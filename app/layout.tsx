@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import Navbar from '@/components/Navbar'
 import './globals.css'
 
 const geistSans = Geist({
@@ -49,7 +50,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <head>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(corporateEntityGraph) }} />
       </head>
-      <body className="min-h-full flex flex-col bg-[#0a0a0c]">{children}</body>
+      <body className="min-h-full flex flex-col bg-[#0a0a0c]">
+        <Navbar />
+        <main className="flex-grow">
+          {children}
+        </main>
+      </body>
     </html>
   )
 }
