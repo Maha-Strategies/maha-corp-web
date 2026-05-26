@@ -177,79 +177,81 @@ References
 }
 
 // 1. DYNAMIC METADATA: Injects Google Scholar Highwire tags
-export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
-  const paper = papers[params.slug as keyof typeof papers]
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+    const resolvedParams = await params;
+    const paper = papers[resolvedParams.slug as keyof typeof papers];
+    
+    if (!paper) return {};
   
-  if (!paper) return {}
-
-  return {
-    title: `${paper.title} | Maha Strategies Research`,
-    description: paper.abstract,
-    alternates: { canonical: `https://www.mahastrategies.com/research/${params.slug}` },
-    other: {
-      'citation_title': paper.title,
-      'citation_author': 'Maha Rajan, Mayone',
-      'citation_publication_date': paper.citationDate,
-      'citation_pdf_url': paper.osfUrl, 
+    return {
+      title: `${paper.title} | Maha Strategies Research`,
+      description: paper.abstract,
+      alternates: { canonical: `https://www.mahastrategies.com/research/${resolvedParams.slug}` },
+      other: {
+        'citation_title': paper.title,
+        'citation_author': 'Maha Rajan, Mayone',
+        'citation_publication_date': paper.citationDate,
+        'citation_pdf_url': paper.osfUrl, 
+      }
     }
   }
-}
-
-// 2. PAGE COMPONENT: Renders the frontend UI
-export default function PaperPage({ params }: { params: { slug: string } }) {
-  const paper = papers[params.slug as keyof typeof papers]
   
-  if (!paper) {
-    notFound()
-  }
-
-  return (
-    <div className="min-h-screen bg-[#0a0a0c] text-zinc-300 font-sans p-8 md:p-24 selection:bg-indigo-500 selection:text-white">
-      <div className="max-w-3xl mx-auto">
-        <Link href="/research" className="text-xs text-zinc-500 uppercase tracking-widest hover:text-white mb-8 block">← Back to Research Hub</Link>
-        
-        <header className="mb-12 border-b border-zinc-800 pb-12">
-          <p className="text-xs text-indigo-400 tracking-widest uppercase mb-4">{paper.date}</p>
-          <h1 className="text-3xl md:text-4xl text-white font-light tracking-wide mb-8 leading-tight">
-            {paper.title}
-          </h1>
+  // 2. PAGE COMPONENT: Renders the frontend UI
+  export default async function PaperPage({ params }: { params: Promise<{ slug: string }> }) {
+    const resolvedParams = await params;
+    const paper = papers[resolvedParams.slug as keyof typeof papers];
+    
+    if (!paper) {
+      notFound();
+    }
+  
+    return (
+      <div className="min-h-screen bg-[#0a0a0c] text-zinc-300 font-sans p-8 md:p-24 selection:bg-indigo-500 selection:text-white">
+        <div className="max-w-3xl mx-auto">
+          <Link href="/research" className="text-xs text-zinc-500 uppercase tracking-widest hover:text-white mb-8 block">← Back to Research Hub</Link>
           
-          <div className="flex flex-col sm:flex-row gap-4">
-            <a 
-              href={paper.osfUrl} 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="inline-block bg-white text-black px-6 py-3 text-xs font-bold uppercase tracking-widest hover:bg-zinc-200 transition-colors text-center"
-            >
-              Verify on OSF ↗
-            </a>
-            <button 
-              className="inline-block border border-zinc-600 text-zinc-300 px-6 py-3 text-xs font-bold uppercase tracking-widest hover:border-white hover:text-white transition-colors text-center"
-              onClick={() => navigator.clipboard.writeText(`Maha Rajan, M. (${paper.date.split(' ')[2]}). ${paper.title}. Maha Strategies LLC. ${paper.osfUrl}`)}
-            >
-              Copy Citation
-            </button>
+          <header className="mb-12 border-b border-zinc-800 pb-12">
+            <p className="text-xs text-indigo-400 tracking-widest uppercase mb-4">{paper.date}</p>
+            <h1 className="text-3xl md:text-4xl text-white font-light tracking-wide mb-8 leading-tight">
+              {paper.title}
+            </h1>
+            
+            <div className="flex flex-col sm:flex-row gap-4">
+              <a 
+                href={paper.osfUrl} 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="inline-block bg-white text-black px-6 py-3 text-xs font-bold uppercase tracking-widest hover:bg-zinc-200 transition-colors text-center"
+              >
+                Verify on OSF ↗
+              </a>
+              <button 
+                className="inline-block border border-zinc-600 text-zinc-300 px-6 py-3 text-xs font-bold uppercase tracking-widest hover:border-white hover:text-white transition-colors text-center"
+                onClick={() => navigator.clipboard.writeText(`Maha Rajan, M. (${paper.date.split(' ')[2]}). ${paper.title}. Maha Strategies LLC. ${paper.osfUrl}`)}
+              >
+                Copy Citation
+              </button>
+            </div>
+          </header>
+  
+          {/* The Provenance Block - Bridging the Entity Gap */}
+          <div className="bg-zinc-900/50 border border-zinc-800 p-6 mb-12">
+            <h3 className="text-white text-xs tracking-widest uppercase mb-2">Author's Note & Provenance</h3>
+            <p className="text-sm text-zinc-400 leading-relaxed">
+              Originally drafted in {paper.date.split(',')[0]}, this manuscript serves as foundational architecture for Maha Strategies LLC. The theoretical frameworks documented here directly inform the firm's custom silicon strategy and the deployment of sovereign digital infrastructure. Verified and archived on the Open Science Framework.
+            </p>
           </div>
-        </header>
-
-        {/* The Provenance Block - Bridging the Entity Gap */}
-        <div className="bg-zinc-900/50 border border-zinc-800 p-6 mb-12">
-          <h3 className="text-white text-xs tracking-widest uppercase mb-2">Author's Note & Provenance</h3>
-          <p className="text-sm text-zinc-400 leading-relaxed">
-            Originally drafted in {paper.date.split(',')[0]}, this manuscript serves as foundational architecture for Maha Strategies LLC. The theoretical frameworks documented here directly inform the firm's custom silicon strategy and the deployment of sovereign digital infrastructure. Verified and archived on the Open Science Framework.
-          </p>
+  
+          {/* The Payload: Your paper content is injected here */}
+          <div 
+            className="prose prose-invert max-w-none font-light tracking-wide leading-relaxed prose-h2:text-white prose-h2:font-light prose-h2:text-2xl prose-h2:mt-12 prose-h2:mb-6 prose-a:text-indigo-400"
+            dangerouslySetInnerHTML={{ __html: paper.content }}
+          />
+          
         </div>
-
-        {/* The Payload: Your paper content is injected here */}
-        <div 
-          className="prose prose-invert max-w-none font-light tracking-wide leading-relaxed prose-h2:text-white prose-h2:font-light prose-h2:text-2xl prose-h2:mt-12 prose-h2:mb-6 prose-a:text-indigo-400"
-          dangerouslySetInnerHTML={{ __html: paper.content }}
-        />
-        
       </div>
-    </div>
-  )
-}
+    )
+  }
 
 // 3. STATIC GENERATION: Tells Vercel exactly which 5 pages to build for the edge cache
 export function generateStaticParams() {
