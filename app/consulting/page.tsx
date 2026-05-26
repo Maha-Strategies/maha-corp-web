@@ -19,23 +19,30 @@ export default function ConsultingPage() {
         
         <div className="prose prose-invert max-w-none font-light tracking-wide leading-relaxed">
           <p>
-            [span_11](start_span)In the contemporary global landscape, technology is not merely a tool for efficiency; it is the ultimate domain of geopolitical power and operational sovereignty[span_11](end_span). [span_12](start_span)The corporate consulting division of Maha Strategies LLC operates at the intersection of deep tech infrastructure, custom hardware design, and international supply chain resilience[span_12](end_span).
+            In the contemporary global landscape, technology is not merely a tool for efficiency; it is the ultimate domain of geopolitical power and operational sovereignty. The corporate consulting division of Maha Strategies LLC operates at the intersection of deep tech infrastructure, custom hardware design, and international supply chain resilience. We do not offer conventional IT advice. We deliver structural foresight and tactical execution for enterprises operating in high-stakes environments.
           </p>
 
           <h2 className="text-2xl text-white font-light mt-12 mb-4">Strategic Advisory for Elite Expert Networks</h2>
           <p>
-            [span_13](start_span)We provide specialized, high-impact advisory services to leading global expert networks—including Uzabase, Dialectica, Tegus, and ProSapient[span_13](end_span). [span_14](start_span)We translate complex hardware capabilities into actionable, long-term macroeconomic strategies[span_14](end_span).
+            As the leading global authority on next-generation computing architectures, we serve as the premier AI hardware expert network for the world's most sophisticated investment and research institutions. We provide specialized, high-impact advisory services to leading global expert networks—including Uzabase, Dialectica, Tegus, and ProSapient. Our deep industry intelligence empowers analysts, asset managers, and corporate decision-makers to navigate the volatile landscape of global semiconductor supply chains, geopolitical choke points, and emerging export controls. We translate complex hardware capabilities into actionable, long-term macroeconomic strategies.
           </p>
 
           <h2 className="text-2xl text-white font-light mt-12 mb-4">Custom Silicon Strategy & Hardware Geopolitics</h2>
           <p>
-            [span_15](start_span)True technological independence requires control over the physical layer[span_15](end_span). [span_16](start_span)Our tailored custom silicon strategy services guide enterprise leaders through the lifecycle of bespoke semiconductor design—from initial conceptualization to foundry coordination and geopolitical risk mitigation[span_16](end_span). 
+            True technological independence requires control over the physical layer. Our tailored custom silicon strategy services guide enterprise leaders through the lifecycle of bespoke semiconductor design—from initial conceptualization to foundry coordination and geopolitical risk mitigation. We analyze the computational needs of our clients through a rigorous geopolitical lens. In an era of escalating tech-nationalism, securing proprietary ASIC and RISC-V pipelines is not just a technological advantage; it is an existential hedge against platform dependency and supply chain disruption.
           </p>
 
           <h2 className="text-2xl text-white font-light mt-12 mb-4">Sovereign Digital Product Engineering</h2>
           <p>
-            [span_17](start_span)Beyond hardware, we advise on the architecture of on-device agentic systems[span_17](end_span). [span_18](start_span)By prioritizing on-device agentic systems, we eliminate reliance on vulnerable cloud APIs, ensuring that your enterprise intelligence remains localized, tamper-resistant, and entirely sovereign[span_18](end_span).
+            Beyond hardware, we advise on the architecture of on-device agentic systems. Our B2B digital product engineering consulting bridges the gap between hardware constraints and software deployment. We design resilient, decentralized product ecosystems that run local models securely at the edge. By prioritizing on-device agentic systems, we eliminate reliance on vulnerable cloud APIs, ensuring that your enterprise intelligence remains localized, tamper-resistant, and entirely sovereign.
           </p>
+
+          <div className="mt-12 pt-8 border-t border-zinc-800">
+             <p className="text-white font-semibold mb-4 tracking-widest uppercase text-xs">Elevate Your Enterprise Architecture</p>
+             <p className="text-sm text-zinc-500">
+               Maha Strategies LLC provides the clarity required to build, secure, and dominate the digital landscape. Partner with us to transition your organization from a consumer of legacy infrastructure to an architect of your own technological destiny.
+             </p>
+          </div>
         </div>
       </div>
     </div>
