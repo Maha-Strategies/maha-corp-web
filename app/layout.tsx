@@ -17,6 +17,18 @@ export const metadata: Metadata = {
   title: 'Maha Strategies LLC | Systemic Sovereignty',
   description: 'Securing autonomy across the modern stack. AI hardware consulting, sovereign digital infrastructure, and agentic publishing.',
   alternates: { canonical: 'https://www.mahastrategies.com' },
+  openGraph: {
+    title: 'Maha Strategies LLC | Systemic Sovereignty',
+    description: 'Securing autonomy across the modern stack. Architecting infrastructure, interface, and intellect.',
+    url: 'https://www.mahastrategies.com',
+    siteName: 'Maha Strategies LLC',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Maha Strategies LLC | Systemic Sovereignty',
+    description: 'Securing autonomy across the modern stack.',
+  },
 };
 
 export default function RootLayout({

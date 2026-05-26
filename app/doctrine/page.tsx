@@ -24,7 +24,7 @@ export default function DoctrinePage() {
 
           <h2 className="text-2xl text-white font-light mt-12 mb-4">The Maha Principle</h2>
           <p>
-            Our primary doctrine, <em>The Maha Principle: Architecting Personal and National Renewal</em>, is a 95,000-word strategic framework designed to reclaim the human biological and cognitive baseline from extractive industrial and technological systems.
+            Our primary doctrine, <em>The Maha Principle: Architecting Personal and National Renewal</em>, is an 81,015-word strategic framework designed to reclaim the human biological and cognitive baseline from extractive industrial and technological systems.
           </p>
           <p>
             It establishes the theoretical architecture for Metabolic Sovereignty, Attentional Captivity, and the Nurturing Warrior archetype—the direct philosophy powering Maha OS.
