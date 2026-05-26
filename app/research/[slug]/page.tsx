@@ -297,9 +297,6 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
             <h1 className="text-3xl md:text-4xl text-white font-light tracking-wide mb-8 leading-tight">
               {paper.title}
             </h1>
-            
-            // Inside your PaperPage component, locate the flex row with the buttons and update it to this:
-
 <div className="flex flex-col sm:flex-row gap-4">
   <a 
     href={paper.pdfUrl} 
