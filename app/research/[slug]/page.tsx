@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
+import CopyCitation from '@/components/CopyCitation'
 
 // This database object holds the metadata for your 5 papers. 
 // You will paste your rich HTML content into the 'content' field.
@@ -225,12 +226,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
               >
                 Verify on OSF ↗
               </a>
-              <button 
-                className="inline-block border border-zinc-600 text-zinc-300 px-6 py-3 text-xs font-bold uppercase tracking-widest hover:border-white hover:text-white transition-colors text-center"
-                onClick={() => navigator.clipboard.writeText(`Maha Rajan, M. (${paper.date.split(' ')[2]}). ${paper.title}. Maha Strategies LLC. ${paper.osfUrl}`)}
-              >
-                Copy Citation
-              </button>
+              <CopyCitation text={`Maha Rajan, M. (${paper.date.split(' ')[2]}). ${paper.title}. Maha Strategies LLC. ${paper.osfUrl}`} />
             </div>
           </header>
   
