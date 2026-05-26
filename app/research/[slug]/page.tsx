@@ -152,3 +152,10 @@ export default function PaperPage({ params }: { params: { slug: string } }) {
     </div>
   )
 }
+
+// 3. STATIC GENERATION: Tells Vercel exactly which 5 pages to build for the edge cache
+export function generateStaticParams() {
+    return Object.keys(papers).map((slug) => ({
+      slug: slug,
+    }))
+  }  
