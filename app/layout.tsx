@@ -68,6 +68,49 @@ export default function RootLayout({
     <html lang="en" className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}>
       <head>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(corporateEntityGraph) }} />
+        <script
+  type="application/ld+json"
+  dangerouslySetInnerHTML={{
+    __html: JSON.stringify({
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Organization",
+          "@id": "https://www.mahastrategies.com/#organization",
+          "name": "Maha Strategies LLC",
+          "url": "https://www.mahastrategies.com",
+          "founder": {
+            "@id": "https://www.mahastrategies.com/#founder"
+          }
+        },
+        {
+          "@type": "Person",
+          "@id": "https://www.mahastrategies.com/#founder",
+          "name": "Mayone Maha Rajan",
+          "jobTitle": "Managing Director",
+          "worksFor": {
+            "@id": "https://www.mahastrategies.com/#organization"
+          }
+        },
+        {
+          "@type": "Book",
+          "@id": "https://www.mahastrategies.com/#book",
+          "name": "The Maha Principle",
+          "alternativeHeadline": "Reclaiming Biological Sovereignty",
+          "author": {
+            "@id": "https://www.mahastrategies.com/#founder"
+          },
+          "numberOfPages": 320,
+          "wordCount": 81015,
+          "url": "https://publish.mahastrategies.com",
+          "publisher": {
+            "@id": "https://www.mahastrategies.com/#organization"
+          }
+        }
+      ]
+    })
+  }}
+/>
       </head>
       <body className="min-h-full flex flex-col bg-[#0a0a0c]">
         <Navbar />
