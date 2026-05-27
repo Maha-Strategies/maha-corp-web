@@ -15,8 +15,8 @@ export default function ProtocolsIndex() {
         </header>
 
         <div className="space-y-6">
-                              {/* ARTICLE LINK 05 */}
-                              <Link href="/protocols/architecting-renewal" className="group block p-6 border border-indigo-900/50 bg-black hover:border-indigo-500 transition-colors rounded-sm">
+          {/* ARTICLE LINK 05 */}
+           <Link href="/protocols/architecting-renewal" className="group block p-6 border border-indigo-900/50 bg-black hover:border-indigo-500 transition-colors rounded-sm">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between">
               <div>
                 <p className="font-mono text-xs text-indigo-500 mb-2 group-hover:text-indigo-400 transition-colors">APEX NODE // DEPLOYED</p>

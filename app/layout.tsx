@@ -37,29 +37,51 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   
-  // The Master Corporate Entity Graph
-  const corporateEntityGraph = {
+  // The Master Unified Entity Graph
+  const jsonLd = {
     "@context": "https://schema.org",
-    "@type": "Organization",
-    "name": "Maha Strategies LLC",
-    "url": "https://www.mahastrategies.com",
-    "description": "A research and engineering firm specializing in AI hardware consulting, sovereign digital infrastructure, and cognitive defense software.",
-    "founder": {
-      "@type": "Person",
-      "name": "Mayone Maha Rajan",
-      "jobTitle": "Managing Director"
-    },
-    "brand": [
+    "@graph": [
       {
-        "@type": "Brand",
-        "name": "Agentic Book Publishing",
-        "url": "https://publish.mahastrategies.com"
+        "@type": "Person",
+        "@id": "https://www.mayonemaharajan.com/#person",
+        "name": "Mayone Maha Rajan",
+        "jobTitle": "Managing Director",
+        "url": "https://www.mayonemaharajan.com"
+      },
+      {
+        "@type": "Organization",
+        "@id": "https://www.mahastrategies.com/#organization",
+        "name": "Maha Strategies LLC",
+        "url": "https://www.mahastrategies.com",
+        "description": "A research and engineering firm specializing in AI hardware consulting, sovereign digital infrastructure, and cognitive defense software.",
+        "founder": {
+          "@id": "https://www.mayonemaharajan.com/#person"
+        }
       },
       {
         "@type": "SoftwareApplication",
+        "@id": "https://www.mahastrategies.com/#software",
         "name": "Maha OS: Sovereign Ecosystem",
         "applicationCategory": "HealthAndFitnessApplication",
-        "operatingSystem": "Android"
+        "operatingSystem": "Android",
+        "url": "https://play.google.com/store/apps/details?id=com.maha.os",
+        "author": {
+          "@id": "https://www.mahastrategies.com/#organization"
+        }
+      },
+      {
+        "@type": "Book",
+        "@id": "https://www.mahastrategies.com/#book",
+        "name": "The Maha Principle: Reclaiming Biological Sovereignty",
+        "author": {
+          "@id": "https://www.mayonemaharajan.com/#person"
+        },
+        "publisher": {
+          "@id": "https://www.mahastrategies.com/#organization"
+        },
+        "numberOfPages": 300,
+        "wordCount": 81015,
+        "url": "https://publish.mahastrategies.com"
       }
     ]
   };
@@ -67,50 +89,11 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}>
       <head>
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(corporateEntityGraph) }} />
-        <script
-  type="application/ld+json"
-  dangerouslySetInnerHTML={{
-    __html: JSON.stringify({
-      "@context": "https://schema.org",
-      "@graph": [
-        {
-          "@type": "Organization",
-          "@id": "https://www.mahastrategies.com/#organization",
-          "name": "Maha Strategies LLC",
-          "url": "https://www.mahastrategies.com",
-          "founder": {
-            "@id": "https://www.mahastrategies.com/#founder"
-          }
-        },
-        {
-          "@type": "Person",
-          "@id": "https://www.mahastrategies.com/#founder",
-          "name": "Mayone Maha Rajan",
-          "jobTitle": "Managing Director",
-          "worksFor": {
-            "@id": "https://www.mahastrategies.com/#organization"
-          }
-        },
-        {
-          "@type": "Book",
-          "@id": "https://www.mahastrategies.com/#book",
-          "name": "The Maha Principle",
-          "alternativeHeadline": "Reclaiming Biological Sovereignty",
-          "author": {
-            "@id": "https://www.mahastrategies.com/#founder"
-          },
-          "numberOfPages": 320,
-          "wordCount": 81015,
-          "url": "https://publish.mahastrategies.com",
-          "publisher": {
-            "@id": "https://www.mahastrategies.com/#organization"
-          }
-        }
-      ]
-    })
-  }}
-/>
+        {/* Single, Unified Schema Injection */}
+        <script 
+          type="application/ld+json" 
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} 
+        />
       </head>
       <body className="min-h-full flex flex-col bg-[#0a0a0c]">
         <Navbar />
