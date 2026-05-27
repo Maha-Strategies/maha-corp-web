@@ -1,8 +1,105 @@
 import Link from 'next/link'
 
+export function ProtocolAnchorGrid() {
+  const protocols = [
+    {
+      id: "01",
+      title: "Metabolic Sovereignty",
+      subtitle: "The Algorithmic Trance & Biological Substrates",
+      href: "/protocols/metabolic-sovereignty",
+      status: "ACTIVE"
+    },
+    {
+      id: "02",
+      title: "The Digital Firewall",
+      subtitle: "The Saturnian Perimeter & Cognitive Defense",
+      href: "/protocols/digital-firewall",
+      status: "ACTIVE"
+    },
+    {
+      id: "03",
+      title: "Kinetic Friction",
+      subtitle: "The Iron Engine & Engineered Resistance",
+      href: "/protocols/kinetic-friction",
+      status: "ACTIVE"
+    },
+    {
+      id: "04",
+      title: "Hardware Sovereignty",
+      subtitle: "Edge-Compute Intelligence & Local Silicon",
+      href: "/protocols/hardware-sovereignty",
+      status: "ACTIVE"
+    },
+    {
+      id: "05",
+      title: "Architecting Renewal",
+      subtitle: "The Sovereign Ecosystem Apex Node",
+      href: "/protocols/architecting-renewal",
+      status: "STABLE",
+      isApex: true
+    }
+  ];
+
+  return (
+    <section className="w-full py-20 border-t border-gray-950 bg-[#0a0a0c] text-white">
+      <div className="max-w-4xl mx-auto px-6 font-mono">
+        
+        {/* SECTION ROUTING LABEL */}
+        <div className="text-xs text-gray-600 tracking-widest uppercase mb-12 flex justify-between items-center">
+          <span>[ LINKING_MATRIX // LIVE_ROUTING ]</span>
+          <span>SYSTEMIC_DEFAULTS: ENFORCED</span>
+        </div>
+
+        <h2 className="font-sans text-2xl font-bold tracking-tight text-gray-200 mb-8 uppercase">
+          Core Systemic Doctrines
+        </h2>
+
+        {/* THE ANCHOR PIPE MATRIX */}
+        <div className="grid grid-cols-1 gap-4">
+          {protocols.map((protocol) => (
+            <Link 
+              key={protocol.id} 
+              href={protocol.href}
+              className={`group block p-6 border transition-all duration-200 ${
+                protocol.isApex 
+                  ? "border-indigo-950 bg-indigo-950/10 hover:border-indigo-500" 
+                  : "border-gray-900 bg-black/40 hover:border-gray-600"
+              }`}
+            >
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                <div className="space-y-1">
+                  <div className="flex items-center gap-2">
+                    <span className={`text-xs ${protocol.isApex ? "text-indigo-400" : "text-gray-500"}`}>
+                      NODE_{protocol.id}
+                    </span>
+                    <span className="text-[10px] bg-gray-900 px-1.5 py-0.5 text-gray-400 border border-gray-800 tracking-tighter">
+                      {protocol.status}
+                    </span>
+                  </div>
+                  <h3 className="font-sans text-xl font-bold text-gray-100 group-hover:text-white transition-colors">
+                    {protocol.title}
+                  </h3>
+                  <p className="text-xs text-gray-400 font-serif italic">
+                    {protocol.subtitle}
+                  </p>
+                </div>
+                
+                <div className="text-xs text-gray-500 group-hover:text-white font-mono transition-colors self-end sm:self-center">
+                  [ DEPLOY_LINK ↗ ]
+                </div>
+              </div>
+            </Link>
+          ))}
+        </div>
+        
+      </div>
+    </section>
+  );
+}
+
 export default function CorporateHomepage() {
   return (
-    <div className="min-h-screen bg-[#0a0a0c] text-zinc-300 font-sans p-8 md:p-24 selection:bg-indigo-500 selection:text-white">
+    <div className="min-h-screen bg-[#0a0a0c] text-zinc-300 font-sans p-8 md:p-24 md:pb-0 selection:bg-indigo-500 selection:text-white">
       <div className="max-w-4xl mx-auto">
         <h1 className="text-4xl md:text-5xl font-light tracking-widest uppercase text-white mb-8">
           Maha Strategies LLC
@@ -38,11 +135,15 @@ export default function CorporateHomepage() {
           <p>
             We do not view hardware, software, and intellect as disparate domains. They are the contiguous layers of a single, unified reality. A vulnerability in custom silicon compromises Maha OS; a vulnerability in Maha OS compromises the mind; a compromised mind cannot defend its infrastructure.
           </p>
-          <p className="mt-8 font-bold text-white tracking-widest uppercase text-xs">
+          <p className="mt-8 mb-16 font-bold text-white tracking-widest uppercase text-xs">
             We are Maha Strategies LLC. The architecture of independence begins here.
           </p>
         </div>
       </div>
+
+      {/* THE INTEGRATION: This is where the grid renders */}
+      <ProtocolAnchorGrid />
+      
     </div>
   )
 }
