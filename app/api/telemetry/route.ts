@@ -1,24 +1,25 @@
 import { NextResponse } from 'next/server';
 import { createClient } from '@supabase/supabase-js';
 
-// 1. Pull the keys from the secure server environment
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
-
-if (!supabaseUrl || !supabaseServiceKey) {
-  throw new Error("Missing Supabase environment variables.");
-}
-
-// 2. Initialize the Supabase client using the master service_role key
-const supabase = createClient(supabaseUrl, supabaseServiceKey);
-
 export async function POST(request: Request) {
   try {
-    // Parse the incoming JSON payload from the frontend page
+    // 1. Pull the keys at runtime, preventing local build-time crashes
+    const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+    const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+
+    if (!supabaseUrl || !supabaseServiceKey) {
+      console.error('[TELEMETRY ERROR] Missing Supabase environment variables.');
+      return NextResponse.json({ error: 'Server configuration error' }, { status: 500 });
+    }
+
+    // 2. Initialize the client securely inside the request lifecycle
+    const supabase = createClient(supabaseUrl, supabaseServiceKey);
+
+    // 3. Parse the incoming JSON payload
     const body = await request.json();
     const { endpoint, agent, payload_size, status } = body;
 
-    // 3. Execute the silent write to the database
+    // 4. Execute the silent write to the database
     const { error } = await supabase
       .from('telemetry_logs')
       .insert([
@@ -30,13 +31,11 @@ export async function POST(request: Request) {
         }
       ]);
 
-    // 4. Handle database rejection
     if (error) {
       console.error('[SUPABASE WRITE ERROR]:', error.message);
       return NextResponse.json({ error: 'Failed to log telemetry' }, { status: 500 });
     }
 
-    // 5. Confirm successful ingestion
     return NextResponse.json({ success: true }, { status: 200 });
 
   } catch (error) {
