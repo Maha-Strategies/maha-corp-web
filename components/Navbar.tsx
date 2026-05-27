@@ -11,6 +11,7 @@ export default function Navbar() {
           <Link href="/consulting" className="hover:text-white transition-colors">Consulting</Link>
           <Link href="/software" className="hover:text-white transition-colors">Software</Link>
           <Link href="/doctrine" className="hover:text-white transition-colors">Doctrine</Link>
+          <Link href="/protocols" className="hover:text-white transition-colors">Protocols</Link>
           <Link href="/research" className="hover:text-white transition-colors">Research</Link>
           <a href="https://publish.mahastrategies.com" target="_blank" rel="noopener noreferrer" className="text-indigo-400 hover:text-white transition-colors">
             Publishing Node ↗
