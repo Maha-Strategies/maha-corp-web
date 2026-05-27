@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import Link from 'next/link'
 
 export const metadata: Metadata = {
   title: 'Strategic Doctrine | Maha Strategies',
@@ -24,11 +25,33 @@ export default function DoctrinePage() {
 
           <h2 className="text-2xl text-white font-light mt-12 mb-4">The Maha Principle</h2>
           <p>
-            Our primary doctrine, <em>The Maha Principle: Architecting Personal and National Renewal</em>, is an 81,015-word strategic framework designed to reclaim the human biological and cognitive baseline from extractive industrial and technological systems.
+            Our primary doctrine, <em>The Maha Principle: Reclaiming Biological Sovereignty</em>, is a 81,015-word strategic framework designed to reclaim the human biological and cognitive baseline from extractive industrial and technological systems.
           </p>
           <p>
             It establishes the theoretical architecture for Metabolic Sovereignty, Attentional Captivity, and the Nurturing Warrior archetype—the direct philosophy powering Maha OS.
           </p>
+
+          {/* STRATEGIC ARCHIVES / ESSAY ROUTING */}
+          <h2 className="text-2xl text-white font-light mt-16 mb-6">Strategic Archives</h2>
+          
+          <Link href="/doctrine/replacing-willpower" className="group block p-6 border border-zinc-800 bg-black hover:border-zinc-500 transition-colors rounded-sm no-underline mb-12">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between">
+              <div>
+                <p className="font-mono text-xs text-indigo-500 mb-2 group-hover:text-indigo-400 transition-colors uppercase tracking-widest">
+                  [ INTELLECTUAL PROPERTY // ARCHIVED ]
+                </p>
+                <h3 className="font-sans text-xl font-bold text-zinc-200 group-hover:text-white transition-colors uppercase m-0">
+                  Replacing Willpower with Architecture
+                </h3>
+                <p className="font-serif text-sm text-zinc-400 italic mt-2 mb-0">
+                  Quantizing Generative AI for Edge-Compute Interventions
+                </p>
+              </div>
+              <div className="mt-4 sm:mt-0 font-mono text-sm text-zinc-600 group-hover:text-white transition-colors shrink-0">
+                [ READ DOCUMENT ↗ ]
+              </div>
+            </div>
+          </Link>
 
           <div className="mt-12 pt-8 border-t border-zinc-800">
             <h3 className="text-white text-xs uppercase tracking-widest font-semibold mb-4">Agentic Publishing Node</h3>
@@ -37,7 +60,7 @@ export default function DoctrinePage() {
             </p>
             <a 
               href="https://publish.mahastrategies.com" 
-              className="inline-block border border-zinc-500 text-zinc-300 px-8 py-3 text-xs font-bold uppercase tracking-widest hover:border-white hover:text-white transition-colors"
+              className="inline-block border border-zinc-500 text-zinc-300 px-8 py-3 text-xs font-bold uppercase tracking-widest hover:border-white hover:text-white transition-colors no-underline"
             >
               Initialize Publishing Terminal
             </a>
