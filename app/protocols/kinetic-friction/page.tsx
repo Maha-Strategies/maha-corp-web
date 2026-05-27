@@ -106,7 +106,7 @@ export default function KineticFrictionProtocol() {
         <div className="mt-16 p-6 border border-gray-700 bg-gray-900 rounded-lg text-center">
           <p className="font-mono text-sm text-gray-400 mb-4">LOG KINETIC EXERTION</p>
           <a 
-            href="https://play.google.com/store/apps/details?id=com.mahastrategies.os" 
+            href="https://play.google.com/store/apps/details?id=com.maha.os" 
             target="_blank" 
             rel="noopener noreferrer"
             className="inline-block px-6 py-3 bg-white text-black font-sans font-bold text-sm tracking-widest hover:bg-gray-200 transition-colors"
