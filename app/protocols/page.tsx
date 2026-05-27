@@ -43,6 +43,20 @@ export default function ProtocolsIndex() {
               </div>
             </div>
           </Link>
+                    {/* ARTICLE LINK 03 */}
+                    <Link href="/protocols/kinetic-friction" className="group block p-6 border border-gray-800 bg-black hover:border-gray-500 transition-colors rounded-sm">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between">
+              <div>
+                <p className="font-mono text-xs text-gray-500 mb-2 group-hover:text-gray-400 transition-colors">NODE v2.0 // DEPLOYED</p>
+                <h2 className="font-sans text-xl font-bold text-gray-200 group-hover:text-white transition-colors">
+                  The Iron Engine & The Necessity of Friction
+                </h2>
+              </div>
+              <div className="mt-4 sm:mt-0 font-mono text-sm text-gray-600 group-hover:text-white transition-colors">
+                [ READ PROTOCOL ]
+              </div>
+            </div>
+          </Link>
           {/* Future articles will be added here as new <Link> blocks */}
         </div>
 
