@@ -2,7 +2,7 @@
 
 import React, { useEffect } from 'react';
 import 'katex/dist/katex.min.css';
-import { BlockMath } from 'react-katex';
+import { BlockMath, InlineMath } from 'react-katex';
 
 export default function KineticFrictionProtocol() {
   
@@ -78,8 +78,8 @@ export default function KineticFrictionProtocol() {
           </div>
 
           <p>
-            Where $\mu_{friction}$ represents the coefficient of deliberate resistance designed into a process. If the latency of the reward is zero (instant gratification) or the friction is zero (effortless consumption), the Kinetic Drive equation collapses. The system loses all forward velocity.
-          </p>
+            Where <InlineMath math="\mu_{friction}" /> represents the coefficient of deliberate resistance designed into a process. If the latency of the reward is zero...
+        </p>
 
           <hr className="border-gray-800 my-12" />
 
