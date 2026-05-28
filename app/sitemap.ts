@@ -67,6 +67,24 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: new Date('2026-05-28'),
       changeFrequency: 'monthly',
       priority: 0.8,
+    },
+    {
+      url: 'https://mahastrategies.com/intelligence/briefs/generative-ai-silicon-cycle-recalibration',
+      lastModified: new Date('2026-05-28'),
+      changeFrequency: 'monthly',
+      priority: 0.8,
+    },
+    {
+      url: 'https://mahastrategies.com/intelligence/briefs/semiconductor-wfe-doping-annealing-landscape',
+      lastModified: new Date('2026-05-28'),
+      changeFrequency: 'monthly',
+      priority: 0.8,
+    },
+    {
+      url: 'https://mahastrategies.com/intelligence/briefs/power-semiconductor-target-setting-metrics',
+      lastModified: new Date('2026-05-28'),
+      changeFrequency: 'monthly',
+      priority: 0.8,
     }
   ]
 }

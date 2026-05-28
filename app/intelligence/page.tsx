@@ -200,6 +200,72 @@ export default function IntelligenceGrid() {
     ACCESS DATA DEEP-DIVE <span className="group-hover:translate-x-1 transition-transform">→</span>
   </div>
 </Link>
+<Link 
+  href="/intelligence/briefs/generative-ai-silicon-cycle-recalibration" 
+  className="group block border border-neutral-800 bg-[#0a0a0c] p-6 hover:border-neutral-500 transition-all duration-200"
+>
+  <div className="flex items-center justify-between mb-4">
+    <span className="font-mono text-xs tracking-widest text-amber-500 uppercase">
+      MACRO.SILICON
+    </span>
+    <span className="font-mono text-xs tracking-widest bg-neutral-900 text-neutral-400 px-2 py-0.5 border border-neutral-800 uppercase group-hover:border-neutral-600">
+      STATUS: VOLATILE
+    </span>
+  </div>
+  <h3 className="text-xl font-bold text-white uppercase tracking-tight group-hover:text-amber-500 transition-colors mb-2">
+    The Generative AI Distortion: Recalibrating the Silicon Boom-Bust Cycle
+  </h3>
+  <p className="text-sm text-neutral-400 line-clamp-3 leading-relaxed">
+    An architectural evaluation of the incoming CapEx super-cycle oversupply, the enterprise infrastructure digestion phase, and the resulting bifurcated "growth recession" in semiconductor markets.
+  </p>
+  <div className="mt-6 flex items-center gap-2 text-xs font-mono tracking-widest text-white uppercase">
+    ACCESS DATA DEEP-DIVE <span className="group-hover:translate-x-1 transition-transform">→</span>
+  </div>
+</Link>
+<Link 
+  href="/intelligence/briefs/semiconductor-wfe-doping-annealing-landscape" 
+  className="group block border border-neutral-800 bg-[#0a0a0c] p-6 hover:border-neutral-500 transition-all duration-200"
+>
+  <div className="flex items-center justify-between mb-4">
+    <span className="font-mono text-xs tracking-widest text-amber-500 uppercase">
+      WFE.MARKETSTRUCTURE
+    </span>
+    <span className="font-mono text-xs tracking-widest bg-neutral-900 text-neutral-400 px-2 py-0.5 border border-neutral-800 uppercase group-hover:border-neutral-600">
+      STATUS: TRANSITIONING
+    </span>
+  </div>
+  <h3 className="text-xl font-bold text-white uppercase tracking-tight group-hover:text-amber-500 transition-colors mb-2">
+    Semiconductor WFE Architecture: Geopolitical Bifurcation and Thermal Budget Physics
+  </h3>
+  <p className="text-sm text-neutral-400 line-clamp-3 leading-relaxed">
+    An exhaustive quantitative re-mapping of global ion implantation and advanced laser annealing market shares, evaluating the 2024 baseline against structural 2035 sovereign localization trends.
+  </p>
+  <div className="mt-6 flex items-center gap-2 text-xs font-mono tracking-widest text-white uppercase">
+    ACCESS DATA DEEP-DIVE <span className="group-hover:translate-x-1 transition-transform">→</span>
+  </div>
+</Link>
+<Link 
+  href="/intelligence/briefs/power-semiconductor-target-setting-metrics" 
+  className="group block border border-neutral-800 bg-[#0a0a0c] p-6 hover:border-neutral-500 transition-all duration-200"
+>
+  <div className="flex items-center justify-between mb-4">
+    <span className="font-mono text-xs tracking-widest text-amber-500 uppercase">
+      POWER.STRATEGY
+    </span>
+    <span className="font-mono text-xs tracking-widest bg-neutral-900 text-neutral-400 px-2 py-0.5 border border-neutral-800 uppercase group-hover:border-neutral-600">
+      STATUS: ACTIVE
+    </span>
+  </div>
+  <h3 className="text-xl font-bold text-white uppercase tracking-tight group-hover:text-amber-500 transition-colors mb-2">
+    Power Semiconductor Architecture: Strategic Target Calibration Across Nodes
+  </h3>
+  <p className="text-sm text-neutral-400 line-clamp-3 leading-relaxed">
+    An operational evaluation of capital deployment matrices, corporate margin optimization targets, and systemic sub-system transitions within global IGBT, IEGT, and SiC manufacturing pipelines.
+  </p>
+  <div className="mt-6 flex items-center gap-2 text-xs font-mono tracking-widest text-white uppercase">
+    ACCESS DATA DEEP-DIVE <span className="group-hover:translate-x-1 transition-transform">→</span>
+  </div>
+</Link>
           {/* FUTURE NODES CAN GO HERE */}
 
         </div>
