@@ -138,6 +138,23 @@ export default function CorporateHomepage() {
           <p className="mt-8 mb-16 font-bold text-white tracking-widest uppercase text-xs">
             We are Maha Strategies LLC. The architecture of independence begins here.
           </p>
+
+          {/* THE TOP-OF-FUNNEL GATEWAY INJECTION */}
+          <div className="mb-24 border border-indigo-900/50 bg-indigo-950/20 p-8 sm:p-12 relative overflow-hidden not-prose">
+            <div className="absolute top-0 left-0 w-1 h-full bg-indigo-500"></div>
+            <h2 className="text-white font-mono text-sm tracking-widest uppercase mb-4 mt-0">
+              [ PROTOCOL 001 // INITIALIZATION ]
+            </h2>
+            <p className="text-zinc-300 text-lg mb-8 font-light">
+              The modern industrial environment is not designed to support your life; it is designed to harvest your attention and your biology for profit. Secure your perimeter. 
+            </p>
+            <Link
+              href="/start"
+              className="inline-block bg-white text-black font-mono font-bold text-xs tracking-widest uppercase px-8 py-4 hover:bg-zinc-200 transition-colors no-underline"
+            >
+              Enter The Stronghold (Start Here) ↗
+            </Link>
+          </div>
         </div>
       </div>
 
