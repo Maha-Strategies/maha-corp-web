@@ -101,11 +101,22 @@ export default function CorporateHomepage() {
   return (
     <div className="min-h-screen bg-[#0a0a0c] text-zinc-300 font-sans p-8 md:p-24 md:pb-0 selection:bg-indigo-500 selection:text-white">
       <div className="max-w-4xl mx-auto">
-        <h1 className="text-4xl md:text-5xl font-light tracking-widest uppercase text-white mb-8">
+        
+        <h1 className="text-4xl md:text-5xl font-light tracking-widest uppercase text-white mb-6">
           Maha Strategies LLC
         </h1>
+
+        {/* THE MANIFESTO APEX LINK */}
+        <div className="mb-12 not-prose">
+          <Link href="/manifesto" className="text-indigo-400 font-mono text-xs uppercase tracking-widest hover:text-white transition-colors">
+            [ Read the Core Doctrine: The Maha Principle Manifesto ↗ ]
+          </Link>
+        </div>
         
         <div className="prose prose-invert max-w-none font-light tracking-wide leading-relaxed">
+          <p className="text-xl text-zinc-400 mb-12">
+            In an era defined by cascading dependencies and centralized choke points, the ultimate strategic commodity is autonomy. Maha Strategies LLC exists to secure this autonomy at every layer of the modern stack—from physical silicon to individual consciousness. We call this Systemic Sovereignty.
+          </p>
           <p className="text-xl text-zinc-400 mb-12">
             In an era defined by cascading dependencies and centralized choke points, the ultimate strategic commodity is autonomy. Maha Strategies LLC exists to secure this autonomy at every layer of the modern stack—from physical silicon to individual consciousness. We call this Systemic Sovereignty.
           </p>
