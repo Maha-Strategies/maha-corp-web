@@ -31,5 +31,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     // INJECTED: ACTIVE MARKET INTELLIGENCE
     { url: `${baseUrl}/intelligence`, lastModified: new Date(), changeFrequency: 'daily', priority: 0.8 },
     { url: `${baseUrl}/intelligence/briefs/semiconductor-bifurcation`, lastModified: new Date(), changeFrequency: 'weekly', priority: 0.7 }
+    { url: `${baseUrl}/intelligence/briefs/physical-ai-deployment`, lastModified: new Date(), changeFrequency: 'weekly', priority: 0.7 }
   ]
 }
