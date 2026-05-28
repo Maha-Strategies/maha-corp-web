@@ -13,8 +13,6 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-import type { Metadata } from 'next'
-
 export const metadata: Metadata = {
   title: 'Maha Strategies LLC | Systemic Sovereignty',
   description: 'Foundational frameworks and strategic research equipping elite actors to resist narrative capture and defend their cognitive baseline.',
@@ -27,7 +25,7 @@ export const metadata: Metadata = {
     siteName: 'Maha Strategies',
     images: [
       {
-        url: '/og-master.png', // We will add this asset in Step 3
+        url: '/og-master.png', 
         width: 1200,
         height: 630,
         alt: 'Maha Strategies LLC - Systemic Sovereignty',

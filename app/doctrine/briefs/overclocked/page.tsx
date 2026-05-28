@@ -4,8 +4,41 @@ import React from 'react';
 import Link from 'next/link';
 
 export default function OverclockedBrief() {
+  // VECTOR B: SCHEMA.ORG JSON-LD STRUCTURAL METADATA
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: 'Overclocked: The Physics of Modern Anxiety',
+    description: 'A tactical brief mapping modern anxiety to CPU thermal throttling, sympathetic nervous system arousal, and allostatic overload.',
+    author: {
+      '@type': 'Organization',
+      name: 'Maha Strategies LLC',
+      url: 'https://www.mahastrategies.com'
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: 'Maha Strategies LLC',
+      logo: {
+        '@type': 'ImageObject',
+        url: 'https://www.mahastrategies.com/logo.png'
+      }
+    },
+    datePublished: '2026-01-27T00:00:00.000Z',
+    dateModified: '2026-05-28T00:00:00.000Z',
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': 'https://www.mahastrategies.com/doctrine/briefs/overclocked'
+    }
+  };
+
   return (
     <main className="min-h-screen bg-[#0a0a0c] text-[#e0e0e0] py-16 px-6 sm:px-12 selection:bg-indigo-500 selection:text-white">
+      {/* INJECT SCHEMA ENGINE INTO THE DOM */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+
       <div className="max-w-6xl mx-auto">
         
         {/* HEADER */}
