@@ -90,6 +90,28 @@ export default function IntelligenceGrid() {
     An intelligence brief on digital native behavioral loops, social currency in mobile gaming ecosystems, and vectors of cognitive capture.
   </p>
 </Link>
+<Link 
+  href="/intelligence/briefs/backside-microchannel-semiconductors" 
+  className="group block border border-neutral-800 bg-[#0a0a0c] p-6 hover:border-neutral-500 transition-all duration-200"
+>
+  <div className="flex items-center justify-between mb-4">
+    <span className="font-mono text-xs tracking-widest text-amber-500 uppercase">
+      HARDWARE.THERMAL
+    </span>
+    <span className="font-mono text-xs tracking-widest bg-neutral-900 text-neutral-400 px-2 py-0.5 border border-neutral-800 uppercase group-hover:border-neutral-600">
+      STATUS: CRITICAL
+    </span>
+  </div>
+  <h3 className="text-xl font-bold text-white uppercase tracking-tight group-hover:text-amber-500 transition-colors mb-2">
+    Monolithic Backside Microfluidics: Bypassing the Silicon Thermal Wall
+  </h3>
+  <p className="text-sm text-neutral-400 line-clamp-3 leading-relaxed">
+    An architectural evaluation of sub-node thermal management limitations, DRIE defectivity vectors, and the strategic pivot toward monolithic buried channel processing.
+  </p>
+  <div className="mt-6 flex items-center gap-2 text-xs font-mono tracking-widest text-white uppercase">
+    ACCESS DATA DEEP-DIVE <span className="group-hover:translate-x-1 transition-transform">→</span>
+  </div>
+</Link>
           
           {/* FUTURE NODES CAN GO HERE */}
 

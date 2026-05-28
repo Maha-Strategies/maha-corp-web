@@ -38,5 +38,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'monthly',
       priority: 0.7,
     },
+    {
+      url: 'https://mahastrategies.com/intelligence/briefs/backside-microchannel-semiconductors',
+      lastModified: new Date('2026-05-28'),
+      changeFrequency: 'monthly',
+      priority: 0.8,
+    }
   ]
 }
