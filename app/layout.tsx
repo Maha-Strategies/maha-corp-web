@@ -13,23 +13,36 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+import type { Metadata } from 'next'
+
 export const metadata: Metadata = {
   title: 'Maha Strategies LLC | Systemic Sovereignty',
-  description: 'Securing autonomy across the modern stack. AI hardware consulting, sovereign digital infrastructure, and agentic publishing.',
-  alternates: { canonical: 'https://www.mahastrategies.com' },
+  description: 'Foundational frameworks and strategic research equipping elite actors to resist narrative capture and defend their cognitive baseline.',
+  metadataBase: new URL('https://www.mahastrategies.com'),
+  alternates: { canonical: '/' },
   openGraph: {
-    title: 'Maha Strategies LLC | Systemic Sovereignty',
-    description: 'Securing autonomy across the modern stack. Architecting infrastructure, interface, and intellect.',
+    title: 'Maha Strategies LLC',
+    description: 'The architecture of independence. Cognitive defense and custom silicon infrastructure.',
     url: 'https://www.mahastrategies.com',
-    siteName: 'Maha Strategies LLC',
+    siteName: 'Maha Strategies',
+    images: [
+      {
+        url: '/og-master.png', // We will add this asset in Step 3
+        width: 1200,
+        height: 630,
+        alt: 'Maha Strategies LLC - Systemic Sovereignty',
+      },
+    ],
+    locale: 'en_US',
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Maha Strategies LLC | Systemic Sovereignty',
-    description: 'Securing autonomy across the modern stack.',
+    title: 'Maha Strategies LLC',
+    description: 'The architecture of independence. Cognitive defense and custom silicon infrastructure.',
+    images: ['/og-master.png'],
   },
-};
+}
 
 export default function RootLayout({
   children,

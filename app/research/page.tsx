@@ -51,6 +51,26 @@ export default function ResearchIndex() {
           </p>
         </div>
 
+        {/* MCP INTEGRATION BLOCK */}
+        <div className="mb-16 p-8 border border-indigo-900/50 bg-indigo-950/10">
+          <p className="text-xs text-indigo-400 tracking-widest uppercase mb-2 font-mono">
+            [ ACTIVE INFRASTRUCTURE ]
+          </p>
+          <h2 className="text-2xl text-white font-light mb-3">
+            Cognitive Defense Grid (MCP)
+          </h2>
+          <p className="text-sm text-zinc-400 mb-6 max-w-2xl">
+            Integrate the Maha Strategies sovereign baseline directly into your local Claude Desktop instance. Audit cloud infrastructure and retrieve protocols for Zero-Payload architecture in real-time.
+          </p>
+          <Link 
+            href="/research/mcp" 
+            className="inline-block border border-indigo-500 text-indigo-400 font-mono text-[10px] tracking-widest py-3 px-6 hover:bg-indigo-500 hover:text-white transition-colors uppercase"
+          >
+            Initialize Terminal ↗
+          </Link>
+        </div>
+
+        {/* PREPRINTS LIST */}
         <div className="space-y-8">
           {preprints.map((paper, index) => (
             <div key={index} className="border-t border-zinc-800 pt-8 group">
