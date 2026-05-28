@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import Navbar from "@/components/Navbar";
 import "./globals.css";
 
+// FIXED: Removed the invalid backslashes from string literals
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -25,7 +26,7 @@ export const metadata: Metadata = {
     siteName: 'Maha Strategies',
     images: [
       {
-        url: '/og-master.png', 
+        url: '/og-master.png',
         width: 1200,
         height: 630,
         alt: 'Maha Strategies LLC - Systemic Sovereignty',
@@ -40,33 +41,33 @@ export const metadata: Metadata = {
     description: 'The architecture of independence. Cognitive defense and custom silicon infrastructure.',
     images: ['/og-master.png'],
   },
-}
+};
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
-  
-  // The Master Unified Entity Graph
+}) {
+  // UNIFIED MASTER SCHEMA ENGINE
   const jsonLd = {
     "@context": "https://schema.org",
     "@graph": [
-      {
-        "@type": "Person",
-        "@id": "https://www.mayonemaharajan.com/#person",
-        "name": "Mayone Maha Rajan",
-        "jobTitle": "Managing Director",
-        "url": "https://www.mayonemaharajan.com"
-      },
       {
         "@type": "Organization",
         "@id": "https://www.mahastrategies.com/#organization",
         "name": "Maha Strategies LLC",
         "url": "https://www.mahastrategies.com",
-        "description": "A research and engineering firm specializing in AI hardware consulting, sovereign digital infrastructure, and cognitive defense software.",
-        "founder": {
-          "@id": "https://www.mayonemaharajan.com/#person"
+        "logo": "https://www.mahastrategies.com/logo.png",
+        "sameAs": []
+      },
+      {
+        "@type": "Person",
+        "@id": "https://www.mayonemaharajan.com/#person",
+        "name": "Mayone Maha Rajan",
+        "url": "https://www.mayonemaharajan.com",
+        "jobTitle": "Managing Director",
+        "worksFor": {
+          "@id": "https://www.mahastrategies.com/#organization"
         }
       },
       {
@@ -100,17 +101,16 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}>
       <head>
-        {/* Single, Unified Schema Injection */}
         <script 
           type="application/ld+json" 
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} 
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className="min-h-full flex flex-col bg-[#0a0a0c]">
+      <body className="bg-[#0a0a0c] text-[#e0e0e0] h-full flex flex-col antialiased">
         <Navbar />
-        <main className="flex-grow">
+        <div className="flex-1">
           {children}
-        </main>
+        </div>
       </body>
     </html>
   );
