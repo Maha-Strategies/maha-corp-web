@@ -8,7 +8,6 @@ export default function Navbar() {
           Maha Strategies
         </Link>
         <div className="flex flex-wrap justify-center items-center gap-x-5 gap-y-3 md:gap-6 text-[10px] sm:text-xs font-semibold tracking-widest uppercase text-zinc-500">
-        <Link href="/manifesto" className="text-indigo-400 font-mono text-xs uppercase tracking-widest hover:text-white transition-colors">[ Read the Core Doctrine: The Maha Principle Manifesto ]</Link>
           <Link href="/consulting" className="hover:text-white transition-colors">Consulting</Link>
           <Link href="/software" className="hover:text-white transition-colors">Software</Link>
           <Link href="/doctrine" className="hover:text-white transition-colors">Doctrine</Link>

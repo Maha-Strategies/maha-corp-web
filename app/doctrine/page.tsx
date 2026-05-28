@@ -71,7 +71,40 @@ export default function DoctrinePage() {
               </div>
             </div>
           </Link>
+                    {/* TACTICAL BRIEFS MATRIX */}
+                    <div className="mt-16 pt-8 border-t border-zinc-800">
+            <h2 className="text-2xl text-white font-light mb-6">Tactical Briefs</h2>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              
+              <Link href="/doctrine/briefs/soil-gut-brain-axis" className="group block p-5 border border-zinc-900 bg-black hover:border-zinc-600 transition-colors no-underline">
+                <p className="font-mono text-[10px] text-indigo-500 mb-2 uppercase tracking-widest">
+                  [ BRIEF 01 ]
+                </p>
+                <h4 className="font-sans text-sm font-bold text-zinc-200 group-hover:text-white transition-colors uppercase m-0 leading-tight">
+                  The Soil-Gut-Brain Axis
+                </h4>
+              </Link>
 
+              <Link href="/doctrine/briefs/physics-of-spirit" className="group block p-5 border border-zinc-900 bg-black hover:border-zinc-600 transition-colors no-underline">
+                <p className="font-mono text-[10px] text-indigo-500 mb-2 uppercase tracking-widest">
+                  [ BRIEF 02 ]
+                </p>
+                <h4 className="font-sans text-sm font-bold text-zinc-200 group-hover:text-white transition-colors uppercase m-0 leading-tight">
+                  The Physics of Spirit
+                </h4>
+              </Link>
+
+              <Link href="/doctrine/briefs/overclocked" className="group block p-5 border border-zinc-900 bg-black hover:border-zinc-600 transition-colors no-underline">
+                <p className="font-mono text-[10px] text-indigo-500 mb-2 uppercase tracking-widest">
+                  [ BRIEF 03 ]
+                </p>
+                <h4 className="font-sans text-sm font-bold text-zinc-200 group-hover:text-white transition-colors uppercase m-0 leading-tight">
+                  Overclocked: The Physics of Anxiety
+                </h4>
+              </Link>
+
+            </div>
+          </div>
           <div className="mt-12 pt-8 border-t border-zinc-800">
             <h3 className="text-white text-xs uppercase tracking-widest font-semibold mb-4">Agentic Publishing Node</h3>
             <p className="text-sm text-zinc-500 mb-6">
