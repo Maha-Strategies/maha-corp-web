@@ -288,6 +288,38 @@ export default function IntelligenceGrid() {
     ACCESS DATA DEEP-DIVE <span className="group-hover:translate-x-1 transition-transform">→</span>
   </div>
 </Link>
+<Link 
+  href="/intelligence/briefs/neurotechnology-non-medical-outlook" 
+  className="group block border border-neutral-800 bg-[#0a0a0c] p-6 hover:border-neutral-500 transition-all duration-200 flex flex-col justify-between"
+>
+  <div>
+    <div className="flex items-center justify-between mb-4">
+      <span className="font-mono text-xs tracking-widest text-amber-500 uppercase">
+        NEURO.SOCIETY
+      </span>
+      <span className="font-mono text-xs tracking-widest bg-neutral-900 text-neutral-400 px-2 py-0.5 border border-neutral-800 uppercase group-hover:border-neutral-600">
+        STATUS: EMERGING
+      </span>
+    </div>
+    <h3 className="text-xl font-bold text-white uppercase tracking-tight group-hover:text-amber-500 transition-colors mb-2">
+      Neurotechnology Outlook: Decoding and Non-Medical Neurofeedback
+    </h3>
+    <p className="text-sm text-neutral-400 line-clamp-3 leading-relaxed mb-4">
+      An operational framework mapping the timeline of consumer brain-computer interfaces, segmented by physical hurdles, the economic pivot to True Attention Metrics, and resulting lifestyle shifts.
+    </p>
+  </div>
+  
+  {/* Color-Coded Indicators for Grid Card */}
+  <div className="flex flex-wrap gap-2 mt-2">
+    <span className="w-2 h-2 rounded-full bg-rose-500" title="Hurdles"></span>
+    <span className="w-2 h-2 rounded-full bg-emerald-500" title="Value Shifts"></span>
+    <span className="w-2 h-2 rounded-full bg-cyan-500" title="Societal Impacts"></span>
+  </div>
+
+  <div className="mt-6 flex items-center gap-2 text-xs font-mono tracking-widest text-white uppercase">
+    ACCESS DATA DEEP-DIVE <span className="group-hover:translate-x-1 transition-transform">→</span>
+  </div>
+</Link>
           {/* FUTURE NODES CAN GO HERE */}
 
         </div>
