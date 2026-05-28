@@ -43,6 +43,24 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: new Date('2026-05-28'),
       changeFrequency: 'monthly',
       priority: 0.8,
+    },
+    {
+      url: 'https://mahastrategies.com/intelligence/briefs/known-good-die-storage-yield',
+      lastModified: new Date('2026-05-28'),
+      changeFrequency: 'monthly',
+      priority: 0.8,
+    },
+    {
+      url: 'https://mahastrategies.com/intelligence/briefs/high-purity-alumina-manufacturing-architecture',
+      lastModified: new Date('2026-05-28'),
+      changeFrequency: 'monthly',
+      priority: 0.8,
+    },
+    {
+      url: 'https://mahastrategies.com/intelligence/briefs/angstrom-era-soc-architecture',
+      lastModified: new Date('2026-05-28'),
+      changeFrequency: 'monthly',
+      priority: 0.8,
     }
   ]
 }

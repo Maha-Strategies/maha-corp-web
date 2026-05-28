@@ -134,6 +134,50 @@ export default function IntelligenceGrid() {
     ACCESS DATA DEEP-DIVE <span className="group-hover:translate-x-1 transition-transform">→</span>
   </div>
 </Link>   
+<Link 
+  href="/intelligence/briefs/high-purity-alumina-manufacturing-architecture" 
+  className="group block border border-neutral-800 bg-[#0a0a0c] p-6 hover:border-neutral-500 transition-all duration-200"
+>
+  <div className="flex items-center justify-between mb-4">
+    <span className="font-mono text-xs tracking-widest text-amber-500 uppercase">
+      HARDWARE.MATERIALS
+    </span>
+    <span className="font-mono text-xs tracking-widest bg-neutral-900 text-neutral-400 px-2 py-0.5 border border-neutral-800 uppercase group-hover:border-neutral-600">
+      STATUS: ACTIVE
+    </span>
+  </div>
+  <h3 className="text-xl font-bold text-white uppercase tracking-tight group-hover:text-amber-500 transition-colors mb-2">
+    High-Purity Alumina Architecture: Synthesis Vectors and Sub-Nanometer Yields
+  </h3>
+  <p className="text-sm text-neutral-400 line-clamp-3 leading-relaxed">
+    An architectural assessment of 5N/6N HPA manufacturing, bauxite-independent hydrometallurgy, and high-margin deployment across advanced logic fabs and energy storage arrays.
+  </p>
+  <div className="mt-6 flex items-center gap-2 text-xs font-mono tracking-widest text-white uppercase">
+    ACCESS DATA DEEP-DIVE <span className="group-hover:translate-x-1 transition-transform">→</span>
+  </div>
+</Link>
+<Link 
+  href="/intelligence/briefs/angstrom-era-soc-architecture" 
+  className="group block border border-neutral-800 bg-[#0a0a0c] p-6 hover:border-neutral-500 transition-all duration-200"
+>
+  <div className="flex items-center justify-between mb-4">
+    <span className="font-mono text-xs tracking-widest text-amber-500 uppercase">
+      SILICON.NODES
+    </span>
+    <span className="font-mono text-xs tracking-widest bg-neutral-900 text-neutral-400 px-2 py-0.5 border border-neutral-800 uppercase group-hover:border-neutral-600">
+      STATUS: ACTIVE
+    </span>
+  </div>
+  <h3 className="text-xl font-bold text-white uppercase tracking-tight group-hover:text-amber-500 transition-colors mb-2">
+    Angstrom-Era SoC Architecture: The 2nm Transition and Edge AI
+  </h3>
+  <p className="text-sm text-neutral-400 line-clamp-3 leading-relaxed">
+    An architectural assessment of sub-3nm node migration, Backside Power Delivery Networks, CFET stacking, and the sovereign imperative for Angstrom-era fabrication policies.
+  </p>
+  <div className="mt-6 flex items-center gap-2 text-xs font-mono tracking-widest text-white uppercase">
+    ACCESS DATA DEEP-DIVE <span className="group-hover:translate-x-1 transition-transform">→</span>
+  </div>
+</Link>
           {/* FUTURE NODES CAN GO HERE */}
 
         </div>
