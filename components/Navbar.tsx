@@ -13,6 +13,7 @@ export default function Navbar() {
           <Link href="/doctrine" className="hover:text-white transition-colors">Doctrine</Link>
           <Link href="/protocols" className="hover:text-white transition-colors">Protocols</Link>
           <Link href="/research" className="hover:text-white transition-colors">Research</Link>
+          <Link href="/start" className="font-mono text-xs uppercase tracking-widest hover:text-indigo-400">[ Start Here ]</Link>
           <a href="https://publish.mahastrategies.com" target="_blank" rel="noopener noreferrer" className="text-indigo-400 hover:text-white transition-colors">
             Publishing Node ↗
           </a>
