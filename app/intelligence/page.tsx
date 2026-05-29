@@ -23,6 +23,14 @@ const BRIEFS: BriefData[] = [
   // --- MACRO & SYSTEMS ---
   {
     group: 'MACRO & SYSTEMS',
+    category: 'MACRO.IP_STRATEGY',
+    status: 'STRUCTURAL SHIFT',
+    title: 'Strategic IP Architecture: Escaping the 50:50 Joint Ownership Trap',
+    description: 'An operational audit of how hyperscalers structure intellectual property rights in joint research to maximize Freedom to Operate (FTO) and commercial integration over nominal shared ownership.',
+    href: '/intelligence/briefs/strategic-ip-architecture',
+  },
+  {
+    group: 'MACRO & SYSTEMS',
     category: 'MACRO.GEOPOLITICS',
     status: 'CRITICAL',
     title: 'The Bifurcation of Silicon',
@@ -62,6 +70,14 @@ const BRIEFS: BriefData[] = [
     title: 'Angstrom-Era SoC Architecture: The 2nm Transition and Edge AI',
     description: 'An architectural assessment of sub-3nm node migration, Backside Power Delivery Networks, CFET stacking, and the sovereign imperative for Angstrom-era fabrication.',
     href: '/intelligence/briefs/angstrom-era-soc-architecture',
+  },
+  {
+    group: 'HARDWARE & INFRASTRUCTURE',
+    category: 'SILICON.NODES',
+    status: 'ACTIVE',
+    title: 'Angstrom Foundry Diversification: The Non-TSMC Migration',
+    description: 'An intelligence brief on ASIC vendor and CSP strategies for dual-sourcing 2nm and 1.Xnm silicon across Samsung, Intel, and Rapidus to mitigate geopolitical and capacity risks.',
+    href: '/intelligence/briefs/angstrom-foundry-diversification',
   },
   {
     group: 'HARDWARE & INFRASTRUCTURE',

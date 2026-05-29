@@ -151,6 +151,24 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: new Date('2026-05-28'),
       changeFrequency: 'monthly',
       priority: 0.8,
+    },
+    {
+      url: 'https://mahastrategies.com/intelligence/briefs/hyperscaler-storage-disposition',
+      lastModified: new Date('2026-05-29'),
+      changeFrequency: 'monthly',
+      priority: 0.8,
+    },
+    {
+      url: 'https://mahastrategies.com/intelligence/briefs/angstrom-foundry-diversification',
+      lastModified: new Date('2026-05-29'),
+      changeFrequency: 'monthly',
+      priority: 0.8,
+    },
+    {
+      url: 'https://mahastrategies.com/intelligence/briefs/strategic-ip-architecture',
+      lastModified: new Date('2026-05-29'),
+      changeFrequency: 'monthly',
+      priority: 0.8,
     }
   ]
 }
