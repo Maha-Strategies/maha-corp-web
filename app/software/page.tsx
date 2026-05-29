@@ -36,7 +36,14 @@ export default function SoftwarePage() {
           <p>
             As the cornerstone of your new sovereign digital infrastructure, Maha OS establishes an impenetrable local fortress. Leveraging ultra-fast, local storage engines like MMKV and SQLite, your data remains strictly partitioned and encrypted on the metal itself. Maha OS treats compute as a private, sovereign utility—ensuring that your data, decisions, and biological systems remain entirely under your command.
           </p>
-          
+          {/* RESEARCH COUPLING FRAMEWORK */}
+<div className="mt-8 border border-zinc-900 bg-black/40 p-6 font-mono text-xs text-zinc-400">
+  <span className="text-white block font-bold mb-1 uppercase tracking-wider">FOUNDATIONAL WHITE-PAPER //</span>
+  For a full clinical and technical diagnostic of how algorithmic systems enforce attentional exploitation and why hardware-level circuit breakers are mandatory, inspect our latest research publication.
+  <Link href="/research/architecture-of-attention" className="block text-indigo-400 hover:text-indigo-300 mt-3 uppercase tracking-widest no-underline">
+    [ ACCESS ARTICLE: THE ARCHITECTURE OF ATTENTION &rarr; ]
+  </Link>
+</div>
           <div className="mt-12 pt-8 border-t border-zinc-800">
              <p className="text-white font-semibold mb-4 tracking-widest uppercase text-xs">Deploy the Infrastructure</p>
              <p className="text-sm text-zinc-500 mb-6">

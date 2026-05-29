@@ -57,6 +57,12 @@ export default function ProtocolsIndex() {
               </div>
             </div>
           </Link>
+          <p className="mt-4 text-sm text-zinc-500">
+  Theoretical backing for the layout vectors of Protocol 02 can be found within the primary research deployment archive. 
+  <Link href="/research/architecture-of-attention" className="text-zinc-300 hover:text-white transition-colors underline ml-1">
+    Review whitepaper specification document.
+  </Link>
+</p>
                     {/* ARTICLE LINK 03 */}
                     <Link href="/protocols/kinetic-friction" className="group block p-6 border border-gray-800 bg-black hover:border-gray-500 transition-colors rounded-sm">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between">
