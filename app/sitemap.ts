@@ -34,6 +34,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'monthly',
       priority: 0.6,
     },
+    {
+      url: 'https://www.mahastrategies.com/doctrine/briefs/harmonic-command',
+      lastModified: new Date('2026-05-29'),
+      changeFrequency: 'monthly',
+      priority: 0.7,
+    },
     // INJECTED: ACTIVE MARKET INTELLIGENCE
     { url: `${baseUrl}/intelligence`, lastModified: new Date(), changeFrequency: 'daily', priority: 0.8 },
     { url: `${baseUrl}/intelligence/briefs/semiconductor-bifurcation`, lastModified: new Date(), changeFrequency: 'weekly', priority: 0.7 },

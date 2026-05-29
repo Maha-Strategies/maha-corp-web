@@ -120,6 +120,15 @@ export default function DoctrinePage() {
                   Strategic Gravity
                 </h4>
               </Link>
+              <Link href="/doctrine/briefs/harmonic-command" className="group block p-5 border border-zinc-900 bg-black hover:border-zinc-600 transition-colors no-underline">
+                <p className="font-mono text-[10px] text-indigo-500 mb-2 uppercase tracking-widest">
+                  [ BRIEF 06 ]
+                </p>
+                <h4 className="font-sans text-sm font-bold text-zinc-200 group-hover:text-white transition-colors uppercase m-0 leading-tight">
+                  The Harmonic Command
+                </h4>
+              </Link>
+              
             </div>
           </div>
 
