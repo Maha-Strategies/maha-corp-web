@@ -89,11 +89,27 @@ const BRIEFS: BriefData[] = [
   },
   {
     group: 'HARDWARE & INFRASTRUCTURE',
+    category: 'SILICON.PHOTONICS',
+    status: 'ACTIVE',
+    title: 'Electro-Photonic Co-Integration: The Package-to-Package Bottleneck',
+    description: 'An operational audit of the manufacturing and economic barriers preventing high-volume package-to-package optical interconnects, focusing on alignment yield, thermal degradation, and testability.',
+    href: '/intelligence/briefs/electro-photonic-co-integration',
+  },
+  {
+    group: 'HARDWARE & INFRASTRUCTURE',
     category: 'POWER.STRATEGY',
     status: 'ACTIVE',
     title: 'Power Semiconductor Architecture: Strategic Target Calibration Across Nodes',
     description: 'An operational evaluation of capital deployment matrices, corporate margin optimization targets, and systemic sub-system transitions within global IGBT, IEGT, and SiC pipelines.',
     href: '/intelligence/briefs/power-semiconductor-target-setting-metrics',
+  },
+  {
+    group: 'HARDWARE & INFRASTRUCTURE',
+    category: 'SILICON.POWER',
+    status: 'ACTIVE',
+    title: 'Power Semiconductor Target Architecture: Metrics, Yields, and Segment Rationale',
+    description: 'An operational audit analyzing strategic performance indicators, capex intensity targets, and value-capture strategies across discrete IGBTs, EV SiC, and industrial automation segments.',
+    href: '/intelligence/briefs/power-semiconductor-target-architecture',
   },
   {
     group: 'HARDWARE & INFRASTRUCTURE',

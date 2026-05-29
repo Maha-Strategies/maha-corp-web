@@ -169,6 +169,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: new Date('2026-05-29'),
       changeFrequency: 'monthly',
       priority: 0.8,
+    },
+    {
+      url: 'https://mahastrategies.com/intelligence/briefs/electro-photonic-co-integration',
+      lastModified: new Date('2026-05-29'),
+      changeFrequency: 'monthly',
+      priority: 0.8,
+    },
+    {
+      url: 'https://mahastrategies.com/intelligence/briefs/power-semiconductor-target-architecture',
+      lastModified: new Date('2026-05-29'),
+      changeFrequency: 'monthly',
+      priority: 0.8,
     }
   ]
 }
