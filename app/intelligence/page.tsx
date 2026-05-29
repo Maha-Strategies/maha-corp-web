@@ -23,6 +23,14 @@ const BRIEFS: BriefData[] = [
   // --- MACRO & SYSTEMS ---
   {
     group: 'MACRO & SYSTEMS',
+    category: 'MACRO.GEOPOLITICS',
+    status: 'VOLATILE',
+    title: 'U.S. Foundry Sovereignization: The Intel IDM 2.0 Friction Point',
+    description: 'An architectural audit of the U.S. semiconductor supply chain shift, analyzing the divergence between strategic national security mandates and financial stakeholder realities regarding Intel’s foundry business.',
+    href: '/intelligence/briefs/us-foundry-sovereignization',
+  },
+  {
+    group: 'MACRO & SYSTEMS',
     category: 'MACRO.IP_STRATEGY',
     status: 'STRUCTURAL SHIFT',
     title: 'Strategic IP Architecture: Escaping the 50:50 Joint Ownership Trap',
