@@ -175,6 +175,14 @@ const BRIEFS: BriefData[] = [
     description: 'An architectural evaluation of GaN-on-Diamond deployment in LEO constellations, mapping component cost premiums against system-level thermal and power storage savings.',
     href: '/intelligence/briefs/gan-on-diamond-leo-economics',
   },
+  {
+    group: 'HARDWARE & INFRASTRUCTURE',
+    category: 'SILICON.NODES',
+    status: 'CRITICAL',
+    title: 'Rapidus 2nm Mass-Production Yield Probability',
+    description: 'A quantitative and qualitative assessment of Rapidus achieving steady-state High-Volume Manufacturing (HVM) on 2nm GAA/nanosheet architecture by 2030.',
+    href: '/intelligence/briefs/rapidus-2nm-yield-probability',
+  },
 
   // --- INTELLIGENCE & CYBERNETICS ---
   {

@@ -200,5 +200,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'monthly',
       priority: 0.8,
     },
+    {
+      url: 'https://mahastrategies.com/intelligence/briefs/rapidus-2nm-yield-probability',
+      lastModified: new Date('2026-05-29'),
+      changeFrequency: 'monthly',
+      priority: 0.8,
+    },
   ]
 }
