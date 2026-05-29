@@ -193,6 +193,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: new Date('2026-05-29'),
       changeFrequency: 'monthly',
       priority: 0.8,
-    }
+    },
+    {
+      url: 'https://mahastrategies.com/intelligence/briefs/gan-on-diamond-leo-economics',
+      lastModified: new Date('2026-05-29'),
+      changeFrequency: 'monthly',
+      priority: 0.8,
+    },
   ]
 }

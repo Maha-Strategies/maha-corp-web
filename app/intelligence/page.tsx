@@ -167,6 +167,14 @@ const BRIEFS: BriefData[] = [
     description: 'An operational audit analyzing the value-capture mechanics, margin compressions, and hardware-to-service profit blending across industrial welding robot portfolios.',
     href: '/intelligence/briefs/arc-welding-robotics-margins',
   },
+  {
+    group: 'HARDWARE & INFRASTRUCTURE',
+    category: 'AEROSPACE.SILICON',
+    status: 'EMERGING',
+    title: 'Orbital Diamond: GaN-on-Diamond SWaP-C Economics in LEO Constellations',
+    description: 'An architectural evaluation of GaN-on-Diamond deployment in LEO constellations, mapping component cost premiums against system-level thermal and power storage savings.',
+    href: '/intelligence/briefs/gan-on-diamond-leo-economics',
+  },
 
   // --- INTELLIGENCE & CYBERNETICS ---
   {
