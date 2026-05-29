@@ -65,6 +65,14 @@ const BRIEFS: BriefData[] = [
   },
   {
     group: 'HARDWARE & INFRASTRUCTURE',
+    category: 'HARDWARE.LOGISTICS',
+    status: 'TRANSITIONING',
+    title: 'Hyperscaler Storage Disposition: The End of the Shredding Era',
+    description: 'An operational audit of cloud service provider data disposal policies, mapping the technological and legal transition from physical HDD shredding to cryptographic sanitization and circular asset recovery.',
+    href: '/intelligence/briefs/hyperscaler-storage-disposition',
+  },
+  {
+    group: 'HARDWARE & INFRASTRUCTURE',
     category: 'POWER.STRATEGY',
     status: 'ACTIVE',
     title: 'Power Semiconductor Architecture: Strategic Target Calibration Across Nodes',
