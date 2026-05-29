@@ -31,11 +31,31 @@ export default function ConsultingPage() {
           <p>
             True technological independence requires control over the physical layer. Our tailored custom silicon strategy services guide enterprise leaders through the lifecycle of bespoke semiconductor design—from initial conceptualization to foundry coordination and geopolitical risk mitigation. We analyze the computational needs of our clients through a rigorous geopolitical lens. In an era of escalating tech-nationalism, securing proprietary ASIC and RISC-V pipelines is not just a technological advantage; it is an existential hedge against platform dependency and supply chain disruption.
           </p>
-
           <h2 className="text-2xl text-white font-light mt-12 mb-4">Sovereign Digital Product Engineering</h2>
           <p>
             Beyond hardware, we advise on the architecture of on-device agentic systems. Our B2B digital product engineering consulting bridges the gap between hardware constraints and software deployment. We design resilient, decentralized product ecosystems that run local models securely at the edge. By prioritizing on-device agentic systems, we eliminate reliance on vulnerable cloud APIs, ensuring that your enterprise intelligence remains localized, tamper-resistant, and entirely sovereign.
           </p>
+
+          <div className="mt-16 mb-8">
+            <div className="font-mono text-xs tracking-widest text-indigo-500 uppercase mb-4">
+              [ FEATURED STRATEGIC ADVISORY ]
+            </div>
+            <Link href="/consulting/migration-to-the-edge" className="group block p-6 md:p-8 border border-zinc-800 bg-[#111113] hover:border-zinc-500 transition-colors no-underline">
+              <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
+                <div>
+                  <h3 className="text-xl font-bold text-zinc-200 group-hover:text-white transition-colors m-0 uppercase tracking-wide">
+                    The Migration to the Edge
+                  </h3>
+                  <p className="font-mono text-xs text-zinc-500 mt-2 m-0 group-hover:text-zinc-400 transition-colors uppercase">
+                    Mobile Hardware & The GenAI Replacement Cycle
+                  </p>
+                </div>
+                <div className="font-mono text-xs text-zinc-500 group-hover:text-indigo-400 transition-colors whitespace-nowrap tracking-widest">
+                  ACCESS BRIEF &rarr;
+                </div>
+              </div>
+            </Link>
+          </div>
 
           <div className="mt-12 pt-8 border-t border-zinc-800">
              <p className="text-white font-semibold mb-4 tracking-widest uppercase text-xs">Elevate Your Enterprise Architecture</p>
@@ -46,5 +66,6 @@ export default function ConsultingPage() {
         </div>
       </div>
     </div>
-  )
+  );
 }
+          
