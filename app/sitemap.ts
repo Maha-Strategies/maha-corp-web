@@ -28,6 +28,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${baseUrl}/doctrine/briefs/overclocked`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.6 },
     { url: `${baseUrl}/doctrine/briefs/physics-of-spirit`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.6 },
     { url: `${baseUrl}/doctrine/briefs/protocol-of-precision`, lastModified: new Date('2026-05-29'), changeFrequency: 'monthly', priority: 0.6,},
+    {
+      url: 'https://www.mahastrategies.com/doctrine/briefs/strategic-gravity',
+      lastModified: new Date('2026-05-29'),
+      changeFrequency: 'monthly',
+      priority: 0.6,
+    },
     // INJECTED: ACTIVE MARKET INTELLIGENCE
     { url: `${baseUrl}/intelligence`, lastModified: new Date(), changeFrequency: 'daily', priority: 0.8 },
     { url: `${baseUrl}/intelligence/briefs/semiconductor-bifurcation`, lastModified: new Date(), changeFrequency: 'weekly', priority: 0.7 },
