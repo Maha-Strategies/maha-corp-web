@@ -151,6 +151,22 @@ const BRIEFS: BriefData[] = [
     description: 'An architectural evaluation of semiconductor vulnerability in orbit, detailing the thermal and rad-hard imperatives for deploying GaN-on-SiC logic in high-throughput satellite payloads.',
     href: '/intelligence/briefs/rad-hard-gan-sic-leo-satellites',
   },
+  {
+    group: 'HARDWARE & INFRASTRUCTURE',
+    category: 'SILICON.SUPPLY_CHAIN',
+    status: 'ACTIVE',
+    title: 'STM Customer Matrix: Legacy Semiconductor Distribution',
+    description: 'An operational audit of STMicroelectronics\' commercial distribution structure, analyzing revenue concentration across Apple, Automotive Tier-1s, and Aerospace.',
+    href: '/intelligence/briefs/stm-legacy-distribution',
+  },
+  {
+    group: 'HARDWARE & INFRASTRUCTURE',
+    category: 'AUTOMATION.ROBOTICS',
+    status: 'ACTIVE',
+    title: 'Arc Welding Robotics: Component Margin Architecture',
+    description: 'An operational audit analyzing the value-capture mechanics, margin compressions, and hardware-to-service profit blending across industrial welding robot portfolios.',
+    href: '/intelligence/briefs/arc-welding-robotics-margins',
+  },
 
   // --- INTELLIGENCE & CYBERNETICS ---
   {

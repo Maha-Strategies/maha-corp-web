@@ -181,6 +181,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: new Date('2026-05-29'),
       changeFrequency: 'monthly',
       priority: 0.8,
+    },
+    {
+      url: 'https://mahastrategies.com/intelligence/briefs/stm-legacy-distribution',
+      lastModified: new Date('2026-05-29'),
+      changeFrequency: 'monthly',
+      priority: 0.8,
+    },
+    {
+      url: 'https://mahastrategies.com/intelligence/briefs/arc-welding-robotics-margins',
+      lastModified: new Date('2026-05-29'),
+      changeFrequency: 'monthly',
+      priority: 0.8,
     }
   ]
 }
