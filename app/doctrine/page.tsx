@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 export default function DoctrinePage() {
   return (
     <div className="min-h-screen bg-[#0a0a0c] text-zinc-300 font-sans p-8 md:p-24 selection:bg-indigo-500 selection:text-white">
-      <div className="max-w-3xl mx-auto">
+      <div className="max-w-4xl mx-auto">
         <h1 className="text-4xl text-white font-light tracking-wide mb-6 leading-tight">
           Intellectual Property & Foundational Doctrine
         </h1>
@@ -71,10 +71,11 @@ export default function DoctrinePage() {
               </div>
             </div>
           </Link>
-                    {/* TACTICAL BRIEFS MATRIX */}
-                    <div className="mt-16 pt-8 border-t border-zinc-800">
+
+          {/* TACTICAL BRIEFS MATRIX */}
+          <div className="mt-16 pt-8 border-t border-zinc-800">
             <h2 className="text-2xl text-white font-light mb-6">Tactical Briefs</h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
               
               <Link href="/doctrine/briefs/soil-gut-brain-axis" className="group block p-5 border border-zinc-900 bg-black hover:border-zinc-600 transition-colors no-underline">
                 <p className="font-mono text-[10px] text-indigo-500 mb-2 uppercase tracking-widest">
@@ -103,8 +104,18 @@ export default function DoctrinePage() {
                 </h4>
               </Link>
 
+              <Link href="/doctrine/briefs/protocol-of-precision" className="group block p-5 border border-zinc-900 bg-black hover:border-zinc-600 transition-colors no-underline">
+                <p className="font-mono text-[10px] text-indigo-500 mb-2 uppercase tracking-widest">
+                  [ BRIEF 04 ]
+                </p>
+                <h4 className="font-sans text-sm font-bold text-zinc-200 group-hover:text-white transition-colors uppercase m-0 leading-tight">
+                  Protocol of Precision
+                </h4>
+              </Link>
+
             </div>
           </div>
+
           <div className="mt-12 pt-8 border-t border-zinc-800">
             <h3 className="text-white text-xs uppercase tracking-widest font-semibold mb-4">Agentic Publishing Node</h3>
             <p className="text-sm text-zinc-500 mb-6">
