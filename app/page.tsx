@@ -117,9 +117,6 @@ export default function CorporateHomepage() {
           <p className="text-xl text-zinc-400 mb-12">
             In an era defined by cascading dependencies and centralized choke points, the ultimate strategic commodity is autonomy. Maha Strategies LLC exists to secure this autonomy at every layer of the modern stack—from physical silicon to individual consciousness. We call this Systemic Sovereignty.
           </p>
-          <p className="text-xl text-zinc-400 mb-12">
-            In an era defined by cascading dependencies and centralized choke points, the ultimate strategic commodity is autonomy. Maha Strategies LLC exists to secure this autonomy at every layer of the modern stack—from physical silicon to individual consciousness. We call this Systemic Sovereignty.
-          </p>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
             <div className="border-t border-zinc-800 pt-6">
