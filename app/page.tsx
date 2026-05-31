@@ -119,31 +119,42 @@ export default function CorporateHomepage() {
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
-            <div className="border-t border-zinc-800 pt-6">
-              <h3 className="text-white text-sm tracking-widest uppercase mb-4">I. Infrastructure</h3>
-              <p className="text-sm text-zinc-500">
-                Through our premier AI hardware consulting and custom silicon division, we advise expert networks, sovereign entities, and digital product engineering teams on navigating the high-friction realities of the global semiconductor supply chain.
+            <div className="border-t border-zinc-800 pt-6 group">
+              <h3 className="text-white text-sm tracking-widest uppercase mb-4 group-hover:text-indigo-400 transition-colors">I. Infrastructure</h3>
+              <p className="text-sm text-zinc-500 mb-4">
+                Hardware is the foundation of sovereignty. Through our advisory division, we guide expert networks and sovereign entities through the high-friction realities of the global semiconductor supply chain.
+              </p>
+              <p className="text-xs font-mono text-zinc-600 uppercase tracking-widest">
+                Focus: Edge-Compute & Silicon Strategy
               </p>
             </div>
-            <div className="border-t border-zinc-800 pt-6">
-              <h3 className="text-white text-sm tracking-widest uppercase mb-4">II. Interface</h3>
-              <p className="text-sm text-zinc-500">
-                Maha OS is our direct intervention. By treating compute as a private, sovereign utility, Maha OS establishes a local fortress of operations, ensuring that your data, decisions, and systems remain strictly under your command.
+            
+            <div className="border-t border-zinc-800 pt-6 group">
+              <h3 className="text-white text-sm tracking-widest uppercase mb-4 group-hover:text-indigo-400 transition-colors">II. Interface</h3>
+              <p className="text-sm text-zinc-500 mb-4">
+                Maha OS is our direct architectural intervention. Functioning as a continuous cognitive circuit breaker, it establishes a zero-payload local fortress, ensuring your data and systemic integrity remain strictly under your command.
+              </p>
+              <p className="text-xs font-mono text-zinc-600 uppercase tracking-widest">
+                Focus: On-Device AI & Digital Firewalls
               </p>
             </div>
-            <div className="border-t border-zinc-800 pt-6">
-              <h3 className="text-white text-sm tracking-widest uppercase mb-4">III. Intellect</h3>
-              <p className="text-sm text-zinc-500">
-                Through Agentic Publishing, our intellectual property division, we publish foundational frameworks, sovereign blueprints, and strategic research that equip elite actors to resist narrative capture.
+            
+            <div className="border-t border-zinc-800 pt-6 group">
+              <h3 className="text-white text-sm tracking-widest uppercase mb-4 group-hover:text-indigo-400 transition-colors">III. Intellect</h3>
+              <p className="text-sm text-zinc-500 mb-4">
+                Rooted in applied cognitive science, Agentic Publishing is our intellectual property division. We engineer prescriptive frameworks and comprehensive doctrines that equip elite actors to resist narrative capture and optimize biological output.
+              </p>
+              <p className="text-xs font-mono text-zinc-600 uppercase tracking-widest">
+                Focus: Prescriptive Doctrine & Human Optimization
               </p>
             </div>
           </div>
 
           <h2 className="text-2xl text-white font-light mb-4">The Sovereign Synthesis</h2>
           <p>
-            We do not view hardware, software, and intellect as disparate domains. They are the contiguous layers of a single, unified reality. A vulnerability in custom silicon compromises Maha OS; a vulnerability in Maha OS compromises the mind; a compromised mind cannot defend its infrastructure.
+            We do not view hardware, software, and the human nervous system as disparate domains. They are contiguous layers of a single, unified reality. A vulnerability in custom silicon compromises the operating system; a vulnerability in the OS extracts your telemetry; a compromised physical baseline cannot defend its infrastructure. True independence requires securing the entire stack.
           </p>
-          <p className="mt-8 mb-16 font-bold text-white tracking-widest uppercase text-xs">
+          <p className="mt-8 mb-16 font-mono text-indigo-400 tracking-widest uppercase text-xs">
             We are Maha Strategies LLC. The architecture of independence begins here.
           </p>
 
