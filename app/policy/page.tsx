@@ -34,7 +34,7 @@ const legislativeSeeds = [
     summary:
       'Abolishing subsidies for empty, extractive calories and replacing them with a Nutrient Density Bonus.',
     body: [
-      'U.S. agricultural subsidies historically concentrate on a small set of commodity crops\u2014corn, soy, wheat\u2014whose downstream products dominate the processed-food supply. Maha Strategies\u2019 position is that this subsidy structure optimizes for caloric yield and shelf stability rather than nutritional return, and that the public health cost of that trade-off is not currently priced into agricultural policy.',
+      'U.S. agricultural subsidies historically concentrate on a small set of commodity crops\u2014corn, soy, wheat\u2014whose downstream products dominate the processed-food supply. Maha Strategies position is that this subsidy structure optimizes for caloric yield and shelf stability rather than nutritional return, and that the public health cost of that trade-off is not currently priced into agricultural policy.',
       'We propose redirecting subsidy weight toward a Nutrient Density Bonus: payments indexed to the measurable nutritional content of what is grown, rather than raw tonnage. The intent is to transition the agricultural sector from an extractive model toward a restorative, regenerative supply chain over a roughly ten-year horizon, treating soil and crop quality as long-term national assets rather than annual commodities.',
       'This is a directional argument, not a costed bill. The mechanism design\u2014how density is measured, audited, and rewarded without creating new perverse incentives\u2014is the hard part, and is where we believe serious policy work should concentrate.',
     ],
@@ -46,8 +46,8 @@ const legislativeSeeds = [
       'Closing the gap between U.S. additive self-certification and stricter peer-nation standards.',
     body: [
       'Under the U.S. "Generally Recognized as Safe" (GRAS) pathway, manufacturers can self-affirm the safety of certain food additives, in some cases without formal pre-market FDA review. Several other jurisdictions\u2014notably the European Union\u2014apply more restrictive or precautionary standards to specific additives and pesticides that remain permitted in the United States.',
-      'We propose a reciprocity mechanism: where a peer regulator (the EU, Japan, or Canada) has restricted a food additive, pesticide, or industrial chemical, that restriction would trigger an automatic provisional review\u2014and, pending that review, a precautionary hold\u2014in the U.S. The principle is to shift the default from corporate self-certification toward the precautionary standard already operating among comparable economies.',
-      'We state this as Maha Strategies\u2019 policy position. The specific divergences between U.S. and peer-nation chemical regulation are real but vary case by case; any implementation would require a documented, substance-by-substance basis rather than a blanket import of another bloc\u2019s list.',
+      'We propose a reciprocity mechanism: where a peer regulator (the EU, Japan, or Canada) has restricted a food additive, pesticide, or industrial chemical, that restriction would trigger an automatic provisional review\u2014and, pending that review, a precautionary hold in the U.S. The principle is to shift the default from corporate self-certification toward the precautionary standard already operating among comparable economies.',
+      'We state this as Maha Strategies policy position. The specific divergences between U.S. and peer-nation chemical regulation are real but vary case by case; any implementation would require a documented, substance-by-substance basis rather than a blanket import of another list.',
     ],
   },
   {
@@ -75,9 +75,9 @@ const legislativeSeeds = [
     id: 'community-sovereignty-compact',
     title: 'V. The Community Sovereignty Compact',
     summary:
-      'Protecting local jurisdictions\u2019 right to set higher standards than the national floor.',
+      'Protecting local jurisdictions right to set higher standards than the national floor.',
     body: [
-      'A recurring obstacle to local health and environmental standards is preemption: higher levels of government, or industry litigation, overriding stricter municipal rules. Maha Strategies\u2019 position is that local jurisdictions should have explicit, durable protection to set environmental, health, and attentional standards above the national floor.',
+      'A recurring obstacle to local health and environmental standards is preemption: higher levels of government, or industry litigation, overriding stricter municipal rules. Maha Strategies position is that local jurisdictions should have explicit, durable protection to set environmental, health, and attentional standards above the national floor.',
       'We frame the national baseline as exactly that\u2014a floor, not a ceiling. Where a town, county, or school board chooses to exceed it, that choice should be insulated from corporate preemption challenges. This connects to our broader "enclave strategy": change driven upward from coordinated local jurisdictions rather than waiting on captured federal apparatus.',
     ],
   },
@@ -128,10 +128,10 @@ export default function PolicyNode() {
           </h2>
           <div className="pl-4 space-y-6 text-gray-300 font-serif text-lg leading-relaxed">
             <p>
-              For roughly a century, much of Western policy has operated under what we call a Jupiterian program\u2014expansion as the default good: more output, more comfort, more growth. That program eliminated real historical scarcities. Maha Strategies\u2019 argument is that it also produced a structural trap, in which institutions optimize for short-horizon yield and engagement at the expense of long-horizon systemic health.
+              For roughly a century, much of Western policy has operated under what we call a Jupiterian program as the default good: more output, more comfort, more growth. That program eliminated real historical scarcities. Maha Strategies' argument is that it also produced a structural trap, in which institutions optimize for short-horizon yield and engagement at the expense of long-horizon systemic health.
             </p>
             <p>
-              We propose the Saturnian principle as the corrective: the archetype of structure, limits, and deep time. The governing question shifts from "what does this quarter\u2019s growth look like?" to "will this architecture still stand in five hundred years?" In this framing, statecraft is not the management of competing political interests but the design of conditions under which human beings can durably flourish.
+              We propose the Saturnian principle as the corrective: the archetype of structure, limits, and deep time. The governing question shifts from "what does this quarter's growth look like?" to "will this architecture still stand in five hundred years?" In this framing, statecraft is not the management of competing political interests but the design of conditions under which human beings can durably flourish.
             </p>
           </div>
         </section>

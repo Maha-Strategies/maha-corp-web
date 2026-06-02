@@ -97,9 +97,92 @@ export function ProtocolAnchorGrid() {
   );
 }
 
+const SITE_URL = 'https://www.mahastrategies.com';
+
+export const metadata = {
+  metadataBase: new URL(SITE_URL),
+  title: 'Maha Strategies LLC | Systemic Sovereignty',
+  description:
+    'Maha Strategies advises investors and OEMs on the China+1 semiconductor supply-chain shift, South Asian manufacturing logistics, and the transition to on-device AI \u2014 the architecture of independence.',
+  alternates: { canonical: '/' },
+  openGraph: {
+    type: 'website',
+    url: SITE_URL,
+    siteName: 'Maha Strategies',
+    title: 'Maha Strategies LLC | Systemic Sovereignty',
+    description:
+      'Advisory on China+1 supply-chain strategy, semiconductor logistics in South Asia, and on-device AI sovereignty.',
+    images: [{ url: '/og-master.png', width: 1200, height: 630, alt: 'Maha Strategies LLC' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Maha Strategies LLC | Systemic Sovereignty',
+    description:
+      'Advisory on China+1 supply-chain strategy, semiconductor logistics in South Asia, and on-device AI sovereignty.',
+    images: ['/og-master.png'],
+    creator: '@mayonemaha',
+  },
+};
+
+// Structured data — encodes only what is verifiable from stated background.
+// Organization (the firm) + Person (founder/MD) + the advisory expertise.
+const orgJsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'Organization',
+      '@id': `${SITE_URL}/#organization`,
+      name: 'Maha Strategies LLC',
+      url: SITE_URL,
+      description:
+        'An applied research institute and advisory firm focused on systemic sovereignty: semiconductor supply-chain strategy, the China+1 manufacturing shift, and on-device AI.',
+      knowsAbout: [
+        'Semiconductor supply chain strategy',
+        'China+1 manufacturing shift',
+        'OSAT and packaging feasibility',
+        'South Asian manufacturing logistics',
+        'On-device AI and NPU adoption',
+        'Edge-compute hardware strategy',
+      ],
+      founder: { '@id': `${SITE_URL}/#founder` },
+    },
+    {
+      '@type': 'Person',
+      '@id': `${SITE_URL}/#founder`,
+      name: 'Mayone Maha Rajan',
+      jobTitle: 'Managing Director',
+      worksFor: { '@id': `${SITE_URL}/#organization` },
+      description:
+        'Managing Director of Maha Strategies LLC. Advises global investors and OEMs on the China+1 supply-chain shift and South Asian semiconductor logistics, bridging silicon strategy (on-device AI / NPU adoption) with supply-chain execution. Author of The Maha Principle.',
+      knowsAbout: [
+        'China+1 feasibility analysis',
+        'Semiconductor logistics',
+        'OSAT and packaging capacity',
+        'On-device AI / NPU architectures',
+        'Supply-chain risk mitigation',
+      ],
+      author: {
+        '@type': 'Book',
+        name: 'The Maha Principle: Architecting Personal and National Renewal',
+        inLanguage: 'en',
+      },
+      url: 'https://www.mayonemaharajan.com',
+      sameAs: [
+        'https://www.mayonemaharajan.com',
+        'https://www.linkedin.com/in/mayonrajan',
+        'https://x.com/mayonemaha',
+      ],
+    },
+  ],
+};
+
 export default function CorporateHomepage() {
   return (
     <div className="min-h-screen bg-[#0a0a0c] text-zinc-300 font-sans p-8 md:p-24 md:pb-0 selection:bg-indigo-500 selection:text-white">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(orgJsonLd) }}
+      />
       <div className="max-w-4xl mx-auto">
         
         <h1 className="text-4xl md:text-5xl font-light tracking-widest uppercase text-white mb-6">
@@ -124,20 +207,20 @@ export default function CorporateHomepage() {
             <div className="border-t border-zinc-800 pt-6 group">
               <h3 className="text-white text-sm tracking-widest uppercase mb-4 group-hover:text-indigo-400 transition-colors">I. Infrastructure</h3>
               <p className="text-sm text-zinc-500 mb-4">
-                Hardware is the foundation of sovereignty. Through our advisory division, we guide expert networks and sovereign entities through the high-friction realities of the global semiconductor supply chain.
+                Hardware is the foundation of sovereignty. Through our advisory division, we guide global investors and OEMs through the high-friction realities of the semiconductor supply chain &mdash; specifically the &ldquo;China+1&rdquo; shift, OSAT and packaging feasibility, and the relocation of high-tech manufacturing into the South Asian corridor. Operating from Sri Lanka, we provide ground-truth intelligence on the logistics, labor, and energy infrastructure that shift actually requires.
               </p>
               <p className="text-xs font-mono text-zinc-600 uppercase tracking-widest">
-                Focus: Edge-Compute & Silicon Strategy
+                Focus: China+1 Strategy, Semiconductor Logistics & Silicon Supply Chains
               </p>
             </div>
             
             <div className="border-t border-zinc-800 pt-6 group">
               <h3 className="text-white text-sm tracking-widest uppercase mb-4 group-hover:text-indigo-400 transition-colors">II. Interface</h3>
               <p className="text-sm text-zinc-500 mb-4">
-                Maha OS is our direct architectural intervention. Functioning as a continuous cognitive circuit breaker, it establishes a zero-payload local fortress, ensuring your data and systemic integrity remain strictly under your command.
+                Maha OS is our direct architectural intervention. Functioning as a continuous cognitive circuit breaker, it establishes a zero-payload local fortress, ensuring your data and systemic integrity remain strictly under your command. It reflects the same thesis we advise on at the infrastructure layer: the transition from cloud-dependent AI to on-device NPU architectures.
               </p>
               <p className="text-xs font-mono text-zinc-600 uppercase tracking-widest">
-                Focus: On-Device AI & Digital Firewalls
+                Focus: On-Device AI, NPU Adoption & Digital Firewalls
               </p>
             </div>
             
