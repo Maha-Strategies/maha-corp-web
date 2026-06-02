@@ -37,6 +37,13 @@ export function ProtocolAnchorGrid() {
       href: "/protocols/architecting-renewal",
       status: "STABLE",
       isApex: true
+    },
+    {
+      id: "VI",
+      title: "Policy & Statecraft",
+      subtitle: "The Civilizational Tier & Legislative Architecture",
+      href: "/policy",
+      status: "DOCTRINE"
     }
   ];
 
@@ -258,20 +265,6 @@ export default function CorporateHomepage() {
             >
               Enter The Stronghold (Start Here) ↗
             </Link>
-                      {/* POLICY & STATECRAFT NODE */}
-          <Link href="/policy" className="group p-6 border border-gray-800 rounded-lg hover:border-indigo-500 transition-all bg-[#0a0a0c] relative overflow-hidden flex flex-col justify-between">
-            <div>
-              <div className="font-mono text-xs text-indigo-500 mb-4 tracking-widest uppercase">
-                // Statecraft
-              </div>
-              <h3 className="text-xl font-bold text-white mb-2 group-hover:text-indigo-400 transition-colors">
-                Policy & Statecraft &rarr;
-              </h3>
-              <p className="font-serif text-sm text-gray-400 leading-relaxed">
-                The legislative architecture and applied research directives for the Maha Nation. Reclaiming biological capital and civilizational sovereignty.
-              </p>
-            </div>
-          </Link>
           </div>
         </div>
       </div>
