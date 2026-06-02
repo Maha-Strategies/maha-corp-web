@@ -51,15 +51,19 @@ export function ProtocolAnchorGrid() {
     <section className="w-full py-20 border-t border-gray-950 bg-[#0a0a0c] text-white">
       <div className="max-w-4xl mx-auto px-6 font-mono">
         
-        {/* SECTION ROUTING LABEL */}
-        <div className="text-xs text-gray-600 tracking-widest uppercase mb-12 flex justify-between items-center">
+        {/* CLEAR HEADING FIRST */}
+        <h2 className="font-sans text-2xl font-bold tracking-tight text-white mb-3 uppercase">
+          Core Systemic Doctrines
+        </h2>
+        <p className="font-sans text-sm text-gray-400 mb-8 max-w-2xl normal-case tracking-normal font-light leading-relaxed">
+          Our research is organized into a set of doctrines &mdash; each one a practical framework for staying independent at a different layer of the stack. Start anywhere.
+        </p>
+
+        {/* SECTION ROUTING LABEL (thematic flavor, secondary) */}
+        <div className="text-xs text-gray-700 tracking-widest uppercase mb-12 flex justify-between items-center">
           <span>[ LINKING_MATRIX // LIVE_ROUTING ]</span>
           <span>SYSTEMIC_DEFAULTS: ENFORCED</span>
         </div>
-
-        <h2 className="font-sans text-2xl font-bold tracking-tight text-gray-200 mb-8 uppercase">
-          Core Systemic Doctrines
-        </h2>
 
         {/* THE ANCHOR PIPE MATRIX */}
         <div className="grid grid-cols-1 gap-4">
@@ -108,24 +112,24 @@ const SITE_URL = 'https://www.mahastrategies.com';
 
 export const metadata = {
   metadataBase: new URL(SITE_URL),
-  title: 'Maha Strategies LLC | Systemic Sovereignty',
+  title: 'Maha Strategies LLC | A Think Tank for Systemic Sovereignty',
   description:
-    'Maha Strategies advises investors and OEMs on the China+1 semiconductor supply-chain shift, South Asian manufacturing logistics, and the transition to on-device AI \u2014 the architecture of independence.',
+    'Maha Strategies is an independent think tank researching sovereignty across the modern stack \u2014 from semiconductors and on-device AI to human biology. We call it Systemic Sovereignty.',
   alternates: { canonical: '/' },
   openGraph: {
     type: 'website',
     url: SITE_URL,
     siteName: 'Maha Strategies',
-    title: 'Maha Strategies LLC | Systemic Sovereignty',
+    title: 'Maha Strategies LLC | A Think Tank for Systemic Sovereignty',
     description:
-      'Advisory on China+1 supply-chain strategy, semiconductor logistics in South Asia, and on-device AI sovereignty.',
+      'An independent think tank researching sovereignty across the modern stack: silicon, software, and human biology.',
     images: [{ url: '/og-master.png', width: 1200, height: 630, alt: 'Maha Strategies LLC' }],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Maha Strategies LLC | Systemic Sovereignty',
+    title: 'Maha Strategies LLC | A Think Tank for Systemic Sovereignty',
     description:
-      'Advisory on China+1 supply-chain strategy, semiconductor logistics in South Asia, and on-device AI sovereignty.',
+      'An independent think tank researching sovereignty across the modern stack: silicon, software, and human biology.',
     images: ['/og-master.png'],
     creator: '@mayonemaha',
   },
@@ -142,7 +146,7 @@ const orgJsonLd = {
       name: 'Maha Strategies LLC',
       url: SITE_URL,
       description:
-        'An applied research institute and advisory firm focused on systemic sovereignty: semiconductor supply-chain strategy, the China+1 manufacturing shift, and on-device AI.',
+        'An independent think tank and applied research institute focused on systemic sovereignty: semiconductor supply-chain strategy, the China+1 manufacturing shift, on-device AI, and human resilience.',
       knowsAbout: [
         'Semiconductor supply chain strategy',
         'China+1 manufacturing shift',
@@ -160,7 +164,7 @@ const orgJsonLd = {
       jobTitle: 'Managing Director',
       worksFor: { '@id': `${SITE_URL}/#organization` },
       description:
-        'Managing Director of Maha Strategies LLC. Advises global investors and OEMs on the China+1 supply-chain shift and South Asian semiconductor logistics, bridging silicon strategy (on-device AI / NPU adoption) with supply-chain execution. Author of The Maha Principle.',
+        'Managing Director of Maha Strategies LLC, an independent think tank on systemic sovereignty. Researches and advises on the China+1 semiconductor supply-chain shift, South Asian manufacturing logistics, and the transition to on-device AI. Author of The Maha Principle.',
       knowsAbout: [
         'China+1 feasibility analysis',
         'Semiconductor logistics',
@@ -196,6 +200,11 @@ export default function CorporateHomepage() {
           Maha Strategies LLC
         </h1>
 
+        {/* CLEAR ENTRY LAYER: what this is, in plain language, first */}
+        <p className="font-mono text-xs text-indigo-500 font-semibold tracking-widest uppercase mb-6">
+          [ An Independent Think Tank ]
+        </p>
+
         {/* THE MANIFESTO APEX LINK */}
         <div className="mb-12 not-prose">
           <Link href="/manifesto" className="text-indigo-400 font-mono text-xs uppercase tracking-widest hover:text-white transition-colors">
@@ -204,6 +213,9 @@ export default function CorporateHomepage() {
         </div>
         
         <div className="prose prose-invert max-w-none font-light tracking-wide leading-relaxed">
+          <p className="text-2xl text-white font-light mb-8 leading-snug">
+            We research how individuals, companies, and nations stay independent &mdash; across the whole modern stack, from the silicon in our devices to the software that shapes our attention to our own biology.
+          </p>
           <p className="text-xl text-zinc-400 mb-12">
             In an era defined by cascading dependencies and centralized choke points, the ultimate strategic commodity is autonomy. Maha Strategies LLC exists to secure this autonomy at every layer of the modern stack—from physical silicon to individual consciousness. We call this Systemic Sovereignty.
           </p>
@@ -214,30 +226,30 @@ export default function CorporateHomepage() {
             <div className="border-t border-zinc-800 pt-6 group">
               <h3 className="text-white text-sm tracking-widest uppercase mb-4 group-hover:text-indigo-400 transition-colors">I. Infrastructure</h3>
               <p className="text-sm text-zinc-500 mb-4">
-                Hardware is the foundation of sovereignty. Through our advisory division, we guide global investors and OEMs through the high-friction realities of the semiconductor supply chain &mdash; specifically the &ldquo;China+1&rdquo; shift, OSAT and packaging feasibility, and the relocation of high-tech manufacturing into the South Asian corridor. Operating from Sri Lanka, we provide ground-truth intelligence on the logistics, labor, and energy infrastructure that shift actually requires.
+                Hardware is the foundation of sovereignty. Our research here covers the hardest practical question in technology supply chains right now: how to move semiconductor manufacturing out of single points of dependency. That means the &ldquo;China+1&rdquo; shift, the feasibility of chip assembly and packaging (OSAT) in new regions, and the real logistics, labor, and energy infrastructure that relocation into South Asia actually requires.
               </p>
               <p className="text-xs font-mono text-zinc-600 uppercase tracking-widest">
-                Focus: China+1 Strategy, Semiconductor Logistics & Silicon Supply Chains
+                Research Area: China+1 Strategy, Semiconductor Logistics & Silicon Supply Chains
               </p>
             </div>
             
             <div className="border-t border-zinc-800 pt-6 group">
               <h3 className="text-white text-sm tracking-widest uppercase mb-4 group-hover:text-indigo-400 transition-colors">II. Interface</h3>
               <p className="text-sm text-zinc-500 mb-4">
-                Maha OS is our direct architectural intervention. Functioning as a continuous cognitive circuit breaker, it establishes a zero-payload local fortress, ensuring your data and systemic integrity remain strictly under your command. It reflects the same thesis we advise on at the infrastructure layer: the transition from cloud-dependent AI to on-device NPU architectures.
+                We study how software can serve its user instead of harvesting them &mdash; and Maha OS is where that research becomes a working product. It runs AI directly on your device rather than in the cloud, so your data never leaves your hardware: what we call a <em>zero-payload local fortress</em>. The same idea drives our wider research into the shift from cloud-dependent AI to on-device processing.
               </p>
               <p className="text-xs font-mono text-zinc-600 uppercase tracking-widest">
-                Focus: On-Device AI, NPU Adoption & Digital Firewalls
+                Research Area: On-Device AI, NPU Adoption & Digital Privacy
               </p>
             </div>
             
             <div className="border-t border-zinc-800 pt-6 group">
               <h3 className="text-white text-sm tracking-widest uppercase mb-4 group-hover:text-indigo-400 transition-colors">III. Intellect</h3>
               <p className="text-sm text-zinc-500 mb-4">
-                Rooted in applied cognitive science, Agentic Publishing is our intellectual property division. We engineer prescriptive frameworks and comprehensive doctrines that equip elite actors to resist narrative capture and optimize biological output.
+                Grounded in cognitive science, this is our published research and writing. We develop frameworks and doctrines for thinking clearly and staying autonomous under pressure &mdash; how to resist <em>narrative capture</em> (having your attention and beliefs shaped by systems built to do exactly that) and how to keep mind and body resilient.
               </p>
               <p className="text-xs font-mono text-zinc-600 uppercase tracking-widest">
-                Focus: Prescriptive Doctrine & Human Optimization
+                Research Area: Applied Doctrine, Cognitive Liberty & Human Resilience
               </p>
             </div>
           </div>
@@ -259,12 +271,20 @@ export default function CorporateHomepage() {
             <p className="text-zinc-300 text-lg mb-8 font-light">
               The modern industrial environment is not designed to support your life; it is designed to harvest your attention and your biology for profit. Secure your perimeter. 
             </p>
-            <Link
-              href="/start"
-              className="inline-block bg-white text-black font-mono font-bold text-xs tracking-widest uppercase px-8 py-4 hover:bg-zinc-200 transition-colors no-underline"
-            >
-              Enter The Stronghold (Start Here) ↗
-            </Link>
+            <div className="flex flex-col sm:flex-row gap-4">
+              <Link
+                href="/start"
+                className="inline-block bg-white text-black font-mono font-bold text-xs tracking-widest uppercase px-8 py-4 hover:bg-zinc-200 transition-colors no-underline text-center"
+              >
+                Enter The Stronghold (Start Here) ↗
+              </Link>
+              <Link
+                href="/intelligence"
+                className="inline-block border border-zinc-600 text-zinc-200 font-mono font-bold text-xs tracking-widest uppercase px-8 py-4 hover:border-white hover:text-white transition-colors no-underline text-center"
+              >
+                Browse the Research ↗
+              </Link>
+            </div>
           </div>
         </div>
       </div>
