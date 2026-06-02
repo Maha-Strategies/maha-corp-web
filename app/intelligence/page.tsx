@@ -69,6 +69,14 @@ const BRIEFS: BriefData[] = [
     description: 'An exhaustive quantitative re-mapping of global ion implantation and advanced laser annealing market shares, evaluating 2024 baselines against 2035 localization trends.',
     href: '/intelligence/briefs/semiconductor-wfe-doping-annealing-landscape',
   },
+  {
+    group: 'MACRO & SYSTEMS',
+    category: 'MACRO.GEOPOLITICS',
+    status: 'ACTIVE',
+    title: 'Manufacturing Power Semiconductors in SEA as a China-Risk Hedge',
+    description: 'Assessing Southeast Asia\'s realistic role in power semiconductor sourcing, evaluating geopolitical risk reduction, OSAT flexibility, and constraints in process control.',
+    href: '/intelligence/briefs/sea-semiconductor-manufacturing-hedge',
+  },
 
   // --- HARDWARE & INFRASTRUCTURE ---
   {
