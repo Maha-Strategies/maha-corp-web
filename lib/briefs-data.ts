@@ -47,6 +47,47 @@ export interface Brief {
 
 export const BRIEFS: Brief[] = [
   {
+    slug: 'sea-semiconductor-manufacturing-hedge',
+    title: 'Manufacturing Power Semiconductors in SEA as a China-Risk Hedge',
+    kicker: 'GEOPOLITICS // SUPPLY CHAIN // HARDWARE ARCHITECTURE',
+    description: 'Assessing Southeast Asia\'s realistic role in power semiconductor sourcing, evaluating geopolitical risk reduction, OSAT flexibility, and constraints in process control.',
+    status: 'ACTIVE',
+    datePublished: '2026-06-02',
+    intro: 'Amid rising geopolitical and supply chain risks, Southeast Asia is increasingly positioned as an alternative manufacturing base for power semiconductors, leveraging its wafer fab footprint, OSAT cluster, cost competitiveness, and export access to the US and EU. We hypothesize that Southeast Asia offers clear benefits in geopolitical risk reduction and OSAT flexibility. However, advanced process control, accumulation of engineering know-how, and meeting stringent Japanese/European customer quality requirements may remain ongoing constraints, particularly for power semiconductor production.',
+    sections: [
+      {
+        level: 2,
+        heading: '01. Cost and Supply Stability',
+        paragraphs: [
+          'Southeast Asia (particularly Malaysia, Vietnam, and Thailand) offers the clear “China + 1” geopolitical safe haven. When manufacturing here, operators avoid the immediate threat of sudden tariffs or technology embargoes, which stabilizes the export route to the U.S. and EU. Operational capex and labor remain highly competitive.',
+          'China’s primary advantage is its unparalleled end-to-end ecosystem depth. From raw material refinement to wafer manufacturing and final module assembly, the supply chain is highly localized. With massive state subsidies for wide-bandgap technologies, China offers a cost structure that is incredibly difficult to beat. Supply stability is the glaring weakness.'
+        ]
+      },
+      {
+        level: 2,
+        heading: '02. Process Quality and Yield Maturity',
+        paragraphs: [
+          'It is true that indigenous, local pure-play foundries in SEA may lack the advanced process control of top-tier Chinese or Taiwanese fabs. However, SEA is currently experiencing a massive influx of front-end fab investments from Western IDMs.',
+          'Driven by the world’s largest domestic EV and renewable energy markets, Chinese foundries are iterating their power semiconductor processes at a breakneck pace. Yields in silicon, SiC, and GaN are climbing.'
+        ]
+      },
+      {
+        level: 2,
+        heading: '03. Engineering and Technology Accumulation',
+        paragraphs: [
+          'Southeast Asia is an excellent manufacturing base if you leverage it for its world-class OSAT capabilities and as a host for established Western IDM front-end fabs. If you are looking for a complete, localized, and cheap end-to-end ecosystem to replace China on a one-to-one basis, the region is not there yet.',
+          'China produces an astonishing volume of engineering talent yearly. This workforce has deep, accumulated know-how across the entire stack, from chip design and front-end process engineering to equipment manufacturing and packaging, and possesses a strong capability for bottom-up innovation and rapid problem-solving on the fab floor.'
+        ]
+      }
+    ],
+    protocolPatch: {
+      title: 'Maha Protocol Patch: The Asymmetric Supply Chain Hedge',
+      paragraphs: [
+        'Enterprise procurement strategies must reflect the reality on the ground: SEA is not a 1:1 replacement for China. Rather than seeking full end-to-end relocation, organizations should leverage SEA specifically for its OSAT strengths and as a strategic geopolitical bypass, while acknowledging that true process leadership in power semiconductors remains heavily contested by the scale of the Chinese domestic market.'
+      ]
+    }
+  },
+  {
     slug: 'semiconductor-bifurcation',
     title: 'The Bifurcation of Silicon',
     kicker: 'GEOPOLITICS // OPEN INNOVATION // SUPPLY CHAIN',
