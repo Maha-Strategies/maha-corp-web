@@ -27,6 +27,7 @@ export default function Navbar() {
     { name: 'Intelligence', href: '/intelligence' },
     { name: 'Protocols', href: '/protocols' },
     { name: 'Research', href: '/research' },
+    { name: 'Policy', href: '/policy' },
     { name: 'Start', href: '/start' },
   ];
 

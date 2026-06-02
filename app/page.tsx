@@ -117,7 +117,9 @@ export default function CorporateHomepage() {
           <p className="text-xl text-zinc-400 mb-12">
             In an era defined by cascading dependencies and centralized choke points, the ultimate strategic commodity is autonomy. Maha Strategies LLC exists to secure this autonomy at every layer of the modern stack—from physical silicon to individual consciousness. We call this Systemic Sovereignty.
           </p>
-
+          <p className="font-mono text-xs text-indigo-500 font-semibold tracking-widest uppercase mt-4">
+          [ Applied Research Institute & Cybernetic Think Tank ]
+        </p>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
             <div className="border-t border-zinc-800 pt-6 group">
               <h3 className="text-white text-sm tracking-widest uppercase mb-4 group-hover:text-indigo-400 transition-colors">I. Infrastructure</h3>
@@ -173,6 +175,20 @@ export default function CorporateHomepage() {
             >
               Enter The Stronghold (Start Here) ↗
             </Link>
+                      {/* POLICY & STATECRAFT NODE */}
+          <Link href="/policy" className="group p-6 border border-gray-800 rounded-lg hover:border-indigo-500 transition-all bg-[#0a0a0c] relative overflow-hidden flex flex-col justify-between">
+            <div>
+              <div className="font-mono text-xs text-indigo-500 mb-4 tracking-widest uppercase">
+                // Statecraft
+              </div>
+              <h3 className="text-xl font-bold text-white mb-2 group-hover:text-indigo-400 transition-colors">
+                Policy & Statecraft &rarr;
+              </h3>
+              <p className="font-serif text-sm text-gray-400 leading-relaxed">
+                The legislative architecture and applied research directives for the Maha Nation. Reclaiming biological capital and civilizational sovereignty.
+              </p>
+            </div>
+          </Link>
           </div>
         </div>
       </div>
