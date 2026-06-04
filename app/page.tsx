@@ -1,3 +1,4 @@
+// app/page.tsx
 import Link from 'next/link'
 
 export function ProtocolAnchorGrid() {
@@ -189,16 +190,25 @@ const orgJsonLd = {
 
 export default function CorporateHomepage() {
   return (
-    <div className="min-h-screen bg-[#0a0a0c] text-zinc-300 font-sans p-8 md:p-24 md:pb-0 selection:bg-indigo-500 selection:text-white">
+    <div className="min-h-screen bg-[#0a0a0c] text-zinc-300 font-sans p-8 md:p-24 md:pb-0 selection:bg-indigo-500 selection:text-white flex flex-col">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(orgJsonLd) }}
       />
-      <div className="max-w-4xl mx-auto">
+      <div className="max-w-4xl mx-auto w-full flex-grow">
         
-        <h1 className="text-4xl md:text-5xl font-light tracking-widest uppercase text-white mb-6">
-          Maha Strategies LLC
-        </h1>
+        {/* HEADER FLEX CONTAINER FOR TITLE & CONTACT LINK */}
+        <div className="flex flex-col sm:flex-row sm:justify-between sm:items-baseline gap-4 mb-6">
+          <h1 className="text-4xl md:text-5xl font-light tracking-widest uppercase text-white">
+            Maha Strategies LLC
+          </h1>
+          <Link 
+            href="/contact" 
+            className="font-mono text-xs text-zinc-500 hover:text-indigo-400 tracking-widest uppercase transition-colors"
+          >
+            [ Establish Contact ↗ ]
+          </Link>
+        </div>
 
         {/* CLEAR ENTRY LAYER: what this is, in plain language, first */}
         <p className="font-mono text-xs text-indigo-500 font-semibold tracking-widest uppercase mb-6">
@@ -292,6 +302,18 @@ export default function CorporateHomepage() {
       {/* THE INTEGRATION: This is where the grid renders */}
       <ProtocolAnchorGrid />
       
+      {/* GLOBAL FOOTER */}
+      <footer className="w-full py-12 border-t border-gray-950 flex flex-col items-center justify-center gap-4 bg-[#0a0a0c]">
+        <Link 
+          href="/contact" 
+          className="font-mono text-xs text-zinc-600 hover:text-indigo-400 tracking-widest uppercase transition-colors"
+        >
+          [ SECURE CHANNEL // CONTACT ]
+        </Link>
+        <p className="font-mono text-[10px] text-zinc-800 tracking-widest uppercase">
+          &copy; {new Date().getFullYear()} Maha Strategies LLC. All Rights Reserved.
+        </p>
+      </footer>
     </div>
   )
 }
