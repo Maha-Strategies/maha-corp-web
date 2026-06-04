@@ -1,30 +1,17 @@
 // app/contact/page.tsx
-import React from 'react';
+"use client";
+
+import React, { useActionState } from 'react';
 import Link from 'next/link';
-
-const SITE_URL = 'https://www.mahastrategies.com';
-
-export const metadata = {
-  metadataBase: new URL(SITE_URL),
-  title: 'Contact | Maha Strategies',
-  description:
-    'Secure contact channel for Maha Strategies. Reach out for Cognitive Gateway access tokens, inquiries, and support.',
-  alternates: { canonical: '/contact' },
-  openGraph: {
-    type: 'website',
-    url: `${SITE_URL}/contact`,
-    siteName: 'Maha Strategies',
-    title: 'Contact Maha Strategies',
-    description: 'Request access tokens or reach out to Maha Strategies.',
-  },
-  twitter: {
-    card: 'summary',
-    title: 'Contact Maha Strategies',
-    description: 'Secure contact channel for Maha Strategies.',
-  },
-};
+import { submitContactForm } from './actions';
 
 export default function ContactPage() {
+  // useActionState handles the server action lifecycle (loading, success, error)
+  const [state, formAction, isPending] = useActionState(submitContactForm, { 
+    success: false, 
+    error: null 
+  });
+
   return (
     <main className="min-h-screen bg-[#0a0a0c] text-[#e0e0e0] py-16 px-6 sm:px-12 font-mono selection:bg-indigo-500 selection:text-white">
       <div className="max-w-3xl mx-auto">
@@ -49,84 +36,106 @@ export default function ContactPage() {
             01 // Transmission Matrix
           </h2>
           
-          <form 
-            action="#" 
-            method="POST" 
-            className="space-y-6 font-sans bg-black/30 border border-gray-900 p-6 sm:p-8"
-          >
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-              {/* NAME */}
-              <div className="space-y-2">
-                <label htmlFor="name" className="block text-xs text-gray-400 uppercase tracking-widest font-mono">
-                  Designation (Name)
-                </label>
-                <input
-                  type="text"
-                  id="name"
-                  name="name"
-                  required
-                  className="w-full bg-zinc-900/50 border border-zinc-800 text-white text-sm px-4 py-2.5 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-colors"
-                  placeholder="Jane Doe"
-                />
+          {state.success ? (
+            <div className="bg-emerald-950/20 border border-emerald-900 p-8 text-center space-y-4">
+               <p className="text-emerald-400 font-bold tracking-widest uppercase text-sm">
+                 [ TRANSMISSION SUCCESSFUL ]
+               </p>
+               <p className="font-sans text-zinc-400 text-sm">
+                 Your payload has been securely routed to Maha Strategies command. You will receive a response at your designated return vector shortly.
+               </p>
+            </div>
+          ) : (
+            <form 
+              action={formAction} 
+              className="space-y-6 font-sans bg-black/30 border border-gray-900 p-6 sm:p-8"
+            >
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                {/* NAME */}
+                <div className="space-y-2">
+                  <label htmlFor="name" className="block text-xs text-gray-400 uppercase tracking-widest font-mono">
+                    Designation (Name)
+                  </label>
+                  <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    required
+                    disabled={isPending}
+                    className="w-full bg-zinc-900/50 border border-zinc-800 text-white text-sm px-4 py-2.5 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-colors disabled:opacity-50"
+                    placeholder="Jane Doe"
+                  />
+                </div>
+
+                {/* EMAIL */}
+                <div className="space-y-2">
+                  <label htmlFor="email" className="block text-xs text-gray-400 uppercase tracking-widest font-mono">
+                    Return Vector (Email)
+                  </label>
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    required
+                    disabled={isPending}
+                    className="w-full bg-zinc-900/50 border border-zinc-800 text-white text-sm px-4 py-2.5 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-colors disabled:opacity-50"
+                    placeholder="jane@example.com"
+                  />
+                </div>
               </div>
 
-              {/* EMAIL */}
+              {/* SUBJECT / INQUIRY TYPE */}
               <div className="space-y-2">
-                <label htmlFor="email" className="block text-xs text-gray-400 uppercase tracking-widest font-mono">
-                  Return Vector (Email)
+                <label htmlFor="subject" className="block text-xs text-gray-400 uppercase tracking-widest font-mono">
+                  Transmission Type
                 </label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  required
-                  className="w-full bg-zinc-900/50 border border-zinc-800 text-white text-sm px-4 py-2.5 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-colors"
-                  placeholder="jane@example.com"
-                />
+                <select
+                  id="subject"
+                  name="subject"
+                  disabled={isPending}
+                  className="w-full bg-zinc-900/50 border border-zinc-800 text-white text-sm px-4 py-2.5 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-colors appearance-none disabled:opacity-50"
+                >
+                  <option value="token_request">Cognitive Gateway Access Token Request</option>
+                  <option value="support">Technical Support / Troubleshooting</option>
+                  <option value="general">General Inquiry</option>
+                </select>
               </div>
-            </div>
 
-            {/* SUBJECT / INQUIRY TYPE */}
-            <div className="space-y-2">
-              <label htmlFor="subject" className="block text-xs text-gray-400 uppercase tracking-widest font-mono">
-                Transmission Type
-              </label>
-              <select
-                id="subject"
-                name="subject"
-                className="w-full bg-zinc-900/50 border border-zinc-800 text-white text-sm px-4 py-2.5 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-colors appearance-none"
-              >
-                <option value="token_request">Cognitive Gateway Access Token Request</option>
-                <option value="support">Technical Support / Troubleshooting</option>
-                <option value="general">General Inquiry</option>
-              </select>
-            </div>
+              {/* MESSAGE */}
+              <div className="space-y-2">
+                <label htmlFor="message" className="block text-xs text-gray-400 uppercase tracking-widest font-mono">
+                  Payload (Message)
+                </label>
+                <textarea
+                  id="message"
+                  name="message"
+                  rows={5}
+                  required
+                  disabled={isPending}
+                  className="w-full bg-zinc-900/50 border border-zinc-800 text-white text-sm px-4 py-3 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-colors resize-y disabled:opacity-50"
+                  placeholder="Briefly describe your use case for the Gateway, or state your inquiry..."
+                ></textarea>
+              </div>
 
-            {/* MESSAGE */}
-            <div className="space-y-2">
-              <label htmlFor="message" className="block text-xs text-gray-400 uppercase tracking-widest font-mono">
-                Payload (Message)
-              </label>
-              <textarea
-                id="message"
-                name="message"
-                rows={5}
-                required
-                className="w-full bg-zinc-900/50 border border-zinc-800 text-white text-sm px-4 py-3 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-colors resize-y"
-                placeholder="Briefly describe your use case for the Gateway, or state your inquiry..."
-              ></textarea>
-            </div>
+              {/* ERROR STATE */}
+              {state.error && (
+                <p className="text-red-400 text-xs font-mono uppercase tracking-widest">
+                  [ ERROR: {state.error} ]
+                </p>
+              )}
 
-            {/* SUBMIT BUTTON */}
-            <div className="pt-2">
-              <button
-                type="submit"
-                className="bg-indigo-600 hover:bg-indigo-500 text-white text-xs uppercase tracking-widest font-mono px-6 py-3 transition-colors flex items-center justify-center w-full sm:w-auto"
-              >
-                Transmit &rarr;
-              </button>
-            </div>
-          </form>
+              {/* SUBMIT BUTTON */}
+              <div className="pt-2">
+                <button
+                  type="submit"
+                  disabled={isPending}
+                  className="bg-indigo-600 hover:bg-indigo-500 text-white text-xs uppercase tracking-widest font-mono px-6 py-3 transition-colors flex items-center justify-center w-full sm:w-auto disabled:bg-indigo-900 disabled:cursor-not-allowed"
+                >
+                  {isPending ? "Transmitting..." : "Transmit \u2192"}
+                </button>
+              </div>
+            </form>
+          )}
         </section>
 
         {/* PGP / ALTERNATIVE CONTACT */}
@@ -136,8 +145,8 @@ export default function ContactPage() {
           </h2>
           <p className="text-sm text-gray-300 leading-relaxed font-sans mb-4">
             If you prefer not to use the form, you can transmit inquiries directly to our secure inbox at{' '}
-            <a href="mailto:comms@mahastrategies.com" className="text-indigo-400 hover:text-white underline">
-              comms@mahastrategies.com
+            <a href="mailto:mayone@mahastrategies.com" className="text-indigo-400 hover:text-white underline">
+              mayone@mahastrategies.com
             </a>.
           </p>
         </section>
