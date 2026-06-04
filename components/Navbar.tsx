@@ -29,6 +29,7 @@ export default function Navbar() {
     { name: 'Research', href: '/research' },
     { name: 'Policy', href: '/policy' },
     { name: 'Start', href: '/start' },
+    { name: 'Contact', href: '/contact' }, // ADDED CONTACT ROUTE
   ];
 
   return (
