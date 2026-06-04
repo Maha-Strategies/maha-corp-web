@@ -51,29 +51,85 @@ export default function ResearchIndex() {
           </p>
         </div>
 
-        {/* MCP INTEGRATION BLOCK */}
-        <div className="mb-16 p-8 border border-indigo-900/50 bg-indigo-950/10">
-          <p className="text-xs text-indigo-400 tracking-widest uppercase mb-2 font-mono">
-            [ ACTIVE INFRASTRUCTURE ]
-          </p>
-          <h2 className="text-2xl text-white font-light mb-3">
-            Cognitive Defense Grid (MCP)
-          </h2>
-          <p className="text-sm text-zinc-400 mb-6 max-w-2xl">
-            Integrate the Maha Strategies sovereign baseline directly into your local Claude Desktop instance. Audit cloud infrastructure and retrieve protocols for Zero-Payload architecture in real-time.
-          </p>
-          <Link 
-            href="/research/mcp" 
-            className="inline-block border border-indigo-500 text-indigo-400 font-mono text-[10px] tracking-widest py-3 px-6 hover:bg-indigo-500 hover:text-white transition-colors uppercase"
-          >
-            Initialize Terminal ↗
-          </Link>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
+          
+          {/* ACADEMIC SUBDOMAIN BLOCK */}
+          <div className="p-8 border border-emerald-900/50 bg-emerald-950/10 flex flex-col justify-between">
+            <div>
+              <p className="text-xs text-emerald-400 tracking-widest uppercase mb-2 font-mono">
+                [ ACADEMIC NODE ONLINE ]
+              </p>
+              <h2 className="text-2xl text-white font-light mb-3">
+                Formal Publications
+              </h2>
+              <p className="text-sm text-zinc-400 mb-6">
+                Our peer-reviewed protocols and rigorous systemic sovereignty research are actively hosted on our dedicated academic subdomain.
+              </p>
+            </div>
+            
+            <div className="space-y-4">
+              <a 
+                href="https://research.mahastrategies.com" 
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-block border border-emerald-500 text-emerald-400 font-mono text-[10px] tracking-widest py-3 px-6 hover:bg-emerald-500 hover:text-white transition-colors uppercase w-full text-center"
+              >
+                Access Subdomain ↗
+              </a>
+              
+              <div className="border-t border-emerald-900/50 pt-4 mt-4">
+                <p className="text-[10px] text-zinc-500 font-mono tracking-widest uppercase mb-2">
+                  LATEST PUBLICATION
+                </p>
+                <a 
+                  href="https://research.mahastrategies.com/papers/thermodynamic-isomorphism"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group block"
+                >
+                  <h3 className="text-sm text-emerald-100 font-semibold group-hover:text-emerald-400 transition-colors">
+                    Thermodynamic Isomorphism
+                  </h3>
+                  <span className="text-[10px] text-emerald-600/70 group-hover:text-emerald-400 font-mono transition-colors mt-1 block truncate">
+                    Read Paper ↗
+                  </span>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          {/* MCP INTEGRATION BLOCK */}
+          <div className="p-8 border border-indigo-900/50 bg-indigo-950/10 flex flex-col justify-between">
+            <div>
+              <p className="text-xs text-indigo-400 tracking-widest uppercase mb-2 font-mono">
+                [ ACTIVE INFRASTRUCTURE ]
+              </p>
+              <h2 className="text-2xl text-white font-light mb-3">
+                Cognitive Defense Grid
+              </h2>
+              <p className="text-sm text-zinc-400 mb-6">
+                Integrate the Maha Strategies sovereign baseline directly into your local Claude Desktop instance. Audit cloud infrastructure and retrieve protocols for Zero-Payload architecture in real-time.
+              </p>
+            </div>
+            <div>
+              <Link 
+                href="/research/mcp" 
+                className="inline-block border border-indigo-500 text-indigo-400 font-mono text-[10px] tracking-widest py-3 px-6 hover:bg-indigo-500 hover:text-white transition-colors uppercase w-full text-center"
+              >
+                Initialize Terminal (MCP) ↗
+              </Link>
+            </div>
+          </div>
+          
         </div>
 
         {/* PREPRINTS LIST */}
         <div className="space-y-8">
+          <h2 className="text-xs text-zinc-500 tracking-widest uppercase font-mono border-b border-zinc-800 pb-4">
+            [ ARCHIVAL PREPRINTS ]
+          </h2>
           {preprints.map((paper, index) => (
-            <div key={index} className="border-t border-zinc-800 pt-8 group">
+            <div key={index} className="pt-4 group">
               <p className="text-xs text-zinc-500 tracking-widest uppercase mb-3">{paper.date}</p>
               <h2 className="text-2xl text-white font-light mb-4 group-hover:text-indigo-400 transition-colors">
                 <Link href={`/research/${paper.slug}`}>
