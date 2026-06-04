@@ -77,6 +77,14 @@ const BRIEFS: BriefData[] = [
     description: 'Assessing Southeast Asia\'s realistic role in power semiconductor sourcing, evaluating geopolitical risk reduction, OSAT flexibility, and constraints in process control.',
     href: '/intelligence/briefs/sea-semiconductor-manufacturing-hedge',
   },
+  {
+    group: 'MACRO & SYSTEMS',
+    category: 'MACRO.GAMING',
+    status: 'ACTIVE',
+    title: 'SEA Gaming Expansion: Hardware Substrates and F2P Monetization',
+    description: 'An operational audit of Southeast Asia’s gaming ecosystem, assessing the structural dominance of PC/Mobile cross-platform architecture, hardware constraints, and hyper-localized monetization vectors.',
+    href: '/intelligence/briefs/sea-gaming-market-expansion',
+  },
 
   // --- HARDWARE & INFRASTRUCTURE ---
   {
