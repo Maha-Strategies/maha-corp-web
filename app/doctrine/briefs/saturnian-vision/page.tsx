@@ -52,7 +52,7 @@ export default function Page() {
       {/* Prose Matrix */}
       <article className="prose prose-invert max-w-none font-light tracking-wide leading-relaxed space-y-6">
         <p>
-          The fractal is not complete. A sovereign individual in a sovereign community is still vulnerable if the nation is diseased. You can clean your water and secure your food supply and fortify your household—and then watch a debasement of the currency erase your savings, or a captured regulatory apparatus poison the school lunch programme your children eat from, or a digital infrastructure monetise your child's developing brain at a scale no household firewall can fully resist. 
+          A sovereign individual in a sovereign community is still vulnerable if the nation is diseased. You can clean your water and secure your food supply and fortify your household—and then watch a debasement of the currency erase your savings, or a captured regulatory apparatus poison the school lunch programme your children eat from, or a digital infrastructure monetise your child's developing brain at a scale no household firewall can fully resist. 
         </p>
 
         <p className="text-zinc-200 font-medium border-l-2 border-indigo-500 pl-4 italic my-8 text-lg">
