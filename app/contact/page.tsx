@@ -147,8 +147,48 @@ export default function ContactPage() {
             If you prefer not to use the form, you can transmit inquiries directly to our secure inbox at{' '}
             <a href="mailto:mayone@mahastrategies.com" className="text-indigo-400 hover:text-white underline">
               mayone@mahastrategies.com
+            </a>{' '}or by phone at{' '}
+            <a href="tel:+13322138380" className="text-indigo-400 hover:text-white underline">
+              +1 332 213 8380
             </a>.
           </p>
+        </section>
+
+        {/* REGISTERED ENTITY / BUSINESS INFORMATION */}
+        <section className="mb-12">
+          <h2 className="text-xs text-indigo-400 uppercase tracking-widest border-b border-gray-900 pb-2 mb-6">
+            03 // Registered Entity
+          </h2>
+          <address className="not-italic font-sans text-sm text-gray-300 leading-relaxed space-y-4">
+            <div>
+              <p className="text-white font-semibold">Maha Strategies LLC</p>
+              <p className="text-gray-400">
+                1021 E Lincolnway, Unit #1533<br />
+                Cheyenne, WY 82001<br />
+                United States
+              </p>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-2">
+              <p>
+                <span className="text-gray-500 text-xs uppercase tracking-widest font-mono block mb-1">Phone</span>
+                <a href="tel:+13322138380" className="text-indigo-400 hover:text-white transition-colors">
+                  +1 332 213 8380
+                </a>
+              </p>
+              <p>
+                <span className="text-gray-500 text-xs uppercase tracking-widest font-mono block mb-1">Email</span>
+                <a href="mailto:mayone@mahastrategies.com" className="text-indigo-400 hover:text-white transition-colors">
+                  mayone@mahastrategies.com
+                </a>
+              </p>
+              <p>
+                <span className="text-gray-500 text-xs uppercase tracking-widest font-mono block mb-1">Website</span>
+                <a href="https://www.mayonemaharajan.com" className="text-indigo-400 hover:text-white transition-colors" rel="noopener noreferrer">
+                  www.mayonemaharajan.com
+                </a>
+              </p>
+            </div>
+          </address>
         </section>
 
         {/* FOOTER */}
