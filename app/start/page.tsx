@@ -1,9 +1,15 @@
 'use client';
 
-import React from 'react';
+import React, { useActionState } from 'react';
 import Link from 'next/link';
+import { subscribeToGateway } from './actions';
 
 export default function StartGateway() {
+  const [state, formAction, isPending] = useActionState(subscribeToGateway, {
+    success: false,
+    error: null,
+  });
+
   return (
     <main className="min-h-screen bg-[#0a0a0c] text-[#e0e0e0] py-16 px-6 sm:px-12 selection:bg-indigo-500 selection:text-white">
       <div className="max-w-3xl mx-auto">
@@ -38,11 +44,11 @@ export default function StartGateway() {
           <div className="space-y-6 my-8 p-6 sm:p-8 border border-gray-800 bg-black/40">
             <div className="flex gap-4">
               <span className="font-mono text-indigo-500 font-bold shrink-0">[ FOG ]</span>
-              <p className="m-0 text-sm sm:text-base">You think you have “ADHD.” In reality, your dopamine receptors have been burned out by algorithmic extraction.</p>
+              <p className="m-0 text-sm sm:text-base">You struggle to focus. The pull of every notification is engineered to fragment your attention — and it is working exactly as designed.</p>
             </div>
             <div className="flex gap-4">
               <span className="font-mono text-indigo-500 font-bold shrink-0">[ FATIGUE ]</span>
-              <p className="m-0 text-sm sm:text-base">You think you are “depressed.” In reality, your cellular energy is being hijacked by inflammatory, industrial oils that disrupt basic mitochondrial function.</p>
+              <p className="m-0 text-sm sm:text-base">You feel constantly drained. The modern food environment is built to sell, not to nourish — and the cumulative load it places on the body is real.</p>
             </div>
             <div className="flex gap-4">
               <span className="font-mono text-indigo-500 font-bold shrink-0">[ DRIFT ]</span>
@@ -79,7 +85,7 @@ export default function StartGateway() {
               <div>
                 <h4 className="font-sans text-lg font-bold text-white uppercase mb-2">1. The Shopper’s Integrity Card</h4>
                 <p className="font-serif text-sm text-gray-400 mb-6">
-                  A wallet-sized tactical checklist to identify and reject “edible industrial substances” disguised as food. Print this out. Give it to your spouse. If it’s not on the card, it doesn’t enter the house.
+                  A wallet-sized tactical checklist for spotting ultra-processed products and choosing whole foods instead. Print it. Share it with your household. A simple standard for what makes the cut.
                 </p>
               </div>
               <a 
@@ -97,7 +103,7 @@ export default function StartGateway() {
               <div>
                 <h4 className="font-sans text-lg font-bold text-white uppercase mb-2">2. The School Lunch Audit</h4>
                 <p className="font-serif text-sm text-gray-400 mb-6">
-                  A template for parents to audit the nutritional density of their children’s school meals. Use this to demand transparency. Do not let them feed your children the very poisons you have banned from your home.
+                  A template for parents to understand and discuss what is in their children’s school meals. Use it to ask informed questions and bring the same standards you set at home into the conversation.
                 </p>
               </div>
               <a 
@@ -122,21 +128,41 @@ export default function StartGateway() {
             Once you have secured the perimeter, you are ready for the internal work. Join the network to receive the next dispatch. We are building the Army of the Remnant.
           </p>
           
-          {/* Form Placeholder - Replace with your MailerLite / ConvertKit action */}
-          <form className="flex flex-col sm:flex-row gap-4" onSubmit={(e) => e.preventDefault()}>
-            <input 
-              type="email" 
-              placeholder="ENTER SECURE EMAIL COMMUNICATOR" 
-              className="flex-grow bg-black border border-gray-700 p-3 font-mono text-xs text-white focus:outline-none focus:border-indigo-500"
-              required
-            />
-            <button 
-              type="submit" 
-              className="bg-white text-black font-bold font-mono text-xs tracking-widest px-8 py-3 hover:bg-gray-200 transition-colors"
-            >
-              INITIALIZE PROTOCOL
-            </button>
-          </form>
+          {state.success ? (
+            <div className="bg-emerald-950/20 border border-emerald-900 p-6 text-center">
+              <p className="text-emerald-400 font-bold font-mono tracking-widest uppercase text-sm">
+                [ PROTOCOL INITIALIZED ]
+              </p>
+              <p className="font-serif text-zinc-400 text-sm mt-3">
+                Your signal has been received. Check your inbox — the next dispatch is inbound.
+              </p>
+            </div>
+          ) : (
+            <form action={formAction} className="flex flex-col sm:flex-row gap-4">
+              <label htmlFor="gateway-email" className="sr-only">Email address</label>
+              <input
+                type="email"
+                id="gateway-email"
+                name="email"
+                placeholder="ENTER SECURE EMAIL COMMUNICATOR"
+                disabled={isPending}
+                className="flex-grow bg-black border border-gray-700 p-3 font-mono text-xs text-white focus:outline-none focus:border-indigo-500 disabled:opacity-50"
+                required
+              />
+              <button
+                type="submit"
+                disabled={isPending}
+                className="bg-white text-black font-bold font-mono text-xs tracking-widest px-8 py-3 hover:bg-gray-200 transition-colors disabled:bg-gray-500 disabled:cursor-not-allowed"
+              >
+                {isPending ? 'TRANSMITTING…' : 'INITIALIZE PROTOCOL'}
+              </button>
+            </form>
+          )}
+          {state.error && (
+            <p className="text-red-400 text-xs font-mono uppercase tracking-widest mt-4">
+              [ ERROR: {state.error} ]
+            </p>
+          )}
         </section>
 
         {/* INTERNAL MESH */}
