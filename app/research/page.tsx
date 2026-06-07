@@ -31,6 +31,8 @@ const preprints = [
   {
     title: 'Chronobiological Entrainment as a Primary Modality for Endocrine Homeostasis',
     slug: 'chronobiological-entrainment-endocrine-homeostasis',
+    href: 'https://research.mahastrategies.com/papers/chronobiological-entrainment',
+    external: true,
     date: 'February 26, 2026'
   }
 ];
@@ -57,13 +59,13 @@ export default function ResearchIndex() {
           <div className="p-8 border border-emerald-900/50 bg-emerald-950/10 flex flex-col justify-between">
             <div>
               <p className="text-xs text-emerald-400 tracking-widest uppercase mb-2 font-mono">
-                [ ACADEMIC NODE ONLINE ]
+                [ RESEARCH NODE ONLINE ]
               </p>
               <h2 className="text-2xl text-white font-light mb-3">
-                Formal Publications
+                Research Syntheses
               </h2>
               <p className="text-sm text-zinc-400 mb-6">
-                Our peer-reviewed protocols and rigorous systemic sovereignty research are actively hosted on our dedicated academic subdomain.
+                Our cross-disciplinary syntheses and systemic sovereignty research are hosted on our dedicated research subdomain. These are openly-labeled, AI-assisted hypotheses and frameworks — not peer-reviewed conclusions.
               </p>
             </div>
             
@@ -132,16 +134,33 @@ export default function ResearchIndex() {
             <div key={index} className="pt-4 group">
               <p className="text-xs text-zinc-500 tracking-widest uppercase mb-3">{paper.date}</p>
               <h2 className="text-2xl text-white font-light mb-4 group-hover:text-indigo-400 transition-colors">
-                <Link href={`/research/${paper.slug}`}>
-                  {paper.title}
-                </Link>
+                {paper.external ? (
+                  <a href={paper.href} target="_blank" rel="noopener noreferrer">
+                    {paper.title}
+                  </a>
+                ) : (
+                  <Link href={`/research/${paper.slug}`}>
+                    {paper.title}
+                  </Link>
+                )}
               </h2>
-              <Link 
-                href={`/research/${paper.slug}`}
-                className="text-sm font-semibold tracking-widest uppercase text-zinc-400 hover:text-white transition-colors"
-              >
-                Read Manuscript →
-              </Link>
+              {paper.external ? (
+                <a
+                  href={paper.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-sm font-semibold tracking-widest uppercase text-zinc-400 hover:text-white transition-colors"
+                >
+                  Read on Research Subdomain ↗
+                </a>
+              ) : (
+                <Link
+                  href={`/research/${paper.slug}`}
+                  className="text-sm font-semibold tracking-widest uppercase text-zinc-400 hover:text-white transition-colors"
+                >
+                  Read Manuscript →
+                </Link>
+              )}
             </div>
           ))}
         </div>
