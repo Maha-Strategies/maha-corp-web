@@ -211,15 +211,6 @@ export default function CorporateHomepage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(orgJsonLd) }}
       />
-      
-      {/* GLOBAL NAVIGATION LAYER */}
-      <nav className="max-w-4xl mx-auto w-full mb-12 flex flex-wrap gap-6 border-b border-zinc-900 pb-4 font-mono text-xs uppercase tracking-widest text-zinc-500">
-        <Link href="/intelligence" className="hover:text-indigo-400 transition-colors">Intelligence</Link>
-        <Link href="/doctrine" className="hover:text-indigo-400 transition-colors">Doctrine</Link>
-        <Link href="/consulting" className="hover:text-indigo-400 transition-colors">Consulting</Link>
-        <Link href="/software" className="hover:text-indigo-400 transition-colors">Software</Link>
-        <Link href="/research/mcp" className="hover:text-indigo-400 transition-colors">Cognitive Grid (MCP)</Link>
-      </nav>
 
       <div className="max-w-4xl mx-auto w-full flex-grow">
         
