@@ -1,6 +1,22 @@
 // app/page.tsx
 import Link from 'next/link'
 
+// Data extracted from sitemap for active intelligence
+const intelligenceBriefs = [
+  { id: "INT-01", title: "Angstrom-Era SoC Architecture", href: "/intelligence/briefs/angstrom-era-soc-architecture" },
+  { id: "INT-02", title: "US Foundry Sovereignization", href: "/intelligence/briefs/us-foundry-sovereignization" },
+  { id: "INT-03", title: "Backside Microchannel Semiconductors", href: "/intelligence/briefs/backside-microchannel-semiconductors" },
+  { id: "INT-04", title: "AI Software Cost Trajectory 2040", href: "/intelligence/briefs/ai-software-cost-trajectory-2040" },
+];
+
+// Data extracted from sitemap for tactical doctrine
+const doctrineBriefs = [
+  { id: "DOC-01", title: "The Protocol of Precision", href: "/doctrine/briefs/protocol-of-precision" },
+  { id: "DOC-02", title: "Strategic Gravity", href: "/doctrine/briefs/strategic-gravity" },
+  { id: "DOC-03", title: "Harmonic Command", href: "/doctrine/briefs/harmonic-command" },
+  { id: "DOC-04", title: "The Saturnian Vision", href: "/doctrine/briefs/saturnian-vision" },
+];
+
 export function ProtocolAnchorGrid() {
   const protocols = [
     {
@@ -195,6 +211,16 @@ export default function CorporateHomepage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(orgJsonLd) }}
       />
+      
+      {/* GLOBAL NAVIGATION LAYER */}
+      <nav className="max-w-4xl mx-auto w-full mb-12 flex flex-wrap gap-6 border-b border-zinc-900 pb-4 font-mono text-xs uppercase tracking-widest text-zinc-500">
+        <Link href="/intelligence" className="hover:text-indigo-400 transition-colors">Intelligence</Link>
+        <Link href="/doctrine" className="hover:text-indigo-400 transition-colors">Doctrine</Link>
+        <Link href="/consulting" className="hover:text-indigo-400 transition-colors">Consulting</Link>
+        <Link href="/software" className="hover:text-indigo-400 transition-colors">Software</Link>
+        <Link href="/research/mcp" className="hover:text-indigo-400 transition-colors">Cognitive Grid (MCP)</Link>
+      </nav>
+
       <div className="max-w-4xl mx-auto w-full flex-grow">
         
         {/* HEADER FLEX CONTAINER FOR TITLE & CONTACT LINK */}
@@ -229,18 +255,20 @@ export default function CorporateHomepage() {
           <p className="text-xl text-zinc-400 mb-12">
             In an era defined by cascading dependencies and centralized choke points, the ultimate strategic commodity is autonomy. Maha Strategies LLC exists to secure this autonomy at every layer of the modern stack—from physical silicon to individual consciousness. We call this Systemic Sovereignty.
           </p>
+          
           <p className="font-mono text-xs text-indigo-500 font-semibold tracking-widest uppercase mt-4">
-          [ Applied Research Institute & Cybernetic Think Tank ]
-        </p>
+            [ Applied Research Institute & Cybernetic Think Tank ]
+          </p>
+          
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
             <div className="border-t border-zinc-800 pt-6 group">
               <h3 className="text-white text-sm tracking-widest uppercase mb-4 group-hover:text-indigo-400 transition-colors">I. Infrastructure</h3>
               <p className="text-sm text-zinc-500 mb-4">
                 Hardware is the foundation of sovereignty. Our research here covers the hardest practical question in technology supply chains right now: how to move semiconductor manufacturing out of single points of dependency. That means the &ldquo;China+1&rdquo; shift, the feasibility of chip assembly and packaging (OSAT) in new regions, and the real logistics, labor, and energy infrastructure that relocation into South Asia actually requires.
               </p>
-              <p className="text-xs font-mono text-zinc-600 uppercase tracking-widest">
-                Research Area: China+1 Strategy, Semiconductor Logistics & Silicon Supply Chains
-              </p>
+              <Link href="/intelligence" className="text-xs font-mono text-zinc-600 hover:text-indigo-400 uppercase tracking-widest transition-colors block">
+                Access Market Intelligence ↗
+              </Link>
             </div>
             
             <div className="border-t border-zinc-800 pt-6 group">
@@ -248,9 +276,9 @@ export default function CorporateHomepage() {
               <p className="text-sm text-zinc-500 mb-4">
                 We study how software can serve its user instead of harvesting them &mdash; and Maha OS is where that research becomes a working product. It runs AI directly on your device rather than in the cloud, so your data never leaves your hardware: what we call a <em>zero-payload local fortress</em>. The same idea drives our wider research into the shift from cloud-dependent AI to on-device processing.
               </p>
-              <p className="text-xs font-mono text-zinc-600 uppercase tracking-widest">
-                Research Area: On-Device AI, NPU Adoption & Digital Privacy
-              </p>
+              <Link href="/software" className="text-xs font-mono text-zinc-600 hover:text-indigo-400 uppercase tracking-widest transition-colors block">
+                Review Software Systems ↗
+              </Link>
             </div>
             
             <div className="border-t border-zinc-800 pt-6 group">
@@ -258,9 +286,54 @@ export default function CorporateHomepage() {
               <p className="text-sm text-zinc-500 mb-4">
                 Grounded in cognitive science, this is our published research and writing. We develop frameworks and doctrines for thinking clearly and staying autonomous under pressure &mdash; how to resist <em>narrative capture</em> (having your attention and beliefs shaped by systems built to do exactly that) and how to keep mind and body resilient.
               </p>
-              <p className="text-xs font-mono text-zinc-600 uppercase tracking-widest">
-                Research Area: Applied Doctrine, Cognitive Liberty & Human Resilience
-              </p>
+              <Link href="/doctrine" className="text-xs font-mono text-zinc-600 hover:text-indigo-400 uppercase tracking-widest transition-colors block">
+                Read Tactical Briefs ↗
+              </Link>
+            </div>
+          </div>
+
+          {/* HIGHLIGHTED RESEARCH BRIEFS */}
+          <div className="mb-16 grid grid-cols-1 md:grid-cols-2 gap-12 border-t border-zinc-900 pt-12">
+            {/* Intelligence Column */}
+            <div>
+              <h3 className="text-white font-mono text-xs tracking-widest uppercase mb-6 flex items-center gap-2">
+                <span className="w-2 h-2 bg-indigo-500 inline-block"></span>
+                Active Market Intelligence
+              </h3>
+              <ul className="space-y-3 not-prose">
+                {intelligenceBriefs.map(brief => (
+                  <li key={brief.id}>
+                    <Link href={brief.href} className="group flex flex-col p-3 border border-zinc-800/50 hover:border-zinc-500 hover:bg-zinc-900/30 transition-all">
+                      <span className="text-[10px] font-mono text-zinc-500 mb-1">{brief.id}</span>
+                      <span className="text-sm text-zinc-300 group-hover:text-white font-medium">{brief.title}</span>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+              <Link href="/intelligence" className="inline-block mt-4 text-xs font-mono text-indigo-400 hover:text-white uppercase tracking-widest transition-colors">
+                [ View All Intelligence Log ↗ ]
+              </Link>
+            </div>
+
+            {/* Doctrine Column */}
+            <div>
+              <h3 className="text-white font-mono text-xs tracking-widest uppercase mb-6 flex items-center gap-2">
+                <span className="w-2 h-2 bg-zinc-500 inline-block"></span>
+                Tactical Doctrine
+              </h3>
+              <ul className="space-y-3 not-prose">
+                {doctrineBriefs.map(brief => (
+                  <li key={brief.id}>
+                    <Link href={brief.href} className="group flex flex-col p-3 border border-zinc-800/50 hover:border-zinc-500 hover:bg-zinc-900/30 transition-all">
+                      <span className="text-[10px] font-mono text-zinc-500 mb-1">{brief.id}</span>
+                      <span className="text-sm text-zinc-300 group-hover:text-white font-medium">{brief.title}</span>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+              <Link href="/doctrine" className="inline-block mt-4 text-xs font-mono text-indigo-400 hover:text-white uppercase tracking-widest transition-colors">
+                [ View All Tactical Briefs ↗ ]
+              </Link>
             </div>
           </div>
 
@@ -289,10 +362,10 @@ export default function CorporateHomepage() {
                 Enter The Stronghold (Start Here) ↗
               </Link>
               <Link
-                href="/intelligence"
+                href="/consulting"
                 className="inline-block border border-zinc-600 text-zinc-200 font-mono font-bold text-xs tracking-widest uppercase px-8 py-4 hover:border-white hover:text-white transition-colors no-underline text-center"
               >
-                Browse the Research ↗
+                Engage Consulting ↗
               </Link>
             </div>
           </div>
