@@ -31,6 +31,7 @@ const legislativeSeeds = [
   {
     id: 'nutrient-density-standard',
     title: 'I. The Nutrient Density Standard',
+    href: '/policy/nutrient-density-standard/paying-for-nutrition',
     summary:
       'Abolishing subsidies for empty, extractive calories and replacing them with a Nutrient Density Bonus.',
     body: [
@@ -110,14 +111,14 @@ export default function PolicyNode() {
           <div className="font-mono text-xs text-indigo-400 font-semibold tracking-widest uppercase">
             [ Maha Strategies: Think Tank &amp; Applied Research ]
           </div>
-          <h1 className="font-sans text-5xl sm:text-6xl font-bold tracking-tight text-white leading-tight">
+          <h1 className="font-sans text-4xl sm:text-6xl font-bold tracking-tight text-white leading-tight">
             Policy &amp; Statecraft
           </h1>
-          <p className="font-serif text-2xl leading-relaxed text-gray-400 max-w-3xl">
+          <p className="font-serif text-xl text-gray-400 leading-relaxed max-w-2xl">
             The Saturnian Vision: moving from defense of the individual stronghold to the architectural design of a sovereign civilization.
           </p>
-          <p className="font-mono text-[11px] text-gray-600 tracking-widest uppercase pt-2">
-            This page sets out Maha Strategies&rsquo; policy doctrine and proposals. It presents arguments and positions, not legislative text or settled law.
+          <p className="font-serif text-base text-gray-500 leading-relaxed max-w-2xl">
+            This page sets out Maha Strategies\u2019 policy doctrine and proposals. It presents arguments and positions, not legislative text or settled law.
           </p>
         </header>
 
@@ -180,11 +181,26 @@ export default function PolicyNode() {
           <div className="space-y-10 pl-4">
             {legislativeSeeds.map((seed) => (
               <article key={seed.id} id={seed.id} className="bg-[#0a0a0c] border border-gray-800 p-6 sm:p-8 rounded scroll-mt-24">
-                <h3 className="font-sans text-2xl font-bold text-white mb-2">{seed.title}</h3>
+                <h3 className="font-sans text-2xl font-bold text-white mb-2">
+                  {seed.href ? (
+                    <Link href={seed.href} className="hover:text-indigo-400 transition-colors">
+                      {seed.title}
+                    </Link>
+                  ) : (
+                    seed.title
+                  )}
+                </h3>
                 <p className="font-mono text-xs text-indigo-400 uppercase tracking-widest mb-5">{seed.summary}</p>
                 <div className="space-y-4 font-serif text-gray-300 text-lg leading-relaxed">
                   {seed.body.map((para, i) => <p key={i}>{para}</p>)}
                 </div>
+                {seed.href && (
+                  <p className="mt-5">
+                    <Link href={seed.href} className="font-mono text-sm text-indigo-400 hover:text-indigo-300 transition-colors uppercase tracking-widest">
+                      Read the working paper &#8599;
+                    </Link>
+                  </p>
+                )}
               </article>
             ))}
           </div>
