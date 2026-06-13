@@ -15,6 +15,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${baseUrl}/policy`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.8 },
     { url: `${baseUrl}/contact`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.8 }, // ADDED CONTACT ROUTE
 
+    // POLICY DIRECTIVES (Five Platform Seeds)
+    { url: `${baseUrl}/policy/nutrient-density-standard`, lastModified: new Date('2026-06-02'), changeFrequency: 'monthly', priority: 0.7 },
+    { url: `${baseUrl}/policy/chemical-reciprocity-act`, lastModified: new Date('2026-06-02'), changeFrequency: 'monthly', priority: 0.7 },
+    { url: `${baseUrl}/policy/algorithmic-transparency-act`, lastModified: new Date('2026-06-02'), changeFrequency: 'monthly', priority: 0.7 },
+    { url: `${baseUrl}/policy/soil-restoration-corps`, lastModified: new Date('2026-06-02'), changeFrequency: 'monthly', priority: 0.7 },
+    { url: `${baseUrl}/policy/community-sovereignty-compact`, lastModified: new Date('2026-06-02'), changeFrequency: 'monthly', priority: 0.7 },
+
+    // POLICY WORKING PAPERS
+    { url: `${baseUrl}/policy/nutrient-density-standard/paying-for-nutrition`, lastModified: new Date('2026-06-13'), changeFrequency: 'monthly', priority: 0.7 },
+
     // PROTOCOL HUB & NODES
     { url: `${baseUrl}/protocols`, lastModified: new Date(), changeFrequency: 'weekly', priority: 0.9 },
     { url: `${baseUrl}/protocols/architecting-renewal`, lastModified: new Date(), priority: 0.9 },
