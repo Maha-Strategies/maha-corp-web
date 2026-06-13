@@ -20,6 +20,15 @@ const policyArticles: Record<
         <p>We propose redirecting subsidy weight toward a Nutrient Density Bonus: payments indexed to the measurable nutritional content of what is grown, rather than raw tonnage. The intent is to make soil and crop quality long-term assets rather than annual commodities. We state this as a directional argument, not a costed bill. The mechanism design—how density is measured, audited, and rewarded without creating new perverse incentives—is the hard part, and is where we believe serious policy work should concentrate.</p>
 
         <p>Any transition would need to avoid the shock of abrupt removal. One approach worth study is to introduce the bonus as a rider in a future Farm Bill cycle, allocate a defined share of existing support toward regenerative transition grants, and shift the incentive structure over a roughly ten-year horizon as the regenerative market develops the capacity to absorb it. The specific allocations and timelines are matters for detailed mechanism design rather than settled prescriptions.</p>
+
+        <p className="pt-2">
+          <Link
+            href="/policy/nutrient-density-standard/paying-for-nutrition"
+            className="font-mono text-sm text-indigo-400 hover:text-indigo-300 transition-colors uppercase tracking-widest"
+          >
+            Read the working paper &#8599;
+          </Link>
+        </p>
       </>
     ),
   },
