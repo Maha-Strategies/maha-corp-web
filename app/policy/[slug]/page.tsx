@@ -20,14 +20,6 @@ const policyArticles: Record<
         <p>We propose redirecting subsidy weight toward a Nutrient Density Bonus: payments indexed to the measurable nutritional content of what is grown, rather than raw tonnage. The intent is to make soil and crop quality long-term assets rather than annual commodities. We state this as a directional argument, not a costed bill. The mechanism design—how density is measured, audited, and rewarded without creating new perverse incentives—is the hard part, and is where we believe serious policy work should concentrate.</p>
 
         <p>Any transition would need to avoid the shock of abrupt removal. One approach worth study is to introduce the bonus as a rider in a future Farm Bill cycle, allocate a defined share of existing support toward regenerative transition grants, and shift the incentive structure over a roughly ten-year horizon as the regenerative market develops the capacity to absorb it. The specific allocations and timelines are matters for detailed mechanism design rather than settled prescriptions.</p>
-        <p className="pt-2">
-  <Link
-    href="/policy/nutrient-density-standard/paying-for-nutrition"
-    className="font-mono text-sm text-indigo-400 hover:text-indigo-300 transition-colors uppercase tracking-widest"
-  >
-    Read the working paper &#8599;
-  </Link>
-</p>
       </>
     ),
   },
@@ -179,11 +171,12 @@ export default async function PolicyArticle({ params }: PageProps) {
   };
 
   return (
-    <div className="max-w-3xl w-full mx-auto space-y-12 selection:bg-gray-700 pb-16 pt-12">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
+    <main className="min-h-screen bg-[#0a0a0c] text-[#e0e0e0] selection:bg-indigo-500 selection:text-white">
+      <div className="max-w-3xl w-full mx-auto px-6 sm:px-12 space-y-12 pb-16 pt-16">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
 
       <nav className="font-mono text-xs text-gray-500 tracking-widest uppercase mb-8 flex gap-2">
         <Link href="/policy" className="hover:text-indigo-400 transition-colors">
@@ -205,6 +198,7 @@ export default async function PolicyArticle({ params }: PageProps) {
       <article className="font-serif text-lg leading-relaxed text-gray-300 space-y-6">
         {article.content}
       </article>
-    </div>
+      </div>
+    </main>
   );
 }

@@ -31,7 +31,7 @@ const legislativeSeeds = [
   {
     id: 'nutrient-density-standard',
     title: 'I. The Nutrient Density Standard',
-    href: '/policy/nutrient-density-standard/paying-for-nutrition',
+    href: '/policy/nutrient-density-standard',
     summary:
       'Abolishing subsidies for empty, extractive calories and replacing them with a Nutrient Density Bonus.',
     body: [
@@ -197,7 +197,7 @@ export default function PolicyNode() {
                 {seed.href && (
                   <p className="mt-5">
                     <Link href={seed.href} className="font-mono text-sm text-indigo-400 hover:text-indigo-300 transition-colors uppercase tracking-widest">
-                      Read the working paper &#8599;
+                      Read the directive &#8599;
                     </Link>
                   </p>
                 )}
