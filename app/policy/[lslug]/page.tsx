@@ -1,75 +1,145 @@
 import React from 'react';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
+import type { Metadata } from 'next';
 
-// The fully populated Chapter 11 Article Database
-const policyArticles: Record<string, { title: string; date: string; content: React.ReactNode }> = {
+// Chapter 11 Article Database — directional policy arguments, hedged register.
+const policyArticles: Record<
+  string,
+  { title: string; date: string; summary: string; content: React.ReactNode }
+> = {
   "nutrient-density-standard": {
     title: "I. The Nutrient Density Standard",
     date: "2026-06-02",
+    summary:
+      "A proposal to redirect agricultural subsidy weight from volumetric yield toward the measured nutritional content of harvested crops.",
     content: (
       <>
-        <p>We abolish the subsidy of empty calories. For fifty years, the USDA has cut cheques based on bushels of commodity corn and soy — raw material that flows primarily into high-fructose corn syrup, industrial seed oils, and ethanol rather than into nourishment. The Farm Bill has been the single most consequential piece of anti-health legislation in American history, and it passes every five years with bipartisan support because the lobbying infrastructure behind it is the most powerful in Washington.</p>
-        
-        <p>We replace yield-based subsidies with nutrient density bonuses. The farmer who heals the soil, produces food with measurable mineral density, and maintains the ecological health of the land becomes the most valued player in the rural economy. The monoculture operation that exhausts the topsoil and produces caloric volume with negligible nutritional content receives no government support.</p>
-        
-        <p>The transition strategy avoids the shock of abrupt removal. We introduce a Nutrient Density Bonus as a rider in the next Farm Bill cycle, allocate ten percent of crop insurance funding to Regenerative Transition Grants, and over a ten-year window dial the incentive structure from extraction to restoration as the regenerative market develops the capacity to absorb the transition.</p>
+        <p>Our position is that U.S. agricultural subsidies optimize for caloric yield and shelf stability rather than nutritional return. For decades, commodity support has concentrated on a narrow set of crops—corn, soy, wheat—whose downstream products dominate the processed-food supply. We argue that the public-health cost of that trade-off is not currently priced into agricultural policy, and that the subsidy structure consequently rewards volume over nutritional quality.</p>
+
+        <p>We propose redirecting subsidy weight toward a Nutrient Density Bonus: payments indexed to the measurable nutritional content of what is grown, rather than raw tonnage. The intent is to make soil and crop quality long-term assets rather than annual commodities. We state this as a directional argument, not a costed bill. The mechanism design—how density is measured, audited, and rewarded without creating new perverse incentives—is the hard part, and is where we believe serious policy work should concentrate.</p>
+
+        <p>Any transition would need to avoid the shock of abrupt removal. One approach worth study is to introduce the bonus as a rider in a future Farm Bill cycle, allocate a defined share of existing support toward regenerative transition grants, and shift the incentive structure over a roughly ten-year horizon as the regenerative market develops the capacity to absorb it. The specific allocations and timelines are matters for detailed mechanism design rather than settled prescriptions.</p>
+        <p className="pt-2">
+  <Link
+    href="/policy/nutrient-density-standard/paying-for-nutrition"
+    className="font-mono text-sm text-indigo-400 hover:text-indigo-300 transition-colors uppercase tracking-widest"
+  >
+    Read the working paper &#8599;
+  </Link>
+</p>
       </>
-    )
+    ),
   },
   "chemical-reciprocity-act": {
     title: "II. The Chemical Reciprocity Act",
     date: "2026-06-02",
+    summary:
+      "A proposed reciprocity mechanism that would trigger provisional U.S. review when a peer regulator restricts a food additive, pesticide, or industrial chemical.",
     content: (
       <>
-        <p>We end the practice of treating American citizens as the test population for chemicals that our peer nations have already evaluated and rejected. This act mandates an automatic provisional ban on any food additive, pesticide, pharmaceutical, or industrial chemical currently restricted by the European Union, Japan, or Canada — our closest allies, operating under comparable scientific standards but different regulatory philosophies.</p>
-        
-        <p>The United States operates under the GRAS loophole: Generally Recognised As Safe, a self-certification standard that allows food companies to declare their own ingredients safe without independent verification. Europe operates under the Precautionary Principle: prove it is safe before you sell it to children. The result is a divergence: the same company, the same product, two formulations: clean for Europe because the law requires it, and toxic for America because the law permits it.</p>
+        <p>Under the U.S. "Generally Recognized as Safe" (GRAS) pathway, manufacturers can self-affirm the safety of certain food additives, in some cases without formal pre-market FDA review. Several other jurisdictions—notably the European Union—apply more restrictive or precautionary standards to specific additives and pesticides that remain permitted in the United States. We frame this as a difference in regulatory philosophy, not a blanket claim that one food supply is uniformly safe and another uniformly unsafe.</p>
 
-        <p>The Chemical Reciprocity Act closes this gap by forcing the American standard up to the level our allies have already reached.</p>
+        <p>We propose a reciprocity mechanism: where a peer regulator (the EU, Japan, or Canada) has restricted a food additive, pesticide, or industrial chemical, that restriction would trigger an automatic provisional review—and, pending that review, a precautionary hold in the U.S. The principle is to shift the default from corporate self-certification toward the precautionary standard already operating among comparable economies.</p>
+
+        <p>We state this as a Maha Strategies policy position. The specific divergences between U.S. and peer-nation chemical regulation are real but vary case by case; any implementation would require a documented, substance-by-substance basis rather than a blanket import of another jurisdiction's list.</p>
       </>
-    )
+    ),
   },
   "algorithmic-transparency-act": {
     title: "III. Algorithmic Transparency and Cognitive Liberty",
     date: "2026-06-02",
+    summary:
+      "A proposal to classify demonstrably deceptive interface design as an unfair trade practice and to explore taxation indexed to documented harm.",
     content: (
       <>
-        <p>We codify the right to a mind free from predatory manipulation. User attention is designated a protected resource. Deceptive interface design — infinite scroll, autoplay, variable reward schedules calibrated to maximise time-on-device at the expense of user wellbeing — is classified as an unfair trade practice and prohibited. Ranking algorithms used by platforms serving users under eighteen are subject to audit by a designated Digital EPA with the authority to require modification.</p>
-        
-        <p>The tax structure mirrors the environmental model. We tax platforms on their documented harm metrics — addiction rates, adolescent depression correlations, self-reported wellbeing declines among heavy users — with the same regulatory logic we apply to industrial polluters. The exhaust of the attention economy is cognitive fragmentation and mass attentional disability. We treat it with the same seriousness as industrial exhaust.</p>
+        <p>We argue for a codified right to a mind free from engineered, predatory manipulation. The behavioral mechanics documented in our intelligence briefs—variable reward loops, infinite scroll, autoplay, engagement-maximizing defaults—are deployed at population scale, and we contend their cumulative cost to attention and executive function is a plausible public harm, not merely a private choice. We treat the strength of that harm claim as contingent on measurement rather than assumed.</p>
 
-        <p>The attention economy is producing a Kessler Syndrome of the Mind. No single notification, video, or algorithmic recommendation is individually catastrophic. The aggregate density of low-signal digital stimulation is creating the conditions under which no sustained, high-order thinking can achieve escape velocity. The Algorithmic Transparency and Cognitive Liberty Act is the legislation designed to reduce the orbital density before the cascade becomes irreversible.</p>
+        <p>The proposal is to classify demonstrably deceptive interface design as an unfair trade practice under existing consumer-protection frameworks, to subject ranking algorithms serving minors to audit, and to explore taxation indexed to documented harm metrics. We are explicit that "documented harm" is the crux: any such regime stands or falls on rigorous, contestable measurement rather than on aesthetic objections to particular designs.</p>
+
+        <p>The analogy we use is a "cognitive Kessler Syndrome": a hypothesized tipping point past which the shared attentional environment becomes so saturated with extraction that collective focus degrades for everyone. We offer this as a framing device that motivates the proposal, not as an established empirical finding.</p>
       </>
-    )
+    ),
   },
   "soil-restoration-corps": {
     title: "IV. The National Soil Restoration Corps",
     date: "2026-06-02",
+    summary:
+      "A proposed civilian service corps for ecological repair, funded by redirecting a portion of existing fossil-fuel and commodity-crop support.",
     content: (
       <>
-        <p>We authorise the mobilisation of one million young Americans into a civilian service corps dedicated to ecological repair: reforestation of public and degraded private land, wetland restoration along watersheds, topsoil regeneration in the agricultural heartland where industrial farming has depleted the carbon and microbial life that makes food nutritious.</p>
-        
-        <p>The cost is approximately $50 billion annually — roughly six percent of the current defense budget. The funding mechanism is a direct subsidy reallocation: we currently spend approximately $20 billion annually supporting fossil fuel extraction and $30 billion supporting the commodity crop production that drives metabolic disease. We stop paying to poison the earth and redirect those funds to healing it.</p>
-        
-        <p>The Corps serves a dual purpose. It heals the ecological debts that compound across generations. And it forges a generation of young Americans who have worked with their hands in the physical world, who have experienced genuine physical difficulty in service of something larger than themselves, and who have built the specific neural and physiological resilience that only genuine challenge produces. The soil restoration and the human restoration happen simultaneously.</p>
+        <p>We propose a civilian service corps dedicated to ecological repair—reforestation, watershed and wetland restoration, and topsoil regeneration in agricultural regions where intensive management has depleted soil carbon and microbial life. The program is modeled in spirit on large-scale civilian conservation programs of the twentieth century.</p>
+
+        <p>The proposed funding mechanism is a redirection of existing subsidies rather than new net spending. Federal support for fossil-fuel production and for commodity-crop programs each runs into the tens of billions of dollars annually, though published estimates vary widely depending on whether one counts direct outlays, tax provisions, or unpriced externalities. Rather than assert a precise figure, we argue directionally: a portion of the public money currently directed toward extraction could instead fund restorative land work. The exact scale, offsets, and budgetary accounting are matters for a costed proposal, which this is not.</p>
+
+        <p>The dual thesis is that the same program can heal degraded land and build human resilience: physical, outdoor, purpose-driven work as both ecological infrastructure and a counter to the metabolic and attentional decline we describe elsewhere in our doctrine. We present this as a vision for how restorative labor and national service could be structured, not as a budgeted appropriation.</p>
       </>
-    )
+    ),
   },
   "community-sovereignty-compact": {
     title: "V. The Community Sovereignty Compact",
     date: "2026-06-02",
+    summary:
+      "A proposal to give local jurisdictions explicit, durable protection to set environmental and health standards above the national floor.",
     content: (
       <>
-        <p>We enshrine Local Preemption as a federal right. Municipalities gain the explicit constitutional protection to set environmental and health standards higher than the national floor — and to maintain those standards against corporate challenges.</p>
-        
-        <p>If a town votes to ban glyphosate on public land, or to remove industrial fluoride from the municipal water supply, or to establish a phone-free zone in its schools, the corporations whose products are affected cannot invoke state preemption law to overturn the will of the people who live there.</p>
-        
-        <p>The legal principle is simple: the people who breathe the air and drink the water have standing to govern the air and the water. This is the ultimate protection for the Enclave Strategy, ensuring that the Strongholds we build cannot be legislated out of existence by captured centralized regulatory bodies.</p>
+        <p>A recurring obstacle to local health and environmental standards is preemption: higher levels of government, or industry litigation, overriding stricter municipal rules. Our position is that local jurisdictions should have explicit, durable protection to set environmental, health, and attentional standards above the national floor.</p>
+
+        <p>Where a town chooses to restrict a particular pesticide on public land, to alter its municipal water treatment, or to establish phone-free zones in its schools, we argue that choice should be insulated from corporate preemption challenges. We frame the national baseline as exactly that—a floor, not a ceiling.</p>
+
+        <p>The underlying principle is that the people who breathe the air and drink the water have standing to govern the air and the water. This connects to our broader enclave strategy: change driven upward from coordinated local jurisdictions rather than waiting on federal apparatus. We present it as a directional argument; the constitutional and statutory questions around preemption are genuinely contested and would require careful legal design.</p>
       </>
-    )
-  }
+    ),
+  },
 };
+
+export function generateStaticParams() {
+  return Object.keys(policyArticles).map((slug) => ({ slug }));
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+  const { slug } = await params;
+  const article = policyArticles[slug];
+
+  if (!article) {
+    return { title: "Directive Not Found | Maha Strategies" };
+  }
+
+  const url = `https://www.mahastrategies.com/policy/${slug}`;
+  const cleanTitle = article.title.replace(/^[IVX]+\.\s*/, "");
+
+  return {
+    title: `${cleanTitle} | Policy & Statecraft | Maha Strategies`,
+    description: article.summary,
+    alternates: { canonical: url },
+    openGraph: {
+      title: `${cleanTitle} | Maha Strategies`,
+      description: article.summary,
+      url,
+      siteName: "Maha Strategies",
+      type: "article",
+      publishedTime: article.date,
+      images: [
+        {
+          url: "https://www.mahastrategies.com/og-master.png",
+          width: 1200,
+          height: 630,
+          alt: "Maha Strategies — Policy & Statecraft",
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${cleanTitle} | Maha Strategies`,
+      description: article.summary,
+      images: ["https://www.mahastrategies.com/og-master.png"],
+    },
+  };
+}
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -81,12 +151,40 @@ export default async function PolicyArticle({ params }: PageProps) {
 
   if (!article) return notFound();
 
+  const cleanTitle = article.title.replace(/^[IVX]+\.\s*/, "");
+  const articleUrl = `https://www.mahastrategies.com/policy/${resolvedParams.slug}`;
+
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: cleanTitle,
+    description: article.summary,
+    datePublished: article.date,
+    url: articleUrl,
+    mainEntityOfPage: { "@type": "WebPage", "@id": articleUrl },
+    author: { "@type": "Organization", name: "Maha Strategies" },
+    publisher: {
+      "@type": "Organization",
+      name: "Maha Strategies",
+      logo: {
+        "@type": "ImageObject",
+        url: "https://www.mahastrategies.com/og-master.png",
+      },
+    },
+    isPartOf: {
+      "@type": "CreativeWork",
+      name: "Policy & Statecraft",
+      url: "https://www.mahastrategies.com/policy",
+    },
+  };
+
   return (
     <div className="max-w-3xl w-full mx-auto space-y-12 selection:bg-gray-700 pb-16 pt-12">
-      
-      {/* NOTE: If you use the layout.tsx file above, you can remove this <nav> 
-        block to prevent double-navigation bars. 
-      */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+
       <nav className="font-mono text-xs text-gray-500 tracking-widest uppercase mb-8 flex gap-2">
         <Link href="/policy" className="hover:text-indigo-400 transition-colors">
           POLICY INDEX
@@ -107,7 +205,6 @@ export default async function PolicyArticle({ params }: PageProps) {
       <article className="font-serif text-lg leading-relaxed text-gray-300 space-y-6">
         {article.content}
       </article>
-
     </div>
   );
 }
