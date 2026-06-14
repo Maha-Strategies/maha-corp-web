@@ -213,10 +213,10 @@ export default function PolicyNode() {
           </h2>
           <div className="pl-4 space-y-6 text-gray-300 font-serif text-lg leading-relaxed">
             <p className="font-mono text-[11px] text-gray-600 tracking-widest uppercase">
-              The following is explicitly speculative\u2014a framing device for our long-horizon thesis, not an empirical claim.
+              The following is explicitly speculative framing device for our long-horizon thesis, not an empirical claim.
             </p>
             <p>
-              One way we frame the stakes: the Great Filter that may prevent civilizations from becoming durable and interstellar might not be nuclear war or resource exhaustion, but metabolic and cognitive decline\u2014a civilization growing too comfortable to sustain the demands of its own ambitions. We offer this as a thought experiment that motivates the doctrine, not as a testable prediction.
+              One way we frame the stakes: the Great Filter that may prevent civilizations from becoming durable and interstellar might not be nuclear war or resource exhaustion, but metabolic and cognitive decline. A civilization growing too comfortable to sustain the demands of its own ambitions. We offer this as a thought experiment that motivates the doctrine, not as a testable prediction.
             </p>
             <p>
               The figure we return to is the Nurturing Warrior: a configuration combining care and capacity, which we argue generates the surplus a society needs to endure hard transitions. The project, in that framing, is not only to restore a nation but to build the conditions from which it could eventually reach further.
