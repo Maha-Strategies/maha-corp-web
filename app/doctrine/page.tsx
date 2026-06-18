@@ -33,7 +33,7 @@ export default function DoctrinePage() {
 
           {/* THE MAHA PRINCIPLE EXTERNAL LINK */}
           <a 
-            href="https://TheMahaPrinciple.com" 
+            href="https://www.mayonemaharajan.com/concepts/the-maha-principle" 
             target="_blank"
             rel="noopener noreferrer"
             className="group block mt-8 p-6 border-l-4 border-indigo-500 bg-indigo-950/10 hover:bg-indigo-950/20 transition-colors no-underline"
