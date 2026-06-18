@@ -25,11 +25,32 @@ export default function DoctrinePage() {
 
           <h2 className="text-2xl text-white font-light mt-12 mb-4">The Maha Principle</h2>
           <p>
-            Our primary doctrine, <em>The Maha Principle: The Architecture of Human Flourishing</em>, is an 82,000-word strategic framework designed to reclaim the human biological and cognitive baseline from extractive industrial and technological systems.
+            Our primary doctrine, <em>The Maha Principle: The Architecture of Human Flourishing</em>, is an 81,015-word strategic framework designed to reclaim the human biological and cognitive baseline from extractive industrial and technological systems.
           </p>
           <p>
             It establishes the theoretical architecture for Metabolic Sovereignty, Attentional Captivity, and the Nurturing Warrior archetype—the direct philosophy powering Maha OS.
           </p>
+
+          {/* THE MAHA PRINCIPLE EXTERNAL LINK */}
+          <a 
+            href="https://TheMahaPrinciple.com" 
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group block mt-8 p-6 border-l-4 border-indigo-500 bg-indigo-950/10 hover:bg-indigo-950/20 transition-colors no-underline"
+          >
+            <p className="font-mono text-xs text-indigo-400 mb-2 uppercase tracking-widest m-0">
+              [ EXTERNAL PORTAL // DISCOVER MORE ]
+            </p>
+            <h3 className="font-sans text-xl font-bold text-white uppercase m-0 mt-2">
+              Explore The Maha Principle
+            </h3>
+            <p className="font-serif text-sm text-zinc-400 italic mt-2 mb-0">
+              Visit the official domain for comprehensive insights on the foundational framework.
+            </p>
+            <div className="mt-4 font-mono text-xs text-zinc-500 group-hover:text-white transition-colors">
+              ACCESS PORTAL ↗
+            </div>
+          </a>
 
           {/* STRATEGIC ARCHIVES / ESSAY ROUTING */}
           <h2 className="text-2xl text-white font-light mt-16 mb-6">Strategic Archives</h2>
