@@ -29,8 +29,8 @@ const BOOK = {
   price: '$2.99',
   format: 'Kindle',
   launchDate: 'July 10, 2026',
-  // TODO: drop the upscaled cover into /public and set the path here.
-  coverSrc: '/the-maha-principle-cover.png',
+  // Cover lives at /public/The_Maha_Principle_cover_v2.jpg
+  coverSrc: '/The_Maha_Principle_cover_v2.jpg',
 };
 
 export function BookPreorderSection() {
