@@ -58,7 +58,7 @@ export function BookPreorderSection() {
           {/* DETAILS */}
           <div className="flex-grow">
             <p className="font-mono text-[10px] text-indigo-400 tracking-widest uppercase mb-3">
-              The Book &mdash; Launching {BOOK.launchDate}
+              The Book — Launching {BOOK.launchDate}
             </p>
             <h3 className="text-3xl sm:text-4xl font-light text-white mb-2 leading-tight">
               {BOOK.title}
@@ -70,7 +70,7 @@ export function BookPreorderSection() {
               {/* TODO: swap for your own one-paragraph pitch from themahaprinciple.com. */}
               The foundational text behind everything Maha Strategies researches:
               metabolic decline, attentional capture, and systemic fragmentation as
-              one coupled phenomenon &mdash; and a framework for engineering renewal
+              one coupled phenomenon — and a framework for engineering renewal
               at the level of the individual and the nation.
             </p>
 
@@ -82,7 +82,7 @@ export function BookPreorderSection() {
                 className="inline-block bg-white text-black font-mono font-bold text-xs tracking-widest uppercase px-8 py-4 hover:bg-zinc-200 transition-colors no-underline text-center"
               >
                 {/* TODO: before launch use "Pre-order on Amazon"; after, "Get it on Amazon". */}
-                Get it on Amazon &mdash; {BOOK.price} {BOOK.format} &nearr;
+                Get it on Amazon — {BOOK.price} {BOOK.format} ↗
               </a>
               <a
                 href={BOOK.siteUrl}
@@ -90,7 +90,7 @@ export function BookPreorderSection() {
                 rel="noopener noreferrer"
                 className="inline-block border border-zinc-600 text-zinc-200 font-mono font-bold text-xs tracking-widest uppercase px-8 py-4 hover:border-white hover:text-white transition-colors no-underline text-center"
               >
-                Read the Full Brief &nearr;
+                Read the Full Brief ↗
               </a>
             </div>
           </div>
