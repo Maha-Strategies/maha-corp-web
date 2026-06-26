@@ -17,6 +17,89 @@ const doctrineBriefs = [
   { id: "DOC-04", title: "The Saturnian Vision", href: "/doctrine/briefs/saturnian-vision" },
 ];
 
+// Book launch / pre-order block. Links out to Amazon (purchase) and the
+// dedicated book site (full details). Verify the TODO-flagged fields.
+const BOOK = {
+  title: 'The Maha Principle',
+  // TODO: confirm exact subtitle as it appears on the Amazon listing.
+  subtitle: 'Architecting Personal and National Renewal',
+  asin: 'B0H62WLMT5',
+  amazonUrl: 'https://www.amazon.com/dp/B0H62WLMT5',
+  siteUrl: 'https://www.themahaprinciple.com',
+  price: '$2.99',
+  format: 'Kindle',
+  launchDate: 'July 10, 2026',
+  // TODO: drop the upscaled cover into /public and set the path here.
+  coverSrc: '/the-maha-principle-cover.png',
+};
+
+export function BookPreorderSection() {
+  return (
+    <section className="mt-4 mb-20 not-prose">
+      <div className="border border-indigo-900/50 bg-indigo-950/20 p-8 sm:p-12 relative overflow-hidden">
+        <div className="absolute top-0 left-0 w-1 h-full bg-indigo-500"></div>
+
+        <h2 className="text-white font-mono text-sm tracking-widest uppercase mb-8 mt-0">
+          [ THE BOOK // CORE DOCTRINE ]
+        </h2>
+
+        <div className="flex flex-col md:flex-row gap-8 md:gap-12 md:items-center">
+          {/* COVER */}
+          <div className="shrink-0 w-40 sm:w-48 mx-auto md:mx-0">
+            {/* Using a plain <img> to avoid next/image config assumptions. */}
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={BOOK.coverSrc}
+              alt={`${BOOK.title} — book cover`}
+              className="w-full h-auto border border-zinc-800 shadow-2xl shadow-black/60"
+            />
+          </div>
+
+          {/* DETAILS */}
+          <div className="flex-grow">
+            <p className="font-mono text-[10px] text-indigo-400 tracking-widest uppercase mb-3">
+              The Book &mdash; Launching {BOOK.launchDate}
+            </p>
+            <h3 className="text-3xl sm:text-4xl font-light text-white mb-2 leading-tight">
+              {BOOK.title}
+            </h3>
+            <p className="text-zinc-400 font-serif italic mb-6">
+              {BOOK.subtitle}
+            </p>
+            <p className="text-zinc-300 font-light mb-8 max-w-xl leading-relaxed">
+              {/* TODO: swap for your own one-paragraph pitch from themahaprinciple.com. */}
+              The foundational text behind everything Maha Strategies researches:
+              metabolic decline, attentional capture, and systemic fragmentation as
+              one coupled phenomenon &mdash; and a framework for engineering renewal
+              at the level of the individual and the nation.
+            </p>
+
+            <div className="flex flex-col sm:flex-row gap-4">
+              <a
+                href={BOOK.amazonUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-block bg-white text-black font-mono font-bold text-xs tracking-widest uppercase px-8 py-4 hover:bg-zinc-200 transition-colors no-underline text-center"
+              >
+                {/* TODO: before launch use "Pre-order on Amazon"; after, "Get it on Amazon". */}
+                Get it on Amazon &mdash; {BOOK.price} {BOOK.format} &nearr;
+              </a>
+              <a
+                href={BOOK.siteUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-block border border-zinc-600 text-zinc-200 font-mono font-bold text-xs tracking-widest uppercase px-8 py-4 hover:border-white hover:text-white transition-colors no-underline text-center"
+              >
+                Read the Full Brief &nearr;
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 export function ProtocolAnchorGrid() {
   const protocols = [
     {
@@ -189,17 +272,35 @@ const orgJsonLd = {
         'On-device AI / NPU architectures',
         'Supply-chain risk mitigation',
       ],
-      author: {
-        '@type': 'Book',
-        name: 'The Maha Principle: Architecting Personal and National Renewal',
-        inLanguage: 'en',
-      },
+      author: { '@id': `${SITE_URL}/#book` },
       url: 'https://www.mayonemaharajan.com',
       sameAs: [
         'https://www.mayonemaharajan.com',
         'https://www.linkedin.com/in/mayonrajan',
         'https://x.com/mayonemaha',
       ],
+    },
+    {
+      '@type': 'Book',
+      '@id': `${SITE_URL}/#book`,
+      name: 'The Maha Principle: Architecting Personal and National Renewal',
+      inLanguage: 'en',
+      author: { '@id': `${SITE_URL}/#founder` },
+      url: 'https://www.themahaprinciple.com',
+      sameAs: ['https://www.amazon.com/dp/B0H62WLMT5'],
+      workExample: {
+        '@type': 'Book',
+        '@id': 'https://www.amazon.com/dp/B0H62WLMT5',
+        bookFormat: 'https://schema.org/EBook',
+        // TODO: confirm price/currency at launch; update if it changes.
+        offers: {
+          '@type': 'Offer',
+          price: '2.99',
+          priceCurrency: 'USD',
+          availability: 'https://schema.org/PreOrder',
+          url: 'https://www.amazon.com/dp/B0H62WLMT5',
+        },
+      },
     },
   ],
 };
@@ -250,7 +351,10 @@ export default function CorporateHomepage() {
           <p className="font-mono text-xs text-indigo-500 font-semibold tracking-widest uppercase mt-4">
             [ Applied Research Institute & Cybernetic Think Tank ]
           </p>
-          
+
+          {/* THE BOOK LEADS: core doctrine, front and center */}
+          <BookPreorderSection />
+
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
             <div className="border-t border-zinc-800 pt-6 group">
               <h3 className="text-white text-sm tracking-widest uppercase mb-4 group-hover:text-indigo-400 transition-colors">I. Infrastructure</h3>
