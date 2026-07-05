@@ -22,10 +22,11 @@ const doctrineBriefs = [
 const BOOK = {
   title: 'The Maha Principle',
   // TODO: confirm exact subtitle as it appears on the Amazon listing.
-  subtitle: 'Architecting Personal and National Renewal',
+  subtitle: 'The Architecture of Human Flourishing',
   asin: 'B0H62WLMT5',
   amazonUrl: 'https://www.amazon.com/dp/B0H62WLMT5',
   siteUrl: 'https://www.themahaprinciple.com',
+  frameworkUrl: 'https://www.themahaprinciple.com/framework.html',
   price: '$2.99',
   format: 'Kindle',
   launchDate: 'July 10, 2026',
@@ -68,10 +69,7 @@ export function BookPreorderSection() {
             </p>
             <p className="text-zinc-300 font-light mb-8 max-w-xl leading-relaxed">
               {/* TODO: swap for your own one-paragraph pitch from themahaprinciple.com. */}
-              The foundational text behind everything Maha Strategies researches:
-              metabolic decline, attentional capture, and systemic fragmentation as
-              one coupled phenomenon — and a framework for engineering renewal
-              at the level of the individual and the nation.
+              A field manual for rebuilding your biological, cognitive, and relational foundations in an extractive world. The Maha Principle argues that metabolic decline, attentional captivity, and relational fragmentation are one coupled failure — and lays out the M.A.H.A. framework for renewal from the inside out.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4">
@@ -82,7 +80,7 @@ export function BookPreorderSection() {
                 className="inline-block bg-white text-black font-mono font-bold text-xs tracking-widest uppercase px-8 py-4 hover:bg-zinc-200 transition-colors no-underline text-center"
               >
                 {/* TODO: before launch use "Pre-order on Amazon"; after, "Get it on Amazon". */}
-                Get it on Amazon — {BOOK.price} {BOOK.format} ↗
+                Pre-order on Amazon — {BOOK.price} {BOOK.format} ↗
               </a>
               <a
                 href={BOOK.siteUrl}
@@ -91,6 +89,14 @@ export function BookPreorderSection() {
                 className="inline-block border border-zinc-600 text-zinc-200 font-mono font-bold text-xs tracking-widest uppercase px-8 py-4 hover:border-white hover:text-white transition-colors no-underline text-center"
               >
                 Read the Full Brief ↗
+              </a>
+              <a
+                href={BOOK.frameworkUrl}
+                target="_blank"
+                rel="me noopener noreferrer"
+                className="inline-block border border-indigo-900/50 text-indigo-300 font-mono font-bold text-xs tracking-widest uppercase px-8 py-4 hover:border-indigo-500 hover:text-indigo-200 transition-colors no-underline text-center"
+              >
+                View Framework ↗
               </a>
             </div>
           </div>
