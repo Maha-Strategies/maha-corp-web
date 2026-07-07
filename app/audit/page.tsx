@@ -57,6 +57,40 @@ export default function AuditPage() {
     }
   };
 
+  const downloadRecord = () => {
+    if (!claims) return;
+    const countsByTag: Record<string, number> = {};
+    Object.keys(TAGS).forEach((t) => (countsByTag[t] = 0));
+    claims.forEach((c: Claim) => countsByTag[c.tag]++);
+    const record = {
+      mps_version: "0.1",
+      document: "pasted passage (demo)",
+      audited: new Date().toISOString().slice(0, 10),
+      compliance_level: "MPS-Declared (demo audit)",
+      claims: claims.map((c: Claim, i: number) => ({
+        id: `c${String(i + 1).padStart(3, "0")}`,
+        excerpt: c.excerpt,
+        tag: c.tag,
+        rationale: c.rationale,
+        source: null,
+        action: c.action || "none",
+      })),
+      summary: {
+        counts_by_tag: countsByTag,
+        compliance: countsByTag.UNVERIFIED === 0 ? "pass" : "conditional",
+      },
+      note: "Demo record. VERIFIED status requires human confirmation against primary sources; full audits resolve each claim source-by-source.",
+      standard: "https://mahastrategies.com/mps",
+    };
+    const blob = new Blob([JSON.stringify(record, null, 2)], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `mps-audit-${record.audited}.json`;
+    a.click();
+    URL.revokeObjectURL(url);
+  };
+
   const segments = useMemo(() => {
     if (!claims || !auditedText) return null;
     const marks: { start: number; end: number; i: number }[] = [];
@@ -168,7 +202,13 @@ export default function AuditPage() {
             </div>
 
             <div style={{ marginTop: 26 }}>
-              <div className="mono" style={{ fontSize: 11, letterSpacing: "0.14em", color: "#5A6660", marginBottom: 12 }}>AUDIT LEDGER</div>
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", marginBottom: 12, flexWrap: "wrap", gap: 8 }}>
+                <div className="mono" style={{ fontSize: 11, letterSpacing: "0.14em", color: "#5A6660" }}>AUDIT LEDGER</div>
+                <button onClick={downloadRecord} className="mono"
+                  style={{ background: "transparent", color: "#1A2420", border: "1px solid #9AA49D", padding: "7px 14px", fontSize: 11, letterSpacing: "0.1em", cursor: "pointer", borderRadius: 2 }}>
+                  DOWNLOAD AUDIT RECORD (JSON)
+                </button>
+              </div>
               {claims.map((c, i) => (
                 <div key={i} onClick={() => setSelected(selected === i ? null : i)}
                   style={{ background: selected === i ? TAGS[c.tag].bg : "#FBFCFA", border: "1px solid #DDE2DB", borderLeft: `3px solid ${TAGS[c.tag].color}`, padding: "12px 16px", marginBottom: 8, borderRadius: 2, cursor: "pointer" }}>
