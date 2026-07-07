@@ -52,6 +52,68 @@ export default function DoctrinePage() {
             </div>
           </a>
 
+          {/* THE MAHA PROVENANCE STANDARD */}
+          <h2 className="text-2xl text-white font-light mt-16 mb-4">The Maha Provenance Standard</h2>
+          <p>
+            A doctrine is only as strong as its epistemics. The Maha Provenance Standard (MPS/0.1)
+            is our published, claim-level tagging standard for AI-assisted nonfiction: every
+            substantive claim carries its epistemic status — VERIFIED, SOURCED, BOUNDARY,
+            ILLUSTRATIVE, or UNVERIFIED — making the entire doctrine auditable, by humans and
+            machines alike.
+          </p>
+          <p>
+            The standard is applied across our books and research, archived under a permanent
+            identifier (DOI:{' '}
+            <a
+              href="https://doi.org/10.5281/zenodo.21241308"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-indigo-400 hover:text-white"
+            >
+              10.5281/zenodo.21241308
+            </a>
+            ), and implemented as a live instrument any author or publisher can use.
+          </p>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-8">
+            <Link
+              href="/mps"
+              className="group block p-6 border-l-4 border-emerald-500 bg-emerald-950/10 hover:bg-emerald-950/20 transition-colors no-underline"
+            >
+              <p className="font-mono text-xs text-emerald-400 mb-2 uppercase tracking-widest m-0">
+                [ SPECIFICATION // MPS/0.1 ]
+              </p>
+              <h3 className="font-sans text-xl font-bold text-white uppercase m-0 mt-2">
+                Read the Standard
+              </h3>
+              <p className="font-serif text-sm text-zinc-400 italic mt-2 mb-0">
+                The five tags, discipline rules, and machine-readable audit-record schema.
+              </p>
+              <div className="mt-4 font-mono text-xs text-zinc-500 group-hover:text-white transition-colors">
+                OPEN SPECIFICATION ↗
+              </div>
+            </Link>
+
+            <Link
+              href="/audit"
+              className="group block p-6 border-l-4 border-emerald-500 bg-emerald-950/10 hover:bg-emerald-950/20 transition-colors no-underline"
+            >
+              <p className="font-mono text-xs text-emerald-400 mb-2 uppercase tracking-widest m-0">
+                [ INSTRUMENT // LIVE ]
+              </p>
+              <h3 className="font-sans text-xl font-bold text-white uppercase m-0 mt-2">
+                Run the Auditor
+              </h3>
+              <p className="font-serif text-sm text-zinc-400 italic mt-2 mb-0">
+                Paste a passage; receive claim-level tags and an exportable MPS audit record.
+                Free, no signup.
+              </p>
+              <div className="mt-4 font-mono text-xs text-zinc-500 group-hover:text-white transition-colors">
+                INITIALIZE AUDIT ↗
+              </div>
+            </Link>
+          </div>
+
           {/* STRATEGIC ARCHIVES / ESSAY ROUTING */}
           <h2 className="text-2xl text-white font-light mt-16 mb-6">Strategic Archives</h2>
           
