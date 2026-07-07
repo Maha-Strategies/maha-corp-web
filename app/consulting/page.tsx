@@ -1,115 +1,295 @@
-import type { Metadata } from 'next'
+// app/consulting/page.tsx
+// Verified Research Brief — productized services page.
+// Design system matches app/page.tsx: zinc/near-black ground, indigo-500 accent,
+// mono uppercase eyebrows, [ BRACKETED ] section labels, left accent bars.
+
 import Link from 'next/link'
+import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Corporate Consulting | Maha Strategies',
+  title: 'Verified Research Brief — Maha Strategies LLC',
   description:
-    'Advisory on AI hardware, custom silicon strategy, and on-device agentic systems — at the intersection of computing architecture and supply-chain geopolitics.',
-  alternates: { canonical: 'https://www.mahastrategies.com/consulting' },
+    'A provenance-tagged research synthesis for decisions that cannot absorb a fabricated claim. Every claim tagged SOURCED, VERIFIED, ILLUSTRATIVE, or UNVERIFIED, with linked evidence. Fixed scope, fixed price, 10 business days.',
 }
+
+// ---------------------------------------------------------------------------
+// Provenance tag system — the product, shown rather than described.
+// ---------------------------------------------------------------------------
+
+const TAGS = [
+  {
+    key: 'SOURCED',
+    color: 'text-emerald-400 border-emerald-800/60 bg-emerald-950/30',
+    dot: 'bg-emerald-400',
+    definition:
+      'Traceable to a primary source. The citation is linked, and the source actually says what the claim says.',
+  },
+  {
+    key: 'VERIFIED',
+    color: 'text-sky-400 border-sky-800/60 bg-sky-950/30',
+    dot: 'bg-sky-400',
+    definition:
+      'Independently checked — recomputed, cross-referenced against a second source, or reproduced from the underlying data.',
+  },
+  {
+    key: 'ILLUSTRATIVE',
+    color: 'text-amber-400 border-amber-800/60 bg-amber-950/30',
+    dot: 'bg-amber-400',
+    definition:
+      'An example, analogy, or estimate used for clarity. Useful for reasoning; not evidence.',
+  },
+  {
+    key: 'UNVERIFIED',
+    color: 'text-rose-400 border-rose-800/60 bg-rose-950/30',
+    dot: 'bg-rose-400',
+    definition:
+      'Could not be confirmed within scope. Flagged instead of hidden — so you know exactly where the ice is thin.',
+  },
+] as const
+
+function Tag({ label }: { label: (typeof TAGS)[number]['key'] }) {
+  const t = TAGS.find((x) => x.key === label)!
+  return (
+    <span
+      className={`inline-flex items-center gap-1.5 border px-1.5 py-0.5 font-mono text-[10px] tracking-widest align-middle ${t.color}`}
+    >
+      <span className={`w-1.5 h-1.5 inline-block ${t.dot}`} />
+      {t.key}
+    </span>
+  )
+}
+
+// ---------------------------------------------------------------------------
+// Page
+// ---------------------------------------------------------------------------
 
 export default function ConsultingPage() {
   return (
-    <div className="min-h-screen bg-[#0a0a0c] text-zinc-300 font-sans p-8 md:p-24 selection:bg-indigo-500 selection:text-white">
-      <div className="max-w-3xl mx-auto">
-        <Link
-          href="/"
-          className="text-xs text-zinc-500 uppercase tracking-widest hover:text-white mb-8 block"
-        >
-          ← Back to Root Node
-        </Link>
+    <div className="min-h-screen bg-[#0a0a0c] text-zinc-300">
+      <div className="max-w-4xl mx-auto px-6 py-20 sm:py-28">
 
-        <h1 className="text-4xl text-white font-light tracking-wide mb-6 leading-tight">
-          Architecting Infrastructural Sovereignty
+        {/* ================= HERO ================= */}
+        <p className="font-mono text-[10px] text-indigo-400 tracking-widest uppercase mb-4">
+          [ CONSULTING // VERIFIED RESEARCH BRIEF ]
+        </p>
+        <h1 className="text-4xl sm:text-5xl font-light text-white leading-tight mb-6">
+          Research you can put your name on.
         </h1>
+        <p className="text-xl text-zinc-400 font-light leading-relaxed max-w-2xl mb-4">
+          AI has made research synthesis fast — and unaccountable. Over a thousand
+          documented court cases now involve fabricated AI citations. Regulators,
+          courts, and boards no longer ask whether you used AI. They ask whether
+          you verified it.
+        </p>
+        <p className="text-xl text-zinc-400 font-light leading-relaxed max-w-2xl mb-12">
+          The Verified Research Brief answers that question in the document itself:
+          every claim carries a provenance tag and linked evidence, so your
+          reviewers can see — not trust — where each statement comes from.
+        </p>
 
-        <div className="prose prose-invert max-w-none font-light tracking-wide leading-relaxed">
-          <p>
-            Technology is no longer just a tool for efficiency — it has become a
-            domain of operational and geopolitical leverage. The consulting
-            practice at Maha Strategies LLC works at the intersection of deep-tech
-            infrastructure, hardware strategy, and supply-chain resilience. This
-            is not conventional IT advice. It is structural foresight and
-            execution support for organizations operating in high-stakes
-            technical environments.
-          </p>
-
-          <h2 className="text-2xl text-white font-light mt-12 mb-4">
-            Advisory for Analysts &amp; Expert Networks
-          </h2>
-          <p>
-            Maha Strategies is available for engagements through the major expert
-            networks — Uzabase, Dialectica, Tegus, ProSapient, and others —
-            providing analyst-facing perspective on next-generation computing
-            architectures. The aim is to help analysts, asset managers, and
-            corporate decision-makers reason clearly about semiconductor supply
-            chains, geopolitical choke points, and emerging export controls, and
-            to translate hardware-level developments into the macroeconomic
-            questions that actually drive decisions.
-          </p>
-
-          <h2 className="text-2xl text-white font-light mt-12 mb-4">
-            Custom Silicon Strategy &amp; Hardware Geopolitics
-          </h2>
-          <p>
-            Technological independence ultimately rests on the physical layer.
-            Our custom-silicon strategy work helps enterprise leaders think
-            through the arc of bespoke semiconductor decisions — from initial
-            conceptualization to foundry coordination and geopolitical risk — and
-            examines computational needs through a geopolitical lens. As
-            tech-nationalism intensifies, control over proprietary ASIC and
-            RISC-V pipelines becomes a meaningful hedge against platform
-            dependency and supply-chain disruption.
-          </p>
-
-          <h2 className="text-2xl text-white font-light mt-12 mb-4">
-            On-Device Agentic Systems
-          </h2>
-          <p>
-            Beyond hardware, we advise on the architecture of on-device agentic
-            systems. This B2B product-engineering work bridges hardware
-            constraints and software deployment: resilient, decentralized
-            ecosystems that run local models securely at the edge. Prioritizing
-            on-device execution reduces reliance on vulnerable cloud APIs and
-            keeps enterprise intelligence localized and tamper-resistant.
-          </p>
-
-          <div className="mt-16 mb-8">
-            <div className="font-mono text-xs tracking-widest text-indigo-500 uppercase mb-4">
-              [ FEATURED STRATEGIC ADVISORY ]
-            </div>
-            <Link
-              href="/consulting/migration-to-the-edge"
-              className="group block p-6 md:p-8 border border-zinc-800 bg-[#111113] hover:border-zinc-500 transition-colors no-underline"
-            >
-              <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
-                <div>
-                  <h3 className="text-xl font-bold text-zinc-200 group-hover:text-white transition-colors m-0 uppercase tracking-wide">
-                    The Migration to the Edge
-                  </h3>
-                  <p className="font-mono text-xs text-zinc-500 mt-2 m-0 group-hover:text-zinc-400 transition-colors uppercase">
-                    Mobile Hardware &amp; The GenAI Replacement Cycle
-                  </p>
-                </div>
-                <div className="font-mono text-xs text-zinc-500 group-hover:text-indigo-400 transition-colors whitespace-nowrap tracking-widest">
-                  ACCESS BRIEF &rarr;
-                </div>
-              </div>
-            </Link>
-          </div>
-
-          <div className="mt-12 pt-8 border-t border-zinc-800">
-            <p className="text-white font-semibold mb-4 tracking-widest uppercase text-xs">
-              Work With Maha Strategies
-            </p>
-            <p className="text-sm text-zinc-500">
-              Maha Strategies LLC offers clarity for organizations navigating the
-              hardware, silicon, and edge-AI landscape — helping teams move from
-              consumers of legacy infrastructure toward ownership of their own
-              technical direction.
-            </p>
-          </div>
+        <div className="flex flex-col sm:flex-row gap-4 mb-24">
+          <a
+            href="mailto:mayone@mahastrategies.com?subject=Verified%20Research%20Brief%20—%20inquiry"
+            className="inline-block bg-white text-black font-mono font-bold text-xs tracking-widest uppercase px-8 py-4 hover:bg-zinc-200 transition-colors no-underline text-center"
+          >
+            Commission a Brief — $2,500
+          </a>
+          <a
+            href="#sample"
+            className="inline-block border border-zinc-600 text-zinc-200 font-mono font-bold text-xs tracking-widest uppercase px-8 py-4 hover:border-white hover:text-white transition-colors no-underline text-center"
+          >
+            See a Tagged Page ↓
+          </a>
         </div>
+
+        {/* ================= THE DELIVERABLE ================= */}
+        <section className="mb-24">
+          <h2 className="text-white font-mono text-sm tracking-widest uppercase mb-8">
+            [ 01 // WHAT YOU RECEIVE ]
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="border-t border-zinc-800 pt-6">
+              <h3 className="text-white text-sm tracking-widest uppercase mb-3">
+                The Brief
+              </h3>
+              <p className="text-sm text-zinc-500 leading-relaxed">
+                A 10–15 page synthesis of the evidence on one question you define —
+                a technology bet, a market claim, a scientific literature, a
+                competitor&rsquo;s assertion. Written to be read by decision-makers,
+                structured to be audited by reviewers.
+              </p>
+            </div>
+            <div className="border-t border-zinc-800 pt-6">
+              <h3 className="text-white text-sm tracking-widest uppercase mb-3">
+                The Evidence Layer
+              </h3>
+              <p className="text-sm text-zinc-500 leading-relaxed">
+                Every claim tagged <span className="text-emerald-400">SOURCED</span>,{' '}
+                <span className="text-sky-400">VERIFIED</span>,{' '}
+                <span className="text-amber-400">ILLUSTRATIVE</span>, or{' '}
+                <span className="text-rose-400">UNVERIFIED</span>, with linked
+                citations. Nothing laundered, nothing hidden — including what we
+                could not confirm.
+              </p>
+            </div>
+            <div className="border-t border-zinc-800 pt-6">
+              <h3 className="text-white text-sm tracking-widest uppercase mb-3">
+                The Terms
+              </h3>
+              <p className="text-sm text-zinc-500 leading-relaxed">
+                Fixed scope. Fixed price: <span className="text-white">$2,500</span>.
+                Delivered in <span className="text-white">10 business days</span> from
+                a scoped question. One revision round included. If the question
+                needs narrowing, we narrow it together before you commit.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* ================= TAG LEGEND ================= */}
+        <section className="mb-24">
+          <h2 className="text-white font-mono text-sm tracking-widest uppercase mb-8">
+            [ 02 // THE PROVENANCE SYSTEM ]
+          </h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            {TAGS.map((t) => (
+              <div key={t.key} className="border border-zinc-800/70 p-5">
+                <div className="mb-3">
+                  <Tag label={t.key} />
+                </div>
+                <p className="text-sm text-zinc-500 leading-relaxed">{t.definition}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* ================= WORKED SAMPLE ================= */}
+        <section id="sample" className="mb-24 scroll-mt-24">
+          <h2 className="text-white font-mono text-sm tracking-widest uppercase mb-4">
+            [ 03 // A TAGGED PAGE, NOT A PROMISE ]
+          </h2>
+          <p className="text-sm text-zinc-500 max-w-2xl mb-8 leading-relaxed">
+            Excerpt adapted from our published Planet Nine detection forecast
+            (Zenodo, DOI&nbsp;
+            <a
+              href="https://doi.org/10.5281/zenodo.20621056"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-indigo-400 hover:text-indigo-300 underline underline-offset-2"
+            >
+              10.5281/zenodo.20621056
+            </a>
+            ). This is what every page of a Verified Research Brief looks like.
+          </p>
+
+          <div className="border border-indigo-900/50 bg-indigo-950/20 relative overflow-hidden">
+            <div className="absolute top-0 left-0 w-1 h-full bg-indigo-500" />
+            <div className="p-8 sm:p-10 font-light leading-loose text-zinc-300">
+              <p className="mb-6">
+                The Vera C. Rubin Observatory&rsquo;s LSST survey is the dominant
+                near-term instrument for a wide-area outer solar system search{' '}
+                <Tag label="SOURCED" />. Under our Monte Carlo model, the cumulative
+                probability of detecting a Planet Nine–class perturber reaches
+                71.9% by 2036 <Tag label="VERIFIED" /> — a figure revised upward
+                from 61.3% after Revision&nbsp;3 corrected an error in the survey&rsquo;s
+                declination cutoff <Tag label="SOURCED" />. For scale, that is
+                roughly the difference between a coin flip and a loaded die{' '}
+                <Tag label="ILLUSTRATIVE" />. Claims that existing infrared surveys
+                have already excluded the candidate orbital range could not be
+                confirmed against the primary literature within scope{' '}
+                <Tag label="UNVERIFIED" />.
+              </p>
+              <p className="font-mono text-[10px] text-zinc-600 tracking-widest uppercase">
+                Note the correction trail: Revision 3 moved our own headline number.
+                Auditable research means the errors are on the record too.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* ================= WHO IT IS FOR ================= */}
+        <section className="mb-24">
+          <h2 className="text-white font-mono text-sm tracking-widest uppercase mb-8">
+            [ 04 // BUILT FOR HIGH-STAKES CONTEXTS ]
+          </h2>
+          <p className="text-zinc-400 font-light leading-relaxed max-w-2xl mb-6">
+            The brief is designed for teams whose documents get audited:
+            governance and compliance functions preparing evidence for review,
+            legal and policy teams that cannot cite what they cannot trace,
+            regulatory and medical writers working under human-in-the-loop
+            mandates, and investors or operators making a decision where one
+            fabricated claim is more expensive than the entire engagement.
+          </p>
+          <p className="text-zinc-400 font-light leading-relaxed max-w-2xl">
+            If your reviewers use words like grounding, audit trail, citation
+            verification, or model risk — this document is shaped for their
+            checklist.
+          </p>
+        </section>
+
+        {/* ================= WHY US ================= */}
+        <section className="mb-24">
+          <h2 className="text-white font-mono text-sm tracking-widest uppercase mb-8">
+            [ 05 // THE METHOD IS PUBLIC ]
+          </h2>
+          <p className="text-zinc-400 font-light leading-relaxed max-w-2xl mb-6">
+            We did not invent this methodology for clients. We built it for our own
+            published research — pre-registered studies, DOI-archived revisions,
+            and an audit paper documenting how AI systems fabricate — and have
+            applied it uniformly across astrophysics forecasts, cognitive science
+            experiments, and technology market intelligence. Every method claim on
+            this page can be checked against the public record at{' '}
+            <a
+              href="https://research.mahastrategies.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-indigo-400 hover:text-indigo-300 underline underline-offset-2"
+            >
+              research.mahastrategies.com
+            </a>
+            .
+          </p>
+          <p className="font-mono text-xs text-indigo-500 font-semibold tracking-widest uppercase">
+            [ Zero fabrication. Explicit AI disclosure. Errors corrected on the record. ]
+          </p>
+        </section>
+
+        {/* ================= CTA ================= */}
+        <section className="mb-8">
+          <div className="border border-indigo-900/50 bg-indigo-950/20 p-8 sm:p-12 relative overflow-hidden">
+            <div className="absolute top-0 left-0 w-1 h-full bg-indigo-500" />
+            <h2 className="text-white font-mono text-sm tracking-widest uppercase mb-4">
+              [ COMMISSION // VERIFIED RESEARCH BRIEF ]
+            </h2>
+            <p className="text-zinc-300 text-lg mb-2 font-light max-w-2xl">
+              Send the question you need answered and the decision it feeds.
+              We reply within two business days with a scoped statement of work —
+              or a referral elsewhere if the fit is wrong.
+            </p>
+            <p className="font-mono text-[10px] text-zinc-500 tracking-widest uppercase mb-8">
+              $2,500 · 10 business days · one revision round · fixed scope
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4">
+              <a
+                href="mailto:research@mahastrategies.com?subject=Verified%20Research%20Brief%20—%20inquiry"
+                className="inline-block bg-white text-black font-mono font-bold text-xs tracking-widest uppercase px-8 py-4 hover:bg-zinc-200 transition-colors no-underline text-center"
+              >
+                Start the Conversation ↗
+              </a>
+              <Link
+                href="/contact"
+                className="inline-block border border-zinc-600 text-zinc-200 font-mono font-bold text-xs tracking-widest uppercase px-8 py-4 hover:border-white hover:text-white transition-colors no-underline text-center"
+              >
+                Secure Channel / Contact ↗
+              </Link>
+            </div>
+          </div>
+        </section>
+
+        {/* ================= FOOTNOTE ================= */}
+        <p className="font-mono text-[10px] text-zinc-700 tracking-widest uppercase text-center mt-16">
+          &copy; {new Date().getFullYear()} Maha Strategies LLC · Wyoming, USA · Operating from Colombo
+        </p>
       </div>
     </div>
   )
