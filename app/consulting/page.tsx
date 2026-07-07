@@ -271,7 +271,7 @@ export default function ConsultingPage() {
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
               <a
-                href="mailto:research@mahastrategies.com?subject=Verified%20Research%20Brief%20—%20inquiry"
+                href="mailto:mayone@mahastrategies.com?subject=Verified%20Research%20Brief%20—%20inquiry"
                 className="inline-block bg-white text-black font-mono font-bold text-xs tracking-widest uppercase px-8 py-4 hover:bg-zinc-200 transition-colors no-underline text-center"
               >
                 Start the Conversation ↗
