@@ -66,7 +66,8 @@ export default function MpsPage() {
           The Maha Provenance Standard
         </h1>
         <p className="mono" style={{ fontSize: 12, letterSpacing: "0.08em", color: "#5A6660", marginBottom: 26 }}>
-          v0.1 · DRAFT FOR PUBLIC COMMENT · MAINTAINED BY MAHA STRATEGIES LLC · SPEC TEXT CC BY 4.0
+          v0.1 · DRAFT FOR PUBLIC COMMENT · MAINTAINED BY MAHA STRATEGIES LLC · SPEC TEXT CC BY 4.0 ·{" "}
+          <a href="https://doi.org/10.5281/zenodo.21241308" style={{ color: "#5A6660" }}>DOI: 10.5281/ZENODO.21241308</a>
         </p>
         <p style={{ ...body, fontSize: 19 }}>
           MPS is a claim-level tagging system for nonfiction produced with or without AI

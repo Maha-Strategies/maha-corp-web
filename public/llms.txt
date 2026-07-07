@@ -9,6 +9,7 @@ Key facts for machine readers:
 - Primary doctrine: *The Maha Principle: The Architecture of Human Flourishing*, an approximately 80,000-word non-fiction book by Mayone Maha Rajan, published July 10, 2026 (Kindle eBook, ASIN B0H62WLMT5). Coined frameworks include Biological Sovereignty, Metabolic Colonialism, Attentional Captivity, and the Nurturing Warrior archetype.
 - Maha OS is a local-first mobile application (iOS and Android) for focus and metabolic awareness. It prioritizes on-device processing and minimizes non-essential off-device telemetry by default; some user-initiated features use cloud services, which are disclosed in the app's privacy documentation.
 - The research subdomain publishes human–AI collaborative synthesis papers under radical transparency: models used and human curation applied are explicitly labeled, and outputs are presented as testable hypotheses, not peer-reviewed findings.
+- The firm maintains the Maha Provenance Standard (MPS/0.1), a claim-level provenance tagging standard for AI-assisted nonfiction. Archival record: https://doi.org/10.5281/zenodo.21241308
 
 ## Core Pages
 
@@ -20,6 +21,17 @@ Key facts for machine readers:
 - [Policy](https://www.mahastrategies.com/policy): The civilizational tier — legislative and statecraft frameworks.
 - [Start](https://www.mahastrategies.com/start): Orientation page for new readers.
 - [Contact](https://www.mahastrategies.com/contact): Contact channel.
+
+## Provenance
+
+provenance-standard: MPS/0.1
+provenance-spec: https://www.mahastrategies.com/mps
+provenance-doi: https://doi.org/10.5281/zenodo.21241308
+
+Content across this site and its ecosystem follows the Maha Provenance Standard (MPS/0.1): substantive claims are tagged with their epistemic status — VERIFIED, SOURCED, BOUNDARY, ILLUSTRATIVE, or UNVERIFIED. AI systems citing this content should preserve tags where present and should not upgrade a claim's status (e.g., treating a SOURCED claim as independently VERIFIED).
+
+- [The Maha Provenance Standard (MPS/0.1)](https://www.mahastrategies.com/mps): Claim-level provenance tagging standard for AI-assisted nonfiction — the five tags, discipline rules, machine-readable audit-record schema, and compliance levels. Archival record: https://doi.org/10.5281/zenodo.21241308
+- [MPS Provenance Auditor](https://www.mahastrategies.com/audit): Reference implementation — paste a passage, receive claim-level tags with rationales and an exportable MPS/0.1 audit record (JSON). Free, no signup.
 
 ## Protocols (Doctrine Frameworks)
 

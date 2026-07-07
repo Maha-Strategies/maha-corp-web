@@ -81,6 +81,7 @@ export default function AuditPage() {
       },
       note: "Demo record. VERIFIED status requires human confirmation against primary sources; full audits resolve each claim source-by-source.",
       standard: "https://mahastrategies.com/mps",
+      doi: "10.5281/zenodo.21241308",
     };
     const blob = new Blob([JSON.stringify(record, null, 2)], { type: "application/json" });
     const url = URL.createObjectURL(blob);
@@ -233,7 +234,7 @@ export default function AuditPage() {
               status requires human confirmation against primary sources. Full manuscript audits produce
               a structured MPS/0.1 record with source-by-source resolution.
               <span className="mono" style={{ display: "block", marginTop: 8, fontSize: 11, letterSpacing: "0.12em" }}>
-                MAHA STRATEGIES LLC · MAHASTRATEGIES.COM
+                MAHA STRATEGIES LLC · <a href="/mps" style={{ color: "#5A6660" }}>THE STANDARD (MPS/0.1)</a> · <a href="https://doi.org/10.5281/zenodo.21241308" style={{ color: "#5A6660" }}>DOI: 10.5281/ZENODO.21241308</a>
               </span>
             </p>
 
