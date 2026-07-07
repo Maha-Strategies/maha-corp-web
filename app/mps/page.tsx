@@ -152,6 +152,15 @@ export default function MpsPage() {
           study of model reliability. The standard is published under its own discipline.
         </p>
 
+        <div className="mono" style={sec}>8 · AUDITS &amp; ADOPTION</div>
+        <p style={body}>
+          Maha Strategies conducts full manuscript audits against this standard — every claim
+          resolved source-by-source, delivered as a structured MPS/0.1 record. To request an
+          audit or discuss adopting MPS for your publication:{" "}
+          <a href="/contact">mahastrategies.com/contact</a> or{" "}
+          <a href="mailto:mayone@mahastrategies.com">mayone@mahastrategies.com</a>.
+        </p>
+
         <div style={{ borderTop: "1px solid #C8CEC6", marginTop: 56, paddingTop: 18 }}>
           <p className="mono" style={{ fontSize: 11, letterSpacing: "0.12em", color: "#5A6660", lineHeight: 1.8 }}>
             MAHA STRATEGIES LLC · MAHASTRATEGIES.COM<br />
