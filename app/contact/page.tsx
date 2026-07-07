@@ -95,9 +95,11 @@ export default function ContactPage() {
                   disabled={isPending}
                   className="w-full bg-zinc-900/50 border border-zinc-800 text-white text-sm px-4 py-2.5 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-colors appearance-none disabled:opacity-50"
                 >
+                  <option value="mps_audit">Manuscript Audit / MPS Inquiry</option>
                   <option value="token_request">Cognitive Gateway Access Token Request</option>
                   <option value="support">Technical Support / Troubleshooting</option>
                   <option value="general">General Inquiry</option>
+                  
                 </select>
               </div>
 
