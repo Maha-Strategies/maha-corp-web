@@ -4,7 +4,7 @@ import Link from 'next/link'
 export const metadata: Metadata = {
   title: 'Maha OS | Local-First Digital Infrastructure',
   description:
-    'Maha OS is a local-first Android app built on edge-compute architecture — keeping your data on your device and reducing reliance on cloud surveillance.',
+    'Maha OS is a local-first mobile app built on edge-compute architecture — keeping your data on your device and reducing reliance on cloud surveillance. Available on iOS and Android.',
   alternates: { canonical: 'https://www.mahastrategies.com/software' },
 }
 
@@ -88,16 +88,26 @@ export default function SoftwarePage() {
             </p>
             <p className="text-sm text-zinc-500 mb-6">
               A local-first foundation for a more private, more intentional
-              relationship with your device.
+              relationship with your device. Available for both iOS and Android platforms.
             </p>
-            <a
-              href="https://play.google.com/store/apps/details?id=com.maha.os"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-block bg-white text-black px-8 py-3 text-xs font-bold uppercase tracking-widest hover:bg-zinc-200 transition-colors"
-            >
-              Get it on Google Play
-            </a>
+            <div className="flex flex-col sm:flex-row gap-4">
+              <a
+                href="https://apps.apple.com/us/app/maha-os/id6778333838"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-block text-center bg-white text-black px-8 py-3 text-xs font-bold uppercase tracking-widest hover:bg-zinc-200 transition-colors"
+              >
+                Download on the App Store
+              </a>
+              <a
+                href="https://play.google.com/store/apps/details?id=com.maha.os"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-block text-center border border-zinc-700 hover:border-zinc-500 hover:text-white px-8 py-3 text-xs font-bold uppercase tracking-widest transition-colors"
+              >
+                Get it on Google Play
+              </a>
+            </div>
           </div>
         </div>
       </div>
