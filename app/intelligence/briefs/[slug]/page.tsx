@@ -208,8 +208,16 @@ export default async function BriefPage(
                 <p className="font-serif text-xs text-gray-400 mb-4">
                   Enforce the Zero-Payload Policy on local device hardware.
                 </p>
-                <a href="https://play.google.com/store/apps/details?id=com.maha.os" target="_blank" rel="noopener noreferrer" className="block text-center border border-indigo-500 text-indigo-400 font-mono text-[10px] tracking-widest py-3 hover:bg-indigo-500 hover:text-white transition-colors uppercase">
-                  Download Client &#8595;
+                <div className="grid grid-cols-2 gap-3 mb-3">
+                  <a href="https://apps.apple.com/us/app/maha-os/id6778333838" target="_blank" rel="noopener noreferrer" className="block text-center border border-indigo-500 text-indigo-400 font-mono text-[10px] tracking-widest py-3 hover:bg-indigo-500 hover:text-white transition-colors uppercase">
+                    iOS Client &#8595;
+                  </a>
+                  <a href="https://play.google.com/store/apps/details?id=com.maha.os" target="_blank" rel="noopener noreferrer" className="block text-center border border-indigo-500 text-indigo-400 font-mono text-[10px] tracking-widest py-3 hover:bg-indigo-500 hover:text-white transition-colors uppercase">
+                    Android Client &#8595;
+                  </a>
+                </div>
+                <a href="https://maha-os.com" target="_blank" rel="noopener noreferrer" className="block text-center border border-neutral-800 bg-neutral-900/50 text-neutral-400 font-mono text-[9px] tracking-widest py-2 hover:bg-neutral-800 hover:text-white transition-colors uppercase">
+                  View Source Documentation &#8599;
                 </a>
               </div>
 
