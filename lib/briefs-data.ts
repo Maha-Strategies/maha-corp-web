@@ -1,5 +1,5 @@
 // lib/briefs-data.ts
-// SINGLE SOURCE OF TRUTH for all 25 INTELLIGENCE briefs.
+// SINGLE SOURCE OF TRUTH for all 28 INTELLIGENCE briefs.
 // Metadata, JSON-LD, and rendering all read from here.
 // Doctrine briefs (soil-gut-brain-axis, overclocked, physics-of-spirit, etc.)
 // are a SEPARATE route and are not included here.
@@ -116,7 +116,7 @@ export const BRIEFS: Brief[] = [
     description:
       'An intelligence brief on the transition to Vision-Language-Action (VLA) models, edge-compute scaling, and the geopolitical moats of localized hardware processing.',
     status: 'STRUCTURAL SHIFT',
-    datePublished: '2026-05-28', // VERIFY: was new Date() in source
+    datePublished: '2026-05-28',
     sections: [
       {
         level: 2,
@@ -161,7 +161,7 @@ export const BRIEFS: Brief[] = [
     description:
       'An intelligence brief on digital native behavioral loops, social currency in mobile gaming ecosystems, and vectors of cognitive capture.',
     status: 'BEHAVIORAL CAPTURE',
-    datePublished: '2026-05-28', // VERIFY: was new Date() in source
+    datePublished: '2026-05-28',
     sections: [
       {
         level: 2,
@@ -838,7 +838,6 @@ export const BRIEFS: Brief[] = [
         ],
       },
     ],
-    // NOTE: this brief had no Protocol Patch block in the source.
   },
   {
     slug: 'angstrom-foundry-diversification',
@@ -886,7 +885,6 @@ export const BRIEFS: Brief[] = [
         },
       },
     ],
-    // NOTE: this brief's closing block was the matrix above, not a Protocol Patch.
   },
   {
     slug: 'strategic-ip-architecture',
@@ -1160,6 +1158,100 @@ export const BRIEFS: Brief[] = [
       ]
     }
   },
+  {
+    slug: 'upstream-semiconductor-cvc-best-practices',
+    title: 'Best Practices for Upstream Semiconductor CVCs',
+    kicker: 'CORE.CORPORATE.VENTURE',
+    description: 'Research on the investment processes, organizational structures, execution setups, and evaluation systems of CVCs managed by semiconductor materials, components, and equipment manufacturers.',
+    status: 'ACTIVE',
+    datePublished: '2026-07-09',
+    intro: 'We are currently conducting research on the investment processes, organizational structures, execution setups, and evaluation systems of CVCs and minority investments managed by semiconductor materials, components, consumables, and equipment manufacturers. In particular, this research excludes CVCs operated by semiconductor device manufacturers (e.g., Samsung Ventures, Intel Capital, NVIDIA) and focuses on best practices among materials, components, consumables, and equipment manufacturers.',
+    sections: [
+      {
+        level: 2,
+        heading: '01. The Ideal CVC Model: Objectives and Execution',
+        paragraphs: [
+          'A best-in-class upstream semiconductor CVC operates on a dual mandate where strategic return is the primary driver, but financial viability is required to validate the technology’s market fit. By accelerating “Lab to Fab” the primary objective is to help deep-tech startups validate high-performance devices and scale faster by providing access to the parent company’s global fab infrastructure, the materials engineering expertise, and supply chain.',
+          'Semi-conductor innovation isn’t isolated. It is deeply concentrated in specific global hubs, and the execution setup should reflect this reality. Establishing a physical presence in Silicon Valley, Taiwan, South Korea, and Europe is non-negotiable.'
+        ]
+      },
+      {
+        level: 2,
+        heading: '02. Evaluation and Organizational Structure',
+        paragraphs: [
+          'Success is measured by the number of Proofs of Concept initiated. Joint Development Agreements signed, startup technologies successfully integrated into the parent’s product lines, and the volume of early market intelligence delivered to internal business units.',
+          'To attract top-tier founders who might be wary of sharing proprietary deep-tech IP with a corporate behemoth, the organizational structure must balance strategic alignment with strict autonomy. Leading CVCs operate with a formal information firewall separating the investment arm from the parent’s business units, ensuring that a startup’s IP is protected from information contamination and prevents the parent company from cannibalizing the startup’s ideas.'
+        ]
+      }
+    ]
+  },
+  {
+    slug: 'ai-semiconductor-slt-practices',
+    title: 'AI Semiconductor SLT Practices and Test Sockets',
+    kicker: 'CORE.HARDWARE.TESTING',
+    description: 'An evaluation of system-level test (SLT) practices for AI semiconductors, detailing test times, mass production realities, and key buying factors for test sockets.',
+    status: 'ACTIVE',
+    datePublished: '2026-07-09',
+    intro: 'We are researching system-level test (SLT) practices for AI semiconductors, such as GPUs with HBM and AI ASICs. In particular, we aim to understand the typical SLT test time per device and the key buying factors (KBFs) for test sockets and probe pins used in SLT.',
+    sections: [
+      {
+        level: 2,
+        heading: '01. SLT Test Times and Technical Drivers',
+        paragraphs: [
+          'Typical SLT test time differs significantly between PC CPUs and advanced AI. For PC CPUs SLT Range from 1 to 10 minutes with the most commonly averaging 2 to 5 minutes. For AI Semiconductors the typical SLT range from 10 to 30+ minutes, often stretching up to an hour for premium enterprise data center chips.',
+          'The primary technical and commercial drivers that procurement and test engineers prioritize when sourcing these components are advanced thermal management integration, high current-carrying capacity, signal integrity at ultra-high frequencies, and co-planarity & package warpage absorption.'
+        ]
+      },
+      {
+        level: 2,
+        heading: '02. Real-World Mass Production Constraints',
+        paragraphs: [
+          'When calculating required SLT boards, a theoretical baseline of 100% capacity with zero friction does not exist in a real-world mass production environment. To build a realistic factory deployment plan you must factor in the three critical manufacturing realities of overall equipment effectiveness (OEE) / utilization, first-pass yield & retest rates, and handler overhead.',
+          'SLT lines typically run at an OEE of 80% to 90%. Sockets require periodic cleaning, automated handlers jam, software stacks crash, and host systems need reboots. Not every chip passes on the first try. If your target is 100k shipped units and your final test yield is 98%, you actually need to run 102,040 tests per month.',
+          'While the test execution takes 30 minutes, the robotic handler requires 10 to 20 seconds per device to pick, place, actuate the socket lid, and later unload the lid. When planning for consumables like pogo pins and socket housings, there is a paradox introduced by SLT. Because the test time is so long, the physical wear-and-tear on the pins is incredibly low compared to standard Automate Test Equipment testing.'
+        ]
+      },
+      {
+        level: 2,
+        heading: '03. Supplier Selection and Key Buying Factors',
+        paragraphs: [
+          'When selecting suppliers for SLT sockets or probe pins, technical performance and risk mitigation heavily outweigh price and lead time. AI chips are extraordinarily expensive, highly complex, and power-hungry. The most important factors are electrical & thermal characteristics, track record & reputation among leading customers, and engineering co-design & prototyping lead time.',
+          'Modern AI processors regularly draw 700W to 1000W+ of power and require massive transient current spikes. This is a binary technical gate. If a socket cannot meet the extreme physics required by an AI chip, it is a non-starter. High-end AI accelerators can cost anywhere from $10K to over $30K per single device. A poorly manufactured or unproven test socket can physically destroy an expensive device under test via a mechanical short, or introduce false fails.',
+          'AI chips use custom, highly complex advanced packaging with massive footprints and unique pinouts. Missing a product launch window can cost a semiconductor company hundreds of millions of dollars in lost market share. Buyers look for thermal and electrical durability. They care about how well the socket housing resists warping after spending thousands of hours at 125°C. The winning vendor is usually chosen based on the question if the supplier has the verified engineering capability to handle mass power/signal needs and if they can be trusted to not damage their high-value silicon during a critical production ramp.'
+        ]
+      }
+    ]
+  },
+  {
+    slug: 'semiconductor-substrate-price-tolerance',
+    title: 'Tolerance to Price Increases for Semiconductor Package Substrates',
+    kicker: 'CORE.MACRO.SUPPLY_CHAIN',
+    description: 'An analysis of price increase tolerance thresholds for semiconductor package substrates and PCBs from the perspective of package manufacturers and end OEMs.',
+    status: 'ACTIVE',
+    datePublished: '2026-07-09',
+    intro: 'Assuming the perspective of a semiconductor package manufacturer or an end OEM that uses PCBs, this brief evaluates the extent to which price increases for semiconductor package substrates and PCBs are generally acceptable, particularly when driven by unavoidable circumstances like a sharp rise in critical material costs.',
+    sections: [
+      {
+        level: 2,
+        heading: '01. Price Increase Thresholds and Market Reactions',
+        paragraphs: [
+          'A price increase of 1-3% per year is generally considered acceptable or routine. This can be absorbed or passed on with minimal friction, and is considered the cost of doing business.',
+          'A price increase of 4-7% per year is a significant increase and requires justification and negotiation. It will require the supplier to provide transparent data on their cost drivers and will trigger formal reviews.',
+          'A price increase of 8-15% per year is considered highly disruptive as this level of increase is painful and triggers strategic action. Potential product redesigns are looked at, as well as exploring alternative suppliers with longer qualification times. This level of price increase requires executive discussions and the formation of task forces to mitigate the cost.',
+          'A price increase of greater than 15% per year is crisis-level and unacceptable in normal circumstances. An increase that large threatens market competitiveness of the end product, and is typically only accepted under extreme market shortages.'
+        ]
+      },
+      {
+        level: 2,
+        heading: '02. Supply Chain Positioning: Manufacturers vs. OEMs',
+        paragraphs: [
+          'As a semiconductor package manufacturer, our position is that of a middleman. When we buy substrates, our primary value-add is the assembly and test process. The ability to accept a price increase from a substrate supplier is dependent on our ability to pass that cost on to the customer. Negotiations with customers will be opened to pass on the substrate cost increase.',
+          'As an end OEM, our primary concern is the final product’s Bill of Materials cost and its impact on our product’s retail price and overall profitability. During a shortage, however, market conditions come into play, and all rules go out the window.',
+          'Semiconductor package manufacturers are more flexible than OEMs if they can maintain their margin. Transparency from the supplier is paramount. The "acceptable" percentage is a fluid number defined by a negotiation between partners.'
+        ]
+      }
+    ]
+  }
 ]
 
 const BRIEF_MAP: Record<string, Brief> = Object.fromEntries(

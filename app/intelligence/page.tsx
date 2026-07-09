@@ -71,6 +71,14 @@ const BRIEFS: BriefData[] = [
   },
   {
     group: 'MACRO & SYSTEMS',
+    category: 'MACRO.SUPPLY_CHAIN',
+    status: 'ACTIVE',
+    title: 'Tolerance to Price Increases for Semiconductor Package Substrates',
+    description: 'An analysis of price increase tolerance thresholds for semiconductor package substrates and PCBs from the perspective of package manufacturers and end OEMs.',
+    href: '/intelligence/briefs/semiconductor-substrate-price-tolerance',
+  },
+  {
+    group: 'MACRO & SYSTEMS',
     category: 'MACRO.GEOPOLITICS',
     status: 'ACTIVE',
     title: 'Manufacturing Power Semiconductors in SEA as a China-Risk Hedge',
@@ -118,6 +126,22 @@ const BRIEFS: BriefData[] = [
     title: 'Electro-Photonic Co-Integration: The Package-to-Package Bottleneck',
     description: 'An operational audit of the manufacturing and economic barriers preventing high-volume package-to-package optical interconnects, focusing on alignment yield, thermal degradation, and testability.',
     href: '/intelligence/briefs/electro-photonic-co-integration',
+  },
+  {
+    group: 'HARDWARE & INFRASTRUCTURE',
+    category: 'CORPORATE.VENTURE',
+    status: 'ACTIVE',
+    title: 'Best Practices for Upstream Semiconductor CVCs',
+    description: 'Research on the investment processes, organizational structures, execution setups, and evaluation systems of CVCs managed by semiconductor materials, components, and equipment manufacturers.',
+    href: '/intelligence/briefs/upstream-semiconductor-cvc-best-practices',
+  },
+  {
+    group: 'HARDWARE & INFRASTRUCTURE',
+    category: 'HARDWARE.TESTING',
+    status: 'ACTIVE',
+    title: 'AI Semiconductor SLT Practices and Test Sockets',
+    description: 'An evaluation of system-level test (SLT) practices for AI semiconductors, detailing test times, mass production realities, and key buying factors for test sockets.',
+    href: '/intelligence/briefs/ai-semiconductor-slt-practices',
   },
   {
     group: 'HARDWARE & INFRASTRUCTURE',
