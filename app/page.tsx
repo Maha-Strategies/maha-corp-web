@@ -17,11 +17,10 @@ const doctrineBriefs = [
   { id: "DOC-04", title: "The Saturnian Vision", href: "/doctrine/briefs/saturnian-vision" },
 ];
 
-// Book launch / pre-order block. Links out to Amazon (purchase) and the
-// dedicated book site (full details). Verify the TODO-flagged fields.
+// Book block. Links out to Amazon (purchase) and the
+// dedicated book site (full details).
 const BOOK = {
   title: 'The Maha Principle',
-  // TODO: confirm exact subtitle as it appears on the Amazon listing.
   subtitle: 'The Architecture of Human Flourishing',
   asin: 'B0H62WLMT5',
   amazonUrl: 'https://www.amazon.com/dp/B0H62WLMT5',
@@ -34,7 +33,7 @@ const BOOK = {
   coverSrc: '/The_Maha_Principle_cover_v2.jpg',
 };
 
-export function BookPreorderSection() {
+export function BookSection() {
   return (
     <section className="mt-4 mb-20 not-prose">
       <div className="border border-indigo-900/50 bg-indigo-950/20 p-8 sm:p-12 relative overflow-hidden">
@@ -59,7 +58,7 @@ export function BookPreorderSection() {
           {/* DETAILS */}
           <div className="flex-grow">
             <p className="font-mono text-[10px] text-indigo-400 tracking-widest uppercase mb-3">
-              The Book — Launching {BOOK.launchDate}
+              The Book — Published {BOOK.launchDate}
             </p>
             <h3 className="text-3xl sm:text-4xl font-light text-white mb-2 leading-tight">
               {BOOK.title}
@@ -68,7 +67,6 @@ export function BookPreorderSection() {
               {BOOK.subtitle}
             </p>
             <p className="text-zinc-300 font-light mb-8 max-w-xl leading-relaxed">
-              {/* TODO: swap for your own one-paragraph pitch from themahaprinciple.com. */}
               A field manual for rebuilding your biological, cognitive, and relational foundations in an extractive world. The Maha Principle argues that metabolic decline, attentional captivity, and relational fragmentation are one coupled failure — and lays out the M.A.H.A. framework for renewal from the inside out.
             </p>
 
@@ -79,8 +77,7 @@ export function BookPreorderSection() {
                 rel="noopener noreferrer"
                 className="inline-block bg-white text-black font-mono font-bold text-xs tracking-widest uppercase px-8 py-4 hover:bg-zinc-200 transition-colors no-underline text-center"
               >
-                {/* TODO: before launch use "Pre-order on Amazon"; after, "Get it on Amazon". */}
-                Pre-order on Amazon — {BOOK.price} {BOOK.format} ↗
+                Get it on Amazon — {BOOK.price} {BOOK.format} ↗
               </a>
               <a
                 href={BOOK.siteUrl}
@@ -298,12 +295,11 @@ const orgJsonLd = {
         '@type': 'Book',
         '@id': 'https://www.amazon.com/dp/B0H62WLMT5',
         bookFormat: 'https://schema.org/EBook',
-        // TODO: confirm price/currency at launch; update if it changes.
         offers: {
           '@type': 'Offer',
           price: '2.99',
           priceCurrency: 'USD',
-          availability: 'https://schema.org/PreOrder',
+          availability: 'https://schema.org/InStock',
           url: 'https://www.amazon.com/dp/B0H62WLMT5',
         },
       },
@@ -359,7 +355,7 @@ export default function CorporateHomepage() {
           </p>
 
           {/* THE BOOK LEADS: core doctrine, front and center */}
-          <BookPreorderSection />
+          <BookSection />
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
             <div className="border-t border-zinc-800 pt-6 group">
