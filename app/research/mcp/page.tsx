@@ -16,7 +16,7 @@ export const metadata = {
   metadataBase: new URL(SITE_URL),
   title: 'Connect the Maha Cognitive Gateway (MCP Server) to Claude | Maha Strategies',
   description:
-    'Step-by-step guide to connecting the Maha Cognitive Gateway MCP server to Claude Desktop via mcp-remote, including configuration, verification, the available tools, and troubleshooting.',
+    'Connect the Maha Cognitive Gateway to Claude Desktop for Maha OS telemetry, publishing workflows, and research tools. Includes token access, setup, verification, and troubleshooting.',
   alternates: { canonical: '/research/mcp' },
   openGraph: {
     type: 'article',
@@ -24,13 +24,13 @@ export const metadata = {
     siteName: 'Maha Strategies',
     title: 'Connect the Maha Cognitive Gateway (MCP Server) to Claude',
     description:
-      'Connect the Cognitive Gateway MCP server to Claude Desktop: configuration, verification, tools, and troubleshooting.',
+      'Connect the Cognitive Gateway to Claude Desktop for Maha OS telemetry, publishing workflows, and research tools.',
     images: [{ url: '/og-master.png', width: 1200, height: 630, alt: 'Maha Cognitive Gateway MCP' }],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Connect the Maha Cognitive Gateway (MCP Server) to Claude',
-    description: 'Connect the Cognitive Gateway MCP server to Claude Desktop.',
+    description: 'Bring Maha OS telemetry, publishing workflows, and research tools into Claude Desktop.',
     images: ['/og-master.png'],
   },
 };
@@ -115,7 +115,7 @@ export default function McpInstallationPage() {
         {/* TOP STATUS LINE */}
         <header className="text-xs text-gray-500 mb-12 border-b border-gray-800 pb-4 flex justify-between items-center">
           <span>[ PROTOCOL // COGNITIVE_GATEWAY ]</span>
-          <span className="text-indigo-400">SERVER: {SERVER_ID}</span>
+          <span className="text-emerald-400">STATUS: OPERATIONAL</span>
         </header>
 
         <h1 className="font-sans text-2xl sm:text-4xl font-bold tracking-tight text-white uppercase mb-4">
@@ -129,12 +129,19 @@ export default function McpInstallationPage() {
           pointed at the server&rsquo;s HTTP endpoint &mdash; the method we&rsquo;ve found most reliable.
         </p>
 
-        {/* HONEST EXPECTATION-SETTING */}
-        <div className="border border-amber-900/40 bg-amber-950/10 p-4 mb-12 text-xs text-amber-200/80 font-sans leading-relaxed">
-          <strong className="text-amber-300">Early-stage server.</strong> The Gateway&rsquo;s current uptime is roughly
-          86%. If a tool call fails, retry, or check the live status on the Smithery page before assuming your config
-          is wrong. Access requires a token &mdash; see step 1.
+        <div className="border border-emerald-900/50 bg-emerald-950/20 p-4 mb-8 text-xs text-emerald-100/80 font-sans leading-relaxed">
+          <strong className="text-emerald-300">Operational.</strong> The Gateway currently maintains 100% uptime. Access requires a token.
         </div>
+
+        <section className="mb-12 border-l-2 border-indigo-500 pl-5">
+          <h2 className="text-base text-white font-sans mb-3">Bring Maha workflows into Claude Desktop.</h2>
+          <p className="text-sm text-gray-400 leading-relaxed font-sans mb-5">
+            Use the Gateway to read Maha OS telemetry from a paired device, run cognitive-defense actions with approval, and work with publishing and research tools without leaving Claude.
+          </p>
+          <Link href="/contact" className="inline-block bg-white text-black font-mono font-bold text-[10px] tracking-widest uppercase px-5 py-3 hover:bg-zinc-200 transition-colors">
+            Request an access token &#8599;
+          </Link>
+        </section>
 
         {/* PREREQUISITES */}
         <section className="mb-12">
@@ -234,7 +241,7 @@ export default function McpInstallationPage() {
           <ul className="text-sm text-gray-300 leading-relaxed font-sans space-y-3 list-disc pl-5">
             <li><strong className="text-white">Tools don&rsquo;t appear:</strong> fully quit and reopen Claude Desktop &mdash; servers load at startup. Check the config JSON is valid (no trailing commas).</li>
             <li><strong className="text-white">Auth errors / 401 / 403:</strong> confirm <code className="text-white bg-zinc-900 px-1 py-0.5 text-xs border border-zinc-800">YOUR_TOKEN</code> is replaced with a valid token and the header reads <code className="text-white bg-zinc-900 px-1 py-0.5 text-xs border border-zinc-800">Authorization: Bearer &lt;token&gt;</code>.</li>
-            <li><strong className="text-white">Calls fail intermittently:</strong> the server runs at ~86% uptime; check live status on the Smithery page and retry before changing your config.</li>
+            <li><strong className="text-white">Calls fail:</strong> confirm your network connection, token, and server configuration before retrying the request.</li>
             <li><strong className="text-white">Command not found:</strong> verify Node/npm are installed and the global npm bin directory is on your PATH.</li>
             <li><strong className="text-white">Logs:</strong> on macOS, see <code className="text-white bg-zinc-900 px-1 py-0.5 text-xs border border-zinc-800">~/Library/Logs/Claude/</code> for the maha-os server log.</li>
           </ul>

@@ -161,6 +161,10 @@ export default function CorporateHomepage() {
           <Link href="/consulting" className="inline-block mt-8 text-xs font-mono text-indigo-300 hover:text-white tracking-widest uppercase transition-colors">
             Explore the methodology ↗
           </Link>
+          <div className="mt-5 flex flex-col sm:flex-row gap-x-6 gap-y-3 font-mono text-[10px] tracking-widest uppercase">
+            <Link href="/audit" className="text-zinc-400 hover:text-white transition-colors">Try the live auditor ↗</Link>
+            <Link href="/mps" className="text-zinc-400 hover:text-white transition-colors">Read the MPS/0.1 standard ↗</Link>
+          </div>
         </section>
 
         <section className="mt-24">

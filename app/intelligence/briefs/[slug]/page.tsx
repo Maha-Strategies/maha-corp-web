@@ -168,6 +168,17 @@ export default async function BriefPage(
               </div>
             )}
 
+            <aside className="border border-zinc-800 bg-zinc-950/60 p-5 mb-10 not-prose">
+              <p className="font-mono text-[10px] text-indigo-400 tracking-widest uppercase mb-2">[ Evidence status ]</p>
+              <p className="text-sm text-zinc-400 leading-relaxed mb-3">
+                This public brief is Maha Strategies&rsquo; analytical view of an active issue. Use it to frame questions and test assumptions, not as a substitute for source-verified diligence on a live decision.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-x-5 gap-y-2 font-mono text-[10px] tracking-widest uppercase">
+                <Link href="/consulting" className="text-indigo-300 hover:text-white transition-colors">Request a source-tagged brief ↗</Link>
+                <Link href="/mps" className="text-zinc-500 hover:text-white transition-colors">How MPS classifies claims ↗</Link>
+              </div>
+            </aside>
+
             {brief.sections.map((section, i) => (
               <SectionBody key={i} section={section} />
             ))}
@@ -191,34 +202,29 @@ export default async function BriefPage(
             <div className="sticky top-12 space-y-8">
               <div className="p-6 border border-gray-800 bg-black">
                 <h3 className="font-sans text-sm font-bold text-white uppercase tracking-widest mb-2">
-                  Strategic Audit
+                  Need a decision-ready brief?
                 </h3>
                 <p className="font-serif text-xs text-gray-400 mb-4">
-                  Deploy a systemic audit aligned to this brief&rsquo;s domain.
+                  Commission an evidence-tagged research brief on the market, technology, or policy question behind this analysis.
                 </p>
                 <Link href="/consulting" className="block text-center border border-gray-600 bg-gray-900 text-white font-mono text-[10px] tracking-widest py-3 hover:bg-white hover:text-black transition-colors uppercase">
-                  Initiate Audit &#8599;
+                  Commission a Research Brief &#8599;
                 </Link>
               </div>
 
               <div className="p-6 border border-indigo-900/50 bg-indigo-950/10">
                 <h3 className="font-sans text-sm font-bold text-indigo-400 uppercase tracking-widest mb-2">
-                  Maha OS Alpha
+                  Test the evidence method
                 </h3>
                 <p className="font-serif text-xs text-gray-400 mb-4">
-                  Enforce the Zero-Payload Policy on local device hardware.
+                  Paste a passage into the Maha Provenance Auditor to see how claims are classified before they become decisions.
                 </p>
-                <div className="grid grid-cols-2 gap-3 mb-3">
-                  <a href="https://apps.apple.com/us/app/maha-os/id6778333838" target="_blank" rel="noopener noreferrer" className="block text-center border border-indigo-500 text-indigo-400 font-mono text-[10px] tracking-widest py-3 hover:bg-indigo-500 hover:text-white transition-colors uppercase">
-                    iOS Client &#8595;
-                  </a>
-                  <a href="https://play.google.com/store/apps/details?id=com.maha.os" target="_blank" rel="noopener noreferrer" className="block text-center border border-indigo-500 text-indigo-400 font-mono text-[10px] tracking-widest py-3 hover:bg-indigo-500 hover:text-white transition-colors uppercase">
-                    Android Client &#8595;
-                  </a>
-                </div>
-                <a href="https://maha-os.com" target="_blank" rel="noopener noreferrer" className="block text-center border border-neutral-800 bg-neutral-900/50 text-neutral-400 font-mono text-[9px] tracking-widest py-2 hover:bg-neutral-800 hover:text-white transition-colors uppercase">
-                  View Source Documentation &#8599;
-                </a>
+                <Link href="/audit" className="block text-center border border-indigo-500 text-indigo-400 font-mono text-[10px] tracking-widest py-3 hover:bg-indigo-500 hover:text-white transition-colors uppercase">
+                  Run the Live Auditor &#8599;
+                </Link>
+                <Link href="/mps" className="block mt-3 text-center text-neutral-400 font-mono text-[9px] tracking-widest hover:text-white transition-colors uppercase">
+                  Read the MPS/0.1 standard &#8599;
+                </Link>
               </div>
 
               <ExportButton />
