@@ -20,18 +20,23 @@ export default function Navbar() {
     };
   }, [isOpen]);
 
-  const navLinks = [
+  const primaryLinks = [
     { name: 'Consulting', href: '/consulting' },
-    { name: 'Software', href: '/software' },
-    { name: 'Doctrine', href: '/doctrine' },
     { name: 'Intelligence', href: '/intelligence' },
+    { name: 'Method', href: '/method' },
     { name: 'Auditor', href: '/audit' },
-    { name: 'MPS', href: '/mps' },
-    { name: 'Protocols', href: '/protocols' },
+    { name: 'Contact', href: '/contact' },
+  ];
+
+  const exploreLinks = [
+    { name: 'MPS Standard', href: '/mps' },
     { name: 'Research', href: '/research' },
     { name: 'Policy', href: '/policy' },
-    { name: 'Start', href: '/start' },
-    { name: 'Contact', href: '/contact' }, // ADDED CONTACT ROUTE
+    { name: 'Doctrine', href: '/doctrine' },
+    { name: 'Protocols', href: '/protocols' },
+    { name: 'Maha OS', href: '/software' },
+    { name: 'Cognitive Gateway', href: '/research/mcp' },
+    { name: 'Personal Protocols', href: '/start' },
   ];
 
   return (
@@ -50,19 +55,24 @@ export default function Navbar() {
 
           {/* Desktop Navigation */}
           <div className="hidden xl:flex items-center gap-6 text-[10px] text-gray-400 font-mono tracking-widest uppercase">
-            {navLinks.map((link) => (
+            {primaryLinks.map((link) => (
               <Link key={link.name} href={link.href} className="hover:text-white transition-colors">
                 {link.name}
               </Link>
             ))}
-            <a 
-              href="https://publish.mahastrategies.com" 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              className="hover:text-white transition-colors text-zinc-500"
-            >
-              Publishing Node ↗
-            </a>
+            <details className="relative">
+              <summary className="list-none cursor-pointer hover:text-white transition-colors">Explore +</summary>
+              <div className="absolute right-0 top-6 w-52 border border-zinc-800 bg-[#0a0a0c] p-3 shadow-2xl">
+                {exploreLinks.map((link) => (
+                  <Link key={link.name} href={link.href} className="block px-3 py-2 text-zinc-400 hover:text-white hover:bg-zinc-900 transition-colors">
+                    {link.name}
+                  </Link>
+                ))}
+                <a href="https://publish.mahastrategies.com" target="_blank" rel="noopener noreferrer" className="block px-3 py-2 text-zinc-500 hover:text-white hover:bg-zinc-900 transition-colors">
+                  Publishing Node ↗
+                </a>
+              </div>
+            </details>
           </div>
 
           {/* Mobile Navigation Toggle */}
@@ -79,7 +89,18 @@ export default function Navbar() {
       {isOpen && (
         <div className="fixed inset-0 z-40 bg-[#0a0a0c] pt-24 px-6 xl:hidden flex flex-col h-[100dvh] overflow-y-auto">
           <div className="flex flex-col gap-6 text-sm text-zinc-400 font-mono tracking-widest uppercase mt-8">
-            {navLinks.map((link) => (
+            {primaryLinks.map((link) => (
+              <Link
+                key={link.name}
+                href={link.href}
+                onClick={toggleMenu}
+                className="hover:text-white transition-colors border-b border-zinc-900 pb-4"
+              >
+                {link.name}
+              </Link>
+            ))}
+            <p className="pt-4 font-mono text-[10px] text-zinc-600 uppercase tracking-widest">Explore</p>
+            {exploreLinks.map((link) => (
               <Link 
                 key={link.name} 
                 href={link.href} 

@@ -3,11 +3,15 @@
 
 import { Resend } from "resend";
 
-export async function submitContactForm(prevState: any, formData: FormData) {
+type ContactState = { success: boolean; error: string | null };
+
+export async function submitContactForm(_prevState: ContactState, formData: FormData) {
   const name = formData.get("name") as string;
   const email = formData.get("email") as string;
   const subject = (formData.get("subject") as string) || "general";
   const message = formData.get("message") as string;
+  const decision = formData.get("decision") as string;
+  const deadline = formData.get("deadline") as string;
 
   if (!name || !email || !message) {
     return { success: false, error: "Missing required fields." };
@@ -40,6 +44,8 @@ NEW TRANSMISSION RECEIVED
 DESIGNATION (NAME): ${name}
 RETURN VECTOR (EMAIL): ${email}
 INQUIRY TYPE: ${subject}
+DECISION TO INFORM: ${decision || 'Not provided'}
+DECISION DEADLINE: ${deadline || 'Not provided'}
 
 PAYLOAD (MESSAGE):
 ${message}

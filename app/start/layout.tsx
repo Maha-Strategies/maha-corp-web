@@ -1,8 +1,8 @@
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Start Here | Protocol 001: The Stronghold',
-  description: 'A tactical field manual for resisting Metabolic Colonialism. Secure your perimeter and download the structural defense assets.',
+  title: 'Personal Protocols | The Stronghold',
+  description: 'Personal protocols and practical field assets from The Maha Principle, for protecting attention, food environments, and family routines.',
   alternates: { canonical: 'https://www.mahastrategies.com/start' },
 }
 

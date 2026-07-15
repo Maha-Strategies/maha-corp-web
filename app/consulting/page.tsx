@@ -5,6 +5,7 @@
 
 import Link from 'next/link'
 import type { Metadata } from 'next'
+import { TrackedLink } from '@/components/ConversionTracker'
 
 export const metadata: Metadata = {
   title: 'Verified Research Brief — Maha Strategies LLC',
@@ -88,12 +89,13 @@ export default function ConsultingPage() {
         </p>
 
         <div className="flex flex-col sm:flex-row gap-4 mb-24">
-          <a
-            href="mailto:mayone@mahastrategies.com?subject=Verified%20Research%20Brief%20—%20inquiry"
+          <TrackedLink
+            href="/contact"
+            event="cta_consulting_commission_brief"
             className="inline-block bg-white text-black font-mono font-bold text-xs tracking-widest uppercase px-8 py-4 hover:bg-zinc-200 transition-colors no-underline text-center"
           >
             Commission a Brief — $2,500
-          </a>
+          </TrackedLink>
           <a
             href="#sample"
             className="inline-block border border-zinc-600 text-zinc-200 font-mono font-bold text-xs tracking-widest uppercase px-8 py-4 hover:border-white hover:text-white transition-colors no-underline text-center"
@@ -101,6 +103,24 @@ export default function ConsultingPage() {
             See a Tagged Page ↓
           </a>
         </div>
+
+        <section className="mb-24 border-t border-zinc-800 pt-8">
+          <p className="font-mono text-[10px] text-indigo-400 tracking-widest uppercase mb-5">[ Common research scopes ]</p>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <Link href="/consulting/semiconductor-supply-chain" className="border border-zinc-800 p-5 hover:border-zinc-500 transition-colors">
+              <h2 className="text-white text-sm mb-2">Semiconductor supply chains</h2>
+              <p className="text-xs text-zinc-500 leading-relaxed">Foundry, packaging, regional diversification, and concentration risk.</p>
+            </Link>
+            <Link href="/consulting/ai-infrastructure" className="border border-zinc-800 p-5 hover:border-zinc-500 transition-colors">
+              <h2 className="text-white text-sm mb-2">AI infrastructure &amp; edge AI</h2>
+              <p className="text-xs text-zinc-500 leading-relaxed">Deployment paths, hardware constraints, and AI economics.</p>
+            </Link>
+            <Link href="/consulting/evidence-policy" className="border border-zinc-800 p-5 hover:border-zinc-500 transition-colors">
+              <h2 className="text-white text-sm mb-2">Evidence &amp; policy</h2>
+              <p className="text-xs text-zinc-500 leading-relaxed">Contested claims, policy exposure, and decision-critical evidence.</p>
+            </Link>
+          </div>
+        </section>
 
         {/* ================= THE DELIVERABLE ================= */}
         <section className="mb-24">
@@ -270,12 +290,13 @@ export default function ConsultingPage() {
               $2,500 · 10 business days · one revision round · fixed scope
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
-              <a
-                href="mailto:mayone@mahastrategies.com?subject=Verified%20Research%20Brief%20—%20inquiry"
+              <TrackedLink
+                href="/contact"
+                event="cta_consulting_start_conversation"
                 className="inline-block bg-white text-black font-mono font-bold text-xs tracking-widest uppercase px-8 py-4 hover:bg-zinc-200 transition-colors no-underline text-center"
               >
                 Start the Conversation ↗
-              </a>
+              </TrackedLink>
               <Link
                 href="/contact"
                 className="inline-block border border-zinc-600 text-zinc-200 font-mono font-bold text-xs tracking-widest uppercase px-8 py-4 hover:border-white hover:text-white transition-colors no-underline text-center"

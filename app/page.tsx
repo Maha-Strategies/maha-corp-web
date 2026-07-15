@@ -1,8 +1,8 @@
 import Link from 'next/link'
 import type { Metadata } from 'next'
+import { TrackedLink } from '@/components/ConversionTracker'
 
 const SITE_URL = 'https://www.mahastrategies.com'
-const inquiryUrl = 'mailto:mayone@mahastrategies.com?subject=Verified%20Research%20Brief%20%E2%80%94%20inquiry'
 
 export const metadata: Metadata = {
   title: 'Verified Research Briefs | Maha Strategies',
@@ -32,16 +32,19 @@ const capabilities = [
   {
     number: '01',
     title: 'Technology & AI',
+    href: '/consulting/ai-infrastructure',
     copy: 'Assess a technology bet, vendor claim, AI deployment path, or emerging technical risk before it reaches a board memo or investment committee.',
   },
   {
     number: '02',
     title: 'Markets & Supply Chains',
+    href: '/consulting/semiconductor-supply-chain',
     copy: 'Map semiconductor, manufacturing, and infrastructure exposure with the sources and uncertainty made visible—not buried in a polished narrative.',
   },
   {
     number: '03',
     title: 'Policy & Evidence',
+    href: '/consulting/evidence-policy',
     copy: 'Turn a contested question into a decision-ready brief with claims that legal, governance, and policy reviewers can trace.',
   },
 ]
@@ -109,12 +112,13 @@ export default function CorporateHomepage() {
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 mb-8">
-            <a
-              href={inquiryUrl}
+            <TrackedLink
+              href="/contact"
+              event="cta_homepage_commission_brief"
               className="inline-block bg-white text-black font-mono font-bold text-xs tracking-widest uppercase px-7 py-4 hover:bg-zinc-200 transition-colors text-center"
             >
               Commission a Brief — $2,500 ↗
-            </a>
+            </TrackedLink>
             <Link
               href="/consulting#sample"
               className="inline-block border border-zinc-600 text-zinc-200 font-mono font-bold text-xs tracking-widest uppercase px-7 py-4 hover:border-white hover:text-white transition-colors text-center"
@@ -133,11 +137,12 @@ export default function CorporateHomepage() {
           </p>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {capabilities.map((capability) => (
-              <article key={capability.number} className="border-t border-zinc-700 pt-5">
+              <Link key={capability.number} href={capability.href} className="group border-t border-zinc-700 pt-5 hover:border-zinc-400 transition-colors">
                 <p className="font-mono text-[10px] text-zinc-600 tracking-widest mb-3">{capability.number}</p>
-                <h2 className="text-white text-lg mb-3">{capability.title}</h2>
+                <h2 className="text-white text-lg mb-3 group-hover:text-indigo-300 transition-colors">{capability.title}</h2>
                 <p className="text-sm text-zinc-500 leading-relaxed">{capability.copy}</p>
-              </article>
+                <span className="inline-block mt-4 font-mono text-[10px] text-zinc-600 group-hover:text-white tracking-widest uppercase">Explore this brief ↗</span>
+              </Link>
             ))}
           </div>
         </section>
@@ -216,7 +221,7 @@ export default function CorporateHomepage() {
             Send the question, the decision it informs, and the deadline you are working to. We reply within two business days with a scope—or tell you plainly if we are not the right fit.
           </p>
           <div className="flex flex-col sm:flex-row gap-4">
-            <a href={inquiryUrl} className="inline-block bg-white text-black font-mono font-bold text-xs tracking-widest uppercase px-7 py-4 hover:bg-zinc-200 transition-colors text-center">Start an Inquiry ↗</a>
+            <TrackedLink href="/contact" event="cta_homepage_start_inquiry" className="inline-block bg-white text-black font-mono font-bold text-xs tracking-widest uppercase px-7 py-4 hover:bg-zinc-200 transition-colors text-center">Start an Inquiry ↗</TrackedLink>
             <Link href="/contact" className="inline-block border border-zinc-600 text-zinc-200 font-mono font-bold text-xs tracking-widest uppercase px-7 py-4 hover:border-white hover:text-white transition-colors text-center">Contact Maha Strategies ↗</Link>
           </div>
         </section>

@@ -3,6 +3,7 @@
 import React, { useActionState } from 'react';
 import Link from 'next/link';
 import { subscribeToGateway } from './actions';
+import { TrackedLink } from '@/components/ConversionTracker';
 
 export default function StartGateway() {
   const [state, formAction, isPending] = useActionState(subscribeToGateway, {
@@ -21,12 +22,19 @@ export default function StartGateway() {
         </header>
 
         {/* TITLE */}
+        <p className="font-mono text-[10px] text-indigo-400 uppercase tracking-widest mb-4">
+          [ Personal Protocols // Companion to The Maha Principle ]
+        </p>
         <h1 className="font-sans text-4xl sm:text-5xl font-bold tracking-tight mb-4 text-white uppercase">
-          Protocol 001: The Stronghold
+          Personal Protocol 001: The Stronghold
         </h1>
-        <h2 className="font-mono text-sm text-indigo-400 mb-12 uppercase tracking-widest">
-          [ START HERE ]
-        </h2>
+        <p className="font-mono text-sm text-indigo-400 mb-8 uppercase tracking-widest">[ Start here ]</p>
+        <div className="mb-12 border border-zinc-800 bg-zinc-950/50 p-5">
+          <p className="font-sans text-sm text-zinc-400 mb-3">Looking for research for an investment, market, or corporate strategy decision?</p>
+          <TrackedLink href="/consulting" event="cta_personal_protocols_to_consulting" className="font-mono text-[10px] text-indigo-300 hover:text-white tracking-widest uppercase transition-colors">
+            Commission a Verified Research Brief ↗
+          </TrackedLink>
+        </div>
 
         <article className="prose prose-invert prose-lg font-serif leading-relaxed text-gray-300 max-w-none">
           

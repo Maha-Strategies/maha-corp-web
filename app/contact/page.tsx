@@ -1,9 +1,10 @@
 // app/contact/page.tsx
 "use client";
 
-import React, { useActionState } from 'react';
+import React, { useActionState, useEffect } from 'react';
 import Link from 'next/link';
 import { submitContactForm } from './actions';
+import { trackConversion } from '@/components/ConversionTracker';
 
 export default function ContactPage() {
   // useActionState handles the server action lifecycle (loading, success, error)
@@ -11,6 +12,10 @@ export default function ContactPage() {
     success: false, 
     error: null 
   });
+
+  useEffect(() => {
+    if (state.success) trackConversion('contact_form_success');
+  }, [state.success]);
 
   return (
     <main className="min-h-screen bg-[#0a0a0c] text-[#e0e0e0] py-16 px-6 sm:px-12 font-mono selection:bg-indigo-500 selection:text-white">
@@ -27,7 +32,7 @@ export default function ContactPage() {
         </h1>
 
         <p className="text-sm text-gray-400 leading-relaxed mb-12 font-sans">
-          Use the secure form below to request a Maha Cognitive Gateway access token, report telemetry anomalies, or initiate general inquiries. Please allow up to 48 hours for token provisioning.
+          Start with the decision you need to make. For a Verified Research Brief, we reply within two business days with a scope—or tell you plainly if we are not the right fit.
         </p>
 
         {/* CONTACT FORM SECTION */}
@@ -42,7 +47,7 @@ export default function ContactPage() {
                  [ TRANSMISSION SUCCESSFUL ]
                </p>
                <p className="font-sans text-zinc-400 text-sm">
-                 Your payload has been securely routed to Maha Strategies command. You will receive a response at your designated return vector shortly.
+                 Your inquiry has been received. Maha Strategies will respond within two business days.
                </p>
             </div>
           ) : (
@@ -95,12 +100,42 @@ export default function ContactPage() {
                   disabled={isPending}
                   className="w-full bg-zinc-900/50 border border-zinc-800 text-white text-sm px-4 py-2.5 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-colors appearance-none disabled:opacity-50"
                 >
+                  <option value="verified_research">Verified Research Brief — $2,500 / 10 business days</option>
                   <option value="mps_audit">Manuscript Audit / MPS Inquiry</option>
                   <option value="token_request">Cognitive Gateway Access Token Request</option>
                   <option value="support">Technical Support / Troubleshooting</option>
                   <option value="general">General Inquiry</option>
                   
                 </select>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                <div className="space-y-2">
+                  <label htmlFor="decision" className="block text-xs text-gray-400 uppercase tracking-widest font-mono">
+                    Decision to inform (optional)
+                  </label>
+                  <input
+                    type="text"
+                    id="decision"
+                    name="decision"
+                    disabled={isPending}
+                    className="w-full bg-zinc-900/50 border border-zinc-800 text-white text-sm px-4 py-2.5 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-colors disabled:opacity-50"
+                    placeholder="An investment, vendor, or strategy decision"
+                  />
+                </div>
+                <div className="space-y-2">
+                  <label htmlFor="deadline" className="block text-xs text-gray-400 uppercase tracking-widest font-mono">
+                    Decision deadline (optional)
+                  </label>
+                  <input
+                    type="text"
+                    id="deadline"
+                    name="deadline"
+                    disabled={isPending}
+                    className="w-full bg-zinc-900/50 border border-zinc-800 text-white text-sm px-4 py-2.5 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-colors disabled:opacity-50"
+                    placeholder="e.g. 15 August 2026"
+                  />
+                </div>
               </div>
 
               {/* MESSAGE */}
@@ -115,7 +150,7 @@ export default function ContactPage() {
                   required
                   disabled={isPending}
                   className="w-full bg-zinc-900/50 border border-zinc-800 text-white text-sm px-4 py-3 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-colors resize-y disabled:opacity-50"
-                  placeholder="Briefly describe your use case for the Gateway, or state your inquiry..."
+                  placeholder="What question do you need answered, and what would change if the answer were different?"
                 ></textarea>
               </div>
 
