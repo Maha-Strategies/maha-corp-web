@@ -26,9 +26,10 @@ export async function generateMetadata(
   const brief = getBriefBySlug(slug);
   if (!brief) return {};
   const url = `${SITE_URL}/intelligence/briefs/${brief.slug}`;
+  const seoTitle = brief.seoTitle ?? `${brief.title} | Intelligence | Maha Strategies`;
   return {
     metadataBase: new URL(SITE_URL),
-    title: `${brief.title} | Intelligence | Maha Strategies`,
+    title: seoTitle,
     description: brief.description,
     alternates: { canonical: `/intelligence/briefs/${brief.slug}` },
     openGraph: {

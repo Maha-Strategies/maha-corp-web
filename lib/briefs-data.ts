@@ -35,6 +35,7 @@ export interface ProtocolPatch {
 export interface Brief {
   slug: string;
   title: string;
+  seoTitle?: string;
   kicker: string;
   description: string;
   status: string;
@@ -346,49 +347,53 @@ export const BRIEFS: Brief[] = [
   },
   {
     slug: 'angstrom-era-soc-architecture',
-    title: 'Angstrom-Era SoC Architecture: The 2nm Transition and Edge AI',
+    title: 'Angstrom-Era Semiconductors: 2nm SoC Architecture and Edge AI',
+    seoTitle: 'Angstrom-Era Semiconductors: 2nm SoC Strategy',
     kicker: 'CORE.SILICON.NODES',
     description:
-      'An architectural assessment of sub-3nm node migration, Backside Power Delivery Networks (BSPDN), and the sovereign imperative for Angstrom-era fabrication.',
+      'An Angstrom-era semiconductor analysis of 2nm SoC architecture, GAA transistors, backside power delivery, High-NA EUV, and edge-AI design trade-offs.',
     status: 'ACTIVE',
     datePublished: '2026-05-28',
+    dateModified: '2026-07-15',
+    intro: 'Angstrom-era semiconductor roadmaps are often discussed as a simple node race. For strategy teams, the useful question is more concrete: which design, manufacturing, packaging, and power-delivery changes must work together before a 2nm-class platform creates a defendable performance-per-watt advantage?',
     sections: [
       {
         level: 2,
-        heading: '01. The 3nm Baseline and Mobile PPA',
+        heading: '01. What “Angstrom Era” Means for Semiconductor Strategy',
         paragraphs: [
-          'The current ceiling for consumer-grade silicon architecture is defined by the 3nm process node, exemplified by TSMC\'s N3E utilized in flagship mobile SoCs like the Snapdragon 8 Elite. At this density, the foundational metric for evaluation is strictly PPA (Performance, Power, Area).',
-          'Power efficiency has superseded absolute clock speed as the primary architectural constraint. By shrinking transistors, foundries have enabled designers to integrate exponentially more powerful Neural Processing Units (NPUs) and Image Signal Processors (ISPs) without expanding the physical silicon footprint. However, the thermal and power demands of continuous on-device Generative AI are rapidly exhausting the efficiencies gained at 3nm.',
+          '“Angstrom era” is a useful shorthand for the leading-edge transition beyond today’s mature FinFET generations, not a decision metric by itself. A node label does not guarantee a product advantage. The commercial question is whether the process, library ecosystem, design rules, yield learning, and package can jointly improve performance, power, area, and time to market.',
+          'For mobile and edge-AI SoCs, power efficiency is the binding constraint. More compute can be integrated only if the platform controls voltage droop, interconnect congestion, memory movement, and heat. The strategy should therefore compare usable workload performance per watt and total platform cost—not transistor density in isolation.',
         ],
       },
       {
         level: 2,
-        heading: '02. The 2nm Transition and Backside Power Delivery',
+        heading: '02. The 2nm Transition: GAA, Backside Power, and Design Enablement',
         paragraphs: [
-          'The migration to 2nm nodes—entering mass commercial availability in consumer endpoints by late 2026 to 2027—introduces a structural paradigm shift rather than a mere lithographic refinement. The critical innovation of the 2nm era is the implementation of Backside Power Delivery Networks (BSPDN).',
-          'Historically, power and signal lines competed for routing space on the front side of the silicon, creating logic congestion and resistance bottlenecks. Relocating the power delivery network to the backside of the wafer decouples power from logic, eliminating data "traffic jams" and drastically reducing voltage droop. This architectural redesign is mandatory to sustain the high-refresh-rate gaming and continuous thermal-throttling mitigation required by modern mobile compute loads.',
+          'The 2nm-class transition combines more than a lithographic shrink. Gate-all-around (GAA) transistor architectures aim to improve electrostatic control, while backside power delivery moves part of the power-routing burden away from front-side signal interconnects. In principle, that separation can create routing headroom and improve power integrity; in practice, it also introduces new integration, design-rule, and yield risks.',
+          'The decision gate is design enablement. A foundry roadmap becomes commercially meaningful only when PDK maturity, IP availability, EDA flows, packaging choices, and customer engineering support let a product team translate device-level gains into a predictable tape-out. Investors and operators should ask where that enablement is proven rather than infer readiness from a node announcement.',
         ],
       },
       {
         level: 2,
-        heading: '03. The Angstrom-Era Imperative: High-NA EUV and CFET',
+        heading: '03. High-NA EUV and CFET: Strategic Options, Not Automatic Outcomes',
         paragraphs: [
-          'Saturating demand at 2nm is a false hypothesis. By 2029, the industry will cross into the Angstrom Era (1.8nm, 1.4nm) driven by the compute requirements of true edge-based Generative AI. Running massive LLMs and multimodal diffusion models entirely locally—ensuring zero latency and absolute data privacy—demands trillions of calculations per second at a sub-watt power envelope.',
-          'To achieve this, foundries must deploy multi-hundred-million-dollar High-Numerical Aperture (High-NA) EUV lithography systems. Simultaneously, transistor architecture will evolve into 3D configurations, specifically Complementary FETs (CFET), where N-type and P-type transistors are stacked vertically. This vertical integration is the only physical pathway to achieving the required logic density for next-generation edge intelligence.',
+          'High-NA EUV and complementary FET (CFET) concepts are strategically important because they address different constraints: patterning precision on one side, device-density scaling on the other. Neither should be treated as a standalone catalyst. Their value depends on defect control, process-window stability, equipment availability, and the economic yield of the complete manufacturing flow.',
+          'That distinction matters for capital allocation. A credible Angstrom-era thesis separates the technology roadmap from the commercial bridge: which customers require the capability, what product class can absorb the cost, and what volume can sustain learning. It is more defensible to model multiple adoption paths than to assume every edge-AI workload requires the most advanced node.',
         ],
       },
       {
         level: 2,
-        heading: '04. Form Factor Evolution: Spatial Computing',
+        heading: '04. Edge AI and Spatial Computing: The Architecture Test',
         paragraphs: [
-          'The push toward 1.4nm is not strictly about better smartphones; it is the fundamental enabling technology for the successor to the smartphone: ubiquitous Augmented Reality (AR) and spatial computing. Lightweight, all-day AR glasses present an extreme set of conflicting requirements—desktop-class path-tracing graphics overlaid on reality, running on a battery small enough to fit inside a spectacle frame. Without the performance-per-watt leap provided by Angstrom-era fabrication, spatial computing will remain thermally and practically inviable.',
+          'Edge AI and spatial-computing devices make the performance-per-watt problem visible. They combine sustained AI inference, sensing, graphics, memory bandwidth, and a constrained thermal envelope. The winning architecture may mix a leading-edge application processor with advanced packaging, specialized accelerators, and workload partitioning rather than place every function on the smallest available node.',
+          'A useful diligence framework is to track four linked variables: workload latency, energy per inference, memory and package bandwidth, and thermal behavior at sustained use. This prevents a node discussion from drifting into marketing language and exposes where a product advantage actually comes from.',
         ],
       },
     ],
     protocolPatch: {
-      title: 'Maha Protocol Patch // Thesis .044 — Sovereign Policy: The Fallacy of Node Saturation',
+      title: 'Maha Protocol Patch // Thesis .044 — Underwrite the Integration Path, Not the Node Label',
       paragraphs: [
-        'For state entities like Japan\'s METI, assuming demand saturation at the 2nm threshold is a catastrophic industrial policy error. The trajectory of global edge AI and spatial computing strictly mandates Angstrom-era (sub-2nm) fabrication capabilities. Shifting state support solely to legacy or trailing nodes relinquishes sovereign control over the future of hardware-accelerated AI. Japan must aggressively subsidize next-generation CFET integration and High-NA EUV domestic infrastructure to avoid technological subjugation.',
+        'For investors, operators, and policymakers, the core question is not whether an Angstrom-era node exists on a roadmap. It is whether the full integration path—process, design enablement, packaging, yield, and customer volume—can convert that roadmap into a durable platform advantage. Support and diligence should be tied to those verifiable gates.',
       ],
     },
   },
@@ -962,11 +967,13 @@ export const BRIEFS: Brief[] = [
   },
   {
     slug: 'stm-legacy-distribution',
-    title: 'STM Customer Matrix: Legacy Semiconductor Distribution',
+    title: 'STMicroelectronics Distribution Strategy: Customer and Channel Analysis',
+    seoTitle: 'STMicroelectronics Distribution Strategy Analysis',
     kicker: 'CORE.SILICON.SUPPLY_CHAIN',
-    description: 'An operational audit of STMicroelectronics\x27 commercial distribution structure, analyzing revenue concentration across Apple, Automotive Tier-1s, and Aerospace.',
+    description: 'An analysis of STMicroelectronics distribution strategy, customer concentration, and channel exposure across Apple, automotive Tier-1s, industrial, and aerospace markets.',
     status: 'ACTIVE',
     datePublished: '2026-05-29',
+    dateModified: '2026-07-15',
     intro: 'Analyzing the commercial distribution of legacy semiconductors (power devices, MCUs, analog) at STMicroelectronics (STM) reveals a highly concentrated, uneven revenue architecture. While STM generates 40-50% of its total revenue from the broader Automotive and Industrial sectors, a granular look at direct OEM/Tier-1 purchasing exposes severe asymmetric dependencies.',
     sections: [
       { level: 2, heading: '01. The 40% Baseline & The Apple Anomaly', paragraphs: [
@@ -1082,26 +1089,32 @@ export const BRIEFS: Brief[] = [
   },
   {
     slug: 'us-foundry-sovereignization',
-    title: 'U.S. Foundry Sovereignization: The Intel IDM 2.0 Friction Point',
+    title: 'Intel IDM 2.0 Strategy: U.S. Foundry Economics and Policy',
+    seoTitle: 'Intel IDM 2.0 Strategy & U.S. Foundry Economics',
     kicker: 'MACRO.GEOPOLITICS // STAKEHOLDER AUDIT',
-    description: 'An architectural audit of the U.S. semiconductor supply chain shift, analyzing the divergence between strategic national security mandates and financial stakeholder realities regarding Intel\x27s foundry business.',
+    description: 'An Intel IDM 2.0 strategy analysis: how foundry economics, external-customer trust, CHIPS Act incentives, and domestic sourcing policy shape U.S. semiconductor manufacturing.',
     status: 'VOLATILE',
     datePublished: '2026-05-29',
+    dateModified: '2026-07-15',
+    intro: 'Intel IDM 2.0 is best evaluated as a foundry-transition problem, not only as a geopolitical narrative. The strategy must simultaneously earn external customer confidence, sustain costly process and capacity learning, and satisfy a U.S. policy objective that values domestic leading-edge capability beyond near-term factory returns.',
     sections: [
       { level: 2, heading: 'Executive Summary', paragraphs: [
-        'The domestic sovereignization of the U.S. semiconductor supply chain is currently locked in a precarious transition phase. The primary execution vehicle for this shift—Intel\x27s IDM 2.0 foundry strategy—has become a friction point where geopolitical necessity collides with severe commercial and financial realities. Despite accelerating R&D toward sub-2nm nodes, Intel Foundry Services has historically struggled to secure the volume commitments from apex product owners (e.g., Apple, Nvidia) required to sustain a profitable leading-edge fab.',
-        'However, defining these operational hardships as terminal misreads the macro environment. The market is witnessing a profound divergence in stakeholder incentives, where national security mandates may ultimately override near-term financial efficiency.' ] },
-      { level: 2, heading: 'The Divergence of Stakeholder Incentives', paragraphs: [
-        'Perception of the domestic foundry transition is heavily fragmented depending on the stakeholder\x27s operational vector:' ],
+        'The U.S. foundry strategy sits at the intersection of three tests: can Intel execute a competitive manufacturing service, can it fill leading-edge capacity with customers that are not captive to its product business, and can public policy reduce strategic risk without masking commercial weakness? Each test has a different time horizon and owner.',
+        'This is why the Intel IDM 2.0 strategy attracts conflicting conclusions. A factory can matter for supply-chain resilience before it earns an attractive financial return. But policy support cannot by itself create the manufacturing consistency, IP protection, design enablement, and customer service that outside chip designers require.' ] },
+      { level: 2, heading: '01. What Intel IDM 2.0 Must Prove', paragraphs: [
+        'The foundry model requires a credible separation between the needs of Intel\'s own product groups and the expectations of external customers. Fabless firms need confidentiality, predictable process documentation, responsive design support, compatible IP and EDA ecosystems, reliable capacity commitments, and an escalation path that treats them as customers rather than competitors.',
+        'The economic test is equally direct: leading-edge capacity is capital intensive and depends on utilization, yield learning, and a mix of products that can absorb the cost. Announced capacity, grants, or partnership language are incomplete indicators. The stronger signal is repeatable external design activity that progresses from evaluation to volume manufacturing.' ] },
+      { level: 2, heading: '02. The Stakeholder Decision Matrix', paragraphs: [
+        'The correct interpretation of progress depends on who bears the risk and what they are optimizing for:' ],
         listItems: [
-          'The Strategic Mandate (Government & Defense): Policymakers and the Pentagon view Intel as functionally "too big to fail." If the IDM 2.0 framework collapses, the fundamental premise of the CHIPS Act disintegrates. The U.S. defense apparatus requires a secure, domestic point of origin for cutting-edge military silicon. For these stakeholders, Intel\x27s stability is not a matter of margin, but of strict national security.',
-          'The Financial Market Resistance: Conversely, capital markets maintain a highly negative perception of the asset-heavy foundry strategy. Activist investors and financial analysts view the massive CapEx requirements of building out Angstrom-era fabs as a structural liability dragging down the historically profitable logic design business. The financial reflex is a demand to strip the foundry for parts to preserve short-term shareholder value.',
-          'The Commercial Pragmatists (Fabless Apex Clients): Commercial giants (Nvidia, Apple, Qualcomm, Amazon) are desperate for a viable secondary source to hedge against the geopolitical tail-risk of an incident in the Taiwan Strait. However, they remain hesitant. Intel is structurally attempting to pivot from a monopolistic competitor to a pure-play service provider. Industry veterans note that the internal rigidity of Intel must be replaced by the intense, service-oriented humility mastered by TSMC for this relationship to function at scale.' ] },
-      { level: 2, heading: 'The Regulatory Coercion Horizon (3-5 Year Outlook)', paragraphs: [
-        'A prevailing market assumption suggests that Intel\x27s current failure to capture secure anchor customers for its most advanced processes is a temporary dislocation. As the U.S. government subsidizes these fabs with billions in taxpayer capital, the implicit expectation is that soft commercial nudging will eventually harden into regulatory coercion.',
-        'In the medium-to-long term (a 3 to 5-year horizon), it is highly probable that major U.S. technology hardware vendors will be formally or informally obliged to procure a baseline percentage of their advanced process chips from domestic onshore facilities.' ] },
+          'Policy and national-security stakeholders: the priority is assured access, trusted manufacturing, workforce depth, and resilience under disruption. They should measure capability milestones and supply assurance, not only subsidy totals.',
+          'Investors and corporate strategy teams: the priority is whether external revenue can improve factory utilization and fund the next process transition. They should look for customer qualification, design starts, recurring volume, and the capital intensity required to achieve them.',
+          'Fabless customers: the priority is a credible second source without exposing product roadmaps or accepting unacceptable execution risk. They should assess process fit, PDK and IP readiness, packaging options, service culture, and contractual protection—not geopolitical desire alone.' ] },
+      { level: 2, heading: '03. What to Watch in a U.S. Foundry Strategy', paragraphs: [
+        'A decision-ready monitoring set should separate statements of intent from evidence of adoption. The most informative signals are named or clearly qualified external programs, the movement of customer designs through the manufacturing flow, sustained yield and reliability progress, capacity commitments, and disclosures that show whether the foundry is reducing the gap between investment and demand.',
+        'CHIPS Act incentives and domestic-sourcing policy can change the risk-reward equation, especially for strategically sensitive supply. They do not eliminate commercial diligence. Policy can support capacity and demand formation; it cannot substitute for the operational trust required to win a competitive design.' ] },
       { level: 2, heading: 'Strategic Conclusion', paragraphs: [
-        'The hardships surrounding the U.S. domestic foundry shift are acute, driven by a legacy culture attempting an unnatural pivot to contract manufacturing. Yet, evaluating these struggles solely through a traditional P&L lens ignores the structural reality of the 2026 landscape. The U.S. government has designated onshore manufacturing as a non-negotiable geopolitical imperative. Consequently, while the financial friction is real and punitive, the overarching transition is underwritten by sovereign force, framing the current instability as a temporary—albeit painful—phase of market recalibration.' ] },
+        'Intel IDM 2.0 should be viewed as a conditional strategic asset. The U.S. has a structural interest in successful domestic leading-edge manufacturing, while customers have a structural interest in qualified alternatives. The opportunity becomes durable only when those interests are converted into repeatable commercial behavior: qualified designs, customer trust, viable utilization, and credible process execution.' ] },
     ],
   },
     {

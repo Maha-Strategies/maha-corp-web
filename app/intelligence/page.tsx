@@ -25,8 +25,8 @@ const BRIEFS: BriefData[] = [
     group: 'MACRO & SYSTEMS',
     category: 'MACRO.GEOPOLITICS',
     status: 'VOLATILE',
-    title: 'U.S. Foundry Sovereignization: The Intel IDM 2.0 Friction Point',
-    description: 'An architectural audit of the U.S. semiconductor supply chain shift, analyzing the divergence between strategic national security mandates and financial stakeholder realities regarding Intel’s foundry business.',
+    title: 'Intel IDM 2.0 Strategy: U.S. Foundry Economics and Policy',
+    description: 'How foundry economics, external-customer trust, CHIPS Act incentives, and domestic sourcing policy shape U.S. semiconductor manufacturing.',
     href: '/intelligence/briefs/us-foundry-sovereignization',
   },
   {
@@ -99,8 +99,8 @@ const BRIEFS: BriefData[] = [
     group: 'HARDWARE & INFRASTRUCTURE',
     category: 'SILICON.NODES',
     status: 'ACTIVE',
-    title: 'Angstrom-Era SoC Architecture: The 2nm Transition and Edge AI',
-    description: 'An architectural assessment of sub-3nm node migration, Backside Power Delivery Networks, CFET stacking, and the sovereign imperative for Angstrom-era fabrication.',
+    title: 'Angstrom-Era Semiconductors: 2nm SoC Architecture and Edge AI',
+    description: 'How 2nm SoC architecture, GAA transistors, backside power, High-NA EUV, and CFET affect edge-AI design trade-offs.',
     href: '/intelligence/briefs/angstrom-era-soc-architecture',
   },
   {
@@ -203,8 +203,8 @@ const BRIEFS: BriefData[] = [
     group: 'HARDWARE & INFRASTRUCTURE',
     category: 'SILICON.SUPPLY_CHAIN',
     status: 'ACTIVE',
-    title: 'STM Customer Matrix: Legacy Semiconductor Distribution',
-    description: 'An operational audit of STMicroelectronics\' commercial distribution structure, analyzing revenue concentration across Apple, Automotive Tier-1s, and Aerospace.',
+    title: 'STMicroelectronics Distribution Strategy: Customer and Channel Analysis',
+    description: 'Customer concentration and channel exposure across Apple, automotive Tier-1s, industrial, and aerospace markets.',
     href: '/intelligence/briefs/stm-legacy-distribution',
   },
   {
