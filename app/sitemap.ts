@@ -261,5 +261,41 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'monthly',
       priority: 0.8,
     },
+    {
+      url: `${baseUrl}/intelligence/briefs/tape-storage-nearline-hdd-demand`,
+      lastModified: new Date('2026-07-15'),
+      changeFrequency: 'monthly',
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/intelligence/briefs/advanced-packaging-test-cpo-sockets`,
+      lastModified: new Date('2026-07-15'),
+      changeFrequency: 'monthly',
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/intelligence/briefs/automotive-cloud-virtual-verification`,
+      lastModified: new Date('2026-07-15'),
+      changeFrequency: 'monthly',
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/intelligence/briefs/ntc-thermistors-embedded-power-modules`,
+      lastModified: new Date('2026-07-15'),
+      changeFrequency: 'monthly',
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/intelligence/briefs/china-fa-cable-competitive-landscape`,
+      lastModified: new Date('2026-07-15'),
+      changeFrequency: 'monthly',
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/intelligence/briefs/us-semiconductor-cleanroom-construction`,
+      lastModified: new Date('2026-07-15'),
+      changeFrequency: 'monthly',
+      priority: 0.8,
+    },
   ]
 }

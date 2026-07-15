@@ -231,6 +231,46 @@ const BRIEFS: BriefData[] = [
     description: 'A quantitative and qualitative assessment of Rapidus achieving steady-state High-Volume Manufacturing (HVM) on 2nm GAA/nanosheet architecture by 2030.',
     href: '/intelligence/briefs/rapidus-2nm-yield-probability',
   },
+  {
+    group: 'HARDWARE & INFRASTRUCTURE',
+    category: 'STORAGE.ARCHITECTURE',
+    status: 'PRELIMINARY',
+    title: 'Tape Storage and the Nearline HDD Demand Boundary',
+    description: 'An input-based assessment of tape substitution in deep archive tiers, nearline HDD demand, and the role of AI-era data staging.',
+    href: '/intelligence/briefs/tape-storage-nearline-hdd-demand',
+  },
+  {
+    group: 'HARDWARE & INFRASTRUCTURE',
+    category: 'HARDWARE.TESTING',
+    status: 'PRELIMINARY',
+    title: 'Advanced Packaging Test and CPO Socket Requirements',
+    description: 'An assessment of RDL-interposer screening and the opto-electrical socket requirements created by co-packaged optics.',
+    href: '/intelligence/briefs/advanced-packaging-test-cpo-sockets',
+  },
+  {
+    group: 'HARDWARE & INFRASTRUCTURE',
+    category: 'POWER.PACKAGING',
+    status: 'PRELIMINARY',
+    title: 'NTC Thermistors for Embedded Power Semiconductor Modules',
+    description: 'A technical requirement assessment for NTC thermistors as power modules move toward embedded-die packaging and sintered interconnects.',
+    href: '/intelligence/briefs/ntc-thermistors-embedded-power-modules',
+  },
+  {
+    group: 'HARDWARE & INFRASTRUCTURE',
+    category: 'AUTOMATION.CABLES',
+    status: 'PRELIMINARY',
+    title: 'China FA Cable Competitive Landscape',
+    description: 'A preliminary assessment of high-flex, heat-resistant, and ultra-thin factory-automation cable competition in China.',
+    href: '/intelligence/briefs/china-fa-cable-competitive-landscape',
+  },
+  {
+    group: 'HARDWARE & INFRASTRUCTURE',
+    category: 'SILICON.INFRASTRUCTURE',
+    status: 'PRELIMINARY',
+    title: 'U.S. Semiconductor Cleanroom Construction Market',
+    description: 'An input-based sizing framework for controlled semiconductor environments, support spaces, and adjacent supply-chain facilities.',
+    href: '/intelligence/briefs/us-semiconductor-cleanroom-construction',
+  },
 
   // --- INTELLIGENCE & CYBERNETICS ---
   {
@@ -240,6 +280,14 @@ const BRIEFS: BriefData[] = [
     title: 'Embodied Intelligence',
     description: 'An intelligence brief on the transition to Vision-Language-Action (VLA) models, edge-compute scaling, and the geopolitical moats of localized hardware processing.',
     href: '/intelligence/briefs/physical-ai-deployment',
+  },
+  {
+    group: 'INTELLIGENCE & CYBERNETICS',
+    category: 'AUTOMOTIVE.SOFTWARE',
+    status: 'PRELIMINARY',
+    title: 'Cloud Virtual Verification for Automotive Software',
+    description: 'A market-structure assessment of cloud verification, HIL bottlenecks, CI regression value, and preliminary pricing bands.',
+    href: '/intelligence/briefs/automotive-cloud-virtual-verification',
   },
   {
     group: 'INTELLIGENCE & CYBERNETICS',

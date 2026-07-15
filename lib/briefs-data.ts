@@ -1251,6 +1251,227 @@ export const BRIEFS: Brief[] = [
         ]
       }
     ]
+  },
+  {
+    slug: 'tape-storage-nearline-hdd-demand',
+    title: 'Tape Storage and the Nearline HDD Demand Boundary',
+    kicker: 'CORE.STORAGE.ARCHITECTURE',
+    description: 'An input-based assessment of where modern tape can displace nearline HDD capacity, where random-access disks retain an advantage, and how AI changes the definition of archival data.',
+    status: 'PRELIMINARY',
+    datePublished: '2026-07-15',
+    intro: 'This brief translates supplied storage-market assumptions into a decision framework. Percentage ranges are working estimates from the supplied material, not independently verified market measurements.',
+    sections: [
+      {
+        level: 2,
+        heading: '01. Tape Eligibility Is Defined by Access Pattern, Not by Data Age',
+        paragraphs: [
+          'Long-retention records, compliance archives, and data whose service-level agreements tolerate staged retrieval remain the clearest tape candidates. Tape’s sequential access architecture makes it structurally unsuitable for workloads that require immediate, random retrieval.',
+          'The supplied assessment makes an important refinement for AI: data that may later be used in batch training is not automatically excluded from tape. The relevant question is whether the training workflow can tolerate staging and retrieval delay, rather than whether future reuse is possible.'
+        ]
+      },
+      {
+        level: 2,
+        heading: '02. Working Migration Range',
+        tag: 'INPUT-BASED ESTIMATE',
+        paragraphs: [
+          'The supplied market framing estimates that 60% to 80% of enterprise data becomes cold within roughly 90 to 120 days, and that 75% to 85% of that cold-data pool is technically viable for tape. It also cites roughly 15% tape penetration of stored enterprise capacity.',
+          'These figures imply a large addressable gap between technically tape-suitable cold data and current tape deployment. They should be used as a scenario range for diligence, not as a published market-share baseline without source validation.'
+        ]
+      },
+      {
+        level: 2,
+        heading: '03. Software Expands Tape’s Reach but Does Not Remove Its Physics',
+        paragraphs: [
+          'Tape cannot become a random-access medium. Its competitive expansion instead depends on orchestration layers: S3-compatible object interfaces, NVMe or disk staging tiers, and retrieval scheduling that reads physically adjacent files in a single pass.',
+          'The likely result is a sharper tiering of storage. Tape can take more of the deep archive and batch-oriented tier, while nearline HDDs retain the active archive, cool-data, and random-access workloads that cannot accept sequential-media latency.'
+        ]
+      }
+    ],
+    protocolPatch: {
+      title: 'Decision Frame // Storage Tiering',
+      paragraphs: [
+        'Model tape substitution by workload and retrieval SLA, not by a blanket percentage of cold data. The strategic risk to nearline HDD demand is concentrated in deep-capacity tiers where software can hide tape’s access latency; it is materially lower where active reuse and random retrieval are core requirements.'
+      ]
+    }
+  },
+  {
+    slug: 'advanced-packaging-test-cpo-sockets',
+    title: 'Advanced Packaging Test and CPO Socket Requirements',
+    kicker: 'CORE.HARDWARE.TESTING',
+    description: 'An assessment of pre-assembly RDL-interposer screening for AI packages and the opto-electrical socket requirements created by co-packaged optics.',
+    status: 'PRELIMINARY',
+    datePublished: '2026-07-15',
+    intro: 'This brief distinguishes panel-level interposer screening from system-level test. It synthesizes the supplied comparison of contact-based probing and electron-beam voltage contrast, along with the resulting CPO socket design requirements.',
+    sections: [
+      {
+        level: 2,
+        heading: '01. Known-Good Interposer Screening Is a Package-Economics Requirement',
+        paragraphs: [
+          'For an RDL interposer carrying embedded silicon bridges, a latent defect discovered only after assembly can strand a high-value logic die and multiple HBM stacks. The pre-assembly test objective is therefore known-good interposer screening, not merely visual inspection.',
+          'Step-and-repeat MEMS probing is the practical route for parametric screening. A dense local probe card can identify resistance, leakage, and other marginal electrical defects that a purely non-contact scan may not resolve.'
+        ]
+      },
+      {
+        level: 2,
+        heading: '02. Contact Probing and Electron-Beam Voltage Contrast Solve Different Problems',
+        paragraphs: [
+          'MEMS probing benefits from mature ATE workflows and can compensate for panel distortion through optical alignment. Its trade-offs are probe-pad damage risk, contamination exposure, and the cost of high-density probing hardware.',
+          'Electron-beam voltage contrast offers contactless, high-resolution mapping with strong tolerance for warpage and fine pitch. The supplied assessment identifies throughput and limited parametric visibility as its central limitations. A combined long-term flow of electron-beam screening, high-speed optical inspection, and targeted electrical probing is the most plausible direction as pitch shrinks.'
+        ]
+      },
+      {
+        level: 2,
+        heading: '03. CPO Test Sockets Become Opto-Electrical Micro-Systems',
+        paragraphs: [
+          'As optical channel counts increase and waveguide pitches contract, sockets must manage electrical contact, optical coupling, thermal drift, and repeated insertion without damaging the device under test. Passive alignment alone becomes less sufficient at the tightest tolerances.',
+          'The supplied design path combines expanded-beam optics using micro-lens arrays, six-degree-of-freedom active alignment with optical-power feedback, and kinematic mounting approaches that preserve repeatability. Thermal expansion and contamination control become first-order socket requirements rather than secondary mechanical details.'
+        ]
+      }
+    ]
+  },
+  {
+    slug: 'automotive-cloud-virtual-verification',
+    title: 'Cloud Virtual Verification for Automotive Software',
+    kicker: 'CORE.AUTOMOTIVE.SOFTWARE',
+    description: 'A market-structure assessment of cloud-based virtual verification as a complement to hardware-in-the-loop validation, including value concentration and preliminary willingness-to-pay bands.',
+    status: 'PRELIMINARY',
+    datePublished: '2026-07-15',
+    intro: 'This brief converts the supplied product hypothesis into an adoption and pricing framework. Willingness-to-pay bands are design assumptions, not survey results.',
+    sections: [
+      {
+        level: 2,
+        heading: '01. Virtual Verification Relieves the HIL Scheduling Constraint',
+        paragraphs: [
+          'Physical hardware-in-the-loop rigs remain essential for final hardware validation, but they are capital-intensive, lab-bound, and difficult to schedule across distributed teams. A cloud-based virtual environment is most defensible when it moves earlier verification cycles away from the scarce physical-rig bottleneck.',
+          'The strongest value case is not a claim that virtual testing replaces every HIL workflow. It is the ability to execute software and network verification repeatedly before hardware access becomes necessary.'
+        ]
+      },
+      {
+        level: 2,
+        heading: '02. CI Regression and Integration Testing Carry the Clearest Value',
+        paragraphs: [
+          'The supplied assessment places the highest value in CI regression and unit-to-integration testing, especially where multi-vECU networks and middleware-to-application interactions create defects that are expensive to find late.',
+          'System-level testing and certification preparation remain important adjacent workflows, but their value depends on model fidelity, traceability, and the degree to which the virtual environment maps to the target vehicle architecture.'
+        ]
+      },
+      {
+        level: 2,
+        heading: '03. Preliminary Monetization Bands',
+        tag: 'WORKING PRICING HYPOTHESIS',
+        paragraphs: [
+          'The supplied willingness-to-pay hypothesis centers on $5,001 to $20,000 per developer per year for higher-value infrastructure use. A lighter $1,001 to $5,000 tier could serve application developers using software-in-the-loop environments, while higher-fidelity target simulation, rest-bus capability, and ASPICE or ISO 26262 traceability support justify a premium tier.',
+          'The critical commercial test is whether pricing follows the value of avoiding HIL queue time and late defect discovery, rather than simply matching generic developer-tool budgets.'
+        ]
+      }
+    ]
+  },
+  {
+    slug: 'ntc-thermistors-embedded-power-modules',
+    title: 'NTC Thermistors for Embedded Power Semiconductor Modules',
+    kicker: 'CORE.POWER.PACKAGING',
+    description: 'A technical requirement assessment for NTC thermistors as power modules move toward embedded-die packaging and high-temperature sintered interconnects.',
+    status: 'PRELIMINARY',
+    datePublished: '2026-07-15',
+    intro: 'This brief is based on the supplied packaging requirements. Temperature, pressure, thickness, and packaging ranges should be validated against the target process flow before they are used as component specifications.',
+    sections: [
+      {
+        level: 2,
+        heading: '01. Planarity and Thickness Become System Requirements',
+        paragraphs: [
+          'Embedding a thermistor beside a SiC or GaN die makes it part of a multilayer composite, not a standalone mounted component. The supplied framing notes that die thickness can be far below conventional SMT component thickness, so mismatch can create resin voids, uneven lamination, or local stress concentrations.',
+          'Flat, parallel surfaces and a smaller footprint are therefore central requirements. The target geometry must support placement near the power die for thermal coupling without disrupting substrate routing or mechanical lamination.'
+        ]
+      },
+      {
+        level: 2,
+        heading: '02. Thermal and Mechanical Survivability Move Beyond Standard Reflow',
+        paragraphs: [
+          'Conventional SMT thermistors are typically designed around solder reflow and lower operating-temperature assumptions. The supplied requirement set anticipates sintering processes around 250°C to 300°C, mechanical pressure in the single- to double-digit MPa range, and SiC-module operation approaching 175°C to 200°C.',
+          'These are not incremental qualification changes. They alter the required material stack, mechanical robustness, and process-screening conditions for a thermistor intended to survive embedded power-module assembly.'
+        ]
+      },
+      {
+        level: 2,
+        heading: '03. Electrode Chemistry Is the Critical Interface',
+        paragraphs: [
+          'The supplied assessment identifies metallization as the largest departure from standard SMT design. A tin-based termination that is acceptable in conventional assembly may be incompatible with high-temperature lamination, sintering, and surrounding PCB chemistry.',
+          'The design question is therefore not only how small the NTC can become. It is whether the electrode stack can remain stable, electrically reliable, and process-compatible through the complete embedded-package flow.'
+        ]
+      }
+    ]
+  },
+  {
+    slug: 'china-fa-cable-competitive-landscape',
+    title: 'China FA Cable Competitive Landscape',
+    kicker: 'CORE.INDUSTRIAL.AUTOMATION',
+    description: 'A preliminary assessment of the Chinese factory-automation cable market, focused on high-flex, heat-resistant, and ultra-thin cable requirements for robotics and semiconductor equipment.',
+    status: 'PRELIMINARY',
+    datePublished: '2026-07-15',
+    intro: 'This brief organizes the supplied competitive assessment. Player shares and positioning are working estimates and should not be treated as confirmed market data without primary-source validation.',
+    sections: [
+      {
+        level: 2,
+        heading: '01. Four Procurement Criteria Define the Premium Segment',
+        paragraphs: [
+          'The supplied framework identifies flex and torsion life, miniaturization, environmental resistance, and cost-performance with lead time as the decisive selection criteria. These requirements are particularly acute in robot arms, drag chains, machine-vision systems, and semiconductor equipment.',
+          'The market is not uniform: the specification burden rises sharply when cables must survive repeated motion, high temperatures, oils or chemicals, and dense internal routing without loss of shielding or signal integrity.'
+        ]
+      },
+      {
+        level: 2,
+        heading: '02. Japanese Incumbents Retain Premium Positions',
+        paragraphs: [
+          'The supplied assessment positions Proterial as strong in high-end industrial-robot and semiconductor-equipment applications, where flex life and structural innovation matter more than lowest price. Daiden is framed as strongest where Japanese servo and encoder ecosystems remain embedded, while OKI Electric Cable is associated with high-flex machine-vision and sensor cable applications.',
+          'The common advantage is predictable durability and application-specific performance. The common exposure is pressure from Chinese suppliers with faster local availability and aggressive pricing on standardized specifications.'
+        ]
+      },
+      {
+        level: 2,
+        heading: '03. Market Shares Require Separate Validation',
+        tag: 'INPUT-BASED ESTIMATE',
+        paragraphs: [
+          'The supplied view estimates that domestic Chinese manufacturers command more than 60% of total FA-cable volume, while Proterial may hold roughly 15% to 20% of the premium high-performance segment. These are useful hypotheses for segmentation, but they are not published market-share findings in this brief.',
+          'For product strategy, the more durable conclusion is that premium suppliers should compete on demonstrated flex life, reliability, and application engineering, while local suppliers are likely to dominate where price, lead time, and standardization are decisive.'
+        ]
+      }
+    ]
+  },
+  {
+    slug: 'us-semiconductor-cleanroom-construction',
+    title: 'U.S. Semiconductor Cleanroom Construction Market',
+    kicker: 'CORE.SEMICONDUCTOR.INFRASTRUCTURE',
+    description: 'An input-based sizing framework for the broadly defined U.S. semiconductor-related cleanroom construction market, including controlled support environments and adjacent materials and equipment facilities.',
+    status: 'PRELIMINARY',
+    datePublished: '2026-07-15',
+    intro: 'This brief applies supplied market assumptions to a transparent sizing model. The resulting values are illustrative scenario outputs, not independently verified market estimates.',
+    sections: [
+      {
+        level: 2,
+        heading: '01. Lower-Cleanliness Space Is a Small Share of the Semiconductor Envelope',
+        tag: 'ILLUSTRATIVE SCENARIO',
+        paragraphs: [
+          'The supplied assessment estimates lower-cleanliness, non-HEPA or non-ULPA space at 10% to 20% of the HEPA or ULPA cleanroom envelope, with 15% as a working point estimate. This is materially below a generic cleanroom-market assumption because exposed-wafer operations demand stringent contamination control across most of the primary manufacturing footprint.',
+          'The residual lower-cleanliness area is concentrated in peripheral functions such as gowning, some staging areas, secondary corridors, and selected backend or shipping spaces.'
+        ]
+      },
+      {
+        level: 2,
+        heading: '02. Controlled Support Environments Can Match the Cleanroom Cost',
+        paragraphs: [
+          'The supplied range places associated controlled environments at 85% to 110% of the narrow cleanroom envelope, with 95% as a working point. Sub-fab, interstitial plenum, gas, chemical, and utility interfaces are not incidental building areas; they are core to fab operation and can equal or exceed the cost of the cleanroom itself.',
+          'This is the main reason a narrow cleanroom-only market definition can understate semiconductor construction exposure.'
+        ]
+      },
+      {
+        level: 2,
+        heading: '03. Illustrative Broad-Market Calculation',
+        tag: 'ILLUSTRATIVE SCENARIO',
+        paragraphs: [
+          'Using the supplied $250 million semiconductor HEPA or ULPA starting point, a 15% lower-cleanliness ratio produces a $287.5 million narrow envelope. Applying a 95% controlled-environment ratio adds roughly $273 million, producing an illustrative core market of about $560 million.',
+          'Applying the supplied 15% to 25% uplift for materials and equipment facilities produces an illustrative broader semiconductor-related range of roughly $645 million to $700 million, with about $675 million at a 20% uplift. Each component should be stress-tested against project mix and facility definition before it is used as a market-size claim.'
+        ]
+      }
+    ]
   }
 ]
 
