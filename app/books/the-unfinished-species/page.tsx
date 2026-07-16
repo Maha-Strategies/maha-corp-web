@@ -113,7 +113,10 @@ export default function TheUnfinishedSpeciesHub() {
           <Link href="/books/the-unfinished-species/the-algorithm" className="inline-block bg-white text-black font-mono font-bold text-xs tracking-widest uppercase px-7 py-4 hover:bg-zinc-200 transition-colors">
             Read Chapter 1 ↗
           </Link>
-          <Link href="/books/the-unfinished-species/the-blind-watchmaker-opens-his-eyes" className="inline-block mt-5 sm:mt-0 sm:ml-6 font-mono text-[10px] text-zinc-400 hover:text-white tracking-widest uppercase transition-colors">Read the opening essay ↗</Link>
+          <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:gap-6">
+            <Link href="/books/the-unfinished-species/what-is-natural-selection" className="font-mono text-[10px] text-indigo-300 hover:text-white tracking-widest uppercase transition-colors">What is natural selection? ↗</Link>
+            <Link href="/books/the-unfinished-species/the-blind-watchmaker-opens-his-eyes" className="font-mono text-[10px] text-zinc-400 hover:text-white tracking-widest uppercase transition-colors">Read the opening essay ↗</Link>
+          </div>
         </section>
 
         <section className="mt-20">

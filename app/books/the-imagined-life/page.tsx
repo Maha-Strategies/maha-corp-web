@@ -113,7 +113,10 @@ export default function TheImaginedLifeHub() {
           <Link href="/books/the-imagined-life/what-happens-when-you-sleep" className="inline-block bg-white text-black font-mono font-bold text-xs tracking-widest uppercase px-7 py-4 hover:bg-zinc-200 transition-colors">
             Read Chapter 1 ↗
           </Link>
-          <Link href="/books/the-imagined-life/the-faculty-of-the-possible" className="inline-block mt-5 sm:mt-0 sm:ml-6 font-mono text-[10px] text-zinc-400 hover:text-white tracking-widest uppercase transition-colors">Read the opening essay ↗</Link>
+          <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:gap-6">
+            <Link href="/books/the-imagined-life/sleep-stages-explained" className="font-mono text-[10px] text-indigo-300 hover:text-white tracking-widest uppercase transition-colors">Sleep stages explained ↗</Link>
+            <Link href="/books/the-imagined-life/the-faculty-of-the-possible" className="font-mono text-[10px] text-zinc-400 hover:text-white tracking-widest uppercase transition-colors">Read the opening essay ↗</Link>
+          </div>
         </section>
 
         <section className="mt-20">

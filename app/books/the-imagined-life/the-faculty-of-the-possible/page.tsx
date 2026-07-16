@@ -77,7 +77,10 @@ export default function FacultyOfThePossibleEssay() {
 
         <footer className="mt-16 pt-8 border-t border-zinc-800">
           <p className="font-mono text-[10px] text-zinc-600 tracking-widest uppercase mb-4">[ Continue reading ]</p>
-          <Link href="/books/the-imagined-life" className="text-zinc-300 hover:text-white transition-colors">Return to the book’s table of contents ↗</Link>
+          <div className="flex flex-col gap-3">
+            <Link href="/books/the-imagined-life/sleep-stages-explained" className="text-zinc-300 hover:text-white transition-colors">Sleep stages explained ↗</Link>
+            <Link href="/books/the-imagined-life" className="text-zinc-300 hover:text-white transition-colors">Return to the book’s table of contents ↗</Link>
+          </div>
         </footer>
       </article>
     </main>
