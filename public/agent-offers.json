@@ -1,0 +1,88 @@
+{
+  "schema": "https://www.mahastrategies.com/schemas/agent-offers/v0.1",
+  "version": "0.1.0",
+  "updatedAt": "2026-07-16T00:00:00.000Z",
+  "provider": {
+    "name": "Maha Strategies LLC",
+    "url": "https://www.mahastrategies.com",
+    "contactUrl": "https://www.mahastrategies.com/contact"
+  },
+  "transactionPolicy": {
+    "mode": "inquiry_only",
+    "humanConfirmationRequired": true,
+    "autonomousPaymentSupported": false,
+    "bindingCommitment": "No price, scope, delivery date, or work commitment is binding until Maha Strategies confirms it in writing."
+  },
+  "provenance": {
+    "standard": "MPS/0.1",
+    "specification": "https://www.mahastrategies.com/mps",
+    "registry": "https://mps.mahastrategies.com/v1/records"
+  },
+  "offers": [
+    {
+      "id": "rapid-intelligence-brief",
+      "name": "Rapid Intelligence Brief",
+      "status": "available_for_inquiry",
+      "serviceUrl": "https://www.mahastrategies.com/rapid-intelligence-brief",
+      "price": {
+        "currency": "USD",
+        "type": "starting_at",
+        "amount": 500
+      },
+      "delivery": {
+        "targetBusinessDays": 5,
+        "beginsAfter": "A human confirms fit, scope, sources, deliverable, price, and timing."
+      },
+      "requiredInputs": [
+        "One defined market, technology, or policy question.",
+        "The decision the brief should inform.",
+        "Any deadline, known constraints, and relevant context."
+      ],
+      "deliverables": [
+        "A 2–3 page decision-ready memo.",
+        "Key evidence and links to public or authorized sources used.",
+        "Explicit assumptions, material uncertainty, and decision implications."
+      ],
+      "exclusions": [
+        "Primary interviews, confidential diligence, legal advice, investment advice, and engineering sign-off.",
+        "Open-ended research programs and ongoing monitoring.",
+        "A fully provenance-tagged evidence record."
+      ],
+      "request": {
+        "url": "https://www.mahastrategies.com/contact",
+        "inquiryType": "rapid_intelligence",
+        "responseTargetBusinessDays": 2
+      }
+    },
+    {
+      "id": "verified-research-brief",
+      "name": "Verified Research Brief",
+      "status": "available_for_inquiry",
+      "serviceUrl": "https://www.mahastrategies.com/consulting",
+      "price": {
+        "currency": "USD",
+        "type": "fixed",
+        "amount": 2500
+      },
+      "delivery": {
+        "targetBusinessDays": 10,
+        "beginsAfter": "A human confirms and narrows the scoped question."
+      },
+      "requiredInputs": [
+        "One decision-critical question or assertion to assess.",
+        "The intended decision-maker and decision context.",
+        "Known constraints, required sources, and timing."
+      ],
+      "deliverables": [
+        "A 10–15 page research synthesis for decision-makers.",
+        "An evidence layer with MPS claim-status tags and linked citations.",
+        "One revision round."
+      ],
+      "request": {
+        "url": "https://www.mahastrategies.com/contact",
+        "inquiryType": "verified_research",
+        "responseTargetBusinessDays": 2
+      }
+    }
+  ]
+}

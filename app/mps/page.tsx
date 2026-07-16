@@ -130,6 +130,17 @@ export default function MpsPage() {
           metadata: <span className="mono" style={{ fontSize: 14 }}>provenance-standard: MPS/0.1</span>.
         </p>
 
+        <div className="mono" style={sec}>4A · PUBLIC REGISTRY</div>
+        <p style={body}>
+          The MPS Registry publishes versioned, machine-readable claim records for this standard.
+          Each public record includes its evidence context, review metadata, and a content hash.
+        </p>
+        <p style={{ marginTop: 22 }}>
+          <a href="https://mps.mahastrategies.com/v1/records" target="_blank" rel="noreferrer" className="mono" style={{ fontSize: 12, letterSpacing: "0.1em", background: "#1A2420", color: "#EEF1EC", padding: "12px 22px", textDecoration: "none", borderRadius: 2, display: "inline-block" }}>
+            OPEN THE MPS REGISTRY ↗
+          </a>
+        </p>
+
         <div className="mono" style={sec}>5 · COMPLIANCE LEVELS</div>
         <p style={body}>
           <strong>MPS-Declared</strong> — the document states it follows MPS and tags its claims.<br />

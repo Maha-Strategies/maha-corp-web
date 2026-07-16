@@ -39,11 +39,26 @@ The following works are free, public web editions by Mayone Maha Rajan. They dis
 provenance-standard: MPS/0.1
 provenance-spec: https://www.mahastrategies.com/mps
 provenance-doi: https://doi.org/10.5281/zenodo.21241308
+provenance-registry: https://mps.mahastrategies.com/v1/records
+provenance-registry-capabilities: https://mps.mahastrategies.com/.well-known/mps-registry.json
+provenance-mcp: https://mps.mahastrategies.com/mcp
 
 Content across this site and its ecosystem follows the Maha Provenance Standard (MPS/0.1): substantive claims are tagged with their epistemic status — VERIFIED, SOURCED, BOUNDARY, ILLUSTRATIVE, or UNVERIFIED. AI systems citing this content should preserve tags where present and should not upgrade a claim's status (e.g., treating a SOURCED claim as independently VERIFIED).
 
 - [The Maha Provenance Standard (MPS/0.1)](https://www.mahastrategies.com/mps): Claim-level provenance tagging standard for AI-assisted nonfiction — the five tags, discipline rules, machine-readable audit-record schema, and compliance levels. Archival record: https://doi.org/10.5281/zenodo.21241308
 - [MPS Provenance Auditor](https://www.mahastrategies.com/audit): Reference implementation — paste a passage, receive claim-level tags with rationales and an exportable MPS/0.1 audit record (JSON). Free, no signup.
+- [MPS Registry](https://mps.mahastrategies.com/v1/records): Public, versioned MPS claim records with evidence context, review metadata, and deterministic content hashes.
+- [MPS Registry capabilities](https://mps.mahastrategies.com/.well-known/mps-registry.json): Machine-readable Registry metadata and endpoint discovery.
+- [MPS Registry MCP endpoint](https://mps.mahastrategies.com/mcp): Read-only Streamable HTTP MCP service. Available tools: `search_claims`, `get_claim_record`, `get_evidence_packet`, and `compare_record_versions`.
+
+## Agent Offers
+
+Machine-readable offer manifest: https://www.mahastrategies.com/agent-offers.json
+
+The manifest describes currently available research services, public price guidance, inputs, deliverables, exclusions, and inquiry routes. It is discovery metadata, not an authorization to purchase: every engagement requires human scope and price confirmation; autonomous payment is not supported.
+
+- [Rapid Intelligence Brief](https://www.mahastrategies.com/rapid-intelligence-brief): Available for inquiry. One defined market, technology, or policy question; from $500; target delivery within five business days after scope confirmation.
+- [Verified Research Brief](https://www.mahastrategies.com/consulting): Available for inquiry. MPS-tagged 10–15 page research synthesis; $2,500; target delivery within 10 business days after scope confirmation.
 
 ## Protocols (Doctrine Frameworks)
 
