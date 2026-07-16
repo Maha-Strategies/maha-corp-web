@@ -59,16 +59,16 @@ export default function MapIsNotMindEssay() {
     <main className="min-h-screen bg-[#0a0a0c] text-zinc-300 selection:bg-indigo-500 selection:text-white">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }} />
       <article className="max-w-3xl mx-auto px-6 py-20 sm:py-28">
-        <Link href="/books/the-orbital-mind" className="inline-block font-mono text-[10px] text-indigo-400 hover:text-white tracking-widest uppercase transition-colors mb-12">
+        <Link href="/books/the-orbital-mind" className="inline-block font-mono text-xs text-indigo-300 hover:text-white tracking-widest uppercase transition-colors mb-12">
           ← The Orbital Mind
         </Link>
         <header className="border-b border-zinc-800 pb-10 mb-12">
-          <p className="font-mono text-[10px] text-indigo-400 tracking-widest uppercase mb-5">[ Opening essay ]</p>
+          <p className="font-mono text-xs text-indigo-300 tracking-widest uppercase mb-5">[ Opening essay ]</p>
           <h1 className="text-4xl sm:text-5xl font-light text-white leading-[1.1] tracking-tight mb-6">The map is not the mind</h1>
-          <p className="text-xl text-zinc-400 font-light leading-relaxed">
+          <p className="text-xl text-zinc-300 font-light leading-relaxed">
             A self is a system of relationships, not a set of personality labels.
           </p>
-          <p className="mt-7 font-mono text-[10px] text-zinc-600 tracking-widest uppercase">Mayone Maha Rajan · The Orbital Mind</p>
+          <p className="mt-7 font-mono text-xs text-zinc-500 tracking-widest uppercase">Mayone Maha Rajan · The Orbital Mind</p>
         </header>
 
         <div className="prose prose-invert prose-lg max-w-none prose-p:text-zinc-300 prose-p:leading-[1.85] prose-p:mb-7">
@@ -76,7 +76,7 @@ export default function MapIsNotMindEssay() {
         </div>
 
         <footer className="mt-16 pt-8 border-t border-zinc-800">
-          <p className="font-mono text-[10px] text-zinc-600 tracking-widest uppercase mb-4">[ Continue reading ]</p>
+          <p className="font-mono text-xs text-zinc-500 tracking-widest uppercase mb-4">[ Continue reading ]</p>
           <div className="flex flex-col gap-3">
             <Link href="/books/the-orbital-mind/what-is-executive-function" className="text-zinc-300 hover:text-white transition-colors">What is executive function? ↗</Link>
             <Link href="/books/the-orbital-mind" className="text-zinc-300 hover:text-white transition-colors">Return to the book’s table of contents ↗</Link>

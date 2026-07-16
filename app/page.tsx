@@ -131,7 +131,7 @@ export default function CorporateHomepage() {
           <p className="text-xl sm:text-2xl text-zinc-300 font-light leading-relaxed mb-5">
             We turn complex technology, market, and policy questions into decision-ready research briefs with every claim clearly tagged to its evidence.
           </p>
-          <p className="text-base sm:text-lg text-zinc-500 leading-relaxed max-w-2xl mb-10">
+          <p className="text-base sm:text-lg text-zinc-400 leading-relaxed max-w-2xl mb-10">
             Built for operators, investors, policy teams, and anyone whose work will be challenged, audited, or acted upon. No anonymous synthesis. No citations you cannot trace.
           </p>
 
@@ -150,7 +150,7 @@ export default function CorporateHomepage() {
               See a Tagged Page ↓
             </Link>
           </div>
-          <p className="font-mono text-[10px] text-zinc-500 tracking-widest uppercase">
+          <p className="font-mono text-xs text-zinc-400 tracking-widest uppercase">
             Fixed scope · 10 business days · one revision round · sources linked in the document
           </p>
         </section>
@@ -164,8 +164,8 @@ export default function CorporateHomepage() {
               <Link key={capability.number} href={capability.href} className="group border-t border-zinc-700 pt-5 hover:border-zinc-400 transition-colors">
                 <p className="font-mono text-[10px] text-zinc-600 tracking-widest mb-3">{capability.number}</p>
                 <h2 className="text-white text-lg mb-3 group-hover:text-indigo-300 transition-colors">{capability.title}</h2>
-                <p className="text-sm text-zinc-500 leading-relaxed">{capability.copy}</p>
-                <span className="inline-block mt-4 font-mono text-[10px] text-zinc-600 group-hover:text-white tracking-widest uppercase">Explore this brief ↗</span>
+                <p className="text-sm text-zinc-400 leading-relaxed">{capability.copy}</p>
+                <span className="inline-block mt-4 font-mono text-xs text-zinc-400 group-hover:text-white tracking-widest uppercase">Explore this brief ↗</span>
               </Link>
             ))}
           </div>
@@ -200,19 +200,22 @@ export default function CorporateHomepage() {
           <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-8">
             <div>
               <p className="font-mono text-[10px] text-indigo-400 tracking-widest uppercase mb-3">[ Published work ]</p>
-              <h2 className="text-2xl sm:text-3xl font-light text-white">See the depth before you engage.</h2>
+              <h2 className="text-2xl sm:text-3xl font-light text-white">Books, essays, and public analysis.</h2>
             </div>
-            <Link href="/intelligence" className="font-mono text-[10px] text-zinc-500 hover:text-white tracking-widest uppercase transition-colors">
-              View market intelligence ↗
-            </Link>
+            <div className="flex flex-wrap gap-x-6 gap-y-3 font-mono text-xs tracking-widest uppercase">
+              <Link href="/books" className="text-indigo-300 hover:text-white transition-colors">View all books ↗</Link>
+              <Link href="/intelligence" className="text-zinc-400 hover:text-white transition-colors">View market intelligence ↗</Link>
+            </div>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
             {work.map((item) => (
               <Link key={item.title} href={item.href} className="group border border-zinc-800 p-6 hover:border-zinc-500 hover:bg-zinc-900/30 transition-colors">
                 <p className="font-mono text-[10px] text-indigo-400 tracking-widest uppercase mb-4">{item.category}</p>
                 <h3 className="text-lg text-zinc-100 group-hover:text-white mb-3">{item.title}</h3>
-                <p className="text-sm text-zinc-500 leading-relaxed">{item.copy}</p>
-                <span className="inline-block mt-5 font-mono text-[10px] text-zinc-500 group-hover:text-white tracking-widest uppercase">Read analysis ↗</span>
+                <p className="text-sm text-zinc-400 leading-relaxed">{item.copy}</p>
+                <span className="inline-block mt-5 font-mono text-xs text-zinc-400 group-hover:text-white tracking-widest uppercase">
+                  {item.category === 'OPEN EDITION' ? 'Explore book ↗' : 'Read analysis ↗'}
+                </span>
               </Link>
             ))}
           </div>
@@ -222,18 +225,18 @@ export default function CorporateHomepage() {
           <div>
             <p className="font-mono text-[10px] text-indigo-400 tracking-widest uppercase mb-3">[ Independent research ]</p>
             <h2 className="text-xl text-white mb-3">Systemic sovereignty</h2>
-            <p className="text-sm text-zinc-500 leading-relaxed mb-4">
+            <p className="text-sm text-zinc-400 leading-relaxed mb-4">
               Maha Strategies also publishes independent work on semiconductor resilience, edge AI, human autonomy, and the systems that connect them.
             </p>
-            <Link href="/research" className="font-mono text-[10px] text-zinc-400 hover:text-white tracking-widest uppercase transition-colors">Browse research ↗</Link>
+            <Link href="/research" className="font-mono text-xs text-zinc-400 hover:text-white tracking-widest uppercase transition-colors">Browse research ↗</Link>
           </div>
           <div>
             <p className="font-mono text-[10px] text-indigo-400 tracking-widest uppercase mb-3">[ The Maha Principle ]</p>
             <h2 className="text-xl text-white mb-3">The architecture of human flourishing</h2>
-            <p className="text-sm text-zinc-500 leading-relaxed mb-4">
+            <p className="text-sm text-zinc-400 leading-relaxed mb-4">
               Our book examines the biological, cognitive, and relational foundations of independence in an extractive world.
             </p>
-            <a href="https://www.themahaprinciple.com" target="_blank" rel="noopener noreferrer" className="font-mono text-[10px] text-zinc-400 hover:text-white tracking-widest uppercase transition-colors">Read the book brief ↗</a>
+            <a href="https://www.themahaprinciple.com" target="_blank" rel="noopener noreferrer" className="font-mono text-xs text-zinc-400 hover:text-white tracking-widest uppercase transition-colors">Read the book brief ↗</a>
           </div>
         </section>
 

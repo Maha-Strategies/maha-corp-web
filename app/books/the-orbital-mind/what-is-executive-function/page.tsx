@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import type { Metadata } from 'next'
+import ArticleTableOfContents from '@/components/ArticleTableOfContents'
 
 const SITE_URL = 'https://www.mahastrategies.com'
 const URL = `${SITE_URL}/books/the-orbital-mind/what-is-executive-function`
@@ -82,20 +83,21 @@ export default function WhatIsExecutiveFunctionPage() {
     <main className="min-h-screen bg-[#0a0a0c] text-zinc-300 selection:bg-indigo-500 selection:text-white">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }} />
       <article className="max-w-3xl mx-auto px-6 py-20 sm:py-28">
-        <Link href="/books/the-orbital-mind" className="inline-block font-mono text-[10px] text-indigo-400 hover:text-white tracking-widest uppercase transition-colors mb-12">
+        <Link href="/books/the-orbital-mind" className="inline-block font-mono text-xs text-indigo-300 hover:text-white tracking-widest uppercase transition-colors mb-12">
           ← The Orbital Mind
         </Link>
 
         <header className="border-b border-zinc-800 pb-10 mb-12">
-          <p className="font-mono text-[10px] text-indigo-400 tracking-widest uppercase mb-5">[ Plain-English psychology guide ]</p>
+          <p className="font-mono text-xs text-indigo-300 tracking-widest uppercase mb-5">[ Plain-English psychology guide ]</p>
           <h1 className="text-4xl sm:text-5xl font-light text-white leading-[1.1] tracking-tight mb-6">What is executive function?</h1>
-          <p className="text-xl text-zinc-400 font-light leading-relaxed">
+          <p className="text-xl text-zinc-300 font-light leading-relaxed">
             Executive function is the family of cognitive skills that helps us hold information in mind, resist an unhelpful impulse, shift when circumstances change, and keep a goal in view. It is not a personality type, a moral score, or a diagnosis.
           </p>
-          <p className="mt-7 font-mono text-[10px] text-zinc-600 tracking-widest uppercase">Mayone Maha Rajan · The Orbital Mind</p>
+          <p className="mt-7 font-mono text-xs text-zinc-500 tracking-widest uppercase">Mayone Maha Rajan · The Orbital Mind</p>
         </header>
 
-        <div className="prose prose-invert prose-lg max-w-none prose-p:text-zinc-300 prose-p:leading-[1.85] prose-p:mb-7 prose-strong:text-white prose-a:text-indigo-300 prose-a:no-underline hover:prose-a:text-white prose-li:text-zinc-300 prose-li:leading-relaxed">
+        <ArticleTableOfContents contentId="article-content" />
+        <div id="article-content" data-article-content className="prose prose-invert prose-lg max-w-none prose-p:text-zinc-300 prose-p:leading-[1.85] prose-p:mb-7 prose-strong:text-white prose-a:text-indigo-300 prose-a:no-underline hover:prose-a:text-white prose-li:text-zinc-300 prose-li:leading-relaxed">
           <h2>Short answer</h2>
           <p>
             Executive function is an umbrella term for the control processes we use when a response is not automatic: keeping a rule in mind, pausing before acting, ignoring interference, switching strategies, and organizing steps toward a goal. Research commonly identifies three core components—working memory, inhibitory control, and cognitive flexibility—while also recognizing that they are related without being one single ability. <a href={sources[0].href}>[1]</a> <a href={sources[1].href}>[2]</a>
@@ -171,7 +173,7 @@ export default function WhatIsExecutiveFunctionPage() {
         </div>
 
         <section className="mt-16 pt-8 border-t border-zinc-800">
-          <p className="font-mono text-[10px] text-indigo-400 tracking-widest uppercase mb-5">[ Sources ]</p>
+          <p className="font-mono text-xs text-indigo-300 tracking-widest uppercase mb-5">[ Sources ]</p>
           <ol className="space-y-5">
             {sources.map((source, index) => (
               <li key={source.href} className="grid grid-cols-[1.5rem_1fr] gap-4 text-sm leading-relaxed">
@@ -187,7 +189,7 @@ export default function WhatIsExecutiveFunctionPage() {
         </section>
 
         <footer className="mt-16 pt-8 border-t border-zinc-800">
-          <p className="font-mono text-[10px] text-zinc-600 tracking-widest uppercase mb-4">[ Continue reading ]</p>
+          <p className="font-mono text-xs text-zinc-500 tracking-widest uppercase mb-4">[ Continue reading ]</p>
           <div className="flex flex-col gap-3">
             <Link href="/books/the-orbital-mind/the-governing-center" className="text-zinc-300 hover:text-white transition-colors">Read Chapter 1: The Governing Center ↗</Link>
             <Link href="/books/the-orbital-mind" className="text-zinc-300 hover:text-white transition-colors">Return to The Orbital Mind ↗</Link>

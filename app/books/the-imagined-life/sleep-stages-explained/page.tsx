@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import type { Metadata } from 'next'
+import ArticleTableOfContents from '@/components/ArticleTableOfContents'
 
 const SITE_URL = 'https://www.mahastrategies.com'
 const URL = `${SITE_URL}/books/the-imagined-life/sleep-stages-explained`
@@ -88,20 +89,21 @@ export default function SleepStagesExplainedPage() {
     <main className="min-h-screen bg-[#0a0a0c] text-zinc-300 selection:bg-indigo-500 selection:text-white">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }} />
       <article className="max-w-3xl mx-auto px-6 py-20 sm:py-28">
-        <Link href="/books/the-imagined-life" className="inline-block font-mono text-[10px] text-indigo-400 hover:text-white tracking-widest uppercase transition-colors mb-12">
+        <Link href="/books/the-imagined-life" className="inline-block font-mono text-xs text-indigo-300 hover:text-white tracking-widest uppercase transition-colors mb-12">
           ← The Imagined Life
         </Link>
 
         <header className="border-b border-zinc-800 pb-10 mb-12">
-          <p className="font-mono text-[10px] text-indigo-400 tracking-widest uppercase mb-5">[ Plain-English sleep guide ]</p>
+          <p className="font-mono text-xs text-indigo-300 tracking-widest uppercase mb-5">[ Plain-English sleep guide ]</p>
           <h1 className="text-4xl sm:text-5xl font-light text-white leading-[1.1] tracking-tight mb-6">Sleep stages explained: REM and non-REM sleep</h1>
-          <p className="text-xl text-zinc-400 font-light leading-relaxed">
+          <p className="text-xl text-zinc-300 font-light leading-relaxed">
             Sleep is not one uniform state. Across the night, the brain and body move repeatedly through non-REM and REM sleep, each identified by characteristic patterns in sleep studies. The stages are measurable; the full purpose of dreaming is still an open scientific question.
           </p>
-          <p className="mt-7 font-mono text-[10px] text-zinc-600 tracking-widest uppercase">Mayone Maha Rajan · The Imagined Life</p>
+          <p className="mt-7 font-mono text-xs text-zinc-500 tracking-widest uppercase">Mayone Maha Rajan · The Imagined Life</p>
         </header>
 
-        <div className="prose prose-invert prose-lg max-w-none prose-p:text-zinc-300 prose-p:leading-[1.85] prose-p:mb-7 prose-strong:text-white prose-a:text-indigo-300 prose-a:no-underline hover:prose-a:text-white prose-li:text-zinc-300 prose-li:leading-relaxed">
+        <ArticleTableOfContents contentId="article-content" />
+        <div id="article-content" data-article-content className="prose prose-invert prose-lg max-w-none prose-p:text-zinc-300 prose-p:leading-[1.85] prose-p:mb-7 prose-strong:text-white prose-a:text-indigo-300 prose-a:no-underline hover:prose-a:text-white prose-li:text-zinc-300 prose-li:leading-relaxed">
           <h2>Short answer</h2>
           <p>
             A typical night alternates between two broad phases: non-rapid eye movement (non-REM) sleep and rapid eye movement (REM) sleep. Non-REM has three stages, N1 through N3. The pattern repeats through the night in cycles that commonly last about 80 to 100 minutes, though the exact timing and amount of each stage vary by person, age, night, and circumstance. <a href={sources[0].href}>[1]</a>
@@ -177,7 +179,7 @@ export default function SleepStagesExplainedPage() {
         </div>
 
         <section className="mt-16 pt-8 border-t border-zinc-800">
-          <p className="font-mono text-[10px] text-indigo-400 tracking-widest uppercase mb-5">[ Sources ]</p>
+          <p className="font-mono text-xs text-indigo-300 tracking-widest uppercase mb-5">[ Sources ]</p>
           <ol className="space-y-5">
             {sources.map((source, index) => (
               <li key={source.href} className="grid grid-cols-[1.5rem_1fr] gap-4 text-sm leading-relaxed">
@@ -193,7 +195,7 @@ export default function SleepStagesExplainedPage() {
         </section>
 
         <footer className="mt-16 pt-8 border-t border-zinc-800">
-          <p className="font-mono text-[10px] text-zinc-600 tracking-widest uppercase mb-4">[ Continue reading ]</p>
+          <p className="font-mono text-xs text-zinc-500 tracking-widest uppercase mb-4">[ Continue reading ]</p>
           <div className="flex flex-col gap-3">
             <Link href="/books/the-imagined-life/what-happens-when-you-sleep" className="text-zinc-300 hover:text-white transition-colors">Read Chapter 1: What Happens When You Sleep ↗</Link>
             <Link href="/books/the-imagined-life" className="text-zinc-300 hover:text-white transition-colors">Return to The Imagined Life ↗</Link>

@@ -2,6 +2,7 @@ import { readFile } from 'node:fs/promises'
 import path from 'node:path'
 import Link from 'next/link'
 import type { ReactNode } from 'react'
+import ArticleTableOfContents from '@/components/ArticleTableOfContents'
 
 type MarkdownChapterProps = {
   bookId: string
@@ -79,19 +80,20 @@ export default async function MarkdownChapter({
     <main className="min-h-screen bg-[#0a0a0c] text-zinc-300 selection:bg-indigo-500 selection:text-white">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }} />
       <article className="max-w-3xl mx-auto px-6 py-20 sm:py-28">
-        <Link href={bookHref} className="inline-block font-mono text-[10px] text-indigo-400 hover:text-white tracking-widest uppercase transition-colors mb-12">
+        <Link href={bookHref} className="inline-block font-mono text-xs text-indigo-300 hover:text-white tracking-widest uppercase transition-colors mb-12">
           ← {bookTitle}
         </Link>
         <header className="border-b border-zinc-800 pb-10 mb-12">
-          <p className="font-mono text-[10px] text-indigo-400 tracking-widest uppercase mb-5">[ Open edition · Chapter 1 ]</p>
-          <p className="text-lg text-zinc-400 font-light leading-relaxed">{chapterDescription}</p>
+          <p className="font-mono text-xs text-indigo-300 tracking-widest uppercase mb-5">[ Open edition · Chapter 1 ]</p>
+          <p className="text-lg text-zinc-300 font-light leading-relaxed">{chapterDescription}</p>
         </header>
-        <div className="prose prose-invert prose-lg max-w-none prose-p:text-zinc-300 prose-p:leading-[1.85] prose-p:mb-7 prose-strong:text-white prose-em:text-zinc-400">
+        <ArticleTableOfContents contentId="article-content" />
+        <div id="article-content" data-article-content className="prose prose-invert prose-lg max-w-none prose-p:text-zinc-300 prose-p:leading-[1.85] prose-p:mb-7 prose-strong:text-white prose-em:text-zinc-300">
           {renderMarkdown(markdown)}
         </div>
         <footer className="mt-16 pt-8 border-t border-zinc-800">
-          <p className="font-mono text-[10px] text-zinc-600 tracking-widest uppercase mb-4">[ Continue reading ]</p>
-          <Link href={bookHref} className="text-zinc-300 hover:text-white transition-colors">Return to the book’s table of contents ↗</Link>
+          <p className="font-mono text-xs text-zinc-500 tracking-widest uppercase mb-4">[ Continue reading ]</p>
+          <Link href={bookHref} className="text-sm text-zinc-300 hover:text-white transition-colors">Return to the book’s table of contents ↗</Link>
         </footer>
       </article>
     </main>

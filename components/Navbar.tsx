@@ -6,7 +6,7 @@ import Link from 'next/link';
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
 
-  const toggleMenu = () => setIsOpen(!isOpen);
+  const toggleMenu = () => setIsOpen((open) => !open);
 
   // Prevent scrolling when the mobile menu is open
   useEffect(() => {
@@ -20,19 +20,25 @@ export default function Navbar() {
     };
   }, [isOpen]);
 
+  useEffect(() => {
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') setIsOpen(false);
+    };
+
+    window.addEventListener('keydown', closeOnEscape);
+    return () => window.removeEventListener('keydown', closeOnEscape);
+  }, []);
+
   const primaryLinks = [
     { name: 'Consulting', href: '/consulting' },
     { name: 'Intelligence', href: '/intelligence' },
+    { name: 'Books', href: '/books' },
     { name: 'Method', href: '/method' },
     { name: 'Auditor', href: '/audit' },
     { name: 'Contact', href: '/contact' },
   ];
 
   const exploreLinks = [
-    { name: 'The Orbital Mind', href: '/books/the-orbital-mind' },
-    { name: 'The Synthetic Self', href: '/books/the-synthetic-self' },
-    { name: 'The Unfinished Species', href: '/books/the-unfinished-species' },
-    { name: 'The Imagined Life', href: '/books/the-imagined-life' },
     { name: 'MPS Standard', href: '/mps' },
     { name: 'Research', href: '/research' },
     { name: 'Policy', href: '/policy' },
@@ -58,7 +64,7 @@ export default function Navbar() {
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden xl:flex items-center gap-6 text-[10px] text-gray-400 font-mono tracking-widest uppercase">
+          <div className="hidden xl:flex items-center gap-5 text-xs text-zinc-300 font-mono tracking-widest uppercase">
             {primaryLinks.map((link) => (
               <Link key={link.name} href={link.href} className="hover:text-white transition-colors">
                 {link.name}
@@ -68,11 +74,11 @@ export default function Navbar() {
               <summary className="list-none cursor-pointer hover:text-white transition-colors">Explore +</summary>
               <div className="absolute right-0 top-6 w-52 border border-zinc-800 bg-[#0a0a0c] p-3 shadow-2xl">
                 {exploreLinks.map((link) => (
-                  <Link key={link.name} href={link.href} className="block px-3 py-2 text-zinc-400 hover:text-white hover:bg-zinc-900 transition-colors">
+                  <Link key={link.name} href={link.href} className="block px-3 py-2 text-zinc-300 hover:text-white hover:bg-zinc-900 transition-colors">
                     {link.name}
                   </Link>
                 ))}
-                <a href="https://publish.mahastrategies.com" target="_blank" rel="noopener noreferrer" className="block px-3 py-2 text-zinc-500 hover:text-white hover:bg-zinc-900 transition-colors">
+                <a href="https://publish.mahastrategies.com" target="_blank" rel="noopener noreferrer" className="block px-3 py-2 text-zinc-400 hover:text-white hover:bg-zinc-900 transition-colors">
                   Publishing Node ↗
                 </a>
               </div>
@@ -81,8 +87,12 @@ export default function Navbar() {
 
           {/* Mobile Navigation Toggle */}
           <button 
+            type="button"
             onClick={toggleMenu}
-            className="xl:hidden font-mono text-[10px] uppercase tracking-widest text-zinc-400 hover:text-white transition-colors z-50 focus:outline-none"
+            aria-expanded={isOpen}
+            aria-controls="mobile-navigation"
+            aria-label={isOpen ? 'Close navigation menu' : 'Open navigation menu'}
+            className="xl:hidden font-mono text-xs uppercase tracking-widest text-zinc-300 hover:text-white transition-colors z-50"
           >
             {isOpen ? '[ CLOSE ]' : '[ MENU ]'}
           </button>
@@ -91,8 +101,8 @@ export default function Navbar() {
 
       {/* Mobile Full-Screen Overlay */}
       {isOpen && (
-        <div className="fixed inset-0 z-40 bg-[#0a0a0c] pt-24 px-6 xl:hidden flex flex-col h-[100dvh] overflow-y-auto">
-          <div className="flex flex-col gap-6 text-sm text-zinc-400 font-mono tracking-widest uppercase mt-8">
+        <div id="mobile-navigation" role="dialog" aria-modal="true" aria-label="Primary navigation" className="fixed inset-0 z-40 bg-[#0a0a0c] pt-24 px-6 xl:hidden flex flex-col h-[100dvh] overflow-y-auto">
+          <div className="flex flex-col gap-6 text-sm text-zinc-300 font-mono tracking-widest uppercase mt-8">
             {primaryLinks.map((link) => (
               <Link
                 key={link.name}
@@ -103,7 +113,7 @@ export default function Navbar() {
                 {link.name}
               </Link>
             ))}
-            <p className="pt-4 font-mono text-[10px] text-zinc-600 uppercase tracking-widest">Explore</p>
+            <p className="pt-4 font-mono text-xs text-zinc-500 uppercase tracking-widest">Explore</p>
             {exploreLinks.map((link) => (
               <Link 
                 key={link.name} 
@@ -119,7 +129,7 @@ export default function Navbar() {
               target="_blank" 
               rel="noopener noreferrer" 
               onClick={toggleMenu}
-              className="hover:text-white transition-colors text-zinc-500 border-b border-zinc-900 pb-4 flex justify-between items-center"
+              className="hover:text-white transition-colors text-zinc-400 border-b border-zinc-900 pb-4 flex justify-between items-center"
             >
               <span>Publishing Node</span>
               <span>↗</span>
