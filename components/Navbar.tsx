@@ -44,6 +44,7 @@ export default function Navbar() {
     { name: 'Policy', href: '/policy' },
     { name: 'Doctrine', href: '/doctrine' },
     { name: 'Protocols', href: '/protocols' },
+    { name: 'Overclock Game', href: '/overclock' },
     { name: 'Maha OS', href: '/software' },
     { name: 'Cognitive Gateway', href: '/research/mcp' },
     { name: 'Personal Protocols', href: '/start' },

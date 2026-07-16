@@ -75,7 +75,7 @@ export default function OverclockedBrief() {
             </div>
 
             <p>
-              The human brain is a biological processor with a specific design frequency. It evolved to handle low-frequency inputs: the movement of weather, the pace of conversation, the sustained engagement of reading. The algorithmic feed is a high-frequency input stream. It delivers thousands of context switches per hour — headlines, images, emotional triggers, notifications — at a rate that the brain's architecture was never designed to process.
+              The human brain is a biological processor with a specific design frequency. It evolved to handle low-frequency inputs: the movement of weather, the pace of conversation, the sustained engagement of reading. The algorithmic feed is a high-frequency input stream. It delivers thousands of context switches per hour — headlines, images, emotional triggers, notifications — at a rate that the brain&apos;s architecture was never designed to process.
             </p>
             
             <p className="font-bold text-white text-xl font-sans uppercase tracking-widest border-l-2 border-indigo-500 pl-4 my-8 not-prose">
@@ -94,7 +94,7 @@ export default function OverclockedBrief() {
               In biological terms, the equivalent of overclocking is chronic Sympathetic Nervous System activation — the sustained fight-or-flight state that the constant novelty and threat-detection of the algorithmic feed is designed to trigger. 
             </p>
             <p>
-              The clinical term for what happens when this state persists without adequate recovery is <strong className="text-white">Allostatic Overload</strong>: the cumulative physiological wear on biological systems subjected to unrelenting stress hormones. The thermal metaphor maps precisely onto the biology. Anxiety is Sympathetic Hyperarousal. Brain fog is the brain's protective downregulation under Allostatic Overload — not a failure, but a circuit breaker.
+              The clinical term for what happens when this state persists without adequate recovery is <strong className="text-white">Allostatic Overload</strong>: the cumulative physiological wear on biological systems subjected to unrelenting stress hormones. The thermal metaphor maps precisely onto the biology. Anxiety is Sympathetic Hyperarousal. Brain fog is the brain&apos;s protective downregulation under Allostatic Overload — not a failure, but a circuit breaker.
             </p>
             <p>
               Brain fog is thermal throttling. When you find yourself unable to hold a thought after extended screen time, your biology has not failed you. It has protected you. Your system detected a critical load and reduced performance to prevent permanent damage.
@@ -123,6 +123,16 @@ export default function OverclockedBrief() {
                 </p>
                 <Link href="/doctrine" className="block text-center border border-gray-600 bg-gray-900 text-white font-mono text-[10px] tracking-widest py-3 hover:bg-white hover:text-black transition-colors uppercase">
                   Initialize Vault ↗
+                </Link>
+              </div>
+
+              <div className="p-6 border border-orange-900/50 bg-orange-950/10">
+                <h3 className="font-sans text-sm font-bold text-orange-300 uppercase tracking-widest mb-2">Overclock: Interactive Prototype</h3>
+                <p className="font-serif text-xs text-gray-400 mb-4">
+                  Play the risk-and-trust system behind this brief: five rounds, escalating stakes, and an oracle whose accuracy can degrade.
+                </p>
+                <Link href="/overclock" className="block text-center border border-orange-400 text-orange-200 font-mono text-[10px] tracking-widest py-3 hover:bg-orange-400 hover:text-black transition-colors uppercase">
+                  Run the prototype ↗
                 </Link>
               </div>
 

@@ -75,6 +75,12 @@ const work = [
     href: '/books/the-imagined-life',
   },
   {
+    category: 'INTERACTIVE PROTOTYPE',
+    title: 'Overclock',
+    copy: 'A five-round risk game about escalating stakes, imperfect information, and knowing when to bank a decision.',
+    href: '/overclock',
+  },
+  {
     category: 'SEMICONDUCTOR STRATEGY',
     title: 'U.S. Foundry Sovereignization',
     copy: 'A public analysis of the commercial and geopolitical friction around Intel IDM 2.0 and domestic advanced-node capacity.',
@@ -214,7 +220,7 @@ export default function CorporateHomepage() {
                 <h3 className="text-lg text-zinc-100 group-hover:text-white mb-3">{item.title}</h3>
                 <p className="text-sm text-zinc-400 leading-relaxed">{item.copy}</p>
                 <span className="inline-block mt-5 font-mono text-xs text-zinc-400 group-hover:text-white tracking-widest uppercase">
-                  {item.category === 'OPEN EDITION' ? 'Explore book ↗' : 'Read analysis ↗'}
+                  {item.category === 'OPEN EDITION' ? 'Explore book ↗' : item.category === 'INTERACTIVE PROTOTYPE' ? 'Play prototype ↗' : 'Read analysis ↗'}
                 </span>
               </Link>
             ))}
