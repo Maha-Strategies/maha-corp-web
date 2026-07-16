@@ -29,6 +29,7 @@ export default function Navbar() {
   ];
 
   const exploreLinks = [
+    { name: 'The Orbital Mind', href: '/books/the-orbital-mind' },
     { name: 'The Synthetic Self', href: '/books/the-synthetic-self' },
     { name: 'The Unfinished Species', href: '/books/the-unfinished-species' },
     { name: 'The Imagined Life', href: '/books/the-imagined-life' },

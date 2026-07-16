@@ -52,9 +52,15 @@ const capabilities = [
 const work = [
   {
     category: 'OPEN EDITION',
-    title: 'The Imagined Life',
-    copy: 'A book about dreaming, imagination, and the work of turning a possible future into an actual one.',
-    href: '/books/the-imagined-life',
+    title: 'The Orbital Mind',
+    copy: 'A systems psychology of attention, desire, agency, limit, imagination, and integration.',
+    href: '/books/the-orbital-mind',
+  },
+  {
+    category: 'OPEN EDITION',
+    title: 'The Synthetic Self',
+    copy: 'A book about language models, human judgment, and the record we are teaching machines to reflect.',
+    href: '/books/the-synthetic-self',
   },
   {
     category: 'OPEN EDITION',
@@ -64,9 +70,9 @@ const work = [
   },
   {
     category: 'OPEN EDITION',
-    title: 'The Synthetic Self',
-    copy: 'A book about language models, human judgment, and the record we are teaching machines to reflect.',
-    href: '/books/the-synthetic-self',
+    title: 'The Imagined Life',
+    copy: 'A book about dreaming, imagination, and the work of turning a possible future into an actual one.',
+    href: '/books/the-imagined-life',
   },
   {
     category: 'SEMICONDUCTOR STRATEGY',
