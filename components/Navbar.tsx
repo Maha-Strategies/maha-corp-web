@@ -29,6 +29,7 @@ export default function Navbar() {
   ];
 
   const exploreLinks = [
+    { name: 'The Synthetic Self', href: '/books/the-synthetic-self' },
     { name: 'MPS Standard', href: '/mps' },
     { name: 'Research', href: '/research' },
     { name: 'Policy', href: '/policy' },

@@ -51,6 +51,12 @@ const capabilities = [
 
 const work = [
   {
+    category: 'OPEN EDITION',
+    title: 'The Synthetic Self',
+    copy: 'A book about language models, human judgment, and the record we are teaching machines to reflect.',
+    href: '/books/the-synthetic-self',
+  },
+  {
     category: 'SEMICONDUCTOR STRATEGY',
     title: 'U.S. Foundry Sovereignization',
     copy: 'A public analysis of the commercial and geopolitical friction around Intel IDM 2.0 and domestic advanced-node capacity.',

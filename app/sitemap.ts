@@ -19,6 +19,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${baseUrl}/contact`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.8 },
     { url: `${baseUrl}/audit`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.8 }, // ADDED CORE NODE
     { url: `${baseUrl}/mps`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.8 },   // ADDED CORE NODE
+    { url: `${baseUrl}/books/the-synthetic-self`, lastModified: new Date('2026-07-16'), changeFrequency: 'weekly', priority: 0.8 },
+    { url: `${baseUrl}/books/the-synthetic-self/ai-is-a-mirror`, lastModified: new Date('2026-07-16'), changeFrequency: 'monthly', priority: 0.7 },
 
     // POLICY DIRECTIVES (Five Platform Seeds)
     { url: `${baseUrl}/policy/nutrient-density-standard`, lastModified: new Date('2026-06-02'), changeFrequency: 'monthly', priority: 0.7 },
