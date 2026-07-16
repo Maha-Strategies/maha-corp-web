@@ -52,6 +52,12 @@ const capabilities = [
 const work = [
   {
     category: 'OPEN EDITION',
+    title: 'The Imagined Life',
+    copy: 'A book about dreaming, imagination, and the work of turning a possible future into an actual one.',
+    href: '/books/the-imagined-life',
+  },
+  {
+    category: 'OPEN EDITION',
     title: 'The Unfinished Species',
     copy: 'A book about evolution, self-design, and the conditions intelligence creates for its own development.',
     href: '/books/the-unfinished-species',

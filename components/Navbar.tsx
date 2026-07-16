@@ -31,6 +31,7 @@ export default function Navbar() {
   const exploreLinks = [
     { name: 'The Synthetic Self', href: '/books/the-synthetic-self' },
     { name: 'The Unfinished Species', href: '/books/the-unfinished-species' },
+    { name: 'The Imagined Life', href: '/books/the-imagined-life' },
     { name: 'MPS Standard', href: '/mps' },
     { name: 'Research', href: '/research' },
     { name: 'Policy', href: '/policy' },
