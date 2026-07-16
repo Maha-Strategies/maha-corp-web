@@ -102,6 +102,7 @@ export default function ContactPage() {
                 >
                   <option value="rapid_intelligence">Rapid Intelligence Brief — from $500 / five business days</option>
                   <option value="verified_research">Verified Research Brief — $2,500 / 10 business days</option>
+                  <option value="mps_evidence_audit">MPS Evidence Audit — manuscript or high-stakes document review</option>
                   <option value="mps_audit">Manuscript Audit / MPS Inquiry</option>
                   <option value="token_request">Cognitive Gateway Access Token Request</option>
                   <option value="support">Technical Support / Troubleshooting</option>

@@ -240,19 +240,19 @@ export default function AuditPage() {
 
             <div style={{ marginTop: 30, background: "#1A2420", color: "#EEF1EC", borderRadius: 3, padding: "22px 24px", maxWidth: 640 }}>
               <div className="mono" style={{ fontSize: 11, letterSpacing: "0.16em", color: "#9AA49D", marginBottom: 10 }}>
-                FULL MANUSCRIPT AUDITS
+                GO BEYOND THE DEMO
               </div>
               <p style={{ fontSize: 16.5, lineHeight: 1.6, margin: "0 0 16px" }}>
-                Publishing AI-assisted content at scale? We audit complete manuscripts against
-                MPS/0.1 — every claim resolved source-by-source, delivered as a structured
-                audit record.
+                Run a private MPS Preflight on an extract of up to about 2,000 words, then receive a
+                structured claim map and verification backlog. For complete manuscripts or source-by-source
+                resolution, request a human Evidence Audit.
               </p>
-              <a href="/contact" className="mono"
+              <a href="/mps/preflight" className="mono"
                 style={{ display: "inline-block", background: "#EEF1EC", color: "#1A2420", padding: "10px 18px", fontSize: 12, letterSpacing: "0.1em", textDecoration: "none", borderRadius: 2 }}>
-                REQUEST AN AUDIT →
+                RUN MPS PREFLIGHT — $49 →
               </a>
               <span className="mono" style={{ marginLeft: 14, fontSize: 12, color: "#9AA49D" }}>
-                or <a href="mailto:mayone@mahastrategies.com" style={{ color: "#EEF1EC" }}>mayone@mahastrategies.com</a>
+                or <a href="/contact" style={{ color: "#EEF1EC" }}>request human review</a>
               </span>
             </div>
           </div>

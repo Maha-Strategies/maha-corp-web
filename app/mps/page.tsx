@@ -84,6 +84,9 @@ export default function MpsPage() {
           <Link href="/audit" className="mono" style={{ fontSize: 12, letterSpacing: "0.1em", background: "#1A2420", color: "#EEF1EC", padding: "12px 22px", textDecoration: "none", borderRadius: 2, display: "inline-block" }}>
             TRY THE LIVE AUDITOR →
           </Link>
+          <Link href="/mps/preflight" className="mono" style={{ fontSize: 12, letterSpacing: "0.1em", border: "1px solid #1A2420", color: "#1A2420", padding: "11px 20px", textDecoration: "none", borderRadius: 2, display: "inline-block", marginLeft: 10 }}>
+            RUN A PRIVATE PREFLIGHT — $49 →
+          </Link>
         </p>
 
         <div className="mono" style={sec}>1 · SCOPE</div>
@@ -171,6 +174,10 @@ export default function MpsPage() {
           audit or discuss adopting MPS for your publication:{" "}
           <a href="/contact">mahastrategies.com/contact</a> or{" "}
           <a href="mailto:mayone@mahastrategies.com">mayone@mahastrategies.com</a>.
+        </p>
+        <p style={body}>
+          For a short draft or document extract, <Link href="/mps/preflight">MPS Preflight</Link> provides
+          a private automated claim map before you commission a source-by-source human review.
         </p>
 
         <div style={{ borderTop: "1px solid #C8CEC6", marginTop: 56, paddingTop: 18 }}>
