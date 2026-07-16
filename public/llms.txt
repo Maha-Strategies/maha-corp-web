@@ -50,6 +50,7 @@ Content across this site and its ecosystem follows the Maha Provenance Standard 
 - [MPS Registry](https://mps.mahastrategies.com/v1/records): Public, versioned MPS claim records with evidence context, review metadata, and deterministic content hashes.
 - [MPS Registry capabilities](https://mps.mahastrategies.com/.well-known/mps-registry.json): Machine-readable Registry metadata and endpoint discovery.
 - [MPS Registry MCP endpoint](https://mps.mahastrategies.com/mcp): Read-only Streamable HTTP MCP service. Available tools: `search_claims`, `get_claim_record`, `get_evidence_packet`, and `compare_record_versions`.
+- MPS Audit API: `POST https://www.mahastrategies.com/api/mps-audits` applies the headless MPS/0.1 engine to a passage. It is available only to approved client credentials explicitly scoped to `mps_audit`; source text is processed but not retained in its private ledger. Request schema: https://www.mahastrategies.com/mps-audit-schema.json
 
 ## Agent Offers
 

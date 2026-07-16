@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://www.mahastrategies.com/mps-audit-schema.json",
+  "title": "MPS Audit Request",
+  "description": "A capability-gated request to apply MPS/0.1 to a passage. The source passage is processed but is not retained in the audit ledger; the returned record includes an input hash and claim excerpts.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["clientRequestId", "text"],
+  "properties": {
+    "clientRequestId": {
+      "type": "string",
+      "minLength": 8,
+      "maxLength": 120,
+      "description": "A client-generated, idempotency key unique per credential and source passage."
+    },
+    "text": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 6000,
+      "description": "The nonfiction passage to audit."
+    }
+  }
+}

@@ -16,7 +16,7 @@
   "credentialPolicy": {
     "mode": "approved_client_credentials",
     "issuance": "Credentials are issued only after a human approval by Maha Strategies.",
-    "scope": ["client identity", "allowed offers", "request rate", "expiry", "revocation"],
+    "scope": ["client identity", "allowed offers", "allowed capabilities", "request rate", "expiry", "revocation"],
     "storage": "Clients must store issued credentials in a secret manager. Maha Strategies never publishes a shared public token."
   },
   "provenance": {
@@ -24,6 +24,18 @@
     "specification": "https://www.mahastrategies.com/mps",
     "registry": "https://mps.mahastrategies.com/v1/records"
   },
+  "capabilities": [
+    {
+      "id": "mps_audit",
+      "status": "approved_clients_only",
+      "endpoint": "https://www.mahastrategies.com/api/mps-audits",
+      "method": "POST",
+      "inputSchema": "https://www.mahastrategies.com/mps-audit-schema.json",
+      "authorization": "Bearer client credential with explicit mps_audit capability; credentials are expiring, revocable, and rate-limited.",
+      "recordPolicy": "Source text is not retained in the audit ledger. The stored record contains the input hash, claim-level result, status, model identifier, and event history.",
+      "assurance": "Automated MPS/0.1 assessment only. VERIFIED claims still require human confirmation against primary sources."
+    }
+  ],
   "offers": [
     {
       "id": "rapid-intelligence-brief",

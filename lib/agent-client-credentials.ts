@@ -7,6 +7,9 @@ const RATE_WINDOW_MS = 60 * 60 * 1000
 
 const credentialRateWindows = new Map<string, { startedAt: number; count: number }>()
 
+export const AGENT_CAPABILITIES = ['mps_audit'] as const
+export type AgentCapability = typeof AGENT_CAPABILITIES[number]
+
 export type CredentialAuthorization =
   | { kind: 'authorized'; clientId: string; credentialId: string; credentialLabel: string; tokenFingerprint: string }
   | { kind: 'unavailable' }
@@ -53,6 +56,21 @@ export function parseAllowedOfferIds(value: unknown): OfferId[] {
   return offerIds
 }
 
+export function parseAllowedCapabilities(value: unknown): AgentCapability[] {
+  if (value === undefined) return []
+  if (!Array.isArray(value) || value.length > AGENT_CAPABILITIES.length) {
+    throw new Error('allowedCapabilities must be an array of available capabilities.')
+  }
+  const capabilities = value.map((item) => {
+    if (typeof item !== 'string' || !AGENT_CAPABILITIES.includes(item as AgentCapability)) {
+      throw new Error('allowedCapabilities contains an unavailable capability.')
+    }
+    return item as AgentCapability
+  })
+  if (new Set(capabilities).size !== capabilities.length) throw new Error('allowedCapabilities must not contain duplicates.')
+  return capabilities
+}
+
 function acceptRateLimitedRequest(credentialId: string, limit: number): boolean {
   const now = Date.now()
   const current = credentialRateWindows.get(credentialId)
@@ -66,13 +84,32 @@ function acceptRateLimitedRequest(credentialId: string, limit: number): boolean 
 }
 
 export async function authorizeClientCredential(token: string, offerId: OfferId): Promise<CredentialAuthorization> {
+  return authorizeClientAccess(token, (credential) => credential.allowed_offer_ids.includes(offerId))
+}
+
+export async function authorizeClientCapability(token: string, capability: AgentCapability): Promise<CredentialAuthorization> {
+  return authorizeClientAccess(token, (credential) => credential.allowed_capabilities.includes(capability))
+}
+
+type CredentialRecord = {
+  public_id: string
+  client_id: string
+  label: string
+  allowed_offer_ids: OfferId[]
+  allowed_capabilities: AgentCapability[]
+  rate_limit_per_hour: number
+  expires_at: string
+  status: string
+}
+
+async function authorizeClientAccess(token: string, isAllowed: (credential: CredentialRecord) => boolean): Promise<CredentialAuthorization> {
   const ledger = createAgentInquiryLedger()
   if (!ledger) return { kind: 'unavailable' }
 
   const fingerprint = tokenFingerprint(token)
   const { data: credential, error: credentialError } = await ledger
     .from('agent_client_credentials')
-    .select('public_id, client_id, label, allowed_offer_ids, rate_limit_per_hour, expires_at, status')
+    .select('public_id, client_id, label, allowed_offer_ids, allowed_capabilities, rate_limit_per_hour, expires_at, status')
     .eq('secret_hash', fingerprint)
     .maybeSingle()
   if (credentialError) {
@@ -93,7 +130,7 @@ export async function authorizeClientCredential(token: string, offerId: OfferId)
   }
   if (!client || client.status !== 'active') return { kind: 'unauthorized' }
 
-  if (!credential.allowed_offer_ids.includes(offerId)) return { kind: 'forbidden' }
+  if (!isAllowed(credential as CredentialRecord)) return { kind: 'forbidden' }
   if (!acceptRateLimitedRequest(credential.public_id, credential.rate_limit_per_hour)) return { kind: 'rate_limited' }
 
   return {

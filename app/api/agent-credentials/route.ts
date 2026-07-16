@@ -2,9 +2,11 @@ import { createHash } from 'node:crypto'
 
 import { type OfferId, bearerMatches, jsonResponse } from '@/lib/agent-inquiries'
 import {
+  type AgentCapability,
   createClientId,
   createCredentialId,
   createCredentialSecret,
+  parseAllowedCapabilities,
   parseAllowedOfferIds,
   validClientId,
 } from '@/lib/agent-client-credentials'
@@ -53,6 +55,7 @@ type CredentialRequest = {
   clientName?: string
   credentialLabel: string
   allowedOfferIds: OfferId[]
+  allowedCapabilities: AgentCapability[]
   rateLimitPerHour: number
   expiresAt: string
 }
@@ -66,11 +69,17 @@ function parseCredentialRequest(value: unknown): CredentialRequest {
 
   const clientId = hasClientId ? singleLine(body.clientId, 'clientId', 80) : undefined
   if (clientId && !validClientId(clientId)) throw new Error('clientId is not valid.')
+  const allowedCapabilities = parseAllowedCapabilities(body.allowedCapabilities)
+  const allowedOfferIds = body.allowedOfferIds === undefined ? [] : parseAllowedOfferIds(body.allowedOfferIds)
+  if (!allowedOfferIds.length && !allowedCapabilities.length) {
+    throw new Error('Provide one or more allowedOfferIds or allowedCapabilities.')
+  }
   return {
     clientId,
     clientName: hasClientName ? singleLine(body.clientName, 'clientName', 160, 2) : undefined,
     credentialLabel: singleLine(body.credentialLabel, 'credentialLabel', 160, 2),
-    allowedOfferIds: parseAllowedOfferIds(body.allowedOfferIds),
+    allowedOfferIds,
+    allowedCapabilities,
     rateLimitPerHour: parseRateLimit(body.rateLimitPerHour),
     expiresAt: parseExpiry(body.expiresAt),
   }
@@ -85,7 +94,7 @@ export async function GET(request: Request) {
 
   const [{ data: clients, error: clientsError }, { data: credentials, error: credentialsError }] = await Promise.all([
     ledger.from('agent_clients').select('public_id, display_name, status, created_at, revoked_at').order('created_at', { ascending: false }),
-    ledger.from('agent_client_credentials').select('public_id, client_id, label, secret_prefix, allowed_offer_ids, rate_limit_per_hour, expires_at, status, issued_at, revoked_at, revocation_reason').order('issued_at', { ascending: false }),
+    ledger.from('agent_client_credentials').select('public_id, client_id, label, secret_prefix, allowed_offer_ids, allowed_capabilities, rate_limit_per_hour, expires_at, status, issued_at, revoked_at, revocation_reason').order('issued_at', { ascending: false }),
   ])
   if (clientsError || credentialsError) return jsonResponse({ error: { code: 'ledger_unavailable', message: 'The credential registry could not be read.' } }, 503)
 
@@ -134,6 +143,7 @@ export async function POST(request: Request) {
     secret_hash: createHash('sha256').update(secret).digest('hex'),
     secret_prefix: secret.slice(0, 14),
     allowed_offer_ids: input.allowedOfferIds,
+    allowed_capabilities: input.allowedCapabilities,
     rate_limit_per_hour: input.rateLimitPerHour,
     expires_at: input.expiresAt,
     status: 'active',
@@ -149,6 +159,7 @@ export async function POST(request: Request) {
     credential: secret,
     credentialPrefix: secret.slice(0, 14),
     allowedOfferIds: input.allowedOfferIds,
+    allowedCapabilities: input.allowedCapabilities,
     rateLimitPerHour: input.rateLimitPerHour,
     expiresAt: input.expiresAt,
     secretDisclosure: 'This credential is shown once. Store it in the client’s secret manager, not in source control or chat.',

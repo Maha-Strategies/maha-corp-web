@@ -29,7 +29,7 @@ export async function GET(request: Request, context: RouteContext<'/api/agent-cr
   if (!ledger) return jsonResponse({ error: { code: 'ledger_unavailable', message: 'The credential registry is not configured.' } }, 503)
   const { data: credential, error: credentialError } = await ledger
     .from('agent_client_credentials')
-    .select('public_id, client_id, label, secret_prefix, allowed_offer_ids, rate_limit_per_hour, expires_at, status, issued_at, revoked_at, revocation_reason')
+    .select('public_id, client_id, label, secret_prefix, allowed_offer_ids, allowed_capabilities, rate_limit_per_hour, expires_at, status, issued_at, revoked_at, revocation_reason')
     .eq('public_id', credentialId)
     .maybeSingle()
   if (credentialError) return jsonResponse({ error: { code: 'ledger_unavailable', message: 'The credential could not be read.' } }, 503)

@@ -69,7 +69,7 @@ curl --request POST https://www.mahastrategies.com/api/agent-inquiries \
 
 A successful `202` response means only that the request was recorded for human review. The returned `notificationStatus` shows whether the optional email notification was delivered. Neither result is an acceptance, purchase confirmation, or service-level commitment.
 
-Apply `supabase/migrations/20260716_agent_inquiry_ledger.sql` and then `supabase/migrations/20260716_agent_client_credentials.sql` in the Supabase SQL Editor before enabling client credentials. Together, they create the private inquiry ledger, database-maintained event histories, client credential registry, and RLS with no public access policies. The existing `NEXT_PUBLIC_SUPABASE_URL` and `SUPABASE_SERVICE_ROLE_KEY` deployment variables are required.
+Apply `supabase/migrations/20260716_agent_inquiry_ledger.sql`, `supabase/migrations/20260716_agent_client_credentials.sql`, and `supabase/migrations/20260716_mps_audit_jobs.sql` in the Supabase SQL Editor before enabling the full agent infrastructure. Together, they create the private inquiry ledger, credential registry, MPS audit ledger, database-maintained event histories, and RLS with no public access policies. The existing `NEXT_PUBLIC_SUPABASE_URL` and `SUPABASE_SERVICE_ROLE_KEY` deployment variables are required.
 
 Reviewer operations use a separate private endpoint:
 
@@ -91,7 +91,7 @@ GET  /api/agent-credentials/:credentialId
 PATCH /api/agent-credentials/:credentialId
 ```
 
-All require `Authorization: Bearer <AGENT_REVIEW_TOKEN>`. `POST` issues a credential once; its plaintext value is returned only in that response. Supply either a new `clientName` or an existing `clientId`, plus `credentialLabel`, `allowedOfferIds`, optional `rateLimitPerHour` (default 12), and optional `expiresAt` (default 90 days). `PATCH` accepts `{ "action": "revoke", "reason": "optional note" }`. GET endpoints never return a credential secret.
+All require `Authorization: Bearer <AGENT_REVIEW_TOKEN>`. `POST` issues a credential once; its plaintext value is returned only in that response. Supply either a new `clientName` or an existing `clientId`, plus `credentialLabel`, one or more `allowedOfferIds` and/or optional `allowedCapabilities`, optional `rateLimitPerHour` (default 12), and optional `expiresAt` (default 90 days). A capability-only credential is permitted. Capabilities default to none; the only current capability is `mps_audit`. `PATCH` accepts `{ "action": "revoke", "reason": "optional note" }`. GET endpoints never return a credential secret.
 
 Example issuance:
 
@@ -103,6 +103,23 @@ curl --request POST https://www.mahastrategies.com/api/agent-credentials \
     "clientName": "Example client agent",
     "credentialLabel": "Production research intake",
     "allowedOfferIds": ["rapid-intelligence-brief"],
+    "allowedCapabilities": ["mps_audit"],
     "rateLimitPerHour": 12
+  }'
+```
+
+## Capability-Gated MPS Audit API
+
+`POST /api/mps-audits` applies the headless MPS/0.1 engine to a single passage. It requires a named client credential carrying the explicit `mps_audit` capability, uses the same credential rate limit, and stores an idempotent audit record in Supabase. The source passage is processed but deliberately not retained; the record retains the input hash, output claim excerpts, model identifier, status, and event history. This is a computational API, not a certification or a substitute for human verification.
+
+The request schema is published at `/mps-audit-schema.json`. Use a unique `clientRequestId`; reuse of the same value with different text returns `409`. A completed response contains the audit result. A replay with the same request ID and passage returns the stored result without a second model invocation.
+
+```bash
+curl --request POST https://www.mahastrategies.com/api/mps-audits \
+  --header "Authorization: Bearer $MPS_AUDIT_CREDENTIAL" \
+  --header "Content-Type: application/json" \
+  --data '{
+    "clientRequestId": "example-audit-20260716-01",
+    "text": "In 2024, the company reported a 32 percent increase in output."
   }'
 ```
