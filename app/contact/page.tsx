@@ -32,7 +32,7 @@ export default function ContactPage() {
         </h1>
 
         <p className="text-sm text-gray-400 leading-relaxed mb-12 font-sans">
-          Start with the decision you need to make. For a Verified Research Brief, we reply within two business days with a scope—or tell you plainly if we are not the right fit.
+          Start with the decision you need to make. For a Rapid Intelligence Brief or Verified Research Brief, we reply within two business days with a scope—or tell you plainly if we are not the right fit.
         </p>
 
         {/* CONTACT FORM SECTION */}
@@ -100,6 +100,7 @@ export default function ContactPage() {
                   disabled={isPending}
                   className="w-full bg-zinc-900/50 border border-zinc-800 text-white text-sm px-4 py-2.5 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-colors appearance-none disabled:opacity-50"
                 >
+                  <option value="rapid_intelligence">Rapid Intelligence Brief — from $500 / five business days</option>
                   <option value="verified_research">Verified Research Brief — $2,500 / 10 business days</option>
                   <option value="mps_audit">Manuscript Audit / MPS Inquiry</option>
                   <option value="token_request">Cognitive Gateway Access Token Request</option>

@@ -104,6 +104,27 @@ export default function ConsultingPage() {
           </a>
         </div>
 
+        <section className="mb-24 border border-indigo-900/50 bg-indigo-950/20 p-8 sm:p-10 relative overflow-hidden">
+          <div className="absolute top-0 left-0 w-1 h-full bg-indigo-500" />
+          <p className="font-mono text-[10px] text-indigo-400 tracking-widest uppercase mb-4">[ Need a faster, narrower answer? ]</p>
+          <div className="grid grid-cols-1 md:grid-cols-[1fr_auto] gap-8 items-end">
+            <div>
+              <h2 className="text-2xl text-white font-light mb-3">Rapid Intelligence Brief</h2>
+              <p className="text-zinc-400 leading-relaxed max-w-2xl">
+                One defined market, technology, or policy question. A concise 2–3 page research memo with linked sources, stated assumptions, and decision implications — right-sized for an early decision before it becomes a full diligence program.
+              </p>
+              <p className="font-mono text-[10px] text-zinc-500 tracking-widest uppercase mt-5">Starting at $500 · delivered within five business days · fixed scope</p>
+            </div>
+            <TrackedLink
+              href="/rapid-intelligence-brief"
+              event="cta_consulting_rapid_brief"
+              className="inline-block border border-zinc-500 text-zinc-100 font-mono font-bold text-xs tracking-widest uppercase px-7 py-4 hover:bg-white hover:text-black hover:border-white transition-colors no-underline text-center"
+            >
+              Explore Rapid Brief ↗
+            </TrackedLink>
+          </div>
+        </section>
+
         <section className="mb-24 border-t border-zinc-800 pt-8">
           <p className="font-mono text-[10px] text-indigo-400 tracking-widest uppercase mb-5">[ Common research scopes ]</p>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">

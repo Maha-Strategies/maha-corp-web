@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import { TrackedLink } from '@/components/ConversionTracker';
 
 export const metadata = {
   title: 'Intelligence | Maha Strategies LLC',
@@ -373,6 +374,15 @@ export default function IntelligenceGrid() {
           <p className="font-mono text-sm text-neutral-500 tracking-widest uppercase">
             [ Flash-Opinions // Structural Audits // Market Signals ]
           </p>
+          <div className="mt-8">
+            <TrackedLink
+              href="/rapid-intelligence-brief"
+              event="cta_intelligence_rapid_brief"
+              className="inline-block border border-indigo-500/70 text-indigo-200 font-mono text-[10px] tracking-widest uppercase px-5 py-3 hover:bg-indigo-500 hover:text-white transition-colors"
+            >
+              Need a focused answer in five days? Rapid Intelligence Brief ↗
+            </TrackedLink>
+          </div>
         </header>
 
         {/* CATEGORIZED GRID */}

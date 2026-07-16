@@ -14,6 +14,7 @@ import {
   type BriefSection,
 } from '@/lib/briefs-data';
 import ExportButton from './ExportButton';
+import { TrackedLink } from '@/components/ConversionTracker';
 
 export function generateStaticParams() {
   return getAllBriefSlugs().map((slug) => ({ slug }));
@@ -203,13 +204,16 @@ export default async function BriefPage(
             <div className="sticky top-12 space-y-8">
               <div className="p-6 border border-gray-800 bg-black">
                 <h3 className="font-sans text-sm font-bold text-white uppercase tracking-widest mb-2">
-                  Need a decision-ready brief?
+                  Need a focused answer first?
                 </h3>
                 <p className="font-serif text-xs text-gray-400 mb-4">
-                  Commission an evidence-tagged research brief on the market, technology, or policy question behind this analysis.
+                  Commission a Rapid Intelligence Brief for one defined market, technology, or policy question — a concise memo with stated assumptions and linked sources, delivered within five business days.
                 </p>
-                <Link href="/consulting" className="block text-center border border-gray-600 bg-gray-900 text-white font-mono text-[10px] tracking-widest py-3 hover:bg-white hover:text-black transition-colors uppercase">
-                  Commission a Research Brief &#8599;
+                <TrackedLink href="/rapid-intelligence-brief" event="cta_brief_rapid_intelligence" className="block text-center border border-gray-600 bg-gray-900 text-white font-mono text-[10px] tracking-widest py-3 hover:bg-white hover:text-black transition-colors uppercase">
+                  Rapid Intelligence Brief · From $500 &#8599;
+                </TrackedLink>
+                <Link href="/consulting" className="block mt-3 text-center text-neutral-400 font-mono text-[9px] tracking-widest hover:text-white transition-colors uppercase">
+                  Need full diligence? View the Verified Research Brief &#8599;
                 </Link>
               </div>
 
