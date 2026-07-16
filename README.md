@@ -39,21 +39,22 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 
 `POST /api/agent-inquiries` is an authenticated, non-binding intake endpoint for the offers published in `/agent-offers.json`. It validates against `/agent-inquiry-schema.json`, persists the inquiry and its first event to a private Supabase ledger, then attempts to notify the reviewer through Resend. It does not accept payment, create a commission, or send work automatically.
 
+The inquiry gateway accepts named, database-backed client credentials. Credential issuance and revocation are private reviewer operations; there is no shared public inquiry token.
+
 Set these deployment environment variables before enabling it:
 
 ```text
-AGENT_INQUIRY_TOKEN=<unique random bearer token>
-AGENT_REVIEW_TOKEN=<different unique reviewer bearer token>
+AGENT_REVIEW_TOKEN=<unique reviewer bearer token>
 RESEND_API_KEY=<existing Resend key>
 ```
 
-Optional delivery overrides are `AGENT_INQUIRY_FROM` and `AGENT_INQUIRY_TO`. Keep the bearer token server-side and issue it only to an approved client. Without `AGENT_INQUIRY_TOKEN`, the route returns `503` and sends no email.
+Optional delivery overrides are `AGENT_INQUIRY_FROM` and `AGENT_INQUIRY_TO`. Keep the reviewer token server-side. Client credentials are created by the private registry and are shown only once at issuance.
 
 Approved clients send JSON using the schema at `/agent-inquiry-schema.json`:
 
 ```bash
 curl --request POST https://www.mahastrategies.com/api/agent-inquiries \
-  --header "Authorization: Bearer $AGENT_INQUIRY_TOKEN" \
+  --header "Authorization: Bearer $CLIENT_CREDENTIAL" \
   --header "Content-Type: application/json" \
   --data '{
     "clientRequestId": "client-generated-unique-id",
@@ -68,7 +69,7 @@ curl --request POST https://www.mahastrategies.com/api/agent-inquiries \
 
 A successful `202` response means only that the request was recorded for human review. The returned `notificationStatus` shows whether the optional email notification was delivered. Neither result is an acceptance, purchase confirmation, or service-level commitment.
 
-Apply `supabase/migrations/20260716_agent_inquiry_ledger.sql` in the Supabase SQL Editor before enabling the gateway. The migration creates a private inquiry ledger, database-maintained event history, and RLS with no public access policies. The existing `NEXT_PUBLIC_SUPABASE_URL` and `SUPABASE_SERVICE_ROLE_KEY` deployment variables are required.
+Apply `supabase/migrations/20260716_agent_inquiry_ledger.sql` and then `supabase/migrations/20260716_agent_client_credentials.sql` in the Supabase SQL Editor before enabling client credentials. Together, they create the private inquiry ledger, database-maintained event histories, client credential registry, and RLS with no public access policies. The existing `NEXT_PUBLIC_SUPABASE_URL` and `SUPABASE_SERVICE_ROLE_KEY` deployment variables are required.
 
 Reviewer operations use a separate private endpoint:
 
@@ -78,3 +79,30 @@ PATCH /api/agent-inquiries/:inquiryId
 ```
 
 Both require `Authorization: Bearer <AGENT_REVIEW_TOKEN>`. GET returns the full private request and its event history. PATCH accepts one action: `start_review`, `needs_clarification`, `decline`, or `approve_for_scoping`; the last is an internal disposition, not an acceptance of work.
+
+## Client Credential Registry
+
+Private reviewer operations are available at:
+
+```text
+GET  /api/agent-credentials
+POST /api/agent-credentials
+GET  /api/agent-credentials/:credentialId
+PATCH /api/agent-credentials/:credentialId
+```
+
+All require `Authorization: Bearer <AGENT_REVIEW_TOKEN>`. `POST` issues a credential once; its plaintext value is returned only in that response. Supply either a new `clientName` or an existing `clientId`, plus `credentialLabel`, `allowedOfferIds`, optional `rateLimitPerHour` (default 12), and optional `expiresAt` (default 90 days). `PATCH` accepts `{ "action": "revoke", "reason": "optional note" }`. GET endpoints never return a credential secret.
+
+Example issuance:
+
+```bash
+curl --request POST https://www.mahastrategies.com/api/agent-credentials \
+  --header "Authorization: Bearer $AGENT_REVIEW_TOKEN" \
+  --header "Content-Type: application/json" \
+  --data '{
+    "clientName": "Example client agent",
+    "credentialLabel": "Production research intake",
+    "allowedOfferIds": ["rapid-intelligence-brief"],
+    "rateLimitPerHour": 12
+  }'
+```

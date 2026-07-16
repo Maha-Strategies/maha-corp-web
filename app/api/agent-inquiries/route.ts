@@ -5,37 +5,19 @@ import { Resend } from 'resend'
 import {
   OFFERS,
   type AgentInquiry,
-  bearerMatches,
   contentHash,
   jsonResponse,
   parseInquiry,
   serializableInquiry,
-  tokenFingerprint,
 } from '@/lib/agent-inquiries'
+import { authorizeClientCredential, bearerToken } from '@/lib/agent-client-credentials'
 import { createAgentInquiryLedger } from '@/lib/agent-inquiry-ledger'
 
 export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
 
 const MAX_BODY_BYTES = 32_768
-const REQUEST_WINDOW_MS = 60 * 60 * 1000
-const REQUEST_LIMIT = 12
-
-const rateWindows = new Map<string, { startedAt: number; count: number }>()
-
-function acceptRateLimitedRequest(fingerprint: string): boolean {
-  const now = Date.now()
-  const current = rateWindows.get(fingerprint)
-  if (!current || now - current.startedAt >= REQUEST_WINDOW_MS) {
-    rateWindows.set(fingerprint, { startedAt: now, count: 1 })
-    return true
-  }
-  if (current.count >= REQUEST_LIMIT) return false
-  current.count += 1
-  return true
-}
-
-function buildEmailText(inquiry: AgentInquiry, inquiryId: string): string {
+function buildEmailText(inquiry: AgentInquiry, inquiryId: string, clientId: string, credentialId: string, credentialLabel: string): string {
   return `
 AGENT INQUIRY — HUMAN REVIEW REQUIRED
 --------------------------------------
@@ -43,6 +25,11 @@ INQUIRY ID: ${inquiryId}
 CLIENT REQUEST ID: ${inquiry.clientRequestId}
 OFFER: ${OFFERS[inquiry.offerId]} (${inquiry.offerId})
 AUTHORIZATION ATTESTATION: requesterAuthorized=true
+
+CLIENT CREDENTIAL
+CLIENT ID: ${clientId}
+CREDENTIAL ID: ${credentialId}
+CREDENTIAL LABEL: ${credentialLabel}
 
 REQUESTER
 NAME: ${inquiry.requester.name}
@@ -74,13 +61,8 @@ Received for human review only. No scope, price, delivery date, payment, or work
 }
 
 export async function POST(request: Request) {
-  const gatewayToken = process.env.AGENT_INQUIRY_TOKEN
-  if (!gatewayToken) {
-    return jsonResponse({ error: { code: 'gateway_unavailable', message: 'The agent inquiry gateway is not enabled.' } }, 503)
-  }
-  if (!bearerMatches(request, gatewayToken)) {
-    return jsonResponse({ error: { code: 'unauthorized', message: 'A valid bearer token is required.' } }, 401)
-  }
+  const credentialToken = bearerToken(request)
+  if (!credentialToken) return jsonResponse({ error: { code: 'unauthorized', message: 'A valid client credential is required.' } }, 401)
   if (!request.headers.get('content-type')?.toLowerCase().startsWith('application/json')) {
     return jsonResponse({ error: { code: 'unsupported_media_type', message: 'Content-Type must be application/json.' } }, 415)
   }
@@ -90,16 +72,25 @@ export async function POST(request: Request) {
     return jsonResponse({ error: { code: 'payload_too_large', message: 'Request body exceeds the 32 KB limit.' } }, 413)
   }
 
-  const tokenHash = tokenFingerprint(gatewayToken)
-  if (!acceptRateLimitedRequest(tokenHash)) {
-    return jsonResponse({ error: { code: 'rate_limited', message: 'Too many requests. Retry after one hour.' } }, 429)
-  }
-
   let inquiry: AgentInquiry
   try {
     inquiry = parseInquiry(await request.json())
   } catch (error) {
     return jsonResponse({ error: { code: 'invalid_request', message: error instanceof Error ? error.message : 'Invalid request body.' } }, 400)
+  }
+
+  const authorization = await authorizeClientCredential(credentialToken, inquiry.offerId)
+  if (authorization.kind === 'unavailable') {
+    return jsonResponse({ error: { code: 'gateway_unavailable', message: 'The credential registry is not available.' } }, 503)
+  }
+  if (authorization.kind === 'unauthorized') {
+    return jsonResponse({ error: { code: 'unauthorized', message: 'A valid client credential is required.' } }, 401)
+  }
+  if (authorization.kind === 'forbidden') {
+    return jsonResponse({ error: { code: 'offer_not_authorized', message: 'This credential is not authorized for the requested offer.' } }, 403)
+  }
+  if (authorization.kind === 'rate_limited') {
+    return jsonResponse({ error: { code: 'rate_limited', message: 'Credential request limit reached. Retry after one hour.' } }, 429)
   }
 
   const ledger = createAgentInquiryLedger()
@@ -114,8 +105,10 @@ export async function POST(request: Request) {
     .from('agent_inquiries')
     .insert({
       public_id: publicId,
-      client_token_fingerprint: tokenHash,
+      client_token_fingerprint: authorization.tokenFingerprint,
       client_request_id: inquiry.clientRequestId,
+      client_id: authorization.clientId,
+      credential_id: authorization.credentialId,
       offer_id: inquiry.offerId,
       requester_name: inquiry.requester.name,
       requester_email: inquiry.requester.email,
@@ -135,7 +128,7 @@ export async function POST(request: Request) {
     const { data: existing, error: existingError } = await ledger
       .from('agent_inquiries')
       .select('public_id, status, notification_status')
-      .eq('client_token_fingerprint', tokenHash)
+      .eq('client_token_fingerprint', authorization.tokenFingerprint)
       .eq('client_request_id', inquiry.clientRequestId)
       .maybeSingle()
     if (existingError || !existing) {
@@ -169,7 +162,7 @@ export async function POST(request: Request) {
         to: process.env.AGENT_INQUIRY_TO ?? 'mayone@mahastrategies.com',
         replyTo: inquiry.requester.email,
         subject: `[Agent inquiry — review required] ${OFFERS[inquiry.offerId]} · ${inquiry.requester.name}`,
-        text: buildEmailText(inquiry, inserted.public_id),
+        text: buildEmailText(inquiry, inserted.public_id, authorization.clientId, authorization.credentialId, authorization.credentialLabel),
       })
       notificationStatus = error ? 'failed' : 'sent'
       if (error) console.error('Agent inquiry email delivery was rejected:', error.name)
@@ -192,6 +185,8 @@ export async function POST(request: Request) {
     clientRequestId: inquiry.clientRequestId,
     offerId: inquiry.offerId,
     status: 'received_for_human_review',
+    clientId: authorization.clientId,
+    credentialId: authorization.credentialId,
     notificationStatus,
     bindingCommitment: false,
     autonomousPaymentSupported: false,

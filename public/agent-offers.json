@@ -13,6 +13,12 @@
     "autonomousPaymentSupported": false,
     "bindingCommitment": "No price, scope, delivery date, or work commitment is binding until Maha Strategies confirms it in writing."
   },
+  "credentialPolicy": {
+    "mode": "approved_client_credentials",
+    "issuance": "Credentials are issued only after a human approval by Maha Strategies.",
+    "scope": ["client identity", "allowed offers", "request rate", "expiry", "revocation"],
+    "storage": "Clients must store issued credentials in a secret manager. Maha Strategies never publishes a shared public token."
+  },
   "provenance": {
     "standard": "MPS/0.1",
     "specification": "https://www.mahastrategies.com/mps",
@@ -53,7 +59,7 @@
         "url": "https://www.mahastrategies.com/api/agent-inquiries",
         "method": "POST",
         "inputSchema": "https://www.mahastrategies.com/agent-inquiry-schema.json",
-        "authorization": "Bearer token issued by Maha Strategies after approval.",
+        "authorization": "Bearer client credential issued by Maha Strategies after approval; credentials are scoped, expiring, and revocable.",
         "fallbackUrl": "https://www.mahastrategies.com/contact",
         "inquiryType": "rapid_intelligence",
         "responseTargetBusinessDays": 2
@@ -88,7 +94,7 @@
         "url": "https://www.mahastrategies.com/api/agent-inquiries",
         "method": "POST",
         "inputSchema": "https://www.mahastrategies.com/agent-inquiry-schema.json",
-        "authorization": "Bearer token issued by Maha Strategies after approval.",
+        "authorization": "Bearer client credential issued by Maha Strategies after approval; credentials are scoped, expiring, and revocable.",
         "fallbackUrl": "https://www.mahastrategies.com/contact",
         "inquiryType": "verified_research",
         "responseTargetBusinessDays": 2

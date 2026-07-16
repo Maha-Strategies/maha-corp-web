@@ -43,7 +43,7 @@ export async function GET(_request: Request, context: RouteContext<'/api/agent-i
 
   const { data, error } = await ledger
     .from('agent_inquiries')
-    .select('public_id, offer_id, requester_name, requester_email, requester_organization, decision, question, deadline, payload, payload_hash, status, notification_status, reviewer_note, created_at, reviewed_at')
+    .select('public_id, client_id, credential_id, offer_id, requester_name, requester_email, requester_organization, decision, question, deadline, payload, payload_hash, status, notification_status, reviewer_note, created_at, reviewed_at')
     .eq('public_id', inquiryId)
     .maybeSingle()
   if (error) return jsonResponse({ error: { code: 'ledger_unavailable', message: 'The inquiry ledger could not be read.' } }, 503)

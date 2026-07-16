@@ -64,7 +64,7 @@ The manifest describes currently available research services, public price guida
 
 - Endpoint: `POST https://www.mahastrategies.com/api/agent-inquiries`
 - Request schema: https://www.mahastrategies.com/agent-inquiry-schema.json
-- Authentication: an approved client must send its issued bearer token. There is no public token, unauthenticated browser flow, autonomous payment, or automatic commission.
+- Authentication: an approved client must send its named, scoped bearer credential. Credentials are issued after human approval, expire by default, can be revoked, and are never public or shared between clients. There is no unauthenticated browser flow, autonomous payment, or automatic commission.
 - Successful requests return `202 Accepted` with `received_for_human_review`. They send a review draft to Maha Strategies; they do not accept an engagement or create a binding commitment.
 
 ## Protocols (Doctrine Frameworks)
