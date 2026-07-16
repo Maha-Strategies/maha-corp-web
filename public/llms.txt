@@ -60,6 +60,13 @@ The manifest describes currently available research services, public price guida
 - [Rapid Intelligence Brief](https://www.mahastrategies.com/rapid-intelligence-brief): Available for inquiry. One defined market, technology, or policy question; from $500; target delivery within five business days after scope confirmation.
 - [Verified Research Brief](https://www.mahastrategies.com/consulting): Available for inquiry. MPS-tagged 10–15 page research synthesis; $2,500; target delivery within 10 business days after scope confirmation.
 
+## Agent Inquiry Gateway
+
+- Endpoint: `POST https://www.mahastrategies.com/api/agent-inquiries`
+- Request schema: https://www.mahastrategies.com/agent-inquiry-schema.json
+- Authentication: an approved client must send its issued bearer token. There is no public token, unauthenticated browser flow, autonomous payment, or automatic commission.
+- Successful requests return `202 Accepted` with `received_for_human_review`. They send a review draft to Maha Strategies; they do not accept an engagement or create a binding commitment.
+
 ## Protocols (Doctrine Frameworks)
 
 - [Metabolic Sovereignty](https://www.mahastrategies.com/protocols/metabolic-sovereignty): Reclaiming the biological baseline from industrial food systems.

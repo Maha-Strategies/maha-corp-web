@@ -49,7 +49,12 @@
         "A fully provenance-tagged evidence record."
       ],
       "request": {
-        "url": "https://www.mahastrategies.com/contact",
+        "mode": "authenticated_json",
+        "url": "https://www.mahastrategies.com/api/agent-inquiries",
+        "method": "POST",
+        "inputSchema": "https://www.mahastrategies.com/agent-inquiry-schema.json",
+        "authorization": "Bearer token issued by Maha Strategies after approval.",
+        "fallbackUrl": "https://www.mahastrategies.com/contact",
         "inquiryType": "rapid_intelligence",
         "responseTargetBusinessDays": 2
       }
@@ -79,7 +84,12 @@
         "One revision round."
       ],
       "request": {
-        "url": "https://www.mahastrategies.com/contact",
+        "mode": "authenticated_json",
+        "url": "https://www.mahastrategies.com/api/agent-inquiries",
+        "method": "POST",
+        "inputSchema": "https://www.mahastrategies.com/agent-inquiry-schema.json",
+        "authorization": "Bearer token issued by Maha Strategies after approval.",
+        "fallbackUrl": "https://www.mahastrategies.com/contact",
         "inquiryType": "verified_research",
         "responseTargetBusinessDays": 2
       }
