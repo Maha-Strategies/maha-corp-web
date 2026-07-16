@@ -52,6 +52,12 @@ const capabilities = [
 const work = [
   {
     category: 'OPEN EDITION',
+    title: 'The Unfinished Species',
+    copy: 'A book about evolution, self-design, and the conditions intelligence creates for its own development.',
+    href: '/books/the-unfinished-species',
+  },
+  {
+    category: 'OPEN EDITION',
     title: 'The Synthetic Self',
     copy: 'A book about language models, human judgment, and the record we are teaching machines to reflect.',
     href: '/books/the-synthetic-self',
