@@ -24,6 +24,23 @@ export const metadata: Metadata = {
   },
 }
 
+const articleJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: 'The Faculty of the Possible',
+  description: 'A dream does not make itself real. It changes the dreamer, who changes their actions, which can then change the world.',
+  url: `${SITE_URL}/books/the-imagined-life/the-faculty-of-the-possible`,
+  mainEntityOfPage: `${SITE_URL}/books/the-imagined-life/the-faculty-of-the-possible`,
+  isPartOf: { '@id': `${SITE_URL}/books/the-imagined-life#book` },
+  author: { '@type': 'Person', name: 'Mayone Maha Rajan' },
+  publisher: { '@type': 'Organization', name: 'Maha Strategies LLC', url: SITE_URL },
+  datePublished: '2026-07-16',
+  dateModified: '2026-07-16',
+  isAccessibleForFree: true,
+  inLanguage: 'en',
+  articleSection: 'Opening essay',
+}
+
 const paragraphs = [
   'There is a moment, just before sleep, when the mind slips its leash. A place you have never been appears. A conversation that never happened begins. A version of yourself does something you have not done. You did not decide to picture these things. They arrive, and by morning they can carry the texture of having been lived rather than imagined.',
   'We tend to treat dreaming as the mind’s idle hour: a strange nightly screensaver, meaningful or meaningless according to taste, disconnected from the serious business of waking life. But the generative power on display in a dream—the ability to build a convincing world from within—may be much closer to the center of waking life than it first appears.',
@@ -40,6 +57,7 @@ const paragraphs = [
 export default function FacultyOfThePossibleEssay() {
   return (
     <main className="min-h-screen bg-[#0a0a0c] text-zinc-300 selection:bg-indigo-500 selection:text-white">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }} />
       <article className="max-w-3xl mx-auto px-6 py-20 sm:py-28">
         <Link href="/books/the-imagined-life" className="inline-block font-mono text-[10px] text-indigo-400 hover:text-white tracking-widest uppercase transition-colors mb-12">
           ← The Imagined Life

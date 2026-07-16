@@ -24,6 +24,23 @@ export const metadata: Metadata = {
   },
 }
 
+const bookJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Book',
+  '@id': `${SITE_URL}/books/the-orbital-mind#book`,
+  name: 'The Orbital Mind',
+  alternativeHeadline: 'The Astrophysics of the Self',
+  description: 'A systems psychology of attention, desire, agency, limit, imagination, and integration.',
+  url: `${SITE_URL}/books/the-orbital-mind`,
+  author: { '@type': 'Person', name: 'Mayone Maha Rajan' },
+  publisher: { '@type': 'Organization', name: 'Maha Strategies LLC', url: SITE_URL },
+  bookFormat: 'https://schema.org/EBook',
+  isAccessibleForFree: true,
+  inLanguage: 'en',
+  datePublished: '2026-07-16',
+  potentialAction: { '@type': 'ReadAction', target: `${SITE_URL}/books/the-orbital-mind` },
+}
+
 const parts = [
   {
     number: 'I',
@@ -60,6 +77,7 @@ const parts = [
 export default function TheOrbitalMindHub() {
   return (
     <main className="min-h-screen bg-[#0a0a0c] text-zinc-300 selection:bg-indigo-500 selection:text-white">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(bookJsonLd) }} />
       <article className="max-w-4xl mx-auto px-6 py-20 sm:py-28">
         <header className="max-w-3xl border-l border-indigo-500 pl-6 sm:pl-8">
           <p className="font-mono text-[10px] text-indigo-400 tracking-widest uppercase mb-5">
@@ -88,13 +106,14 @@ export default function TheOrbitalMindHub() {
         <section className="mt-16 border border-indigo-900/50 bg-indigo-950/20 p-7 sm:p-10 relative overflow-hidden">
           <div className="absolute top-0 left-0 h-full w-1 bg-indigo-500" />
           <p className="font-mono text-[10px] text-indigo-400 tracking-widest uppercase mb-4">[ Read now ]</p>
-          <h2 className="text-2xl sm:text-3xl font-light text-white mb-4">The map is not the mind</h2>
+          <h2 className="text-2xl sm:text-3xl font-light text-white mb-4">Chapter 1: The Governing Center</h2>
           <p className="text-zinc-400 leading-relaxed max-w-2xl mb-7">
-            The opening essay: why a self is better understood as a system of relationships than a set of personality labels—and how to use a symbolic map without mistaking it for evidence.
+            The function of self-regulation and the holding of a center: what the evidence supports, where it stops, and what it means to govern a system of competing claims.
           </p>
-          <Link href="/books/the-orbital-mind/the-map-is-not-the-mind" className="inline-block bg-white text-black font-mono font-bold text-xs tracking-widest uppercase px-7 py-4 hover:bg-zinc-200 transition-colors">
-            Read the opening essay ↗
+          <Link href="/books/the-orbital-mind/the-governing-center" className="inline-block bg-white text-black font-mono font-bold text-xs tracking-widest uppercase px-7 py-4 hover:bg-zinc-200 transition-colors">
+            Read Chapter 1 ↗
           </Link>
+          <Link href="/books/the-orbital-mind/the-map-is-not-the-mind" className="inline-block mt-5 sm:mt-0 sm:ml-6 font-mono text-[10px] text-zinc-400 hover:text-white tracking-widest uppercase transition-colors">Read the opening essay ↗</Link>
         </section>
 
         <section className="mt-20">

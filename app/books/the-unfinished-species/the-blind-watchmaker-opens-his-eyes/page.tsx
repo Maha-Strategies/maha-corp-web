@@ -24,6 +24,23 @@ export const metadata: Metadata = {
   },
 }
 
+const articleJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: 'The Blind Watchmaker Opens His Eyes',
+  description: 'Natural selection built a creature capable of prediction. What follows when that creature begins to redesign the pressures that made it?',
+  url: `${SITE_URL}/books/the-unfinished-species/the-blind-watchmaker-opens-his-eyes`,
+  mainEntityOfPage: `${SITE_URL}/books/the-unfinished-species/the-blind-watchmaker-opens-his-eyes`,
+  isPartOf: { '@id': `${SITE_URL}/books/the-unfinished-species#book` },
+  author: { '@type': 'Person', name: 'Mayone Maha Rajan' },
+  publisher: { '@type': 'Organization', name: 'Maha Strategies LLC', url: SITE_URL },
+  datePublished: '2026-07-16',
+  dateModified: '2026-07-16',
+  isAccessibleForFree: true,
+  inLanguage: 'en',
+  articleSection: 'Opening essay',
+}
+
 const paragraphs = [
   'For two centuries, the intellectual history of our species has been caught in a false choice. On one side: a universe of chance, in which life is the accidental residue of blind selection. On the other: a universe of design, in which complexity must have been imposed by an external will. Both sides see something real. Both mistake a stage for the whole story.',
   'Natural selection has no foresight. Mutations do not arrive with a plan. Organisms that fit their circumstances leave more descendants, and those that do not tend to disappear. That mechanism is blind, slow, and often cruel. It is also capable, given enough time, of producing a creature that can imagine a future before it enters it.',
@@ -40,6 +57,7 @@ const paragraphs = [
 export default function BlindWatchmakerEssay() {
   return (
     <main className="min-h-screen bg-[#0a0a0c] text-zinc-300 selection:bg-indigo-500 selection:text-white">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }} />
       <article className="max-w-3xl mx-auto px-6 py-20 sm:py-28">
         <Link href="/books/the-unfinished-species" className="inline-block font-mono text-[10px] text-indigo-400 hover:text-white tracking-widest uppercase transition-colors mb-12">
           ← The Unfinished Species

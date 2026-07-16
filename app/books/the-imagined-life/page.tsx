@@ -24,6 +24,23 @@ export const metadata: Metadata = {
   },
 }
 
+const bookJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Book',
+  '@id': `${SITE_URL}/books/the-imagined-life#book`,
+  name: 'The Imagined Life',
+  alternativeHeadline: 'Living Inside a Dreaming Brain',
+  description: 'A book about dreaming, imagination, and the work of turning a possible future into an actual one.',
+  url: `${SITE_URL}/books/the-imagined-life`,
+  author: { '@type': 'Person', name: 'Mayone Maha Rajan' },
+  publisher: { '@type': 'Organization', name: 'Maha Strategies LLC', url: SITE_URL },
+  bookFormat: 'https://schema.org/EBook',
+  isAccessibleForFree: true,
+  inLanguage: 'en',
+  datePublished: '2026-07-16',
+  potentialAction: { '@type': 'ReadAction', target: `${SITE_URL}/books/the-imagined-life` },
+}
+
 const parts = [
   {
     number: 'I',
@@ -60,6 +77,7 @@ const parts = [
 export default function TheImaginedLifeHub() {
   return (
     <main className="min-h-screen bg-[#0a0a0c] text-zinc-300 selection:bg-indigo-500 selection:text-white">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(bookJsonLd) }} />
       <article className="max-w-4xl mx-auto px-6 py-20 sm:py-28">
         <header className="max-w-3xl border-l border-indigo-500 pl-6 sm:pl-8">
           <p className="font-mono text-[10px] text-indigo-400 tracking-widest uppercase mb-5">
@@ -88,13 +106,14 @@ export default function TheImaginedLifeHub() {
         <section className="mt-16 border border-indigo-900/50 bg-indigo-950/20 p-7 sm:p-10 relative overflow-hidden">
           <div className="absolute top-0 left-0 h-full w-1 bg-indigo-500" />
           <p className="font-mono text-[10px] text-indigo-400 tracking-widest uppercase mb-4">[ Read now ]</p>
-          <h2 className="text-2xl sm:text-3xl font-light text-white mb-4">The faculty of the possible</h2>
+          <h2 className="text-2xl sm:text-3xl font-light text-white mb-4">Chapter 1: What Happens When You Sleep</h2>
           <p className="text-zinc-400 leading-relaxed max-w-2xl mb-7">
-            The opening essay: a dream does not make itself real. It changes the dreamer, who changes their actions, which can then change the world.
+            The measurable architecture of sleep, from the first discovery of REM to the brain’s nightly shift into a generative state.
           </p>
-          <Link href="/books/the-imagined-life/the-faculty-of-the-possible" className="inline-block bg-white text-black font-mono font-bold text-xs tracking-widest uppercase px-7 py-4 hover:bg-zinc-200 transition-colors">
-            Read the opening essay ↗
+          <Link href="/books/the-imagined-life/what-happens-when-you-sleep" className="inline-block bg-white text-black font-mono font-bold text-xs tracking-widest uppercase px-7 py-4 hover:bg-zinc-200 transition-colors">
+            Read Chapter 1 ↗
           </Link>
+          <Link href="/books/the-imagined-life/the-faculty-of-the-possible" className="inline-block mt-5 sm:mt-0 sm:ml-6 font-mono text-[10px] text-zinc-400 hover:text-white tracking-widest uppercase transition-colors">Read the opening essay ↗</Link>
         </section>
 
         <section className="mt-20">

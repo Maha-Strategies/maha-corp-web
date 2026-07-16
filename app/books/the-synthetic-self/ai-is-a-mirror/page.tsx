@@ -24,6 +24,23 @@ export const metadata: Metadata = {
   },
 }
 
+const articleJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: 'AI Is a Mirror, Not an Oracle',
+  description: 'What language models learn from human text, why fluency is not truth, and why the machine’s problems so often lead back to us.',
+  url: `${SITE_URL}/books/the-synthetic-self/ai-is-a-mirror`,
+  mainEntityOfPage: `${SITE_URL}/books/the-synthetic-self/ai-is-a-mirror`,
+  isPartOf: { '@id': `${SITE_URL}/books/the-synthetic-self#book` },
+  author: { '@type': 'Person', name: 'Mayone Maha Rajan' },
+  publisher: { '@type': 'Organization', name: 'Maha Strategies LLC', url: SITE_URL },
+  datePublished: '2026-07-16',
+  dateModified: '2026-07-16',
+  isAccessibleForFree: true,
+  inLanguage: 'en',
+  articleSection: 'Opening essay',
+}
+
 const paragraphs = [
   'The first time a modern AI answers a difficult question well, there is a small moment of vertigo. It writes. It explains. It catches the shape of an argument. It can even apologize in a tone that resembles grace. The natural question is: what is this thing?',
   'The common answers make it sound like an intelligence that has arrived from somewhere else. Sometimes it is a threat: a new power, alien and accelerating. Sometimes it is a windfall: a tireless worker, a machine for turning prompts into competence. Those stories disagree about whether we should fear it or exploit it. They share a mistake. Both make the machine the agent and us the audience.',
@@ -44,6 +61,7 @@ const paragraphs = [
 export default function AiIsAMirrorEssay() {
   return (
     <main className="min-h-screen bg-[#0a0a0c] text-zinc-300 selection:bg-indigo-500 selection:text-white">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }} />
       <article className="max-w-3xl mx-auto px-6 py-20 sm:py-28">
         <Link href="/books/the-synthetic-self" className="inline-block font-mono text-[10px] text-indigo-400 hover:text-white tracking-widest uppercase transition-colors mb-12">
           ← The Synthetic Self

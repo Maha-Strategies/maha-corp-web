@@ -24,6 +24,23 @@ export const metadata: Metadata = {
   },
 }
 
+const articleJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: 'The Map Is Not the Mind',
+  description: 'A self is a system of relationships, not a set of personality labels. How to use a symbolic map without mistaking it for evidence.',
+  url: `${SITE_URL}/books/the-orbital-mind/the-map-is-not-the-mind`,
+  mainEntityOfPage: `${SITE_URL}/books/the-orbital-mind/the-map-is-not-the-mind`,
+  isPartOf: { '@id': `${SITE_URL}/books/the-orbital-mind#book` },
+  author: { '@type': 'Person', name: 'Mayone Maha Rajan' },
+  publisher: { '@type': 'Organization', name: 'Maha Strategies LLC', url: SITE_URL },
+  datePublished: '2026-07-16',
+  dateModified: '2026-07-16',
+  isAccessibleForFree: true,
+  inLanguage: 'en',
+  articleSection: 'Opening essay',
+}
+
 const paragraphs = [
   'A person can be highly capable and still feel internally ungoverned: thought pulling one way, desire another, obligation a third. The work that matters sits open in front of you while attention is captured by whatever is loudest. The problem is not always intelligence or effort. Often it is a problem of coordination.',
   'We reach for personality labels because they feel clarifying. They reduce a moving life to a fixed answer: this is who I am; this is the kind of person I have always been. But labels easily end the conversation we most need to have. They turn a relationship between functions into a verdict about a self.',
@@ -40,6 +57,7 @@ const paragraphs = [
 export default function MapIsNotMindEssay() {
   return (
     <main className="min-h-screen bg-[#0a0a0c] text-zinc-300 selection:bg-indigo-500 selection:text-white">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }} />
       <article className="max-w-3xl mx-auto px-6 py-20 sm:py-28">
         <Link href="/books/the-orbital-mind" className="inline-block font-mono text-[10px] text-indigo-400 hover:text-white tracking-widest uppercase transition-colors mb-12">
           ← The Orbital Mind
