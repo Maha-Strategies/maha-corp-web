@@ -49,11 +49,11 @@ const body = { fontSize: 17.5, lineHeight: 1.7, color: "#1A2420", maxWidth: 680 
 
 export default function MpsPage() {
   return (
-    <div style={{ minHeight: "100vh", background: "#EEF1EC", color: "#1A2420", fontFamily: "'Newsreader', Georgia, serif" }}>
+    <div className="mps-page" style={{ minHeight: "100vh", background: "#EEF1EC", color: "#1A2420", fontFamily: "'Newsreader', Georgia, serif" }}>
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
         .mono { font-family: 'IBM Plex Mono', monospace; }
-        a { color: #1A2420; }
+        .mps-page a { color: #1A2420; }
       `}</style>
 
       <div style={{ maxWidth: 880, margin: "0 auto", padding: "40px 20px 100px" }}>
