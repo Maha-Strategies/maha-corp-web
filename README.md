@@ -37,12 +37,13 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 
 ## Agent Inquiry Gateway
 
-`POST /api/agent-inquiries` is an authenticated, non-binding intake endpoint for the offers published in `/agent-offers.json`. It validates against `/agent-inquiry-schema.json` and sends a review draft through Resend. It does not accept payment, create a commission, or send work automatically.
+`POST /api/agent-inquiries` is an authenticated, non-binding intake endpoint for the offers published in `/agent-offers.json`. It validates against `/agent-inquiry-schema.json`, persists the inquiry and its first event to a private Supabase ledger, then attempts to notify the reviewer through Resend. It does not accept payment, create a commission, or send work automatically.
 
 Set these deployment environment variables before enabling it:
 
 ```text
 AGENT_INQUIRY_TOKEN=<unique random bearer token>
+AGENT_REVIEW_TOKEN=<different unique reviewer bearer token>
 RESEND_API_KEY=<existing Resend key>
 ```
 
@@ -65,4 +66,15 @@ curl --request POST https://www.mahastrategies.com/api/agent-inquiries \
   }'
 ```
 
-A successful `202` response means only that a review draft was delivered. It is not an acceptance, purchase confirmation, or service-level commitment.
+A successful `202` response means only that the request was recorded for human review. The returned `notificationStatus` shows whether the optional email notification was delivered. Neither result is an acceptance, purchase confirmation, or service-level commitment.
+
+Apply `supabase/migrations/20260716_agent_inquiry_ledger.sql` in the Supabase SQL Editor before enabling the gateway. The migration creates a private inquiry ledger, database-maintained event history, and RLS with no public access policies. The existing `NEXT_PUBLIC_SUPABASE_URL` and `SUPABASE_SERVICE_ROLE_KEY` deployment variables are required.
+
+Reviewer operations use a separate private endpoint:
+
+```text
+GET   /api/agent-inquiries/:inquiryId
+PATCH /api/agent-inquiries/:inquiryId
+```
+
+Both require `Authorization: Bearer <AGENT_REVIEW_TOKEN>`. GET returns the full private request and its event history. PATCH accepts one action: `start_review`, `needs_clarification`, `decline`, or `approve_for_scoping`; the last is an internal disposition, not an acceptance of work.
