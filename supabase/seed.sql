@@ -1,13 +1,5 @@
--- Local development seed. Applied only by `supabase db reset`; never runs in production.
-
--- Parity with hosted Supabase, where service_role receives full DML on public
--- tables through default privileges. The local supabase/postgres image ships
--- stricter defaults (no DML for service_role), which would 42501 every route.
-grant usage on schema public to service_role;
-grant select, insert, update, delete on all tables in schema public to service_role;
-grant usage, select on all sequences in schema public to service_role;
-alter default privileges for role postgres in schema public
-  grant select, insert, update, delete on tables to service_role;
+-- Local development seed. Applied only by `supabase db reset`; never runs in
+-- production. service_role table grants live in the explicit grants migration.
 
 -- Deterministic verification fixtures: one active client with a prepaid
 -- credential, a paid checkout, and a 10-credit purchase grant.
