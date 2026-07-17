@@ -71,11 +71,11 @@ export async function PATCH(request: Request, context: RouteContext<'/api/agent-
     .from('agent_client_credentials')
     .update({ status: 'revoked', revoked_at: revokedAt, revocation_reason: revocationReason })
     .eq('public_id', credentialId)
-    .eq('status', 'active')
+    .in('status', ['active', 'pending_payment'])
     .select('public_id, client_id, status, revoked_at')
     .maybeSingle()
   if (error) return jsonResponse({ error: { code: 'ledger_unavailable', message: 'The credential could not be revoked.' } }, 503)
-  if (!data) return jsonResponse({ error: { code: 'not_found', message: 'Active credential not found.' } }, 404)
+  if (!data) return jsonResponse({ error: { code: 'not_found', message: 'Revocable credential not found.' } }, 404)
 
-  return jsonResponse({ credential: data, revoked: true, note: 'Revocation takes effect immediately for new inquiry requests.' }, 200)
+  return jsonResponse({ credential: data, revoked: true, note: 'Revocation takes effect immediately for all new authenticated requests, including MPS audits.' }, 200)
 }

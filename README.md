@@ -146,3 +146,57 @@ STRIPE_MPS_CREDITS_WEBHOOK_SECRET
 Subscribe that endpoint to `checkout.session.completed`, `checkout.session.async_payment_succeeded`, `refund.created`, and `refund.updated`. Successful payment adds a purchase-grant entry; a successful refund adds a proportional reversal entry rather than mutating the grant. The webhook migration records each Stripe `evt_` ID under a unique constraint and atomically commits that event record with its ledger change. Duplicate events are acknowledged without another balance change, while an out-of-order refund receives a retryable response until its checkout grant exists.
 
 `GET /api/mps-credits` returns the authenticated client’s ledger balance. For prepaid credentials, `POST /api/mps-audits` atomically reserves one credit, returns HTTP 402 with the purchase URL when none remains, and creates an idempotent refund entry if execution fails. Existing credentials default to `internal_meter` and retain their prior meter-only behavior without credit enforcement.
+
+## MPS operational control plane
+
+Apply `supabase/migrations/20260718_mps_operational_control_plane.sql` after the prepaid-credit and Stripe-webhook migrations, then configure a dedicated server-only `MPS_OPERATIONS_TOKEN`. Do not reuse `AGENT_REVIEW_TOKEN`. The control plane has no public UI and never returns stored secret hashes or plaintext credentials.
+
+Use the exact-match lookup endpoint before any intervention. The request body keeps receipt emails and customer identifiers out of URL/access logs. Supported values are a receipt email, client ID, credential ID, 14-character credential prefix, checkout ID, Stripe Checkout Session ID, PaymentIntent ID, Refund ID, or Event ID.
+
+```bash
+curl --request POST https://www.mahastrategies.com/api/admin/mps-operations/lookup \
+  --header "Authorization: Bearer $MPS_OPERATIONS_TOKEN" \
+  --header "Content-Type: application/json" \
+  --data '{"query":"customer@example.com"}'
+```
+
+Mutations use `/api/admin/mps-operations/actions`. Every request requires a unique operator-supplied idempotency key, a reason, and an external ticket or Stripe reference. The database commits the mutation and immutable operator-action record in one transaction.
+
+Append a credit correction; never edit or delete existing ledger rows:
+
+```json
+{
+  "action": "credit_adjustment",
+  "clientId": "client_...",
+  "quantity": 1,
+  "idempotencyKey": "support-ticket-1042-credit-restore",
+  "reason": "Restore one credit after a confirmed engine failure.",
+  "referenceId": "ticket-1042"
+}
+```
+
+Immediately revoke an active or pending-payment credential:
+
+```json
+{
+  "action": "credential_revocation",
+  "credentialId": "cred_...",
+  "idempotencyKey": "abuse-case-1043-revoke",
+  "reason": "Credential reported as compromised.",
+  "referenceId": "ticket-1043"
+}
+```
+
+Replace a lost, active prepaid MPS credential while preserving its client-level balance:
+
+```json
+{
+  "action": "credential_replacement",
+  "credentialId": "cred_...",
+  "idempotencyKey": "support-ticket-1044-replace",
+  "reason": "Customer lost the only plaintext copy.",
+  "referenceId": "ticket-1044"
+}
+```
+
+Replacement revokes the old credential atomically and returns the new plaintext once. An idempotent replay confirms the original replacement but cannot redisclose its plaintext. Deliver new credentials through an approved secret-sharing channel; never put them in tickets, logs, source control, or chat. Supabase Studio may be used for inspection, but all balance corrections, revocations, and replacements must go through these audited actions rather than direct table edits.
