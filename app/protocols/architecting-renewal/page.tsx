@@ -2,7 +2,6 @@ import React from 'react';
 import Link from 'next/link';
 import 'katex/dist/katex.min.css';
 import { BlockMath, InlineMath } from 'react-katex';
-import TelemetryStrike from '../TelemetryStrike';
 
 export const metadata = {
   title: 'Architecting Renewal: Sovereign Infrastructure Solutions | Maha Strategies LLC',
@@ -23,7 +22,6 @@ export default function ArchitectingRenewalProtocol() {
 
   return (
     <main className="min-h-screen bg-[#0a0a0a] text-[#e0e0e0] py-16 px-6 sm:px-12 selection:bg-indigo-500 font-sans">
-      <TelemetryStrike endpoint="/protocols/architecting-renewal" wordCount="1102 words" />
       
       <script
         type="application/ld+json"

@@ -11,6 +11,7 @@ import {
 } from '@/lib/mps-audit-jobs'
 import { jsonResponse } from '@/lib/agent-inquiries'
 import { createCreditLedgerEntryId, ledgerEventHash, MPS_AUDIT_CREDIT_UNIT } from '@/lib/mps-credits'
+import { billingDecision } from '@/lib/mps-audit-billing'
 
 export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
@@ -123,6 +124,19 @@ export async function POST(request: Request) {
   }
 
   const auditId = createMpsAuditJobId()
+
+  // Mandatory model boundary: no audit record, Anthropic client, or message
+  // request is created for a new audit until this explicitly returns `allow`.
+  const billing = await billingDecision(authorization.billingMode, async () => {
+    const { data, error } = await changeAuditCredit(ledger, 'consume_mps_audit_credit', authorization.clientId, auditId)
+    return { accepted: data === true, errorCode: error?.code }
+  })
+  if (billing.kind === 'payment_required') return purchaseRequired()
+  if (billing.kind === 'unavailable') {
+    console.error('MPS audit credit consumption failed:', billing.errorCode)
+    return jsonResponse({ error: { code: 'ledger_unavailable', message: 'The audit credit could not be reserved.' } }, 503)
+  }
+
   const { error: createError } = await ledger.from('agent_mps_audits').insert({
     public_id: auditId,
     client_id: authorization.clientId,
@@ -133,6 +147,7 @@ export async function POST(request: Request) {
     model: MODEL,
   })
   if (createError?.code === '23505') {
+    if (billing.creditReserved) await changeAuditCredit(ledger, 'refund_mps_audit_credit', authorization.clientId, auditId)
     const replay = await existingAudit(ledger, authorization.credentialId, input.clientRequestId)
     if (!replay.error && replay.data && replay.data.input_hash === input.inputHash) {
       return jsonResponse(auditResponse(replay.data, true), replay.data.status === 'processing' ? 202 : 200)
@@ -140,23 +155,12 @@ export async function POST(request: Request) {
     return jsonResponse({ error: { code: 'idempotency_conflict', message: 'clientRequestId was already used with different source text.' } }, 409)
   }
   if (createError) {
+    if (billing.creditReserved) await changeAuditCredit(ledger, 'refund_mps_audit_credit', authorization.clientId, auditId)
     console.error('MPS audit ledger creation failed:', createError.code)
     return jsonResponse({ error: { code: 'ledger_unavailable', message: 'The MPS audit could not be recorded.' } }, 503)
   }
 
-  if (authorization.billingMode === 'prepaid') {
-    const { data: consumed, error: consumeError } = await changeAuditCredit(ledger, 'consume_mps_audit_credit', authorization.clientId, auditId)
-    if (consumeError) {
-      await ledger.from('agent_mps_audits').delete().eq('public_id', auditId)
-      console.error('MPS audit credit consumption failed:', consumeError.code)
-      return jsonResponse({ error: { code: 'ledger_unavailable', message: 'The audit credit could not be reserved.' } }, 503)
-    }
-    if (consumed !== true) {
-      await ledger.from('agent_mps_audits').delete().eq('public_id', auditId)
-      return purchaseRequired()
-    }
-  }
-
+  // ANTHROPIC MODEL BOUNDARY — reachable only after billing.kind === 'allow'.
   try {
     const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY })
     const result = await runMpsAudit(input.passage, async (prompt) => {

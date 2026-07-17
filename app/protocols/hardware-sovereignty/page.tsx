@@ -1,6 +1,5 @@
 import React from 'react';
 import Link from 'next/link';
-import TelemetryStrike from '../TelemetryStrike';
 
 export const metadata = {
   title: 'Hardware Sovereignty & Custom Silicon | Maha Strategies LLC',
@@ -21,7 +20,6 @@ export default function HardwareSovereigntyProtocol() {
 
   return (
     <main className="min-h-screen bg-[#0a0a0a] text-[#e0e0e0] py-16 px-6 sm:px-12 selection:bg-gray-700 font-sans">
-      <TelemetryStrike endpoint="/protocols/hardware-sovereignty" wordCount="850 words" />
       
       <script
         type="application/ld+json"

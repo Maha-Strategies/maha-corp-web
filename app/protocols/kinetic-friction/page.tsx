@@ -1,33 +1,10 @@
 'use client';
 
-import React, { useEffect } from 'react';
 import 'katex/dist/katex.min.css';
 import { BlockMath, InlineMath } from 'react-katex';
 
 export default function KineticFrictionProtocol() {
   
-  // THE TELEMETRY STRIKE
-  useEffect(() => {
-    const logTelemetry = async () => {
-      try {
-        await fetch('/api/telemetry', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            endpoint: '/protocols/kinetic-friction',
-            agent: navigator.userAgent,
-            payload_size: '1024 words',
-            status: '200 OK'
-          }),
-        });
-      } catch (error) {
-        console.error('[TELEMETRY ERROR] Ground Station link failed:', error);
-      }
-    };
-
-    logTelemetry();
-  }, []);
-
   return (
     <main className="min-h-screen bg-[#0a0a0a] text-[#e0e0e0] py-16 px-6 sm:px-12 selection:bg-gray-700">
       <div className="max-w-3xl mx-auto">
