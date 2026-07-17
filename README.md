@@ -123,3 +123,20 @@ curl --request POST https://www.mahastrategies.com/api/mps-audits \
     "text": "In 2024, the company reported a 32 percent increase in output."
   }'
 ```
+
+## Prepaid MPS audit credit ledger
+
+The repository includes a Stripe-backed, credential-scoped purchase ledger for a future prepaid MPS audit credit pack. A completed Stripe Checkout session grants a fixed number of `mps_audit_invocation` units to the named `agent_client`; a duplicate Stripe event cannot create a second grant.
+
+It is intentionally disabled by default. It requires the `20260717_mps_audit_credit_ledger.sql` Supabase migration, a dedicated Stripe Price, a dedicated webhook endpoint at `/api/mps-credits/webhook`, and all of these server-only variables before `POST /api/mps-credits/checkout` can create a checkout:
+
+```text
+STRIPE_MPS_AUDIT_CREDIT_PRICE_ID
+MPS_AUDIT_CREDIT_PACK_UNITS
+MPS_AUDIT_CREDIT_CHECKOUT_ENABLED=true
+STRIPE_MPS_CREDITS_WEBHOOK_SECRET
+```
+
+Subscribe that endpoint to `checkout.session.completed`, `checkout.session.async_payment_succeeded`, `refund.created`, and `refund.updated`. Successful payment adds a purchase-grant entry; a successful refund adds a proportional reversal entry rather than mutating the grant.
+
+`GET /api/mps-credits` returns the authenticated client’s current ledger balance. The current audit API does **not** deduct credits yet, and the private OAuth Audit Bridge is not yet mapped to a purchasable client account. Do not enable this checkout for external sale until a consumption policy and an OAuth-client-to-credit-account mapping have been approved and deployed.

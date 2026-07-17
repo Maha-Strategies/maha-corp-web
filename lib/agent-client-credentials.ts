@@ -91,6 +91,10 @@ export async function authorizeClientCapability(token: string, capability: Agent
   return authorizeClientAccess(token, (credential) => credential.allowed_capabilities.includes(capability))
 }
 
+export async function authorizeClientCapabilityForBilling(token: string, capability: AgentCapability): Promise<CredentialAuthorization> {
+  return authorizeClientAccess(token, (credential) => credential.allowed_capabilities.includes(capability), false)
+}
+
 type CredentialRecord = {
   public_id: string
   client_id: string
@@ -102,7 +106,7 @@ type CredentialRecord = {
   status: string
 }
 
-async function authorizeClientAccess(token: string, isAllowed: (credential: CredentialRecord) => boolean): Promise<CredentialAuthorization> {
+async function authorizeClientAccess(token: string, isAllowed: (credential: CredentialRecord) => boolean, applyRateLimit = true): Promise<CredentialAuthorization> {
   const ledger = createAgentInquiryLedger()
   if (!ledger) return { kind: 'unavailable' }
 
@@ -131,7 +135,7 @@ async function authorizeClientAccess(token: string, isAllowed: (credential: Cred
   if (!client || client.status !== 'active') return { kind: 'unauthorized' }
 
   if (!isAllowed(credential as CredentialRecord)) return { kind: 'forbidden' }
-  if (!acceptRateLimitedRequest(credential.public_id, credential.rate_limit_per_hour)) return { kind: 'rate_limited' }
+  if (applyRateLimit && !acceptRateLimitedRequest(credential.public_id, credential.rate_limit_per_hour)) return { kind: 'rate_limited' }
 
   return {
     kind: 'authorized',
