@@ -43,6 +43,14 @@ export function validCreditCheckoutId(value: string): boolean {
   return /^credit_checkout_[a-f0-9]{32}$/.test(value)
 }
 
+export function validStripeEventId(value: string): boolean {
+  return /^evt_[A-Za-z0-9]+$/.test(value)
+}
+
+export function stripeWebhookPayloadHash(raw: string): string {
+  return `sha256:${createHash('sha256').update(raw).digest('hex')}`
+}
+
 export function requestHash(clientRequestId: string): string {
   return `sha256:${createHash('sha256').update(clientRequestId).digest('hex')}`
 }

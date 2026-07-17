@@ -134,7 +134,7 @@ Apply `supabase/migrations/20260717_public_mps_audit_usage.sql` and set the serv
 
 The repository includes self-service Stripe Checkout at `/mps/audit-access`. Each purchase creates a dormant credential scoped only to `mps_audit`; Stripe's signed webhook atomically grants the configured `mps_audit_invocation` pack and activates that credential. The secret is disclosed once in the purchasing browser.
 
-It is disabled by default. It requires both the `20260717_mps_audit_credit_ledger.sql` and `20260717_self_service_mps_audit_access.sql` migrations, a dedicated Stripe Price, a dedicated webhook endpoint at `/api/mps-credits/webhook`, and all of these server-only variables before `POST /api/mps-credits/checkout` can create a checkout:
+It is disabled by default. It requires the `20260717_mps_audit_credit_ledger.sql`, `20260717_self_service_mps_audit_access.sql`, and `20260717_stripe_webhook_idempotency.sql` migrations, a dedicated Stripe Price, a dedicated webhook endpoint at `/api/mps-credits/webhook`, and all of these server-only variables before `POST /api/mps-credits/checkout` can create a checkout:
 
 ```text
 STRIPE_MPS_AUDIT_CREDIT_PRICE_ID
@@ -143,6 +143,6 @@ MPS_AUDIT_CREDIT_CHECKOUT_ENABLED=true
 STRIPE_MPS_CREDITS_WEBHOOK_SECRET
 ```
 
-Subscribe that endpoint to `checkout.session.completed`, `checkout.session.async_payment_succeeded`, `refund.created`, and `refund.updated`. Successful payment adds a purchase-grant entry; a successful refund adds a proportional reversal entry rather than mutating the grant.
+Subscribe that endpoint to `checkout.session.completed`, `checkout.session.async_payment_succeeded`, `refund.created`, and `refund.updated`. Successful payment adds a purchase-grant entry; a successful refund adds a proportional reversal entry rather than mutating the grant. The webhook migration records each Stripe `evt_` ID under a unique constraint and atomically commits that event record with its ledger change. Duplicate events are acknowledged without another balance change, while an out-of-order refund receives a retryable response until its checkout grant exists.
 
 `GET /api/mps-credits` returns the authenticated client’s ledger balance. For prepaid credentials, `POST /api/mps-audits` atomically reserves one credit, returns HTTP 402 with the purchase URL when none remains, and creates an idempotent refund entry if execution fails. Existing credentials default to `internal_meter` and retain their prior meter-only behavior without credit enforcement.
