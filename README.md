@@ -130,11 +130,11 @@ curl --request POST https://www.mahastrategies.com/api/mps-audits \
 
 Apply `supabase/migrations/20260717_public_mps_audit_usage.sql` and set the server-only `MPS_PUBLIC_AUDIT_RATE_LIMIT_SECRET` before deploying this version. The secret HMACs an IP-and-user-agent visitor fingerprint for a three-runs-per-day quota; neither the source text nor a source-text hash is saved in the public usage or event tables. The public event table records only submitted, completed, failed, and record-download events with counts/timestamps so that conversion can be measured without collecting the passage.
 
-## Prepaid MPS audit credit ledger
+## Prepaid MPS audit access
 
-The repository includes a Stripe-backed, credential-scoped purchase ledger for a future prepaid MPS audit credit pack. A completed Stripe Checkout session grants a fixed number of `mps_audit_invocation` units to the named `agent_client`; a duplicate Stripe event cannot create a second grant.
+The repository includes self-service Stripe Checkout at `/mps/audit-access`. Each purchase creates a dormant credential scoped only to `mps_audit`; Stripe's signed webhook atomically grants the configured `mps_audit_invocation` pack and activates that credential. The secret is disclosed once in the purchasing browser.
 
-It is intentionally disabled by default. It requires the `20260717_mps_audit_credit_ledger.sql` Supabase migration, a dedicated Stripe Price, a dedicated webhook endpoint at `/api/mps-credits/webhook`, and all of these server-only variables before `POST /api/mps-credits/checkout` can create a checkout:
+It is disabled by default. It requires both the `20260717_mps_audit_credit_ledger.sql` and `20260717_self_service_mps_audit_access.sql` migrations, a dedicated Stripe Price, a dedicated webhook endpoint at `/api/mps-credits/webhook`, and all of these server-only variables before `POST /api/mps-credits/checkout` can create a checkout:
 
 ```text
 STRIPE_MPS_AUDIT_CREDIT_PRICE_ID
@@ -145,4 +145,4 @@ STRIPE_MPS_CREDITS_WEBHOOK_SECRET
 
 Subscribe that endpoint to `checkout.session.completed`, `checkout.session.async_payment_succeeded`, `refund.created`, and `refund.updated`. Successful payment adds a purchase-grant entry; a successful refund adds a proportional reversal entry rather than mutating the grant.
 
-`GET /api/mps-credits` returns the authenticated client’s current ledger balance. The current audit API does **not** deduct credits yet, and the private OAuth Audit Bridge is not yet mapped to a purchasable client account. Do not enable this checkout for external sale until a consumption policy and an OAuth-client-to-credit-account mapping have been approved and deployed.
+`GET /api/mps-credits` returns the authenticated client’s ledger balance. For prepaid credentials, `POST /api/mps-audits` atomically reserves one credit, returns HTTP 402 with the purchase URL when none remains, and creates an idempotent refund entry if execution fails. Existing credentials default to `internal_meter` and retain their prior meter-only behavior without credit enforcement.

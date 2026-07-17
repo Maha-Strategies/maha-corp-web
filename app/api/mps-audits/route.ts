@@ -10,6 +10,7 @@ import {
   serializableMpsAuditResult,
 } from '@/lib/mps-audit-jobs'
 import { jsonResponse } from '@/lib/agent-inquiries'
+import { createCreditLedgerEntryId, ledgerEventHash, MPS_AUDIT_CREDIT_UNIT } from '@/lib/mps-credits'
 
 export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
@@ -57,6 +58,29 @@ async function existingAudit(ledger: NonNullable<ReturnType<typeof createAgentIn
     .eq('client_request_id', clientRequestId)
     .maybeSingle()
   return { data: data as StoredAudit | null, error }
+}
+
+async function changeAuditCredit(
+  ledger: NonNullable<ReturnType<typeof createAgentInquiryLedger>>,
+  operation: 'consume_mps_audit_credit' | 'refund_mps_audit_credit',
+  clientId: string,
+  auditId: string,
+) {
+  const entryId = createCreditLedgerEntryId()
+  const createdAt = new Date().toISOString()
+  const quantity = operation === 'consume_mps_audit_credit' ? -1 : 1
+  const sourceId = auditId
+  return ledger.rpc(operation, {
+    p_client_id: clientId, p_audit_id: auditId, p_entry_id: entryId, p_created_at: createdAt,
+    p_event_hash: ledgerEventHash({ entryId, clientId, checkoutId: auditId, quantity, sourceId, createdAt }),
+  })
+}
+
+function purchaseRequired() {
+  return jsonResponse({
+    error: { code: 'payment_required', message: 'This prepaid credential has no audit credits remaining.' },
+    purchase: { href: '/mps/audit-access', checkoutEndpoint: '/api/mps-credits/checkout', unit: MPS_AUDIT_CREDIT_UNIT },
+  }, 402)
 }
 
 export async function POST(request: Request) {
@@ -120,6 +144,19 @@ export async function POST(request: Request) {
     return jsonResponse({ error: { code: 'ledger_unavailable', message: 'The MPS audit could not be recorded.' } }, 503)
   }
 
+  if (authorization.billingMode === 'prepaid') {
+    const { data: consumed, error: consumeError } = await changeAuditCredit(ledger, 'consume_mps_audit_credit', authorization.clientId, auditId)
+    if (consumeError) {
+      await ledger.from('agent_mps_audits').delete().eq('public_id', auditId)
+      console.error('MPS audit credit consumption failed:', consumeError.code)
+      return jsonResponse({ error: { code: 'ledger_unavailable', message: 'The audit credit could not be reserved.' } }, 503)
+    }
+    if (consumed !== true) {
+      await ledger.from('agent_mps_audits').delete().eq('public_id', auditId)
+      return purchaseRequired()
+    }
+  }
+
   try {
     const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY })
     const result = await runMpsAudit(input.passage, async (prompt) => {
@@ -137,6 +174,7 @@ export async function POST(request: Request) {
       .select('public_id, client_request_id, input_hash, status, result, failure_code')
       .maybeSingle()
     if (completeError || !completed) {
+      if (authorization.billingMode === 'prepaid') await changeAuditCredit(ledger, 'refund_mps_audit_credit', authorization.clientId, auditId)
       console.error('MPS audit completion write failed:', completeError?.code ?? 'missing_record')
       return jsonResponse({ error: { code: 'ledger_unavailable', message: 'The audit result could not be recorded.' } }, 503)
     }
@@ -148,6 +186,10 @@ export async function POST(request: Request) {
       .update({ status: 'failed', failure_code: failureCode, completed_at: new Date().toISOString() })
       .eq('public_id', auditId)
     if (failError) console.error('MPS audit failure write failed:', failError.code)
+    if (authorization.billingMode === 'prepaid') {
+      const { error: refundError } = await changeAuditCredit(ledger, 'refund_mps_audit_credit', authorization.clientId, auditId)
+      if (refundError) console.error('MPS audit credit refund failed:', refundError.code)
+    }
     console.error('MPS audit execution failed:', error instanceof Error ? error.name : 'unknown_error')
     return jsonResponse({ error: { code: failureCode, message: 'The audit did not complete. Try again with a new clientRequestId.' } }, 502)
   }

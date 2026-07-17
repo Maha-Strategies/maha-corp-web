@@ -132,38 +132,13 @@ export async function POST(request: Request) {
 
   const entryId = createCreditLedgerEntryId()
   const createdAt = new Date().toISOString()
-  const { error: creditError } = await ledger.from('mps_credit_ledger_entries').insert({
-    public_id: entryId,
-    client_id: checkout.client_id,
-    checkout_id: checkout.public_id,
-    entry_type: 'purchase_grant',
-    unit: MPS_AUDIT_CREDIT_UNIT,
-    quantity: checkout.credit_quantity,
-    source_type: 'stripe_checkout_session',
-    source_id: session.id,
-    event_hash: ledgerEventHash({ entryId, clientId: checkout.client_id, checkoutId: checkout.public_id, quantity: checkout.credit_quantity, sourceId: session.id, createdAt }),
-    metadata: { stripePriceId: checkout.stripe_price_id, stripePaymentIntentId: session.payment_intent ?? null, stripePaymentAmount: session.amount_total, stripePaymentCurrency: session.currency.toLowerCase() },
-    created_at: createdAt,
+  const eventHash = ledgerEventHash({ entryId, clientId: checkout.client_id, checkoutId: checkout.public_id, quantity: checkout.credit_quantity, sourceId: session.id, createdAt })
+  const { data: finalized, error: updateError } = await ledger.rpc('finalize_mps_credit_purchase', {
+    p_checkout_id: checkout.public_id, p_session_id: session.id, p_payment_intent_id: session.payment_intent ?? null,
+    p_amount: session.amount_total, p_currency: session.currency, p_entry_id: entryId, p_event_hash: eventHash, p_created_at: createdAt,
   })
-  if (creditError && creditError.code !== '23505') {
-    console.error('MPS credit grant failed:', creditError.code)
-    return Response.json({ error: 'Ledger unavailable.' }, { status: 503 })
-  }
-
-  const { error: updateError } = await ledger
-    .from('mps_credit_checkouts')
-    .update({
-      status: 'paid',
-      stripe_checkout_session_id: session.id,
-      stripe_payment_intent_id: session.payment_intent ?? null,
-      stripe_payment_amount: session.amount_total,
-      stripe_payment_currency: session.currency.toLowerCase(),
-      paid_at: createdAt,
-    })
-    .eq('public_id', checkout.public_id)
-    .eq('status', 'awaiting_payment')
-  if (updateError) {
-    console.error('MPS credit checkout payment update failed:', updateError.code)
+  if (updateError || finalized !== true) {
+    console.error('MPS credit checkout finalization failed:', updateError?.code ?? 'rejected')
     return Response.json({ error: 'Ledger unavailable.' }, { status: 503 })
   }
   return Response.json({ received: true })

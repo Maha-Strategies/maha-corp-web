@@ -11,7 +11,7 @@ export const AGENT_CAPABILITIES = ['mps_audit'] as const
 export type AgentCapability = typeof AGENT_CAPABILITIES[number]
 
 export type CredentialAuthorization =
-  | { kind: 'authorized'; clientId: string; credentialId: string; credentialLabel: string; tokenFingerprint: string }
+  | { kind: 'authorized'; clientId: string; credentialId: string; credentialLabel: string; tokenFingerprint: string; billingMode: 'internal_meter' | 'prepaid' }
   | { kind: 'unavailable' }
   | { kind: 'unauthorized' }
   | { kind: 'forbidden' }
@@ -104,6 +104,7 @@ type CredentialRecord = {
   rate_limit_per_hour: number
   expires_at: string
   status: string
+  billing_mode: 'internal_meter' | 'prepaid'
 }
 
 async function authorizeClientAccess(token: string, isAllowed: (credential: CredentialRecord) => boolean, applyRateLimit = true): Promise<CredentialAuthorization> {
@@ -113,7 +114,7 @@ async function authorizeClientAccess(token: string, isAllowed: (credential: Cred
   const fingerprint = tokenFingerprint(token)
   const { data: credential, error: credentialError } = await ledger
     .from('agent_client_credentials')
-    .select('public_id, client_id, label, allowed_offer_ids, allowed_capabilities, rate_limit_per_hour, expires_at, status')
+    .select('public_id, client_id, label, allowed_offer_ids, allowed_capabilities, rate_limit_per_hour, expires_at, status, billing_mode')
     .eq('secret_hash', fingerprint)
     .maybeSingle()
   if (credentialError) {
@@ -143,5 +144,6 @@ async function authorizeClientAccess(token: string, isAllowed: (credential: Cred
     credentialId: credential.public_id,
     credentialLabel: credential.label,
     tokenFingerprint: fingerprint,
+    billingMode: credential.billing_mode,
   }
 }

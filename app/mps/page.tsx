@@ -87,6 +87,9 @@ export default function MpsPage() {
           <Link href="/mps/preflight" className="mono" style={{ fontSize: 12, letterSpacing: "0.1em", border: "1px solid #1A2420", color: "#1A2420", padding: "11px 20px", textDecoration: "none", borderRadius: 2, display: "inline-block", marginLeft: 10 }}>
             RUN A PRIVATE PREFLIGHT — $49 →
           </Link>
+          <Link href="/mps/audit-access" className="mono" style={{ fontSize: 12, letterSpacing: "0.1em", border: "1px solid #1A2420", color: "#1A2420", padding: "11px 20px", textDecoration: "none", borderRadius: 2, display: "inline-block", marginLeft: 10, marginTop: 10 }}>
+            PURCHASE API AUDIT ACCESS →
+          </Link>
         </p>
 
         <div className="mono" style={sec}>1 · SCOPE</div>

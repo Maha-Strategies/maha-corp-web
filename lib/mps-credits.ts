@@ -65,7 +65,7 @@ export function ledgerEventHash(input: {
   ].join('|')).digest('hex')}`
 }
 
-export function parseCreditCheckoutRequest(value: unknown): { clientRequestId: string } {
+export function parseCreditCheckoutRequest(value: unknown): { clientRequestId: string; email: string } {
   if (typeof value !== 'object' || value === null || Array.isArray(value)) throw new Error('Request body must be a JSON object.')
   const clientRequestId = (value as Record<string, unknown>).clientRequestId
   if (typeof clientRequestId !== 'string') throw new Error('clientRequestId must be a string.')
@@ -73,7 +73,11 @@ export function parseCreditCheckoutRequest(value: unknown): { clientRequestId: s
   if (trimmed.length < 8 || trimmed.length > 120 || /[\r\n]/.test(trimmed)) {
     throw new Error('clientRequestId must contain between 8 and 120 characters on one line.')
   }
-  return { clientRequestId: trimmed }
+  const email = (value as Record<string, unknown>).email
+  if (typeof email !== 'string' || email.length > 254 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) {
+    throw new Error('email must be a valid email address.')
+  }
+  return { clientRequestId: trimmed, email: email.trim().toLowerCase() }
 }
 
 export function creditPackConfig(): CreditPackConfig | null {

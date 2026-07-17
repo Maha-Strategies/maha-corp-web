@@ -27,7 +27,7 @@ export async function GET(request: Request) {
     clientId: authorization.clientId,
     unit: MPS_AUDIT_CREDIT_UNIT,
     balance: creditBalance((entries ?? []) as { quantity: number | string }[]),
-    billingEnforcement: 'not_enabled',
+    billingEnforcement: authorization.billingMode === 'prepaid' ? 'prepaid' : 'internal_meter',
     checkouts: checkouts ?? [],
   }, 200)
 }
