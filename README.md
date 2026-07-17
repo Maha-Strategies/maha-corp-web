@@ -124,6 +124,12 @@ curl --request POST https://www.mahastrategies.com/api/mps-audits \
   }'
 ```
 
+## Public MPS audit preflight
+
+`/audit` is the free, bounded public MPS preflight. It accepts a passage of up to 6,000 characters, returns a claim map in the browser, and lets a visitor download a source-free JSON record. It is distinct from the credentialed API and from the paid private Preflight at `/mps/preflight`.
+
+Apply `supabase/migrations/20260717_public_mps_audit_usage.sql` and set the server-only `MPS_PUBLIC_AUDIT_RATE_LIMIT_SECRET` before deploying this version. The secret HMACs an IP-and-user-agent visitor fingerprint for a three-runs-per-day quota; neither the source text nor a source-text hash is saved in the public usage or event tables. The public event table records only submitted, completed, failed, and record-download events with counts/timestamps so that conversion can be measured without collecting the passage.
+
 ## Prepaid MPS audit credit ledger
 
 The repository includes a Stripe-backed, credential-scoped purchase ledger for a future prepaid MPS audit credit pack. A completed Stripe Checkout session grants a fixed number of `mps_audit_invocation` units to the named `agent_client`; a duplicate Stripe event cannot create a second grant.

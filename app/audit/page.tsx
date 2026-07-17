@@ -35,6 +35,8 @@ export default function AuditPage() {
   const [error, setError] = useState("");
   const [selected, setSelected] = useState<number | null>(null);
 
+  const charactersRemaining = 6_000 - text.length;
+
   const runAudit = async () => {
     const input = text.trim();
     if (!input) { setError("Paste a passage to audit — or load the sample."); return; }
@@ -50,8 +52,8 @@ export default function AuditPage() {
       if (!res.ok) throw new Error(data.error || "Audit failed");
       setClaims(data.claims);
       setAuditedText(input);
-    } catch (e: any) {
-      setError(e.message || "The audit didn't complete. Please try again.");
+    } catch (error: unknown) {
+      setError(error instanceof Error ? error.message : "The audit didn't complete. Please try again.");
     } finally {
       clearInterval(ticker); setLoading(false); setLoadStep(0);
     }
@@ -64,9 +66,9 @@ export default function AuditPage() {
     claims.forEach((c: Claim) => countsByTag[c.tag]++);
     const record = {
       mps_version: "0.1",
-      document: "pasted passage (demo)",
+      document: "pasted passage (free preflight)",
       audited: new Date().toISOString().slice(0, 10),
-      compliance_level: "MPS-Declared (demo audit)",
+      compliance_level: "MPS-Declared (free preflight)",
       claims: claims.map((c: Claim, i: number) => ({
         id: `c${String(i + 1).padStart(3, "0")}`,
         excerpt: c.excerpt,
@@ -79,7 +81,7 @@ export default function AuditPage() {
         counts_by_tag: countsByTag,
         compliance: countsByTag.UNVERIFIED === 0 ? "pass" : "conditional",
       },
-      note: "Demo record. VERIFIED status requires human confirmation against primary sources; full audits resolve each claim source-by-source.",
+      note: "Free preflight record. VERIFIED status requires human confirmation against primary sources; the source passage is not included in this export or retained by Maha.",
       standard: "https://mahastrategies.com/mps",
       doi: "10.5281/zenodo.21241308",
     };
@@ -90,6 +92,11 @@ export default function AuditPage() {
     a.download = `mps-audit-${record.audited}.json`;
     a.click();
     URL.revokeObjectURL(url);
+    void fetch("/api/audit/events", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ event: "record_downloaded" }),
+    }).catch(() => undefined);
   };
 
   const segments = useMemo(() => {
@@ -135,16 +142,15 @@ export default function AuditPage() {
 
       <div style={{ maxWidth: 880, margin: "0 auto", padding: "40px 20px 80px" }}>
         <div className="mono" style={{ fontSize: 11, letterSpacing: "0.18em", color: "#5A6660", display: "flex", justifyContent: "space-between", borderBottom: "1px solid #C8CEC6", paddingBottom: 12 }}>
-          <span>MAHA PROVENANCE STANDARD</span><span>MPS/0.1 · AUDIT DEMO</span>
+          <span>MAHA PROVENANCE STANDARD</span><span>MPS/0.1 · FREE PREFLIGHT</span>
         </div>
 
         <h1 style={{ fontSize: "clamp(34px, 6vw, 54px)", fontWeight: 500, lineHeight: 1.05, margin: "34px 0 14px", letterSpacing: "-0.01em" }}>
-          Every claim, on the record.
+          Run a free claim preflight.
         </h1>
         <p style={{ fontSize: 19, lineHeight: 1.55, maxWidth: 620, margin: "0 0 30px", color: "#3A453F" }}>
-          AI-assisted writing fails by sounding certain. This auditor reads a passage,
-          isolates its substantive claims, and marks each with its epistemic status —
-          the same discipline applied across the Maha Strategies book series.
+          Paste a short nonfiction passage. MPS isolates its substantive claims and marks
+          their epistemic status, so you can see what a reader is being asked to trust.
         </p>
 
         <div style={{ display: "flex", flexWrap: "wrap", gap: 8, marginBottom: 34 }}>
@@ -157,7 +163,7 @@ export default function AuditPage() {
         </div>
 
         <div style={{ background: "#FBFCFA", border: "1px solid #C8CEC6", borderRadius: 3, padding: 18 }}>
-          <div className="mono" style={{ fontSize: 11, letterSpacing: "0.14em", color: "#5A6660", marginBottom: 10 }}>PASSAGE UNDER AUDIT</div>
+          <div className="mono" style={{ fontSize: 11, letterSpacing: "0.14em", color: "#5A6660", marginBottom: 10 }}>PASSAGE UNDER AUDIT · FREE PUBLIC PREFLIGHT</div>
           <textarea
             value={text}
             onChange={(e) => setText(e.target.value)}
@@ -167,7 +173,7 @@ export default function AuditPage() {
           <div style={{ display: "flex", gap: 10, marginTop: 12, flexWrap: "wrap", alignItems: "center" }}>
             <button onClick={runAudit} disabled={loading} className="mono"
               style={{ background: "#1A2420", color: "#EEF1EC", border: "none", padding: "11px 22px", fontSize: 13, letterSpacing: "0.1em", cursor: loading ? "wait" : "pointer", borderRadius: 2 }}>
-              {loading ? LOADING_LINES[loadStep] : "RUN AUDIT"}
+              {loading ? LOADING_LINES[loadStep] : "RUN FREE PREFLIGHT"}
             </button>
             <button onClick={() => { setText(SAMPLE); setError(""); }} className="mono"
               style={{ background: "transparent", color: "#1A2420", border: "1px solid #9AA49D", padding: "10px 16px", fontSize: 13, letterSpacing: "0.1em", cursor: "pointer", borderRadius: 2 }}>
@@ -175,6 +181,9 @@ export default function AuditPage() {
             </button>
             {error && <span style={{ color: "#B3402E", fontSize: 14 }}>{error}</span>}
           </div>
+          <p style={{ margin: "14px 0 0", color: "#5A6660", fontSize: 13, lineHeight: 1.5 }}>
+            {charactersRemaining.toLocaleString()} characters remaining · 3 free runs per visitor each day. Maha does not save the full passage in its audit ledger; it is sent to an AI provider only to generate this audit.
+          </p>
         </div>
 
         {claims && counts && segments && (
@@ -230,7 +239,7 @@ export default function AuditPage() {
             </div>
 
             <p style={{ fontSize: 13.5, color: "#5A6660", marginTop: 22, lineHeight: 1.55, maxWidth: 640 }}>
-              Demo audit — tags reflect what an auditor can determine from the text alone; VERIFIED
+              Free preflight — tags reflect what an auditor can determine from the text alone; VERIFIED
               status requires human confirmation against primary sources. Full manuscript audits produce
               a structured MPS/0.1 record with source-by-source resolution.
               <span className="mono" style={{ display: "block", marginTop: 8, fontSize: 11, letterSpacing: "0.12em" }}>
@@ -240,7 +249,7 @@ export default function AuditPage() {
 
             <div style={{ marginTop: 30, background: "#1A2420", color: "#EEF1EC", borderRadius: 3, padding: "22px 24px", maxWidth: 640 }}>
               <div className="mono" style={{ fontSize: 11, letterSpacing: "0.16em", color: "#9AA49D", marginBottom: 10 }}>
-                GO BEYOND THE DEMO
+                GO BEYOND THE FREE PREFLIGHT
               </div>
               <p style={{ fontSize: 16.5, lineHeight: 1.6, margin: "0 0 16px" }}>
                 Run a private MPS Preflight on an extract of up to about 2,000 words, then receive a
@@ -249,7 +258,7 @@ export default function AuditPage() {
               </p>
               <a href="/mps/preflight" className="mono"
                 style={{ display: "inline-block", background: "#EEF1EC", color: "#1A2420", padding: "10px 18px", fontSize: 12, letterSpacing: "0.1em", textDecoration: "none", borderRadius: 2 }}>
-                RUN MPS PREFLIGHT — $49 →
+                RUN PRIVATE PREFLIGHT — $49 →
               </a>
               <span className="mono" style={{ marginLeft: 14, fontSize: 12, color: "#9AA49D" }}>
                 or <a href="/contact" style={{ color: "#EEF1EC" }}>request human review</a>

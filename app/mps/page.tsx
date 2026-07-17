@@ -82,7 +82,7 @@ export default function MpsPage() {
         </p>
         <p style={{ marginTop: 22 }}>
           <Link href="/audit" className="mono" style={{ fontSize: 12, letterSpacing: "0.1em", background: "#1A2420", color: "#EEF1EC", padding: "12px 22px", textDecoration: "none", borderRadius: 2, display: "inline-block" }}>
-            TRY THE LIVE AUDITOR →
+            RUN A FREE PREFLIGHT →
           </Link>
           <Link href="/mps/preflight" className="mono" style={{ fontSize: 12, letterSpacing: "0.1em", border: "1px solid #1A2420", color: "#1A2420", padding: "11px 20px", textDecoration: "none", borderRadius: 2, display: "inline-block", marginLeft: 10 }}>
             RUN A PRIVATE PREFLIGHT — $49 →
@@ -176,8 +176,9 @@ export default function MpsPage() {
           <a href="mailto:mayone@mahastrategies.com">mayone@mahastrategies.com</a>.
         </p>
         <p style={body}>
-          For a short draft or document extract, <Link href="/mps/preflight">MPS Preflight</Link> provides
-          a private automated claim map before you commission a source-by-source human review.
+          Start with a <Link href="/audit">free public preflight</Link> for a short passage, or use the
+          private <Link href="/mps/preflight">MPS Preflight</Link> for a longer document extract and a
+          retained private report before commissioning a source-by-source human review.
         </p>
 
         <div style={{ borderTop: "1px solid #C8CEC6", marginTop: 56, paddingTop: 18 }}>
