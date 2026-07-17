@@ -1,22 +1,44 @@
 'use client'
 
-import { FormEvent, useState } from 'react'
+import { FormEvent, useMemo, useState, useSyncExternalStore } from 'react'
+
+import ApiAccessTokenReveal from './ApiAccessTokenReveal'
 
 const STORAGE_KEY = 'mps-audit-access-purchase'
+const RESTORING = 'restoring'
 
 type Purchase = { credential: string; creditQuantity: number; expiresAt: string }
+
+// One-time reveal: the token only crosses sessionStorage to survive the Stripe
+// redirect. The first read purges it, so a refresh, shared machine, or later
+// tab restore can never resurface it; afterwards it exists only in memory.
+let revealedPurchaseJson: string | null | undefined
+function readPurchaseOnce(): string | null {
+  if (revealedPurchaseJson === undefined) {
+    revealedPurchaseJson = sessionStorage.getItem(STORAGE_KEY)
+    sessionStorage.removeItem(STORAGE_KEY)
+  }
+  return revealedPurchaseJson
+}
+const subscribeToNothing = () => () => {}
 
 export default function AuditAccessCheckout({ purchaseState }: { purchaseState?: string }) {
   const [email, setEmail] = useState('')
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
-  const [copyStatus, setCopyStatus] = useState<'idle' | 'copied' | 'failed'>('idle')
-  const [purchase] = useState<Purchase | null>(() => {
-    if (purchaseState !== 'success' || typeof window === 'undefined') return null
-    const saved = sessionStorage.getItem(STORAGE_KEY)
-    if (!saved) return null
-    try { return JSON.parse(saved) as Purchase } catch { sessionStorage.removeItem(STORAGE_KEY); return null }
-  })
+
+  // The server snapshot renders a placeholder, so server and client markup
+  // stay identical until the storage read resolves on the client.
+  const purchaseJson = useSyncExternalStore(
+    subscribeToNothing,
+    purchaseState === 'success' ? readPurchaseOnce : () => null,
+    () => (purchaseState === 'success' ? RESTORING : null),
+  )
+  const restoring = purchaseJson === RESTORING
+  const purchase = useMemo<Purchase | null>(() => {
+    if (!purchaseJson || purchaseJson === RESTORING) return null
+    try { return JSON.parse(purchaseJson) as Purchase } catch { return null }
+  }, [purchaseJson])
 
   async function checkout(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
@@ -37,35 +59,14 @@ export default function AuditAccessCheckout({ purchaseState }: { purchaseState?:
     }
   }
 
-  async function copyApiAccessToken(token: string) {
-    try {
-      await navigator.clipboard.writeText(token)
-      setCopyStatus('copied')
-    } catch {
-      setCopyStatus('failed')
-    }
-  }
-
   if (purchaseState === 'success') {
     return <div className="mt-10 border border-emerald-800 bg-emerald-950/20 p-6 sm:p-8">
       <p className="font-mono text-[10px] uppercase tracking-widest text-emerald-300">[ Payment received ]</p>
-      {purchase ? <>
-        <p className="mt-4 text-sm leading-relaxed text-zinc-300">Your MPS-only API access token includes {purchase.creditQuantity} audit {purchase.creditQuantity === 1 ? 'credit' : 'credits'}.</p>
-        <div role="alert" className="mt-6 border-2 border-red-500 bg-red-950/40 p-5 text-red-100">
-          <p className="font-mono text-xs font-bold uppercase tracking-widest text-red-300">Save this token before closing this window</p>
-          <p className="mt-3 text-sm font-semibold leading-relaxed">This is the only recoverable plaintext copy. Maha Strategies cannot display or recover this API access token after this browser window closes. Store it in your password manager or secret manager now.</p>
-        </div>
-        <div className="mt-6 border border-zinc-600 bg-black p-5" data-nosnippet>
-          <p className="font-mono text-[10px] font-bold uppercase tracking-widest text-zinc-400">API Access Token</p>
-          <code aria-label="API access token" className="mt-3 block select-all break-all border border-zinc-800 bg-zinc-950 p-4 text-sm leading-relaxed text-white">{purchase.credential}</code>
-          <button type="button" onClick={() => copyApiAccessToken(purchase.credential)} className="mt-4 w-full bg-white px-5 py-4 font-mono text-xs font-bold uppercase tracking-widest text-black hover:bg-zinc-200 sm:w-auto">Copy API Access Token</button>
-          <p aria-live="polite" className={`mt-3 text-xs ${copyStatus === 'failed' ? 'text-red-300' : 'text-emerald-300'}`}>
-            {copyStatus === 'copied' && 'API access token copied. Save it somewhere secure before leaving this page.'}
-            {copyStatus === 'failed' && 'Automatic copy failed. Select the visible token above and copy it manually.'}
-          </p>
-        </div>
-        <p className="mt-4 text-xs text-zinc-500">Stripe may take a few seconds to activate the credential. It expires {new Date(purchase.expiresAt).toLocaleDateString()}.</p>
-      </> : <div role="alert" className="mt-5 border-2 border-red-500 bg-red-950/40 p-5 text-red-100">
+      {restoring ? <div aria-hidden className="mt-6 animate-pulse border border-zinc-700 bg-zinc-950 p-5">
+        <p className="font-mono text-[10px] uppercase tracking-widest text-zinc-500">Retrieving secure token…</p>
+        <div className="mt-3 h-12 bg-zinc-900" />
+      </div> : purchase ? <ApiAccessTokenReveal credential={purchase.credential} creditQuantity={purchase.creditQuantity} expiresAt={purchase.expiresAt} />
+        : <div role="alert" className="mt-5 border-2 border-red-500 bg-red-950/40 p-5 text-red-100">
         <p className="font-mono text-xs font-bold uppercase tracking-widest text-red-300">API access token unavailable</p>
         <p className="mt-3 text-sm leading-relaxed">This browser no longer holds the one-time plaintext token, and it cannot be recovered from the credential registry. Contact support with your Stripe receipt.</p>
       </div>}
