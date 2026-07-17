@@ -2,10 +2,7 @@ import { randomBytes, randomUUID } from 'node:crypto'
 
 import { type OfferId, OFFERS, tokenFingerprint } from '@/lib/agent-inquiries'
 import { createAgentInquiryLedger } from '@/lib/agent-inquiry-ledger'
-
-const RATE_WINDOW_MS = 60 * 60 * 1000
-
-const credentialRateWindows = new Map<string, { startedAt: number; count: number }>()
+import { consumeCredentialRateLimit } from '@/lib/credential-rate-limit'
 
 export const AGENT_CAPABILITIES = ['mps_audit'] as const
 export type AgentCapability = typeof AGENT_CAPABILITIES[number]
@@ -71,18 +68,6 @@ export function parseAllowedCapabilities(value: unknown): AgentCapability[] {
   return capabilities
 }
 
-function acceptRateLimitedRequest(credentialId: string, limit: number): boolean {
-  const now = Date.now()
-  const current = credentialRateWindows.get(credentialId)
-  if (!current || now - current.startedAt >= RATE_WINDOW_MS) {
-    credentialRateWindows.set(credentialId, { startedAt: now, count: 1 })
-    return true
-  }
-  if (current.count >= limit) return false
-  current.count += 1
-  return true
-}
-
 export async function authorizeClientCredential(token: string, offerId: OfferId): Promise<CredentialAuthorization> {
   return authorizeClientAccess(token, (credential) => credential.allowed_offer_ids.includes(offerId))
 }
@@ -136,7 +121,18 @@ async function authorizeClientAccess(token: string, isAllowed: (credential: Cred
   if (!client || client.status !== 'active') return { kind: 'unauthorized' }
 
   if (!isAllowed(credential as CredentialRecord)) return { kind: 'forbidden' }
-  if (applyRateLimit && !acceptRateLimitedRequest(credential.public_id, credential.rate_limit_per_hour)) return { kind: 'rate_limited' }
+  if (applyRateLimit) {
+    const rateLimit = await consumeCredentialRateLimit(
+      credential.public_id,
+      credential.rate_limit_per_hour,
+      (parameters) => ledger.rpc('consume_agent_credential_rate_limit', parameters),
+    )
+    if (rateLimit.kind === 'unavailable') {
+      console.error('Agent credential rate limiter failed:', rateLimit.errorCode)
+      return { kind: 'unavailable' }
+    }
+    if (rateLimit.kind === 'rate_limited') return { kind: 'rate_limited' }
+  }
 
   return {
     kind: 'authorized',

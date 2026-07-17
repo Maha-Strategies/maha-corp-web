@@ -69,7 +69,7 @@ curl --request POST https://www.mahastrategies.com/api/agent-inquiries \
 
 A successful `202` response means only that the request was recorded for human review. The returned `notificationStatus` shows whether the optional email notification was delivered. Neither result is an acceptance, purchase confirmation, or service-level commitment.
 
-Apply `supabase/migrations/20260716_agent_inquiry_ledger.sql`, `supabase/migrations/20260716_agent_client_credentials.sql`, and `supabase/migrations/20260716_mps_audit_jobs.sql` in the Supabase SQL Editor before enabling the full agent infrastructure. Together, they create the private inquiry ledger, credential registry, MPS audit ledger, database-maintained event histories, and RLS with no public access policies. The existing `NEXT_PUBLIC_SUPABASE_URL` and `SUPABASE_SERVICE_ROLE_KEY` deployment variables are required.
+Apply `supabase/migrations/20260716_agent_inquiry_ledger.sql`, `supabase/migrations/20260716_agent_client_credentials.sql`, `supabase/migrations/20260716_mps_audit_jobs.sql`, and `supabase/migrations/20260717_serverless_credential_rate_limits.sql` in the Supabase SQL Editor before enabling the full agent infrastructure. Together, they create the private inquiry ledger, credential registry, MPS audit ledger, database-maintained event histories, and an atomic shared credential rate limiter with RLS and no public access policies. The existing `NEXT_PUBLIC_SUPABASE_URL` and `SUPABASE_SERVICE_ROLE_KEY` deployment variables are required.
 
 Reviewer operations use a separate private endpoint:
 
