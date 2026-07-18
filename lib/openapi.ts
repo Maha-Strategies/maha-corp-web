@@ -30,6 +30,18 @@ function errorResponse(description: string) {
 const INFO_DESCRIPTION = `
 The Maha Provenance Standard (MPS) API runs claim-level provenance audits over prose. Every factual claim in a passage is excerpted, tagged (${MPS_TAGS.join(', ')}), and returned with a rationale and a recommended action — so agents and editors can verify before they publish.
 
+## Local bridge (CLI)
+
+Install the open-source local bridge and point Claude Code, Cursor, or any MCP client at it:
+
+\`\`\`sh
+npm install -g maha-mcp-bridge
+maha login        # verify and store your credential
+maha serve        # start the stdio MCP server
+\`\`\`
+
+Raw rows and credentials stay local; only locally-redacted context reaches the agent's cloud model.
+
 ## Authentication
 
 Commercial endpoints use bearer credentials:
