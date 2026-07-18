@@ -35,7 +35,7 @@ The Maha Provenance Standard (MPS) API runs claim-level provenance audits over p
 Install the open-source local bridge and point Claude Code, Cursor, or any MCP client at it:
 
 \`\`\`sh
-npm install -g maha-mcp-bridge
+npm install -g @mahastrategies/maha-mcp-bridge
 maha login        # verify and store your credential
 maha serve        # start the stdio MCP server
 \`\`\`
