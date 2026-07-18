@@ -80,6 +80,39 @@ export async function authorizeClientCapabilityForBilling(token: string, capabil
   return authorizeClientAccess(token, (credential) => credential.allowed_capabilities.includes(capability), false)
 }
 
+export type BookEntitlementAuthorization =
+  | { kind: 'entitled'; clientId: string; bookId: string }
+  | { kind: 'unavailable' }
+  | { kind: 'unauthorized' }
+  | { kind: 'not_entitled' }
+
+// Book ownership is orthogonal to the mps_audit capability, so this authenticates
+// the credential (core hashing + status/expiry checks, no rate limit, no
+// capability requirement) and then checks the book_entitlements table. Kept
+// separate from the credit/capability path so book logic never leaks into it.
+export async function authorizeBookEntitlement(token: string, bookId: string): Promise<BookEntitlementAuthorization> {
+  const authorization = await authorizeClientAccess(token, () => true, false)
+  if (authorization.kind !== 'authorized') {
+    return authorization.kind === 'unavailable' ? { kind: 'unavailable' } : { kind: 'unauthorized' }
+  }
+
+  const ledger = createAgentInquiryLedger()
+  if (!ledger) return { kind: 'unavailable' }
+  const { data, error } = await ledger
+    .from('book_entitlements')
+    .select('public_id')
+    .eq('client_id', authorization.clientId)
+    .eq('book_id', bookId)
+    .is('revoked_at', null)
+    .maybeSingle()
+  if (error) {
+    console.error('Book entitlement lookup failed:', error.code)
+    return { kind: 'unavailable' }
+  }
+  if (!data) return { kind: 'not_entitled' }
+  return { kind: 'entitled', clientId: authorization.clientId, bookId }
+}
+
 type CredentialRecord = {
   public_id: string
   client_id: string

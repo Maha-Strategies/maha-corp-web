@@ -36,15 +36,20 @@ function routePathsOnDisk(dir: string, prefix: string): string[] {
   return paths
 }
 
+// OpenAPI writes path params as `{id}`; Next.js names the directory `[id]`.
+function specPathToDisk(specPath: string): string {
+  return specPath.replace(/\{([^}]+)\}/g, '[$1]')
+}
+
 test('every documented path has a route handler on disk', () => {
   for (const specPath of Object.keys(openApiDocument.paths)) {
-    const routeFile = join(APP_DIR, ...specPath.split('/').filter(Boolean), 'route.ts')
+    const routeFile = join(APP_DIR, ...specPathToDisk(specPath).split('/').filter(Boolean), 'route.ts')
     assert.ok(existsSync(routeFile), `${specPath} is documented but ${routeFile} does not exist`)
   }
 })
 
 test('every API route on disk is documented or explicitly private', () => {
-  const documented = new Set(Object.keys(openApiDocument.paths))
+  const documented = new Set(Object.keys(openApiDocument.paths).map(specPathToDisk))
   for (const routePath of routePathsOnDisk(join(APP_DIR, 'api'), '/api')) {
     assert.ok(
       documented.has(routePath) || PRIVATE_ROUTES.has(routePath),

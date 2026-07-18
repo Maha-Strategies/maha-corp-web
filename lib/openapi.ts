@@ -90,8 +90,45 @@ export const openApiDocument = {
     { name: 'Checkout', description: 'Self-service credit purchase.' },
     { name: 'Webhooks', description: 'Stripe payment confirmation (called by Stripe, documented for transparency).' },
     { name: 'Free Preflight', description: 'Rate-limited public demo, no credential required.' },
+    { name: 'Books', description: 'Purchased-book entitlement checks for the local MCP bridge.' },
   ],
   paths: {
+    '/api/books/{id}/entitlement': {
+      get: {
+        tags: ['Books'],
+        operationId: 'getBookEntitlement',
+        summary: 'Check whether a credential owns a book',
+        description: 'Used by the `maha book mount` CLI to verify purchase authorization before serving a book over MCP. Returns the title if the authenticated credential holds an active entitlement for the book.',
+        security: [{ credential: [] }],
+        parameters: [
+          {
+            name: 'id',
+            in: 'path',
+            required: true,
+            description: 'Lowercase book slug.',
+            schema: { type: 'string', pattern: '^[a-z0-9][a-z0-9-]{1,63}$' },
+          },
+        ],
+        responses: {
+          '200': {
+            description: 'The credential owns this book.',
+            content: {
+              'application/json': {
+                schema: {
+                  type: 'object',
+                  required: ['title'],
+                  properties: { title: { type: 'string', description: 'Book title.' } },
+                },
+              },
+            },
+          },
+          '401': errorResponse('Missing or invalid credential.'),
+          '403': errorResponse('Credential is valid but holds no entitlement for this book.'),
+          '404': errorResponse('No such book.'),
+          '503': errorResponse('The entitlement registry is unavailable.'),
+        },
+      },
+    },
     '/api/mps-audits': {
       post: {
         tags: ['MPS Audit'],
