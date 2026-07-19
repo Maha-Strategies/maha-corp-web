@@ -86,3 +86,56 @@ export function readBookAst(slug: string): BookAst | null {
   const { title, chunks } = chunkMarkdown(markdown)
   return { slug, title, chunkCount: chunks.length, chunks }
 }
+
+export type MarkdownBlock =
+  | { type: 'heading'; level: number; text: string }
+  | { type: 'paragraph'; text: string }
+  | { type: 'list'; items: string[] }
+  | { type: 'hr' }
+
+// Block-level parser for server-side rendering the full book as semantic HTML.
+// Handles the element vocabulary the manuscripts actually use: ATX headings,
+// unordered lists, thematic breaks, and blank-line-separated paragraphs. Inline
+// spans (**bold**, *italic*) are left in `text` for the renderer to turn into
+// React elements — nothing here emits HTML, so there is no injection surface.
+export function parseMarkdownBlocks(markdown: string, options?: { skipFirstH1?: boolean }): MarkdownBlock[] {
+  const blocks: MarkdownBlock[] = []
+  let paragraph: string[] = []
+  let list: string[] = []
+  let skippedFirstH1 = false
+
+  const flushParagraph = () => {
+    if (paragraph.length) { blocks.push({ type: 'paragraph', text: paragraph.join(' ') }); paragraph = [] }
+  }
+  const flushList = () => {
+    if (list.length) { blocks.push({ type: 'list', items: list.slice() }); list = [] }
+  }
+  const flush = () => { flushParagraph(); flushList() }
+
+  for (const raw of markdown.split(/\r?\n/)) {
+    const line = raw.replace(/\s+$/, '')
+    const heading = /^(#{1,6})\s+(.+)$/.exec(line)
+    const listItem = /^\s*[-*]\s+(.+)$/.exec(line)
+    const isRule = /^(-{3,}|\*{3,}|_{3,})$/.test(line.trim())
+
+    if (heading) {
+      flush()
+      const level = heading[1].length
+      if (options?.skipFirstH1 && level === 1 && !skippedFirstH1) { skippedFirstH1 = true; continue }
+      blocks.push({ type: 'heading', level, text: heading[2].trim() })
+    } else if (isRule) {
+      flush()
+      blocks.push({ type: 'hr' })
+    } else if (listItem) {
+      flushParagraph()
+      list.push(listItem[1].trim())
+    } else if (line.trim() === '') {
+      flush()
+    } else {
+      flushList()
+      paragraph.push(line.trim())
+    }
+  }
+  flush()
+  return blocks
+}

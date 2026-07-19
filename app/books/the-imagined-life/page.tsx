@@ -1,8 +1,7 @@
-import Link from 'next/link'
 import type { Metadata } from 'next'
-import BookChapterList from '@/components/BookChapterList'
-import BookReaderPaths from '@/components/BookReaderPaths'
 import BookEndpointCTA from '@/components/BookEndpointCTA'
+import MarkdownArticle from '@/components/MarkdownArticle'
+import { parseMarkdownBlocks, readBookMarkdown } from '@/lib/content'
 
 const SITE_URL = 'https://www.mahastrategies.com'
 
@@ -44,40 +43,10 @@ const bookJsonLd = {
   potentialAction: { '@type': 'ReadAction', target: `${SITE_URL}/books/the-imagined-life` },
 }
 
-const parts = [
-  {
-    number: 'I',
-    title: 'The Dreaming Brain',
-    subtitle: 'Established science · The credibility anchor',
-    chapters: ['What Happens When You Sleep', 'Why We Dream, and Why No One Yet Knows'],
-  },
-  {
-    number: 'II',
-    title: 'The Edge of the Known',
-    subtitle: 'Where sleep science meets the inference machine',
-    chapters: ['The Hardest Thing to Study', 'Two Engines, One Trick'],
-  },
-  {
-    number: 'III',
-    title: 'Extreme States of Simulation',
-    subtitle: 'When the dreaming mind reveals its workings',
-    chapters: ['The Dreamer at the Controls', 'When the Machinery Fails'],
-  },
-  {
-    number: 'IV',
-    title: 'The Speculative Frontier',
-    subtitle: 'Open questions, held as open questions',
-    chapters: ['Are Dreams Computation?', 'The Quantum Question', 'The Machines That Dream'],
-  },
-  {
-    number: 'V',
-    title: 'The Imagined Life',
-    subtitle: 'The possible self and the work of making it real',
-    chapters: ['The Waking Dream', 'Steering the Simulator', 'Coda: The Future of Dreaming'],
-  },
-]
-
 export default function TheImaginedLifeHub() {
+  // Read at build time (static route) via the path-safe reader; the leading H1
+  // is skipped because the page header already renders the title.
+  const blocks = parseMarkdownBlocks(readBookMarkdown('the-imagined-life') ?? '', { skipFirstH1: true })
   return (
     <main className="min-h-screen bg-[#0a0a0c] text-zinc-300 selection:bg-indigo-500 selection:text-white">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(bookJsonLd) }} />
@@ -108,42 +77,7 @@ export default function TheImaginedLifeHub() {
 
         <BookEndpointCTA title="The Imagined Life" placement="top" />
 
-        <section className="mt-16 border border-indigo-900/50 bg-indigo-950/20 p-7 sm:p-10 relative overflow-hidden">
-          <div className="absolute top-0 left-0 h-full w-1 bg-indigo-500" />
-          <p className="font-mono text-xs text-indigo-300 tracking-widest uppercase mb-4">[ Read now ]</p>
-          <h2 className="text-2xl sm:text-3xl font-light text-white mb-4">Chapter 1: What Happens When You Sleep</h2>
-          <p className="text-zinc-400 leading-relaxed max-w-2xl mb-7">
-            The measurable architecture of sleep, from the first discovery of REM to the brain’s nightly shift into a generative state.
-          </p>
-          <Link href="/books/the-imagined-life/what-happens-when-you-sleep" className="inline-block bg-white text-black font-mono font-bold text-xs tracking-widest uppercase px-7 py-4 hover:bg-zinc-200 transition-colors">
-            Read Chapter 1 ↗
-          </Link>
-          <BookReaderPaths
-            guideHref="/books/the-imagined-life/sleep-stages-explained"
-            guideTitle="Sleep stages explained"
-            guideDescription="An evidence-led guide to NREM sleep, REM sleep, sleep cycles, and why dreams are not only a REM phenomenon."
-            essayHref="/books/the-imagined-life/the-faculty-of-the-possible"
-            essayTitle="The faculty of the possible"
-          />
-        </section>
-
-        <section className="mt-20">
-          <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-8">
-            <div>
-              <p className="font-mono text-xs text-indigo-300 tracking-widest uppercase mb-3">[ Table of contents ]</p>
-              <h2 className="text-2xl sm:text-3xl font-light text-white">From the sleeping brain to the imagined future.</h2>
-            </div>
-            <p className="font-mono text-xs text-zinc-500 tracking-widest uppercase">One chapter available · further chapters forthcoming</p>
-          </div>
-          <BookChapterList parts={parts} availableChapter={{ title: 'What Happens When You Sleep', href: '/books/the-imagined-life/what-happens-when-you-sleep' }} />
-        </section>
-
-        <section className="mt-20 border-t border-zinc-800 pt-10 max-w-3xl">
-          <p className="font-mono text-xs text-indigo-300 tracking-widest uppercase mb-4">[ Method ]</p>
-          <p className="text-zinc-400 leading-relaxed">
-            The book separates empirical findings from theoretical interpretation and clearly fenced speculation. AI assisted the drafting process; Mayone Maha Rajan is responsible for the argument, editorial decisions, and source verification. Chapters are released after a final claim-and-source review.
-          </p>
-        </section>
+        <MarkdownArticle blocks={blocks} />
 
         <BookEndpointCTA title="The Imagined Life" placement="bottom" />
       </article>

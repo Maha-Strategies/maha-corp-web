@@ -1,7 +1,7 @@
-import Link from 'next/link'
 import type { Metadata } from 'next'
-import BookReaderPaths from '@/components/BookReaderPaths'
 import BookEndpointCTA from '@/components/BookEndpointCTA'
+import MarkdownArticle from '@/components/MarkdownArticle'
+import { parseMarkdownBlocks, readBookMarkdown } from '@/lib/content'
 
 const SITE_URL = 'https://www.mahastrategies.com'
 
@@ -44,21 +44,10 @@ const bookJsonLd = {
   potentialAction: { '@type': 'ReadAction', target: `${SITE_URL}/books/the-synthetic-self` },
 }
 
-const chapters = [
-  ['01', 'The Learning Machine', 'How language models learn, and why the mirror is not merely a metaphor.'],
-  ['02', 'The Thermodynamics of Thought', 'The physical bill of computation: heat, energy, architecture, and scale.'],
-  ['03', 'Computation Versus Understanding', 'What fluent machine output can—and cannot—tell us about understanding.'],
-  ['04', 'The Data Problem', 'Bias, contamination, and what happens when the mirror reflects itself.'],
-  ['05', 'The Alignment Problem, Honestly', 'Why telling a machine what we value begins with knowing what we value.'],
-  ['06', 'Inside the Black Box', 'Why AI can be capable, useful, and still difficult to trust.'],
-  ['07', 'The Centaur', 'The case for human–machine combination over replacement.'],
-  ['08', 'Cognitive Offloading and Atrophy', 'When assistance amplifies human capacity—and when it substitutes for it.'],
-  ['09', 'The Economics of Synthetic Abundance', 'What remains scarce when competent output becomes cheap.'],
-  ['10', 'The Substrate Question', 'The material limits and possible futures of machine intelligence.'],
-  ['11', 'The Parent and the Child', 'Why the machine’s inheritance makes responsibility a human question.'],
-]
-
 export default function TheSyntheticSelfHub() {
+  // Read at build time (static route) via the path-safe reader; the leading H1
+  // is skipped because the page header already renders the title.
+  const blocks = parseMarkdownBlocks(readBookMarkdown('the-synthetic-self') ?? '', { skipFirstH1: true })
   return (
     <main className="min-h-screen bg-[#0a0a0c] text-zinc-300 selection:bg-indigo-500 selection:text-white">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(bookJsonLd) }} />
@@ -89,61 +78,7 @@ export default function TheSyntheticSelfHub() {
 
         <BookEndpointCTA title="The Synthetic Self" placement="top" />
 
-        <section className="mt-16 border border-indigo-900/50 bg-indigo-950/20 p-7 sm:p-10 relative overflow-hidden">
-          <div className="absolute top-0 left-0 h-full w-1 bg-indigo-500" />
-          <p className="font-mono text-xs text-indigo-300 tracking-widest uppercase mb-4">[ Read now ]</p>
-          <h2 className="text-2xl sm:text-3xl font-light text-white mb-4">Chapter 1: The Learning Machine</h2>
-          <p className="text-zinc-400 leading-relaxed max-w-2xl mb-7">
-            How a language model is trained, what that mechanism does and does not explain, and why the book calls it a mirror of the human record.
-          </p>
-          <Link href="/books/the-synthetic-self/the-learning-machine" className="inline-block bg-white text-black font-mono font-bold text-xs tracking-widest uppercase px-7 py-4 hover:bg-zinc-200 transition-colors">
-            Read Chapter 1 ↗
-          </Link>
-          <BookReaderPaths
-            guideHref="/books/the-synthetic-self/how-large-language-models-learn"
-            guideTitle="How do large language models learn?"
-            guideDescription="A plain-English guide to tokens, training, prediction, and why fluent AI is not automatically factual."
-            essayHref="/books/the-synthetic-self/ai-is-a-mirror"
-            essayTitle="AI is a mirror, not an oracle"
-          />
-        </section>
-
-        <section className="mt-20">
-          <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-8">
-            <div>
-              <p className="font-mono text-xs text-indigo-300 tracking-widest uppercase mb-3">[ Table of contents ]</p>
-              <h2 className="text-2xl sm:text-3xl font-light text-white">A single idea, followed all the way down.</h2>
-            </div>
-            <p className="font-mono text-xs text-zinc-500 tracking-widest uppercase">One chapter available · further chapters forthcoming</p>
-          </div>
-          <ol className="border-t border-zinc-800">
-            {chapters.map(([number, title, description]) => (
-              <li key={number} className="grid grid-cols-[3rem_1fr] gap-4 sm:gap-7 border-b border-zinc-800 py-6">
-                <span className="font-mono text-xs text-zinc-500 tracking-widest pt-1">{number}</span>
-                <div>
-                  {number === '01' ? (
-                    <Link href="/books/the-synthetic-self/the-learning-machine" className="inline-flex items-center gap-2 text-lg text-zinc-100 hover:text-white transition-colors mb-2">
-                      <span>{title}</span>
-                      <span className="border border-indigo-700 px-2 py-0.5 font-mono text-xs text-indigo-200 tracking-wider uppercase">Available</span>
-                    </Link>
-                  ) : (
-                    <h3 className="text-lg text-zinc-100 mb-2">
-                      {title} <span className="font-mono text-xs text-zinc-500 tracking-wider uppercase">Forthcoming</span>
-                    </h3>
-                  )}
-                  <p className="text-sm text-zinc-400 leading-relaxed">{description}</p>
-                </div>
-              </li>
-            ))}
-          </ol>
-        </section>
-
-        <section className="mt-20 border-t border-zinc-800 pt-10 max-w-3xl">
-          <p className="font-mono text-xs text-indigo-300 tracking-widest uppercase mb-4">[ Method ]</p>
-          <p className="text-zinc-400 leading-relaxed">
-            The web edition distinguishes established findings, sourced figures, interpretation, and frontier speculation. AI assisted the drafting process; Mayone Maha Rajan is responsible for the book’s argument, editorial decisions, and source verification. Chapters are released after a final claim-and-source review.
-          </p>
-        </section>
+        <MarkdownArticle blocks={blocks} />
 
         <BookEndpointCTA title="The Synthetic Self" placement="bottom" />
       </article>

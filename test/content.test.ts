@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
 
-import { chunkMarkdown, readBookAst, readBookMarkdown } from '../lib/content.ts'
+import { chunkMarkdown, parseMarkdownBlocks, readBookAst, readBookMarkdown } from '../lib/content.ts'
 
 test('chunkMarkdown splits at H1/H2 boundaries and captures bodies', () => {
   const markdown = [
@@ -35,6 +35,48 @@ test('readBookMarkdown rejects unknown and path-traversal slugs', () => {
   assert.equal(readBookMarkdown('not-a-book'), null)
   assert.equal(readBookMarkdown('../../etc/passwd'), null)
   assert.equal(readBookMarkdown('the-orbital-mind'), null) // known book, but no master file at the canonical path
+})
+
+test('parseMarkdownBlocks maps headings, paragraphs, lists, and rules', () => {
+  const md = [
+    '# Title',
+    '',
+    '## Section',
+    'First line',
+    'joined with second.',
+    '',
+    '- item one',
+    '- item **two**',
+    '',
+    '---',
+    '',
+    'A closing *paragraph*.',
+  ].join('\n')
+
+  const blocks = parseMarkdownBlocks(md)
+  assert.deepEqual(blocks[0], { type: 'heading', level: 1, text: 'Title' })
+  assert.deepEqual(blocks[1], { type: 'heading', level: 2, text: 'Section' })
+  assert.deepEqual(blocks[2], { type: 'paragraph', text: 'First line joined with second.' })
+  assert.deepEqual(blocks[3], { type: 'list', items: ['item one', 'item **two**'] })
+  assert.deepEqual(blocks[4], { type: 'hr' })
+  assert.deepEqual(blocks[5], { type: 'paragraph', text: 'A closing *paragraph*.' })
+})
+
+test('parseMarkdownBlocks can skip the leading H1 (page header shows the title)', () => {
+  const blocks = parseMarkdownBlocks('# Duplicate Title\n\nBody.', { skipFirstH1: true })
+  assert.equal(blocks.find((b) => b.type === 'heading' && b.text === 'Duplicate Title'), undefined)
+  assert.deepEqual(blocks[0], { type: 'paragraph', text: 'Body.' })
+})
+
+test('parseMarkdownBlocks on the real book yields many blocks with no raw heading markers', () => {
+  const md = readBookMarkdown('the-imagined-life')
+  assert.ok(md)
+  const blocks = parseMarkdownBlocks(md, { skipFirstH1: true })
+  assert.ok(blocks.length > 100)
+  assert.ok(blocks.some((b) => b.type === 'heading'))
+  assert.ok(blocks.some((b) => b.type === 'paragraph'))
+  // No block text should still contain a leading '#' heading marker.
+  assert.ok(!blocks.some((b) => (b.type === 'paragraph' || b.type === 'heading') && /^#/.test(b.text)))
 })
 
 test('readBookAst reads the real launch book end-to-end', () => {
