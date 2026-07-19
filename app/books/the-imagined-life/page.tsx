@@ -2,6 +2,7 @@ import Link from 'next/link'
 import type { Metadata } from 'next'
 import BookChapterList from '@/components/BookChapterList'
 import BookReaderPaths from '@/components/BookReaderPaths'
+import BookEndpointCTA from '@/components/BookEndpointCTA'
 
 const SITE_URL = 'https://www.mahastrategies.com'
 
@@ -105,6 +106,8 @@ export default function TheImaginedLifeHub() {
           </p>
         </section>
 
+        <BookEndpointCTA title="The Imagined Life" placement="top" />
+
         <section className="mt-16 border border-indigo-900/50 bg-indigo-950/20 p-7 sm:p-10 relative overflow-hidden">
           <div className="absolute top-0 left-0 h-full w-1 bg-indigo-500" />
           <p className="font-mono text-xs text-indigo-300 tracking-widest uppercase mb-4">[ Read now ]</p>
@@ -141,6 +144,8 @@ export default function TheImaginedLifeHub() {
             The book separates empirical findings from theoretical interpretation and clearly fenced speculation. AI assisted the drafting process; Mayone Maha Rajan is responsible for the argument, editorial decisions, and source verification. Chapters are released after a final claim-and-source review.
           </p>
         </section>
+
+        <BookEndpointCTA title="The Imagined Life" placement="bottom" />
       </article>
     </main>
   )

@@ -129,6 +129,55 @@ export const openApiDocument = {
         },
       },
     },
+    '/api/books/{id}/content': {
+      get: {
+        tags: ['Books'],
+        operationId: 'getBookContent',
+        summary: 'Fetch the structured book payload (paid)',
+        description: 'Returns the book as an ordered array of heading-addressable chunks for the `maha book mount` MCP tool. The same text is free to read on the public web page; only this machine-readable form is gated behind an entitlement.',
+        security: [{ credential: [] }],
+        parameters: [
+          { name: 'id', in: 'path', required: true, description: 'Lowercase book slug.', schema: { type: 'string', pattern: '^[a-z0-9][a-z0-9-]{1,63}$' } },
+        ],
+        responses: {
+          '200': {
+            description: 'Structured book content.',
+            content: {
+              'application/json': {
+                schema: {
+                  type: 'object',
+                  required: ['book', 'title', 'chunkCount', 'chunks'],
+                  properties: {
+                    book: { type: 'string' },
+                    title: { type: 'string' },
+                    chunkCount: { type: 'integer' },
+                    chunks: {
+                      type: 'array',
+                      items: {
+                        type: 'object',
+                        required: ['index', 'depth', 'heading', 'anchor', 'wordCount', 'content'],
+                        properties: {
+                          index: { type: 'integer' },
+                          depth: { type: 'integer', enum: [1, 2] },
+                          heading: { type: 'string' },
+                          anchor: { type: 'string' },
+                          wordCount: { type: 'integer' },
+                          content: { type: 'string' },
+                        },
+                      },
+                    },
+                  },
+                },
+              },
+            },
+          },
+          '401': errorResponse('Missing or invalid credential.'),
+          '403': errorResponse('Credential holds no entitlement for this book.'),
+          '404': errorResponse('No such book, or no structured content available yet.'),
+          '503': errorResponse('The entitlement registry is unavailable.'),
+        },
+      },
+    },
     '/api/books/checkout': {
       post: {
         tags: ['Books'],
