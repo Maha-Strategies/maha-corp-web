@@ -129,6 +129,91 @@ export const openApiDocument = {
         },
       },
     },
+    '/api/books/checkout': {
+      post: {
+        tags: ['Books'],
+        operationId: 'createBookCheckout',
+        summary: 'Start a book purchase',
+        description: 'Creates a Stripe Checkout session for a book on the authenticated credential’s account. The entitlement is minted only after Stripe confirms payment via signed webhook.',
+        security: [{ credential: [] }],
+        requestBody: {
+          required: true,
+          content: {
+            'application/json': {
+              schema: {
+                type: 'object',
+                required: ['bookId', 'clientRequestId'],
+                properties: {
+                  bookId: { type: 'string', pattern: '^[a-z0-9][a-z0-9-]{1,63}$', description: 'Book slug from the catalog.' },
+                  clientRequestId: { type: 'string', minLength: 8, maxLength: 120, description: 'Caller-chosen request key, one line.' },
+                },
+              },
+            },
+          },
+        },
+        responses: {
+          '201': {
+            description: 'Checkout prepared. Redirect the buyer to `checkoutUrl`.',
+            content: {
+              'application/json': {
+                schema: {
+                  type: 'object',
+                  required: ['checkoutId', 'checkoutUrl', 'bookId', 'title'],
+                  properties: {
+                    checkoutId: { type: 'string', pattern: '^book_checkout_[a-f0-9]{32}$' },
+                    checkoutUrl: { type: 'string', format: 'uri', description: 'Stripe-hosted payment page.' },
+                    bookId: { type: 'string' },
+                    title: { type: 'string' },
+                  },
+                },
+              },
+            },
+          },
+          '400': errorResponse('Invalid bookId or clientRequestId.'),
+          '401': errorResponse('Missing or invalid credential.'),
+          '404': errorResponse('No such book is available for purchase.'),
+          '409': errorResponse('clientRequestId was already used for a book checkout.'),
+          '415': errorResponse('Content-Type must be application/json.'),
+          '429': errorResponse('Hourly credential rate limit reached.'),
+          '502': errorResponse('Stripe checkout could not be started.'),
+          '503': errorResponse('Book purchases are not enabled or a backing service is unavailable.'),
+        },
+      },
+    },
+    '/api/books/webhook': {
+      post: {
+        tags: ['Books'],
+        operationId: 'stripeBooksWebhook',
+        summary: 'Stripe book-payment webhook (Stripe calls this — you never do)',
+        description: 'Verifies the `Stripe-Signature` header and mints book entitlements exactly once per Stripe event id, in the same transaction that records the event.',
+        parameters: [
+          { name: 'Stripe-Signature', in: 'header', required: true, schema: { type: 'string' }, description: 'Stripe webhook signature (`t=…,v1=…`).' },
+        ],
+        requestBody: {
+          required: true,
+          content: { 'application/json': { schema: { type: 'object', description: 'Raw Stripe event payload.' } } },
+        },
+        responses: {
+          '200': {
+            description: 'Event handled. Redeliveries return `duplicate: true` and change nothing.',
+            content: {
+              'application/json': {
+                schema: {
+                  type: 'object',
+                  required: ['received'],
+                  properties: {
+                    received: { type: 'boolean', const: true },
+                    duplicate: { type: 'boolean' },
+                  },
+                },
+              },
+            },
+          },
+          '400': { description: 'Invalid signature or malformed event.', content: { 'application/json': { schema: { type: 'object', properties: { error: { type: 'string' } } } } } },
+          '503': { description: 'Ledger unavailable; Stripe will retry.', content: { 'application/json': { schema: { type: 'object', properties: { error: { type: 'string' } } } } } },
+        },
+      },
+    },
     '/api/mps-audits': {
       post: {
         tags: ['MPS Audit'],

@@ -80,6 +80,13 @@ export async function authorizeClientCapabilityForBilling(token: string, capabil
   return authorizeClientAccess(token, (credential) => credential.allowed_capabilities.includes(capability), false)
 }
 
+// Book purchases need an authenticated, active credential but no specific
+// capability. Rate-limited so a leaked credential cannot spam checkout-session
+// creation.
+export async function authorizeBookPurchase(token: string): Promise<CredentialAuthorization> {
+  return authorizeClientAccess(token, () => true)
+}
+
 export type BookEntitlementAuthorization =
   | { kind: 'entitled'; clientId: string; bookId: string }
   | { kind: 'unavailable' }
