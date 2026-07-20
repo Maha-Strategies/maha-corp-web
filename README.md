@@ -202,3 +202,34 @@ Replace a lost, active prepaid MPS credential while preserving its client-level 
 ```
 
 Replacement revokes the old credential atomically and returns the new plaintext once. An idempotent replay confirms the original replacement but cannot redisclose its plaintext. Deliver new credentials through an approved secret-sharing channel; never put them in tickets, logs, source control, or chat. Supabase Studio may be used for inspection, but all balance corrections, revocations, and replacements must go through these audited actions rather than direct table edits.
+
+## Offer-to-Cash Revenue Control Plane
+
+Apply `supabase/migrations/20260720001900_revenue_control_plane.sql` and configure a separate, server-only `REVENUE_CONTROL_TOKEN`. Do not reuse reviewer or MPS operations tokens. The private endpoint is:
+
+```text
+POST /api/admin/revenue-control-plane
+```
+
+It records only non-PII source references, offer routing, and immutable commercial outcome events. It cannot send outreach, charge a customer, sign a contract, operate a wallet, or accept an engagement. Existing self-service offers route to their current purchase pages; Rapid Intelligence Brief and Verified Research Brief signals remain subject to human scope and price confirmation.
+
+Route an inbound signal with a stable source reference:
+
+```json
+{
+  "action": "route_inbound",
+  "idempotencyKey": "inbound-brief-1042",
+  "reason": "Qualified website inquiry entered the commercial review queue.",
+  "referenceId": "contact-1042",
+  "signal": {
+    "sourceType": "website_contact",
+    "sourceReference": "contact-1042",
+    "offerId": "rapid-intelligence-brief",
+    "hasDefinedDecision": true,
+    "hasSpecificQuestion": true,
+    "hasOrganization": true
+  }
+}
+```
+
+Later record a stateful outcome with a different idempotency key. `paid` and `refunded` require positive `amountCents` and a three-letter currency. The ledger allows only valid transitions: routing/review to checkout, checkout to paid, paid to delivered, and paid or delivered to refunded.
