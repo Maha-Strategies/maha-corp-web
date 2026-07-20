@@ -1,5 +1,6 @@
 import { MPS_AUDIT_CAPABILITY } from './mps-audit-jobs.ts'
 import { MPS_AUDIT_CREDIT_UNIT } from './mps-credits.ts'
+import { BOOKS } from './books.ts'
 
 export const SITE_URL = 'https://www.mahastrategies.com'
 export const AGENTIC_COMMERCE_MANIFEST_URL = `${SITE_URL}/agent-offers.json`
@@ -70,6 +71,68 @@ export const mpsAuditOffer = {
   ],
 } as const
 
+const mpsPreflightOffer = {
+  id: 'mps-preflight',
+  name: 'MPS Preflight',
+  status: 'available_for_self_service_purchase',
+  serviceUrl: `${SITE_URL}/mps/preflight`,
+  pricing: { currency: 'USD', type: 'fixed', amount: 49 },
+  delivery: { type: 'automated_after_signed_payment_confirmation', report: 'Private claim map, verification backlog, and machine-readable record.' },
+  input: { maximumCharacters: 12000, acceptedContent: 'A nonfiction document extract.' },
+  purchase: {
+    mode: 'human_confirmed_stripe_checkout', purchaseUrl: `${SITE_URL}/mps/preflight`, checkoutEndpoint: `${SITE_URL}/api/mps-preflight/checkout`, method: 'POST',
+    authorization: 'A human purchaser must review and authorize payment in Stripe Checkout. This discovery surface does not authorize an autonomous charge.',
+  },
+  boundaries: ['Automated triage, not a public MPS certification or source-by-source human verification.', 'No legal, investment, or other regulated professional advice.', 'The source document is not saved in the ledger; the durable record retains an input hash and claim excerpts.'],
+} as const
+
+const mahaOsOffer = {
+  id: 'maha-os-mobile-app',
+  name: 'Maha OS',
+  status: 'available_through_app_stores',
+  serviceUrl: `${SITE_URL}/software`,
+  description: 'A local-first mobile application for focus and metabolic awareness, designed to minimize non-essential off-device telemetry.',
+  acquisition: {
+    mode: 'external_app_store',
+    iosUrl: 'https://apps.apple.com/us/app/maha-os/id6778333838',
+    androidUrl: 'https://play.google.com/store/apps/details?id=com.maha.os',
+    authorization: 'App-store terms and payment controls apply. Maha Strategies does not expose an autonomous purchase endpoint for the app.',
+  },
+} as const
+
+const bookOffers = Object.entries(BOOKS).map(([id, name]) => ({
+  id: `book-${id}`,
+  name,
+  status: 'open_web_edition_with_authenticated_machine_access',
+  serviceUrl: `${SITE_URL}/books/${id}`,
+  access: {
+    publicWebEdition: 'Free to read on the public web page.',
+    machineReadableContent: 'The structured content API requires an active credential with a book entitlement.',
+    entitlementEndpoint: `${SITE_URL}/api/books/${id}/entitlement`,
+    contentEndpoint: `${SITE_URL}/api/books/${id}/content`,
+  },
+  purchase: {
+    mode: 'authenticated_stripe_checkout_when_enabled',
+    checkoutEndpoint: `${SITE_URL}/api/books/checkout`,
+    authorization: 'A valid client credential is required. The caller must obtain human approval before any checkout is opened; no merchant secret or autonomous spending authority is exposed.',
+  },
+}))
+
+const inquiryOffers = [
+  {
+    id: 'rapid-intelligence-brief', name: 'Rapid Intelligence Brief', status: 'available_for_inquiry', serviceUrl: `${SITE_URL}/rapid-intelligence-brief`,
+    pricing: { currency: 'USD', type: 'starting_at', amount: 500 }, delivery: { targetBusinessDays: 5, beginsAfter: 'A human confirms fit, scope, sources, deliverable, price, and timing.' },
+    request: { mode: 'authenticated_json', url: `${SITE_URL}/api/agent-inquiries`, method: 'POST', inputSchema: `${SITE_URL}/agent-inquiry-schema.json`, inquiryType: 'rapid_intelligence', responseTargetBusinessDays: 2 },
+  },
+  {
+    id: 'verified-research-brief', name: 'Verified Research Brief', status: 'available_for_inquiry', serviceUrl: `${SITE_URL}/consulting`,
+    pricing: { currency: 'USD', type: 'fixed', amount: 2500 }, delivery: { targetBusinessDays: 10, beginsAfter: 'A human confirms and narrows the scoped question.' },
+    request: { mode: 'authenticated_json', url: `${SITE_URL}/api/agent-inquiries`, method: 'POST', inputSchema: `${SITE_URL}/agent-inquiry-schema.json`, inquiryType: 'verified_research', responseTargetBusinessDays: 2 },
+  },
+] as const
+
+export const availableOffers = [mpsAuditOffer, mpsPreflightOffer, ...bookOffers, mahaOsOffer, ...inquiryOffers] as const
+
 export const agenticCommerceDiscovery = {
   schema: `${SITE_URL}/schemas/agentic-commerce/v0.1`,
   version: '0.1.0',
@@ -93,7 +156,7 @@ export const agenticCommerceDiscovery = {
     humanConfirmationRequired: true,
     bindingCommitment: 'A purchase is binding only when the purchaser authorizes payment in Stripe Checkout. This discovery document cannot initiate or authorize a charge.',
   },
-  offers: [mpsAuditOffer],
+  offers: availableOffers,
 } as const
 
 export const mpsAuditServiceJsonLd = {

@@ -157,6 +157,68 @@
         "inquiryType": "verified_research",
         "responseTargetBusinessDays": 2
       }
+    },
+    {
+      "id": "mps-preflight",
+      "name": "MPS Preflight",
+      "status": "available_for_self_service_purchase",
+      "serviceUrl": "https://www.mahastrategies.com/mps/preflight",
+      "price": { "currency": "USD", "type": "fixed", "amount": 49 },
+      "delivery": { "type": "automated_after_signed_payment_confirmation", "report": "Private claim map, verification backlog, and machine-readable record." },
+      "input": { "maximumCharacters": 12000, "acceptedContent": "A nonfiction document extract." },
+      "purchase": {
+        "mode": "human_confirmed_stripe_checkout",
+        "purchaseUrl": "https://www.mahastrategies.com/mps/preflight",
+        "checkoutEndpoint": "https://www.mahastrategies.com/api/mps-preflight/checkout",
+        "method": "POST",
+        "authorization": "A human purchaser must review and authorize payment in Stripe Checkout. This manifest does not authorize an autonomous charge."
+      },
+      "boundaries": ["Automated triage, not a public MPS certification or source-by-source human verification.", "No legal, investment, or other regulated professional advice.", "The source document is not saved in the ledger; the durable record retains an input hash and claim excerpts."]
+    },
+    {
+      "id": "book-the-imagined-life",
+      "name": "The Imagined Life",
+      "status": "open_web_edition_with_authenticated_machine_access",
+      "serviceUrl": "https://www.mahastrategies.com/books/the-imagined-life",
+      "access": { "publicWebEdition": "Free to read on the public web page.", "entitlementEndpoint": "https://www.mahastrategies.com/api/books/the-imagined-life/entitlement", "contentEndpoint": "https://www.mahastrategies.com/api/books/the-imagined-life/content" },
+      "purchase": { "mode": "authenticated_stripe_checkout_when_enabled", "checkoutEndpoint": "https://www.mahastrategies.com/api/books/checkout", "authorization": "A valid client credential and human approval are required before checkout." }
+    },
+    {
+      "id": "book-the-orbital-mind",
+      "name": "The Orbital Mind",
+      "status": "open_web_edition_with_authenticated_machine_access",
+      "serviceUrl": "https://www.mahastrategies.com/books/the-orbital-mind",
+      "access": { "publicWebEdition": "Free to read on the public web page.", "entitlementEndpoint": "https://www.mahastrategies.com/api/books/the-orbital-mind/entitlement", "contentEndpoint": "https://www.mahastrategies.com/api/books/the-orbital-mind/content" },
+      "purchase": { "mode": "authenticated_stripe_checkout_when_enabled", "checkoutEndpoint": "https://www.mahastrategies.com/api/books/checkout", "authorization": "A valid client credential and human approval are required before checkout." }
+    },
+    {
+      "id": "book-the-synthetic-self",
+      "name": "The Synthetic Self",
+      "status": "open_web_edition_with_authenticated_machine_access",
+      "serviceUrl": "https://www.mahastrategies.com/books/the-synthetic-self",
+      "access": { "publicWebEdition": "Free to read on the public web page.", "entitlementEndpoint": "https://www.mahastrategies.com/api/books/the-synthetic-self/entitlement", "contentEndpoint": "https://www.mahastrategies.com/api/books/the-synthetic-self/content" },
+      "purchase": { "mode": "authenticated_stripe_checkout_when_enabled", "checkoutEndpoint": "https://www.mahastrategies.com/api/books/checkout", "authorization": "A valid client credential and human approval are required before checkout." }
+    },
+    {
+      "id": "book-the-unfinished-species",
+      "name": "The Unfinished Species",
+      "status": "open_web_edition_with_authenticated_machine_access",
+      "serviceUrl": "https://www.mahastrategies.com/books/the-unfinished-species",
+      "access": { "publicWebEdition": "Free to read on the public web page.", "entitlementEndpoint": "https://www.mahastrategies.com/api/books/the-unfinished-species/entitlement", "contentEndpoint": "https://www.mahastrategies.com/api/books/the-unfinished-species/content" },
+      "purchase": { "mode": "authenticated_stripe_checkout_when_enabled", "checkoutEndpoint": "https://www.mahastrategies.com/api/books/checkout", "authorization": "A valid client credential and human approval are required before checkout." }
+    },
+    {
+      "id": "maha-os-mobile-app",
+      "name": "Maha OS",
+      "status": "available_through_app_stores",
+      "serviceUrl": "https://www.mahastrategies.com/software",
+      "description": "A local-first mobile application for focus and metabolic awareness, designed to minimize non-essential off-device telemetry.",
+      "acquisition": {
+        "mode": "external_app_store",
+        "iosUrl": "https://apps.apple.com/us/app/maha-os/id6778333838",
+        "androidUrl": "https://play.google.com/store/apps/details?id=com.maha.os",
+        "authorization": "App-store terms and payment controls apply. Maha Strategies does not expose an autonomous purchase endpoint for the app."
+      }
     }
   ]
 }

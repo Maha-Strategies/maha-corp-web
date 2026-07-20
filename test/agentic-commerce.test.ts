@@ -7,6 +7,7 @@ import {
   AGENTIC_COMMERCE_API_URL,
   AGENTIC_COMMERCE_CONTEXT_URL,
   AGENTIC_COMMERCE_MANIFEST_URL,
+  availableOffers,
   agenticCommerceDiscovery,
   mpsAuditOffer,
   mpsAuditServiceJsonLd,
@@ -21,6 +22,16 @@ test('MPS agentic-commerce offer is discovery-only and preserves the human payme
   assert.equal(mpsAuditOffer.prepaidCredits.insufficientBalance.httpStatus, 402)
   assert.equal(mpsAuditOffer.prepaidCredits.unit, 'mps_audit_invocation')
   assert.match(mpsAuditOffer.credentialPolicy.recovery, /cannot be recovered/i)
+})
+
+test('discovery includes every currently available product with an explicit acquisition model', () => {
+  const ids = new Set(availableOffers.map((offer) => offer.id))
+  for (const id of [
+    'mps-prepaid-audit-access', 'mps-preflight', 'book-the-imagined-life', 'book-the-orbital-mind',
+    'book-the-synthetic-self', 'book-the-unfinished-species', 'maha-os-mobile-app',
+    'rapid-intelligence-brief', 'verified-research-brief',
+  ]) assert.ok(ids.has(id), `missing ${id}`)
+  assert.equal(availableOffers.length, 9)
 })
 
 test('MPS purchase-page JSON-LD identifies the same commercial service without inventing a price', () => {
