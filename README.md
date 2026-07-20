@@ -235,3 +235,9 @@ Route an inbound signal with a stable source reference:
 Later record a stateful outcome with a different idempotency key. `paid` and `refunded` require positive `amountCents` and a three-letter currency. The ledger allows only valid transitions: routing/review to checkout, checkout to paid, paid to delivered, and paid or delivered to refunded.
 
 Verified Stripe payment and reversal webhooks now reconcile automatically into this ledger. MPS audit credits and book entitlements are marked delivered only after their existing product webhooks issue access; MPS Preflight records delivery when its report completes. Stripe remains the payment authority, and no revenue control-plane token is sent to Stripe or the browser.
+
+## Inbound Revenue Gatekeeper
+
+Apply `supabase/migrations/20260720002100_inbound_revenue_gatekeeper.sql`. Public human and agent submissions use `POST /api/inbound-submissions`, with the schema at `/inbound-submission-schema.json` and the machine-readable agent card at `/.well-known/agent.json`. The endpoint uses a database-backed hourly rate limit, a honeypot, strict size/schema validation, and deterministic qualification. It routes every accepted submission to the private Revenue Control Plane but never creates a commitment, payment, contract, or automatic outreach.
+
+The scheduled `GET /api/cron/inbound-digest` endpoint sends one daily digest of unsent qualified submissions. Configure `INBOUND_DIGEST_TO` and Vercel's `CRON_SECRET`; `INBOUND_DIGEST_TOKEN` is available only for a separately authorized manual trigger. `vercel.json` schedules the Vercel Cron invocation for 13:00 UTC. The digest contains personal contact details, so keep its recipient address private.

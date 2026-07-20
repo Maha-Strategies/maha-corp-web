@@ -1,0 +1,10 @@
+{
+  "schema": "https://www.mahastrategies.com/schemas/inbound-agent-card/v0.1",
+  "name": "Maha Strategies Inbound Gatekeeper",
+  "url": "https://www.mahastrategies.com/inbound",
+  "submissionEndpoint": "https://www.mahastrategies.com/api/inbound-submissions",
+  "inputSchema": "https://www.mahastrategies.com/inbound-submission-schema.json",
+  "acceptedOffers": ["rapid-intelligence-brief", "verified-research-brief", "mps-preflight", "mps-prepaid-audit-access"],
+  "terms": {"bindingCommitment": false, "payment": "A human purchaser must authorize any Stripe Checkout payment.", "sensitiveData": "Do not submit confidential, regulated, or sensitive personal information."},
+  "review": {"mode": "deterministic_qualification_then_human_scope_review", "responseTargetBusinessDays": 2}
+}
