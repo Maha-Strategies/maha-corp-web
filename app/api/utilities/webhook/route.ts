@@ -47,15 +47,15 @@ async function paymentIntentForCharge(chargeId: string, stripeSecretKey: string)
   } catch { return null }
 }
 
-// A reversal always reconciles the revenue reversal (idempotent by event id) and,
-// best-effort, flips a consumed run to refunded so the token cannot be reused.
+// A full reversal always reconciles revenue and locks a consumed run. A partial
+// refund does not consume the buyer's paid run token.
 async function processReversal(input: {
   eventId: string; eventType: string; payloadHash: string; reversalId: string; paymentIntentId: string; amount: number; currency: string
 }) {
   const ledger = createAgentInquiryLedger()
   if (!ledger) return Response.json({ error: 'Ledger unavailable.' }, { status: 503 })
-  const { data: checkout } = await ledger.from('utility_checkouts').select('public_id').eq('stripe_payment_intent_id', input.paymentIntentId).maybeSingle()
-  if (checkout?.public_id && validUtilityCheckoutId(checkout.public_id)) {
+  const { data: checkout } = await ledger.from('utility_checkouts').select('public_id,stripe_payment_amount,stripe_payment_currency').eq('stripe_payment_intent_id', input.paymentIntentId).maybeSingle()
+  if (checkout?.public_id && validUtilityCheckoutId(checkout.public_id) && checkout.stripe_payment_amount === input.amount && checkout.stripe_payment_currency === input.currency.toLowerCase()) {
     await ledger.rpc('mark_utility_run_refunded', { p_checkout_id: checkout.public_id })
   }
   const reconciliation = await reconcileRevenueRefund(ledger, {

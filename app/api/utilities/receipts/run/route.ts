@@ -26,23 +26,31 @@ type ReceiptResult = { index: number; parsed: ParsedReceipt | null }
 async function autoRefund(
   ledger: NonNullable<ReturnType<typeof createAgentInquiryLedger>>,
   checkoutId: string, stripeSecretKey: string,
-): Promise<void> {
+): Promise<boolean> {
   const { data: checkout } = await ledger.from('utility_checkouts').select('stripe_payment_intent_id').eq('public_id', checkoutId).maybeSingle()
   const paymentIntentId = checkout?.stripe_payment_intent_id
-  if (paymentIntentId && /^pi_[A-Za-z0-9]+$/.test(paymentIntentId)) {
-    try {
-      const stripeResponse = await fetch('https://api.stripe.com/v1/refunds', {
-        method: 'POST',
-        headers: { Authorization: `Bearer ${stripeSecretKey}`, 'Content-Type': 'application/x-www-form-urlencoded', 'Idempotency-Key': `refund_${checkoutId}` },
-        body: new URLSearchParams({ payment_intent: paymentIntentId, reason: 'requested_by_customer' }),
-        cache: 'no-store',
-      })
-      if (!stripeResponse.ok) console.error('Utility auto-refund failed:', stripeResponse.status)
-    } catch (error) {
-      console.error('Utility auto-refund error:', error instanceof Error ? error.message : 'unknown_error')
+  if (!paymentIntentId || !/^pi_[A-Za-z0-9]+$/.test(paymentIntentId)) return false
+  try {
+    const stripeResponse = await fetch('https://api.stripe.com/v1/refunds', {
+      method: 'POST',
+      headers: { Authorization: `Bearer ${stripeSecretKey}`, 'Content-Type': 'application/x-www-form-urlencoded', 'Idempotency-Key': `refund_${checkoutId}` },
+      body: new URLSearchParams({ payment_intent: paymentIntentId, reason: 'requested_by_customer' }),
+      cache: 'no-store',
+    })
+    const refund = await stripeResponse.json() as { status?: unknown }
+    if (!stripeResponse.ok || refund.status !== 'succeeded') {
+      console.error('Utility auto-refund was not confirmed:', stripeResponse.status, refund.status ?? 'unknown')
+      return false
     }
+  } catch (error) {
+    console.error('Utility auto-refund error:', error instanceof Error ? error.message : 'unknown_error')
+    return false
   }
-  await ledger.rpc('mark_utility_run_refunded', { p_checkout_id: checkoutId })
+  const { data: marked, error } = await ledger.rpc('mark_utility_run_refunded', { p_checkout_id: checkoutId })
+  if (error) return false
+  if (marked === 'refunded') return true
+  const { data: settled } = await ledger.from('utility_checkouts').select('run_status').eq('public_id', checkoutId).maybeSingle()
+  return settled?.run_status === 'refunded'
 }
 
 export async function POST(request: Request) {
@@ -117,7 +125,9 @@ export async function POST(request: Request) {
   // You are only charged when at least one receipt yields usable data. Anything
   // else — all infeasible, worker errors, or a mix — triggers an auto-refund.
   if (feasible.length === 0) {
-    await autoRefund(ledger, checkoutId, config.stripeSecretKey)
+    if (!await autoRefund(ledger, checkoutId, config.stripeSecretKey)) {
+      return response({ error: 'No receipt could be parsed. The automatic refund is still being confirmed; contact support if it does not appear shortly.' }, 502)
+    }
     return response({
       delivered: false, refunded: true,
       note: 'None of the submitted receipts could be parsed, so the payment was refunded.',

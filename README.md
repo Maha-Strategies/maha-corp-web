@@ -241,3 +241,7 @@ Verified Stripe payment and reversal webhooks now reconcile automatically into t
 Apply `supabase/migrations/20260720002100_inbound_revenue_gatekeeper.sql`. Public human and agent submissions use `POST /api/inbound-submissions`, with the schema at `/inbound-submission-schema.json` and the machine-readable agent card at `/.well-known/agent.json`. The endpoint uses a database-backed hourly rate limit, a honeypot, strict size/schema validation, and deterministic qualification. It routes every accepted submission to the private Revenue Control Plane but never creates a commitment, payment, contract, or automatic outreach.
 
 The scheduled `GET /api/cron/inbound-digest` endpoint sends one daily digest of unsent qualified submissions. Configure `INBOUND_DIGEST_TO` and Vercel's `CRON_SECRET`; `INBOUND_DIGEST_TOKEN` is available only for a separately authorized manual trigger. `vercel.json` schedules the Vercel Cron invocation for 13:00 UTC. The digest contains personal contact details, so keep its recipient address private.
+
+## Inbound Operations Queue
+
+Apply `supabase/migrations/20260720003200_inbound_operations_queue.sql`, configure a separate server-only `INBOUND_OPERATIONS_TOKEN`, then open `/admin/inbound`. The private queue displays inbound qualification, contact context, linked revenue status, and an append-only review history. Its actions are limited to review, clarification, scope approval, checkout referral, decline, and close-lost. It cannot send any message, accept an engagement, or mark a payment as received.

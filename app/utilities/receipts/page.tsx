@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 
+import ReceiptBatch from './ReceiptBatch'
 import ReceiptDemo from './ReceiptDemo'
 
 const SITE_URL = 'https://www.mahastrategies.com'
@@ -25,6 +26,17 @@ export default function ReceiptsUtilityPage() {
         </p>
 
         <ReceiptDemo />
+
+        <section className="mt-16 border-t border-zinc-800 pt-10">
+          <p className="font-mono text-[10px] uppercase tracking-widest text-emerald-300">[ Batch run ]</p>
+          <h2 className="mt-4 text-2xl font-light tracking-tight text-white sm:text-3xl">Have a stack of them? Run a batch.</h2>
+          <p className="mt-4 max-w-2xl text-base leading-relaxed text-zinc-400">
+            The free demo above is your pre-flight check. When it parses cleanly, batch up to {20} receipts into one
+            CSV — pay once, no account, no login. Unparseable receipts are dropped, and a run where nothing parses is
+            refunded automatically.
+          </p>
+          <ReceiptBatch />
+        </section>
 
         <section className="mt-16 border-t border-zinc-800 pt-8">
           <p className="font-mono text-[10px] uppercase tracking-widest text-zinc-500">How it stays honest</p>
