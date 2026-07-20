@@ -21,11 +21,14 @@ const PRIVATE_ROUTES = new Set([
   '/api/agent-inquiries/[inquiryId]',
   '/api/audit/events',
   '/api/docs/openapi',
+  '/api/inbound-submissions',
+  '/api/cron/inbound-digest',
   '/api/mps-audits/[auditId]',
   '/api/mps-preflight/[orderId]',
   '/api/mps-preflight/checkout',
   '/api/mps-preflight/submit',
   '/api/mps-preflight/webhook',
+  '/api/utilities/receipts/demo',
 ])
 
 function routePathsOnDisk(dir: string, prefix: string): string[] {
