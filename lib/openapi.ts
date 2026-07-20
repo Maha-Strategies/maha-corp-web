@@ -278,6 +278,14 @@ export const openApiDocument = {
         },
       },
     },
+    '/api/books/public-checkout': {
+      post: {
+        tags: ['Books'], operationId: 'createPublicBookCheckout', summary: 'Start a book MCP-access purchase without a prior credential',
+        description: 'Creates a dormant, book-only credential and Stripe Checkout session. The credential is shown once and activates with the paid entitlement after signed webhook confirmation.',
+        requestBody: { required: true, content: { 'application/json': { schema: { type: 'object', required: ['bookId', 'email', 'clientRequestId'], properties: { bookId: { type: 'string' }, email: { type: 'string', format: 'email' }, clientRequestId: { type: 'string', minLength: 8, maxLength: 120 } } } } } },
+        responses: { '201': { description: 'Checkout prepared; save the one-time credential before redirecting.', content: { 'application/json': { schema: { type: 'object', required: ['checkoutId', 'checkoutUrl', 'credential', 'expiresAt'], properties: { checkoutId: { type: 'string' }, checkoutUrl: { type: 'string', format: 'uri' }, credential: { type: 'string' }, expiresAt: { type: 'string', format: 'date-time' } } } } } }, '400': errorResponse('Invalid request.'), '415': errorResponse('Content-Type must be application/json.'), '502': errorResponse('Stripe checkout could not be started.'), '503': errorResponse('Book checkout is not enabled.') },
+      },
+    },
     '/api/books/webhook': {
       post: {
         tags: ['Books'],

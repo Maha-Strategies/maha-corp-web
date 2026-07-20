@@ -34,7 +34,7 @@ The bridge uses the documented API with a user-held credential. It has no mercha
 ## Other available products
 
 - **MPS Preflight**: $49 self-service private document review. Product page: https://www.mahastrategies.com/mps/preflight. A human authorizes Stripe Checkout; it is automated triage, not a certification or source-by-source human verification.
-- **Books & Essays**: Four free public web editions: https://www.mahastrategies.com/books. Their machine-readable APIs require an active book entitlement and an authenticated client credential; the checkout endpoint is `POST https://www.mahastrategies.com/api/books/checkout`.
+- **Books & Essays**: Four free public web editions: https://www.mahastrategies.com/books. The paid entitlement adds heading-addressable structured API access for the local MCP bridge; it does not restrict the free web text. Terms: https://www.mahastrategies.com/books/mcp-access. The current price appears in Stripe Checkout before payment is authorized; the checkout endpoint is `POST https://www.mahastrategies.com/api/books/checkout`.
 - **Maha OS**: Local-first mobile application. Product page: https://www.mahastrategies.com/software. It is acquired under Apple App Store or Google Play terms; no autonomous purchase endpoint is offered here.
 - **Rapid Intelligence Brief**: Starting at $500; inquiry only after authenticated intake and human scope confirmation. https://www.mahastrategies.com/rapid-intelligence-brief
 - **Verified Research Brief**: $2,500 fixed-scope research synthesis; inquiry only after authenticated intake and human scope confirmation. https://www.mahastrategies.com/consulting

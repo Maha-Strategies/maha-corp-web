@@ -19,6 +19,13 @@
     "scope": ["client identity", "allowed offers", "allowed capabilities", "request rate", "expiry", "revocation"],
     "storage": "Clients must store issued credentials in a secret manager. Maha Strategies never publishes a shared public token."
   },
+  "bookMachineAccessPolicy": {
+    "termsUrl": "https://www.mahastrategies.com/books/mcp-access",
+    "publicWebEdition": "Every book remains free to read on its public web page.",
+    "paidEntitlement": "The entitlement adds a heading-addressable structured content API for local MCP use; it does not restrict the free web edition.",
+    "pricing": "The current price is displayed in Stripe Checkout before payment is authorized.",
+    "reversalPolicy": "Partial refunds preserve access. Access is revoked only after cumulative refunds reach the original payment or a Stripe dispute is closed as lost."
+  },
   "provenance": {
     "standard": "MPS/0.1",
     "specification": "https://www.mahastrategies.com/mps",

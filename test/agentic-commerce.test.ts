@@ -34,6 +34,18 @@ test('discovery includes every currently available product with an explicit acqu
   assert.equal(availableOffers.length, 9)
 })
 
+test('machine-readable book offers distinguish free reading from the paid local-MCP entitlement', () => {
+  const books = availableOffers.filter((offer) => offer.id.startsWith('book-'))
+  assert.equal(books.length, 4)
+  for (const book of books) {
+    assert.ok('access' in book && 'pricing' in book && 'entitlementPolicy' in book, `${book.id} is missing book-access terms`)
+    assert.match(book.access.publicWebEdition, /Free to read/i)
+    assert.match(book.access.machineReadableContent, /heading-addressable/i)
+    assert.equal(book.pricing.type, 'stripe_checkout_disclosed')
+    assert.match(book.entitlementPolicy.refundAndDispute, /dispute.*lost/i)
+  }
+})
+
 test('MPS purchase-page JSON-LD identifies the same commercial service without inventing a price', () => {
   assert.equal(mpsAuditServiceJsonLd['@type'], 'Service')
   assert.equal(mpsAuditServiceJsonLd.url, mpsAuditOffer.serviceUrl)

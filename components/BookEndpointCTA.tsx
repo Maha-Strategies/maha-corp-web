@@ -5,7 +5,7 @@ import Link from 'next/link'
 export default function BookEndpointCTA({
   title,
   price,
-  href = '/docs',
+  href = '/books/mcp-access',
   placement = 'inline',
 }: {
   title: string
@@ -22,15 +22,15 @@ export default function BookEndpointCTA({
         Read <span className="text-emerald-300">{title}</span> for free — or mount it into your IDE.
       </h2>
       <p className="text-zinc-400 leading-relaxed max-w-2xl mb-7">
-        Every word is on this page, free and open. Or connect the book directly to Claude Code, Cursor, or any
-        MCP client as a secure, queryable server{priceLabel} — so your agent can pull the exact chapter it needs
-        instead of scrolling a wall of text.
+        Every word is on this page, free and open. The paid entitlement adds a chunk-addressable API and local MCP
+        mount for Claude Code, Cursor, or another MCP client{priceLabel} — so your agent can retrieve an exact,
+        heading-addressable passage without scraping the web edition.
       </p>
       <Link
         href={href}
         className="inline-block bg-emerald-400 text-black font-mono font-bold text-xs tracking-widest uppercase px-7 py-4 hover:bg-emerald-300 transition-colors"
       >
-        Mount as MCP endpoint ↗
+        See MCP access terms ↗
       </Link>
       {placement === 'bottom' && (
         <p className="mt-5 font-mono text-[11px] text-zinc-500 tracking-widest uppercase">

@@ -107,14 +107,24 @@ const bookOffers = Object.entries(BOOKS).map(([id, name]) => ({
   serviceUrl: `${SITE_URL}/books/${id}`,
   access: {
     publicWebEdition: 'Free to read on the public web page.',
-    machineReadableContent: 'The structured content API requires an active credential with a book entitlement.',
+    machineReadableContent: 'The paid entitlement adds a heading-addressable structured content API for local MCP use; it does not restrict the free public web edition.',
     entitlementEndpoint: `${SITE_URL}/api/books/${id}/entitlement`,
     contentEndpoint: `${SITE_URL}/api/books/${id}/content`,
+  },
+  pricing: {
+    currency: 'USD',
+    type: 'stripe_checkout_disclosed',
+    disclosure: 'The current price is displayed in Stripe Checkout before payment is authorized.',
   },
   purchase: {
     mode: 'authenticated_stripe_checkout_when_enabled',
     checkoutEndpoint: `${SITE_URL}/api/books/checkout`,
     authorization: 'A valid client credential is required. The caller must obtain human approval before any checkout is opened; no merchant secret or autonomous spending authority is exposed.',
+  },
+  entitlementPolicy: {
+    delivery: 'Stripe signed payment confirmation mints the entitlement exactly once.',
+    refundAndDispute: 'Partial refunds preserve access. Access is revoked only after cumulative refunds reach the original payment or a Stripe dispute is closed as lost.',
+    termsUrl: `${SITE_URL}/books/mcp-access`,
   },
 }))
 
