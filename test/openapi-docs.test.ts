@@ -29,6 +29,9 @@ const PRIVATE_ROUTES = new Set([
   '/api/mps-preflight/submit',
   '/api/mps-preflight/webhook',
   '/api/utilities/receipts/demo',
+  '/api/utilities/receipts/checkout',
+  '/api/utilities/receipts/run',
+  '/api/utilities/webhook',
 ])
 
 function routePathsOnDisk(dir: string, prefix: string): string[] {

@@ -7,6 +7,7 @@
 export const RECEIPT_UTILITY = 'receipts-to-csv' as const
 export const MAX_RECEIPT_CHARS = 8_000
 export const MIN_RECEIPT_CHARS = 12
+export const MAX_BATCH_RECEIPTS = 20
 
 export class ReceiptUtilityError extends Error {
   readonly status: number
@@ -127,6 +128,14 @@ export async function runReceiptParse(text: string, runner: ReceiptRunner): Prom
   return parseReceiptResponse(await runner(buildReceiptPrompt(text)))
 }
 
+// Validate a paid batch: an array of 1..MAX_BATCH_RECEIPTS receipt strings,
+// each held to the same bounds as a single receipt. Throws on the first bad one.
+export function validateReceiptBatch(value: unknown): string[] {
+  if (!Array.isArray(value) || value.length === 0) throw new ReceiptUtilityError('Provide an array of at least one receipt.')
+  if (value.length > MAX_BATCH_RECEIPTS) throw new ReceiptUtilityError(`A single run accepts at most ${MAX_BATCH_RECEIPTS} receipts.`)
+  return value.map((entry) => validateReceiptText(entry))
+}
+
 function csvCell(value: string | number | null): string {
   if (value === null) return ''
   const text = String(value)
@@ -152,4 +161,26 @@ export function receiptCsv(parsed: ParsedReceipt): string {
     csvCell(parsed.merchant), csvCell(parsed.purchasedAt), csvCell(parsed.currency),
   ].join(',')
   return [header.join(','), ...rows, totals].join('\r\n')
+}
+
+// Combined CSV for a paid batch. A leading `receipt` column groups the rows,
+// and each receipt is followed by its own TOTAL row. Callers pass only the
+// receipts worth delivering (feasible ones); an empty list yields header-only.
+export function receiptBatchCsv(receipts: ParsedReceipt[]): string {
+  const header = ['receipt', 'description', 'quantity', 'unit_price', 'amount', 'category', 'merchant', 'purchased_at', 'currency']
+  const lines = [header.join(',')]
+  receipts.forEach((parsed, index) => {
+    const label = String(index + 1)
+    for (const item of parsed.lineItems) {
+      lines.push([
+        csvCell(label), csvCell(item.description), csvCell(item.quantity), csvCell(item.unitPrice), csvCell(item.amount),
+        csvCell(item.category), csvCell(parsed.merchant), csvCell(parsed.purchasedAt), csvCell(parsed.currency),
+      ].join(','))
+    }
+    lines.push([
+      csvCell(label), csvCell('TOTAL'), '', '', csvCell(parsed.total ?? parsed.subtotal),
+      csvCell(parsed.tax === null ? '' : `tax:${parsed.tax}`), csvCell(parsed.merchant), csvCell(parsed.purchasedAt), csvCell(parsed.currency),
+    ].join(','))
+  })
+  return lines.join('\r\n')
 }

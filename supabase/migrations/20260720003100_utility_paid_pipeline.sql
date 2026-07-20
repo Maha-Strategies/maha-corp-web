@@ -73,6 +73,30 @@ begin
 end;
 $$;
 
+-- Utility is a deferred-delivery offer (paid at webhook, delivered at run time),
+-- exactly like mps-preflight. Verbatim copy of record_revenue_checkout_delivery
+-- (20260720002000) with 'utility-receipts-to-csv' added to the offer allowlist
+-- and a neutral reason string now that it serves two offers. Do not otherwise edit.
+create or replace function public.record_revenue_checkout_delivery(
+  p_offer_id text, p_checkout_reference text, p_reference_id text, p_actor_fingerprint text, p_delivered_at timestamptz
+) returns text language plpgsql security definer set search_path = public, extensions as $$
+declare v_payment public.revenue_payment_reconciliations%rowtype; v_hash text;
+begin
+  if p_offer_id not in ('mps-preflight', 'utility-receipts-to-csv') or char_length(p_checkout_reference) not between 3 and 200 or char_length(p_reference_id) not between 3 and 200
+     or p_actor_fingerprint !~ '^sha256:[a-f0-9]{64}$' or p_delivered_at is null then raise exception 'Invalid revenue delivery reconciliation.' using errcode='22023'; end if;
+  select r.* into v_payment from public.revenue_payment_reconciliations r join public.revenue_opportunities o on o.public_id=r.opportunity_id
+    where r.checkout_reference=p_checkout_reference and o.offer_id=p_offer_id for update;
+  if not found then return 'retry'; end if;
+  if v_payment.delivered_at is not null then return 'duplicate'; end if;
+  v_hash := 'sha256:' || encode(digest('delivery:' || p_checkout_reference,'sha256'),'hex');
+  insert into public.revenue_opportunity_events (opportunity_id,event_type,idempotency_hash,actor_fingerprint,reason,reference_id,metadata,created_at)
+    values (v_payment.opportunity_id,'delivered',v_hash,p_actor_fingerprint,'Purchased checkout delivered.',p_reference_id,'{}'::jsonb,p_delivered_at);
+  update public.revenue_payment_reconciliations set delivered_at=p_delivered_at where opportunity_id=v_payment.opportunity_id;
+  update public.revenue_opportunities set status='delivered',updated_at=p_delivered_at where public_id=v_payment.opportunity_id;
+  return 'processed';
+end;
+$$;
+
 -- 2. The single-use checkout / run token.
 create table if not exists public.utility_checkouts (
   public_id text primary key check (public_id ~ '^util_checkout_[a-f0-9]{32}$'),
