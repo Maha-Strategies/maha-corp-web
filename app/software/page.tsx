@@ -80,6 +80,12 @@ export default function SoftwarePage() {
             >
               [ READ: THE ARCHITECTURE OF ATTENTION &rarr; ]
             </Link>
+            <Link
+              href="/on-device-ai-vs-cloud"
+              className="block text-indigo-400 hover:text-indigo-300 mt-3 uppercase tracking-widest no-underline"
+            >
+              [ DECISION GUIDE: ON-DEVICE AI VS CLOUD &rarr; ]
+            </Link>
           </div>
 
           <div className="mt-12 pt-8 border-t border-zinc-800">
