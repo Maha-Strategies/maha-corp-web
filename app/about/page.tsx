@@ -26,7 +26,7 @@ export default function AboutPage() {
     <div className="mx-auto max-w-4xl">
       <p className="font-mono text-[10px] uppercase tracking-widest text-indigo-300">[ Entity profile · Maha Strategies LLC ]</p>
       <h1 className="mt-5 max-w-3xl text-4xl font-light leading-tight tracking-tight text-white sm:text-6xl">Research for systems that can remain autonomous.</h1>
-      <p className="mt-7 max-w-3xl text-lg leading-relaxed text-zinc-400">Maha Strategies LLC is an independent think tank and advisory firm researching systemic sovereignty: how individuals, companies, and nations can remain autonomous across semiconductor supply chains, software and on-device AI, and human attention.</p>
+      <p className="mt-7 max-w-3xl text-lg leading-relaxed text-zinc-400">Maha Strategies LLC is an independent think tank and advisory firm researching <Link className="text-zinc-200 underline underline-offset-4 hover:text-white" href="/systemic-sovereignty">systemic sovereignty</Link>: how individuals, companies, and nations can remain autonomous across semiconductor supply chains, software and on-device AI, and human attention.</p>
 
       <section className="mt-14 border-y border-zinc-800 py-8">
         <h2 className="font-mono text-xs uppercase tracking-widest text-zinc-500">The three-layer research model</h2>
