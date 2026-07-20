@@ -157,7 +157,9 @@ export const agenticCommerceDiscovery = {
     openApi: `${SITE_URL}/api/docs/openapi`,
     localMcpBridge: {
       package: '@mahastrategies/maha-mcp-bridge',
+      version: '0.3.2',
       install: 'npm install -g @mahastrategies/maha-mcp-bridge',
+      manifest: `${SITE_URL}/api/mcp-bridge/manifest`,
       policy: 'The local bridge uses the documented API; it does not receive a merchant secret or autonomous spending authority.',
     },
   },

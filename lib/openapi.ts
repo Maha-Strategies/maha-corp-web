@@ -124,6 +124,13 @@ export const openApiDocument = {
         },
       },
     },
+    '/api/mcp-bridge/manifest': {
+      get: {
+        tags: ['Agentic Commerce'], operationId: 'getMcpBridgeCompatibility', summary: 'Discover local MCP bridge compatibility',
+        description: 'Returns the versioned contract for the local commercial bridge and explicitly distinguishes it from the hosted Cognitive Gateway.',
+        responses: { '200': { description: 'Public compatibility manifest.', content: { 'application/json': { schema: { type: 'object', required: ['bridge', 'compatibility', 'security'], properties: { bridge: { type: 'object' }, compatibility: { type: 'object' }, security: { type: 'object' }, distinctServices: { type: 'array' } } } } } } },
+      },
+    },
     '/api/books/{id}/entitlement': {
       get: {
         tags: ['Books'],

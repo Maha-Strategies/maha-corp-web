@@ -1,5 +1,7 @@
 # Connecting the Maha Cognitive Gateway to Claude
 
+> Scope: this document is only for the hosted Cognitive Gateway at `mcp.maha-os.com`. It is not the local commercial package `@mahastrategies/maha-mcp-bridge`, which has separate credentials, tools, and compatibility terms at https://www.mahastrategies.com/mcp-bridge.
+
 The Cognitive Gateway is the Maha Strategies Model Context Protocol (MCP) server,
 published on Smithery as `mayone/cognitive-gateway`. Once connected, it gives
 Claude tools for evaluating local-inference workflows and retrieving

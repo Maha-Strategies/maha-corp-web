@@ -133,6 +133,10 @@ export default function McpInstallationPage() {
           <strong className="text-emerald-300">Operational.</strong> The Gateway currently maintains 100% uptime. Access requires a token.
         </div>
 
+        <div className="border border-indigo-900/50 bg-indigo-950/20 p-4 mb-8 text-xs text-indigo-100/80 font-sans leading-relaxed">
+          This hosted Cognitive Gateway is separate from the local commercial <Link href="/mcp-bridge" className="text-indigo-300 underline">Maha MCP Bridge</Link>. Their credentials and tool sets are not interchangeable.
+        </div>
+
         <section className="mb-12 border-l-2 border-indigo-500 pl-5">
           <h2 className="text-base text-white font-sans mb-3">Bring Maha workflows into Claude Desktop.</h2>
           <p className="text-sm text-gray-400 leading-relaxed font-sans mb-5">

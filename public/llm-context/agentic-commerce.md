@@ -31,6 +31,10 @@ npm install -g @mahastrategies/maha-mcp-bridge
 
 The bridge uses the documented API with a user-held credential. It has no merchant secret or autonomous spending authority.
 
+Compatibility manifest: https://www.mahastrategies.com/api/mcp-bridge/manifest
+
+This local commercial bridge is distinct from the hosted Maha Cognitive Gateway at https://mcp.maha-os.com/mcp. The two services use separate credentials and tool sets.
+
 ## Other available products
 
 - **MPS Preflight**: $49 self-service private document review. Product page: https://www.mahastrategies.com/mps/preflight. A human authorizes Stripe Checkout; it is automated triage, not a certification or source-by-source human verification.
