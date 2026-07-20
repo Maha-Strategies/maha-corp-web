@@ -1,5 +1,6 @@
 import { MAX_AUDIT_CHARS, MPS_ACTIONS, MPS_TAGS, MPS_VERSION } from './mps-audit-engine.ts'
 import { MPS_AUDIT_CREDIT_UNIT } from './mps-credits.ts'
+import { AGENTIC_COMMERCE_API_URL } from './agentic-commerce.ts'
 
 // Hand-authored OpenAPI 3.1 document for the public API. The runtime
 // validators in lib/ are the source of truth; every pattern and bound here
@@ -86,6 +87,7 @@ export const openApiDocument = {
   },
   servers: [{ url: 'https://www.mahastrategies.com' }],
   tags: [
+    { name: 'Agentic Commerce', description: 'Read-only offer and transaction-policy discovery for agents.' },
     { name: 'MPS Audit', description: 'Prepaid claim-level provenance audits.' },
     { name: 'Checkout', description: 'Self-service credit purchase.' },
     { name: 'Webhooks', description: 'Stripe payment confirmation (called by Stripe, documented for transparency).' },
@@ -93,6 +95,35 @@ export const openApiDocument = {
     { name: 'Books', description: 'Purchased-book entitlement checks for the local MCP bridge.' },
   ],
   paths: {
+    '/api/agentic-commerce/offers': {
+      get: {
+        tags: ['Agentic Commerce'],
+        operationId: 'getAgenticCommerceOffers',
+        summary: 'Discover public MPS commercial terms',
+        description: `Returns the read-only canonical offer catalog. It cannot create a checkout, disclose a credential, or authorize a payment. Canonical URL: ${AGENTIC_COMMERCE_API_URL}.`,
+        responses: {
+          '200': {
+            description: 'Public agentic-commerce discovery document.',
+            content: {
+              'application/json': {
+                schema: {
+                  type: 'object',
+                  required: ['schema', 'version', 'provider', 'transactionPolicy', 'offers'],
+                  properties: {
+                    schema: { type: 'string', format: 'uri' },
+                    version: { type: 'string' },
+                    provider: { type: 'object' },
+                    discovery: { type: 'object' },
+                    transactionPolicy: { type: 'object' },
+                    offers: { type: 'array', minItems: 1, items: { type: 'object' } },
+                  },
+                },
+              },
+            },
+          },
+        },
+      },
+    },
     '/api/books/{id}/entitlement': {
       get: {
         tags: ['Books'],

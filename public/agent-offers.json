@@ -1,17 +1,17 @@
 {
-  "schema": "https://www.mahastrategies.com/schemas/agent-offers/v0.1",
-  "version": "0.1.0",
-  "updatedAt": "2026-07-16T00:00:00.000Z",
+  "schema": "https://www.mahastrategies.com/schemas/agent-offers/v0.2",
+  "version": "0.2.0",
+  "updatedAt": "2026-07-20T00:00:00.000Z",
   "provider": {
     "name": "Maha Strategies LLC",
     "url": "https://www.mahastrategies.com",
     "contactUrl": "https://www.mahastrategies.com/contact"
   },
   "transactionPolicy": {
-    "mode": "inquiry_only",
+    "mode": "mixed_inquiry_and_human_confirmed_checkout",
     "humanConfirmationRequired": true,
     "autonomousPaymentSupported": false,
-    "bindingCommitment": "No price, scope, delivery date, or work commitment is binding until Maha Strategies confirms it in writing."
+    "bindingCommitment": "Research engagements require written confirmation by Maha Strategies. A self-service MPS purchase is binding only when the purchaser authorizes payment in Stripe Checkout; this manifest cannot authorize a charge."
   },
   "credentialPolicy": {
     "mode": "approved_client_credentials",
@@ -27,7 +27,7 @@
   "capabilities": [
     {
       "id": "mps_audit",
-      "status": "approved_clients_only",
+      "status": "self_service_or_approved_client",
       "endpoint": "https://www.mahastrategies.com/api/mps-audits",
       "method": "POST",
       "inputSchema": "https://www.mahastrategies.com/mps-audit-schema.json",
@@ -37,6 +37,52 @@
     }
   ],
   "offers": [
+    {
+      "id": "mps-prepaid-audit-access",
+      "name": "MPS Prepaid Audit API Access",
+      "status": "available_for_self_service_purchase",
+      "serviceUrl": "https://www.mahastrategies.com/mps/audit-access",
+      "capability": "mps_audit",
+      "price": {
+        "currency": "USD",
+        "type": "stripe_checkout_disclosed",
+        "disclosure": "The current fixed-pack price and payment methods are displayed by Stripe Checkout before payment is authorized."
+      },
+      "delivery": {
+        "type": "automated_after_signed_payment_confirmation",
+        "credentialScope": "MPS audit API only",
+        "credentialExpiry": "One year after checkout preparation unless the credential is revoked sooner."
+      },
+      "prepaidCredits": {
+        "unit": "mps_audit_invocation",
+        "consumption": "One credit is reserved before each successful MPS API audit runs.",
+        "failedAuditPolicy": "If an audit fails after a credit is reserved, the credit is automatically returned to the append-only ledger.",
+        "insufficientBalance": {
+          "httpStatus": 402,
+          "code": "payment_required",
+          "action": "Buy another prepaid pack through the purchase URL or checkout endpoint in the response."
+        }
+      },
+      "purchase": {
+        "mode": "human_confirmed_stripe_checkout",
+        "purchaseUrl": "https://www.mahastrategies.com/mps/audit-access",
+        "checkoutEndpoint": "https://www.mahastrategies.com/api/mps-credits/checkout",
+        "method": "POST",
+        "authorization": "A human purchaser must review and authorize the Stripe-hosted payment. This manifest does not authorize an autonomous charge."
+      },
+      "credentialPolicy": {
+        "issuance": "A new credential is generated for each self-service checkout and becomes active only after Stripe signed webhook confirmation.",
+        "storage": "The plaintext credential is disclosed once in the purchasing browser. Store it in a secret manager before closing the page.",
+        "recovery": "Plaintext credentials cannot be recovered. Support can revoke and replace a credential, but cannot reveal the original secret.",
+        "access": "Credentials are scoped, rate-limited, expiring, revocable, and cannot access internal services."
+      },
+      "api": {
+        "openApi": "https://www.mahastrategies.com/api/docs/openapi",
+        "auditEndpoint": "https://www.mahastrategies.com/api/mps-audits",
+        "balanceEndpoint": "https://www.mahastrategies.com/api/mps-credits",
+        "authorization": "Bearer client credential with explicit mps_audit capability."
+      }
+    },
     {
       "id": "rapid-intelligence-brief",
       "name": "Rapid Intelligence Brief",
