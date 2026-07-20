@@ -147,6 +147,8 @@ Subscribe that endpoint to `checkout.session.completed`, `checkout.session.async
 
 `GET /api/mps-credits` returns the authenticated client’s ledger balance. For prepaid credentials, `POST /api/mps-audits` atomically reserves one credit, returns HTTP 402 with the purchase URL when none remains, and creates an idempotent refund entry if execution fails. Existing credentials default to `internal_meter` and retain their prior meter-only behavior without credit enforcement.
 
+Book checkout webhooks must subscribe to `checkout.session.completed`, `checkout.session.async_payment_succeeded`, `refund.created`, `refund.updated`, and `charge.dispute.closed`. A successful payment mints a book entitlement exactly once. Confirmed refund objects are recorded once per Stripe refund, and the entitlement is revoked only after the cumulative reversed amount reaches the original paid amount. A dispute revokes access only when Stripe closes it as lost.
+
 ## MPS operational control plane
 
 Apply `supabase/migrations/20260718_mps_operational_control_plane.sql` after the prepaid-credit and Stripe-webhook migrations, then configure a dedicated server-only `MPS_OPERATIONS_TOKEN`. Do not reuse `AGENT_REVIEW_TOKEN`. The control plane has no public UI and never returns stored secret hashes or plaintext credentials.

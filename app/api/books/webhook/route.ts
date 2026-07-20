@@ -16,6 +16,24 @@ type StripeCheckoutSession = {
   currency?: string | null
 }
 
+type StripeRefund = {
+  id?: string
+  payment_intent?: string | null
+  amount?: number | null
+  currency?: string | null
+  status?: string | null
+}
+
+type StripeDispute = {
+  id?: string
+  payment_intent?: string | null
+  charge?: string | null
+  charge_id?: string | null
+  amount?: number | null
+  currency?: string | null
+  status?: string | null
+}
+
 function validPaymentAmount(value: unknown): value is number {
   return typeof value === 'number' && Number.isInteger(value) && value > 0
 }
@@ -32,6 +50,14 @@ function objectId(value: unknown): string | null {
   if (typeof value !== 'object' || value === null || Array.isArray(value)) return null
   const id = (value as { id?: unknown }).id
   return typeof id === 'string' && id.length <= 255 ? id : null
+}
+
+function validPaymentIntentId(value: unknown): value is string {
+  return typeof value === 'string' && /^pi_[A-Za-z0-9]+$/.test(value)
+}
+
+function validStripeChargeId(value: unknown): value is string {
+  return typeof value === 'string' && /^ch_[A-Za-z0-9]+$/.test(value)
 }
 
 type ProcessingResult = 'processed' | 'duplicate' | 'ignored' | 'retry'
@@ -60,6 +86,31 @@ async function recordEvent(eventId: string, eventType: string, payloadHash: stri
   return processingResponse(data as ProcessingResult | null, error?.code)
 }
 
+async function paymentIntentForCharge(chargeId: string, stripeSecretKey: string): Promise<string | null> {
+  try {
+    const response = await fetch(`https://api.stripe.com/v1/charges/${encodeURIComponent(chargeId)}`, {
+      headers: { Authorization: `Bearer ${stripeSecretKey}` }, cache: 'no-store',
+    })
+    if (!response.ok) return null
+    const charge = await response.json() as { payment_intent?: unknown }
+    return validPaymentIntentId(charge.payment_intent) ? charge.payment_intent : null
+  } catch { return null }
+}
+
+async function processReversal(input: {
+  eventId: string; eventType: string; payloadHash: string; reversalId: string; reversalType: 'refund' | 'dispute_lost'
+  paymentIntentId: string; amount: number; currency: string
+}) {
+  const ledger = createAgentInquiryLedger()
+  if (!ledger) return Response.json({ error: 'Ledger unavailable.' }, { status: 503 })
+  const { data, error } = await ledger.rpc('process_book_payment_reversal_event', {
+    p_event_id: input.eventId, p_event_type: input.eventType, p_payload_hash: input.payloadHash,
+    p_reversal_id: input.reversalId, p_reversal_type: input.reversalType, p_payment_intent_id: input.paymentIntentId,
+    p_amount: input.amount, p_currency: input.currency, p_received_at: new Date().toISOString(),
+  })
+  return processingResponse(data as ProcessingResult | null, error?.code)
+}
+
 export async function POST(request: Request) {
   let config
   try { config = bookCatalogConfig() }
@@ -81,6 +132,34 @@ export async function POST(request: Request) {
   const eventType = event.type
   const stripeObject = event.data?.object
   const payloadHash = stripeWebhookPayloadHash(raw)
+
+  if (eventType === 'refund.created' || eventType === 'refund.updated') {
+    const refund = stripeObject as StripeRefund | undefined
+    if (refund?.status !== 'succeeded' || !/^re_[A-Za-z0-9]+$/.test(refund.id ?? '') || !validPaymentIntentId(refund.payment_intent) || !validPaymentAmount(refund.amount) || !validCurrency(refund.currency)) {
+      return recordEvent(eventId, eventType, payloadHash, objectId(stripeObject))
+    }
+    return processReversal({
+      eventId, eventType, payloadHash, reversalId: refund.id!, reversalType: 'refund', paymentIntentId: refund.payment_intent,
+      amount: refund.amount, currency: refund.currency,
+    })
+  }
+
+  if (eventType === 'charge.dispute.closed') {
+    const dispute = stripeObject as StripeDispute | undefined
+    if (dispute?.status !== 'lost' || !/^du_[A-Za-z0-9]+$/.test(dispute.id ?? '') || !validPaymentAmount(dispute.amount) || !validCurrency(dispute.currency)) {
+      return recordEvent(eventId, eventType, payloadHash, objectId(stripeObject))
+    }
+    const paymentIntentId = validPaymentIntentId(dispute.payment_intent)
+      ? dispute.payment_intent
+      : validStripeChargeId(dispute.charge) ? await paymentIntentForCharge(dispute.charge, config.stripeSecretKey)
+        : validStripeChargeId(dispute.charge_id) ? await paymentIntentForCharge(dispute.charge_id, config.stripeSecretKey)
+          : null
+    if (!paymentIntentId) return Response.json({ error: 'Stripe dispute dependency is not ready.' }, { status: 503 })
+    return processReversal({
+      eventId, eventType, payloadHash, reversalId: dispute.id!, reversalType: 'dispute_lost', paymentIntentId,
+      amount: dispute.amount, currency: dispute.currency,
+    })
+  }
 
   if (eventType !== 'checkout.session.completed' && eventType !== 'checkout.session.async_payment_succeeded') {
     return recordEvent(eventId, eventType, payloadHash, objectId(stripeObject))

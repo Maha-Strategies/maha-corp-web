@@ -265,7 +265,7 @@ export const openApiDocument = {
         tags: ['Books'],
         operationId: 'stripeBooksWebhook',
         summary: 'Stripe book-payment webhook (Stripe calls this — you never do)',
-        description: 'Verifies the `Stripe-Signature` header and mints book entitlements exactly once per Stripe event id, in the same transaction that records the event.',
+        description: 'Verifies the `Stripe-Signature` header and mints book entitlements exactly once per Stripe event id. Confirmed refunds are deduplicated by refund id and revoke access only after the cumulative reversal reaches the original payment; a dispute revokes access only after Stripe closes it as lost.',
         parameters: [
           { name: 'Stripe-Signature', in: 'header', required: true, schema: { type: 'string' }, description: 'Stripe webhook signature (`t=…,v1=…`).' },
         ],
