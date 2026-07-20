@@ -249,10 +249,28 @@ export const openApiDocument = {
               },
             },
           },
+          '200': {
+            description: 'Idempotent replay. Returns the original open Stripe Checkout URL, or the settled checkout state when payment already completed.',
+            content: {
+              'application/json': {
+                schema: {
+                  type: 'object',
+                  required: ['checkoutId', 'bookId', 'title', 'checkoutStatus', 'idempotentReplay'],
+                  properties: {
+                    checkoutId: { type: 'string', pattern: '^book_checkout_[a-f0-9]{32}$' },
+                    checkoutUrl: { type: 'string', format: 'uri', description: 'Present only while checkout is awaiting payment.' },
+                    bookId: { type: 'string' }, title: { type: 'string' },
+                    checkoutStatus: { type: 'string', enum: ['awaiting_payment', 'paid'] },
+                    idempotentReplay: { type: 'boolean', const: true },
+                  },
+                },
+              },
+            },
+          },
           '400': errorResponse('Invalid bookId or clientRequestId.'),
           '401': errorResponse('Missing or invalid credential.'),
           '404': errorResponse('No such book is available for purchase.'),
-          '409': errorResponse('clientRequestId was already used for a book checkout.'),
+          '409': errorResponse('clientRequestId conflicts with a different book, or the original checkout failed.'),
           '415': errorResponse('Content-Type must be application/json.'),
           '429': errorResponse('Hourly credential rate limit reached.'),
           '502': errorResponse('Stripe checkout could not be started.'),
