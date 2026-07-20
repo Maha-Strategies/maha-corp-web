@@ -6,6 +6,7 @@ import {
   validStripeEventId,
   validStripeWebhookSignature,
 } from '@/lib/mps-credits'
+import { reconciliationFailure, reconcileRevenuePayment, reconcileRevenueRefund } from '@/lib/revenue-reconciliation'
 
 export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
@@ -86,7 +87,13 @@ async function processRefund(eventId: string, eventType: string, payloadHash: st
     p_entry_id: createCreditLedgerEntryId(),
     p_received_at: new Date().toISOString(),
   })
-  return processingResponse(data as ProcessingResult | null, error?.code)
+  const productResponse = processingResponse(data as ProcessingResult | null, error?.code)
+  if (error || !['processed', 'duplicate'].includes(String(data))) return productResponse
+  const reconciliation = await reconcileRevenueRefund(ledger, {
+    eventId, eventType, payloadHash, reversalId: refund.id!, paymentIntentId: refund.payment_intent!,
+    amountCents: refund.amount!, currency: refund.currency!, receivedAt: new Date().toISOString(),
+  })
+  return reconciliationFailure(reconciliation) ?? productResponse
 }
 
 async function processCheckout(eventId: string, eventType: string, payloadHash: string, checkoutId: string, session: StripeCheckoutSession) {
@@ -104,7 +111,14 @@ async function processCheckout(eventId: string, eventType: string, payloadHash: 
     p_entry_id: createCreditLedgerEntryId(),
     p_received_at: new Date().toISOString(),
   })
-  return processingResponse(data as ProcessingResult | null, error?.code)
+  const productResponse = processingResponse(data as ProcessingResult | null, error?.code)
+  if (error || !['processed', 'duplicate'].includes(String(data))) return productResponse
+  const reconciliation = await reconcileRevenuePayment(ledger, {
+    eventId, eventType, payloadHash, offerId: 'mps-prepaid-audit-access', checkoutReference: checkoutId,
+    sessionId: session.id!, paymentIntentId: session.payment_intent ?? null, amountCents: session.amount_total!,
+    currency: session.currency!, delivered: true, receivedAt: new Date().toISOString(),
+  })
+  return reconciliationFailure(reconciliation) ?? productResponse
 }
 
 export async function POST(request: Request) {

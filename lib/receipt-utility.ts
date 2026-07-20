@@ -1,0 +1,155 @@
+// Receipt → clean CSV micro-utility. The free demo parses ONE pasted receipt;
+// it doubles as the qualifier (behavioral intent) and the pre-flight
+// feasibility check (garbage in → `feasible: false` BEFORE anyone pays).
+// No input is ever persisted — the text goes to the model and the result comes
+// back; only counts/hashes are logged.
+
+export const RECEIPT_UTILITY = 'receipts-to-csv' as const
+export const MAX_RECEIPT_CHARS = 8_000
+export const MIN_RECEIPT_CHARS = 12
+
+export class ReceiptUtilityError extends Error {
+  readonly status: number
+  constructor(message: string, status = 400) {
+    super(message)
+    this.name = 'ReceiptUtilityError'
+    this.status = status
+  }
+}
+
+export type ReceiptLineItem = {
+  description: string
+  quantity: number | null
+  unitPrice: number | null
+  amount: number | null
+  category: string
+}
+
+export type ParsedReceipt = {
+  feasible: boolean
+  confidence: number
+  note: string
+  merchant: string | null
+  purchasedAt: string | null
+  currency: string | null
+  subtotal: number | null
+  tax: number | null
+  total: number | null
+  lineItems: ReceiptLineItem[]
+}
+
+export type ReceiptRunner = (prompt: string) => Promise<string>
+
+export function validateReceiptText(value: unknown): string {
+  if (typeof value !== 'string') throw new ReceiptUtilityError('Paste the text of a receipt to parse.')
+  const text = value.trim()
+  if (text.length < MIN_RECEIPT_CHARS) throw new ReceiptUtilityError('That is too short to be a receipt.')
+  if (text.length > MAX_RECEIPT_CHARS) throw new ReceiptUtilityError(`Receipt text exceeds the ${MAX_RECEIPT_CHARS.toLocaleString()}-character free-demo limit.`, 413)
+  return text
+}
+
+export function buildReceiptPrompt(text: string): string {
+  return [
+    'You convert one raw, messy receipt into structured accounting data.',
+    'Return ONLY a JSON object (no prose, no code fence) with this exact shape:',
+    '{',
+    '  "feasible": boolean,        // false if the text is not actually a receipt/invoice',
+    '  "confidence": number,       // 0..1, your confidence in the extraction',
+    '  "note": string,             // one short sentence; if not feasible, say why',
+    '  "merchant": string|null,',
+    '  "purchasedAt": string|null, // ISO 8601 date if determinable, else null',
+    '  "currency": string|null,    // ISO 4217 code, e.g. "USD"',
+    '  "subtotal": number|null, "tax": number|null, "total": number|null,',
+    '  "lineItems": [ { "description": string, "quantity": number|null, "unitPrice": number|null, "amount": number|null, "category": string } ]',
+    '}',
+    'Rules: amounts are plain numbers (no currency symbols). If the input is not a receipt, set feasible=false, confidence low, lineItems=[]. Never invent line items that are not present.',
+    '',
+    'RECEIPT:',
+    text,
+  ].join('\n')
+}
+
+function num(value: unknown): number | null {
+  if (typeof value !== 'number' || !Number.isFinite(value)) return null
+  return Math.round(value * 100) / 100
+}
+
+function str(value: unknown, max = 200): string | null {
+  if (typeof value !== 'string') return null
+  const trimmed = value.trim()
+  return trimmed ? trimmed.slice(0, max) : null
+}
+
+// Tolerant parse of the model's JSON (strips an accidental code fence), then
+// hard-validates and clamps every field so the CSV layer only sees clean data.
+export function parseReceiptResponse(raw: string): ParsedReceipt {
+  const stripped = raw.trim().replace(/^```(?:json)?/i, '').replace(/```$/, '').trim()
+  let body: Record<string, unknown>
+  try {
+    const parsed = JSON.parse(stripped)
+    if (typeof parsed !== 'object' || parsed === null || Array.isArray(parsed)) throw new Error('not an object')
+    body = parsed as Record<string, unknown>
+  } catch {
+    throw new ReceiptUtilityError('The parser returned an unreadable result. Try again.', 502)
+  }
+
+  const rawItems = Array.isArray(body.lineItems) ? body.lineItems : []
+  const lineItems: ReceiptLineItem[] = rawItems.slice(0, 200).map((item) => {
+    const object = (typeof item === 'object' && item !== null ? item : {}) as Record<string, unknown>
+    return {
+      description: str(object.description, 300) ?? '(unlabeled item)',
+      quantity: num(object.quantity),
+      unitPrice: num(object.unitPrice),
+      amount: num(object.amount),
+      category: str(object.category, 60) ?? 'uncategorized',
+    }
+  })
+
+  const confidenceRaw = typeof body.confidence === 'number' ? body.confidence : 0
+  const confidence = Math.max(0, Math.min(1, confidenceRaw))
+  const feasible = body.feasible === true && lineItems.length > 0
+
+  return {
+    feasible,
+    confidence,
+    note: str(body.note, 300) ?? (feasible ? 'Parsed.' : 'This does not look like a receipt.'),
+    merchant: str(body.merchant, 200),
+    purchasedAt: str(body.purchasedAt, 40),
+    currency: str(body.currency, 8),
+    subtotal: num(body.subtotal),
+    tax: num(body.tax),
+    total: num(body.total),
+    lineItems,
+  }
+}
+
+export async function runReceiptParse(text: string, runner: ReceiptRunner): Promise<ParsedReceipt> {
+  return parseReceiptResponse(await runner(buildReceiptPrompt(text)))
+}
+
+function csvCell(value: string | number | null): string {
+  if (value === null) return ''
+  const text = String(value)
+  return /[",\r\n]/.test(text) ? `"${text.replace(/"/g, '""')}"` : text
+}
+
+// Deterministic CSV from a parsed receipt — the shippable asset. Header matches
+// common accounting imports; a trailing totals row summarizes the receipt.
+export function receiptCsv(parsed: ParsedReceipt): string {
+  const header = ['description', 'quantity', 'unit_price', 'amount', 'category', 'merchant', 'purchased_at', 'currency']
+  const rows = parsed.lineItems.map((item) => [
+    csvCell(item.description),
+    csvCell(item.quantity),
+    csvCell(item.unitPrice),
+    csvCell(item.amount),
+    csvCell(item.category),
+    csvCell(parsed.merchant),
+    csvCell(parsed.purchasedAt),
+    csvCell(parsed.currency),
+  ].join(','))
+  const totals = [
+    csvCell('TOTAL'), '', '', csvCell(parsed.total ?? parsed.subtotal), csvCell(parsed.tax === null ? '' : `tax:${parsed.tax}`),
+    csvCell(parsed.merchant), csvCell(parsed.purchasedAt), csvCell(parsed.currency),
+  ].join(',')
+  return [header.join(','), ...rows, totals].join('\r\n')
+}

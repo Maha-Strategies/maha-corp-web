@@ -4,6 +4,7 @@ import { Resend } from 'resend'
 import { createAgentInquiryLedger } from '@/lib/agent-inquiry-ledger'
 import { auditInputHash, MpsAuditError, runMpsAudit } from '@/lib/mps-audit-engine'
 import { mergePreflightAudits, parsePreflightText, PREFLIGHT_MODEL, reportPath, secretMatches, splitPreflightText, type StoredPreflight, validPreflightId } from '@/lib/mps-preflight'
+import { reconciliationFailure, reconcileRevenueDelivery } from '@/lib/revenue-reconciliation'
 
 export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
@@ -24,6 +25,15 @@ async function loadOrder(orderId: string): Promise<{ order: StoredPreflight | nu
   return { order: data as StoredPreflight | null, unavailable: Boolean(error) }
 }
 
+async function reconcileCompletedPreflight(orderId: string): Promise<Response | null> {
+  const ledger = createAgentInquiryLedger()
+  if (!ledger) return response({ error: 'The revenue ledger is unavailable.' }, 503)
+  const result = await reconcileRevenueDelivery(ledger, {
+    offerId: 'mps-preflight', checkoutReference: orderId, referenceId: `delivery:${orderId}`, deliveredAt: new Date().toISOString(),
+  })
+  return reconciliationFailure(result)
+}
+
 export async function POST(request: Request) {
   let orderId: string
   let access: string
@@ -42,7 +52,11 @@ export async function POST(request: Request) {
   const { order, unavailable } = await loadOrder(orderId)
   if (unavailable) return response({ error: 'The preflight ledger is unavailable.' }, 503)
   if (!order || !secretMatches(access, order.access_hash)) return response({ error: 'The purchase link is invalid.' }, 404)
-  if (order.status === 'completed' && order.report) return response({ status: 'completed', reportUrl: reportPath(orderId, access) }, 200)
+  if (order.status === 'completed' && order.report) {
+    const reconciliationError = await reconcileCompletedPreflight(orderId)
+    if (reconciliationError) return reconciliationError
+    return response({ status: 'completed', reportUrl: reportPath(orderId, access) }, 200)
+  }
   if (order.status === 'processing') return response({ status: 'processing', retryAfterSeconds: 8 }, 202)
   if (order.status !== 'paid') return response({ error: 'Payment has not yet been confirmed. Refresh this page in a few seconds.' }, 409)
 
@@ -75,6 +89,8 @@ export async function POST(request: Request) {
       .update({ status: 'completed', report, completed_at: new Date().toISOString() })
       .eq('public_id', orderId)
     if (completeError) throw new Error('ledger_completion_failed')
+    const reconciliationError = await reconcileCompletedPreflight(orderId)
+    if (reconciliationError) return reconciliationError
 
     const resendKey = process.env.RESEND_API_KEY
     if (resendKey) {

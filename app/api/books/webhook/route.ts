@@ -1,7 +1,8 @@
 import { jsonResponse } from '@/lib/agent-inquiries'
 import { createAgentInquiryLedger } from '@/lib/agent-inquiry-ledger'
-import { bookCatalogConfig, createBookEntitlementId, validBookCheckoutId } from '@/lib/books'
+import { bookCatalogConfig, createBookEntitlementId, isKnownBook, validBookCheckoutId } from '@/lib/books'
 import { stripeWebhookPayloadHash, validStripeEventId, validStripeWebhookSignature } from '@/lib/mps-credits'
+import { REVENUE_OFFER_FOR_BOOK, reconciliationFailure, reconcileRevenuePayment, reconcileRevenueRefund } from '@/lib/revenue-reconciliation'
 
 export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
@@ -108,7 +109,15 @@ async function processReversal(input: {
     p_reversal_id: input.reversalId, p_reversal_type: input.reversalType, p_payment_intent_id: input.paymentIntentId,
     p_amount: input.amount, p_currency: input.currency, p_received_at: new Date().toISOString(),
   })
-  return processingResponse(data as ProcessingResult | null, error?.code)
+  const productResponse = processingResponse(data as ProcessingResult | null, error?.code)
+  if (error || !['processed', 'duplicate'].includes(String(data))) return productResponse
+  const { data: checkout, error: checkoutError } = await ledger.from('book_checkouts').select('book_id').eq('stripe_payment_intent_id', input.paymentIntentId).maybeSingle()
+  if (checkoutError || !checkout || !isKnownBook(checkout.book_id)) return Response.json({ error: 'Revenue reconciliation is temporarily unavailable.' }, { status: 503 })
+  const reconciliation = await reconcileRevenueRefund(ledger, {
+    eventId: input.eventId, eventType: input.eventType, payloadHash: input.payloadHash, reversalId: input.reversalId,
+    paymentIntentId: input.paymentIntentId, amountCents: input.amount, currency: input.currency, receivedAt: new Date().toISOString(),
+  })
+  return reconciliationFailure(reconciliation) ?? productResponse
 }
 
 export async function POST(request: Request) {
@@ -189,5 +198,14 @@ export async function POST(request: Request) {
     p_allowed_price_ids: Object.keys(config.bookByPrice),
     p_received_at: new Date().toISOString(),
   })
-  return processingResponse(data as ProcessingResult | null, error?.code)
+  const productResponse = processingResponse(data as ProcessingResult | null, error?.code)
+  if (error || !['processed', 'duplicate'].includes(String(data))) return productResponse
+  const { data: checkout, error: checkoutError } = await ledger.from('book_checkouts').select('book_id').eq('public_id', checkoutId).maybeSingle()
+  if (checkoutError || !checkout || !isKnownBook(checkout.book_id)) return Response.json({ error: 'Revenue reconciliation is temporarily unavailable.' }, { status: 503 })
+  const reconciliation = await reconcileRevenuePayment(ledger, {
+    eventId, eventType, payloadHash, offerId: REVENUE_OFFER_FOR_BOOK[checkout.book_id], checkoutReference: checkoutId,
+    sessionId: session.id, paymentIntentId: session.payment_intent ?? null, amountCents: session.amount_total,
+    currency: session.currency, delivered: true, receivedAt: new Date().toISOString(),
+  })
+  return reconciliationFailure(reconciliation) ?? productResponse
 }

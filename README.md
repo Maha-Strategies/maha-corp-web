@@ -205,7 +205,7 @@ Replacement revokes the old credential atomically and returns the new plaintext 
 
 ## Offer-to-Cash Revenue Control Plane
 
-Apply `supabase/migrations/20260720001900_revenue_control_plane.sql` and configure a separate, server-only `REVENUE_CONTROL_TOKEN`. Do not reuse reviewer or MPS operations tokens. The private endpoint is:
+Apply `supabase/migrations/20260720001900_revenue_control_plane.sql` and `supabase/migrations/20260720002000_revenue_event_reconciliation.sql`, then configure a separate, server-only `REVENUE_CONTROL_TOKEN`. Do not reuse reviewer or MPS operations tokens. The private endpoint is:
 
 ```text
 POST /api/admin/revenue-control-plane
@@ -233,3 +233,5 @@ Route an inbound signal with a stable source reference:
 ```
 
 Later record a stateful outcome with a different idempotency key. `paid` and `refunded` require positive `amountCents` and a three-letter currency. The ledger allows only valid transitions: routing/review to checkout, checkout to paid, paid to delivered, and paid or delivered to refunded.
+
+Verified Stripe payment and reversal webhooks now reconcile automatically into this ledger. MPS audit credits and book entitlements are marked delivered only after their existing product webhooks issue access; MPS Preflight records delivery when its report completes. Stripe remains the payment authority, and no revenue control-plane token is sent to Stripe or the browser.

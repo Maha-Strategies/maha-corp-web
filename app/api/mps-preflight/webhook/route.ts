@@ -1,6 +1,8 @@
 import { createHmac, timingSafeEqual } from 'node:crypto'
 
 import { createAgentInquiryLedger } from '@/lib/agent-inquiry-ledger'
+import { reconciliationFailure, reconcileRevenuePayment, reconcileRevenueRefund } from '@/lib/revenue-reconciliation'
+import { stripeWebhookPayloadHash, validStripeEventId } from '@/lib/mps-credits'
 
 export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
@@ -24,25 +26,67 @@ export async function POST(request: Request) {
   if (!secret || !validSignature(raw, request.headers.get('stripe-signature'), secret)) {
     return Response.json({ error: 'Invalid Stripe signature.' }, { status: 400 })
   }
-  let event: { type?: string; data?: { object?: { id?: string; payment_status?: string; client_reference_id?: string; metadata?: { preflightOrderId?: string } } } }
+  let event: { id?: unknown; type?: string; data?: { object?: { id?: string; status?: string | null; payment_intent?: string | null; payment_status?: string; client_reference_id?: string; metadata?: { preflightOrderId?: string }; amount?: number | null; amount_total?: number | null; currency?: string | null } } }
   try { event = JSON.parse(raw) } catch { return Response.json({ error: 'Invalid Stripe event.' }, { status: 400 }) }
+  if (typeof event.id !== 'string' || !validStripeEventId(event.id)) return Response.json({ error: 'Invalid Stripe event.' }, { status: 400 })
+  const stripeObject = event.data?.object
+  if (event.type === 'refund.created' || event.type === 'refund.updated') {
+    if (stripeObject?.status !== 'succeeded' || !/^re_[A-Za-z0-9]+$/.test(stripeObject.id ?? '')
+      || !/^pi_[A-Za-z0-9]+$/.test(stripeObject.payment_intent ?? '') || typeof stripeObject.amount !== 'number'
+      || !Number.isInteger(stripeObject.amount) || stripeObject.amount < 1 || !/^[a-z]{3}$/i.test(stripeObject.currency ?? '')) {
+      return Response.json({ received: true })
+    }
+    const ledger = createAgentInquiryLedger()
+    if (!ledger) return Response.json({ error: 'Ledger unavailable.' }, { status: 503 })
+    const reconciliation = await reconcileRevenueRefund(ledger, {
+      eventId: event.id, eventType: event.type, payloadHash: stripeWebhookPayloadHash(raw), reversalId: stripeObject.id!,
+      paymentIntentId: stripeObject.payment_intent!, amountCents: stripeObject.amount, currency: stripeObject.currency!, receivedAt: new Date().toISOString(),
+    })
+    const reconciliationError = reconciliationFailure(reconciliation)
+    if (reconciliationError) return reconciliationError
+    return Response.json({ received: true })
+  }
   if (event.type !== 'checkout.session.completed' && event.type !== 'checkout.session.async_payment_succeeded') return Response.json({ received: true })
 
-  const session = event.data?.object
+  const session = stripeObject
   if (event.type === 'checkout.session.completed' && session?.payment_status !== 'paid') return Response.json({ received: true })
   const orderId = session?.metadata?.preflightOrderId ?? session?.client_reference_id
   if (!session?.id || !orderId) return Response.json({ received: true })
   const ledger = createAgentInquiryLedger()
   if (!ledger) return Response.json({ error: 'Ledger unavailable.' }, { status: 503 })
-  const { error } = await ledger
+  const { data: markedOrder, error } = await ledger
     .from('mps_preflight_orders')
     .update({ status: 'paid' })
     .eq('public_id', orderId)
     .eq('stripe_checkout_session_id', session.id)
     .eq('status', 'awaiting_payment')
+    .select('public_id')
+    .maybeSingle()
   if (error) {
     console.error('MPS Preflight payment update failed:', error.code)
     return Response.json({ error: 'Ledger unavailable.' }, { status: 503 })
   }
+  if (!markedOrder) {
+    const { data: existingOrder, error: existingOrderError } = await ledger
+      .from('mps_preflight_orders')
+      .select('status')
+      .eq('public_id', orderId)
+      .eq('stripe_checkout_session_id', session.id)
+      .maybeSingle()
+    if (existingOrderError) return Response.json({ error: 'Ledger unavailable.' }, { status: 503 })
+    if (!existingOrder || !['paid', 'processing', 'completed'].includes(existingOrder.status)) return Response.json({ received: true })
+  }
+  const amountTotal = session.amount_total
+  const currency = session.currency
+  if (typeof amountTotal !== 'number' || !Number.isInteger(amountTotal) || amountTotal < 1 || !/^[a-z]{3}$/i.test(currency ?? '')) {
+    return Response.json({ error: 'Invalid Stripe payment details.' }, { status: 400 })
+  }
+  const reconciliation = await reconcileRevenuePayment(ledger, {
+    eventId: event.id, eventType: event.type!, payloadHash: stripeWebhookPayloadHash(raw), offerId: 'mps-preflight', checkoutReference: orderId,
+    sessionId: session.id, paymentIntentId: session.payment_intent ?? null, amountCents: amountTotal,
+    currency: currency!, delivered: false, receivedAt: new Date().toISOString(),
+  })
+  const reconciliationError = reconciliationFailure(reconciliation)
+  if (reconciliationError) return reconciliationError
   return Response.json({ received: true })
 }
