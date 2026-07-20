@@ -80,6 +80,10 @@ export default function MpsPage() {
           in this work&rdquo; — tells the reader nothing about <em>which sentences to trust</em>.
           MPS operates at the claim level.
         </p>
+        <p style={{ ...body, marginTop: 16 }}>
+          New to the standard? Read <Link href="/mps/what-is-mps">the concise MPS explainer</Link>
+          {' '}for its scope, limits, citation format, and canonical sources.
+        </p>
         <p style={{ marginTop: 22 }}>
           <Link href="/audit" className="mono" style={{ fontSize: 12, letterSpacing: "0.1em", background: "#1A2420", color: "#EEF1EC", padding: "12px 22px", textDecoration: "none", borderRadius: 2, display: "inline-block" }}>
             RUN A FREE PREFLIGHT →

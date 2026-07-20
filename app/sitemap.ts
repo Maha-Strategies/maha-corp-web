@@ -21,6 +21,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${baseUrl}/about`, lastModified: new Date('2026-07-20'), changeFrequency: 'monthly', priority: 0.8 },
     { url: `${baseUrl}/audit`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.8 }, // ADDED CORE NODE
     { url: `${baseUrl}/mps`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.8 },   // ADDED CORE NODE
+    { url: `${baseUrl}/mps/what-is-mps`, lastModified: new Date('2026-07-20'), changeFrequency: 'monthly', priority: 0.8 },
     { url: `${baseUrl}/mps/audit-access`, lastModified: new Date('2026-07-20'), changeFrequency: 'monthly', priority: 0.8 },
     { url: `${baseUrl}/mps/preflight`, lastModified: new Date('2026-07-16'), changeFrequency: 'monthly', priority: 0.8 },
     { url: `${baseUrl}/overclock`, lastModified: new Date('2026-07-16'), changeFrequency: 'monthly', priority: 0.6 },

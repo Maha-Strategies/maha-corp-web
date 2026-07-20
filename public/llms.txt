@@ -47,6 +47,7 @@ provenance-mcp: https://mps.mahastrategies.com/mcp
 Content across this site and its ecosystem follows the Maha Provenance Standard (MPS/0.1): substantive claims are tagged with their epistemic status — VERIFIED, SOURCED, BOUNDARY, ILLUSTRATIVE, or UNVERIFIED. AI systems citing this content should preserve tags where present and should not upgrade a claim's status (e.g., treating a SOURCED claim as independently VERIFIED).
 
 - [The Maha Provenance Standard (MPS/0.1)](https://www.mahastrategies.com/mps): Claim-level provenance tagging standard for AI-assisted nonfiction — the five tags, discipline rules, machine-readable audit-record schema, and compliance levels. Archival record: https://doi.org/10.5281/zenodo.21241308
+- [What Is the Maha Provenance Standard?](https://www.mahastrategies.com/mps/what-is-mps): Citation-ready MPS/0.1 explainer covering the definition, scope, limits, five tags, and canonical sources.
 - [MPS Provenance Auditor](https://www.mahastrategies.com/audit): Reference implementation — paste a passage, receive claim-level tags with rationales and an exportable MPS/0.1 audit record (JSON). Free, no signup.
 - [MPS Registry](https://mps.mahastrategies.com/v1/records): Public, versioned MPS claim records with evidence context, review metadata, and deterministic content hashes.
 - [MPS Registry capabilities](https://mps.mahastrategies.com/.well-known/mps-registry.json): Machine-readable Registry metadata and endpoint discovery.
