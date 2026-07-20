@@ -39,6 +39,7 @@ export default function Navbar() {
   ];
 
   const exploreLinks = [
+    { name: 'About Maha', href: '/about' },
     { name: 'MPS Standard', href: '/mps' },
     { name: 'Research', href: '/research' },
     { name: 'Policy', href: '/policy' },

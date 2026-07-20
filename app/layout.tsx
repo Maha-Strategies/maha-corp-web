@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import Navbar from "@/components/Navbar";
+import { mahaEntityGraphJsonLd } from '@/lib/entity';
 import "./globals.css";
 
 // FIXED: Removed the invalid backslashes from string literals
@@ -48,26 +49,12 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  // Site-wide organization identity. Page-specific services and products provide
-  // their own structured data, avoiding contradictory duplicate entities.
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "Organization",
-        "@id": "https://www.mahastrategies.com/#organization",
-        "name": "Maha Strategies LLC",
-        "url": "https://www.mahastrategies.com"
-      }
-    ]
-  };
-
   return (
     <html lang="en" className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}>
       <head>
         <script 
           type="application/ld+json" 
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(mahaEntityGraphJsonLd).replace(/</g, '\\u003c') }}
         />
       </head>
       <body className="bg-[#0a0a0c] text-[#e0e0e0] h-full flex flex-col antialiased">
