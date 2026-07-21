@@ -5,24 +5,24 @@ import { TrackedLink } from '@/components/ConversionTracker'
 const SITE_URL = 'https://www.mahastrategies.com'
 
 export const metadata: Metadata = {
-  title: 'Verified Research Briefs | Maha Strategies',
+  title: 'Make Confident Decisions | Maha Strategies',
   description:
-    'Decision-ready, evidence-tagged research briefs for teams evaluating technology, markets, policy, and high-stakes claims. Fixed scope, $2,500, delivered in 10 business days.',
+    'Get a clear, evidence-led answer before you make a consequential technology, market, or policy decision. Fixed-scope research briefs from Maha Strategies.',
   alternates: { canonical: '/' },
   openGraph: {
     type: 'website',
     url: SITE_URL,
     siteName: 'Maha Strategies',
-    title: 'Verified Research Briefs | Maha Strategies',
+    title: 'Make Confident Decisions | Maha Strategies',
     description:
-      'Evidence-tagged research for decisions that cannot absorb a fabricated claim. Fixed scope, $2,500, delivered in 10 business days.',
+      'Clear, evidence-led research for decisions where getting it wrong is expensive.',
     images: [{ url: '/og-master.png', width: 1200, height: 630, alt: 'Maha Strategies — Verified Research Briefs' }],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Verified Research Briefs | Maha Strategies',
+    title: 'Make Confident Decisions | Maha Strategies',
     description:
-      'Decision-ready, evidence-tagged research for high-stakes technology, market, and policy decisions.',
+      'Clear, evidence-led research for consequential technology, market, and policy decisions.',
     images: ['/og-master.png'],
     creator: '@mayonemaha',
   },
@@ -129,16 +129,16 @@ export default function CorporateHomepage() {
       <div className="max-w-4xl mx-auto px-6 py-20 sm:py-28">
         <section className="max-w-3xl">
           <p className="font-mono text-[10px] text-indigo-400 tracking-widest uppercase mb-5">
-            [ Maha Strategies // Verified Research Briefs ]
+            [ Maha Strategies // Decision Research ]
           </p>
           <h1 className="text-4xl sm:text-5xl md:text-6xl font-light text-white leading-[1.08] tracking-tight mb-7">
-            Evidence you can defend in the room.
+            Know what to do next—before the decision gets expensive.
           </h1>
           <p className="text-xl sm:text-2xl text-zinc-300 font-light leading-relaxed mb-5">
-            We turn complex technology, market, and policy questions into decision-ready research briefs with every claim clearly tagged to its evidence.
+            Bring us the decision you need to make. We turn the difficult question behind it into a clear brief your team can use.
           </p>
           <p className="text-base sm:text-lg text-zinc-400 leading-relaxed max-w-2xl mb-10">
-            Built for operators, investors, policy teams, and anyone whose work will be challenged, audited, or acted upon. No anonymous synthesis. No citations you cannot trace.
+            You get the answer, the evidence behind it, and the uncertainty that still matters—without having to sort through a pile of polished but unreliable summaries.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 mb-8">
@@ -147,23 +147,23 @@ export default function CorporateHomepage() {
               event="cta_homepage_commission_brief"
               className="inline-block bg-white text-black font-mono font-bold text-xs tracking-widest uppercase px-7 py-4 hover:bg-zinc-200 transition-colors text-center"
             >
-              Commission a Brief — $2,500 ↗
+              Get a Decision Brief — $2,500 ↗
             </TrackedLink>
             <Link
               href="/consulting#sample"
               className="inline-block border border-zinc-600 text-zinc-200 font-mono font-bold text-xs tracking-widest uppercase px-7 py-4 hover:border-white hover:text-white transition-colors text-center"
             >
-              See a Tagged Page ↓
+              See What You Receive ↓
             </Link>
           </div>
           <p className="font-mono text-xs text-zinc-400 tracking-widest uppercase">
-            Fixed scope · 10 business days · one revision round · sources linked in the document
+            Fixed scope · delivered in 10 business days · one revision round · sources linked in the document
           </p>
         </section>
 
         <section className="mt-24 border-t border-zinc-800 pt-10">
           <p className="font-mono text-[10px] text-indigo-400 tracking-widest uppercase mb-8">
-            [ What we help you decide ]
+            [ Decisions we help make ]
           </p>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {capabilities.map((capability) => (
@@ -171,7 +171,7 @@ export default function CorporateHomepage() {
                 <p className="font-mono text-[10px] text-zinc-600 tracking-widest mb-3">{capability.number}</p>
                 <h2 className="text-white text-lg mb-3 group-hover:text-indigo-300 transition-colors">{capability.title}</h2>
                 <p className="text-sm text-zinc-400 leading-relaxed">{capability.copy}</p>
-                <span className="inline-block mt-4 font-mono text-xs text-zinc-400 group-hover:text-white tracking-widest uppercase">Explore this brief ↗</span>
+                <span className="inline-block mt-4 font-mono text-xs text-zinc-400 group-hover:text-white tracking-widest uppercase">See how we help ↗</span>
               </Link>
             ))}
           </div>
@@ -180,13 +180,13 @@ export default function CorporateHomepage() {
         <section className="mt-24 border border-indigo-900/50 bg-indigo-950/20 p-7 sm:p-10 relative overflow-hidden">
           <div className="absolute top-0 left-0 h-full w-1 bg-indigo-500" />
           <p className="font-mono text-[10px] text-indigo-400 tracking-widest uppercase mb-4">
-            [ The deliverable ]
+            [ What you receive ]
           </p>
           <h2 className="text-2xl sm:text-3xl font-light text-white mb-5">
-            A brief that shows its work.
+            A clear answer your team can stand behind.
           </h2>
           <p className="text-zinc-400 leading-relaxed max-w-2xl mb-7">
-            Each 10–15 page brief separates what is sourced, independently verified, illustrative, and still unverified. Your team sees the strength of the evidence before it sees the conclusion.
+            In 10–15 pages, you get the decision context, the evidence, the relevant trade-offs, and a clear boundary between what is established and what still needs judgment.
           </p>
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 font-mono text-[10px] tracking-widest">
             {['SOURCED', 'VERIFIED', 'ILLUSTRATIVE', 'UNVERIFIED'].map((tag) => (
@@ -194,7 +194,7 @@ export default function CorporateHomepage() {
             ))}
           </div>
           <Link href="/consulting" className="inline-block mt-8 text-xs font-mono text-indigo-300 hover:text-white tracking-widest uppercase transition-colors">
-            Explore the methodology ↗
+            See the method behind it ↗
           </Link>
           <div className="mt-5 flex flex-col sm:flex-row gap-x-6 gap-y-3 font-mono text-[10px] tracking-widest uppercase">
             <Link href="/audit" className="text-zinc-400 hover:text-white transition-colors">Try the live auditor ↗</Link>
