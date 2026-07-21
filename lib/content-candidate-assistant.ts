@@ -15,8 +15,8 @@ export type ContentCandidateSuggestion = {
 
 function text(value: unknown, field: string, min: number, max: number) {
   if (typeof value !== 'string') throw new Error(`${field} is missing from the candidate suggestion.`)
-  const parsed = value.trim()
-  if (parsed.length < min || parsed.length > max || /[\r\n]/.test(parsed)) throw new Error(`${field} in the candidate suggestion is invalid.`)
+  const parsed = value.trim().replace(/\s+/g, ' ')
+  if (parsed.length < min || parsed.length > max) throw new Error(`${field} in the candidate suggestion is invalid.`)
   return parsed
 }
 

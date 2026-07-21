@@ -55,12 +55,15 @@ export async function POST(request: Request) {
     const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY })
     const message = await client.messages.create({ model: process.env.CONTENT_CANDIDATE_ASSISTANT_MODEL ?? 'claude-sonnet-4-6', max_tokens: 2_000, messages: [{ role: 'user', content: contentCandidateAssistantPrompt({ ...input, sources }) }] })
     const responseText = message.content.map((block) => block.type === 'text' ? block.text : '').join('\n').trim()
-    const raw = responseText.replace(/^```(?:json)?\s*/i, '').replace(/\s*```$/, '').trim()
+    const unfenced = responseText.replace(/^```(?:json)?\s*/i, '').replace(/\s*```$/, '').trim()
+    const start = unfenced.indexOf('{'); const end = unfenced.lastIndexOf('}')
+    const raw = start >= 0 && end > start ? unfenced.slice(start, end + 1) : unfenced
     const suggestion = parseContentCandidateSuggestion(JSON.parse(raw), { topicCluster: input.topicCluster, sources })
     return jsonResponse({ suggestion, savedCandidate: false, publicationAuthority: false, sourcesRetrieved: sources.length }, 200)
   } catch (error) {
     console.error('Content candidate assistant failed:', error instanceof Error ? error.name : 'unknown_error')
-    return unavailable('The model did not return a valid private candidate suggestion. No candidate was saved; you can retry.')
+    const reason = error instanceof Error ? error.message : 'unknown validation error'
+    return unavailable(`The model did not return a valid private candidate suggestion (${reason}). No candidate was saved; you can retry.`)
   }
 }
 
