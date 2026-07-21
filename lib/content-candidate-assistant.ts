@@ -71,7 +71,7 @@ Use only the supplied question and retrieved source metadata. Do not browse, inv
 Return ONLY valid JSON with this exact shape:
 {"proposedPath":"/lowercase-path","readerQuestion":"...","readerOutcome":"...","originalValue":"...","sourceNotes":["...","...","..."]}
 
-Requirements: proposedPath is a lowercase Maha path; readerQuestion 20-500 characters; readerOutcome 20-750; originalValue 80-1500; sourceNotes has exactly one 30-500 character note per supplied source.
+Requirements: proposedPath is a lowercase Maha path; readerQuestion 20-500 characters; readerOutcome 20-750; originalValue 40-1500; sourceNotes has exactly one 30-500 character note per supplied source.
 
 Question: ${input.seedQuestion}
 Topic cluster: ${input.topicCluster}
@@ -90,7 +90,7 @@ export function parseContentCandidateSuggestion(value: unknown, input: { topicCl
     proposedPath,
     readerQuestion: text(record.readerQuestion, 'readerQuestion', 20, 500),
     readerOutcome: text(record.readerOutcome, 'readerOutcome', 20, 750),
-    originalValue: text(record.originalValue, 'originalValue', 80, 1_500),
+    originalValue: text(record.originalValue, 'originalValue', 40, 1_500),
     evidence: input.sources.map((source, index) => ({ url: source.url, title: source.title, sourceType: sourceType(source.url), publishedOn: source.publishedOn, note: sourceNotes[index] })),
     policyChecks: { readerFirst: true, originalAnalysis: true, notDoorway: true, attributionComplete: true, sourceIndependenceReviewed: false, humanReviewRequired: true },
   }
