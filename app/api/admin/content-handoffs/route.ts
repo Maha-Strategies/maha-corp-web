@@ -11,7 +11,7 @@ function unavailable(code?: string) {
   if (code === '42703' || code === 'PGRST204') return jsonResponse({ error: { code: 'schema_cache_refresh_required', message: 'Supabase has not yet refreshed the publication-handoff schema. Apply the schema-cache refresh migration, then refresh this page.' } }, 503)
   if (code === '22023') return jsonResponse({ error: { code: 'invalid_request', message: 'The publication handoff failed validation.' } }, 400)
   if (code === 'P0001') return jsonResponse({ error: { code: 'operation_not_allowed', message: 'An editorial-ready draft and approved evidence package are required.' } }, 409)
-  return jsonResponse({ error: { code: 'content_handoffs_unavailable', message: 'The publication handoff ledger is temporarily unavailable.' } }, 503)
+  return jsonResponse({ error: { code: 'content_handoffs_unavailable', message: `The publication handoff ledger is temporarily unavailable (diagnostic: ${code ?? 'configuration'}).` } }, 503)
 }
 function authorized(request: Request) { const result = authorizeMarketMapping(request); return result.authorized && result.actorFingerprint ? result : null }
 function id(value: unknown, prefix: string) { return typeof value === 'string' && new RegExp(`^${prefix}_[a-f0-9]{32}$`).test(value) ? value : null }
