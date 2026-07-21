@@ -1,6 +1,6 @@
 import { BRIEFS, SITE_URL } from './briefs-data.ts'
 
-type FeedEntry = {
+export type FeedEntry = {
   id: string
   url: string
   title: string
@@ -54,7 +54,7 @@ function xml(value: string): string {
   })[character]!)
 }
 
-export function latestFeedEntries(limit = 30): FeedEntry[] {
+export function latestFeedEntries(limit = 30, humanPublishedEntries: FeedEntry[] = []): FeedEntry[] {
   const intelligenceEntries: FeedEntry[] = BRIEFS.map((brief) => ({
     id: `${SITE_URL}/intelligence/briefs/${brief.slug}`,
     url: `${SITE_URL}/intelligence/briefs/${brief.slug}`,
@@ -65,7 +65,7 @@ export function latestFeedEntries(limit = 30): FeedEntry[] {
     category: brief.kicker,
   }))
 
-  return [...explainerEntries, ...intelligenceEntries]
+  return [...explainerEntries, ...intelligenceEntries, ...humanPublishedEntries]
     .sort((left, right) => right.updated.localeCompare(left.updated) || right.published.localeCompare(left.published) || left.url.localeCompare(right.url))
     .slice(0, limit)
 }

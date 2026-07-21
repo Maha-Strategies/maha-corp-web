@@ -1,9 +1,11 @@
 import { MetadataRoute } from 'next'
+import { MAHA_SITE_URL } from '@/lib/entity'
+import { getPublicContentPublicationSitemapRows } from '@/lib/public-content-publications'
 
-export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://www.mahastrategies.com'
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const baseUrl = MAHA_SITE_URL
   
-  return [
+  const staticPages: MetadataRoute.Sitemap = [
     // EXISTING CORE NODES
     { url: `${baseUrl}`, lastModified: new Date(), changeFrequency: 'weekly', priority: 1 },
     { url: `${baseUrl}/consulting`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.9 },
@@ -325,4 +327,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.8,
     },
   ]
+  const published = await getPublicContentPublicationSitemapRows()
+  return [...staticPages, ...published.map((publication) => ({ url: `${baseUrl}/insights/${publication.slug}`, lastModified: new Date(publication.updated_at), changeFrequency: 'monthly' as const, priority: 0.7 }))]
 }
