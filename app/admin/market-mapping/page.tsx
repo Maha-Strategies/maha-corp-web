@@ -1,6 +1,6 @@
 'use client'
 
-import { useMemo, useState } from 'react'
+import { useMemo, useRef, useState } from 'react'
 
 type Evidence = { url: string; note: string }
 type Opportunity = {
@@ -17,6 +17,8 @@ export default function MarketMappingPage() {
   const [loading, setLoading] = useState(false)
   const [notice, setNotice] = useState('')
   const [unlocked, setUnlocked] = useState(false)
+  const [observedAt, setObservedAt] = useState(() => new Date().toISOString().slice(0, 10))
+  const fileInput = useRef<HTMLInputElement>(null)
   const visible = useMemo(() => opportunities.filter((item) => filter === 'all' || ACTIVE.has(item.status)), [filter, opportunities])
 
   async function load() {
@@ -37,7 +39,7 @@ export default function MarketMappingPage() {
     try {
       const response = await fetch('/api/admin/market-opportunities', {
         method: 'POST', headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
-        body: JSON.stringify({ action: 'operate', opportunityId, note, idempotencyKey: `${action}:${opportunityId}:${crypto.randomUUID()}` }),
+        body: JSON.stringify({ action, opportunityId, note, idempotencyKey: `${action}:${opportunityId}:${crypto.randomUUID()}` }),
       })
       const body = await response.json() as { error?: { message?: string } }
       if (!response.ok) throw new Error(body.error?.message ?? 'Market operation failed.')
@@ -58,6 +60,22 @@ export default function MarketMappingPage() {
     } catch (error) { setNotice(error instanceof Error ? error.message : 'The Scout could not complete its run.'); setLoading(false) }
   }
 
+  async function importSearchConsole(file: File) {
+    setLoading(true); setNotice('')
+    try {
+      const csv = await file.text()
+      const response = await fetch('/api/admin/search-console-import', {
+        method: 'POST',
+        headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
+        body: JSON.stringify({ observedAt, csv }),
+      })
+      const body = await response.json() as { import?: { rows: number; eligible: number; skipped: number; created: number; duplicates: number; failed: number }; error?: { message?: string } }
+      if (!response.ok || !body.import) throw new Error(body.error?.message ?? 'The Search Console import could not complete.')
+      await load()
+      setNotice(`Search Console reviewed ${body.import.rows} queries: ${body.import.created} queued, ${body.import.duplicates} existing, ${body.import.skipped} below the commercial-intent threshold, ${body.import.failed} failed.`)
+    } catch (error) { setNotice(error instanceof Error ? error.message : 'The Search Console import could not complete.'); setLoading(false) }
+  }
+
   if (!unlocked) return (
     <main className="min-h-screen bg-[#0a0a0c] px-6 py-20 text-zinc-200"><div className="mx-auto max-w-md border border-zinc-800 bg-zinc-950 p-6">
       <p className="font-mono text-xs tracking-widest text-cyan-300">[ MARKET MAPPING // PRIVATE ]</p><h1 className="mt-4 text-2xl text-white">Unlock the queue</h1>
@@ -69,7 +87,7 @@ export default function MarketMappingPage() {
   )
 
   return <main className="min-h-screen bg-[#0a0a0c] px-6 py-12 text-zinc-200"><div className="mx-auto max-w-6xl">
-    <div className="flex flex-wrap items-end justify-between gap-4"><div><p className="font-mono text-xs tracking-widest text-cyan-300">[ MARKET MAPPING // PRIVATE ]</p><h1 className="mt-3 text-3xl text-white">Opportunity queue</h1><p className="mt-2 text-sm text-zinc-400">Evidence → deterministic score → human approval. No autonomous publishing, spend, deployment, or outreach.</p></div><div className="flex flex-wrap gap-3"><select value={filter} onChange={(event) => setFilter(event.target.value as 'active' | 'all')} className="border border-zinc-700 bg-black p-2 text-sm"><option value="active">Active</option><option value="all">All</option></select><button onClick={() => void runScout()} disabled={loading} className="border border-cyan-400 px-4 py-2 font-mono text-xs uppercase text-cyan-200 disabled:opacity-40">{loading ? 'Working…' : 'Run Scout · max 5'}</button><button onClick={() => void load()} disabled={loading} className="border border-zinc-600 px-4 py-2 font-mono text-xs uppercase">Refresh</button></div></div>
+    <div className="flex flex-wrap items-end justify-between gap-4"><div><p className="font-mono text-xs tracking-widest text-cyan-300">[ MARKET MAPPING // PRIVATE ]</p><h1 className="mt-3 text-3xl text-white">Opportunity queue</h1><p className="mt-2 text-sm text-zinc-400">Evidence → deterministic score → human approval. No autonomous publishing, spend, deployment, or outreach.</p></div><div className="flex flex-wrap gap-3"><select value={filter} onChange={(event) => setFilter(event.target.value as 'active' | 'all')} className="border border-zinc-700 bg-black p-2 text-sm"><option value="active">Active</option><option value="all">All</option></select><input aria-label="Search Console observation date" type="date" value={observedAt} onChange={(event) => setObservedAt(event.target.value)} className="border border-zinc-700 bg-black p-2 text-sm" /><input ref={fileInput} type="file" accept=".csv,text/csv" className="hidden" onChange={(event) => { const file = event.target.files?.[0]; event.target.value = ''; if (file) void importSearchConsole(file) }} /><button onClick={() => fileInput.current?.click()} disabled={loading} className="border border-cyan-700 px-4 py-2 font-mono text-xs uppercase text-cyan-100 disabled:opacity-40">Import GSC queries</button><button onClick={() => void runScout()} disabled={loading} className="border border-cyan-400 px-4 py-2 font-mono text-xs uppercase text-cyan-200 disabled:opacity-40">{loading ? 'Working…' : 'Run Scout · max 5'}</button><button onClick={() => void load()} disabled={loading} className="border border-zinc-600 px-4 py-2 font-mono text-xs uppercase">Refresh</button></div></div>
     {notice && <p className="mt-5 border border-red-800 bg-red-950/30 p-3 text-sm text-red-200">{notice}</p>}
     <div className="mt-8 space-y-4">{visible.map((item) => <article key={item.public_id} className="border border-zinc-800 bg-zinc-950/50 p-5"><div className="flex flex-wrap justify-between gap-5"><div><p className="font-mono text-[10px] uppercase tracking-widest text-cyan-300">{item.source.replaceAll('_', ' ')} · {item.signal_class.replaceAll('_', ' ')} · {item.status.replaceAll('_', ' ')}</p><h2 className="mt-2 text-xl text-white">{item.title}</h2><p className="mt-1 text-sm text-zinc-400">Buyer: {item.buyer}</p></div><div className="text-right"><p className="font-mono text-3xl text-cyan-200">{item.score}</p><p className="font-mono text-[10px] uppercase tracking-widest text-zinc-500">opportunity score</p></div></div>
       <p className="mt-5 text-sm leading-relaxed"><span className="text-zinc-500">Gap:</span> {item.problem}</p><p className="mt-3 text-sm leading-relaxed"><span className="text-zinc-500">Proposed experiment:</span> {item.proposed_solution}</p>

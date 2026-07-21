@@ -38,7 +38,7 @@ export async function POST(request: Request) {
   const ledger = createAgentInquiryLedger()
   if (!ledger) return unavailable()
 
-  if (body.action === 'operate') {
+  if (body.action === 'start_review' || body.action === 'approve_experiment' || body.action === 'reject' || body.action === 'archive') {
     let operation: ReturnType<typeof parseMarketOperation>
     try { operation = parseMarketOperation(body) } catch (error) { return jsonResponse({ error: { code: 'invalid_request', message: error instanceof Error ? error.message : 'Invalid operation.' } }, 400) }
     const { data, error } = await ledger.rpc('operate_market_opportunity', {

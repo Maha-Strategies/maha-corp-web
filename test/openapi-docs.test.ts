@@ -19,6 +19,7 @@ const PRIVATE_ROUTES = new Set([
   '/api/admin/inbound-operations',
   '/api/admin/market-opportunities',
   '/api/admin/market-scout',
+  '/api/admin/search-console-import',
   '/api/agent-credentials',
   '/api/agent-credentials/[credentialId]',
   '/api/agent-inquiries',

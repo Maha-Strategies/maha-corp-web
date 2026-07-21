@@ -57,6 +57,10 @@ const FIRST_PERSON_DEMAND = ['i need', 'we need', 'i am looking', "i'm looking",
 const SEO_TERMS = ['guide', 'methods compared', 'best ', 'review', 'vs.', 'versus', 'pricing plans', 'how to convert', 'top 10', 'alternatives']
 const MARKETPLACE_HOSTS = ['upwork.com', 'fiverr.com', 'freelancer.com', 'contra.com', 'peopleperhour.com', 'guru.com']
 const COMMUNITY_HOSTS = ['reddit.com', 'news.ycombinator.com', 'stackoverflow.com', 'community.', 'forum.']
+// A first-party search query is useful demand evidence only when it contains a
+// concrete commercial action and maps to one of the capabilities above. This
+// prevents generic informational impressions from becoming sales proposals.
+const SEARCH_CONSOLE_INTENT_TERMS = ['api', 'tool', 'service', 'audit', 'pricing', 'price', 'buy', 'hire', 'quote', 'software']
 
 function sanitize(value: string, max: number): string {
   return value.replace(/[\r\n\t]+/g, ' ').replace(/\s{2,}/g, ' ').trim().slice(0, max)
@@ -89,6 +93,9 @@ export function stableSourceReference(url: string): string {
 export function classifySignal(signal: RawSignal): MarketSignalClass {
   const text = `${signal.title} ${signal.snippet} ${signal.query}`.toLowerCase()
   const host = (() => { try { return new URL(signal.url).host.toLowerCase() } catch { return '' } })()
+  if (signal.sourceId === 'search_console') {
+    return bestCapability(text) && countHits(text, SEARCH_CONSOLE_INTENT_TERMS) >= 2 ? 'buyer_demand' : 'editorial_content'
+  }
   if (MARKETPLACE_HOSTS.some((known) => host === known || host.endsWith(`.${known}`))) return 'marketplace_request'
   if (FIRST_PERSON_DEMAND.some((term) => text.includes(term)) && COMMUNITY_HOSTS.some((known) => host.includes(known))) return 'buyer_demand'
   if (SEO_TERMS.some((term) => text.includes(term))) return 'competitor_content'
