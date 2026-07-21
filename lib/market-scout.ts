@@ -6,7 +6,7 @@
 
 import { createHash } from 'node:crypto'
 
-import type { MarketOpportunityInput } from './market-mapping.ts'
+import type { MarketOpportunityInput, MarketSignalClass } from './market-mapping.ts'
 
 export const SCOUT_SOURCE = 'outbound_scout' as const
 export const SCOUT_MAX_RESULTS = 25 // hard bound on proposals per run
@@ -37,12 +37,14 @@ export type ScoutCandidate = {
   problem: string
   proposedSolution: string
   evidence: { url: string; note: string }[]
+  signalClass: MarketSignalClass
   scores: ScoutScores
 }
 
 // Maha's shippable capabilities the scout maps demand onto. Fit and the proposed
 // (human-reviewed) solution are derived deterministically from these.
 const CAPABILITIES: { id: string; offer: string; keywords: string[] }[] = [
+  { id: 'mps-audit', offer: 'MPS claim-verification API access for evidence-tagged provenance audits', keywords: ['claim verification', 'verify claims', 'fact check', 'fact-check', 'citation audit', 'citation verification', 'source verification', 'provenance', 'hallucination', 'factual accuracy'] },
   { id: 'receipts-to-csv', offer: 'the receipts-to-CSV self-serve micro-utility (no-login, pay-then-run, instant CSV)', keywords: ['receipt', 'expense', 'bookkeep', 'invoice', 'accounting', 'csv', 'reimburs'] },
   { id: 'data-extraction', offer: 'a paid data-extraction micro-utility on the existing pay-then-run rails', keywords: ['extract', 'parse', 'structured data', 'pdf to', 'ocr', 'scan to', 'convert to csv', 'spreadsheet'] },
   { id: 'research-brief', offer: 'a human-scoped verified research brief', keywords: ['research', 'competitive analysis', 'market report', 'intelligence', 'landscape', 'due diligence'] },
@@ -51,6 +53,10 @@ const CAPABILITIES: { id: string; offer: string; keywords: string[] }[] = [
 const DEMAND_TERMS = ['how do i', 'how can i', 'looking for', 'need a', 'need to', 'is there a tool', 'any tool', 'recommend', 'best way to', 'struggling to', 'tired of manually']
 const COMMERCIAL_TERMS = ['pay for', 'happy to pay', 'worth paying', 'budget', 'pricing', 'price', 'subscription', 'per month', 'hire', 'quote', 'invoice', 'buy']
 const RISK_TERMS = ['medical', 'patient', 'hipaa', 'legal advice', 'attorney', 'lawsuit', 'ssn', 'social security', 'credit card number', 'bypass', 'scrape behind login', 'gambling', 'crypto trading', 'weapon']
+const FIRST_PERSON_DEMAND = ['i need', 'we need', 'i am looking', "i'm looking", 'looking for', 'can anyone recommend', 'does anyone know', 'tired of manually', 'need help']
+const SEO_TERMS = ['guide', 'methods compared', 'best ', 'review', 'vs.', 'versus', 'pricing plans', 'how to convert', 'top 10', 'alternatives']
+const MARKETPLACE_HOSTS = ['upwork.com', 'fiverr.com', 'freelancer.com', 'contra.com', 'peopleperhour.com', 'guru.com']
+const COMMUNITY_HOSTS = ['reddit.com', 'news.ycombinator.com', 'stackoverflow.com', 'community.', 'forum.']
 
 function sanitize(value: string, max: number): string {
   return value.replace(/[\r\n\t]+/g, ' ').replace(/\s{2,}/g, ' ').trim().slice(0, max)
@@ -80,6 +86,15 @@ export function stableSourceReference(url: string): string {
   return sanitize(`outbound-scout:${host}:${digest}`, 200)
 }
 
+export function classifySignal(signal: RawSignal): MarketSignalClass {
+  const text = `${signal.title} ${signal.snippet} ${signal.query}`.toLowerCase()
+  const host = (() => { try { return new URL(signal.url).host.toLowerCase() } catch { return '' } })()
+  if (MARKETPLACE_HOSTS.some((known) => host === known || host.endsWith(`.${known}`))) return 'marketplace_request'
+  if (FIRST_PERSON_DEMAND.some((term) => text.includes(term)) && COMMUNITY_HOSTS.some((known) => host.includes(known))) return 'buyer_demand'
+  if (SEO_TERMS.some((term) => text.includes(term))) return 'competitor_content'
+  return 'editorial_content'
+}
+
 // Deterministic component scores derived purely from the signal text.
 export function scoutScores(signal: RawSignal): ScoutScores {
   const text = `${signal.title} ${signal.snippet} ${signal.query}`.toLowerCase()
@@ -88,13 +103,16 @@ export function scoutScores(signal: RawSignal): ScoutScores {
   const hasCurrency = /[$£€]\s?\d/.test(text) || /\busd\b/.test(text)
   const capability = bestCapability(text)
   const riskHits = countHits(text, RISK_TERMS)
+  const signalClass = classifySignal(signal)
+  const buyerIntent = signalClass === 'marketplace_request' ? 2 : signalClass === 'buyer_demand' ? 1 : 0
+  const sourcePenalty = signalClass === 'competitor_content' ? 12 : signalClass === 'editorial_content' ? 6 : 0
 
   return {
-    demandEvidence: Math.min(30, 6 + demandHits * 6),
-    commercialIntent: Math.min(25, commercialHits * 6 + (hasCurrency ? 7 : 0)),
+    demandEvidence: buyerIntent === 2 ? 30 : buyerIntent === 1 ? Math.min(26, 14 + demandHits * 4) : Math.min(10, 2 + demandHits * 2),
+    commercialIntent: buyerIntent === 2 ? Math.min(25, 16 + commercialHits * 3 + (hasCurrency ? 4 : 0)) : buyerIntent === 1 ? Math.min(20, 8 + commercialHits * 3 + (hasCurrency ? 3 : 0)) : Math.min(5, commercialHits + (hasCurrency ? 2 : 0)),
     capabilityFit: capability ? Math.min(20, 8 + capability.hits * 4) : 4,
     speedToValidate: capability && capability.id !== 'research-brief' ? 13 : 8,
-    riskPenalty: Math.min(20, riskHits * 7),
+    riskPenalty: Math.min(20, riskHits * 7 + sourcePenalty),
   }
 }
 
@@ -122,6 +140,7 @@ export function candidateFromSignal(signal: RawSignal): ScoutCandidate | null {
 
   const text = `${signal.title} ${signal.snippet} ${signal.query}`.toLowerCase()
   const capability = bestCapability(text)
+  const signalClass = classifySignal(signal)
   const cleanSnippet = sanitize(signal.snippet || signal.title, 800)
   const cleanTitle = sanitize(signal.title || cleanSnippet || 'Discovered market signal', 180)
 
@@ -130,12 +149,13 @@ export function candidateFromSignal(signal: RawSignal): ScoutCandidate | null {
     sourceReference: stableSourceReference(signal.url),
     title: cleanTitle.length >= 8 ? cleanTitle : `Signal: ${cleanTitle}`.slice(0, 180),
     buyer: inferBuyer(text),
-    problem: sanitize(`Demand signal (${signal.sourceId}/${signal.query}): ${cleanSnippet}`, 1_500),
+    problem: sanitize(`${signalClass.replaceAll('_', ' ')} signal (${signal.sourceId}/${signal.query}): ${cleanSnippet}`, 1_500),
     proposedSolution: sanitize(
       `Validate demand for ${capability ? capability.offer : 'a self-serve paid micro-utility'} with a landing page and the existing pay-then-run checkout. Read-only proposal for human review — no outreach, spend, or deployment.`,
       1_500,
     ),
     evidence: [{ url: normalized, note: evidenceNote.length >= 3 ? evidenceNote : `Retrieved ${signal.retrievedAt}.` }],
+    signalClass,
     scores: scoutScores(signal),
   }
 }
@@ -167,6 +187,7 @@ export function scoutIdempotencyKey(runId: string, sourceReference: string): str
 export function candidateToSubmission(candidate: ScoutCandidate, runId: string): MarketOpportunityInput & { idempotencyKey: string } {
   return {
     source: SCOUT_SOURCE,
+    signalClass: candidate.signalClass,
     sourceReference: candidate.sourceReference,
     title: candidate.title,
     buyer: candidate.buyer,

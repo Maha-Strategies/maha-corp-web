@@ -21,10 +21,11 @@ const MAX_RESULTS_PER_QUERY = 8
 // Default approved discovery queries — themes adjacent to Maha's shippable
 // utilities. Override with MARKET_SCOUT_QUERIES (JSON array of strings).
 const DEFAULT_SCOUT_QUERIES = [
-  'how do I convert receipts to a spreadsheet',
-  'tool to extract expenses from receipt photos',
-  'is there a tool to turn invoices into CSV',
-  'best way to digitize paper receipts for bookkeeping',
+  'I need to verify factual claims and citations before publishing AI content',
+  'hire competitive intelligence research brief for market entry decision',
+  'freelance request extract PDF invoices and reports into CSV',
+  'I need to convert receipt photos to a spreadsheet without manual entry',
+  'need a tool to audit citations and source provenance in a report',
 ]
 
 function approvedQueries(): string[] {
