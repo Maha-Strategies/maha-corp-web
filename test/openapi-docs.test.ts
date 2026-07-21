@@ -20,6 +20,7 @@ const PRIVATE_ROUTES = new Set([
   '/api/admin/content-candidates',
   '/api/admin/content-drafts',
   '/api/admin/content-draft-assistant',
+  '/api/admin/content-candidate-assistant',
   '/api/admin/content-handoffs',
   '/api/admin/content-publications',
   '/api/admin/inbound-operations',
