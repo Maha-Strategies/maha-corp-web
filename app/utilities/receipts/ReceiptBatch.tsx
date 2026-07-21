@@ -371,8 +371,8 @@ export default function ReceiptBatch() {
 
       <p className="mt-5 border-t border-zinc-800 pt-4 text-xs leading-relaxed text-zinc-500">
         Privacy: photos are stripped of metadata in your browser, uploaded to private, short-lived storage
-        (auto-expiring within 24 hours), and used only to read your receipts. Source images are deleted right
-        after your CSV is delivered or the payment is refunded. We never post public links or keep your photos.
+        (auto-expiring within 24 hours), and used only to read your receipts. Source images are deleted immediately
+        after delivery or refund; abandoned uploads are removed by the daily cleanup. We never post public links.
       </p>
 
       {error && <p role="alert" className="mt-5 text-sm text-red-300">{error}</p>}
