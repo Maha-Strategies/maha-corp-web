@@ -44,17 +44,23 @@ export async function POST(request: Request) {
 
   let input: ReturnType<typeof parseCandidateAssistantRequest>
   try { input = parseCandidateAssistantRequest(await request.json()) } catch (error) { return jsonResponse({ error: { code: 'invalid_request', message: error instanceof Error ? error.message : 'Invalid request.' } }, 400) }
+  let sources: ReturnType<typeof selectIndependentSources>
   try {
-    const sources = await retrieveSources(process.env.EXA_API_KEY, input.seedQuestion)
-    if (sources.length < 3) return unavailable('The read-only research step did not find three independent, dated sources. Refine the question or add sources manually.', 422)
+    sources = await retrieveSources(process.env.EXA_API_KEY, input.seedQuestion)
+  } catch {
+    return unavailable('The read-only Exa research step failed. Confirm EXA_API_KEY is present in Vercel and try again.')
+  }
+  if (sources.length < 3) return unavailable('The read-only research step did not find three independent, dated sources. Refine the question or add sources manually.', 422)
+  try {
     const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY })
     const message = await client.messages.create({ model: process.env.CONTENT_CANDIDATE_ASSISTANT_MODEL ?? 'claude-sonnet-4-6', max_tokens: 2_000, messages: [{ role: 'user', content: contentCandidateAssistantPrompt({ ...input, sources }) }] })
-    const raw = message.content.map((block) => block.type === 'text' ? block.text : '').join('\n').trim()
+    const responseText = message.content.map((block) => block.type === 'text' ? block.text : '').join('\n').trim()
+    const raw = responseText.replace(/^```(?:json)?\s*/i, '').replace(/\s*```$/, '').trim()
     const suggestion = parseContentCandidateSuggestion(JSON.parse(raw), { topicCluster: input.topicCluster, sources })
     return jsonResponse({ suggestion, savedCandidate: false, publicationAuthority: false, sourcesRetrieved: sources.length }, 200)
   } catch (error) {
     console.error('Content candidate assistant failed:', error instanceof Error ? error.name : 'unknown_error')
-    return unavailable('The candidate intake assistant did not return a usable suggestion. No candidate was saved; you can retry.')
+    return unavailable('The model did not return a valid private candidate suggestion. No candidate was saved; you can retry.')
   }
 }
 
