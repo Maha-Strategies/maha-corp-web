@@ -1,0 +1,20 @@
+import type { Metadata } from 'next'
+import Link from 'next/link'
+
+const SPEC_URL = 'https://www.mahastrategies.com/api/integrations/base44/openapi'
+
+export const metadata: Metadata = { title: 'Connect Maha MPS to Base44', description: 'Add claim verification to a Base44 app through a secure workspace integration.', alternates: { canonical: '/integrations/base44' } }
+
+export default function Base44IntegrationPage() {
+  return <main className="min-h-screen bg-[#0a0a0c] px-6 py-20 text-zinc-300 sm:py-28"><div className="mx-auto max-w-3xl">
+    <p className="font-mono text-[10px] uppercase tracking-widest text-cyan-300">[ Base44 integration ]</p>
+    <h1 className="mt-5 text-4xl font-light leading-tight text-white sm:text-6xl">Verify claims before your app shows the answer.</h1>
+    <p className="mt-6 max-w-2xl text-lg leading-relaxed text-zinc-400">Connect Maha Provenance Standard to a Base44 app so a user’s draft can be checked for claim-level provenance before it is presented, saved, or published.</p>
+    <div className="mt-10 grid gap-4 border-y border-zinc-800 py-7 text-sm sm:grid-cols-3"><p><span className="block font-mono text-[10px] uppercase tracking-widest text-zinc-500">Outcome</span>Claims are tagged with an action: verify, cite, reword, remove, or none.</p><p><span className="block font-mono text-[10px] uppercase tracking-widest text-zinc-500">Setup</span>One Base44 custom workspace integration, one endpoint.</p><p><span className="block font-mono text-[10px] uppercase tracking-widest text-zinc-500">Control</span>Your credential is a Base44 workspace secret; no browser key is needed.</p></div>
+    <section className="mt-10 border border-zinc-800 p-6"><h2 className="text-xl text-white">1. Buy and save an MPS audit credential</h2><p className="mt-3 text-sm leading-relaxed text-zinc-400">Purchase prepaid audit access. Copy the credential once and treat it like a production secret.</p><Link href="/mps/audit-access" className="mt-4 inline-block text-cyan-200 underline">Get MPS audit access →</Link></section>
+    <section className="mt-4 border border-zinc-800 p-6"><h2 className="text-xl text-white">2. Add a Base44 custom integration</h2><ol className="mt-3 list-decimal space-y-2 pl-5 text-sm leading-relaxed text-zinc-400"><li>In Base44: <strong className="text-zinc-200">Workspace Settings → Integrations → Add integration → Custom integration</strong>.</li><li>Import this public OpenAPI URL:</li></ol><pre className="mt-4 overflow-x-auto bg-black p-4 text-sm text-cyan-200">{SPEC_URL}</pre><p className="mt-4 text-sm leading-relaxed text-zinc-400">Expose only <code>POST /api/mps-audits</code>. Set the Base URL to <code>https://www.mahastrategies.com</code>. Add the header <code>Authorization: Bearer YOUR_MPS_CREDENTIAL</code>; Base44 stores sensitive headers as workspace secrets.</p></section>
+    <section className="mt-4 border border-zinc-800 p-6"><h2 className="text-xl text-white">3. Tell Base44 what to build</h2><pre className="mt-4 overflow-x-auto bg-black p-4 text-sm leading-relaxed text-emerald-200">{`Use the Maha MPS integration when a user submits content. Generate a unique clientRequestId, call runMpsClaimAudit with the submitted text, and show each claim's excerpt, tag, rationale, and recommended action. If the API returns 402, show the operator that audit credits need to be purchased; do not attempt payment automatically. Never expose the Maha credential in the browser.`}</pre></section>
+    <section className="mt-4 border border-indigo-900 bg-indigo-950/20 p-6"><h2 className="text-xl text-white">Test before releasing</h2><p className="mt-3 text-sm leading-relaxed text-zinc-300">Submit a short passage with a unique request ID. Confirm that the app renders claim actions. Repeat the same request ID and text to confirm an idempotent replay; do not reuse that ID with different text.</p></section>
+    <p className="mt-10 text-xs leading-relaxed text-zinc-500">This is a runtime integration for a published Base44 app. It is different from an MCP connection, which Base44 uses only in its editor chat while building.</p>
+  </div></main>
+}

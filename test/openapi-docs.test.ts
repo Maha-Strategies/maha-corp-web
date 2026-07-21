@@ -28,6 +28,7 @@ const PRIVATE_ROUTES = new Set([
   '/api/audit/events',
   '/api/docs/openapi',
   '/api/inbound-submissions',
+  '/api/integrations/base44/openapi',
   '/api/cron/inbound-digest',
   '/api/cron/market-scout',
   '/api/cron/utility-upload-cleanup',
