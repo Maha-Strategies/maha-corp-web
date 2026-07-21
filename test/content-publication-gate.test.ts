@@ -14,7 +14,7 @@ const candidate = {
     { url: 'https://www.nist.gov/itl/ai-risk-management-framework', title: 'AI Risk Management Framework', sourceType: 'official' as const, publishedOn: '2025-02-01', note: 'Provides a public risk-management reference point.' },
     { url: 'https://arxiv.org/abs/2305.18248', title: 'Retrieval-Augmented Generation', sourceType: 'primary' as const, publishedOn: '2023-05-29', note: 'Describes evidence retrieval patterns relevant to claim support.' },
   ],
-  policyChecks: { readerFirst: true, originalAnalysis: true, notDoorway: true, attributionComplete: true, humanReviewRequired: true },
+  policyChecks: { readerFirst: true, originalAnalysis: true, notDoorway: true, attributionComplete: true, sourceIndependenceReviewed: true, humanReviewRequired: true },
   idempotencyKey: 'content-candidate-create-001',
 }
 

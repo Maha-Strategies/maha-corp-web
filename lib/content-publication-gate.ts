@@ -7,7 +7,7 @@ type ContentCandidateAction = typeof CONTENT_CANDIDATE_ACTIONS[number]
 type EvidenceType = 'primary' | 'official' | 'public_data' | 'internal'
 
 export type ContentEvidence = { url: string; title: string; sourceType: EvidenceType; publishedOn: string; note: string }
-export type PolicyChecks = { readerFirst: boolean; originalAnalysis: boolean; notDoorway: boolean; attributionComplete: boolean; humanReviewRequired: boolean }
+export type PolicyChecks = { readerFirst: boolean; originalAnalysis: boolean; notDoorway: boolean; attributionComplete: boolean; sourceIndependenceReviewed: boolean; humanReviewRequired: boolean }
 
 function line(value: unknown, field: string, min: number, max: number): string {
   if (typeof value !== 'string') throw new Error(`${field} must be a string.`)
@@ -37,7 +37,7 @@ function evidence(value: unknown): ContentEvidence[] {
 function policyChecks(value: unknown): PolicyChecks {
   if (typeof value !== 'object' || value === null || Array.isArray(value)) throw new Error('policyChecks must be an object.')
   const record = value as Record<string, unknown>
-  const keys = ['readerFirst', 'originalAnalysis', 'notDoorway', 'attributionComplete', 'humanReviewRequired'] as const
+  const keys = ['readerFirst', 'originalAnalysis', 'notDoorway', 'attributionComplete', 'sourceIndependenceReviewed', 'humanReviewRequired'] as const
   const parsed = Object.fromEntries(keys.map((key) => {
     if (typeof record[key] !== 'boolean') throw new Error(`policyChecks.${key} must be a boolean.`)
     return [key, record[key]]
