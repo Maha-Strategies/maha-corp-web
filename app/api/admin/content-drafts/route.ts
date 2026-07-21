@@ -7,6 +7,7 @@ export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
 
 function unavailable(code?: string) {
+  if (code === '42P01' || code === '42883') return jsonResponse({ error: { code: 'migration_required', message: 'Apply the Conditional Content Draft Composer migration with supabase db push, then try again.' } }, 503)
   if (code === '22023') return jsonResponse({ error: { code: 'invalid_request', message: 'The content draft failed validation.' } }, 400)
   if (code === 'P0002') return jsonResponse({ error: { code: 'not_found', message: 'Content candidate or draft not found.' } }, 404)
   if (code === 'P0001') return jsonResponse({ error: { code: 'operation_not_allowed', message: 'The candidate needs human draft approval, or that draft transition is not allowed.' } }, 409)
