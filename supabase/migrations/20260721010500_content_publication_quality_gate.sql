@@ -59,7 +59,7 @@ begin
   if found then return jsonb_build_object('candidateId',v_existing.public_id,'status',v_existing.status,'idempotentReplay',true); end if;
 
   v_status := case when p_quality_score >= 70
-    and p_policy_checks @> '{"readerFirst":true,"originalAnalysis":true,"notDoorway":true,"attributionComplete":true,"humanReviewRequired":true}'::jsonb
+    and p_policy_checks @> '{"readerFirst":true,"originalAnalysis":true,"notDoorway":true,"attributionComplete":true,"sourceIndependenceReviewed":true,"humanReviewRequired":true}'::jsonb
     then 'draft_ready' else 'evidence_collecting' end;
 
   insert into public.content_page_candidates (public_id,topic_cluster,proposed_path,reader_question,reader_outcome,original_value,author_attribution,evidence,policy_checks,quality_score,status,created_at,updated_at)
