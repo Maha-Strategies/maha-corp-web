@@ -6,7 +6,7 @@ import {
   SCOUT_SOURCE, type RawSignal, boundCandidates, candidateFromSignal, candidateToSubmission,
   classifySignal, dedupeCandidates, normalizeHttpsUrl, scoutIdempotencyKey, scoutScores, stableSourceReference,
 } from '../lib/market-scout.ts'
-import { ScoutConfigError, configuredScoutSources, type ResearchSource } from '../lib/market-scout-sources.ts'
+import { DEFAULT_DISCOVERY_MATRIX, ScoutConfigError, configuredDiscoveryMatrix, configuredScoutSources, createExaResearchSource, rotatingDiscoveryQueries, type ResearchSource } from '../lib/market-scout-sources.ts'
 import { httpQueueSubmitter, runMarketScout, type ScoutSubmitter } from '../lib/market-scout-runner.ts'
 
 function signal(over: Partial<RawSignal> = {}): RawSignal {
@@ -19,7 +19,7 @@ function signal(over: Partial<RawSignal> = {}): RawSignal {
 }
 
 function withEnv(env: Record<string, string | undefined>, run: () => void | Promise<void>) {
-  const keys = ['MARKET_MAPPING_TOKEN', 'MARKET_SCOUT_SOURCES', 'MARKET_SCOUT_QUERIES', 'EXA_API_KEY']
+  const keys = ['MARKET_MAPPING_TOKEN', 'MARKET_SCOUT_SOURCES', 'MARKET_SCOUT_QUERIES', 'MARKET_SCOUT_QUERY_MATRIX', 'EXA_API_KEY']
   const prior = Object.fromEntries(keys.map((k) => [k, process.env[k]]))
   for (const k of keys) { if (env[k] === undefined) delete process.env[k]; else process.env[k] = env[k] }
   return (async () => { try { await run() } finally { for (const k of keys) { if (prior[k] === undefined) delete process.env[k]; else process.env[k] = prior[k] } } })()
@@ -172,24 +172,38 @@ test('configuredScoutSources fails closed on missing list, missing credential, o
   await withEnv({ MARKET_SCOUT_SOURCES: 'exa', EXA_API_KEY: 'k' }, () => assert.deepEqual(configuredScoutSources().map((s) => s.id), ['exa']))
 })
 
+test('discovery matrix rotates a bounded cross-lane slice deterministically', () => {
+  const today = rotatingDiscoveryQueries(DEFAULT_DISCOVERY_MATRIX, new Date('2026-07-21T12:00:00.000Z'))
+  const again = rotatingDiscoveryQueries(DEFAULT_DISCOVERY_MATRIX, new Date('2026-07-21T23:59:59.000Z'))
+  const tomorrow = rotatingDiscoveryQueries(DEFAULT_DISCOVERY_MATRIX, new Date('2026-07-22T00:00:00.000Z'))
+  assert.equal(today.length, 5)
+  assert.deepEqual(today, again)
+  assert.notDeepEqual(today, tomorrow)
+  assert.ok(new Set(today.map((entry) => entry.laneId)).size >= 4)
+})
+
+test('matrix configuration validates lanes and preserves the legacy query override', () => {
+  assert.deepEqual(configuredDiscoveryMatrix({ MARKET_SCOUT_QUERY_MATRIX: JSON.stringify({ lanes: [{ id: 'claims', label: 'Claims', queries: ['claim verification API pricing'] }] }) }).map((lane) => lane.id), ['claims'])
+  assert.throws(() => configuredDiscoveryMatrix({ MARKET_SCOUT_QUERY_MATRIX: JSON.stringify({ lanes: [{ id: 'Bad ID', queries: ['x'] }] }) }), ScoutConfigError)
+  assert.deepEqual(configuredDiscoveryMatrix({ MARKET_SCOUT_QUERIES: JSON.stringify(['one custom search', 'another custom search']) }).map((lane) => lane.id), ['custom'])
+})
+
 // ---- Exa source is read-only search (no writes) ----
 test('exa source issues a read-only highlights search and maps results, preserving URLs', async () => {
-  await withEnv({ MARKET_SCOUT_SOURCES: 'exa', EXA_API_KEY: 'k', MARKET_SCOUT_QUERIES: JSON.stringify(['one query']) }, async () => {
-    const calls: { url: string; method?: string; body?: string }[] = []
-    const fetchImpl = async (url: string, init?: { method?: string; body?: string }) => {
-      calls.push({ url, method: init?.method, body: init?.body })
-      return { ok: true, status: 200, json: async () => ({ results: [{ url: 'https://r.example.com/1', title: 'T', highlights: ['evidence excerpt'] }] }) }
-    }
-    const [source] = configuredScoutSources()
-    const signals = await source.search(fetchImpl)
-    assert.equal(calls.length, 1)
-    assert.equal(calls[0].url, 'https://api.exa.ai/search') // only ever the search endpoint
-    assert.equal(JSON.parse(calls[0].body!).contents.highlights, true)
-    assert.equal(signals.length, 1)
-    assert.equal(signals[0].url, 'https://r.example.com/1')
-    assert.equal(signals[0].snippet, 'evidence excerpt')
-    assert.ok(signals[0].retrievedAt) // timestamp stamped at retrieval
-  })
+  const calls: { url: string; method?: string; body?: string }[] = []
+  const fetchImpl = async (url: string, init?: { method?: string; body?: string }) => {
+    calls.push({ url, method: init?.method, body: init?.body })
+    return { ok: true, status: 200, json: async () => ({ results: [{ url: 'https://r.example.com/1', title: 'T', highlights: ['evidence excerpt'] }] }) }
+  }
+  const source = createExaResearchSource('k', [{ laneId: 'test', query: 'one query' }])
+  const signals = await source.search(fetchImpl)
+  assert.equal(calls.length, 1)
+  assert.equal(calls[0].url, 'https://api.exa.ai/search') // only ever the search endpoint
+  assert.equal(JSON.parse(calls[0].body!).contents.highlights, true)
+  assert.equal(signals.length, 1)
+  assert.equal(signals[0].url, 'https://r.example.com/1')
+  assert.equal(signals[0].snippet, 'evidence excerpt')
+  assert.ok(signals[0].retrievedAt) // timestamp stamped at retrieval
 })
 
 test('httpQueueSubmitter posts to the market-mapping queue with the bearer token', async () => {
