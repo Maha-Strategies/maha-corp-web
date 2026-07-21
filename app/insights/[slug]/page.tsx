@@ -12,7 +12,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const publication = await getPublicContentPublication(slug)
   if (!publication) return {}
   const url = `${MAHA_SITE_URL}/insights/${publication.slug}`
-  return { title: publication.title, description: publication.summary, alternates: { canonical: `/insights/${publication.slug}` }, openGraph: { type: 'article', url, title: publication.title, description: publication.summary, publishedTime: publication.published_at }, twitter: { card: 'summary_large_image', title: publication.title, description: publication.summary } }
+  return { title: publication.title, description: publication.summary, alternates: { canonical: `/insights/${publication.slug}` }, openGraph: { type: 'article', url, title: publication.title, description: publication.summary, publishedTime: publication.published_at, modifiedTime: publication.updated_at }, twitter: { card: 'summary_large_image', title: publication.title, description: publication.summary } }
 }
 
 export default async function PublishedInsightPage({ params }: { params: Promise<{ slug: string }> }) {
