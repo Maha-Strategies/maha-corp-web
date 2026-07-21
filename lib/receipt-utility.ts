@@ -70,6 +70,26 @@ export function buildReceiptPrompt(text: string): string {
   ].join('\n')
 }
 
+// Instruction text paired with an image block for the vision model. Same output
+// contract as buildReceiptPrompt, so parseReceiptResponse handles both modalities.
+export function buildReceiptImagePrompt(): string {
+  return [
+    'The attached image is a photo or scan of ONE receipt or invoice.',
+    'Read it and return ONLY a JSON object (no prose, no code fence) with this exact shape:',
+    '{',
+    '  "feasible": boolean,        // false if the image is not actually a receipt/invoice or is unreadable',
+    '  "confidence": number,       // 0..1, your confidence in the extraction',
+    '  "note": string,             // one short sentence; if not feasible, say why',
+    '  "merchant": string|null,',
+    '  "purchasedAt": string|null, // ISO 8601 date if determinable, else null',
+    '  "currency": string|null,    // ISO 4217 code, e.g. "USD"',
+    '  "subtotal": number|null, "tax": number|null, "total": number|null,',
+    '  "lineItems": [ { "description": string, "quantity": number|null, "unitPrice": number|null, "amount": number|null, "category": string } ]',
+    '}',
+    'Rules: amounts are plain numbers (no currency symbols). If the image is not a legible receipt, set feasible=false, confidence low, lineItems=[]. Never invent line items you cannot read.',
+  ].join('\n')
+}
+
 function num(value: unknown): number | null {
   if (typeof value !== 'number' || !Number.isFinite(value)) return null
   return Math.round(value * 100) / 100

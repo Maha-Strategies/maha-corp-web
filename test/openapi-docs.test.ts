@@ -17,6 +17,7 @@ const PRIVATE_ROUTES = new Set([
   '/api/admin/revenue-control-plane',
   '/api/admin/revenue-metrics',
   '/api/admin/inbound-operations',
+  '/api/admin/market-opportunities',
   '/api/agent-credentials',
   '/api/agent-credentials/[credentialId]',
   '/api/agent-inquiries',
