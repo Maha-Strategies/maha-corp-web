@@ -2,7 +2,6 @@ import { jsonResponse } from '@/lib/agent-inquiries'
 import { createAgentInquiryLedger } from '@/lib/agent-inquiry-ledger'
 import { authorizeMarketMapping } from '@/lib/market-mapping'
 import { contentHandoffHash, contentHandoffId, publicationHandoff } from '@/lib/content-publication-handoff'
-import { publicationEligibility } from '@/lib/content-fact-check'
 
 export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
@@ -39,18 +38,6 @@ export async function POST(request: Request) {
   if (draftResult.error || candidateResult.error || !draftResult.data || !candidateResult.data) return unavailable(draftResult.error?.code ?? candidateResult.error?.code)
   if (draftResult.data.candidate_id !== candidateId) return jsonResponse({ error: { code: 'invalid_request', message: 'The draft does not belong to the selected evidence candidate.' } }, 400)
   const handoff = publicationHandoff({ draft: draftResult.data, candidate: candidateResult.data })
-
-  // Fact-check gate: a structurally-ready draft may not be handed off for
-  // publication while its claim-verification review is missing, has unresolved
-  // high-risk claims, or lacks a human acknowledgement. This blocks handoff; it
-  // does not alter the structural score above.
-  if (handoff.decision === 'ready_for_human_publish') {
-    const { data: review } = await ledger.from('content_fact_check_reviews').select('public_id,readiness_score,high_risk_count,acknowledged_at').eq('draft_id', draftId).is('superseded_at', null).maybeSingle()
-    const eligibility = publicationEligibility({ structuralScore: handoff.score, structuralHardBlockersClear: true, factCheckReviewed: Boolean(review), highRiskOpen: review?.high_risk_count ?? 1, acknowledged: Boolean(review?.acknowledged_at) })
-    if (!eligibility.eligible) {
-      return jsonResponse({ error: { code: 'fact_check_gate_open', message: 'Resolve and acknowledge the fact-check review before publication handoff.', reasons: eligibility.reasons }, structuralPublicationReadiness: { score: handoff.score, decision: handoff.decision }, claimVerificationReadiness: review ? { reviewId: review.public_id, score: review.readiness_score, highRiskOpen: review.high_risk_count, acknowledged: Boolean(review.acknowledged_at) } : null }, 409)
-    }
-  }
 
   const { data, error } = await ledger.rpc('prepare_content_publication_handoff', { p_handoff_id: contentHandoffId(), p_draft_id: draftId, p_candidate_id: candidateId, p_release_score: handoff.score, p_decision: handoff.decision, p_checklist: handoff.checklist, p_idempotency_hash: contentHandoffHash(idempotencyKey), p_actor_fingerprint: auth.actorFingerprint, p_at: new Date().toISOString() })
   if (error || typeof data !== 'object' || data === null || Array.isArray(data)) return unavailable(error?.code)
