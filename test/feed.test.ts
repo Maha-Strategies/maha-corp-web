@@ -29,3 +29,8 @@ test('Atom feed escapes XML-sensitive entry data', () => {
   assert.match(feed, /https:\/\/example\.test\/a\?b=1&amp;c=2/)
   assert.match(feed, /R&amp;D/)
 })
+
+test('Atom feed can surface a human-published insight alongside the existing corpus', () => {
+  const entries = latestFeedEntries(30, [{ id: 'https://www.mahastrategies.com/insights/test', url: 'https://www.mahastrategies.com/insights/test', title: 'Human-reviewed insight', summary: 'A public release created after an explicit editorial handoff.', published: '2026-07-21', updated: '2026-07-21', category: 'Evidence-led insight' }])
+  assert.ok(entries.some((entry) => entry.url.endsWith('/insights/test')))
+})
