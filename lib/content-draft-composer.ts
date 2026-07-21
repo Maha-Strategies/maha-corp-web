@@ -50,3 +50,12 @@ export function parseContentDraftAction(value: unknown) {
   if (!/^contentdraft_[a-f0-9]{32}$/.test(draftId)) throw new Error('draftId is not valid.')
   return { draftId, action: body.action as ContentDraftAction, note: body.note === undefined || body.note === '' ? '' : paragraph(body.note, 'note', 3, 2_000), idempotencyKey: line(body.idempotencyKey, 'idempotencyKey', 8, 120) }
 }
+
+export function parseContentDraftRevision(value: unknown) {
+  const draft = parseContentDraft(value)
+  if (typeof value !== 'object' || value === null || Array.isArray(value)) throw new Error('Request body must be a JSON object.')
+  const body = value as Record<string, unknown>
+  const draftId = line(body.draftId, 'draftId', 12, 80)
+  if (!/^contentdraft_[a-f0-9]{32}$/.test(draftId)) throw new Error('draftId is not valid.')
+  return { ...draft, draftId }
+}

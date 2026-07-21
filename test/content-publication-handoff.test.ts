@@ -19,3 +19,9 @@ test('an incomplete draft is withheld below the 70 release threshold', () => {
   assert.ok(result.score < 70)
   assert.equal(result.decision, 'withheld')
 })
+
+test('a score above 70 remains withheld when a required release module is absent', () => {
+  const result = publicationHandoff({ candidate, draft: { ...draft, limitations: null } })
+  assert.ok(result.score >= 70)
+  assert.equal(result.decision, 'withheld')
+})

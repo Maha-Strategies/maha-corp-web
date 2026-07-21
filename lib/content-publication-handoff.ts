@@ -39,5 +39,6 @@ export function publicationHandoff(input: { candidate: CandidateForHandoff; draf
     + (checklist.evidenceArtifactIncluded ? 3 : 0)
     + (checklist.reviewerAssigned ? 4 : 0),
   )
-  return { score, decision: score >= 70 ? 'ready_for_human_publish' as const : 'withheld' as const, checklist }
+  const hardBlockersClear = checklist.summaryComplete && checklist.mahaMethodComplete && checklist.limitsIncluded && checklist.evidenceArtifactIncluded
+  return { score, decision: score >= 70 && hardBlockersClear ? 'ready_for_human_publish' as const : 'withheld' as const, checklist }
 }
