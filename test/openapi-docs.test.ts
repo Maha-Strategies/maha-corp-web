@@ -18,6 +18,7 @@ const PRIVATE_ROUTES = new Set([
   '/api/admin/revenue-metrics',
   '/api/admin/experiments',
   '/api/admin/content-candidates',
+  '/api/admin/content-drafts',
   '/api/admin/inbound-operations',
   '/api/admin/market-opportunities',
   '/api/admin/market-scout',
