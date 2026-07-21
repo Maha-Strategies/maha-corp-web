@@ -39,7 +39,7 @@ function approvedQueries(): string[] {
   return (parsed as string[]).map((q) => q.trim()).slice(0, MAX_QUERIES)
 }
 
-type ExaResult = { url?: unknown; title?: unknown; text?: unknown; snippet?: unknown }
+type ExaResult = { url?: unknown; title?: unknown; highlights?: unknown; text?: unknown; snippet?: unknown }
 
 // Exa semantic search — a read-only retrieval API. Fails closed without EXA_API_KEY.
 function exaSource(): ResearchSource {
@@ -57,7 +57,10 @@ function exaSource(): ResearchSource {
           response = await fetchImpl('https://api.exa.ai/search', {
             method: 'POST',
             headers: { 'x-api-key': apiKey, 'Content-Type': 'application/json' },
-            body: JSON.stringify({ query, numResults: MAX_RESULTS_PER_QUERY, type: 'auto', contents: { text: { maxCharacters: 800 } } }),
+            // The Scout needs attributable excerpts, not a generated answer.
+            // Highlights are the current Exa raw-retrieval format selected for
+            // this integration and keep the source URL alongside its evidence.
+            body: JSON.stringify({ query, numResults: MAX_RESULTS_PER_QUERY, type: 'auto', contents: { highlights: true } }),
           })
         } catch {
           console.error('Exa search request failed for a query.')
@@ -75,7 +78,9 @@ function exaSource(): ResearchSource {
             sourceId: 'exa',
             url: item.url,
             title: typeof item.title === 'string' ? item.title : '',
-            snippet: typeof item.text === 'string' ? item.text : (typeof item.snippet === 'string' ? item.snippet : ''),
+            snippet: Array.isArray(item.highlights)
+              ? item.highlights.filter((highlight): highlight is string => typeof highlight === 'string').join(' ')
+              : (typeof item.text === 'string' ? item.text : (typeof item.snippet === 'string' ? item.snippet : '')),
             query,
             retrievedAt,
           })

@@ -16,6 +16,7 @@ export default function MarketMappingPage() {
   const [filter, setFilter] = useState<'active' | 'all'>('active')
   const [loading, setLoading] = useState(false)
   const [notice, setNotice] = useState('')
+  const [unlocked, setUnlocked] = useState(false)
   const visible = useMemo(() => opportunities.filter((item) => filter === 'all' || ACTIVE.has(item.status)), [filter, opportunities])
 
   async function load() {
@@ -25,6 +26,7 @@ export default function MarketMappingPage() {
       const body = await response.json() as { opportunities?: Opportunity[]; error?: { message?: string } }
       if (!response.ok) throw new Error(body.error?.message ?? 'Market mapping is unavailable.')
       setOpportunities(body.opportunities ?? [])
+      setUnlocked(true)
     } catch (error) { setNotice(error instanceof Error ? error.message : 'Market mapping is unavailable.') }
     finally { setLoading(false) }
   }
@@ -43,7 +45,20 @@ export default function MarketMappingPage() {
     } catch (error) { setNotice(error instanceof Error ? error.message : 'Market operation failed.'); setLoading(false) }
   }
 
-  if (opportunities.length === 0) return (
+  async function runScout() {
+    setLoading(true); setNotice('')
+    try {
+      const response = await fetch('/api/admin/market-scout', {
+        method: 'POST', headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' }, body: JSON.stringify({ limit: 5 }),
+      })
+      const body = await response.json() as { scout?: { submitted: number; duplicates: number; failed: number; discovered: number; unique: number }; error?: { message?: string } }
+      if (!response.ok || !body.scout) throw new Error(body.error?.message ?? 'The Scout could not complete its run.')
+      await load()
+      setNotice(`Scout reviewed ${body.scout.discovered} signals and queued ${body.scout.submitted} new proposal${body.scout.submitted === 1 ? '' : 's'} (${body.scout.duplicates} existing, ${body.scout.failed} failed).`)
+    } catch (error) { setNotice(error instanceof Error ? error.message : 'The Scout could not complete its run.'); setLoading(false) }
+  }
+
+  if (!unlocked) return (
     <main className="min-h-screen bg-[#0a0a0c] px-6 py-20 text-zinc-200"><div className="mx-auto max-w-md border border-zinc-800 bg-zinc-950 p-6">
       <p className="font-mono text-xs tracking-widest text-cyan-300">[ MARKET MAPPING // PRIVATE ]</p><h1 className="mt-4 text-2xl text-white">Unlock the queue</h1>
       <p className="mt-2 text-sm leading-relaxed text-zinc-400">Evidence-backed proposals only. This queue cannot publish, spend, deploy, or contact anyone.</p>
@@ -54,7 +69,7 @@ export default function MarketMappingPage() {
   )
 
   return <main className="min-h-screen bg-[#0a0a0c] px-6 py-12 text-zinc-200"><div className="mx-auto max-w-6xl">
-    <div className="flex flex-wrap items-end justify-between gap-4"><div><p className="font-mono text-xs tracking-widest text-cyan-300">[ MARKET MAPPING // PRIVATE ]</p><h1 className="mt-3 text-3xl text-white">Opportunity queue</h1><p className="mt-2 text-sm text-zinc-400">Evidence → deterministic score → human approval. No autonomous publishing, spend, deployment, or outreach.</p></div><div className="flex gap-3"><select value={filter} onChange={(event) => setFilter(event.target.value as 'active' | 'all')} className="border border-zinc-700 bg-black p-2 text-sm"><option value="active">Active</option><option value="all">All</option></select><button onClick={() => void load()} disabled={loading} className="border border-zinc-600 px-4 py-2 font-mono text-xs uppercase">{loading ? 'Loading…' : 'Refresh'}</button></div></div>
+    <div className="flex flex-wrap items-end justify-between gap-4"><div><p className="font-mono text-xs tracking-widest text-cyan-300">[ MARKET MAPPING // PRIVATE ]</p><h1 className="mt-3 text-3xl text-white">Opportunity queue</h1><p className="mt-2 text-sm text-zinc-400">Evidence → deterministic score → human approval. No autonomous publishing, spend, deployment, or outreach.</p></div><div className="flex flex-wrap gap-3"><select value={filter} onChange={(event) => setFilter(event.target.value as 'active' | 'all')} className="border border-zinc-700 bg-black p-2 text-sm"><option value="active">Active</option><option value="all">All</option></select><button onClick={() => void runScout()} disabled={loading} className="border border-cyan-400 px-4 py-2 font-mono text-xs uppercase text-cyan-200 disabled:opacity-40">{loading ? 'Working…' : 'Run Scout · max 5'}</button><button onClick={() => void load()} disabled={loading} className="border border-zinc-600 px-4 py-2 font-mono text-xs uppercase">Refresh</button></div></div>
     {notice && <p className="mt-5 border border-red-800 bg-red-950/30 p-3 text-sm text-red-200">{notice}</p>}
     <div className="mt-8 space-y-4">{visible.map((item) => <article key={item.public_id} className="border border-zinc-800 bg-zinc-950/50 p-5"><div className="flex flex-wrap justify-between gap-5"><div><p className="font-mono text-[10px] uppercase tracking-widest text-cyan-300">{item.source.replaceAll('_', ' ')} · {item.status.replaceAll('_', ' ')}</p><h2 className="mt-2 text-xl text-white">{item.title}</h2><p className="mt-1 text-sm text-zinc-400">Buyer: {item.buyer}</p></div><div className="text-right"><p className="font-mono text-3xl text-cyan-200">{item.score}</p><p className="font-mono text-[10px] uppercase tracking-widest text-zinc-500">opportunity score</p></div></div>
       <p className="mt-5 text-sm leading-relaxed"><span className="text-zinc-500">Gap:</span> {item.problem}</p><p className="mt-3 text-sm leading-relaxed"><span className="text-zinc-500">Proposed experiment:</span> {item.proposed_solution}</p>

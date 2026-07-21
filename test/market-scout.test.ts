@@ -161,19 +161,21 @@ test('configuredScoutSources fails closed on missing list, missing credential, o
 })
 
 // ---- Exa source is read-only search (no writes) ----
-test('exa source issues a read-only search and maps results, preserving URLs', async () => {
+test('exa source issues a read-only highlights search and maps results, preserving URLs', async () => {
   await withEnv({ MARKET_SCOUT_SOURCES: 'exa', EXA_API_KEY: 'k', MARKET_SCOUT_QUERIES: JSON.stringify(['one query']) }, async () => {
-    const calls: { url: string; method?: string }[] = []
-    const fetchImpl = async (url: string, init?: { method?: string }) => {
-      calls.push({ url, method: init?.method })
-      return { ok: true, status: 200, json: async () => ({ results: [{ url: 'https://r.example.com/1', title: 'T', text: 'snippet' }] }) }
+    const calls: { url: string; method?: string; body?: string }[] = []
+    const fetchImpl = async (url: string, init?: { method?: string; body?: string }) => {
+      calls.push({ url, method: init?.method, body: init?.body })
+      return { ok: true, status: 200, json: async () => ({ results: [{ url: 'https://r.example.com/1', title: 'T', highlights: ['evidence excerpt'] }] }) }
     }
     const [source] = configuredScoutSources()
     const signals = await source.search(fetchImpl)
     assert.equal(calls.length, 1)
     assert.equal(calls[0].url, 'https://api.exa.ai/search') // only ever the search endpoint
+    assert.equal(JSON.parse(calls[0].body!).contents.highlights, true)
     assert.equal(signals.length, 1)
     assert.equal(signals[0].url, 'https://r.example.com/1')
+    assert.equal(signals[0].snippet, 'evidence excerpt')
     assert.ok(signals[0].retrievedAt) // timestamp stamped at retrieval
   })
 })
