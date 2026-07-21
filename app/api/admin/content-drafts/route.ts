@@ -1,7 +1,7 @@
 import { jsonResponse } from '@/lib/agent-inquiries'
 import { createAgentInquiryLedger } from '@/lib/agent-inquiry-ledger'
 import { authorizeMarketMapping } from '@/lib/market-mapping'
-import { contentDraftHash, contentDraftId, parseContentDraft, parseContentDraftAction } from '@/lib/content-draft-composer'
+import { contentDraftHash, contentDraftId, parseContentDraft, parseContentDraftAction, parseContentDraftRevision } from '@/lib/content-draft-composer'
 
 export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
@@ -19,7 +19,7 @@ export async function GET(request: Request) {
   if (!authorized(request)) return jsonResponse({ error: { code: 'unauthorized', message: 'A valid market-mapping bearer token is required.' } }, 401)
   const ledger = createAgentInquiryLedger(); if (!ledger) return unavailable()
   const [drafts, candidates] = await Promise.all([
-    ledger.from('content_page_drafts').select('public_id,candidate_id,title,summary,direct_answer,method,artifact_url,artifact_label,limitations,editorial_reviewer,status,reviewer_note,created_at,updated_at').order('updated_at', { ascending: false }).limit(100),
+    ledger.from('content_page_drafts').select('public_id,candidate_id,title,summary,direct_answer,method,artifact_url,artifact_label,limitations,editorial_reviewer,status,revision,reviewer_note,created_at,updated_at').order('updated_at', { ascending: false }).limit(100),
     ledger.from('content_page_candidates').select('public_id,proposed_path,reader_question,reader_outcome,original_value,author_attribution,evidence,quality_score,status').eq('status', 'approved_for_draft').order('quality_score', { ascending: false }).limit(100),
   ])
   if (drafts.error) return unavailable(drafts.error.code)
@@ -33,6 +33,12 @@ export async function POST(request: Request) {
   if (!request.headers.get('content-type')?.toLowerCase().startsWith('application/json')) return jsonResponse({ error: { code: 'unsupported_media_type', message: 'Content-Type must be application/json.' } }, 415)
   let body: unknown; try { body = await request.json() } catch { return jsonResponse({ error: { code: 'invalid_request', message: 'Request body must be valid JSON.' } }, 400) }
   const ledger = createAgentInquiryLedger(); if (!ledger) return unavailable()
+  if (typeof body === 'object' && body !== null && !Array.isArray(body) && (body as Record<string, unknown>).action === 'revise') {
+    let revision: ReturnType<typeof parseContentDraftRevision>; try { revision = parseContentDraftRevision(body) } catch (error) { return jsonResponse({ error: { code: 'invalid_request', message: error instanceof Error ? error.message : 'Invalid content draft revision.' } }, 400) }
+    const { data, error } = await ledger.rpc('revise_content_page_draft', { p_draft_id: revision.draftId, p_candidate_id: revision.candidateId, p_title: revision.title, p_summary: revision.summary, p_direct_answer: revision.directAnswer, p_method: revision.method, p_artifact_url: revision.artifactUrl || null, p_artifact_label: revision.artifactLabel || null, p_limitations: revision.limitations || null, p_editorial_reviewer: revision.editorialReviewer, p_idempotency_hash: contentDraftHash(revision.idempotencyKey), p_actor_fingerprint: auth.actorFingerprint, p_at: new Date().toISOString() })
+    if (error || typeof data !== 'object' || data === null || Array.isArray(data)) return unavailable(error?.code)
+    return jsonResponse({ revision: data, publicPublishingSupported: false }, 200)
+  }
   if (typeof body === 'object' && body !== null && !Array.isArray(body) && 'action' in body) {
     let action: ReturnType<typeof parseContentDraftAction>; try { action = parseContentDraftAction(body) } catch (error) { return jsonResponse({ error: { code: 'invalid_request', message: error instanceof Error ? error.message : 'Invalid draft operation.' } }, 400) }
     const { data, error } = await ledger.rpc('operate_content_page_draft', { p_draft_id: action.draftId, p_action: action.action, p_note: action.note || null, p_idempotency_hash: contentDraftHash(action.idempotencyKey), p_actor_fingerprint: auth.actorFingerprint, p_at: new Date().toISOString() })

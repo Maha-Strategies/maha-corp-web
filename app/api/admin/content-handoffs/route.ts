@@ -18,7 +18,7 @@ function id(value: unknown, prefix: string) { return typeof value === 'string' &
 export async function GET(request: Request) {
   if (!authorized(request)) return jsonResponse({ error: { code: 'unauthorized', message: 'A valid market-mapping bearer token is required.' } }, 401)
   const ledger = createAgentInquiryLedger(); if (!ledger) return unavailable()
-  const { data, error } = await ledger.from('content_publication_handoffs').select('public_id,draft_id,candidate_id,release_score,decision,checklist,reviewer_note,created_at,updated_at').order('created_at', { ascending: false }).limit(100)
+  const { data, error } = await ledger.from('content_publication_handoffs').select('public_id,draft_id,candidate_id,release_score,decision,checklist,reviewer_note,created_at,updated_at').is('superseded_at', null).order('created_at', { ascending: false }).limit(100)
   if (error) return unavailable(error.code)
   return jsonResponse({ handoffs: data ?? [], publicPublishingSupported: false, automaticIndexingSupported: false }, 200)
 }
