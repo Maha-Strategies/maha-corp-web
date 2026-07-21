@@ -20,3 +20,7 @@ test('revision input preserves the same bounded fields and requires a valid draf
   const parsed = parseContentDraftRevision({ ...draft, action: 'revise', draftId: 'contentdraft_1234567890abcdef1234567890abcdef' })
   assert.equal(parsed.draftId, 'contentdraft_1234567890abcdef1234567890abcdef')
 })
+
+test('restore is a supported human-only draft operation', () => {
+  assert.equal(parseContentDraftAction({ draftId: 'contentdraft_1234567890abcdef1234567890abcdef', action: 'restore', idempotencyKey: 'restore-draft-001' }).action, 'restore')
+})
