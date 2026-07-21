@@ -1,6 +1,6 @@
 import { createHash, randomUUID } from 'node:crypto'
 
-export const CONTENT_DRAFT_ACTIONS = ['mark_editorial_ready', 'archive'] as const
+export const CONTENT_DRAFT_ACTIONS = ['mark_editorial_ready', 'archive', 'restore'] as const
 type ContentDraftAction = typeof CONTENT_DRAFT_ACTIONS[number]
 
 function line(value: unknown, field: string, min: number, max: number): string {
