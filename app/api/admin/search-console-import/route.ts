@@ -23,6 +23,11 @@ export async function POST(request: Request) {
   } catch (error) { return jsonResponse({ error: { code: 'invalid_request', message: error instanceof Error ? error.message : 'Invalid Search Console export.' } }, 400) }
   const ledger = createAgentInquiryLedger()
   if (!ledger) return unavailable()
+  const { error: snapshotError } = await ledger.from('search_console_query_snapshots').upsert(
+    input.rows.map((row) => ({ observed_on: input.observedAt, query: row.query, clicks: row.clicks, impressions: row.impressions, ctr: row.ctr, position: row.position, imported_at: new Date().toISOString() })),
+    { onConflict: 'observed_on,query' },
+  )
+  if (snapshotError) return jsonResponse({ error: { code: 'search_performance_unavailable', message: 'Search performance storage is unavailable. Apply the feedback migration first.' } }, 503)
   const { eligible, skipped } = searchConsoleImportCandidates(input)
   let created = 0, duplicates = 0, failed = 0
   for (const candidate of eligible) {
@@ -37,7 +42,7 @@ export async function POST(request: Request) {
     if ((data as { idempotentReplay?: unknown }).idempotentReplay === true) duplicates += 1
     else created += 1
   }
-  return jsonResponse({ import: { rows: input.rows.length, eligible: eligible.length, skipped, created, duplicates, failed }, autonomousPublishingSupported: false, autonomousSpendSupported: false, autonomousOutreachSupported: false }, 200)
+  return jsonResponse({ import: { rows: input.rows.length, snapshots: input.rows.length, eligible: eligible.length, skipped, created, duplicates, failed }, autonomousPublishingSupported: false, autonomousSpendSupported: false, autonomousOutreachSupported: false }, 200)
 }
 
 export function OPTIONS() { return new Response(null, { status: 204, headers: { Allow: 'POST, OPTIONS', 'Cache-Control': 'no-store' } }) }
