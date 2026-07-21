@@ -26,6 +26,7 @@ const PRIVATE_ROUTES = new Set([
   '/api/docs/openapi',
   '/api/inbound-submissions',
   '/api/cron/inbound-digest',
+  '/api/cron/utility-upload-cleanup',
   '/api/mps-audits/[auditId]',
   '/api/mps-preflight/[orderId]',
   '/api/mps-preflight/checkout',
@@ -34,6 +35,7 @@ const PRIVATE_ROUTES = new Set([
   '/api/utilities/receipts/demo',
   '/api/utilities/receipts/checkout',
   '/api/utilities/receipts/run',
+  '/api/utilities/receipts/uploads',
   '/api/utilities/webhook',
 ])
 

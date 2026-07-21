@@ -32,8 +32,8 @@ export default function ReceiptsUtilityPage() {
           <h2 className="mt-4 text-2xl font-light tracking-tight text-white sm:text-3xl">Have a stack of them? Run a batch.</h2>
           <p className="mt-4 max-w-2xl text-base leading-relaxed text-zinc-400">
             The free demo above is your pre-flight check. When it parses cleanly, batch up to {20} receipts into one
-            CSV — pay once, no account, no login. Unparseable receipts are dropped, and a run where nothing parses is
-            refunded automatically.
+            CSV — <strong className="text-zinc-300">upload photos or paste text, or mix both</strong>. Pay once, no
+            account, no login. Unparseable receipts are dropped, and a run where nothing parses is refunded automatically.
           </p>
           <ReceiptBatch />
         </section>

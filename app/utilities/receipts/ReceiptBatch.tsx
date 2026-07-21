@@ -6,8 +6,17 @@ const MAX_BATCH = 20
 const MIN_CHARS = 12
 const STORAGE_PREFIX = 'maha_receipt_run:'
 
-type RunResultRow = { index: number; feasible: boolean; confidence?: number; note?: string; merchant?: string | null; rowCount?: number }
+// Client-side image rules. Original file capped at 10 MB; every image is
+// re-encoded to JPEG on a canvas (which strips EXIF/GPS metadata) and shrunk to
+// stay under the 8 MB upload cap before it ever leaves the browser.
+const SUPPORTED_IMAGE_TYPES = ['image/jpeg', 'image/png', 'image/webp']
+const MAX_ORIGINAL_BYTES = 10 * 1024 * 1024
+const MAX_UPLOAD_BYTES = 8 * 1024 * 1024
+const MAX_IMAGE_DIMENSION = 2000
+
+type RunResultRow = { index: number; source?: 'image' | 'text'; feasible: boolean; confidence?: number; note?: string; merchant?: string | null; rowCount?: number }
 type RunResult = { delivered: boolean; refunded?: boolean; note?: string; csv?: string; receiptCount?: number; rowCount?: number; results: RunResultRow[] }
+type PendingImage = { id: string; name: string; previewUrl: string; blob: Blob }
 
 type Phase = 'compose' | 'redirecting' | 'running' | 'done' | 'refunded' | 'cancelled' | 'missing' | 'error'
 
@@ -15,8 +24,36 @@ function storageKey(checkoutId: string) {
   return `${STORAGE_PREFIX}${checkoutId}`
 }
 
+function canvasToJpeg(canvas: HTMLCanvasElement, quality: number): Promise<Blob> {
+  return new Promise((resolve, reject) => canvas.toBlob((blob) => (blob ? resolve(blob) : reject(new Error('Encode failed.'))), 'image/jpeg', quality))
+}
+
+// Decode, bake in EXIF orientation, downscale, and re-encode to JPEG. Re-encoding
+// on the canvas discards all original metadata (EXIF, GPS). Never uploads the
+// original bytes.
+async function reencodeToJpeg(file: File): Promise<Blob> {
+  const bitmap = await createImageBitmap(file, { imageOrientation: 'from-image' })
+  const scale = Math.min(1, MAX_IMAGE_DIMENSION / Math.max(bitmap.width, bitmap.height))
+  const width = Math.max(1, Math.round(bitmap.width * scale))
+  const height = Math.max(1, Math.round(bitmap.height * scale))
+  const canvas = document.createElement('canvas')
+  canvas.width = width; canvas.height = height
+  const context = canvas.getContext('2d')
+  if (!context) { bitmap.close(); throw new Error('This browser cannot process images.') }
+  context.drawImage(bitmap, 0, 0, width, height)
+  bitmap.close()
+  let quality = 0.82
+  let blob = await canvasToJpeg(canvas, quality)
+  while (blob.size > MAX_UPLOAD_BYTES && quality > 0.4) {
+    quality -= 0.15
+    blob = await canvasToJpeg(canvas, quality)
+  }
+  return blob
+}
+
 export default function ReceiptBatch() {
   const [receipts, setReceipts] = useState<string[]>([''])
+  const [images, setImages] = useState<PendingImage[]>([])
   const [phase, setPhase] = useState<Phase>('compose')
   const [error, setError] = useState('')
   const [runResult, setRunResult] = useState<RunResult | null>(null)
@@ -77,28 +114,50 @@ export default function ReceiptBatch() {
     }
   }
 
+  // Upload each re-encoded image to its private, single-use signed URL. Images go
+  // directly to storage — never through our API, sessionStorage, or the URL.
+  // Returns the server-owned draft id the checkout is bound to.
+  async function uploadImages(): Promise<string | undefined> {
+    let draftId: string | undefined
+    for (const image of images) {
+      const prepared = await fetch('/api/utilities/receipts/uploads', {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ draftId, contentType: image.blob.type || 'image/jpeg', byteSize: image.blob.size }),
+      })
+      const data = await prepared.json() as { draftId?: string; uploadUrl?: string; error?: string }
+      if (!prepared.ok || !data.draftId || !data.uploadUrl) throw new Error(data.error ?? 'An image upload could not be prepared.')
+      draftId = data.draftId
+      const put = await fetch(data.uploadUrl, { method: 'PUT', headers: { 'Content-Type': image.blob.type || 'image/jpeg' }, body: image.blob })
+      if (!put.ok) throw new Error('An image failed to upload. Try again.')
+    }
+    return draftId
+  }
+
   async function payAndRun() {
     const cleaned = receipts.map((r) => r.trim()).filter((r) => r.length > 0)
-    if (cleaned.length === 0 || cleaned.some((r) => r.length < MIN_CHARS)) {
-      setError(`Add at least one receipt (each ${MIN_CHARS}+ characters).`); return
-    }
+    if (cleaned.some((r) => r.length < MIN_CHARS)) { setError(`Each pasted receipt needs ${MIN_CHARS}+ characters.`); return }
+    if (cleaned.length === 0 && images.length === 0) { setError('Add at least one receipt — paste text or upload a photo.'); return }
+    if (cleaned.length + images.length > MAX_BATCH) { setError(`A single run accepts at most ${MAX_BATCH} receipts across images and text.`); return }
+
     setPhase('redirecting'); setError('')
     try {
+      const draftId = await uploadImages()
       const clientRequestId = crypto.randomUUID()
       const response = await fetch('/api/utilities/receipts/checkout', {
         method: 'POST', headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ utility: 'receipts-to-csv', clientRequestId }),
+        body: JSON.stringify({ utility: 'receipts-to-csv', clientRequestId, draftId }),
       })
       const data = await response.json() as { checkoutId?: string; checkoutUrl?: string; error?: { message?: string } }
       if (!response.ok || !data.checkoutId || !data.checkoutUrl) {
         setError(data.error?.message ?? 'Batch runs are not available right now.'); setPhase('compose'); return
       }
-      // Hold the receipts in THIS browser across the Stripe redirect — they are
-      // never sent to our server until the paid run itself.
+      // Hold only the TEXT receipts in this browser across the Stripe redirect —
+      // images already live in private storage, bound to the checkout server-side.
       sessionStorage.setItem(storageKey(data.checkoutId), JSON.stringify(cleaned))
       window.location.href = data.checkoutUrl
-    } catch {
-      setError('Could not start secure checkout. Try again.'); setPhase('compose')
+    } catch (uploadError) {
+      setError(uploadError instanceof Error ? uploadError.message : 'Could not start secure checkout. Try again.')
+      setPhase('compose')
     }
   }
 
@@ -112,6 +171,33 @@ export default function ReceiptBatch() {
     setReceipts((prev) => (prev.length === 1 ? prev : prev.filter((_, i) => i !== index)))
   }
 
+  const textReadyCount = receipts.map((r) => r.trim()).filter((r) => r.length >= MIN_CHARS).length
+
+  async function addImageFiles(files: FileList | null) {
+    if (!files?.length) return
+    setError('')
+    const room = MAX_BATCH - (textReadyCount + images.length)
+    const accepted: PendingImage[] = []
+    for (const file of Array.from(files)) {
+      if (accepted.length >= room) { setError(`A single run accepts at most ${MAX_BATCH} receipts across images and text.`); break }
+      if (!SUPPORTED_IMAGE_TYPES.includes(file.type)) { setError('Only JPG, PNG, or WebP images are supported (HEIC and PDF are not).'); continue }
+      if (file.size > MAX_ORIGINAL_BYTES) { setError('Each image must be 10 MB or smaller.'); continue }
+      try {
+        const blob = await reencodeToJpeg(file)
+        accepted.push({ id: crypto.randomUUID(), name: file.name, previewUrl: URL.createObjectURL(blob), blob })
+      } catch { setError('That image could not be processed. Try a different photo.') }
+    }
+    if (accepted.length) setImages((prev) => [...prev, ...accepted])
+  }
+
+  function removeImage(id: string) {
+    setImages((prev) => {
+      const target = prev.find((image) => image.id === id)
+      if (target) URL.revokeObjectURL(target.previewUrl)
+      return prev.filter((image) => image.id !== id)
+    })
+  }
+
   function downloadCsv() {
     if (!runResult?.csv) return
     const blob = new Blob([runResult.csv], { type: 'text/csv' })
@@ -121,7 +207,7 @@ export default function ReceiptBatch() {
     URL.revokeObjectURL(url)
   }
 
-  const readyCount = receipts.map((r) => r.trim()).filter((r) => r.length >= MIN_CHARS).length
+  const totalReady = textReadyCount + images.length
 
   // ---- Return-trip states (after Stripe redirect) ----
   if (phase === 'running') {
@@ -147,7 +233,7 @@ export default function ReceiptBatch() {
           {runResult.results.map((row) => (
             <li key={row.index} className="flex items-start gap-3 border-b border-zinc-800/70 pb-2">
               <span className={`mt-0.5 font-mono text-[10px] uppercase tracking-widest ${row.feasible ? 'text-emerald-300' : 'text-amber-300'}`}>
-                #{row.index + 1} {row.feasible ? 'ok' : 'skipped'}
+                #{row.index + 1}{row.source ? ` ${row.source}` : ''} {row.feasible ? 'ok' : 'skipped'}
               </span>
               <span className="text-zinc-400">
                 {row.feasible
@@ -206,10 +292,39 @@ export default function ReceiptBatch() {
     <BatchShell>
       <p className="font-mono text-[11px] uppercase tracking-widest text-emerald-300">Paid batch · up to {MAX_BATCH} receipts</p>
       <p className="mt-3 text-sm leading-relaxed text-zinc-400">
-        Paste each receipt in its own box. You pay once on Stripe, then the batch runs and downloads as a single CSV.
-        Receipts that aren&apos;t parseable are excluded — and if <em>none</em> parse, the payment is refunded automatically.
-        You&apos;ll see the exact price on the secure Stripe checkout before paying.
+        Upload receipt photos or paste text — mix both, up to {MAX_BATCH} total. You pay once on Stripe, then the batch
+        runs and downloads as a single CSV. Receipts that aren&apos;t parseable are excluded — and if <em>none</em> parse,
+        the payment is refunded automatically. You&apos;ll see the exact price on the secure Stripe checkout before paying.
       </p>
+
+      {/* Image uploads */}
+      <div className="mt-6">
+        <label className="font-mono text-[10px] uppercase tracking-widest text-zinc-500">Receipt photos (JPG, PNG, WebP · up to 10 MB each)</label>
+        <div className="mt-2">
+          <input
+            type="file" accept="image/jpeg,image/png,image/webp" multiple
+            onChange={(event) => { void addImageFiles(event.target.files); event.target.value = '' }}
+            disabled={totalReady >= MAX_BATCH}
+            className="block w-full text-sm text-zinc-400 file:mr-4 file:border file:border-zinc-700 file:bg-zinc-900 file:px-4 file:py-2 file:font-mono file:text-[11px] file:uppercase file:tracking-widest file:text-zinc-200 hover:file:border-emerald-500 disabled:opacity-40"
+          />
+        </div>
+        {images.length > 0 && (
+          <div className="mt-4 grid grid-cols-3 gap-3 sm:grid-cols-4">
+            {images.map((image) => (
+              <div key={image.id} className="group relative border border-zinc-800 bg-black">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={image.previewUrl} alt={image.name} className="h-24 w-full object-cover opacity-90" />
+                <button
+                  type="button" onClick={() => removeImage(image.id)}
+                  className="absolute right-1 top-1 bg-black/80 px-2 py-0.5 font-mono text-[10px] uppercase tracking-widest text-zinc-300 hover:text-red-300"
+                >
+                  ✕
+                </button>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
 
       <div className="mt-6 space-y-4">
         {receipts.map((value, index) => (
@@ -242,17 +357,23 @@ export default function ReceiptBatch() {
         >
           + Add another receipt
         </button>
-        <span className="font-mono text-[10px] uppercase tracking-widest text-zinc-600">{readyCount} ready · {receipts.length}/{MAX_BATCH} boxes</span>
+        <span className="font-mono text-[10px] uppercase tracking-widest text-zinc-600">{images.length} photo{images.length === 1 ? '' : 's'} · {textReadyCount} text · {totalReady}/{MAX_BATCH} total</span>
       </div>
 
       <button
         type="button"
         onClick={payAndRun}
-        disabled={phase === 'redirecting' || readyCount === 0}
+        disabled={phase === 'redirecting' || totalReady === 0}
         className="mt-6 bg-emerald-400 px-7 py-4 font-mono text-xs font-bold uppercase tracking-widest text-black hover:bg-emerald-300 disabled:cursor-not-allowed disabled:bg-zinc-600"
       >
-        {phase === 'redirecting' ? 'Starting secure checkout…' : 'Pay & run batch →'}
+        {phase === 'redirecting' ? 'Preparing secure checkout…' : 'Pay & run batch →'}
       </button>
+
+      <p className="mt-5 border-t border-zinc-800 pt-4 text-xs leading-relaxed text-zinc-500">
+        Privacy: photos are stripped of metadata in your browser, uploaded to private, short-lived storage
+        (auto-expiring within 24 hours), and used only to read your receipts. Source images are deleted right
+        after your CSV is delivered or the payment is refunded. We never post public links or keep your photos.
+      </p>
 
       {error && <p role="alert" className="mt-5 text-sm text-red-300">{error}</p>}
     </BatchShell>

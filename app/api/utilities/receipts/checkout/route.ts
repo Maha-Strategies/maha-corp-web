@@ -2,6 +2,7 @@ import { jsonResponse } from '@/lib/agent-inquiries'
 import { createAgentInquiryLedger } from '@/lib/agent-inquiry-ledger'
 import { requestHash } from '@/lib/mps-credits'
 import { RECEIPT_UTILITY } from '@/lib/receipt-utility'
+import { validDraftId } from '@/lib/receipt-uploads'
 import { createUtilityCheckoutId, isKnownUtility, utilityCatalogConfig } from '@/lib/utility-billing'
 
 export const runtime = 'nodejs'
@@ -17,7 +18,7 @@ type StoredCheckout = {
   status: 'awaiting_payment' | 'paid' | 'failed'
 }
 
-function parseBody(value: unknown): { utility: string; clientRequestId: string } {
+function parseBody(value: unknown): { utility: string; clientRequestId: string; draftId: string | null } {
   if (typeof value !== 'object' || value === null || Array.isArray(value)) throw new Error('Request body must be a JSON object.')
   const body = value as Record<string, unknown>
   const utility = typeof body.utility === 'string' ? body.utility : RECEIPT_UTILITY
@@ -27,7 +28,12 @@ function parseBody(value: unknown): { utility: string; clientRequestId: string }
   if (trimmed.length < 8 || trimmed.length > 120 || /[\r\n]/.test(trimmed)) {
     throw new Error('clientRequestId must contain between 8 and 120 characters on one line.')
   }
-  return { utility, clientRequestId: trimmed }
+  let draftId: string | null = null
+  if (body.draftId !== undefined && body.draftId !== null) {
+    if (!validDraftId(body.draftId)) throw new Error('draftId is not valid.')
+    draftId = body.draftId
+  }
+  return { utility, clientRequestId: trimmed, draftId }
 }
 
 export async function POST(request: Request) {
@@ -55,12 +61,28 @@ export async function POST(request: Request) {
   const ledger = createAgentInquiryLedger()
   if (!ledger) return jsonResponse({ error: { code: 'ledger_unavailable', message: 'The purchase could not be prepared.' } }, 503)
 
+  // Bind the checkout to its uploaded-image draft, if any. The draft must exist,
+  // match the utility, still be open/unexpired, and not already be bound.
+  if (input.draftId) {
+    const { data: draft, error: draftError } = await ledger.from('utility_upload_drafts')
+      .select('public_id, utility, status, expires_at, cleaned_at').eq('public_id', input.draftId).maybeSingle()
+    if (draftError) return jsonResponse({ error: { code: 'ledger_unavailable', message: 'The purchase could not be prepared.' } }, 503)
+    if (!draft) return jsonResponse({ error: { code: 'draft_not_found', message: 'No such upload draft.' } }, 404)
+    if (draft.utility !== utility) return jsonResponse({ error: { code: 'draft_mismatch', message: 'That upload draft is for a different utility.' } }, 409)
+    if (draft.status !== 'open' || draft.cleaned_at || new Date(draft.expires_at).getTime() <= Date.now()) {
+      return jsonResponse({ error: { code: 'draft_expired', message: 'This upload session has expired. Start over.' } }, 410)
+    }
+    const { data: bound } = await ledger.from('utility_checkouts').select('public_id').eq('draft_id', input.draftId).maybeSingle()
+    if (bound) return jsonResponse({ error: { code: 'draft_in_use', message: 'This upload session was already checked out.' } }, 409)
+  }
+
   // Idempotency: request_hash is globally unique (no login). A repeat returns
   // the same checkout rather than creating a second Stripe session.
   const requestIdHash = requestHash(input.clientRequestId)
   const checkoutId = createUtilityCheckoutId()
   const { error: insertError } = await ledger.from('utility_checkouts').insert({
     public_id: checkoutId, utility, request_hash: requestIdHash, stripe_price_id: priceId, status: 'awaiting_payment',
+    draft_id: input.draftId,
   })
   if (insertError?.code === '23505') {
     const { data, error } = await ledger.from('utility_checkouts')

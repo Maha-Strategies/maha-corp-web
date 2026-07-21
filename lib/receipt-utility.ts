@@ -148,10 +148,26 @@ export async function runReceiptParse(text: string, runner: ReceiptRunner): Prom
   return parseReceiptResponse(await runner(buildReceiptPrompt(text)))
 }
 
+// The deliverable subset of a run: the receipts that parsed into usable data.
+// A run with none of these is refunded — you are charged only for what parsed.
+export function feasibleReceipts(parsed: (ParsedReceipt | null)[]): ParsedReceipt[] {
+  return parsed.filter((receipt): receipt is ParsedReceipt => receipt?.feasible === true)
+}
+
 // Validate a paid batch: an array of 1..MAX_BATCH_RECEIPTS receipt strings,
 // each held to the same bounds as a single receipt. Throws on the first bad one.
 export function validateReceiptBatch(value: unknown): string[] {
   if (!Array.isArray(value) || value.length === 0) throw new ReceiptUtilityError('Provide an array of at least one receipt.')
+  if (value.length > MAX_BATCH_RECEIPTS) throw new ReceiptUtilityError(`A single run accepts at most ${MAX_BATCH_RECEIPTS} receipts.`)
+  return value.map((entry) => validateReceiptText(entry))
+}
+
+// Optional text side of a mixed image/text run: 0..MAX_BATCH_RECEIPTS strings.
+// Images may be the sole input, so an empty or absent list is allowed here; the
+// combined image+text minimum is enforced separately at run time.
+export function validateOptionalReceiptTexts(value: unknown): string[] {
+  if (value === undefined || value === null) return []
+  if (!Array.isArray(value)) throw new ReceiptUtilityError('receipts must be an array of strings.')
   if (value.length > MAX_BATCH_RECEIPTS) throw new ReceiptUtilityError(`A single run accepts at most ${MAX_BATCH_RECEIPTS} receipts.`)
   return value.map((entry) => validateReceiptText(entry))
 }
