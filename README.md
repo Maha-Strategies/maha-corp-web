@@ -20,6 +20,20 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
+## Outbound Market Discovery Matrix
+
+The private Market Scout is a read-only discovery process. It pulls attributable web-search evidence into `/admin/market-mapping`, where every proposal remains subject to a deterministic score and human review. It cannot publish, spend, deploy, or contact a person.
+
+With `MARKET_SCOUT_SOURCES=exa` and `EXA_API_KEY` set, the default matrix rotates five queries per UTC day across MPS claim verification, research briefs, document-data extraction, and receipt operations. Each query retrieves at most eight Exa results.
+
+To replace the defaults, set this server-only JSON environment variable:
+
+```text
+MARKET_SCOUT_QUERY_MATRIX={"lanes":[{"id":"claims","label":"Claim verification","queries":["claim verification API pricing","citation audit tool quote"]},{"id":"documents","label":"Document extraction","queries":["PDF table extraction API pricing"]}]}
+```
+
+The matrix permits up to eight named lanes and twelve queries per lane; the Scout still selects only five cross-lane queries per daily run. The older `MARKET_SCOUT_QUERIES` JSON-string-array setting remains supported as a single custom lane for backward compatibility.
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:
