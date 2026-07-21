@@ -23,7 +23,7 @@ export async function GET(request: Request) {
   const ledger = createAgentInquiryLedger()
   if (!ledger) return unavailable()
   const { data, error } = await ledger.from('market_opportunities')
-    .select('public_id,source,source_reference,title,problem,buyer,proposed_solution,evidence,demand_evidence,commercial_intent,capability_fit,speed_to_validate,risk_penalty,score,status,reviewer_note,created_at,updated_at')
+    .select('public_id,source,signal_class,source_reference,title,problem,buyer,proposed_solution,evidence,demand_evidence,commercial_intent,capability_fit,speed_to_validate,risk_penalty,score,status,reviewer_note,created_at,updated_at')
     .order('score', { ascending: false }).order('created_at', { ascending: true }).limit(100)
   if (error) return unavailable(error.code)
   return jsonResponse({ opportunities: data ?? [], autonomousPublishingSupported: false, autonomousSpendSupported: false, autonomousOutreachSupported: false }, 200)
@@ -54,7 +54,7 @@ export async function POST(request: Request) {
   const idempotencyKey = typeof body.idempotencyKey === 'string' ? body.idempotencyKey.trim() : ''
   if (idempotencyKey.length < 8 || idempotencyKey.length > 120 || /[\r\n]/.test(idempotencyKey)) return jsonResponse({ error: { code: 'invalid_request', message: 'idempotencyKey must contain between 8 and 120 characters on one line.' } }, 400)
   const { data, error } = await ledger.rpc('create_market_opportunity', {
-    p_opportunity_id: createMarketOpportunityId(), p_source: input.source, p_source_reference: input.sourceReference, p_title: input.title,
+    p_opportunity_id: createMarketOpportunityId(), p_source: input.source, p_signal_class: input.signalClass, p_source_reference: input.sourceReference, p_title: input.title,
     p_problem: input.problem, p_buyer: input.buyer, p_proposed_solution: input.proposedSolution, p_evidence: input.evidence,
     p_demand_evidence: input.demandEvidence, p_commercial_intent: input.commercialIntent, p_capability_fit: input.capabilityFit,
     p_speed_to_validate: input.speedToValidate, p_risk_penalty: input.riskPenalty, p_score: marketOpportunityScore(input),

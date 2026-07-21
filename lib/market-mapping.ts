@@ -2,12 +2,15 @@ import { createHash, randomUUID, timingSafeEqual } from 'node:crypto'
 
 export const MARKET_SIGNAL_SOURCES = ['search_console', 'llm_query', 'freelance_market', 'manual_research', 'outbound_scout'] as const
 export type MarketSignalSource = typeof MARKET_SIGNAL_SOURCES[number]
+export const MARKET_SIGNAL_CLASSES = ['buyer_demand', 'competitor_content', 'marketplace_request', 'editorial_content'] as const
+export type MarketSignalClass = typeof MARKET_SIGNAL_CLASSES[number]
 export const MARKET_OPPORTUNITY_ACTIONS = ['start_review', 'approve_experiment', 'reject', 'archive'] as const
 export type MarketOpportunityAction = typeof MARKET_OPPORTUNITY_ACTIONS[number]
 
 export type Evidence = { url: string; note: string }
 export type MarketOpportunityInput = {
   source: MarketSignalSource
+  signalClass: MarketSignalClass
   sourceReference: string
   title: string
   problem: string
@@ -50,8 +53,10 @@ export function parseMarketOpportunity(value: unknown): MarketOpportunityInput {
   if (typeof value !== 'object' || value === null || Array.isArray(value)) throw new Error('Request body must be a JSON object.')
   const body = value as Record<string, unknown>
   if (typeof body.source !== 'string' || !MARKET_SIGNAL_SOURCES.includes(body.source as MarketSignalSource)) throw new Error('source is not supported.')
+  if (typeof body.signalClass !== 'string' || !MARKET_SIGNAL_CLASSES.includes(body.signalClass as MarketSignalClass)) throw new Error('signalClass is not supported.')
   return {
     source: body.source as MarketSignalSource,
+    signalClass: body.signalClass as MarketSignalClass,
     sourceReference: line(body.sourceReference, 'sourceReference', 3, 200),
     title: line(body.title, 'title', 8, 180),
     problem: line(body.problem, 'problem', 20, 1_500),

@@ -4,7 +4,7 @@ import test from 'node:test'
 import { marketOpportunityScore, parseMarketOpportunity } from '../lib/market-mapping.ts'
 import {
   SCOUT_SOURCE, type RawSignal, boundCandidates, candidateFromSignal, candidateToSubmission,
-  dedupeCandidates, normalizeHttpsUrl, scoutIdempotencyKey, scoutScores, stableSourceReference,
+  classifySignal, dedupeCandidates, normalizeHttpsUrl, scoutIdempotencyKey, scoutScores, stableSourceReference,
 } from '../lib/market-scout.ts'
 import { ScoutConfigError, configuredScoutSources, type ResearchSource } from '../lib/market-scout-sources.ts'
 import { httpQueueSubmitter, runMarketScout, type ScoutSubmitter } from '../lib/market-scout-runner.ts'
@@ -44,6 +44,16 @@ test('scoutScores is deterministic and every component stays within its bound', 
   assert.equal(risky.capabilityFit, 4)
 })
 
+test('signal class distinguishes direct demand from marketplace, competitor SEO, and editorial context', () => {
+  assert.equal(classifySignal(signal()), 'buyer_demand')
+  assert.equal(classifySignal(signal({ url: 'https://www.upwork.com/jobs/receipt-extraction', title: 'Need receipt extraction developer' })), 'marketplace_request')
+  const competitor = signal({ url: 'https://vendor.example.com/blog/receipt-guide', title: 'Convert receipts to spreadsheets: 5 methods compared', snippet: 'Our guide compares the best tools and pricing plans.' })
+  assert.equal(classifySignal(competitor), 'competitor_content')
+  assert.ok(scoutScores(competitor).riskPenalty >= 12)
+  assert.ok(scoutScores(competitor).commercialIntent <= 5)
+  assert.equal(classifySignal(signal({ url: 'https://news.example.com/report', title: 'Quarterly report', snippet: 'A market overview.' })), 'editorial_content')
+})
+
 // ---- Candidate mapping + HTTPS/evidence/timestamps ----
 test('candidateFromSignal drops non-HTTPS and preserves URL + retrieval timestamp', () => {
   assert.equal(candidateFromSignal(signal({ url: 'http://insecure.example.com/x' })), null)
@@ -56,6 +66,7 @@ test('candidateFromSignal drops non-HTTPS and preserves URL + retrieval timestam
   assert.match(candidate!.evidence[0].note, /2026-07-21T10:00:00\.000Z/) // retrieval timestamp preserved
   assert.ok(candidate!.problem.length >= 20 && candidate!.proposedSolution.length >= 20 && candidate!.title.length >= 8)
   assert.match(candidate!.sourceReference, /^outbound-scout:/)
+  assert.equal(candidate!.signalClass, 'buyer_demand')
 })
 
 test('candidateToSubmission passes the queue validator with a consistent score', () => {
@@ -127,6 +138,7 @@ test('runMarketScout dedupes, submits only proposals, and reports created/duplic
     assert.equal(submitted.length, 2)
     for (const body of submitted) {
       assert.equal(body.source, SCOUT_SOURCE)
+      assert.ok(typeof body.signalClass === 'string' && ['buyer_demand', 'competitor_content', 'marketplace_request', 'editorial_content'].includes(body.signalClass))
       assert.ok(Array.isArray(body.evidence))
       for (const key of ['to', 'email', 'recipient', 'message', 'amount', 'publish']) assert.ok(!(key in body), `payload must not contain ${key}`)
     }
