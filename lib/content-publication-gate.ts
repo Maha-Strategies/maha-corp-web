@@ -37,12 +37,15 @@ function evidence(value: unknown): ContentEvidence[] {
 function policyChecks(value: unknown): PolicyChecks {
   if (typeof value !== 'object' || value === null || Array.isArray(value)) throw new Error('policyChecks must be an object.')
   const record = value as Record<string, unknown>
-  const keys = ['readerFirst', 'originalAnalysis', 'notDoorway', 'attributionComplete', 'sourceIndependenceReviewed', 'humanReviewRequired'] as const
-  const parsed = Object.fromEntries(keys.map((key) => {
+  const requiredKeys = ['readerFirst', 'originalAnalysis', 'notDoorway', 'attributionComplete', 'humanReviewRequired'] as const
+  const parsed = Object.fromEntries(requiredKeys.map((key) => {
     if (typeof record[key] !== 'boolean') throw new Error(`policyChecks.${key} must be a boolean.`)
     return [key, record[key]]
-  })) as PolicyChecks
-  return parsed
+  })) as Omit<PolicyChecks, 'sourceIndependenceReviewed'>
+  // An older deployed form may not know this newer review control. It may
+  // still record a candidate, but it must fail closed as evidence_collecting.
+  if (record.sourceIndependenceReviewed !== undefined && typeof record.sourceIndependenceReviewed !== 'boolean') throw new Error('policyChecks.sourceIndependenceReviewed must be a boolean.')
+  return { ...parsed, sourceIndependenceReviewed: record.sourceIndependenceReviewed === true }
 }
 
 export function contentCandidateId() { return `contentcand_${randomUUID().replaceAll('-', '')}` }

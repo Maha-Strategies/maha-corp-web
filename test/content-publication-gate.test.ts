@@ -32,6 +32,13 @@ test('refuses doorway-like paths, shallow evidence, and untrusted ready scores',
   assert.equal(contentQualityScore({ evidence: candidate.evidence, policyChecks: { ...candidate.policyChecks, notDoorway: false }, originalValue: candidate.originalValue, readerOutcome: candidate.readerOutcome }, new Date('2026-07-21T00:00:00Z')), 80)
 })
 
+test('an older form without the new independence review fails closed instead of blocking evidence capture', () => {
+  const olderForm = { ...candidate, policyChecks: { readerFirst: true, originalAnalysis: true, notDoorway: true, attributionComplete: true, humanReviewRequired: true } }
+  const parsed = parseContentCandidate(olderForm)
+  assert.equal(parsed.policyChecks.sourceIndependenceReviewed, false)
+  assert.equal(parsed.qualityScore, 80)
+})
+
 test('limits operations to human draft approval or withholding', () => {
   const id = 'contentcand_1234567890abcdef1234567890abcdef'
   assert.equal(parseContentCandidateAction({ candidateId: id, action: 'approve_draft', idempotencyKey: 'approve-content-001' }).action, 'approve_draft')
