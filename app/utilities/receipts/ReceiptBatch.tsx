@@ -46,20 +46,30 @@ export default function ReceiptBatch() {
     void runBatch(checkoutId, stashed, key)
   }, [])
 
-  async function runBatch(checkoutId: string, batch: string[], key: string) {
+  async function runBatch(checkoutId: string, batch: string[], key: string, paymentRetries = 0) {
     setPhase('running'); setError('')
     try {
       const response = await fetch('/api/utilities/receipts/run', {
         method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ checkoutId, receipts: batch }),
       })
       const data = await response.json() as RunResult & { error?: string }
-      // Keep the stash on transient (5xx) failures so a reload can retry; the
-      // run token is single-use server-side, so a claimed-then-crashed run will
-      // surface as an error rather than a silent double-charge.
-      if (response.status < 500) sessionStorage.removeItem(key)
+      // Stripe can redirect before its signed webhook marks this checkout paid.
+      // Keep the browser-held receipts and retry briefly; the run endpoint has
+      // not claimed the single-use token while it returns 402.
+      if (response.status === 402 && paymentRetries < 6) {
+        window.setTimeout(() => { void runBatch(checkoutId, batch, key, paymentRetries + 1) }, 2_000)
+        return
+      }
+      // Keep the stash on transient failures and on a still-unconfirmed payment
+      // so a later reload can retry. A claimed-then-crashed run remains safe:
+      // the server-side token is single-use and cannot double-charge.
+      if (response.status < 500 && response.status !== 402) sessionStorage.removeItem(key)
 
       if (response.status === 422 && data.refunded) { setRunResult(data); setPhase('refunded'); return }
-      if (!response.ok) { setError(data.error ?? 'The batch run could not be completed.'); setPhase('error'); return }
+      if (!response.ok) {
+        setError(response.status === 402 ? 'Stripe is still confirming payment. Wait a moment, then reload this page to retry.' : data.error ?? 'The batch run could not be completed.')
+        setPhase('error'); return
+      }
       setRunResult(data); setPhase('done')
     } catch {
       setError('Could not reach the batch runner. Reload this page to retry.')
