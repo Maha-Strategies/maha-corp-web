@@ -1,4 +1,5 @@
 import { createHash, randomUUID } from 'node:crypto'
+import { sourceMetadataComplete } from './content-source-quality.ts'
 
 type CandidateForHandoff = { public_id: string; proposed_path: string; quality_score: number; evidence: unknown; policy_checks: unknown; status: string }
 type DraftForHandoff = { public_id: string; candidate_id: string; title: string; summary: string; direct_answer: string; method: string; artifact_url: string | null; artifact_label: string | null; limitations: string | null; editorial_reviewer: string; status: string }
@@ -15,6 +16,7 @@ export function publicationHandoff(input: { candidate: CandidateForHandoff; draf
   const checklist = {
     evidencePackageApproved: candidate.status === 'approved_for_draft',
     threeOrMoreSources: evidenceCount(candidate.evidence) >= 3,
+    sourceMetadataComplete: sourceMetadataComplete(candidate.evidence),
     policyChecksComplete: allPolicyChecks(candidate.policy_checks),
     editorialReady: draft.status === 'editorial_ready',
     titleComplete: draft.title.trim().length >= 40,
@@ -39,6 +41,6 @@ export function publicationHandoff(input: { candidate: CandidateForHandoff; draf
     + (checklist.evidenceArtifactIncluded ? 3 : 0)
     + (checklist.reviewerAssigned ? 4 : 0),
   )
-  const hardBlockersClear = checklist.summaryComplete && checklist.mahaMethodComplete && checklist.limitsIncluded && checklist.evidenceArtifactIncluded
+  const hardBlockersClear = checklist.summaryComplete && checklist.mahaMethodComplete && checklist.limitsIncluded && checklist.evidenceArtifactIncluded && checklist.sourceMetadataComplete
   return { score, decision: score >= 70 && hardBlockersClear ? 'ready_for_human_publish' as const : 'withheld' as const, checklist }
 }
