@@ -36,18 +36,18 @@ export async function submitContactForm(_prevState: ContactState, formData: Form
       // Once your domain is verified in Resend, change to e.g. 'system@mahastrategies.com'
       from: "Maha Strategies <onboarding@resend.dev>",
       to: "mayone@mahastrategies.com",
-      subject: `[Maha Strategies Portal] ${subject.toUpperCase()}`,
+      subject: `[Maha Strategies inquiry] ${subject.toUpperCase()}`,
       replyTo: email,
       text: `
-NEW TRANSMISSION RECEIVED
--------------------------
-DESIGNATION (NAME): ${name}
-RETURN VECTOR (EMAIL): ${email}
+NEW INQUIRY RECEIVED
+--------------------
+NAME: ${name}
+EMAIL: ${email}
 INQUIRY TYPE: ${subject}
 DECISION TO INFORM: ${decision || 'Not provided'}
 DECISION DEADLINE: ${deadline || 'Not provided'}
 
-PAYLOAD (MESSAGE):
+QUESTION:
 ${message}
       `,
     });
@@ -56,7 +56,7 @@ ${message}
       console.error("Resend rejected the send:", error);
       return {
         success: false,
-        error: "Transmission failed. Please email mayone@mahastrategies.com directly.",
+        error: "Your inquiry could not be sent. Please email mayone@mahastrategies.com directly.",
       };
     }
 
@@ -65,7 +65,7 @@ ${message}
     console.error("Transmission failed:", error);
     return {
       success: false,
-      error: "Network anomaly detected. Please email mayone@mahastrategies.com directly.",
+      error: "Your inquiry could not be sent. Please email mayone@mahastrategies.com directly.",
     };
   }
 }

@@ -143,11 +143,11 @@ export default function CorporateHomepage() {
 
           <div className="flex flex-col sm:flex-row gap-4 mb-8">
             <TrackedLink
-              href="/contact"
+              href="/contact?service=verified_research"
               event="cta_homepage_commission_brief"
               className="inline-block bg-white text-black font-mono font-bold text-xs tracking-widest uppercase px-7 py-4 hover:bg-zinc-200 transition-colors text-center"
             >
-              Get a Decision Brief — $2,500 ↗
+              Request a Verified Research Brief — $2,500 ↗
             </TrackedLink>
             <Link
               href="/consulting#sample"
@@ -246,6 +246,27 @@ export default function CorporateHomepage() {
           </div>
         </section>
 
+        <section className="mt-24 border-t border-zinc-800 pt-10">
+          <p className="font-mono text-[10px] text-indigo-400 tracking-widest uppercase mb-4">[ Self-service tools ]</p>
+          <h2 className="text-2xl sm:text-3xl font-light text-white mb-4">Use a focused tool when a full brief is more than you need.</h2>
+          <p className="max-w-2xl text-zinc-400 leading-relaxed mb-8">
+            Run a receipt-to-CSV batch without an account, or purchase prepaid MPS audit access for a claim-level workflow. These are separate, scoped products—not consulting retainers.
+          </p>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <Link href="/utilities/receipts" className="border border-zinc-800 p-6 hover:border-emerald-500 transition-colors">
+              <p className="font-mono text-[10px] text-emerald-300 tracking-widest uppercase mb-3">Receipt → CSV</p>
+              <h3 className="text-lg text-white mb-2">Turn receipt photos or text into a CSV</h3>
+              <p className="text-sm text-zinc-400 leading-relaxed">Try a single receipt free, then run a private batch when it parses cleanly.</p>
+            </Link>
+            <Link href="/mps/audit-access" className="border border-zinc-800 p-6 hover:border-indigo-400 transition-colors">
+              <p className="font-mono text-[10px] text-indigo-300 tracking-widest uppercase mb-3">MPS audit API</p>
+              <h3 className="text-lg text-white mb-2">Audit claim-level evidence with prepaid access</h3>
+              <p className="text-sm text-zinc-400 leading-relaxed">Purchase a credential scoped only to the MPS audit endpoint—no subscription and no internal access.</p>
+            </Link>
+          </div>
+          <Link href="/tools" className="inline-block mt-6 font-mono text-xs text-zinc-400 hover:text-white tracking-widest uppercase transition-colors">Explore tools &amp; API ↗</Link>
+        </section>
+
         <section className="mt-24 border border-indigo-900/50 bg-indigo-950/20 p-8 sm:p-12 relative overflow-hidden">
           <div className="absolute top-0 left-0 h-full w-1 bg-indigo-500" />
           <p className="font-mono text-[10px] text-indigo-400 tracking-widest uppercase mb-4">[ Start with the decision ]</p>
@@ -254,7 +275,7 @@ export default function CorporateHomepage() {
             Send the question, the decision it informs, and the deadline you are working to. We reply within two business days with a scope—or tell you plainly if we are not the right fit.
           </p>
           <div className="flex flex-col sm:flex-row gap-4">
-            <TrackedLink href="/contact" event="cta_homepage_start_inquiry" className="inline-block bg-white text-black font-mono font-bold text-xs tracking-widest uppercase px-7 py-4 hover:bg-zinc-200 transition-colors text-center">Start an Inquiry ↗</TrackedLink>
+            <TrackedLink href="/contact?service=verified_research" event="cta_homepage_start_inquiry" className="inline-block bg-white text-black font-mono font-bold text-xs tracking-widest uppercase px-7 py-4 hover:bg-zinc-200 transition-colors text-center">Start an Inquiry ↗</TrackedLink>
             <Link href="/contact" className="inline-block border border-zinc-600 text-zinc-200 font-mono font-bold text-xs tracking-widest uppercase px-7 py-4 hover:border-white hover:text-white transition-colors text-center">Contact Maha Strategies ↗</Link>
           </div>
         </section>

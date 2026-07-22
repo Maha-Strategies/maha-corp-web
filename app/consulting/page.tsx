@@ -90,7 +90,7 @@ export default function ConsultingPage() {
 
         <div className="flex flex-col sm:flex-row gap-4 mb-24">
           <TrackedLink
-            href="/contact"
+            href="/contact?service=verified_research"
             event="cta_consulting_commission_brief"
             className="inline-block bg-white text-black font-mono font-bold text-xs tracking-widest uppercase px-8 py-4 hover:bg-zinc-200 transition-colors no-underline text-center"
           >

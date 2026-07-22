@@ -84,7 +84,7 @@ export default function RapidIntelligenceBriefPage() {
 
         <div className="flex flex-col sm:flex-row gap-4 mb-24">
           <TrackedLink
-            href="/contact"
+            href="/contact?service=rapid_intelligence"
             event="cta_rapid_brief_start"
             className="inline-block bg-white text-black font-mono font-bold text-xs tracking-widest uppercase px-8 py-4 hover:bg-zinc-200 transition-colors no-underline text-center"
           >
