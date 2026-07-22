@@ -33,12 +33,14 @@ export function parseExperiment(value: unknown) {
   const body = value as Record<string, unknown>
   const sourceKind = body.sourceKind
   const primaryKpi = body.primaryKpi
-  if (sourceKind !== 'market_opportunity' && sourceKind !== 'search_performance' && sourceKind !== 'manual') throw new Error('sourceKind is not supported.')
+  if (sourceKind !== 'market_opportunity' && sourceKind !== 'search_performance' && sourceKind !== 'manual' && sourceKind !== 'demand_cluster') throw new Error('sourceKind is not supported.')
   if (!['impressions', 'click_through_rate', 'inquiries', 'checkout_starts', 'paid_conversions'].includes(primaryKpi as string)) throw new Error('primaryKpi is not supported.')
   const baselineObservedOn = date(body.baselineObservedOn, 'baselineObservedOn')
   const measureAfterOn = date(body.measureAfterOn, 'measureAfterOn')
   if (measureAfterOn < baselineObservedOn) throw new Error('measureAfterOn must not be before baselineObservedOn.')
-  return { sourceKind, sourceReference: line(body.sourceReference, 'sourceReference', 3, 200), hypothesis: line(body.hypothesis, 'hypothesis', 20, 1_000), targetUrl: targetUrl(body.targetUrl), intendedChange: line(body.intendedChange, 'intendedChange', 20, 1_500), callToAction: line(body.callToAction, 'callToAction', 3, 160), primaryKpi, baselineValue: amount(body.baselineValue, 'baselineValue'), baselineObservedOn, measureAfterOn, idempotencyKey: line(body.idempotencyKey, 'idempotencyKey', 8, 120) }
+  const sourceReference = line(body.sourceReference, 'sourceReference', 3, 200)
+  if (sourceKind === 'demand_cluster' && !/^demand_[a-f0-9]{32}$/.test(sourceReference)) throw new Error('sourceReference must be a validated demand cluster ID.')
+  return { sourceKind, sourceReference, hypothesis: line(body.hypothesis, 'hypothesis', 20, 1_000), targetUrl: targetUrl(body.targetUrl), intendedChange: line(body.intendedChange, 'intendedChange', 20, 1_500), callToAction: line(body.callToAction, 'callToAction', 3, 160), primaryKpi, baselineValue: amount(body.baselineValue, 'baselineValue'), baselineObservedOn, measureAfterOn, idempotencyKey: line(body.idempotencyKey, 'idempotencyKey', 8, 120) }
 }
 
 export function parseExperimentAction(value: unknown) {
