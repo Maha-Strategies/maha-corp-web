@@ -107,13 +107,13 @@ export default function TheUnfinishedSpeciesHub() {
 
         <section className="mt-16 border border-indigo-900/50 bg-indigo-950/20 p-7 sm:p-10 relative overflow-hidden">
           <div className="absolute top-0 left-0 h-full w-1 bg-indigo-500" />
-          <p className="font-mono text-xs text-indigo-300 tracking-widest uppercase mb-4">[ Read now ]</p>
-          <h2 className="text-2xl sm:text-3xl font-light text-white mb-4">Chapter 1: The Algorithm</h2>
+          <p className="font-mono text-xs text-indigo-300 tracking-widest uppercase mb-4">[ Complete edition ]</p>
+          <h2 className="text-2xl sm:text-3xl font-light text-white mb-4">Read the full book</h2>
           <p className="text-zinc-400 leading-relaxed max-w-2xl mb-7">
-            The settled mechanism of natural selection, the origin of the first replicator, and the evolutionary funnel that frames the rest of the book.
+            The full manuscript is now available online: the introduction, all eleven chapters, and the method and sources that close the book.
           </p>
-          <Link href="/books/the-unfinished-species/the-algorithm" className="inline-block bg-white text-black font-mono font-bold text-xs tracking-widest uppercase px-7 py-4 hover:bg-zinc-200 transition-colors">
-            Read Chapter 1 ↗
+          <Link href="/books/the-unfinished-species/read" className="inline-block bg-white text-black font-mono font-bold text-xs tracking-widest uppercase px-7 py-4 hover:bg-zinc-200 transition-colors">
+            Read the complete edition ↗
           </Link>
           <BookReaderPaths
             guideHref="/books/the-unfinished-species/what-is-natural-selection"
@@ -130,15 +130,27 @@ export default function TheUnfinishedSpeciesHub() {
               <p className="font-mono text-xs text-indigo-300 tracking-widest uppercase mb-3">[ Table of contents ]</p>
               <h2 className="text-2xl sm:text-3xl font-light text-white">From selection to self-design.</h2>
             </div>
-            <p className="font-mono text-xs text-zinc-500 tracking-widest uppercase">One chapter available · further chapters forthcoming</p>
+            <p className="font-mono text-xs text-zinc-500 tracking-widest uppercase">Introduction · 11 chapters · method & sources</p>
           </div>
-          <BookChapterList parts={parts} availableChapter={{ title: 'The Algorithm', href: '/books/the-unfinished-species/the-algorithm' }} />
+          <BookChapterList parts={parts} availableChapters={{
+            'The Algorithm': '/books/the-unfinished-species/read/the-algorithm',
+            'The Crucible': '/books/the-unfinished-species/read/the-crucible',
+            'The Zoo': '/books/the-unfinished-species/read/the-zoo',
+            'The Runaway Maximizer': '/books/the-unfinished-species/read/the-runaway-maximizer',
+            'Software Writes Hardware': '/books/the-unfinished-species/read/software-writes-hardware',
+            'The Switchboard of Sovereignty': '/books/the-unfinished-species/read/the-switchboard-of-sovereignty',
+            'Building the Selection Pressure': '/books/the-unfinished-species/read/building-the-selection-pressure',
+            'The Merger Already Happened': '/books/the-unfinished-species/read/the-merger-already-happened',
+            'The Quantum Substrate': '/books/the-unfinished-species/read/the-quantum-substrate',
+            'The Cyborg Fallacy': '/books/the-unfinished-species/read/the-cyborg-fallacy',
+            'Design as Destiny': '/books/the-unfinished-species/read/design-as-destiny',
+          }} />
         </section>
 
         <section className="mt-20 border-t border-zinc-800 pt-10 max-w-3xl">
           <p className="font-mono text-xs text-indigo-300 tracking-widest uppercase mb-4">[ Epistemic contract ]</p>
           <p className="text-zinc-400 leading-relaxed">
-            The book separates established findings from inferences drawn from them and from clearly fenced speculation. AI assisted the drafting process; Mayone Maha Rajan is responsible for the argument, editorial decisions, and source verification. Chapters are released after a final claim-and-source review.
+            The book separates established findings from inferences drawn from them and from clearly fenced speculation. AI assisted the drafting process; Mayone Maha Rajan is responsible for the argument, editorial decisions, and source verification. The complete manuscript is published as an open edition; readers should consult the method and sources before treating any claim as settled.
           </p>
         </section>
       </article>
