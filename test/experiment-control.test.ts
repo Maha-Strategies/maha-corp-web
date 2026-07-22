@@ -22,6 +22,11 @@ test('refuses external target URLs and invalid measurement windows', () => {
   assert.throws(() => parseExperiment({ ...draft, measureAfterOn: '2026-07-20' }), /must not be before/)
 })
 
+test('requires a demand-cluster identifier when that source is selected', () => {
+  assert.throws(() => parseExperiment({ ...draft, sourceKind: 'demand_cluster', sourceReference: 'manual:experiment' }), /validated demand cluster ID/)
+  assert.equal(parseExperiment({ ...draft, sourceKind: 'demand_cluster', sourceReference: 'demand_1234567890abcdef1234567890abcdef' }).sourceKind, 'demand_cluster')
+})
+
 test('requires a measured value before an outcome can be recorded', () => {
   const id = 'experiment_1234567890abcdef1234567890abcdef'
   assert.throws(() => parseExperimentAction({ experimentId: id, action: 'retain', idempotencyKey: 'outcome-key-001' }), /outcomeValue/)

@@ -23,15 +23,18 @@ export async function GET(request: Request) {
   if (!authorized(request)) return jsonResponse({ error: { code: 'unauthorized', message: 'A valid market-mapping bearer token is required.' } }, 401)
   const ledger = createAgentInquiryLedger()
   if (!ledger) return unavailable()
-  const [{ data, error }, { data: measurements, error: measurementError }] = await Promise.all([
+  const [{ data, error }, { data: measurements, error: measurementError }, { data: demandClusters, error: demandClusterError }] = await Promise.all([
     ledger.from('growth_experiments').select('public_id,source_kind,source_reference,hypothesis,target_url,intended_change,call_to_action,primary_kpi,baseline_value,baseline_observed_on,measure_after_on,status,outcome_value,outcome_note,approved_at,prepared_at,published_at,measured_at,created_at,updated_at').order('created_at', { ascending: false }).limit(100),
     ledger.from('conversion_measurements').select('experiment_id,event_type,source_kind').order('recorded_at', { ascending: false }).limit(5000),
+    ledger.from('demand_validation_clusters').select('public_id,title,buyer,job_to_be_done,offer,score').eq('status', 'validated').order('score', { ascending: false }).limit(100),
   ])
   if (error) return unavailable(error.code)
   return jsonResponse({
     experiments: data ?? [],
     conversionAttribution: measurementError ? null : aggregateConversionMeasurements(measurements ?? []),
     conversionMeasurementUnavailable: Boolean(measurementError),
+    validatedDemandClusters: demandClusterError ? [] : demandClusters ?? [],
+    demandValidationUnavailable: Boolean(demandClusterError),
     autonomousPublishingSupported: false, autonomousSpendSupported: false, autonomousOutreachSupported: false,
   }, 200)
 }
@@ -53,7 +56,9 @@ export async function POST(request: Request) {
   }
   let input: ReturnType<typeof parseExperiment>
   try { input = parseExperiment(body) } catch (error) { return jsonResponse({ error: { code: 'invalid_request', message: error instanceof Error ? error.message : 'Invalid experiment.' } }, 400) }
-  const { data, error } = await ledger.rpc('create_growth_experiment', { p_experiment_id: experimentId(), p_source_kind: input.sourceKind, p_source_reference: input.sourceReference, p_hypothesis: input.hypothesis, p_target_url: input.targetUrl, p_intended_change: input.intendedChange, p_call_to_action: input.callToAction, p_primary_kpi: input.primaryKpi, p_baseline_value: input.baselineValue, p_baseline_observed_on: input.baselineObservedOn, p_measure_after_on: input.measureAfterOn, p_idempotency_hash: experimentHash(input.idempotencyKey), p_actor_fingerprint: auth.actorFingerprint, p_at: new Date().toISOString() })
+  if (input.sourceKind !== 'demand_cluster') return jsonResponse({ error: { code: 'demand_validation_required', message: 'New experiments must start from a validated demand cluster.' } }, 409)
+  const args = { p_experiment_id: experimentId(), p_hypothesis: input.hypothesis, p_target_url: input.targetUrl, p_intended_change: input.intendedChange, p_call_to_action: input.callToAction, p_primary_kpi: input.primaryKpi, p_baseline_value: input.baselineValue, p_baseline_observed_on: input.baselineObservedOn, p_measure_after_on: input.measureAfterOn, p_idempotency_hash: experimentHash(input.idempotencyKey), p_actor_fingerprint: auth.actorFingerprint, p_at: new Date().toISOString() }
+  const { data, error } = await ledger.rpc('create_validated_growth_experiment', { ...args, p_demand_cluster_id: input.sourceReference })
   if (error || typeof data !== 'object' || data === null || Array.isArray(data)) return unavailable(error?.code)
   return jsonResponse({ experiment: data, autonomousPublishingSupported: false }, 201)
 }
