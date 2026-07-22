@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import Link from 'next/link'
 import BookEndpointCTA from '@/components/BookEndpointCTA'
 import MarkdownArticle from '@/components/MarkdownArticle'
 import { parseMarkdownBlocks, readBookMarkdown } from '@/lib/content'
@@ -74,6 +75,8 @@ export default function TheImaginedLifeHub() {
             This book begins with the measurable architecture of sleep and dreaming, crosses the uncertain border between brains and generative machines, and ends with the practical question of how to become a deliberate steward of one&apos;s own imagination.
           </p>
         </section>
+
+        <Link href="/books/the-imagined-life/read" className="mt-10 inline-block bg-white px-7 py-4 font-mono text-xs font-bold uppercase tracking-widest text-black transition-colors hover:bg-zinc-200">Read by chapter ↗</Link>
 
         <BookEndpointCTA title="The Imagined Life" placement="top" />
 

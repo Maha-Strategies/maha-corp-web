@@ -12,7 +12,7 @@ export const metadata: Metadata = {
     type: 'website',
     url: `${SITE_URL}/books`,
     title: 'Books & Essays | Maha Strategies',
-    description: 'Four open web editions by Mayone Maha Rajan, with guides, essays, and newly released chapters.',
+    description: 'Four complete open web editions by Mayone Maha Rajan, with guides and essays.',
     images: [{ url: '/og-master.png', width: 1200, height: 630, alt: 'Books & Essays — Maha Strategies' }],
   },
   twitter: {
@@ -70,7 +70,7 @@ export default function BooksPage() {
             Four works about the systems that shape a person: intelligence, attention, evolution, imagination, and the choices that follow from them.
           </p>
           <p className="text-base sm:text-lg text-zinc-400 leading-relaxed">
-            Each open edition begins with a plain-English guide, an opening essay, and a released first chapter. New chapters follow a final claim-and-source review.
+            Each open edition includes the complete manuscript, with stable chapter links for focused reading, plus companion guides and essays where available.
           </p>
         </header>
 
