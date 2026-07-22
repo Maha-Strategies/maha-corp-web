@@ -25,7 +25,13 @@ export default function MarketMappingPage() {
   const [unlocked, setUnlocked] = useState(false)
   const [observedAt, setObservedAt] = useState(() => new Date().toISOString().slice(0, 10))
   const fileInput = useRef<HTMLInputElement>(null)
-  const visible = useMemo(() => opportunities.filter((item) => filter === 'all' || ACTIVE.has(item.status)), [filter, opportunities])
+  // "Active" is intentionally a decision queue, not a record of every topical
+  // web page the Scout saw. Historical/context records remain available under All.
+  const visible = useMemo(() => opportunities.filter((item) => filter === 'all' || (
+    ACTIVE.has(item.status)
+    && (item.signal_class === 'buyer_demand' || item.signal_class === 'marketplace_request')
+    && item.score >= 60
+  )), [filter, opportunities])
 
   async function load() {
     setLoading(true); setNotice('')
@@ -65,10 +71,10 @@ export default function MarketMappingPage() {
       const response = await fetch('/api/admin/market-scout', {
         method: 'POST', headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' }, body: JSON.stringify({ limit: 5 }),
       })
-      const body = await response.json() as { scout?: { submitted: number; duplicates: number; failed: number; discovered: number; unique: number }; error?: { message?: string } }
+      const body = await response.json() as { scout?: { submitted: number; duplicates: number; failed: number; discovered: number; qualified: number; contextDropped: number; unique: number }; error?: { message?: string } }
       if (!response.ok || !body.scout) throw new Error(body.error?.message ?? 'The Scout could not complete its run.')
       await load()
-      setNotice(`Scout reviewed ${body.scout.discovered} signals and queued ${body.scout.submitted} new proposal${body.scout.submitted === 1 ? '' : 's'} (${body.scout.duplicates} existing, ${body.scout.failed} failed).`)
+      setNotice(`Scout reviewed ${body.scout.discovered} signals: ${body.scout.qualified} qualified direct-demand signals, ${body.scout.contextDropped} context results withheld; ${body.scout.submitted} new proposal${body.scout.submitted === 1 ? '' : 's'} queued (${body.scout.duplicates} existing, ${body.scout.failed} failed).`)
     } catch (error) { setNotice(error instanceof Error ? error.message : 'The Scout could not complete its run.'); setLoading(false) }
   }
 

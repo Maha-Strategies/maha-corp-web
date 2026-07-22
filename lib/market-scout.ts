@@ -10,6 +10,7 @@ import type { MarketOpportunityInput, MarketSignalClass } from './market-mapping
 
 export const SCOUT_SOURCE = 'outbound_scout' as const
 export const SCOUT_MAX_RESULTS = 25 // hard bound on proposals per run
+export const MIN_DIRECT_DEMAND_SCORE = 60
 
 // A raw, read-only signal from an approved source. `retrievedAt` is preserved end
 // to end so every proposal carries when its evidence was observed.
@@ -165,6 +166,18 @@ export function candidateFromSignal(signal: RawSignal): ScoutCandidate | null {
     signalClass,
     scores: scoutScores(signal),
   }
+}
+
+// The active queue is for opportunities, not reading material. A result must
+// be an explicit buyer request or marketplace request and carry enough demand
+// and commercial evidence to justify a human review. Competitor/editorial
+// results remain research context and are never active opportunities.
+export function qualifiesForActiveDemand(candidate: ScoutCandidate): boolean {
+  const score = candidate.scores.demandEvidence + candidate.scores.commercialIntent + candidate.scores.capabilityFit + candidate.scores.speedToValidate - candidate.scores.riskPenalty
+  return (candidate.signalClass === 'buyer_demand' || candidate.signalClass === 'marketplace_request')
+    && candidate.scores.demandEvidence >= 14
+    && candidate.scores.commercialIntent >= 8
+    && score >= MIN_DIRECT_DEMAND_SCORE
 }
 
 // Deduplicate candidates by sourceReference BEFORE submitting (first wins).

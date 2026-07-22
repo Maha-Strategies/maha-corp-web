@@ -9,7 +9,7 @@ import { randomUUID } from 'node:crypto'
 
 import { type MarketOpportunityInput, marketOpportunityScore, parseMarketOpportunity } from './market-mapping.ts'
 import {
-  type RawSignal, boundCandidates, candidateFromSignal, candidateToSubmission, dedupeCandidates,
+  type RawSignal, boundCandidates, candidateFromSignal, candidateToSubmission, dedupeCandidates, qualifiesForActiveDemand,
 } from './market-scout.ts'
 import { type FetchLike, type ResearchSource, ScoutConfigError, configuredScoutSources } from './market-scout-sources.ts'
 
@@ -21,6 +21,8 @@ export type ScoutRunSummary = {
   sources: string[]
   discovered: number
   candidates: number
+  qualified: number
+  contextDropped: number
   unique: number
   submitted: number
   duplicates: number
@@ -60,10 +62,14 @@ export async function runMarketScout(options: {
       } catch { return false }
     })
 
-  // 3. Deduplicate BEFORE submitting, then bound the batch.
-  const unique = boundCandidates(dedupeCandidates(candidates), options.limit ?? Number.NaN)
+  // 3. Context is deliberately withheld. Topical relevance is not demand.
+  const qualified = candidates.filter(qualifiesForActiveDemand)
+  const contextDropped = candidates.length - qualified.length
 
-  // 4. Submit proposals to the private queue only.
+  // 4. Deduplicate active demand BEFORE submitting, then bound the batch.
+  const unique = boundCandidates(dedupeCandidates(qualified), options.limit ?? Number.NaN)
+
+  // 5. Submit qualifying proposals to the private queue only.
   const results: ScoutRunSummary['results'] = []
   let submitted = 0, duplicates = 0, failed = 0
   for (const candidate of unique) {
@@ -80,7 +86,7 @@ export async function runMarketScout(options: {
     }
   }
 
-  return { runId, sources: sources.map((s) => s.id), discovered: signals.length, candidates: candidates.length, unique: unique.length, submitted, duplicates, failed, results }
+  return { runId, sources: sources.map((s) => s.id), discovered: signals.length, candidates: candidates.length, qualified: qualified.length, contextDropped, unique: unique.length, submitted, duplicates, failed, results }
 }
 
 // Real submitter: POST to the private market-mapping queue with the bearer token.

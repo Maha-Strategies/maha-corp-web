@@ -4,7 +4,7 @@ import test from 'node:test'
 import { marketOpportunityScore, parseMarketOpportunity } from '../lib/market-mapping.ts'
 import {
   SCOUT_SOURCE, type RawSignal, boundCandidates, candidateFromSignal, candidateToSubmission,
-  classifySignal, dedupeCandidates, normalizeHttpsUrl, scoutIdempotencyKey, scoutScores, stableSourceReference,
+  classifySignal, dedupeCandidates, normalizeHttpsUrl, qualifiesForActiveDemand, scoutIdempotencyKey, scoutScores, stableSourceReference,
 } from '../lib/market-scout.ts'
 import { DEFAULT_DISCOVERY_MATRIX, ScoutConfigError, configuredDiscoveryMatrix, configuredScoutSources, createExaResearchSource, rotatingDiscoveryQueries, type ResearchSource } from '../lib/market-scout-sources.ts'
 import { httpQueueSubmitter, runMarketScout, type ScoutSubmitter } from '../lib/market-scout-runner.ts'
@@ -52,6 +52,12 @@ test('signal class distinguishes direct demand from marketplace, competitor SEO,
   assert.ok(scoutScores(competitor).riskPenalty >= 12)
   assert.ok(scoutScores(competitor).commercialIntent <= 5)
   assert.equal(classifySignal(signal({ url: 'https://news.example.com/report', title: 'Quarterly report', snippet: 'A market overview.' })), 'editorial_content')
+})
+
+test('only strong direct buyer evidence qualifies for the active queue', () => {
+  assert.equal(qualifiesForActiveDemand(candidateFromSignal(signal())!), true)
+  const editorial = candidateFromSignal(signal({ url: 'https://vendor.example.com/blog/receipt-guide', title: 'Five receipt conversion methods compared', snippet: 'A guide to the best receipt OCR software methods.', query: 'receipt conversion guide' }))!
+  assert.equal(qualifiesForActiveDemand(editorial), false)
 })
 
 // ---- Candidate mapping + HTTPS/evidence/timestamps ----
@@ -113,16 +119,16 @@ test('boundCandidates enforces the hard batch cap', () => {
 test('runMarketScout dedupes, submits only proposals, and reports created/duplicate/failed', async () => {
   await withEnv({ MARKET_MAPPING_TOKEN: 'tok' }, async () => {
     const source: ResearchSource = { id: 'stub', search: async () => [
-      signal({ url: 'https://x.example.com/a' }),
-      signal({ url: 'https://x.example.com/a', query: 'dup url different query' }), // dedupes with the first
-      signal({ url: 'https://x.example.com/b' }),
+      signal({ url: 'https://forum.example.com/a' }),
+      signal({ url: 'https://forum.example.com/a', query: 'dup url different query' }), // dedupes with the first
+      signal({ url: 'https://forum.example.com/b' }),
       signal({ url: 'http://x.example.com/c' }), // non-HTTPS → dropped
     ] }
 
     const submitted: (Record<string, unknown>)[] = []
     const submit: ScoutSubmitter = async (body) => {
       submitted.push(body)
-      if (body.sourceReference === stableSourceReference('https://x.example.com/b')) return { ok: true, status: 201, idempotentReplay: true }
+      if (body.sourceReference === stableSourceReference('https://forum.example.com/b')) return { ok: true, status: 201, idempotentReplay: true }
       return { ok: true, status: 201, idempotentReplay: false }
     }
 
@@ -147,7 +153,7 @@ test('runMarketScout dedupes, submits only proposals, and reports created/duplic
 
 test('runMarketScout respects the limit', async () => {
   await withEnv({ MARKET_MAPPING_TOKEN: 'tok' }, async () => {
-    const source: ResearchSource = { id: 'stub', search: async () => Array.from({ length: 10 }, (_, i) => signal({ url: `https://x.example.com/${i}` })) }
+    const source: ResearchSource = { id: 'stub', search: async () => Array.from({ length: 10 }, (_, i) => signal({ url: `https://forum.example.com/${i}` })) }
     const submit: ScoutSubmitter = async () => ({ ok: true, status: 201, idempotentReplay: false })
     const summary = await runMarketScout({ fetchImpl: (() => { throw new Error('unused') }) as never, submit, sources: [source], limit: 2, runId: 'r' })
     assert.equal(summary.unique, 2)
