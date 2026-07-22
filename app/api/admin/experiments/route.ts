@@ -1,6 +1,7 @@
 import { jsonResponse } from '@/lib/agent-inquiries'
 import { createAgentInquiryLedger } from '@/lib/agent-inquiry-ledger'
 import { experimentHash, experimentId, parseExperiment, parseExperimentAction } from '@/lib/experiment-control'
+import { aggregateConversionMeasurements } from '@/lib/conversion-measurement'
 import { authorizeMarketMapping } from '@/lib/market-mapping'
 
 export const runtime = 'nodejs'
@@ -22,9 +23,17 @@ export async function GET(request: Request) {
   if (!authorized(request)) return jsonResponse({ error: { code: 'unauthorized', message: 'A valid market-mapping bearer token is required.' } }, 401)
   const ledger = createAgentInquiryLedger()
   if (!ledger) return unavailable()
-  const { data, error } = await ledger.from('growth_experiments').select('public_id,source_kind,source_reference,hypothesis,target_url,intended_change,call_to_action,primary_kpi,baseline_value,baseline_observed_on,measure_after_on,status,outcome_value,outcome_note,approved_at,prepared_at,published_at,measured_at,created_at,updated_at').order('created_at', { ascending: false }).limit(100)
+  const [{ data, error }, { data: measurements, error: measurementError }] = await Promise.all([
+    ledger.from('growth_experiments').select('public_id,source_kind,source_reference,hypothesis,target_url,intended_change,call_to_action,primary_kpi,baseline_value,baseline_observed_on,measure_after_on,status,outcome_value,outcome_note,approved_at,prepared_at,published_at,measured_at,created_at,updated_at').order('created_at', { ascending: false }).limit(100),
+    ledger.from('conversion_measurements').select('experiment_id,event_type,source_kind').order('recorded_at', { ascending: false }).limit(5000),
+  ])
   if (error) return unavailable(error.code)
-  return jsonResponse({ experiments: data ?? [], autonomousPublishingSupported: false, autonomousSpendSupported: false, autonomousOutreachSupported: false }, 200)
+  return jsonResponse({
+    experiments: data ?? [],
+    conversionAttribution: measurementError ? null : aggregateConversionMeasurements(measurements ?? []),
+    conversionMeasurementUnavailable: Boolean(measurementError),
+    autonomousPublishingSupported: false, autonomousSpendSupported: false, autonomousOutreachSupported: false,
+  }, 200)
 }
 
 export async function POST(request: Request) {

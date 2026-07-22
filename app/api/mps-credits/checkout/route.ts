@@ -5,6 +5,7 @@ import { createClientId, createCredentialId, createCredentialSecret } from '@/li
 import { jsonResponse } from '@/lib/agent-inquiries'
 import { MPS_AUDIT_CAPABILITY } from '@/lib/mps-audit-jobs'
 import { MPS_AUDIT_CREDIT_UNIT, creditPackConfig, createCreditCheckoutId, parseCreditCheckoutRequest, requestHash } from '@/lib/mps-credits'
+import { recordCheckoutAttribution } from '@/lib/conversion-measurement-server'
 
 export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
@@ -74,6 +75,14 @@ export async function POST(request: Request) {
   }
   const { error: sessionError } = await ledger.from('mps_credit_checkouts').update({ stripe_checkout_session_id: stripe.id }).eq('public_id', checkoutId)
   if (sessionError) return jsonResponse({ error: { code: 'ledger_unavailable', message: 'Secure checkout could not be recorded.' } }, 503)
+
+  // Measurement does not participate in billing or credential issuance. A
+  // temporary analytics failure must never prevent an otherwise valid checkout.
+  const attribution = await recordCheckoutAttribution(ledger, {
+    checkoutReference: checkoutId, offerId: 'mps-prepaid-audit-access', experimentId: input.experimentId,
+    sourcePath: input.sourcePath ?? '/mps/audit-access', occurredAt: new Date().toISOString(),
+  })
+  if (attribution.error) console.error('MPS conversion measurement unavailable:', attribution.error.code ?? 'unknown_error')
 
   return jsonResponse({ checkoutId, checkoutUrl: stripe.url, credential, credentialPrefix: credential.slice(0, 14),
     creditQuantity: config.creditQuantity, unit: MPS_AUDIT_CREDIT_UNIT, expiresAt,

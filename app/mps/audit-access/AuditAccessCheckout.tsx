@@ -3,6 +3,7 @@
 import { FormEvent, useMemo, useState, useSyncExternalStore } from 'react'
 
 import ApiAccessTokenReveal from './ApiAccessTokenReveal'
+import { browserConversionContext } from '@/components/ConversionTracker'
 
 const STORAGE_KEY = 'mps-audit-access-purchase'
 const RESTORING = 'restoring'
@@ -47,7 +48,7 @@ export default function AuditAccessCheckout({ purchaseState }: { purchaseState?:
     try {
       const response = await fetch('/api/mps-credits/checkout', {
         method: 'POST', headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, clientRequestId: crypto.randomUUID() }),
+        body: JSON.stringify({ email, clientRequestId: crypto.randomUUID(), ...browserConversionContext() }),
       })
       const data = await response.json() as Purchase & { checkoutUrl?: string; error?: { message?: string } }
       if (!response.ok || !data.checkoutUrl || !data.credential) throw new Error(data.error?.message ?? 'Checkout could not start.')
