@@ -30,6 +30,7 @@ const books = [
     subtitle: 'The Astrophysics of the Self',
     description: 'A systems psychology of attention, desire, agency, structure, imagination, grief, and integration.',
     href: '/books/the-orbital-mind',
+    readHref: '/books/the-orbital-mind/read',
     guide: { title: 'What Is Executive Function?', href: '/books/the-orbital-mind/what-is-executive-function' },
     chapter: { title: 'The Governing Center', href: '/books/the-orbital-mind/the-governing-center' },
   },
@@ -38,6 +39,7 @@ const books = [
     subtitle: 'Engineering the Soul of the Machine',
     description: 'A book about language models, human judgment, and the record we are teaching machines to reflect.',
     href: '/books/the-synthetic-self',
+    readHref: '/books/the-synthetic-self/read',
     guide: { title: 'How Do Large Language Models Learn?', href: '/books/the-synthetic-self/how-large-language-models-learn' },
     chapter: { title: 'The Learning Machine', href: '/books/the-synthetic-self/the-learning-machine' },
   },
@@ -46,6 +48,7 @@ const books = [
     subtitle: 'How Intelligence Learned to Redesign Its Own Substrate',
     description: 'A book about evolution, self-design, and the conditions intelligence creates for its own development.',
     href: '/books/the-unfinished-species',
+    readHref: '/books/the-unfinished-species/read',
     guide: { title: 'What Is Natural Selection?', href: '/books/the-unfinished-species/what-is-natural-selection' },
     chapter: { title: 'The Algorithm', href: '/books/the-unfinished-species/the-algorithm' },
   },
@@ -54,6 +57,7 @@ const books = [
     subtitle: 'Living Inside a Dreaming Brain',
     description: 'A book about dreaming, imagination, and turning a possible future into an actual one.',
     href: '/books/the-imagined-life',
+    readHref: '/books/the-imagined-life/read',
     guide: { title: 'Sleep Stages Explained', href: '/books/the-imagined-life/sleep-stages-explained' },
     chapter: { title: 'What Happens When You Sleep', href: '/books/the-imagined-life/what-happens-when-you-sleep' },
   },
@@ -86,8 +90,11 @@ export default function BooksPage() {
                   <Link href={book.guide.href} className="text-indigo-200 hover:text-white transition-colors">
                     New reader? {book.guide.title} ↗
                   </Link>
-                  <Link href={book.chapter.href} className="text-zinc-200 hover:text-white transition-colors">
-                    Read Chapter 1: {book.chapter.title} ↗
+                  <Link href={book.readHref} className="font-mono text-xs text-white hover:text-indigo-200 tracking-widest uppercase transition-colors">
+                    Read complete edition ↗
+                  </Link>
+                  <Link href={book.chapter.href} className="text-zinc-400 hover:text-white transition-colors">
+                    Start with Chapter 1: {book.chapter.title} ↗
                   </Link>
                   <Link href={book.href} className="font-mono text-xs text-zinc-400 hover:text-white tracking-widest uppercase transition-colors mt-1">
                     Explore the book ↗

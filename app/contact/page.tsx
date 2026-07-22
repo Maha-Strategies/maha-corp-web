@@ -1,7 +1,7 @@
 // app/contact/page.tsx
 "use client";
 
-import React, { useActionState, useEffect } from 'react';
+import React, { useActionState, useEffect, useState } from 'react';
 import Link from 'next/link';
 import { submitContactForm } from './actions';
 import { trackConversion } from '@/components/ConversionTracker';
@@ -12,10 +12,26 @@ export default function ContactPage() {
     success: false, 
     error: null 
   });
+  const [selectedService, setSelectedService] = useState('verified_research');
 
   useEffect(() => {
     if (state.success) trackConversion('contact_form_success');
   }, [state.success]);
+
+  useEffect(() => {
+    const service = new URLSearchParams(window.location.search).get('service');
+    const supportedServices = new Set([
+      'rapid_intelligence',
+      'verified_research',
+      'mps_evidence_audit',
+      'mps_audit',
+      'token_request',
+      'support',
+      'general',
+    ]);
+
+    if (service && supportedServices.has(service)) setSelectedService(service);
+  }, []);
 
   return (
     <main className="min-h-screen bg-[#0a0a0c] text-[#e0e0e0] py-16 px-6 sm:px-12 font-mono selection:bg-indigo-500 selection:text-white">
@@ -23,12 +39,12 @@ export default function ContactPage() {
         
         {/* TOP STATUS LINE */}
         <header className="text-xs text-gray-500 mb-12 border-b border-gray-800 pb-4 flex justify-between items-center">
-          <span>[ PROTOCOL // CONTACT_CHANNEL ]</span>
-          <span className="text-emerald-400">STATUS: SECURE_LINK</span>
+          <span>[ MAHA STRATEGIES // INQUIRY ]</span>
+          <span className="text-emerald-400">REPLY: WITHIN TWO BUSINESS DAYS</span>
         </header>
 
         <h1 className="font-sans text-2xl sm:text-4xl font-bold tracking-tight text-white uppercase mb-4">
-          Establish Contact
+          Start an inquiry
         </h1>
 
         <p className="text-sm text-gray-400 leading-relaxed mb-12 font-sans">
@@ -38,13 +54,13 @@ export default function ContactPage() {
         {/* CONTACT FORM SECTION */}
         <section className="mb-12">
           <h2 className="text-xs text-indigo-400 uppercase tracking-widest border-b border-gray-900 pb-2 mb-6">
-            01 // Transmission Matrix
+            01 // Tell us what you need
           </h2>
           
           {state.success ? (
             <div className="bg-emerald-950/20 border border-emerald-900 p-8 text-center space-y-4">
                <p className="text-emerald-400 font-bold tracking-widest uppercase text-sm">
-                 [ TRANSMISSION SUCCESSFUL ]
+                 [ INQUIRY RECEIVED ]
                </p>
                <p className="font-sans text-zinc-400 text-sm">
                  Your inquiry has been received. Maha Strategies will respond within two business days.
@@ -59,7 +75,7 @@ export default function ContactPage() {
                 {/* NAME */}
                 <div className="space-y-2">
                   <label htmlFor="name" className="block text-xs text-gray-400 uppercase tracking-widest font-mono">
-                    Designation (Name)
+                    Your name
                   </label>
                   <input
                     type="text"
@@ -75,7 +91,7 @@ export default function ContactPage() {
                 {/* EMAIL */}
                 <div className="space-y-2">
                   <label htmlFor="email" className="block text-xs text-gray-400 uppercase tracking-widest font-mono">
-                    Return Vector (Email)
+                    Work email
                   </label>
                   <input
                     type="email"
@@ -92,16 +108,18 @@ export default function ContactPage() {
               {/* SUBJECT / INQUIRY TYPE */}
               <div className="space-y-2">
                 <label htmlFor="subject" className="block text-xs text-gray-400 uppercase tracking-widest font-mono">
-                  Transmission Type
+                  What can we help with?
                 </label>
                 <select
                   id="subject"
                   name="subject"
+                  value={selectedService}
+                  onChange={(event) => setSelectedService(event.target.value)}
                   disabled={isPending}
                   className="w-full bg-zinc-900/50 border border-zinc-800 text-white text-sm px-4 py-2.5 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-colors appearance-none disabled:opacity-50"
                 >
-                  <option value="rapid_intelligence">Rapid Intelligence Brief — from $500 / five business days</option>
                   <option value="verified_research">Verified Research Brief — $2,500 / 10 business days</option>
+                  <option value="rapid_intelligence">Rapid Intelligence Brief — from $500 / five business days</option>
                   <option value="mps_evidence_audit">MPS Evidence Audit — manuscript or high-stakes document review</option>
                   <option value="mps_audit">Manuscript Audit / MPS Inquiry</option>
                   <option value="token_request">Cognitive Gateway Access Token Request</option>
@@ -143,7 +161,7 @@ export default function ContactPage() {
               {/* MESSAGE */}
               <div className="space-y-2">
                 <label htmlFor="message" className="block text-xs text-gray-400 uppercase tracking-widest font-mono">
-                  Payload (Message)
+                  Your question
                 </label>
                 <textarea
                   id="message"
@@ -170,7 +188,7 @@ export default function ContactPage() {
                   disabled={isPending}
                   className="bg-indigo-600 hover:bg-indigo-500 text-white text-xs uppercase tracking-widest font-mono px-6 py-3 transition-colors flex items-center justify-center w-full sm:w-auto disabled:bg-indigo-900 disabled:cursor-not-allowed"
                 >
-                  {isPending ? "Transmitting..." : "Transmit \u2192"}
+                  {isPending ? "Sending..." : "Send inquiry \u2192"}
                 </button>
               </div>
             </form>
@@ -180,10 +198,10 @@ export default function ContactPage() {
         {/* PGP / ALTERNATIVE CONTACT */}
         <section className="mb-12">
           <h2 className="text-xs text-indigo-400 uppercase tracking-widest border-b border-gray-900 pb-2 mb-4">
-            02 // Direct Comms
+            02 // Contact directly
           </h2>
           <p className="text-sm text-gray-300 leading-relaxed font-sans mb-4">
-            If you prefer not to use the form, you can transmit inquiries directly to our secure inbox at{' '}
+            If you prefer not to use the form, email{' '}
             <a href="mailto:mayone@mahastrategies.com" className="text-indigo-400 hover:text-white underline">
               mayone@mahastrategies.com
             </a>{' '}or by phone at{' '}
@@ -196,7 +214,7 @@ export default function ContactPage() {
         {/* REGISTERED ENTITY / BUSINESS INFORMATION */}
         <section className="mb-12">
           <h2 className="text-xs text-indigo-400 uppercase tracking-widest border-b border-gray-900 pb-2 mb-6">
-            03 // Registered Entity
+            03 // Business details
           </h2>
           <address className="not-italic font-sans text-sm text-gray-300 leading-relaxed space-y-4">
             <div>
@@ -233,11 +251,11 @@ export default function ContactPage() {
         {/* FOOTER */}
         <footer className="mt-16 pt-8 border-t border-gray-900 flex flex-col sm:flex-row justify-between gap-4 text-xs">
           <Link href="/" className="text-gray-600 hover:text-white transition-colors">
-            [ &larr; Return to Base ]
+            [ &larr; Return home ]
           </Link>
           <div className="flex flex-col sm:flex-row gap-4">
             <Link href="/research/mcp" className="text-indigo-400 hover:text-white transition-colors">
-              [ Cognitive Gateway Docs &#8599; ]
+              [ API documentation &#8599; ]
             </Link>
           </div>
         </footer>
