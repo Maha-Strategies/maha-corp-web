@@ -1,22 +1,35 @@
 // app/contact/page.tsx
 "use client";
 
-import React, { useActionState, useEffect, useState } from 'react';
+import React, { FormEvent, useEffect, useState } from 'react';
 import Link from 'next/link';
-import { submitContactForm } from './actions';
+import Script from 'next/script';
 import { trackConversion } from '@/components/ConversionTracker';
 
+declare global { interface Window { mahaTurnstileComplete?: (token: string) => void; mahaTurnstileExpired?: () => void } }
+
+const OFFER_BY_SERVICE: Record<string, string> = {
+  verified_research: 'verified-research-brief', rapid_intelligence: 'rapid-intelligence-brief',
+  mps_evidence_audit: 'mps-prepaid-audit-access', mps_audit: 'mps-prepaid-audit-access',
+  token_request: 'mps-preflight', support: 'mps-preflight', general: 'rapid-intelligence-brief',
+};
+const TURNSTILE_SITE_KEY = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY;
+
 export default function ContactPage() {
-  // useActionState handles the server action lifecycle (loading, success, error)
-  const [state, formAction, isPending] = useActionState(submitContactForm, { 
-    success: false, 
-    error: null 
-  });
+  const [state, setState] = useState({ success: false, error: null as string | null });
+  const [isPending, setIsPending] = useState(false);
   const [selectedService, setSelectedService] = useState('verified_research');
+  const [turnstileToken, setTurnstileToken] = useState('');
 
   useEffect(() => {
     if (state.success) trackConversion('contact_form_success');
   }, [state.success]);
+
+  useEffect(() => {
+    window.mahaTurnstileComplete = (token) => setTurnstileToken(token);
+    window.mahaTurnstileExpired = () => setTurnstileToken('');
+    return () => { delete window.mahaTurnstileComplete; delete window.mahaTurnstileExpired; };
+  }, []);
 
   useEffect(() => {
     const service = new URLSearchParams(window.location.search).get('service');
@@ -32,6 +45,31 @@ export default function ContactPage() {
 
     if (service && supportedServices.has(service)) setSelectedService(service);
   }, []);
+
+  async function submit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    setIsPending(true); setState({ success: false, error: null });
+    const form = new FormData(event.currentTarget);
+    const query = new URLSearchParams(window.location.search);
+    const body = {
+      idempotencyKey: `contact:${crypto.randomUUID()}`,
+      offerId: OFFER_BY_SERVICE[selectedService],
+      requester: { name: form.get('name'), email: form.get('email'), organization: form.get('organization') || undefined },
+      decision: form.get('decision'), question: form.get('message'), deadline: form.get('deadline') || undefined,
+      context: form.get('website') ? `Company or project URL: ${form.get('website')}` : undefined,
+      requesterAuthorized: true, website: form.get('website_trap') || undefined,
+      referralSource: form.get('referralSource'), referralDetail: form.get('referralDetail') || undefined, sourcePath: '/contact',
+      utmSource: query.get('utm_source') || undefined, utmMedium: query.get('utm_medium') || undefined, utmCampaign: query.get('utm_campaign') || undefined,
+      turnstileToken: turnstileToken || undefined,
+    };
+    try {
+      const response = await fetch('/api/inbound-submissions', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
+      const result = await response.json() as { error?: { message?: string } };
+      if (!response.ok) throw new Error(result.error?.message ?? 'Your inquiry could not be sent.');
+      setState({ success: true, error: null });
+    } catch (error) { setState({ success: false, error: error instanceof Error ? error.message : 'Your inquiry could not be sent.' }); }
+    finally { setIsPending(false); }
+  }
 
   return (
     <main className="min-h-screen bg-[#0a0a0c] text-[#e0e0e0] py-16 px-6 sm:px-12 font-mono selection:bg-indigo-500 selection:text-white">
@@ -68,7 +106,7 @@ export default function ContactPage() {
             </div>
           ) : (
             <form 
-              action={formAction} 
+              onSubmit={submit}
               className="space-y-6 font-sans bg-black/30 border border-gray-900 p-6 sm:p-8"
             >
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
@@ -103,6 +141,11 @@ export default function ContactPage() {
                     placeholder="jane@example.com"
                   />
                 </div>
+
+                <div className="space-y-2">
+                  <label htmlFor="organization" className="block text-xs text-gray-400 uppercase tracking-widest font-mono">Organization or project</label>
+                  <input type="text" id="organization" name="organization" required disabled={isPending} className="w-full bg-zinc-900/50 border border-zinc-800 text-white text-sm px-4 py-2.5 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-colors disabled:opacity-50" placeholder="Company, publication, or project" />
+                </div>
               </div>
 
               {/* SUBJECT / INQUIRY TYPE */}
@@ -132,12 +175,13 @@ export default function ContactPage() {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 <div className="space-y-2">
                   <label htmlFor="decision" className="block text-xs text-gray-400 uppercase tracking-widest font-mono">
-                    Decision to inform (optional)
+                    Decision to inform
                   </label>
                   <input
                     type="text"
                     id="decision"
                     name="decision"
+                    required
                     disabled={isPending}
                     className="w-full bg-zinc-900/50 border border-zinc-800 text-white text-sm px-4 py-2.5 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-colors disabled:opacity-50"
                     placeholder="An investment, vendor, or strategy decision"
@@ -158,6 +202,12 @@ export default function ContactPage() {
                 </div>
               </div>
 
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                <div className="space-y-2"><label htmlFor="website" className="block text-xs text-gray-400 uppercase tracking-widest font-mono">Company or project URL (optional)</label><input type="url" id="website" name="website" disabled={isPending} className="w-full bg-zinc-900/50 border border-zinc-800 text-white text-sm px-4 py-2.5 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-colors disabled:opacity-50" placeholder="https://example.com" /></div>
+                <div className="space-y-2"><label htmlFor="referralSource" className="block text-xs text-gray-400 uppercase tracking-widest font-mono">How did you find Maha?</label><select id="referralSource" name="referralSource" defaultValue="search" disabled={isPending} className="w-full bg-zinc-900/50 border border-zinc-800 text-white text-sm px-4 py-2.5"><option value="search">Search</option><option value="developer_directory">Developer directory</option><option value="referral">Referral</option><option value="social">Social media</option><option value="newsletter">Newsletter</option><option value="event">Event or community</option><option value="direct">Direct visit</option><option value="other">Other</option></select></div>
+              </div>
+              <div className="space-y-2"><label htmlFor="referralDetail" className="block text-xs text-gray-400 uppercase tracking-widest font-mono">Referral detail (optional)</label><input type="text" id="referralDetail" name="referralDetail" disabled={isPending} className="w-full bg-zinc-900/50 border border-zinc-800 text-white text-sm px-4 py-2.5" placeholder="e.g. Google, Glama, a colleague, or publication" /></div>
+
               {/* MESSAGE */}
               <div className="space-y-2">
                 <label htmlFor="message" className="block text-xs text-gray-400 uppercase tracking-widest font-mono">
@@ -173,6 +223,9 @@ export default function ContactPage() {
                   placeholder="What question do you need answered, and what would change if the answer were different?"
                 ></textarea>
               </div>
+
+              <div className="hidden" aria-hidden="true"><label htmlFor="website_trap">Leave this blank</label><input id="website_trap" name="website_trap" tabIndex={-1} autoComplete="off" /></div>
+              {TURNSTILE_SITE_KEY && <><Script src="https://challenges.cloudflare.com/turnstile/v0/api.js" strategy="afterInteractive" /><div className="cf-turnstile" data-sitekey={TURNSTILE_SITE_KEY} data-action="contact_inquiry" data-callback="mahaTurnstileComplete" data-expired-callback="mahaTurnstileExpired" /></>}
 
               {/* ERROR STATE */}
               {state.error && (
