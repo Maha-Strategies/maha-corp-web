@@ -1,5 +1,7 @@
 import { createHash, createHmac, randomUUID, timingSafeEqual } from 'node:crypto'
 
+import { validExperimentId, validSourcePath } from './conversion-measurement.ts'
+
 export const MPS_AUDIT_CREDIT_UNIT = 'mps_audit_invocation' as const
 
 export type CreditCheckoutStatus = 'awaiting_payment' | 'paid' | 'failed'
@@ -73,7 +75,7 @@ export function ledgerEventHash(input: {
   ].join('|')).digest('hex')}`
 }
 
-export function parseCreditCheckoutRequest(value: unknown): { clientRequestId: string; email: string } {
+export function parseCreditCheckoutRequest(value: unknown): { clientRequestId: string; email: string; experimentId: string | null; sourcePath: string | null } {
   if (typeof value !== 'object' || value === null || Array.isArray(value)) throw new Error('Request body must be a JSON object.')
   const clientRequestId = (value as Record<string, unknown>).clientRequestId
   if (typeof clientRequestId !== 'string') throw new Error('clientRequestId must be a string.')
@@ -85,7 +87,12 @@ export function parseCreditCheckoutRequest(value: unknown): { clientRequestId: s
   if (typeof email !== 'string' || email.length > 254 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) {
     throw new Error('email must be a valid email address.')
   }
-  return { clientRequestId: trimmed, email: email.trim().toLowerCase() }
+  const body = value as Record<string, unknown>
+  const experimentId = body.experimentId === undefined || body.experimentId === null ? null : body.experimentId
+  if (experimentId !== null && !validExperimentId(experimentId)) throw new Error('experimentId is invalid.')
+  const sourcePath = body.sourcePath === undefined || body.sourcePath === null ? null : body.sourcePath
+  if (sourcePath !== null && !validSourcePath(sourcePath)) throw new Error('sourcePath is invalid.')
+  return { clientRequestId: trimmed, email: email.trim().toLowerCase(), experimentId, sourcePath }
 }
 
 export function creditPackConfig(): CreditPackConfig | null {

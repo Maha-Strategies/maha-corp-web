@@ -2,6 +2,8 @@
 
 import { useEffect, useRef, useState } from 'react'
 
+import { browserConversionContext } from '@/components/ConversionTracker'
+
 const MAX_BATCH = 20
 const MIN_CHARS = 12
 const STORAGE_PREFIX = 'maha_receipt_run:'
@@ -145,7 +147,7 @@ export default function ReceiptBatch() {
       const clientRequestId = crypto.randomUUID()
       const response = await fetch('/api/utilities/receipts/checkout', {
         method: 'POST', headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ utility: 'receipts-to-csv', clientRequestId, draftId }),
+        body: JSON.stringify({ utility: 'receipts-to-csv', clientRequestId, draftId, ...browserConversionContext() }),
       })
       const data = await response.json() as { checkoutId?: string; checkoutUrl?: string; error?: { message?: string } }
       if (!response.ok || !data.checkoutId || !data.checkoutUrl) {

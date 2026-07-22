@@ -7,6 +7,7 @@ import {
   validStripeWebhookSignature,
 } from '@/lib/mps-credits'
 import { reconciliationFailure, reconcileRevenuePayment, reconcileRevenueRefund } from '@/lib/revenue-reconciliation'
+import { recordVerifiedCheckoutConversion } from '@/lib/conversion-measurement-server'
 
 export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
@@ -118,7 +119,15 @@ async function processCheckout(eventId: string, eventType: string, payloadHash: 
     sessionId: session.id!, paymentIntentId: session.payment_intent ?? null, amountCents: session.amount_total!,
     currency: session.currency!, delivered: true, receivedAt: new Date().toISOString(),
   })
-  return reconciliationFailure(reconciliation) ?? productResponse
+  const failure = reconciliationFailure(reconciliation)
+  if (failure) return failure
+  // Stripe has verified the payment and the revenue ledger has accepted it.
+  // Measurement failure is intentionally non-blocking for billing and access.
+  const measurement = await recordVerifiedCheckoutConversion(ledger, {
+    checkoutReference: checkoutId, offerId: 'mps-prepaid-audit-access', occurredAt: new Date().toISOString(),
+  })
+  if (measurement.error) console.error('MPS verified conversion measurement unavailable:', measurement.error.code ?? 'unknown_error')
+  return productResponse
 }
 
 export async function POST(request: Request) {

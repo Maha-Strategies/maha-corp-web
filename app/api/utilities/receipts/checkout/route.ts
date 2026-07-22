@@ -1,6 +1,7 @@
 import { jsonResponse } from '@/lib/agent-inquiries'
 import { createAgentInquiryLedger } from '@/lib/agent-inquiry-ledger'
 import { requestHash } from '@/lib/mps-credits'
+import { parseCheckoutAttribution, recordCheckoutAttribution } from '@/lib/conversion-measurement-server'
 import { RECEIPT_UTILITY } from '@/lib/receipt-utility'
 import { validDraftId } from '@/lib/receipt-uploads'
 import { createUtilityCheckoutId, isKnownUtility, utilityCatalogConfig } from '@/lib/utility-billing'
@@ -18,7 +19,7 @@ type StoredCheckout = {
   status: 'awaiting_payment' | 'paid' | 'failed'
 }
 
-function parseBody(value: unknown): { utility: string; clientRequestId: string; draftId: string | null } {
+function parseBody(value: unknown): { utility: string; clientRequestId: string; draftId: string | null; experimentId: string | null; sourcePath: string } {
   if (typeof value !== 'object' || value === null || Array.isArray(value)) throw new Error('Request body must be a JSON object.')
   const body = value as Record<string, unknown>
   const utility = typeof body.utility === 'string' ? body.utility : RECEIPT_UTILITY
@@ -33,7 +34,8 @@ function parseBody(value: unknown): { utility: string; clientRequestId: string; 
     if (!validDraftId(body.draftId)) throw new Error('draftId is not valid.')
     draftId = body.draftId
   }
-  return { utility, clientRequestId: trimmed, draftId }
+  const attribution = parseCheckoutAttribution(body)
+  return { utility, clientRequestId: trimmed, draftId, ...attribution }
 }
 
 export async function POST(request: Request) {
@@ -120,6 +122,12 @@ export async function POST(request: Request) {
   }
   const { error: sessionError } = await ledger.from('utility_checkouts').update({ stripe_checkout_session_id: stripe.id, stripe_checkout_url: stripe.url }).eq('public_id', checkoutId)
   if (sessionError) return jsonResponse({ error: { code: 'ledger_unavailable', message: 'Secure checkout could not be recorded.' } }, 503)
+
+  const attribution = await recordCheckoutAttribution(ledger, {
+    checkoutReference: checkoutId, offerId: 'utility-receipts-to-csv', experimentId: input.experimentId,
+    sourcePath: input.sourcePath || '/utilities/receipts', occurredAt: new Date().toISOString(),
+  })
+  if (attribution.error) console.error('Utility conversion measurement unavailable:', attribution.error.code ?? 'unknown_error')
 
   return jsonResponse({ checkoutId, checkoutUrl: stripe.url, utility }, 201)
 }

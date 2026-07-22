@@ -2,6 +2,7 @@ import { jsonResponse } from '@/lib/agent-inquiries'
 import { createAgentInquiryLedger } from '@/lib/agent-inquiry-ledger'
 import { stripeWebhookPayloadHash, validStripeEventId, validStripeWebhookSignature } from '@/lib/mps-credits'
 import { reconciliationFailure, reconcileRevenuePayment, reconcileRevenueRefund } from '@/lib/revenue-reconciliation'
+import { recordVerifiedCheckoutConversion } from '@/lib/conversion-measurement-server'
 import { REVENUE_OFFER_FOR_UTILITY, isKnownUtility, utilityCatalogConfig, validUtilityCheckoutId } from '@/lib/utility-billing'
 
 export const runtime = 'nodejs'
@@ -149,5 +150,11 @@ export async function POST(request: Request) {
     sessionId: session.id, paymentIntentId: session.payment_intent ?? null, amountCents: session.amount_total,
     currency: session.currency, delivered: false, receivedAt: new Date().toISOString(),
   })
-  return reconciliationFailure(reconciliation) ?? Response.json({ received: true, duplicate: markResult === 'duplicate' })
+  const failure = reconciliationFailure(reconciliation)
+  if (failure) return failure
+  const measurement = await recordVerifiedCheckoutConversion(ledger, {
+    checkoutReference: checkoutId, offerId: REVENUE_OFFER_FOR_UTILITY[checkout.utility], occurredAt: new Date().toISOString(),
+  })
+  if (measurement.error) console.error('Utility verified conversion measurement unavailable:', measurement.error.code ?? 'unknown_error')
+  return Response.json({ received: true, duplicate: markResult === 'duplicate' })
 }
