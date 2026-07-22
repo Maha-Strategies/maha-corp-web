@@ -76,7 +76,7 @@ export default function TheImaginedLifeHub() {
           </p>
         </section>
 
-        <Link href="/books/the-imagined-life/read" className="mt-10 inline-block bg-white px-7 py-4 font-mono text-xs font-bold uppercase tracking-widest text-black transition-colors hover:bg-zinc-200">Read by chapter ↗</Link>
+        <Link href="/books/the-imagined-life/read" className="mt-10 inline-block bg-white px-7 py-4 font-mono text-xs font-bold uppercase tracking-widest text-black transition-colors hover:bg-zinc-200">Choose a chapter ↗</Link>
 
         <BookEndpointCTA title="The Imagined Life" placement="top" />
 

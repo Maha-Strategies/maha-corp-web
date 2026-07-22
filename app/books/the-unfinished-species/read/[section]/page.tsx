@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import BookManuscript from '@/components/BookManuscript'
+import { OpenBookSectionNavigation } from '@/components/OpenBookReader'
 import { getUnfinishedSpeciesSection, unfinishedSpeciesSections } from '@/lib/unfinished-species'
 
 const SITE_URL = 'https://www.mahastrategies.com'
@@ -40,13 +41,14 @@ export default async function UnfinishedSpeciesSectionPage({ params }: PageProps
     <main className="min-h-screen bg-[#0a0a0c] text-zinc-300 selection:bg-indigo-500 selection:text-white">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, '\\u003c') }} />
       <article className="max-w-3xl mx-auto px-6 py-20 sm:py-28">
-        <Link href="/books/the-unfinished-species/read" className="inline-block font-mono text-xs text-indigo-300 hover:text-white tracking-widest uppercase transition-colors mb-12">← Complete edition</Link>
+        <Link href="/books/the-unfinished-species/read" className="inline-block font-mono text-xs text-indigo-300 hover:text-white tracking-widest uppercase transition-colors mb-12">← All chapters</Link>
         <header className="border-b border-zinc-800 pb-10 mb-12">
           <p className="font-mono text-xs text-indigo-300 tracking-widest uppercase mb-5">[ Open edition · {found.section.articleSection} ]</p>
           <h1 className="text-4xl sm:text-5xl font-light text-white leading-[1.1] tracking-tight mb-5">{found.section.title}</h1>
           <p className="text-xl text-zinc-300 font-light leading-relaxed">{found.section.description}</p>
         </header>
         <BookManuscript markdown={found.markdown} />
+        <OpenBookSectionNavigation book={{ slug: 'the-unfinished-species', title: 'The Unfinished Species', subtitle: 'How Intelligence Learned to Redesign Its Own Substrate', sections: unfinishedSpeciesSections }} section={found.section} />
         <footer className="mt-16 border-t border-zinc-800 pt-8"><Link href="/books/the-unfinished-species" className="text-sm text-zinc-300 hover:text-white">Return to the book’s table of contents ↗</Link></footer>
       </article>
     </main>

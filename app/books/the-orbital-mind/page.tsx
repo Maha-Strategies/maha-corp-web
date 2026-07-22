@@ -107,13 +107,13 @@ export default function TheOrbitalMindHub() {
 
         <section className="mt-16 border border-indigo-900/50 bg-indigo-950/20 p-7 sm:p-10 relative overflow-hidden">
           <div className="absolute top-0 left-0 h-full w-1 bg-indigo-500" />
-          <p className="font-mono text-xs text-indigo-300 tracking-widest uppercase mb-4">[ Complete edition ]</p>
-          <h2 className="text-2xl sm:text-3xl font-light text-white mb-4">Read the full book</h2>
+          <p className="font-mono text-xs text-indigo-300 tracking-widest uppercase mb-4">[ Chapter-by-chapter edition ]</p>
+          <h2 className="text-2xl sm:text-3xl font-light text-white mb-4">Read the book one chapter at a time</h2>
           <p className="text-zinc-400 leading-relaxed max-w-2xl mb-7">
-            The full manuscript is available online: the framework, all five parts, and the formal appendices that test its limits.
+            The complete book is available online as a chapter reader: begin with the framework, choose a section, and continue with stable next-chapter links.
           </p>
           <Link href="/books/the-orbital-mind/read" className="inline-block bg-white text-black font-mono font-bold text-xs tracking-widest uppercase px-7 py-4 hover:bg-zinc-200 transition-colors">
-            Read the complete edition ↗
+            Choose a chapter ↗
           </Link>
           <BookReaderPaths
             guideHref="/books/the-orbital-mind/what-is-executive-function"
