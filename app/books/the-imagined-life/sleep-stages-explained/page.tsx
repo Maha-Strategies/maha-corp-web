@@ -6,22 +6,22 @@ const SITE_URL = 'https://www.mahastrategies.com'
 const URL = `${SITE_URL}/books/the-imagined-life/sleep-stages-explained`
 
 export const metadata: Metadata = {
-  title: 'Sleep Stages Explained: REM and Non-REM Sleep',
+  title: 'NREM Sleep Stages Explained: N1, N2, N3, REM, and Dreaming',
   description:
-    'A plain-English guide to sleep stages: REM and non-REM sleep, N1, N2, N3, sleep cycles, dreaming, circadian timing, and when to discuss sleep symptoms with a clinician.',
+    'What NREM sleep means, how N1, N2, N3 and REM differ, what stage people dream in, and how sleep cycles change through the night.',
   alternates: { canonical: '/books/the-imagined-life/sleep-stages-explained' },
   openGraph: {
     type: 'article',
     url: URL,
-    title: 'Sleep Stages Explained: REM and Non-REM Sleep',
+    title: 'NREM Sleep Stages Explained: N1, N2, N3, REM, and Dreaming',
     description:
-      'A plain-English guide to N1, N2, N3, REM sleep, dreaming, and the repeating architecture of a night’s sleep.',
+      'A plain-English guide to NREM sleep, N1, N2, N3, REM sleep, dreaming, and sleep cycles.',
     images: [{ url: '/og-master.png', width: 1200, height: 630, alt: 'Sleep Stages Explained — Maha Strategies' }],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Sleep Stages Explained: REM and Non-REM Sleep',
-    description: 'A plain-English guide to sleep stages, cycles, and dreaming.',
+    title: 'NREM Sleep Stages Explained: N1, N2, N3, REM, and Dreaming',
+    description: 'A plain-English guide to NREM sleep, REM sleep, cycles, and dreaming.',
     images: ['/og-master.png'],
     creator: '@mayonemaha',
   },
@@ -63,7 +63,7 @@ const sources = [
 const articleJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Article',
-  headline: 'Sleep Stages Explained: REM and Non-REM Sleep',
+  headline: 'NREM Sleep Stages Explained: N1, N2, N3, REM, and Dreaming',
   description:
     'A plain-English guide to sleep stages: REM and non-REM sleep, N1, N2, N3, sleep cycles, dreaming, circadian timing, and when to discuss sleep symptoms with a clinician.',
   url: URL,
@@ -72,7 +72,7 @@ const articleJsonLd = {
   author: { '@type': 'Person', name: 'Mayone Maha Rajan' },
   publisher: { '@type': 'Organization', name: 'Maha Strategies LLC', url: SITE_URL },
   datePublished: '2026-07-16',
-  dateModified: '2026-07-16',
+  dateModified: '2026-07-22',
   isAccessibleForFree: true,
   inLanguage: 'en',
   articleSection: 'Sleep explainer',
@@ -95,7 +95,7 @@ export default function SleepStagesExplainedPage() {
 
         <header className="border-b border-zinc-800 pb-10 mb-12">
           <p className="font-mono text-xs text-indigo-300 tracking-widest uppercase mb-5">[ Plain-English sleep guide ]</p>
-          <h1 className="text-4xl sm:text-5xl font-light text-white leading-[1.1] tracking-tight mb-6">Sleep stages explained: REM and non-REM sleep</h1>
+          <h1 className="text-4xl sm:text-5xl font-light text-white leading-[1.1] tracking-tight mb-6">NREM sleep stages explained: N1, N2, N3, REM, and dreaming</h1>
           <p className="text-xl text-zinc-300 font-light leading-relaxed">
             Sleep is not one uniform state. Across the night, the brain and body move repeatedly through non-REM and REM sleep, each identified by characteristic patterns in sleep studies. The stages are measurable; the full purpose of dreaming is still an open scientific question.
           </p>
@@ -106,13 +106,18 @@ export default function SleepStagesExplainedPage() {
         <div id="article-content" data-article-content className="prose prose-invert prose-lg max-w-none prose-p:text-zinc-300 prose-p:leading-[1.85] prose-p:mb-7 prose-strong:text-white prose-a:text-indigo-300 prose-a:no-underline hover:prose-a:text-white prose-li:text-zinc-300 prose-li:leading-relaxed">
           <h2>Short answer</h2>
           <p>
-            A typical night alternates between two broad phases: non-rapid eye movement (non-REM) sleep and rapid eye movement (REM) sleep. Non-REM has three stages, N1 through N3. The pattern repeats through the night in cycles that commonly last about 80 to 100 minutes, though the exact timing and amount of each stage vary by person, age, night, and circumstance. <a href={sources[0].href}>[1]</a>
+            <strong>NREM sleep</strong> means non-rapid eye movement sleep. It has three stages: N1, N2, and N3. A typical night alternates between NREM and rapid eye movement (REM) sleep in cycles that commonly last about 80 to 100 minutes. The exact timing and amount of each stage vary by person, age, night, and circumstance. <a href={sources[0].href}>[1]</a>
           </p>
           <p>
             Sleep stages are classifications made from signals measured in sleep studies, including brain activity and eye movements. They are a useful map of a night’s physiology, not a scorecard of personal worth or a diagnosis from a single night of data.
           </p>
 
-          <h2>Non-REM sleep: N1, N2, and N3</h2>
+          <h2>What does NREM sleep mean?</h2>
+          <p>
+            NREM is short for <strong>non-rapid eye movement</strong> sleep. It includes the transition into sleep (N1), established sleep (N2), and deep or slow-wave sleep (N3). In a sleep study, these stages are classified from measured brain activity rather than from how rested someone feels the next morning. <a href={sources[0].href}>[1]</a>
+          </p>
+
+          <h2>NREM sleep stages: N1, N2, and N3</h2>
           <h3>N1: the transition into sleep</h3>
           <p>
             N1 is the shift from wakefulness into sleep. It is usually brief. Breathing, heartbeat, eye movements, and brain-wave patterns begin to slow, and it is easy to wake. This is the threshold rather than a destination: the body is no longer fully awake, but has not yet moved into deeper non-REM sleep.
@@ -126,13 +131,23 @@ export default function SleepStagesExplainedPage() {
             N3 is commonly called deep sleep or slow-wave sleep because of the pattern seen in brain recordings. It is more prominent earlier in the night, and waking from it can be difficult. The amount of slow-wave sleep changes across the lifespan, which is one reason a fixed “ideal” chart cannot describe every person. <a href={sources[0].href}>[1]</a>
           </p>
 
-          <h2>REM sleep</h2>
+          <h2>REM vs. NREM sleep</h2>
           <p>
-            During REM sleep, the eyes move rapidly beneath closed lids and measured brain activity becomes more wake-like. Dreaming commonly occurs in REM sleep. At the same time, the large muscles of the arms and legs normally become temporarily relaxed or limp, a state called muscle atonia that helps prevent most people from acting out dreams. REM sleep tends to occupy more of the later part of the night. <a href={sources[0].href}>[1]</a>
+            The simplest distinction is that NREM sleep includes N1, N2, and N3, while REM is a separate phase. During REM sleep, the eyes move rapidly beneath closed lids and measured brain activity becomes more wake-like. Dreaming commonly occurs in REM sleep. At the same time, the large muscles of the arms and legs normally become temporarily relaxed or limp, a state called muscle atonia that helps prevent most people from acting out dreams. REM sleep tends to occupy more of the later part of the night. <a href={sources[0].href}>[1]</a>
           </p>
           <p>
             REM is not “better” sleep and non-REM is not empty sleep. They are different, recurring physiological states. Both belong to a normal night’s architecture, and both are studied as part of healthy sleep.
           </p>
+
+          <table>
+            <thead><tr><th>Stage</th><th>Where it fits</th><th>Plain-English description</th></tr></thead>
+            <tbody>
+              <tr><td>N1</td><td>NREM</td><td>The brief transition between wakefulness and sleep.</td></tr>
+              <tr><td>N2</td><td>NREM</td><td>Established sleep; a person is clearly asleep.</td></tr>
+              <tr><td>N3</td><td>NREM</td><td>Deep or slow-wave sleep, often more prominent earlier in the night.</td></tr>
+              <tr><td>REM</td><td>REM</td><td>Brain activity is more wake-like; vivid dreaming is common and muscles normally become limp.</td></tr>
+            </tbody>
+          </table>
 
           <h2>Sleep cycles change across the night</h2>
           <p>
@@ -142,9 +157,9 @@ export default function SleepStagesExplainedPage() {
             This repeating pattern is influenced by more than a clock on the wall. Circadian clocks help coordinate when the body is prepared for sleep and wakefulness, and light, darkness, caffeine, schedules, and time awake can all affect the system. <a href={sources[1].href}>[2]</a>
           </p>
 
-          <h2>Are dreams only REM sleep?</h2>
+          <h2>What stage of sleep do you dream in?</h2>
           <p>
-            No. REM sleep is strongly associated with vivid dreaming, but dream reports can also occur after non-REM sleep. That is one reason researchers distinguish the physiology of a sleep stage from the experience of dreaming itself. A 2017 high-density EEG study found neural patterns associated with reports of dreaming in both REM and non-REM sleep. <a href={sources[3].href}>[4]</a>
+            Dreaming commonly happens during REM sleep, and REM dreams are often vivid. But dreams are not exclusive to REM: dream reports can also occur after non-REM sleep. That is why researchers distinguish the physiology of a sleep stage from the experience of dreaming itself. A 2017 high-density EEG study found neural patterns associated with reports of dreaming in both REM and non-REM sleep. <a href={sources[3].href}>[4]</a>
           </p>
           <p>
             What science has not settled is a single universal answer to “why do we dream?” The existence, timing, and correlates of dreams can be studied. Their full function—and whether every dream has a hidden message or purpose—is not established by sleep-stage data.
@@ -164,6 +179,14 @@ export default function SleepStagesExplainedPage() {
           </p>
 
           <h2>Frequently asked questions</h2>
+          <h3>What is N1 sleep?</h3>
+          <p>N1 is the first NREM stage: the usually brief transition from wakefulness into sleep. It is easy to wake from N1. <a href={sources[0].href}>[1]</a></p>
+          <h3>What is N2 sleep?</h3>
+          <p>N2 is an NREM stage in which a person is clearly asleep. Sleep researchers identify it using characteristic patterns in measured brain activity. <a href={sources[0].href}>[1]</a></p>
+          <h3>What is N3 sleep?</h3>
+          <p>N3 is deep or slow-wave NREM sleep. It is often more prominent earlier in the night, and waking from it can be difficult. <a href={sources[0].href}>[1]</a></p>
+          <h3>How many stages of sleep are there?</h3>
+          <p>The current commonly used framework has three NREM stages—N1, N2, and N3—plus REM sleep as a separate phase. <a href={sources[0].href}>[1]</a></p>
           <h3>Do people dream every night?</h3>
           <p>
             Dream recall varies. People may report dreams after both REM and non-REM sleep, but not remembering a dream does not establish that no mental experience occurred.
@@ -197,7 +220,7 @@ export default function SleepStagesExplainedPage() {
         <footer className="mt-16 pt-8 border-t border-zinc-800">
           <p className="font-mono text-xs text-zinc-500 tracking-widest uppercase mb-4">[ Continue reading ]</p>
           <div className="flex flex-col gap-3">
-            <Link href="/books/the-imagined-life/what-happens-when-you-sleep" className="text-zinc-300 hover:text-white transition-colors">Read Chapter 1: What Happens When You Sleep ↗</Link>
+            <Link href="/books/the-imagined-life/read/what-happens-when-you-sleep" className="text-zinc-300 hover:text-white transition-colors">Read Chapter 1: What Happens When You Sleep ↗</Link>
             <Link href="/books/the-imagined-life" className="text-zinc-300 hover:text-white transition-colors">Return to The Imagined Life ↗</Link>
           </div>
         </footer>

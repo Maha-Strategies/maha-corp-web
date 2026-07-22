@@ -50,7 +50,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${baseUrl}/books/the-imagined-life`, lastModified: new Date('2026-07-16'), changeFrequency: 'weekly', priority: 0.8 },
     { url: `${baseUrl}/books/the-imagined-life/the-faculty-of-the-possible`, lastModified: new Date('2026-07-16'), changeFrequency: 'monthly', priority: 0.7 },
     { url: `${baseUrl}/books/the-imagined-life/what-happens-when-you-sleep`, lastModified: new Date('2026-07-16'), changeFrequency: 'monthly', priority: 0.8 },
-    { url: `${baseUrl}/books/the-imagined-life/sleep-stages-explained`, lastModified: new Date('2026-07-16'), changeFrequency: 'monthly', priority: 0.8 },
+    { url: `${baseUrl}/books/the-imagined-life/sleep-stages-explained`, lastModified: new Date('2026-07-22'), changeFrequency: 'monthly', priority: 0.8 },
 
     // POLICY DIRECTIVES (Five Platform Seeds)
     { url: `${baseUrl}/policy/nutrient-density-standard`, lastModified: new Date('2026-06-02'), changeFrequency: 'monthly', priority: 0.7 },
