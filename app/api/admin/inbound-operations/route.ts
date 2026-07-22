@@ -18,7 +18,7 @@ export async function GET(request: Request) {
   const ledger = createAgentInquiryLedger()
   if (!ledger) return databaseError(undefined)
   const { data, error } = await ledger.from('inbound_submissions')
-    .select('public_id,offer_id,requester_name,requester_email,requester_organization,decision,question,deadline,context,agent,qualification_status,qualification_reasons,operations_status,reviewer_note,reviewed_at,revenue_opportunity_id,created_at')
+    .select('public_id,offer_id,requester_name,requester_email,requester_organization,decision,question,deadline,context,agent,qualification_status,qualification_reasons,inquiry_class,referral_source,referral_detail,utm_source,utm_medium,utm_campaign,operations_status,reviewer_note,reviewed_at,revenue_opportunity_id,created_at')
     .order('created_at', { ascending: true }).limit(100)
   if (error) return databaseError(error.code)
   const opportunityIds = (data ?? []).map((item) => item.revenue_opportunity_id).filter((id): id is string => typeof id === 'string')
