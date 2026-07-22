@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import Link from 'next/link'
 import BookEndpointCTA from '@/components/BookEndpointCTA'
 import MarkdownArticle from '@/components/MarkdownArticle'
 import { parseMarkdownBlocks, readBookMarkdown } from '@/lib/content'
@@ -75,6 +76,8 @@ export default function TheSyntheticSelfHub() {
             This book follows that idea from the machinery of training through energy, hallucination, alignment, work, and responsibility. It is written for curious non-specialists who want the mechanism without the mythology—and the human consequences without the slogans.
           </p>
         </section>
+
+        <Link href="/books/the-synthetic-self/read" className="mt-10 inline-block bg-white px-7 py-4 font-mono text-xs font-bold uppercase tracking-widest text-black transition-colors hover:bg-zinc-200">Read by chapter ↗</Link>
 
         <BookEndpointCTA title="The Synthetic Self" placement="top" />
 

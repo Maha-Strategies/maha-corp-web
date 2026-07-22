@@ -2,6 +2,7 @@ import { MetadataRoute } from 'next'
 import { MAHA_SITE_URL } from '@/lib/entity'
 import { getPublicContentPublicationSitemapRows } from '@/lib/public-content-publications'
 import { unfinishedSpeciesSections } from '@/lib/unfinished-species'
+import { openBookEditions } from '@/lib/open-book-editions'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = MAHA_SITE_URL
@@ -333,5 +334,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${baseUrl}/books/the-unfinished-species/read`, lastModified: new Date('2026-07-22'), changeFrequency: 'monthly' as const, priority: 0.9 },
     ...unfinishedSpeciesSections.map((section) => ({ url: `${baseUrl}/books/the-unfinished-species/read/${section.slug}`, lastModified: new Date('2026-07-22'), changeFrequency: 'monthly' as const, priority: 0.8 })),
   ]
-  return [...staticPages, ...unfinishedSpeciesReader, ...published.map((publication) => ({ url: `${baseUrl}/insights/${publication.slug}`, lastModified: new Date(publication.updated_at), changeFrequency: 'monthly' as const, priority: 0.7 }))]
+  const otherOpenBookReaders = Object.values(openBookEditions).flatMap((book) => [
+    { url: `${baseUrl}/books/${book.slug}/read`, lastModified: new Date('2026-07-22'), changeFrequency: 'monthly' as const, priority: 0.9 },
+    ...book.sections.map((section) => ({ url: `${baseUrl}/books/${book.slug}/read/${section.slug}`, lastModified: new Date('2026-07-22'), changeFrequency: 'monthly' as const, priority: 0.8 })),
+  ])
+  return [...staticPages, ...unfinishedSpeciesReader, ...otherOpenBookReaders, ...published.map((publication) => ({ url: `${baseUrl}/insights/${publication.slug}`, lastModified: new Date(publication.updated_at), changeFrequency: 'monthly' as const, priority: 0.7 }))]
 }

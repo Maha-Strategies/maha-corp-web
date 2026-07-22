@@ -107,13 +107,13 @@ export default function TheOrbitalMindHub() {
 
         <section className="mt-16 border border-indigo-900/50 bg-indigo-950/20 p-7 sm:p-10 relative overflow-hidden">
           <div className="absolute top-0 left-0 h-full w-1 bg-indigo-500" />
-          <p className="font-mono text-xs text-indigo-300 tracking-widest uppercase mb-4">[ Read now ]</p>
-          <h2 className="text-2xl sm:text-3xl font-light text-white mb-4">Chapter 1: The Governing Center</h2>
+          <p className="font-mono text-xs text-indigo-300 tracking-widest uppercase mb-4">[ Complete edition ]</p>
+          <h2 className="text-2xl sm:text-3xl font-light text-white mb-4">Read the full book</h2>
           <p className="text-zinc-400 leading-relaxed max-w-2xl mb-7">
-            The function of self-regulation and the holding of a center: what the evidence supports, where it stops, and what it means to govern a system of competing claims.
+            The full manuscript is available online: the framework, all five parts, and the formal appendices that test its limits.
           </p>
-          <Link href="/books/the-orbital-mind/the-governing-center" className="inline-block bg-white text-black font-mono font-bold text-xs tracking-widest uppercase px-7 py-4 hover:bg-zinc-200 transition-colors">
-            Read Chapter 1 ↗
+          <Link href="/books/the-orbital-mind/read" className="inline-block bg-white text-black font-mono font-bold text-xs tracking-widest uppercase px-7 py-4 hover:bg-zinc-200 transition-colors">
+            Read the complete edition ↗
           </Link>
           <BookReaderPaths
             guideHref="/books/the-orbital-mind/what-is-executive-function"
@@ -130,9 +130,27 @@ export default function TheOrbitalMindHub() {
               <p className="font-mono text-xs text-indigo-300 tracking-widest uppercase mb-3">[ Table of contents ]</p>
               <h2 className="text-2xl sm:text-3xl font-light text-white">Read yourself by collision, not by type.</h2>
             </div>
-            <p className="font-mono text-xs text-zinc-500 tracking-widest uppercase">One chapter available · further chapters forthcoming</p>
+            <p className="font-mono text-xs text-zinc-500 tracking-widest uppercase">Five parts · formal appendices · full text</p>
           </div>
-          <BookChapterList parts={parts} availableChapter={{ title: 'The Governing Center', href: '/books/the-orbital-mind/the-governing-center' }} />
+          <BookChapterList parts={parts} availableChapters={{
+            'The Governing Center': '/books/the-orbital-mind/read/the-governing-center',
+            'The Body and Its Rhythms': '/books/the-orbital-mind/read/body-and-rhythms',
+            'Structure and Limit': '/books/the-orbital-mind/read/structure-and-limit',
+            'Thought and Attention': '/books/the-orbital-mind/read/thought-and-attention',
+            'Desire and Value': '/books/the-orbital-mind/read/desire-and-value',
+            'Agency and Boundary': '/books/the-orbital-mind/read/agency-and-boundary',
+            'Responsibility and Coordination': '/books/the-orbital-mind/read/responsibility-and-coordination',
+            'Disruption and Novelty': '/books/the-orbital-mind/read/disruption-and-novelty',
+            'Ambiguity and Imagination': '/books/the-orbital-mind/read/ambiguity-and-imagination',
+            'Depth and Grief': '/books/the-orbital-mind/read/depth-and-grief',
+            'Orientation Toward the Unseen': '/books/the-orbital-mind/read/orientation-toward-the-unseen',
+            'The Five Collisions': '/books/the-orbital-mind/read/five-collisions',
+            'The Diagnostic Protocol': '/books/the-orbital-mind/read/orbital-dynamics',
+            'The Alloy': '/books/the-orbital-mind/read/orbital-dynamics',
+            'The Formal Model': '/books/the-orbital-mind/read/formal-model',
+            'The Cross-Scale Conjecture': '/books/the-orbital-mind/read/maha-invariance',
+            'Predictions That Could Lose': '/books/the-orbital-mind/read/predictions-that-could-lose',
+          }} />
         </section>
 
         <section className="mt-20 border-t border-zinc-800 pt-10 max-w-3xl">
