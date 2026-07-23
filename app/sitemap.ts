@@ -289,6 +289,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.8,
     },
     {
+      url: `${baseUrl}/intelligence/briefs/smartphone-ap-fan-out-substrate-thickness`,
+      lastModified: new Date('2026-07-23'),
+      changeFrequency: 'monthly',
+      priority: 0.8,
+    },
+    {
       url: `${baseUrl}/intelligence/briefs/ai-semiconductor-slt-practices`,
       lastModified: new Date('2026-07-09'),
       changeFrequency: 'monthly',

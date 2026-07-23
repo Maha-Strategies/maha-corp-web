@@ -146,6 +146,14 @@ const BRIEFS: BriefData[] = [
   },
   {
     group: 'HARDWARE & INFRASTRUCTURE',
+    category: 'ADVANCED.PACKAGING',
+    status: 'ACTIVE',
+    title: 'Smartphone AP Packaging: Fan-Out and Substrate-Thickness Decisions',
+    description: 'A decision framework for fan-out, flip-chip, and package-on-package architectures for high-end smartphone application processors.',
+    href: '/intelligence/briefs/smartphone-ap-fan-out-substrate-thickness',
+  },
+  {
+    group: 'HARDWARE & INFRASTRUCTURE',
     category: 'HARDWARE.TESTING',
     status: 'ACTIVE',
     title: 'AI Semiconductor SLT Practices and Test Sockets',
