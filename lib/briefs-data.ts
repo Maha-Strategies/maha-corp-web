@@ -1173,30 +1173,176 @@ export const BRIEFS: Brief[] = [
   },
   {
     slug: 'upstream-semiconductor-cvc-best-practices',
-    title: 'Best Practices for Upstream Semiconductor CVCs',
-    kicker: 'CORE.CORPORATE.VENTURE',
-    description: 'Research on the investment processes, organizational structures, execution setups, and evaluation systems of CVCs managed by semiconductor materials, components, and equipment manufacturers.',
+    title: 'Designing a CVC for Upstream Semiconductor Companies',
+    kicker: 'CORPORATE VENTURE // SEMICONDUCTOR ECOSYSTEM // STRATEGY',
+    description: 'A decision framework for corporate venture activity by semiconductor materials, components, consumables, and equipment companies: how to define strategic value, preserve founder trust, and measure industrial learning.',
     status: 'ACTIVE',
     datePublished: '2026-07-09',
-    intro: 'We are currently conducting research on the investment processes, organizational structures, execution setups, and evaluation systems of CVCs and minority investments managed by semiconductor materials, components, consumables, and equipment manufacturers. In particular, this research excludes CVCs operated by semiconductor device manufacturers (e.g., Samsung Ventures, Intel Capital, NVIDIA) and focuses on best practices among materials, components, consumables, and equipment manufacturers.',
+    dateModified: '2026-07-23',
+    intro: 'This is an operating-model brief for materials, components, consumables, and capital-equipment suppliers—not semiconductor device makers. It does not prescribe a universal fund structure or claim that every company requires the same locations, sectors, or investment pace. The central question is narrower: how can an upstream supplier invest in emerging technology without turning strategic access into a substitute for disciplined underwriting or founder trust?',
     sections: [
       {
         level: 2,
-        heading: '01. The Ideal CVC Model: Objectives and Execution',
+        heading: '01. Start With a Strategic Option, Not a Deal Quota',
         paragraphs: [
-          'A best-in-class upstream semiconductor CVC operates on a dual mandate where strategic return is the primary driver, but financial viability is required to validate the technology’s market fit. By accelerating “Lab to Fab” the primary objective is to help deep-tech startups validate high-performance devices and scale faster by providing access to the parent company’s global fab infrastructure, the materials engineering expertise, and supply chain.',
-          'Semi-conductor innovation isn’t isolated. It is deeply concentrated in specific global hubs, and the execution setup should reflect this reality. Establishing a physical presence in Silicon Valley, Taiwan, South Korea, and Europe is non-negotiable.'
+          'An upstream CVC should begin with a small set of explicit strategic options: a materials transition worth learning early, a process bottleneck that could reshape a customer segment, a new manufacturing interface, or a supply-chain capability that may become critical before the parent can build it internally. A cheque is then one instrument for gaining lawful, bounded exposure to that option; it is not proof that the option is real.',
+          'Financial discipline still matters. A commercially credible startup is more likely to survive long enough for an industrial relationship to matter, while a strategic rationale keeps the CVC from becoming an unfocused financial portfolio. The practical test is whether the parent can name the hypothesis, the permitted form of collaboration, the decision that the investment may inform, and the condition under which it will stop investing.'
+        ],
+        table: {
+          caption: 'Investment thesis test',
+          header: ['Question', 'A useful answer'],
+          rows: [
+            ['What may change?', 'A material, process, component, tool, or production constraint with a defined time horizon.'],
+            ['Why this company?', 'A specific technical or commercial advantage—not merely adjacency to the parent.'],
+            ['What can the parent offer?', 'A controlled evaluation path, technical feedback, customer access, or manufacturing insight with clear boundaries.'],
+            ['What would disprove the thesis?', 'A technical, market, regulatory, or conflict signal that ends follow-on support.']
+          ]
+        }
+      },
+      {
+        level: 2,
+        heading: '02. Separate Sponsorship From Confidential Information',
+        paragraphs: [
+          'The parent needs senior sponsorship, but an investment team cannot function as an informal channel for a business unit to obtain a startup’s confidential roadmap. The operating charter should say who may see diligence, when technical teams can engage, how conflicts are declared, and what information is prohibited from crossing into product, sourcing, or competitive decision-making.',
+          'A clean boundary serves both sides. It gives founders a predictable route to collaborate without assuming their intellectual property will be absorbed, and it gives the parent a defensible process for avoiding information contamination. Independence is therefore not isolation: the CVC can convene experts and surface approved learning while preserving the limits of its mandate.'
+        ],
+        listItems: [
+          'Investment committee: owns capital allocation, valuation discipline, conflicts, and follow-on decisions.',
+          'Strategic sponsor: owns the business question and commits only the resources explicitly approved for an evaluation.',
+          'Technical review: assesses feasibility under an agreed disclosure scope; it does not receive unrestricted portfolio-company information.',
+          'Legal and compliance: records information boundaries, competition risks, export-control constraints, and any related-party concerns.'
         ]
       },
       {
         level: 2,
-        heading: '02. Evaluation and Organizational Structure',
+        heading: '03. Build a Networked Execution Model',
         paragraphs: [
-          'Success is measured by the number of Proofs of Concept initiated. Joint Development Agreements signed, startup technologies successfully integrated into the parent’s product lines, and the volume of early market intelligence delivered to internal business units.',
-          'To attract top-tier founders who might be wary of sharing proprietary deep-tech IP with a corporate behemoth, the organizational structure must balance strategic alignment with strict autonomy. Leading CVCs operate with a formal information firewall separating the investment arm from the parent’s business units, ensuring that a startup’s IP is protected from information contamination and prevents the parent company from cannibalizing the startup’s ideas.'
+          'Semiconductor innovation is geographically concentrated, but “global presence” should not mean duplicating a full team in every hub. The appropriate footprint follows the thesis: proximity to venture formation, advanced research, customer fabs, packaging ecosystems, or strategic suppliers. Silicon Valley, Taiwan, South Korea, Europe, and Japan can each matter for different reasons; none is a universal substitute for a clear investment mandate.',
+          'A lean model combines a central investment team with named external networks, local technical partners, and a repeatable path for diligence visits and proof-of-concept governance. The measure of a hub is not office count. It is whether the team receives relevant opportunities early enough and can turn a promising introduction into a properly scoped technical and commercial decision.'
+        ],
+        blockquote: 'The useful CVC is close enough to learn quickly, but structured enough that a promising pilot does not become an unpriced commitment.'
+      },
+      {
+        level: 2,
+        heading: '04. Treat the Investment Process as an Industrial Stage Gate',
+        paragraphs: [
+          'Pre-approved technology domains can speed decisions when they are hypotheses rather than blank cheques. Each domain should have an owner, a definition of strategic relevance, a preferred stage range, known conflicts, and a maximum initial exposure. Opportunities outside the thesis may still be logged as market intelligence, but should not be forced through an investment process merely to maintain activity.',
+          'After investment, collaboration needs its own gate. A technical trial, joint-development agreement, commercial qualification, and product integration are different commitments with different risks. Conflating them creates false progress: a large count of meetings or pilots can conceal that no decision owner, data-rights arrangement, or route to scale has been agreed.'
+        ]
+      },
+      {
+        level: 2,
+        heading: '05. Score Learning, Conversion, and Capital Separately',
+        paragraphs: [
+          'A portfolio dashboard should not rely on deal count or proof-of-concept count alone. Early experiments can be valuable learning even when they do not convert, but the dashboard should make that distinction visible. Track the quality of the strategic hypothesis, progress through the collaboration gate, business-unit ownership, the value of validated learning, and financial exposure as separate fields.',
+          'Incentives should reward well-documented decisions and timely termination as well as successful integrations. If teams are paid only for launches or portfolio mark-ups, they will tend to overstate weak signals. A balanced scorecard makes it safer to stop a misaligned pilot and more credible to escalate a genuinely useful technology.'
+        ],
+        table: {
+          caption: 'Portfolio review scorecard',
+          header: ['Measure', 'What it reveals', 'Common misuse to avoid'],
+          rows: [
+            ['Thesis coverage', 'Whether capital maps to a stated strategic option.', 'Counting broad themes without an accountable owner.'],
+            ['Qualified evaluations', 'Whether trials have a scope, decision owner, and stop condition.', 'Treating any meeting or demo as a proof of concept.'],
+            ['Validated learning', 'What changed in a product, sourcing, or technology decision.', 'Calling generic market updates strategic value.'],
+            ['Conversion quality', 'Which evaluations progressed to an appropriately governed agreement or adoption path.', 'Equating every JDA with revenue or integration.'],
+            ['Financial resilience', 'Whether reserves, concentration, and follow-on choices remain disciplined.', 'Using strategic relevance to excuse weak underwriting.']
+          ]
+        }
+      }
+    ],
+    protocolPatch: {
+      title: 'Maha Operating Note // Upstream CVC Design',
+      paragraphs: [
+        'Design the venture arm as a bounded learning system: define the industrial option, separate decision rights from confidential information, give every evaluation a named owner and stop condition, and report strategic learning separately from financial performance. A minority investment can create access; it does not create entitlement to a startup’s technology or guarantee a route to production.'
+      ],
+      emphasis: 'Use this framework to structure diligence. Apply company-specific legal, technical, competition, and investment review before acting.'
+    }
+  },
+  {
+    slug: 'european-compressor-suppliers-semiconductor-utilities',
+    title: 'European Compressor Suppliers for Semiconductor Utility Systems',
+    kicker: 'SEMICONDUCTOR UTILITIES // COMPRESSED AIR // SUPPLIER SCREENING',
+    description: 'A clean-room supplier-screening framework for European compressor and package providers considered for semiconductor air-separation and clean-dry-air utility systems.',
+    status: 'ACTIVE',
+    datePublished: '2026-07-23',
+    intro: 'This brief separates the equipment question from the vendor-marketing question. Air-separation units (ASUs) and clean dry air (CDA) systems have different process duties, failure modes, and evidence requirements. A European supplier may be a credible candidate for a component, compressor train, purification package, or turnkey utility scope without being qualified for every semiconductor application. Revenue estimates and claimed sector deployments for privately held firms should be verified directly in diligence, not treated as a public ranking.',
+    sections: [
+      {
+        level: 2,
+        heading: '01. Begin With the Utility Boundary',
+        paragraphs: [
+          'An ASU converts ambient air into industrial gases through a defined separation process; its compressor train is only one part of a larger system involving purification, heat exchange, controls, storage, and site integration. CDA is a separate utility problem: compressed air must meet a declared condition at the point of use, including contamination, moisture, particles, pressure stability, and redundancy requirements. A shortlist that starts with the word “compressor” can miss the actual system owner and qualification risk.',
+          'The first procurement document should therefore state the duty rather than ask for a generic high-purity solution. Define gas or air composition, flow and pressure profile, uptime target, maintenance window, contamination specification, installed environment, electrical constraints, and whether the supplier is expected to provide an equipment train, a packaged subsystem, or only a compressor element.'
+        ],
+        table: {
+          caption: 'Scope before supplier selection',
+          header: ['System question', 'ASU focus', 'CDA focus'],
+          rows: [
+            ['Primary duty', 'Gas separation and delivery within a defined plant process.', 'Reliable clean compressed-air supply at required point-of-use conditions.'],
+            ['Critical interface', 'Integration with purification, cold-box or separation technology, storage, and distribution.', 'Drying, filtration, distribution, monitoring, and contamination control.'],
+            ['Compressor question', 'Process-gas or feed-air duty, operating envelope, and train integration.', 'Oil-free air architecture, turndown, control, and downstream treatment.'],
+            ['Qualification proof', 'Reference scope, performance guarantees, controls, and commissioning support.', 'Measured air-quality performance at the required location and operating condition.']
+          ]
+        }
+      },
+      {
+        level: 2,
+        heading: '02. Use Capability Lanes Instead of a Single Vendor List',
+        paragraphs: [
+          'The supplier universe is easier to evaluate when divided into capability lanes. A process-compressor manufacturer may be strong in custom high-pressure or specialty-gas duty but not offer the purification and controls package required for a CDA station. A packaged-equipment integrator may provide a well-engineered skid while relying on another company’s compression core. Both can be suitable, provided the buyer knows who owns performance, service, documentation, and failure resolution.',
+          'For a European market scan, screen candidates in four lanes: process-gas and reciprocating compression; oil-free rotary or screw air compression; skid and balance-of-plant packaging; and purification, monitoring, and distribution integration. Do not use headquarters or an estimated revenue threshold as a proxy for technical qualification. They are filtering attributes that require current, company-specific confirmation.'
+        ],
+        listItems: [
+          'Compression core: operating envelope, lubrication architecture, materials compatibility, control range, vibration, and maintainability.',
+          'Package integrator: mechanical and electrical design authority, instrumentation, control philosophy, documentation, factory acceptance testing, and field commissioning.',
+          'Purity chain: filtration, drying, adsorption or other treatment, point-of-use monitoring, and alarm response.',
+          'Lifecycle partner: installed-base evidence, local service capacity, spare-parts availability, remote support, and outage-response commitments.'
+        ]
+      },
+      {
+        level: 2,
+        heading: '03. Interpret Oil-Free Claims Precisely',
+        paragraphs: [
+          '“Oil-free” describes an important part of contamination control, not the finished utility specification. A compressor can use an oil-free compression path while the delivered air still depends on inlet conditions, piping, condensate management, dryers, filters, distribution integrity, instruments, and maintenance. The relevant question is what condition the system guarantees at the defined measurement point and how that condition is sustained through lifecycle operation.',
+          'Procurement should request the applicable test method, measurement location, operating range, treatment design, monitoring architecture, calibration approach, and exception handling. A claim of a clean compressor should never replace a documented point-of-use quality requirement.'
+        ],
+        blockquote: 'For semiconductor utilities, the decisive evidence is not a product category label; it is a controlled specification, a test record, and a serviceable path for keeping the delivered utility within limits.'
+      },
+      {
+        level: 2,
+        heading: '04. Qualify Package Responsibility Before Comparing Price',
+        paragraphs: [
+          'Packaged systems are attractive because they can reduce interface management, but only when responsibility is unambiguous. The buyer should identify who owns the process design, compressor selection, filtration and drying train, PLC or controls integration, FAT protocol, site acceptance, warranty boundary, and remedy if air quality or availability misses the agreed target.',
+          'A useful request-for-information asks for a reference project that is comparable in duty and service model—not merely a similarly sized compressor. It should also ask what is standard, what is engineered-to-order, which subsystems are subcontracted, and whether the supplier has authority to modify each of them during commissioning or a later reliability retrofit.'
+        ],
+        table: {
+          caption: 'Diligence questions for a packaged offer',
+          header: ['Question', 'Why it matters'],
+          rows: [
+            ['Who is the single performance counterparty?', 'Prevents gaps between compressor, treatment, controls, and installer responsibilities.'],
+            ['What is measured during FAT and SAT?', 'Shows whether the acceptance plan actually tests the promised utility condition.'],
+            ['Which elements are third-party supplied?', 'Clarifies support, warranty, obsolescence, and spare-parts exposure.'],
+            ['What happens after an excursion?', 'Tests alarm, isolation, recovery, root-cause analysis, and service response.'],
+            ['What reference is comparable?', 'Avoids inferring semiconductor readiness from unrelated industrial use.']
+          ]
+        }
+      },
+      {
+        level: 2,
+        heading: '05. Build a Shortlist That Can Survive Verification',
+        paragraphs: [
+          'A first-pass European screen may include established process-compression, oil-free compressed-air, and package-engineering specialists. The purpose is to generate diligence candidates, not to declare an endorsed vendor roster. Public product information may demonstrate that a company offers a relevant compressor technology or industrial-gas capability; it does not on its own demonstrate a particular semiconductor installation, revenue band, or willingness to carry turnkey system responsibility.',
+          'Use a two-step process. First, create a longlist by capability lane and region. Second, issue a controlled qualification questionnaire and remove candidates that cannot provide current evidence for the exact duty, standards, service geography, performance guarantee, and contractual responsibility required. That approach is more defensible than ranking private companies from estimated revenue figures.'
         ]
       }
-    ]
+    ],
+    protocolPatch: {
+      title: 'Maha Supplier-Screening Note // Semiconductor Utility Systems',
+      paragraphs: [
+        'Treat named companies as research leads only. Before awarding work, verify legal entity, current ownership, manufacturing location, financial capacity, relevant installed base, application fit, specification compliance, project references, and service commitments directly with the supplier and through the buyer’s normal technical, commercial, and legal review.'
+      ],
+      emphasis: 'Do not infer semiconductor-grade qualification, a revenue threshold, or turnkey responsibility from a general compressor catalogue.'
+    }
   },
   {
     slug: 'ai-semiconductor-slt-practices',

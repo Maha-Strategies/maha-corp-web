@@ -278,7 +278,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
     {
       url: `${baseUrl}/intelligence/briefs/upstream-semiconductor-cvc-best-practices`,
-      lastModified: new Date('2026-07-09'),
+      lastModified: new Date('2026-07-23'),
+      changeFrequency: 'monthly',
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/intelligence/briefs/european-compressor-suppliers-semiconductor-utilities`,
+      lastModified: new Date('2026-07-23'),
       changeFrequency: 'monthly',
       priority: 0.8,
     },
