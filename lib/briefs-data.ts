@@ -1345,6 +1345,91 @@ export const BRIEFS: Brief[] = [
     }
   },
   {
+    slug: 'smartphone-ap-fan-out-substrate-thickness',
+    title: 'Smartphone AP Packaging: Fan-Out and Substrate-Thickness Decisions',
+    kicker: 'ADVANCED PACKAGING // MOBILE APPLICATION PROCESSORS // YIELD',
+    description: 'A decision framework for selecting fan-out, flip-chip, and package-on-package architectures for high-end smartphone application processors—and for qualifying thin substrate designs without treating yield estimates as universal.',
+    status: 'ACTIVE',
+    datePublished: '2026-07-23',
+    intro: 'High-end smartphone application-processor packaging is not a binary contest between fan-out wafer-level packaging (FOWLP) and flip-chip chip-scale packaging (FC-CSP). Both can be used within a package-on-package (PoP) architecture, and both have active manufacturing ecosystems. The relevant decision is whether the chosen architecture meets electrical, thermal, form-factor, test, yield, capacity, and unit-economics requirements for one defined product—not which technology has the more compelling label.',
+    sections: [
+      {
+        level: 2,
+        heading: '01. Separate the Architecture Choices',
+        paragraphs: [
+          '“Fan-out,” “flip-chip,” “FC-CSP,” and “PoP” describe different layers of an architecture. Fan-out creates redistribution outside a die boundary, typically in a reconstituted package structure. Flip-chip describes die-to-package interconnection. FC-CSP commonly uses a substrate to route a flip-chip die. PoP stacks a top package, often memory, on a bottom package. A viable smartphone AP can combine these ideas in more than one way.',
+          'That distinction matters because a question about whether FOWLP is in volume production cannot by itself answer whether it is the appropriate bottom package for a particular AP. The design team must determine I/O density, memory interface, power delivery, thermals, z-height, board-level reliability, test coverage, and the availability of a production-ready flow.'
+        ],
+        table: {
+          caption: 'Architecture vocabulary',
+          header: ['Term', 'Decision it actually describes'],
+          rows: [
+            ['Fan-out WLP', 'How redistribution and external I/O extend beyond the die area.'],
+            ['Flip-chip CSP', 'How a die connects to a package substrate and routes to the board.'],
+            ['Package-on-package', 'How separately qualified packages are vertically assembled, often logic below memory.'],
+            ['Substrate-less or substrate-based', 'Where routing, mechanical support, and integration risk are carried.']
+          ]
+        }
+      },
+      {
+        level: 2,
+        heading: '02. Fan-Out Is a Manufacturing Platform, Not a Single Supply Chain',
+        paragraphs: [
+          'Public OSAT portfolios demonstrate that fan-out packaging is commercially deployed across mobile-oriented functions such as RF, baseband, PMIC, codec, and PoP configurations. Foundries and integrated manufacturers also offer advanced fan-out flows. It is therefore too broad to say that independent packaging providers have no FOWLP production record.',
+          'The harder question is whether a supplier has a proven flow for the exact combination of die size, I/O, memory stack, RDL design rules, test sequence, assembly process, reliability target, and forecast volume. A technology platform may be mature in one mobile component category yet still require meaningful development work for a flagship AP programme. Procurement should distinguish a published platform, a qualified reference design, and a production commitment.'
+        ],
+        listItems: [
+          'Ask for the highest-risk package attribute that has already reached volume: die size, I/O count, RDL layers and line/space, PoP stack, or thermal load.',
+          'Request the test and known-good-die strategy before committing to a stacked architecture.',
+          'Confirm substrate, molding, RDL, assembly, and test capacity as a connected production flow—not as individual supplier claims.',
+          'Compare total cost after yield, test, memory-stack handling, and launch-risk reserve; package unit price alone is not the decision.'
+        ]
+      },
+      {
+        level: 2,
+        heading: '03. Do Not Confuse RDL Thickness With Package or Substrate Thickness',
+        paragraphs: [
+          'A statement such as “80 μm versus 100–120 μm RDL thickness” needs a cross-section before it can be evaluated. It may refer to total package height, an organic substrate thickness, a core or build-up construction, a die thickness, or another stack dimension. Redistribution-layer copper and dielectric thickness are separate variables. Treating all of them as one thickness obscures the actual failure mechanism.',
+          'A thinner construction can create system value by reducing z-height or changing electrical paths, but it can also change handling stiffness, warpage behaviour, registration margin, via formation, assembly stress, and board-level reliability. The engineering question is not whether thinner is inherently better; it is whether the selected stack maintains process margin and field reliability at the planned volume.'
+        ],
+        blockquote: 'Before requesting a thinner package, require a labelled cross-section, the functional reason for every thickness reduction, and the corresponding process and reliability evidence.'
+      },
+      {
+        level: 2,
+        heading: '04. Model Yield as a Distribution, Not a Single Market Percentage',
+        paragraphs: [
+          'Yield cannot be responsibly inferred from a universal transition such as 110 μm to 80 μm. It depends on the exact stack-up, panel or wafer process, die value, RDL geometry, material set, handling flow, assembly equipment, reflow conditions, inspection coverage, and reliability criteria. A published percentage without this context can lead a programme team to price the wrong risk.',
+          'The right approach separates substrate fabrication, package assembly, electrical test, and reliability fallout. For each stage, record baseline yield, proposed-process yield, confidence interval, rework or scrap path, cost of lost silicon, and the evidence source. The decision should then be based on an expected-cost and launch-risk model, not on a generic claim that thinning causes a stated percentage loss.'
+        ],
+        table: {
+          caption: 'Thin-stack qualification record',
+          header: ['Stage', 'Evidence to request', 'Decision risk'],
+          rows: [
+            ['Substrate or RDL fabrication', 'Registration, via, trace, warpage, handling, and inspection data for the proposed stack.', 'Process margin and material yield.'],
+            ['Assembly', 'Die attach, bump or interconnect, molding, reflow, and package-warp data.', 'Known-good die exposure and assembly fallout.'],
+            ['Electrical test', 'Coverage, correlation, retest behaviour, and failure-analysis route.', 'False escapes or needless scrap.'],
+            ['Board-level reliability', 'Thermal cycling, drop or bend, moisture, and use-condition testing relevant to the product.', 'Field failure and warranty exposure.']
+          ]
+        }
+      },
+      {
+        level: 2,
+        heading: '05. Choose the Package by the Constraint That Cannot Move',
+        paragraphs: [
+          'For one programme the immovable constraint may be z-height; for another it may be memory integration, power integrity, testability, supplier capacity, or a narrow launch schedule. The architecture review should explicitly rank those constraints and show which package option fails first. This makes trade-offs visible and prevents a packaging choice from being driven by a single attractive attribute such as thinness.',
+          'A mature decision package contains an architecture comparison, cross-sections, electrical and thermal assumptions, test and known-good-die plan, yield model, reliability plan, supplier readiness review, capacity path, and a decision owner for every unresolved risk. That is the basis for selecting a fan-out or substrate-based route—not a generalised view of which approach is “mass produced.”'
+        ]
+      }
+    ],
+    protocolPatch: {
+      title: 'Maha Packaging Decision Note // Smartphone AP',
+      paragraphs: [
+        'Treat FOWLP, FC-CSP, and PoP as architectural building blocks. Confirm the exact package construction, supplier process, qualified reference scope, yield evidence, and board-level reliability requirements before carrying a technology claim into a product or sourcing decision.'
+      ],
+      emphasis: 'Do not publish or price universal yield-loss percentages without a traceable stack-up, baseline, test method, and decision context.'
+    }
+  },
+  {
     slug: 'ai-semiconductor-slt-practices',
     title: 'AI Semiconductor SLT Practices and Test Sockets',
     kicker: 'CORE.HARDWARE.TESTING',
