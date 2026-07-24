@@ -1430,6 +1430,93 @@ export const BRIEFS: Brief[] = [
     }
   },
   {
+    slug: 'smartphone-oem-peripheral-sales-mix',
+    title: 'Smartphone OEM Peripheral Mix: A Five-Year Scenario Framework',
+    kicker: 'CONSUMER HARDWARE // ECOSYSTEM ECONOMICS // PRODUCT MIX',
+    description: 'A normalized framework for assessing how tablets, PCs, wearables, smart glasses, and adjacent hardware may change within smartphone manufacturers’ non-phone device portfolios.',
+    status: 'ACTIVE',
+    datePublished: '2026-07-24',
+    intro: 'A pooled “peripheral and adjacent device” sales mix is useful for scenario planning, but it is not a reported market metric. Smartphone OEMs differ radically in product scope and financial disclosure: some separately report tablets and PCs, some combine wearables with home and accessories, while others include extensive AIoT and appliance portfolios. This brief therefore treats any 100% allocation as an analytical normalization—a consistent way to compare strategic direction—not an assertion about the companies’ reported revenue.',
+    sections: [
+      {
+        level: 2,
+        heading: '01. Define the Denominator Before Forecasting the Mix',
+        paragraphs: [
+          'The first decision is what counts as adjacent hardware. A narrow definition can include tablets, PCs, watches, hearables, and glasses. A broad definition may also include televisions, smart-home products, appliances, routers, displays, or connected vehicles. The mix changes materially depending on that boundary, especially for diversified companies whose non-phone business extends well beyond personal computing.',
+          'Use a consistent denominator for the cohort and keep service revenue outside it unless the study is explicitly about ecosystem profit pools. This avoids comparing a hardware-only category at one company with a hardware-plus-services or appliances-inclusive category at another.'
+        ],
+        table: {
+          caption: 'Normalization choices',
+          header: ['Category', 'Include when', 'Do not infer'],
+          rows: [
+            ['Tablets', 'The OEM sells branded tablets and reports or estimates hardware revenue consistently.', 'That a unit share equals a revenue share.'],
+            ['PCs and laptops', 'The OEM has a material, identifiable computing portfolio.', 'That every smartphone OEM participates equally.'],
+            ['Wearables and hearables', 'Watches, bands, earbuds, and related personal devices are in scope.', 'That public reporting separates each subcategory.'],
+            ['Smart glasses', 'The study defines whether audio/AI glasses and display AR devices are grouped together.', 'That a prototype or launch announcement creates material revenue.'],
+            ['Other ecosystem hardware', 'The denominator explicitly includes home, appliance, and IoT categories.', 'That the category is comparable across all OEMs.']
+          ]
+        }
+      },
+      {
+        level: 2,
+        heading: '02. Start With Three Scenarios, Not One Point Estimate',
+        paragraphs: [
+          'A five-year product-mix view should be expressed as a range with a named scenario. In a base case, tablets and PCs may grow more slowly than recurring-use personal devices, leaving their mix share under pressure even if revenue is stable. In an ecosystem-expansion case, watches, hearables, home devices, and connected accessories gain share through attach, replacement, and wider category participation. In a spatial-computing upside case, glasses become meaningful only if usability, pricing, distribution, and sustained consumer demand all clear their gates.',
+          'This formulation is more honest than publishing a single forecast such as a fixed smart-glasses share. It distinguishes a category that is currently small from one that has proven revenue scale, and it makes the assumptions available for review.'
+        ],
+        table: {
+          caption: 'Illustrative direction of travel—not a reported forecast',
+          header: ['Category', 'Base case', 'Upside case', 'Key dependency'],
+          rows: [
+            ['Tablets', 'Stable to modestly lower mix share as replacement cycles remain long.', 'New productivity or education demand lifts value mix.', 'Replacement cadence and ASP.'],
+            ['PCs and laptops', 'Mixed; heavily dependent on which OEMs are in the cohort.', 'Premium AI-capable devices raise ASP and attach.', 'Portfolio participation and upgrade demand.'],
+            ['Smart glasses', 'Small mix share from a low base.', 'Material new category if daily utility and comfort are proven.', 'Consumer adoption, price, battery, and developer ecosystem.'],
+            ['Wearables and hearables', 'Potentially resilient or rising share through attach and replacement.', 'Health, audio, and AI features improve willingness to pay.', 'Retention, regulatory pathway, and ASP.'],
+            ['Other ecosystem hardware', 'Highly OEM-specific; may expand for diversified AIoT players.', 'Home and connected-device ecosystem broadens materially.', 'Definition of scope and cross-category distribution.']
+          ]
+        }
+      },
+      {
+        level: 2,
+        heading: '03. Tablets and PCs Are Different Forms of Maturity',
+        paragraphs: [
+          'Tablet demand is often driven by replacement, education, media, and productivity use cases. Its revenue share can decline even when sales are healthy if faster-growing accessory categories expand the denominator. PCs are even less suitable for a universal forecast: some smartphone OEMs have substantial laptop portfolios, while others have little or no comparable business. A cohort average should show this participation asymmetry rather than treat every brand as a mini-version of the same ecosystem.',
+          'The relevant indicators are active installed base, replacement interval, ASP, channel inventory, attach to phone-led services, and product overlap with large-screen phones or other computing devices. These variables are more informative than a generic assertion that one form factor will “replace” another.'
+        ]
+      },
+      {
+        level: 2,
+        heading: '04. Wearables, Hearables, and Glasses Need Different Gates',
+        paragraphs: [
+          'Watches and hearables can benefit from frequent use, ecosystem attachment, and replacement cycles that differ from tablets and PCs. Their financial contribution still depends on selling price, gross margin, regional distribution, and whether the OEM reports them separately. Health-oriented features may strengthen customer value, but a feature announcement is not evidence of revenue expansion or a medical-market opportunity.',
+          'Smart glasses should be split into at least two buckets: display-less or audio/AI wearables, and display-based augmented-reality devices. They have different bills of material, battery and comfort constraints, usage patterns, price points, and market-readiness risks. Combining them can create a misleading impression that a visually impressive AR roadmap is already a mature peripheral revenue line.'
+        ],
+        listItems: [
+          'Wearables: monitor active users, attachment to the phone base, replacement, ASP, and feature retention.',
+          'Hearables: monitor replacement cadence, audio and communication use, bundle economics, and upgrade conversion.',
+          'AI glasses: monitor repeat use, return rate, privacy acceptance, battery life, software utility, and channel support.',
+          'AR glasses: monitor optical quality, comfort, thermal limits, content availability, price, and long-session behaviour.'
+        ]
+      },
+      {
+        level: 2,
+        heading: '05. Convert the Mix Into an Operating Model',
+        paragraphs: [
+          'The objective is not to predict a perfect percentage. It is to identify which categories can create durable ecosystem value. Build each category’s revenue using installed base, attach rate, replacement interval, ASP, and channel availability. Then test the model under a base case, an upside case, and a downside case. This exposes whether an apparent mix shift is caused by new demand, pricing, a change in the denominator, or weakness in another category.',
+          'The best five-year output is therefore a transparent scenario table, a statement of scope, and a trigger list. Update it when an OEM changes reporting categories, a glasses product demonstrates repeat use, a health feature gains an appropriate regulatory status, or an ecosystem category becomes large enough to warrant its own revenue line.'
+        ],
+        blockquote: 'A higher peripheral share is not automatically better. The durable value test is whether the category improves retention, recurring use, margin quality, and the customer’s reason to remain in the ecosystem.'
+      }
+    ],
+    protocolPatch: {
+      title: 'Maha Scenario Note // Smartphone OEM Ecosystems',
+      paragraphs: [
+        'Use normalized product mixes only after documenting the denominator and company coverage. Keep reported revenue, estimated revenue, unit shipments, and strategic hypotheses in separate fields. A category forecast should show its range, assumptions, and observable triggers rather than present one five-year percentage as fact.'
+      ],
+      emphasis: 'Do not aggregate Apple-style product categories, broad AIoT portfolios, and unreported OEM lines without explicitly reconciling the scope.'
+    }
+  },
+  {
     slug: 'ai-semiconductor-slt-practices',
     title: 'AI Semiconductor SLT Practices and Test Sockets',
     kicker: 'CORE.HARDWARE.TESTING',
