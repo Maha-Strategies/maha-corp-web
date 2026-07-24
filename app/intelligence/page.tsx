@@ -154,6 +154,14 @@ const BRIEFS: BriefData[] = [
   },
   {
     group: 'HARDWARE & INFRASTRUCTURE',
+    category: 'CONSUMER.ECOSYSTEMS',
+    status: 'ACTIVE',
+    title: 'Smartphone OEM Peripheral Mix: A Five-Year Scenario Framework',
+    description: 'A normalized framework for assessing how tablets, PCs, wearables, smart glasses, and adjacent hardware may change within smartphone manufacturers’ non-phone portfolios.',
+    href: '/intelligence/briefs/smartphone-oem-peripheral-sales-mix',
+  },
+  {
+    group: 'HARDWARE & INFRASTRUCTURE',
     category: 'HARDWARE.TESTING',
     status: 'ACTIVE',
     title: 'AI Semiconductor SLT Practices and Test Sockets',
