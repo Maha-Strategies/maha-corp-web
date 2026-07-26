@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import type { Metadata } from 'next'
 import { TrackedLink } from '@/components/ConversionTracker'
+import EngagementPath from '@/components/EngagementPath'
 
 const SITE_URL = 'https://www.mahastrategies.com'
 
@@ -97,6 +98,8 @@ export default function RapidIntelligenceBriefPage() {
             See the scope ↓
           </Link>
         </div>
+
+        <EngagementPath offer="rapid" className="mb-24" />
 
         <section id="scope" className="grid grid-cols-1 md:grid-cols-2 gap-12 border-t border-zinc-800 pt-10 mb-24 scroll-mt-24">
           <div>

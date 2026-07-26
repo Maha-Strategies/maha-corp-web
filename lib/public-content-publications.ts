@@ -4,6 +4,23 @@ export type PublicContentPublication = {
   slug: string; title: string; summary: string; direct_answer: string; method: string; limitations: string; artifact_url: string; artifact_label: string; editorial_reviewer: string; evidence: Array<{ url: string; title: string; note?: string }>; published_at: string; updated_at: string
 }
 
+export type PublicContentPublicationIndexEntry = Pick<PublicContentPublication, 'slug' | 'title' | 'summary' | 'editorial_reviewer' | 'published_at' | 'updated_at'>
+
+/** Public index entries only. Private drafts, withheld handoffs, and withdrawn
+ * releases are deliberately absent from this query. */
+export async function getPublicContentPublications(limit = 100): Promise<PublicContentPublicationIndexEntry[]> {
+  const ledger = createAgentInquiryLedger()
+  if (!ledger) return []
+  const safeLimit = Math.min(Math.max(Math.trunc(limit), 1), 500)
+  const { data, error } = await ledger
+    .from('content_publications')
+    .select('slug,title,summary,editorial_reviewer,published_at,updated_at')
+    .is('unpublished_at', null)
+    .order('published_at', { ascending: false })
+    .limit(safeLimit)
+  return error || !data ? [] : data as PublicContentPublicationIndexEntry[]
+}
+
 export async function getPublicContentPublication(slug: string): Promise<PublicContentPublication | null> {
   if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(slug)) return null
   const ledger = createAgentInquiryLedger()

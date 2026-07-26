@@ -6,6 +6,7 @@
 import Link from 'next/link'
 import type { Metadata } from 'next'
 import { TrackedLink } from '@/components/ConversionTracker'
+import EngagementPath from '@/components/EngagementPath'
 
 export const metadata: Metadata = {
   title: 'Verified Research Brief — Maha Strategies LLC',
@@ -103,6 +104,8 @@ export default function ConsultingPage() {
             See a Tagged Page ↓
           </a>
         </div>
+
+        <EngagementPath offer="verified" className="mb-24" />
 
         <section className="mb-24 border border-indigo-900/50 bg-indigo-950/20 p-8 sm:p-10 relative overflow-hidden">
           <div className="absolute top-0 left-0 w-1 h-full bg-indigo-500" />
