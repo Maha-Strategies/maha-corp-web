@@ -5,6 +5,7 @@ import React, { FormEvent, useEffect, useState } from 'react';
 import Link from 'next/link';
 import Script from 'next/script';
 import { trackConversion } from '@/components/ConversionTracker';
+import EngagementPath from '@/components/EngagementPath';
 
 declare global { interface Window { mahaTurnstileComplete?: (token: string) => void; mahaTurnstileExpired?: () => void } }
 
@@ -88,6 +89,8 @@ export default function ContactPage() {
         <p className="text-sm text-gray-400 leading-relaxed mb-12 font-sans">
           Start with the decision you need to make. For a Rapid Intelligence Brief or Verified Research Brief, we reply within two business days with a scope—or tell you plainly if we are not the right fit.
         </p>
+
+        <EngagementPath className="mb-12" />
 
         {/* CONTACT FORM SECTION */}
         <section className="mb-12">
