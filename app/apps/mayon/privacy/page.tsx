@@ -16,6 +16,9 @@ export default function MayonPrivacyPage() {
         <Link href="/" className="mb-10 block text-xs uppercase tracking-widest text-zinc-500 hover:text-white">
           ← Maha Strategies
         </Link>
+        <Link href="/apps/mayon" className="mb-6 block text-xs uppercase tracking-widest text-cyan-300 hover:text-cyan-100">
+          Mayon documentation →
+        </Link>
         <p className="text-xs uppercase tracking-[0.22em] text-amber-300">Educational volcano explorer</p>
         <h1 className="mt-4 text-4xl font-light tracking-wide text-white sm:text-5xl">Mayon Privacy Policy</h1>
         <p className="mt-4 text-sm text-zinc-500">Effective date: 25 July 2026</p>
