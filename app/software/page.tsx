@@ -2,10 +2,16 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 
 export const metadata: Metadata = {
-  title: 'Maha OS | Local-First Digital Infrastructure',
+  title: 'Maha OS | Local-First Focus and Awareness App',
   description:
     'Maha OS is a local-first mobile app built on edge-compute architecture — keeping your data on your device and reducing reliance on cloud surveillance. Available on iOS and Android.',
   alternates: { canonical: 'https://www.mahastrategies.com/software' },
+  openGraph: {
+    title: 'Maha OS | Local-First Focus and Awareness App',
+    description: 'A local-first mobile app designed for a more private, more intentional relationship with your device.',
+    url: 'https://www.mahastrategies.com/software',
+    type: 'website',
+  },
 }
 
 export default function SoftwarePage() {
@@ -17,6 +23,9 @@ export default function SoftwarePage() {
           className="text-xs text-zinc-500 uppercase tracking-widest hover:text-white mb-8 block"
         >
           ← Back to Root Node
+        </Link>
+        <Link href="/apps" className="mb-6 block text-xs text-indigo-300 uppercase tracking-widest hover:text-white">
+          Explore all apps →
         </Link>
 
         <h1 className="text-4xl text-white font-light tracking-wide mb-6 leading-tight">
@@ -115,6 +124,31 @@ export default function SoftwarePage() {
               </a>
             </div>
           </div>
+
+          <section className="mt-16 border-t border-zinc-800 pt-10">
+            <p className="text-white font-semibold mb-4 tracking-widest uppercase text-xs">More from Maha Strategies</p>
+            <p className="max-w-2xl text-sm leading-relaxed text-zinc-500">Different questions call for different instruments. Explore the other public apps from Maha Strategies.</p>
+            <div className="mt-6 grid gap-4 md:grid-cols-2 not-prose">
+              <article className="border border-amber-900/60 bg-amber-950/10 p-5">
+                <p className="font-mono text-[10px] uppercase tracking-widest text-amber-200">The Imagined Life companion</p>
+                <h2 className="mt-3 text-xl font-light text-white">The Dream Engine</h2>
+                <p className="mt-3 text-sm leading-relaxed text-zinc-400">Read, practice, and keep a private archive for attention, reflection, and ordinary action.</p>
+                <div className="mt-5 flex flex-wrap gap-4 text-sm">
+                  <Link href="/apps/the-engine" className="text-amber-100 underline">Explore the app</Link>
+                  <a href="https://play.google.com/store/apps/details?id=com.theimaginedlife.engine" target="_blank" rel="noopener noreferrer" className="text-amber-100 underline">Google Play ↗</a>
+                </div>
+              </article>
+              <article className="border border-cyan-900/60 bg-cyan-950/10 p-5">
+                <p className="font-mono text-[10px] uppercase tracking-widest text-cyan-200">Educational volcano explorer</p>
+                <h2 className="mt-3 text-xl font-light text-white">Mayon</h2>
+                <p className="mt-3 text-sm leading-relaxed text-zinc-400">A free, true-scale interactive field trip through Mayon Volcano, its history, landscape, and volcanology.</p>
+                <div className="mt-5 flex flex-wrap gap-4 text-sm">
+                  <Link href="/apps/mayon" className="text-cyan-100 underline">Explore the app</Link>
+                  <a href="https://mayonrajan.com" target="_blank" rel="noopener noreferrer" className="text-cyan-100 underline">Open Mayon ↗</a>
+                </div>
+              </article>
+            </div>
+          </section>
         </div>
       </div>
     </div>
