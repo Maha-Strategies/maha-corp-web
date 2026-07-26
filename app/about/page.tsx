@@ -58,6 +58,19 @@ export default function AboutPage() {
           <p>Research and advisory work distinguish sourced evidence, interpretation, and bounded speculation. Read the <Link className="text-zinc-200 underline underline-offset-4 hover:text-white" href="/method">method</Link>, browse <Link className="text-zinc-200 underline underline-offset-4 hover:text-white" href="/intelligence">intelligence</Link>, or <Link className="text-zinc-200 underline underline-offset-4 hover:text-white" href="/contact">contact Maha Strategies</Link>.</p>
         </div>
       </section>
+
+      <section className="mt-14 grid gap-10 border-t border-zinc-800 pt-10 md:grid-cols-[1fr_2fr]">
+        <h2 className="font-mono text-xs uppercase tracking-widest text-zinc-500">Public work</h2>
+        <div className="space-y-5 text-sm leading-relaxed text-zinc-400">
+          <p>Maha Strategies is the organization behind a connected public body of research, tools, books, and educational demonstrations. Each project has its own purpose and editorial boundary.</p>
+          <div className="grid gap-4 sm:grid-cols-2">
+            <a className="border border-zinc-800 p-4 transition hover:border-zinc-600" href="https://research.mahastrategies.com"><span className="block text-zinc-200">Maha Strategies Research ↗</span><span className="mt-1 block text-xs text-zinc-500">Open research syntheses and preprints.</span></a>
+            <a className="border border-zinc-800 p-4 transition hover:border-zinc-600" href="https://publish.mahastrategies.com"><span className="block text-zinc-200">Agentic Book Publishing ↗</span><span className="mt-1 block text-xs text-zinc-500">Tools for authors preparing agent queries.</span></a>
+            <a className="border border-zinc-800 p-4 transition hover:border-zinc-600" href="https://www.themahaprinciple.com"><span className="block text-zinc-200">The Maha Principle ↗</span><span className="mt-1 block text-xs text-zinc-500">A reader-facing framework and book project.</span></a>
+            <a className="border border-zinc-800 p-4 transition hover:border-zinc-600" href="https://mayonrajan.com"><span className="block text-zinc-200">Mayon Volcano ↗</span><span className="mt-1 block text-xs text-zinc-500">A free educational volcano explorer.</span></a>
+          </div>
+        </div>
+      </section>
     </div>
   </main>
 }
