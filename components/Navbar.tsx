@@ -44,6 +44,7 @@ export default function Navbar() {
     { name: 'About Maha', href: '/about' },
     { name: 'MPS Standard', href: '/mps' },
     { name: 'Research', href: '/research' },
+    { name: 'Case Studies', href: '/case-studies' },
     { name: 'Insights', href: '/insights' },
     { name: 'Policy', href: '/policy' },
     { name: 'Doctrine', href: '/doctrine' },
