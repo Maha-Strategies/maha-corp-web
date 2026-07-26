@@ -53,6 +53,12 @@ export default function AppsPage() {
             </div>
           </article>
         </div>
+        <section className="mt-12 border border-zinc-800 bg-[#0d1112] p-7">
+          <p className="font-mono text-[10px] uppercase tracking-widest text-cyan-300">[ Context and provenance ]</p>
+          <h2 className="mt-3 text-2xl font-light text-white">See how the public projects relate</h2>
+          <p className="mt-3 max-w-2xl leading-relaxed text-zinc-400">The applications, research, publishing tools, and book program share an operator or author in different ways. Their evidence and claims are separate. The public map makes those relationships and boundaries explicit.</p>
+          <Link href="/network" className="mt-5 inline-block text-sm text-cyan-100 underline">Open the Maha Knowledge Network</Link>
+        </section>
       </section>
     </main>
   )
