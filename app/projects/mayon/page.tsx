@@ -43,6 +43,7 @@ export default function MayonProjectPage() {
         <h1 className="mt-5 text-4xl font-light leading-tight tracking-tight text-white sm:text-6xl">Mayon Virtual Field Trip</h1>
         <p className="mt-7 max-w-3xl text-xl leading-relaxed text-zinc-300">A true-scale interactive view of Mayon Volcano, designed to make volcanic processes, historical memory, uncertainty, and public-safety boundaries easier to discuss.</p>
         <p className="mt-5 text-sm text-zinc-400">Looking for classroom use, privacy, accessibility, and app-status information? <Link href="/apps/mayon" className="text-cyan-100 underline">Read the Mayon app documentation</Link>.</p>
+        <p className="mt-3 text-sm text-zinc-400">For the operator&apos;s public account of what is live and what the project does not claim, see the <Link href="/case-studies#mayon" className="text-cyan-100 underline">Mayon case study</Link>.</p>
 
         <section className="mt-14 border border-amber-900/50 bg-amber-950/10 p-7">
           <p className="font-mono text-[10px] uppercase tracking-widest text-amber-200">[ Important limit ]</p>
