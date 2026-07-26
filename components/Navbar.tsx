@@ -33,6 +33,7 @@ export default function Navbar() {
     { name: 'Consulting', href: '/consulting' },
     { name: 'Intelligence', href: '/intelligence' },
     { name: 'Books', href: '/books' },
+    { name: 'Apps', href: '/apps' },
     { name: 'Method', href: '/method' },
     { name: 'Auditor', href: '/audit' },
     { name: 'Contact', href: '/contact' },
