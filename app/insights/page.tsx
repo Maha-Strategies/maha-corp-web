@@ -52,6 +52,11 @@ export default async function InsightsIndexPage() {
           <p className="font-mono text-[10px] uppercase tracking-widest text-cyan-300">[ Insights // public editorial releases ]</p>
           <h1 className="mt-5 text-4xl font-light leading-tight tracking-tight text-white sm:text-6xl">Evidence-led articles, released by a human.</h1>
           <p className="mt-7 text-lg leading-relaxed text-zinc-400">Each article here was created through Maha&rsquo;s evidence-to-editorial workflow, reviewed before release, and published only through an explicit human confirmation. Sources and limits remain on the article itself.</p>
+          <div className="mt-9 grid gap-4 border-t border-zinc-800 pt-7 sm:grid-cols-3">
+            <div><p className="font-mono text-[10px] uppercase tracking-widest text-cyan-300">01 · Answer</p><p className="mt-2 text-sm leading-relaxed text-zinc-500">Start with the decision-relevant conclusion, in plain language.</p></div>
+            <div><p className="font-mono text-[10px] uppercase tracking-widest text-cyan-300">02 · Evidence</p><p className="mt-2 text-sm leading-relaxed text-zinc-500">Open the linked sources and supporting artifact; do not take a synthesis on faith.</p></div>
+            <div><p className="font-mono text-[10px] uppercase tracking-widest text-cyan-300">03 · Limits</p><p className="mt-2 text-sm leading-relaxed text-zinc-500">Read what the analysis cannot establish before carrying it into a decision.</p></div>
+          </div>
         </header>
 
         {publications.length > 0 ? (
@@ -81,6 +86,17 @@ export default async function InsightsIndexPage() {
             <Link href="/intelligence" className="mt-6 inline-block font-mono text-xs uppercase tracking-widest text-cyan-100 underline underline-offset-4 hover:text-white">Explore intelligence ↗</Link>
           </section>
         )}
+
+        <section className="mt-16 border-t border-zinc-800 pt-10" aria-labelledby="editorial-standard">
+          <p className="font-mono text-[10px] uppercase tracking-widest text-zinc-500">[ Editorial standard ]</p>
+          <h2 id="editorial-standard" className="mt-4 text-2xl font-light text-white">Publication is a decision, not an automatic output.</h2>
+          <p className="mt-4 max-w-3xl leading-relaxed text-zinc-400">This library does not publish private drafts, rejected candidates, or automated summaries. Each release identifies its reviewer, evidence, method, and limitations so readers can judge the work on its merits.</p>
+          <div className="mt-6 flex flex-wrap gap-5 font-mono text-[10px] uppercase tracking-widest">
+            <Link href="/method" className="text-cyan-100 underline underline-offset-4 hover:text-white">Read the method ↗</Link>
+            <Link href="/about" className="text-cyan-100 underline underline-offset-4 hover:text-white">About the publisher ↗</Link>
+            <Link href="/feed.xml" className="text-cyan-100 underline underline-offset-4 hover:text-white">Subscribe by feed ↗</Link>
+          </div>
+        </section>
       </div>
     </main>
   )
