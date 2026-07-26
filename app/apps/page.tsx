@@ -46,10 +46,10 @@ export default function AppsPage() {
           <article className="border border-amber-900/50 bg-amber-950/10 p-7 sm:p-9">
             <p className="font-mono text-[10px] uppercase tracking-widest text-amber-200">[ The Imagined Life · companion app ]</p>
             <h2 className="mt-4 text-3xl font-light text-white">The Dream Engine</h2>
-            <p className="mt-4 max-w-2xl leading-relaxed text-zinc-400">Read <em>The Imagined Life</em>, then use a quiet, private practice for attention, reflection, and ordinary action. Store release is in preparation.</p>
+            <p className="mt-4 max-w-2xl leading-relaxed text-zinc-400">Read <em>The Imagined Life</em>, then use a quiet, private practice for attention, reflection, and ordinary action. Available now on Google Play; App Store release is in preparation.</p>
             <div className="mt-6 flex flex-wrap gap-4 text-sm">
               <Link href="/apps/the-engine" className="border border-amber-700 px-4 py-2 text-amber-100 transition hover:bg-amber-900/40">Explore The Dream Engine</Link>
-              <a href="mailto:mayone@mahastrategies.com?subject=The%20Dream%20Engine%20release%20updates" className="px-4 py-2 text-amber-100 underline">Get release updates</a>
+              <a href="https://play.google.com/store/apps/details?id=com.theimaginedlife.engine" className="px-4 py-2 text-amber-100 underline" target="_blank" rel="noreferrer">Get it on Google Play</a>
             </div>
           </article>
         </div>
