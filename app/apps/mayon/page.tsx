@@ -119,8 +119,10 @@ export default function MayonDocumentationPage() {
           </div>
           <div className="mt-7 flex flex-wrap gap-4 text-sm">
             <a href="https://mayonrajan.com/methods/" target="_blank" rel="noreferrer" className="text-cyan-100 underline">Mayon methods and sources</a>
+            <a href="https://research.mahastrategies.com/papers/the-volcanic-engine-thesis" target="_blank" rel="noreferrer" className="text-cyan-100 underline">Related volcanism working paper</a>
             <Link href="/projects/mayon" className="text-cyan-100 underline">Maha Strategies project overview</Link>
           </div>
+          <p className="mt-5 text-sm leading-relaxed text-zinc-500">The related working paper provides broad planetary-volcanism context; it does not validate the Mayon visual model or replace the project&apos;s own source record.</p>
         </section>
 
         <section className="mt-16 grid gap-10 border-t border-zinc-800 pt-10 md:grid-cols-2">
