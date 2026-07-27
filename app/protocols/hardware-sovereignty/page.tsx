@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import { MAHA_ORGANIZATION_ID } from '@/lib/entity'
 
 export const metadata = {
   title: 'Hardware Sovereignty & Custom Silicon | Maha Strategies LLC',
@@ -13,8 +14,8 @@ export default function HardwareSovereigntyProtocol() {
     '@type': 'Article',
     headline: 'Hardware Sovereignty & Edge-Compute Intelligence',
     description: 'A strategic advisory framework for deploying custom silicon to guarantee data sovereignty.',
-    author: { '@type': 'Organization', name: 'Maha Strategies LLC' },
-    publisher: { '@type': 'Organization', name: 'Maha Strategies LLC' },
+    author: { '@id': MAHA_ORGANIZATION_ID },
+    publisher: { '@id': MAHA_ORGANIZATION_ID },
     datePublished: '2026-05-30',
   };
 

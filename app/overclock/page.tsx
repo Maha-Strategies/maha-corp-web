@@ -2,6 +2,7 @@ import Link from 'next/link'
 import type { Metadata } from 'next'
 import { TrackedLink } from '@/components/ConversionTracker'
 import OverclockGame from '@/components/OverclockGame'
+import { MAHA_ORGANIZATION_ID } from '@/lib/entity'
 
 const SITE_URL = 'https://www.mahastrategies.com'
 
@@ -32,8 +33,8 @@ const gameJsonLd = {
   name: 'Overclock',
   description: 'A browser-based five-round risk game about escalating stakes, imperfect information, and when to bank a decision.',
   url: `${SITE_URL}/overclock`,
-  author: { '@type': 'Organization', name: 'Maha Strategies LLC', url: SITE_URL },
-  publisher: { '@type': 'Organization', name: 'Maha Strategies LLC', url: SITE_URL },
+  author: { '@id': MAHA_ORGANIZATION_ID },
+  publisher: { '@id': MAHA_ORGANIZATION_ID },
   applicationCategory: 'Game',
   operatingSystem: 'Web browser',
   isAccessibleForFree: true,

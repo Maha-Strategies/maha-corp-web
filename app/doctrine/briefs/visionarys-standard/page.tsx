@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import { MAHA_ORGANIZATION_ID } from '@/lib/entity'
 
 export const metadata = {
   title: 'The Visionary\'s Standard: Beauty as Objective Signal | Doctrine',
@@ -13,11 +14,7 @@ export default function Page() {
     "headline": "The Visionary's Standard: Beauty as Objective Signal",
     "description": "An architectural critique of the modern built environment, redefining beauty not as subjective preference, but as the optical signal of biological integrity and negentropy.",
     "proficiencyLevel": "Expert",
-    "publisher": {
-      "@type": "Organization",
-      "name": "Maha Strategies LLC",
-      "url": "https://mahastrategies.com"
-    },
+    "publisher": { "@id": MAHA_ORGANIZATION_ID },
     "datePublished": "2026-05-29"
   };
 

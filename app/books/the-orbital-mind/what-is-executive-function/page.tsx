@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import type { Metadata } from 'next'
 import ArticleTableOfContents from '@/components/ArticleTableOfContents'
+import { MAHA_ORGANIZATION_ID } from '@/lib/entity'
 
 const SITE_URL = 'https://www.mahastrategies.com'
 const URL = `${SITE_URL}/books/the-orbital-mind/what-is-executive-function`
@@ -64,7 +65,7 @@ const articleJsonLd = {
   mainEntityOfPage: URL,
   isPartOf: { '@id': `${SITE_URL}/books/the-orbital-mind#book` },
   author: { '@type': 'Person', name: 'Mayone Maha Rajan' },
-  publisher: { '@type': 'Organization', name: 'Maha Strategies LLC', url: SITE_URL },
+  publisher: { '@id': MAHA_ORGANIZATION_ID },
   datePublished: '2026-07-16',
   dateModified: '2026-07-16',
   isAccessibleForFree: true,

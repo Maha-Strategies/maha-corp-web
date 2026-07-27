@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import { MAHA_ORGANIZATION_ID } from '@/lib/entity'
 
 const pageUrl = 'https://www.mahastrategies.com/apps/maha-os'
 const appStoreUrl = 'https://apps.apple.com/us/app/maha-os/id6778333838'
@@ -25,7 +26,7 @@ const appJsonLd = {
   operatingSystem: 'iOS, Android',
   url: pageUrl,
   installUrl: [appStoreUrl, googlePlayUrl],
-  publisher: { '@type': 'Organization', name: 'Maha Strategies LLC', url: 'https://www.mahastrategies.com' },
+  publisher: { '@id': MAHA_ORGANIZATION_ID },
   description: 'A local-first mobile app for focus and metabolic awareness, designed to minimize non-essential off-device telemetry.',
 }
 

@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import { MAHA_ORGANIZATION_ID } from '@/lib/entity'
 
 const pageUrl = 'https://www.mahastrategies.com/apps/mayon'
 
@@ -46,7 +47,7 @@ const appJsonLd = {
   isAccessibleForFree: true,
   url: 'https://mayonrajan.com',
   sameAs: pageUrl,
-  publisher: { '@type': 'Organization', name: 'Maha Strategies LLC', url: 'https://www.mahastrategies.com' },
+  publisher: { '@id': MAHA_ORGANIZATION_ID },
   description: 'A free educational interactive for exploring Mayon Volcano, its landscape, eruption history, and volcanology concepts.',
 }
 

@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import { MAHA_ORGANIZATION_ID } from '@/lib/entity'
 
 export const metadata = {
   title: 'Strategic Gravity: The Architecture of Tension | Doctrine',
@@ -13,11 +14,7 @@ export default function Page() {
     "headline": "Strategic Gravity: The Architecture of Tension",
     "description": "An analysis of power, spatial vacuums, and the strategic deployment of tension over reactive high-frequency activity.",
     "proficiencyLevel": "Expert",
-    "publisher": {
-      "@type": "Organization",
-      "name": "Maha Strategies LLC",
-      "url": "https://mahastrategies.com"
-    },
+    "publisher": { "@id": MAHA_ORGANIZATION_ID },
     "datePublished": "2026-05-29"
   };
 

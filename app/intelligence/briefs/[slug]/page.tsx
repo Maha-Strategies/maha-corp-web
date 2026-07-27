@@ -15,6 +15,7 @@ import {
 } from '@/lib/briefs-data';
 import ExportButton from './ExportButton';
 import { TrackedLink } from '@/components/ConversionTracker';
+import { MAHA_ORGANIZATION_ID } from '@/lib/entity'
 
 export function generateStaticParams() {
   return getAllBriefSlugs().map((slug) => ({ slug }));
@@ -134,12 +135,8 @@ export default async function BriefPage(
     '@type': 'Article',
     headline: brief.title,
     description: brief.description,
-    author: { '@type': 'Organization', name: 'Maha Strategies LLC', url: SITE_URL },
-    publisher: {
-      '@type': 'Organization',
-      name: 'Maha Strategies LLC',
-      logo: { '@type': 'ImageObject', url: `${SITE_URL}/logo.png` },
-    },
+    author: { '@id': MAHA_ORGANIZATION_ID },
+    publisher: { '@id': MAHA_ORGANIZATION_ID },
     datePublished: brief.datePublished,
     dateModified: brief.dateModified ?? brief.datePublished,
     mainEntityOfPage: { '@type': 'WebPage', '@id': url },

@@ -2,6 +2,7 @@ import Link from 'next/link'
 import type { Metadata } from 'next'
 import BookChapterList from '@/components/BookChapterList'
 import BookReaderPaths from '@/components/BookReaderPaths'
+import { MAHA_ORGANIZATION_ID } from '@/lib/entity'
 
 const SITE_URL = 'https://www.mahastrategies.com'
 
@@ -35,7 +36,7 @@ const bookJsonLd = {
   description: 'A systems psychology of attention, desire, agency, limit, imagination, and integration.',
   url: `${SITE_URL}/books/the-orbital-mind`,
   author: { '@type': 'Person', name: 'Mayone Maha Rajan' },
-  publisher: { '@type': 'Organization', name: 'Maha Strategies LLC', url: SITE_URL },
+  publisher: { '@id': MAHA_ORGANIZATION_ID },
   bookFormat: 'https://schema.org/EBook',
   isAccessibleForFree: true,
   inLanguage: 'en',

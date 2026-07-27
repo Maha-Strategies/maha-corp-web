@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation'
 import BookManuscript from '@/components/BookManuscript'
 import { OpenBookSectionNavigation } from '@/components/OpenBookReader'
 import { getUnfinishedSpeciesSection, unfinishedSpeciesSections } from '@/lib/unfinished-species'
+import { MAHA_ORGANIZATION_ID } from '@/lib/entity'
 
 const SITE_URL = 'https://www.mahastrategies.com'
 
@@ -34,7 +35,7 @@ export default async function UnfinishedSpeciesSectionPage({ params }: PageProps
   const jsonLd = {
     '@context': 'https://schema.org', '@type': 'Chapter', name: found.section.title, description: found.section.description,
     url, isPartOf: { '@id': `${SITE_URL}/books/the-unfinished-species#book` },
-    author: { '@type': 'Person', name: 'Mayone Maha Rajan' }, publisher: { '@type': 'Organization', name: 'Maha Strategies LLC', url: SITE_URL },
+    author: { '@type': 'Person', name: 'Mayone Maha Rajan' }, publisher: { '@id': MAHA_ORGANIZATION_ID },
     isAccessibleForFree: true, inLanguage: 'en', datePublished: '2026-07-22',
   }
   return (

@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import { MAHA_ORGANIZATION_ID } from '@/lib/entity'
 
 export const metadata = {
   title: 'The Harmonic Command: Leadership as Enablement | Doctrine',
@@ -13,11 +14,7 @@ export default function Page() {
     "headline": "The Harmonic Command: Leadership as Enablement",
     "description": "An operational critique of brittle centralization, structural trust, and governance frameworks that optimize for systemic emergence.",
     "proficiencyLevel": "Expert",
-    "publisher": {
-      "@type": "Organization",
-      "name": "Maha Strategies LLC",
-      "url": "https://mahastrategies.com"
-    },
+    "publisher": { "@id": MAHA_ORGANIZATION_ID },
     "datePublished": "2026-05-29"
   };
 

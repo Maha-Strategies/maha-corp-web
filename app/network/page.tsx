@@ -84,7 +84,7 @@ export default function KnowledgeNetworkPage() {
 
       <section className="mt-16 border-t border-zinc-800 pt-10">
         <h2 className="text-2xl text-white">Primary operator</h2>
-        <p className="mt-4 max-w-3xl leading-relaxed text-zinc-400">Maha Strategies LLC is the operating organization for its public applications and publishing tools. <Link className="text-cyan-100 underline" href="/about">Read about Maha Strategies and Mayone Maha Rajan</Link>, or use the project-specific pages above for purpose, evidence, status, and contact boundaries.</p>
+        <p className="mt-4 max-w-3xl leading-relaxed text-zinc-400">Maha Strategies LLC is an independent research, publishing, and technology-architecture organization, and the operating organization for the public applications and publishing tools above. <Link className="text-cyan-100 underline" href="/about">Read about Maha Strategies and Mayone Maha Rajan</Link>, or use the project-specific pages above for purpose, evidence, status, and contact boundaries.</p>
       </section>
     </article>
   </main>

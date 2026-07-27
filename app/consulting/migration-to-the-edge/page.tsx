@@ -1,6 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import { Metadata } from "next";
+import { MAHA_ORGANIZATION_ID } from '@/lib/entity'
 
 export const metadata: Metadata = {
   title: "The Migration to the Edge: Mobile Hardware in the GenAI Era | Maha Strategies",
@@ -18,15 +19,8 @@ export default function MigrationToTheEdgePage() {
     headline: "The Migration to the Edge: Mobile Hardware in the GenAI Era",
     description:
       "An advisory on the decentralization of the AI inference layer into mobile hardware — NPU baselines, memory constraints, foldable form factors, and hybrid edge-cloud enterprise architecture.",
-    author: {
-      "@type": "Organization",
-      name: "Maha Strategies LLC",
-    },
-    publisher: {
-      "@type": "Organization",
-      name: "Maha Strategies LLC",
-      url: "https://www.mahastrategies.com",
-    },
+    author: { '@id': MAHA_ORGANIZATION_ID },
+    publisher: { '@id': MAHA_ORGANIZATION_ID },
     mainEntityOfPage: {
       "@type": "WebPage",
       "@id": "https://www.mahastrategies.com/consulting/migration-to-the-edge",

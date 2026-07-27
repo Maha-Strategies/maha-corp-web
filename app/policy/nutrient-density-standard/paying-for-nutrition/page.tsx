@@ -1,6 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import type { Metadata } from 'next';
+import { MAHA_ORGANIZATION_ID } from '@/lib/entity'
 
 const SITE_URL = 'https://www.mahastrategies.com';
 const PAGE_URL = `${SITE_URL}/policy/nutrient-density-standard/paying-for-nutrition`;
@@ -38,12 +39,8 @@ export default function PayingForNutritionPaper() {
     datePublished: '2026-06-13',
     url: PAGE_URL,
     creativeWorkStatus: 'Non-Peer-Reviewed Working Paper',
-    author: { '@type': 'Organization', name: 'Maha Strategies LLC', url: SITE_URL },
-    publisher: {
-      '@type': 'Organization',
-      name: 'Maha Strategies LLC',
-      logo: { '@type': 'ImageObject', url: `${SITE_URL}/logo.png` },
-    },
+    author: { '@id': MAHA_ORGANIZATION_ID },
+    publisher: { '@id': MAHA_ORGANIZATION_ID },
     isPartOf: {
       '@type': 'CreativeWork',
       name: 'The Nutrient Density Standard',

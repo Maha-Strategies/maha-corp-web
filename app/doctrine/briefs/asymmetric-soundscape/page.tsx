@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import { MAHA_ORGANIZATION_ID } from '@/lib/entity'
 
 export const metadata = {
   title: 'The Asymmetric Soundscape: Learning to Hear the Polyrhythm | Doctrine',
@@ -13,11 +14,7 @@ export default function Page() {
     "headline": "The Asymmetric Soundscape: Learning to Hear the Polyrhythm",
     "description": "An analysis of polyrhythmic environments, signal resolution, and anchoring to physical and biological realities over narrative chaos.",
     "proficiencyLevel": "Expert",
-    "publisher": {
-      "@type": "Organization",
-      "name": "Maha Strategies LLC",
-      "url": "https://mahastrategies.com"
-    },
+    "publisher": { "@id": MAHA_ORGANIZATION_ID },
     "datePublished": "2026-05-29"
   };
 

@@ -2,6 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import 'katex/dist/katex.min.css';
 import { BlockMath, InlineMath } from 'react-katex';
+import { MAHA_ORGANIZATION_ID } from '@/lib/entity'
 
 export const metadata = {
   title: 'Architecting Renewal: Sovereign Infrastructure Solutions | Maha Strategies LLC',
@@ -15,8 +16,8 @@ export default function ArchitectingRenewalProtocol() {
     '@type': 'Article',
     headline: 'The Sovereign Ecosystem: Architecting Renewal',
     description: 'Navigating digital sovereignty frameworks to implement resilient, locally governed cloud environments.',
-    author: { '@type': 'Organization', name: 'Maha Strategies LLC' },
-    publisher: { '@type': 'Organization', name: 'Maha Strategies LLC' },
+    author: { '@id': MAHA_ORGANIZATION_ID },
+    publisher: { '@id': MAHA_ORGANIZATION_ID },
     datePublished: '2026-05-30',
   };
 

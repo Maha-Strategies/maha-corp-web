@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import { MAHA_ORGANIZATION_ID } from '@/lib/entity'
 
 export const metadata = {
   title: 'The Saturnian Vision: From Stronghold to Statecraft | Doctrine',
@@ -13,11 +14,7 @@ export default function Page() {
     "headline": "The Saturnian Vision: From Stronghold to Statecraft",
     "description": "An architectural transition from individual sovereignty to classical statecraft, contrasting Jupiterian expansion with Saturnian limits.",
     "proficiencyLevel": "Expert",
-    "publisher": {
-      "@type": "Organization",
-      "name": "Maha Strategies LLC",
-      "url": "https://mahastrategies.com"
-    },
+    "publisher": { "@id": MAHA_ORGANIZATION_ID },
     "datePublished": "2026-05-29"
   };
 

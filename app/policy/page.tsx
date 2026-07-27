@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import { MAHA_ORGANIZATION_ID } from '@/lib/entity'
 
 const SITE_URL = 'https://www.mahastrategies.com';
 
@@ -91,12 +92,8 @@ export default function PolicyNode() {
     headline: 'Policy & Statecraft: The Maha Strategies Doctrine',
     description:
       'A long-horizon policy doctrine covering biological capital, ecological statecraft, municipal sovereignty, and five proposed legislative platforms for national renewal.',
-    author: { '@type': 'Organization', name: 'Maha Strategies LLC', url: SITE_URL },
-    publisher: {
-      '@type': 'Organization',
-      name: 'Maha Strategies LLC',
-      logo: { '@type': 'ImageObject', url: `${SITE_URL}/logo.png` },
-    },
+    author: { '@id': MAHA_ORGANIZATION_ID },
+    publisher: { '@id': MAHA_ORGANIZATION_ID },
     mainEntityOfPage: { '@type': 'WebPage', '@id': `${SITE_URL}/policy` },
   };
 
