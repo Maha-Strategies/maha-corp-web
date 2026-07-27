@@ -85,6 +85,8 @@ A successful `202` response means only that the request was recorded for human r
 
 Apply `supabase/migrations/20260716_agent_inquiry_ledger.sql`, `supabase/migrations/20260716_agent_client_credentials.sql`, `supabase/migrations/20260716_mps_audit_jobs.sql`, and `supabase/migrations/20260717_serverless_credential_rate_limits.sql` in the Supabase SQL Editor before enabling the full agent infrastructure. Together, they create the private inquiry ledger, credential registry, MPS audit ledger, database-maintained event histories, and an atomic shared credential rate limiter with RLS and no public access policies. The existing `NEXT_PUBLIC_SUPABASE_URL` and `SUPABASE_SERVICE_ROLE_KEY` deployment variables are required.
 
+Selected credential-based commercial APIs also write to `commercial_api_usage_daily` through `20260727000100_privacy_preserving_commercial_api_metering.sql`. This is a daily aggregate meter for MPS audits, MPS credit reads, book-entitlement checks, and structured book-content delivery. It deliberately excludes IP addresses, user agents, token values or fingerprints, request and response bodies, referrers, emails, and visitor identifiers. The read-only aggregate board is `/admin/commercial-api-metering` and requires `REVENUE_CONTROL_TOKEN`.
+
 Reviewer operations use a separate private endpoint:
 
 ```text
