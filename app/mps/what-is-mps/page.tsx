@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 
+import MpsLearningLinks from '@/components/MpsLearningLinks'
 import { MAHA_ORGANIZATION_ID, MAYONE_MAHA_RAJAN_ID } from '@/lib/entity'
 
 const canonicalUrl = 'https://www.mahastrategies.com/mps/what-is-mps'
@@ -166,6 +167,7 @@ export default function WhatIsMpsPage() {
         <Link href="/mps" className="border border-zinc-600 px-5 py-3 font-mono text-xs font-bold uppercase tracking-widest text-zinc-100 hover:border-white">Read the MPS/0.1 specification</Link>
         <Link href="/audit" className="border border-zinc-600 px-5 py-3 font-mono text-xs font-bold uppercase tracking-widest text-zinc-100 hover:border-white">Try the free Auditor</Link>
       </section>
+      <MpsLearningLinks />
     </article>
   </main>
 }
