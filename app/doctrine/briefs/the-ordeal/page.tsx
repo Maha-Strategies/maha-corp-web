@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import { MAHA_ORGANIZATION_ID } from '@/lib/entity'
 
 export const metadata = {
   title: 'The Ordeal: Earned Identity | Doctrine',
@@ -13,11 +14,7 @@ export default function Page() {
     "headline": "The Ordeal: Earned Identity",
     "description": "An operational framework for establishing authentic identity through hormetic stress, witnessed capacity, and deliberate neurological adaptation.",
     "proficiencyLevel": "Expert",
-    "publisher": {
-      "@type": "Organization",
-      "name": "Maha Strategies LLC",
-      "url": "https://mahastrategies.com"
-    },
+    "publisher": { "@id": MAHA_ORGANIZATION_ID },
     "datePublished": "2026-05-29"
   };
 

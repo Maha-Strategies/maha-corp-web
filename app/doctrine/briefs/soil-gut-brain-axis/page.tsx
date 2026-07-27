@@ -2,6 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
+import { MAHA_ORGANIZATION_ID } from '@/lib/entity'
 
 export default function SoilGutBrainBrief() {
   // VECTOR B: SCHEMA.ORG JSON-LD STRUCTURAL METADATA
@@ -10,19 +11,8 @@ export default function SoilGutBrainBrief() {
     '@type': 'Article',
     headline: 'The Soil-Gut-Brain Axis',
     description: 'A tactical brief on biological sovereignty, the microbiome, and the consequences of industrialized agriculture.',
-    author: {
-      '@type': 'Organization',
-      name: 'Maha Strategies LLC',
-      url: 'https://www.mahastrategies.com'
-    },
-    publisher: {
-      '@type': 'Organization',
-      name: 'Maha Strategies LLC',
-      logo: {
-        '@type': 'ImageObject',
-        url: 'https://www.mahastrategies.com/logo.png'
-      }
-    },
+    author: { '@id': MAHA_ORGANIZATION_ID },
+    publisher: { '@id': MAHA_ORGANIZATION_ID },
     datePublished: '2026-01-29T00:00:00.000Z',
     dateModified: '2026-05-28T00:00:00.000Z',
     mainEntityOfPage: {

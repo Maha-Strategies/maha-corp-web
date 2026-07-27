@@ -3,6 +3,7 @@ import Link from 'next/link'
 import BookEndpointCTA from '@/components/BookEndpointCTA'
 import MarkdownArticle from '@/components/MarkdownArticle'
 import { parseMarkdownBlocks, readBookMarkdown } from '@/lib/content'
+import { MAHA_ORGANIZATION_ID } from '@/lib/entity'
 
 const SITE_URL = 'https://www.mahastrategies.com'
 
@@ -37,7 +38,7 @@ const bookJsonLd = {
   description: 'A book about language models, human judgment, and the record we are teaching machines to reflect.',
   url: `${SITE_URL}/books/the-synthetic-self`,
   author: { '@type': 'Person', name: 'Mayone Maha Rajan' },
-  publisher: { '@type': 'Organization', name: 'Maha Strategies LLC', url: SITE_URL },
+  publisher: { '@id': MAHA_ORGANIZATION_ID },
   bookFormat: 'https://schema.org/EBook',
   isAccessibleForFree: true,
   inLanguage: 'en',

@@ -7,11 +7,52 @@ import Link from 'next/link'
 import type { Metadata } from 'next'
 import { TrackedLink } from '@/components/ConversionTracker'
 import EngagementPath from '@/components/EngagementPath'
+import { MAHA_ORGANIZATION_ID, MAHA_SITE_URL } from '@/lib/entity'
 
 export const metadata: Metadata = {
   title: 'Verified Research Brief — Maha Strategies LLC',
   description:
     'A provenance-tagged research synthesis for decisions that cannot absorb a fabricated claim. Every claim tagged SOURCED, VERIFIED, ILLUSTRATIVE, or UNVERIFIED, with linked evidence. Fixed scope, fixed price, 10 business days.',
+}
+
+// ProfessionalService is used here because this page sells a defined, priced
+// engagement. The offers below mirror the prices and turnarounds stated in the
+// visible copy; they must be updated together.
+const consultingJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'ProfessionalService',
+  '@id': `${MAHA_SITE_URL}/consulting#service`,
+  name: 'Verified Research Brief',
+  url: `${MAHA_SITE_URL}/consulting`,
+  serviceType: 'Provenance-tagged research synthesis',
+  description:
+    'A research synthesis in which every claim carries a provenance tag — SOURCED, VERIFIED, ILLUSTRATIVE, or UNVERIFIED — with linked evidence, so reviewers can check rather than trust each statement.',
+  provider: { '@id': MAHA_ORGANIZATION_ID },
+  areaServed: 'Worldwide',
+  availableLanguage: 'English',
+  offers: [
+    {
+      '@type': 'Offer',
+      name: 'Verified Research Brief',
+      price: '2500',
+      priceCurrency: 'USD',
+      description: 'Fixed scope, fixed price, delivered within 10 business days.',
+      url: `${MAHA_SITE_URL}/contact?service=verified_research`,
+    },
+    {
+      '@type': 'Offer',
+      name: 'Rapid Intelligence Brief',
+      price: '500',
+      priceCurrency: 'USD',
+      priceSpecification: {
+        '@type': 'PriceSpecification',
+        minPrice: '500',
+        priceCurrency: 'USD',
+      },
+      description: 'Starting price. Fixed scope, delivered within five business days.',
+      url: `${MAHA_SITE_URL}/rapid-intelligence-brief`,
+    },
+  ],
 }
 
 // ---------------------------------------------------------------------------
@@ -68,6 +109,10 @@ function Tag({ label }: { label: (typeof TAGS)[number]['key'] }) {
 export default function ConsultingPage() {
   return (
     <div className="min-h-screen bg-[#0a0a0c] text-zinc-300">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(consultingJsonLd).replace(/</g, '\\u003c') }}
+      />
       <div className="max-w-4xl mx-auto px-6 py-20 sm:py-28">
 
         {/* ================= HERO ================= */}

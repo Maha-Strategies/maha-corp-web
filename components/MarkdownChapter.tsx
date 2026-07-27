@@ -3,6 +3,7 @@ import path from 'node:path'
 import Link from 'next/link'
 import type { ReactNode } from 'react'
 import ArticleTableOfContents from '@/components/ArticleTableOfContents'
+import { MAHA_ORGANIZATION_ID, MAYONE_MAHA_RAJAN_ID } from '@/lib/entity'
 
 type MarkdownChapterProps = {
   bookId: string
@@ -67,8 +68,8 @@ export default async function MarkdownChapter({
     url: chapterUrl,
     mainEntityOfPage: chapterUrl,
     isPartOf: { '@id': bookId },
-    author: { '@type': 'Person', name: 'Mayone Maha Rajan' },
-    publisher: { '@type': 'Organization', name: 'Maha Strategies LLC', url: 'https://www.mahastrategies.com' },
+    author: { '@id': MAYONE_MAHA_RAJAN_ID },
+    publisher: { '@id': MAHA_ORGANIZATION_ID },
     datePublished: '2026-07-16',
     dateModified: '2026-07-16',
     isAccessibleForFree: true,

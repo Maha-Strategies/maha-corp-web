@@ -2,6 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
+import { MAHA_ORGANIZATION_ID } from '@/lib/entity'
 
 // Chapter 11 Article Database — directional policy arguments, hedged register.
 const policyArticles: Record<
@@ -163,15 +164,8 @@ export default async function PolicyArticle({ params }: PageProps) {
     datePublished: article.date,
     url: articleUrl,
     mainEntityOfPage: { "@type": "WebPage", "@id": articleUrl },
-    author: { "@type": "Organization", name: "Maha Strategies" },
-    publisher: {
-      "@type": "Organization",
-      name: "Maha Strategies",
-      logo: {
-        "@type": "ImageObject",
-        url: "https://www.mahastrategies.com/og-master.png",
-      },
-    },
+    author: { '@id': MAHA_ORGANIZATION_ID },
+    publisher: { '@id': MAHA_ORGANIZATION_ID },
     isPartOf: {
       "@type": "CreativeWork",
       name: "Policy & Statecraft",

@@ -1,6 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import { Metadata } from "next";
+import { MAHA_ORGANIZATION_ID } from '@/lib/entity'
 
 export const metadata: Metadata = {
   title: "The Architecture of Attention // Maha Research",
@@ -20,11 +21,7 @@ export default function ArchitectureOfAttentionPage() {
       "name": "Mayone Maha Rajan",
       "jobTitle": "Founder & Cultural Strategist"
     },
-    "publisher": {
-      "@type": "Organization",
-      "name": "Maha Strategies LLC",
-      "url": "https://mahastrategies.com"
-    },
+    "publisher": { "@id": MAHA_ORGANIZATION_ID },
     "datePublished": "2026-05-29"
   };
 

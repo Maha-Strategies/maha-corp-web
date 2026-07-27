@@ -2,6 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
+import { MAHA_ORGANIZATION_ID } from '@/lib/entity'
 
 export default function OverclockedBrief() {
   // VECTOR B: SCHEMA.ORG JSON-LD STRUCTURAL METADATA
@@ -10,19 +11,8 @@ export default function OverclockedBrief() {
     '@type': 'Article',
     headline: 'Overclocked: The Physics of Modern Anxiety',
     description: 'A tactical brief mapping modern anxiety to CPU thermal throttling, sympathetic nervous system arousal, and allostatic overload.',
-    author: {
-      '@type': 'Organization',
-      name: 'Maha Strategies LLC',
-      url: 'https://www.mahastrategies.com'
-    },
-    publisher: {
-      '@type': 'Organization',
-      name: 'Maha Strategies LLC',
-      logo: {
-        '@type': 'ImageObject',
-        url: 'https://www.mahastrategies.com/logo.png'
-      }
-    },
+    author: { '@id': MAHA_ORGANIZATION_ID },
+    publisher: { '@id': MAHA_ORGANIZATION_ID },
     datePublished: '2026-01-27T00:00:00.000Z',
     dateModified: '2026-05-28T00:00:00.000Z',
     mainEntityOfPage: {

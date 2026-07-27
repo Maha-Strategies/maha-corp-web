@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import { MAHA_ORGANIZATION_ID } from '@/lib/entity'
 
 const pageUrl = 'https://www.mahastrategies.com/apps/the-engine'
 const googlePlayUrl = 'https://play.google.com/store/apps/details?id=com.theimaginedlife.engine'
@@ -24,7 +25,7 @@ const appJsonLd = {
   operatingSystem: 'iOS, Android',
   url: pageUrl,
   installUrl: googlePlayUrl,
-  publisher: { '@type': 'Organization', name: 'Maha Strategies LLC', url: 'https://www.mahastrategies.com' },
+  publisher: { '@id': MAHA_ORGANIZATION_ID },
   description: 'A companion app to The Imagined Life, combining the complete book with a private practice for attention, reflection, and action.',
 }
 

@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import type { Metadata } from 'next'
+import { MAHA_ORGANIZATION_ID } from '@/lib/entity'
 
 const SITE_URL = 'https://www.mahastrategies.com'
 
@@ -33,7 +34,7 @@ const articleJsonLd = {
   mainEntityOfPage: `${SITE_URL}/books/the-unfinished-species/the-blind-watchmaker-opens-his-eyes`,
   isPartOf: { '@id': `${SITE_URL}/books/the-unfinished-species#book` },
   author: { '@type': 'Person', name: 'Mayone Maha Rajan' },
-  publisher: { '@type': 'Organization', name: 'Maha Strategies LLC', url: SITE_URL },
+  publisher: { '@id': MAHA_ORGANIZATION_ID },
   datePublished: '2026-07-16',
   dateModified: '2026-07-16',
   isAccessibleForFree: true,

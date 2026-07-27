@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import { MAHA_ORGANIZATION_ID } from '@/lib/entity'
 
 export const metadata = {
   title: 'The Protocol of Precision | Strategic Doctrine',
@@ -13,11 +14,7 @@ export default function Page() {
     "headline": "The Protocol of Precision: Eliminating Systemic Slop",
     "description": "An operational directive on tuning internal instruments—body, mind, and spirit—to build an unshakeable pocket of biological integrity.",
     "proficiencyLevel": "Expert",
-    "publisher": {
-      "@type": "Organization",
-      "name": "Maha Strategies LLC",
-      "url": "https://mahastrategies.com"
-    },
+    "publisher": { "@id": MAHA_ORGANIZATION_ID },
     "datePublished": "2026-05-29"
   };
 

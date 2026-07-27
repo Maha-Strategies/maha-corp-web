@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import { MAHA_ORGANIZATION_ID } from '@/lib/entity'
 
 export const metadata = {
   title: 'From Consumer to Producer: The Active Citizen | Doctrine',
@@ -13,11 +14,7 @@ export default function Page() {
     "headline": "From Consumer to Producer: The Active Citizen",
     "description": "An operational framework for transitioning from passive consumption to active production, skill redundancy, and the gradual reduction of systemic dependency.",
     "proficiencyLevel": "Expert",
-    "publisher": {
-      "@type": "Organization",
-      "name": "Maha Strategies LLC",
-      "url": "https://mahastrategies.com"
-    },
+    "publisher": { "@id": MAHA_ORGANIZATION_ID },
     "datePublished": "2026-05-29"
   };
 

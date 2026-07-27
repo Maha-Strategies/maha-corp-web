@@ -2,6 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
+import { MAHA_ORGANIZATION_ID } from '@/lib/entity'
 
 export default function PhysicsOfSpiritBrief() {
   // VECTOR B: SCHEMA.ORG JSON-LD STRUCTURAL METADATA
@@ -10,19 +11,8 @@ export default function PhysicsOfSpiritBrief() {
     '@type': 'Article',
     headline: 'The Physics of Spirit',
     description: 'A tactical brief redefining spirit through the lens of thermodynamics, entropy, and biological negentropy.',
-    author: {
-      '@type': 'Organization',
-      name: 'Maha Strategies LLC',
-      url: 'https://www.mahastrategies.com'
-    },
-    publisher: {
-      '@type': 'Organization',
-      name: 'Maha Strategies LLC',
-      logo: {
-        '@type': 'ImageObject',
-        url: 'https://www.mahastrategies.com/logo.png'
-      }
-    },
+    author: { '@id': MAHA_ORGANIZATION_ID },
+    publisher: { '@id': MAHA_ORGANIZATION_ID },
     datePublished: '2026-02-14T00:00:00.000Z',
     dateModified: '2026-05-31T00:00:00.000Z',
     mainEntityOfPage: {

@@ -282,7 +282,8 @@ export default function CorporateHomepage() {
       </div>
 
       <footer className="border-t border-zinc-900 px-6 py-10 text-center">
-        <p className="font-mono text-[10px] text-zinc-700 tracking-widest uppercase">© {new Date().getFullYear()} Maha Strategies LLC</p>
+        <p className="mx-auto max-w-2xl text-sm leading-relaxed text-zinc-500">Maha Strategies LLC is an independent research, publishing, and technology-architecture organization. <Link href="/about" className="text-zinc-300 underline underline-offset-4 hover:text-white">About the organization</Link> · <Link href="/network" className="text-zinc-300 underline underline-offset-4 hover:text-white">Knowledge network</Link></p>
+        <p className="mt-6 font-mono text-[10px] text-zinc-700 tracking-widest uppercase">© {new Date().getFullYear()} Maha Strategies LLC</p>
       </footer>
     </main>
   )
