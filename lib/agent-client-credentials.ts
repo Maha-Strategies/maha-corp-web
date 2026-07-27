@@ -88,7 +88,7 @@ export async function authorizeBookPurchase(token: string): Promise<CredentialAu
 }
 
 export type BookEntitlementAuthorization =
-  | { kind: 'entitled'; clientId: string; bookId: string }
+  | { kind: 'entitled'; clientId: string; credentialId: string; bookId: string }
   | { kind: 'unavailable' }
   | { kind: 'unauthorized' }
   | { kind: 'not_entitled' }
@@ -117,7 +117,7 @@ export async function authorizeBookEntitlement(token: string, bookId: string): P
     return { kind: 'unavailable' }
   }
   if (!data) return { kind: 'not_entitled' }
-  return { kind: 'entitled', clientId: authorization.clientId, bookId }
+  return { kind: 'entitled', clientId: authorization.clientId, credentialId: authorization.credentialId, bookId }
 }
 
 type CredentialRecord = {

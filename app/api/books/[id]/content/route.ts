@@ -1,7 +1,9 @@
 import { authorizeBookEntitlement, bearerToken } from '@/lib/agent-client-credentials'
 import { jsonResponse } from '@/lib/agent-inquiries'
 import { isKnownBook } from '@/lib/books'
+import { recordCommercialApiUsage } from '@/lib/commercial-api-metering'
 import { readBookAst } from '@/lib/content'
+import { createAgentInquiryLedger } from '@/lib/agent-inquiry-ledger'
 
 export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
@@ -36,5 +38,7 @@ export async function GET(request: Request, context: RouteContext<'/api/books/[i
   if (!ast) {
     return jsonResponse({ error: { code: 'content_unavailable', message: 'Structured content is not available for this book yet.' } }, 404)
   }
+  const ledger = createAgentInquiryLedger()
+  if (ledger) await recordCommercialApiUsage(ledger, { credentialId: authorization.credentialId, operation: 'book_content', statusCode: 200 })
   return jsonResponse({ book: ast.slug, title: ast.title, chunkCount: ast.chunkCount, chunks: ast.chunks }, 200)
 }

@@ -1,6 +1,8 @@
 import { authorizeBookEntitlement, bearerToken } from '@/lib/agent-client-credentials'
 import { jsonResponse } from '@/lib/agent-inquiries'
 import { bookTitle, isKnownBook } from '@/lib/books'
+import { recordCommercialApiUsage } from '@/lib/commercial-api-metering'
+import { createAgentInquiryLedger } from '@/lib/agent-inquiry-ledger'
 
 export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
@@ -29,5 +31,7 @@ export async function GET(request: Request, context: RouteContext<'/api/books/[i
     return jsonResponse({ error: { code: 'not_entitled', message: 'This credential has not purchased this book.' } }, 403)
   }
 
+  const ledger = createAgentInquiryLedger()
+  if (ledger) await recordCommercialApiUsage(ledger, { credentialId: authorization.credentialId, operation: 'book_entitlement', statusCode: 200 })
   return jsonResponse({ title: bookTitle(id) }, 200)
 }

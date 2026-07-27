@@ -12,6 +12,7 @@ import {
 import { jsonResponse } from '@/lib/agent-inquiries'
 import { createCreditLedgerEntryId, ledgerEventHash, MPS_AUDIT_CREDIT_UNIT } from '@/lib/mps-credits'
 import { billingDecision } from '@/lib/mps-audit-billing'
+import { recordCommercialApiUsage } from '@/lib/commercial-api-metering'
 
 export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
@@ -84,6 +85,16 @@ function purchaseRequired() {
   }, 402)
 }
 
+async function meteredAuditResponse(
+  ledger: NonNullable<ReturnType<typeof createAgentInquiryLedger>>,
+  credentialId: string,
+  body: Record<string, unknown>,
+  status: number,
+) {
+  await recordCommercialApiUsage(ledger, { credentialId, operation: 'mps_audit', statusCode: status })
+  return jsonResponse(body, status)
+}
+
 export async function POST(request: Request) {
   const credentialToken = bearerToken(request)
   if (!credentialToken) return jsonResponse({ error: { code: 'unauthorized', message: 'A valid client credential is required.' } }, 401)
@@ -120,7 +131,7 @@ export async function POST(request: Request) {
     if (known.data.input_hash !== input.inputHash) {
       return jsonResponse({ error: { code: 'idempotency_conflict', message: 'clientRequestId was already used with different source text.' } }, 409)
     }
-    return jsonResponse(auditResponse(known.data, true), known.data.status === 'processing' ? 202 : 200)
+    return meteredAuditResponse(ledger, authorization.credentialId, auditResponse(known.data, true), known.data.status === 'processing' ? 202 : 200)
   }
 
   const auditId = createMpsAuditJobId()
@@ -150,7 +161,7 @@ export async function POST(request: Request) {
     if (billing.creditReserved) await changeAuditCredit(ledger, 'refund_mps_audit_credit', authorization.clientId, auditId)
     const replay = await existingAudit(ledger, authorization.credentialId, input.clientRequestId)
     if (!replay.error && replay.data && replay.data.input_hash === input.inputHash) {
-      return jsonResponse(auditResponse(replay.data, true), replay.data.status === 'processing' ? 202 : 200)
+      return meteredAuditResponse(ledger, authorization.credentialId, auditResponse(replay.data, true), replay.data.status === 'processing' ? 202 : 200)
     }
     return jsonResponse({ error: { code: 'idempotency_conflict', message: 'clientRequestId was already used with different source text.' } }, 409)
   }
@@ -182,7 +193,7 @@ export async function POST(request: Request) {
       console.error('MPS audit completion write failed:', completeError?.code ?? 'missing_record')
       return jsonResponse({ error: { code: 'ledger_unavailable', message: 'The audit result could not be recorded.' } }, 503)
     }
-    return jsonResponse(auditResponse(completed as StoredAudit), 201)
+    return meteredAuditResponse(ledger, authorization.credentialId, auditResponse(completed as StoredAudit), 201)
   } catch (error) {
     const failureCode = error instanceof MpsAuditError ? 'invalid_model_response' : 'model_unavailable'
     const { error: failError } = await ledger

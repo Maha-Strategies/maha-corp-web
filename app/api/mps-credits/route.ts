@@ -1,6 +1,7 @@
 import { authorizeClientCapabilityForBilling, bearerToken } from '@/lib/agent-client-credentials'
 import { jsonResponse } from '@/lib/agent-inquiries'
 import { createAgentInquiryLedger } from '@/lib/agent-inquiry-ledger'
+import { recordCommercialApiUsage } from '@/lib/commercial-api-metering'
 import { MPS_AUDIT_CREDIT_UNIT, creditBalance } from '@/lib/mps-credits'
 import { MPS_AUDIT_CAPABILITY } from '@/lib/mps-audit-jobs'
 
@@ -23,6 +24,7 @@ export async function GET(request: Request) {
     ledger.from('mps_credit_checkouts').select('public_id, credit_quantity, status, created_at, paid_at').eq('client_id', authorization.clientId).order('created_at', { ascending: false }).limit(20),
   ])
   if (entriesError || checkoutsError) return jsonResponse({ error: { code: 'ledger_unavailable', message: 'The credit ledger could not be read.' } }, 503)
+  await recordCommercialApiUsage(ledger, { credentialId: authorization.credentialId, operation: 'mps_credit_balance', statusCode: 200 })
   return jsonResponse({
     clientId: authorization.clientId,
     unit: MPS_AUDIT_CREDIT_UNIT,
