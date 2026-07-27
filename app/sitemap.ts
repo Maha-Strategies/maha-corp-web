@@ -39,6 +39,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${baseUrl}/audit`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.8 }, // ADDED CORE NODE
     { url: `${baseUrl}/mps`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.8 },   // ADDED CORE NODE
     { url: `${baseUrl}/mps/what-is-mps`, lastModified: new Date('2026-07-20'), changeFrequency: 'monthly', priority: 0.8 },
+    { url: `${baseUrl}/mps/learn`, lastModified: new Date('2026-07-27'), changeFrequency: 'monthly', priority: 0.8 },
+    { url: `${baseUrl}/mps/claim-level-provenance`, lastModified: new Date('2026-07-27'), changeFrequency: 'monthly', priority: 0.8 },
+    { url: `${baseUrl}/mps/citing-ai-assisted-research`, lastModified: new Date('2026-07-27'), changeFrequency: 'monthly', priority: 0.8 },
+    { url: `${baseUrl}/mps/source-interpretation-speculation`, lastModified: new Date('2026-07-27'), changeFrequency: 'monthly', priority: 0.8 },
     { url: `${baseUrl}/mps/audit-access`, lastModified: new Date('2026-07-20'), changeFrequency: 'monthly', priority: 0.8 },
     { url: `${baseUrl}/mps/preflight`, lastModified: new Date('2026-07-16'), changeFrequency: 'monthly', priority: 0.8 },
     { url: `${baseUrl}/overclock`, lastModified: new Date('2026-07-16'), changeFrequency: 'monthly', priority: 0.6 },
