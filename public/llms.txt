@@ -63,6 +63,10 @@ Content across this site and its ecosystem follows the Maha Provenance Standard 
 - [MPS Registry MCP endpoint](https://mps.mahastrategies.com/mcp): Read-only Streamable HTTP MCP service. Available tools: `search_claims`, `get_claim_record`, `get_evidence_packet`, and `compare_record_versions`.
 - MPS Audit API: `POST https://www.mahastrategies.com/api/mps-audits` applies the headless MPS/0.1 engine to a passage. It is available only to approved client credentials explicitly scoped to `mps_audit`; source text is processed but not retained in its private ledger. Request schema: https://www.mahastrategies.com/mps-audit-schema.json
 
+## Constraint Studio
+
+- [Maha Constraint Studio](https://www.mahastrategies.com/tools/constraint-studio): A free browser-local preflight for expressing a planning or optimization problem as a machine-readable Constraint Pack. It captures objectives, variables, hard constraints, soft preferences, assumptions, and data limits; checks structural completeness; and exports JSON for human review or future solver encoding. It does not solve the problem, access external systems, retain inputs, or make operational decisions.
+
 ## Agent Offers
 
 Machine-readable offer manifest: https://www.mahastrategies.com/agent-offers.json

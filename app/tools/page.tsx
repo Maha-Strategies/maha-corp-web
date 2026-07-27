@@ -5,7 +5,7 @@ const SITE_URL = 'https://www.mahastrategies.com'
 
 export const metadata: Metadata = {
   title: 'Tools & API | Maha Strategies',
-  description: 'Focused self-service utilities from Maha Strategies: receipt-to-CSV extraction and prepaid MPS claim-audit API access.',
+  description: 'Focused self-service utilities from Maha Strategies: decision specification, receipt-to-CSV extraction, and prepaid MPS claim-audit API access.',
   alternates: { canonical: '/tools' },
   openGraph: {
     type: 'website',
@@ -16,6 +16,14 @@ export const metadata: Metadata = {
 }
 
 const tools = [
+  {
+    eyebrow: 'Constraint Studio',
+    title: 'Turn a planning problem into a Constraint Pack',
+    body: 'Specify objectives, variables, hard limits, preferences, assumptions, and data gaps. Export a browser-local JSON handoff for human review or future solver work.',
+    href: '/tools/constraint-studio',
+    action: 'Build a Constraint Pack',
+    accent: 'cyan',
+  },
   {
     eyebrow: 'Receipt → CSV',
     title: 'Extract a receipt batch into one clean CSV',
@@ -57,7 +65,7 @@ export default function ToolsPage() {
           </p>
         </header>
 
-        <section className="mt-20 grid gap-5 md:grid-cols-3" aria-label="Maha Strategies self-service tools">
+        <section className="mt-20 grid gap-5 md:grid-cols-2" aria-label="Maha Strategies self-service tools">
           {tools.map((tool) => {
             const accent = tool.accent === 'emerald' ? 'text-emerald-300 hover:border-emerald-500' : tool.accent === 'cyan' ? 'text-cyan-200 hover:border-cyan-500' : 'text-indigo-300 hover:border-indigo-400'
             return (
