@@ -260,6 +260,9 @@ export default function AuditPage() {
                 style={{ display: "inline-block", background: "#EEF1EC", color: "#1A2420", padding: "10px 18px", fontSize: 12, letterSpacing: "0.1em", textDecoration: "none", borderRadius: 2 }}>
                 RUN PRIVATE PREFLIGHT — $49 →
               </a>
+              <a href="/mps/preflight/example" className="mono" style={{ display: "inline-block", marginLeft: 14, fontSize: 12, color: "#EEF1EC", textDecoration: "underline", textUnderlineOffset: 4 }}>
+                SEE SAMPLE REPORT
+              </a>
               <span className="mono" style={{ marginLeft: 14, fontSize: 12, color: "#9AA49D" }}>
                 or <a href="/contact" style={{ color: "#EEF1EC" }}>request human review</a>
               </span>

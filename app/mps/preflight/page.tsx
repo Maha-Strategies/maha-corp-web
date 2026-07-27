@@ -41,6 +41,7 @@ export default function MpsPreflightPage() {
             <div className="mt-8 flex flex-wrap gap-3 font-mono text-[10px] uppercase tracking-widest text-zinc-500">
               <span>One-time purchase</span><span>·</span><span>$49 USD</span><span>·</span><span>No account required</span>
             </div>
+            <p className="mt-5 text-sm leading-relaxed text-zinc-400">Want to see the format first? <Link href="/mps/preflight/example" className="text-indigo-300 underline underline-offset-4 hover:text-white">Inspect a transparent sample report</Link>.</p>
             <p className="mt-7 max-w-2xl text-sm leading-relaxed text-zinc-500">Need a complete manuscript, source-by-source resolution, or a review that someone can rely on in a high-stakes decision? Start with a <Link href="/contact" className="text-indigo-300 underline underline-offset-4 hover:text-white">human Evidence Audit inquiry</Link> instead.</p>
           </section>
           <aside className="border-l border-zinc-800 pl-0 lg:pl-10">
