@@ -4,6 +4,7 @@ import { parseMarkdownBlocks } from '@/lib/content'
 type BookManuscriptProps = {
   markdown: string
   skipFirstH1?: boolean
+  demoteH1?: boolean
 }
 
 function inlineMarkdown(text: string): ReactNode[] {
@@ -14,7 +15,7 @@ function inlineMarkdown(text: string): ReactNode[] {
   })
 }
 
-export default function BookManuscript({ markdown, skipFirstH1 = false }: BookManuscriptProps) {
+export default function BookManuscript({ markdown, skipFirstH1 = false, demoteH1 = false }: BookManuscriptProps) {
   return (
     <div className="prose prose-invert prose-lg max-w-none prose-p:text-zinc-300 prose-p:leading-[1.85] prose-p:mb-7 prose-strong:text-white prose-em:text-zinc-300 prose-li:text-zinc-300 prose-li:leading-relaxed">
       {parseMarkdownBlocks(markdown, { skipFirstH1 }).map((block, index) => {
@@ -25,7 +26,7 @@ export default function BookManuscript({ markdown, skipFirstH1 = false }: BookMa
           return <p key={index}>{inlineMarkdown(block.text)}</p>
         }
         const content = inlineMarkdown(block.text)
-        if (block.level === 1) return <h1 key={index}>{content}</h1>
+        if (block.level === 1) return demoteH1 ? <h2 key={index}>{content}</h2> : <h1 key={index}>{content}</h1>
         if (block.level === 2) return <h2 key={index}>{content}</h2>
         if (block.level === 3) return <h3 key={index}>{content}</h3>
         if (block.level === 4) return <h4 key={index}>{content}</h4>
