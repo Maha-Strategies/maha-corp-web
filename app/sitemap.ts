@@ -59,6 +59,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${baseUrl}/books`, lastModified: new Date('2026-07-28'), changeFrequency: 'weekly', priority: 0.9 },
     { url: `${baseUrl}/books/mcp-access`, lastModified: new Date('2026-07-20'), changeFrequency: 'monthly', priority: 0.7 },
     { url: `${baseUrl}/books/the-borrowed-light`, lastModified: new Date('2026-07-28'), changeFrequency: 'weekly', priority: 0.8 },
+    { url: `${baseUrl}/books/the-borrowed-light/m-theory-faq`, lastModified: new Date('2026-07-28'), changeFrequency: 'monthly', priority: 0.8 },
     { url: `${baseUrl}/books/the-synthetic-self`, lastModified: new Date('2026-07-16'), changeFrequency: 'weekly', priority: 0.8 },
     { url: `${baseUrl}/books/the-synthetic-self/ai-is-a-mirror`, lastModified: new Date('2026-07-16'), changeFrequency: 'monthly', priority: 0.7 },
     { url: `${baseUrl}/books/the-synthetic-self/the-learning-machine`, lastModified: new Date('2026-07-16'), changeFrequency: 'monthly', priority: 0.8 },

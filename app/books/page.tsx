@@ -31,6 +31,7 @@ const books = [
     description: 'A book about the self, relationship, and the structures we borrow from one another to become real.',
     href: '/books/the-borrowed-light',
     readHref: '/books/the-borrowed-light/read',
+    guide: { title: 'M-Theory, Plainly', href: '/books/the-borrowed-light/m-theory-faq' },
     chapter: { title: 'The Light Without a Source', href: '/books/the-borrowed-light/read/introduction' },
   },
   {
