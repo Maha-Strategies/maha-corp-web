@@ -193,6 +193,8 @@ export default function OnDeviceAiVsCloudPage() {
       </section>
 
       <section className="mt-14 flex flex-wrap gap-4 border-t border-zinc-800 pt-10">
+        <Link href="/mps/learn/implementation" className="border border-zinc-600 px-5 py-3 font-mono text-xs font-bold uppercase tracking-widest text-zinc-100 hover:border-white">Use the implementation framework</Link>
+        <Link href="/mps/learn" className="border border-zinc-600 px-5 py-3 font-mono text-xs font-bold uppercase tracking-widest text-zinc-100 hover:border-white">MPS Learning Center</Link>
         <Link href="/software" className="border border-zinc-600 px-5 py-3 font-mono text-xs font-bold uppercase tracking-widest text-zinc-100 hover:border-white">Explore Maha OS</Link>
         <Link href="/systemic-sovereignty" className="border border-zinc-600 px-5 py-3 font-mono text-xs font-bold uppercase tracking-widest text-zinc-100 hover:border-white">Read systemic sovereignty</Link>
       </section>
