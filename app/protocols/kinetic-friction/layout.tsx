@@ -1,10 +1,9 @@
-import { Metadata } from 'next';
+import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'The Iron Engine & The Necessity of Friction | Maha Strategies',
-  description: 'Overcoming the frictionless digital grid through kinetic separation and engineered resistance to restore neurobiological drive.',
-};
-
-export default function Layout({ children }: { children: React.ReactNode }) {
-  return <>{children}</>;
+  title: 'The Necessity of Friction | Maha Strategies',
+  description: 'A protocol for restoring deliberate effort, delay, and resistance to digital environments designed for instant reward.',
+  alternates: { canonical: '/protocols/kinetic-friction' },
 }
+
+export default function Layout({ children }: Readonly<{ children: React.ReactNode }>) { return children }

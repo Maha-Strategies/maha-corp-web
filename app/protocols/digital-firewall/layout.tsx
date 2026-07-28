@@ -1,10 +1,9 @@
-import { Metadata } from 'next';
+import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'The Saturnian Perimeter & The Digital Firewall | Maha Strategies',
-  description: 'Constructing a rigid digital boundary to counter runaway algorithmic amplification, restrict synthetic noise, and protect cognitive yield.',
-};
-
-export default function Layout({ children }: { children: React.ReactNode }) {
-  return <>{children}</>;
+  title: 'The Digital Firewall | Maha Strategies',
+  description: 'A practical framework for creating deliberate information boundaries in an environment built to amplify noise.',
+  alternates: { canonical: '/protocols/digital-firewall' },
 }
+
+export default function Layout({ children }: Readonly<{ children: React.ReactNode }>) { return children }

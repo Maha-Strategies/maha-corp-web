@@ -1,10 +1,9 @@
-import { Metadata } from 'next';
+import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'The Algorithmic Trance & Metabolic Sovereignty | Maha Strategies',
-  description: 'Quantifying cognitive extraction and establishing a baseline of Metabolic Purity as the substrate of biological sovereignty.',
-};
-
-export default function Layout({ children }: { children: React.ReactNode }) {
-  return <>{children}</>;
+  title: 'Metabolic Sovereignty | Maha Strategies',
+  description: 'A protocol about attention, biological limits, and the relationship between digital environments and human agency.',
+  alternates: { canonical: '/protocols/metabolic-sovereignty' },
 }
+
+export default function Layout({ children }: Readonly<{ children: React.ReactNode }>) { return children }
