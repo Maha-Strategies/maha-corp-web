@@ -6,25 +6,33 @@ const SITE_URL = 'https://www.mahastrategies.com'
 export const metadata: Metadata = {
   title: 'Books & Essays | Maha Strategies',
   description:
-    'Open web editions by Mayone Maha Rajan on artificial intelligence, self-regulation, evolution, dreaming, and the human future.',
+    'Open web editions by Mayone Maha Rajan on artificial intelligence, self-regulation, evolution, dreaming, relationship, and the human future.',
   alternates: { canonical: '/books' },
   openGraph: {
     type: 'website',
     url: `${SITE_URL}/books`,
     title: 'Books & Essays | Maha Strategies',
-    description: 'Four complete open web editions by Mayone Maha Rajan, with guides and essays.',
+    description: 'Five complete open web editions by Mayone Maha Rajan, with guides and essays.',
     images: [{ url: '/og-master.png', width: 1200, height: 630, alt: 'Books & Essays — Maha Strategies' }],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Books & Essays | Maha Strategies',
-    description: 'Four open web editions by Mayone Maha Rajan.',
+    description: 'Five open web editions by Mayone Maha Rajan.',
     images: ['/og-master.png'],
     creator: '@mayonemaha',
   },
 }
 
 const books = [
+  {
+    title: 'The Borrowed Light',
+    subtitle: 'The Physics of a Self Made With Others',
+    description: 'A book about the self, relationship, and the structures we borrow from one another to become real.',
+    href: '/books/the-borrowed-light',
+    readHref: '/books/the-borrowed-light/read',
+    chapter: { title: 'The Light Without a Source', href: '/books/the-borrowed-light/read/introduction' },
+  },
   {
     title: 'The Orbital Mind',
     subtitle: 'The Astrophysics of the Self',
@@ -71,7 +79,7 @@ export default function BooksPage() {
           <p className="font-mono text-xs text-indigo-300 tracking-widest uppercase mb-5">[ Maha Strategies // Open Editions ]</p>
           <h1 className="text-4xl sm:text-5xl md:text-6xl font-light text-white leading-[1.08] tracking-tight mb-6">Books &amp; essays</h1>
           <p className="text-xl sm:text-2xl text-zinc-200 font-light leading-relaxed mb-5">
-            Four works about the systems that shape a person: intelligence, attention, evolution, imagination, and the choices that follow from them.
+            Five works about the systems that shape a person: intelligence, attention, evolution, imagination, relationship, and the choices that follow from them.
           </p>
           <p className="text-base sm:text-lg text-zinc-400 leading-relaxed">
             Each open edition includes the complete manuscript, with stable chapter links for focused reading, plus companion guides and essays where available.
@@ -87,14 +95,14 @@ export default function BooksPage() {
                 <p className="font-mono text-xs text-zinc-400 tracking-widest uppercase mb-5">{book.subtitle}</p>
                 <p className="text-zinc-400 leading-relaxed mb-7">{book.description}</p>
                 <div className="flex flex-col gap-3 border-t border-zinc-800 pt-5 text-sm">
-                  <Link href={book.guide.href} className="text-indigo-200 hover:text-white transition-colors">
+                  {'guide' in book && book.guide ? <Link href={book.guide.href} className="text-indigo-200 hover:text-white transition-colors">
                     New reader? {book.guide.title} ↗
-                  </Link>
+                  </Link> : null}
                   <Link href={book.readHref} className="font-mono text-xs text-white hover:text-indigo-200 tracking-widest uppercase transition-colors">
                     Read complete edition ↗
                   </Link>
                   <Link href={book.chapter.href} className="text-zinc-400 hover:text-white transition-colors">
-                    Start with Chapter 1: {book.chapter.title} ↗
+                    Start with {book.title === 'The Borrowed Light' ? 'the introduction' : 'Chapter 1'}: {book.chapter.title} ↗
                   </Link>
                   <Link href={book.href} className="font-mono text-xs text-zinc-400 hover:text-white tracking-widest uppercase transition-colors mt-1">
                     Explore the book ↗

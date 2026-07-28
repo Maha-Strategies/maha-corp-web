@@ -3,10 +3,10 @@ import { resolve, sep } from 'node:path'
 
 export type OpenBookSection = { slug: string; title: string; marker: string }
 export type OpenBookEdition = {
-  slug: 'the-imagined-life' | 'the-orbital-mind' | 'the-synthetic-self'
+  slug: 'the-borrowed-light' | 'the-imagined-life' | 'the-orbital-mind' | 'the-synthetic-self'
   title: string
   subtitle: string
-  manuscriptFile: string
+  manuscriptFiles: string[]
   sections: OpenBookSection[]
 }
 
@@ -16,7 +16,7 @@ const CONTENT_ROOT = resolve(process.cwd(), 'content', 'books')
 // URLs are derived views, never separately maintained chapter copies.
 export const openBookEditions: Record<OpenBookEdition['slug'], OpenBookEdition> = {
   'the-imagined-life': {
-    slug: 'the-imagined-life', title: 'The Imagined Life', subtitle: 'Living Inside a Dreaming Brain', manuscriptFile: 'the-imagined-life.md',
+    slug: 'the-imagined-life', title: 'The Imagined Life', subtitle: 'Living Inside a Dreaming Brain', manuscriptFiles: ['the-imagined-life.md'],
     sections: [
       ['introduction', 'Introduction: The Faculty of the Possible', '# Introduction: The Faculty of the Possible'],
       ['what-happens-when-you-sleep', 'Chapter 1: What Happens When You Sleep', '# Chapter 1 — What Happens When You Sleep'],
@@ -35,7 +35,7 @@ export const openBookEditions: Record<OpenBookEdition['slug'], OpenBookEdition> 
     ].map(([slug, title, marker]) => ({ slug, title, marker })),
   },
   'the-synthetic-self': {
-    slug: 'the-synthetic-self', title: 'The Synthetic Self', subtitle: 'Engineering the Soul of the Machine', manuscriptFile: 'the-synthetic-self.md',
+    slug: 'the-synthetic-self', title: 'The Synthetic Self', subtitle: 'Engineering the Soul of the Machine', manuscriptFiles: ['the-synthetic-self.md'],
     sections: [
       ['introduction', 'Introduction: The Mirror We Built', '## Introduction: The Mirror We Built'],
       ['the-learning-machine', 'Chapter 1: The Learning Machine', '# Chapter 1 — The Learning Machine'],
@@ -56,7 +56,7 @@ export const openBookEditions: Record<OpenBookEdition['slug'], OpenBookEdition> 
     ].map(([slug, title, marker]) => ({ slug, title, marker })),
   },
   'the-orbital-mind': {
-    slug: 'the-orbital-mind', title: 'The Orbital Mind', subtitle: 'The Astrophysics of the Self', manuscriptFile: 'the-orbital-mind.md',
+    slug: 'the-orbital-mind', title: 'The Orbital Mind', subtitle: 'The Astrophysics of the Self', manuscriptFiles: ['the-orbital-mind.md'],
     sections: [
       ['maha-framework', 'A Note on the Maha Framework', '# A Note on the Maha Framework'],
       ['how-to-use-this-book', 'How to Use This Book', '# How to Use This Book'],
@@ -83,20 +83,42 @@ export const openBookEditions: Record<OpenBookEdition['slug'], OpenBookEdition> 
       ['predictions-that-could-lose', 'Appendix F: Predictions That Could Lose', '# Appendix F · A Research Program: Predictions That Could Lose'],
     ].map(([slug, title, marker]) => ({ slug, title, marker })),
   },
+  'the-borrowed-light': {
+    slug: 'the-borrowed-light', title: 'The Borrowed Light', subtitle: 'The Physics of a Self Made With Others',
+    manuscriptFiles: ['introduction.md', 'chapter-1.md', 'chapter-2.md', 'chapter-3.md', 'chapter-4.md', 'chapter-5.md', 'chapter-6.md', 'chapter-7.md', 'chapter-8.md', 'chapter-9.md', 'chapter-10.md', 'chapter-11.md', 'appendix-a.md', 'appendix-b.md'],
+    sections: [
+      ['introduction', 'Introduction: The Light Without a Source', '## Introduction — The Light Without a Source'],
+      ['the-amnesia-of-the-sources', 'Chapter 1: The Amnesia of the Sources', '## Chapter One — The Amnesia of the Sources, The Far Side, and the Physics of Own Gravity'],
+      ['five-certain-theories', 'Chapter 2: Five Certain Theories', '## Chapter Two — Five Certain Theories, The Elephant, and the Physics of Rival Certainties'],
+      ['the-intimate-and-the-vast', 'Chapter 3: The Intimate and the Vast', '## Chapter Three — The Intimate and the Vast, The Kitchen Table, and the Physics of the Curled Dimension'],
+      ['the-legible-adversary', 'Chapter 4: The Legible Adversary', '## Chapter Four — The Legible Adversary, The Chipped Mug, and the Physics of Strong Coupling'],
+      ['the-invariants', 'Chapter 5: The Invariants', '## Chapter Five — The Invariants, The Two Funerals, and the Physics of Mirror Worlds'],
+      ['the-boundary-that-writes-the-bulk', 'Chapter 6: The Boundary That Writes the Bulk', '## Chapter Six — The Boundary That Writes the Bulk, The Wake, and the Physics of the Written Surface'],
+      ['endpoints', 'Chapter 7: Endpoints', '## Chapter Seven — Endpoints, The Strange Situation, and the Physics of the Attached String'],
+      ['what-crosses-anyway', 'Chapter 8: What Crosses Anyway', '## Chapter Eight — What Crosses Anyway, The Blocked Number, and the Physics of the Closed String'],
+      ['the-chosen-world', 'Chapter 9: The Chosen World', '## Chapter Nine — The Chosen World, The Vow, and the Physics of the Landscape'],
+      ['the-worlds-that-cannot-be-built', 'Chapter 10: The Worlds That Cannot Be Built', '## Chapter Ten — The Worlds That Cannot Be Built, The Phalanstery, and the Physics of the Swampland'],
+      ['the-unnamed-unity', 'Chapter 11: The Unnamed Unity', '## Chapter Eleven — The Unnamed Unity, The Upside-Down W, and the Physics of the Letter M'],
+      ['what-m-theory-is-and-isnt', "Appendix A: What M-Theory Actually Is and Isn't", "## Appendix A — What M-Theory Actually Is and Isn't"],
+      ['provenance-index', 'Appendix B: Provenance Index', '## Appendix B — Provenance Index'],
+    ].map(([slug, title, marker]) => ({ slug, title, marker })),
+  },
 }
 
 export function getOpenBookEdition(slug: string): OpenBookEdition | null {
   return slug in openBookEditions ? openBookEditions[slug as OpenBookEdition['slug']] : null
 }
 
-function manuscriptPath(book: OpenBookEdition) {
-  const file = resolve(CONTENT_ROOT, book.slug, book.manuscriptFile)
+function manuscriptPath(book: OpenBookEdition, filename: string) {
+  const file = resolve(CONTENT_ROOT, book.slug, filename)
   if (!file.startsWith(CONTENT_ROOT + sep)) throw new Error('Invalid book manuscript path.')
   return file
 }
 
 export function readOpenBookManuscript(book: OpenBookEdition): string {
-  return readFileSync(manuscriptPath(book), 'utf8')
+  return book.manuscriptFiles
+    .map((filename) => readFileSync(manuscriptPath(book, filename), 'utf8').replace(/^# THE BORROWED LIGHT\s*\r?\n\r?\n?/i, '').trim())
+    .join('\n\n')
 }
 
 export function getOpenBookSection(book: OpenBookEdition, slug: string): { section: OpenBookSection; markdown: string } | null {

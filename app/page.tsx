@@ -52,6 +52,12 @@ const capabilities = [
 const work = [
   {
     category: 'OPEN EDITION',
+    title: 'The Borrowed Light',
+    copy: 'A book about the self, relationship, and the structures we borrow from one another to become real.',
+    href: '/books/the-borrowed-light',
+  },
+  {
+    category: 'OPEN EDITION',
     title: 'The Orbital Mind',
     copy: 'A systems psychology of attention, desire, agency, limit, imagination, and integration.',
     href: '/books/the-orbital-mind',
