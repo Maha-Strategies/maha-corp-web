@@ -47,6 +47,7 @@ export default function TheBorrowedLightHub() {
         <p className="text-base sm:text-lg text-zinc-400 leading-relaxed">Across eleven chapters and two appendices, it uses the structures of M-theory as a carefully marked analogy—not as proof—to explore intimacy, belief, commitment, grief, and the conditions under which a life can hold its shape.</p>
       </section>
       <Link href="/books/the-borrowed-light/read" className="mt-10 inline-block bg-white px-7 py-4 font-mono text-xs font-bold uppercase tracking-widest text-black transition-colors hover:bg-zinc-200">Choose a chapter ↗</Link>
+      <p className="mt-5 text-sm leading-relaxed text-zinc-400">New to the physics? Start with the <Link href="/books/the-borrowed-light/m-theory-faq" className="text-indigo-300 underline underline-offset-4 hover:text-white">plain-English M-theory FAQ</Link>.</p>
       <MarkdownArticle blocks={blocks} />
     </article>
   </main>
