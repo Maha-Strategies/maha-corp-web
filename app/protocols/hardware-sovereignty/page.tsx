@@ -1,11 +1,13 @@
 import React from 'react';
 import Link from 'next/link';
+import type { Metadata } from 'next';
 import { MAHA_ORGANIZATION_ID } from '@/lib/entity'
 
-export const metadata = {
+export const metadata: Metadata = {
   title: 'Hardware Sovereignty & Custom Silicon | Maha Strategies LLC',
   description: 'A strategic advisory framework for deploying custom silicon to guarantee data sovereignty and secure computing infrastructure.',
   keywords: 'custom silicon design firms, data sovereignty consulting, ai hardware consulting, secure computing infrastructure',
+  alternates: { canonical: '/protocols/hardware-sovereignty' },
 };
 
 export default function HardwareSovereigntyProtocol() {

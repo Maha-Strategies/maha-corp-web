@@ -93,7 +93,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${baseUrl}/protocols/metabolic-sovereignty`, lastModified: new Date(), priority: 0.8 },
     { url: `${baseUrl}/protocols/digital-firewall`, lastModified: new Date(), priority: 0.8 },
     { url: `${baseUrl}/protocols/kinetic-friction`, lastModified: new Date(), priority: 0.8 },
-    { url: `${baseUrl}/protocols/hardware-sovereignty`, lastModified: new Date(), priority: 0.8 },
+    { url: `${baseUrl}/protocols/hardware-sovereignty`, lastModified: new Date('2026-05-30'), changeFrequency: 'monthly', priority: 0.8 },
 
     // COGNITIVE GRID & MCP
     { url: `${baseUrl}/research/mcp`, lastModified: new Date(), changeFrequency: 'weekly', priority: 0.8 },
