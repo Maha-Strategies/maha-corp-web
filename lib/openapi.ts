@@ -95,8 +95,47 @@ export const openApiDocument = {
     { name: 'Books', description: 'Purchased-book entitlement checks for the local MCP bridge.' },
     { name: 'Enterprise MCP Gateway', description: 'Tenant-scoped MCP proxy for operator-registered public upstream servers.' },
     { name: 'Context Compiler', description: 'Deterministic, source-linked context-pack compilation with privacy-safe measurement.' },
+    { name: 'Maha Tensor-Opt (Mock)', description: 'Integration-only mock contract for the planned tensor-network optimization service.' },
   ],
   paths: {
+    '/api/v1/tensor-opt': {
+      post: {
+        tags: ['Maha Tensor-Opt (Mock)'],
+        operationId: 'createMockTensorOptJob',
+        summary: 'Validate a Tensor-Opt integration request and return a mock job',
+        description: 'Integration stub only. The endpoint does not accept matrix terms, queue compute, store source input, or make a performance claim. It returns a deterministic mock job envelope for frontend and SDK work.',
+        requestBody: {
+          required: true,
+          content: {
+            'application/json': {
+              schema: {
+                type: 'object', required: ['clientRequestId', 'problem'], properties: {
+                  clientRequestId: { type: 'string', minLength: 8, maxLength: 120 },
+                  problem: {
+                    type: 'object', required: ['formulation'], properties: {
+                      formulation: { type: 'string', enum: ['qubo', 'ising'] },
+                      variableCount: { type: 'integer', minimum: 1, maximum: 1000000, description: 'Required for QUBO.' },
+                      spinCount: { type: 'integer', minimum: 1, maximum: 1000000, description: 'Required for Ising.' },
+                    },
+                  },
+                  solver: { type: 'object', properties: { bondDimensionMax: { type: 'number' }, maxSweeps: { type: 'number' }, seed: { type: 'number' } } },
+                  target: { type: 'object', properties: { kind: { type: 'string', enum: ['gpu', 'tpu'] } } },
+                },
+              },
+            },
+          },
+        },
+        responses: {
+          '202': {
+            description: 'Mock job accepted; no optimization has run.',
+            headers: { 'X-Maha-API-Mode': { schema: { const: 'mock' }, description: 'Signals that this response is a contract stub.' } },
+            content: { 'application/json': { schema: { type: 'object', required: ['mock', 'jobId', 'status', 'clientRequestId', 'inputHash', 'citations', 'sourceTextStored'], properties: { mock: { const: true }, jobId: { type: 'string', pattern: '^topt_[a-f0-9]{32}$' }, status: { const: 'queued' }, clientRequestId: { type: 'string' }, inputHash: { type: 'string', pattern: '^[a-f0-9]{64}$' }, citations: { type: 'array', minItems: 1, items: { type: 'object' } }, sourceTextStored: { const: false } } } } },
+          },
+          '400': errorResponse('Invalid mock Tensor-Opt request.'),
+          '415': errorResponse('Content-Type must be application/json.'),
+        },
+      },
+    },
     '/api/agentic-commerce/offers': {
       get: {
         tags: ['Agentic Commerce'],
