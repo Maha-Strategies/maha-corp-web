@@ -63,6 +63,7 @@ The Context Compiler produces a bounded, source-linked Context Pack before an ag
 - Request schema: https://www.mahastrategies.com/context-pack-evaluation-schema.json
 - Required credential capability: `context_compile`
 - The evaluator requires each test span to be an exact span from a declared source document. It returns retained/omitted evidence status and efficiency metrics; it does not evaluate factual accuracy or a model's final answer.
+- GitHub Action: `Maha-Strategies/maha-corp-web/.github/actions/maha-context-evidence@main`. It uses a `context_compile` credential stored as a GitHub Secret and can fail a pull request below a configured evidence-retention threshold.
 
 ## Other available products
 

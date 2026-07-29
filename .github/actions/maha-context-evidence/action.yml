@@ -1,0 +1,59 @@
+name: Maha Context & Evidence Check
+description: Compile bounded agent context and optionally fail a pull request when declared source evidence is omitted.
+author: Maha Strategies
+
+inputs:
+  credential:
+    description: Context Compiler credential with the context_compile capability. Store it in GitHub Secrets.
+    required: true
+  documents-file:
+    description: Path to JSON containing either a documents array or an object with a documents array.
+    required: true
+  task:
+    description: The bounded agent task the Context Pack will support.
+    required: true
+  token-budget:
+    description: Model-neutral estimated-token budget for the compiled Context Pack.
+    required: false
+    default: '2000'
+  required-evidence-file:
+    description: Optional path to JSON containing either a requiredEvidence array or an object with that array. Each span must exactly appear in its declared source document.
+    required: false
+    default: ''
+  fail-below-evidence-retention:
+    description: Optional integer 0-100. When evidence is supplied, fail the check below this retention percentage. Set 0 to report only.
+    required: false
+    default: '0'
+  api-url:
+    description: Maha Strategies API origin.
+    required: false
+    default: https://www.mahastrategies.com
+
+outputs:
+  pack-id:
+    description: Context Pack identifier returned by Maha.
+    value: ${{ steps.check.outputs.pack-id }}
+  estimated-reduction-percent:
+    description: Model-neutral estimated context reduction percentage.
+    value: ${{ steps.check.outputs.estimated-reduction-percent }}
+  required-evidence-retention-percent:
+    description: Exact-span retention percentage when required evidence is supplied.
+    value: ${{ steps.check.outputs.required-evidence-retention-percent }}
+  source-coverage-percent:
+    description: Percentage of supplied sources represented in the compiled pack.
+    value: ${{ steps.check.outputs.source-coverage-percent }}
+
+runs:
+  using: composite
+  steps:
+    - id: check
+      shell: bash
+      env:
+        MAHA_CONTEXT_CREDENTIAL: ${{ inputs.credential }}
+        INPUT_DOCUMENTS_FILE: ${{ inputs.documents-file }}
+        INPUT_TASK: ${{ inputs.task }}
+        INPUT_TOKEN_BUDGET: ${{ inputs.token-budget }}
+        INPUT_REQUIRED_EVIDENCE_FILE: ${{ inputs.required-evidence-file }}
+        INPUT_FAIL_BELOW_EVIDENCE_RETENTION: ${{ inputs.fail-below-evidence-retention }}
+        INPUT_API_URL: ${{ inputs.api-url }}
+      run: node "$GITHUB_ACTION_PATH/check.mjs"

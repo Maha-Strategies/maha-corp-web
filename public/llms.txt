@@ -121,6 +121,7 @@ Commercial MCP bridge compatibility manifest: https://www.mahastrategies.com/api
 - [Context Pack Evaluator](https://www.mahastrategies.com/context-pack-evaluator): Measures Context Pack efficiency and whether caller-declared, exact source spans were retained after deterministic compilation.
 - Endpoint: `POST https://www.mahastrategies.com/api/context-pack-evaluations`; request schema: https://www.mahastrategies.com/context-pack-evaluation-schema.json; required credential capability: `context_compile`.
 - A retained result means a named source span appears in an included passage from its declared source. It does not establish source truth, answer quality, downstream model behavior, or regulatory compliance. The ledger stores hashes and aggregate results only—not required evidence, sources or compiled context.
+- GitHub Action: `Maha-Strategies/maha-corp-web/.github/actions/maha-context-evidence@main`. It compiles repository-managed documents on a pull request, writes privacy-safe metrics to the job summary, and can fail below a configured exact-span evidence-retention threshold. Setup: https://github.com/Maha-Strategies/maha-corp-web/tree/main/.github/actions/maha-context-evidence
 
 ## MPS Preflight
 
