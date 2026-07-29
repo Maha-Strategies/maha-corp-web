@@ -35,6 +35,35 @@ Compatibility manifest: https://www.mahastrategies.com/api/mcp-bridge/manifest
 
 This local commercial bridge is distinct from the hosted Maha Cognitive Gateway at https://mcp.maha-os.com/mcp. The two services use separate credentials and tool sets.
 
+## Enterprise MCP Gateway
+
+The Enterprise MCP Gateway is separate from both the local bridge and the hosted Cognitive Gateway. It is a tenant-scoped control layer for registered upstream MCP servers: https://www.mahastrategies.com/enterprise-mcp-gateway
+
+- Contract: https://www.mahastrategies.com/mcp-gateway-contract.json
+- Gateway endpoint: `POST https://www.mahastrategies.com/api/mcp-gateway/{serverId}`
+- Required credential capability: `mcp_gateway`
+- Enforced boundary: the credential and server must belong to the same registered client tenant.
+- First release supports public HTTPS JSON upstreams only. It never forwards the caller's bearer credential or stores an upstream credential. Private upstream connectivity requires a future OAuth token-exchange integration.
+- Operators may require a registered Context Pack for named approved tools. Calls then carry `contextPackId`, `contextPackHash`, and `context`; the gateway confirms the exact context hash is registered to the same tenant before forwarding. Context contents are not retained.
+
+## Context Compiler
+
+The Context Compiler produces a bounded, source-linked Context Pack before an agent receives document context.
+
+- Product page: https://www.mahastrategies.com/context-compiler
+- API: `POST https://www.mahastrategies.com/api/context-packs`
+- Request schema: https://www.mahastrategies.com/context-pack-schema.json
+- Required credential capability: `context_compile`
+- The service returns source references, hashes, and model-neutral estimated-token metrics. It retains neither source text nor compiled context in its ledger, and it does not make verification or hallucination-prevention claims.
+
+## Context Pack Evaluator
+
+- Product page: https://www.mahastrategies.com/context-pack-evaluator
+- API: `POST https://www.mahastrategies.com/api/context-pack-evaluations`
+- Request schema: https://www.mahastrategies.com/context-pack-evaluation-schema.json
+- Required credential capability: `context_compile`
+- The evaluator requires each test span to be an exact span from a declared source document. It returns retained/omitted evidence status and efficiency metrics; it does not evaluate factual accuracy or a model's final answer.
+
 ## Other available products
 
 - **MPS Preflight**: $49 self-service private document review. Product page: https://www.mahastrategies.com/mps/preflight. A human authorizes Stripe Checkout; it is automated triage, not a certification or source-by-source human verification.

@@ -1,0 +1,22 @@
+import type { Metadata } from 'next'
+import Link from 'next/link'
+
+export const metadata: Metadata = {
+  title: 'Maha Context Compiler | Measured AI Context Efficiency',
+  description: 'Compile raw documents into source-linked Context Packs with transparent, model-neutral efficiency measurements.',
+  alternates: { canonical: '/context-compiler' },
+}
+
+export default function ContextCompilerPage() {
+  return <main className="min-h-screen bg-[#0a0a0c] px-6 py-20 text-zinc-200 sm:py-28"><div className="mx-auto max-w-4xl">
+    <p className="font-mono text-[10px] uppercase tracking-[0.24em] text-cyan-300">[ Maha Strategies // epistemic middleware ]</p>
+    <h1 className="mt-5 max-w-3xl text-4xl font-light leading-tight text-white sm:text-6xl">Give agents less context. Keep the evidence path.</h1>
+    <p className="mt-6 max-w-3xl text-lg leading-relaxed text-zinc-400">The Maha Context Compiler turns a bounded set of raw documents into a task-specific Context Pack: deduplicated passages, source references, hashes, and transparent before/after measurements. It is deterministic middleware, not a model wrapper.</p>
+    <section className="mt-10 grid gap-4 md:grid-cols-3"><Card title="Measure" body="Record original and compiled bytes, model-neutral estimated tokens, reduction percentage, source coverage, and duplicates removed." /><Card title="Trace" body="Every included passage points back to a source ID, passage position, and content hash. The original document is never stored." /><Card title="Constrain" body="Set a context budget and an explicit task. Passages that do not fit are excluded visibly rather than silently overflowing the prompt." /></section>
+    <section className="mt-12 border border-cyan-900 bg-cyan-950/15 p-6"><h2 className="text-xl text-white">What this first release does not claim</h2><p className="mt-3 text-sm leading-relaxed text-zinc-300">It does not promise a fixed percentage reduction, exact provider token counts, complete source coverage, factual verification, or hallucination prevention. Those are workload-specific outcomes to measure. Use <Link href="/mps" className="text-cyan-200 underline">MPS</Link> when consequential claims need a separate provenance review.</p></section>
+    <section className="mt-12"><h2 className="text-2xl text-white">Machine integration</h2><p className="mt-3 max-w-3xl text-sm leading-relaxed text-zinc-400">Authenticated clients call the Context Pack API with a task, a token budget, and 1–8 textual sources. The response is returned directly; the service retains only a privacy-safe outcome ledger, not source text or the compiled pack.</p><div className="mt-5 flex flex-wrap gap-3"><a className="border border-cyan-600 px-4 py-2 font-mono text-xs uppercase tracking-widest text-cyan-100 hover:bg-cyan-950/50" href="/context-pack-schema.json">Read request schema</a><a className="border border-zinc-700 px-4 py-2 font-mono text-xs uppercase tracking-widest text-zinc-300 hover:border-cyan-500" href="/api/docs/openapi">OpenAPI contract</a><Link className="border border-zinc-700 px-4 py-2 font-mono text-xs uppercase tracking-widest text-zinc-300 hover:border-cyan-500" href="/enterprise-mcp-gateway">Enterprise MCP Gateway</Link></div></section>
+    <section className="mt-12 border-t border-zinc-800 pt-8"><h2 className="text-2xl text-white">How it unifies Maha</h2><p className="mt-3 max-w-3xl text-sm leading-relaxed text-zinc-400">Context Packs are the portable evidence object between the corporate systems: MPS can review their consequential claims; the Enterprise MCP Gateway can restrict which tools receive them; and the commercial ledger can measure where compact, source-linked context is actually used.</p></section>
+  </div></main>
+}
+
+function Card({ title, body }: { title: string; body: string }) { return <article className="border border-zinc-800 bg-zinc-950/50 p-5"><p className="font-mono text-[10px] uppercase tracking-widest text-cyan-300">{title}</p><p className="mt-3 text-sm leading-relaxed text-zinc-400">{body}</p></article> }

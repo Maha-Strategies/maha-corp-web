@@ -1,0 +1,17 @@
+import type { Metadata } from 'next'
+import Link from 'next/link'
+
+export const metadata: Metadata = { title: 'Context Pack Evaluator | Maha Strategies', description: 'Measure context efficiency while testing whether named evidence survives compilation.', alternates: { canonical: '/context-pack-evaluator' } }
+
+export default function ContextPackEvaluatorPage() {
+  return <main className="min-h-screen bg-[#0a0a0c] px-6 py-20 text-zinc-200 sm:py-28"><div className="mx-auto max-w-4xl">
+    <p className="font-mono text-[10px] uppercase tracking-[0.24em] text-cyan-300">[ Maha Strategies // measurable epistemic middleware ]</p>
+    <h1 className="mt-5 max-w-3xl text-4xl font-light leading-tight text-white sm:text-6xl">Measure the compression. Test the evidence.</h1>
+    <p className="mt-6 max-w-3xl text-lg leading-relaxed text-zinc-400">The Context Pack Evaluator asks for the source passages that must survive a compacting workflow. It reports how much context changed and whether each required span was retained in the returned pack.</p>
+    <section className="mt-10 grid gap-4 md:grid-cols-3"><Card label="01 // Declare" text="Provide source documents, a task and budget, then list exact required evidence spans with their source IDs." /><Card label="02 // Compile" text="The deterministic compiler ranks, deduplicates and bounds context. No AI model judges the material." /><Card label="03 // Report" text="Receive token/byte metrics, source coverage, duplicate removal, and an exact retained-or-omitted result for each declared span." /></section>
+    <section className="mt-12 border border-cyan-900 bg-cyan-950/15 p-6"><h2 className="text-xl text-white">What an evidence-retention result means</h2><p className="mt-3 text-sm leading-relaxed text-zinc-300"><strong>Retained</strong> means the exact required source span appears in an included passage from its declared source. <strong>Omitted</strong> means it does not. Neither result establishes factual accuracy, model answer quality, legal compliance, or downstream hallucination behavior.</p></section>
+    <section className="mt-12"><h2 className="text-2xl text-white">A credible report, not a sales claim</h2><p className="mt-3 max-w-3xl text-sm leading-relaxed text-zinc-400">Use repeated, representative evaluations to establish a baseline for a specific workflow. Publish the task, budget, source count, required-evidence definition and measured results. Do not generalize one benchmark into a universal savings promise.</p><div className="mt-5 flex flex-wrap gap-3"><a className="border border-cyan-600 px-4 py-2 font-mono text-xs uppercase tracking-widest text-cyan-100 hover:bg-cyan-950/50" href="/context-pack-evaluation-schema.json">Read evaluation schema</a><a className="border border-zinc-700 px-4 py-2 font-mono text-xs uppercase tracking-widest text-zinc-300 hover:border-cyan-500" href="/api/docs/openapi">OpenAPI contract</a><Link className="border border-zinc-700 px-4 py-2 font-mono text-xs uppercase tracking-widest text-zinc-300 hover:border-cyan-500" href="/context-compiler">Context Compiler</Link></div></section>
+  </div></main>
+}
+
+function Card({ label, text }: { label: string; text: string }) { return <article className="border border-zinc-800 bg-zinc-950/50 p-5"><p className="font-mono text-[10px] uppercase tracking-widest text-cyan-300">{label}</p><p className="mt-3 text-sm leading-relaxed text-zinc-400">{text}</p></article> }

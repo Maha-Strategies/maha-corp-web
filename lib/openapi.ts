@@ -93,6 +93,8 @@ export const openApiDocument = {
     { name: 'Webhooks', description: 'Stripe payment confirmation (called by Stripe, documented for transparency).' },
     { name: 'Free Preflight', description: 'Rate-limited public demo, no credential required.' },
     { name: 'Books', description: 'Purchased-book entitlement checks for the local MCP bridge.' },
+    { name: 'Enterprise MCP Gateway', description: 'Tenant-scoped MCP proxy for operator-registered public upstream servers.' },
+    { name: 'Context Compiler', description: 'Deterministic, source-linked context-pack compilation with privacy-safe measurement.' },
   ],
   paths: {
     '/api/agentic-commerce/offers': {
@@ -129,6 +131,65 @@ export const openApiDocument = {
         tags: ['Agentic Commerce'], operationId: 'getMcpBridgeCompatibility', summary: 'Discover local MCP bridge compatibility',
         description: 'Returns the versioned contract for the local commercial bridge and explicitly distinguishes it from the hosted Cognitive Gateway.',
         responses: { '200': { description: 'Public compatibility manifest.', content: { 'application/json': { schema: { type: 'object', required: ['bridge', 'compatibility', 'security'], properties: { bridge: { type: 'object' }, compatibility: { type: 'object' }, security: { type: 'object' }, distinctServices: { type: 'array' } } } } } } },
+      },
+    },
+    '/api/mcp-gateway/{serverId}': {
+      post: {
+        tags: ['Enterprise MCP Gateway'],
+        operationId: 'proxyTenantMcpMessage',
+        summary: 'Send an allowlisted MCP message through a tenant gateway',
+        description: 'Forwards a JSON-RPC MCP message only when the caller credential and registered server belong to the same tenant, the method is allowed, and tools/call names are allowlisted. An operator can additionally require selected tools to receive an exact Context Pack registered to the same tenant: the call supplies contextPackId, contextPackHash and context, and the gateway verifies the content hash before forwarding. The first release supports public HTTPS JSON upstreams only; it does not forward bearer tokens, store upstream credentials, or stream SSE.',
+        security: [{ credential: [] }],
+        parameters: [
+          { name: 'serverId', in: 'path', required: true, schema: { type: 'string', pattern: '^mcp_srv_[a-f0-9]{32}$' } },
+          { name: 'Mcp-Method', in: 'header', required: true, description: 'Must match JSON-RPC method exactly.', schema: { type: 'string' } },
+          { name: 'Mcp-Name', in: 'header', required: false, description: 'Required for tools/call, resources/read, and prompts/get; must match the requested name or URI.', schema: { type: 'string' } },
+        ],
+        requestBody: { required: true, content: { 'application/json': { schema: { type: 'object', required: ['jsonrpc', 'method'], properties: { jsonrpc: { const: '2.0' }, id: { oneOf: [{ type: 'string' }, { type: 'number' }, { type: 'null' }] }, method: { type: 'string' }, params: { type: 'object' } } } } } },
+        responses: {
+          '200': { description: 'JSON response from the allowlisted upstream MCP server.', content: { 'application/json': { schema: { type: 'object' } } } },
+          '400': errorResponse('Invalid JSON-RPC message or MCP headers.'),
+          '401': errorResponse('Missing or invalid tenant credential.'),
+          '403': errorResponse('Tenant boundary, method, tool, origin, or Context Pack admission policy denied the request.'),
+          '413': errorResponse('Request exceeds 64 KB.'),
+          '502': errorResponse('Registered upstream was unavailable or returned a response over 1 MB.'),
+        },
+      },
+    },
+    '/api/context-packs': {
+      post: {
+        tags: ['Context Compiler'],
+        operationId: 'compileContextPack',
+        summary: 'Compile bounded, source-linked context for an agent task',
+        description: 'Deduplicates and ranks supplied text deterministically against a stated task, returning a Context Pack with source references and model-neutral estimated-token metrics. The source text and compiled pack are not retained in the service ledger.',
+        security: [{ credential: [] }],
+        requestBody: { required: true, content: { 'application/json': { schema: { type: 'object', required: ['clientRequestId', 'task', 'tokenBudget', 'documents'], properties: { clientRequestId: { type: 'string', minLength: 8, maxLength: 120 }, task: { type: 'string', minLength: 8, maxLength: 1200 }, tokenBudget: { type: 'integer', minimum: 64, maximum: 16000 }, documents: { type: 'array', minItems: 1, maxItems: 8, items: { type: 'object', required: ['id', 'text'], properties: { id: { type: 'string' }, title: { type: 'string' }, text: { type: 'string', maxLength: 64000 } } } } } } } } },
+        responses: {
+          '201': { description: 'Compiled Context Pack; source text and compiled context were returned transiently only.', content: { 'application/json': { schema: { type: 'object', required: ['packId', 'context', 'metrics', 'sources', 'warnings'], properties: { packId: { type: 'string' }, context: { type: 'string' }, metrics: { type: 'object' }, sources: { type: 'array' }, warnings: { type: 'array', items: { type: 'string' } }, sourceTextStored: { const: false }, compiledContextStored: { const: false } } } } } },
+          '400': errorResponse('Invalid Context Pack request.'),
+          '401': errorResponse('Missing or invalid Context Compiler credential.'),
+          '403': errorResponse('Credential lacks the context_compile capability.'),
+          '409': errorResponse('clientRequestId was already used with different inputs.'),
+          '413': errorResponse('Request exceeds the 128 KB input limit.'),
+        },
+      },
+    },
+    '/api/context-pack-evaluations': {
+      post: {
+        tags: ['Context Compiler'],
+        operationId: 'evaluateContextPack',
+        summary: 'Measure Context Pack efficiency and declared evidence retention',
+        description: 'Compiles a bounded Context Pack and checks whether each caller-declared exact evidence span from a supplied source document remains in the output. This is deterministic span retention, not factual verification or downstream answer-quality evaluation.',
+        security: [{ credential: [] }],
+        requestBody: { required: true, content: { 'application/json': { schema: { type: 'object', required: ['clientRequestId', 'task', 'tokenBudget', 'documents', 'requiredEvidence'], properties: { clientRequestId: { type: 'string' }, task: { type: 'string' }, tokenBudget: { type: 'integer', minimum: 64, maximum: 16000 }, documents: { type: 'array', minItems: 1, maxItems: 8, items: { type: 'object' } }, requiredEvidence: { type: 'array', minItems: 1, maxItems: 32, items: { type: 'object', required: ['evidenceId', 'sourceId', 'text'], properties: { evidenceId: { type: 'string' }, sourceId: { type: 'string' }, text: { type: 'string' } } } } } } } } },
+        responses: {
+          '201': { description: 'Privacy-safe evaluation result, including retained or omitted status for each declared evidence span.', content: { 'application/json': { schema: { type: 'object', required: ['evaluationId', 'metrics', 'evidence', 'warnings'], properties: { evaluationId: { type: 'string' }, metrics: { type: 'object' }, evidence: { type: 'array' }, warnings: { type: 'array', items: { type: 'string' } }, requiredEvidenceTextStored: { const: false } } } } } },
+          '400': errorResponse('Invalid source document or required evidence declaration.'),
+          '401': errorResponse('Missing or invalid Context Compiler credential.'),
+          '403': errorResponse('Credential lacks the context_compile capability.'),
+          '409': errorResponse('clientRequestId was already used with different inputs.'),
+          '413': errorResponse('Request exceeds the 128 KB input limit.'),
+        },
       },
     },
     '/api/books/{id}/entitlement': {

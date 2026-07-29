@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Maha Strategies Enterprise MCP Gateway - first release contract",
+  "version": "0.1.0",
+  "documentation": "https://www.mahastrategies.com/enterprise-mcp-gateway",
+  "transport": "JSON MCP messages over HTTPS POST",
+  "gatewayEndpoint": "https://www.mahastrategies.com/api/mcp-gateway/{serverId}",
+  "authorization": {
+    "scheme": "Bearer",
+    "requiredCapability": "mcp_gateway",
+    "tenantBinding": "The credential and registered server must belong to the same client tenant."
+  },
+  "registration": {
+    "endpoint": "https://www.mahastrategies.com/api/admin/mcp-gateway",
+    "operatorAuthentication": "Bearer MCP_GATEWAY_OPERATIONS_TOKEN",
+    "upstreamRequirements": ["HTTPS", "public DNS hostname", "no embedded credential", "JSON response"],
+    "requiredFields": ["clientId", "displayName", "endpointUrl", "allowedMethods"],
+    "toolCallRule": "tools/call additionally requires an explicit allowedToolNames allowlist."
+  },
+  "enforcement": {
+    "requestBodyRetention": "none",
+    "upstreamBearerForwarding": false,
+    "upstreamCredentialsStored": false,
+    "browserOriginRequests": false,
+    "streamingResponses": false,
+    "maxRequestBytes": 65536,
+    "maxResponseBytes": 1000000,
+    "timeoutMs": 10000
+  },
+  "contextPackAdmission": {
+    "optional": true,
+    "operatorConfiguration": "contextPackRequiredTools is a subset of a server's allowedToolNames.",
+    "requiredArguments": ["contextPackId", "contextPackHash", "context"],
+    "verification": "The gateway requires a tenant-owned registered pack and verifies sha256(context) equals contextPackHash and the stored output hash.",
+    "retention": "The gateway event stores the pack ID and outcome, not the context."
+  },
+  "allowedMethods": ["initialize", "notifications/initialized", "ping", "tools/list", "resources/list", "resources/read", "prompts/list", "prompts/get", "tools/call"],
+  "auditEventFields": ["serverId", "clientId", "credentialId", "mcpMethod", "toolName", "outcome", "upstreamStatus", "requestHash", "createdAt"],
+  "notYetImplemented": ["OAuth confidential client", "private upstream credentials", "SSE streaming", "runtime content inspection", "prompt-injection analysis", "automatic remediation"]
+}

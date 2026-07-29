@@ -102,6 +102,26 @@ Read-only Agentic Commerce discovery API: https://www.mahastrategies.com/api/age
 
 Commercial MCP bridge compatibility manifest: https://www.mahastrategies.com/api/mcp-bridge/manifest (local package `@mahastrategies/maha-mcp-bridge` v0.3.2; separate from the hosted Cognitive Gateway).
 
+## Enterprise MCP Gateway
+
+- [Enterprise MCP Gateway](https://www.mahastrategies.com/enterprise-mcp-gateway): Tenant-scoped inventory, explicit method and tool allowlists, and privacy-preserving event records for approved MCP connections.
+- Machine-readable contract: https://www.mahastrategies.com/mcp-gateway-contract.json
+- Gateway endpoint: `POST https://www.mahastrategies.com/api/mcp-gateway/{serverId}`. Requires a tenant-owned credential scoped to `mcp_gateway`; the credential can access only servers registered for its own client tenant.
+- Context Pack admission: operators can require named approved tools to receive `contextPackId`, `contextPackHash`, and `context`. The gateway verifies the exact context hash against a registered Context Pack owned by the same tenant before forwarding, and retains only the pack ID and policy outcome.
+- First-release boundary: public HTTPS JSON upstreams only. The gateway does not store upstream credentials, forward a caller bearer token, support browser-originated requests or SSE streaming, or claim to detect prompt injection. Its records retain method, tool name, outcome, upstream status, Context Pack ID where supplied, and a request hash—not request contents or upstream responses.
+
+## Context Compiler
+
+- [Maha Context Compiler](https://www.mahastrategies.com/context-compiler): Deterministically compiles task-specific Context Packs from 1-8 provided textual sources. Each pack includes source references, hashes, before/after byte and estimated-token measurements, source coverage, and duplicate removal counts.
+- Endpoint: `POST https://www.mahastrategies.com/api/context-packs`; request schema: https://www.mahastrategies.com/context-pack-schema.json; required credential capability: `context_compile`.
+- Privacy boundary: source text and returned compiled context are processed transiently. The service ledger retains only hashes and aggregate efficiency metadata. Estimated tokens are model-neutral approximations, not a provider tokenizer or billing figure. The compiler does not verify claims, guarantee completeness, or prevent hallucination.
+
+## Context Pack Evaluator
+
+- [Context Pack Evaluator](https://www.mahastrategies.com/context-pack-evaluator): Measures Context Pack efficiency and whether caller-declared, exact source spans were retained after deterministic compilation.
+- Endpoint: `POST https://www.mahastrategies.com/api/context-pack-evaluations`; request schema: https://www.mahastrategies.com/context-pack-evaluation-schema.json; required credential capability: `context_compile`.
+- A retained result means a named source span appears in an included passage from its declared source. It does not establish source truth, answer quality, downstream model behavior, or regulatory compliance. The ledger stores hashes and aggregate results only—not required evidence, sources or compiled context.
+
 ## MPS Preflight
 
 - [MPS Preflight](https://www.mahastrategies.com/mps/preflight): A private, self-service MPS/0.1 claim-level review for a nonfiction extract of up to about 2,000 words. $49 one-time purchase. The full source text is processed transiently; the resulting report retains the input hash and claim excerpts. It is automated triage, not a human certification or primary-source verification.
