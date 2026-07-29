@@ -1,0 +1,23 @@
+name: Context and evidence check
+
+on:
+  pull_request:
+    paths:
+      - '.maha/**'
+      - 'docs/agent-context/**'
+
+jobs:
+  context-evidence:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: Maha-Strategies/maha-corp-web/.github/actions/maha-context-evidence@main
+        with:
+          credential: ${{ secrets.MAHA_CONTEXT_CREDENTIAL }}
+          documents-file: .maha/context-documents.json
+          required-evidence-file: .maha/required-evidence.json
+          task: Prepare the approved security context for the deployment agent.
+          token-budget: '1800'
+          fail-below-evidence-retention: '100'
