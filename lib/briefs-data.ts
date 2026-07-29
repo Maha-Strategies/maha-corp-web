@@ -1430,6 +1430,102 @@ export const BRIEFS: Brief[] = [
     }
   },
   {
+    slug: 'smartphone-ap-osat-commercial-risk-allocation',
+    title: 'Commercial Architecture for Smartphone AP OSAT Engagements',
+    kicker: 'ADVANCED PACKAGING // COMMERCIAL MODEL // YIELD GOVERNANCE',
+    description: 'A contract-design framework for allocating capacity, materials, assembly, test, yield, quality, and high-value die risk among smartphone AP owners, OSATs, and package-substrate suppliers.',
+    status: 'ACTIVE',
+    datePublished: '2026-07-29',
+    intro: 'For smartphone application-processor packaging, the commercial model starts by separating who owns the die, who fabricates or procures the substrate, who performs assembly and test, and who controls the production evidence. Those roles can be combined in a turnkey programme or divided among several companies. This brief is a decision and diligence framework—not legal advice, and not a claim that any one price, yield threshold, or liability term is an industry standard.',
+    sections: [
+      {
+        level: 2,
+        heading: '01. Name the Interfaces Before You Price Them',
+        paragraphs: [
+          '“OSAT” normally describes outsourced semiconductor assembly and test. A package-substrate fabricator, the application-processor owner, a wafer foundry, and an OSAT are therefore distinct roles even when one supplier offers a broad turnkey package solution. A useful commercial review names the legal entity responsible for each interface instead of assuming that the packaging provider owns every part of the supply chain.',
+          'This matters most for high-value mobile AP die. The agreement should identify who releases wafers and known-good die, who approves the bill of materials, who qualifies a substrate or RDL stack, who controls test coverage, and who accepts completed units. If those ownership and acceptance points are vague, a later yield discussion becomes a dispute about definitions rather than an operational decision.'
+        ],
+        table: {
+          caption: 'Core roles in a smartphone AP package programme',
+          header: ['Role', 'Primary responsibility to define'],
+          rows: [
+            ['AP owner', 'Design inputs, die release, performance requirements, acceptance criteria, and product forecast.'],
+            ['OSAT', 'Assembly, test execution, process controls, traceability, and agreed production evidence.'],
+            ['Substrate or material supplier', 'Specified construction, material traceability, quality documentation, and change control.'],
+            ['Programme integrator', 'The party—often the AP owner or OSAT—that coordinates qualification, capacity, and cross-supplier decisions.']
+          ]
+        }
+      },
+      {
+        level: 2,
+        heading: '02. Price the Commitment in Separate Components',
+        paragraphs: [
+          'A resilient commercial model separates the cost of holding capability from the cost of producing qualified output. Capacity reservation, materials, assembly, test, qualification work, and programme changes have different drivers. Combining them into one opaque per-unit figure makes it harder to compare offers, manage a ramp, or see which party can actually change the outcome.',
+          'The agreement does not need to impose a universal charging method. It should instead make the unit of commitment and the evidence for each charge explicit: a reserved production window, an approved material lot, a completed assembly stage, a defined test programme, or a completed qualification milestone. That distinction is more useful than repeating generic descriptions of take-or-pay or pass-through pricing.'
+        ],
+        table: {
+          caption: 'Commercial components to make explicit',
+          header: ['Component', 'Question the programme should answer'],
+          rows: [
+            ['Capacity', 'What equipment, time window, minimum volume, forecast horizon, and release mechanism are being reserved?'],
+            ['Materials', 'Who purchases each material, which substitutions need approval, and how are obsolescence or inventory risks handled?'],
+            ['Assembly', 'Which process steps, package complexity assumptions, and acceptance point are included in the assembly charge?'],
+            ['Test', 'What programme, coverage, equipment usage, retest path, and change-control process are included?'],
+            ['NRE and qualification', 'Which tooling, load boards, process development, reliability work, and milestone deliverables are funded?']
+          ]
+        }
+      },
+      {
+        level: 2,
+        heading: '03. Treat Yield as a Measured Operating Variable',
+        paragraphs: [
+          'Yield is not one self-explanatory number. A programme must specify the denominator, the production stage, the pass criteria, the treatment of retest and rework, and the time window. Assembly yield, final-test yield, and field-reliability fallout answer different questions. A yield commitment without that measurement design is unlikely to create the behaviour that either party expects.',
+          'For a high-value AP, the review should also identify when a defect can be detected and which evidence is retained. Incoming-die quality, substrate quality, assembly process control, test coverage, and design interaction can all affect a failed unit. A root-cause method, lot traceability, containment procedure, and escalation path are more actionable than a generic statement that one party “shares” yield risk.'
+        ],
+        listItems: [
+          'Record a baseline and a proposed target separately; do not turn an engineering forecast into a contractual fact without qualification evidence.',
+          'Define the disposition path for reworkable material, scrap, quarantined lots, and suspected test escapes.',
+          'Preserve the evidence needed for failure analysis: lot history, materials, equipment and recipe identifiers, inspection data, and test records.',
+          'Review lost-die exposure alongside yield—not merely the number of failed packages.'
+        ]
+      },
+      {
+        level: 2,
+        heading: '04. Allocate Quality and Recovery by Cause and Control',
+        paragraphs: [
+          'A finished-package failure does not automatically identify its cause. The commercial framework should distinguish supplier-controlled process defects from incoming-material issues, wafer or die conditions, design constraints, test-programme limitations, and approved engineering changes. Each category needs an agreed notification, investigation, containment, and recovery process.',
+          'There is no public universal liability cap or yield-loss percentage that can responsibly be applied across smartphone AP programmes. Risk allocation should be negotiated with the actual die value, manufacturing evidence, insurance position, applicable law, supply-chain dependency, and bargaining context in view. Legal counsel should review the final allocation; an engineering brief cannot substitute for the purchase agreement.'
+        ],
+        table: {
+          caption: 'Evidence-led risk review',
+          header: ['Event', 'Operational control to agree'],
+          rows: [
+            ['Incoming-material concern', 'Lot acceptance, hold authority, sample plan, and required supplier traceability.'],
+            ['Assembly excursion', 'Containment timing, affected-lot definition, process-data retention, and failure-analysis ownership.'],
+            ['Test anomaly', 'Correlation method, retest rule, escape investigation, and version control for the test programme.'],
+            ['Engineering change', 'Approval owner, requalification threshold, cost treatment, and documentation required before release.']
+          ]
+        }
+      },
+      {
+        level: 2,
+        heading: '05. Run the Ramp as a Governed Decision System',
+        paragraphs: [
+          'A new package flow should have a distinct launch phase rather than being managed as if it were mature production. Establish a recurring review of capacity, material readiness, yield by stage, test correlation, reliability evidence, open corrective actions, and forecast changes. The programme should designate who can approve a process or material change and what proof is required before volume exposure increases.',
+          'At production maturity, retain the same traceability and change-control discipline while shifting the decision focus toward cost, supply continuity, test-time efficiency, and field feedback. This gives the AP owner and suppliers a shared operational record without assuming that a contract alone can eliminate technical uncertainty.'
+        ]
+      }
+    ],
+    protocolPatch: {
+      title: 'Maha Commercial Review Note // Smartphone AP Packaging',
+      paragraphs: [
+        'Separate the commercial interfaces before negotiating a unit price. Define the capacity commitment, material ownership, assembly and test scope, yield measurement, evidence-retention rule, root-cause process, and engineering-change authority for the exact package programme.',
+        'Use qualified programme data and counsel-reviewed terms for any financial or legal allocation. Do not infer a standard liability cap, die-value threshold, yield guarantee, or OSAT responsibility from a generic packaging label.'
+      ],
+      emphasis: 'A contract is strongest when it makes technical evidence and decision rights visible—not when it hides programme risk behind an unqualified yield percentage.'
+    }
+  },
+  {
     slug: 'smartphone-oem-peripheral-sales-mix',
     title: 'Smartphone OEM Peripheral Mix: A Five-Year Scenario Framework',
     kicker: 'CONSUMER HARDWARE // ECOSYSTEM ECONOMICS // PRODUCT MIX',

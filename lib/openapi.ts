@@ -1,6 +1,8 @@
 import { MAX_AUDIT_CHARS, MPS_ACTIONS, MPS_TAGS, MPS_VERSION } from './mps-audit-engine.ts'
 import { MPS_AUDIT_CREDIT_UNIT } from './mps-credits.ts'
 import { AGENTIC_COMMERCE_API_URL } from './agentic-commerce.ts'
+import { geometricAiOpenApiPath } from './openapi-geometric.ts'
+import { holographicQecOpenApiPath } from './openapi-holographic-qec.ts'
 
 // Hand-authored OpenAPI 3.1 document for the public API. The runtime
 // validators in lib/ are the source of truth; every pattern and bound here
@@ -96,8 +98,12 @@ export const openApiDocument = {
     { name: 'Enterprise MCP Gateway', description: 'Tenant-scoped MCP proxy for operator-registered public upstream servers.' },
     { name: 'Context Compiler', description: 'Deterministic, source-linked context-pack compilation with privacy-safe measurement.' },
     { name: 'Maha Tensor-Opt (Mock)', description: 'Integration-only mock contract for the planned tensor-network optimization service.' },
+    { name: 'Maha Geometric AI (Mock)', description: 'Integration-only mock contract for symmetry-aware geometric AI workloads.' },
+    { name: 'Maha QEC-Compiler (Mock)', description: 'Integration-only mock contract for holographic QEC layout compilation.' },
   ],
   paths: {
+    ...geometricAiOpenApiPath,
+    ...holographicQecOpenApiPath,
     '/api/v1/tensor-opt': {
       post: {
         tags: ['Maha Tensor-Opt (Mock)'],
