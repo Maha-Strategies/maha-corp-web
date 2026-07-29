@@ -11,7 +11,7 @@ declare global { interface Window { mahaTurnstileComplete?: (token: string) => v
 
 const OFFER_BY_SERVICE: Record<string, string> = {
   verified_research: 'verified-research-brief', rapid_intelligence: 'rapid-intelligence-brief',
-  mps_evidence_audit: 'mps-prepaid-audit-access', mps_audit: 'mps-prepaid-audit-access',
+  mps_evidence_audit: 'mps-evidence-audit', mps_audit: 'mps-evidence-audit',
   token_request: 'mps-preflight', support: 'mps-preflight', general: 'rapid-intelligence-brief',
 };
 const TURNSTILE_SITE_KEY = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY;
@@ -166,8 +166,8 @@ export default function ContactPage() {
                 >
                   <option value="verified_research">Verified Research Brief — $2,500 / 10 business days</option>
                   <option value="rapid_intelligence">Rapid Intelligence Brief — from $500 / five business days</option>
-                  <option value="mps_evidence_audit">MPS Evidence Audit — manuscript or high-stakes document review</option>
-                  <option value="mps_audit">Manuscript Audit / MPS Inquiry</option>
+                  <option value="mps_evidence_audit">MPS Evidence Audit — high-stakes document review</option>
+                  <option value="mps_audit">MPS Evidence Audit — manuscript or report</option>
                   <option value="token_request">Cognitive Gateway Access Token Request</option>
                   <option value="support">Technical Support / Troubleshooting</option>
                   <option value="general">General Inquiry</option>

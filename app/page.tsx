@@ -135,35 +135,35 @@ export default function CorporateHomepage() {
       <div className="max-w-4xl mx-auto px-6 py-20 sm:py-28">
         <section className="max-w-3xl">
           <p className="font-mono text-[10px] text-indigo-400 tracking-widest uppercase mb-5">
-            [ Maha Strategies // Decision Research ]
+            [ Maha Strategies // Evidence Assurance ]
           </p>
           <h1 className="text-4xl sm:text-5xl md:text-6xl font-light text-white leading-[1.08] tracking-tight mb-7">
-            Know what to do next—before the decision gets expensive.
+            Make AI-assisted documents defensible before they reach review.
           </h1>
           <p className="text-xl sm:text-2xl text-zinc-300 font-light leading-relaxed mb-5">
-            Bring us the decision you need to make. We turn the difficult question behind it into a clear brief your team can use.
+            For research, policy, and communications teams whose work must survive scrutiny—not merely sound convincing.
           </p>
           <p className="text-base sm:text-lg text-zinc-400 leading-relaxed max-w-2xl mb-10">
-            You get the answer, the evidence behind it, and the uncertainty that still matters—without having to sort through a pile of polished but unreliable summaries.
+            Maha maps substantive claims, makes uncertainty visible, and creates a clear record of what must be verified before publication, review, or decision.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 mb-8">
             <TrackedLink
-              href="/contact?service=verified_research"
-              event="cta_homepage_commission_brief"
+              href="/mps/preflight"
+              event="cta_homepage_mps_preflight"
               className="inline-block bg-white text-black font-mono font-bold text-xs tracking-widest uppercase px-7 py-4 hover:bg-zinc-200 transition-colors text-center"
             >
-              Request a Verified Research Brief — $2,500 ↗
+              Run a Private Preflight — $49 ↗
             </TrackedLink>
             <Link
-              href="/consulting#sample"
+              href="/evidence-audit"
               className="inline-block border border-zinc-600 text-zinc-200 font-mono font-bold text-xs tracking-widest uppercase px-7 py-4 hover:border-white hover:text-white transition-colors text-center"
             >
-              See What You Receive ↓
+              Request an Evidence Audit ↓
             </Link>
           </div>
           <p className="font-mono text-xs text-zinc-400 tracking-widest uppercase">
-            Fixed scope · delivered in 10 business days · one revision round · sources linked in the document
+            Free auditor · private preflight · human evidence audit · explicit scope at every step
           </p>
         </section>
 

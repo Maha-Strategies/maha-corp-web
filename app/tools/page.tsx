@@ -17,6 +17,22 @@ export const metadata: Metadata = {
 
 const tools = [
   {
+    eyebrow: 'Architecture Readiness',
+    title: 'Turn an AI implementation ambition into a gap register',
+    body: 'Inventory data paths, device fleet, model lifecycle, identity and access, outage fallback, and accountability. Export a browser-local implementation sequence.',
+    href: '/tools/architecture-readiness-assessment',
+    action: 'Assess architecture readiness',
+    accent: 'indigo',
+  },
+  {
+    eyebrow: 'AI Boundary Planner',
+    title: 'Turn an AI deployment choice into a reviewable record',
+    body: 'Compare local, cloud, and hybrid boundaries using stated data, capability, latency, resilience, device, and ownership conditions. Export a browser-local decision record.',
+    href: '/tools/ai-boundary-planner',
+    action: 'Plan an AI boundary',
+    accent: 'indigo',
+  },
+  {
     eyebrow: 'Constraint Studio',
     title: 'Turn a planning problem into a Constraint Pack',
     body: 'Specify objectives, variables, hard limits, preferences, assumptions, and data gaps. Export a browser-local JSON handoff for human review or future solver work.',

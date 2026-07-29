@@ -34,3 +34,8 @@ body {
 [data-article-content] :is(h2, h3) {
   scroll-margin-top: 6rem;
 }
+@media print {
+  .planner-inquiry {
+    display: none !important;
+  }
+}

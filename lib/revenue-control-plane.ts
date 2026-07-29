@@ -7,6 +7,9 @@ export const REVENUE_OFFERS = {
   'mps-preflight': {
     name: 'MPS Preflight', acquisition: 'self_service_checkout', href: '/mps/preflight',
   },
+  'mps-evidence-audit': {
+    name: 'MPS Evidence Audit', acquisition: 'human_scope_review', href: '/evidence-audit',
+  },
   'book-the-imagined-life': {
     name: 'The Imagined Life — MCP Access', acquisition: 'self_service_checkout', href: '/books/mcp-access',
   },
