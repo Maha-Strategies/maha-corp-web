@@ -104,6 +104,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     // COGNITIVE GRID & MCP
     { url: `${baseUrl}/research/mcp`, lastModified: new Date(), changeFrequency: 'weekly', priority: 0.8 },
     { url: `${baseUrl}/mcp-bridge`, lastModified: new Date('2026-07-20'), changeFrequency: 'monthly', priority: 0.7 },
+    { url: `${baseUrl}/enterprise-mcp-gateway`, lastModified: new Date('2026-07-29'), changeFrequency: 'weekly', priority: 0.7 },
+    { url: `${baseUrl}/context-compiler`, lastModified: new Date('2026-07-29'), changeFrequency: 'weekly', priority: 0.7 },
+    { url: `${baseUrl}/context-pack-evaluator`, lastModified: new Date('2026-07-29'), changeFrequency: 'weekly', priority: 0.7 },
 
     // TACTICAL BRIEFS
     { url: `${baseUrl}/doctrine/briefs/soil-gut-brain-axis`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.6 },

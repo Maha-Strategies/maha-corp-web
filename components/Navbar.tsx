@@ -53,6 +53,9 @@ export default function Navbar() {
     { name: 'Overclock Game', href: '/overclock' },
     { name: 'Maha OS', href: '/software' },
     { name: 'Cognitive Gateway', href: '/research/mcp' },
+    { name: 'Enterprise MCP Gateway', href: '/enterprise-mcp-gateway' },
+    { name: 'Context Compiler', href: '/context-compiler' },
+    { name: 'Context Pack Evaluator', href: '/context-pack-evaluator' },
     { name: 'Personal Protocols', href: '/start' },
   ];
 

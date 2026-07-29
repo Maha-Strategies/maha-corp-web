@@ -14,6 +14,7 @@ const APP_DIR = join(import.meta.dirname, '..', 'app')
 const PRIVATE_ROUTES = new Set([
   '/api/admin/mps-operations/actions',
   '/api/admin/mps-operations/lookup',
+  '/api/admin/mcp-gateway',
   '/api/admin/revenue-control-plane',
   '/api/admin/revenue-metrics',
   '/api/admin/experiments',
