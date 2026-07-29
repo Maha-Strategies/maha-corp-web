@@ -17,8 +17,7 @@ export const metadata: Metadata = {
 const productJsonLd = {
   '@context': 'https://schema.org',
   '@graph': [
-    { '@type': 'SoftwareApplication', '@id': `${SITE_URL}/tensor-opt#maha-tensor-opt`, name: 'Maha Tensor-Opt', applicationCategory: 'BusinessApplication', operatingSystem: 'Cloud API', description: 'GPU/TPU-targeted tensor-network optimization for bounded QUBO and Ising workloads with execution and citation manifests.', author: { '@id': 'https://mayonemaharajan.com/#person' }, publisher: { '@id': `${SITE_URL}/#organization` }, citation: TN_014_URL, url: `${SITE_URL}/tensor-opt` },
-    { '@type': 'Product', '@id': `${SITE_URL}/tensor-opt#maha-epistemic-middleware`, name: 'Maha Epistemic Middleware', description: 'Source-admission, context reduction, and verification-backlog tooling for enterprise AI workflows.', brand: { '@type': 'Brand', name: 'Maha Strategies' }, manufacturer: { '@id': `${SITE_URL}/#organization` }, url: `${SITE_URL}/tensor-opt`, isRelatedTo: { '@id': `${SITE_URL}/tensor-opt#maha-tensor-opt` } },
+    { '@type': 'SoftwareApplication', '@id': 'https://mahastrategies.com/tensor-opt/#software', name: 'Maha Tensor-Opt', description: 'Quantum-inspired tensor network optimization engine for classical GPU/TPU clusters.', url: 'https://mahastrategies.com/tensor-opt', applicationCategory: 'BusinessApplication', operatingSystem: 'Cloud API / Linux / CUDA', publisher: { '@id': 'https://research.mahastrategies.com/#organization' }, author: { '@id': 'https://www.mayonemaharajan.com/#person' }, citation: RESEARCH_URL },
   ],
 }
 
