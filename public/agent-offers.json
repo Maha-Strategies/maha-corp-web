@@ -183,6 +183,18 @@
       "boundaries": ["Automated triage, not a public MPS certification or source-by-source human verification.", "No legal, investment, or other regulated professional advice.", "The source document is not saved in the ledger; the durable record retains an input hash and claim excerpts."]
     },
     {
+      "id": "mps-evidence-audit",
+      "name": "MPS Evidence Audit",
+      "status": "available_for_inquiry",
+      "serviceUrl": "https://www.mahastrategies.com/evidence-audit",
+      "price": { "currency": "USD", "type": "scoped_after_review" },
+      "delivery": { "type": "human_scoped", "beginsAfter": "Maha confirms document fit, review context, source availability, deliverable, price, and timing." },
+      "requiredInputs": ["A report, manuscript, or high-stakes document to review.", "The publication, governance, or decision context.", "The intended reviewers, deadline, and any source constraints."],
+      "deliverables": ["A claim register and verification backlog.", "An MPS/0.1 evidence record appropriate to the agreed scope.", "A publication-readiness summary separating sourced material, verified material, and unresolved claims."],
+      "exclusions": ["Legal, medical, investment, or engineering advice.", "Certification or approval by a regulator, publisher, or other third party."],
+      "request": { "mode": "authenticated_json", "url": "https://www.mahastrategies.com/api/agent-inquiries", "method": "POST", "inputSchema": "https://www.mahastrategies.com/agent-inquiry-schema.json", "authorization": "Bearer client credential issued by Maha Strategies after approval; credentials are scoped, expiring, and revocable.", "fallbackUrl": "https://www.mahastrategies.com/contact?service=mps_evidence_audit", "inquiryType": "mps_evidence_audit", "responseTargetBusinessDays": 2 }
+    },
+    {
       "id": "book-the-imagined-life",
       "name": "The Imagined Life",
       "status": "open_web_edition_with_authenticated_machine_access",

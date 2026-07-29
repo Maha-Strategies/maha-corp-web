@@ -67,6 +67,10 @@ Content across this site and its ecosystem follows the Maha Provenance Standard 
 - [AI Deployment & MPS Glossary](https://www.mahastrategies.com/mps/learn/glossary): Plain-language terms for on-device, cloud, hybrid, latency, resilience, telemetry, and MPS.
 - [On-Device, Cloud AI & MPS FAQ](https://www.mahastrategies.com/mps/learn/faq): Concise, bounded answers about privacy, capability, cost, offline operation, device requirements, and MPS review tools.
 - [AI Implementation Library Methodology & Sources](https://www.mahastrategies.com/mps/learn/methodology): Sources, measurement guidance, and evidence boundaries behind the implementation library.
+- [AI Reference Architectures](https://www.mahastrategies.com/mps/learn/reference-architectures): Bounded patterns for offline field capture with authorized cloud escalation, a school accessibility assistant, and internal approved-document search. Each provides a proposed data flow, assumptions, measurement plan, failure path, and source links; none is a universal deployment prescription or security certification.
+- [Offline Field Capture with Authorized Cloud Escalation](https://www.mahastrategies.com/mps/learn/reference-architectures/offline-field-capture-authorized-cloud-escalation): A local-first field workflow with explicit approval and transfer boundaries for remote capability.
+- [School Accessibility Assistant](https://www.mahastrategies.com/mps/learn/reference-architectures/school-accessibility-assistant): A teacher-reviewed, bounded accessibility-support pattern that avoids delegating assessment authority.
+- [Internal Approved-Document Search](https://www.mahastrategies.com/mps/learn/reference-architectures/internal-approved-document-search): A source-linked internal search pattern with explicit corpus, access, freshness, and escalation boundaries.
 - [What Is Claim-Level Provenance?](https://www.mahastrategies.com/mps/claim-level-provenance): A compact record model for keeping a claim’s source, status, limits, and review date attached during reuse.
 - [How Should AI-Assisted Research Be Cited?](https://www.mahastrategies.com/mps/citing-ai-assisted-research): How to distinguish citation of a versioned synthesis, citation of a primary source, and disclosure of AI assistance.
 - [Source, Interpretation, and Speculation](https://www.mahastrategies.com/mps/source-interpretation-speculation): A practical reading and writing guide for preserving epistemic boundaries.
@@ -79,6 +83,14 @@ Content across this site and its ecosystem follows the Maha Provenance Standard 
 ## Constraint Studio
 
 - [Maha Constraint Studio](https://www.mahastrategies.com/tools/constraint-studio): A free browser-local preflight for expressing a planning or optimization problem as a machine-readable Constraint Pack. It captures objectives, variables, hard constraints, soft preferences, assumptions, and data limits; checks structural completeness; and exports JSON for human review or future solver encoding. It does not solve the problem, access external systems, retain inputs, or make operational decisions.
+
+## AI Boundary Planner
+
+- [AI Boundary Planner](https://www.mahastrategies.com/tools/ai-boundary-planner): A free browser-local planning tool for comparing on-device, cloud, and hybrid AI boundaries by stated data sensitivity, capability, latency, resilience, device readiness, cost, and ownership conditions. It exports a machine-readable planning record with recommendation logic and review questions. A user may explicitly opt in to attach the current record to a Rapid Intelligence Brief or Verified Research Brief inquiry; no planner inputs are transmitted or retained unless the user checks consent and submits that inquiry. It does not rank vendors, access external systems, assess security or privacy, certify performance or cost, or authorize implementation.
+
+## Architecture Readiness Assessment
+
+- [Architecture Readiness Assessment](https://www.mahastrategies.com/tools/architecture-readiness-assessment): A free browser-local, self-reported AI implementation inventory for data paths, device fleet, model lifecycle, identity and access, outage fallback, and accountability. It produces a gap register and implementation sequence. It does not inspect systems, verify controls, assess security or privacy, certify readiness, or authorize production use.
 
 ## Agent Offers
 

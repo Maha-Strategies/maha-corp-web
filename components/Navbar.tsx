@@ -30,7 +30,7 @@ export default function Navbar() {
   }, []);
 
   const primaryLinks = [
-    { name: 'Consulting', href: '/consulting' },
+    { name: 'Evidence Audit', href: '/evidence-audit' },
     { name: 'Intelligence', href: '/intelligence' },
     { name: 'Books', href: '/books' },
     { name: 'Apps', href: '/apps' },

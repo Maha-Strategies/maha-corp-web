@@ -41,6 +41,7 @@ const implementationGuides = [
   { href: '/mps/learn/implementation', title: 'AI implementation decision framework', description: 'Compare privacy, capability, cost, latency, resilience, and device requirements before selecting a local, cloud, or hybrid boundary.' },
   { href: '/on-device-ai-vs-cloud', title: 'On-device AI vs cloud AI', description: 'The existing canonical workload-level comparison: where inference belongs, what each option requires, and why hybrid is often appropriate.' },
   { href: '/mps/learn/implementation/individuals', title: 'Implementation guides', description: 'Practical starting points for individuals, schools, small organizations, and developers.' },
+  { href: '/mps/learn/reference-architectures', title: 'Reference architectures', description: 'Bounded field, school, and internal-search patterns with data flows, measurements, failure paths, and sources.' },
 ]
 
 const jsonLd = {
