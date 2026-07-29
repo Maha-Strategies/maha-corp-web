@@ -154,6 +154,14 @@ const BRIEFS: BriefData[] = [
   },
   {
     group: 'HARDWARE & INFRASTRUCTURE',
+    category: 'ADVANCED.PACKAGING',
+    status: 'ACTIVE',
+    title: 'Commercial Architecture for Smartphone AP OSAT Engagements',
+    description: 'A decision framework for capacity, materials, assembly, test, yield, quality, and high-value die risk in smartphone AP packaging programmes.',
+    href: '/intelligence/briefs/smartphone-ap-osat-commercial-risk-allocation',
+  },
+  {
+    group: 'HARDWARE & INFRASTRUCTURE',
     category: 'CONSUMER.ECOSYSTEMS',
     status: 'ACTIVE',
     title: 'Smartphone OEM Peripheral Mix: A Five-Year Scenario Framework',

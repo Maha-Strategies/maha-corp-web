@@ -17,6 +17,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${baseUrl}/consulting/evidence-policy`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.8 },
     { url: `${baseUrl}/method`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.8 },
     { url: `${baseUrl}/software`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.8 },
+    { url: `${baseUrl}/geometric-ai`, lastModified: new Date('2026-07-29'), changeFrequency: 'monthly', priority: 0.8 },
+    { url: `${baseUrl}/holographic-qec`, lastModified: new Date('2026-07-29'), changeFrequency: 'monthly', priority: 0.8 },
     { url: `${baseUrl}/doctrine`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.8 },
     { url: `${baseUrl}/research`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.8 },
     { url: `${baseUrl}/start`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.8 },
@@ -326,6 +328,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     {
       url: `${baseUrl}/intelligence/briefs/smartphone-ap-fan-out-substrate-thickness`,
       lastModified: new Date('2026-07-23'),
+      changeFrequency: 'monthly',
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/intelligence/briefs/smartphone-ap-osat-commercial-risk-allocation`,
+      lastModified: new Date('2026-07-29'),
       changeFrequency: 'monthly',
       priority: 0.8,
     },
