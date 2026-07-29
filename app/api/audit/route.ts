@@ -15,11 +15,16 @@ function response(body: object, status = 200) {
   return Response.json(body, { status, headers: { 'Cache-Control': 'no-store' } })
 }
 
+function acquisitionChannel(request: Request) {
+  return request.headers.get('x-maha-acquisition-channel') === 'github_action' ? 'github_action' : 'web'
+}
+
 async function recordEvent(
   ledger: NonNullable<ReturnType<typeof createAgentInquiryLedger>>,
   visitorHash: string,
   eventType: 'submitted' | 'completed' | 'failed',
   inputCharCount: number,
+  acquisitionChannel: 'web' | 'github_action',
   claimCount?: number,
 ) {
   const { error } = await ledger.from('mps_public_audit_events').insert({
@@ -27,6 +32,7 @@ async function recordEvent(
     event_type: eventType,
     input_char_count: inputCharCount,
     claim_count: claimCount ?? null,
+    acquisition_channel: acquisitionChannel,
   })
   if (error) console.error('Public MPS audit event failed:', error.code)
 }
@@ -77,7 +83,8 @@ export async function POST(request: Request) {
     return response({ error: `Free preflight limit reached. Please return tomorrow, or use the private MPS Preflight for a longer document.` }, 429)
   }
 
-  await recordEvent(ledger, visitorHash, 'submitted', text.length)
+  const channel = acquisitionChannel(request)
+  await recordEvent(ledger, visitorHash, 'submitted', text.length, channel)
   try {
     const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY })
     const audit = await runMpsAudit(text, async (prompt) => {
@@ -88,10 +95,10 @@ export async function POST(request: Request) {
       })
       return message.content.map((block) => block.type === 'text' ? block.text : '').join('\n')
     })
-    await recordEvent(ledger, visitorHash, 'completed', text.length, audit.claims.length)
+    await recordEvent(ledger, visitorHash, 'completed', text.length, channel, audit.claims.length)
     return response(audit)
   } catch (error) {
-    await recordEvent(ledger, visitorHash, 'failed', text.length)
+    await recordEvent(ledger, visitorHash, 'failed', text.length, channel)
     if (error instanceof MpsAuditError) return response({ error: error.message }, error.status)
     console.error('Public MPS audit error:', error instanceof Error ? error.name : 'unknown_error')
     return response({ error: "The audit didn't complete. Please try again tomorrow or use the private preflight." }, 502)
