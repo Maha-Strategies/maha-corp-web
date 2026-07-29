@@ -21,3 +21,11 @@ jobs:
           task: Prepare the approved security context for the deployment agent.
           token-budget: '1800'
           fail-below-evidence-retention: '100'
+
+      # Credential-free option for a sanitized public passage:
+      # - uses: Maha-Strategies/maha-corp-web/.github/actions/maha-context-evidence@main
+      #   with:
+      #     mode: preflight
+      #     documents-file: .maha/context-documents.json # unused compatibility placeholder
+      #     task: Public claim preflight # unused compatibility placeholder
+      #     audit-passage-file: docs/sanitized-public-draft.txt

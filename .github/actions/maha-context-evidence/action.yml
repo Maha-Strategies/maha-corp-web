@@ -5,10 +5,19 @@ author: Maha Strategies
 inputs:
   credential:
     description: Context Compiler credential with the context_compile capability. Store it in GitHub Secrets.
-    required: true
+    required: false
+    default: ''
+  mode:
+    description: compiler uses the private Context Compiler; preflight uses the public MPS claim preflight and requires no credential.
+    required: false
+    default: compiler
   documents-file:
     description: Path to JSON containing either a documents array or an object with a documents array.
     required: true
+  audit-passage-file:
+    description: Path to a sanitized UTF-8 nonfiction passage for public preflight mode (maximum 6,000 characters). Do not use sensitive, personal, regulated, or confidential material.
+    required: false
+    default: ''
   task:
     description: The bounded agent task the Context Pack will support.
     required: true
@@ -50,7 +59,9 @@ runs:
       shell: bash
       env:
         MAHA_CONTEXT_CREDENTIAL: ${{ inputs.credential }}
+        INPUT_MODE: ${{ inputs.mode }}
         INPUT_DOCUMENTS_FILE: ${{ inputs.documents-file }}
+        INPUT_AUDIT_PASSAGE_FILE: ${{ inputs.audit-passage-file }}
         INPUT_TASK: ${{ inputs.task }}
         INPUT_TOKEN_BUDGET: ${{ inputs.token-budget }}
         INPUT_REQUIRED_EVIDENCE_FILE: ${{ inputs.required-evidence-file }}

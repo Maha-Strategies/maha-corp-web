@@ -125,6 +125,8 @@ Commercial MCP bridge compatibility manifest: https://www.mahastrategies.com/api
 
 ## MPS Preflight
 
+- [MPS Preflight MCP server](https://www.mahastrategies.com/mcp/mps-preflight.md): A public Streamable HTTP MCP server exposing the read-only `mps_claim_preflight` tool. It accepts a sanitized nonfiction passage of up to 6,000 characters and returns an MPS/0.1 claim map. No credential is required; the service is rate-limited and must not receive sensitive, personal, regulated, or confidential material. It is automated triage, not factual verification or certification. Endpoint: `https://www.mahastrategies.com/api/mcp/mps-preflight`. Registry metadata: `https://www.mahastrategies.com/mcp/mps-preflight.server.json`.
+
 - [MPS Preflight](https://www.mahastrategies.com/mps/preflight): A private, self-service MPS/0.1 claim-level review for a nonfiction extract of up to about 2,000 words. $49 one-time purchase. The full source text is processed transiently; the resulting report retains the input hash and claim excerpts. It is automated triage, not a human certification or primary-source verification.
 - [MPS Preflight sample report](https://www.mahastrategies.com/mps/preflight/example): A transparent, fictional worked example of the private report format, including claim statuses, rationale, a verification backlog, and the limits of automated review. It is not a client report or independent finding.
 

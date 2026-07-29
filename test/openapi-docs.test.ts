@@ -13,6 +13,7 @@ const APP_DIR = join(import.meta.dirname, '..', 'app')
 // page; the docs route documents itself by serving the spec.
 const PRIVATE_ROUTES = new Set([
   '/api/admin/mps-operations/actions',
+  '/api/admin/commercial-api-metering',
   '/api/admin/mps-operations/lookup',
   '/api/admin/mcp-gateway',
   '/api/admin/revenue-control-plane',
@@ -53,6 +54,9 @@ const PRIVATE_ROUTES = new Set([
   '/api/mps-preflight/checkout',
   '/api/mps-preflight/submit',
   '/api/mps-preflight/webhook',
+  // MCP endpoints expose their own JSON-RPC tool schemas and are linked from
+  // llms.txt and public MCP metadata rather than the REST OpenAPI document.
+  '/api/mcp/mps-preflight',
   '/api/utilities/receipts/demo',
   '/api/utilities/receipts/checkout',
   '/api/utilities/receipts/run',
