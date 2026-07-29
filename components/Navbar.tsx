@@ -43,6 +43,7 @@ export default function Navbar() {
     { name: 'Tools & API', href: '/tools' },
     { name: 'About Maha', href: '/about' },
     { name: 'MPS Standard', href: '/mps' },
+    { name: 'Timing Board', href: '/operations/timing' },
     { name: 'Research', href: '/research' },
     { name: 'Case Studies', href: '/case-studies' },
     { name: 'Insights', href: '/insights' },
