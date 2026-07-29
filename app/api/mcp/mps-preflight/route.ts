@@ -40,6 +40,7 @@ async function recordEvent(
   visitorHash: string,
   eventType: 'submitted' | 'completed' | 'failed',
   inputCharCount: number,
+  acquisitionChannel: 'mcp',
   claimCount?: number,
 ) {
   const { error: insertError } = await ledger.from('mps_public_audit_events').insert({
@@ -47,6 +48,7 @@ async function recordEvent(
     event_type: eventType,
     input_char_count: inputCharCount,
     claim_count: claimCount ?? null,
+    acquisition_channel: acquisitionChannel,
   })
   if (insertError) console.error('Public MPS audit event failed:', insertError.code)
 }
@@ -97,17 +99,17 @@ async function callPreflight(request: Request, value: unknown) {
   if (allowed !== true) throw new MpsAuditError('Free preflight limit reached. Please return tomorrow, or use the private MPS Preflight for a longer document.', 429)
 
   const clean = text.trim()
-  await recordEvent(ledger, visitorHash, 'submitted', clean.length)
+  await recordEvent(ledger, visitorHash, 'submitted', clean.length, 'mcp')
   try {
     const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY })
     const audit = await runMpsAudit(clean, async (prompt) => {
       const message = await client.messages.create({ model: MODEL, max_tokens: 1_500, messages: [{ role: 'user', content: prompt }] })
       return message.content.map((block) => block.type === 'text' ? block.text : '').join('\n')
     })
-    await recordEvent(ledger, visitorHash, 'completed', clean.length, audit.claims.length)
+    await recordEvent(ledger, visitorHash, 'completed', clean.length, 'mcp', audit.claims.length)
     return audit
   } catch (cause) {
-    await recordEvent(ledger, visitorHash, 'failed', clean.length)
+    await recordEvent(ledger, visitorHash, 'failed', clean.length, 'mcp')
     if (cause instanceof MpsAuditError) throw cause
     console.error('Public MPS audit error:', cause instanceof Error ? cause.name : 'unknown_error')
     throw new MpsAuditError("The audit didn't complete. Please try again tomorrow or use the private preflight.", 502)
