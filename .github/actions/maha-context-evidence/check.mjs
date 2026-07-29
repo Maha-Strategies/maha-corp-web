@@ -7,6 +7,10 @@ function requiredEnvironment(name) {
   return value
 }
 
+function optionalEnvironment(name) {
+  return process.env[name]?.trim() ?? ''
+}
+
 function parseJsonFile(file, label) {
   try { return JSON.parse(readFileSync(resolve(file), 'utf8')) } catch { throw new Error(`${label} must be readable JSON.`) }
 }
@@ -36,6 +40,25 @@ function summary(lines) {
 }
 
 async function main() {
+  const mode = optionalEnvironment('INPUT_MODE') || 'compiler'
+  if (!['compiler', 'preflight'].includes(mode)) throw new Error('mode must be compiler or preflight.')
+  const apiOrigin = requiredEnvironment('INPUT_API_URL').replace(/\/+$/, '')
+  if (mode === 'preflight') {
+    const passageFile = requiredEnvironment('INPUT_AUDIT_PASSAGE_FILE')
+    const passage = readFileSync(resolve(passageFile), 'utf8').trim()
+    if (!passage) throw new Error('audit-passage-file must contain a sanitized passage.')
+    if (passage.length > 6000) throw new Error('audit-passage-file exceeds the public preflight limit of 6,000 characters.')
+    const response = await fetch(`${apiOrigin}/api/audit`, { method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' }, body: JSON.stringify({ text: passage }) })
+    const audit = await response.json().catch(() => null)
+    if (!response.ok) throw new Error(audit?.error ?? `Maha public preflight returned HTTP ${response.status}.`)
+    if (!audit?.input_hash || !Array.isArray(audit.claims)) throw new Error('Maha public preflight returned an incomplete result.')
+    const counts = Object.fromEntries(['VERIFIED', 'SOURCED', 'BOUNDARY', 'ILLUSTRATIVE', 'UNVERIFIED'].map((tag) => [tag, audit.claims.filter((claim) => claim.tag === tag).length]))
+    setOutput('pack-id', audit.input_hash)
+    setOutput('estimated-reduction-percent', '')
+    setOutput('source-coverage-percent', '')
+    summary(['## Maha MPS Claim Preflight', '', `- Input hash: \`${audit.input_hash}\``, `- Claims identified: **${audit.claims.length}**`, ...Object.entries(counts).map(([tag, count]) => `- ${tag}: **${count}**`), '', '_Public preflight is automated claim triage, not factual verification or certification. The passage is not written to this summary; only use sanitized, non-sensitive text._'])
+    return
+  }
   const credential = requiredEnvironment('MAHA_CONTEXT_CREDENTIAL')
   const documents = arrayFromFile(requiredEnvironment('INPUT_DOCUMENTS_FILE'), 'documents', 'documents-file')
   const task = requiredEnvironment('INPUT_TASK')
@@ -43,7 +66,6 @@ async function main() {
   const evidenceFile = process.env.INPUT_REQUIRED_EVIDENCE_FILE?.trim()
   const requiredEvidence = evidenceFile ? arrayFromFile(evidenceFile, 'requiredEvidence', 'required-evidence-file') : null
   const threshold = numberInput('INPUT_FAIL_BELOW_EVIDENCE_RETENTION', 0, 100)
-  const apiOrigin = requiredEnvironment('INPUT_API_URL').replace(/\/+$/, '')
   const endpoint = requiredEvidence ? '/api/context-pack-evaluations' : '/api/context-packs'
   const clientRequestId = `github-${process.env.GITHUB_RUN_ID ?? 'local'}-${process.env.GITHUB_RUN_ATTEMPT ?? '1'}`.slice(0, 120)
   const response = await fetch(`${apiOrigin}${endpoint}`, {

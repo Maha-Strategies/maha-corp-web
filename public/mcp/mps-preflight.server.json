@@ -1,0 +1,9 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.Maha-Strategies/mps-preflight",
+  "description": "Claim-level provenance preflight for sanitized nonfiction passages; automated triage only.",
+  "version": "0.1.0",
+  "websiteUrl": "https://www.mahastrategies.com/audit",
+  "repository": { "url": "https://github.com/Maha-Strategies/maha-corp-web", "source": "github" },
+  "remotes": [{ "type": "streamable-http", "url": "https://www.mahastrategies.com/api/mcp/mps-preflight" }]
+}
