@@ -1,28 +1,10 @@
-import { apiKeyDataRedisKey, bearerApiKey, getApiKeyRecordForRawKey, hashApiKey } from '@/lib/api-key'
+import { bearerApiKey, getApiKeyRecordForRawKey } from '@/lib/api-key'
 
 export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
 
 export async function GET(request: Request) {
-  if (process.env.API_KEY_DIAGNOSTICS === 'true') {
-    const incomingHeaders = Object.fromEntries(request.headers.entries())
-    if (incomingHeaders.authorization) incomingHeaders.authorization = '[REDACTED]'
-    console.log('[DEBUG_INCOMING_HEADERS]', incomingHeaders)
-  }
-  const authHeader = request.headers.get('authorization')
   const rawKey = bearerApiKey(request)
-  const keyHash = rawKey ? await hashApiKey(rawKey) : null
-  const redisKey = keyHash ? apiKeyDataRedisKey(keyHash) : null
-  if (process.env.API_KEY_DIAGNOSTICS === 'true') {
-    // Deliberately never log authHeader itself: it contains a reusable secret.
-    console.log('[KEY_BAL_DEBUG]', {
-      authHeaderPresent: Boolean(authHeader),
-      authScheme: authHeader?.match(/^\s*([^\s]+)/)?.[1] ?? null,
-      parsedRawKeyPrefix: rawKey?.slice(0, 12),
-      computedHash: keyHash,
-    })
-    console.log('[HASH_COMPARE]', { targetRedisKey: redisKey })
-  }
   if (!rawKey) return Response.json({ error: { code: 'api_key_required', message: 'Provide Authorization: Bearer <API_KEY>.' } }, { status: 401 })
   try {
     const record = await getApiKeyRecordForRawKey(rawKey)

@@ -7,6 +7,9 @@ export type ApiKeyRecord = { key_id: string; email_hash: string; balance_credits
 const STARTER_CREDITS = 20_000
 const KEY_PREFIX = 'mha_live_'
 const YEAR_SECONDS = 31_536_000
+// Diagnostics are opt-in only. Production behavior is silent unless an
+// operator explicitly sets this exact value to "true".
+export const apiKeyDiagnosticsEnabled = process.env.API_KEY_DIAGNOSTICS === 'true'
 
 export class ApiKeyConfigurationError extends Error {
   constructor() { super('Upstash Redis is not configured.'); this.name = 'ApiKeyConfigurationError' }
@@ -80,13 +83,11 @@ export async function getApiKeyRecord(hash: string): Promise<ApiKeyRecord | null
   // Key data is stored as a Redis hash via HSET in provisionStarterKey, so it
   // must be retrieved as the same hash via HGETALL (never GET/JSON.parse).
   const result = await redis<Record<string, string> | string[] | null>('HGETALL', [redisKey])
-  if (process.env.API_KEY_DIAGNOSTICS === 'true') console.log('[REDIS_READ_RESULT]', { redisKey, result })
   const rawRecord = hashResultToRecord(result)
   const balanceCredits = Number(rawRecord?.balance_credits)
   const rateLimit = Number(rawRecord?.rate_limit_per_minute)
   const tiers: ApiKeyTier[] = ['starter', 'builder', 'scale', 'enterprise']
   if (!rawRecord?.key_id || typeof rawRecord.email_hash !== 'string' || !tiers.includes(rawRecord.tier as ApiKeyTier) || rawRecord.status !== 'active' || !Number.isFinite(balanceCredits) || balanceCredits < 0 || !Number.isFinite(rateLimit) || rateLimit < 1 || typeof rawRecord.created_at !== 'string') {
-    if (process.env.API_KEY_DIAGNOSTICS === 'true') console.log('[VALIDATION_FAILED_REASON]', rawRecord)
     return null
   }
   return {
@@ -102,7 +103,6 @@ export async function getApiKeyRecord(hash: string): Promise<ApiKeyRecord | null
 }
 export async function getApiKeyRecordForRawKey(rawKey: string): Promise<ApiKeyRecord | null> {
   const key = canonicalApiKey(rawKey); const hash = await hashApiKey(key)
-  if (process.env.NODE_ENV !== 'production') console.log('[KEY_LOOKUP_DEBUG]', { rawKeyPrefix: key.slice(0, 10), hash })
   return getApiKeyRecord(hash)
 }
 
@@ -113,7 +113,6 @@ export async function provisionStarterKey(email: string) {
   const redisKey = apiKeyDataRedisKey(hash)
   // HSET and the HGETALL read above intentionally operate on this exact key.
   await redis('HSET', [redisKey, 'key_id', keyId, 'email_hash', emailHash, 'balance_credits', String(STARTER_CREDITS), 'tier', 'starter', 'status', 'active', 'rate_limit_per_minute', '30', 'zero_data_retention', 'true', 'created_at', createdAt])
-  if (process.env.API_KEY_DIAGNOSTICS === 'true') console.log('[REDIS_WRITE_PATH]', { redisKey, method: 'HSET' })
   await redis('SET', [idKey(keyId), hash, 'EX', YEAR_SECONDS, 'NX'])
   return { key, keyId, balanceCredits: STARTER_CREDITS, tier: 'starter' as const }
 }
@@ -135,7 +134,7 @@ return {1, remaining, limit - current}
 `
 export async function authorizeAndConsumeApiUnit(rawKey: string): Promise<ApiAccess> {
   if (!apiKeyServiceConfigured()) return { kind: 'unavailable' }
-  try { const key = canonicalApiKey(rawKey); const hash = await hashApiKey(key); if (process.env.NODE_ENV !== 'production') console.log('[KEY_LOOKUP_DEBUG]', { rawKeyPrefix: key.slice(0, 10), hash }); const bucket = Math.floor(Date.now() / 60_000); const result = await redis<number[]>('EVAL', [CONSUME_SCRIPT, 2, apiKeyDataRedisKey(hash), `key:rate:${hash}:${bucket}`, 30]); const [code, credits, requests] = result
+  try { const key = canonicalApiKey(rawKey); const hash = await hashApiKey(key); const bucket = Math.floor(Date.now() / 60_000); const result = await redis<number[]>('EVAL', [CONSUME_SCRIPT, 2, apiKeyDataRedisKey(hash), `key:rate:${hash}:${bucket}`, 30]); const [code, credits, requests] = result
     if (code === 1) { const record = await getApiKeyRecord(hash); return record ? { kind: 'authorized', keyId: record.key_id, tier: record.tier, zeroDataRetention: zeroDataRetentionEnabled(record), remainingCredits: credits, remainingRequests: requests } : { kind: 'unavailable' } }
     if (code === 2) return { kind: 'depleted' }; if (code === 3) return { kind: 'rate_limited' }; return { kind: 'unauthorized' }
   } catch { return { kind: 'unavailable' } }
