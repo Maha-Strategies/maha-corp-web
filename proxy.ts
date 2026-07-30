@@ -18,6 +18,6 @@ export async function proxy(request: NextRequest) {
   if (access.kind === 'depleted') return json({ error: { code: 'credit_balance_depleted', message: 'This API key has no remaining credits. Purchase a prepaid pack to continue.' } }, apiAccessStatus('depleted'))
   if (access.kind === 'rate_limited') return json({ error: { code: 'rate_limited', message: 'Per-minute API key limit reached. Retry shortly.' } }, apiAccessStatus('rate_limited'), { 'Retry-After': '60' })
   if (access.kind !== 'authorized') return json({ error: { code: 'api_key_service_unavailable', message: 'API authorization is temporarily unavailable.' } }, apiAccessStatus('unavailable'))
-  const headers = new Headers(request.headers); headers.set('x-maha-api-key-id', access.keyId); headers.set('x-maha-credits-remaining', String(access.remainingCredits)); return NextResponse.next({ request: { headers }, headers: API_CORS_HEADERS })
+  const headers = new Headers(request.headers); headers.set('x-maha-api-key-id', access.keyId); headers.set('x-maha-api-key-tier', access.tier); headers.set('x-maha-zero-data-retention', String(access.zeroDataRetention)); headers.set('x-maha-credits-remaining', String(access.remainingCredits)); return NextResponse.next({ request: { headers }, headers: API_CORS_HEADERS })
 }
 export const config = { matcher: ['/api/v1/:path*'] }

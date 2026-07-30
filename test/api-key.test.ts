@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
 
-import { apiKeyDataRedisKey, apiKeyServiceConfigured, bearerApiKey, consumeProvisioningLimit, getApiKeyRecordForRawKey, hashApiKey, provisionStarterKey } from '../lib/api-key.ts'
+import { apiKeyDataRedisKey, apiKeyServiceConfigured, bearerApiKey, canonicalApiKey, consumeProvisioningLimit, getApiKeyRecordForRawKey, hashApiKey, provisionStarterKey } from '../lib/api-key.ts'
 
 const originalUrl = process.env.UPSTASH_REDIS_REST_URL
 const originalToken = process.env.UPSTASH_REDIS_REST_TOKEN
@@ -22,8 +22,10 @@ test('Upstash API-key configuration accepts sanitized Vercel environment values'
 
 test('API-key hashing and bearer extraction use the same raw key in every runtime', async () => {
   const rawKey = 'mha_live_ExampleKey-123'
-  assert.equal(bearerApiKey(new Request('https://example.test', { headers: { authorization: `  bEaReR\t ${rawKey}  ` } })), rawKey)
+  assert.equal(bearerApiKey(new Request('https://example.test', { headers: { authorization: `  bEaReR\t  "${rawKey}"  ` } })), rawKey)
+  assert.equal(canonicalApiKey(`  '${rawKey}'  `), rawKey)
   assert.equal(await hashApiKey(rawKey), 'd119888447296d78fc9a4309f08b3cd4a64941f457358cccbf57f5e860d38558')
+  assert.equal(await hashApiKey(` "${rawKey}" `), await hashApiKey(rawKey))
   assert.equal(apiKeyDataRedisKey(await hashApiKey(rawKey)), 'key:data:d119888447296d78fc9a4309f08b3cd4a64941f457358cccbf57f5e860d38558')
 })
 

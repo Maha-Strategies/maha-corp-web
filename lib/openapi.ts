@@ -104,6 +104,7 @@ export const openApiDocument = {
     { name: 'Maha Landscape-Opt (Mock)', description: 'Integration-only mock contract for high-dimensional landscape optimization.' },
     { name: 'Self-service API Keys', description: 'Instant starter-key provisioning and prepaid credit checkout.' },
     { name: 'Maha SDK', description: 'Small, credentialed context compression and provenance lookup endpoints for the public TypeScript SDK.' },
+    { name: 'Maha OpenAI-compatible Proxy', description: 'Non-streaming OpenAI Chat Completions proxy with transient, deterministic context compaction.' },
   ],
   paths: {
     ...geometricAiOpenApiPath,
@@ -135,6 +136,17 @@ export const openApiDocument = {
         description: 'Credentialed version of deterministic context compilation. It does not retain source text or make factual-verification claims.', security: [{ credential: [] }],
         requestBody: { required: true, content: { 'application/json': { schema: { type: 'object', required: ['clientRequestId', 'task', 'tokenBudget', 'documents'], properties: { clientRequestId: { type: 'string', minLength: 8, maxLength: 120 }, task: { type: 'string', minLength: 8, maxLength: 1200 }, tokenBudget: { type: 'integer', minimum: 64, maximum: 16000 }, documents: { type: 'array', minItems: 1, maxItems: 8, items: { type: 'object', required: ['id', 'text'], properties: { id: { type: 'string' }, title: { type: 'string' }, text: { type: 'string', maxLength: 64000 } } } } } } } } },
         responses: { '201': { description: 'Transient compiled context pack.', content: { 'application/json': { schema: { type: 'object', required: ['packId', 'context', 'metrics', 'sources', 'warnings'], properties: { packId: { type: 'string' }, context: { type: 'string' }, metrics: { type: 'object' }, sources: { type: 'array', items: { type: 'object' } }, warnings: { type: 'array', items: { type: 'string' } }, sourceTextStored: { const: false }, compiledContextStored: { const: false } } } } } }, '400': errorResponse('Invalid compression request.'), '401': errorResponse('Missing or invalid API key.'), '402': errorResponse('API-key credits depleted.'), '413': errorResponse('Context input exceeds 128 KB.'), '415': errorResponse('Content-Type must be application/json.') },
+      },
+    },
+    '/api/v1/chat/completions': {
+      post: {
+        tags: ['Maha OpenAI-compatible Proxy'], operationId: 'createMahaChatCompletion', summary: 'Create a non-streaming OpenAI-compatible chat completion through Maha context compaction',
+        description: 'Accepts the standard Chat Completions payload shape and returns the upstream OpenAI JSON response unchanged. Text-only prior conversation may be deterministically compacted; multimodal or tool-call payloads are forwarded unchanged. Maha does not log or cache payloads. Streaming is not supported by this route.', security: [{ credential: [] }],
+        requestBody: { required: true, content: { 'application/json': { schema: { type: 'object', required: ['model', 'messages'], properties: { model: { type: 'string' }, messages: { type: 'array', minItems: 1, items: { type: 'object', required: ['role', 'content'], properties: { role: { type: 'string' }, content: {} } } }, temperature: { type: 'number' }, stream: { type: 'boolean', const: false } }, additionalProperties: true } } } },
+        responses: {
+          '200': { description: 'Unmodified upstream OpenAI Chat Completion JSON. Compression estimates are returned in X-Maha-* headers.', content: { 'application/json': { schema: { type: 'object', required: ['id', 'choices'], properties: { id: { type: 'string' }, choices: { type: 'array' }, usage: { type: 'object' } }, additionalProperties: true } } } },
+          '400': errorResponse('Invalid request, unsupported streaming request, or unsafe compression input.'), '401': errorResponse('Missing or invalid Maha API key.'), '402': errorResponse('API-key credits depleted.'), '413': errorResponse('Chat request exceeds 512 KB.'), '429': errorResponse('API-key rate limit reached.'), '502': errorResponse('OpenAI upstream could not be reached.'), '503': errorResponse('Maha API-key service or upstream configuration unavailable.'),
+        },
       },
     },
     '/api/v1/claims/{claimId}': {
