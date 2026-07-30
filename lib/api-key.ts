@@ -1,8 +1,8 @@
 /** Edge-safe API key, prepaid-credit, and Upstash REST helpers. */
 export type ApiKeyTier = 'starter' | 'builder' | 'scale' | 'enterprise'
-// Redis hash values are strings. `zero_data_retention` is written for every
-// newly-issued key and gives the request path an explicit no-log/no-cache policy.
-export type ApiKeyRecord = { key_id: string; email_hash: string; balance_credits: string; tier: ApiKeyTier; status: 'active'; rate_limit_per_minute: string; zero_data_retention?: 'true'; created_at: string }
+// Upstash hash values are strings. Parse them at this boundary so downstream
+// authorization and balance code only handles the correctly typed record.
+export type ApiKeyRecord = { key_id: string; email_hash: string; balance_credits: number; tier: ApiKeyTier; status: 'active'; rate_limit_per_minute: number; zero_data_retention: boolean; created_at: string }
 
 const STARTER_CREDITS = 20_000
 const KEY_PREFIX = 'mha_live_'
@@ -67,7 +67,23 @@ export async function getApiKeyRecord(hash: string): Promise<ApiKeyRecord | null
   // must be retrieved as the same hash via HGETALL (never GET/JSON.parse).
   const rawRecord = await redis<Record<string, string> | null>('HGETALL', [redisKey])
   if (process.env.API_KEY_DIAGNOSTICS === 'true') console.log('[REDIS_READ_RESULT]', { redisKey, result: rawRecord })
-  return rawRecord?.key_id ? rawRecord as ApiKeyRecord : null
+  const balanceCredits = Number(rawRecord?.balance_credits)
+  const rateLimit = Number(rawRecord?.rate_limit_per_minute)
+  const tiers: ApiKeyTier[] = ['starter', 'builder', 'scale', 'enterprise']
+  if (!rawRecord?.key_id || typeof rawRecord.email_hash !== 'string' || !tiers.includes(rawRecord.tier as ApiKeyTier) || rawRecord.status !== 'active' || !Number.isFinite(balanceCredits) || balanceCredits < 0 || !Number.isFinite(rateLimit) || rateLimit < 1 || typeof rawRecord.created_at !== 'string') {
+    if (process.env.API_KEY_DIAGNOSTICS === 'true') console.log('[VALIDATION_FAILED_REASON]', rawRecord)
+    return null
+  }
+  return {
+    key_id: rawRecord.key_id,
+    email_hash: rawRecord.email_hash,
+    balance_credits: balanceCredits,
+    tier: rawRecord.tier as ApiKeyTier,
+    status: 'active',
+    rate_limit_per_minute: rateLimit,
+    zero_data_retention: String(rawRecord.zero_data_retention) === 'true',
+    created_at: rawRecord.created_at,
+  }
 }
 export async function getApiKeyRecordForRawKey(rawKey: string): Promise<ApiKeyRecord | null> {
   const key = canonicalApiKey(rawKey); const hash = await hashApiKey(key)
@@ -75,7 +91,7 @@ export async function getApiKeyRecordForRawKey(rawKey: string): Promise<ApiKeyRe
   return getApiKeyRecord(hash)
 }
 
-export function zeroDataRetentionEnabled(record: Pick<ApiKeyRecord, 'zero_data_retention'>) { return record.zero_data_retention === 'true' }
+export function zeroDataRetentionEnabled(record: Pick<ApiKeyRecord, 'zero_data_retention'>) { return record.zero_data_retention }
 
 export async function provisionStarterKey(email: string) {
   const key = createApiKey(); const keyId = createApiKeyId(); const hash = await hashApiKey(key); const emailHash = await sha256(email); const createdAt = new Date().toISOString()
