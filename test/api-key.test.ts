@@ -30,9 +30,10 @@ test('Upstash REST calls serialize numeric Redis arguments as strings', async ()
       return new Response(JSON.stringify({ result: requests.length === 1 ? 1 : 1 }), { status: 200 })
     }
     assert.equal(await consumeProvisioningLimit('127.0.0.1'), true)
-    assert.match(requests[0].url, /\/incr$/)
-    assert.match(requests[1].url, /\/expire$/)
-    assert.equal(requests[1].args[1], '3600')
+    assert.equal(requests[0].url, 'https://example.upstash.io')
+    assert.equal(requests[0].args[0], 'INCR')
+    assert.equal(requests[1].args[0], 'EXPIRE')
+    assert.equal(requests[1].args[2], '3600')
   } finally {
     globalThis.fetch = originalFetch
     if (originalUrl === undefined) delete process.env.UPSTASH_REDIS_REST_URL; else process.env.UPSTASH_REDIS_REST_URL = originalUrl
