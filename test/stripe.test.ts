@@ -38,9 +38,9 @@ test('Stripe webhook reports duplicate credit events without another credit gran
   process.env.STRIPE_SECRET_KEY = secret; process.env.STRIPE_API_KEY_WEBHOOK_SECRET = webhookSecret
   process.env.UPSTASH_REDIS_REST_URL = 'https://upstash.example'; process.env.UPSTASH_REDIS_REST_TOKEN = 'token'
   let credits = 0
-  globalThis.fetch = async (input) => {
-    const url = String(input)
-    if (url.endsWith('/get')) return new Response(JSON.stringify({ result: 'key-hash' }))
+  globalThis.fetch = async (_input, init) => {
+    const [command] = JSON.parse(String(init?.body)) as [string]
+    if (command === 'GET') return new Response(JSON.stringify({ result: 'key-hash' }))
     credits += 1
     return new Response(JSON.stringify({ result: credits === 1 ? 100_000 : false }))
   }
