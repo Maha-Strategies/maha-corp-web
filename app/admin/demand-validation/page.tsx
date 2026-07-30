@@ -1,6 +1,6 @@
 'use client'
 
-import { useMemo, useState } from 'react'
+import { useState } from 'react'
 
 type Signal = { public_id: string; source: string; signal_class: string; title: string; buyer: string; problem: string; proposed_solution: string; commercial_intent: number; score: number }
 type Cluster = { public_id: string; title: string; buyer: string; job_to_be_done: string; offer: string; status: string; score: number; signal_count: number; direct_demand_signals: number; source_channels: number; average_commercial_intent: number }
@@ -9,7 +9,6 @@ export default function DemandValidationPage() {
   const [token, setToken] = useState(''); const [unlocked, setUnlocked] = useState(false); const [loading, setLoading] = useState(false); const [notice, setNotice] = useState('')
   const [signals, setSignals] = useState<Signal[]>([]); const [clusters, setClusters] = useState<Cluster[]>([]); const [selected, setSelected] = useState<string[]>([])
   const [form, setForm] = useState({ title: '', buyer: '', jobToBeDone: '', offer: '' })
-  const selectedSignals = useMemo(() => signals.filter((signal) => selected.includes(signal.public_id)), [signals, selected])
   async function load() { setLoading(true); setNotice(''); try { const response = await fetch('/api/admin/demand-validation', { headers: { Authorization: `Bearer ${token}` } }); const body = await response.json() as { clusters?: Cluster[]; approvedSignals?: Signal[]; error?: { message?: string } }; if (!response.ok) throw new Error(body.error?.message ?? 'Demand validation is unavailable.'); setClusters(body.clusters ?? []); setSignals(body.approvedSignals ?? []); setUnlocked(true) } catch (error) { setNotice(error instanceof Error ? error.message : 'Demand validation is unavailable.') } finally { setLoading(false) } }
   function toggle(id: string) { setSelected((current) => current.includes(id) ? current.filter((value) => value !== id) : current.length >= 8 ? current : [...current, id]) }
   async function create() { setLoading(true); setNotice(''); try { const response = await fetch('/api/admin/demand-validation', { method: 'POST', headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' }, body: JSON.stringify({ ...form, opportunityIds: selected, idempotencyKey: `demand-cluster:${crypto.randomUUID()}` }) }); const body = await response.json() as { cluster?: { status?: string; score?: number }; error?: { message?: string } }; if (!response.ok || !body.cluster) throw new Error(body.error?.message ?? 'Demand cluster could not be recorded.'); setNotice(`Demand cluster recorded: ${body.cluster.status ?? 'collecting'} (${body.cluster.score ?? 0}/100).`); setSelected([]); setForm({ title: '', buyer: '', jobToBeDone: '', offer: '' }); await load() } catch (error) { setNotice(error instanceof Error ? error.message : 'Demand cluster could not be recorded.'); setLoading(false) } }

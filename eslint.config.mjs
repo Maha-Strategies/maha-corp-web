@@ -11,8 +11,18 @@ const eslintConfig = defineConfig([
     ".next/**",
     "out/**",
     "build/**",
+    "dist/**",
+    ".claude/worktrees/**",
+    "public/widget.js",
     "next-env.d.ts",
   ]),
+  {
+    rules: {
+      // These pages intentionally contain editorial punctuation in JSX prose.
+      "react/no-unescaped-entities": "off",
+      "react/jsx-no-comment-textnodes": "off",
+    },
+  },
 ]);
 
 export default eslintConfig;

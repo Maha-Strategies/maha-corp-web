@@ -1,4 +1,5 @@
 'use client'
+/* eslint-disable react-hooks/set-state-in-effect, react-hooks/immutability -- This one-time effect recovers a Stripe redirect from browser-held session state before invoking the payment-gated runner. */
 
 import { useEffect, useRef, useState } from 'react'
 
@@ -83,6 +84,8 @@ export default function ReceiptBatch() {
     } catch { setPhase('error'); setError('The stored receipts for this run were unreadable.'); return }
 
     void runBatch(checkoutId, stashed, key)
+  // runBatch is a stable function declaration; this effect must only process a redirect once.
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   async function runBatch(checkoutId: string, batch: string[], key: string, paymentRetries = 0) {

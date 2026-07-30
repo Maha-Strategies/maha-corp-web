@@ -42,6 +42,7 @@ const PRIVATE_ROUTES = new Set([
   '/api/agent-inquiries/[inquiryId]',
   '/api/audit/events',
   '/api/docs/openapi',
+  '/api/webhooks/stripe',
   '/api/inbound-submissions',
   '/api/integrations/base44/openapi',
   '/api/cron/inbound-digest',

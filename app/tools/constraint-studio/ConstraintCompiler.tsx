@@ -85,8 +85,8 @@ export default function ConstraintCompiler() {
     generatedAt: new Date().toISOString(),
     status: preflight.errors.length ? 'needs_review' : 'preflight_complete',
     decision: { title: title.trim(), scope: scope.trim(), objective: objective.trim(), direction },
-    variables: variables.map(({ id: _id, ...variable }) => ({ ...variable, name: variable.name.trim(), domain: variable.domain.trim() })),
-    constraints: constraints.map(({ id: _id, ...constraint }) => ({ ...constraint, statement: constraint.statement.trim(), variableNames: constraint.variableNames.split(',').map((value) => value.trim()).filter(Boolean), source: constraint.source.trim() || undefined })),
+    variables: variables.map(({ name, kind, domain }) => ({ name: name.trim(), kind, domain: domain.trim() })),
+    constraints: constraints.map(({ kind, statement, variableNames, source }) => ({ kind, statement: statement.trim(), variableNames: variableNames.split(',').map((value) => value.trim()).filter(Boolean), source: source.trim() || undefined })),
     assumptions: assumptions.trim() ? assumptions.trim().split('\n').map((value) => value.trim()).filter(Boolean) : [],
     preflight: preflight,
     limits: [
