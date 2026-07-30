@@ -18,6 +18,7 @@ const PRIVATE_ROUTES = new Set([
   '/api/admin/mcp-gateway',
   '/api/admin/revenue-control-plane',
   '/api/admin/revenue-metrics',
+  '/api/admin/billing-readiness',
   '/api/admin/experiments',
   '/api/admin/demand-validation',
   '/api/admin/som-evaluations',
