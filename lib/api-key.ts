@@ -6,14 +6,27 @@ const STARTER_CREDITS = 20_000
 const KEY_PREFIX = 'mha_live_'
 const YEAR_SECONDS = 31_536_000
 
+export class ApiKeyConfigurationError extends Error {
+  constructor() { super('Upstash Redis is not configured.'); this.name = 'ApiKeyConfigurationError' }
+}
+
+export class UpstashRedisError extends Error {
+  readonly code: 'upstash_connection_failed' | 'upstash_request_failed' | 'upstash_response_invalid'
+  constructor(code: 'upstash_connection_failed' | 'upstash_request_failed' | 'upstash_response_invalid', message: string) { super(message); this.name = 'UpstashRedisError'; this.code = code }
+}
+
+function sanitizedEnvironmentValue(value: string | undefined) {
+  return value?.trim().replace(/^["']|["']$/g, '') || undefined
+}
+
 function redisConfiguration() {
-  const url = process.env.UPSTASH_REDIS_REST_URL
-  const token = process.env.UPSTASH_REDIS_REST_TOKEN
-  if (!url || !token) throw new Error('Upstash Redis is not configured.')
+  const url = sanitizedEnvironmentValue(process.env.UPSTASH_REDIS_REST_URL)
+  const token = sanitizedEnvironmentValue(process.env.UPSTASH_REDIS_REST_TOKEN)
+  if (!url || !token) throw new ApiKeyConfigurationError()
   return { url: url.replace(/\/$/, ''), token }
 }
 
-export function apiKeyServiceConfigured() { return Boolean(process.env.UPSTASH_REDIS_REST_URL && process.env.UPSTASH_REDIS_REST_TOKEN) }
+export function apiKeyServiceConfigured() { const { url, token } = { url: sanitizedEnvironmentValue(process.env.UPSTASH_REDIS_REST_URL), token: sanitizedEnvironmentValue(process.env.UPSTASH_REDIS_REST_TOKEN) }; return Boolean(url && token) }
 export async function sha256(value: string) { const bytes = new TextEncoder().encode(value); const digest = await crypto.subtle.digest('SHA-256', bytes); return [...new Uint8Array(digest)].map((byte) => byte.toString(16).padStart(2, '0')).join('') }
 function randomBase64Url(length = 32) { const bytes = crypto.getRandomValues(new Uint8Array(length)); return btoa(String.fromCharCode(...bytes)).replaceAll('+', '-').replaceAll('/', '_').replaceAll('=', '') }
 export function createApiKey() { return `${KEY_PREFIX}${randomBase64Url()}` }
@@ -21,9 +34,14 @@ export function createApiKeyId() { return `key_${crypto.randomUUID().replaceAll(
 export function bearerApiKey(request: Request) { const value = request.headers.get('authorization'); return value?.startsWith('Bearer ') ? value.slice(7).trim() || null : null }
 
 async function redis<T>(command: string, args: unknown[]): Promise<T> {
-  const config = redisConfiguration(); const response = await fetch(`${config.url}/${command.toLowerCase()}`, { method: 'POST', headers: { Authorization: `Bearer ${config.token}`, 'Content-Type': 'application/json' }, body: JSON.stringify(args), cache: 'no-store' })
-  if (!response.ok) throw new Error(`Upstash ${command} failed.`)
-  const data = await response.json() as { result: T; error?: string }; if (data.error) throw new Error(`Upstash ${command} failed.`); return data.result
+  const config = redisConfiguration()
+  let response: Response
+  try { response = await fetch(`${config.url}/${command.toLowerCase()}`, { method: 'POST', headers: { Authorization: `Bearer ${config.token}`, 'Content-Type': 'application/json' }, body: JSON.stringify(args), cache: 'no-store' }) } catch (error) { throw new UpstashRedisError('upstash_connection_failed', `Upstash ${command} connection failed: ${error instanceof Error ? error.message : 'unknown network error'}`) }
+  if (!response.ok) throw new UpstashRedisError('upstash_request_failed', `Upstash ${command} returned HTTP ${response.status}.`)
+  let data: { result: T; error?: string }
+  try { data = await response.json() as { result: T; error?: string } } catch { throw new UpstashRedisError('upstash_response_invalid', `Upstash ${command} returned invalid JSON.`) }
+  if (data.error) throw new UpstashRedisError('upstash_request_failed', `Upstash ${command} rejected the request.`)
+  return data.result
 }
 
 function dataKey(hash: string) { return `key:data:${hash}` }
@@ -59,7 +77,7 @@ export async function authorizeAndConsumeApiUnit(key: string): Promise<ApiAccess
     if (code === 2) return { kind: 'depleted' }; if (code === 3) return { kind: 'rate_limited' }; return { kind: 'unauthorized' }
   } catch { return { kind: 'unavailable' } }
 }
-export async function consumeProvisioningLimit(ip: string) { if (!apiKeyServiceConfigured()) return true; try { const digest = await sha256(ip); const bucket = Math.floor(Date.now() / 3_600_000); const count = await redis<number>('INCR', [`key:provision:${digest}:${bucket}`]); if (count === 1) await redis('EXPIRE', [`key:provision:${digest}:${bucket}`, 3600]); return count <= 3 } catch { return false } }
+export async function consumeProvisioningLimit(ip: string) { if (!apiKeyServiceConfigured()) throw new ApiKeyConfigurationError(); const digest = await sha256(ip); const bucket = Math.floor(Date.now() / 3_600_000); const count = await redis<number>('INCR', [`key:provision:${digest}:${bucket}`]); if (count === 1) await redis('EXPIRE', [`key:provision:${digest}:${bucket}`, 3600]); return count <= 3 }
 export async function keyHashForId(keyId: string) { return redis<string | null>('GET', [idKey(keyId)]) }
 export async function creditKeyById(keyId: string, credits: number) { const hash = await keyHashForId(keyId); if (!hash) throw new Error('API key does not exist.'); return redis<number>('HINCRBY', [dataKey(hash), 'balance_credits', credits]) }
 export async function creditKeyOnce(eventId: string, keyId: string, credits: number) { const hash = await keyHashForId(keyId); if (!hash) throw new Error('API key does not exist.'); const script = `if redis.call('SET', KEYS[1], '1', 'NX', 'EX', 2592000) then return redis.call('HINCRBY', KEYS[2], 'balance_credits', ARGV[1]) end return false`; return redis<number | false>('EVAL', [script, 2, `stripe:event:${eventId}`, dataKey(hash), String(credits)]) }
