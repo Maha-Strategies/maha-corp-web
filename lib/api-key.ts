@@ -35,8 +35,11 @@ export function bearerApiKey(request: Request) { const value = request.headers.g
 
 async function redis<T>(command: string, args: unknown[]): Promise<T> {
   const config = redisConfiguration()
+  // Upstash's REST command endpoint expects Redis protocol arguments as strings.
+  // Keeping this conversion here covers EXPIRE, SET EX, EVAL numkeys, and limits.
+  const serializedArgs = args.map((argument) => typeof argument === 'number' ? String(argument) : argument)
   let response: Response
-  try { response = await fetch(`${config.url}/${command.toLowerCase()}`, { method: 'POST', headers: { Authorization: `Bearer ${config.token}`, 'Content-Type': 'application/json' }, body: JSON.stringify(args), cache: 'no-store' }) } catch (error) { throw new UpstashRedisError('upstash_connection_failed', `Upstash ${command} connection failed: ${error instanceof Error ? error.message : 'unknown network error'}`) }
+  try { response = await fetch(`${config.url}/${command.toLowerCase()}`, { method: 'POST', headers: { Authorization: `Bearer ${config.token}`, 'Content-Type': 'application/json' }, body: JSON.stringify(serializedArgs), cache: 'no-store' }) } catch (error) { throw new UpstashRedisError('upstash_connection_failed', `Upstash ${command} connection failed: ${error instanceof Error ? error.message : 'unknown network error'}`) }
   if (!response.ok) throw new UpstashRedisError('upstash_request_failed', `Upstash ${command} returned HTTP ${response.status}.`)
   let data: { result: T; error?: string }
   try { data = await response.json() as { result: T; error?: string } } catch { throw new UpstashRedisError('upstash_response_invalid', `Upstash ${command} returned invalid JSON.`) }
