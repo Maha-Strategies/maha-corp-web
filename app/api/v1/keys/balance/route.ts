@@ -4,6 +4,11 @@ export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
 
 export async function GET(request: Request) {
+  if (process.env.API_KEY_DIAGNOSTICS === 'true') {
+    const incomingHeaders = Object.fromEntries(request.headers.entries())
+    if (incomingHeaders.authorization) incomingHeaders.authorization = '[REDACTED]'
+    console.log('[DEBUG_INCOMING_HEADERS]', incomingHeaders)
+  }
   const authHeader = request.headers.get('authorization')
   const rawKey = bearerApiKey(request)
   const keyHash = rawKey ? await hashApiKey(rawKey) : null
