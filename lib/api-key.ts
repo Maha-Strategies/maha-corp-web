@@ -160,4 +160,13 @@ export async function consumeAdditionalApiCredits(keyId: string, credits: number
   return { kind: 'charged' as const, remainingCredits: result }
 }
 export async function creditKeyById(keyId: string, credits: number) { const hash = await keyHashForId(keyId); if (!hash) throw new Error('API key does not exist.'); return redis<number>('HINCRBY', [apiKeyDataRedisKey(hash), 'balance_credits', credits]) }
-export async function creditKeyOnce(eventId: string, keyId: string, credits: number) { const hash = await keyHashForId(keyId); if (!hash) throw new Error('API key does not exist.'); const script = `if redis.call('SET', KEYS[1], '1', 'NX', 'EX', 2592000) then return redis.call('HINCRBY', KEYS[2], 'balance_credits', ARGV[1]) end return false`; return redis<number | false>('EVAL', [script, 2, `stripe:event:${eventId}`, apiKeyDataRedisKey(hash), String(credits)]) }
+// Keep Stripe event claims permanently: a completed payment must never credit
+// twice merely because a provider retries after the usual webhook window.
+export async function creditKeyOnce(eventId: string, keyId: string, credits: number) { const hash = await keyHashForId(keyId); if (!hash) throw new Error('API key does not exist.'); const script = `if redis.call('SET', KEYS[1], '1', 'NX') then return redis.call('HINCRBY', KEYS[2], 'balance_credits', ARGV[1]) end return false`; return redis<number | false>('EVAL', [script, 2, `stripe:event:${eventId}`, apiKeyDataRedisKey(hash), String(credits)]) }
+export async function reverseKeyCreditsOnce(eventId: string, keyId: string, credits: number) {
+  if (!Number.isInteger(credits) || credits < 0) throw new Error('credits must be a non-negative integer.')
+  const hash = await keyHashForId(keyId); if (!hash) throw new Error('API key does not exist.')
+  const script = `if redis.call('SET', KEYS[1], '1', 'NX') then local balance=tonumber(redis.call('HGET', KEYS[2], 'balance_credits') or '0'); local requested=tonumber(ARGV[1]); if balance<requested then redis.call('HSET', KEYS[2], 'balance_credits', '0', 'status', 'suspended'); return {1,0,1} end return {1,redis.call('HINCRBY', KEYS[2], 'balance_credits', -requested),0} end return {0,tonumber(redis.call('HGET', KEYS[2], 'balance_credits') or '0'),redis.call('HGET', KEYS[2], 'status') == 'suspended' and 1 or 0}`
+  const result = await redis<number[]>('EVAL', [script, 2, `stripe:reversal:${eventId}`, apiKeyDataRedisKey(hash), String(credits)])
+  return { applied: result[0] === 1, balanceCredits: result[1], suspended: result[2] === 1 }
+}

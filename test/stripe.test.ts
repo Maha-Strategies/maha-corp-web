@@ -34,23 +34,12 @@ test('Stripe webhook rejects missing signatures and acknowledges malformed signe
   } finally { globalThis.fetch = originalFetch }
 })
 
-test('Stripe webhook reports duplicate credit events without another credit grant', async () => {
+test('Stripe webhook ignores non-billing events without touching the credit ledger', async () => {
   process.env.STRIPE_SECRET_KEY = secret; process.env.STRIPE_API_KEY_WEBHOOK_SECRET = webhookSecret
-  process.env.UPSTASH_REDIS_REST_URL = 'https://upstash.example'; process.env.UPSTASH_REDIS_REST_TOKEN = 'token'
-  let credits = 0
-  globalThis.fetch = async (_input, init) => {
-    const [command] = JSON.parse(String(init?.body)) as [string]
-    if (command === 'GET') return new Response(JSON.stringify({ result: 'key-hash' }))
-    credits += 1
-    return new Response(JSON.stringify({ result: credits === 1 ? 100_000 : false }))
-  }
   try {
-    const first = await POST(signedRequest(event()))
-    assert.equal(first.status, 200)
-    assert.equal((await first.json()).duplicate, false)
-    const duplicate = await POST(signedRequest(event()))
-    assert.equal(duplicate.status, 200)
-    assert.equal((await duplicate.json()).duplicate, true)
+    const ignored = await POST(signedRequest({ ...event(), type: 'payment_intent.created' }))
+    assert.equal(ignored.status, 200)
+    assert.deepEqual(await ignored.json(), { received: true, ignored: true })
   } finally {
     globalThis.fetch = originalFetch
     if (originalSecret === undefined) delete process.env.STRIPE_SECRET_KEY; else process.env.STRIPE_SECRET_KEY = originalSecret

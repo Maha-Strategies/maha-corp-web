@@ -120,8 +120,8 @@ export const openApiDocument = {
     '/api/v1/keys/checkout': {
       post: {
         tags: ['Self-service API Keys'], operationId: 'createApiCreditCheckout', summary: 'Create a hosted Stripe Checkout session for a prepaid API credit pack', security: [{ credential: [] }],
-        requestBody: { required: true, content: { 'application/json': { schema: { type: 'object', required: ['pack'], properties: { pack: { type: 'string', enum: ['starter', 'builder', 'scale'] } } } } } },
-        responses: { '200': { description: 'Hosted checkout URL.', content: { 'application/json': { schema: { type: 'object', required: ['checkoutUrl', 'pack', 'credits'], properties: { checkoutUrl: { type: 'string', format: 'uri' }, pack: { type: 'string' }, credits: { type: 'integer' } } } } } }, '401': errorResponse('Invalid API key.'), '503': errorResponse('Checkout unavailable.') },
+        requestBody: { required: true, content: { 'application/json': { schema: { type: 'object', required: ['pack', 'clientRequestId'], properties: { pack: { type: 'string', enum: ['starter', 'builder', 'scale', 'pro', 'enterprise'] }, clientRequestId: { type: 'string', minLength: 8, maxLength: 120, pattern: '^[A-Za-z0-9_-]+$', description: 'Stable idempotency key. Reuse it only while retrying this exact pack purchase.' } } } } } },
+        responses: { '200': { description: 'Hosted checkout URL.', content: { 'application/json': { schema: { type: 'object', required: ['checkoutUrl', 'pack', 'idempotentReplay'], properties: { checkoutUrl: { type: 'string', format: 'uri' }, pack: { type: 'string' }, idempotentReplay: { type: 'boolean' } } } } } }, '400': errorResponse('Invalid pack or idempotency key.'), '401': errorResponse('Invalid API key.'), '409': errorResponse('A reused request ID conflicts with another purchase or has already completed.'), '503': errorResponse('Checkout unavailable.') },
       },
     },
     '/api/v1/keys/balance': {
