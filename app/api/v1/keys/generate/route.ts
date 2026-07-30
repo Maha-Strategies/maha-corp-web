@@ -1,4 +1,4 @@
-import { ApiKeyConfigurationError, apiKeyDataRedisKey, consumeProvisioningLimit, apiKeyServiceConfigured, hashApiKey, provisionStarterKey, UpstashRedisError } from '@/lib/api-key'
+import { ApiKeyConfigurationError, consumeProvisioningLimit, apiKeyServiceConfigured, provisionStarterKey, UpstashRedisError } from '@/lib/api-key'
 
 export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
@@ -20,12 +20,6 @@ export async function POST(request: Request) {
   try {
     if (!await consumeProvisioningLimit(ip)) return json({ error: { code: 'provisioning_rate_limited', message: 'Free key generation is temporarily limited. Retry later.' } }, 429)
     const result = await provisionStarterKey(email)
-    if (process.env.API_KEY_DIAGNOSTICS === 'true') {
-      const keyHash = await hashApiKey(result.key)
-      const redisKey = apiKeyDataRedisKey(keyHash)
-      console.log('[KEY_GEN_DEBUG]', { rawKeyPrefix: result.key.slice(0, 12), hash: keyHash, redisKey })
-      console.log('[HASH_COMPARE]', { targetRedisKey: redisKey })
-    }
     return json({ apiKey: result.key, apiKeyId: result.keyId, balanceCredits: result.balanceCredits, tier: result.tier, disclosure: 'Copy this API key now. It is not stored in the browser or returned by this endpoint again.' }, 201)
   } catch (error) { console.error('[KEY_GEN_ERROR]', error); return json({ error: infrastructureError(error) }, 503) }
 }

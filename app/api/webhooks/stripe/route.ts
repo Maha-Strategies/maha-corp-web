@@ -3,7 +3,9 @@ import { creditKeyOnce } from '../../../../lib/api-key.ts'
 
 export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
-const CREDIT_PACKS: Record<string, number> = { starter: 100_000, builder: 600_000, scale: 3_000_000 }
+// builder / scale are retained for checkout sessions created by Phase 1;
+// pro / enterprise are the developer-dashboard pack names.
+const CREDIT_PACKS: Record<string, number> = { starter: 100_000, builder: 600_000, scale: 3_000_000, pro: 600_000, enterprise: 3_000_000 }
 
 function malformedPayload(eventId: string) {
   // Stripe has authenticated this event, but retrying cannot repair its metadata.
