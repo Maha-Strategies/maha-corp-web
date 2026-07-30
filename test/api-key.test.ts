@@ -76,3 +76,24 @@ test('key provisioning and raw-key lookup resolve the identical Redis record key
     if (originalToken === undefined) delete process.env.UPSTASH_REDIS_REST_TOKEN; else process.env.UPSTASH_REDIS_REST_TOKEN = originalToken
   }
 })
+
+test('flat Upstash HGETALL responses are normalized before API-key validation', async () => {
+  try {
+    process.env.UPSTASH_REDIS_REST_URL = 'https://example.upstash.io'
+    process.env.UPSTASH_REDIS_REST_TOKEN = 'token-value'
+    globalThis.fetch = async (_input, init) => {
+      const command = JSON.parse(String(init?.body)) as unknown[]
+      assert.equal(command[0], 'HGETALL')
+      return new Response(JSON.stringify({ result: ['key_id', 'key_flat', 'email_hash', 'hash', 'balance_credits', '20000', 'tier', 'starter', 'status', 'active', 'rate_limit_per_minute', '30', 'zero_data_retention', 'true', 'created_at', 'now'] }), { status: 200 })
+    }
+    const record = await getApiKeyRecordForRawKey('mha_live_flat-array-test')
+    assert.equal(record?.key_id, 'key_flat')
+    assert.equal(record?.balance_credits, 20_000)
+    assert.equal(record?.rate_limit_per_minute, 30)
+    assert.equal(record?.zero_data_retention, true)
+  } finally {
+    globalThis.fetch = originalFetch
+    if (originalUrl === undefined) delete process.env.UPSTASH_REDIS_REST_URL; else process.env.UPSTASH_REDIS_REST_URL = originalUrl
+    if (originalToken === undefined) delete process.env.UPSTASH_REDIS_REST_TOKEN; else process.env.UPSTASH_REDIS_REST_TOKEN = originalToken
+  }
+})

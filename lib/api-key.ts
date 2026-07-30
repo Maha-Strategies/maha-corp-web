@@ -61,12 +61,27 @@ async function redis<T>(command: string, args: unknown[]): Promise<T> {
 
 export function apiKeyDataRedisKey(hash: string) { return `key:data:${hash}` }
 function idKey(id: string) { return `key:id:${id}` }
+function hashResultToRecord(result: Record<string, string> | string[] | null): Record<string, string> | null {
+  if (!result) return null
+  if (!Array.isArray(result)) return result
+  // Upstash REST returns HGETALL as [field, value, field, value, ...] for
+  // this endpoint. Normalize it before applying the typed-record validator.
+  if (result.length % 2 !== 0) return null
+  const record: Record<string, string> = {}
+  for (let index = 0; index < result.length; index += 2) {
+    const field = result[index]; const value = result[index + 1]
+    if (typeof field !== 'string' || typeof value !== 'string') return null
+    record[field] = value
+  }
+  return record
+}
 export async function getApiKeyRecord(hash: string): Promise<ApiKeyRecord | null> {
   const redisKey = apiKeyDataRedisKey(hash)
   // Key data is stored as a Redis hash via HSET in provisionStarterKey, so it
   // must be retrieved as the same hash via HGETALL (never GET/JSON.parse).
-  const rawRecord = await redis<Record<string, string> | null>('HGETALL', [redisKey])
-  if (process.env.API_KEY_DIAGNOSTICS === 'true') console.log('[REDIS_READ_RESULT]', { redisKey, result: rawRecord })
+  const result = await redis<Record<string, string> | string[] | null>('HGETALL', [redisKey])
+  if (process.env.API_KEY_DIAGNOSTICS === 'true') console.log('[REDIS_READ_RESULT]', { redisKey, result })
+  const rawRecord = hashResultToRecord(result)
   const balanceCredits = Number(rawRecord?.balance_credits)
   const rateLimit = Number(rawRecord?.rate_limit_per_minute)
   const tiers: ApiKeyTier[] = ['starter', 'builder', 'scale', 'enterprise']
