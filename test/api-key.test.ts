@@ -64,7 +64,10 @@ test('key provisioning and raw-key lookup resolve the identical Redis record key
     const expectedRecordKey = apiKeyDataRedisKey(await hashApiKey(provisioned.key))
     assert.equal(commands[0][0], 'HSET')
     assert.equal(commands[0][1], expectedRecordKey)
-    assert.equal((await getApiKeyRecordForRawKey(provisioned.key))?.key_id, 'key_test')
+    const record = await getApiKeyRecordForRawKey(provisioned.key)
+    assert.equal(record?.key_id, 'key_test')
+    assert.equal(record?.balance_credits, 20_000)
+    assert.equal(record?.zero_data_retention, false)
     assert.equal(commands.at(-1)?.[0], 'HGETALL')
     assert.equal(commands.at(-1)?.[1], expectedRecordKey)
   } finally {
