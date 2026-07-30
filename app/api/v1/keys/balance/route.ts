@@ -9,7 +9,7 @@ export async function GET(request: Request) {
   try {
     const record = await getApiKeyRecordForRawKey(rawKey)
     if (!record || record.status !== 'active') return Response.json({ error: { code: 'invalid_api_key', message: 'This API key is invalid or inactive.' } }, { status: 401 })
-    return Response.json({ balance_credits: Number(record.balance_credits), tier: record.tier }, { headers: { 'Cache-Control': 'no-store' } })
+    return Response.json({ api_key_id: record.key_id, balance_credits: Number(record.balance_credits), tier: record.tier }, { headers: { 'Cache-Control': 'no-store' } })
   } catch {
     return Response.json({ error: { code: 'api_key_service_unavailable', message: 'API authorization is temporarily unavailable.' } }, { status: 503 })
   }
