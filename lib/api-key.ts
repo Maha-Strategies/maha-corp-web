@@ -61,7 +61,14 @@ async function redis<T>(command: string, args: unknown[]): Promise<T> {
 
 export function apiKeyDataRedisKey(hash: string) { return `key:data:${hash}` }
 function idKey(id: string) { return `key:id:${id}` }
-export async function getApiKeyRecord(hash: string): Promise<ApiKeyRecord | null> { const record = await redis<Record<string, string> | null>('HGETALL', [apiKeyDataRedisKey(hash)]); return record?.key_id ? record as ApiKeyRecord : null }
+export async function getApiKeyRecord(hash: string): Promise<ApiKeyRecord | null> {
+  const redisKey = apiKeyDataRedisKey(hash)
+  // Key data is stored as a Redis hash via HSET in provisionStarterKey, so it
+  // must be retrieved as the same hash via HGETALL (never GET/JSON.parse).
+  const rawRecord = await redis<Record<string, string> | null>('HGETALL', [redisKey])
+  if (process.env.API_KEY_DIAGNOSTICS === 'true') console.log('[REDIS_READ_RESULT]', { redisKey, result: rawRecord })
+  return rawRecord?.key_id ? rawRecord as ApiKeyRecord : null
+}
 export async function getApiKeyRecordForRawKey(rawKey: string): Promise<ApiKeyRecord | null> {
   const key = canonicalApiKey(rawKey); const hash = await hashApiKey(key)
   if (process.env.NODE_ENV !== 'production') console.log('[KEY_LOOKUP_DEBUG]', { rawKeyPrefix: key.slice(0, 10), hash })
@@ -72,7 +79,10 @@ export function zeroDataRetentionEnabled(record: Pick<ApiKeyRecord, 'zero_data_r
 
 export async function provisionStarterKey(email: string) {
   const key = createApiKey(); const keyId = createApiKeyId(); const hash = await hashApiKey(key); const emailHash = await sha256(email); const createdAt = new Date().toISOString()
-  await redis('HSET', [apiKeyDataRedisKey(hash), 'key_id', keyId, 'email_hash', emailHash, 'balance_credits', String(STARTER_CREDITS), 'tier', 'starter', 'status', 'active', 'rate_limit_per_minute', '30', 'zero_data_retention', 'true', 'created_at', createdAt])
+  const redisKey = apiKeyDataRedisKey(hash)
+  // HSET and the HGETALL read above intentionally operate on this exact key.
+  await redis('HSET', [redisKey, 'key_id', keyId, 'email_hash', emailHash, 'balance_credits', String(STARTER_CREDITS), 'tier', 'starter', 'status', 'active', 'rate_limit_per_minute', '30', 'zero_data_retention', 'true', 'created_at', createdAt])
+  if (process.env.API_KEY_DIAGNOSTICS === 'true') console.log('[REDIS_WRITE_PATH]', { redisKey, method: 'HSET' })
   await redis('SET', [idKey(keyId), hash, 'EX', YEAR_SECONDS, 'NX'])
   return { key, keyId, balanceCredits: STARTER_CREDITS, tier: 'starter' as const }
 }
