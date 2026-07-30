@@ -28,10 +28,13 @@ function redisConfiguration() {
 
 export function apiKeyServiceConfigured() { const { url, token } = { url: sanitizedEnvironmentValue(process.env.UPSTASH_REDIS_REST_URL), token: sanitizedEnvironmentValue(process.env.UPSTASH_REDIS_REST_TOKEN) }; return Boolean(url && token) }
 export async function sha256(value: string) { const bytes = new TextEncoder().encode(value); const digest = await crypto.subtle.digest('SHA-256', bytes); return [...new Uint8Array(digest)].map((byte) => byte.toString(16).padStart(2, '0')).join('') }
+// API-key hashing deliberately does not trim or normalize the key. The exact raw
+// value generated is the exact value supplied in Authorization on later requests.
+export async function hashApiKey(rawKey: string) { return sha256(rawKey) }
 function randomBase64Url(length = 32) { const bytes = crypto.getRandomValues(new Uint8Array(length)); return btoa(String.fromCharCode(...bytes)).replaceAll('+', '-').replaceAll('/', '_').replaceAll('=', '') }
 export function createApiKey() { return `${KEY_PREFIX}${randomBase64Url()}` }
 export function createApiKeyId() { return `key_${crypto.randomUUID().replaceAll('-', '')}` }
-export function bearerApiKey(request: Request) { const value = request.headers.get('authorization'); return value?.startsWith('Bearer ') ? value.slice(7).trim() || null : null }
+export function bearerApiKey(request: Request) { const authHeader = request.headers.get('authorization') || ''; const rawKey = authHeader.replace(/^Bearer\s+/i, '').trim(); return rawKey || null }
 
 async function redis<T>(command: string, args: unknown[]): Promise<T> {
   const config = redisConfiguration()
@@ -48,13 +51,18 @@ async function redis<T>(command: string, args: unknown[]): Promise<T> {
   return data.result
 }
 
-function dataKey(hash: string) { return `key:data:${hash}` }
+export function apiKeyDataRedisKey(hash: string) { return `key:data:${hash}` }
 function idKey(id: string) { return `key:id:${id}` }
-export async function getApiKeyRecord(hash: string): Promise<ApiKeyRecord | null> { const record = await redis<Record<string, string> | null>('HGETALL', [dataKey(hash)]); return record?.key_id ? record as ApiKeyRecord : null }
+export async function getApiKeyRecord(hash: string): Promise<ApiKeyRecord | null> { const record = await redis<Record<string, string> | null>('HGETALL', [apiKeyDataRedisKey(hash)]); return record?.key_id ? record as ApiKeyRecord : null }
+export async function getApiKeyRecordForRawKey(rawKey: string): Promise<ApiKeyRecord | null> {
+  const hash = await hashApiKey(rawKey)
+  if (process.env.NODE_ENV !== 'production') console.log('[KEY_LOOKUP_DEBUG]', { rawKeyPrefix: rawKey.slice(0, 10), hash })
+  return getApiKeyRecord(hash)
+}
 
 export async function provisionStarterKey(email: string) {
-  const key = createApiKey(); const keyId = createApiKeyId(); const hash = await sha256(key); const emailHash = await sha256(email); const createdAt = new Date().toISOString()
-  await redis('HSET', [dataKey(hash), 'key_id', keyId, 'email_hash', emailHash, 'balance_credits', String(STARTER_CREDITS), 'tier', 'starter', 'status', 'active', 'rate_limit_per_minute', '30', 'created_at', createdAt])
+  const key = createApiKey(); const keyId = createApiKeyId(); const hash = await hashApiKey(key); const emailHash = await sha256(email); const createdAt = new Date().toISOString()
+  await redis('HSET', [apiKeyDataRedisKey(hash), 'key_id', keyId, 'email_hash', emailHash, 'balance_credits', String(STARTER_CREDITS), 'tier', 'starter', 'status', 'active', 'rate_limit_per_minute', '30', 'created_at', createdAt])
   await redis('SET', [idKey(keyId), hash, 'EX', YEAR_SECONDS, 'NX'])
   return { key, keyId, balanceCredits: STARTER_CREDITS, tier: 'starter' as const }
 }
@@ -74,14 +82,14 @@ if current > limit then return {3, balance, 0} end
 local remaining = redis.call('HINCRBY', record, 'balance_credits', -1)
 return {1, remaining, limit - current}
 `
-export async function authorizeAndConsumeApiUnit(key: string): Promise<ApiAccess> {
+export async function authorizeAndConsumeApiUnit(rawKey: string): Promise<ApiAccess> {
   if (!apiKeyServiceConfigured()) return { kind: 'unavailable' }
-  try { const hash = await sha256(key); const bucket = Math.floor(Date.now() / 60_000); const result = await redis<number[]>('EVAL', [CONSUME_SCRIPT, 2, dataKey(hash), `key:rate:${hash}:${bucket}`, 30]); const [code, credits, requests] = result
+  try { const hash = await hashApiKey(rawKey); if (process.env.NODE_ENV !== 'production') console.log('[KEY_LOOKUP_DEBUG]', { rawKeyPrefix: rawKey.slice(0, 10), hash }); const bucket = Math.floor(Date.now() / 60_000); const result = await redis<number[]>('EVAL', [CONSUME_SCRIPT, 2, apiKeyDataRedisKey(hash), `key:rate:${hash}:${bucket}`, 30]); const [code, credits, requests] = result
     if (code === 1) { const record = await getApiKeyRecord(hash); return record ? { kind: 'authorized', keyId: record.key_id, remainingCredits: credits, remainingRequests: requests } : { kind: 'unavailable' } }
     if (code === 2) return { kind: 'depleted' }; if (code === 3) return { kind: 'rate_limited' }; return { kind: 'unauthorized' }
   } catch { return { kind: 'unavailable' } }
 }
 export async function consumeProvisioningLimit(ip: string) { if (!apiKeyServiceConfigured()) throw new ApiKeyConfigurationError(); const digest = await sha256(ip); const bucket = Math.floor(Date.now() / 3_600_000); const count = await redis<number>('INCR', [`key:provision:${digest}:${bucket}`]); if (count === 1) await redis('EXPIRE', [`key:provision:${digest}:${bucket}`, 3600]); return count <= 3 }
 export async function keyHashForId(keyId: string) { return redis<string | null>('GET', [idKey(keyId)]) }
-export async function creditKeyById(keyId: string, credits: number) { const hash = await keyHashForId(keyId); if (!hash) throw new Error('API key does not exist.'); return redis<number>('HINCRBY', [dataKey(hash), 'balance_credits', credits]) }
-export async function creditKeyOnce(eventId: string, keyId: string, credits: number) { const hash = await keyHashForId(keyId); if (!hash) throw new Error('API key does not exist.'); const script = `if redis.call('SET', KEYS[1], '1', 'NX', 'EX', 2592000) then return redis.call('HINCRBY', KEYS[2], 'balance_credits', ARGV[1]) end return false`; return redis<number | false>('EVAL', [script, 2, `stripe:event:${eventId}`, dataKey(hash), String(credits)]) }
+export async function creditKeyById(keyId: string, credits: number) { const hash = await keyHashForId(keyId); if (!hash) throw new Error('API key does not exist.'); return redis<number>('HINCRBY', [apiKeyDataRedisKey(hash), 'balance_credits', credits]) }
+export async function creditKeyOnce(eventId: string, keyId: string, credits: number) { const hash = await keyHashForId(keyId); if (!hash) throw new Error('API key does not exist.'); const script = `if redis.call('SET', KEYS[1], '1', 'NX', 'EX', 2592000) then return redis.call('HINCRBY', KEYS[2], 'balance_credits', ARGV[1]) end return false`; return redis<number | false>('EVAL', [script, 2, `stripe:event:${eventId}`, apiKeyDataRedisKey(hash), String(credits)]) }
