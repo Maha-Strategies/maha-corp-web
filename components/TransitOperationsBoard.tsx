@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from 'react'
 
-import { OPERATIONS, TRANSIT_PHASES, currentJupiterPhase, formatDate } from '@/lib/transit-alignment'
+import { OPERATIONS, currentJupiterPhase, formatDate } from '@/lib/transit-alignment'
 
 function statusFor(operationId: string, phaseId: string) {
   const operation = OPERATIONS.find((item) => item.id === operationId)!

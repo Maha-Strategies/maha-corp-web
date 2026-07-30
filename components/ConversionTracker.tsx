@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { useEffect, useState } from 'react'
+import { useMemo } from 'react'
 import type { ComponentProps, MouseEventHandler } from 'react'
 
 import { validExperimentId } from '@/lib/conversion-measurement'
@@ -37,16 +37,15 @@ export function trackConversion(event: string) {
 }
 
 export function TrackedLink({ event, href, onClick, ...props }: TrackedLinkProps) {
-  const [attributedHref, setAttributedHref] = useState(href)
-  useEffect(() => {
+  const attributedHref = useMemo(() => {
     const { experimentId } = browserConversionContext()
-    if (!experimentId || typeof href !== 'string') return
+    if (!experimentId || typeof href !== 'string') return href
     try {
       const destination = new URL(href, window.location.origin)
-      if (destination.origin !== window.location.origin) return
+      if (destination.origin !== window.location.origin) return href
       destination.searchParams.set('exp', experimentId)
-      setAttributedHref(`${destination.pathname}${destination.search}${destination.hash}`)
-    } catch { /* Leave an unusual href unchanged. */ }
+      return `${destination.pathname}${destination.search}${destination.hash}`
+    } catch { return href }
   }, [href])
   const handleClick: MouseEventHandler<HTMLAnchorElement> = (click) => {
     trackConversion(event)

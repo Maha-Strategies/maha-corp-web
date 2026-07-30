@@ -2,23 +2,34 @@
   "name": "maha-corp-web",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": ">=22.0.0"
+  },
+  "bin": {
+    "maha": "./bin/maha.js"
+  },
   "scripts": {
     "dev": "next dev",
+    "prebuild": "npm run expand-graph",
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "test": "node --test --experimental-strip-types test/openapi-docs.test.ts"
+    "maha": "node bin/maha.js",
+    "expand-graph": "node --experimental-strip-types scripts/expand-graph.ts",
+    "test": "node --test --experimental-strip-types test/*.test.ts"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.110.0",
     "@scalar/api-reference-react": "^0.9.58",
+    "@stripe/stripe-js": "^9.12.1",
     "@supabase/supabase-js": "^2.106.2",
     "katex": "^0.17.0",
     "next": "16.2.6",
     "react": "19.2.4",
     "react-dom": "19.2.4",
     "react-katex": "^3.1.0",
-    "resend": "^6.12.4"
+    "resend": "^6.12.4",
+    "stripe": "^22.3.2"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",

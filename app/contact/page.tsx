@@ -16,10 +16,17 @@ const OFFER_BY_SERVICE: Record<string, string> = {
 };
 const TURNSTILE_SITE_KEY = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY;
 
+function selectedServiceFromLocation() {
+  if (typeof window === 'undefined') return 'verified_research'
+  const service = new URLSearchParams(window.location.search).get('service')
+  const supportedServices = new Set(['rapid_intelligence', 'verified_research', 'mps_evidence_audit', 'mps_audit', 'token_request', 'support', 'general'])
+  return service && supportedServices.has(service) ? service : 'verified_research'
+}
+
 export default function ContactPage() {
   const [state, setState] = useState({ success: false, error: null as string | null });
   const [isPending, setIsPending] = useState(false);
-  const [selectedService, setSelectedService] = useState('verified_research');
+  const [selectedService, setSelectedService] = useState(selectedServiceFromLocation);
   const [turnstileToken, setTurnstileToken] = useState('');
 
   useEffect(() => {
@@ -30,21 +37,6 @@ export default function ContactPage() {
     window.mahaTurnstileComplete = (token) => setTurnstileToken(token);
     window.mahaTurnstileExpired = () => setTurnstileToken('');
     return () => { delete window.mahaTurnstileComplete; delete window.mahaTurnstileExpired; };
-  }, []);
-
-  useEffect(() => {
-    const service = new URLSearchParams(window.location.search).get('service');
-    const supportedServices = new Set([
-      'rapid_intelligence',
-      'verified_research',
-      'mps_evidence_audit',
-      'mps_audit',
-      'token_request',
-      'support',
-      'general',
-    ]);
-
-    if (service && supportedServices.has(service)) setSelectedService(service);
   }, []);
 
   async function submit(event: FormEvent<HTMLFormElement>) {

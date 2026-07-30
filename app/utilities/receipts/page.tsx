@@ -4,8 +4,6 @@ import Link from 'next/link'
 import ReceiptBatch from './ReceiptBatch'
 import ReceiptDemo from './ReceiptDemo'
 
-const SITE_URL = 'https://www.mahastrategies.com'
-
 export const metadata: Metadata = {
   title: 'Receipt → CSV | Maha Strategies',
   description: 'Paste a messy receipt, get clean accounting-ready CSV instantly. Free single-receipt demo; batch runs available.',

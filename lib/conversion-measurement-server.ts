@@ -2,7 +2,8 @@ import { createHash } from 'node:crypto'
 
 import { validExperimentId, validSourcePath } from './conversion-measurement'
 
-type Ledger = { rpc: (name: string, args: Record<string, unknown>) => any }
+type LedgerResponse = { error?: { code?: string } | null }
+type Ledger = { rpc: (name: string, args: Record<string, unknown>) => PromiseLike<LedgerResponse> }
 
 export type CheckoutAttribution = {
   checkoutReference: string

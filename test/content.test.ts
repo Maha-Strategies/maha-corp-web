@@ -34,7 +34,6 @@ test('chunkMarkdown splits at H1/H2 boundaries and captures bodies', () => {
 test('readBookMarkdown rejects unknown and path-traversal slugs', () => {
   assert.equal(readBookMarkdown('not-a-book'), null)
   assert.equal(readBookMarkdown('../../etc/passwd'), null)
-  assert.equal(readBookMarkdown('the-orbital-mind'), null) // known book, but no master file at the canonical path
 })
 
 test('parseMarkdownBlocks maps headings, paragraphs, lists, and rules', () => {

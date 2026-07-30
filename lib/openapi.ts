@@ -3,6 +3,7 @@ import { MPS_AUDIT_CREDIT_UNIT } from './mps-credits.ts'
 import { AGENTIC_COMMERCE_API_URL } from './agentic-commerce.ts'
 import { geometricAiOpenApiPath } from './openapi-geometric.ts'
 import { holographicQecOpenApiPath } from './openapi-holographic-qec.ts'
+import { landscapeOpenApiPath } from './openapi-landscape.ts'
 
 // Hand-authored OpenAPI 3.1 document for the public API. The runtime
 // validators in lib/ are the source of truth; every pattern and bound here
@@ -100,10 +101,50 @@ export const openApiDocument = {
     { name: 'Maha Tensor-Opt (Mock)', description: 'Integration-only mock contract for the planned tensor-network optimization service.' },
     { name: 'Maha Geometric AI (Mock)', description: 'Integration-only mock contract for symmetry-aware geometric AI workloads.' },
     { name: 'Maha QEC-Compiler (Mock)', description: 'Integration-only mock contract for holographic QEC layout compilation.' },
+    { name: 'Maha Landscape-Opt (Mock)', description: 'Integration-only mock contract for high-dimensional landscape optimization.' },
+    { name: 'Self-service API Keys', description: 'Instant starter-key provisioning and prepaid credit checkout.' },
+    { name: 'Maha SDK', description: 'Small, credentialed context compression and provenance lookup endpoints for the public TypeScript SDK.' },
   ],
   paths: {
     ...geometricAiOpenApiPath,
     ...holographicQecOpenApiPath,
+    ...landscapeOpenApiPath,
+    '/api/v1/keys/generate': {
+      post: {
+        tags: ['Self-service API Keys'], operationId: 'generateStarterApiKey', summary: 'Generate a one-time starter API key with 20,000 free credits',
+        requestBody: { required: true, content: { 'application/json': { schema: { type: 'object', required: ['email'], properties: { email: { type: 'string', format: 'email' } } } } } },
+        responses: { '201': { description: 'The API key is disclosed exactly once.', content: { 'application/json': { schema: { type: 'object', required: ['apiKey', 'apiKeyId', 'balanceCredits', 'tier'], properties: { apiKey: { type: 'string', description: 'Secret shown once; store it securely.' }, apiKeyId: { type: 'string' }, balanceCredits: { type: 'integer', const: 20000 }, tier: { const: 'starter' } } } } } }, '400': errorResponse('Invalid email.'), '429': errorResponse('Starter-key provisioning rate limit reached.'), '503': errorResponse('Key provisioning unavailable.') },
+      },
+    },
+    '/api/v1/keys/checkout': {
+      post: {
+        tags: ['Self-service API Keys'], operationId: 'createApiCreditCheckout', summary: 'Create a hosted Stripe Checkout session for a prepaid API credit pack', security: [{ credential: [] }],
+        requestBody: { required: true, content: { 'application/json': { schema: { type: 'object', required: ['pack'], properties: { pack: { type: 'string', enum: ['starter', 'builder', 'scale'] } } } } } },
+        responses: { '200': { description: 'Hosted checkout URL.', content: { 'application/json': { schema: { type: 'object', required: ['checkoutUrl', 'pack', 'credits'], properties: { checkoutUrl: { type: 'string', format: 'uri' }, pack: { type: 'string' }, credits: { type: 'integer' } } } } } }, '401': errorResponse('Invalid API key.'), '503': errorResponse('Checkout unavailable.') },
+      },
+    },
+    '/api/v1/keys/balance': {
+      get: {
+        tags: ['Self-service API Keys'], operationId: 'getApiKeyBalance', summary: 'Get the balance for the current API key', security: [{ credential: [] }],
+        responses: { '200': { description: 'Current prepaid API-key balance.', content: { 'application/json': { schema: { type: 'object', required: ['balance_credits', 'tier'], properties: { balance_credits: { type: 'integer', minimum: 0 }, tier: { type: 'string', enum: ['starter', 'builder', 'scale'] } } } } } }, '401': errorResponse('Missing or invalid API key.'), '503': errorResponse('API-key service unavailable.') },
+      },
+    },
+    '/api/v1/compress': {
+      post: {
+        tags: ['Maha SDK'], operationId: 'compressContext', summary: 'Compile a bounded context pack through the lightweight SDK contract',
+        description: 'Credentialed version of deterministic context compilation. It does not retain source text or make factual-verification claims.', security: [{ credential: [] }],
+        requestBody: { required: true, content: { 'application/json': { schema: { type: 'object', required: ['clientRequestId', 'task', 'tokenBudget', 'documents'], properties: { clientRequestId: { type: 'string', minLength: 8, maxLength: 120 }, task: { type: 'string', minLength: 8, maxLength: 1200 }, tokenBudget: { type: 'integer', minimum: 64, maximum: 16000 }, documents: { type: 'array', minItems: 1, maxItems: 8, items: { type: 'object', required: ['id', 'text'], properties: { id: { type: 'string' }, title: { type: 'string' }, text: { type: 'string', maxLength: 64000 } } } } } } } } },
+        responses: { '201': { description: 'Transient compiled context pack.', content: { 'application/json': { schema: { type: 'object', required: ['packId', 'context', 'metrics', 'sources', 'warnings'], properties: { packId: { type: 'string' }, context: { type: 'string' }, metrics: { type: 'object' }, sources: { type: 'array', items: { type: 'object' } }, warnings: { type: 'array', items: { type: 'string' } }, sourceTextStored: { const: false }, compiledContextStored: { const: false } } } } } }, '400': errorResponse('Invalid compression request.'), '401': errorResponse('Missing or invalid API key.'), '402': errorResponse('API-key credits depleted.'), '413': errorResponse('Context input exceeds 128 KB.'), '415': errorResponse('Content-Type must be application/json.') },
+      },
+    },
+    '/api/v1/claims/{claimId}': {
+      get: {
+        tags: ['Maha SDK'], operationId: 'verifyGeneratedClaim', summary: 'Retrieve an active claim and its provenance fields',
+        description: 'Returns a generated MPS claim node as published by the research graph. The result exposes its declared source citations and status; it does not independently re-verify a claim at request time.', security: [{ credential: [] }],
+        parameters: [{ name: 'claimId', in: 'path', required: true, schema: { type: 'string', pattern: '^[a-z0-9]+(?:-[a-z0-9]+)*$' } }],
+        responses: { '200': { description: 'Published claim node and canonical research URL.', content: { 'application/json': { schema: { type: 'object', required: ['claim_id', 'title', 'summary', 'status', 'latex_formulation', 'sources', 'tags', 'canonical_url'], properties: { claim_id: { type: 'string' }, title: { type: 'string' }, summary: { type: 'string' }, status: { type: 'string', enum: ['VERIFIED', 'SOURCED', 'ILLUSTRATIVE', 'UNVERIFIED'] }, latex_formulation: { type: 'string' }, sources: { type: 'array', items: { type: 'string' } }, tags: { type: 'array', items: { type: 'string' } }, canonical_url: { type: 'string', format: 'uri' } } } } } }, '401': errorResponse('Missing or invalid API key.'), '402': errorResponse('API-key credits depleted.'), '404': errorResponse('No active generated claim matches this ID.') },
+      },
+    },
     '/api/v1/tensor-opt': {
       post: {
         tags: ['Maha Tensor-Opt (Mock)'],
