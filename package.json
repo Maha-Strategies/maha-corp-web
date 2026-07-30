@@ -16,6 +16,7 @@
     "lint": "eslint",
     "maha": "node bin/maha.js",
     "expand-graph": "node --experimental-strip-types scripts/expand-graph.ts",
+    "verify:api-credit-billing": "node --experimental-strip-types scripts/verify-api-credit-billing.ts",
     "test": "node --test --experimental-strip-types test/*.test.ts"
   },
   "dependencies": {

@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import { BillingReadinessPanel } from '@/components/admin/BillingReadinessPanel'
 
 type FunnelCounts = { opportunities: number; qualified: number; checkoutStarted: number; paid: number; delivered: number; partiallyRefunded: number; refunded: number }
 type OfferFunnel = FunnelCounts & { offerId: string }
@@ -107,6 +108,7 @@ export default function RevenueMetricsPage() {
           </div>
         </div>
         {notice && <p className="mt-5 border border-red-800 bg-red-950/30 p-3 text-sm text-red-200">{notice}</p>}
+        <BillingReadinessPanel token={token} />
 
         {/* Revenue headline */}
         <section className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-3">
