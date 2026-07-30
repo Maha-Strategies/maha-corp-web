@@ -26,6 +26,7 @@ import logging
 from typing import Dict, Any, Tuple
 import requests
 import modal
+from fastapi import Header
 
 # Setup logging
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
@@ -233,7 +234,10 @@ def execute_tensor_opt_job(job_payload: Dict[str, Any]) -> None:
     secrets=[maha_secrets]
 )
 @modal.fastapi_endpoint(method="POST")
-def job_dispatch_entrypoint(request_data: Dict[str, Any], authorization: str = None) -> Tuple[int, Dict[str, Any]]:
+def job_dispatch_entrypoint(
+    request_data: Dict[str, Any], 
+    authorization: str = Header(default=None)
+) -> Tuple[int, Dict[str, Any]]:
     """
     Web Endpoint acting as MAHA_WORKER_URL.
     Receives HTTP POST requests from Vercel Backend, validates Bearer Token,
