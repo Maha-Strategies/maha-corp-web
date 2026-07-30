@@ -127,7 +127,7 @@ export const openApiDocument = {
     '/api/v1/keys/balance': {
       get: {
         tags: ['Self-service API Keys'], operationId: 'getApiKeyBalance', summary: 'Get the balance for the current API key', security: [{ credential: [] }],
-        responses: { '200': { description: 'Current prepaid API-key balance.', content: { 'application/json': { schema: { type: 'object', required: ['balance_credits', 'tier'], properties: { balance_credits: { type: 'integer', minimum: 0 }, tier: { type: 'string', enum: ['starter', 'builder', 'scale'] } } } } } }, '401': errorResponse('Missing or invalid API key.'), '503': errorResponse('API-key service unavailable.') },
+        responses: { '200': { description: 'Current prepaid API-key balance and non-secret key identifier.', content: { 'application/json': { schema: { type: 'object', required: ['api_key_id', 'balance_credits', 'tier'], properties: { api_key_id: { type: 'string', description: 'Non-secret identifier for this authenticated API key.' }, balance_credits: { type: 'integer', minimum: 0 }, tier: { type: 'string', enum: ['starter', 'builder', 'scale', 'enterprise'] } } } } } }, '401': errorResponse('Missing or invalid API key.'), '503': errorResponse('API-key service unavailable.') },
       },
     },
     '/api/v1/compress': {
