@@ -38,7 +38,7 @@ export function canonicalApiKey(rawKey: string) {
 }
 // This is the sole hash boundary for API keys. Both creation and validation use
 // this Web Crypto implementation, yielding the same lower-case hexadecimal SHA-256.
-export async function hashApiKey(rawKey: string) { return sha256(canonicalApiKey(rawKey)) }
+export async function hashApiKey(rawKey: string): Promise<string> { return sha256(canonicalApiKey(rawKey)) }
 function randomBase64Url(length = 32) { const bytes = crypto.getRandomValues(new Uint8Array(length)); return btoa(String.fromCharCode(...bytes)).replaceAll('+', '-').replaceAll('/', '_').replaceAll('=', '') }
 export function createApiKey() { return `${KEY_PREFIX}${randomBase64Url()}` }
 export function createApiKeyId() { return `key_${crypto.randomUUID().replaceAll('-', '')}` }
