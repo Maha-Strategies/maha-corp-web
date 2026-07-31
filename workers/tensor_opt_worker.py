@@ -123,7 +123,6 @@ def send_webhook_callback(
 
     return False
 
-# 
 # ============================================================================
 # COMPUTE SHELL: Background GPU Tensor Network Optimization Task
 # ============================================================================
@@ -138,9 +137,8 @@ def send_webhook_callback(
 def execute_tensor_opt_job(job_payload: Dict[str, Any]) -> None:
     import torch
 
-    # Note camelCase mapping to match Vercel WorkerHandoff contract
     job_id = job_payload.get("jobId")
-    input_hash = job_payload.get("inputHash") # Must echo this back!
+    input_hash = job_payload.get("inputHash")
     callback_url = job_payload.get("callbackUrl")
     webhook_secret = os.environ.get("MAHA_WORKER_WEBHOOK_SECRET", "")
 
@@ -178,6 +176,7 @@ def execute_tensor_opt_job(job_payload: Dict[str, Any]) -> None:
 
         # Exact match to Vercel's WorkerCallback interface
         callback_payload = {
+            "contractVersion": "1.0.0",  # REQUIRED BY VERCEL
             "jobId": job_id,
             "inputHash": input_hash,
             "status": "completed",
@@ -198,6 +197,7 @@ def execute_tensor_opt_job(job_payload: Dict[str, Any]) -> None:
         logger.error(f"Job {job_id} failed with error: {str(exc)}", exc_info=True)
 
         callback_payload = {
+            "contractVersion": "1.0.0",  # REQUIRED BY VERCEL
             "jobId": job_id,
             "inputHash": input_hash,
             "status": "failed",
@@ -212,7 +212,6 @@ def execute_tensor_opt_job(job_payload: Dict[str, Any]) -> None:
 
     # Dispatch signed callback to Vercel webhook
     send_webhook_callback(callback_url, webhook_secret, callback_payload)
-
 
 # ============================================================================
 # ENTRYPOINT: FastAPI / Modal Web Endpoint (MAHA_WORKER_URL)
