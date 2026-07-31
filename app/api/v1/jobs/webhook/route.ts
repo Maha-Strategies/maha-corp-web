@@ -101,16 +101,3 @@ export function OPTIONS() {
   return new Response(null, { status: 204, headers: { Allow: 'POST, OPTIONS', 'Cache-Control': 'no-store' } })
 }
 
-# Add this at the very bottom of workers/maha_workers.py
-
-@app.local_entrypoint()
-def main():
-    test_payload = {
-        "jobId": "test_job_123",
-        "inputHash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-        "callbackUrl": "https://httpbin.org/post",
-        "problem": {"size": 4}
-    }
-    print("🚀 Spawning local test job on Modal GPU...")
-    run_tensor_opt.remote(test_payload)
-    print("✅ Local test execution completed successfully!")
