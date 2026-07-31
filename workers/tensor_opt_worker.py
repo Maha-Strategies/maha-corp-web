@@ -229,11 +229,23 @@ def execute_tensor_opt_job(job_payload: Dict[str, Any]) -> None:
         }
 
     except Exception as exc:
-        # ... (Keep your existing exception handling block here)
         end_time = time.perf_counter()
         device_seconds = round(end_time - start_time, 4)
         logger.error(f"Job {job_id} failed with error: {str(exc)}", exc_info=True)
-        # ... (Failure callback payload)
+        
+        callback_payload = {
+            "contractVersion": "1.0.0",
+            "jobId": job_id,
+            "inputHash": input_hash,
+            "status": "failed",
+            "usage": {
+                "deviceSeconds": device_seconds
+            },
+            "error": {
+                "code": "COMPUTE_EXECUTION_ERROR",
+                "message": str(exc)
+            }
+        }
 
     send_webhook_callback(callback_url, webhook_secret, callback_payload)
 
