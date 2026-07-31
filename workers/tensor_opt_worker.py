@@ -170,8 +170,19 @@ def execute_tensor_opt_job(job_payload: Dict[str, Any]) -> None:
         # 2. Fetch the actual problem definition (QUBO terms)
         if terms_url:
             logger.info(f"Downloading problem definition from {terms_url}")
-            # In production, parse this into your initial tensor state
-            # terms_data = requests.get(terms_url).json() 
+            response = requests.get(terms_url, timeout=10)
+            response.raise_for_status()
+            terms_data = response.json()
+            
+            # Initialize an empty Q matrix on the GPU
+            Q_matrix = torch.zeros((problem_size, problem_size), device=device, dtype=torch.float64)
+            
+            # Populate the Q matrix (assuming terms_data is a list of [i, j, weight])
+            for term in terms_data.get("terms", []):
+                i, j, weight = term["i"], term["j"], term["weight"]
+                Q_matrix[i, j] = weight
+                if i != j:
+                    Q_matrix[j, i] = weight  # Ensure symmetry if required
         
         # ---------------------------------------------------------
         # 3. MAHA PROPRIETARY SOLVER MATH GOES HERE
