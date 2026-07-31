@@ -6,9 +6,11 @@ import crypto from 'crypto';
 
 export async function POST(
   req: NextRequest,
-  { params }: { params: { serverId: string } }
+  { params }: { params: Promise<{ serverId: string }> }
 ) {
   try {
+    const { serverId } = await params;
+
     const tenantId = req.headers.get('x-tenant-id');
     if (!tenantId) {
       return NextResponse.json(
@@ -17,7 +19,6 @@ export async function POST(
       );
     }
 
-    const { serverId } = params;
     const serverConfig = await MCPRegistry.getServer(tenantId, serverId);
 
     if (!serverConfig) {
