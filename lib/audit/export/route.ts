@@ -23,10 +23,11 @@ export async function GET(req: NextRequest) {
 
     // Query double-entry ledger logs indexed in Upstash Redis by timestamp range
     const ledgerKey = `ledger:tenant:${tenantId}:entries`;
-    const rawEntries: string[] = await redis.zrangebyscore(
+    const rawEntries: string[] = await redis.zrange(
       ledgerKey,
       startTime,
-      endTime
+      endTime,
+      { byScore: true }
     );
 
     const entries: AuditLedgerEntry[] = rawEntries.map((item) => typeof item === 'string' ? JSON.parse(item) : item);
