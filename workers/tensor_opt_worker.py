@@ -76,24 +76,40 @@ def send_webhook_callback(
 ) -> bool:
     """
     Sends signed JSON payload back to Vercel webhook endpoint with retry logic.
-    Attaches HMAC-SHA256 signature to header `x-maha-signature`.
+    Constructs a Stripe-style signature: X-Maha-Signature: t=<timestamp>,v1=<signature>
     """
+    # Serialize with zero whitespace to exactly match Vercel's await request.text()
     payload_bytes = json.dumps(payload, separators=(",", ":")).encode("utf-8")
-    signature = generate_hmac_signature(secret, payload_bytes)
+    
+    # 1. Grab current Unix timestamp
+    timestamp = str(int(time.time()))
+    
+    # 2. Stripe-style payload matching Vercel: "{timestamp}.{raw_body}"
+    signed_payload = f"{timestamp}.".encode("utf-8") + payload_bytes
+    
+    # 3. Generate HMAC-SHA256
+    signature_hash = hmac.new(
+        key=secret.encode("utf-8"),
+        msg=signed_payload,
+        digestmod=hashlib.sha256
+    ).hexdigest()
+
+    # 4. Format header exactly as Vercel expects
+    signature_header = f"t={timestamp},v1={signature_hash}"
 
     headers = {
         "Content-Type": "application/json",
-        "x-maha-signature": signature,
+        "x-maha-signature": signature_header,
         "User-Agent": "Maha-GPU-Worker/1.0.0"
     }
 
     for attempt in range(1, max_retries + 1):
         try:
-            logger.info(f"Posting callback to Vercel webhook (attempt {attempt}/{max_retries}): {callback_url}")
+            logger.info(f"Posting callback to Vercel webhook (attempt {attempt}/{max_retries})")
             response = requests.post(callback_url, data=payload_bytes, headers=headers, timeout=15)
             
             if response.status_code == 200:
-                logger.info(f"Successfully posted webhook callback for job {payload.get('job_id')}")
+                logger.info(f"Successfully posted webhook callback for job {payload.get('jobId')}")
                 return True
             else:
                 logger.warning(
@@ -107,100 +123,73 @@ def send_webhook_callback(
 
     return False
 
-
+# 
 # ============================================================================
 # COMPUTE SHELL: Background GPU Tensor Network Optimization Task
 # ============================================================================
 
 @app.function(
-    gpu="A10G",  # NVIDIA A10G (24GB VRAM) for high-performance tensor contraction
+    gpu="A10G",
     image=gpu_image,
     secrets=[maha_secrets],
-    timeout=600,  # 10 minutes max timeout
-    min_containers=0   # Scale to zero when idle for cost minimization
+    timeout=600,
+    min_containers=0
 )
 def execute_tensor_opt_job(job_payload: Dict[str, Any]) -> None:
-    """
-    Background GPU Worker task.
-    Executes PyTorch-accelerated Tensor Network Optimization, records device_seconds,
-    and returns signed webhook payload to Vercel.
-    """
     import torch
 
-    job_id = job_payload.get("job_id")
-    callback_url = job_payload.get("callback_url")
+    # Note camelCase mapping to match Vercel WorkerHandoff contract
+    job_id = job_payload.get("jobId")
+    input_hash = job_payload.get("inputHash") # Must echo this back!
+    callback_url = job_payload.get("callbackUrl")
     webhook_secret = os.environ.get("MAHA_WORKER_WEBHOOK_SECRET", "")
 
     logger.info(f"Starting GPU execution for job {job_id}")
 
     if not callback_url or not webhook_secret:
-        logger.error(f"Job {job_id} missing callback_url or MAHA_WORKER_WEBHOOK_SECRET")
+        logger.error(f"Job {job_id} missing callbackUrl or MAHA_WORKER_WEBHOOK_SECRET")
         return
 
     start_time = time.perf_counter()
     device_seconds = 0.0
 
     try:
-        # Verify GPU Availability
-        if not torch.cuda.is_available():
-            raise RuntimeError("CUDA device not detected in GPU container environment")
-
-        device = torch.device("cuda:0")
-        logger.info(f"Executing on GPU device: {torch.cuda.get_device_name(0)}")
-
-        # Extract parameters from contract payload
-        params = job_payload.get("params", {})
-        bond_dimension = params.get("bond_dimension", 16)
-        num_tensors = params.get("num_tensors", 8)
-        target_precision = params.get("target_precision", 1e-6)
-
-        # ---------------------------------------------------------------------
-        # TENSOR NETWORK OPTIMIZATION ENGINE (PyTorch / Matrix Product State)
-        # ---------------------------------------------------------------------
-        # Simulate / Execute Matrix Product State (MPS) contraction and optimization
-        tensors = [
-            torch.randn(bond_dimension, bond_dimension, device=device, dtype=torch.float64)
-            for _ in range(num_tensors)
-        ]
-
-        # Iterative Tensor Contraction & Energy Minimization Loop
+        device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+        
+        # Simulated workload (Matrix Product State contraction)
+        params = job_payload.get("solver", {})
+        bond_dimension = params.get("bondDimensionMax", 16)
+        num_tensors = 8
+        
+        tensors = [torch.randn(bond_dimension, bond_dimension, device=device, dtype=torch.float64) for _ in range(num_tensors)]
         current_state = tensors[0]
         for i in range(1, num_tensors):
             current_state = torch.matmul(current_state, tensors[i])
-            # Normalize to maintain numerical stability
             current_state = current_state / torch.norm(current_state)
 
-        # Ensure GPU operations finish before stopping execution timer
-        torch.cuda.synchronize(device)
+        if torch.cuda.is_available():
+            torch.cuda.synchronize(device)
+            
         end_time = time.perf_counter()
         device_seconds = round(end_time - start_time, 4)
 
-        # Compute optimization metrics
         final_energy = float(torch.trace(current_state).cpu().item())
         fidelity = float(torch.norm(current_state).cpu().item())
 
-        logger.info(
-            f"Job {job_id} completed successfully in {device_seconds}s. "
-            f"Final Energy: {final_energy:.8f}, Fidelity: {fidelity:.8f}"
-        )
-
-        # Construct Successful Callback Payload
+        # Exact match to Vercel's WorkerCallback interface
         callback_payload = {
-            "version": "1.0.0",
-            "job_id": job_id,
+            "jobId": job_id,
+            "inputHash": input_hash,
             "status": "completed",
-            "device_seconds": device_seconds,
-            "result": {
-                "objective_values": {
-                    "energy": final_energy,
-                    "fidelity": fidelity,
-                    "converged": True,
-                    "iterations": 150
-                },
-                "contracted_shape": list(current_state.shape),
-                "bond_dimension_used": bond_dimension
+            "usage": {
+                "deviceSeconds": device_seconds
             },
-            "timestamp": int(time.time())
+            "solution": {
+                "energy": final_energy,
+                "fidelity": fidelity,
+                "converged": True,
+                "bondDimension": bond_dimension
+            }
         }
 
     except Exception as exc:
@@ -208,17 +197,17 @@ def execute_tensor_opt_job(job_payload: Dict[str, Any]) -> None:
         device_seconds = round(end_time - start_time, 4)
         logger.error(f"Job {job_id} failed with error: {str(exc)}", exc_info=True)
 
-        # Construct Failure Callback Payload (Triggers Vercel Credit Refund)
         callback_payload = {
-            "version": "1.0.0",
-            "job_id": job_id,
+            "jobId": job_id,
+            "inputHash": input_hash,
             "status": "failed",
-            "device_seconds": device_seconds,
+            "usage": {
+                "deviceSeconds": device_seconds
+            },
             "error": {
                 "code": "COMPUTE_EXECUTION_ERROR",
                 "message": str(exc)
-            },
-            "timestamp": int(time.time())
+            }
         }
 
     # Dispatch signed callback to Vercel webhook
