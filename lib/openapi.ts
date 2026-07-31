@@ -261,6 +261,117 @@ export const openApiDocument = {
         },
       },
     },
+    '/api/v1/audit/export': {
+      get: {
+        tags: ['MPS Audit'],
+        summary: 'Export Provenance Audit Ledger',
+        description: 'Generates an RFC 4180 CSV or cryptographic PDF report of tenant ledger entries.',
+        security: [{ credential: [] }],
+        parameters: [
+          { name: 'tenantId', in: 'query', required: true, schema: { type: 'string' } },
+          { name: 'format', in: 'query', required: false, schema: { type: 'string', enum: ['csv', 'pdf'], default: 'csv' } },
+          { name: 'startTime', in: 'query', required: false, schema: { type: 'integer' } },
+          { name: 'endTime', in: 'query', required: false, schema: { type: 'integer' } },
+        ],
+        responses: {
+          '200': {
+            description: 'Audit file payload',
+            content: {
+              'text/csv': { schema: { type: 'string' } },
+              'application/pdf': { schema: { type: 'string', format: 'binary' } },
+            },
+          },
+          '400': errorResponse('Missing required tenantId parameter or invalid format.'),
+          '401': errorResponse('Missing or invalid API key.'),
+          '500': errorResponse('Internal audit export failure.'),
+        },
+      },
+    },
+    '/api/v1/mcp/register': {
+      post: {
+        tags: ['Enterprise MCP Gateway'],
+        summary: 'Register Upstream MCP Server',
+        description: 'Stores and encrypts upstream credentials for enterprise MCP tool routing.',
+        security: [{ credential: [] }],
+        parameters: [
+          { name: 'X-Tenant-ID', in: 'header', required: true, schema: { type: 'string' } },
+        ],
+        requestBody: {
+          required: true,
+          content: {
+            'application/json': {
+              schema: {
+                type: 'object',
+                required: ['name', 'baseUrl', 'authType'],
+                properties: {
+                  name: { type: 'string' },
+                  baseUrl: { type: 'string' },
+                  authType: { type: 'string', enum: ['bearer', 'hmac', 'none'] },
+                  secret: { type: 'string' },
+                  allowedEngines: { type: 'array', items: { type: 'string' } },
+                },
+              },
+            },
+          },
+        },
+        responses: {
+          '201': {
+            description: 'Server registered successfully.',
+            content: {
+              'application/json': {
+                schema: { type: 'object' }
+              }
+            }
+          },
+          '400': errorResponse('Missing required fields or invalid authType.'),
+          '401': errorResponse('Missing or invalid API key.'),
+          '500': errorResponse('Internal failure registering MCP upstream server.'),
+        },
+      },
+    },
+    '/api/v1/mcp/gateway/{serverId}': {
+      post: {
+        tags: ['Enterprise MCP Gateway'],
+        summary: 'Proxy JSON-RPC call to Upstream MCP Server (v1)',
+        description: 'Proxies, signs, and audits tool calls made by enterprise AI agents via the v1 App Router endpoint.',
+        security: [{ credential: [] }],
+        parameters: [
+          { name: 'serverId', in: 'path', required: true, schema: { type: 'string' } },
+          { name: 'X-Tenant-ID', in: 'header', required: true, schema: { type: 'string' } },
+        ],
+        requestBody: {
+          required: true,
+          content: {
+            'application/json': {
+              schema: {
+                type: 'object',
+                required: ['jsonrpc', 'method'],
+                properties: {
+                  jsonrpc: { const: '2.0' },
+                  id: { oneOf: [{ type: 'string' }, { type: 'number' }] },
+                  method: { type: 'string' },
+                  params: { type: 'object' },
+                }
+              }
+            }
+          }
+        },
+        responses: {
+          '200': { 
+            description: 'JSON-RPC 2.0 Response from upstream.',
+            content: {
+              'application/json': {
+                schema: { type: 'object' }
+              }
+            }
+          },
+          '400': errorResponse('Missing X-Tenant-ID Header or invalid JSON-RPC 2.0 payload.'),
+          '401': errorResponse('Missing or invalid API key.'),
+          '404': errorResponse('Target MCP Server not registered for this tenant.'),
+          '500': errorResponse('Internal MCP Gateway Processing Failure.'),
+        },
+      },
+    },
     '/api/agentic-commerce/offers': {
       get: {
         tags: ['Agentic Commerce'],
