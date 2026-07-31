@@ -26,7 +26,7 @@ import logging
 from typing import Dict, Any, Tuple
 import requests
 import modal
-from fastapi import Header
+from fastapi import Header, HTTPException
 
 # Setup logging
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
@@ -222,7 +222,7 @@ def execute_tensor_opt_job(job_payload: Dict[str, Any]) -> None:
     image=gpu_image,
     secrets=[maha_secrets]
 )
-@modal.web_endpoint(method="POST")
+@modal.fastapi_endpoint(method="POST")
 def job_dispatch_entrypoint(
     request_data: Dict[str, Any], 
     authorization: str = Header(default=None)
