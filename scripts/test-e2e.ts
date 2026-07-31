@@ -1,4 +1,4 @@
-import { MahaClient } from '../index'; // Adjust path if needed
+import { MahaClient } from '../lib/sdkindex'; 
 import fs from 'fs/promises';
 import path from 'path';
 
