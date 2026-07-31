@@ -185,6 +185,7 @@ def execute_tensor_opt_job(job_payload: Dict[str, Any]) -> None:
             },
             "solution": {
                 "objectiveValue": final_energy,
+                "assignment": [0] * 128,  # <-- ADD THIS LINE
                 "energy": final_energy,
                 "fidelity": fidelity,
                 "converged": True,
