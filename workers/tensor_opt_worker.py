@@ -176,7 +176,7 @@ def execute_tensor_opt_job(job_payload: Dict[str, Any]) -> None:
 
         # Exact match to Vercel's WorkerCallback interface
         callback_payload = {
-            "contractVersion": "1.0.0",  # REQUIRED BY VERCEL
+            "contractVersion": "1.0.0",
             "jobId": job_id,
             "inputHash": input_hash,
             "status": "completed",
@@ -184,6 +184,7 @@ def execute_tensor_opt_job(job_payload: Dict[str, Any]) -> None:
                 "deviceSeconds": device_seconds
             },
             "solution": {
+                "objectiveValue": final_energy,
                 "energy": final_energy,
                 "fidelity": fidelity,
                 "converged": True,
