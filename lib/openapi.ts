@@ -157,7 +157,7 @@ export const openApiDocument = {
         responses: { '200': { description: 'Published claim node and canonical research URL.', content: { 'application/json': { schema: { type: 'object', required: ['claim_id', 'title', 'summary', 'status', 'latex_formulation', 'sources', 'tags', 'canonical_url'], properties: { claim_id: { type: 'string' }, title: { type: 'string' }, summary: { type: 'string' }, status: { type: 'string', enum: ['VERIFIED', 'SOURCED', 'ILLUSTRATIVE', 'UNVERIFIED'] }, latex_formulation: { type: 'string' }, sources: { type: 'array', items: { type: 'string' } }, tags: { type: 'array', items: { type: 'string' } }, canonical_url: { type: 'string', format: 'uri' } } } } } }, '401': errorResponse('Missing or invalid API key.'), '402': errorResponse('API-key credits depleted.'), '404': errorResponse('No active generated claim matches this ID.') },
       },
     },
-    '/api/v1/tensor-opt': {
+    '/api/v1/jobs/tensor-opt': {
       post: {
         tags: ['Maha Tensor-Opt (Mock)'],
         operationId: 'createMockTensorOptJob',
