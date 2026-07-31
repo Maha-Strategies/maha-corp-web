@@ -98,7 +98,7 @@ export const openApiDocument = {
     { name: 'Books', description: 'Purchased-book entitlement checks for the local MCP bridge.' },
     { name: 'Enterprise MCP Gateway', description: 'Tenant-scoped MCP proxy for operator-registered public upstream servers.' },
     { name: 'Context Compiler', description: 'Deterministic, source-linked context-pack compilation with privacy-safe measurement.' },
-    { name: 'Maha Tensor-Opt (Mock)', description: 'Integration-only mock contract for the planned tensor-network optimization service.' },
+    { name: 'Maha Tensor-Opt', description: 'Serverless GPU-backed tensor-network optimization service.' },
     { name: 'Maha Geometric AI (Mock)', description: 'Integration-only mock contract for symmetry-aware geometric AI workloads.' },
     { name: 'Maha QEC-Compiler (Mock)', description: 'Integration-only mock contract for holographic QEC layout compilation.' },
     { name: 'Maha Landscape-Opt (Mock)', description: 'Integration-only mock contract for high-dimensional landscape optimization.' },
@@ -159,26 +159,38 @@ export const openApiDocument = {
     },
     '/api/v1/jobs/tensor-opt': {
       post: {
-        tags: ['Maha Tensor-Opt (Mock)'],
-        operationId: 'createMockTensorOptJob',
-        summary: 'Validate a Tensor-Opt integration request and return a mock job',
-        description: 'Integration stub only. The endpoint does not accept matrix terms, queue compute, store source input, or make a performance claim. It returns a deterministic mock job envelope for frontend and SDK work.',
+        tags: ['Maha Tensor-Opt'],
+        operationId: 'createTensorOptJob',
+        summary: 'Submit a Tensor-Opt GPU optimization job',
+        description: 'Dispatches a tensor-network QUBO or Ising optimization task to the serverless GPU worker network. Returns a 202 Accepted envelope with a unique jobId for async status polling.',
+        security: [{ credential: [] }],
         requestBody: {
           required: true,
           content: {
             'application/json': {
               schema: {
-                type: 'object', required: ['clientRequestId', 'problem'], properties: {
-                  clientRequestId: { type: 'string', minLength: 8, maxLength: 120 },
+                type: 'object',
+                required: ['clientRequestId', 'problem'],
+                properties: {
+                  clientRequestId: { type: 'string', minLength: 8, maxLength: 120, description: 'Caller-chosen idempotency key.' },
                   problem: {
-                    type: 'object', required: ['formulation'], properties: {
+                    type: 'object',
+                    required: ['formulation'],
+                    properties: {
                       formulation: { type: 'string', enum: ['qubo', 'ising'] },
-                      variableCount: { type: 'integer', minimum: 1, maximum: 1000000, description: 'Required for QUBO.' },
-                      spinCount: { type: 'integer', minimum: 1, maximum: 1000000, description: 'Required for Ising.' },
+                      size: { type: 'integer', minimum: 1, maximum: 1000000, description: 'Number of binary variables or spins.' },
+                      termsUrl: { type: 'string', format: 'uri', description: 'HTTPS URL pointing to the JSON QUBO terms definition.' },
+                      terms: { type: 'array', items: { type: 'object' }, description: 'Inline upper-triangular terms array.' },
                     },
                   },
-                  solver: { type: 'object', properties: { bondDimensionMax: { type: 'number' }, maxSweeps: { type: 'number' }, seed: { type: 'number' } } },
-                  target: { type: 'object', properties: { kind: { type: 'string', enum: ['gpu', 'tpu'] } } },
+                  solver: {
+                    type: 'object',
+                    properties: {
+                      bondDimensionMax: { type: 'integer', minimum: 1, maximum: 1024 },
+                      target_precision: { type: 'number' },
+                      maxSweeps: { type: 'integer' },
+                    },
+                  },
                 },
               },
             },
@@ -186,12 +198,66 @@ export const openApiDocument = {
         },
         responses: {
           '202': {
-            description: 'Mock job accepted; no optimization has run.',
-            headers: { 'X-Maha-API-Mode': { schema: { const: 'mock' }, description: 'Signals that this response is a contract stub.' } },
-            content: { 'application/json': { schema: { type: 'object', required: ['mock', 'jobId', 'status', 'clientRequestId', 'inputHash', 'citations', 'sourceTextStored'], properties: { mock: { const: true }, jobId: { type: 'string', pattern: '^topt_[a-f0-9]{32}$' }, status: { const: 'queued' }, clientRequestId: { type: 'string' }, inputHash: { type: 'string', pattern: '^[a-f0-9]{64}$' }, citations: { type: 'array', minItems: 1, items: { type: 'object' } }, sourceTextStored: { const: false } } } } },
+            description: 'Job accepted and queued for GPU worker execution.',
+            content: {
+              'application/json': {
+                schema: {
+                  type: 'object',
+                  required: ['jobId', 'kind', 'status', 'clientRequestId', 'inputHash'],
+                  properties: {
+                    jobId: { type: 'string', pattern: '^job_[a-f0-9]{32}$' },
+                    kind: { const: 'tensor-opt' },
+                    status: { type: 'string', enum: ['queued', 'processing'] },
+                    clientRequestId: { type: 'string' },
+                    inputHash: { type: 'string', pattern: '^[a-f0-9]{64}$' },
+                    acceptedConfiguration: { type: 'object' },
+                    credits: {
+                      type: 'object',
+                      properties: {
+                        reserved: { type: 'integer' },
+                        charged: { type: ['integer', 'null'] },
+                        refunded: { type: 'integer' },
+                      },
+                    },
+                  },
+                },
+              },
+            },
           },
-          '400': errorResponse('Invalid mock Tensor-Opt request.'),
+          '400': errorResponse('Invalid Tensor-Opt request or missing required problem configuration.'),
+          '401': errorResponse('Missing or invalid API key.'),
+          '402': errorResponse('API key credit balance insufficient for job reservation.'),
           '415': errorResponse('Content-Type must be application/json.'),
+        },
+      },
+    },
+    '/api/v1/jobs/{jobId}': {
+      get: {
+        tags: ['Maha Tensor-Opt'],
+        operationId: 'getTensorOptJobStatus',
+        summary: 'Poll status and retrieve result for a submitted job',
+        description: 'Returns the current execution state, credit ledger status, solution vector, and solver diagnostics for a previously dispatched optimization job.',
+        security: [{ credential: [] }],
+        parameters: [
+          {
+            name: 'jobId',
+            in: 'path',
+            required: true,
+            description: 'Unique job identifier returned during dispatch.',
+            schema: { type: 'string', pattern: '^job_[a-f0-9]{32}$' },
+          },
+        ],
+        responses: {
+          '200': {
+            description: 'Current job record (includes solution vector and solver diagnostics when completed).',
+            content: {
+              'application/json': {
+                schema: { $ref: '#/components/schemas/TensorOptJobRecord' },
+              },
+            },
+          },
+          '401': errorResponse('Missing or invalid API key.'),
+          '404': errorResponse('No job found matching the specified jobId for this authenticated account.'),
         },
       },
     },
@@ -772,6 +838,119 @@ export const openApiDocument = {
           audit: { $ref: '#/components/schemas/AuditResult' },
           retryAfterSeconds: { type: 'integer', description: 'Present while status is `processing`.' },
           error: { type: 'object', properties: { code: { type: 'string' }, message: { type: 'string' } }, description: 'Present when status is `failed`.' },
+        },
+      },
+      TensorOptJobRecord: {
+        type: 'object',
+        required: [
+          'jobId',
+          'kind',
+          'status',
+          'clientRequestId',
+          'inputHash',
+          'acceptedConfiguration',
+          'credits',
+          'timestamps'
+        ],
+        properties: {
+          jobId: { type: 'string', pattern: '^job_[a-f0-9]{32}$' },
+          kind: { type: 'string', const: 'tensor-opt' },
+          status: { type: 'string', enum: ['queued', 'processing', 'completed', 'failed'] },
+          clientRequestId: { type: 'string' },
+          inputHash: { type: 'string', pattern: '^[a-f0-9]{64}$' },
+          acceptedConfiguration: { type: 'object' },
+          credits: {
+            type: 'object',
+            required: ['reserved', 'charged', 'refunded'],
+            properties: {
+              reserved: { type: 'integer' },
+              charged: { type: ['integer', 'null'] },
+              refunded: { type: 'integer' },
+            },
+          },
+          result: {
+            type: ['object', 'null'],
+            properties: {
+              objectiveValue: { type: 'number' },
+              assignment: { type: 'array', items: { type: 'integer' } },
+              bestBound: { type: ['number', 'null'] },
+              provenOptimal: { type: 'boolean' },
+            },
+          },
+          diagnostics: {
+            type: ['object', 'null'],
+            properties: {
+              wallClockSeconds: { type: 'number' },
+              bondDimensionUsed: { type: ['integer', 'null'] },
+              sweepsCompleted: { type: ['integer', 'null'] },
+              discardedWeight: { type: ['number', 'null'] },
+              deviceClass: { type: 'string' },
+            },
+          },
+          error: {
+            type: ['object', 'null'],
+            properties: {
+              code: { type: 'string' },
+              message: { type: 'string' },
+            },
+          },
+          timestamps: {
+            type: 'object',
+            required: ['createdAt', 'updatedAt', 'expiresAt'],
+            properties: {
+              createdAt: { type: 'string', format: 'date-time' },
+              updatedAt: { type: 'string', format: 'date-time' },
+              expiresAt: { type: 'string', format: 'date-time' },
+            },
+          },
+          citations: { type: 'array', items: { type: 'object' } },
+        },
+      },
+      WorkerCallbackPayload: {
+        type: 'object',
+        required: ['contractVersion', 'jobId', 'inputHash', 'status', 'usage'],
+        properties: {
+          contractVersion: { type: 'string', const: '1.0.0' },
+          jobId: { type: 'string' },
+          inputHash: { type: 'string' },
+          status: { type: 'string', enum: ['completed', 'failed'] },
+          usage: {
+            type: 'object',
+            required: ['deviceSeconds'],
+            properties: {
+              deviceSeconds: { type: 'number' },
+            },
+          },
+          solution: {
+            type: 'object',
+            required: ['objectiveValue', 'assignment'],
+            properties: {
+              objectiveValue: { type: 'number' },
+              assignment: { type: 'array', items: { type: 'integer' } },
+              energy: { type: 'number' },
+              fidelity: { type: 'number' },
+              converged: { type: 'boolean' },
+              bondDimension: { type: 'integer' },
+            },
+          },
+          diagnostics: {
+            type: 'object',
+            required: ['wallClockSeconds'],
+            properties: {
+              wallClockSeconds: { type: 'number' },
+              bondDimensionUsed: { type: ['integer', 'null'] },
+              sweepsCompleted: { type: ['integer', 'null'] },
+              discardedWeight: { type: ['number', 'null'] },
+              deviceClass: { type: 'string' },
+            },
+          },
+          error: {
+            type: 'object',
+            properties: {
+              code: { type: 'string' },
+              message: { type: 'string' },
+            },
+          },
         },
       },
     },
