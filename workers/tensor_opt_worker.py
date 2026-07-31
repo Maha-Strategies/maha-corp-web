@@ -222,11 +222,11 @@ def execute_tensor_opt_job(job_payload: Dict[str, Any]) -> None:
     image=gpu_image,
     secrets=[maha_secrets]
 )
-@modal.fastapi_endpoint(method="POST")
+@modal.web_endpoint(method="POST")
 def job_dispatch_entrypoint(
     request_data: Dict[str, Any], 
     authorization: str = Header(default=None)
-) -> Tuple[int, Dict[str, Any]]:
+):
     """
     Web Endpoint acting as MAHA_WORKER_URL.
     Receives HTTP POST requests from Vercel Backend, validates Bearer Token,
@@ -237,29 +237,30 @@ def job_dispatch_entrypoint(
     # 1. Validate Authentication Token
     if not authorization or not authorization.startswith("Bearer "):
         logger.warning("Rejecting request: Missing or invalid Authorization header format")
-        return 401, {"error": "Unauthorized: Missing Bearer token"}
+        raise HTTPException(status_code=401, detail="Unauthorized: Missing Bearer token")
 
     token = authorization.split("Bearer ")[1].strip()
     if not expected_token or not hmac.compare_digest(token, expected_token):
         logger.warning("Rejecting request: Bearer token mismatch")
-        return 403, {"error": "Forbidden: Invalid worker authentication token"}
+        raise HTTPException(status_code=403, detail="Forbidden: Invalid worker authentication token")
 
-    # 2. Validate Contract Payload Structure
-    job_id = request_data.get("job_id")
-    callback_url = request_data.get("callback_url")
+    # 2. Validate Contract Payload Structure (Using camelCase to match Vercel)
+    job_id = request_data.get("jobId")
+    callback_url = request_data.get("callbackUrl")
 
     if not job_id or not callback_url:
-        return 400, {"error": "Bad Request: Missing required job_id or callback_url in payload"}
+        logger.error("Payload missing jobId or callbackUrl")
+        raise HTTPException(status_code=400, detail="Bad Request: Missing required jobId or callbackUrl in payload")
 
     logger.info(f"Received valid job dispatch request: {job_id}. Spawning background GPU execution...")
 
     # 3. Asynchronously Spawn GPU Worker Task (Unblocks Web Endpoint)
     execute_tensor_opt_job.spawn(request_data)
 
-    # 4. Return 202 Accepted Immediately
-    return 202, {
+    # 4. Return Accepted Status
+    return {
         "status": "accepted",
-        "job_id": job_id,
+        "jobId": job_id,
         "message": "Job dispatched to serverless GPU compute worker",
         "timestamp": int(time.time())
     }
