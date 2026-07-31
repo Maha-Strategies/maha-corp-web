@@ -6,6 +6,10 @@ export type ProvenanceVerifyResponse = { claim_id: string; title: string; summar
 export type TensorOptRequest = { clientRequestId: string; problem: { formulation: 'qubo' | 'ising'; size?: number; termsUrl?: string; terms?: Array<{ i: number; j: number; weight: number }> }; solver?: { bondDimensionMax?: number; target_precision?: number; maxSweeps?: number; seed?: number } }
 export type TensorOptJobRecord = { jobId: string; kind: 'tensor-opt'; status: 'queued' | 'processing' | 'completed' | 'failed'; clientRequestId: string; inputHash: string; credits: { reserved: number; charged: number | null; refunded: number }; result?: { objectiveValue: number; assignment: number[]; bestBound?: number; provenOptimal?: boolean }; diagnostics?: { wallClockSeconds: number; bondDimensionUsed?: number; sweepsCompleted?: number; discardedWeight?: number; deviceClass: string }; error?: { code: string; message: string }; citations?: Array<any> }
 
+// --- Audit & MCP Types ---
+export type AuditExportOptions = { format?: 'csv' | 'pdf'; startTime?: number; endTime?: number }
+export type RegisterMCPOptions = { name: string; baseUrl: string; authType: 'bearer' | 'hmac' | 'none'; secret?: string; allowedEngines?: Array<'tensor-opt' | 'geometric-ai' | 'qec-compiler' | 'landscape-opt' | '*'> }
+
 export class MahaApiError extends Error { readonly status: number; readonly code: string; constructor(status: number, code: string, message: string) { super(message); this.name = 'MahaApiError'; this.status = status; this.code = code } }
 export class MahaAuthenticationError extends MahaApiError { constructor(status: 401 | 402, code: string, message: string) { super(status, code, message); this.name = 'MahaAuthenticationError' } }
 export type MahaClientOptions = { apiKey: string; baseUrl?: string }
@@ -20,6 +24,8 @@ export class MahaClient {
     this.baseUrl = (options.baseUrl ?? 'https://www.mahastrategies.com').replace(/\/$/, '')
   }
 
+  // --- Core API Methods ---
+
   async compress(payload: ContextCompressRequest): Promise<ContextCompressResponse> { return this.request('/api/v1/compress', { method: 'POST', body: JSON.stringify(payload), headers: { 'Content-Type': 'application/json' } }) }
 
   async verify(claimId: string): Promise<ProvenanceVerifyResponse> {
@@ -28,6 +34,93 @@ export class MahaClient {
   }
 
   async getBalance(): Promise<{ balance_credits: number }> { return this.request('/api/v1/keys/balance') }
+
+  // --- Phase A: Audit & Compliance ---
+
+  public readonly audit = {
+    /**
+     * Exports double-entry provenance ledger entries as a raw CSV string or PDF ArrayBuffer/Blob.
+     */
+    export: async (tenantId: string, options: AuditExportOptions = {}): Promise<{ data: ArrayBuffer | Blob | string; filename: string }> => {
+      const format = options.format ?? 'csv';
+      const params = new URLSearchParams({ tenantId, format });
+      if (options.startTime) params.set('startTime', options.startTime.toString());
+      if (options.endTime) params.set('endTime', options.endTime.toString());
+
+      // Bypass internal request() to handle raw binary/text responses cleanly
+      const response = await fetch(`${this.baseUrl}/api/v1/audit/export?${params.toString()}`, {
+        method: 'GET',
+        headers: { Authorization: `Bearer ${this.options.apiKey}` }
+      });
+
+      if (!response.ok) {
+        const errText = await response.text();
+        throw new MahaApiError(response.status, `http_${response.status}`, `Audit export failed: ${errText}`);
+      }
+
+      const contentDisposition = response.headers.get('content-disposition');
+      const filenameMatch = contentDisposition?.match(/filename="([^"]+)"/);
+      const filename = filenameMatch ? filenameMatch[1] : `maha_audit_${tenantId}.${format}`;
+
+      if (format === 'csv') {
+        return { data: await response.text(), filename };
+      }
+
+      // Return ArrayBuffer for Edge/Node/Bun, and Blob for Browser environments
+      if (typeof window === 'undefined') {
+        return { data: await response.arrayBuffer(), filename };
+      } else {
+        return { data: await response.blob(), filename };
+      }
+    }
+  };
+
+  // --- Phase B: Enterprise MCP Gateway ---
+
+  public readonly mcp = {
+    /**
+     * Registers a new tenant-scoped upstream MCP tool server.
+     */
+    registerServer: async (tenantId: string, options: RegisterMCPOptions): Promise<{ id: string; [key: string]: any }> => {
+      return this.request('/api/v1/mcp/register', {
+        method: 'POST',
+        body: JSON.stringify(options),
+        headers: { 
+          'Content-Type': 'application/json',
+          'X-Tenant-ID': tenantId 
+        }
+      });
+    },
+
+    /**
+     * Dispatches a JSON-RPC 2.0 call through the tenant MCP Gateway proxy.
+     */
+    call: async <T = unknown>(tenantId: string, serverId: string, method: string, params: Record<string, unknown> = {}): Promise<T> => {
+      const payload = {
+        jsonrpc: '2.0',
+        id: `req_${Date.now()}`,
+        method,
+        params
+      };
+
+      const response = await this.request<{ result?: T; error?: { code: number; message: string } }>(
+        `/api/v1/mcp/gateway/${encodeURIComponent(serverId)}`,
+        {
+          method: 'POST',
+          body: JSON.stringify(payload),
+          headers: { 
+            'Content-Type': 'application/json',
+            'X-Tenant-ID': tenantId 
+          }
+        }
+      );
+
+      if (response.error) {
+        throw new Error(`MCP Error [${response.error.code}]: ${response.error.message}`);
+      }
+      return response.result as T;
+    }
+  };
 
   // --- Async GPU Worker Methods ---
 
