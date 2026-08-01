@@ -48,3 +48,66 @@ test('Stripe webhook ignores non-billing events without touching the credit ledg
     if (originalRedisToken === undefined) delete process.env.UPSTASH_REDIS_REST_TOKEN; else process.env.UPSTASH_REDIS_REST_TOKEN = originalRedisToken
   }
 })
+
+test('invoice.paid resets only the tenant subscription bucket exactly once', async () => {
+  const commands: unknown[][] = []
+  process.env.STRIPE_SECRET_KEY = secret; process.env.STRIPE_API_KEY_WEBHOOK_SECRET = webhookSecret; process.env.UPSTASH_REDIS_REST_URL = 'https://example.upstash.io'; process.env.UPSTASH_REDIS_REST_TOKEN = 'token'; process.env.STRIPE_TENANT_BUILDER_PRICE_ID = 'price_builder'; process.env.STRIPE_TENANT_SCALE_PRICE_ID = 'price_scale'; process.env.STRIPE_TENANT_AUTO_TOPUP_PRICE_ID = 'price_topup'
+  globalThis.fetch = async (_input, init) => { const command = JSON.parse(String(init?.body)) as unknown[]; commands.push(command); return new Response(JSON.stringify({ result: 1 })) }
+  try {
+    const payload = { id: 'evt_invoice_paid_123', object: 'event', api_version: '2026-06-24.dahlia', created: 1, livemode: false, type: 'invoice.paid', data: { object: { id: 'in_123', object: 'invoice', customer: 'cus_123', period_end: 123456, lines: { data: [{ pricing: { type: 'price_details', price_details: { price: 'price_builder', product: 'prod_builder' } } }] }, parent: { type: 'subscription_details', subscription_details: { subscription: 'sub_123', metadata: { tenant_id: 'tenant_key_123', tier: 'builder' } } } } } }
+    const result = await POST(signedRequest(payload))
+    assert.equal(result.status, 200)
+    assert.deepEqual(await result.json(), { received: true, duplicate: false })
+    assert.equal(commands[0][0], 'HSET')
+    assert.equal(commands[1][0], 'EVAL')
+    assert.ok(JSON.stringify(commands[1]).includes('subscription_credits'))
+    assert.ok(JSON.stringify(commands[1]).includes('10000'))
+  } finally { globalThis.fetch = originalFetch }
+})
+
+test('successful automatic top-up credits 5,000 rollover credits idempotently', async () => {
+  const commands: unknown[][] = []
+  process.env.STRIPE_SECRET_KEY = secret; process.env.STRIPE_API_KEY_WEBHOOK_SECRET = webhookSecret; process.env.UPSTASH_REDIS_REST_URL = 'https://example.upstash.io'; process.env.UPSTASH_REDIS_REST_TOKEN = 'token'
+  globalThis.fetch = async (_input, init) => { const command = JSON.parse(String(init?.body)) as unknown[]; commands.push(command); return new Response(JSON.stringify({ result: 5000 })) }
+  try {
+    const payload = { id: 'evt_topup_123', object: 'event', api_version: '2026-06-24.dahlia', created: 1, livemode: false, type: 'payment_intent.succeeded', data: { object: { id: 'pi_123', object: 'payment_intent', amount_received: 1000, currency: 'usd', metadata: { billing_kind: 'tenant_auto_topup', tenant_id: 'tenant_key_123', attempt_id: 'autotopup_123', credits: '5000' } } } }
+    const result = await POST(signedRequest(payload))
+    assert.equal(result.status, 200)
+    assert.deepEqual(await result.json(), { received: true, duplicate: false })
+    assert.equal(commands[0][0], 'EVAL')
+    assert.ok(JSON.stringify(commands[0]).includes('topup_credits'))
+    assert.ok(JSON.stringify(commands[0]).includes('autotopup_123'))
+  } finally {
+    globalThis.fetch = originalFetch
+    if (originalSecret === undefined) delete process.env.STRIPE_SECRET_KEY; else process.env.STRIPE_SECRET_KEY = originalSecret
+    if (originalWebhookSecret === undefined) delete process.env.STRIPE_API_KEY_WEBHOOK_SECRET; else process.env.STRIPE_API_KEY_WEBHOOK_SECRET = originalWebhookSecret
+    if (originalRedisUrl === undefined) delete process.env.UPSTASH_REDIS_REST_URL; else process.env.UPSTASH_REDIS_REST_URL = originalRedisUrl
+    if (originalRedisToken === undefined) delete process.env.UPSTASH_REDIS_REST_TOKEN; else process.env.UPSTASH_REDIS_REST_TOKEN = originalRedisToken
+  }
+})
+
+test('subscription deletion clears monthly credits and disables automatic top-up', async () => {
+  const commands: unknown[][] = []
+  process.env.STRIPE_SECRET_KEY = secret; process.env.STRIPE_API_KEY_WEBHOOK_SECRET = webhookSecret; process.env.UPSTASH_REDIS_REST_URL = 'https://example.upstash.io'; process.env.UPSTASH_REDIS_REST_TOKEN = 'token'
+  globalThis.fetch = async (_input, init) => { const command = JSON.parse(String(init?.body)) as unknown[]; commands.push(command); return new Response(JSON.stringify({ result: 1 })) }
+  try {
+    const payload = { id: 'evt_subscription_deleted_123', object: 'event', api_version: '2026-06-24.dahlia', created: 1, livemode: false, type: 'customer.subscription.deleted', data: { object: { id: 'sub_123', object: 'subscription', customer: 'cus_123', metadata: { tenant_id: 'tenant_key_123', tier: 'builder' }, items: { data: [] }, status: 'canceled' } } }
+    const result = await POST(signedRequest(payload))
+    assert.equal(result.status, 200)
+    assert.deepEqual(await result.json(), { received: true, ignored: false })
+    assert.equal(commands[0][0], 'EVAL')
+    assert.ok(JSON.stringify(commands[0]).includes('subscription_credits'))
+    assert.ok(JSON.stringify(commands[0]).includes('auto_topup_enabled'))
+  } finally { globalThis.fetch = originalFetch }
+})
+
+test('automatic top-up success refuses an event without the matching pending attempt', async () => {
+  process.env.STRIPE_SECRET_KEY = secret; process.env.STRIPE_API_KEY_WEBHOOK_SECRET = webhookSecret; process.env.UPSTASH_REDIS_REST_URL = 'https://example.upstash.io'; process.env.UPSTASH_REDIS_REST_TOKEN = 'token'
+  globalThis.fetch = async () => new Response(JSON.stringify({ result: -1 }))
+  try {
+    const payload = { id: 'evt_topup_mismatch_123', object: 'event', api_version: '2026-06-24.dahlia', created: 1, livemode: false, type: 'payment_intent.succeeded', data: { object: { id: 'pi_mismatch_123', object: 'payment_intent', amount_received: 1000, currency: 'usd', metadata: { billing_kind: 'tenant_auto_topup', tenant_id: 'tenant_key_123', attempt_id: 'autotopup_wrong', credits: '5000' } } } }
+    const result = await POST(signedRequest(payload))
+    assert.equal(result.status, 200)
+    assert.deepEqual(await result.json(), { received: true, warning: 'auto_topup_attempt_mismatch' })
+  } finally { globalThis.fetch = originalFetch }
+})

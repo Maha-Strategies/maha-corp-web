@@ -142,6 +142,24 @@ export const openApiDocument = {
         responses: { '200': { description: 'Key permanently revoked.', content: { 'application/json': { schema: { type: 'object', required: ['revoked'], properties: { revoked: { const: true } } } } } }, '401': errorResponse('Missing, invalid, or inactive API key.'), '503': errorResponse('Key revocation unavailable.') },
       },
     },
+    '/api/v1/billing/subscription': {
+      post: {
+        tags: ['Checkout'], operationId: 'createTenantSubscriptionCheckout', summary: 'Create Builder or Scale subscription Checkout for the authenticated tenant', security: [{ credential: [] }],
+        requestBody: { required: true, content: { 'application/json': { schema: { type: 'object', required: ['tier', 'clientRequestId'], properties: { tier: { type: 'string', enum: ['builder', 'scale'] }, clientRequestId: { type: 'string', minLength: 8, maxLength: 120, pattern: '^[A-Za-z0-9_-]+$', description: 'Stable idempotency key for retrying this Checkout attempt.' } } } } } },
+        responses: { '200': { description: 'Hosted Stripe subscription Checkout URL.', content: { 'application/json': { schema: { type: 'object', required: ['url'], properties: { url: { type: 'string', format: 'uri' } } } } } }, '400': errorResponse('Invalid tier.'), '401': errorResponse('Invalid API key.'), '409': errorResponse('Tenant already has a subscription.'), '503': errorResponse('Subscription Checkout unavailable.') },
+      },
+    },
+    '/api/v1/billing/settings': {
+      get: {
+        tags: ['Checkout'], operationId: 'getTenantBillingSettings', summary: 'Get tenant subscription balances and auto-top-up state', security: [{ credential: [] }],
+        responses: { '200': { description: 'Sanitized tenant billing state; Stripe identifiers are not returned.' }, '401': errorResponse('Invalid API key.'), '503': errorResponse('Billing settings unavailable.') },
+      },
+      post: {
+        tags: ['Checkout'], operationId: 'updateTenantAutoTopup', summary: 'Explicitly enable or disable tenant automatic top-up', security: [{ credential: [] }],
+        requestBody: { required: true, content: { 'application/json': { schema: { type: 'object', required: ['autoTopupEnabled'], properties: { autoTopupEnabled: { type: 'boolean' } } } } } },
+        responses: { '200': { description: 'Updated automatic top-up state.' }, '400': errorResponse('Invalid setting.'), '401': errorResponse('Invalid API key.'), '409': errorResponse('An active subscription and saved payment method are required.'), '503': errorResponse('Billing settings unavailable.') },
+      },
+    },
     '/api/v1/compress': {
       post: {
         tags: ['Maha SDK'], operationId: 'compressContext', summary: 'Compile a bounded context pack through the lightweight SDK contract',

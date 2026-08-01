@@ -2,6 +2,7 @@ import { createHash, randomUUID } from 'node:crypto'
 import Stripe from 'stripe'
 
 import { createAgentInquiryLedger } from './agent-inquiry-ledger.ts'
+import { claimTenantAutoTopup, type TenantBillingState } from './api-key.ts'
 
 export const API_CREDIT_PACKS = {
   starter: { environment: 'STRIPE_API_CREDITS_STARTER_PRICE_ID', credits: 100_000 },
@@ -46,6 +47,44 @@ export function tenantBillingConfig() {
 }
 
 function siteOrigin(request: Request) { return process.env.NEXT_PUBLIC_SITE_URL?.trim().replace(/\/$/, '') || new URL(request.url).origin }
+
+export function isTenantSubscriptionTier(value: unknown): value is TenantSubscriptionTier { return value === 'builder' || value === 'scale' }
+export function tenantMonthlyCredits(tier: TenantSubscriptionTier) { return tier === 'builder' ? 10_000 : 60_000 }
+
+export async function createTenantSubscriptionCheckout(input: { request: Request; state: TenantBillingState; tier: TenantSubscriptionTier; clientRequestId: string }) {
+  const config = tenantBillingConfig(); if (!config) return { kind: 'unavailable' as const }
+  const origin = siteOrigin(input.request); const successUrl = new URL('/dashboard', origin); successUrl.searchParams.set('status', 'subscription-success'); const cancelUrl = new URL('/dashboard', origin); cancelUrl.searchParams.set('status', 'cancelled')
+  const stripe = new Stripe(config.stripeSecretKey, { apiVersion: '2026-06-24.dahlia' })
+  try {
+    const session = await stripe.checkout.sessions.create({
+      mode: 'subscription', customer: input.state.stripeCustomerId ?? undefined,
+      line_items: [{ price: config.prices[input.tier], quantity: 1 }], success_url: successUrl.toString(), cancel_url: cancelUrl.toString(),
+      metadata: { billing_kind: 'tenant_subscription', tenant_id: input.state.tenantId, tier: input.tier },
+      subscription_data: { metadata: { billing_kind: 'tenant_subscription', tenant_id: input.state.tenantId, tier: input.tier } },
+    }, { idempotencyKey: `tenant-subscription-${input.state.tenantId}-${input.clientRequestId}` })
+    return session.url ? { kind: 'ready' as const, url: session.url } : { kind: 'failed' as const }
+  } catch (error) { console.error('[TENANT_SUBSCRIPTION_CHECKOUT_ERROR]', error); return { kind: 'failed' as const } }
+}
+
+export async function maybeCreateTenantAutoTopup(input: { tenantId: string; remainingCredits: number }) {
+  if (input.remainingCredits >= 1_000) return { kind: 'not_needed' as const }
+  const config = tenantBillingConfig(); if (!config) return { kind: 'unavailable' as const }
+  const stripe = new Stripe(config.stripeSecretKey, { apiVersion: '2026-06-24.dahlia' })
+  try {
+    const price = await stripe.prices.retrieve(config.prices.autoTopup)
+    if (price.type !== 'one_time' || price.currency !== 'usd' || price.unit_amount !== 1_000) throw new Error('Auto-top-up Price must be a one-time USD $10 Price.')
+    const attemptId = `autotopup_${randomUUID().replaceAll('-', '')}`
+    const claim = await claimTenantAutoTopup(input.tenantId, attemptId); if (!claim) return { kind: 'not_eligible' as const }
+    const [customerId, paymentMethodId] = claim
+    await stripe.paymentIntents.create({ amount: price.unit_amount, currency: price.currency, customer: customerId, payment_method: paymentMethodId, confirm: true, off_session: true, metadata: { billing_kind: 'tenant_auto_topup', tenant_id: input.tenantId, attempt_id: attemptId, credits: '5000' } }, { idempotencyKey: attemptId })
+    return { kind: 'submitted' as const }
+  } catch (error) {
+    // Keep an asserted charge attempt pending on ambiguous transport errors. A
+    // signed succeeded/failed webhook is the only authority that settles it,
+    // which prevents a retry from creating a second off-session charge.
+    console.error('[TENANT_AUTO_TOPUP_ERROR]', error); return { kind: 'failed' as const }
+  }
+}
 
 export async function createOrRecoverApiCreditCheckout(input: { request: Request; apiKeyId: string; pack: ApiCreditPack; clientRequestId: string }) {
   const config = apiCreditBillingConfig(); const ledger = createAgentInquiryLedger()

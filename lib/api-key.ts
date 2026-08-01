@@ -4,6 +4,7 @@ export type ApiKeyTier = 'starter' | 'builder' | 'scale' | 'enterprise'
 // authorization and balance code only handles the correctly typed record.
 export type ApiKeyRecord = { key_id: string; tenant_id: string; email_hash: string; balance_credits: number; tier: ApiKeyTier; status: 'active'; rate_limit_per_minute: number; zero_data_retention: boolean; created_at: string }
 export type TenantCreditBalance = { tenantId: string; subscriptionCredits: number; topupCredits: number; balanceCredits: number; tier: ApiKeyTier; rateLimitPerMinute: number }
+export type TenantBillingState = TenantCreditBalance & { stripeCustomerId: string | null; stripeSubscriptionId: string | null; stripePaymentMethodId: string | null; subscriptionStatus: string; autoTopupEnabled: boolean }
 
 const STARTER_CREDITS = 20_000
 const KEY_PREFIX = 'mha_live_'
@@ -119,6 +120,55 @@ export async function ensureTenantForKey(record: ApiKeyRecord, hash: string): Pr
 }
 
 export async function tenantBalanceForRawKey(rawKey: string) { const hash = await hashApiKey(rawKey); const record = await getApiKeyRecord(hash); return record ? ensureTenantForKey(record, hash) : null }
+
+export async function tenantBillingStateForRawKey(rawKey: string): Promise<TenantBillingState | null> {
+  const hash = await hashApiKey(rawKey); const record = await getApiKeyRecord(hash); if (!record) return null
+  const tenant = await ensureTenantForKey(record, hash)
+  const result = hashResultToRecord(await redis<Record<string, string> | string[] | null>('HGETALL', [tenantDataRedisKey(tenant.tenantId)]))
+  return { ...tenant, stripeCustomerId: result?.stripe_customer_id || null, stripeSubscriptionId: result?.stripe_subscription_id || null, stripePaymentMethodId: result?.stripe_payment_method_id || null, subscriptionStatus: result?.subscription_status || 'none', autoTopupEnabled: result?.auto_topup_enabled === 'true' }
+}
+
+export async function bindTenantSubscription(input: { tenantId: string; customerId: string; subscriptionId: string; paymentMethodId?: string | null; tier: 'builder' | 'scale'; status: string }) {
+  const rateLimit = input.tier === 'builder' ? 3_000 : 12_000
+  const fields: unknown[] = [tenantDataRedisKey(input.tenantId), 'stripe_customer_id', input.customerId, 'stripe_subscription_id', input.subscriptionId, 'tier', input.tier, 'subscription_status', input.status, 'rate_limit_per_minute', String(rateLimit)]
+  if (input.paymentMethodId) fields.push('stripe_payment_method_id', input.paymentMethodId)
+  await redis('HSET', fields)
+}
+
+export async function setTenantSubscriptionStatus(tenantId: string, status: string) { await redis('HSET', [tenantDataRedisKey(tenantId), 'subscription_status', status]) }
+
+export async function endTenantSubscription(tenantId: string, subscriptionId: string) {
+  const script = `if redis.call('HGET',KEYS[1],'stripe_subscription_id')==ARGV[1] then redis.call('HSET',KEYS[1],'subscription_status','canceled','subscription_credits','0','auto_topup_enabled','false','auto_topup_pending','false'); return 1 end return 0`
+  return (await redis<number>('EVAL', [script, 1, tenantDataRedisKey(tenantId), subscriptionId])) === 1
+}
+
+export async function resetTenantSubscriptionCreditsOnce(input: { eventId: string; tenantId: string; tier: 'builder' | 'scale'; subscriptionId: string; periodEnd: number }) {
+  const credits = input.tier === 'builder' ? 10_000 : 60_000
+  const script = `if redis.call('SET',KEYS[1],ARGV[5],'NX') then redis.call('HSET',KEYS[2],'subscription_credits',ARGV[1],'tier',ARGV[2],'stripe_subscription_id',ARGV[3],'subscription_status','active','subscription_period_end',ARGV[4]); return 1 end return 0`
+  return (await redis<number>('EVAL', [script, 2, `stripe:subscription-grant:${input.subscriptionId}:${input.periodEnd}`, tenantDataRedisKey(input.tenantId), credits, input.tier, input.subscriptionId, input.periodEnd, input.eventId])) === 1
+}
+
+export async function setTenantAutoTopup(rawKey: string, enabled: boolean) {
+  const state = await tenantBillingStateForRawKey(rawKey); if (!state) return null
+  if (enabled && (!state.stripeCustomerId || !state.stripePaymentMethodId || state.subscriptionStatus !== 'active')) return { kind: 'payment_method_required' as const, state }
+  await redis('HSET', [tenantDataRedisKey(state.tenantId), 'auto_topup_enabled', String(enabled)])
+  return { kind: 'updated' as const, state: { ...state, autoTopupEnabled: enabled } }
+}
+
+export async function creditTenantTopupOnce(eventId: string, tenantId: string, attemptId: string, credits: number) {
+  const script = `if redis.call('HGET',KEYS[2],'auto_topup_pending')~='true' or redis.call('HGET',KEYS[2],'auto_topup_attempt_id')~=ARGV[2] then return -1 end if redis.call('SET',KEYS[1],'1','NX') then redis.call('HSET',KEYS[2],'auto_topup_pending','false'); return redis.call('HINCRBY',KEYS[2],'topup_credits',ARGV[1]) end return false`
+  return redis<number | false>('EVAL', [script, 2, `stripe:auto-topup:${eventId}`, tenantDataRedisKey(tenantId), credits, attemptId])
+}
+
+export async function claimTenantAutoTopup(tenantId: string, attemptId: string) {
+  const script = `local t=KEYS[1] local total=tonumber(redis.call('HGET',t,'subscription_credits') or '0')+tonumber(redis.call('HGET',t,'topup_credits') or '0') if redis.call('HGET',t,'auto_topup_enabled')~='true' or total>=1000 or redis.call('HGET',t,'auto_topup_pending')=='true' then return false end local customer=redis.call('HGET',t,'stripe_customer_id') local payment=redis.call('HGET',t,'stripe_payment_method_id') if not customer or not payment then return false end redis.call('HSET',t,'auto_topup_pending','true','auto_topup_attempt_id',ARGV[1]); return {customer,payment}`
+  return redis<string[] | false>('EVAL', [script, 1, tenantDataRedisKey(tenantId), attemptId])
+}
+
+export async function releaseTenantAutoTopup(tenantId: string, attemptId: string) {
+  const script = `if redis.call('HGET',KEYS[1],'auto_topup_attempt_id')==ARGV[1] then redis.call('HSET',KEYS[1],'auto_topup_pending','false'); return 1 end return 0`
+  return redis<number>('EVAL', [script, 1, tenantDataRedisKey(tenantId), attemptId])
+}
 
 export function zeroDataRetentionEnabled(record: Pick<ApiKeyRecord, 'zero_data_retention'>) { return record.zero_data_retention }
 
