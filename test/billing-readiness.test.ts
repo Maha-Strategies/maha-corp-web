@@ -2,7 +2,7 @@ import assert from 'node:assert/strict'
 import test from 'node:test'
 
 import { GET } from '../app/api/admin/billing-readiness/route.ts'
-import { billingConfigurationPresence, billingLedgerFailureCode } from '../lib/billing-readiness.ts'
+import { billingConfigurationPresence, billingLedgerFailureCode, billingLedgerTimestampColumns } from '../lib/billing-readiness.ts'
 
 const originalRevenueControlToken = process.env.REVENUE_CONTROL_TOKEN
 
@@ -28,6 +28,15 @@ test('billing readiness turns database failures into safe operator diagnostic co
   assert.equal(billingLedgerFailureCode('PGRST205'), 'ledger_migration_missing_or_schema_cache_stale')
   assert.equal(billingLedgerFailureCode('42501'), 'ledger_access_denied')
   assert.equal(billingLedgerFailureCode('unknown'), 'ledger_table_unavailable')
+})
+
+test('billing readiness probes each ledger table using its actual timestamp column', () => {
+  assert.deepEqual(billingLedgerTimestampColumns, {
+    api_credit_checkouts: 'created_at',
+    api_credit_stripe_events: 'processed_at',
+    api_credit_ledger_entries: 'created_at',
+    api_credit_payment_reversals: 'created_at',
+  })
 })
 
 test('billing readiness operator route rejects a missing or invalid control token before diagnostics run', async () => {
