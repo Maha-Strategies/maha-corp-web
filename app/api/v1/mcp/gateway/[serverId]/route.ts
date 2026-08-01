@@ -11,7 +11,7 @@ export async function POST(
   try {
     const { serverId } = await params;
 
-    const tenantId = req.headers.get('x-maha-api-key-id');
+    const tenantId = req.headers.get('x-maha-tenant-id');
     if (!tenantId) {
       return NextResponse.json(
         { jsonrpc: '2.0', id: null, error: { code: -32001, message: 'Unauthorized' } },

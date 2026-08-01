@@ -10,6 +10,7 @@ export const API_CREDIT_PACKS = {
 } as const
 
 export type ApiCreditPack = keyof typeof API_CREDIT_PACKS
+export type TenantSubscriptionTier = 'builder' | 'scale'
 export type ApiCreditCheckout = { public_id: string; api_key_id: string; pack: ApiCreditPack; stripe_price_id: string; stripe_checkout_session_id: string | null; stripe_checkout_url: string | null; status: 'awaiting_payment' | 'paid' | 'failed' | 'reversed' }
 
 export function isApiCreditPack(value: unknown): value is ApiCreditPack { return typeof value === 'string' && value in API_CREDIT_PACKS }
@@ -30,6 +31,18 @@ export function apiCreditWebhookConfig() {
   const stripeSecretKey = process.env.STRIPE_SECRET_KEY?.trim()
   const webhookSecret = process.env.STRIPE_API_KEY_WEBHOOK_SECRET?.trim()
   return stripeSecretKey && webhookSecret ? { stripeSecretKey, webhookSecret } : null
+}
+
+/** Configuration gate for tenant subscriptions. No subscription or off-session
+ * charge may be created unless every required server-side value is present. */
+export function tenantBillingConfig() {
+  const stripeSecretKey = process.env.STRIPE_SECRET_KEY?.trim()
+  const webhookSecret = process.env.STRIPE_API_KEY_WEBHOOK_SECRET?.trim()
+  const builderPriceId = process.env.STRIPE_TENANT_BUILDER_PRICE_ID?.trim()
+  const scalePriceId = process.env.STRIPE_TENANT_SCALE_PRICE_ID?.trim()
+  const autoTopupPriceId = process.env.STRIPE_TENANT_AUTO_TOPUP_PRICE_ID?.trim()
+  if (!stripeSecretKey || !webhookSecret || ![builderPriceId, scalePriceId, autoTopupPriceId].every((price) => /^price_[A-Za-z0-9]+$/.test(price ?? ''))) return null
+  return { stripeSecretKey, webhookSecret, prices: { builder: builderPriceId!, scale: scalePriceId!, autoTopup: autoTopupPriceId! } }
 }
 
 function siteOrigin(request: Request) { return process.env.NEXT_PUBLIC_SITE_URL?.trim().replace(/\/$/, '') || new URL(request.url).origin }

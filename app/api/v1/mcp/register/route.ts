@@ -3,7 +3,7 @@ import { MCPRegistry } from '@/lib/mcp/registry';
 
 export async function POST(req: NextRequest) {
   try {
-    const tenantId = req.headers.get('x-maha-api-key-id');
+    const tenantId = req.headers.get('x-maha-tenant-id');
     if (!tenantId) return NextResponse.json({ error: { code: 'api_key_required', message: 'Provide Authorization: Bearer <API_KEY>.' } }, { status: 401 });
     if (!req.headers.get('content-type')?.toLowerCase().startsWith('application/json')) return NextResponse.json({ error: { code: 'unsupported_media_type', message: 'Content-Type must be application/json.' } }, { status: 415 });
 
