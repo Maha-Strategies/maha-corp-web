@@ -98,6 +98,8 @@ test('subscription deletion clears monthly credits and disables automatic top-up
     assert.equal(commands[0][0], 'EVAL')
     assert.ok(JSON.stringify(commands[0]).includes('subscription_credits'))
     assert.ok(JSON.stringify(commands[0]).includes('auto_topup_enabled'))
+    assert.ok(JSON.stringify(commands[0]).includes('rate_limit_per_minute'))
+    assert.ok(JSON.stringify(commands[0]).includes('starter'))
   } finally { globalThis.fetch = originalFetch }
 })
 
