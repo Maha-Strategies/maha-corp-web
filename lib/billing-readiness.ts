@@ -38,6 +38,15 @@ export type BillingReadinessReport = {
 type Environment = Record<string, string | undefined>
 type Ledger = NonNullable<ReturnType<typeof createAgentInquiryLedger>>
 
+export const billingLedgerTimestampColumns = {
+  api_credit_checkouts: 'created_at',
+  api_credit_stripe_events: 'processed_at',
+  api_credit_ledger_entries: 'created_at',
+  api_credit_payment_reversals: 'created_at',
+} as const
+
+type BillingLedgerTable = keyof typeof billingLedgerTimestampColumns
+
 function configured(value: string | undefined) {
   return Boolean(value?.trim().replace(/^["']|["']$/g, ''))
 }
@@ -72,20 +81,22 @@ export function billingLedgerFailureCode(errorCode: string | undefined): string 
   return 'ledger_table_unavailable'
 }
 
-async function inspectTable(ledger: Ledger, table: string): Promise<ReadinessCheck> {
+async function inspectTable(ledger: Ledger, table: BillingLedgerTable): Promise<ReadinessCheck> {
+  const timestampColumn = billingLedgerTimestampColumns[table]
   try {
     const { data, error, count } = await ledger
       .from(table)
-      .select('created_at', { count: 'exact' })
-      .order('created_at', { ascending: false })
+      .select(timestampColumn, { count: 'exact' })
+      .order(timestampColumn, { ascending: false })
       .limit(1)
     if (error) return { state: 'unavailable', code: billingLedgerFailureCode(error.code) }
-    const row = Array.isArray(data) ? data[0] as { created_at?: unknown } | undefined : undefined
+    const row = Array.isArray(data) ? data[0] as Record<string, unknown> | undefined : undefined
+    const latestAt = row?.[timestampColumn]
     return {
       state: 'ready',
       code: 'ledger_table_reachable',
       count: typeof count === 'number' ? count : 0,
-      latestAt: typeof row?.created_at === 'string' ? row.created_at : undefined,
+      latestAt: typeof latestAt === 'string' ? latestAt : undefined,
     }
   } catch {
     return { state: 'unavailable', code: 'ledger_table_unavailable' }
