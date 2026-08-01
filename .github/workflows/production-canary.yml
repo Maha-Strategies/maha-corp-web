@@ -24,8 +24,8 @@ jobs:
       TEST_MCP_UPSTREAM_URL: ${{ vars.PRODUCTION_CANARY_MCP_UPSTREAM_URL }}
       TEST_MCP_UPSTREAM_TOKEN: ${{ secrets.PRODUCTION_CANARY_MCP_UPSTREAM_TOKEN }}
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
         with:
           node-version: 24
           cache: npm
