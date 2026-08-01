@@ -1,4 +1,10 @@
+import nextEnv from '@next/env';
 import { MahaClient } from '../lib/sdk/index.ts';
+
+// This script runs outside the Next.js runtime, so load .env.local and the
+// other standard Next environment files before reading test configuration.
+// Explicit shell/CI values retain precedence over files.
+nextEnv.loadEnvConfig(process.cwd());
 
 const BASE_URL = process.env.TEST_API_URL || 'http://localhost:3000';
 const TEST_API_KEY = process.env.STAGING_API_KEY;
