@@ -2,6 +2,15 @@ name: Production billing canary
 
 on:
   workflow_dispatch:
+    inputs:
+      operation:
+        description: Billing canary operation
+        required: true
+        default: create-checkout
+        type: choice
+        options:
+          - create-checkout
+          - verify-state
 
 permissions:
   contents: read
@@ -11,7 +20,7 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  create-checkout:
+  billing-canary:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     environment:
@@ -29,6 +38,7 @@ jobs:
           cache: npm
       - run: npm ci
       - name: Create Builder Checkout
+        if: inputs.operation == 'create-checkout'
         run: |
           node --input-type=module <<'NODE'
           import { writeFile } from 'node:fs/promises'
@@ -52,9 +62,33 @@ jobs:
           await writeFile(`${process.env.RUNNER_TEMP}/checkout-url.txt`, `${checkoutUrl.href}\n`, { mode: 0o600 })
           NODE
       - name: Upload protected Checkout link
+        if: inputs.operation == 'create-checkout'
         uses: actions/upload-artifact@v4
         with:
           name: production-builder-checkout
           path: ${{ runner.temp }}/checkout-url.txt
           if-no-files-found: error
           retention-days: 1
+      - name: Verify Builder subscription and credit grant
+        if: inputs.operation == 'verify-state'
+        run: |
+          node --input-type=module <<'NODE'
+          const response = await fetch(`${process.env.CANARY_BASE_URL}/api/v1/billing/settings`, {
+            headers: { Authorization: `Bearer ${process.env.CANARY_API_KEY}` },
+          })
+          const state = await response.json().catch(() => null)
+          if (!response.ok || !state) throw new Error(`Billing state check failed with HTTP ${response.status}.`)
+          if (state.tier !== 'builder') throw new Error(`Expected Builder tier, received ${state.tier}.`)
+          if (state.subscriptionStatus !== 'active') throw new Error(`Expected active subscription, received ${state.subscriptionStatus}.`)
+          if (state.subscriptionCredits !== 10_000) throw new Error(`Expected 10,000 monthly credits, received ${state.subscriptionCredits}.`)
+          if (state.autoTopupEnabled !== false) throw new Error('Automatic top-up must remain disabled until explicitly enabled.')
+          if (state.canEnableAutoTopup !== true) throw new Error('The subscription payment method was not bound to the tenant.')
+          console.log(JSON.stringify({
+            tier: state.tier,
+            subscriptionStatus: state.subscriptionStatus,
+            subscriptionCredits: state.subscriptionCredits,
+            topupCredits: state.topupCredits,
+            autoTopupEnabled: state.autoTopupEnabled,
+            paymentMethodReady: state.canEnableAutoTopup,
+          }, null, 2))
+          NODE
