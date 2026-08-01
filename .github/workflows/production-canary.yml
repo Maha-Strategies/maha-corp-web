@@ -1,0 +1,34 @@
+name: Production canary
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: production-canary
+  cancel-in-progress: false
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    environment:
+      name: production-canary
+      url: ${{ vars.PRODUCTION_CANARY_BASE_URL }}
+    env:
+      CI: true
+      TEST_API_URL: ${{ vars.PRODUCTION_CANARY_BASE_URL }}
+      STAGING_API_KEY: ${{ secrets.PRODUCTION_CANARY_API_KEY }}
+      TEST_MCP_UPSTREAM_URL: ${{ vars.PRODUCTION_CANARY_MCP_UPSTREAM_URL }}
+      TEST_MCP_UPSTREAM_TOKEN: ${{ secrets.PRODUCTION_CANARY_MCP_UPSTREAM_TOKEN }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Run isolated production E2E gates
+        run: node --experimental-strip-types scripts/test-e2e.ts
