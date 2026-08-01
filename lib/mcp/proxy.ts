@@ -3,6 +3,7 @@ import { Redis } from '@upstash/redis';
 import { MCPServerConfig, JSONRPCRequest, JSONRPCResponse, MCPProxyContext } from './types';
 import { decryptSecret } from './registry';
 import { assertPublicUpstreamHost } from '../mcp-gateway';
+import { scopedRedisKey } from '../redis-namespace';
 
 const redis = Redis.fromEnv();
 
@@ -99,7 +100,7 @@ export class MCPProxyEngine {
     latencyMs: number
   ): Promise<void> {
     const timestamp = Date.now();
-    const ledgerKey = `ledger:tenant:${ctx.tenantId}:entries`;
+    const ledgerKey = scopedRedisKey(`ledger:tenant:${ctx.tenantId}:entries`);
     
     const entry = {
       id: `mcp_tx_${crypto.randomBytes(6).toString('hex')}`,

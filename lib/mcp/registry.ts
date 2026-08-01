@@ -2,6 +2,7 @@ import { Redis } from '@upstash/redis';
 import crypto from 'crypto';
 import { MCPServerConfig } from './types';
 import { assertPublicUpstreamHost, parsePublicUpstreamUrl } from '../mcp-gateway';
+import { scopedRedisKey } from '../redis-namespace';
 
 const redis = Redis.fromEnv();
 
@@ -61,7 +62,7 @@ export class MCPRegistry {
       createdAt: Date.now(),
     };
 
-    const redisKey = `mcp:tenant:${tenantId}:servers`;
+    const redisKey = scopedRedisKey(`mcp:tenant:${tenantId}:servers`);
     await redis.hset(redisKey, { [serverId]: JSON.stringify(serverConfig) });
 
     return serverConfig;
@@ -71,7 +72,7 @@ export class MCPRegistry {
    * Retrieves a tenant-scoped MCP server config.
    */
   static async getServer(tenantId: string, serverId: string): Promise<MCPServerConfig | null> {
-    const redisKey = `mcp:tenant:${tenantId}:servers`;
+    const redisKey = scopedRedisKey(`mcp:tenant:${tenantId}:servers`);
     const raw = await redis.hget<string>(redisKey, serverId);
     if (!raw) return null;
     return typeof raw === 'string' ? JSON.parse(raw) : raw;
@@ -81,7 +82,7 @@ export class MCPRegistry {
    * Lists all MCP servers registered to a tenant.
    */
   static async listServers(tenantId: string): Promise<MCPServerConfig[]> {
-    const redisKey = `mcp:tenant:${tenantId}:servers`;
+    const redisKey = scopedRedisKey(`mcp:tenant:${tenantId}:servers`);
     const hashData = await redis.hgetall<Record<string, string | MCPServerConfig>>(redisKey);
     if (!hashData) return [];
 

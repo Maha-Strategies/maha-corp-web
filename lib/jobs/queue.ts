@@ -27,6 +27,7 @@ import { createHash } from 'node:crypto'
 import { redis } from '@/lib/redis'
 import { consumeAdditionalApiCredits, creditKeyById } from '@/lib/api-key'
 import { quoteJobCredits } from '@/lib/jobs/pricing'
+import { scopedRedisKey } from '@/lib/redis-namespace'
 import {
   createJobId,
   type JobKind,
@@ -43,11 +44,11 @@ const JOB_TTL_SECONDS = 604_800 // 7 days for a completed record
 const ZDR_JOB_TTL_SECONDS = 86_400 // 24 hours when the key is zero-data-retention
 const IDEMPOTENCY_TTL_SECONDS = 86_400
 
-export function jobDataKey(jobId: string) { return `job:data:${jobId}` }
-export function jobQueueKey(kind: JobKind) { return `job:queue:${kind}` }
-export const JOB_PENDING_ZSET = 'job:pending'
+export function jobDataKey(jobId: string) { return scopedRedisKey(`job:data:${jobId}`) }
+export function jobQueueKey(kind: JobKind) { return scopedRedisKey(`job:queue:${kind}`) }
+export const JOB_PENDING_ZSET = scopedRedisKey('job:pending')
 function idempotencyKey(keyId: string, clientRequestId: string) {
-  return `job:idem:${keyId}:${createHash('sha256').update(clientRequestId).digest('hex').slice(0, 32)}`
+  return scopedRedisKey(`job:idem:${keyId}:${createHash('sha256').update(clientRequestId).digest('hex').slice(0, 32)}`)
 }
 
 // ---------------------------------------------------------------------------
