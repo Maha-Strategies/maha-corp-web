@@ -23,6 +23,14 @@ async function checkoutPriceId(stripe: Stripe, sessionId: string) {
   return priceId(lines.data[0].price)
 }
 
+export async function isInvoicePaymentIntent(stripe: Pick<Stripe, 'invoicePayments'>, paymentIntentId: string) {
+  const payments = await stripe.invoicePayments.list({
+    payment: { type: 'payment_intent', payment_intent: paymentIntentId },
+    limit: 1,
+  })
+  return payments.data.length > 0
+}
+
 async function processPurchase(input: { stripe: Stripe; event: Stripe.Event; session: Stripe.Checkout.Session; payloadHash: string }) {
   const checkoutId = input.session.metadata?.api_credit_checkout_id
   const intentId = paymentIntentId(input.session.payment_intent)
@@ -85,7 +93,12 @@ async function processSubscriptionLifecycle(event: Stripe.Event, subscription: S
   return response({ received: true })
 }
 
-async function processReversal(input: { event: Stripe.Event; reversalId: string; paymentIntentId: string; amount: number; currency: string; payloadHash: string }) {
+async function processReversal(input: { stripe: Stripe; event: Stripe.Event; reversalId: string; paymentIntentId: string; amount: number; currency: string; payloadHash: string }) {
+  // Invoice-backed payments (including tenant subscriptions) do not have an
+  // API-credit checkout row. Subscription cancellation owns the monthly-credit
+  // transition, so acknowledge these refunds instead of asking Stripe to retry
+  // the prepaid-credit reversal RPC forever.
+  if (await isInvoicePaymentIntent(input.stripe, input.paymentIntentId)) return response({ received: true, ignored: true })
   const ledger = createAgentInquiryLedger(); if (!ledger) return response({ error: 'Billing ledger unavailable.' }, 503)
   const { data, error } = await ledger.rpc('process_api_credit_reversal_event', {
     p_event_id: input.event.id, p_event_type: input.event.type, p_payload_hash: input.payloadHash,
@@ -138,7 +151,7 @@ export async function POST(request: Request) {
       const refund = event.data.object as Stripe.Refund
       const intentId = paymentIntentId(refund.payment_intent)
       if (refund.status !== 'succeeded' || !intentId || !refund.id || !refund.amount || !refund.currency) return response({ received: true, ignored: true })
-      return processReversal({ event, reversalId: refund.id, paymentIntentId: intentId, amount: refund.amount, currency: refund.currency, payloadHash: stripeWebhookPayloadHash(raw) })
+      return processReversal({ stripe, event, reversalId: refund.id, paymentIntentId: intentId, amount: refund.amount, currency: refund.currency, payloadHash: stripeWebhookPayloadHash(raw) })
     }
     if (event.type === 'charge.dispute.closed') {
       const dispute = event.data.object as Stripe.Dispute
@@ -146,7 +159,7 @@ export async function POST(request: Request) {
       const charge = typeof dispute.charge === 'string' ? await stripe.charges.retrieve(dispute.charge) : dispute.charge
       const intentId = paymentIntentId(charge?.payment_intent)
       if (!intentId) return response({ error: 'Stripe reversal dependency is not ready.' }, 503)
-      return processReversal({ event, reversalId: dispute.id, paymentIntentId: intentId, amount: dispute.amount, currency: dispute.currency, payloadHash: stripeWebhookPayloadHash(raw) })
+      return processReversal({ stripe, event, reversalId: dispute.id, paymentIntentId: intentId, amount: dispute.amount, currency: dispute.currency, payloadHash: stripeWebhookPayloadHash(raw) })
     }
     return response({ received: true, ignored: true })
   } catch (error) {

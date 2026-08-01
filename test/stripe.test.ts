@@ -3,7 +3,7 @@ import test from 'node:test'
 
 import Stripe from 'stripe'
 
-import { POST } from '../app/api/webhooks/stripe/route.ts'
+import { isInvoicePaymentIntent, POST } from '../app/api/webhooks/stripe/route.ts'
 
 const secret = 'sk_test_123'
 const webhookSecret = 'whsec_test_123'
@@ -47,6 +47,29 @@ test('Stripe webhook ignores non-billing events without touching the credit ledg
     if (originalRedisUrl === undefined) delete process.env.UPSTASH_REDIS_REST_URL; else process.env.UPSTASH_REDIS_REST_URL = originalRedisUrl
     if (originalRedisToken === undefined) delete process.env.UPSTASH_REDIS_REST_TOKEN; else process.env.UPSTASH_REDIS_REST_TOKEN = originalRedisToken
   }
+})
+
+test('invoice-backed PaymentIntents are classified before prepaid-credit reversal', async () => {
+  const calls: unknown[] = []
+  const stripe = {
+    invoicePayments: {
+      list: async (params: unknown) => {
+        calls.push(params)
+        return { data: [{ id: 'inpay_123' }] }
+      },
+    },
+  } as unknown as Pick<Stripe, 'invoicePayments'>
+
+  assert.equal(await isInvoicePaymentIntent(stripe, 'pi_subscription_123'), true)
+  assert.deepEqual(calls, [{
+    payment: { type: 'payment_intent', payment_intent: 'pi_subscription_123' },
+    limit: 1,
+  }])
+
+  const prepaid = {
+    invoicePayments: { list: async () => ({ data: [] }) },
+  } as unknown as Pick<Stripe, 'invoicePayments'>
+  assert.equal(await isInvoicePaymentIntent(prepaid, 'pi_prepaid_123'), false)
 })
 
 test('invoice.paid resets only the tenant subscription bucket exactly once', async () => {
