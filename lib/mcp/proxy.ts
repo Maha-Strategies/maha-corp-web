@@ -2,6 +2,7 @@ import crypto from 'crypto';
 import { Redis } from '@upstash/redis';
 import { MCPServerConfig, JSONRPCRequest, JSONRPCResponse, MCPProxyContext } from './types';
 import { decryptSecret } from './registry';
+import { assertPublicUpstreamHost } from '../mcp-gateway';
 
 const redis = Redis.fromEnv();
 
@@ -22,7 +23,8 @@ export class MCPProxyEngine {
       };
     }
 
-    const targetUrl = new URL(serverConfig.baseUrl.replace(/\/$/, '') + '/rpc');
+    await assertPublicUpstreamHost(serverConfig.baseUrl)
+    const targetUrl = new URL(serverConfig.baseUrl);
     const headers: Record<string, string> = {
       'Content-Type': 'application/json',
       'X-Maha-Tenant-ID': ctx.tenantId,

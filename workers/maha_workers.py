@@ -213,3 +213,34 @@ def job_dispatch_entrypoint(request_data: Dict[str, Any], authorization: str = H
     else: raise HTTPException(status_code=400, detail=f"Unsupported job kind: {kind}")
 
     return {"status": "accepted", "jobId": request_data.get("jobId"), "kind": kind}
+
+
+# Dedicated staging-only JSON-RPC upstream for the protected-preview smoke
+# test. It runs in Modal, not in the Vercel preview being tested, and requires
+# a separate bearer token so it cannot become an open echo service.
+@app.function(image=gpu_image, secrets=[maha_secrets])
+@modal.fastapi_endpoint(method="POST")
+def e2e_mcp_upstream(request_data: Dict[str, Any], authorization: str = Header(default=None)):
+    expected_token = os.environ.get("MAHA_E2E_MCP_TOKEN", "")
+    if not authorization or not authorization.startswith("Bearer "):
+        raise HTTPException(status_code=401, detail="Unauthorized")
+    token = authorization.split("Bearer ", 1)[1].strip()
+    if not expected_token or not hmac.compare_digest(token, expected_token):
+        raise HTTPException(status_code=403, detail="Forbidden")
+
+    request_id = request_data.get("id")
+    method = request_data.get("method")
+    if request_data.get("jsonrpc") != "2.0" or not isinstance(method, str) or not method:
+        return {"jsonrpc": "2.0", "id": request_id, "error": {"code": -32600, "message": "Invalid JSON-RPC 2.0 request"}}
+
+    # Return only deterministic, non-sensitive request metadata. In
+    # particular, never echo Authorization or any upstream credential.
+    return {
+        "jsonrpc": "2.0",
+        "id": request_id,
+        "result": {
+            "authenticated": True,
+            "method": method,
+            "params": request_data.get("params", {}),
+        },
+    }

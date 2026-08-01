@@ -1,16 +1,24 @@
 import { Redis } from '@upstash/redis';
 import crypto from 'crypto';
 import { MCPServerConfig } from './types';
+import { assertPublicUpstreamHost, parsePublicUpstreamUrl } from '../mcp-gateway';
 
 const redis = Redis.fromEnv();
-const ENCRYPTION_KEY = process.env.MCP_ENCRYPTION_KEY || 'default-32-char-secret-key-000000'; // Must be 32 bytes
+
+function encryptionKey(): Buffer {
+  const value = process.env.MCP_ENCRYPTION_KEY
+  if (!value) throw new Error('MCP encryption is not configured.')
+  if (/^[a-f0-9]{64}$/i.test(value)) return Buffer.from(value, 'hex')
+  if (Buffer.byteLength(value, 'utf8') === 32) return Buffer.from(value, 'utf8')
+  throw new Error('MCP encryption is not configured.')
+}
 
 /**
  * Encrypts upstream API secrets prior to storing in Redis.
  */
 export function encryptSecret(plainText: string): string {
   const iv = crypto.randomBytes(16);
-  const cipher = crypto.createCipheriv('aes-256-gcm', Buffer.from(ENCRYPTION_KEY.slice(0, 32)), iv);
+  const cipher = crypto.createCipheriv('aes-256-gcm', encryptionKey(), iv);
   let encrypted = cipher.update(plainText, 'utf8', 'hex');
   encrypted += cipher.final('hex');
   const authTag = cipher.getAuthTag().toString('hex');
@@ -22,9 +30,11 @@ export function encryptSecret(plainText: string): string {
  */
 export function decryptSecret(cipherText: string): string {
   const [ivHex, authTagHex, encryptedText] = cipherText.split(':');
+  if (!ivHex || !authTagHex || !encryptedText || !/^[a-f0-9]+$/i.test(ivHex) || !/^[a-f0-9]+$/i.test(authTagHex) || !/^[a-f0-9]+$/i.test(encryptedText)) throw new Error('Stored MCP credential is malformed.')
   const iv = Buffer.from(ivHex, 'hex');
   const authTag = Buffer.from(authTagHex, 'hex');
-  const decipher = crypto.createDecipheriv('aes-256-gcm', Buffer.from(ENCRYPTION_KEY.slice(0, 32)), iv);
+  if (iv.length !== 16 || authTag.length !== 16) throw new Error('Stored MCP credential is malformed.')
+  const decipher = crypto.createDecipheriv('aes-256-gcm', encryptionKey(), iv);
   decipher.setAuthTag(authTag);
   let decrypted = decipher.update(encryptedText, 'hex', 'utf8');
   decrypted += decipher.final('utf8');
@@ -40,9 +50,11 @@ export class MCPRegistry {
     config: Omit<MCPServerConfig, 'id' | 'tenantId' | 'createdAt'>,
     rawSecret?: string
   ): Promise<MCPServerConfig> {
+    const baseUrl = parsePublicUpstreamUrl(config.baseUrl)
+    await assertPublicUpstreamHost(baseUrl)
     const serverId = `mcp_srv_${crypto.randomBytes(8).toString('hex')}`;
     const serverConfig: MCPServerConfig = {
-      ...config,
+      ...config, baseUrl,
       id: serverId,
       tenantId,
       authSecretEncrypted: rawSecret ? encryptSecret(rawSecret) : undefined,
