@@ -10,7 +10,7 @@ function json(body: unknown, status: number) {
 export async function GET(request: Request) {
   // proxy.ts authenticates /api/v1 routes and overwrites this with the
   // verified key id. The caller cannot select a different tenant namespace.
-  const tenantId = request.headers.get('x-maha-api-key-id')
+  const tenantId = request.headers.get('x-maha-tenant-id')
   if (!tenantId) return json({ error: { code: 'api_key_required', message: 'Provide Authorization: Bearer <API_KEY>.' } }, 401)
 
   try {

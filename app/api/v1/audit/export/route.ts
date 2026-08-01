@@ -22,7 +22,7 @@ function timeBound(value: string | null, fallback: number): number | null {
 export async function GET(request: NextRequest) {
   // proxy.ts authenticates every /api/v1 route and overwrites this value with
   // the verified key id. The client never selects the ledger namespace.
-  const clientId = request.headers.get('x-maha-api-key-id')
+  const clientId = request.headers.get('x-maha-tenant-id')
   if (!clientId) return json({ error: { code: 'api_key_required', message: 'Provide Authorization: Bearer <API_KEY>.' } }, 401)
 
   const { searchParams } = new URL(request.url)

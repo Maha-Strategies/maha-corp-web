@@ -2,7 +2,8 @@
 export type ApiKeyTier = 'starter' | 'builder' | 'scale' | 'enterprise'
 // Upstash hash values are strings. Parse them at this boundary so downstream
 // authorization and balance code only handles the correctly typed record.
-export type ApiKeyRecord = { key_id: string; email_hash: string; balance_credits: number; tier: ApiKeyTier; status: 'active'; rate_limit_per_minute: number; zero_data_retention: boolean; created_at: string }
+export type ApiKeyRecord = { key_id: string; tenant_id: string; email_hash: string; balance_credits: number; tier: ApiKeyTier; status: 'active'; rate_limit_per_minute: number; zero_data_retention: boolean; created_at: string }
+export type TenantCreditBalance = { tenantId: string; subscriptionCredits: number; topupCredits: number; balanceCredits: number; tier: ApiKeyTier; rateLimitPerMinute: number }
 
 const STARTER_CREDITS = 20_000
 const KEY_PREFIX = 'mha_live_'
@@ -63,7 +64,9 @@ async function redis<T>(command: string, args: unknown[]): Promise<T> {
 }
 
 export function apiKeyDataRedisKey(hash: string) { return `key:data:${hash}` }
+export function tenantDataRedisKey(tenantId: string) { return `tenant:data:${tenantId}` }
 function idKey(id: string) { return `key:id:${id}` }
+function tenantIdForKeyId(keyId: string) { return `tenant_${keyId}` }
 function hashResultToRecord(result: Record<string, string> | string[] | null): Record<string, string> | null {
   if (!result) return null
   if (!Array.isArray(result)) return result
@@ -91,7 +94,7 @@ export async function getApiKeyRecord(hash: string): Promise<ApiKeyRecord | null
     return null
   }
   return {
-    key_id: rawRecord.key_id,
+    key_id: rawRecord.key_id, tenant_id: rawRecord.tenant_id || tenantIdForKeyId(rawRecord.key_id),
     email_hash: rawRecord.email_hash,
     balance_credits: balanceCredits,
     tier: rawRecord.tier as ApiKeyTier,
@@ -106,13 +109,26 @@ export async function getApiKeyRecordForRawKey(rawKey: string): Promise<ApiKeyRe
   return getApiKeyRecord(hash)
 }
 
+export async function ensureTenantForKey(record: ApiKeyRecord, hash: string): Promise<TenantCreditBalance> {
+  const script = `local key=KEYS[1] local tenant=KEYS[2] if redis.call('EXISTS',key)==0 or redis.call('HGET',key,'status')~='active' then return false end if redis.call('EXISTS',tenant)==0 then redis.call('HSET',tenant,'subscription_credits','0','topup_credits',redis.call('HGET',key,'balance_credits') or '0','tier',redis.call('HGET',key,'tier'),'rate_limit_per_minute',redis.call('HGET',key,'rate_limit_per_minute'),'auto_topup_enabled','false','created_at',ARGV[1]) end redis.call('HSET',key,'tenant_id',ARGV[2]) return {redis.call('HGET',tenant,'subscription_credits'),redis.call('HGET',tenant,'topup_credits'),redis.call('HGET',tenant,'tier'),redis.call('HGET',tenant,'rate_limit_per_minute')}`
+  const values = await redis<string[] | false>('EVAL', [script, 2, apiKeyDataRedisKey(hash), tenantDataRedisKey(record.tenant_id), new Date().toISOString(), record.tenant_id])
+  if (!values || values.length !== 4) throw new UpstashRedisError('upstash_response_invalid', 'Tenant migration returned invalid data.')
+  const subscriptionCredits = Number(values[0]); const topupCredits = Number(values[1]); const rateLimitPerMinute = Number(values[3])
+  if (!Number.isFinite(subscriptionCredits) || !Number.isFinite(topupCredits) || !Number.isFinite(rateLimitPerMinute)) throw new UpstashRedisError('upstash_response_invalid', 'Tenant balance is invalid.')
+  return { tenantId: record.tenant_id, subscriptionCredits, topupCredits, balanceCredits: subscriptionCredits + topupCredits, tier: values[2] as ApiKeyTier, rateLimitPerMinute }
+}
+
+export async function tenantBalanceForRawKey(rawKey: string) { const hash = await hashApiKey(rawKey); const record = await getApiKeyRecord(hash); return record ? ensureTenantForKey(record, hash) : null }
+
 export function zeroDataRetentionEnabled(record: Pick<ApiKeyRecord, 'zero_data_retention'>) { return record.zero_data_retention }
 
 export async function provisionStarterKey(email: string) {
   const key = createApiKey(); const keyId = createApiKeyId(); const hash = await hashApiKey(key); const emailHash = await sha256(email); const createdAt = new Date().toISOString()
   const redisKey = apiKeyDataRedisKey(hash)
   // HSET and the HGETALL read above intentionally operate on this exact key.
-  await redis('HSET', [redisKey, 'key_id', keyId, 'email_hash', emailHash, 'balance_credits', String(STARTER_CREDITS), 'tier', 'starter', 'status', 'active', 'rate_limit_per_minute', '30', 'zero_data_retention', 'true', 'created_at', createdAt])
+  const tenantId = tenantIdForKeyId(keyId)
+  await redis('HSET', [redisKey, 'key_id', keyId, 'tenant_id', tenantId, 'email_hash', emailHash, 'balance_credits', String(STARTER_CREDITS), 'tier', 'starter', 'status', 'active', 'rate_limit_per_minute', '30', 'zero_data_retention', 'true', 'created_at', createdAt])
+  await redis('HSET', [tenantDataRedisKey(tenantId), 'subscription_credits', '0', 'topup_credits', String(STARTER_CREDITS), 'tier', 'starter', 'rate_limit_per_minute', '30', 'auto_topup_enabled', 'false', 'created_at', createdAt])
   await redis('SET', [idKey(keyId), hash, 'EX', YEAR_SECONDS, 'NX'])
   return { key, keyId, balanceCredits: STARTER_CREDITS, tier: 'starter' as const }
 }
@@ -125,7 +141,7 @@ if redis.call('EXISTS', previous) == 0 or redis.call('HGET', previous, 'status')
 if redis.call('EXISTS', replacement) ~= 0 then return -1 end
 local keyId = redis.call('HGET', previous, 'key_id')
 if not keyId then return -1 end
-local fields = {'email_hash', 'balance_credits', 'tier', 'rate_limit_per_minute', 'zero_data_retention', 'created_at'}
+local fields = {'tenant_id', 'email_hash', 'balance_credits', 'tier', 'rate_limit_per_minute', 'zero_data_retention', 'created_at'}
 for _, field in ipairs(fields) do
   local value = redis.call('HGET', previous, field)
   if value == false then return -1 end
@@ -163,56 +179,71 @@ export async function revokeApiKey(rawKey: string) {
   return (await redis<number>('EVAL', [REVOKE_KEY_SCRIPT, 1, apiKeyDataRedisKey(hash), new Date().toISOString()])) === 1
 }
 
-export type ApiAccess = { kind: 'authorized'; keyId: string; tier: ApiKeyTier; zeroDataRetention: boolean; remainingCredits: number; remainingRequests: number } | { kind: 'unauthorized' | 'depleted' | 'rate_limited' | 'unavailable' }
+export type ApiAccess = { kind: 'authorized'; keyId: string; tenantId: string; tier: ApiKeyTier; zeroDataRetention: boolean; remainingCredits: number; remainingRequests: number } | { kind: 'unauthorized' | 'depleted' | 'rate_limited' | 'unavailable' }
 const CONSUME_SCRIPT = `
 local record = KEYS[1]
-local window = KEYS[2]
+local tenant = KEYS[2]
+local window = KEYS[3]
 if redis.call('EXISTS', record) == 0 then return {0, -1, -1} end
 if redis.call('HGET', record, 'status') ~= 'active' then return {0, -1, -1} end
-local balance = tonumber(redis.call('HGET', record, 'balance_credits') or '0')
+local subscription = tonumber(redis.call('HGET', tenant, 'subscription_credits') or '0')
+local topup = tonumber(redis.call('HGET', tenant, 'topup_credits') or '0')
+local balance = subscription + topup
 if balance <= 0 then return {2, 0, -1} end
-local limit = tonumber(redis.call('HGET', record, 'rate_limit_per_minute') or ARGV[1])
+local limit = tonumber(redis.call('HGET', tenant, 'rate_limit_per_minute') or ARGV[1])
 local current = redis.call('INCR', window)
 if current == 1 then redis.call('EXPIRE', window, 60) end
 if current > limit then return {3, balance, 0} end
-local remaining = redis.call('HINCRBY', record, 'balance_credits', -1)
+if subscription > 0 then redis.call('HINCRBY', tenant, 'subscription_credits', -1) else redis.call('HINCRBY', tenant, 'topup_credits', -1) end
+local remaining = balance - 1
 return {1, remaining, limit - current}
 `
 export async function authorizeAndConsumeApiUnit(rawKey: string): Promise<ApiAccess> {
   if (!apiKeyServiceConfigured()) return { kind: 'unavailable' }
-  try { const key = canonicalApiKey(rawKey); const hash = await hashApiKey(key); const bucket = Math.floor(Date.now() / 60_000); const result = await redis<number[]>('EVAL', [CONSUME_SCRIPT, 2, apiKeyDataRedisKey(hash), `key:rate:${hash}:${bucket}`, 30]); const [code, credits, requests] = result
-    if (code === 1) { const record = await getApiKeyRecord(hash); return record ? { kind: 'authorized', keyId: record.key_id, tier: record.tier, zeroDataRetention: zeroDataRetentionEnabled(record), remainingCredits: credits, remainingRequests: requests } : { kind: 'unavailable' } }
+  try { const key = canonicalApiKey(rawKey); const hash = await hashApiKey(key); const record = await getApiKeyRecord(hash); if (!record) return { kind: 'unauthorized' }; const tenant = await ensureTenantForKey(record, hash); const bucket = Math.floor(Date.now() / 60_000); const result = await redis<number[]>('EVAL', [CONSUME_SCRIPT, 3, apiKeyDataRedisKey(hash), tenantDataRedisKey(tenant.tenantId), `tenant:rate:${tenant.tenantId}:${bucket}`, tenant.rateLimitPerMinute]); const [code, credits, requests] = result
+    if (code === 1) return { kind: 'authorized', keyId: record.key_id, tenantId: tenant.tenantId, tier: tenant.tier, zeroDataRetention: zeroDataRetentionEnabled(record), remainingCredits: credits, remainingRequests: requests }
     if (code === 2) return { kind: 'depleted' }; if (code === 3) return { kind: 'rate_limited' }; return { kind: 'unauthorized' }
   } catch { return { kind: 'unavailable' } }
 }
 export async function consumeProvisioningLimit(ip: string) { if (!apiKeyServiceConfigured()) throw new ApiKeyConfigurationError(); const digest = await sha256(ip); const bucket = Math.floor(Date.now() / 3_600_000); const count = await redis<number>('INCR', [`key:provision:${digest}:${bucket}`]); if (count === 1) await redis('EXPIRE', [`key:provision:${digest}:${bucket}`, 3600]); return count <= 3 }
 export async function keyHashForId(keyId: string) { return redis<string | null>('GET', [idKey(keyId)]) }
+async function tenantForKeyId(keyId: string) {
+  const hash = await keyHashForId(keyId); if (!hash) return null
+  const record = await getApiKeyRecord(hash); if (!record) return null
+  return { hash, record, tenant: await ensureTenantForKey(record, hash) }
+}
 const ADDITIONAL_CREDIT_SCRIPT = `
-local record = KEYS[1]
+local tenant = KEYS[1]
 local credits = tonumber(ARGV[1])
-if redis.call('EXISTS', record) == 0 then return -2 end
-local balance = tonumber(redis.call('HGET', record, 'balance_credits') or '0')
+if redis.call('EXISTS', tenant) == 0 then return -2 end
+local subscription = tonumber(redis.call('HGET', tenant, 'subscription_credits') or '0')
+local topup = tonumber(redis.call('HGET', tenant, 'topup_credits') or '0')
+local balance = subscription + topup
 if balance < credits then return -1 end
-return redis.call('HINCRBY', record, 'balance_credits', -credits)
+local fromSubscription = math.min(subscription, credits)
+if fromSubscription > 0 then redis.call('HINCRBY', tenant, 'subscription_credits', -fromSubscription) end
+local fromTopup = credits - fromSubscription
+if fromTopup > 0 then redis.call('HINCRBY', tenant, 'topup_credits', -fromTopup) end
+return balance - credits
 `
 export async function consumeAdditionalApiCredits(keyId: string, credits: number) {
   if (!Number.isInteger(credits) || credits < 0) throw new Error('credits must be a non-negative integer.')
   if (credits === 0) return { kind: 'charged' as const, remainingCredits: null }
-  const hash = await keyHashForId(keyId)
-  if (!hash) return { kind: 'unavailable' as const }
-  const result = await redis<number>('EVAL', [ADDITIONAL_CREDIT_SCRIPT, 1, apiKeyDataRedisKey(hash), String(credits)])
+  const resolved = await tenantForKeyId(keyId)
+  if (!resolved) return { kind: 'unavailable' as const }
+  const result = await redis<number>('EVAL', [ADDITIONAL_CREDIT_SCRIPT, 1, tenantDataRedisKey(resolved.tenant.tenantId), String(credits)])
   if (result === -1) return { kind: 'depleted' as const }
   if (result === -2) return { kind: 'unavailable' as const }
   return { kind: 'charged' as const, remainingCredits: result }
 }
-export async function creditKeyById(keyId: string, credits: number) { const hash = await keyHashForId(keyId); if (!hash) throw new Error('API key does not exist.'); return redis<number>('HINCRBY', [apiKeyDataRedisKey(hash), 'balance_credits', credits]) }
+export async function creditKeyById(keyId: string, credits: number) { const resolved = await tenantForKeyId(keyId); if (!resolved) throw new Error('API key does not exist.'); return redis<number>('HINCRBY', [tenantDataRedisKey(resolved.tenant.tenantId), 'topup_credits', credits]) }
 // Keep Stripe event claims permanently: a completed payment must never credit
 // twice merely because a provider retries after the usual webhook window.
-export async function creditKeyOnce(eventId: string, keyId: string, credits: number) { const hash = await keyHashForId(keyId); if (!hash) throw new Error('API key does not exist.'); const script = `if redis.call('SET', KEYS[1], '1', 'NX') then return redis.call('HINCRBY', KEYS[2], 'balance_credits', ARGV[1]) end return false`; return redis<number | false>('EVAL', [script, 2, `stripe:event:${eventId}`, apiKeyDataRedisKey(hash), String(credits)]) }
+export async function creditKeyOnce(eventId: string, keyId: string, credits: number) { const resolved = await tenantForKeyId(keyId); if (!resolved) throw new Error('API key does not exist.'); const script = `if redis.call('SET', KEYS[1], '1', 'NX') then return redis.call('HINCRBY', KEYS[2], 'topup_credits', ARGV[1]) end return false`; return redis<number | false>('EVAL', [script, 2, `stripe:event:${eventId}`, tenantDataRedisKey(resolved.tenant.tenantId), String(credits)]) }
 export async function reverseKeyCreditsOnce(eventId: string, keyId: string, credits: number) {
   if (!Number.isInteger(credits) || credits < 0) throw new Error('credits must be a non-negative integer.')
-  const hash = await keyHashForId(keyId); if (!hash) throw new Error('API key does not exist.')
-  const script = `if redis.call('SET', KEYS[1], '1', 'NX') then local balance=tonumber(redis.call('HGET', KEYS[2], 'balance_credits') or '0'); local requested=tonumber(ARGV[1]); if balance<requested then redis.call('HSET', KEYS[2], 'balance_credits', '0', 'status', 'suspended'); return {1,0,1} end return {1,redis.call('HINCRBY', KEYS[2], 'balance_credits', -requested),0} end return {0,tonumber(redis.call('HGET', KEYS[2], 'balance_credits') or '0'),redis.call('HGET', KEYS[2], 'status') == 'suspended' and 1 or 0}`
-  const result = await redis<number[]>('EVAL', [script, 2, `stripe:reversal:${eventId}`, apiKeyDataRedisKey(hash), String(credits)])
+  const resolved = await tenantForKeyId(keyId); if (!resolved) throw new Error('API key does not exist.')
+  const script = `if redis.call('SET', KEYS[1], '1', 'NX') then local topup=tonumber(redis.call('HGET', KEYS[2], 'topup_credits') or '0'); local requested=tonumber(ARGV[1]); if topup<requested then redis.call('HSET', KEYS[2], 'topup_credits', '0', 'status', 'suspended'); return {1,0,1} end return {1,redis.call('HINCRBY', KEYS[2], 'topup_credits', -requested),0} end return {0,tonumber(redis.call('HGET', KEYS[2], 'topup_credits') or '0'),redis.call('HGET', KEYS[2], 'status') == 'suspended' and 1 or 0}`
+  const result = await redis<number[]>('EVAL', [script, 2, `stripe:reversal:${eventId}`, tenantDataRedisKey(resolved.tenant.tenantId), String(credits)])
   return { applied: result[0] === 1, balanceCredits: result[1], suspended: result[2] === 1 }
 }
