@@ -138,7 +138,7 @@ export async function bindTenantSubscription(input: { tenantId: string; customer
 export async function setTenantSubscriptionStatus(tenantId: string, status: string) { await redis('HSET', [tenantDataRedisKey(tenantId), 'subscription_status', status]) }
 
 export async function endTenantSubscription(tenantId: string, subscriptionId: string) {
-  const script = `if redis.call('HGET',KEYS[1],'stripe_subscription_id')==ARGV[1] then redis.call('HSET',KEYS[1],'subscription_status','canceled','subscription_credits','0','auto_topup_enabled','false','auto_topup_pending','false'); return 1 end return 0`
+  const script = `if redis.call('HGET',KEYS[1],'stripe_subscription_id')==ARGV[1] then redis.call('HSET',KEYS[1],'subscription_status','canceled','subscription_credits','0','tier','starter','rate_limit_per_minute','30','auto_topup_enabled','false','auto_topup_pending','false'); return 1 end return 0`
   return (await redis<number>('EVAL', [script, 1, tenantDataRedisKey(tenantId), subscriptionId])) === 1
 }
 
