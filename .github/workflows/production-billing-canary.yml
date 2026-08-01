@@ -1,0 +1,60 @@
+name: Production billing canary
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: production-billing-canary
+  cancel-in-progress: false
+
+jobs:
+  create-checkout:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    environment:
+      name: production-canary
+      url: ${{ vars.PRODUCTION_CANARY_BASE_URL }}
+    env:
+      CANARY_BASE_URL: ${{ vars.PRODUCTION_CANARY_BASE_URL }}
+      CANARY_API_KEY: ${{ secrets.PRODUCTION_CANARY_API_KEY }}
+      CLIENT_REQUEST_ID: billing_canary_${{ github.run_id }}
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Create Builder Checkout
+        run: |
+          node --input-type=module <<'NODE'
+          import { writeFile } from 'node:fs/promises'
+
+          const response = await fetch(`${process.env.CANARY_BASE_URL}/api/v1/billing/subscription`, {
+            method: 'POST',
+            headers: {
+              Authorization: `Bearer ${process.env.CANARY_API_KEY}`,
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ tier: 'builder', clientRequestId: process.env.CLIENT_REQUEST_ID }),
+          })
+          const result = await response.json().catch(() => null)
+          if (!response.ok || typeof result?.url !== 'string') {
+            throw new Error(`Builder Checkout creation failed with HTTP ${response.status}.`)
+          }
+          const checkoutUrl = new URL(result.url)
+          if (checkoutUrl.protocol !== 'https:' || checkoutUrl.hostname !== 'checkout.stripe.com') {
+            throw new Error('Builder Checkout returned an untrusted URL.')
+          }
+          await writeFile(`${process.env.RUNNER_TEMP}/checkout-url.txt`, `${checkoutUrl.href}\n`, { mode: 0o600 })
+          NODE
+      - name: Upload protected Checkout link
+        uses: actions/upload-artifact@v4
+        with:
+          name: production-builder-checkout
+          path: ${{ runner.temp }}/checkout-url.txt
+          if-no-files-found: error
+          retention-days: 1
