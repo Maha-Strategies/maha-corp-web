@@ -130,6 +130,18 @@ export const openApiDocument = {
         responses: { '200': { description: 'Current prepaid API-key balance and non-secret key identifier.', content: { 'application/json': { schema: { type: 'object', required: ['api_key_id', 'balance_credits', 'tier'], properties: { api_key_id: { type: 'string', description: 'Non-secret identifier for this authenticated API key.' }, balance_credits: { type: 'integer', minimum: 0 }, tier: { type: 'string', enum: ['starter', 'builder', 'scale', 'enterprise'] } } } } } }, '401': errorResponse('Missing or invalid API key.'), '503': errorResponse('API-key service unavailable.') },
       },
     },
+    '/api/v1/keys/rotate': {
+      post: {
+        tags: ['Self-service API Keys'], operationId: 'rotateCurrentApiKey', summary: 'Rotate the current API key without changing its balance or key ID', security: [{ credential: [] }],
+        responses: { '201': { description: 'Replacement API key disclosed exactly once. The prior raw key is immediately revoked.', content: { 'application/json': { schema: { type: 'object', required: ['apiKey', 'apiKeyId', 'balanceCredits', 'tier', 'disclosure'], properties: { apiKey: { type: 'string', description: 'Replacement secret shown once; store it securely.' }, apiKeyId: { type: 'string' }, balanceCredits: { type: 'integer', minimum: 0 }, tier: { type: 'string', enum: ['starter', 'builder', 'scale', 'enterprise'] }, disclosure: { type: 'string' } } } } } }, '401': errorResponse('Missing, invalid, or inactive API key.'), '503': errorResponse('Key rotation unavailable.') },
+      },
+    },
+    '/api/v1/keys/revoke': {
+      post: {
+        tags: ['Self-service API Keys'], operationId: 'revokeCurrentApiKey', summary: 'Permanently revoke the current API key', security: [{ credential: [] }],
+        responses: { '200': { description: 'Key permanently revoked.', content: { 'application/json': { schema: { type: 'object', required: ['revoked'], properties: { revoked: { const: true } } } } } }, '401': errorResponse('Missing, invalid, or inactive API key.'), '503': errorResponse('Key revocation unavailable.') },
+      },
+    },
     '/api/v1/compress': {
       post: {
         tags: ['Maha SDK'], operationId: 'compressContext', summary: 'Compile a bounded context pack through the lightweight SDK contract',

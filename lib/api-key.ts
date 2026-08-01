@@ -117,6 +117,52 @@ export async function provisionStarterKey(email: string) {
   return { key, keyId, balanceCredits: STARTER_CREDITS, tier: 'starter' as const }
 }
 
+const ROTATE_KEY_SCRIPT = `
+local previous = KEYS[1]
+local replacement = KEYS[2]
+local keyIndex = KEYS[3]
+if redis.call('EXISTS', previous) == 0 or redis.call('HGET', previous, 'status') ~= 'active' then return 0 end
+if redis.call('EXISTS', replacement) ~= 0 then return -1 end
+local keyId = redis.call('HGET', previous, 'key_id')
+if not keyId then return -1 end
+local fields = {'email_hash', 'balance_credits', 'tier', 'rate_limit_per_minute', 'zero_data_retention', 'created_at'}
+for _, field in ipairs(fields) do
+  local value = redis.call('HGET', previous, field)
+  if value == false then return -1 end
+  redis.call('HSET', replacement, field, value)
+end
+redis.call('HSET', replacement, 'key_id', keyId, 'status', 'active', 'rotated_at', ARGV[1])
+redis.call('HSET', previous, 'status', 'revoked', 'revoked_at', ARGV[1], 'rotated_to', ARGV[2])
+local ttl = redis.call('TTL', keyIndex)
+if ttl > 0 then redis.call('SET', keyIndex, ARGV[3], 'EX', ttl) else redis.call('SET', keyIndex, ARGV[3]) end
+return 1
+`
+
+const REVOKE_KEY_SCRIPT = `
+local record = KEYS[1]
+if redis.call('EXISTS', record) == 0 or redis.call('HGET', record, 'status') ~= 'active' then return 0 end
+redis.call('HSET', record, 'status', 'revoked', 'revoked_at', ARGV[1])
+return 1
+`
+
+/** Replaces the raw credential while preserving its key ID, balance, and tenant-scoped resources. */
+export async function rotateApiKey(rawKey: string) {
+  const previousHash = await hashApiKey(rawKey)
+  const replacement = createApiKey()
+  const replacementHash = await hashApiKey(replacement)
+  const record = await getApiKeyRecord(previousHash)
+  if (!record) return null
+  const result = await redis<number>('EVAL', [ROTATE_KEY_SCRIPT, 3, apiKeyDataRedisKey(previousHash), apiKeyDataRedisKey(replacementHash), idKey(record.key_id), new Date().toISOString(), replacementHash, replacementHash])
+  if (result !== 1) return null
+  return { key: replacement, keyId: record.key_id, balanceCredits: record.balance_credits, tier: record.tier }
+}
+
+/** Permanently disables the supplied raw credential. A revoked key cannot be reactivated. */
+export async function revokeApiKey(rawKey: string) {
+  const hash = await hashApiKey(rawKey)
+  return (await redis<number>('EVAL', [REVOKE_KEY_SCRIPT, 1, apiKeyDataRedisKey(hash), new Date().toISOString()])) === 1
+}
+
 export type ApiAccess = { kind: 'authorized'; keyId: string; tier: ApiKeyTier; zeroDataRetention: boolean; remainingCredits: number; remainingRequests: number } | { kind: 'unauthorized' | 'depleted' | 'rate_limited' | 'unavailable' }
 const CONSUME_SCRIPT = `
 local record = KEYS[1]

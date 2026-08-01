@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
 
-import { apiKeyDataRedisKey, apiKeyServiceConfigured, bearerApiKey, canonicalApiKey, consumeProvisioningLimit, getApiKeyRecordForRawKey, hashApiKey, provisionStarterKey } from '../lib/api-key.ts'
+import { apiKeyDataRedisKey, apiKeyServiceConfigured, bearerApiKey, canonicalApiKey, consumeProvisioningLimit, getApiKeyRecordForRawKey, hashApiKey, provisionStarterKey, revokeApiKey, rotateApiKey } from '../lib/api-key.ts'
 
 const originalUrl = process.env.UPSTASH_REDIS_REST_URL
 const originalToken = process.env.UPSTASH_REDIS_REST_TOKEN
@@ -91,6 +91,44 @@ test('flat Upstash HGETALL responses are normalized before API-key validation', 
     assert.equal(record?.balance_credits, 20_000)
     assert.equal(record?.rate_limit_per_minute, 30)
     assert.equal(record?.zero_data_retention, true)
+  } finally {
+    globalThis.fetch = originalFetch
+    if (originalUrl === undefined) delete process.env.UPSTASH_REDIS_REST_URL; else process.env.UPSTASH_REDIS_REST_URL = originalUrl
+    if (originalToken === undefined) delete process.env.UPSTASH_REDIS_REST_TOKEN; else process.env.UPSTASH_REDIS_REST_TOKEN = originalToken
+  }
+})
+
+test('rotation preserves the stable key ID while atomically replacing the raw-key record', async () => {
+  const commands: unknown[][] = []
+  try {
+    process.env.UPSTASH_REDIS_REST_URL = 'https://example.upstash.io'
+    process.env.UPSTASH_REDIS_REST_TOKEN = 'token-value'
+    globalThis.fetch = async (_input, init) => {
+      const command = JSON.parse(String(init?.body)) as unknown[]
+      commands.push(command)
+      return new Response(JSON.stringify({ result: command[0] === 'HGETALL' ? { key_id: 'key_stable', email_hash: 'hash', balance_credits: '20000', tier: 'starter', status: 'active', rate_limit_per_minute: '30', zero_data_retention: 'true', created_at: 'now' } : 1 }), { status: 200 })
+    }
+    const rotated = await rotateApiKey('mha_live_rotate-me')
+    assert.equal(rotated?.keyId, 'key_stable')
+    assert.equal(rotated?.balanceCredits, 20_000)
+    assert.ok(rotated?.key.startsWith('mha_live_'))
+    assert.equal(commands[1][0], 'EVAL')
+    assert.equal(commands[1][5], `key:id:${rotated?.keyId}`)
+  } finally {
+    globalThis.fetch = originalFetch
+    if (originalUrl === undefined) delete process.env.UPSTASH_REDIS_REST_URL; else process.env.UPSTASH_REDIS_REST_URL = originalUrl
+    if (originalToken === undefined) delete process.env.UPSTASH_REDIS_REST_TOKEN; else process.env.UPSTASH_REDIS_REST_TOKEN = originalToken
+  }
+})
+
+test('revocation uses one atomic Redis transition', async () => {
+  const commands: unknown[][] = []
+  try {
+    process.env.UPSTASH_REDIS_REST_URL = 'https://example.upstash.io'
+    process.env.UPSTASH_REDIS_REST_TOKEN = 'token-value'
+    globalThis.fetch = async (_input, init) => { const command = JSON.parse(String(init?.body)) as unknown[]; commands.push(command); return new Response(JSON.stringify({ result: 1 }), { status: 200 }) }
+    assert.equal(await revokeApiKey('mha_live_revoke-me'), true)
+    assert.equal(commands[0][0], 'EVAL')
   } finally {
     globalThis.fetch = originalFetch
     if (originalUrl === undefined) delete process.env.UPSTASH_REDIS_REST_URL; else process.env.UPSTASH_REDIS_REST_URL = originalUrl

@@ -2,6 +2,8 @@ export const SELF_MANAGED_KEY_ROUTES = new Set([
   '/api/v1/keys/generate',
   '/api/v1/keys/balance',
   '/api/v1/keys/checkout',
+  '/api/v1/keys/rotate',
+  '/api/v1/keys/revoke',
   // Called by our GPU compute workers, which hold no customer API key and must
   // not consume a customer's request unit. The route authenticates itself with
   // an HMAC signature over the raw body — see app/api/v1/jobs/webhook/route.ts.

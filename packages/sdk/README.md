@@ -1,17 +1,17 @@
-# @maha/sdk
+# @mahastrategies/sdk
 
 The zero-dependency TypeScript client for the Maha Strategies API. It runs in Node.js, Bun, Deno, browsers, and Edge runtimes.
 
 ## Install
 
 ```sh
-npm install @maha/sdk
+npm install @mahastrategies/sdk
 ```
 
 ## Use
 
 ```ts
-import { MahaClient } from '@maha/sdk'
+import { MahaClient } from '@mahastrategies/sdk'
 
 const maha = new MahaClient({ apiKey: process.env.MAHA_API_KEY! })
 
