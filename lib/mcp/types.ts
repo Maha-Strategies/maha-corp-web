@@ -8,6 +8,36 @@ export interface MCPServerConfig {
   allowedEngines: Array<'tensor-opt' | 'geometric-ai' | 'qec-compiler' | 'landscape-opt' | '*'>;
   status: 'active' | 'suspended';
   createdAt: number;
+  discovery: MCPToolDiscovery;
+}
+
+export interface MCPToolDefinition {
+  name: string;
+  description?: string;
+  inputSchema: Record<string, unknown>;
+}
+
+export interface MCPToolDiscovery {
+  status: 'pending' | 'ready' | 'error';
+  tools: MCPToolDefinition[];
+  discoveredAt?: number;
+  error?: string;
+}
+
+export interface MCPServerSummary {
+  serverId: string;
+  name: string;
+  baseUrl: string;
+  createdAt: number;
+  status: 'active' | 'suspended';
+  discovery: MCPToolDiscovery;
+}
+
+export interface MCPSlaPolicy {
+  requestsPerMinute: number;
+  timeoutMs: number;
+  failureThreshold: number;
+  cooldownMs: number;
 }
 
 export interface JSONRPCRequest {
@@ -25,7 +55,7 @@ export interface JSONRPCResponse {
     message: string;
     data?: unknown;
   };
-  id: string | number;
+  id: string | number | null;
 }
 
 export interface MCPProxyContext {

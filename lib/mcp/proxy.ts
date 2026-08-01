@@ -1,9 +1,9 @@
 import crypto from 'crypto';
 import { Redis } from '@upstash/redis';
 import { MCPServerConfig, JSONRPCRequest, JSONRPCResponse, MCPProxyContext } from './types';
-import { decryptSecret } from './registry';
-import { assertPublicUpstreamHost } from '../mcp-gateway';
 import { scopedRedisKey } from '../redis-namespace';
+import { MCPControls } from './controls';
+import { prepareMcpUpstream, readBoundedUpstreamJson } from './upstream';
 
 const redis = Redis.fromEnv();
 
@@ -15,77 +15,81 @@ export class MCPProxyEngine {
     serverConfig: MCPServerConfig,
     rpcPayload: JSONRPCRequest,
     ctx: MCPProxyContext
-  ): Promise<JSONRPCResponse> {
+  ): Promise<{ body: JSONRPCResponse; status: number; retryAfterSeconds?: number }> {
     if (serverConfig.status !== 'active') {
       return {
-        jsonrpc: '2.0',
-        id: rpcPayload.id,
-        error: { code: -32600, message: 'Target MCP Upstream Server is suspended' }
+        status: 503,
+        body: { jsonrpc: '2.0', id: rpcPayload.id, error: { code: -32004, message: 'Target MCP Upstream Server is suspended' } },
       };
     }
 
-    await assertPublicUpstreamHost(serverConfig.baseUrl)
-    const targetUrl = new URL(serverConfig.baseUrl);
-    const headers: Record<string, string> = {
-      'Content-Type': 'application/json',
-      'X-Maha-Tenant-ID': ctx.tenantId,
-      'X-Maha-Trace-ID': ctx.traceId,
-      'X-Maha-Proxy-Timestamp': Date.now().toString(),
-    };
-
-    // Inject upstream credentials securely
-    if (serverConfig.authType === 'bearer' && serverConfig.authSecretEncrypted) {
-      const token = decryptSecret(serverConfig.authSecretEncrypted);
-      headers['Authorization'] = `Bearer ${token}`;
-    } else if (serverConfig.authType === 'hmac' && serverConfig.authSecretEncrypted) {
-      const secret = decryptSecret(serverConfig.authSecretEncrypted);
-      const signature = crypto
-        .createHmac('sha256', secret)
-        .update(`${ctx.traceId}:${JSON.stringify(rpcPayload)}`)
-        .digest('hex');
-      headers['X-Maha-HMAC-Signature'] = signature;
-    }
-
     const startTime = Date.now();
+    let phase: 'controls' | 'transport' | 'audit' = 'controls'
 
     try {
-      const response = await fetch(targetUrl.toString(), {
+      const policy = await MCPControls.getPolicy(ctx.tenantId)
+      const circuit = await MCPControls.beforeRequest(ctx.tenantId, serverConfig.id, policy)
+      if (!circuit.allowed) return {
+        status: 503,
+        retryAfterSeconds: circuit.retryAfterSeconds,
+        body: { jsonrpc: '2.0', id: rpcPayload.id, error: { code: -32003, message: 'Upstream circuit breaker is open' } },
+      }
+      const rate = await MCPControls.consumeRateLimit(ctx.tenantId, policy.requestsPerMinute)
+      if (!rate.allowed) return {
+        status: 429,
+        retryAfterSeconds: rate.retryAfterSeconds,
+        body: { jsonrpc: '2.0', id: rpcPayload.id, error: { code: -32002, message: 'Tenant MCP request limit reached' } },
+      }
+      phase = 'transport'
+      const upstream = await prepareMcpUpstream(serverConfig, rpcPayload, ctx)
+      const response = await fetch(upstream.url, {
         method: 'POST',
-        headers,
+        headers: upstream.headers,
         body: JSON.stringify(rpcPayload),
-        signal: AbortSignal.timeout(10000) // 10-second standard timeout for upstream tools
+        signal: AbortSignal.timeout(policy.timeoutMs),
+        redirect: 'manual',
       });
 
       if (!response.ok) {
-        const errText = await response.text();
+        if (response.status >= 500 || response.status >= 300 && response.status < 400) await MCPControls.recordFailure(ctx.tenantId, serverConfig.id, policy)
+        else await MCPControls.recordSuccess(ctx.tenantId, serverConfig.id)
         return {
-          jsonrpc: '2.0',
-          id: rpcPayload.id,
-          error: {
-            code: -32603,
-            message: `Upstream MCP HTTP Error (${response.status})`,
-            data: errText
-          }
+          status: 502,
+          body: { jsonrpc: '2.0', id: rpcPayload.id, error: { code: -32603, message: `Upstream MCP HTTP Error (${response.status})` } },
         };
       }
 
-      const jsonRpcData: JSONRPCResponse = await response.json();
+      const jsonRpcData = await readBoundedUpstreamJson(response) as JSONRPCResponse;
+      if (!jsonRpcData || jsonRpcData.jsonrpc !== '2.0' || jsonRpcData.id !== rpcPayload.id) throw new Error('Upstream returned an invalid JSON-RPC response.')
+      await MCPControls.recordSuccess(ctx.tenantId, serverConfig.id)
+      phase = 'audit'
 
       // Log invocation to Upstash Redis double-entry audit ledger
       await this.recordMCPUsage(ctx, serverConfig, rpcPayload, Date.now() - startTime);
 
-      return jsonRpcData;
+      return { body: jsonRpcData, status: 200 };
 
     } catch (err: unknown) {
-      const errorMessage = err instanceof Error ? err.message : 'Unknown proxy error';
-      return {
-        jsonrpc: '2.0',
-        id: rpcPayload.id,
-        error: {
-          code: -32603,
-          message: 'Upstream MCP Gateway Timeout / Connection Refused',
-          data: errorMessage
+      if (phase === 'transport') {
+        try {
+          const policy = await MCPControls.getPolicy(ctx.tenantId)
+          await MCPControls.recordFailure(ctx.tenantId, serverConfig.id, policy)
+        } catch (controlError) {
+          console.error('[MCP Circuit State Error]:', controlError instanceof Error ? controlError.name : 'unknown_error')
         }
+      }
+      const errorMessage = err instanceof Error ? err.message : 'Unknown proxy error';
+      if (phase === 'controls') return {
+        status: 503,
+        body: { jsonrpc: '2.0', id: rpcPayload.id, error: { code: -32005, message: 'MCP SLA controls are temporarily unavailable' } },
+      }
+      if (phase === 'audit') return {
+        status: 503,
+        body: { jsonrpc: '2.0', id: rpcPayload.id, error: { code: -32006, message: 'MCP usage audit could not be committed' } },
+      }
+      return {
+        status: errorMessage.includes('timed out') || errorMessage.includes('aborted') ? 504 : 502,
+        body: { jsonrpc: '2.0', id: rpcPayload.id, error: { code: -32603, message: 'Upstream MCP Gateway Timeout / Connection Refused' } },
       };
     }
   }

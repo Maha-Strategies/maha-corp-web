@@ -1,6 +1,6 @@
 import { Redis } from '@upstash/redis';
 import crypto from 'crypto';
-import { MCPServerConfig } from './types';
+import { MCPServerConfig, MCPServerSummary, MCPToolDiscovery } from './types';
 import { assertPublicUpstreamHost, parsePublicUpstreamUrl } from '../mcp-gateway';
 import { scopedRedisKey } from '../redis-namespace';
 
@@ -48,7 +48,7 @@ export class MCPRegistry {
    */
   static async registerServer(
     tenantId: string,
-    config: Omit<MCPServerConfig, 'id' | 'tenantId' | 'createdAt'>,
+    config: Omit<MCPServerConfig, 'id' | 'tenantId' | 'createdAt' | 'discovery'>,
     rawSecret?: string
   ): Promise<MCPServerConfig> {
     const baseUrl = parsePublicUpstreamUrl(config.baseUrl)
@@ -60,6 +60,7 @@ export class MCPRegistry {
       tenantId,
       authSecretEncrypted: rawSecret ? encryptSecret(rawSecret) : undefined,
       createdAt: Date.now(),
+      discovery: { status: 'pending', tools: [] },
     };
 
     const redisKey = scopedRedisKey(`mcp:tenant:${tenantId}:servers`);
@@ -75,7 +76,7 @@ export class MCPRegistry {
     const redisKey = scopedRedisKey(`mcp:tenant:${tenantId}:servers`);
     const raw = await redis.hget<string>(redisKey, serverId);
     if (!raw) return null;
-    return typeof raw === 'string' ? JSON.parse(raw) : raw;
+    return this.normalize(typeof raw === 'string' ? JSON.parse(raw) : raw);
   }
 
   /**
@@ -86,8 +87,31 @@ export class MCPRegistry {
     const hashData = await redis.hgetall<Record<string, string | MCPServerConfig>>(redisKey);
     if (!hashData) return [];
 
-    return Object.values(hashData).map((val) =>
+    return Object.values(hashData).map((val) => this.normalize(
       typeof val === 'string' ? JSON.parse(val) : val
-    );
+    ));
+  }
+
+  static async updateDiscovery(tenantId: string, serverId: string, discovery: MCPToolDiscovery): Promise<MCPServerConfig | null> {
+    const server = await this.getServer(tenantId, serverId)
+    if (!server) return null
+    const updated = { ...server, discovery }
+    await redis.hset(scopedRedisKey(`mcp:tenant:${tenantId}:servers`), { [serverId]: JSON.stringify(updated) })
+    return updated
+  }
+
+  static summarize(server: MCPServerConfig): MCPServerSummary {
+    return {
+      serverId: server.id,
+      name: server.name,
+      baseUrl: server.baseUrl,
+      createdAt: server.createdAt,
+      status: server.status,
+      discovery: server.discovery,
+    }
+  }
+
+  private static normalize(server: MCPServerConfig): MCPServerConfig {
+    return { ...server, discovery: server.discovery ?? { status: 'pending', tools: [] } }
   }
 }

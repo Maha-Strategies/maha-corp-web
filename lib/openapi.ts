@@ -320,7 +320,7 @@ export const openApiDocument = {
       post: {
         tags: ['Enterprise MCP Gateway'],
         summary: 'Register Upstream MCP Server',
-        description: 'Stores and encrypts upstream credentials for enterprise MCP tool routing.',
+        description: 'Stores and encrypts upstream credentials, then calls tools/list to persist a validated tool inventory. Encrypted credential material is never returned.',
         security: [{ credential: [] }],
         requestBody: {
           required: true,
@@ -370,10 +370,17 @@ export const openApiDocument = {
                   type: 'object', required: ['servers'], properties: {
                     servers: {
                       type: 'array', items: {
-                        type: 'object', required: ['serverId', 'name', 'baseUrl', 'createdAt', 'status'],
+                        type: 'object', required: ['serverId', 'name', 'baseUrl', 'createdAt', 'status', 'discovery'],
                         properties: {
                           serverId: { type: 'string' }, name: { type: 'string' }, baseUrl: { type: 'string', format: 'uri' },
                           createdAt: { type: 'integer' }, status: { type: 'string', enum: ['active', 'suspended'] },
+                          discovery: {
+                            type: 'object', required: ['status', 'tools'], properties: {
+                              status: { type: 'string', enum: ['pending', 'ready', 'error'] },
+                              discoveredAt: { type: 'integer' }, error: { type: 'string' },
+                              tools: { type: 'array', items: { type: 'object', required: ['name', 'inputSchema'], properties: { name: { type: 'string' }, description: { type: 'string' }, inputSchema: { type: 'object' } } } },
+                            },
+                          },
                         },
                       },
                     },
@@ -385,6 +392,35 @@ export const openApiDocument = {
           '401': errorResponse('Missing or invalid API key.'),
           '503': errorResponse('MCP registry unavailable.'),
         },
+      },
+    },
+    '/api/v1/mcp/servers/{serverId}/discover': {
+      post: {
+        tags: ['Enterprise MCP Gateway'],
+        summary: 'Refresh MCP Tool Discovery',
+        description: 'Calls tools/list on a tenant-owned upstream, validates the bounded JSON-RPC response, and persists credential-safe tool metadata.',
+        security: [{ credential: [] }],
+        parameters: [{ name: 'serverId', in: 'path', required: true, schema: { type: 'string', pattern: '^mcp_srv_[a-f0-9]{16}$' } }],
+        responses: {
+          '200': { description: 'Validated tool inventory persisted.', content: { 'application/json': { schema: { type: 'object', required: ['server'], properties: { server: { type: 'object' } } } } } },
+          '400': errorResponse('Invalid MCP server ID.'),
+          '401': errorResponse('Missing or invalid API key.'),
+          '404': errorResponse('MCP server not registered to this tenant.'),
+          '429': errorResponse('Tenant MCP request limit reached.'),
+          '502': errorResponse('Upstream discovery failed or returned invalid data.'),
+          '503': errorResponse('Upstream circuit breaker open.'),
+        },
+      },
+    },
+    '/api/v1/mcp/settings': {
+      get: {
+        tags: ['Enterprise MCP Gateway'], summary: 'Get Tenant MCP SLA Controls', security: [{ credential: [] }],
+        responses: { '200': { description: 'Current tenant MCP controls.', content: { 'application/json': { schema: { type: 'object' } } } }, '401': errorResponse('Missing or invalid API key.'), '503': errorResponse('MCP controls unavailable.') },
+      },
+      post: {
+        tags: ['Enterprise MCP Gateway'], summary: 'Set Tenant MCP SLA Controls', security: [{ credential: [] }],
+        requestBody: { required: true, content: { 'application/json': { schema: { type: 'object', required: ['requestsPerMinute', 'timeoutMs', 'failureThreshold', 'cooldownMs'], properties: { requestsPerMinute: { type: 'integer', minimum: 1, maximum: 600 }, timeoutMs: { type: 'integer', minimum: 1000, maximum: 30000 }, failureThreshold: { type: 'integer', minimum: 1, maximum: 10 }, cooldownMs: { type: 'integer', minimum: 5000, maximum: 300000 } } } } } },
+        responses: { '200': { description: 'Updated tenant MCP controls.', content: { 'application/json': { schema: { type: 'object' } } } }, '400': errorResponse('Invalid MCP SLA controls.'), '401': errorResponse('Missing or invalid API key.'), '415': errorResponse('Content-Type must be application/json.'), '503': errorResponse('MCP controls unavailable.') },
       },
     },
     '/api/v1/mcp/gateway/{serverId}': {
@@ -423,8 +459,13 @@ export const openApiDocument = {
             }
           },
           '400': errorResponse('Invalid JSON-RPC 2.0 payload.'),
+          '413': errorResponse('MCP request exceeds 64 KB.'),
           '401': errorResponse('Missing or invalid API key.'),
           '404': errorResponse('Target MCP Server not registered for this tenant.'),
+          '429': errorResponse('Tenant MCP request limit reached.'),
+          '502': errorResponse('Upstream MCP server returned an error or invalid response.'),
+          '503': errorResponse('Upstream circuit breaker open or server suspended.'),
+          '504': errorResponse('Upstream MCP timeout.'),
           '500': errorResponse('Internal MCP Gateway Processing Failure.'),
         },
       },

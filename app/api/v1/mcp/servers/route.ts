@@ -15,13 +15,7 @@ export async function GET(request: Request) {
 
   try {
     const servers = await MCPRegistry.listServers(tenantId)
-    return json({ servers: servers.map((server) => ({
-      serverId: server.id,
-      name: server.name,
-      baseUrl: server.baseUrl,
-      createdAt: server.createdAt,
-      status: server.status,
-    })) }, 200)
+    return json({ servers: servers.map(MCPRegistry.summarize) }, 200)
   } catch (error) {
     console.error('[MCP_SERVERS_LIST_ERROR]', error instanceof Error ? error.name : 'unknown_error')
     return json({ error: { code: 'mcp_registry_unavailable', message: 'Registered MCP servers could not be loaded.' } }, 503)
