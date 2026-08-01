@@ -1,4 +1,6 @@
 /** Edge-safe API key, prepaid-credit, and Upstash REST helpers. */
+import { scopedRedisKey } from './redis-namespace.ts'
+
 export type ApiKeyTier = 'starter' | 'builder' | 'scale' | 'enterprise'
 // Upstash hash values are strings. Parse them at this boundary so downstream
 // authorization and balance code only handles the correctly typed record.
@@ -64,9 +66,9 @@ async function redis<T>(command: string, args: unknown[]): Promise<T> {
   return data.result
 }
 
-export function apiKeyDataRedisKey(hash: string) { return `key:data:${hash}` }
-export function tenantDataRedisKey(tenantId: string) { return `tenant:data:${tenantId}` }
-function idKey(id: string) { return `key:id:${id}` }
+export function apiKeyDataRedisKey(hash: string) { return scopedRedisKey(`key:data:${hash}`) }
+export function tenantDataRedisKey(tenantId: string) { return scopedRedisKey(`tenant:data:${tenantId}`) }
+function idKey(id: string) { return scopedRedisKey(`key:id:${id}`) }
 function tenantIdForKeyId(keyId: string) { return `tenant_${keyId}` }
 function hashResultToRecord(result: Record<string, string> | string[] | null): Record<string, string> | null {
   if (!result) return null
@@ -145,7 +147,7 @@ export async function endTenantSubscription(tenantId: string, subscriptionId: st
 export async function resetTenantSubscriptionCreditsOnce(input: { eventId: string; tenantId: string; tier: 'builder' | 'scale'; subscriptionId: string; periodEnd: number }) {
   const credits = input.tier === 'builder' ? 10_000 : 60_000
   const script = `if redis.call('SET',KEYS[1],ARGV[5],'NX') then redis.call('HSET',KEYS[2],'subscription_credits',ARGV[1],'tier',ARGV[2],'stripe_subscription_id',ARGV[3],'subscription_status','active','subscription_period_end',ARGV[4]); return 1 end return 0`
-  return (await redis<number>('EVAL', [script, 2, `stripe:subscription-grant:${input.subscriptionId}:${input.periodEnd}`, tenantDataRedisKey(input.tenantId), credits, input.tier, input.subscriptionId, input.periodEnd, input.eventId])) === 1
+  return (await redis<number>('EVAL', [script, 2, scopedRedisKey(`stripe:subscription-grant:${input.subscriptionId}:${input.periodEnd}`), tenantDataRedisKey(input.tenantId), credits, input.tier, input.subscriptionId, input.periodEnd, input.eventId])) === 1
 }
 
 export async function setTenantAutoTopup(rawKey: string, enabled: boolean) {
@@ -157,7 +159,7 @@ export async function setTenantAutoTopup(rawKey: string, enabled: boolean) {
 
 export async function creditTenantTopupOnce(eventId: string, tenantId: string, attemptId: string, credits: number) {
   const script = `if redis.call('HGET',KEYS[2],'auto_topup_pending')~='true' or redis.call('HGET',KEYS[2],'auto_topup_attempt_id')~=ARGV[2] then return -1 end if redis.call('SET',KEYS[1],'1','NX') then redis.call('HSET',KEYS[2],'auto_topup_pending','false'); return redis.call('HINCRBY',KEYS[2],'topup_credits',ARGV[1]) end return false`
-  return redis<number | false>('EVAL', [script, 2, `stripe:auto-topup:${eventId}`, tenantDataRedisKey(tenantId), credits, attemptId])
+  return redis<number | false>('EVAL', [script, 2, scopedRedisKey(`stripe:auto-topup:${eventId}`), tenantDataRedisKey(tenantId), credits, attemptId])
 }
 
 export async function claimTenantAutoTopup(tenantId: string, attemptId: string) {
@@ -250,12 +252,12 @@ return {1, remaining, limit - current}
 `
 export async function authorizeAndConsumeApiUnit(rawKey: string): Promise<ApiAccess> {
   if (!apiKeyServiceConfigured()) return { kind: 'unavailable' }
-  try { const key = canonicalApiKey(rawKey); const hash = await hashApiKey(key); const record = await getApiKeyRecord(hash); if (!record) return { kind: 'unauthorized' }; const tenant = await ensureTenantForKey(record, hash); const bucket = Math.floor(Date.now() / 60_000); const result = await redis<number[]>('EVAL', [CONSUME_SCRIPT, 3, apiKeyDataRedisKey(hash), tenantDataRedisKey(tenant.tenantId), `tenant:rate:${tenant.tenantId}:${bucket}`, tenant.rateLimitPerMinute]); const [code, credits, requests] = result
+  try { const key = canonicalApiKey(rawKey); const hash = await hashApiKey(key); const record = await getApiKeyRecord(hash); if (!record) return { kind: 'unauthorized' }; const tenant = await ensureTenantForKey(record, hash); const bucket = Math.floor(Date.now() / 60_000); const result = await redis<number[]>('EVAL', [CONSUME_SCRIPT, 3, apiKeyDataRedisKey(hash), tenantDataRedisKey(tenant.tenantId), scopedRedisKey(`tenant:rate:${tenant.tenantId}:${bucket}`), tenant.rateLimitPerMinute]); const [code, credits, requests] = result
     if (code === 1) return { kind: 'authorized', keyId: record.key_id, tenantId: tenant.tenantId, tier: tenant.tier, zeroDataRetention: zeroDataRetentionEnabled(record), remainingCredits: credits, remainingRequests: requests }
     if (code === 2) return { kind: 'depleted' }; if (code === 3) return { kind: 'rate_limited' }; return { kind: 'unauthorized' }
   } catch { return { kind: 'unavailable' } }
 }
-export async function consumeProvisioningLimit(ip: string) { if (!apiKeyServiceConfigured()) throw new ApiKeyConfigurationError(); const digest = await sha256(ip); const bucket = Math.floor(Date.now() / 3_600_000); const count = await redis<number>('INCR', [`key:provision:${digest}:${bucket}`]); if (count === 1) await redis('EXPIRE', [`key:provision:${digest}:${bucket}`, 3600]); return count <= 3 }
+export async function consumeProvisioningLimit(ip: string) { if (!apiKeyServiceConfigured()) throw new ApiKeyConfigurationError(); const digest = await sha256(ip); const bucket = Math.floor(Date.now() / 3_600_000); const key = scopedRedisKey(`key:provision:${digest}:${bucket}`); const count = await redis<number>('INCR', [key]); if (count === 1) await redis('EXPIRE', [key, 3600]); return count <= 3 }
 export async function keyHashForId(keyId: string) { return redis<string | null>('GET', [idKey(keyId)]) }
 async function tenantForKeyId(keyId: string) {
   const hash = await keyHashForId(keyId); if (!hash) return null
@@ -289,11 +291,11 @@ export async function consumeAdditionalApiCredits(keyId: string, credits: number
 export async function creditKeyById(keyId: string, credits: number) { const resolved = await tenantForKeyId(keyId); if (!resolved) throw new Error('API key does not exist.'); return redis<number>('HINCRBY', [tenantDataRedisKey(resolved.tenant.tenantId), 'topup_credits', credits]) }
 // Keep Stripe event claims permanently: a completed payment must never credit
 // twice merely because a provider retries after the usual webhook window.
-export async function creditKeyOnce(eventId: string, keyId: string, credits: number) { const resolved = await tenantForKeyId(keyId); if (!resolved) throw new Error('API key does not exist.'); const script = `if redis.call('SET', KEYS[1], '1', 'NX') then return redis.call('HINCRBY', KEYS[2], 'topup_credits', ARGV[1]) end return false`; return redis<number | false>('EVAL', [script, 2, `stripe:event:${eventId}`, tenantDataRedisKey(resolved.tenant.tenantId), String(credits)]) }
+export async function creditKeyOnce(eventId: string, keyId: string, credits: number) { const resolved = await tenantForKeyId(keyId); if (!resolved) throw new Error('API key does not exist.'); const script = `if redis.call('SET', KEYS[1], '1', 'NX') then return redis.call('HINCRBY', KEYS[2], 'topup_credits', ARGV[1]) end return false`; return redis<number | false>('EVAL', [script, 2, scopedRedisKey(`stripe:event:${eventId}`), tenantDataRedisKey(resolved.tenant.tenantId), String(credits)]) }
 export async function reverseKeyCreditsOnce(eventId: string, keyId: string, credits: number) {
   if (!Number.isInteger(credits) || credits < 0) throw new Error('credits must be a non-negative integer.')
   const resolved = await tenantForKeyId(keyId); if (!resolved) throw new Error('API key does not exist.')
   const script = `if redis.call('SET', KEYS[1], '1', 'NX') then local topup=tonumber(redis.call('HGET', KEYS[2], 'topup_credits') or '0'); local requested=tonumber(ARGV[1]); if topup<requested then redis.call('HSET', KEYS[2], 'topup_credits', '0', 'status', 'suspended'); return {1,0,1} end return {1,redis.call('HINCRBY', KEYS[2], 'topup_credits', -requested),0} end return {0,tonumber(redis.call('HGET', KEYS[2], 'topup_credits') or '0'),redis.call('HGET', KEYS[2], 'status') == 'suspended' and 1 or 0}`
-  const result = await redis<number[]>('EVAL', [script, 2, `stripe:reversal:${eventId}`, tenantDataRedisKey(resolved.tenant.tenantId), String(credits)])
+  const result = await redis<number[]>('EVAL', [script, 2, scopedRedisKey(`stripe:reversal:${eventId}`), tenantDataRedisKey(resolved.tenant.tenantId), String(credits)])
   return { applied: result[0] === 1, balanceCredits: result[1], suspended: result[2] === 1 }
 }

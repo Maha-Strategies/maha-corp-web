@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { Redis } from '@upstash/redis'
 import { generateCSV, generatePDF, computeSequenceHash } from '@/lib/audit/exporter'
 import type { AuditLedgerEntry, AuditExportPayload } from '@/lib/audit/types'
+import { scopedRedisKey } from '@/lib/redis-namespace'
 
 export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
@@ -35,7 +36,7 @@ export async function GET(request: NextRequest) {
   try {
     // The Upstash client may deserialize JSON members before returning them;
     // accept both its object form and the raw string form used by Redis.
-    const rawEntries = await redis.zrange<Array<AuditLedgerEntry | string>>(`ledger:tenant:${clientId}:entries`, startTime, endTime, { byScore: true })
+    const rawEntries = await redis.zrange<Array<AuditLedgerEntry | string>>(scopedRedisKey(`ledger:tenant:${clientId}:entries`), startTime, endTime, { byScore: true })
     const entries: AuditLedgerEntry[] = rawEntries.map((item) => typeof item === 'string' ? JSON.parse(item) as AuditLedgerEntry : item)
     const timestamp = new Date().toISOString().replace(/[:.]/g, '-')
     if (format === 'csv') {

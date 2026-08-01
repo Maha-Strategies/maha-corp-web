@@ -1,4 +1,5 @@
 import { Redis } from '@upstash/redis'
+import { scopedRedisKey } from './redis-namespace.ts'
 
 type StoredApiKeyData = Record<string, unknown>
 
@@ -23,10 +24,10 @@ export const redis = new Redis({ url, token })
  * `key:data:<hash>`, so that path is the authoritative fallback.
  */
 export async function getApiKeyData(apiKeyId: string): Promise<StoredApiKeyData | null> {
-  const directRecord = await redis.hgetall<StoredApiKeyData>(`apiKey:${apiKeyId}`)
+  const directRecord = await redis.hgetall<StoredApiKeyData>(scopedRedisKey(`apiKey:${apiKeyId}`))
   if (directRecord) return directRecord
 
-  const keyHash = await redis.get<string>(`key:id:${apiKeyId}`)
+  const keyHash = await redis.get<string>(scopedRedisKey(`key:id:${apiKeyId}`))
   if (!keyHash) return null
-  return redis.hgetall<StoredApiKeyData>(`key:data:${keyHash}`)
+  return redis.hgetall<StoredApiKeyData>(scopedRedisKey(`key:data:${keyHash}`))
 }
