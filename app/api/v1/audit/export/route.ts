@@ -33,8 +33,10 @@ export async function GET(request: NextRequest) {
   if (startTime === null || endTime === null || startTime > endTime) return json({ error: { code: 'invalid_time_range', message: 'startTime and endTime must be valid epoch-millisecond values.' } }, 400)
 
   try {
-    const rawEntries = await redis.zrange<string[]>(`ledger:tenant:${clientId}:entries`, startTime, endTime, { byScore: true })
-    const entries: AuditLedgerEntry[] = rawEntries.map((item) => JSON.parse(item) as AuditLedgerEntry)
+    // The Upstash client may deserialize JSON members before returning them;
+    // accept both its object form and the raw string form used by Redis.
+    const rawEntries = await redis.zrange<Array<AuditLedgerEntry | string>>(`ledger:tenant:${clientId}:entries`, startTime, endTime, { byScore: true })
+    const entries: AuditLedgerEntry[] = rawEntries.map((item) => typeof item === 'string' ? JSON.parse(item) as AuditLedgerEntry : item)
     const timestamp = new Date().toISOString().replace(/[:.]/g, '-')
     if (format === 'csv') {
       return new NextResponse(generateCSV(entries), { headers: {
