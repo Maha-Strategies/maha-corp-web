@@ -1,4 +1,4 @@
-import { MahaClient } from '../lib/sdk/index'; 
+import { MahaClient } from '../lib/sdk/index.ts';
 
 const BASE_URL = process.env.TEST_API_URL || 'http://localhost:3000';
 const TEST_API_KEY = process.env.STAGING_API_KEY;
