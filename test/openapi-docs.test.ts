@@ -50,6 +50,7 @@ const PRIVATE_ROUTES = new Set([
   '/api/v1/jobs/[jobId]',
   '/api/v1/jobs/webhook',
   '/api/inbound-submissions',
+  '/api/internal/ops-alerts',
   '/api/integrations/base44/openapi',
   '/api/cron/inbound-digest',
   '/api/cron/job-reclaim',

@@ -3,6 +3,7 @@ import test from 'node:test'
 
 import { lowCreditAlertRequired, opsAlertConfig, signOpsAlert } from '../lib/observability/contracts.ts'
 import { observabilityReadiness } from '../lib/observability/readiness.ts'
+import { opsAlertEmail, receiveOpsAlert } from '../lib/observability/receiver.ts'
 import { mcpMethodClass } from '../lib/observability/telemetry.ts'
 import { scrubSentryPayload, sentryTraceSampleRate } from '../lib/observability/sentry.ts'
 
@@ -21,6 +22,40 @@ test('operations webhook signing is deterministic and low-credit threshold is st
   assert.match(signOpsAlert('{"test":true}', secret), /^sha256=[a-f0-9]{64}$/)
   assert.equal(lowCreditAlertRequired(999, 1_000), true)
   assert.equal(lowCreditAlertRequired(1_000, 1_000), false)
+})
+
+test('operations alert receiver authenticates the raw body and rejects replay windows', () => {
+  const occurredAt = '2026-08-01T16:30:00.000Z'
+  const body = JSON.stringify({
+    schema: 'maha.ops-alert.v1', event: 'tenant.low_credit', eventId: `alert_${'b'.repeat(32)}`,
+    occurredAt, tenantId: 'tenant_key_canary', data: { remainingCredits: 999, thresholdCredits: 1_000 },
+  })
+  const headers = new Headers({
+    'x-maha-alert-event': 'tenant.low_credit', 'x-maha-alert-id': `alert_${'b'.repeat(32)}`,
+    'x-maha-alert-signature': signOpsAlert(body, secret),
+  })
+  const alert = receiveOpsAlert(body, headers, secret, Date.parse(occurredAt) + 1_000)
+  assert.equal(alert.tenantId, 'tenant_key_canary')
+  assert.match(opsAlertEmail(alert).subject, /Low tenant credit balance/)
+  assert.throws(() => receiveOpsAlert(body, headers, secret, Date.parse(occurredAt) + 16 * 60 * 1_000), /delivery window/)
+  headers.set('x-maha-alert-id', `alert_${'c'.repeat(32)}`)
+  assert.throws(() => receiveOpsAlert(body, headers, secret, Date.parse(occurredAt)), /headers do not match/)
+})
+
+test('operations alert receiver rejects tampering and unbounded detail values', () => {
+  const occurredAt = '2026-08-01T16:30:00.000Z'
+  const body = JSON.stringify({
+    schema: 'maha.ops-alert.v1', event: 'mcp.upstream_connectivity_failure', eventId: `alert_${'d'.repeat(32)}`,
+    occurredAt, tenantId: 'tenant_canary', data: { failure: 'timeout' },
+  })
+  const headers = new Headers({
+    'x-maha-alert-event': 'mcp.upstream_connectivity_failure', 'x-maha-alert-id': `alert_${'d'.repeat(32)}`,
+    'x-maha-alert-signature': signOpsAlert(`${body} `, secret),
+  })
+  assert.throws(() => receiveOpsAlert(body, headers, secret, Date.parse(occurredAt)), /signature/)
+  const oversized = body.replace('timeout', 'x'.repeat(513))
+  headers.set('x-maha-alert-signature', signOpsAlert(oversized, secret))
+  assert.throws(() => receiveOpsAlert(oversized, headers, secret, Date.parse(occurredAt)), /invalid value/)
 })
 
 test('Sentry scrubber removes payload identity and query data while preserving route method', () => {
