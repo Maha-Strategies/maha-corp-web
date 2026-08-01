@@ -48,7 +48,7 @@ async function main() {
   // --- STEP 2: Dispatch Tool Call Through Gateway ---
   console.log('\n[2/4] Executing JSON-RPC tool call through MCP Gateway Proxy...');
   
-  const result = await maha.mcp.call<any>(
+  const result = await maha.mcp.call<{ authenticated?: boolean; method?: string }>(
     server.id,
     'tools/calculateRiskScore',
     { portfolioId: 'pf_8819', alpha: 0.05 }

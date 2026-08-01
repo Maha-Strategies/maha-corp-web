@@ -325,6 +325,38 @@ export const openApiDocument = {
         },
       },
     },
+    '/api/v1/mcp/servers': {
+      get: {
+        tags: ['Enterprise MCP Gateway'],
+        summary: 'List Registered MCP Servers',
+        description: 'Lists the authenticated API key’s registered MCP upstreams. Credentials and encrypted credential material are never returned.',
+        security: [{ credential: [] }],
+        responses: {
+          '200': {
+            description: 'Credential-safe MCP server summaries.',
+            content: {
+              'application/json': {
+                schema: {
+                  type: 'object', required: ['servers'], properties: {
+                    servers: {
+                      type: 'array', items: {
+                        type: 'object', required: ['serverId', 'name', 'baseUrl', 'createdAt', 'status'],
+                        properties: {
+                          serverId: { type: 'string' }, name: { type: 'string' }, baseUrl: { type: 'string', format: 'uri' },
+                          createdAt: { type: 'integer' }, status: { type: 'string', enum: ['active', 'suspended'] },
+                        },
+                      },
+                    },
+                  },
+                },
+              },
+            },
+          },
+          '401': errorResponse('Missing or invalid API key.'),
+          '503': errorResponse('MCP registry unavailable.'),
+        },
+      },
+    },
     '/api/v1/mcp/gateway/{serverId}': {
       post: {
         tags: ['Enterprise MCP Gateway'],

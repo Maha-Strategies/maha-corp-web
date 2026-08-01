@@ -4,11 +4,12 @@ export type ContextCompressResponse = { packId: string; context: string; metrics
 export type ProvenanceVerifyResponse = { claim_id: string; title: string; summary: string; status: 'VERIFIED' | 'SOURCED' | 'ILLUSTRATIVE' | 'UNVERIFIED'; latex_formulation: string; sources: string[]; tags: string[]; canonical_url: string }
 
 export type TensorOptRequest = { clientRequestId: string; problem: { formulation: 'qubo' | 'ising'; size?: number; termsUrl?: string; terms?: Array<{ i: number; j: number; weight: number }> }; solver?: { bondDimensionMax?: number; target_precision?: number; maxSweeps?: number; seed?: number } }
-export type TensorOptJobRecord = { jobId: string; kind: 'tensor-opt'; status: 'queued' | 'processing' | 'completed' | 'failed'; clientRequestId: string; inputHash: string; credits: { reserved: number; charged: number | null; refunded: number }; result?: { objectiveValue: number; assignment: number[]; bestBound?: number; provenOptimal?: boolean }; diagnostics?: { wallClockSeconds: number; bondDimensionUsed?: number; sweepsCompleted?: number; discardedWeight?: number; deviceClass: string }; error?: { code: string; message: string }; citations?: Array<any> }
+export type TensorOptJobRecord = { jobId: string; kind: 'tensor-opt'; status: 'queued' | 'processing' | 'completed' | 'failed'; clientRequestId: string; inputHash: string; credits: { reserved: number; charged: number | null; refunded: number }; result?: { objectiveValue: number; assignment: number[]; bestBound?: number; provenOptimal?: boolean }; diagnostics?: { wallClockSeconds: number; bondDimensionUsed?: number; sweepsCompleted?: number; discardedWeight?: number; deviceClass: string }; error?: { code: string; message: string }; citations?: unknown[] }
 
 // --- Audit & MCP Types ---
 export type AuditExportOptions = { format?: 'csv' | 'pdf'; startTime?: number; endTime?: number }
 export type RegisterMCPOptions = { name: string; baseUrl: string; authType: 'bearer' | 'hmac' | 'none'; secret?: string; allowedEngines?: Array<'tensor-opt' | 'geometric-ai' | 'qec-compiler' | 'landscape-opt' | '*'> }
+export type McpServerSummary = { serverId: string; name: string; baseUrl: string; createdAt: number; status: 'active' | 'suspended' }
 
 export class MahaApiError extends Error { readonly status: number; readonly code: string; constructor(status: number, code: string, message: string) { super(message); this.name = 'MahaApiError'; this.status = status; this.code = code } }
 export class MahaAuthenticationError extends MahaApiError { constructor(status: 401 | 402, code: string, message: string) { super(status, code, message); this.name = 'MahaAuthenticationError' } }
@@ -78,10 +79,15 @@ export class MahaClient {
   // --- Phase B: Enterprise MCP Gateway ---
 
   public readonly mcp = {
+    /** Lists the authenticated API key's registered MCP upstreams without credentials. */
+    listServers: async (): Promise<McpServerSummary[]> => {
+      const response = await this.request<{ servers: McpServerSummary[] }>('/api/v1/mcp/servers')
+      return response.servers
+    },
     /**
      * Registers a new tenant-scoped upstream MCP tool server.
      */
-    registerServer: async (options: RegisterMCPOptions): Promise<{ id: string; [key: string]: any }> => {
+    registerServer: async (options: RegisterMCPOptions): Promise<{ id: string } & Record<string, unknown>> => {
       return this.request('/api/v1/mcp/register', {
         method: 'POST',
         body: JSON.stringify(options),
