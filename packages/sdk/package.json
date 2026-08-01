@@ -1,12 +1,20 @@
 {
-  "name": "@maha/sdk",
+  "name": "@mahastrategies/sdk",
   "version": "0.1.0",
   "description": "Zero-dependency TypeScript client for the Maha Strategies API.",
-  "keywords": ["maha", "api", "sdk", "mcp", "provenance"],
+  "keywords": [
+    "maha",
+    "api",
+    "sdk",
+    "mcp",
+    "provenance"
+  ],
   "license": "MIT",
   "type": "module",
   "sideEffects": false,
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "exports": {

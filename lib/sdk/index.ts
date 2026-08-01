@@ -10,6 +10,7 @@ export type TensorOptJobRecord = { jobId: string; kind: 'tensor-opt'; status: 'q
 export type AuditExportOptions = { format?: 'csv' | 'pdf'; startTime?: number; endTime?: number }
 export type RegisterMCPOptions = { name: string; baseUrl: string; authType: 'bearer' | 'hmac' | 'none'; secret?: string; allowedEngines?: Array<'tensor-opt' | 'geometric-ai' | 'qec-compiler' | 'landscape-opt' | '*'> }
 export type McpServerSummary = { serverId: string; name: string; baseUrl: string; createdAt: number; status: 'active' | 'suspended' }
+export type RotatedApiKey = { apiKey: string; apiKeyId: string; balanceCredits: number; tier: 'starter' | 'builder' | 'scale' | 'enterprise'; disclosure: string }
 
 export class MahaApiError extends Error { readonly status: number; readonly code: string; constructor(status: number, code: string, message: string) { super(message); this.name = 'MahaApiError'; this.status = status; this.code = code } }
 export class MahaAuthenticationError extends MahaApiError { constructor(status: 401 | 402, code: string, message: string) { super(status, code, message); this.name = 'MahaAuthenticationError' } }
@@ -35,6 +36,10 @@ export class MahaClient {
   }
 
   async getBalance(): Promise<{ balance_credits: number }> { return this.request('/api/v1/keys/balance') }
+  /** Replaces this raw API credential while preserving its key ID and balance. The returned secret is disclosed once. */
+  async rotateApiKey(): Promise<RotatedApiKey> { return this.request('/api/v1/keys/rotate', { method: 'POST' }) }
+  /** Permanently disables this raw API credential. */
+  async revokeApiKey(): Promise<{ revoked: true }> { return this.request('/api/v1/keys/revoke', { method: 'POST' }) }
 
   // --- Phase A: Audit & Compliance ---
 

@@ -7,6 +7,8 @@ test('API proxy policy fails closed, allows only self-managed key routes, and ha
   assert.equal(apiProxyGate('/api/v1/compress', 'POST', false), 'unavailable') // proxy maps this to 503
   assert.equal(apiProxyGate('/api/v1/compress', 'POST', true), 'protected') // proxy applies 401/402 credential outcomes
   assert.equal(apiProxyGate('/api/v1/keys/generate', 'POST', false), 'self_managed')
+  assert.equal(apiProxyGate('/api/v1/keys/rotate', 'POST', false), 'self_managed')
+  assert.equal(apiProxyGate('/api/v1/keys/revoke', 'POST', false), 'self_managed')
   assert.equal(apiProxyGate('/api/v1/keys/future-route', 'POST', false), 'unavailable')
   assert.equal(apiProxyGate('/api/v1/compress', 'OPTIONS', false), 'preflight')
   assert.equal(apiAccessStatus('unavailable'), 503)
