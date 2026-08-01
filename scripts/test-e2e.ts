@@ -1,5 +1,6 @@
 import nextEnv from '@next/env';
-import { MahaClient } from '../lib/sdk/index.ts';
+import assert from 'node:assert/strict';
+import { MahaApiError, MahaClient } from '../lib/sdk/index.ts';
 
 // This script runs outside the Next.js runtime, so load .env.local and the
 // other standard Next environment files before reading test configuration.
@@ -44,6 +45,19 @@ async function main() {
   });
 
   console.log(`   ✔ MCP Server registered with ID: ${server.id}`);
+  if (server.discovery.status !== 'ready' || !server.discovery.tools.some((tool) => tool.name === 'calculateRiskScore')) throw new Error(`Automatic tools/list discovery failed: ${server.discovery.error ?? server.discovery.status}`);
+  console.log(`   ✔ tools/list discovered ${server.discovery.tools.length} validated tool(s).`);
+
+  const safeServers = await maha.mcp.listServers();
+  const registeredServer = safeServers.find((item) => item.serverId === server.id);
+  if (!registeredServer || JSON.stringify(registeredServer).includes('authSecret')) throw new Error('Credential-safe MCP server listing failed.');
+  const refreshed = await maha.mcp.discoverTools(server.id);
+  if (refreshed.discovery.status !== 'ready' || refreshed.discovery.tools.length !== server.discovery.tools.length) throw new Error('Manual tools/list refresh failed.');
+  console.log(`   ✔ Sanitized server listing and manual tools/list refresh passed.`);
+  const sla = await maha.mcp.getSettings();
+  const savedSla = await maha.mcp.updateSettings(sla);
+  if (JSON.stringify(savedSla) !== JSON.stringify(sla)) throw new Error('Tenant MCP SLA settings did not round-trip.');
+  console.log(`   ✔ Tenant SLA controls round-tripped (${sla.requestsPerMinute}/min, ${sla.timeoutMs}ms timeout).`);
 
   // --- STEP 2: Dispatch Tool Call Through Gateway ---
   console.log('\n[2/4] Executing JSON-RPC tool call through MCP Gateway Proxy...');
@@ -55,6 +69,35 @@ async function main() {
   );
   if (result?.authenticated !== true || result.method !== 'tools/calculateRiskScore') throw new Error('Gateway did not return the expected authenticated JSON-RPC result.');
   console.log(`   ✔ Gateway response received and JSON-RPC result asserted.`);
+
+  const originalSla = await maha.mcp.getSettings();
+  try {
+    await maha.mcp.updateSettings({ ...originalSla, timeoutMs: 1_000, failureThreshold: 1, cooldownMs: 5_000 });
+    await assert.rejects(
+      () => maha.mcp.call(server.id, 'test/timeout'),
+      (error: unknown) => error instanceof MahaApiError && error.status === 504,
+      'The controlled upstream timeout did not return HTTP 504.',
+    );
+    await assert.rejects(
+      () => maha.mcp.call(server.id, 'tools/calculateRiskScore'),
+      (error: unknown) => error instanceof MahaApiError && error.status === 503,
+      'The circuit breaker did not block the next upstream request.',
+    );
+    await new Promise((resolve) => setTimeout(resolve, 5_100));
+    const recovered = await maha.mcp.call<{ authenticated?: boolean }>(server.id, 'tools/calculateRiskScore');
+    if (recovered.authenticated !== true) throw new Error('The circuit breaker half-open probe did not recover.');
+
+    await maha.mcp.updateSettings({ ...originalSla, requestsPerMinute: 1 });
+    const limited = await fetch(`${BASE_URL}/api/v1/mcp/gateway/${encodeURIComponent(server.id)}`, {
+      method: 'POST',
+      headers: { Authorization: `Bearer ${TEST_API_KEY}`, 'Content-Type': 'application/json' },
+      body: JSON.stringify({ jsonrpc: '2.0', id: 'rate_limit_probe', method: 'tools/calculateRiskScore', params: {} }),
+    });
+    if (limited.status !== 429) throw new Error(`Tenant MCP rate limiter returned ${limited.status}, expected 429.`);
+    console.log(`   ✔ Timeout circuit opened, half-open recovery passed, and tenant rate limit returned 429.`);
+  } finally {
+    await maha.mcp.updateSettings(originalSla);
+  }
 
   // --- STEP 3: Export & Validate CSV Audit Trail ---
   console.log('\n[3/4] Exporting Provenance Ledger as CSV...');
@@ -81,7 +124,7 @@ async function main() {
     throw new Error(`Invalid PDF binary header received: ${pdfHeader}`);
   }
 
-  console.log('\n SUCCESS! All Phase A & Phase B endpoints verified end-to-end.');
+  console.log('\n SUCCESS! Audit export, MCP discovery, SLA controls, and gateway proxy verified end-to-end.');
 }
 
 main().catch((err) => {

@@ -1,5 +1,15 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { MCPRegistry } from '@/lib/mcp/registry';
+import { MCPDiscoveryService } from '@/lib/mcp/discovery';
+import type { MCPServerConfig, MCPToolDiscovery } from '@/lib/mcp/types';
+
+async function persistDiscovery(tenantId: string, server: MCPServerConfig, discovery: MCPToolDiscovery) {
+  try { return await MCPRegistry.updateDiscovery(tenantId, server.id, discovery) }
+  catch (error) {
+    console.error('[MCP Discovery Persistence Error]:', error instanceof Error ? error.name : 'unknown_error')
+    return null
+  }
+}
 
 export async function POST(req: NextRequest) {
   try {
@@ -7,7 +17,8 @@ export async function POST(req: NextRequest) {
     if (!tenantId) return NextResponse.json({ error: { code: 'api_key_required', message: 'Provide Authorization: Bearer <API_KEY>.' } }, { status: 401 });
     if (!req.headers.get('content-type')?.toLowerCase().startsWith('application/json')) return NextResponse.json({ error: { code: 'unsupported_media_type', message: 'Content-Type must be application/json.' } }, { status: 415 });
 
-    const body = await req.json();
+    let body: Record<string, unknown>
+    try { body = await req.json() as Record<string, unknown> } catch { return NextResponse.json({ error: { code: 'invalid_json', message: 'Request body must be valid JSON.' } }, { status: 400 }) }
     const { name, baseUrl, authType, secret, allowedEngines } = body;
 
     if (typeof name !== 'string' || name.trim().length < 2 || name.trim().length > 160 || typeof baseUrl !== 'string' || !authType) {
@@ -36,11 +47,31 @@ export async function POST(req: NextRequest) {
         allowedEngines: allowedEngines ?? ['*'],
         status: 'active',
       },
-      secret
+      typeof secret === 'string' ? secret : undefined
     );
 
-    return NextResponse.json(server, { status: 201 });
+    try {
+      const discovery = await MCPDiscoveryService.discover(server)
+      const updated = await persistDiscovery(tenantId, server, discovery)
+      const safeDiscovery = updated ? discovery : { status: 'error' as const, tools: [], discoveredAt: Date.now(), error: 'Tool discovery metadata could not be persisted.' }
+      const summary = MCPRegistry.summarize(updated ?? { ...server, discovery: safeDiscovery })
+      return NextResponse.json({ ...summary, id: summary.serverId }, { status: 201 });
+    } catch (discoveryError) {
+      const discovery = {
+        status: 'error' as const,
+        tools: [],
+        discoveredAt: Date.now(),
+        error: discoveryError instanceof Error ? discoveryError.message : 'Tool discovery failed.',
+      }
+      const updated = await persistDiscovery(tenantId, server, discovery)
+      const summary = MCPRegistry.summarize(updated ?? { ...server, discovery })
+      return NextResponse.json({ ...summary, id: summary.serverId }, { status: 201 });
+    }
   } catch (error) {
+    const message = error instanceof Error ? error.message : ''
+    if (message.includes('HTTPS URL') || message.includes('public DNS hostname') || message.includes('non-public network address')) {
+      return NextResponse.json({ error: { code: 'invalid_upstream_url', message } }, { status: 400 })
+    }
     console.error('[MCP Register Error]:', error);
     return NextResponse.json(
       { error: 'Internal failure registering MCP upstream server' },

@@ -44,3 +44,21 @@ test('SDK preserves legacy string error messages during a deployment transition'
     )
   } finally { globalThis.fetch = originalFetch }
 })
+
+test('SDK exposes MCP discovery and tenant SLA controls', async () => {
+  const requests: Array<{ url: string; method: string; body?: string }> = []
+  globalThis.fetch = async (input, init) => {
+    requests.push({ url: String(input), method: init?.method ?? 'GET', body: init?.body as string | undefined })
+    if (String(input).endsWith('/discover')) return new Response(JSON.stringify({ server: { serverId: 'mcp_srv_0123456789abcdef', name: 'Modal', baseUrl: 'https://example.test', createdAt: 1, status: 'active', discovery: { status: 'ready', tools: [] } } }), { status: 200 })
+    if (init?.method === 'POST') return new Response(JSON.stringify({ settings: { requestsPerMinute: 90, timeoutMs: 8000, failureThreshold: 4, cooldownMs: 45000 } }), { status: 200 })
+    return new Response(JSON.stringify({ settings: { requestsPerMinute: 60, timeoutMs: 10000, failureThreshold: 3, cooldownMs: 30000 } }), { status: 200 })
+  }
+  try {
+    const mcp = new MahaClient({ apiKey: 'mha_live_test', baseUrl: 'https://example.test' }).mcp
+    assert.equal((await mcp.discoverTools('mcp_srv_0123456789abcdef')).discovery.status, 'ready')
+    assert.equal((await mcp.getSettings()).timeoutMs, 10000)
+    assert.equal((await mcp.updateSettings({ requestsPerMinute: 90, timeoutMs: 8000, failureThreshold: 4, cooldownMs: 45000 })).requestsPerMinute, 90)
+    assert.equal(requests[0].url, 'https://example.test/api/v1/mcp/servers/mcp_srv_0123456789abcdef/discover')
+    assert.deepEqual(JSON.parse(requests[2].body ?? '{}'), { requestsPerMinute: 90, timeoutMs: 8000, failureThreshold: 4, cooldownMs: 45000 })
+  } finally { globalThis.fetch = originalFetch }
+})

@@ -9,7 +9,10 @@ export type TensorOptJobRecord = { jobId: string; kind: 'tensor-opt'; status: 'q
 // --- Audit & MCP Types ---
 export type AuditExportOptions = { format?: 'csv' | 'pdf'; startTime?: number; endTime?: number }
 export type RegisterMCPOptions = { name: string; baseUrl: string; authType: 'bearer' | 'hmac' | 'none'; secret?: string; allowedEngines?: Array<'tensor-opt' | 'geometric-ai' | 'qec-compiler' | 'landscape-opt' | '*'> }
-export type McpServerSummary = { serverId: string; name: string; baseUrl: string; createdAt: number; status: 'active' | 'suspended' }
+export type McpToolDefinition = { name: string; description?: string; inputSchema: Record<string, unknown> }
+export type McpToolDiscovery = { status: 'pending' | 'ready' | 'error'; tools: McpToolDefinition[]; discoveredAt?: number; error?: string }
+export type McpServerSummary = { serverId: string; name: string; baseUrl: string; createdAt: number; status: 'active' | 'suspended'; discovery: McpToolDiscovery }
+export type McpSlaSettings = { requestsPerMinute: number; timeoutMs: number; failureThreshold: number; cooldownMs: number }
 export type RotatedApiKey = { apiKey: string; apiKeyId: string; balanceCredits: number; tier: 'starter' | 'builder' | 'scale' | 'enterprise'; disclosure: string }
 export type TenantBillingSettings = { tenantId: string; tier: string; subscriptionStatus: string; subscriptionCredits: number; topupCredits: number; autoTopupEnabled: boolean; canEnableAutoTopup: boolean }
 
@@ -95,10 +98,25 @@ export class MahaClient {
       const response = await this.request<{ servers: McpServerSummary[] }>('/api/v1/mcp/servers')
       return response.servers
     },
+    /** Re-runs the upstream tools/list handshake and persists a validated tool inventory. */
+    discoverTools: async (serverId: string): Promise<McpServerSummary> => {
+      const response = await this.request<{ server: McpServerSummary }>(`/api/v1/mcp/servers/${encodeURIComponent(serverId)}/discover`, { method: 'POST' })
+      return response.server
+    },
+    /** Reads tenant-wide MCP proxy rate, timeout, and circuit-breaker controls. */
+    getSettings: async (): Promise<McpSlaSettings> => {
+      const response = await this.request<{ settings: McpSlaSettings }>('/api/v1/mcp/settings')
+      return response.settings
+    },
+    /** Replaces tenant-wide MCP proxy controls after server-side bounds validation. */
+    updateSettings: async (settings: McpSlaSettings): Promise<McpSlaSettings> => {
+      const response = await this.request<{ settings: McpSlaSettings }>('/api/v1/mcp/settings', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(settings) })
+      return response.settings
+    },
     /**
      * Registers a new tenant-scoped upstream MCP tool server.
      */
-    registerServer: async (options: RegisterMCPOptions): Promise<{ id: string } & Record<string, unknown>> => {
+    registerServer: async (options: RegisterMCPOptions): Promise<McpServerSummary & { id: string }> => {
       return this.request('/api/v1/mcp/register', {
         method: 'POST',
         body: JSON.stringify(options),

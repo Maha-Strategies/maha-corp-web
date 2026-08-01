@@ -233,6 +233,31 @@ def e2e_mcp_upstream(request_data: Dict[str, Any], authorization: str = Header(d
     if request_data.get("jsonrpc") != "2.0" or not isinstance(method, str) or not method:
         return {"jsonrpc": "2.0", "id": request_id, "error": {"code": -32600, "message": "Invalid JSON-RPC 2.0 request"}}
 
+    if method == "test/timeout":
+        time.sleep(2)
+        return {"jsonrpc": "2.0", "id": request_id, "result": {"authenticated": True, "method": method}}
+
+    if method == "tools/list":
+        return {
+            "jsonrpc": "2.0",
+            "id": request_id,
+            "result": {
+                "tools": [{
+                    "name": "calculateRiskScore",
+                    "description": "Returns a deterministic authenticated E2E risk-score fixture.",
+                    "inputSchema": {
+                        "type": "object",
+                        "properties": {
+                            "portfolioId": {"type": "string"},
+                            "alpha": {"type": "number"},
+                        },
+                        "required": ["portfolioId"],
+                        "additionalProperties": False,
+                    },
+                }]
+            },
+        }
+
     # Return only deterministic, non-sensitive request metadata. In
     # particular, never echo Authorization or any upstream credential.
     return {
