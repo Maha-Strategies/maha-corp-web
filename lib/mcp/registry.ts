@@ -3,6 +3,7 @@ import crypto from 'crypto';
 import { MCPServerConfig, MCPServerSummary, MCPToolDiscovery } from './types';
 import { assertPublicUpstreamHost, parsePublicUpstreamUrl } from '../mcp-gateway';
 import { scopedRedisKey } from '../redis-namespace';
+import { traceRedisQuery } from '../observability/telemetry';
 
 const redis = Redis.fromEnv();
 
@@ -64,7 +65,7 @@ export class MCPRegistry {
     };
 
     const redisKey = scopedRedisKey(`mcp:tenant:${tenantId}:servers`);
-    await redis.hset(redisKey, { [serverId]: JSON.stringify(serverConfig) });
+    await traceRedisQuery('HSET', () => redis.hset(redisKey, { [serverId]: JSON.stringify(serverConfig) }));
 
     return serverConfig;
   }
@@ -74,7 +75,7 @@ export class MCPRegistry {
    */
   static async getServer(tenantId: string, serverId: string): Promise<MCPServerConfig | null> {
     const redisKey = scopedRedisKey(`mcp:tenant:${tenantId}:servers`);
-    const raw = await redis.hget<string>(redisKey, serverId);
+    const raw = await traceRedisQuery('HGET', () => redis.hget<string>(redisKey, serverId));
     if (!raw) return null;
     return this.normalize(typeof raw === 'string' ? JSON.parse(raw) : raw);
   }
@@ -84,7 +85,7 @@ export class MCPRegistry {
    */
   static async listServers(tenantId: string): Promise<MCPServerConfig[]> {
     const redisKey = scopedRedisKey(`mcp:tenant:${tenantId}:servers`);
-    const hashData = await redis.hgetall<Record<string, string | MCPServerConfig>>(redisKey);
+    const hashData = await traceRedisQuery('HGETALL', () => redis.hgetall<Record<string, string | MCPServerConfig>>(redisKey));
     if (!hashData) return [];
 
     return Object.values(hashData).map((val) => this.normalize(
@@ -96,7 +97,7 @@ export class MCPRegistry {
     const server = await this.getServer(tenantId, serverId)
     if (!server) return null
     const updated = { ...server, discovery }
-    await redis.hset(scopedRedisKey(`mcp:tenant:${tenantId}:servers`), { [serverId]: JSON.stringify(updated) })
+    await traceRedisQuery('HSET', () => redis.hset(scopedRedisKey(`mcp:tenant:${tenantId}:servers`), { [serverId]: JSON.stringify(updated) }))
     return updated
   }
 

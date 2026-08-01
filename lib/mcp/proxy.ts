@@ -4,6 +4,7 @@ import { MCPServerConfig, JSONRPCRequest, JSONRPCResponse, MCPProxyContext } fro
 import { scopedRedisKey } from '../redis-namespace';
 import { MCPControls } from './controls';
 import { prepareMcpUpstream, readBoundedUpstreamJson } from './upstream';
+import { captureOperationalError, mcpMethodClass, traceMcpUpstream, traceRedisQuery } from '../observability/telemetry';
 
 const redis = Redis.fromEnv();
 
@@ -15,7 +16,7 @@ export class MCPProxyEngine {
     serverConfig: MCPServerConfig,
     rpcPayload: JSONRPCRequest,
     ctx: MCPProxyContext
-  ): Promise<{ body: JSONRPCResponse; status: number; retryAfterSeconds?: number }> {
+  ): Promise<{ body: JSONRPCResponse; status: number; retryAfterSeconds?: number; connectivityFailure?: { failure: string; status?: number } }> {
     if (serverConfig.status !== 'active') {
       return {
         status: 503,
@@ -42,19 +43,23 @@ export class MCPProxyEngine {
       }
       phase = 'transport'
       const upstream = await prepareMcpUpstream(serverConfig, rpcPayload, ctx)
-      const response = await fetch(upstream.url, {
-        method: 'POST',
-        headers: upstream.headers,
-        body: JSON.stringify(rpcPayload),
-        signal: AbortSignal.timeout(policy.timeoutMs),
-        redirect: 'manual',
+      const response = await traceMcpUpstream(rpcPayload.method, new URL(upstream.url).hostname, async (span) => {
+        const result = await fetch(upstream.url, {
+          method: 'POST', headers: upstream.headers, body: JSON.stringify(rpcPayload),
+          signal: AbortSignal.timeout(policy.timeoutMs), redirect: 'manual',
+        })
+        span.setAttribute('http.response.status_code', result.status)
+        span.setStatus(result.ok ? { code: 1, message: 'ok' } : { code: 2, message: result.status >= 500 ? 'unavailable' : 'invalid_argument' })
+        return result
       });
 
       if (!response.ok) {
         if (response.status >= 500 || response.status >= 300 && response.status < 400) await MCPControls.recordFailure(ctx.tenantId, serverConfig.id, policy)
         else await MCPControls.recordSuccess(ctx.tenantId, serverConfig.id)
+        if (response.status >= 500 || response.status >= 300 && response.status < 400) captureOperationalError(new Error(`MCP upstream returned HTTP ${response.status}.`), 'mcp-upstream', mcpMethodClass(rpcPayload.method))
         return {
           status: 502,
+          ...(response.status >= 500 || response.status >= 300 && response.status < 400 ? { connectivityFailure: { failure: response.status >= 500 ? 'upstream_5xx' : 'redirect_blocked', status: response.status } } : {}),
           body: { jsonrpc: '2.0', id: rpcPayload.id, error: { code: -32603, message: `Upstream MCP HTTP Error (${response.status})` } },
         };
       }
@@ -71,6 +76,7 @@ export class MCPProxyEngine {
 
     } catch (err: unknown) {
       if (phase === 'transport') {
+        captureOperationalError(err, 'mcp-upstream', mcpMethodClass(rpcPayload.method))
         try {
           const policy = await MCPControls.getPolicy(ctx.tenantId)
           await MCPControls.recordFailure(ctx.tenantId, serverConfig.id, policy)
@@ -89,6 +95,7 @@ export class MCPProxyEngine {
       }
       return {
         status: errorMessage.includes('timed out') || errorMessage.includes('aborted') ? 504 : 502,
+        connectivityFailure: { failure: errorMessage.includes('timed out') || errorMessage.includes('aborted') ? 'timeout' : 'connection_or_protocol_error' },
         body: { jsonrpc: '2.0', id: rpcPayload.id, error: { code: -32603, message: 'Upstream MCP Gateway Timeout / Connection Refused' } },
       };
     }
@@ -125,6 +132,6 @@ export class MCPProxyEngine {
       }
     };
 
-    await redis.zadd(ledgerKey, { score: timestamp, member: JSON.stringify(entry) });
+    await traceRedisQuery('ZADD', () => redis.zadd(ledgerKey, { score: timestamp, member: JSON.stringify(entry) }));
   }
 }

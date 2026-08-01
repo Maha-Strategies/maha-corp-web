@@ -1,5 +1,6 @@
 /** Edge-safe API key, prepaid-credit, and Upstash REST helpers. */
 import { scopedRedisKey } from './redis-namespace.ts'
+import { traceRedisQuery } from './observability/telemetry.ts'
 
 export type ApiKeyTier = 'starter' | 'builder' | 'scale' | 'enterprise'
 // Upstash hash values are strings. Parse them at this boundary so downstream
@@ -52,6 +53,7 @@ export function createApiKeyId() { return `key_${crypto.randomUUID().replaceAll(
 export function bearerApiKey(request: Request) { const authHeader = request.headers.get('authorization') || ''; const rawKey = canonicalApiKey(authHeader.replace(/^Bearer\s+/i, '')); return rawKey || null }
 
 async function redis<T>(command: string, args: unknown[]): Promise<T> {
+  return traceRedisQuery(command, async () => {
   const config = redisConfiguration()
   // Upstash command-body requests must target the bare REST URL and include the
   // command as the first JSON-array item: ["HSET", key, field, value, ...].
@@ -64,6 +66,7 @@ async function redis<T>(command: string, args: unknown[]): Promise<T> {
   try { data = await response.json() as { result: T; error?: string } } catch { throw new UpstashRedisError('upstash_response_invalid', `Upstash ${command} returned invalid JSON.`) }
   if (data.error) throw new UpstashRedisError('upstash_request_failed', `Upstash ${command} rejected the request.`)
   return data.result
+  })
 }
 
 export function apiKeyDataRedisKey(hash: string) { return scopedRedisKey(`key:data:${hash}`) }
