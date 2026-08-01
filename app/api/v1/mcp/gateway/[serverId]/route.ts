@@ -11,11 +11,11 @@ export async function POST(
   try {
     const { serverId } = await params;
 
-    const tenantId = req.headers.get('x-tenant-id');
+    const tenantId = req.headers.get('x-maha-api-key-id');
     if (!tenantId) {
       return NextResponse.json(
-        { jsonrpc: '2.0', id: null, error: { code: -32600, message: 'Missing X-Tenant-ID Header' } },
-        { status: 400 }
+        { jsonrpc: '2.0', id: null, error: { code: -32001, message: 'Unauthorized' } },
+        { status: 401 }
       );
     }
 
@@ -28,6 +28,7 @@ export async function POST(
       );
     }
 
+    if (!req.headers.get('content-type')?.toLowerCase().startsWith('application/json')) return NextResponse.json({ jsonrpc: '2.0', id: null, error: { code: -32600, message: 'Content-Type must be application/json' } }, { status: 415 });
     const body: JSONRPCRequest = await req.json();
 
     if (!body.jsonrpc || body.jsonrpc !== '2.0' || !body.method) {

@@ -34,3 +34,13 @@ test('SDK maps invalid credentials and exhausted credits to typed authentication
     await assert.rejects(() => new MahaClient({ apiKey: 'mha_live_test', baseUrl: 'https://example.test' }).getBalance(), (error: unknown) => error instanceof MahaApiError && error.status === 500)
   } finally { globalThis.fetch = originalFetch }
 })
+
+test('SDK preserves legacy string error messages during a deployment transition', async () => {
+  try {
+    globalThis.fetch = async () => new Response(JSON.stringify({ error: 'Missing required X-Tenant-ID header' }), { status: 400 })
+    await assert.rejects(
+      () => new MahaClient({ apiKey: 'mha_live_test', baseUrl: 'https://example.test' }).mcp.registerServer({ name: 'Test', baseUrl: 'https://example.test', authType: 'none' }),
+      (error: unknown) => error instanceof MahaApiError && error.status === 400 && error.message === 'Missing required X-Tenant-ID header',
+    )
+  } finally { globalThis.fetch = originalFetch }
+})

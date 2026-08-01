@@ -41,9 +41,9 @@ export class MahaClient {
     /**
      * Exports double-entry provenance ledger entries as a raw CSV string or PDF ArrayBuffer/Blob.
      */
-    export: async (tenantId: string, options: AuditExportOptions = {}): Promise<{ data: ArrayBuffer | Blob | string; filename: string }> => {
+    export: async (options: AuditExportOptions = {}): Promise<{ data: ArrayBuffer | Blob | string; filename: string }> => {
       const format = options.format ?? 'csv';
-      const params = new URLSearchParams({ tenantId, format });
+      const params = new URLSearchParams({ format });
       if (options.startTime) params.set('startTime', options.startTime.toString());
       if (options.endTime) params.set('endTime', options.endTime.toString());
 
@@ -60,7 +60,7 @@ export class MahaClient {
 
       const contentDisposition = response.headers.get('content-disposition');
       const filenameMatch = contentDisposition?.match(/filename="([^"]+)"/);
-      const filename = filenameMatch ? filenameMatch[1] : `maha_audit_${tenantId}.${format}`;
+      const filename = filenameMatch ? filenameMatch[1] : `maha_audit.${format}`;
 
       if (format === 'csv') {
         return { data: await response.text(), filename };
@@ -81,13 +81,12 @@ export class MahaClient {
     /**
      * Registers a new tenant-scoped upstream MCP tool server.
      */
-    registerServer: async (tenantId: string, options: RegisterMCPOptions): Promise<{ id: string; [key: string]: any }> => {
+    registerServer: async (options: RegisterMCPOptions): Promise<{ id: string; [key: string]: any }> => {
       return this.request('/api/v1/mcp/register', {
         method: 'POST',
         body: JSON.stringify(options),
         headers: { 
           'Content-Type': 'application/json',
-          'X-Tenant-ID': tenantId 
         }
       });
     },
@@ -95,7 +94,7 @@ export class MahaClient {
     /**
      * Dispatches a JSON-RPC 2.0 call through the tenant MCP Gateway proxy.
      */
-    call: async <T = unknown>(tenantId: string, serverId: string, method: string, params: Record<string, unknown> = {}): Promise<T> => {
+    call: async <T = unknown>(serverId: string, method: string, params: Record<string, unknown> = {}): Promise<T> => {
       const payload = {
         jsonrpc: '2.0',
         id: `req_${Date.now()}`,
@@ -110,7 +109,6 @@ export class MahaClient {
           body: JSON.stringify(payload),
           headers: { 
             'Content-Type': 'application/json',
-            'X-Tenant-ID': tenantId 
           }
         }
       );
@@ -164,11 +162,16 @@ export class MahaClient {
         continue
       }
 
-      const data = await response.json().catch(() => ({})) as T & { error?: { code?: string; message?: string } }
+      const data = await response.json().catch(() => ({})) as T & { error?: { code?: string; message?: string } | string }
 
       if (!response.ok) {
-        const code = data.error?.code ?? `http_${response.status}`;
-        const message = data.error?.message ?? `Maha API request failed (${response.status}).`;
+        const error = data.error
+        const code = typeof error === 'object' && error !== null ? error.code ?? `http_${response.status}` : `http_${response.status}`;
+        const message = typeof error === 'string'
+          ? error
+          : typeof error === 'object' && error !== null && error.message
+            ? error.message
+            : `Maha API request failed (${response.status}).`;
         if (response.status === 401 || response.status === 402) throw new MahaAuthenticationError(response.status, code, message);
         throw new MahaApiError(response.status, code, message)
       }
