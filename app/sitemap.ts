@@ -44,6 +44,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${baseUrl}/systemic-sovereignty`, lastModified: new Date('2026-07-20'), changeFrequency: 'monthly', priority: 0.8 },
     { url: `${baseUrl}/on-device-ai-vs-cloud`, lastModified: new Date('2026-07-20'), changeFrequency: 'monthly', priority: 0.8 },
     { url: `${baseUrl}/audit`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.8 }, // ADDED CORE NODE
+    { url: `${baseUrl}/docs`, lastModified: new Date(), changeFrequency: 'weekly', priority: 0.7 },
     { url: `${baseUrl}/mps`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.8 },   // ADDED CORE NODE
     { url: `${baseUrl}/mps/what-is-mps`, lastModified: new Date('2026-07-20'), changeFrequency: 'monthly', priority: 0.8 },
     { url: `${baseUrl}/mps/learn`, lastModified: new Date('2026-07-27'), changeFrequency: 'monthly', priority: 0.8 },
