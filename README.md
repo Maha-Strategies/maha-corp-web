@@ -252,6 +252,10 @@ Later record a stateful outcome with a different idempotency key. `paid` and `re
 
 Verified Stripe payment and reversal webhooks now reconcile automatically into this ledger. MPS audit credits and book entitlements are marked delivered only after their existing product webhooks issue access; MPS Preflight records delivery when its report completes. Stripe remains the payment authority, and no revenue control-plane token is sent to Stripe or the browser.
 
+## Operations and observability
+
+The platform includes privacy-scrubbed Sentry error/performance telemetry, Redis and Modal MCP dependency spans, signed low-credit and upstream-connectivity webhooks, and a private configuration-readiness endpoint. See [the operations runbook](./docs/observability.md) for environment variables, signature verification, dashboards, and release tests.
+
 ## Inbound Revenue Gatekeeper
 
 Apply `supabase/migrations/20260720002100_inbound_revenue_gatekeeper.sql`. Public human and agent submissions use `POST /api/inbound-submissions`, with the schema at `/inbound-submission-schema.json` and the machine-readable agent card at `/.well-known/agent.json`. The endpoint uses a database-backed hourly rate limit, a honeypot, strict size/schema validation, and deterministic qualification. It routes every accepted submission to the private Revenue Control Plane but never creates a commitment, payment, contract, or automatic outreach.

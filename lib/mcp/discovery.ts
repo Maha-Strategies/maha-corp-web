@@ -3,6 +3,7 @@ import { MCPControls } from './controls'
 import { prepareMcpUpstream, readBoundedUpstreamJson } from './upstream'
 import type { JSONRPCRequest, MCPServerConfig, MCPToolDefinition, MCPToolDiscovery } from './types'
 import { parseToolsListResponse } from './validation'
+import { traceMcpUpstream } from '../observability/telemetry'
 
 const MAX_DISCOVERED_TOOLS = 256
 const MAX_DISCOVERY_PAGES = 8
@@ -26,7 +27,12 @@ export class MCPDiscoveryService {
         const payload: JSONRPCRequest = { jsonrpc: '2.0', id, method: 'tools/list', ...(cursor ? { params: { cursor } } : {}) }
         const context = { tenantId: server.tenantId, serverId: server.id, traceId: `trc_${crypto.randomBytes(8).toString('hex')}` }
         const upstream = await prepareMcpUpstream(server, payload, context)
-        const response = await fetch(upstream.url, { method: 'POST', headers: upstream.headers, body: JSON.stringify(payload), signal: AbortSignal.timeout(policy.timeoutMs), redirect: 'manual' })
+        const response = await traceMcpUpstream(payload.method, new URL(upstream.url).hostname, async (span) => {
+          const result = await fetch(upstream.url, { method: 'POST', headers: upstream.headers, body: JSON.stringify(payload), signal: AbortSignal.timeout(policy.timeoutMs), redirect: 'manual' })
+          span.setAttribute('http.response.status_code', result.status)
+          span.setStatus(result.ok ? { code: 1, message: 'ok' } : { code: 2, message: result.status >= 500 ? 'unavailable' : 'invalid_argument' })
+          return result
+        })
         if (!response.ok) {
           if (response.status >= 400 && response.status < 500) outboundStarted = false
           throw new Error(`Upstream tools/list returned HTTP ${response.status}.`)

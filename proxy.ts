@@ -2,6 +2,7 @@ import { NextResponse, type NextFetchEvent, type NextRequest } from 'next/server
 import { apiKeyServiceConfigured, authorizeAndConsumeApiUnit, bearerApiKey } from '@/lib/api-key'
 import { API_CORS_HEADERS, apiAccessStatus, apiProxyGate } from '@/lib/api-proxy-policy'
 import { maybeCreateTenantAutoTopup } from '@/lib/api-credit-billing'
+import { maybeSendLowCreditAlert } from '@/lib/observability/alerts'
 
 function json(body: unknown, status: number, headers: HeadersInit = {}) {
   return NextResponse.json(body, { status, headers: { ...API_CORS_HEADERS, ...headers } })
@@ -20,6 +21,7 @@ export async function proxy(request: NextRequest, event: NextFetchEvent) {
   if (access.kind === 'rate_limited') return json({ error: { code: 'rate_limited', message: 'Per-minute API key limit reached. Retry shortly.' } }, apiAccessStatus('rate_limited'), { 'Retry-After': '60' })
   if (access.kind !== 'authorized') return json({ error: { code: 'api_key_service_unavailable', message: 'API authorization is temporarily unavailable.' } }, apiAccessStatus('unavailable'))
   if (access.remainingCredits < 1_000) event.waitUntil(maybeCreateTenantAutoTopup({ tenantId: access.tenantId, remainingCredits: access.remainingCredits }).then(() => undefined))
+  event.waitUntil(maybeSendLowCreditAlert({ tenantId: access.tenantId, remainingCredits: access.remainingCredits }).then(() => undefined))
   const headers = new Headers(request.headers); headers.set('x-maha-api-key-id', access.keyId); headers.set('x-maha-tenant-id', access.tenantId); headers.set('x-maha-api-key-tier', access.tier); headers.set('x-maha-zero-data-retention', String(access.zeroDataRetention)); headers.set('x-maha-credits-remaining', String(access.remainingCredits)); return NextResponse.next({ request: { headers }, headers: API_CORS_HEADERS })
 }
 export const config = { matcher: ['/api/v1/:path*'] }

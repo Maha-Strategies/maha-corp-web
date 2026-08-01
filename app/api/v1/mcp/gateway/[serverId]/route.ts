@@ -1,9 +1,10 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { after, NextRequest, NextResponse } from 'next/server';
 import { MCPRegistry } from '@/lib/mcp/registry';
 import { MCPProxyEngine } from '@/lib/mcp/proxy';
 import { JSONRPCRequest } from '@/lib/mcp/types';
 import crypto from 'crypto';
 import { MAX_MCP_GATEWAY_BODY_BYTES } from '@/lib/mcp-gateway';
+import { sendMcpConnectivityAlert } from '@/lib/observability/alerts';
 
 export async function POST(
   req: NextRequest,
@@ -54,6 +55,10 @@ export async function POST(
 
     const headers: Record<string, string> = { 'Cache-Control': 'no-store' }
     if (result.retryAfterSeconds) headers['Retry-After'] = String(result.retryAfterSeconds)
+    if (result.connectivityFailure) {
+      const alert = result.connectivityFailure
+      after(() => sendMcpConnectivityAlert({ tenantId, serverId, hostname: new URL(serverConfig.baseUrl).hostname, failure: alert.failure, status: alert.status }).then(() => undefined))
+    }
     return NextResponse.json(result.body, { status: result.status, headers });
 
   } catch (error) {
