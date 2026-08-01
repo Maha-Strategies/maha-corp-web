@@ -32,7 +32,7 @@ const maha = new MahaClient({
 async function main() {
   console.log(`🚀 Starting End-to-End Integration Test`);
   console.log(` Target Server: ${BASE_URL}`);
-  console.log(` Authenticated API key: ${TEST_API_KEY.slice(0, 12)}…\n`);
+  console.log(` Authenticated API key configured.\n`);
 
   // --- STEP 1: Register Upstream MCP Server ---
   console.log('[1/4] Registering Upstream Enterprise MCP Server...');
