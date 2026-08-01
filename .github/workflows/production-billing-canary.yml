@@ -11,6 +11,7 @@ on:
         options:
           - create-checkout
           - verify-state
+          - verify-canceled
 
 permissions:
   contents: read
@@ -83,6 +84,29 @@ jobs:
           if (state.subscriptionCredits !== 10_000) throw new Error(`Expected 10,000 monthly credits, received ${state.subscriptionCredits}.`)
           if (state.autoTopupEnabled !== false) throw new Error('Automatic top-up must remain disabled until explicitly enabled.')
           if (state.canEnableAutoTopup !== true) throw new Error('The subscription payment method was not bound to the tenant.')
+          console.log(JSON.stringify({
+            tier: state.tier,
+            subscriptionStatus: state.subscriptionStatus,
+            subscriptionCredits: state.subscriptionCredits,
+            topupCredits: state.topupCredits,
+            autoTopupEnabled: state.autoTopupEnabled,
+            paymentMethodReady: state.canEnableAutoTopup,
+          }, null, 2))
+          NODE
+      - name: Verify canceled subscription state
+        if: inputs.operation == 'verify-canceled'
+        run: |
+          node --input-type=module <<'NODE'
+          const response = await fetch(`${process.env.CANARY_BASE_URL}/api/v1/billing/settings`, {
+            headers: { Authorization: `Bearer ${process.env.CANARY_API_KEY}` },
+          })
+          const state = await response.json().catch(() => null)
+          if (!response.ok || !state) throw new Error(`Canceled billing-state check failed with HTTP ${response.status}.`)
+          if (state.tier !== 'starter') throw new Error(`Expected Starter tier, received ${state.tier}.`)
+          if (state.subscriptionStatus !== 'canceled') throw new Error(`Expected canceled subscription, received ${state.subscriptionStatus}.`)
+          if (state.subscriptionCredits !== 0) throw new Error(`Expected zero monthly credits, received ${state.subscriptionCredits}.`)
+          if (state.topupCredits !== 19_984) throw new Error(`Expected 19,984 preserved rollover credits, received ${state.topupCredits}.`)
+          if (state.autoTopupEnabled !== false || state.canEnableAutoTopup !== false) throw new Error('Cancellation did not disable automatic top-up eligibility.')
           console.log(JSON.stringify({
             tier: state.tier,
             subscriptionStatus: state.subscriptionStatus,
