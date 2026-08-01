@@ -11,6 +11,7 @@ export type AuditExportOptions = { format?: 'csv' | 'pdf'; startTime?: number; e
 export type RegisterMCPOptions = { name: string; baseUrl: string; authType: 'bearer' | 'hmac' | 'none'; secret?: string; allowedEngines?: Array<'tensor-opt' | 'geometric-ai' | 'qec-compiler' | 'landscape-opt' | '*'> }
 export type McpServerSummary = { serverId: string; name: string; baseUrl: string; createdAt: number; status: 'active' | 'suspended' }
 export type RotatedApiKey = { apiKey: string; apiKeyId: string; balanceCredits: number; tier: 'starter' | 'builder' | 'scale' | 'enterprise'; disclosure: string }
+export type TenantBillingSettings = { tenantId: string; tier: string; subscriptionStatus: string; subscriptionCredits: number; topupCredits: number; autoTopupEnabled: boolean; canEnableAutoTopup: boolean }
 
 export class MahaApiError extends Error { readonly status: number; readonly code: string; constructor(status: number, code: string, message: string) { super(message); this.name = 'MahaApiError'; this.status = status; this.code = code } }
 export class MahaAuthenticationError extends MahaApiError { constructor(status: 401 | 402, code: string, message: string) { super(status, code, message); this.name = 'MahaAuthenticationError' } }
@@ -35,11 +36,16 @@ export class MahaClient {
     return this.request(`/api/v1/claims/${encodeURIComponent(claimId)}`)
   }
 
-  async getBalance(): Promise<{ balance_credits: number }> { return this.request('/api/v1/keys/balance') }
+  async getBalance(): Promise<{ api_key_id?: string; tenant_id?: string; balance_credits: number; subscription_credits?: number; topup_credits?: number; tier?: string }> { return this.request('/api/v1/keys/balance') }
   /** Replaces this raw API credential while preserving its key ID and balance. The returned secret is disclosed once. */
   async rotateApiKey(): Promise<RotatedApiKey> { return this.request('/api/v1/keys/rotate', { method: 'POST' }) }
   /** Permanently disables this raw API credential. */
   async revokeApiKey(): Promise<{ revoked: true }> { return this.request('/api/v1/keys/revoke', { method: 'POST' }) }
+  public readonly billing = {
+    getSettings: async (): Promise<TenantBillingSettings> => this.request('/api/v1/billing/settings'),
+    subscribe: async (tier: 'builder' | 'scale', clientRequestId = crypto.randomUUID().replaceAll('-', '')): Promise<{ url: string }> => this.request('/api/v1/billing/subscription', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ tier, clientRequestId }) }),
+    setAutoTopup: async (enabled: boolean): Promise<{ autoTopupEnabled: boolean }> => this.request('/api/v1/billing/settings', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ autoTopupEnabled: enabled }) }),
+  }
 
   // --- Phase A: Audit & Compliance ---
 
