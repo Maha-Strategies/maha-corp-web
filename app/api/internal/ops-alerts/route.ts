@@ -1,0 +1,39 @@
+import { jsonResponse } from '@/lib/agent-inquiries'
+import { opsAlertEmail, receiveOpsAlert } from '@/lib/observability/receiver'
+import { Resend } from 'resend'
+
+export const runtime = 'nodejs'
+export const dynamic = 'force-dynamic'
+
+const MAX_BODY_BYTES = 16_384
+
+export async function POST(request: Request) {
+  if (!request.headers.get('content-type')?.toLowerCase().startsWith('application/json')) return jsonResponse({ error: { code: 'unsupported_media_type', message: 'Content-Type must be application/json.' } }, 415)
+  const body = await request.text()
+  if (Buffer.byteLength(body, 'utf8') > MAX_BODY_BYTES) return jsonResponse({ error: { code: 'payload_too_large', message: 'Alert exceeds the 16 KB limit.' } }, 413)
+
+  const secret = process.env.MAHA_OPS_WEBHOOK_SECRET
+  const resendKey = process.env.RESEND_API_KEY
+  if (!secret || !resendKey) return jsonResponse({ error: { code: 'receiver_unavailable', message: 'Operations alert receiver is not configured.' } }, 503)
+
+  let alert
+  try { alert = receiveOpsAlert(body, request.headers, secret) }
+  catch (error) { return jsonResponse({ error: { code: 'invalid_alert', message: error instanceof Error ? error.message : 'Alert is invalid.' } }, 401) }
+
+  const email = opsAlertEmail(alert)
+  try {
+    const result = await new Resend(resendKey).emails.send({
+      from: process.env.MAHA_OPS_ALERT_FROM ?? 'Maha Operations <noreply@mahastrategies.com>',
+      to: process.env.MAHA_OPS_ALERT_TO ?? 'mayone@mahastrategies.com',
+      subject: email.subject,
+      text: email.text,
+    }, { idempotencyKey: alert.eventId })
+    if (result.error) throw result.error
+  } catch {
+    return jsonResponse({ error: { code: 'delivery_failed', message: 'Operations notification delivery failed.' } }, 503)
+  }
+
+  return jsonResponse({ received: true }, 200)
+}
+
+export function OPTIONS() { return new Response(null, { status: 204, headers: { Allow: 'POST, OPTIONS', 'Cache-Control': 'no-store' } }) }
