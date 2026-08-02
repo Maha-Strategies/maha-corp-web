@@ -45,3 +45,5 @@ The reviewer-protected `production-canary` environment additionally needs the sa
 Use a Vercel access token scoped to the Maha team. Rotate it immediately if it is exposed. Neither workflow prints bearer tokens or Vercel credentials.
 
 Release-health and recovery-drill failures are retried with an event ID anchored to the latest prior successful run, so repeated failed runs do not create duplicate email. A recovery notification is sent only when the immediately preceding completed run failed. Notifications contain workflow/run metadata and bounded stage outcomes; application and dependency response bodies are excluded.
+
+For an auditable end-to-end notification test, manually dispatch `production-release-health.yml` with `send_controlled_alert=true`. The workflow first requires every health check and evidence upload to pass, then emits one failure/recovery pair marked `controlledTest: true`. Scheduled runs leave this input disabled.
