@@ -33,6 +33,7 @@ The workflow deliberately does not automatically roll forward after a failed pos
 `production-monitoring` is restricted to `main` and has no reviewer gate because scheduled jobs must run unattended. It contains:
 
 - Secret `PRODUCTION_RELEASE_HEALTH_TOKEN` (read-only; must match Vercel `RELEASE_HEALTH_TOKEN`)
+- Secret `VERCEL_AUTOMATION_BYPASS_SECRET` (required only for protected immutable deployment URLs)
 - Secret `VERCEL_TOKEN`
 - Variable `PRODUCTION_BASE_URL=https://www.mahastrategies.com`
 - Variable `VERCEL_TEAM_ID=team_KTJouKHTcPGeMXNMDqh6CoYs`
