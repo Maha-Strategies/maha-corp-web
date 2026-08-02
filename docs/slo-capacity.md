@@ -14,11 +14,13 @@ A 99.9% monthly objective permits approximately 43 minutes and 50 seconds of una
 
 Capacity acceptance uses a stricter small-sample release gate: 99.9% success for public/control-plane scenarios and 99.5% for the MCP scenario. Because the bounded samples are small, this normally means zero failed requests.
 
+Each scenario begins with a concurrency-sized warmup batch. Warmup success and maximum latency remain visible and must stay below 3 seconds for public, 5 seconds for control-plane, and 10 seconds for MCP. The stricter p95/p99 limits are then applied to the measured steady-state batch. This separates cold-start behavior from sustained capacity without discarding either signal.
+
 ## Safe profiles
 
 - `public` sends only GET requests to the homepage and OpenAPI document.
 - `control-plane` adds authenticated billing/observability readiness and API-key balance lookups. It does not deduct credits or modify configuration.
-- `mcp` invokes the controlled upstream and deducts one canary credit per request. It is capped at 30 requests and concurrency 5 and requires the exact confirmation `CONSUME CANARY CREDITS`.
+- `mcp` invokes the controlled upstream and deducts one canary credit per measured or warmup request. It is capped at 30 measured requests and concurrency 5 and requires the exact confirmation `CONSUME CANARY CREDITS`.
 
 The harness rejects the canonical Production domain unless `CAPACITY_PRODUCTION_CONFIRMATION=LOAD TEST PRODUCTION` is also present. The GitHub workflow deliberately does not expose that confirmation and is therefore Preview-only.
 

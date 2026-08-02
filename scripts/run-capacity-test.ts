@@ -14,7 +14,7 @@ const environment = {
 const configuration = capacityConfiguration(environment)
 const scenarios = capacityScenarios(environment, configuration.profile)
 
-async function execute(scenario: CapacityScenario) {
+async function batch(scenario: CapacityScenario, requests: number) {
   const latencies: number[] = []
   const statuses: number[] = []
   let cursor = 0
@@ -22,7 +22,7 @@ async function execute(scenario: CapacityScenario) {
   await Promise.all(Array.from({ length: configuration.concurrency }, async () => {
     while (true) {
       const index = cursor++
-      if (index >= configuration.requestsPerScenario) return
+      if (index >= requests) return
       const requestStarted = performance.now()
       let status = 0
       try {
@@ -37,7 +37,13 @@ async function execute(scenario: CapacityScenario) {
       statuses.push(status)
     }
   }))
-  return capacityReport({ scenario, latencies, statuses, elapsedMs: performance.now() - started })
+  return { latencies, statuses, elapsedMs: performance.now() - started }
+}
+
+async function execute(scenario: CapacityScenario) {
+  const warmup = await batch(scenario, configuration.concurrency)
+  const measured = await batch(scenario, configuration.requestsPerScenario)
+  return capacityReport({ scenario, ...measured, warmupLatencies: warmup.latencies, warmupStatuses: warmup.statuses })
 }
 
 const reports = []
@@ -47,8 +53,8 @@ const output = {
   schema: 'maha.capacity-report.v1', generatedAt: new Date().toISOString(), targetOrigin: configuration.baseUrl,
   production: configuration.production, profile: configuration.profile, requestsPerScenario: configuration.requestsPerScenario,
   concurrency: configuration.concurrency, timeoutMs: configuration.timeoutMs, thresholds: configuration.thresholds,
-  state: failures.length ? 'failed' : 'passed', reports, failures,
+  warmupRequestsPerScenario: configuration.concurrency, state: failures.length ? 'failed' : 'passed', reports, failures,
 }
 await writeFile(process.env.CAPACITY_OUTPUT_PATH?.trim() || 'capacity-report.json', `${JSON.stringify(output, null, 2)}\n`, { mode: 0o600 })
-console.log(JSON.stringify({ state: output.state, profile: output.profile, reports: reports.map(({ name, requests, successRate, throughputPerSecond, latencyMs }) => ({ name, requests, successRate, throughputPerSecond, latencyMs })), failures }, null, 2))
+console.log(JSON.stringify({ state: output.state, profile: output.profile, reports: reports.map(({ name, requests, successRate, throughputPerSecond, latencyMs, warmup }) => ({ name, requests, successRate, throughputPerSecond, latencyMs, warmup })), failures }, null, 2))
 if (failures.length) throw new Error(`Capacity acceptance failed: ${failures.join('; ')}.`)

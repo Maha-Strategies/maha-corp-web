@@ -18,12 +18,13 @@ export type CapacityScenarioReport = {
   throughputPerSecond: number
   latencyMs: { min: number; p50: number; p95: number; p99: number; max: number }
   statuses: Record<string, number>
+  warmup: { requests: number; successes: number; maxLatencyMs: number; statuses: Record<string, number> }
 }
 
-export const CAPACITY_THRESHOLDS: Record<CapacityProfile, { minSuccessRate: number; maxP95Ms: number; maxP99Ms: number }> = Object.freeze({
-  public: { minSuccessRate: 0.999, maxP95Ms: 1_000, maxP99Ms: 2_500 },
-  'control-plane': { minSuccessRate: 0.999, maxP95Ms: 1_500, maxP99Ms: 3_000 },
-  mcp: { minSuccessRate: 0.995, maxP95Ms: 3_000, maxP99Ms: 7_000 },
+export const CAPACITY_THRESHOLDS: Record<CapacityProfile, { minSuccessRate: number; maxP95Ms: number; maxP99Ms: number; maxWarmupMs: number }> = Object.freeze({
+  public: { minSuccessRate: 0.999, maxP95Ms: 1_000, maxP99Ms: 2_500, maxWarmupMs: 3_000 },
+  'control-plane': { minSuccessRate: 0.999, maxP95Ms: 1_500, maxP99Ms: 3_000, maxWarmupMs: 5_000 },
+  mcp: { minSuccessRate: 0.995, maxP95Ms: 3_000, maxP99Ms: 7_000, maxWarmupMs: 10_000 },
 })
 
 function integer(value: string | undefined, fallback: number, minimum: number, maximum: number, name: string) {
@@ -89,23 +90,31 @@ export function percentile(sortedValues: number[], quantile: number) {
   return sortedValues[Math.max(0, Math.ceil(sortedValues.length * quantile) - 1)]
 }
 
-export function capacityReport(input: { scenario: CapacityScenario; latencies: number[]; statuses: number[]; elapsedMs: number }): CapacityScenarioReport {
+export function capacityReport(input: { scenario: CapacityScenario; latencies: number[]; statuses: number[]; elapsedMs: number; warmupLatencies?: number[]; warmupStatuses?: number[] }): CapacityScenarioReport {
   const sorted = [...input.latencies].sort((a, b) => a - b)
   const successes = input.statuses.filter((status) => status >= 200 && status < 300).length
   const statuses: Record<string, number> = {}
   for (const status of input.statuses) statuses[String(status)] = (statuses[String(status)] ?? 0) + 1
+  const warmupStatuses: Record<string, number> = {}
+  for (const status of input.warmupStatuses ?? []) warmupStatuses[String(status)] = (warmupStatuses[String(status)] ?? 0) + 1
   const round = (value: number) => Math.round(value * 100) / 100
   const roundRate = (value: number) => Math.round(value * 1_000_000) / 1_000_000
   return {
     name: input.scenario.name, path: input.scenario.path, requests: input.statuses.length, successes,
     successRate: roundRate(successes / input.statuses.length), throughputPerSecond: round(input.statuses.length / Math.max(input.elapsedMs / 1_000, 0.001)),
     latencyMs: { min: round(sorted[0] ?? 0), p50: round(percentile(sorted, 0.5)), p95: round(percentile(sorted, 0.95)), p99: round(percentile(sorted, 0.99)), max: round(sorted.at(-1) ?? 0) },
-    statuses,
+    statuses, warmup: {
+      requests: input.warmupStatuses?.length ?? 0,
+      successes: input.warmupStatuses?.filter((status) => status >= 200 && status < 300).length ?? 0,
+      maxLatencyMs: round(Math.max(0, ...(input.warmupLatencies ?? []))), statuses: warmupStatuses,
+    },
   }
 }
 
-export function capacityFailures(reports: CapacityScenarioReport[], thresholds: { minSuccessRate: number; maxP95Ms: number; maxP99Ms: number }) {
+export function capacityFailures(reports: CapacityScenarioReport[], thresholds: { minSuccessRate: number; maxP95Ms: number; maxP99Ms: number; maxWarmupMs: number }) {
   return reports.flatMap((report) => [
+    ...(report.warmup.successes !== report.warmup.requests ? [`${report.name}: warmup requests did not all succeed`] : []),
+    ...(report.warmup.maxLatencyMs > thresholds.maxWarmupMs ? [`${report.name}: warmup max ${report.warmup.maxLatencyMs}ms exceeds ${thresholds.maxWarmupMs}ms`] : []),
     ...(report.successRate < thresholds.minSuccessRate ? [`${report.name}: success rate ${report.successRate} is below ${thresholds.minSuccessRate}`] : []),
     ...(report.latencyMs.p95 > thresholds.maxP95Ms ? [`${report.name}: p95 ${report.latencyMs.p95}ms exceeds ${thresholds.maxP95Ms}ms`] : []),
     ...(report.latencyMs.p99 > thresholds.maxP99Ms ? [`${report.name}: p99 ${report.latencyMs.p99}ms exceeds ${thresholds.maxP99Ms}ms`] : []),

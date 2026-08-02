@@ -22,9 +22,10 @@ test('capacity scenarios keep secrets in headers and require a bounded MCP serve
 
 test('capacity reports use nearest-rank percentiles and fail closed on SLO breaches', () => {
   assert.equal(percentile([10, 20, 30, 40], 0.95), 40)
-  const report = capacityReport({ scenario: { name: 'test', path: '/', method: 'GET' }, latencies: [10, 20, 30, 40], statuses: [200, 200, 200, 503], elapsedMs: 1_000 })
+  const report = capacityReport({ scenario: { name: 'test', path: '/', method: 'GET' }, latencies: [10, 20, 30, 40], statuses: [200, 200, 200, 503], elapsedMs: 1_000, warmupLatencies: [50], warmupStatuses: [200] })
   assert.equal(report.successRate, 0.75)
   assert.equal(report.latencyMs.p50, 20)
   assert.deepEqual(report.statuses, { 200: 3, 503: 1 })
-  assert.deepEqual(capacityFailures([report], { minSuccessRate: 0.99, maxP95Ms: 35, maxP99Ms: 100 }), ['test: success rate 0.75 is below 0.99', 'test: p95 40ms exceeds 35ms'])
+  assert.deepEqual(report.warmup, { requests: 1, successes: 1, maxLatencyMs: 50, statuses: { 200: 1 } })
+  assert.deepEqual(capacityFailures([report], { minSuccessRate: 0.99, maxP95Ms: 35, maxP99Ms: 100, maxWarmupMs: 1_000 }), ['test: success rate 0.75 is below 0.99', 'test: p95 40ms exceeds 35ms'])
 })
