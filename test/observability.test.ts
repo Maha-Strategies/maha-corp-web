@@ -3,7 +3,7 @@ import test from 'node:test'
 
 import { lowCreditAlertRequired, opsAlertConfig, signOpsAlert } from '../lib/observability/contracts.ts'
 import { observabilityReadiness } from '../lib/observability/readiness.ts'
-import { opsAlertEmail, receiveOpsAlert } from '../lib/observability/receiver.ts'
+import { opsAlertDeliveryFailure, opsAlertEmail, receiveOpsAlert } from '../lib/observability/receiver.ts'
 import { mcpMethodClass } from '../lib/observability/telemetry.ts'
 import { scrubSentryPayload, sentryTraceSampleRate } from '../lib/observability/sentry.ts'
 
@@ -56,6 +56,13 @@ test('operations alert receiver rejects tampering and unbounded detail values', 
   const oversized = body.replace('timeout', 'x'.repeat(513))
   headers.set('x-maha-alert-signature', signOpsAlert(oversized, secret))
   assert.throws(() => receiveOpsAlert(oversized, headers, secret, Date.parse(occurredAt)), /invalid value/)
+})
+
+test('operations alert delivery failures are reduced to bounded provider categories', () => {
+  assert.equal(opsAlertDeliveryFailure({ name: 'validation_error', message: 'The sender domain is not verified.' }), 'sender_domain_unverified')
+  assert.equal(opsAlertDeliveryFailure({ name: 'authentication_error', message: 'API key is invalid.' }), 'provider_authentication_failed')
+  assert.equal(opsAlertDeliveryFailure({ name: 'rate_limit_exceeded', message: 'Too many requests.' }), 'provider_rate_limited')
+  assert.equal(opsAlertDeliveryFailure(new Error('socket closed')), 'provider_request_failed')
 })
 
 test('Sentry scrubber removes payload identity and query data while preserving route method', () => {
