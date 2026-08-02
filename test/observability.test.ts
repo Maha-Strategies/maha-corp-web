@@ -4,6 +4,7 @@ import test from 'node:test'
 import { lowCreditAlertRequired, opsAlertConfig, signOpsAlert } from '../lib/observability/contracts.ts'
 import { observabilityReadiness } from '../lib/observability/readiness.ts'
 import { opsAlertDeliveryFailure, opsAlertEmail, receiveOpsAlert } from '../lib/observability/receiver.ts'
+import { createReleaseAlert, releaseIncidentContext } from '../lib/observability/release-alerts.ts'
 import { mcpMethodClass } from '../lib/observability/telemetry.ts'
 import { scrubSentryPayload, sentryTraceSampleRate } from '../lib/observability/sentry.ts'
 
@@ -63,6 +64,31 @@ test('operations alert delivery failures are reduced to bounded provider categor
   assert.equal(opsAlertDeliveryFailure({ name: 'authentication_error', message: 'API key is invalid.' }), 'provider_authentication_failed')
   assert.equal(opsAlertDeliveryFailure({ name: 'rate_limit_exceeded', message: 'Too many requests.' }), 'provider_rate_limited')
   assert.equal(opsAlertDeliveryFailure(new Error('socket closed')), 'provider_request_failed')
+})
+
+test('release alerts are bounded, deterministic per incident, and label recovery separately', () => {
+  const base = {
+    incidentAnchor: '30733759252', runId: '30733759252',
+    runUrl: 'https://github.com/Maha-Strategies/maha-corp-web/actions/runs/30733759252',
+    commitSha: 'a'.repeat(40), stage: 'health=failure', occurredAt: '2026-08-02T05:30:00.000Z',
+  }
+  const failure = createReleaseAlert({ ...base, event: 'release.health_failure', deploymentId: 'dpl_Abc123' })
+  const retry = createReleaseAlert({ ...base, event: 'release.health_failure', runId: '30733759253', runUrl: 'https://github.com/Maha-Strategies/maha-corp-web/actions/runs/30733759253' })
+  const recovery = createReleaseAlert({ ...base, event: 'release.health_recovered' })
+  assert.equal(failure.eventId, retry.eventId)
+  assert.notEqual(failure.eventId, recovery.eventId)
+  assert.match(opsAlertEmail(receiveOpsAlert(JSON.stringify(recovery), new Headers({
+    'x-maha-alert-event': recovery.event, 'x-maha-alert-id': recovery.eventId,
+    'x-maha-alert-signature': signOpsAlert(JSON.stringify(recovery), secret),
+  }), secret, Date.parse(base.occurredAt))).subject, /recovered/)
+  assert.throws(() => createReleaseAlert({ ...base, event: 'release.health_failure', stage: 'x'.repeat(257) }), /stage/)
+})
+
+test('release incident context anchors retries to the latest prior success', () => {
+  assert.deepEqual(releaseIncidentContext({ workflow_runs: [
+    { id: 30, conclusion: 'failure' }, { id: 29, conclusion: 'failure' }, { id: 28, conclusion: 'success' },
+  ] }), { previousConclusion: 'failure', incidentAnchor: '28' })
+  assert.deepEqual(releaseIncidentContext({ workflow_runs: [] }), { previousConclusion: 'none', incidentAnchor: 'none' })
 })
 
 test('Sentry scrubber removes payload identity and query data while preserving route method', () => {

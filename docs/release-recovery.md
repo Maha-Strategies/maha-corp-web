@@ -33,6 +33,7 @@ The workflow deliberately does not automatically roll forward after a failed pos
 `production-monitoring` is restricted to `main` and has no reviewer gate because scheduled jobs must run unattended. It contains:
 
 - Secret `PRODUCTION_RELEASE_HEALTH_TOKEN` (read-only; must match Vercel `RELEASE_HEALTH_TOKEN`)
+- Secret `MAHA_OPS_WEBHOOK_SECRET` (signs bounded failure and recovery notifications)
 - Secret `VERCEL_AUTOMATION_BYPASS_SECRET` (required only for protected immutable deployment URLs)
 - Secret `VERCEL_TOKEN`
 - Variable `PRODUCTION_BASE_URL=https://www.mahastrategies.com`
@@ -42,3 +43,5 @@ The workflow deliberately does not automatically roll forward after a failed pos
 The reviewer-protected `production-canary` environment additionally needs the same two secrets and Vercel variables. Existing canary API and Modal upstream credentials remain unchanged. The unattended workflows never receive `REVENUE_CONTROL_TOKEN`.
 
 Use a Vercel access token scoped to the Maha team. Rotate it immediately if it is exposed. Neither workflow prints bearer tokens or Vercel credentials.
+
+Release-health and recovery-drill failures are retried with an event ID anchored to the latest prior successful run, so repeated failed runs do not create duplicate email. A recovery notification is sent only when the immediately preceding completed run failed. Notifications contain workflow/run metadata and bounded stage outcomes; application and dependency response bodies are excluded.
