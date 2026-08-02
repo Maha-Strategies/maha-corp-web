@@ -24,6 +24,7 @@ const PRIVATE_ROUTES = new Set([
   '/api/admin/som-evaluations',
   '/api/admin/micro-utility-validations',
   '/api/admin/observability-readiness',
+  '/api/admin/revenue-readiness',
   '/api/admin/content-candidates',
   '/api/admin/content-drafts',
   '/api/admin/content-draft-assistant',
