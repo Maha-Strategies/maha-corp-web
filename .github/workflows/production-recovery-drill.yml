@@ -43,7 +43,7 @@ jobs:
       - uses: actions/download-artifact@v5
         with:
           name: production-last-known-good
-          path: ${{ runner.temp }}/last-known-good
+          path: ${{ github.workspace }}/last-known-good
           github-token: ${{ github.token }}
           run-id: ${{ steps.health-run.outputs.run_id }}
       - name: Validate recovery manifest
