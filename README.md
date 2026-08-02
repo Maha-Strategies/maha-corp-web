@@ -258,6 +258,8 @@ The platform includes privacy-scrubbed Sentry error/performance telemetry, Redis
 
 Production release health runs four times per hour, preserves the exact last-known-good Vercel deployment, and supports a reviewer-gated rollback with post-recovery readiness and full canary verification. See [the release recovery runbook](./docs/release-recovery.md).
 
+Internal availability and latency objectives are enforced by a bounded Preview capacity harness covering public surfaces, readiness dependencies, Upstash key lookup, and an explicitly confirmed controlled-upstream MCP profile. See [service objectives and capacity acceptance](./docs/slo-capacity.md).
+
 ## Inbound Revenue Gatekeeper
 
 Apply `supabase/migrations/20260720002100_inbound_revenue_gatekeeper.sql`. Public human and agent submissions use `POST /api/inbound-submissions`, with the schema at `/inbound-submission-schema.json` and the machine-readable agent card at `/.well-known/agent.json`. The endpoint uses a database-backed hourly rate limit, a honeypot, strict size/schema validation, and deterministic qualification. It routes every accepted submission to the private Revenue Control Plane but never creates a commitment, payment, contract, or automatic outreach.
