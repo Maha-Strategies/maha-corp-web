@@ -78,6 +78,7 @@ from older documentation. See [`AGENTS.md`](./AGENTS.md).
 
 | Runbook | Covers |
 | --- | --- |
+| [`docs/backup-restore.md`](./docs/backup-restore.md) | Rehearsing a database restore, and measuring RTO and RPO |
 | [`docs/database-migrations.md`](./docs/database-migrations.md) | Applying schema changes to Production, drift detection, evidence |
 | [`docs/observability.md`](./docs/observability.md) | Sentry configuration, signed alert verification, readiness checks |
 | [`docs/release-recovery.md`](./docs/release-recovery.md) | Release health, recovery drill, rollback, rehearsal, required GitHub environments |
