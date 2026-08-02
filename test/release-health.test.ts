@@ -18,7 +18,7 @@ test('release health checks canonical public and protected readiness surfaces', 
     if (path === '/api/docs/openapi') return Response.json({ openapi: '3.1.0' })
     return Response.json({ state: 'ready', readOnly: true })
   }
-  const result = await checkProductionRelease({ baseUrl: 'https://www.mahastrategies.com', revenueControlToken: 'x'.repeat(32), fetcher })
+  const result = await checkProductionRelease({ baseUrl: 'https://www.mahastrategies.com', releaseHealthToken: 'x'.repeat(32), fetcher })
   assert.equal(result.state, 'ready')
   assert.equal(result.checks.length, 4)
   assert.equal(result.checks.every((check) => check.status === 200), true)
@@ -26,7 +26,7 @@ test('release health checks canonical public and protected readiness surfaces', 
 
 test('release health fails closed without leaking a dependency response', async () => {
   const fetcher = async (input: string | URL | Request) => new Response(String(input).includes('billing-readiness') ? 'secret database error' : '{}', { status: 503, headers: { 'content-type': 'application/json' } })
-  const result = await checkProductionRelease({ baseUrl: 'https://www.mahastrategies.com', revenueControlToken: 'x'.repeat(32), fetcher })
+  const result = await checkProductionRelease({ baseUrl: 'https://www.mahastrategies.com', releaseHealthToken: 'x'.repeat(32), fetcher })
   assert.equal(result.state, 'unhealthy')
   assert.equal(JSON.stringify(result).includes('secret database error'), false)
 })

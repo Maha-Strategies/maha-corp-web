@@ -22,7 +22,7 @@ jobs:
       url: ${{ vars.PRODUCTION_BASE_URL }}
     env:
       GH_TOKEN: ${{ github.token }}
-      PRODUCTION_REVENUE_CONTROL_TOKEN: ${{ secrets.PRODUCTION_REVENUE_CONTROL_TOKEN }}
+      PRODUCTION_RELEASE_HEALTH_TOKEN: ${{ secrets.PRODUCTION_RELEASE_HEALTH_TOKEN }}
       VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
       VERCEL_TEAM_ID: ${{ vars.VERCEL_TEAM_ID }}
       VERCEL_PROJECT_ID: ${{ vars.VERCEL_PROJECT_ID }}
