@@ -86,11 +86,11 @@ Each path reports one state:
 
 HTTP 200 means no path is in a fault state; 503 means at least one is, and `faults` names them. Only variable **names** appear in the response — never a value, prefix, or length.
 
-Shared platform credentials (`STRIPE_SECRET_KEY`, `RESEND_API_KEY`, `ANTHROPIC_API_KEY`) are tracked separately from path-specific ones. A shared key is set for other paths anyway, so it is never read as evidence that this path was being wired.
+Shared platform credentials (including `STRIPE_SECRET_KEY`, `STRIPE_API_KEY_WEBHOOK_SECRET`, and `ANTHROPIC_API_KEY`) are tracked separately from path-specific ones. A shared key may be set for other paths anyway, so it is never read as evidence that this path was being wired. Optional delivery overrides such as `RESEND_API_KEY` and `MPS_PREFLIGHT_FROM_EMAIL` do not affect whether MPS Preflight can transact and are not readiness requirements.
 
-When a required variable is missing, the response also reports any environment variable name within a small edit distance of it. This catches the failure mode where a variable is set under a near-miss name and the path fails closed exactly as if nothing had been set — the `MPS_PREFLIGHT_FROM_EMAI` case, missing its final L.
+When a required variable is missing, the response also reports any environment variable name within a small edit distance of it. This catches the failure mode where a variable is set under a near-miss name and the path fails closed exactly as if nothing had been set.
 
-`REVENUE_PATHS` in `lib/revenue-readiness.ts` mirrors the config gates in `books.ts`, `mps-credits.ts`, `utility-billing.ts`, and the preflight and API-credit checkout routes. Update it when a gate changes; a test asserts every path declares at least one variable of its own.
+`REVENUE_PATHS` in `lib/revenue-readiness.ts` mirrors the config gates in `books.ts`, `mps-credits.ts`, `utility-billing.ts`, and the preflight, API-credit, and tenant-billing checkout routes. Update it when a gate changes; a test asserts every path declares at least one variable of its own.
 
 **This endpoint is deliberately not one of the four release-health checks.** Those gate the last-known-good manifest that rollback depends on, and a configuration fault must never be able to withhold the recovery path. Poll it separately.
 
