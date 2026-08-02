@@ -1,0 +1,187 @@
+name: Production database migrations
+
+# Applies supabase/migrations to the Production database through a reviewed,
+# evidenced path instead of the Supabase SQL editor.
+#
+# UNVERIFIED: this workflow has never run against the live project. Run it in
+# dry-run mode first and read the uploaded evidence before ever selecting apply.
+#
+# It deliberately has no automatic revert. A down-migration against ledgers that
+# hold commercial history would compound an incident rather than resolve it, so a
+# failed verification leaves the applied schema in place for operator diagnosis —
+# the same stance the rollback workflow takes toward deployments.
+
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: dry-run reports pending migrations and changes nothing
+        required: true
+        default: dry-run
+        type: choice
+        options:
+          - dry-run
+          - apply
+      reason:
+        description: Change ticket or reason (minimum 12 characters)
+        required: true
+        type: string
+      confirmation:
+        description: For apply, type APPLY PRODUCTION MIGRATIONS exactly
+        required: false
+        type: string
+      check_schema_drift:
+        description: Compare the live schema against the migration tree before applying
+        required: false
+        default: true
+        type: boolean
+
+permissions:
+  contents: read
+
+# Deliberately NOT the production-recovery group used by rollback. An emergency
+# deployment rollback must never be queued behind a database job. Schema and
+# deployment state are recovered independently.
+concurrency:
+  group: production-database
+  cancel-in-progress: false
+
+jobs:
+  migrate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    environment:
+      name: production-database
+      url: ${{ vars.PRODUCTION_BASE_URL }}
+    env:
+      SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}
+      SUPABASE_DB_PASSWORD: ${{ secrets.SUPABASE_DB_PASSWORD }}
+      SUPABASE_PROJECT_REF: ${{ vars.SUPABASE_PROJECT_REF }}
+      PRODUCTION_BASE_URL: ${{ vars.PRODUCTION_BASE_URL }}
+      PRODUCTION_CANONICAL_URL: ${{ vars.PRODUCTION_BASE_URL }}
+      PRODUCTION_RELEASE_HEALTH_TOKEN: ${{ secrets.PRODUCTION_RELEASE_HEALTH_TOKEN }}
+      VERCEL_AUTOMATION_BYPASS_SECRET: ${{ secrets.VERCEL_AUTOMATION_BYPASS_SECRET }}
+      VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+      VERCEL_TEAM_ID: ${{ vars.VERCEL_TEAM_ID }}
+      VERCEL_PROJECT_ID: ${{ vars.VERCEL_PROJECT_ID }}
+      VERCEL_DEPLOYMENT_JSON_PATH: ${{ github.workspace }}/post-migration-deployment.json
+      RELEASE_HEALTH_OUTPUT: ${{ github.workspace }}/post-migration-health.json
+      EVIDENCE: ${{ github.workspace }}/migration-evidence
+    steps:
+      - name: Enforce explicit apply confirmation
+        env:
+          MODE: ${{ inputs.mode }}
+          REASON: ${{ inputs.reason }}
+          CONFIRMATION: ${{ inputs.confirmation }}
+        run: |
+          test "${#REASON}" -ge 12
+          if [ "$MODE" = 'apply' ]; then
+            test "$CONFIRMATION" = 'APPLY PRODUCTION MIGRATIONS'
+          fi
+
+      - uses: actions/checkout@v5
+        with:
+          # Full history so the integrity check can resolve a merge base.
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 24
+          cache: npm
+
+      - run: npm ci
+
+      - run: mkdir -p "$EVIDENCE"
+
+      # The same gate the pull-request build runs. Re-run it here because the
+      # dispatched ref is not necessarily the ref that was reviewed.
+      - name: Verify migration integrity
+        run: node --experimental-strip-types scripts/check-migrations.ts | tee "$EVIDENCE/integrity.txt"
+
+      - name: Install pinned Supabase CLI
+        run: npm install --global supabase@2.109.1
+
+      - name: Record authorized request
+        env:
+          MODE: ${{ inputs.mode }}
+          REASON: ${{ inputs.reason }}
+          ACTOR: ${{ github.actor }}
+        run: |
+          node --input-type=module -e "import fs from 'node:fs'; fs.writeFileSync(process.env.EVIDENCE+'/request.json', JSON.stringify({requestedAt:new Date().toISOString(),actor:process.env.ACTOR,mode:process.env.MODE,reason:process.env.REASON,commitSha:process.env.GITHUB_SHA,workflowRunId:process.env.GITHUB_RUN_ID},null,2)+'\n',{mode:0o600})"
+
+      # --password is read from SUPABASE_DB_PASSWORD; neither it nor the access
+      # token is ever echoed.
+      - name: Link the Production project
+        run: supabase link --project-ref "$SUPABASE_PROJECT_REF" >/dev/null
+
+      # The authoritative record of what the database believes it has applied.
+      # Read this in dry-run before approving an apply.
+      - name: Record migration history
+        run: supabase migration list --linked | tee "$EVIDENCE/migration-list-before.txt"
+
+      # Schema only — never data. A data dump would place customer records and
+      # commercial history into a workflow artifact.
+      - name: Capture pre-apply schema snapshot
+        run: supabase db dump --linked --schema public -f "$EVIDENCE/schema-before.sql"
+
+      # The failure this repository has actually experienced: schema changed
+      # directly in the SQL editor, leaving the database ahead of the migration
+      # tree. Applying on top of undeclared drift is how ledgers get corrupted.
+      - name: Detect schema drift
+        if: ${{ inputs.check_schema_drift }}
+        run: |
+          supabase db diff --linked --schema public > "$EVIDENCE/drift.sql"
+          if [ -s "$EVIDENCE/drift.sql" ]; then
+            echo '::error::The live schema differs from the migration tree. Reconcile the drift into a migration before applying.'
+            cat "$EVIDENCE/drift.sql"
+            exit 1
+          fi
+          echo 'No drift: the live schema matches the migration tree.'
+
+      - name: Report pending migrations
+        run: supabase db push --linked --dry-run | tee "$EVIDENCE/pending.txt"
+
+      - name: Apply pending migrations
+        id: apply
+        if: ${{ inputs.mode == 'apply' }}
+        run: supabase db push --linked --yes | tee "$EVIDENCE/applied.txt"
+
+      - name: Record migration history after apply
+        if: ${{ inputs.mode == 'apply' }}
+        run: supabase migration list --linked | tee "$EVIDENCE/migration-list-after.txt"
+
+      # Schema changes are only safe once the running application still works
+      # against them. This is the same readiness check the release-health and
+      # rollback workflows use: homepage, OpenAPI, billing, observability.
+      - name: Install pinned Vercel CLI
+        if: ${{ inputs.mode == 'apply' }}
+        run: npm install --global vercel@58.4.0
+
+      - name: Resolve canonical Production deployment
+        if: ${{ inputs.mode == 'apply' }}
+        run: vercel inspect "$PRODUCTION_BASE_URL" --json --token "$VERCEL_TOKEN" --scope "$VERCEL_TEAM_ID" > "$VERCEL_DEPLOYMENT_JSON_PATH"
+
+      - name: Verify the application against the new schema
+        if: ${{ inputs.mode == 'apply' }}
+        run: node --experimental-strip-types scripts/verify-production-release.ts | tee "$EVIDENCE/post-apply-health.txt"
+
+      # Only meaningful once the push step actually started. A failure before
+      # that point changed nothing, and saying otherwise would send an operator
+      # looking for damage that does not exist.
+      - name: Warn that the schema was not reverted
+        if: ${{ failure() && steps.apply.outcome != 'skipped' }}
+        run: |
+          echo '::error::Migrations were applied or partially applied, and a later step failed. The schema has NOT been reverted; reverting a ledger migration automatically would compound the incident. Diagnose using the uploaded evidence and the preserved pre-apply schema snapshot.'
+          exit 1
+
+      - name: Upload migration evidence
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: production-migrations-${{ github.run_id }}
+          path: |
+            ${{ env.EVIDENCE }}
+            ${{ env.RELEASE_HEALTH_OUTPUT }}
+            ${{ env.VERCEL_DEPLOYMENT_JSON_PATH }}
+          if-no-files-found: warn
+          retention-days: 90

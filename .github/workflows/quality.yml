@@ -18,14 +18,44 @@ jobs:
       UPSTASH_REDIS_REST_TOKEN: ci-build-placeholder
     steps:
       - uses: actions/checkout@v5
+        with:
+          # Full history so the migration check can resolve the merge base with
+          # the target branch.
+          fetch-depth: 0
       - uses: actions/setup-node@v5
         with:
           node-version: 22
           cache: npm
       - run: npm ci
+      # Schema integrity before anything expensive: append-only migrations,
+      # unique ordered timestamps, and justified destructive DDL.
+      - name: Verify migration integrity
+        run: node --experimental-strip-types scripts/check-migrations.ts
+      # Advisories in dependencies that reach customers. Dev-only advisories are
+      # tracked by Dependabot but do not block a release.
+      - name: Audit production dependencies
+        run: npm audit --omit=dev --audit-level=high
       - run: npm run expand-graph
       - run: npm run typecheck
       - run: npm run lint
       - run: npm test
       - run: rm -rf .next
       - run: npm run build
+
+  # The Modal GPU worker ships outside the Vercel build, so nothing else in CI
+  # would notice if it stopped importing. Its own test spawns a real GPU job on
+  # Modal and bills for it, so it cannot run here; this catches the breakage
+  # class that does not need an account: syntax errors and undefined names.
+  worker:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install ruff==0.16.1
+      - name: Check worker for syntax errors and undefined names
+        run: ruff check --isolated --select E9,F82 workers/
+      - name: Byte-compile the worker
+        run: python -m compileall -q workers
