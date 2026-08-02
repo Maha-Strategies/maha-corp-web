@@ -1,0 +1,58 @@
+name: Production release health
+
+on:
+  schedule:
+    - cron: '7,22,37,52 * * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: production-release-health
+  cancel-in-progress: true
+
+jobs:
+  monitor:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    environment:
+      name: production-monitoring
+      url: ${{ vars.PRODUCTION_BASE_URL }}
+    env:
+      PRODUCTION_BASE_URL: ${{ vars.PRODUCTION_BASE_URL }}
+      PRODUCTION_CANONICAL_URL: ${{ vars.PRODUCTION_BASE_URL }}
+      PRODUCTION_REVENUE_CONTROL_TOKEN: ${{ secrets.PRODUCTION_REVENUE_CONTROL_TOKEN }}
+      VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+      VERCEL_TEAM_ID: ${{ vars.VERCEL_TEAM_ID }}
+      VERCEL_PROJECT_ID: ${{ vars.VERCEL_PROJECT_ID }}
+      RELEASE_HEALTH_OUTPUT: ${{ runner.temp }}/production-release-health.json
+      RELEASE_MANIFEST_OUTPUT: ${{ runner.temp }}/production-last-known-good.json
+      VERCEL_DEPLOYMENT_JSON_PATH: ${{ runner.temp }}/vercel-deployment.json
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 24
+      - name: Install pinned Vercel CLI
+        run: npm install --global vercel@58.4.0
+      - name: Resolve canonical Production deployment
+        run: vercel inspect "$PRODUCTION_BASE_URL" --json --token "$VERCEL_TOKEN" --scope "$VERCEL_TEAM_ID" > "$VERCEL_DEPLOYMENT_JSON_PATH"
+      - name: Verify read-only Production health
+        run: node --experimental-strip-types scripts/verify-production-release.ts
+      - name: Upload last-known-good deployment
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: production-last-known-good
+          path: ${{ runner.temp }}/production-last-known-good.json
+          if-no-files-found: error
+          retention-days: 14
+      - name: Upload health evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: production-release-health-${{ github.run_id }}
+          path: ${{ runner.temp }}/production-release-health.json
+          if-no-files-found: warn
+          retention-days: 14

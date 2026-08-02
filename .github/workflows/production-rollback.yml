@@ -1,0 +1,104 @@
+name: Production rollback
+
+on:
+  workflow_dispatch:
+    inputs:
+      confirmation:
+        description: Type ROLLBACK PRODUCTION exactly
+        required: true
+        type: string
+      reason:
+        description: Incident or rollback reason
+        required: true
+        type: string
+
+permissions:
+  actions: read
+  contents: read
+
+concurrency:
+  group: production-recovery
+  cancel-in-progress: false
+
+jobs:
+  rollback:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    environment:
+      name: production-canary
+      url: ${{ vars.PRODUCTION_CANARY_BASE_URL }}
+    env:
+      GH_TOKEN: ${{ github.token }}
+      PRODUCTION_BASE_URL: ${{ vars.PRODUCTION_CANARY_BASE_URL }}
+      PRODUCTION_CANONICAL_URL: ${{ vars.PRODUCTION_CANARY_BASE_URL }}
+      PRODUCTION_REVENUE_CONTROL_TOKEN: ${{ secrets.PRODUCTION_REVENUE_CONTROL_TOKEN }}
+      VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+      VERCEL_TEAM_ID: ${{ vars.VERCEL_TEAM_ID }}
+      VERCEL_PROJECT_ID: ${{ vars.VERCEL_PROJECT_ID }}
+      RELEASE_MANIFEST_PATH: ${{ runner.temp }}/last-known-good/production-last-known-good.json
+      RELEASE_HEALTH_OUTPUT: ${{ runner.temp }}/post-rollback-health.json
+      RELEASE_MANIFEST_OUTPUT: ${{ runner.temp }}/post-rollback-manifest.json
+      VERCEL_DEPLOYMENT_JSON_PATH: ${{ runner.temp }}/post-rollback-deployment.json
+      STAGING_API_KEY: ${{ secrets.PRODUCTION_CANARY_API_KEY }}
+      TEST_API_URL: ${{ vars.PRODUCTION_CANARY_BASE_URL }}
+      TEST_MCP_UPSTREAM_URL: ${{ vars.PRODUCTION_CANARY_MCP_UPSTREAM_URL }}
+      TEST_MCP_UPSTREAM_TOKEN: ${{ secrets.PRODUCTION_CANARY_MCP_UPSTREAM_TOKEN }}
+    steps:
+      - name: Enforce explicit rollback confirmation
+        env:
+          CONFIRMATION: ${{ inputs.confirmation }}
+          REASON: ${{ inputs.reason }}
+        run: |
+          test "$CONFIRMATION" = 'ROLLBACK PRODUCTION'
+          test "${#REASON}" -ge 12
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Find latest successful release-health run
+        id: health-run
+        run: |
+          gh api "repos/$GITHUB_REPOSITORY/actions/workflows/production-release-health.yml/runs?status=success&branch=main&per_page=1" > "$RUNNER_TEMP/health-runs.json"
+          node --input-type=module -e "import fs from 'node:fs'; const id=JSON.parse(fs.readFileSync(process.env.RUNNER_TEMP+'/health-runs.json')).workflow_runs?.[0]?.id; if(!id) throw new Error('No successful release-health run exists.'); fs.appendFileSync(process.env.GITHUB_OUTPUT,'run_id='+id+'\\n')"
+      - uses: actions/download-artifact@v5
+        with:
+          name: production-last-known-good
+          path: ${{ runner.temp }}/last-known-good
+          github-token: ${{ github.token }}
+          run-id: ${{ steps.health-run.outputs.run_id }}
+      - name: Validate rollback target
+        id: recovery
+        run: node --experimental-strip-types scripts/resolve-release-manifest.ts
+      - name: Record authorized recovery request
+        env:
+          RECOVERY_REASON: ${{ inputs.reason }}
+          RECOVERY_ACTOR: ${{ github.actor }}
+          RECOVERY_TARGET: ${{ steps.recovery.outputs.deployment_id }}
+        run: |
+          node --input-type=module -e "import fs from 'node:fs'; const evidence={requestedAt:new Date().toISOString(),actor:process.env.RECOVERY_ACTOR,reason:process.env.RECOVERY_REASON,targetDeploymentId:process.env.RECOVERY_TARGET,workflowRunId:process.env.GITHUB_RUN_ID}; fs.writeFileSync(process.env.RUNNER_TEMP+'/rollback-request.json',JSON.stringify(evidence,null,2)+'\n',{mode:0o600})"
+      - name: Install pinned Vercel CLI
+        run: npm install --global vercel@58.4.0
+      - name: Preserve pre-rollback deployment evidence
+        run: vercel inspect "$PRODUCTION_BASE_URL" --json --token "$VERCEL_TOKEN" --scope "$VERCEL_TEAM_ID" > "$RUNNER_TEMP/pre-rollback-deployment.json"
+      - name: Roll back canonical Production aliases
+        run: vercel rollback "${{ steps.recovery.outputs.deployment_id }}" --yes --timeout 3m --token "$VERCEL_TOKEN" --scope "$VERCEL_TEAM_ID"
+      - name: Resolve post-rollback canonical deployment
+        run: vercel inspect "$PRODUCTION_BASE_URL" --json --token "$VERCEL_TOKEN" --scope "$VERCEL_TEAM_ID" > "$VERCEL_DEPLOYMENT_JSON_PATH"
+      - name: Verify post-rollback readiness
+        run: node --experimental-strip-types scripts/verify-production-release.ts
+      - name: Run isolated post-rollback E2E gates
+        run: node --experimental-strip-types scripts/test-e2e.ts
+      - name: Upload recovery evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: production-rollback-${{ github.run_id }}
+          path: |
+            ${{ runner.temp }}/pre-rollback-deployment.json
+            ${{ runner.temp }}/post-rollback-deployment.json
+            ${{ runner.temp }}/post-rollback-health.json
+            ${{ runner.temp }}/rollback-request.json
+          if-no-files-found: warn
+          retention-days: 90
