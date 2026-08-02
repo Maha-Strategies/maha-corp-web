@@ -1,0 +1,78 @@
+version: 2
+
+updates:
+  # Application dependencies. Security advisories are raised immediately and
+  # independently of this schedule; the weekly window only batches routine
+  # version drift so review stays bounded.
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+      time: "07:00"
+      timezone: Etc/UTC
+    open-pull-requests-limit: 5
+    versioning-strategy: increase
+    labels:
+      - dependencies
+    groups:
+      # Payment, database, telemetry, and model clients touch money movement and
+      # customer data. Keep them out of the large batch so each one is reviewed
+      # against its own changelog.
+      revenue-and-data-clients:
+        patterns:
+          - stripe
+          - "@stripe/*"
+          - "@supabase/*"
+          - "@upstash/*"
+          - "@sentry/*"
+          - "@anthropic-ai/*"
+          - resend
+        update-types:
+          - minor
+          - patch
+      framework:
+        patterns:
+          - next
+          - react
+          - react-dom
+          - eslint-config-next
+        update-types:
+          - minor
+          - patch
+      development:
+        dependency-type: development
+        update-types:
+          - minor
+          - patch
+    ignore:
+      # Major upgrades of the framework and the payment/data clients are
+      # migrations, not dependency bumps. They are planned deliberately.
+      - dependency-name: next
+        update-types: ["version-update:semver-major"]
+      - dependency-name: react
+        update-types: ["version-update:semver-major"]
+      - dependency-name: react-dom
+        update-types: ["version-update:semver-major"]
+      - dependency-name: stripe
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "@supabase/supabase-js"
+        update-types: ["version-update:semver-major"]
+
+  # Workflow actions run with repository credentials and Vercel tokens, so they
+  # are pinned dependencies in their own right.
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+      time: "07:00"
+      timezone: Etc/UTC
+    open-pull-requests-limit: 3
+    labels:
+      - dependencies
+      - ci
+# The Modal GPU worker pins its Python dependencies inline in the image
+# definition in workers/maha_workers.py, so there is no manifest for Dependabot
+# to read. Adding a `pip` entry here would fail on every run. Those pins are
+# reviewed by hand when the worker image is rebuilt.
