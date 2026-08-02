@@ -65,6 +65,35 @@ curl -H 'Authorization: Bearer <REVENUE_CONTROL_TOKEN>' \
 
 It returns only configuration presence and status—never DSNs, tokens, URLs, or webhook secrets. HTTP 200 means both integrations are ready; HTTP 503 means configuration is missing or invalid.
 
+## Revenue path readiness
+
+Every paid path fails closed: its config function returns `null` when a variable is missing or its flag is off, and the surface stops offering checkout without saying so. A deliberate shutdown and a half-finished one are indistinguishable from outside.
+
+```bash
+curl -H 'Authorization: Bearer <RELEASE_HEALTH_TOKEN>' \
+  https://<deployment>/api/admin/revenue-readiness
+```
+
+Each path reports one state:
+
+| State | Meaning | Fault |
+| --- | --- | --- |
+| `ready` | Enabled and fully configured | No |
+| `disabled` | Flag off and none of its own variables set — a clean shutdown | No |
+| `configured_not_enabled` | Fully wired but the flag was never switched on | No |
+| `incomplete` | Partially wired: someone started and stopped | **Yes** |
+| `enabled_incomplete` | Flag on but variables missing — it cannot transact | **Yes** |
+
+HTTP 200 means no path is in a fault state; 503 means at least one is, and `faults` names them. Only variable **names** appear in the response — never a value, prefix, or length.
+
+Shared platform credentials (`STRIPE_SECRET_KEY`, `RESEND_API_KEY`, `ANTHROPIC_API_KEY`) are tracked separately from path-specific ones. A shared key is set for other paths anyway, so it is never read as evidence that this path was being wired.
+
+When a required variable is missing, the response also reports any environment variable name within a small edit distance of it. This catches the failure mode where a variable is set under a near-miss name and the path fails closed exactly as if nothing had been set — the `MPS_PREFLIGHT_FROM_EMAI` case, missing its final L.
+
+`REVENUE_PATHS` in `lib/revenue-readiness.ts` mirrors the config gates in `books.ts`, `mps-credits.ts`, `utility-billing.ts`, and the preflight and API-credit checkout routes. Update it when a gate changes; a test asserts every path declares at least one variable of its own.
+
+**This endpoint is deliberately not one of the four release-health checks.** Those gate the last-known-good manifest that rollback depends on, and a configuration fault must never be able to withhold the recovery path. Poll it separately.
+
 ## Release verification
 
 1. Deploy Preview with the Preview Sentry project and a test webhook receiver.
