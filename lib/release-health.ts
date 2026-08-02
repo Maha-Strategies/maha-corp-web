@@ -58,9 +58,9 @@ async function json(response: Response) {
   try { return object(await response.json()) } catch { return null }
 }
 
-export async function checkProductionRelease(input: { baseUrl: string; revenueControlToken: string; bypassSecret?: string; allowDeploymentUrl?: boolean; fetcher?: Fetcher }) {
+export async function checkProductionRelease(input: { baseUrl: string; releaseHealthToken: string; bypassSecret?: string; allowDeploymentUrl?: boolean; fetcher?: Fetcher }) {
   const origin = baseUrl(input.baseUrl, input.allowDeploymentUrl).origin
-  if (input.revenueControlToken.length < 32) throw new Error('Revenue control token is not configured.')
+  if (input.releaseHealthToken.length < 32) throw new Error('Release health token is not configured.')
   const fetcher = input.fetcher ?? fetch
   const definitions = [
     { name: 'homepage' as const, path: '/', authorization: false },
@@ -74,7 +74,7 @@ export async function checkProductionRelease(input: { baseUrl: string; revenueCo
     let status = 0, code = 'request_failed', state: 'ready' | 'failed' = 'failed'
     try {
       const headers = new Headers({ Accept: definition.name === 'homepage' ? 'text/html' : 'application/json' })
-      if (definition.authorization) headers.set('Authorization', `Bearer ${input.revenueControlToken}`)
+      if (definition.authorization) headers.set('Authorization', `Bearer ${input.releaseHealthToken}`)
       if (input.bypassSecret) headers.set('x-vercel-protection-bypass', input.bypassSecret)
       const response = await fetcher(`${origin}${definition.path}`, { headers, redirect: 'manual', signal: AbortSignal.timeout(10_000) })
       status = response.status

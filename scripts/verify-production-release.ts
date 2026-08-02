@@ -12,7 +12,7 @@ const outputPath = required('RELEASE_HEALTH_OUTPUT')
 const deploymentJson = JSON.parse(await readFile(required('VERCEL_DEPLOYMENT_JSON_PATH'), 'utf8')) as unknown
 const deployment = parseProductionDeployment(deploymentJson, required('VERCEL_PROJECT_ID'))
 const result = await checkProductionRelease({
-  baseUrl: required('PRODUCTION_BASE_URL'), revenueControlToken: required('PRODUCTION_REVENUE_CONTROL_TOKEN'),
+  baseUrl: required('PRODUCTION_BASE_URL'), releaseHealthToken: required('PRODUCTION_RELEASE_HEALTH_TOKEN'),
   bypassSecret: process.env.VERCEL_AUTOMATION_BYPASS_SECRET?.trim(), allowDeploymentUrl: process.env.ALLOW_VERCEL_DEPLOYMENT_URL === 'true',
 })
 
