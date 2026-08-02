@@ -1,0 +1,152 @@
+name: Production rollback and restore rehearsal
+
+on:
+  workflow_dispatch:
+    inputs:
+      confirmation:
+        description: Type REHEARSE PRODUCTION ROLLBACK exactly
+        required: true
+        type: string
+      reason:
+        description: Approved maintenance-window reason
+        required: true
+        type: string
+      target_release_health_run_id:
+        description: Prior successful Production release-health run ID
+        required: true
+        type: string
+
+permissions:
+  actions: read
+  contents: read
+
+concurrency:
+  group: production-recovery
+  cancel-in-progress: false
+
+jobs:
+  rehearse:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    environment:
+      name: production-canary
+      url: ${{ vars.PRODUCTION_CANARY_BASE_URL }}
+    env:
+      GH_TOKEN: ${{ github.token }}
+      PRODUCTION_BASE_URL: ${{ vars.PRODUCTION_CANARY_BASE_URL }}
+      PRODUCTION_CANONICAL_URL: ${{ vars.PRODUCTION_CANARY_BASE_URL }}
+      PRODUCTION_RELEASE_HEALTH_TOKEN: ${{ secrets.PRODUCTION_RELEASE_HEALTH_TOKEN }}
+      VERCEL_AUTOMATION_BYPASS_SECRET: ${{ secrets.VERCEL_AUTOMATION_BYPASS_SECRET }}
+      VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+      VERCEL_TEAM_ID: ${{ vars.VERCEL_TEAM_ID }}
+      VERCEL_PROJECT_ID: ${{ vars.VERCEL_PROJECT_ID }}
+      TARGET_RELEASE_HEALTH_RUN_ID: ${{ inputs.target_release_health_run_id }}
+      TARGET_WORKFLOW_RUN_JSON_PATH: ${{ runner.temp }}/rehearsal-target-workflow-run.json
+      RELEASE_MANIFEST_PATH: ${{ github.workspace }}/rollback-target/production-last-known-good.json
+      ORIGINAL_DEPLOYMENT_JSON_PATH: ${{ github.workspace }}/rehearsal-original-deployment.json
+      TARGET_DEPLOYMENT_JSON_PATH: ${{ github.workspace }}/rehearsal-target-deployment.json
+      ROLLED_BACK_DEPLOYMENT_JSON_PATH: ${{ github.workspace }}/rehearsal-rolled-back-deployment.json
+      RESTORED_DEPLOYMENT_JSON_PATH: ${{ github.workspace }}/rehearsal-restored-deployment.json
+      ROLLBACK_HEALTH_OUTPUT: ${{ github.workspace }}/rehearsal-rollback-health.json
+      RESTORE_HEALTH_OUTPUT: ${{ github.workspace }}/rehearsal-restore-health.json
+      STAGING_API_KEY: ${{ secrets.PRODUCTION_CANARY_API_KEY }}
+      TEST_API_URL: ${{ vars.PRODUCTION_CANARY_BASE_URL }}
+      TEST_MCP_UPSTREAM_URL: ${{ vars.PRODUCTION_CANARY_MCP_UPSTREAM_URL }}
+      TEST_MCP_UPSTREAM_TOKEN: ${{ secrets.PRODUCTION_CANARY_MCP_UPSTREAM_TOKEN }}
+    steps:
+      - name: Enforce explicit rehearsal authorization
+        env:
+          CONFIRMATION: ${{ inputs.confirmation }}
+          REASON: ${{ inputs.reason }}
+        run: |
+          test "$GITHUB_REF_NAME" = 'main'
+          test "$CONFIRMATION" = 'REHEARSE PRODUCTION ROLLBACK'
+          test "${#REASON}" -ge 12
+          case "$TARGET_RELEASE_HEALTH_RUN_ID" in (*[!0-9]*|'') exit 1;; esac
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Fetch authenticated rollback-target run metadata
+        run: gh api "repos/$GITHUB_REPOSITORY/actions/runs/$TARGET_RELEASE_HEALTH_RUN_ID" > "$TARGET_WORKFLOW_RUN_JSON_PATH"
+      - name: Download approved rollback target
+        uses: actions/download-artifact@v8
+        with:
+          name: production-last-known-good
+          path: ${{ github.workspace }}/rollback-target
+          github-token: ${{ github.token }}
+          run-id: ${{ inputs.target_release_health_run_id }}
+      - name: Validate rollback target manifest
+        id: manifest
+        run: node --experimental-strip-types scripts/resolve-release-manifest.ts
+      - name: Install pinned Vercel CLI
+        run: npm install --global vercel@58.4.0
+      - name: Capture exact original canonical deployment
+        run: vercel inspect "$PRODUCTION_BASE_URL" --json --token "$VERCEL_TOKEN" --scope "$VERCEL_TEAM_ID" > "$ORIGINAL_DEPLOYMENT_JSON_PATH"
+      - name: Inspect rollback target
+        run: vercel inspect "${{ steps.manifest.outputs.deployment_id }}" --json --token "$VERCEL_TOKEN" --scope "$VERCEL_TEAM_ID" > "$TARGET_DEPLOYMENT_JSON_PATH"
+      - name: Bind target artifact and preserve restore point
+        id: transition
+        run: node --experimental-strip-types scripts/prepare-rollback-rehearsal.ts
+      - name: Record approved rehearsal request
+        env:
+          REHEARSAL_REASON: ${{ inputs.reason }}
+          REHEARSAL_ACTOR: ${{ github.actor }}
+          ORIGINAL_DEPLOYMENT_ID: ${{ steps.transition.outputs.original_id }}
+          TARGET_DEPLOYMENT_ID: ${{ steps.transition.outputs.target_id }}
+        run: |
+          node --input-type=module -e "import fs from 'node:fs'; const evidence={requestedAt:new Date().toISOString(),actor:process.env.REHEARSAL_ACTOR,reason:process.env.REHEARSAL_REASON,sourceReleaseHealthRunId:process.env.TARGET_RELEASE_HEALTH_RUN_ID,originalDeploymentId:process.env.ORIGINAL_DEPLOYMENT_ID,targetDeploymentId:process.env.TARGET_DEPLOYMENT_ID,workflowRunId:process.env.GITHUB_RUN_ID}; fs.writeFileSync(process.env.RUNNER_TEMP+'/rollback-rehearsal-request.json',JSON.stringify(evidence,null,2)+'\n',{mode:0o600})"
+      - name: Roll back canonical Production aliases
+        run: vercel rollback "${{ steps.transition.outputs.target_id }}" --yes --timeout 3m --token "$VERCEL_TOKEN" --scope "$VERCEL_TEAM_ID"
+      - name: Resolve rolled-back canonical deployment
+        run: vercel inspect "$PRODUCTION_BASE_URL" --json --token "$VERCEL_TOKEN" --scope "$VERCEL_TEAM_ID" > "$ROLLED_BACK_DEPLOYMENT_JSON_PATH"
+      - name: Verify rolled-back identity and readiness
+        env:
+          EXPECTED_DEPLOYMENT_ID: ${{ steps.transition.outputs.target_id }}
+          VERCEL_DEPLOYMENT_JSON_PATH: ${{ env.ROLLED_BACK_DEPLOYMENT_JSON_PATH }}
+          RELEASE_HEALTH_OUTPUT: ${{ env.ROLLBACK_HEALTH_OUTPUT }}
+        run: |
+          node --experimental-strip-types scripts/assert-production-deployment.ts
+          node --experimental-strip-types scripts/verify-production-release.ts
+      - name: Run rolled-back E2E gates
+        run: node --experimental-strip-types scripts/test-e2e.ts
+      - name: Restore exact original Production deployment
+        id: restore
+        if: ${{ always() && steps.transition.outputs.original_id != '' }}
+        run: vercel rollback "${{ steps.transition.outputs.original_id }}" --yes --timeout 3m --token "$VERCEL_TOKEN" --scope "$VERCEL_TEAM_ID"
+      - name: Resolve restored canonical deployment
+        id: inspect-restored
+        if: ${{ always() && steps.restore.outcome == 'success' }}
+        run: vercel inspect "$PRODUCTION_BASE_URL" --json --token "$VERCEL_TOKEN" --scope "$VERCEL_TEAM_ID" > "$RESTORED_DEPLOYMENT_JSON_PATH"
+      - name: Verify restored identity and readiness
+        id: verify-restored
+        if: ${{ always() && steps.inspect-restored.outcome == 'success' }}
+        env:
+          EXPECTED_DEPLOYMENT_ID: ${{ steps.transition.outputs.original_id }}
+          VERCEL_DEPLOYMENT_JSON_PATH: ${{ env.RESTORED_DEPLOYMENT_JSON_PATH }}
+          RELEASE_HEALTH_OUTPUT: ${{ env.RESTORE_HEALTH_OUTPUT }}
+        run: |
+          node --experimental-strip-types scripts/assert-production-deployment.ts
+          node --experimental-strip-types scripts/verify-production-release.ts
+      - name: Run restored E2E gates
+        if: ${{ always() && steps.verify-restored.outcome == 'success' }}
+        run: node --experimental-strip-types scripts/test-e2e.ts
+      - name: Upload rehearsal evidence
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: production-rollback-rehearsal-${{ github.run_id }}
+          path: |
+            ${{ env.RELEASE_MANIFEST_PATH }}
+            ${{ env.TARGET_WORKFLOW_RUN_JSON_PATH }}
+            ${{ env.ORIGINAL_DEPLOYMENT_JSON_PATH }}
+            ${{ env.TARGET_DEPLOYMENT_JSON_PATH }}
+            ${{ env.ROLLED_BACK_DEPLOYMENT_JSON_PATH }}
+            ${{ env.RESTORED_DEPLOYMENT_JSON_PATH }}
+            ${{ env.ROLLBACK_HEALTH_OUTPUT }}
+            ${{ env.RESTORE_HEALTH_OUTPUT }}
+            ${{ runner.temp }}/rollback-rehearsal-request.json
+          if-no-files-found: warn
+          retention-days: 90
