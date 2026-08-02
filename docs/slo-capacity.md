@@ -35,6 +35,20 @@ Create the GitHub environment `preview-capacity` with:
 
 Dispatch `preview-capacity.yml` with the immutable ready Preview URL. Run `control-plane` first at 40 requests per scenario and concurrency 5. Run `mcp` separately at 20 requests and concurrency 2 only after confirming the canary balance and upstream availability.
 
+Leaving `base_url` blank resolves the newest ready Preview automatically. This requires secret `VERCEL_TOKEN` and variables `VERCEL_TEAM_ID` and `VERCEL_PROJECT_ID` in the `preview-capacity` environment, in addition to the secrets listed above.
+
+## Scheduled trend
+
+The workflow also runs daily at 06:17 UTC against the newest ready Preview. A scheduled run is always the `control-plane` profile at 40 requests and concurrency 5, regardless of any input: it never selects `public` and, more importantly, never selects `mcp`, which spends a canary credit on every measured and warmup request. Consuming credits stays an explicit, supervised decision.
+
+The control-plane profile is credit-free. Its authenticated scenarios are the two readiness endpoints and `/api/v1/keys/balance`, which is a self-managed key route and is not metered by the edge proxy.
+
+Each run uploads `preview-capacity-target.json` alongside the report, recording the trigger, profile, measured origin, deployment ID, and commit SHA. Without that, a trend point cannot be attributed to a change.
+
+Read the trend for direction, not for absolute numbers. Each scheduled run measures a different Preview deployment of a different commit, and Preview instances are not performance-comparable with Production. A single slow run is more likely to be a cold start or a noisy neighbour than a regression; several consecutive runs drifting in one direction is the signal worth acting on. Promotion decisions still use a deliberate dispatched run against a specific Preview.
+
+Deployment selection re-checks target, readiness, and project ownership on every entry rather than trusting the API filter, so a Production deployment can never be selected even if it is newer.
+
 For local execution, the harness also recognizes the existing `TEST_API_URL`, `STAGING_API_KEY`, and `RELEASE_HEALTH_TOKEN` aliases after loading the standard Next.js environment files. Explicit `CAPACITY_*` values always take precedence.
 
 Do not increase concurrency or request limits simply to obtain a larger headline number. To establish higher tenant throughput, provision multiple isolated canary tenants, define the expected tier limits first, and increase load in supervised steps while watching Vercel, Sentry, Upstash, Modal, and error-budget consumption.

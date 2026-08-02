@@ -1,15 +1,21 @@
 name: Preview capacity acceptance
 
 on:
+  # A daily control-plane run against the newest ready Preview, so a latency
+  # regression shows up as a trend rather than being discovered during an
+  # incident. Deliberately never the mcp profile: that one spends canary
+  # credits on every request and must stay an explicit, supervised decision.
+  schedule:
+    - cron: '17 6 * * *'
   workflow_dispatch:
     inputs:
       base_url:
-        description: Ready Vercel Preview origin
-        required: true
+        description: Ready Vercel Preview origin (blank resolves the newest ready Preview)
+        required: false
         type: string
       profile:
         description: Capacity profile
-        required: true
+        required: false
         default: control-plane
         type: choice
         options:
@@ -18,12 +24,12 @@ on:
           - mcp
       requests_per_scenario:
         description: Requests per scenario (10-500; MCP maximum 30)
-        required: true
+        required: false
         default: '40'
         type: string
       concurrency:
         description: Concurrent requests (1-20; MCP maximum 5)
-        required: true
+        required: false
         default: '5'
         type: string
       credit_confirmation:
@@ -44,16 +50,20 @@ jobs:
     timeout-minutes: 15
     environment: preview-capacity
     env:
-      CAPACITY_BASE_URL: ${{ inputs.base_url }}
-      CAPACITY_PROFILE: ${{ inputs.profile }}
-      CAPACITY_REQUESTS_PER_SCENARIO: ${{ inputs.requests_per_scenario }}
-      CAPACITY_CONCURRENCY: ${{ inputs.concurrency }}
-      CAPACITY_CREDIT_CONFIRMATION: ${{ inputs.credit_confirmation }}
+      # A scheduled run is always the credit-free control-plane profile at the
+      # documented acceptance settings. Only a dispatch may choose otherwise.
+      CAPACITY_PROFILE: ${{ github.event_name == 'schedule' && 'control-plane' || inputs.profile || 'control-plane' }}
+      CAPACITY_REQUESTS_PER_SCENARIO: ${{ github.event_name == 'schedule' && '40' || inputs.requests_per_scenario || '40' }}
+      CAPACITY_CONCURRENCY: ${{ github.event_name == 'schedule' && '5' || inputs.concurrency || '5' }}
+      CAPACITY_CREDIT_CONFIRMATION: ${{ github.event_name == 'schedule' && '' || inputs.credit_confirmation }}
       CAPACITY_API_KEY: ${{ secrets.CAPACITY_API_KEY }}
       CAPACITY_RELEASE_HEALTH_TOKEN: ${{ secrets.CAPACITY_RELEASE_HEALTH_TOKEN }}
       CAPACITY_MCP_SERVER_ID: ${{ vars.CAPACITY_MCP_SERVER_ID }}
       VERCEL_AUTOMATION_BYPASS_SECRET: ${{ secrets.VERCEL_AUTOMATION_BYPASS_SECRET }}
       CAPACITY_OUTPUT_PATH: ${{ github.workspace }}/preview-capacity-report.json
+      VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+      VERCEL_TEAM_ID: ${{ vars.VERCEL_TEAM_ID }}
+      VERCEL_PROJECT_ID: ${{ vars.VERCEL_PROJECT_ID }}
     steps:
       - uses: actions/checkout@v5
       - uses: actions/setup-node@v5
@@ -61,13 +71,49 @@ jobs:
           node-version: 24
           cache: npm
       - run: npm ci
+
+      # Previews are per-commit and ephemeral, so a scheduled run has no URL
+      # handed to it. Selection re-checks target, readiness, and project
+      # ownership rather than trusting the API filter.
+      - name: Resolve the newest ready Preview
+        id: preview
+        if: ${{ !inputs.base_url }}
+        run: node --experimental-strip-types scripts/resolve-preview-deployment.ts
+
+      - name: Select the capacity target
+        env:
+          SUPPLIED: ${{ inputs.base_url }}
+          RESOLVED: ${{ steps.preview.outputs.origin }}
+        run: |
+          set -euo pipefail
+          target="${SUPPLIED:-$RESOLVED}"
+          if [ -z "$target" ]; then
+            echo '::error::No Preview origin was supplied or resolved.'
+            exit 1
+          fi
+          echo "CAPACITY_BASE_URL=$target" >> "$GITHUB_ENV"
+          echo "Measuring $target"
+
       - name: Run bounded Preview capacity acceptance
         run: node --experimental-strip-types scripts/run-capacity-test.ts
+
+      # The commit the measurement belongs to. Without it a trend line cannot be
+      # attributed to a change.
+      - name: Record the measured deployment
+        if: always()
+        env:
+          DEPLOYMENT_ID: ${{ steps.preview.outputs.deployment_id }}
+          COMMIT_SHA: ${{ steps.preview.outputs.commit_sha }}
+        run: |
+          node --input-type=module -e "import fs from 'node:fs'; fs.writeFileSync('${{ github.workspace }}/preview-capacity-target.json', JSON.stringify({measuredAt:new Date().toISOString(),trigger:process.env.GITHUB_EVENT_NAME,profile:process.env.CAPACITY_PROFILE,baseUrl:process.env.CAPACITY_BASE_URL,deploymentId:process.env.DEPLOYMENT_ID||null,commitSha:process.env.COMMIT_SHA||null,workflowRunId:process.env.GITHUB_RUN_ID},null,2)+'\n')"
+
       - name: Upload capacity evidence
         if: always()
         uses: actions/upload-artifact@v7
         with:
           name: preview-capacity-${{ github.run_id }}
-          path: ${{ env.CAPACITY_OUTPUT_PATH }}
+          path: |
+            ${{ env.CAPACITY_OUTPUT_PATH }}
+            ${{ github.workspace }}/preview-capacity-target.json
           if-no-files-found: error
           retention-days: 90
