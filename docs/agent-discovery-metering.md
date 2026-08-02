@@ -52,10 +52,17 @@ be counted. The two documents moved to `content/discovery/` and are served by
 route handlers, with rewrites in `next.config.ts` preserving the canonical URLs.
 Nothing about the documents themselves changed.
 
-They are deliberately **not edge-cached** (`max-age=0, must-revalidate`). A
-cached discovery document would be cheaper to serve and invisible to
-measurement, and measurement is the entire reason these are routes. Both are
-small and low-traffic, so the origin cost is negligible.
+They are deliberately **not edge-cached**, and the header is `no-store` rather
+than a zero `max-age`. That distinction matters: Vercel serves `public/` assets
+with `public, max-age=0, must-revalidate`, and those responses still come back
+`x-vercel-cache: HIT` with a non-zero `age`. A revalidation directive does not
+keep a response off the edge, and an edge-cached discovery document is invisible
+to measurement — which is the entire reason these are routes. Both documents are
+small and low-traffic, so paying the origin cost is the price of the signal.
+
+If either surface ever becomes hot enough for that to matter, sample rather than
+cache: caching silently undercounts, whereas a known sampling rate can be
+corrected for.
 
 Metering is best-effort: a meter write failure is logged and the document still
 serves. A discovery document failing because a counter could not be incremented
