@@ -1,0 +1,54 @@
+# Every path falls back to the repository owner.
+*                                   @mayonerajan
+
+# Money movement. Webhook handlers, ledgers, and credit accounting are
+# idempotent by construction; a change here can double-charge, double-grant, or
+# silently drop a reversal.
+/app/api/webhooks/                  @mayonerajan
+/app/api/**/webhook/                @mayonerajan
+/app/api/mps-credits/               @mayonerajan
+/app/api/books/                     @mayonerajan
+/app/api/stripe/                    @mayonerajan
+/app/api/v1/billing/                @mayonerajan
+/lib/api-credit-billing.ts          @mayonerajan
+/lib/mps-audit-billing.ts           @mayonerajan
+/lib/mps-credits.ts                 @mayonerajan
+/lib/utility-billing.ts             @mayonerajan
+/lib/revenue-control-plane.ts       @mayonerajan
+/lib/revenue-reconciliation.ts      @mayonerajan
+/lib/books.ts                       @mayonerajan
+
+# Authentication and authorization. The edge proxy gates every /api/v1 request;
+# the credential registry issues secrets that are disclosed exactly once.
+/proxy.ts                           @mayonerajan
+/lib/api-key.ts                     @mayonerajan
+/lib/api-proxy-policy.ts            @mayonerajan
+/lib/agent-client-credentials.ts    @mayonerajan
+/lib/credential-rate-limit.ts       @mayonerajan
+/lib/readiness-authorization.ts     @mayonerajan
+/app/api/agent-credentials/         @mayonerajan
+/app/api/admin/                     @mayonerajan
+
+# Schema. Migrations are append-only and are applied to a database holding
+# commercial history; see scripts/check-migrations.ts.
+/supabase/                          @mayonerajan
+
+# Release, recovery, and CI. These workflows hold Vercel tokens and can mutate
+# the Production alias.
+/.github/                           @mayonerajan
+/scripts/                           @mayonerajan
+/vercel.json                        @mayonerajan
+/next.config.ts                     @mayonerajan
+/instrumentation.ts                 @mayonerajan
+/instrumentation-client.ts          @mayonerajan
+/sentry.server.config.ts            @mayonerajan
+/sentry.edge.config.ts              @mayonerajan
+
+# Dependency manifests: the supply chain for Stripe, Supabase, Sentry, and the
+# model clients.
+/package.json                       @mayonerajan
+/package-lock.json                  @mayonerajan
+
+# The Modal GPU worker runs outside Vercel and authenticates its callbacks with
+# a shared HMAC secret.
+/workers/                           @mayonerajan
