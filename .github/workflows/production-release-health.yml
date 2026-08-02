@@ -4,6 +4,12 @@ on:
   schedule:
     - cron: '7,22,37,52 * * * *'
   workflow_dispatch:
+    inputs:
+      send_controlled_alert:
+        description: Send a labeled failure/recovery alert pair after healthy verification
+        required: false
+        default: false
+        type: boolean
 
 permissions:
   actions: read
@@ -83,4 +89,20 @@ jobs:
           RELEASE_ALERT_EVENT: release.health_recovered
           RELEASE_ALERT_INCIDENT_ANCHOR: ${{ steps.incident.outputs.incident_anchor }}
           RELEASE_ALERT_STAGE: health=success,previous=failure
+        run: node --experimental-strip-types scripts/send-release-alert.ts
+      - name: Send controlled failure alert
+        if: ${{ success() && inputs.send_controlled_alert == true }}
+        env:
+          RELEASE_ALERT_EVENT: release.health_failure
+          RELEASE_ALERT_INCIDENT_ANCHOR: ${{ github.run_id }}
+          RELEASE_ALERT_STAGE: controlled_validation=failure
+          RELEASE_ALERT_CONTROLLED_TEST: 'true'
+        run: node --experimental-strip-types scripts/send-release-alert.ts
+      - name: Send controlled recovery alert
+        if: ${{ success() && inputs.send_controlled_alert == true }}
+        env:
+          RELEASE_ALERT_EVENT: release.health_recovered
+          RELEASE_ALERT_INCIDENT_ANCHOR: ${{ github.run_id }}
+          RELEASE_ALERT_STAGE: controlled_validation=recovered
+          RELEASE_ALERT_CONTROLLED_TEST: 'true'
         run: node --experimental-strip-types scripts/send-release-alert.ts
