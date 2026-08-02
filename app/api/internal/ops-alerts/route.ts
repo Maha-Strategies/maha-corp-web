@@ -1,5 +1,6 @@
 import { jsonResponse } from '@/lib/agent-inquiries'
-import { opsAlertEmail, receiveOpsAlert } from '@/lib/observability/receiver'
+import { opsAlertDeliveryFailure, opsAlertEmail, receiveOpsAlert } from '@/lib/observability/receiver'
+import { captureOperationalError } from '@/lib/observability/telemetry'
 import { Resend } from 'resend'
 
 export const runtime = 'nodejs'
@@ -29,7 +30,10 @@ export async function POST(request: Request) {
       text: email.text,
     }, { idempotencyKey: alert.eventId })
     if (result.error) throw result.error
-  } catch {
+  } catch (error) {
+    const failure = opsAlertDeliveryFailure(error)
+    console.error('[OPS_ALERT_DELIVERY_FAILED]', { failure })
+    captureOperationalError(new Error(`Operations email delivery failed (${failure}).`), 'ops-alert-receiver', 'email-delivery')
     return jsonResponse({ error: { code: 'delivery_failed', message: 'Operations notification delivery failed.' } }, 503)
   }
 

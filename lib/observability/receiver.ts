@@ -72,3 +72,16 @@ export function opsAlertEmail(alert: ReceivedOpsAlert) {
     text: `${label.toUpperCase()}\n\nEvent: ${alert.event}\nEvent ID: ${alert.eventId}\nOccurred: ${alert.occurredAt}\nTenant: ${alert.tenantId}\n\nDetails:\n${JSON.stringify(alert.data, null, 2)}\n`,
   }
 }
+
+export function opsAlertDeliveryFailure(error: unknown) {
+  const record = typeof error === 'object' && error !== null ? error as Record<string, unknown> : null
+  const name = typeof record?.name === 'string' ? record.name.toLowerCase() : ''
+  const message = typeof record?.message === 'string' ? record.message.toLowerCase() : error instanceof Error ? error.message.toLowerCase() : ''
+  const detail = `${name} ${message}`
+  if (detail.includes('domain') && (detail.includes('verif') || detail.includes('sender'))) return 'sender_domain_unverified'
+  if (detail.includes('api key') || detail.includes('authentication') || detail.includes('unauthorized')) return 'provider_authentication_failed'
+  if (detail.includes('rate') && detail.includes('limit')) return 'provider_rate_limited'
+  if (detail.includes('recipient') || detail.includes('email address')) return 'recipient_rejected'
+  if (name === 'validation_error') return 'provider_validation_failed'
+  return 'provider_request_failed'
+}
