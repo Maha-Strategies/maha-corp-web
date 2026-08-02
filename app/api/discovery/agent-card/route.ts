@@ -9,9 +9,13 @@ export const dynamic = 'force-dynamic'
 // itself is unchanged; it moved out of public/ only so that a request for it
 // reaches the origin and can be counted.
 //
-// Deliberately not cached at the edge. A cached discovery document would be
-// cheaper to serve and invisible to measurement, and measurement is the entire
-// reason this is a route rather than a static file.
+// `no-store`, not merely `max-age=0`. Production serves public/ assets with
+// `public, max-age=0, must-revalidate` and those responses still return
+// x-vercel-cache: HIT with a non-zero age, so that directive does not keep a
+// response off the edge. A cached discovery document is invisible to
+// measurement, and measurement is the entire reason this is a route rather than
+// a static file. These documents are small and low-traffic; the origin cost is
+// the price of the signal.
 export async function GET(request: Request) {
   const ledger = createAgentInquiryLedger()
   if (ledger) {
@@ -19,7 +23,7 @@ export async function GET(request: Request) {
     await recordAgentDiscovery(ledger, { surface: 'agent_card', userAgent: request.headers.get('user-agent') })
   }
   return Response.json(agentCard, {
-    headers: { 'Cache-Control': 'public, max-age=0, must-revalidate', 'Access-Control-Allow-Origin': '*' },
+    headers: { 'Cache-Control': 'no-store', 'Access-Control-Allow-Origin': '*' },
   })
 }
 
