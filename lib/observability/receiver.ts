@@ -4,13 +4,17 @@ import { signOpsAlert } from './contracts.ts'
 
 const EVENT_ID = /^alert_[a-f0-9]{32}$/
 const TENANT_ID = /^[A-Za-z0-9_-]{1,160}$/
-const ALLOWED_EVENTS = new Set(['tenant.low_credit', 'mcp.upstream_connectivity_failure'])
+const ALLOWED_EVENTS = new Set([
+  'tenant.low_credit', 'mcp.upstream_connectivity_failure',
+  'release.health_failure', 'release.health_recovered',
+  'release.recovery_drill_failure', 'release.recovery_drill_recovered',
+])
 const MAX_EVENT_AGE_MS = 15 * 60 * 1_000
 const MAX_CLOCK_SKEW_MS = 5 * 60 * 1_000
 
 export type ReceivedOpsAlert = {
   schema: 'maha.ops-alert.v1'
-  event: 'tenant.low_credit' | 'mcp.upstream_connectivity_failure'
+  event: 'tenant.low_credit' | 'mcp.upstream_connectivity_failure' | 'release.health_failure' | 'release.health_recovered' | 'release.recovery_drill_failure' | 'release.recovery_drill_recovered'
   eventId: string
   occurredAt: string
   tenantId: string
@@ -66,7 +70,15 @@ export function receiveOpsAlert(body: string, headers: Headers, secret: string, 
 }
 
 export function opsAlertEmail(alert: ReceivedOpsAlert) {
-  const label = alert.event === 'tenant.low_credit' ? 'Low tenant credit balance' : 'MCP upstream connectivity failure'
+  const labels: Record<ReceivedOpsAlert['event'], string> = {
+    'tenant.low_credit': 'Low tenant credit balance',
+    'mcp.upstream_connectivity_failure': 'MCP upstream connectivity failure',
+    'release.health_failure': 'Production release health failure',
+    'release.health_recovered': 'Production release health recovered',
+    'release.recovery_drill_failure': 'Production recovery drill failure',
+    'release.recovery_drill_recovered': 'Production recovery drill recovered',
+  }
+  const label = labels[alert.event]
   return {
     subject: `[Maha operations] ${label}`,
     text: `${label.toUpperCase()}\n\nEvent: ${alert.event}\nEvent ID: ${alert.eventId}\nOccurred: ${alert.occurredAt}\nTenant: ${alert.tenantId}\n\nDetails:\n${JSON.stringify(alert.data, null, 2)}\n`,

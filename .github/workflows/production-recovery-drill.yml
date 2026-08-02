@@ -22,6 +22,7 @@ jobs:
       url: ${{ vars.PRODUCTION_BASE_URL }}
     env:
       GH_TOKEN: ${{ github.token }}
+      MAHA_OPS_WEBHOOK_SECRET: ${{ secrets.MAHA_OPS_WEBHOOK_SECRET }}
       PRODUCTION_RELEASE_HEALTH_TOKEN: ${{ secrets.PRODUCTION_RELEASE_HEALTH_TOKEN }}
       VERCEL_AUTOMATION_BYPASS_SECRET: ${{ secrets.VERCEL_AUTOMATION_BYPASS_SECRET }}
       VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
@@ -36,32 +37,57 @@ jobs:
       - uses: actions/setup-node@v5
         with:
           node-version: 24
+      - name: Capture prior recovery state
+        id: incident
+        continue-on-error: true
+        run: |
+          gh api "repos/$GITHUB_REPOSITORY/actions/workflows/production-recovery-drill.yml/runs?status=completed&branch=main&per_page=100" > "$RUNNER_TEMP/recovery-drill-runs.json"
+          WORKFLOW_RUNS_PATH="$RUNNER_TEMP/recovery-drill-runs.json" node --experimental-strip-types scripts/resolve-workflow-incident.ts
       - name: Find latest successful release-health run
-        id: health-run
+        id: health_run
         run: |
           gh api "repos/$GITHUB_REPOSITORY/actions/workflows/production-release-health.yml/runs?status=success&branch=main&per_page=1" > "$RUNNER_TEMP/health-runs.json"
           node --input-type=module -e "import fs from 'node:fs'; const id=JSON.parse(fs.readFileSync(process.env.RUNNER_TEMP+'/health-runs.json')).workflow_runs?.[0]?.id; if(!id) throw new Error('No successful release-health run exists.'); fs.appendFileSync(process.env.GITHUB_OUTPUT,'run_id='+id+'\\n')"
       - uses: actions/download-artifact@v5
+        id: download
         with:
           name: production-last-known-good
           path: ${{ github.workspace }}/last-known-good
           github-token: ${{ github.token }}
-          run-id: ${{ steps.health-run.outputs.run_id }}
+          run-id: ${{ steps.health_run.outputs.run_id }}
       - name: Validate recovery manifest
         id: recovery
         run: node --experimental-strip-types scripts/resolve-release-manifest.ts
       - name: Install pinned Vercel CLI
+        id: install
         run: npm install --global vercel@58.4.0
       - name: Confirm recovery deployment remains READY
+        id: inspect
         run: vercel inspect "${{ steps.recovery.outputs.deployment_id }}" --json --token "$VERCEL_TOKEN" --scope "$VERCEL_TEAM_ID" > "$VERCEL_DEPLOYMENT_JSON_PATH"
       - name: Exercise recovery deployment directly
+        id: exercise
         env:
           PRODUCTION_BASE_URL: ${{ steps.recovery.outputs.deployment_url }}
         run: node --experimental-strip-types scripts/verify-production-release.ts
       - uses: actions/upload-artifact@v4
+        id: evidence
         if: always()
         with:
           name: production-recovery-drill-${{ github.run_id }}
           path: ${{ env.RELEASE_HEALTH_OUTPUT }}
           if-no-files-found: warn
           retention-days: 30
+      - name: Alert on recovery-drill failure
+        if: ${{ always() && (steps.health_run.outcome == 'failure' || steps.download.outcome == 'failure' || steps.recovery.outcome == 'failure' || steps.install.outcome == 'failure' || steps.inspect.outcome == 'failure' || steps.exercise.outcome == 'failure' || steps.evidence.outcome == 'failure') }}
+        env:
+          RELEASE_ALERT_EVENT: release.recovery_drill_failure
+          RELEASE_ALERT_INCIDENT_ANCHOR: ${{ steps.incident.outputs.incident_anchor }}
+          RELEASE_ALERT_STAGE: manifest=${{ steps.recovery.outcome }},inspect=${{ steps.inspect.outcome }},exercise=${{ steps.exercise.outcome }},evidence=${{ steps.evidence.outcome }}
+        run: node --experimental-strip-types scripts/send-release-alert.ts
+      - name: Alert when recovery drill recovers
+        if: ${{ success() && steps.incident.outputs.previous_conclusion == 'failure' }}
+        env:
+          RELEASE_ALERT_EVENT: release.recovery_drill_recovered
+          RELEASE_ALERT_INCIDENT_ANCHOR: ${{ steps.incident.outputs.incident_anchor }}
+          RELEASE_ALERT_STAGE: recovery=success,previous=failure
+        run: node --experimental-strip-types scripts/send-release-alert.ts

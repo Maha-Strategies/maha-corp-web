@@ -43,10 +43,14 @@ X-Maha-Alert-Signature: sha256=HMAC_SHA256(raw_body, MAHA_OPS_WEBHOOK_SECRET)
 
 It should reject invalid signatures with a non-2xx response. The remaining headers are `X-Maha-Alert-Event` and `X-Maha-Alert-ID`. The JSON schema identifier is `maha.ops-alert.v1`.
 
-Two alert types are emitted:
+The application and release workflows emit these alert types:
 
 - `tenant.low_credit` when the post-request tenant balance is below the configured threshold. It deduplicates once per tenant per UTC day.
 - `mcp.upstream_connectivity_failure` for timeouts, connection/protocol failures, blocked redirects, or upstream 5xx responses. It deduplicates once per tenant/server per five-minute window. Expected upstream 4xx responses do not alert.
+- `release.health_failure` and `release.health_recovered` for Production release-health state transitions.
+- `release.recovery_drill_failure` and `release.recovery_drill_recovered` for immutable-deployment recovery validation.
+
+Release failures use a deterministic event ID anchored to the most recent successful workflow run. Failed runs can therefore retry notification delivery without sending duplicate email. Recovery is emitted only when the immediately preceding completed run failed. Release payloads contain bounded workflow metadata, stage outcomes, deployment ID, commit SHA, and run URL; they never include credentials, dependency response bodies, tenant data, or request payloads.
 
 Delivery has a five-second timeout. A failed delivery becomes eligible for retry after five minutes. Alert delivery is best-effort and never changes the customer API response.
 

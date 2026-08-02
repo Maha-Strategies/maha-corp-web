@@ -6,6 +6,7 @@ on:
   workflow_dispatch:
 
 permissions:
+  actions: read
   contents: read
 
 concurrency:
@@ -20,6 +21,8 @@ jobs:
       name: production-monitoring
       url: ${{ vars.PRODUCTION_BASE_URL }}
     env:
+      GH_TOKEN: ${{ github.token }}
+      MAHA_OPS_WEBHOOK_SECRET: ${{ secrets.MAHA_OPS_WEBHOOK_SECRET }}
       PRODUCTION_BASE_URL: ${{ vars.PRODUCTION_BASE_URL }}
       PRODUCTION_CANONICAL_URL: ${{ vars.PRODUCTION_BASE_URL }}
       PRODUCTION_RELEASE_HEALTH_TOKEN: ${{ secrets.PRODUCTION_RELEASE_HEALTH_TOKEN }}
@@ -34,13 +37,23 @@ jobs:
       - uses: actions/setup-node@v5
         with:
           node-version: 24
+      - name: Capture prior monitoring state
+        id: incident
+        continue-on-error: true
+        run: |
+          gh api "repos/$GITHUB_REPOSITORY/actions/workflows/production-release-health.yml/runs?status=completed&branch=main&per_page=100" > "$RUNNER_TEMP/release-health-runs.json"
+          WORKFLOW_RUNS_PATH="$RUNNER_TEMP/release-health-runs.json" node --experimental-strip-types scripts/resolve-workflow-incident.ts
       - name: Install pinned Vercel CLI
+        id: install
         run: npm install --global vercel@58.4.0
       - name: Resolve canonical Production deployment
+        id: inspect
         run: vercel inspect "$PRODUCTION_BASE_URL" --json --token "$VERCEL_TOKEN" --scope "$VERCEL_TEAM_ID" > "$VERCEL_DEPLOYMENT_JSON_PATH"
       - name: Verify read-only Production health
+        id: health
         run: node --experimental-strip-types scripts/verify-production-release.ts
       - name: Upload last-known-good deployment
+        id: manifest
         if: success()
         uses: actions/upload-artifact@v4
         with:
@@ -49,6 +62,7 @@ jobs:
           if-no-files-found: error
           retention-days: 14
       - name: Upload health evidence
+        id: evidence
         if: always()
         uses: actions/upload-artifact@v4
         with:
@@ -56,3 +70,17 @@ jobs:
           path: ${{ env.RELEASE_HEALTH_OUTPUT }}
           if-no-files-found: warn
           retention-days: 14
+      - name: Alert on release-health failure
+        if: ${{ always() && (steps.install.outcome == 'failure' || steps.inspect.outcome == 'failure' || steps.health.outcome == 'failure' || steps.manifest.outcome == 'failure' || steps.evidence.outcome == 'failure') }}
+        env:
+          RELEASE_ALERT_EVENT: release.health_failure
+          RELEASE_ALERT_INCIDENT_ANCHOR: ${{ steps.incident.outputs.incident_anchor }}
+          RELEASE_ALERT_STAGE: install=${{ steps.install.outcome }},inspect=${{ steps.inspect.outcome }},health=${{ steps.health.outcome }},manifest=${{ steps.manifest.outcome }},evidence=${{ steps.evidence.outcome }}
+        run: node --experimental-strip-types scripts/send-release-alert.ts
+      - name: Alert when release health recovers
+        if: ${{ success() && steps.incident.outputs.previous_conclusion == 'failure' }}
+        env:
+          RELEASE_ALERT_EVENT: release.health_recovered
+          RELEASE_ALERT_INCIDENT_ANCHOR: ${{ steps.incident.outputs.incident_anchor }}
+          RELEASE_ALERT_STAGE: health=success,previous=failure
+        run: node --experimental-strip-types scripts/send-release-alert.ts
