@@ -1,0 +1,73 @@
+name: Preview capacity acceptance
+
+on:
+  workflow_dispatch:
+    inputs:
+      base_url:
+        description: Ready Vercel Preview origin
+        required: true
+        type: string
+      profile:
+        description: Capacity profile
+        required: true
+        default: control-plane
+        type: choice
+        options:
+          - public
+          - control-plane
+          - mcp
+      requests_per_scenario:
+        description: Requests per scenario (10-500; MCP maximum 30)
+        required: true
+        default: '40'
+        type: string
+      concurrency:
+        description: Concurrent requests (1-20; MCP maximum 5)
+        required: true
+        default: '5'
+        type: string
+      credit_confirmation:
+        description: For MCP only, type CONSUME CANARY CREDITS
+        required: false
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: preview-capacity
+  cancel-in-progress: false
+
+jobs:
+  capacity:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    environment: preview-capacity
+    env:
+      CAPACITY_BASE_URL: ${{ inputs.base_url }}
+      CAPACITY_PROFILE: ${{ inputs.profile }}
+      CAPACITY_REQUESTS_PER_SCENARIO: ${{ inputs.requests_per_scenario }}
+      CAPACITY_CONCURRENCY: ${{ inputs.concurrency }}
+      CAPACITY_CREDIT_CONFIRMATION: ${{ inputs.credit_confirmation }}
+      CAPACITY_API_KEY: ${{ secrets.CAPACITY_API_KEY }}
+      CAPACITY_RELEASE_HEALTH_TOKEN: ${{ secrets.CAPACITY_RELEASE_HEALTH_TOKEN }}
+      CAPACITY_MCP_SERVER_ID: ${{ vars.CAPACITY_MCP_SERVER_ID }}
+      VERCEL_AUTOMATION_BYPASS_SECRET: ${{ secrets.VERCEL_AUTOMATION_BYPASS_SECRET }}
+      CAPACITY_OUTPUT_PATH: ${{ github.workspace }}/preview-capacity-report.json
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Run bounded Preview capacity acceptance
+        run: node --experimental-strip-types scripts/run-capacity-test.ts
+      - name: Upload capacity evidence
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: preview-capacity-${{ github.run_id }}
+          path: ${{ env.CAPACITY_OUTPUT_PATH }}
+          if-no-files-found: error
+          retention-days: 90

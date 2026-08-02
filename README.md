@@ -1,24 +1,88 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Maha Strategies
 
-## Getting Started
+The Maha Strategies platform: one Next.js application serving the public site
+and publishing surfaces, the credentialed commercial APIs, and the private
+operations control planes behind them. It is deployed on Vercel at
+[www.mahastrategies.com](https://www.mahastrategies.com).
 
-First, run the development server:
+Most of what follows in this file is operating instructions for a specific
+subsystem — read the section you need rather than the whole document.
+
+## Stack
+
+| Concern | Service |
+| --- | --- |
+| Application and hosting | Next.js (App Router), React, TypeScript, on Vercel |
+| Database | Supabase Postgres, RLS with no public access policies |
+| Cache, rate limits, balances | Upstash Redis, namespaced per deployment environment |
+| GPU compute | Modal — `workers/maha_workers.py` |
+| Payments | Stripe — a separate endpoint and signing secret per product line |
+| Email | Resend |
+| Telemetry | Sentry, payload-scrubbed |
+
+## Running it locally
+
+Requires Node 22 or newer.
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+The app serves on [http://localhost:3000](http://localhost:3000). Copy
+`.env.example` to `.env.local` and fill in what the surface you are working on
+needs; most features degrade to a disabled state rather than crashing when their
+variables are absent.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+To exercise the database locally, start Supabase (`supabase start`) and apply
+`supabase/migrations` plus `supabase/seed.sql`, which provides deterministic
+fixtures.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Checks
+
+```bash
+npm run typecheck && npm run lint && npm test
+```
+
+`npm test` runs the full suite in `test/`. The same commands run in CI on every
+pull request, together with a production build, a production-dependency audit,
+and the migration integrity check below.
+
+## Working on this codebase
+
+Three rules are enforced rather than assumed, because violating them corrupts
+state that cannot be reconstructed:
+
+1. **Migrations are append-only.** Never edit, rename, or delete a migration
+   that has been committed — it may already have run in Production. Add a new
+   forward migration. Filenames are `<14-digit UTC timestamp>_<snake_case>.sql`
+   and must sort after everything already on `main`. Verify with:
+
+   ```bash
+   node --experimental-strip-types scripts/check-migrations.ts
+   ```
+
+2. **Ledgers are append-only.** Corrections are new rows and refunds are
+   reversal entries; nothing edits or deletes a recorded commercial outcome.
+   Operator interventions go through the audited, idempotent actions in the MPS
+   operational control plane, not through direct table writes.
+
+3. **Secrets stay server-side.** Only `NEXT_PUBLIC_*` variables reach the
+   browser. Credential secrets are disclosed exactly once at issuance and stored
+   only as hashes.
+
+Framework note: this repository tracks a Next.js version whose APIs may differ
+from older documentation. See [`AGENTS.md`](./AGENTS.md).
+
+## Operations
+
+| Runbook | Covers |
+| --- | --- |
+| [`docs/database-migrations.md`](./docs/database-migrations.md) | Applying schema changes to Production, drift detection, evidence |
+| [`docs/observability.md`](./docs/observability.md) | Sentry configuration, signed alert verification, readiness checks |
+| [`docs/release-recovery.md`](./docs/release-recovery.md) | Release health, recovery drill, rollback, rehearsal, required GitHub environments |
+| [`docs/slo-capacity.md`](./docs/slo-capacity.md) | Service objectives, error budgets, the bounded capacity harness |
+| [`SECURITY.md`](./SECURITY.md) | Vulnerability reporting and the platform's standing security assumptions |
 
 ## Outbound Market Discovery Matrix
 
@@ -33,21 +97,6 @@ MARKET_SCOUT_QUERY_MATRIX={"lanes":[{"id":"claims","label":"Claim verification",
 ```
 
 The matrix permits up to eight named lanes and twelve queries per lane; the Scout still selects only five cross-lane queries per daily run. The older `MARKET_SCOUT_QUERIES` JSON-string-array setting remains supported as a single custom lane for backward compatibility.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
 
 ## Agent Inquiry Gateway
 
@@ -257,6 +306,8 @@ Verified Stripe payment and reversal webhooks now reconcile automatically into t
 The platform includes privacy-scrubbed Sentry error/performance telemetry, Redis and Modal MCP dependency spans, signed low-credit and upstream-connectivity webhooks, and a private configuration-readiness endpoint. See [the operations runbook](./docs/observability.md) for environment variables, signature verification, dashboards, and release tests.
 
 Production release health runs four times per hour, preserves the exact last-known-good Vercel deployment, and supports a reviewer-gated rollback with post-recovery readiness and full canary verification. See [the release recovery runbook](./docs/release-recovery.md).
+
+Internal availability and latency objectives are enforced by a bounded Preview capacity harness covering public surfaces, readiness dependencies, Upstash key lookup, and an explicitly confirmed controlled-upstream MCP profile. See [service objectives and capacity acceptance](./docs/slo-capacity.md).
 
 ## Inbound Revenue Gatekeeper
 
