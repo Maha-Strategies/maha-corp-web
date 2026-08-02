@@ -41,7 +41,7 @@ jobs:
       VERCEL_TEAM_ID: ${{ vars.VERCEL_TEAM_ID }}
       VERCEL_PROJECT_ID: ${{ vars.VERCEL_PROJECT_ID }}
       TARGET_RELEASE_HEALTH_RUN_ID: ${{ inputs.target_release_health_run_id }}
-      TARGET_WORKFLOW_RUN_JSON_PATH: ${{ runner.temp }}/rehearsal-target-workflow-run.json
+      TARGET_WORKFLOW_RUN_JSON_PATH: ${{ github.workspace }}/rehearsal-target-workflow-run.json
       RELEASE_MANIFEST_PATH: ${{ github.workspace }}/rollback-target/production-last-known-good.json
       ORIGINAL_DEPLOYMENT_JSON_PATH: ${{ github.workspace }}/rehearsal-original-deployment.json
       TARGET_DEPLOYMENT_JSON_PATH: ${{ github.workspace }}/rehearsal-target-deployment.json
