@@ -9,6 +9,8 @@ const nextConfig: NextConfig = {
     return [
       { source: '/.well-known/agent.json', destination: '/api/discovery/agent-card' },
       { source: '/agent-offers.json', destination: '/api/discovery/agent-offers' },
+      { source: '/llm-context/agentic-commerce.md', destination: '/api/discovery/agent-context' },
+      { source: '/mcp-gateway-contract.json', destination: '/api/discovery/mcp-contract' },
     ]
   },
   async redirects() {
