@@ -8,9 +8,19 @@
 // only the class: seven possible values, aggregated per day. That is enough to
 // tell a machine from a browser and nowhere near enough to identify anyone.
 
+// What something evaluating this platform actually reads.
+//
+// Two surfaces are deliberately absent. /api/docs/openapi is requested by
+// release health four times an hour and by the capacity harness on every run,
+// so its counts would measure our own monitoring rather than agent interest.
+// /llms.txt is served by a generated route that a stale public/llms.txt
+// shadows; the two conflict, and making the route dynamic to meter it turns
+// that latent conflict into a hard 500.
 export const DISCOVERY_SURFACES = {
   agent_card: '/.well-known/agent.json',
   agent_offers: '/agent-offers.json',
+  agent_context: '/llm-context/agentic-commerce.md',
+  mcp_contract: '/mcp-gateway-contract.json',
 } as const
 
 export type DiscoverySurface = keyof typeof DISCOVERY_SURFACES

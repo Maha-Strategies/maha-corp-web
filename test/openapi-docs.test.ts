@@ -29,6 +29,8 @@ const PRIVATE_ROUTES = new Set([
   // /agent-offers.json; these internal paths are not part of the API surface.
   '/api/discovery/agent-card',
   '/api/discovery/agent-offers',
+  '/api/discovery/agent-context',
+  '/api/discovery/mcp-contract',
   '/api/admin/content-candidates',
   '/api/admin/content-drafts',
   '/api/admin/content-draft-assistant',

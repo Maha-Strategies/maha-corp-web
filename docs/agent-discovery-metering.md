@@ -8,12 +8,33 @@ either: an agent that never discovers the offers never becomes a customer.
 
 ## What is measured
 
-Two surfaces, at their unchanged public URLs:
+Four surfaces, at their unchanged public URLs:
 
 | Surface | URL |
 | --- | --- |
 | `agent_card` | `/.well-known/agent.json` |
 | `agent_offers` | `/agent-offers.json` |
+| `agent_context` | `/llm-context/agentic-commerce.md` |
+| `mcp_contract` | `/mcp-gateway-contract.json` |
+
+### What is deliberately not metered
+
+**`/api/docs/openapi`.** Release health requests it four times an hour and the
+capacity harness requests it on every run. Its counts would measure our own
+monitoring, not agent interest. Metering it needs a way to exclude internal
+callers first — a marker header the meter skips would do it, and neither the
+release-health nor capacity client sends one today.
+
+**`/llms.txt`.** It is served by a generated route, `app/llms.txt/route.ts`,
+which a stale `public/llms.txt` shadows. The two conflict; the route is
+`force-static`, so the conflict is invisible in production and a hard 500 in
+local development. Making the route dynamic in order to meter it turns that
+latent conflict into a live one. The dead file has to go first.
+
+**The JSON schemas** (`/agent-inquiry-schema.json`, `/mps-audit-schema.json`,
+and the rest). A schema fetch is a validation step that follows discovery, so
+it mostly restates a signal the metered surfaces already carry, and each one
+would add a surface and a conversion for little return.
 
 Each request is counted once against a **client class** — one of seven values,
 derived from the request in memory and then discarded:
