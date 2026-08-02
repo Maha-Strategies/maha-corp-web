@@ -26,9 +26,9 @@ jobs:
       VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
       VERCEL_TEAM_ID: ${{ vars.VERCEL_TEAM_ID }}
       VERCEL_PROJECT_ID: ${{ vars.VERCEL_PROJECT_ID }}
-      RELEASE_MANIFEST_PATH: ${{ runner.temp }}/last-known-good/production-last-known-good.json
-      RELEASE_HEALTH_OUTPUT: ${{ runner.temp }}/recovery-drill-health.json
-      VERCEL_DEPLOYMENT_JSON_PATH: ${{ runner.temp }}/recovery-deployment.json
+      RELEASE_MANIFEST_PATH: ${{ github.workspace }}/last-known-good/production-last-known-good.json
+      RELEASE_HEALTH_OUTPUT: ${{ github.workspace }}/recovery-drill-health.json
+      VERCEL_DEPLOYMENT_JSON_PATH: ${{ github.workspace }}/recovery-deployment.json
       ALLOW_VERCEL_DEPLOYMENT_URL: 'true'
     steps:
       - uses: actions/checkout@v5
@@ -61,6 +61,6 @@ jobs:
         if: always()
         with:
           name: production-recovery-drill-${{ github.run_id }}
-          path: ${{ runner.temp }}/recovery-drill-health.json
+          path: ${{ env.RELEASE_HEALTH_OUTPUT }}
           if-no-files-found: warn
           retention-days: 30
