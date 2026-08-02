@@ -19,6 +19,7 @@
     "maha": "node bin/maha.js",
     "expand-graph": "node --experimental-strip-types scripts/expand-graph.ts",
     "verify:api-credit-billing": "node --experimental-strip-types scripts/verify-api-credit-billing.ts",
+    "test:capacity": "node --experimental-strip-types scripts/run-capacity-test.ts",
     "build:sdk": "npm --prefix packages/sdk run build",
     "pack:sdk": "npm --prefix packages/sdk run pack:dry-run",
     "test": "node --test --experimental-strip-types test/*.test.ts"
