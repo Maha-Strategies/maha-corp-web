@@ -14,6 +14,9 @@ import {
 } from '../lib/agentic-commerce.ts'
 
 const PUBLIC_DIR = join(import.meta.dirname, '..', 'public')
+// The manifest moved out of public/ so that requests for it reach the origin
+// and can be metered; it is served at the same URL by a rewrite.
+const DISCOVERY_DIR = join(import.meta.dirname, '..', 'content', 'discovery')
 
 test('MPS agentic-commerce offer is discovery-only and preserves the human payment boundary', () => {
   assert.equal(agenticCommerceDiscovery.transactionPolicy.autonomousPaymentSupported, false)
@@ -64,7 +67,7 @@ test('agent context links only to the canonical public discovery surfaces', () =
 })
 
 test('the long-lived agent-offers manifest exposes the same MPS payment boundary', () => {
-  const manifest = JSON.parse(readFileSync(join(PUBLIC_DIR, 'agent-offers.json'), 'utf8')) as {
+  const manifest = JSON.parse(readFileSync(join(DISCOVERY_DIR, 'agent-offers.json'), 'utf8')) as {
     transactionPolicy: { autonomousPaymentSupported: boolean; humanConfirmationRequired: boolean }
     offers: Array<{ id: string; purchase?: { mode?: string }; prepaidCredits?: { insufficientBalance?: { httpStatus?: number } } }>
   }

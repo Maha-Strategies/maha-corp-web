@@ -78,6 +78,7 @@ from older documentation. See [`AGENTS.md`](./AGENTS.md).
 
 | Runbook | Covers |
 | --- | --- |
+| [`docs/agent-discovery-metering.md`](./docs/agent-discovery-metering.md) | Measuring whether agents are finding the platform, and reading the numbers honestly |
 | [`docs/backup-restore.md`](./docs/backup-restore.md) | Rehearsing a database restore, and measuring RTO and RPO |
 | [`docs/database-migrations.md`](./docs/database-migrations.md) | Applying schema changes to Production, drift detection, evidence |
 | [`docs/observability.md`](./docs/observability.md) | Sentry configuration, signed alert verification, readiness checks |

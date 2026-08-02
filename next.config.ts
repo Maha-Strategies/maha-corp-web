@@ -2,6 +2,15 @@ import type { NextConfig } from "next";
 import { withSentryConfig } from '@sentry/nextjs'
 
 const nextConfig: NextConfig = {
+  // The discovery documents keep their canonical public URLs. They are served
+  // by route handlers rather than from public/ so that each request reaches the
+  // origin and can be counted; see lib/agent-discovery-metering.ts.
+  async rewrites() {
+    return [
+      { source: '/.well-known/agent.json', destination: '/api/discovery/agent-card' },
+      { source: '/agent-offers.json', destination: '/api/discovery/agent-offers' },
+    ]
+  },
   async redirects() {
     return [
       {
