@@ -105,13 +105,13 @@ export function createProductionReleaseManifest(input: { canonicalUrl: string; d
   return { schema: RELEASE_MANIFEST_SCHEMA, generatedAt: input.generatedAt ?? new Date().toISOString(), canonicalUrl, deployment: input.deployment, checks: input.checks, source: { repository: input.repository, workflowRunId: input.workflowRunId, commitSha: input.commitSha } }
 }
 
-export function parseProductionReleaseManifest(value: unknown, now = Date.now(), maxAgeMs = 14 * 86_400_000): ProductionReleaseManifest {
+export function parseProductionReleaseManifest(value: unknown, now = Date.now(), maxAgeMs = 14 * 86_400_000, expectedProjectId = process.env.VERCEL_PROJECT_ID ?? 'prj_afSBk4GaUchbuPuHF3ctZSS42iRU'): ProductionReleaseManifest {
   const manifest = object(value)
   if (manifest.schema !== RELEASE_MANIFEST_SCHEMA || typeof manifest.generatedAt !== 'string') throw new Error('Release manifest schema is invalid.')
   const generatedAt = Date.parse(manifest.generatedAt)
   if (!Number.isFinite(generatedAt) || generatedAt > now + 300_000 || generatedAt < now - maxAgeMs) throw new Error('Release manifest is outside the recovery window.')
   const deployment = object(manifest.deployment)
-  const parsedDeployment = parseProductionDeployment({ ...deployment, name: 'maha-corp-web' }, process.env.VERCEL_PROJECT_ID ?? 'prj_afSBk4GaUchbuPuHF3ctZSS42iRU')
+  const parsedDeployment = parseProductionDeployment({ ...deployment, name: 'maha-corp-web' }, expectedProjectId)
   const checks = Array.isArray(manifest.checks) ? manifest.checks : []
   const expectedNames = new Set(['homepage', 'openapi', 'billing_readiness', 'observability_readiness'])
   if (checks.length !== 4 || checks.some((value) => {
@@ -121,4 +121,28 @@ export function parseProductionReleaseManifest(value: unknown, now = Date.now(),
   const source = object(manifest.source)
   if (typeof source.repository !== 'string' || !/^[A-Za-z0-9_.-]+\/[A-Za-z0-9_.-]+$/.test(source.repository) || typeof source.workflowRunId !== 'string' || !/^[0-9]+$/.test(source.workflowRunId) || typeof source.commitSha !== 'string' || !/^[a-f0-9]{40}$/.test(source.commitSha)) throw new Error('Release manifest source metadata is invalid.')
   return { schema: RELEASE_MANIFEST_SCHEMA, generatedAt: manifest.generatedAt, canonicalUrl: baseUrl(String(manifest.canonicalUrl)).origin, deployment: parsedDeployment, checks: checks as ReleaseHealthCheck[], source: source as ProductionReleaseManifest['source'] }
+}
+
+export function prepareRollbackRehearsal(input: {
+  originalDeployment: unknown
+  targetDeployment: unknown
+  targetManifest: unknown
+  targetWorkflowRun: unknown
+  targetReleaseHealthRunId: string
+  projectId: string
+  repository: string
+  now?: number
+}) {
+  if (!/^[1-9][0-9]{0,19}$/.test(input.targetReleaseHealthRunId)) throw new Error('Target release-health run ID is invalid.')
+  const original = parseProductionDeployment(input.originalDeployment, input.projectId)
+  const target = parseProductionDeployment(input.targetDeployment, input.projectId)
+  const manifest = parseProductionReleaseManifest(input.targetManifest, input.now, 14 * 86_400_000, input.projectId)
+  const run = object(input.targetWorkflowRun)
+  const runRepository = object(run.repository)
+  if (String(run.id) !== input.targetReleaseHealthRunId || run.status !== 'completed' || run.conclusion !== 'success' || run.head_branch !== 'main' || run.path !== '.github/workflows/production-release-health.yml') throw new Error('Target run is not a successful main-branch Production release-health run.')
+  if (runRepository.full_name !== input.repository || manifest.source.repository !== input.repository || run.head_sha !== manifest.source.commitSha) throw new Error('Target run metadata does not match the recovery manifest.')
+  if (manifest.source.workflowRunId !== input.targetReleaseHealthRunId) throw new Error('Recovery manifest does not belong to the requested release-health run.')
+  if (manifest.deployment.id !== target.id || manifest.deployment.url !== target.url) throw new Error('Recovery manifest does not match the inspected rollback target.')
+  if (original.id === target.id) throw new Error('Rollback rehearsal target must differ from the current Production deployment.')
+  return { original, target, manifest }
 }

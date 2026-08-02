@@ -63,7 +63,7 @@ jobs:
         run: |
           gh api "repos/$GITHUB_REPOSITORY/actions/workflows/production-release-health.yml/runs?status=success&branch=main&per_page=1" > "$RUNNER_TEMP/health-runs.json"
           node --input-type=module -e "import fs from 'node:fs'; const id=JSON.parse(fs.readFileSync(process.env.RUNNER_TEMP+'/health-runs.json')).workflow_runs?.[0]?.id; if(!id) throw new Error('No successful release-health run exists.'); fs.appendFileSync(process.env.GITHUB_OUTPUT,'run_id='+id+'\\n')"
-      - uses: actions/download-artifact@v5
+      - uses: actions/download-artifact@v8
         with:
           name: production-last-known-good
           path: ${{ github.workspace }}/last-known-good
@@ -93,7 +93,7 @@ jobs:
         run: node --experimental-strip-types scripts/test-e2e.ts
       - name: Upload recovery evidence
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: production-rollback-${{ github.run_id }}
           path: |

@@ -28,6 +28,16 @@ The requesting actor, timestamp, reason, workflow run, pre-rollback deployment, 
 
 The workflow deliberately does not automatically roll forward after a failed post-rollback test. Restoring the known-bad deployment would compound the incident; the rolled-back state remains in place for operator diagnosis.
 
+## Rollback-and-restore rehearsal
+
+`production-rollback-rehearsal.yml` exercises the complete alias rollback and restoration path during an approved maintenance window. It is separate from the emergency rollback workflow and uses the same reviewer-protected `production-canary` environment and recovery concurrency lock.
+
+The operator must type `REHEARSE PRODUCTION ROLLBACK` exactly, provide an approved reason of at least twelve characters, and select a successful Production release-health run from the previous fourteen days. Before changing aliases, the workflow proves that the artifact belongs to the requested run and project, that its inspected deployment is `READY`, and that it differs from the current canonical deployment.
+
+The workflow then records the exact original deployment, rolls back to the selected target, verifies canonical identity, readiness, and the full E2E gates, and always attempts to restore the exact original deployment. It repeats identity, readiness, and E2E verification after restoration. The request, manifests, deployment inspections, and both health reports are retained for ninety days.
+
+This workflow must remain supervised until restoration is green. A failed restoration is an active Production incident and requires immediate manual recovery using the preserved original deployment ID.
+
 ## Required GitHub environments
 
 `production-monitoring` is restricted to `main` and has no reviewer gate because scheduled jobs must run unattended. It contains:
