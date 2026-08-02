@@ -1,0 +1,112 @@
+name: Preview E2E gates
+
+# Runs the full integration suite against each Preview deployment, so MCP
+# discovery, gateway proxying, circuit-breaker behaviour, tenant rate limiting,
+# and CSV/PDF audit export are verified before merge rather than after deploy.
+#
+# UNVERIFIED: this workflow has never run. deployment_status only fires for
+# workflow files already on the default branch, so it cannot test itself on the
+# pull request that adds it. Use the workflow_dispatch path against a known
+# Preview URL first, then merge, then require it in branch protection.
+
+on:
+  # Vercel reports each deployment back to GitHub; this fires once the Preview
+  # is ready and carries its immutable URL.
+  deployment_status:
+  workflow_dispatch:
+    inputs:
+      preview_url:
+        description: Ready Preview URL to test (https://...vercel.app)
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+# Deliberately global rather than per-branch, and deliberately not cancelling.
+#
+# Every run drives the SAME canary tenant: it mutates that tenant's MCP SLA
+# settings and trips its circuit breaker. Two concurrent runs would fight over
+# shared state. Worse, the script restores the original SLA in a `finally`, so a
+# cancelled run can leave the tenant pinned at requestsPerMinute=1 and break
+# every later run. Superseded Previews therefore queue instead of cancelling.
+concurrency:
+  group: preview-e2e
+  cancel-in-progress: false
+
+jobs:
+  e2e:
+    # Only ready Preview deployments. Vercel also reports Production here, and
+    # this suite must never point its Preview credentials at Production.
+    if: >-
+      github.event_name == 'workflow_dispatch' ||
+      (github.event.deployment_status.state == 'success' &&
+       github.event.deployment_status.environment != 'Production' &&
+       github.event.deployment_status.environment != 'production')
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    environment:
+      name: preview-e2e
+      url: ${{ github.event.deployment_status.environment_url || inputs.preview_url }}
+    env:
+      CI: true
+      STAGING_API_KEY: ${{ secrets.PREVIEW_CANARY_API_KEY }}
+      TEST_MCP_UPSTREAM_URL: ${{ vars.PREVIEW_MCP_UPSTREAM_URL }}
+      TEST_MCP_UPSTREAM_TOKEN: ${{ secrets.PREVIEW_MCP_UPSTREAM_TOKEN }}
+      VERCEL_AUTOMATION_BYPASS_SECRET: ${{ secrets.VERCEL_AUTOMATION_BYPASS_SECRET }}
+      PRODUCTION_BASE_URL: ${{ vars.PRODUCTION_BASE_URL }}
+    steps:
+      # A wrong target here would spend Production credits and rewrite a
+      # Production tenant's SLA settings. The event filter above should already
+      # prevent it; this is the stop that does not depend on Vercel's labelling.
+      - name: Resolve and validate the target Preview URL
+        env:
+          TARGET: ${{ github.event.deployment_status.environment_url || inputs.preview_url }}
+        run: |
+          set -euo pipefail
+          if [ -z "${TARGET:-}" ]; then
+            echo '::error::No Preview URL was supplied by the deployment event.'
+            exit 1
+          fi
+          case "$TARGET" in
+            https://*) ;;
+            *) echo "::error::Preview URL must be https."; exit 1 ;;
+          esac
+          target_host=$(printf '%s' "$TARGET" | awk -F/ '{print $3}')
+          production_host=$(printf '%s' "${PRODUCTION_BASE_URL:-}" | awk -F/ '{print $3}')
+          if [ -n "$production_host" ] && [ "$target_host" = "$production_host" ]; then
+            echo '::error::Refusing to run the Preview suite against the canonical Production host.'
+            exit 1
+          fi
+          case "$target_host" in
+            *mahastrategies.com) echo "::error::Refusing to run against an apex or custom domain: $target_host"; exit 1 ;;
+          esac
+          echo "TEST_API_URL=$TARGET" >> "$GITHUB_ENV"
+          echo "Target: $TARGET"
+
+      - uses: actions/checkout@v5
+        with:
+          # Test the code that was actually deployed, not the tip of the branch.
+          ref: ${{ github.event.deployment.sha || github.sha }}
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 24
+          cache: npm
+
+      - run: npm ci
+
+      # Each request through /api/v1 deducts one credit from the Preview canary
+      # tenant, so a run costs roughly a dozen credits. Watch that balance; the
+      # low-credit alert fires on this tenant like any other.
+      - name: Run isolated Preview E2E gates
+        run: node --experimental-strip-types scripts/test-e2e.ts 2>&1 | tee "$RUNNER_TEMP/preview-e2e.log"
+
+      - name: Upload E2E evidence
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: preview-e2e-${{ github.run_id }}
+          path: ${{ runner.temp }}/preview-e2e.log
+          if-no-files-found: warn
+          retention-days: 14
