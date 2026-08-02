@@ -1,0 +1,119 @@
+# Production database migrations
+
+Schema changes reach Production through `production-migrations.yml`, not through
+the Supabase SQL editor. Applying by hand is how the migration history came to
+need manual repair once already, and it is the highest-consequence failure mode
+in this system: the ledgers hold commercial history that cannot be reconstructed.
+
+> **This workflow has not yet run against the live project.** The first dispatch
+> must use `dry-run`, and its evidence must be read before any `apply`.
+
+## Two gates, one before review and one before apply
+
+`scripts/check-migrations.ts` runs on every pull request and again inside the
+migration workflow. It enforces four properties:
+
+- Filenames are `<14-digit UTC timestamp>_<lower_snake_case>.sql`. Bare dates
+  collide in the Supabase CLI's `schema_migrations` version column.
+- Timestamps are unique and are real UTC instants.
+- Already-committed migrations are never edited, renamed, or deleted. A file
+  that may already have run cannot be changed retroactively; add a new forward
+  migration instead.
+- A new migration sorts after every migration already on the base branch.
+  Otherwise environments past that point would never apply it.
+- Destructive DDL (`drop table`, `drop column`, `drop schema`, `truncate`)
+  requires an explicit `-- migration-allow-destructive: <reason>` comment, so
+  discarding recorded history is always a stated decision.
+
+Run it locally before pushing:
+
+```bash
+node --experimental-strip-types scripts/check-migrations.ts
+```
+
+It reads the working tree, not just committed state, so an uncommitted edit to
+an old migration fails immediately.
+
+## Dispatching the workflow
+
+Inputs are `mode` (`dry-run` or `apply`), a `reason` of at least twelve
+characters, `confirmation` (required only for `apply`, and it must read exactly
+`APPLY PRODUCTION MIGRATIONS`), and `check_schema_drift`, which defaults on.
+
+A `dry-run` links the project, records the migration history, captures a
+schema-only snapshot, checks for drift, and reports what `db push` would apply.
+It changes nothing. Read `migration-list-before.txt` and `pending.txt` in the
+uploaded evidence and confirm the pending set is exactly what you expect.
+
+An `apply` repeats all of that, pushes, records the resulting history, and then
+runs the same readiness verification the release-health and rollback workflows
+use — homepage, OpenAPI document, billing readiness, and observability readiness
+— against the canonical deployment. A schema change is not finished until the
+running application still works against it.
+
+## Drift is a stop condition
+
+`supabase db diff --linked` compares the live schema against the migration tree.
+Any output means the database has changes that no migration describes — almost
+always a direct edit in the SQL editor. The workflow fails and applies nothing.
+
+Reconcile drift by writing a new migration that expresses what was already done,
+then re-running. Do not disable `check_schema_drift` to get past the gate; the
+flag exists only because the check needs a Docker shadow database on the runner
+and may be unavailable, not because the finding is optional.
+
+## There is no automatic revert
+
+If verification fails after a push, the schema stays as applied. This matches the
+deployment rollback workflow's stance: automatically reverting would compound the
+incident, and a down-migration against an append-only ledger can destroy recorded
+commercial outcomes. The workflow emits an explicit error saying the schema was
+not reverted, and preserves `schema-before.sql` for diagnosis.
+
+Recovery is an operator decision: write a forward migration that corrects the
+state. Restoring the database wholesale is a last resort and depends on the
+Supabase project's backup and point-in-time-recovery settings, which are
+configured in the Supabase dashboard and are **not** covered by this workflow.
+
+## Evidence
+
+Every run uploads a ninety-day artifact containing the authorized request
+(actor, mode, reason, commit, run ID), the integrity-check output, the migration
+history before and after, the pending and applied sets, the drift diff, the
+pre-apply schema snapshot, and the post-apply health report.
+
+The schema snapshot is `--schema public` and schema-only. Never add `--data-only`
+or a full dump: that would place customer records and commercial history into a
+workflow artifact.
+
+## Required GitHub environment
+
+Create the reviewer-protected environment `production-database`. Require a
+reviewer; unlike the monitoring workflows, nothing here runs unattended.
+
+- Secret `SUPABASE_ACCESS_TOKEN` — a Supabase personal access token. Rotate it
+  immediately if exposed.
+- Secret `SUPABASE_DB_PASSWORD` — the Production database password, read by the
+  CLI from the environment and never passed on a command line.
+- Secret `PRODUCTION_RELEASE_HEALTH_TOKEN` — read-only; must match Vercel's
+  `RELEASE_HEALTH_TOKEN`, same value the monitoring environments use.
+- Secret `VERCEL_TOKEN` and secret `VERCEL_AUTOMATION_BYPASS_SECRET`.
+- Variable `SUPABASE_PROJECT_REF` — the Production project reference.
+- Variable `PRODUCTION_BASE_URL=https://www.mahastrategies.com`
+- Variable `VERCEL_TEAM_ID=team_KTJouKHTcPGeMXNMDqh6CoYs`
+- Variable `VERCEL_PROJECT_ID=prj_afSBk4GaUchbuPuHF3ctZSS42iRU`
+
+The workflow never receives `REVENUE_CONTROL_TOKEN`, `MPS_OPERATIONS_TOKEN`, or
+any other mutating application token, and it prints no credential.
+
+The Supabase CLI is pinned to 2.109.1 — the version verified against this
+migration tree. Bump it deliberately, and re-run a `dry-run` after any bump.
+
+## Concurrency
+
+This workflow holds the `production-database` lock, deliberately separate from
+the `production-recovery` lock used by rollback and rehearsal. An emergency
+deployment rollback must never queue behind a database job. Note the corollary:
+a rollback does not revert schema, so a deployment rolled back across a migration
+boundary runs older code against a newer schema. Prefer migrations that are
+backward compatible with the previous release for exactly this reason.
