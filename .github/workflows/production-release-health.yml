@@ -26,9 +26,9 @@ jobs:
       VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
       VERCEL_TEAM_ID: ${{ vars.VERCEL_TEAM_ID }}
       VERCEL_PROJECT_ID: ${{ vars.VERCEL_PROJECT_ID }}
-      RELEASE_HEALTH_OUTPUT: ${{ runner.temp }}/production-release-health.json
-      RELEASE_MANIFEST_OUTPUT: ${{ runner.temp }}/production-last-known-good.json
-      VERCEL_DEPLOYMENT_JSON_PATH: ${{ runner.temp }}/vercel-deployment.json
+      RELEASE_HEALTH_OUTPUT: ${{ github.workspace }}/production-release-health.json
+      RELEASE_MANIFEST_OUTPUT: ${{ github.workspace }}/production-last-known-good.json
+      VERCEL_DEPLOYMENT_JSON_PATH: ${{ github.workspace }}/vercel-deployment.json
     steps:
       - uses: actions/checkout@v5
       - uses: actions/setup-node@v5
@@ -45,7 +45,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: production-last-known-good
-          path: ${{ runner.temp }}/production-last-known-good.json
+          path: ${{ env.RELEASE_MANIFEST_OUTPUT }}
           if-no-files-found: error
           retention-days: 14
       - name: Upload health evidence
@@ -53,6 +53,6 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: production-release-health-${{ github.run_id }}
-          path: ${{ runner.temp }}/production-release-health.json
+          path: ${{ env.RELEASE_HEALTH_OUTPUT }}
           if-no-files-found: warn
           retention-days: 14
