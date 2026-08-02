@@ -12,9 +12,13 @@ jobs:
   verify:
     runs-on: ubuntu-latest
     timeout-minutes: 15
+    env:
+      # Build-time validation only. CI must never receive Production Redis credentials.
+      UPSTASH_REDIS_REST_URL: https://ci-build.invalid
+      UPSTASH_REDIS_REST_TOKEN: ci-build-placeholder
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
         with:
           node-version: 22
           cache: npm
