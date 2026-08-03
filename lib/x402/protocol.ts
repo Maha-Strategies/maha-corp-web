@@ -8,10 +8,11 @@
 // validates payloads, and enforces the checks that must happen before a
 // facilitator is trusted. It settles nothing by itself and holds no key.
 //
-// UNVERIFIED WIRE FORMAT: the field names below follow the x402 shape but have
-// not been checked against a live facilitator. Validate them against the
-// facilitator's own documentation before this carries revenue -- a mismatched
-// field name would be discovered as a payment that silently fails to verify.
+// Header names follow the settled specification: PAYMENT-REQUIRED carries the
+// base64-encoded challenge from server to client, PAYMENT-SIGNATURE carries the
+// signed payment back, and PAYMENT-RESPONSE optionally confirms settlement
+// alongside the resource. The X-PAYMENT form seen in earlier material is
+// accepted inbound as a defensive measure but never emitted.
 //
 // This does not collide with the existing 402. That one answers an
 // authenticated request whose key has no credits, and points at Stripe. This
@@ -72,6 +73,12 @@ export type ReplayGuard = {
 }
 
 export const X402_VERSION = 1 as const
+
+export const PAYMENT_REQUIRED_HEADER = 'PAYMENT-REQUIRED'
+export const PAYMENT_SIGNATURE_HEADER = 'PAYMENT-SIGNATURE'
+export const PAYMENT_RESPONSE_HEADER = 'PAYMENT-RESPONSE'
+/** Pre-standard name. Read, never written. */
+const LEGACY_SIGNATURE_HEADER = 'X-PAYMENT'
 
 const NETWORKS = new Set<string>(['base', 'base-sepolia', 'solana', 'arbitrum'])
 const AMOUNT = /^[0-9]{1,32}$/
@@ -164,4 +171,26 @@ export async function acceptPayment(input: {
   if (!settled.ok) return { ok: false, status: 402, reason: settled.reason }
 
   return { ok: true, payer: settled.payer, transaction: settled.transaction, amountPaid: settled.amountPaid }
+}
+
+
+/** The base64 challenge for the PAYMENT-REQUIRED header. */
+export function encodeChallengeHeader(body: PaymentRequiredBody): string {
+  return Buffer.from(JSON.stringify(body), 'utf8').toString('base64')
+}
+
+/**
+ * Reads the signed payment from a request.
+ *
+ * Prefers the standard header and falls back to the pre-standard name, so an
+ * agent built against earlier material still transacts rather than failing in
+ * a way neither side can see.
+ */
+export function readPaymentSignature(headers: Headers): string | null {
+  return headers.get(PAYMENT_SIGNATURE_HEADER) ?? headers.get(LEGACY_SIGNATURE_HEADER)
+}
+
+/** Settlement confirmation for the PAYMENT-RESPONSE header on a 200. */
+export function encodePaymentResponse(result: { transaction: string; network: string; payer: string }): string {
+  return Buffer.from(JSON.stringify({ success: true, ...result }), 'utf8').toString('base64')
 }

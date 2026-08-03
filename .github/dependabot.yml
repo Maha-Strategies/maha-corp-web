@@ -16,14 +16,16 @@ updates:
     labels:
       - dependencies
     groups:
-      # Stripe alone. Its minor releases advance the pinned API version, which
-      # changes webhook payload shapes, so a Stripe bump needs its own webhook
-      # re-testing. Grouped with the others it blocked three safe client
+      # Payment clients, each of which changes a money-handling contract. Stripe
+      # minors advance the pinned API version and change webhook payload
+      # shapes; x402 governs the machine-payment wire format. Both need their
+      # own verification, and grouping them with anything else blocks safe
       # updates behind that work.
-      stripe:
+      payments:
         patterns:
           - stripe
           - "@stripe/*"
+          - "@x402/*"
         update-types:
           - minor
           - patch
