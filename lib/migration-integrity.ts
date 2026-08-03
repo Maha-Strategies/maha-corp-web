@@ -24,7 +24,10 @@ const DESTRUCTIVE = [
   { code: 'drop_schema', pattern: /\bdrop\s+schema\b/i },
   { code: 'drop_database', pattern: /\bdrop\s+database\b/i },
   { code: 'drop_column', pattern: /\bdrop\s+column\b/i },
-  { code: 'truncate', pattern: /\btruncate\b/i },
+  // Statement-anchored. TRUNCATE is also a privilege name, so `revoke ...
+  // truncate ... from role` mentions it while doing the opposite of
+  // discarding data -- it removes the ability to.
+  { code: 'truncate', pattern: /(^|;)\s*truncate\b/i },
 ]
 
 const ALLOW_DESTRUCTIVE = /--\s*migration-allow-destructive:\s*\S+/i
