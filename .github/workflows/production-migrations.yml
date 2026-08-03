@@ -79,7 +79,7 @@ jobs:
             test "$CONFIRMATION" = 'APPLY PRODUCTION MIGRATIONS'
           fi
 
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v7
         with:
           # Full history so the integrity check can resolve a merge base.
           fetch-depth: 0
