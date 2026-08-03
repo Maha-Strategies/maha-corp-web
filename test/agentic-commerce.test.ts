@@ -12,8 +12,10 @@ import {
   mpsAuditOffer,
   mpsAuditServiceJsonLd,
 } from '../lib/agentic-commerce.ts'
+import claimsData from '../lib/atlas/generated-claims.json' with { type: 'json' }
+import { buildLlmsManifest } from '../lib/llms-manifest.ts'
+import type { MpsClaim } from '../scripts/expand-graph.ts'
 
-const PUBLIC_DIR = join(import.meta.dirname, '..', 'public')
 // The metered discovery documents moved out of public/ so that requests for
 // them reach the origin and can be counted; they are served at the same URLs
 // by rewrites.
@@ -57,9 +59,25 @@ test('MPS purchase-page JSON-LD identifies the same commercial service without i
   assert.match(JSON.stringify(mpsAuditServiceJsonLd), /402 Payment Required/)
 })
 
+test('the served orientation file points agents at the commercial surfaces', () => {
+  // /llms.txt is the conventional file an evaluating agent reads first. It
+  // listed the research claim index and the API endpoints but no commercial
+  // surface, so nothing led an agent from there to the offers.
+  const llms = buildLlmsManifest(claimsData as MpsClaim[])
+  for (const url of [AGENTIC_COMMERCE_MANIFEST_URL, AGENTIC_COMMERCE_API_URL, AGENTIC_COMMERCE_CONTEXT_URL]) {
+    assert.ok(llms.includes(url), `${url} must appear in the served /llms.txt`)
+  }
+  assert.ok(llms.includes('/.well-known/agent.json'), 'the agent card must be reachable from /llms.txt')
+  // The payment boundary travels with the offer, not only on the purchase page.
+  assert.match(llms, /human purchaser must authorize/i)
+})
+
 test('agent context links only to the canonical public discovery surfaces', () => {
   const context = readFileSync(join(DISCOVERY_DIR, 'agentic-commerce.md'), 'utf8')
-  const llms = readFileSync(join(PUBLIC_DIR, 'llms.txt'), 'utf8')
+  // The manifest that /llms.txt actually serves, not the shadowed public/
+  // file. Reading the latter made this guarantee pass while being false in
+  // production: the served document listed no commercial surface at all.
+  const llms = buildLlmsManifest(claimsData as MpsClaim[])
   for (const url of [AGENTIC_COMMERCE_MANIFEST_URL, AGENTIC_COMMERCE_API_URL, AGENTIC_COMMERCE_CONTEXT_URL]) {
     assert.ok(context.includes(url) || llms.includes(url), `${url} must be discoverable`)
   }
