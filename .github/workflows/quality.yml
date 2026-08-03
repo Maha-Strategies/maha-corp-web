@@ -59,3 +59,13 @@ jobs:
         run: ruff check --isolated --select E9,F82 workers/
       - name: Byte-compile the worker
         run: python -m compileall -q workers
+
+      # The Python client is the base for the LangChain and CrewAI adapters, so
+      # it is published to other people's agent environments. It is
+      # dependency-free and its tests use stdlib unittest, so this needs no
+      # install step and no test framework.
+      - name: Check the Python client
+        run: ruff check --isolated --select E9,F82 clients/python/
+      - name: Test the Python client
+        working-directory: clients/python
+        run: python -m unittest discover -s tests -v
