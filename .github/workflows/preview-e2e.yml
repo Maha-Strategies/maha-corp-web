@@ -84,7 +84,7 @@ jobs:
           echo "TEST_API_URL=$TARGET" >> "$GITHUB_ENV"
           echo "Target: $TARGET"
 
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v7
         with:
           # Test the code that was actually deployed, not the tip of the branch.
           ref: ${{ github.event.deployment.sha || github.sha }}
