@@ -16,9 +16,13 @@ type RawDeployment = {
   readyState?: unknown
   target?: unknown
   createdAt?: unknown
+  created?: unknown
   projectId?: unknown
   meta?: { githubCommitSha?: unknown }
 }
+
+/** Everything Vercel can call a deployment that is not a preview. */
+const NON_PREVIEW_TARGETS = new Set(['production', 'staging'])
 
 function text(value: unknown): string | undefined {
   return typeof value === 'string' && value.trim() ? value.trim() : undefined
@@ -34,6 +38,24 @@ function isReady(deployment: RawDeployment): boolean {
   return state === 'READY'
 }
 
+/**
+ * A preview's target is reported as "preview" by some endpoints and as null or
+ * absent by others. Only an explicit Production or staging target disqualifies
+ * a deployment.
+ */
+function isNonPreviewTarget(target: unknown): boolean {
+  const value = text(target)
+  return value !== undefined && NON_PREVIEW_TARGETS.has(value.toLowerCase())
+}
+
+/** `createdAt` on most responses, `created` on some. Both are epoch millis. */
+function timestamp(deployment: RawDeployment): number | undefined {
+  for (const value of [deployment.createdAt, deployment.created]) {
+    if (typeof value === 'number' && Number.isFinite(value)) return value
+  }
+  return undefined
+}
+
 export function selectNewestReadyPreview(payload: unknown, projectId: string): PreviewDeployment {
   const deployments = (payload as { deployments?: unknown })?.deployments
   if (!Array.isArray(deployments)) throw new Error('Vercel returned no deployment list.')
@@ -41,8 +63,13 @@ export function selectNewestReadyPreview(payload: unknown, projectId: string): P
   const eligible: PreviewDeployment[] = []
   for (const entry of deployments as RawDeployment[]) {
     if (!entry || typeof entry !== 'object') continue
-    // `production` and `staging` targets are explicitly not what this measures.
-    if (text(entry.target) !== 'preview') continue
+    // Exclude by what a deployment IS rather than by what it is not. The list
+    // endpoint reports a preview's target as null on some API versions while
+    // `vercel inspect` reports "preview"; requiring the literal string made
+    // every real preview ineligible. Rejecting the known non-preview targets
+    // keeps the guarantee that matters -- Production is never selected -- under
+    // either representation.
+    if (isNonPreviewTarget(entry.target)) continue
     if (!isReady(entry)) continue
     // Only enforced when the API includes it; a mismatch means the query was
     // scoped wrongly and the result cannot be trusted.
@@ -50,7 +77,7 @@ export function selectNewestReadyPreview(payload: unknown, projectId: string): P
     if (owner && owner !== projectId) continue
     const url = text(entry.url)
     const id = text(entry.uid) ?? text(entry.id)
-    const createdAt = typeof entry.createdAt === 'number' && Number.isFinite(entry.createdAt) ? entry.createdAt : undefined
+    const createdAt = timestamp(entry)
     if (!url || !id || createdAt === undefined) continue
     eligible.push({ id, url, createdAt, commitSha: text(entry.meta?.githubCommitSha) })
   }
