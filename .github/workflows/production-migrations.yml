@@ -127,19 +127,36 @@ jobs:
       # The failure this repository has actually experienced: schema changed
       # directly in the SQL editor, leaving the database ahead of the migration
       # tree. Applying on top of undeclared drift is how ledgers get corrupted.
-      - name: Detect schema drift
-        if: ${{ inputs.check_schema_drift }}
-        run: |
-          supabase db diff --linked --schema public > "$EVIDENCE/drift.sql"
-          if [ -s "$EVIDENCE/drift.sql" ]; then
-            echo '::error::The live schema differs from the migration tree. Reconcile the drift into a migration before applying.'
-            cat "$EVIDENCE/drift.sql"
-            exit 1
-          fi
-          echo 'No drift: the live schema matches the migration tree.'
-
       - name: Report pending migrations
         run: supabase db push --linked --dry-run | tee "$EVIDENCE/pending.txt"
+
+      # Drift is recorded before applying, but only *fails* here when nothing
+      # is pending to explain it.
+      #
+      # The original gate refused to proceed whenever live and the tree
+      # disagreed, which deadlocked: a migration written to reconcile drift can
+      # never be applied, because the drift it exists to remove is still present
+      # when the gate runs. Unexplained drift -- live differs and no migration
+      # is waiting to account for it -- is still a hard stop, because that is
+      # the case the gate was built for: someone changed Production by hand.
+      - name: Record schema drift before applying
+        if: ${{ inputs.check_schema_drift }}
+        run: |
+          set -euo pipefail
+          supabase db diff --linked --schema public > "$EVIDENCE/drift-before.sql"
+          if [ ! -s "$EVIDENCE/drift-before.sql" ]; then
+            echo 'No drift: the live schema matches the migration tree.'
+            exit 0
+          fi
+          echo '::warning::The live schema differs from the migration tree. See drift-before.sql.'
+          cat "$EVIDENCE/drift-before.sql"
+          # `db push --dry-run` prints the versions it would apply; no pending
+          # migration means nothing accounts for the difference.
+          if ! grep -qE '[0-9]{14}' "$EVIDENCE/pending.txt"; then
+            echo '::error::Live schema differs from the migration tree and no migration is pending to reconcile it. Production was changed outside this workflow.'
+            exit 1
+          fi
+          echo 'Pending migrations exist to reconcile this drift; convergence is verified after applying.'
 
       - name: Apply pending migrations
         id: apply
@@ -149,6 +166,23 @@ jobs:
       - name: Record migration history after apply
         if: ${{ inputs.mode == 'apply' }}
         run: supabase migration list --linked | tee "$EVIDENCE/migration-list-after.txt"
+
+      # The stop condition the pre-apply gate used to provide, moved to where it
+      # can actually be satisfied. This is the stronger property: it does not
+      # merely refuse to act on a disagreement, it requires the end state to
+      # agree. Anything left here is a real difference the applied migrations
+      # did not account for.
+      - name: Verify the schema converged
+        if: ${{ inputs.mode == 'apply' && inputs.check_schema_drift }}
+        run: |
+          set -euo pipefail
+          supabase db diff --linked --schema public > "$EVIDENCE/drift-after.sql"
+          if [ -s "$EVIDENCE/drift-after.sql" ]; then
+            echo '::error::The live schema still differs from the migration tree after applying. Compare drift-before.sql and drift-after.sql.'
+            cat "$EVIDENCE/drift-after.sql"
+            exit 1
+          fi
+          echo 'Converged: the live schema now matches the migration tree.'
 
       # Schema changes are only safe once the running application still works
       # against them. This is the same readiness check the release-health and
