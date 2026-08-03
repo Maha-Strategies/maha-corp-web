@@ -84,7 +84,7 @@ jobs:
           # Full history so the integrity check can resolve a merge base.
           fetch-depth: 0
 
-      - uses: actions/setup-node@v5
+      - uses: actions/setup-node@v7
         with:
           node-version: 24
           cache: npm
