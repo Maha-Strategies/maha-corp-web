@@ -54,6 +54,19 @@ test('prose about a statement is not mistaken for the statement', () => {
   assert.deepEqual(checkDestructive([{ name: '20260801000000_safe.sql', sql }]), [])
 })
 
+test('revoking the truncate privilege is not a truncate', () => {
+  // TRUNCATE is a privilege name as well as a statement. Revoking it removes
+  // the ability to discard data, which is the opposite of the risk this flags.
+  const sql = 'grant select, insert on table public.x402_payments to service_role;\nrevoke update, delete, truncate on table public.x402_payments from service_role;'
+  assert.deepEqual(checkDestructive([{ name: '20260803000500_guard.sql', sql }]), [])
+})
+
+test('an actual truncate statement is still flagged', () => {
+  assert.deepEqual(codes(checkDestructive([{ name: '20260801000000_wipe.sql', sql: 'truncate table public.mps_credit_ledger_entries;' }])), ['destructive_truncate'])
+  // Including when it follows another statement on the same line.
+  assert.deepEqual(codes(checkDestructive([{ name: '20260801000000_wipe.sql', sql: 'select 1; truncate public.stripe_webhook_events;' }])), ['destructive_truncate'])
+})
+
 test('a legitimate delete inside a function body is not destructive DDL', () => {
   const sql = 'create function public.cleanup() returns void as $$ begin delete from public.utility_upload_objects where draft_id = p_draft_id; end; $$ language plpgsql;'
   assert.deepEqual(checkDestructive([{ name: '20260801000000_cleanup.sql', sql }]), [])
