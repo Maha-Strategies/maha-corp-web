@@ -14,6 +14,8 @@ on:
 permissions:
   actions: read
   contents: read
+  # Only for the undelivered-alert fallback below.
+  issues: write
 
 concurrency:
   group: production-release-health
@@ -77,12 +79,35 @@ jobs:
           if-no-files-found: warn
           retention-days: 14
       - name: Alert on release-health failure
+        id: alert
         if: ${{ always() && (steps.install.outcome == 'failure' || steps.inspect.outcome == 'failure' || steps.health.outcome == 'failure' || steps.manifest.outcome == 'failure' || steps.evidence.outcome == 'failure') }}
         env:
           RELEASE_ALERT_EVENT: release.health_failure
           RELEASE_ALERT_INCIDENT_ANCHOR: ${{ steps.incident.outputs.incident_anchor }}
           RELEASE_ALERT_STAGE: install=${{ steps.install.outcome }},inspect=${{ steps.inspect.outcome }},health=${{ steps.health.outcome }},manifest=${{ steps.manifest.outcome }},evidence=${{ steps.evidence.outcome }}
         run: node --experimental-strip-types scripts/send-release-alert.ts
+
+      # The alert path is a single channel that terminates in one mailbox, and
+      # it has already failed silently once: the receiver returned 503 and a
+      # Production health failure went unannounced for over an hour. A GitHub
+      # issue is not a pager, but it notifies watchers, depends on nothing this
+      # repository operates, and leaves a durable record. It is the floor, not
+      # the fix -- the fix is a paging service with acknowledgement.
+      - name: Raise an issue when the alert itself could not be delivered
+        if: ${{ always() && steps.alert.outcome == 'failure' }}
+        env:
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          STAGES: install=${{ steps.install.outcome }},inspect=${{ steps.inspect.outcome }},health=${{ steps.health.outcome }},manifest=${{ steps.manifest.outcome }},evidence=${{ steps.evidence.outcome }}
+        run: |
+          set -euo pipefail
+          existing=$(gh issue list --label ops-alert-undelivered --state open --limit 1 --json number --jq '.[0].number // empty')
+          body=$(printf 'Production release health failed and the operations alert could not be delivered, so no notification was sent.\n\nStage outcomes: %s\nWorkflow run: %s\n\nCheck the alert receiver at /api/internal/ops-alerts before trusting the absence of alerts.' "$STAGES" "$RUN_URL")
+          if [ -n "$existing" ]; then
+            gh issue comment "$existing" --body "$body"
+          else
+            gh label create ops-alert-undelivered --color B60205 --description "Operations alert delivery failed" 2>/dev/null || true
+            gh issue create --title "Production release health failing and alerts undelivered" --label ops-alert-undelivered --body "$body"
+          fi
       - name: Alert when release health recovers
         if: ${{ success() && steps.incident.outputs.previous_conclusion == 'failure' }}
         env:
