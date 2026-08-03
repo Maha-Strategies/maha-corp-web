@@ -1,0 +1,126 @@
+import { priceFor, requirementFor, x402Config, type X402Config } from './config.ts'
+import { acquireSlot } from './concurrency.ts'
+import { createFacilitator } from './facilitator.ts'
+import {
+  PAYMENT_REQUIRED_HEADER,
+  PAYMENT_RESPONSE_HEADER,
+  acceptPayment,
+  buildPaymentRequired,
+  encodeChallengeHeader,
+  encodePaymentResponse,
+  parsePaymentHeader,
+  readPaymentSignature,
+  type PaymentFacilitator,
+  type PaymentRequirement,
+} from './protocol.ts'
+import { createReplayGuard } from './replay-guard.ts'
+import { createAgentInquiryLedger } from '../agent-inquiry-ledger.ts'
+
+// Decides what happens to a request that carries no API key: a challenge, a
+// refusal, or admission as a paid caller. Sits between proxy.ts and the
+// protocol so the proxy stays a thin router and this stays testable without a
+// request pipeline.
+
+export type X402Outcome =
+  | { kind: 'not_applicable' }
+  | { kind: 'challenge'; status: 402; header: string; body: unknown }
+  | { kind: 'refused'; status: 402 | 409 | 429 | 503; code: string; message: string; retryAfterSeconds?: number }
+  | { kind: 'paid'; header: string; transaction: string; payer: string; amountPaid: string }
+
+type Dependencies = {
+  config?: X402Config | null
+  facilitator?: PaymentFacilitator
+  ledger?: Parameters<typeof createReplayGuard>[0] | null
+  acquire?: typeof acquireSlot
+}
+
+/**
+ * `not_applicable` means the caller should carry on exactly as before —
+ * x402 disabled, or a path with no published price. Every other outcome is
+ * terminal for this request.
+ */
+export async function resolveX402(request: Request, dependencies: Dependencies = {}): Promise<X402Outcome> {
+  let config: X402Config | null
+  try {
+    config = dependencies.config !== undefined ? dependencies.config : x402Config()
+  } catch (error) {
+    // Present but invalid configuration must not quietly disable payments, and
+    // must not serve resources for free either.
+    console.error('x402 configuration is invalid:', error instanceof Error ? error.message : 'unknown_error')
+    return { kind: 'refused', status: 503, code: 'x402_misconfigured', message: 'Machine payment is temporarily unavailable.' }
+  }
+  if (!config) return { kind: 'not_applicable' }
+
+  const url = new URL(request.url)
+  const resource = priceFor(url.pathname, config)
+  if (!resource) return { kind: 'not_applicable' }
+
+  // The requirement binds to the exact URL without query string, so a
+  // challenge cannot be answered against a different resource.
+  const resourceUrl = `${url.origin}${url.pathname}`
+  const requirement = requirementFor(resource, resourceUrl, config)
+
+  const signature = readPaymentSignature(request.headers)
+  if (!signature) return challenge(requirement, 'Payment is required for this resource.')
+
+  const parsed = parsePaymentHeader(signature)
+  if (!parsed.ok) return challenge(requirement, parsed.reason)
+
+  const ledger = dependencies.ledger !== undefined ? dependencies.ledger : createAgentInquiryLedger()
+  if (!ledger) {
+    // Without the ledger there is no replay protection, and a proof would buy
+    // unlimited calls.
+    return { kind: 'refused', status: 503, code: 'x402_ledger_unavailable', message: 'Machine payment is temporarily unavailable.' }
+  }
+
+  const facilitator = dependencies.facilitator ?? createFacilitator({
+    url: config.facilitatorUrl,
+    authHeaders: config.facilitatorAuthHeaders,
+  })
+
+  const accepted = await acceptPayment({
+    payment: parsed.payment,
+    requirements: [requirement],
+    facilitator,
+    replayGuard: createReplayGuard(ledger, { network: config.caip2Network, asset: config.asset }, requirement),
+  })
+
+  if (!accepted.ok) {
+    if (accepted.status === 409) {
+      return { kind: 'refused', status: 409, code: 'payment_already_used', message: 'This payment has already been used.' }
+    }
+    return challenge(requirement, accepted.reason)
+  }
+
+  // Capacity is checked only after payment is settled and recorded. Checking
+  // first would let an unpaid caller probe how loaded a resource is.
+  const acquire = dependencies.acquire ?? acquireSlot
+  const slot = await acquire(resource.pathPrefix, resource.concurrencyCap, config.slotTtlSeconds)
+  if (!slot.admitted) {
+    return {
+      kind: 'refused',
+      status: 429,
+      code: 'resource_at_capacity',
+      message: 'This resource is at capacity. The payment was accepted and is not consumed again on retry.',
+      retryAfterSeconds: Math.min(config.slotTtlSeconds, 60),
+    }
+  }
+
+  return {
+    kind: 'paid',
+    header: encodePaymentResponse({ transaction: accepted.transaction, network: config.caip2Network, payer: accepted.payer }),
+    transaction: accepted.transaction,
+    payer: accepted.payer,
+    amountPaid: accepted.amountPaid,
+  }
+}
+
+function challenge(requirement: PaymentRequirement, error: string): X402Outcome {
+  const body = buildPaymentRequired([requirement], error)
+  return { kind: 'challenge', status: 402, header: encodeChallengeHeader(body), body }
+}
+
+export const X402_HEADERS = {
+  required: PAYMENT_REQUIRED_HEADER,
+  response: PAYMENT_RESPONSE_HEADER,
+} as const

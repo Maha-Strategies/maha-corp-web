@@ -68,8 +68,14 @@ export type PaymentFacilitator = {
  * identifier is claimed in the same transaction as the value it releases.
  */
 export type ReplayGuard = {
-  /** True when this payment has not been seen before and is now claimed. */
-  claim(transaction: string): Promise<boolean>
+  /**
+   * True when this payment has not been seen before and is now claimed.
+   *
+   * Takes the verified details rather than the transaction alone, because the
+   * payer and amount are only known once the facilitator has answered, and the
+   * record is worthless without them.
+   */
+  claim(payment: { transaction: string; payer: string; amountPaid: string }): Promise<boolean>
 }
 
 export const X402_VERSION = 1 as const
@@ -164,7 +170,9 @@ export async function acceptPayment(input: {
     return { ok: false, status: 402, reason: 'insufficient_amount' }
   }
 
-  const claimed = await input.replayGuard.claim(verified.transaction)
+  const claimed = await input.replayGuard.claim({
+    transaction: verified.transaction, payer: verified.payer, amountPaid: verified.amountPaid,
+  })
   if (!claimed) return { ok: false, status: 409, reason: 'payment_already_used' }
 
   const settled = await input.facilitator.settle(input.payment, requirement)
@@ -172,7 +180,6 @@ export async function acceptPayment(input: {
 
   return { ok: true, payer: settled.payer, transaction: settled.transaction, amountPaid: settled.amountPaid }
 }
-
 
 /** The base64 challenge for the PAYMENT-REQUIRED header. */
 export function encodeChallengeHeader(body: PaymentRequiredBody): string {

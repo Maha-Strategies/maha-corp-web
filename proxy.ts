@@ -3,6 +3,7 @@ import { apiKeyServiceConfigured, authorizeAndConsumeApiUnit, bearerApiKey } fro
 import { API_CORS_HEADERS, apiAccessStatus, apiProxyGate } from '@/lib/api-proxy-policy'
 import { maybeCreateTenantAutoTopup } from '@/lib/api-credit-billing'
 import { maybeSendLowCreditAlert } from '@/lib/observability/alerts'
+import { X402_HEADERS, resolveX402 } from '@/lib/x402/gateway'
 
 function json(body: unknown, status: number, headers: HeadersInit = {}) {
   return NextResponse.json(body, { status, headers: { ...API_CORS_HEADERS, ...headers } })
@@ -14,7 +15,41 @@ export async function proxy(request: NextRequest, event: NextFetchEvent) {
   if (gate === 'preflight') return new NextResponse(null, { status: 204, headers: API_CORS_HEADERS })
   if (gate === 'self_managed') return NextResponse.next({ headers: API_CORS_HEADERS })
   if (gate === 'unavailable') return json({ error: { code: 'api_key_service_unavailable', message: 'API authorization is temporarily unavailable.' } }, apiAccessStatus('unavailable'))
-  const key = bearerApiKey(request); if (!key) return json({ error: { code: 'api_key_required', message: 'Provide Authorization: Bearer <API_KEY>. Generate a free starter key at /tools/token-calc.', href: '/tools/token-calc' } }, apiAccessStatus('missing_key'))
+  const key = bearerApiKey(request)
+
+  // Machine payment is attempted only for a request carrying no API key, so
+  // the credit path below is untouched and behaves exactly as before. When
+  // X402_ENABLED is not 'true' this resolves to not_applicable without reading
+  // any other configuration, and the endpoint is indistinguishable from how it
+  // behaved before x402 existed.
+  if (!key) {
+    const outcome = await resolveX402(request)
+    if (outcome.kind === 'challenge') {
+      return json(outcome.body, outcome.status, { [X402_HEADERS.required]: outcome.header })
+    }
+    if (outcome.kind === 'refused') {
+      return json(
+        { error: { code: outcome.code, message: outcome.message } },
+        outcome.status,
+        outcome.retryAfterSeconds ? { 'Retry-After': String(outcome.retryAfterSeconds) } : {},
+      )
+    }
+    if (outcome.kind === 'paid') {
+      // A paid caller has no key, tenant, or credit balance, so downstream is
+      // told what it is dealing with rather than left to infer it.
+      const paidHeaders = new Headers(request.headers)
+      paidHeaders.set('x-maha-payment-transaction', outcome.transaction)
+      paidHeaders.set('x-maha-payment-payer', outcome.payer)
+      paidHeaders.set('x-maha-payment-amount', outcome.amountPaid)
+      paidHeaders.set('x-maha-access-mode', 'x402')
+      return NextResponse.next({
+        request: { headers: paidHeaders },
+        headers: { ...API_CORS_HEADERS, [X402_HEADERS.response]: outcome.header },
+      })
+    }
+    return json({ error: { code: 'api_key_required', message: 'Provide Authorization: Bearer <API_KEY>. Generate a free starter key at /tools/token-calc.', href: '/tools/token-calc' } }, apiAccessStatus('missing_key'))
+  }
+
   const access = await authorizeAndConsumeApiUnit(key)
   if (access.kind === 'unauthorized') return json({ error: { code: 'invalid_api_key', message: 'This API key is invalid or inactive.', href: '/tools/token-calc' } }, apiAccessStatus('invalid_key'))
   if (access.kind === 'depleted') return json({ error: { code: 'credit_balance_depleted', message: 'This API key has no remaining credits. Purchase a prepaid pack to continue.' } }, apiAccessStatus('depleted'))
