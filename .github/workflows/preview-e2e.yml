@@ -36,13 +36,19 @@ concurrency:
 
 jobs:
   e2e:
-    # Only ready Preview deployments. Vercel also reports Production here, and
-    # this suite must never point its Preview credentials at Production.
+    # Vercel's own Preview deployments and nothing else.
+    #
+    # This was a denylist excluding 'Production', which let through every
+    # deployment GitHub creates for a workflow `environment:` block --
+    # production-database, production-monitoring, preview-capacity, and
+    # preview-e2e itself. A migration run therefore triggered this suite against
+    # the canonical Production URL, where the target guard refused it and left a
+    # failure on an unrelated run. Allowlisting Vercel's exact environment name
+    # excludes all of them, and stops this workflow triggering itself.
     if: >-
       github.event_name == 'workflow_dispatch' ||
       (github.event.deployment_status.state == 'success' &&
-       github.event.deployment_status.environment != 'Production' &&
-       github.event.deployment_status.environment != 'production')
+       github.event.deployment_status.environment == 'Preview')
     runs-on: ubuntu-latest
     timeout-minutes: 15
     environment:
