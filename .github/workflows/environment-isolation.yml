@@ -1,0 +1,79 @@
+name: Environment isolation
+
+# Preview and Production share one Vercel project, so a variable defined once
+# for both carries the same value in both. Twenty-three credentials were in
+# that state before this check existed, including the operator tokens that
+# authenticate against Production's control planes.
+#
+# Drift here comes from human edits, which arrive in bursts: the risky moment is
+# the day someone adds a new variable and ticks both environments out of habit.
+# A daily read costs one API call and catches that within a day.
+
+on:
+  schedule:
+    - cron: '41 7 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  # Only for the drift notification below.
+  issues: write
+
+concurrency:
+  group: environment-isolation
+  cancel-in-progress: false
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    environment:
+      name: production-monitoring
+      url: ${{ vars.PRODUCTION_BASE_URL }}
+    env:
+      GH_TOKEN: ${{ github.token }}
+      # Read-only against the Vercel API. The check reads record structure, not
+      # values: one record targeting both environments is one shared value, so
+      # nothing here decrypts or handles a secret.
+      VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+      VERCEL_TEAM_ID: ${{ vars.VERCEL_TEAM_ID }}
+      VERCEL_PROJECT_ID: ${{ vars.VERCEL_PROJECT_ID }}
+      ISOLATION_OUTPUT_PATH: ${{ github.workspace }}/environment-isolation.json
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+
+      - name: Audit Preview and Production credential isolation
+        id: audit
+        run: node --experimental-strip-types scripts/check-environment-isolation.ts
+
+      - name: Upload isolation report
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: environment-isolation-${{ github.run_id }}
+          path: ${{ env.ISOLATION_OUTPUT_PATH }}
+          if-no-files-found: warn
+          retention-days: 90
+
+      # Deliberately not a page. A shared credential is a standing risk to
+      # correct in working hours, not an outage to wake someone for. A
+      # deduplicated issue notifies watchers and leaves a durable record.
+      - name: Raise an issue when a credential is shared
+        if: ${{ failure() && steps.audit.outcome == 'failure' }}
+        env:
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          set -euo pipefail
+          existing=$(gh issue list --label environment-isolation --state open --limit 1 --json number --jq '.[0].number // empty')
+          body=$(printf 'One or more credentials now hold the same value in Preview and Production.\n\nAnything that exposes a Preview deployment exposes Production to the same degree. The report artifact on the run lists the variable names; it contains no values.\n\nWorkflow run: %s\n\nFix by giving Preview its own value, or by scoping the variable to Production only where Preview has no use for it.' "$RUN_URL")
+          if [ -n "$existing" ]; then
+            gh issue comment "$existing" --body "$body"
+          else
+            gh label create environment-isolation --color D93F0B --description "Preview and Production share a credential" 2>/dev/null || true
+            gh issue create --title "Preview and Production share a credential" --label environment-isolation --body "$body"
+          fi
