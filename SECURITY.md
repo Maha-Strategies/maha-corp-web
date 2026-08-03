@@ -56,6 +56,30 @@ depends on one of them being different should say so explicitly:
   submitted to the public MPS preflight is deliberately never persisted, and
   neither is a hash of it.
 
+## Preview and Production are credential-isolated
+
+Preview and Production share one Vercel project, so a variable defined once for
+both environments carries the same value in both. Preview is the least
+controlled environment — it builds from every pull request — so a shared
+credential means anything exposing a Preview deployment exposes Production to
+the same degree.
+
+Every credential is therefore per-environment. Preview has its own Supabase
+project, Redis keyspace, Stripe key, operator tokens, and encryption key; it
+cannot page the on-call, drive Production GPU compute, forge signed Stripe
+webhooks, or send mail from the domain.
+
+`environment-isolation.yml` audits this daily and opens a deduplicated issue if
+a credential becomes shared. The check reads Vercel record *structure* rather
+than values — one record targeting both environments is one value — so it never
+decrypts or handles a secret. The policy lives in `lib/environment-isolation.ts`
+and grades by consequence: authenticating against Production fails, a metered
+third-party key warns, configuration is ignored.
+
+Unlisted variables are treated as configuration, so new settings create no
+noise. **A new credential must be classified in that policy deliberately** —
+add it when you add the variable.
+
 ## Operational security references
 
 - Alerting, telemetry scrubbing, and readiness checks: [`docs/observability.md`](docs/observability.md)
