@@ -54,6 +54,34 @@ Release failures use a deterministic event ID anchored to the most recent succes
 
 Delivery has a five-second timeout. A failed delivery becomes eligible for retry after five minutes. Alert delivery is best-effort and never changes the customer API response.
 
+## Paging and the fallback recipient
+
+Email alone is not an alerting channel: nothing about it requires anyone to acknowledge, and it has already failed silently once — the receiver returned 503 and a Production health failure went unannounced for over an hour.
+
+Set `PAGERDUTY_ROUTING_KEY` to the Events API v2 integration key of a PagerDuty service. Verified alerts then page first, and email is used only when paging is unconfigured or fails. One channel failing can no longer mean silence.
+
+Failure and recovery alerts share a deduplication key, so `release.health_recovered` resolves the incident that `release.health_failure` opened rather than creating a second one. Tenant-scoped alerts key per tenant, so one noisy tenant cannot mask an incident for another.
+
+| Event | Action | Severity |
+| --- | --- | --- |
+| `release.health_failure` | trigger | critical |
+| `release.recovery_drill_failure` | trigger | error |
+| `mcp.upstream_connectivity_failure` | trigger | error |
+| `tenant.low_credit` | trigger | warning |
+| `*_recovered` | resolve | — |
+
+Only the bounded, already-scrubbed alert `data` is forwarded as `custom_details`. No request bodies, headers, tokens, or customer content reach the paging provider.
+
+Configure the PagerDuty service with an escalation policy that has at least two levels, so an unacknowledged page escalates to a second recipient rather than expiring. That second recipient is the fallback the on-call design depends on; the email path is a backstop for the paging provider being down, not a substitute for escalation.
+
+Verify end to end with the controlled test, which requires every health check to pass first and then emits one failure/recovery pair:
+
+```bash
+gh workflow run production-release-health.yml -f send_controlled_alert=true
+```
+
+A correct result is one PagerDuty incident that triggers and then resolves itself, and no email.
+
 ## Readiness check
 
 Use the private, read-only endpoint with the existing revenue operations bearer token:
