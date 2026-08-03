@@ -1,0 +1,26 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "maha-sdk"
+version = "0.1.0"
+description = "Zero-dependency Python client for the Maha Strategies API."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+keywords = ["maha", "mcp", "agent", "provenance", "context"]
+# Deliberately none. This installs into agent environments that already pin
+# their own HTTP stack, and must not force a resolution against it.
+dependencies = []
+
+[project.urls]
+Homepage = "https://www.mahastrategies.com"
+Documentation = "https://www.mahastrategies.com/api/docs/openapi"
+
+[project.optional-dependencies]
+langchain = ["langchain-core>=0.3"]
+crewai = ["crewai-tools>=0.2"]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/maha_sdk"]
