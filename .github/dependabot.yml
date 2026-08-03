@@ -16,13 +16,21 @@ updates:
     labels:
       - dependencies
     groups:
-      # Payment, database, telemetry, and model clients touch money movement and
-      # customer data. Keep them out of the large batch so each one is reviewed
-      # against its own changelog.
-      revenue-and-data-clients:
+      # Stripe alone. Its minor releases advance the pinned API version, which
+      # changes webhook payload shapes, so a Stripe bump needs its own webhook
+      # re-testing. Grouped with the others it blocked three safe client
+      # updates behind that work.
+      stripe:
         patterns:
           - stripe
           - "@stripe/*"
+        update-types:
+          - minor
+          - patch
+      # Database, telemetry, and model clients. These touch customer data but
+      # not the payment contract, so they move together.
+      data-and-telemetry-clients:
+        patterns:
           - "@supabase/*"
           - "@upstash/*"
           - "@sentry/*"
