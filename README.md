@@ -78,9 +78,12 @@ from older documentation. See [`AGENTS.md`](./AGENTS.md).
 
 | Runbook | Covers |
 | --- | --- |
+| [`docs/agent-discovery-metering.md`](./docs/agent-discovery-metering.md) | Measuring whether agents are finding the platform, and reading the numbers honestly |
+| [`docs/backup-restore.md`](./docs/backup-restore.md) | Rehearsing a database restore, and measuring RTO and RPO |
 | [`docs/database-migrations.md`](./docs/database-migrations.md) | Applying schema changes to Production, drift detection, evidence |
 | [`docs/observability.md`](./docs/observability.md) | Sentry configuration, signed alert verification, readiness checks |
 | [`docs/release-recovery.md`](./docs/release-recovery.md) | Release health, recovery drill, rollback, rehearsal, required GitHub environments |
+| [`docs/preview-e2e.md`](./docs/preview-e2e.md) | Integration gates on every Preview deployment, and making them block merges |
 | [`docs/slo-capacity.md`](./docs/slo-capacity.md) | Service objectives, error budgets, the bounded capacity harness |
 | [`SECURITY.md`](./SECURITY.md) | Vulnerability reporting and the platform's standing security assumptions |
 

@@ -14,6 +14,10 @@ import {
 } from '../lib/agentic-commerce.ts'
 
 const PUBLIC_DIR = join(import.meta.dirname, '..', 'public')
+// The metered discovery documents moved out of public/ so that requests for
+// them reach the origin and can be counted; they are served at the same URLs
+// by rewrites.
+const DISCOVERY_DIR = join(import.meta.dirname, '..', 'content', 'discovery')
 
 test('MPS agentic-commerce offer is discovery-only and preserves the human payment boundary', () => {
   assert.equal(agenticCommerceDiscovery.transactionPolicy.autonomousPaymentSupported, false)
@@ -54,7 +58,7 @@ test('MPS purchase-page JSON-LD identifies the same commercial service without i
 })
 
 test('agent context links only to the canonical public discovery surfaces', () => {
-  const context = readFileSync(join(PUBLIC_DIR, 'llm-context', 'agentic-commerce.md'), 'utf8')
+  const context = readFileSync(join(DISCOVERY_DIR, 'agentic-commerce.md'), 'utf8')
   const llms = readFileSync(join(PUBLIC_DIR, 'llms.txt'), 'utf8')
   for (const url of [AGENTIC_COMMERCE_MANIFEST_URL, AGENTIC_COMMERCE_API_URL, AGENTIC_COMMERCE_CONTEXT_URL]) {
     assert.ok(context.includes(url) || llms.includes(url), `${url} must be discoverable`)
@@ -64,7 +68,7 @@ test('agent context links only to the canonical public discovery surfaces', () =
 })
 
 test('the long-lived agent-offers manifest exposes the same MPS payment boundary', () => {
-  const manifest = JSON.parse(readFileSync(join(PUBLIC_DIR, 'agent-offers.json'), 'utf8')) as {
+  const manifest = JSON.parse(readFileSync(join(DISCOVERY_DIR, 'agent-offers.json'), 'utf8')) as {
     transactionPolicy: { autonomousPaymentSupported: boolean; humanConfirmationRequired: boolean }
     offers: Array<{ id: string; purchase?: { mode?: string }; prepaidCredits?: { insufficientBalance?: { httpStatus?: number } } }>
   }

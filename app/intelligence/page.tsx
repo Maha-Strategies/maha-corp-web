@@ -148,8 +148,8 @@ const BRIEFS: BriefData[] = [
     group: 'HARDWARE & INFRASTRUCTURE',
     category: 'ADVANCED.PACKAGING',
     status: 'ACTIVE',
-    title: 'Smartphone AP Packaging: Fan-Out and Substrate-Thickness Decisions',
-    description: 'A decision framework for fan-out, flip-chip, and package-on-package architectures for high-end smartphone application processors.',
+    title: 'Smartphone AP Packaging: Architecture, Supplier, and Reliability Decisions',
+    description: 'A decision framework for fan-out, flip-chip, supplier-route, and reliability decisions for smartphone application processors.',
     href: '/intelligence/briefs/smartphone-ap-fan-out-substrate-thickness',
   },
   {

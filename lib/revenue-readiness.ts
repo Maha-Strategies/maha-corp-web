@@ -53,13 +53,20 @@ type RevenuePath = {
 }
 
 // Mirrors the config gates in books.ts, mps-credits.ts, utility-billing.ts, and
-// the preflight and API-credit checkout routes. Keep in step with them.
+// the preflight, API-credit, and tenant-billing checkout routes. Keep in step
+// with them.
 export const REVENUE_PATHS: readonly RevenuePath[] = [
   {
     id: 'api_credit_packs',
     label: 'Developer Portal API credit packs',
     specific: ['STRIPE_API_KEY_WEBHOOK_SECRET', 'STRIPE_API_CREDITS_STARTER_PRICE_ID', 'STRIPE_API_CREDITS_PRO_PRICE_ID', 'STRIPE_API_CREDITS_ENTERPRISE_PRICE_ID'],
     shared: ['STRIPE_SECRET_KEY'],
+  },
+  {
+    id: 'tenant_billing',
+    label: 'Tenant subscriptions and automatic top-ups',
+    specific: ['STRIPE_TENANT_BUILDER_PRICE_ID', 'STRIPE_TENANT_SCALE_PRICE_ID', 'STRIPE_TENANT_AUTO_TOPUP_PRICE_ID'],
+    shared: ['STRIPE_SECRET_KEY', 'STRIPE_API_KEY_WEBHOOK_SECRET'],
   },
   {
     id: 'mps_audit_credits',
@@ -85,8 +92,8 @@ export const REVENUE_PATHS: readonly RevenuePath[] = [
   {
     id: 'mps_preflight',
     label: 'MPS Preflight',
-    specific: ['STRIPE_MPS_PREFLIGHT_PRICE_ID', 'STRIPE_WEBHOOK_SECRET', 'MPS_PREFLIGHT_FROM_EMAIL'],
-    shared: ['STRIPE_SECRET_KEY', 'RESEND_API_KEY', 'ANTHROPIC_API_KEY'],
+    specific: ['STRIPE_MPS_PREFLIGHT_PRICE_ID', 'STRIPE_WEBHOOK_SECRET'],
+    shared: ['STRIPE_SECRET_KEY', 'ANTHROPIC_API_KEY'],
   },
 ]
 
@@ -117,11 +124,8 @@ function withinEditDistance(a: string, b: string, budget: number): boolean {
 
 const KNOWN = new Set(REVENUE_PATHS.flatMap((path) => [...path.specific, ...path.shared, ...(path.flag ? [path.flag] : [])]))
 
-/**
- * A variable set under a near-miss name is indistinguishable from one that was
- * never set: the path fails closed either way. This is the failure that
- * actually occurred here — MPS_PREFLIGHT_FROM_EMAI, missing its final L.
- */
+/** A required variable set under a near-miss name is indistinguishable from
+ * one that was never set: the path fails closed either way. */
 export function findSuspectedTypos(missing: readonly string[], environment: Environment): SuspectedTypo[] {
   const candidates = Object.keys(environment).filter((key) => !KNOWN.has(key) && key.length >= 8 && configured(environment[key]))
   const typos: SuspectedTypo[] = []
