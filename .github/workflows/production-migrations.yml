@@ -117,7 +117,7 @@ jobs:
       # The authoritative record of what the database believes it has applied.
       # Read this in dry-run before approving an apply.
       - name: Record migration history
-        run: supabase migration list --linked | tee "$EVIDENCE/migration-list-before.txt"
+        run: supabase migration list --linked 2>&1 | tee "$EVIDENCE/migration-list-before.txt"
 
       # Schema only — never data. A data dump would place customer records and
       # commercial history into a workflow artifact.
@@ -128,7 +128,7 @@ jobs:
       # directly in the SQL editor, leaving the database ahead of the migration
       # tree. Applying on top of undeclared drift is how ledgers get corrupted.
       - name: Report pending migrations
-        run: supabase db push --linked --dry-run | tee "$EVIDENCE/pending.txt"
+        run: supabase db push --linked --dry-run 2>&1 | tee "$EVIDENCE/pending.txt"
 
       # Drift is recorded before applying, but only *fails* here when nothing
       # is pending to explain it.
@@ -150,9 +150,11 @@ jobs:
           fi
           echo '::warning::The live schema differs from the migration tree. See drift-before.sql.'
           cat "$EVIDENCE/drift-before.sql"
-          # `db push --dry-run` prints the versions it would apply; no pending
-          # migration means nothing accounts for the difference.
-          if ! grep -qE '[0-9]{14}' "$EVIDENCE/pending.txt"; then
+          # `db push --dry-run` prints the versions it would apply, on stderr,
+          # which is why the capture above redirects it. Matching the migration
+          # filename shape rather than any run of digits keeps CLI banners and
+          # version strings from reading as a pending migration.
+          if ! grep -qE '[0-9]{14}_[a-z0-9_]+\.sql' "$EVIDENCE/pending.txt"; then
             echo '::error::Live schema differs from the migration tree and no migration is pending to reconcile it. Production was changed outside this workflow.'
             exit 1
           fi
@@ -161,11 +163,11 @@ jobs:
       - name: Apply pending migrations
         id: apply
         if: ${{ inputs.mode == 'apply' }}
-        run: supabase db push --linked --yes | tee "$EVIDENCE/applied.txt"
+        run: supabase db push --linked --yes 2>&1 | tee "$EVIDENCE/applied.txt"
 
       - name: Record migration history after apply
         if: ${{ inputs.mode == 'apply' }}
-        run: supabase migration list --linked | tee "$EVIDENCE/migration-list-after.txt"
+        run: supabase migration list --linked 2>&1 | tee "$EVIDENCE/migration-list-after.txt"
 
       # The stop condition the pre-apply gate used to provide, moved to where it
       # can actually be satisfied. This is the stronger property: it does not
