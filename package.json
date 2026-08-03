@@ -25,11 +25,11 @@
     "test": "node --test --experimental-strip-types test/*.test.ts"
   },
   "dependencies": {
-    "@anthropic-ai/sdk": "^0.110.0",
+    "@anthropic-ai/sdk": "^0.115.0",
     "@scalar/api-reference-react": "^0.9.58",
     "@sentry/nextjs": "^10.69.0",
     "@stripe/stripe-js": "^9.12.1",
-    "@supabase/supabase-js": "^2.106.2",
+    "@supabase/supabase-js": "^2.112.0",
     "@upstash/redis": "^1.38.0",
     "katex": "^0.17.0",
     "next": "^16.2.12",
@@ -37,7 +37,7 @@
     "react": "19.2.8",
     "react-dom": "19.2.8",
     "react-katex": "^3.1.0",
-    "resend": "^6.12.4",
+    "resend": "^6.18.1",
     "stripe": "^22.3.2"
   },
   "devDependencies": {
