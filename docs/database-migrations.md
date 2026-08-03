@@ -51,16 +51,32 @@ use — homepage, OpenAPI document, billing readiness, and observability readine
 — against the canonical deployment. A schema change is not finished until the
 running application still works against it.
 
-## Drift is a stop condition
+## Drift, and how it is gated
 
 `supabase db diff --linked` compares the live schema against the migration tree.
-Any output means the database has changes that no migration describes — almost
-always a direct edit in the SQL editor. The workflow fails and applies nothing.
+Output means the database has changes no migration describes — usually a direct
+edit in the SQL editor.
 
-Reconcile drift by writing a new migration that expresses what was already done,
-then re-running. Do not disable `check_schema_drift` to get past the gate; the
-flag exists only because the check needs a Docker shadow database on the runner
-and may be unavailable, not because the finding is optional.
+The check runs twice, because the obvious design deadlocks. Failing before
+applying whenever live and the tree disagree means a migration *written to
+reconcile drift* can never run: the drift it exists to remove is still present
+when the gate fires. The first real dry-run hit exactly that.
+
+**Before applying**, drift is recorded to `drift-before.sql` and reported as a
+warning. It fails only when drift exists and **no migration is pending** to
+account for it — which is the case the gate was built for: Production changed
+outside this workflow, with nothing on its way to explain it.
+
+**After applying**, `drift-after.sql` must be empty. This is the stronger
+property: rather than refusing to act on a disagreement, it requires the end
+state to agree. Anything remaining is a real difference the applied migrations
+did not account for, and the run fails with both files retained for comparison.
+
+Reconcile drift by writing a migration that expresses what is already true, or
+that removes what should not be there. Do not disable `check_schema_drift` to
+get past a finding; the flag exists because the check needs a Docker shadow
+database on the runner and may be unavailable, not because the finding is
+optional.
 
 ## There is no automatic revert
 
