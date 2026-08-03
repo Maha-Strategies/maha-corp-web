@@ -1346,12 +1346,13 @@ export const BRIEFS: Brief[] = [
   },
   {
     slug: 'smartphone-ap-fan-out-substrate-thickness',
-    title: 'Smartphone AP Packaging: Fan-Out and Substrate-Thickness Decisions',
+    title: 'Smartphone AP Packaging: Architecture, Supplier, and Reliability Decisions',
     kicker: 'ADVANCED PACKAGING // MOBILE APPLICATION PROCESSORS // YIELD',
-    description: 'A decision framework for selecting fan-out, flip-chip, and package-on-package architectures for high-end smartphone application processors—and for qualifying thin substrate designs without treating yield estimates as universal.',
+    description: 'A decision framework for selecting fan-out, flip-chip, and package-on-package architectures for smartphone application processors, assessing supplier routes, and interpreting reliability evidence without treating a single test threshold as universal.',
     status: 'ACTIVE',
     datePublished: '2026-07-23',
-    intro: 'High-end smartphone application-processor packaging is not a binary contest between fan-out wafer-level packaging (FOWLP) and flip-chip chip-scale packaging (FC-CSP). Both can be used within a package-on-package (PoP) architecture, and both have active manufacturing ecosystems. The relevant decision is whether the chosen architecture meets electrical, thermal, form-factor, test, yield, capacity, and unit-economics requirements for one defined product—not which technology has the more compelling label.',
+    dateModified: '2026-08-02',
+    intro: 'Smartphone application-processor packaging is not a binary contest between fan-out wafer-level packaging (FOWLP) and flip-chip chip-scale packaging (FC-CSP). Both can be used within a package-on-package (PoP) architecture, and both have active manufacturing ecosystems. The relevant decision is whether the chosen architecture meets electrical, thermal, form-factor, test, yield, capacity, and unit-economics requirements for one defined product—not which technology has the more compelling label or most recognizable supplier.',
     sections: [
       {
         level: 2,
@@ -1419,6 +1420,55 @@ export const BRIEFS: Brief[] = [
           'For one programme the immovable constraint may be z-height; for another it may be memory integration, power integrity, testability, supplier capacity, or a narrow launch schedule. The architecture review should explicitly rank those constraints and show which package option fails first. This makes trade-offs visible and prevents a packaging choice from being driven by a single attractive attribute such as thinness.',
           'A mature decision package contains an architecture comparison, cross-sections, electrical and thermal assumptions, test and known-good-die plan, yield model, reliability plan, supplier readiness review, capacity path, and a decision owner for every unresolved risk. That is the basis for selecting a fan-out or substrate-based route—not a generalised view of which approach is “mass produced.”'
         ]
+      },
+      {
+        level: 2,
+        heading: '06. Treat Foundry and OSAT Choice as a Package-Flow Qualification Decision',
+        paragraphs: [
+          'Public information confirms that both foundries and independent assembly-and-test providers offer mobile-oriented fan-out and PoP platforms. TSMC describes InFO-PoP as an RDL-based route for integrating a mobile AP and DRAM; ASE and Amkor also publish fan-out and PoP capabilities for mobile applications. Public product pages do not, however, disclose a complete, current package assignment for every Qualcomm or MediaTek part. It is therefore not defensible to state as fact that either company depends on one manufacturer for all package substrates or all flagship processors.',
+          'For an AP owner, the selection question is narrower: which supplier has qualified the exact bottom-package construction, memory interface, die size, RDL rules, test sequence, reliability target, and launch volume? An integrated foundry-plus-package flow can reduce hand-offs and permit earlier co-optimization of die pads, bumps, RDL, and package rules. An OSAT route can create an independent manufacturing option, but only once the specific flow—not merely a similarly named platform—has passed the necessary qualification gates.'
+        ],
+        table: {
+          caption: 'Supplier-route decision gates',
+          header: ['Route', 'Potential advantage', 'Evidence required before allocation'],
+          rows: [
+            ['Integrated foundry and package flow', 'Fewer interface hand-offs and a connected design-to-package engineering loop.', 'Qualified package reference, capacity commitment, test plan, change-control authority, and loss-of-die exposure.'],
+            ['Independent OSAT flow', 'Supplier independence and potential access to alternative assembly, test, and material ecosystems.', 'Proven result for the exact stack, known-good-die plan, RDL and warpage data, reliability record, and yield-learning ownership.'],
+            ['Dual-qualified flow', 'Continuity option and commercial leverage when both routes can make an accepted package.', 'Comparable electrical, thermal, reliability, test-correlation, quality, and change-control evidence—not just nominal package similarity.']
+          ]
+        }
+      },
+      {
+        level: 2,
+        heading: '07. A 3,000-Cycle TCT Result Is Evidence, Not a Standalone Market Claim',
+        paragraphs: [
+          'A temperature-cycle result from −55°C to +125°C over 3,000 cycles can be a meaningful endurance data point for a mobile AP package, especially where it is measured on defined RDL, via, bump, or daisy-chain structures. A resistance change below 10% may indicate greater interconnect stability than a comparable result above 10%, but it is not by itself a universal competitive advantage. The test vehicle, monitored net, sample size, failure criterion, interim read points, thermal dwell and ramp profile, and board-level test configuration determine what the comparison means.',
+          'Likewise, a resistance shift should not be translated directly into a promised phone-level clock-speed, battery-life, or throttling difference. A material change can raise path resistance or signal loss, but the user-visible outcome depends on the power-delivery design, voltage guard bands, system firmware, thermal solution, memory interface, and the location and cause of the degradation. A change caused by localized cracking deserves urgent failure analysis; a measured shift without mechanism or system correlation is not enough to infer field performance.'
+        ],
+        table: {
+          caption: 'How to interpret a TCT resistance comparison',
+          header: ['Observation', 'What it can support', 'What it cannot support alone'],
+          rows: [
+            ['<10% resistance change after the defined test', 'A relative indication of interconnect stability for the tested structure and conditions.', 'A general claim of superior smartphone performance or lifetime.'],
+            ['≥10% resistance change after the defined test', 'A trigger to inspect failure distribution, current crowding, cracking, contact integrity, and correlation to functional tests.', 'A conclusion that CPU or GPU throttling will occur in shipping devices.'],
+            ['Different results between two qualified flows', 'A supplier and design-review input when the designs, test conditions, and samples are comparable.', 'A vendor ranking without cross-section, materials, electrical, and board-level context.']
+          ]
+        },
+        blockquote: 'Use temperature-cycle results to decide which package risks need deeper analysis; use correlated electrical, functional, and board-level evidence to decide whether users will notice a difference.'
+      },
+      {
+        level: 2,
+        heading: '08. Model an Anchor-Customer Departure as a Scenario, Not a Forecast',
+        paragraphs: [
+          'If a large mobile customer moved a material share of advanced packaging to an internal flow or an OSAT, spare capacity and development priorities could shift. A foundry might seek more volume from other mobile-platform customers, revise commercial terms, or broaden the use cases for an existing packaging platform. Those are plausible responses, not outcomes that can be assumed from public information.',
+          'The countervailing possibility is that capacity is redeployed to other high-value programmes, including computing, networking, or automotive. The consequence for Qualcomm and MediaTek would therefore depend on actual available capacity, package compatibility, demand from other customers, and each company’s qualified alternative routes. A sourcing team should run both cases: excess-capacity competition and capacity absorption elsewhere.'
+        ],
+        listItems: [
+          'Estimate the affected package capacity and identify which equipment and process steps are actually transferable.',
+          'Test whether the AP package is compatible with the capacity that could become available, rather than assuming that all fan-out capacity is fungible.',
+          'Compare a pricing-improvement case with a capacity-redeployment case, and state the evidence needed to discriminate between them.',
+          'Preserve a technically qualified OSAT alternative if supplier neutrality or a multi-foundry wafer strategy is an explicit objective.'
+        ]
       }
     ],
     protocolPatch: {
@@ -1426,7 +1476,7 @@ export const BRIEFS: Brief[] = [
       paragraphs: [
         'Treat FOWLP, FC-CSP, and PoP as architectural building blocks. Confirm the exact package construction, supplier process, qualified reference scope, yield evidence, and board-level reliability requirements before carrying a technology claim into a product or sourcing decision.'
       ],
-      emphasis: 'Do not publish or price universal yield-loss percentages without a traceable stack-up, baseline, test method, and decision context.'
+      emphasis: 'Do not publish or price universal yield-loss, supplier-dependence, or reliability-performance claims without a traceable stack-up, test method, and decision context.'
     }
   },
   {
@@ -1436,6 +1486,7 @@ export const BRIEFS: Brief[] = [
     description: 'A contract-design framework for allocating capacity, materials, assembly, test, yield, quality, and high-value die risk among smartphone AP owners, OSATs, and package-substrate suppliers.',
     status: 'ACTIVE',
     datePublished: '2026-07-29',
+    dateModified: '2026-08-02',
     intro: 'For smartphone application-processor packaging, the commercial model starts by separating who owns the die, who fabricates or procures the substrate, who performs assembly and test, and who controls the production evidence. Those roles can be combined in a turnkey programme or divided among several companies. This brief is a decision and diligence framework—not legal advice, and not a claim that any one price, yield threshold, or liability term is an industry standard.',
     sections: [
       {
@@ -1514,6 +1565,23 @@ export const BRIEFS: Brief[] = [
           'A new package flow should have a distinct launch phase rather than being managed as if it were mature production. Establish a recurring review of capacity, material readiness, yield by stage, test correlation, reliability evidence, open corrective actions, and forecast changes. The programme should designate who can approve a process or material change and what proof is required before volume exposure increases.',
           'At production maturity, retain the same traceability and change-control discipline while shifting the decision focus toward cost, supply continuity, test-time efficiency, and field feedback. This gives the AP owner and suppliers a shared operational record without assuming that a contract alone can eliminate technical uncertainty.'
         ]
+      },
+      {
+        level: 2,
+        heading: '06. Align Package Complexity With the Product Portfolio—Without Assuming a Public Vendor Map',
+        paragraphs: [
+          'A premium mobile platform is more likely to justify costly package development when its requirements for power delivery, I/O, memory integration, z-height, and thermal control exceed the value available from a conventional construction. Mainstream and entry platforms may instead favor mature substrate-based or lower-complexity fan-out flows because predictable capacity, qualification reuse, and unit cost carry more weight. This is a product-economics principle, not a verified allocation map for a particular Qualcomm or MediaTek SKU.',
+          'The same processor family can change packaging route across generations as die size, node, memory configuration, forecast, available capacity, or launch priority changes. Supplier selection must consequently be verified part by part through package marking, supplier disclosures, qualification material, or direct programme evidence—not inferred from a brand tier or a chipset series name.'
+        ],
+        table: {
+          caption: 'Portfolio lens for package sourcing',
+          header: ['Programme characteristic', 'Likely weighting in the decision'],
+          rows: [
+            ['Premium platform', 'Integration margin, electrical and thermal performance, form factor, and leading-edge capacity may justify higher development and unit cost.'],
+            ['High-volume mainstream platform', 'Repeatable yield, scalable assembly and test, materials availability, and total delivered cost are commonly more decisive.'],
+            ['Entry platform or mature derivative', 'Qualification reuse, cost control, supply continuity, and broad OSAT capacity usually rise in priority.']
+          ]
+        }
       }
     ],
     protocolPatch: {

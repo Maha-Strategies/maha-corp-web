@@ -11,6 +11,7 @@ const path = (id: string) => {
 
 const books = path('books')
 const preflight = path('mps_preflight')
+const tenantBilling = path('tenant_billing')
 
 const wiredBooks = {
   STRIPE_SECRET_KEY: 'sk_live_x',
@@ -53,18 +54,39 @@ test('a path switched on with variables missing cannot transact', () => {
 test('a flagless path is live once configured and a fault when partial', () => {
   const complete = {
     STRIPE_SECRET_KEY: 'sk', STRIPE_MPS_PREFLIGHT_PRICE_ID: 'price_A', STRIPE_WEBHOOK_SECRET: 'whsec',
-    MPS_PREFLIGHT_FROM_EMAIL: 'a@b.c', RESEND_API_KEY: 're_x', ANTHROPIC_API_KEY: 'sk-ant',
+    ANTHROPIC_API_KEY: 'sk-ant',
   }
   assert.equal(inspectRevenuePath(preflight, complete).state, 'ready')
   assert.equal(inspectRevenuePath(preflight, complete).enabled, null)
-  assert.equal(inspectRevenuePath(preflight, { ...complete, MPS_PREFLIGHT_FROM_EMAIL: undefined }).state, 'incomplete')
+  assert.equal(inspectRevenuePath(preflight, { ...complete, ANTHROPIC_API_KEY: undefined }).state, 'incomplete')
+})
+
+test('Preflight email delivery configuration is optional for transaction readiness', () => {
+  const complete = {
+    STRIPE_SECRET_KEY: 'sk', STRIPE_MPS_PREFLIGHT_PRICE_ID: 'price_A', STRIPE_WEBHOOK_SECRET: 'whsec',
+    ANTHROPIC_API_KEY: 'sk-ant', RESEND_API_KEY: undefined, MPS_PREFLIGHT_FROM_EMAIL: undefined,
+  }
+  const result = inspectRevenuePath(preflight, complete)
+  assert.equal(result.state, 'ready')
+  assert.deepEqual(result.missing, [])
+})
+
+test('tenant subscriptions and automatic top-ups require every Stripe price and the shared webhook', () => {
+  const complete = {
+    STRIPE_SECRET_KEY: 'sk', STRIPE_API_KEY_WEBHOOK_SECRET: 'whsec',
+    STRIPE_TENANT_BUILDER_PRICE_ID: 'price_builder', STRIPE_TENANT_SCALE_PRICE_ID: 'price_scale',
+    STRIPE_TENANT_AUTO_TOPUP_PRICE_ID: 'price_topup',
+  }
+  assert.equal(inspectRevenuePath(tenantBilling, complete).state, 'ready')
+
+  const incomplete = inspectRevenuePath(tenantBilling, { ...complete, STRIPE_TENANT_AUTO_TOPUP_PRICE_ID: undefined })
+  assert.equal(incomplete.state, 'incomplete')
+  assert.deepEqual(incomplete.missing, ['STRIPE_TENANT_AUTO_TOPUP_PRICE_ID'])
 })
 
 test('a near-miss variable name is surfaced against the name it should have been', () => {
-  // The failure that actually occurred: MPS_PREFLIGHT_FROM_EMAI, missing its
-  // final L. The path fails closed exactly as if nothing had been set.
-  const typos = findSuspectedTypos(['MPS_PREFLIGHT_FROM_EMAIL'], { MPS_PREFLIGHT_FROM_EMAI: 'ops@example.com' })
-  assert.deepEqual(typos, [{ expected: 'MPS_PREFLIGHT_FROM_EMAIL', found: 'MPS_PREFLIGHT_FROM_EMAI' }])
+  const typos = findSuspectedTypos(['STRIPE_MPS_PREFLIGHT_PRICE_ID'], { STRIPE_MPS_PREFLIGHT_PRICE_I: 'price_A' })
+  assert.deepEqual(typos, [{ expected: 'STRIPE_MPS_PREFLIGHT_PRICE_ID', found: 'STRIPE_MPS_PREFLIGHT_PRICE_I' }])
 })
 
 test('typo detection ignores unrelated and unset variables', () => {
@@ -72,7 +94,7 @@ test('typo detection ignores unrelated and unset variables', () => {
   // Present under the correct name for another path, so not a near miss of this one.
   assert.deepEqual(findSuspectedTypos(['STRIPE_BOOKS_WEBHOOK_SECRET'], { STRIPE_SECRET_KEY: 'sk' }), [])
   // Declared but empty is the same as absent and must not be offered as a fix.
-  assert.deepEqual(findSuspectedTypos(['MPS_PREFLIGHT_FROM_EMAIL'], { MPS_PREFLIGHT_FROM_EMAI: '   ' }), [])
+  assert.deepEqual(findSuspectedTypos(['STRIPE_MPS_PREFLIGHT_PRICE_ID'], { STRIPE_MPS_PREFLIGHT_PRICE_I: '   ' }), [])
 })
 
 test('the report degrades only on genuine faults and never reports a value', () => {

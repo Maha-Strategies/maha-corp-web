@@ -25,6 +25,12 @@ const PRIVATE_ROUTES = new Set([
   '/api/admin/micro-utility-validations',
   '/api/admin/observability-readiness',
   '/api/admin/revenue-readiness',
+  // Rewrite targets. The documented public URLs are /.well-known/agent.json and
+  // /agent-offers.json; these internal paths are not part of the API surface.
+  '/api/discovery/agent-card',
+  '/api/discovery/agent-offers',
+  '/api/discovery/agent-context',
+  '/api/discovery/mcp-contract',
   '/api/admin/content-candidates',
   '/api/admin/content-drafts',
   '/api/admin/content-draft-assistant',
