@@ -52,7 +52,7 @@ jobs:
         run: |
           test "$CONFIRMATION" = 'ROLLBACK PRODUCTION'
           test "${#REASON}" -ge 12
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v7
       - uses: actions/setup-node@v5
         with:
           node-version: 24

@@ -32,7 +32,7 @@ jobs:
       CANARY_API_KEY: ${{ secrets.PRODUCTION_CANARY_API_KEY }}
       CLIENT_REQUEST_ID: billing_canary_${{ github.run_id }}
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v7
       - uses: actions/setup-node@v5
         with:
           node-version: 24

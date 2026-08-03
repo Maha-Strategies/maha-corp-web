@@ -17,7 +17,7 @@ jobs:
       UPSTASH_REDIS_REST_URL: https://ci-build.invalid
       UPSTASH_REDIS_REST_TOKEN: ci-build-placeholder
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v7
         with:
           # Full history so the migration check can resolve the merge base with
           # the target branch.
@@ -50,7 +50,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v7
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
