@@ -125,3 +125,16 @@ export function validStripeWebhookSignature(raw: string, signature: string | nul
     return supplied.length === configured.length && timingSafeEqual(supplied, configured)
   })
 }
+
+/**
+ * Whether prepaid audit access can currently be sold.
+ *
+ * The checkout API already fails closed on this, but the purchase page has to
+ * ask the same question before rendering an offer, or a visitor reaches a
+ * complete purchase flow and receives a 503 on pressing the button. A throw
+ * means the configuration is present but invalid, which is equally
+ * untransactable.
+ */
+export function creditPackAvailable(): boolean {
+  try { return creditPackConfig() !== null } catch { return false }
+}
