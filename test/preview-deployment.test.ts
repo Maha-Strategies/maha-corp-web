@@ -27,6 +27,36 @@ test('Production deployments are never selected', () => {
     () => selectNewestReadyPreview({ deployments: [preview({ target: 'production', createdAt: 9_000 })] }, PROJECT),
     /No ready Preview deployment/,
   )
+  // Case-insensitively, and staging is not a preview either.
+  assert.throws(() => selectNewestReadyPreview({ deployments: [preview({ target: 'PRODUCTION' })] }, PROJECT), /No ready Preview/)
+  assert.throws(() => selectNewestReadyPreview({ deployments: [preview({ target: 'staging' })] }, PROJECT), /No ready Preview/)
+})
+
+test('a preview whose target is null or absent is still eligible', () => {
+  // The list endpoint reports a preview's target as null on some API versions
+  // while `vercel inspect` reports "preview". Requiring the literal string made
+  // every real preview ineligible and the scheduled run failed with "No ready
+  // Preview deployment is available to measure" against twelve of them.
+  assert.equal(selectNewestReadyPreview({ deployments: [preview({ target: null })] }, PROJECT).id, 'dpl_a')
+  assert.equal(selectNewestReadyPreview({ deployments: [preview({ target: undefined })] }, PROJECT).id, 'dpl_a')
+})
+
+test('a null-target preview still loses to nothing and never to Production', () => {
+  const chosen = selectNewestReadyPreview({
+    deployments: [
+      preview({ uid: 'dpl_prod', target: 'production', createdAt: 9_000 }),
+      preview({ uid: 'dpl_preview', target: null, createdAt: 5_000 }),
+    ],
+  }, PROJECT)
+  assert.equal(chosen.id, 'dpl_preview')
+})
+
+test('a timestamp reported as `created` rather than `createdAt` is accepted', () => {
+  const chosen = selectNewestReadyPreview({
+    deployments: [{ uid: 'dpl_c', url: 'c.vercel.app', target: null, readyState: 'READY', created: 7_000, projectId: PROJECT }],
+  }, PROJECT)
+  assert.equal(chosen.id, 'dpl_c')
+  assert.equal(chosen.createdAt, 7_000)
 })
 
 test('readiness is honoured under either field name', () => {
