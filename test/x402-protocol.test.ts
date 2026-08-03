@@ -37,7 +37,7 @@ function facilitator(overrides: Partial<PaymentFacilitator> = {}): PaymentFacili
 }
 
 function guard(seen: Set<string> = new Set()): ReplayGuard {
-  return { claim: async (transaction) => (seen.has(transaction) ? false : (seen.add(transaction), true)) }
+  return { claim: async ({ transaction }) => (seen.has(transaction) ? false : (seen.add(transaction), true)) }
 }
 
 test('a challenge states the terms an agent needs to pay', () => {

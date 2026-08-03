@@ -7,11 +7,9 @@ import type { PaymentRequirement, ReplayGuard } from './protocol.ts'
 
 type Ledger = { rpc: (name: string, args: Record<string, unknown>) => PromiseLike<{ data: unknown; error: { code?: string; message?: string } | null }> }
 
-export type ClaimedPayment = {
-  transaction: string
+/** The parts known before the facilitator answers. */
+export type SettlementContext = {
   network: string
-  payer: string
-  amountPaid: string
   asset: string
 }
 
@@ -25,16 +23,17 @@ export type ClaimedPayment = {
  * can retry. A payer who is wrongly refused still holds their settled payment;
  * a resource served without a record cannot be recovered.
  */
-export function createReplayGuard(ledger: Ledger, payment: ClaimedPayment, requirement: PaymentRequirement): ReplayGuard {
+export function createReplayGuard(ledger: Ledger, context: SettlementContext, requirement: PaymentRequirement): ReplayGuard {
   return {
-    async claim(transaction: string): Promise<boolean> {
+    async claim(payment): Promise<boolean> {
       const { data, error } = await ledger.rpc('claim_x402_payment', {
-        p_transaction_id: transaction,
-        p_network: payment.network,
+        p_transaction_id: payment.transaction,
+        p_network: context.network,
+        // The requirement's resource, never anything the caller supplied.
         p_resource: requirement.resource,
         p_payer: payment.payer,
         p_amount_paid: payment.amountPaid,
-        p_asset: payment.asset,
+        p_asset: context.asset,
       })
       if (error) {
         console.error('x402 replay claim failed:', error.code ?? 'unknown_error')
