@@ -1,0 +1,23 @@
+{
+  "_README": [
+    "UNVERIFIED PLACEHOLDER RATES. Verify every figure against the provider's",
+    "current pricing page before quoting any number this harness produces.",
+    "Model names and prices move faster than this file will be maintained, and a",
+    "unit-economics claim built on a stale rate is worse than no claim at all.",
+    "",
+    "inputPerMillionUsd is the INPUT token price only. Compression reduces input",
+    "tokens; it does not change output pricing, so output rates are irrelevant to",
+    "the arbitrage and are deliberately omitted.",
+    "",
+    "Add or replace entries freely -- the harness reads whatever is here."
+  ],
+  "_verifiedOn": null,
+  "models": [
+    { "id": "claude-3-5-sonnet", "label": "Claude 3.5 Sonnet", "inputPerMillionUsd": 3.00, "verified": false },
+    { "id": "gpt-4o", "label": "GPT-4o", "inputPerMillionUsd": 2.50, "verified": false },
+    { "id": "gemini-1-5-pro", "label": "Gemini 1.5 Pro", "inputPerMillionUsd": 1.25, "verified": false },
+    { "id": "frontier-premium", "label": "Frontier premium tier", "inputPerMillionUsd": 15.00, "verified": false },
+    { "id": "budget-tier", "label": "Budget/small model", "inputPerMillionUsd": 0.15, "verified": false }
+  ],
+  "feeTiersUsd": [0.001, 0.005, 0.01, 0.05]
+}
