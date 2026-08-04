@@ -1,6 +1,6 @@
 import { HTTPFacilitatorClient } from '@x402/core/server'
 
-import type { PaymentFacilitator, PaymentPayload, PaymentRequirement, VerificationResult } from './protocol.ts'
+import type { PaymentFacilitator, PaymentPayload, PaymentRequirement, SettleResult, VerifyResult } from './protocol.ts'
 
 // Adapts the official facilitator client to this codebase's interface.
 //
@@ -31,8 +31,85 @@ export type SettlementConfig = {
   asset: string
 }
 
-function failure(reason: string): VerificationResult {
+function failure(reason: string): { ok: false; reason: string } {
   return { ok: false, reason }
+}
+
+/**
+ * Everything knowable about a thrown facilitator call.
+ *
+ * The SDK collapses transport failures, non-2xx responses and schema
+ * mismatches into errors whose `name` is a bare `Error`, and the caller sees
+ * the same 402 for all of them. That is not enough to act on: a DNS failure, a
+ * runtime that blocks the egress, and a facilitator returning HTML instead of
+ * JSON all look identical from the log line.
+ *
+ * So two things happen here. The error is unwrapped down its `cause` chain,
+ * which is where `fetch` puts the real reason. Then, because the SDK has
+ * already discarded the response, the same endpoint is called again with a
+ * plain fetch purely to record what it actually answers -- status,
+ * content-type, and the first of the body. That second call verifies nothing
+ * and settles nothing; it exists to turn "Error" into a fact.
+ *
+ * Bodies and stacks are logged only when X402_FACILITATOR_DIAGNOSTICS is
+ * 'true'. A facilitator's error text is not a field we control, and this runs
+ * on a path that has a payer's address in scope.
+ */
+async function reportFailure(
+  operation: 'verify' | 'settle',
+  error: unknown,
+  config: FacilitatorConfig,
+  payment: PaymentPayload,
+  requirement: PaymentRequirement,
+): Promise<void> {
+  const verbose = process.env.X402_FACILITATOR_DIAGNOSTICS?.trim() === 'true'
+
+  const chain: string[] = []
+  let current: unknown = error
+  for (let depth = 0; current instanceof Error && depth < 5; depth += 1) {
+    const code = (current as { code?: unknown }).code
+    chain.push(`${current.name}${code ? `[${code}]` : ''}: ${current.message.slice(0, 300)}`)
+    current = current.cause
+  }
+  if (chain.length === 0) chain.push(`non-error thrown: ${String(error).slice(0, 200)}`)
+
+  const endpoint = `${config.url.replace(/\/$/, '')}/${operation}`
+  console.error(`x402 facilitator ${operation} failed`, JSON.stringify({
+    endpoint,
+    scheme: requirement.scheme,
+    network: requirement.network,
+    // Whether we sent the EIP-712 domain at all. Its absence is answered with
+    // invalid_exact_evm_missing_eip712_domain and refuses every payment.
+    sentExtra: Object.keys(requirement.extra ?? {}),
+    x402Version: payment.x402Version,
+    errorChain: chain,
+    ...(verbose && error instanceof Error ? { stack: error.stack?.split('\n').slice(0, 8) } : {}),
+  }))
+
+  // What does that endpoint actually answer? The SDK threw the response away.
+  try {
+    const probe = await fetch(endpoint, {
+      method: 'POST',
+      headers: { 'content-type': 'application/json', ...(config.authHeaders ?? {}) },
+      body: JSON.stringify({ x402Version: payment.x402Version, paymentPayload: payment, paymentRequirements: requirement }),
+      cache: 'no-store',
+    })
+    const body = await probe.text()
+    console.error('x402 facilitator probe', JSON.stringify({
+      endpoint,
+      status: probe.status,
+      contentType: probe.headers.get('content-type'),
+      bodyBytes: body.length,
+      ...(verbose ? { body: body.slice(0, 1_000) } : { bodyPreview: body.slice(0, 200) }),
+    }))
+  } catch (probeError) {
+    // The probe failing the same way is itself the answer: the runtime cannot
+    // reach the host, and nothing about the payload is responsible.
+    const detail = probeError instanceof Error
+      ? `${probeError.name}: ${probeError.message.slice(0, 300)}${probeError.cause instanceof Error ? ` <- ${probeError.cause.name}: ${probeError.cause.message.slice(0, 200)}` : ''}`
+      : String(probeError).slice(0, 200)
+    console.error('x402 facilitator probe could not reach the host', JSON.stringify({ endpoint, detail }))
+  }
 }
 
 /**
@@ -51,34 +128,42 @@ export function createFacilitator(config: FacilitatorConfig): PaymentFacilitator
     ...(config.authHeaders ? { createAuthHeaders: async () => config.authHeaders! } : {}),
   } as ConstructorParameters<typeof HTTPFacilitatorClient>[0])
 
-  const call = async (
-    operation: 'verify' | 'settle',
-    payment: PaymentPayload,
-    requirement: PaymentRequirement,
-  ): Promise<VerificationResult> => {
+  const call = async (operation: 'verify' | 'settle', payment: PaymentPayload, requirement: PaymentRequirement) => {
     try {
-      const response = await (client as unknown as Record<string, (a: unknown, b: unknown) => Promise<unknown>>)[operation](payment, requirement)
-      return readResponse(operation, response)
+      return await (client as unknown as Record<string, (a: unknown, b: unknown) => Promise<unknown>>)[operation](payment, requirement)
     } catch (error) {
       // A facilitator that is unreachable or erroring must never read as a
       // successful payment.
-      console.error(`x402 facilitator ${operation} failed:`, error instanceof Error ? error.name : 'unknown_error')
-      return failure(`facilitator_${operation}_failed`)
+      await reportFailure(operation, error, config, payment, requirement)
+      return null
     }
   }
 
   return {
-    verify: (payment, requirement) => call('verify', payment, requirement),
-    settle: (payment, requirement) => call('settle', payment, requirement),
+    async verify(payment, requirement): Promise<VerifyResult> {
+      const response = await call('verify', payment, requirement)
+      return response === null ? failure('facilitator_verify_failed') : readResponse('verify', response)
+    },
+    async settle(payment, requirement): Promise<SettleResult> {
+      const response = await call('settle', payment, requirement)
+      return response === null ? failure('facilitator_settle_failed') : readResponse('settle', response)
+    },
   }
 }
 
 /**
- * Field names vary across facilitator implementations and protocol versions,
- * so each is read defensively. A response that does not clearly state success
- * is treated as a failure rather than assumed to be one shape or the other.
+ * The two operations return genuinely different shapes, and conflating them was
+ * a real bug: `verify` yields `{ isValid, payer }` and nothing else, because no
+ * chain transaction exists yet. Demanding a transaction hash from it refuses
+ * every payment, including valid ones. Only `settle` carries a transaction.
+ *
+ * Field names still vary across implementations and protocol versions, so each
+ * is read defensively, and a response that does not clearly state success is
+ * treated as a failure rather than assumed to be one shape or the other.
  */
-export function readResponse(operation: 'verify' | 'settle', response: unknown): VerificationResult {
+export function readResponse(operation: 'verify', response: unknown): VerifyResult
+export function readResponse(operation: 'settle', response: unknown): SettleResult
+export function readResponse(operation: 'verify' | 'settle', response: unknown): VerifyResult | SettleResult {
   if (typeof response !== 'object' || response === null) return failure(`facilitator_${operation}_malformed`)
   const body = response as Record<string, unknown>
 
@@ -89,16 +174,15 @@ export function readResponse(operation: 'verify' | 'settle', response: unknown):
   }
 
   const payer = firstString(body.payer, body.from, body.payerAddress)
-  const transaction = firstString(body.transaction, body.txHash, body.transactionHash, body.nonce)
-  const amountPaid = firstString(body.amountPaid, body.amount, body.value)
-
-  // Without a transaction identifier there is nothing to record against, and
-  // replay protection would silently do nothing.
-  if (!transaction) return failure(`facilitator_${operation}_missing_transaction`)
   if (!payer) return failure(`facilitator_${operation}_missing_payer`)
-  if (!amountPaid || !/^[0-9]+$/.test(amountPaid)) return failure(`facilitator_${operation}_missing_amount`)
+  if (operation === 'verify') return { ok: true, payer }
 
-  return { ok: true, payer, transaction, amountPaid }
+  const transaction = firstString(body.transaction, body.txHash, body.transactionHash)
+  // Settlement with no transaction identifier leaves nothing to reconcile
+  // against the chain, so it is not treated as a settlement.
+  if (!transaction) return failure('facilitator_settle_missing_transaction')
+
+  return { ok: true, payer, transaction }
 }
 
 function firstString(...values: unknown[]): string | undefined {

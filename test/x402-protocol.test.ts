@@ -32,12 +32,20 @@ const payment = (overrides: Partial<PaymentPayload> = {}): PaymentPayload => ({
 const encode = (value: unknown) => Buffer.from(JSON.stringify(value), 'utf8').toString('base64')
 
 function facilitator(overrides: Partial<PaymentFacilitator> = {}): PaymentFacilitator {
-  const success = { ok: true as const, payer: '0xAgent', transaction: 'tx_1', amountPaid: '1000' }
-  return { verify: async () => success, settle: async () => success, ...overrides }
+  return {
+    // Verify carries no transaction and no amount: the protocol has none to
+    // give until settlement.
+    verify: async () => ({ ok: true as const, payer: '0xAgent' }),
+    settle: async () => ({ ok: true as const, payer: '0xAgent', transaction: 'tx_1' }),
+    ...overrides,
+  }
 }
 
 function guard(seen: Set<string> = new Set()): ReplayGuard {
-  return { claim: async (transaction) => (seen.has(transaction) ? false : (seen.add(transaction), true)) }
+  return {
+    claim: async ({ paymentId }) => (seen.has(paymentId) ? 'duplicate' : (seen.add(paymentId), 'claimed')),
+    recordSettlement: async () => undefined,
+  }
 }
 
 test('a challenge states the terms an agent needs to pay', () => {
@@ -104,14 +112,48 @@ test('a verified payment of the full amount is accepted', async () => {
   if (result.ok) assert.equal(result.transaction, 'tx_1')
 })
 
-test('an underpayment is refused even when the facilitator verifies it', async () => {
-  // The facilitator confirms the payment is real; it does not know the price.
-  const short = facilitator({ verify: async () => ({ ok: true, payer: '0xAgent', transaction: 'tx_2', amountPaid: '999' }) })
+test('the price is enforced by what is sent to the facilitator, not checked after', async () => {
+  // There is no amount in a verify response to compare against, so the price
+  // is enforced upstream: maxAmountRequired travels in the requirements, and
+  // the facilitator answers isValid:false when the signed payload does not
+  // satisfy them. Checking a field the protocol never sends is how an earlier
+  // version of this file refused every payment it was given.
+  const seen: string[] = []
+  const watching = facilitator({
+    verify: async (_payment, requirement) => {
+      seen.push(requirement.maxAmountRequired)
+      return { ok: true, payer: '0xAgent' }
+    },
+  })
+  await acceptPayment({
+    payment: payment(), requirements: [requirement({ maxAmountRequired: '1000' })], facilitator: watching, replayGuard: guard(),
+  })
+  assert.deepEqual(seen, ['1000'])
+})
+
+test('a facilitator rejection is the underpayment refusal, and never settles', async () => {
+  let settled = false
+  const short = facilitator({
+    verify: async () => ({ ok: false, reason: 'insufficient_funds' }),
+    settle: async () => { settled = true; return { ok: true, payer: '0xAgent', transaction: 'tx_2' } },
+  })
   const result = await acceptPayment({
     payment: payment(), requirements: [requirement({ maxAmountRequired: '1000' })], facilitator: short, replayGuard: guard(),
   })
   assert.equal(result.ok, false)
-  if (!result.ok) assert.equal(result.reason, 'insufficient_amount')
+  if (!result.ok) {
+    assert.equal(result.status, 402)
+    assert.equal(result.reason, 'insufficient_funds')
+  }
+  assert.equal(settled, false)
+})
+
+test('the amount recorded is the price that was demanded', async () => {
+  const result = await acceptPayment({
+    payment: payment(), requirements: [requirement({ maxAmountRequired: '1000' })], facilitator: facilitator(), replayGuard: guard(),
+  })
+  assert.equal(result.ok, true)
+  if (result.ok) assert.equal(result.amountPaid, '1000')
 })
 
 test('a payment cannot be spent twice', async () => {
@@ -162,4 +204,26 @@ test('a payment for one resource cannot be presented for another', () => {
   const solver = requirement({ resource: 'https://www.mahastrategies.com/api/v1/jobs/tensor-opt', maxAmountRequired: '500000' })
   assert.notEqual(audit.resource, solver.resource)
   assert.notEqual(audit.maxAmountRequired, solver.maxAmountRequired)
+})
+
+test('a ledger that cannot answer is not reported as a replay', async () => {
+  // The commonest cause is the migration not having been applied to the
+  // environment under test. Calling that "already used" on a first-ever
+  // payment sends an operator hunting for a duplicate that never existed.
+  let settled = false
+  const broken: ReplayGuard = { claim: async () => 'unavailable', recordSettlement: async () => undefined }
+  const result = await acceptPayment({
+    payment: payment(),
+    requirements: [requirement()],
+    facilitator: facilitator({ settle: async () => { settled = true; return { ok: true, payer: '0xAgent', transaction: 'tx_1' } } }),
+    replayGuard: broken,
+  })
+  assert.equal(result.ok, false)
+  if (!result.ok) {
+    assert.equal(result.status, 503)
+    assert.equal(result.reason, 'x402_ledger_unavailable')
+  }
+  // Nothing settled, so the payer keeps their authorization and the retry is
+  // genuinely free rather than a second charge.
+  assert.equal(settled, false)
 })

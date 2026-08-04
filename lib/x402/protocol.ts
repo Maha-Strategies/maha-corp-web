@@ -36,6 +36,14 @@ export type PaymentRequirement = {
   maxTimeoutSeconds: number
   /** Contract address of the accepted asset, e.g. USDC on the chosen network. */
   asset: string
+  /**
+   * Scheme-specific parameters. For `exact` on EVM this carries the token's
+   * EIP-712 domain, `{ name, version }`, and it is not optional in practice:
+   * the facilitator reconstructs the signing digest from it and answers
+   * `invalid_exact_evm_missing_eip712_domain` without it. Verified against the
+   * live facilitator -- omitting it refuses every payment.
+   */
+  extra?: Record<string, string>
 }
 
 export type PaymentRequiredBody = {
@@ -51,14 +59,33 @@ export type PaymentPayload = {
   payload: Record<string, unknown>
 }
 
-export type VerificationResult =
-  | { ok: true; payer: string; transaction: string; amountPaid: string }
+/**
+ * What a facilitator can actually tell us, which is less than it first appears.
+ *
+ * `verify` answers one question -- is this payload a valid authorization for
+ * the requirements we sent -- and returns the payer. It does NOT return a
+ * transaction hash or an amount, because nothing has been submitted to the
+ * chain yet. Only `settle` produces a transaction.
+ *
+ * This matters more than it sounds. The amount is not checked locally against
+ * the verify response, because there is no amount in it; the facilitator is
+ * given `maxAmountRequired` in the requirements and answers `isValid: false`
+ * when the signed payload does not satisfy them. Re-checking a field the
+ * protocol never sends is how the first version of this file managed to refuse
+ * every payment it was given.
+ */
+export type VerifyResult =
+  | { ok: true; payer: string }
+  | { ok: false; reason: string }
+
+export type SettleResult =
+  | { ok: true; payer: string; transaction: string }
   | { ok: false; reason: string }
 
 /** Injectable so the protocol is testable without a facilitator or a network. */
 export type PaymentFacilitator = {
-  verify(payment: PaymentPayload, requirement: PaymentRequirement): Promise<VerificationResult>
-  settle(payment: PaymentPayload, requirement: PaymentRequirement): Promise<VerificationResult>
+  verify(payment: PaymentPayload, requirement: PaymentRequirement): Promise<VerifyResult>
+  settle(payment: PaymentPayload, requirement: PaymentRequirement): Promise<SettleResult>
 }
 
 /**
@@ -66,10 +93,72 @@ export type PaymentFacilitator = {
  * Without a record of what has already been spent, the same payload buys
  * unlimited calls. This mirrors the Stripe webhook event table, where the
  * identifier is claimed in the same transaction as the value it releases.
+ *
+ * Three outcomes, not two.
+ *
+ * `unavailable` is separated from `duplicate` deliberately. Both withhold the
+ * resource, so collapsing them looks harmless -- but they mean opposite things
+ * to whoever is reading the response. A first-ever payment answered "already
+ * used" because a table is missing sends the operator hunting for a replay
+ * that never happened, and the caller cannot tell a permanent refusal from one
+ * worth retrying.
  */
+export type ClaimOutcome = 'claimed' | 'duplicate' | 'unavailable'
+
 export type ReplayGuard = {
-  /** True when this payment has not been seen before and is now claimed. */
-  claim(transaction: string): Promise<boolean>
+  /**
+   * Claims this payment if it has not been seen before.
+   *
+   * Keyed on `paymentId` -- a hash of the signed payload -- rather than on a
+   * settlement transaction hash. The hash is the only identifier that exists
+   * before settlement, which is where the claim has to happen; and it is the
+   * right one regardless, because it identifies the authorization the payer
+   * signed. Two presentations of one signed payload are the replay this
+   * guards, and they share a paymentId whether or not either ever settles.
+   */
+  claim(payment: { paymentId: string; payer: string }): Promise<ClaimOutcome>
+  /** Records the on-chain result once settlement returns. Never gates access. */
+  recordSettlement(settlement: {
+    paymentId: string
+    transaction: string
+    /** What reading the chain established, so an unconfirmed settlement is a
+     *  row a reconciliation sweep can find rather than an assumption. */
+    confirmation?: { status: string; blockNumber?: number; amount?: string; reason?: string }
+  }): Promise<void>
+}
+
+/**
+ * Reads the chain to check the facilitator told the truth.
+ *
+ * Injected so the protocol stays testable without a node, and optional so a
+ * deployment with no RPC endpoint degrades to the previous behaviour rather
+ * than refusing every payment.
+ */
+export type SettlementConfirmer = (settlement: { transaction: string; payer: string }) => Promise<{
+  status: 'confirmed' | 'contradicted' | 'indeterminate'
+  blockNumber?: number
+  amount?: string
+  reason?: string
+}>
+
+/**
+ * A stable identifier for a signed payment authorization.
+ *
+ * Canonicalized with sorted keys so that two encodings of the same payload --
+ * different key order, different whitespace -- cannot present as two distinct
+ * payments and buy the resource twice.
+ */
+export async function paymentId(payment: PaymentPayload): Promise<string> {
+  const canonical = stableStringify({ scheme: payment.scheme, network: payment.network, payload: payment.payload })
+  const digest = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(canonical))
+  return [...new Uint8Array(digest)].map((byte) => byte.toString(16).padStart(2, '0')).join('')
+}
+
+function stableStringify(value: unknown): string {
+  if (value === null || typeof value !== 'object') return JSON.stringify(value) ?? 'null'
+  if (Array.isArray(value)) return `[${value.map(stableStringify).join(',')}]`
+  const entries = Object.entries(value as Record<string, unknown>).sort(([a], [b]) => (a < b ? -1 : a > b ? 1 : 0))
+  return `{${entries.map(([key, item]) => `${JSON.stringify(key)}:${stableStringify(item)}`).join(',')}}`
 }
 
 export const X402_VERSION = 1 as const
@@ -138,21 +227,29 @@ export function matchRequirement(payment: PaymentPayload, requirements: PaymentR
 
 export type AcceptPaymentResult =
   | { ok: true; payer: string; transaction: string; amountPaid: string }
-  | { ok: false; status: 402 | 409; reason: string }
+  // 502 is the chain contradicting the facilitator: an upstream told us
+  // something the ledger of record does not support.
+  | { ok: false; status: 402 | 409 | 502 | 503; reason: string }
 
 /**
  * Verify, guard against replay, then settle -- in that order.
  *
  * The claim happens between verification and settlement deliberately. Claiming
  * after settlement would leave a window where a concurrent duplicate settles
- * twice; claiming before verification would let an invalid payload burn a
- * transaction identifier and lock out the legitimate retry.
+ * twice; claiming before verification would let an invalid payload burn an
+ * identifier that the legitimate retry needs.
+ *
+ * The amount reported back is `maxAmountRequired`, not something the
+ * facilitator returned. It is the amount the payer signed for and the amount
+ * the facilitator validated the payload against, and no step in this protocol
+ * reports a settled figure independently of it.
  */
 export async function acceptPayment(input: {
   payment: PaymentPayload
   requirements: PaymentRequirement[]
   facilitator: PaymentFacilitator
   replayGuard: ReplayGuard
+  confirmOnChain?: SettlementConfirmer
 }): Promise<AcceptPaymentResult> {
   const requirement = matchRequirement(input.payment, input.requirements)
   if (!requirement) return { ok: false, status: 402, reason: 'no_matching_requirement' }
@@ -160,19 +257,40 @@ export async function acceptPayment(input: {
   const verified = await input.facilitator.verify(input.payment, requirement)
   if (!verified.ok) return { ok: false, status: 402, reason: verified.reason }
 
-  if (BigInt(verified.amountPaid) < BigInt(requirement.maxAmountRequired)) {
-    return { ok: false, status: 402, reason: 'insufficient_amount' }
-  }
-
-  const claimed = await input.replayGuard.claim(verified.transaction)
-  if (!claimed) return { ok: false, status: 409, reason: 'payment_already_used' }
+  const id = await paymentId(input.payment)
+  const claimed = await input.replayGuard.claim({ paymentId: id, payer: verified.payer })
+  // Nothing has settled yet, so a refusal here costs the payer nothing -- they
+  // still hold their signed authorization and can present it again.
+  if (claimed === 'unavailable') return { ok: false, status: 503, reason: 'x402_ledger_unavailable' }
+  if (claimed === 'duplicate') return { ok: false, status: 409, reason: 'payment_already_used' }
 
   const settled = await input.facilitator.settle(input.payment, requirement)
   if (!settled.ok) return { ok: false, status: 402, reason: settled.reason }
 
-  return { ok: true, payer: settled.payer, transaction: settled.transaction, amountPaid: settled.amountPaid }
-}
+  // Independent confirmation, where a node is configured. Until this point
+  // "settled" means the facilitator said so; this is the only step that checks.
+  const confirmation = input.confirmOnChain
+    ? await input.confirmOnChain({ transaction: settled.transaction, payer: settled.payer })
+    : undefined
 
+  // Recorded either way, including when the chain could not be read, so an
+  // unconfirmed payment is a row someone can find rather than an assumption.
+  await input.replayGuard.recordSettlement({ paymentId: id, transaction: settled.transaction, confirmation })
+
+  // Only an active contradiction withholds. The payer's money has already
+  // moved by now, so refusing because a node was unreachable would take
+  // payment and give nothing -- the one outcome worse than serving
+  // unconfirmed. A chain that positively disagrees is different in kind: it
+  // means the settlement we were told about did not happen as described.
+  if (confirmation?.status === 'contradicted') {
+    // Not a 402. Re-challenging would invite a second payment for a resource
+    // whose first payment the facilitator claims already settled, and the
+    // caller can do nothing to fix an upstream disagreement.
+    return { ok: false, status: 502, reason: `settlement_contradicted:${confirmation.reason ?? 'unknown'}` }
+  }
+
+  return { ok: true, payer: settled.payer, transaction: settled.transaction, amountPaid: requirement.maxAmountRequired }
+}
 
 /** The base64 challenge for the PAYMENT-REQUIRED header. */
 export function encodeChallengeHeader(body: PaymentRequiredBody): string {
