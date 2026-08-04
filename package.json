@@ -20,6 +20,8 @@
     "expand-graph": "node --experimental-strip-types scripts/expand-graph.ts",
     "verify:api-credit-billing": "node --experimental-strip-types scripts/verify-api-credit-billing.ts",
     "test:capacity": "node --experimental-strip-types scripts/run-capacity-test.ts",
+    "verify:x402-limiter": "node --experimental-strip-types scripts/verify-x402-limiter.ts",
+    "verify:x402-sepolia": "node --experimental-strip-types scripts/verify-x402-sepolia.ts",
     "build:sdk": "npm --prefix packages/sdk run build",
     "pack:sdk": "npm --prefix packages/sdk run pack:dry-run",
     "test": "node --test --experimental-strip-types test/*.test.ts"
@@ -51,7 +53,8 @@
     "eslint": "^9",
     "eslint-config-next": "^16.2.12",
     "tailwindcss": "^4",
-    "typescript": "^5"
+    "typescript": "^5",
+    "viem": "^2.55.10"
   },
   "overrides": {
     "js-yaml": "^4.3.1",
