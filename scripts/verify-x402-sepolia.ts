@@ -64,6 +64,9 @@ type Requirement = {
   payTo: string
   asset: string
   maxTimeoutSeconds: number
+  /** The token's EIP-712 domain. Without it the facilitator answers
+   *  invalid_exact_evm_missing_eip712_domain and refuses every payment. */
+  extra?: { name?: string; version?: string }
 }
 
 /**
@@ -79,9 +82,12 @@ async function signAuthorization(input: {
   validAfter: bigint
   validBefore: bigint
 }) {
+  // Taken from the challenge, not assumed. The server publishes the domain it
+  // will hand the facilitator, and signing against a different one produces a
+  // signature that verifies locally and is rejected on presentation.
   const domain = {
-    name: 'USDC',
-    version: '2',
+    name: input.requirement.extra?.name ?? 'USDC',
+    version: input.requirement.extra?.version ?? '2',
     chainId: BASE_SEPOLIA_CHAIN_ID,
     verifyingContract: input.requirement.asset as Hex,
   } as const
@@ -148,6 +154,7 @@ async function dryRun() {
     payTo: '0x0000000000000000000000000000000000000002',
     asset: '0x036CbD53842c5426634e7929541eC2318f3dCF7e',
     maxTimeoutSeconds: 60,
+    extra: { name: 'USDC', version: '2' },
   }
 
   stage('Signing')
@@ -271,6 +278,9 @@ async function liveRun() {
   check('the challenge binds to the resource being bought', requirement?.resource === `${baseUrl}${path}`, requirement?.resource)
   check('the challenge names a price', /^[0-9]+$/.test(requirement?.maxAmountRequired ?? ''), requirement?.maxAmountRequired)
   check('the challenge names an asset and a payee', Boolean(requirement?.asset && requirement?.payTo))
+  // Verified against the live facilitator: without this it answers
+  // invalid_exact_evm_missing_eip712_domain and no payment can ever succeed.
+  check('the challenge carries the EIP-712 domain', Boolean(requirement?.extra?.name && requirement?.extra?.version), JSON.stringify(requirement?.extra))
   if (!requirement) return finish()
 
   // -- Stage 2: the asset is what it claims to be -------------------------
@@ -324,8 +334,10 @@ async function liveRun() {
     validBefore: now + BigInt(Math.max(requirement.maxTimeoutSeconds, 120)),
   })
   // Use the token's real domain rather than the assumed one.
+  // The challenge's domain must match the token's own, or the facilitator
+  // rebuilds a different digest than the one that was signed.
   const domainMatches = signed.domain.name === domainName && signed.domain.version === domainVersion
-  check('the signing domain matches the token contract', domainMatches, `${signed.domain.name} v${signed.domain.version} vs ${domainName} v${domainVersion}`)
+  check('the published EIP-712 domain matches the token contract', domainMatches, `challenge says ${signed.domain.name} v${signed.domain.version}; contract says ${domainName} v${domainVersion}`)
   check('the authorization is signed', signed.signature.startsWith('0x'))
 
   const { payload, header } = encodePayload(requirement, signed.message, signed.signature)

@@ -36,6 +36,83 @@ function failure(reason: string): { ok: false; reason: string } {
 }
 
 /**
+ * Everything knowable about a thrown facilitator call.
+ *
+ * The SDK collapses transport failures, non-2xx responses and schema
+ * mismatches into errors whose `name` is a bare `Error`, and the caller sees
+ * the same 402 for all of them. That is not enough to act on: a DNS failure, a
+ * runtime that blocks the egress, and a facilitator returning HTML instead of
+ * JSON all look identical from the log line.
+ *
+ * So two things happen here. The error is unwrapped down its `cause` chain,
+ * which is where `fetch` puts the real reason. Then, because the SDK has
+ * already discarded the response, the same endpoint is called again with a
+ * plain fetch purely to record what it actually answers -- status,
+ * content-type, and the first of the body. That second call verifies nothing
+ * and settles nothing; it exists to turn "Error" into a fact.
+ *
+ * Bodies and stacks are logged only when X402_FACILITATOR_DIAGNOSTICS is
+ * 'true'. A facilitator's error text is not a field we control, and this runs
+ * on a path that has a payer's address in scope.
+ */
+async function reportFailure(
+  operation: 'verify' | 'settle',
+  error: unknown,
+  config: FacilitatorConfig,
+  payment: PaymentPayload,
+  requirement: PaymentRequirement,
+): Promise<void> {
+  const verbose = process.env.X402_FACILITATOR_DIAGNOSTICS?.trim() === 'true'
+
+  const chain: string[] = []
+  let current: unknown = error
+  for (let depth = 0; current instanceof Error && depth < 5; depth += 1) {
+    const code = (current as { code?: unknown }).code
+    chain.push(`${current.name}${code ? `[${code}]` : ''}: ${current.message.slice(0, 300)}`)
+    current = current.cause
+  }
+  if (chain.length === 0) chain.push(`non-error thrown: ${String(error).slice(0, 200)}`)
+
+  const endpoint = `${config.url.replace(/\/$/, '')}/${operation}`
+  console.error(`x402 facilitator ${operation} failed`, JSON.stringify({
+    endpoint,
+    scheme: requirement.scheme,
+    network: requirement.network,
+    // Whether we sent the EIP-712 domain at all. Its absence is answered with
+    // invalid_exact_evm_missing_eip712_domain and refuses every payment.
+    sentExtra: Object.keys(requirement.extra ?? {}),
+    x402Version: payment.x402Version,
+    errorChain: chain,
+    ...(verbose && error instanceof Error ? { stack: error.stack?.split('\n').slice(0, 8) } : {}),
+  }))
+
+  // What does that endpoint actually answer? The SDK threw the response away.
+  try {
+    const probe = await fetch(endpoint, {
+      method: 'POST',
+      headers: { 'content-type': 'application/json', ...(config.authHeaders ?? {}) },
+      body: JSON.stringify({ x402Version: payment.x402Version, paymentPayload: payment, paymentRequirements: requirement }),
+      cache: 'no-store',
+    })
+    const body = await probe.text()
+    console.error('x402 facilitator probe', JSON.stringify({
+      endpoint,
+      status: probe.status,
+      contentType: probe.headers.get('content-type'),
+      bodyBytes: body.length,
+      ...(verbose ? { body: body.slice(0, 1_000) } : { bodyPreview: body.slice(0, 200) }),
+    }))
+  } catch (probeError) {
+    // The probe failing the same way is itself the answer: the runtime cannot
+    // reach the host, and nothing about the payload is responsible.
+    const detail = probeError instanceof Error
+      ? `${probeError.name}: ${probeError.message.slice(0, 300)}${probeError.cause instanceof Error ? ` <- ${probeError.cause.name}: ${probeError.cause.message.slice(0, 200)}` : ''}`
+      : String(probeError).slice(0, 200)
+    console.error('x402 facilitator probe could not reach the host', JSON.stringify({ endpoint, detail }))
+  }
+}
+
+/**
  * The facilitator answers one question: is this payment real and settled. It
  * does not know the price, the resource, or whether the payment has already
  * been spent against this API. Those checks live in `acceptPayment` and the
@@ -57,14 +134,7 @@ export function createFacilitator(config: FacilitatorConfig): PaymentFacilitator
     } catch (error) {
       // A facilitator that is unreachable or erroring must never read as a
       // successful payment.
-      //
-      // The name alone was not enough to act on: a rejected payload and a
-      // misconfigured facilitator URL both surface as a bare `Error`, and the
-      // response is the same 402 either way. The message is included so the
-      // two are distinguishable from logs, truncated because a facilitator's
-      // error text is not a field we control.
-      const detail = error instanceof Error ? `${error.name}: ${error.message.slice(0, 200)}` : 'unknown_error'
-      console.error(`x402 facilitator ${operation} failed:`, detail)
+      await reportFailure(operation, error, config, payment, requirement)
       return null
     }
   }

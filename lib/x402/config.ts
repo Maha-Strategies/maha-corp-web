@@ -37,6 +37,13 @@ export type X402Config = {
   payTo: string
   /** Asset contract address, e.g. USDC on the configured network. */
   asset: string
+  /**
+   * The asset's EIP-712 domain. Sent to the facilitator so it can rebuild the
+   * digest the payer signed. Must match the token contract exactly: read
+   * `name()` and `version()` from it rather than assuming, because a mismatch
+   * produces a signature that is valid and useless.
+   */
+  assetEip712: { name: string; version: string }
   resources: PricedResource[]
   /** Seconds a concurrency slot is held before it self-releases. */
   slotTtlSeconds: number
@@ -93,6 +100,12 @@ export function x402Config(environment: Environment = process.env): X402Config |
     caip2Network: network.caip2,
     payTo,
     asset,
+    // USDC's domain on every chain this supports. Overridable because the
+    // defaults stop being right the moment a different token is priced.
+    assetEip712: {
+      name: environment.X402_ASSET_EIP712_NAME?.trim() || 'USDC',
+      version: environment.X402_ASSET_EIP712_VERSION?.trim() || '2',
+    },
     resources,
     slotTtlSeconds,
   }
@@ -164,5 +177,8 @@ export function requirementFor(resource: PricedResource, resourceUrl: string, co
     payTo: config.payTo,
     maxTimeoutSeconds: 60,
     asset: config.asset,
+    // Without this the facilitator cannot rebuild the signing digest and
+    // refuses the payment as invalid_exact_evm_missing_eip712_domain.
+    extra: { name: config.assetEip712.name, version: config.assetEip712.version },
   }
 }
