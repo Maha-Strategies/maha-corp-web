@@ -1,6 +1,6 @@
 import { HTTPFacilitatorClient } from '@x402/core/server'
 
-import type { PaymentFacilitator, PaymentPayload, PaymentRequirement, VerificationResult } from './protocol.ts'
+import type { PaymentFacilitator, PaymentPayload, PaymentRequirement, SettleResult, VerifyResult } from './protocol.ts'
 
 // Adapts the official facilitator client to this codebase's interface.
 //
@@ -31,7 +31,7 @@ export type SettlementConfig = {
   asset: string
 }
 
-function failure(reason: string): VerificationResult {
+function failure(reason: string): { ok: false; reason: string } {
   return { ok: false, reason }
 }
 
@@ -51,34 +51,42 @@ export function createFacilitator(config: FacilitatorConfig): PaymentFacilitator
     ...(config.authHeaders ? { createAuthHeaders: async () => config.authHeaders! } : {}),
   } as ConstructorParameters<typeof HTTPFacilitatorClient>[0])
 
-  const call = async (
-    operation: 'verify' | 'settle',
-    payment: PaymentPayload,
-    requirement: PaymentRequirement,
-  ): Promise<VerificationResult> => {
+  const call = async (operation: 'verify' | 'settle', payment: PaymentPayload, requirement: PaymentRequirement) => {
     try {
-      const response = await (client as unknown as Record<string, (a: unknown, b: unknown) => Promise<unknown>>)[operation](payment, requirement)
-      return readResponse(operation, response)
+      return await (client as unknown as Record<string, (a: unknown, b: unknown) => Promise<unknown>>)[operation](payment, requirement)
     } catch (error) {
       // A facilitator that is unreachable or erroring must never read as a
       // successful payment.
       console.error(`x402 facilitator ${operation} failed:`, error instanceof Error ? error.name : 'unknown_error')
-      return failure(`facilitator_${operation}_failed`)
+      return null
     }
   }
 
   return {
-    verify: (payment, requirement) => call('verify', payment, requirement),
-    settle: (payment, requirement) => call('settle', payment, requirement),
+    async verify(payment, requirement): Promise<VerifyResult> {
+      const response = await call('verify', payment, requirement)
+      return response === null ? failure('facilitator_verify_failed') : readResponse('verify', response)
+    },
+    async settle(payment, requirement): Promise<SettleResult> {
+      const response = await call('settle', payment, requirement)
+      return response === null ? failure('facilitator_settle_failed') : readResponse('settle', response)
+    },
   }
 }
 
 /**
- * Field names vary across facilitator implementations and protocol versions,
- * so each is read defensively. A response that does not clearly state success
- * is treated as a failure rather than assumed to be one shape or the other.
+ * The two operations return genuinely different shapes, and conflating them was
+ * a real bug: `verify` yields `{ isValid, payer }` and nothing else, because no
+ * chain transaction exists yet. Demanding a transaction hash from it refuses
+ * every payment, including valid ones. Only `settle` carries a transaction.
+ *
+ * Field names still vary across implementations and protocol versions, so each
+ * is read defensively, and a response that does not clearly state success is
+ * treated as a failure rather than assumed to be one shape or the other.
  */
-export function readResponse(operation: 'verify' | 'settle', response: unknown): VerificationResult {
+export function readResponse(operation: 'verify', response: unknown): VerifyResult
+export function readResponse(operation: 'settle', response: unknown): SettleResult
+export function readResponse(operation: 'verify' | 'settle', response: unknown): VerifyResult | SettleResult {
   if (typeof response !== 'object' || response === null) return failure(`facilitator_${operation}_malformed`)
   const body = response as Record<string, unknown>
 
@@ -89,16 +97,15 @@ export function readResponse(operation: 'verify' | 'settle', response: unknown):
   }
 
   const payer = firstString(body.payer, body.from, body.payerAddress)
-  const transaction = firstString(body.transaction, body.txHash, body.transactionHash, body.nonce)
-  const amountPaid = firstString(body.amountPaid, body.amount, body.value)
-
-  // Without a transaction identifier there is nothing to record against, and
-  // replay protection would silently do nothing.
-  if (!transaction) return failure(`facilitator_${operation}_missing_transaction`)
   if (!payer) return failure(`facilitator_${operation}_missing_payer`)
-  if (!amountPaid || !/^[0-9]+$/.test(amountPaid)) return failure(`facilitator_${operation}_missing_amount`)
+  if (operation === 'verify') return { ok: true, payer }
 
-  return { ok: true, payer, transaction, amountPaid }
+  const transaction = firstString(body.transaction, body.txHash, body.transactionHash)
+  // Settlement with no transaction identifier leaves nothing to reconcile
+  // against the chain, so it is not treated as a settlement.
+  if (!transaction) return failure('facilitator_settle_missing_transaction')
+
+  return { ok: true, payer, transaction }
 }
 
 function firstString(...values: unknown[]): string | undefined {

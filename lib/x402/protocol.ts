@@ -51,14 +51,33 @@ export type PaymentPayload = {
   payload: Record<string, unknown>
 }
 
-export type VerificationResult =
-  | { ok: true; payer: string; transaction: string; amountPaid: string }
+/**
+ * What a facilitator can actually tell us, which is less than it first appears.
+ *
+ * `verify` answers one question -- is this payload a valid authorization for
+ * the requirements we sent -- and returns the payer. It does NOT return a
+ * transaction hash or an amount, because nothing has been submitted to the
+ * chain yet. Only `settle` produces a transaction.
+ *
+ * This matters more than it sounds. The amount is not checked locally against
+ * the verify response, because there is no amount in it; the facilitator is
+ * given `maxAmountRequired` in the requirements and answers `isValid: false`
+ * when the signed payload does not satisfy them. Re-checking a field the
+ * protocol never sends is how the first version of this file managed to refuse
+ * every payment it was given.
+ */
+export type VerifyResult =
+  | { ok: true; payer: string }
+  | { ok: false; reason: string }
+
+export type SettleResult =
+  | { ok: true; payer: string; transaction: string }
   | { ok: false; reason: string }
 
 /** Injectable so the protocol is testable without a facilitator or a network. */
 export type PaymentFacilitator = {
-  verify(payment: PaymentPayload, requirement: PaymentRequirement): Promise<VerificationResult>
-  settle(payment: PaymentPayload, requirement: PaymentRequirement): Promise<VerificationResult>
+  verify(payment: PaymentPayload, requirement: PaymentRequirement): Promise<VerifyResult>
+  settle(payment: PaymentPayload, requirement: PaymentRequirement): Promise<SettleResult>
 }
 
 /**
@@ -71,11 +90,36 @@ export type ReplayGuard = {
   /**
    * True when this payment has not been seen before and is now claimed.
    *
-   * Takes the verified details rather than the transaction alone, because the
-   * payer and amount are only known once the facilitator has answered, and the
-   * record is worthless without them.
+   * Keyed on `paymentId` -- a hash of the signed payload -- rather than on a
+   * settlement transaction hash. The hash is the only identifier that exists
+   * before settlement, which is where the claim has to happen; and it is the
+   * right one regardless, because it identifies the authorization the payer
+   * signed. Two presentations of one signed payload are the replay this
+   * guards, and they share a paymentId whether or not either ever settles.
    */
-  claim(payment: { transaction: string; payer: string; amountPaid: string }): Promise<boolean>
+  claim(payment: { paymentId: string; payer: string }): Promise<boolean>
+  /** Records the on-chain result once settlement returns. Never gates access. */
+  recordSettlement(settlement: { paymentId: string; transaction: string }): Promise<void>
+}
+
+/**
+ * A stable identifier for a signed payment authorization.
+ *
+ * Canonicalized with sorted keys so that two encodings of the same payload --
+ * different key order, different whitespace -- cannot present as two distinct
+ * payments and buy the resource twice.
+ */
+export async function paymentId(payment: PaymentPayload): Promise<string> {
+  const canonical = stableStringify({ scheme: payment.scheme, network: payment.network, payload: payment.payload })
+  const digest = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(canonical))
+  return [...new Uint8Array(digest)].map((byte) => byte.toString(16).padStart(2, '0')).join('')
+}
+
+function stableStringify(value: unknown): string {
+  if (value === null || typeof value !== 'object') return JSON.stringify(value) ?? 'null'
+  if (Array.isArray(value)) return `[${value.map(stableStringify).join(',')}]`
+  const entries = Object.entries(value as Record<string, unknown>).sort(([a], [b]) => (a < b ? -1 : a > b ? 1 : 0))
+  return `{${entries.map(([key, item]) => `${JSON.stringify(key)}:${stableStringify(item)}`).join(',')}}`
 }
 
 export const X402_VERSION = 1 as const
@@ -151,8 +195,13 @@ export type AcceptPaymentResult =
  *
  * The claim happens between verification and settlement deliberately. Claiming
  * after settlement would leave a window where a concurrent duplicate settles
- * twice; claiming before verification would let an invalid payload burn a
- * transaction identifier and lock out the legitimate retry.
+ * twice; claiming before verification would let an invalid payload burn an
+ * identifier that the legitimate retry needs.
+ *
+ * The amount reported back is `maxAmountRequired`, not something the
+ * facilitator returned. It is the amount the payer signed for and the amount
+ * the facilitator validated the payload against, and no step in this protocol
+ * reports a settled figure independently of it.
  */
 export async function acceptPayment(input: {
   payment: PaymentPayload
@@ -166,19 +215,18 @@ export async function acceptPayment(input: {
   const verified = await input.facilitator.verify(input.payment, requirement)
   if (!verified.ok) return { ok: false, status: 402, reason: verified.reason }
 
-  if (BigInt(verified.amountPaid) < BigInt(requirement.maxAmountRequired)) {
-    return { ok: false, status: 402, reason: 'insufficient_amount' }
-  }
-
-  const claimed = await input.replayGuard.claim({
-    transaction: verified.transaction, payer: verified.payer, amountPaid: verified.amountPaid,
-  })
+  const id = await paymentId(input.payment)
+  const claimed = await input.replayGuard.claim({ paymentId: id, payer: verified.payer })
   if (!claimed) return { ok: false, status: 409, reason: 'payment_already_used' }
 
   const settled = await input.facilitator.settle(input.payment, requirement)
   if (!settled.ok) return { ok: false, status: 402, reason: settled.reason }
 
-  return { ok: true, payer: settled.payer, transaction: settled.transaction, amountPaid: settled.amountPaid }
+  // Provenance, not a gate. The claim above already decided access, so a
+  // failure to record the hash must not withhold a resource that was paid for.
+  await input.replayGuard.recordSettlement({ paymentId: id, transaction: settled.transaction })
+
+  return { ok: true, payer: settled.payer, transaction: settled.transaction, amountPaid: requirement.maxAmountRequired }
 }
 
 /** The base64 challenge for the PAYMENT-REQUIRED header. */

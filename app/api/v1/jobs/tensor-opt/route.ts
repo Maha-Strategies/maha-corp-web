@@ -17,6 +17,7 @@ import { JobValidationError, parseTensorOptJobRequest } from '@/lib/jobs/contrac
 import { dispatchToWorker, enqueueTensorOptJob } from '@/lib/jobs/queue'
 import { quoteJobCredits } from '@/lib/jobs/pricing'
 import { jobResponseHeaders, publicJobView } from '@/lib/jobs/provenance'
+import { releaseHeldSlot, slotFromRequest } from '@/lib/x402/slot'
 
 export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
@@ -59,8 +60,19 @@ export async function POST(request: Request) {
     return json({ error: { code: 'unsupported_media_type', message: 'Content-Type must be application/json.' } }, 415)
   }
 
+  const slot = slotFromRequest(request)
+
   const identity = identityFromRequest(request)
   if (!identity) {
+    // A paid caller reaching here has already settled, and a job needs a key to
+    // reserve credits against. Rather than answer a settled payment with a
+    // confusing 401, say what happened and free the capacity slot the payment
+    // bought. The real fix is upstream: do not list an async job path in
+    // X402_RESOURCES until paid callers have a job identity.
+    if (slot) {
+      await releaseHeldSlot(slot)
+      return json({ error: { code: 'paid_jobs_unavailable', message: 'This endpoint does not yet accept machine payment. The payment settled and no job was started; contact support@mahastrategies.com for a refund.' } }, 501)
+    }
     return json({ error: { code: 'api_key_required', message: 'Provide Authorization: Bearer <API_KEY>.', href: '/tools/token-calc' } }, 401)
   }
 
@@ -82,10 +94,20 @@ export async function POST(request: Request) {
       keyId: identity.keyId,
       zeroDataRetention: identity.zeroDataRetention,
       callbackUrl: callbackUrl(request),
+      // A paid caller holds a capacity slot acquired in proxy.ts. It is stored
+      // on the job rather than released here, because this handler returns as
+      // soon as the job is dispatched and the GPU runs long after.
+      slot,
     })
   } catch {
+    // No job exists to release the slot later, so release it here.
+    await releaseHeldSlot(slot)
     return json({ error: { code: 'job_enqueue_failed', message: 'The job could not be queued. No credits were charged.' } }, 503)
   }
+
+  // Every outcome except `queued` means no GPU work will run under this slot.
+  // `duplicate` included: the original job holds its own slot and settles it.
+  if (outcome.kind !== 'queued') await releaseHeldSlot(slot)
 
   if (outcome.kind === 'insufficient_credits') {
     return json({

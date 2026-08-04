@@ -27,13 +27,23 @@ const request = (path: string, headers: Record<string, string> = {}) =>
 const encode = (value: unknown) => Buffer.from(JSON.stringify(value), 'utf8').toString('base64')
 const signature = encode({ x402Version: 1, scheme: 'exact', network: 'base', payload: { signature: '0x' } })
 
-function facilitator(amountPaid = '10000'): PaymentFacilitator {
-  const ok = { ok: true as const, payer: '0xAgent', transaction: 'tx_1', amountPaid }
-  return { verify: async () => ok, settle: async () => ok }
+function facilitator(seen: string[] = []): PaymentFacilitator {
+  return {
+    // The real verify response: valid, and who paid. No transaction and no
+    // amount exist until settlement.
+    verify: async (_payment, requirement) => { seen.push(requirement.maxAmountRequired); return { ok: true, payer: '0xAgent' } },
+    settle: async () => ({ ok: true, payer: '0xAgent', transaction: 'tx_1' }),
+  }
+}
+
+/** Rejects, the way a facilitator does when the signed payload is short. */
+const underfunded: PaymentFacilitator = {
+  verify: async () => ({ ok: false, reason: 'insufficient_funds' }),
+  settle: async () => ({ ok: false, reason: 'not_reached' }),
 }
 
 const ledger = (result: string) => ({ rpc: async () => ({ data: result, error: null }) })
-const acquire = async () => ({ admitted: true, active: 1 })
+const acquire = async () => ({ admitted: true, active: 1, token: 'slot-token' })
 
 test('the flag alone decides whether any of this is live', () => {
   assert.equal(x402Enabled({ X402_ENABLED: 'true' }), true)
@@ -95,6 +105,9 @@ test('a settled payment is admitted and carries settlement back', async () => {
   assert.equal(outcome.kind, 'paid')
   if (outcome.kind !== 'paid') return
   assert.equal(outcome.transaction, 'tx_1')
+  // The slot must come back with the outcome. Acquiring capacity and then
+  // dropping the token holds it until its score expires, for no reason.
+  assert.deepEqual(outcome.slot, { resource: '/api/v1/compress', token: 'slot-token' })
   const decoded = JSON.parse(Buffer.from(outcome.header, 'base64').toString('utf8'))
   assert.equal(decoded.success, true)
 })
@@ -109,11 +122,24 @@ test('a replayed payment is refused with 409, not re-challenged', async () => {
   assert.equal(outcome.code, 'payment_already_used')
 })
 
-test('an underpayment is challenged again rather than served', async () => {
-  const outcome = await resolveX402(request('/api/v1/jobs/tensor-opt', { 'PAYMENT-SIGNATURE': signature }), {
-    config: config(), facilitator: facilitator('10000'), ledger: ledger('claimed'), acquire,
+test('each path is priced to the facilitator at its own rate', async () => {
+  // The solver costs 500000 and compression 10000. The price is enforced by
+  // what is sent to the facilitator to validate the signed payload against --
+  // there is no amount in a verify response to check afterwards.
+  const seen: string[] = []
+  await resolveX402(request('/api/v1/jobs/tensor-opt', { 'PAYMENT-SIGNATURE': signature }), {
+    config: config(), facilitator: facilitator(seen), ledger: ledger('claimed'), acquire,
   })
-  // The solver costs 500000; a compression-priced payment must not buy one.
+  await resolveX402(request('/api/v1/compress', { 'PAYMENT-SIGNATURE': signature }), {
+    config: config(), facilitator: facilitator(seen), ledger: ledger('claimed'), acquire,
+  })
+  assert.deepEqual(seen, ['500000', '10000'])
+})
+
+test('a payment the facilitator rejects is challenged again rather than served', async () => {
+  const outcome = await resolveX402(request('/api/v1/jobs/tensor-opt', { 'PAYMENT-SIGNATURE': signature }), {
+    config: config(), facilitator: underfunded, ledger: ledger('claimed'), acquire,
+  })
   assert.equal(outcome.kind, 'challenge')
 })
 
@@ -121,7 +147,7 @@ test('a paid request is refused when the resource is at capacity', async () => {
   // Payment authorizes; it does not create GPU capacity.
   const full = async () => ({ admitted: false, active: 2 })
   const outcome = await resolveX402(request('/api/v1/jobs/tensor-opt', { 'PAYMENT-SIGNATURE': signature }), {
-    config: config(), facilitator: facilitator('500000'), ledger: ledger('claimed'), acquire: full,
+    config: config(), facilitator: facilitator(), ledger: ledger('claimed'), acquire: full,
   })
   assert.equal(outcome.kind, 'refused')
   if (outcome.kind !== 'refused') return
