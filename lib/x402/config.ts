@@ -1,4 +1,5 @@
 import type { PaymentRequirement, X402Network } from './protocol.ts'
+import { releasesSlot } from './slot.ts'
 
 // Everything here is off unless X402_ENABLED is exactly 'true'. The flag is
 // checked before any other configuration is read, so an incomplete or
@@ -117,6 +118,13 @@ function parseResources(raw: string | undefined): PricedResource[] {
     if (!description) throw new Error('description is required so the challenge states what is being bought.')
     if (typeof concurrencyCap !== 'number' || !Number.isInteger(concurrencyCap) || concurrencyCap < 1 || concurrencyCap > 1_000) {
       throw new Error('concurrencyCap must be an integer between 1 and 1000.')
+    }
+    // Pricing a path whose handler never releases its slot fills the cap with
+    // slots nobody frees, and paying callers are refused until the scores
+    // lapse. Nothing about the route surfaces that, so it is refused here
+    // rather than discovered as unexplained 429s under load.
+    if (!releasesSlot(pathPrefix)) {
+      throw new Error(`${pathPrefix} does not release its concurrency slot, so it cannot be priced. Add it to SLOT_RELEASING_PATHS once its handler does.`)
     }
     return { pathPrefix, amount, description, concurrencyCap }
   })

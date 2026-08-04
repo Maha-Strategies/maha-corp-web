@@ -7,7 +7,7 @@ import type { PaymentFacilitator } from '../lib/x402/protocol.ts'
 
 const RESOURCES = JSON.stringify([
   { pathPrefix: '/api/v1/compress', amount: '10000', description: 'One compression', concurrencyCap: 8 },
-  { pathPrefix: '/api/v1/jobs/tensor-opt', amount: '500000', description: 'One solver job', concurrencyCap: 2 },
+  { pathPrefix: '/api/v1/compress/solver', amount: '500000', description: 'One solver job', concurrencyCap: 2 },
 ])
 
 const ENV = {
@@ -65,6 +65,42 @@ test('enabled but incomplete configuration is loud, not silent', () => {
   assert.throws(() => x402Config({ ...ENV, X402_RESOURCES: '[{"pathPrefix":"/a","amount":"1","description":"d","concurrencyCap":0}]' }), /concurrencyCap/)
 })
 
+test('a path that cannot release its slot cannot be priced', async () => {
+  // The failure this prevents is invisible from the route: the cap fills with
+  // slots nobody frees and paying callers see 429s that look like load.
+  const { releasesSlot, withSlotRelease } = await import('../lib/x402/slot.ts')
+  assert.throws(
+    () => x402Config({ ...ENV, X402_RESOURCES: '[{"pathPrefix":"/api/v1/jobs/tensor-opt","amount":"1","description":"d","concurrencyCap":1}]' }),
+    /does not release its concurrency slot/,
+  )
+  assert.equal(releasesSlot('/api/v1/compress'), true)
+  assert.equal(releasesSlot('/api/v1/compress/solver'), true)
+  // A prefix that merely starts with the same characters is not the same route.
+  assert.equal(releasesSlot('/api/v1/compressor'), false)
+  assert.equal(typeof withSlotRelease, 'function')
+})
+
+test('a wrapped handler frees its slot even when it throws', async () => {
+  const { withSlotRelease, SLOT_RESOURCE_HEADER, SLOT_TOKEN_HEADER } = await import('../lib/x402/slot.ts')
+  const released: string[] = []
+  const { releaseSlot } = await import('../lib/x402/concurrency.ts')
+  void releaseSlot
+
+  const paid = () => new Request('https://www.mahastrategies.com/api/v1/compress', {
+    headers: { [SLOT_RESOURCE_HEADER]: '/api/v1/compress', [SLOT_TOKEN_HEADER]: 'tok' },
+  })
+
+  // Redis is unconfigured here, so the release fails closed and is swallowed;
+  // what matters is that the finally runs on both paths rather than leaving a
+  // slot held for the whole TTL.
+  const ok = withSlotRelease(async () => { released.push('ran'); return new Response('ok') })
+  assert.equal((await ok(paid())).status, 200)
+
+  const boom = withSlotRelease(async () => { throw new Error('handler exploded') })
+  await assert.rejects(boom(paid()), /handler exploded/)
+  assert.deepEqual(released, ['ran'])
+})
+
 test('a disabled deployment is untouched by any of this', async () => {
   const outcome = await resolveX402(request('/api/v1/compress'), { config: null })
   assert.equal(outcome.kind, 'not_applicable')
@@ -86,9 +122,9 @@ test('an unpaid request to a priced path is challenged', async () => {
 })
 
 test('the price charged is the longest matching prefix', () => {
-  // /api/v1/jobs/tensor-opt must not be sold at the compression price.
+  // /api/v1/compress/solver must not be sold at the compression price.
   assert.equal(priceFor('/api/v1/compress', config())?.amount, '10000')
-  assert.equal(priceFor('/api/v1/jobs/tensor-opt', config())?.amount, '500000')
+  assert.equal(priceFor('/api/v1/compress/solver', config())?.amount, '500000')
   assert.equal(priceFor('/api/v1/mcp/servers', config()), null)
 })
 
@@ -127,7 +163,7 @@ test('each path is priced to the facilitator at its own rate', async () => {
   // what is sent to the facilitator to validate the signed payload against --
   // there is no amount in a verify response to check afterwards.
   const seen: string[] = []
-  await resolveX402(request('/api/v1/jobs/tensor-opt', { 'PAYMENT-SIGNATURE': signature }), {
+  await resolveX402(request('/api/v1/compress/solver', { 'PAYMENT-SIGNATURE': signature }), {
     config: config(), facilitator: facilitator(seen), ledger: ledger('claimed'), acquire,
   })
   await resolveX402(request('/api/v1/compress', { 'PAYMENT-SIGNATURE': signature }), {
@@ -137,7 +173,7 @@ test('each path is priced to the facilitator at its own rate', async () => {
 })
 
 test('a payment the facilitator rejects is challenged again rather than served', async () => {
-  const outcome = await resolveX402(request('/api/v1/jobs/tensor-opt', { 'PAYMENT-SIGNATURE': signature }), {
+  const outcome = await resolveX402(request('/api/v1/compress/solver', { 'PAYMENT-SIGNATURE': signature }), {
     config: config(), facilitator: underfunded, ledger: ledger('claimed'), acquire,
   })
   assert.equal(outcome.kind, 'challenge')
@@ -146,7 +182,7 @@ test('a payment the facilitator rejects is challenged again rather than served',
 test('a paid request is refused when the resource is at capacity', async () => {
   // Payment authorizes; it does not create GPU capacity.
   const full = async () => ({ admitted: false, active: 2 })
-  const outcome = await resolveX402(request('/api/v1/jobs/tensor-opt', { 'PAYMENT-SIGNATURE': signature }), {
+  const outcome = await resolveX402(request('/api/v1/compress/solver', { 'PAYMENT-SIGNATURE': signature }), {
     config: config(), facilitator: facilitator(), ledger: ledger('claimed'), acquire: full,
   })
   assert.equal(outcome.kind, 'refused')

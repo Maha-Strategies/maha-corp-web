@@ -34,3 +34,46 @@ export async function releaseHeldSlot(slot: SlotHandle | null): Promise<void> {
   if (!slot) return
   await releaseSlot(slot.resource, slot.token)
 }
+
+/**
+ * Wraps a synchronous route so its slot is freed when the response is built.
+ *
+ * Without this the slot is held until its score expires. A compression that
+ * finishes in milliseconds would occupy capacity for the full TTL, and a
+ * paying caller would be refused for two minutes over work that is long done.
+ * The release runs in a `finally` so a thrown handler frees capacity too.
+ *
+ * Only for routes that finish their work before responding. A route that
+ * returns while work continues elsewhere -- the GPU solvers return at dispatch
+ * -- must carry the token to whatever observes the real end instead.
+ */
+export function withSlotRelease<Args extends unknown[]>(
+  handler: (request: Request, ...args: Args) => Promise<Response>,
+): (request: Request, ...args: Args) => Promise<Response> {
+  return async (request, ...args) => {
+    const slot = slotFromRequest(request)
+    try {
+      return await handler(request, ...args)
+    } finally {
+      await releaseHeldSlot(slot)
+    }
+  }
+}
+
+/**
+ * Path prefixes whose handlers actually release the slot they are given.
+ *
+ * Pricing a path that does not release one is a silent capacity leak: the cap
+ * fills with slots nobody frees and paying callers are refused until the
+ * scores lapse. Nothing about the route makes that visible, so the config is
+ * checked against this list at startup and a mistake becomes a loud boot
+ * error instead of a slow degradation nobody can attribute.
+ *
+ * Add a prefix here only after its handler releases -- via `withSlotRelease`,
+ * or by carrying the token through to whatever observes the work finish.
+ */
+export const SLOT_RELEASING_PATHS = ['/api/v1/compress'] as const
+
+export function releasesSlot(pathPrefix: string): boolean {
+  return SLOT_RELEASING_PATHS.some((ready) => pathPrefix === ready || pathPrefix.startsWith(`${ready}/`))
+}
