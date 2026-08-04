@@ -39,6 +39,12 @@ jobs:
       - run: npm run typecheck
       - run: npm run lint
       - run: npm test
+      # The x402 payment payload the client signs and the id the server claims
+      # against must agree, or replay protection silently guards nothing. The
+      # dry run proves that with a throwaway key and no network, so it runs on
+      # every commit rather than only when someone remembers the testnet.
+      - name: Verify x402 payload signing and identity
+        run: npm run verify:x402-sepolia -- --dry-run
       - run: rm -rf .next
       - run: npm run build
 

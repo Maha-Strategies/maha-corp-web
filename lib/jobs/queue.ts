@@ -28,6 +28,7 @@ import { redis } from '@/lib/redis'
 import { consumeAdditionalApiCredits, creditKeyById } from '@/lib/api-key'
 import { quoteJobCredits } from '@/lib/jobs/pricing'
 import { scopedRedisKey } from '@/lib/redis-namespace'
+import { releaseHeldSlot } from '@/lib/x402/slot'
 import {
   createJobId,
   type JobKind,
@@ -76,6 +77,9 @@ export type JobRecord = {
   diagnostics: WorkerDiagnostics | null
   error: { code: string; message: string } | null
   deviceSeconds: number | null
+  /** Held x402 capacity slot, released when the job reaches a terminal state.
+   *  Null for credit-authenticated jobs, which hold no slot. */
+  slot: { resource: string; token: string } | null
 }
 
 function parseJson<T>(value: unknown): T | null {
@@ -119,6 +123,7 @@ function toJobRecord(raw: Record<string, unknown> | null): JobRecord | null {
     diagnostics: readJsonField<WorkerDiagnostics>(raw.diagnostics),
     error: readJsonField<{ code: string; message: string }>(raw.error),
     deviceSeconds: raw.deviceSeconds === undefined || raw.deviceSeconds === null || raw.deviceSeconds === '' ? null : Number(raw.deviceSeconds),
+    slot: raw.slotResource && raw.slotToken ? { resource: String(raw.slotResource), token: String(raw.slotToken) } : null,
   }
 }
 
@@ -165,6 +170,13 @@ export async function enqueueTensorOptJob(input: {
   zeroDataRetention: boolean
   callbackUrl: string
   kind?: JobKind
+  /**
+   * The x402 capacity slot this job holds, when the caller paid rather than
+   * spending credits. Stored on the record so the completion webhook can
+   * release it; the route cannot, because it returns at dispatch while the GPU
+   * is still running. Absent for every credit-authenticated job.
+   */
+  slot?: { resource: string; token: string } | null
 }): Promise<EnqueueOutcome> {
   const kind = input.kind ?? 'tensor-opt'
   const idemKey = idempotencyKey(input.keyId, input.request.clientRequestId)
@@ -226,6 +238,8 @@ export async function enqueueTensorOptJob(input: {
     diagnostics: '',
     error: '',
     deviceSeconds: '',
+    slotResource: input.slot?.resource ?? '',
+    slotToken: input.slot?.token ?? '',
   }
 
   try {
@@ -357,6 +371,11 @@ export async function settleJobFromCallback(callback: WorkerCallback): Promise<S
 
   await redis.zrem(JOB_PENDING_ZSET, callback.jobId)
 
+  // The GPU is free now, so the capacity slot is too. Only the winning
+  // transition reaches here, and ZREM of an already-removed token is a no-op,
+  // so a replayed callback cannot free a slot twice.
+  await releaseHeldSlot(job.slot)
+
   // Only the winning transition refunds, so a replayed failure callback cannot
   // credit the balance twice.
   if (creditsRefunded > 0) await creditKeyById(job.keyId, creditsRefunded).catch(() => undefined)
@@ -425,6 +444,9 @@ export async function reclaimExpiredJobs(limit = 100): Promise<{ reclaimed: stri
     )
     await redis.zrem(JOB_PENDING_ZSET, jobId)
     if (transitioned === 1) {
+      // A worker that crashed mid-run would otherwise hold its slot until the
+      // score expired. This is the second terminal path and must free it too.
+      await releaseHeldSlot(job.slot)
       await creditKeyById(job.keyId, job.reservedCredits).catch(() => undefined)
       reclaimed.push(jobId)
     }

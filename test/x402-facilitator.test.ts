@@ -58,18 +58,31 @@ test('the settlement confirmation encodes for PAYMENT-RESPONSE', () => {
 
 test('a facilitator success is read across the field names implementations use', () => {
   for (const body of [
-    { isValid: true, payer: '0xA', transaction: 'tx_1', amountPaid: '10000' },
-    { success: true, from: '0xA', txHash: 'tx_1', amount: '10000' },
-    { valid: true, payerAddress: '0xA', transactionHash: 'tx_1', value: '10000' },
+    { success: true, payer: '0xA', transaction: 'tx_1' },
+    { isValid: true, from: '0xA', txHash: 'tx_1' },
+    { valid: true, payerAddress: '0xA', transactionHash: 'tx_1' },
   ]) {
-    const result = readResponse('verify', body)
+    const result = readResponse('settle', body)
     assert.equal(result.ok, true, JSON.stringify(body))
     if (result.ok) {
       assert.equal(result.transaction, 'tx_1')
       assert.equal(result.payer, '0xA')
-      assert.equal(result.amountPaid, '10000')
     }
   }
+})
+
+test('verify is not asked for a transaction it cannot have', () => {
+  // The x402 verify response is { isValid, payer }: nothing has been submitted
+  // to the chain yet. Requiring a transaction hash here refused every payment,
+  // valid ones included, and it is the reason this distinction is now typed.
+  const verified = readResponse('verify', { isValid: true, payer: '0xA' })
+  assert.equal(verified.ok, true)
+  if (verified.ok) assert.equal(verified.payer, '0xA')
+
+  // Settlement is the operation that must produce one.
+  const settled = readResponse('settle', { success: true, payer: '0xA' })
+  assert.equal(settled.ok, false)
+  if (!settled.ok) assert.equal(settled.reason, 'facilitator_settle_missing_transaction')
 })
 
 test('a rejection carries the facilitator\'s own reason', () => {
@@ -95,8 +108,11 @@ test('a success without a transaction identifier is refused', () => {
   const noPayer = readResponse('settle', { isValid: true, transaction: 'tx_1', amountPaid: '10000' })
   assert.equal(noPayer.ok, false)
 
-  const badAmount = readResponse('settle', { isValid: true, transaction: 'tx_1', payer: '0xA', amountPaid: '1.5' })
-  assert.equal(badAmount.ok, false)
+  // No amount is asserted here, deliberately. The protocol does not report a
+  // settled amount at all; the price is enforced by sending maxAmountRequired
+  // in the requirements the facilitator validates against.
+  const complete = readResponse('settle', { isValid: true, transaction: 'tx_1', payer: '0xA' })
+  assert.equal(complete.ok, true)
 })
 
 test('the facilitator url must be https', () => {
