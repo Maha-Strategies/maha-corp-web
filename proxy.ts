@@ -3,7 +3,7 @@ import { apiKeyServiceConfigured, authorizeAndConsumeApiUnit, bearerApiKey } fro
 import { API_CORS_HEADERS, apiAccessStatus, apiProxyGate } from '@/lib/api-proxy-policy'
 import { maybeCreateTenantAutoTopup } from '@/lib/api-credit-billing'
 import { maybeSendLowCreditAlert } from '@/lib/observability/alerts'
-import { X402_HEADERS, resolveX402 } from '@/lib/x402/gateway'
+import { X402_HEADERS, paidRequestHeaders, resolveX402 } from '@/lib/x402/gateway'
 
 function json(body: unknown, status: number, headers: HeadersInit = {}) {
   return NextResponse.json(body, { status, headers: { ...API_CORS_HEADERS, ...headers } })
@@ -37,11 +37,13 @@ export async function proxy(request: NextRequest, event: NextFetchEvent) {
     if (outcome.kind === 'paid') {
       // A paid caller has no key, tenant, or credit balance, so downstream is
       // told what it is dealing with rather than left to infer it.
+      //
+      // The capacity slot is held from here. This proxy cannot release it —
+      // there is no hook that fires when the handler it forwards to finishes —
+      // so the token goes downstream and whoever observes the work end releases
+      // it. See lib/x402/slot.ts.
       const paidHeaders = new Headers(request.headers)
-      paidHeaders.set('x-maha-payment-transaction', outcome.transaction)
-      paidHeaders.set('x-maha-payment-payer', outcome.payer)
-      paidHeaders.set('x-maha-payment-amount', outcome.amountPaid)
-      paidHeaders.set('x-maha-access-mode', 'x402')
+      for (const [name, value] of Object.entries(paidRequestHeaders(outcome))) paidHeaders.set(name, value)
       return NextResponse.next({
         request: { headers: paidHeaders },
         headers: { ...API_CORS_HEADERS, [X402_HEADERS.response]: outcome.header },

@@ -4,6 +4,17 @@ import type { PaymentRequirement, ReplayGuard } from './protocol.ts'
 // payment settling twice on-chain; this prevents the same settled payment
 // being presented twice to this API. Both are needed, and only the second is
 // ours.
+//
+// The claim is keyed on a hash of the signed payload, not on a settlement
+// transaction hash. That is forced by the protocol -- `verify` returns no
+// transaction, and the claim has to happen before `settle` or two concurrent
+// duplicates both settle -- and it is the better key anyway: it identifies the
+// authorization the payer signed, which is the thing being replayed.
+//
+// Settlement is recorded afterwards, in a second append-only table. It cannot
+// be written back onto the claim row, because UPDATE is revoked on these
+// ledgers by design, and that constraint is worth more than the convenience of
+// keeping one row.
 
 type Ledger = { rpc: (name: string, args: Record<string, unknown>) => PromiseLike<{ data: unknown; error: { code?: string; message?: string } | null }> }
 
@@ -20,19 +31,22 @@ export type SettlementContext = {
  * is missing, the role lacks execute -- the payment is treated as already used
  * and the resource is withheld. The alternative is serving paid resources with
  * no record of payment, which is worse than refusing a legitimate caller who
- * can retry. A payer who is wrongly refused still holds their settled payment;
+ * can retry. A payer who is wrongly refused still holds their signed payment;
  * a resource served without a record cannot be recovered.
  */
 export function createReplayGuard(ledger: Ledger, context: SettlementContext, requirement: PaymentRequirement): ReplayGuard {
   return {
     async claim(payment): Promise<boolean> {
       const { data, error } = await ledger.rpc('claim_x402_payment', {
-        p_transaction_id: payment.transaction,
+        p_payment_id: payment.paymentId,
         p_network: context.network,
-        // The requirement's resource, never anything the caller supplied.
+        // The requirement's resource and price, never anything the caller
+        // supplied. The facilitator has already validated the signed payload
+        // against these exact requirements, so they are the authoritative
+        // record of what was bought and for how much.
         p_resource: requirement.resource,
         p_payer: payment.payer,
-        p_amount_paid: payment.amountPaid,
+        p_amount_paid: requirement.maxAmountRequired,
         p_asset: context.asset,
       })
       if (error) {
@@ -40,6 +54,22 @@ export function createReplayGuard(ledger: Ledger, context: SettlementContext, re
         return false
       }
       return data === 'claimed'
+    },
+
+    /**
+     * Provenance only. Access was already decided by the claim, so a failure
+     * here is logged and swallowed: withholding a resource the caller has
+     * demonstrably paid for, because a second write failed, is the worse
+     * outcome. The gap surfaces as a claim with no settlement row, which is
+     * exactly what a reconciliation sweep should look for.
+     */
+    async recordSettlement(settlement): Promise<void> {
+      const { error } = await ledger.rpc('record_x402_settlement', {
+        p_payment_id: settlement.paymentId,
+        p_transaction_id: settlement.transaction,
+        p_network: context.network,
+      })
+      if (error) console.error('x402 settlement record failed:', error.code ?? 'unknown_error')
     },
   }
 }

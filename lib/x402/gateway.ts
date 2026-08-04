@@ -15,6 +15,7 @@ import {
 } from './protocol.ts'
 import { createReplayGuard } from './replay-guard.ts'
 import { createAgentInquiryLedger } from '../agent-inquiry-ledger.ts'
+import { SLOT_RESOURCE_HEADER, SLOT_TOKEN_HEADER } from './slot.ts'
 
 // Decides what happens to a request that carries no API key: a challenge, a
 // refusal, or admission as a paid caller. Sits between proxy.ts and the
@@ -25,7 +26,16 @@ export type X402Outcome =
   | { kind: 'not_applicable' }
   | { kind: 'challenge'; status: 402; header: string; body: unknown }
   | { kind: 'refused'; status: 402 | 409 | 429 | 503; code: string; message: string; retryAfterSeconds?: number }
-  | { kind: 'paid'; header: string; transaction: string; payer: string; amountPaid: string }
+  | {
+      kind: 'paid'
+      header: string
+      transaction: string
+      payer: string
+      amountPaid: string
+      /** The capacity slot this request holds. Whoever observes the work finish
+       *  must release it; see lib/x402/slot.ts. */
+      slot: { resource: string; token: string }
+    }
 
 type Dependencies = {
   config?: X402Config | null
@@ -112,6 +122,7 @@ export async function resolveX402(request: Request, dependencies: Dependencies =
     transaction: accepted.transaction,
     payer: accepted.payer,
     amountPaid: accepted.amountPaid,
+    slot: { resource: resource.pathPrefix, token: slot.token ?? '' },
   }
 }
 
@@ -124,3 +135,22 @@ export const X402_HEADERS = {
   required: PAYMENT_REQUIRED_HEADER,
   response: PAYMENT_RESPONSE_HEADER,
 } as const
+
+/**
+ * What a paid request must carry downstream.
+ *
+ * Extracted from proxy.ts so it can be asserted: a header spelled one way here
+ * and another way in the handler that reads it fails silently, and the symptom
+ * -- a payer getting a 401 -- looks nothing like the cause. proxy.ts itself is
+ * not importable under the test runner, so this is the seam.
+ */
+export function paidRequestHeaders(outcome: Extract<X402Outcome, { kind: 'paid' }>): Record<string, string> {
+  return {
+    'x-maha-access-mode': 'x402',
+    'x-maha-payment-transaction': outcome.transaction,
+    'x-maha-payment-payer': outcome.payer,
+    'x-maha-payment-amount': outcome.amountPaid,
+    [SLOT_RESOURCE_HEADER]: outcome.slot.resource,
+    [SLOT_TOKEN_HEADER]: outcome.slot.token,
+  }
+}
