@@ -99,6 +99,11 @@ export async function resolveX402(request: Request, dependencies: Dependencies =
     if (accepted.status === 409) {
       return { kind: 'refused', status: 409, code: 'payment_already_used', message: 'This payment has already been used.' }
     }
+    if (accepted.status === 503) {
+      // Nothing settled, so the caller's authorization is still spendable.
+      // Saying so is what stops a retry being read as a double charge.
+      return { kind: 'refused', status: 503, code: 'x402_ledger_unavailable', message: 'Payment could not be recorded and was not settled. Retry with the same payment.' }
+    }
     return challenge(requirement, accepted.reason)
   }
 

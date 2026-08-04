@@ -43,7 +43,7 @@ function facilitator(overrides: Partial<PaymentFacilitator> = {}): PaymentFacili
 
 function guard(seen: Set<string> = new Set()): ReplayGuard {
   return {
-    claim: async ({ paymentId }) => (seen.has(paymentId) ? false : (seen.add(paymentId), true)),
+    claim: async ({ paymentId }) => (seen.has(paymentId) ? 'duplicate' : (seen.add(paymentId), 'claimed')),
     recordSettlement: async () => undefined,
   }
 }
@@ -204,4 +204,26 @@ test('a payment for one resource cannot be presented for another', () => {
   const solver = requirement({ resource: 'https://www.mahastrategies.com/api/v1/jobs/tensor-opt', maxAmountRequired: '500000' })
   assert.notEqual(audit.resource, solver.resource)
   assert.notEqual(audit.maxAmountRequired, solver.maxAmountRequired)
+})
+
+test('a ledger that cannot answer is not reported as a replay', async () => {
+  // The commonest cause is the migration not having been applied to the
+  // environment under test. Calling that "already used" on a first-ever
+  // payment sends an operator hunting for a duplicate that never existed.
+  let settled = false
+  const broken: ReplayGuard = { claim: async () => 'unavailable', recordSettlement: async () => undefined }
+  const result = await acceptPayment({
+    payment: payment(),
+    requirements: [requirement()],
+    facilitator: facilitator({ settle: async () => { settled = true; return { ok: true, payer: '0xAgent', transaction: 'tx_1' } } }),
+    replayGuard: broken,
+  })
+  assert.equal(result.ok, false)
+  if (!result.ok) {
+    assert.equal(result.status, 503)
+    assert.equal(result.reason, 'x402_ledger_unavailable')
+  }
+  // Nothing settled, so the payer keeps their authorization and the retry is
+  // genuinely free rather than a second charge.
+  assert.equal(settled, false)
 })

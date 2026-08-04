@@ -1,4 +1,4 @@
-import type { PaymentRequirement, ReplayGuard } from './protocol.ts'
+import type { ClaimOutcome, PaymentRequirement, ReplayGuard } from './protocol.ts'
 
 // The database side of replay protection. The facilitator prevents the same
 // payment settling twice on-chain; this prevents the same settled payment
@@ -28,15 +28,18 @@ export type SettlementContext = {
  * A guard that fails closed.
  *
  * If the claim cannot be recorded -- the database is unreachable, the migration
- * is missing, the role lacks execute -- the payment is treated as already used
- * and the resource is withheld. The alternative is serving paid resources with
- * no record of payment, which is worse than refusing a legitimate caller who
- * can retry. A payer who is wrongly refused still holds their signed payment;
+ * is missing, the role lacks execute -- the resource is withheld. The
+ * alternative is serving paid resources with no record of payment, which is
+ * worse than refusing a legitimate caller who can retry: a payer who is wrongly
+ * refused still holds their signed authorization, and nothing has settled, but
  * a resource served without a record cannot be recovered.
+ *
+ * It is reported as `unavailable` rather than `duplicate` so the refusal says
+ * what actually happened.
  */
 export function createReplayGuard(ledger: Ledger, context: SettlementContext, requirement: PaymentRequirement): ReplayGuard {
   return {
-    async claim(payment): Promise<boolean> {
+    async claim(payment): Promise<ClaimOutcome> {
       const { data, error } = await ledger.rpc('claim_x402_payment', {
         p_payment_id: payment.paymentId,
         p_network: context.network,
@@ -50,10 +53,15 @@ export function createReplayGuard(ledger: Ledger, context: SettlementContext, re
         p_asset: context.asset,
       })
       if (error) {
+        // Unreachable database, missing migration, role without execute. All
+        // withhold the resource, but none of them are a replay -- and calling
+        // them one sends an operator looking for a duplicate that never
+        // existed. The commonest cause in practice is this migration not
+        // having been applied to the environment being tested.
         console.error('x402 replay claim failed:', error.code ?? 'unknown_error')
-        return false
+        return 'unavailable'
       }
-      return data === 'claimed'
+      return data === 'claimed' ? 'claimed' : 'duplicate'
     },
 
     /**

@@ -30,12 +30,12 @@ function ledger(result: { data?: unknown; error?: { code?: string } | null }, ca
 
 test('a first presentation is claimed', async () => {
   const guard = createReplayGuard(ledger({ data: 'claimed' }), context, requirement)
-  assert.equal(await guard.claim(claimInput), true)
+  assert.equal(await guard.claim(claimInput), 'claimed')
 })
 
 test('a repeat presentation is refused', async () => {
   const guard = createReplayGuard(ledger({ data: 'duplicate' }), context, requirement)
-  assert.equal(await guard.claim(claimInput), false)
+  assert.equal(await guard.claim(claimInput), 'duplicate')
 })
 
 test('the claim records the resource that was actually paid for', async () => {
@@ -62,19 +62,22 @@ test('settlement is recorded separately and never gates access', async () => {
   assert.equal(calls[0].p_payment_id, 'b'.repeat(64))
 })
 
-test('a database failure withholds the resource rather than serving it unrecorded', async () => {
+test('a database failure withholds the resource, and says so accurately', async () => {
   // Failing open would serve paid resources with no record of payment. A payer
-  // wrongly refused still holds their settled payment and can retry; a
+  // wrongly refused still holds their signed authorization and can retry; a
   // resource served without a record cannot be recovered.
+  //
+  // PGRST202 is "function not found" -- the shape a missing migration takes.
+  // It must not be reported as a replay.
   for (const error of [{ code: 'PGRST202' }, { code: '42501' }, {}]) {
     const guard = createReplayGuard(ledger({ error }), context, requirement)
-    assert.equal(await guard.claim(claimInput), false)
+    assert.equal(await guard.claim(claimInput), 'unavailable')
   }
 })
 
-test('an unexpected return value is treated as unclaimed', async () => {
+test('an unexpected return value never reads as claimed', async () => {
   for (const data of [null, undefined, '', 'unexpected', 0]) {
     const guard = createReplayGuard(ledger({ data }), context, requirement)
-    assert.equal(await guard.claim(claimInput), false)
+    assert.notEqual(await guard.claim(claimInput), 'claimed')
   }
 })
