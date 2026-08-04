@@ -228,6 +228,7 @@ async function liveRun() {
         ...headers,
       },
       body: JSON.stringify({ sources: [{ id: 'probe', text: 'x402 sepolia verification probe.' }], budgetTokens: 64 }),
+      task: "test-compression",
       cache: 'no-store',
     })
 
