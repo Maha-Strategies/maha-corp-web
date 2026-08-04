@@ -230,7 +230,7 @@ async function liveRun() {
       // MOVE `task` INSIDE THE STRINGIFIED OBJECT:
       body: JSON.stringify({ 
         documents: [{ id: 'probe', text: 'x402 sepolia verification probe.' }], 
-        budgetTokens: 64,
+        tokenBudget: 64,
         task: "test-compression" 
       }),
       cache: 'no-store',
