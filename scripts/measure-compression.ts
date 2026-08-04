@@ -30,7 +30,7 @@ import { readFile } from 'node:fs/promises'
 
 import { encode } from 'gpt-tokenizer'
 
-import { compileContextPack, estimateTokens } from '../lib/context-compiler.ts'
+import { compileContextPack, estimateTokens, type ProvenanceStyle } from '../lib/context-compiler.ts'
 import { CORPORA, loadCorporaFrom, type Corpus } from './compression-corpus.ts'
 
 const AS_JSON = process.argv.includes('--json')
@@ -47,8 +47,11 @@ type Pricing = {
   feeTiersUsd: number[]
 }
 
+const PROVENANCE_STYLES: ProvenanceStyle[] = ['full', 'compact', 'none']
+
 type Measurement = {
   corpus: string
+  provenance: ProvenanceStyle
   budget: number
   inputTokens: number
   outputTokens: number
@@ -65,12 +68,13 @@ const bpe = (text: string) => encode(text).length
 const percentile = (sorted: number[], p: number) => sorted[Math.min(sorted.length - 1, Math.floor(sorted.length * p))]
 const usd = (value: number) => (value >= 0 ? ' ' : '-') + '$' + Math.abs(value).toFixed(4)
 
-function measure(corpus: Corpus, budget: number): Measurement {
+function measure(corpus: Corpus, budget: number, provenance: ProvenanceStyle = 'full'): Measurement {
   const request = {
     clientRequestId: `measure-${corpus.name}-${budget}`,
     task: corpus.task,
     tokenBudget: budget,
     documents: corpus.documents,
+    provenance,
   }
 
   const durations: number[] = []
@@ -93,6 +97,7 @@ function measure(corpus: Corpus, budget: number): Measurement {
 
   return {
     corpus: corpus.name,
+    provenance,
     budget,
     inputTokens,
     outputTokens,
@@ -122,6 +127,9 @@ function table(rows: string[][], headers: string[]): string {
 const pricing = JSON.parse(await readFile(new URL('./model-pricing.json', import.meta.url), 'utf8')) as Pricing
 const corpora = USING_REAL_DATA ? await loadCorporaFrom(corpusDirectory) : CORPORA
 const measurements = corpora.flatMap((corpus) => BUDGETS.map((budget) => measure(corpus, budget)))
+// The header experiment: same corpora and budgets, three labelling styles.
+const headerSweep = corpora.flatMap((corpus) =>
+  PROVENANCE_STYLES.flatMap((style) => BUDGETS.map((budget) => measure(corpus, budget, style))))
 
 if (AS_JSON) {
   console.log(JSON.stringify({ pricing, measurements, usingRealData: USING_REAL_DATA }, null, 2))
@@ -163,6 +171,42 @@ for (const corpus of corpora) {
   console.log(table(rows, ['budget', 'in', 'out', 'reduction', 'needles', 'verdict', 'p50']))
   console.log()
 }
+
+// -- 1b. Provenance header cost ----------------------------------------------
+
+console.log('\n1b. PROVENANCE HEADER COST')
+console.log('-'.repeat(78))
+console.log('Same payloads and budgets, three labelling styles. Retention is unchanged')
+console.log('by labelling -- the same passages are selected -- so only size moves.\n')
+
+for (const corpus of corpora) {
+  const rows = BUDGETS.map((budget) => {
+    const cells = PROVENANCE_STYLES.map((style) =>
+      headerSweep.find((row) => row.corpus === corpus.name && row.budget === budget && row.provenance === style)!)
+    const [full, compact, none] = cells
+    return [
+      String(budget),
+      String(full.inputTokens),
+      `${full.reductionPercent.toFixed(1)}%`,
+      `${compact.reductionPercent.toFixed(1)}%`,
+      `${none.reductionPercent.toFixed(1)}%`,
+      `${(none.reductionPercent - full.reductionPercent).toFixed(1)}pp`,
+      `${full.needlesRetained}/${full.needlesTotal}`,
+    ]
+  })
+  console.log(`${corpus.name}`)
+  console.log(table(rows, ['budget', 'in', 'full', 'compact', 'none', 'full→none', 'needles']))
+  console.log()
+}
+
+const flipped = corpora.filter((corpus) => {
+  const full = headerSweep.find((row) => row.corpus === corpus.name && row.budget === 16_000 && row.provenance === 'full')!
+  const none = headerSweep.find((row) => row.corpus === corpus.name && row.budget === 16_000 && row.provenance === 'none')!
+  return full.reductionPercent <= 0 && none.reductionPercent > 0
+})
+console.log(flipped.length > 0
+  ? `Payload shapes that go from net-negative to net-positive by dropping the header: ${flipped.map((corpus) => corpus.name).join(', ')}`
+  : 'No payload shape changes sign by dropping the header.')
 
 // -- 2. Tokenizer gap ---------------------------------------------------------
 

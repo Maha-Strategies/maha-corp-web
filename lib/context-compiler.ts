@@ -6,11 +6,25 @@ export const MAX_CONTEXT_PACK_BYTES = 128_000
 const MAX_DOCUMENTS = 8
 const MAX_DOCUMENT_BYTES = 64_000
 
+/**
+ * How each selected passage is labelled in the rendered pack.
+ *
+ * Measured cost of the full form is roughly 20 tokens per passage, which on a
+ * payload of many short passages exceeds the text it was selected to keep --
+ * the pack comes back larger than the input. The structured provenance in
+ * `includedPassages` is unaffected by this choice, so `none` loses nothing a
+ * caller cannot read from the response; it loses only the model's ability to
+ * cite inline while it is writing.
+ */
+export type ProvenanceStyle = 'full' | 'compact' | 'none'
+
 export type ContextPackRequest = {
   clientRequestId: string
   task: string
   tokenBudget: number
   documents: Array<{ id: string; title?: string; text: string }>
+  /** Defaults to 'full', which is the behaviour callers already depend on. */
+  provenance?: ProvenanceStyle
 }
 
 type Passage = { sourceId: string; sourceTitle: string; index: number; text: string; hash: string; estimatedTokens: number; score: number }
@@ -64,7 +78,11 @@ export function parseContextPackRequest(value: unknown): ContextPackRequest {
     ids.add(id)
     return { id, title: document.title === undefined ? undefined : singleLine(document.title, `documents[${index}].title`, 1, 160), text: text(document.text, `documents[${index}].text`, 1, MAX_DOCUMENT_BYTES) }
   })
-  return { clientRequestId: singleLine(body.clientRequestId, 'clientRequestId', 8, 120), task, tokenBudget: body.tokenBudget, documents }
+  const provenance = body.provenance === undefined ? 'full' : body.provenance
+  if (provenance !== 'full' && provenance !== 'compact' && provenance !== 'none') {
+    throw new Error('provenance must be one of: full, compact, none.')
+  }
+  return { clientRequestId: singleLine(body.clientRequestId, 'clientRequestId', 8, 120), task, tokenBudget: body.tokenBudget, documents, provenance }
 }
 
 function normalize(value: string): string {
@@ -104,12 +122,21 @@ export function compileContextPack(input: ContextPackRequest) {
     if (used >= input.tokenBudget) break
   }
   const originalText = input.documents.map((document) => normalize(document.text)).join('\n\n')
+  const provenance: ProvenanceStyle = input.provenance ?? 'full'
   function renderContext(passages: Passage[]) {
+    const label = (passage: Passage) => {
+      if (provenance === 'none') return passage.text
+      // Compact keeps a citable handle and drops the title, which is repeated
+      // identically on every passage from the same source and is the bulk of
+      // the cost.
+      if (provenance === 'compact') return `[${passage.sourceId}:${passage.index}] ${passage.text}`
+      return `## ${passage.sourceTitle} [${passage.sourceId}:${passage.index}]\n${passage.text}`
+    }
     return [
       '# Context Pack',
       `Task: ${input.task}`,
       '',
-      ...passages.map((passage) => `## ${passage.sourceTitle} [${passage.sourceId}:${passage.index}]\n${passage.text}`),
+      ...passages.map(label),
     ].join('\n\n')
   }
   // Heading and task overhead also count toward the caller's declared budget.
