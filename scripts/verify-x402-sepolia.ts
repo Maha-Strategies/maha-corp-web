@@ -231,7 +231,8 @@ async function liveRun() {
       body: JSON.stringify({ 
         documents: [{ id: 'probe', text: 'x402 sepolia verification probe.' }], 
         tokenBudget: 64,
-        task: "test-compression" 
+        task: "test-compression", 
+        clientRequestId: "test-request-123"
       }),
       cache: 'no-store',
     })
