@@ -85,10 +85,21 @@ export type PaymentFacilitator = {
  * Without a record of what has already been spent, the same payload buys
  * unlimited calls. This mirrors the Stripe webhook event table, where the
  * identifier is claimed in the same transaction as the value it releases.
+ *
+ * Three outcomes, not two.
+ *
+ * `unavailable` is separated from `duplicate` deliberately. Both withhold the
+ * resource, so collapsing them looks harmless -- but they mean opposite things
+ * to whoever is reading the response. A first-ever payment answered "already
+ * used" because a table is missing sends the operator hunting for a replay
+ * that never happened, and the caller cannot tell a permanent refusal from one
+ * worth retrying.
  */
+export type ClaimOutcome = 'claimed' | 'duplicate' | 'unavailable'
+
 export type ReplayGuard = {
   /**
-   * True when this payment has not been seen before and is now claimed.
+   * Claims this payment if it has not been seen before.
    *
    * Keyed on `paymentId` -- a hash of the signed payload -- rather than on a
    * settlement transaction hash. The hash is the only identifier that exists
@@ -97,7 +108,7 @@ export type ReplayGuard = {
    * signed. Two presentations of one signed payload are the replay this
    * guards, and they share a paymentId whether or not either ever settles.
    */
-  claim(payment: { paymentId: string; payer: string }): Promise<boolean>
+  claim(payment: { paymentId: string; payer: string }): Promise<ClaimOutcome>
   /** Records the on-chain result once settlement returns. Never gates access. */
   recordSettlement(settlement: { paymentId: string; transaction: string }): Promise<void>
 }
@@ -188,7 +199,7 @@ export function matchRequirement(payment: PaymentPayload, requirements: PaymentR
 
 export type AcceptPaymentResult =
   | { ok: true; payer: string; transaction: string; amountPaid: string }
-  | { ok: false; status: 402 | 409; reason: string }
+  | { ok: false; status: 402 | 409 | 503; reason: string }
 
 /**
  * Verify, guard against replay, then settle -- in that order.
@@ -217,7 +228,10 @@ export async function acceptPayment(input: {
 
   const id = await paymentId(input.payment)
   const claimed = await input.replayGuard.claim({ paymentId: id, payer: verified.payer })
-  if (!claimed) return { ok: false, status: 409, reason: 'payment_already_used' }
+  // Nothing has settled yet, so a refusal here costs the payer nothing -- they
+  // still hold their signed authorization and can present it again.
+  if (claimed === 'unavailable') return { ok: false, status: 503, reason: 'x402_ledger_unavailable' }
+  if (claimed === 'duplicate') return { ok: false, status: 409, reason: 'payment_already_used' }
 
   const settled = await input.facilitator.settle(input.payment, requirement)
   if (!settled.ok) return { ok: false, status: 402, reason: settled.reason }

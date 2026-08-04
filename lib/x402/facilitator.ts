@@ -57,7 +57,14 @@ export function createFacilitator(config: FacilitatorConfig): PaymentFacilitator
     } catch (error) {
       // A facilitator that is unreachable or erroring must never read as a
       // successful payment.
-      console.error(`x402 facilitator ${operation} failed:`, error instanceof Error ? error.name : 'unknown_error')
+      //
+      // The name alone was not enough to act on: a rejected payload and a
+      // misconfigured facilitator URL both surface as a bare `Error`, and the
+      // response is the same 402 either way. The message is included so the
+      // two are distinguishable from logs, truncated because a facilitator's
+      // error text is not a field we control.
+      const detail = error instanceof Error ? `${error.name}: ${error.message.slice(0, 200)}` : 'unknown_error'
+      console.error(`x402 facilitator ${operation} failed:`, detail)
       return null
     }
   }

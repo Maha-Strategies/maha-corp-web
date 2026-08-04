@@ -197,6 +197,10 @@ async function liveRun() {
   const path = process.env.X402_TEST_PATH?.trim() || '/api/v1/compress'
   const privateKey = required('X402_TEST_PRIVATE_KEY') as Hex
   const rpcUrl = process.env.BASE_SEPOLIA_RPC_URL?.trim() || 'https://sepolia.base.org'
+  // A Vercel preview sits behind deployment protection. Without the bypass the
+  // first request is answered by Vercel's own SSO 401, which looks nothing
+  // like the app and wastes a signing cycle to diagnose.
+  const bypass = process.env.VERCEL_AUTOMATION_BYPASS_SECRET?.trim()
 
   if (!/^0x[0-9a-fA-F]{64}$/.test(privateKey)) {
     console.error('X402_TEST_PRIVATE_KEY must be a 0x-prefixed 32-byte hex key.')
@@ -211,10 +215,45 @@ async function liveRun() {
   const request = (headers: Record<string, string> = {}) =>
     fetch(`${baseUrl}${path}`, {
       method: 'POST',
-      headers: { 'content-type': 'application/json', ...headers },
+      headers: {
+        'content-type': 'application/json',
+        ...(bypass ? { 'x-vercel-protection-bypass': bypass, 'x-vercel-set-bypass-cookie': 'false' } : {}),
+        ...headers,
+      },
       body: JSON.stringify({ sources: [{ id: 'probe', text: 'x402 sepolia verification probe.' }], budgetTokens: 64 }),
       cache: 'no-store',
     })
+
+  // -- Stage 0: the ledger is ready --------------------------------------
+  // Checked before anything is signed. A missing migration surfaces at stage 4
+  // as a refusal on a payment that has already been signed, which is a
+  // confusing place to learn it.
+  stage('Stage 0 -- the ledger is migrated')
+  const ledgerUrl = process.env.NEXT_PUBLIC_SUPABASE_URL?.trim()
+  const ledgerKey = process.env.SUPABASE_SERVICE_ROLE_KEY?.trim()
+  const readLedger = async (table: string, query: string) => {
+    if (!ledgerUrl || !ledgerKey) return null
+    const response = await fetch(`${ledgerUrl}/rest/v1/${table}?${query}`, {
+      headers: { apikey: ledgerKey, authorization: `Bearer ${ledgerKey}` },
+      cache: 'no-store',
+    })
+    return response.ok ? (await response.json()) as Record<string, unknown>[] : null
+  }
+
+  if (!ledgerUrl || !ledgerKey) {
+    console.log('  skipped: set NEXT_PUBLIC_SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY for the environment under test')
+    console.log('  NOTE: without these the ledger assertions cannot run, and a missing')
+    console.log('        migration will surface as a refusal after signing.')
+  } else {
+    const payments = await readLedger('x402_payments', 'select=payment_id&limit=1')
+    const settlements = await readLedger('x402_settlements', 'select=payment_id&limit=1')
+    check('x402_payments exists and is readable', payments !== null, 'apply 20260804000100_x402_payment_id_replay_key.sql')
+    check('x402_settlements exists and is readable', settlements !== null, 'apply 20260804000100_x402_payment_id_replay_key.sql')
+    if (payments === null || settlements === null) {
+      console.log('\n  Nothing was signed. Apply the migration to this environment first.')
+      return finish()
+    }
+  }
 
   // -- Stage 1: the challenge --------------------------------------------
   stage('Stage 1 -- challenge')
@@ -311,19 +350,10 @@ async function liveRun() {
 
   // -- Stage 5: the ledger ------------------------------------------------
   stage('Stage 5 -- what the ledger recorded')
-  const ledgerUrl = process.env.NEXT_PUBLIC_SUPABASE_URL?.trim()
-  const ledgerKey = process.env.SUPABASE_SERVICE_ROLE_KEY?.trim()
   if (!ledgerUrl || !ledgerKey) {
-    console.log('  skipped: set NEXT_PUBLIC_SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY to assert the ledger')
+    console.log('  skipped: no ledger credentials')
   } else {
-    const read = async (table: string, query: string) => {
-      const response = await fetch(`${ledgerUrl}/rest/v1/${table}?${query}`, {
-        headers: { apikey: ledgerKey, authorization: `Bearer ${ledgerKey}` },
-        cache: 'no-store',
-      })
-      return response.ok ? (await response.json()) as Record<string, unknown>[] : null
-    }
-
+    const read = readLedger
     const claims = await read('x402_payments', `payment_id=eq.${expectedId}&select=*`)
     check('the claim is recorded under the payload hash', claims?.length === 1, claims === null ? 'ledger unreadable' : `${claims?.length ?? 0} rows`)
     if (claims?.length === 1) {
