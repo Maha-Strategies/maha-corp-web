@@ -118,8 +118,28 @@ export type ReplayGuard = {
    */
   claim(payment: { paymentId: string; payer: string }): Promise<ClaimOutcome>
   /** Records the on-chain result once settlement returns. Never gates access. */
-  recordSettlement(settlement: { paymentId: string; transaction: string }): Promise<void>
+  recordSettlement(settlement: {
+    paymentId: string
+    transaction: string
+    /** What reading the chain established, so an unconfirmed settlement is a
+     *  row a reconciliation sweep can find rather than an assumption. */
+    confirmation?: { status: string; blockNumber?: number; amount?: string; reason?: string }
+  }): Promise<void>
 }
+
+/**
+ * Reads the chain to check the facilitator told the truth.
+ *
+ * Injected so the protocol stays testable without a node, and optional so a
+ * deployment with no RPC endpoint degrades to the previous behaviour rather
+ * than refusing every payment.
+ */
+export type SettlementConfirmer = (settlement: { transaction: string; payer: string }) => Promise<{
+  status: 'confirmed' | 'contradicted' | 'indeterminate'
+  blockNumber?: number
+  amount?: string
+  reason?: string
+}>
 
 /**
  * A stable identifier for a signed payment authorization.
@@ -207,7 +227,9 @@ export function matchRequirement(payment: PaymentPayload, requirements: PaymentR
 
 export type AcceptPaymentResult =
   | { ok: true; payer: string; transaction: string; amountPaid: string }
-  | { ok: false; status: 402 | 409 | 503; reason: string }
+  // 502 is the chain contradicting the facilitator: an upstream told us
+  // something the ledger of record does not support.
+  | { ok: false; status: 402 | 409 | 502 | 503; reason: string }
 
 /**
  * Verify, guard against replay, then settle -- in that order.
@@ -227,6 +249,7 @@ export async function acceptPayment(input: {
   requirements: PaymentRequirement[]
   facilitator: PaymentFacilitator
   replayGuard: ReplayGuard
+  confirmOnChain?: SettlementConfirmer
 }): Promise<AcceptPaymentResult> {
   const requirement = matchRequirement(input.payment, input.requirements)
   if (!requirement) return { ok: false, status: 402, reason: 'no_matching_requirement' }
@@ -244,9 +267,27 @@ export async function acceptPayment(input: {
   const settled = await input.facilitator.settle(input.payment, requirement)
   if (!settled.ok) return { ok: false, status: 402, reason: settled.reason }
 
-  // Provenance, not a gate. The claim above already decided access, so a
-  // failure to record the hash must not withhold a resource that was paid for.
-  await input.replayGuard.recordSettlement({ paymentId: id, transaction: settled.transaction })
+  // Independent confirmation, where a node is configured. Until this point
+  // "settled" means the facilitator said so; this is the only step that checks.
+  const confirmation = input.confirmOnChain
+    ? await input.confirmOnChain({ transaction: settled.transaction, payer: settled.payer })
+    : undefined
+
+  // Recorded either way, including when the chain could not be read, so an
+  // unconfirmed payment is a row someone can find rather than an assumption.
+  await input.replayGuard.recordSettlement({ paymentId: id, transaction: settled.transaction, confirmation })
+
+  // Only an active contradiction withholds. The payer's money has already
+  // moved by now, so refusing because a node was unreachable would take
+  // payment and give nothing -- the one outcome worse than serving
+  // unconfirmed. A chain that positively disagrees is different in kind: it
+  // means the settlement we were told about did not happen as described.
+  if (confirmation?.status === 'contradicted') {
+    // Not a 402. Re-challenging would invite a second payment for a resource
+    // whose first payment the facilitator claims already settled, and the
+    // caller can do nothing to fix an upstream disagreement.
+    return { ok: false, status: 502, reason: `settlement_contradicted:${confirmation.reason ?? 'unknown'}` }
+  }
 
   return { ok: true, payer: settled.payer, transaction: settled.transaction, amountPaid: requirement.maxAmountRequired }
 }

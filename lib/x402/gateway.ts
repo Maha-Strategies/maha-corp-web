@@ -12,7 +12,9 @@ import {
   readPaymentSignature,
   type PaymentFacilitator,
   type PaymentRequirement,
+  type SettlementConfirmer,
 } from './protocol.ts'
+import { confirmSettlement } from './chain.ts'
 import { createReplayGuard } from './replay-guard.ts'
 import { createAgentInquiryLedger } from '../agent-inquiry-ledger.ts'
 import { SLOT_RESOURCE_HEADER, SLOT_TOKEN_HEADER } from './slot.ts'
@@ -25,7 +27,7 @@ import { SLOT_RESOURCE_HEADER, SLOT_TOKEN_HEADER } from './slot.ts'
 export type X402Outcome =
   | { kind: 'not_applicable' }
   | { kind: 'challenge'; status: 402; header: string; body: unknown }
-  | { kind: 'refused'; status: 402 | 409 | 429 | 503; code: string; message: string; retryAfterSeconds?: number }
+  | { kind: 'refused'; status: 402 | 409 | 429 | 502 | 503; code: string; message: string; retryAfterSeconds?: number }
   | {
       kind: 'paid'
       header: string
@@ -42,6 +44,27 @@ type Dependencies = {
   facilitator?: PaymentFacilitator
   ledger?: Parameters<typeof createReplayGuard>[0] | null
   acquire?: typeof acquireSlot
+  confirmOnChain?: SettlementConfirmer
+}
+
+/**
+ * Reads the chain for this requirement, or nothing when no endpoint is set.
+ *
+ * Bound to the requirement we published rather than to anything the caller or
+ * the facilitator supplied, so the transfer is checked against the asset and
+ * recipient this server actually asked for.
+ */
+function confirmerFor(config: X402Config, requirement: PaymentRequirement): SettlementConfirmer | undefined {
+  if (!config.chainRpcUrl) return undefined
+  return async ({ transaction, payer }) => confirmSettlement({
+    rpcUrl: config.chainRpcUrl!,
+    caip2Network: config.caip2Network,
+    transaction,
+    asset: config.asset,
+    payer,
+    payTo: config.payTo,
+    minAmount: requirement.maxAmountRequired,
+  })
 }
 
 /**
@@ -93,9 +116,23 @@ export async function resolveX402(request: Request, dependencies: Dependencies =
     requirements: [requirement],
     facilitator,
     replayGuard: createReplayGuard(ledger, { network: config.caip2Network, asset: config.asset }, requirement),
+    confirmOnChain: dependencies.confirmOnChain ?? confirmerFor(config, requirement),
   })
 
   if (!accepted.ok) {
+    // Checked before the reason-string match below, which is a broad pattern
+    // that must not be given the chance to read a chain contradiction as a
+    // replay. The two call for opposite responses.
+    if (accepted.status === 502) {
+      console.error('x402 settlement contradicted by chain:', accepted.reason)
+      return {
+        kind: 'refused',
+        status: 502,
+        code: 'settlement_contradicted',
+        message: 'The settlement reported by the payment facilitator could not be corroborated on chain. The resource was withheld and the discrepancy has been recorded.',
+      }
+    }
+
     // FIX: Catch any string that hints the payment was already used/settled/replayed
     if (accepted.status === 409 || /used|replay|settled|conflict|duplicate|already/i.test(accepted.reason)) {
       return { kind: 'refused', status: 409, code: 'payment_already_used', message: 'This payment has already been used.' }

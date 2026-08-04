@@ -76,6 +76,13 @@ export function createReplayGuard(ledger: Ledger, context: SettlementContext, re
         p_payment_id: settlement.paymentId,
         p_transaction_id: settlement.transaction,
         p_network: context.network,
+        // What a node actually said, stored beside the facilitator's account
+        // rather than in place of it. Null when no RPC endpoint is configured,
+        // which is visibly different from 'indeterminate'.
+        p_chain_status: settlement.confirmation?.status ?? null,
+        p_chain_block_number: settlement.confirmation?.blockNumber ?? null,
+        p_chain_amount: settlement.confirmation?.amount ?? null,
+        p_chain_detail: settlement.confirmation?.reason ?? null,
       })
       if (error) console.error('x402 settlement record failed:', error.code ?? 'unknown_error')
     },

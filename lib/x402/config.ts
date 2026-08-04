@@ -1,4 +1,5 @@
 import type { PaymentRequirement, X402Network } from './protocol.ts'
+import { rpcUrlFor } from './chain.ts'
 import { releasesSlot } from './slot.ts'
 
 // Everything here is off unless X402_ENABLED is exactly 'true'. The flag is
@@ -47,6 +48,12 @@ export type X402Config = {
   resources: PricedResource[]
   /** Seconds a concurrency slot is held before it self-releases. */
   slotTtlSeconds: number
+  /**
+   * JSON-RPC endpoint used to confirm that a settlement the facilitator
+   * reported is actually on chain. Null disables confirmation entirely, which
+   * is the previous behaviour: the facilitator's word is taken as final.
+   */
+  chainRpcUrl: string | null
 }
 
 const NETWORKS: Record<string, { network: X402Network; caip2: string }> = {
@@ -108,6 +115,7 @@ export function x402Config(environment: Environment = process.env): X402Config |
     },
     resources,
     slotTtlSeconds,
+    chainRpcUrl: rpcUrlFor(network.caip2, environment.X402_CHAIN_RPC_URL),
   }
 }
 
