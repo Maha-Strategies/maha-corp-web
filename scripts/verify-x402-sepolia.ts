@@ -229,7 +229,7 @@ async function liveRun() {
       },
       // MOVE `task` INSIDE THE STRINGIFIED OBJECT:
       body: JSON.stringify({ 
-        sources: [{ id: 'probe', text: 'x402 sepolia verification probe.' }], 
+        documents: [{ id: 'probe', text: 'x402 sepolia verification probe.' }], 
         budgetTokens: 64,
         task: "test-compression" 
       }),
@@ -352,7 +352,7 @@ async function liveRun() {
   // -- Stage 4: pay -------------------------------------------------------
   stage('Stage 4 -- present the payment')
   const paid = await request({ 'PAYMENT-SIGNATURE': header })
-  check('the paid request is served', paid.status >= 200 && paid.status < 300, `got ${paid.status}: ${(await paid.clone().text()).slice(0, 300)}`)
+  check('the paid request is served', paid.status >= 200 && paid.status < 300, `got ${paid.status}: ${(await paid.clone().text())}`)
 
   const receiptHeader = paid.headers.get('PAYMENT-RESPONSE')
   if (receiptHeader) {
