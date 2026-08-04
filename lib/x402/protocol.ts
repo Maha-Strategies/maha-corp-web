@@ -36,6 +36,14 @@ export type PaymentRequirement = {
   maxTimeoutSeconds: number
   /** Contract address of the accepted asset, e.g. USDC on the chosen network. */
   asset: string
+  /**
+   * Scheme-specific parameters. For `exact` on EVM this carries the token's
+   * EIP-712 domain, `{ name, version }`, and it is not optional in practice:
+   * the facilitator reconstructs the signing digest from it and answers
+   * `invalid_exact_evm_missing_eip712_domain` without it. Verified against the
+   * live facilitator -- omitting it refuses every payment.
+   */
+  extra?: Record<string, string>
 }
 
 export type PaymentRequiredBody = {

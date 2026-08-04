@@ -128,6 +128,19 @@ test('the price charged is the longest matching prefix', () => {
   assert.equal(priceFor('/api/v1/mcp/servers', config()), null)
 })
 
+test('the challenge publishes the EIP-712 domain the facilitator needs', () => {
+  // Verified against the live x402.org facilitator: a requirement without
+  // `extra` is answered invalid_exact_evm_missing_eip712_domain, so every
+  // payment is refused. Its absence is silent everywhere else.
+  const requirement = requirementFor(priceFor('/api/v1/compress', config())!, 'https://www.mahastrategies.com/api/v1/compress', config())
+  assert.deepEqual(requirement.extra, { name: 'USDC', version: '2' })
+
+  // Overridable, because the USDC defaults stop being right the moment a
+  // different token is priced.
+  const other = x402Config({ ...ENV, X402_ASSET_EIP712_NAME: 'EURC', X402_ASSET_EIP712_VERSION: '1' }) as X402Config
+  assert.deepEqual(requirementFor(priceFor('/api/v1/compress', other)!, 'https://x.test/api/v1/compress', other).extra, { name: 'EURC', version: '1' })
+})
+
 test('the challenge binds to the path without its query string', () => {
   const requirement = requirementFor(priceFor('/api/v1/compress', config())!, 'https://www.mahastrategies.com/api/v1/compress', config())
   assert.equal(requirement.resource, 'https://www.mahastrategies.com/api/v1/compress')
