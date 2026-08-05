@@ -22,6 +22,9 @@ app = modal.App(APP_NAME)
 # into the measured GPU container or old research packages into either image.
 gpu_image = (
     modal.Image.from_registry("pytorch/pytorch:2.5.1-cuda12.4-cudnn9-runtime")
+    # Modal imports this module in each function image; the shared staging
+    # endpoint annotations therefore require FastAPI at import time.
+    .pip_install("fastapi==0.115.6")
     .add_local_python_source("workers.qubo_reference")
 )
 e2e_image = modal.Image.debian_slim(python_version="3.11").pip_install("fastapi==0.115.6")
