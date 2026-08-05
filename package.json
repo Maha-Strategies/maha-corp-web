@@ -21,6 +21,7 @@
     "verify:api-credit-billing": "node --experimental-strip-types scripts/verify-api-credit-billing.ts",
     "test:capacity": "node --experimental-strip-types scripts/run-capacity-test.ts",
     "verify:x402-limiter": "node --experimental-strip-types scripts/verify-x402-limiter.ts",
+    "measure:compression-scale": "node --experimental-strip-types scripts/measure-compression-scale.ts",
     "measure:compression": "node --experimental-strip-types scripts/measure-compression.ts",
     "verify:x402-sepolia": "node --experimental-strip-types scripts/verify-x402-sepolia.ts",
     "build:sdk": "npm --prefix packages/sdk run build",
