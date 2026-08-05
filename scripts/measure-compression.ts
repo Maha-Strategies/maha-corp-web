@@ -163,8 +163,10 @@ for (const corpus of corpora) {
     String(row.inputTokens),
     String(row.outputTokens),
     `${row.reductionPercent.toFixed(1)}%`,
-    `${row.needlesRetained}/${row.needlesTotal}`,
-    row.needlesRetained === row.needlesTotal ? 'ok' : row.needlesRetained === 0 ? 'ANSWER LOST' : 'PARTIAL',
+    row.needlesTotal === 0 ? '—' : `${row.needlesRetained}/${row.needlesTotal}`,
+    row.needlesTotal === 0 ? 'unlabelled'
+      : row.needlesRetained === row.needlesTotal ? 'ok'
+      : row.needlesRetained === 0 ? 'ANSWER LOST' : 'PARTIAL',
     `${row.latencyP50Ms.toFixed(2)}ms`,
   ])
   console.log(`${corpus.name} — "${corpus.task}"`)
