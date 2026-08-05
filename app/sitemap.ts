@@ -17,9 +17,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${baseUrl}/consulting/evidence-policy`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.8 },
     { url: `${baseUrl}/method`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.8 },
     { url: `${baseUrl}/software`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.8 },
-    { url: `${baseUrl}/geometric-ai`, lastModified: new Date('2026-07-29'), changeFrequency: 'monthly', priority: 0.8 },
-    { url: `${baseUrl}/holographic-qec`, lastModified: new Date('2026-07-29'), changeFrequency: 'monthly', priority: 0.8 },
-    { url: `${baseUrl}/landscape-opt`, lastModified: new Date('2026-07-29'), changeFrequency: 'monthly', priority: 0.8 },
     { url: `${baseUrl}/doctrine`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.8 },
     { url: `${baseUrl}/research`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.8 },
     { url: `${baseUrl}/start`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.8 },
@@ -192,7 +189,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
     {
       url: `${baseUrl}/intelligence/briefs/angstrom-era-soc-architecture`,
-      lastModified: new Date('2026-05-28'),
+      lastModified: new Date('2026-08-05'),
       changeFrequency: 'monthly',
       priority: 0.8,
     },
@@ -300,7 +297,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
     {
       url: `${baseUrl}/intelligence/briefs/us-foundry-sovereignization`,
-      lastModified: new Date('2026-05-29'),
+      lastModified: new Date('2026-08-05'),
       changeFrequency: 'monthly',
       priority: 0.8,
     },
@@ -372,7 +369,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
     {
       url: `${baseUrl}/intelligence/briefs/automotive-cloud-virtual-verification`,
-      lastModified: new Date('2026-07-15'),
+      lastModified: new Date('2026-08-05'),
       changeFrequency: 'monthly',
       priority: 0.8,
     },

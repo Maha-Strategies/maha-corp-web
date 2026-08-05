@@ -1,8 +1,8 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://mahastrategies.com/schemas/maha-worker-contract-1.0.0.json",
+  "$id": "urn:maha:internal:worker-contract:1.0.0",
   "title": "Maha optimization worker contract v1.0.0",
-  "description": "The two payloads exchanged between the Maha Vercel backend and an external GPU compute worker (Modal, RunPod, AWS). $defs.WorkerHandoff is sent to the worker; $defs.WorkerCallback is what the worker POSTs to /api/v1/jobs/webhook. Both are generated from lib/jobs/contract.ts, which is the authoritative definition.",
+  "description": "Internal pre-release worker contract. It is not a public API promise and must not be published until the solver promotion gate passes. lib/jobs/contract.ts is authoritative.",
   "oneOf": [{ "$ref": "#/$defs/WorkerHandoff" }, { "$ref": "#/$defs/WorkerCallback" }],
   "$defs": {
     "QuboTerm": {

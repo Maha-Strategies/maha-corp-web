@@ -27,10 +27,9 @@ export function buildLlmsManifest(claims: readonly MpsClaim[]): string {
     '',
     '## Public API endpoints',
     '- OpenAPI document: https://www.mahastrategies.com/api/docs/openapi',
-    '- Tensor-Opt mock: https://www.mahastrategies.com/api/v1/tensor-opt',
-    '- Geometric AI mock: https://www.mahastrategies.com/api/v1/geometric-ai',
-    '- Holographic QEC mock: https://www.mahastrategies.com/api/v1/holographic-qec',
-    '- Landscape-Opt mock: https://www.mahastrategies.com/api/v1/landscape-opt',
+    '- Context compression: https://www.mahastrategies.com/api/v1/compress',
+    '- MPS audit: https://www.mahastrategies.com/api/mps-audits',
+    '- Free MPS preflight: https://www.mahastrategies.com/api/audit',
     '',
     // The commercial surfaces an evaluating agent needs next. Payment always
     // requires a human purchaser; the manifest states that boundary itself.

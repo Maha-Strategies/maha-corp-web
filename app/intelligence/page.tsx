@@ -26,8 +26,8 @@ const BRIEFS: BriefData[] = [
     group: 'MACRO & SYSTEMS',
     category: 'MACRO.GEOPOLITICS',
     status: 'VOLATILE',
-    title: 'Intel IDM 2.0 Strategy: U.S. Foundry Economics and Policy',
-    description: 'How foundry economics, external-customer trust, CHIPS Act incentives, and domestic sourcing policy shape U.S. semiconductor manufacturing.',
+    title: 'Intel IDM 2.0: U.S. Foundry Strategy, Modernization, and Economics',
+    description: 'How foundry modernization, economics, external-customer trust, CHIPS Act incentives, and domestic sourcing policy shape U.S. semiconductor manufacturing.',
     href: '/intelligence/briefs/us-foundry-sovereignization',
   },
   {
@@ -100,8 +100,8 @@ const BRIEFS: BriefData[] = [
     group: 'HARDWARE & INFRASTRUCTURE',
     category: 'SILICON.NODES',
     status: 'ACTIVE',
-    title: 'Angstrom-Era Semiconductors: 2nm SoC Architecture and Edge AI',
-    description: 'How 2nm SoC architecture, GAA transistors, backside power, High-NA EUV, and CFET affect edge-AI design trade-offs.',
+    title: 'Angstrom Era Semiconductors: 2nm SoC Architecture and Edge AI',
+    description: 'What the Angstrom Era means for 2nm SoC architecture, GAA transistors, backside power, High-NA EUV, and edge-AI trade-offs.',
     href: '/intelligence/briefs/angstrom-era-soc-architecture',
   },
   {
@@ -318,8 +318,8 @@ const BRIEFS: BriefData[] = [
     group: 'INTELLIGENCE & CYBERNETICS',
     category: 'AUTOMOTIVE.SOFTWARE',
     status: 'PRELIMINARY',
-    title: 'Cloud Virtual Verification for Automotive Software',
-    description: 'A market-structure assessment of cloud verification, HIL bottlenecks, CI regression value, and preliminary pricing bands.',
+    title: 'Hardware-Assisted Verification Systems: Automotive Market Framework',
+    description: 'A market framework for hardware-assisted verification, cloud-based virtual verification, and hardware-in-the-loop constraints in automotive software.',
     href: '/intelligence/briefs/automotive-cloud-virtual-verification',
   },
   {

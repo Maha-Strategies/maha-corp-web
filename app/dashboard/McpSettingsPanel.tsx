@@ -57,7 +57,7 @@ export function McpSettingsPanel({ apiKey }: { apiKey: string }) {
     if (!upstreamToken.trim()) { setError('Provide the bearer credential for the upstream server.'); return }
     setLoading(true); setError(null); setNotice(null); setRegistered(null)
     try {
-      const result = await client().mcp.registerServer({ name: name.trim(), baseUrl: endpoint, authType: 'bearer', secret: upstreamToken.trim(), allowedEngines: ['*'] })
+      const result = await client().mcp.registerServer({ name: name.trim(), baseUrl: endpoint, authType: 'bearer', secret: upstreamToken.trim() })
       setRegistered(result); await loadServers(); setName(''); setBaseUrl(''); setUpstreamToken('')
     } catch (caught) { setError(caught instanceof Error ? caught.message : 'The upstream MCP server could not be registered.') }
     finally { setLoading(false) }

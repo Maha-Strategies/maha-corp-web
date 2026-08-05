@@ -70,7 +70,7 @@ test('a path that cannot release its slot cannot be priced', async () => {
   // slots nobody frees and paying callers see 429s that look like load.
   const { releasesSlot, withSlotRelease } = await import('../lib/x402/slot.ts')
   assert.throws(
-    () => x402Config({ ...ENV, X402_RESOURCES: '[{"pathPrefix":"/api/v1/jobs/tensor-opt","amount":"1","description":"d","concurrencyCap":1}]' }),
+    () => x402Config({ ...ENV, X402_RESOURCES: '[{"pathPrefix":"/api/v1/jobs/private-reference","amount":"1","description":"d","concurrencyCap":1}]' }),
     /does not release its concurrency slot/,
   )
   assert.equal(releasesSlot('/api/v1/compress'), true)

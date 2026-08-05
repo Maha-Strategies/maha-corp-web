@@ -5,7 +5,8 @@ export interface MCPServerConfig {
   baseUrl: string; // e.g., "https://mcp.internal-enterprise.com/v1"
   authType: 'bearer' | 'hmac' | 'none';
   authSecretEncrypted?: string; // Encrypted upstream key/token
-  allowedEngines: Array<'tensor-opt' | 'geometric-ai' | 'qec-compiler' | 'landscape-opt' | '*'>;
+  /** Internal compatibility field. Public registration does not expose unfinished Maha engines. */
+  allowedEngines: ['*'];
   status: 'active' | 'suspended';
   createdAt: number;
   discovery: MCPToolDiscovery;
