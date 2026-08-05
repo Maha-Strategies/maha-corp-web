@@ -15,22 +15,24 @@ export const CONTEXT_COMPILER_VERSION = '0.1.0'
  * Bytes rather than tokens because the cap has to be checked before the body
  * is parsed. Real agent traces run about 3.8 bytes per token.
  */
-// Derived, not chosen. Fitted against measured p50 compute with the current
-// defaults (bm25 + compound tokenization), at ~3.45 bytes per token:
+// Derived from measured tail latency, not from an average and not chosen.
 //
-//   p50 50ms  -> 211,000 tokens  -> 715,000 bytes   (standard)
-//   p50 100ms -> 422,000 tokens  -> 1,430,000 bytes (enterprise)
+// SLAs are written against p95, so the caps are too. Measured over 60 runs per
+// size with the current defaults (bm25 + compound tokenization), at roughly
+// 3.45 bytes per token:
 //
-// These are below the 250k/450k originally proposed. That proposal rested on a
-// 47ms reading taken at 223,340 tokens before compound tokenization existed;
-// tokenization costs roughly 25% more compute, and 250,000 tokens now measures
-// about 59ms. The latency commitment was kept and the token figure moved,
-// rather than the reverse.
+//   150,076 tokens   p50 34.6ms   p95 41.7ms   p99 54.1ms
+//   202,276 tokens   p50 44.6ms   p95 50.9ms   p99 86.6ms
+//   358,151 tokens   p50 82.2ms   p95 89.5ms   p99 95.6ms
 //
-// Both are p50. p95 runs 5-30% higher and crosses 50ms nearer 150,000 tokens,
-// so an SLA written against p95 needs a lower cap again.
-export const STANDARD_MAX_CONTEXT_PACK_BYTES = 715_000
-export const ENTERPRISE_MAX_CONTEXT_PACK_BYTES = 1_430_000
+// A median-based cap would have sat near 210,000 tokens and missed a sub-50ms
+// p95 by about a millisecond, which is the difference between an SLA that
+// holds under load and one that is quietly breached in the tail.
+//
+// p99 still exceeds 50ms at the standard cap. An SLA written against p99 needs
+// a lower figure again; this is honest about which percentile it guarantees.
+export const STANDARD_MAX_CONTEXT_PACK_BYTES = 525_000
+export const ENTERPRISE_MAX_CONTEXT_PACK_BYTES = 1_200_000
 
 /** Retained for callers that imported the old name; equals the standard cap. */
 export const MAX_CONTEXT_PACK_BYTES = STANDARD_MAX_CONTEXT_PACK_BYTES
