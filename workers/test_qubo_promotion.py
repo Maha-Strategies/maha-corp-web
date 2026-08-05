@@ -14,7 +14,7 @@ def valid_evidence():
     case = {
         "size": 64,
         "repeats": 5,
-        "algorithm": "multi-start-simulated-annealing-torch",
+        "algorithm": "parallel-update-simulated-annealing-torch-v1",
         "latencyP95Ms": 20.0,
         "runs": [{**run, "repeat": index} for index in range(5)],
     }

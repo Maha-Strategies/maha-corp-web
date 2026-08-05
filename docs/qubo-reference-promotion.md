@@ -2,7 +2,7 @@
 
 ## Current status
 
-The reference engine is private and has no customer execution endpoint. It is a transparent multi-start
+The reference engine is private and has no customer execution endpoint. It is a transparent parallel-replica
 simulated-annealing heuristic implemented with Torch. It is not Tensor-Opt,
 does not use tensor networks, and does not claim an optimal solution or a
 certified bound for instances above the exact-enumeration threshold.
@@ -31,11 +31,15 @@ Choose the production p95 budget before looking at the result, then run:
 ```bash
 python3 scripts/verify-qubo-promotion.py \
   qubo-benchmark-evidence.json \
-  --maximum-p95-ms <reviewed-warm-solver-budget>
+  --maximum-p95-ms 500
 ```
 
 This is warm solver latency, not API end-to-end latency. Record Modal cold
 start, Vercel dispatch, queue delay, callback, and polling latency separately.
+
+The reviewed promotion budget is 500 ms warm p95 for every committed benchmark
+case through 256 variables. This is an asynchronous optimization-engine budget;
+it does not replace or reinterpret the separate Context Compression API SLA.
 
 ## Required gates
 
