@@ -352,7 +352,7 @@ def benchmark_torch(
         "backend": "cuda",
         "device": torch.cuda.get_device_name(device),
         "deviceTotalMemoryBytes": int(properties.total_memory),
-        "torchVersion": torch.__version__,
+        "torchVersion": str(torch.__version__),
         "cudaVersion": torch.version.cuda,
         "cases": cases,
     }

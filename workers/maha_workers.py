@@ -43,7 +43,9 @@ def benchmark_qubo_reference(commit: str) -> Dict[str, Any]:
     evidence["commit"] = commit
     evidence["generatedAt"] = datetime.now(timezone.utc).isoformat()
     evidence["benchmarkWallClockMs"] = round((time.perf_counter() - started) * 1_000, 3)
-    return evidence
+    # Modal pickles return values. A TorchVersion instance would otherwise make
+    # the local client require Torch merely to receive JSON-shaped evidence.
+    return json.loads(json.dumps(evidence))
 
 
 @app.local_entrypoint()
