@@ -13,7 +13,18 @@ function estimateTokens(value: string) { const jsonLike = /^\s*[{[]/.test(value)
 export function TokenCostCalculator() {
   const [payload, setPayload] = useState(''); const [copied, setCopied] = useState(''); const [email, setEmail] = useState(''); const [apiKey, setApiKey] = useState(''); const [apiKeyId, setApiKeyId] = useState(''); const [error, setError] = useState(''); const [showKeyForm, setShowKeyForm] = useState(false); const [loading, setLoading] = useState(false)
   const metrics = useMemo(() => { const bytes = new TextEncoder().encode(payload).byteLength; const tokens = estimateTokens(payload); return { bytes, tokens, compression: 0.45 } }, [payload])
-  const snippets = useMemo(() => { const body = JSON.stringify({ clientRequestId: 'replace-with-unique-request-id', problem: { formulation: 'qubo', variableCount: 100 } }); return { curl: `curl https://www.mahastrategies.com/api/v1/tensor-opt \\\n+  -H "Authorization: Bearer ${apiKey || 'YOUR_MAHA_API_KEY'}" \\\n+  -H "Content-Type: application/json" \\\n+  -d '${body}'`, python: `import requests\n\nresponse = requests.post(\n    "https://www.mahastrategies.com/api/v1/tensor-opt",\n    headers={"Authorization": "Bearer ${apiKey || 'YOUR_MAHA_API_KEY'}"},\n    json=${body},\n    timeout=30,\n)\nprint(response.json())` } }, [apiKey])
+  const snippets = useMemo(() => {
+    const body = JSON.stringify({
+      clientRequestId: 'replace-with-unique-request-id',
+      task: 'Extract the decision, constraints, and evidence gaps.',
+      tokenBudget: 600,
+      documents: [{ id: 'brief-1', title: 'Planning brief', text: payload || 'Paste your source text here.' }],
+    })
+    return {
+      curl: `curl https://www.mahastrategies.com/api/v1/compress \\\n+  -H "Authorization: Bearer ${apiKey || 'YOUR_MAHA_API_KEY'}" \\\n+  -H "Content-Type: application/json" \\\n+  -d '${body}'`,
+      python: `import requests\n\nresponse = requests.post(\n    "https://www.mahastrategies.com/api/v1/compress",\n    headers={"Authorization": "Bearer ${apiKey || 'YOUR_MAHA_API_KEY'}"},\n    json=${body},\n    timeout=30,\n)\nprint(response.json())`,
+    }
+  }, [apiKey, payload])
   async function copy(label: string, value: string) { await navigator.clipboard.writeText(value); setCopied(label); window.setTimeout(() => setCopied(''), 1600) }
   async function generateKey(event: React.FormEvent) { event.preventDefault(); setLoading(true); setError(''); try { const response = await fetch('/api/v1/keys/generate', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ email }) }); const result = await response.json().catch(() => null) as { apiKey?: string; apiKeyId?: string; error?: { message?: string } } | null; if (!response.ok || !result?.apiKey || !result.apiKeyId) throw new Error(result?.error?.message ?? 'We could not generate a key. Please try again shortly.'); setApiKey(result.apiKey); setApiKeyId(result.apiKeyId) } catch { setError('We could not generate a key. Please try again shortly.') } finally { setLoading(false) } }
   function updatePayload(next: string) { if (next.length > MAX_PAYLOAD_CHARS) { setError('For responsive local estimates, limit a payload to 1 MB.'); return } setError(''); setPayload(next) }

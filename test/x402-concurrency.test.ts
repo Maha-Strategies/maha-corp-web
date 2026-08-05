@@ -45,7 +45,7 @@ const limiter = () => import('../lib/x402/concurrency.ts')
 test('an admitted request gets a token it can later release', async () => {
   const { acquireSlot } = await limiter()
   reply = [1, 1]
-  const slot = await acquireSlot('/api/v1/jobs/tensor-opt', 2, 60)
+  const slot = await acquireSlot('/api/v1/compress', 2, 60)
   assert.equal(slot.admitted, true)
   assert.equal(slot.active, 1)
   assert.match(slot.token ?? '', /^[0-9a-f-]{36}$/)
@@ -54,7 +54,7 @@ test('an admitted request gets a token it can later release', async () => {
 test('a refused request gets no token, so it cannot release a slot it never held', async () => {
   const { acquireSlot } = await limiter()
   reply = [0, 2]
-  const slot = await acquireSlot('/api/v1/jobs/tensor-opt', 2, 60)
+  const slot = await acquireSlot('/api/v1/compress', 2, 60)
   assert.equal(slot.admitted, false)
   assert.equal(slot.active, 2)
   assert.equal(slot.token, undefined)
@@ -80,7 +80,7 @@ test('the token is scored with its own expiry, not the key', async () => {
 test('a Redis failure refuses the request rather than admitting unbounded GPU work', async () => {
   const { acquireSlot } = await limiter()
   fail = true
-  const slot = await acquireSlot('/api/v1/jobs/tensor-opt', 2, 60)
+  const slot = await acquireSlot('/api/v1/compress', 2, 60)
   assert.equal(slot.admitted, false)
   assert.equal(slot.token, undefined)
 })

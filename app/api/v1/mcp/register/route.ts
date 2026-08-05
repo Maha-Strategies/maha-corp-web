@@ -19,7 +19,7 @@ export async function POST(req: NextRequest) {
 
     let body: Record<string, unknown>
     try { body = await req.json() as Record<string, unknown> } catch { return NextResponse.json({ error: { code: 'invalid_json', message: 'Request body must be valid JSON.' } }, { status: 400 }) }
-    const { name, baseUrl, authType, secret, allowedEngines } = body;
+    const { name, baseUrl, authType, secret } = body;
 
     if (typeof name !== 'string' || name.trim().length < 2 || name.trim().length > 160 || typeof baseUrl !== 'string' || !authType) {
       return NextResponse.json(
@@ -33,18 +33,13 @@ export async function POST(req: NextRequest) {
     }
     if (authType === 'none' && secret !== undefined) return NextResponse.json({ error: 'authType none must not include a secret' }, { status: 400 });
     if (authType !== 'none' && (typeof secret !== 'string' || secret.length < 1 || secret.length > 4_096)) return NextResponse.json({ error: 'A bounded secret is required for bearer or hmac authentication' }, { status: 400 });
-    const validEngines = new Set(['tensor-opt', 'geometric-ai', 'qec-compiler', 'landscape-opt', '*'])
-    if (allowedEngines !== undefined && (!Array.isArray(allowedEngines) || allowedEngines.length < 1 || allowedEngines.length > validEngines.size || allowedEngines.some((engine) => typeof engine !== 'string' || !validEngines.has(engine)) || new Set(allowedEngines).size !== allowedEngines.length)) {
-      return NextResponse.json({ error: 'allowedEngines must be a non-empty, duplicate-free list of supported engines.' }, { status: 400 });
-    }
-
     const server = await MCPRegistry.registerServer(
       tenantId,
       {
         name: name.trim(),
         baseUrl,
         authType,
-        allowedEngines: allowedEngines ?? ['*'],
+        allowedEngines: ['*'],
         status: 'active',
       },
       typeof secret === 'string' ? secret : undefined

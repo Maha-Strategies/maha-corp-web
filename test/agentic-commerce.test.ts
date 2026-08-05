@@ -70,6 +70,10 @@ test('the served orientation file points agents at the commercial surfaces', () 
   assert.ok(llms.includes('/.well-known/agent.json'), 'the agent card must be reachable from /llms.txt')
   // The payment boundary travels with the offer, not only on the purchase page.
   assert.match(llms, /human purchaser must authorize/i)
+  assert.match(llms, /api\/v1\/compress/)
+  for (const marker of ['tensor-opt', 'geometric-ai', 'holographic-qec', 'qec-compiler', 'landscape-opt']) {
+    assert.equal(llms.toLowerCase().includes(marker), false, `${marker} must not be publicly discoverable`)
+  }
 })
 
 test('agent context links only to the canonical public discovery surfaces', () => {

@@ -201,7 +201,7 @@ test('a payment for one resource cannot be presented for another', () => {
   // Requirements bind to an exact URL, so a challenge issued for a cheap
   // endpoint cannot be answered against an expensive one.
   const audit = requirement({ resource: 'https://www.mahastrategies.com/api/mps-audits', maxAmountRequired: '1000' })
-  const solver = requirement({ resource: 'https://www.mahastrategies.com/api/v1/jobs/tensor-opt', maxAmountRequired: '500000' })
+  const solver = requirement({ resource: 'https://www.mahastrategies.com/api/v1/compress', maxAmountRequired: '500000' })
   assert.notEqual(audit.resource, solver.resource)
   assert.notEqual(audit.maxAmountRequired, solver.maxAmountRequired)
 })

@@ -53,9 +53,10 @@ const PRIVATE_ROUTES = new Set([
   '/api/docs/openapi',
   '/api/webhooks/stripe',
   '/api/stripe/checkout',
-  '/api/v1/jobs/tensor-opt',
   '/api/v1/jobs/[jobId]',
   '/api/v1/jobs/webhook',
+  // Optimization engines remain private until real solver implementations,
+  // hardware benchmarks, and SLA evidence have passed the promotion gate.
   '/api/inbound-submissions',
   '/api/internal/ops-alerts',
   '/api/integrations/base44/openapi',
@@ -131,5 +132,12 @@ test('spec is structurally sound and self-consistent', () => {
         assert.ok(documentedTags.has(tag), `operation tag "${tag}" is not declared in the tags list`)
       }
     }
+  }
+})
+
+test('unfinished optimization engines are absent from the public contract', () => {
+  const publicContract = JSON.stringify(openApiDocument).toLowerCase()
+  for (const marker of ['tensor-opt', 'geometric-ai', 'holographic-qec', 'qec-compiler', 'landscape-opt']) {
+    assert.equal(publicContract.includes(marker), false, `${marker} must stay private until its promotion gate passes`)
   }
 })

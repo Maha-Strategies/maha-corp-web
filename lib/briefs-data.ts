@@ -347,14 +347,14 @@ export const BRIEFS: Brief[] = [
   },
   {
     slug: 'angstrom-era-soc-architecture',
-    title: 'Angstrom-Era Semiconductors: 2nm SoC Architecture and Edge AI',
-    seoTitle: 'Angstrom-Era Semiconductors: 2nm SoC Strategy',
+    title: 'Angstrom Era Semiconductors: 2nm SoC Architecture and Edge AI',
+    seoTitle: 'Angstrom Era Semiconductors: 2nm SoC Strategy',
     kicker: 'CORE.SILICON.NODES',
     description:
-      'An Angstrom-era semiconductor analysis of 2nm SoC architecture, GAA transistors, backside power delivery, High-NA EUV, and edge-AI design trade-offs.',
+      'What the Angstrom Era means for semiconductors: a 2nm SoC analysis covering GAA transistors, backside power delivery, High-NA EUV, and edge-AI design trade-offs.',
     status: 'ACTIVE',
     datePublished: '2026-05-28',
-    dateModified: '2026-07-15',
+    dateModified: '2026-08-05',
     intro: 'Angstrom-era semiconductor roadmaps are often discussed as a simple node race. For strategy teams, the useful question is more concrete: which design, manufacturing, packaging, and power-delivery changes must work together before a 2nm-class platform creates a defendable performance-per-watt advantage?',
     sections: [
       {
@@ -1089,13 +1089,13 @@ export const BRIEFS: Brief[] = [
   },
   {
     slug: 'us-foundry-sovereignization',
-    title: 'Intel IDM 2.0 Strategy: U.S. Foundry Economics and Policy',
-    seoTitle: 'Intel IDM 2.0 Strategy & U.S. Foundry Economics',
+    title: 'Intel IDM 2.0: U.S. Foundry Strategy, Modernization, and Economics',
+    seoTitle: 'Intel IDM 2.0: U.S. Foundry Strategy & Modernization',
     kicker: 'MACRO.GEOPOLITICS // STAKEHOLDER AUDIT',
-    description: 'An Intel IDM 2.0 strategy analysis: how foundry economics, external-customer trust, CHIPS Act incentives, and domestic sourcing policy shape U.S. semiconductor manufacturing.',
+    description: 'An Intel IDM 2.0 and U.S. foundry strategy analysis: how modernization, economics, external-customer trust, CHIPS Act incentives, and domestic sourcing policy shape semiconductor manufacturing.',
     status: 'VOLATILE',
     datePublished: '2026-05-29',
-    dateModified: '2026-07-15',
+    dateModified: '2026-08-05',
     intro: 'Intel IDM 2.0 is best evaluated as a foundry-transition problem, not only as a geopolitical narrative. The strategy must simultaneously earn external customer confidence, sustain costly process and capacity learning, and satisfy a U.S. policy objective that values domestic leading-edge capability beyond near-term factory returns.',
     sections: [
       { level: 2, heading: 'Executive Summary', paragraphs: [
@@ -1863,11 +1863,13 @@ export const BRIEFS: Brief[] = [
   },
   {
     slug: 'automotive-cloud-virtual-verification',
-    title: 'Cloud Virtual Verification for Automotive Software',
+    title: 'Hardware-Assisted Verification Systems: Cloud Virtual Verification for Automotive Software',
+    seoTitle: 'Hardware-Assisted Verification Systems: Automotive Market Framework',
     kicker: 'CORE.AUTOMOTIVE.SOFTWARE',
-    description: 'A market-structure assessment of cloud-based virtual verification as a complement to hardware-in-the-loop validation, including value concentration and preliminary willingness-to-pay bands.',
+    description: 'A hardware-assisted verification system market framework for automotive software: cloud-based virtual verification, hardware-in-the-loop constraints, value concentration, and preliminary willingness-to-pay bands.',
     status: 'PRELIMINARY',
     datePublished: '2026-07-15',
+    dateModified: '2026-08-05',
     intro: 'This brief converts the supplied product hypothesis into an adoption and pricing framework. Willingness-to-pay bands are design assumptions, not survey results.',
     sections: [
       {
@@ -1893,6 +1895,14 @@ export const BRIEFS: Brief[] = [
         paragraphs: [
           'The supplied willingness-to-pay hypothesis centers on $5,001 to $20,000 per developer per year for higher-value infrastructure use. A lighter $1,001 to $5,000 tier could serve application developers using software-in-the-loop environments, while higher-fidelity target simulation, rest-bus capability, and ASPICE or ISO 26262 traceability support justify a premium tier.',
           'The critical commercial test is whether pricing follows the value of avoiding HIL queue time and late defect discovery, rather than simply matching generic developer-tool budgets.'
+        ]
+      },
+      {
+        level: 2,
+        heading: '04. Define the Hardware-Assisted Verification Market Before Sizing It',
+        paragraphs: [
+          '“Hardware-assisted verification system” can describe hardware-in-the-loop rigs, virtual electronic-control-unit environments, target simulators, vehicle-network test systems, or a combined workflow. Those categories have different buyers, deployment models, and economics. A credible market assessment must state whether it measures physical HIL equipment, software licences, cloud execution, engineering services, or the broader verification workflow.',
+          'For automotive software teams, the commercial opportunity is often created by the boundary between those categories: virtual environments can increase the number of regression cycles completed before a constrained physical rig is needed. The value is therefore best assessed through avoided scheduling delay, earlier defect detection, and reusable test coverage, rather than by treating all verification spend as one interchangeable market.'
         ]
       }
     ]
