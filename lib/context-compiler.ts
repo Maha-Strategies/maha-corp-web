@@ -139,11 +139,47 @@ function normalize(value: string): string {
   return value.replace(/\r\n?/g, '\n').replace(/[ \t]+/g, ' ').replace(/\n{3,}/g, '\n\n').trim()
 }
 
-function keywords(task: string): Set<string> {
-  return new Set((task.toLowerCase().match(/[a-z0-9][a-z0-9-]{2,}/g) ?? []).filter((word) => !new Set(['that', 'with', 'from', 'this', 'into', 'about', 'which', 'their', 'should', 'would', 'could', 'while', 'where', 'when']).has(word)))
+const STOPWORDS = new Set([
+  'that', 'with', 'from', 'this', 'into', 'about', 'which', 'their', 'should', 'would', 'could',
+  'while', 'where', 'when', 'the', 'was', 'were', 'what', 'did', 'does', 'any', 'are', 'and',
+  'for', 'has', 'have', 'had', 'its', 'our', 'you', 'your', 'been', 'being', 'there', 'here',
+])
+
+/**
+ * Words, plus the parts of any compound they were built from.
+ *
+ * Identifiers are the reason. Agent traces are mostly code and paths, where
+ * the answer lives in `AuditAccessCheckout.tsx` under `audit-access/` while
+ * the question asks about "the audit access checkout component". Matching
+ * whole tokens only, those never meet: the identifier is one token and the
+ * query is three, and a passage carrying the answer scores as if it were
+ * irrelevant. Measured on a real trace, the passage holding the answer matched
+ * exactly one query term and was never retrieved at any budget.
+ *
+ * So a camelCase or hyphenated compound contributes its parts as well as
+ * itself. The whole token is kept too, because an exact identifier match is
+ * still the strongest possible signal.
+ */
+function tokenize(value: string): string[] {
+  const tokens: string[] = []
+  for (const raw of value.match(/[A-Za-z0-9][A-Za-z0-9_-]*/g) ?? []) {
+    const lowered = raw.toLowerCase()
+    if (lowered.length >= 3) tokens.push(lowered)
+    // camelCase, PascalCase, snake_case and kebab-case all split here.
+    const parts = raw
+      .replace(/([a-z0-9])([A-Z])/g, '$1 $2')
+      .replace(/([A-Z]+)([A-Z][a-z])/g, '$1 $2')
+      .split(/[^A-Za-z0-9]+/)
+      .map((part) => part.toLowerCase())
+      .filter((part) => part.length >= 3)
+    if (parts.length > 1) tokens.push(...parts)
+  }
+  return tokens
 }
 
-const WORD = /[a-z0-9][a-z0-9-]{2,}/g
+function keywords(task: string): Set<string> {
+  return new Set(tokenize(task).filter((word) => !STOPWORDS.has(word)))
+}
 
 function splitPassages(sourceId: string, sourceTitle: string, value: string): Passage[] {
   const passages = normalize(value).split(/\n{2,}/).flatMap((paragraph) => {
@@ -156,7 +192,7 @@ function splitPassages(sourceId: string, sourceTitle: string, value: string): Pa
   return passages.map((passage, index) => ({
     sourceId, sourceTitle, index: index + 1, text: passage, hash: sha256(passage),
     estimatedTokens: estimateTokens(passage), score: 0,
-    terms: passage.toLowerCase().match(WORD) ?? [],
+    terms: tokenize(passage),
   }))
 }
 
