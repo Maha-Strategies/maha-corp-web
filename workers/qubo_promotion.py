@@ -34,7 +34,7 @@ def validate_promotion_evidence(
         if not isinstance(case, dict):
             failures.append(f"{label} must be an object")
             continue
-        if case.get("algorithm") != "multi-start-simulated-annealing-torch":
+        if case.get("algorithm") != "parallel-update-simulated-annealing-torch-v1":
             failures.append(f"{label} used an unapproved algorithm")
         repeats = case.get("repeats")
         if not isinstance(repeats, int) or repeats < minimum_repeats:

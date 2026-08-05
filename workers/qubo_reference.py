@@ -2,7 +2,7 @@
 
 This is intentionally a baseline, not a tensor-network implementation. Small
 instances are solved by exhaustive enumeration and can claim optimality. Larger
-instances use deterministic, multi-start simulated annealing on a Torch device
+instances use deterministic, parallel-update annealing across Torch replicas
 and never claim a certified bound or proof of optimality.
 """
 
@@ -161,7 +161,13 @@ def solve_cpu_annealing(problem: Dict[str, Any], solver: Dict[str, Any] | None =
 
 
 def solve_torch(problem: Dict[str, Any], solver: Dict[str, Any] | None, device: str) -> Dict[str, Any]:
-    """Run batched simulated annealing on the requested Torch device."""
+    """Run transparent parallel-update annealing on the requested Torch device.
+
+    Each sweep evaluates every variable's one-flip delta from the same state,
+    applies the accepted flips in parallel, and then recomputes the exact batch
+    energy. This synchronous heuristic is deliberately named differently from
+    sequential simulated annealing because adjacent accepted flips interact.
+    """
 
     formulation, size, terms = normalize_terms(problem)
     options = solver or {}
@@ -178,24 +184,33 @@ def solve_torch(problem: Dict[str, Any], solver: Dict[str, Any] | None, device: 
     generator.manual_seed(seed)
 
     if formulation == "qubo":
-        states = torch.randint(0, 2, (replicas, size), device=device, generator=generator, dtype=torch.int8)
+        states = torch.randint(0, 2, (replicas, size), device=device, generator=generator).to(torch.float32)
     else:
-        states = torch.randint(0, 2, (replicas, size), device=device, generator=generator, dtype=torch.int8) * 2 - 1
+        states = torch.randint(0, 2, (replicas, size), device=device, generator=generator).to(torch.float32) * 2 - 1
 
     coefficient_scale = max(sum(abs(term[2]) for term in terms) / len(terms), 1e-9)
     initial_temperature = float(options.get("initialTemperature") or coefficient_scale * 4)
     final_temperature = max(float(options.get("finalTemperature") or coefficient_scale * 0.01), 1e-12)
-    adjacency: List[List[Term]] = [[] for _ in range(size)]
-    for term in terms:
-        adjacency[term[0]].append(term)
-        if term[1] != term[0]:
-            adjacency[term[1]].append(term)
+    diagonal = torch.zeros(size, device=device, dtype=torch.float32)
+    interactions = torch.zeros((size, size), device=device, dtype=torch.float32)
+    diagonal_indices = [i for i, j, _ in terms if i == j]
+    diagonal_values = [coefficient for i, j, coefficient in terms if i == j]
+    if diagonal_indices:
+        diagonal.index_put_(
+            (torch.tensor(diagonal_indices, device=device),),
+            torch.tensor(diagonal_values, device=device, dtype=torch.float32),
+            accumulate=True,
+        )
+    off_diagonal = [(i, j, coefficient) for i, j, coefficient in terms if i != j]
+    if off_diagonal:
+        rows = torch.tensor([item[0] for item in off_diagonal], device=device)
+        columns = torch.tensor([item[1] for item in off_diagonal], device=device)
+        values = torch.tensor([item[2] for item in off_diagonal], device=device, dtype=torch.float32)
+        interactions.index_put_((rows, columns), values, accumulate=True)
+        interactions.index_put_((columns, rows), values, accumulate=True)
 
     def batch_energy() -> Any:
-        result = torch.zeros(replicas, device=device, dtype=torch.float64)
-        for i, j, coefficient in terms:
-            result += coefficient * states[:, i].to(torch.float64) * states[:, j].to(torch.float64)
-        return result
+        return (states * diagonal).sum(dim=1) + 0.5 * (states * (states @ interactions)).sum(dim=1)
 
     energies = batch_energy()
     best_index = int(torch.argmin(energies).item())
@@ -206,28 +221,20 @@ def solve_torch(problem: Dict[str, Any], solver: Dict[str, Any] | None, device: 
     for sweep in range(sweeps):
         ratio = sweep / max(sweeps - 1, 1)
         temperature = initial_temperature * (final_temperature / initial_temperature) ** ratio
-        for variable_tensor in torch.randperm(size, generator=generator, device=device):
-            variable = int(variable_tensor.item())
-            current = states[:, variable].to(torch.float64)
-            delta = torch.zeros(replicas, device=device, dtype=torch.float64)
-            for i, j, coefficient in adjacency[variable]:
-                if i == j:
-                    if formulation == "qubo":
-                        delta += coefficient * (1 - 2 * current)
-                    continue
-                other = j if i == variable else i
-                other_state = states[:, other].to(torch.float64)
-                if formulation == "qubo":
-                    delta += coefficient * (1 - 2 * current) * other_state
-                else:
-                    delta += -2 * coefficient * current * other_state
-
-            probabilities = torch.exp(torch.clamp(-delta / temperature, max=0))
-            accepted = (delta <= 0) | (torch.rand(replicas, device=device, generator=generator) < probabilities)
-            if bool(accepted.any()):
-                states[accepted, variable] = (1 - states[accepted, variable]) if formulation == "qubo" else -states[accepted, variable]
-                energies[accepted] += delta[accepted]
-                accepted_moves += int(accepted.sum().item())
+        neighbor_field = states @ interactions
+        if formulation == "qubo":
+            delta = (1 - 2 * states) * (diagonal + neighbor_field)
+            flipped = 1 - states
+        else:
+            delta = -2 * states * neighbor_field
+            flipped = -states
+        probabilities = torch.exp(torch.clamp(-delta / temperature, max=0))
+        accepted = (delta <= 0) | (
+            torch.rand((replicas, size), device=device, generator=generator) < probabilities
+        )
+        states = torch.where(accepted, flipped, states)
+        accepted_moves += int(accepted.sum().item())
+        energies = batch_energy()
 
         current_index = int(torch.argmin(energies).item())
         current_value = float(energies[current_index].item())
@@ -247,7 +254,7 @@ def solve_torch(problem: Dict[str, Any], solver: Dict[str, Any] | None, device: 
             "provenOptimal": False,
         },
         "diagnostics": {
-            "algorithm": "multi-start-simulated-annealing-torch",
+            "algorithm": "parallel-update-simulated-annealing-torch-v1",
             "replicas": replicas,
             "acceptedMoves": accepted_moves,
             "sweepsCompleted": sweeps,
@@ -338,7 +345,7 @@ def benchmark_torch(
             "size": size,
             "termCount": len(problem["terms"]),
             "repeats": repeats,
-            "algorithm": "multi-start-simulated-annealing-torch",
+            "algorithm": "parallel-update-simulated-annealing-torch-v1",
             "sweeps": sweeps,
             "replicas": replicas,
             "latencyP50Ms": round(median(ordered), 3),
