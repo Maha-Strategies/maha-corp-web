@@ -18,6 +18,22 @@ const MAX_DOCUMENT_BYTES = 64_000
  */
 export type ProvenanceStyle = 'full' | 'compact' | 'none'
 
+/**
+ * How a passage's relevance to the task is scored.
+ *
+ * `keyword` counts how many task terms appear, each worth ten. Every term is
+ * worth the same, so a term appearing in almost every passage carries as much
+ * weight as one appearing twice. On a large payload that is fatal: hundreds of
+ * passages tie on a common word, the tie breaks on position rather than
+ * relevance, and a genuinely relevant passage further down is crowded out.
+ * Measured, this loses an answer somewhere between 35k and 54k input tokens.
+ *
+ * `bm25` weights each term by how rare it is across the payload and saturates
+ * repeated occurrences, so a word present everywhere contributes almost
+ * nothing and a rare one dominates.
+ */
+export type ScoringMode = 'keyword' | 'bm25'
+
 export type ContextPackRequest = {
   clientRequestId: string
   task: string
@@ -25,9 +41,11 @@ export type ContextPackRequest = {
   documents: Array<{ id: string; title?: string; text: string }>
   /** Defaults to 'full', which is the behaviour callers already depend on. */
   provenance?: ProvenanceStyle
+  /** Defaults to 'keyword', the original scoring. */
+  scoring?: ScoringMode
 }
 
-type Passage = { sourceId: string; sourceTitle: string; index: number; text: string; hash: string; estimatedTokens: number; score: number }
+type Passage = { sourceId: string; sourceTitle: string; index: number; text: string; hash: string; estimatedTokens: number; score: number; terms: string[] }
 
 function object(value: unknown): Record<string, unknown> | null {
   return typeof value === 'object' && value !== null && !Array.isArray(value) ? value as Record<string, unknown> : null
@@ -82,7 +100,9 @@ export function parseContextPackRequest(value: unknown): ContextPackRequest {
   if (provenance !== 'full' && provenance !== 'compact' && provenance !== 'none') {
     throw new Error('provenance must be one of: full, compact, none.')
   }
-  return { clientRequestId: singleLine(body.clientRequestId, 'clientRequestId', 8, 120), task, tokenBudget: body.tokenBudget, documents, provenance }
+  const scoring = body.scoring === undefined ? 'keyword' : body.scoring
+  if (scoring !== 'keyword' && scoring !== 'bm25') throw new Error('scoring must be one of: keyword, bm25.')
+  return { clientRequestId: singleLine(body.clientRequestId, 'clientRequestId', 8, 120), task, tokenBudget: body.tokenBudget, documents, provenance, scoring }
 }
 
 function normalize(value: string): string {
@@ -93,22 +113,84 @@ function keywords(task: string): Set<string> {
   return new Set((task.toLowerCase().match(/[a-z0-9][a-z0-9-]{2,}/g) ?? []).filter((word) => !new Set(['that', 'with', 'from', 'this', 'into', 'about', 'which', 'their', 'should', 'would', 'could', 'while', 'where', 'when']).has(word)))
 }
 
-function splitPassages(sourceId: string, sourceTitle: string, value: string, terms: Set<string>): Passage[] {
+const WORD = /[a-z0-9][a-z0-9-]{2,}/g
+
+function splitPassages(sourceId: string, sourceTitle: string, value: string): Passage[] {
   const passages = normalize(value).split(/\n{2,}/).flatMap((paragraph) => {
     // Long paragraphs are bounded so a single unranked block cannot consume a pack.
     if (paragraph.length <= 1_600) return [paragraph]
     return paragraph.match(/[^.!?]+[.!?]+(?:\s|$)|.{1,1200}(?:\s|$)/g) ?? [paragraph]
   }).map((paragraph) => paragraph.trim()).filter(Boolean)
-  return passages.map((passage, index) => {
-    const words = new Set((passage.toLowerCase().match(/[a-z0-9][a-z0-9-]{2,}/g) ?? []))
+  // Scored separately: BM25 needs the whole payload's term statistics, which
+  // are not knowable while a single document is being split.
+  return passages.map((passage, index) => ({
+    sourceId, sourceTitle, index: index + 1, text: passage, hash: sha256(passage),
+    estimatedTokens: estimateTokens(passage), score: 0,
+    terms: passage.toLowerCase().match(WORD) ?? [],
+  }))
+}
+
+/** Positional preference, kept only to break exact ties deterministically. */
+const positionBonus = (index: number) => Math.max(0, 2 - Math.floor(index / 8))
+
+function scoreKeyword(passages: Passage[], terms: Set<string>): void {
+  for (const passage of passages) {
+    const words = new Set(passage.terms)
     const matches = [...terms].filter((term) => words.has(term)).length
-    return { sourceId, sourceTitle, index: index + 1, text: passage, hash: sha256(passage), estimatedTokens: estimateTokens(passage), score: matches * 10 + Math.max(0, 2 - Math.floor(index / 8)) }
-  })
+    passage.score = matches * 10 + positionBonus(passage.index - 1)
+  }
+}
+
+/**
+ * Okapi BM25 over the payload's own passages.
+ *
+ * The payload is the corpus: a term's weight comes from how many passages in
+ * *this* request contain it, so the same word can be decisive in one payload
+ * and worthless in another. That is the property the keyword scorer lacks and
+ * the reason it dilutes at scale.
+ */
+function scoreBm25(passages: Passage[], terms: Set<string>): void {
+  const K1 = 1.5
+  const B = 0.75
+  const total = passages.length
+  const averageLength = passages.reduce((sum, passage) => sum + passage.terms.length, 0) / Math.max(1, total)
+
+  const documentFrequency = new Map<string, number>()
+  for (const passage of passages) {
+    for (const term of new Set(passage.terms)) {
+      if (terms.has(term)) documentFrequency.set(term, (documentFrequency.get(term) ?? 0) + 1)
+    }
+  }
+
+  // Standard BM25 idf. The +1 keeps a term present in every passage at a small
+  // positive weight rather than a negative one, so ubiquity is worth almost
+  // nothing without ever counting against a passage.
+  const idf = new Map<string, number>()
+  for (const term of terms) {
+    const frequency = documentFrequency.get(term) ?? 0
+    idf.set(term, Math.log(1 + (total - frequency + 0.5) / (frequency + 0.5)))
+  }
+
+  for (const passage of passages) {
+    const counts = new Map<string, number>()
+    for (const term of passage.terms) if (terms.has(term)) counts.set(term, (counts.get(term) ?? 0) + 1)
+
+    let score = 0
+    for (const [term, count] of counts) {
+      const saturated = (count * (K1 + 1)) / (count + K1 * (1 - B + (B * passage.terms.length) / Math.max(1, averageLength)))
+      score += (idf.get(term) ?? 0) * saturated
+    }
+    // Scaled far below one BM25 point so position can only separate passages
+    // that are otherwise genuinely equal.
+    passage.score = score + positionBonus(passage.index - 1) * 0.001
+  }
 }
 
 export function compileContextPack(input: ContextPackRequest) {
   const terms = keywords(input.task)
-  const allPassages = input.documents.flatMap((document) => splitPassages(document.id, document.title ?? document.id, document.text, terms))
+  const allPassages = input.documents.flatMap((document) => splitPassages(document.id, document.title ?? document.id, document.text))
+  if ((input.scoring ?? 'keyword') === 'bm25') scoreBm25(allPassages, terms)
+  else scoreKeyword(allPassages, terms)
   const seen = new Set<string>()
   const unique = allPassages.filter((passage) => { if (seen.has(passage.hash)) return false; seen.add(passage.hash); return true })
   const ranked = [...unique].sort((left, right) => right.score - left.score || left.sourceId.localeCompare(right.sourceId) || left.index - right.index)

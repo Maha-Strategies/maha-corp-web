@@ -22,7 +22,7 @@
 
 import { encode } from 'gpt-tokenizer'
 
-import { compileContextPack, type ProvenanceStyle } from '../lib/context-compiler.ts'
+import { compileContextPack, type ProvenanceStyle, type ScoringMode } from '../lib/context-compiler.ts'
 
 const BUDGET = 16_000
 const RUNS = 7
@@ -73,9 +73,9 @@ type Row = {
   usPerToken: number
 }
 
-function run(turns: number, provenance: ProvenanceStyle): Row {
+function run(turns: number, provenance: ProvenanceStyle, scoring: ScoringMode = 'keyword'): Row {
   const text = agentTrace(turns)
-  const request = { clientRequestId: `scale-${turns}-${provenance}`, task: TASK, tokenBudget: BUDGET, documents: [{ id: 'trace', title: 'Agent trace', text }], provenance }
+  const request = { clientRequestId: `scale-${turns}-${provenance}`, task: TASK, tokenBudget: BUDGET, documents: [{ id: 'trace', title: 'Agent trace', text }], provenance, scoring }
 
   let pack = compileContextPack(request)
   const durations: number[] = []
@@ -110,7 +110,7 @@ function table(rows: string[][], headers: string[]): string {
 }
 
 // Turn counts chosen to land near 8k, 16k, 32k, 50k, 100k and 200k tokens.
-const SIZES = [55, 110, 220, 340, 690, 1_380]
+const SIZES = [55, 110, 220, 340, 690, 1_380, 2_760, 5_520]
 
 console.log('\n' + '='.repeat(86))
 console.log(`COMPRESSION AT SCALE — fixed ${BUDGET.toLocaleString()}-token budget, budget-bound agent trace`)
@@ -118,9 +118,10 @@ console.log('='.repeat(86))
 console.log('\nSynthetic corpus. Shape is realistic; the traffic is not. The 128 KB request')
 console.log('cap (~32k tokens) is bypassed deliberately — the question is where it should be.\n')
 
-for (const provenance of ['full', 'none'] as ProvenanceStyle[]) {
-  const rows = SIZES.map((turns) => run(turns, provenance))
-  console.log(`\nprovenance: ${provenance}`)
+for (const scoring of ['keyword', 'bm25'] as ScoringMode[]) {
+for (const provenance of ['none'] as ProvenanceStyle[]) {
+  const rows = SIZES.map((turns) => run(turns, provenance, scoring))
+  console.log(`\nscoring: ${scoring}  |  provenance: ${provenance}`)
   console.log(table(
     rows.map((row) => [
       row.inputTokens.toLocaleString(),
@@ -148,6 +149,11 @@ for (const provenance of ['full', 'none'] as ProvenanceStyle[]) {
   console.log(over50.length > 0
     ? `  first size past 50ms compute: ${over50[0].inputTokens.toLocaleString()} tokens`
     : '  no size measured exceeds 50ms of compute')
+  const lost = rows.find((row) => row.needles < 2)
+  console.log(lost
+    ? `  retention cliff: first loss at ${lost.inputTokens.toLocaleString()} input tokens`
+    : `  retention holds to ${rows[rows.length - 1].inputTokens.toLocaleString()} input tokens — no cliff measured`)
+}
 }
 
 console.log('\n' + '='.repeat(86))
