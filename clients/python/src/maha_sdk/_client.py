@@ -12,6 +12,7 @@ cannot drag a transitive vulnerability into someone else's agent.
 from __future__ import annotations
 
 import json
+import os
 import urllib.error
 import urllib.parse
 import urllib.request
@@ -102,15 +103,76 @@ class MahaClient:
         timeout: float = DEFAULT_TIMEOUT_SECONDS,
         *,
         opener: Any | None = None,
+        consented_capture: str | None = None,
     ) -> None:
+        """Create a client.
+
+        ``consented_capture`` is a directory path. When set, every payload this
+        client sends to /compress is also written there as a benchmark corpus
+        file, on the caller's own disk.
+
+        It exists because the service keeps nothing. /compress answers
+        ``sourceTextStored: false`` and that is a deliberate property, not a gap
+        to be closed later, so there is no server-side corpus to improve the
+        compiler against and there never will be. The only way to benchmark
+        against real payloads is for the party who owns them to choose to keep
+        a copy.
+
+        So this writes locally and transmits nothing extra. Nothing is uploaded,
+        no flag is sent to the server, and the request is byte-identical to one
+        made without it. Sharing a captured corpus is a separate, deliberate act
+        by whoever owns the data. Off unless a path is passed: a capture that
+        could switch itself on would be a retention policy, not a courtesy.
+        """
         if not api_key or not api_key.strip():
             raise ValueError("api_key is required.")
         self._api_key = api_key.strip()
         self.base_url = base_url.rstrip("/")
         self.timeout = timeout
+        self._capture_dir = consented_capture
         # Injectable so tests exercise the real request-building and
         # error-mapping paths without network access.
         self._opener = opener or urllib.request.urlopen
+
+    # -- consented capture -----------------------------------------------
+
+    def _capture(
+        self,
+        request_id: str,
+        task: str,
+        documents: list[dict[str, Any]],
+        token_budget: int,
+    ) -> None:
+        """Write one payload to the capture directory, if one was configured.
+
+        Written in the harness's corpus format so a captured directory can be
+        measured directly. ``needles`` is left empty because only a human who
+        knows the question can say which passages answer it; the harness
+        reports retention as unavailable rather than inventing a value.
+
+        Failures are swallowed. A full disk or an unwritable path must never
+        turn a benchmarking convenience into a failed API call.
+        """
+        if not self._capture_dir:
+            return
+        try:
+            os.makedirs(self._capture_dir, exist_ok=True)
+            corpus = {
+                "name": f"captured-{request_id}",
+                "task": task,
+                "description": (
+                    "Consented client-side capture. Real payload, unlabelled: "
+                    "retention cannot be measured without ground truth."
+                ),
+                "documents": documents,
+                "needles": [],
+                "tokenBudget": token_budget,
+            }
+            path = os.path.join(self._capture_dir, f"captured-{request_id}.json")
+            with open(path, "w", encoding="utf-8") as handle:
+                json.dump(corpus, handle, indent=2)
+        except OSError:
+            pass
 
     # -- transport -------------------------------------------------------
 
@@ -182,11 +244,13 @@ class MahaClient:
         if token_budget <= 0:
             raise ValueError("token_budget must be positive.")
 
+        request_id = client_request_id or _new_request_id()
+        self._capture(request_id, task, documents, token_budget)
         payload = self._request(
             "/api/v1/compress",
             method="POST",
             body={
-                "clientRequestId": client_request_id or _new_request_id(),
+                "clientRequestId": request_id,
                 "task": task,
                 "tokenBudget": token_budget,
                 "documents": documents,
