@@ -1,0 +1,105 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:maha:worker-contract:qubo-ising:2.0.0",
+  "title": "Maha GPU QUBO/Ising heuristic worker contract v2.0.0",
+  "description": "Production candidate contract for the bounded GPU heuristic. lib/jobs/contract.ts is authoritative.",
+  "oneOf": [{ "$ref": "#/$defs/WorkerHandoff" }, { "$ref": "#/$defs/WorkerCallback" }],
+  "$defs": {
+    "QuboTerm": {
+      "type": "object",
+      "required": ["i", "j", "value"],
+      "additionalProperties": false,
+      "properties": {
+        "i": { "type": "integer", "minimum": 0, "maximum": 255 },
+        "j": { "type": "integer", "minimum": 0, "maximum": 255 },
+        "value": { "type": "number" }
+      }
+    },
+    "WorkerHandoff": {
+      "type": "object",
+      "required": ["contractVersion", "jobId", "kind", "callbackUrl", "timeoutSeconds", "expiresAt", "zeroDataRetention", "problem", "solver", "target", "inputHash"],
+      "additionalProperties": false,
+      "properties": {
+        "contractVersion": { "const": "2.0.0" },
+        "jobId": { "type": "string", "pattern": "^job_[a-f0-9]{32}$" },
+        "kind": { "const": "qubo-ising" },
+        "callbackUrl": { "type": "string", "format": "uri" },
+        "timeoutSeconds": { "type": "integer", "minimum": 1, "maximum": 600 },
+        "expiresAt": { "type": "string", "format": "date-time" },
+        "zeroDataRetention": { "type": "boolean" },
+        "problem": {
+          "type": "object",
+          "required": ["formulation", "size", "terms"],
+          "additionalProperties": false,
+          "properties": {
+            "formulation": { "enum": ["qubo", "ising"] },
+            "size": { "type": "integer", "minimum": 1, "maximum": 256 },
+            "terms": { "type": "array", "minItems": 1, "maxItems": 32896, "items": { "$ref": "#/$defs/QuboTerm" } }
+          }
+        },
+        "solver": {
+          "type": "object",
+          "required": ["maxSweeps", "replicas", "seed", "exactThreshold", "initialTemperature", "finalTemperature"],
+          "additionalProperties": false,
+          "properties": {
+            "maxSweeps": { "type": "integer", "minimum": 1, "maximum": 256 },
+            "replicas": { "type": "integer", "minimum": 1, "maximum": 256 },
+            "seed": { "type": "integer", "minimum": -2147483648, "maximum": 2147483647 },
+            "exactThreshold": { "type": "integer", "minimum": 0, "maximum": 18 },
+            "initialTemperature": { "type": ["number", "null"], "exclusiveMinimum": 0 },
+            "finalTemperature": { "type": ["number", "null"], "exclusiveMinimum": 0 }
+          }
+        },
+        "target": { "const": "gpu" },
+        "inputHash": { "type": "string", "pattern": "^[a-f0-9]{64}$" }
+      }
+    },
+    "WorkerCallback": {
+      "type": "object",
+      "required": ["contractVersion", "jobId", "inputHash", "status", "solution", "diagnostics", "error", "usage"],
+      "additionalProperties": false,
+      "properties": {
+        "contractVersion": { "const": "2.0.0" },
+        "jobId": { "type": "string", "pattern": "^job_[a-f0-9]{32}$" },
+        "inputHash": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+        "status": { "enum": ["completed", "failed"] },
+        "solution": {
+          "type": ["object", "null"],
+          "required": ["objectiveValue", "assignment", "bestBound", "provenOptimal"],
+          "additionalProperties": false,
+          "properties": {
+            "objectiveValue": { "type": "number" },
+            "assignment": { "type": "array", "minItems": 1, "maxItems": 256, "items": { "type": "integer", "enum": [-1, 0, 1] } },
+            "bestBound": { "type": ["number", "null"] },
+            "provenOptimal": { "type": "boolean" }
+          }
+        },
+        "diagnostics": {
+          "type": ["object", "null"],
+          "required": ["algorithm", "sweepsCompleted", "replicas", "acceptedMoves", "wallClockSeconds", "deviceClass"],
+          "additionalProperties": false,
+          "properties": {
+            "algorithm": { "enum": ["exhaustive-enumeration", "parallel-update-simulated-annealing-torch-v1"] },
+            "sweepsCompleted": { "type": "integer", "minimum": 0, "maximum": 256 },
+            "replicas": { "type": ["integer", "null"], "minimum": 1, "maximum": 256 },
+            "acceptedMoves": { "type": ["integer", "null"], "minimum": 0 },
+            "wallClockSeconds": { "type": "number", "minimum": 0 },
+            "deviceClass": { "type": "string", "maxLength": 64 }
+          }
+        },
+        "error": {
+          "type": ["object", "null"],
+          "required": ["code", "message"],
+          "additionalProperties": false,
+          "properties": { "code": { "type": "string", "maxLength": 64 }, "message": { "type": "string", "maxLength": 500 } }
+        },
+        "usage": {
+          "type": ["object", "null"],
+          "required": ["deviceSeconds"],
+          "additionalProperties": false,
+          "properties": { "deviceSeconds": { "type": "number", "minimum": 0 } }
+        }
+      }
+    }
+  }
+}

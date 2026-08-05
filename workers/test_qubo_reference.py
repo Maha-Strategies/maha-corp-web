@@ -57,6 +57,29 @@ class QuboReferenceTests(unittest.TestCase):
                 "termsUrl": "https://example.com/problem.json",
             })
 
+    def test_public_hardware_envelope_fails_closed(self):
+        with self.assertRaisesRegex(QuboReferenceError, "1 to 256"):
+            solve_exact({
+                "formulation": "qubo",
+                "size": 257,
+                "terms": [{"i": 0, "j": 0, "value": 1}],
+            })
+        with self.assertRaisesRegex(QuboReferenceError, "1 to 256"):
+            solve_cpu_annealing({
+                "formulation": "qubo",
+                "size": 2,
+                "terms": [{"i": 0, "j": 0, "value": 1}],
+            }, {"exactThreshold": 0, "maxSweeps": 0, "replicas": 1})
+
+    def test_exact_threshold_zero_selects_the_heuristic_boundary(self):
+        result = solve_cpu_annealing({
+            "formulation": "qubo",
+            "size": 2,
+            "terms": [{"i": 0, "j": 0, "value": -1}],
+        }, {"exactThreshold": 0, "maxSweeps": 2, "replicas": 2, "seed": 7})
+        self.assertFalse(result["solution"]["provenOptimal"])
+        self.assertIsNone(result["solution"]["bestBound"])
+
 
 if __name__ == "__main__":
     unittest.main()

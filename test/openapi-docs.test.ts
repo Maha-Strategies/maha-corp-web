@@ -53,7 +53,6 @@ const PRIVATE_ROUTES = new Set([
   '/api/docs/openapi',
   '/api/webhooks/stripe',
   '/api/stripe/checkout',
-  '/api/v1/jobs/[jobId]',
   '/api/v1/jobs/webhook',
   // Optimization engines remain private until real solver implementations,
   // hardware benchmarks, and SLA evidence have passed the promotion gate.

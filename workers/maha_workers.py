@@ -8,8 +8,11 @@ import os
 import time
 import hmac
 import json
+import re
 from datetime import datetime, timezone
 from typing import Dict, Any
+from urllib.parse import urlparse
+from urllib.request import Request, urlopen
 import modal
 from fastapi import Header, HTTPException
 
@@ -30,6 +33,99 @@ gpu_image = (
 e2e_image = modal.Image.debian_slim(python_version="3.11").pip_install("fastapi==0.115.6")
 
 maha_secrets = modal.Secret.from_name("maha-worker-secrets")
+
+
+def _post_signed_callback(callback_url: str, payload: Dict[str, Any]) -> None:
+    parsed = urlparse(callback_url)
+    hostname = parsed.hostname or ""
+    allowed = parsed.scheme == "https" and (
+        hostname in {"www.mahastrategies.com", "mahastrategies.com"} or hostname.endswith(".vercel.app")
+    )
+    if not allowed:
+        raise RuntimeError("callback URL is outside the Maha deployment boundary")
+    secret = os.environ.get("MAHA_WORKER_WEBHOOK_SECRET", "")
+    if not secret:
+        raise RuntimeError("worker callback signing is not configured")
+    body = json.dumps(payload, separators=(",", ":")).encode("utf-8")
+    timestamp = str(int(time.time()))
+    signature = hmac.new(secret.encode("utf-8"), f"{timestamp}.".encode("utf-8") + body, "sha256").hexdigest()
+    headers = {"Content-Type": "application/json", "X-Maha-Signature": f"t={timestamp},v1={signature}"}
+    bypass = os.environ.get("VERCEL_AUTOMATION_BYPASS_SECRET")
+    if bypass:
+        headers["x-vercel-protection-bypass"] = bypass
+    last_error: Exception | None = None
+    for attempt in range(3):
+        try:
+            with urlopen(Request(callback_url, data=body, headers=headers, method="POST"), timeout=20) as response:
+                if 200 <= response.status < 300:
+                    return
+                raise RuntimeError(f"callback returned HTTP {response.status}")
+        except Exception as error:
+            last_error = error
+            if attempt < 2:
+                time.sleep(2 ** attempt)
+    raise RuntimeError(f"callback delivery failed: {last_error}")
+
+
+@app.function(gpu="A10G", image=gpu_image, secrets=[maha_secrets], timeout=600)
+def run_qubo_ising(handoff: Dict[str, Any]) -> None:
+    """Execute contract v2 without logging or persisting customer coefficients."""
+    import torch
+    from workers.qubo_reference import solve_torch
+
+    if handoff.get("contractVersion") != "2.0.0" or handoff.get("kind") != "qubo-ising":
+        raise RuntimeError("unsupported QUBO/Ising worker contract")
+    job_id = handoff.get("jobId")
+    input_hash = handoff.get("inputHash")
+    if not isinstance(job_id, str) or not re.fullmatch(r"job_[a-f0-9]{32}", job_id):
+        raise RuntimeError("invalid job id")
+    if not isinstance(input_hash, str) or not re.fullmatch(r"[a-f0-9]{64}", input_hash):
+        raise RuntimeError("invalid input hash")
+
+    started = time.perf_counter()
+    device = "cuda:0" if torch.cuda.is_available() else "cpu"
+    try:
+        result = solve_torch(handoff.get("problem", {}), handoff.get("solver", {}), device)
+        torch.cuda.synchronize(device)
+        elapsed = time.perf_counter() - started
+        diagnostics = result.get("diagnostics", {})
+        payload = {
+            "contractVersion": "2.0.0", "jobId": job_id, "inputHash": input_hash, "status": "completed",
+            "solution": result["solution"],
+            "diagnostics": {
+                "algorithm": diagnostics.get("algorithm"),
+                "sweepsCompleted": diagnostics.get("sweepsCompleted", 0),
+                "replicas": diagnostics.get("replicas"),
+                "acceptedMoves": diagnostics.get("acceptedMoves"),
+                "wallClockSeconds": elapsed,
+                "deviceClass": torch.cuda.get_device_name(device),
+            },
+            "error": None, "usage": {"deviceSeconds": elapsed},
+        }
+    except Exception as error:
+        elapsed = time.perf_counter() - started
+        payload = {
+            "contractVersion": "2.0.0", "jobId": job_id, "inputHash": input_hash, "status": "failed",
+            "solution": None, "diagnostics": None,
+            "error": {"code": "compute_execution_error", "message": str(error)[:500]},
+            "usage": {"deviceSeconds": elapsed},
+        }
+    _post_signed_callback(str(handoff.get("callbackUrl", "")), payload)
+
+
+@app.function(image=e2e_image, secrets=[maha_secrets])
+@modal.fastapi_endpoint(method="POST")
+def qubo_ising_dispatch(request_data: Dict[str, Any], authorization: str = Header(default=None)):
+    expected_token = os.environ.get("MAHA_WORKER_TOKEN", "")
+    if not authorization or not authorization.startswith("Bearer "):
+        raise HTTPException(status_code=401, detail="Unauthorized")
+    token = authorization.split("Bearer ", 1)[1].strip()
+    if not expected_token or not hmac.compare_digest(token, expected_token):
+        raise HTTPException(status_code=403, detail="Forbidden")
+    if request_data.get("contractVersion") != "2.0.0" or request_data.get("kind") != "qubo-ising":
+        raise HTTPException(status_code=400, detail="Unsupported worker contract")
+    run_qubo_ising.spawn(request_data)
+    return {"status": "accepted", "jobId": request_data.get("jobId"), "kind": "qubo-ising"}
 
 @app.function(gpu="A10G", image=gpu_image, timeout=1200)
 def benchmark_qubo_reference(commit: str) -> Dict[str, Any]:

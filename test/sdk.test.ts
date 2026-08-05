@@ -62,3 +62,44 @@ test('SDK exposes MCP discovery and tenant SLA controls', async () => {
     assert.deepEqual(JSON.parse(requests[2].body ?? '{}'), { requestsPerMinute: 90, timeoutMs: 8000, failureThreshold: 4, cooldownMs: 45000 })
   } finally { globalThis.fetch = originalFetch }
 })
+
+test('SDK submits and polls the accurately named QUBO/Ising contract', async () => {
+  const urls: string[] = []
+  let polls = 0
+  globalThis.fetch = async (input, init) => {
+    const url = String(input)
+    urls.push(url)
+    if (init?.method === 'POST') {
+      const payload = JSON.parse(String(init.body))
+      assert.equal(payload.problem.formulation, 'qubo')
+      return new Response(JSON.stringify({
+        jobId: `job_${'a'.repeat(32)}`, kind: 'qubo-ising', status: 'queued',
+        clientRequestId: payload.clientRequestId, inputHash: 'b'.repeat(64),
+        acceptedConfiguration: { formulation: 'qubo', problemSize: 2, target: 'gpu' },
+        credits: { reserved: 525, charged: null, refunded: 0 }, result: null, diagnostics: null, error: null,
+      }), { status: 202 })
+    }
+    polls += 1
+    return new Response(JSON.stringify({
+      jobId: `job_${'a'.repeat(32)}`, kind: 'qubo-ising', status: 'completed',
+      clientRequestId: 'sdk-qubo-123', inputHash: 'b'.repeat(64),
+      acceptedConfiguration: { formulation: 'qubo', problemSize: 2, target: 'gpu' },
+      credits: { reserved: 525, charged: 525, refunded: 0 },
+      result: { objectiveValue: -2, assignment: [1, 1], bestBound: null, provenOptimal: false },
+      diagnostics: { algorithm: 'parallel-update-simulated-annealing-torch-v1', sweepsCompleted: 8, replicas: 8, acceptedMoves: 1, wallClockSeconds: 0.02, deviceClass: 'NVIDIA A10' },
+      error: null,
+    }), { status: 200 })
+  }
+  try {
+    const client = new MahaClient({ apiKey: 'mha_live_test', baseUrl: 'https://example.test' })
+    const result = await client.optimization.solveQuboIsing({
+      clientRequestId: 'sdk-qubo-123',
+      problem: { formulation: 'qubo', size: 2, terms: [{ i: 0, j: 0, value: -1 }, { i: 1, j: 1, value: -1 }] },
+      solver: { maxSweeps: 8, replicas: 8, exactThreshold: 0 },
+    }, { pollIntervalMs: 1, timeoutMs: 2_000 })
+    assert.equal(result.result?.objectiveValue, -2)
+    assert.equal(result.result?.provenOptimal, false)
+    assert.equal(polls, 1)
+    assert.deepEqual(urls, ['https://example.test/api/v1/jobs/qubo-ising', `https://example.test/api/v1/jobs/job_${'a'.repeat(32)}`])
+  } finally { globalThis.fetch = originalFetch }
+})

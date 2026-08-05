@@ -80,6 +80,9 @@ export async function POST(request: Request) {
     case 'input_hash_mismatch':
       return json({ error: { code: 'input_hash_mismatch', message: 'The callback inputHash does not match the dispatched problem. The result was discarded.' } }, 409)
 
+    case 'invalid_result':
+      return json({ error: { code: 'invalid_result', message: 'The callback result does not match the submitted formulation or approved optimality boundary.' } }, 409)
+
     case 'already_terminal':
       // 200 so a duplicate delivery is not retried forever. `applied: false`
       // tells the worker its result was not the one recorded.
@@ -100,4 +103,3 @@ export async function POST(request: Request) {
 export function OPTIONS() {
   return new Response(null, { status: 204, headers: { Allow: 'POST, OPTIONS', 'Cache-Control': 'no-store' } })
 }
-

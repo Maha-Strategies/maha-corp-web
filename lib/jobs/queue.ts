@@ -33,7 +33,7 @@ import {
   createJobId,
   type JobKind,
   type JobStatus,
-  type TensorOptJobRequest,
+  type QuboIsingJobRequest,
   type WorkerCallback,
   type WorkerDiagnostics,
   type WorkerHandoff,
@@ -139,16 +139,17 @@ export async function getJob(jobId: string): Promise<JobRecord | null> {
  * insertion order, so a refactor that reorders the object literal above cannot
  * silently change every hash and break worker-side echo comparison.
  */
-export function computeInputHash(request: TensorOptJobRequest): string {
+export function computeInputHash(request: QuboIsingJobRequest): string {
   const canonical = JSON.stringify([
     request.problem.formulation,
     request.problem.size,
     request.problem.terms,
-    request.problem.termsUrl,
-    request.solver.bondDimensionMax,
     request.solver.maxSweeps,
-    request.solver.truncationThreshold,
+    request.solver.replicas,
     request.solver.seed,
+    request.solver.exactThreshold,
+    request.solver.initialTemperature,
+    request.solver.finalTemperature,
     request.target,
   ])
   return createHash('sha256').update(canonical).digest('hex')
@@ -164,12 +165,11 @@ export type EnqueueOutcome =
   | { kind: 'insufficient_credits'; required: number }
   | { kind: 'unavailable' }
 
-export async function enqueueTensorOptJob(input: {
-  request: TensorOptJobRequest
+export async function enqueueQuboIsingJob(input: {
+  request: QuboIsingJobRequest
   keyId: string
   zeroDataRetention: boolean
   callbackUrl: string
-  kind?: JobKind
   /**
    * The x402 capacity slot this job holds, when the caller paid rather than
    * spending credits. Stored on the record so the completion webhook can
@@ -178,7 +178,7 @@ export async function enqueueTensorOptJob(input: {
    */
   slot?: { resource: string; token: string } | null
 }): Promise<EnqueueOutcome> {
-  const kind = input.kind ?? 'tensor-opt'
+  const kind: JobKind = 'qubo-ising'
   const idemKey = idempotencyKey(input.keyId, input.request.clientRequestId)
 
   // Idempotency first. A client retrying a POST after a network timeout must
@@ -336,6 +336,7 @@ export type SettleOutcome =
   | { kind: 'already_terminal'; job: JobRecord }
   | { kind: 'unknown_job' }
   | { kind: 'input_hash_mismatch'; job: JobRecord }
+  | { kind: 'invalid_result'; job: JobRecord }
 
 export async function settleJobFromCallback(callback: WorkerCallback): Promise<SettleOutcome> {
   const job = await getJob(callback.jobId)
@@ -345,6 +346,16 @@ export async function settleJobFromCallback(callback: WorkerCallback): Promise<S
   // not belong to this job's problem — reject it rather than storing a solution
   // to a question nobody asked.
   if (callback.inputHash !== job.inputHash) return { kind: 'input_hash_mismatch', job }
+
+  if (callback.status === 'completed' && callback.solution) {
+    const domain = job.formulation === 'qubo' ? new Set([0, 1]) : new Set([-1, 1])
+    if (callback.solution.assignment.length !== job.problemSize || callback.solution.assignment.some((value) => !domain.has(value))) {
+      return { kind: 'invalid_result', job }
+    }
+    if (callback.solution.provenOptimal && (job.problemSize > 18 || callback.diagnostics?.algorithm !== 'exhaustive-enumeration')) {
+      return { kind: 'invalid_result', job }
+    }
+  }
 
   const completed = callback.status === 'completed'
   const creditsCharged = completed ? job.reservedCredits : 0
