@@ -1351,7 +1351,7 @@ export const BRIEFS: Brief[] = [
     description: 'A decision framework for selecting fan-out, flip-chip, and package-on-package architectures for smartphone application processors, assessing supplier routes, and interpreting reliability evidence without treating a single test threshold as universal.',
     status: 'ACTIVE',
     datePublished: '2026-07-23',
-    dateModified: '2026-08-02',
+    dateModified: '2026-08-05',
     intro: 'Smartphone application-processor packaging is not a binary contest between fan-out wafer-level packaging (FOWLP) and flip-chip chip-scale packaging (FC-CSP). Both can be used within a package-on-package (PoP) architecture, and both have active manufacturing ecosystems. The relevant decision is whether the chosen architecture meets electrical, thermal, form-factor, test, yield, capacity, and unit-economics requirements for one defined product—not which technology has the more compelling label or most recognizable supplier.',
     sections: [
       {
@@ -1469,6 +1469,24 @@ export const BRIEFS: Brief[] = [
           'Compare a pricing-improvement case with a capacity-redeployment case, and state the evidence needed to discriminate between them.',
           'Preserve a technically qualified OSAT alternative if supplier neutrality or a multi-foundry wafer strategy is an explicit objective.'
         ]
+      },
+      {
+        level: 2,
+        heading: '09. Distinguish a Published FOPoP Platform From a Named AP Production Award',
+        paragraphs: [
+          'ASE publicly describes FOPoP as an RDL-based fan-out bottom package with a top package, positioned for AP-and-memory integration and mobile applications. This is strong evidence that ASE has an applicable process platform; it is not public confirmation that a named flagship smartphone processor is manufactured on that platform. A platform announcement, a test vehicle, a customer qualification, and a sustained production award are different levels of evidence.',
+          'The same constraint applies to inferences about particular Snapdragon, Dimensity, or Exynos models. Product marketing, teardowns, package markings, and supplier disclosures may provide clues, but the package assembly supplier and exact construction are often not publicly disclosed. A buyer evaluating ASE or another OSAT should request a qualified reference that matches the critical package attributes, rather than extrapolating from a public FOPoP capability page.'
+        ],
+        table: {
+          caption: 'Evidence ladder for an AP fan-out claim',
+          header: ['Evidence available', 'Conclusion it supports'],
+          rows: [
+            ['Supplier platform page or technical paper', 'The supplier has described a relevant architecture or process capability.'],
+            ['Qualified reference with comparable package parameters', 'The flow may be technically relevant, subject to scope, vintage, and volume confirmation.'],
+            ['Named customer and part-level production disclosure', 'The supplier has a publicly attributable production relationship for that stated part or programme.'],
+            ['Current allocation and volume evidence', 'A buyer can assess supply continuity and commercial relevance for a live sourcing decision.']
+          ]
+        }
       }
     ],
     protocolPatch: {
@@ -1476,7 +1494,7 @@ export const BRIEFS: Brief[] = [
       paragraphs: [
         'Treat FOWLP, FC-CSP, and PoP as architectural building blocks. Confirm the exact package construction, supplier process, qualified reference scope, yield evidence, and board-level reliability requirements before carrying a technology claim into a product or sourcing decision.'
       ],
-      emphasis: 'Do not publish or price universal yield-loss, supplier-dependence, or reliability-performance claims without a traceable stack-up, test method, and decision context.'
+      emphasis: 'Do not publish or price universal yield-loss, supplier-dependence, reliability-performance, or named-programme claims without a traceable stack-up, test method, and decision context.'
     }
   },
   {
@@ -1486,7 +1504,7 @@ export const BRIEFS: Brief[] = [
     description: 'A contract-design framework for allocating capacity, materials, assembly, test, yield, quality, and high-value die risk among smartphone AP owners, OSATs, and package-substrate suppliers.',
     status: 'ACTIVE',
     datePublished: '2026-07-29',
-    dateModified: '2026-08-02',
+    dateModified: '2026-08-05',
     intro: 'For smartphone application-processor packaging, the commercial model starts by separating who owns the die, who fabricates or procures the substrate, who performs assembly and test, and who controls the production evidence. Those roles can be combined in a turnkey programme or divided among several companies. This brief is a decision and diligence framework—not legal advice, and not a claim that any one price, yield threshold, or liability term is an industry standard.',
     sections: [
       {
@@ -1582,6 +1600,25 @@ export const BRIEFS: Brief[] = [
             ['Entry platform or mature derivative', 'Qualification reuse, cost control, supply continuity, and broad OSAT capacity usually rise in priority.']
           ]
         }
+      },
+      {
+        level: 2,
+        heading: '07. Samsung Illustrates Why Corporate Boundaries Must Be Mapped Precisely',
+        paragraphs: [
+          'Samsung’s public foundry materials describe a SAFE OSAT Alliance and an ecosystem spanning assembly, test, substrate, memory, and advanced packaging. Samsung Electro-Mechanics separately markets FCCSP substrates for mobile application processors. These disclosures show that a Samsung-affiliated ecosystem can include both internal-group capabilities and external specialist partners. They do not disclose the assembly provider, substrate fabricator, or package architecture for every Exynos device.',
+          'Accordingly, it is reasonable to treat an all-internal Exynos backend assumption as unproven, but it is equally inappropriate to assign Nepes, LB Semicon, Amkor, ASE, Hana Micron, SFA Semicon, Unimicron, Kinsus, Ibiden, LG Innotek, or any other company to a specific Exynos model without part-level evidence. An alliance membership, general service offering, or related component engagement does not establish a production award for an AP.'
+        ],
+        table: {
+          caption: 'Samsung AP package diligence map',
+          header: ['Question', 'Evidence that would answer it'],
+          rows: [
+            ['Who fabricated the wafer?', 'Foundry disclosure, die identification, or reliable part-level reporting.'],
+            ['Who assembled and tested the package?', 'Package marking decode, named programme disclosure, qualification evidence, or direct supplier confirmation.'],
+            ['Who fabricated the organic substrate?', 'Approved vendor list, substrate marking or traceability, or a customer/supplier disclosure tied to the package.'],
+            ['Is the package substrate-less?', 'A labelled package cross-section and material stack, not a general description of the processor tier.']
+          ]
+        },
+        blockquote: 'OSATs assemble and test; substrate companies fabricate substrates. A turnkey programme can coordinate both roles, but it should not blur them in supplier analysis.'
       }
     ],
     protocolPatch: {

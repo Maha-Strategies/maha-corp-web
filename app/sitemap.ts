@@ -330,13 +330,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
     {
       url: `${baseUrl}/intelligence/briefs/smartphone-ap-fan-out-substrate-thickness`,
-      lastModified: new Date('2026-08-02'),
+      lastModified: new Date('2026-08-05'),
       changeFrequency: 'monthly',
       priority: 0.8,
     },
     {
       url: `${baseUrl}/intelligence/briefs/smartphone-ap-osat-commercial-risk-allocation`,
-      lastModified: new Date('2026-08-02'),
+      lastModified: new Date('2026-08-05'),
       changeFrequency: 'monthly',
       priority: 0.8,
     },
