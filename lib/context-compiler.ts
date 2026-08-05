@@ -34,6 +34,32 @@ export type ProvenanceStyle = 'full' | 'compact' | 'none'
  */
 export type ScoringMode = 'keyword' | 'bm25'
 
+/**
+ * What `tokenBudget` promises.
+ *
+ * `estimated` fills to the budget in this module's own word-based units. Those
+ * units track a real BPE count closely on prose and badly on structured text --
+ * measured drift runs from -26% on a SQL result dump to +10% on an agent
+ * trace -- so a pack built this way can exceed the caller's real budget.
+ *
+ * `guaranteed` applies a margin sized to the worst measured under-count, so
+ * the returned pack fits the stated budget in real tokens whatever the content
+ * turns out to be. It costs capacity on prose, where the estimate was already
+ * accurate, and that is the trade: a smaller pack that fits, rather than a
+ * full one that may not.
+ *
+ * The alternative -- shipping a real BPE tokenizer -- was rejected: the
+ * smallest usable one is 55 MB, it is exact only for OpenAI models, and this
+ * runs on a request path.
+ */
+export type BudgetMode = 'estimated' | 'guaranteed'
+
+/**
+ * Worst under-count observed across the measured corpora, rounded against us.
+ * Re-derive with scripts/measure-compression.ts if the estimator changes.
+ */
+const GUARANTEED_BUDGET_FACTOR = 0.72
+
 export type ContextPackRequest = {
   clientRequestId: string
   task: string
@@ -43,6 +69,8 @@ export type ContextPackRequest = {
   provenance?: ProvenanceStyle
   /** Defaults to 'keyword', the original scoring. */
   scoring?: ScoringMode
+  /** Defaults to 'estimated', which is the existing behaviour. */
+  budgetMode?: BudgetMode
 }
 
 type Passage = { sourceId: string; sourceTitle: string; index: number; text: string; hash: string; estimatedTokens: number; score: number; terms: string[] }
@@ -102,7 +130,9 @@ export function parseContextPackRequest(value: unknown): ContextPackRequest {
   }
   const scoring = body.scoring === undefined ? 'keyword' : body.scoring
   if (scoring !== 'keyword' && scoring !== 'bm25') throw new Error('scoring must be one of: keyword, bm25.')
-  return { clientRequestId: singleLine(body.clientRequestId, 'clientRequestId', 8, 120), task, tokenBudget: body.tokenBudget, documents, provenance, scoring }
+  const budgetMode = body.budgetMode === undefined ? 'estimated' : body.budgetMode
+  if (budgetMode !== 'estimated' && budgetMode !== 'guaranteed') throw new Error('budgetMode must be one of: estimated, guaranteed.')
+  return { clientRequestId: singleLine(body.clientRequestId, 'clientRequestId', 8, 120), task, tokenBudget: body.tokenBudget, documents, provenance, scoring, budgetMode }
 }
 
 function normalize(value: string): string {
@@ -187,6 +217,10 @@ function scoreBm25(passages: Passage[], terms: Set<string>): void {
 }
 
 export function compileContextPack(input: ContextPackRequest) {
+  // Everything below fills to `budget`, not to the caller's stated figure.
+  const budget = (input.budgetMode ?? 'estimated') === 'guaranteed'
+    ? Math.max(1, Math.floor(input.tokenBudget * GUARANTEED_BUDGET_FACTOR))
+    : input.tokenBudget
   const terms = keywords(input.task)
   const allPassages = input.documents.flatMap((document) => splitPassages(document.id, document.title ?? document.id, document.text))
   if ((input.scoring ?? 'keyword') === 'bm25') scoreBm25(allPassages, terms)
@@ -197,11 +231,11 @@ export function compileContextPack(input: ContextPackRequest) {
   const selected: Passage[] = []
   let used = 0
   for (const passage of ranked) {
-    if (passage.estimatedTokens > input.tokenBudget - used && selected.length > 0) continue
-    if (passage.estimatedTokens > input.tokenBudget) continue
+    if (passage.estimatedTokens > budget - used && selected.length > 0) continue
+    if (passage.estimatedTokens > budget) continue
     selected.push(passage)
     used += passage.estimatedTokens
-    if (used >= input.tokenBudget) break
+    if (used >= budget) break
   }
   const originalText = input.documents.map((document) => normalize(document.text)).join('\n\n')
   const provenance: ProvenanceStyle = input.provenance ?? 'full'
@@ -224,7 +258,7 @@ export function compileContextPack(input: ContextPackRequest) {
   // Heading and task overhead also count toward the caller's declared budget.
   // Remove the lowest-ranked included passages until the returned pack fits.
   let markdown = renderContext(selected)
-  while (selected.length > 0 && estimateTokens(markdown) > input.tokenBudget) {
+  while (selected.length > 0 && estimateTokens(markdown) > budget) {
     selected.pop()
     markdown = renderContext(selected)
   }
