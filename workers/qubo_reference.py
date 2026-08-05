@@ -28,14 +28,14 @@ def normalize_terms(problem: Dict[str, Any]) -> tuple[str, int, List[Term]]:
         raise QuboReferenceError("problem.formulation must be qubo or ising")
 
     size = problem.get("size")
-    if not isinstance(size, int) or isinstance(size, bool) or size < 1:
-        raise QuboReferenceError("problem.size must be a positive integer")
+    if not isinstance(size, int) or isinstance(size, bool) or size < 1 or size > 256:
+        raise QuboReferenceError("problem.size must be an integer from 1 to 256")
 
     if problem.get("termsUrl"):
         raise QuboReferenceError("remote term files are disabled until signed object ingestion is available")
     raw_terms = problem.get("terms")
-    if not isinstance(raw_terms, list) or not raw_terms:
-        raise QuboReferenceError("problem.terms must be a non-empty sparse term list")
+    if not isinstance(raw_terms, list) or not raw_terms or len(raw_terms) > 32_896:
+        raise QuboReferenceError("problem.terms must contain 1 to 32896 sparse terms")
 
     terms: List[Term] = []
     for index, raw in enumerate(raw_terms):
@@ -87,9 +87,9 @@ def solve_exact(problem: Dict[str, Any], maximum_variables: int = 18) -> Dict[st
         "diagnostics": {
             "algorithm": "exhaustive-enumeration",
             "evaluations": evaluations,
+            "replicas": None,
+            "acceptedMoves": None,
             "sweepsCompleted": 0,
-            "bondDimensionUsed": None,
-            "discardedWeight": None,
         },
     }
 
@@ -99,12 +99,17 @@ def solve_cpu_annealing(problem: Dict[str, Any], solver: Dict[str, Any] | None =
 
     formulation, size, terms = normalize_terms(problem)
     options = solver or {}
-    if size <= int(options.get("exactThreshold", 18)):
-        return solve_exact(problem, int(options.get("exactThreshold", 18)))
+    exact_threshold = int(options.get("exactThreshold", 18))
+    if exact_threshold < 0 or exact_threshold > 18:
+        raise QuboReferenceError("solver.exactThreshold must be an integer from 0 to 18")
+    if size <= exact_threshold:
+        return solve_exact(problem, exact_threshold)
 
     seed = int(options.get("seed") or 0)
-    sweeps = max(1, min(int(options.get("maxSweeps") or 64), 10_000))
-    replicas = max(1, min(int(options.get("replicas") or 16), 256))
+    sweeps = int(options.get("maxSweeps", 64))
+    replicas = int(options.get("replicas", 16))
+    if sweeps < 1 or sweeps > 256 or replicas < 1 or replicas > 256:
+        raise QuboReferenceError("solver maxSweeps and replicas must be integers from 1 to 256")
     coefficient_scale = max(sum(abs(term[2]) for term in terms) / len(terms), 1e-9)
     initial_temperature = float(options.get("initialTemperature") or coefficient_scale * 4)
     final_temperature = max(float(options.get("finalTemperature") or coefficient_scale * 0.01), 1e-12)
@@ -153,9 +158,8 @@ def solve_cpu_annealing(problem: Dict[str, Any], solver: Dict[str, Any] | None =
             "algorithm": "multi-start-simulated-annealing-cpu",
             "evaluations": evaluations,
             "replicas": replicas,
+            "acceptedMoves": None,
             "sweepsCompleted": sweeps,
-            "bondDimensionUsed": None,
-            "discardedWeight": None,
         },
     }
 
@@ -172,14 +176,18 @@ def solve_torch(problem: Dict[str, Any], solver: Dict[str, Any] | None, device: 
     formulation, size, terms = normalize_terms(problem)
     options = solver or {}
     exact_threshold = int(options.get("exactThreshold", 18))
+    if exact_threshold < 0 or exact_threshold > 18:
+        raise QuboReferenceError("solver.exactThreshold must be an integer from 0 to 18")
     if size <= exact_threshold:
         return solve_exact(problem, exact_threshold)
 
     import torch
 
     seed = int(options.get("seed") or 0)
-    sweeps = max(1, min(int(options.get("maxSweeps") or 64), 10_000))
-    replicas = max(1, min(int(options.get("replicas") or min(64, max(8, 16_384 // size))), 256))
+    sweeps = int(options.get("maxSweeps") or 64)
+    replicas = int(options.get("replicas") or min(64, max(8, 16_384 // size)))
+    if sweeps < 1 or sweeps > 256 or replicas < 1 or replicas > 256:
+        raise QuboReferenceError("solver maxSweeps and replicas must be integers from 1 to 256")
     generator = torch.Generator(device=device)
     generator.manual_seed(seed)
 
@@ -258,8 +266,6 @@ def solve_torch(problem: Dict[str, Any], solver: Dict[str, Any] | None, device: 
             "replicas": replicas,
             "acceptedMoves": accepted_moves,
             "sweepsCompleted": sweeps,
-            "bondDimensionUsed": None,
-            "discardedWeight": None,
         },
     }
 

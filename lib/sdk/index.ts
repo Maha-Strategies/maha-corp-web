@@ -12,6 +12,22 @@ export type McpServerSummary = { serverId: string; name: string; baseUrl: string
 export type McpSlaSettings = { requestsPerMinute: number; timeoutMs: number; failureThreshold: number; cooldownMs: number }
 export type RotatedApiKey = { apiKey: string; apiKeyId: string; balanceCredits: number; tier: 'starter' | 'builder' | 'scale' | 'enterprise'; disclosure: string }
 export type TenantBillingSettings = { tenantId: string; tier: string; subscriptionStatus: string; subscriptionCredits: number; topupCredits: number; autoTopupEnabled: boolean; canEnableAutoTopup: boolean }
+export type QuboIsingRequest = {
+  clientRequestId: string
+  problem: { formulation: 'qubo' | 'ising'; size: number; terms: Array<{ i: number; j: number; value: number }> }
+  solver?: { maxSweeps?: number; replicas?: number; seed?: number; exactThreshold?: number; initialTemperature?: number; finalTemperature?: number }
+  target?: 'gpu'
+  timeoutSeconds?: number
+}
+export type QuboIsingJob = {
+  jobId: string; kind: 'qubo-ising'; status: 'queued' | 'processing' | 'completed' | 'failed' | 'cancelled'
+  clientRequestId: string; inputHash: string; pollUrl?: string; quotedCredits?: number
+  acceptedConfiguration: { formulation: 'qubo' | 'ising'; problemSize: number; target: 'gpu' }
+  credits: { reserved: number; charged: number | null; refunded: number }
+  result: { objectiveValue: number; assignment: number[]; bestBound: number | null; provenOptimal: boolean } | null
+  diagnostics: { algorithm: 'exhaustive-enumeration' | 'parallel-update-simulated-annealing-torch-v1'; sweepsCompleted: number; replicas: number | null; acceptedMoves: number | null; wallClockSeconds: number; deviceClass: string } | null
+  error: { code: string; message: string } | null
+}
 
 export class MahaApiError extends Error { readonly status: number; readonly code: string; constructor(status: number, code: string, message: string) { super(message); this.name = 'MahaApiError'; this.status = status; this.code = code } }
 export class MahaAuthenticationError extends MahaApiError { constructor(status: 401 | 402, code: string, message: string) { super(status, code, message); this.name = 'MahaAuthenticationError' } }
@@ -45,6 +61,27 @@ export class MahaClient {
     getSettings: async (): Promise<TenantBillingSettings> => this.request('/api/v1/billing/settings'),
     subscribe: async (tier: 'builder' | 'scale', clientRequestId = crypto.randomUUID().replaceAll('-', '')): Promise<{ url: string }> => this.request('/api/v1/billing/subscription', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ tier, clientRequestId }) }),
     setAutoTopup: async (enabled: boolean): Promise<{ autoTopupEnabled: boolean }> => this.request('/api/v1/billing/settings', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ autoTopupEnabled: enabled }) }),
+  }
+
+  public readonly optimization = {
+    submitQuboIsing: async (payload: QuboIsingRequest): Promise<QuboIsingJob> => this.request('/api/v1/jobs/qubo-ising', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) }),
+    getJob: async (jobId: string): Promise<QuboIsingJob> => {
+      if (!/^job_[a-f0-9]{32}$/.test(jobId)) throw new Error('jobId is malformed.')
+      return this.request(`/api/v1/jobs/${encodeURIComponent(jobId)}`)
+    },
+    solveQuboIsing: async (payload: QuboIsingRequest, options: { pollIntervalMs?: number; timeoutMs?: number } = {}): Promise<QuboIsingJob> => {
+      let job = await this.optimization.submitQuboIsing(payload)
+      const deadline = Date.now() + (options.timeoutMs ?? 120_000)
+      let delay = Math.max(100, options.pollIntervalMs ?? 500)
+      while (job.status === 'queued' || job.status === 'processing') {
+        if (Date.now() >= deadline) throw new MahaApiError(408, 'job_poll_timeout', 'QUBO/Ising job did not reach a terminal state before the polling deadline.')
+        await new Promise((resolve) => setTimeout(resolve, delay))
+        job = await this.optimization.getJob(job.jobId)
+        delay = Math.min(5_000, Math.round(delay * 1.5))
+      }
+      if (job.status !== 'completed') throw new MahaApiError(500, job.error?.code ?? 'job_failed', job.error?.message ?? `QUBO/Ising job ended with status ${job.status}.`)
+      return job
+    },
   }
 
   // --- Phase A: Audit & Compliance ---

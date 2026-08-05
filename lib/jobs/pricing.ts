@@ -18,10 +18,7 @@ import type { JobKind } from '@/lib/jobs/contract'
  * are still recorded for metering — they just do not move the charge.
  */
 const JOB_PRICING: Record<JobKind, { base: number; perThousandVariables: number }> = {
-  'tensor-opt': { base: 500, perThousandVariables: 25 },
-  'geometric-ai': { base: 400, perThousandVariables: 20 },
-  'holographic-qec': { base: 750, perThousandVariables: 40 },
-  'landscape-opt': { base: 600, perThousandVariables: 30 },
+  'qubo-ising': { base: 500, perThousandVariables: 25 },
 }
 
 export function quoteJobCredits(kind: JobKind, problemSize: number): number {

@@ -98,6 +98,7 @@ export const openApiDocument = {
     { name: 'Self-service API Keys', description: 'Instant starter-key provisioning and prepaid credit checkout.' },
     { name: 'Maha SDK', description: 'Small, credentialed context compression and provenance lookup endpoints for the public TypeScript SDK.' },
     { name: 'Maha OpenAI-compatible Proxy', description: 'Non-streaming OpenAI Chat Completions proxy with transient, deterministic context compaction.' },
+    { name: 'GPU Heuristic Optimization', description: 'Bounded asynchronous QUBO/Ising optimization using an accurately labelled GPU heuristic.' },
   ],
   paths: {
     '/api/v1/keys/generate': {
@@ -156,6 +157,26 @@ export const openApiDocument = {
         description: 'Credentialed version of deterministic context compilation. It does not retain source text or make factual-verification claims.', security: [{ credential: [] }],
         requestBody: { required: true, content: { 'application/json': { schema: { type: 'object', required: ['clientRequestId', 'task', 'tokenBudget', 'documents'], properties: { clientRequestId: { type: 'string', minLength: 8, maxLength: 120 }, task: { type: 'string', minLength: 8, maxLength: 1200 }, tokenBudget: { type: 'integer', minimum: 64, maximum: 16000 }, documents: { type: 'array', minItems: 1, maxItems: 8, items: { type: 'object', required: ['id', 'text'], properties: { id: { type: 'string' }, title: { type: 'string' }, text: { type: 'string', maxLength: 64000 } } } } } } } } },
         responses: { '201': { description: 'Transient compiled context pack.', content: { 'application/json': { schema: { type: 'object', required: ['packId', 'context', 'metrics', 'sources', 'warnings'], properties: { packId: { type: 'string' }, context: { type: 'string' }, metrics: { type: 'object' }, sources: { type: 'array', items: { type: 'object' } }, warnings: { type: 'array', items: { type: 'string' } }, sourceTextStored: { const: false }, compiledContextStored: { const: false } } } } } }, '400': errorResponse('Invalid compression request.'), '401': errorResponse('Missing or invalid API key.'), '402': errorResponse('API-key credits depleted.'), '413': errorResponse('Context input exceeds 128 KB.'), '415': errorResponse('Content-Type must be application/json.') },
+      },
+    },
+    '/api/v1/jobs/qubo-ising': {
+      post: {
+        tags: ['GPU Heuristic Optimization'], operationId: 'createQuboIsingJob', summary: 'Create a bounded GPU QUBO/Ising heuristic job',
+        description: 'Runs exact enumeration through the declared exact threshold and an explicitly heuristic parallel-update annealer above it. The heuristic never claims optimality or a certified bound.',
+        security: [{ credential: [] }],
+        requestBody: { required: true, content: { 'application/json': { schema: { $ref: '#/components/schemas/QuboIsingJobRequest' } } } },
+        responses: {
+          '202': { description: 'Job queued; poll the returned pollUrl.', content: { 'application/json': { schema: { $ref: '#/components/schemas/QuboIsingJob' } } } },
+          '200': { description: 'Idempotent replay of an existing job.', content: { 'application/json': { schema: { $ref: '#/components/schemas/QuboIsingJob' } } } },
+          '400': errorResponse('Invalid or unbenchmarked problem configuration.'), '401': errorResponse('Missing or invalid API key.'), '402': errorResponse('Insufficient credits.'), '415': errorResponse('Content-Type must be application/json.'), '503': errorResponse('Job queue unavailable.'),
+        },
+      },
+    },
+    '/api/v1/jobs/{jobId}': {
+      get: {
+        tags: ['GPU Heuristic Optimization'], operationId: 'getQuboIsingJob', summary: 'Poll a QUBO/Ising job owned by the current API key', security: [{ credential: [] }],
+        parameters: [{ name: 'jobId', in: 'path', required: true, schema: { type: 'string', pattern: '^job_[a-f0-9]{32}$' } }],
+        responses: { '200': { description: 'Credential-safe job state; submitted coefficients are never echoed.', content: { 'application/json': { schema: { $ref: '#/components/schemas/QuboIsingJob' } } } }, '400': errorResponse('Malformed job ID.'), '401': errorResponse('Missing or invalid API key.'), '404': errorResponse('Job not found for this API key.') },
       },
     },
     '/api/v1/chat/completions': {
@@ -220,7 +241,6 @@ export const openApiDocument = {
                   baseUrl: { type: 'string' },
                   authType: { type: 'string', enum: ['bearer', 'hmac', 'none'] },
                   secret: { type: 'string' },
-                  allowedEngines: { type: 'array', items: { type: 'string' } },
                 },
               },
             },
@@ -933,6 +953,25 @@ export const openApiDocument = {
           audit: { $ref: '#/components/schemas/AuditResult' },
           retryAfterSeconds: { type: 'integer', description: 'Present while status is `processing`.' },
           error: { type: 'object', properties: { code: { type: 'string' }, message: { type: 'string' } }, description: 'Present when status is `failed`.' },
+        },
+      },
+      QuboTerm: {
+        type: 'object', required: ['i', 'j', 'value'], additionalProperties: false,
+        properties: { i: { type: 'integer', minimum: 0, maximum: 255 }, j: { type: 'integer', minimum: 0, maximum: 255 }, value: { type: 'number' } },
+      },
+      QuboIsingJobRequest: {
+        type: 'object', required: ['clientRequestId', 'problem'], additionalProperties: false,
+        properties: {
+          clientRequestId: { type: 'string', minLength: 8, maxLength: 120 },
+          problem: { type: 'object', required: ['formulation', 'size', 'terms'], additionalProperties: false, properties: { formulation: { type: 'string', enum: ['qubo', 'ising'] }, size: { type: 'integer', minimum: 1, maximum: 256 }, terms: { type: 'array', minItems: 1, maxItems: 32896, items: { $ref: '#/components/schemas/QuboTerm' } } } },
+          solver: { type: 'object', additionalProperties: false, properties: { maxSweeps: { type: 'integer', minimum: 1, maximum: 256, default: 64 }, replicas: { type: 'integer', minimum: 1, maximum: 256, default: 64 }, seed: { type: 'integer', default: 0 }, exactThreshold: { type: 'integer', minimum: 0, maximum: 18, default: 18 }, initialTemperature: { type: 'number', exclusiveMinimum: 0 }, finalTemperature: { type: 'number', exclusiveMinimum: 0 } } },
+          target: { type: 'string', const: 'gpu', default: 'gpu' }, timeoutSeconds: { type: 'integer', minimum: 1, maximum: 600, default: 120 },
+        },
+      },
+      QuboIsingJob: {
+        type: 'object', required: ['jobId', 'kind', 'status', 'clientRequestId', 'inputHash', 'acceptedConfiguration', 'credits', 'result', 'methodBoundary'],
+        properties: {
+          jobId: { type: 'string', pattern: '^job_[a-f0-9]{32}$' }, kind: { type: 'string', const: 'qubo-ising' }, status: { type: 'string', enum: ['queued', 'processing', 'completed', 'failed', 'cancelled'] }, clientRequestId: { type: 'string' }, inputHash: { type: 'string', pattern: '^[a-f0-9]{64}$' }, acceptedConfiguration: { type: 'object' }, credits: { type: 'object' }, result: { type: ['object', 'null'] }, diagnostics: { type: ['object', 'null'] }, error: { type: ['object', 'null'] }, pollUrl: { type: 'string' }, quotedCredits: { type: 'integer' }, problemStored: { type: 'boolean', const: false }, methodBoundary: { type: 'string' },
         },
       },
     },

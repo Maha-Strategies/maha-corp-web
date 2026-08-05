@@ -2,7 +2,8 @@ export interface AuditLedgerEntry {
   id: string;
   tenantId: string;
   jobId: string;
-  engine: 'tensor-opt' | 'geometric-ai' | 'qec-compiler' | 'landscape-opt';
+  /** Stable capability identifier recorded by the ledger (for example `qubo-ising` or `mcp-gateway`). */
+  engine: string;
   timestamp: number; // UTC Epoch ms
   creditDelta: number;
   entryType: 'DEBIT' | 'CREDIT';
