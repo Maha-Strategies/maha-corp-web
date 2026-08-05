@@ -2,9 +2,48 @@ import { createHash, randomUUID } from 'node:crypto'
 
 export const CONTEXT_COMPILER_CAPABILITY = 'context_compile' as const
 export const CONTEXT_COMPILER_VERSION = '0.1.0'
-export const MAX_CONTEXT_PACK_BYTES = 128_000
+/**
+ * Payload caps, set by compute time rather than by answer quality.
+ *
+ * Retention showed no cliff at any size measured once BM25 and compound
+ * tokenization were in place, so the limit is now how long the caller is
+ * willing to wait. Growth is linear, so the caps are a straight choice of
+ * latency budget -- see scripts/measure-compression-scale.ts, which is where
+ * these numbers came from and where they should be re-derived if the scoring
+ * changes.
+ *
+ * Bytes rather than tokens because the cap has to be checked before the body
+ * is parsed. Real agent traces run about 3.8 bytes per token.
+ */
+// Derived, not chosen. Fitted against measured p50 compute with the current
+// defaults (bm25 + compound tokenization), at ~3.45 bytes per token:
+//
+//   p50 50ms  -> 211,000 tokens  -> 715,000 bytes   (standard)
+//   p50 100ms -> 422,000 tokens  -> 1,430,000 bytes (enterprise)
+//
+// These are below the 250k/450k originally proposed. That proposal rested on a
+// 47ms reading taken at 223,340 tokens before compound tokenization existed;
+// tokenization costs roughly 25% more compute, and 250,000 tokens now measures
+// about 59ms. The latency commitment was kept and the token figure moved,
+// rather than the reverse.
+//
+// Both are p50. p95 runs 5-30% higher and crosses 50ms nearer 150,000 tokens,
+// so an SLA written against p95 needs a lower cap again.
+export const STANDARD_MAX_CONTEXT_PACK_BYTES = 715_000
+export const ENTERPRISE_MAX_CONTEXT_PACK_BYTES = 1_430_000
+
+/** Retained for callers that imported the old name; equals the standard cap. */
+export const MAX_CONTEXT_PACK_BYTES = STANDARD_MAX_CONTEXT_PACK_BYTES
+
+export function maxContextPackBytes(tier: string | null | undefined): number {
+  return tier === 'enterprise' ? ENTERPRISE_MAX_CONTEXT_PACK_BYTES : STANDARD_MAX_CONTEXT_PACK_BYTES
+}
+
 const MAX_DOCUMENTS = 8
-const MAX_DOCUMENT_BYTES = 64_000
+// A single document may fill the whole payload: a real agent session arrives
+// as one trace, not eight, and a per-document limit below the payload cap
+// would make the cap unreachable for the commonest shape.
+const MAX_DOCUMENT_BYTES = ENTERPRISE_MAX_CONTEXT_PACK_BYTES
 
 /**
  * How each selected passage is labelled in the rendered pack.
@@ -65,11 +104,11 @@ export type ContextPackRequest = {
   task: string
   tokenBudget: number
   documents: Array<{ id: string; title?: string; text: string }>
-  /** Defaults to 'full', which is the behaviour callers already depend on. */
+  /** Defaults to 'full'. Labelling does not change which passages are selected. */
   provenance?: ProvenanceStyle
-  /** Defaults to 'keyword', the original scoring. */
+  /** Defaults to 'bm25'. See ScoringMode for why 'keyword' is no longer default. */
   scoring?: ScoringMode
-  /** Defaults to 'estimated', which is the existing behaviour. */
+  /** Defaults to 'guaranteed', so a pack never exceeds the stated budget. */
   budgetMode?: BudgetMode
 }
 
@@ -128,9 +167,9 @@ export function parseContextPackRequest(value: unknown): ContextPackRequest {
   if (provenance !== 'full' && provenance !== 'compact' && provenance !== 'none') {
     throw new Error('provenance must be one of: full, compact, none.')
   }
-  const scoring = body.scoring === undefined ? 'keyword' : body.scoring
+  const scoring = body.scoring === undefined ? 'bm25' : body.scoring
   if (scoring !== 'keyword' && scoring !== 'bm25') throw new Error('scoring must be one of: keyword, bm25.')
-  const budgetMode = body.budgetMode === undefined ? 'estimated' : body.budgetMode
+  const budgetMode = body.budgetMode === undefined ? 'guaranteed' : body.budgetMode
   if (budgetMode !== 'estimated' && budgetMode !== 'guaranteed') throw new Error('budgetMode must be one of: estimated, guaranteed.')
   return { clientRequestId: singleLine(body.clientRequestId, 'clientRequestId', 8, 120), task, tokenBudget: body.tokenBudget, documents, provenance, scoring, budgetMode }
 }
@@ -254,12 +293,12 @@ function scoreBm25(passages: Passage[], terms: Set<string>): void {
 
 export function compileContextPack(input: ContextPackRequest) {
   // Everything below fills to `budget`, not to the caller's stated figure.
-  const budget = (input.budgetMode ?? 'estimated') === 'guaranteed'
+  const budget = (input.budgetMode ?? 'guaranteed') === 'guaranteed'
     ? Math.max(1, Math.floor(input.tokenBudget * GUARANTEED_BUDGET_FACTOR))
     : input.tokenBudget
   const terms = keywords(input.task)
   const allPassages = input.documents.flatMap((document) => splitPassages(document.id, document.title ?? document.id, document.text))
-  if ((input.scoring ?? 'keyword') === 'bm25') scoreBm25(allPassages, terms)
+  if ((input.scoring ?? 'bm25') === 'bm25') scoreBm25(allPassages, terms)
   else scoreKeyword(allPassages, terms)
   const seen = new Set<string>()
   const unique = allPassages.filter((passage) => { if (seen.has(passage.hash)) return false; seen.add(passage.hash); return true })
