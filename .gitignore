@@ -26,6 +26,12 @@ __pycache__/
 /build
 /packages/sdk/dist
 
+# Local counsel, strategy, and generated report artifacts. These may contain
+# confidential material and do not belong in application source control.
+/output/*.pdf
+/output/sdk-ts-draft/
+/output/migration-evidence/
+
 # misc
 .DS_Store
 *.pem

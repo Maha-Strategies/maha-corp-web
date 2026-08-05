@@ -3,8 +3,11 @@ name: Production database migrations
 # Applies supabase/migrations to the Production database through a reviewed,
 # evidenced path instead of the Supabase SQL editor.
 #
-# UNVERIFIED: this workflow has never run against the live project. Run it in
-# dry-run mode first and read the uploaded evidence before ever selecting apply.
+# VERIFIED: reviewer-approved Production run 30815131758 completed on
+# 2026-08-03, applied the pending convergence migration, proved zero remaining
+# schema drift, and passed post-apply application health. The evidence record is
+# docs/production-migration-evidence-2026-08-03.md. Future changes still require
+# reviewing a fresh dry-run before apply.
 #
 # It deliberately has no automatic revert. A down-migration against ledgers that
 # hold commercial history would compound an incident rather than resolve it, so a
