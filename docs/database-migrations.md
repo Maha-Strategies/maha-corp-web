@@ -5,8 +5,14 @@ the Supabase SQL editor. Applying by hand is how the migration history came to
 need manual repair once already, and it is the highest-consequence failure mode
 in this system: the ledgers hold commercial history that cannot be reconstructed.
 
-> **This workflow has not yet run against the live project.** The first dispatch
-> must use `dry-run`, and its evidence must be read before any `apply`.
+> **Production workflow verified.** Reviewer-approved run
+> [#8](https://github.com/Maha-Strategies/maha-corp-web/actions/runs/30815131758)
+> completed successfully on 2026-08-03. It applied the pending convergence
+> migration, proved the resulting schema matched the migration tree, and passed
+> post-apply application health. The durable evidence index is recorded in
+> [production-migration-evidence-2026-08-03.md](./production-migration-evidence-2026-08-03.md).
+> Every future migration must still begin with a fresh `dry-run` whose evidence
+> is reviewed before `apply` is approved.
 
 ## Two gates, one before review and one before apply
 
@@ -102,10 +108,18 @@ The schema snapshot is `--schema public` and schema-only. Never add `--data-only
 or a full dump: that would place customer records and commercial history into a
 workflow artifact.
 
-## Required GitHub environment
+The first successful Production apply is indexed in
+[`production-migration-evidence-2026-08-03.md`](./production-migration-evidence-2026-08-03.md).
+For every later apply, add a comparable evidence record containing the run URL,
+reviewed commit, applied migration versions, final convergence result, health
+result, artifact name, and artifact SHA-256 digest. The record must not copy a
+schema dump or any customer data into Git.
 
-Create the reviewer-protected environment `production-database`. Require a
-reviewer; unlike the monitoring workflows, nothing here runs unattended.
+## GitHub environment
+
+The reviewer-protected environment `production-database` is configured and was
+exercised successfully by run #8. Keep a required reviewer; unlike the
+monitoring workflows, nothing here runs unattended.
 
 - Secret `SUPABASE_ACCESS_TOKEN` — a Supabase personal access token. Rotate it
   immediately if exposed.
