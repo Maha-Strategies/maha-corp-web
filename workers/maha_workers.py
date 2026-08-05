@@ -17,19 +17,14 @@ from fastapi import Header, HTTPException
 APP_NAME = "maha-compute-workers"
 app = modal.App(APP_NAME)
 
-# Shared GPU Image Definition
+# Benchmark image contains only the CUDA/Torch runtime required by the solver.
+# Keeping the staging FastAPI fixture separate avoids shipping web dependencies
+# into the measured GPU container or old research packages into either image.
 gpu_image = (
-    modal.Image.debian_slim(python_version="3.11")
-    .pip_install(
-        "torch>=2.2.0",
-        "numpy>=1.26.0",
-        "pydantic>=2.6.0",
-        "fastapi[standard]",
-        "opt_einsum>=3.3.0",
-        "quimb>=1.7.0"
-    )
+    modal.Image.from_registry("pytorch/pytorch:2.5.1-cuda12.4-cudnn9-runtime")
     .add_local_python_source("workers.qubo_reference")
 )
+e2e_image = modal.Image.debian_slim(python_version="3.11").pip_install("fastapi==0.115.6")
 
 maha_secrets = modal.Secret.from_name("maha-worker-secrets")
 
@@ -61,7 +56,7 @@ def benchmark(commit: str, output: str = "qubo-benchmark-evidence.json") -> None
 # Dedicated staging-only JSON-RPC upstream for the protected-preview smoke
 # test. It runs in Modal, not in the Vercel preview being tested, and requires
 # a separate bearer token so it cannot become an open echo service.
-@app.function(image=gpu_image, secrets=[maha_secrets])
+@app.function(image=e2e_image, secrets=[maha_secrets])
 @modal.fastapi_endpoint(method="POST")
 def e2e_mcp_upstream(request_data: Dict[str, Any], authorization: str = Header(default=None)):
     expected_token = os.environ.get("MAHA_E2E_MCP_TOKEN", "")
