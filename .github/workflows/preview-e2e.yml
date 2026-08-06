@@ -106,7 +106,9 @@ jobs:
       # tenant, so a run costs roughly a dozen credits. Watch that balance; the
       # low-credit alert fires on this tenant like any other.
       - name: Run isolated Preview E2E gates
-        run: node --experimental-strip-types scripts/test-e2e.ts 2>&1 | tee "$RUNNER_TEMP/preview-e2e.log"
+        run: |
+          set -o pipefail
+          node --experimental-strip-types scripts/test-e2e.ts 2>&1 | tee "$RUNNER_TEMP/preview-e2e.log"
 
       - name: Upload E2E evidence
         if: always()
