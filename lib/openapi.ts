@@ -99,6 +99,7 @@ export const openApiDocument = {
     { name: 'Maha SDK', description: 'Small, credentialed context compression and provenance lookup endpoints for the public TypeScript SDK.' },
     { name: 'Maha OpenAI-compatible Proxy', description: 'Non-streaming OpenAI Chat Completions proxy with transient, deterministic context compaction.' },
     { name: 'GPU Heuristic Optimization', description: 'Bounded asynchronous QUBO/Ising optimization using an accurately labelled GPU heuristic.' },
+    { name: 'GPU Geometric Optimization', description: 'Bounded paired-point SE(3) registration with explicit residual and correspondence boundaries.' },
   ],
   paths: {
     '/api/v1/keys/generate': {
@@ -172,11 +173,27 @@ export const openApiDocument = {
         },
       },
     },
+    '/api/v1/jobs/tensor-network': {
+      post: {
+        tags: ['GPU Heuristic Optimization'], operationId: 'createTensorNetworkJob', summary: 'Create a bounded-bond tensor-network QUBO/Ising job',
+        description: 'Contracts the binary factor network in variable order and truncates the transfer frontier to the declared bond dimension. Exact enumeration is used only below the declared threshold; truncated results are heuristic and never claim optimality.', security: [{ credential: [] }],
+        requestBody: { required: true, content: { 'application/json': { schema: { $ref: '#/components/schemas/TensorNetworkJobRequest' } } } },
+        responses: { '202': { description: 'Job queued; poll the returned pollUrl.', content: { 'application/json': { schema: { $ref: '#/components/schemas/TensorNetworkJob' } } } }, '200': { description: 'Idempotent replay.', content: { 'application/json': { schema: { $ref: '#/components/schemas/TensorNetworkJob' } } } }, '400': errorResponse('Invalid or unbenchmarked tensor-network configuration.'), '401': errorResponse('Missing or invalid API key.'), '402': errorResponse('Insufficient credits.'), '415': errorResponse('Content-Type must be application/json.'), '503': errorResponse('Job queue unavailable.') },
+      },
+    },
+    '/api/v1/jobs/geometric-registration': {
+      post: {
+        tags: ['GPU Geometric Optimization'], operationId: 'createGeometricRegistrationJob', summary: 'Fit a weighted SE(3) transform to paired 3D points',
+        description: 'Runs a weighted Kabsch SVD solve for the least-squares rigid transform between paired source and target points. It does not perform correspondence search or non-rigid deformation.', security: [{ credential: [] }],
+        requestBody: { required: true, content: { 'application/json': { schema: { $ref: '#/components/schemas/GeometricRegistrationJobRequest' } } } },
+        responses: { '202': { description: 'Job queued; poll the returned pollUrl.', content: { 'application/json': { schema: { $ref: '#/components/schemas/GeometricRegistrationJob' } } } }, '200': { description: 'Idempotent replay.', content: { 'application/json': { schema: { $ref: '#/components/schemas/GeometricRegistrationJob' } } } }, '400': errorResponse('Invalid or unbenchmarked point-cloud configuration.'), '401': errorResponse('Missing or invalid API key.'), '402': errorResponse('Insufficient credits.'), '415': errorResponse('Content-Type must be application/json.'), '503': errorResponse('Job queue unavailable.') },
+      },
+    },
     '/api/v1/jobs/{jobId}': {
       get: {
-        tags: ['GPU Heuristic Optimization'], operationId: 'getQuboIsingJob', summary: 'Poll a QUBO/Ising job owned by the current API key', security: [{ credential: [] }],
+        tags: ['GPU Heuristic Optimization'], operationId: 'getOptimizationJob', summary: 'Poll an optimization job owned by the current API key', security: [{ credential: [] }],
         parameters: [{ name: 'jobId', in: 'path', required: true, schema: { type: 'string', pattern: '^job_[a-f0-9]{32}$' } }],
-        responses: { '200': { description: 'Credential-safe job state; submitted coefficients are never echoed.', content: { 'application/json': { schema: { $ref: '#/components/schemas/QuboIsingJob' } } } }, '400': errorResponse('Malformed job ID.'), '401': errorResponse('Missing or invalid API key.'), '404': errorResponse('Job not found for this API key.') },
+        responses: { '200': { description: 'Credential-safe job state; submitted problem data is never echoed.', content: { 'application/json': { schema: { oneOf: [{ $ref: '#/components/schemas/QuboIsingJob' }, { $ref: '#/components/schemas/TensorNetworkJob' }, { $ref: '#/components/schemas/GeometricRegistrationJob' }] } } } }, '400': errorResponse('Malformed job ID.'), '401': errorResponse('Missing or invalid API key.'), '404': errorResponse('Job not found for this API key.') },
       },
     },
     '/api/v1/chat/completions': {
@@ -973,6 +990,33 @@ export const openApiDocument = {
         properties: {
           jobId: { type: 'string', pattern: '^job_[a-f0-9]{32}$' }, kind: { type: 'string', const: 'qubo-ising' }, status: { type: 'string', enum: ['queued', 'processing', 'completed', 'failed', 'cancelled'] }, clientRequestId: { type: 'string' }, inputHash: { type: 'string', pattern: '^[a-f0-9]{64}$' }, acceptedConfiguration: { type: 'object' }, credits: { type: 'object' }, result: { type: ['object', 'null'] }, diagnostics: { type: ['object', 'null'] }, error: { type: ['object', 'null'] }, pollUrl: { type: 'string' }, quotedCredits: { type: 'integer' }, problemStored: { type: 'boolean', const: false }, methodBoundary: { type: 'string' },
         },
+      },
+      TensorNetworkJobRequest: {
+        type: 'object', required: ['clientRequestId', 'problem'], additionalProperties: false,
+        properties: {
+          clientRequestId: { type: 'string', minLength: 8, maxLength: 120 },
+          problem: { type: 'object', required: ['formulation', 'size', 'terms'], additionalProperties: false, properties: { formulation: { type: 'string', enum: ['qubo', 'ising'] }, size: { type: 'integer', minimum: 1, maximum: 256 }, terms: { type: 'array', minItems: 1, maxItems: 32896, items: { $ref: '#/components/schemas/QuboTerm' } } } },
+          solver: { type: 'object', additionalProperties: false, properties: { bondDimension: { type: 'integer', minimum: 2, maximum: 4096, default: 256 }, exactThreshold: { type: 'integer', minimum: 0, maximum: 18, default: 18 } } },
+          target: { type: 'string', const: 'gpu', default: 'gpu' }, timeoutSeconds: { type: 'integer', minimum: 1, maximum: 600, default: 120 },
+        },
+      },
+      TensorNetworkJob: {
+        type: 'object', required: ['jobId', 'kind', 'status', 'clientRequestId', 'inputHash', 'acceptedConfiguration', 'credits', 'result', 'methodBoundary'],
+        properties: { jobId: { type: 'string', pattern: '^job_[a-f0-9]{32}$' }, kind: { type: 'string', const: 'tensor-network' }, status: { type: 'string', enum: ['queued', 'processing', 'completed', 'failed', 'cancelled'] }, clientRequestId: { type: 'string' }, inputHash: { type: 'string', pattern: '^[a-f0-9]{64}$' }, acceptedConfiguration: { type: 'object' }, credits: { type: 'object' }, result: { type: ['object', 'null'] }, diagnostics: { type: ['object', 'null'] }, error: { type: ['object', 'null'] }, pollUrl: { type: 'string' }, quotedCredits: { type: 'integer' }, problemStored: { type: 'boolean', const: false }, methodBoundary: { type: 'string' } },
+      },
+      PointVector: { type: 'array', minItems: 3, maxItems: 3, items: { type: 'number' } },
+      GeometricRegistrationJobRequest: {
+        type: 'object', required: ['clientRequestId', 'problem'], additionalProperties: false,
+        properties: {
+          clientRequestId: { type: 'string', minLength: 8, maxLength: 120 },
+          problem: { type: 'object', required: ['sourcePoints', 'targetPoints'], additionalProperties: false, properties: { sourcePoints: { type: 'array', minItems: 3, maxItems: 16384, items: { $ref: '#/components/schemas/PointVector' } }, targetPoints: { type: 'array', minItems: 3, maxItems: 16384, items: { $ref: '#/components/schemas/PointVector' } }, weights: { type: 'array', minItems: 3, maxItems: 16384, items: { type: 'number', exclusiveMinimum: 0 } } } },
+          solver: { type: 'object', additionalProperties: false, properties: { allowReflection: { type: 'boolean', const: false, default: false } } },
+          target: { type: 'string', const: 'gpu', default: 'gpu' }, timeoutSeconds: { type: 'integer', minimum: 1, maximum: 600, default: 120 },
+        },
+      },
+      GeometricRegistrationJob: {
+        type: 'object', required: ['jobId', 'kind', 'status', 'clientRequestId', 'inputHash', 'acceptedConfiguration', 'credits', 'result', 'methodBoundary'],
+        properties: { jobId: { type: 'string', pattern: '^job_[a-f0-9]{32}$' }, kind: { type: 'string', const: 'geometric-registration' }, status: { type: 'string', enum: ['queued', 'processing', 'completed', 'failed', 'cancelled'] }, clientRequestId: { type: 'string' }, inputHash: { type: 'string', pattern: '^[a-f0-9]{64}$' }, acceptedConfiguration: { type: 'object' }, credits: { type: 'object' }, result: { type: ['object', 'null'], description: 'Rotation matrix, translation vector, RMSE, maximum error, and determinant.' }, diagnostics: { type: ['object', 'null'] }, error: { type: ['object', 'null'] }, pollUrl: { type: 'string' }, quotedCredits: { type: 'integer' }, problemStored: { type: 'boolean', const: false }, methodBoundary: { type: 'string' } },
       },
     },
   },

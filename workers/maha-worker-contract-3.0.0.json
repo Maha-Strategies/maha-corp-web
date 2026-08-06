@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:maha:worker-contract:optimization:3.0.0",
+  "title": "Maha GPU optimization worker contract v3.0.0",
+  "description": "Multi-engine handoff and callback envelope. lib/jobs/contract.ts is authoritative.",
+  "oneOf": [{ "$ref": "#/$defs/WorkerHandoff" }, { "$ref": "#/$defs/WorkerCallback" }],
+  "$defs": {
+    "WorkerHandoff": {
+      "type": "object",
+      "required": ["contractVersion", "jobId", "kind", "callbackUrl", "timeoutSeconds", "expiresAt", "zeroDataRetention", "problem", "solver", "target", "inputHash"],
+      "additionalProperties": false,
+      "properties": {
+        "contractVersion": { "const": "3.0.0" },
+        "jobId": { "type": "string", "pattern": "^job_[a-f0-9]{32}$" },
+        "kind": { "enum": ["qubo-ising", "tensor-network", "geometric-registration"] },
+        "callbackUrl": { "type": "string", "format": "uri" },
+        "timeoutSeconds": { "type": "integer", "minimum": 1, "maximum": 600 },
+        "expiresAt": { "type": "string", "format": "date-time" },
+        "zeroDataRetention": { "type": "boolean" },
+        "problem": { "type": "object" },
+        "solver": { "type": "object" },
+        "target": { "const": "gpu" },
+        "inputHash": { "type": "string", "pattern": "^[a-f0-9]{64}$" }
+      }
+    },
+    "WorkerCallback": {
+      "type": "object",
+      "required": ["contractVersion", "kind", "jobId", "inputHash", "status", "solution", "diagnostics", "error", "usage"],
+      "additionalProperties": false,
+      "properties": {
+        "contractVersion": { "const": "3.0.0" },
+        "kind": { "enum": ["qubo-ising", "tensor-network", "geometric-registration"] },
+        "jobId": { "type": "string", "pattern": "^job_[a-f0-9]{32}$" },
+        "inputHash": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+        "status": { "enum": ["completed", "failed"] },
+        "solution": { "type": ["object", "null"] },
+        "diagnostics": { "type": ["object", "null"] },
+        "error": { "type": ["object", "null"] },
+        "usage": { "type": ["object", "null"] }
+      }
+    }
+  }
+}

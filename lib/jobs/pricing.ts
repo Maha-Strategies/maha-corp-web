@@ -19,6 +19,8 @@ import type { JobKind } from '@/lib/jobs/contract'
  */
 const JOB_PRICING: Record<JobKind, { base: number; perThousandVariables: number }> = {
   'qubo-ising': { base: 500, perThousandVariables: 25 },
+  'tensor-network': { base: 750, perThousandVariables: 50 },
+  'geometric-registration': { base: 500, perThousandVariables: 25 },
 }
 
 export function quoteJobCredits(kind: JobKind, problemSize: number): number {

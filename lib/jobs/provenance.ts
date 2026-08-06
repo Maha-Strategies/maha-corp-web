@@ -1,6 +1,7 @@
 /** Credential-safe public job response helpers. */
 
 import type { JobRecord } from '@/lib/jobs/queue'
+import type { BinaryOptimizationSolution } from '@/lib/jobs/contract'
 
 export function jobResponseHeaders(input: { zeroDataRetention: boolean; creditsRemaining?: number | null }) {
   const headers: Record<string, string> = {
@@ -13,6 +14,7 @@ export function jobResponseHeaders(input: { zeroDataRetention: boolean; creditsR
 }
 
 export function publicJobView(job: JobRecord) {
+  const binary = job.kind !== 'geometric-registration' && job.solution ? job.solution as BinaryOptimizationSolution : null
   return {
     jobId: job.jobId,
     kind: job.kind,
@@ -25,16 +27,13 @@ export function publicJobView(job: JobRecord) {
       charged: job.creditsCharged,
       refunded: job.status === 'failed' || job.status === 'cancelled' ? job.reservedCredits : 0,
     },
-    result: job.solution ? {
-      objectiveValue: job.solution.objectiveValue,
-      assignment: job.solution.assignment,
-      bestBound: job.solution.bestBound,
-      provenOptimal: job.solution.provenOptimal,
-    } : null,
+    result: binary ? { objectiveValue: binary.objectiveValue, assignment: binary.assignment, bestBound: binary.bestBound, provenOptimal: binary.provenOptimal } : job.solution,
     diagnostics: job.diagnostics,
     error: job.error,
     timestamps: { createdAt: job.createdAt, updatedAt: job.updatedAt, expiresAt: job.expiresAt },
     problemStored: false,
-    methodBoundary: 'Results above the exact threshold are heuristic: no optimality or certified-bound claim is made.',
+    methodBoundary: job.kind === 'geometric-registration'
+      ? 'The Kabsch result is the weighted least-squares rigid transform for paired points; correspondence search and non-rigid deformation are outside this contract.'
+      : 'Results above the exact threshold are heuristic: no optimality or certified-bound claim is made.',
   }
 }

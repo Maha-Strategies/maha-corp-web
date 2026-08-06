@@ -37,7 +37,31 @@ await maha.mcp.updateSettings({
   failureThreshold: 3,
   cooldownMs: 30_000,
 })
+
+const tensorResult = await maha.optimization.solveTensorNetwork({
+  clientRequestId: crypto.randomUUID().replaceAll('-', ''),
+  problem: {
+    formulation: 'qubo',
+    size: 3,
+    terms: [{ i: 0, j: 0, value: -1 }, { i: 1, j: 1, value: -1 }],
+  },
+  solver: { bondDimension: 256, exactThreshold: 18 },
+})
+
+const registration = await maha.optimization.solveGeometricRegistration({
+  clientRequestId: crypto.randomUUID().replaceAll('-', ''),
+  problem: {
+    sourcePoints: [[0, 0, 0], [1, 0, 0], [0, 1, 0]],
+    targetPoints: [[2, 3, 4], [3, 3, 4], [2, 4, 4]],
+  },
+})
 ```
+
+The tensor-network method uses a declared, bounded transfer-frontier bond
+dimension. Above the exact threshold it is a heuristic and does not claim a
+certified bound or global optimum. Geometric registration fits a weighted
+least-squares rigid transform to already paired 3D points; it does not search
+for correspondences or perform non-rigid fitting.
 
 Registration performs the first bounded `tools/list` discovery automatically. Server listings and refreshes return validated tool metadata, never upstream credential or encrypted credential material.
 

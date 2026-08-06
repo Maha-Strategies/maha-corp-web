@@ -28,6 +28,30 @@ export type QuboIsingJob = {
   diagnostics: { algorithm: 'exhaustive-enumeration' | 'parallel-update-simulated-annealing-torch-v1'; sweepsCompleted: number; replicas: number | null; acceptedMoves: number | null; wallClockSeconds: number; deviceClass: string } | null
   error: { code: string; message: string } | null
 }
+export type TensorNetworkRequest = {
+  clientRequestId: string
+  problem: QuboIsingRequest['problem']
+  solver?: { bondDimension?: number; exactThreshold?: number }
+  target?: 'gpu'; timeoutSeconds?: number
+}
+export type TensorNetworkJob = Omit<QuboIsingJob, 'kind' | 'diagnostics'> & {
+  kind: 'tensor-network'
+  diagnostics: { algorithm: 'exhaustive-enumeration' | 'bounded-bond-transfer-contraction-torch-v1'; sweepsCompleted: number; replicas: null; acceptedMoves: null; wallClockSeconds: number; deviceClass: string; bondDimension?: number; peakFrontier?: number; truncations?: number } | null
+}
+export type Point3 = [number, number, number]
+export type GeometricRegistrationRequest = {
+  clientRequestId: string
+  problem: { sourcePoints: Point3[]; targetPoints: Point3[]; weights?: number[] }
+  solver?: { allowReflection?: false }
+  target?: 'gpu'; timeoutSeconds?: number
+}
+export type GeometricRegistrationJob = Omit<QuboIsingJob, 'kind' | 'acceptedConfiguration' | 'result' | 'diagnostics'> & {
+  kind: 'geometric-registration'
+  acceptedConfiguration: { formulation: 'se3-paired-registration'; problemSize: number; target: 'gpu' }
+  result: { rotation: [Point3, Point3, Point3]; translation: Point3; rmse: number; maxError: number; determinant: number } | null
+  diagnostics: { algorithm: 'weighted-kabsch-svd-torch-v1'; pointCount: number; reflectionCorrected: boolean; orthogonalityResidual: number; singularValues: number[]; wallClockSeconds: number; deviceClass: string } | null
+}
+export type MahaOptimizationJob = QuboIsingJob | TensorNetworkJob | GeometricRegistrationJob
 
 export class MahaApiError extends Error { readonly status: number; readonly code: string; constructor(status: number, code: string, message: string) { super(message); this.name = 'MahaApiError'; this.status = status; this.code = code } }
 export class MahaAuthenticationError extends MahaApiError { constructor(status: 401 | 402, code: string, message: string) { super(status, code, message); this.name = 'MahaAuthenticationError' } }
@@ -65,7 +89,9 @@ export class MahaClient {
 
   public readonly optimization = {
     submitQuboIsing: async (payload: QuboIsingRequest): Promise<QuboIsingJob> => this.request('/api/v1/jobs/qubo-ising', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) }),
-    getJob: async (jobId: string): Promise<QuboIsingJob> => {
+    submitTensorNetwork: async (payload: TensorNetworkRequest): Promise<TensorNetworkJob> => this.request('/api/v1/jobs/tensor-network', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) }),
+    submitGeometricRegistration: async (payload: GeometricRegistrationRequest): Promise<GeometricRegistrationJob> => this.request('/api/v1/jobs/geometric-registration', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) }),
+    getJob: async <T extends MahaOptimizationJob = MahaOptimizationJob>(jobId: string): Promise<T> => {
       if (!/^job_[a-f0-9]{32}$/.test(jobId)) throw new Error('jobId is malformed.')
       return this.request(`/api/v1/jobs/${encodeURIComponent(jobId)}`)
     },
@@ -76,10 +102,36 @@ export class MahaClient {
       while (job.status === 'queued' || job.status === 'processing') {
         if (Date.now() >= deadline) throw new MahaApiError(408, 'job_poll_timeout', 'QUBO/Ising job did not reach a terminal state before the polling deadline.')
         await new Promise((resolve) => setTimeout(resolve, delay))
-        job = await this.optimization.getJob(job.jobId)
+        job = await this.optimization.getJob<QuboIsingJob>(job.jobId)
         delay = Math.min(5_000, Math.round(delay * 1.5))
       }
       if (job.status !== 'completed') throw new MahaApiError(500, job.error?.code ?? 'job_failed', job.error?.message ?? `QUBO/Ising job ended with status ${job.status}.`)
+      return job
+    },
+    solveTensorNetwork: async (payload: TensorNetworkRequest, options: { pollIntervalMs?: number; timeoutMs?: number } = {}): Promise<TensorNetworkJob> => {
+      let job = await this.optimization.submitTensorNetwork(payload)
+      const deadline = Date.now() + (options.timeoutMs ?? 120_000)
+      let delay = Math.max(100, options.pollIntervalMs ?? 500)
+      while (job.status === 'queued' || job.status === 'processing') {
+        if (Date.now() >= deadline) throw new MahaApiError(408, 'job_poll_timeout', 'Tensor-network job did not reach a terminal state before the polling deadline.')
+        await new Promise((resolve) => setTimeout(resolve, delay))
+        job = await this.optimization.getJob<TensorNetworkJob>(job.jobId)
+        delay = Math.min(5_000, Math.round(delay * 1.5))
+      }
+      if (job.status !== 'completed') throw new MahaApiError(500, job.error?.code ?? 'job_failed', job.error?.message ?? `Tensor-network job ended with status ${job.status}.`)
+      return job
+    },
+    solveGeometricRegistration: async (payload: GeometricRegistrationRequest, options: { pollIntervalMs?: number; timeoutMs?: number } = {}): Promise<GeometricRegistrationJob> => {
+      let job = await this.optimization.submitGeometricRegistration(payload)
+      const deadline = Date.now() + (options.timeoutMs ?? 120_000)
+      let delay = Math.max(100, options.pollIntervalMs ?? 500)
+      while (job.status === 'queued' || job.status === 'processing') {
+        if (Date.now() >= deadline) throw new MahaApiError(408, 'job_poll_timeout', 'Geometric registration job did not reach a terminal state before the polling deadline.')
+        await new Promise((resolve) => setTimeout(resolve, delay))
+        job = await this.optimization.getJob<GeometricRegistrationJob>(job.jobId)
+        delay = Math.min(5_000, Math.round(delay * 1.5))
+      }
+      if (job.status !== 'completed') throw new MahaApiError(500, job.error?.code ?? 'job_failed', job.error?.message ?? `Geometric registration job ended with status ${job.status}.`)
       return job
     },
   }

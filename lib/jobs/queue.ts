@@ -31,9 +31,14 @@ import { scopedRedisKey } from '@/lib/redis-namespace'
 import { releaseHeldSlot } from '@/lib/x402/slot'
 import {
   createJobId,
+  type BinaryOptimizationSolution,
+  type GeometricRegistrationJobRequest,
+  type GeometricRegistrationSolution,
+  type JobRequest,
   type JobKind,
   type JobStatus,
   type QuboIsingJobRequest,
+  type TensorNetworkJobRequest,
   type WorkerCallback,
   type WorkerDiagnostics,
   type WorkerHandoff,
@@ -139,19 +144,8 @@ export async function getJob(jobId: string): Promise<JobRecord | null> {
  * insertion order, so a refactor that reorders the object literal above cannot
  * silently change every hash and break worker-side echo comparison.
  */
-export function computeInputHash(request: QuboIsingJobRequest): string {
-  const canonical = JSON.stringify([
-    request.problem.formulation,
-    request.problem.size,
-    request.problem.terms,
-    request.solver.maxSweeps,
-    request.solver.replicas,
-    request.solver.seed,
-    request.solver.exactThreshold,
-    request.solver.initialTemperature,
-    request.solver.finalTemperature,
-    request.target,
-  ])
+export function computeInputHash(kind: JobKind, request: JobRequest): string {
+  const canonical = JSON.stringify([kind, request.problem, request.solver, request.target])
   return createHash('sha256').update(canonical).digest('hex')
 }
 
@@ -165,8 +159,9 @@ export type EnqueueOutcome =
   | { kind: 'insufficient_credits'; required: number }
   | { kind: 'unavailable' }
 
-export async function enqueueQuboIsingJob(input: {
-  request: QuboIsingJobRequest
+export async function enqueueJob(input: {
+  kind: JobKind
+  request: JobRequest
   keyId: string
   zeroDataRetention: boolean
   callbackUrl: string
@@ -178,7 +173,7 @@ export async function enqueueQuboIsingJob(input: {
    */
   slot?: { resource: string; token: string } | null
 }): Promise<EnqueueOutcome> {
-  const kind: JobKind = 'qubo-ising'
+  const kind = input.kind
   const idemKey = idempotencyKey(input.keyId, input.request.clientRequestId)
 
   // Idempotency first. A client retrying a POST after a network timeout must
@@ -195,7 +190,9 @@ export async function enqueueQuboIsingJob(input: {
     await redis.set(idemKey, jobId, { ex: IDEMPOTENCY_TTL_SECONDS })
   }
 
-  const credits = quoteJobCredits(kind, input.request.problem.size)
+  const problemSize = 'size' in input.request.problem ? input.request.problem.size : input.request.problem.sourcePoints.length
+  const formulation = 'formulation' in input.request.problem ? input.request.problem.formulation : 'se3-paired-registration'
+  const credits = quoteJobCredits(kind, problemSize)
 
   // Reserve before any work is scheduled. Charging on completion was the
   // alternative and it is unsound: the balance can be spent elsewhere while the
@@ -215,7 +212,7 @@ export async function enqueueQuboIsingJob(input: {
 
   const now = new Date()
   const expiresAt = new Date(now.getTime() + input.request.timeoutSeconds * 1000)
-  const inputHash = computeInputHash(input.request)
+  const inputHash = computeInputHash(kind, input.request)
 
   const record: Record<string, string> = {
     jobId,
@@ -224,8 +221,8 @@ export async function enqueueQuboIsingJob(input: {
     keyId: input.keyId,
     clientRequestId: input.request.clientRequestId,
     inputHash,
-    problemSize: String(input.request.problem.size),
-    formulation: input.request.problem.formulation,
+    problemSize: String(problemSize),
+    formulation,
     target: input.request.target,
     zeroDataRetention: String(input.zeroDataRetention),
     reservedCredits: String(credits),
@@ -273,6 +270,18 @@ export async function enqueueQuboIsingJob(input: {
   }
 
   return { kind: 'queued', job, handoff }
+}
+
+export function enqueueQuboIsingJob(input: Omit<Parameters<typeof enqueueJob>[0], 'kind' | 'request'> & { request: QuboIsingJobRequest }) {
+  return enqueueJob({ ...input, kind: 'qubo-ising', request: input.request })
+}
+
+export function enqueueTensorNetworkJob(input: Omit<Parameters<typeof enqueueJob>[0], 'kind' | 'request'> & { request: TensorNetworkJobRequest }) {
+  return enqueueJob({ ...input, kind: 'tensor-network', request: input.request })
+}
+
+export function enqueueGeometricRegistrationJob(input: Omit<Parameters<typeof enqueueJob>[0], 'kind' | 'request'> & { request: GeometricRegistrationJobRequest }) {
+  return enqueueJob({ ...input, kind: 'geometric-registration', request: input.request })
 }
 
 // ---------------------------------------------------------------------------
@@ -342,19 +351,28 @@ export async function settleJobFromCallback(callback: WorkerCallback): Promise<S
   const job = await getJob(callback.jobId)
   if (!job) return { kind: 'unknown_job' }
 
+  if (callback.kind !== job.kind) return { kind: 'input_hash_mismatch', job }
+
   // The worker echoes the input hash we sent. A mismatch means the result does
   // not belong to this job's problem — reject it rather than storing a solution
   // to a question nobody asked.
   if (callback.inputHash !== job.inputHash) return { kind: 'input_hash_mismatch', job }
 
-  if (callback.status === 'completed' && callback.solution) {
+  if (callback.status === 'completed' && callback.solution && job.kind !== 'geometric-registration') {
+    const solution = callback.solution as BinaryOptimizationSolution
     const domain = job.formulation === 'qubo' ? new Set([0, 1]) : new Set([-1, 1])
-    if (callback.solution.assignment.length !== job.problemSize || callback.solution.assignment.some((value) => !domain.has(value))) {
+    if (solution.assignment.length !== job.problemSize || solution.assignment.some((value) => !domain.has(value))) {
       return { kind: 'invalid_result', job }
     }
-    if (callback.solution.provenOptimal && (job.problemSize > 18 || callback.diagnostics?.algorithm !== 'exhaustive-enumeration')) {
+    if (solution.provenOptimal && (job.problemSize > 18 || callback.diagnostics?.algorithm !== 'exhaustive-enumeration')) {
       return { kind: 'invalid_result', job }
     }
+  }
+  if (callback.status === 'completed' && callback.solution && job.kind === 'geometric-registration') {
+    const solution = callback.solution as GeometricRegistrationSolution
+    const determinantBoundary = Math.abs(solution.determinant - 1) <= 1e-5
+    const orthogonalityBoundary = (callback.diagnostics?.orthogonalityResidual ?? Number.POSITIVE_INFINITY) <= 1e-5
+    if (!determinantBoundary || !orthogonalityBoundary || callback.diagnostics?.pointCount !== job.problemSize) return { kind: 'invalid_result', job }
   }
 
   const completed = callback.status === 'completed'
