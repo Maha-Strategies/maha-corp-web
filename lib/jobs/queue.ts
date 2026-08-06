@@ -418,18 +418,34 @@ export async function settleJobFromCallback(callback: WorkerCallback): Promise<S
 // ---------------------------------------------------------------------------
 
 /**
+ * Fail closed before reserving credits when the worker handoff or callback
+ * cannot be authenticated. This is deliberately a presence/configuration
+ * check only: a stale token or unreachable worker is handled by the
+ * post-enqueue dispatch compensation below.
+ */
+export function workerDispatchConfigured(): boolean {
+  const workerUrl = process.env.MAHA_WORKER_URL
+  const workerToken = process.env.MAHA_WORKER_TOKEN
+  const webhookSecret = process.env.MAHA_WORKER_WEBHOOK_SECRET
+  if (!workerUrl || !workerToken || !webhookSecret) return false
+  try { return new URL(workerUrl).protocol === 'https:' } catch { return false }
+}
+
+/**
  * Hand a job to the GPU worker.
  *
  * Called from `after()` in the route so the client's 202 is not blocked on the
- * worker's control plane. Dispatch failure is deliberately NOT fatal: the job
- * stays `queued` in Redis and the reclaim sweep re-dispatches or expires it.
- * Failing the request here would mean a job the customer was told was queued,
- * and was charged for, silently never existing.
+ * worker's control plane. A false result must be followed by
+ * `failUndispatchedJob`: the reclaim sweep only expires jobs after their
+ * deadline and does not provide a retry queue.
  */
 export async function dispatchToWorker(handoff: WorkerHandoff): Promise<boolean> {
   const workerUrl = process.env.MAHA_WORKER_URL
   const workerToken = process.env.MAHA_WORKER_TOKEN
-  if (!workerUrl || !workerToken) return false
+  if (!workerUrl || !workerToken) {
+    console.error('GPU worker dispatch skipped: worker URL or token is not configured.')
+    return false
+  }
 
   try {
     const response = await fetch(workerUrl, {
@@ -443,12 +459,38 @@ export async function dispatchToWorker(handoff: WorkerHandoff): Promise<boolean>
       body: JSON.stringify(handoff),
       cache: 'no-store',
     })
-    if (!response.ok) return false
+    if (!response.ok) {
+      console.error('GPU worker dispatch rejected.', { jobId: handoff.jobId, kind: handoff.kind, status: response.status })
+      return false
+    }
     await markJobProcessing(handoff.jobId)
     return true
-  } catch {
+  } catch (error) {
+    console.error('GPU worker dispatch failed.', {
+      jobId: handoff.jobId,
+      kind: handoff.kind,
+      error: error instanceof Error ? error.message : 'unknown_error',
+    })
     return false
   }
+}
+
+/**
+ * Compensate a handoff that never reached the worker. The ordinary settlement
+ * guard makes this idempotent and refunds the reservation exactly once.
+ */
+export function failUndispatchedJob(handoff: WorkerHandoff): Promise<SettleOutcome> {
+  return settleJobFromCallback({
+    contractVersion: WORKER_CONTRACT_VERSION,
+    jobId: handoff.jobId,
+    kind: handoff.kind,
+    inputHash: handoff.inputHash,
+    status: 'failed',
+    solution: null,
+    diagnostics: null,
+    error: { code: 'worker_dispatch_failed', message: 'The GPU worker did not accept the job. Reserved credits were refunded.' },
+    usage: null,
+  })
 }
 
 /**
