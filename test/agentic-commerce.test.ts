@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict'
-import { readFileSync } from 'node:fs'
+import { existsSync, readFileSync } from 'node:fs'
 import { join } from 'node:path'
 import test from 'node:test'
 
@@ -71,9 +71,43 @@ test('the served orientation file points agents at the commercial surfaces', () 
   // The payment boundary travels with the offer, not only on the purchase page.
   assert.match(llms, /human purchaser must authorize/i)
   assert.match(llms, /api\/v1\/compress/)
+  for (const endpoint of [
+    '/api/v1/jobs/qubo-ising',
+    '/api/v1/jobs/tensor-network',
+    '/api/v1/jobs/geometric-registration',
+  ]) assert.ok(llms.includes(endpoint), `${endpoint} must be discoverable`)
   for (const marker of ['tensor-opt', 'geometric-ai', 'holographic-qec', 'qec-compiler', 'landscape-opt']) {
     assert.equal(llms.toLowerCase().includes(marker), false, `${marker} must not be publicly discoverable`)
   }
+})
+
+test('the generated orientation route is not shadowed by an obsolete public file', () => {
+  assert.equal(existsSync(join(import.meta.dirname, '..', 'public', 'llms.txt')), false)
+})
+
+test('public agent discovery identifies the live production API capabilities without offering autonomous payment', () => {
+  const offers = JSON.parse(readFileSync(join(DISCOVERY_DIR, 'agent-offers.json'), 'utf8')) as {
+    updatedAt: string
+    transactionPolicy: { autonomousPaymentSupported: boolean }
+    technicalCapabilities: Array<{ id: string; endpoint?: string; methodBoundary?: string }>
+  }
+  const card = JSON.parse(readFileSync(join(DISCOVERY_DIR, 'agent-card.json'), 'utf8')) as {
+    serviceCatalog: string
+    capabilities: Array<{ id: string }>
+  }
+  assert.equal(offers.updatedAt, '2026-08-06T00:00:00.000Z')
+  assert.equal(offers.transactionPolicy.autonomousPaymentSupported, false)
+  const expected = [
+    'context-compression',
+    'gpu-qubo-ising',
+    'gpu-tensor-network',
+    'gpu-geometric-registration',
+    'enterprise-mcp-gateway',
+  ]
+  assert.deepEqual(offers.technicalCapabilities.map((capability) => capability.id), expected)
+  assert.deepEqual(card.capabilities.map((capability) => capability.id), expected)
+  assert.equal(card.serviceCatalog, AGENTIC_COMMERCE_MANIFEST_URL)
+  assert.match(offers.technicalCapabilities.find((capability) => capability.id === 'gpu-tensor-network')?.methodBoundary ?? '', /heuristic/i)
 })
 
 test('agent context links only to the canonical public discovery surfaces', () => {
