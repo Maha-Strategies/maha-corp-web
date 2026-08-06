@@ -236,10 +236,6 @@ def e2e_mcp_upstream(request_data: Dict[str, Any], authorization: str = Header(d
     if request_data.get("jsonrpc") != "2.0" or not isinstance(method, str) or not method:
         return {"jsonrpc": "2.0", "id": request_id, "error": {"code": -32600, "message": "Invalid JSON-RPC 2.0 request"}}
 
-    if method == "test/timeout":
-        time.sleep(2)
-        return {"jsonrpc": "2.0", "id": request_id, "result": {"authenticated": True, "method": method}}
-
     if method == "tools/list":
         return {
             "jsonrpc": "2.0",
@@ -257,9 +253,22 @@ def e2e_mcp_upstream(request_data: Dict[str, Any], authorization: str = Header(d
                         "required": ["portfolioId"],
                         "additionalProperties": False,
                     },
+                }, {
+                    "name": "simulateTimeout",
+                    "description": "Controlled staging-only timeout fixture for circuit-breaker verification.",
+                    "inputSchema": {"type": "object", "additionalProperties": False},
                 }]
             },
         }
+
+    if method == "tools/call":
+        params = request_data.get("params", {})
+        tool_name = params.get("name") if isinstance(params, dict) else None
+        if tool_name == "simulateTimeout":
+            time.sleep(2)
+        if tool_name not in {"calculateRiskScore", "simulateTimeout"}:
+            return {"jsonrpc": "2.0", "id": request_id, "error": {"code": -32601, "message": "Tool not found"}}
+        return {"jsonrpc": "2.0", "id": request_id, "result": {"authenticated": True, "method": method, "toolName": tool_name}}
 
     # Return only deterministic, non-sensitive request metadata. In
     # particular, never echo Authorization or any upstream credential.

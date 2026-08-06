@@ -128,6 +128,7 @@ export class MCPProxyEngine {
       meta: {
         serverId: server.id,
         method: req.method,
+        toolName: req.method === 'tools/call' && typeof req.params?.name === 'string' ? req.params.name : null,
         latencyMs
       }
     };

@@ -244,7 +244,7 @@ export const openApiDocument = {
       post: {
         tags: ['Enterprise MCP Gateway'],
         summary: 'Register Upstream MCP Server',
-        description: 'Stores and encrypts upstream credentials, then calls tools/list to persist a validated tool inventory. Encrypted credential material is never returned.',
+        description: 'Canonical gateway registration. Stores and encrypts upstream credentials, calls tools/list to persist a validated tool inventory, and applies an explicit method/tool policy. Encrypted credential material is never returned.',
         security: [{ credential: [] }],
         requestBody: {
           required: true,
@@ -252,12 +252,14 @@ export const openApiDocument = {
             'application/json': {
               schema: {
                 type: 'object',
-                required: ['name', 'baseUrl', 'authType'],
+                required: ['name', 'baseUrl', 'authType', 'allowedMethods', 'allowedToolNames'],
                 properties: {
                   name: { type: 'string' },
                   baseUrl: { type: 'string' },
                   authType: { type: 'string', enum: ['bearer', 'hmac', 'none'] },
                   secret: { type: 'string' },
+                  allowedMethods: { type: 'array', minItems: 1, uniqueItems: true, items: { type: 'string', enum: ['initialize', 'notifications/initialized', 'ping', 'tools/list', 'resources/list', 'resources/read', 'prompts/list', 'prompts/get', 'tools/call'] } },
+                  allowedToolNames: { type: 'array', maxItems: 256, uniqueItems: true, items: { type: 'string' }, description: 'tools/call requires at least one approved name. Names must come from the validated upstream inventory.' },
                 },
               },
             },
@@ -293,10 +295,11 @@ export const openApiDocument = {
                   type: 'object', required: ['servers'], properties: {
                     servers: {
                       type: 'array', items: {
-                        type: 'object', required: ['serverId', 'name', 'baseUrl', 'createdAt', 'status', 'discovery'],
+                        type: 'object', required: ['serverId', 'name', 'baseUrl', 'createdAt', 'status', 'policy', 'discovery'],
                         properties: {
                           serverId: { type: 'string' }, name: { type: 'string' }, baseUrl: { type: 'string', format: 'uri' },
                           createdAt: { type: 'integer' }, status: { type: 'string', enum: ['active', 'suspended'] },
+                          policy: { type: 'object', required: ['allowedMethods', 'allowedToolNames', 'mode'], properties: { allowedMethods: { type: 'array', items: { type: 'string' } }, allowedToolNames: { type: 'array', items: { type: 'string' } }, mode: { type: 'string', enum: ['explicit', 'legacy_discovered'] } } },
                           discovery: {
                             type: 'object', required: ['status', 'tools'], properties: {
                               status: { type: 'string', enum: ['pending', 'ready', 'error'] },
@@ -333,6 +336,17 @@ export const openApiDocument = {
           '502': errorResponse('Upstream discovery failed or returned invalid data.'),
           '503': errorResponse('Upstream circuit breaker open.'),
         },
+      },
+    },
+    '/api/v1/mcp/servers/{serverId}': {
+      patch: {
+        tags: ['Enterprise MCP Gateway'],
+        summary: 'Set MCP Server Method and Tool Policy',
+        description: 'Replaces the explicit policy for a tenant-owned upstream. Callable tool names must appear in the latest validated tools/list inventory.',
+        security: [{ credential: [] }],
+        parameters: [{ name: 'serverId', in: 'path', required: true, schema: { type: 'string', pattern: '^mcp_srv_[a-f0-9]{16}$' } }],
+        requestBody: { required: true, content: { 'application/json': { schema: { type: 'object', required: ['allowedMethods', 'allowedToolNames'], properties: { allowedMethods: { type: 'array', minItems: 1, uniqueItems: true, items: { type: 'string' } }, allowedToolNames: { type: 'array', maxItems: 256, uniqueItems: true, items: { type: 'string' } }, status: { type: 'string', enum: ['active', 'suspended'] } } } } } },
+        responses: { '200': { description: 'Updated credential-safe server summary.', content: { 'application/json': { schema: { type: 'object' } } } }, '400': errorResponse('Invalid policy, status, or unknown tool.'), '401': errorResponse('Missing or invalid API key.'), '404': errorResponse('MCP server not registered to this tenant.'), '415': errorResponse('Content-Type must be application/json.'), '503': errorResponse('MCP registry unavailable.') },
       },
     },
     '/api/v1/mcp/settings': {
@@ -385,6 +399,7 @@ export const openApiDocument = {
           '413': errorResponse('MCP request exceeds 64 KB.'),
           '401': errorResponse('Missing or invalid API key.'),
           '404': errorResponse('Target MCP Server not registered for this tenant.'),
+          '403': errorResponse('MCP method or tool is not permitted by the server policy.'),
           '429': errorResponse('Tenant MCP request limit reached.'),
           '502': errorResponse('Upstream MCP server returned an error or invalid response.'),
           '503': errorResponse('Upstream circuit breaker open or server suspended.'),
@@ -427,29 +442,6 @@ export const openApiDocument = {
         tags: ['Agentic Commerce'], operationId: 'getMcpBridgeCompatibility', summary: 'Discover local MCP bridge compatibility',
         description: 'Returns the versioned contract for the local commercial bridge and explicitly distinguishes it from the hosted Cognitive Gateway.',
         responses: { '200': { description: 'Public compatibility manifest.', content: { 'application/json': { schema: { type: 'object', required: ['bridge', 'compatibility', 'security'], properties: { bridge: { type: 'object' }, compatibility: { type: 'object' }, security: { type: 'object' }, distinctServices: { type: 'array' } } } } } } },
-      },
-    },
-    '/api/mcp-gateway/{serverId}': {
-      post: {
-        tags: ['Enterprise MCP Gateway'],
-        operationId: 'proxyTenantMcpMessage',
-        summary: 'Send an allowlisted MCP message through a tenant gateway',
-        description: 'Forwards a JSON-RPC MCP message only when the caller credential and registered server belong to the same tenant, the method is allowed, and tools/call names are allowlisted. An operator can additionally require selected tools to receive an exact Context Pack registered to the same tenant: the call supplies contextPackId, contextPackHash and context, and the gateway verifies the content hash before forwarding. The first release supports public HTTPS JSON upstreams only; it does not forward bearer tokens, store upstream credentials, or stream SSE.',
-        security: [{ credential: [] }],
-        parameters: [
-          { name: 'serverId', in: 'path', required: true, schema: { type: 'string', pattern: '^mcp_srv_[a-f0-9]{32}$' } },
-          { name: 'Mcp-Method', in: 'header', required: true, description: 'Must match JSON-RPC method exactly.', schema: { type: 'string' } },
-          { name: 'Mcp-Name', in: 'header', required: false, description: 'Required for tools/call, resources/read, and prompts/get; must match the requested name or URI.', schema: { type: 'string' } },
-        ],
-        requestBody: { required: true, content: { 'application/json': { schema: { type: 'object', required: ['jsonrpc', 'method'], properties: { jsonrpc: { const: '2.0' }, id: { oneOf: [{ type: 'string' }, { type: 'number' }, { type: 'null' }] }, method: { type: 'string' }, params: { type: 'object' } } } } } },
-        responses: {
-          '200': { description: 'JSON response from the allowlisted upstream MCP server.', content: { 'application/json': { schema: { type: 'object' } } } },
-          '400': errorResponse('Invalid JSON-RPC message or MCP headers.'),
-          '401': errorResponse('Missing or invalid tenant credential.'),
-          '403': errorResponse('Tenant boundary, method, tool, origin, or Context Pack admission policy denied the request.'),
-          '413': errorResponse('Request exceeds 64 KB.'),
-          '502': errorResponse('Registered upstream was unavailable or returned a response over 1 MB.'),
-        },
       },
     },
     '/api/context-packs': {

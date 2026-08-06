@@ -31,6 +31,11 @@ console.log(compressed.context)
 const servers = await maha.mcp.listServers()
 const refreshed = await maha.mcp.discoverTools(servers[0].serverId)
 
+await maha.mcp.updateServerPolicy(refreshed.serverId, {
+  allowedMethods: ['initialize', 'notifications/initialized', 'ping', 'tools/list', 'tools/call'],
+  allowedToolNames: ['portfolio.risk'],
+})
+
 await maha.mcp.updateSettings({
   requestsPerMinute: 120,
   timeoutMs: 8_000,
@@ -63,7 +68,7 @@ certified bound or global optimum. Geometric registration fits a weighted
 least-squares rigid transform to already paired 3D points; it does not search
 for correspondences or perform non-rigid fitting.
 
-Registration performs the first bounded `tools/list` discovery automatically. Server listings and refreshes return validated tool metadata, never upstream credential or encrypted credential material.
+Registration performs the first bounded `tools/list` discovery automatically and starts with a read-only method policy. Server listings and refreshes return validated tool metadata, never upstream credential or encrypted credential material. Approve callable tools explicitly with `updateServerPolicy()` before dispatching `tools/call`.
 
 `compress()` sends the documented context-pack contract and returns the compiled
 context, source coverage, warnings, and measured reduction. The universal SDK

@@ -17,7 +17,7 @@ client = MahaClient(api_key="maha_live_sk_...")
 client.balance()
 client.compress(task="brief the board", documents=[{"id": "d1", "text": "..."}], token_budget=4000)
 client.verify_claim("chronobiological-entrainment")
-client.call_mcp_tool("mcp_srv_...", "tools/calculateRiskScore", {"portfolioId": "pf_1"})
+client.call_mcp_tool("mcp_srv_...", "tools/call", {"name": "calculateRiskScore", "arguments": {"portfolioId": "pf_1"}})
 ```
 
 Errors are typed, so an agent can act on them rather than parse strings:

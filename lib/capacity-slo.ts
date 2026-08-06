@@ -81,7 +81,7 @@ export function capacityScenarios(environment: Environment, profile: CapacityPro
   return [{
     name: 'mcp-controlled-upstream', path: `/api/v1/mcp/gateway/${serverId}`, method: 'POST',
     headers: { ...commonHeaders, Authorization: `Bearer ${apiKey}`, 'Content-Type': 'application/json' },
-    body: JSON.stringify({ jsonrpc: '2.0', id: 'capacity_probe', method: 'tools/calculateRiskScore', params: { portfolioId: 'capacity_canary', alpha: 0.05 } }),
+    body: JSON.stringify({ jsonrpc: '2.0', id: 'capacity_probe', method: 'tools/call', params: { name: 'calculateRiskScore', arguments: { portfolioId: 'capacity_canary', alpha: 0.05 } } }),
   }]
 }
 

@@ -4,6 +4,7 @@ import { MCPServerConfig, MCPServerSummary, MCPToolDiscovery } from './types';
 import { assertPublicUpstreamHost, parsePublicUpstreamUrl } from '../mcp-gateway';
 import { scopedRedisKey } from '../redis-namespace';
 import { traceRedisQuery } from '../observability/telemetry';
+import { MCP_SUPPORTED_METHODS } from './validation';
 
 const redis = Redis.fromEnv();
 
@@ -96,7 +97,19 @@ export class MCPRegistry {
   static async updateDiscovery(tenantId: string, serverId: string, discovery: MCPToolDiscovery): Promise<MCPServerConfig | null> {
     const server = await this.getServer(tenantId, serverId)
     if (!server) return null
-    const updated = { ...server, discovery }
+    const updated = {
+      ...server,
+      discovery,
+      ...(server.policyMode === 'legacy_discovered' ? { allowedToolNames: discovery.tools.map((tool) => tool.name) } : {}),
+    }
+    await traceRedisQuery('HSET', () => redis.hset(scopedRedisKey(`mcp:tenant:${tenantId}:servers`), { [serverId]: JSON.stringify(updated) }))
+    return updated
+  }
+
+  static async updatePolicy(tenantId: string, serverId: string, policy: Pick<MCPServerConfig, 'allowedMethods' | 'allowedToolNames'>, status?: MCPServerConfig['status']): Promise<MCPServerConfig | null> {
+    const server = await this.getServer(tenantId, serverId)
+    if (!server) return null
+    const updated: MCPServerConfig = { ...server, ...policy, ...(status ? { status } : {}), policyMode: 'explicit' }
     await traceRedisQuery('HSET', () => redis.hset(scopedRedisKey(`mcp:tenant:${tenantId}:servers`), { [serverId]: JSON.stringify(updated) }))
     return updated
   }
@@ -108,11 +121,20 @@ export class MCPRegistry {
       baseUrl: server.baseUrl,
       createdAt: server.createdAt,
       status: server.status,
+      policy: { allowedMethods: server.allowedMethods, allowedToolNames: server.allowedToolNames, mode: server.policyMode },
       discovery: server.discovery,
     }
   }
 
   private static normalize(server: MCPServerConfig): MCPServerConfig {
-    return { ...server, discovery: server.discovery ?? { status: 'pending', tools: [] } }
+    const discovery = server.discovery ?? { status: 'pending' as const, tools: [] }
+    const legacy = !Array.isArray(server.allowedMethods) || !Array.isArray(server.allowedToolNames)
+    return {
+      ...server,
+      discovery,
+      allowedMethods: legacy ? [...MCP_SUPPORTED_METHODS] : server.allowedMethods,
+      allowedToolNames: legacy ? discovery.tools.map((tool) => tool.name) : server.allowedToolNames,
+      policyMode: legacy ? 'legacy_discovered' : server.policyMode ?? 'explicit',
+    }
   }
 }

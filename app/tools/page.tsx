@@ -80,6 +80,14 @@ const tools = [
     action: 'Read MCP bridge guide',
     accent: 'cyan',
   },
+  {
+    eyebrow: 'Enterprise MCP Gateway',
+    title: 'Govern which agents can call which MCP tools',
+    body: 'Register approved upstreams, discover their tool surface, enforce tenant-scoped limits and allowlists, and retain metadata-only audit evidence without retaining tool arguments.',
+    href: '/enterprise-mcp-gateway',
+    action: 'Explore the enterprise gateway',
+    accent: 'cyan',
+  },
 ] as const
 
 export default function ToolsPage() {

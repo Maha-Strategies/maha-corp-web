@@ -5,10 +5,11 @@ export type ProvenanceVerifyResponse = { claim_id: string; title: string; summar
 
 // --- Audit & MCP Types ---
 export type AuditExportOptions = { format?: 'csv' | 'pdf'; startTime?: number; endTime?: number }
-export type RegisterMCPOptions = { name: string; baseUrl: string; authType: 'bearer' | 'hmac' | 'none'; secret?: string }
+export type McpServerPolicy = { allowedMethods: string[]; allowedToolNames: string[]; mode?: 'explicit' | 'legacy_discovered' }
+export type RegisterMCPOptions = { name: string; baseUrl: string; authType: 'bearer' | 'hmac' | 'none'; secret?: string; allowedMethods?: string[]; allowedToolNames?: string[] }
 export type McpToolDefinition = { name: string; description?: string; inputSchema: Record<string, unknown> }
 export type McpToolDiscovery = { status: 'pending' | 'ready' | 'error'; tools: McpToolDefinition[]; discoveredAt?: number; error?: string }
-export type McpServerSummary = { serverId: string; name: string; baseUrl: string; createdAt: number; status: 'active' | 'suspended'; discovery: McpToolDiscovery }
+export type McpServerSummary = { serverId: string; name: string; baseUrl: string; createdAt: number; status: 'active' | 'suspended'; policy: McpServerPolicy; discovery: McpToolDiscovery }
 export type McpSlaSettings = { requestsPerMinute: number; timeoutMs: number; failureThreshold: number; cooldownMs: number }
 export type RotatedApiKey = { apiKey: string; apiKeyId: string; balanceCredits: number; tier: 'starter' | 'builder' | 'scale' | 'enterprise'; disclosure: string }
 export type TenantBillingSettings = { tenantId: string; tier: string; subscriptionStatus: string; subscriptionCredits: number; topupCredits: number; autoTopupEnabled: boolean; canEnableAutoTopup: boolean }
@@ -189,6 +190,11 @@ export class MahaClient {
       const response = await this.request<{ server: McpServerSummary }>(`/api/v1/mcp/servers/${encodeURIComponent(serverId)}/discover`, { method: 'POST' })
       return response.server
     },
+    /** Replaces the explicit method and tool allowlist for a tenant-owned upstream. */
+    updateServerPolicy: async (serverId: string, policy: { allowedMethods: string[]; allowedToolNames: string[]; status?: 'active' | 'suspended' }): Promise<McpServerSummary> => {
+      const response = await this.request<{ server: McpServerSummary }>(`/api/v1/mcp/servers/${encodeURIComponent(serverId)}`, { method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(policy) })
+      return response.server
+    },
     /** Reads tenant-wide MCP proxy rate, timeout, and circuit-breaker controls. */
     getSettings: async (): Promise<McpSlaSettings> => {
       const response = await this.request<{ settings: McpSlaSettings }>('/api/v1/mcp/settings')
@@ -205,7 +211,11 @@ export class MahaClient {
     registerServer: async (options: RegisterMCPOptions): Promise<McpServerSummary & { id: string }> => {
       return this.request('/api/v1/mcp/register', {
         method: 'POST',
-        body: JSON.stringify(options),
+        body: JSON.stringify({
+          ...options,
+          allowedMethods: options.allowedMethods ?? ['initialize', 'notifications/initialized', 'ping', 'tools/list', 'resources/list', 'resources/read', 'prompts/list', 'prompts/get'],
+          allowedToolNames: options.allowedToolNames ?? [],
+        }),
         headers: { 
           'Content-Type': 'application/json',
         }

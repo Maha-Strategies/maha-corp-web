@@ -25,6 +25,7 @@ export function McpSettingsPanel({ apiKey }: { apiKey: string }) {
   const [loadingSettings, setLoadingSettings] = useState(true)
   const [savingSettings, setSavingSettings] = useState(false)
   const [discovering, setDiscovering] = useState<string | null>(null)
+  const [savingPolicy, setSavingPolicy] = useState<string | null>(null)
   const [error, setError] = useState<string | null>(null)
   const [notice, setNotice] = useState<string | null>(null)
   const [registered, setRegistered] = useState<McpServerSummary | null>(null)
@@ -73,6 +74,22 @@ export function McpSettingsPanel({ apiKey }: { apiKey: string }) {
     finally { setDiscovering(null) }
   }
 
+  async function toggleTool(server: McpServerSummary, toolName: string) {
+    setSavingPolicy(server.serverId); setError(null); setNotice(null)
+    const allowedToolNames = server.policy.allowedToolNames.includes(toolName)
+      ? server.policy.allowedToolNames.filter((name) => name !== toolName)
+      : [...server.policy.allowedToolNames, toolName]
+    const allowedMethods = allowedToolNames.length > 0
+      ? Array.from(new Set([...server.policy.allowedMethods, 'tools/call']))
+      : server.policy.allowedMethods.filter((method) => method !== 'tools/call')
+    try {
+      const updated = await client().mcp.updateServerPolicy(server.serverId, { allowedMethods, allowedToolNames })
+      setServers((current) => current.map((candidate) => candidate.serverId === server.serverId ? updated : candidate))
+      setNotice(`Tool policy saved for ${server.name}.`)
+    } catch (caught) { setError(caught instanceof Error ? caught.message : 'The MCP tool policy could not be saved.') }
+    finally { setSavingPolicy(null) }
+  }
+
   async function saveSettings(event: React.FormEvent) {
     event.preventDefault(); setSavingSettings(true); setError(null); setNotice(null)
     try { setSettings(await client().mcp.updateSettings(settings)); setNotice('Tenant MCP rate, timeout, and circuit-breaker controls saved.') }
@@ -98,7 +115,14 @@ export function McpSettingsPanel({ apiKey }: { apiKey: string }) {
 
     <div className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
       <div className="flex flex-wrap items-center justify-between gap-3"><div><h3 className="font-semibold text-gray-900">Active connections and discovered tools</h3><p className="mt-1 text-xs text-gray-500">Tool schemas are validated and persisted; upstream credentials are never included.</p></div><button type="button" onClick={() => void loadServers()} disabled={loadingServers || loading} className="rounded-lg border border-gray-300 px-3 py-1.5 text-xs font-medium text-gray-700 hover:bg-gray-50 disabled:opacity-50">{loadingServers ? 'Refreshing…' : 'Refresh servers'}</button></div>
-      {loadingServers ? <p className="mt-4 text-sm text-gray-500">Loading registered servers…</p> : servers.length ? <div className="mt-4 space-y-4">{servers.map((server) => <article key={server.serverId} className="rounded-xl border border-gray-200 p-4"><div className="flex flex-wrap items-start justify-between gap-3"><div><h4 className="text-sm font-semibold text-gray-900">{server.name}</h4><p className="mt-1 break-all font-mono text-[11px] text-gray-500">{server.serverId} · {server.baseUrl}</p></div><div className="flex items-center gap-2"><span className={`rounded-full px-2 py-1 text-xs font-medium ${server.discovery.status === 'ready' ? 'bg-green-50 text-green-700' : server.discovery.status === 'error' ? 'bg-red-50 text-red-700' : 'bg-amber-50 text-amber-700'}`}>{server.discovery.status === 'ready' ? `${server.discovery.tools.length} tools` : server.discovery.status}</span><button type="button" onClick={() => void discover(server.serverId)} disabled={discovering !== null || loading} className="rounded-lg border border-gray-300 px-3 py-1.5 text-xs font-medium text-gray-700 hover:bg-gray-50 disabled:opacity-50">{discovering === server.serverId ? 'Discovering…' : 'Run tools/list'}</button></div></div>{server.discovery.error && <p className="mt-3 rounded-lg bg-red-50 px-3 py-2 text-xs text-red-700">{server.discovery.error}</p>}{server.discovery.tools.length > 0 && <ul className="mt-4 grid gap-2 md:grid-cols-2">{server.discovery.tools.map((tool) => <li key={tool.name} className="rounded-lg bg-gray-50 p-3"><code className="text-xs font-semibold text-gray-900">{tool.name}</code><p className="mt-1 line-clamp-3 text-xs leading-5 text-gray-600">{tool.description || 'No description supplied by upstream.'}</p></li>)}</ul>}<p className="mt-3 text-[11px] text-gray-400">Registered {new Date(server.createdAt).toLocaleDateString()}{server.discovery.discoveredAt ? ` · Last discovery ${new Date(server.discovery.discoveredAt).toLocaleString()}` : ''}</p></article>)}</div> : <p className="mt-4 text-sm text-gray-500">No MCP upstreams are registered for this tenant.</p>}
+      {loadingServers ? <p className="mt-4 text-sm text-gray-500">Loading registered servers…</p> : servers.length ? <div className="mt-4 space-y-4">{servers.map((server) => <article key={server.serverId} className="rounded-xl border border-gray-200 p-4">
+        <div className="flex flex-wrap items-start justify-between gap-3"><div><h4 className="text-sm font-semibold text-gray-900">{server.name}</h4><p className="mt-1 break-all font-mono text-[11px] text-gray-500">{server.serverId} · {server.baseUrl}</p></div><div className="flex items-center gap-2"><span className={`rounded-full px-2 py-1 text-xs font-medium ${server.discovery.status === 'ready' ? 'bg-green-50 text-green-700' : server.discovery.status === 'error' ? 'bg-red-50 text-red-700' : 'bg-amber-50 text-amber-700'}`}>{server.discovery.status === 'ready' ? `${server.discovery.tools.length} tools` : server.discovery.status}</span><button type="button" onClick={() => void discover(server.serverId)} disabled={discovering !== null || loading} className="rounded-lg border border-gray-300 px-3 py-1.5 text-xs font-medium text-gray-700 hover:bg-gray-50 disabled:opacity-50">{discovering === server.serverId ? 'Discovering…' : 'Run tools/list'}</button></div></div>
+        {server.discovery.error && <p className="mt-3 rounded-lg bg-red-50 px-3 py-2 text-xs text-red-700">{server.discovery.error}</p>}
+        <div className="mt-4 rounded-lg border border-gray-200 bg-gray-50 p-3"><p className="text-xs font-medium text-gray-800">Approved tools</p><p className="mt-1 text-[11px] leading-5 text-gray-500">Discovered tools remain blocked until approved here. Changes apply before the next upstream request.</p>
+          {server.discovery.tools.length > 0 ? <ul className="mt-3 grid gap-2 md:grid-cols-2">{server.discovery.tools.map((tool) => <li key={tool.name} className="rounded-lg bg-white p-3"><label className="flex items-start gap-2"><input type="checkbox" className="mt-0.5" checked={server.policy.allowedToolNames.includes(tool.name)} disabled={savingPolicy !== null} onChange={() => void toggleTool(server, tool.name)} /><span><code className="text-xs font-semibold text-gray-900">{tool.name}</code><span className="mt-1 block line-clamp-3 text-xs leading-5 text-gray-600">{tool.description || 'No description supplied by upstream.'}</span></span></label></li>)}</ul> : <p className="mt-3 text-xs text-gray-500">Run tools/list before approving callable tools.</p>}
+        </div>
+        <p className="mt-3 text-[11px] text-gray-400">Registered {new Date(server.createdAt).toLocaleDateString()}{server.discovery.discoveredAt ? ` · Last discovery ${new Date(server.discovery.discoveredAt).toLocaleString()}` : ''} · {server.policy.allowedToolNames.length} callable tools</p>
+      </article>)}</div> : <p className="mt-4 text-sm text-gray-500">No MCP upstreams are registered for this tenant.</p>}
     </div>
 
     <div className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">

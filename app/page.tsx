@@ -273,6 +273,16 @@ export default function CorporateHomepage() {
           <Link href="/tools" className="inline-block mt-6 font-mono text-xs text-zinc-400 hover:text-white tracking-widest uppercase transition-colors">Explore tools &amp; API ↗</Link>
         </section>
 
+        <section className="mt-24 border border-cyan-900/60 bg-cyan-950/10 p-8 sm:p-10" aria-labelledby="enterprise-mcp-home">
+          <p className="font-mono text-[10px] uppercase tracking-widest text-cyan-300">[ Enterprise agent infrastructure ]</p>
+          <h2 id="enterprise-mcp-home" className="mt-4 text-2xl font-light text-white sm:text-3xl">One governed path to approved MCP tools.</h2>
+          <p className="mt-4 max-w-3xl leading-relaxed text-zinc-400">The Maha Enterprise MCP Gateway gives platform teams tenant-scoped upstream inventory, explicit method and tool policy, bounded execution, and metadata-only audit records for AI-agent traffic.</p>
+          <div className="mt-7 flex flex-wrap gap-5 font-mono text-xs uppercase tracking-widest">
+            <Link href="/enterprise-mcp-gateway" className="text-cyan-100 underline underline-offset-4 hover:text-white">Explore the gateway ↗</Link>
+            <Link href="/guides/enterprise-mcp-governance" className="text-zinc-400 underline underline-offset-4 hover:text-white">Read the implementation guide ↗</Link>
+          </div>
+        </section>
+
         <section className="mt-24 border border-indigo-900/50 bg-indigo-950/20 p-8 sm:p-12 relative overflow-hidden">
           <div className="absolute top-0 left-0 h-full w-1 bg-indigo-500" />
           <p className="font-mono text-[10px] text-indigo-400 tracking-widest uppercase mb-4">[ Start with the decision ]</p>

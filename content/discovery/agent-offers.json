@@ -89,9 +89,9 @@
       "status": "available_for_tenant_onboarding",
       "serviceUrl": "https://www.mahastrategies.com/enterprise-mcp-gateway",
       "contractUrl": "https://www.mahastrategies.com/mcp-gateway-contract.json",
-      "authorization": "Tenant-bound API credentials and a distinct operator credential are required. Browser-originated proxy calls are not supported.",
+      "authorization": "A provisioned tenant API key is required. Browser-originated proxy calls are not supported.",
       "capability": "Tenant-scoped upstream inventory, explicit method and tool allowlists, and privacy-preserving gateway audit records.",
-      "methodBoundary": "The first release proxies JSON MCP messages to registered public HTTPS upstreams. It does not support private-upstream OAuth exchange, SSE streaming, or forwarding an agent bearer token.",
+      "methodBoundary": "The canonical v1 gateway proxies JSON MCP messages to registered public HTTPS upstreams, encrypts configured bearer or HMAC upstream credentials, and requires explicit tool approval. It does not yet support private-network upstreams, upstream OAuth exchange, SSE streaming, or browser-originated calls.",
       "acquisition": "Enterprise onboarding requires human scope and security review. This manifest cannot authorize a connection or a charge."
     }
   ],

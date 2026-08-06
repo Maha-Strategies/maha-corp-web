@@ -5,6 +5,7 @@ import { JSONRPCRequest } from '@/lib/mcp/types';
 import crypto from 'crypto';
 import { MAX_MCP_GATEWAY_BODY_BYTES } from '@/lib/mcp-gateway';
 import { sendMcpConnectivityAlert } from '@/lib/observability/alerts';
+import { evaluateMcpServerPolicy } from '@/lib/mcp/validation';
 
 export async function POST(
   req: NextRequest,
@@ -45,6 +46,12 @@ export async function POST(
         { status: 400 }
       );
     }
+
+    const policy = evaluateMcpServerPolicy(body, serverConfig)
+    if (!policy.allowed) return NextResponse.json(
+      { jsonrpc: '2.0', id: body.id, error: { code: policy.code, message: policy.message } },
+      { status: 403, headers: { 'Cache-Control': 'no-store' } },
+    )
 
     const traceId = `trc_${crypto.randomBytes(8).toString('hex')}`;
     const result = await MCPProxyEngine.dispatch(serverConfig, body, {

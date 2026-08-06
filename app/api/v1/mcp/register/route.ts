@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { MCPRegistry } from '@/lib/mcp/registry';
 import { MCPDiscoveryService } from '@/lib/mcp/discovery';
 import type { MCPServerConfig, MCPToolDiscovery } from '@/lib/mcp/types';
+import { DEFAULT_MCP_ALLOWED_METHODS, MCP_SUPPORTED_METHODS, parseMcpServerPolicy } from '@/lib/mcp/validation';
 
 async function persistDiscovery(tenantId: string, server: MCPServerConfig, discovery: MCPToolDiscovery) {
   try { return await MCPRegistry.updateDiscovery(tenantId, server.id, discovery) }
@@ -33,6 +34,15 @@ export async function POST(req: NextRequest) {
     }
     if (authType === 'none' && secret !== undefined) return NextResponse.json({ error: 'authType none must not include a secret' }, { status: 400 });
     if (authType !== 'none' && (typeof secret !== 'string' || secret.length < 1 || secret.length > 4_096)) return NextResponse.json({ error: 'A bounded secret is required for bearer or hmac authentication' }, { status: 400 });
+    const explicitPolicy = body.allowedMethods !== undefined || body.allowedToolNames !== undefined
+    let policy: { allowedMethods: string[]; allowedToolNames: string[] }
+    try {
+      policy = explicitPolicy
+        ? parseMcpServerPolicy({ allowedMethods: body.allowedMethods, allowedToolNames: body.allowedToolNames ?? [] })
+        : { allowedMethods: [...MCP_SUPPORTED_METHODS], allowedToolNames: [] }
+    } catch (error) {
+      return NextResponse.json({ error: { code: 'invalid_mcp_policy', message: error instanceof Error ? error.message : 'Invalid MCP server policy.' } }, { status: 400 })
+    }
     const server = await MCPRegistry.registerServer(
       tenantId,
       {
@@ -41,17 +51,25 @@ export async function POST(req: NextRequest) {
         authType,
         allowedEngines: ['*'],
         status: 'active',
+        ...policy,
+        policyMode: explicitPolicy ? 'explicit' : 'legacy_discovered',
       },
       typeof secret === 'string' ? secret : undefined
     );
 
     try {
       const discovery = await MCPDiscoveryService.discover(server)
+      const discoveredNames = new Set(discovery.tools.map((tool) => tool.name))
+      if (explicitPolicy && policy.allowedToolNames.some((tool) => !discoveredNames.has(tool))) throw new Error('Configured allowedToolNames must appear in the validated tools/list inventory.')
       const updated = await persistDiscovery(tenantId, server, discovery)
       const safeDiscovery = updated ? discovery : { status: 'error' as const, tools: [], discoveredAt: Date.now(), error: 'Tool discovery metadata could not be persisted.' }
       const summary = MCPRegistry.summarize(updated ?? { ...server, discovery: safeDiscovery })
       return NextResponse.json({ ...summary, id: summary.serverId }, { status: 201 });
     } catch (discoveryError) {
+      if (explicitPolicy) {
+        try { await MCPRegistry.updatePolicy(tenantId, server.id, { allowedMethods: [...DEFAULT_MCP_ALLOWED_METHODS], allowedToolNames: [] }) }
+        catch (policyError) { console.error('[MCP Policy Rollback Error]:', policyError instanceof Error ? policyError.name : 'unknown_error') }
+      }
       const discovery = {
         status: 'error' as const,
         tools: [],
