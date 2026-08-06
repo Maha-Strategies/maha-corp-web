@@ -33,6 +33,7 @@
     {
       "id": "enterprise-mcp-gateway",
       "status": "available_for_tenant_onboarding",
+      "endpoint": "https://www.mahastrategies.com/api/v1/mcp/gateway/{serverId}",
       "contract": "https://www.mahastrategies.com/mcp-gateway-contract.json"
     }
   ],

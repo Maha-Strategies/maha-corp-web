@@ -8,6 +8,9 @@ export interface MCPServerConfig {
   /** Internal compatibility field. Public registration does not expose unfinished Maha engines. */
   allowedEngines: ['*'];
   status: 'active' | 'suspended';
+  allowedMethods: string[];
+  allowedToolNames: string[];
+  policyMode: 'explicit' | 'legacy_discovered';
   createdAt: number;
   discovery: MCPToolDiscovery;
 }
@@ -31,6 +34,7 @@ export interface MCPServerSummary {
   baseUrl: string;
   createdAt: number;
   status: 'active' | 'suspended';
+  policy: { allowedMethods: string[]; allowedToolNames: string[]; mode: 'explicit' | 'legacy_discovered' };
   discovery: MCPToolDiscovery;
 }
 

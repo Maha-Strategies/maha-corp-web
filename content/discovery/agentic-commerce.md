@@ -40,11 +40,12 @@ This local commercial bridge is distinct from the hosted Maha Cognitive Gateway 
 The Enterprise MCP Gateway is separate from both the local bridge and the hosted Cognitive Gateway. It is a tenant-scoped control layer for registered upstream MCP servers: https://www.mahastrategies.com/enterprise-mcp-gateway
 
 - Contract: https://www.mahastrategies.com/mcp-gateway-contract.json
-- Gateway endpoint: `POST https://www.mahastrategies.com/api/mcp-gateway/{serverId}`
-- Required credential capability: `mcp_gateway`
-- Enforced boundary: the credential and server must belong to the same registered client tenant.
-- First release supports public HTTPS JSON upstreams only. It never forwards the caller's bearer credential or stores an upstream credential. Private upstream connectivity requires a future OAuth token-exchange integration.
-- Operators may require a registered Context Pack for named approved tools. Calls then carry `contextPackId`, `contextPackHash`, and `context`; the gateway confirms the exact context hash is registered to the same tenant before forwarding. Context contents are not retained.
+- Gateway endpoint: `POST https://www.mahastrategies.com/api/v1/mcp/gateway/{serverId}`
+- Registration: `POST https://www.mahastrategies.com/api/v1/mcp/register`
+- Policy: `PATCH https://www.mahastrategies.com/api/v1/mcp/servers/{serverId}`
+- Required credential: a provisioned Maha tenant API key.
+- Enforced boundary: the verified API-key tenant and registered server must match; tool calls require an explicit allowlist.
+- The gateway supports public HTTPS JSON upstreams and encrypts configured bearer or HMAC credentials. Private-network connectivity and upstream OAuth token exchange remain future integrations.
 
 ## Context Compiler
 

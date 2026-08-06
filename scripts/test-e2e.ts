@@ -42,7 +42,8 @@ async function main() {
     baseUrl: TEST_MCP_UPSTREAM_URL,
     authType: 'bearer',
     secret: TEST_MCP_UPSTREAM_TOKEN,
-    allowedEngines: ['*'],
+    allowedMethods: ['initialize', 'notifications/initialized', 'ping', 'tools/list', 'tools/call'],
+    allowedToolNames: ['calculateRiskScore', 'simulateTimeout'],
   });
 
   console.log(`   ✔ MCP Server registered with ID: ${server.id}`);
@@ -65,34 +66,34 @@ async function main() {
   
   const result = await maha.mcp.call<{ authenticated?: boolean; method?: string }>(
     server.id,
-    'tools/calculateRiskScore',
-    { portfolioId: 'pf_8819', alpha: 0.05 }
+    'tools/call',
+    { name: 'calculateRiskScore', arguments: { portfolioId: 'pf_8819', alpha: 0.05 } }
   );
-  if (result?.authenticated !== true || result.method !== 'tools/calculateRiskScore') throw new Error('Gateway did not return the expected authenticated JSON-RPC result.');
+  if (result?.authenticated !== true || result.method !== 'tools/call') throw new Error('Gateway did not return the expected authenticated JSON-RPC result.');
   console.log(`   ✔ Gateway response received and JSON-RPC result asserted.`);
 
   const originalSla = await maha.mcp.getSettings();
   try {
     await maha.mcp.updateSettings({ ...originalSla, timeoutMs: 1_000, failureThreshold: 1, cooldownMs: 5_000 });
     await assert.rejects(
-      () => maha.mcp.call(server.id, 'test/timeout'),
+      () => maha.mcp.call(server.id, 'tools/call', { name: 'simulateTimeout', arguments: {} }),
       (error: unknown) => error instanceof MahaApiError && error.status === 504,
       'The controlled upstream timeout did not return HTTP 504.',
     );
     await assert.rejects(
-      () => maha.mcp.call(server.id, 'tools/calculateRiskScore'),
+      () => maha.mcp.call(server.id, 'tools/call', { name: 'calculateRiskScore', arguments: { portfolioId: 'pf_8819' } }),
       (error: unknown) => error instanceof MahaApiError && error.status === 503,
       'The circuit breaker did not block the next upstream request.',
     );
     await new Promise((resolve) => setTimeout(resolve, 5_100));
-    const recovered = await maha.mcp.call<{ authenticated?: boolean }>(server.id, 'tools/calculateRiskScore');
+    const recovered = await maha.mcp.call<{ authenticated?: boolean }>(server.id, 'tools/call', { name: 'calculateRiskScore', arguments: { portfolioId: 'pf_8819' } });
     if (recovered.authenticated !== true) throw new Error('The circuit breaker half-open probe did not recover.');
 
     await maha.mcp.updateSettings({ ...originalSla, requestsPerMinute: 1 });
     const limited = await fetch(`${BASE_URL}/api/v1/mcp/gateway/${encodeURIComponent(server.id)}`, {
       method: 'POST',
       headers: { Authorization: `Bearer ${TEST_API_KEY}`, 'Content-Type': 'application/json' },
-      body: JSON.stringify({ jsonrpc: '2.0', id: 'rate_limit_probe', method: 'tools/calculateRiskScore', params: {} }),
+      body: JSON.stringify({ jsonrpc: '2.0', id: 'rate_limit_probe', method: 'tools/call', params: { name: 'calculateRiskScore', arguments: { portfolioId: 'pf_8819' } } }),
     });
     if (limited.status !== 429) throw new Error(`Tenant MCP rate limiter returned ${limited.status}, expected 429.`);
     console.log(`   ✔ Timeout circuit opened, half-open recovery passed, and tenant rate limit returned 429.`);
