@@ -103,3 +103,28 @@ test('SDK submits and polls the accurately named QUBO/Ising contract', async () 
     assert.deepEqual(urls, ['https://example.test/api/v1/jobs/qubo-ising', `https://example.test/api/v1/jobs/job_${'a'.repeat(32)}`])
   } finally { globalThis.fetch = originalFetch }
 })
+
+test('SDK submits and polls tensor-network and geometric registration contracts', async () => {
+  const posted: string[] = []
+  let activeKind: 'tensor-network' | 'geometric-registration' = 'tensor-network'
+  globalThis.fetch = async (input, init) => {
+    const url = String(input)
+    if (init?.method === 'POST') {
+      activeKind = url.endsWith('/tensor-network') ? 'tensor-network' : 'geometric-registration'
+      posted.push(url)
+      return new Response(JSON.stringify({ jobId: `job_${'c'.repeat(32)}`, kind: activeKind, status: 'queued', clientRequestId: 'restored-1234', inputHash: 'd'.repeat(64), acceptedConfiguration: { formulation: activeKind === 'tensor-network' ? 'qubo' : 'se3-paired-registration', problemSize: 3, target: 'gpu' }, credits: { reserved: 800, charged: null, refunded: 0 }, result: null, diagnostics: null, error: null }), { status: 202 })
+    }
+    const result = activeKind === 'tensor-network'
+      ? { objectiveValue: -2, assignment: [1, 1, 0], bestBound: null, provenOptimal: false }
+      : { rotation: [[1, 0, 0], [0, 1, 0], [0, 0, 1]], translation: [2, 3, 4], rmse: 0, maxError: 0, determinant: 1 }
+    return new Response(JSON.stringify({ jobId: `job_${'c'.repeat(32)}`, kind: activeKind, status: 'completed', clientRequestId: 'restored-1234', inputHash: 'd'.repeat(64), acceptedConfiguration: { formulation: activeKind === 'tensor-network' ? 'qubo' : 'se3-paired-registration', problemSize: 3, target: 'gpu' }, credits: { reserved: 800, charged: 800, refunded: 0 }, result, diagnostics: null, error: null }), { status: 200 })
+  }
+  try {
+    const optimization = new MahaClient({ apiKey: 'mha_live_test', baseUrl: 'https://example.test' }).optimization
+    const tensor = await optimization.solveTensorNetwork({ clientRequestId: 'restored-1234', problem: { formulation: 'qubo', size: 3, terms: [{ i: 0, j: 0, value: -1 }] } }, { pollIntervalMs: 1 })
+    assert.equal(tensor.result?.objectiveValue, -2)
+    const geometric = await optimization.solveGeometricRegistration({ clientRequestId: 'restored-5678', problem: { sourcePoints: [[0, 0, 0], [1, 0, 0], [0, 1, 0]], targetPoints: [[2, 3, 4], [3, 3, 4], [2, 4, 4]] } }, { pollIntervalMs: 1 })
+    assert.equal(geometric.result?.rmse, 0)
+    assert.deepEqual(posted, ['https://example.test/api/v1/jobs/tensor-network', 'https://example.test/api/v1/jobs/geometric-registration'])
+  } finally { globalThis.fetch = originalFetch }
+})

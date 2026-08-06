@@ -29,6 +29,8 @@ gpu_image = (
     # endpoint annotations therefore require FastAPI at import time.
     .pip_install("fastapi==0.115.6")
     .add_local_python_source("workers.qubo_reference")
+    .add_local_python_source("workers.tensor_network")
+    .add_local_python_source("workers.geometric_registration")
 )
 e2e_image = modal.Image.debian_slim(python_version="3.11").pip_install("fastapi==0.115.6")
 
@@ -67,14 +69,13 @@ def _post_signed_callback(callback_url: str, payload: Dict[str, Any]) -> None:
     raise RuntimeError(f"callback delivery failed: {last_error}")
 
 
-@app.function(gpu="A10G", image=gpu_image, secrets=[maha_secrets], timeout=600)
-def run_qubo_ising(handoff: Dict[str, Any]) -> None:
-    """Execute contract v2 without logging or persisting customer coefficients."""
+def _execute_gpu_job(handoff: Dict[str, Any], expected_kind: str, solve) -> None:
     import torch
-    from workers.qubo_reference import solve_torch
 
-    if handoff.get("contractVersion") != "2.0.0" or handoff.get("kind") != "qubo-ising":
-        raise RuntimeError("unsupported QUBO/Ising worker contract")
+    if handoff.get("contractVersion") not in {"2.0.0", "3.0.0"} or handoff.get("kind") != expected_kind:
+        raise RuntimeError(f"unsupported {expected_kind} worker contract")
+    if handoff.get("contractVersion") == "2.0.0" and expected_kind != "qubo-ising":
+        raise RuntimeError("contract v2 is limited to QUBO/Ising")
     job_id = handoff.get("jobId")
     input_hash = handoff.get("inputHash")
     if not isinstance(job_id, str) or not re.fullmatch(r"job_[a-f0-9]{32}", job_id):
@@ -85,32 +86,47 @@ def run_qubo_ising(handoff: Dict[str, Any]) -> None:
     started = time.perf_counter()
     device = "cuda:0" if torch.cuda.is_available() else "cpu"
     try:
-        result = solve_torch(handoff.get("problem", {}), handoff.get("solver", {}), device)
-        torch.cuda.synchronize(device)
+        result = solve(handoff.get("problem", {}), handoff.get("solver", {}), device)
+        if torch.cuda.is_available():
+            torch.cuda.synchronize(device)
         elapsed = time.perf_counter() - started
         diagnostics = result.get("diagnostics", {})
         payload = {
-            "contractVersion": "2.0.0", "jobId": job_id, "inputHash": input_hash, "status": "completed",
+            "contractVersion": handoff["contractVersion"], "kind": expected_kind,
+            "jobId": job_id, "inputHash": input_hash, "status": "completed",
             "solution": result["solution"],
-            "diagnostics": {
-                "algorithm": diagnostics.get("algorithm"),
-                "sweepsCompleted": diagnostics.get("sweepsCompleted", 0),
-                "replicas": diagnostics.get("replicas"),
-                "acceptedMoves": diagnostics.get("acceptedMoves"),
-                "wallClockSeconds": elapsed,
-                "deviceClass": torch.cuda.get_device_name(device),
-            },
+            "diagnostics": {**diagnostics, "wallClockSeconds": elapsed, "deviceClass": torch.cuda.get_device_name(device) if torch.cuda.is_available() else "cpu"},
             "error": None, "usage": {"deviceSeconds": elapsed},
         }
     except Exception as error:
         elapsed = time.perf_counter() - started
         payload = {
-            "contractVersion": "2.0.0", "jobId": job_id, "inputHash": input_hash, "status": "failed",
+            "contractVersion": handoff["contractVersion"], "kind": expected_kind,
+            "jobId": job_id, "inputHash": input_hash, "status": "failed",
             "solution": None, "diagnostics": None,
             "error": {"code": "compute_execution_error", "message": str(error)[:500]},
             "usage": {"deviceSeconds": elapsed},
         }
     _post_signed_callback(str(handoff.get("callbackUrl", "")), payload)
+
+
+@app.function(gpu="A10G", image=gpu_image, secrets=[maha_secrets], timeout=600)
+def run_qubo_ising(handoff: Dict[str, Any]) -> None:
+    """Execute contract v2 without logging or persisting customer coefficients."""
+    from workers.qubo_reference import solve_torch
+    _execute_gpu_job(handoff, "qubo-ising", solve_torch)
+
+
+@app.function(gpu="A10G", image=gpu_image, secrets=[maha_secrets], timeout=600)
+def run_tensor_network(handoff: Dict[str, Any]) -> None:
+    from workers.tensor_network import solve_transfer_torch
+    _execute_gpu_job(handoff, "tensor-network", solve_transfer_torch)
+
+
+@app.function(gpu="A10G", image=gpu_image, secrets=[maha_secrets], timeout=600)
+def run_geometric_registration(handoff: Dict[str, Any]) -> None:
+    from workers.geometric_registration import solve_kabsch_torch
+    _execute_gpu_job(handoff, "geometric-registration", solve_kabsch_torch)
 
 
 @app.function(image=e2e_image, secrets=[maha_secrets])
@@ -122,10 +138,19 @@ def qubo_ising_dispatch(request_data: Dict[str, Any], authorization: str = Heade
     token = authorization.split("Bearer ", 1)[1].strip()
     if not expected_token or not hmac.compare_digest(token, expected_token):
         raise HTTPException(status_code=403, detail="Forbidden")
-    if request_data.get("contractVersion") != "2.0.0" or request_data.get("kind") != "qubo-ising":
+    version = request_data.get("contractVersion")
+    kind = request_data.get("kind")
+    if version not in {"2.0.0", "3.0.0"} or kind not in {"qubo-ising", "tensor-network", "geometric-registration"}:
         raise HTTPException(status_code=400, detail="Unsupported worker contract")
-    run_qubo_ising.spawn(request_data)
-    return {"status": "accepted", "jobId": request_data.get("jobId"), "kind": "qubo-ising"}
+    if version == "2.0.0" and kind != "qubo-ising":
+        raise HTTPException(status_code=400, detail="Contract v2 is limited to QUBO/Ising")
+    if kind == "qubo-ising":
+        run_qubo_ising.spawn(request_data)
+    elif kind == "tensor-network":
+        run_tensor_network.spawn(request_data)
+    else:
+        run_geometric_registration.spawn(request_data)
+    return {"status": "accepted", "jobId": request_data.get("jobId"), "kind": kind}
 
 @app.function(gpu="A10G", image=gpu_image, timeout=1200)
 def benchmark_qubo_reference(commit: str) -> Dict[str, Any]:
@@ -144,10 +169,31 @@ def benchmark_qubo_reference(commit: str) -> Dict[str, Any]:
     return json.loads(json.dumps(evidence))
 
 
+@app.function(gpu="A10G", image=gpu_image, timeout=1200)
+def benchmark_restored_engines(commit: str) -> Dict[str, Any]:
+    import torch
+    from workers.tensor_network import benchmark_tensor_network
+    from workers.geometric_registration import benchmark_geometric_registration
+
+    device = "cuda:0" if torch.cuda.is_available() else "cpu"
+    started = time.perf_counter()
+    evidence = {
+        "schema": "maha.restored-engines-benchmark.v1",
+        "commit": commit,
+        "generatedAt": datetime.now(timezone.utc).isoformat(),
+        "tensorNetwork": benchmark_tensor_network(device),
+        "geometricRegistration": benchmark_geometric_registration(device),
+    }
+    evidence["benchmarkWallClockMs"] = round((time.perf_counter() - started) * 1_000, 3)
+    return json.loads(json.dumps(evidence))
+
+
 @app.local_entrypoint()
-def benchmark(commit: str, output: str = "qubo-benchmark-evidence.json") -> None:
+def benchmark(commit: str, output: str = "qubo-benchmark-evidence.json", engine: str = "qubo") -> None:
     """Run with: modal run workers/maha_workers.py --commit <git-sha>."""
-    evidence = benchmark_qubo_reference.remote(commit)
+    if engine not in {"qubo", "restored"}:
+        raise ValueError("engine must be qubo or restored")
+    evidence = benchmark_qubo_reference.remote(commit) if engine == "qubo" else benchmark_restored_engines.remote(commit)
     with open(output, "w", encoding="utf-8") as handle:
         json.dump(evidence, handle, indent=2, sort_keys=True)
         handle.write("\n")

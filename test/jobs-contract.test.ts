@@ -5,7 +5,9 @@ import {
   JobValidationError,
   WORKER_CONTRACT_VERSION,
   createJobId,
+  parseGeometricRegistrationJobRequest,
   parseQuboIsingJobRequest,
+  parseTensorNetworkJobRequest,
   parseWorkerCallback,
   validJobId,
 } from '../lib/jobs/contract.ts'
@@ -61,6 +63,7 @@ test('identifiers and timeout are bounded rather than silently rewritten', () =>
 test('a completed heuristic callback carries accurate method diagnostics', () => {
   const callback = parseWorkerCallback({
     contractVersion: WORKER_CONTRACT_VERSION,
+    kind: 'qubo-ising',
     jobId: createJobId(), inputHash: 'a'.repeat(64), status: 'completed',
     solution: { objectiveValue: -12.5, assignment: [0, 1, 1, 0], bestBound: null, provenOptimal: false },
     diagnostics: { algorithm: 'parallel-update-simulated-annealing-torch-v1', sweepsCompleted: 64, replicas: 64, acceptedMoves: 123, wallClockSeconds: 0.025, deviceClass: 'NVIDIA A10' },
@@ -75,10 +78,10 @@ test('worker callbacks fail closed when identity, result, or method cannot be tr
   const jobId = createJobId(); const inputHash = 'a'.repeat(64)
   const cases: [unknown, string][] = [
     [{ contractVersion: '1.0.0', jobId, inputHash, status: 'completed' }, 'unsupported_contract_version'],
-    [{ contractVersion: WORKER_CONTRACT_VERSION, jobId: 'nope', inputHash, status: 'completed' }, 'invalid_job_id'],
-    [{ contractVersion: WORKER_CONTRACT_VERSION, jobId, inputHash: 'zz', status: 'completed' }, 'invalid_input_hash'],
-    [{ contractVersion: WORKER_CONTRACT_VERSION, jobId, inputHash, status: 'failed' }, 'invalid_error'],
-    [{ contractVersion: WORKER_CONTRACT_VERSION, jobId, inputHash, status: 'completed', solution: { objectiveValue: 1, assignment: [0] }, diagnostics: { algorithm: 'made-up', sweepsCompleted: 1, wallClockSeconds: 1 } }, 'invalid_diagnostics'],
+    [{ contractVersion: WORKER_CONTRACT_VERSION, kind: 'qubo-ising', jobId: 'nope', inputHash, status: 'completed' }, 'invalid_job_id'],
+    [{ contractVersion: WORKER_CONTRACT_VERSION, kind: 'qubo-ising', jobId, inputHash: 'zz', status: 'completed' }, 'invalid_input_hash'],
+    [{ contractVersion: WORKER_CONTRACT_VERSION, kind: 'qubo-ising', jobId, inputHash, status: 'failed' }, 'invalid_error'],
+    [{ contractVersion: WORKER_CONTRACT_VERSION, kind: 'qubo-ising', jobId, inputHash, status: 'completed', solution: { objectiveValue: 1, assignment: [0] }, diagnostics: { algorithm: 'made-up', sweepsCompleted: 1, wallClockSeconds: 1 } }, 'invalid_diagnostics'],
   ]
   for (const [body, code] of cases) assert.throws(() => parseWorkerCallback(body), (error: unknown) => error instanceof JobValidationError && error.code === code)
 })
@@ -86,4 +89,32 @@ test('worker callbacks fail closed when identity, result, or method cannot be tr
 test('credit quote is fixed from declared bounded size', () => {
   assert.equal(quoteJobCredits('qubo-ising', 1), 525)
   assert.equal(quoteJobCredits('qubo-ising', 256), 525)
+  assert.equal(quoteJobCredits('tensor-network', 256), 800)
+  assert.equal(quoteJobCredits('geometric-registration', 1001), 550)
+})
+
+test('tensor-network requests expose a bounded contraction frontier', () => {
+  const parsed = parseTensorNetworkJobRequest({ ...baseRequest, solver: { bondDimension: 512, exactThreshold: 12 } })
+  assert.equal(parsed.solver.bondDimension, 512)
+  assert.throws(() => parseTensorNetworkJobRequest({ ...baseRequest, solver: { bondDimension: 1 } }), (error: unknown) => error instanceof JobValidationError && error.code === 'invalid_solver')
+})
+
+test('geometric registration accepts paired finite points and positive weights', () => {
+  const parsed = parseGeometricRegistrationJobRequest({
+    clientRequestId: 'geo-12345678',
+    problem: { sourcePoints: [[0, 0, 0], [1, 0, 0], [0, 1, 0]], targetPoints: [[2, 3, 4], [3, 3, 4], [2, 4, 4]], weights: [1, 2, 1] },
+  })
+  assert.equal(parsed.problem.sourcePoints.length, 3)
+  assert.equal(parsed.solver.allowReflection, false)
+  assert.throws(() => parseGeometricRegistrationJobRequest({ clientRequestId: 'geo-12345678', problem: { sourcePoints: [[0, 0, 0]], targetPoints: [[0, 0, 0]] } }), (error: unknown) => error instanceof JobValidationError && error.code === 'invalid_point_cloud')
+})
+
+test('geometric callbacks validate transform shape and residuals', () => {
+  const callback = parseWorkerCallback({
+    contractVersion: WORKER_CONTRACT_VERSION, kind: 'geometric-registration', jobId: createJobId(), inputHash: 'b'.repeat(64), status: 'completed',
+    solution: { rotation: [[1, 0, 0], [0, 1, 0], [0, 0, 1]], translation: [1, 2, 3], rmse: 0, maxError: 0, determinant: 1 },
+    diagnostics: { algorithm: 'weighted-kabsch-svd-torch-v1', pointCount: 3, reflectionCorrected: false, orthogonalityResidual: 0, singularValues: [1, 1, 0], wallClockSeconds: 0.01, deviceClass: 'NVIDIA A10' },
+  })
+  assert.equal(callback.kind, 'geometric-registration')
+  assert.equal(callback.solution?.rmse, 0)
 })

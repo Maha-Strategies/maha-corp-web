@@ -17,6 +17,22 @@ export const metadata: Metadata = {
 
 const tools = [
   {
+    eyebrow: 'Tensor-Network Optimization',
+    title: 'Solve bounded QUBO and Ising models on an A10G',
+    body: 'Run a verified bounded-bond transfer-tensor heuristic with explicit exact and heuristic boundaries, asynchronous settlement, and published latency evidence.',
+    href: '/tensor-opt',
+    action: 'View tensor optimization',
+    accent: 'cyan',
+  },
+  {
+    eyebrow: 'Geometric Registration',
+    title: 'Fit a rigid transform to paired 3D point clouds',
+    body: 'Recover a weighted SE(3) rotation and translation with residual, determinant, and orthogonality checks on the production GPU job pipeline.',
+    href: '/geometric-optimization',
+    action: 'View geometric registration',
+    accent: 'emerald',
+  },
+  {
     eyebrow: 'Architecture Readiness',
     title: 'Turn an AI implementation ambition into a gap register',
     body: 'Inventory data paths, device fleet, model lifecycle, identity and access, outage fallback, and accountability. Export a browser-local implementation sequence.',
