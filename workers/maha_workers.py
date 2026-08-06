@@ -49,6 +49,13 @@ def _valid_worker_token(provided: str) -> bool:
     return bool(matches) and any(matches)
 
 
+def _callback_signing_secret(hostname: str) -> str:
+    """Keep Preview callback authentication independent from Production."""
+    if hostname.endswith(".vercel.app"):
+        return os.environ.get("MAHA_WORKER_PREVIEW_WEBHOOK_SECRET", "")
+    return os.environ.get("MAHA_WORKER_WEBHOOK_SECRET", "")
+
+
 def _post_signed_callback(callback_url: str, payload: Dict[str, Any]) -> None:
     parsed = urlparse(callback_url)
     hostname = parsed.hostname or ""
@@ -57,7 +64,7 @@ def _post_signed_callback(callback_url: str, payload: Dict[str, Any]) -> None:
     )
     if not allowed:
         raise RuntimeError("callback URL is outside the Maha deployment boundary")
-    secret = os.environ.get("MAHA_WORKER_WEBHOOK_SECRET", "")
+    secret = _callback_signing_secret(hostname)
     if not secret:
         raise RuntimeError("worker callback signing is not configured")
     body = json.dumps(payload, separators=(",", ":")).encode("utf-8")
