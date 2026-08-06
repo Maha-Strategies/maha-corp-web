@@ -273,13 +273,14 @@ export default function CorporateHomepage() {
           <Link href="/tools" className="inline-block mt-6 font-mono text-xs text-zinc-400 hover:text-white tracking-widest uppercase transition-colors">Explore tools &amp; API ↗</Link>
         </section>
 
-        <section className="mt-24 border border-cyan-900/60 bg-cyan-950/10 p-8 sm:p-10" aria-labelledby="enterprise-mcp-home">
-          <p className="font-mono text-[10px] uppercase tracking-widest text-cyan-300">[ Enterprise agent infrastructure ]</p>
-          <h2 id="enterprise-mcp-home" className="mt-4 text-2xl font-light text-white sm:text-3xl">One governed path to approved MCP tools.</h2>
-          <p className="mt-4 max-w-3xl leading-relaxed text-zinc-400">The Maha Enterprise MCP Gateway gives platform teams tenant-scoped upstream inventory, explicit method and tool policy, bounded execution, and metadata-only audit records for AI-agent traffic.</p>
+        <section className="mt-24 border border-cyan-900/60 bg-cyan-950/10 p-8 sm:p-10" aria-labelledby="developer-infrastructure-home">
+          <p className="font-mono text-[10px] uppercase tracking-widest text-cyan-300">[ Developer infrastructure ]</p>
+          <h2 id="developer-infrastructure-home" className="mt-4 text-2xl font-light text-white sm:text-3xl">Govern tools, bound context, and measure the evidence path.</h2>
+          <p className="mt-4 max-w-3xl leading-relaxed text-zinc-400">Use Maha&apos;s production APIs for enterprise MCP governance, source-linked context compilation, evidence-retention evaluation, bounded GPU optimization, and MPS preflight—with documented SDKs, benchmarks, and security boundaries.</p>
           <div className="mt-7 flex flex-wrap gap-5 font-mono text-xs uppercase tracking-widest">
-            <Link href="/enterprise-mcp-gateway" className="text-cyan-100 underline underline-offset-4 hover:text-white">Explore the gateway ↗</Link>
-            <Link href="/guides/enterprise-mcp-governance" className="text-zinc-400 underline underline-offset-4 hover:text-white">Read the implementation guide ↗</Link>
+            <Link href="/developers" className="text-cyan-100 underline underline-offset-4 hover:text-white">Explore developer infrastructure ↗</Link>
+            <Link href="/enterprise-mcp-gateway" className="text-zinc-400 underline underline-offset-4 hover:text-white">Review the Enterprise MCP Gateway ↗</Link>
+            <Link href="/context-compiler" className="text-zinc-400 underline underline-offset-4 hover:text-white">Review the Context Compiler ↗</Link>
           </div>
         </section>
 
@@ -297,10 +298,6 @@ export default function CorporateHomepage() {
         </section>
       </div>
 
-      <footer className="border-t border-zinc-900 px-6 py-10 text-center">
-        <p className="mx-auto max-w-2xl text-sm leading-relaxed text-zinc-500">Maha Strategies LLC is an independent research, publishing, and technology-architecture organization. <Link href="/about" className="text-zinc-300 underline underline-offset-4 hover:text-white">About the organization</Link> · <Link href="/network" className="text-zinc-300 underline underline-offset-4 hover:text-white">Knowledge network</Link></p>
-        <p className="mt-6 font-mono text-[10px] text-zinc-700 tracking-widest uppercase">© {new Date().getFullYear()} Maha Strategies LLC</p>
-      </footer>
     </main>
   )
 }

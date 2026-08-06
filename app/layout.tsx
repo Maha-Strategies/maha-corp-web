@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import Navbar from "@/components/Navbar";
+import SiteFooter from "@/components/SiteFooter";
 import { mahaEntityGraphJsonLd } from '@/lib/entity';
 import "./globals.css";
 
@@ -64,6 +65,7 @@ export default function RootLayout({
         <div className="flex-1">
           {children}
         </div>
+        <SiteFooter />
       </body>
     </html>
   );

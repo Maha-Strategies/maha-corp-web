@@ -105,6 +105,12 @@ export default function ToolsPage() {
           </p>
         </header>
 
+        <aside className="mt-12 border border-cyan-900/70 bg-cyan-950/10 p-6" aria-label="Developer infrastructure">
+          <p className="font-mono text-[10px] uppercase tracking-widest text-cyan-300">Developer infrastructure</p>
+          <p className="mt-3 max-w-2xl text-sm leading-7 text-zinc-400">Looking for authenticated APIs, SDKs, benchmarks, and security boundaries rather than a standalone utility?</p>
+          <Link href="/developers" className="mt-4 inline-block font-mono text-xs uppercase tracking-widest text-cyan-100 underline underline-offset-4 hover:text-white">Explore the complete developer infrastructure map ↗</Link>
+        </aside>
+
         <section className="mt-20 grid gap-5 md:grid-cols-2" aria-label="Maha Strategies self-service tools">
           {tools.map((tool) => {
             const accent = tool.accent === 'emerald' ? 'text-emerald-300 hover:border-emerald-500' : tool.accent === 'cyan' ? 'text-cyan-200 hover:border-cyan-500' : 'text-indigo-300 hover:border-indigo-400'

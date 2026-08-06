@@ -19,6 +19,7 @@ export default function DocsPage() {
           <p className="mt-2 max-w-3xl text-sm leading-relaxed text-zinc-400">Register tenant-owned upstreams, discover tools, configure SLA controls, and dispatch JSON-RPC calls through one documented gateway.</p>
         </div>
         <div className="flex shrink-0 flex-wrap gap-3 font-mono text-[10px] uppercase tracking-widest">
+          <Link href="/developers" className="border border-white bg-white px-4 py-2 font-bold text-black hover:bg-zinc-200">Developer hub ↗</Link>
           <Link href="/enterprise-mcp-gateway" className="border border-cyan-700 px-4 py-2 text-cyan-100 hover:bg-cyan-950/50">Gateway overview ↗</Link>
           <Link href="/guides/enterprise-mcp-governance" className="border border-zinc-700 px-4 py-2 text-zinc-300 hover:border-cyan-600">Governance guide ↗</Link>
         </div>
