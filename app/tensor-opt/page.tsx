@@ -12,7 +12,7 @@ export default function TensorOptimizationPage() {
   clientRequestId: crypto.randomUUID().replaceAll('-', ''),
   problem: { formulation: 'qubo', size: 3, terms },
   solver: { bondDimension: 256, exactThreshold: 18 }
-})`}</code></pre><div className="mt-10 flex flex-wrap gap-4"><Link href="/docs" className="border border-cyan-500 px-5 py-3 font-mono text-xs uppercase tracking-widest text-cyan-100">Open API reference</Link><Link href="/start" className="border border-zinc-700 px-5 py-3 font-mono text-xs uppercase tracking-widest text-zinc-200">Get an API key</Link></div></article></main>
+})`}</code></pre><div className="mt-10 flex flex-wrap gap-4"><Link href="/docs" className="border border-cyan-500 px-5 py-3 font-mono text-xs uppercase tracking-widest text-cyan-100">Open API reference</Link><Link href="/dashboard" className="border border-zinc-700 px-5 py-3 font-mono text-xs uppercase tracking-widest text-zinc-200">Get an API key</Link></div></article></main>
 }
 
 function Metric({ label, value }: { label: string; value: string }) { return <div className="border border-zinc-800 p-5"><p className="font-mono text-[10px] uppercase tracking-widest text-zinc-500">{label}</p><p className="mt-3 text-2xl text-white">{value}</p></div> }
