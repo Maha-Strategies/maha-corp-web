@@ -9,6 +9,7 @@ test('contact qualification captures bounded, non-identifying source metadata', 
   assert.equal(optionalCampaignValue('mcp-directory-july', 'utmCampaign'), 'mcp-directory-july')
   assert.throws(() => optionalCampaignValue('https://example.com/?email=a@example.com', 'utmCampaign'), /utmCampaign/)
   assert.equal(contactSourcePath('/contact'), '/contact')
+  assert.equal(contactSourcePath('/evidence-audit'), '/evidence-audit')
   assert.equal(contactSourcePath('/other'), '/contact')
 })
 
