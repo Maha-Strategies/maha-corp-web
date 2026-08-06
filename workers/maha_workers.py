@@ -37,6 +37,18 @@ e2e_image = modal.Image.debian_slim(python_version="3.11").pip_install("fastapi=
 maha_secrets = modal.Secret.from_name("maha-worker-secrets")
 
 
+def _valid_worker_token(provided: str) -> bool:
+    """Accept isolated Production and Preview dispatch credentials."""
+    expected_tokens = [
+        value for value in (
+            os.environ.get("MAHA_WORKER_TOKEN", ""),
+            os.environ.get("MAHA_WORKER_PREVIEW_TOKEN", ""),
+        ) if value
+    ]
+    matches = [hmac.compare_digest(provided, expected) for expected in expected_tokens]
+    return bool(matches) and any(matches)
+
+
 def _post_signed_callback(callback_url: str, payload: Dict[str, Any]) -> None:
     parsed = urlparse(callback_url)
     hostname = parsed.hostname or ""
@@ -132,11 +144,10 @@ def run_geometric_registration(handoff: Dict[str, Any]) -> None:
 @app.function(image=e2e_image, secrets=[maha_secrets])
 @modal.fastapi_endpoint(method="POST")
 def qubo_ising_dispatch(request_data: Dict[str, Any], authorization: str = Header(default=None)):
-    expected_token = os.environ.get("MAHA_WORKER_TOKEN", "")
     if not authorization or not authorization.startswith("Bearer "):
         raise HTTPException(status_code=401, detail="Unauthorized")
     token = authorization.split("Bearer ", 1)[1].strip()
-    if not expected_token or not hmac.compare_digest(token, expected_token):
+    if not _valid_worker_token(token):
         raise HTTPException(status_code=403, detail="Forbidden")
     version = request_data.get("contractVersion")
     kind = request_data.get("kind")
