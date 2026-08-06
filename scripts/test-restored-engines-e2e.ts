@@ -1,5 +1,6 @@
 import nextEnv from '@next/env'
 import assert from 'node:assert/strict'
+import { pathToFileURL } from 'node:url'
 
 import { MahaClient } from '../lib/sdk/index.ts'
 
@@ -17,8 +18,10 @@ if (process.env.VERCEL_AUTOMATION_BYPASS_SECRET) {
   }
 }
 
-const maha = new MahaClient({ apiKey, baseUrl })
-console.log(`Restored-engine staging E2E: ${baseUrl}`)
+const standaloneMaha = new MahaClient({ apiKey, baseUrl })
+
+export async function runRestoredEngineE2e(maha: MahaClient, targetUrl: string) {
+console.log(`Restored-engine staging E2E: ${targetUrl}`)
 
 const tensorTerms = Array.from({ length: 64 }, (_, index) => ({ i: index, j: index, value: -1 }))
 const tensorRequest = {
@@ -55,3 +58,8 @@ assert.ok((geometric.result?.rmse ?? 1) < 1e-9)
 assert.ok(Math.abs((geometric.result?.determinant ?? 0) - 1) < 1e-9)
 assert.equal(geometric.credits.charged, 525)
 console.log(`✔ geometric transform, signed callback, and idempotency verified: ${geometric.jobId}`)
+}
+
+if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
+  await runRestoredEngineE2e(standaloneMaha, baseUrl)
+}

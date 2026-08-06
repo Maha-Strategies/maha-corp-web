@@ -1,6 +1,7 @@
 import nextEnv from '@next/env';
 import assert from 'node:assert/strict';
 import { MahaApiError, MahaClient } from '../lib/sdk/index.ts';
+import { runRestoredEngineE2e } from './test-restored-engines-e2e.ts';
 
 // This script runs outside the Next.js runtime, so load .env.local and the
 // other standard Next environment files before reading test configuration.
@@ -125,6 +126,8 @@ async function main() {
   }
 
   console.log('\n SUCCESS! Audit export, MCP discovery, SLA controls, and gateway proxy verified end-to-end.');
+  await runRestoredEngineE2e(maha, BASE_URL);
+  console.log('\n SUCCESS! Restored Tensor-Network and Geometric Registration engines verified end-to-end.');
 }
 
 main().catch((err) => {
