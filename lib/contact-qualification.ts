@@ -29,7 +29,7 @@ export function optionalCampaignValue(value: unknown, name: string): string | un
 }
 
 export function contactSourcePath(value: unknown): string {
-  if (value !== '/contact') return '/contact'
+  if (value === '/evidence-audit') return '/evidence-audit'
   return '/contact'
 }
 

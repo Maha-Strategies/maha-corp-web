@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 
 import { TrackedLink } from '@/components/ConversionTracker'
+import EvidenceAuditScopeForm from '@/components/EvidenceAuditScopeForm'
 
 const SITE_URL = 'https://www.mahastrategies.com'
 
@@ -41,7 +42,7 @@ export default function EvidenceAuditPage() {
           <p className="mt-5 max-w-2xl text-base leading-relaxed text-zinc-400 sm:text-lg">This is not generic AI writing advice or a polished summary. It is an evidence workflow for work your organization must be able to stand behind.</p>
           <div className="mt-10 flex flex-col gap-4 sm:flex-row">
             <TrackedLink href="/mps/preflight" event="cta_evidence_audit_preflight" className="inline-block bg-white px-7 py-4 text-center font-mono text-xs font-bold uppercase tracking-widest text-black transition-colors hover:bg-zinc-200">Run a Private Preflight — $49 ↗</TrackedLink>
-            <TrackedLink href="/contact?service=mps_evidence_audit" event="cta_evidence_audit_scope" className="inline-block border border-zinc-600 px-7 py-4 text-center font-mono text-xs font-bold uppercase tracking-widest text-zinc-100 transition-colors hover:border-white hover:text-white">Request an Evidence Audit ↗</TrackedLink>
+            <TrackedLink href="#scope-an-audit" event="cta_evidence_audit_scope" className="inline-block border border-zinc-600 px-7 py-4 text-center font-mono text-xs font-bold uppercase tracking-widest text-zinc-100 transition-colors hover:border-white hover:text-white">Request an Evidence Audit ↗</TrackedLink>
           </div>
           <p className="mt-5 font-mono text-[10px] uppercase tracking-widest text-zinc-500">Start self-service for a defined extract. Scope a human audit for a high-stakes document.</p>
         </section>
@@ -71,6 +72,10 @@ export default function EvidenceAuditPage() {
             <div><p className="font-mono text-xs text-indigo-200">03</p><h2 className="mt-3 text-lg text-white">Resolve what matters</h2><p className="mt-2 text-sm leading-relaxed text-zinc-400">Receive the agreed evidence record and a clear view of what is ready, conditional, or unresolved.</p></div>
           </div>
         </section>
+
+        <div className="mt-24">
+          <EvidenceAuditScopeForm />
+        </div>
 
         <section className="mt-24 border-t border-zinc-800 pt-10">
           <p className="max-w-2xl text-lg font-light leading-relaxed text-zinc-300">The method is public: MPS makes the epistemic status of substantive claims explicit and machine-readable. An audit applies that discipline to the document in front of you.</p>
