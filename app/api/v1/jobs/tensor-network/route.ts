@@ -3,7 +3,7 @@
 import { after } from 'next/server'
 
 import { JobValidationError, parseTensorNetworkJobRequest } from '@/lib/jobs/contract'
-import { dispatchToWorker, enqueueTensorNetworkJob } from '@/lib/jobs/queue'
+import { dispatchToWorker, enqueueTensorNetworkJob, failUndispatchedJob, workerDispatchConfigured } from '@/lib/jobs/queue'
 import { quoteJobCredits } from '@/lib/jobs/pricing'
 import { jobResponseHeaders, publicJobView } from '@/lib/jobs/provenance'
 
@@ -25,6 +25,7 @@ export async function POST(request: Request) {
     if (error instanceof JobValidationError) return json({ error: { code: error.code, message: error.message } }, 400)
     throw error
   }
+  if (!workerDispatchConfigured()) return json({ error: { code: 'worker_unavailable', message: 'GPU job dispatch is not configured. No credits were charged.' } }, 503)
   const zeroDataRetention = request.headers.get('x-maha-zero-data-retention') === 'true'
   let outcome
   try {
@@ -34,7 +35,9 @@ export async function POST(request: Request) {
   if (outcome.kind === 'unavailable') return json({ error: { code: 'api_key_service_unavailable', message: 'Credit reservation is temporarily unavailable.' } }, 503)
   const headers = jobResponseHeaders({ zeroDataRetention })
   if (outcome.kind === 'duplicate') return json({ ...publicJobView(outcome.job), idempotentReplay: true }, 200, headers)
-  after(async () => { await dispatchToWorker(outcome.handoff) })
+  after(async () => {
+    if (!await dispatchToWorker(outcome.handoff)) await failUndispatchedJob(outcome.handoff)
+  })
   return json({ ...publicJobView(outcome.job), quotedCredits: quoteJobCredits('tensor-network', parsed.problem.size), pollUrl: `/api/v1/jobs/${outcome.job.jobId}` }, 202, headers)
 }
 

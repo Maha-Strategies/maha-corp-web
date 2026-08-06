@@ -109,6 +109,11 @@ Preview deployment.
 - Variable `PRODUCTION_BASE_URL=https://www.mahastrategies.com` — read only so
   the guard can refuse it.
 
+The Modal secret `maha-worker-secrets` must contain the same
+`VERCEL_AUTOMATION_BYPASS_SECRET` used by the protected Preview environment.
+Without it, Modal can accept and execute a GPU job but Vercel rejects the
+signed result callback before `/api/v1/jobs/webhook` runs.
+
 If you already configured `preview-capacity`, the bypass secret and the upstream
 URL and token are the same values; the API key should stay distinct so capacity
 and E2E runs do not consume one another's balance.
