@@ -32,6 +32,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${baseUrl}/apps/the-engine`, lastModified: new Date('2026-07-26'), changeFrequency: 'monthly', priority: 0.7 },
     { url: `${baseUrl}/apps/the-engine/privacy`, lastModified: new Date('2026-07-22'), changeFrequency: 'yearly', priority: 0.3 },
     { url: `${baseUrl}/tools`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.8 },
+    { url: `${baseUrl}/developers`, lastModified: new Date('2026-08-06'), changeFrequency: 'weekly', priority: 0.9 },
     { url: `${baseUrl}/tensor-opt`, lastModified: new Date('2026-08-06'), changeFrequency: 'monthly', priority: 0.8 },
     { url: `${baseUrl}/geometric-optimization`, lastModified: new Date('2026-08-06'), changeFrequency: 'monthly', priority: 0.8 },
     { url: `${baseUrl}/tools/architecture-readiness-assessment`, lastModified: new Date('2026-07-29'), changeFrequency: 'monthly', priority: 0.8 },

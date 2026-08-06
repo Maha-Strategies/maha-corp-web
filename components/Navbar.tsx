@@ -36,11 +36,13 @@ export default function Navbar() {
     { name: 'Apps', href: '/apps' },
     { name: 'Method', href: '/method' },
     { name: 'Auditor', href: '/audit' },
+    { name: 'Developers', href: '/developers' },
     { name: 'Contact', href: '/contact' },
   ];
 
   const exploreLinks = [
     { name: 'Tools & API', href: '/tools' },
+    { name: 'Developer Infrastructure', href: '/developers' },
     { name: 'About Maha', href: '/about' },
     { name: 'MPS Standard', href: '/mps' },
     { name: 'Timing Board', href: '/operations/timing' },
