@@ -1,7 +1,7 @@
 {
   "schema": "https://www.mahastrategies.com/schemas/agent-offers/v0.2",
   "version": "0.2.0",
-  "updatedAt": "2026-07-20T00:00:00.000Z",
+  "updatedAt": "2026-08-06T00:00:00.000Z",
   "provider": {
     "name": "Maha Strategies LLC",
     "url": "https://www.mahastrategies.com",
@@ -31,6 +31,70 @@
     "specification": "https://www.mahastrategies.com/mps",
     "registry": "https://mps.mahastrategies.com/v1/records"
   },
+  "technicalCapabilities": [
+    {
+      "id": "context-compression",
+      "name": "Context Compression",
+      "status": "available_with_provisioned_api_key",
+      "serviceUrl": "https://www.mahastrategies.com/tools",
+      "documentationUrl": "https://www.mahastrategies.com/docs",
+      "endpoint": "https://www.mahastrategies.com/api/v1/compress",
+      "method": "POST",
+      "authorization": "A provisioned Maha API key is required. The public API contract uses Authorization: Bearer <API_KEY>.",
+      "dataBoundary": "The endpoint returns a transient compiled context pack. Source text and compiled context are not retained by the API.",
+      "acquisition": "Tenant API access is provisioned through the dashboard or operator onboarding; this manifest cannot create a key or authorize a charge."
+    },
+    {
+      "id": "gpu-qubo-ising",
+      "name": "GPU QUBO/Ising Heuristic",
+      "status": "available_with_provisioned_api_key",
+      "serviceUrl": "https://www.mahastrategies.com/tools",
+      "documentationUrl": "https://www.mahastrategies.com/docs",
+      "endpoint": "https://www.mahastrategies.com/api/v1/jobs/qubo-ising",
+      "method": "POST",
+      "authorization": "A provisioned Maha API key with sufficient tenant credits is required.",
+      "execution": "Asynchronous GPU job. Poll the returned job URL. Inputs are bounded inline data and are not echoed by the job API.",
+      "methodBoundary": "The solver is a heuristic outside its documented exact-enumeration threshold. It does not claim a certified bound or global optimum.",
+      "acquisition": "Tenant API access is provisioned through the dashboard or operator onboarding; this manifest cannot create a key or authorize a charge."
+    },
+    {
+      "id": "gpu-tensor-network",
+      "name": "Bounded-Bond Tensor-Network Optimization",
+      "status": "available_with_provisioned_api_key",
+      "serviceUrl": "https://www.mahastrategies.com/tensor-opt",
+      "documentationUrl": "https://www.mahastrategies.com/docs",
+      "endpoint": "https://www.mahastrategies.com/api/v1/jobs/tensor-network",
+      "method": "POST",
+      "authorization": "A provisioned Maha API key with sufficient tenant credits is required.",
+      "execution": "Asynchronous GPU job. The binary factor network is contracted in variable order with a declared bounded transfer frontier.",
+      "methodBoundary": "Exact enumeration is available only below the documented threshold. Truncated contraction is heuristic and never claims optimality.",
+      "acquisition": "Tenant API access is provisioned through the dashboard or operator onboarding; this manifest cannot create a key or authorize a charge."
+    },
+    {
+      "id": "gpu-geometric-registration",
+      "name": "Weighted SE(3) Geometric Registration",
+      "status": "available_with_provisioned_api_key",
+      "serviceUrl": "https://www.mahastrategies.com/geometric-optimization",
+      "documentationUrl": "https://www.mahastrategies.com/docs",
+      "endpoint": "https://www.mahastrategies.com/api/v1/jobs/geometric-registration",
+      "method": "POST",
+      "authorization": "A provisioned Maha API key with sufficient tenant credits is required.",
+      "execution": "Asynchronous GPU job for paired 3D points. Results include rotation, translation, RMSE, maximum residual, and determinant.",
+      "methodBoundary": "The solver fits a weighted rigid transform for known correspondences. It does not search correspondences or perform non-rigid deformation.",
+      "acquisition": "Tenant API access is provisioned through the dashboard or operator onboarding; this manifest cannot create a key or authorize a charge."
+    },
+    {
+      "id": "enterprise-mcp-gateway",
+      "name": "Enterprise MCP Gateway",
+      "status": "available_for_tenant_onboarding",
+      "serviceUrl": "https://www.mahastrategies.com/enterprise-mcp-gateway",
+      "contractUrl": "https://www.mahastrategies.com/mcp-gateway-contract.json",
+      "authorization": "Tenant-bound API credentials and a distinct operator credential are required. Browser-originated proxy calls are not supported.",
+      "capability": "Tenant-scoped upstream inventory, explicit method and tool allowlists, and privacy-preserving gateway audit records.",
+      "methodBoundary": "The first release proxies JSON MCP messages to registered public HTTPS upstreams. It does not support private-upstream OAuth exchange, SSE streaming, or forwarding an agent bearer token.",
+      "acquisition": "Enterprise onboarding requires human scope and security review. This manifest cannot authorize a connection or a charge."
+    }
+  ],
   "capabilities": [
     {
       "id": "mps_audit",

@@ -1,10 +1,41 @@
 {
-  "schema": "https://www.mahastrategies.com/schemas/inbound-agent-card/v0.1",
+  "schema": "https://www.mahastrategies.com/schemas/inbound-agent-card/v0.2",
+  "version": "0.2.0",
+  "updatedAt": "2026-08-06T00:00:00.000Z",
   "name": "Maha Strategies Inbound Gatekeeper",
   "url": "https://www.mahastrategies.com/inbound",
   "submissionEndpoint": "https://www.mahastrategies.com/api/inbound-submissions",
   "inputSchema": "https://www.mahastrategies.com/inbound-submission-schema.json",
   "acceptedOffers": ["rapid-intelligence-brief", "verified-research-brief", "mps-preflight", "mps-prepaid-audit-access"],
+  "serviceCatalog": "https://www.mahastrategies.com/agent-offers.json",
+  "documentation": "https://www.mahastrategies.com/docs",
+  "capabilities": [
+    {
+      "id": "context-compression",
+      "status": "available_with_provisioned_api_key",
+      "endpoint": "https://www.mahastrategies.com/api/v1/compress"
+    },
+    {
+      "id": "gpu-qubo-ising",
+      "status": "available_with_provisioned_api_key",
+      "endpoint": "https://www.mahastrategies.com/api/v1/jobs/qubo-ising"
+    },
+    {
+      "id": "gpu-tensor-network",
+      "status": "available_with_provisioned_api_key",
+      "endpoint": "https://www.mahastrategies.com/api/v1/jobs/tensor-network"
+    },
+    {
+      "id": "gpu-geometric-registration",
+      "status": "available_with_provisioned_api_key",
+      "endpoint": "https://www.mahastrategies.com/api/v1/jobs/geometric-registration"
+    },
+    {
+      "id": "enterprise-mcp-gateway",
+      "status": "available_for_tenant_onboarding",
+      "contract": "https://www.mahastrategies.com/mcp-gateway-contract.json"
+    }
+  ],
   "terms": {"bindingCommitment": false, "payment": "A human purchaser must authorize any Stripe Checkout payment.", "sensitiveData": "Do not submit confidential, regulated, or sensitive personal information."},
   "review": {"mode": "deterministic_qualification_then_human_scope_review", "responseTargetBusinessDays": 2}
 }
