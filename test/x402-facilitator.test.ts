@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
 
-import { createFacilitator, facilitatorRejectionReason, readResponse } from '../lib/x402/facilitator.ts'
+import { createFacilitator, facilitatorRejectionReason, readResponse, recoverSubmittedSettlement } from '../lib/x402/facilitator.ts'
 import {
   PAYMENT_REQUIRED_HEADER,
   PAYMENT_SIGNATURE_HEADER,
@@ -105,6 +105,53 @@ test('typed facilitator errors retain their actionable rejection reason', () => 
   })
   assert.equal(facilitatorRejectionReason('settle', settleError), 'settle_exact_failed_onchain')
   assert.equal(facilitatorRejectionReason('verify', new Error('HTTP 401')), null)
+})
+
+test('an ambiguous 5xx settlement is recovered only from CDP\'s on-chain nonce response', () => {
+  const payer = '0x1111111111111111111111111111111111111111'
+  const transaction = `0x${'ab'.repeat(32)}`
+  const payment = {
+    x402Version: 2,
+    accepted: requirement,
+    payload: { authorization: { from: payer }, signature: '0xsig' },
+  }
+  const recovered = recoverSubmittedSettlement({
+    success: false,
+    errorReason: 'invalid_payload',
+    errorMessage: 'authorization nonce already submitted; transaction already on-chain',
+    network: requirement.network,
+    transaction,
+  }, payment, requirement)
+
+  assert.deepEqual(recovered, { ok: true, payer, transaction })
+})
+
+test('settlement recovery refuses every response that cannot be confirmed safely', () => {
+  const payer = '0x1111111111111111111111111111111111111111'
+  const transaction = `0x${'ab'.repeat(32)}`
+  const payment = {
+    x402Version: 2,
+    accepted: requirement,
+    payload: { authorization: { from: payer }, signature: '0xsig' },
+  }
+  const base = {
+    success: false,
+    errorReason: 'invalid_payload',
+    errorMessage: 'authorization nonce already submitted; transaction already on-chain',
+    network: requirement.network,
+    transaction,
+  }
+
+  for (const response of [
+    { ...base, success: true },
+    { ...base, errorReason: 'insufficient_funds' },
+    { ...base, errorMessage: 'some other invalid payload' },
+    { ...base, network: 'eip155:84532' },
+    { ...base, transaction: 'not-a-hash' },
+  ]) {
+    assert.equal(recoverSubmittedSettlement(response, payment, requirement), null)
+  }
+  assert.equal(recoverSubmittedSettlement(base, { ...payment, payload: { authorization: { from: 'not-an-address' } } }, requirement), null)
 })
 
 test('a response that does not clearly state success is a failure', () => {
