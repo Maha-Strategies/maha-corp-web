@@ -26,6 +26,8 @@
     "measure:arbitrage": "node --experimental-strip-types scripts/measure-arbitrage-baseline.ts",
     "measure:compression-scale": "node --experimental-strip-types scripts/measure-compression-scale.ts",
     "measure:compression": "node --experimental-strip-types scripts/measure-compression.ts",
+    "recipe:context-compiler": "node --experimental-strip-types scripts/run-context-compiler-agent-recipe.ts",
+    "recipe:context-compiler:live": "node --experimental-strip-types scripts/run-context-compiler-agent-recipe.ts --live",
     "verify:x402-sepolia": "node --experimental-strip-types scripts/verify-x402-sepolia.ts",
     "build:sdk": "npm --prefix packages/sdk run build",
     "pack:sdk": "npm --prefix packages/sdk run pack:dry-run",
