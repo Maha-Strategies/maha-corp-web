@@ -1,0 +1,35 @@
+import assert from 'node:assert/strict'
+import test from 'node:test'
+
+import { validateDiscoveryExtension, validateDiscoveryExtensionSpec } from '@x402/extensions/bazaar'
+
+import { discoveryExtensionsFor, resourceInfoFor } from '../lib/x402/discovery.ts'
+
+const compression = {
+  pathPrefix: '/api/v1/compress',
+  amount: '1000',
+  description: 'Evidence-aware context compression for LLM and agent workflows',
+  concurrencyCap: 8,
+}
+
+test('the Context Compiler publishes valid, callable Bazaar metadata', () => {
+  const extensions = discoveryExtensionsFor(compression)
+  assert.ok(extensions?.bazaar)
+  assert.deepEqual(validateDiscoveryExtensionSpec(extensions!.bazaar as never), { valid: true })
+  assert.deepEqual(validateDiscoveryExtension(extensions!.bazaar as never), { valid: true })
+
+  const bazaar = extensions!.bazaar as { info: { input: { method: string; body: Record<string, unknown> } } }
+  assert.equal(bazaar.info.input.method, 'POST')
+  assert.equal(bazaar.info.input.body.tokenBudget, 1024)
+})
+
+test('the catalog metadata identifies the service for semantic search', () => {
+  const resource = resourceInfoFor(compression, 'https://www.mahastrategies.com/api/v1/compress')
+  assert.equal(resource.serviceName, 'Maha Context Compiler')
+  assert.ok(resource.tags?.includes('context-compression'))
+  assert.equal(resource.iconUrl, 'https://www.mahastrategies.com/icon.png')
+})
+
+test('an unknown priced route is not advertised with an invented schema', () => {
+  assert.equal(discoveryExtensionsFor({ ...compression, pathPrefix: '/api/v1/unknown' }), undefined)
+})

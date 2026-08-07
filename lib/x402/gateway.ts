@@ -8,6 +8,7 @@ import {
   buildPaymentRequired,
   encodeChallengeHeader,
   encodePaymentResponse,
+  matchesPaymentContext,
   parsePaymentHeader,
   readPaymentSignature,
   type PaymentFacilitator,
@@ -18,6 +19,7 @@ import { confirmSettlement } from './chain.ts'
 import { createReplayGuard } from './replay-guard.ts'
 import { createAgentInquiryLedger } from '../agent-inquiry-ledger.ts'
 import { SLOT_RESOURCE_HEADER, SLOT_TOKEN_HEADER } from './slot.ts'
+import { discoveryExtensionsFor, resourceInfoFor } from './discovery.ts'
 
 // Decides what happens to a request that carries no API key: a challenge, a
 // refusal, or admission as a paid caller. Sits between proxy.ts and the
@@ -63,7 +65,7 @@ function confirmerFor(config: X402Config, requirement: PaymentRequirement): Sett
     asset: config.asset,
     payer,
     payTo: config.payTo,
-    minAmount: requirement.maxAmountRequired,
+    minAmount: requirement.amount,
   })
 }
 
@@ -92,12 +94,17 @@ export async function resolveX402(request: Request, dependencies: Dependencies =
   // challenge cannot be answered against a different resource.
   const resourceUrl = `${url.origin}${url.pathname}`
   const requirement = requirementFor(resource, resourceUrl, config)
+  const resourceInfo = resourceInfoFor(resource, resourceUrl)
+  const extensions = discoveryExtensionsFor(resource)
 
   const signature = readPaymentSignature(request.headers)
-  if (!signature) return challenge(requirement, 'Payment is required for this resource.')
+  if (!signature) return challenge(requirement, resourceInfo, extensions, 'Payment is required for this resource.')
 
   const parsed = parsePaymentHeader(signature)
-  if (!parsed.ok) return challenge(requirement, parsed.reason)
+  if (!parsed.ok) return challenge(requirement, resourceInfo, extensions, parsed.reason)
+  if (!matchesPaymentContext(parsed.payment, resourceInfo, extensions)) {
+    return challenge(requirement, resourceInfo, extensions, 'payment_context_mismatch')
+  }
 
   const ledger = dependencies.ledger !== undefined ? dependencies.ledger : createAgentInquiryLedger()
   if (!ledger) {
@@ -116,7 +123,7 @@ export async function resolveX402(request: Request, dependencies: Dependencies =
     payment: parsed.payment,
     requirements: [requirement],
     facilitator,
-    replayGuard: createReplayGuard(ledger, { network: config.caip2Network, asset: config.asset }, requirement),
+    replayGuard: createReplayGuard(ledger, { network: config.caip2Network, asset: config.asset, resource: resourceUrl }, requirement),
     confirmOnChain: dependencies.confirmOnChain ?? confirmerFor(config, requirement),
   })
 
@@ -144,7 +151,7 @@ export async function resolveX402(request: Request, dependencies: Dependencies =
       return { kind: 'refused', status: 503, code: 'x402_ledger_unavailable', message: 'Payment could not be recorded and was not settled. Retry with the same payment.' }
     }
     
-    return challenge(requirement, accepted.reason)
+    return challenge(requirement, resourceInfo, extensions, accepted.reason)
   }
 
   // Capacity is checked only after payment is settled and recorded. Checking
@@ -171,8 +178,13 @@ export async function resolveX402(request: Request, dependencies: Dependencies =
   }
 }
 
-function challenge(requirement: PaymentRequirement, error: string): X402Outcome {
-  const body = buildPaymentRequired([requirement], error)
+function challenge(
+  requirement: PaymentRequirement,
+  resource: Parameters<typeof buildPaymentRequired>[1],
+  extensions: Record<string, unknown> | undefined,
+  error: string,
+): X402Outcome {
+  const body = buildPaymentRequired([requirement], resource, error, extensions)
   return { kind: 'challenge', status: 402, header: encodeChallengeHeader(body), body }
 }
 

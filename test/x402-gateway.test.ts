@@ -4,6 +4,7 @@ import test from 'node:test'
 import { priceFor, requirementFor, x402Config, x402Enabled, type X402Config } from '../lib/x402/config.ts'
 import { resolveX402 } from '../lib/x402/gateway.ts'
 import type { PaymentFacilitator } from '../lib/x402/protocol.ts'
+import { discoveryExtensionsFor, resourceInfoFor } from '../lib/x402/discovery.ts'
 
 const RESOURCES = JSON.stringify([
   { pathPrefix: '/api/v1/compress', amount: '10000', description: 'One compression', concurrencyCap: 8 },
@@ -25,13 +26,23 @@ const request = (path: string, headers: Record<string, string> = {}) =>
   new Request(`https://www.mahastrategies.com${path}`, { headers })
 
 const encode = (value: unknown) => Buffer.from(JSON.stringify(value), 'utf8').toString('base64')
-const signature = encode({ x402Version: 1, scheme: 'exact', network: 'base', payload: { signature: '0x' } })
+const signatureFor = (path: string) => {
+  const priced = priceFor(path, config())!
+  const url = `https://www.mahastrategies.com${path}`
+  return encode({
+    x402Version: 2,
+    resource: resourceInfoFor(priced, url),
+    accepted: requirementFor(priced, url, config()),
+    payload: { signature: '0x' },
+    ...(discoveryExtensionsFor(priced) ? { extensions: discoveryExtensionsFor(priced) } : {}),
+  })
+}
 
 function facilitator(seen: string[] = []): PaymentFacilitator {
   return {
     // The real verify response: valid, and who paid. No transaction and no
     // amount exist until settlement.
-    verify: async (_payment, requirement) => { seen.push(requirement.maxAmountRequired); return { ok: true, payer: '0xAgent' } },
+    verify: async (_payment, requirement) => { seen.push(requirement.amount); return { ok: true, payer: '0xAgent' } },
     settle: async () => ({ ok: true, payer: '0xAgent', transaction: 'tx_1' }),
   }
 }
@@ -130,8 +141,11 @@ test('an unpaid request to a priced path is challenged', async () => {
   if (outcome.kind !== 'challenge') return
   assert.equal(outcome.status, 402)
   const decoded = JSON.parse(Buffer.from(outcome.header, 'base64').toString('utf8'))
-  assert.equal(decoded.accepts[0].maxAmountRequired, '10000')
-  assert.equal(decoded.accepts[0].resource, 'https://www.mahastrategies.com/api/v1/compress')
+  assert.equal(decoded.x402Version, 2)
+  assert.equal(decoded.accepts[0].amount, '10000')
+  assert.equal(decoded.resource.url, 'https://www.mahastrategies.com/api/v1/compress')
+  assert.equal(decoded.resource.serviceName, 'Maha Context Compiler')
+  assert.equal(decoded.extensions.bazaar.info.input.method, 'POST')
 })
 
 test('the price charged is the longest matching prefix', () => {
@@ -154,14 +168,17 @@ test('the challenge publishes the EIP-712 domain the facilitator needs', () => {
   assert.deepEqual(requirementFor(priceFor('/api/v1/compress', other)!, 'https://x.test/api/v1/compress', other).extra, { name: 'EURC', version: '1' })
 })
 
-test('the challenge binds to the path without its query string', () => {
-  const requirement = requirementFor(priceFor('/api/v1/compress', config())!, 'https://www.mahastrategies.com/api/v1/compress', config())
-  assert.equal(requirement.resource, 'https://www.mahastrategies.com/api/v1/compress')
-  assert.equal(requirement.payTo, '0xSettlement')
+test('the v2 resource binds to the path without its query string', async () => {
+  const outcome = await resolveX402(request('/api/v1/compress?debug=1'), { config: config() })
+  assert.equal(outcome.kind, 'challenge')
+  if (outcome.kind !== 'challenge') return
+  const decoded = JSON.parse(Buffer.from(outcome.header, 'base64').toString('utf8'))
+  assert.equal(decoded.resource.url, 'https://www.mahastrategies.com/api/v1/compress')
+  assert.equal(decoded.accepts[0].payTo, '0xSettlement')
 })
 
 test('a settled payment is admitted and carries settlement back', async () => {
-  const outcome = await resolveX402(request('/api/v1/compress', { 'PAYMENT-SIGNATURE': signature }), {
+  const outcome = await resolveX402(request('/api/v1/compress', { 'PAYMENT-SIGNATURE': signatureFor('/api/v1/compress') }), {
     config: config(), facilitator: facilitator(), ledger: ledger('claimed'), acquire,
   })
   assert.equal(outcome.kind, 'paid')
@@ -175,7 +192,7 @@ test('a settled payment is admitted and carries settlement back', async () => {
 })
 
 test('a replayed payment is refused with 409, not re-challenged', async () => {
-  const outcome = await resolveX402(request('/api/v1/compress', { 'PAYMENT-SIGNATURE': signature }), {
+  const outcome = await resolveX402(request('/api/v1/compress', { 'PAYMENT-SIGNATURE': signatureFor('/api/v1/compress') }), {
     config: config(), facilitator: facilitator(), ledger: ledger('duplicate'), acquire,
   })
   assert.equal(outcome.kind, 'refused')
@@ -189,17 +206,17 @@ test('each path is priced to the facilitator at its own rate', async () => {
   // what is sent to the facilitator to validate the signed payload against --
   // there is no amount in a verify response to check afterwards.
   const seen: string[] = []
-  await resolveX402(request('/api/v1/compress/solver', { 'PAYMENT-SIGNATURE': signature }), {
+  await resolveX402(request('/api/v1/compress/solver', { 'PAYMENT-SIGNATURE': signatureFor('/api/v1/compress/solver') }), {
     config: config(), facilitator: facilitator(seen), ledger: ledger('claimed'), acquire,
   })
-  await resolveX402(request('/api/v1/compress', { 'PAYMENT-SIGNATURE': signature }), {
+  await resolveX402(request('/api/v1/compress', { 'PAYMENT-SIGNATURE': signatureFor('/api/v1/compress') }), {
     config: config(), facilitator: facilitator(seen), ledger: ledger('claimed'), acquire,
   })
   assert.deepEqual(seen, ['500000', '10000'])
 })
 
 test('a payment the facilitator rejects is challenged again rather than served', async () => {
-  const outcome = await resolveX402(request('/api/v1/compress/solver', { 'PAYMENT-SIGNATURE': signature }), {
+  const outcome = await resolveX402(request('/api/v1/compress/solver', { 'PAYMENT-SIGNATURE': signatureFor('/api/v1/compress/solver') }), {
     config: config(), facilitator: underfunded, ledger: ledger('claimed'), acquire,
   })
   assert.equal(outcome.kind, 'challenge')
@@ -208,7 +225,7 @@ test('a payment the facilitator rejects is challenged again rather than served',
 test('a paid request is refused when the resource is at capacity', async () => {
   // Payment authorizes; it does not create GPU capacity.
   const full = async () => ({ admitted: false, active: 2 })
-  const outcome = await resolveX402(request('/api/v1/compress/solver', { 'PAYMENT-SIGNATURE': signature }), {
+  const outcome = await resolveX402(request('/api/v1/compress/solver', { 'PAYMENT-SIGNATURE': signatureFor('/api/v1/compress/solver') }), {
     config: config(), facilitator: facilitator(), ledger: ledger('claimed'), acquire: full,
   })
   assert.equal(outcome.kind, 'refused')
@@ -226,7 +243,7 @@ test('capacity is checked only after payment, so load cannot be probed for free'
 })
 
 test('a missing ledger withholds the resource rather than serving it unrecorded', async () => {
-  const outcome = await resolveX402(request('/api/v1/compress', { 'PAYMENT-SIGNATURE': signature }), {
+  const outcome = await resolveX402(request('/api/v1/compress', { 'PAYMENT-SIGNATURE': signatureFor('/api/v1/compress') }), {
     config: config(), facilitator: facilitator(), ledger: null, acquire,
   })
   assert.equal(outcome.kind, 'refused')
@@ -236,7 +253,7 @@ test('a missing ledger withholds the resource rather than serving it unrecorded'
 })
 
 test('the pre-standard header still transacts', async () => {
-  const outcome = await resolveX402(request('/api/v1/compress', { 'X-PAYMENT': signature }), {
+  const outcome = await resolveX402(request('/api/v1/compress', { 'X-PAYMENT': signatureFor('/api/v1/compress') }), {
     config: config(), facilitator: facilitator(), ledger: ledger('claimed'), acquire,
   })
   assert.equal(outcome.kind, 'paid')

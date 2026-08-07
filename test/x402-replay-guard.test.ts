@@ -6,17 +6,14 @@ import type { PaymentRequirement } from '../lib/x402/protocol.ts'
 
 const requirement: PaymentRequirement = {
   scheme: 'exact',
-  network: 'base',
-  maxAmountRequired: '10000',
-  resource: 'https://www.mahastrategies.com/api/mps-audits',
-  description: 'One MPS audit',
-  mimeType: 'application/json',
+  network: 'eip155:8453',
+  amount: '10000',
   payTo: '0xSettlement',
   maxTimeoutSeconds: 60,
   asset: '0xUSDC',
 }
 
-const context: SettlementContext = { network: 'eip155:8453', asset: '0xUSDC' }
+const context: SettlementContext = { network: 'eip155:8453', asset: '0xUSDC', resource: 'https://www.mahastrategies.com/api/mps-audits' }
 const claimInput = { paymentId: 'a'.repeat(64), payer: '0xAgent' }
 
 function ledger(result: { data?: unknown; error?: { code?: string } | null }, calls: Record<string, unknown>[] = []) {

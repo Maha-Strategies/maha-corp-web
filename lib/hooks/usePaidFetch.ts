@@ -115,7 +115,7 @@ export function describePhase(phase: PaymentPhase): string {
   switch (phase.status) {
     case 'idle': return ''
     case 'requesting': return 'Contacting the service…'
-    case 'payment_required': return `Payment required: ${formatAmount(phase.requirement)} for ${phase.requirement.description ?? 'this request'}.`
+    case 'payment_required': return `Payment required: ${formatAmount(phase.requirement)} for this request.`
     case 'signing': return 'Confirm the payment in your wallet.'
     case 'settling': return 'Settling payment…'
     case 'settled': return 'Paid.'
@@ -125,7 +125,7 @@ export function describePhase(phase: PaymentPhase): string {
 
 /** USDC has six decimals; showing raw base units to a person is unreadable. */
 export function formatAmount(requirement: PaymentRequirement, decimals = 6): string {
-  const raw = BigInt(requirement.maxAmountRequired)
+  const raw = BigInt(requirement.amount)
   const unit = BigInt(10) ** BigInt(decimals)
   const whole = raw / unit
   const fraction = (raw % unit).toString().padStart(decimals, '0').replace(/0+$/, '')

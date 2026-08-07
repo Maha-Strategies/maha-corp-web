@@ -8,10 +8,9 @@ import type { CdpApiCredentials } from './cdp-auth.ts'
 // half-configured deployment behaves exactly as it did before x402 existed
 // rather than advertising a payment path that cannot complete.
 //
-// The published policy still states that autonomous payment is not supported.
-// That flag must stay false until this path works end to end and legal review
-// is complete: agent-offers.json is machine-readable, and an agent that reads
-// it acts without a human present to notice the discrepancy.
+// This is the autonomous pay-per-call path. It is deliberately separate from
+// consulting and checkout offers whose machine-readable policy still requires
+// human authorization.
 
 export type PricedResource = {
   /** Path prefix this price applies to, matched against the request pathname. */
@@ -33,8 +32,8 @@ export type X402Config = {
   facilitatorUrl: string
   facilitatorAuthHeaders?: Record<string, string>
   cdpCredentials?: CdpApiCredentials
+  /** CAIP-2 identifier sent on every x402 v2 message. */
   network: X402Network
-  /** CAIP-2 identifier sent to the facilitator, e.g. eip155:8453 for Base. */
   caip2Network: string
   /** The settlement provider's receiving address, not a wallet we hold. */
   payTo: string
@@ -58,11 +57,15 @@ export type X402Config = {
   chainRpcUrl: string | null
 }
 
-const NETWORKS: Record<string, { network: X402Network; caip2: string }> = {
-  base: { network: 'base', caip2: 'eip155:8453' },
-  'base-sepolia': { network: 'base-sepolia', caip2: 'eip155:84532' },
-  arbitrum: { network: 'arbitrum', caip2: 'eip155:42161' },
-  solana: { network: 'solana', caip2: 'solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp' },
+const NETWORKS: Record<string, X402Network> = {
+  base: 'eip155:8453',
+  'eip155:8453': 'eip155:8453',
+  'base-sepolia': 'eip155:84532',
+  'eip155:84532': 'eip155:84532',
+  arbitrum: 'eip155:42161',
+  'eip155:42161': 'eip155:42161',
+  solana: 'solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp',
+  'solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp': 'solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp',
 }
 
 type Environment = Record<string, string | undefined>
@@ -115,8 +118,8 @@ export function x402Config(environment: Environment = process.env): X402Config |
     facilitatorUrl,
     facilitatorAuthHeaders: parseAuthHeaders(environment.X402_FACILITATOR_AUTH_HEADERS),
     ...(cdpApiKeyId && cdpApiKeySecret ? { cdpCredentials: { apiKeyId: cdpApiKeyId, apiKeySecret: cdpApiKeySecret } } : {}),
-    network: network.network,
-    caip2Network: network.caip2,
+    network,
+    caip2Network: network,
     payTo,
     asset,
     // USDC's domain on every chain this supports. Overridable because the
@@ -127,7 +130,7 @@ export function x402Config(environment: Environment = process.env): X402Config |
     },
     resources,
     slotTtlSeconds,
-    chainRpcUrl: rpcUrlFor(network.caip2, environment.X402_CHAIN_RPC_URL),
+    chainRpcUrl: rpcUrlFor(network, environment.X402_CHAIN_RPC_URL),
   }
 }
 
@@ -187,13 +190,13 @@ export function priceFor(pathname: string, config: X402Config): PricedResource |
 }
 
 export function requirementFor(resource: PricedResource, resourceUrl: string, config: X402Config): PaymentRequirement {
+  // resourceUrl is accepted for call-site stability; in v2 it lives in the
+  // top-level ResourceInfo rather than inside each payment requirement.
+  void resourceUrl
   return {
     scheme: 'exact',
     network: config.network,
-    maxAmountRequired: resource.amount,
-    resource: resourceUrl,
-    description: resource.description,
-    mimeType: 'application/json',
+    amount: resource.amount,
     payTo: config.payTo,
     maxTimeoutSeconds: 60,
     asset: config.asset,

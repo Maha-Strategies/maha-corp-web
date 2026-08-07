@@ -10,10 +10,15 @@ const account = privateKeyToAccount(privateKey)
 
 const signTypedData = async (req: TypedDataRequest) => {
   return account.signTypedData({
-    domain: req.domain as any,
-    types: req.types as any,
+    domain: { ...req.domain, verifyingContract: req.domain.verifyingContract as `0x${string}` },
+    types: req.types,
     primaryType: req.primaryType,
-    message: req.message,
+    message: {
+      ...req.message,
+      from: req.message.from as `0x${string}`,
+      to: req.message.to as `0x${string}`,
+      nonce: req.message.nonce as `0x${string}`,
+    },
   })
 }
 
@@ -21,7 +26,7 @@ const paidFetch = createPaidFetch({
   signTypedData,
   address: account.address,
   chainId: base.id, // CHANGED: Now using chain ID 8453 (Base Mainnet)
-  onPaymentRequired: (req) => console.log('Payment challenge received:', req.description),
+  onPaymentRequired: (req) => console.log('Payment challenge received:', `${req.amount} base units on ${req.network}`),
   onSettled: (receipt) => console.log('Payment settled on Base Mainnet:', receipt),
 })
 

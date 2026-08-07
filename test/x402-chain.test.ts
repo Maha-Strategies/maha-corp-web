@@ -164,9 +164,8 @@ test('each supported network has a default endpoint, and overrides win', () => {
 // ---------------------------------------------------------------------------
 
 const REQUIREMENT: PaymentRequirement = {
-  scheme: 'exact', network: 'base-sepolia', maxAmountRequired: '10000',
-  resource: 'https://maha.test/api/v1/compress', description: 'One compression',
-  mimeType: 'application/json', payTo: PAY_TO, maxTimeoutSeconds: 60, asset: ASSET,
+  scheme: 'exact', network: 'eip155:84532', amount: '10000',
+  payTo: PAY_TO, maxTimeoutSeconds: 60, asset: ASSET,
 }
 
 const facilitator: PaymentFacilitator = {
@@ -181,7 +180,7 @@ function guard(recorded: Array<Record<string, unknown>>): ReplayGuard {
   }
 }
 
-const payment = { x402Version: 1, scheme: 'exact', network: 'base-sepolia', payload: { signature: '0xsig' } }
+const payment = { x402Version: 2, accepted: REQUIREMENT, payload: { signature: '0xsig' } }
 
 test('a contradicted settlement withholds the resource', async () => {
   const recorded: Array<Record<string, unknown>> = []

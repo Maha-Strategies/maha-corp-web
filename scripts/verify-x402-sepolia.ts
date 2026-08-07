@@ -24,7 +24,7 @@ import { createPublicClient, http, parseAbi, verifyTypedData, type Hex } from 'v
 import { generatePrivateKey, privateKeyToAccount } from 'viem/accounts'
 import { baseSepolia } from 'viem/chains'
 
-import { paymentId, type PaymentPayload } from '../lib/x402/protocol.ts'
+import { paymentId, type PaymentPayload, type PaymentRequirement } from '../lib/x402/protocol.ts'
 
 const DRY_RUN = process.argv.includes('--dry-run')
 const BASE_SEPOLIA_CHAIN_ID = 84532
@@ -56,18 +56,7 @@ function required(name: string): string {
 // Payload construction
 // ---------------------------------------------------------------------------
 
-type Requirement = {
-  scheme: string
-  network: string
-  maxAmountRequired: string
-  resource: string
-  payTo: string
-  asset: string
-  maxTimeoutSeconds: number
-  /** The token's EIP-712 domain. Without it the facilitator answers
-   *  invalid_exact_evm_missing_eip712_domain and refuses every payment. */
-  extra?: { name?: string; version?: string }
-}
+type Requirement = PaymentRequirement
 
 /**
  * The `exact` scheme on an EVM chain is an EIP-3009 `transferWithAuthorization`
@@ -106,7 +95,7 @@ async function signAuthorization(input: {
   const message = {
     from: input.account.address,
     to: input.requirement.payTo as Hex,
-    value: BigInt(input.requirement.maxAmountRequired),
+    value: BigInt(input.requirement.amount),
     validAfter: input.validAfter,
     validBefore: input.validBefore,
     nonce: input.nonce,
@@ -116,11 +105,17 @@ async function signAuthorization(input: {
   return { domain, types, message, signature }
 }
 
-function encodePayload(requirement: Requirement, message: Record<string, unknown>, signature: Hex): { payload: PaymentPayload; header: string } {
+function encodePayload(
+  requirement: Requirement,
+  resource: PaymentPayload['resource'],
+  extensions: Record<string, unknown> | undefined,
+  message: Record<string, unknown>,
+  signature: Hex,
+): { payload: PaymentPayload; header: string } {
   const payload: PaymentPayload = {
-    x402Version: 1,
-    scheme: 'exact',
-    network: requirement.network,
+    x402Version: 2,
+    resource,
+    accepted: requirement,
     payload: {
       signature,
       authorization: {
@@ -132,6 +127,7 @@ function encodePayload(requirement: Requirement, message: Record<string, unknown
         nonce: message.nonce,
       },
     },
+    ...(extensions ? { extensions } : {}),
   }
   return { payload, header: Buffer.from(JSON.stringify(payload), 'utf8').toString('base64') }
 }
@@ -148,9 +144,8 @@ async function dryRun() {
   const account = privateKeyToAccount(generatePrivateKey())
   const requirement: Requirement = {
     scheme: 'exact',
-    network: 'base-sepolia',
-    maxAmountRequired: '10000',
-    resource: 'https://example.test/api/v1/compress',
+    network: EXPECTED_CAIP2,
+    amount: '10000',
     payTo: '0x0000000000000000000000000000000000000002',
     asset: '0x036CbD53842c5426634e7929541eC2318f3dCF7e',
     maxTimeoutSeconds: 60,
@@ -174,7 +169,9 @@ async function dryRun() {
   check('the signature recovers to the signing address', recovered)
 
   stage('Payload identity')
-  const { payload, header } = encodePayload(requirement, signed.message, signed.signature)
+  const resource = { url: 'https://example.test/api/v1/compress', description: 'Context Compression', mimeType: 'application/json' }
+  const extensions = { bazaar: { info: { input: { type: 'http', method: 'POST' } }, schema: {} } }
+  const { payload, header } = encodePayload(requirement, resource, extensions, signed.message, signed.signature)
   const id = await paymentId(payload)
   check('the payment id is a sha256 hex digest', /^[0-9a-f]{64}$/.test(id), id)
 
@@ -186,7 +183,7 @@ async function dryRun() {
 
   // Key order must not change the identity, or one authorization re-encoded
   // presents as two distinct payments and buys the resource twice.
-  const reordered = { payload: payload.payload, network: payload.network, scheme: payload.scheme, x402Version: payload.x402Version } as PaymentPayload
+  const reordered = { payload: payload.payload, accepted: payload.accepted, extensions: payload.extensions, resource: payload.resource, x402Version: payload.x402Version } as PaymentPayload
   check('re-ordering the payload keys does not change the id', (await paymentId(reordered)) === id)
 
   const different = await paymentId({ ...payload, payload: { ...payload.payload, signature: '0xdifferent' } })
@@ -279,10 +276,11 @@ async function liveRun() {
 
   const challenge = decode(challengeHeader)
   const requirement: Requirement = challenge.accepts?.[0]
-  check('the challenge states x402 version 1', challenge.x402Version === 1)
-  check('the challenge names Base Sepolia', requirement?.network === 'base-sepolia', requirement?.network)
-  check('the challenge binds to the resource being bought', requirement?.resource === `${baseUrl}${path}`, requirement?.resource)
-  check('the challenge names a price', /^[0-9]+$/.test(requirement?.maxAmountRequired ?? ''), requirement?.maxAmountRequired)
+  check('the challenge states x402 version 2', challenge.x402Version === 2)
+  check('the challenge names Base Sepolia', requirement?.network === EXPECTED_CAIP2, requirement?.network)
+  check('the challenge binds to the resource being bought', challenge.resource?.url === `${baseUrl}${path}`, challenge.resource?.url)
+  check('the challenge names a price', /^[0-9]+$/.test(requirement?.amount ?? ''), requirement?.amount)
+  check('the challenge declares Bazaar discovery metadata', challenge.extensions?.bazaar?.info?.input?.method === 'POST')
   check('the challenge names an asset and a payee', Boolean(requirement?.asset && requirement?.payTo))
   // Verified against the live facilitator: without this it answers
   // invalid_exact_evm_missing_eip712_domain and no payment can ever succeed.
@@ -316,10 +314,10 @@ async function liveRun() {
     domainVersion = await chain.readContract({ address: requirement.asset as Hex, abi: erc20, functionName: 'version' }).then(String).catch(() => '2')
 
     console.log(`  asset:   ${symbol} (${decimals} decimals) at ${requirement.asset}`)
-    console.log(`  balance: ${balance} (need ${requirement.maxAmountRequired})`)
+    console.log(`  balance: ${balance} (need ${requirement.amount})`)
     check('the advertised asset is a real token on this chain', true)
-    check('the payer holds enough of it to settle', balance >= BigInt(requirement.maxAmountRequired), `have ${balance}`)
-    assetOk = balance >= BigInt(requirement.maxAmountRequired)
+    check('the payer holds enough of it to settle', balance >= BigInt(requirement.amount), `have ${balance}`)
+    assetOk = balance >= BigInt(requirement.amount)
   } catch (error) {
     check('the advertised asset is a real token on this chain', false, error instanceof Error ? error.message : 'read failed')
   }
@@ -346,7 +344,7 @@ async function liveRun() {
   check('the published EIP-712 domain matches the token contract', domainMatches, `challenge says ${signed.domain.name} v${signed.domain.version}; contract says ${domainName} v${domainVersion}`)
   check('the authorization is signed', signed.signature.startsWith('0x'))
 
-  const { payload, header } = encodePayload(requirement, signed.message, signed.signature)
+  const { payload, header } = encodePayload(requirement, challenge.resource, challenge.extensions, signed.message, signed.signature)
   const expectedId = await paymentId(payload)
   console.log(`  payment id: ${expectedId}`)
 

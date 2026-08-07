@@ -19,18 +19,22 @@
 // one answers a request carrying no key at all. The discriminator is the
 // presence of an API key, so the two never contend for the same request.
 
-export type X402Network = 'base' | 'base-sepolia' | 'solana' | 'arbitrum'
+export type X402Network = `eip155:${number}` | `solana:${string}`
+
+export type ResourceInfo = {
+  url: string
+  description?: string
+  mimeType?: string
+  serviceName?: string
+  tags?: string[]
+  iconUrl?: string
+}
 
 export type PaymentRequirement = {
   scheme: 'exact'
   network: X402Network
   /** Smallest indivisible unit of the asset, as a decimal string. USDC has six. */
-  maxAmountRequired: string
-  /** The exact URL being paid for. Binding it prevents a payment for a cheap
-   *  resource being replayed against an expensive one. */
-  resource: string
-  description: string
-  mimeType: string
+  amount: string
   /** The receiving address. Belongs to the settlement provider, not to us. */
   payTo: string
   maxTimeoutSeconds: number
@@ -47,16 +51,19 @@ export type PaymentRequirement = {
 }
 
 export type PaymentRequiredBody = {
-  x402Version: 1
+  x402Version: 2
+  resource: ResourceInfo
   accepts: PaymentRequirement[]
+  extensions?: Record<string, unknown>
   error: string
 }
 
 export type PaymentPayload = {
   x402Version: number
-  scheme: string
-  network: string
+  resource?: ResourceInfo
+  accepted: PaymentRequirement
   payload: Record<string, unknown>
+  extensions?: Record<string, unknown>
 }
 
 /**
@@ -69,7 +76,7 @@ export type PaymentPayload = {
  *
  * This matters more than it sounds. The amount is not checked locally against
  * the verify response, because there is no amount in it; the facilitator is
- * given `maxAmountRequired` in the requirements and answers `isValid: false`
+ * given `amount` in the requirements and answers `isValid: false`
  * when the signed payload does not satisfy them. Re-checking a field the
  * protocol never sends is how the first version of this file managed to refuse
  * every payment it was given.
@@ -149,7 +156,7 @@ export type SettlementConfirmer = (settlement: { transaction: string; payer: str
  * payments and buy the resource twice.
  */
 export async function paymentId(payment: PaymentPayload): Promise<string> {
-  const canonical = stableStringify({ scheme: payment.scheme, network: payment.network, payload: payment.payload })
+  const canonical = stableStringify({ accepted: payment.accepted, payload: payment.payload })
   const digest = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(canonical))
   return [...new Uint8Array(digest)].map((byte) => byte.toString(16).padStart(2, '0')).join('')
 }
@@ -161,7 +168,7 @@ function stableStringify(value: unknown): string {
   return `{${entries.map(([key, item]) => `${JSON.stringify(key)}:${stableStringify(item)}`).join(',')}}`
 }
 
-export const X402_VERSION = 1 as const
+export const X402_VERSION = 2 as const
 
 export const PAYMENT_REQUIRED_HEADER = 'PAYMENT-REQUIRED'
 export const PAYMENT_SIGNATURE_HEADER = 'PAYMENT-SIGNATURE'
@@ -169,25 +176,34 @@ export const PAYMENT_RESPONSE_HEADER = 'PAYMENT-RESPONSE'
 /** Pre-standard name. Read, never written. */
 const LEGACY_SIGNATURE_HEADER = 'X-PAYMENT'
 
-const NETWORKS = new Set<string>(['base', 'base-sepolia', 'solana', 'arbitrum'])
+const NETWORK = /^(?:eip155:[1-9][0-9]*|solana:[A-Za-z0-9]+)$/
 const AMOUNT = /^[0-9]{1,32}$/
 
-export function buildPaymentRequired(requirements: PaymentRequirement[], error = 'Payment required.'): PaymentRequiredBody {
+export function buildPaymentRequired(
+  requirements: PaymentRequirement[],
+  resource: ResourceInfo,
+  error = 'Payment required.',
+  extensions?: Record<string, unknown>,
+): PaymentRequiredBody {
   if (requirements.length === 0) throw new Error('At least one payment requirement is required.')
   for (const requirement of requirements) assertRequirement(requirement)
-  return { x402Version: X402_VERSION, accepts: requirements, error }
+  assertResource(resource)
+  return { x402Version: X402_VERSION, resource, accepts: requirements, ...(extensions ? { extensions } : {}), error }
 }
 
 function assertRequirement(requirement: PaymentRequirement): void {
-  if (!NETWORKS.has(requirement.network)) throw new Error(`Unsupported network: ${requirement.network}`)
-  if (!AMOUNT.test(requirement.maxAmountRequired)) throw new Error('maxAmountRequired must be an integer string in the asset\'s smallest unit.')
-  if (requirement.maxAmountRequired === '0') throw new Error('maxAmountRequired must be greater than zero.')
+  if (!NETWORK.test(requirement.network)) throw new Error(`Unsupported network: ${requirement.network}`)
+  if (!AMOUNT.test(requirement.amount)) throw new Error('amount must be an integer string in the asset\'s smallest unit.')
+  if (requirement.amount === '0') throw new Error('amount must be greater than zero.')
   if (!requirement.payTo.trim()) throw new Error('payTo is required.')
   if (!requirement.asset.trim()) throw new Error('asset is required.')
-  let resource: URL
-  try { resource = new URL(requirement.resource) } catch { throw new Error('resource must be an absolute URL.') }
-  if (resource.protocol !== 'https:') throw new Error('resource must be https.')
   if (requirement.maxTimeoutSeconds <= 0 || requirement.maxTimeoutSeconds > 300) throw new Error('maxTimeoutSeconds must be between 1 and 300.')
+}
+
+function assertResource(resource: ResourceInfo): void {
+  let url: URL
+  try { url = new URL(resource.url) } catch { throw new Error('resource.url must be an absolute URL.') }
+  if (url.protocol !== 'https:') throw new Error('resource.url must be https.')
 }
 
 /**
@@ -209,11 +225,26 @@ export function parsePaymentHeader(header: string | null): { ok: true; payment: 
 
   const payment = value as Record<string, unknown>
   if (payment.x402Version !== X402_VERSION) return { ok: false, reason: 'unsupported_x402_version' }
-  if (typeof payment.scheme !== 'string' || payment.scheme !== 'exact') return { ok: false, reason: 'unsupported_scheme' }
-  if (typeof payment.network !== 'string' || !NETWORKS.has(payment.network)) return { ok: false, reason: 'unsupported_network' }
+  if (typeof payment.accepted !== 'object' || payment.accepted === null) return { ok: false, reason: 'missing_accepted_requirement' }
+  const accepted = payment.accepted as Record<string, unknown>
+  if (accepted.scheme !== 'exact') return { ok: false, reason: 'unsupported_scheme' }
+  if (typeof accepted.network !== 'string' || !NETWORK.test(accepted.network)) return { ok: false, reason: 'unsupported_network' }
+  if (typeof accepted.amount !== 'string' || !AMOUNT.test(accepted.amount)) return { ok: false, reason: 'invalid_amount' }
+  if (typeof accepted.asset !== 'string' || typeof accepted.payTo !== 'string' || typeof accepted.maxTimeoutSeconds !== 'number') {
+    return { ok: false, reason: 'invalid_accepted_requirement' }
+  }
   if (typeof payment.payload !== 'object' || payment.payload === null) return { ok: false, reason: 'missing_payload' }
 
-  return { ok: true, payment: { x402Version: X402_VERSION, scheme: 'exact', network: payment.network, payload: payment.payload as Record<string, unknown> } }
+  return {
+    ok: true,
+    payment: {
+      x402Version: X402_VERSION,
+      ...(typeof payment.resource === 'object' && payment.resource !== null ? { resource: payment.resource as ResourceInfo } : {}),
+      accepted: accepted as PaymentRequirement,
+      payload: payment.payload as Record<string, unknown>,
+      ...(typeof payment.extensions === 'object' && payment.extensions !== null ? { extensions: payment.extensions as Record<string, unknown> } : {}),
+    },
+  }
 }
 
 /**
@@ -222,7 +253,27 @@ export function parsePaymentHeader(header: string | null): { ok: true; payment: 
  */
 export function matchRequirement(payment: PaymentPayload, requirements: PaymentRequirement[]): PaymentRequirement | null {
   return requirements.find((requirement) =>
-    requirement.scheme === payment.scheme && requirement.network === payment.network) ?? null
+    requirement.scheme === payment.accepted.scheme &&
+    requirement.network === payment.accepted.network &&
+    requirement.asset.toLowerCase() === payment.accepted.asset.toLowerCase() &&
+    requirement.amount === payment.accepted.amount &&
+    requirement.payTo.toLowerCase() === payment.accepted.payTo.toLowerCase() &&
+    requirement.maxTimeoutSeconds === payment.accepted.maxTimeoutSeconds) ?? null
+}
+
+/**
+ * v2 moved the resource and extensions beside `accepted`. Verify those
+ * server-declared terms before forwarding the payload so a client cannot
+ * rewrite the URL or the Bazaar schema that the facilitator catalogs.
+ */
+export function matchesPaymentContext(
+  payment: PaymentPayload,
+  resource: ResourceInfo,
+  extensions?: Record<string, unknown>,
+): boolean {
+  if (stableStringify(payment.resource) !== stableStringify(resource)) return false
+  if (extensions && stableStringify(payment.extensions) !== stableStringify(extensions)) return false
+  return true
 }
 
 export type AcceptPaymentResult =
@@ -239,7 +290,7 @@ export type AcceptPaymentResult =
  * twice; claiming before verification would let an invalid payload burn an
  * identifier that the legitimate retry needs.
  *
- * The amount reported back is `maxAmountRequired`, not something the
+ * The amount reported back is `amount`, not something the
  * facilitator returned. It is the amount the payer signed for and the amount
  * the facilitator validated the payload against, and no step in this protocol
  * reports a settled figure independently of it.
@@ -289,7 +340,7 @@ export async function acceptPayment(input: {
     return { ok: false, status: 502, reason: `settlement_contradicted:${confirmation.reason ?? 'unknown'}` }
   }
 
-  return { ok: true, payer: settled.payer, transaction: settled.transaction, amountPaid: requirement.maxAmountRequired }
+  return { ok: true, payer: settled.payer, transaction: settled.transaction, amountPaid: requirement.amount }
 }
 
 /** The base64 challenge for the PAYMENT-REQUIRED header. */
