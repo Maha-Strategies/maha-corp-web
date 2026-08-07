@@ -14,23 +14,22 @@ import {
 } from '../lib/x402/protocol.ts'
 
 const requirement: PaymentRequirement = {
-  scheme: 'exact', network: 'base', maxAmountRequired: '10000',
-  resource: 'https://www.mahastrategies.com/api/mps-audits',
-  description: 'One MPS audit', mimeType: 'application/json',
+  scheme: 'exact', network: 'eip155:8453', amount: '10000',
   payTo: '0xSettlement', maxTimeoutSeconds: 60, asset: '0xUSDC',
 }
+const resource = { url: 'https://www.mahastrategies.com/api/mps-audits', description: 'One MPS audit', mimeType: 'application/json' }
 
 test('the challenge round-trips through the PAYMENT-REQUIRED header', () => {
-  const body = buildPaymentRequired([requirement])
+  const body = buildPaymentRequired([requirement], resource)
   const header = encodeChallengeHeader(body)
   const decoded = JSON.parse(Buffer.from(header, 'base64').toString('utf8'))
-  assert.equal(decoded.x402Version, 1)
-  assert.equal(decoded.accepts[0].resource, requirement.resource)
+  assert.equal(decoded.x402Version, 2)
+  assert.equal(decoded.resource.url, resource.url)
   assert.equal(PAYMENT_REQUIRED_HEADER, 'PAYMENT-REQUIRED')
 })
 
 test('the standard signature header is read, and the pre-standard one still works', () => {
-  const payload = Buffer.from(JSON.stringify({ x402Version: 1, scheme: 'exact', network: 'base', payload: { signature: '0x' } })).toString('base64')
+  const payload = Buffer.from(JSON.stringify({ x402Version: 2, resource, accepted: requirement, payload: { signature: '0x' } })).toString('base64')
 
   const standard = new Headers({ [PAYMENT_SIGNATURE_HEADER]: payload })
   assert.equal(readPaymentSignature(standard), payload)
@@ -126,7 +125,7 @@ test('a success without a transaction identifier is refused', () => {
   assert.equal(noPayer.ok, false)
 
   // No amount is asserted here, deliberately. The protocol does not report a
-  // settled amount at all; the price is enforced by sending maxAmountRequired
+  // settled amount at all; the price is enforced by sending amount
   // in the requirements the facilitator validates against.
   const complete = readResponse('settle', { isValid: true, transaction: 'tx_1', payer: '0xA' })
   assert.equal(complete.ok, true)

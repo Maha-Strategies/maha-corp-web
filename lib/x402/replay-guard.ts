@@ -22,6 +22,7 @@ type Ledger = { rpc: (name: string, args: Record<string, unknown>) => PromiseLik
 export type SettlementContext = {
   network: string
   asset: string
+  resource: string
 }
 
 /**
@@ -47,9 +48,9 @@ export function createReplayGuard(ledger: Ledger, context: SettlementContext, re
         // supplied. The facilitator has already validated the signed payload
         // against these exact requirements, so they are the authoritative
         // record of what was bought and for how much.
-        p_resource: requirement.resource,
+        p_resource: context.resource,
         p_payer: payment.payer,
-        p_amount_paid: requirement.maxAmountRequired,
+        p_amount_paid: requirement.amount,
         p_asset: context.asset,
       })
       if (error) {

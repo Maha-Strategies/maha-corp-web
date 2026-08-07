@@ -18,18 +18,15 @@ export const PAYMENT_RESPONSE_HEADER = 'PAYMENT-RESPONSE'
 
 /** Network names the seller publishes, mapped to the chain a signature binds to. */
 export const NETWORK_CHAIN_IDS: Record<string, number> = {
-  'base-sepolia': 84532,
-  base: 8453,
-  arbitrum: 42161,
+  'eip155:84532': 84532,
+  'eip155:8453': 8453,
+  'eip155:42161': 42161,
 }
 
 export type PaymentRequirement = {
   scheme: string
   network: string
-  maxAmountRequired: string
-  resource: string
-  description?: string
-  mimeType?: string
+  amount: string
   payTo: string
   maxTimeoutSeconds: number
   asset: string
@@ -40,7 +37,16 @@ export type PaymentRequirement = {
 
 export type PaymentChallenge = {
   x402Version: number
+  resource: {
+    url: string
+    description?: string
+    mimeType?: string
+    serviceName?: string
+    tags?: string[]
+    iconUrl?: string
+  }
   accepts: PaymentRequirement[]
+  extensions?: Record<string, unknown>
   error?: string
 }
 
@@ -132,7 +138,7 @@ export function decodeChallenge(header: string | null): PaymentChallenge {
     throw new X402PaymentError('malformed_challenge', 'The payment challenge could not be decoded.', { cause })
   }
   const challenge = parsed as PaymentChallenge
-  if (!challenge || !Array.isArray(challenge.accepts) || challenge.accepts.length === 0) {
+  if (!challenge || challenge.x402Version !== 2 || !challenge.resource?.url || !Array.isArray(challenge.accepts) || challenge.accepts.length === 0) {
     throw new X402PaymentError('malformed_challenge', 'The payment challenge listed no terms that could be paid.')
   }
   return challenge
@@ -172,7 +178,7 @@ export function buildTypedData(requirement: PaymentRequirement, from: string, no
   const seconds = BigInt(Math.floor(now / 1_000))
   return {
     domain: {
-      name: requirement.extra?.name ?? 'USDC',
+      name: requirement.extra?.name ?? 'USD Coin',
       version: requirement.extra?.version ?? '2',
       chainId,
       verifyingContract: requirement.asset,
@@ -191,7 +197,7 @@ export function buildTypedData(requirement: PaymentRequirement, from: string, no
     message: {
       from,
       to: requirement.payTo,
-      value: BigInt(requirement.maxAmountRequired),
+      value: BigInt(requirement.amount),
       // Match the reference v1 EVM client exactly. The generous backdate
       // tolerates payer/server clock skew; the expiry is bounded by the terms
       // the server published rather than silently extending them.
@@ -203,11 +209,16 @@ export function buildTypedData(requirement: PaymentRequirement, from: string, no
 }
 
 /** The base64 PAYMENT-SIGNATURE header. BigInts cross as decimal strings. */
-export function encodePaymentSignature(requirement: PaymentRequirement, message: TransferAuthorization, signature: string): string {
+export function encodePaymentSignature(
+  requirement: PaymentRequirement,
+  message: TransferAuthorization,
+  signature: string,
+  challenge?: Pick<PaymentChallenge, 'resource' | 'extensions'>,
+): string {
   return toBase64(JSON.stringify({
-    x402Version: 1,
-    scheme: 'exact',
-    network: requirement.network,
+    x402Version: 2,
+    ...(challenge?.resource ? { resource: challenge.resource } : {}),
+    accepted: requirement,
     payload: {
       signature,
       authorization: {
@@ -219,6 +230,7 @@ export function encodePaymentSignature(requirement: PaymentRequirement, message:
         nonce: message.nonce,
       },
     },
+    ...(challenge?.extensions ? { extensions: challenge.extensions } : {}),
   }))
 }
 
@@ -301,7 +313,7 @@ export function createPaidFetch(options: PaidFetchOptions) {
     const paid = await request(input, {
       ...init,
       body: body as BodyInit | null | undefined,
-      headers: { ...headersToObject(init.headers), [PAYMENT_SIGNATURE_HEADER]: encodePaymentSignature(requirement, typedData.message, signature) },
+      headers: { ...headersToObject(init.headers), [PAYMENT_SIGNATURE_HEADER]: encodePaymentSignature(requirement, typedData.message, signature, challenge) },
     })
 
     if (paid.ok) {

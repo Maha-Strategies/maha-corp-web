@@ -5,6 +5,7 @@ import {
   acceptPayment,
   buildPaymentRequired,
   matchRequirement,
+  matchesPaymentContext,
   parsePaymentHeader,
   type PaymentFacilitator,
   type PaymentPayload,
@@ -14,11 +15,8 @@ import {
 
 const requirement = (overrides: Partial<PaymentRequirement> = {}): PaymentRequirement => ({
   scheme: 'exact',
-  network: 'base',
-  maxAmountRequired: '1000',
-  resource: 'https://www.mahastrategies.com/api/mps-audits',
-  description: 'One MPS audit',
-  mimeType: 'application/json',
+  network: 'eip155:8453',
+  amount: '1000',
   payTo: '0xSettlementProvider',
   maxTimeoutSeconds: 60,
   asset: '0xUSDC',
@@ -26,8 +24,14 @@ const requirement = (overrides: Partial<PaymentRequirement> = {}): PaymentRequir
 })
 
 const payment = (overrides: Partial<PaymentPayload> = {}): PaymentPayload => ({
-  x402Version: 1, scheme: 'exact', network: 'base', payload: { signature: '0xsig' }, ...overrides,
+  x402Version: 2,
+  resource: { url: 'https://www.mahastrategies.com/api/mps-audits', description: 'One MPS audit', mimeType: 'application/json' },
+  accepted: requirement(),
+  payload: { signature: '0xsig' },
+  ...overrides,
 })
+
+const resource = { url: 'https://www.mahastrategies.com/api/mps-audits', description: 'One MPS audit', mimeType: 'application/json' }
 
 const encode = (value: unknown) => Buffer.from(JSON.stringify(value), 'utf8').toString('base64')
 
@@ -49,23 +53,23 @@ function guard(seen: Set<string> = new Set()): ReplayGuard {
 }
 
 test('a challenge states the terms an agent needs to pay', () => {
-  const body = buildPaymentRequired([requirement()], 'Payment required for this audit.')
-  assert.equal(body.x402Version, 1)
-  assert.equal(body.accepts[0].maxAmountRequired, '1000')
-  assert.equal(body.accepts[0].resource, 'https://www.mahastrategies.com/api/mps-audits')
+  const body = buildPaymentRequired([requirement()], resource, 'Payment required for this audit.')
+  assert.equal(body.x402Version, 2)
+  assert.equal(body.accepts[0].amount, '1000')
+  assert.equal(body.resource.url, 'https://www.mahastrategies.com/api/mps-audits')
   assert.equal(body.error, 'Payment required for this audit.')
 })
 
 test('a challenge that cannot be honoured is refused at construction', () => {
   // Publishing an unpayable challenge is the machine equivalent of advertising
   // a product that cannot be bought.
-  assert.throws(() => buildPaymentRequired([]), /At least one/)
-  assert.throws(() => buildPaymentRequired([requirement({ maxAmountRequired: '0' })]), /greater than zero/)
-  assert.throws(() => buildPaymentRequired([requirement({ maxAmountRequired: '1.5' })]), /smallest unit/)
-  assert.throws(() => buildPaymentRequired([requirement({ network: 'dogecoin' as never })]), /Unsupported network/)
-  assert.throws(() => buildPaymentRequired([requirement({ resource: 'http://insecure.example' })]), /https/)
-  assert.throws(() => buildPaymentRequired([requirement({ payTo: '  ' })]), /payTo/)
-  assert.throws(() => buildPaymentRequired([requirement({ maxTimeoutSeconds: 0 })]), /between 1 and 300/)
+  assert.throws(() => buildPaymentRequired([], resource), /At least one/)
+  assert.throws(() => buildPaymentRequired([requirement({ amount: '0' })], resource), /greater than zero/)
+  assert.throws(() => buildPaymentRequired([requirement({ amount: '1.5' })], resource), /smallest unit/)
+  assert.throws(() => buildPaymentRequired([requirement({ network: 'dogecoin' as never })], resource), /Unsupported network/)
+  assert.throws(() => buildPaymentRequired([requirement()], { ...resource, url: 'http://insecure.example' }), /https/)
+  assert.throws(() => buildPaymentRequired([requirement({ payTo: '  ' })], resource), /payTo/)
+  assert.throws(() => buildPaymentRequired([requirement({ maxTimeoutSeconds: 0 })], resource), /between 1 and 300/)
 })
 
 test('a malformed payment header is a client error, never a crash', () => {
@@ -75,10 +79,10 @@ test('a malformed payment header is a client error, never a crash', () => {
     ['!!!not base64!!!', 'payment_header_not_json'],
     [Buffer.from('not json').toString('base64'), 'payment_header_not_json'],
     [encode([1, 2]), 'payment_header_not_an_object'],
-    [encode({ x402Version: 99, scheme: 'exact', network: 'base', payload: {} }), 'unsupported_x402_version'],
-    [encode({ x402Version: 1, scheme: 'upto', network: 'base', payload: {} }), 'unsupported_scheme'],
-    [encode({ x402Version: 1, scheme: 'exact', network: 'dogecoin', payload: {} }), 'unsupported_network'],
-    [encode({ x402Version: 1, scheme: 'exact', network: 'base' }), 'missing_payload'],
+    [encode({ x402Version: 99, accepted: requirement(), payload: {} }), 'unsupported_x402_version'],
+    [encode({ x402Version: 2, accepted: { ...requirement(), scheme: 'upto' }, payload: {} }), 'unsupported_scheme'],
+    [encode({ x402Version: 2, accepted: requirement({ network: 'dogecoin' as never }), payload: {} }), 'unsupported_network'],
+    [encode({ x402Version: 2, accepted: requirement() }), 'missing_payload'],
   ] as const) {
     const result = parsePaymentHeader(header)
     assert.equal(result.ok, false, String(header))
@@ -95,13 +99,21 @@ test('an oversized header is refused before it is decoded', () => {
 test('a well-formed header parses', () => {
   const result = parsePaymentHeader(encode(payment()))
   assert.equal(result.ok, true)
-  if (result.ok) assert.equal(result.payment.network, 'base')
+  if (result.ok) assert.equal(result.payment.accepted.network, 'eip155:8453')
 })
 
 test('a payment is matched to the requirement it satisfies', () => {
-  const requirements = [requirement({ network: 'base' }), requirement({ network: 'solana' })]
-  assert.equal(matchRequirement(payment({ network: 'solana' }), requirements)?.network, 'solana')
-  assert.equal(matchRequirement(payment({ network: 'arbitrum' }), requirements), null)
+  const solana = requirement({ network: 'solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp' })
+  const requirements = [requirement(), solana]
+  assert.equal(matchRequirement(payment({ accepted: solana }), requirements)?.network, solana.network)
+  assert.equal(matchRequirement(payment({ accepted: requirement({ network: 'eip155:42161' }) }), requirements), null)
+})
+
+test('the v2 resource and Bazaar declaration cannot be rewritten by the payer', () => {
+  const extensions = { bazaar: { info: { input: { type: 'http', method: 'POST' } } } }
+  assert.equal(matchesPaymentContext(payment({ extensions }), resource, extensions), true)
+  assert.equal(matchesPaymentContext(payment({ resource: { ...resource, url: 'https://example.com/cheaper' }, extensions }), resource, extensions), false)
+  assert.equal(matchesPaymentContext(payment({ extensions: { bazaar: {} } }), resource, extensions), false)
 })
 
 test('a verified payment of the full amount is accepted', async () => {
@@ -114,19 +126,19 @@ test('a verified payment of the full amount is accepted', async () => {
 
 test('the price is enforced by what is sent to the facilitator, not checked after', async () => {
   // There is no amount in a verify response to compare against, so the price
-  // is enforced upstream: maxAmountRequired travels in the requirements, and
+  // is enforced upstream: amount travels in the requirements, and
   // the facilitator answers isValid:false when the signed payload does not
   // satisfy them. Checking a field the protocol never sends is how an earlier
   // version of this file refused every payment it was given.
   const seen: string[] = []
   const watching = facilitator({
     verify: async (_payment, requirement) => {
-      seen.push(requirement.maxAmountRequired)
+      seen.push(requirement.amount)
       return { ok: true, payer: '0xAgent' }
     },
   })
   await acceptPayment({
-    payment: payment(), requirements: [requirement({ maxAmountRequired: '1000' })], facilitator: watching, replayGuard: guard(),
+    payment: payment(), requirements: [requirement({ amount: '1000' })], facilitator: watching, replayGuard: guard(),
   })
   assert.deepEqual(seen, ['1000'])
 })
@@ -138,7 +150,7 @@ test('a facilitator rejection is the underpayment refusal, and never settles', a
     settle: async () => { settled = true; return { ok: true, payer: '0xAgent', transaction: 'tx_2' } },
   })
   const result = await acceptPayment({
-    payment: payment(), requirements: [requirement({ maxAmountRequired: '1000' })], facilitator: short, replayGuard: guard(),
+    payment: payment(), requirements: [requirement({ amount: '1000' })], facilitator: short, replayGuard: guard(),
   })
   assert.equal(result.ok, false)
   if (!result.ok) {
@@ -150,7 +162,7 @@ test('a facilitator rejection is the underpayment refusal, and never settles', a
 
 test('the amount recorded is the price that was demanded', async () => {
   const result = await acceptPayment({
-    payment: payment(), requirements: [requirement({ maxAmountRequired: '1000' })], facilitator: facilitator(), replayGuard: guard(),
+    payment: payment(), requirements: [requirement({ amount: '1000' })], facilitator: facilitator(), replayGuard: guard(),
   })
   assert.equal(result.ok, true)
   if (result.ok) assert.equal(result.amountPaid, '1000')
@@ -174,7 +186,7 @@ test('a payment cannot be spent twice', async () => {
 test('a replayed payment is never settled a second time', async () => {
   const settlements: string[] = []
   const counting = facilitator({
-    settle: async (p, r) => { settlements.push(r.resource); return { ok: true, payer: '0xA', transaction: 'tx_3', amountPaid: '1000' } },
+    settle: async (p, r) => { settlements.push(r.amount); return { ok: true, payer: '0xA', transaction: 'tx_3', amountPaid: '1000' } },
   })
   const replayGuard = guard()
   await acceptPayment({ payment: payment(), requirements: [requirement()], facilitator: counting, replayGuard })
@@ -197,13 +209,10 @@ test('a failed verification never reaches settlement or claims an identifier', a
   assert.equal(seen.size, 0)
 })
 
-test('a payment for one resource cannot be presented for another', () => {
-  // Requirements bind to an exact URL, so a challenge issued for a cheap
-  // endpoint cannot be answered against an expensive one.
-  const audit = requirement({ resource: 'https://www.mahastrategies.com/api/mps-audits', maxAmountRequired: '1000' })
-  const solver = requirement({ resource: 'https://www.mahastrategies.com/api/v1/compress', maxAmountRequired: '500000' })
-  assert.notEqual(audit.resource, solver.resource)
-  assert.notEqual(audit.maxAmountRequired, solver.maxAmountRequired)
+test('a payment for one price cannot be presented for another', () => {
+  const audit = requirement({ amount: '1000' })
+  const solver = requirement({ amount: '500000' })
+  assert.notEqual(audit.amount, solver.amount)
 })
 
 test('a ledger that cannot answer is not reported as a replay', async () => {
