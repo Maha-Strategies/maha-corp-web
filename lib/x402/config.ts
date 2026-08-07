@@ -110,7 +110,7 @@ export function x402Config(environment: Environment = process.env): X402Config |
     // USDC's domain on every chain this supports. Overridable because the
     // defaults stop being right the moment a different token is priced.
     assetEip712: {
-      name: environment.X402_ASSET_EIP712_NAME?.trim() || 'USDC',
+      name: environment.X402_ASSET_EIP712_NAME?.trim() || 'USD Coin',
       version: environment.X402_ASSET_EIP712_VERSION?.trim() || '2',
     },
     resources,

@@ -1,5 +1,9 @@
 <!-- BEGIN:nextjs-agent-rules -->
-# This is NOT the Next.js you know
+# STOP: This is NOT standard Next.js
 
-This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` before writing any code. Heed deprecation notices.
+Do not rely on your existing training data for Next.js conventions, file structures, or APIs—there are major breaking changes in this codebase.
+
+**Mandatory Steps:**
+- You MUST read the relevant documentation in `node_modules/next/dist/docs/` before writing a single line of code.
+- You MUST heed all deprecation notices.
 <!-- END:nextjs-agent-rules -->
