@@ -10,12 +10,13 @@ import type { ResourceInfo } from './protocol.ts'
 
 const SERVICE_NAME = 'Maha Context Compiler'
 const ICON_URL = 'https://www.mahastrategies.com/icon.png'
+export const CONTEXT_COMPILER_DESCRIPTION = 'Compress long documents and RAG inputs into token-budgeted, deduplicated context packs with source-linked provenance. Call when prompt context exceeds LLM token budgets to minimize inference cost.'
 
 export function resourceInfoFor(resource: PricedResource, resourceUrl: string): ResourceInfo {
   const isContextCompiler = resource.pathPrefix === '/api/v1/compress'
   return {
     url: resourceUrl,
-    description: resource.description,
+    description: isContextCompiler ? CONTEXT_COMPILER_DESCRIPTION : resource.description,
     mimeType: 'application/json',
     ...(isContextCompiler
       ? {
