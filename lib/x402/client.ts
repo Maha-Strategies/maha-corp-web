@@ -192,10 +192,11 @@ export function buildTypedData(requirement: PaymentRequirement, from: string, no
       from,
       to: requirement.payTo,
       value: BigInt(requirement.maxAmountRequired),
-      // Backdated by a minute so a clock skewed slightly fast against the chain
-      // does not produce an authorization that is not yet valid.
-      validAfter: seconds - BigInt(60),
-      validBefore: seconds + BigInt(Math.max(requirement.maxTimeoutSeconds, 120)),
+      // Match the reference v1 EVM client exactly. The generous backdate
+      // tolerates payer/server clock skew; the expiry is bounded by the terms
+      // the server published rather than silently extending them.
+      validAfter: seconds - BigInt(600),
+      validBefore: seconds + BigInt(requirement.maxTimeoutSeconds),
       nonce: randomNonce(),
     },
   }

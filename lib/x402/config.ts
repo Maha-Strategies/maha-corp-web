@@ -1,6 +1,7 @@
 import type { PaymentRequirement, X402Network } from './protocol.ts'
 import { rpcUrlFor } from './chain.ts'
 import { releasesSlot } from './slot.ts'
+import type { CdpApiCredentials } from './cdp-auth.ts'
 
 // Everything here is off unless X402_ENABLED is exactly 'true'. The flag is
 // checked before any other configuration is read, so an incomplete or
@@ -31,6 +32,7 @@ export type PricedResource = {
 export type X402Config = {
   facilitatorUrl: string
   facilitatorAuthHeaders?: Record<string, string>
+  cdpCredentials?: CdpApiCredentials
   network: X402Network
   /** CAIP-2 identifier sent to the facilitator, e.g. eip155:8453 for Base. */
   caip2Network: string
@@ -92,6 +94,15 @@ export function x402Config(environment: Environment = process.env): X402Config |
   try { url = new URL(facilitatorUrl) } catch { throw new Error('X402_FACILITATOR_URL must be an absolute URL.') }
   if (url.protocol !== 'https:') throw new Error('X402_FACILITATOR_URL must be https.')
 
+  const cdpApiKeyId = environment.CDP_API_KEY_ID?.trim()
+  const cdpApiKeySecret = environment.CDP_API_KEY_SECRET?.trim()
+  if (Boolean(cdpApiKeyId) !== Boolean(cdpApiKeySecret)) {
+    throw new Error('CDP_API_KEY_ID and CDP_API_KEY_SECRET must be set together.')
+  }
+  if (url.hostname === 'api.cdp.coinbase.com' && (!cdpApiKeyId || !cdpApiKeySecret)) {
+    throw new Error('The CDP mainnet facilitator requires CDP_API_KEY_ID and CDP_API_KEY_SECRET.')
+  }
+
   const resources = parseResources(environment.X402_RESOURCES)
   if (resources.length === 0) throw new Error('X402_RESOURCES must define at least one priced resource.')
 
@@ -103,6 +114,7 @@ export function x402Config(environment: Environment = process.env): X402Config |
   return {
     facilitatorUrl,
     facilitatorAuthHeaders: parseAuthHeaders(environment.X402_FACILITATOR_AUTH_HEADERS),
+    ...(cdpApiKeyId && cdpApiKeySecret ? { cdpCredentials: { apiKeyId: cdpApiKeyId, apiKeySecret: cdpApiKeySecret } } : {}),
     network: network.network,
     caip2Network: network.caip2,
     payTo,

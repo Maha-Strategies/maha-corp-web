@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
 
-import { createFacilitator, readResponse } from '../lib/x402/facilitator.ts'
+import { createFacilitator, facilitatorRejectionReason, readResponse } from '../lib/x402/facilitator.ts'
 import {
   PAYMENT_REQUIRED_HEADER,
   PAYMENT_SIGNATURE_HEADER,
@@ -89,6 +89,23 @@ test('a rejection carries the facilitator\'s own reason', () => {
   const result = readResponse('verify', { isValid: false, invalidReason: 'insufficient_funds' })
   assert.equal(result.ok, false)
   if (!result.ok) assert.equal(result.reason, 'insufficient_funds')
+})
+
+test('typed facilitator errors retain their actionable rejection reason', () => {
+  const verifyError = Object.assign(new Error('verification rejected'), {
+    invalidReason: 'invalid_exact_evm_payload_signature',
+    invalidMessage: 'recovered signer does not match authorization.from',
+  })
+  assert.equal(
+    facilitatorRejectionReason('verify', verifyError),
+    'invalid_exact_evm_payload_signature: recovered signer does not match authorization.from',
+  )
+
+  const settleError = Object.assign(new Error('settlement rejected'), {
+    errorReason: 'settle_exact_failed_onchain',
+  })
+  assert.equal(facilitatorRejectionReason('settle', settleError), 'settle_exact_failed_onchain')
+  assert.equal(facilitatorRejectionReason('verify', new Error('HTTP 401')), null)
 })
 
 test('a response that does not clearly state success is a failure', () => {

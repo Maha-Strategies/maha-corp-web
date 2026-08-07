@@ -61,7 +61,7 @@ test('the report carries names and verdicts only, never a value', () => {
 })
 
 test('the policy classifies the credentials this platform actually holds', () => {
-  for (const key of ['SUPABASE_SERVICE_ROLE_KEY', 'STRIPE_SECRET_KEY', 'MAHA_WORKER_TOKEN', 'MCP_ENCRYPTION_KEY', 'PAGERDUTY_ROUTING_KEY', 'REVENUE_CONTROL_TOKEN']) {
+  for (const key of ['SUPABASE_SERVICE_ROLE_KEY', 'STRIPE_SECRET_KEY', 'CDP_API_KEY_SECRET', 'MAHA_WORKER_TOKEN', 'MCP_ENCRYPTION_KEY', 'PAGERDUTY_ROUTING_KEY', 'REVENUE_CONTROL_TOKEN']) {
     assert.equal(tierFor(key), 'must_differ', `${key} must be isolated`)
   }
   // Vercel manages one bypass secret per project; demanding two would be wrong.
