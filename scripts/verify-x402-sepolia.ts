@@ -160,7 +160,7 @@ async function dryRun() {
   stage('Signing')
   const now = BigInt(Math.floor(Date.now() / 1000))
   const nonce = `0x${Buffer.from(crypto.getRandomValues(new Uint8Array(32))).toString('hex')}` as Hex
-  const signed = await signAuthorization({ account, requirement, nonce, validAfter: now - 60n, validBefore: now + 600n })
+  const signed = await signAuthorization({ account, requirement, nonce, validAfter: now - 600n, validBefore: now + BigInt(requirement.maxTimeoutSeconds) })
   check('the authorization signs', signed.signature.startsWith('0x'))
 
   const recovered = await verifyTypedData({
@@ -336,8 +336,8 @@ async function liveRun() {
     account,
     requirement: { ...requirement },
     nonce,
-    validAfter: now - 60n,
-    validBefore: now + BigInt(Math.max(requirement.maxTimeoutSeconds, 120)),
+    validAfter: now - 600n,
+    validBefore: now + BigInt(requirement.maxTimeoutSeconds),
   })
   // Use the token's real domain rather than the assumed one.
   // The challenge's domain must match the token's own, or the facilitator

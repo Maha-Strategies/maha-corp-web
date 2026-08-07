@@ -109,6 +109,7 @@ export async function resolveX402(request: Request, dependencies: Dependencies =
   const facilitator = dependencies.facilitator ?? createFacilitator({
     url: config.facilitatorUrl,
     authHeaders: config.facilitatorAuthHeaders,
+    cdpCredentials: config.cdpCredentials,
   })
 
   const accepted = await acceptPayment({

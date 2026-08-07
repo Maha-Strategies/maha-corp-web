@@ -1,6 +1,7 @@
 import { HTTPFacilitatorClient } from '@x402/core/server'
 
 import type { PaymentFacilitator, PaymentPayload, PaymentRequirement, SettleResult, VerifyResult } from './protocol.ts'
+import { createCdpFacilitatorAuthHeaders, type CdpApiCredentials } from './cdp-auth.ts'
 
 // Adapts the official facilitator client to this codebase's interface.
 //
@@ -22,6 +23,8 @@ export type FacilitatorConfig = {
   url: string
   /** Sent on every facilitator request when the facilitator requires auth. */
   authHeaders?: Record<string, string>
+  /** CDP credentials used to mint a fresh request-bound JWT for each call. */
+  cdpCredentials?: CdpApiCredentials
 }
 
 /** Not a wallet address; the settlement provider's receiving address. */
@@ -33,6 +36,31 @@ export type SettlementConfig = {
 
 function failure(reason: string): { ok: false; reason: string } {
   return { ok: false, reason }
+}
+
+/**
+ * `HTTPFacilitatorClient` throws typed errors for ordinary verifier and
+ * settlement rejections. Preserve their machine-readable reason instead of
+ * collapsing every non-2xx response into a transport failure.
+ *
+ * This is structural rather than `instanceof`: Next.js can bundle two copies
+ * of a package across route chunks, while the public error fields remain the
+ * stable contract.
+ */
+export function facilitatorRejectionReason(operation: 'verify' | 'settle', error: unknown): string | null {
+  if (!(error instanceof Error)) return null
+  const candidate = error as Error & {
+    invalidReason?: unknown
+    invalidMessage?: unknown
+    errorReason?: unknown
+    errorMessage?: unknown
+  }
+  const reason = operation === 'verify' ? candidate.invalidReason : candidate.errorReason
+  if (typeof reason !== 'string' || !reason.trim()) return null
+  const message = operation === 'verify' ? candidate.invalidMessage : candidate.errorMessage
+  return typeof message === 'string' && message.trim()
+    ? `${reason.trim()}: ${message.trim()}`
+    : reason.trim()
 }
 
 /**
@@ -88,9 +116,12 @@ async function reportFailure(
 
   // What does that endpoint actually answer? The SDK threw the response away.
   try {
+    const diagnosticHeaders = config.cdpCredentials
+      ? (await createCdpFacilitatorAuthHeaders(config.url, config.cdpCredentials))[operation]
+      : config.authHeaders
     const probe = await fetch(endpoint, {
       method: 'POST',
-      headers: { 'content-type': 'application/json', ...(config.authHeaders ?? {}) },
+      headers: { 'content-type': 'application/json', ...(diagnosticHeaders ?? {}) },
       body: JSON.stringify({ x402Version: payment.x402Version, paymentPayload: payment, paymentRequirements: requirement }),
       cache: 'no-store',
     })
@@ -123,30 +154,60 @@ export function createFacilitator(config: FacilitatorConfig): PaymentFacilitator
   const url = new URL(config.url)
   if (url.protocol !== 'https:') throw new Error('Facilitator url must be https.')
 
+  const createAuthHeaders = config.cdpCredentials
+    ? () => createCdpFacilitatorAuthHeaders(config.url, config.cdpCredentials!)
+    : config.authHeaders
+      ? async () => ({
+          verify: config.authHeaders!,
+          settle: config.authHeaders!,
+          supported: config.authHeaders!,
+        })
+      : undefined
+
   const client = new HTTPFacilitatorClient({
     url: config.url,
-    ...(config.authHeaders ? { createAuthHeaders: async () => config.authHeaders! } : {}),
-  } as ConstructorParameters<typeof HTTPFacilitatorClient>[0])
+    ...(createAuthHeaders ? { createAuthHeaders } : {}),
+  })
 
-  const call = async (operation: 'verify' | 'settle', payment: PaymentPayload, requirement: PaymentRequirement) => {
+  type CallResult =
+    | { kind: 'response'; response: unknown }
+    | { kind: 'rejection'; reason: string }
+    | { kind: 'transport-failure' }
+
+  const call = async (operation: 'verify' | 'settle', payment: PaymentPayload, requirement: PaymentRequirement): Promise<CallResult> => {
     try {
-      return await (client as unknown as Record<string, (a: unknown, b: unknown) => Promise<unknown>>)[operation](payment, requirement)
+      const response = await (client as unknown as Record<string, (a: unknown, b: unknown) => Promise<unknown>>)[operation](payment, requirement)
+      return { kind: 'response', response }
     } catch (error) {
+      const rejection = facilitatorRejectionReason(operation, error)
+      if (rejection) {
+        console.warn(`x402 facilitator ${operation} rejected payment`, JSON.stringify({
+          scheme: requirement.scheme,
+          network: requirement.network,
+          x402Version: payment.x402Version,
+          reason: rejection,
+        }))
+        return { kind: 'rejection', reason: rejection }
+      }
       // A facilitator that is unreachable or erroring must never read as a
       // successful payment.
       await reportFailure(operation, error, config, payment, requirement)
-      return null
+      return { kind: 'transport-failure' }
     }
   }
 
   return {
     async verify(payment, requirement): Promise<VerifyResult> {
-      const response = await call('verify', payment, requirement)
-      return response === null ? failure('facilitator_verify_failed') : readResponse('verify', response)
+      const result = await call('verify', payment, requirement)
+      if (result.kind === 'rejection') return failure(result.reason)
+      if (result.kind === 'transport-failure') return failure('facilitator_verify_failed')
+      return readResponse('verify', result.response)
     },
     async settle(payment, requirement): Promise<SettleResult> {
-      const response = await call('settle', payment, requirement)
-      return response === null ? failure('facilitator_settle_failed') : readResponse('settle', response)
+      const result = await call('settle', payment, requirement)
+      if (result.kind === 'rejection') return failure(result.reason)
+      if (result.kind === 'transport-failure') return failure('facilitator_settle_failed')
+      return readResponse('settle', result.response)
     },
   }
 }

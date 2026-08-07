@@ -63,6 +63,19 @@ test('enabled but incomplete configuration is loud, not silent', () => {
   assert.throws(() => x402Config({ ...ENV, X402_RESOURCES: '[{"pathPrefix":"api","amount":"1","description":"d","concurrencyCap":1}]' }), /must start with/)
   assert.throws(() => x402Config({ ...ENV, X402_RESOURCES: '[{"pathPrefix":"/a","amount":"0","description":"d","concurrencyCap":1}]' }), /positive integer/)
   assert.throws(() => x402Config({ ...ENV, X402_RESOURCES: '[{"pathPrefix":"/a","amount":"1","description":"d","concurrencyCap":0}]' }), /concurrencyCap/)
+  assert.throws(() => x402Config({ ...ENV, CDP_API_KEY_ID: 'id' }), /must be set together/)
+  assert.throws(
+    () => x402Config({ ...ENV, X402_FACILITATOR_URL: 'https://api.cdp.coinbase.com/platform/v2/x402' }),
+    /requires CDP_API_KEY_ID and CDP_API_KEY_SECRET/,
+  )
+
+  const cdp = x402Config({
+    ...ENV,
+    X402_FACILITATOR_URL: 'https://api.cdp.coinbase.com/platform/v2/x402',
+    CDP_API_KEY_ID: 'key-id',
+    CDP_API_KEY_SECRET: 'secret',
+  }) as X402Config
+  assert.equal(cdp.cdpCredentials?.apiKeyId, 'key-id')
 })
 
 test('a path that cannot release its slot cannot be priced', async () => {
@@ -129,11 +142,11 @@ test('the price charged is the longest matching prefix', () => {
 })
 
 test('the challenge publishes the EIP-712 domain the facilitator needs', () => {
-  // Verified against the live x402.org facilitator: a requirement without
-  // `extra` is answered invalid_exact_evm_missing_eip712_domain, so every
-  // payment is refused. Its absence is silent everywhere else.
+  // Base mainnet native USDC reports "USD Coin" version "2". A requirement
+  // without `extra` is refused because the facilitator cannot rebuild the
+  // EIP-712 digest; its absence is silent everywhere else.
   const requirement = requirementFor(priceFor('/api/v1/compress', config())!, 'https://www.mahastrategies.com/api/v1/compress', config())
-  assert.deepEqual(requirement.extra, { name: 'USDC', version: '2' })
+  assert.deepEqual(requirement.extra, { name: 'USD Coin', version: '2' })
 
   // Overridable, because the USDC defaults stop being right the moment a
   // different token is priced.

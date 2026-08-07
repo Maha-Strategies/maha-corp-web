@@ -120,9 +120,9 @@ test('the signed payload is the terms the server published', async () => {
   assert.equal(typedData.message.value, BigInt(10_000))
   assert.equal(typedData.message.from, ADDRESS)
   assert.match(typedData.message.nonce, /^0x[0-9a-f]{64}$/)
-  // Backdated, so a slightly fast clock does not sign a not-yet-valid window.
-  assert.ok(typedData.message.validAfter < BigInt(1_800_000_000))
-  assert.ok(typedData.message.validBefore > BigInt(1_800_000_000))
+  // Match the reference v1 authorization window exactly.
+  assert.equal(typedData.message.validAfter, BigInt(1_800_000_000 - 600))
+  assert.equal(typedData.message.validBefore, BigInt(1_800_000_000 + REQUIREMENT.maxTimeoutSeconds))
 })
 
 test('each payment gets its own nonce', () => {

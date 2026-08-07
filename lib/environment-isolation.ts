@@ -47,6 +47,8 @@ export const ISOLATION_POLICY: Readonly<Record<string, IsolationTier>> = {
   STRIPE_UTILITY_WEBHOOK_SECRET: 'must_differ',
   STRIPE_MPS_CREDITS_WEBHOOK_SECRET: 'must_differ',
   STRIPE_API_KEY_WEBHOOK_SECRET: 'must_differ',
+  CDP_API_KEY_ID: 'must_differ',
+  CDP_API_KEY_SECRET: 'must_differ',
 
   // Compute and stored-credential encryption. A shared worker token lets
   // Preview drive Production GPU jobs and forge their callbacks.
