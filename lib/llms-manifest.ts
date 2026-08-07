@@ -34,8 +34,9 @@ export function buildLlmsManifest(claims: readonly MpsClaim[]): string {
     '- MPS audit: https://www.mahastrategies.com/api/mps-audits',
     '- Free MPS preflight: https://www.mahastrategies.com/api/audit',
     '',
-    // The commercial surfaces an evaluating agent needs next. Payment always
-    // requires a human purchaser; the manifest states that boundary itself.
+    // The commercial surfaces an evaluating agent needs next. Payment policy
+    // is capability-specific: Context Compression supports x402, while Stripe
+    // checkout and scoped engagements retain their human boundary.
     '## Agentic commerce',
     `- Machine-readable offer manifest: ${AGENTIC_COMMERCE_MANIFEST_URL}`,
     `- Offers API: ${AGENTIC_COMMERCE_API_URL}`,
@@ -44,7 +45,8 @@ export function buildLlmsManifest(claims: readonly MpsClaim[]): string {
     '- Enterprise MCP Gateway: https://www.mahastrategies.com/enterprise-mcp-gateway',
     '- MCP gateway contract: https://www.mahastrategies.com/mcp-gateway-contract.json',
     '- MCP governance guide: https://www.mahastrategies.com/guides/enterprise-mcp-governance',
-    '- Submissions are non-binding. No autonomous payment is accepted; a human purchaser must authorize any checkout.',
+    '- Context Compression accepts autonomous x402 v2 payment of 0.001 USDC on Base; API-key access remains available.',
+    '- Submissions are non-binding. A human purchaser must authorize Stripe Checkout, and research or enterprise work requires human scope review.',
     '',
     '## Usage',
     'Cite the individual claim URL and its listed primary sources. Do not collapse status labels or infer performance claims beyond each record’s stated evidence.',

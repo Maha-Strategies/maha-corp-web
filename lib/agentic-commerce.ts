@@ -7,6 +7,25 @@ export const AGENTIC_COMMERCE_MANIFEST_URL = `${SITE_URL}/agent-offers.json`
 export const AGENTIC_COMMERCE_API_URL = `${SITE_URL}/api/agentic-commerce/offers`
 export const AGENTIC_COMMERCE_CONTEXT_URL = `${SITE_URL}/llm-context/agentic-commerce.md`
 
+export const contextCompressionX402Capability = {
+  id: 'context-compression',
+  endpoint: `${SITE_URL}/api/v1/compress`,
+  method: 'POST',
+  payment: {
+    protocol: 'x402',
+    version: 2,
+    scheme: 'exact',
+    network: 'eip155:8453',
+    asset: '0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913',
+    assetSymbol: 'USDC',
+    amount: '1000',
+    amountUnit: 'base_units',
+    displayAmount: '0.001 USDC',
+  },
+  discovery: 'https://api.cdp.coinbase.com/platform/v2/x402/discovery/mcp',
+  alternativeAuthorization: 'Bearer Maha API key',
+} as const
+
 // This is deliberately a public, read-only description of the MPS offer. It
 // never reads Stripe configuration or returns a credential, checkout session,
 // customer data, or a payment capability.
@@ -162,11 +181,15 @@ export const agenticCommerceDiscovery = {
       manifest: `${SITE_URL}/api/mcp-bridge/manifest`,
       policy: 'The local bridge uses the documented API; it does not receive a merchant secret or autonomous spending authority.',
     },
+    autonomousCapabilities: [contextCompressionX402Capability],
   },
   transactionPolicy: {
-    autonomousPaymentSupported: false,
+    mode: 'mixed_by_capability',
+    autonomousPaymentSupported: true,
+    autonomousPaymentScope: [contextCompressionX402Capability.id],
     humanConfirmationRequired: true,
-    bindingCommitment: 'A purchase is binding only when the purchaser authorizes payment in Stripe Checkout. This discovery document cannot initiate or authorize a charge.',
+    humanConfirmationScope: ['stripe-checkout', 'research-inquiries', 'enterprise-onboarding'],
+    bindingCommitment: 'Only Context Compression accepts autonomous x402 payment under its published terms. Stripe purchases require purchaser authorization; research and enterprise engagements require human scope review.',
   },
   offers: availableOffers,
 } as const

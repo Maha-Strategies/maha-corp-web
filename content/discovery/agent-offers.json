@@ -1,17 +1,19 @@
 {
   "schema": "https://www.mahastrategies.com/schemas/agent-offers/v0.2",
-  "version": "0.2.0",
-  "updatedAt": "2026-08-06T00:00:00.000Z",
+  "version": "0.2.1",
+  "updatedAt": "2026-08-07T00:00:00.000Z",
   "provider": {
     "name": "Maha Strategies LLC",
     "url": "https://www.mahastrategies.com",
     "contactUrl": "https://www.mahastrategies.com/contact"
   },
   "transactionPolicy": {
-    "mode": "mixed_inquiry_and_human_confirmed_checkout",
+    "mode": "mixed_by_capability",
     "humanConfirmationRequired": true,
-    "autonomousPaymentSupported": false,
-    "bindingCommitment": "Research engagements require written confirmation by Maha Strategies. A self-service MPS purchase is binding only when the purchaser authorizes payment in Stripe Checkout; this manifest cannot authorize a charge."
+    "autonomousPaymentSupported": true,
+    "autonomousPaymentScope": ["context-compression"],
+    "humanConfirmationScope": ["stripe-checkout", "research-inquiries", "enterprise-onboarding"],
+    "bindingCommitment": "Only the Context Compression capability accepts autonomous x402 payment under its published machine-payment terms. Stripe products require purchaser confirmation, and research or enterprise engagements require human scope review."
   },
   "credentialPolicy": {
     "mode": "approved_client_credentials",
@@ -35,14 +37,26 @@
     {
       "id": "context-compression",
       "name": "Context Compression",
-      "status": "available_with_provisioned_api_key",
-      "serviceUrl": "https://www.mahastrategies.com/tools",
+      "status": "available_with_api_key_or_x402",
+      "serviceUrl": "https://www.mahastrategies.com/context-compiler",
       "documentationUrl": "https://www.mahastrategies.com/docs",
       "endpoint": "https://www.mahastrategies.com/api/v1/compress",
       "method": "POST",
-      "authorization": "A provisioned Maha API key is required. The public API contract uses Authorization: Bearer <API_KEY>.",
+      "authorization": "Use Authorization: Bearer <API_KEY>, or answer the endpoint's x402 v2 PAYMENT-REQUIRED challenge with a compatible wallet.",
       "dataBoundary": "The endpoint returns a transient compiled context pack. Source text and compiled context are not retained by the API.",
-      "acquisition": "Tenant API access is provisioned through the dashboard or operator onboarding; this manifest cannot create a key or authorize a charge."
+      "acquisition": "API-key access is available through tenant provisioning. Account-free access is available through the endpoint's x402 v2 challenge.",
+      "machinePayment": {
+        "protocol": "x402",
+        "version": 2,
+        "scheme": "exact",
+        "network": "eip155:8453",
+        "asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+        "assetSymbol": "USDC",
+        "amount": "1000",
+        "amountUnit": "base_units",
+        "displayAmount": "0.001 USDC",
+        "discovery": "https://api.cdp.coinbase.com/platform/v2/x402/discovery/mcp"
+      }
     },
     {
       "id": "gpu-qubo-ising",

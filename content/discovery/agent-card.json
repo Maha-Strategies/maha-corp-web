@@ -1,7 +1,7 @@
 {
   "schema": "https://www.mahastrategies.com/schemas/inbound-agent-card/v0.2",
-  "version": "0.2.0",
-  "updatedAt": "2026-08-06T00:00:00.000Z",
+  "version": "0.2.1",
+  "updatedAt": "2026-08-07T00:00:00.000Z",
   "name": "Maha Strategies Inbound Gatekeeper",
   "url": "https://www.mahastrategies.com/inbound",
   "submissionEndpoint": "https://www.mahastrategies.com/api/inbound-submissions",
@@ -12,8 +12,16 @@
   "capabilities": [
     {
       "id": "context-compression",
-      "status": "available_with_provisioned_api_key",
-      "endpoint": "https://www.mahastrategies.com/api/v1/compress"
+      "status": "available_with_api_key_or_x402",
+      "endpoint": "https://www.mahastrategies.com/api/v1/compress",
+      "payment": {
+        "protocol": "x402",
+        "version": 2,
+        "network": "eip155:8453",
+        "amount": "1000",
+        "assetSymbol": "USDC",
+        "autonomous": true
+      }
     },
     {
       "id": "gpu-qubo-ising",
@@ -37,6 +45,6 @@
       "contract": "https://www.mahastrategies.com/mcp-gateway-contract.json"
     }
   ],
-  "terms": {"bindingCommitment": false, "payment": "A human purchaser must authorize any Stripe Checkout payment.", "sensitiveData": "Do not submit confidential, regulated, or sensitive personal information."},
+  "terms": {"bindingCommitment": false, "payment": "Context Compression accepts its published autonomous x402 terms. A human purchaser must authorize Stripe Checkout; research and enterprise work require human scope review.", "sensitiveData": "Do not submit confidential, regulated, or sensitive personal information."},
   "review": {"mode": "deterministic_qualification_then_human_scope_review", "responseTargetBusinessDays": 2}
 }
