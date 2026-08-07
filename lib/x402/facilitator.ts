@@ -89,7 +89,7 @@ async function reportFailure(
   config: FacilitatorConfig,
   payment: PaymentPayload,
   requirement: PaymentRequirement,
-): Promise<void> {
+): Promise<unknown | null> {
   const verbose = process.env.X402_FACILITATOR_DIAGNOSTICS?.trim() === 'true'
 
   const chain: string[] = []
@@ -126,6 +126,8 @@ async function reportFailure(
       cache: 'no-store',
     })
     const body = await probe.text()
+    let parsed: unknown = null
+    try { parsed = JSON.parse(body) } catch { /* Diagnostic body was not JSON. */ }
     console.error('x402 facilitator probe', JSON.stringify({
       endpoint,
       status: probe.status,
@@ -133,6 +135,7 @@ async function reportFailure(
       bodyBytes: body.length,
       ...(verbose ? { body: body.slice(0, 1_000) } : { bodyPreview: body.slice(0, 200) }),
     }))
+    return parsed
   } catch (probeError) {
     // The probe failing the same way is itself the answer: the runtime cannot
     // reach the host, and nothing about the payload is responsible.
@@ -140,7 +143,39 @@ async function reportFailure(
       ? `${probeError.name}: ${probeError.message.slice(0, 300)}${probeError.cause instanceof Error ? ` <- ${probeError.cause.name}: ${probeError.cause.message.slice(0, 200)}` : ''}`
       : String(probeError).slice(0, 200)
     console.error('x402 facilitator probe could not reach the host', JSON.stringify({ endpoint, detail }))
+    return null
   }
+}
+
+/**
+ * CDP can submit a transaction successfully and still return a transient 5xx
+ * before the HTTP response reaches us. Retrying the same authorization then
+ * returns `invalid_payload` because its nonce is already on-chain, together
+ * with the transaction hash that consumed it.
+ *
+ * This is the only failed response that can be recovered as a settlement. The
+ * transaction is still independently checked against Base immediately after
+ * this function returns; a wrong token, payer, recipient, or amount remains a
+ * contradiction and the resource is withheld.
+ */
+export function recoverSubmittedSettlement(
+  response: unknown,
+  payment: PaymentPayload,
+  requirement: PaymentRequirement,
+): Extract<SettleResult, { ok: true }> | null {
+  if (typeof response !== 'object' || response === null) return null
+  const body = response as Record<string, unknown>
+  if (body.success !== false || body.errorReason !== 'invalid_payload') return null
+  if (typeof body.errorMessage !== 'string' || !body.errorMessage.toLowerCase().includes('authorization nonce already submitted')) return null
+  if (typeof body.transaction !== 'string' || !/^0x[0-9a-fA-F]{64}$/.test(body.transaction)) return null
+  if (body.network !== requirement.network) return null
+
+  const authorization = payment.payload.authorization
+  if (typeof authorization !== 'object' || authorization === null) return null
+  const payer = (authorization as Record<string, unknown>).from
+  if (typeof payer !== 'string' || !/^0x[0-9a-fA-F]{40}$/.test(payer)) return null
+
+  return { ok: true, payer, transaction: body.transaction }
 }
 
 /**
@@ -191,7 +226,17 @@ export function createFacilitator(config: FacilitatorConfig): PaymentFacilitator
       }
       // A facilitator that is unreachable or erroring must never read as a
       // successful payment.
-      await reportFailure(operation, error, config, payment, requirement)
+      const probe = await reportFailure(operation, error, config, payment, requirement)
+      if (operation === 'settle') {
+        const recovered = recoverSubmittedSettlement(probe, payment, requirement)
+        if (recovered) {
+          console.warn('x402 facilitator settlement recovered from on-chain nonce', JSON.stringify({
+            network: requirement.network,
+            transaction: recovered.transaction,
+          }))
+          return { kind: 'response', response: { success: true, payer: recovered.payer, transaction: recovered.transaction } }
+        }
+      }
       return { kind: 'transport-failure' }
     }
   }
