@@ -3,7 +3,7 @@ import test from 'node:test'
 
 import { validateDiscoveryExtension, validateDiscoveryExtensionSpec } from '@x402/extensions/bazaar'
 
-import { discoveryExtensionsFor, resourceInfoFor } from '../lib/x402/discovery.ts'
+import { CONTEXT_COMPILER_DESCRIPTION, discoveryExtensionsFor, resourceInfoFor } from '../lib/x402/discovery.ts'
 
 const compression = {
   pathPrefix: '/api/v1/compress',
@@ -26,6 +26,7 @@ test('the Context Compiler publishes valid, callable Bazaar metadata', () => {
 test('the catalog metadata identifies the service for semantic search', () => {
   const resource = resourceInfoFor(compression, 'https://www.mahastrategies.com/api/v1/compress')
   assert.equal(resource.serviceName, 'Maha Context Compiler')
+  assert.equal(resource.description, CONTEXT_COMPILER_DESCRIPTION)
   assert.ok(resource.tags?.includes('context-compression'))
   assert.equal(resource.iconUrl, 'https://www.mahastrategies.com/icon.png')
 })
