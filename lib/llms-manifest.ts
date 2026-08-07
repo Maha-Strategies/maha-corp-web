@@ -46,6 +46,7 @@ export function buildLlmsManifest(claims: readonly MpsClaim[]): string {
     '- MCP gateway contract: https://www.mahastrategies.com/mcp-gateway-contract.json',
     '- MCP governance guide: https://www.mahastrategies.com/guides/enterprise-mcp-governance',
     '- Context Compression accepts autonomous x402 v2 payment of 0.001 USDC on Base; API-key access remains available.',
+    '- Executable large-document recipe: https://www.mahastrategies.com/recipes/context-compiler-large-document',
     '- Submissions are non-binding. A human purchaser must authorize Stripe Checkout, and research or enterprise work requires human scope review.',
     '',
     '## Usage',
