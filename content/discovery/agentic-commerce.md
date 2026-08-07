@@ -6,6 +6,18 @@ Read-only discovery API: https://www.mahastrategies.com/api/agentic-commerce/off
 
 OpenAPI: https://www.mahastrategies.com/api/docs/openapi
 
+## Context Compression via x402
+
+- Product page: https://www.mahastrategies.com/context-compiler
+- API: `POST https://www.mahastrategies.com/api/v1/compress`
+- Payment protocol: x402 v2, exact scheme
+- Network: Base Mainnet (`eip155:8453`)
+- Price: 1,000 USDC base units (`0.001 USDC`)
+- Bazaar MCP discovery: https://api.cdp.coinbase.com/platform/v2/x402/discovery/mcp
+- Alternative authorization: a provisioned Maha API key
+
+This capability accepts autonomous payment under the terms in its `PAYMENT-REQUIRED` challenge. This exception does not authorize autonomous Stripe Checkout, research engagements, enterprise onboarding, or spending through the local Maha MCP Bridge.
+
 ## MPS Prepaid Audit API Access
 
 - Product page: https://www.mahastrategies.com/mps/audit-access
@@ -49,7 +61,7 @@ The Enterprise MCP Gateway is separate from both the local bridge and the hosted
 
 ## Context Compiler
 
-The Context Compiler produces a bounded, source-linked Context Pack before an agent receives document context.
+The credentialed Context Compiler produces a bounded, source-linked Context Pack before an agent receives document context. The lightweight `/api/v1/compress` contract above is the separate API-key-or-x402 path intended for automated callers.
 
 - Product page: https://www.mahastrategies.com/context-compiler
 - API: `POST https://www.mahastrategies.com/api/context-packs`

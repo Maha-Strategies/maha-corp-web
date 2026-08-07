@@ -9,6 +9,7 @@ import {
   AGENTIC_COMMERCE_MANIFEST_URL,
   availableOffers,
   agenticCommerceDiscovery,
+  contextCompressionX402Capability,
   mpsAuditOffer,
   mpsAuditServiceJsonLd,
 } from '../lib/agentic-commerce.ts'
@@ -21,8 +22,9 @@ import type { MpsClaim } from '../scripts/expand-graph.ts'
 // by rewrites.
 const DISCOVERY_DIR = join(import.meta.dirname, '..', 'content', 'discovery')
 
-test('MPS agentic-commerce offer is discovery-only and preserves the human payment boundary', () => {
-  assert.equal(agenticCommerceDiscovery.transactionPolicy.autonomousPaymentSupported, false)
+test('discovery scopes autonomous x402 to Context Compression and preserves the MPS human payment boundary', () => {
+  assert.equal(agenticCommerceDiscovery.transactionPolicy.autonomousPaymentSupported, true)
+  assert.deepEqual(agenticCommerceDiscovery.transactionPolicy.autonomousPaymentScope, ['context-compression'])
   assert.equal(agenticCommerceDiscovery.transactionPolicy.humanConfirmationRequired, true)
   assert.equal(mpsAuditOffer.purchase.mode, 'human_confirmed_stripe_checkout')
   assert.equal(mpsAuditOffer.prepaidCredits.insufficientBalance.httpStatus, 402)
@@ -70,6 +72,7 @@ test('the served orientation file points agents at the commercial surfaces', () 
   assert.ok(llms.includes('/.well-known/agent.json'), 'the agent card must be reachable from /llms.txt')
   // The payment boundary travels with the offer, not only on the purchase page.
   assert.match(llms, /human purchaser must authorize/i)
+  assert.match(llms, /x402 v2 payment of 0\.001 USDC/i)
   assert.match(llms, /api\/v1\/compress/)
   for (const endpoint of [
     '/api/v1/jobs/qubo-ising',
@@ -85,18 +88,36 @@ test('the generated orientation route is not shadowed by an obsolete public file
   assert.equal(existsSync(join(import.meta.dirname, '..', 'public', 'llms.txt')), false)
 })
 
-test('public agent discovery identifies the live production API capabilities without offering autonomous payment', () => {
+test('public agent discovery identifies live capabilities and the scoped Context Compression payment contract', () => {
   const offers = JSON.parse(readFileSync(join(DISCOVERY_DIR, 'agent-offers.json'), 'utf8')) as {
     updatedAt: string
-    transactionPolicy: { autonomousPaymentSupported: boolean }
-    technicalCapabilities: Array<{ id: string; endpoint?: string; methodBoundary?: string }>
+    transactionPolicy: { autonomousPaymentSupported: boolean; autonomousPaymentScope: string[] }
+    technicalCapabilities: Array<{
+      id: string
+      endpoint?: string
+      status?: string
+      methodBoundary?: string
+      machinePayment?: {
+        protocol: string
+        version: number
+        network: string
+        asset: string
+        amount: string
+        displayAmount: string
+      }
+    }>
   }
   const card = JSON.parse(readFileSync(join(DISCOVERY_DIR, 'agent-card.json'), 'utf8')) as {
     serviceCatalog: string
-    capabilities: Array<{ id: string }>
+    capabilities: Array<{
+      id: string
+      status?: string
+      payment?: { protocol: string; version: number; network: string; amount: string; assetSymbol: string; autonomous: boolean }
+    }>
   }
-  assert.equal(offers.updatedAt, '2026-08-06T00:00:00.000Z')
-  assert.equal(offers.transactionPolicy.autonomousPaymentSupported, false)
+  assert.equal(offers.updatedAt, '2026-08-07T00:00:00.000Z')
+  assert.equal(offers.transactionPolicy.autonomousPaymentSupported, true)
+  assert.deepEqual(offers.transactionPolicy.autonomousPaymentScope, ['context-compression'])
   const expected = [
     'context-compression',
     'gpu-qubo-ising',
@@ -108,6 +129,25 @@ test('public agent discovery identifies the live production API capabilities wit
   assert.deepEqual(card.capabilities.map((capability) => capability.id), expected)
   assert.equal(card.serviceCatalog, AGENTIC_COMMERCE_MANIFEST_URL)
   assert.match(offers.technicalCapabilities.find((capability) => capability.id === 'gpu-tensor-network')?.methodBoundary ?? '', /heuristic/i)
+
+  const contextOffer = offers.technicalCapabilities.find((capability) => capability.id === 'context-compression')
+  const contextCard = card.capabilities.find((capability) => capability.id === 'context-compression')
+  assert.equal(contextOffer?.status, 'available_with_api_key_or_x402')
+  assert.equal(contextCard?.status, 'available_with_api_key_or_x402')
+  assert.equal(contextOffer?.machinePayment?.protocol, contextCompressionX402Capability.payment.protocol)
+  assert.equal(contextOffer?.machinePayment?.version, contextCompressionX402Capability.payment.version)
+  assert.equal(contextOffer?.machinePayment?.network, contextCompressionX402Capability.payment.network)
+  assert.equal(contextOffer?.machinePayment?.asset, contextCompressionX402Capability.payment.asset)
+  assert.equal(contextOffer?.machinePayment?.amount, contextCompressionX402Capability.payment.amount)
+  assert.equal(contextOffer?.machinePayment?.displayAmount, contextCompressionX402Capability.payment.displayAmount)
+  assert.deepEqual(contextCard?.payment, {
+    protocol: contextCompressionX402Capability.payment.protocol,
+    version: contextCompressionX402Capability.payment.version,
+    network: contextCompressionX402Capability.payment.network,
+    amount: contextCompressionX402Capability.payment.amount,
+    assetSymbol: contextCompressionX402Capability.payment.assetSymbol,
+    autonomous: true,
+  })
 })
 
 test('agent context links only to the canonical public discovery surfaces', () => {
@@ -119,17 +159,19 @@ test('agent context links only to the canonical public discovery surfaces', () =
   for (const url of [AGENTIC_COMMERCE_MANIFEST_URL, AGENTIC_COMMERCE_API_URL, AGENTIC_COMMERCE_CONTEXT_URL]) {
     assert.ok(context.includes(url) || llms.includes(url), `${url} must be discoverable`)
   }
-  assert.match(context, /do(?:es)? not authorize an autonomous charge/i)
+  assert.match(context, /accepts autonomous payment/i)
+  assert.match(context, /does not authorize autonomous Stripe Checkout/i)
   assert.match(context, /cannot be recovered later/i)
 })
 
 test('the long-lived agent-offers manifest exposes the same MPS payment boundary', () => {
   const manifest = JSON.parse(readFileSync(join(DISCOVERY_DIR, 'agent-offers.json'), 'utf8')) as {
-    transactionPolicy: { autonomousPaymentSupported: boolean; humanConfirmationRequired: boolean }
+    transactionPolicy: { autonomousPaymentSupported: boolean; autonomousPaymentScope: string[]; humanConfirmationRequired: boolean }
     offers: Array<{ id: string; purchase?: { mode?: string }; prepaidCredits?: { insufficientBalance?: { httpStatus?: number } } }>
   }
   const mpsOffer = manifest.offers.find((offer) => offer.id === mpsAuditOffer.id)
-  assert.equal(manifest.transactionPolicy.autonomousPaymentSupported, false)
+  assert.equal(manifest.transactionPolicy.autonomousPaymentSupported, true)
+  assert.deepEqual(manifest.transactionPolicy.autonomousPaymentScope, ['context-compression'])
   assert.equal(manifest.transactionPolicy.humanConfirmationRequired, true)
   assert.equal(mpsOffer?.purchase?.mode, mpsAuditOffer.purchase.mode)
   assert.equal(mpsOffer?.prepaidCredits?.insufficientBalance?.httpStatus, 402)
