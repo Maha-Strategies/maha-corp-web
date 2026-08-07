@@ -5,7 +5,6 @@ import SiteFooter from "@/components/SiteFooter";
 import { mahaEntityGraphJsonLd } from '@/lib/entity';
 import "./globals.css";
 
-// FIXED: Removed the invalid backslashes from string literals
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -43,6 +42,9 @@ export const metadata: Metadata = {
     description: 'Decision-ready research and independent analysis from Maha Strategies.',
     images: ['/og-master.png'],
   },
+  other: {
+    'base:app_id': '6a75654b6aef320a4609ad64',
+  },
 };
 
 export default function RootLayout({
@@ -55,8 +57,8 @@ export default function RootLayout({
       <head>
         <link rel="alternate" type="application/atom+xml" title="Maha Strategies — Intelligence & Explainers" href="/feed.xml" />
         <link rel="alternate" type="text/plain" title="Maha Strategies machine-readable site guide" href="/llms.txt" />
-        <script 
-          type="application/ld+json" 
+        <script
+          type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(mahaEntityGraphJsonLd).replace(/</g, '\\u003c') }}
         />
       </head>
