@@ -28,6 +28,8 @@
     "measure:compression": "node --experimental-strip-types scripts/measure-compression.ts",
     "recipe:context-compiler": "node --experimental-strip-types scripts/run-context-compiler-agent-recipe.ts",
     "recipe:context-compiler:live": "node --experimental-strip-types scripts/run-context-compiler-agent-recipe.ts --live",
+    "benchmark:context-retention": "node --experimental-strip-types scripts/run-context-retention-benchmark.ts",
+    "benchmark:context-retention:publish": "node --experimental-strip-types scripts/run-context-retention-benchmark.ts --write",
     "verify:x402-sepolia": "node --experimental-strip-types scripts/verify-x402-sepolia.ts",
     "build:sdk": "npm --prefix packages/sdk run build",
     "pack:sdk": "npm --prefix packages/sdk run pack:dry-run",
