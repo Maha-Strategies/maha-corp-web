@@ -93,18 +93,13 @@ async function loadWallet(mode: WalletMode): Promise<RecipeWallet> {
 
   const accountName = process.env.CDP_ACCOUNT_NAME
   if (!accountName) throw new Error('Set CDP_ACCOUNT_NAME to the funded CDP Server Wallet account name.')
-  const packageName = '@coinbase/cdp-sdk'
-  let imported: unknown
-  try { imported = await import(packageName) } catch {
-    throw new Error('CDP mode requires npm install @coinbase/cdp-sdk.')
-  }
-  type CdpAccount = { address: string; signTypedData: (request: TypedDataRequest) => Promise<string> }
-  type CdpConstructor = new () => { evm: { getOrCreateAccount: (options: { name: string }) => Promise<CdpAccount> } }
-  const CdpClient = (imported as { CdpClient?: CdpConstructor }).CdpClient
-  if (!CdpClient) throw new Error('@coinbase/cdp-sdk did not export CdpClient.')
+  const { CdpClient } = await import('@coinbase/cdp-sdk')
   const cdp = new CdpClient()
   const account = await cdp.evm.getOrCreateAccount({ name: accountName })
-  return { address: account.address, signTypedData: (request) => account.signTypedData(request) }
+  return {
+    address: account.address,
+    signTypedData: (request) => account.signTypedData(request as Parameters<typeof account.signTypedData>[0]),
+  }
 }
 
 async function run(): Promise<void> {
