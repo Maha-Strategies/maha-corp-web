@@ -172,8 +172,8 @@ export default function DevelopersPage() {
             <div className="grid gap-4 sm:grid-cols-2">
               <Benchmark label="Tensor-network QUBO / Ising" value="80.840 ms" detail="Warm p95 at 256 variables and bond dimension 256; reviewed promotion threshold ≤150 ms." href="/tensor-opt" />
               <Benchmark label="Weighted SE(3) registration" value="108.604 ms" detail="Warm p95 at 16,384 paired points; reviewed promotion threshold ≤200 ms." href="/geometric-optimization" />
-              <Benchmark label="Context compiler recipe" value="74.18%" detail="Reproducible BPE reduction on four complete published chapters with 100% source coverage; economics stated against the $0.001 x402 fee." href="/recipes/context-compiler-large-document" />
-              <Benchmark label="Evidence retention" value="Explicit" detail="Declare required source spans and receive retained-or-omitted results instead of inferring quality from compression ratio." href="/context-pack-evaluator" />
+              <Benchmark label="MCRB-1 evidence retention" value="62.8%" detail="Complete human evidence-set retention at 74.4% mean token reduction across 250 independently annotated QASPER questions." href="/benchmarks/context-retention" />
+              <Benchmark label="Context compiler recipe" value="74.18%" detail="Executable four-chapter workload with 100% source participation and economics stated against the $0.001 x402 fee." href="/recipes/context-compiler-large-document" />
             </div>
           </div>
         </section>

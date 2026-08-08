@@ -1,0 +1,294 @@
+{
+  "benchmark": "Maha Context Retention Benchmark",
+  "id": "mcrb-1",
+  "version": "1.0.0",
+  "measuredOn": "2026-08-08",
+  "scope": "Fixed-budget extractive context selection. This benchmark does not measure generated-answer accuracy or factuality.",
+  "dataset": {
+    "name": "QASPER",
+    "version": "0.3.0",
+    "license": "CC BY 4.0",
+    "source": "https://allenai.org/data/qasper",
+    "archiveUrl": "https://qasper-dataset.s3.us-west-2.amazonaws.com/qasper-train-dev-v0.3.tgz",
+    "archiveSha256": "a28fdf966db827bcee3d873107d6b6669864fb7ca8fbf73a192f5e39191bdb5a",
+    "split": "dev",
+    "selection": "First 250 eligible answerable questions ordered by SHA-256(question_id).",
+    "cases": 250,
+    "uniquePapers": 136,
+    "meanInputTokensBpe": 6447.1,
+    "evidencePositionCounts": {
+      "front": 95,
+      "middle": 93,
+      "back": 62
+    }
+  },
+  "protocol": {
+    "declaredTokenBudget": 2048,
+    "tokenizer": "gpt-tokenizer cl100k_base-compatible encode()",
+    "mahaMode": {
+      "scoring": "bm25",
+      "provenance": "compact",
+      "budgetMode": "guaranteed"
+    },
+    "methods": [
+      "maha_bm25",
+      "maha_keyword",
+      "front_truncation",
+      "tail_recency",
+      "seeded_random",
+      "oracle_ceiling"
+    ],
+    "primaryMetric": "completeEvidenceSetPercent"
+  },
+  "results": [
+    {
+      "method": "maha_bm25",
+      "cases": 250,
+      "completeEvidenceSetPercent": 62.8,
+      "completeEvidenceSetWilson95": {
+        "low": 56.7,
+        "high": 68.6
+      },
+      "anyEvidenceHitPercent": 72.4,
+      "anyEvidenceHitWilson95": {
+        "low": 66.6,
+        "high": 77.6
+      },
+      "meanEvidenceRecallPercent": 67.4,
+      "meanOutputTokens": 1508.7,
+      "meanReductionPercent": 74.4,
+      "citationTraceabilityPercent": 100,
+      "latencyMs": {
+        "p50": 3.34,
+        "p95": 5.91
+      },
+      "byEvidencePosition": {
+        "front": {
+          "cases": 95,
+          "completeEvidenceSetPercent": 66.3,
+          "meanEvidenceRecallPercent": 72.1
+        },
+        "middle": {
+          "cases": 93,
+          "completeEvidenceSetPercent": 59.1,
+          "meanEvidenceRecallPercent": 61.7
+        },
+        "back": {
+          "cases": 62,
+          "completeEvidenceSetPercent": 62.9,
+          "meanEvidenceRecallPercent": 68.7
+        }
+      }
+    },
+    {
+      "method": "maha_keyword",
+      "cases": 250,
+      "completeEvidenceSetPercent": 58,
+      "completeEvidenceSetWilson95": {
+        "low": 51.8,
+        "high": 64
+      },
+      "anyEvidenceHitPercent": 68.4,
+      "anyEvidenceHitWilson95": {
+        "low": 62.4,
+        "high": 73.8
+      },
+      "meanEvidenceRecallPercent": 63,
+      "meanOutputTokens": 1508.4,
+      "meanReductionPercent": 74.4,
+      "citationTraceabilityPercent": 100,
+      "latencyMs": {
+        "p50": 2.93,
+        "p95": 5.86
+      },
+      "byEvidencePosition": {
+        "front": {
+          "cases": 95,
+          "completeEvidenceSetPercent": 71.6,
+          "meanEvidenceRecallPercent": 77.2
+        },
+        "middle": {
+          "cases": 93,
+          "completeEvidenceSetPercent": 51.6,
+          "meanEvidenceRecallPercent": 56.1
+        },
+        "back": {
+          "cases": 62,
+          "completeEvidenceSetPercent": 46.8,
+          "meanEvidenceRecallPercent": 51.6
+        }
+      }
+    },
+    {
+      "method": "front_truncation",
+      "cases": 250,
+      "completeEvidenceSetPercent": 25.6,
+      "completeEvidenceSetWilson95": {
+        "low": 20.6,
+        "high": 31.4
+      },
+      "anyEvidenceHitPercent": 30.4,
+      "anyEvidenceHitWilson95": {
+        "low": 25,
+        "high": 36.4
+      },
+      "meanEvidenceRecallPercent": 27.9,
+      "meanOutputTokens": 1587.5,
+      "meanReductionPercent": 73.1,
+      "citationTraceabilityPercent": 100,
+      "latencyMs": {
+        "p50": 1.58,
+        "p95": 2.97
+      },
+      "byEvidencePosition": {
+        "front": {
+          "cases": 95,
+          "completeEvidenceSetPercent": 67.4,
+          "meanEvidenceRecallPercent": 72.6
+        },
+        "middle": {
+          "cases": 93,
+          "completeEvidenceSetPercent": 0,
+          "meanEvidenceRecallPercent": 0.8
+        },
+        "back": {
+          "cases": 62,
+          "completeEvidenceSetPercent": 0,
+          "meanEvidenceRecallPercent": 0
+        }
+      }
+    },
+    {
+      "method": "tail_recency",
+      "cases": 250,
+      "completeEvidenceSetPercent": 20.4,
+      "completeEvidenceSetWilson95": {
+        "low": 15.9,
+        "high": 25.8
+      },
+      "anyEvidenceHitPercent": 25.6,
+      "anyEvidenceHitWilson95": {
+        "low": 20.6,
+        "high": 31.4
+      },
+      "meanEvidenceRecallPercent": 22.8,
+      "meanOutputTokens": 1576.3,
+      "meanReductionPercent": 73.3,
+      "citationTraceabilityPercent": 100,
+      "latencyMs": {
+        "p50": 1.44,
+        "p95": 2.52
+      },
+      "byEvidencePosition": {
+        "front": {
+          "cases": 95,
+          "completeEvidenceSetPercent": 3.2,
+          "meanEvidenceRecallPercent": 6
+        },
+        "middle": {
+          "cases": 93,
+          "completeEvidenceSetPercent": 7.5,
+          "meanEvidenceRecallPercent": 9.8
+        },
+        "back": {
+          "cases": 62,
+          "completeEvidenceSetPercent": 66.1,
+          "meanEvidenceRecallPercent": 68.3
+        }
+      }
+    },
+    {
+      "method": "seeded_random",
+      "cases": 250,
+      "completeEvidenceSetPercent": 22,
+      "completeEvidenceSetWilson95": {
+        "low": 17.3,
+        "high": 27.5
+      },
+      "anyEvidenceHitPercent": 33.6,
+      "anyEvidenceHitWilson95": {
+        "low": 28,
+        "high": 39.7
+      },
+      "meanEvidenceRecallPercent": 27.3,
+      "meanOutputTokens": 1575.8,
+      "meanReductionPercent": 73.3,
+      "citationTraceabilityPercent": 100,
+      "latencyMs": {
+        "p50": 1.45,
+        "p95": 2.7
+      },
+      "byEvidencePosition": {
+        "front": {
+          "cases": 95,
+          "completeEvidenceSetPercent": 18.9,
+          "meanEvidenceRecallPercent": 24.1
+        },
+        "middle": {
+          "cases": 93,
+          "completeEvidenceSetPercent": 19.4,
+          "meanEvidenceRecallPercent": 24.5
+        },
+        "back": {
+          "cases": 62,
+          "completeEvidenceSetPercent": 30.6,
+          "meanEvidenceRecallPercent": 36.6
+        }
+      }
+    },
+    {
+      "method": "oracle_ceiling",
+      "cases": 250,
+      "completeEvidenceSetPercent": 99.6,
+      "completeEvidenceSetWilson95": {
+        "low": 97.8,
+        "high": 99.9
+      },
+      "anyEvidenceHitPercent": 99.6,
+      "anyEvidenceHitWilson95": {
+        "low": 97.8,
+        "high": 99.9
+      },
+      "meanEvidenceRecallPercent": 99.6,
+      "meanOutputTokens": 1575,
+      "meanReductionPercent": 73.3,
+      "citationTraceabilityPercent": 100,
+      "latencyMs": {
+        "p50": 2.94,
+        "p95": 6.86
+      },
+      "byEvidencePosition": {
+        "front": {
+          "cases": 95,
+          "completeEvidenceSetPercent": 98.9,
+          "meanEvidenceRecallPercent": 98.9
+        },
+        "middle": {
+          "cases": 93,
+          "completeEvidenceSetPercent": 100,
+          "meanEvidenceRecallPercent": 100
+        },
+        "back": {
+          "cases": 62,
+          "completeEvidenceSetPercent": 100,
+          "meanEvidenceRecallPercent": 100
+        }
+      }
+    }
+  ],
+  "economics": {
+    "referenceInputPriceUsdPerMillionTokens": 3,
+    "productionX402FeeUsd": 0.001,
+    "mahaMeanInputTokensAvoided": 4938.4,
+    "mahaGrossInputCostAvoidedUsd": 0.014815,
+    "mahaNetInputCostAvoidedAfterFeeUsd": 0.013815,
+    "scope": "Input-token cost only. Output generation cost is excluded equally from every method."
+  },
+  "limitations": [
+    "QASPER contains NLP research papers and does not represent every enterprise or agent workload.",
+    "Evidence retention is exact-span containment against independent human annotations; it is not generated-answer accuracy.",
+    "All evaluated methods are extractive and therefore retain stable passage citations. Generative summarizers require a separate answer-quality protocol.",
+    "Latency was measured locally in one process and is useful for relative algorithmic comparison, not a network SLA.",
+    "The oracle is an unattainable upper bound that ranks known gold evidence first, not a deployable competitor."
+  ]
+}
