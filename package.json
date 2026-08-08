@@ -44,8 +44,8 @@
     "@stripe/stripe-js": "^9.12.1",
     "@supabase/supabase-js": "^2.112.0",
     "@upstash/redis": "^1.38.1",
-    "@x402/core": "^2.20.0",
-    "@x402/extensions": "^2.20.0",
+    "@x402/core": "^2.21.0",
+    "@x402/extensions": "^2.21.0",
     "jose": "^6.2.8",
     "katex": "^0.17.0",
     "next": "^16.2.12",
@@ -57,6 +57,7 @@
     "stripe": "^22.3.2"
   },
   "devDependencies": {
+    "@coinbase/cdp-sdk": "^1.55.0",
     "@tailwindcss/postcss": "^4",
     "@tailwindcss/typography": "^0.5.20",
     "@types/node": "^26",
@@ -72,7 +73,9 @@
   },
   "overrides": {
     "js-yaml": "^4.3.1",
-    "postcss": "^8.5.10",
+    "axios": "^1.19.0",
+    "nanoid@^3.0.0": "^3.3.18",
+    "postcss": "^8.5.26",
     "sharp": "0.35.0",
     "brace-expansion@^1.0.0": "^1.1.18",
     "brace-expansion@^5.0.0": "^5.0.9"

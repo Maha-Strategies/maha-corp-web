@@ -73,7 +73,7 @@ export default function BazaarDiscoveryToPaymentRecipePage() {
         <div className="mt-7 grid gap-5 lg:grid-cols-3">
           <Command title="Dry discovery" command="npm run recipe:bazaar-payment" detail="Searches Bazaar, inspects schemas, and evaluates terms. It never loads a wallet." />
           <Command title="Plain Viem wallet" command={'X402_BUYER_PRIVATE_KEY=0x… npm run recipe:bazaar-payment -- --pay --wallet=viem'} detail="Uses a dedicated limited-balance EOA. The key stays in the process environment." />
-          <Command title="CDP Server Wallet" command={'npm install @coinbase/cdp-sdk\nCDP_ACCOUNT_NAME=maha-agent npm run recipe:bazaar-payment -- --pay --wallet=cdp'} detail="Also requires CDP_API_KEY_ID, CDP_API_KEY_SECRET, and CDP_WALLET_SECRET in the environment." />
+          <Command title="CDP Server Wallet" command={'npm install --save-dev @coinbase/cdp-sdk\nCDP_ACCOUNT_NAME=maha-agent npm run recipe:bazaar-payment -- --pay --wallet=cdp'} detail="Also requires CDP_API_KEY_ID, CDP_API_KEY_SECRET, and CDP_WALLET_SECRET in the environment." />
         </div>
         <div className="mt-6 border border-amber-900 bg-amber-950/10 p-5 text-sm leading-7 text-amber-100/80">Fund only the selected Base account with the USDC needed for the test. Do not commit wallet secrets, use a personal high-balance wallet, or remove the local policy checks.</div>
       </section>
