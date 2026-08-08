@@ -11,6 +11,64 @@ import type { ResourceInfo } from './protocol.ts'
 const SERVICE_NAME = 'Maha Context Compiler'
 const ICON_URL = 'https://www.mahastrategies.com/icon.png'
 export const CONTEXT_COMPILER_DESCRIPTION = 'Compress long documents and RAG inputs into token-budgeted, deduplicated context packs with source-linked provenance. Call when prompt context exceeds LLM token budgets to minimize inference cost.'
+const SHA256_PATTERN = '^sha256:[a-f0-9]{64}$'
+const SOURCE_ID_PATTERN = '^[A-Za-z0-9][A-Za-z0-9._:-]{0,79}$'
+const PASSAGE_ID_PATTERN = '^[A-Za-z0-9][A-Za-z0-9._:-]{0,79}:[1-9][0-9]*$'
+
+const DISCOVERY_INPUT = {
+  clientRequestId: 'req_rag_release_001',
+  task: 'Find the release condition and rollback trigger while removing duplicate operational background.',
+  tokenBudget: 128,
+  documents: [
+    { id: 'release-notes', title: 'Release notes', text: 'Release may proceed after the security owner attaches credential-rotation evidence. The production canary passed in every region.\n\nRoutine notes cover staffing, dashboards, meeting cadence, maintenance calendars, regional handoffs, historical capacity, and documentation formatting.' },
+    { id: 'rollback-runbook', title: 'Rollback runbook', text: 'Rollback if API errors exceed 2 percent for five minutes or payment failures breach the alert threshold. Restore the last-known-good deployment before reopening traffic.\n\nRoutine notes cover staffing, dashboards, meeting cadence, maintenance calendars, regional handoffs, historical capacity, and documentation formatting.' },
+  ],
+  provenance: 'compact', scoring: 'bm25', budgetMode: 'guaranteed',
+}
+
+const DISCOVERY_OUTPUT = {
+  version: '0.1.0',
+  packId: 'ctxpack_6a5464df2ce14e9b9e16571c7d814821',
+  clientRequestId: 'req_rag_release_001',
+  task: DISCOVERY_INPUT.task,
+  tokenBudget: 128,
+  context: '# Context Pack\n\nTask: Find the release condition and rollback trigger while removing duplicate operational background.\n\n[release-notes:1] Release may proceed after the security owner attaches credential-rotation evidence. The production canary passed in every region.\n\n[rollback-runbook:1] Rollback if API errors exceed 2 percent for five minutes or payment failures breach the alert threshold. Restore the last-known-good deployment before reopening traffic.',
+  metrics: {
+    originalBytes: 606,
+    compiledBytes: 461,
+    originalEstimatedTokens: 97,
+    compiledEstimatedTokens: 83,
+    estimatedReductionPercent: 14.4,
+    sourceCount: 2,
+    sourceCoveragePercent: 100,
+    duplicatePassagesRemoved: 1,
+  },
+  includedPassages: [
+    { sourceId: 'release-notes', passageId: 'release-notes:1', passageHash: 'sha256:4d5e66efdcf5f8dba63a89b40af6ce17f3f42948c48b731732e47f5dc2e7740c', text: 'Release may proceed after the security owner attaches credential-rotation evidence. The production canary passed in every region.' },
+    { sourceId: 'rollback-runbook', passageId: 'rollback-runbook:1', passageHash: 'sha256:6ac9d2eec09e0d9b0233f51d845f0ecbd1beca34fceab3ee44370b352644e2b5', text: 'Rollback if API errors exceed 2 percent for five minutes or payment failures breach the alert threshold. Restore the last-known-good deployment before reopening traffic.' },
+  ],
+  sources: [
+    { sourceId: 'release-notes', title: 'Release notes', sourceHash: 'sha256:288ded29ae161d3d11effd7161edf7c51ef1320e7ba0a8d2feaaed7abccec607', originalEstimatedTokens: 44, passageCount: 2, includedPassageIds: ['release-notes:1'], includedEstimatedTokens: 21 },
+    { sourceId: 'rollback-runbook', title: 'Rollback runbook', sourceHash: 'sha256:29fca10dd4c87bee562ed5b22b42dfcc970e0dc4768591b0983fe463646f38ca', originalEstimatedTokens: 53, passageCount: 2, includedPassageIds: ['rollback-runbook:1'], includedEstimatedTokens: 30 },
+  ],
+  warnings: [
+    'Token counts are model-neutral estimates, not provider tokenizer or billing counts.',
+    'This compiler ranks and deduplicates text; it does not verify claims, guarantee completeness, or prevent hallucination.',
+  ],
+  warningCodes: ['model_neutral_token_estimates', 'extractive_selection_not_verification'],
+  retentionBoundaries: {
+    selectionType: 'extractive',
+    evidenceRetention: 'best_effort',
+    claimVerificationPerformed: false,
+    completenessGuaranteed: false,
+    hallucinationPreventionGuaranteed: false,
+    tokenCountType: 'model_neutral_estimate',
+  },
+  inputHash: 'sha256:288dd5cacd92158f9460346ba6e931f6d0d52f2598bd55e748fc30a186fbdc34',
+  outputHash: 'sha256:80a337617475688482476a469f9fa7b489ef3e1ad15b4a9756fdc1aa716ed089',
+  sourceTextStored: false,
+  compiledContextStored: false,
+}
 
 export function resourceInfoFor(resource: PricedResource, resourceUrl: string): ResourceInfo {
   const isContextCompiler = resource.pathPrefix === '/api/v1/compress'
@@ -41,81 +99,112 @@ export function discoveryExtensionsFor(resource: PricedResource): Record<string,
 
   const declared = declareDiscoveryExtension({
     bodyType: 'json',
-    input: {
-      clientRequestId: 'req_agent_context_001',
-      task: 'Extract the evidence most relevant to the deployment decision.',
-      tokenBudget: 1024,
-      documents: [{
-        id: 'deployment-notes',
-        title: 'Deployment notes',
-        text: 'The production canary passed. The rollback rehearsal remains pending.',
-      }],
-      provenance: 'compact',
-      scoring: 'bm25',
-      budgetMode: 'guaranteed',
-    },
+    input: DISCOVERY_INPUT,
     inputSchema: {
       type: 'object',
       additionalProperties: false,
       properties: {
-        clientRequestId: { type: 'string', minLength: 8, maxLength: 120, description: 'Caller-supplied idempotency and trace identifier.' },
-        task: { type: 'string', minLength: 8, maxLength: 1200, description: 'The question or task the returned context should support.' },
-        tokenBudget: { type: 'integer', minimum: 64, maximum: 16000, description: 'Maximum model-neutral token estimate for the compiled context pack.' },
+        clientRequestId: { type: 'string', minLength: 8, maxLength: 120, description: 'Caller trace ID.' },
+        task: { type: 'string', minLength: 8, maxLength: 1200, description: 'Task used to rank passages.' },
+        tokenBudget: { type: 'integer', minimum: 64, maximum: 16000, description: 'Model-neutral output budget.' },
         documents: {
           type: 'array',
           minItems: 1,
           maxItems: 8,
-          description: 'Source documents to rank, deduplicate, and compress.',
+          description: 'Sources to rank and deduplicate.',
           items: {
             type: 'object',
             additionalProperties: false,
             properties: {
-              id: { type: 'string', minLength: 1, maxLength: 80 },
-              title: { type: 'string', minLength: 1, maxLength: 160 },
-              text: { type: 'string', minLength: 1 },
+              id: { type: 'string', pattern: SOURCE_ID_PATTERN, description: 'Stable source ID.' },
+              title: { type: 'string', minLength: 1, maxLength: 160, description: 'Source title.' },
+              text: { type: 'string', minLength: 1, description: 'Transient source text.' },
             },
             required: ['id', 'text'],
           },
         },
-        provenance: { type: 'string', enum: ['full', 'compact', 'none'], default: 'full' },
-        scoring: { type: 'string', enum: ['bm25', 'keyword'], default: 'bm25' },
-        budgetMode: { type: 'string', enum: ['guaranteed', 'estimated'], default: 'guaranteed' },
+        provenance: { type: 'string', enum: ['full', 'compact', 'none'], default: 'full', description: 'Inline citation style.' },
+        scoring: { type: 'string', enum: ['bm25', 'keyword'], default: 'bm25', description: 'Passage ranker.' },
+        budgetMode: { type: 'string', enum: ['guaranteed', 'estimated'], default: 'guaranteed', description: 'Budget enforcement mode.' },
       },
       required: ['clientRequestId', 'task', 'tokenBudget', 'documents'],
     },
     output: {
-      example: {
-        version: '0.1.0',
-        packId: 'ctxpack_example',
-        clientRequestId: 'req_agent_context_001',
-        context: '# Context Pack\n\n[deployment-notes:1] The production canary passed.',
-        metrics: { originalEstimatedTokens: 12, compiledEstimatedTokens: 8, sourceCoveragePercent: 100 },
-        sources: [{ sourceId: 'deployment-notes', includedPassageIds: ['deployment-notes:1'] }],
-        warnings: ['Token counts are model-neutral estimates.'],
-        inputHash: 'sha256:…',
-        outputHash: 'sha256:…',
-        sourceTextStored: false,
-        compiledContextStored: false,
-      },
+      example: DISCOVERY_OUTPUT,
       schema: {
         type: 'object',
+        additionalProperties: false,
         properties: {
-          version: { type: 'string' },
-          packId: { type: 'string' },
-          clientRequestId: { type: 'string' },
+          version: { type: 'string', const: '0.1.0' },
+          packId: { type: 'string', pattern: '^ctxpack_[a-f0-9]{32}$' },
+          clientRequestId: { type: 'string', minLength: 8, maxLength: 120 },
           task: { type: 'string' },
-          tokenBudget: { type: 'integer' },
+          tokenBudget: { type: 'integer', minimum: 64, maximum: 16000 },
           context: { type: 'string' },
-          metrics: { type: 'object' },
-          includedPassages: { type: 'array', items: { type: 'object' } },
-          sources: { type: 'array', items: { type: 'object' } },
-          warnings: { type: 'array', items: { type: 'string' } },
-          inputHash: { type: 'string' },
-          outputHash: { type: 'string' },
+          metrics: {
+            type: 'object',
+            additionalProperties: false,
+            properties: {
+              originalBytes: { type: 'integer', minimum: 0, description: 'Source UTF-8 bytes.' },
+              compiledBytes: { type: 'integer', minimum: 0, description: 'Output UTF-8 bytes.' },
+              originalEstimatedTokens: { type: 'integer', minimum: 0, description: 'Source token estimate.' },
+              compiledEstimatedTokens: { type: 'integer', minimum: 0, description: 'Output token estimate.' },
+              estimatedReductionPercent: { type: 'number', minimum: 0, maximum: 100, description: 'Estimated token reduction; not provider billing.' },
+              sourceCount: { type: 'integer', minimum: 1, maximum: 8, description: 'Input source count.' },
+              sourceCoveragePercent: { type: 'number', minimum: 0, maximum: 100, description: 'Sources with selected passages; not evidence recall.' },
+              duplicatePassagesRemoved: { type: 'integer', minimum: 0, description: 'Exact duplicates removed.' },
+            },
+            required: ['originalBytes', 'compiledBytes', 'originalEstimatedTokens', 'compiledEstimatedTokens', 'estimatedReductionPercent', 'sourceCount', 'sourceCoveragePercent', 'duplicatePassagesRemoved'],
+          },
+          includedPassages: {
+            type: 'array',
+            items: {
+              type: 'object', additionalProperties: false,
+              properties: {
+                sourceId: { type: 'string', pattern: SOURCE_ID_PATTERN },
+                passageId: { type: 'string', pattern: PASSAGE_ID_PATTERN },
+                passageHash: { type: 'string', pattern: SHA256_PATTERN },
+                text: { type: 'string', minLength: 1 },
+              },
+              required: ['sourceId', 'passageId', 'passageHash', 'text'],
+            },
+          },
+          sources: {
+            type: 'array', minItems: 1, maxItems: 8,
+            items: {
+              type: 'object', additionalProperties: false,
+              properties: {
+                sourceId: { type: 'string', pattern: SOURCE_ID_PATTERN },
+                title: { type: 'string' },
+                sourceHash: { type: 'string', pattern: SHA256_PATTERN },
+                originalEstimatedTokens: { type: 'integer', minimum: 0 },
+                passageCount: { type: 'integer', minimum: 1 },
+                includedPassageIds: { type: 'array', items: { type: 'string', pattern: PASSAGE_ID_PATTERN } },
+                includedEstimatedTokens: { type: 'integer', minimum: 0 },
+              },
+              required: ['sourceId', 'title', 'sourceHash', 'originalEstimatedTokens', 'passageCount', 'includedPassageIds', 'includedEstimatedTokens'],
+            },
+          },
+          warnings: { type: 'array', items: { type: 'string' }, description: 'Human-readable limitations.' },
+          warningCodes: { type: 'array', items: { type: 'string', enum: ['model_neutral_token_estimates', 'extractive_selection_not_verification', 'no_passage_fit_budget'] }, description: 'Machine-readable limitations.' },
+          retentionBoundaries: {
+            type: 'object', additionalProperties: false,
+            properties: {
+              selectionType: { type: 'string', const: 'extractive' },
+              evidenceRetention: { type: 'string', const: 'best_effort' },
+              claimVerificationPerformed: { type: 'boolean', const: false },
+              completenessGuaranteed: { type: 'boolean', const: false },
+              hallucinationPreventionGuaranteed: { type: 'boolean', const: false },
+              tokenCountType: { type: 'string', const: 'model_neutral_estimate' },
+            },
+            required: ['selectionType', 'evidenceRetention', 'claimVerificationPerformed', 'completenessGuaranteed', 'hallucinationPreventionGuaranteed', 'tokenCountType'],
+          },
+          inputHash: { type: 'string', pattern: SHA256_PATTERN },
+          outputHash: { type: 'string', pattern: SHA256_PATTERN },
           sourceTextStored: { type: 'boolean', const: false },
           compiledContextStored: { type: 'boolean', const: false },
         },
-        required: ['version', 'packId', 'context', 'metrics', 'sources', 'warnings', 'inputHash', 'outputHash'],
+        required: ['version', 'packId', 'clientRequestId', 'task', 'tokenBudget', 'context', 'metrics', 'includedPassages', 'sources', 'warnings', 'warningCodes', 'retentionBoundaries', 'inputHash', 'outputHash', 'sourceTextStored', 'compiledContextStored'],
       },
     },
   })

@@ -352,6 +352,11 @@ export function compileContextPack(input: ContextPackRequest) {
     'This compiler ranks and deduplicates text; it does not verify claims, guarantee completeness, or prevent hallucination.',
     ...(selected.length === 0 ? ['No passage fit within the stated token budget. Increase tokenBudget or provide shorter source documents.'] : []),
   ]
+  const warningCodes = [
+    'model_neutral_token_estimates' as const,
+    'extractive_selection_not_verification' as const,
+    ...(selected.length === 0 ? ['no_passage_fit_budget' as const] : []),
+  ]
   return {
     version: CONTEXT_COMPILER_VERSION,
     packId: createContextPackId(),
@@ -363,6 +368,15 @@ export function compileContextPack(input: ContextPackRequest) {
     includedPassages: selected.map((passage) => ({ sourceId: passage.sourceId, passageId: `${passage.sourceId}:${passage.index}`, passageHash: passage.hash, text: passage.text })),
     sources: sourceManifest,
     warnings,
+    warningCodes,
+    retentionBoundaries: {
+      selectionType: 'extractive' as const,
+      evidenceRetention: 'best_effort' as const,
+      claimVerificationPerformed: false as const,
+      completenessGuaranteed: false as const,
+      hallucinationPreventionGuaranteed: false as const,
+      tokenCountType: 'model_neutral_estimate' as const,
+    },
     inputHash: sha256(JSON.stringify({ task: input.task, tokenBudget: input.tokenBudget, documents: input.documents.map((document) => ({ id: document.id, title: document.title, hash: sha256(normalize(document.text)) })) })),
     outputHash: sha256(markdown),
   }

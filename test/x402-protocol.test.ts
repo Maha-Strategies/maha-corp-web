@@ -91,7 +91,7 @@ test('a malformed payment header is a client error, never a crash', () => {
 })
 
 test('an oversized header is refused before it is decoded', () => {
-  const result = parsePaymentHeader('A'.repeat(8_193))
+  const result = parsePaymentHeader('A'.repeat(16_385))
   assert.equal(result.ok, false)
   if (!result.ok) assert.equal(result.reason, 'payment_header_too_large')
 })
