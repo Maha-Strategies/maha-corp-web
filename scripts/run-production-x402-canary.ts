@@ -69,6 +69,17 @@ function loadBuyer() {
 }
 
 async function run(): Promise<CanaryEvidence> {
+  if (process.argv.includes('--validate-config')) {
+    const account = loadBuyer()
+    console.log(`Dedicated canary buyer configuration: PASS (${account.address})`)
+    return {
+      checkedAt: new Date().toISOString(),
+      resource: MAHA_CONTEXT_RESOURCE,
+      outcome: 'skipped',
+      buyer: account.address,
+    }
+  }
+
   const checkedAt = new Date().toISOString()
   const resources = await fetchMerchantResources()
   const decision = decideBazaarCanary(findContextCompiler(resources), Date.now())

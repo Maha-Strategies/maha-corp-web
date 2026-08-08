@@ -25,7 +25,9 @@ definition. The official public value is `https://mainnet.base.org`.
 This wallet is a bounded operational credential, not a treasury. Keep only a
 small USDC balance in it (for example $0.05-$0.10) and no unrelated assets.
 The code refuses any other buyer, endpoint, payee, network, asset, or price and
-can issue at most one signature per workflow run.
+can issue at most one signature per workflow run. The workflow exposes the key
+only to first-party configuration and canary steps, not to checkout, package
+installation, artifact, or notification actions.
 
 ## Operation
 
