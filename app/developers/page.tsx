@@ -197,6 +197,17 @@ export default function DevelopersPage() {
             <Link href="/docs" className="text-zinc-400 underline underline-offset-4 hover:text-white">Inspect endpoint contracts ↗</Link>
           </div>
         </section>
+
+        <section className="mt-20 border-t border-zinc-800 pt-12" aria-labelledby="implementation-guides">
+          <p className="font-mono text-[10px] uppercase tracking-widest text-cyan-300">[ Evidence-grounded guides ]</p>
+          <h2 id="implementation-guides" className="mt-4 text-3xl font-light text-white">Start from measured behavior and runnable controls.</h2>
+          <div className="mt-8 grid gap-4 md:grid-cols-2">
+            <Guide href="/guides/context-compression-vs-conversation-summarization" title="Context compression vs. conversation summarization" detail="Choose by evidence and state-preservation requirements." />
+            <Guide href="/guides/preserve-citations-reducing-llm-context" title="Preserve citations while reducing LLM context" detail="Validate source and passage identities after selection." />
+            <Guide href="/guides/crewai-context-compression-provenance" title="CrewAI context compression with provenance" detail="Use the published Python adapter in a bounded research agent." />
+            <Guide href="/guides/mcp-gateway-vs-direct-server" title="MCP gateway vs. direct server connections" detail="Compare destination, policy, credential, containment, and audit controls." />
+          </div>
+        </section>
       </div>
     </main>
   )
@@ -211,4 +222,8 @@ function Benchmark({ label, value, detail, href }: { label: string; value: strin
       <Link href={href} className="mt-5 inline-block font-mono text-[10px] uppercase tracking-widest text-zinc-300 hover:text-white">Review scope and limits ↗</Link>
     </article>
   )
+}
+
+function Guide({ href, title, detail }: { href: string; title: string; detail: string }) {
+  return <Link href={href} className="border border-zinc-800 p-5 hover:border-cyan-700"><span className="text-lg text-white">{title}</span><span className="mt-2 block text-sm leading-6 text-zinc-400">{detail}</span></Link>
 }

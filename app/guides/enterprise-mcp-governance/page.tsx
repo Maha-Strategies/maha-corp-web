@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import { CodeBlock } from '@/app/guides/_components/EvidenceGuide'
 
 const SITE_URL = 'https://www.mahastrategies.com'
 const PAGE_URL = `${SITE_URL}/guides/enterprise-mcp-governance`
@@ -26,7 +27,7 @@ export default function EnterpriseMcpGovernanceGuide() {
   const articleJsonLd = {
     '@context': 'https://schema.org', '@type': 'TechArticle', '@id': `${PAGE_URL}#article`,
     headline: title, description, url: PAGE_URL, mainEntityOfPage: PAGE_URL,
-    datePublished: '2026-08-06', dateModified: '2026-08-06', isAccessibleForFree: true,
+    datePublished: '2026-08-06', dateModified: '2026-08-08', isAccessibleForFree: true,
     author: { '@id': `${SITE_URL}/about#mayone-maha-rajan` }, publisher: { '@id': `${SITE_URL}/#organization` },
     about: ['Model Context Protocol', 'AI agent governance', 'Tool allowlists', 'Audit logging'],
   }
@@ -67,7 +68,21 @@ export default function EnterpriseMcpGovernanceGuide() {
       </section>
 
       <section className="mt-14">
-        <h2 className="text-3xl font-light text-white">What not to log</h2>
+        <h2 className="text-3xl font-light text-white">Apply an explicit tool policy</h2>
+        <p className="mt-5 leading-relaxed text-zinc-400">Run bounded <code>tools/list</code> discovery first, then approve a subset by exact name. Discovery describes what exists; it does not grant permission.</p>
+        <CodeBlock>{`const discovered = await maha.mcp.discoverTools(serverId)
+const approved = discovered.discovery.tools
+  .filter(tool => ["calculateRiskScore", "readPolicy"].includes(tool.name))
+  .map(tool => tool.name)
+
+await maha.mcp.updateServerPolicy(serverId, {
+  allowedMethods: ["initialize", "ping", "tools/list", "tools/call"],
+  allowedToolNames: approved,
+})`}</CodeBlock>
+      </section>
+
+      <section className="mt-14">
+        <h2 className="text-3xl font-light text-white">MCP audit logging for AI agents: what not to retain</h2>
         <p className="mt-5 leading-relaxed text-zinc-400">Tool arguments can contain source documents, customer identifiers, credentials, and regulated data. Full response bodies can be equally sensitive. A default gateway event should therefore identify the tenant, server, credential, MCP method, tool name, outcome, latency, upstream status, and a one-way request hash—not the request body itself.</p>
         <p className="mt-4 leading-relaxed text-zinc-400">Teams that need payload inspection should define it as a separate, explicit data-processing mode with its own retention policy, access controls, and customer approval.</p>
       </section>
@@ -78,7 +93,7 @@ export default function EnterpriseMcpGovernanceGuide() {
       </section>
 
       <footer className="mt-16 border-t border-zinc-800 pt-8">
-        <p className="max-w-3xl text-sm leading-relaxed text-zinc-500">Maha’s implementation exposes the same core controls through its <Link href="/enterprise-mcp-gateway" className="text-cyan-100 underline underline-offset-4">Enterprise MCP Gateway</Link>. Integration teams can inspect the <a href="/mcp-gateway-contract.json" className="text-cyan-100 underline underline-offset-4">machine-readable contract</a> and the <Link href="/docs" className="text-cyan-100 underline underline-offset-4">API reference</Link>.</p>
+        <p className="max-w-3xl text-sm leading-relaxed text-zinc-500">Maha’s implementation exposes the same core controls through its <Link href="/enterprise-mcp-gateway" className="text-cyan-100 underline underline-offset-4">Enterprise MCP Gateway</Link>. Compare it with <Link href="/guides/mcp-gateway-vs-direct-server" className="text-cyan-100 underline underline-offset-4">direct MCP server connections</Link>, inspect the <a href="/mcp-gateway-contract.json" className="text-cyan-100 underline underline-offset-4">machine-readable contract</a>, or open the <Link href="/docs" className="text-cyan-100 underline underline-offset-4">API reference</Link>.</p>
       </footer>
     </article>
   </main>
