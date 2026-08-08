@@ -15,6 +15,8 @@ OpenAPI: https://www.mahastrategies.com/api/docs/openapi
 - Price: 1,000 USDC base units (`0.001 USDC`)
 - Bazaar MCP discovery: https://api.cdp.coinbase.com/platform/v2/x402/discovery/mcp
 - Alternative authorization: a provisioned Maha API key
+- Reproducible MCRB-1 benchmark: https://www.mahastrategies.com/benchmarks/context-retention
+- Aggregate benchmark results: https://www.mahastrategies.com/benchmarks/mcrb-1/results.json
 - Executable large-document recipe: https://www.mahastrategies.com/recipes/context-compiler-large-document
 
 This capability accepts autonomous payment under the terms in its `PAYMENT-REQUIRED` challenge. This exception does not authorize autonomous Stripe Checkout, research engagements, enterprise onboarding, or spending through the local Maha MCP Bridge.

@@ -97,6 +97,9 @@ test('public agent discovery identifies live capabilities and the scoped Context
       endpoint?: string
       status?: string
       methodBoundary?: string
+      benchmarkUrl?: string
+      benchmarkResultsUrl?: string
+      executableRecipeUrl?: string
       machinePayment?: {
         protocol: string
         version: number
@@ -112,10 +115,12 @@ test('public agent discovery identifies live capabilities and the scoped Context
     capabilities: Array<{
       id: string
       status?: string
+      benchmark?: string
+      executableRecipe?: string
       payment?: { protocol: string; version: number; network: string; amount: string; assetSymbol: string; autonomous: boolean }
     }>
   }
-  assert.equal(offers.updatedAt, '2026-08-07T00:00:00.000Z')
+  assert.equal(offers.updatedAt, '2026-08-08T00:00:00.000Z')
   assert.equal(offers.transactionPolicy.autonomousPaymentSupported, true)
   assert.deepEqual(offers.transactionPolicy.autonomousPaymentScope, ['context-compression'])
   const expected = [
@@ -134,6 +139,11 @@ test('public agent discovery identifies live capabilities and the scoped Context
   const contextCard = card.capabilities.find((capability) => capability.id === 'context-compression')
   assert.equal(contextOffer?.status, 'available_with_api_key_or_x402')
   assert.equal(contextCard?.status, 'available_with_api_key_or_x402')
+  assert.equal(contextOffer?.benchmarkUrl, 'https://www.mahastrategies.com/benchmarks/context-retention')
+  assert.equal(contextOffer?.benchmarkResultsUrl, 'https://www.mahastrategies.com/benchmarks/mcrb-1/results.json')
+  assert.equal(contextOffer?.executableRecipeUrl, 'https://www.mahastrategies.com/recipes/context-compiler-large-document')
+  assert.equal(contextCard?.benchmark, contextOffer?.benchmarkUrl)
+  assert.equal(contextCard?.executableRecipe, contextOffer?.executableRecipeUrl)
   assert.equal(contextOffer?.machinePayment?.protocol, contextCompressionX402Capability.payment.protocol)
   assert.equal(contextOffer?.machinePayment?.version, contextCompressionX402Capability.payment.version)
   assert.equal(contextOffer?.machinePayment?.network, contextCompressionX402Capability.payment.network)

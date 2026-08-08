@@ -212,9 +212,10 @@ function assertResource(resource: ResourceInfo): void {
  */
 export function parsePaymentHeader(header: string | null): { ok: true; payment: PaymentPayload } | { ok: false; reason: string } {
   if (!header?.trim()) return { ok: false, reason: 'missing_payment_header' }
-  // A header large enough to be a denial-of-service vector is refused before
-  // it is decoded.
-  if (header.length > 8_192) return { ok: false, reason: 'payment_header_too_large' }
+  // Bazaar v2 requires clients to echo the typed discovery extension. Keep the
+  // application cap aligned with Vercel's 16 KB per-header ceiling while still
+  // rejecting oversized input before base64 decoding or JSON parsing.
+  if (header.length > 16_384) return { ok: false, reason: 'payment_header_too_large' }
 
   let decoded: string
   try { decoded = Buffer.from(header, 'base64').toString('utf8') } catch { return { ok: false, reason: 'payment_header_not_base64' } }

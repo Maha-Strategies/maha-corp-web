@@ -1,6 +1,15 @@
 /** Zero-dependency client for Node, Bun, Deno, browsers, and Edge runtimes. */
 export type ContextCompressRequest = { clientRequestId: string; task: string; tokenBudget: number; documents: Array<{ id: string; title?: string; text: string }> }
-export type ContextCompressResponse = { packId: string; context: string; metrics: { originalEstimatedTokens: number; compiledEstimatedTokens: number; estimatedReductionPercent: number }; sources: Array<{ sourceId: string; includedPassageIds: string[] }>; warnings: string[] }
+export type ContextCompressResponse = {
+  version: string; packId: string; clientRequestId: string; task: string; tokenBudget: number; context: string
+  metrics: { originalBytes: number; compiledBytes: number; originalEstimatedTokens: number; compiledEstimatedTokens: number; estimatedReductionPercent: number; sourceCount: number; sourceCoveragePercent: number; duplicatePassagesRemoved: number }
+  includedPassages: Array<{ sourceId: string; passageId: string; passageHash: string; text: string }>
+  sources: Array<{ sourceId: string; title: string; sourceHash: string; originalEstimatedTokens: number; passageCount: number; includedPassageIds: string[]; includedEstimatedTokens: number }>
+  warnings: string[]
+  warningCodes: Array<'model_neutral_token_estimates' | 'extractive_selection_not_verification' | 'no_passage_fit_budget'>
+  retentionBoundaries: { selectionType: 'extractive'; evidenceRetention: 'best_effort'; claimVerificationPerformed: false; completenessGuaranteed: false; hallucinationPreventionGuaranteed: false; tokenCountType: 'model_neutral_estimate' }
+  inputHash: string; outputHash: string; sourceTextStored: false; compiledContextStored: false
+}
 export type ProvenanceVerifyResponse = { claim_id: string; title: string; summary: string; status: 'VERIFIED' | 'SOURCED' | 'ILLUSTRATIVE' | 'UNVERIFIED'; latex_formulation: string; sources: string[]; tags: string[]; canonical_url: string }
 
 // --- Audit & MCP Types ---

@@ -18,9 +18,13 @@ test('the Context Compiler publishes valid, callable Bazaar metadata', () => {
   assert.deepEqual(validateDiscoveryExtensionSpec(extensions!.bazaar as never), { valid: true })
   assert.deepEqual(validateDiscoveryExtension(extensions!.bazaar as never), { valid: true })
 
-  const bazaar = extensions!.bazaar as { info: { input: { method: string; body: Record<string, unknown> } } }
+  const bazaar = extensions!.bazaar as { info: { input: { method: string; body: { tokenBudget: number; documents: unknown[] } }; output: { example: { includedPassages: unknown[]; sources: unknown[]; warningCodes: string[] } } } }
   assert.equal(bazaar.info.input.method, 'POST')
-  assert.equal(bazaar.info.input.body.tokenBudget, 1024)
+  assert.equal(bazaar.info.input.body.tokenBudget, 128)
+  assert.equal(bazaar.info.input.body.documents.length, 2)
+  assert.equal(bazaar.info.output.example.includedPassages.length, 2)
+  assert.equal(bazaar.info.output.example.sources.length, 2)
+  assert.ok(bazaar.info.output.example.warningCodes.includes('extractive_selection_not_verification'))
 })
 
 test('the catalog metadata identifies the service for semantic search', () => {

@@ -1,7 +1,7 @@
 {
   "schema": "https://www.mahastrategies.com/schemas/inbound-agent-card/v0.2",
-  "version": "0.2.1",
-  "updatedAt": "2026-08-07T00:00:00.000Z",
+  "version": "0.2.2",
+  "updatedAt": "2026-08-08T00:00:00.000Z",
   "name": "Maha Strategies Inbound Gatekeeper",
   "url": "https://www.mahastrategies.com/inbound",
   "submissionEndpoint": "https://www.mahastrategies.com/api/inbound-submissions",
@@ -14,6 +14,8 @@
       "id": "context-compression",
       "status": "available_with_api_key_or_x402",
       "endpoint": "https://www.mahastrategies.com/api/v1/compress",
+      "benchmark": "https://www.mahastrategies.com/benchmarks/context-retention",
+      "executableRecipe": "https://www.mahastrategies.com/recipes/context-compiler-large-document",
       "payment": {
         "protocol": "x402",
         "version": 2,

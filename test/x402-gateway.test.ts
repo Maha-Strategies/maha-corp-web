@@ -146,6 +146,13 @@ test('an unpaid request to a priced path is challenged', async () => {
   assert.equal(decoded.resource.url, 'https://www.mahastrategies.com/api/v1/compress')
   assert.equal(decoded.resource.serviceName, 'Maha Context Compiler')
   assert.equal(decoded.extensions.bazaar.info.input.method, 'POST')
+  assert.equal(decoded.extensions.bazaar.info.input.body.documents.length, 2)
+  assert.equal(decoded.extensions.bazaar.info.output.example.sources.length, 2)
+  assert.equal(decoded.extensions.bazaar.info.output.example.retentionBoundaries.evidenceRetention, 'best_effort')
+  const outputSchema = decoded.extensions.bazaar.schema.properties.output.properties.example
+  assert.equal(outputSchema.properties.metrics.properties.estimatedReductionPercent.description, 'Estimated token reduction; not provider billing.')
+  assert.equal(outputSchema.properties.includedPassages.items.properties.passageHash.pattern, '^sha256:[a-f0-9]{64}$')
+  assert.ok(outcome.header.length < 16_384, `PAYMENT-REQUIRED is ${outcome.header.length} bytes`)
 })
 
 test('the price charged is the longest matching prefix', () => {
