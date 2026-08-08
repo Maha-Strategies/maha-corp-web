@@ -1,0 +1,65 @@
+name: Production x402 Bazaar canary
+
+on:
+  # The job checks twice weekly but pays only after 21 days without any Bazaar
+  # settlement. Real customer activity resets the clock automatically.
+  schedule:
+    - cron: '17 4 * * 1,4'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: production-x402-bazaar-canary
+  cancel-in-progress: false
+
+jobs:
+  preserve-listing:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    environment:
+      name: production-x402-canary
+      url: https://www.mahastrategies.com/api/v1/compress
+    env:
+      X402_BUYER_PRIVATE_KEY: ${{ secrets.X402_BUYER_PRIVATE_KEY }}
+      BASE_RPC_URL: ${{ secrets.BASE_RPC_URL }}
+      X402_CANARY_OUTPUT_PATH: ${{ github.workspace }}/production-x402-canary.json
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+
+      - name: Check Bazaar activity and settle only when stale
+        id: canary
+        run: npm run canary:x402 -- --pay-if-stale
+
+      - name: Upload canary evidence
+        id: evidence
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: production-x402-canary-${{ github.run_id }}
+          path: ${{ env.X402_CANARY_OUTPUT_PATH }}
+          if-no-files-found: error
+          retention-days: 90
+
+      - name: Raise a durable alert if the canary fails
+        if: ${{ always() && (steps.canary.outcome == 'failure' || steps.evidence.outcome == 'failure') }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          set -euo pipefail
+          existing=$(gh issue list --label x402-canary --state open --limit 1 --json number --jq '.[0].number // empty')
+          body=$(printf 'The bounded Production x402 Bazaar canary failed. No successful settlement should be assumed.\n\nWorkflow run: %s\n\nInspect the sanitized evidence artifact, endpoint health, Bazaar listing, and dedicated wallet balance.' "$RUN_URL")
+          if [ -n "$existing" ]; then
+            gh issue comment "$existing" --body "$body"
+          else
+            gh label create x402-canary --color B60205 --description "Production x402 Bazaar canary failure" 2>/dev/null || true
+            gh issue create --title "Production x402 Bazaar canary failed" --label x402-canary --body "$body"
+          fi
