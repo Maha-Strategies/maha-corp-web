@@ -5,6 +5,7 @@ const developerLinks = [
   { href: '/docs', label: 'API documentation' },
   { href: '/enterprise-mcp-gateway', label: 'Enterprise MCP Gateway' },
   { href: '/context-compiler', label: 'Context Compiler' },
+  { href: '/context-compiler/playground', label: 'Try Context Compiler' },
 ] as const
 
 const companyLinks = [

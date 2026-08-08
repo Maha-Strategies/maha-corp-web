@@ -112,6 +112,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${baseUrl}/enterprise-mcp-gateway`, lastModified: new Date('2026-07-29'), changeFrequency: 'weekly', priority: 0.7 },
     { url: `${baseUrl}/guides/enterprise-mcp-governance`, lastModified: new Date('2026-08-06'), changeFrequency: 'monthly', priority: 0.8 },
     { url: `${baseUrl}/context-compiler`, lastModified: new Date('2026-07-29'), changeFrequency: 'weekly', priority: 0.7 },
+    { url: `${baseUrl}/context-compiler/playground`, lastModified: new Date('2026-08-08'), changeFrequency: 'monthly', priority: 0.8 },
     { url: `${baseUrl}/benchmarks/context-retention`, lastModified: new Date('2026-08-08'), changeFrequency: 'monthly', priority: 0.8 },
     { url: `${baseUrl}/recipes/context-compiler-large-document`, lastModified: new Date('2026-08-07'), changeFrequency: 'monthly', priority: 0.8 },
     { url: `${baseUrl}/context-pack-evaluator`, lastModified: new Date('2026-07-29'), changeFrequency: 'weekly', priority: 0.7 },
