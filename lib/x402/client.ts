@@ -335,8 +335,15 @@ export function createPaidFetch(options: PaidFetchOptions) {
  * failure means this one never settled and retrying is free.
  */
 async function refusalFor(response: Response, requirement: PaymentRequirement): Promise<X402PaymentError> {
-  const body = await response.json().catch(() => ({})) as { error?: { code?: string; message?: string } }
-  const code = body.error?.code
+  const body = await response.json().catch(() => ({})) as {
+    error?: string | { code?: string; message?: string }
+    message?: string
+    reason?: string
+  }
+  const code = typeof body.error === 'object' ? body.error?.code : undefined
+  const providerMessage = redactProviderMessage(
+    (typeof body.error === 'string' ? body.error : body.error?.message) ?? body.message ?? body.reason,
+  )
 
   if (response.status === 409) {
     return new X402PaymentError('payment_already_used', 'Payment already used. This authorization has been spent; a new payment is needed for another request.', { status: 409, requirement, settled: true })
@@ -349,7 +356,14 @@ async function refusalFor(response: Response, requirement: PaymentRequirement): 
   }
   // A second 402 means the facilitator refused the payment we just signed.
   // Its own reason is far more useful than a generic failure.
-  return new X402PaymentError('payment_rejected', body.error?.message ?? challengeReason(response) ?? `The payment was refused (${code ?? response.status}).`, { status: response.status, requirement, settled: false })
+  return new X402PaymentError('payment_rejected', providerMessage ?? challengeReason(response) ?? `The payment was refused (${code ?? response.status}).`, { status: response.status, requirement, settled: false })
+}
+
+function redactProviderMessage(message: string | undefined): string | undefined {
+  return message?.replace(
+    /https:\/\/(?:discord(?:app)?\.com)\/api\/webhooks\/[^\s"'<>]+/gi,
+    '[Discord webhook redacted]',
+  )
 }
 
 function challengeReason(response: Response): string | null {

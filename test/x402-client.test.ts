@@ -211,6 +211,23 @@ test('a second 402 is reported, never answered with another payment', async () =
   assert.equal(payments, 1)
 })
 
+test('a provider string refusal is preserved while Discord webhook credentials are redacted', async () => {
+  const webhookFixture = ['https://discord.com', 'api', 'webhooks', '123', 'secret-token'].join('/')
+  const { impl } = server({
+    onPaid: () => new Response(JSON.stringify({
+      error: `Connection test failed for ${webhookFixture}`,
+    }), { status: 400 }),
+  })
+  const paidFetch = createPaidFetch({ signTypedData: signer, address: ADDRESS, chainId: 84532, fetchImpl: impl })
+  const error = await paidFetch('https://maha.test/api/v1/compress').then(() => null, (e) => e as X402PaymentError)
+
+  assert.equal(error?.code, 'payment_rejected')
+  assert.match(error!.message, /Connection test failed/)
+  assert.match(error!.message, /Discord webhook redacted/)
+  assert.doesNotMatch(error!.message, /secret-token/)
+  assert.equal(error?.settled, false)
+})
+
 test('a capacity refusal does not imply the payment was lost', async () => {
   const { impl } = server({ onPaid: () => new Response(JSON.stringify({ error: { code: 'resource_at_capacity' } }), { status: 429 }) })
   const paidFetch = createPaidFetch({ signTypedData: signer, address: ADDRESS, chainId: 84532, fetchImpl: impl })
