@@ -17,7 +17,14 @@ export const SELF_MANAGED_KEY_ROUTES = new Set([
 export const API_CORS_HEADERS = {
   'Access-Control-Allow-Origin': '*',
   'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
-  'Access-Control-Allow-Headers': 'Authorization, Content-Type',
+  // Browser-based x402 clients must be able to read the unpaid challenge and
+  // settlement receipt, then submit the signed authorization on the retry.
+  // Server-side agents do not exercise CORS, so omitting these can pass every
+  // settlement test while making the same public endpoint unusable in a web
+  // agent or zero-install playground.
+  'Access-Control-Allow-Headers': 'Authorization, Content-Type, PAYMENT-SIGNATURE',
+  'Access-Control-Expose-Headers': 'PAYMENT-REQUIRED, PAYMENT-RESPONSE, Retry-After, Server-Timing',
+  'Access-Control-Max-Age': '86400',
 }
 
 export type ApiProxyGate = 'preflight' | 'self_managed' | 'unavailable' | 'protected'
@@ -34,4 +41,13 @@ export function apiAccessStatus(outcome: ApiAccessOutcome): 401 | 402 | 429 | 50
   if (outcome === 'rate_limited') return 429
   if (outcome === 'unavailable') return 503
   return 401
+}
+
+export function x402ChallengeHeaders(paymentRequired: string, durationMs: number): Record<string, string> {
+  const duration = Number.isFinite(durationMs) ? Math.max(0, durationMs) : 0
+  return {
+    'PAYMENT-REQUIRED': paymentRequired,
+    'Cache-Control': 'no-store',
+    'Server-Timing': `x402-challenge;dur=${duration.toFixed(1)}`,
+  }
 }

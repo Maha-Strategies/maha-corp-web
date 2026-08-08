@@ -30,6 +30,7 @@
     "recipe:context-compiler:live": "node --experimental-strip-types scripts/run-context-compiler-agent-recipe.ts --live",
     "recipe:bazaar-payment": "node --experimental-strip-types scripts/run-bazaar-discovery-payment-recipe.ts",
     "x402:doctor": "node --experimental-strip-types scripts/x402-doctor.ts",
+    "audit:x402-trust": "node --experimental-strip-types scripts/run-x402-trust-audit.ts",
     "generate:context-playground": "node --experimental-strip-types scripts/generate-context-playground-workload.ts",
     "benchmark:context-retention": "node --experimental-strip-types scripts/run-context-retention-benchmark.ts",
     "benchmark:context-retention:publish": "node --experimental-strip-types scripts/run-context-retention-benchmark.ts --write",

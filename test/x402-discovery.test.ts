@@ -38,3 +38,7 @@ test('the catalog metadata identifies the service for semantic search', () => {
 test('an unknown priced route is not advertised with an invented schema', () => {
   assert.equal(discoveryExtensionsFor({ ...compression, pathPrefix: '/api/v1/unknown' }), undefined)
 })
+
+test('the validated declaration is reused on the warm unpaid path', () => {
+  assert.equal(discoveryExtensionsFor(compression), discoveryExtensionsFor(compression))
+})

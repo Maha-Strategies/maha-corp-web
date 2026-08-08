@@ -14,6 +14,7 @@ export const CONTEXT_COMPILER_DESCRIPTION = 'Compress long documents and RAG inp
 const SHA256_PATTERN = '^sha256:[a-f0-9]{64}$'
 const SOURCE_ID_PATTERN = '^[A-Za-z0-9][A-Za-z0-9._:-]{0,79}$'
 const PASSAGE_ID_PATTERN = '^[A-Za-z0-9][A-Za-z0-9._:-]{0,79}:[1-9][0-9]*$'
+let cachedContextCompilerDiscovery: Record<string, unknown> | undefined
 
 const DISCOVERY_INPUT = {
   clientRequestId: 'req_rag_release_001',
@@ -96,6 +97,11 @@ export function resourceInfoFor(resource: PricedResource, resourceUrl: string): 
  */
 export function discoveryExtensionsFor(resource: PricedResource): Record<string, unknown> | undefined {
   if (resource.pathPrefix !== '/api/v1/compress') return undefined
+  // The declaration is immutable deployment metadata. Rebuilding and
+  // validating its full input/output schema on every unpaid probe adds work to
+  // the exact 402 path catalogs measure. Cache the validated object for the
+  // lifetime of the warm instance; a new deployment naturally rebuilds it.
+  if (cachedContextCompilerDiscovery) return cachedContextCompilerDiscovery
 
   const declared = declareDiscoveryExtension({
     bodyType: 'json',
@@ -224,5 +230,6 @@ export function discoveryExtensionsFor(resource: PricedResource): Record<string,
     throw new Error(`Bazaar discovery example does not satisfy its schema: ${dataValidation.errors?.join('; ') ?? 'unknown error'}`)
   }
 
-  return { bazaar: enriched }
+  cachedContextCompilerDiscovery = Object.freeze({ bazaar: enriched })
+  return cachedContextCompilerDiscovery
 }
