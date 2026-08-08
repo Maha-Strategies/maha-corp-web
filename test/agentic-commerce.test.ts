@@ -100,6 +100,7 @@ test('public agent discovery identifies live capabilities and the scoped Context
       benchmarkUrl?: string
       benchmarkResultsUrl?: string
       executableRecipeUrl?: string
+      discoveryPaymentRecipeUrl?: string
       machinePayment?: {
         protocol: string
         version: number
@@ -117,6 +118,7 @@ test('public agent discovery identifies live capabilities and the scoped Context
       status?: string
       benchmark?: string
       executableRecipe?: string
+      discoveryPaymentRecipe?: string
       payment?: { protocol: string; version: number; network: string; amount: string; assetSymbol: string; autonomous: boolean }
     }>
   }
@@ -142,8 +144,10 @@ test('public agent discovery identifies live capabilities and the scoped Context
   assert.equal(contextOffer?.benchmarkUrl, 'https://www.mahastrategies.com/benchmarks/context-retention')
   assert.equal(contextOffer?.benchmarkResultsUrl, 'https://www.mahastrategies.com/benchmarks/mcrb-1/results.json')
   assert.equal(contextOffer?.executableRecipeUrl, 'https://www.mahastrategies.com/recipes/context-compiler-large-document')
+  assert.equal(contextOffer?.discoveryPaymentRecipeUrl, 'https://www.mahastrategies.com/recipes/bazaar-discovery-to-payment')
   assert.equal(contextCard?.benchmark, contextOffer?.benchmarkUrl)
   assert.equal(contextCard?.executableRecipe, contextOffer?.executableRecipeUrl)
+  assert.equal(contextCard?.discoveryPaymentRecipe, contextOffer?.discoveryPaymentRecipeUrl)
   assert.equal(contextOffer?.machinePayment?.protocol, contextCompressionX402Capability.payment.protocol)
   assert.equal(contextOffer?.machinePayment?.version, contextCompressionX402Capability.payment.version)
   assert.equal(contextOffer?.machinePayment?.network, contextCompressionX402Capability.payment.network)

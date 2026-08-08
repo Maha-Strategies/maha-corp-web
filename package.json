@@ -28,6 +28,7 @@
     "measure:compression": "node --experimental-strip-types scripts/measure-compression.ts",
     "recipe:context-compiler": "node --experimental-strip-types scripts/run-context-compiler-agent-recipe.ts",
     "recipe:context-compiler:live": "node --experimental-strip-types scripts/run-context-compiler-agent-recipe.ts --live",
+    "recipe:bazaar-payment": "node --experimental-strip-types scripts/run-bazaar-discovery-payment-recipe.ts",
     "generate:context-playground": "node --experimental-strip-types scripts/generate-context-playground-workload.ts",
     "benchmark:context-retention": "node --experimental-strip-types scripts/run-context-retention-benchmark.ts",
     "benchmark:context-retention:publish": "node --experimental-strip-types scripts/run-context-retention-benchmark.ts --write",

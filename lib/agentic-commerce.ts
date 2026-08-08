@@ -23,6 +23,7 @@ export const contextCompressionX402Capability = {
     displayAmount: '0.001 USDC',
   },
   discovery: 'https://api.cdp.coinbase.com/platform/v2/x402/discovery/mcp',
+  buyerRecipe: `${SITE_URL}/recipes/bazaar-discovery-to-payment`,
   alternativeAuthorization: 'Bearer Maha API key',
 } as const
 
