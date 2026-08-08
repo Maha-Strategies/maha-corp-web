@@ -1,6 +1,6 @@
 {
   "schema": "https://www.mahastrategies.com/schemas/inbound-agent-card/v0.2",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "updatedAt": "2026-08-08T00:00:00.000Z",
   "name": "Maha Strategies Inbound Gatekeeper",
   "url": "https://www.mahastrategies.com/inbound",
@@ -16,6 +16,7 @@
       "endpoint": "https://www.mahastrategies.com/api/v1/compress",
       "benchmark": "https://www.mahastrategies.com/benchmarks/context-retention",
       "executableRecipe": "https://www.mahastrategies.com/recipes/context-compiler-large-document",
+      "discoveryPaymentRecipe": "https://www.mahastrategies.com/recipes/bazaar-discovery-to-payment",
       "payment": {
         "protocol": "x402",
         "version": 2,

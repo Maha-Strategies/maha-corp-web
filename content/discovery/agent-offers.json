@@ -1,6 +1,6 @@
 {
   "schema": "https://www.mahastrategies.com/schemas/agent-offers/v0.2",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "updatedAt": "2026-08-08T00:00:00.000Z",
   "provider": {
     "name": "Maha Strategies LLC",
@@ -43,6 +43,7 @@
       "benchmarkUrl": "https://www.mahastrategies.com/benchmarks/context-retention",
       "benchmarkResultsUrl": "https://www.mahastrategies.com/benchmarks/mcrb-1/results.json",
       "executableRecipeUrl": "https://www.mahastrategies.com/recipes/context-compiler-large-document",
+      "discoveryPaymentRecipeUrl": "https://www.mahastrategies.com/recipes/bazaar-discovery-to-payment",
       "endpoint": "https://www.mahastrategies.com/api/v1/compress",
       "method": "POST",
       "authorization": "Use Authorization: Bearer <API_KEY>, or answer the endpoint's x402 v2 PAYMENT-REQUIRED challenge with a compatible wallet.",

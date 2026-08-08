@@ -49,6 +49,7 @@ export function buildLlmsManifest(claims: readonly MpsClaim[]): string {
     '- MCRB-1 context-retention benchmark: https://www.mahastrategies.com/benchmarks/context-retention',
     '- MCRB-1 aggregate JSON: https://www.mahastrategies.com/benchmarks/mcrb-1/results.json',
     '- Executable large-document recipe: https://www.mahastrategies.com/recipes/context-compiler-large-document',
+    '- Bazaar discovery-to-payment recipe (CDP and Viem wallets): https://www.mahastrategies.com/recipes/bazaar-discovery-to-payment',
     '- Submissions are non-binding. A human purchaser must authorize Stripe Checkout, and research or enterprise work requires human scope review.',
     '',
     '## Usage',
