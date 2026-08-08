@@ -14,6 +14,11 @@ export type BazaarResource = {
   description?: string
   accepts?: PaymentRequirement[]
   extensions?: Record<string, unknown>
+  quality?: {
+    l30DaysTotalCalls?: number
+    l30DaysUniquePayers?: number
+    lastCalledAt?: string
+  }
 }
 
 export type BazaarContract = {
