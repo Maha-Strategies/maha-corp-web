@@ -52,6 +52,9 @@ const PRIVATE_ROUTES = new Set([
   '/api/agent-inquiries/[inquiryId]',
   '/api/audit/events',
   '/api/docs/openapi',
+  // Fixed-workload UI backend. It is not the customer integration contract;
+  // /api/v1/compress remains the documented machine API.
+  '/api/context-compiler/playground',
   '/api/webhooks/stripe',
   '/api/stripe/checkout',
   '/api/v1/jobs/webhook',

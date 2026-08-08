@@ -6,6 +6,7 @@ import test from 'node:test'
 import { encode } from 'gpt-tokenizer'
 
 import published from '../content/recipes/context-compiler-large-document-result.json' with { type: 'json' }
+import playgroundDocuments from '../content/recipes/context-compiler-playground-workload.json' with { type: 'json' }
 import { compileContextPack, parseContextPackRequest } from '../lib/context-compiler.ts'
 
 const root = join(import.meta.dirname, '..')
@@ -15,6 +16,14 @@ const sources = [
   ['orbital-mind-ch1', 'The Orbital Mind — Chapter 1', 'content/books/the-orbital-mind/chapter-1.md'],
   ['imagined-life-ch1', 'The Imagined Life — Chapter 1', 'content/books/the-imagined-life/chapter-1.md'],
 ] as const
+
+test('the playground workload is the same four checked-in benchmark sources', () => {
+  assert.deepEqual(playgroundDocuments, sources.map(([id, title, path]) => ({
+    id,
+    title,
+    text: readFileSync(join(root, path), 'utf8'),
+  })))
+})
 
 test('the published large-document recipe is reproduced by the committed sources and compiler', () => {
   const request = parseContextPackRequest({
