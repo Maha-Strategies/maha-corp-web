@@ -1,6 +1,6 @@
 import { NextResponse, type NextFetchEvent, type NextRequest } from 'next/server'
 import { apiKeyServiceConfigured, authorizeAndConsumeApiUnit, bearerApiKey } from '@/lib/api-key'
-import { API_CORS_HEADERS, apiAccessStatus, apiProxyGate } from '@/lib/api-proxy-policy'
+import { API_CORS_HEADERS, apiAccessStatus, apiProxyGate, x402ChallengeHeaders } from '@/lib/api-proxy-policy'
 import { maybeCreateTenantAutoTopup } from '@/lib/api-credit-billing'
 import { maybeSendLowCreditAlert } from '@/lib/observability/alerts'
 import { X402_HEADERS, paidRequestHeaders, resolveX402 } from '@/lib/x402/gateway'
@@ -23,9 +23,10 @@ export async function proxy(request: NextRequest, event: NextFetchEvent) {
   // any other configuration, and the endpoint is indistinguishable from how it
   // behaved before x402 existed.
   if (!key) {
+    const x402StartedAt = performance.now()
     const outcome = await resolveX402(request)
     if (outcome.kind === 'challenge') {
-      return json(outcome.body, outcome.status, { [X402_HEADERS.required]: outcome.header })
+      return json(outcome.body, outcome.status, x402ChallengeHeaders(outcome.header, performance.now() - x402StartedAt))
     }
     if (outcome.kind === 'refused') {
       return json(
