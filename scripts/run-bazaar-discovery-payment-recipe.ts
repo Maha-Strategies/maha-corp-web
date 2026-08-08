@@ -1,6 +1,8 @@
 import { pathToFileURL } from 'node:url'
 
+import { createPublicClient, formatUnits, http, parseAbi, type Address } from 'viem'
 import { privateKeyToAccount } from 'viem/accounts'
+import { base } from 'viem/chains'
 
 import {
   BASE_NETWORK,
@@ -40,6 +42,7 @@ type ContextPack = {
 }
 
 const query = 'compress documents to an LLM token budget while preserving source-linked citations'
+const erc20BalanceAbi = parseAbi(['function balanceOf(address owner) view returns (uint256)'])
 
 function parseArgs(argv: string[]): { pay: boolean; wallet: WalletMode } {
   const walletArgument = argv.find((argument) => argument.startsWith('--wallet='))?.slice('--wallet='.length) ?? 'viem'
@@ -102,6 +105,30 @@ async function loadWallet(mode: WalletMode): Promise<RecipeWallet> {
   }
 }
 
+async function requireFundedBaseUsdcWallet(wallet: RecipeWallet): Promise<void> {
+  const publicClient = createPublicClient({
+    chain: base,
+    transport: http(process.env.BASE_RPC_URL),
+  })
+  let balance: bigint
+  try {
+    balance = await publicClient.readContract({
+      address: BASE_USDC as Address,
+      abi: erc20BalanceAbi,
+      functionName: 'balanceOf',
+      args: [wallet.address as Address],
+    })
+  } catch (error) {
+    throw new Error(`Could not verify Base USDC balance for ${wallet.address}. Set BASE_RPC_URL to a working Base Mainnet RPC and retry.`, { cause: error })
+  }
+
+  console.log(`   wallet=${wallet.address}`)
+  console.log(`   Base USDC balance=${formatUnits(balance, 6)} USDC`)
+  if (balance < EXPECTED_PRICE_BASE_UNITS) {
+    throw new Error(`Wallet ${wallet.address} has insufficient Base USDC. Fund this CDP account with at least 0.001 USDC, then retry.`)
+  }
+}
+
 async function run(): Promise<void> {
   const args = parseArgs(process.argv.slice(2))
   console.log('\nMaha Bazaar discovery-to-payment recipe')
@@ -128,6 +155,7 @@ async function run(): Promise<void> {
   }
 
   const wallet = await loadWallet(args.wallet)
+  await requireFundedBaseUsdcWallet(wallet)
   const body = { ...contract.inputExample, clientRequestId: `bazaar_recipe_${crypto.randomUUID()}` }
   let challenged = false
   const paidFetch = createPaidFetch({
