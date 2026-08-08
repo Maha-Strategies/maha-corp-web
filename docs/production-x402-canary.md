@@ -18,8 +18,9 @@ Add one required environment secret:
 - `X402_BUYER_PRIVATE_KEY`: private key for the dedicated buyer address
   `0x7b7ff44288fADe4A1829abA2584DFCeB952146f2`.
 
-Optionally add `BASE_RPC_URL` as an environment secret. Without it, Viem uses
-the Base Mainnet public RPC configured by the chain definition.
+Optionally add `BASE_RPC_URL` as an environment variable (not a secret).
+Without it, Viem uses the Base Mainnet public RPC configured by the chain
+definition. The official public value is `https://mainnet.base.org`.
 
 This wallet is a bounded operational credential, not a treasury. Keep only a
 small USDC balance in it (for example $0.05-$0.10) and no unrelated assets.

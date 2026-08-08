@@ -24,7 +24,7 @@ jobs:
       url: https://www.mahastrategies.com/api/v1/compress
     env:
       X402_BUYER_PRIVATE_KEY: ${{ secrets.X402_BUYER_PRIVATE_KEY }}
-      BASE_RPC_URL: ${{ secrets.BASE_RPC_URL }}
+      BASE_RPC_URL: ${{ vars.BASE_RPC_URL }}
       X402_CANARY_OUTPUT_PATH: ${{ github.workspace }}/production-x402-canary.json
     steps:
       - uses: actions/checkout@v7
