@@ -1,0 +1,61 @@
+name: x402 Doctor
+description: Validate an x402 v2 resource, reproduce its Bazaar crawler request, and upload SARIF findings.
+author: Maha Strategies
+
+inputs:
+  endpoint:
+    description: Absolute HTTPS URL of the protected x402 resource.
+    required: true
+  method:
+    description: Method used for the initial unpaid probe. The Bazaar-declared method is used for the crawler reproduction.
+    required: false
+    default: GET
+  bazaar-url:
+    description: Bazaar discovery API base URL.
+    required: false
+    default: https://api.cdp.coinbase.com/platform/v2/x402/discovery
+  fail-on-warning:
+    description: Fail the check when warnings such as stale Bazaar metadata are found.
+    required: false
+    default: 'false'
+  sarif-file:
+    description: SARIF output path relative to the caller workspace.
+    required: false
+    default: x402-doctor.sarif
+
+outputs:
+  sarif-file:
+    description: SARIF report path.
+    value: ${{ steps.doctor.outputs.sarif-file }}
+
+runs:
+  using: composite
+  steps:
+    - name: Install doctor dependencies
+      shell: bash
+      run: npm ci --ignore-scripts --prefix "$GITHUB_ACTION_PATH/../../.."
+
+    - id: doctor
+      name: Inspect x402 resource
+      shell: bash
+      env:
+        INPUT_ENDPOINT: ${{ inputs.endpoint }}
+        INPUT_METHOD: ${{ inputs.method }}
+        INPUT_BAZAAR_URL: ${{ inputs.bazaar-url }}
+        INPUT_FAIL_ON_WARNING: ${{ inputs.fail-on-warning }}
+        INPUT_SARIF_FILE: ${{ inputs.sarif-file }}
+      run: |
+        args=("$INPUT_ENDPOINT" --method "$INPUT_METHOD" --bazaar-url "$INPUT_BAZAAR_URL" --format sarif --output "$GITHUB_WORKSPACE/$INPUT_SARIF_FILE")
+        if [[ "$INPUT_FAIL_ON_WARNING" == "true" ]]; then args+=(--fail-on-warning); fi
+        set +e
+        node --experimental-strip-types "$GITHUB_ACTION_PATH/../../../scripts/x402-doctor.ts" "${args[@]}"
+        status=$?
+        set -e
+        echo "sarif-file=$INPUT_SARIF_FILE" >> "$GITHUB_OUTPUT"
+        exit "$status"
+
+    - name: Upload x402 Doctor SARIF
+      if: always() && hashFiles(inputs.sarif-file) != ''
+      uses: github/codeql-action/upload-sarif@v4
+      with:
+        sarif_file: ${{ inputs.sarif-file }}
