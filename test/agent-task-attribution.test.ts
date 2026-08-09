@@ -8,7 +8,7 @@ import {
   isAttributable,
   resolveTaskAttribution,
 } from '../lib/agent-task-attribution.ts'
-import { recordAgentTaskSpend } from '../lib/agent-task-spend.ts'
+import { evaluateBudgets, recordAgentTaskSpend, spendByCostCenter, type BudgetRow } from '../lib/agent-task-spend.ts'
 
 // Cost centre and task identifier are supplied by the caller, so the whole
 // surface is untrusted input feeding an invoice. The failure that matters is
@@ -179,4 +179,88 @@ test('negative and fractional volumes are normalized rather than stored', async 
   await recordAgentTaskSpend({ ...spend, creditsCharged: -5, tokensSaved: 1.6, ledger: spy.ledger })
   assert.equal(spy.calls[0].args.p_credits_charged, 0)
   assert.equal(spy.calls[0].args.p_tokens_saved, 2)
+})
+
+// ---------------------------------------------------------------------------
+// Budget status: read-only by construction
+// ---------------------------------------------------------------------------
+
+const budget = (over: Partial<BudgetRow> = {}): BudgetRow =>
+  ({ cost_center: 'platform', credit_limit: 1_000, alert_at_percent: 80, ...over })
+
+test('spend under the alert threshold is within budget', () => {
+  const [status] = evaluateBudgets({ spendByCostCenter: { platform: 500 }, budgets: [budget()] })
+  assert.equal(status.state, 'within')
+  assert.equal(status.percentUsed, 50)
+})
+
+test('the alert threshold is inclusive, so the warning arrives at the number set', () => {
+  const [status] = evaluateBudgets({ spendByCostCenter: { platform: 800 }, budgets: [budget()] })
+  assert.equal(status.state, 'approaching')
+  assert.equal(status.percentUsed, 80)
+})
+
+test('spending exactly the limit is exceeded, not within', () => {
+  // >= rather than >. All of the budget is gone, and calling that "within" is
+  // the off-by-one a finance team spots first.
+  const [status] = evaluateBudgets({ spendByCostCenter: { platform: 1_000 }, budgets: [budget()] })
+  assert.equal(status.state, 'exceeded')
+  assert.equal(status.percentUsed, 100)
+})
+
+test('overspend reports the real percentage rather than capping at 100', () => {
+  const [status] = evaluateBudgets({ spendByCostCenter: { platform: 2_500 }, budgets: [budget()] })
+  assert.equal(status.state, 'exceeded')
+  assert.equal(status.percentUsed, 250)
+})
+
+test('a cost centre with no budget is omitted, not reported as compliant', () => {
+  // A budget nobody set is not a budget met. Reporting one would put a green
+  // tick against a department nobody is watching.
+  const statuses = evaluateBudgets({
+    spendByCostCenter: { platform: 500, growth: 9_000 },
+    budgets: [budget({ cost_center: 'platform' })],
+  })
+  assert.deepEqual(statuses.map((status) => status.costCenter), ['platform'])
+})
+
+test('a budget with no spend is within, not missing', () => {
+  const [status] = evaluateBudgets({ spendByCostCenter: {}, budgets: [budget({ cost_center: 'quiet' })] })
+  assert.equal(status.creditsSpent, 0)
+  assert.equal(status.state, 'within')
+})
+
+test('a nonsensical limit is dropped rather than dividing by zero', () => {
+  const statuses = evaluateBudgets({
+    spendByCostCenter: { a: 10 },
+    budgets: [budget({ cost_center: 'a', credit_limit: 0 }), budget({ cost_center: 'b', credit_limit: -5 })],
+  })
+  assert.deepEqual(statuses, [])
+})
+
+test('string numerics from Postgres are compared as numbers', () => {
+  const [status] = evaluateBudgets({
+    spendByCostCenter: { platform: 900 },
+    budgets: [budget({ credit_limit: '1000', alert_at_percent: '80' })],
+  })
+  assert.equal(status.state, 'approaching')
+  assert.equal(status.creditLimit, 1_000)
+})
+
+test('statuses are ordered deterministically', () => {
+  const statuses = evaluateBudgets({
+    spendByCostCenter: {},
+    budgets: [budget({ cost_center: 'zulu' }), budget({ cost_center: 'alpha' }), budget({ cost_center: 'Mike' })],
+  })
+  assert.deepEqual(statuses.map((status) => status.costCenter), ['Mike', 'alpha', 'zulu'])
+})
+
+test('spend is aggregated per cost centre across rows', () => {
+  const totals = spendByCostCenter([
+    { cost_center: 'platform', credits_charged: 7 },
+    { cost_center: 'platform', credits_charged: '3' },
+    { cost_center: 'growth', credits_charged: 2 },
+  ])
+  assert.equal(totals.get('platform'), 10)
+  assert.equal(totals.get('growth'), 2)
 })

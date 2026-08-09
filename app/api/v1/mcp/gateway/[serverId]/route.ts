@@ -6,6 +6,8 @@ import crypto from 'crypto';
 import { MAX_MCP_GATEWAY_BODY_BYTES } from '@/lib/mcp-gateway';
 import { sendMcpConnectivityAlert } from '@/lib/observability/alerts';
 import { evaluateMcpServerPolicy } from '@/lib/mcp/validation';
+import { isAttributable, resolveTaskAttribution } from '@/lib/agent-task-attribution';
+import { recordAgentTaskSpend } from '@/lib/agent-task-spend';
 
 export async function POST(
   req: NextRequest,
@@ -66,6 +68,21 @@ export async function POST(
       const alert = result.connectivityFailure
       after(() => sendMcpConnectivityAlert({ tenantId, serverId, hostname: new URL(serverConfig.baseUrl).hostname, failure: alert.failure, status: alert.status }).then(() => undefined))
     }
+    // One proxied call is one credit, taken at the proxy before this route ran.
+    // Recorded after the response exists and through `after`, so attribution
+    // adds nothing to the latency of a call that is already proxying to a
+    // third-party server.
+    const attribution = resolveTaskAttribution(req.headers)
+    if (isAttributable(attribution, tenantId)) {
+      after(() => recordAgentTaskSpend({
+        tenantId,
+        taskId: attribution.taskId!,
+        costCenter: attribution.costCenter,
+        surface: 'gateway',
+        creditsCharged: 1,
+      }))
+    }
+
     return NextResponse.json(result.body, { status: result.status, headers });
 
   } catch (error) {

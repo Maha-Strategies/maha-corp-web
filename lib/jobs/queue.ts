@@ -26,6 +26,8 @@ import { createHash } from 'node:crypto'
 
 import { redis } from '@/lib/redis'
 import { consumeAdditionalApiCredits, creditKeyById } from '@/lib/api-key'
+import { UNALLOCATED } from '@/lib/agent-task-attribution'
+import { recordAgentTaskSpend } from '@/lib/agent-task-spend'
 import { quoteJobCredits } from '@/lib/jobs/pricing'
 import { scopedRedisKey } from '@/lib/redis-namespace'
 import { releaseHeldSlot } from '@/lib/x402/slot'
@@ -74,6 +76,15 @@ export type JobRecord = {
   zeroDataRetention: boolean
   reservedCredits: number
   creditsCharged: number | null
+  /**
+   * Chargeback attribution captured from the request headers at enqueue.
+   *
+   * Carried on the record because the settlement webhook is where the real
+   * charge becomes known, and by then the originating request is long gone.
+   * Empty when the caller supplied none, which is the common case.
+   */
+  taskId: string
+  costCenter: string
   createdAt: string
   updatedAt: string
   expiresAt: string
@@ -120,6 +131,10 @@ function toJobRecord(raw: Record<string, unknown> | null): JobRecord | null {
     zeroDataRetention: String(raw.zeroDataRetention) === 'true',
     reservedCredits: Number.isFinite(reservedCredits) ? reservedCredits : 0,
     creditsCharged: creditsChargedRaw === undefined || creditsChargedRaw === null || creditsChargedRaw === '' ? null : Number(creditsChargedRaw),
+    // Jobs enqueued before attribution existed have no such fields; they read
+    // as empty and are simply not attributed, rather than failing to parse.
+    taskId: typeof raw.taskId === 'string' ? raw.taskId : '',
+    costCenter: typeof raw.costCenter === 'string' ? raw.costCenter : '',
     createdAt: String(raw.createdAt),
     updatedAt: String(raw.updatedAt),
     expiresAt: String(raw.expiresAt),
@@ -172,6 +187,8 @@ export async function enqueueJob(input: {
    * is still running. Absent for every credit-authenticated job.
    */
   slot?: { resource: string; token: string } | null
+  /** Resolved from request headers by the route. Absent when unattributed. */
+  attribution?: { taskId: string | null; costCenter: string } | null
 }): Promise<EnqueueOutcome> {
   const kind = input.kind
   const idemKey = idempotencyKey(input.keyId, input.request.clientRequestId)
@@ -227,6 +244,8 @@ export async function enqueueJob(input: {
     zeroDataRetention: String(input.zeroDataRetention),
     reservedCredits: String(credits),
     creditsCharged: '',
+    taskId: input.attribution?.taskId ?? '',
+    costCenter: input.attribution?.taskId ? input.attribution.costCenter : '',
     createdAt: now.toISOString(),
     updatedAt: now.toISOString(),
     expiresAt: expiresAt.toISOString(),
@@ -408,6 +427,27 @@ export async function settleJobFromCallback(callback: WorkerCallback): Promise<S
   // Only the winning transition refunds, so a replayed failure callback cannot
   // credit the balance twice.
   if (creditsRefunded > 0) await creditKeyById(job.keyId, creditsRefunded).catch(() => undefined)
+
+  // Attributed spend is recorded here rather than at dispatch, and records
+  // creditsCharged rather than the quote. Credits are debited at enqueue and
+  // refunded whenever a job does not complete, so a row written at dispatch
+  // would put every failed job on an invoice as money the customer got back.
+  // Only the winning transition reaches this line, so a replayed callback
+  // cannot double-count the spend either.
+  //
+  // Nothing is written when the charge is zero. A failed job costs nothing,
+  // and the two ways of failing -- this callback and the expiry sweep -- would
+  // otherwise be recorded inconsistently, since the sweep has no natural place
+  // to write one. A chargeback ledger tracks money, and a zero is not spend.
+  if (job.taskId && creditsCharged > 0) {
+    await recordAgentTaskSpend({
+      tenantId: job.keyId,
+      taskId: job.taskId,
+      costCenter: job.costCenter || UNALLOCATED,
+      surface: 'jobs',
+      creditsCharged,
+    })
+  }
 
   const settled = await getJob(callback.jobId)
   return { kind: 'settled', job: settled ?? job, creditsCharged, creditsRefunded }

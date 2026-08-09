@@ -51,3 +51,88 @@ export async function recordAgentTaskSpend(input: {
     // Deliberately silent beyond the log above.
   }
 }
+
+// ---------------------------------------------------------------------------
+// Budget status
+// ---------------------------------------------------------------------------
+//
+// Read-only, and structurally incapable of being anything else: it takes spend
+// and a budget and returns a label. There is no request path that calls it, no
+// throw, and no outcome that could refuse anything. Enforcement would move this
+// system inline, which is the one property that makes it sellable to a finance
+// team without a security review.
+
+export type BudgetRow = {
+  cost_center: string
+  credit_limit: number | string
+  alert_at_percent: number | string
+  period_start?: string
+  period_end?: string
+}
+
+export type BudgetState = 'within' | 'approaching' | 'exceeded'
+
+export type BudgetStatus = {
+  costCenter: string
+  creditsSpent: number
+  creditLimit: number
+  /** Spend as a percentage of the limit, one decimal. Can exceed 100. */
+  percentUsed: number
+  alertAtPercent: number
+  state: BudgetState
+}
+
+const numeric = (value: number | string | null | undefined): number => {
+  const parsed = typeof value === 'number' ? value : Number(value ?? 0)
+  return Number.isFinite(parsed) ? parsed : 0
+}
+
+/**
+ * Compare spend per cost centre against the budgets defined for them.
+ *
+ * Cost centres with no budget are omitted rather than reported as unlimited or
+ * as zero. A budget nobody set is not a budget met, and inventing either
+ * reading would put a green tick against a department nobody is watching.
+ *
+ * `exceeded` is `>=`, not `>`: spending exactly the limit has consumed all of
+ * it, and reporting that as still within budget is the kind of off-by-one a
+ * finance team notices immediately.
+ */
+export function evaluateBudgets(input: {
+  spendByCostCenter: Map<string, number> | Record<string, number>
+  budgets: readonly BudgetRow[]
+}): BudgetStatus[] {
+  const spend = input.spendByCostCenter instanceof Map
+    ? input.spendByCostCenter
+    : new Map(Object.entries(input.spendByCostCenter))
+
+  return input.budgets
+    .map((budget): BudgetStatus | null => {
+      const creditLimit = numeric(budget.credit_limit)
+      // A non-positive limit cannot produce a meaningful percentage, and the
+      // column forbids one. Reported as absent rather than as a division by
+      // zero dressed up as Infinity.
+      if (creditLimit <= 0) return null
+
+      const creditsSpent = Math.max(0, numeric(spend.get(budget.cost_center)))
+      const alertAtPercent = numeric(budget.alert_at_percent) || 80
+      const percentUsed = Number(((creditsSpent / creditLimit) * 100).toFixed(1))
+
+      const state: BudgetState = creditsSpent >= creditLimit
+        ? 'exceeded'
+        : percentUsed >= alertAtPercent ? 'approaching' : 'within'
+
+      return { costCenter: budget.cost_center, creditsSpent, creditLimit, percentUsed, alertAtPercent, state }
+    })
+    .filter((status): status is BudgetStatus => status !== null)
+    .sort((left, right) => (left.costCenter < right.costCenter ? -1 : left.costCenter > right.costCenter ? 1 : 0))
+}
+
+/** Spend per cost centre, in the shape `evaluateBudgets` wants. */
+export function spendByCostCenter(rows: readonly { cost_center: string; credits_charged: number | string }[]): Map<string, number> {
+  const totals = new Map<string, number>()
+  for (const row of rows) {
+    totals.set(row.cost_center, (totals.get(row.cost_center) ?? 0) + numeric(row.credits_charged))
+  }
+  return totals
+}

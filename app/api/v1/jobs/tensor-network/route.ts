@@ -6,6 +6,7 @@ import { JobValidationError, parseTensorNetworkJobRequest } from '@/lib/jobs/con
 import { dispatchToWorker, enqueueTensorNetworkJob, failUndispatchedJob, workerDispatchConfigured } from '@/lib/jobs/queue'
 import { quoteJobCredits } from '@/lib/jobs/pricing'
 import { jobResponseHeaders, publicJobView } from '@/lib/jobs/provenance'
+import { resolveTaskAttribution } from '@/lib/agent-task-attribution'
 
 export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
@@ -27,9 +28,12 @@ export async function POST(request: Request) {
   }
   if (!workerDispatchConfigured()) return json({ error: { code: 'worker_unavailable', message: 'GPU job dispatch is not configured. No credits were charged.' } }, 503)
   const zeroDataRetention = request.headers.get('x-maha-zero-data-retention') === 'true'
+  // Captured here and carried on the job record: the settlement webhook is
+  // where the real charge becomes known, and this request is gone by then.
+  const attribution = resolveTaskAttribution(request.headers)
   let outcome
   try {
-    outcome = await enqueueTensorNetworkJob({ request: parsed, keyId, zeroDataRetention, callbackUrl: `${new URL(request.url).origin}/api/v1/jobs/webhook` })
+    outcome = await enqueueTensorNetworkJob({ request: parsed, keyId, zeroDataRetention, attribution, callbackUrl: `${new URL(request.url).origin}/api/v1/jobs/webhook` })
   } catch { return json({ error: { code: 'job_enqueue_failed', message: 'The job could not be queued. No credits were charged.' } }, 503) }
   if (outcome.kind === 'insufficient_credits') return json({ error: { code: 'credit_balance_depleted', message: `This job requires ${outcome.required} credits.`, requiredCredits: outcome.required } }, 402)
   if (outcome.kind === 'unavailable') return json({ error: { code: 'api_key_service_unavailable', message: 'Credit reservation is temporarily unavailable.' } }, 503)
