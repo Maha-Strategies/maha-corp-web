@@ -8,6 +8,7 @@ import { base } from 'viem/chains'
 
 import { applyManualMetadataRefresh, decideBazaarCanary, findContextCompiler } from '../lib/x402/bazaar-canary.ts'
 import { createPaidFetch, type TypedDataRequest } from '../lib/x402/client.ts'
+import { assertRecoverableSignature, failureEvidenceFor, type CanaryFailure } from '../lib/x402/canary-evidence.ts'
 import {
   assertSpendPolicy,
   BASE_USDC,
@@ -33,6 +34,8 @@ type CanaryEvidence = {
   packId?: string
   metrics?: Record<string, unknown>
   error?: string
+  /** Structured detail for a failure, sanitized for upload. */
+  failure?: CanaryFailure
 }
 
 async function writeEvidence(evidence: CanaryEvidence): Promise<void> {
@@ -123,17 +126,24 @@ async function run(): Promise<CanaryEvidence> {
   const paidFetch = createPaidFetch({
     address: account.address,
     chainId: base.id,
-    signTypedData: async (request: TypedDataRequest) => account.signTypedData({
-      domain: { ...request.domain, verifyingContract: request.domain.verifyingContract as `0x${string}` },
-      types: request.types,
-      primaryType: request.primaryType,
-      message: {
-        ...request.message,
-        from: request.message.from as `0x${string}`,
-        to: request.message.to as `0x${string}`,
-        nonce: request.message.nonce as `0x${string}`,
-      },
-    }),
+    signTypedData: async (request: TypedDataRequest) => {
+      const signature = await account.signTypedData({
+        domain: { ...request.domain, verifyingContract: request.domain.verifyingContract as `0x${string}` },
+        types: request.types,
+        primaryType: request.primaryType,
+        message: {
+          ...request.message,
+          from: request.message.from as `0x${string}`,
+          to: request.message.to as `0x${string}`,
+          nonce: request.message.nonce as `0x${string}`,
+        },
+      })
+      // Local check before the payload leaves the process. A signature that
+      // recovers to the wrong payer is refused remotely as a generic failure;
+      // caught here it names both addresses and nothing is sent.
+      await assertRecoverableSignature(request, signature, account.address)
+      return signature
+    },
     onPaymentRequired(requirement) {
       assertSpendPolicy(requirement)
       challenged = true
@@ -187,13 +197,22 @@ if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) 
     .then(writeEvidence)
     .catch(async (error) => {
       const message = error instanceof Error ? error.message : String(error)
+      // Evidence is written on every failure, and written before the exit
+      // code is set, so a run that fails still uploads something worth
+      // reading. The structured failure is what makes the difference between
+      // "the canary broke" and knowing which layer broke.
+      const failure = await failureEvidenceFor(error)
       await writeEvidence({
         checkedAt: new Date().toISOString(),
         resource: MAHA_CONTEXT_RESOURCE,
         outcome: 'failed',
         error: message,
+        failure,
       })
       console.error(`Production x402 canary failed: ${message}`)
+      console.error(`  operation ${failure.operation}, code ${failure.errorCode}${failure.httpStatus ? `, HTTP ${failure.httpStatus}` : ''}`)
+      if (failure.providerReason && failure.providerReason !== message) console.error(`  provider: ${failure.providerReason}`)
+      if (failure.settled === true) console.error('  A payment WAS settled. Do not retry blindly.')
       process.exitCode = 1
     })
 }

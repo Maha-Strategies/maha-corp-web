@@ -16,13 +16,18 @@ const ICON_URL = 'https://www.mahastrategies.com/icon.png'
 // not come again. Breakeven is given as a formula because it depends on the
 // caller's model price and on the reduction their payload shape actually
 // achieves, neither of which this service knows.
+// Every clause here is load-bearing and the field has a hard ceiling, so this
+// is written tight rather than complete: what it does, how to decide whether
+// calling it pays, and the three ways it does not fit. The long-form version
+// -- measured breakeven anchors, the negative-reduction workloads, the full
+// script-coverage note -- lives in SKILL.md and the Bazaar `info` extension,
+// neither of which is length-bound by the facilitator.
 export const CONTEXT_COMPILER_DESCRIPTION = 'Compress long documents and RAG inputs into token-budgeted, deduplicated context packs with source-linked provenance. '
-  + 'Returns measured original and compiled token counts so the caller can verify the saving against its own model price. '
-  + 'Cost is net-positive above N = fee / (r x p) input tokens, where r is the reduction achieved on your payload and p your model input price per token: '
-  + 'about 630 tokens for retrieval-shaped payloads at $2.50/M, about 2,030 for long agent traces. '
-  + 'Selection is extractive and budget-bound, so a pack can omit evidence; check includedPassages before relying on it. '
-  + 'Ranking works across Latin, Cyrillic, Greek, Arabic and CJK scripts; CJK is indexed as character bigrams rather than segmented words, so ranking there is coarser. '
-  + 'Not suitable for tabular or heavily-structured payloads, where per-passage framing can exceed the reduction.'
+  + 'Returns original and compiled token counts, so the saving is verifiable. '
+  + 'Net-positive above N = fee / (r x p) tokens: r your reduction, p your input price. '
+  + 'Extractive and budget-bound, so check includedPassages before relying on it. '
+  + 'Ranks Latin, Cyrillic, Greek, Arabic and CJK; CJK coarser (bigrams). '
+  + 'Not for tabular or heavily-structured payloads.'
 const SHA256_PATTERN = '^sha256:[a-f0-9]{64}$'
 const SOURCE_ID_PATTERN = '^[A-Za-z0-9][A-Za-z0-9._:-]{0,79}$'
 const PASSAGE_ID_PATTERN = '^[A-Za-z0-9][A-Za-z0-9._:-]{0,79}:[1-9][0-9]*$'
@@ -84,11 +89,93 @@ const DISCOVERY_OUTPUT = {
   compiledContextStored: false,
 }
 
+/**
+ * Ceiling on the published `resource.description`.
+ *
+ * The x402 v2 specification places no length limit on this field and neither
+ * does `@x402/core`'s `ResourceInfoSchema`, which caps `serviceName`, `tags`
+ * and `iconUrl` but leaves `description` open. The CDP facilitator is stricter
+ * and undocumented: it answers a payment payload carrying an oversized
+ * description with `HTTP 400 'paymentPayload' is invalid: must match one of
+ * [x402V2PaymentPayload, ...]`, rejecting the whole union before it looks at
+ * the signature at all.
+ *
+ * That is how every settlement after 2026-08-08T07:21:24Z came to fail. The
+ * description grew from 196 to 702 and then 865 characters while the rest of
+ * the payload was unchanged, and the last settlement to succeed was the last
+ * one made at 196. Because a settlement is also what refreshes the Bazaar
+ * listing, the stale-metadata drift was a symptom of the same change rather
+ * than a second fault.
+ *
+ * The limit is tracked upstream as x402-foundation/x402#2284. 480 is the
+ * enforced ceiling here because 480 is empirically known to pass and 523 to
+ * fail; 512 sits inside that unresolved gap and is not proven safe.
+ *
+ * Both a character count and a UTF-8 byte count are enforced. Which of the two
+ * a remote implementation actually measures is not stated anywhere, and for
+ * ASCII copy they agree -- so the difference only appears the day someone adds
+ * a non-Latin sentence, at which point the field silently triples in bytes
+ * while looking unchanged. Enforcing the stricter of the two costs nothing now
+ * and removes that failure entirely.
+ */
+export const MAX_RESOURCE_DESCRIPTION_CHARS = 480
+export const MAX_RESOURCE_DESCRIPTION_BYTES = 480
+
+const utf8Bytes = (value: string): number => new TextEncoder().encode(value).length
+
+/**
+ * Clamped rather than rejected. A description that outgrows the ceiling is a
+ * copy problem, and refusing to build the challenge would turn it into an
+ * outage; publishing a truncated sentence keeps payments working while the
+ * contract test that guards the authored length fails loudly in CI.
+ *
+ * This is the fallback, not the mechanism. The production description is
+ * written to fit, and a value that reaches the clamp is a bug that has already
+ * been caught in CI -- the clamp only decides whether it degrades to shortened
+ * copy or to a total payment outage.
+ *
+ * Iteration is by code point rather than by UTF-16 unit, so an emoji or a CJK
+ * character is never cut in half. Slicing a JavaScript string at a fixed index
+ * can split a surrogate pair and produce a lone half that is not valid UTF-8,
+ * which is exactly the class of malformed field this function exists to avoid
+ * sending.
+ */
+export function boundDescription(description: string): string {
+  if (description.length <= MAX_RESOURCE_DESCRIPTION_CHARS && utf8Bytes(description) <= MAX_RESOURCE_DESCRIPTION_BYTES) {
+    return description
+  }
+
+  console.warn('x402 resource description exceeds the facilitator ceiling and was clamped', JSON.stringify({
+    length: description.length,
+    bytes: utf8Bytes(description),
+    maxChars: MAX_RESOURCE_DESCRIPTION_CHARS,
+    maxBytes: MAX_RESOURCE_DESCRIPTION_BYTES,
+  }))
+
+  let clamped = ''
+  let bytes = 0
+  let characters = 0
+  for (const codePoint of description) {
+    const size = utf8Bytes(codePoint)
+    if (bytes + size > MAX_RESOURCE_DESCRIPTION_BYTES) break
+    if (characters + codePoint.length > MAX_RESOURCE_DESCRIPTION_CHARS) break
+    clamped += codePoint
+    bytes += size
+    characters += codePoint.length
+  }
+
+  // Prefer a word boundary, but only a nearby one. Scripts that do not
+  // separate words with spaces have no boundary to find, and hunting further
+  // back would discard most of the text to satisfy a rule that does not apply.
+  const lastSpace = clamped.lastIndexOf(' ')
+  return lastSpace > clamped.length - 80 ? clamped.slice(0, lastSpace) : clamped
+}
+
 export function resourceInfoFor(resource: PricedResource, resourceUrl: string): ResourceInfo {
   const isContextCompiler = resource.pathPrefix === '/api/v1/compress'
   return {
     url: resourceUrl,
-    description: isContextCompiler ? CONTEXT_COMPILER_DESCRIPTION : resource.description,
+    description: boundDescription(isContextCompiler ? CONTEXT_COMPILER_DESCRIPTION : resource.description),
     mimeType: 'application/json',
     ...(isContextCompiler
       ? {
