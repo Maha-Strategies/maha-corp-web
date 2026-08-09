@@ -85,6 +85,9 @@ from older documentation. See [`AGENTS.md`](./AGENTS.md).
 | [`docs/release-recovery.md`](./docs/release-recovery.md) | Release health, recovery drill, rollback, rehearsal, required GitHub environments |
 | [`docs/preview-e2e.md`](./docs/preview-e2e.md) | Integration gates on every Preview deployment, and making them block merges |
 | [`docs/slo-capacity.md`](./docs/slo-capacity.md) | Service objectives, error budgets, the bounded capacity harness |
+| [`docs/x402-conformance-corpus.md`](./docs/x402-conformance-corpus.md) | Vendor-neutral x402 v2 fixtures and the offline reference runner |
+| [`docs/x402-declaration-digest-proposal.md`](./docs/x402-declaration-digest-proposal.md) | Draft catalog-attested discovery declaration digest and test vectors |
+| [`docs/x402-doctor.md`](./docs/x402-doctor.md) | Live resource, crawler, Bazaar drift, and bounded-settlement diagnostics |
 | [`SECURITY.md`](./SECURITY.md) | Vulnerability reporting and the platform's standing security assumptions |
 
 ## Outbound Market Discovery Matrix

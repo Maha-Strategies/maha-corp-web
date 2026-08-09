@@ -11,6 +11,12 @@ import {
   type PaymentChallenge,
   type PaymentRequirement,
 } from './client.ts'
+import {
+  DECLARATION_DIGEST_EXTENSION,
+  canonicalResourceUrl,
+  declarationDigest as computeDeclarationDigest,
+  readDeclarationDigestExtension,
+} from './declaration-digest.ts'
 
 export const EXTENSION_RESPONSES_HEADER = 'EXTENSION-RESPONSES'
 export const DEFAULT_BAZAAR_URL = 'https://api.cdp.coinbase.com/platform/v2/x402/discovery'
@@ -59,6 +65,9 @@ export type DoctorReport = {
     x402Version?: number
     resource?: string
     declarationDigest?: string
+    integrityDigest?: string
+    declaredIntegrityDigest?: string
+    metadataVersion?: string
     crawlerStatus?: number
     paidStatus?: number
     transaction?: string
@@ -67,6 +76,8 @@ export type DoctorReport = {
     found: boolean
     resource?: string
     declarationDigest?: string
+    digestSource?: 'catalog' | 'reconstructed'
+    metadataVersion?: string
     matchesLive?: boolean
     lastUpdated?: string
   }
@@ -290,6 +301,26 @@ export async function diagnoseX402Endpoint(options: DoctorOptions): Promise<Doct
       extensions: challenge.extensions,
     })
     report.live.declarationDigest = await sha256(liveDeclaration)
+    report.live.integrityDigest = await computeDeclarationDigest({
+      x402Version: challenge.x402Version,
+      resource: challenge.resource as unknown as JsonRecord,
+      accepts: challenge.accepts,
+      extensions: challenge.extensions,
+    })
+    const rawLiveIntegrity = record(challenge.extensions)?.[DECLARATION_DIGEST_EXTENSION]
+    const liveIntegrity = readDeclarationDigestExtension(rawLiveIntegrity)
+    if (rawLiveIntegrity !== undefined && !liveIntegrity) {
+      add(findings, 'x402.declaration_integrity.malformed', 'error', 'The live declaration-integrity extension is malformed.')
+    } else if (liveIntegrity) {
+      report.live.declaredIntegrityDigest = liveIntegrity.declarationDigest
+      report.live.metadataVersion = liveIntegrity.metadataVersion
+      if (liveIntegrity.declarationDigest !== report.live.integrityDigest) {
+        add(findings, 'x402.declaration_integrity.self_mismatch', 'error', 'The seller-declared digest does not match the live declaration.', `declared=${liveIntegrity.declarationDigest}; computed=${report.live.integrityDigest}`)
+      }
+      if (liveIntegrity.canonicalResource !== canonicalResourceUrl(endpoint)) {
+        add(findings, 'x402.declaration_integrity.resource', 'error', 'The declaration-integrity canonicalResource does not identify the live endpoint.', liveIntegrity.canonicalResource)
+      }
+    }
 
     const crawlerRequest = extensionInput(challenge)
     if (!crawlerRequest) {
@@ -324,18 +355,33 @@ export async function diagnoseX402Endpoint(options: DoctorOptions): Promise<Doct
             report.bazaar = { found: false }
             add(findings, 'x402.bazaar.not_found', 'warning', 'The live endpoint is not present in the current Bazaar merchant record.')
           } else {
+            const rawIndexedIntegrity = current.declarationIntegrity
+              ?? record(current.extensions)?.[DECLARATION_DIGEST_EXTENSION]
+            const indexedIntegrity = readDeclarationDigestExtension(rawIndexedIntegrity)
+            if (rawIndexedIntegrity !== undefined && !indexedIntegrity) {
+              add(findings, 'x402.declaration_integrity.catalog_malformed', 'warning', 'The catalog exposes a malformed declaration-integrity value.')
+            }
             const indexedDeclaration = declaration(current)
-            const indexedDigest = await sha256(indexedDeclaration)
-            const matchesLive = indexedDigest === report.live.declarationDigest
+            const reconstructedDigest = await sha256(indexedDeclaration)
+            const indexedDigest = indexedIntegrity?.declarationDigest ?? reconstructedDigest
+            const matchesLive = indexedIntegrity
+              ? indexedDigest === report.live.integrityDigest
+              : indexedDigest === report.live.declarationDigest
             report.bazaar = {
               found: true,
               resource: bazaarResourceUrl(current) ?? undefined,
               declarationDigest: indexedDigest,
+              digestSource: indexedIntegrity ? 'catalog' : 'reconstructed',
               matchesLive,
+              ...(indexedIntegrity ? { metadataVersion: indexedIntegrity.metadataVersion } : {}),
               ...(typeof current.lastUpdated === 'string' ? { lastUpdated: current.lastUpdated } : {}),
             }
+            if (indexedIntegrity && indexedIntegrity.canonicalResource !== canonicalResourceUrl(endpoint)) {
+              add(findings, 'x402.declaration_integrity.catalog_resource', 'warning', 'The catalog digest belongs to a different canonical resource.', indexedIntegrity.canonicalResource)
+            }
             if (!matchesLive) {
-              add(findings, 'x402.bazaar.stale_metadata', 'warning', 'The Bazaar declaration differs from the live PAYMENT-REQUIRED declaration.', `live=${report.live.declarationDigest}; bazaar=${indexedDigest}`)
+              const liveDigest = indexedIntegrity ? report.live.integrityDigest : report.live.declarationDigest
+              add(findings, 'x402.bazaar.stale_metadata', 'warning', 'The Bazaar declaration differs from the live PAYMENT-REQUIRED declaration.', `live=${liveDigest}; bazaar=${indexedDigest}; source=${indexedIntegrity ? 'catalog' : 'reconstructed'}`)
             }
           }
         }

@@ -2,6 +2,8 @@
 
 `x402-doctor` is a read-only-by-default conformance and discovery diagnostic for x402 resource servers. It is motivated by a production failure mode: a seller can publish a correct live declaration while Bazaar continues to serve stale metadata, or can publish a valid-looking input example that the crawler receives as HTTP 400 instead of 402.
 
+The doctor also implements the draft [`declaration-integrity` proposal](./x402-declaration-digest-proposal.md). When a seller and catalog expose the proposed digest, it independently hashes the live declaration and compares that value with the catalog-computed indexed digest. Reports label this source as `catalog`. Until catalogs support the proposal, the existing field-normalization comparison remains available and is explicitly labeled `reconstructed`.
+
 ## Read-only inspection
 
 ```bash
@@ -48,4 +50,3 @@ npm run x402:doctor -- https://seller.example/resource \
 ## Stale metadata and a future protocol improvement
 
 The doctor currently canonicalizes `{ resource, description, mimeType, accepts, extensions }` and compares SHA-256 digests across the live challenge and Bazaar record. A future x402 extension could standardize this as a declaration digest plus metadata version. Catalogs could then reject or refresh stale seller metadata without requiring an unrelated paid call solely to trigger re-indexing.
-

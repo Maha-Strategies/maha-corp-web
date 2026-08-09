@@ -31,6 +31,7 @@
     "recipe:context-compiler:live": "node --experimental-strip-types scripts/run-context-compiler-agent-recipe.ts --live",
     "recipe:bazaar-payment": "node --experimental-strip-types scripts/run-bazaar-discovery-payment-recipe.ts",
     "x402:doctor": "node --experimental-strip-types scripts/x402-doctor.ts",
+    "x402:conformance": "node --experimental-strip-types scripts/run-x402-conformance-corpus.ts",
     "audit:x402-trust": "node --experimental-strip-types scripts/run-x402-trust-audit.ts",
     "watch:x402": "node --experimental-strip-types scripts/run-x402-endpoint-watch.ts",
     "canary:x402": "node --experimental-strip-types scripts/run-production-x402-canary.ts",
