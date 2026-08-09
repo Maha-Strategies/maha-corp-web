@@ -21,6 +21,7 @@ export const CONTEXT_COMPILER_DESCRIPTION = 'Compress long documents and RAG inp
   + 'Cost is net-positive above N = fee / (r x p) input tokens, where r is the reduction achieved on your payload and p your model input price per token: '
   + 'about 630 tokens for retrieval-shaped payloads at $2.50/M, about 2,030 for long agent traces. '
   + 'Selection is extractive and budget-bound, so a pack can omit evidence; check includedPassages before relying on it. '
+  + 'Ranking works across Latin, Cyrillic, Greek, Arabic and CJK scripts; CJK is indexed as character bigrams rather than segmented words, so ranking there is coarser. '
   + 'Not suitable for tabular or heavily-structured payloads, where per-passage framing can exceed the reduction.'
 const SHA256_PATTERN = '^sha256:[a-f0-9]{64}$'
 const SOURCE_ID_PATTERN = '^[A-Za-z0-9][A-Za-z0-9._:-]{0,79}$'

@@ -56,7 +56,13 @@ routing production volume.
   needed. Inspect `includedPassages` rather than assuming completeness.
 - Token counts are model-neutral estimates, not your provider's tokenizer.
   Use them for ratios; use your own count for billing.
-- Payload ceiling is 525 KB on the standard tier and 1.2 MB on enterprise.
+- Payload ceiling is 450 KB on the standard tier and 1.05 MB on enterprise, set
+  by a p95 compute budget of 50ms and 100ms respectively.
+- Ranking works across Latin, Cyrillic, Greek, Arabic and CJK scripts. CJK is
+  indexed as overlapping character bigrams rather than segmented words, so
+  ranking there is coarser than for space-separated languages. Per-language
+  retention has been checked on one document per language, not measured as a
+  rate: treat multilingual behaviour as working rather than as quantified.
 - Nothing is retained. The response states `sourceTextStored: false`.
 
 ## Execution
