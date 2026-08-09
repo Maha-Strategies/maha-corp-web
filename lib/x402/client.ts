@@ -250,8 +250,12 @@ export type PaidFetchOptions = {
   address: string | undefined
   /** The chain the wallet is currently on, which the requirement must match. */
   chainId: number | undefined
-  /** Called once terms are known and before the wallet is prompted. */
-  onPaymentRequired?: (requirement: PaymentRequirement) => void
+  /** Called once terms and the fresh authorization nonce are known, before the
+   * wallet is prompted. It may perform an asynchronous policy-ledger reserve. */
+  onPaymentRequired?: (
+    requirement: PaymentRequirement,
+    context: { challenge: PaymentChallenge; authorization: TransferAuthorization },
+  ) => void | Promise<void>
   /** Called with the settlement receipt when the retry is served. */
   onSettled?: (receipt: { success: boolean; transaction?: string }) => void
   fetchImpl?: typeof fetch
@@ -298,9 +302,8 @@ export function createPaidFetch(options: PaidFetchOptions) {
       )
     }
 
-    options.onPaymentRequired?.(requirement)
-
     const typedData = buildTypedData(requirement, options.address)
+    await options.onPaymentRequired?.(requirement, { challenge, authorization: typedData.message })
     let signature: string
     try {
       signature = await options.signTypedData(typedData)

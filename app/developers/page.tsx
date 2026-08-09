@@ -99,6 +99,13 @@ const integrations = [
     action: 'Inspect public conformance',
     external: false,
   },
+  {
+    title: 'x402 Buyer Policy',
+    body: 'Open pre-signing budgets, allowlists, approvals, replay controls, and settlement verification for autonomous buyers.',
+    href: '/x402-buyer-policy',
+    action: 'Apply buyer payment controls',
+    external: false,
+  },
 ] as const
 
 export default function DevelopersPage() {

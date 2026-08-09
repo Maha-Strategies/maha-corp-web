@@ -7,6 +7,7 @@ const developerLinks = [
   { href: '/context-compiler', label: 'Context Compiler' },
   { href: '/context-compiler/playground', label: 'Try Context Compiler' },
   { href: '/x402-observatory', label: 'x402 Conformance Observatory' },
+  { href: '/x402-buyer-policy', label: 'x402 Buyer Policy' },
 ] as const
 
 const companyLinks = [

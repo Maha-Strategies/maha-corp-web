@@ -1,4 +1,9 @@
 import type { PaymentRequirement } from './client.ts'
+import {
+  BUYER_POLICY_SCHEMA_VERSION,
+  evaluatePaymentIntent,
+  type BuyerPolicy,
+} from './buyer-policy.ts'
 
 export const BAZAAR_SEARCH_URL = 'https://api.cdp.coinbase.com/platform/v2/x402/discovery/search'
 export const BAZAAR_MERCHANT_URL = 'https://api.cdp.coinbase.com/platform/v2/x402/discovery/merchant'
@@ -8,6 +13,23 @@ export const BASE_NETWORK = 'eip155:8453'
 export const BASE_USDC = '0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913'
 export const EXPECTED_PRICE_BASE_UNITS = BigInt(1_000)
 export const SPEND_CEILING_BASE_UNITS = BigInt(5_000)
+
+export const MAHA_BUYER_POLICY: BuyerPolicy = {
+  schemaVersion: BUYER_POLICY_SCHEMA_VERSION,
+  policyId: 'maha-bazaar-recipe-policy',
+  policyVersion: '2026-08-09',
+  approvedSchemes: ['exact'],
+  approvedResources: [MAHA_CONTEXT_RESOURCE],
+  approvedPayees: [MAHA_PAYEE],
+  assetRules: [{
+    network: BASE_NETWORK,
+    asset: BASE_USDC,
+    maxAmountPerCall: SPEND_CEILING_BASE_UNITS.toString(),
+    maxAmountPerTask: SPEND_CEILING_BASE_UNITS.toString(),
+  }],
+  requireValidatedSchema: true,
+  settlement: { requirePaymentResponse: true, requireOnchainConfirmation: true },
+}
 
 export type BazaarResource = {
   resource?: string
@@ -90,16 +112,16 @@ export function inspectBazaarContract(resource: BazaarResource): BazaarContract 
  * catalog terms and the live 402 challenge must pass this policy independently.
  */
 export function assertSpendPolicy(requirement: PaymentRequirement): void {
-  let amount: bigint
-  try { amount = BigInt(requirement.amount) } catch { throw new Error('The payment amount is not an integer.') }
-
-  if (requirement.scheme !== 'exact') throw new Error(`Refusing payment scheme ${requirement.scheme}.`)
-  if (requirement.network !== BASE_NETWORK) throw new Error(`Refusing payment network ${requirement.network}.`)
-  if (requirement.asset.toLowerCase() !== BASE_USDC.toLowerCase()) throw new Error(`Refusing payment asset ${requirement.asset}.`)
-  if (requirement.payTo.toLowerCase() !== MAHA_PAYEE) throw new Error(`Refusing unexpected payee ${requirement.payTo}.`)
-  if (amount <= BigInt(0) || amount > SPEND_CEILING_BASE_UNITS) {
-    throw new Error(`Refusing ${amount} USDC base units; the hard ceiling is ${SPEND_CEILING_BASE_UNITS}.`)
-  }
+  const decision = evaluatePaymentIntent(MAHA_BUYER_POLICY, {
+    taskId: 'catalog-inspection-0001',
+    authorizationId: 'catalog-inspection-authorization-0001',
+    requestedResource: MAHA_CONTEXT_RESOURCE,
+    declaredResource: MAHA_CONTEXT_RESOURCE,
+    requirement,
+    schema: { status: 'valid' },
+  })
+  if (!decision.allowed) throw new Error(`${decision.code}: ${decision.message}`)
+  const amount = BigInt(requirement.amount)
   if (amount !== EXPECTED_PRICE_BASE_UNITS) {
     throw new Error(`Refusing changed Maha price ${amount}; this recipe expects exactly ${EXPECTED_PRICE_BASE_UNITS} base units.`)
   }

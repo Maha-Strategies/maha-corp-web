@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://www.mahastrategies.com/schemas/x402-buyer-policy-1.0.0.json",
+  "title": "x402 Buyer Policy",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "policyId", "policyVersion", "approvedSchemes", "approvedResources", "approvedPayees", "assetRules", "requireValidatedSchema", "settlement"],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "policyId": { "type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{7,199}$" },
+    "policyVersion": { "type": "string", "minLength": 1, "maxLength": 100 },
+    "approvedSchemes": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "type": "string", "minLength": 1 } },
+    "approvedResources": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "type": "string", "format": "uri", "pattern": "^https://" } },
+    "approvedPayees": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "type": "string", "minLength": 1 } },
+    "assetRules": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["network", "asset", "maxAmountPerCall", "maxAmountPerTask"],
+        "properties": {
+          "network": { "type": "string", "pattern": "^[a-z0-9]+:[A-Za-z0-9][A-Za-z0-9._-]{0,127}$" },
+          "asset": { "type": "string", "minLength": 1 },
+          "maxAmountPerCall": { "type": "string", "pattern": "^[1-9][0-9]*$" },
+          "maxAmountPerTask": { "type": "string", "pattern": "^[1-9][0-9]*$" },
+          "humanApprovalAbove": { "type": "string", "pattern": "^(0|[1-9][0-9]*)$" }
+        }
+      }
+    },
+    "requireValidatedSchema": { "type": "boolean" },
+    "settlement": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["requirePaymentResponse", "requireOnchainConfirmation"],
+      "properties": {
+        "requirePaymentResponse": { "type": "boolean" },
+        "requireOnchainConfirmation": { "type": "boolean" }
+      }
+    }
+  }
+}

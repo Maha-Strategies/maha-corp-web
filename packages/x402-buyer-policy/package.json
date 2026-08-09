@@ -1,0 +1,42 @@
+{
+  "name": "@mahastrategies/x402-buyer-policy",
+  "version": "0.1.0",
+  "description": "Vendor-neutral pre-signing budgets, allowlists, approvals, replay controls, and settlement verification for x402 buyers.",
+  "keywords": [
+    "x402",
+    "agents",
+    "payments",
+    "policy",
+    "viem",
+    "mcp"
+  ],
+  "license": "Apache-2.0",
+  "type": "module",
+  "sideEffects": false,
+  "files": [
+    "dist",
+    "INTEGRATIONS.md",
+    "policy.schema.json"
+  ],
+  "main": "./dist/buyer-policy.js",
+  "types": "./dist/buyer-policy.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/buyer-policy.d.ts",
+      "import": "./dist/buyer-policy.js",
+      "default": "./dist/buyer-policy.js"
+    },
+    "./policy.schema.json": "./policy.schema.json"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "tsc --project tsconfig.json",
+    "pack:dry-run": "npm pack --dry-run",
+    "prepack": "npm run build"
+  }
+}

@@ -89,6 +89,7 @@ from older documentation. See [`AGENTS.md`](./AGENTS.md).
 | [`docs/x402-declaration-digest-proposal.md`](./docs/x402-declaration-digest-proposal.md) | Draft catalog-attested discovery declaration digest and test vectors |
 | [`docs/x402-doctor.md`](./docs/x402-doctor.md) | Live resource, crawler, Bazaar drift, and bounded-settlement diagnostics |
 | [`docs/x402-observatory.md`](./docs/x402-observatory.md) | Public protocol-correctness observations, inclusion policy, and scheduled operation |
+| [`docs/x402-buyer-policy.md`](./docs/x402-buyer-policy.md) | Vendor-neutral pre-signing budgets, approvals, replay controls, and settlement verification |
 | [`SECURITY.md`](./SECURITY.md) | Vulnerability reporting and the platform's standing security assumptions |
 
 ## Outbound Market Discovery Matrix
