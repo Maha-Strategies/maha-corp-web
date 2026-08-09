@@ -10,6 +10,7 @@ export function EvidenceGuide({
   summary,
   published = '2026-08-08',
   about,
+  citations = [],
   backHref,
   backLabel,
   children,
@@ -20,13 +21,13 @@ export function EvidenceGuide({
   summary: string
   published?: string
   about: string[]
+  citations?: Array<{ name: string; url: string; datePublished: string; authors: string[] }>
   backHref: string
   backLabel: string
   children: ReactNode
 }) {
   const url = `${SITE_URL}${path}`
-  const jsonLd = {
-    '@context': 'https://schema.org',
+  const article = {
     '@type': 'TechArticle',
     '@id': `${url}#article`,
     headline: title,
@@ -39,7 +40,22 @@ export function EvidenceGuide({
     author: { '@id': `${SITE_URL}/about#mayone-maha-rajan` },
     publisher: { '@id': `${SITE_URL}/#organization` },
     about,
+    citation: citations.map((citation) => ({ '@id': `${citation.url}#scholarly-article` })),
   }
+  const scholarlyArticles = citations.map((citation) => ({
+    '@type': 'ScholarlyArticle',
+    '@id': `${citation.url}#scholarly-article`,
+    headline: citation.name,
+    url: citation.url,
+    datePublished: citation.datePublished,
+    author: citation.authors.map((name) => ({ '@type': 'Person', name })),
+    identifier: citation.url.includes('arxiv.org/abs/') ? {
+      '@type': 'PropertyValue',
+      propertyID: 'arXiv',
+      value: citation.url.split('/').pop(),
+    } : undefined,
+  }))
+  const jsonLd = { '@context': 'https://schema.org', '@graph': [article, ...scholarlyArticles] }
 
   return <main className="min-h-screen bg-[#0a0a0c] px-6 py-20 text-zinc-300 sm:py-28">
     <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, '\\u003c') }} />

@@ -1,6 +1,27 @@
 @plugin "@tailwindcss/typography";
 @import "tailwindcss";
 
+.navigator-label {
+  display: block;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.625rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgb(161 161 170);
+}
+
+.navigator-input {
+  width: 100%;
+  border: 1px solid rgb(63 63 70);
+  background: #000;
+  padding: 0.75rem;
+  color: #fff;
+  font-size: 0.875rem;
+  outline: none;
+}
+
+.navigator-input:focus { border-color: rgb(103 232 249); }
+
 :root {
   --background: #ffffff;
   --foreground: #171717;

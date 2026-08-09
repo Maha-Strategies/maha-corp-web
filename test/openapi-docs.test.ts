@@ -52,6 +52,7 @@ const PRIVATE_ROUTES = new Set([
   '/api/admin/content-publications',
   '/api/admin/content-publication-amendments',
   '/api/admin/inbound-operations',
+  '/api/admin/navigator',
   '/api/admin/market-opportunities',
   '/api/admin/outbound',
   '/api/admin/sales-pipeline',
@@ -73,6 +74,9 @@ const PRIVATE_ROUTES = new Set([
   // Optimization engines remain private until real solver implementations,
   // hardware benchmarks, and SLA evidence have passed the promotion gate.
   '/api/inbound-submissions',
+  // Consent-based browser assessment backend. It is not a customer API
+  // integration contract and exposes no autonomous outreach capability.
+  '/api/navigator/assessments',
   '/api/internal/ops-alerts',
   '/api/integrations/base44/openapi',
   '/api/cron/inbound-digest',

@@ -6,7 +6,7 @@ function remoteIp(request: Request): string | undefined {
   return parsed && parsed.length <= 64 ? parsed : undefined
 }
 
-export async function verifyContactTurnstile(token: unknown, request: Request): Promise<{ accepted: boolean; configured: boolean }> {
+export async function verifyContactTurnstile(token: unknown, request: Request, expectedAction = 'contact_inquiry'): Promise<{ accepted: boolean; configured: boolean }> {
   const secret = process.env.TURNSTILE_SECRET_KEY
   if (!secret) return { accepted: true, configured: false }
   if (typeof token !== 'string' || token.length < 20 || token.length > 2_048) return { accepted: false, configured: true }
@@ -21,7 +21,7 @@ export async function verifyContactTurnstile(token: unknown, request: Request): 
     const result = await response.json() as SiteverifyResponse
     const expectedHostname = process.env.TURNSTILE_EXPECTED_HOSTNAME
     const hostnameMatches = !expectedHostname || result.hostname === expectedHostname
-    return { accepted: response.ok && result.success === true && result.action === 'contact_inquiry' && hostnameMatches, configured: true }
+    return { accepted: response.ok && result.success === true && result.action === expectedAction && hostnameMatches, configured: true }
   } catch {
     return { accepted: false, configured: true }
   }

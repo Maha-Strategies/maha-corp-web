@@ -12,6 +12,7 @@ const developerLinks = [
 
 const companyLinks = [
   { href: '/tools', label: 'Tools & API' },
+  { href: '/navigator', label: 'Maha Navigator' },
   { href: '/mps/preflight', label: 'MPS Preflight' },
   { href: '/about', label: 'About Maha' },
   { href: '/contact', label: 'Contact' },
