@@ -4,6 +4,7 @@ import { API_CORS_HEADERS, apiAccessStatus, apiProxyGate, x402ChallengeHeaders }
 import { maybeCreateTenantAutoTopup } from '@/lib/api-credit-billing'
 import { maybeSendLowCreditAlert } from '@/lib/observability/alerts'
 import { X402_HEADERS, paidRequestHeaders, resolveX402 } from '@/lib/x402/gateway'
+import { metersAtProxy, recordContextCompilerUsage } from '@/lib/context-compiler-metering'
 
 function json(body: unknown, status: number, headers: HeadersInit = {}) {
   return NextResponse.json(body, { status, headers: { ...API_CORS_HEADERS, ...headers } })
@@ -25,6 +26,16 @@ export async function proxy(request: NextRequest, event: NextFetchEvent) {
   if (!key) {
     const x402StartedAt = performance.now()
     const outcome = await resolveX402(request)
+
+    // A challenge or refusal is answered here and never reaches the route, so
+    // the route's metering wrapper cannot see it. Recorded through waitUntil
+    // so a slow or failing meter can never delay the 402 an agent is waiting
+    // on, and never changes what it receives.
+    if (metersAtProxy(pathname, outcome.kind)) {
+      const status = outcome.kind === 'refused' ? outcome.status : 402
+      event.waitUntil(recordContextCompilerUsage({ mode: 'anonymous', credentialId: '', status }))
+    }
+
     if (outcome.kind === 'challenge') {
       return json(outcome.body, outcome.status, x402ChallengeHeaders(outcome.header, performance.now() - x402StartedAt))
     }
