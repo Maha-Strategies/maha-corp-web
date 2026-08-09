@@ -63,6 +63,6 @@ failed signing attempt. A confirmed settlement must never be released.
 
 ## Publishing
 
-The package is prepared as `@mahastrategies/x402-buyer-policy@0.1.0`. Run its
-build and dry-run pack checks before publishing. Publishing to npm is a separate
-operator action because it creates an external immutable release.
+The current package is `@mahastrategies/x402-buyer-policy@0.1.1`. Version
+`0.1.0` was the initial release; `0.1.1` is tagged `latest`. Run the build and
+dry-run pack checks before every future immutable npm release.

@@ -2,6 +2,10 @@
 
 # dependencies
 /node_modules
+# Workspace packages install locally during pack/publish checks; those trees and
+# their lockfiles are build artifacts, not sources.
+/packages/*/node_modules
+/packages/*/package-lock.json
 /.pnp
 .pnp.*
 .yarn/*
