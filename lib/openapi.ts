@@ -88,6 +88,7 @@ export const openApiDocument = {
   servers: [{ url: 'https://www.mahastrategies.com' }],
   tags: [
     { name: 'Agentic Commerce', description: 'Read-only offer and transaction-policy discovery for agents.' },
+    { name: 'x402 Conformance', description: 'Factual protocol and Bazaar discovery observations without trust, security, or uptime scoring.' },
     { name: 'MPS Audit', description: 'Prepaid claim-level provenance audits.' },
     { name: 'Checkout', description: 'Self-service credit purchase.' },
     { name: 'Webhooks', description: 'Stripe payment confirmation (called by Stripe, documented for transparency).' },
@@ -405,6 +406,38 @@ export const openApiDocument = {
           '503': errorResponse('Upstream circuit breaker open or server suspended.'),
           '504': errorResponse('Upstream MCP timeout.'),
           '500': errorResponse('Internal MCP Gateway Processing Failure.'),
+        },
+      },
+    },
+    '/api/x402-observatory': {
+      get: {
+        tags: ['x402 Conformance'],
+        operationId: 'getX402ConformanceObservatory',
+        summary: 'Read the latest public x402 protocol and discovery observations',
+        description: 'Returns factual point-in-time checks from the open x402 conformance observatory. A pass is not a security, quality, uptime, reputation, or trust endorsement.',
+        security: [],
+        responses: {
+          '200': {
+            description: 'Latest observation for each explicitly allowlisted public resource.',
+            content: { 'application/json': { schema: {
+              type: 'object', required: ['schemaVersion', 'generatedAt', 'scope', 'resources'],
+              properties: {
+                schemaVersion: { type: 'string', const: '1.0.0' },
+                generatedAt: { type: 'string', format: 'date-time' },
+                scope: { type: 'string' },
+                resources: { type: 'array', items: {
+                  type: 'object', required: ['id', 'name', 'url', 'operator', 'boundedSettlementEnabled', 'latest'],
+                  properties: {
+                    id: { type: 'string' }, name: { type: 'string' }, url: { type: 'string', format: 'uri' }, operator: { type: 'string' },
+                    boundedSettlementEnabled: { type: 'boolean' },
+                    latest: { type: ['object', 'null'], description: 'Latest append-only observation. Check states are pass, fail, unknown, or not_applicable.' },
+                    lastSuccessfulBoundedSettlementAt: { type: ['string', 'null'], format: 'date-time' },
+                    lastSuccessfulBoundedSettlementTransaction: { type: ['string', 'null'] },
+                  },
+                } },
+              },
+            } } },
+          },
         },
       },
     },

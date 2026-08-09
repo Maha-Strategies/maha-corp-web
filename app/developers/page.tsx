@@ -92,6 +92,13 @@ const integrations = [
     action: 'Read the MCP bridge guide',
     external: false,
   },
+  {
+    title: 'x402 Observatory',
+    body: 'Open factual checks for x402 v2 protocol and Bazaar discovery correctness, without subjective trust scoring.',
+    href: '/x402-observatory',
+    action: 'Inspect public conformance',
+    external: false,
+  },
 ] as const
 
 export default function DevelopersPage() {

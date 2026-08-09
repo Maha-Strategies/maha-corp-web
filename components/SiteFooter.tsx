@@ -6,6 +6,7 @@ const developerLinks = [
   { href: '/enterprise-mcp-gateway', label: 'Enterprise MCP Gateway' },
   { href: '/context-compiler', label: 'Context Compiler' },
   { href: '/context-compiler/playground', label: 'Try Context Compiler' },
+  { href: '/x402-observatory', label: 'x402 Conformance Observatory' },
 ] as const
 
 const companyLinks = [
