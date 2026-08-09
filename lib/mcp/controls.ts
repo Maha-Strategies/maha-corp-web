@@ -1,8 +1,8 @@
 import { Redis } from '@upstash/redis'
-import { scopedRedisKey } from '../redis-namespace'
-import type { MCPSlaPolicy } from './types'
-import { DEFAULT_MCP_SLA_POLICY, parseMcpSlaPolicy } from './validation'
-import { traceRedisQuery } from '../observability/telemetry'
+import { scopedRedisKey } from '../redis-namespace.ts'
+import type { MCPSlaPolicy } from './types.ts'
+import { DEFAULT_MCP_SLA_POLICY, parseMcpSlaPolicy } from './validation.ts'
+import { traceRedisQuery } from '../observability/telemetry.ts'
 
 const redis = Redis.fromEnv()
 
