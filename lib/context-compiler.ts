@@ -364,7 +364,7 @@ export function compileContextPack(input: ContextPackRequest) {
     task: input.task,
     tokenBudget: input.tokenBudget,
     context: markdown,
-    metrics: { originalBytes: Buffer.byteLength(originalText, 'utf8'), compiledBytes: Buffer.byteLength(markdown, 'utf8'), originalEstimatedTokens, compiledEstimatedTokens, estimatedReductionPercent: reduction, sourceCount: input.documents.length, sourceCoveragePercent: Number(((sourceManifest.filter((source) => source.includedPassageIds.length > 0).length / input.documents.length) * 100).toFixed(1)), duplicatePassagesRemoved: allPassages.length - unique.length },
+    metrics: { originalBytes: Buffer.byteLength(originalText, 'utf8'), compiledBytes: Buffer.byteLength(markdown, 'utf8'), originalEstimatedTokens, compiledEstimatedTokens, tokensSaved: Math.max(0, originalEstimatedTokens - compiledEstimatedTokens), estimatedReductionPercent: reduction, sourceCount: input.documents.length, sourceCoveragePercent: Number(((sourceManifest.filter((source) => source.includedPassageIds.length > 0).length / input.documents.length) * 100).toFixed(1)), duplicatePassagesRemoved: allPassages.length - unique.length },
     includedPassages: selected.map((passage) => ({ sourceId: passage.sourceId, passageId: `${passage.sourceId}:${passage.index}`, passageHash: passage.hash, text: passage.text })),
     sources: sourceManifest,
     warnings,

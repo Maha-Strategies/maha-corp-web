@@ -15,42 +15,97 @@ metadata:
 
 # Maha Context Compiler
 
-Pre-inference context compression service built on x402 and Base Mainnet. Compresses prompt payloads into optimized BPE token streams while retaining source fidelity.
+Pre-inference context compression. Ranks and deduplicates source passages into a
+token-budgeted context pack with source-linked provenance, so a long payload can
+be reduced before it reaches an expensive model. Selection is extractive: text is
+chosen verbatim, never rewritten or summarised.
 
-## Trigger Conditions
+## When this is worth calling
 
-Activate this skill whenever:
+Compression is net-positive above a breakeven input size, and that size depends
+on two things this service does not know: your model's input price, and how much
+reduction your payload shape actually achieves.
 
-- A document or multi-file context payload exceeds 10,000 tokens.
-- Minimizing downstream inference costs for expensive model calls (e.g., GPT-4o, Claude 3.5 Sonnet) is required.
+```
+N_breakeven  =  fee / (r x p)
 
-## Execution Procedure
+  fee = 0.001 USD per call
+  r   = reduction achieved on your payload, as a fraction
+  p   = your model's input price per token
+```
 
-1. **Inspect & Pay (x402 Protocol)**
-  Prepare an EIP-3009 authorization or x402 payment header on Base Mainnet paying 1,000 atomic USDC ($0.001) to `0xec84c1cd6602bbe387bc8e6f0d3c062f2762de28`.
-2. **Call Compression Endpoint**
-  Submit an HTTP `POST` to `https://www.mahastrategies.com/api/v1/compress`:
-   **Request Body:**
+Measured against this repository's benchmark harness, at $2.50 per million input
+tokens:
 
-Response Body:  
+| Payload shape        | Measured reduction | Breakeven |
+|----------------------|--------------------|-----------|
+| RAG retrieval        | +63.5%             | ~630 tokens |
+| Long agent trace     | +19.7%             | ~2,030 tokens |
+| Scraped web page     | -19.3%             | never worthwhile |
+| Tabular / SQL output | -58.0%             | never worthwhile |
 
+Reduction is not a fixed property of the service. It is bounded by the
+`tokenBudget` you request, and on payloads made of many short passages the
+per-passage framing can exceed what is removed, returning a pack larger than the
+input. Call `estimatedReductionPercent` on a sample of your own traffic before
+routing production volume.
+
+## Limits worth knowing before you route
+
+- Selection is extractive and budget-bound, so a pack can omit evidence the task
+  needed. Inspect `includedPassages` rather than assuming completeness.
+- Token counts are model-neutral estimates, not your provider's tokenizer.
+  Use them for ratios; use your own count for billing.
+- Payload ceiling is 525 KB on the standard tier and 1.2 MB on enterprise.
+- Nothing is retained. The response states `sourceTextStored: false`.
+
+## Execution
+
+**1. Pay (x402 on Base Mainnet)**
+
+Prepare an EIP-3009 authorization paying 1,000 atomic USDC ($0.001) to the
+`payTo` address in the live `PAYMENT-REQUIRED` challenge. Read the address from
+the challenge rather than hard-coding it; it is authoritative and can change.
+
+**2. Call the endpoint**
+
+`POST https://www.mahastrategies.com/api/v1/compress`
 
 ```json
 {
-  "compressed_text": "<OPTIMIZED_PAYLOAD>",
-  "original_tokens": 22340,
-  "compressed_tokens": 5768,
-  "reduction_pct": 74.18
+  "clientRequestId": "req_example_0001",
+  "task": "The question the pack must answer. Passages are ranked against this.",
+  "tokenBudget": 2048,
+  "documents": [{ "id": "doc-1", "title": "Optional", "text": "..." }],
+  "provenance": "compact",
+  "scoring": "bm25",
+  "budgetMode": "guaranteed"
 }
-
 ```
 
-1. **Pass to LLM Pipeline**  
-Substitute `compressed_text` in place of raw text before invoking downstream AI model inference.
+**3. Read the response**
 
+The compiled pack is `context`. Token figures live under `metrics`:
+
+```json
+{
+  "packId": "ctxpack_...",
+  "context": "# Context Pack\n\nTask: ...",
+  "metrics": {
+    "originalEstimatedTokens": 22340,
+    "compiledEstimatedTokens": 5768,
+    "tokensSaved": 16572,
+    "estimatedReductionPercent": 74.2
+  },
+  "includedPassages": [{ "sourceId": "doc-1", "passageId": "doc-1:3", "text": "..." }],
+  "sourceTextStored": false
+}
 ```
 
-Would you like to draft a TypeScript middleware wrapper to test x402 payment authorization against this endpoint?
+There is no `net_usd_savings` field, and there will not be one: the service does
+not know which model you are calling or what you pay for it. Multiply
+`tokensSaved` by your own input price.
 
-```
+**4. Substitute**
 
+Use `context` in place of the raw payload for the downstream call.

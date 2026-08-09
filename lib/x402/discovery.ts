@@ -10,7 +10,18 @@ import type { ResourceInfo } from './protocol.ts'
 
 const SERVICE_NAME = 'Maha Context Compiler'
 const ICON_URL = 'https://www.mahastrategies.com/icon.png'
-export const CONTEXT_COMPILER_DESCRIPTION = 'Compress long documents and RAG inputs into token-budgeted, deduplicated context packs with source-linked provenance. Call when prompt context exceeds LLM token budgets to minimize inference cost.'
+// Written to be verifiable rather than persuasive. A router selects on fit,
+// and stating where the tool does not fit is what makes the rest credible --
+// an agent that tries this on a SQL dump and gets a larger payload back will
+// not come again. Breakeven is given as a formula because it depends on the
+// caller's model price and on the reduction their payload shape actually
+// achieves, neither of which this service knows.
+export const CONTEXT_COMPILER_DESCRIPTION = 'Compress long documents and RAG inputs into token-budgeted, deduplicated context packs with source-linked provenance. '
+  + 'Returns measured original and compiled token counts so the caller can verify the saving against its own model price. '
+  + 'Cost is net-positive above N = fee / (r x p) input tokens, where r is the reduction achieved on your payload and p your model input price per token: '
+  + 'about 630 tokens for retrieval-shaped payloads at $2.50/M, about 2,030 for long agent traces. '
+  + 'Selection is extractive and budget-bound, so a pack can omit evidence; check includedPassages before relying on it. '
+  + 'Not suitable for tabular or heavily-structured payloads, where per-passage framing can exceed the reduction.'
 const SHA256_PATTERN = '^sha256:[a-f0-9]{64}$'
 const SOURCE_ID_PATTERN = '^[A-Za-z0-9][A-Za-z0-9._:-]{0,79}$'
 const PASSAGE_ID_PATTERN = '^[A-Za-z0-9][A-Za-z0-9._:-]{0,79}:[1-9][0-9]*$'
@@ -39,6 +50,7 @@ const DISCOVERY_OUTPUT = {
     compiledBytes: 461,
     originalEstimatedTokens: 97,
     compiledEstimatedTokens: 83,
+    tokensSaved: 14,
     estimatedReductionPercent: 14.4,
     sourceCount: 2,
     sourceCoveragePercent: 100,
@@ -155,12 +167,13 @@ export function discoveryExtensionsFor(resource: PricedResource): Record<string,
               compiledBytes: { type: 'integer', minimum: 0, description: 'Output UTF-8 bytes.' },
               originalEstimatedTokens: { type: 'integer', minimum: 0, description: 'Source token estimate.' },
               compiledEstimatedTokens: { type: 'integer', minimum: 0, description: 'Output token estimate.' },
+              tokensSaved: { type: 'integer', minimum: 0, description: 'Estimated input tokens avoided. Multiply by your own model input price to obtain a cost saving; this service does not know your model and does not compute a dollar figure.' },
               estimatedReductionPercent: { type: 'number', minimum: 0, maximum: 100, description: 'Estimated token reduction; not provider billing.' },
               sourceCount: { type: 'integer', minimum: 1, maximum: 8, description: 'Input source count.' },
               sourceCoveragePercent: { type: 'number', minimum: 0, maximum: 100, description: 'Sources with selected passages; not evidence recall.' },
               duplicatePassagesRemoved: { type: 'integer', minimum: 0, description: 'Exact duplicates removed.' },
             },
-            required: ['originalBytes', 'compiledBytes', 'originalEstimatedTokens', 'compiledEstimatedTokens', 'estimatedReductionPercent', 'sourceCount', 'sourceCoveragePercent', 'duplicatePassagesRemoved'],
+            required: ['originalBytes', 'compiledBytes', 'originalEstimatedTokens', 'compiledEstimatedTokens', 'tokensSaved', 'estimatedReductionPercent', 'sourceCount', 'sourceCoveragePercent', 'duplicatePassagesRemoved'],
           },
           includedPassages: {
             type: 'array',
