@@ -73,6 +73,17 @@ export type FunnelReport = {
   /** Adjacent-stage cohort ratios. Null where either side is unavailable. */
   ratios: {
     discoveryToCredential: number | null
+    /**
+     * Always null.
+     *
+     * Credentials are counted from `agent_client_credentials` (`cred_*`,
+     * Postgres, scoped to the research-brief offers) and activation from the
+     * `key_*` API keys the proxy injects (Redis). Dividing one by the other
+     * produced a number that looked like a conversion rate and compared two
+     * unrelated populations. It stays null until one identity system covers
+     * both stages; a missing number is recoverable, a confidently wrong one
+     * gets quoted.
+     */
     credentialToActivated: number | null
     activatedToRepeated: number | null
     /**
@@ -144,6 +155,12 @@ export async function buildAcquisitionFunnel(ledger: Ledger | null, window: Funn
     ? unavailable('discovery_meter_unreadable')
     : { available: true, count: discoveryRows.reduce((sum, row) => sum + Number(row.request_count ?? 0), 0) }
 
+  // Counted, but not comparable to activation. `agent_client_credentials`
+  // issues `cred_<32hex>` identifiers scoped to the research-brief offers and
+  // lives in Postgres; the credential that appears in Context Compiler usage is
+  // the `key_<32hex>` API key the proxy injects, which lives in Redis. They are
+  // separate identity systems, so the count below is the size of one population
+  // and `activated` is the size of another. See ratios.credentialToActivated.
   const credentialsCreated: StageValue = credentialRows === null
     ? unavailable('credential_table_unreadable')
     : { available: true, count: credentialRows.length }
@@ -200,7 +217,7 @@ export async function buildAcquisitionFunnel(ledger: Ledger | null, window: Funn
     stages: { discovery, credentialsCreated, activated, repeated, settlements, paidAutonomous, anonymousSuccess, challenges },
     ratios: {
       discoveryToCredential: ratio(credentialsCreated, discovery),
-      credentialToActivated: ratio(activated, credentialsCreated),
+      credentialToActivated: null,
       activatedToRepeated: ratio(repeated, activated),
       challengeToSettlement: ratio(settlements, challenges),
     },

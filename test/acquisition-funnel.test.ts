@@ -61,7 +61,11 @@ test('activation counts credentials that succeeded, not credentials that were is
   assert.deepEqual(report.stages.credentialsCreated, { available: true, count: 3 })
   // 'c' was issued and never used. That gap is the point of the stage.
   assert.deepEqual(report.stages.activated, { available: true, count: 2 })
-  assert.equal(report.ratios.credentialToActivated, 0.6667)
+  // Both counts are real; the ratio between them is not. Credentials are
+  // `cred_*` rows in Postgres scoped to the research-brief offers, activation
+  // is `key_*` API keys from Redis, and 0.6667 read as a conversion rate
+  // compared two unrelated populations.
+  assert.equal(report.ratios.credentialToActivated, null)
 })
 
 test('a failed call does not count as activation', async () => {
