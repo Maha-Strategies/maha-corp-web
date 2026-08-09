@@ -1,0 +1,107 @@
+name: Production x402 discovery drift
+
+# Catches the failure mode the 2026-08-08 infrastructure review found by hand:
+# the live PAYMENT-REQUIRED declaration and the Coinbase Bazaar listing can
+# disagree, so an autonomous buyer routes on a stale schema, price or
+# description while the endpoint itself is entirely healthy. Nothing else in
+# the platform notices -- the endpoint returns a valid 402, the canary settles,
+# release health is green, and the listing is quietly wrong.
+#
+# x402-doctor already detects it and already exits non-zero under
+# --fail-on-warning. It simply ran only when somebody remembered. This is the
+# schedule.
+#
+# Read-only. No payment is signed, no settlement is made, and no wallet key is
+# available to this workflow -- the drift question is answerable from the
+# public declaration and the public listing alone. Refreshing a stale listing
+# requires a bounded settlement, which stays a deliberate operator action in
+# the separate canary workflow rather than something a cron job does with
+# money.
+
+on:
+  schedule:
+    # Twice daily, offset from the release-health and canary crons so a Bazaar
+    # outage does not read as three separate incidents at once.
+    - cron: '43 5,17 * * *'
+  workflow_dispatch:
+  # Metadata-affecting releases are exactly when drift appears, so the check
+  # also runs after a push that touches the declaration or the discovery layer.
+  push:
+    branches: [main]
+    paths:
+      - 'lib/x402/**'
+      - 'lib/openapi.ts'
+      - 'content/discovery/**'
+      - 'app/api/v1/compress/**'
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: production-x402-discovery-drift
+  cancel-in-progress: true
+
+jobs:
+  drift:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    env:
+      GH_TOKEN: ${{ github.token }}
+      SUBJECT: https://www.mahastrategies.com/api/v1/compress
+      REPORT: ${{ github.workspace }}/x402-doctor.json
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+
+      # --fail-on-warning is the point: stale Bazaar metadata is reported as a
+      # warning rather than an error, because the endpoint is still serving
+      # correctly. For a buyer routing on the listing it is not a warning.
+      - name: Check live declaration against Bazaar
+        id: doctor
+        run: |
+          npm run x402:doctor -- "$SUBJECT" \
+            --method POST \
+            --fail-on-warning \
+            --format json \
+            --output "$REPORT"
+
+      - name: Upload report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: x402-doctor-report
+          path: ${{ env.REPORT }}
+          retention-days: 30
+
+      # An unattended schedule has nobody watching the run list, so a failure
+      # has to leave something a person will actually see. Deduplicated by
+      # title so a persistent drift does not open one issue per run.
+      - name: Open or update a drift issue
+        if: failure()
+        run: |
+          TITLE="x402 discovery drift on ${SUBJECT}"
+          EXISTING=$(gh issue list --state open --search "$TITLE in:title" --json number --jq '.[0].number // empty')
+          BODY=$(printf 'The live PAYMENT-REQUIRED declaration no longer matches the published Bazaar listing.\n\nAutonomous buyers reading the listing may route on a stale schema, price or description while the endpoint itself is healthy.\n\nRun: %s\n\nRemediation is in docs/production-x402-canary.md — a bounded settlement refreshes the listing, and that stays a deliberate operator action.\n' "$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID")
+          if [ -n "$EXISTING" ]; then
+            gh issue comment "$EXISTING" --body "$BODY"
+          else
+            gh issue create --title "$TITLE" --body "$BODY" --label x402 || \
+            gh issue create --title "$TITLE" --body "$BODY"
+          fi
+
+      # Closes itself when the drift clears, so the issue list stays a list of
+      # things that are currently wrong.
+      - name: Close the drift issue when clean
+        if: success()
+        run: |
+          TITLE="x402 discovery drift on ${SUBJECT}"
+          EXISTING=$(gh issue list --state open --search "$TITLE in:title" --json number --jq '.[0].number // empty')
+          if [ -n "$EXISTING" ]; then
+            gh issue comment "$EXISTING" --body "Drift cleared: the live declaration and the Bazaar listing now agree."
+            gh issue close "$EXISTING"
+          fi
