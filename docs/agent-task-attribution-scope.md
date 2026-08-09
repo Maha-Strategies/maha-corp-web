@@ -1,7 +1,9 @@
 # Agent task attribution and chargeback export
 
-**Status:** scoped 9 August 2026. Steps 1–3 implemented and applied to the staging
-database (`maha-corp-staging.`, `wukyzcqxzkbwuledzxlx`); steps 4–5 not started.
+**Status:** scoped and implemented 9 August 2026, steps 1–5. Both migrations are
+applied to the staging database (`maha-corp-staging.`, `wukyzcqxzkbwuledzxlx`)
+and **not** to Production, which requires the reviewed
+`Production database migrations` workflow.
 
 An enterprise platform team running agents cannot currently answer "which
 department spent this." Usage is metered per credential and per day, which
@@ -137,8 +139,18 @@ security review.
    being pure buys. Reproducibility, ordering, RFC 4180 quoting, spreadsheet
    formula neutralisation and content hashing are all checkable without a
    single real row.)*
-4. **Jobs and gateway surfaces.**
-5. **Budgets, read-only.**
+4. **Jobs and gateway surfaces.** *(done. Job spend is recorded at the
+   settlement webhook with `creditsCharged`, not at dispatch with the quote:
+   credits are debited at enqueue and refunded whenever a job does not
+   complete, so a row written at dispatch would put every failed job on an
+   invoice as money the customer got back. Attribution is carried on the job
+   record because the originating request is gone by settlement. Nothing is
+   written when the charge is zero, so the two ways of failing -- the callback
+   and the expiry sweep -- are treated alike. The gateway records one credit
+   per proxied call, which is what the proxy took.)*
+5. **Budgets, read-only.** *(done. `agent_cost_center_budgets` plus
+   `evaluateBudgets`, which takes spend and a budget and returns a label. No
+   request path calls it and no outcome can refuse anything.)*
 
 Steps 1–3 are testable end to end without a customer and produce the CSV that is
 the actual sales artifact.
