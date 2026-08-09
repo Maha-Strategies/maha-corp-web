@@ -42,6 +42,6 @@ const pack = await maha.compress({
   documents: sourceDocuments,
 })
 
-// Ground the next model call in pack.context and preserve passage IDs.`}</CodeBlock><p className="mt-5 text-sm leading-7 text-zinc-500">Keep generated state separate from source evidence. Do not label a summary sentence as a source quotation, and do not infer that retained evidence guarantees a correct downstream answer.</p></section>
+// Ground the next model call in pack.context and preserve passage IDs.`}</CodeBlock><p className="mt-5 text-sm leading-7 text-zinc-500">Keep generated state separate from source evidence. Do not label a summary sentence as a source quotation, and do not infer that retained evidence guarantees a correct downstream answer.</p><Link href="/guides/retrieval-augmented-generation-lewis-2020" className="mt-5 inline-block text-cyan-100 underline underline-offset-4">Read the Lewis et al. (2020) RAG developer summary →</Link></section>
   </EvidenceGuide>
 }

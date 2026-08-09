@@ -58,6 +58,7 @@ export default function Navbar() {
     { name: 'Enterprise MCP Gateway', href: '/enterprise-mcp-gateway' },
     { name: 'Context Compiler', href: '/context-compiler' },
     { name: 'Context Pack Evaluator', href: '/context-pack-evaluator' },
+    { name: 'Maha Navigator', href: '/navigator' },
     { name: 'x402 Conformance Observatory', href: '/x402-observatory' },
     { name: 'x402 Buyer Policy', href: '/x402-buyer-policy' },
     { name: 'Personal Protocols', href: '/start' },

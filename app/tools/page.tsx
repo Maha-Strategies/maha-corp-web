@@ -17,6 +17,14 @@ export const metadata: Metadata = {
 
 const tools = [
   {
+    eyebrow: 'Agent Infrastructure Readiness',
+    title: 'Map one real deployment into a control brief',
+    body: 'Use Maha Navigator to inventory MCP, A2A, x402, context, audit, spending, and reliability controls and receive one bounded pilot recommendation.',
+    href: '/navigator',
+    action: 'Start with Navigator',
+    accent: 'cyan',
+  },
+  {
     eyebrow: 'Tensor-Network Optimization',
     title: 'Solve bounded QUBO and Ising models on an A10G',
     body: 'Run a verified bounded-bond transfer-tensor heuristic with explicit exact and heuristic boundaries, asynchronous settlement, and published latency evidence.',
