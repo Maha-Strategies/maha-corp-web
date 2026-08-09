@@ -36,16 +36,33 @@ export type FunnelStages = {
   activated: StageValue
   /** Credentials successful on two or more distinct days: the repeat signal. */
   repeated: StageValue
-  /** Distinct payers that settled at least one x402 payment. */
+  /**
+   * x402 payments settled. One row per payment, so a single agent calling
+   * fifty times contributes fifty.
+   *
+   * This, not the payer count, is the numerator for conversion: a challenge is
+   * answered per call, so the two sides of that ratio have to be counted in the
+   * same unit.
+   */
+  settlements: StageValue
+  /**
+   * Distinct wallets that settled at least one payment. Kept separate because
+   * it answers a different question -- how many buyers exist, rather than how
+   * much they bought -- and because five settlements from one payer reads very
+   * differently from five payers.
+   */
   paidAutonomous: StageValue
   /** Successful compress calls served without any credential or payment. */
   anonymousSuccess: StageValue
   /**
-   * Unpaid requests answered with a 402 challenge or a payment refusal.
+   * Unpaid requests answered with a 402 challenge.
    *
    * Recorded at the proxy boundary, because that is where they terminate: the
    * route handler never runs for them. This is the discovery denominator, and
    * without it a quiet endpoint and an unattractive one look identical.
+   *
+   * Refusals are excluded. They follow a presented payment, so counting them
+   * here would place post-payment failures in a pre-payment denominator.
    */
   challenges: StageValue
 }
@@ -59,9 +76,12 @@ export type FunnelReport = {
     credentialToActivated: number | null
     activatedToRepeated: number | null
     /**
-     * Settlements per challenge. Low means agents found the endpoint and
-     * declined -- a price or description problem. No challenges at all means
-     * they never found it -- a discovery problem. The two need opposite fixes.
+     * Settlements per challenge, both counted per call.
+     *
+     * Low means agents found the endpoint and declined: a price or description
+     * problem. No challenges at all means they never found it: a discovery
+     * problem. The two need opposite fixes, which is the reason this ratio
+     * exists.
      */
     challengeToSettlement: number | null
   }
@@ -109,7 +129,7 @@ export async function buildAcquisitionFunnel(ledger: Ledger | null, window: Funn
     const none = unavailable('ledger_unavailable')
     return {
       window,
-      stages: { discovery: none, credentialsCreated: none, activated: none, repeated: none, paidAutonomous: none, anonymousSuccess: none, challenges: none },
+      stages: { discovery: none, credentialsCreated: none, activated: none, repeated: none, settlements: none, paidAutonomous: none, anonymousSuccess: none, challenges: none },
       ratios: { discoveryToCredential: null, credentialToActivated: null, activatedToRepeated: null, challengeToSettlement: null },
       interpretation,
     }
@@ -155,9 +175,9 @@ export async function buildAcquisitionFunnel(ledger: Ledger | null, window: Funn
       available: true,
       count: successful.filter((row) => row.access_mode === 'anonymous').reduce((sum, row) => sum + Number(row.request_count ?? 0), 0),
     }
-    // Anonymous non-2xx on this path is definitionally a challenge or refusal:
-    // the proxy answers every unauthenticated request before the route can
-    // produce any other client error.
+    // Anonymous non-2xx on this path is definitionally a challenge: the proxy
+    // answers every unauthenticated request before the route can produce any
+    // other client error, and refusals are no longer written here.
     challenges = {
       available: true,
       count: usageRows
@@ -166,18 +186,23 @@ export async function buildAcquisitionFunnel(ledger: Ledger | null, window: Funn
     }
   }
 
+  // One query, two different questions: how many payments, and how many payers.
+  const settlements: StageValue = paymentRows === null
+    ? unavailable('payment_ledger_unreadable')
+    : { available: true, count: paymentRows.length }
+
   const paidAutonomous: StageValue = paymentRows === null
     ? unavailable('payment_ledger_unreadable')
     : { available: true, count: new Set(paymentRows.map((row) => String(row.payer ?? '').toLowerCase())).size }
 
   return {
     window,
-    stages: { discovery, credentialsCreated, activated, repeated, paidAutonomous, anonymousSuccess, challenges },
+    stages: { discovery, credentialsCreated, activated, repeated, settlements, paidAutonomous, anonymousSuccess, challenges },
     ratios: {
       discoveryToCredential: ratio(credentialsCreated, discovery),
       credentialToActivated: ratio(activated, credentialsCreated),
       activatedToRepeated: ratio(repeated, activated),
-      challengeToSettlement: ratio(paidAutonomous, challenges),
+      challengeToSettlement: ratio(settlements, challenges),
     },
     interpretation,
   }

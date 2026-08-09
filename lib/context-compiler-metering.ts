@@ -14,20 +14,29 @@ export type AccessMode = 'api_key' | 'x402' | 'anonymous'
 export const METERED_PATH = '/api/v1/compress'
 
 /**
- * Outcomes that terminate inside proxy.ts and therefore never reach the route
- * handler's metering wrapper.
+ * The one proxy outcome this meter records: an unpaid probe answered with a
+ * 402 challenge.
  *
- * This was the gap: an unpaid probe is answered with a 402 challenge by the
- * proxy and returns from there, so the route never runs and nothing recorded
- * it. Challenges are the denominator of the only question the funnel exists to
- * answer -- did agents find this and decline, or never find it -- and without
- * them the two are indistinguishable.
+ * A challenge terminates inside proxy.ts and never reaches the route handler,
+ * so the route's metering wrapper cannot see it. It is also the denominator of
+ * the only question the funnel exists to answer -- did agents find this and
+ * decline, or never find it at all -- and without it the two are
+ * indistinguishable.
  *
- * Paid admissions are deliberately excluded: those do reach the route, and
- * metering them here as well would double-count every settlement.
+ * Refusals are excluded, and that is the correction rather than an oversight.
+ * A replayed payment, a resource at capacity or an unreadable ledger all occur
+ * *after* a payment has been presented. Counting them here would fold
+ * post-payment failures into a pre-payment denominator and understate the
+ * conversion rate by exactly the number of things that went wrong later. They
+ * remain visible in logs and alerting, which is where an operational failure
+ * belongs; this table measures acquisition.
+ *
+ * Paid admissions are excluded for the opposite reason: those do reach the
+ * route, which records them, and metering them here as well would double-count
+ * every settlement.
  */
 export function metersAtProxy(pathname: string, kind: string): boolean {
-  return pathname === METERED_PATH && (kind === 'challenge' || kind === 'refused')
+  return pathname === METERED_PATH && kind === 'challenge'
 }
 
 /** Access mode from the headers proxy.ts injects, without trusting the caller. */

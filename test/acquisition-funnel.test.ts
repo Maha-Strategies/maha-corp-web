@@ -100,12 +100,15 @@ test('anonymous and x402 traffic never inflates credential activation', async ()
   assert.deepEqual(report.stages.anonymousSuccess, { available: true, count: 40 })
 })
 
-test('paid autonomous counts distinct payers, case-insensitively', async () => {
+test('settlements and payers are counted separately from the same rows', async () => {
   const report = await buildAcquisitionFunnel(ledgerOf({
     x402_payments: [{ payer: '0xABC' }, { payer: '0xabc' }, { payer: '0xDEF' }],
   }), WINDOW)
-  // One wallet writing its address two ways is one buyer, and the difference
-  // decides whether the endpoint looks like it has traction.
+
+  // Three payments from two wallets. Conflating these is how five calls from a
+  // single canary reads as five customers.
+  assert.deepEqual(report.stages.settlements, { available: true, count: 3 })
+  // One wallet writing its address two ways is one buyer.
   assert.deepEqual(report.stages.paidAutonomous, { available: true, count: 2 })
 })
 
@@ -131,25 +134,25 @@ test('the trailing window is inclusive of today and the requested span', () => {
   assert.equal(window.fromDay, '2026-08-03')
 })
 
-test('challenges count the unpaid probes that terminate at the proxy', async () => {
-  // The gap this closes: an unpaid request is answered with a 402 by proxy.ts
-  // and returns from there, so the route's metering wrapper never runs. Before
-  // this, the discovery denominator was silently zero and the endpoint looked
-  // undiscovered rather than unattractive.
+test('conversion counts settlements per challenge, both per call', async () => {
   const report = await buildAcquisitionFunnel(ledgerOf({
     context_compiler_usage_daily: [
       usage('', '2026-08-02', '4xx', 'anonymous', 90),
-      usage('', '2026-08-03', '5xx', 'anonymous', 10),
+      usage('', '2026-08-03', '4xx', 'anonymous', 10),
       usage('', '2026-08-03', '2xx', 'anonymous', 4),
       usage('a', '2026-08-03', '4xx', 'api_key', 7),
     ],
-    x402_payments: [{ payer: '0xA' }, { payer: '0xB' }],
+    // Four payments from two wallets.
+    x402_payments: [{ payer: '0xA' }, { payer: '0xA' }, { payer: '0xA' }, { payer: '0xB' }],
   }), WINDOW)
 
   // Anonymous non-2xx only: a credentialled 4xx is a broken request, not a probe.
   assert.deepEqual(report.stages.challenges, { available: true, count: 100 })
+  // 4/100. Using distinct payers here would report 0.02 and understate
+  // conversion by half, because a challenge is answered per call and payers
+  // are not.
+  assert.equal(report.ratios.challengeToSettlement, 0.04)
   assert.deepEqual(report.stages.paidAutonomous, { available: true, count: 2 })
-  assert.equal(report.ratios.challengeToSettlement, 0.02)
 })
 
 test('no challenges and no settlements is a discovery problem, not a pricing one', async () => {
@@ -159,6 +162,7 @@ test('no challenges and no settlements is a discovery problem, not a pricing one
   }), WINDOW)
 
   assert.deepEqual(report.stages.challenges, { available: true, count: 0 })
+  assert.deepEqual(report.stages.settlements, { available: true, count: 0 })
   // Null, not 0: dividing settlements by zero challenges would report a
   // conversion failure where the truth is that nobody arrived.
   assert.equal(report.ratios.challengeToSettlement, null)

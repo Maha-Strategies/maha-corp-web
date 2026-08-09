@@ -8,9 +8,16 @@ import { METERED_PATH, accessModeFrom, metersAtProxy, statusClassOf } from '../l
 // predicate that decides what the proxy records, and in particular that it
 // never records what the route already will.
 
-test('outcomes that terminate at the proxy are metered there', () => {
+test('a challenge is metered at the proxy', () => {
   assert.equal(metersAtProxy(METERED_PATH, 'challenge'), true)
-  assert.equal(metersAtProxy(METERED_PATH, 'refused'), true)
+})
+
+test('a refusal is not counted as discovery', () => {
+  // A replay, a full resource or an unreadable ledger all happen after a
+  // payment was presented. Counting them in the acquisition denominator would
+  // fold post-payment failures into a pre-payment number and understate
+  // conversion by exactly the count of things that broke later.
+  assert.equal(metersAtProxy(METERED_PATH, 'refused'), false)
 })
 
 test('a paid admission is never metered at the proxy', () => {

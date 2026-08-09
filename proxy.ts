@@ -27,13 +27,14 @@ export async function proxy(request: NextRequest, event: NextFetchEvent) {
     const x402StartedAt = performance.now()
     const outcome = await resolveX402(request)
 
-    // A challenge or refusal is answered here and never reaches the route, so
-    // the route's metering wrapper cannot see it. Recorded through waitUntil
-    // so a slow or failing meter can never delay the 402 an agent is waiting
-    // on, and never changes what it receives.
+    // A challenge is answered here and never reaches the route, so the route's
+    // metering wrapper cannot see it. Recorded through waitUntil so a slow or
+    // failing meter can never delay the 402 an agent is waiting on, and never
+    // changes what it receives. Refusals are deliberately not recorded: they
+    // follow a presented payment, and belong to reliability rather than to the
+    // acquisition denominator.
     if (metersAtProxy(pathname, outcome.kind)) {
-      const status = outcome.kind === 'refused' ? outcome.status : 402
-      event.waitUntil(recordContextCompilerUsage({ mode: 'anonymous', credentialId: '', status }))
+      event.waitUntil(recordContextCompilerUsage({ mode: 'anonymous', credentialId: '', status: 402 }))
     }
 
     if (outcome.kind === 'challenge') {
