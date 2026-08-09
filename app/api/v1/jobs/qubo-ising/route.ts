@@ -1,4 +1,18 @@
-/** POST a bounded asynchronous GPU QUBO/Ising heuristic job. */
+/**
+ * POST a bounded asynchronous GPU QUBO/Ising heuristic job.
+ *
+ * BETA, and deliberately undiscoverable. The standalone parallel-replica
+ * reference engine has no passing A10G promotion evidence: candidate 9e5be53
+ * failed the reviewed 500 ms warm-p95 gate, and the vectorized successor has
+ * never been benchmarked. Until it is, this route is withheld from OpenAPI,
+ * the agent card, the offers manifest and the LLM manifest, so nothing
+ * advertises an engine whose latency and quality are unmeasured.
+ *
+ * The route still answers for callers who already hold the URL. Withdrawing
+ * discovery is reversible; deleting a live customer route is not, and the
+ * benchmark that decides the question has not run yet. See
+ * docs/qubo-reference-promotion.md.
+ */
 
 import { after } from 'next/server'
 

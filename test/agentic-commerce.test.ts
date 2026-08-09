@@ -75,10 +75,13 @@ test('the served orientation file points agents at the commercial surfaces', () 
   assert.match(llms, /x402 v2 payment of 0\.001 USDC/i)
   assert.match(llms, /api\/v1\/compress/)
   for (const endpoint of [
-    '/api/v1/jobs/qubo-ising',
     '/api/v1/jobs/tensor-network',
     '/api/v1/jobs/geometric-registration',
   ]) assert.ok(llms.includes(endpoint), `${endpoint} must be discoverable`)
+  // The standalone QUBO reference engine is beta and unbenchmarked, so it must
+  // not appear here: /llms.txt is the first file an evaluating agent reads, and
+  // an entry in it is an advertisement. See docs/qubo-reference-promotion.md.
+  assert.equal(llms.includes('/api/v1/jobs/qubo-ising'), false, 'the unpromoted engine must not be discoverable')
   for (const marker of ['tensor-opt', 'geometric-ai', 'holographic-qec', 'qec-compiler', 'landscape-opt']) {
     assert.equal(llms.toLowerCase().includes(marker), false, `${marker} must not be publicly discoverable`)
   }
@@ -127,7 +130,9 @@ test('public agent discovery identifies live capabilities and the scoped Context
   assert.deepEqual(offers.transactionPolicy.autonomousPaymentScope, ['context-compression'])
   const expected = [
     'context-compression',
-    'gpu-qubo-ising',
+    // gpu-qubo-ising is deliberately absent: the standalone reference engine is
+    // beta and undiscoverable until its vectorized candidate has passing A10G
+    // evidence. See docs/qubo-reference-promotion.md.
     'gpu-tensor-network',
     'gpu-geometric-registration',
     'enterprise-mcp-gateway',

@@ -1,0 +1,14 @@
+{
+  "schema": "maha.qubo-promotion-sla.v2",
+  "status": "proposed_pending_operator_signoff",
+  "chosenOn": "2026-08-09",
+  "appliesTo": "standalone parallel-replica QUBO reference engine (parallel-update-simulated-annealing-torch-v1)",
+  "maximumWarmP95Ms": 500,
+  "maximumWorstOptimalityGap": 0.02,
+  "rationale": {
+    "maximumWarmP95Ms": "Unchanged from the budget reviewed before the 2026-08-05 baseline. Re-deriving a latency budget now, with a failing result already on record, would be indistinguishable from moving the goalposts to fit the candidate.",
+    "maximumWorstOptimalityGap": "Worst, not best, relative gap to the exactly-enumerated optimum across all seeded repeats. A caller gets one seed, not the best of seven, so the worst run is the honest promise. 2% is tight enough that an engine passing it is genuinely solving the problem and loose enough not to demand optimality from a labelled heuristic.",
+    "differentiation": "Not a numeric threshold. The gate fails if the already-promoted tensor-network engine was better on quality in every case and faster in every case, because an engine beaten on both axes everywhere has no product reason to exist as a separate endpoint."
+  },
+  "discipline": "This file must be committed before the benchmark runs. The verifier reads its thresholds instead of accepting them on the command line, so the git history shows whether the gate predates the evidence it judges."
+}

@@ -22,13 +22,21 @@ export type McpServerSummary = { serverId: string; name: string; baseUrl: string
 export type McpSlaSettings = { requestsPerMinute: number; timeoutMs: number; failureThreshold: number; cooldownMs: number }
 export type RotatedApiKey = { apiKey: string; apiKeyId: string; balanceCredits: number; tier: 'starter' | 'builder' | 'scale' | 'enterprise'; disclosure: string }
 export type TenantBillingSettings = { tenantId: string; tier: string; subscriptionStatus: string; subscriptionCredits: number; topupCredits: number; autoTopupEnabled: boolean; canEnableAutoTopup: boolean }
+export type IsingProblem = { formulation: 'qubo' | 'ising'; size: number; terms: Array<{ i: number; j: number; value: number }> }
+/**
+ * BETA. The standalone parallel-replica reference engine is unpromoted: no
+ * A10G evidence establishes its warm latency or its solution quality against
+ * the tensor-network engine. Prefer `TensorNetworkRequest`, which is
+ * benchmarked. See docs/qubo-reference-promotion.md.
+ */
 export type QuboIsingRequest = {
   clientRequestId: string
-  problem: { formulation: 'qubo' | 'ising'; size: number; terms: Array<{ i: number; j: number; value: number }> }
+  problem: IsingProblem
   solver?: { maxSweeps?: number; replicas?: number; seed?: number; exactThreshold?: number; initialTemperature?: number; finalTemperature?: number }
   target?: 'gpu'
   timeoutSeconds?: number
 }
+/** BETA, unpromoted. See {@link QuboIsingRequest}. */
 export type QuboIsingJob = {
   jobId: string; kind: 'qubo-ising'; status: 'queued' | 'processing' | 'completed' | 'failed' | 'cancelled'
   clientRequestId: string; inputHash: string; pollUrl?: string; quotedCredits?: number
@@ -40,7 +48,7 @@ export type QuboIsingJob = {
 }
 export type TensorNetworkRequest = {
   clientRequestId: string
-  problem: QuboIsingRequest['problem']
+  problem: IsingProblem
   solver?: { bondDimension?: number; exactThreshold?: number }
   target?: 'gpu'; timeoutSeconds?: number
 }
@@ -98,6 +106,7 @@ export class MahaClient {
   }
 
   public readonly optimization = {
+    /** BETA, unpromoted and undiscoverable. See {@link QuboIsingRequest}. */
     submitQuboIsing: async (payload: QuboIsingRequest): Promise<QuboIsingJob> => this.request('/api/v1/jobs/qubo-ising', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) }),
     submitTensorNetwork: async (payload: TensorNetworkRequest): Promise<TensorNetworkJob> => this.request('/api/v1/jobs/tensor-network', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) }),
     submitGeometricRegistration: async (payload: GeometricRegistrationRequest): Promise<GeometricRegistrationJob> => this.request('/api/v1/jobs/geometric-registration', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) }),
@@ -105,6 +114,7 @@ export class MahaClient {
       if (!/^job_[a-f0-9]{32}$/.test(jobId)) throw new Error('jobId is malformed.')
       return this.request(`/api/v1/jobs/${encodeURIComponent(jobId)}`)
     },
+    /** BETA, unpromoted and undiscoverable. See {@link QuboIsingRequest}. */
     solveQuboIsing: async (payload: QuboIsingRequest, options: { pollIntervalMs?: number; timeoutMs?: number } = {}): Promise<QuboIsingJob> => {
       let job = await this.optimization.submitQuboIsing(payload)
       const deadline = Date.now() + (options.timeoutMs ?? 120_000)

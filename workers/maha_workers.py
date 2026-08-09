@@ -206,12 +206,35 @@ def benchmark_restored_engines(commit: str) -> Dict[str, Any]:
     return json.loads(json.dumps(evidence))
 
 
+@app.function(gpu="A10G", image=gpu_image, timeout=1800)
+def benchmark_qubo_promotion(commit: str) -> Dict[str, Any]:
+    """Generate v2 promotion evidence: warm latency plus solution quality.
+
+    The longer timeout covers the added work -- exact enumeration on the small
+    cases and a tensor-network solve per case -- which the latency-only v1
+    benchmark did not do.
+    """
+    import torch
+    from workers.qubo_promotion_benchmark import benchmark_promotion
+
+    device = "cuda:0" if torch.cuda.is_available() else "cpu"
+    started = time.perf_counter()
+    evidence = benchmark_promotion(device)
+    evidence["commit"] = commit
+    evidence["generatedAt"] = datetime.now(timezone.utc).isoformat()
+    evidence["benchmarkWallClockMs"] = round((time.perf_counter() - started) * 1_000, 3)
+    return json.loads(json.dumps(evidence))
+
+
 @app.local_entrypoint()
 def benchmark(commit: str, output: str = "qubo-benchmark-evidence.json", engine: str = "qubo") -> None:
     """Run with: modal run workers/maha_workers.py --commit <git-sha>."""
-    if engine not in {"qubo", "restored"}:
-        raise ValueError("engine must be qubo or restored")
-    evidence = benchmark_qubo_reference.remote(commit) if engine == "qubo" else benchmark_restored_engines.remote(commit)
+    if engine not in {"qubo", "restored", "qubo-promotion"}:
+        raise ValueError("engine must be qubo, qubo-promotion, or restored")
+    if engine == "qubo-promotion":
+        evidence = benchmark_qubo_promotion.remote(commit)
+    else:
+        evidence = benchmark_qubo_reference.remote(commit) if engine == "qubo" else benchmark_restored_engines.remote(commit)
     with open(output, "w", encoding="utf-8") as handle:
         json.dump(evidence, handle, indent=2, sort_keys=True)
         handle.write("\n")
