@@ -66,6 +66,7 @@ const PRIVATE_ROUTES = new Set([
   '/api/cron/inbound-digest',
   '/api/cron/job-reclaim',
   '/api/cron/market-scout',
+  '/api/cron/x402-observatory',
   '/api/cron/utility-upload-cleanup',
   '/api/conversion-events',
   '/api/cron/utility-upload-cleanup',
