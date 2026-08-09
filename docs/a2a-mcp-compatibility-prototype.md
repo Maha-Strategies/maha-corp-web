@@ -26,10 +26,14 @@ compatibility proof.
 - The A2A task class is supplied in `X-Maha-Task-Class` and must be a skill ID
   from the validated Agent Card. It is a policy label, not a claim that Maha
   semantically understands the task.
-- The buyer-policy package validates an upstream payment declaration but this
-  adapter does not yet reserve a multi-call task budget in a durable policy
-  ledger. Per-call ceilings are enforced; durable per-task budgets remain a
-  promotion gate.
+- Multi-call task budgets are durable in Upstash. A signed turn is atomically
+  reserved before forwarding. Only a verified receipt moves the reservation
+  into cumulative spend. Explicit payment refusals release the reservation;
+  ambiguous outcomes remain reserved and fail closed. The ledger closes when
+  cumulative spend reaches `maxAmountPerTask`.
+- A first `message/send` uses a stable gateway task identity derived from its
+  A2A context/message identifier. The upstream task id returned on success is
+  durably aliased to that ledger for later `tasks/get` and `tasks/cancel` turns.
 - Independent on-chain receipt confirmation is not implemented in this slice;
   a policy requesting it is rejected at registration rather than weakened.
 - A validated Agent Card is not the same as a validated x402 input/output
@@ -44,17 +48,20 @@ Deploy the controlled fixture without changing the production GPU worker:
 modal deploy workers/a2a_e2e_upstream.py
 ```
 
-Set `MAHA_E2E_A2A_TOKEN` in the existing Modal `maha-worker-secrets` group,
+Set `MAHA_E2E_A2A_TOKEN` in the isolated Modal `maha-a2a-e2e-secrets` group,
 then register its `/.well-known/agent-card.json` URL through
 `POST /api/v1/a2a/register`. Send tasks to
 `POST /api/v1/a2a/gateway/{agentId}` with `X-Maha-Task-Class:
 governance.echo`.
 
-The controlled agent can also return two valid x402 challenges without
-settling them:
+The controlled agent returns valid x402 challenges and deterministic fixture
+receipts:
 
 - a message beginning `paid:` requests 1,000 USDC base units;
 - a message beginning `expensive:` requests 1,000,000 base units.
 
-With a 1,000-base-unit ceiling, Maha passes the first challenge through and
-blocks the second before a wallet is asked to sign.
+With a 1,000-base-unit per-call ceiling and 2,000-base-unit per-task ceiling,
+the suite commits two fixture settlements to one durable task ledger, blocks
+the next turn because the cumulative ceiling is closed, and separately blocks
+the `$1` challenge before a wallet is asked to sign. Fixture receipts exercise
+gateway state transitions; they are not represented as on-chain settlements.

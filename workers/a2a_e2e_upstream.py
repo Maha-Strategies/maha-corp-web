@@ -1,6 +1,7 @@
 """Controlled, token-gated A2A v0.3 compatibility fixture for staging E2E."""
 
 import base64
+import hashlib
 import hmac
 import json
 import os
@@ -11,7 +12,7 @@ from fastapi import FastAPI, Header, HTTPException, Request, Response
 
 app = modal.App("maha-a2a-e2e-upstream")
 image = modal.Image.debian_slim(python_version="3.11").pip_install("fastapi==0.115.6")
-secrets = modal.Secret.from_name("maha-worker-secrets")
+secrets = modal.Secret.from_name("maha-a2a-e2e-secrets")
 web = FastAPI()
 
 USDC = "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913"
@@ -65,7 +66,12 @@ def _challenge(resource: str, amount: str) -> tuple[dict, str]:
 
 
 @web.post("/a2a")
-async def a2a_rpc(request: Request, response: Response, authorization: str | None = Header(default=None)):
+async def a2a_rpc(
+    request: Request,
+    response: Response,
+    authorization: str | None = Header(default=None),
+    payment_signature: str | None = Header(default=None, alias="PAYMENT-SIGNATURE"),
+):
     _authorized(authorization)
     payload = await request.json()
     request_id = payload.get("id")
@@ -75,11 +81,26 @@ async def a2a_rpc(request: Request, response: Response, authorization: str | Non
     if method == "message/send":
         text = _message_text(payload.get("params", {}))
         if text.startswith("paid:") or text.startswith("expensive:"):
-            body, encoded = _challenge(str(request.url), "1000" if text.startswith("paid:") else "1000000")
-            response.status_code = 402
-            response.headers["PAYMENT-REQUIRED"] = encoded
-            return body
-        task_id = f"task_{uuid.uuid4().hex}"
+            amount = "1000" if text.startswith("paid:") else "1000000"
+            if not payment_signature:
+                body, encoded = _challenge(str(request.url), amount)
+                response.status_code = 402
+                response.headers["PAYMENT-REQUIRED"] = encoded
+                return body
+            try:
+                payment = json.loads(base64.b64decode(payment_signature).decode())
+                accepted = payment["accepted"]
+                payer = payment["payload"]["authorization"]["from"]
+                if accepted["amount"] != amount or accepted["network"] != "eip155:8453":
+                    raise ValueError("payment terms differ")
+            except (KeyError, TypeError, ValueError, json.JSONDecodeError):
+                raise HTTPException(status_code=402, detail="Invalid controlled payment fixture")
+            transaction = "0x" + hashlib.sha256(payment_signature.encode()).hexdigest()
+            receipt = {"success": True, "transaction": transaction, "network": "eip155:8453", "payer": payer}
+            response.headers["PAYMENT-RESPONSE"] = base64.b64encode(json.dumps(receipt, separators=(",", ":")).encode()).decode()
+        message = payload.get("params", {}).get("message", {})
+        task_seed = message.get("contextId") or message.get("messageId") or uuid.uuid4().hex
+        task_id = f"task_{hashlib.sha256(task_seed.encode()).hexdigest()[:32]}"
         return {
             "jsonrpc": "2.0", "id": request_id,
             "result": {"id": task_id, "contextId": f"ctx_{uuid.uuid4().hex}", "status": {"state": "completed"}, "artifacts": [{"artifactId": f"artifact_{uuid.uuid4().hex}", "parts": [{"kind": "text", "text": text}]}]},
@@ -91,4 +112,3 @@ async def a2a_rpc(request: Request, response: Response, authorization: str | Non
 @modal.asgi_app()
 def endpoint():
     return web
-

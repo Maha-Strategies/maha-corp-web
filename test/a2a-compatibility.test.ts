@@ -2,6 +2,7 @@ import assert from 'node:assert/strict'
 import test from 'node:test'
 import { parseA2AAgentCard, parseA2APaymentPolicy, parseA2ATaskPolicy, parseA2ARequest, evaluateA2ATaskPolicy } from '../lib/a2a/validation.ts'
 import { A2AProxyEngine } from '../lib/a2a/proxy.ts'
+import type { A2ATaskBudgetReservation, A2ATaskBudgetState, A2ATaskBudgetStore } from '../lib/a2a/task-budget.ts'
 import type { A2AAgentConfig, A2AJsonRpcRequest } from '../lib/a2a/types.ts'
 import { encodeChallengeHeader } from '../lib/x402/protocol.ts'
 import { evaluatePaymentIntent, type BuyerPolicy } from '../lib/x402/buyer-policy.ts'
@@ -12,6 +13,63 @@ const card = {
   url: 'https://agent.example/a2a',
   protocolVersion: '0.3.0',
   skills: [{ id: 'research.summarize', name: 'Summarize research', description: 'Summarizes supplied text.' }],
+}
+
+class MemoryTaskBudgets implements A2ATaskBudgetStore {
+  private readonly states = new Map<string, A2ATaskBudgetState>()
+  private readonly reservations = new Map<string, { taskId: string; amount: bigint; status: 'reserved' | 'cancelled' | 'settled' }>()
+  private readonly settlements = new Set<string>()
+  private readonly aliases = new Map<string, string>()
+
+  async resolveTaskId(input: { taskId: string }) { return this.aliases.get(input.taskId) ?? input.taskId }
+  private async current(input: { taskId: string; maxTaskBudget: string }) {
+    const taskId = await this.resolveTaskId(input)
+    const existing = this.states.get(taskId)
+    if (existing) return existing
+    const created: A2ATaskBudgetState = { taskId, cumulativeSpentBaseUnits: '0', reservedBaseUnits: '0', maxTaskBudgetBaseUnits: input.maxTaskBudget, status: 'active' }
+    this.states.set(taskId, created)
+    return created
+  }
+  async canReserve(input: Omit<A2ATaskBudgetReservation, 'authorizationId'>) {
+    const state = await this.current(input)
+    const allowed = state.status === 'active' && BigInt(state.cumulativeSpentBaseUnits) + BigInt(state.reservedBaseUnits) + BigInt(input.amount) <= BigInt(state.maxTaskBudgetBaseUnits)
+    return { allowed, state: { ...state } }
+  }
+  async reserve(input: A2ATaskBudgetReservation) {
+    const state = await this.current(input)
+    if (this.reservations.has(input.authorizationId)) return { reserved: false as const, reason: 'authorization_replayed' as const, state: { ...state } }
+    if (state.status === 'closed') return { reserved: false as const, reason: 'task_closed' as const, state: { ...state } }
+    if (BigInt(state.cumulativeSpentBaseUnits) + BigInt(state.reservedBaseUnits) + BigInt(input.amount) > BigInt(state.maxTaskBudgetBaseUnits)) return { reserved: false as const, reason: 'task_budget_exceeded' as const, state: { ...state } }
+    state.reservedBaseUnits = (BigInt(state.reservedBaseUnits) + BigInt(input.amount)).toString()
+    this.reservations.set(input.authorizationId, { taskId: state.taskId, amount: BigInt(input.amount), status: 'reserved' })
+    return { reserved: true as const, state: { ...state } }
+  }
+  async cancel(input: Pick<A2ATaskBudgetReservation, 'taskId' | 'authorizationId'>) {
+    const reservation = this.reservations.get(input.authorizationId)
+    if (!reservation || reservation.status !== 'reserved') return
+    const state = this.states.get(reservation.taskId)!
+    state.reservedBaseUnits = (BigInt(state.reservedBaseUnits) - reservation.amount).toString()
+    reservation.status = 'cancelled'
+  }
+  async settle(input: Pick<A2ATaskBudgetReservation, 'taskId' | 'authorizationId'> & { transaction: string }) {
+    const taskId = await this.resolveTaskId(input)
+    const state = this.states.get(taskId)!
+    if (this.settlements.has(input.transaction)) return { settled: false as const, reason: 'settlement_replayed' as const, state: { ...state } }
+    const reservation = this.reservations.get(input.authorizationId)
+    if (!reservation || reservation.status !== 'reserved') return { settled: false as const, reason: 'reservation_missing' as const, state: { ...state } }
+    state.reservedBaseUnits = (BigInt(state.reservedBaseUnits) - reservation.amount).toString()
+    state.cumulativeSpentBaseUnits = (BigInt(state.cumulativeSpentBaseUnits) + reservation.amount).toString()
+    state.status = BigInt(state.cumulativeSpentBaseUnits) >= BigInt(state.maxTaskBudgetBaseUnits) ? 'closed' : 'active'
+    reservation.status = 'settled'
+    this.settlements.add(input.transaction)
+    return { settled: true as const, state: { ...state } }
+  }
+  async bindUpstreamTask(input: { taskId: string; upstreamTaskId: string }) {
+    const canonical = await this.resolveTaskId(input)
+    const existing = this.aliases.get(input.upstreamTaskId)
+    if (existing && existing !== canonical) throw new Error('conflicting alias')
+    this.aliases.set(input.upstreamTaskId, canonical)
+  }
 }
 
 test('A2A Agent Card and task policy bind calls to discovered skills', () => {
@@ -86,10 +144,11 @@ test('A2A proxy passes an allowed challenge and blocks an over-ceiling challenge
     return new Response(JSON.stringify(body), { status: 402, headers: { 'PAYMENT-REQUIRED': encodeChallengeHeader(body) } })
   }
   const baseOptions = { tenantId: 'tenant-1', traceId: 'trace-12345678', taskClass: 'research.summarize', paymentSignature: null, a2aVersion: '0.3.0', controls, assertPublicHost: async () => {} }
-  const allowed = await A2AProxyEngine.dispatch(config, request, { ...baseOptions, fetchImpl: async () => challenge('1000') })
+  const taskBudgets = new MemoryTaskBudgets()
+  const allowed = await A2AProxyEngine.dispatch(config, request, { ...baseOptions, taskBudgets, fetchImpl: async () => challenge('1000') })
   assert.equal(allowed.status, 402)
   assert.ok(allowed.headers?.['PAYMENT-REQUIRED'])
-  const blocked = await A2AProxyEngine.dispatch(config, request, { ...baseOptions, fetchImpl: async () => challenge('1001') })
+  const blocked = await A2AProxyEngine.dispatch(config, request, { ...baseOptions, taskBudgets, fetchImpl: async () => challenge('1001') })
   assert.equal(blocked.status, 403)
 
   const payer = '0x7b7ff44288fADe4A1829abA2584DFCeB952146f2'
@@ -97,8 +156,20 @@ test('A2A proxy passes an allowed challenge and blocks an over-ceiling challenge
   const paymentSignature = Buffer.from(JSON.stringify({ x402Version: 2, resource: { url: config.rpcUrl }, accepted, payload: { signature: `0x${'1'.repeat(130)}`, authorization: { from: payer } } }), 'utf8').toString('base64')
   const receipt = Buffer.from(JSON.stringify({ success: true, transaction: `0x${'2'.repeat(64)}`, network: 'eip155:8453', payer }), 'utf8').toString('base64')
   const paidFetch = async () => new Response(JSON.stringify({ jsonrpc: '2.0', id: request.id, result: { status: { state: 'completed' } } }), { status: 200, headers: { 'PAYMENT-RESPONSE': receipt } })
-  const paid = await A2AProxyEngine.dispatch(config, request, { ...baseOptions, paymentSignature, fetchImpl: paidFetch, audit: async () => {} })
+  const paid = await A2AProxyEngine.dispatch(config, request, { ...baseOptions, taskBudgets, paymentSignature, fetchImpl: paidFetch, audit: async () => {} })
   assert.equal(paid.status, 200)
-  const missingReceipt = await A2AProxyEngine.dispatch(config, request, { ...baseOptions, paymentSignature, fetchImpl: async () => new Response(JSON.stringify({ jsonrpc: '2.0', id: request.id, result: {} }), { status: 200 }), audit: async () => {} })
+  assert.equal(paid.headers?.['X-Maha-Task-Spent'], '1000')
+  const missingReceipt = await A2AProxyEngine.dispatch(config, request, { ...baseOptions, taskBudgets: new MemoryTaskBudgets(), paymentSignature, fetchImpl: async () => new Response(JSON.stringify({ jsonrpc: '2.0', id: request.id, result: {} }), { status: 200 }), audit: async () => {} })
   assert.equal(missingReceipt.status, 502)
+})
+
+test('durable A2A task budgets accumulate settlements and close at the ceiling', async () => {
+  const store = new MemoryTaskBudgets()
+  const base = { tenantId: 'tenant-1', agentId: 'a2a_agt_0123456789abcdef', taskId: 'a2a-task-12345678', network: 'eip155:8453', asset: 'usdc', amount: '1000', maxTaskBudget: '2000' }
+  assert.equal((await store.reserve({ ...base, authorizationId: 'authorization-1' })).reserved, true)
+  assert.equal((await store.settle({ ...base, authorizationId: 'authorization-1', transaction: `0x${'1'.repeat(64)}` })).state.cumulativeSpentBaseUnits, '1000')
+  assert.equal((await store.reserve({ ...base, authorizationId: 'authorization-2' })).reserved, true)
+  const closed = await store.settle({ ...base, authorizationId: 'authorization-2', transaction: `0x${'2'.repeat(64)}` })
+  assert.equal(closed.state.status, 'closed')
+  assert.equal((await store.reserve({ ...base, authorizationId: 'authorization-3' })).reason, 'task_closed')
 })
