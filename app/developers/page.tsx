@@ -1,6 +1,9 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 
+import contextRetention from '@/benchmarks/mcrb-1/results.json'
+import contextRecipe from '@/content/recipes/context-compiler-large-document-result.json'
+
 const SITE_URL = 'https://www.mahastrategies.com'
 const title = 'Developer Infrastructure for Governed AI Systems | Maha Strategies'
 const description = 'Production APIs for enterprise MCP governance, bounded context compilation, evidence evaluation, GPU optimization, and MPS preflight—with TypeScript and Python SDKs.'
@@ -92,6 +95,7 @@ const integrations = [
 ] as const
 
 export default function DevelopersPage() {
+  const contextBm25 = contextRetention.results.find((result) => result.method === 'maha_bm25')!
   const itemListJsonLd = {
     '@context': 'https://schema.org',
     '@type': 'CollectionPage',
@@ -172,8 +176,8 @@ export default function DevelopersPage() {
             <div className="grid gap-4 sm:grid-cols-2">
               <Benchmark label="Tensor-network QUBO / Ising" value="80.840 ms" detail="Warm p95 at 256 variables and bond dimension 256; reviewed promotion threshold ≤150 ms." href="/tensor-opt" />
               <Benchmark label="Weighted SE(3) registration" value="108.604 ms" detail="Warm p95 at 16,384 paired points; reviewed promotion threshold ≤200 ms." href="/geometric-optimization" />
-              <Benchmark label="MCRB-1 evidence retention" value="62.8%" detail="Complete human evidence-set retention at 74.4% mean token reduction across 250 independently annotated QASPER questions." href="/benchmarks/context-retention" />
-              <Benchmark label="Context compiler recipe" value="74.18%" detail="Executable four-chapter workload with 100% source participation and economics stated against the $0.001 x402 fee." href="/recipes/context-compiler-large-document" />
+              <Benchmark label="MCRB-1 evidence retention" value={`${contextBm25.completeEvidenceSetPercent}%`} detail={`Complete human evidence-set retention at ${contextBm25.meanReductionPercent}% mean token reduction across ${contextRetention.dataset.cases} independently annotated QASPER questions.`} href="/benchmarks/context-retention" />
+              <Benchmark label="Context compiler recipe" value={`${contextRecipe.result.reductionPercent}%`} detail="Executable four-chapter workload with 100% source participation and economics stated against the $0.001 x402 fee." href="/recipes/context-compiler-large-document" />
             </div>
           </div>
         </section>

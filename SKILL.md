@@ -98,10 +98,10 @@ The compiled pack is `context`. Token figures live under `metrics`:
   "packId": "ctxpack_...",
   "context": "# Context Pack\n\nTask: ...",
   "metrics": {
-    "originalEstimatedTokens": 22340,
-    "compiledEstimatedTokens": 5768,
-    "tokensSaved": 16572,
-    "estimatedReductionPercent": 74.2
+    "originalEstimatedTokens": 21827,
+    "compiledEstimatedTokens": 5645,
+    "tokensSaved": 16182,
+    "estimatedReductionPercent": 74.1
   },
   "includedPassages": [{ "sourceId": "doc-1", "passageId": "doc-1:3", "text": "..." }],
   "sourceTextStored": false

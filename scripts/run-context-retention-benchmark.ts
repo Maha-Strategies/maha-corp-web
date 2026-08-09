@@ -20,7 +20,7 @@ import { gunzipSync } from 'node:zlib'
 
 import { encode } from 'gpt-tokenizer'
 
-import { compileContextPack, estimateTokens, parseContextPackRequest } from '../lib/context-compiler.ts'
+import { compileContextPack, estimateTokens, parseContextPackRequest, STANDARD_MAX_CONTEXT_PACK_BYTES } from '../lib/context-compiler.ts'
 
 const VERSION = '1.0.0'
 const QASPER_VERSION = '0.3.0'
@@ -30,7 +30,7 @@ const QASPER_DEV_FILE = 'qasper-dev-v0.3.json'
 const CASE_COUNT = 250
 const TOKEN_BUDGET = 2_048
 const SELECTION_BUDGET = Math.floor(TOKEN_BUDGET * 0.72)
-const MAX_INPUT_BYTES = 525_000
+const MAX_INPUT_BYTES = STANDARD_MAX_CONTEXT_PACK_BYTES
 const MIN_INPUT_TOKENS = TOKEN_BUDGET * 2
 const WRITE_RESULTS = process.argv.includes('--write')
 
@@ -375,6 +375,7 @@ const result = {
   },
   protocol: {
     declaredTokenBudget: TOKEN_BUDGET,
+    maximumInputBytes: MAX_INPUT_BYTES,
     tokenizer: 'gpt-tokenizer cl100k_base-compatible encode()',
     mahaMode: { scoring: 'bm25', provenance: 'compact', budgetMode: 'guaranteed' },
     methods,

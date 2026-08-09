@@ -2,6 +2,8 @@ import assert from 'node:assert/strict'
 import { readFile } from 'node:fs/promises'
 import test from 'node:test'
 
+import { STANDARD_MAX_CONTEXT_PACK_BYTES } from '../lib/context-compiler.ts'
+
 const root = new URL('../', import.meta.url)
 
 test('MCRB-1 publishes a complete frozen cohort and raw method records', async () => {
@@ -14,6 +16,7 @@ test('MCRB-1 publishes a complete frozen cohort and raw method records', async (
   const methods = result.protocol.methods as string[]
 
   assert.equal(result.id, 'mcrb-1')
+  assert.equal(result.protocol.maximumInputBytes, STANDARD_MAX_CONTEXT_PACK_BYTES)
   assert.equal(result.dataset.cases, 250)
   assert.equal(cohort.length, 250)
   assert.equal(new Set(cohort.map((entry: { questionId: string }) => entry.questionId)).size, 250)
