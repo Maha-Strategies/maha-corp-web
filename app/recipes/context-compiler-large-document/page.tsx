@@ -65,7 +65,7 @@ export default function ContextCompilerLargeDocumentRecipePage() {
 
         <section className="mt-12 border border-emerald-900 bg-emerald-950/10 p-7 sm:p-9" aria-labelledby="economics">
           <p className="font-mono text-[10px] uppercase tracking-widest text-emerald-300">[ Declared economic assumption ]</p>
-          <h2 id="economics" className="mt-4 text-3xl font-light text-white">$0.049716 gross input cost avoided at a $3/M reference rate.</h2>
+          <h2 id="economics" className="mt-4 text-3xl font-light text-white">${measurement.economics.grossInputCostAvoidedUsd.toFixed(6)} gross input cost avoided at a $3/M reference rate.</h2>
           <div className="mt-7 grid gap-5 sm:grid-cols-3">
             <Economic label="x402 fee" value={`$${measurement.economics.x402FeeUsd.toFixed(3)}`} />
             <Economic label="Net input cost avoided" value={`$${measurement.economics.netInputCostAvoidedUsd.toFixed(6)}`} />

@@ -157,7 +157,7 @@ export function estimateTokens(value: string): number {
   )) {
     if (latin) { units += 1; continue }
     // CJK runs tokenize at roughly one token per character.
-    if (unsegmented) { units += unsegmented.length; continue }
+    if (unsegmented) { units += Array.from(unsegmented).length; continue }
     // Cyrillic, Greek, Arabic, Hebrew, Devanagari: about three characters per
     // token, versus the one-per-character this used to assume.
     if (alphabetic) { units += Math.max(1, Math.round(alphabetic.length / 3)); continue }
@@ -234,9 +234,10 @@ const MIXED_SCRIPT_BOUNDARY = /(?=[\p{Script=Han}\p{Script=Hiragana}\p{Script=Ka
 const COMPOUND = /[_-]|\p{Ll}\p{Lu}|\p{N}\p{L}|\p{L}\p{N}/u
 
 function bigrams(run: string): string[] {
-  if (run.length === 1) return [run]
+  const codePoints = Array.from(run)
+  if (codePoints.length === 1) return codePoints
   const out: string[] = []
-  for (let index = 0; index + 1 < run.length; index += 1) out.push(run.slice(index, index + 2))
+  for (let index = 0; index + 1 < codePoints.length; index += 1) out.push(`${codePoints[index]}${codePoints[index + 1]}`)
   return out
 }
 
