@@ -1,6 +1,7 @@
 # Agent task attribution and chargeback export
 
-**Status:** scoped 9 August 2026. Step 1 and 2 implemented; steps 3–5 not started.
+**Status:** scoped 9 August 2026. Steps 1–3 implemented and applied to the staging
+database (`maha-corp-staging.`, `wukyzcqxzkbwuledzxlx`); steps 4–5 not started.
 
 An enterprise platform team running agents cannot currently answer "which
 department spent this." Usage is metered per credential and per day, which
@@ -131,7 +132,11 @@ security review.
    migration integrity green. *(done)*
 2. **Attribution on `/api/v1/compress`** — headers parsed, defaulting to
    `unallocated`, no behaviour change for a caller that sends neither. *(done)*
-3. **Export function and tests**, run against a week of real production data.
+3. **Export function and tests.** *(done — validated against synthetic
+   fixtures rather than waiting for live traffic, which is what the function
+   being pure buys. Reproducibility, ordering, RFC 4180 quoting, spreadsheet
+   formula neutralisation and content hashing are all checkable without a
+   single real row.)*
 4. **Jobs and gateway surfaces.**
 5. **Budgets, read-only.**
 
