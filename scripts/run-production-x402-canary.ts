@@ -6,7 +6,7 @@ import { createPublicClient, formatUnits, http, parseAbi, type Address } from 'v
 import { privateKeyToAccount } from 'viem/accounts'
 import { base } from 'viem/chains'
 
-import { decideBazaarCanary, findContextCompiler } from '../lib/x402/bazaar-canary.ts'
+import { applyManualMetadataRefresh, decideBazaarCanary, findContextCompiler } from '../lib/x402/bazaar-canary.ts'
 import { createPaidFetch, type TypedDataRequest } from '../lib/x402/client.ts'
 import {
   assertSpendPolicy,
@@ -82,11 +82,21 @@ async function run(): Promise<CanaryEvidence> {
 
   const checkedAt = new Date().toISOString()
   const resources = await fetchMerchantResources()
-  const decision = decideBazaarCanary(findContextCompiler(resources), Date.now())
+  const forceRefresh = process.argv.includes('--force-refresh')
+  if (forceRefresh && !process.argv.includes('--pay-if-stale')) {
+    throw new Error('--force-refresh also requires --pay-if-stale; refusing to load the wallet.')
+  }
+  const decision = applyManualMetadataRefresh(
+    decideBazaarCanary(findContextCompiler(resources), Date.now()),
+    forceRefresh,
+  )
 
   console.log(`Bazaar canary decision: ${decision.reason}`)
   console.log(`Last settlement: ${decision.lastCalledAt ?? 'not present in Bazaar'}`)
   console.log(`Settlement age: ${decision.ageDays === null ? 'unknown' : `${decision.ageDays} days`}`)
+  if (decision.reason === 'metadata_refresh_requested') {
+    console.log('A reviewed manual dispatch requested one bounded metadata-refresh settlement.')
+  }
   if (!decision.shouldPay) {
     console.log('No payment needed; organic or prior canary activity is still inside the 21-day window.')
     return { checkedAt, resource: MAHA_CONTEXT_RESOURCE, decision, outcome: 'skipped' }

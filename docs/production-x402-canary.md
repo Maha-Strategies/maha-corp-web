@@ -44,3 +44,16 @@ Use **Actions → Production x402 Bazaar canary → Run workflow** after initial
 setup. A healthy initial run should report `settlement_recent` and spend
 nothing. Canary settlements are operational traffic and must not be counted as
 external demand or customer revenue.
+
+## Deliberate metadata refresh
+
+Recent settlement activity protects the listing from inactivity removal but
+does not prove that Bazaar indexed the current discovery declaration. When the
+read-only drift workflow reports a mismatch, manually dispatch this workflow
+with **force_refresh** enabled. That authorizes exactly one 0.001 USDC call even
+inside the 21-day window. Every existing buyer, endpoint, payee, network,
+asset, price, balance, one-signature, response, and receipt guard still applies.
+
+`force_refresh` is unavailable to scheduled runs and is not a general force or
+price override. After the settlement, rerun x402 Doctor and close the drift
+issue only when the indexed declaration matches the live challenge.
