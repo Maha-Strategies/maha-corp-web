@@ -1,10 +1,10 @@
 import { Redis } from '@upstash/redis';
 import crypto from 'crypto';
-import { MCPServerConfig, MCPServerSummary, MCPToolDiscovery } from './types';
-import { assertPublicUpstreamHost, parsePublicUpstreamUrl } from '../mcp-gateway';
-import { scopedRedisKey } from '../redis-namespace';
-import { traceRedisQuery } from '../observability/telemetry';
-import { MCP_SUPPORTED_METHODS } from './validation';
+import type { MCPServerConfig, MCPServerSummary, MCPToolDiscovery } from './types.ts';
+import { assertPublicUpstreamHost, parsePublicUpstreamUrl } from '../mcp-gateway.ts';
+import { scopedRedisKey } from '../redis-namespace.ts';
+import { traceRedisQuery } from '../observability/telemetry.ts';
+import { MCP_SUPPORTED_METHODS } from './validation.ts';
 
 const redis = Redis.fromEnv();
 

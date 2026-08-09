@@ -12,6 +12,11 @@ const APP_DIR = join(import.meta.dirname, '..', 'app')
 // surfaces are private; nested preflight routes are covered by their product
 // page; the docs route documents itself by serving the spec.
 const PRIVATE_ROUTES = new Set([
+  // Compatibility prototype. Promote only after the controlled A2A + MCP E2E
+  // passes against Preview and the contract is reviewed for public support.
+  '/api/v1/a2a/agents',
+  '/api/v1/a2a/gateway/[agentId]',
+  '/api/v1/a2a/register',
   '/api/admin/mps-operations/actions',
   '/api/admin/commercial-api-metering',
   '/api/admin/mps-operations/lookup',
@@ -26,6 +31,12 @@ const PRIVATE_ROUTES = new Set([
   '/api/admin/micro-utility-validations',
   '/api/admin/observability-readiness',
   '/api/admin/revenue-readiness',
+  // Beta and deliberately undiscoverable rather than private: the route answers
+  // for callers holding the URL, but the standalone QUBO reference engine has no
+  // passing A10G evidence for its vectorized candidate, so nothing advertises it.
+  // Restore it to the contract only with the evidence. See
+  // docs/qubo-reference-promotion.md.
+  '/api/v1/jobs/qubo-ising',
   // Rewrite targets. The documented public URLs are /.well-known/agent.json and
   // /agent-offers.json; these internal paths are not part of the API surface.
   '/api/discovery/agent-card',

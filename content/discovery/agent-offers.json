@@ -63,19 +63,6 @@
       }
     },
     {
-      "id": "gpu-qubo-ising",
-      "name": "GPU QUBO/Ising Heuristic",
-      "status": "available_with_provisioned_api_key",
-      "serviceUrl": "https://www.mahastrategies.com/tools",
-      "documentationUrl": "https://www.mahastrategies.com/docs",
-      "endpoint": "https://www.mahastrategies.com/api/v1/jobs/qubo-ising",
-      "method": "POST",
-      "authorization": "A provisioned Maha API key with sufficient tenant credits is required.",
-      "execution": "Asynchronous GPU job. Poll the returned job URL. Inputs are bounded inline data and are not echoed by the job API.",
-      "methodBoundary": "The solver is a heuristic outside its documented exact-enumeration threshold. It does not claim a certified bound or global optimum.",
-      "acquisition": "Tenant API access is provisioned through the dashboard or operator onboarding; this manifest cannot create a key or authorize a charge."
-    },
-    {
       "id": "gpu-tensor-network",
       "name": "Bounded-Bond Tensor-Network Optimization",
       "status": "available_with_provisioned_api_key",
