@@ -3,6 +3,7 @@ import test from 'node:test'
 
 import { discoveryExtensionsFor } from '../lib/x402/discovery.ts'
 import { diagnoseX402Endpoint, doctorReportToSarif } from '../lib/x402/doctor.ts'
+import { createDeclarationDigestExtension } from '../lib/x402/declaration-digest.ts'
 import type { PaymentChallenge, PaymentRequirement } from '../lib/x402/client.ts'
 import { parseDoctorArgs } from '../scripts/x402-doctor.ts'
 
@@ -35,10 +36,10 @@ function encoded(value: unknown): string {
   return Buffer.from(JSON.stringify(value)).toString('base64')
 }
 
-function challengeResponse(status = 402): Response {
+function challengeResponse(status = 402, value = challenge): Response {
   return new Response(JSON.stringify({ error: 'payment_required' }), {
     status,
-    headers: { 'content-type': 'application/json', 'PAYMENT-REQUIRED': encoded(challenge) },
+    headers: { 'content-type': 'application/json', 'PAYMENT-REQUIRED': encoded(value) },
   })
 }
 
@@ -94,6 +95,61 @@ test('detects the accidental crawler 400 and stale Bazaar metadata', async () =>
   assert.equal(report.ok, false)
   assert.equal(report.findings.some((finding) => finding.ruleId === 'x402.bazaar.crawler_status' && finding.level === 'error'), true)
   assert.equal(report.findings.some((finding) => finding.ruleId === 'x402.bazaar.stale_metadata' && finding.level === 'warning'), true)
+})
+
+test('uses a catalog-computed declaration digest instead of reconstructing catalog fields', async () => {
+  const declaration = {
+    x402Version: challenge.x402Version,
+    resource: challenge.resource,
+    accepts: challenge.accepts,
+    extensions: challenge.extensions,
+  }
+  const integrity = await createDeclarationDigestExtension(declaration, '2026-08-09')
+  const liveChallenge: PaymentChallenge = {
+    ...challenge,
+    extensions: { ...challenge.extensions, 'declaration-integrity': integrity },
+  }
+  const report = await diagnoseX402Endpoint({
+    endpoint,
+    request: { method: 'POST' },
+    fetchImpl: fetchSequence([
+      challengeResponse(402, liveChallenge),
+      challengeResponse(402, liveChallenge),
+      Response.json({ resources: [bazaarRecord({ description: 'Catalogs may flatten this differently.', declarationIntegrity: integrity })] }),
+    ]),
+  })
+
+  assert.equal(report.ok, true)
+  assert.equal(report.live?.declaredIntegrityDigest, integrity.declarationDigest)
+  assert.equal(report.bazaar?.digestSource, 'catalog')
+  assert.equal(report.bazaar?.matchesLive, true)
+  assert.equal(report.findings.some((finding) => finding.ruleId === 'x402.bazaar.stale_metadata'), false)
+})
+
+test('rejects a seller digest that does not describe its own live declaration', async () => {
+  const liveChallenge: PaymentChallenge = {
+    ...challenge,
+    extensions: {
+      ...challenge.extensions,
+      'declaration-integrity': {
+        declarationDigest: `sha256:${'0'.repeat(64)}`,
+        metadataVersion: '2026-08-09',
+        canonicalResource: endpoint,
+      },
+    },
+  }
+  const report = await diagnoseX402Endpoint({
+    endpoint,
+    request: { method: 'POST' },
+    fetchImpl: fetchSequence([
+      challengeResponse(402, liveChallenge),
+      challengeResponse(402, liveChallenge),
+      Response.json({ resources: [bazaarRecord()] }),
+    ]),
+  })
+
+  assert.equal(report.ok, false)
+  assert.equal(report.findings.some((finding) => finding.ruleId === 'x402.declaration_integrity.self_mismatch' && finding.level === 'error'), true)
 })
 
 test('flags deprecated v1 response headers alongside the canonical v2 challenge', async () => {

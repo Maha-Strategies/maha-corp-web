@@ -1,0 +1,89 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "vectorVersion": "0.1.0",
+  "canonicalization": "RFC8785-compatible JSON serialization with extensions.declaration-integrity omitted",
+  "vectors": [
+    {
+      "id": "declaration-integrity.valid",
+      "declaration": {
+        "x402Version": 2,
+        "resource": {
+          "url": "https://example.com/api/resource",
+          "description": "Return a deterministic example.",
+          "mimeType": "application/json"
+        },
+        "accepts": [
+          {
+            "scheme": "exact",
+            "network": "eip155:8453",
+            "amount": "1000",
+            "asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+            "payTo": "0x1111111111111111111111111111111111111111",
+            "maxTimeoutSeconds": 60
+          }
+        ],
+        "extensions": {
+          "bazaar": {
+            "info": {
+              "input": {
+                "type": "http",
+                "method": "POST",
+                "bodyType": "json",
+                "body": { "query": "example" }
+              },
+              "output": { "type": "json", "example": { "ok": true } }
+            }
+          }
+        }
+      },
+      "expected": {
+        "declarationDigest": "sha256:1af4817702a2648b6a4db4cc5323562a453818110bbd9dc3996ece5c948a3556",
+        "metadataVersion": "2026-08-09",
+        "canonicalResource": "https://example.com/api/resource"
+      }
+    },
+    {
+      "id": "declaration-integrity.self-exclusion",
+      "description": "Adding the integrity extension does not change the digest it declares.",
+      "declaration": {
+        "extensions": {
+          "declaration-integrity": {
+            "canonicalResource": "https://example.com/api/resource",
+            "metadataVersion": "2026-08-09",
+            "declarationDigest": "sha256:1af4817702a2648b6a4db4cc5323562a453818110bbd9dc3996ece5c948a3556"
+          },
+          "bazaar": {
+            "info": {
+              "output": { "example": { "ok": true }, "type": "json" },
+              "input": {
+                "body": { "query": "example" },
+                "bodyType": "json",
+                "method": "POST",
+                "type": "http"
+              }
+            }
+          }
+        },
+        "accepts": [
+          {
+            "maxTimeoutSeconds": 60,
+            "payTo": "0x1111111111111111111111111111111111111111",
+            "asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+            "amount": "1000",
+            "network": "eip155:8453",
+            "scheme": "exact"
+          }
+        ],
+        "resource": {
+          "mimeType": "application/json",
+          "description": "Return a deterministic example.",
+          "url": "https://example.com/api/resource"
+        },
+        "x402Version": 2
+      },
+      "expected": {
+        "declarationDigest": "sha256:1af4817702a2648b6a4db4cc5323562a453818110bbd9dc3996ece5c948a3556"
+      }
+    }
+  ]
+}

@@ -1,0 +1,436 @@
+{
+  "$schema": "./corpus.schema.json",
+  "schemaVersion": "1.0.0",
+  "corpusVersion": "0.1.0",
+  "protocolVersion": 2,
+  "license": "Apache-2.0",
+  "licenseUrl": "https://www.mahastrategies.com/conformance/x402-v2/LICENSE.txt",
+  "evaluationTime": 1800000000,
+  "specReferences": [
+    "https://github.com/coinbase/x402/blob/main/specs/transports-v2/http.md",
+    "https://github.com/coinbase/x402/blob/main/specs/schemes/exact/scheme_exact_evm.md",
+    "https://github.com/coinbase/x402/tree/main/typescript/packages/extensions/src/bazaar"
+  ],
+  "fixtures": [
+    {
+      "id": "http.challenge.valid-v2",
+      "title": "Valid x402 v2 HTTP challenge",
+      "layer": "http",
+      "description": "A protected resource returns 402 and a decodable PAYMENT-REQUIRED value containing one payable requirement.",
+      "input": {
+        "status": 402,
+        "headerName": "PAYMENT-REQUIRED",
+        "headerEncoding": "base64-json",
+        "headerValue": "eyJ4NDAyVmVyc2lvbiI6MiwicmVzb3VyY2UiOnsidXJsIjoiaHR0cHM6Ly9zZWxsZXIuZXhhbXBsZS92MS9yZXNvdXJjZSIsImRlc2NyaXB0aW9uIjoiUmV0dXJuIGEgZGV0ZXJtaW5pc3RpYyB0ZXN0IHJlc291cmNlLiIsIm1pbWVUeXBlIjoiYXBwbGljYXRpb24vanNvbiJ9LCJhY2NlcHRzIjpbeyJzY2hlbWUiOiJleGFjdCIsIm5ldHdvcmsiOiJlaXAxNTU6ODQ1MzIiLCJhbW91bnQiOiIxMDAwMCIsImFzc2V0IjoiMHgwMzZDYkQ1Mzg0MmM1NDI2NjM0ZTc5Mjk1NDFlQzIzMThmM2RDRjdlIiwicGF5VG8iOiIweDIwOTY5M0JjNmFmYzBDNTMyOGJBMzZGYUYwM0M1MTRFRjMxMjI4N0MiLCJtYXhUaW1lb3V0U2Vjb25kcyI6NjAsImV4dHJhIjp7ImFzc2V0VHJhbnNmZXJNZXRob2QiOiJlaXAzMDA5IiwibmFtZSI6IlVTREMiLCJ2ZXJzaW9uIjoiMiJ9fV19",
+        "message": {
+          "x402Version": 2,
+          "resource": {
+            "url": "https://seller.example/v1/resource",
+            "description": "Return a deterministic test resource.",
+            "mimeType": "application/json"
+          },
+          "accepts": [
+            {
+              "scheme": "exact",
+              "network": "eip155:84532",
+              "amount": "10000",
+              "asset": "0x036CbD53842c5426634e7929541eC2318f3dCF7e",
+              "payTo": "0x209693Bc6afc0C5328bA36FaF03C514EF312287C",
+              "maxTimeoutSeconds": 60,
+              "extra": { "assetTransferMethod": "eip3009", "name": "USDC", "version": "2" }
+            }
+          ]
+        }
+      },
+      "expected": {
+        "verdict": "accept",
+        "phase": "challenge",
+        "code": "valid_v2_challenge",
+        "retry": "not_applicable",
+        "httpStatus": 402
+      },
+      "specReferences": ["https://github.com/coinbase/x402/blob/main/specs/transports-v2/http.md"]
+    },
+    {
+      "id": "requirements.network.malformed-caip2",
+      "title": "Malformed CAIP-2 network",
+      "layer": "requirements",
+      "description": "The namespace and reference must be separated by exactly one colon and contain only CAIP-2-compatible characters.",
+      "input": {
+        "requirement": {
+          "scheme": "exact",
+          "network": "base-mainnet",
+          "amount": "10000",
+          "asset": "0x036CbD53842c5426634e7929541eC2318f3dCF7e",
+          "payTo": "0x209693Bc6afc0C5328bA36FaF03C514EF312287C",
+          "maxTimeoutSeconds": 60
+        }
+      },
+      "expected": {
+        "verdict": "reject",
+        "phase": "requirements",
+        "code": "invalid_caip2_network",
+        "retry": "after_correction"
+      },
+      "specReferences": ["https://chainagnostic.org/CAIPs/caip-2"]
+    },
+    {
+      "id": "payment.valid.eip3009",
+      "title": "Valid exact EIP-3009 payment",
+      "layer": "eip3009",
+      "description": "A deterministic authorization is correctly signed, matches the selected requirement, and is valid at the corpus evaluation time.",
+      "input": {
+        "evaluationTime": 1800000000,
+        "requirement": {
+          "scheme": "exact",
+          "network": "eip155:84532",
+          "amount": "10000",
+          "asset": "0x036CbD53842c5426634e7929541eC2318f3dCF7e",
+          "payTo": "0x209693Bc6afc0C5328bA36FaF03C514EF312287C",
+          "maxTimeoutSeconds": 60,
+          "extra": { "assetTransferMethod": "eip3009", "name": "USDC", "version": "2" }
+        },
+        "payment": {
+          "x402Version": 2,
+          "resource": {
+            "url": "https://seller.example/v1/resource",
+            "description": "Return a deterministic test resource.",
+            "mimeType": "application/json"
+          },
+          "accepted": {
+            "scheme": "exact",
+            "network": "eip155:84532",
+            "amount": "10000",
+            "asset": "0x036CbD53842c5426634e7929541eC2318f3dCF7e",
+            "payTo": "0x209693Bc6afc0C5328bA36FaF03C514EF312287C",
+            "maxTimeoutSeconds": 60,
+            "extra": { "assetTransferMethod": "eip3009", "name": "USDC", "version": "2" }
+          },
+          "payload": {
+            "signature": "0x3961ccc010e76a417f13d086d800c1e5eda02fb99cbae7e32f2d34c0da717b5c307e7fcf9df187ee91cfdde13b161d06aee555553310e6396536ed1026c410421c",
+            "authorization": {
+              "from": "0x25599a5f9E2E108a3CB9960f0d0B2D08ff4fE715",
+              "to": "0x209693Bc6afc0C5328bA36FaF03C514EF312287C",
+              "value": "10000",
+              "validAfter": "1799999940",
+              "validBefore": "1800000060",
+              "nonce": "0x1111111111111111111111111111111111111111111111111111111111111111"
+            }
+          }
+        }
+      },
+      "expected": {
+        "verdict": "accept",
+        "phase": "verify",
+        "code": "valid_eip3009_payment",
+        "retry": "not_applicable"
+      },
+      "specReferences": ["https://github.com/coinbase/x402/blob/main/specs/schemes/exact/scheme_exact_evm.md"]
+    },
+    {
+      "id": "payment.mismatch.network",
+      "title": "Payment selects the wrong chain",
+      "layer": "requirements",
+      "description": "The signed payment selects Base Sepolia while the resource requirement selects Base Mainnet.",
+      "input": {
+        "requirement": {
+          "scheme": "exact",
+          "network": "eip155:8453",
+          "amount": "10000",
+          "asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+          "payTo": "0x209693Bc6afc0C5328bA36FaF03C514EF312287C",
+          "maxTimeoutSeconds": 60
+        },
+        "paymentFixture": "payment.valid.eip3009"
+      },
+      "expected": {
+        "verdict": "reject",
+        "phase": "requirements",
+        "code": "requirement_mismatch_network",
+        "retry": "after_correction"
+      },
+      "specReferences": ["https://github.com/coinbase/x402/blob/main/specs/schemes/exact/scheme_exact_evm.md"]
+    },
+    {
+      "id": "payment.mismatch.asset",
+      "title": "Payment selects the wrong token",
+      "layer": "requirements",
+      "description": "The selected token contract differs from the resource requirement.",
+      "input": {
+        "requirement": {
+          "scheme": "exact",
+          "network": "eip155:84532",
+          "amount": "10000",
+          "asset": "0x1111111111111111111111111111111111111111",
+          "payTo": "0x209693Bc6afc0C5328bA36FaF03C514EF312287C",
+          "maxTimeoutSeconds": 60
+        },
+        "paymentFixture": "payment.valid.eip3009"
+      },
+      "expected": {
+        "verdict": "reject",
+        "phase": "requirements",
+        "code": "requirement_mismatch_asset",
+        "retry": "after_correction"
+      },
+      "specReferences": ["https://github.com/coinbase/x402/blob/main/specs/schemes/exact/scheme_exact_evm.md"]
+    },
+    {
+      "id": "payment.mismatch.payee",
+      "title": "Payment names the wrong payee",
+      "layer": "requirements",
+      "description": "The authorization recipient differs from the resource payTo address.",
+      "input": {
+        "requirement": {
+          "scheme": "exact",
+          "network": "eip155:84532",
+          "amount": "10000",
+          "asset": "0x036CbD53842c5426634e7929541eC2318f3dCF7e",
+          "payTo": "0x2222222222222222222222222222222222222222",
+          "maxTimeoutSeconds": 60
+        },
+        "paymentFixture": "payment.valid.eip3009"
+      },
+      "expected": {
+        "verdict": "reject",
+        "phase": "requirements",
+        "code": "requirement_mismatch_payee",
+        "retry": "after_correction"
+      },
+      "specReferences": ["https://github.com/coinbase/x402/blob/main/specs/schemes/exact/scheme_exact_evm.md"]
+    },
+    {
+      "id": "payment.mismatch.amount",
+      "title": "Payment authorizes the wrong amount",
+      "layer": "requirements",
+      "description": "The authorization value does not satisfy the amount selected from the challenge.",
+      "input": {
+        "requirement": {
+          "scheme": "exact",
+          "network": "eip155:84532",
+          "amount": "11000",
+          "asset": "0x036CbD53842c5426634e7929541eC2318f3dCF7e",
+          "payTo": "0x209693Bc6afc0C5328bA36FaF03C514EF312287C",
+          "maxTimeoutSeconds": 60
+        },
+        "paymentFixture": "payment.valid.eip3009"
+      },
+      "expected": {
+        "verdict": "reject",
+        "phase": "requirements",
+        "code": "requirement_mismatch_amount",
+        "retry": "after_correction"
+      },
+      "specReferences": ["https://github.com/coinbase/x402/blob/main/specs/schemes/exact/scheme_exact_evm.md"]
+    },
+    {
+      "id": "payment.authorization.expired",
+      "title": "Expired EIP-3009 authorization",
+      "layer": "eip3009",
+      "description": "The signature is authentic but validBefore precedes the evaluation time.",
+      "input": {
+        "evaluationTime": 1800000061,
+        "requirementFixture": "payment.valid.eip3009",
+        "paymentFixture": "payment.valid.eip3009"
+      },
+      "expected": {
+        "verdict": "reject",
+        "phase": "verify",
+        "code": "authorization_expired",
+        "retry": "after_correction"
+      },
+      "specReferences": ["https://eips.ethereum.org/EIPS/eip-3009"]
+    },
+    {
+      "id": "payment.authorization.replay",
+      "title": "Replayed EIP-3009 authorization",
+      "layer": "replay",
+      "description": "The same signer, token, chain, and nonce is submitted after the first attempt has consumed it.",
+      "input": {
+        "paymentFixture": "payment.valid.eip3009",
+        "attempts": 2,
+        "consumedAfterAttempt": 1
+      },
+      "expected": {
+        "verdict": "reject",
+        "phase": "replay",
+        "code": "authorization_replayed",
+        "retry": "unsafe",
+        "notes": "Do not create a second authorization until the first settlement state is known."
+      },
+      "specReferences": ["https://eips.ethereum.org/EIPS/eip-3009"]
+    },
+    {
+      "id": "bazaar.crawler.accidental-400",
+      "title": "Bazaar crawler receives 400 instead of 402",
+      "layer": "bazaar",
+      "description": "A documented crawler example reaches ordinary request validation before the payment boundary.",
+      "input": {
+        "request": {
+          "method": "POST",
+          "url": "https://seller.example/v1/resource",
+          "headers": { "content-type": "application/json" },
+          "body": { "query": "fixture" }
+        },
+        "response": { "status": 400, "headers": {} }
+      },
+      "expected": {
+        "verdict": "reject",
+        "phase": "crawler",
+        "code": "crawler_not_challenged",
+        "retry": "after_correction",
+        "httpStatus": 402
+      },
+      "specReferences": ["https://docs.cdp.coinbase.com/x402/bazaar"]
+    },
+    {
+      "id": "bazaar.example.invalid",
+      "title": "Bazaar input example violates its schema",
+      "layer": "bazaar",
+      "description": "The discovery example supplies a number where the declared request schema requires a string.",
+      "input": {
+        "extension": {
+          "info": {
+            "input": { "type": "http", "method": "POST", "bodyType": "json", "body": { "query": 42 } },
+            "output": { "type": "json", "example": { "ok": true } }
+          },
+          "schema": {
+            "$schema": "https://json-schema.org/draft/2020-12/schema",
+            "type": "object",
+            "properties": {
+              "input": {
+                "type": "object",
+                "properties": {
+                  "type": { "const": "http" },
+                  "method": { "const": "POST" },
+                  "bodyType": { "const": "json" },
+                  "body": {
+                    "type": "object",
+                    "properties": { "query": { "type": "string" } },
+                    "required": ["query"]
+                  }
+                },
+                "required": ["type", "method", "bodyType", "body"]
+              },
+              "output": { "type": "object" }
+            },
+            "required": ["input", "output"]
+          }
+        }
+      },
+      "expected": {
+        "verdict": "reject",
+        "phase": "discovery",
+        "code": "bazaar_example_invalid",
+        "retry": "after_correction"
+      },
+      "specReferences": ["https://docs.cdp.coinbase.com/x402/bazaar"]
+    },
+    {
+      "id": "bazaar.schema.invalid",
+      "title": "Bazaar declaration contains an invalid JSON Schema",
+      "layer": "bazaar",
+      "description": "The schema uses an unsupported value for the JSON Schema type keyword.",
+      "input": {
+        "extension": {
+          "info": {
+            "input": { "type": "http", "method": "POST", "bodyType": "json", "body": { "query": "fixture" } },
+            "output": { "type": "json", "example": { "ok": true } }
+          },
+          "schema": { "$schema": "https://json-schema.org/draft/2020-12/schema", "type": "banana" }
+        }
+      },
+      "expected": {
+        "verdict": "reject",
+        "phase": "discovery",
+        "code": "bazaar_schema_invalid",
+        "retry": "after_correction"
+      },
+      "specReferences": ["https://json-schema.org/draft/2020-12/schema"]
+    },
+    {
+      "id": "bazaar.metadata.stale",
+      "title": "Indexed Bazaar metadata is stale",
+      "layer": "bazaar",
+      "description": "The indexed declaration differs from the live challenge for a payment-relevant field.",
+      "input": {
+        "live": {
+          "resource": "https://seller.example/v1/resource",
+          "accepts": [{ "scheme": "exact", "network": "eip155:84532", "amount": "10000", "asset": "0x036CbD53842c5426634e7929541eC2318f3dCF7e", "payTo": "0x209693Bc6afc0C5328bA36FaF03C514EF312287C", "maxTimeoutSeconds": 60 }]
+        },
+        "indexed": {
+          "resource": "https://seller.example/v1/resource",
+          "accepts": [{ "scheme": "exact", "network": "eip155:84532", "amount": "20000", "asset": "0x036CbD53842c5426634e7929541eC2318f3dCF7e", "payTo": "0x209693Bc6afc0C5328bA36FaF03C514EF312287C", "maxTimeoutSeconds": 60 }]
+        }
+      },
+      "expected": {
+        "verdict": "warn",
+        "phase": "discovery",
+        "code": "bazaar_metadata_stale",
+        "retry": "after_correction"
+      },
+      "specReferences": ["https://docs.cdp.coinbase.com/x402/bazaar"]
+    },
+    {
+      "id": "settlement.result.ambiguous",
+      "title": "Settlement outcome is ambiguous",
+      "layer": "settlement",
+      "description": "The facilitator accepted the request but the client timed out before receiving a definitive settlement response.",
+      "input": {
+        "requestSubmitted": true,
+        "transportOutcome": "timeout",
+        "transaction": null,
+        "receipt": null
+      },
+      "expected": {
+        "verdict": "indeterminate",
+        "phase": "settle",
+        "code": "settlement_indeterminate",
+        "retry": "unsafe",
+        "notes": "Query settlement state by authorization identity or transaction before signing again."
+      },
+      "specReferences": ["https://github.com/coinbase/x402/blob/main/specs/transports-v2/http.md"]
+    },
+    {
+      "id": "receipt.missing",
+      "title": "Successful resource response omits PAYMENT-RESPONSE",
+      "layer": "receipt",
+      "description": "A paid resource response succeeds without the required settlement receipt header.",
+      "input": {
+        "status": 200,
+        "headers": {},
+        "body": { "ok": true }
+      },
+      "expected": {
+        "verdict": "reject",
+        "phase": "receipt",
+        "code": "receipt_missing",
+        "retry": "unsafe"
+      },
+      "specReferences": ["https://github.com/coinbase/x402/blob/main/specs/transports-v2/http.md"]
+    },
+    {
+      "id": "receipt.malformed",
+      "title": "Malformed PAYMENT-RESPONSE receipt",
+      "layer": "receipt",
+      "description": "The receipt decodes but does not satisfy the v2 settlement response contract.",
+      "input": {
+        "status": 200,
+        "headerName": "PAYMENT-RESPONSE",
+        "message": {
+          "success": true,
+          "transaction": "0x1234",
+          "network": "base",
+          "payer": "not-an-address"
+        }
+      },
+      "expected": {
+        "verdict": "reject",
+        "phase": "receipt",
+        "code": "receipt_malformed",
+        "retry": "unsafe"
+      },
+      "specReferences": ["https://github.com/coinbase/x402/blob/main/specs/transports-v2/http.md"]
+    }
+  ]
+}
