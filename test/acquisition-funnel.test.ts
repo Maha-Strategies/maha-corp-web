@@ -130,3 +130,36 @@ test('the trailing window is inclusive of today and the requested span', () => {
   assert.equal(window.toDay, '2026-08-09')
   assert.equal(window.fromDay, '2026-08-03')
 })
+
+test('challenges count the unpaid probes that terminate at the proxy', async () => {
+  // The gap this closes: an unpaid request is answered with a 402 by proxy.ts
+  // and returns from there, so the route's metering wrapper never runs. Before
+  // this, the discovery denominator was silently zero and the endpoint looked
+  // undiscovered rather than unattractive.
+  const report = await buildAcquisitionFunnel(ledgerOf({
+    context_compiler_usage_daily: [
+      usage('', '2026-08-02', '4xx', 'anonymous', 90),
+      usage('', '2026-08-03', '5xx', 'anonymous', 10),
+      usage('', '2026-08-03', '2xx', 'anonymous', 4),
+      usage('a', '2026-08-03', '4xx', 'api_key', 7),
+    ],
+    x402_payments: [{ payer: '0xA' }, { payer: '0xB' }],
+  }), WINDOW)
+
+  // Anonymous non-2xx only: a credentialled 4xx is a broken request, not a probe.
+  assert.deepEqual(report.stages.challenges, { available: true, count: 100 })
+  assert.deepEqual(report.stages.paidAutonomous, { available: true, count: 2 })
+  assert.equal(report.ratios.challengeToSettlement, 0.02)
+})
+
+test('no challenges and no settlements is a discovery problem, not a pricing one', async () => {
+  const report = await buildAcquisitionFunnel(ledgerOf({
+    context_compiler_usage_daily: [],
+    x402_payments: [],
+  }), WINDOW)
+
+  assert.deepEqual(report.stages.challenges, { available: true, count: 0 })
+  // Null, not 0: dividing settlements by zero challenges would report a
+  // conversion failure where the truth is that nobody arrived.
+  assert.equal(report.ratios.challengeToSettlement, null)
+})

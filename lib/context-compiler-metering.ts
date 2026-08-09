@@ -7,6 +7,29 @@ import { createAgentInquiryLedger } from './agent-inquiry-ledger.ts'
 
 export type AccessMode = 'api_key' | 'x402' | 'anonymous'
 
+/**
+ * The metered path. The usage table is specific to the Context Compiler, so
+ * the proxy must not fold challenges for other priced resources into it.
+ */
+export const METERED_PATH = '/api/v1/compress'
+
+/**
+ * Outcomes that terminate inside proxy.ts and therefore never reach the route
+ * handler's metering wrapper.
+ *
+ * This was the gap: an unpaid probe is answered with a 402 challenge by the
+ * proxy and returns from there, so the route never runs and nothing recorded
+ * it. Challenges are the denominator of the only question the funnel exists to
+ * answer -- did agents find this and decline, or never find it -- and without
+ * them the two are indistinguishable.
+ *
+ * Paid admissions are deliberately excluded: those do reach the route, and
+ * metering them here as well would double-count every settlement.
+ */
+export function metersAtProxy(pathname: string, kind: string): boolean {
+  return pathname === METERED_PATH && (kind === 'challenge' || kind === 'refused')
+}
+
 /** Access mode from the headers proxy.ts injects, without trusting the caller. */
 export function accessModeFrom(headers: Headers): { mode: AccessMode; credentialId: string } {
   if (headers.get('x-maha-access-mode') === 'x402') return { mode: 'x402', credentialId: '' }

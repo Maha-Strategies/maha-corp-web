@@ -40,6 +40,14 @@ export type FunnelStages = {
   paidAutonomous: StageValue
   /** Successful compress calls served without any credential or payment. */
   anonymousSuccess: StageValue
+  /**
+   * Unpaid requests answered with a 402 challenge or a payment refusal.
+   *
+   * Recorded at the proxy boundary, because that is where they terminate: the
+   * route handler never runs for them. This is the discovery denominator, and
+   * without it a quiet endpoint and an unattractive one look identical.
+   */
+  challenges: StageValue
 }
 
 export type FunnelReport = {
@@ -50,6 +58,12 @@ export type FunnelReport = {
     discoveryToCredential: number | null
     credentialToActivated: number | null
     activatedToRepeated: number | null
+    /**
+     * Settlements per challenge. Low means agents found the endpoint and
+     * declined -- a price or description problem. No challenges at all means
+     * they never found it -- a discovery problem. The two need opposite fixes.
+     */
+    challengeToSettlement: number | null
   }
   /** Stated on every report so the ratios are never read as journeys. */
   interpretation: string
@@ -95,8 +109,8 @@ export async function buildAcquisitionFunnel(ledger: Ledger | null, window: Funn
     const none = unavailable('ledger_unavailable')
     return {
       window,
-      stages: { discovery: none, credentialsCreated: none, activated: none, repeated: none, paidAutonomous: none, anonymousSuccess: none },
-      ratios: { discoveryToCredential: null, credentialToActivated: null, activatedToRepeated: null },
+      stages: { discovery: none, credentialsCreated: none, activated: none, repeated: none, paidAutonomous: none, anonymousSuccess: none, challenges: none },
+      ratios: { discoveryToCredential: null, credentialToActivated: null, activatedToRepeated: null, challengeToSettlement: null },
       interpretation,
     }
   }
@@ -117,6 +131,7 @@ export async function buildAcquisitionFunnel(ledger: Ledger | null, window: Funn
   let activated: StageValue = unavailable('compress_usage_meter_unreadable')
   let repeated: StageValue = unavailable('compress_usage_meter_unreadable')
   let anonymousSuccess: StageValue = unavailable('compress_usage_meter_unreadable')
+  let challenges: StageValue = unavailable('compress_usage_meter_unreadable')
 
   if (usageRows !== null) {
     const successful = usageRows.filter((row) => row.status_class === '2xx')
@@ -140,6 +155,15 @@ export async function buildAcquisitionFunnel(ledger: Ledger | null, window: Funn
       available: true,
       count: successful.filter((row) => row.access_mode === 'anonymous').reduce((sum, row) => sum + Number(row.request_count ?? 0), 0),
     }
+    // Anonymous non-2xx on this path is definitionally a challenge or refusal:
+    // the proxy answers every unauthenticated request before the route can
+    // produce any other client error.
+    challenges = {
+      available: true,
+      count: usageRows
+        .filter((row) => row.access_mode === 'anonymous' && row.status_class !== '2xx')
+        .reduce((sum, row) => sum + Number(row.request_count ?? 0), 0),
+    }
   }
 
   const paidAutonomous: StageValue = paymentRows === null
@@ -148,11 +172,12 @@ export async function buildAcquisitionFunnel(ledger: Ledger | null, window: Funn
 
   return {
     window,
-    stages: { discovery, credentialsCreated, activated, repeated, paidAutonomous, anonymousSuccess },
+    stages: { discovery, credentialsCreated, activated, repeated, paidAutonomous, anonymousSuccess, challenges },
     ratios: {
       discoveryToCredential: ratio(credentialsCreated, discovery),
       credentialToActivated: ratio(activated, credentialsCreated),
       activatedToRepeated: ratio(repeated, activated),
+      challengeToSettlement: ratio(paidAutonomous, challenges),
     },
     interpretation,
   }
