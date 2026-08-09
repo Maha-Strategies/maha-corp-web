@@ -93,14 +93,34 @@ export class X402PaymentError extends Error {
   readonly requirement?: PaymentRequirement
   /** True when no payment was settled, so retrying costs the payer nothing. */
   readonly settled: boolean
+  /**
+   * The authorization this payer signed, when one was signed.
+   *
+   * Carried so a failure can be written to evidence with the validity window
+   * and a nonce digest attached. Without it a refusal cannot be told apart
+   * from the next refusal, and an expired authorization looks the same as a
+   * rejected one.
+   */
+  readonly authorization?: TransferAuthorization
+  /** The seller's own reason string, verbatim, when it supplied one. */
+  readonly providerReason?: string
 
-  constructor(code: X402ErrorCode, message: string, options: { status?: number; requirement?: PaymentRequirement; settled?: boolean; cause?: unknown } = {}) {
+  constructor(code: X402ErrorCode, message: string, options: {
+    status?: number
+    requirement?: PaymentRequirement
+    settled?: boolean
+    cause?: unknown
+    authorization?: TransferAuthorization
+    providerReason?: string
+  } = {}) {
     super(message, { cause: options.cause })
     this.name = 'X402PaymentError'
     this.code = code
     this.status = options.status
     this.requirement = options.requirement
     this.settled = options.settled ?? false
+    this.authorization = options.authorization
+    this.providerReason = options.providerReason
   }
 }
 
@@ -325,7 +345,7 @@ export function createPaidFetch(options: PaidFetchOptions) {
       return Object.assign(paid, { x402: { requirement, receipt } })
     }
 
-    throw await refusalFor(paid, requirement)
+    throw await refusalFor(paid, requirement, typedData.message)
   }
 }
 
@@ -337,7 +357,11 @@ export function createPaidFetch(options: PaidFetchOptions) {
  * exactly that: a duplicate means an earlier payment succeeded, while a ledger
  * failure means this one never settled and retrying is free.
  */
-async function refusalFor(response: Response, requirement: PaymentRequirement): Promise<X402PaymentError> {
+async function refusalFor(
+  response: Response,
+  requirement: PaymentRequirement,
+  authorization?: TransferAuthorization,
+): Promise<X402PaymentError> {
   const body = await response.json().catch(() => ({})) as {
     error?: string | { code?: string; message?: string }
     message?: string
@@ -347,19 +371,26 @@ async function refusalFor(response: Response, requirement: PaymentRequirement): 
   const providerMessage = redactProviderMessage(
     (typeof body.error === 'string' ? body.error : body.error?.message) ?? body.message ?? body.reason,
   )
+  const context = { requirement, authorization }
 
   if (response.status === 409) {
-    return new X402PaymentError('payment_already_used', 'Payment already used. This authorization has been spent; a new payment is needed for another request.', { status: 409, requirement, settled: true })
+    return new X402PaymentError('payment_already_used', 'Payment already used. This authorization has been spent; a new payment is needed for another request.', { ...context, status: 409, settled: true })
   }
   if (response.status === 503) {
-    return new X402PaymentError('ledger_unavailable', 'Ledger unavailable, funds were not settled. Nothing was charged — try again shortly.', { status: 503, requirement, settled: false })
+    return new X402PaymentError('ledger_unavailable', 'Ledger unavailable, funds were not settled. Nothing was charged — try again shortly.', { ...context, status: 503, settled: false })
   }
   if (response.status === 429) {
-    return new X402PaymentError('resource_at_capacity', 'The resource is at capacity. The payment was accepted and is not consumed by retrying.', { status: 429, requirement, settled: true })
+    return new X402PaymentError('resource_at_capacity', 'The resource is at capacity. The payment was accepted and is not consumed by retrying.', { ...context, status: 429, settled: true })
   }
   // A second 402 means the facilitator refused the payment we just signed.
   // Its own reason is far more useful than a generic failure.
-  return new X402PaymentError('payment_rejected', providerMessage ?? challengeReason(response) ?? `The payment was refused (${code ?? response.status}).`, { status: response.status, requirement, settled: false })
+  const reason = providerMessage ?? challengeReason(response) ?? undefined
+  return new X402PaymentError('payment_rejected', reason ?? `The payment was refused (${code ?? response.status}).`, {
+    ...context,
+    status: response.status,
+    settled: false,
+    providerReason: reason,
+  })
 }
 
 function redactProviderMessage(message: string | undefined): string | undefined {

@@ -39,6 +39,96 @@ function failure(reason: string): { ok: false; reason: string } {
 }
 
 /**
+ * What the facilitator actually said, in a form safe to write to evidence.
+ *
+ * Carries no signature, no nonce, no authorization header and no credential.
+ * The nonce is reduced to a hash so two failures can be told apart and a
+ * replayed authorization recognised, without publishing the value that
+ * authorizes the transfer.
+ */
+export type FacilitatorDiagnostic = {
+  operation: 'verify' | 'settle'
+  /** HTTP status the facilitator answered with, when it answered at all. */
+  httpStatus?: number
+  /** Machine-readable reason from the provider, e.g. `insufficient_funds`. */
+  providerReason?: string
+  /** Provider prose, truncated. Never a field we control the contents of. */
+  providerMessage?: string
+  /** CDP echoes this on every error and it is what support asks for. */
+  correlationId?: string
+  /** Set when the call never reached the host: DNS, TLS, egress, timeout. */
+  transport?: string
+  authorization?: { validAfter?: string; validBefore?: string; nonceHash?: string }
+}
+
+const truncate = (value: unknown, limit: number): string | undefined =>
+  typeof value === 'string' && value.trim() ? value.trim().slice(0, limit) : undefined
+
+/** SHA-256 of the nonce, so evidence can distinguish attempts without exposing one. */
+async function hashNonce(nonce: unknown): Promise<string | undefined> {
+  if (typeof nonce !== 'string' || !nonce) return undefined
+  const digest = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(nonce))
+  return [...new Uint8Array(digest)].map((byte) => byte.toString(16).padStart(2, '0')).join('').slice(0, 16)
+}
+
+/**
+ * Pull a real rejection out of a diagnostic probe body.
+ *
+ * A facilitator answering `{ isValid: false, invalidReason }` has evaluated
+ * the payment and refused it. Reporting that as a transport failure loses the
+ * only sentence that says why, which is how an oversized description spent a
+ * day looking like an unreachable host.
+ */
+export function rejectionFromProbe(operation: 'verify' | 'settle', body: unknown): string | null {
+  if (typeof body !== 'object' || body === null) return null
+  const parsed = body as Record<string, unknown>
+  const succeeded = operation === 'verify' ? parsed.isValid : parsed.success
+  if (succeeded !== false) return null
+  const reason = truncate(operation === 'verify' ? parsed.invalidReason : parsed.errorReason, 120)
+  if (!reason) return null
+  const message = truncate(operation === 'verify' ? parsed.invalidMessage : parsed.errorMessage, 200)
+  return message ? `${reason}: ${message}` : reason
+}
+
+/**
+ * Strip anything that could carry payload values out of provider prose.
+ *
+ * A facilitator's error text is not a field we control and it is about to be
+ * published in a 402 body. Field names are the useful part and are what CDP
+ * actually returns; hex runs are not, and a signature, nonce or address
+ * echoed back must not travel further than the log.
+ */
+export function sanitizeProviderMessage(message: string): string {
+  return message.replace(/0x[0-9a-fA-F]{8,}/g, '0x[redacted]')
+}
+
+/**
+ * A provider that refused the *request* rather than the payment.
+ *
+ * CDP answers a malformed or oversized payload with `HTTP 400` and an
+ * `errorType`/`errorMessage` pair, and never reaches a verdict about the
+ * payment at all. That is not `isValid: false` and must not be reported as
+ * one -- the payment was never judged. It is also not a transport failure,
+ * and reporting it as one is what made an oversized `resource.description`
+ * look like an unreachable host for a day.
+ *
+ * So it gets its own code, and carries the provider's own words, which name
+ * the field. The payment is still refused: this is a distinct diagnosis, not
+ * a softer outcome.
+ */
+export function requestRejectionFromProbe(operation: 'verify' | 'settle', diagnostic: FacilitatorDiagnostic): string | null {
+  const status = diagnostic.httpStatus
+  if (status === undefined || status < 400 || status >= 500) return null
+  // 401/403 are credential problems. They carry no provider reason worth
+  // publishing, and saying "unauthorized" in a public 402 body tells a caller
+  // about our credentials rather than about their payment.
+  if (status === 401 || status === 403) return null
+  const detail = diagnostic.providerMessage ?? diagnostic.providerReason
+  if (!detail) return null
+  return `facilitator_${operation}_rejected_request: ${sanitizeProviderMessage(detail).slice(0, 300)}`
+}
+
+/**
  * `HTTPFacilitatorClient` throws typed errors for ordinary verifier and
  * settlement rejections. Preserve their machine-readable reason instead of
  * collapsing every non-2xx response into a transport failure.
@@ -89,8 +179,18 @@ async function reportFailure(
   config: FacilitatorConfig,
   payment: PaymentPayload,
   requirement: PaymentRequirement,
-): Promise<unknown | null> {
+): Promise<{ body: unknown | null; diagnostic: FacilitatorDiagnostic }> {
   const verbose = process.env.X402_FACILITATOR_DIAGNOSTICS?.trim() === 'true'
+
+  const authorization = (payment.payload?.authorization ?? {}) as Record<string, unknown>
+  const diagnostic: FacilitatorDiagnostic = {
+    operation,
+    authorization: {
+      validAfter: truncate(authorization.validAfter, 20),
+      validBefore: truncate(authorization.validBefore, 20),
+      nonceHash: await hashNonce(authorization.nonce),
+    },
+  }
 
   const chain: string[] = []
   let current: unknown = error
@@ -128,22 +228,38 @@ async function reportFailure(
     const body = await probe.text()
     let parsed: unknown = null
     try { parsed = JSON.parse(body) } catch { /* Diagnostic body was not JSON. */ }
+
+    diagnostic.httpStatus = probe.status
+    const fields = (typeof parsed === 'object' && parsed !== null ? parsed : {}) as Record<string, unknown>
+    diagnostic.correlationId = truncate(fields.correlationId, 64)
+    // A provider names its complaint in one of several fields depending on
+    // whether it refused the payment or refused the request that carried it.
+    diagnostic.providerReason = truncate(fields.invalidReason ?? fields.errorReason ?? fields.errorType ?? fields.code, 120)
+    // Not truncated to a preview: this is the sentence that says which field
+    // the facilitator disliked, and cutting it at 200 characters is what made
+    // a schema rejection unreadable for a day.
+    diagnostic.providerMessage = truncate(fields.invalidMessage ?? fields.errorMessage ?? fields.message, 600)
+
     console.error('x402 facilitator probe', JSON.stringify({
       endpoint,
       status: probe.status,
       contentType: probe.headers.get('content-type'),
       bodyBytes: body.length,
-      ...(verbose ? { body: body.slice(0, 1_000) } : { bodyPreview: body.slice(0, 200) }),
+      correlationId: diagnostic.correlationId,
+      providerReason: diagnostic.providerReason,
+      providerMessage: diagnostic.providerMessage,
+      ...(verbose ? { body: body.slice(0, 1_000) } : {}),
     }))
-    return parsed
+    return { body: parsed, diagnostic }
   } catch (probeError) {
     // The probe failing the same way is itself the answer: the runtime cannot
     // reach the host, and nothing about the payload is responsible.
     const detail = probeError instanceof Error
       ? `${probeError.name}: ${probeError.message.slice(0, 300)}${probeError.cause instanceof Error ? ` <- ${probeError.cause.name}: ${probeError.cause.message.slice(0, 200)}` : ''}`
       : String(probeError).slice(0, 200)
+    diagnostic.transport = detail
     console.error('x402 facilitator probe could not reach the host', JSON.stringify({ endpoint, detail }))
-    return null
+    return { body: null, diagnostic }
   }
 }
 
@@ -207,7 +323,7 @@ export function createFacilitator(config: FacilitatorConfig): PaymentFacilitator
   type CallResult =
     | { kind: 'response'; response: unknown }
     | { kind: 'rejection'; reason: string }
-    | { kind: 'transport-failure' }
+    | { kind: 'transport-failure'; diagnostic: FacilitatorDiagnostic }
 
   const call = async (operation: 'verify' | 'settle', payment: PaymentPayload, requirement: PaymentRequirement): Promise<CallResult> => {
     try {
@@ -226,7 +342,7 @@ export function createFacilitator(config: FacilitatorConfig): PaymentFacilitator
       }
       // A facilitator that is unreachable or erroring must never read as a
       // successful payment.
-      const probe = await reportFailure(operation, error, config, payment, requirement)
+      const { body: probe, diagnostic } = await reportFailure(operation, error, config, payment, requirement)
       if (operation === 'settle') {
         const recovered = recoverSubmittedSettlement(probe, payment, requirement)
         if (recovered) {
@@ -237,7 +353,16 @@ export function createFacilitator(config: FacilitatorConfig): PaymentFacilitator
           return { kind: 'response', response: { success: true, payer: recovered.payer, transaction: recovered.transaction } }
         }
       }
-      return { kind: 'transport-failure' }
+      // The SDK threw before it could hand back a typed rejection, but the
+      // probe reached the same endpoint and got a real verdict. That verdict
+      // is the truth of the matter and outranks the generic failure code.
+      const rejected = rejectionFromProbe(operation, probe)
+      if (rejected) return { kind: 'rejection', reason: rejected }
+      // No verdict on the payment, but the provider did answer and said why it
+      // would not look at it. That answer is the diagnosis.
+      const requestRejected = requestRejectionFromProbe(operation, diagnostic)
+      if (requestRejected) return { kind: 'rejection', reason: requestRejected }
+      return { kind: 'transport-failure', diagnostic }
     }
   }
 
