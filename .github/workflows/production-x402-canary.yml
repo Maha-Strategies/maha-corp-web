@@ -6,6 +6,12 @@ on:
   schedule:
     - cron: '17 4 * * 1,4'
   workflow_dispatch:
+    inputs:
+      force_refresh:
+        description: 'Settle exactly 0.001 USDC even when activity is recent, to refresh stale Bazaar metadata.'
+        required: false
+        type: boolean
+        default: false
 
 permissions:
   contents: read
@@ -46,7 +52,11 @@ jobs:
         id: canary
         env:
           X402_BUYER_PRIVATE_KEY: ${{ secrets.X402_BUYER_PRIVATE_KEY }}
-        run: npm run canary:x402 -- --pay-if-stale
+          FORCE_REFRESH: ${{ inputs.force_refresh || 'false' }}
+        run: |
+          args=(--pay-if-stale)
+          if [ "$FORCE_REFRESH" = "true" ]; then args+=(--force-refresh); fi
+          npm run canary:x402 -- "${args[@]}"
 
       - name: Upload canary evidence
         id: evidence

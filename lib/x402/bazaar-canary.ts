@@ -6,9 +6,24 @@ const FUTURE_CLOCK_TOLERANCE_MS = 5 * 60 * 1_000
 
 export type BazaarCanaryDecision = {
   shouldPay: boolean
-  reason: 'listing_missing' | 'last_call_missing' | 'settlement_stale' | 'settlement_recent'
+  reason: 'listing_missing' | 'last_call_missing' | 'settlement_stale' | 'settlement_recent' | 'metadata_refresh_requested'
   lastCalledAt: string | null
   ageDays: number | null
+}
+
+/**
+ * A recent settlement protects the listing from inactivity removal, but it
+ * does not prove that Bazaar indexed the current declaration. A reviewed
+ * manual workflow dispatch may therefore authorize one refresh settlement.
+ * The caller still has to supply the normal payment flag and pass every
+ * buyer, resource, price, network, asset, payee, balance, and receipt guard.
+ */
+export function applyManualMetadataRefresh(
+  decision: BazaarCanaryDecision,
+  requested: boolean,
+): BazaarCanaryDecision {
+  if (!requested) return decision
+  return { ...decision, shouldPay: true, reason: 'metadata_refresh_requested' }
 }
 
 export function findContextCompiler(resources: BazaarResource[]): BazaarResource | null {
