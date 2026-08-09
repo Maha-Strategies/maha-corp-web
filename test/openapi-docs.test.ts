@@ -19,6 +19,7 @@ const PRIVATE_ROUTES = new Set([
   '/api/v1/a2a/register',
   '/api/admin/mps-operations/actions',
   '/api/admin/commercial-api-metering',
+  '/api/admin/chargeback-export',
   '/api/admin/mps-operations/lookup',
   '/api/admin/mcp-gateway',
   '/api/mcp-gateway/[serverId]',
