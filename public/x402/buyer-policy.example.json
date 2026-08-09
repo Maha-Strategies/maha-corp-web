@@ -1,0 +1,22 @@
+{
+  "schemaVersion": "1.0.0",
+  "policyId": "research-agent-prod",
+  "policyVersion": "2026-08-09",
+  "approvedSchemes": ["exact"],
+  "approvedResources": ["https://www.mahastrategies.com/api/v1/compress"],
+  "approvedPayees": ["0xec84c1cd6602bbe387bc8e6f0d3c062f2762de28"],
+  "assetRules": [
+    {
+      "network": "eip155:8453",
+      "asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+      "maxAmountPerCall": "5000",
+      "maxAmountPerTask": "25000",
+      "humanApprovalAbove": "2000"
+    }
+  ],
+  "requireValidatedSchema": true,
+  "settlement": {
+    "requirePaymentResponse": true,
+    "requireOnchainConfirmation": true
+  }
+}

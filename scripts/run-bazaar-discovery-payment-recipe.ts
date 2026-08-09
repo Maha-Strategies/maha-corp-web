@@ -10,6 +10,7 @@ import {
   BAZAAR_MERCHANT_URL,
   BAZAAR_SEARCH_URL,
   EXPECTED_PRICE_BASE_UNITS,
+  MAHA_BUYER_POLICY,
   MAHA_CONTEXT_RESOURCE,
   MAHA_PAYEE,
   SPEND_CEILING_BASE_UNITS,
@@ -20,6 +21,13 @@ import {
   type BazaarResource,
 } from '../lib/x402/discovery-payment-recipe.ts'
 import { createPaidFetch, type TypedDataRequest } from '../lib/x402/client.ts'
+import {
+  authorizePayment,
+  createInMemoryBuyerPolicyLedger,
+  verifyAndRecordSettlement,
+  type PaymentAuthorization,
+} from '../lib/x402/buyer-policy.ts'
+import { confirmSettlement, rpcUrlFor } from '../lib/x402/chain.ts'
 
 type WalletMode = 'viem' | 'cdp'
 type RecipeWallet = {
@@ -157,15 +165,32 @@ async function run(): Promise<void> {
   const wallet = await loadWallet(args.wallet)
   await requireFundedBaseUsdcWallet(wallet)
   const body = { ...contract.inputExample, clientRequestId: `bazaar_recipe_${crypto.randomUUID()}` }
+  const taskId = `bazaar-task-${crypto.randomUUID()}`
+  const policyLedger = createInMemoryBuyerPolicyLedger()
+  let authorization: PaymentAuthorization | null = null
   let challenged = false
   const paidFetch = createPaidFetch({
     address: wallet.address,
     chainId: 8453,
     signTypedData: wallet.signTypedData,
-    onPaymentRequired(requirement) {
-      // Re-check the live 402 independently of the catalog result. No wallet
-      // signature is produced if any term drifted since discovery.
-      assertSpendPolicy(requirement)
+    async onPaymentRequired(requirement, context) {
+      // Re-check and reserve the live 402 independently of the catalog result.
+      // The authorization nonce is claimed before any wallet prompt appears.
+      const decision = await authorizePayment({
+        policy: MAHA_BUYER_POLICY,
+        ledger: policyLedger,
+        intent: {
+          taskId,
+          authorizationId: context.authorization.nonce,
+          requestedResource: MAHA_CONTEXT_RESOURCE,
+          declaredResource: context.challenge.resource.url,
+          requirement,
+          schema: { status: 'valid' },
+        },
+      })
+      if (!decision.allowed) throw new Error(`${decision.code}: ${decision.message}`)
+      if (BigInt(decision.amount) !== EXPECTED_PRICE_BASE_UNITS) throw new Error('The live price differs from the reviewed recipe price.')
+      authorization = decision
       challenged = true
       console.log(`4. Live challenge accepted; signing exactly ${requirement.amount} base units with ${args.wallet}.`)
     },
@@ -179,7 +204,31 @@ async function run(): Promise<void> {
   if (!challenged) throw new Error('The endpoint did not return the expected x402 payment challenge.')
   if (response.status !== 201) throw new Error(`Expected HTTP 201 after settlement; received ${response.status}.`)
   verifyPaymentReceipt(response.x402?.receipt, wallet.address)
-  console.log('5. Verified PAYMENT-RESPONSE')
+  if (!authorization) throw new Error('No buyer-policy authorization was recorded before signing.')
+  const receipt = response.x402.receipt
+  const rpcUrl = rpcUrlFor(authorization.network, process.env.BASE_RPC_URL)
+  if (!rpcUrl) throw new Error(`No RPC endpoint is configured for ${authorization.network}.`)
+  const chain = await confirmSettlement({
+    rpcUrl,
+    caip2Network: authorization.network,
+    transaction: receipt.transaction,
+    asset: authorization.asset,
+    payer: wallet.address,
+    payTo: authorization.payee,
+    minAmount: authorization.amount,
+  })
+  const settlement = await verifyAndRecordSettlement({
+    policy: MAHA_BUYER_POLICY,
+    authorization,
+    payer: wallet.address,
+    receipt,
+    onchain: chain.status === 'confirmed'
+      ? { status: 'confirmed', transaction: chain.transaction, network: authorization.network, asset: authorization.asset, payer: wallet.address, payTo: authorization.payee, amount: chain.amount, blockNumber: chain.blockNumber }
+      : chain,
+    ledger: policyLedger,
+  })
+  if (!settlement.verified) throw new Error(`${settlement.code}: ${settlement.message}`)
+  console.log('5. Verified PAYMENT-RESPONSE and on-chain ERC-20 transfer')
   console.log(`   payer=${response.x402.receipt.payer}`)
   console.log(`   transaction=https://basescan.org/tx/${response.x402.receipt.transaction}`)
 

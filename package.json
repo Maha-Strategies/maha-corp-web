@@ -41,6 +41,8 @@
     "verify:x402-sepolia": "node --experimental-strip-types scripts/verify-x402-sepolia.ts",
     "build:sdk": "npm --prefix packages/sdk run build",
     "pack:sdk": "npm --prefix packages/sdk run pack:dry-run",
+    "build:x402-buyer-policy": "npm --prefix packages/x402-buyer-policy run build",
+    "pack:x402-buyer-policy": "npm --prefix packages/x402-buyer-policy run pack:dry-run",
     "test": "node --test --experimental-strip-types test/*.test.ts"
   },
   "dependencies": {

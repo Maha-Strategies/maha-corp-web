@@ -22,9 +22,9 @@ const requirement = {
 test('the recipe accepts only the expected payment below its hard ceiling', () => {
   assert.ok(EXPECTED_PRICE_BASE_UNITS < SPEND_CEILING_BASE_UNITS)
   assert.doesNotThrow(() => assertSpendPolicy(requirement))
-  assert.throws(() => assertSpendPolicy({ ...requirement, amount: String(SPEND_CEILING_BASE_UNITS + BigInt(1)) }), /hard ceiling/)
+  assert.throws(() => assertSpendPolicy({ ...requirement, amount: String(SPEND_CEILING_BASE_UNITS + BigInt(1)) }), /per-call ceiling/)
   assert.throws(() => assertSpendPolicy({ ...requirement, amount: '2000' }), /expects exactly/)
-  assert.throws(() => assertSpendPolicy({ ...requirement, payTo: '0x0000000000000000000000000000000000000000' }), /unexpected payee/)
+  assert.throws(() => assertSpendPolicy({ ...requirement, payTo: '0x0000000000000000000000000000000000000000' }), /payee is not allowlisted/)
 })
 
 test('the recipe inspects the Bazaar input and output schemas before use', () => {
