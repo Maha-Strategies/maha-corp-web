@@ -15,24 +15,27 @@ export const CONTEXT_COMPILER_VERSION = '0.1.0'
  * Bytes rather than tokens because the cap has to be checked before the body
  * is parsed. Real agent traces run about 3.8 bytes per token.
  */
-// Derived from measured tail latency, not from an average and not chosen.
+// Derived from measured p95, and re-derived whenever the tokenizer changes.
 //
-// SLAs are written against p95, so the caps are too. Measured over 60 runs per
-// size with the current defaults (bm25 + compound tokenization), at roughly
-// 3.45 bytes per token:
+// Unicode-aware tokenization costs roughly 40% more than the ASCII-only
+// pattern it replaced, so the caps that held a p95 SLA before it no longer
+// did: 150,076 tokens moved from 41.7ms to 56.4ms. The SLA is the promise and
+// the cap is derived from it, so the cap moved rather than the promise.
 //
-//   150,076 tokens   p50 34.6ms   p95 41.7ms   p99 54.1ms
-//   202,276 tokens   p50 44.6ms   p95 50.9ms   p99 86.6ms
-//   358,151 tokens   p50 82.2ms   p95 89.5ms   p99 95.6ms
+// Set from measured points rather than a fitted line, because a fit through
+// the origin ignores fixed per-call overhead and reads optimistic near the
+// boundary -- it put p95 50ms at 158k tokens where 153,654 already measured
+// 53.7ms.
 //
-// A median-based cap would have sat near 210,000 tokens and missed a sub-50ms
-// p95 by about a millisecond, which is the difference between an SLA that
-// holds under load and one that is quietly breached in the tail.
+//   125,051 tokens   p50 41.4ms   p95 42.7ms   <- standard sits below this
+//   153,654 tokens   p50 48.4ms   p95 53.7ms
+//   313,154 tokens   p50 87.5ms   p95 93.8ms   <- enterprise sits at this
+//   356,654 tokens   p50 102.2ms  p95 114.2ms
 //
-// p99 still exceeds 50ms at the standard cap. An SLA written against p99 needs
-// a lower figure again; this is honest about which percentile it guarantees.
-export const STANDARD_MAX_CONTEXT_PACK_BYTES = 525_000
-export const ENTERPRISE_MAX_CONTEXT_PACK_BYTES = 1_200_000
+// Bytes rather than tokens because the cap is checked before the body is
+// parsed. Real agent traces run about 3.47 bytes per token.
+export const STANDARD_MAX_CONTEXT_PACK_BYTES = 450_000
+export const ENTERPRISE_MAX_CONTEXT_PACK_BYTES = 1_050_000
 
 /** Retained for callers that imported the old name; equals the standard cap. */
 export const MAX_CONTEXT_PACK_BYTES = STANDARD_MAX_CONTEXT_PACK_BYTES
@@ -141,8 +144,26 @@ export function sha256(value: string): string {
 export function estimateTokens(value: string): number {
   // Deliberately model-neutral. This is a reproducible approximation, not a
   // provider tokenizer count and must not be used for billing.
-  const units = value.trim().match(/[A-Za-z0-9]+|[^\sA-Za-z0-9]/g) ?? []
-  return units.length
+  //
+  // Counting every non-ASCII character as one unit over-counted Cyrillic and
+  // Arabic by roughly three times, which does not merely misreport size: a
+  // passage that looks larger than the budget is dropped, so whole languages
+  // were being excluded for being too big when they would have fit. The
+  // divisors below are fitted against real BPE on sample text per script
+  // family, not derived -- see scripts/measure-language-retention.ts.
+  let units = 0
+  for (const [, latin, unsegmented, alphabetic, other] of value.trim().matchAll(
+    /([A-Za-z0-9]+)|([\p{Script=Han}\p{Script=Hiragana}\p{Script=Katakana}\p{Script=Hangul}\p{Script=Thai}]+)|([\p{L}\p{N}]+)|([^\s])/gu,
+  )) {
+    if (latin) { units += 1; continue }
+    // CJK runs tokenize at roughly one token per character.
+    if (unsegmented) { units += unsegmented.length; continue }
+    // Cyrillic, Greek, Arabic, Hebrew, Devanagari: about three characters per
+    // token, versus the one-per-character this used to assume.
+    if (alphabetic) { units += Math.max(1, Math.round(alphabetic.length / 3)); continue }
+    if (other) units += 1
+  }
+  return units
 }
 
 export function createContextPackId(): string {
@@ -201,21 +222,57 @@ const STOPWORDS = new Set([
  * itself. The whole token is kept too, because an exact identifier match is
  * still the strongest possible signal.
  */
+// Scripts written without spaces between words. A run of these cannot be split
+// on whitespace, so it is indexed as overlapping character bigrams -- the same
+// approach Lucene's CJK analyser takes, and enough for a term to be matchable
+// at all, which is the difference between ranking and not ranking.
+const UNSEGMENTED = /[\p{Script=Han}\p{Script=Hiragana}\p{Script=Katakana}\p{Script=Hangul}\p{Script=Thai}]/u
+const WORD_RUN = /[\p{L}\p{N}][\p{L}\p{N}_-]*/gu
+const MIXED_SCRIPT_BOUNDARY = /(?=[\p{Script=Han}\p{Script=Hiragana}\p{Script=Katakana}\p{Script=Hangul}\p{Script=Thai}]+)|(?<=[\p{Script=Han}\p{Script=Hiragana}\p{Script=Katakana}\p{Script=Hangul}\p{Script=Thai}])(?=[^\p{Script=Han}\p{Script=Hiragana}\p{Script=Katakana}\p{Script=Hangul}\p{Script=Thai}])/u
+// Only a run containing a case change or a separator can decompose, so the
+// expensive replace/split chain is skipped for ordinary lowercase words.
+const COMPOUND = /[_-]|\p{Ll}\p{Lu}|\p{N}\p{L}|\p{L}\p{N}/u
+
+function bigrams(run: string): string[] {
+  if (run.length === 1) return [run]
+  const out: string[] = []
+  for (let index = 0; index + 1 < run.length; index += 1) out.push(run.slice(index, index + 2))
+  return out
+}
+
 function tokenize(value: string): string[] {
   const tokens: string[] = []
-  for (const raw of value.match(/[A-Za-z0-9][A-Za-z0-9_-]*/g) ?? []) {
-    const lowered = raw.toLowerCase()
-    if (lowered.length >= 3) tokens.push(lowered)
-    // camelCase, PascalCase, snake_case and kebab-case all split here.
-    const parts = raw
-      .replace(/([a-z0-9])([A-Z])/g, '$1 $2')
-      .replace(/([A-Z]+)([A-Z][a-z])/g, '$1 $2')
-      .split(/[^A-Za-z0-9]+/)
-      .map((part) => part.toLowerCase())
-      .filter((part) => part.length >= 3)
-    if (parts.length > 1) tokens.push(...parts)
+  for (const raw of value.match(WORD_RUN) ?? []) {
+    // Fast path, and it is the path almost every call takes. The mixed-script
+    // split below uses lookbehind with script properties, which is expensive
+    // enough per word to move the p95 latency that the payload caps are
+    // derived from -- so it runs only when the run actually contains an
+    // unsegmented script.
+    if (!UNSEGMENTED.test(raw)) { pushWord(tokens, raw); continue }
+
+    for (const segment of raw.split(MIXED_SCRIPT_BOUNDARY)) {
+      if (!segment) continue
+      if (UNSEGMENTED.test(segment)) tokens.push(...bigrams(segment))
+      else pushWord(tokens, segment)
+    }
   }
   return tokens
+}
+
+/** A space-separated word, plus the parts of any compound it was built from. */
+function pushWord(tokens: string[], segment: string): void {
+  const lowered = segment.toLowerCase()
+  // Two, not three: many scripts carry meaning in short words, and a
+  // three-character floor discarded most of them.
+  if (lowered.length >= 2) tokens.push(lowered)
+  if (!COMPOUND.test(segment)) return
+  const parts = segment
+    .replace(/(\p{Ll}|\p{N})(\p{Lu})/gu, '$1 $2')
+    .replace(/(\p{Lu}+)(\p{Lu}\p{Ll})/gu, '$1 $2')
+    .split(/[^\p{L}\p{N}]+/u)
+    .map((part) => part.toLowerCase())
+    .filter((part) => part.length >= 2)
+  if (parts.length > 1) tokens.push(...parts)
 }
 
 function keywords(task: string): Set<string> {
