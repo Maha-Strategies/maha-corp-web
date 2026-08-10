@@ -1,5 +1,16 @@
 # Production migration evidence — 2026-08-03
 
+> **CORRECTION, 2026-08-10.** This run targeted the **staging** project, not
+> Production. The `SUPABASE_PROJECT_REF` variable in the `production-database`
+> environment held `wukyzcqxzkbwuledzxlx` (`maha-corp-staging.`) instead of the
+> Production ref `uhwuullakihgszxhiygz`, so the migration history, pending list,
+> drift report and convergence check recorded below all describe staging. The
+> apply itself succeeded and the evidence is internally consistent — it simply
+> describes a different database than its title claims. Production had no
+> migration applied through this workflow before 2026-08-10. The variable is
+> corrected and the workflow now asserts its target against a literal before
+> doing any work.
+
 This record indexes the first successful, reviewer-approved execution of the
 Production database migration workflow. It contains identifiers and outcomes,
 not a database dump or customer data.
