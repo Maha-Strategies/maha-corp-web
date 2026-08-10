@@ -76,7 +76,18 @@ export async function fetchAgentTaskSpendDaily(
       .eq('tenant_id', query.tenantId.trim())
       .gte('usage_day', query.startDate)
       .lte('usage_day', query.endDate)
-    if (error) return { ok: false, reason: 'query_failed' }
+    if (error) {
+      // Logged with the provider's own code because `query_failed` covers two
+      // very different situations: a table PostgREST cannot see yet (PGRST205,
+      // fixed by a schema reload) and a database that cannot be reached. The
+      // first cost a round trip to diagnose once; it should name itself next
+      // time. Not returned to the caller, which gets a stable code.
+      console.error('agent task spend query failed', JSON.stringify({
+        code: (error as { code?: unknown }).code ?? null,
+        message: String((error as { message?: unknown }).message ?? '').slice(0, 200),
+      }))
+      return { ok: false, reason: 'query_failed' }
+    }
 
     const rows = (Array.isArray(data) ? data : []) as SpendRow[]
     const filtered = query.costCenter ? rows.filter((row) => row.cost_center === query.costCenter) : rows

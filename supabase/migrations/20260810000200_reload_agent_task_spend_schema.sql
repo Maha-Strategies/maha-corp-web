@@ -1,0 +1,17 @@
+-- Expose the chargeback attribution tables and RPC to PostgREST.
+--
+-- Supabase's REST layer answers from a cached schema, so a correctly applied
+-- migration stays invisible to it until that cache refreshes. Both halves of
+-- the chargeback path go through PostgREST -- writes call the
+-- record_agent_task_spend RPC, reads select from agent_task_spend_daily -- so
+-- without this the ledger accepts nothing and returns nothing while every
+-- migration reports success.
+--
+-- That failure is quiet in the worst way. recordAgentTaskSpend swallows ledger
+-- errors by design, because a billing report is not worth a failed customer
+-- request, so the write side degrades to a log line and the route still answers
+-- 201. The staging probe caught it only because it reads the rows back rather
+-- than trusting the status code.
+--
+-- Same remedy as 20260730000200 for the API-credit billing tables.
+notify pgrst, 'reload schema';
