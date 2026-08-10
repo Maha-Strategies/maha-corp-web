@@ -117,3 +117,47 @@ signed result callback before `/api/v1/jobs/webhook` runs.
 If you already configured `preview-capacity`, the bypass secret and the upstream
 URL and token are the same values; the API key should stay distinct so capacity
 and E2E runs do not consume one another's balance.
+
+## Branch protection
+
+`verify` (from `.github/workflows/quality.yml`) is the required status check on
+`main`. This workflow is **not** a required check, deliberately.
+
+Three reasons it cannot be one as written:
+
+- Its triggers are `deployment_status` and `workflow_dispatch`, not
+  `pull_request`, so it does not report on a pull request the way a gate must.
+- Non-Preview deployment events fire it and the job-level `if:` skips them.
+  GitHub counts a skipped required check as passing, so requiring it would
+  create a rule that looks strict and enforces nothing.
+- Every run spends roughly a dozen canary credits, mutates the shared canary
+  tenant's MCP SLA and trips its circuit breaker, under a global
+  non-cancelling concurrency group. Requiring it per pull request would make
+  concurrent pull requests fail each other for reasons unrelated to their
+  changes.
+
+The required context is the **job** name, `verify`, not the workflow name.
+GitHub keys required checks on jobs; requiring a workflow name blocks every
+pull request forever, waiting for a check that never reports.
+
+`enforce_admins` is false so a provider outage cannot lock the repository.
+
+Making this suite a real gate means isolating the canary tenant per run first.
+The cost is the shared state, not the workflow.
+
+## Upstream deployment drift
+
+The suite refuses to run when the deployed Modal upstream is not the worker in
+the checkout. `workers/maha_workers.py` bakes a digest of its own source into
+the image at deploy -- where the module is imported from the operator's
+checkout -- and reports it through a `maha/deployment` JSON-RPC method.
+`scripts/test-e2e.ts` recomputes the same digest and compares.
+
+A content digest rather than a commit: CI checks out at depth 1, so there is no
+history to diff a deployed commit against, and a commit would also report drift
+for changes that never touched this worker.
+
+This exists because the upstream once ran four days behind the tree and the
+only symptom was `allowedToolNames must appear in the validated tools/list
+inventory` -- a message pointing at configuration, which is where the search
+went. Redeploy with `modal deploy workers/maha_workers.py`.
