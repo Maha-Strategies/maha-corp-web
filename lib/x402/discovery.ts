@@ -173,7 +173,13 @@ export async function discoveryExtensionsFor(
     amount: offer.amount,
     asset: 'USDC',
     assetDecimals: USDC_DECIMALS,
-    network: BASE_MAINNET_CAIP2,
+    // Read from the requirement this challenge actually carries, never from a
+    // constant. Preview settles on Base Sepolia and Production on Base
+    // Mainnet, so a hard-coded mainnet CAIP-2 here would tell a Preview buyer
+    // to prepare a payment on a chain the accepts array does not accept -- an
+    // extension that contradicts the requirement beside it is worse than no
+    // extension at all.
+    network: requirement?.network ?? BASE_MAINNET_CAIP2,
     status: offer.status,
     maxRequestBytes: offer.maxRequestBytes,
     capabilityBoundaries: [...offer.capabilityBoundaries],
