@@ -85,6 +85,25 @@ export function resolveTaskAttribution(
   }
 }
 
+/** The header proxy.ts injects after authorizing a credential. */
+export const TENANT_ID_HEADER = 'x-maha-tenant-id'
+
+/**
+ * The billing identity a spend row is keyed on.
+ *
+ * One function rather than a header read at each call site, because the two
+ * identities in play look interchangeable and are not: `x-maha-api-key-id`
+ * carries `key_<hex>` and identifies one credential, while this carries
+ * `tenant_<hex>` and identifies the customer that credential belongs to. A
+ * surface that recorded the key id would write rows a tenant-scoped export
+ * silently skips -- which is exactly what the jobs path did before this
+ * existed, and it would have looked like missing usage rather than a defect.
+ */
+export function resolveTenantId(headers: Headers): string | null {
+  const value = headers.get(TENANT_ID_HEADER)?.trim()
+  return value ? value : null
+}
+
 /**
  * Whether this call can be attributed at all.
  *

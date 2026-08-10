@@ -6,7 +6,7 @@ import crypto from 'crypto';
 import { MAX_MCP_GATEWAY_BODY_BYTES } from '@/lib/mcp-gateway';
 import { sendMcpConnectivityAlert } from '@/lib/observability/alerts';
 import { evaluateMcpServerPolicy } from '@/lib/mcp/validation';
-import { isAttributable, resolveTaskAttribution } from '@/lib/agent-task-attribution';
+import { isAttributable, resolveTaskAttribution, resolveTenantId } from '@/lib/agent-task-attribution';
 import { recordAgentTaskSpend } from '@/lib/agent-task-spend';
 
 export async function POST(
@@ -73,7 +73,10 @@ export async function POST(
     // adds nothing to the latency of a call that is already proxying to a
     // third-party server.
     const attribution = resolveTaskAttribution(req.headers)
-    if (isAttributable(attribution, tenantId)) {
+    // The gateway already authenticated `tenantId` above from the same header
+    // this resolves, so they agree; resolved through the shared function so a
+    // future change to the header name cannot leave one surface behind.
+    if (isAttributable(attribution, resolveTenantId(req.headers) ?? tenantId)) {
       after(() => recordAgentTaskSpend({
         tenantId,
         taskId: attribution.taskId!,

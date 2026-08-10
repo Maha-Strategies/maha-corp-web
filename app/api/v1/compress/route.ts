@@ -2,7 +2,7 @@ import { compileContextPack, maxContextPackBytes, parseContextPackRequest } from
 import { withSlotRelease } from '@/lib/x402/slot'
 import { accessModeFrom, recordContextCompilerUsage } from '@/lib/context-compiler-metering'
 import { consumeAdditionalApiCredits } from '@/lib/api-key'
-import { isAttributable, resolveTaskAttribution } from '@/lib/agent-task-attribution'
+import { isAttributable, resolveTaskAttribution, resolveTenantId } from '@/lib/agent-task-attribution'
 import { recordAgentTaskSpend } from '@/lib/agent-task-spend'
 import {
   CREDITS_CHARGED_HEADER,
@@ -83,7 +83,7 @@ async function withBilling(
   // delivered. A call carrying no task identifier writes no row at all rather
   // than an unallocatable line an invoice cannot use.
   const attribution = resolveTaskAttribution(context.request.headers)
-  const tenantId = context.request.headers.get('x-maha-tenant-id')
+  const tenantId = resolveTenantId(context.request.headers)
   if (isAttributable(attribution, tenantId)) {
     await recordAgentTaskSpend({
       tenantId: tenantId!,

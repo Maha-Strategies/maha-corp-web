@@ -20,7 +20,7 @@ import { JobValidationError, parseQuboIsingJobRequest } from '@/lib/jobs/contrac
 import { dispatchToWorker, enqueueQuboIsingJob, failUndispatchedJob, workerDispatchConfigured } from '@/lib/jobs/queue'
 import { quoteJobCredits } from '@/lib/jobs/pricing'
 import { jobResponseHeaders, publicJobView } from '@/lib/jobs/provenance'
-import { resolveTaskAttribution } from '@/lib/agent-task-attribution'
+import { resolveTaskAttribution, resolveTenantId } from '@/lib/agent-task-attribution'
 
 export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
@@ -59,7 +59,7 @@ export async function POST(request: Request) {
       callbackUrl: `${new URL(request.url).origin}/api/v1/jobs/webhook`,
       // Captured here and carried on the job record: the settlement webhook is
       // where the real charge becomes known, and this request is gone by then.
-      attribution: resolveTaskAttribution(request.headers),
+      attribution: { ...resolveTaskAttribution(request.headers), tenantId: resolveTenantId(request.headers) },
     })
   } catch {
     return json({ error: { code: 'job_enqueue_failed', message: 'The job could not be queued. No credits were charged.' } }, 503)

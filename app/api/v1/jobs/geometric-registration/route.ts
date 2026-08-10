@@ -6,7 +6,7 @@ import { JobValidationError, parseGeometricRegistrationJobRequest } from '@/lib/
 import { dispatchToWorker, enqueueGeometricRegistrationJob, failUndispatchedJob, workerDispatchConfigured } from '@/lib/jobs/queue'
 import { quoteJobCredits } from '@/lib/jobs/pricing'
 import { jobResponseHeaders, publicJobView } from '@/lib/jobs/provenance'
-import { resolveTaskAttribution } from '@/lib/agent-task-attribution'
+import { resolveTaskAttribution, resolveTenantId } from '@/lib/agent-task-attribution'
 
 export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
@@ -30,7 +30,7 @@ export async function POST(request: Request) {
   const zeroDataRetention = request.headers.get('x-maha-zero-data-retention') === 'true'
   // Captured here and carried on the job record: the settlement webhook is
   // where the real charge becomes known, and this request is gone by then.
-  const attribution = resolveTaskAttribution(request.headers)
+  const attribution = { ...resolveTaskAttribution(request.headers), tenantId: resolveTenantId(request.headers) }
   let outcome
   try {
     outcome = await enqueueGeometricRegistrationJob({ request: parsed, keyId, zeroDataRetention, attribution, callbackUrl: `${new URL(request.url).origin}/api/v1/jobs/webhook` })
