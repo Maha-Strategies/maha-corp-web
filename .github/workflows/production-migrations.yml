@@ -3,11 +3,19 @@ name: Production database migrations
 # Applies supabase/migrations to the Production database through a reviewed,
 # evidenced path instead of the Supabase SQL editor.
 #
-# VERIFIED: reviewer-approved Production run 30815131758 completed on
-# 2026-08-03, applied the pending convergence migration, proved zero remaining
-# schema drift, and passed post-apply application health. The evidence record is
-# docs/production-migration-evidence-2026-08-03.md. Future changes still require
-# reviewing a fresh dry-run before apply.
+# CORRECTED 2026-08-10: the run recorded below, and every run between
+# 2026-08-03 and 2026-08-10, targeted the STAGING project. The
+# SUPABASE_PROJECT_REF variable in the production-database environment held
+# `wukyzcqxzkbwuledzxlx` (maha-corp-staging.) rather than the Production ref, so
+# the history, pending list, drift report and convergence check in those runs
+# all describe staging. Read
+# docs/production-migration-evidence-2026-08-03.md with that in mind: it is
+# evidence of a successful apply, but not to Production.
+#
+# The variable is corrected and the first step of this job now asserts the
+# target against a literal in this file, so the same silent redirection cannot
+# recur. Production had no migration applied through this path before
+# 2026-08-10.
 #
 # It deliberately has no automatic revert. A down-migration against ledgers that
 # hold commercial history would compound an incident rather than resolve it, so a
@@ -71,6 +79,39 @@ jobs:
       RELEASE_HEALTH_OUTPUT: ${{ github.workspace }}/post-migration-health.json
       EVIDENCE: ${{ github.workspace }}/migration-evidence
     steps:
+      # First, before any checkout or install, because everything after this
+      # step believes it is talking to Production.
+      #
+      # SUPABASE_PROJECT_REF held the staging ref from 2026-08-03 until
+      # 2026-08-10, so every run in that window linked to staging, applied
+      # migrations there, and reported staging's history, staging's pending
+      # list and staging's drift as Production's. Nothing failed. The workflow
+      # cannot detect this on its own: `supabase link` succeeds against any
+      # project the token can reach, and every check afterwards asks the
+      # database it was pointed at.
+      #
+      # The expected ref is a literal here rather than another variable, on
+      # purpose. A variable checked against a variable proves nothing; this
+      # value is in a reviewed file, under version control, and changing it
+      # requires a pull request. The variable stays because it is what `link`
+      # consumes, and a disagreement between the two is now a hard stop rather
+      # than a silent redirection.
+      - name: Assert the Production target
+        env:
+          REF: ${{ vars.SUPABASE_PROJECT_REF }}
+        run: |
+          set -euo pipefail
+          expected='uhwuullakihgszxhiygz'
+          if [ -z "${REF:-}" ]; then
+            echo '::error::SUPABASE_PROJECT_REF is unset. Refusing to guess which database is Production.'
+            exit 1
+          fi
+          if [ "$REF" != "$expected" ]; then
+            echo "::error::SUPABASE_PROJECT_REF is '$REF', not Production ('$expected'). Refusing to run: a migration applied to the wrong database reports success and leaves Production untouched."
+            exit 1
+          fi
+          echo "Target confirmed: $REF"
+
       - name: Enforce explicit apply confirmation
         env:
           MODE: ${{ inputs.mode }}
