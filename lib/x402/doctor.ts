@@ -117,6 +117,43 @@ function normalizedUrl(value: string): string {
   return url.toString()
 }
 
+/**
+ * Fields a reconstructed comparison may use.
+ *
+ * A catalog that never returns a field cannot be said to disagree about it.
+ * CDP's merchant record omits `mimeType` entirely, and treating that absence
+ * as `null` made every healthy listing hash differently from its own live
+ * declaration -- a permanent false "stale metadata" warning that prompted
+ * bounded settlements to refresh a listing that was already current. Absence
+ * is not disagreement, so a field the catalog does not carry is dropped from
+ * both sides and reported as uncompared.
+ *
+ * This applies only to the reconstructed path. When the catalog publishes a
+ * declaration digest of its own there is nothing to reconstruct and the
+ * comparison is exact.
+ */
+export function comparableDeclarations(indexed: JsonRecord, live: JsonRecord): {
+  indexed: JsonRecord
+  live: JsonRecord
+  uncompared: string[]
+} {
+  const uncompared: string[] = []
+  const trimmedIndexed: JsonRecord = {}
+  const trimmedLive: JsonRecord = {}
+  for (const key of Object.keys(live)) {
+    // Null or undefined on the indexed side means the catalog did not carry
+    // the field. A field it carries as an empty string or empty object is a
+    // real value and stays in the comparison.
+    if (indexed[key] === null || indexed[key] === undefined) {
+      uncompared.push(key)
+      continue
+    }
+    trimmedIndexed[key] = indexed[key]
+    trimmedLive[key] = live[key]
+  }
+  return { indexed: trimmedIndexed, live: trimmedLive, uncompared }
+}
+
 function declaration(value: { resource?: unknown; description?: unknown; mimeType?: unknown; accepts?: unknown; extensions?: unknown }): JsonRecord {
   const resource = typeof value.resource === 'string'
     ? value.resource
@@ -362,11 +399,15 @@ export async function diagnoseX402Endpoint(options: DoctorOptions): Promise<Doct
               add(findings, 'x402.declaration_integrity.catalog_malformed', 'warning', 'The catalog exposes a malformed declaration-integrity value.')
             }
             const indexedDeclaration = declaration(current)
-            const reconstructedDigest = await sha256(indexedDeclaration)
+            // Reconstructed comparisons only consider fields the catalog
+            // actually returned. See comparableDeclarations.
+            const comparable = comparableDeclarations(indexedDeclaration, liveDeclaration)
+            const reconstructedDigest = await sha256(comparable.indexed)
+            const comparableLiveDigest = await sha256(comparable.live)
             const indexedDigest = indexedIntegrity?.declarationDigest ?? reconstructedDigest
             const matchesLive = indexedIntegrity
               ? indexedDigest === report.live.integrityDigest
-              : indexedDigest === report.live.declarationDigest
+              : reconstructedDigest === comparableLiveDigest
             report.bazaar = {
               found: true,
               resource: bazaarResourceUrl(current) ?? undefined,
@@ -380,8 +421,15 @@ export async function diagnoseX402Endpoint(options: DoctorOptions): Promise<Doct
               add(findings, 'x402.declaration_integrity.catalog_resource', 'warning', 'The catalog digest belongs to a different canonical resource.', indexedIntegrity.canonicalResource)
             }
             if (!matchesLive) {
-              const liveDigest = indexedIntegrity ? report.live.integrityDigest : report.live.declarationDigest
-              add(findings, 'x402.bazaar.stale_metadata', 'warning', 'The Bazaar declaration differs from the live PAYMENT-REQUIRED declaration.', `live=${liveDigest}; bazaar=${indexedDigest}; source=${indexedIntegrity ? 'catalog' : 'reconstructed'}`)
+              const liveDigest = indexedIntegrity ? report.live.integrityDigest : comparableLiveDigest
+              const scope = indexedIntegrity ? '' : `; compared=${Object.keys(comparable.indexed).join(',') || 'none'}`
+              const skipped = comparable.uncompared.length > 0 && !indexedIntegrity ? `; uncompared=${comparable.uncompared.join(',')}` : ''
+              add(findings, 'x402.bazaar.stale_metadata', 'warning', 'The Bazaar declaration differs from the live PAYMENT-REQUIRED declaration.', `live=${liveDigest}; bazaar=${indexedDigest}; source=${indexedIntegrity ? 'catalog' : 'reconstructed'}${scope}${skipped}`)
+            } else if (!indexedIntegrity && comparable.uncompared.length > 0) {
+              // Stated rather than silent: the listing matches on everything
+              // comparable, and a reader should know the match is partial and
+              // why, instead of reading a clean pass as a complete one.
+              add(findings, 'x402.bazaar.partial_comparison', 'note', 'The catalog does not return every declared field, so the match is partial.', `uncompared=${comparable.uncompared.join(',')}`)
             }
           }
         }

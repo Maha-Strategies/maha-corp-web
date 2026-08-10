@@ -2,7 +2,7 @@ import assert from 'node:assert/strict'
 import test from 'node:test'
 
 import { discoveryExtensionsFor } from '../lib/x402/discovery.ts'
-import { diagnoseX402Endpoint, doctorReportToSarif } from '../lib/x402/doctor.ts'
+import { diagnoseX402Endpoint, doctorReportToSarif, comparableDeclarations } from '../lib/x402/doctor.ts'
 import { createDeclarationDigestExtension } from '../lib/x402/declaration-digest.ts'
 import type { PaymentChallenge, PaymentRequirement } from '../lib/x402/client.ts'
 import { parseDoctorArgs } from '../scripts/x402-doctor.ts'
@@ -227,4 +227,46 @@ test('the CLI makes paid probes explicit and base-unit bounded', async () => {
   assert.equal(options.pay, true)
   assert.equal(options.maxAmount, BigInt(1000))
   assert.equal(options.privateKeyEnvironment, 'DEDICATED_CANARY_KEY')
+})
+
+// ---------------------------------------------------------------------------
+// Reconstructed comparison against a catalog that drops fields
+// ---------------------------------------------------------------------------
+
+test('a field the catalog never returns is not evidence of drift', () => {
+  // CDP's merchant record omits mimeType. Treating that absence as null made
+  // every healthy listing hash differently from its own live declaration, so
+  // the stale-metadata warning fired permanently and prompted bounded
+  // settlements to refresh a listing that was already current.
+  const live = { resource: 'https://x/y', description: 'd', mimeType: 'application/json', accepts: [], extensions: {} }
+  const indexed = { resource: 'https://x/y', description: 'd', mimeType: null, accepts: [], extensions: {} }
+
+  const comparable = comparableDeclarations(indexed, live)
+  assert.deepEqual(comparable.uncompared, ['mimeType'])
+  assert.ok(!('mimeType' in comparable.indexed))
+  assert.ok(!('mimeType' in comparable.live), 'dropping from one side only would still mismatch')
+  assert.deepEqual(Object.keys(comparable.indexed), Object.keys(comparable.live))
+})
+
+test('a field the catalog returns with a different value is still drift', () => {
+  // The fix must not silence real disagreement. An indexed description that
+  // has genuinely fallen behind is exactly what this check exists to catch.
+  const live = { resource: 'https://x/y', description: 'new text', mimeType: 'application/json' }
+  const indexed = { resource: 'https://x/y', description: 'old text', mimeType: null }
+
+  const comparable = comparableDeclarations(indexed, live)
+  assert.equal(comparable.indexed.description, 'old text')
+  assert.equal(comparable.live.description, 'new text')
+  assert.deepEqual(comparable.uncompared, ['mimeType'])
+})
+
+test('an empty value the catalog does carry stays in the comparison', () => {
+  // Absent and empty are different claims. A catalog that returns an empty
+  // description is asserting one, and that disagreement should surface.
+  const comparable = comparableDeclarations(
+    { description: '', extensions: {} },
+    { description: 'real text', extensions: {} },
+  )
+  assert.deepEqual(comparable.uncompared, [])
+  assert.equal(comparable.indexed.description, '')
 })
