@@ -1,0 +1,84 @@
+name: x402 settlement watch
+
+# Reports who paid for the Context Compiler, and whether anyone came back.
+#
+# The first external settlement was noticed because the operator looked at a
+# wallet balance and asked where the money came from. Nothing reported it. The
+# endpoint watch covers availability and the Bazaar canary covers listing
+# freshness; neither notices revenue, and the commercial plan gates its pricing
+# decisions on an event -- a second payment from a wallet that is not ours --
+# that nothing was collecting.
+#
+# Read-only and credential-free. It reads public Base Mainnet logs, holds no
+# wallet, and cannot spend. That is why it can run on a schedule without a
+# secret to leak, and why it is safe to run more often than the canary.
+
+on:
+  schedule:
+    - cron: '23 6,18 * * *'
+  workflow_dispatch:
+    inputs:
+      days:
+        description: Days of chain history to scan (1-90)
+        required: false
+        default: '30'
+        type: string
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: x402-settlement-watch
+  cancel-in-progress: false
+
+jobs:
+  watch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      BASE_RPC_URL: ${{ vars.BASE_RPC_URL }}
+      X402_WATCH_OUTPUT_PATH: ${{ github.workspace }}/x402-settlement-watch.json
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+
+      - name: Scan Base for settlements
+        id: watch
+        run: |
+          set -o pipefail
+          node --experimental-strip-types scripts/watch-x402-settlements.ts \
+            --days "${{ inputs.days || '30' }}" 2>&1 | tee "$RUNNER_TEMP/settlement-watch.log"
+
+      - name: Upload settlement evidence
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: x402-settlement-watch-${{ github.run_id }}
+          path: ${{ env.X402_WATCH_OUTPUT_PATH }}
+          if-no-files-found: warn
+          retention-days: 90
+
+      # One issue, updated, rather than a new one per run. A repeat buyer is the
+      # decision gate for pricing, so it should arrive as a durable record
+      # somebody can act on, not as a line in a log nobody reads.
+      - name: Record a repeat buyer
+        if: ${{ steps.watch.outputs.repeat_buyer == 'true' }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+          SUMMARY: ${{ steps.watch.outputs.summary }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          set -euo pipefail
+          body=$(printf 'A wallet that is not the canary has settled more than once.\n\n%s\n\nThis is the demand-validation gate from the commercial plan: repeat external settlements are the evidence required before changing price or adding a paid resource.\n\nCanary traffic is excluded from every figure. Full breakdown in the run evidence artifact.\n\nRun: %s' "$SUMMARY" "$RUN_URL")
+          existing=$(gh issue list --label x402-repeat-buyer --state open --limit 1 --json number --jq '.[0].number // empty')
+          if [ -n "$existing" ]; then
+            gh issue comment "$existing" --body "$body"
+          else
+            gh label create x402-repeat-buyer --color 0E8A16 --description "External wallet settled more than once" 2>/dev/null || true
+            gh issue create --title "Repeat external x402 buyer" --label x402-repeat-buyer --body "$body"
+          fi
