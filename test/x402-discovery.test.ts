@@ -96,3 +96,18 @@ test('each offer gets its own declaration rather than the first one probed', asy
   assert.equal(entryOffer.offerId, 'context-compression')
   assert.equal(entryOffer.amount, '1000')
 })
+
+test('the offer extension names the chain the requirement actually uses', async () => {
+  // Preview settles on Base Sepolia and Production on Base Mainnet. An
+  // extension that hard-coded mainnet would tell a Preview buyer to prepare a
+  // payment on a chain the accepts array beside it does not accept, and the
+  // buyer would build a correct payload for the wrong network.
+  resetDiscoveryCache()
+  const sepolia = { ...requirement('1000'), network: 'eip155:84532' as const }
+  const extensions = await discoveryExtensionsFor(compression, COMPRESSION_URL, sepolia)
+  assert.equal((extensions!['maha-offer'] as { network: string }).network, 'eip155:84532')
+
+  resetDiscoveryCache()
+  const mainnet = await discoveryExtensionsFor(compression, COMPRESSION_URL, requirement('1000'))
+  assert.equal((mainnet!['maha-offer'] as { network: string }).network, 'eip155:8453')
+})
