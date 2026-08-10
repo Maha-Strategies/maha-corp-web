@@ -30,10 +30,78 @@ const maha = new MahaClient({
   baseUrl: BASE_URL,
 });
 
+/**
+ * Identity of the worker source in this checkout.
+ *
+ * Must stay byte-identical to `_worker_source_digest` in workers/maha_workers.py:
+ * each non-test `.py` file in workers/, sorted by name, as `name:sha256(bytes)`,
+ * joined with `|`, hashed, first 16 hex characters.
+ */
+async function localWorkerDigest(): Promise<string> {
+  const { readdir, readFile } = await import('node:fs/promises')
+  const { createHash } = await import('node:crypto')
+  const { join } = await import('node:path')
+
+  const dir = join(import.meta.dirname, '..', 'workers')
+  const names = (await readdir(dir))
+    .filter((name) => name.endsWith('.py') && !name.startsWith('test_'))
+    .sort()
+  const parts: string[] = []
+  for (const name of names) {
+    parts.push(`${name}:${createHash('sha256').update(await readFile(join(dir, name))).digest('hex')}`)
+  }
+  return createHash('sha256').update(parts.join('|')).digest('hex').slice(0, 16)
+}
+
+/**
+ * Refuse to run against a worker older than the code under test.
+ *
+ * A stale Modal deployment does not announce itself. In August 2026 the upstream
+ * ran four days behind the tree and the only symptom was `allowedToolNames must
+ * appear in the validated tools/list inventory` -- a message that points at
+ * configuration, so that is where the search went. Every later failure of this
+ * kind would cost the same detour, and the next one might present as a routing
+ * error instead.
+ *
+ * Checked before the suite rather than after, because every assertion below is
+ * meaningless if the thing being tested is not the thing that was written.
+ */
+async function assertUpstreamIsCurrent(): Promise<void> {
+  const expected = await localWorkerDigest()
+  const response = await fetch(TEST_MCP_UPSTREAM_URL!, {
+    method: 'POST',
+    headers: { 'content-type': 'application/json', authorization: `Bearer ${TEST_MCP_UPSTREAM_TOKEN}` },
+    body: JSON.stringify({ jsonrpc: '2.0', id: 'deployment-check', method: 'maha/deployment' }),
+  })
+  if (!response.ok) throw new Error(`Upstream deployment check returned HTTP ${response.status}.`)
+  const body = await response.json() as { result?: { workerSourceDigest?: string } }
+  const deployed = body.result?.workerSourceDigest
+
+  // An upstream that does not answer this method at all is, by definition,
+  // older than the commit that added it.
+  if (!deployed || deployed === 'unknown') {
+    throw new Error(
+      'The deployed MCP upstream does not report a source digest, so it predates deployment stamping. '
+      + 'Redeploy it: modal deploy workers/maha_workers.py',
+    )
+  }
+  if (deployed !== expected) {
+    throw new Error(
+      `The deployed MCP upstream is not the worker in this checkout (deployed ${deployed}, expected ${expected}). `
+      + 'Every assertion after this would be testing the wrong artifact. '
+      + 'Redeploy it: modal deploy workers/maha_workers.py',
+    )
+  }
+  console.log(`   ✔ Upstream worker matches this checkout (${deployed})`)
+}
+
 async function main() {
   console.log(`🚀 Starting End-to-End Integration Test`);
   console.log(` Target Server: ${BASE_URL}`);
   console.log(` Authenticated API key configured.\n`);
+
+  console.log('[0/4] Verifying the deployed MCP upstream matches this checkout...');
+  await assertUpstreamIsCurrent();
 
   // --- STEP 1: Register Upstream MCP Server ---
   console.log('[1/4] Registering Upstream Enterprise MCP Server...');
