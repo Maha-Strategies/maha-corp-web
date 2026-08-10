@@ -12,6 +12,7 @@ import { assertRecoverableSignature, failureEvidenceFor, type CanaryFailure } fr
 import {
   assertSpendPolicy,
   BASE_USDC,
+  CANARY_BUYER,
   BAZAAR_MERCHANT_URL,
   EXPECTED_PRICE_BASE_UNITS,
   MAHA_CONTEXT_RESOURCE,
@@ -20,7 +21,7 @@ import {
   type BazaarResource,
 } from '../lib/x402/discovery-payment-recipe.ts'
 
-const EXPECTED_BUYER = '0x7b7ff44288fADe4A1829abA2584DFCeB952146f2'
+const EXPECTED_BUYER = CANARY_BUYER
 const erc20BalanceAbi = parseAbi(['function balanceOf(address owner) view returns (uint256)'])
 const outputPath = process.env.X402_CANARY_OUTPUT_PATH?.trim()
 

@@ -11,6 +11,16 @@ export const MAHA_CONTEXT_RESOURCE = 'https://www.mahastrategies.com/api/v1/comp
 export const MAHA_PAYEE = '0xec84c1cd6602bbe387bc8e6f0d3c062f2762de28'
 export const BASE_NETWORK = 'eip155:8453'
 export const BASE_USDC = '0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913'
+/**
+ * Wallets this operator controls, which must never be counted as demand.
+ *
+ * One list, because two would drift. The bounded Bazaar canary pays from the
+ * first of these and converts by construction; a settlement watch that excluded
+ * a slightly different address would report our own traffic as a customer, and
+ * that is the single most flattering mistake this platform could make.
+ */
+export const OPERATOR_WALLETS = ['0x7b7ff44288fADe4A1829abA2584DFCeB952146f2'] as const
+export const CANARY_BUYER = OPERATOR_WALLETS[0]
 export const EXPECTED_PRICE_BASE_UNITS = BigInt(1_000)
 export const SPEND_CEILING_BASE_UNITS = BigInt(5_000)
 
