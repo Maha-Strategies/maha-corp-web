@@ -1,0 +1,75 @@
+name: Production attribution verification
+
+# Proves that attributed spend persists in Production.
+#
+# Exists because a migration applied outside the reviewed workflow leaves no
+# evidence that the schema it created actually works against the running
+# application. The database reporting a table and the application writing rows
+# into it are different claims, and only the second one matters commercially.
+#
+# Costs one production credit per run. Manual dispatch only -- there is no
+# schedule, because a check that spends money on a timer is a subscription
+# rather than a verification.
+
+on:
+  workflow_dispatch:
+    inputs:
+      reason:
+        description: Why this run is needed (minimum 12 characters)
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: production-attribution-verification
+  cancel-in-progress: false
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    # Reuses the environment that already holds a production API key, so no new
+    # credential is created for this check. Approval is the point: the run
+    # spends real credit and writes a real row.
+    environment:
+      name: production-canary
+      url: ${{ vars.PRODUCTION_CANARY_BASE_URL }}
+    env:
+      PRODUCTION_BASE_URL: ${{ vars.PRODUCTION_CANARY_BASE_URL }}
+      PRODUCTION_API_KEY: ${{ secrets.PRODUCTION_CANARY_API_KEY }}
+      REVENUE_CONTROL_TOKEN: ${{ secrets.REVENUE_CONTROL_TOKEN }}
+      PRODUCTION_ATTRIBUTION_OUTPUT_PATH: ${{ github.workspace }}/production-attribution.json
+    steps:
+      - name: Require a stated reason
+        env:
+          REASON: ${{ inputs.reason }}
+        run: test "${#REASON}" -ge 12
+
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+
+      # Without REVENUE_CONTROL_TOKEN the script still sends the write and says
+      # plainly that persistence was not verified, rather than reporting a pass
+      # it has not established.
+      - name: Verify attributed persistence
+        run: |
+          set -o pipefail
+          node --experimental-strip-types scripts/verify-production-attribution.ts 2>&1 \
+            | tee "$RUNNER_TEMP/production-attribution.log"
+
+      - name: Upload verification evidence
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: production-attribution-${{ github.run_id }}
+          path: |
+            ${{ env.PRODUCTION_ATTRIBUTION_OUTPUT_PATH }}
+            ${{ runner.temp }}/production-attribution.log
+          if-no-files-found: warn
+          retention-days: 90
