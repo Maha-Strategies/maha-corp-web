@@ -266,6 +266,26 @@ export function matchRequirement(payment: PaymentPayload, requirements: PaymentR
  * v2 moved the resource and extensions beside `accepted`. Verify those
  * server-declared terms before forwarding the payload so a client cannot
  * rewrite the URL or the Bazaar schema that the facilitator catalogs.
+ *
+ * The resource is always compared in full. Exact resource binding is what
+ * stops a challenge issued for one endpoint being answered against another,
+ * and nothing below relaxes it.
+ *
+ * The declaration may be bound either by full echo or by digest, and the
+ * second form is a necessity rather than a convenience. A payer echoes the
+ * declaration back inside PAYMENT-SIGNATURE, and that header has a hard 16 KB
+ * ceiling at the platform edge. A full echo costs ~15.9 KB for the entry
+ * compression offer and ~26.6 KB for deep evaluation -- so a richly documented
+ * offer is not merely close to the limit, it is unpayable, and the failure
+ * arrives as `payment_header_too_large` on a payload the payer assembled
+ * correctly from our own challenge.
+ *
+ * Binding on the digest is not a weaker check. The digest is taken over the
+ * canonicalised declaration -- resource, accepts, and every extension -- so a
+ * payer presenting a digest equal to ours has demonstrated exactly what a full
+ * echo demonstrates: that it read the declaration this server published and
+ * not a substitute. What it removes is the need to carry 26 KB of JSON schema
+ * through a 16 KB header to prove it.
  */
 export function matchesPaymentContext(
   payment: PaymentPayload,
@@ -273,8 +293,41 @@ export function matchesPaymentContext(
   extensions?: Record<string, unknown>,
 ): boolean {
   if (stableStringify(payment.resource) !== stableStringify(resource)) return false
-  if (extensions && stableStringify(payment.extensions) !== stableStringify(extensions)) return false
-  return true
+  if (!extensions) return true
+
+  // The full echo. Still the common case, and still accepted unchanged.
+  if (stableStringify(payment.extensions) === stableStringify(extensions)) return true
+
+  return matchesDeclarationDigest(payment.extensions, extensions)
+}
+
+const DIGEST_EXTENSION = 'declaration-integrity'
+
+/**
+ * Accepts a payer that echoed only the integrity extension.
+ *
+ * Deliberately strict about what "only" means: the presented map must contain
+ * the integrity entry and nothing else. Allowing a partial echo with arbitrary
+ * extra keys would let a client silently drop the extensions it dislikes -- a
+ * price annotation, a capability boundary -- while still presenting a valid
+ * digest, and the server would have no way to notice which ones went missing.
+ */
+function matchesDeclarationDigest(
+  presented: Record<string, unknown> | undefined,
+  expected: Record<string, unknown>,
+): boolean {
+  if (!presented || typeof presented !== 'object') return false
+
+  const presentedKeys = Object.keys(presented)
+  if (presentedKeys.length !== 1 || presentedKeys[0] !== DIGEST_EXTENSION) return false
+
+  const ours = expected[DIGEST_EXTENSION] as { declarationDigest?: unknown } | undefined
+  const theirs = presented[DIGEST_EXTENSION] as { declarationDigest?: unknown } | undefined
+  if (typeof ours?.declarationDigest !== 'string' || typeof theirs?.declarationDigest !== 'string') return false
+
+  // Both sides are a fixed-length public value from the challenge, so a plain
+  // comparison leaks nothing an attacker did not already receive.
+  return ours.declarationDigest === theirs.declarationDigest
 }
 
 export type AcceptPaymentResult =

@@ -18,12 +18,14 @@ const requirement: PaymentRequirement = {
   asset: '0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913',
   extra: { name: 'USD Coin', version: '2' },
 }
-const extensions = discoveryExtensionsFor({
-  pathPrefix: '/api/v1/compress',
+const extensions = await discoveryExtensionsFor({
+  offerId: 'context-compression',
+  method: 'POST' as const,
+  path: '/api/v1/compress',
   amount: '1000',
   description,
   concurrencyCap: 8,
-})!
+}, endpoint)
 const challenge: PaymentChallenge = {
   x402Version: 2,
   resource: { url: endpoint, description, mimeType: 'application/json' },

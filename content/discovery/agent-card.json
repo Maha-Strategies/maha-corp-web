@@ -6,7 +6,12 @@
   "url": "https://www.mahastrategies.com/inbound",
   "submissionEndpoint": "https://www.mahastrategies.com/api/inbound-submissions",
   "inputSchema": "https://www.mahastrategies.com/inbound-submission-schema.json",
-  "acceptedOffers": ["rapid-intelligence-brief", "verified-research-brief", "mps-preflight", "mps-prepaid-audit-access"],
+  "acceptedOffers": [
+    "rapid-intelligence-brief",
+    "verified-research-brief",
+    "mps-preflight",
+    "mps-prepaid-audit-access"
+  ],
   "serviceCatalog": "https://www.mahastrategies.com/agent-offers.json",
   "documentation": "https://www.mahastrategies.com/docs",
   "capabilities": [
@@ -22,6 +27,46 @@
         "version": 2,
         "network": "eip155:8453",
         "amount": "1000",
+        "assetSymbol": "USDC",
+        "autonomous": true
+      }
+    },
+    {
+      "id": "deep-context-evaluation",
+      "status": "available_with_api_key_or_x402",
+      "endpoint": "https://www.mahastrategies.com/api/v1/compress/evaluate",
+      "measures": "exact retention of caller-labelled required-evidence spans",
+      "notMeasured": [
+        "factual accuracy",
+        "answer quality",
+        "verification",
+        "hallucination prevention"
+      ],
+      "payment": {
+        "protocol": "x402",
+        "version": 2,
+        "network": "eip155:8453",
+        "amount": "10000",
+        "assetSymbol": "USDC",
+        "autonomous": true
+      }
+    },
+    {
+      "id": "mps-autonomous-audit",
+      "status": "available_with_x402",
+      "endpoint": "https://www.mahastrategies.com/api/v1/mps/audit",
+      "retrievalEndpoint": "https://www.mahastrategies.com/api/v1/mps/audit/{auditId}",
+      "provides": "automated claim triage with provenance statuses",
+      "notProvided": [
+        "factual certification",
+        "legal advice",
+        "human verification"
+      ],
+      "payment": {
+        "protocol": "x402",
+        "version": 2,
+        "network": "eip155:8453",
+        "amount": "100000",
         "assetSymbol": "USDC",
         "autonomous": true
       }
@@ -43,6 +88,13 @@
       "contract": "https://www.mahastrategies.com/mcp-gateway-contract.json"
     }
   ],
-  "terms": {"bindingCommitment": false, "payment": "Context Compression accepts its published autonomous x402 terms. A human purchaser must authorize Stripe Checkout; research and enterprise work require human scope review.", "sensitiveData": "Do not submit confidential, regulated, or sensitive personal information."},
-  "review": {"mode": "deterministic_qualification_then_human_scope_review", "responseTargetBusinessDays": 2}
+  "terms": {
+    "bindingCommitment": false,
+    "payment": "Context Compression, Deep Context Evaluation and the Autonomous MPS Audit accept their published autonomous x402 terms on Base Mainnet; no other capability does. The GPU optimization routes are not x402 products. A human purchaser must authorize Stripe Checkout; research and enterprise work require human scope review.",
+    "sensitiveData": "Do not submit confidential, regulated, or sensitive personal information."
+  },
+  "review": {
+    "mode": "deterministic_qualification_then_human_scope_review",
+    "responseTargetBusinessDays": 2
+  }
 }

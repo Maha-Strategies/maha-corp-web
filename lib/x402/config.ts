@@ -1,6 +1,7 @@
 import type { PaymentRequirement, X402Network } from './protocol.ts'
 import { rpcUrlFor } from './chain.ts'
 import { releasesSlot } from './slot.ts'
+import { catalogMismatches, offerFor } from './offers.ts'
 import type { CdpApiCredentials } from './cdp-auth.ts'
 
 // Everything here is off unless X402_ENABLED is exactly 'true'. The flag is
@@ -13,8 +14,27 @@ import type { CdpApiCredentials } from './cdp-auth.ts'
 // human authorization.
 
 export type PricedResource = {
-  /** Path prefix this price applies to, matched against the request pathname. */
-  pathPrefix: string
+  /** The catalog offer this resource enables. */
+  offerId: string
+  /**
+   * HTTP method this price applies to.
+   *
+   * Matching used to be method-blind, which was survivable with one priced
+   * POST and stops being survivable the moment a resource grows a GET status
+   * route: an unpaid status poll would be answered with a 402 demanding the
+   * POST price, and a payment signed for the POST would admit a GET.
+   */
+  method: 'POST'
+  /**
+   * Exact pathname. Not a prefix.
+   *
+   * Prefix matching is why /api/v1/compress/evaluate could be sold for a
+   * tenth of its price: it starts with /api/v1/compress, so the longest-prefix
+   * rule found the entry offer and priced the deep one at $0.001. Exact match
+   * removes the class rather than patching the instance -- there is no
+   * ordering of prefixes that makes an unlisted sub-path safe.
+   */
+  path: string
   /** Smallest indivisible unit of the asset. USDC has six decimals, so 10000 is $0.01. */
   amount: string
   description: string
@@ -47,6 +67,13 @@ export type X402Config = {
    */
   assetEip712: { name: string; version: string }
   resources: PricedResource[]
+  /**
+   * Ways this deployment's X402_RESOURCES disagrees with the published
+   * catalog. Empty in a healthy deployment. Non-empty is served anyway --
+   * the catalog's values win, so nothing wrong is sold -- and readiness
+   * fails on it so the stale variable gets fixed rather than forgotten.
+   */
+  catalogContradictions: string[]
   /** Seconds a concurrency slot is held before it self-releases. */
   slotTtlSeconds: number
   /**
@@ -106,8 +133,12 @@ export function x402Config(environment: Environment = process.env): X402Config |
     throw new Error('The CDP mainnet facilitator requires CDP_API_KEY_ID and CDP_API_KEY_SECRET.')
   }
 
-  const resources = parseResources(environment.X402_RESOURCES)
+  const catalogContradictions: string[] = []
+  const resources = parseResources(environment.X402_RESOURCES, catalogContradictions)
   if (resources.length === 0) throw new Error('X402_RESOURCES must define at least one priced resource.')
+  for (const contradiction of catalogContradictions) {
+    console.error('x402 deployment configuration contradicts the public offer catalog:', contradiction)
+  }
 
   const slotTtlSeconds = Number(environment.X402_SLOT_TTL_SECONDS ?? '120')
   if (!Number.isInteger(slotTtlSeconds) || slotTtlSeconds < 5 || slotTtlSeconds > 900) {
@@ -129,40 +160,80 @@ export function x402Config(environment: Environment = process.env): X402Config |
       version: environment.X402_ASSET_EIP712_VERSION?.trim() || '2',
     },
     resources,
+    catalogContradictions,
     slotTtlSeconds,
     chainRpcUrl: rpcUrlFor(network, environment.X402_CHAIN_RPC_URL),
   }
 }
 
-/** JSON: [{"pathPrefix":"/api/v1/compress","amount":"10000","description":"…","concurrencyCap":8}] */
-function parseResources(raw: string | undefined): PricedResource[] {
+/**
+ * Turns the deployment's enablement list into priced resources.
+ *
+ * JSON: [{"method":"POST","path":"/api/v1/compress","amount":"1000","description":"…","concurrencyCap":8}]
+ * `pathPrefix` is still read as a synonym for `path`, so a deployment carrying
+ * the pre-catalog spelling keeps working rather than dropping payments the
+ * moment this ships.
+ *
+ * What the environment decides is *which* offers are on. What it does not
+ * decide is what they cost or what they claim: those are read from the public
+ * catalog, so a stale variable cannot quietly sell an offer at a price the
+ * published manifests contradict. Contradictions are collected and surfaced by
+ * readiness (see `catalogContradictions`) rather than thrown, because taking
+ * payments offline over a description drift is a worse outage than the drift.
+ */
+function parseResources(raw: string | undefined, contradictions: string[]): PricedResource[] {
   if (!raw?.trim()) return []
   let parsed: unknown
   try { parsed = JSON.parse(raw) } catch { throw new Error('X402_RESOURCES must be valid JSON.') }
   if (!Array.isArray(parsed)) throw new Error('X402_RESOURCES must be a JSON array.')
 
+  const seen = new Set<string>()
   return parsed.map((entry) => {
     if (typeof entry !== 'object' || entry === null) throw new Error('Each X402_RESOURCES entry must be an object.')
     const resource = entry as Record<string, unknown>
-    const pathPrefix = typeof resource.pathPrefix === 'string' ? resource.pathPrefix.trim() : ''
-    const amount = typeof resource.amount === 'string' ? resource.amount.trim() : ''
-    const description = typeof resource.description === 'string' ? resource.description.trim() : ''
-    const concurrencyCap = resource.concurrencyCap
+    const rawPath = typeof resource.path === 'string' ? resource.path.trim()
+      : typeof resource.pathPrefix === 'string' ? resource.pathPrefix.trim() : ''
+    const method = (typeof resource.method === 'string' ? resource.method.trim() : 'POST').toUpperCase()
 
-    if (!pathPrefix.startsWith('/')) throw new Error('pathPrefix must start with /.')
-    if (!/^[0-9]{1,32}$/.test(amount) || amount === '0') throw new Error('amount must be a positive integer string in the asset\'s smallest unit.')
-    if (!description) throw new Error('description is required so the challenge states what is being bought.')
-    if (typeof concurrencyCap !== 'number' || !Number.isInteger(concurrencyCap) || concurrencyCap < 1 || concurrencyCap > 1_000) {
-      throw new Error('concurrencyCap must be an integer between 1 and 1000.')
+    if (!rawPath.startsWith('/')) throw new Error('path must start with /.')
+    if (method !== 'POST') throw new Error(`Only POST resources can be priced; got ${method} ${rawPath}.`)
+
+    // An unknown path is a typo, and a typo here sells nothing while looking
+    // configured. Loud at boot beats silent in production.
+    const offer = offerFor(method, rawPath)
+    if (!offer) {
+      throw new Error(`X402_RESOURCES enables ${method} ${rawPath}, which is not in the public offer catalog (lib/x402/offers.ts).`)
     }
+    const key = `${method} ${rawPath}`
+    if (seen.has(key)) throw new Error(`X402_RESOURCES lists ${key} twice.`)
+    seen.add(key)
+
+    for (const problem of catalogMismatches([{
+      path: rawPath,
+      method,
+      amount: typeof resource.amount === 'string' ? resource.amount.trim() : offer.amount,
+      description: typeof resource.description === 'string' ? resource.description.trim() : offer.description,
+      concurrencyCap: typeof resource.concurrencyCap === 'number' ? resource.concurrencyCap : offer.concurrencyCap,
+    }])) {
+      contradictions.push(problem)
+    }
+
     // Pricing a path whose handler never releases its slot fills the cap with
     // slots nobody frees, and paying callers are refused until the scores
     // lapse. Nothing about the route surfaces that, so it is refused here
     // rather than discovered as unexplained 429s under load.
-    if (!releasesSlot(pathPrefix)) {
-      throw new Error(`${pathPrefix} does not release its concurrency slot, so it cannot be priced. Add it to SLOT_RELEASING_PATHS once its handler does.`)
+    if (!releasesSlot(offer.method, offer.path)) {
+      throw new Error(`${method} ${rawPath} does not release its concurrency slot, so it cannot be priced. Add it to SLOT_RELEASING_ROUTES once its handler does.`)
     }
-    return { pathPrefix, amount, description, concurrencyCap }
+
+    return {
+      offerId: offer.id,
+      method: offer.method,
+      path: offer.path,
+      amount: offer.amount,
+      description: offer.description,
+      concurrencyCap: offer.concurrencyCap,
+    }
   })
 }
 
@@ -179,14 +250,27 @@ function parseAuthHeaders(raw: string | undefined): Record<string, string> | und
   return headers
 }
 
-/** Longest matching prefix, so a specific path beats a general one. */
-export function priceFor(pathname: string, config: X402Config): PricedResource | null {
-  let match: PricedResource | null = null
-  for (const resource of config.resources) {
-    if (!pathname.startsWith(resource.pathPrefix)) continue
-    if (!match || resource.pathPrefix.length > match.pathPrefix.length) match = resource
-  }
-  return match
+/**
+ * Exact method and path, or nothing.
+ *
+ * This replaced longest-prefix matching, which was not merely imprecise but
+ * actively unsafe once a second offer lived under a first one's path. Under
+ * prefix rules /api/v1/compress/evaluate matched the $0.001 entry offer, so a
+ * $0.01 resource would have been sold at a tenth of its price to anyone who
+ * found the URL -- and the 402 would have quoted the low price, so the payer
+ * would have done nothing wrong.
+ *
+ * Being method-aware closes the mirror-image hole: a GET status route under a
+ * priced POST path no longer inherits the POST's price, and a payment signed
+ * for the POST no longer admits a GET.
+ *
+ * The cost of exactness is that a new sub-path is unpriced until it is added
+ * to the catalog. That is the safe direction to fail: an unpriced route is
+ * refused by the API-key gate, whereas a mispriced one takes money.
+ */
+export function priceFor(method: string, pathname: string, config: X402Config): PricedResource | null {
+  const wanted = method.toUpperCase()
+  return config.resources.find((resource) => resource.method === wanted && resource.path === pathname) ?? null
 }
 
 export function requirementFor(resource: PricedResource, resourceUrl: string, config: X402Config): PaymentRequirement {

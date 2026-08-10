@@ -11,14 +11,29 @@
     "mode": "mixed_by_capability",
     "humanConfirmationRequired": true,
     "autonomousPaymentSupported": true,
-    "autonomousPaymentScope": ["context-compression"],
-    "humanConfirmationScope": ["stripe-checkout", "research-inquiries", "enterprise-onboarding"],
-    "bindingCommitment": "Only the Context Compression capability accepts autonomous x402 payment under its published machine-payment terms. Stripe products require purchaser confirmation, and research or enterprise engagements require human scope review."
+    "autonomousPaymentScope": [
+      "context-compression",
+      "deep-context-evaluation",
+      "mps-autonomous-audit"
+    ],
+    "humanConfirmationScope": [
+      "stripe-checkout",
+      "research-inquiries",
+      "enterprise-onboarding"
+    ],
+    "bindingCommitment": "Only Context Compression, Deep Context Evaluation and the Autonomous MPS Audit accept autonomous x402 payment, each under its own published machine-payment terms at an exact method and path. The GPU optimization capabilities are not x402 products. Stripe products require purchaser confirmation, and research or enterprise engagements require human scope review."
   },
   "credentialPolicy": {
     "mode": "approved_client_credentials",
     "issuance": "Credentials are issued only after a human approval by Maha Strategies.",
-    "scope": ["client identity", "allowed offers", "allowed capabilities", "request rate", "expiry", "revocation"],
+    "scope": [
+      "client identity",
+      "allowed offers",
+      "allowed capabilities",
+      "request rate",
+      "expiry",
+      "revocation"
+    ],
     "storage": "Clients must store issued credentials in a secret manager. Maha Strategies never publishes a shared public token."
   },
   "bookMachineAccessPolicy": {
@@ -60,6 +75,55 @@
         "amountUnit": "base_units",
         "displayAmount": "0.001 USDC",
         "discovery": "https://api.cdp.coinbase.com/platform/v2/x402/discovery/mcp"
+      }
+    },
+    {
+      "id": "deep-context-evaluation",
+      "status": "available_with_api_key_or_x402",
+      "endpoint": "https://www.mahastrategies.com/api/v1/compress/evaluate",
+      "method": "POST",
+      "methodBoundary": "Compiles a token-budgeted context pack, then reports exact retention of the caller's own labelled evidence spans. The retention figure is exact span matching and is not factual accuracy, answer quality, verification, or hallucination prevention. A retained span means the text survived selection, not that the text is true.",
+      "inputBounds": {
+        "documents": "1-8",
+        "requiredEvidenceSpans": "1-32",
+        "maxRequestBytes": 1050000
+      },
+      "retention": {
+        "sourceTextStored": false,
+        "compiledContextStored": false,
+        "requiredEvidenceTextStored": false
+      },
+      "machinePayment": {
+        "protocol": "x402",
+        "version": 2,
+        "network": "eip155:8453",
+        "asset": "USDC",
+        "amount": "10000",
+        "displayAmount": "0.01 USDC"
+      }
+    },
+    {
+      "id": "mps-autonomous-audit",
+      "status": "available_with_x402",
+      "endpoint": "https://www.mahastrategies.com/api/v1/mps/audit",
+      "retrievalEndpoint": "https://www.mahastrategies.com/api/v1/mps/audit/{auditId}",
+      "method": "POST",
+      "methodBoundary": "Automated claim triage under the Maha Provenance Standard v0.1. Each substantive claim receives a model-assigned provenance status, a rationale and a suggested action. This is not factual certification, not legal advice, and not human verification. Requires no Maha credential and consumes no prepaid MPS audit credit; the credential path at /api/mps-audits is separate and unchanged.",
+      "inputBounds": {
+        "maxPassageCharacters": 6000,
+        "maxRequestBytes": 32768
+      },
+      "recovery": "A one-time high-entropy retrievalToken is issued at creation. A paid job is retrievable and resumable without a second payment, up to three model attempts; a resume must resubmit the original passage because no source text is stored.",
+      "retention": {
+        "sourceTextStored": false
+      },
+      "machinePayment": {
+        "protocol": "x402",
+        "version": 2,
+        "network": "eip155:8453",
+        "asset": "USDC",
+        "amount": "100000",
+        "displayAmount": "0.10 USDC"
       }
     },
     {
@@ -179,7 +243,7 @@
         "Any deadline, known constraints, and relevant context."
       ],
       "deliverables": [
-        "A 2–3 page decision-ready memo.",
+        "A 2\u20133 page decision-ready memo.",
         "Key evidence and links to public or authorized sources used.",
         "Explicit assumptions, material uncertainty, and decision implications."
       ],
@@ -219,7 +283,7 @@
         "Known constraints, required sources, and timing."
       ],
       "deliverables": [
-        "A 10–15 page research synthesis for decision-makers.",
+        "A 10\u201315 page research synthesis for decision-makers.",
         "An evidence layer with MPS claim-status tags and linked citations.",
         "One revision round."
       ],
@@ -239,9 +303,19 @@
       "name": "MPS Preflight",
       "status": "available_for_self_service_purchase",
       "serviceUrl": "https://www.mahastrategies.com/mps/preflight",
-      "price": { "currency": "USD", "type": "fixed", "amount": 49 },
-      "delivery": { "type": "automated_after_signed_payment_confirmation", "report": "Private claim map, verification backlog, and machine-readable record." },
-      "input": { "maximumCharacters": 12000, "acceptedContent": "A nonfiction document extract." },
+      "price": {
+        "currency": "USD",
+        "type": "fixed",
+        "amount": 49
+      },
+      "delivery": {
+        "type": "automated_after_signed_payment_confirmation",
+        "report": "Private claim map, verification backlog, and machine-readable record."
+      },
+      "input": {
+        "maximumCharacters": 12000,
+        "acceptedContent": "A nonfiction document extract."
+      },
       "purchase": {
         "mode": "human_confirmed_stripe_checkout",
         "purchaseUrl": "https://www.mahastrategies.com/mps/preflight",
@@ -249,51 +323,113 @@
         "method": "POST",
         "authorization": "A human purchaser must review and authorize payment in Stripe Checkout. This manifest does not authorize an autonomous charge."
       },
-      "boundaries": ["Automated triage, not a public MPS certification or source-by-source human verification.", "No legal, investment, or other regulated professional advice.", "The source document is not saved in the ledger; the durable record retains an input hash and claim excerpts."]
+      "boundaries": [
+        "Automated triage, not a public MPS certification or source-by-source human verification.",
+        "No legal, investment, or other regulated professional advice.",
+        "The source document is not saved in the ledger; the durable record retains an input hash and claim excerpts."
+      ]
     },
     {
       "id": "mps-evidence-audit",
       "name": "MPS Evidence Audit",
       "status": "available_for_inquiry",
       "serviceUrl": "https://www.mahastrategies.com/evidence-audit",
-      "price": { "currency": "USD", "type": "scoped_after_review" },
-      "delivery": { "type": "human_scoped", "beginsAfter": "Maha confirms document fit, review context, source availability, deliverable, price, and timing." },
-      "requiredInputs": ["A report, manuscript, or high-stakes document to review.", "The publication, governance, or decision context.", "The intended reviewers, deadline, and any source constraints."],
-      "deliverables": ["A claim register and verification backlog.", "An MPS/0.1 evidence record appropriate to the agreed scope.", "A publication-readiness summary separating sourced material, verified material, and unresolved claims."],
-      "exclusions": ["Legal, medical, investment, or engineering advice.", "Certification or approval by a regulator, publisher, or other third party."],
-      "request": { "mode": "authenticated_json", "url": "https://www.mahastrategies.com/api/agent-inquiries", "method": "POST", "inputSchema": "https://www.mahastrategies.com/agent-inquiry-schema.json", "authorization": "Bearer client credential issued by Maha Strategies after approval; credentials are scoped, expiring, and revocable.", "fallbackUrl": "https://www.mahastrategies.com/contact?service=mps_evidence_audit", "inquiryType": "mps_evidence_audit", "responseTargetBusinessDays": 2 }
+      "price": {
+        "currency": "USD",
+        "type": "scoped_after_review"
+      },
+      "delivery": {
+        "type": "human_scoped",
+        "beginsAfter": "Maha confirms document fit, review context, source availability, deliverable, price, and timing."
+      },
+      "requiredInputs": [
+        "A report, manuscript, or high-stakes document to review.",
+        "The publication, governance, or decision context.",
+        "The intended reviewers, deadline, and any source constraints."
+      ],
+      "deliverables": [
+        "A claim register and verification backlog.",
+        "An MPS/0.1 evidence record appropriate to the agreed scope.",
+        "A publication-readiness summary separating sourced material, verified material, and unresolved claims."
+      ],
+      "exclusions": [
+        "Legal, medical, investment, or engineering advice.",
+        "Certification or approval by a regulator, publisher, or other third party."
+      ],
+      "request": {
+        "mode": "authenticated_json",
+        "url": "https://www.mahastrategies.com/api/agent-inquiries",
+        "method": "POST",
+        "inputSchema": "https://www.mahastrategies.com/agent-inquiry-schema.json",
+        "authorization": "Bearer client credential issued by Maha Strategies after approval; credentials are scoped, expiring, and revocable.",
+        "fallbackUrl": "https://www.mahastrategies.com/contact?service=mps_evidence_audit",
+        "inquiryType": "mps_evidence_audit",
+        "responseTargetBusinessDays": 2
+      }
     },
     {
       "id": "book-the-imagined-life",
       "name": "The Imagined Life",
       "status": "open_web_edition_with_authenticated_machine_access",
       "serviceUrl": "https://www.mahastrategies.com/books/the-imagined-life",
-      "access": { "publicWebEdition": "Free to read on the public web page.", "entitlementEndpoint": "https://www.mahastrategies.com/api/books/the-imagined-life/entitlement", "contentEndpoint": "https://www.mahastrategies.com/api/books/the-imagined-life/content" },
-      "purchase": { "mode": "authenticated_stripe_checkout_when_enabled", "checkoutEndpoint": "https://www.mahastrategies.com/api/books/checkout", "authorization": "A valid client credential and human approval are required before checkout." }
+      "access": {
+        "publicWebEdition": "Free to read on the public web page.",
+        "entitlementEndpoint": "https://www.mahastrategies.com/api/books/the-imagined-life/entitlement",
+        "contentEndpoint": "https://www.mahastrategies.com/api/books/the-imagined-life/content"
+      },
+      "purchase": {
+        "mode": "authenticated_stripe_checkout_when_enabled",
+        "checkoutEndpoint": "https://www.mahastrategies.com/api/books/checkout",
+        "authorization": "A valid client credential and human approval are required before checkout."
+      }
     },
     {
       "id": "book-the-orbital-mind",
       "name": "The Orbital Mind",
       "status": "open_web_edition_with_authenticated_machine_access",
       "serviceUrl": "https://www.mahastrategies.com/books/the-orbital-mind",
-      "access": { "publicWebEdition": "Free to read on the public web page.", "entitlementEndpoint": "https://www.mahastrategies.com/api/books/the-orbital-mind/entitlement", "contentEndpoint": "https://www.mahastrategies.com/api/books/the-orbital-mind/content" },
-      "purchase": { "mode": "authenticated_stripe_checkout_when_enabled", "checkoutEndpoint": "https://www.mahastrategies.com/api/books/checkout", "authorization": "A valid client credential and human approval are required before checkout." }
+      "access": {
+        "publicWebEdition": "Free to read on the public web page.",
+        "entitlementEndpoint": "https://www.mahastrategies.com/api/books/the-orbital-mind/entitlement",
+        "contentEndpoint": "https://www.mahastrategies.com/api/books/the-orbital-mind/content"
+      },
+      "purchase": {
+        "mode": "authenticated_stripe_checkout_when_enabled",
+        "checkoutEndpoint": "https://www.mahastrategies.com/api/books/checkout",
+        "authorization": "A valid client credential and human approval are required before checkout."
+      }
     },
     {
       "id": "book-the-synthetic-self",
       "name": "The Synthetic Self",
       "status": "open_web_edition_with_authenticated_machine_access",
       "serviceUrl": "https://www.mahastrategies.com/books/the-synthetic-self",
-      "access": { "publicWebEdition": "Free to read on the public web page.", "entitlementEndpoint": "https://www.mahastrategies.com/api/books/the-synthetic-self/entitlement", "contentEndpoint": "https://www.mahastrategies.com/api/books/the-synthetic-self/content" },
-      "purchase": { "mode": "authenticated_stripe_checkout_when_enabled", "checkoutEndpoint": "https://www.mahastrategies.com/api/books/checkout", "authorization": "A valid client credential and human approval are required before checkout." }
+      "access": {
+        "publicWebEdition": "Free to read on the public web page.",
+        "entitlementEndpoint": "https://www.mahastrategies.com/api/books/the-synthetic-self/entitlement",
+        "contentEndpoint": "https://www.mahastrategies.com/api/books/the-synthetic-self/content"
+      },
+      "purchase": {
+        "mode": "authenticated_stripe_checkout_when_enabled",
+        "checkoutEndpoint": "https://www.mahastrategies.com/api/books/checkout",
+        "authorization": "A valid client credential and human approval are required before checkout."
+      }
     },
     {
       "id": "book-the-unfinished-species",
       "name": "The Unfinished Species",
       "status": "open_web_edition_with_authenticated_machine_access",
       "serviceUrl": "https://www.mahastrategies.com/books/the-unfinished-species",
-      "access": { "publicWebEdition": "Free to read on the public web page.", "entitlementEndpoint": "https://www.mahastrategies.com/api/books/the-unfinished-species/entitlement", "contentEndpoint": "https://www.mahastrategies.com/api/books/the-unfinished-species/content" },
-      "purchase": { "mode": "authenticated_stripe_checkout_when_enabled", "checkoutEndpoint": "https://www.mahastrategies.com/api/books/checkout", "authorization": "A valid client credential and human approval are required before checkout." }
+      "access": {
+        "publicWebEdition": "Free to read on the public web page.",
+        "entitlementEndpoint": "https://www.mahastrategies.com/api/books/the-unfinished-species/entitlement",
+        "contentEndpoint": "https://www.mahastrategies.com/api/books/the-unfinished-species/content"
+      },
+      "purchase": {
+        "mode": "authenticated_stripe_checkout_when_enabled",
+        "checkoutEndpoint": "https://www.mahastrategies.com/api/books/checkout",
+        "authorization": "A valid client credential and human approval are required before checkout."
+      }
     },
     {
       "id": "maha-os-mobile-app",

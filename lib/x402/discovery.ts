@@ -6,9 +6,19 @@ import {
 } from '@x402/extensions/bazaar'
 
 import type { PricedResource } from './config.ts'
-import type { ResourceInfo } from './protocol.ts'
+import { X402_VERSION, type PaymentRequirement, type ResourceInfo } from './protocol.ts'
+import { BASE_MAINNET_CAIP2, CONTEXT_COMPRESSION_OFFER, USDC_DECIMALS, offerById } from './offers.ts'
+import { DECLARATION_DIGEST_EXTENSION, createDeclarationDigestExtension } from './declaration-digest.ts'
 
-const SERVICE_NAME = 'Maha Context Compiler'
+/** Extension namespace for Maha's own commerce metadata. */
+export const OFFER_EXTENSION = 'maha-offer'
+
+/**
+ * Bumped whenever any published offer's declaration changes. A catalog uses it
+ * with the declaration digest to tell a re-index from a genuine revision.
+ */
+export const OFFER_METADATA_VERSION = '2026-08-10'
+
 const ICON_URL = 'https://www.mahastrategies.com/icon.png'
 // Written to be verifiable rather than persuasive. A router selects on fit,
 // and stating where the tool does not fit is what makes the rest credible --
@@ -22,102 +32,13 @@ const ICON_URL = 'https://www.mahastrategies.com/icon.png'
 // -- measured breakeven anchors, the negative-reduction workloads, the full
 // script-coverage note -- lives in SKILL.md and the Bazaar `info` extension,
 // neither of which is length-bound by the facilitator.
-export const CONTEXT_COMPILER_DESCRIPTION = 'Compress long documents and RAG inputs into token-budgeted, deduplicated context packs with source-linked provenance. '
-  + 'Returns original and compiled token counts, so the saving is verifiable. '
-  + 'Net-positive above N = fee / (r x p) tokens: r your reduction, p your input price. '
-  + 'Extractive and budget-bound, so check includedPassages before relying on it. '
-  + 'Ranks Latin, Cyrillic, Greek, Arabic and CJK; CJK coarser (bigrams). '
-  + 'Not for tabular or heavily-structured payloads.'
-const SHA256_PATTERN = '^sha256:[a-f0-9]{64}$'
-const SOURCE_ID_PATTERN = '^[A-Za-z0-9][A-Za-z0-9._:-]{0,79}$'
-const PASSAGE_ID_PATTERN = '^[A-Za-z0-9][A-Za-z0-9._:-]{0,79}:[1-9][0-9]*$'
-let cachedContextCompilerDiscovery: Record<string, unknown> | undefined
-
-const DISCOVERY_INPUT = {
-  clientRequestId: 'req_rag_release_001',
-  task: 'Find the release condition and rollback trigger while removing duplicate operational background.',
-  tokenBudget: 128,
-  documents: [
-    { id: 'release-notes', title: 'Release notes', text: 'Release may proceed after the security owner attaches credential-rotation evidence. The production canary passed in every region.\n\nRoutine notes cover staffing, dashboards, meeting cadence, maintenance calendars, regional handoffs, historical capacity, and documentation formatting.' },
-    { id: 'rollback-runbook', title: 'Rollback runbook', text: 'Rollback if API errors exceed 2 percent for five minutes or payment failures breach the alert threshold. Restore the last-known-good deployment before reopening traffic.\n\nRoutine notes cover staffing, dashboards, meeting cadence, maintenance calendars, regional handoffs, historical capacity, and documentation formatting.' },
-  ],
-  provenance: 'compact', scoring: 'bm25', budgetMode: 'guaranteed',
-}
-
-const DISCOVERY_OUTPUT = {
-  version: '0.1.0',
-  packId: 'ctxpack_6a5464df2ce14e9b9e16571c7d814821',
-  clientRequestId: 'req_rag_release_001',
-  task: DISCOVERY_INPUT.task,
-  tokenBudget: 128,
-  context: '# Context Pack\n\nTask: Find the release condition and rollback trigger while removing duplicate operational background.\n\n[release-notes:1] Release may proceed after the security owner attaches credential-rotation evidence. The production canary passed in every region.\n\n[rollback-runbook:1] Rollback if API errors exceed 2 percent for five minutes or payment failures breach the alert threshold. Restore the last-known-good deployment before reopening traffic.',
-  metrics: {
-    originalBytes: 606,
-    compiledBytes: 461,
-    originalEstimatedTokens: 97,
-    compiledEstimatedTokens: 83,
-    tokensSaved: 14,
-    estimatedReductionPercent: 14.4,
-    sourceCount: 2,
-    sourceCoveragePercent: 100,
-    duplicatePassagesRemoved: 1,
-  },
-  includedPassages: [
-    { sourceId: 'release-notes', passageId: 'release-notes:1', passageHash: 'sha256:4d5e66efdcf5f8dba63a89b40af6ce17f3f42948c48b731732e47f5dc2e7740c', text: 'Release may proceed after the security owner attaches credential-rotation evidence. The production canary passed in every region.' },
-    { sourceId: 'rollback-runbook', passageId: 'rollback-runbook:1', passageHash: 'sha256:6ac9d2eec09e0d9b0233f51d845f0ecbd1beca34fceab3ee44370b352644e2b5', text: 'Rollback if API errors exceed 2 percent for five minutes or payment failures breach the alert threshold. Restore the last-known-good deployment before reopening traffic.' },
-  ],
-  sources: [
-    { sourceId: 'release-notes', title: 'Release notes', sourceHash: 'sha256:288ded29ae161d3d11effd7161edf7c51ef1320e7ba0a8d2feaaed7abccec607', originalEstimatedTokens: 44, passageCount: 2, includedPassageIds: ['release-notes:1'], includedEstimatedTokens: 21 },
-    { sourceId: 'rollback-runbook', title: 'Rollback runbook', sourceHash: 'sha256:29fca10dd4c87bee562ed5b22b42dfcc970e0dc4768591b0983fe463646f38ca', originalEstimatedTokens: 53, passageCount: 2, includedPassageIds: ['rollback-runbook:1'], includedEstimatedTokens: 30 },
-  ],
-  warnings: [
-    'Token counts are model-neutral estimates, not provider tokenizer or billing counts.',
-    'This compiler ranks and deduplicates text; it does not verify claims, guarantee completeness, or prevent hallucination.',
-  ],
-  warningCodes: ['model_neutral_token_estimates', 'extractive_selection_not_verification'],
-  retentionBoundaries: {
-    selectionType: 'extractive',
-    evidenceRetention: 'best_effort',
-    claimVerificationPerformed: false,
-    completenessGuaranteed: false,
-    hallucinationPreventionGuaranteed: false,
-    tokenCountType: 'model_neutral_estimate',
-  },
-  inputHash: 'sha256:288dd5cacd92158f9460346ba6e931f6d0d52f2598bd55e748fc30a186fbdc34',
-  outputHash: 'sha256:80a337617475688482476a469f9fa7b489ef3e1ad15b4a9756fdc1aa716ed089',
-  sourceTextStored: false,
-  compiledContextStored: false,
-}
-
 /**
- * Ceiling on the published `resource.description`.
- *
- * The x402 v2 specification places no length limit on this field and neither
- * does `@x402/core`'s `ResourceInfoSchema`, which caps `serviceName`, `tags`
- * and `iconUrl` but leaves `description` open. The CDP facilitator is stricter
- * and undocumented: it answers a payment payload carrying an oversized
- * description with `HTTP 400 'paymentPayload' is invalid: must match one of
- * [x402V2PaymentPayload, ...]`, rejecting the whole union before it looks at
- * the signature at all.
- *
- * That is how every settlement after 2026-08-08T07:21:24Z came to fail. The
- * description grew from 196 to 702 and then 865 characters while the rest of
- * the payload was unchanged, and the last settlement to succeed was the last
- * one made at 196. Because a settlement is also what refreshes the Bazaar
- * listing, the stale-metadata drift was a symptom of the same change rather
- * than a second fault.
- *
- * The limit is tracked upstream as x402-foundation/x402#2284. 480 is the
- * enforced ceiling here because 480 is empirically known to pass and 523 to
- * fail; 512 sits inside that unresolved gap and is not proven safe.
- *
- * Both a character count and a UTF-8 byte count are enforced. Which of the two
- * a remote implementation actually measures is not stated anywhere, and for
- * ASCII copy they agree -- so the difference only appears the day someone adds
- * a non-Latin sentence, at which point the field silently triples in bytes
- * while looking unchanged. Enforcing the stricter of the two costs nothing now
- * and removes that failure entirely.
+ * Kept as a named export because scripts, tests and the conformance corpus
+ * import it. The text itself now lives in the offer catalog, so there is one
+ * copy of every published claim rather than one per surface.
  */
+export const CONTEXT_COMPILER_DESCRIPTION = CONTEXT_COMPRESSION_OFFER.description
+
 export const MAX_RESOURCE_DESCRIPTION_CHARS = 480
 export const MAX_RESOURCE_DESCRIPTION_BYTES = 480
 
@@ -171,166 +92,127 @@ export function boundDescription(description: string): string {
   return lastSpace > clamped.length - 80 ? clamped.slice(0, lastSpace) : clamped
 }
 
+
 export function resourceInfoFor(resource: PricedResource, resourceUrl: string): ResourceInfo {
-  const isContextCompiler = resource.pathPrefix === '/api/v1/compress'
+  const offer = offerById(resource.offerId)
   return {
     url: resourceUrl,
-    description: boundDescription(isContextCompiler ? CONTEXT_COMPILER_DESCRIPTION : resource.description),
+    // The catalog's description, not the deployment variable's. A stale
+    // X402_RESOURCES entry can enable or disable an offer; it cannot change
+    // what the challenge claims that offer is.
+    description: boundDescription(offer?.description ?? resource.description),
     mimeType: 'application/json',
-    ...(isContextCompiler
-      ? {
-          serviceName: SERVICE_NAME,
-          tags: ['ai', 'context-compression', 'llm', 'rag', 'provenance'],
-          iconUrl: ICON_URL,
-        }
+    ...(offer
+      ? { serviceName: offer.serviceName, tags: [...offer.tags], iconUrl: ICON_URL }
       : {}),
   }
 }
 
 /**
- * Bazaar catalog metadata for routes whose public contract is stable enough
- * for an autonomous buyer to call without reading prose documentation.
+ * Bazaar catalog metadata plus the integrity and commerce facts an autonomous
+ * buyer needs before signing.
  *
- * Unknown priced routes intentionally receive no discovery declaration. A
- * vague or incorrect schema is worse than no listing: Bazaar agents can spend
- * money against it without a human noticing the mismatch.
+ * Cached per offer. The previous single module-level variable was correct for
+ * exactly one offer and silently wrong for more than one: whichever offer was
+ * probed first would have populated the cache, and every other offer's
+ * challenge would then have advertised the first one's schema. That failure is
+ * invisible from the server side -- the 402 looks well-formed -- and surfaces
+ * as agents paying for one resource and calling another.
+ *
+ * An offer with no catalog entry receives no declaration at all, which remains
+ * deliberate: a vague or incorrect schema is worse than no listing, because a
+ * Bazaar agent can spend money against it without a human noticing.
  */
-export function discoveryExtensionsFor(resource: PricedResource): Record<string, unknown> | undefined {
-  if (resource.pathPrefix !== '/api/v1/compress') return undefined
-  // The declaration is immutable deployment metadata. Rebuilding and
-  // validating its full input/output schema on every unpaid probe adds work to
-  // the exact 402 path catalogs measure. Cache the validated object for the
-  // lifetime of the warm instance; a new deployment naturally rebuilds it.
-  if (cachedContextCompilerDiscovery) return cachedContextCompilerDiscovery
+const declarationCache = new Map<string, Record<string, unknown>>()
+
+export async function discoveryExtensionsFor(
+  resource: PricedResource,
+  resourceUrl: string,
+  requirement?: PaymentRequirement,
+): Promise<Record<string, unknown> | undefined> {
+  const offer = offerById(resource.offerId)
+  if (!offer) return undefined
+
+  // Keyed by offer and by resource URL. The same offer is served from Preview
+  // and Production under different origins, and the canonical resource URL is
+  // covered by the declaration digest, so one cache entry cannot serve both.
+  const cacheKey = `${offer.id} ${resourceUrl}`
+  const cached = declarationCache.get(cacheKey)
+  if (cached) return cached
 
   const declared = declareDiscoveryExtension({
     bodyType: 'json',
-    input: DISCOVERY_INPUT,
-    inputSchema: {
-      type: 'object',
-      additionalProperties: false,
-      properties: {
-        clientRequestId: { type: 'string', minLength: 8, maxLength: 120, description: 'Caller trace ID.' },
-        task: { type: 'string', minLength: 8, maxLength: 1200, description: 'Task used to rank passages.' },
-        tokenBudget: { type: 'integer', minimum: 64, maximum: 16000, description: 'Model-neutral output budget.' },
-        documents: {
-          type: 'array',
-          minItems: 1,
-          maxItems: 8,
-          description: 'Sources to rank and deduplicate.',
-          items: {
-            type: 'object',
-            additionalProperties: false,
-            properties: {
-              id: { type: 'string', pattern: SOURCE_ID_PATTERN, description: 'Stable source ID.' },
-              title: { type: 'string', minLength: 1, maxLength: 160, description: 'Source title.' },
-              text: { type: 'string', minLength: 1, description: 'Transient source text.' },
-            },
-            required: ['id', 'text'],
-          },
-        },
-        provenance: { type: 'string', enum: ['full', 'compact', 'none'], default: 'full', description: 'Inline citation style.' },
-        scoring: { type: 'string', enum: ['bm25', 'keyword'], default: 'bm25', description: 'Passage ranker.' },
-        budgetMode: { type: 'string', enum: ['guaranteed', 'estimated'], default: 'guaranteed', description: 'Budget enforcement mode.' },
-      },
-      required: ['clientRequestId', 'task', 'tokenBudget', 'documents'],
-    },
-    output: {
-      example: DISCOVERY_OUTPUT,
-      schema: {
-        type: 'object',
-        additionalProperties: false,
-        properties: {
-          version: { type: 'string', const: '0.1.0' },
-          packId: { type: 'string', pattern: '^ctxpack_[a-f0-9]{32}$' },
-          clientRequestId: { type: 'string', minLength: 8, maxLength: 120 },
-          task: { type: 'string' },
-          tokenBudget: { type: 'integer', minimum: 64, maximum: 16000 },
-          context: { type: 'string' },
-          metrics: {
-            type: 'object',
-            additionalProperties: false,
-            properties: {
-              originalBytes: { type: 'integer', minimum: 0, description: 'Source UTF-8 bytes.' },
-              compiledBytes: { type: 'integer', minimum: 0, description: 'Output UTF-8 bytes.' },
-              originalEstimatedTokens: { type: 'integer', minimum: 0, description: 'Source token estimate.' },
-              compiledEstimatedTokens: { type: 'integer', minimum: 0, description: 'Output token estimate.' },
-              tokensSaved: { type: 'integer', minimum: 0, description: 'Estimated input tokens avoided. Multiply by your own model input price to obtain a cost saving; this service does not know your model and does not compute a dollar figure.' },
-              estimatedReductionPercent: { type: 'number', minimum: 0, maximum: 100, description: 'Estimated token reduction; not provider billing.' },
-              sourceCount: { type: 'integer', minimum: 1, maximum: 8, description: 'Input source count.' },
-              sourceCoveragePercent: { type: 'number', minimum: 0, maximum: 100, description: 'Sources with selected passages; not evidence recall.' },
-              duplicatePassagesRemoved: { type: 'integer', minimum: 0, description: 'Exact duplicates removed.' },
-            },
-            required: ['originalBytes', 'compiledBytes', 'originalEstimatedTokens', 'compiledEstimatedTokens', 'tokensSaved', 'estimatedReductionPercent', 'sourceCount', 'sourceCoveragePercent', 'duplicatePassagesRemoved'],
-          },
-          includedPassages: {
-            type: 'array',
-            items: {
-              type: 'object', additionalProperties: false,
-              properties: {
-                sourceId: { type: 'string', pattern: SOURCE_ID_PATTERN },
-                passageId: { type: 'string', pattern: PASSAGE_ID_PATTERN },
-                passageHash: { type: 'string', pattern: SHA256_PATTERN },
-                text: { type: 'string', minLength: 1 },
-              },
-              required: ['sourceId', 'passageId', 'passageHash', 'text'],
-            },
-          },
-          sources: {
-            type: 'array', minItems: 1, maxItems: 8,
-            items: {
-              type: 'object', additionalProperties: false,
-              properties: {
-                sourceId: { type: 'string', pattern: SOURCE_ID_PATTERN },
-                title: { type: 'string' },
-                sourceHash: { type: 'string', pattern: SHA256_PATTERN },
-                originalEstimatedTokens: { type: 'integer', minimum: 0 },
-                passageCount: { type: 'integer', minimum: 1 },
-                includedPassageIds: { type: 'array', items: { type: 'string', pattern: PASSAGE_ID_PATTERN } },
-                includedEstimatedTokens: { type: 'integer', minimum: 0 },
-              },
-              required: ['sourceId', 'title', 'sourceHash', 'originalEstimatedTokens', 'passageCount', 'includedPassageIds', 'includedEstimatedTokens'],
-            },
-          },
-          warnings: { type: 'array', items: { type: 'string' }, description: 'Human-readable limitations.' },
-          warningCodes: { type: 'array', items: { type: 'string', enum: ['model_neutral_token_estimates', 'extractive_selection_not_verification', 'no_passage_fit_budget'] }, description: 'Machine-readable limitations.' },
-          retentionBoundaries: {
-            type: 'object', additionalProperties: false,
-            properties: {
-              selectionType: { type: 'string', const: 'extractive' },
-              evidenceRetention: { type: 'string', const: 'best_effort' },
-              claimVerificationPerformed: { type: 'boolean', const: false },
-              completenessGuaranteed: { type: 'boolean', const: false },
-              hallucinationPreventionGuaranteed: { type: 'boolean', const: false },
-              tokenCountType: { type: 'string', const: 'model_neutral_estimate' },
-            },
-            required: ['selectionType', 'evidenceRetention', 'claimVerificationPerformed', 'completenessGuaranteed', 'hallucinationPreventionGuaranteed', 'tokenCountType'],
-          },
-          inputHash: { type: 'string', pattern: SHA256_PATTERN },
-          outputHash: { type: 'string', pattern: SHA256_PATTERN },
-          sourceTextStored: { type: 'boolean', const: false },
-          compiledContextStored: { type: 'boolean', const: false },
-        },
-        required: ['version', 'packId', 'clientRequestId', 'task', 'tokenBudget', 'context', 'metrics', 'includedPassages', 'sources', 'warnings', 'warningCodes', 'retentionBoundaries', 'inputHash', 'outputHash', 'sourceTextStored', 'compiledContextStored'],
-      },
-    },
+    input: offer.discovery.input,
+    inputSchema: offer.discovery.inputSchema,
+    output: { example: offer.discovery.output, schema: offer.discovery.outputSchema },
   })
 
   const enriched = bazaarResourceServerExtension.enrichDeclaration?.(declared.bazaar, {
-    method: 'POST',
-    path: resource.pathPrefix,
-    adapter: { getPath: () => resource.pathPrefix },
+    method: offer.method,
+    path: offer.path,
+    adapter: { getPath: () => offer.path },
   }) as Record<string, unknown>
 
   const validation = validateDiscoveryExtensionSpec(enriched)
   if (!validation.valid) {
-    throw new Error(`Invalid Bazaar discovery declaration: ${validation.errors?.join('; ') ?? 'unknown error'}`)
+    throw new Error(`Invalid Bazaar discovery declaration for ${offer.id}: ${validation.errors?.join('; ') ?? 'unknown error'}`)
   }
   const dataValidation = validateDiscoveryExtension(enriched as unknown as Parameters<typeof validateDiscoveryExtension>[0])
   if (!dataValidation.valid) {
-    throw new Error(`Bazaar discovery example does not satisfy its schema: ${dataValidation.errors?.join('; ') ?? 'unknown error'}`)
+    throw new Error(`Bazaar discovery example for ${offer.id} does not satisfy its schema: ${dataValidation.errors?.join('; ') ?? 'unknown error'}`)
   }
 
-  cachedContextCompilerDiscovery = Object.freeze({ bazaar: enriched })
-  return cachedContextCompilerDiscovery
+  // The commercial facts a buyer needs that the Bazaar schema has no field
+  // for: what the money is, on which chain, and what the offer does not do.
+  // Published beside the schema so an agent never has to read prose docs to
+  // find the boundary of what it is buying.
+  const offerExtension = {
+    offerId: offer.id,
+    method: offer.method,
+    canonicalResource: resourceUrl,
+    amount: offer.amount,
+    asset: 'USDC',
+    assetDecimals: USDC_DECIMALS,
+    network: BASE_MAINNET_CAIP2,
+    status: offer.status,
+    maxRequestBytes: offer.maxRequestBytes,
+    capabilityBoundaries: [...offer.capabilityBoundaries],
+    retention: {
+      sourceTextStored: offer.retention.sourceTextStored,
+      retainedFields: [...offer.retention.retainedFields],
+    },
+  }
+
+  const extensions: Record<string, unknown> = { bazaar: enriched, [OFFER_EXTENSION]: offerExtension }
+
+  // The digest must describe the declaration this server actually publishes,
+  // which means it is taken over the real resource *and the real accepts* --
+  // not over a placeholder. A digest computed over a stand-in validates
+  // against itself and fails against the live challenge, which is exactly the
+  // self-mismatch x402-doctor exists to catch. So the requirement is passed in
+  // rather than invented here.
+  if (requirement) {
+    const integrity = await createDeclarationDigestExtension(
+      {
+        x402Version: X402_VERSION,
+        resource: resourceInfoFor(resource, resourceUrl) as unknown as Record<string, unknown>,
+        accepts: [requirement],
+        extensions,
+      },
+      OFFER_METADATA_VERSION,
+    )
+    extensions[DECLARATION_DIGEST_EXTENSION] = integrity
+  }
+
+  const frozen = Object.freeze(extensions)
+  // Only a complete declaration is cached. Caching one built without a
+  // requirement would serve a digest-less declaration for the lifetime of the
+  // instance to every later caller that did supply one.
+  if (requirement) declarationCache.set(cacheKey, frozen)
+  return frozen
+}
+
+/** Test seam. A warm instance otherwise keeps a declaration for its lifetime. */
+export function resetDiscoveryCache(): void {
+  declarationCache.clear()
 }

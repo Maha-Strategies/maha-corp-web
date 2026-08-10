@@ -6,9 +6,11 @@ import { resolveX402 } from '../lib/x402/gateway.ts'
 import type { PaymentFacilitator } from '../lib/x402/protocol.ts'
 import { discoveryExtensionsFor, resourceInfoFor } from '../lib/x402/discovery.ts'
 
+// Two real catalog offers, one nested under the other's path. That nesting is
+// the point: it is the shape that prefix matching priced wrongly.
 const RESOURCES = JSON.stringify([
-  { pathPrefix: '/api/v1/compress', amount: '10000', description: 'One compression', concurrencyCap: 8 },
-  { pathPrefix: '/api/v1/compress/solver', amount: '500000', description: 'One solver job', concurrencyCap: 2 },
+  { method: 'POST', path: '/api/v1/compress' },
+  { method: 'POST', path: '/api/v1/compress/evaluate' },
 ])
 
 const ENV = {
@@ -22,19 +24,30 @@ const ENV = {
 
 const config = () => x402Config(ENV) as X402Config
 
-const request = (path: string, headers: Record<string, string> = {}) =>
-  new Request(`https://www.mahastrategies.com${path}`, { headers })
+const request = (path: string, headers: Record<string, string> = {}, method = 'POST') =>
+  new Request(`https://www.mahastrategies.com${path}`, { headers, method })
 
 const encode = (value: unknown) => Buffer.from(JSON.stringify(value), 'utf8').toString('base64')
-const signatureFor = (path: string) => {
-  const priced = priceFor(path, config())!
+/**
+ * Builds a payer's PAYMENT-SIGNATURE.
+ *
+ * `binding` picks how the declaration is echoed back. Both are legitimate:
+ * 'full' is what a client with a small declaration does, 'digest' is what a
+ * client must do when the full declaration exceeds the 16 KB header ceiling.
+ */
+const signatureFor = async (path: string, binding: 'full' | 'digest' = 'full') => {
+  const priced = priceFor('POST', path, config())!
   const url = `https://www.mahastrategies.com${path}`
+  const declared = await discoveryExtensionsFor(priced, url, requirementFor(priced, url, config()))
+  const extensions = binding === 'digest' && declared
+    ? { 'declaration-integrity': declared['declaration-integrity'] }
+    : declared
   return encode({
     x402Version: 2,
     resource: resourceInfoFor(priced, url),
     accepted: requirementFor(priced, url, config()),
     payload: { signature: '0x' },
-    ...(discoveryExtensionsFor(priced) ? { extensions: discoveryExtensionsFor(priced) } : {}),
+    ...(extensions ? { extensions } : {}),
   })
 }
 
@@ -71,9 +84,11 @@ test('enabled but incomplete configuration is loud, not silent', () => {
   assert.throws(() => x402Config({ ...ENV, X402_FACILITATOR_URL: 'http://insecure' }), /https/)
   assert.throws(() => x402Config({ ...ENV, X402_NETWORK: 'dogecoin' }), /X402_NETWORK/)
   assert.throws(() => x402Config({ ...ENV, X402_RESOURCES: '[]' }), /at least one/)
-  assert.throws(() => x402Config({ ...ENV, X402_RESOURCES: '[{"pathPrefix":"api","amount":"1","description":"d","concurrencyCap":1}]' }), /must start with/)
-  assert.throws(() => x402Config({ ...ENV, X402_RESOURCES: '[{"pathPrefix":"/a","amount":"0","description":"d","concurrencyCap":1}]' }), /positive integer/)
-  assert.throws(() => x402Config({ ...ENV, X402_RESOURCES: '[{"pathPrefix":"/a","amount":"1","description":"d","concurrencyCap":0}]' }), /concurrencyCap/)
+  assert.throws(() => x402Config({ ...ENV, X402_RESOURCES: '[{"path":"api"}]' }), /must start with/)
+  // A path nobody published is a typo, and a typo that boots is a route that
+  // silently sells nothing while looking configured.
+  assert.throws(() => x402Config({ ...ENV, X402_RESOURCES: '[{"path":"/a"}]' }), /not in the public offer catalog/)
+  assert.throws(() => x402Config({ ...ENV, X402_RESOURCES: '[{"method":"GET","path":"/api/v1/compress"}]' }), /Only POST/)
   assert.throws(() => x402Config({ ...ENV, CDP_API_KEY_ID: 'id' }), /must be set together/)
   assert.throws(
     () => x402Config({ ...ENV, X402_FACILITATOR_URL: 'https://api.cdp.coinbase.com/platform/v2/x402' }),
@@ -94,13 +109,18 @@ test('a path that cannot release its slot cannot be priced', async () => {
   // slots nobody frees and paying callers see 429s that look like load.
   const { releasesSlot, withSlotRelease } = await import('../lib/x402/slot.ts')
   assert.throws(
-    () => x402Config({ ...ENV, X402_RESOURCES: '[{"pathPrefix":"/api/v1/jobs/private-reference","amount":"1","description":"d","concurrencyCap":1}]' }),
-    /does not release its concurrency slot/,
+    () => x402Config({ ...ENV, X402_RESOURCES: '[{"path":"/api/v1/jobs/tensor-network"}]' }),
+    /not in the public offer catalog|does not release its concurrency slot/,
   )
-  assert.equal(releasesSlot('/api/v1/compress'), true)
-  assert.equal(releasesSlot('/api/v1/compress/solver'), true)
-  // A prefix that merely starts with the same characters is not the same route.
-  assert.equal(releasesSlot('/api/v1/compressor'), false)
+  assert.equal(releasesSlot('POST', '/api/v1/compress'), true)
+  assert.equal(releasesSlot('POST', '/api/v1/compress/evaluate'), true)
+  assert.equal(releasesSlot('POST', '/api/v1/mps/audit'), true)
+  // A route is vouched for by method as well as path.
+  assert.equal(releasesSlot('GET', '/api/v1/compress'), false)
+  // A sub-path is not covered by its parent's entry. The old prefix rule
+  // vouched for /api/v1/compress/evaluate before that handler was written.
+  assert.equal(releasesSlot('POST', '/api/v1/mps/audit/audit_x'), false)
+  assert.equal(releasesSlot('POST', '/api/v1/compressor'), false)
   assert.equal(typeof withSlotRelease, 'function')
 })
 
@@ -142,7 +162,7 @@ test('an unpaid request to a priced path is challenged', async () => {
   assert.equal(outcome.status, 402)
   const decoded = JSON.parse(Buffer.from(outcome.header, 'base64').toString('utf8'))
   assert.equal(decoded.x402Version, 2)
-  assert.equal(decoded.accepts[0].amount, '10000')
+  assert.equal(decoded.accepts[0].amount, '1000')
   assert.equal(decoded.resource.url, 'https://www.mahastrategies.com/api/v1/compress')
   assert.equal(decoded.resource.serviceName, 'Maha Context Compiler')
   assert.equal(decoded.extensions.bazaar.info.input.method, 'POST')
@@ -155,24 +175,32 @@ test('an unpaid request to a priced path is challenged', async () => {
   assert.ok(outcome.header.length < 16_384, `PAYMENT-REQUIRED is ${outcome.header.length} bytes`)
 })
 
-test('the price charged is the longest matching prefix', () => {
-  // /api/v1/compress/solver must not be sold at the compression price.
-  assert.equal(priceFor('/api/v1/compress', config())?.amount, '10000')
-  assert.equal(priceFor('/api/v1/compress/solver', config())?.amount, '500000')
-  assert.equal(priceFor('/api/v1/mcp/servers', config()), null)
+test('the price charged is an exact method and path match', () => {
+  // The deep endpoint costs ten times the entry endpoint and lives beneath it.
+  // Under the old longest-prefix rule it matched /api/v1/compress and would
+  // have been sold for $0.001 -- and the 402 would have quoted that price, so
+  // the payer would have done nothing wrong.
+  assert.equal(priceFor('POST', '/api/v1/compress', config())?.amount, '1000')
+  assert.equal(priceFor('POST', '/api/v1/compress/evaluate', config())?.amount, '10000')
+
+  // A sub-path of a priced route is not priced by inheritance.
+  assert.equal(priceFor('POST', '/api/v1/compress/evaluate/extra', config()), null)
+  // A GET beside a priced POST is not the priced resource.
+  assert.equal(priceFor('GET', '/api/v1/compress', config()), null)
+  assert.equal(priceFor('POST', '/api/v1/mcp/servers', config()), null)
 })
 
 test('the challenge publishes the EIP-712 domain the facilitator needs', () => {
   // Base mainnet native USDC reports "USD Coin" version "2". A requirement
   // without `extra` is refused because the facilitator cannot rebuild the
   // EIP-712 digest; its absence is silent everywhere else.
-  const requirement = requirementFor(priceFor('/api/v1/compress', config())!, 'https://www.mahastrategies.com/api/v1/compress', config())
+  const requirement = requirementFor(priceFor('POST', '/api/v1/compress', config())!, 'https://www.mahastrategies.com/api/v1/compress', config())
   assert.deepEqual(requirement.extra, { name: 'USD Coin', version: '2' })
 
   // Overridable, because the USDC defaults stop being right the moment a
   // different token is priced.
   const other = x402Config({ ...ENV, X402_ASSET_EIP712_NAME: 'EURC', X402_ASSET_EIP712_VERSION: '1' }) as X402Config
-  assert.deepEqual(requirementFor(priceFor('/api/v1/compress', other)!, 'https://x.test/api/v1/compress', other).extra, { name: 'EURC', version: '1' })
+  assert.deepEqual(requirementFor(priceFor('POST', '/api/v1/compress', other)!, 'https://x.test/api/v1/compress', other).extra, { name: 'EURC', version: '1' })
 })
 
 test('the v2 resource binds to the path without its query string', async () => {
@@ -185,7 +213,7 @@ test('the v2 resource binds to the path without its query string', async () => {
 })
 
 test('a settled payment is admitted and carries settlement back', async () => {
-  const outcome = await resolveX402(request('/api/v1/compress', { 'PAYMENT-SIGNATURE': signatureFor('/api/v1/compress') }), {
+  const outcome = await resolveX402(request('/api/v1/compress', { 'PAYMENT-SIGNATURE': await signatureFor('/api/v1/compress') }), {
     config: config(), facilitator: facilitator(), ledger: ledger('claimed'), acquire,
   })
   assert.equal(outcome.kind, 'paid')
@@ -193,13 +221,13 @@ test('a settled payment is admitted and carries settlement back', async () => {
   assert.equal(outcome.transaction, 'tx_1')
   // The slot must come back with the outcome. Acquiring capacity and then
   // dropping the token holds it until its score expires, for no reason.
-  assert.deepEqual(outcome.slot, { resource: '/api/v1/compress', token: 'slot-token' })
+  assert.deepEqual(outcome.slot, { resource: 'context-compression', token: 'slot-token' })
   const decoded = JSON.parse(Buffer.from(outcome.header, 'base64').toString('utf8'))
   assert.equal(decoded.success, true)
 })
 
 test('a replayed payment is refused with 409, not re-challenged', async () => {
-  const outcome = await resolveX402(request('/api/v1/compress', { 'PAYMENT-SIGNATURE': signatureFor('/api/v1/compress') }), {
+  const outcome = await resolveX402(request('/api/v1/compress', { 'PAYMENT-SIGNATURE': await signatureFor('/api/v1/compress') }), {
     config: config(), facilitator: facilitator(), ledger: ledger('duplicate'), acquire,
   })
   assert.equal(outcome.kind, 'refused')
@@ -209,21 +237,21 @@ test('a replayed payment is refused with 409, not re-challenged', async () => {
 })
 
 test('each path is priced to the facilitator at its own rate', async () => {
-  // The solver costs 500000 and compression 10000. The price is enforced by
+  // Deep evaluation costs 10000 and entry compression 1000. The price is enforced by
   // what is sent to the facilitator to validate the signed payload against --
   // there is no amount in a verify response to check afterwards.
   const seen: string[] = []
-  await resolveX402(request('/api/v1/compress/solver', { 'PAYMENT-SIGNATURE': signatureFor('/api/v1/compress/solver') }), {
+  await resolveX402(request('/api/v1/compress/evaluate', { 'PAYMENT-SIGNATURE': await signatureFor('/api/v1/compress/evaluate', 'digest') }), {
     config: config(), facilitator: facilitator(seen), ledger: ledger('claimed'), acquire,
   })
-  await resolveX402(request('/api/v1/compress', { 'PAYMENT-SIGNATURE': signatureFor('/api/v1/compress') }), {
+  await resolveX402(request('/api/v1/compress', { 'PAYMENT-SIGNATURE': await signatureFor('/api/v1/compress') }), {
     config: config(), facilitator: facilitator(seen), ledger: ledger('claimed'), acquire,
   })
-  assert.deepEqual(seen, ['500000', '10000'])
+  assert.deepEqual(seen, ['10000', '1000'])
 })
 
 test('a payment the facilitator rejects is challenged again rather than served', async () => {
-  const outcome = await resolveX402(request('/api/v1/compress/solver', { 'PAYMENT-SIGNATURE': signatureFor('/api/v1/compress/solver') }), {
+  const outcome = await resolveX402(request('/api/v1/compress/evaluate', { 'PAYMENT-SIGNATURE': await signatureFor('/api/v1/compress/evaluate', 'digest') }), {
     config: config(), facilitator: underfunded, ledger: ledger('claimed'), acquire,
   })
   assert.equal(outcome.kind, 'challenge')
@@ -232,7 +260,7 @@ test('a payment the facilitator rejects is challenged again rather than served',
 test('a paid request is refused when the resource is at capacity', async () => {
   // Payment authorizes; it does not create GPU capacity.
   const full = async () => ({ admitted: false, active: 2 })
-  const outcome = await resolveX402(request('/api/v1/compress/solver', { 'PAYMENT-SIGNATURE': signatureFor('/api/v1/compress/solver') }), {
+  const outcome = await resolveX402(request('/api/v1/compress/evaluate', { 'PAYMENT-SIGNATURE': await signatureFor('/api/v1/compress/evaluate', 'digest') }), {
     config: config(), facilitator: facilitator(), ledger: ledger('claimed'), acquire: full,
   })
   assert.equal(outcome.kind, 'refused')
@@ -250,7 +278,7 @@ test('capacity is checked only after payment, so load cannot be probed for free'
 })
 
 test('a missing ledger withholds the resource rather than serving it unrecorded', async () => {
-  const outcome = await resolveX402(request('/api/v1/compress', { 'PAYMENT-SIGNATURE': signatureFor('/api/v1/compress') }), {
+  const outcome = await resolveX402(request('/api/v1/compress', { 'PAYMENT-SIGNATURE': await signatureFor('/api/v1/compress') }), {
     config: config(), facilitator: facilitator(), ledger: null, acquire,
   })
   assert.equal(outcome.kind, 'refused')
@@ -260,7 +288,7 @@ test('a missing ledger withholds the resource rather than serving it unrecorded'
 })
 
 test('the pre-standard header still transacts', async () => {
-  const outcome = await resolveX402(request('/api/v1/compress', { 'X-PAYMENT': signatureFor('/api/v1/compress') }), {
+  const outcome = await resolveX402(request('/api/v1/compress', { 'X-PAYMENT': await signatureFor('/api/v1/compress') }), {
     config: config(), facilitator: facilitator(), ledger: ledger('claimed'), acquire,
   })
   assert.equal(outcome.kind, 'paid')
