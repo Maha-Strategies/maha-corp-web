@@ -3,6 +3,7 @@
  *
  *   TEST_API_URL=https://…vercel.app \
  *   STAGING_API_KEY=… VERCEL_AUTOMATION_BYPASS_SECRET=… \
+ *   REVENUE_CONTROL_TOKEN=…  # optional; without it the rows are not read back \
  *   node --experimental-strip-types scripts/probe-preview-attribution.ts
  *
  * Two legs. The write leg sends attributed requests and checks the responses.
@@ -114,6 +115,30 @@ async function writeLeg() {
   record('unattributed control call succeeds', control.status === 201, `HTTP ${control.status}`)
 }
 
+/**
+ * Ask the deployment which tenant this key belongs to.
+ *
+ * Discovered rather than configured. A `PREVIEW_TENANT_ID` variable would be a
+ * second copy of a fact the deployment already knows, and a stale one would
+ * make this probe read an empty window and report it as "no rows" -- a false
+ * negative that looks exactly like a broken write path. `/api/v1/keys/balance`
+ * is a self-managed route, so asking costs no credit.
+ */
+async function resolveTenantId(): Promise<string | null> {
+  const override = process.env.PREVIEW_TENANT_ID?.trim()
+  if (override) return override
+
+  const response = await fetch(`${target}/api/v1/keys/balance`, { headers: headers() })
+  if (response.status !== 200) {
+    record('tenant identity is discoverable', false, `balance returned HTTP ${response.status}`)
+    return null
+  }
+  const body = await response.json().catch(() => ({})) as { tenant_id?: string; api_key_id?: string }
+  const tenantId = body.tenant_id?.trim() || (body.api_key_id ? `tenant_${body.api_key_id}` : '')
+  record('tenant identity is discoverable', Boolean(tenantId), tenantId || 'balance response carried neither tenant_id nor api_key_id')
+  return tenantId || null
+}
+
 async function readLeg(): Promise<boolean> {
   if (!operatorToken) {
     console.log('\nSKIP  chargeback read leg')
@@ -122,9 +147,12 @@ async function readLeg(): Promise<boolean> {
     return false
   }
 
+  const tenantId = await resolveTenantId()
+  if (!tenantId) return false
+
   const today = new Date().toISOString().slice(0, 10)
   const url = new URL(`${target}/api/admin/chargeback-export`)
-  url.searchParams.set('tenantId', process.env.PREVIEW_TENANT_ID ?? '')
+  url.searchParams.set('tenantId', tenantId)
   url.searchParams.set('startDate', today)
   url.searchParams.set('endDate', today)
   url.searchParams.set('granularity', 'task')
