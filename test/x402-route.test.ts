@@ -17,7 +17,7 @@ const ORIGINAL_FETCH = globalThis.fetch
 const ORIGINAL_ENV = { ...process.env }
 
 const RESOURCES = JSON.stringify([
-  { pathPrefix: '/api/v1/compress', amount: '10000', description: 'One compression', concurrencyCap: 8 },
+  { method: 'POST', path: '/api/v1/compress' },
 ])
 
 type Calls = { verify: number; settle: number; claim: number; record: number; acquire: number; release: number }
@@ -92,17 +92,17 @@ afterEach(() => {
 const gateway = () => import('../lib/x402/gateway.ts')
 
 const encode = (value: unknown) => Buffer.from(JSON.stringify(value), 'utf8').toString('base64')
-const priced = { pathPrefix: '/api/v1/compress', amount: '10000', description: 'One compression', concurrencyCap: 8 }
+const priced = { offerId: 'context-compression', method: 'POST' as const, path: '/api/v1/compress', amount: '1000', description: 'One compression', concurrencyCap: 8 }
 const resourceUrl = 'https://www.mahastrategies.com/api/v1/compress'
-const SIGNATURE = () => encode({
+const SIGNATURE = async () => encode({
   x402Version: 2,
   resource: resourceInfoFor(priced, resourceUrl),
   accepted: {
-    scheme: 'exact', network: 'eip155:8453', amount: '10000', payTo: '0xSettlement',
+    scheme: 'exact', network: 'eip155:8453', amount: '1000', payTo: '0xSettlement',
     maxTimeoutSeconds: 60, asset: '0xUSDC', extra: { name: 'USD Coin', version: '2' },
   },
   payload: { signature: '0xsigned' },
-  extensions: discoveryExtensionsFor(priced),
+  extensions: await discoveryExtensionsFor(priced, resourceUrl),
 })
 
 function post(path: string, headers: Record<string, string> = {}) {
@@ -131,7 +131,7 @@ test('an unpaid request is challenged with terms it can actually pay', async () 
   const challenge = JSON.parse(Buffer.from(outcome.header, 'base64').toString('utf8'))
   assert.equal(challenge.x402Version, 2)
   const [requirement] = challenge.accepts
-  assert.equal(requirement.amount, '10000')
+  assert.equal(requirement.amount, '1000')
   assert.equal(requirement.payTo, '0xSettlement')
   assert.equal(requirement.asset, '0xUSDC')
   assert.equal(requirement.network, 'eip155:8453')
@@ -144,7 +144,7 @@ test('an unpaid request is challenged with terms it can actually pay', async () 
 test('a signed payment is verified, claimed, settled, and admitted -- in that order', async () => {
   enableX402()
   const { resolveX402 } = await gateway()
-  const outcome = await resolveX402(post('/api/v1/compress', { 'PAYMENT-SIGNATURE': SIGNATURE() }))
+  const outcome = await resolveX402(post('/api/v1/compress', { 'PAYMENT-SIGNATURE': await SIGNATURE() }))
 
   assert.equal(outcome.kind, 'paid')
   if (outcome.kind !== 'paid') return
@@ -161,7 +161,7 @@ test('a signed payment is verified, claimed, settled, and admitted -- in that or
 test('the handler is told it is serving a paid caller, and handed the slot to release', async () => {
   enableX402()
   const { resolveX402, paidRequestHeaders } = await gateway()
-  const outcome = await resolveX402(post('/api/v1/compress', { 'PAYMENT-SIGNATURE': SIGNATURE() }))
+  const outcome = await resolveX402(post('/api/v1/compress', { 'PAYMENT-SIGNATURE': await SIGNATURE() }))
   assert.equal(outcome.kind, 'paid')
   if (outcome.kind !== 'paid') return
 
@@ -171,8 +171,8 @@ test('the handler is told it is serving a paid caller, and handed the slot to re
   assert.equal(headers['x-maha-access-mode'], 'x402')
   assert.equal(headers['x-maha-payment-transaction'], 'tx_e2e')
   assert.equal(headers['x-maha-payment-payer'], '0xAgent')
-  assert.equal(headers['x-maha-payment-amount'], '10000')
-  assert.equal(headers['x-maha-slot-resource'], '/api/v1/compress')
+  assert.equal(headers['x-maha-payment-amount'], '1000')
+  assert.equal(headers['x-maha-slot-resource'], 'context-compression')
   assert.match(headers['x-maha-slot-token'], /^[0-9a-f-]{36}$/)
 })
 
@@ -181,7 +181,7 @@ test('the slot the handler is handed is the one that was acquired', async () => 
   const { resolveX402, paidRequestHeaders } = await gateway()
   const { slotFromRequest } = await import('../lib/x402/slot.ts')
 
-  const outcome = await resolveX402(post('/api/v1/compress', { 'PAYMENT-SIGNATURE': SIGNATURE() }))
+  const outcome = await resolveX402(post('/api/v1/compress', { 'PAYMENT-SIGNATURE': await SIGNATURE() }))
   assert.equal(outcome.kind, 'paid')
   if (outcome.kind !== 'paid') return
 
@@ -189,7 +189,7 @@ test('the slot the handler is handed is the one that was acquired', async () => 
   // proxy.ts to the route. A token dropped anywhere along this path costs a
   // slot until its score expires, with nothing in the logs to say why.
   const downstream = new Request('https://www.mahastrategies.com/api/v1/compress', { headers: paidRequestHeaders(outcome) })
-  assert.deepEqual(slotFromRequest(downstream), { resource: '/api/v1/compress', token: outcome.slot.token })
+  assert.deepEqual(slotFromRequest(downstream), { resource: 'context-compression', token: outcome.slot.token })
 })
 
 test('a credit-authenticated request holds no slot to release', async () => {
@@ -202,7 +202,7 @@ test('a replayed payment is refused without settling a second time', async () =>
   enableX402()
   claimResult = 'duplicate'
   const { resolveX402 } = await gateway()
-  const outcome = await resolveX402(post('/api/v1/compress', { 'PAYMENT-SIGNATURE': SIGNATURE() }))
+  const outcome = await resolveX402(post('/api/v1/compress', { 'PAYMENT-SIGNATURE': await SIGNATURE() }))
 
   assert.equal(outcome.kind, 'refused')
   if (outcome.kind !== 'refused') return
@@ -216,7 +216,7 @@ test('a paid request is refused when the resource is full, and told when to retr
   enableX402()
   admitted = false
   const { resolveX402 } = await gateway()
-  const outcome = await resolveX402(post('/api/v1/compress', { 'PAYMENT-SIGNATURE': SIGNATURE() }))
+  const outcome = await resolveX402(post('/api/v1/compress', { 'PAYMENT-SIGNATURE': await SIGNATURE() }))
 
   assert.equal(outcome.kind, 'refused')
   if (outcome.kind !== 'refused') return
@@ -238,7 +238,7 @@ test('broken configuration withholds the resource instead of serving it free', a
   enableX402()
   process.env.X402_PAY_TO = ''
   const { resolveX402 } = await gateway()
-  const outcome = await resolveX402(post('/api/v1/compress', { 'PAYMENT-SIGNATURE': SIGNATURE() }))
+  const outcome = await resolveX402(post('/api/v1/compress', { 'PAYMENT-SIGNATURE': await SIGNATURE() }))
 
   assert.equal(outcome.kind, 'refused')
   if (outcome.kind !== 'refused') return
@@ -257,7 +257,7 @@ test('a facilitator that cannot be reached does not admit the request', async ()
   }) as unknown as typeof fetch
 
   const { resolveX402 } = await gateway()
-  const outcome = await resolveX402(post('/api/v1/compress', { 'PAYMENT-SIGNATURE': SIGNATURE() }))
+  const outcome = await resolveX402(post('/api/v1/compress', { 'PAYMENT-SIGNATURE': await SIGNATURE() }))
   assert.notEqual(outcome.kind, 'paid')
   assert.equal(calls.acquire, 0)
 })

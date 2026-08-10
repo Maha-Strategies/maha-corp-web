@@ -87,7 +87,9 @@ export async function resolveX402(request: Request, dependencies: Dependencies =
   if (!config) return { kind: 'not_applicable' }
 
   const url = new URL(request.url)
-  const resource = priceFor(url.pathname, config)
+  // Method-aware and exact. A GET beside a priced POST is not the priced
+  // resource, and a sub-path of one is not the parent.
+  const resource = priceFor(request.method, url.pathname, config)
   if (!resource) return { kind: 'not_applicable' }
 
   // The requirement binds to the exact URL without query string, so a
@@ -95,7 +97,10 @@ export async function resolveX402(request: Request, dependencies: Dependencies =
   const resourceUrl = `${url.origin}${url.pathname}`
   const requirement = requirementFor(resource, resourceUrl, config)
   const resourceInfo = resourceInfoFor(resource, resourceUrl)
-  const extensions = discoveryExtensionsFor(resource)
+  // The requirement is passed through so the declaration digest covers the
+  // accepts array this challenge actually carries. Awaited once per request,
+  // served from a per-offer cache after the first.
+  const extensions = await discoveryExtensionsFor(resource, resourceUrl, requirement)
 
   const signature = readPaymentSignature(request.headers)
   if (!signature) return challenge(requirement, resourceInfo, extensions, 'Payment is required for this resource.')
@@ -157,7 +162,9 @@ export async function resolveX402(request: Request, dependencies: Dependencies =
   // Capacity is checked only after payment is settled and recorded. Checking
   // first would let an unpaid caller probe how loaded a resource is.
   const acquire = dependencies.acquire ?? acquireSlot
-  const slot = await acquire(resource.pathPrefix, resource.concurrencyCap, config.slotTtlSeconds)
+  // Keyed by offer id rather than by path, so two offers sharing a path prefix
+  // hold separate capacity pools and neither can starve the other.
+  const slot = await acquire(resource.offerId, resource.concurrencyCap, config.slotTtlSeconds)
   if (!slot.admitted) {
     return {
       kind: 'refused',
@@ -174,7 +181,7 @@ export async function resolveX402(request: Request, dependencies: Dependencies =
     transaction: accepted.transaction,
     payer: accepted.payer,
     amountPaid: accepted.amountPaid,
-    slot: { resource: resource.pathPrefix, token: slot.token ?? '' },
+    slot: { resource: resource.offerId, token: slot.token ?? '' },
   }
 }
 

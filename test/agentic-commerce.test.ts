@@ -72,8 +72,17 @@ test('the served orientation file points agents at the commercial surfaces', () 
   assert.ok(llms.includes('/.well-known/agent.json'), 'the agent card must be reachable from /llms.txt')
   // The payment boundary travels with the offer, not only on the purchase page.
   assert.match(llms, /human purchaser must authorize/i)
-  assert.match(llms, /x402 v2 payment of 0\.001 USDC/i)
-  assert.match(llms, /api\/v1\/compress/)
+  // Each x402 price appears against its own route. A single blended sentence
+  // was survivable with one offer; with three at 100x spread it is how an
+  // agent signs a $0.10 authorization for a $0.001 endpoint.
+  assert.match(llms, /POST \/api\/v1\/compress - 1000 USDC base units/)
+  assert.match(llms, /POST \/api\/v1\/compress\/evaluate - 10000 USDC base units/)
+  assert.match(llms, /POST \/api\/v1\/mps\/audit - 100000 USDC base units/)
+  // And the exclusion is stated, so "it is under /api/v1" is not read as
+  // "it is payable".
+  assert.match(llms, /No other endpoint accepts autonomous payment/i)
+  assert.match(llms, /not factual certification, legal advice, or human verification/i)
+  assert.match(llms, /not factual accuracy, answer quality, verification, or hallucination prevention/i)
   for (const endpoint of [
     '/api/v1/jobs/tensor-network',
     '/api/v1/jobs/geometric-registration',
@@ -127,9 +136,12 @@ test('public agent discovery identifies live capabilities and the scoped Context
   }
   assert.equal(offers.updatedAt, '2026-08-08T00:00:00.000Z')
   assert.equal(offers.transactionPolicy.autonomousPaymentSupported, true)
-  assert.deepEqual(offers.transactionPolicy.autonomousPaymentScope, ['context-compression'])
+  // Exactly the three x402 offers, and deliberately not the GPU routes.
+  assert.deepEqual(offers.transactionPolicy.autonomousPaymentScope, ['context-compression', 'deep-context-evaluation', 'mps-autonomous-audit'])
   const expected = [
     'context-compression',
+    'deep-context-evaluation',
+    'mps-autonomous-audit',
     // gpu-qubo-ising is deliberately absent: the standalone reference engine is
     // beta and undiscoverable until its vectorized candidate has passing A10G
     // evidence. See docs/qubo-reference-promotion.md.
@@ -190,8 +202,16 @@ test('the long-lived agent-offers manifest exposes the same MPS payment boundary
   }
   const mpsOffer = manifest.offers.find((offer) => offer.id === mpsAuditOffer.id)
   assert.equal(manifest.transactionPolicy.autonomousPaymentSupported, true)
-  assert.deepEqual(manifest.transactionPolicy.autonomousPaymentScope, ['context-compression'])
+  assert.deepEqual(manifest.transactionPolicy.autonomousPaymentScope, ['context-compression', 'deep-context-evaluation', 'mps-autonomous-audit'])
   assert.equal(manifest.transactionPolicy.humanConfirmationRequired, true)
+
+  // The prepaid MPS product and the autonomous MPS offer are different things
+  // and must stay legible as such. Adding an x402 audit route did not turn the
+  // prepaid credit pack into something an agent can buy on its own: that offer
+  // keeps its purchase mode and its 402-on-empty-balance contract, and it is
+  // not in the autonomous scope above -- 'mps-autonomous-audit' is a separate
+  // capability at a separate endpoint.
   assert.equal(mpsOffer?.purchase?.mode, mpsAuditOffer.purchase.mode)
   assert.equal(mpsOffer?.prepaidCredits?.insufficientBalance?.httpStatus, 402)
+  assert.equal(manifest.transactionPolicy.autonomousPaymentScope.includes(mpsAuditOffer.id), false)
 })

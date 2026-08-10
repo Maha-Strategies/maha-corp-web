@@ -285,7 +285,7 @@ test('the authored Context Compiler description fits without needing the clamp',
 
 test('the description a challenge actually publishes is bounded', () => {
   const info = resourceInfoFor(
-    { pathPrefix: '/api/v1/compress', amount: '1000', description: 'x', concurrencyCap: 4 },
+    { offerId: 'context-compression', method: 'POST' as const, path: '/api/v1/compress', amount: '1000', description: 'x', concurrencyCap: 4 },
     'https://www.mahastrategies.com/api/v1/compress',
   )
   const description = info.description ?? ''
