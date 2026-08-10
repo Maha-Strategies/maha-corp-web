@@ -116,7 +116,14 @@ jobs:
       # to go stale. The read leg needs REVENUE_CONTROL_TOKEN; without it the
       # probe still runs the writes and reports plainly that the rows were not
       # verified, rather than passing on evidence it does not have.
+      # Runs even when the suite above failed. The two verify unrelated things --
+      # that one checks MCP discovery and circuit breakers, this one checks that
+      # billing rows reach Postgres -- and letting an MCP upstream misconfigured
+      # in Preview suppress the billing evidence would mean the attribution
+      # pipeline stays unverified for reasons that have nothing to do with it.
+      # Not `always()`: a cancelled run should not go on to spend credits.
       - name: Probe chargeback attribution end to end
+        if: ${{ !cancelled() }}
         env:
           REVENUE_CONTROL_TOKEN: ${{ secrets.REVENUE_CONTROL_TOKEN }}
         run: |
