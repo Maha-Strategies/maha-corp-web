@@ -110,6 +110,19 @@ jobs:
           set -o pipefail
           node --experimental-strip-types scripts/test-e2e.ts 2>&1 | tee "$RUNNER_TEMP/preview-e2e.log"
 
+      # Attribution writes rows to the staging chargeback ledger and then reads
+      # them back out through the export route. The read leg needs
+      # REVENUE_CONTROL_TOKEN; without it the probe still runs the writes and
+      # reports plainly that the rows were not verified, rather than passing on
+      # evidence it does not have.
+      - name: Probe chargeback attribution end to end
+        env:
+          REVENUE_CONTROL_TOKEN: ${{ secrets.REVENUE_CONTROL_TOKEN }}
+          PREVIEW_TENANT_ID: ${{ vars.PREVIEW_TENANT_ID }}
+        run: |
+          set -o pipefail
+          node --experimental-strip-types scripts/probe-preview-attribution.ts 2>&1 | tee -a "$RUNNER_TEMP/preview-e2e.log"
+
       - name: Upload E2E evidence
         if: always()
         uses: actions/upload-artifact@v7

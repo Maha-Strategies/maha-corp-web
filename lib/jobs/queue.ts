@@ -85,6 +85,8 @@ export type JobRecord = {
    */
   taskId: string
   costCenter: string
+  /** Customer identity, not the credential. See resolveTenantId. */
+  tenantId: string
   createdAt: string
   updatedAt: string
   expiresAt: string
@@ -135,6 +137,7 @@ function toJobRecord(raw: Record<string, unknown> | null): JobRecord | null {
     // as empty and are simply not attributed, rather than failing to parse.
     taskId: typeof raw.taskId === 'string' ? raw.taskId : '',
     costCenter: typeof raw.costCenter === 'string' ? raw.costCenter : '',
+    tenantId: typeof raw.tenantId === 'string' ? raw.tenantId : '',
     createdAt: String(raw.createdAt),
     updatedAt: String(raw.updatedAt),
     expiresAt: String(raw.expiresAt),
@@ -188,7 +191,7 @@ export async function enqueueJob(input: {
    */
   slot?: { resource: string; token: string } | null
   /** Resolved from request headers by the route. Absent when unattributed. */
-  attribution?: { taskId: string | null; costCenter: string } | null
+  attribution?: { taskId: string | null; costCenter: string; tenantId: string | null } | null
 }): Promise<EnqueueOutcome> {
   const kind = input.kind
   const idemKey = idempotencyKey(input.keyId, input.request.clientRequestId)
@@ -246,6 +249,7 @@ export async function enqueueJob(input: {
     creditsCharged: '',
     taskId: input.attribution?.taskId ?? '',
     costCenter: input.attribution?.taskId ? input.attribution.costCenter : '',
+    tenantId: input.attribution?.tenantId ?? '',
     createdAt: now.toISOString(),
     updatedAt: now.toISOString(),
     expiresAt: expiresAt.toISOString(),
@@ -439,9 +443,9 @@ export async function settleJobFromCallback(callback: WorkerCallback): Promise<S
   // and the two ways of failing -- this callback and the expiry sweep -- would
   // otherwise be recorded inconsistently, since the sweep has no natural place
   // to write one. A chargeback ledger tracks money, and a zero is not spend.
-  if (job.taskId && creditsCharged > 0) {
+  if (job.taskId && job.tenantId && creditsCharged > 0) {
     await recordAgentTaskSpend({
-      tenantId: job.keyId,
+      tenantId: job.tenantId,
       taskId: job.taskId,
       costCenter: job.costCenter || UNALLOCATED,
       surface: 'jobs',

@@ -7,6 +7,7 @@ import {
   UNALLOCATED,
   isAttributable,
   resolveTaskAttribution,
+  resolveTenantId,
 } from '../lib/agent-task-attribution.ts'
 import { evaluateBudgets, recordAgentTaskSpend, spendByCostCenter, type BudgetRow } from '../lib/agent-task-spend.ts'
 
@@ -263,4 +264,31 @@ test('spend is aggregated per cost centre across rows', () => {
   ])
   assert.equal(totals.get('platform'), 10)
   assert.equal(totals.get('growth'), 2)
+})
+
+// ---------------------------------------------------------------------------
+// The two identities that look interchangeable
+// ---------------------------------------------------------------------------
+
+test('the billing identity is the tenant, never the credential', () => {
+  // The bug this pins: the jobs path recorded `keyId` while compress recorded
+  // the tenant, so a tenant-scoped export silently omitted every job row. It
+  // would have read as missing usage rather than as a defect, which is the
+  // worst kind of billing bug -- one that under-reports quietly.
+  const both = headers({
+    'x-maha-tenant-id': 'tenant_abc123',
+    'x-maha-api-key-id': 'key_def456',
+  })
+  assert.equal(resolveTenantId(both), 'tenant_abc123')
+
+  // A credential with no tenant header is not attributable, rather than
+  // falling back to the key id.
+  assert.equal(resolveTenantId(headers({ 'x-maha-api-key-id': 'key_def456' })), null)
+})
+
+test('a blank or whitespace tenant header is absent, not an empty bucket', () => {
+  for (const value of ['', '   ']) {
+    assert.equal(resolveTenantId(headers({ 'x-maha-tenant-id': value })), null)
+  }
+  assert.equal(resolveTenantId(headers({ 'x-maha-tenant-id': ' tenant_x ' })), 'tenant_x')
 })
