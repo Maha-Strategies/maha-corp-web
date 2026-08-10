@@ -13,6 +13,9 @@ from datetime import datetime, timezone
 from typing import Dict, Any
 from urllib.parse import urlparse
 from urllib.request import Request, urlopen
+import hashlib
+from pathlib import Path
+
 import modal
 from fastapi import Header, HTTPException
 
@@ -32,7 +35,40 @@ gpu_image = (
     .add_local_python_source("workers.tensor_network")
     .add_local_python_source("workers.geometric_registration")
 )
-e2e_image = modal.Image.debian_slim(python_version="3.11").pip_install("fastapi==0.115.6")
+def _worker_source_digest() -> str:
+    """Identity of the worker source, computed where this module is imported.
+
+    At deploy time that is the operator's checkout, so the value baked into the
+    image below describes the code actually shipped. The container recomputing
+    it would describe itself and prove nothing, which is why the result travels
+    as a baked environment variable rather than being read at runtime.
+
+    Deliberately a content digest rather than a git commit. The E2E suite has no
+    git history to compare against -- CI checks out at depth 1 -- and a commit
+    would also report drift for changes that never touched this worker. What
+    matters is whether the deployed worker is the same code as the tree under
+    test, and that is exactly what this measures.
+    """
+    here = Path(__file__).resolve().parent
+    parts = []
+    for path in sorted(here.glob("*.py")):
+        if path.name.startswith("test_"):
+            continue
+        parts.append(f"{path.name}:{hashlib.sha256(path.read_bytes()).hexdigest()}")
+    return hashlib.sha256("|".join(parts).encode("utf-8")).hexdigest()[:16]
+
+
+WORKER_SOURCE_DIGEST = _worker_source_digest()
+
+e2e_image = (
+    modal.Image.debian_slim(python_version="3.11")
+    .pip_install("fastapi==0.115.6")
+    # Baked at deploy, read at runtime. This is what lets a test detect that the
+    # deployed upstream is older than the code exercising it, instead of that
+    # drift surfacing as a missing tool or an unexplained routing failure --
+    # which is how it presented for four days in August 2026.
+    .env({"MAHA_WORKER_SOURCE_DIGEST": WORKER_SOURCE_DIGEST})
+)
 
 maha_secrets = modal.Secret.from_name("maha-worker-secrets")
 
@@ -258,6 +294,15 @@ def e2e_mcp_upstream(request_data: Dict[str, Any], authorization: str = Header(d
     method = request_data.get("method")
     if request_data.get("jsonrpc") != "2.0" or not isinstance(method, str) or not method:
         return {"jsonrpc": "2.0", "id": request_id, "error": {"code": -32600, "message": "Invalid JSON-RPC 2.0 request"}}
+
+    if method == "maha/deployment":
+        # Unauthenticated callers never reach here; the token check above runs
+        # first. The digest identifies code, not data, and carries no secret.
+        return {
+            "jsonrpc": "2.0",
+            "id": request_id,
+            "result": {"workerSourceDigest": os.environ.get("MAHA_WORKER_SOURCE_DIGEST", "unknown")},
+        }
 
     if method == "tools/list":
         return {
