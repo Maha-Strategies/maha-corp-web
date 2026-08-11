@@ -106,6 +106,13 @@ const integrations = [
     action: 'Apply buyer payment controls',
     external: false,
   },
+  {
+    title: 'Compatibility Pack contract',
+    body: 'Exact schemas, fixed price, sample evidence report, limitations, and refund behavior for the bounded A2A + MCP machine product.',
+    href: '/agent-infrastructure-compatibility-pack',
+    action: 'Inspect the published contract',
+    external: false,
+  },
 ] as const
 
 export default function DevelopersPage() {

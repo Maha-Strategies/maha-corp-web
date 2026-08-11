@@ -380,6 +380,40 @@
       }
     },
     {
+      "id": "agent-infrastructure-compatibility-pack",
+      "name": "Agent Infrastructure Compatibility Pack",
+      "status": "contract_published_runtime_withheld",
+      "serviceUrl": "https://www.mahastrategies.com/agent-infrastructure-compatibility-pack",
+      "description": "A bounded, evidence-backed compatibility assessment for one A2A agent, one MCP server and their declared policy and payment boundary.",
+      "price": {
+        "protocol": "x402",
+        "version": 2,
+        "network": "eip155:8453",
+        "asset": "USDC",
+        "amount": "49000000",
+        "display": "49.00 USDC"
+      },
+      "purchase": {
+        "payableNow": false,
+        "reason": "Autonomous payment remains disabled until durable report delivery and automatic refund recovery pass Production E2E."
+      },
+      "scope": {
+        "a2aAgents": 1,
+        "mcpServers": 1,
+        "nonMutatingA2ASkills": 1,
+        "nonMutatingMcpTools": 1,
+        "upstreamPayment": "challenge inspection only; Maha never signs or settles with the buyer wallet"
+      },
+      "contract": "https://www.mahastrategies.com/api/discovery/agent-infrastructure-compatibility-pack",
+      "sampleReport": "https://www.mahastrategies.com/api/discovery/agent-infrastructure-compatibility-pack/sample",
+      "failureAndRefund": {
+        "preflightFailure": "No charge.",
+        "compatibilityFailure": "Delivered as a finding; no refund.",
+        "mahaFailureAfterSettlement": "Full automatic refund.",
+        "duplicate": "The original report is returned without a second settlement."
+      }
+    },
+    {
       "id": "book-the-imagined-life",
       "name": "The Imagined Life",
       "status": "open_web_edition_with_authenticated_machine_access",
