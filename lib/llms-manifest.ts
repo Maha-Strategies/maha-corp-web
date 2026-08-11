@@ -28,6 +28,8 @@ export function buildLlmsManifest(claims: readonly MpsClaim[]): string {
     '## Public API endpoints',
     '- OpenAPI document: https://www.mahastrategies.com/api/docs/openapi',
     '- Context compression: https://www.mahastrategies.com/api/v1/compress',
+    '- Deep context evaluation: https://www.mahastrategies.com/api/v1/compress/evaluate',
+    '- Autonomous MPS audit: https://www.mahastrategies.com/api/v1/mps/audit',
     '- GPU tensor-network QUBO/Ising heuristic: https://www.mahastrategies.com/api/v1/jobs/tensor-network',
     '- GPU SE(3) registration: https://www.mahastrategies.com/api/v1/jobs/geometric-registration',
     '- MPS audit: https://www.mahastrategies.com/api/mps-audits',
@@ -41,10 +43,23 @@ export function buildLlmsManifest(claims: readonly MpsClaim[]): string {
     `- Offers API: ${AGENTIC_COMMERCE_API_URL}`,
     `- Agent context note: ${AGENTIC_COMMERCE_CONTEXT_URL}`,
     '- Agent card: https://www.mahastrategies.com/.well-known/agent.json',
+    '- Agent Infrastructure Compatibility Pack: https://www.mahastrategies.com/agent-infrastructure-compatibility-pack',
+    '  - Machine contract and exact schemas: https://www.mahastrategies.com/api/discovery/agent-infrastructure-compatibility-pack',
+    '  - Fixed price: 49.00 USDC on Base Mainnet. CONTRACT PUBLISHED, RUNTIME WITHHELD: not currently payable. One A2A agent, one MCP server, one caller-declared non-mutating action per target. Compatibility failures are report findings; Maha delivery failures after settlement receive a full automatic refund.',
     '- Enterprise MCP Gateway: https://www.mahastrategies.com/enterprise-mcp-gateway',
     '- MCP gateway contract: https://www.mahastrategies.com/mcp-gateway-contract.json',
     '- MCP governance guide: https://www.mahastrategies.com/guides/enterprise-mcp-governance',
-    '- Context Compression accepts autonomous x402 v2 payment of 0.001 USDC on Base; API-key access remains available.',
+    // Naming the exact three, and naming what is excluded, because an agent
+    // that assumes every /api/v1 route is payable will sign for one it cannot
+    // buy. Matching is by exact method and path: a sub-path of a priced route
+    // is not priced, and a GET beside a priced POST is not the priced resource.
+    '- Autonomous x402 v2 payment on Base Mainnet (eip155:8453) is accepted on POST /api/v1/compress only. Two further offers are published below and are NOT currently payable; their status field is authoritative, and a live PAYMENT-REQUIRED challenge is the only proof an offer can be bought.',
+    '  - POST /api/v1/compress - 1000 USDC base units (0.001 USDC). API-key access also available.',
+    '  - POST /api/v1/compress/evaluate - 10000 USDC base units (0.01 USDC). PREVIEW: not currently payable in Production. API-key access also available. Reports exact retention of caller-labelled evidence spans; this is span matching, not factual accuracy, answer quality, verification, or hallucination prevention.',
+    '  - POST /api/v1/mps/audit - 100000 USDC base units (0.10 USDC). WITHHELD: described here but not currently payable. x402 only; needs no Maha credential and consumes no prepaid MPS credit. Automated claim triage with provenance statuses, not factual certification, legal advice, or human verification. The complete submitted passage is not retained; results retain short verbatim claim excerpts, classifications, rationales, hashes and operational metadata.',
+    '- No other endpoint accepts autonomous payment. The GPU routes (/api/v1/jobs/*) are not x402 products and require a provisioned API key.',
+    '- Complete machine-readable declarations: https://www.mahastrategies.com/api/discovery/x402-offers/{offerId}',
+    '- A paid MPS audit is retrievable and resumable at /api/v1/mps/audit/{auditId} with the one-time retrievalToken, without a second payment.',
     '- MCRB-1 context-retention benchmark: https://www.mahastrategies.com/benchmarks/context-retention',
     '- MCRB-1 aggregate JSON: https://www.mahastrategies.com/benchmarks/mcrb-1/results.json',
     '- Executable large-document recipe: https://www.mahastrategies.com/recipes/context-compiler-large-document',

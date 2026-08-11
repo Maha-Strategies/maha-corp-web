@@ -5,6 +5,7 @@ import { maybeCreateTenantAutoTopup } from '@/lib/api-credit-billing'
 import { maybeSendLowCreditAlert } from '@/lib/observability/alerts'
 import { X402_HEADERS, paidRequestHeaders, resolveX402 } from '@/lib/x402/gateway'
 import { metersAtProxy, recordContextCompilerUsage } from '@/lib/context-compiler-metering'
+import { discoverySourceFrom, offerChallengeFor, recordOfferUsage } from '@/lib/x402/offer-telemetry'
 
 function json(body: unknown, status: number, headers: HeadersInit = {}) {
   return NextResponse.json(body, { status, headers: { ...API_CORS_HEADERS, ...headers } })
@@ -35,6 +36,23 @@ export async function proxy(request: NextRequest, event: NextFetchEvent) {
     // acquisition denominator.
     if (metersAtProxy(pathname, outcome.kind)) {
       event.waitUntil(recordContextCompilerUsage({ mode: 'anonymous', credentialId: '', status: 402 }))
+    }
+
+    // Per-offer challenge telemetry, recorded here for the same reason: a
+    // challenge terminates in this function and no route ever sees it. This is
+    // the only place a 'challenge' event is written, and the routes are the
+    // only places an 'invocation' event is written, so no single request can
+    // increment both. Recorded through waitUntil so a slow or failing meter
+    // can never delay the 402 an agent is waiting on, and never changes what
+    // it receives.
+    const challengedOffer = offerChallengeFor(request.method, pathname, outcome.kind)
+    if (challengedOffer) {
+      event.waitUntil(recordOfferUsage({
+        offerId: challengedOffer.id,
+        eventKind: 'challenge',
+        status: 402,
+        discoverySource: discoverySourceFrom(request.headers),
+      }))
     }
 
     if (outcome.kind === 'challenge') {

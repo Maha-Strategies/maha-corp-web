@@ -14,6 +14,25 @@ export const SELF_MANAGED_KEY_ROUTES = new Set([
   '/api/v1/jobs/webhook',
 ])
 
+/**
+ * Self-managed routes whose final segment is a resource id.
+ *
+ * Kept separate from the exact-match set above because these cannot be
+ * enumerated: the id is minted per job. Each entry must name a route that
+ * authenticates itself, and each one is listed with what that credential is.
+ *
+ * /api/v1/mps/audit/{auditId} -- retrieval and resumption of an audit that has
+ * already been paid for, authenticated by the high-entropy retrieval token
+ * issued once at creation. It is deliberately not priced: demanding a second
+ * $0.10 to look at a job the caller already bought is how a settled payment
+ * turns into a support ticket. Note this is a *different path* from the priced
+ * POST /api/v1/mps/audit, and only stays that way because offer matching is
+ * exact rather than prefix-based.
+ */
+export const SELF_MANAGED_KEY_ROUTE_PREFIXES = [
+  '/api/v1/mps/audit/',
+] as const
+
 export const API_CORS_HEADERS = {
   'Access-Control-Allow-Origin': '*',
   'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
@@ -33,6 +52,11 @@ export type ApiAccessOutcome = 'unavailable' | 'missing_key' | 'invalid_key' | '
 export function apiProxyGate(pathname: string, method: string, configured: boolean): ApiProxyGate {
   if (method === 'OPTIONS') return 'preflight'
   if (SELF_MANAGED_KEY_ROUTES.has(pathname)) return 'self_managed'
+  // A trailing-slash prefix, so /api/v1/mps/audit itself (the priced POST) is
+  // never matched here and keeps its 402.
+  if (SELF_MANAGED_KEY_ROUTE_PREFIXES.some((prefix) => pathname.startsWith(prefix) && pathname.length > prefix.length)) {
+    return 'self_managed'
+  }
   return configured ? 'protected' : 'unavailable'
 }
 

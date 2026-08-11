@@ -17,6 +17,14 @@ export const metadata: Metadata = {
 
 const tools = [
   {
+    eyebrow: 'Agent Compatibility Pack',
+    title: 'Test one A2A agent and one MCP server against explicit policy',
+    body: 'Inspect the fixed-price contract, exact schemas, sample evidence report, limitations, and automatic-refund boundary. Runtime payment remains withheld until Production recovery is proven.',
+    href: '/agent-infrastructure-compatibility-pack',
+    action: 'Review the compatibility contract',
+    accent: 'cyan',
+  },
+  {
     eyebrow: 'Agent Infrastructure Readiness',
     title: 'Map one real deployment into a control brief',
     body: 'Use Maha Navigator to inventory MCP, A2A, x402, context, audit, spending, and reliability controls and receive one bounded pilot recommendation.',

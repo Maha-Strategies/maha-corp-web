@@ -61,19 +61,37 @@ export function withSlotRelease<Args extends unknown[]>(
 }
 
 /**
- * Path prefixes whose handlers actually release the slot they are given.
+ * Routes whose handlers actually release the slot they are given.
  *
- * Pricing a path that does not release one is a silent capacity leak: the cap
+ * Pricing a route that does not release one is a silent capacity leak: the cap
  * fills with slots nobody frees and paying callers are refused until the
  * scores lapse. Nothing about the route makes that visible, so the config is
  * checked against this list at startup and a mistake becomes a loud boot
  * error instead of a slow degradation nobody can attribute.
  *
- * Add a prefix here only after its handler releases -- via `withSlotRelease`,
+ * Add a route here only after its handler releases -- via `withSlotRelease`,
  * or by carrying the token through to whatever observes the work finish.
  */
-export const SLOT_RELEASING_PATHS = ['/api/v1/compress'] as const
+export const SLOT_RELEASING_ROUTES = [
+  'POST /api/v1/compress',
+  // Wrapped in withSlotRelease, whose `finally` frees the slot on success,
+  // on validation failure, and on a thrown handler alike.
+  'POST /api/v1/compress/evaluate',
+  // Also wrapped, and it matters more here: this route crosses the Anthropic
+  // boundary, so a leaked slot is held for the length of a model call rather
+  // than a few milliseconds, against a cap of 2.
+  'POST /api/v1/mps/audit',
+] as const
 
-export function releasesSlot(pathPrefix: string): boolean {
-  return SLOT_RELEASING_PATHS.some((ready) => pathPrefix === ready || pathPrefix.startsWith(`${ready}/`))
+/**
+ * Exact `METHOD /path` match, deliberately.
+ *
+ * The old rule treated a listed prefix as covering everything beneath it, so
+ * the single entry for /api/v1/compress silently vouched for
+ * /api/v1/compress/evaluate before that route existed: a handler nobody had
+ * written yet was pre-approved as slot-releasing. Each route now earns its own
+ * entry, which is the only thing that makes this allowlist worth having.
+ */
+export function releasesSlot(method: string, path: string): boolean {
+  return (SLOT_RELEASING_ROUTES as readonly string[]).includes(`${method.toUpperCase()} ${path}`)
 }
