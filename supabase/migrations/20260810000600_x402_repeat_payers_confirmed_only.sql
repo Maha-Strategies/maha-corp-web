@@ -49,7 +49,7 @@ create or replace function public.x402_repeat_payers(
   -- LEFT, deliberately. An inner join would make a claim that never settled
   -- vanish from the report entirely, and "no row" is indistinguishable from
   -- "no traffic" -- which is how a failing payment path stays invisible.
-  left join public.x402_settlements s on s.transaction_id = p.transaction_id
+  left join public.x402_settlements s on s.payment_id = p.payment_id
   where p.claimed_at >= p_from_day::timestamptz
     and p.claimed_at < (p_to_day + 1)::timestamptz
   group by p.payer, p.resource;
