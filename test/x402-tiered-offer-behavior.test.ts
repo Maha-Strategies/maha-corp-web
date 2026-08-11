@@ -665,7 +665,8 @@ test('the repeat-buyer query joins the authoritative settlement table', () => {
   const migration = readFileSync(join(ROOT, 'supabase', 'migrations', '20260810000600_x402_repeat_payers_confirmed_only.sql'), 'utf8')
   assert.ok(migration.includes('from public.x402_payments p'))
   // The correction: purchases come from settlements, not claims.
-  assert.ok(migration.includes('left join public.x402_settlements s on s.transaction_id = p.transaction_id'))
+  assert.ok(migration.includes('left join public.x402_settlements s on s.payment_id = p.payment_id'))
+  assert.ok(!migration.includes('p.transaction_id'), 'the claim ledger is keyed by payment_id, not transaction_id')
   assert.ok(migration.includes("count(*) filter (where s.chain_status = 'confirmed') as confirmed_payment_count"))
   // agent_task_spend_daily is keyed by tenant and task, neither of which an
   // anonymous wallet has, so joining through it returns a confident zero. It
