@@ -147,10 +147,32 @@ jobs:
             select 'x402_offer_usage_daily=' || (to_regclass('public.x402_offer_usage_daily') is not null)::text;
           " | tee "$EVIDENCE/verify.txt"
 
+          # Full x402 object census, so a partially-applied database is legible
+          # in one place rather than inferred from a probe that cannot run.
+          psql "$url" -v ON_ERROR_STOP=1 -At -c "
+            select 'x402_readiness_functions=' || (to_regprocedure('public.x402_readiness_functions(text[])') is not null)::text
+            union all select 'x402_payments=' || (to_regclass('public.x402_payments') is not null)::text
+            union all select 'x402_settlements=' || (to_regclass('public.x402_settlements') is not null)::text
+            union all select 'x402_offer_admissions=' || (to_regclass('public.x402_offer_admissions') is not null)::text
+            union all select 'x402_mps_audits=' || (to_regclass('public.x402_mps_audits') is not null)::text
+            union all select 'reserve_x402_admission=' || (to_regprocedure('public.reserve_x402_admission(text,text,text,text,text,numeric,interval)') is not null)::text
+            union all select 'settle_x402_admission=' || (to_regprocedure('public.settle_x402_admission(text,text,text,text)') is not null)::text
+            union all select 'release_x402_admission=' || (to_regprocedure('public.release_x402_admission(text,text,text)') is not null)::text;
+          " | tee -a "$EVIDENCE/verify.txt"
+
           grep -q 'record_x402_offer_usage=true' "$EVIDENCE/verify.txt" || {
             echo '::error::record_x402_offer_usage() is still absent after applying.'; exit 1; }
           grep -q 'x402_offer_usage_daily=true' "$EVIDENCE/verify.txt" || {
             echo '::error::x402_offer_usage_daily is still absent after applying.'; exit 1; }
+
+      # Lets the running deployment and this workflow be proven to share a
+      # database without either side printing its reference. Compare this
+      # against `databaseFingerprint` in the readiness response.
+      - name: Publish the target database fingerprint
+        run: |
+          set -euo pipefail
+          fingerprint="sha256:$(printf '%s' "$SUPABASE_PROJECT_REF" | sha256sum | cut -d' ' -f1)"
+          echo "target database fingerprint: $fingerprint" | tee "$EVIDENCE/fingerprint.txt"
 
       - name: Upload evidence
         if: always()
