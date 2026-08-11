@@ -34,14 +34,17 @@ create table if not exists public.x402_mps_audits (
   payer text not null check (length(payer) between 1 and 200),
 
   client_request_id text not null check (char_length(client_request_id) between 8 and 120),
-  -- Hash of the submitted passage. The passage itself is never stored: see the
-  -- retention note on the offer catalog and the route's sourceTextStored:false.
+  -- Hash of the submitted passage. The passage as submitted is not stored;
+  -- see the note on `result` below for what genuinely is retained.
   input_hash text not null check (input_hash ~ '^sha256:[a-f0-9]{64}$'),
 
   status text not null check (status in ('processing', 'completed', 'failed')),
-  -- The audit result only: claims, tags, rationales, counts. Rationales are
-  -- model-written prose about the passage, not the passage; excerpts are short
-  -- verbatim spans the result is meaningless without.
+  -- The audit result: claims, tags, rationales, counts.
+  --
+  -- This column DOES retain short verbatim excerpts of the submitted passage,
+  -- 6-25 words each, because a claim is identified by the text it quotes and a
+  -- result that could not quote what it tagged would be unusable. The complete
+  -- passage is not stored. Anything published about this offer must say both.
   result jsonb,
   failure_code text check (failure_code is null or char_length(failure_code) <= 80),
   model text not null check (char_length(model) <= 80),
@@ -108,7 +111,7 @@ revoke all on function public.resume_x402_mps_audit(text, integer) from public, 
 grant execute on function public.resume_x402_mps_audit(text, integer) to service_role;
 
 comment on table public.x402_mps_audits is
-  'MPS audit jobs purchased with an autonomous x402 payment. Separate from agent_mps_audits, which is the credential/prepaid path and is unchanged. Stores no submitted source text: only its hash, the result, status metadata, the payer address and the settled payment transaction. Results are readable only with the high-entropy retrieval credential whose digest is stored here.';
+  'MPS audit jobs purchased with an autonomous x402 payment. Separate from agent_mps_audits, which is the credential/prepaid path and is unchanged. The complete submitted passage is not stored; the result column retains short verbatim claim excerpts (6-25 words each), classifications, rationales, hashes, payer and the settled payment transaction. Results are readable only with the high-entropy retrieval credential whose digest is stored here.';
 
 comment on column public.x402_mps_audits.retrieval_token_hash is
   'SHA-256 of the retrieval credential issued once at creation. The audit id is not a capability; a database read does not yield the ability to fetch a result.';

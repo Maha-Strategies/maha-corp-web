@@ -24,6 +24,10 @@ const PRIVATE_ROUTES = new Set([
   '/api/admin/mcp-gateway',
   '/api/mcp-gateway/[serverId]',
   '/api/admin/revenue-control-plane',
+  // Operator readiness for the x402 payment surface. Behind the readiness
+  // bearer token and deliberately undocumented publicly: it reports which
+  // offers are enabled where, which is operational state rather than product.
+  '/api/admin/x402-readiness',
   '/api/admin/revenue-metrics',
   '/api/admin/billing-readiness',
   '/api/admin/experiments',

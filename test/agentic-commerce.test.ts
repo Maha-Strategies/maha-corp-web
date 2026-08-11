@@ -103,7 +103,7 @@ test('the generated orientation route is not shadowed by an obsolete public file
 test('public agent discovery identifies live capabilities and the scoped Context Compression payment contract', () => {
   const offers = JSON.parse(readFileSync(join(DISCOVERY_DIR, 'agent-offers.json'), 'utf8')) as {
     updatedAt: string
-    transactionPolicy: { autonomousPaymentSupported: boolean; autonomousPaymentScope: string[] }
+    transactionPolicy: { autonomousPaymentSupported: boolean; autonomousPaymentScope: string[]; describedNotPayable: string[] }
     technicalCapabilities: Array<{
       id: string
       endpoint?: string
@@ -136,8 +136,12 @@ test('public agent discovery identifies live capabilities and the scoped Context
   }
   assert.equal(offers.updatedAt, '2026-08-08T00:00:00.000Z')
   assert.equal(offers.transactionPolicy.autonomousPaymentSupported, true)
-  // Exactly the three x402 offers, and deliberately not the GPU routes.
-  assert.deepEqual(offers.transactionPolicy.autonomousPaymentScope, ['context-compression', 'deep-context-evaluation', 'mps-autonomous-audit'])
+  // Only what is payable today. Deep Context is in preview and the MPS audit
+  // is withheld, so both are described but neither is in the payable scope --
+  // an agent that reads this list must be able to act on it without checking
+  // anything else.
+  assert.deepEqual(offers.transactionPolicy.autonomousPaymentScope, ['context-compression'])
+  assert.deepEqual(offers.transactionPolicy.describedNotPayable, ['deep-context-evaluation', 'mps-autonomous-audit'])
   const expected = [
     'context-compression',
     'deep-context-evaluation',
@@ -202,7 +206,7 @@ test('the long-lived agent-offers manifest exposes the same MPS payment boundary
   }
   const mpsOffer = manifest.offers.find((offer) => offer.id === mpsAuditOffer.id)
   assert.equal(manifest.transactionPolicy.autonomousPaymentSupported, true)
-  assert.deepEqual(manifest.transactionPolicy.autonomousPaymentScope, ['context-compression', 'deep-context-evaluation', 'mps-autonomous-audit'])
+  assert.deepEqual(manifest.transactionPolicy.autonomousPaymentScope, ['context-compression'])
   assert.equal(manifest.transactionPolicy.humanConfirmationRequired, true)
 
   // The prepaid MPS product and the autonomous MPS offer are different things

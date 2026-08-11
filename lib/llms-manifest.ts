@@ -50,11 +50,12 @@ export function buildLlmsManifest(claims: readonly MpsClaim[]): string {
     // that assumes every /api/v1 route is payable will sign for one it cannot
     // buy. Matching is by exact method and path: a sub-path of a priced route
     // is not priced, and a GET beside a priced POST is not the priced resource.
-    '- Autonomous x402 v2 payment on Base Mainnet (eip155:8453) is accepted on exactly three routes:',
+    '- Autonomous x402 v2 payment on Base Mainnet (eip155:8453) is accepted on POST /api/v1/compress only. Two further offers are published below and are NOT currently payable; their status field is authoritative, and a live PAYMENT-REQUIRED challenge is the only proof an offer can be bought.',
     '  - POST /api/v1/compress - 1000 USDC base units (0.001 USDC). API-key access also available.',
-    '  - POST /api/v1/compress/evaluate - 10000 USDC base units (0.01 USDC). API-key access also available. Reports exact retention of caller-labelled evidence spans; this is span matching, not factual accuracy, answer quality, verification, or hallucination prevention.',
-    '  - POST /api/v1/mps/audit - 100000 USDC base units (0.10 USDC). x402 only; needs no Maha credential and consumes no prepaid MPS credit. Automated claim triage with provenance statuses, not factual certification, legal advice, or human verification.',
+    '  - POST /api/v1/compress/evaluate - 10000 USDC base units (0.01 USDC). PREVIEW: not currently payable in Production. API-key access also available. Reports exact retention of caller-labelled evidence spans; this is span matching, not factual accuracy, answer quality, verification, or hallucination prevention.',
+    '  - POST /api/v1/mps/audit - 100000 USDC base units (0.10 USDC). WITHHELD: described here but not currently payable. x402 only; needs no Maha credential and consumes no prepaid MPS credit. Automated claim triage with provenance statuses, not factual certification, legal advice, or human verification. The complete submitted passage is not retained; results retain short verbatim claim excerpts, classifications, rationales, hashes and operational metadata.',
     '- No other endpoint accepts autonomous payment. The GPU routes (/api/v1/jobs/*) are not x402 products and require a provisioned API key.',
+    '- Complete machine-readable declarations: https://www.mahastrategies.com/api/discovery/x402-offers/{offerId}',
     '- A paid MPS audit is retrievable and resumable at /api/v1/mps/audit/{auditId} with the one-time retrievalToken, without a second payment.',
     '- MCRB-1 context-retention benchmark: https://www.mahastrategies.com/benchmarks/context-retention',
     '- MCRB-1 aggregate JSON: https://www.mahastrategies.com/benchmarks/mcrb-1/results.json',

@@ -10,6 +10,7 @@ import {
   X402_OFFERS,
   catalogMismatches,
   offerFor,
+  payableOffers,
 } from '../lib/x402/offers.ts'
 import { MAX_RESOURCE_DESCRIPTION_BYTES, MAX_RESOURCE_DESCRIPTION_CHARS } from '../lib/x402/discovery.ts'
 import { priceFor, x402Config, type X402Config } from '../lib/x402/config.ts'
@@ -179,7 +180,7 @@ test('the static manifests do not contradict the runtime catalog', () => {
     capabilities: { id: string; endpoint?: string; payment?: { amount: string; network: string } }[]
   }
   const offers = JSON.parse(readFileSync(join(DISCOVERY_DIR, 'agent-offers.json'), 'utf8')) as {
-    transactionPolicy: { autonomousPaymentScope: string[] }
+    transactionPolicy: { autonomousPaymentScope: string[]; describedNotPayable?: string[] }
     technicalCapabilities: { id: string; endpoint?: string; machinePayment?: { amount: string; network: string } }[]
   }
 
@@ -198,18 +199,72 @@ test('the static manifests do not contradict the runtime catalog', () => {
     assert.ok(manifestEntry!.endpoint?.endsWith(offer.path), `${offer.id} agent-offers endpoint`)
   }
 
-  // And the scope is exactly the catalog: no more, no fewer. An extra id here
-  // advertises a route that will answer 401, and a missing one hides a route
-  // that will answer 402.
+  // The payable scope is exactly the offers marked available -- no more, no
+  // fewer. An extra id here advertises a payment contract that does not exist;
+  // a missing one hides a route that will answer 402.
   assert.deepEqual(
     [...offers.transactionPolicy.autonomousPaymentScope].sort(),
-    X402_OFFERS.map((offer) => offer.id).sort(),
+    payableOffers().map((offer) => offer.id).sort(),
   )
+  // Everything else is still described, so an offer does not vanish between
+  // crawls, but is listed as not payable.
+  assert.deepEqual(
+    [...(offers.transactionPolicy.describedNotPayable ?? [])].sort(),
+    X402_OFFERS.filter((offer) => offer.status !== 'available').map((offer) => offer.id).sort(),
+  )
+})
+
+test('a withheld or preview offer is never advertised as payable', () => {
+  const card = JSON.parse(readFileSync(join(DISCOVERY_DIR, 'agent-card.json'), 'utf8')) as {
+    capabilities: { id: string; payableNow?: boolean; payment?: { autonomous?: boolean } }[]
+  }
+  const offers = JSON.parse(readFileSync(join(DISCOVERY_DIR, 'agent-offers.json'), 'utf8')) as {
+    technicalCapabilities: { id: string; payableNow?: boolean; machinePayment?: { payableNow?: boolean } }[]
+  }
+
+  for (const offer of X402_OFFERS) {
+    const expected = offer.status === 'available'
+    const cardEntry = card.capabilities.find((capability) => capability.id === offer.id)!
+    const manifestEntry = offers.technicalCapabilities.find((capability) => capability.id === offer.id)!
+
+    assert.equal(cardEntry.payableNow, expected, `${offer.id} agent-card payableNow`)
+    assert.equal(manifestEntry.payableNow, expected, `${offer.id} agent-offers payableNow`)
+    // The autonomous flag is what a buying agent branches on, so it must agree
+    // with the status rather than describing the eventual intent.
+    if (cardEntry.payment) assert.equal(cardEntry.payment.autonomous, expected, `${offer.id} agent-card autonomous`)
+    if (manifestEntry.machinePayment) {
+      assert.equal(manifestEntry.machinePayment.payableNow, expected, `${offer.id} agent-offers machinePayment.payableNow`)
+    }
+    assert.equal(offer.availability.payableInProduction, expected)
+    if (!expected) assert.ok(offer.availability.blockedBy.length > 0, `${offer.id} must publish why it is not payable`)
+  }
+})
+
+test('the retention claim matches what each offer actually keeps', () => {
+  // The claim that was wrong. An MPS result identifies each claim by a 6-25
+  // word verbatim excerpt, so excerpts are retained by design; publishing "no
+  // source text is retained" was a promise the product could not keep.
+  assert.equal(MPS_AUTONOMOUS_AUDIT_OFFER.retention.fullSourceTextStored, false)
+  assert.equal(MPS_AUTONOMOUS_AUDIT_OFFER.retention.verbatimExcerptsRetained, true)
+  assert.match(MPS_AUTONOMOUS_AUDIT_OFFER.retention.note, /complete submitted passage is not retained/i)
+  assert.match(MPS_AUTONOMOUS_AUDIT_OFFER.retention.note, /verbatim claim excerpts/i)
+
+  // The compression offers genuinely keep nothing, and may say so.
+  for (const offer of [CONTEXT_COMPRESSION_OFFER, DEEP_CONTEXT_EVALUATION_OFFER]) {
+    assert.equal(offer.retention.fullSourceTextStored, false)
+    assert.equal(offer.retention.verbatimExcerptsRetained, false)
+  }
+
+  // And no offer may publish the flat, false claim anywhere.
+  for (const offer of X402_OFFERS) {
+    assert.equal(/no source text is retained/i.test(offer.description), false, `${offer.id} description`)
+    assert.equal(/no source text is retained/i.test(offer.retention.note), false, `${offer.id} retention note`)
+  }
 })
 
 test('the GPU routes are not advertised as x402 products in this phase', () => {
   const offers = JSON.parse(readFileSync(join(DISCOVERY_DIR, 'agent-offers.json'), 'utf8')) as {
-    transactionPolicy: { autonomousPaymentScope: string[] }
+    transactionPolicy: { autonomousPaymentScope: string[]; describedNotPayable?: string[] }
   }
   for (const gpu of ['gpu-tensor-network', 'gpu-geometric-registration', 'gpu-qubo-ising']) {
     assert.equal(offers.transactionPolicy.autonomousPaymentScope.includes(gpu), false)

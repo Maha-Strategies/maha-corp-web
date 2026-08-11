@@ -27,15 +27,22 @@ export const MODEL_PRICING = {
 export const MAX_OUTPUT_TOKENS = 1_500
 
 /**
- * Tokens per character, worst case.
+ * Tokens per character.
  *
- * English prose runs about 0.25. This uses 0.5 because the passage is
- * caller-supplied and the cap is in *characters*: dense CJK, heavy markup, or
- * base64-ish content tokenizes far worse than prose, and the cap does not stop
- * them. Estimating with the prose ratio would understate the ceiling by about
- * half on exactly the inputs that cost the most.
+ * 0.5 was previously labelled "worst case" and it is not. English prose runs
+ * about 0.25; dense CJK, minified code, base64 and other high-entropy input
+ * tokenize at roughly one token per character on this tokenizer, and the cap is
+ * expressed in *characters*, so nothing stops a payer sending exactly that.
+ * Calling the midpoint a ceiling understated the true ceiling by half on
+ * precisely the inputs that cost the most -- and the offer's margin was then
+ * argued from that understatement.
+ *
+ * Both are kept. The expected case is what the business will usually see; the
+ * conservative case is what it must survive, and it is the one the promotion
+ * gate is judged against.
  */
-export const WORST_CASE_TOKENS_PER_CHAR = 0.5
+export const EXPECTED_TOKENS_PER_CHAR = 0.5
+export const CONSERVATIVE_TOKENS_PER_CHAR = 1.0
 
 /** The audit prompt template, measured once at MAX. Rounded up. */
 export const PROMPT_TEMPLATE_TOKENS = 700
@@ -47,8 +54,8 @@ export type CostBreakdown = {
   modelCostUsd: number
 }
 
-export function modelCost(passageChars: number, label: string): CostBreakdown {
-  const inputTokens = Math.ceil(passageChars * WORST_CASE_TOKENS_PER_CHAR) + PROMPT_TEMPLATE_TOKENS
+export function modelCost(passageChars: number, label: string, tokensPerChar = CONSERVATIVE_TOKENS_PER_CHAR): CostBreakdown {
+  const inputTokens = Math.ceil(passageChars * tokensPerChar) + PROMPT_TEMPLATE_TOKENS
   const outputTokens = MAX_OUTPUT_TOKENS
   return {
     label,
@@ -83,9 +90,16 @@ export const INFRASTRUCTURE_ALLOWANCE_USD = 0.002
  * the happy path: a 15% first-attempt failure rate, with the geometric tail
  * bounded by the attempt ceiling.
  */
-export const ASSUMED_FAILURE_RATE = 0.15
+export const EXPECTED_FAILURE_RATE = 0.15
+/**
+ * The rate the offer must survive, not the one it expects.
+ *
+ * A model provider having a bad hour is exactly when retries cluster, and every
+ * retry is a model call absorbed against a payment already taken.
+ */
+export const CONSERVATIVE_FAILURE_RATE = 0.35
 
-export function expectedRetryMultiplier(failureRate = ASSUMED_FAILURE_RATE, maxAttempts = MAX_AUDIT_ATTEMPTS): number {
+export function expectedRetryMultiplier(failureRate = EXPECTED_FAILURE_RATE, maxAttempts = MAX_AUDIT_ATTEMPTS): number {
   // Expected number of model calls per paid job: 1, plus one more for each
   // additional attempt reached, capped at maxAttempts.
   let expected = 0
@@ -108,10 +122,15 @@ export type UnitEconomics = {
   minimumSafeAmountBaseUnits: string
 }
 
-export function unitEconomics(passageChars: number, scenario: string, priceBaseUnits = MPS_AUTONOMOUS_AUDIT_OFFER.amount): UnitEconomics {
+export function unitEconomics(
+  passageChars: number,
+  scenario: string,
+  priceBaseUnits = MPS_AUTONOMOUS_AUDIT_OFFER.amount,
+  assumptions: { tokensPerChar?: number; failureRate?: number } = {},
+): UnitEconomics {
   const priceUsd = Number(priceBaseUnits) / 10 ** USDC_DECIMALS
-  const cost = modelCost(passageChars, scenario)
-  const expectedModelCostUsd = cost.modelCostUsd * expectedRetryMultiplier()
+  const cost = modelCost(passageChars, scenario, assumptions.tokensPerChar ?? CONSERVATIVE_TOKENS_PER_CHAR)
+  const expectedModelCostUsd = cost.modelCostUsd * expectedRetryMultiplier(assumptions.failureRate ?? CONSERVATIVE_FAILURE_RATE)
   const totalCostUsd = expectedModelCostUsd + FACILITATOR_ALLOWANCE_USD + INFRASTRUCTURE_ALLOWANCE_USD
   const marginUsd = priceUsd - totalCostUsd
 
@@ -134,8 +153,29 @@ export function unitEconomics(passageChars: number, scenario: string, priceBaseU
   }
 }
 
-/** The binding case: the largest passage the engine will actually accept. */
-export const BINDING_WORST_CASE = () => unitEconomics(MAX_AUDIT_PASSAGE_CHARS, `${MAX_AUDIT_PASSAGE_CHARS}-character passage (engine cap)`)
+/**
+ * What the business will usually see: prose-like input, ordinary failure rate.
+ */
+export const EXPECTED_CASE = () => unitEconomics(
+  MAX_AUDIT_PASSAGE_CHARS,
+  `${MAX_AUDIT_PASSAGE_CHARS}-character passage, expected case`,
+  MPS_AUTONOMOUS_AUDIT_OFFER.amount,
+  { tokensPerChar: EXPECTED_TOKENS_PER_CHAR, failureRate: EXPECTED_FAILURE_RATE },
+)
+
+/**
+ * What it must survive: high-entropy input at the cap, and a bad hour.
+ *
+ * This is the number the promotion gate is judged against. An offer priced off
+ * the expected case is priced for the days nothing goes wrong.
+ */
+export const CONSERVATIVE_CASE = () => unitEconomics(
+  MAX_AUDIT_PASSAGE_CHARS,
+  `${MAX_AUDIT_PASSAGE_CHARS}-character passage, conservative case`,
+)
+
+/** Retained name, now pointing at the conservative figure it always implied. */
+export const BINDING_WORST_CASE = CONSERVATIVE_CASE
 
 /**
  * The hypothetical the brief asked about: a full 32 KB body reaching the model.
@@ -144,3 +184,6 @@ export const BINDING_WORST_CASE = () => unitEconomics(MAX_AUDIT_PASSAGE_CHARS, `
  * the body limit, this is the number that decides whether $0.10 survives it.
  */
 export const HYPOTHETICAL_32KB = () => unitEconomics(32_768, '32,768-character passage (body limit, not currently reachable)')
+
+/** The floor a withheld offer must clear before it may be promoted. */
+export const MINIMUM_PROMOTABLE_MARGIN_PERCENT = 25

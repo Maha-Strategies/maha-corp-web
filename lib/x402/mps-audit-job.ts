@@ -123,8 +123,20 @@ export const AUDIT_WARNING_CODES = [
   'model_assigned_status',
 ] as const
 
+/**
+ * What actually survives an audit.
+ *
+ * `sourceTextStored: false` used to be published here and it was wrong. An
+ * audit result identifies each claim by a 6-25 word verbatim excerpt of the
+ * submitted passage -- a result that could not quote what it tagged would be
+ * unusable -- so excerpts are retained by design. What is not retained is the
+ * passage as submitted. Publishing the stronger claim was a promise the
+ * product could not keep, and a buyer relying on it for regulated text would
+ * have been misled.
+ */
 export const AUDIT_RETENTION_BOUNDARIES = {
-  sourceTextStored: false,
+  fullPassageStored: false,
+  verbatimExcerptsRetained: true,
   claimVerificationPerformed: false,
   legalAdviceProvided: false,
   humanReviewPerformed: false,
@@ -153,7 +165,9 @@ export function auditJobResponse(
     warnings: [...AUDIT_WARNINGS],
     warningCodes: [...AUDIT_WARNING_CODES],
     retentionBoundaries: { ...AUDIT_RETENTION_BOUNDARIES },
-    sourceTextStored: false,
+    fullPassageStored: false,
+    verbatimExcerptsRetained: true,
+    retentionNote: 'The complete submitted passage is not retained. Audit results retain short verbatim claim excerpts, classifications, rationales, hashes, and operational metadata.',
   }
 
   if (job.status === 'completed' && job.result) body.audit = job.result
