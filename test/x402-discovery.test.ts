@@ -32,9 +32,15 @@ test('the Context Compiler publishes valid, callable Bazaar metadata', async () 
   const bazaar = extensions!.bazaar as { info: { input: { method: string; body: { tokenBudget: number; documents: unknown[] } }; output: { example: { includedPassages: unknown[]; sources: unknown[]; warningCodes: string[] } } } }
   assert.equal(bazaar.info.input.method, 'POST')
   assert.equal(bazaar.info.input.body.tokenBudget, 128)
+  // The input example is published verbatim, because a crawler replays it.
   assert.equal(bazaar.info.input.body.documents.length, 2)
-  assert.equal(bazaar.info.output.example.includedPassages.length, 2)
-  assert.equal(bazaar.info.output.example.sources.length, 2)
+
+  // The response example is compacted so a conforming client's echo fits the
+  // 16 KB payment header. Shape is preserved -- the arrays are still arrays of
+  // the right objects -- but they are truncated, and the complete example is
+  // served at declarationUrl.
+  assert.equal(bazaar.info.output.example.includedPassages.length, 1)
+  assert.equal(bazaar.info.output.example.sources.length, 1)
   assert.ok(bazaar.info.output.example.warningCodes.includes('extractive_selection_not_verification'))
 })
 
