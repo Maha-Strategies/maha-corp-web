@@ -126,8 +126,9 @@ export function createAdmissionGuard(claim: AdmissionClaim, ledger?: Ledger | nu
         })
       } catch {
         // The payment is real whether or not this row records it. Losing the
-        // marker means a later retry is refused as in-progress and then
-        // retaken when it goes stale, which is recoverable; throwing here
+        // marker means every later retry remains in-progress for operator
+        // reconciliation. That is deliberately fail-closed: automatically
+        // retaking an uncertain claim could charge the payer twice. Throwing here
         // would fail a request the payer has already paid for.
       }
     },
@@ -140,7 +141,7 @@ export function createAdmissionGuard(claim: AdmissionClaim, ledger?: Ledger | nu
           p_idempotency_key: claim.idempotencyKey,
         })
       } catch {
-        // A claim left reserved goes stale on its own and is retaken.
+        // A claim left reserved remains fail-closed for operator reconciliation.
       }
     },
   }

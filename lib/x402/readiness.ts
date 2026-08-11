@@ -38,11 +38,12 @@ const REQUIRED_RELATIONS: Record<string, { tables: string[]; functions: string[]
   'deep-context-evaluation': { tables: ['x402_payments', 'x402_offer_usage_daily'], functions: ['record_x402_offer_usage'] },
   'mps-autonomous-audit': {
     tables: ['x402_payments', 'x402_offer_usage_daily', 'x402_mps_audits', 'x402_offer_admissions'],
-    functions: ['record_x402_offer_usage', 'reserve_x402_admission', 'resume_x402_mps_audit'],
+    functions: ['record_x402_offer_usage', 'reserve_x402_admission', 'settle_x402_admission', 'release_x402_admission', 'resume_x402_mps_audit'],
   },
 }
 
 type Probe = (relation: string) => Promise<boolean>
+type FunctionProbe = (functions: readonly string[]) => Promise<Set<string> | null>
 
 /**
  * Existence probe that cannot become a data leak.
@@ -63,9 +64,29 @@ function defaultProbe(): Probe | null {
   }
 }
 
+/** Checks executable dependencies without invoking a payment-mutating RPC. */
+function defaultFunctionProbe(): FunctionProbe | null {
+  const ledger = createAgentInquiryLedger()
+  if (!ledger) return null
+  return async (functions) => {
+    try {
+      const { data, error } = await ledger.rpc('x402_readiness_functions', { p_names: [...functions] })
+      if (error || !Array.isArray(data)) return null
+      return new Set(data.flatMap((row) => {
+        if (!row || typeof row !== 'object') return []
+        const value = row as { function_name?: unknown; present?: unknown }
+        return value.present === true && typeof value.function_name === 'string' ? [value.function_name] : []
+      }))
+    } catch {
+      return null
+    }
+  }
+}
+
 export async function getX402Readiness(options: {
   environment?: Record<string, string | undefined>
   probe?: Probe | null
+  functionProbe?: FunctionProbe | null
 } = {}): Promise<X402ReadinessReport> {
   const environment = options.environment ?? process.env
   const checkedAt = new Date().toISOString()
@@ -152,12 +173,15 @@ export async function getX402Readiness(options: {
     // the constraint rather than a failure that cries wolf on every Preview.
     // `withheld` has no environment where enabling it is correct.
     const withheld = offer.status === 'withheld'
+    const previewInProduction = offer.status === 'preview' && environment.VERCEL_ENV === 'production'
     checks.push({
       id: `x402.offer.${offer.id}.status`,
-      state: withheld ? 'fail' : 'warn',
+      state: withheld || previewInProduction ? 'fail' : 'warn',
       summary: withheld
         ? `${offer.id} is enabled for payment but published as "withheld".`
-        : `${offer.id} is enabled and published as "preview": correct outside Production, never inside it.`,
+        : previewInProduction
+          ? `${offer.id} is a Preview offer but is enabled for payment in Production.`
+          : `${offer.id} is enabled and published as "preview": correct outside Production, never inside it.`,
       detail: `An agent would be quoted a price for an offer the catalog says is not payable in Production. Gates: ${offer.availability.blockedBy.join(' | ') || 'none recorded'}`,
     })
   }
@@ -172,6 +196,12 @@ export async function getX402Readiness(options: {
 
   // --- Missing tables and migrations ----------------------------------------
   const probe = options.probe !== undefined ? options.probe : defaultProbe()
+  const functionProbe = options.functionProbe !== undefined
+    ? options.functionProbe
+    : options.probe !== undefined
+      ? async (functions: readonly string[]) => new Set((await Promise.all(functions.map(async (name) => await options.probe!(name))))
+          .flatMap((present, index) => present ? [functions[index]] : []))
+      : defaultFunctionProbe()
   if (!probe) {
     checks.push({ id: 'x402.storage', state: 'fail', summary: 'The ledger is unreachable, so required tables cannot be verified.' })
   } else {
@@ -182,8 +212,16 @@ export async function getX402Readiness(options: {
       for (const table of required.tables) {
         if (!(await probe(table))) missing.push(table)
       }
+      const presentFunctions = functionProbe ? await functionProbe(required.functions) : null
+      if (!presentFunctions) {
+        missing.push(...required.functions.map((name) => `${name}()`))
+      } else {
+        for (const name of required.functions) {
+          if (!presentFunctions.has(name)) missing.push(`${name}()`)
+        }
+      }
       checks.push(missing.length === 0
-        ? { id: `x402.offer.${offerId}.storage`, state: 'ok', summary: `${offerId} has the tables it needs.` }
+        ? { id: `x402.offer.${offerId}.storage`, state: 'ok', summary: `${offerId} has the tables and functions it needs.` }
         : {
             id: `x402.offer.${offerId}.storage`,
             state: 'fail',
@@ -191,6 +229,20 @@ export async function getX402Readiness(options: {
             detail: `Unapplied migrations: ${missing.join(', ')}. A payer would settle and then receive a 503.`,
           })
     }
+  }
+
+  if (enabledIds.has('mps-autonomous-audit')) {
+    const runtimeProblems: string[] = []
+    if ((environment.X402_RETRIEVAL_TOKEN_SECRET?.trim().length ?? 0) < 32) runtimeProblems.push('the retrieval-token secret is missing or shorter than 32 characters')
+    if (!environment.ANTHROPIC_API_KEY?.trim()) runtimeProblems.push('the model provider credential is missing')
+    checks.push(runtimeProblems.length === 0
+      ? { id: 'x402.offer.mps-autonomous-audit.runtime', state: 'ok', summary: 'MPS paid-job runtime dependencies are configured.' }
+      : {
+          id: 'x402.offer.mps-autonomous-audit.runtime',
+          state: 'fail',
+          summary: 'MPS Autonomous Audit could accept payment but cannot complete or return the paid job.',
+          detail: runtimeProblems.join('; '),
+        })
   }
 
   // --- Discovery availability -----------------------------------------------

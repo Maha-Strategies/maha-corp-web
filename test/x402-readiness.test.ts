@@ -78,6 +78,43 @@ test('an offer enabled for payment but published as withheld fails readiness', a
   assert.match(status!.detail ?? '', /database separation|durable paid-job recovery/i)
 })
 
+test('an enabled paid MPS job fails readiness without its runtime secrets', async () => {
+  const report = await getX402Readiness({
+    environment: {
+      ...BASE,
+      X402_RESOURCES: JSON.stringify([
+        { method: 'POST', path: CONTEXT_COMPRESSION_OFFER.path },
+        { method: 'POST', path: MPS_AUTONOMOUS_AUDIT_OFFER.path },
+      ]),
+    },
+    probe: everything,
+  })
+  const runtime = check(report, 'x402.offer.mps-autonomous-audit.runtime')
+  assert.equal(runtime?.state, 'fail')
+  assert.match(runtime?.detail ?? '', /retrieval-token secret/)
+  assert.match(runtime?.detail ?? '', /model provider credential/)
+})
+
+test('an enabled paid MPS job reports its runtime dependencies without echoing them', async () => {
+  const secret = 'retrieval-secret-that-is-long-enough-to-use'
+  const modelKey = 'model-provider-secret'
+  const report = await getX402Readiness({
+    environment: {
+      ...BASE,
+      X402_RETRIEVAL_TOKEN_SECRET: secret,
+      ANTHROPIC_API_KEY: modelKey,
+      X402_RESOURCES: JSON.stringify([
+        { method: 'POST', path: CONTEXT_COMPRESSION_OFFER.path },
+        { method: 'POST', path: MPS_AUTONOMOUS_AUDIT_OFFER.path },
+      ]),
+    },
+    probe: everything,
+  })
+  assert.equal(check(report, 'x402.offer.mps-autonomous-audit.runtime')?.state, 'ok')
+  assert.equal(JSON.stringify(report).includes(secret), false)
+  assert.equal(JSON.stringify(report).includes(modelKey), false)
+})
+
 test('a preview offer enabled outside Production warns rather than failing', async () => {
   // Preview means exercised in a non-production environment, so enabling it
   // there is the intended state. Failing on it would make readiness cry wolf
@@ -97,6 +134,33 @@ test('a preview offer enabled outside Production warns rather than failing', asy
   assert.equal(status?.state, 'warn')
   assert.match(status!.summary, /correct outside Production, never inside it/)
   assert.equal(report.state, 'degraded', 'a preview offer degrades readiness, it does not break it')
+})
+
+test('a preview offer enabled in Production fails readiness', async () => {
+  const report = await getX402Readiness({
+    environment: {
+      ...BASE,
+      VERCEL_ENV: 'production',
+      X402_RESOURCES: JSON.stringify([
+        { method: 'POST', path: CONTEXT_COMPRESSION_OFFER.path },
+        { method: 'POST', path: '/api/v1/compress/evaluate' },
+      ]),
+    },
+    probe: everything,
+  })
+  assert.equal(check(report, 'x402.offer.deep-context-evaluation.status')?.state, 'fail')
+  assert.equal(report.state, 'unavailable')
+})
+
+test('missing required RPC functions fail readiness', async () => {
+  const report = await getX402Readiness({
+    environment: BASE,
+    probe: everything,
+    functionProbe: async () => new Set(),
+  })
+  const storage = check(report, 'x402.offer.context-compression.storage')
+  assert.equal(storage?.state, 'fail')
+  assert.match(storage?.detail ?? '', /record_x402_offer_usage\(\)/)
 })
 
 test('an available offer that is not enabled is a warning, not a failure', async () => {

@@ -78,9 +78,9 @@ create or replace function public.reserve_x402_admission(
   p_input_hash text,
   p_resource text,
   p_amount numeric,
-  -- Reservations older than this are treated as abandoned and retaken, so a
-  -- process that died mid-settlement does not lock a payer out of their key
-  -- forever.
+  -- Retained for RPC compatibility. Reserved claims never expire
+  -- automatically: after the facilitator is called, an old reservation is an
+  -- uncertain payment, not evidence that no money moved.
   p_stale_after interval default interval '5 minutes'
 ) returns table (decision text, payment_transaction text)
 language plpgsql security definer set search_path = public, extensions as $$
@@ -118,12 +118,14 @@ begin
     return;
   end if;
 
-  if v_existing.state = 'reserved' and v_existing.created_at > now() - p_stale_after then
+  if v_existing.state = 'reserved' then
     return query select 'in_progress'::text, null::text;
     return;
   end if;
 
-  -- Failed, or reserved and abandoned. Retake it.
+  -- Only an explicit failed settlement can be retried. A reserved row is
+  -- never automatically retaken because that can turn a torn post-settlement
+  -- write into a second charge.
   update public.x402_offer_admissions
     set state = 'reserved', created_at = now(), payment_transaction = null, settled_at = null
   where offer_id = p_offer_id and payer = p_payer and idempotency_key = p_idempotency_key;
@@ -167,6 +169,23 @@ revoke all on function public.settle_x402_admission(text, text, text, text) from
 grant execute on function public.settle_x402_admission(text, text, text, text) to service_role;
 revoke all on function public.release_x402_admission(text, text, text) from public, anon, authenticated;
 grant execute on function public.release_x402_admission(text, text, text) to service_role;
+
+-- Readiness checks function existence without invoking a payment-mutating RPC.
+create or replace function public.x402_readiness_functions(p_names text[])
+returns table (function_name text, present boolean)
+language sql stable security definer set search_path = public, pg_catalog as $$
+  select requested.function_name,
+         exists (
+           select 1
+           from pg_catalog.pg_proc proc
+           join pg_catalog.pg_namespace namespace on namespace.oid = proc.pronamespace
+           where namespace.nspname = 'public' and proc.proname = requested.function_name
+         ) as present
+  from unnest(coalesce(p_names, array[]::text[])) as requested(function_name);
+$$;
+
+revoke all on function public.x402_readiness_functions(text[]) from public, anon, authenticated;
+grant execute on function public.x402_readiness_functions(text[]) to service_role;
 
 comment on table public.x402_offer_admissions is
   'Pre-settlement idempotency claims for paid x402 offers. Distinct from x402_payments, which stops one authorization being spent twice; this stops two authorizations being spent on one logical request. Binds offer, payer, idempotency key, input hash, resource and price.';
