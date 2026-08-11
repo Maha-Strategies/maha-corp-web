@@ -1,0 +1,161 @@
+name: Production x402 Deep Context settlement
+
+# One authorized Mainnet settlement against the newly promoted Deep Context
+# Evaluation offer, run once by hand.
+#
+# Separate from production-x402-canary.yml on purpose. That workflow is a
+# recurring liveness check wired to one endpoint at one price, and it exists to
+# keep a Bazaar listing warm. This is a single promotion gate at ten times the
+# amount: folding it in would either widen the recurring job's spending
+# authority permanently or make its price a parameter, and a scheduled job that
+# can be told how much to spend is a different kind of object than one that
+# cannot.
+#
+# The signing key is the same dedicated low-balance buyer, and the first step
+# proves it derives that address before anything is signed. The authorization
+# this implements names a payer, so an unnamed wallet paying the right amount is
+# still the wrong event.
+#
+# Deliberately has no retry. An x402 settlement that fails ambiguously may have
+# moved money -- the facilitator can broadcast and then fail to answer -- so a
+# second signed authorization can double-spend against a delivery nobody
+# observed. Re-running is an operator decision made after reading the chain, not
+# something this workflow does on the operator's behalf.
+
+on:
+  workflow_dispatch:
+    inputs:
+      reason:
+        description: Change ticket or reason (minimum 12 characters)
+        required: true
+        type: string
+      confirmation:
+        description: Type SETTLE DEEP CONTEXT ONCE exactly
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: production-x402-deep-context-settlement
+  cancel-in-progress: false
+
+jobs:
+  settle:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    environment:
+      name: production-x402-canary
+      url: https://www.mahastrategies.com/api/v1/compress/evaluate
+    env:
+      SUBJECT: https://www.mahastrategies.com/api/v1/compress/evaluate
+      # The authorized ceiling, in USDC base units. The offer is priced at
+      # exactly this, so any drift upward refuses rather than overpays.
+      MAX_AMOUNT: '10000'
+      AUTHORIZED_PAYER: '0x7b7ff44288fADe4A1829abA2584DFCeB952146f2'
+      EXPECTED_PAYEE: '0xec84c1cd6602bbe387bc8e6f0d3c062f2762de28'
+      EXPECTED_ASSET: '0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913'
+      EXPECTED_NETWORK: 'eip155:8453'
+      REPORT: ${{ github.workspace }}/deep-context-settlement.json
+      BODY: ${{ github.workspace }}/deep-context-request.json
+    steps:
+      - name: Require the confirmation phrase
+        env:
+          CONFIRMATION: ${{ inputs.confirmation }}
+          REASON: ${{ inputs.reason }}
+        run: |
+          set -euo pipefail
+          if [ "$CONFIRMATION" != "SETTLE DEEP CONTEXT ONCE" ]; then
+            echo '::error::Confirmation phrase not matched. Refusing to spend.'
+            exit 1
+          fi
+          if [ "${#REASON}" -lt 12 ]; then
+            echo '::error::Reason must be at least 12 characters.'
+            exit 1
+          fi
+
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+
+      # Read the live challenge before the key is in scope. Every term the
+      # authorization names is asserted here, so a mispriced or re-pointed offer
+      # fails on a free request rather than on a signed one.
+      - name: Assert the live terms match the authorization
+        run: |
+          set -euo pipefail
+          curl -sS -X POST "$SUBJECT" -H 'content-type: application/json' -d '{}' -o challenge.json
+          node -e '
+            const fs = require("fs")
+            const body = JSON.parse(fs.readFileSync("challenge.json", "utf8"))
+            const accepts = body.accepts || []
+            if (accepts.length !== 1) throw new Error(`expected exactly one requirement, got ${accepts.length}`)
+            const [a] = accepts
+            const expect = (field, actual, wanted) => {
+              if (String(actual).toLowerCase() !== String(wanted).toLowerCase()) {
+                throw new Error(`${field}: live ${actual} != authorized ${wanted}`)
+              }
+            }
+            expect("amount", a.amount, process.env.MAX_AMOUNT)
+            expect("network", a.network, process.env.EXPECTED_NETWORK)
+            expect("asset", a.asset, process.env.EXPECTED_ASSET)
+            expect("payTo", a.payTo, process.env.EXPECTED_PAYEE)
+            if (a.scheme !== "exact") throw new Error(`scheme ${a.scheme} is not exact`)
+            // The published input example is the request this settlement pays
+            // for. Using the offer own declaration means the paid call
+            // exercises the contract buyers are told to send.
+            const input = body.extensions?.bazaar?.info?.input?.body
+            if (!input) throw new Error("the challenge published no input body to pay for")
+            fs.writeFileSync(process.env.BODY, JSON.stringify(input))
+            console.log(`live terms match: ${a.amount} ${a.network} -> ${a.payTo}`)
+          '
+
+      # Proves the configured key derives the authorized payer. Reuses the
+      # canary validator so there is one implementation of "is this our wallet".
+      - name: Validate the buyer is the authorized payer
+        env:
+          X402_BUYER_PRIVATE_KEY: ${{ secrets.X402_BUYER_PRIVATE_KEY }}
+        run: npm run canary:x402 -- --validate-config
+
+      - name: Settle once
+        id: settle
+        env:
+          X402_BUYER_PRIVATE_KEY: ${{ secrets.X402_BUYER_PRIVATE_KEY }}
+        run: |
+          set -euo pipefail
+          npm run x402:doctor -- "$SUBJECT" \
+            --method POST \
+            --header 'content-type: application/json' \
+            --body "@$BODY" \
+            --pay \
+            --max-amount "$MAX_AMOUNT" \
+            --format json \
+            --output "$REPORT"
+
+      - name: Report the settlement
+        if: always()
+        run: |
+          set -euo pipefail
+          [ -f "$REPORT" ] || { echo '::error::No report was produced; treat delivery as ambiguous and read the chain before any retry.'; exit 1; }
+          node -e '
+            const r = JSON.parse(require("fs").readFileSync(process.env.REPORT, "utf8"))
+            console.log("ok        :", r.ok)
+            console.log("http      :", r.live && r.live.status)
+            console.log("errors    :", r.summary && r.summary.errors)
+            console.log("warnings  :", r.summary && r.summary.warnings)
+            console.log("transaction:", (r.live && r.live.transaction) || "NONE -- delivery is ambiguous, do not retry automatically")
+            for (const f of r.findings || []) console.log(`[${f.level}] ${f.ruleId}: ${f.message}`)
+          '
+
+      - name: Upload settlement evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: deep-context-settlement-${{ github.run_id }}
+          path: ${{ env.REPORT }}
+          if-no-files-found: warn
+          retention-days: 90
