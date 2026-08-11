@@ -75,7 +75,7 @@ test('an offer enabled for payment but published as withheld fails readiness', a
   assert.equal(status?.state, 'fail')
   assert.match(status!.summary, /enabled for payment but published as "withheld"/)
   // And it says what would unblock it.
-  assert.match(status!.detail ?? '', /database separation|durable paid-job recovery/i)
+  assert.match(status!.detail ?? '', /paid-job and admission migrations|durable paid-job recovery/i)
 })
 
 test('an enabled paid MPS job fails readiness without its runtime secrets', async () => {
