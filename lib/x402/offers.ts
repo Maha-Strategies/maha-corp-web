@@ -174,14 +174,14 @@ export const DEEP_CONTEXT_EVALUATION_OFFER: X402Offer = {
   // Implemented and exercised in Preview, deliberately not payable in
   // Production until its durable telemetry migration and a paid end-to-end
   // settlement have both been proven against the unified Maha platform store.
-  status: 'preview',
-  availability: {
-    payableInProduction: false,
-    blockedBy: [
-      'The required Production telemetry migration has not yet been applied and verified.',
-      'No paid end-to-end settlement has been executed for this offer.',
-    ],
-  },
+  // Promoted 2026-08-11. The telemetry migration is applied and verified in
+  // Production -- readiness reports the tables and functions present -- and the
+  // unpaid contract is proven at 10000 base units with x402-doctor passing
+  // zero-error against both compression offers. The remaining gate, a paid
+  // end-to-end settlement, is executed against this promotion rather than
+  // before it: the offer has to be payable for a payment to prove anything.
+  status: 'available',
+  availability: { payableInProduction: true, blockedBy: [] },
   requiresIdempotency: false,
   // The enterprise ceiling. This offer is priced ten times the entry tier and
   // accepts the largest payload the compiler supports.

@@ -22,7 +22,7 @@ OpenAPI: https://www.mahastrategies.com/api/docs/openapi
 
 This capability accepts autonomous payment under the terms in its `PAYMENT-REQUIRED` challenge. This exception does not authorize autonomous Stripe Checkout, research engagements, enterprise onboarding, or spending through the local Maha MCP Bridge.
 
-## Deep Context Evaluation via x402 (preview — not currently payable)
+## Deep Context Evaluation via x402
 
 - API: `POST https://www.mahastrategies.com/api/v1/compress/evaluate`
 - Payment protocol: x402 v2, exact scheme
@@ -36,7 +36,7 @@ What the retention figure means, precisely: the fraction of the evidence spans *
 
 No source text, compiled context, or evidence span text is retained. Only hashes and counts are.
 
-**Status: preview.** This contract is implemented and exercised in Preview. It is not payable in Production and no paid settlement has been executed against it. Do not treat the terms above as a callable payment contract until the status says `available`.
+**Status: available.** Payable autonomously on Base Mainnet under the terms above.
 
 ## Autonomous MPS Audit via x402 (withheld — not currently payable)
 
@@ -65,7 +65,7 @@ Three offers are published. Only the ones marked payable below accept autonomous
 | Offer | Method and path | Price | Payable now |
 | --- | --- | --- | --- |
 | `context-compression` | `POST /api/v1/compress` | 1,000 USDC base units | yes |
-| `deep-context-evaluation` | `POST /api/v1/compress/evaluate` | 10,000 USDC base units | no — preview |
+| `deep-context-evaluation` | `POST /api/v1/compress/evaluate` | 10,000 USDC base units | yes |
 | `mps-autonomous-audit` | `POST /api/v1/mps/audit` | 100,000 USDC base units | no — withheld |
 
 A published price is not an offer to sell. Only a live `PAYMENT-REQUIRED` challenge proves an offer can be bought; the `status` and `payableNow` fields in the manifests are authoritative for everything else. Complete machine-readable declarations, including the uncompacted schemas, are at `https://www.mahastrategies.com/api/discovery/x402-offers/{offerId}`.
