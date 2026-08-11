@@ -5,7 +5,14 @@
 
 export type MigrationChangeStatus = 'added' | 'modified' | 'deleted' | 'renamed'
 
-export type MigrationChange = { name: string; status: MigrationChangeStatus }
+export type MigrationChange = { name: string; status: MigrationChangeStatus; baseSha256?: string; currentSha256?: string }
+
+export type ApprovedMigrationAmendment = {
+  name: string
+  baseSha256: string
+  currentSha256: string
+  evidence: string
+}
 
 export type MigrationFile = { name: string; sql: string }
 
@@ -83,10 +90,20 @@ export function checkNaming(names: readonly string[]): MigrationFinding[] {
  * Migrations already merged have been (or will be) applied to Production, so
  * editing one leaves the database and the repository permanently disagreeing.
  */
-export function checkAppendOnly(changes: readonly MigrationChange[]): MigrationFinding[] {
+export function checkAppendOnly(
+  changes: readonly MigrationChange[],
+  approvedAmendments: readonly ApprovedMigrationAmendment[] = [],
+): MigrationFinding[] {
   const findings: MigrationFinding[] = []
   for (const change of changes) {
     if (change.status === 'added') continue
+    const approved = change.status === 'modified' && approvedAmendments.some((amendment) => (
+      amendment.name === change.name
+      && amendment.baseSha256 === change.baseSha256
+      && amendment.currentSha256 === change.currentSha256
+      && /^https:\/\//.test(amendment.evidence)
+    ))
+    if (approved) continue
     const verb = change.status === 'deleted' ? 'Deleting' : change.status === 'renamed' ? 'Renaming' : 'Editing'
     findings.push({
       code: `migration_${change.status}`, name: change.name,
@@ -141,12 +158,13 @@ export function auditMigrations(input: {
   changes?: readonly MigrationChange[]
   baseNames?: readonly string[]
   addedFiles?: readonly MigrationFile[]
+  approvedAmendments?: readonly ApprovedMigrationAmendment[]
 }): MigrationAudit {
   const comparedToBase = input.changes !== undefined && input.baseNames !== undefined
   const added = (input.changes ?? []).filter((change) => change.status === 'added').map((change) => change.name)
   const findings = [
     ...checkNaming(input.names),
-    ...checkAppendOnly(input.changes ?? []),
+    ...checkAppendOnly(input.changes ?? [], input.approvedAmendments ?? []),
     ...(comparedToBase ? checkOrderAgainstBase(added, input.baseNames ?? []) : []),
     ...checkDestructive(input.addedFiles ?? []),
   ]

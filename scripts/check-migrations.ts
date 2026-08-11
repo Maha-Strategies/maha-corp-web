@@ -1,10 +1,24 @@
 import { execFileSync } from 'node:child_process'
+import { createHash } from 'node:crypto'
 import { readdir, readFile } from 'node:fs/promises'
 import path from 'node:path'
 
 import { auditMigrations, type MigrationChange, type MigrationChangeStatus, type MigrationFile } from '../lib/migration-integrity.ts'
 
 const DIR = 'supabase/migrations'
+
+// Exception to the append-only rule, bounded to two exact file digests.
+// Run 31473349855 proved this migration had never reached Production and could
+// not even replay into the shadow database: it referenced a column that never
+// existed. A forward migration cannot repair a predecessor that prevents the
+// migration tree from being constructed, so the unapplied file itself must be
+// corrected. Any further byte change falls outside this one-time approval.
+const APPROVED_UNAPPLIED_AMENDMENTS = [{
+  name: '20260810000600_x402_repeat_payers_confirmed_only.sql',
+  baseSha256: 'abfcf2b1bfeeb8bd6f8b8e531d4d0331a496584a5af2f32b0a6466489477325c',
+  currentSha256: 'fe9bccae4f26fec49275d83660861d4b2ab57b8a6e6911134720d3e2df92c08a',
+  evidence: 'https://github.com/Maha-Strategies/maha-corp-web/actions/runs/31473349855',
+}] as const
 
 function git(...args: string[]): string | null {
   try {
@@ -13,6 +27,16 @@ function git(...args: string[]): string | null {
     return null
   }
 }
+
+function gitFile(base: string, name: string): string | null {
+  try {
+    return execFileSync('git', ['show', `${base}:${DIR}/${name}`], { encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'] })
+  } catch {
+    return null
+  }
+}
+
+const sha256 = (value: string) => createHash('sha256').update(value).digest('hex')
 
 /**
  * CI passes the base ref explicitly. Locally we fall back to origin/main, and
@@ -67,7 +91,14 @@ function namesAt(base: string): string[] | null {
 
 const names = (await readdir(DIR)).filter((name) => name.endsWith('.sql')).sort()
 const base = baseCommit()
-const changes = base ? changesSince(base) : null
+const rawChanges = base ? changesSince(base) : null
+const changes = rawChanges && base ? await Promise.all(rawChanges.map(async (change): Promise<MigrationChange> => {
+  if (change.status !== 'modified') return change
+  const before = gitFile(base, change.name)
+  if (before === null) return change
+  const after = await readFile(path.join(DIR, change.name), 'utf8')
+  return { ...change, baseSha256: sha256(before), currentSha256: sha256(after) }
+})) : rawChanges
 const baseNames = base ? namesAt(base) : null
 
 const addedFiles: MigrationFile[] = []
@@ -86,6 +117,7 @@ const audit = auditMigrations({
   changes: changes ?? undefined,
   baseNames: baseNames ?? undefined,
   addedFiles,
+  approvedAmendments: APPROVED_UNAPPLIED_AMENDMENTS,
 })
 
 for (const finding of audit.findings) console.error(`${finding.name ? `${finding.name}: ` : ''}${finding.message} [${finding.code}]`)
