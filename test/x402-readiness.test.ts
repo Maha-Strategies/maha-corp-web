@@ -2,7 +2,19 @@ import assert from 'node:assert/strict'
 import test from 'node:test'
 
 import { getX402Readiness } from '../lib/x402/readiness.ts'
-import { CONTEXT_COMPRESSION_OFFER, MPS_AUTONOMOUS_AUDIT_OFFER } from '../lib/x402/offers.ts'
+import { CONTEXT_COMPRESSION_OFFER, DEEP_CONTEXT_EVALUATION_OFFER, MPS_AUTONOMOUS_AUDIT_OFFER, X402_OFFERS } from '../lib/x402/offers.ts'
+
+/**
+ * A catalog in which Deep Context is still `preview`.
+ *
+ * Deep Context was promoted to `available`, so no published offer is in the
+ * preview state any more. Injecting one keeps the preview branch covered:
+ * otherwise promoting the last preview offer would silently delete the tests
+ * for what happens to the next one.
+ */
+const WITH_PREVIEW_OFFER = X402_OFFERS.map((offer) => offer.id === 'deep-context-evaluation'
+  ? { ...offer, status: 'preview' as const, availability: { payableInProduction: false, blockedBy: ['synthetic preview gate'] } }
+  : offer)
 
 // `catalogContradictions` used to be computed and then dropped: a deployment
 // that disagreed with the published catalog logged one line at boot and served
@@ -153,6 +165,7 @@ test('a preview offer enabled outside Production warns rather than failing', asy
       ]),
     },
     probe: everything,
+    offers: WITH_PREVIEW_OFFER,
   })
   const status = check(report, 'x402.offer.deep-context-evaluation.status')
   assert.equal(status?.state, 'warn')
@@ -171,6 +184,7 @@ test('a preview offer enabled in Production fails readiness', async () => {
       ]),
     },
     probe: everything,
+    offers: WITH_PREVIEW_OFFER,
   })
   assert.equal(check(report, 'x402.offer.deep-context-evaluation.status')?.state, 'fail')
   assert.equal(report.state, 'unavailable')
@@ -187,14 +201,28 @@ test('missing required RPC functions fail readiness', async () => {
   assert.match(storage?.detail ?? '', /record_x402_offer_usage\(\)/)
 })
 
-test('an available offer that is not enabled is a warning, not a failure', async () => {
+test('an available offer that is not enabled is information outside Production', async () => {
   const report = await getX402Readiness({
     environment: { ...BASE, X402_RESOURCES: JSON.stringify([{ method: 'POST', path: '/api/v1/compress' }]) },
     probe: everything,
   })
-  // Nothing here is wrong; the environment simply does not sell it.
-  assert.equal(check(report, 'x402.offer.deep-context-evaluation.enablement'), undefined)
+  // A Preview need not sell everything Production sells, so this must not hold
+  // the deployment below ready.
+  assert.equal(check(report, 'x402.offer.deep-context-evaluation.enablement')?.state, 'info')
   assert.equal(report.state, 'ready')
+})
+
+test('an available offer that is not enabled in Production fails readiness', async () => {
+  // There it is a live contradiction: discovery tells an agent the offer is
+  // payable and the deployment answers 401.
+  const report = await getX402Readiness({
+    environment: { ...BASE, VERCEL_ENV: 'production', X402_RESOURCES: JSON.stringify([{ method: 'POST', path: '/api/v1/compress' }]) },
+    probe: everything,
+  })
+  const enablement = check(report, 'x402.offer.deep-context-evaluation.enablement')
+  assert.equal(enablement?.state, 'fail')
+  assert.match(enablement!.summary, /told to pay and then refused/)
+  assert.equal(report.state, 'unavailable')
 })
 
 test('chain confirmation is on by default for Base, and its absence only degrades', async () => {
@@ -291,6 +319,12 @@ test('the report states which offers are payable, so a promotion can be gated on
   assert.equal(mps.status, 'withheld')
   assert.equal(mps.payableInProduction, false)
   assert.equal(mps.enabledInThisEnvironment, false)
+
+  // Deep Context was promoted on 2026-08-11 and must read as payable.
+  const deep = report.offers.find((offer) => offer.id === 'deep-context-evaluation')!
+  assert.equal(deep.status, 'available')
+  assert.equal(deep.payableInProduction, true)
+  assert.equal(DEEP_CONTEXT_EVALUATION_OFFER.availability.blockedBy.length, 0)
 
   const entry = report.offers.find((offer) => offer.id === 'context-compression')!
   assert.equal(entry.status, 'available')

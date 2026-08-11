@@ -140,8 +140,9 @@ test('public agent discovery identifies live capabilities and the scoped Context
   // is withheld, so both are described but neither is in the payable scope --
   // an agent that reads this list must be able to act on it without checking
   // anything else.
-  assert.deepEqual(offers.transactionPolicy.autonomousPaymentScope, ['context-compression'])
-  assert.deepEqual(offers.transactionPolicy.describedNotPayable, ['deep-context-evaluation', 'mps-autonomous-audit'])
+  // Deep Context was promoted on 2026-08-11; MPS remains withheld.
+  assert.deepEqual(offers.transactionPolicy.autonomousPaymentScope, ['context-compression', 'deep-context-evaluation'])
+  assert.deepEqual(offers.transactionPolicy.describedNotPayable, ['mps-autonomous-audit'])
   const expected = [
     'context-compression',
     'deep-context-evaluation',
@@ -206,7 +207,7 @@ test('the long-lived agent-offers manifest exposes the same MPS payment boundary
   }
   const mpsOffer = manifest.offers.find((offer) => offer.id === mpsAuditOffer.id)
   assert.equal(manifest.transactionPolicy.autonomousPaymentSupported, true)
-  assert.deepEqual(manifest.transactionPolicy.autonomousPaymentScope, ['context-compression'])
+  assert.deepEqual(manifest.transactionPolicy.autonomousPaymentScope, ['context-compression', 'deep-context-evaluation'])
   assert.equal(manifest.transactionPolicy.humanConfirmationRequired, true)
 
   // The prepaid MPS product and the autonomous MPS offer are different things

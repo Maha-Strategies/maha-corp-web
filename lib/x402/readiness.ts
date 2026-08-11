@@ -132,8 +132,16 @@ export async function getX402Readiness(options: {
   environment?: Record<string, string | undefined>
   probe?: Probe | null
   functionProbe?: FunctionProbe | null
+  /**
+   * Overrides the published catalog. Production always uses the real one; this
+   * exists so the preview/withheld branches stay covered once no offer happens
+   * to be in that state -- otherwise promoting the last preview offer silently
+   * deletes the tests for what happens to the next one.
+   */
+  offers?: readonly X402Offer[]
 } = {}): Promise<X402ReadinessReport> {
   const environment = options.environment ?? process.env
+  const catalog = options.offers ?? X402_OFFERS
   const checkedAt = new Date().toISOString()
   const checks: ReadinessCheck[] = []
 
@@ -143,7 +151,7 @@ export async function getX402Readiness(options: {
       enabled: false,
       checkedAt,
       databaseFingerprint: databaseFingerprintOf(environment),
-      offers: X402_OFFERS.map((offer) => ({
+      offers: catalog.map((offer) => ({
         id: offer.id, status: offer.status, enabledInThisEnvironment: false, payableInProduction: offer.availability.payableInProduction,
       })),
       checks: [{ id: 'x402.enabled', state: 'warn', summary: 'X402_ENABLED is not true; no offer is payable in this environment.' }],
@@ -210,7 +218,7 @@ export async function getX402Readiness(options: {
       })
 
   // --- Offer enabled but unavailable ----------------------------------------
-  for (const offer of X402_OFFERS) {
+  for (const offer of catalog) {
     if (!enabledIds.has(offer.id)) continue
     if (offer.status === 'available') continue
 
@@ -231,12 +239,18 @@ export async function getX402Readiness(options: {
       detail: `An agent would be quoted a price for an offer the catalog says is not payable in Production. Gates: ${offer.availability.blockedBy.join(' | ') || 'none recorded'}`,
     })
   }
-  for (const offer of X402_OFFERS) {
+  for (const offer of catalog) {
     if (offer.status !== 'available' || enabledIds.has(offer.id)) continue
     checks.push({
       id: `x402.offer.${offer.id}.enablement`,
-      state: 'warn',
-      summary: `${offer.id} is published as available but is not enabled in this environment.`,
+      // In Production this is a live contradiction: discovery tells agents the
+      // offer is payable while the deployment will answer 401. Anywhere else it
+      // is ordinary -- a Preview need not sell everything Production sells --
+      // so it is information rather than a degradation.
+      state: environment.VERCEL_ENV === 'production' ? 'fail' : 'info',
+      summary: environment.VERCEL_ENV === 'production'
+        ? `${offer.id} is published as payable but is not enabled in Production; an agent would be told to pay and then refused.`
+        : `${offer.id} is published as available but is not enabled in this environment.`,
     })
   }
 
@@ -327,7 +341,7 @@ export async function getX402Readiness(options: {
 
   // --- Discovery availability -----------------------------------------------
   const discoveryProblems: string[] = []
-  for (const offer of X402_OFFERS) {
+  for (const offer of catalog) {
     if (offer.description.length > MAX_RESOURCE_DESCRIPTION_CHARS
       || new TextEncoder().encode(offer.description).length > MAX_RESOURCE_DESCRIPTION_BYTES) {
       discoveryProblems.push(`${offer.id}: description exceeds the facilitator ceiling, which refuses settlement`)
@@ -346,7 +360,7 @@ export async function getX402Readiness(options: {
     enabled: true,
     checkedAt,
     databaseFingerprint: databaseFingerprintOf(environment),
-    offers: X402_OFFERS.map((offer) => ({
+    offers: catalog.map((offer) => ({
       id: offer.id,
       status: offer.status,
       enabledInThisEnvironment: enabledIds.has(offer.id),
