@@ -172,14 +172,13 @@ export const DEEP_CONTEXT_EVALUATION_OFFER: X402Offer = {
   serviceName: 'Maha Context Compiler',
   tags: ['ai', 'context-compression', 'llm', 'rag', 'evidence-retention'],
   // Implemented and exercised in Preview, deliberately not payable in
-  // Production. The gate is infrastructure, not code: the shared Production
-  // database has pending migrations, and this offer's telemetry table is among
-  // them.
+  // Production until its durable telemetry migration and a paid end-to-end
+  // settlement have both been proven against the unified Maha platform store.
   status: 'preview',
   availability: {
     payableInProduction: false,
     blockedBy: [
-      'Production shares the Maha OS database, which has pending migrations; database separation is an external promotion gate.',
+      'The required Production telemetry migration has not yet been applied and verified.',
       'No paid end-to-end settlement has been executed for this offer.',
     ],
   },
@@ -228,7 +227,7 @@ export const MPS_AUTONOMOUS_AUDIT_OFFER: X402Offer = {
   availability: {
     payableInProduction: false,
     blockedBy: [
-      'Production shares the Maha OS database; this offer requires two unapplied migrations and database separation is an external promotion gate.',
+      'The required Production paid-job and admission migrations have not yet been applied and verified.',
       'Durable paid-job recovery has not been proven against a real deployment.',
       'No paid end-to-end settlement has been executed for this offer.',
     ],

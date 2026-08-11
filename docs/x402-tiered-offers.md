@@ -157,10 +157,13 @@ environment and should be deleted or left to expire rather than promoted.
 
 These are external and none of them is worked around in code.
 
-1. **Production still uses the shared Maha OS Supabase project**, which has five
-   pending migrations; this branch adds three more (offer telemetry, MPS audit
-   jobs, admissions) plus one replacement (repeat payers). Database separation
-   is the promotion gate. Nothing has been applied anywhere.
+1. **The unified Maha platform database has pending migrations.** Maha OS and
+   Maha's infrastructure products intentionally share one governed Production
+   store; separation into another Supabase project is no longer a promotion
+   gate. The pending offer telemetry, MPS audit-job and admission migrations
+   must still be reviewed, applied through the protected migration workflow,
+   and verified before either offer is enabled. Nothing is enabled merely
+   because the architectural boundary changed.
 2. **No paid end-to-end settlement** has been executed for either new offer.
 3. **Durable recovery is proven in tests, not against a real deployment.**
 4. `X402_RETRIEVAL_TOKEN_SECRET` (≥32 characters) must exist before the MPS
