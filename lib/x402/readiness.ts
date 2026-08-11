@@ -18,7 +18,16 @@ import { MAX_RESOURCE_DESCRIPTION_BYTES, MAX_RESOURCE_DESCRIPTION_CHARS } from '
 
 export type ReadinessCheck = {
   id: string
-  state: 'ok' | 'warn' | 'fail'
+  /**
+   * `info` is reported but excluded from the overall rollup.
+   *
+   * It exists for facts an operator asked to see that are not defects -- an
+   * unmet prerequisite for an offer that is deliberately switched off, for
+   * instance. Folding those into `warn` would make a correctly-configured
+   * deployment permanently degraded for having an unshipped product, and a
+   * readiness signal that is never green is a readiness signal nobody reads.
+   */
+  state: 'ok' | 'info' | 'warn' | 'fail'
   summary: string
   /** Never a value; only what is wrong and what would fix it. */
   detail?: string
@@ -231,16 +240,37 @@ export async function getX402Readiness(options: {
     }
   }
 
-  if (enabledIds.has('mps-autonomous-audit')) {
+  // Reported whether or not the offer is enabled.
+  //
+  // Gating this on enablement made the one question an operator actually needs
+  // answered -- "is it safe to turn MPS on yet?" -- unanswerable without
+  // turning MPS on. That is backwards for a precondition whose entire purpose
+  // is to be checked beforehand: without the retrieval secret the route refuses
+  // *after* settlement, so discovering it by enabling the offer means
+  // discovering it with a payer's money.
+  //
+  // Severity follows enablement. Unmet while enabled is a live hazard and
+  // fails; unmet while disabled is a prerequisite and warns; met is `ok` either
+  // way, which is what makes a pre-flight check possible.
+  {
     const runtimeProblems: string[] = []
     if ((environment.X402_RETRIEVAL_TOKEN_SECRET?.trim().length ?? 0) < 32) runtimeProblems.push('the retrieval-token secret is missing or shorter than 32 characters')
     if (!environment.ANTHROPIC_API_KEY?.trim()) runtimeProblems.push('the model provider credential is missing')
+    const enabled = enabledIds.has('mps-autonomous-audit')
     checks.push(runtimeProblems.length === 0
-      ? { id: 'x402.offer.mps-autonomous-audit.runtime', state: 'ok', summary: 'MPS paid-job runtime dependencies are configured.' }
+      ? {
+          id: 'x402.offer.mps-autonomous-audit.runtime',
+          state: 'ok',
+          summary: enabled
+            ? 'MPS paid-job runtime dependencies are configured.'
+            : 'MPS paid-job runtime dependencies are configured; the offer is not enabled here.',
+        }
       : {
           id: 'x402.offer.mps-autonomous-audit.runtime',
-          state: 'fail',
-          summary: 'MPS Autonomous Audit could accept payment but cannot complete or return the paid job.',
+          state: enabled ? 'fail' : 'info',
+          summary: enabled
+            ? 'MPS Autonomous Audit could accept payment but cannot complete or return the paid job.'
+            : 'MPS Autonomous Audit is not enabled here, and could not complete a paid job if it were.',
           detail: runtimeProblems.join('; '),
         })
   }

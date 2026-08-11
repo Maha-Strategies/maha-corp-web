@@ -78,6 +78,30 @@ test('an offer enabled for payment but published as withheld fails readiness', a
   assert.match(status!.detail ?? '', /paid-job and admission migrations|durable paid-job recovery/i)
 })
 
+test('the MPS runtime prerequisite is reported before the offer is enabled', async () => {
+  // The whole point of a precondition is to be checkable beforehand. Gating
+  // this on enablement meant the only way to learn the retrieval secret was
+  // missing was to enable MPS -- and because the route refuses after
+  // settlement, that means learning it with a payer's money.
+  const unmet = await getX402Readiness({ environment: BASE, probe: everything })
+  const unmetCheck = check(unmet, 'x402.offer.mps-autonomous-audit.runtime')
+  assert.equal(unmetCheck?.state, 'info', 'a prerequisite for a disabled offer is reported, not counted against health')
+  assert.match(unmetCheck!.summary, /not enabled here/)
+  // Reported without degrading the deployment: a correctly-configured system
+  // must not be permanently amber for owning an unshipped product.
+  assert.equal(unmet.state, 'ready')
+
+  const met = await getX402Readiness({
+    environment: { ...BASE, X402_RETRIEVAL_TOKEN_SECRET: 'a'.repeat(44), ANTHROPIC_API_KEY: 'k' },
+    probe: everything,
+  })
+  const metCheck = check(met, 'x402.offer.mps-autonomous-audit.runtime')
+  assert.equal(metCheck?.state, 'ok')
+  // And a satisfied prerequisite must not hold readiness below ready, or a
+  // healthy deployment could never report 200 while an offer waits to ship.
+  assert.equal(met.state, 'ready')
+})
+
 test('an enabled paid MPS job fails readiness without its runtime secrets', async () => {
   const report = await getX402Readiness({
     environment: {
