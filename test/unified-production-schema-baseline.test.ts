@@ -28,6 +28,17 @@ test('the live reconciliation removes drift and closes the destructive RPC', asy
   assert.doesNotMatch(sql, /GRANT (?:ALL|EXECUTE) ON FUNCTION public\.purge_node_data\(uuid\) TO (?:anon|authenticated)/)
 })
 
+test('the Maha OS function normalization is behavior-preserving and narrowly scoped', async () => {
+  const sql = await read('supabase/migrations/20260811000100_normalize_maha_os_function_bodies.sql')
+
+  assert.equal((sql.match(/CREATE OR REPLACE FUNCTION/g) ?? []).length, 3)
+  assert.match(sql, /CREATE OR REPLACE FUNCTION public\.handle_new_node\(\)/)
+  assert.match(sql, /CREATE OR REPLACE FUNCTION public\.handle_new_user\(\)/)
+  assert.match(sql, /CREATE OR REPLACE FUNCTION public\.join_fireteam\(target_id uuid\)/)
+  assert.doesNotMatch(sql, /\r/)
+  assert.doesNotMatch(sql, /\b(?:DROP|ALTER|GRANT|REVOKE|CREATE TABLE|DELETE FROM|TRUNCATE)\b/)
+})
+
 test('the Production workflow can only record the exact baseline without running schema SQL', async () => {
   const workflow = await read('.github/workflows/production-migrations.yml')
 
