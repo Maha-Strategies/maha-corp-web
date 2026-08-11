@@ -152,6 +152,15 @@ jobs:
           grep -q 'x402_offer_usage_daily=true' "$EVIDENCE/verify.txt" || {
             echo '::error::x402_offer_usage_daily is still absent after applying.'; exit 1; }
 
+      # Lets the running deployment and this workflow be proven to share a
+      # database without either side printing its reference. Compare this
+      # against `databaseFingerprint` in the readiness response.
+      - name: Publish the target database fingerprint
+        run: |
+          set -euo pipefail
+          fingerprint="sha256:$(printf '%s' "$SUPABASE_PROJECT_REF" | sha256sum | cut -d' ' -f1)"
+          echo "target database fingerprint: $fingerprint" | tee "$EVIDENCE/fingerprint.txt"
+
       - name: Upload evidence
         if: always()
         uses: actions/upload-artifact@v4

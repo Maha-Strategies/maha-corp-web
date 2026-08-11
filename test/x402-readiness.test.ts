@@ -242,6 +242,27 @@ test('a disabled environment reports unavailable without pretending to be broken
   assert.equal(report.offers.every((offer) => offer.enabledInThisEnvironment === false), true)
 })
 
+test('readiness fingerprints its database without disclosing it', async () => {
+  // "Which database is this actually bound to" was unanswerable from outside:
+  // the URL is a platform secret, it is not inlined in any client bundle, and a
+  // migration applied against a correctly-named credential still left the app
+  // unable to see the objects it created. A deployment that cannot name its own
+  // database can only be diagnosed by guessing.
+  const report = await getX402Readiness({
+    environment: { ...BASE, NEXT_PUBLIC_SUPABASE_URL: 'https://abcdefghijklmnopqrst.supabase.co' },
+    probe: everything,
+  })
+  const { createHash } = await import('node:crypto')
+  const expected = `sha256:${createHash('sha256').update('abcdefghijklmnopqrst').digest('hex')}`
+  assert.equal(report.databaseFingerprint, expected)
+  // The reference itself must not appear anywhere in the response.
+  assert.equal(JSON.stringify(report).includes('abcdefghijklmnopqrst'), false)
+
+  // Absent or malformed configuration reports null rather than inventing one.
+  const none = await getX402Readiness({ environment: BASE, probe: everything })
+  assert.equal(none.databaseFingerprint, null)
+})
+
 test('readiness never echoes a secret or a raw environment value', async () => {
   const secrets = ['super-secret-cdp-key', 'https://private-rpc.example/KEY123']
   const report = await getX402Readiness({
