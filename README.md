@@ -323,6 +323,12 @@ Apply `supabase/migrations/20260720002100_inbound_revenue_gatekeeper.sql`. Publi
 
 The scheduled `GET /api/cron/inbound-digest` endpoint sends one daily digest of unsent qualified submissions. Configure `INBOUND_DIGEST_TO` and Vercel's `CRON_SECRET`; `INBOUND_DIGEST_TOKEN` is available only for a separately authorized manual trigger. `vercel.json` schedules the Vercel Cron invocation for 13:00 UTC. The digest contains personal contact details, so keep its recipient address private.
 
+### Navigator registry research
+
+Navigator can create evidence-backed candidate drafts from Coinbase Bazaar, PayanAgent, the official MCP Registry, and explicitly approved public A2A Agent Cards. Configure `NAVIGATOR_REGISTRY_SOURCES`, a bounded JSON array in `NAVIGATOR_REGISTRY_QUERIES`, and (because A2A has no universal registry) `NAVIGATOR_A2A_CARD_URLS`. The daily `/api/cron/navigator-registry-scout` run uses only public read interfaces, deduplicates by company domain, and creates at most 20 drafts through the existing append-only Navigator research queue.
+
+For a manual bounded run, send `POST /api/admin/navigator/registry-scout` with the server-only `INBOUND_OPERATIONS_TOKEN`. Registry records are recommendations for review, not evidence of purchase intent or permission to contact. The scout has no recipient, message, email, payment, publishing, or deployment capability; even a human `pursue` disposition does not authorize email.
+
 ## Inbound Operations Queue
 
 Apply `supabase/migrations/20260720003200_inbound_operations_queue.sql`, configure a separate server-only `INBOUND_OPERATIONS_TOKEN`, then open `/admin/inbound`. The private queue displays inbound qualification, contact context, linked revenue status, and an append-only review history. Its actions are limited to review, clarification, scope approval, checkout referral, decline, and close-lost. It cannot send any message, accept an engagement, or mark a payment as received.
