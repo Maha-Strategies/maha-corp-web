@@ -1,0 +1,125 @@
+name: Production x402 settlement verification
+
+# Read-only. Answers the two promotion criteria that cannot be observed from
+# outside the database: did the paid call record telemetry, and does anything
+# in the x402 schema retain caller request content.
+#
+# Separate from the settlement workflow because it must be runnable again
+# without spending anything. Folding a verification that operators will want to
+# repeat into a workflow that moves money means the only way to re-check is to
+# pay again.
+#
+# Issues SELECTs only. No DDL, no writes, no wallet key in scope.
+
+on:
+  workflow_dispatch:
+    inputs:
+      offer_id:
+        description: Offer to verify telemetry for
+        required: true
+        default: deep-context-evaluation
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: production-x402-settlement-verification
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    environment: production-database
+    env:
+      SUPABASE_DB_PASSWORD: ${{ secrets.SUPABASE_DB_PASSWORD }}
+      SUPABASE_PROJECT_REF: ${{ secrets.SUPABASE_PROJECT_REF }}
+      OFFER_ID: ${{ inputs.offer_id }}
+    steps:
+      - uses: actions/checkout@v5
+
+      # The mirror image of the Preview workflow's guard. That one refuses to
+      # touch Production; this one refuses to report on anything else, because
+      # a green verification against staging would be worse than no
+      # verification at all.
+      - name: Require the Production target
+        run: |
+          set -euo pipefail
+          production='uhwuullakihgszxhiygz'
+          if [ "${SUPABASE_PROJECT_REF:-}" != "$production" ]; then
+            echo '::error::SUPABASE_PROJECT_REF is not the Production ref. This workflow only reports on Production.'
+            exit 1
+          fi
+          echo "target database fingerprint: sha256:$(printf '%s' "$SUPABASE_PROJECT_REF" | sha256sum | cut -d' ' -f1)"
+
+      - name: Telemetry recorded for the offer
+        run: |
+          set -euo pipefail
+          url="postgresql://postgres.${SUPABASE_PROJECT_REF}:${SUPABASE_DB_PASSWORD}@aws-0-us-east-1.pooler.supabase.com:5432/postgres"
+          echo '--- usage rows for the offer, last 2 days ---'
+          psql "$url" -v ON_ERROR_STOP=1 -P pager=off -c "
+            select usage_day, event_kind, status_class, discovery_source, event_count,
+                   required_evidence_total, retained_evidence_total, last_observed_at
+              from public.x402_offer_usage_daily
+             where offer_id = '${OFFER_ID}'
+               and usage_day >= (current_date - 1)
+             order by usage_day desc, event_kind, status_class;
+          "
+          invocations=$(psql "$url" -At -v ON_ERROR_STOP=1 -c "
+            select coalesce(sum(event_count), 0)
+              from public.x402_offer_usage_daily
+             where offer_id = '${OFFER_ID}'
+               and event_kind = 'invocation'
+               and status_class = '2xx'
+               and usage_day >= (current_date - 1);
+          ")
+          echo "successful invocations recorded: ${invocations}"
+          if [ "${invocations:-0}" -lt 1 ]; then
+            echo '::error::No successful invocation was recorded for this offer. The paid call did not increment telemetry.'
+            exit 1
+          fi
+
+      - name: Settlement recorded and corroborated
+        run: |
+          set -euo pipefail
+          url="postgresql://postgres.${SUPABASE_PROJECT_REF}:${SUPABASE_DB_PASSWORD}@aws-0-us-east-1.pooler.supabase.com:5432/postgres"
+          psql "$url" -v ON_ERROR_STOP=1 -P pager=off -c "
+            select resource, payer, amount, transaction_id, chain_status, settled_at
+              from public.x402_settlements
+             where settled_at >= now() - interval '2 days'
+             order by settled_at desc
+             limit 10;
+          "
+
+      # Structural rather than sampled. Showing that today's rows happen to hold
+      # no document text proves nothing about tomorrow's; showing the schema has
+      # nowhere to put it does.
+      - name: No x402 table can retain caller request content
+        run: |
+          set -euo pipefail
+          url="postgresql://postgres.${SUPABASE_PROJECT_REF}:${SUPABASE_DB_PASSWORD}@aws-0-us-east-1.pooler.supabase.com:5432/postgres"
+          echo '--- every text/json column in the x402 schema ---'
+          psql "$url" -v ON_ERROR_STOP=1 -P pager=off -c "
+            select table_name, column_name, data_type
+              from information_schema.columns
+             where table_schema = 'public'
+               and table_name like 'x402\_%'
+               and data_type in ('text', 'character varying', 'json', 'jsonb')
+             order by table_name, column_name;
+          "
+          # Named after the request fields that carry caller content. Any column
+          # matching these is a place document text could land.
+          offenders=$(psql "$url" -At -v ON_ERROR_STOP=1 -c "
+            select table_name || '.' || column_name
+              from information_schema.columns
+             where table_schema = 'public'
+               and table_name like 'x402\_%'
+               and (column_name ~ '(document|passage|excerpt|source_text|body|content|prompt|evidence_text|context)')
+             order by 1;
+          ")
+          if [ -n "$offenders" ]; then
+            echo "::error::Columns capable of retaining caller content exist: ${offenders}"
+            exit 1
+          fi
+          echo 'No column in the x402 schema is shaped to hold caller request content.'
