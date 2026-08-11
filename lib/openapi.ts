@@ -1,6 +1,10 @@
 import { MAX_AUDIT_CHARS, MPS_ACTIONS, MPS_TAGS, MPS_VERSION } from './mps-audit-engine.ts'
 import { MPS_AUDIT_CREDIT_UNIT } from './mps-credits.ts'
 import { AGENTIC_COMMERCE_API_URL } from './agentic-commerce.ts'
+import {
+  COMPATIBILITY_PACK_CONTRACT,
+  COMPATIBILITY_PACK_OUTPUT_SCHEMA,
+} from './agent-infrastructure-compatibility-pack.ts'
 
 // Hand-authored OpenAPI 3.1 document for the public API. The runtime
 // validators in lib/ are the source of truth; every pattern and bound here
@@ -103,6 +107,41 @@ export const openApiDocument = {
     { name: 'GPU Geometric Optimization', description: 'Bounded paired-point SE(3) registration with explicit residual and correspondence boundaries.' },
   ],
   paths: {
+    '/api/discovery/agent-infrastructure-compatibility-pack': {
+      get: {
+        tags: ['Agentic Commerce'],
+        operationId: 'getAgentInfrastructureCompatibilityPackContract',
+        summary: 'Inspect the fixed-price Agent Infrastructure Compatibility Pack contract',
+        description: 'Returns the exact input and output schemas, fixed price, bounded execution scope, limitations, and failure/refund policy. The runtime is withheld and this read-only route cannot create or pay for a pack.',
+        security: [],
+        responses: {
+          '200': {
+            description: 'Public contract. purchase.payableNow remains false until the durable delivery and refund runtime is promoted.',
+            content: { 'application/json': { schema: {
+              type: 'object',
+              required: ['id', 'version', 'name', 'status', 'price', 'purchase', 'execution', 'failureAndRefund', 'limitations', 'inputSchema', 'outputSchema', 'sampleReportUrl'],
+              properties: {
+                id: { const: COMPATIBILITY_PACK_CONTRACT.id }, version: { const: COMPATIBILITY_PACK_CONTRACT.version }, name: { type: 'string' },
+                status: { const: 'contract_published_runtime_withheld' }, description: { type: 'string' }, price: { type: 'object' }, deliveryTarget: { type: 'string' },
+                purchase: { type: 'object', required: ['payableNow', 'reason'], properties: { payableNow: { const: false }, reason: { type: 'string' } } },
+                execution: { type: 'object' }, failureAndRefund: { type: 'object' }, limitations: { type: 'array', items: { type: 'string' } },
+                inputSchema: { type: 'object' }, outputSchema: { type: 'object' }, sampleReportUrl: { type: 'string', format: 'uri' },
+              },
+            } } },
+          },
+        },
+      },
+    },
+    '/api/discovery/agent-infrastructure-compatibility-pack/sample': {
+      get: {
+        tags: ['Agentic Commerce'],
+        operationId: 'getAgentInfrastructureCompatibilityPackSample',
+        summary: 'Inspect a complete sample compatibility report',
+        description: 'Returns an illustrative report conforming to the published output schema. It is not a report about a current customer or a certification.',
+        security: [],
+        responses: { '200': { description: 'Complete illustrative report.', content: { 'application/json': { schema: COMPATIBILITY_PACK_OUTPUT_SCHEMA } } } },
+      },
+    },
     '/api/v1/keys/generate': {
       post: {
         tags: ['Self-service API Keys'], operationId: 'generateStarterApiKey', summary: 'Generate a one-time starter API key with 20,000 free credits',
@@ -159,6 +198,45 @@ export const openApiDocument = {
         description: 'Deterministic context compilation available with a Maha API key or an autonomous $0.001 USDC payment over x402 v2 on Base. It does not retain source text or make factual-verification claims. Credentialed calls cost one credit per request, plus one credit for every whole 5,000 estimated input tokens the pack avoided, capped at 60 per call and charged only when metered billing is enabled for the deployment. Partial units are free and a call that saved nothing costs only the flat credit. Send x-maha-max-billable-credits to cap what one request may add. The x402 price is flat: an authorization is signed before the saving is known, so it is never metered.', security: [{ credential: [] }, {}],
         requestBody: { required: true, content: { 'application/json': { schema: { type: 'object', required: ['clientRequestId', 'task', 'tokenBudget', 'documents'], properties: { clientRequestId: { type: 'string', minLength: 8, maxLength: 120 }, task: { type: 'string', minLength: 8, maxLength: 1200 }, tokenBudget: { type: 'integer', minimum: 64, maximum: 16000 }, documents: { type: 'array', minItems: 1, maxItems: 8, items: { type: 'object', required: ['id', 'text'], properties: { id: { type: 'string' }, title: { type: 'string' }, text: { type: 'string', maxLength: 64000 } } } } } } } } },
         responses: { '201': { description: 'Transient compiled context pack.', content: { 'application/json': { schema: { type: 'object', required: ['packId', 'context', 'metrics', 'sources', 'warnings'], properties: { packId: { type: 'string' }, context: { type: 'string' }, metrics: { type: 'object' }, sources: { type: 'array', items: { type: 'object' } }, warnings: { type: 'array', items: { type: 'string' } }, sourceTextStored: { const: false }, compiledContextStored: { const: false }, billing: { type: 'object', description: 'What this call was charged. Present on credentialed calls only; x402 callers pay the signed amount and nothing else.', properties: { model: { type: 'string', enum: ['flat', 'flat_plus_metered'] }, flatCredits: { type: 'integer' }, meteredCredits: { type: 'integer', description: 'Credits actually taken, never the amount owed.' }, tokensSaved: { type: 'integer' }, tokensSavedPerCredit: { type: 'integer' }, remainingCredits: { type: 'integer', description: 'Omitted when the ledger did not report a balance.' }, unbilledReason: { type: 'string', enum: ['billing_disabled', 'ledger_unavailable', 'credit_balance_depleted', 'capped_by_caller'] } } } } } } } }, '400': errorResponse('Invalid compression request.'), '401': errorResponse('Missing or invalid API key.'), '402': { description: 'API-key credits are depleted, or an unauthenticated caller must answer the x402 v2 payment challenge.', headers: { 'PAYMENT-REQUIRED': { description: 'Base64-encoded x402 v2 PaymentRequired object, including Base USDC terms and Bazaar discovery metadata.', schema: { type: 'string' } } }, content: { 'application/json': { schema: { type: 'object' } } } }, '413': errorResponse('Context input exceeds the configured tier limit.'), '415': errorResponse('Content-Type must be application/json.') },
+      },
+    },
+    '/api/discovery/x402-offers/{offerId}': {
+      get: {
+        tags: ['Maha SDK'], operationId: 'getX402OfferDeclaration', summary: 'Fetch the complete discovery declaration for an x402 offer', security: [{}],
+        description: 'Public, unauthenticated and free. The PAYMENT-REQUIRED challenge carries a complete-but-compact declaration so that a conforming x402 v2 client, which echoes the declaration back inside PAYMENT-SIGNATURE, stays under the 16 KB request-header ceiling. This route serves the uncompacted input and output schemas and examples that had to be left out, and is the form a catalog should index. Returns the offer status and, when an offer is not payable in Production, the gates it is waiting on.',
+        parameters: [{ name: 'offerId', in: 'path', required: true, schema: { type: 'string', enum: ['context-compression', 'deep-context-evaluation', 'mps-autonomous-audit'] } }],
+        responses: { '200': { description: 'Complete offer declaration.', content: { 'application/json': { schema: { type: 'object', required: ['offerId', 'resource', 'payment', 'status', 'contract'], properties: { offerId: { type: 'string' }, metadataVersion: { type: 'string' }, declarationUrl: { type: 'string', format: 'uri' }, resource: { type: 'object' }, description: { type: 'string' }, payment: { type: 'object' }, status: { type: 'string', enum: ['available', 'preview', 'withheld'] }, availability: { type: 'object' }, maxRequestBytes: { type: 'integer' }, capabilityBoundaries: { type: 'array', items: { type: 'string' } }, retention: { type: 'object' }, contract: { type: 'object' } } } } } }, '404': errorResponse('No such x402 offer.') },
+      },
+    },
+    '/api/v1/compress/evaluate': {
+      post: {
+        tags: ['Maha SDK'], operationId: 'evaluateContextPack', summary: 'Compile a context pack and measure exact retention of caller-labelled evidence spans',
+        description: 'PREVIEW: not currently payable in Production. Deep Context Evaluation. Compiles 1-8 documents into a token-budgeted context pack, then reports whether each of 1-32 caller-supplied evidence spans survived selection verbatim. Available with a Maha API key or an autonomous $0.01 USDC payment over x402 v2 on Base Mainnet. The retention figure is exact span matching and nothing else: it is not factual accuracy, answer quality, verification, or hallucination prevention, and a retained span means the text was present, not that the text is true. Source text, compiled context and evidence spans are all transient; only hashes and counts are retained.', security: [{ credential: [] }, {}],
+        requestBody: { required: true, content: { 'application/json': { schema: { type: 'object', required: ['clientRequestId', 'task', 'tokenBudget', 'documents', 'requiredEvidence'], properties: { clientRequestId: { type: 'string', minLength: 8, maxLength: 120 }, task: { type: 'string', minLength: 8, maxLength: 1200 }, tokenBudget: { type: 'integer', minimum: 64, maximum: 16000 }, documents: { type: 'array', minItems: 1, maxItems: 8, items: { type: 'object', required: ['id', 'text'], properties: { id: { type: 'string' }, title: { type: 'string' }, text: { type: 'string' } } } }, requiredEvidence: { type: 'array', minItems: 1, maxItems: 32, description: 'Spans the compiled pack must retain. Each must be an exact substring of its declared source document.', items: { type: 'object', required: ['evidenceId', 'sourceId', 'text'], properties: { evidenceId: { type: 'string' }, sourceId: { type: 'string' }, text: { type: 'string', minLength: 3, maxLength: 4000 } } } } } } } } },
+        responses: { '201': { description: 'Compiled context pack with per-span retention.', content: { 'application/json': { schema: { type: 'object', required: ['evaluationId', 'contextPack', 'evidence', 'metrics', 'inputHash', 'outputHash', 'warningCodes', 'retentionBoundaries'], properties: { evaluationId: { type: 'string' }, offerId: { const: 'deep-context-evaluation' }, contextPack: { type: 'object' }, evidence: { type: 'array', items: { type: 'object', properties: { evidenceId: { type: 'string' }, sourceId: { type: 'string' }, evidenceHash: { type: 'string' }, status: { type: 'string', enum: ['retained', 'omitted'] } } } }, metrics: { type: 'object', properties: { requiredEvidenceCount: { type: 'integer' }, retainedEvidenceCount: { type: 'integer' }, requiredEvidenceRetentionPercent: { type: 'number', description: 'Exact span retention rate. Not factual accuracy, answer quality, verification, or hallucination prevention.' } } }, inputHash: { type: 'string' }, outputHash: { type: 'string' }, warnings: { type: 'array', items: { type: 'string' } }, warningCodes: { type: 'array', items: { type: 'string' } }, retentionBoundaries: { type: 'object' }, sourceTextStored: { const: false }, compiledContextStored: { const: false }, requiredEvidenceTextStored: { const: false } } } } } }, '400': errorResponse('Invalid evaluation request.'), '401': errorResponse('Missing or invalid API key.'), '402': { description: 'API-key credits are depleted, or an unauthenticated caller must answer the x402 v2 payment challenge for 10000 USDC base units.', headers: { 'PAYMENT-REQUIRED': { description: 'Base64-encoded x402 v2 PaymentRequired object.', schema: { type: 'string' } } }, content: { 'application/json': { schema: { type: 'object' } } } }, '413': errorResponse('Evaluation input exceeds 1,050,000 bytes.'), '415': errorResponse('Content-Type must be application/json.') },
+      },
+    },
+    '/api/v1/mps/audit': {
+      post: {
+        tags: ['MPS Audit'], operationId: 'createAutonomousMpsAudit', summary: 'Triage the claims in a passage, paid autonomously over x402',
+        description: 'WITHHELD: published for evaluation and not currently payable in any environment. Automated claim triage under the Maha Provenance Standard v0.1, priced at $0.10 USDC over x402 v2 on Base Mainnet when enabled. No Maha credential is required and no prepaid MPS audit credit is consumed; the credential and prepaid path at /api/mps-audits is unchanged. Each substantive claim is returned with a model-assigned provenance status, a rationale and a suggested action. This is triage, not factual certification, legal advice or human verification, and results must be checked before publication. The complete submitted passage is not retained; results retain short verbatim claim excerpts (6-25 words each), classifications, rationales, hashes and operational metadata. The response carries a one-time high-entropy retrievalToken: a paid job is recoverable and resumable at /api/v1/mps/audit/{auditId} without a second payment, so keep it.', security: [{}],
+        requestBody: { required: true, content: { 'application/json': { schema: { type: 'object', required: ['clientRequestId', 'text'], properties: { clientRequestId: { type: 'string', minLength: 8, maxLength: 120, description: 'Replaying this value returns the job already paid for rather than charging again.' }, text: { type: 'string', minLength: 1, maxLength: 6000 } } } } } },
+        responses: { '201': { description: 'Completed audit. retrievalToken is returned once and never again.', content: { 'application/json': { schema: { type: 'object', required: ['auditId', 'retrievalToken', 'status', 'warningCodes', 'retentionBoundaries'], properties: { auditId: { type: 'string' }, retrievalToken: { type: 'string' }, retrievalPath: { type: 'string' }, clientRequestId: { type: 'string' }, inputHash: { type: 'string' }, status: { type: 'string', enum: ['completed', 'processing', 'failed'] }, audit: { type: 'object' }, warnings: { type: 'array', items: { type: 'string' } }, warningCodes: { type: 'array', items: { type: 'string' } }, retentionBoundaries: { type: 'object' }, sourceTextStored: { const: false } } } } } }, '200': { description: 'Idempotent replay of a job this payer already bought.', content: { 'application/json': { schema: { type: 'object' } } } }, '202': { description: 'The job is still processing. Poll the retrieval path; no further payment is required.', content: { 'application/json': { schema: { type: 'object' } } } }, '400': errorResponse('Invalid request body.'), '402': { description: 'The x402 v2 payment challenge for 100000 USDC base units.', headers: { 'PAYMENT-REQUIRED': { description: 'Base64-encoded x402 v2 PaymentRequired object.', schema: { type: 'string' } } }, content: { 'application/json': { schema: { type: 'object' } } } }, '409': errorResponse('clientRequestId was already used with different source text.'), '413': errorResponse('Request body exceeds the 32 KB limit.'), '415': errorResponse('Content-Type must be application/json.'), '502': { description: 'The model did not complete. The payment is recorded against the auditId, which is returned with its retrievalToken so the job can be resumed without paying again.', content: { 'application/json': { schema: { type: 'object' } } } }, '503': errorResponse('The audit ledger is unavailable; no model call was made.') },
+      },
+    },
+    '/api/v1/mps/audit/{auditId}': {
+      get: {
+        tags: ['MPS Audit'], operationId: 'getAutonomousMpsAudit', summary: 'Retrieve an audit already paid for', security: [{}],
+        description: 'Returns the current state of a paid audit. Authenticated by the retrievalToken issued once at creation, presented as an Authorization Bearer credential; the auditId alone is not sufficient and is not a capability. This path is deliberately not priced, so recovering a job you already bought never costs a second payment.',
+        parameters: [{ name: 'auditId', in: 'path', required: true, schema: { type: 'string', pattern: '^audit_[a-f0-9]{32}$' } }],
+        responses: { '200': { description: 'Current job state.', content: { 'application/json': { schema: { type: 'object' } } } }, '404': errorResponse('No audit matches that id and retrieval token.'), '503': errorResponse('The audit ledger could not be read.') },
+      },
+      post: {
+        tags: ['MPS Audit'], operationId: 'resumeAutonomousMpsAudit', summary: 'Resume a paid audit after a model failure or timeout', security: [{}],
+        description: 'Re-runs the model for a job that has already been paid for, without charging again, up to 3 attempts in total. The original passage must be resubmitted: this offer retains no source text, so there is nothing stored to re-run against. The resubmitted passage must hash to the same value the job was paid for.',
+        parameters: [{ name: 'auditId', in: 'path', required: true, schema: { type: 'string', pattern: '^audit_[a-f0-9]{32}$' } }],
+        requestBody: { required: true, content: { 'application/json': { schema: { type: 'object', required: ['text'], properties: { retrievalToken: { type: 'string', description: 'Alternative to the Authorization header.' }, text: { type: 'string', minLength: 1, maxLength: 6000 } } } } } },
+        responses: { '200': { description: 'Completed audit.', content: { 'application/json': { schema: { type: 'object' } } } }, '202': { description: 'Still processing and not yet stale; the resume was not started.', content: { 'application/json': { schema: { type: 'object' } } } }, '400': errorResponse('The original passage is required to resume.'), '404': errorResponse('No audit matches that id and retrieval token.'), '409': errorResponse('The passage does not match the audit, or the retry allowance is exhausted.'), '502': { description: 'The model did not complete again.', content: { 'application/json': { schema: { type: 'object' } } } }, '503': errorResponse('The audit ledger is unavailable.') },
       },
     },
     '/api/v1/jobs/tensor-network': {

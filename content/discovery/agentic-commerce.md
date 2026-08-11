@@ -22,6 +22,56 @@ OpenAPI: https://www.mahastrategies.com/api/docs/openapi
 
 This capability accepts autonomous payment under the terms in its `PAYMENT-REQUIRED` challenge. This exception does not authorize autonomous Stripe Checkout, research engagements, enterprise onboarding, or spending through the local Maha MCP Bridge.
 
+## Deep Context Evaluation via x402 (preview — not currently payable)
+
+- API: `POST https://www.mahastrategies.com/api/v1/compress/evaluate`
+- Payment protocol: x402 v2, exact scheme
+- Network: Base Mainnet (`eip155:8453`)
+- Price: 10,000 USDC base units (`0.01 USDC`)
+- Alternative authorization: a provisioned Maha API key
+- Input bounds: 1-8 documents, 1-32 required-evidence spans, 1,050,000 request bytes
+- Returns: the compiled Context Pack, source-linked included passages, input and output hashes, original and compiled token estimates, `tokensSaved`, source coverage, `requiredEvidenceCount`, `retainedEvidenceCount`, `requiredEvidenceRetentionPercent`, machine-readable limitation codes, and zero-retention flags
+
+What the retention figure means, precisely: the fraction of the evidence spans **you labelled** that appear verbatim in the compiled pack. It is exact span matching. It is **not** factual accuracy, **not** answer quality, **not** verification, and **not** hallucination prevention. A retained span means the text survived selection, not that the text is true. An omitted span means the budget or the ranker dropped it, and the response says which.
+
+No source text, compiled context, or evidence span text is retained. Only hashes and counts are.
+
+**Status: preview.** This contract is implemented and exercised in Preview. It is not payable in Production and no paid settlement has been executed against it. Do not treat the terms above as a callable payment contract until the status says `available`.
+
+## Autonomous MPS Audit via x402 (withheld — not currently payable)
+
+- API: `POST https://www.mahastrategies.com/api/v1/mps/audit`
+- Retrieval and resume: `GET`/`POST https://www.mahastrategies.com/api/v1/mps/audit/{auditId}`
+- Payment protocol: x402 v2, exact scheme
+- Network: Base Mainnet (`eip155:8453`)
+- Price: 100,000 USDC base units (`0.10 USDC`)
+- Authorization: x402 only. This route requires **no** Maha credential and consumes **no** prepaid MPS audit credit. The credential and prepaid path at `/api/mps-audits` is unchanged and separate.
+- Input bounds: 6,000-character passage, 32 KB request body
+
+What this is: automated claim triage. Each substantive claim in the passage is returned with a model-assigned provenance status (`VERIFIED`, `SOURCED`, `BOUNDARY`, `ILLUSTRATIVE`, `UNVERIFIED`), a one-sentence rationale, and a suggested action.
+
+What this is not: it is **not factual certification**, **not legal advice**, and **not human verification**. The statuses are model judgements about what a passage's own text supports, and they must be checked before publication.
+
+Retention, stated precisely: **the complete submitted passage is not retained.** Audit results retain short verbatim claim excerpts (6-25 words each), classifications, rationales, hashes, and operational metadata. An audit that could not quote the claim it tagged would be unusable, so the excerpts are retained by design. An earlier version of this page claimed no source text was retained at all; that was wrong.
+
+**Status: withheld.** This offer is described here and is not payable in any environment. It is blocked on database separation and on proving durable paid-job recovery against a real deployment.
+
+Recovery. The response carries a one-time high-entropy `retrievalToken`. A paid job is retrievable and resumable at the retrieval path without a second payment, up to three model attempts. Because no source text is stored, a resume must resubmit the original passage; it is accepted only if it hashes to the passage the job was paid for. Keep the token: it is issued once and the `auditId` alone is not sufficient to read a result.
+
+## Which routes accept autonomous payment
+
+Three offers are published. Only the ones marked payable below accept autonomous payment today, and only at these exact method-and-path pairs:
+
+| Offer | Method and path | Price | Payable now |
+| --- | --- | --- | --- |
+| `context-compression` | `POST /api/v1/compress` | 1,000 USDC base units | yes |
+| `deep-context-evaluation` | `POST /api/v1/compress/evaluate` | 10,000 USDC base units | no — preview |
+| `mps-autonomous-audit` | `POST /api/v1/mps/audit` | 100,000 USDC base units | no — withheld |
+
+A published price is not an offer to sell. Only a live `PAYMENT-REQUIRED` challenge proves an offer can be bought; the `status` and `payableNow` fields in the manifests are authoritative for everything else. Complete machine-readable declarations, including the uncompacted schemas, are at `https://www.mahastrategies.com/api/discovery/x402-offers/{offerId}`.
+
+Matching is exact. A sub-path of a priced route is not priced by inheritance, and a `GET` beside a priced `POST` is not the priced resource. The GPU optimization routes (`/api/v1/jobs/*`) are **not** x402 products in this phase and require a provisioned API key.
+
 ## MPS Prepaid Audit API Access
 
 - Product page: https://www.mahastrategies.com/mps/audit-access

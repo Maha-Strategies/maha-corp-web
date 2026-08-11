@@ -1,5 +1,9 @@
 # Production database migrations
 
+Maha OS and Maha's infrastructure products intentionally use one governed
+Production project. The ownership and isolation rules are recorded in
+[maha-platform-database-boundary.md](./maha-platform-database-boundary.md).
+
 Schema changes reach Production through `production-migrations.yml`, not through
 the Supabase SQL editor. Applying by hand is how the migration history came to
 need manual repair once already, and it is the highest-consequence failure mode

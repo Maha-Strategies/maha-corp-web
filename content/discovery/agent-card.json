@@ -6,7 +6,12 @@
   "url": "https://www.mahastrategies.com/inbound",
   "submissionEndpoint": "https://www.mahastrategies.com/api/inbound-submissions",
   "inputSchema": "https://www.mahastrategies.com/inbound-submission-schema.json",
-  "acceptedOffers": ["rapid-intelligence-brief", "verified-research-brief", "mps-preflight", "mps-prepaid-audit-access"],
+  "acceptedOffers": [
+    "rapid-intelligence-brief",
+    "verified-research-brief",
+    "mps-preflight",
+    "mps-prepaid-audit-access"
+  ],
   "serviceCatalog": "https://www.mahastrategies.com/agent-offers.json",
   "documentation": "https://www.mahastrategies.com/docs",
   "capabilities": [
@@ -24,7 +29,53 @@
         "amount": "1000",
         "assetSymbol": "USDC",
         "autonomous": true
-      }
+      },
+      "payableNow": true
+    },
+    {
+      "id": "deep-context-evaluation",
+      "status": "preview_not_payable",
+      "endpoint": "https://www.mahastrategies.com/api/v1/compress/evaluate",
+      "measures": "exact retention of caller-labelled required-evidence spans",
+      "notMeasured": [
+        "factual accuracy",
+        "answer quality",
+        "verification",
+        "hallucination prevention"
+      ],
+      "payment": {
+        "protocol": "x402",
+        "version": 2,
+        "network": "eip155:8453",
+        "amount": "10000",
+        "assetSymbol": "USDC",
+        "autonomous": false,
+        "note": "Published for evaluation. Not currently payable in Production."
+      },
+      "payableNow": false
+    },
+    {
+      "id": "mps-autonomous-audit",
+      "status": "withheld_not_payable",
+      "endpoint": "https://www.mahastrategies.com/api/v1/mps/audit",
+      "retrievalEndpoint": "https://www.mahastrategies.com/api/v1/mps/audit/{auditId}",
+      "provides": "automated claim triage with provenance statuses",
+      "notProvided": [
+        "factual certification",
+        "legal advice",
+        "human verification"
+      ],
+      "payment": {
+        "protocol": "x402",
+        "version": 2,
+        "network": "eip155:8453",
+        "amount": "100000",
+        "assetSymbol": "USDC",
+        "autonomous": false,
+        "note": "Described only. Not currently payable in any environment."
+      },
+      "payableNow": false,
+      "retention": "The complete submitted passage is not retained. Results retain short verbatim claim excerpts, classifications, rationales, hashes, and operational metadata."
     },
     {
       "id": "gpu-tensor-network",
@@ -43,6 +94,13 @@
       "contract": "https://www.mahastrategies.com/mcp-gateway-contract.json"
     }
   ],
-  "terms": {"bindingCommitment": false, "payment": "Context Compression accepts its published autonomous x402 terms. A human purchaser must authorize Stripe Checkout; research and enterprise work require human scope review.", "sensitiveData": "Do not submit confidential, regulated, or sensitive personal information."},
-  "review": {"mode": "deterministic_qualification_then_human_scope_review", "responseTargetBusinessDays": 2}
+  "terms": {
+    "bindingCommitment": false,
+    "payment": "Context Compression is the only capability currently payable autonomously, on Base Mainnet. Deep Context Evaluation is in preview and the Autonomous MPS Audit is withheld: both are described here and neither is payable today. The GPU optimization routes are not x402 products. A human purchaser must authorize Stripe Checkout; research and enterprise work require human scope review.",
+    "sensitiveData": "Do not submit confidential, regulated, or sensitive personal information."
+  },
+  "review": {
+    "mode": "deterministic_qualification_then_human_scope_review",
+    "responseTargetBusinessDays": 2
+  }
 }
