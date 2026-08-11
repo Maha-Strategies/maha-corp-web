@@ -1,6 +1,10 @@
 import { MAX_AUDIT_CHARS, MPS_ACTIONS, MPS_TAGS, MPS_VERSION } from './mps-audit-engine.ts'
 import { MPS_AUDIT_CREDIT_UNIT } from './mps-credits.ts'
 import { AGENTIC_COMMERCE_API_URL } from './agentic-commerce.ts'
+import {
+  COMPATIBILITY_PACK_CONTRACT,
+  COMPATIBILITY_PACK_OUTPUT_SCHEMA,
+} from './agent-infrastructure-compatibility-pack.ts'
 
 // Hand-authored OpenAPI 3.1 document for the public API. The runtime
 // validators in lib/ are the source of truth; every pattern and bound here
@@ -103,6 +107,41 @@ export const openApiDocument = {
     { name: 'GPU Geometric Optimization', description: 'Bounded paired-point SE(3) registration with explicit residual and correspondence boundaries.' },
   ],
   paths: {
+    '/api/discovery/agent-infrastructure-compatibility-pack': {
+      get: {
+        tags: ['Agentic Commerce'],
+        operationId: 'getAgentInfrastructureCompatibilityPackContract',
+        summary: 'Inspect the fixed-price Agent Infrastructure Compatibility Pack contract',
+        description: 'Returns the exact input and output schemas, fixed price, bounded execution scope, limitations, and failure/refund policy. The runtime is withheld and this read-only route cannot create or pay for a pack.',
+        security: [],
+        responses: {
+          '200': {
+            description: 'Public contract. purchase.payableNow remains false until the durable delivery and refund runtime is promoted.',
+            content: { 'application/json': { schema: {
+              type: 'object',
+              required: ['id', 'version', 'name', 'status', 'price', 'purchase', 'execution', 'failureAndRefund', 'limitations', 'inputSchema', 'outputSchema', 'sampleReportUrl'],
+              properties: {
+                id: { const: COMPATIBILITY_PACK_CONTRACT.id }, version: { const: COMPATIBILITY_PACK_CONTRACT.version }, name: { type: 'string' },
+                status: { const: 'contract_published_runtime_withheld' }, description: { type: 'string' }, price: { type: 'object' }, deliveryTarget: { type: 'string' },
+                purchase: { type: 'object', required: ['payableNow', 'reason'], properties: { payableNow: { const: false }, reason: { type: 'string' } } },
+                execution: { type: 'object' }, failureAndRefund: { type: 'object' }, limitations: { type: 'array', items: { type: 'string' } },
+                inputSchema: { type: 'object' }, outputSchema: { type: 'object' }, sampleReportUrl: { type: 'string', format: 'uri' },
+              },
+            } } },
+          },
+        },
+      },
+    },
+    '/api/discovery/agent-infrastructure-compatibility-pack/sample': {
+      get: {
+        tags: ['Agentic Commerce'],
+        operationId: 'getAgentInfrastructureCompatibilityPackSample',
+        summary: 'Inspect a complete sample compatibility report',
+        description: 'Returns an illustrative report conforming to the published output schema. It is not a report about a current customer or a certification.',
+        security: [],
+        responses: { '200': { description: 'Complete illustrative report.', content: { 'application/json': { schema: COMPATIBILITY_PACK_OUTPUT_SCHEMA } } } },
+      },
+    },
     '/api/v1/keys/generate': {
       post: {
         tags: ['Self-service API Keys'], operationId: 'generateStarterApiKey', summary: 'Generate a one-time starter API key with 20,000 free credits',
