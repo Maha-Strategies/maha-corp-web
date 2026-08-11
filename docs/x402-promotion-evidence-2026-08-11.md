@@ -164,3 +164,52 @@ and Production, then direct verification of `x402_mps_audits` and
 `resume_x402_mps_audit`, then the Preview recovery gates.
 
 Both are configuration changes to Production and were not made unilaterally.
+
+
+---
+
+# Update — option (b) attempted, blocked at step 1
+
+## Completed since the first report
+
+- Production `X402_RESOURCES` corrected to method+path only; readiness **HTTP 200 / ready**; the $0.001 contract verified unchanged (amount 1000, `eip155:8453`, Base USDC, merchant payee).
+- Two distinct 32-byte secrets set for `X402_RETRIEVAL_TOKEN_SECRET` (Preview and Production, separately generated, never printed or persisted).
+- MPS runtime precondition confirmed in Preview **without enabling MPS**:
+  `[ok] MPS paid-job runtime dependencies are configured; the offer is not enabled here.`
+- Deep Context enabled in branch-scoped Preview; all unpaid gates pass, x402-doctor **PASS / 0 errors** on both compression offers.
+
+## Blocked: no reachable path to the Preview database
+
+Step 1 asks for the telemetry migration to be applied to the Preview database,
+with the target verified as Preview beforehand. Neither is possible with the
+access available here.
+
+| Path | Result |
+| --- | --- |
+| GitHub `Preview` environment | **no secrets, no variables** — no CI migration path exists |
+| `production-database` environment | has `SUPABASE_DB_PASSWORD` / `SUPABASE_ACCESS_TOKEN`, but `SUPABASE_PROJECT_REF=uhwuullakihgszxhiygz` is **Production** |
+| Preview `NEXT_PUBLIC_SUPABASE_URL` / `SUPABASE_SERVICE_ROLE_KEY` | Vercel-Sensitive; pull returns `[SENSITIVE]` |
+| Supabase management API | access token is in the OS keyring, not readable |
+| Client bundle scan | `NEXT_PUBLIC_SUPABASE_URL` is not inlined in any served bundle |
+
+What *is* established: Preview and Production use **different** databases —
+Production readiness reports `record_x402_offer_usage` present, Preview reports
+it missing. Of the three Supabase projects on the account
+(`maha-production-shared`, `agentic-publisher`, `maha-corp-staging.`), staging is
+the only plausible Preview target by elimination.
+
+Elimination is not verification. Running DDL against a database identified by
+inference is precisely the mistake the migration workflow's own target-assertion
+guard exists to prevent — and the same class of error as the 2026-08-03
+staging/Production mix-up recorded in that workflow's header. It was not done.
+
+The Preview shortfall is narrow: tables and `x402_readiness_functions` are
+present; only `record_x402_offer_usage()` is missing, so migration
+`…000300` appears to have not reached that database while `…000500` did.
+
+## Consequence
+
+A Preview settlement remains possible and would prove settlement, delivery,
+`PAYMENT-RESPONSE`, retention and non-regression — but **not** the telemetry
+increment, which is the one criterion that motivated option (b). It would also
+run on Base Sepolia rather than Mainnet.
