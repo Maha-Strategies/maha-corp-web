@@ -48,6 +48,17 @@ test('a new migration must sort after everything already on the base branch', ()
   assert.deepEqual(checkOrderAgainstBase(['20260720000000_backdated.sql'], []), [])
 })
 
+test('a historical baseline requires an exact digest and HTTPS evidence', () => {
+  const base = ['20260810000600_latest.sql']
+  const name = '20260809000250_baseline.sql'
+  const file = { name, sql: 'select 1;', sha256: 'reviewed' }
+  const approval = { name, sha256: 'reviewed', evidence: 'https://github.com/example/actions/runs/1' }
+
+  assert.deepEqual(checkOrderAgainstBase([name], base, [file], [approval]), [])
+  assert.deepEqual(codes(checkOrderAgainstBase([name], base, [{ ...file, sha256: 'changed' }], [approval])), ['out_of_order'])
+  assert.deepEqual(codes(checkOrderAgainstBase([name], base, [file], [{ ...approval, evidence: 'not-a-url' }])), ['out_of_order'])
+})
+
 test('destructive DDL is flagged unless it is explicitly justified', () => {
   const drop = 'alter table public.mps_credit_ledger drop column amount;'
   assert.deepEqual(codes(checkDestructive([{ name: '20260801000000_drop.sql', sql: drop }])), ['destructive_drop_column'])

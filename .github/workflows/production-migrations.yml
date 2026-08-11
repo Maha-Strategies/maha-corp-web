@@ -32,13 +32,14 @@ on:
         type: choice
         options:
           - dry-run
+          - baseline
           - apply
       reason:
         description: Change ticket or reason (minimum 12 characters)
         required: true
         type: string
       confirmation:
-        description: For apply, type APPLY PRODUCTION MIGRATIONS exactly
+        description: For baseline, type RECORD PRODUCTION BASELINE; for apply, type APPLY PRODUCTION MIGRATIONS
         required: false
         type: string
       check_schema_drift:
@@ -121,6 +122,8 @@ jobs:
           test "${#REASON}" -ge 12
           if [ "$MODE" = 'apply' ]; then
             test "$CONFIRMATION" = 'APPLY PRODUCTION MIGRATIONS'
+          elif [ "$MODE" = 'baseline' ]; then
+            test "$CONFIRMATION" = 'RECORD PRODUCTION BASELINE'
           fi
 
       - uses: actions/checkout@v7
@@ -167,6 +170,27 @@ jobs:
       # commercial history into a workflow artifact.
       - name: Capture pre-apply schema snapshot
         run: supabase db dump --linked --schema public -f "$EVIDENCE/schema-before.sql"
+
+      # Maha OS objects predated this repository's Production migration
+      # history. The reviewed 20260809000250 migration reproduces those objects
+      # for clean databases, but executing it in Production would attempt to
+      # create objects that already exist. This one-time mode records only that
+      # exact baseline version as applied; it does not execute baseline SQL or
+      # any subsequently pending migration.
+      - name: Record the existing unified Maha OS baseline
+        id: baseline
+        if: ${{ inputs.mode == 'baseline' }}
+        run: |
+          set -euo pipefail
+          version='20260809000250'
+          file="supabase/migrations/${version}_maha_os_unified_schema_baseline.sql"
+          test -f "$file"
+          grep -q 'No customer data is included' "$file"
+          supabase migration repair "$version" --status applied --linked 2>&1 | tee "$EVIDENCE/baseline-repair.txt"
+
+      - name: Record migration history after baseline
+        if: ${{ inputs.mode == 'baseline' }}
+        run: supabase migration list --linked 2>&1 | tee "$EVIDENCE/migration-list-after-baseline.txt"
 
       # The failure this repository has actually experienced: schema changed
       # directly in the SQL editor, leaving the database ahead of the migration
@@ -252,6 +276,12 @@ jobs:
         if: ${{ failure() && steps.apply.outcome != 'skipped' }}
         run: |
           echo '::error::Migrations were applied or partially applied, and a later step failed. The schema has NOT been reverted; reverting a ledger migration automatically would compound the incident. Diagnose using the uploaded evidence and the preserved pre-apply schema snapshot.'
+          exit 1
+
+      - name: Warn that baseline history was not reverted
+        if: ${{ failure() && steps.baseline.outcome == 'success' }}
+        run: |
+          echo '::error::The Maha OS baseline version was recorded as applied, but a later verification step failed. No schema SQL was executed. Diagnose using the uploaded before/after migration history before changing that record.'
           exit 1
 
       - name: Upload migration evidence
