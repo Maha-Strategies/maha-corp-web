@@ -54,22 +54,35 @@ jobs:
           fi
           echo "target database fingerprint: sha256:$(printf '%s' "$SUPABASE_PROJECT_REF" | sha256sum | cut -d' ' -f1)"
 
-      - name: Resolve the project's session pooler
+      - name: Resolve the project's pooler connection
         run: |
           set -euo pipefail
-          project=$(curl --fail --silent --show-error \
+          poolers=$(curl --fail --silent --show-error \
             -H "Authorization: Bearer ${SUPABASE_ACCESS_TOKEN}" \
-            "https://api.supabase.com/v1/projects/${SUPABASE_PROJECT_REF}")
-          region=$(jq -er '.region | select(type == "string" and length > 0)' <<<"$project")
-          echo "SUPABASE_DB_HOST=aws-0-${region}.pooler.supabase.com" >> "$GITHUB_ENV"
-          echo "Resolved the Production session pooler from authenticated project metadata."
+            "https://api.supabase.com/v1/projects/${SUPABASE_PROJECT_REF}/config/database/pooler")
+          pooler=$(jq -cer '
+            [ .[] | select(.database_type == "PRIMARY") ]
+            | .[0]
+            | select(
+                (.db_host | type == "string" and length > 0)
+                and (.db_port | type == "number")
+                and (.db_user | type == "string" and length > 0)
+                and (.db_name | type == "string" and length > 0)
+              )
+          ' <<<"$poolers")
+          echo "SUPABASE_DB_HOST=$(jq -r '.db_host' <<<"$pooler")" >> "$GITHUB_ENV"
+          echo "SUPABASE_DB_PORT=$(jq -r '.db_port' <<<"$pooler")" >> "$GITHUB_ENV"
+          echo "SUPABASE_DB_USER=$(jq -r '.db_user' <<<"$pooler")" >> "$GITHUB_ENV"
+          echo "SUPABASE_DB_NAME=$(jq -r '.db_name' <<<"$pooler")" >> "$GITHUB_ENV"
+          echo "Resolved the Production pooler connection from authenticated project metadata."
 
       - name: Telemetry recorded for the offer
         run: |
           set -euo pipefail
-          url="postgresql://postgres.${SUPABASE_PROJECT_REF}:${SUPABASE_DB_PASSWORD}@${SUPABASE_DB_HOST}:5432/postgres"
+          export PGPASSWORD="$SUPABASE_DB_PASSWORD"
+          dsn="host=${SUPABASE_DB_HOST} port=${SUPABASE_DB_PORT} user=${SUPABASE_DB_USER} dbname=${SUPABASE_DB_NAME} sslmode=require"
           echo '--- usage rows for the offer, last 2 days ---'
-          psql "$url" -v ON_ERROR_STOP=1 -P pager=off -c "
+          psql "$dsn" -v ON_ERROR_STOP=1 -P pager=off -c "
             select usage_day, event_kind, status_class, discovery_source, event_count,
                    required_evidence_total, retained_evidence_total, last_observed_at
               from public.x402_offer_usage_daily
@@ -77,7 +90,7 @@ jobs:
                and usage_day >= (current_date - 1)
              order by usage_day desc, event_kind, status_class;
           "
-          invocations=$(psql "$url" -At -v ON_ERROR_STOP=1 -c "
+          invocations=$(psql "$dsn" -At -v ON_ERROR_STOP=1 -c "
             select coalesce(sum(event_count), 0)
               from public.x402_offer_usage_daily
              where offer_id = '${OFFER_ID}'
@@ -94,8 +107,9 @@ jobs:
       - name: Settlement recorded and corroborated
         run: |
           set -euo pipefail
-          url="postgresql://postgres.${SUPABASE_PROJECT_REF}:${SUPABASE_DB_PASSWORD}@${SUPABASE_DB_HOST}:5432/postgres"
-          psql "$url" -v ON_ERROR_STOP=1 -P pager=off -c "
+          export PGPASSWORD="$SUPABASE_DB_PASSWORD"
+          dsn="host=${SUPABASE_DB_HOST} port=${SUPABASE_DB_PORT} user=${SUPABASE_DB_USER} dbname=${SUPABASE_DB_NAME} sslmode=require"
+          psql "$dsn" -v ON_ERROR_STOP=1 -P pager=off -c "
             select resource, payer, amount, transaction_id, chain_status, settled_at
               from public.x402_settlements
              where settled_at >= now() - interval '2 days'
@@ -109,9 +123,10 @@ jobs:
       - name: No x402 table can retain caller request content
         run: |
           set -euo pipefail
-          url="postgresql://postgres.${SUPABASE_PROJECT_REF}:${SUPABASE_DB_PASSWORD}@${SUPABASE_DB_HOST}:5432/postgres"
+          export PGPASSWORD="$SUPABASE_DB_PASSWORD"
+          dsn="host=${SUPABASE_DB_HOST} port=${SUPABASE_DB_PORT} user=${SUPABASE_DB_USER} dbname=${SUPABASE_DB_NAME} sslmode=require"
           echo '--- every text/json column in the x402 schema ---'
-          psql "$url" -v ON_ERROR_STOP=1 -P pager=off -c "
+          psql "$dsn" -v ON_ERROR_STOP=1 -P pager=off -c "
             select table_name, column_name, data_type
               from information_schema.columns
              where table_schema = 'public'
@@ -121,7 +136,7 @@ jobs:
           "
           # Named after the request fields that carry caller content. Any column
           # matching these is a place document text could land.
-          offenders=$(psql "$url" -At -v ON_ERROR_STOP=1 -c "
+          offenders=$(psql "$dsn" -At -v ON_ERROR_STOP=1 -c "
             select table_name || '.' || column_name
               from information_schema.columns
              where table_schema = 'public'
