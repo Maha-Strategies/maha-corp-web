@@ -9,6 +9,7 @@ import type { PricedResource } from './config.ts'
 import { X402_VERSION, type PaymentRequirement, type ResourceInfo } from './protocol.ts'
 import { BASE_MAINNET_CAIP2, CONTEXT_COMPRESSION_OFFER, USDC_DECIMALS, offerById } from './offers.ts'
 import { DECLARATION_DIGEST_EXTENSION, createDeclarationDigestExtension } from './declaration-digest.ts'
+import { compactExample, compactSchema } from './declaration-compaction.ts'
 
 /** Extension namespace for Maha's own commerce metadata. */
 export const OFFER_EXTENSION = 'maha-offer'
@@ -18,6 +19,11 @@ export const OFFER_EXTENSION = 'maha-offer'
  * with the declaration digest to tell a re-index from a genuine revision.
  */
 export const OFFER_METADATA_VERSION = '2026-08-10'
+
+/** Where the complete, uncompacted declaration for an offer is published. */
+export function declarationUrl(origin: string, offerId: string): string {
+  return `${origin}/api/discovery/x402-offers/${offerId}`
+}
 
 const ICON_URL = 'https://www.mahastrategies.com/icon.png'
 // Written to be verifiable rather than persuasive. A router selects on fit,
@@ -140,11 +146,18 @@ export async function discoveryExtensionsFor(
   const cached = declarationCache.get(cacheKey)
   if (cached) return cached
 
+  // Compacted, so a standard client that echoes this back fits inside the
+  // 16 KB PAYMENT-SIGNATURE ceiling. The input example is published verbatim
+  // because a crawler replays it; only the schemas and the response example
+  // are reduced, and the complete forms are served at `declarationUrl`.
   const declared = declareDiscoveryExtension({
     bodyType: 'json',
     input: offer.discovery.input,
-    inputSchema: offer.discovery.inputSchema,
-    output: { example: offer.discovery.output, schema: offer.discovery.outputSchema },
+    inputSchema: compactSchema(offer.discovery.inputSchema),
+    output: {
+      example: compactExample(offer.discovery.output) as Record<string, unknown>,
+      schema: compactSchema(offer.discovery.outputSchema),
+    },
   })
 
   const enriched = bazaarResourceServerExtension.enrichDeclaration?.(declared.bazaar, {
@@ -166,6 +179,13 @@ export async function discoveryExtensionsFor(
   // for: what the money is, on which chain, and what the offer does not do.
   // Published beside the schema so an agent never has to read prose docs to
   // find the boundary of what it is buying.
+  // Deliberately lean. Every byte here is echoed back by a conforming client
+  // inside a 16 KB header, so this carries only what a buyer needs *to decide
+  // and to pay*: the money, the chain, the limits, and whether it can buy this
+  // at all. The prose -- capability boundaries, retention wording, the gates a
+  // withheld offer is waiting on -- is duplicated from `resource.description`
+  // or served in full at `declarationUrl`, and is not worth a byte of the
+  // payer's header budget.
   const offerExtension = {
     offerId: offer.id,
     method: offer.method,
@@ -173,20 +193,14 @@ export async function discoveryExtensionsFor(
     amount: offer.amount,
     asset: 'USDC',
     assetDecimals: USDC_DECIMALS,
-    // Read from the requirement this challenge actually carries, never from a
-    // constant. Preview settles on Base Sepolia and Production on Base
-    // Mainnet, so a hard-coded mainnet CAIP-2 here would tell a Preview buyer
-    // to prepare a payment on a chain the accepts array does not accept -- an
-    // extension that contradicts the requirement beside it is worse than no
-    // extension at all.
     network: requirement?.network ?? BASE_MAINNET_CAIP2,
     status: offer.status,
+    payableInProduction: offer.availability.payableInProduction,
     maxRequestBytes: offer.maxRequestBytes,
-    capabilityBoundaries: [...offer.capabilityBoundaries],
-    retention: {
-      sourceTextStored: offer.retention.sourceTextStored,
-      retainedFields: [...offer.retention.retainedFields],
-    },
+    fullSourceTextStored: offer.retention.fullSourceTextStored,
+    verbatimExcerptsRetained: offer.retention.verbatimExcerptsRetained,
+    declarationUrl: declarationUrl(new URL(resourceUrl).origin, offer.id),
+    declarationInline: 'compact',
   }
 
   const extensions: Record<string, unknown> = { bazaar: enriched, [OFFER_EXTENSION]: offerExtension }

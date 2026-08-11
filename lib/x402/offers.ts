@@ -32,12 +32,28 @@ export const BASE_MAINNET_CAIP2 = 'eip155:8453'
 /**
  * Operational status, which is a public claim rather than an internal flag.
  *
- * `available` means an agent can pay for it today. `withheld` means the offer
- * is authored, tested, and deliberately not enabled -- the discovery surfaces
- * say so rather than omitting it, because an offer that appears and disappears
- * between crawls reads as an unstable vendor.
+ * `available`  an agent can pay for this today, in Production.
+ * `preview`    the contract is implemented and exercised in Preview, but it is
+ *              not payable in Production. Discovery may describe it; discovery
+ *              must not present it as a callable payment contract.
+ * `withheld`   authored and deliberately not enabled anywhere, because an
+ *              external gate is unmet. Named rather than hidden, because an
+ *              offer that appears and disappears between crawls reads as an
+ *              unstable vendor -- but never advertised as payable.
+ *
+ * Only `available` may appear in Production's payable discovery. That rule is
+ * enforced in tests rather than left to reviewers, because the failure mode is
+ * an autonomous agent signing an authorization for an endpoint that cannot
+ * serve it.
  */
-export type OfferStatus = 'available' | 'withheld'
+export type OfferStatus = 'available' | 'preview' | 'withheld'
+
+/** Why an offer is not yet available, and what would change that. */
+export type OfferAvailability = {
+  payableInProduction: boolean
+  /** Plain-language gates. Published, so a buyer is never guessing. */
+  blockedBy: readonly string[]
+}
 
 export type X402Offer = {
   /** Stable public identifier. Never reused for a different contract. */
@@ -59,6 +75,7 @@ export type X402Offer = {
   serviceName: string
   tags: readonly string[]
   status: OfferStatus
+  availability: OfferAvailability
   /** Largest accepted request body, in UTF-8 bytes. */
   maxRequestBytes: number
   /**
@@ -68,11 +85,25 @@ export type X402Offer = {
    * ask, so the boundary has to travel with the offer or it does not exist.
    */
   capabilityBoundaries: readonly string[]
-  /** Where source text goes after the response is built. Always: nowhere. */
+  /**
+   * What survives the request, stated precisely.
+   *
+   * An earlier revision published a flat "no source text is retained" for every
+   * offer. That was true of the compression offers and false of the MPS audit,
+   * whose stored result contains 6-25 word verbatim excerpts of the submitted
+   * passage by design -- an audit that could not quote the claim it tagged
+   * would be unusable. A retention promise that is wrong on one offer is worse
+   * than no promise, so the shape now forces each offer to answer separately.
+   */
   retention: {
-    sourceTextStored: false
-    /** Fields the ledger does keep, so the claim above is auditable. */
+    /** True only if the whole submitted document or passage is stored. */
+    fullSourceTextStored: false
+    /** True where short verbatim spans of the input survive in the result. */
+    verbatimExcerptsRetained: boolean
+    /** Fields the ledger keeps, so the claims above are auditable. */
     retainedFields: readonly string[]
+    /** One sentence a buyer can act on. */
+    note: string
   }
   discovery: OfferDiscoveryContract
 }
@@ -95,6 +126,7 @@ export const CONTEXT_COMPRESSION_OFFER: X402Offer = {
   serviceName: 'Maha Context Compiler',
   tags: ['ai', 'context-compression', 'llm', 'rag', 'provenance'],
   status: 'available',
+  availability: { payableInProduction: true, blockedBy: [] },
   maxRequestBytes: 450_000,
   capabilityBoundaries: [
     'Extractive selection, not summarisation or rewriting.',
@@ -102,8 +134,10 @@ export const CONTEXT_COMPRESSION_OFFER: X402Offer = {
     'Token counts are model-neutral estimates, not provider billing counts.',
   ],
   retention: {
-    sourceTextStored: false,
+    fullSourceTextStored: false,
+    verbatimExcerptsRetained: false,
     retainedFields: ['input hash', 'output hash', 'token estimates', 'status class'],
+    note: 'Nothing from the request is stored. The compiled pack is returned and discarded; only hashes, token estimates and a status class are retained.',
   },
   discovery: CONTEXT_COMPRESSION_DISCOVERY,
 }
@@ -123,11 +157,22 @@ export const DEEP_CONTEXT_EVALUATION_OFFER: X402Offer = {
     'Compile 1-8 documents into a token-budgeted context pack, then measure exact retention of 1-32 caller-labelled evidence spans. '
     + 'Returns the pack, source-linked passages, input and output hashes, original and compiled token estimates, tokensSaved, source coverage, and requiredEvidenceRetentionPercent. '
     + 'Retention is exact span matching only: not accuracy, answer quality, verification, or hallucination prevention. '
-    + 'Extractive and budget-bound. No source text retained.',
+    + 'Extractive and budget-bound. Request content is not stored.',
   concurrencyCap: 4,
   serviceName: 'Maha Context Compiler',
   tags: ['ai', 'context-compression', 'llm', 'rag', 'evidence-retention'],
-  status: 'available',
+  // Implemented and exercised in Preview, deliberately not payable in
+  // Production. The gate is infrastructure, not code: the shared Production
+  // database has pending migrations, and this offer's telemetry table is among
+  // them.
+  status: 'preview',
+  availability: {
+    payableInProduction: false,
+    blockedBy: [
+      'Production shares the Maha OS database, which has pending migrations; database separation is an external promotion gate.',
+      'No paid end-to-end settlement has been executed for this offer.',
+    ],
+  },
   // The enterprise ceiling. This offer is priced ten times the entry tier and
   // accepts the largest payload the compiler supports.
   maxRequestBytes: 1_050_000,
@@ -138,8 +183,10 @@ export const DEEP_CONTEXT_EVALUATION_OFFER: X402Offer = {
     'Extractive and budget-bound: spans that exceed the token budget are dropped and reported.',
   ],
   retention: {
-    sourceTextStored: false,
+    fullSourceTextStored: false,
+    verbatimExcerptsRetained: false,
     retainedFields: ['input hash', 'output hash', 'token estimates', 'evidence retention counts', 'status class'],
+    note: 'Neither the documents nor the evidence spans are stored. Spans are hashed for the retention report; only hashes, counts and token estimates are retained.',
   },
   discovery: DEEP_CONTEXT_EVALUATION_DISCOVERY,
 }
@@ -154,16 +201,27 @@ export const MPS_AUTONOMOUS_AUDIT_OFFER: X402Offer = {
   // engagement this is not.
   description:
     'Automated claim triage for a nonfiction passage under the Maha Provenance Standard v0.1. '
-    + 'Returns each substantive claim with a provenance status (VERIFIED, SOURCED, BOUNDARY, ILLUSTRATIVE, UNVERIFIED), a one-sentence rationale, and a suggested action. '
-    + 'Statuses are model-assigned triage, not factual certification, legal advice, or human verification, and must be checked before publication. '
-    + 'Passage limit 6000 characters. No source text is retained.',
+    + 'Each substantive claim returns a provenance status (VERIFIED, SOURCED, BOUNDARY, ILLUSTRATIVE, UNVERIFIED), a rationale, and a suggested action. '
+    + 'Model-assigned triage: not factual certification, legal advice, or human verification, and must be checked before publication. '
+    + 'Passage limit 6000 characters. The full passage is not stored; results keep short verbatim claim excerpts.',
   // Deliberately low. Each admitted request crosses the Anthropic boundary and
   // holds a slot for the length of a model call, so the cap is sized to what
   // the model budget tolerates rather than to what the route could serve.
   concurrencyCap: 2,
   serviceName: 'Maha Provenance Standard',
   tags: ['ai', 'provenance', 'claim-triage', 'editorial', 'fact-status'],
-  status: 'available',
+  // Withheld everywhere. The gates are external and unmet, and the honest
+  // consequence of shipping without them is a settled payment with no job
+  // behind it.
+  status: 'withheld',
+  availability: {
+    payableInProduction: false,
+    blockedBy: [
+      'Production shares the Maha OS database; this offer requires two unapplied migrations and database separation is an external promotion gate.',
+      'Durable paid-job recovery has not been proven against a real deployment.',
+      'No paid end-to-end settlement has been executed for this offer.',
+    ],
+  },
   maxRequestBytes: 32_768,
   capabilityBoundaries: [
     'Automated triage that assigns provenance statuses to claims.',
@@ -171,9 +229,19 @@ export const MPS_AUTONOMOUS_AUDIT_OFFER: X402Offer = {
     'Not legal advice.',
     'Not human verification, and not a substitute for editorial review before publication.',
   ],
+  // The correction that matters most on this offer. An audit result is a list
+  // of tagged claims, and a claim is identified by a 6-25 word verbatim excerpt
+  // of the passage -- an audit that could not quote what it tagged would be
+  // useless. So excerpts are retained by design, and saying otherwise was
+  // wrong. What is not retained is the passage as submitted.
   retention: {
-    sourceTextStored: false,
-    retainedFields: ['input hash', 'status', 'result metadata', 'payer address', 'payment transaction'],
+    fullSourceTextStored: false,
+    verbatimExcerptsRetained: true,
+    retainedFields: [
+      'input hash', 'status', 'payer address', 'payment transaction',
+      'short verbatim claim excerpts (6-25 words each)', 'provenance classifications', 'rationales', 'operational metadata',
+    ],
+    note: 'The complete submitted passage is not retained. Audit results retain short verbatim claim excerpts, classifications, rationales, hashes, and operational metadata.',
   },
   discovery: MPS_AUTONOMOUS_AUDIT_DISCOVERY,
 }
@@ -183,6 +251,17 @@ export const X402_OFFERS: readonly X402Offer[] = Object.freeze([
   DEEP_CONTEXT_EVALUATION_OFFER,
   MPS_AUTONOMOUS_AUDIT_OFFER,
 ])
+
+/**
+ * The offers Production discovery may present as callable payment contracts.
+ *
+ * Everything else may be *described* -- a withheld offer that vanishes between
+ * crawls reads as an unstable vendor -- but must not be handed to an
+ * autonomous agent as something it can pay for today.
+ */
+export function payableOffers(): readonly X402Offer[] {
+  return X402_OFFERS.filter((offer) => offer.status === 'available')
+}
 
 export function offerById(id: string): X402Offer | undefined {
   return X402_OFFERS.find((offer) => offer.id === id)
