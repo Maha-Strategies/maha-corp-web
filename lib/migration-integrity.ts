@@ -14,7 +14,13 @@ export type ApprovedMigrationAmendment = {
   evidence: string
 }
 
-export type MigrationFile = { name: string; sql: string }
+export type ApprovedHistoricalMigration = {
+  name: string
+  sha256: string
+  evidence: string
+}
+
+export type MigrationFile = { name: string; sql: string; sha256?: string }
 
 export type MigrationFinding = { code: string; name?: string; message: string }
 
@@ -117,7 +123,12 @@ export function checkAppendOnly(
  * A new migration whose timestamp sorts before one already merged would apply
  * out of order on any environment that is already ahead of it.
  */
-export function checkOrderAgainstBase(added: readonly string[], base: readonly string[]): MigrationFinding[] {
+export function checkOrderAgainstBase(
+  added: readonly string[],
+  base: readonly string[],
+  addedFiles: readonly MigrationFile[] = [],
+  approvedHistorical: readonly ApprovedHistoricalMigration[] = [],
+): MigrationFinding[] {
   const baseStamps = base.map(migrationTimestamp).filter((stamp): stamp is string => stamp !== null)
   if (baseStamps.length === 0) return []
   const highest = baseStamps.reduce((max, stamp) => (stamp > max ? stamp : max))
@@ -125,6 +136,13 @@ export function checkOrderAgainstBase(added: readonly string[], base: readonly s
   for (const name of added) {
     const stamp = migrationTimestamp(name)
     if (!stamp || stamp > highest) continue
+    const file = addedFiles.find((candidate) => candidate.name === name)
+    const approved = approvedHistorical.some((candidate) => (
+      candidate.name === name
+      && candidate.sha256 === file?.sha256
+      && /^https:\/\//.test(candidate.evidence)
+    ))
+    if (approved) continue
     findings.push({
       code: 'out_of_order', name,
       message: `Timestamp ${stamp} is not after ${highest}, the newest migration already on the base branch. Environments past that point would never apply this file.`,
@@ -159,13 +177,14 @@ export function auditMigrations(input: {
   baseNames?: readonly string[]
   addedFiles?: readonly MigrationFile[]
   approvedAmendments?: readonly ApprovedMigrationAmendment[]
+  approvedHistorical?: readonly ApprovedHistoricalMigration[]
 }): MigrationAudit {
   const comparedToBase = input.changes !== undefined && input.baseNames !== undefined
   const added = (input.changes ?? []).filter((change) => change.status === 'added').map((change) => change.name)
   const findings = [
     ...checkNaming(input.names),
     ...checkAppendOnly(input.changes ?? [], input.approvedAmendments ?? []),
-    ...(comparedToBase ? checkOrderAgainstBase(added, input.baseNames ?? []) : []),
+    ...(comparedToBase ? checkOrderAgainstBase(added, input.baseNames ?? [], input.addedFiles ?? [], input.approvedHistorical ?? []) : []),
     ...checkDestructive(input.addedFiles ?? []),
   ]
   return { ok: findings.length === 0, findings, checked: input.names.length, comparedToBase }
