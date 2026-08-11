@@ -259,9 +259,22 @@ export async function getX402Readiness(options: {
         if (!(await probe(table))) missing.push(table)
       }
       const presentFunctions = functionProbe ? await functionProbe(required.functions) : null
+      // A probe that could not run and a function that is genuinely absent are
+      // opposite diagnoses -- "the introspection helper is missing" versus
+      // "the migration did not apply" -- and collapsing them cost real time:
+      // with a single required function the two produce an identical message,
+      // so an unrunnable probe reads as a missing migration and sends you to
+      // re-apply something that was already there.
       if (!presentFunctions) {
-        missing.push(...required.functions.map((name) => `${name}()`))
-      } else {
+        checks.push({
+          id: `x402.offer.${offerId}.storage`,
+          state: 'fail',
+          summary: `${offerId} storage cannot be verified: the introspection probe did not run.`,
+          detail: 'x402_readiness_functions() is unavailable, so no statement can be made about the other objects. Apply the migration that defines it before reading this check as a missing migration.',
+        })
+        continue
+      }
+      {
         for (const name of required.functions) {
           if (!presentFunctions.has(name)) missing.push(`${name}()`)
         }
