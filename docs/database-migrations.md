@@ -46,14 +46,22 @@ an old migration fails immediately.
 
 ## Dispatching the workflow
 
-Inputs are `mode` (`dry-run` or `apply`), a `reason` of at least twelve
-characters, `confirmation` (required only for `apply`, and it must read exactly
-`APPLY PRODUCTION MIGRATIONS`), and `check_schema_drift`, which defaults on.
+Inputs are `mode` (`dry-run`, one-time `baseline`, or `apply`), a `reason` of at
+least twelve characters, `confirmation`, and `check_schema_drift`, which
+defaults on. `baseline` requires `RECORD PRODUCTION BASELINE`; `apply` requires
+`APPLY PRODUCTION MIGRATIONS`.
 
 A `dry-run` links the project, records the migration history, captures a
 schema-only snapshot, checks for drift, and reports what `db push` would apply.
 It changes nothing. Read `migration-list-before.txt` and `pending.txt` in the
 uploaded evidence and confirm the pending set is exactly what you expect.
+
+`baseline` is a narrowly bounded history repair for
+`20260809000250_maha_os_unified_schema_baseline.sql`. The Maha OS objects in
+that file existed in Production before this migration tree governed the unified
+database, so the workflow records that exact version as applied without
+executing its SQL. It then reports the remaining pending migrations and drift.
+Do not reuse this mode for ordinary schema changes.
 
 An `apply` repeats all of that, pushes, records the resulting history, and then
 runs the same readiness verification the release-health and rollback workflows

@@ -39,3 +39,10 @@ or unrelated project cannot silently accept a Production migration.
 An offer is not promoted because its tables exist. Promotion additionally
 requires readiness, durable recovery where applicable, and a bounded paid
 end-to-end settlement against the deployed contract.
+
+The pre-existing Maha OS schema is represented by the reproducible
+`20260809000250` baseline. Production records that version as already applied;
+`20260809000251` performs the actual least-privilege reconciliation, including
+restricting the user-deletion function and token/session tables to
+`service_role`. This makes a clean database reproducible without executing
+duplicate `CREATE` statements against live Maha OS data.

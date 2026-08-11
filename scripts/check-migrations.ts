@@ -20,6 +20,25 @@ const APPROVED_UNAPPLIED_AMENDMENTS = [{
   evidence: 'https://github.com/Maha-Strategies/maha-corp-web/actions/runs/31473349855',
 }] as const
 
+// Run 31474467637 proved that these Maha OS objects already exist in the
+// intentionally unified Production project but are absent from the migration
+// tree. The baseline must sort before the nine still-pending migrations; the
+// following reconciliation must run immediately after it. Both exceptions are
+// bounded to exact reviewed digests. Production records only the baseline as
+// applied; the reconciliation executes normally.
+const APPROVED_HISTORICAL_MIGRATIONS = [
+  {
+    name: '20260809000250_maha_os_unified_schema_baseline.sql',
+    sha256: '86565aa0c98c8542518029e7bf810290b04544b576739c498139eddca2492fb3',
+    evidence: 'https://github.com/Maha-Strategies/maha-corp-web/actions/runs/31474467637',
+  },
+  {
+    name: '20260809000251_harden_unified_maha_os_access.sql',
+    sha256: '8ba6558289627b75b209129abc5c970cc9f4aa9f76b3df50100df6d743e159c4',
+    evidence: 'https://github.com/Maha-Strategies/maha-corp-web/actions/runs/31474467637',
+  },
+] as const
+
 function git(...args: string[]): string | null {
   try {
     return execFileSync('git', args, { encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'] }).trim()
@@ -106,7 +125,8 @@ for (const change of changes ?? []) {
   if (change.status === 'deleted') continue
   // Every migration is re-scanned when there is no base to diff against.
   if (change.status !== 'added') continue
-  addedFiles.push({ name: change.name, sql: await readFile(path.join(DIR, change.name), 'utf8') })
+  const sql = await readFile(path.join(DIR, change.name), 'utf8')
+  addedFiles.push({ name: change.name, sql, sha256: sha256(sql) })
 }
 if (!changes) {
   for (const name of names) addedFiles.push({ name, sql: await readFile(path.join(DIR, name), 'utf8') })
@@ -118,6 +138,7 @@ const audit = auditMigrations({
   baseNames: baseNames ?? undefined,
   addedFiles,
   approvedAmendments: APPROVED_UNAPPLIED_AMENDMENTS,
+  approvedHistorical: APPROVED_HISTORICAL_MIGRATIONS,
 })
 
 for (const finding of audit.findings) console.error(`${finding.name ? `${finding.name}: ` : ''}${finding.message} [${finding.code}]`)
