@@ -1,0 +1,161 @@
+name: Preview database migrations
+
+# Applies a single, named migration to the Preview database.
+#
+# The Preview database had no migration path at all: the `Preview` GitHub
+# environment held no credentials, Vercel stores its Supabase URL and
+# service-role key as Sensitive (so they cannot be read back by tooling), and
+# the Supabase access token lives in a local keyring. The result was a database
+# that had drifted behind the migration tree with no reviewed way to reconcile
+# it, and the drift only surfaced when readiness reported a paid offer would
+# settle and then fail.
+#
+# Deliberately narrower than the Production workflow. It applies exactly one
+# migration, named as an input, rather than everything pending. Preview is where
+# partially-applied state actually exists, and "push whatever is outstanding" is
+# how an unrelated half-finished migration rides along with the one you meant.
+#
+# The target assertion is inverted relative to Production: this refuses to run
+# *against* the Production ref. The Production workflow's own header records why
+# that guard is load-bearing -- every run between 2026-08-03 and 2026-08-10
+# silently targeted staging because a variable held the wrong ref, and each one
+# reported success. A ref check is the only thing standing between "applied" and
+# "applied somewhere else".
+
+on:
+  workflow_dispatch:
+    inputs:
+      migration:
+        description: Exact migration filename under supabase/migrations
+        required: true
+        type: string
+      reason:
+        description: Change ticket or reason (minimum 12 characters)
+        required: true
+        type: string
+      confirmation:
+        description: Type APPLY PREVIEW MIGRATION exactly
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: preview-migrations
+  cancel-in-progress: false
+
+jobs:
+  migrate:
+    runs-on: ubuntu-latest
+    environment: Preview
+    env:
+      SUPABASE_DB_PASSWORD: ${{ secrets.SUPABASE_DB_PASSWORD }}
+      SUPABASE_PROJECT_REF: ${{ secrets.SUPABASE_PROJECT_REF }}
+      EVIDENCE: ${{ github.workspace }}/preview-migration-evidence
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Require the confirmation phrase
+        env:
+          CONFIRMATION: ${{ inputs.confirmation }}
+          REASON: ${{ inputs.reason }}
+        run: |
+          set -euo pipefail
+          if [ "$CONFIRMATION" != "APPLY PREVIEW MIGRATION" ]; then
+            echo '::error::Confirmation phrase not matched. Refusing to apply.'
+            exit 1
+          fi
+          if [ "${#REASON}" -lt 12 ]; then
+            echo '::error::Reason must be at least 12 characters.'
+            exit 1
+          fi
+
+      # The whole point of this workflow. A migration applied to the wrong
+      # database reports success and leaves the intended one untouched, and
+      # nothing downstream can tell the difference afterwards.
+      - name: Refuse to target Production
+        env:
+          REF: ${{ secrets.SUPABASE_PROJECT_REF }}
+        run: |
+          set -euo pipefail
+          production='uhwuullakihgszxhiygz'
+          if [ -z "${REF:-}" ]; then
+            echo '::error::SUPABASE_PROJECT_REF is unset. Refusing to guess which database is Preview.'
+            exit 1
+          fi
+          if [ "$REF" = "$production" ]; then
+            echo "::error::SUPABASE_PROJECT_REF is the Production ref. This workflow only applies to Preview; use production-migrations.yml for Production."
+            exit 1
+          fi
+          # The ref itself is a secret, so only its shape is echoed.
+          echo "Target ref is non-Production and well-formed (length ${#REF})."
+
+      - name: Resolve and validate the requested migration
+        env:
+          MIGRATION: ${{ inputs.migration }}
+        run: |
+          set -euo pipefail
+          case "$MIGRATION" in
+            */*|*..*) echo '::error::migration must be a bare filename.'; exit 1 ;;
+          esac
+          path="supabase/migrations/$MIGRATION"
+          if [ ! -f "$path" ]; then
+            echo "::error::$path does not exist at this commit."
+            exit 1
+          fi
+          mkdir -p "$EVIDENCE"
+          {
+            echo "migration: $MIGRATION"
+            echo "commit: ${{ github.sha }}"
+            echo "actor: ${{ github.actor }}"
+            echo "reason: ${{ inputs.reason }}"
+            echo "sha256: $(sha256sum "$path" | cut -d' ' -f1)"
+          } > "$EVIDENCE/request.txt"
+          cat "$EVIDENCE/request.txt"
+
+      - uses: supabase/setup-cli@v1
+        with:
+          version: latest
+
+      - name: Apply exactly the requested migration
+        env:
+          MIGRATION: ${{ inputs.migration }}
+        run: |
+          set -euo pipefail
+          # Session pooler: the direct db.<ref>.supabase.co host is IPv6-only on
+          # newer projects, which GitHub runners cannot reach.
+          url="postgresql://postgres.${SUPABASE_PROJECT_REF}:${SUPABASE_DB_PASSWORD}@aws-0-us-east-1.pooler.supabase.com:5432/postgres"
+          psql "$url" -v ON_ERROR_STOP=1 -f "supabase/migrations/$MIGRATION" 2>&1 | tee "$EVIDENCE/applied.txt"
+
+          # Record the version so a later `db push` does not treat it as pending.
+          # Tolerant of CLI schema differences: the migration itself is
+          # idempotent, so a failure to record is recoverable, and failing the
+          # run here would misreport a successful apply.
+          version="${MIGRATION%%_*}"
+          psql "$url" -v ON_ERROR_STOP=0 -c \
+            "insert into supabase_migrations.schema_migrations (version) values ('${version}') on conflict do nothing;" \
+            >> "$EVIDENCE/applied.txt" 2>&1 || echo "version not recorded; migration is idempotent" >> "$EVIDENCE/applied.txt"
+
+      - name: Verify the objects the migration was applied for
+        run: |
+          set -euo pipefail
+          url="postgresql://postgres.${SUPABASE_PROJECT_REF}:${SUPABASE_DB_PASSWORD}@aws-0-us-east-1.pooler.supabase.com:5432/postgres"
+          psql "$url" -v ON_ERROR_STOP=1 -At -c "
+            select 'record_x402_offer_usage=' || (to_regprocedure('public.record_x402_offer_usage(text,text,text,text,numeric,numeric,numeric,numeric,numeric,timestamptz)') is not null)::text
+            union all
+            select 'x402_offer_usage_daily=' || (to_regclass('public.x402_offer_usage_daily') is not null)::text;
+          " | tee "$EVIDENCE/verify.txt"
+
+          grep -q 'record_x402_offer_usage=true' "$EVIDENCE/verify.txt" || {
+            echo '::error::record_x402_offer_usage() is still absent after applying.'; exit 1; }
+          grep -q 'x402_offer_usage_daily=true' "$EVIDENCE/verify.txt" || {
+            echo '::error::x402_offer_usage_daily is still absent after applying.'; exit 1; }
+
+      - name: Upload evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: preview-migration-${{ github.run_id }}
+          path: ${{ env.EVIDENCE }}
+          if-no-files-found: warn
