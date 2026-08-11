@@ -76,6 +76,26 @@ jobs:
           echo "SUPABASE_DB_NAME=$(jq -r '.db_name' <<<"$pooler")" >> "$GITHUB_ENV"
           echo "Resolved the Production pooler connection from authenticated project metadata."
 
+      - name: Resolve the compression offer contract
+        run: |
+          set -euo pipefail
+          case "$OFFER_ID" in
+            context-compression)
+              resource='https://www.mahastrategies.com/api/v1/compress'
+              amount='1000'
+              ;;
+            deep-context-evaluation)
+              resource='https://www.mahastrategies.com/api/v1/compress/evaluate'
+              amount='10000'
+              ;;
+            *)
+              echo "::error::This zero-retention verifier does not support offer '${OFFER_ID}'."
+              exit 1
+              ;;
+          esac
+          echo "EXPECTED_RESOURCE=$resource" >> "$GITHUB_ENV"
+          echo "EXPECTED_AMOUNT=$amount" >> "$GITHUB_ENV"
+
       - name: Telemetry recorded for the offer
         run: |
           set -euo pipefail
@@ -110,17 +130,35 @@ jobs:
           export PGPASSWORD="$SUPABASE_DB_PASSWORD"
           dsn="host=${SUPABASE_DB_HOST} port=${SUPABASE_DB_PORT} user=${SUPABASE_DB_USER} dbname=${SUPABASE_DB_NAME} sslmode=require"
           psql "$dsn" -v ON_ERROR_STOP=1 -P pager=off -c "
-            select resource, payer, amount, transaction_id, chain_status, settled_at
-              from public.x402_settlements
-             where settled_at >= now() - interval '2 days'
-             order by settled_at desc
+            select p.resource, p.payer, p.amount_paid, s.transaction_id,
+                   s.chain_status, s.chain_amount, s.settled_at
+              from public.x402_settlements s
+              join public.x402_payments p on p.payment_id = s.payment_id
+             where p.resource = '${EXPECTED_RESOURCE}'
+               and s.settled_at >= now() - interval '2 days'
+             order by s.settled_at desc
              limit 10;
           "
+          confirmed=$(psql "$dsn" -At -v ON_ERROR_STOP=1 -c "
+            select count(*)
+              from public.x402_settlements s
+              join public.x402_payments p on p.payment_id = s.payment_id
+             where p.resource = '${EXPECTED_RESOURCE}'
+               and p.amount_paid = ${EXPECTED_AMOUNT}
+               and s.chain_status = 'confirmed'
+               and s.chain_amount = ${EXPECTED_AMOUNT}
+               and s.settled_at >= now() - interval '2 days';
+          ")
+          echo "exact confirmed settlements recorded: ${confirmed}"
+          if [ "${confirmed:-0}" -lt 1 ]; then
+            echo '::error::No recent settlement matches the offer resource, amount, and independently confirmed chain amount.'
+            exit 1
+          fi
 
-      # Structural rather than sampled. Showing that today's rows happen to hold
-      # no document text proves nothing about tomorrow's; showing the schema has
-      # nowhere to put it does.
-      - name: No x402 table can retain caller request content
+      # Structural rather than sampled. Scope this claim to the tables the two
+      # compression offers write. x402_mps_audits is deliberately excluded: its
+      # separate public contract retains short claim excerpts by design.
+      - name: Compression payment and telemetry tables cannot retain request content
         run: |
           set -euo pipefail
           export PGPASSWORD="$SUPABASE_DB_PASSWORD"
@@ -130,7 +168,7 @@ jobs:
             select table_name, column_name, data_type
               from information_schema.columns
              where table_schema = 'public'
-               and table_name like 'x402\_%'
+               and table_name in ('x402_offer_usage_daily', 'x402_payments', 'x402_settlements')
                and data_type in ('text', 'character varying', 'json', 'jsonb')
              order by table_name, column_name;
           "
@@ -140,7 +178,7 @@ jobs:
             select table_name || '.' || column_name
               from information_schema.columns
              where table_schema = 'public'
-               and table_name like 'x402\_%'
+               and table_name in ('x402_offer_usage_daily', 'x402_payments', 'x402_settlements')
                and (column_name ~ '(document|passage|excerpt|source_text|body|content|prompt|evidence_text|context)')
              order by 1;
           ")
@@ -148,4 +186,4 @@ jobs:
             echo "::error::Columns capable of retaining caller content exist: ${offenders}"
             exit 1
           fi
-          echo 'No column in the x402 schema is shaped to hold caller request content.'
+          echo 'No compression payment or telemetry column is shaped to hold caller request content.'
