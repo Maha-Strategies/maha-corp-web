@@ -32,6 +32,14 @@ test('already-committed migrations may not be edited, renamed, or deleted', () =
   )
 })
 
+test('an unapplied broken migration amendment requires exact before and after digests plus evidence', () => {
+  const change = { name: '20260810000600_broken.sql', status: 'modified' as const, baseSha256: 'old', currentSha256: 'fixed' }
+  const amendment = { name: change.name, baseSha256: 'old', currentSha256: 'fixed', evidence: 'https://github.com/example/actions/runs/1' }
+  assert.deepEqual(checkAppendOnly([change], [amendment]), [])
+  assert.deepEqual(codes(checkAppendOnly([{ ...change, currentSha256: 'changed-again' }], [amendment])), ['migration_modified'])
+  assert.deepEqual(codes(checkAppendOnly([change], [{ ...amendment, evidence: 'not-a-url' }])), ['migration_modified'])
+})
+
 test('a new migration must sort after everything already on the base branch', () => {
   const base = ['20260716000000_first.sql', '20260730000100_latest.sql']
   assert.deepEqual(checkOrderAgainstBase(['20260731000000_next.sql'], base), [])
