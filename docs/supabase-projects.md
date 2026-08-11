@@ -8,14 +8,12 @@ unverified variable.
 | Ref | Name should be | Role | Contains |
 |---|---|---|---|
 | `uhwuullakihgszxhiygz` | `maha-production-shared` | **Production** | maha OS *and* AI infrastructure, sharing one database |
-| `wukyzcqxzkbwuledzxlx` | `maha-ai-staging` | **Staging** | AI infrastructure only, built purely from `supabase/migrations` |
+| `wukyzcqxzkbwuledzxlx` | `maha-ai-staging` | **Staging** | isolated non-Production data with the reproducible unified platform schema |
 | `cupmukvslgflahdymzde` | `agentic-publisher` | unrelated | not part of this repository |
 
-`maha-production-shared` is named for what it is rather than what it should be.
-Once the AI infrastructure moves to its own project it becomes
-`maha-os-production`, and the new one is `maha-ai-production`. Naming it that
-way today would describe an intention rather than a fact, which is the class of
-mistake this file exists to prevent.
+`maha-production-shared` is the intentional Maha platform boundary. Maha OS and
+the infrastructure products share schema governance while retaining separate
+table permissions, ledgers, application credentials and environment data.
 
 ## What went wrong, so it is not repeated
 
@@ -54,20 +52,16 @@ A variable checked against another variable proves nothing. The literal is
 version-controlled and changing it requires review; the variable is only what
 `supabase link` consumes.
 
-## Separation
+## Unified schema baseline
 
-The AI infrastructure and maha OS share `uhwuullakihgszxhiygz` today. The
-dividing line is exact and needs no judgement: a table is AI infrastructure if
-and only if `supabase/migrations` declares it.
+The schema tree now declares both product families. Migration `20260809000250`
+captures the pre-existing Maha OS tables, functions, policies and event trigger
+without customer data. Production records that baseline version as applied
+because those objects already exist; clean and staging databases execute it.
 
-- 90 tables declared by the tree — the AI infrastructure
-- 15 tables in Production that the tree does not declare — maha OS and legacy:
-  `fireteams`, `fireteam_messages`, `fireteam_waitlist`, `vanguard_links`,
-  `ios_vanguard_waitlist`, `gateway_sessions`, `knowledge_network_gsc_*`,
-  `nodes`, `ledgers`, `nodal_feedback_ledger`, `profiles`, `scan_ledger`,
-  `ugc_reports`, `maha_dispatch_subscribers`
-
-There is no Supabase Auth coupling: no migration references `auth.users`, the
-application uses no auth client, and `profiles` is referenced by no code. The
-AI infrastructure reaches `public` with a service-role key and nothing else,
-which is why a separation moves tables and not identities.
+Migration `20260809000251` is deliberately separate and executes everywhere.
+It removes an obsolete billing function, restores the stricter content-source
+gate, restricts session and refresh-token tables, and makes the destructive
+Maha OS user-purge function callable only by `service_role`. Maha OS retains
+its required `auth.users` relationships; infrastructure tables remain isolated
+by their own grants and service credentials.
