@@ -178,6 +178,34 @@ function parseEncodedJson(header: string | null): unknown {
   }
 }
 
+/**
+ * Carries the operator's transport headers onto the crawler probe.
+ *
+ * The declared example describes the *payload* a crawler should send; it cannot
+ * describe how to reach a gated deployment. Without this, a Preview behind
+ * platform authentication answers the crawler probe with 401 and the doctor
+ * reports `crawler_status` as a product defect, when the same request with the
+ * operator's bypass header returns a correct 402. That turns the one gate that
+ * proves an endpoint is crawlable into a check that can never pass off
+ * production, so it gets waived by habit.
+ *
+ * Only headers the declaration did not set are added, so an operator can reach
+ * the deployment without being able to rewrite the example being tested --
+ * which is the thing under test.
+ */
+function withTransportHeaders<T extends { headers?: Record<string, string> } | null>(
+  crawlerRequest: T,
+  operatorHeaders: Record<string, string> | undefined,
+): T {
+  if (!crawlerRequest || !operatorHeaders) return crawlerRequest
+  const headers = { ...(crawlerRequest.headers ?? {}) }
+  const declared = new Set(Object.keys(headers).map((key) => key.toLowerCase()))
+  for (const [key, value] of Object.entries(operatorHeaders)) {
+    if (!declared.has(key.toLowerCase())) headers[key] = value
+  }
+  return { ...crawlerRequest, headers }
+}
+
 function extensionInput(challenge: PaymentChallenge): Required<Pick<DoctorRequest, 'method'>> & Omit<DoctorRequest, 'method'> | null {
   const bazaar = record(challenge.extensions)?.bazaar
   const info = record(record(bazaar)?.info)
@@ -359,7 +387,7 @@ export async function diagnoseX402Endpoint(options: DoctorOptions): Promise<Doct
       }
     }
 
-    const crawlerRequest = extensionInput(challenge)
+    const crawlerRequest = withTransportHeaders(extensionInput(challenge), options.request?.headers)
     if (!crawlerRequest) {
       add(findings, 'x402.bazaar.crawler_input', 'error', 'The Bazaar extension does not contain a reproducible HTTP input example.')
     } else {
