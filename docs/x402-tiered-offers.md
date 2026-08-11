@@ -144,6 +144,15 @@ and discovery consistency. 503 on any failure, so it can gate a promotion.
 It reports state, never configuration: no secret, credential, payee, asset
 address or facilitator host appears in the output, and a test asserts that.
 
+`withheld` enabled anywhere is a failure. `preview` enabled is a warning —
+that is the intended state outside Production, and failing on it would train
+operators to ignore the one signal that matters.
+
+**No environment currently enables either new offer.** The branch-scoped
+Preview variable that briefly enabled Deep Context has been removed; earlier
+Preview deployments built while it existed still carry it in their frozen
+environment and should be deleted or left to expire rather than promoted.
+
 ## Remaining infrastructure gates
 
 These are external and none of them is worked around in code.
