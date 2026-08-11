@@ -41,6 +41,20 @@ const facilitator = { verify: async () => ({ ok: true as const, payer: '0xAgent'
 const ledger = () => ({ rpc: async () => ({ data: 'claimed', error: null }) }) as never
 const acquire = async () => ({ admitted: true, active: 1, token: 'slot-token' })
 
+/** A store that always grants the claim, for tests about other things. */
+const admissionLedger = (decision = 'proceed', transaction: string | null = null) => ({
+  rpc: async (name: string) => name === 'reserve_x402_admission'
+    ? { data: [{ decision, payment_transaction: transaction }], error: null }
+    : { data: null, error: null },
+})
+
+/** Headers a payer must send for an offer that creates a job. */
+const IDEMPOTENT = {
+  'x-maha-idempotency-key': 'req_behaviour_0001',
+  'x-maha-input-hash': `sha256:${'a'.repeat(64)}`,
+}
+
+
 /**
  * A fetch backed by the real gateway, so the challenge a client answers is the
  * one production would send.
@@ -54,7 +68,7 @@ function serverBackedFetch(capture: { header?: string }) {
     const signature = headers.get(PAYMENT_SIGNATURE_HEADER)
     if (signature) capture.header = signature
 
-    const outcome = await resolveX402(request, { config: config(), facilitator, ledger: ledger(), acquire })
+    const outcome = await resolveX402(request, { config: config(), facilitator, ledger: ledger(), acquire, admissionLedger: admissionLedger() })
     if (outcome.kind === 'challenge') {
       return new Response(JSON.stringify(outcome.body), { status: 402, headers: { [PAYMENT_REQUIRED_HEADER]: outcome.header } })
     }
@@ -77,7 +91,10 @@ async function headerFromRealClient(path: string): Promise<string> {
 
   const response = await paidFetch(`${ORIGIN}${path}`, {
     method: 'POST',
-    headers: { 'content-type': 'application/json' },
+    // Sent for every offer. Only the job-creating ones require them, and a
+    // header an offer ignores costs nothing -- but it must be counted in the
+    // size budget, because a real payer of the MPS offer sends it.
+    headers: { 'content-type': 'application/json', ...IDEMPOTENT },
     body: '{}',
   })
   assert.equal(response.status, 201, `${path} must be admitted after paying`)

@@ -2,6 +2,7 @@ import Anthropic from '@anthropic-ai/sdk'
 
 import { createAgentInquiryLedger } from '@/lib/agent-inquiry-ledger'
 import { MpsAuditError, auditInputHash, runMpsAudit, validateAuditPassage } from '@/lib/mps-audit-engine'
+import { IDEMPOTENCY_KEY_HEADER, INPUT_HASH_HEADER } from '@/lib/x402/admission'
 import { parseMpsAuditJobRequest, serializableMpsAuditResult } from '@/lib/mps-audit-jobs'
 import { MPS_AUTONOMOUS_AUDIT_OFFER } from '@/lib/x402/offers'
 import { discoverySourceFrom, recordOfferUsage } from '@/lib/x402/offer-telemetry'
@@ -11,7 +12,7 @@ import {
   auditJobResponse,
   auditRetrievalPath,
   createAuditJobId,
-  createRetrievalToken,
+  deriveRetrievalToken,
   retrievalTokenHash,
   type StoredAuditJob,
 } from '@/lib/x402/mps-audit-job'
@@ -71,6 +72,35 @@ const handler = async (request: Request): Promise<Response> => {
     return json({ error: { code: 'payment_required', message: 'This endpoint is payable with x402 on Base Mainnet.' } }, 402)
   }
 
+  // The gateway claimed idempotency against a *declared* input hash before it
+  // settled, because the payment is decided before any body is read. This is
+  // where that declaration is made honest: the job exists for the hash that was
+  // paid for, and a body that does not hash to it is refused rather than
+  // quietly audited under someone else's claim.
+  const declaredHash = (request.headers.get(INPUT_HASH_HEADER) ?? '').trim().toLowerCase()
+  if (declaredHash && declaredHash !== input.inputHash) {
+    return json({
+      error: {
+        code: 'input_hash_mismatch',
+        message: 'The request body does not hash to the x-maha-input-hash this payment was claimed against.',
+        detail: 'The idempotency claim is taken before the body is read, so the declared hash is what the payment bought. Send the passage that hashes to it, or use a new idempotency key for different input.',
+        declaredInputHash: declaredHash,
+        actualInputHash: input.inputHash,
+      },
+    }, 409)
+  }
+  // The key and the request id are one identity. Allowing them to differ would
+  // give a payer two ways to name the same job and no way to reconcile them.
+  const declaredKey = (request.headers.get(IDEMPOTENCY_KEY_HEADER) ?? '').trim()
+  if (declaredKey && declaredKey !== input.clientRequestId) {
+    return json({
+      error: {
+        code: 'idempotency_key_mismatch',
+        message: 'x-maha-idempotency-key must equal clientRequestId.',
+      },
+    }, 409)
+  }
+
   const ledger = createAgentInquiryLedger()
   if (!ledger) {
     // The payment settled but nothing can be recorded. Refusing before the
@@ -99,14 +129,33 @@ const handler = async (request: Request): Promise<Response> => {
     if (job.input_hash !== input.inputHash) {
       return json({ error: { code: 'idempotency_conflict', message: 'clientRequestId was already used with different source text.' } }, 409)
     }
+    // The credential is re-issued here, and that is the recovery path. A payer
+    // whose original response was lost to a timeout or a crash asks again with
+    // the same clientRequestId: the admission claim already settled, so this
+    // costs nothing, and the derived token is handed back. Recovery therefore
+    // never depends on a secret that existed only in a response that never
+    // arrived.
     return json({
-      ...auditJobResponse(job, { idempotentReplay: true }),
+      ...auditJobResponse(job, { idempotentReplay: true, retrievalToken: deriveRetrievalToken(job.public_id) ?? undefined }),
       retrievalPath: auditRetrievalPath(job.public_id),
     }, job.status === 'processing' ? 202 : 200)
   }
 
   const auditId = createAuditJobId()
-  const retrievalToken = createRetrievalToken()
+  // Derived, not remembered. A crash between the insert below and this
+  // response no longer destroys the only copy of the credential: it can be
+  // recomputed on any instance, and the free idempotent replay re-issues it.
+  const retrievalToken = deriveRetrievalToken(auditId)
+  if (!retrievalToken) {
+    console.error('X402_RETRIEVAL_TOKEN_SECRET is unset; a paid audit would not be recoverable')
+    return json({
+      error: {
+        code: 'retrieval_credential_unavailable',
+        message: 'This offer is not fully configured and no audit was started. No model call was made.',
+        paymentTransaction,
+      },
+    }, 503)
+  }
 
   // ---- The job is committed before the model is called. ----
   const { error: createError } = await ledger.from('x402_mps_audits').insert({

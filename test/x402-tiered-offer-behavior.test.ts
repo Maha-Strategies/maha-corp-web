@@ -68,6 +68,20 @@ const facilitator = (): PaymentFacilitator => ({
 const ledger = () => ({ rpc: async () => ({ data: 'claimed', error: null }) }) as never
 const acquire = async () => ({ admitted: true, active: 1, token: 'slot-token' })
 
+/** A store that always grants the claim, for tests about other things. */
+const admissionLedger = (decision = 'proceed', transaction: string | null = null) => ({
+  rpc: async (name: string) => name === 'reserve_x402_admission'
+    ? { data: [{ decision, payment_transaction: transaction }], error: null }
+    : { data: null, error: null },
+})
+
+/** Headers a payer must send for an offer that creates a job. */
+const IDEMPOTENT = {
+  'x-maha-idempotency-key': 'req_behaviour_0001',
+  'x-maha-input-hash': `sha256:${'a'.repeat(64)}`,
+}
+
+
 // --- 7. Unpaid but valid requests are challenged, never 400 ------------------
 
 test('an unpaid but otherwise valid request is answered 402, not 400', async () => {
@@ -108,8 +122,8 @@ test('an empty body is still a 402 rather than a validation error', async () => 
 test('a paid request is admitted with no API key and carries its settlement', async () => {
   for (const path of ['/api/v1/compress', '/api/v1/compress/evaluate', '/api/v1/mps/audit']) {
     const outcome = await resolveX402(
-      post(path, { 'PAYMENT-SIGNATURE': await signatureFor(path) }),
-      { config: config(), facilitator: facilitator(), ledger: ledger(), acquire },
+      post(path, { 'PAYMENT-SIGNATURE': await signatureFor(path), ...IDEMPOTENT }),
+      { config: config(), facilitator: facilitator(), ledger: ledger(), acquire, admissionLedger: admissionLedger() },
     )
     assert.equal(outcome.kind, 'paid', `${path} must admit a settled payment`)
     if (outcome.kind !== 'paid') continue
@@ -237,8 +251,8 @@ test('a partial extension echo cannot drop the terms it dislikes', async () => {
 test('a replayed payment is refused rather than served twice', async () => {
   const duplicateLedger = { rpc: async () => ({ data: 'duplicate', error: null }) } as never
   const outcome = await resolveX402(
-    post('/api/v1/mps/audit', { 'PAYMENT-SIGNATURE': await signatureFor('/api/v1/mps/audit') }),
-    { config: config(), facilitator: facilitator(), ledger: duplicateLedger, acquire },
+    post('/api/v1/mps/audit', { 'PAYMENT-SIGNATURE': await signatureFor('/api/v1/mps/audit'), ...IDEMPOTENT }),
+    { config: config(), facilitator: facilitator(), ledger: duplicateLedger, acquire, admissionLedger: admissionLedger() },
   )
   assert.equal(outcome.kind, 'refused')
   if (outcome.kind !== 'refused') return

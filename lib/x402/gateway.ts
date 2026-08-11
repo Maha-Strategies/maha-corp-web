@@ -20,6 +20,8 @@ import { createReplayGuard } from './replay-guard.ts'
 import { createAgentInquiryLedger } from '../agent-inquiry-ledger.ts'
 import { SLOT_RESOURCE_HEADER, SLOT_TOKEN_HEADER } from './slot.ts'
 import { discoveryExtensionsFor, resourceInfoFor } from './discovery.ts'
+import { createAdmissionGuard, readAdmissionClaim } from './admission.ts'
+import { offerById } from './offers.ts'
 
 // Decides what happens to a request that carries no API key: a challenge, a
 // refusal, or admission as a paid caller. Sits between proxy.ts and the
@@ -29,9 +31,11 @@ import { discoveryExtensionsFor, resourceInfoFor } from './discovery.ts'
 export type X402Outcome =
   | { kind: 'not_applicable' }
   | { kind: 'challenge'; status: 402; header: string; body: unknown }
-  | { kind: 'refused'; status: 402 | 409 | 429 | 502 | 503; code: string; message: string; retryAfterSeconds?: number }
+  | { kind: 'refused'; status: 400 | 402 | 409 | 429 | 502 | 503; code: string; message: string; retryAfterSeconds?: number }
   | {
       kind: 'paid'
+      /** True when this settled earlier and was not charged again. */
+      replayed?: boolean
       header: string
       transaction: string
       payer: string
@@ -47,6 +51,8 @@ type Dependencies = {
   ledger?: Parameters<typeof createReplayGuard>[0] | null
   acquire?: typeof acquireSlot
   confirmOnChain?: SettlementConfirmer
+  /** Test seam for the pre-settlement idempotency store. */
+  admissionLedger?: Parameters<typeof createAdmissionGuard>[1]
 }
 
 /**
@@ -124,12 +130,36 @@ export async function resolveX402(request: Request, dependencies: Dependencies =
     cdpCredentials: config.cdpCredentials,
   })
 
+  // Offers that create a job claim idempotency before settlement. Without this
+  // a payer whose request timed out retries with a newly signed authorization
+  // and pays twice, and the route -- which only ever runs after the money has
+  // moved -- reports `idempotentReplay: true` beside a second charge.
+  const offer = offerById(resource.offerId)
+  let admissionGuard: Parameters<typeof acceptPayment>[0]['admissionGuard']
+  if (offer?.requiresIdempotency) {
+    const claim = readAdmissionClaim(request.headers, offer, resourceUrl)
+    if (!claim.ok) {
+      return {
+        kind: 'refused',
+        status: 400,
+        code: claim.reason,
+        message: `${offer.id} requires an ${'x-maha-idempotency-key'} header and an ${'x-maha-input-hash'} header (sha256:<64 hex> of the exact request body) so a retry cannot be charged twice. Neither is read from the body, because the charge is decided before the body is seen.`,
+      }
+    }
+    const guard = createAdmissionGuard(claim.claim, dependencies.admissionLedger)
+    if (!guard) {
+      return { kind: 'refused', status: 503, code: 'x402_ledger_unavailable', message: 'Idempotency cannot be guaranteed right now, so no payment was taken. Retry shortly.' }
+    }
+    admissionGuard = guard
+  }
+
   const accepted = await acceptPayment({
     payment: parsed.payment,
     requirements: [requirement],
     facilitator,
     replayGuard: createReplayGuard(ledger, { network: config.caip2Network, asset: config.asset, resource: resourceUrl }, requirement),
     confirmOnChain: dependencies.confirmOnChain ?? confirmerFor(config, requirement),
+    ...(admissionGuard ? { admissionGuard } : {}),
   })
 
   if (!accepted.ok) {
@@ -177,6 +207,7 @@ export async function resolveX402(request: Request, dependencies: Dependencies =
 
   return {
     kind: 'paid',
+    ...(accepted.replayed ? { replayed: true } : {}),
     header: encodePaymentResponse({ transaction: accepted.transaction, network: config.caip2Network, payer: accepted.payer }),
     transaction: accepted.transaction,
     payer: accepted.payer,
@@ -214,6 +245,9 @@ export function paidRequestHeaders(outcome: Extract<X402Outcome, { kind: 'paid' 
     'x-maha-payment-transaction': outcome.transaction,
     'x-maha-payment-payer': outcome.payer,
     'x-maha-payment-amount': outcome.amountPaid,
+    // Tells the route this settled earlier and was not charged again, so it
+    // returns the original job instead of starting a second one.
+    'x-maha-payment-replayed': outcome.replayed ? 'true' : 'false',
     [SLOT_RESOURCE_HEADER]: outcome.slot.resource,
     [SLOT_TOKEN_HEADER]: outcome.slot.token,
   }
