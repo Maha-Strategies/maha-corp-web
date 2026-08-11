@@ -33,6 +33,7 @@ jobs:
     timeout-minutes: 8
     environment: production-database
     env:
+      SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}
       SUPABASE_DB_PASSWORD: ${{ secrets.SUPABASE_DB_PASSWORD }}
       SUPABASE_PROJECT_REF: ${{ vars.SUPABASE_PROJECT_REF }}
       OFFER_ID: ${{ inputs.offer_id }}
@@ -53,10 +54,20 @@ jobs:
           fi
           echo "target database fingerprint: sha256:$(printf '%s' "$SUPABASE_PROJECT_REF" | sha256sum | cut -d' ' -f1)"
 
+      - name: Resolve the project's session pooler
+        run: |
+          set -euo pipefail
+          project=$(curl --fail --silent --show-error \
+            -H "Authorization: Bearer ${SUPABASE_ACCESS_TOKEN}" \
+            "https://api.supabase.com/v1/projects/${SUPABASE_PROJECT_REF}")
+          region=$(jq -er '.region | select(type == "string" and length > 0)' <<<"$project")
+          echo "SUPABASE_DB_HOST=aws-0-${region}.pooler.supabase.com" >> "$GITHUB_ENV"
+          echo "Resolved the Production session pooler from authenticated project metadata."
+
       - name: Telemetry recorded for the offer
         run: |
           set -euo pipefail
-          url="postgresql://postgres.${SUPABASE_PROJECT_REF}:${SUPABASE_DB_PASSWORD}@aws-0-us-east-1.pooler.supabase.com:5432/postgres"
+          url="postgresql://postgres.${SUPABASE_PROJECT_REF}:${SUPABASE_DB_PASSWORD}@${SUPABASE_DB_HOST}:5432/postgres"
           echo '--- usage rows for the offer, last 2 days ---'
           psql "$url" -v ON_ERROR_STOP=1 -P pager=off -c "
             select usage_day, event_kind, status_class, discovery_source, event_count,
@@ -83,7 +94,7 @@ jobs:
       - name: Settlement recorded and corroborated
         run: |
           set -euo pipefail
-          url="postgresql://postgres.${SUPABASE_PROJECT_REF}:${SUPABASE_DB_PASSWORD}@aws-0-us-east-1.pooler.supabase.com:5432/postgres"
+          url="postgresql://postgres.${SUPABASE_PROJECT_REF}:${SUPABASE_DB_PASSWORD}@${SUPABASE_DB_HOST}:5432/postgres"
           psql "$url" -v ON_ERROR_STOP=1 -P pager=off -c "
             select resource, payer, amount, transaction_id, chain_status, settled_at
               from public.x402_settlements
@@ -98,7 +109,7 @@ jobs:
       - name: No x402 table can retain caller request content
         run: |
           set -euo pipefail
-          url="postgresql://postgres.${SUPABASE_PROJECT_REF}:${SUPABASE_DB_PASSWORD}@aws-0-us-east-1.pooler.supabase.com:5432/postgres"
+          url="postgresql://postgres.${SUPABASE_PROJECT_REF}:${SUPABASE_DB_PASSWORD}@${SUPABASE_DB_HOST}:5432/postgres"
           echo '--- every text/json column in the x402 schema ---'
           psql "$url" -v ON_ERROR_STOP=1 -P pager=off -c "
             select table_name, column_name, data_type
