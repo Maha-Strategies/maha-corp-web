@@ -76,6 +76,15 @@ export type X402Offer = {
   tags: readonly string[]
   status: OfferStatus
   availability: OfferAvailability
+  /**
+   * Whether a payer must declare an idempotency key and input hash, claimed
+   * before settlement.
+   *
+   * True only for offers that create a durable job. A stateless offer that is
+   * called twice simply does the work twice, which is what the payer paid for;
+   * a job-creating offer called twice charges twice for one job, which is not.
+   */
+  requiresIdempotency: boolean
   /** Largest accepted request body, in UTF-8 bytes. */
   maxRequestBytes: number
   /**
@@ -127,6 +136,7 @@ export const CONTEXT_COMPRESSION_OFFER: X402Offer = {
   tags: ['ai', 'context-compression', 'llm', 'rag', 'provenance'],
   status: 'available',
   availability: { payableInProduction: true, blockedBy: [] },
+  requiresIdempotency: false,
   maxRequestBytes: 450_000,
   capabilityBoundaries: [
     'Extractive selection, not summarisation or rewriting.',
@@ -173,6 +183,7 @@ export const DEEP_CONTEXT_EVALUATION_OFFER: X402Offer = {
       'No paid end-to-end settlement has been executed for this offer.',
     ],
   },
+  requiresIdempotency: false,
   // The enterprise ceiling. This offer is priced ten times the entry tier and
   // accepts the largest payload the compiler supports.
   maxRequestBytes: 1_050_000,
@@ -222,6 +233,9 @@ export const MPS_AUTONOMOUS_AUDIT_OFFER: X402Offer = {
       'No paid end-to-end settlement has been executed for this offer.',
     ],
   },
+  // This offer creates a job and calls a model. A duplicate is a double
+  // charge, not duplicated work.
+  requiresIdempotency: true,
   maxRequestBytes: 32_768,
   capabilityBoundaries: [
     'Automated triage that assigns provenance statuses to claims.',

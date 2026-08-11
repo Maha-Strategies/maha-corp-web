@@ -1,4 +1,4 @@
-import { createHash, randomBytes, randomUUID, timingSafeEqual } from 'node:crypto'
+import { createHash, createHmac, randomBytes, randomUUID, timingSafeEqual } from 'node:crypto'
 
 import type { MpsAuditResult } from '../mps-audit-engine.ts'
 import { MPS_AUTONOMOUS_AUDIT_OFFER } from './offers.ts'
@@ -44,6 +44,30 @@ export function createAuditJobId(): string {
  */
 export function createRetrievalToken(): string {
   return `mpsrt_${randomBytes(32).toString('base64url')}`
+}
+
+/**
+ * The retrieval credential, derived rather than remembered.
+ *
+ * The previous design minted a random token, stored only its hash, and handed
+ * the token back *after* a model call that can take a minute. A timeout,
+ * crash, or restart between those two points destroyed the only copy of the
+ * credential and stranded a job the payer had already bought. The secret
+ * existed solely in the memory of a response that never arrived.
+ *
+ * Deriving it from a server secret and the audit id removes that window
+ * entirely: the credential can be recomputed at any later time, on any
+ * instance, and is re-issued on the free idempotent replay of the same logical
+ * request. A payer who lost the response recovers by asking again -- which,
+ * because the admission claim already settled, costs nothing.
+ *
+ * The secret is required rather than defaulted. A per-instance fallback would
+ * make tokens unverifiable across instances and would fail exactly under the
+ * conditions this exists to survive.
+ */
+export function deriveRetrievalToken(auditId: string, secret = process.env.X402_RETRIEVAL_TOKEN_SECRET): string | null {
+  if (!secret || secret.length < 32) return null
+  return `mpsrt_${createHmac('sha256', secret).update(`mps-audit:${auditId}`).digest('base64url')}`
 }
 
 export function retrievalTokenHash(token: string): string {

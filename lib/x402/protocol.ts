@@ -330,8 +330,24 @@ function matchesDeclarationDigest(
   return ours.declarationDigest === theirs.declarationDigest
 }
 
+/**
+ * Claimed between verification and settlement, so a duplicate logical request
+ * is refused before money moves rather than deduplicated after. See
+ * lib/x402/admission.ts.
+ */
+export type PreSettlementGuard = {
+  reserve(context: { payer: string }): Promise<
+    | { kind: 'proceed' }
+    | { kind: 'already_paid'; transaction: string }
+    | { kind: 'in_progress' }
+    | { kind: 'conflict' }
+    | { kind: 'unavailable' }>
+  settled(context: { payer: string; transaction: string }): Promise<void>
+  released(context: { payer: string }): Promise<void>
+}
+
 export type AcceptPaymentResult =
-  | { ok: true; payer: string; transaction: string; amountPaid: string }
+  | { ok: true; payer: string; transaction: string; amountPaid: string; replayed?: boolean }
   // 502 is the chain contradicting the facilitator: an upstream told us
   // something the ledger of record does not support.
   | { ok: false; status: 402 | 409 | 502 | 503; reason: string }
@@ -355,6 +371,8 @@ export async function acceptPayment(input: {
   facilitator: PaymentFacilitator
   replayGuard: ReplayGuard
   confirmOnChain?: SettlementConfirmer
+  /** Optional. Offers that create a job supply one; stateless offers do not. */
+  admissionGuard?: PreSettlementGuard
 }): Promise<AcceptPaymentResult> {
   const requirement = matchRequirement(input.payment, input.requirements)
   if (!requirement) return { ok: false, status: 402, reason: 'no_matching_requirement' }
@@ -369,8 +387,29 @@ export async function acceptPayment(input: {
   if (claimed === 'unavailable') return { ok: false, status: 503, reason: 'x402_ledger_unavailable' }
   if (claimed === 'duplicate') return { ok: false, status: 409, reason: 'payment_already_used' }
 
+  // The idempotency claim, taken before settlement and after verification --
+  // the only window where the payer is known and no money has moved. A retry
+  // of a logical request that already settled returns the original
+  // transaction here and never reaches `settle`.
+  const admission = input.admissionGuard
+    ? await input.admissionGuard.reserve({ payer: verified.payer })
+    : { kind: 'proceed' as const }
+
+  if (admission.kind === 'already_paid') {
+    return { ok: true, payer: verified.payer, transaction: admission.transaction, amountPaid: requirement.amount, replayed: true }
+  }
+  if (admission.kind === 'conflict') return { ok: false, status: 409, reason: 'idempotency_key_reused_with_different_request' }
+  if (admission.kind === 'in_progress') return { ok: false, status: 409, reason: 'request_already_in_progress' }
+  if (admission.kind === 'unavailable') return { ok: false, status: 503, reason: 'x402_ledger_unavailable' }
+
   const settled = await input.facilitator.settle(input.payment, requirement)
-  if (!settled.ok) return { ok: false, status: 402, reason: settled.reason }
+  if (!settled.ok) {
+    // Nothing moved, so the claim is released rather than left to go stale and
+    // lock the payer out of their own key for five minutes.
+    await input.admissionGuard?.released({ payer: verified.payer })
+    return { ok: false, status: 402, reason: settled.reason }
+  }
+  await input.admissionGuard?.settled({ payer: verified.payer, transaction: settled.transaction })
 
   // Independent confirmation, where a node is configured. Until this point
   // "settled" means the facilitator said so; this is the only step that checks.
