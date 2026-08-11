@@ -2,7 +2,19 @@ import assert from 'node:assert/strict'
 import test from 'node:test'
 
 import { getX402Readiness } from '../lib/x402/readiness.ts'
-import { CONTEXT_COMPRESSION_OFFER, MPS_AUTONOMOUS_AUDIT_OFFER } from '../lib/x402/offers.ts'
+import { CONTEXT_COMPRESSION_OFFER, DEEP_CONTEXT_EVALUATION_OFFER, MPS_AUTONOMOUS_AUDIT_OFFER, X402_OFFERS } from '../lib/x402/offers.ts'
+
+/**
+ * A catalog in which Deep Context is still `preview`.
+ *
+ * Deep Context was promoted to `available`, so no published offer is in the
+ * preview state any more. Injecting one keeps the preview branch covered:
+ * otherwise promoting the last preview offer would silently delete the tests
+ * for what happens to the next one.
+ */
+const WITH_PREVIEW_OFFER = X402_OFFERS.map((offer) => offer.id === 'deep-context-evaluation'
+  ? { ...offer, status: 'preview' as const, availability: { payableInProduction: false, blockedBy: ['synthetic preview gate'] } }
+  : offer)
 
 // `catalogContradictions` used to be computed and then dropped: a deployment
 // that disagreed with the published catalog logged one line at boot and served
@@ -78,6 +90,30 @@ test('an offer enabled for payment but published as withheld fails readiness', a
   assert.match(status!.detail ?? '', /paid-job and admission migrations|durable paid-job recovery/i)
 })
 
+test('the MPS runtime prerequisite is reported before the offer is enabled', async () => {
+  // The whole point of a precondition is to be checkable beforehand. Gating
+  // this on enablement meant the only way to learn the retrieval secret was
+  // missing was to enable MPS -- and because the route refuses after
+  // settlement, that means learning it with a payer's money.
+  const unmet = await getX402Readiness({ environment: BASE, probe: everything })
+  const unmetCheck = check(unmet, 'x402.offer.mps-autonomous-audit.runtime')
+  assert.equal(unmetCheck?.state, 'info', 'a prerequisite for a disabled offer is reported, not counted against health')
+  assert.match(unmetCheck!.summary, /not enabled here/)
+  // Reported without degrading the deployment: a correctly-configured system
+  // must not be permanently amber for owning an unshipped product.
+  assert.equal(unmet.state, 'ready')
+
+  const met = await getX402Readiness({
+    environment: { ...BASE, X402_RETRIEVAL_TOKEN_SECRET: 'a'.repeat(44), ANTHROPIC_API_KEY: 'k' },
+    probe: everything,
+  })
+  const metCheck = check(met, 'x402.offer.mps-autonomous-audit.runtime')
+  assert.equal(metCheck?.state, 'ok')
+  // And a satisfied prerequisite must not hold readiness below ready, or a
+  // healthy deployment could never report 200 while an offer waits to ship.
+  assert.equal(met.state, 'ready')
+})
+
 test('an enabled paid MPS job fails readiness without its runtime secrets', async () => {
   const report = await getX402Readiness({
     environment: {
@@ -129,6 +165,7 @@ test('a preview offer enabled outside Production warns rather than failing', asy
       ]),
     },
     probe: everything,
+    offers: WITH_PREVIEW_OFFER,
   })
   const status = check(report, 'x402.offer.deep-context-evaluation.status')
   assert.equal(status?.state, 'warn')
@@ -147,6 +184,7 @@ test('a preview offer enabled in Production fails readiness', async () => {
       ]),
     },
     probe: everything,
+    offers: WITH_PREVIEW_OFFER,
   })
   assert.equal(check(report, 'x402.offer.deep-context-evaluation.status')?.state, 'fail')
   assert.equal(report.state, 'unavailable')
@@ -163,14 +201,28 @@ test('missing required RPC functions fail readiness', async () => {
   assert.match(storage?.detail ?? '', /record_x402_offer_usage\(\)/)
 })
 
-test('an available offer that is not enabled is a warning, not a failure', async () => {
+test('an available offer that is not enabled is information outside Production', async () => {
   const report = await getX402Readiness({
     environment: { ...BASE, X402_RESOURCES: JSON.stringify([{ method: 'POST', path: '/api/v1/compress' }]) },
     probe: everything,
   })
-  // Nothing here is wrong; the environment simply does not sell it.
-  assert.equal(check(report, 'x402.offer.deep-context-evaluation.enablement'), undefined)
+  // A Preview need not sell everything Production sells, so this must not hold
+  // the deployment below ready.
+  assert.equal(check(report, 'x402.offer.deep-context-evaluation.enablement')?.state, 'info')
   assert.equal(report.state, 'ready')
+})
+
+test('an available offer that is not enabled in Production fails readiness', async () => {
+  // There it is a live contradiction: discovery tells an agent the offer is
+  // payable and the deployment answers 401.
+  const report = await getX402Readiness({
+    environment: { ...BASE, VERCEL_ENV: 'production', X402_RESOURCES: JSON.stringify([{ method: 'POST', path: '/api/v1/compress' }]) },
+    probe: everything,
+  })
+  const enablement = check(report, 'x402.offer.deep-context-evaluation.enablement')
+  assert.equal(enablement?.state, 'fail')
+  assert.match(enablement!.summary, /told to pay and then refused/)
+  assert.equal(report.state, 'unavailable')
 })
 
 test('chain confirmation is on by default for Base, and its absence only degrades', async () => {
@@ -218,6 +270,27 @@ test('a disabled environment reports unavailable without pretending to be broken
   assert.equal(report.offers.every((offer) => offer.enabledInThisEnvironment === false), true)
 })
 
+test('readiness fingerprints its database without disclosing it', async () => {
+  // "Which database is this actually bound to" was unanswerable from outside:
+  // the URL is a platform secret, it is not inlined in any client bundle, and a
+  // migration applied against a correctly-named credential still left the app
+  // unable to see the objects it created. A deployment that cannot name its own
+  // database can only be diagnosed by guessing.
+  const report = await getX402Readiness({
+    environment: { ...BASE, NEXT_PUBLIC_SUPABASE_URL: 'https://abcdefghijklmnopqrst.supabase.co' },
+    probe: everything,
+  })
+  const { createHash } = await import('node:crypto')
+  const expected = `sha256:${createHash('sha256').update('abcdefghijklmnopqrst').digest('hex')}`
+  assert.equal(report.databaseFingerprint, expected)
+  // The reference itself must not appear anywhere in the response.
+  assert.equal(JSON.stringify(report).includes('abcdefghijklmnopqrst'), false)
+
+  // Absent or malformed configuration reports null rather than inventing one.
+  const none = await getX402Readiness({ environment: BASE, probe: everything })
+  assert.equal(none.databaseFingerprint, null)
+})
+
 test('readiness never echoes a secret or a raw environment value', async () => {
   const secrets = ['super-secret-cdp-key', 'https://private-rpc.example/KEY123']
   const report = await getX402Readiness({
@@ -246,6 +319,12 @@ test('the report states which offers are payable, so a promotion can be gated on
   assert.equal(mps.status, 'withheld')
   assert.equal(mps.payableInProduction, false)
   assert.equal(mps.enabledInThisEnvironment, false)
+
+  // Deep Context was promoted on 2026-08-11 and must read as payable.
+  const deep = report.offers.find((offer) => offer.id === 'deep-context-evaluation')!
+  assert.equal(deep.status, 'available')
+  assert.equal(deep.payableInProduction, true)
+  assert.equal(DEEP_CONTEXT_EVALUATION_OFFER.availability.blockedBy.length, 0)
 
   const entry = report.offers.find((offer) => offer.id === 'context-compression')!
   assert.equal(entry.status, 'available')

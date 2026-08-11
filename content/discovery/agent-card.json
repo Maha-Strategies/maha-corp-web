@@ -34,7 +34,7 @@
     },
     {
       "id": "deep-context-evaluation",
-      "status": "preview_not_payable",
+      "status": "available_with_api_key_or_x402",
       "endpoint": "https://www.mahastrategies.com/api/v1/compress/evaluate",
       "measures": "exact retention of caller-labelled required-evidence spans",
       "notMeasured": [
@@ -49,10 +49,9 @@
         "network": "eip155:8453",
         "amount": "10000",
         "assetSymbol": "USDC",
-        "autonomous": false,
-        "note": "Published for evaluation. Not currently payable in Production."
+        "autonomous": true
       },
-      "payableNow": false
+      "payableNow": true
     },
     {
       "id": "mps-autonomous-audit",
@@ -96,7 +95,7 @@
   ],
   "terms": {
     "bindingCommitment": false,
-    "payment": "Context Compression is the only capability currently payable autonomously, on Base Mainnet. Deep Context Evaluation is in preview and the Autonomous MPS Audit is withheld: both are described here and neither is payable today. The GPU optimization routes are not x402 products. A human purchaser must authorize Stripe Checkout; research and enterprise work require human scope review.",
+    "payment": "Context Compression and Deep Context Evaluation are payable autonomously on Base Mainnet. The Autonomous MPS Audit is withheld: it is described here and is not payable. The GPU optimization routes are not x402 products. A human purchaser must authorize Stripe Checkout; research and enterprise work require human scope review.",
     "sensitiveData": "Do not submit confidential, regulated, or sensitive personal information."
   },
   "review": {

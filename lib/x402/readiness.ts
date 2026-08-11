@@ -2,6 +2,27 @@ import { createAgentInquiryLedger } from '../agent-inquiry-ledger.ts'
 import { x402Config, x402Enabled, type X402Config } from './config.ts'
 import { X402_OFFERS, offerFor, type X402Offer } from './offers.ts'
 import { MAX_RESOURCE_DESCRIPTION_BYTES, MAX_RESOURCE_DESCRIPTION_CHARS } from './discovery.ts'
+import { createHash } from 'node:crypto'
+
+/**
+ * Identifies the bound database without disclosing it.
+ *
+ * Supabase project references appear in ordinary public URLs, so this is a
+ * correlation aid rather than a secret -- but hashing keeps the readiness
+ * response free of anything that looks like configuration, which is the
+ * property that lets it be shared freely.
+ */
+function databaseFingerprintOf(environment: Record<string, string | undefined>): string | null {
+  const url = environment.NEXT_PUBLIC_SUPABASE_URL?.trim()
+  if (!url) return null
+  try {
+    const reference = new URL(url).hostname.split('.')[0] ?? ''
+    if (!reference) return null
+    return `sha256:${createHash('sha256').update(reference).digest('hex')}`
+  } catch {
+    return null
+  }
+}
 
 // Operational readiness for the x402 surface.
 //
@@ -18,7 +39,16 @@ import { MAX_RESOURCE_DESCRIPTION_BYTES, MAX_RESOURCE_DESCRIPTION_CHARS } from '
 
 export type ReadinessCheck = {
   id: string
-  state: 'ok' | 'warn' | 'fail'
+  /**
+   * `info` is reported but excluded from the overall rollup.
+   *
+   * It exists for facts an operator asked to see that are not defects -- an
+   * unmet prerequisite for an offer that is deliberately switched off, for
+   * instance. Folding those into `warn` would make a correctly-configured
+   * deployment permanently degraded for having an unshipped product, and a
+   * readiness signal that is never green is a readiness signal nobody reads.
+   */
+  state: 'ok' | 'info' | 'warn' | 'fail'
   summary: string
   /** Never a value; only what is wrong and what would fix it. */
   detail?: string
@@ -28,6 +58,21 @@ export type X402ReadinessReport = {
   state: 'ready' | 'degraded' | 'unavailable'
   enabled: boolean
   checkedAt: string
+  /**
+   * SHA-256 of the Supabase project reference this deployment is bound to.
+   *
+   * A fingerprint rather than the reference, so the report stays safe to paste
+   * into a ticket, and so this can be compared against the reference held in CI
+   * without either side printing its value.
+   *
+   * It exists because "which database is this actually talking to" turned out
+   * to be unanswerable from outside: the URL is stored as a platform secret, it
+   * is not inlined in any client bundle, and a migration applied against a
+   * correctly-named credential still left the running app unable to see the
+   * objects it created. A deployment that cannot name its own database can only
+   * be diagnosed by guessing.
+   */
+  databaseFingerprint: string | null
   offers: { id: string; status: X402Offer['status']; enabledInThisEnvironment: boolean; payableInProduction: boolean }[]
   checks: ReadinessCheck[]
 }
@@ -87,8 +132,16 @@ export async function getX402Readiness(options: {
   environment?: Record<string, string | undefined>
   probe?: Probe | null
   functionProbe?: FunctionProbe | null
+  /**
+   * Overrides the published catalog. Production always uses the real one; this
+   * exists so the preview/withheld branches stay covered once no offer happens
+   * to be in that state -- otherwise promoting the last preview offer silently
+   * deletes the tests for what happens to the next one.
+   */
+  offers?: readonly X402Offer[]
 } = {}): Promise<X402ReadinessReport> {
   const environment = options.environment ?? process.env
+  const catalog = options.offers ?? X402_OFFERS
   const checkedAt = new Date().toISOString()
   const checks: ReadinessCheck[] = []
 
@@ -97,7 +150,8 @@ export async function getX402Readiness(options: {
       state: 'unavailable',
       enabled: false,
       checkedAt,
-      offers: X402_OFFERS.map((offer) => ({
+      databaseFingerprint: databaseFingerprintOf(environment),
+      offers: catalog.map((offer) => ({
         id: offer.id, status: offer.status, enabledInThisEnvironment: false, payableInProduction: offer.availability.payableInProduction,
       })),
       checks: [{ id: 'x402.enabled', state: 'warn', summary: 'X402_ENABLED is not true; no offer is payable in this environment.' }],
@@ -116,11 +170,11 @@ export async function getX402Readiness(options: {
       summary: 'x402 configuration is present but invalid, so payments are refused.',
       detail: error instanceof Error ? error.message : 'unknown_error',
     })
-    return { state: 'unavailable', enabled: true, checkedAt, offers: [], checks }
+    return { state: 'unavailable', enabled: true, checkedAt, databaseFingerprint: databaseFingerprintOf(environment), offers: [], checks }
   }
   if (!config) {
     return {
-      state: 'unavailable', enabled: false, checkedAt, offers: [],
+      state: 'unavailable', enabled: false, checkedAt, databaseFingerprint: databaseFingerprintOf(environment), offers: [],
       checks: [{ id: 'x402.enabled', state: 'warn', summary: 'x402 is not configured in this environment.' }],
     }
   }
@@ -164,7 +218,7 @@ export async function getX402Readiness(options: {
       })
 
   // --- Offer enabled but unavailable ----------------------------------------
-  for (const offer of X402_OFFERS) {
+  for (const offer of catalog) {
     if (!enabledIds.has(offer.id)) continue
     if (offer.status === 'available') continue
 
@@ -185,12 +239,18 @@ export async function getX402Readiness(options: {
       detail: `An agent would be quoted a price for an offer the catalog says is not payable in Production. Gates: ${offer.availability.blockedBy.join(' | ') || 'none recorded'}`,
     })
   }
-  for (const offer of X402_OFFERS) {
+  for (const offer of catalog) {
     if (offer.status !== 'available' || enabledIds.has(offer.id)) continue
     checks.push({
       id: `x402.offer.${offer.id}.enablement`,
-      state: 'warn',
-      summary: `${offer.id} is published as available but is not enabled in this environment.`,
+      // In Production this is a live contradiction: discovery tells agents the
+      // offer is payable while the deployment will answer 401. Anywhere else it
+      // is ordinary -- a Preview need not sell everything Production sells --
+      // so it is information rather than a degradation.
+      state: environment.VERCEL_ENV === 'production' ? 'fail' : 'info',
+      summary: environment.VERCEL_ENV === 'production'
+        ? `${offer.id} is published as payable but is not enabled in Production; an agent would be told to pay and then refused.`
+        : `${offer.id} is published as available but is not enabled in this environment.`,
     })
   }
 
@@ -213,9 +273,22 @@ export async function getX402Readiness(options: {
         if (!(await probe(table))) missing.push(table)
       }
       const presentFunctions = functionProbe ? await functionProbe(required.functions) : null
+      // A probe that could not run and a function that is genuinely absent are
+      // opposite diagnoses -- "the introspection helper is missing" versus
+      // "the migration did not apply" -- and collapsing them cost real time:
+      // with a single required function the two produce an identical message,
+      // so an unrunnable probe reads as a missing migration and sends you to
+      // re-apply something that was already there.
       if (!presentFunctions) {
-        missing.push(...required.functions.map((name) => `${name}()`))
-      } else {
+        checks.push({
+          id: `x402.offer.${offerId}.storage`,
+          state: 'fail',
+          summary: `${offerId} storage cannot be verified: the introspection probe did not run.`,
+          detail: 'x402_readiness_functions() is unavailable, so no statement can be made about the other objects. Apply the migration that defines it before reading this check as a missing migration.',
+        })
+        continue
+      }
+      {
         for (const name of required.functions) {
           if (!presentFunctions.has(name)) missing.push(`${name}()`)
         }
@@ -231,23 +304,44 @@ export async function getX402Readiness(options: {
     }
   }
 
-  if (enabledIds.has('mps-autonomous-audit')) {
+  // Reported whether or not the offer is enabled.
+  //
+  // Gating this on enablement made the one question an operator actually needs
+  // answered -- "is it safe to turn MPS on yet?" -- unanswerable without
+  // turning MPS on. That is backwards for a precondition whose entire purpose
+  // is to be checked beforehand: without the retrieval secret the route refuses
+  // *after* settlement, so discovering it by enabling the offer means
+  // discovering it with a payer's money.
+  //
+  // Severity follows enablement. Unmet while enabled is a live hazard and
+  // fails; unmet while disabled is a prerequisite and warns; met is `ok` either
+  // way, which is what makes a pre-flight check possible.
+  {
     const runtimeProblems: string[] = []
     if ((environment.X402_RETRIEVAL_TOKEN_SECRET?.trim().length ?? 0) < 32) runtimeProblems.push('the retrieval-token secret is missing or shorter than 32 characters')
     if (!environment.ANTHROPIC_API_KEY?.trim()) runtimeProblems.push('the model provider credential is missing')
+    const enabled = enabledIds.has('mps-autonomous-audit')
     checks.push(runtimeProblems.length === 0
-      ? { id: 'x402.offer.mps-autonomous-audit.runtime', state: 'ok', summary: 'MPS paid-job runtime dependencies are configured.' }
+      ? {
+          id: 'x402.offer.mps-autonomous-audit.runtime',
+          state: 'ok',
+          summary: enabled
+            ? 'MPS paid-job runtime dependencies are configured.'
+            : 'MPS paid-job runtime dependencies are configured; the offer is not enabled here.',
+        }
       : {
           id: 'x402.offer.mps-autonomous-audit.runtime',
-          state: 'fail',
-          summary: 'MPS Autonomous Audit could accept payment but cannot complete or return the paid job.',
+          state: enabled ? 'fail' : 'info',
+          summary: enabled
+            ? 'MPS Autonomous Audit could accept payment but cannot complete or return the paid job.'
+            : 'MPS Autonomous Audit is not enabled here, and could not complete a paid job if it were.',
           detail: runtimeProblems.join('; '),
         })
   }
 
   // --- Discovery availability -----------------------------------------------
   const discoveryProblems: string[] = []
-  for (const offer of X402_OFFERS) {
+  for (const offer of catalog) {
     if (offer.description.length > MAX_RESOURCE_DESCRIPTION_CHARS
       || new TextEncoder().encode(offer.description).length > MAX_RESOURCE_DESCRIPTION_BYTES) {
       discoveryProblems.push(`${offer.id}: description exceeds the facilitator ceiling, which refuses settlement`)
@@ -265,7 +359,8 @@ export async function getX402Readiness(options: {
     state: failed ? 'unavailable' : warned ? 'degraded' : 'ready',
     enabled: true,
     checkedAt,
-    offers: X402_OFFERS.map((offer) => ({
+    databaseFingerprint: databaseFingerprintOf(environment),
+    offers: catalog.map((offer) => ({
       id: offer.id,
       status: offer.status,
       enabledInThisEnvironment: enabledIds.has(offer.id),

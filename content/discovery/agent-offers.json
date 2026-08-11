@@ -12,16 +12,16 @@
     "humanConfirmationRequired": true,
     "autonomousPaymentSupported": true,
     "autonomousPaymentScope": [
-      "context-compression"
+      "context-compression",
+      "deep-context-evaluation"
     ],
     "humanConfirmationScope": [
       "stripe-checkout",
       "research-inquiries",
       "enterprise-onboarding"
     ],
-    "bindingCommitment": "Only Context Compression accepts autonomous x402 payment today. Deep Context Evaluation (preview) and the Autonomous MPS Audit (withheld) are described for evaluation and are not payable; a live PAYMENT-REQUIRED challenge is the only proof an offer can be bought. The GPU optimization capabilities are not x402 products. Stripe products require purchaser confirmation, and research or enterprise engagements require human scope review.",
+    "bindingCommitment": "Context Compression and Deep Context Evaluation accept autonomous x402 payment on Base Mainnet under their published terms. The Autonomous MPS Audit is withheld and is not payable; a live PAYMENT-REQUIRED challenge is the only proof an offer can be bought. The GPU optimization capabilities are not x402 products. Stripe products require purchaser confirmation, and research or enterprise engagements require human scope review.",
     "describedNotPayable": [
-      "deep-context-evaluation",
       "mps-autonomous-audit"
     ]
   },
@@ -83,7 +83,7 @@
     },
     {
       "id": "deep-context-evaluation",
-      "status": "preview_not_payable",
+      "status": "available_with_api_key_or_x402",
       "endpoint": "https://www.mahastrategies.com/api/v1/compress/evaluate",
       "method": "POST",
       "methodBoundary": "Compiles a token-budgeted context pack, then reports exact retention of the caller's own labelled evidence spans. The retention figure is exact span matching and is not factual accuracy, answer quality, verification, or hallucination prevention. A retained span means the text survived selection, not that the text is true.",
@@ -104,10 +104,9 @@
         "asset": "USDC",
         "amount": "10000",
         "displayAmount": "0.01 USDC",
-        "payableNow": false,
-        "note": "Published terms. Not currently payable in Production."
+        "payableNow": true
       },
-      "payableNow": false
+      "payableNow": true
     },
     {
       "id": "mps-autonomous-audit",
