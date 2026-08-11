@@ -154,7 +154,10 @@ jobs:
             union all select 'x402_payments=' || (to_regclass('public.x402_payments') is not null)::text
             union all select 'x402_settlements=' || (to_regclass('public.x402_settlements') is not null)::text
             union all select 'x402_offer_admissions=' || (to_regclass('public.x402_offer_admissions') is not null)::text
-            union all select 'x402_mps_audits=' || (to_regclass('public.x402_mps_audits') is not null)::text;
+            union all select 'x402_mps_audits=' || (to_regclass('public.x402_mps_audits') is not null)::text
+            union all select 'reserve_x402_admission=' || (to_regprocedure('public.reserve_x402_admission(text,text,text,text,text,numeric,interval)') is not null)::text
+            union all select 'settle_x402_admission=' || (to_regprocedure('public.settle_x402_admission(text,text,text,text)') is not null)::text
+            union all select 'release_x402_admission=' || (to_regprocedure('public.release_x402_admission(text,text,text)') is not null)::text;
           " | tee -a "$EVIDENCE/verify.txt"
 
           grep -q 'record_x402_offer_usage=true' "$EVIDENCE/verify.txt" || {
