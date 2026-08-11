@@ -133,20 +133,25 @@ export async function recordOfferUsage(input: OfferUsageInput): Promise<void> {
 export type RepeatPayerRow = {
   payer: string
   resource: string
-  paymentCount: number
-  firstPaidAt: string
-  lastPaidAt: string
+  /** Settlements the chain corroborated. The only number that is a purchase. */
+  confirmedPaymentCount: number
+  /** Settled but not corroborated: no chain RPC, or the node could not answer. */
+  unconfirmedPaymentCount: number
+  /** Claimed but never settled, or contradicted by the chain. */
+  failedPaymentCount: number
+  firstConfirmedAt: string | null
+  lastConfirmedAt: string | null
 }
 
 export type RepeatPayerReport = {
   /** One row per (payer, resource). */
   rows: RepeatPayerRow[]
-  /** Distinct wallets that paid at least once. How many buyers exist. */
+  /** Distinct wallets with at least one confirmed purchase. */
   distinctPayers: number
-  /** Wallets that paid the same resource more than once. Do agents come back? */
+  /** Wallets that confirmed more than one purchase of the same resource. */
   returningPayers: number
   /**
-   * Settled payments in the window.
+   * Confirmed settlements in the window.
    *
    * The transaction count, and deliberately not the wallet count. A challenge
    * is answered per call, so conversion has to be measured in the same unit on
@@ -155,17 +160,29 @@ export type RepeatPayerReport = {
    * would flatter the second into looking like the first.
    */
   settlements: number
+  /**
+   * Attempts that were claimed but not confirmed.
+   *
+   * Reported rather than folded in. An earlier version counted every row in
+   * x402_payments as a purchase, so a claim that failed to settle -- or that
+   * the chain contradicted -- inflated the very number a subscription decision
+   * would rest on. Surfacing them separately keeps that visible instead of
+   * either overstating revenue or silently reporting zero on a deployment with
+   * no chain RPC configured.
+   */
+  unconfirmed: number
+  failed: number
 }
 
 /**
- * Repeat autonomous purchases, read from the settlement ledger.
+ * Repeat autonomous purchases, read from confirmed settlements.
  *
- * x402_payments is the authoritative record here, not telemetry and not
+ * x402_settlements is the authoritative record here, not x402_payments and not
  * agent_task_spend_daily. That last one is worth naming explicitly because it
- * is the tempting join: it has spend, it has surfaces, and it is already
- * wired into the funnel. It is also keyed by tenant and task, neither of which
- * an anonymous x402 wallet has, so joining through it silently drops the
- * entire population being counted and returns a confident zero.
+ * is the tempting join: it has spend, it has surfaces, and it is already wired
+ * into the funnel. It is also keyed by tenant and task, neither of which an
+ * anonymous x402 wallet has, so joining through it silently drops the entire
+ * population being counted and returns a confident zero.
  *
  * API-key repeat use is a different question with a different source --
  * credential usage in the commercial meters -- and the two must not be summed.
@@ -184,16 +201,24 @@ export async function repeatPayers(
     return {
       payer: String(record.payer ?? ''),
       resource: String(record.resource ?? ''),
-      paymentCount: Number(record.payment_count ?? 0),
-      firstPaidAt: String(record.first_paid_at ?? ''),
-      lastPaidAt: String(record.last_paid_at ?? ''),
+      confirmedPaymentCount: Number(record.confirmed_payment_count ?? 0),
+      unconfirmedPaymentCount: Number(record.unconfirmed_payment_count ?? 0),
+      failedPaymentCount: Number(record.failed_payment_count ?? 0),
+      firstConfirmedAt: record.first_confirmed_at ? String(record.first_confirmed_at) : null,
+      lastConfirmedAt: record.last_confirmed_at ? String(record.last_confirmed_at) : null,
     }
   })
 
+  // A payer with zero confirmed purchases is not a buyer, however many
+  // attempts it made.
+  const buyers = rows.filter((row) => row.confirmedPaymentCount > 0)
+
   return {
     rows,
-    distinctPayers: new Set(rows.map((row) => row.payer)).size,
-    returningPayers: new Set(rows.filter((row) => row.paymentCount > 1).map((row) => row.payer)).size,
-    settlements: rows.reduce((total, row) => total + row.paymentCount, 0),
+    distinctPayers: new Set(buyers.map((row) => row.payer)).size,
+    returningPayers: new Set(buyers.filter((row) => row.confirmedPaymentCount > 1).map((row) => row.payer)).size,
+    settlements: buyers.reduce((total, row) => total + row.confirmedPaymentCount, 0),
+    unconfirmed: rows.reduce((total, row) => total + row.unconfirmedPaymentCount, 0),
+    failed: rows.reduce((total, row) => total + row.failedPaymentCount, 0),
   }
 }

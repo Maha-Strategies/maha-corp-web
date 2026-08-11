@@ -436,7 +436,7 @@ test('the credentialed MPS route is untouched', () => {
   assert.equal(credentialed.includes('x402_mps_audits'), false)
 })
 
-test('no submitted source text is written to the audit ledger', () => {
+test('the whole passage is never written to the audit ledger', () => {
   // The columns are enumerated in the migration; none of them holds the
   // passage. The route inserts input_hash and never the text it hashed.
   assert.ok(mpsMigration.includes('input_hash text not null'))
@@ -451,10 +451,13 @@ test('no submitted source text is written to the audit ledger', () => {
     public_id: 'audit_' + 'a'.repeat(32), client_request_id: 'req_abc12345', input_hash: `sha256:${'b'.repeat(64)}`,
     status: 'completed', result: null, failure_code: null, attempt_count: 1,
   })
-  assert.equal(retention.sourceTextStored, false)
+  assert.equal(retention.fullPassageStored, false)
+  assert.equal(retention.verbatimExcerptsRetained, true)
   assert.deepEqual(retention.retentionBoundaries, {
-    sourceTextStored: false, claimVerificationPerformed: false, legalAdviceProvided: false, humanReviewPerformed: false,
+    fullPassageStored: false, verbatimExcerptsRetained: true,
+    claimVerificationPerformed: false, legalAdviceProvided: false, humanReviewPerformed: false,
   })
+  assert.match(String(retention.retentionNote), /complete submitted passage is not retained/i)
 })
 
 test('a failed audit is resumable and says so, rather than inviting a second purchase', () => {
@@ -616,11 +619,11 @@ test('the telemetry table retains no payload, user agent, referrer or address', 
   assert.match(migration, /discovery_source text not null default 'unknown'\s*\n\s*check \(discovery_source in \('bazaar', 'maha_canary', 'direct', 'unknown'\)\)/)
 })
 
-test('repeat buyers are counted from the settlement ledger, by payer and resource', async () => {
+test('repeat buyers are counted from confirmed settlements only', async () => {
   const rows = [
-    { payer: '0xA', resource: '/api/v1/compress', payment_count: 5, first_paid_at: 'a', last_paid_at: 'b' },
-    { payer: '0xA', resource: '/api/v1/mps/audit', payment_count: 1, first_paid_at: 'a', last_paid_at: 'b' },
-    { payer: '0xB', resource: '/api/v1/compress', payment_count: 1, first_paid_at: 'a', last_paid_at: 'b' },
+    { payer: '0xA', resource: '/api/v1/compress', confirmed_payment_count: 5, unconfirmed_payment_count: 0, failed_payment_count: 0, first_confirmed_at: 'a', last_confirmed_at: 'b' },
+    { payer: '0xA', resource: '/api/v1/mps/audit', confirmed_payment_count: 1, unconfirmed_payment_count: 0, failed_payment_count: 0, first_confirmed_at: 'a', last_confirmed_at: 'b' },
+    { payer: '0xB', resource: '/api/v1/compress', confirmed_payment_count: 1, unconfirmed_payment_count: 0, failed_payment_count: 0, first_confirmed_at: 'a', last_confirmed_at: 'b' },
   ]
   const report = await repeatPayers({ fromDay: '2026-08-01', toDay: '2026-08-10' }, { rpc: async () => ({ data: rows, error: null }) })
 
@@ -633,9 +636,37 @@ test('repeat buyers are counted from the settlement ledger, by payer and resourc
   assert.equal(report!.returningPayers, 1)
 })
 
-test('the repeat-buyer query reads x402_payments and not the task spend table', () => {
-  const migration = readFileSync(join(ROOT, 'supabase', 'migrations', '20260810000300_x402_offer_telemetry.sql'), 'utf8')
+test('failed and unconfirmed attempts are never counted as purchases', async () => {
+  // The bug this replaced counted every row in x402_payments -- which is the
+  // replay guard, written before settlement returns -- so a claim that failed
+  // to settle, or that the chain contradicted, counted as revenue. The error
+  // ran in the flattering direction, which is the kind that survives review.
+  const rows = [
+    // A wallet that only ever failed is not a buyer.
+    { payer: '0xGhost', resource: '/api/v1/compress', confirmed_payment_count: 0, unconfirmed_payment_count: 0, failed_payment_count: 4, first_confirmed_at: null, last_confirmed_at: null },
+    // Settled but the chain could not corroborate it: reported, not counted.
+    { payer: '0xMaybe', resource: '/api/v1/compress', confirmed_payment_count: 0, unconfirmed_payment_count: 3, failed_payment_count: 0, first_confirmed_at: null, last_confirmed_at: null },
+    // A real buyer, with some noise of its own.
+    { payer: '0xReal', resource: '/api/v1/compress', confirmed_payment_count: 2, unconfirmed_payment_count: 1, failed_payment_count: 1, first_confirmed_at: 'a', last_confirmed_at: 'b' },
+  ]
+  const report = await repeatPayers({ fromDay: '2026-08-01', toDay: '2026-08-10' }, { rpc: async () => ({ data: rows, error: null }) })
+
+  assert.equal(report!.settlements, 2, 'only confirmed settlements are purchases')
+  assert.equal(report!.distinctPayers, 1, 'a wallet with no confirmed purchase is not a buyer')
+  assert.equal(report!.returningPayers, 1)
+
+  // Surfaced rather than hidden: a deployment with no chain RPC would
+  // otherwise report a confident zero and look like it had no customers.
+  assert.equal(report!.unconfirmed, 4)
+  assert.equal(report!.failed, 5)
+})
+
+test('the repeat-buyer query joins the authoritative settlement table', () => {
+  const migration = readFileSync(join(ROOT, 'supabase', 'migrations', '20260810000600_x402_repeat_payers_confirmed_only.sql'), 'utf8')
   assert.ok(migration.includes('from public.x402_payments p'))
+  // The correction: purchases come from settlements, not claims.
+  assert.ok(migration.includes('left join public.x402_settlements s on s.transaction_id = p.transaction_id'))
+  assert.ok(migration.includes("count(*) filter (where s.chain_status = 'confirmed') as confirmed_payment_count"))
   // agent_task_spend_daily is keyed by tenant and task, neither of which an
   // anonymous wallet has, so joining through it returns a confident zero. It
   // is named in the comment as the trap to avoid; it must not appear in a FROM

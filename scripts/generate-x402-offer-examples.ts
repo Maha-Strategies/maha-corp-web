@@ -83,12 +83,15 @@ const mpsOutput = {
   ],
   warningCodes: ['automated_triage_not_certification', 'not_legal_advice', 'not_human_verification', 'model_assigned_status'],
   retentionBoundaries: {
-    sourceTextStored: false,
+    fullPassageStored: false,
+    verbatimExcerptsRetained: true,
     claimVerificationPerformed: false,
     legalAdviceProvided: false,
     humanReviewPerformed: false,
   },
-  sourceTextStored: false,
+  fullPassageStored: false,
+  verbatimExcerptsRetained: true,
+  retentionNote: 'The complete submitted passage is not retained. Audit results retain short verbatim claim excerpts, classifications, rationales, hashes, and operational metadata.',
 }
 
 const mpsInput = { clientRequestId: 'req_mps_soil_001', text: PASSAGE }

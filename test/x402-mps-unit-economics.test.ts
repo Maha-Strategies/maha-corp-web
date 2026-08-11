@@ -2,9 +2,14 @@ import assert from 'node:assert/strict'
 import test from 'node:test'
 
 import {
-  BINDING_WORST_CASE,
+  CONSERVATIVE_CASE,
+  CONSERVATIVE_FAILURE_RATE,
+  CONSERVATIVE_TOKENS_PER_CHAR,
+  EXPECTED_CASE,
+  EXPECTED_TOKENS_PER_CHAR,
   HYPOTHETICAL_32KB,
   MAX_OUTPUT_TOKENS,
+  MINIMUM_PROMOTABLE_MARGIN_PERCENT,
   MODEL_PRICING,
   expectedRetryMultiplier,
   unitEconomics,
@@ -20,7 +25,25 @@ import { MAX_AUDIT_ATTEMPTS, MAX_AUDIT_PASSAGE_CHARS } from '../lib/x402/mps-aud
 
 test('the offer is priced at ten cents', () => {
   assert.equal(MPS_AUTONOMOUS_AUDIT_OFFER.amount, '100000')
-  assert.equal(BINDING_WORST_CASE().priceUsd, 0.1)
+  assert.equal(CONSERVATIVE_CASE().priceUsd, 0.1)
+})
+
+test('0.5 tokens per character is the expected case, not a worst case', () => {
+  // It was previously labelled worst case and it is not. English prose runs
+  // ~0.25; dense CJK, minified code and base64 reach roughly one token per
+  // character, and the cap is in characters, so nothing prevents it. Pricing
+  // off the midpoint while calling it a ceiling understated the true ceiling
+  // by half on exactly the inputs that cost most.
+  assert.equal(EXPECTED_TOKENS_PER_CHAR, 0.5)
+  assert.equal(CONSERVATIVE_TOKENS_PER_CHAR, 1.0)
+  assert.ok(CONSERVATIVE_CASE().modelCostUsd > EXPECTED_CASE().modelCostUsd)
+})
+
+test('the conservative case also assumes a worse hour, not just worse input', () => {
+  // Retries cluster exactly when the provider is unwell, and every retry is a
+  // model call absorbed against a payment already taken.
+  assert.ok(CONSERVATIVE_FAILURE_RATE > 0.15)
+  assert.ok(expectedRetryMultiplier(CONSERVATIVE_FAILURE_RATE) > expectedRetryMultiplier(0.15))
 })
 
 test('the model cost is computed from the caps that actually bind', () => {
@@ -33,10 +56,10 @@ test('the model cost is computed from the caps that actually bind', () => {
   assert.equal(MODEL_PRICING.inputPerMillionUsd, 3)
   assert.equal(MODEL_PRICING.outputPerMillionUsd, 15)
 
-  const worst = BINDING_WORST_CASE()
-  // 6000 chars at the pessimistic 0.5 tokens/char, plus a ~700-token prompt,
-  // is 3,700 input tokens: $0.0111. Output is capped at 1,500: $0.0225.
-  assert.ok(Math.abs(worst.modelCostUsd - 0.0336) < 0.0005, `model cost was ${worst.modelCostUsd}`)
+  // 6,000 characters at one token per character, plus a ~700-token prompt, is
+  // 6,700 input tokens: $0.0201. Output is capped at 1,500: $0.0225.
+  const worst = CONSERVATIVE_CASE()
+  assert.ok(Math.abs(worst.modelCostUsd - 0.0426) < 0.0005, `model cost was ${worst.modelCostUsd}`)
 })
 
 test('the failure allowance prices the no-second-charge promise, not the happy path', () => {
@@ -52,8 +75,8 @@ test('the failure allowance prices the no-second-charge promise, not the happy p
   assert.equal(expectedRetryMultiplier(0), 1)
 })
 
-test('ten cents covers the worst case that can actually reach the model', () => {
-  const worst = BINDING_WORST_CASE()
+test('ten cents covers the conservative case that can actually reach the model', () => {
+  const worst = CONSERVATIVE_CASE()
   assert.equal(worst.covered, true)
   assert.ok(worst.marginUsd > 0, `margin was ${worst.marginUsd}`)
 
@@ -66,13 +89,28 @@ test('ten cents covers the worst case that can actually reach the model', () => 
     Math.round(worst.totalCostUsd * 1e6),
   )
 
-  // Comfortably, not marginally. A margin under ~25% at list price leaves no
-  // room for a model price change and would not be safe to promote.
-  assert.ok(worst.marginPercent > 25, `margin was ${worst.marginPercent.toFixed(1)}%`)
+  // Judged against the conservative case, not the expected one. An offer
+  // priced off the expected case is priced for the days nothing goes wrong.
+  assert.ok(
+    worst.marginPercent > MINIMUM_PROMOTABLE_MARGIN_PERCENT,
+    `conservative margin was ${worst.marginPercent.toFixed(1)}%, floor is ${MINIMUM_PROMOTABLE_MARGIN_PERCENT}%`,
+  )
+  // And the expected case is naturally healthier, which is what makes the
+  // conservative figure the honest one to quote.
+  assert.ok(EXPECTED_CASE().marginPercent > worst.marginPercent)
+})
+
+test('pricing is sound, which is not the same as the offer being ready', () => {
+  // The offer stays withheld on infrastructure, not on economics. Conflating
+  // the two would let a green margin be read as permission to ship.
+  assert.equal(CONSERVATIVE_CASE().covered, true)
+  assert.equal(MPS_AUTONOMOUS_AUDIT_OFFER.status, 'withheld')
+  assert.equal(MPS_AUTONOMOUS_AUDIT_OFFER.availability.payableInProduction, false)
+  assert.ok(MPS_AUTONOMOUS_AUDIT_OFFER.availability.blockedBy.length > 0)
 })
 
 test('the minimum safe price is reported, so a loss-making offer is never shipped silently', () => {
-  const worst = BINDING_WORST_CASE()
+  const worst = CONSERVATIVE_CASE()
   assert.ok(Number(worst.minimumSafeAmountBaseUnits) > 0)
   // At the published price the floor is below what we charge -- that is what
   // "covered" means, expressed as a number rather than a boolean.
@@ -91,17 +129,17 @@ test('the 32 KB figure is the body limit, not the model input, and is priced any
   // client is constructed, so 32 KB cannot reach the model. The hypothetical is
   // computed so that raising the cap is a decision with a number attached.
   const hypothetical = HYPOTHETICAL_32KB()
-  assert.ok(hypothetical.totalCostUsd > BINDING_WORST_CASE().totalCostUsd)
+  assert.ok(hypothetical.totalCostUsd > CONSERVATIVE_CASE().totalCostUsd)
 
-  // The finding, stated as it actually falls out: at a 32 KB passage ten cents
-  // still covers cost, but only just -- the margin collapses from comfortable
-  // to single digits, which is below the threshold at which this offer is
-  // safe to promote. So raising the passage cap is not free; it is a repricing
-  // decision, and this is the number attached to it.
-  assert.equal(hypothetical.covered, true)
-  assert.ok(hypothetical.marginPercent < 10, `margin was ${hypothetical.marginPercent.toFixed(1)}%`)
+  // Under honest assumptions this is not merely thin, it is loss-making: a
+  // 32 KB high-entropy passage costs about $0.19 to serve for $0.10. The
+  // earlier calculation showed it as narrowly profitable, and it showed that
+  // only because it priced tokens at half their worst rate. The 6,000-char cap
+  // is doing real commercial work, not just protecting latency.
+  assert.equal(hypothetical.covered, false)
+  assert.ok(hypothetical.marginUsd < 0, `margin was ${hypothetical.marginUsd}`)
   assert.ok(
-    hypothetical.marginPercent < BINDING_WORST_CASE().marginPercent / 3,
-    'the 32 KB case must be visibly worse than the binding case, or the cap is doing nothing',
+    Number(hypothetical.minimumSafeAmountBaseUnits) > Number(MPS_AUTONOMOUS_AUDIT_OFFER.amount),
+    'raising the passage cap to the body limit would require repricing the offer',
   )
 })

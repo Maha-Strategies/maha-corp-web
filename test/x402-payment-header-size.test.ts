@@ -6,7 +6,7 @@ import { resolveX402 } from '../lib/x402/gateway.ts'
 import { discoveryExtensionsFor, resourceInfoFor } from '../lib/x402/discovery.ts'
 import { X402_OFFERS } from '../lib/x402/offers.ts'
 import { PAYMENT_HEADER_BUDGET, PAYMENT_HEADER_LIMIT } from '../lib/x402/declaration-compaction.ts'
-import { createPaidFetch, decodeChallenge, encodePaymentSignature, buildTypedData, selectRequirement } from '../lib/x402/client.ts'
+import { buildTypedData, createPaidFetch, encodePaymentSignature } from '../lib/x402/client.ts'
 import { parsePaymentHeader, matchesPaymentContext, PAYMENT_REQUIRED_HEADER, PAYMENT_SIGNATURE_HEADER } from '../lib/x402/protocol.ts'
 
 // The interoperability regression this file exists to prevent.

@@ -442,15 +442,22 @@ export const MPS_AUTONOMOUS_AUDIT_DISCOVERY: OfferDiscoveryContract = {
         type: 'object',
         additionalProperties: false,
         properties: {
-          sourceTextStored: { type: 'boolean', const: false },
+          // The complete passage is never stored; short verbatim claim
+          // excerpts are, because an audit that cannot quote the claim it
+          // tagged is unusable. Both facts are published, because publishing
+          // only the flattering one is what made the earlier claim false.
+          fullPassageStored: { type: 'boolean', const: false },
+          verbatimExcerptsRetained: { type: 'boolean', const: true },
           claimVerificationPerformed: { type: 'boolean', const: false },
           legalAdviceProvided: { type: 'boolean', const: false },
           humanReviewPerformed: { type: 'boolean', const: false },
         },
-        required: ['sourceTextStored', 'claimVerificationPerformed', 'legalAdviceProvided', 'humanReviewPerformed'],
+        required: ['fullPassageStored', 'verbatimExcerptsRetained', 'claimVerificationPerformed', 'legalAdviceProvided', 'humanReviewPerformed'],
       },
-      sourceTextStored: { type: 'boolean', const: false },
+      fullPassageStored: { type: 'boolean', const: false },
+      verbatimExcerptsRetained: { type: 'boolean', const: true },
+      retentionNote: { type: 'string' },
     },
-    required: ['version', 'offerId', 'auditId', 'retrievalToken', 'clientRequestId', 'inputHash', 'status', 'idempotentReplay', 'warnings', 'warningCodes', 'retentionBoundaries', 'sourceTextStored'],
+    required: ['version', 'offerId', 'auditId', 'retrievalToken', 'clientRequestId', 'inputHash', 'status', 'idempotentReplay', 'warnings', 'warningCodes', 'retentionBoundaries', 'fullPassageStored', 'verbatimExcerptsRetained'],
   },
 }

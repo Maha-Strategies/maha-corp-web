@@ -51,7 +51,7 @@ export const DEEP_CONTEXT_EXAMPLE_OUTPUT = {
   "clientRequestId": "req_rag_release_eval_001",
   "contextPack": {
     "version": "0.1.0",
-    "packId": "ctxpack_456658f83a414acb9322fcc815c9f3fa",
+    "packId": "ctxpack_d0dc187dd43a403d8aef472de5689408",
     "clientRequestId": "req_rag_release_eval_001",
     "task": "Find the release condition and rollback trigger while removing duplicate operational background.",
     "tokenBudget": 128,
@@ -245,10 +245,13 @@ export const MPS_AUDIT_EXAMPLE_OUTPUT = {
     "model_assigned_status"
   ],
   "retentionBoundaries": {
-    "sourceTextStored": false,
+    "fullPassageStored": false,
+    "verbatimExcerptsRetained": true,
     "claimVerificationPerformed": false,
     "legalAdviceProvided": false,
     "humanReviewPerformed": false
   },
-  "sourceTextStored": false
+  "fullPassageStored": false,
+  "verbatimExcerptsRetained": true,
+  "retentionNote": "The complete submitted passage is not retained. Audit results retain short verbatim claim excerpts, classifications, rationales, hashes, and operational metadata."
 } as const

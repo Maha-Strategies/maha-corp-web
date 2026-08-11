@@ -12,16 +12,18 @@
     "humanConfirmationRequired": true,
     "autonomousPaymentSupported": true,
     "autonomousPaymentScope": [
-      "context-compression",
-      "deep-context-evaluation",
-      "mps-autonomous-audit"
+      "context-compression"
     ],
     "humanConfirmationScope": [
       "stripe-checkout",
       "research-inquiries",
       "enterprise-onboarding"
     ],
-    "bindingCommitment": "Only Context Compression, Deep Context Evaluation and the Autonomous MPS Audit accept autonomous x402 payment, each under its own published machine-payment terms at an exact method and path. The GPU optimization capabilities are not x402 products. Stripe products require purchaser confirmation, and research or enterprise engagements require human scope review."
+    "bindingCommitment": "Only Context Compression accepts autonomous x402 payment today. Deep Context Evaluation (preview) and the Autonomous MPS Audit (withheld) are described for evaluation and are not payable; a live PAYMENT-REQUIRED challenge is the only proof an offer can be bought. The GPU optimization capabilities are not x402 products. Stripe products require purchaser confirmation, and research or enterprise engagements require human scope review.",
+    "describedNotPayable": [
+      "deep-context-evaluation",
+      "mps-autonomous-audit"
+    ]
   },
   "credentialPolicy": {
     "mode": "approved_client_credentials",
@@ -74,12 +76,14 @@
         "amount": "1000",
         "amountUnit": "base_units",
         "displayAmount": "0.001 USDC",
-        "discovery": "https://api.cdp.coinbase.com/platform/v2/x402/discovery/mcp"
-      }
+        "discovery": "https://api.cdp.coinbase.com/platform/v2/x402/discovery/mcp",
+        "payableNow": true
+      },
+      "payableNow": true
     },
     {
       "id": "deep-context-evaluation",
-      "status": "available_with_api_key_or_x402",
+      "status": "preview_not_payable",
       "endpoint": "https://www.mahastrategies.com/api/v1/compress/evaluate",
       "method": "POST",
       "methodBoundary": "Compiles a token-budgeted context pack, then reports exact retention of the caller's own labelled evidence spans. The retention figure is exact span matching and is not factual accuracy, answer quality, verification, or hallucination prevention. A retained span means the text survived selection, not that the text is true.",
@@ -99,12 +103,15 @@
         "network": "eip155:8453",
         "asset": "USDC",
         "amount": "10000",
-        "displayAmount": "0.01 USDC"
-      }
+        "displayAmount": "0.01 USDC",
+        "payableNow": false,
+        "note": "Published terms. Not currently payable in Production."
+      },
+      "payableNow": false
     },
     {
       "id": "mps-autonomous-audit",
-      "status": "available_with_x402",
+      "status": "withheld_not_payable",
       "endpoint": "https://www.mahastrategies.com/api/v1/mps/audit",
       "retrievalEndpoint": "https://www.mahastrategies.com/api/v1/mps/audit/{auditId}",
       "method": "POST",
@@ -115,7 +122,9 @@
       },
       "recovery": "A one-time high-entropy retrievalToken is issued at creation. A paid job is retrievable and resumable without a second payment, up to three model attempts; a resume must resubmit the original passage because no source text is stored.",
       "retention": {
-        "sourceTextStored": false
+        "fullPassageStored": false,
+        "verbatimExcerptsRetained": true,
+        "note": "The complete submitted passage is not retained. Audit results retain short verbatim claim excerpts, classifications, rationales, hashes, and operational metadata."
       },
       "machinePayment": {
         "protocol": "x402",
@@ -123,8 +132,11 @@
         "network": "eip155:8453",
         "asset": "USDC",
         "amount": "100000",
-        "displayAmount": "0.10 USDC"
-      }
+        "displayAmount": "0.10 USDC",
+        "payableNow": false,
+        "note": "Published terms. Not currently payable in any environment."
+      },
+      "payableNow": false
     },
     {
       "id": "gpu-tensor-network",
