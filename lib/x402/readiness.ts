@@ -2,6 +2,27 @@ import { createAgentInquiryLedger } from '../agent-inquiry-ledger.ts'
 import { x402Config, x402Enabled, type X402Config } from './config.ts'
 import { X402_OFFERS, offerFor, type X402Offer } from './offers.ts'
 import { MAX_RESOURCE_DESCRIPTION_BYTES, MAX_RESOURCE_DESCRIPTION_CHARS } from './discovery.ts'
+import { createHash } from 'node:crypto'
+
+/**
+ * Identifies the bound database without disclosing it.
+ *
+ * Supabase project references appear in ordinary public URLs, so this is a
+ * correlation aid rather than a secret -- but hashing keeps the readiness
+ * response free of anything that looks like configuration, which is the
+ * property that lets it be shared freely.
+ */
+function databaseFingerprintOf(environment: Record<string, string | undefined>): string | null {
+  const url = environment.NEXT_PUBLIC_SUPABASE_URL?.trim()
+  if (!url) return null
+  try {
+    const reference = new URL(url).hostname.split('.')[0] ?? ''
+    if (!reference) return null
+    return `sha256:${createHash('sha256').update(reference).digest('hex')}`
+  } catch {
+    return null
+  }
+}
 
 // Operational readiness for the x402 surface.
 //
@@ -37,6 +58,21 @@ export type X402ReadinessReport = {
   state: 'ready' | 'degraded' | 'unavailable'
   enabled: boolean
   checkedAt: string
+  /**
+   * SHA-256 of the Supabase project reference this deployment is bound to.
+   *
+   * A fingerprint rather than the reference, so the report stays safe to paste
+   * into a ticket, and so this can be compared against the reference held in CI
+   * without either side printing its value.
+   *
+   * It exists because "which database is this actually talking to" turned out
+   * to be unanswerable from outside: the URL is stored as a platform secret, it
+   * is not inlined in any client bundle, and a migration applied against a
+   * correctly-named credential still left the running app unable to see the
+   * objects it created. A deployment that cannot name its own database can only
+   * be diagnosed by guessing.
+   */
+  databaseFingerprint: string | null
   offers: { id: string; status: X402Offer['status']; enabledInThisEnvironment: boolean; payableInProduction: boolean }[]
   checks: ReadinessCheck[]
 }
@@ -106,6 +142,7 @@ export async function getX402Readiness(options: {
       state: 'unavailable',
       enabled: false,
       checkedAt,
+      databaseFingerprint: databaseFingerprintOf(environment),
       offers: X402_OFFERS.map((offer) => ({
         id: offer.id, status: offer.status, enabledInThisEnvironment: false, payableInProduction: offer.availability.payableInProduction,
       })),
@@ -125,11 +162,11 @@ export async function getX402Readiness(options: {
       summary: 'x402 configuration is present but invalid, so payments are refused.',
       detail: error instanceof Error ? error.message : 'unknown_error',
     })
-    return { state: 'unavailable', enabled: true, checkedAt, offers: [], checks }
+    return { state: 'unavailable', enabled: true, checkedAt, databaseFingerprint: databaseFingerprintOf(environment), offers: [], checks }
   }
   if (!config) {
     return {
-      state: 'unavailable', enabled: false, checkedAt, offers: [],
+      state: 'unavailable', enabled: false, checkedAt, databaseFingerprint: databaseFingerprintOf(environment), offers: [],
       checks: [{ id: 'x402.enabled', state: 'warn', summary: 'x402 is not configured in this environment.' }],
     }
   }
@@ -295,6 +332,7 @@ export async function getX402Readiness(options: {
     state: failed ? 'unavailable' : warned ? 'degraded' : 'ready',
     enabled: true,
     checkedAt,
+    databaseFingerprint: databaseFingerprintOf(environment),
     offers: X402_OFFERS.map((offer) => ({
       id: offer.id,
       status: offer.status,
