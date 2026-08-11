@@ -146,11 +146,19 @@ export async function getX402Readiness(options: {
   for (const offer of X402_OFFERS) {
     if (!enabledIds.has(offer.id)) continue
     if (offer.status === 'available') continue
+
+    // `preview` means exactly this: exercised in a non-production environment.
+    // Enabling it there is the intended state, so it is a warning that names
+    // the constraint rather than a failure that cries wolf on every Preview.
+    // `withheld` has no environment where enabling it is correct.
+    const withheld = offer.status === 'withheld'
     checks.push({
       id: `x402.offer.${offer.id}.status`,
-      state: 'fail',
-      summary: `${offer.id} is enabled for payment but published as "${offer.status}".`,
-      detail: `An agent would be quoted a price for an offer the catalog says is not payable. Gates: ${offer.availability.blockedBy.join(' | ') || 'none recorded'}`,
+      state: withheld ? 'fail' : 'warn',
+      summary: withheld
+        ? `${offer.id} is enabled for payment but published as "withheld".`
+        : `${offer.id} is enabled and published as "preview": correct outside Production, never inside it.`,
+      detail: `An agent would be quoted a price for an offer the catalog says is not payable in Production. Gates: ${offer.availability.blockedBy.join(' | ') || 'none recorded'}`,
     })
   }
   for (const offer of X402_OFFERS) {

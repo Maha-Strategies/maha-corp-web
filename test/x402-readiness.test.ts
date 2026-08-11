@@ -78,6 +78,27 @@ test('an offer enabled for payment but published as withheld fails readiness', a
   assert.match(status!.detail ?? '', /database separation|durable paid-job recovery/i)
 })
 
+test('a preview offer enabled outside Production warns rather than failing', async () => {
+  // Preview means exercised in a non-production environment, so enabling it
+  // there is the intended state. Failing on it would make readiness cry wolf
+  // on every Preview and train operators to ignore the one signal that
+  // matters -- a withheld offer being enabled.
+  const report = await getX402Readiness({
+    environment: {
+      ...BASE,
+      X402_RESOURCES: JSON.stringify([
+        { method: 'POST', path: CONTEXT_COMPRESSION_OFFER.path },
+        { method: 'POST', path: '/api/v1/compress/evaluate' },
+      ]),
+    },
+    probe: everything,
+  })
+  const status = check(report, 'x402.offer.deep-context-evaluation.status')
+  assert.equal(status?.state, 'warn')
+  assert.match(status!.summary, /correct outside Production, never inside it/)
+  assert.equal(report.state, 'degraded', 'a preview offer degrades readiness, it does not break it')
+})
+
 test('an available offer that is not enabled is a warning, not a failure', async () => {
   const report = await getX402Readiness({
     environment: { ...BASE, X402_RESOURCES: JSON.stringify([{ method: 'POST', path: '/api/v1/compress' }]) },
