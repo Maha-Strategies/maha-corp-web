@@ -84,56 +84,93 @@ jobs:
             echo "SUPABASE_DB_NAME=$(jq -r '.db_name' <<<"$pooler")"
           } >> "$GITHUB_ENV"
 
+      # psql expands :'var' only on its normal input path. With -c the string
+      # goes to the server verbatim, so the tokens arrived as literal SQL and
+      # run 31600125970 died on `syntax error at or near ":"` before reading a
+      # single row. Hence a file and -f. The shape checks above stay: -f fixes
+      # expansion, it does not make unvalidated input safe.
+      - name: Write the diagnostic SQL
+        run: |
+          set -euo pipefail
+          cat > diagnostic.sql <<'SQL'
+          \echo '=== 1. x402_payments (claims) ==='
+          select payment_id, resource, payer, amount_paid, claimed_at
+            from public.x402_payments
+           where payer ilike :'payer'
+             and resource like '%/api/v1/mps/audit'
+           order by claimed_at desc limit 10;
+          
+          \echo '=== 2. x402_settlements (money) ==='
+          select payment_id, transaction_id, chain_status, chain_amount, settled_at
+            from public.x402_settlements
+           where transaction_id ilike :'tx'
+           order by settled_at desc limit 10;
+          
+          \echo '=== 3. x402_offer_admissions (logical request) ==='
+          select offer_id, payer, idempotency_key, input_hash, resource, amount,
+                 state, payment_transaction, created_at, settled_at
+            from public.x402_offer_admissions
+           where idempotency_key = :'crid'
+              or payment_transaction ilike :'tx'
+           order by created_at desc limit 10;
+          
+          \echo '=== 4. x402_mps_audits (job; operational metadata only) ==='
+          select public_id, payer, client_request_id, input_hash, payment_transaction,
+                 status, failure_code, attempt_count, created_at, completed_at
+            from public.x402_mps_audits
+           where client_request_id = :'crid'
+              or payment_transaction ilike :'tx'
+           order by created_at desc limit 10;
+          
+          \echo '=== 5. x402_offer_usage_daily (telemetry) ==='
+          select usage_day, offer_id, event_kind, status_class, discovery_source, event_count, last_observed_at
+            from public.x402_offer_usage_daily
+           where offer_id = 'mps-autonomous-audit'
+             and usage_day >= (current_date - 2)
+           order by usage_day desc, event_kind;
+          
+          \echo '=== Row counts, for the state classification ==='
+          select
+            (select count(*) from public.x402_settlements where transaction_id ilike :'tx') as settlements,
+            (select count(*) from public.x402_offer_admissions where idempotency_key = :'crid') as admissions,
+            (select count(*) from public.x402_mps_audits where client_request_id = :'crid') as jobs;
+          SQL
+          # The read-only promise, checked against the file that actually runs
+          # rather than against intent.
+          if grep -inE '^[[:space:]]*(insert|update|delete|drop|alter|create|truncate|grant|revoke)[[:space:]]' diagnostic.sql; then
+            echo '::error::The diagnostic must contain SELECT statements only.'
+            exit 1
+          fi
+
+      # Proves expansion works on this input path before the real queries run,
+      # so a regression fails on a one-row probe rather than mid-diagnostic.
+      - name: Prove the psql variables expand
+        run: |
+          set -euo pipefail
+          export PGPASSWORD="$SUPABASE_DB_PASSWORD"
+          dsn="host=${SUPABASE_DB_HOST} port=${SUPABASE_DB_PORT} user=${SUPABASE_DB_USER} dbname=${SUPABASE_DB_NAME} sslmode=require"
+          {
+            echo "select :'tx' = '$TX' as tx_ok, :'crid' = '$CRID' as crid_ok, :'payer' = '$PAYER' as payer_ok;"
+          } > probe.sql
+          out=$(psql "$dsn" -v ON_ERROR_STOP=1 -At -v tx="$TX" -v crid="$CRID" -v payer="$PAYER" -f probe.sql)
+          echo "expansion probe: $out"
+          [ "$out" = 't|t|t' ] || { echo '::error::psql did not expand the diagnostic variables.'; exit 1; }
+
       - name: Correlate the five surfaces
         run: |
           set -euo pipefail
           export PGPASSWORD="$SUPABASE_DB_PASSWORD"
           dsn="host=${SUPABASE_DB_HOST} port=${SUPABASE_DB_PORT} user=${SUPABASE_DB_USER} dbname=${SUPABASE_DB_NAME} sslmode=require"
-          run() { psql "$dsn" -v ON_ERROR_STOP=1 -P pager=off -v tx="$TX" -v crid="$CRID" -v payer="$PAYER" -c "$1"; }
-
-          {
-            echo '=== 1. x402_payments (claims) ==='
-            run "select payment_id, resource, payer, amount_paid, claimed_at
-                   from public.x402_payments
-                  where payer ilike :'payer'
-                    and resource like '%/api/v1/mps/audit'
-                  order by claimed_at desc limit 10;"
-
-            echo '=== 2. x402_settlements (money) ==='
-            run "select payment_id, transaction_id, chain_status, chain_amount, settled_at
-                   from public.x402_settlements
-                  where transaction_id ilike :'tx'
-                  order by settled_at desc limit 10;"
-
-            echo '=== 3. x402_offer_admissions (logical request) ==='
-            run "select offer_id, payer, idempotency_key, input_hash, resource, amount,
-                        state, payment_transaction, created_at, settled_at
-                   from public.x402_offer_admissions
-                  where idempotency_key = :'crid'
-                     or payment_transaction ilike :'tx'
-                  order by created_at desc limit 10;"
-
-            echo '=== 4. x402_mps_audits (job; operational metadata only) ==='
-            run "select public_id, payer, client_request_id, input_hash, payment_transaction,
-                        status, failure_code, attempt_count, created_at, completed_at
-                   from public.x402_mps_audits
-                  where client_request_id = :'crid'
-                     or payment_transaction ilike :'tx'
-                  order by created_at desc limit 10;"
-
-            echo '=== 5. x402_offer_usage_daily (telemetry) ==='
-            run "select usage_day, offer_id, event_kind, status_class, discovery_source, event_count, last_observed_at
-                   from public.x402_offer_usage_daily
-                  where offer_id = 'mps-autonomous-audit'
-                    and usage_day >= (current_date - 2)
-                  order by usage_day desc, event_kind;"
-
-            echo '=== Row counts, for the state classification ==='
-            run "select
-                   (select count(*) from public.x402_settlements where transaction_id ilike :'tx') as settlements,
-                   (select count(*) from public.x402_offer_admissions where idempotency_key = :'crid') as admissions,
-                   (select count(*) from public.x402_mps_audits where client_request_id = :'crid') as jobs;"
-          } | tee "$EVIDENCE"
+          psql "$dsn" -v ON_ERROR_STOP=1 -P pager=off \
+            -v tx="$TX" -v crid="$CRID" -v payer="$PAYER" \
+            -f diagnostic.sql | tee "$EVIDENCE"
+          # An unexpanded token in the output would mean the queries matched
+          # nothing for the wrong reason, which reads identically to a clean
+          # "no rows" result.
+          if grep -qE ":'(tx|crid|payer)'" "$EVIDENCE"; then
+            echo '::error::Unexpanded psql variables appeared in the diagnostic output.'
+            exit 1
+          fi
 
       - name: Upload diagnostic evidence
         if: always()
