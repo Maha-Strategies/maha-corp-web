@@ -64,26 +64,50 @@ must pass before the deployment approval in Stage 2 is requested.
 | # | Gate | Status |
 | --- | --- | --- |
 | 1.1 | **Preview** database census green — every listed table and function `true` | **FAILED 2026-08-12**: `x402_mps_audits=false`, `resume_x402_mps_audit=false` |
-| 1.2 | **Production** database census green | pending — awaiting reviewer approval on `production-database` |
+| 1.2 | **Production** database census green | **PASSED 2026-08-12**: all ten objects `true` (run 31573419127) |
 | 1.3 | Preview readiness HTTP 200 | pending |
 | 1.4 | Preview unpaid `POST /api/v1/mps/audit` returns **402** — never 401, never 400 | pending |
 | 1.5 | Challenge amount exactly `100000` | pending |
 | 1.6 | Crawler probe of the published example returns **402**, never 400 | pending |
-| 1.7 | `x402-doctor` 0 errors | pending |
+| 1.7 | `x402-doctor` 0 errors | **blocked by design** — see below |
 | 1.8 | Anthropic and retrieval-secret runtime checks pass | confirmed via Production readiness |
 | 1.9 | MPS, admission, settlement and telemetry objects present | blocked by 1.1 / 1.2 |
 | 1.10 | Recovery and idempotency exercised in Preview | see below |
 
-**Gate 1.1 has already failed and is the current blocker.** Census run
+**Gate 1.1 has failed and is the current blocker.** Census run
 [31573354515](https://github.com/Maha-Strategies/maha-corp-web/actions/runs/31573354515)
 reports `x402_mps_audits=false` and `resume_x402_mps_audit=false` against the
-Preview database: migration `20260810000400_x402_mps_audit_jobs.sql` was never
-applied there. Everything else the offer needs is present. This is exactly what
-the census was built to find, and it is why "applied, inferred, not observed"
-was not good enough to promote on.
+**Preview** database: migration `20260810000400_x402_mps_audit_jobs.sql` was
+never applied there. Everything else the offer needs is present.
+
+**Gate 1.2 passed.** Census run
+[31573419127](https://github.com/Maha-Strategies/maha-corp-web/actions/runs/31573419127),
+through the reviewer-protected `production-database` environment, reports all
+ten objects `true` in **Production**, including `x402_mps_audits` and
+`resume_x402_mps_audit`.
+
+So the two databases disagree, and the direction is the awkward one: the
+objects exist where money moves and are missing where the behaviour would be
+rehearsed. Production being ready is not a reason to skip Preview — it is the
+reason Preview matters, because the only remaining place to exercise recovery
+and idempotency without spending $0.10 is the environment that cannot currently
+run the job at all.
+
+This is exactly what the census was built to find, and why "applied, inferred,
+not observed" was not good enough to promote on. Neither database had been
+looked at; one of them would have been wrong.
 
 Applying that migration to Preview is a reviewed dispatch of
 `preview-migrations.yml`, and it needs its own authorization.
+
+Gates 1.4 and 1.7 are unreachable before Stage 2 for the same circular reason
+this document was restructured to fix. `x402-doctor` against the live MPS
+endpoint reports one error today —
+`x402.http.challenge_status: The unpaid request returned HTTP 401; Bazaar
+requires HTTP 402` — because an offer that is not in `X402_RESOURCES` has no
+payment contract to validate. The doctor is correct; the endpoint is behind the
+API-key gate. Both gates are re-run against Preview once the path is enabled
+there, and against Production immediately after Stage 2 step 4.
 
 Gate 1.4 deserves its own line because MPS currently answers **401**, not 402.
 Until the path is in `X402_RESOURCES` for the environment under test, the offer
