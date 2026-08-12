@@ -20,7 +20,7 @@ export const metadata: Metadata = {
 
 const flow = [
   ['1', 'Search Bazaar', 'Use semantic search filtered on Base Mainnet, the exact USDC contract address 0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913, exact-payment, and maxUsdPrice=0.005. The asset filter takes a contract address: a bare symbol such as "usdc" matches nothing and returns an empty page rather than an error. If the asynchronous semantic index has not refreshed, use Bazaar merchant discovery as the exact indexed fallback.'],
-  ['2', 'Inspect the contract', 'Read the discovered input example plus input and output JSON Schemas. Refuse missing or malformed discovery metadata.'],
+  ['2', 'Inspect the contract', 'Read the discovered input example plus input and output JSON Schemas. Refuse missing or malformed discovery metadata. To decide which offer to call in the first place, read the machine-readable Maha offer selection guide at /.well-known/maha/offer-selection.json.'],
   ['3', 'Apply policy before signing', 'Require Base Mainnet, native Base USDC, the published Maha payee, exactly 1,000 base units, and a hard ceiling of 5,000 base units.'],
   ['4', 'Pay once', 'Load either a plain Viem account or a named CDP Server Wallet only after discovery and policy checks pass. Re-check the live 402 terms before producing a signature.'],
   ['5', 'Verify settlement', 'Require PAYMENT-RESPONSE success, a Base transaction hash, the expected network, and the signing wallet as payer.'],
