@@ -104,23 +104,23 @@ test('any measurement need selects Deep Context Evaluation', () => {
 // --- Boundaries ------------------------------------------------------------
 
 test('a ceiling exactly equal to the price authorizes it', () => {
-  assert.equal(selectMahaOffer(base({ maximumPriceUsdc: '1000' })).decision, 'select')
+  assert.equal(selectMahaOffer(base({ maximumPriceBaseUnits: '1000' })).decision, 'select')
   assert.equal(
-    selectMahaOffer(base({ objective: 'evaluate-context-quality', maximumPriceUsdc: '10000' })).decision,
+    selectMahaOffer(base({ objective: 'evaluate-context-quality', maximumPriceBaseUnits: '10000' })).decision,
     'select',
   )
 })
 
 test('one base unit under the price rejects', () => {
-  assert.equal(selectMahaOffer(base({ maximumPriceUsdc: '999' })).decision, 'reject')
+  assert.equal(selectMahaOffer(base({ maximumPriceBaseUnits: '999' })).decision, 'reject')
   assert.equal(
-    selectMahaOffer(base({ objective: 'evaluate-context-quality', maximumPriceUsdc: '9999' })).decision,
+    selectMahaOffer(base({ objective: 'evaluate-context-quality', maximumPriceBaseUnits: '9999' })).decision,
     'reject',
   )
 })
 
-test('$0.005 cannot authorize Deep Context Evaluation, and never downgrades to compression', () => {
-  const decision = selectMahaOffer(base({ objective: 'evaluate-context-quality', maximumPriceUsdc: '5000' }))
+test('a 5000 base-unit ceiling cannot authorize Deep Context Evaluation, and never downgrades to compression', () => {
+  const decision = selectMahaOffer(base({ objective: 'evaluate-context-quality', maximumPriceBaseUnits: '5000' }))
   assert.equal(decision.decision, 'reject')
   assert.deepEqual(decision.selectedOfferIds, [], 'a cheaper different product is not an answer')
   assert.ok(decision.reasons.some((reason) => reason.includes('10000')))
@@ -130,15 +130,15 @@ test('$0.005 cannot authorize Deep Context Evaluation, and never downgrades to c
   )
 })
 
-test('$0.02 authorizes the two-stage sequence at exactly 11000 base units', () => {
-  const decision = selectMahaOffer(base({ objective: 'compile-and-evaluate', maximumPriceUsdc: '20000' }))
+test('a 20000 base-unit ceiling authorizes the two-stage sequence at exactly 11000 base units', () => {
+  const decision = selectMahaOffer(base({ objective: 'compile-and-evaluate', maximumPriceBaseUnits: '20000' }))
   assert.equal(decision.decision, 'sequence')
   assert.deepEqual(decision.selectedOfferIds, [COMPRESSION, DEEP])
   assert.equal(decision.estimatedOfferCostBaseUnits, '11000')
 })
 
 test('the sequence is rejected when its total exceeds the ceiling, even though stage one fits', () => {
-  const decision = selectMahaOffer(base({ objective: 'compile-and-evaluate', maximumPriceUsdc: '10999' }))
+  const decision = selectMahaOffer(base({ objective: 'compile-and-evaluate', maximumPriceBaseUnits: '10999' }))
   assert.equal(decision.decision, 'reject')
   assert.deepEqual(decision.selectedOfferIds, [], 'a partial sequence is not a cheaper sequence')
 })
@@ -153,9 +153,40 @@ test('an unknown network or asset fails closed', () => {
 })
 
 test('a ceiling that is not an integer string fails closed rather than being ignored', () => {
-  for (const ceiling of ['0.005', '5e3', '', 'many', '-1', '1_000']) {
-    const decision = selectMahaOffer(base({ maximumPriceUsdc: ceiling }))
+  // '0.005' is the mistake the field name now guards against: a caller who
+  // thinks in dollars. Rejected outright, because reading it as 0 base units
+  // would block every offer and reading it as 5000 would invent permission
+  // nobody granted.
+  for (const ceiling of ['0.005', '0.01', '5e3', '', 'many', '-1', '1_000', ' 5000', '5000 ']) {
+    const decision = selectMahaOffer(base({ maximumPriceBaseUnits: ceiling }))
     assert.equal(decision.decision, 'reject', `${ceiling} must not read as permissive`)
+  }
+})
+
+test('the ceiling field is named for its unit, with no dollar-named alias', async () => {
+  // The guide has not shipped, so there is deliberately no compatibility
+  // alias: a field that accepts both a base-unit name and a dollar-sounding
+  // one would let a caller pick the reading that flatters their intent.
+  const document = buildOfferSelectionDocument()
+  const inputs = document.selectionInputs as Record<string, unknown>
+  assert.ok('maximumPriceBaseUnits' in inputs)
+  assert.ok(!('maximumPriceUsdc' in inputs), 'the misleading dollar-named field must not survive anywhere')
+
+  // Scans the shipped source only. This test file necessarily names the old
+  // field to assert its absence, so including it would fail on its own guard.
+  const { readFile } = await import('node:fs/promises')
+  const forbidden = `maximumPrice${'Usdc'}`
+  for (const file of ['../lib/x402/offer-selection.ts', '../app/api/discovery/offer-selection/route.ts']) {
+    const text = await readFile(new URL(file, import.meta.url), 'utf8')
+    assert.ok(!text.includes(forbidden), `${file} still references the old name`)
+  }
+
+  const ceiling = inputs.maximumPriceBaseUnits as Record<string, unknown>
+  assert.equal(ceiling.assetDecimals, 6, 'the decimals a reader needs to convert must travel with the field')
+  assert.equal(ceiling.pattern, '^[0-9]+$')
+  // Any display value published beside it must be marked non-authoritative.
+  for (const example of ceiling.examples as Array<Record<string, string>>) {
+    assert.match(example.equivalentDisplay, /non-authoritative/)
   }
 })
 
@@ -166,7 +197,7 @@ test('the asset comparison is case-insensitive, since checksummed and lowercase 
 test('unsupported capabilities reject regardless of budget', () => {
   for (const objective of ['summarize', 'verify-facts'] as const) {
     for (const ceiling of ['5000', '20000', '100000000']) {
-      const decision = selectMahaOffer(base({ objective, maximumPriceUsdc: ceiling }))
+      const decision = selectMahaOffer(base({ objective, maximumPriceBaseUnits: ceiling }))
       assert.equal(decision.decision, 'reject', `${objective} at ${ceiling} must reject`)
       assert.deepEqual(decision.selectedOfferIds, [])
     }
