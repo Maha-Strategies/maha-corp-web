@@ -65,14 +65,14 @@ must pass before the deployment approval in Stage 2 is requested.
 | --- | --- | --- |
 | 1.1 | **Preview** database census green — every listed table and function `true` | **PASSED 2026-08-12**: all ten `true` after applying `…000400` (census run 31575178797) |
 | 1.2 | **Production** database census green | **PASSED 2026-08-12**: all ten objects `true` (run 31573419127) |
-| 1.3 | Preview readiness HTTP 200 | pending |
-| 1.4 | Preview unpaid `POST /api/v1/mps/audit` returns **402** — never 401, never 400 | pending |
-| 1.5 | Challenge amount exactly `100000` | pending |
-| 1.6 | Crawler probe of the published example returns **402**, never 400 | pending |
+| 1.3 | Preview readiness HTTP 200 | **blocked** — Preview deployment protection; see below |
+| 1.4 | Preview unpaid `POST /api/v1/mps/audit` returns **402** — never 401, never 400 | **blocked** — same |
+| 1.5 | Challenge amount exactly `100000` | **blocked** — same |
+| 1.6 | Crawler probe of the published example returns **402**, never 400 | **blocked** — same |
 | 1.7 | `x402-doctor` 0 errors | **blocked by design** — see below |
 | 1.8 | Anthropic and retrieval-secret runtime checks pass | confirmed via Production readiness |
 | 1.9 | MPS, admission, settlement and telemetry objects present | blocked by 1.1 / 1.2 |
-| 1.10 | Recovery and idempotency exercised in Preview | see below |
+| 1.10 | Recovery and idempotency exercised in Preview | **blocked** — same, and no funded Sepolia wallet |
 
 **Gate 1.1 passed on the second attempt, after a repair the census exposed.**
 The first Preview census, run
@@ -126,7 +126,50 @@ published input example. A **400** there means the published example does not
 satisfy the live schema — a product defect that only becomes visible once the
 offer is priced.
 
+### Blocked: no credential reaches the Preview deployment
+
+MPS is enabled in Preview. `X402_RESOURCES` is set **branch-scoped to
+`codex/promote-mps-audit`** with method and path for all three offers, so no
+other Preview branch is affected and the environment-wide value is untouched. A
+git-integration build was triggered so the branch-scoped variable takes effect.
+
+Gates 1.3 through 1.6 still cannot be observed, for one reason: **Preview
+deployments sit behind Vercel deployment protection, and nothing available here
+can get past it.**
+
+| Route | Result |
+| --- | --- |
+| Direct request to the Preview URL | HTTP 302 to the Vercel login |
+| `vercel env pull` for `VERCEL_AUTOMATION_BYPASS_SECRET` | Sensitive — returns empty by design |
+| `preview-mps-gates.yml` in CI | `VERCEL_AUTOMATION_BYPASS_SECRET` and `RELEASE_HEALTH_TOKEN` are **both empty** in the GitHub `Preview` environment |
+
+The CI route looked promising because `preview-e2e.yml` references that secret,
+but its own header records that it has never run — the secret it names does not
+exist in GitHub. Run
+[31576810714](https://github.com/Maha-Strategies/maha-corp-web/actions/runs/31576810714)
+confirms both are empty.
+
+This is a credential-provisioning decision, not a technical obstacle to route
+around, and it needs an operator. Either:
+
+1. **Add `VERCEL_AUTOMATION_BYPASS_SECRET` and `RELEASE_HEALTH_TOKEN` to the
+   GitHub `Preview` environment**, read from the Vercel dashboard. Then
+   `preview-mps-gates.yml` runs unchanged and produces a linkable evidence
+   artifact. This is the better option: it also makes `preview-e2e.yml` work
+   for the first time.
+2. Or relax deployment protection for this branch's Preview — worse, because it
+   widens access to satisfy a test.
+
+Until then gates 1.3-1.6 are **unobserved, not passed**, and this document says
+so rather than inferring them from the fact that the same code answers
+correctly in Production. Inferring database state is precisely what the census
+was built to stop.
+
 ### Recovery and idempotency (1.10)
+
+No funded Base Sepolia wallet exists, and none was created: the standing
+instruction is not to fund a wallet merely to satisfy this gate, and the
+Mainnet key must never be used for a testnet assertion.
 
 Exercised in Preview **if a funded Base Sepolia wallet exists**. If none does,
 this gate is **explicitly deferred to the single authorized Production
