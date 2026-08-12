@@ -526,6 +526,8 @@ function offerEntry(offer: X402Offer): Record<string, unknown> {
 
 /** The five deterministic examples, each replayed against the selector in tests. */
 export const OFFER_SELECTION_EXAMPLES: ReadonlyArray<{
+  /** Only meaningful while this offer is payable; omitted from the document otherwise. */
+  requiresOfferId?: string
   name: string
   input: OfferSelectionInput
   expected: { decision: OfferDecision['decision']; selectedOfferIds: string[]; estimatedOfferCostBaseUnits: string }
@@ -562,6 +564,7 @@ export const OFFER_SELECTION_EXAMPLES: ReadonlyArray<{
     note: 'Only Deep Context Evaluation measures retention. 10000 base units fits a 20000 ceiling.',
   },
   {
+    requiresOfferId: MPS_ID,
     name: 'Editorial claim triage, ceiling 100000 base units ($0.10)',
     input: {
       objective: 'claim-provenance-triage',
@@ -575,6 +578,7 @@ export const OFFER_SELECTION_EXAMPLES: ReadonlyArray<{
     note: 'Only the MPS audit assigns provenance statuses. 100000 base units is exactly the ceiling, which authorizes it.',
   },
   {
+    requiresOfferId: MPS_ID,
     name: 'Claim triage at a ceiling of 20000 base units ($0.02)',
     input: {
       objective: 'claim-provenance-triage',
@@ -586,6 +590,7 @@ export const OFFER_SELECTION_EXAMPLES: ReadonlyArray<{
     note: 'Budget mismatch. Neither compression offer is substituted: neither assigns provenance statuses, so a cheaper one would answer a different question.',
   },
   {
+    requiresOfferId: MPS_ID,
     name: 'Claim triage on a passage over 6000 characters',
     input: {
       objective: 'claim-provenance-triage',
@@ -799,7 +804,13 @@ export function buildOfferSelectionDocument(
       'You require guaranteed semantic completeness rather than budget-bound selection.',
       'The request carries binary input rather than UTF-8 text.',
     ],
-    examples: OFFER_SELECTION_EXAMPLES.map((example) => ({
+    // An example that names an unavailable offer is a false published claim,
+    // not merely a stale one: it tells an autonomous buyer to call something it
+    // cannot buy. They return with the offer.
+    examples: OFFER_SELECTION_EXAMPLES.filter((example) =>
+      !example.requiresOfferId
+      || catalog.some((offer) => offer.id === example.requiresOfferId && offer.status === 'available'))
+      .map((example) => ({
       name: example.name,
       note: example.note,
       input: example.input,
