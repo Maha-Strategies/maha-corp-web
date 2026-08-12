@@ -41,7 +41,7 @@ No source text, compiled context, or evidence span text is retained. Only hashes
 
 **Status: available.** Payable autonomously on Base Mainnet under the terms above.
 
-## Autonomous MPS Audit via x402 (withheld — not currently payable)
+## Autonomous MPS Audit via x402
 
 - API: `POST https://www.mahastrategies.com/api/v1/mps/audit`
 - Retrieval and resume: `GET`/`POST https://www.mahastrategies.com/api/v1/mps/audit/{auditId}`
@@ -57,19 +57,19 @@ What this is not: it is **not factual certification**, **not legal advice**, and
 
 Retention, stated precisely: **the complete submitted passage is not retained.** Audit results retain short verbatim claim excerpts (6-25 words each), classifications, rationales, hashes, and operational metadata. An audit that could not quote the claim it tagged would be unusable, so the excerpts are retained by design. An earlier version of this page claimed no source text was retained at all; that was wrong.
 
-**Status: withheld.** This offer is described here and is not payable in any environment. It is blocked on database separation and on proving durable paid-job recovery against a real deployment.
+**Status: available.** This offer accepts autonomous x402 payment on Base Mainnet. It requires an idempotency key and an input hash, both claimed before settlement, so a replayed request returns the job already paid for rather than charging a second time.
 
 Recovery. The response carries a one-time high-entropy `retrievalToken`. A paid job is retrievable and resumable at the retrieval path without a second payment, up to three model attempts. Because no source text is stored, a resume must resubmit the original passage; it is accepted only if it hashes to the passage the job was paid for. Keep the token: it is issued once and the `auditId` alone is not sufficient to read a result.
 
 ## Which routes accept autonomous payment
 
-Three offers are published. Only the ones marked payable below accept autonomous payment today, and only at these exact method-and-path pairs:
+Three offers are published, and all three accept autonomous payment today, at these exact method-and-path pairs and no others:
 
 | Offer | Method and path | Price | Payable now |
 | --- | --- | --- | --- |
 | `context-compression` | `POST /api/v1/compress` | 1,000 USDC base units | yes |
 | `deep-context-evaluation` | `POST /api/v1/compress/evaluate` | 10,000 USDC base units | yes |
-| `mps-autonomous-audit` | `POST /api/v1/mps/audit` | 100,000 USDC base units | no — withheld |
+| `mps-autonomous-audit` | `POST /api/v1/mps/audit` | 100,000 USDC base units | yes |
 
 Choosing between the two payable offers is a documented decision rather than an inference from two descriptions: see the [machine-readable Maha offer selection guide](https://www.mahastrategies.com/.well-known/maha/offer-selection.json). Both offers compile a context pack; only Deep Context Evaluation measures retention of caller-labelled spans, and neither verifies facts.
 
