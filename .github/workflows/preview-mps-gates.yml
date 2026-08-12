@@ -64,8 +64,14 @@ jobs:
           fi
           echo "target: $TARGET"
 
-      # Gate 1.3
+      # Gate 1.3. continue-on-error because readiness is the only gate that
+      # needs RELEASE_HEALTH_TOKEN, and a token mismatch there would otherwise
+      # hide the three gates that need nothing but the protection bypass. Those
+      # three are the ones that decide whether the unpaid contract is correct,
+      # which is what a $0.10 authorization would rest on.
       - name: Readiness must be HTTP 200
+        id: readiness
+        continue-on-error: true
         run: |
           set -euo pipefail
           code=$(curl -s -o readiness.json -w '%{http_code}' \
@@ -89,6 +95,7 @@ jobs:
       # 400 would mean the route rejected an empty body before pricing it. Both
       # are failures, and they fail for different reasons, so both are named.
       - name: Unpaid request must be 402 for exactly 100000
+        id: challenge
         run: |
           set -euo pipefail
           code=$(curl -s -o challenge.json -w '%{http_code}' -X POST \
@@ -118,6 +125,7 @@ jobs:
       # live schema -- a defect only visible once the offer is priced, and one
       # that would strand any agent that trusted the declaration.
       - name: Replay the published crawler example
+        id: crawler
         run: |
           set -euo pipefail
           node -e '
@@ -140,6 +148,7 @@ jobs:
 
       # Gate 1.7
       - name: x402-doctor
+        id: doctor
         run: |
           set -euo pipefail
           npm run x402:doctor -- "${TARGET}/api/v1/mps/audit" \
@@ -152,6 +161,21 @@ jobs:
             for (const f of r.findings || []) console.log(`[${f.level}] ${f.ruleId}: ${f.message}`)
             if (r.summary.errors > 0) throw new Error("x402-doctor reported errors")
           '
+
+      # One place to read the verdict, and the job still fails if any required
+      # gate did. Readiness is required: it is deferred here, not waived.
+      - name: Gate summary
+        if: always()
+        run: |
+          set -euo pipefail
+          echo "1.3 readiness            : ${{ steps.readiness.outcome }}"
+          echo "1.4/1.5 unpaid challenge : ${{ steps.challenge.outcome }}"
+          echo "1.6 crawler example      : ${{ steps.crawler.outcome }}"
+          echo "1.7 x402-doctor          : ${{ steps.doctor.outcome }}"
+          if [ "${{ steps.readiness.outcome }}" != 'success' ]; then
+            echo '::error::Readiness did not pass. If it returned 401, the GitHub RELEASE_HEALTH_TOKEN does not match the value the Preview deployment holds.'
+            exit 1
+          fi
 
       - name: Upload gate evidence
         if: always()
