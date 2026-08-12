@@ -36,6 +36,7 @@
     "audit:x402-trust": "node --experimental-strip-types scripts/run-x402-trust-audit.ts",
     "watch:x402": "node --experimental-strip-types scripts/run-x402-endpoint-watch.ts",
     "watch:x402-inactivity": "node --experimental-strip-types scripts/run-bazaar-inactivity-watch.ts",
+    "worker:carp-seller": "node --experimental-strip-types scripts/run-carp-seller-worker.ts",
     "canary:x402": "node --experimental-strip-types scripts/run-production-x402-canary.ts",
     "generate:context-playground": "node --experimental-strip-types scripts/generate-context-playground-workload.ts",
     "benchmark:context-retention": "node --experimental-strip-types scripts/run-context-retention-benchmark.ts",
