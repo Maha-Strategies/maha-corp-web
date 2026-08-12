@@ -6,6 +6,9 @@ Read-only discovery API: https://www.mahastrategies.com/api/agentic-commerce/off
 
 OpenAPI: https://www.mahastrategies.com/api/docs/openapi
 
+Machine-readable Maha offer selection guide: https://www.mahastrategies.com/.well-known/maha/offer-selection.json
+Deterministic rules for choosing Context Compression, Deep Context Evaluation, or neither, with published non-fit conditions and worked examples. Advisory: a live `PAYMENT-REQUIRED` challenge remains authoritative for terms.
+
 ## Context Compression via x402
 
 - Product page: https://www.mahastrategies.com/context-compiler
@@ -67,6 +70,8 @@ Three offers are published. Only the ones marked payable below accept autonomous
 | `context-compression` | `POST /api/v1/compress` | 1,000 USDC base units | yes |
 | `deep-context-evaluation` | `POST /api/v1/compress/evaluate` | 10,000 USDC base units | yes |
 | `mps-autonomous-audit` | `POST /api/v1/mps/audit` | 100,000 USDC base units | no — withheld |
+
+Choosing between the two payable offers is a documented decision rather than an inference from two descriptions: see the [machine-readable Maha offer selection guide](https://www.mahastrategies.com/.well-known/maha/offer-selection.json). Both offers compile a context pack; only Deep Context Evaluation measures retention of caller-labelled spans, and neither verifies facts.
 
 A published price is not an offer to sell. Only a live `PAYMENT-REQUIRED` challenge proves an offer can be bought; the `status` and `payableNow` fields in the manifests are authoritative for everything else. Complete machine-readable declarations, including the uncompacted schemas, are at `https://www.mahastrategies.com/api/discovery/x402-offers/{offerId}`.
 

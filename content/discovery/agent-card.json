@@ -14,6 +14,10 @@
   ],
   "serviceCatalog": "https://www.mahastrategies.com/agent-offers.json",
   "documentation": "https://www.mahastrategies.com/docs",
+  "offerSelectionGuide": {
+    "url": "https://www.mahastrategies.com/.well-known/maha/offer-selection.json",
+    "description": "Machine-readable Maha offer selection guide: which x402 offer to call, or neither."
+  },
   "capabilities": [
     {
       "id": "context-compression",
