@@ -8,7 +8,7 @@ import {
   BASE_NETWORK,
   BASE_USDC,
   BAZAAR_MERCHANT_URL,
-  BAZAAR_SEARCH_URL,
+  bazaarSearchUrl,
   EXPECTED_PRICE_BASE_UNITS,
   MAHA_BUYER_POLICY,
   MAHA_CONTEXT_RESOURCE,
@@ -65,14 +65,7 @@ async function getJson(url: URL): Promise<Record<string, unknown>> {
 }
 
 async function discover(): Promise<{ resource: BazaarResource; method: string }> {
-  const search = new URL(BAZAAR_SEARCH_URL)
-  search.searchParams.set('query', query)
-  search.searchParams.set('network', BASE_NETWORK)
-  search.searchParams.set('asset', 'usdc')
-  search.searchParams.set('scheme', 'exact')
-  search.searchParams.set('maxUsdPrice', '0.005')
-  search.searchParams.set('limit', '20')
-  const searched = await getJson(search)
+  const searched = await getJson(bazaarSearchUrl({ query }))
   const semanticResources = Array.isArray(searched.resources) ? searched.resources as BazaarResource[] : []
   const semanticMatch = selectMahaResource(semanticResources)
   if (semanticMatch) return { resource: semanticMatch, method: `semantic ${String(searched.searchMethod ?? 'search')}` }
