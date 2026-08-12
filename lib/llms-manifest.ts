@@ -43,6 +43,8 @@ export function buildLlmsManifest(claims: readonly MpsClaim[]): string {
     `- Offers API: ${AGENTIC_COMMERCE_API_URL}`,
     `- Agent context note: ${AGENTIC_COMMERCE_CONTEXT_URL}`,
     '- Agent card: https://www.mahastrategies.com/.well-known/agent.json',
+    '- CABEZON Seller role extension proposal (not yet adopted upstream): https://www.mahastrategies.com/.well-known/carp/seller-role.json',
+    '- Maha CARP Seller profile (contract ready; DID/SAD handshake pending): https://www.mahastrategies.com/.well-known/carp/seller.json',
     '- Agent Infrastructure Compatibility Pack: https://www.mahastrategies.com/agent-infrastructure-compatibility-pack',
     '  - Machine contract and exact schemas: https://www.mahastrategies.com/api/discovery/agent-infrastructure-compatibility-pack',
     '  - Fixed price: 49.00 USDC on Base Mainnet. CONTRACT PUBLISHED, RUNTIME WITHHELD: not currently payable. One A2A agent, one MCP server, one caller-declared non-mutating action per target. Compatibility failures are report findings; Maha delivery failures after settlement receive a full automatic refund.',
