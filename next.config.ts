@@ -2,9 +2,10 @@ import type { NextConfig } from "next";
 import { withSentryConfig } from '@sentry/nextjs'
 
 const nextConfig: NextConfig = {
-  // The discovery documents keep their canonical public URLs. They are served
-  // by route handlers rather than from public/ so that each request reaches the
-  // origin and can be counted; see lib/agent-discovery-metering.ts.
+  // The discovery documents keep their canonical public URLs while their
+  // internal route-handler paths remain implementation details. The primary
+  // agent surfaces are also metered; the CARP proposal is intentionally static
+  // until a real CARP identity and directory membership exist.
   async rewrites() {
     return [
       { source: '/.well-known/agent.json', destination: '/api/discovery/agent-card' },
@@ -12,6 +13,8 @@ const nextConfig: NextConfig = {
       { source: '/llm-context/agentic-commerce.md', destination: '/api/discovery/agent-context' },
       { source: '/mcp-gateway-contract.json', destination: '/api/discovery/mcp-contract' },
       { source: '/.well-known/maha/offer-selection.json', destination: '/api/discovery/offer-selection' },
+      { source: '/.well-known/carp/seller-role.json', destination: '/api/discovery/carp/seller-role' },
+      { source: '/.well-known/carp/seller.json', destination: '/api/discovery/carp/seller-profile' },
     ]
   },
   async redirects() {
