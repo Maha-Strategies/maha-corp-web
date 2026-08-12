@@ -14,7 +14,7 @@ import {
   expectedRetryMultiplier,
   unitEconomics,
 } from '../lib/x402/mps-unit-economics.ts'
-import { MPS_AUTONOMOUS_AUDIT_OFFER } from '../lib/x402/offers.ts'
+import { X402_OFFERS, MPS_AUTONOMOUS_AUDIT_OFFER } from '../lib/x402/offers.ts'
 import { MAX_AUDIT_ATTEMPTS, MAX_AUDIT_PASSAGE_CHARS } from '../lib/x402/mps-audit-job.ts'
 
 // The gate the brief asked for: $0.10 must cover worst-case model cost,
@@ -100,13 +100,29 @@ test('ten cents covers the conservative case that can actually reach the model',
   assert.ok(EXPECTED_CASE().marginPercent > worst.marginPercent)
 })
 
-test('pricing is sound, which is not the same as the offer being ready', () => {
-  // The offer stays withheld on infrastructure, not on economics. Conflating
-  // the two would let a green margin be read as permission to ship.
+test('pricing is sound, and was never what the offer was waiting on', () => {
+  // The offer was withheld on infrastructure, not on economics, and was
+  // promoted on 2026-08-12 once the infrastructure gates were observed rather
+  // than assumed. The margin is asserted separately from the status precisely
+  // so a green margin can never be read as permission to ship.
   assert.equal(CONSERVATIVE_CASE().covered, true)
-  assert.equal(MPS_AUTONOMOUS_AUDIT_OFFER.status, 'withheld')
-  assert.equal(MPS_AUTONOMOUS_AUDIT_OFFER.availability.payableInProduction, false)
-  assert.ok(MPS_AUTONOMOUS_AUDIT_OFFER.availability.blockedBy.length > 0)
+  assert.equal(MPS_AUTONOMOUS_AUDIT_OFFER.status, 'available')
+  assert.equal(MPS_AUTONOMOUS_AUDIT_OFFER.availability.payableInProduction, true)
+  assert.equal(MPS_AUTONOMOUS_AUDIT_OFFER.availability.blockedBy.length, 0)
+})
+
+test('an available offer must publish no blockers, and a blocked one must not be payable', () => {
+  // The invariant the previous version of this test carried incidentally by
+  // naming MPS. Stated directly, it survives any future promotion.
+  for (const offer of X402_OFFERS) {
+    if (offer.status === 'available') {
+      assert.equal(offer.availability.payableInProduction, true, `${offer.id} is available but not payable`)
+      assert.equal(offer.availability.blockedBy.length, 0, `${offer.id} is available but publishes blockers`)
+    } else {
+      assert.equal(offer.availability.payableInProduction, false, `${offer.id} is not available but claims payable`)
+      assert.ok(offer.availability.blockedBy.length > 0, `${offer.id} must publish why it is not payable`)
+    }
+  }
 })
 
 test('the minimum safe price is reported, so a loss-making offer is never shipped silently', () => {

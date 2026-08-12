@@ -220,18 +220,34 @@ export const MPS_AUTONOMOUS_AUDIT_OFFER: X402Offer = {
   concurrencyCap: 2,
   serviceName: 'Maha Provenance Standard',
   tags: ['ai', 'provenance', 'claim-triage', 'editorial', 'fact-status'],
-  // Withheld everywhere. The gates are external and unmet, and the honest
-  // consequence of shipping without them is a settled payment with no job
-  // behind it.
-  status: 'withheld',
-  availability: {
-    payableInProduction: false,
-    blockedBy: [
-      'The required Production paid-job and admission migrations have not yet been applied and verified.',
-      'Durable paid-job recovery has not been proven against a real deployment.',
-      'No paid end-to-end settlement has been executed for this offer.',
-    ],
-  },
+  // Withheld until 2026-08-12, because the honest consequence of shipping
+  // without the gates below is a settled payment with no job behind it.
+  //
+  // Flipping this field is the whole promotion: the moment it lands and
+  // deploys, an autonomous agent can sign for $0.10. The staged gates -- and
+  // in particular the fresh authorization required for the single paid
+  // settlement, which no earlier authorization satisfies -- are in
+  // docs/x402-mps-promotion.md.
+  //
+  //   1. The paid-job and admission migrations (20260810000400 and
+  //      20260810000500) applied in Production AND their objects directly
+  //      censused: x402_mps_audits, resume_x402_mps_audit, x402_offer_admissions
+  //      and the three admission RPCs. The prior evidence was inferential --
+  //      the Production census deliberately excluded the MPS tables -- and
+  //      inference is what this gate exists to refuse.
+  //   2. Durable paid-job recovery exercised against a real deployment rather
+  //      than only in unit tests: a paid job resumes at
+  //      /api/v1/mps/audit/{auditId} against its retrieval token, free, and an
+  //      idempotent replay returns the same job without a second charge.
+  //   3. Exactly one explicitly authorized paid end-to-end settlement.
+  //
+  // Everything commercial is unchanged by the promotion: the path, 100000 base
+  // units, Base Mainnet, Base USDC, the merchant payee, the concurrency cap of
+  // 2, the 32 KiB ceiling, the idempotency and input-hash requirements, the
+  // triage limitations, and the retained claim excerpts. A promotion that also
+  // re-priced or re-scoped the offer would be two changes wearing one review.
+  status: 'available',
+  availability: { payableInProduction: true, blockedBy: [] },
   // This offer creates a job and calls a model. A duplicate is a double
   // charge, not duplicated work.
   requiresIdempotency: true,

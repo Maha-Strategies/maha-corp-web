@@ -59,7 +59,7 @@
     },
     {
       "id": "mps-autonomous-audit",
-      "status": "withheld_not_payable",
+      "status": "available_for_autonomous_payment",
       "endpoint": "https://www.mahastrategies.com/api/v1/mps/audit",
       "retrievalEndpoint": "https://www.mahastrategies.com/api/v1/mps/audit/{auditId}",
       "provides": "automated claim triage with provenance statuses",
@@ -74,10 +74,10 @@
         "network": "eip155:8453",
         "amount": "100000",
         "assetSymbol": "USDC",
-        "autonomous": false,
-        "note": "Described only. Not currently payable in any environment."
+        "autonomous": true,
+        "note": "Payable autonomously over x402 v2 on Base Mainnet. Requires an idempotency key and an input hash, claimed before settlement, so a replayed request returns the job already paid for rather than charging twice. Retrieval and resume at the retrieval endpoint are free."
       },
-      "payableNow": false,
+      "payableNow": true,
       "retention": "The complete submitted passage is not retained. Results retain short verbatim claim excerpts, classifications, rationales, hashes, and operational metadata."
     },
     {
@@ -99,7 +99,7 @@
   ],
   "terms": {
     "bindingCommitment": false,
-    "payment": "Context Compression and Deep Context Evaluation are payable autonomously on Base Mainnet. The Autonomous MPS Audit is withheld: it is described here and is not payable. The GPU optimization routes are not x402 products. A human purchaser must authorize Stripe Checkout; research and enterprise work require human scope review.",
+    "payment": "Context Compression, Deep Context Evaluation and the Autonomous MPS Audit are payable autonomously on Base Mainnet. A live PAYMENT-REQUIRED challenge is the only proof an offer can be bought. The GPU optimization routes are not x402 products. A human purchaser must authorize Stripe Checkout; research and enterprise work require human scope review.",
     "sensitiveData": "Do not submit confidential, regulated, or sensitive personal information."
   },
   "review": {
