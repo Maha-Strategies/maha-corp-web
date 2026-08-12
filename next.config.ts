@@ -11,6 +11,7 @@ const nextConfig: NextConfig = {
       { source: '/agent-offers.json', destination: '/api/discovery/agent-offers' },
       { source: '/llm-context/agentic-commerce.md', destination: '/api/discovery/agent-context' },
       { source: '/mcp-gateway-contract.json', destination: '/api/discovery/mcp-contract' },
+      { source: '/.well-known/maha/offer-selection.json', destination: '/api/discovery/offer-selection' },
     ]
   },
   async redirects() {

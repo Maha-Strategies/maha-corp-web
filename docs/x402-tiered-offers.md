@@ -46,6 +46,15 @@ and const, plus a **verbatim** input example — and the uncompacted schemas are
 served at `/api/discovery/x402-offers/{offerId}`, which the challenge links via
 `maha-offer.declarationUrl`.
 
+Which of the two payable offers to call — or neither — is published separately
+as the [machine-readable Maha offer selection
+guide](https://www.mahastrategies.com/.well-known/maha/offer-selection.json),
+generated from the same catalog. It is deliberately not part of the payable
+declaration: adding a documentation link there would re-digest the declaration,
+which invalidates the Bazaar listing and costs a settlement to refresh. A
+selection contract is documentation, and documentation must not cost $0.001 to
+publish.
+
 Compaction only ever loosens a schema, so the inline form never rejects a
 payload the endpoint accepts. Two exemptions are deliberate: input examples are
 never truncated, because the deep contract requires evidence spans to be exact
