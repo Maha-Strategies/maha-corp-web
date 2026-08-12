@@ -63,7 +63,7 @@ must pass before the deployment approval in Stage 2 is requested.
 
 | # | Gate | Status |
 | --- | --- | --- |
-| 1.1 | **Preview** database census green — every listed table and function `true` | **FAILED 2026-08-12**: `x402_mps_audits=false`, `resume_x402_mps_audit=false` |
+| 1.1 | **Preview** database census green — every listed table and function `true` | **PASSED 2026-08-12**: all ten `true` after applying `…000400` (census run 31575178797) |
 | 1.2 | **Production** database census green | **PASSED 2026-08-12**: all ten objects `true` (run 31573419127) |
 | 1.3 | Preview readiness HTTP 200 | pending |
 | 1.4 | Preview unpaid `POST /api/v1/mps/audit` returns **402** — never 401, never 400 | pending |
@@ -74,24 +74,32 @@ must pass before the deployment approval in Stage 2 is requested.
 | 1.9 | MPS, admission, settlement and telemetry objects present | blocked by 1.1 / 1.2 |
 | 1.10 | Recovery and idempotency exercised in Preview | see below |
 
-**Gate 1.1 has failed and is the current blocker.** Census run
-[31573354515](https://github.com/Maha-Strategies/maha-corp-web/actions/runs/31573354515)
-reports `x402_mps_audits=false` and `resume_x402_mps_audit=false` against the
-**Preview** database: migration `20260810000400_x402_mps_audit_jobs.sql` was
-never applied there. Everything else the offer needs is present.
+**Gate 1.1 passed on the second attempt, after a repair the census exposed.**
+The first Preview census, run
+[31573354515](https://github.com/Maha-Strategies/maha-corp-web/actions/runs/31573354515),
+reported `x402_mps_audits=false` and `resume_x402_mps_audit=false`: migration
+`20260810000400_x402_mps_audit_jobs.sql` had never been applied to the Preview
+database. It was applied on 2026-08-12 under explicit authorization, through
+`preview-migrations.yml` run
+[31575096596](https://github.com/Maha-Strategies/maha-corp-web/actions/runs/31575096596)
+— whose target guard confirmed a non-Production ref before touching anything —
+creating one table, three indexes and one function. Migration sha256
+`7ec278c353f1e9863f8bf455fa941a733c5729bf0d12a75ede25eac5ff73fc13`.
+
+Re-censused independently afterwards rather than trusting the migration's own
+verification step: run
+[31575178797](https://github.com/Maha-Strategies/maha-corp-web/actions/runs/31575178797)
+reports all ten objects `true` in Preview.
 
 **Gate 1.2 passed.** Census run
 [31573419127](https://github.com/Maha-Strategies/maha-corp-web/actions/runs/31573419127),
 through the reviewer-protected `production-database` environment, reports all
-ten objects `true` in **Production**, including `x402_mps_audits` and
-`resume_x402_mps_audit`.
+ten objects `true` in Production.
 
-So the two databases disagree, and the direction is the awkward one: the
-objects exist where money moves and are missing where the behaviour would be
-rehearsed. Production being ready is not a reason to skip Preview — it is the
-reason Preview matters, because the only remaining place to exercise recovery
-and idempotency without spending $0.10 is the environment that cannot currently
-run the job at all.
+The two databases now agree. Before the census they did not, and nobody knew:
+the objects existed where money moves and were missing where the behaviour
+would be rehearsed. Recovery and idempotency can now be exercised in Preview
+without spending $0.10, which was the entire point of insisting on this gate.
 
 This is exactly what the census was built to find, and why "applied, inferred,
 not observed" was not good enough to promote on. Neither database had been
