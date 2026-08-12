@@ -329,15 +329,15 @@ test('readiness never echoes a secret or a raw environment value', async () => {
 
 test('the report states which offers are payable, so a promotion can be gated on it', async () => {
   const report = await getX402Readiness({ environment: BASE, probe: everything })
-  // Promoted on 2026-08-12. enabledInThisEnvironment stays false here because
-  // BASE does not list the MPS path in X402_RESOURCES: being payable in the
-  // catalog and being switched on in one environment are separate facts, and
-  // the report has to keep them separate for a promotion to be gated on it.
+  // Promoted and withdrawn on 2026-08-12, after paid delivery failed. Being
+  // payable in the catalog and being switched on in one environment are
+  // separate facts, and the report keeps them separate so a promotion -- or a
+  // withdrawal -- can be gated on it.
   const mps = report.offers.find((offer) => offer.id === 'mps-autonomous-audit')!
-  assert.equal(mps.status, 'available')
-  assert.equal(mps.payableInProduction, true)
+  assert.equal(mps.status, 'withheld')
+  assert.equal(mps.payableInProduction, false)
   assert.equal(mps.enabledInThisEnvironment, false)
-  assert.equal(MPS_AUTONOMOUS_AUDIT_OFFER.availability.blockedBy.length, 0)
+  assert.ok(MPS_AUTONOMOUS_AUDIT_OFFER.availability.blockedBy.length > 0)
 
   // Deep Context was promoted on 2026-08-11 and must read as payable.
   const deep = report.offers.find((offer) => offer.id === 'deep-context-evaluation')!

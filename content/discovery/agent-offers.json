@@ -13,8 +13,7 @@
     "autonomousPaymentSupported": true,
     "autonomousPaymentScope": [
       "context-compression",
-      "deep-context-evaluation",
-      "mps-autonomous-audit"
+      "deep-context-evaluation"
     ],
     "offerSelectionGuide": "https://www.mahastrategies.com/.well-known/maha/offer-selection.json",
     "humanConfirmationScope": [
@@ -22,8 +21,10 @@
       "research-inquiries",
       "enterprise-onboarding"
     ],
-    "bindingCommitment": "Context Compression, Deep Context Evaluation and the Autonomous MPS Audit accept autonomous x402 payment on Base Mainnet under their published terms. A live PAYMENT-REQUIRED challenge is the only proof an offer can be bought. The MPS Audit requires an idempotency key and input hash, and returns a one-time retrieval token: a paid job is resumable free of charge and is never billed twice. The GPU optimization capabilities are not x402 products. Stripe products require purchaser confirmation, and research or enterprise engagements require human scope review.",
-    "describedNotPayable": []
+    "bindingCommitment": "Context Compression and Deep Context Evaluation accept autonomous x402 payment on Base Mainnet under their published terms. The Autonomous MPS Audit is withheld and is not payable; a live PAYMENT-REQUIRED challenge is the only proof an offer can be bought. The GPU optimization capabilities are not x402 products. Stripe products require purchaser confirmation, and research or enterprise engagements require human scope review.",
+    "describedNotPayable": [
+      "mps-autonomous-audit"
+    ]
   },
   "credentialPolicy": {
     "mode": "approved_client_credentials",
@@ -110,7 +111,7 @@
     },
     {
       "id": "mps-autonomous-audit",
-      "status": "available_for_autonomous_payment",
+      "status": "withheld_not_payable",
       "endpoint": "https://www.mahastrategies.com/api/v1/mps/audit",
       "retrievalEndpoint": "https://www.mahastrategies.com/api/v1/mps/audit/{auditId}",
       "method": "POST",
@@ -132,10 +133,10 @@
         "asset": "USDC",
         "amount": "100000",
         "displayAmount": "0.10 USDC",
-        "payableNow": true,
+        "payableNow": false,
         "note": "Published terms. A live PAYMENT-REQUIRED challenge is the only proof an offer can be bought."
       },
-      "payableNow": true
+      "payableNow": false
     },
     {
       "id": "gpu-tensor-network",
