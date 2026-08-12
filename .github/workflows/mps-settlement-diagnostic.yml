@@ -1,0 +1,145 @@
+name: MPS settlement diagnostic
+
+# One read-only correlation across the five surfaces that record a paid MPS
+# request, for a single named transaction and client request id.
+#
+# Exists because the 2026-08-12 Mainnet verification settled 100000 base units
+# on chain and then failed delivery with payment_already_used, and nothing
+# observable from outside the database can distinguish the possible states:
+# a job that exists and was orphaned, an admission that reserved and was
+# released, or a settlement recorded with no job behind it. Those need
+# different fixes, so guessing between them is not an option.
+#
+# SELECTs only. No writes, no retries, no signatures, no settlements, no
+# refunds, no configuration changes.
+#
+# Prints operational metadata only. Never result content, retrieval-token
+# hashes, request text, source passages, credentials, database URLs or project
+# references -- the whole point of the offer's retention promise is that an
+# investigation into it does not become the thing that breaks it.
+
+on:
+  workflow_dispatch:
+    inputs:
+      transaction:
+        description: Settlement transaction hash
+        required: true
+        type: string
+      client_request_id:
+        description: clientRequestId / idempotency key
+        required: true
+        type: string
+      payer:
+        description: Payer address
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: mps-settlement-diagnostic
+  cancel-in-progress: true
+
+jobs:
+  diagnose:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    environment: production-database
+    env:
+      SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}
+      SUPABASE_DB_PASSWORD: ${{ secrets.SUPABASE_DB_PASSWORD }}
+      SUPABASE_PROJECT_REF: ${{ vars.SUPABASE_PROJECT_REF }}
+      TX: ${{ inputs.transaction }}
+      CRID: ${{ inputs.client_request_id }}
+      PAYER: ${{ inputs.payer }}
+      EVIDENCE: ${{ github.workspace }}/mps-diagnostic.txt
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Validate the inputs and the target
+        run: |
+          set -euo pipefail
+          production='uhwuullakihgszxhiygz'
+          [ "${SUPABASE_PROJECT_REF:-}" = "$production" ] || { echo '::error::Not the Production project.'; exit 1; }
+          # Bounded shapes, so nothing user-supplied reaches SQL unshaped.
+          [[ "$TX" =~ ^0x[a-fA-F0-9]{64}$ ]] || { echo '::error::transaction must be 0x + 64 hex.'; exit 1; }
+          [[ "$PAYER" =~ ^0x[a-fA-F0-9]{40}$ ]] || { echo '::error::payer must be 0x + 40 hex.'; exit 1; }
+          [[ "$CRID" =~ ^[A-Za-z0-9._:-]{8,120}$ ]] || { echo '::error::client_request_id is malformed.'; exit 1; }
+          echo "transaction: $TX"
+          echo "clientRequestId: $CRID"
+          echo "payer: $PAYER"
+
+      - name: Resolve the pooler connection
+        run: |
+          set -euo pipefail
+          poolers=$(curl --fail --silent --show-error \
+            -H "Authorization: Bearer ${SUPABASE_ACCESS_TOKEN}" \
+            "https://api.supabase.com/v1/projects/${SUPABASE_PROJECT_REF}/config/database/pooler")
+          pooler=$(jq -cer '[ .[] | select(.database_type == "PRIMARY") ] | .[0]' <<<"$poolers")
+          {
+            echo "SUPABASE_DB_HOST=$(jq -r '.db_host' <<<"$pooler")"
+            echo "SUPABASE_DB_PORT=$(jq -r '.db_port' <<<"$pooler")"
+            echo "SUPABASE_DB_USER=$(jq -r '.db_user' <<<"$pooler")"
+            echo "SUPABASE_DB_NAME=$(jq -r '.db_name' <<<"$pooler")"
+          } >> "$GITHUB_ENV"
+
+      - name: Correlate the five surfaces
+        run: |
+          set -euo pipefail
+          export PGPASSWORD="$SUPABASE_DB_PASSWORD"
+          dsn="host=${SUPABASE_DB_HOST} port=${SUPABASE_DB_PORT} user=${SUPABASE_DB_USER} dbname=${SUPABASE_DB_NAME} sslmode=require"
+          run() { psql "$dsn" -v ON_ERROR_STOP=1 -P pager=off -v tx="$TX" -v crid="$CRID" -v payer="$PAYER" -c "$1"; }
+
+          {
+            echo '=== 1. x402_payments (claims) ==='
+            run "select payment_id, resource, payer, amount_paid, claimed_at
+                   from public.x402_payments
+                  where payer ilike :'payer'
+                    and resource like '%/api/v1/mps/audit'
+                  order by claimed_at desc limit 10;"
+
+            echo '=== 2. x402_settlements (money) ==='
+            run "select payment_id, transaction_id, chain_status, chain_amount, settled_at
+                   from public.x402_settlements
+                  where transaction_id ilike :'tx'
+                  order by settled_at desc limit 10;"
+
+            echo '=== 3. x402_offer_admissions (logical request) ==='
+            run "select offer_id, payer, idempotency_key, input_hash, resource, amount,
+                        state, payment_transaction, created_at, settled_at
+                   from public.x402_offer_admissions
+                  where idempotency_key = :'crid'
+                     or payment_transaction ilike :'tx'
+                  order by created_at desc limit 10;"
+
+            echo '=== 4. x402_mps_audits (job; operational metadata only) ==='
+            run "select public_id, payer, client_request_id, input_hash, payment_transaction,
+                        status, failure_code, attempt_count, created_at, completed_at
+                   from public.x402_mps_audits
+                  where client_request_id = :'crid'
+                     or payment_transaction ilike :'tx'
+                  order by created_at desc limit 10;"
+
+            echo '=== 5. x402_offer_usage_daily (telemetry) ==='
+            run "select usage_day, offer_id, event_kind, status_class, discovery_source, event_count, last_observed_at
+                   from public.x402_offer_usage_daily
+                  where offer_id = 'mps-autonomous-audit'
+                    and usage_day >= (current_date - 2)
+                  order by usage_day desc, event_kind;"
+
+            echo '=== Row counts, for the state classification ==='
+            run "select
+                   (select count(*) from public.x402_settlements where transaction_id ilike :'tx') as settlements,
+                   (select count(*) from public.x402_offer_admissions where idempotency_key = :'crid') as admissions,
+                   (select count(*) from public.x402_mps_audits where client_request_id = :'crid') as jobs;"
+          } | tee "$EVIDENCE"
+
+      - name: Upload diagnostic evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: mps-diagnostic-${{ github.run_id }}
+          path: ${{ env.EVIDENCE }}
+          if-no-files-found: warn
+          retention-days: 90
