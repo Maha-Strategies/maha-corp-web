@@ -1,0 +1,129 @@
+name: Production MPS settlement
+
+# The single authorized $0.10 Mainnet settlement against the Autonomous MPS
+# Audit, plus the post-payment evidence that settlement alone does not prove.
+#
+# Separate from the Deep Context settlement workflow because the contracts
+# differ in the way that matters: MPS creates a durable job, so it requires an
+# idempotency key and an input hash claimed *before* settlement, and it returns
+# a one-time retrieval token. A workflow that only proved "money moved" would
+# miss the two things that actually distinguish this offer -- that the job is
+# recoverable for free, and that a replay does not charge twice.
+#
+# No retry, ever. An x402 settlement can broadcast and then fail to answer, so
+# a second signed authorization can double-spend against a delivery nobody
+# observed. Re-running is an operator decision taken after reading the chain.
+
+on:
+  workflow_dispatch:
+    inputs:
+      reason:
+        description: Change ticket or reason (minimum 12 characters)
+        required: true
+        type: string
+      confirmation:
+        description: Type SETTLE MPS AUDIT ONCE exactly
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: production-mps-settlement
+  cancel-in-progress: false
+
+jobs:
+  settle:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    environment:
+      name: production-x402-canary
+      url: https://www.mahastrategies.com/api/v1/mps/audit
+    env:
+      SUBJECT: https://www.mahastrategies.com/api/v1/mps/audit
+      MAX_AMOUNT: '100000'
+      AUTHORIZED_PAYER: '0x7b7ff44288fADe4A1829abA2584DFCeB952146f2'
+      EXPECTED_PAYEE: '0xec84c1cd6602bbe387bc8e6f0d3c062f2762de28'
+      EXPECTED_ASSET: '0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913'
+      EXPECTED_NETWORK: 'eip155:8453'
+      EVIDENCE: ${{ github.workspace }}/mps-settlement-evidence
+    steps:
+      - name: Require the confirmation phrase
+        env:
+          CONFIRMATION: ${{ inputs.confirmation }}
+          REASON: ${{ inputs.reason }}
+        run: |
+          set -euo pipefail
+          [ "$CONFIRMATION" = 'SETTLE MPS AUDIT ONCE' ] || { echo '::error::Confirmation phrase not matched. Refusing to spend.'; exit 1; }
+          [ "${#REASON}" -ge 12 ] || { echo '::error::Reason must be at least 12 characters.'; exit 1; }
+
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: mkdir -p "$EVIDENCE"
+
+      # Every authorized term asserted on a free request, before the signing
+      # key is anywhere near scope. A mispriced or re-pointed offer fails here
+      # rather than after money has moved.
+      - name: Assert the live terms match the authorization
+        run: |
+          set -euo pipefail
+          curl -sS -X POST "$SUBJECT" -H 'content-type: application/json' -d '{}' -o "$EVIDENCE/challenge.json"
+          node -e '
+            const fs = require("fs")
+            const body = JSON.parse(fs.readFileSync(process.env.EVIDENCE + "/challenge.json", "utf8"))
+            const accepts = body.accepts || []
+            if (accepts.length !== 1) throw new Error(`expected one requirement, got ${accepts.length}`)
+            const [a] = accepts
+            const expect = (f, actual, wanted) => {
+              if (String(actual).toLowerCase() !== String(wanted).toLowerCase()) throw new Error(`${f}: ${actual} != ${wanted}`)
+            }
+            expect("amount", a.amount, process.env.MAX_AMOUNT)
+            expect("network", a.network, process.env.EXPECTED_NETWORK)
+            expect("asset", a.asset, process.env.EXPECTED_ASSET)
+            expect("payTo", a.payTo, process.env.EXPECTED_PAYEE)
+            if (a.scheme !== "exact") throw new Error(`scheme ${a.scheme} is not exact`)
+            console.log(`live terms match: ${a.amount} ${a.network} -> ${a.payTo}`)
+          '
+
+      - name: Validate the buyer is the authorized payer
+        env:
+          X402_BUYER_PRIVATE_KEY: ${{ secrets.X402_BUYER_PRIVATE_KEY }}
+        run: npm run canary:x402 -- --validate-config
+
+      # One signature, then the three things settlement alone does not prove:
+      # the job completes, recovery is free, and an identical replay is not
+      # charged again. The retrieval token is held in memory and never written
+      # to evidence -- it is issued once, and recording it would turn an
+      # artifact into a capability.
+      - name: Settle once and verify delivery, retrieval and replay
+        id: settle
+        env:
+          X402_BUYER_PRIVATE_KEY: ${{ secrets.X402_BUYER_PRIVATE_KEY }}
+        run: npm run verify:mps-production
+
+      - name: Report
+        if: always()
+        run: |
+          set -euo pipefail
+          if [ -f mps-verification.json ]; then
+            cp mps-verification.json "$EVIDENCE/" || true
+            cat mps-verification.json
+          else
+            echo '::error::No evidence file was produced. If a signature was made, treat delivery as ambiguous and read the chain before any retry.'
+          fi
+
+      - name: Upload evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: mps-settlement-${{ github.run_id }}
+          path: |
+            ${{ env.EVIDENCE }}
+            mps-verification.json
+          if-no-files-found: warn
+          retention-days: 90
