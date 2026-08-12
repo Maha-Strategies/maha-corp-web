@@ -1,0 +1,147 @@
+name: x402 MPS object census
+
+# Read-only. Answers the one question standing between the MPS audit offer and
+# promotion: are its paid-job and admission objects actually present in the
+# target database?
+#
+# It exists because nothing else can answer it. The Production settlement
+# verification workflow deliberately restricts its census to the compression
+# tables, and readiness probes storage only for offers that are *enabled* --
+# MPS is enabled nowhere, so its storage has never been observed. The evidence
+# to date is "the migration was applied and the migration list shows it", which
+# is an inference about a database rather than a look at one.
+#
+# That distinction is not pedantic here. The Deep Context promotion lost a day
+# to a probe that could not run being read as a probe that passed.
+#
+# SELECTs only: no DDL, no writes, no wallet key in scope.
+
+on:
+  workflow_dispatch:
+    inputs:
+      target:
+        description: Which database to census
+        required: true
+        default: preview
+        type: choice
+        options: [preview, production]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: x402-mps-object-census-${{ inputs.target }}
+  cancel-in-progress: true
+
+jobs:
+  census:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    # Preview credentials live in `Preview`; Production credentials in
+    # `production-database`, which carries a required reviewer. A read-only
+    # census still touches Production, so it goes through the same gate.
+    environment: ${{ inputs.target == 'production' && 'production-database' || 'Preview' }}
+    env:
+      SUPABASE_DB_PASSWORD: ${{ secrets.SUPABASE_DB_PASSWORD }}
+      SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}
+      # The two environments store the project ref differently and always have:
+      # `Preview` holds it as a secret (see preview-migrations.yml),
+      # `production-database` as a variable (see production-migrations.yml).
+      # Reading only one of them yields an empty string in the other
+      # environment, and an empty ref is exactly what the guard below refuses
+      # to guess past -- so it would fail closed, but for the wrong reason and
+      # with a misleading message.
+      SUPABASE_PROJECT_REF: ${{ secrets.SUPABASE_PROJECT_REF || vars.SUPABASE_PROJECT_REF }}
+      TARGET: ${{ inputs.target }}
+      EVIDENCE: ${{ github.workspace }}/mps-object-census.txt
+    steps:
+      - uses: actions/checkout@v5
+
+      # The census is only meaningful if it names which database it looked at,
+      # and a green run against the wrong one is worse than no run.
+      - name: Assert the target matches the requested environment
+        run: |
+          set -euo pipefail
+          production='uhwuullakihgszxhiygz'
+          if [ -z "${SUPABASE_PROJECT_REF:-}" ]; then
+            echo '::error::SUPABASE_PROJECT_REF is unset. Refusing to guess which database this is.'
+            exit 1
+          fi
+          if [ "$TARGET" = 'production' ] && [ "$SUPABASE_PROJECT_REF" != "$production" ]; then
+            echo '::error::Asked for Production but the ref is not the Production project.'
+            exit 1
+          fi
+          if [ "$TARGET" = 'preview' ] && [ "$SUPABASE_PROJECT_REF" = "$production" ]; then
+            echo '::error::Asked for Preview but the ref is the Production project.'
+            exit 1
+          fi
+          echo "target: $TARGET"
+          echo "fingerprint: sha256:$(printf '%s' "$SUPABASE_PROJECT_REF" | sha256sum | cut -d' ' -f1)"
+
+      - name: Resolve the project's pooler connection
+        run: |
+          set -euo pipefail
+          poolers=$(curl --fail --silent --show-error \
+            -H "Authorization: Bearer ${SUPABASE_ACCESS_TOKEN}" \
+            "https://api.supabase.com/v1/projects/${SUPABASE_PROJECT_REF}/config/database/pooler")
+          pooler=$(jq -cer '
+            [ .[] | select(.database_type == "PRIMARY") ]
+            | .[0]
+            | select(
+                (.db_host | type == "string" and length > 0)
+                and (.db_port | type == "number")
+                and (.db_user | type == "string" and length > 0)
+                and (.db_name | type == "string" and length > 0)
+              )
+          ' <<<"$poolers")
+          echo "SUPABASE_DB_HOST=$(jq -r '.db_host' <<<"$pooler")" >> "$GITHUB_ENV"
+          echo "SUPABASE_DB_PORT=$(jq -r '.db_port' <<<"$pooler")" >> "$GITHUB_ENV"
+          echo "SUPABASE_DB_USER=$(jq -r '.db_user' <<<"$pooler")" >> "$GITHUB_ENV"
+          echo "SUPABASE_DB_NAME=$(jq -r '.db_name' <<<"$pooler")" >> "$GITHUB_ENV"
+
+      - name: Census the objects the MPS offer needs
+        run: |
+          set -euo pipefail
+          url="postgresql://${SUPABASE_DB_USER}:${SUPABASE_DB_PASSWORD}@${SUPABASE_DB_HOST}:${SUPABASE_DB_PORT}/${SUPABASE_DB_NAME}"
+          psql "$url" -v ON_ERROR_STOP=1 -At -c "
+            select 'x402_mps_audits=' || (to_regclass('public.x402_mps_audits') is not null)::text
+            union all select 'x402_offer_admissions=' || (to_regclass('public.x402_offer_admissions') is not null)::text
+            union all select 'x402_payments=' || (to_regclass('public.x402_payments') is not null)::text
+            union all select 'x402_settlements=' || (to_regclass('public.x402_settlements') is not null)::text
+            union all select 'x402_offer_usage_daily=' || (to_regclass('public.x402_offer_usage_daily') is not null)::text
+            union all select 'resume_x402_mps_audit=' || (to_regproc('public.resume_x402_mps_audit') is not null)::text
+            union all select 'reserve_x402_admission=' || (to_regproc('public.reserve_x402_admission') is not null)::text
+            union all select 'settle_x402_admission=' || (to_regproc('public.settle_x402_admission') is not null)::text
+            union all select 'release_x402_admission=' || (to_regproc('public.release_x402_admission') is not null)::text
+            union all select 'record_x402_offer_usage=' || (to_regproc('public.record_x402_offer_usage') is not null)::text;
+          " | tee "$EVIDENCE"
+
+          missing=$(grep '=false' "$EVIDENCE" || true)
+          if [ -n "$missing" ]; then
+            echo "::error::Objects the MPS offer depends on are absent: ${missing}"
+            exit 1
+          fi
+          echo 'Every object the MPS paid-job and admission path depends on is present.'
+
+      # The retention claim, checked structurally. MPS is the one offer that
+      # keeps verbatim text by design -- 6-25 word claim excerpts -- so the
+      # question is not "is there text" but "is the whole passage there".
+      - name: Show what the MPS job table can retain
+        run: |
+          set -euo pipefail
+          url="postgresql://${SUPABASE_DB_USER}:${SUPABASE_DB_PASSWORD}@${SUPABASE_DB_HOST}:${SUPABASE_DB_PORT}/${SUPABASE_DB_NAME}"
+          psql "$url" -v ON_ERROR_STOP=1 -P pager=off -c "
+            select column_name, data_type
+              from information_schema.columns
+             where table_schema = 'public' and table_name = 'x402_mps_audits'
+             order by ordinal_position;
+          " | tee -a "$EVIDENCE"
+
+      - name: Upload census evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: mps-object-census-${{ inputs.target }}-${{ github.run_id }}
+          path: ${{ env.EVIDENCE }}
+          if-no-files-found: warn
+          retention-days: 90
