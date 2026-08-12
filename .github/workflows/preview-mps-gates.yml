@@ -42,7 +42,14 @@ jobs:
       BYPASS: ${{ secrets.VERCEL_AUTOMATION_BYPASS_SECRET }}
       READINESS_TOKEN: ${{ secrets.RELEASE_HEALTH_TOKEN }}
       EXPECTED_AMOUNT: '100000'
-      EXPECTED_NETWORK: 'eip155:8453'
+      # Base Sepolia. Preview settles on the testnet by design, and asserting
+      # Mainnet here was wrong: it would have failed a correctly configured
+      # environment, and -- far worse -- it would have passed a Preview that had
+      # been misconfigured to settle with real money.
+      #
+      # The Mainnet assertion belongs to Stage 2 step 5, against Production,
+      # immediately before any signature.
+      EXPECTED_NETWORK: 'eip155:84532'
       REPORT: ${{ github.workspace }}/preview-mps-gates.json
     steps:
       - uses: actions/checkout@v7
@@ -116,6 +123,9 @@ jobs:
             }
             expect("amount", a.amount, process.env.EXPECTED_AMOUNT)
             expect("network", a.network, process.env.EXPECTED_NETWORK)
+            if (a.network === "eip155:8453") {
+              throw new Error("Preview is configured to settle on Base Mainnet. Stop: a Preview test must never move real money.")
+            }
             expect("scheme", a.scheme, "exact")
             console.log(`challenge: ${a.amount} ${a.network} ${a.scheme} -> ${a.payTo}`)
           '
