@@ -45,6 +45,33 @@ setup. A healthy initial run should report `settlement_recent` and spend
 nothing. Canary settlements are operational traffic and must not be counted as
 external demand or customer revenue.
 
+## Inactivity watch
+
+The canary protects one listing. `Production x402 Bazaar inactivity watch`
+(`npm run watch:x402-inactivity`) reads Bazaar's `lastCalledAt`,
+`l30DaysTotalCalls` and `l30DaysUniquePayers` for **every payable offer** daily
+and reports how much margin each has left before the 30-day removal rule. It is
+read-only: no wallet key is in scope and it cannot settle anything.
+
+| Level | Margin remaining | Meaning |
+| --- | --- | --- |
+| `ok` | over 14 days | nothing to do |
+| `warn` | 14 days or less | get authorization for a refresh if the offer has no canary |
+| `urgent` | 7 days or less | act now |
+| `unknown` | — | the listing is absent, or its timestamp is missing or in the future |
+
+Offers come from the catalog's payable set, so promoting an offer enrols it in
+the watch by that fact alone. Only Context Compression is canary-covered.
+**Deep Context Evaluation has no automatic settlement by design** — at $0.01 it
+is ten times the canary price, and an offer that buys its own listing back on a
+timer converts silence into a recurring charge nobody approved. Its refresh is a
+manual, authorized dispatch.
+
+A canary-covered offer reaching `urgent` is reported as
+`automation_should_have_fired` rather than as a stale listing: the canary
+settles at 21 days, which leaves more margin than `urgent` allows, so that band
+means the canary did not run. Fix the canary rather than paying by hand.
+
 ## Deliberate metadata refresh
 
 Recent settlement activity protects the listing from inactivity removal but

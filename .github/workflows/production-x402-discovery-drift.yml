@@ -11,6 +11,12 @@ name: Production x402 discovery drift
 # --fail-on-warning. It simply ran only when somebody remembered. This is the
 # schedule.
 #
+# One job per payable offer, because drift is per-listing. A single job over
+# both endpoints would report the first failure and stop, and the two offers
+# drift for unrelated reasons at unrelated times -- Context Compression was
+# stale on 2026-08-11 while Deep Context Evaluation, indexed the same week,
+# was current. Sharing an issue would have merged those into one story.
+#
 # Read-only. No payment is signed, no settlement is made, and no wallet key is
 # available to this workflow -- the drift question is answerable from the
 # public declaration and the public listing alone. Refreshing a stale listing
@@ -46,10 +52,23 @@ jobs:
   drift:
     runs-on: ubuntu-latest
     timeout-minutes: 8
+    strategy:
+      # One stale listing must not hide the state of the other.
+      fail-fast: false
+      matrix:
+        include:
+          - offer: context-compression
+            name: Context Compression
+            subject: https://www.mahastrategies.com/api/v1/compress
+          - offer: deep-context-evaluation
+            name: Deep Context Evaluation
+            subject: https://www.mahastrategies.com/api/v1/compress/evaluate
     env:
       GH_TOKEN: ${{ github.token }}
-      SUBJECT: https://www.mahastrategies.com/api/v1/compress
-      REPORT: ${{ github.workspace }}/x402-doctor.json
+      SUBJECT: ${{ matrix.subject }}
+      OFFER: ${{ matrix.offer }}
+      OFFER_NAME: ${{ matrix.name }}
+      REPORT: ${{ github.workspace }}/x402-doctor-${{ matrix.offer }}.json
     steps:
       - uses: actions/checkout@v7
       - uses: actions/setup-node@v7
@@ -61,6 +80,15 @@ jobs:
       # --fail-on-warning is the point: stale Bazaar metadata is reported as a
       # warning rather than an error, because the endpoint is still serving
       # correctly. For a buyer routing on the listing it is not a warning.
+      #
+      # Informational notes -- a missing observable EXTENSION-RESPONSES header
+      # is the standing example -- are counted separately from warnings by the
+      # doctor and cannot fail this gate. That is deliberate: they describe
+      # what a facilitator chose to forward, not anything wrong with the offer.
+      #
+      # No --body. The doctor probes each endpoint with that offer's own
+      # declared crawler request, so the two offers are each exercised against
+      # the contract they actually publish rather than a shared payload.
       - name: Check live declaration against Bazaar
         id: doctor
         run: |
@@ -74,19 +102,20 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: x402-doctor-report
+          name: x402-doctor-report-${{ matrix.offer }}
           path: ${{ env.REPORT }}
           retention-days: 30
 
       # An unattended schedule has nobody watching the run list, so a failure
       # has to leave something a person will actually see. Deduplicated by
-      # title so a persistent drift does not open one issue per run.
+      # title so a persistent drift does not open one issue per run, and keyed
+      # by offer so two drifting listings are two stories.
       - name: Open or update a drift issue
         if: failure()
         run: |
-          TITLE="x402 discovery drift on ${SUBJECT}"
+          TITLE="x402 discovery drift: ${OFFER_NAME}"
           EXISTING=$(gh issue list --state open --search "$TITLE in:title" --json number --jq '.[0].number // empty')
-          BODY=$(printf 'The live PAYMENT-REQUIRED declaration no longer matches the published Bazaar listing.\n\nAutonomous buyers reading the listing may route on a stale schema, price or description while the endpoint itself is healthy.\n\nRun: %s\n\nRemediation is in docs/production-x402-canary.md — a bounded settlement refreshes the listing, and that stays a deliberate operator action.\n' "$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID")
+          BODY=$(printf 'The live PAYMENT-REQUIRED declaration for **%s** no longer matches the published Bazaar listing.\n\nEndpoint: %s\n\nAutonomous buyers reading the listing may route on a stale schema, price or description while the endpoint itself is healthy.\n\nRun: %s\n\nRemediation is in docs/production-x402-canary.md — a bounded settlement refreshes the listing, and that stays a deliberate operator action requiring explicit authorization.\n' "$OFFER_NAME" "$SUBJECT" "$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID")
           if [ -n "$EXISTING" ]; then
             gh issue comment "$EXISTING" --body "$BODY"
           else
@@ -99,7 +128,7 @@ jobs:
       - name: Close the drift issue when clean
         if: success()
         run: |
-          TITLE="x402 discovery drift on ${SUBJECT}"
+          TITLE="x402 discovery drift: ${OFFER_NAME}"
           EXISTING=$(gh issue list --state open --search "$TITLE in:title" --json number --jq '.[0].number // empty')
           if [ -n "$EXISTING" ]; then
             gh issue comment "$EXISTING" --body "Drift cleared: the live declaration and the Bazaar listing now agree."
