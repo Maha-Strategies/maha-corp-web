@@ -38,6 +38,7 @@
     "watch:x402-inactivity": "node --experimental-strip-types scripts/run-bazaar-inactivity-watch.ts",
     "worker:carp-seller": "node --experimental-strip-types scripts/run-carp-seller-worker.ts",
     "canary:x402": "node --experimental-strip-types scripts/run-production-x402-canary.ts",
+    "verify:mps-production": "node --experimental-strip-types scripts/run-mps-production-verification.ts",
     "generate:context-playground": "node --experimental-strip-types scripts/generate-context-playground-workload.ts",
     "benchmark:context-retention": "node --experimental-strip-types scripts/run-context-retention-benchmark.ts",
     "benchmark:context-retention:publish": "node --experimental-strip-types scripts/run-context-retention-benchmark.ts --write",
