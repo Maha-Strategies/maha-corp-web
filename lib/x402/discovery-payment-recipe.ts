@@ -24,6 +24,58 @@ export const CANARY_BUYER = OPERATOR_WALLETS[0]
 export const EXPECTED_PRICE_BASE_UNITS = BigInt(1_000)
 export const SPEND_CEILING_BASE_UNITS = BigInt(5_000)
 
+export const BAZAAR_DISCOVERY_QUERY =
+  'compress documents to an LLM token budget while preserving source-linked citations'
+/**
+ * The recipe's own ceiling, which is a buyer policy rather than a site-wide
+ * one: this recipe buys the $0.001 Context Compression offer and refuses
+ * anything dearer.
+ *
+ * It therefore also filters out Deep Context Evaluation at $0.01. That is
+ * correct for the recipe and a trap for anything reusing this helper to ask
+ * "is offer X discoverable" -- the offer is indexed and returned at rank 1 for
+ * `evidence retention`, but only once the ceiling is raised above its price.
+ */
+export const BAZAAR_MAX_USD_PRICE = '0.005'
+
+/** Bazaar answers a larger `limit` with HTTP 400, not a truncated page. */
+export const BAZAAR_MAX_SEARCH_LIMIT = 20
+
+/**
+ * Builds a Bazaar semantic search that actually filters.
+ *
+ * The `asset` parameter takes a contract address, not a symbol. Sending `usdc`
+ * matched nothing and returned an empty result set -- not an error, which is
+ * why it survived: an empty page from a discovery API is indistinguishable
+ * from "the index has not caught up yet", and the recipe has a documented
+ * merchant-lookup fallback that quietly rescued every run. The recipe kept
+ * working while the filter it advertises did nothing.
+ *
+ * Constructed here rather than inline in the script so the parameters can be
+ * asserted without a network call.
+ */
+export function bazaarSearchUrl(options: {
+  query?: string
+  maxUsdPrice?: string
+  limit?: number
+} = {}): URL {
+  const limit = options.limit ?? BAZAAR_MAX_SEARCH_LIMIT
+  // Caught locally rather than as a remote 400, because the remote failure is
+  // the same shape as the asset bug -- a request that looks broader and
+  // returns less.
+  if (!Number.isInteger(limit) || limit < 1 || limit > BAZAAR_MAX_SEARCH_LIMIT) {
+    throw new Error(`Bazaar accepts a limit from 1 through ${BAZAAR_MAX_SEARCH_LIMIT}; got ${limit}.`)
+  }
+  const search = new URL(BAZAAR_SEARCH_URL)
+  search.searchParams.set('query', options.query ?? BAZAAR_DISCOVERY_QUERY)
+  search.searchParams.set('network', BASE_NETWORK)
+  search.searchParams.set('asset', BASE_USDC)
+  search.searchParams.set('scheme', 'exact')
+  search.searchParams.set('maxUsdPrice', options.maxUsdPrice ?? BAZAAR_MAX_USD_PRICE)
+  search.searchParams.set('limit', String(limit))
+  return search
+}
+
 export const MAHA_BUYER_POLICY: BuyerPolicy = {
   schemaVersion: BUYER_POLICY_SCHEMA_VERSION,
   policyId: 'maha-bazaar-recipe-policy',

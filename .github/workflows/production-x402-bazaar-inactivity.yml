@@ -1,0 +1,110 @@
+name: Production x402 Bazaar inactivity watch
+
+# Bazaar removes a listing after 30 days without a settlement. Context
+# Compression is protected automatically by the bounded canary; Deep Context
+# Evaluation is not, and deliberately so -- it costs $0.01 rather than $0.001,
+# and an offer that quietly buys its own listing back on a timer turns silence
+# into a recurring charge nobody approved.
+#
+# So this watch reports and escalates rather than settling. Its only power is
+# to exit non-zero and leave an issue. Refreshing a listing remains the
+# manually dispatched, reviewer-protected canary workflow with its own exact
+# spending ceiling.
+#
+# Runs more often than the margin changes, because the cost of checking is
+# zero and the cost of noticing late is a delisted offer.
+
+on:
+  schedule:
+    # Daily, offset from the drift and canary crons.
+    - cron: '11 9 * * *'
+  workflow_dispatch:
+    inputs:
+      fail_on_warn:
+        description: 'Fail the run on a warning as well as urgent (default: urgent only).'
+        required: false
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: production-x402-bazaar-inactivity
+  cancel-in-progress: true
+
+jobs:
+  watch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    env:
+      GH_TOKEN: ${{ github.token }}
+      REPORT: ${{ github.workspace }}/bazaar-inactivity.json
+      TITLE: x402 Bazaar listing approaching inactivity removal
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+
+      # Read-only: public merchant discovery, no credentials, no wallet key in
+      # scope anywhere in this workflow.
+      - name: Read Bazaar activity for every payable offer
+        id: watch
+        env:
+          FAIL_ON_WARN: ${{ inputs.fail_on_warn || 'false' }}
+        run: |
+          set -euo pipefail
+          args=(--output "$REPORT")
+          if [ "$FAIL_ON_WARN" = "true" ]; then args+=(--fail-on-warn); fi
+          npm run watch:x402-inactivity -- "${args[@]}"
+
+      - name: Upload inactivity report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: bazaar-inactivity-${{ github.run_id }}
+          path: ${{ env.REPORT }}
+          if-no-files-found: warn
+          retention-days: 90
+
+      - name: Escalate to an issue
+        if: failure()
+        run: |
+          set -euo pipefail
+          if [ -f "$REPORT" ]; then
+            DETAIL=$(node -e '
+              const r = JSON.parse(require("fs").readFileSync(process.env.REPORT, "utf8"))
+              const rows = r.reports.map((o) => `| ${o.offerId} | ${o.level} | ${o.reason} | ${o.lastCalledAt ?? "unknown"} | ${o.daysRemaining ?? "unknown"} | ${o.totalCallsL30Days ?? "?"} | ${o.uniquePayersL30Days ?? "?"} | ${o.coveredByCanary ? "canary" : "manual"} |`)
+              console.log([
+                `Removal threshold: ${r.removalAfterDays} days without a settlement.`,
+                "",
+                "| offer | level | reason | last settled | days left | l30d calls | l30d payers | coverage |",
+                "| --- | --- | --- | --- | --- | --- | --- | --- |",
+                ...rows,
+              ].join("\n"))
+            ')
+          else
+            DETAIL='The watch failed before producing a report; treat listing state as unknown.'
+          fi
+          BODY=$(printf '%s\n\nRun: %s\n\n**Do not settle automatically.** Refreshing a listing is a manually dispatched, reviewer-protected settlement with an exact ceiling — see docs/production-x402-canary.md. Deep Context Evaluation has no automatic coverage by design.\n\nA canary-covered offer reported as `automation_should_have_fired` means the scheduled canary did not run; fix the canary rather than paying by hand.\n' "$DETAIL" "$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID")
+          EXISTING=$(gh issue list --state open --search "$TITLE in:title" --json number --jq '.[0].number // empty')
+          if [ -n "$EXISTING" ]; then
+            gh issue comment "$EXISTING" --body "$BODY"
+          else
+            gh issue create --title "$TITLE" --body "$BODY" --label x402 || \
+            gh issue create --title "$TITLE" --body "$BODY"
+          fi
+
+      - name: Close the issue when every listing is back inside its margin
+        if: success()
+        run: |
+          set -euo pipefail
+          EXISTING=$(gh issue list --state open --search "$TITLE in:title" --json number --jq '.[0].number // empty')
+          if [ -n "$EXISTING" ]; then
+            gh issue comment "$EXISTING" --body "Every payable offer is inside its inactivity margin again."
+            gh issue close "$EXISTING"
+          fi
