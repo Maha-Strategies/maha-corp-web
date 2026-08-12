@@ -1,0 +1,166 @@
+name: Preview MPS gates
+
+# The Stage 1 gates from docs/x402-mps-promotion.md that can only be answered
+# against a running deployment: readiness, the unpaid challenge, the crawler
+# probe, and x402-doctor.
+#
+# Runs in CI rather than by hand because Preview deployments sit behind
+# deployment protection, and the bypass secret is Sensitive in Vercel -- it
+# cannot be pulled to a laptop, which is the point of marking it Sensitive.
+# Doing this in a workflow is not a workaround for that; it is the supported
+# path, and it leaves a linkable run for the promotion evidence instead of a
+# transcript of somebody's terminal.
+#
+# Read-only and free. It never signs a payment: every assertion here is about
+# the *unpaid* contract, which is exactly the part that must be right before
+# anyone is asked to authorize $0.10.
+
+on:
+  workflow_dispatch:
+    inputs:
+      preview_url:
+        description: Preview deployment URL to test (https://…vercel.app)
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: preview-mps-gates
+  cancel-in-progress: true
+
+jobs:
+  gates:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    environment:
+      name: Preview
+      url: ${{ inputs.preview_url }}
+    env:
+      TARGET: ${{ inputs.preview_url }}
+      BYPASS: ${{ secrets.VERCEL_AUTOMATION_BYPASS_SECRET }}
+      READINESS_TOKEN: ${{ secrets.RELEASE_HEALTH_TOKEN }}
+      EXPECTED_AMOUNT: '100000'
+      EXPECTED_NETWORK: 'eip155:8453'
+      REPORT: ${{ github.workspace }}/preview-mps-gates.json
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+
+      - name: Reject a target that is not a Preview deployment
+        run: |
+          set -euo pipefail
+          case "$TARGET" in
+            https://*.vercel.app) ;;
+            *) echo '::error::Refusing to run against a non-Preview URL.'; exit 1 ;;
+          esac
+          if [ "$TARGET" = 'https://www.mahastrategies.com' ]; then
+            echo '::error::This workflow never targets Production.'; exit 1
+          fi
+          echo "target: $TARGET"
+
+      # Gate 1.3
+      - name: Readiness must be HTTP 200
+        run: |
+          set -euo pipefail
+          code=$(curl -s -o readiness.json -w '%{http_code}' \
+            -H "x-vercel-protection-bypass: ${BYPASS}" \
+            -H "authorization: Bearer ${READINESS_TOKEN}" \
+            "${TARGET}/api/admin/x402-readiness")
+          echo "readiness HTTP ${code}"
+          node -e '
+            const r = JSON.parse(require("fs").readFileSync("readiness.json", "utf8"))
+            console.log("state:", r.state)
+            for (const c of r.checks) console.log(` [${c.state}] ${c.id}: ${c.summary}`)
+            const enabled = (r.offers || []).filter((o) => o.enabledInThisEnvironment).map((o) => o.id)
+            console.log("enabled here:", enabled.join(", ") || "(none)")
+            if (!enabled.includes("mps-autonomous-audit")) {
+              throw new Error("mps-autonomous-audit is not enabled on this deployment")
+            }
+          '
+          [ "$code" = '200' ] || { echo '::error::Readiness is not 200.'; exit 1; }
+
+      # Gates 1.4 and 1.5. 401 means the offer is still behind the API-key gate;
+      # 400 would mean the route rejected an empty body before pricing it. Both
+      # are failures, and they fail for different reasons, so both are named.
+      - name: Unpaid request must be 402 for exactly 100000
+        run: |
+          set -euo pipefail
+          code=$(curl -s -o challenge.json -w '%{http_code}' -X POST \
+            -H "x-vercel-protection-bypass: ${BYPASS}" \
+            -H 'content-type: application/json' \
+            -d '{}' "${TARGET}/api/v1/mps/audit")
+          echo "unpaid POST /api/v1/mps/audit -> HTTP ${code}"
+          if [ "$code" != '402' ]; then
+            echo "::error::Expected 402, got ${code}. 401 means the offer is not priced in this environment; 400 means the route refused the request before pricing it."
+            head -c 400 challenge.json; exit 1
+          fi
+          node -e '
+            const b = JSON.parse(require("fs").readFileSync("challenge.json", "utf8"))
+            const a = (b.accepts || [])[0]
+            if (!a) throw new Error("the 402 carried no payment requirement")
+            const expect = (f, actual, wanted) => {
+              if (String(actual) !== String(wanted)) throw new Error(`${f}: ${actual} != ${wanted}`)
+            }
+            expect("amount", a.amount, process.env.EXPECTED_AMOUNT)
+            expect("network", a.network, process.env.EXPECTED_NETWORK)
+            expect("scheme", a.scheme, "exact")
+            console.log(`challenge: ${a.amount} ${a.network} ${a.scheme} -> ${a.payTo}`)
+          '
+
+      # Gate 1.6. The crawler probe replays the offer's own published input
+      # example. A 400 here means the example we publish does not satisfy the
+      # live schema -- a defect only visible once the offer is priced, and one
+      # that would strand any agent that trusted the declaration.
+      - name: Replay the published crawler example
+        run: |
+          set -euo pipefail
+          node -e '
+            const b = JSON.parse(require("fs").readFileSync("challenge.json", "utf8"))
+            const input = b.extensions?.bazaar?.info?.input?.body
+            if (!input) throw new Error("the challenge published no input example to replay")
+            require("fs").writeFileSync("example.json", JSON.stringify(input))
+            console.log("replaying the published example")
+          '
+          code=$(curl -s -o replay.json -w '%{http_code}' -X POST \
+            -H "x-vercel-protection-bypass: ${BYPASS}" \
+            -H 'content-type: application/json' \
+            --data-binary @example.json "${TARGET}/api/v1/mps/audit")
+          echo "crawler example -> HTTP ${code}"
+          if [ "$code" = '400' ]; then
+            echo '::error::The published input example does not satisfy the live schema.'
+            head -c 400 replay.json; exit 1
+          fi
+          [ "$code" = '402' ] || { echo "::error::Expected 402 for the unpaid example, got ${code}."; exit 1; }
+
+      # Gate 1.7
+      - name: x402-doctor
+        run: |
+          set -euo pipefail
+          npm run x402:doctor -- "${TARGET}/api/v1/mps/audit" \
+            --method POST \
+            --header "x-vercel-protection-bypass: ${BYPASS}" \
+            --format json --output "$REPORT"
+          node -e '
+            const r = JSON.parse(require("fs").readFileSync(process.env.REPORT, "utf8"))
+            console.log(`ok=${r.ok} http=${r.live?.status} crawler=${r.live?.crawlerStatus} errors=${r.summary.errors} warnings=${r.summary.warnings}`)
+            for (const f of r.findings || []) console.log(`[${f.level}] ${f.ruleId}: ${f.message}`)
+            if (r.summary.errors > 0) throw new Error("x402-doctor reported errors")
+          '
+
+      - name: Upload gate evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: preview-mps-gates-${{ github.run_id }}
+          path: |
+            ${{ env.REPORT }}
+            readiness.json
+            challenge.json
+          if-no-files-found: warn
+          retention-days: 90
