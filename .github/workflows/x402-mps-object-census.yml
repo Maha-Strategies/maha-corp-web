@@ -78,9 +78,30 @@ jobs:
           echo "target: $TARGET"
           echo "fingerprint: sha256:$(printf '%s' "$SUPABASE_PROJECT_REF" | sha256sum | cut -d' ' -f1)"
 
+      # Two paths, because the environments are provisioned differently.
+      # `production-database` holds a management access token, so the pooler
+      # endpoint is resolved from authenticated project metadata rather than
+      # assumed. `Preview` has no such token -- preview-migrations.yml builds
+      # the session-pooler URL directly -- so this falls back to the same form
+      # that workflow already uses in anger.
+      #
+      # Falling back rather than failing, because the census is read-only and
+      # the alternative is that Preview simply cannot be verified. But the
+      # fallback is announced in the log: an assumed host that silently
+      # resolves elsewhere is the failure this whole exercise is about.
       - name: Resolve the project's pooler connection
         run: |
           set -euo pipefail
+          if [ -z "${SUPABASE_ACCESS_TOKEN:-}" ]; then
+            echo 'No management token in this environment; using the documented session-pooler host.'
+            {
+              echo 'SUPABASE_DB_HOST=aws-0-us-east-1.pooler.supabase.com'
+              echo 'SUPABASE_DB_PORT=5432'
+              echo "SUPABASE_DB_USER=postgres.${SUPABASE_PROJECT_REF}"
+              echo 'SUPABASE_DB_NAME=postgres'
+            } >> "$GITHUB_ENV"
+            exit 0
+          fi
           poolers=$(curl --fail --silent --show-error \
             -H "Authorization: Bearer ${SUPABASE_ACCESS_TOKEN}" \
             "https://api.supabase.com/v1/projects/${SUPABASE_PROJECT_REF}/config/database/pooler")
