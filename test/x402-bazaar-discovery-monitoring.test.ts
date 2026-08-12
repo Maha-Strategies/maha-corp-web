@@ -172,5 +172,9 @@ test('the watch covers every payable offer, so promotion enrols an offer by itse
   const ids = payableOffers().map((offer) => offer.id)
   assert.ok(ids.includes('context-compression'))
   assert.ok(ids.includes('deep-context-evaluation'))
-  assert.ok(!ids.includes('mps-autonomous-audit'), 'MPS is not payable and must not be watched')
+  // Enrolled by its promotion on 2026-08-12, with no edit to the watch. That
+  // is the property this test exists for: the watch list is the payable set,
+  // so an offer cannot be promoted and then silently go unmonitored.
+  assert.ok(ids.includes('mps-autonomous-audit'))
+  assert.equal(ids.length, payableOffers().length)
 })

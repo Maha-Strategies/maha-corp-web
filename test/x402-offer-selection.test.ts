@@ -17,6 +17,7 @@ import {
   OFFER_SELECTION_CANONICAL_URL,
   OFFER_SELECTION_EXAMPLES,
   OFFER_SELECTION_SCHEMA_VERSION,
+  MPS_MAX_PASSAGE_CHARACTERS,
   buildOfferSelectionDocument,
   selectMahaOffer,
   type OfferSelectionInput,
@@ -25,6 +26,7 @@ import { GET } from '../app/api/discovery/offer-selection/route.ts'
 
 const COMPRESSION = 'context-compression'
 const DEEP = 'deep-context-evaluation'
+const MPS = 'mps-autonomous-audit'
 
 const base = (over: Partial<OfferSelectionInput> = {}): OfferSelectionInput => ({
   objective: 'compile-context-pack',
@@ -60,7 +62,10 @@ test('every payable catalog offer appears exactly once, and nothing else does', 
   const expected = payableOffers().map((offer) => offer.id)
   assert.deepEqual([...published].sort(), [...expected].sort())
   assert.equal(new Set(published).size, published.length, 'no offer may be listed twice')
-  assert.ok(!published.includes(MPS_AUTONOMOUS_AUDIT_OFFER.id), 'a withheld offer is never a selectable offer')
+  // MPS became payable on 2026-08-12 and is now a selectable offer. The
+  // withheld invariant is asserted below against a synthetic offer instead, so
+  // it survives every future promotion.
+  assert.ok(published.includes(MPS_AUTONOMOUS_AUDIT_OFFER.id))
 })
 
 test('published terms are the catalog terms, not a second hand-maintained copy', () => {
@@ -240,6 +245,68 @@ test('a withheld offer never reaches the published document either', () => {
   assert.deepEqual(document.offers, [])
 })
 
+// --- MPS audit selection ---------------------------------------------------
+
+test('claim triage selects the MPS audit and nothing else', () => {
+  const decision = selectMahaOffer(base({ objective: 'claim-provenance-triage', maximumPriceBaseUnits: '100000' }))
+  assert.equal(decision.decision, 'select')
+  assert.deepEqual(decision.selectedOfferIds, [MPS])
+  assert.equal(decision.estimatedOfferCostBaseUnits, '100000')
+  assert.equal(decision.estimatedOfferCostBaseUnits, MPS_AUTONOMOUS_AUDIT_OFFER.amount)
+})
+
+test('a compression request never falls through into the $0.10 model call', () => {
+  // The expensive misroute. Triage is reachable only by asking for it.
+  for (const objective of ['compile-context-pack', 'evaluate-context-quality', 'compile-and-evaluate', 'other'] as const) {
+    const decision = selectMahaOffer(base({ objective, maximumPriceBaseUnits: '100000' }))
+    assert.ok(!decision.selectedOfferIds.includes(MPS), `${objective} must not select the MPS audit`)
+  }
+})
+
+test('MPS over budget rejects and never substitutes a compression offer', () => {
+  const decision = selectMahaOffer(base({ objective: 'claim-provenance-triage', maximumPriceBaseUnits: '20000' }))
+  assert.equal(decision.decision, 'reject')
+  assert.deepEqual(decision.selectedOfferIds, [])
+  assert.ok(decision.warnings.some((w) => /provenance statuses/i.test(w)))
+})
+
+test('the MPS boundary is exact at 100000 base units', () => {
+  assert.equal(selectMahaOffer(base({ objective: 'claim-provenance-triage', maximumPriceBaseUnits: '100000' })).decision, 'select')
+  assert.equal(selectMahaOffer(base({ objective: 'claim-provenance-triage', maximumPriceBaseUnits: '99999' })).decision, 'reject')
+})
+
+test('a passage over 6000 characters rejects before payment', () => {
+  const over = { objective: 'claim-provenance-triage' as const, estimatedInputBytes: MPS_MAX_PASSAGE_CHARACTERS + 1, maximumPriceBaseUnits: '100000' }
+  assert.equal(selectMahaOffer(base(over)).decision, 'reject')
+  assert.equal(selectMahaOffer(base({ ...over, estimatedInputBytes: MPS_MAX_PASSAGE_CHARACTERS })).decision, 'select')
+})
+
+test('the published MPS entry preserves the contract exactly', () => {
+  const entry = (buildOfferSelectionDocument().offers as Array<Record<string, unknown>>)
+    .find((o) => o.offerId === MPS)!
+  assert.ok(entry)
+  assert.equal((entry.price as { baseUnits: string }).baseUnits, '100000')
+  assert.equal(entry.resource, 'https://www.mahastrategies.com/api/v1/mps/audit')
+  assert.equal(entry.method, 'POST')
+  assert.equal(entry.network, BASE_MAINNET_CAIP2)
+  assert.equal(entry.asset, BASE_USDC)
+  assert.equal(entry.requiresIdempotency, true, 'idempotency key and input hash are required')
+  const limits = entry.requestLimits as Record<string, number>
+  assert.equal(limits.maxPassageCharacters, 6000)
+  assert.equal(limits.maxRequestBytes, 32_768)
+  assert.equal(limits.concurrencyCap, 2)
+  const retention = entry.retention as { verbatimExcerptsRetained: boolean; fullSourceTextStored: boolean }
+  assert.equal(retention.verbatimExcerptsRetained, true, 'MPS keeps 6-25 word claim excerpts by design')
+  assert.equal(retention.fullSourceTextStored, false)
+  // Standalone, not a stage of the compression pipeline.
+  assert.deepEqual(entry.flow, { successor: null, predecessor: null, standalone: true })
+  const nonFit = entry.nonFitConditions as string[]
+  for (const claim of [/certification/i, /legal advice/i, /human/i, /hallucination|verification/i]) {
+    assert.ok(nonFit.some((c) => claim.test(c)), `the MPS non-fit list must disclaim ${claim}`)
+  }
+  assert.match(String((entry.links as Record<string, string>).retrieval), /\/api\/v1\/mps\/audit\/\{auditId\}$/)
+})
+
 // --- Examples --------------------------------------------------------------
 
 test('every published example reproduces its documented decision', () => {
@@ -254,10 +321,10 @@ test('every published example reproduces its documented decision', () => {
 test('the document ships the same five examples it was specified with', () => {
   const document = buildOfferSelectionDocument()
   const examples = document.examples as Array<{ decision: { decision: string } }>
-  assert.equal(examples.length, 5)
+  assert.equal(examples.length, 8)
   assert.deepEqual(
     examples.map((example) => example.decision.decision),
-    ['select', 'select', 'reject', 'reject', 'sequence'],
+    ['select', 'select', 'select', 'reject', 'reject', 'reject', 'reject', 'sequence'],
   )
 })
 

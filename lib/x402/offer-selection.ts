@@ -48,6 +48,7 @@ export type SelectionObjective =
   | 'compile-context-pack'
   | 'evaluate-context-quality'
   | 'compile-and-evaluate'
+  | 'claim-provenance-triage'
   | 'summarize'
   | 'verify-facts'
   | 'other'
@@ -109,10 +110,14 @@ export type OfferDecision = {
 
 const COMPRESSION_ID = 'context-compression'
 const DEEP_ID = 'deep-context-evaluation'
+const MPS_ID = 'mps-autonomous-audit'
 
 /** Published request limits that the catalog does not carry as fields. */
 export const DEEP_CONTEXT_DOCUMENT_LIMIT = 8
 export const DEEP_CONTEXT_EVIDENCE_SPAN_LIMIT = 32
+
+/** MPS accepts one passage, bounded well below its 32 KiB transport ceiling. */
+export const MPS_MAX_PASSAGE_CHARACTERS = 6_000
 
 function reject(
   reasons: string[],
@@ -225,11 +230,19 @@ export function selectMahaOffer(
 
   const wantsSequence = input.objective === 'compile-and-evaluate'
 
-  const targetIds = wantsSequence
-    ? [COMPRESSION_ID, DEEP_ID]
-    : wantsMeasurement
-      ? [DEEP_ID]
-      : [COMPRESSION_ID]
+  // Claim triage is a different product, not a tier of the compression
+  // offers. It is reachable only by asking for it explicitly, and it is never
+  // reached by falling through from a compression request -- an agent that
+  // wanted a context pack must not be routed into a $0.10 model call.
+  const wantsTriage = input.objective === 'claim-provenance-triage'
+
+  const targetIds = wantsTriage
+    ? [MPS_ID]
+    : wantsSequence
+      ? [COMPRESSION_ID, DEEP_ID]
+      : wantsMeasurement
+        ? [DEEP_ID]
+        : [COMPRESSION_ID]
 
   // --- Availability --------------------------------------------------------
   constraintsChecked.push('availability')
@@ -278,6 +291,20 @@ export function selectMahaOffer(
     )
   }
 
+  if (
+    selected.some((offer) => offer.id === MPS_ID)
+    && input.estimatedInputBytes !== undefined
+    && input.estimatedInputBytes > MPS_MAX_PASSAGE_CHARACTERS
+  ) {
+    // Stated in characters because that is the published contract; the 32 KiB
+    // ceiling is the transport bound and is the larger of the two, so the
+    // passage limit is what a caller actually hits.
+    return reject(
+      [`The MPS audit accepts a passage of at most ${MPS_MAX_PASSAGE_CHARACTERS} characters; ${input.estimatedInputBytes} were declared.`],
+      constraintsChecked,
+    )
+  }
+
   // --- Budget --------------------------------------------------------------
   const cost = BigInt(totalBaseUnits(selected))
   if (ceiling !== null && cost > ceiling) {
@@ -291,9 +318,11 @@ export function selectMahaOffer(
       })),
       // The load-bearing warning. A buyer that asked to measure retention and
       // received a compression pack instead has been sold a different product.
-      wantsMeasurement || wantsSequence
-        ? ['No cheaper substitute is offered: Context Compression does not measure retention, so selecting it here would answer a different question than the one asked.']
-        : [],
+      wantsTriage
+        ? ['No cheaper substitute is offered: neither compression offer assigns provenance statuses to claims, so selecting one here would answer a different question than the one asked.']
+        : wantsMeasurement || wantsSequence
+          ? ['No cheaper substitute is offered: Context Compression does not measure retention, so selecting it here would answer a different question than the one asked.']
+          : [],
     )
   }
 
@@ -304,7 +333,12 @@ export function selectMahaOffer(
     warnings.push('Source-linked provenance and deduplication are provided by both offers; they are not a reason to choose the dearer one.')
   }
 
-  const reasons = wantsSequence
+  const reasons = wantsTriage
+    ? [
+        'The Autonomous MPS Audit is the only offer that assigns provenance statuses to the claims in a passage.',
+        'It is automated triage: a status is a model judgement, not a certification that the claim is true.',
+      ]
+    : wantsSequence
     ? [
         'Context Compression compiles the pack at the lower price.',
         'Deep Context Evaluation then measures retention of the caller-labelled spans.',
@@ -319,9 +353,11 @@ export function selectMahaOffer(
     if (selected.some((chosen) => chosen.id === offer.id)) continue
     rejectedAlternatives.push({
       offerId: offer.id,
-      reason: offer.id === DEEP_ID
-        ? 'No measurement of retention or source coverage was requested, so its evaluation step would be paid for and unused.'
-        : 'Compilation alone does not answer the measurement question that was asked.',
+      reason: offer.id === MPS_ID
+        ? 'Claim provenance triage was not requested. It is a separate product at a separate endpoint, not a tier of the compression offers.'
+        : offer.id === DEEP_ID
+          ? 'No measurement of retention or source coverage was requested, so its evaluation step would be paid for and unused.'
+          : 'Compilation alone does not answer the question that was asked.',
     })
   }
 
@@ -346,6 +382,13 @@ const OFFER_LINKS: Record<string, Record<string, string>> = {
     largeDocumentRecipe: `${SITE_ORIGIN}/recipes/context-compiler-large-document`,
     benchmark: `${SITE_ORIGIN}/benchmarks/context-retention`,
     humanDocumentation: `${SITE_ORIGIN}/context-compiler`,
+  },
+  [MPS_ID]: {
+    openapi: `${SITE_ORIGIN}/api/docs/openapi`,
+    declaration: `${SITE_ORIGIN}/api/discovery/x402-offers/${MPS_ID}`,
+    retrieval: `${SITE_ORIGIN}/api/v1/mps/audit/{auditId}`,
+    humanDocumentation: `${SITE_ORIGIN}/mps`,
+    standard: `${SITE_ORIGIN}/mps`,
   },
   [DEEP_ID]: {
     openapi: `${SITE_ORIGIN}/api/docs/openapi`,
@@ -378,6 +421,28 @@ const OFFER_FIT: Record<string, { fit: string[]; nonFit: string[]; requiredInput
       'inputHash and outputHash',
     ],
   },
+  [MPS_ID]: {
+    fit: [
+      'Assigning a provenance status to each substantive claim in a nonfiction passage.',
+      'Automated editorial triage ahead of human review.',
+      'Producing rationales and suggested actions per claim under the Maha Provenance Standard v0.1.',
+      'A passage of at most 6000 characters, submitted as UTF-8 text.',
+    ],
+    nonFit: [
+      'You want factual certification: a VERIFIED status is a model judgement, not a confirmation that the claim is true.',
+      'You want legal advice, or a substitute for human editorial review before publication.',
+      'You want hallucination prevention or claim verification.',
+      'You want passage compression or context-pack compilation, which are the other two offers.',
+      'Your passage exceeds 6000 characters, or your request exceeds the 32 KiB ceiling.',
+    ],
+    requiredInputFields: ['clientRequestId', 'text'],
+    producedEvidence: [
+      'per-claim provenance status (VERIFIED, SOURCED, BOUNDARY, ILLUSTRATIVE, UNVERIFIED)',
+      'a rationale and a suggested action per claim',
+      'short verbatim claim excerpts, 6-25 words each, retained by design so a tagged claim can be quoted',
+      'auditId, inputHash, and a one-time retrievalToken',
+    ],
+  },
   [DEEP_ID]: {
     fit: [
       'Measuring required-fact retention against caller-labelled evidence spans.',
@@ -407,7 +472,9 @@ function offerEntry(offer: X402Offer): Record<string, unknown> {
     offerId: offer.id,
     name: offer.serviceName === 'Maha Context Compiler' && offer.id === DEEP_ID
       ? 'Deep Context Evaluation'
-      : offer.id === COMPRESSION_ID ? 'Context Compression' : offer.serviceName,
+      : offer.id === COMPRESSION_ID
+        ? 'Context Compression'
+        : offer.id === MPS_ID ? 'Autonomous MPS Audit' : offer.serviceName,
     resource: `${SITE_ORIGIN}${offer.path}`,
     method: offer.method,
     price: {
@@ -432,6 +499,7 @@ function offerEntry(offer: X402Offer): Record<string, unknown> {
       ...(offer.id === DEEP_ID
         ? { maxDocuments: DEEP_CONTEXT_DOCUMENT_LIMIT, maxRequiredEvidenceSpans: DEEP_CONTEXT_EVIDENCE_SPAN_LIMIT }
         : {}),
+      ...(offer.id === MPS_ID ? { maxPassageCharacters: MPS_MAX_PASSAGE_CHARACTERS } : {}),
     },
     requiresIdempotency: offer.requiresIdempotency,
     requiredInputFields: fit?.requiredInputFields ?? [],
@@ -447,7 +515,11 @@ function offerEntry(offer: X402Offer): Record<string, unknown> {
     },
     flow: offer.id === COMPRESSION_ID
       ? { successor: DEEP_ID, successorOptional: true, predecessor: null }
-      : { successor: null, predecessor: COMPRESSION_ID, predecessorOptional: true },
+      : offer.id === DEEP_ID
+        ? { successor: null, predecessor: COMPRESSION_ID, predecessorOptional: true }
+        // Not a stage of the compression pipeline. Presenting it as one would
+        // invite an agent to chain into a $0.10 model call it never asked for.
+        : { successor: null, predecessor: null, standalone: true },
     links: OFFER_LINKS[offer.id] ?? {},
   }
 }
@@ -488,6 +560,42 @@ export const OFFER_SELECTION_EXAMPLES: ReadonlyArray<{
     },
     expected: { decision: 'select', selectedOfferIds: [DEEP_ID], estimatedOfferCostBaseUnits: '10000' },
     note: 'Only Deep Context Evaluation measures retention. 10000 base units fits a 20000 ceiling.',
+  },
+  {
+    name: 'Editorial claim triage, ceiling 100000 base units ($0.10)',
+    input: {
+      objective: 'claim-provenance-triage',
+      estimatedInputBytes: 4_200,
+      inputEncoding: 'utf8-text',
+      maximumPriceBaseUnits: '100000',
+      network: BASE_MAINNET_CAIP2,
+      asset: BASE_USDC,
+    },
+    expected: { decision: 'select', selectedOfferIds: [MPS_ID], estimatedOfferCostBaseUnits: '100000' },
+    note: 'Only the MPS audit assigns provenance statuses. 100000 base units is exactly the ceiling, which authorizes it.',
+  },
+  {
+    name: 'Claim triage at a ceiling of 20000 base units ($0.02)',
+    input: {
+      objective: 'claim-provenance-triage',
+      maximumPriceBaseUnits: '20000',
+      network: BASE_MAINNET_CAIP2,
+      asset: BASE_USDC,
+    },
+    expected: { decision: 'reject', selectedOfferIds: [], estimatedOfferCostBaseUnits: '0' },
+    note: 'Budget mismatch. Neither compression offer is substituted: neither assigns provenance statuses, so a cheaper one would answer a different question.',
+  },
+  {
+    name: 'Claim triage on a passage over 6000 characters',
+    input: {
+      objective: 'claim-provenance-triage',
+      estimatedInputBytes: 9_000,
+      maximumPriceBaseUnits: '100000',
+      network: BASE_MAINNET_CAIP2,
+      asset: BASE_USDC,
+    },
+    expected: { decision: 'reject', selectedOfferIds: [], estimatedOfferCostBaseUnits: '0' },
+    note: 'Rejected before payment rather than refused after it. Split the passage.',
   },
   {
     name: 'Summarization request, ceiling 5000 base units ($0.005)',
@@ -552,7 +660,7 @@ export function buildOfferSelectionDocument(
     selectionInputs: {
       objective: {
         type: 'string',
-        enum: ['compile-context-pack', 'evaluate-context-quality', 'compile-and-evaluate', 'summarize', 'verify-facts', 'other'],
+        enum: ['compile-context-pack', 'evaluate-context-quality', 'compile-and-evaluate', 'claim-provenance-triage', 'summarize', 'verify-facts', 'other'],
         required: true,
       },
       estimatedInputBytes: { type: 'integer', required: false },
@@ -628,6 +736,18 @@ export function buildOfferSelectionDocument(
           when: 'objective is evaluate-context-quality, or any of needsRetentionMeasurement, needsSourceCoverageMeasurement, needsQualityEvaluation is true',
           then: `select ${DEEP_ID}`,
           because: 'It is the only offer that measures required-fact retention, source coverage and citation traceability.',
+        },
+        {
+          id: 'claim-provenance-triage',
+          when: 'objective is claim-provenance-triage',
+          then: `select ${MPS_ID}`,
+          because: 'It is the only offer that assigns provenance statuses to claims. It is reached only by asking for it: a compression request never falls through into a $0.10 model call.',
+        },
+        {
+          id: 'mps-passage-limit',
+          when: `the MPS audit is selected and the passage exceeds ${MPS_MAX_PASSAGE_CHARACTERS} characters`,
+          then: 'reject',
+          because: 'The endpoint would refuse the request after payment.',
         },
         {
           id: 'two-stage',

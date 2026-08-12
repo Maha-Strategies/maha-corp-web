@@ -13,6 +13,7 @@ import {
   mpsAuditOffer,
   mpsAuditServiceJsonLd,
 } from '../lib/agentic-commerce.ts'
+import { X402_OFFERS, payableOffers } from '../lib/x402/offers.ts'
 import claimsData from '../lib/atlas/generated-claims.json' with { type: 'json' }
 import { buildLlmsManifest } from '../lib/llms-manifest.ts'
 import type { MpsClaim } from '../scripts/expand-graph.ts'
@@ -137,12 +138,21 @@ test('public agent discovery identifies live capabilities and the scoped Context
   assert.equal(offers.updatedAt, '2026-08-08T00:00:00.000Z')
   assert.equal(offers.transactionPolicy.autonomousPaymentSupported, true)
   // Only what is payable today. Deep Context is in preview and the MPS audit
-  // is withheld, so both are described but neither is in the payable scope --
   // an agent that reads this list must be able to act on it without checking
   // anything else.
-  // Deep Context was promoted on 2026-08-11; MPS remains withheld.
-  assert.deepEqual(offers.transactionPolicy.autonomousPaymentScope, ['context-compression', 'deep-context-evaluation'])
-  assert.deepEqual(offers.transactionPolicy.describedNotPayable, ['mps-autonomous-audit'])
+  //
+  // Derived from the catalog rather than listed literally. Both promotions
+  // that have happened so far -- Deep Context on 2026-08-11, MPS on
+  // 2026-08-12 -- had to edit this line, which means the assertion was
+  // tracking the catalog by hand instead of checking that the manifest does.
+  assert.deepEqual(
+    [...offers.transactionPolicy.autonomousPaymentScope].sort(),
+    payableOffers().map((offer) => offer.id).sort(),
+  )
+  assert.deepEqual(
+    [...(offers.transactionPolicy.describedNotPayable ?? [])].sort(),
+    X402_OFFERS.filter((offer) => offer.status !== 'available').map((offer) => offer.id).sort(),
+  )
   const expected = [
     'context-compression',
     'deep-context-evaluation',
@@ -207,7 +217,10 @@ test('the long-lived agent-offers manifest exposes the same MPS payment boundary
   }
   const mpsOffer = manifest.offers.find((offer) => offer.id === mpsAuditOffer.id)
   assert.equal(manifest.transactionPolicy.autonomousPaymentSupported, true)
-  assert.deepEqual(manifest.transactionPolicy.autonomousPaymentScope, ['context-compression', 'deep-context-evaluation'])
+  assert.deepEqual(
+    [...manifest.transactionPolicy.autonomousPaymentScope].sort(),
+    payableOffers().map((offer) => offer.id).sort(),
+  )
   assert.equal(manifest.transactionPolicy.humanConfirmationRequired, true)
 
   // The prepaid MPS product and the autonomous MPS offer are different things
