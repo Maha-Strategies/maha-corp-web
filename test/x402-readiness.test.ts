@@ -72,14 +72,28 @@ test('an offer enabled for payment but published as withheld fails readiness', a
   // The specific mistake that would sell something the catalog says is not for
   // sale. It is a configuration error, not a code error, so only readiness can
   // catch it.
+  //
+  // Injects a withheld offer rather than naming a live one. Every offer in the
+  // catalog is payable as of 2026-08-12, and a guard written against whichever
+  // offer happens to be withheld today stops testing the invariant the moment
+  // that offer is promoted -- which is exactly what happened to this test.
+  const withheld = {
+    ...MPS_AUTONOMOUS_AUDIT_OFFER,
+    status: 'withheld' as const,
+    availability: {
+      payableInProduction: false,
+      blockedBy: ['The required paid-job and admission migrations have not been applied and verified.'],
+    },
+  }
   const report = await getX402Readiness({
     environment: {
       ...BASE,
       X402_RESOURCES: JSON.stringify([
         { method: 'POST', path: CONTEXT_COMPRESSION_OFFER.path },
-        { method: 'POST', path: MPS_AUTONOMOUS_AUDIT_OFFER.path },
+        { method: 'POST', path: withheld.path },
       ]),
     },
+    offers: [CONTEXT_COMPRESSION_OFFER, withheld],
     probe: everything,
   })
   assert.equal(report.state, 'unavailable')
@@ -315,10 +329,15 @@ test('readiness never echoes a secret or a raw environment value', async () => {
 
 test('the report states which offers are payable, so a promotion can be gated on it', async () => {
   const report = await getX402Readiness({ environment: BASE, probe: everything })
+  // Promoted on 2026-08-12. enabledInThisEnvironment stays false here because
+  // BASE does not list the MPS path in X402_RESOURCES: being payable in the
+  // catalog and being switched on in one environment are separate facts, and
+  // the report has to keep them separate for a promotion to be gated on it.
   const mps = report.offers.find((offer) => offer.id === 'mps-autonomous-audit')!
-  assert.equal(mps.status, 'withheld')
-  assert.equal(mps.payableInProduction, false)
+  assert.equal(mps.status, 'available')
+  assert.equal(mps.payableInProduction, true)
   assert.equal(mps.enabledInThisEnvironment, false)
+  assert.equal(MPS_AUTONOMOUS_AUDIT_OFFER.availability.blockedBy.length, 0)
 
   // Deep Context was promoted on 2026-08-11 and must read as payable.
   const deep = report.offers.find((offer) => offer.id === 'deep-context-evaluation')!
