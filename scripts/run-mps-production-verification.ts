@@ -79,7 +79,10 @@ export async function run(): Promise<void> {
 
   const clientRequestId = `mps_prod_verify_${process.env.GITHUB_RUN_ID ?? Date.now()}`
   const body = JSON.stringify({ ...input, clientRequestId })
-  const inputHash = createHash('sha256').update(body, 'utf8').digest('hex')
+  // Prefixed, not bare hex. readAdmissionClaim matches /^sha256:[a-f0-9]{64}$/
+  // so the algorithm travels with the digest -- a bare hash would silently
+  // become ambiguous the day a second algorithm is accepted.
+  const inputHash = `sha256:${createHash('sha256').update(body, 'utf8').digest('hex')}`
   const admissionHeaders = {
     'content-type': 'application/json',
     [IDEMPOTENCY_KEY_HEADER]: clientRequestId,
