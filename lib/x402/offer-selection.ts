@@ -70,14 +70,20 @@ export type OfferSelectionInput = {
   needsDeduplication?: boolean
   latencyPreference?: LatencyPreference
   /**
-   * Ceiling in USDC **base units**, as a decimal integer string.
+   * Ceiling in USDC base units, as a decimal integer string. `'5000'` is
+   * $0.005.
    *
-   * A string of base units rather than a dollar number on purpose: $0.01 is
-   * not representable in binary floating point, and a rounding error in a
-   * spending ceiling is a rounding error in an authorization. `'5000'` is
-   * $0.005. Every comparison below is BigInt.
+   * Named for its unit rather than for the currency. An earlier draft named it
+   * after USDC, which read as a dollar amount and invited exactly the mistake
+   * this field exists to prevent: a caller sending `0.005` meaning half a cent,
+   * and getting either a rejection or -- far worse, under a laxer parser --
+   * five thousand base units of permission nobody granted.
+   *
+   * Base units in, BigInt throughout. $0.01 is not representable in binary
+   * floating point, and a rounding error in a spending ceiling is a rounding
+   * error in an authorization.
    */
-  maximumPriceUsdc?: string
+  maximumPriceBaseUnits?: string
   network?: string
   asset?: string
   /** Beyond the brief's list, because "unsupported binary input" is a stated non-fit. */
@@ -171,17 +177,17 @@ export function selectMahaOffer(
   }
 
   let ceiling: bigint | null = null
-  if (input.maximumPriceUsdc !== undefined) {
-    constraintsChecked.push('maximumPriceUsdc')
+  if (input.maximumPriceBaseUnits !== undefined) {
+    constraintsChecked.push('maximumPriceBaseUnits')
     // Rejected rather than coerced. A ceiling that does not parse is not a
     // permissive ceiling.
-    if (!/^\d+$/.test(input.maximumPriceUsdc)) {
+    if (!/^\d+$/.test(input.maximumPriceBaseUnits)) {
       return reject(
-        ['maximumPriceUsdc must be a decimal integer string of USDC base units; $0.005 is "5000".'],
+        ['maximumPriceBaseUnits must be a decimal integer string of USDC base units; $0.005 is "5000".'],
         constraintsChecked,
       )
     }
-    ceiling = BigInt(input.maximumPriceUsdc)
+    ceiling = BigInt(input.maximumPriceBaseUnits)
   }
 
   // --- Capabilities this platform does not have ---------------------------
@@ -454,7 +460,7 @@ export const OFFER_SELECTION_EXAMPLES: ReadonlyArray<{
   note: string
 }> = Object.freeze([
   {
-    name: 'RAG agent, large multi-document payload, $0.005 ceiling',
+    name: 'RAG agent, large multi-document payload, ceiling 5000 base units ($0.005)',
     input: {
       objective: 'compile-context-pack',
       documentCount: 24,
@@ -462,55 +468,55 @@ export const OFFER_SELECTION_EXAMPLES: ReadonlyArray<{
       requiredTokenBudget: 4_000,
       needsDeduplication: true,
       needsCitationTraceability: true,
-      maximumPriceUsdc: '5000',
+      maximumPriceBaseUnits: '5000',
       network: BASE_MAINNET_CAIP2,
       asset: BASE_USDC,
     },
     expected: { decision: 'select', selectedOfferIds: [COMPRESSION_ID], estimatedOfferCostBaseUnits: '1000' },
-    note: 'Compilation only, and $0.001 sits inside a $0.005 ceiling.',
+    note: 'Compilation only. 1000 base units sits inside a 5000 ceiling.',
   },
   {
-    name: 'Release pipeline checking required-fact retention, $0.02 ceiling',
+    name: 'Release pipeline checking required-fact retention, ceiling 20000 base units ($0.02)',
     input: {
       objective: 'evaluate-context-quality',
       documentCount: 4,
       needsRetentionMeasurement: true,
       needsSourceCoverageMeasurement: true,
-      maximumPriceUsdc: '20000',
+      maximumPriceBaseUnits: '20000',
       network: BASE_MAINNET_CAIP2,
       asset: BASE_USDC,
     },
     expected: { decision: 'select', selectedOfferIds: [DEEP_ID], estimatedOfferCostBaseUnits: '10000' },
-    note: 'Only Deep Context Evaluation measures retention, and $0.01 fits a $0.02 ceiling.',
+    note: 'Only Deep Context Evaluation measures retention. 10000 base units fits a 20000 ceiling.',
   },
   {
-    name: 'Summarization request, $0.005 ceiling',
-    input: { objective: 'summarize', maximumPriceUsdc: '5000' },
+    name: 'Summarization request, ceiling 5000 base units ($0.005)',
+    input: { objective: 'summarize', maximumPriceBaseUnits: '5000' },
     expected: { decision: 'reject', selectedOfferIds: [], estimatedOfferCostBaseUnits: '0' },
     note: 'Capability mismatch: both offers are extractive, never abstractive. The budget is beside the point, and a cheaper offer would still be the wrong product.',
   },
   {
-    name: 'Evaluation request, $0.005 ceiling',
+    name: 'Evaluation request, ceiling 5000 base units ($0.005)',
     input: {
       objective: 'evaluate-context-quality',
       needsRetentionMeasurement: true,
-      maximumPriceUsdc: '5000',
+      maximumPriceBaseUnits: '5000',
     },
     expected: { decision: 'reject', selectedOfferIds: [], estimatedOfferCostBaseUnits: '0' },
     note: 'Budget mismatch only: Deep Context Evaluation costs 10000 base units. Context Compression is deliberately NOT substituted, because it does not measure retention.',
   },
   {
-    name: 'Two-stage workflow, $0.02 total ceiling',
+    name: 'Two-stage workflow, total ceiling 20000 base units ($0.02)',
     input: {
       objective: 'compile-and-evaluate',
       documentCount: 6,
       needsRetentionMeasurement: true,
-      maximumPriceUsdc: '20000',
+      maximumPriceBaseUnits: '20000',
       network: BASE_MAINNET_CAIP2,
       asset: BASE_USDC,
     },
     expected: { decision: 'sequence', selectedOfferIds: [COMPRESSION_ID, DEEP_ID], estimatedOfferCostBaseUnits: '11000' },
-    note: '1000 + 10000 = 11000 base units ($0.011), inside a $0.02 ceiling.',
+    note: '1000 + 10000 = 11000 base units (displays as $0.011), inside a 20000 ceiling.',
   },
 ])
 
@@ -559,11 +565,17 @@ export function buildOfferSelectionDocument(
       needsCitationTraceability: { type: 'boolean', required: false },
       needsDeduplication: { type: 'boolean', required: false },
       latencyPreference: { type: 'string', enum: ['low', 'balanced', 'thorough'], required: false },
-      maximumPriceUsdc: {
+      maximumPriceBaseUnits: {
         type: 'string',
         format: 'decimal-integer-base-units',
+        pattern: '^[0-9]+$',
+        assetDecimals: USDC_DECIMALS,
         required: false,
-        note: 'USDC base units, not dollars. $0.005 is "5000". Integer arithmetic only.',
+        note: `USDC base units, not dollars. With ${USDC_DECIMALS} decimals, "5000" is $0.005 and "10000" is $0.01. A value carrying a decimal point is rejected rather than rounded.`,
+        examples: [
+          { maximumPriceBaseUnits: '5000', equivalentDisplay: '$0.005 (non-authoritative)' },
+          { maximumPriceBaseUnits: '20000', equivalentDisplay: '$0.02 (non-authoritative)' },
+        ],
       },
       network: { type: 'string', enum: [...SUPPORTED_NETWORKS], required: false },
       asset: { type: 'string', enum: [...SUPPORTED_ASSETS], required: false },
@@ -583,7 +595,7 @@ export function buildOfferSelectionDocument(
         },
         {
           id: 'unparseable-ceiling',
-          when: 'maximumPriceUsdc is not a decimal integer string',
+          when: 'maximumPriceBaseUnits is not a decimal integer string',
           then: 'reject',
           because: 'A ceiling that cannot be parsed is not a permissive ceiling.',
         },
@@ -631,7 +643,7 @@ export function buildOfferSelectionDocument(
         },
         {
           id: 'over-ceiling',
-          when: 'the selected offer or sequence costs more than maximumPriceUsdc',
+          when: 'the selected offer or sequence costs more than maximumPriceBaseUnits',
           then: 'reject',
           because: 'Substituting a cheaper offer would answer a different question than the one asked.',
         },
