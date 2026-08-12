@@ -48,6 +48,8 @@ const PRIVATE_ROUTES = new Set([
   '/api/discovery/agent-offers',
   '/api/discovery/agent-context',
   '/api/discovery/mcp-contract',
+  '/api/discovery/carp/seller-profile',
+  '/api/discovery/carp/seller-role',
   '/api/admin/content-candidates',
   '/api/admin/content-drafts',
   '/api/admin/content-draft-assistant',
