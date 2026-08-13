@@ -219,7 +219,7 @@ export default async function KnowledgeArticlePage({ params }: PageProps) {
                         if (!claim) return null
                         const meta = evidenceMeta[claim.status]
                         return (
-                          <div key={claim.id} className="border border-zinc-800 bg-zinc-950/70 p-4 font-sans text-sm leading-6">
+                          <div key={claim.id} id={`claim-${claim.id}`} className="scroll-mt-24 border border-zinc-800 bg-zinc-950/70 p-4 font-sans text-sm leading-6">
                             <div className="flex flex-wrap items-center gap-2">
                               <span className={`border px-2 py-0.5 font-mono text-[9px] uppercase tracking-widest ${meta.className}`}>{meta.label}</span>
                               {claim.sourceIds.map((sourceId) => sourceNumbers.get(sourceId)).filter(Boolean).map((number) => (
