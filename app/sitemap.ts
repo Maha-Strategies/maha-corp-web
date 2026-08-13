@@ -39,6 +39,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${baseUrl}/navigator`, lastModified: new Date('2026-08-09') },
     { url: `${baseUrl}/developers`, lastModified: new Date('2026-08-06') },
     { url: `${baseUrl}/agent-infrastructure-compatibility-pack`, lastModified: new Date('2026-08-11') },
+    { url: `${baseUrl}/agentic-commerce/physical-goods-demo`, lastModified: new Date('2026-08-13') },
     { url: `${baseUrl}/x402-observatory`, lastModified: new Date('2026-08-09') },
     { url: `${baseUrl}/x402-buyer-policy`, lastModified: new Date('2026-08-09') },
     { url: `${baseUrl}/tensor-opt`, lastModified: new Date('2026-08-06') },

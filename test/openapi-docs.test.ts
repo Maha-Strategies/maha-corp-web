@@ -50,6 +50,7 @@ const PRIVATE_ROUTES = new Set([
   '/api/discovery/mcp-contract',
   '/api/discovery/carp/seller-profile',
   '/api/discovery/carp/seller-role',
+  '/api/discovery/physical-commerce-demo',
   // CARP publishes its own DID, SAD, ADILOS and encrypted JSON-RPC contracts.
   // The stable public paths are /.well-known/carp/* and /cgi-bin/* rather than
   // REST OpenAPI operations.

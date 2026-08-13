@@ -3,6 +3,11 @@ import { createHash } from 'node:crypto'
 import { BASE_USDC, MAHA_PAYEE } from '../x402/discovery-payment-recipe.ts'
 import { BASE_MAINNET_CAIP2, DEEP_CONTEXT_EVALUATION_OFFER, USDC_DECIMALS } from '../x402/offers.ts'
 import { configuredIdentity, MAHA_CARP_DID_URL, MAHA_CARP_SAD_URL, MAHA_CARP_URL } from './identity.ts'
+import {
+  PHYSICAL_COMMERCE_DEMO_CONTRACT_URL,
+  PHYSICAL_COMMERCE_DEMO_ID,
+  PHYSICAL_COMMERCE_DEMO_URL,
+} from './physical-commerce-demo.ts'
 
 export const CARP_SELLER_ROLE_URL = 'https://www.mahastrategies.com/.well-known/carp/seller-role.json'
 export const MAHA_CARP_SELLER_URL = 'https://www.mahastrategies.com/.well-known/carp/seller.json'
@@ -11,6 +16,35 @@ export const CABEZON_SELLER_ROLE_URL = 'https://raw.githubusercontent.com/bitsan
 const SITE_URL = 'https://www.mahastrategies.com'
 const OFFER = DEEP_CONTEXT_EVALUATION_OFFER
 const identity = configuredIdentity()
+
+const PHYSICAL_DEMO_OFFER = Object.freeze({
+  offeringRef: PHYSICAL_COMMERCE_DEMO_ID,
+  kind: 'physical',
+  title: 'Physical-Goods Agent Commerce Demonstration',
+  descrip: 'A non-commercial simulation of a Sri Lankan tea enquiry, quote approvals, simulated escrow, shipment evidence, delivery, and release. No inventory, exporter, payment, export, or shipment is connected.',
+  tags: ['physical-fulfillment', 'tea', 'sri-lanka', 'agentic-commerce', 'demonstration-only'],
+  status: 'demonstration_only',
+  commercialAvailability: 'unavailable',
+  price: null,
+  directSettlement: null,
+  fulfillment: {
+    modes: ['physical'],
+    estimatedSeconds: 2,
+    deliveryDeadlineSeconds: null,
+    shipsFrom: 'LK (fictional demonstration)',
+    resultMediaType: 'application/json',
+  },
+  failurePolicy: { onMissedDeadline: null, refundAuthority: null, termsUrl: `${SITE_URL}/terms` },
+  inputSchema: PHYSICAL_COMMERCE_DEMO_CONTRACT_URL,
+  outputSchema: PHYSICAL_COMMERCE_DEMO_CONTRACT_URL,
+  capabilityBoundaries: [
+    'Demonstration only: no product, inventory, exporter, importer, payment, escrow, customs filing, carrier, shipment, or delivery.',
+    'The simulated workflow cannot be purchased and never returns payment instructions.',
+    'A real offer requires a separately verified licensed exporter and destination-market compliance review.',
+  ],
+  retention: { orderPersisted: false, personalDataAccepted: false, evidenceReturnedToCaller: true },
+  termsUrl: PHYSICAL_COMMERCE_DEMO_URL,
+})
 
 export type CarpSellerRequest = {
   jsonrpc: '2.0'
@@ -48,7 +82,7 @@ export const mahaCarpSellerProfile = Object.freeze({
     sad: identity ? MAHA_CARP_SAD_URL : null,
     carpUrl: identity ? MAHA_CARP_URL : null,
   },
-  fulfillmentModes: ['digital'],
+  fulfillmentModes: ['digital', 'physical'],
   termsUrl: `${SITE_URL}/terms`,
   offers: [
     {
@@ -87,6 +121,7 @@ export const mahaCarpSellerProfile = Object.freeze({
       retention: OFFER.retention,
       termsUrl: `${SITE_URL}/deep-context-evaluation`,
     },
+    PHYSICAL_DEMO_OFFER,
   ],
 })
 
@@ -113,7 +148,9 @@ function normalizePurchase(params: unknown, requestId: string): NormalizedPurcha
       : quotedUnitPrice
     return {
       clientOrderRef: legacyOrderId(requestId, itemref),
-      offerId: itemref === 'maha:deep-context-evaluation:v1' ? OFFER.id : String(itemref),
+      offerId: itemref === 'maha:deep-context-evaluation:v1'
+        ? OFFER.id
+        : itemref === PHYSICAL_COMMERCE_DEMO_ID ? PHYSICAL_COMMERCE_DEMO_ID : String(itemref),
       quantity: Number(quantity),
       agreedPrice,
       input: null,
@@ -128,7 +165,9 @@ function normalizePurchase(params: unknown, requestId: string): NormalizedPurcha
   if (!record) return null
   return {
     clientOrderRef: typeof record.clientOrderRef === 'string' ? record.clientOrderRef : '',
-    offerId: record.offeringRef === 'maha:deep-context-evaluation:v1' ? OFFER.id : String(record.offeringRef ?? ''),
+    offerId: record.offeringRef === 'maha:deep-context-evaluation:v1'
+      ? OFFER.id
+      : record.offeringRef === PHYSICAL_COMMERCE_DEMO_ID ? PHYSICAL_COMMERCE_DEMO_ID : String(record.offeringRef ?? ''),
     quantity: Number(record.quantity),
     agreedPrice: record.agreedPrice,
     input: record.input,
@@ -136,14 +175,19 @@ function normalizePurchase(params: unknown, requestId: string): NormalizedPurcha
   }
 }
 
-function enquiryMatches(params: Record<string, unknown>) {
+function matchingOffers(params: Record<string, unknown>) {
   const terms = [
     typeof params.query === 'string' ? params.query : '',
     ...(Array.isArray(params.tags) ? params.tags.filter((tag): tag is string => typeof tag === 'string') : []),
   ].join(' ').trim().toLowerCase()
-  if (!terms) return true
-  return ['context', 'retention', 'evidence', 'rag', 'provenance', 'evaluation', 'digital', 'ai']
+  if (!terms) return mahaCarpSellerProfile.offers
+  const digitalMatch = ['context', 'retention', 'evidence', 'rag', 'provenance', 'evaluation', 'digital', 'ai']
     .some((term) => terms.includes(term))
+  const physicalMatch = ['tea', 'physical', 'shipment', 'shipping', 'export', 'sri lanka', 'product', 'goods']
+    .some((term) => terms.includes(term))
+  return mahaCarpSellerProfile.offers.filter((offer) =>
+    (offer.offeringRef === 'maha:deep-context-evaluation:v1' && digitalMatch)
+    || (offer.offeringRef === PHYSICAL_COMMERCE_DEMO_ID && physicalMatch))
 }
 
 export function handleCarpSellerRequest(request: CarpSellerRequest): CarpSellerReply {
@@ -166,7 +210,7 @@ export function handleCarpSellerRequest(request: CarpSellerRequest): CarpSellerR
     }
     return {
       jsonrpc: '2.0',
-      result: enquiryMatches(params) ? mahaCarpSellerProfile.offers : [],
+      result: matchingOffers(params),
       id: request.id,
     }
   }
@@ -174,6 +218,15 @@ export function handleCarpSellerRequest(request: CarpSellerRequest): CarpSellerR
   if (request.method !== 'purchase') return jsonError(request.id, -32601, 'Unknown Seller service.')
   const params = normalizePurchase(request.params, request.id)
   if (!params) return jsonError(request.id, -32602, 'purchase params must use the legacy array or the v0.2 object shape.')
+  if (params.offerId === PHYSICAL_COMMERCE_DEMO_ID) {
+    return jsonError(request.id, -32020, 'The physical-goods workflow is a non-commercial demonstration and cannot be purchased.', {
+      demonstrationOnly: true,
+      commercialAvailability: 'unavailable',
+      demoUrl: PHYSICAL_COMMERCE_DEMO_URL,
+      contractUrl: PHYSICAL_COMMERCE_DEMO_CONTRACT_URL,
+      paymentInstructions: null,
+    })
+  }
   if (params.offerId !== OFFER.id) return jsonError(request.id, -32602, 'Unknown offerId or itemref.')
   if (params.quantity !== 1) return jsonError(request.id, -32602, 'Deep Context Evaluation must be purchased with quantity 1.')
   if (!/^[A-Za-z0-9._:-]{8,120}$/.test(params.clientOrderRef)) {

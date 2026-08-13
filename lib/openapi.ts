@@ -142,6 +142,65 @@ export const openApiDocument = {
         responses: { '200': { description: 'Complete illustrative report.', content: { 'application/json': { schema: COMPATIBILITY_PACK_OUTPUT_SCHEMA } } } },
       },
     },
+    '/api/agentic-commerce/physical-goods-demo': {
+      get: {
+        tags: ['Agentic Commerce'],
+        operationId: 'getPhysicalGoodsCommerceDemoContract',
+        summary: 'Inspect the non-commercial physical-goods workflow demonstration contract',
+        description: 'Returns the exact bounded input contract and limitations for the free CARP/CABEZON physical-commerce simulation. It cannot create a commercial order or return payment instructions.',
+        security: [],
+        responses: {
+          '200': {
+            description: 'Demonstration contract. commercialAvailability is unavailable and paymentInstructions is null.',
+            content: { 'application/json': { schema: {
+              type: 'object',
+              required: ['schemaVersion', 'name', 'description', 'demonstrationOnly', 'commercialAvailability', 'price', 'paymentInstructions', 'endpoint', 'method', 'inputSchema', 'exampleInput', 'output', 'limitations'],
+              properties: {
+                schemaVersion: { const: '1.0.0' }, name: { type: 'string' }, description: { type: 'string' },
+                demonstrationOnly: { const: true }, commercialAvailability: { const: 'unavailable' },
+                price: { type: 'null' }, paymentInstructions: { type: 'null' }, endpoint: { type: 'string', format: 'uri' }, method: { const: 'POST' },
+                page: { type: 'string', format: 'uri' }, carpSellerProfile: { type: 'string', format: 'uri' }, inputSchema: { type: 'object' }, exampleInput: { type: 'object' }, output: { type: 'object' },
+                limitations: { type: 'array', items: { type: 'string' } },
+              },
+            } } },
+          },
+        },
+      },
+      post: {
+        tags: ['Agentic Commerce'],
+        operationId: 'runPhysicalGoodsCommerceDemo',
+        summary: 'Run the zero-funds physical-goods agent-commerce simulation',
+        description: 'Produces an ephemeral hash-linked event report from enquiry through simulated release. No personal data is accepted, no order is persisted, no real counterparty is contacted, and no money or goods move.',
+        security: [],
+        requestBody: { required: true, content: { 'application/json': { schema: {
+          type: 'object', additionalProperties: false, required: ['clientEnquiryRef', 'quantity', 'destinationCountry'],
+          properties: {
+            clientEnquiryRef: { type: 'string', minLength: 8, maxLength: 120, pattern: '^[A-Za-z0-9._:-]+$', description: 'Caller-supplied demonstration idempotency reference.' },
+            quantity: { type: 'integer', minimum: 20, maximum: 100, description: 'Fictional count of 100 g retail packs.' },
+            destinationCountry: { const: 'US', description: 'The only bounded fictional destination.' },
+          },
+        }, examples: { default: { value: { clientEnquiryRef: 'demo-buyer-enquiry-001', quantity: 20, destinationCountry: 'US' } } } } } },
+        responses: {
+          '201': {
+            description: 'Ephemeral demonstration report. demonstrationOnly is true, commercialAvailability is unavailable, and settlement.realFundsMoved is false.',
+            content: { 'application/json': { schema: {
+              type: 'object',
+              required: ['schemaVersion', 'demonstrationOnly', 'commercialAvailability', 'orderId', 'clientEnquiryRef', 'actors', 'offer', 'quote', 'settlement', 'events', 'evidence', 'warnings', 'productionRequirements'],
+              properties: {
+                schemaVersion: { const: '1.0.0' }, demonstrationOnly: { const: true }, commercialAvailability: { const: 'unavailable' }, orderId: { type: 'string' }, clientEnquiryRef: { type: 'string' },
+                startedAt: { type: 'string', format: 'date-time' }, completedAt: { type: 'string', format: 'date-time' }, actors: { type: 'array', items: { type: 'object' } }, offer: { type: 'object' }, quote: { type: 'object' },
+                settlement: { type: 'object', required: ['mode', 'realFundsMoved'], properties: { mode: { const: 'simulated-escrow' }, realFundsMoved: { const: false }, buyerPaymentHeld: { type: 'number' }, releasedToExporter: { type: 'number' }, releasedToMaha: { type: 'number' }, freightAllocation: { type: 'number' } } },
+                events: { type: 'array', minItems: 1, items: { type: 'object', required: ['sequence', 'state', 'actor', 'humanApprovalRequired', 'demonstrationOnly', 'previousEventHash', 'eventHash'], properties: { sequence: { type: 'integer' }, state: { type: 'string' }, actor: { type: 'string' }, occurredAt: { type: 'string', format: 'date-time' }, humanApprovalRequired: { type: 'boolean' }, demonstrationOnly: { const: true }, detail: { type: 'string' }, previousEventHash: { type: ['string', 'null'] }, eventHash: { type: 'string', pattern: '^sha256:[a-f0-9]{64}$' } } } },
+                evidence: { type: 'object' }, warnings: { type: 'array', items: { type: 'string' } }, productionRequirements: { type: 'array', items: { type: 'string' } },
+              },
+            } } },
+          },
+          '400': errorResponse('Invalid bounded demonstration request.'),
+          '413': errorResponse('Payload exceeds 10,000 bytes.'),
+          '415': errorResponse('Content-Type must be application/json.'),
+        },
+      },
+    },
     '/api/v1/keys/generate': {
       post: {
         tags: ['Self-service API Keys'], operationId: 'generateStarterApiKey', summary: 'Generate a one-time starter API key with 20,000 free credits',

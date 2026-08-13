@@ -13,6 +13,7 @@ const nextConfig: NextConfig = {
       { source: '/llm-context/agentic-commerce.md', destination: '/api/discovery/agent-context' },
       { source: '/mcp-gateway-contract.json', destination: '/api/discovery/mcp-contract' },
       { source: '/.well-known/maha/offer-selection.json', destination: '/api/discovery/offer-selection' },
+      { source: '/.well-known/maha/physical-commerce-demo.json', destination: '/api/discovery/physical-commerce-demo' },
       { source: '/.well-known/carp/seller-role.json', destination: '/api/discovery/carp/seller-role' },
       { source: '/.well-known/carp/seller.json', destination: '/api/discovery/carp/seller-profile' },
       { source: '/.well-known/carp/did.json', destination: '/api/discovery/carp/did' },

@@ -19,6 +19,11 @@ import {
 } from '../lib/carp/identity.ts'
 import { pollCarpSeller } from '../scripts/run-carp-seller-worker.ts'
 import { DEEP_CONTEXT_EVALUATION_OFFER } from '../lib/x402/offers.ts'
+import {
+  PHYSICAL_COMMERCE_DEMO_ID,
+  physicalCommerceDemoContract,
+  runPhysicalCommerceDemo,
+} from '../lib/carp/physical-commerce-demo.ts'
 
 const role = JSON.parse(await readFile(new URL('../content/discovery/carp-seller-role.json', import.meta.url), 'utf8'))
 
@@ -55,7 +60,54 @@ test('enquiry returns the canonical offering array for compatible needs', () => 
     jsonrpc: '2.0', method: 'enquiry', id: 'enquiry-2', params: { query: 'bulk tea shipment', tags: [], imgtxt: null },
   })
   assert.ok('result' in unrelated)
-  assert.deepEqual((unrelated as { result: unknown[] }).result, [])
+  const physicalResults = (unrelated as { result: Array<{ offeringRef: string; status: string; price: unknown }> }).result
+  assert.equal(physicalResults.length, 1)
+  assert.equal(physicalResults[0].offeringRef, PHYSICAL_COMMERCE_DEMO_ID)
+  assert.equal(physicalResults[0].status, 'demonstration_only')
+  assert.equal(physicalResults[0].price, null)
+})
+
+test('the physical-goods demonstration is discoverable but never purchasable', () => {
+  assert.deepEqual(mahaCarpSellerProfile.fulfillmentModes, ['digital', 'physical'])
+  const physical = mahaCarpSellerProfile.offers.find((offer) => offer.offeringRef === PHYSICAL_COMMERCE_DEMO_ID)
+  assert.ok(physical)
+  assert.equal((physical as { commercialAvailability?: string }).commercialAvailability, 'unavailable')
+  assert.equal(physical.directSettlement, null)
+
+  const attempted = handleCarpSellerRequest({
+    jsonrpc: '2.0', method: 'purchase', id: 'physical-purchase-1',
+    params: {
+      clientOrderRef: 'buyer-order-physical-001', offeringRef: PHYSICAL_COMMERCE_DEMO_ID, quantity: 20,
+      agreedPrice: { amount: '620.00', asset: 'USD', network: 'offchain' },
+      delivery: { mode: 'physical', destination: { country: 'US' } },
+    },
+  })
+  assert.ok('error' in attempted)
+  assert.equal(attempted.error.code, -32020)
+  assert.equal((attempted.error.data as { paymentInstructions: unknown }).paymentInstructions, null)
+})
+
+test('the physical-commerce demonstration returns a hash-linked event ledger and coherent split', () => {
+  const result = runPhysicalCommerceDemo(
+    { clientEnquiryRef: 'buyer-enquiry-001', quantity: 20, destinationCountry: 'US' },
+    { startedAt: '2026-08-13T00:00:00.000Z', orderId: 'demo-order-test-001' },
+  )
+  assert.equal(result.demonstrationOnly, true)
+  assert.equal(result.commercialAvailability, 'unavailable')
+  assert.equal(result.quote.productSubtotal, 500)
+  assert.equal(result.quote.totalBuyerPayment, 620)
+  assert.equal(result.quote.mahaCommission, 50)
+  assert.equal(result.quote.exporterProductProceeds, 450)
+  assert.equal(result.settlement.realFundsMoved, false)
+  assert.equal(result.events[0].previousEventHash, null)
+  for (let index = 1; index < result.events.length; index += 1) {
+    assert.equal(result.events[index].previousEventHash, result.events[index - 1].eventHash)
+  }
+  assert.equal(result.events.at(-1)?.state, 'RELEASED')
+  assert.equal(result.evidence.eventChainHead, result.events.at(-1)?.eventHash)
+  assert.ok(result.events.some((event) => event.humanApprovalRequired))
+  assert.equal(physicalCommerceDemoContract.price, null)
+  assert.equal(physicalCommerceDemoContract.paymentInstructions, null)
 })
 
 test('purchase binds the canonical order to exact x402 instructions', () => {
@@ -92,6 +144,8 @@ test('purchase binds the canonical order to exact x402 instructions', () => {
 
 test('legacy purchase arrays remain compatible with base-unit quotes', () => {
   const offer = mahaCarpSellerProfile.offers[0]
+  assert.ok(offer.directSettlement)
+  assert.ok(offer.price)
   const accepted = handleCarpSellerRequest({
     jsonrpc: '2.0', method: 'purchase', id: `0x${'1'.repeat(64)}`,
     params: [1, offer.offeringRef, { amount: offer.directSettlement.amountBaseUnits, asset: offer.directSettlement.assetContract, network: offer.price.network }, null, ''],
