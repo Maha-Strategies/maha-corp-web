@@ -37,6 +37,17 @@ __pycache__/
 /output/migration-evidence/
 /qubo-benchmark-evidence.json
 
+# Private operator/family working documents. Public product documentation,
+# machine contracts and reproducible benchmark evidence belong in the repo;
+# personalized call guides and internal commercial assessments do not.
+/artifacts/*Call-Guide*.docx
+/artifacts/*Call-Guide*.pdf
+/docs/*Family_Guide*.docx
+/docs/*Family_Guide*.pdf
+/docs/reports/maha-strategies-*-report-*.md
+/scripts/create-*-call-guide.py
+/scripts/create-*-family-guide.py
+
 # misc
 .DS_Store
 *.pem

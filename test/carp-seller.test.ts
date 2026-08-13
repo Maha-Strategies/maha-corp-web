@@ -18,6 +18,7 @@ import {
   verifySignedAgentDescriptor,
 } from '../lib/carp/identity.ts'
 import { pollCarpSeller } from '../scripts/run-carp-seller-worker.ts'
+import { DEEP_CONTEXT_EXAMPLE_INPUT } from '../lib/x402/offer-examples.ts'
 import { DEEP_CONTEXT_EVALUATION_OFFER } from '../lib/x402/offers.ts'
 
 const role = JSON.parse(await readFile(new URL('../content/discovery/carp-seller-role.json', import.meta.url), 'utf8'))
@@ -34,7 +35,8 @@ test('the Maha seller maps Deep Context to the adopted digital offering shape', 
   const offer = mahaCarpSellerProfile.offers[0]
   assert.equal(mahaCarpSellerProfile.roleContract, CABEZON_SELLER_ROLE_URL)
   assert.equal(mahaCarpSellerProfile.roleMirror, CARP_SELLER_ROLE_URL)
-  assert.equal(mahaCarpSellerProfile.membership.status, 'identity_published_pending_cabezon_directory_confirmation')
+  assert.equal(mahaCarpSellerProfile.membership.status, 'confirmed_cabezon_seller')
+  assert.match(mahaCarpSellerProfile.membership.evidence, /bitsanity\/cabezon\/pull\/1/)
   assert.equal(offer.offeringRef, 'maha:deep-context-evaluation:v1')
   assert.equal(offer.kind, 'digital')
   assert.equal(offer.price.amount, '0.01')
@@ -66,17 +68,40 @@ test('purchase binds the canonical order to exact x402 instructions', () => {
       offeringRef: 'maha:deep-context-evaluation:v1',
       quantity: 1,
       agreedPrice: { amount: '0.01', asset: 'USDC', network: 'eip155:8453' },
-      input: { clientRequestId: 'carp-test' },
+      input: {
+        clientRequestId: 'buyer-order-001',
+        task: 'Find the release condition and rollback trigger while removing duplicate operational background.',
+        tokenBudget: 128,
+        documents: [
+          { id: 'release-notes', text: 'Release may proceed after the security owner attaches credential-rotation evidence.' },
+          { id: 'rollback-runbook', text: 'Rollback if API errors exceed 2 percent for five minutes.' },
+        ],
+        requiredEvidence: [
+          { evidenceId: 'release-condition', sourceId: 'release-notes', text: 'security owner attaches credential-rotation evidence' },
+          { evidenceId: 'rollback-trigger', sourceId: 'rollback-runbook', text: 'API errors exceed 2 percent for five minutes' },
+        ],
+      },
       delivery: { mode: 'digital', destination: null, replyTo: 'carp://buyer/results/buyer-order-001' },
       specialInstructions: null,
     },
   })
   assert.ok('result' in accepted)
-  const result = (accepted as { result: { status: string; paymentInstructions: { mode: string; amountBaseUnits: string; resource: string } } }).result
+  const result = (accepted as { result: {
+    status: string
+    paymentInstructions: { mode: string; amountBaseUnits: string; resource: string }
+    fulfillmentRequest: { body: { clientRequestId: string } }
+    retryPolicy: { maximumSignedAttempts: number; onAmbiguousSettlement: string }
+  } }).result
   assert.equal(result.status, 'PAYMENT_REQUIRED')
   assert.equal(result.paymentInstructions.mode, 'x402_direct')
   assert.equal(result.paymentInstructions.amountBaseUnits, '10000')
   assert.match(result.paymentInstructions.resource, /\/api\/v1\/compress\/evaluate$/)
+  assert.equal(result.fulfillmentRequest.body.clientRequestId, 'buyer-order-001')
+  assert.deepEqual(result.retryPolicy, {
+    maximumSignedAttempts: 1,
+    onAmbiguousSettlement: 'do_not_retry',
+    supportEmail: 'mayone@mahastrategies.com',
+  })
 
   const stale = handleCarpSellerRequest({
     jsonrpc: '2.0', method: 'purchase', id: 'purchase-2',
@@ -88,6 +113,30 @@ test('purchase binds the canonical order to exact x402 instructions', () => {
   })
   assert.ok('error' in stale)
   assert.equal(stale.error.code, -32010)
+})
+
+test('purchase refuses malformed or order-unbound input before issuing payment instructions', () => {
+  const base = {
+    clientOrderRef: 'buyer-order-003',
+    offeringRef: 'maha:deep-context-evaluation:v1',
+    quantity: 1,
+    agreedPrice: { amount: '0.01', asset: 'USDC', network: 'eip155:8453' },
+    delivery: { mode: 'digital', destination: null },
+  }
+  const malformed = handleCarpSellerRequest({
+    jsonrpc: '2.0', method: 'purchase', id: 'purchase-3',
+    params: { ...base, input: { clientRequestId: 'buyer-order-003' } },
+  })
+  assert.ok('error' in malformed)
+  assert.equal(malformed.error.code, -32602)
+
+  const unbound = handleCarpSellerRequest({
+    jsonrpc: '2.0', method: 'purchase', id: 'purchase-4',
+    params: { ...base, input: { ...DEEP_CONTEXT_EXAMPLE_INPUT, clientRequestId: 'different-order-id' } },
+  })
+  assert.ok('error' in unbound)
+  assert.equal(unbound.error.code, -32602)
+  assert.match(unbound.error.message, /must equal clientOrderRef/)
 })
 
 test('legacy purchase arrays remain compatible with base-unit quotes', () => {

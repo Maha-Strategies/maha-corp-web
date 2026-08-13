@@ -1,6 +1,8 @@
 import { createHash } from 'node:crypto'
 
+import { parseDeepContextRequest } from '../deep-context-evaluation.ts'
 import { BASE_USDC, MAHA_PAYEE } from '../x402/discovery-payment-recipe.ts'
+import { DEEP_CONTEXT_EXAMPLE_INPUT } from '../x402/offer-examples.ts'
 import { BASE_MAINNET_CAIP2, DEEP_CONTEXT_EVALUATION_OFFER, USDC_DECIMALS } from '../x402/offers.ts'
 import { configuredIdentity, MAHA_CARP_DID_URL, MAHA_CARP_SAD_URL, MAHA_CARP_URL } from './identity.ts'
 
@@ -42,7 +44,9 @@ export const mahaCarpSellerProfile = Object.freeze({
   roleMirror: CARP_SELLER_ROLE_URL,
   membership: {
     network: 'CABEZON',
-    status: 'identity_published_pending_cabezon_directory_confirmation',
+    status: 'confirmed_cabezon_seller',
+    confirmedAt: '2026-08-13',
+    evidence: 'https://github.com/bitsanity/cabezon/pull/1#issuecomment-5281334301',
     did: identity?.did.id ?? null,
     didUrl: MAHA_CARP_DID_URL,
     sad: identity ? MAHA_CARP_SAD_URL : null,
@@ -80,7 +84,12 @@ export const mahaCarpSellerProfile = Object.freeze({
         shipsFrom: null,
         resultMediaType: 'application/json',
       },
-      failurePolicy: { onMissedDeadline: 'seller-defined-remedy', refundAuthority: 'seller', termsUrl: `${SITE_URL}/terms` },
+      failurePolicy: {
+        onMissedDeadline: 'stop_without_retry_and_contact_seller',
+        supportEmail: 'mayone@mahastrategies.com',
+        refundAuthority: 'seller',
+        termsUrl: `${SITE_URL}/terms`,
+      },
       inputSchema: `${SITE_URL}/api/discovery/x402-offers/${OFFER.id}`,
       outputSchema: `${SITE_URL}/api/discovery/x402-offers/${OFFER.id}`,
       capabilityBoundaries: [...OFFER.capabilityBoundaries],
@@ -191,6 +200,27 @@ export function handleCarpSellerRequest(request: CarpSellerRequest): CarpSellerR
     return jsonError(request.id, -32602, 'A digital order must not include a postal destination.')
   }
 
+  // A paid request is admitted before the application handler validates its
+  // body. Validate and bind the exact body here so a CARP buyer cannot pay for
+  // malformed input, or pay for an input whose idempotency key differs from
+  // the order it reviewed. Legacy CABEZON calls have no input field, so they
+  // receive the executable public example with the derived order reference.
+  let fulfillmentInput: ReturnType<typeof parseDeepContextRequest>
+  try {
+    const input = params.input ?? { ...DEEP_CONTEXT_EXAMPLE_INPUT, clientRequestId: params.clientOrderRef }
+    fulfillmentInput = parseDeepContextRequest(input)
+  } catch (error) {
+    return jsonError(
+      request.id,
+      -32602,
+      'input must satisfy the Deep Context Evaluation input schema before payment instructions can be issued.',
+      { reason: error instanceof Error ? error.message : 'Invalid Deep Context Evaluation input.' },
+    )
+  }
+  if (fulfillmentInput.clientRequestId !== params.clientOrderRef) {
+    return jsonError(request.id, -32602, 'input.clientRequestId must equal clientOrderRef so order and fulfillment evidence remain bound.')
+  }
+
   return {
     jsonrpc: '2.0',
     result: {
@@ -214,9 +244,22 @@ export function handleCarpSellerRequest(request: CarpSellerRequest): CarpSellerR
         expiresAt: null,
       },
       fulfillmentExpectation: mahaCarpSellerProfile.offers[0].fulfillment,
+      fulfillmentRequest: {
+        method: OFFER.method,
+        resource: `${SITE_URL}${OFFER.path}`,
+        headers: { 'Content-Type': 'application/json' },
+        body: fulfillmentInput,
+      },
+      evidenceFields: ['clientOrderRef', 'transaction', 'evaluationId', 'outputHash', 'buyerReceiptConfirmedAt'],
+      retryPolicy: {
+        maximumSignedAttempts: 1,
+        onAmbiguousSettlement: 'do_not_retry',
+        supportEmail: 'mayone@mahastrategies.com',
+      },
       nextSteps: [
-        'Send the Deep Context Evaluation request to paymentInstructions.resource.',
+        'Send fulfillmentRequest.body unchanged to paymentInstructions.resource.',
         'Answer its x402 v2 challenge for exactly paymentInstructions.amountBaseUnits on paymentInstructions.network.',
+        'Sign at most once. If settlement is ambiguous, do not retry; contact retryPolicy.supportEmail with the order ID and transaction hash.',
         'Treat evaluationId, outputHash, and the PAYMENT-RESPONSE transaction as digital delivery evidence.',
       ],
     },
