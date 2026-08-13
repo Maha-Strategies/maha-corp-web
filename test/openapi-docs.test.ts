@@ -66,6 +66,7 @@ const PRIVATE_ROUTES = new Set([
   '/api/admin/content-handoffs',
   '/api/admin/content-publications',
   '/api/admin/content-publication-amendments',
+  '/api/admin/editorial-coverage',
   '/api/admin/inbound-operations',
   '/api/admin/navigator',
   '/api/admin/navigator/research',
