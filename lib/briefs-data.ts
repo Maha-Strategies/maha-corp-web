@@ -193,51 +193,98 @@ export const BRIEFS: Brief[] = [
   },
   {
     slug: 'backside-microchannel-semiconductors',
-    title: 'Monolithic Backside Microfluidics: Bypassing the Silicon Thermal Wall',
+    title: 'Direct-to-Silicon Liquid Cooling: Backside Microfluidics for AI Chips',
+    seoTitle: 'Direct-to-Silicon Liquid Cooling for AI Chips: Materials and Reliability',
     kicker: 'CORE.HARDWARE.THERMAL',
     description:
-      'An architectural assessment of wafer-level backside microchannel liquid cooling, manufacturing defectivity vectors, and yield-sustaining deployment protocols.',
+      'A reliability and materials framework for direct-to-silicon liquid cooling of AI chips: backside microchannels, sealing, coolants, manifolds, and high-volume qualification.',
     status: 'CRITICAL',
     datePublished: '2026-05-28',
+    dateModified: '2026-08-13',
+    intro: 'Direct-to-silicon (DTS) liquid cooling brings coolant closer to the active silicon than a conventional package cold plate. It can sharply reduce the thermal path, but it also turns a cooling subsystem into a semiconductor-integration and lifetime-reliability problem. Public demonstrations establish technical potential; they do not establish a universal adoption share, a common seal specification, or a production-ready material stack for every AI accelerator.',
     sections: [
       {
         level: 2,
-        heading: '01. The Sub-Node Thermal Paradigm Shift',
+        heading: '01. DTS Is a Different Integration Boundary From Direct-to-Chip Cooling',
         paragraphs: [
-          'Sub-2nm transistor scaling has pushed power density past the physical limits of conventional package-level dissipation. Moving the fluidic plumbing directly onto the microscopic level of the silicon wafer shifts the primary thermal bottleneck away from external copper blocks down to advanced wafer-level manufacturing.',
-          'Liquid cooling architectures utilizing backside microchannels route coolant directly through the active die. While this offers unprecedented heat flux mitigation, it transforms a thermal management issue into a lithographic and structural yield vulnerability.',
+          'Conventional direct-to-chip cooling typically circulates liquid through a cold plate outside the package. DTS and related backside-microfluidic architectures bring channels, a silicon cooling structure, or a liquid manifold much closer to the die. The intended benefit is thermal-path compression: fewer intervening interfaces can improve hotspot control and reduce the dependence on a lid, thermal-interface material, and large external spreader.',
+          'The engineering cost is a new set of interfaces: microchannel fabrication, fluid distribution, particulate control, bonded or sealed plenums, coolant chemistry, electrical isolation, inspection, and serviceability. A thermal demonstration is consequently only one gate. Production adoption requires a package architecture that can be manufactured, qualified, monitored, and recovered from an excursion without exposing a high-value multi-die assembly to unacceptable loss.'
         ],
+        table: {
+          caption: 'Cooling-architecture distinction',
+          header: ['Architecture', 'Where coolant is routed', 'Primary limiting question'],
+          rows: [
+            ['Air or remote liquid cooling', 'Outside the package and server heat-exchanger stack.', 'Rack and server heat-removal capacity.'],
+            ['Direct-to-chip cold plate', 'In a plate attached to the package or lid.', 'Package thermal resistance, cold-plate performance, and mechanical interface.'],
+            ['Direct-to-package or silicon-lid microfluidics', 'In a cooling structure immediately adjacent to the package or die.', 'Integration, bonding, flow distribution, and package reliability.'],
+            ['Direct-to-silicon microfluidics', 'In channels formed at or within the silicon-side cooling interface.', 'Silicon structural integrity, sealing, coolant compatibility, manufacturability, and lifetime leak control.']
+          ]
+        }
       },
       {
         level: 2,
         heading: '02. Lithographic Bottlenecks and DRIE Defectivity',
         paragraphs: [
-          'Fabricating ultra-fine microchannels requires deep reactive ion etching (DRIE) patterns engineered with absolute verticality. Any variation in etch precision or sidewall roughness creates localized flow resistance and pressure anomalies.',
-          'The critical point of failure occurs during closing operations. Traditional approaches rely on a substrate or capping layer bonded over the open channels. At this scale, even a single micron-sized dust particle or slight wafer bow induces immediate bonding failure or micro-voids at the interface, rendering the entire silicon die unviable.',
+          'Fabricating backside microchannels can require etch, thinning, cleaning, and bonding steps that interact with die strength, warpage, device keep-out zones, and package layout. Variation in channel geometry, sidewall condition, debris, or local restriction can alter pressure drop and local heat transfer. Carrier protection and post-etch cleaning are therefore not generic ancillary steps; they must preserve the die while producing inspectable flow paths.',
+          'Closing the channels or attaching a manifold is a separate integration risk. A particle, surface nonplanarity, incomplete wetting, or cure variation may create an open leak path or a local void. The relevant production question is not merely whether a channel can be etched, but whether every channel can be cleaned, sealed, inspected, and qualified at the scale and yield required for a multi-reticle AI package.'
         ],
       },
       {
         level: 2,
-        heading: '03. Interfacial Sealing & Monolithic Alternatives',
+        heading: '03. Sealant and Bond Design Are the First Materials Gate',
         paragraphs: [
-          'To eliminate the risk of polymer bleed into the fluidic paths, foundries must deploy direct silicon-to-silicon fusion bonding or low-thermal-resistance metal bonding interfaces. This enforces hermetic sealing and high mechanical integrity but demands absolute planar purity.',
-          'To bypass bonding risks entirely, advanced processes utilize buried channel technology. A sacrificial trench is etched, the sidewalls are protected with an optimized passivation layer, and isotropic etching hollows out a clean fluidic channel beneath the active surface. This monolithic methodology bypasses interface voids and wafer alignment faults entirely, offering a superior yield trajectory for high-volume manufacturing.',
+          'A seal or bond line enclosing liquid near a logic die must tolerate pressure, thermal cycling, local warpage, coolant exposure, and package-level mechanical loads simultaneously. Public direct-to-silicon demonstrations have used a warpage-tolerant sealant between logic die and liquid-manifold structures, which makes sealing a clearly evidenced integration challenge. No single elongation, adhesion, or leak-rate value is a universal material target; the required window depends on geometry, bond area, coolant, pressure, cure route, and the data-center failure budget.',
+          'A candidate material should be judged as a system. High compliance can reduce strain from coefficient-of-thermal-expansion mismatch, but excessive softness, swelling, permeability, extractables, or cure shrinkage can create other failures. Alternative routes such as direct silicon bonding, metal bonding, inorganic seal frames, or hybrid compliant seals change the trade-off rather than eliminate it. The preferred solution is the one that meets thermal-path, leakage, manufacturability, and repairability requirements together.'
         ],
+        table: {
+          caption: 'Seal and bond qualification record',
+          header: ['Material property', 'Why it matters', 'Evidence to request'],
+          rows: [
+            ['Adhesion and cohesive strength', 'Resists pressure and cyclic interfacial separation.', 'Substrate-specific lap-shear or peel data before and after coolant and thermal exposure.'],
+            ['Modulus and strain tolerance', 'Manages local warpage and CTE mismatch without overstressing the die or manifold.', 'Temperature-dependent mechanical data and package-level finite-element correlation.'],
+            ['Coolant compatibility', 'Avoids swelling, hydrolysis, leachables, and loss of seal integrity.', 'Immersion, pressure, mass-change, extractables, and post-exposure adhesion tests in the actual coolant.'],
+            ['Leakage and inspection response', 'Defines the operational consequence of a seal defect.', 'Pressure-hold or tracer-gas method, detection threshold, sample plan, and post-test failure analysis.']
+          ]
+        }
       },
       {
         level: 2,
-        heading: '04. Two-Phase Fluid Dynamics & Vapor Lock Mitigation',
+        heading: '04. Coolant and Surface Chemistry Must Be Qualified as a Loop',
         paragraphs: [
-          'In high-efficiency two-phase microfluidic topologies, vapor lock represents a structural threat. Boiling inside the microscopic channels generates vapor bubbles that can stall, block the coolant flow, and induce instantaneous localized thermal runaway.',
-          'Preventing bubble stagnation requires physical and chemical zoning of the internal channel walls. By engineering distinct alternating hydrophilic and hydrophobic zones, the fluid dynamics are artificially forced to constantly clear the paths, keeping bubbles mobile and sustaining structural flow stability. Where silicon real estate cannot tolerate fluidic modifications, alternative architectures leveraging 3D-printed polymer impingement coolers are deployed to offload fluid paths entirely.',
+          'High heat capacity is not sufficient for a DTS coolant. The fluid, channel surface, metal interfaces, filters, tubing, pump, and replenishment regime form one chemical system. Water-based coolants can offer strong thermal transport but require rigorous control of ionic contamination, corrosion, microbiological growth, particles, and conductivity. Dielectric fluids change the electrical-risk profile but may introduce different limits in heat capacity, viscosity, material compatibility, environmental profile, or total loop cost.',
+          'A materials opportunity exists in corrosion inhibitors, low-extractable fluid packages, surface passivation, and filtration-compatible formulations, but the claim must be demonstrated in the intended loop. It is not enough to show a stable bottle sample or a single compatibility coupon. The relevant evidence includes conductivity drift, metal release, particle generation, pressure drop, heat-transfer stability, residue after dry-out, and the impact of maintenance or contamination events.'
         ],
+        listItems: [
+          'Define the allowable conductivity, ionic species, dissolved-gas, particle, and biological-control limits for the actual loop—not just the make-up fluid.',
+          'Test coolant interaction with silicon-side passivation, copper or other metals, elastomers, adhesives, filters, and the manifold at representative temperature, flow, and pressure.',
+          'Use fluid-aging and excursion testing to identify corrosion products, extractables, deposit formation, and any shift in thermal or electrical behavior.',
+          'Treat two-phase operation as a distinct architecture requiring evidence for flow stability, dry-out margin, pressure control, and vapor management.']
+      },
+      {
+        level: 2,
+        heading: '05. Adoption Is a Scenario Range, Not a Fixed Server Share',
+        paragraphs: [
+          'Public demonstrations from TSMC and Microsoft support the proposition that silicon-proximate microfluidics can manage very high heat loads. They do not provide a basis for declaring that DTS will capture a fixed fraction of AI servers by a given year. Adoption will depend on accelerator heat flux and layout, package architecture, cost of added processing, available cold-plate alternatives, rack plumbing, data-center service model, customer reliability tolerance, and the ability to qualify a complete supply chain.',
+          'The most plausible early market is the subset of unusually high-heat-flux, high-value accelerators where conventional direct-to-chip cooling reaches an unacceptable junction-temperature, hotspot, or rack-density constraint. Standard cold plates can remain economically attractive for many inference and lower-density training systems. A market forecast should therefore segment by thermal constraint and package readiness, then state explicit adoption assumptions rather than treating a single aggregate percentage as a technology fact.'
+        ],
+        table: {
+          caption: 'DTS adoption gates',
+          header: ['Condition', 'Effect on adoption'],
+          rows: [
+            ['Conventional cooling meets thermal and service requirements', 'Favors continued use of mature cold-plate architectures.'],
+            ['Hotspot or package thermal constraint cannot be solved externally', 'Creates a technical case for silicon-proximate cooling.'],
+            ['Package flow achieves manufacturable yield and leak reliability', 'Enables limited production allocation.'],
+            ['Rack, coolant loop, monitoring, and field-service model are qualified', 'Enables broader deployment beyond controlled pilot environments.']
+          ]
+        }
       },
     ],
     protocolPatch: {
-      title: 'Maha Protocol Patch // Thesis .041 — Decoupling Thermal Packaging From Wafer Yield',
+      title: 'Maha Materials Qualification Note // Direct-to-Silicon Cooling',
       paragraphs: [
-        'Multi-wafer fusion bonding for backside fluidics introduces unacceptably volatile defect vectors into modern sub-nodes. Maha Protocol dictates transitioning immediately to monolithic buried channel etching or secondary 3D-printed polymer impingement layers. Silicon real estate must remain computationally pure; liquid routing must be executed seamlessly without sacrificing lithographic yield thresholds.',
+        'Treat DTS as an integrated silicon, package, fluid, and data-center reliability programme. Rank materials opportunities by the failure mode they remove: seal leakage, interface fatigue, corrosion and conductivity drift, channel contamination, flow instability, or manufacturing inspection—not by thermal conductivity or adhesion in isolation.'
       ],
+      emphasis: 'A promising thermal demonstration is not a volume-ready cooling architecture until the complete fluidic boundary survives manufacturing, qualification, and field-service conditions.'
     },
   },
   {
@@ -2014,6 +2061,105 @@ export const BRIEFS: Brief[] = [
         ]
       }
     ]
+  },
+  {
+    slug: 'ppg-derivatives-semiconductor-applications',
+    title: 'PPG Derivatives in Semiconductor Manufacturing: Process, Purity, and Qualification',
+    seoTitle: 'PPG Derivatives for Semiconductor Manufacturing Applications',
+    kicker: 'SEMICONDUCTOR MATERIALS // WET PROCESS // ADVANCED PACKAGING',
+    description: 'A process-by-process framework for assessing polypropylene glycol (PPG), EO/PO block copolymers, glycol ethers, and reactive polyether derivatives in semiconductor manufacturing and advanced packaging.',
+    status: 'PRELIMINARY',
+    datePublished: '2026-08-13',
+    intro: '“PPG” is not a single semiconductor material category. Polypropylene glycol homopolymers, EO/PO block copolymers, propylene-glycol ether solvents, and amine- or acrylate-functional polyethers have different functions, impurity limits, and qualification routes. This brief treats the supplied application list as a screening hypothesis and distinguishes a technically plausible use from a published material-to-process qualification.',
+    sections: [
+      {
+        level: 2,
+        heading: '01. Start With the Chemical Family, Not the Shared “PPG” Label',
+        paragraphs: [
+          'A poly(propylene oxide) diol or PPG homopolymer is a different material from an EO/PO block copolymer, a propylene-glycol monoalkyl ether, or an amine-terminated polyether. The last two are often discussed beside PPG because they share propylene-oxide chemistry, but they are bought, purified, specified, and qualified differently. A solvent used for photoresist thinning or edge-bead removal should not be treated as evidence that a PPG polymer is qualified for the same use.',
+          'This distinction matters commercially. A transient wet-process additive is judged by bath control, removability, and defectivity. A reactive packaging ingredient becomes part of a cured network and is judged by rheology, cure behavior, ionic cleanliness, outgassing, mechanical response, and reliability. The material-selection brief should name the chemical form before making a statement about the semiconductor application.'
+        ],
+        table: {
+          caption: 'Useful material-family split',
+          header: ['Material family', 'Illustrative use hypothesis', 'Primary qualification question'],
+          rows: [
+            ['PPG or polyether diol', 'Formulation modifier, carrier, or flexible segment in non-device-contact applications.', 'Molecular-weight distribution, viscosity, extractables, and thermal behavior.'],
+            ['EO/PO block copolymer', 'Copper-electrodeposition suppressor or wet-process surfactant candidate.', 'Adsorption and transport behavior, bath aging, metals, residues, and fill performance.'],
+            ['Propylene-glycol ether', 'Photoresist solvent, thinner, edge-bead removal, or process-aid candidate.', 'Solvency, evaporation profile, water content, metals, particles, and residue.'],
+            ['Functional polyether', 'Underfill, adhesive, molding-compound, or dielectric-formulation modifier.', 'Functionality, cure kinetics, ionic contamination, outgassing, and package reliability.']
+          ]
+        }
+      },
+      {
+        level: 2,
+        heading: '02. Copper Electrodeposition Is the Clearest Front-End Use Case',
+        paragraphs: [
+          'Polyether suppressors are a well-established class of organic additives in acid-copper electrodeposition. PPG, PEG, and EO/PO copolymers have been studied as suppressors in damascene and microvia fill: they adsorb at the copper interface, work with other bath constituents, and help regulate deposition so that feature filling can be controlled. The relevant process can include BEOL interconnect fill and, where the chemistry is qualified, TSV or fine-pitch redistribution-layer copper plating.',
+          'This is not a generic claim that every PPG derivative improves every plating bath. The molecular architecture, concentration, chloride regime, accelerator and leveler package, current waveform, and feature geometry interact. Bath aging is also a first-order concern: polyether degradation or accumulation can change suppression behavior and deposited-film properties. Any supplier claim should therefore be supported by the target bath’s analytical-control method and feature-level void, seam, resistivity, and reliability evidence.'
+        ],
+        table: {
+          caption: 'Copper-plating screening record',
+          header: ['Question', 'Evidence to request'],
+          rows: [
+            ['Which polyether is being supplied?', 'EO/PO ratio, block architecture, molecular-weight distribution, terminal group, and lot-to-lot specification.'],
+            ['What role is claimed?', 'Suppressor, carrier, leveler modifier, or another role—with concentration and companion additives defined.'],
+            ['What process is comparable?', 'Feature size and aspect ratio, current waveform, electrolyte, seed/barrier stack, and post-plate treatment.'],
+            ['How is bath life controlled?', 'Additive analytics, degradation monitoring, replenishment model, contamination limits, and disposition of aged solution.']
+          ]
+        }
+      },
+      {
+        level: 2,
+        heading: '03. Glycol-Ether Solvents Have a Separate Lithography Qualification Path',
+        paragraphs: [
+          'Electronic-grade propylene-glycol ethers are publicly marketed for semiconductor photoresist production, thinner, and edge-bead-removal formulations. Their value proposition is not polymeric stress relief or plating suppression; it is controlled solvency, evaporation, surface behavior, and impurity control in a process that must remove or redistribute resist without creating a defectivity problem.',
+          'Other proposed front-end uses—such as wafer slicing and lapping carriers, lithography leveling agents, or wet-etch transport modifiers—should be treated as formulation-specific hypotheses unless the supplier identifies the exact product and qualified process. In many cases a formulation may contain a related polyether or glycol ether while the process owner does not disclose its composition. Public use of a broad chemical family is not evidence that a particular electronic-grade product is approved in a leading-edge fab.'
+        ],
+        listItems: [
+          'For resist and EBR applications, request total metals, particle count, water content, nonvolatile residue, trace anions, filter compatibility, and evaporation/solvency data under the real dispense conditions.',
+          'For any device-facing wet process, define the post-rinse and residue-metrology method before considering a material substitution.',
+          'Do not infer photoresist compatibility from a generic industrial glycol-ether data sheet; the grade, filtration, packaging, and change-control regime matter.']
+      },
+      {
+        level: 2,
+        heading: '04. Back-End Value Comes From Reactive Networks, Not From PPG Alone',
+        paragraphs: [
+          'In advanced packaging, amine-terminated polyethers, functionalized polyethers, and polyether-containing prepolymers can be candidates for underfills, die-attach systems, temporary-bonding materials, molding compounds, and photosensitive or stress-buffering organic layers. Their function is usually to tune flow, adhesion, modulus, cure response, or stress management within a larger resin system. It is the complete formulation—not the PPG backbone alone—that determines whether the result can survive assembly and field conditions.',
+          'The most relevant package contexts are narrow-gap underfill, large-area wafer- or panel-level molding, ultra-thin-wafer handling, and fine-pitch RDL structures. Each combines different trade-offs. Lower viscosity can aid wetting and flow but may complicate filler control or bleed; a softer network can reduce stress but may affect moisture resistance, glass-transition behavior, adhesion, or warpage. Product claims should therefore be tied to a defined assembly geometry and reliability plan.'
+        ],
+        table: {
+          caption: 'Advanced-packaging qualification gates',
+          header: ['Use context', 'Material function to test', 'Decision evidence'],
+          rows: [
+            ['Underfill or die attach', 'Flow, wetting, cure, adhesion, and stress management.', 'Capillary or dispense behavior, voiding, cure profile, die shear, moisture sensitivity, and thermal-cycle results.'],
+            ['Molding compound', 'Toughening, rheology control, and warpage management.', 'Spiral flow, filler compatibility, moldability, package warpage, moisture behavior, and reliability correlation.'],
+            ['Temporary bonding', 'Bond strength during thinning and controlled release at debond.', 'Thickness uniformity, grind survivability, thermal budget, debond residue, cleaning, and die damage.'],
+            ['RDL or organic dielectric', 'Film formation, patternability, cure, and stress buffering.', 'Coating uniformity, lithographic resolution, dielectric properties, adhesion, copper compatibility, and thermal cycling.']
+          ]
+        }
+      },
+      {
+        level: 2,
+        heading: '05. The Differentiator Is Qualification Evidence, Not a Universal Purity Number',
+        paragraphs: [
+          'Metal, halide, moisture, particle, and molecular-distribution requirements are process-specific. A device-facing solvent or plating additive may demand extraordinarily tight ionic and particle control; a packaging formulation may place comparatively more emphasis on halides, moisture, outgassing, cure chemistry, and corrosion behavior. Published generic thresholds should be treated as starting questions, not universal specifications. The approved limit depends on the process of record, concentration in use, exposure path, and the analytical method used to verify it.',
+          'Supplier differentiation should likewise be evaluated at the product-grade and service-model level. Public information supports that Dow markets electronic-grade glycol ethers for semiconductor photoresist, thinner, and EBR uses. BASF, Huntsman, and other chemical suppliers may offer relevant polyether, surfactant, or reactive-amine families, but a public portfolio alone does not verify a given semiconductor-grade formulation, purity level, or named customer qualification. A defensible vendor screen asks which legal entity supplies the exact grade, how it is purified and packaged, and what change-control and application-support commitments it can document.'
+        ],
+        blockquote: 'The addressable opportunity is created only when the material survives a process-specific qualification. Chemistry similarity is a lead for screening—not evidence of a semiconductor production award.',
+        listItems: [
+          'Build a process-to-material matrix that separates transient additives, solvents, and reactive resin ingredients.',
+          'Request certificates of analysis and analytical methods for the impurities that actually matter in the use case; do not compare grades only by a marketing purity label.',
+          'Qualify supplier, plant, packaging, filtration, and change-control route alongside the molecular product.',
+          'Treat any claimed PFAS replacement as a performance-and-defectivity comparison against the actual incumbent formulation, not as a category substitution.']
+      }
+    ],
+    protocolPatch: {
+      title: 'Maha Materials Qualification Note // PPG-Derivative Semiconductor Uses',
+      paragraphs: [
+        'Screen PPG-related materials by chemical family and process exposure. Confirm the exact material, electronic grade, impurity method, formulation role, post-process removal or cure path, and package or device-level reliability evidence before treating a candidate as interchangeable with an approved chemical.'
+      ],
+      emphasis: 'Do not collapse PPG polymers, EO/PO block copolymers, glycol ethers, and functional polyethers into one sourcing category.'
+    }
   }
 ]
 
