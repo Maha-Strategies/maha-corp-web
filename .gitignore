@@ -37,6 +37,17 @@ __pycache__/
 /output/migration-evidence/
 /qubo-benchmark-evidence.json
 
+# Private operator/family material. Public product documentation, reproducible
+# benchmarks, and research publications belong in their explicit public trees;
+# personal strategy and briefing documents do not belong in this repository.
+/docs/reports/
+/artifacts/*Call-Guide*.docx
+/artifacts/*Call-Guide*.pdf
+/docs/*Family_Guide*.docx
+/docs/*Family_Guide*.pdf
+/scripts/create-*-call-guide.py
+/scripts/create-*-family-guide.py
+
 # misc
 .DS_Store
 *.pem
