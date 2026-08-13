@@ -32,6 +32,7 @@ export default function Navbar() {
   const primaryLinks = [
     { name: 'Evidence Audit', href: '/evidence-audit' },
     { name: 'Intelligence', href: '/intelligence' },
+    { name: 'Knowledge', href: '/knowledge' },
     { name: 'Books', href: '/books' },
     { name: 'Apps', href: '/apps' },
     { name: 'Method', href: '/method' },

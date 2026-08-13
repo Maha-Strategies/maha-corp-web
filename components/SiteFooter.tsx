@@ -11,6 +11,8 @@ const developerLinks = [
 ] as const
 
 const companyLinks = [
+  { href: '/knowledge', label: 'Knowledge' },
+  { href: '/intelligence', label: 'Intelligence' },
   { href: '/tools', label: 'Tools & API' },
   { href: '/navigator', label: 'Maha Navigator' },
   { href: '/mps/preflight', label: 'MPS Preflight' },

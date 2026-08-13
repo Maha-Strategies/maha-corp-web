@@ -146,6 +146,14 @@ const BRIEFS: BriefData[] = [
   },
   {
     group: 'HARDWARE & INFRASTRUCTURE',
+    category: 'SEMICONDUCTOR.MATERIALS',
+    status: 'PRELIMINARY',
+    title: 'PPG Derivatives in Semiconductor Manufacturing',
+    description: 'A process, purity, and qualification framework for PPG, EO/PO block copolymers, glycol ethers, and reactive polyethers used in semiconductor manufacturing and advanced packaging.',
+    href: '/intelligence/briefs/ppg-derivatives-semiconductor-applications',
+  },
+  {
+    group: 'HARDWARE & INFRASTRUCTURE',
     category: 'ADVANCED.PACKAGING',
     status: 'ACTIVE',
     title: 'Smartphone AP Packaging: Architecture, Supplier, and Reliability Decisions',
@@ -196,8 +204,8 @@ const BRIEFS: BriefData[] = [
     group: 'HARDWARE & INFRASTRUCTURE',
     category: 'HARDWARE.THERMAL',
     status: 'CRITICAL',
-    title: 'Monolithic Backside Microfluidics: Bypassing the Silicon Thermal Wall',
-    description: 'An architectural evaluation of sub-node thermal management limitations, DRIE defectivity vectors, and the strategic pivot toward monolithic buried channel processing.',
+    title: 'Direct-to-Silicon Liquid Cooling for AI Chips',
+    description: 'A materials and reliability framework for backside microfluidics, sealing, coolants, manifolds, and high-volume qualification of direct-to-silicon AI-chip cooling.',
     href: '/intelligence/briefs/backside-microchannel-semiconductors',
   },
   {
