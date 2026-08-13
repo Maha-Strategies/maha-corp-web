@@ -16,6 +16,7 @@ import {
 import ExportButton from './ExportButton';
 import { TrackedLink } from '@/components/ConversionTracker';
 import { MAHA_ORGANIZATION_ID } from '@/lib/entity'
+import { getKnowledgeForIntelligenceBrief, knowledgeArticlePath } from '@/lib/knowledge-data'
 
 export function generateStaticParams() {
   return getAllBriefSlugs().map((slug) => ({ slug }));
@@ -128,6 +129,7 @@ export default async function BriefPage(
   const { slug } = await params;
   const brief = getBriefBySlug(slug);
   if (!brief) notFound();
+  const supportingKnowledge = getKnowledgeForIntelligenceBrief(brief.slug);
 
   const url = `${SITE_URL}/intelligence/briefs/${brief.slug}`;
   const jsonLd = {
@@ -177,6 +179,22 @@ export default async function BriefPage(
                 <Link href="/mps" className="text-zinc-500 hover:text-white transition-colors">How MPS classifies claims ↗</Link>
               </div>
             </aside>
+
+            {supportingKnowledge.length > 0 && (
+              <aside className="border border-cyan-900/60 bg-cyan-950/10 p-5 mb-10 not-prose">
+                <p className="font-mono text-[10px] text-cyan-300 tracking-widest uppercase mb-2">[ Technical foundations ]</p>
+                <p className="text-sm text-zinc-400 leading-relaxed mb-4">
+                  Follow the underlying processes, materials, and failure modes in the Knowledge graph.
+                </p>
+                <div className="grid gap-2 sm:grid-cols-2">
+                  {supportingKnowledge.map((article) => (
+                    <Link key={article.id} href={knowledgeArticlePath(article)} className="border border-zinc-800 px-3 py-2 font-mono text-[10px] uppercase tracking-widest text-zinc-300 hover:border-cyan-500/50 hover:text-cyan-200 transition-colors">
+                      {article.shortTitle} →
+                    </Link>
+                  ))}
+                </div>
+              </aside>
+            )}
 
             {brief.sections.map((section, i) => (
               <SectionBody key={i} section={section} />
