@@ -3,6 +3,8 @@ import { MAHA_SITE_URL } from '@/lib/entity'
 import { getPublicContentPublicationSitemapRows } from '@/lib/public-content-publications'
 import { unfinishedSpeciesSections } from '@/lib/unfinished-species'
 import { openBookEditions } from '@/lib/open-book-editions'
+import { KNOWLEDGE_ARTICLES, knowledgeArticlePath } from '@/lib/knowledge-data'
+import { SEMICONDUCTOR_PROCESS_MAP_DATE, SEMICONDUCTOR_PROCESS_MAP_PATH } from '@/lib/semiconductor-process-map'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = MAHA_SITE_URL
@@ -19,6 +21,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${baseUrl}/software` },
     { url: `${baseUrl}/doctrine` },
     { url: `${baseUrl}/research` },
+    { url: `${baseUrl}/knowledge`, lastModified: new Date('2026-08-13') },
+    { url: `${baseUrl}${SEMICONDUCTOR_PROCESS_MAP_PATH}`, lastModified: new Date(SEMICONDUCTOR_PROCESS_MAP_DATE) },
     { url: `${baseUrl}/start` },
     { url: `${baseUrl}/policy` },
     { url: `${baseUrl}/contact` },
@@ -171,7 +175,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
     {
       url: `${baseUrl}/intelligence/briefs/backside-microchannel-semiconductors`,
-      lastModified: new Date('2026-05-28'),
+      lastModified: new Date('2026-08-13'),
     },
     {
       url: `${baseUrl}/intelligence/briefs/known-good-die-storage-yield`,
@@ -302,6 +306,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       lastModified: new Date('2026-07-15'),
     },
     {
+      url: `${baseUrl}/intelligence/briefs/ppg-derivatives-semiconductor-applications`,
+      lastModified: new Date('2026-08-13'),
+    },
+    {
       url: `${baseUrl}/intelligence/briefs/automotive-cloud-virtual-verification`,
       lastModified: new Date('2026-08-05'),
     },
@@ -327,5 +335,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${baseUrl}/books/${book.slug}/read`, lastModified: new Date('2026-07-22') },
     ...book.sections.map((section) => ({ url: `${baseUrl}/books/${book.slug}/read/${section.slug}`, lastModified: new Date('2026-07-22') })),
   ])
-  return [...staticPages, ...unfinishedSpeciesReader, ...otherOpenBookReaders, ...published.map((publication) => ({ url: `${baseUrl}/insights/${publication.slug}`, lastModified: new Date(publication.updated_at) }))]
+  const knowledgePages = KNOWLEDGE_ARTICLES.map((article) => ({
+    url: `${baseUrl}${knowledgeArticlePath(article)}`,
+    lastModified: new Date(article.dateModified),
+  }))
+  return [...staticPages, ...knowledgePages, ...unfinishedSpeciesReader, ...otherOpenBookReaders, ...published.map((publication) => ({ url: `${baseUrl}/insights/${publication.slug}`, lastModified: new Date(publication.updated_at) }))]
 }
