@@ -15,6 +15,14 @@ const nextConfig: NextConfig = {
       { source: '/.well-known/maha/offer-selection.json', destination: '/api/discovery/offer-selection' },
       { source: '/.well-known/carp/seller-role.json', destination: '/api/discovery/carp/seller-role' },
       { source: '/.well-known/carp/seller.json', destination: '/api/discovery/carp/seller-profile' },
+      { source: '/.well-known/carp/did.json', destination: '/api/discovery/carp/did' },
+      { source: '/.well-known/carp/sad.json', destination: '/api/discovery/carp/sad' },
+      { source: '/cgi-bin/did', destination: '/api/discovery/carp/did' },
+      { source: '/cgi-bin/maha-strategies', destination: '/api/discovery/carp/sad' },
+      { source: '/cgi-bin/challenge', destination: '/api/carp/challenge' },
+      { source: '/cgi-bin/response', destination: '/api/carp/response' },
+      { source: '/cgi-bin/encrequest', destination: '/api/carp/encrequest' },
+      { source: '/cgi-bin/encresult', destination: '/api/carp/encresult' },
     ]
   },
   async redirects() {

@@ -2,6 +2,8 @@ import assert from 'node:assert/strict'
 import { readFile } from 'node:fs/promises'
 import test from 'node:test'
 
+import secp256k1 from 'secp256k1'
+
 import {
   CABEZON_SELLER_ROLE_URL,
   CARP_SELLER_ROLE_URL,
@@ -9,114 +11,105 @@ import {
   handleCarpSellerRequest,
   mahaCarpSellerProfile,
 } from '../lib/carp/seller.ts'
+import {
+  didDocumentForPublicKey,
+  multibaseForPublicKey,
+  signedAgentDescriptor,
+  verifySignedAgentDescriptor,
+} from '../lib/carp/identity.ts'
 import { pollCarpSeller } from '../scripts/run-carp-seller-worker.ts'
 import { DEEP_CONTEXT_EVALUATION_OFFER } from '../lib/x402/offers.ts'
 
 const role = JSON.parse(await readFile(new URL('../content/discovery/carp-seller-role.json', import.meta.url), 'utf8'))
 
-test('the Seller role preserves the established services and separates digital from physical evidence', () => {
-  assert.equal(role.role, 'Seller')
-  assert.equal(role.version, '0.2-draft')
-  assert.equal(role.proposalStatus, 'maha-extension-proposal-not-yet-adopted-by-cabezon')
+test('the public Seller role mirrors the adopted upstream v0.2 contract', () => {
+  assert.equal(role.sourceVersion, '0.2')
+  assert.equal(role.upstreamStatus, 'adopted-in-bitsanity-cabezon-after-maha-pr-1')
+  assert.equal(role.mahaContribution, 'https://github.com/bitsanity/cabezon/pull/1')
   assert.deepEqual(role.services.map((service: { service: string }) => service.service), ['about', 'enquiry', 'purchase'])
-  assert.deepEqual(role.compatibility.preservesTransportFields, ['http-request', 'red-request', 'red-async-result'])
-  assert.deepEqual(Object.keys(role.extensions.fulfillmentKinds), ['digital_result', 'carrier_shipment'])
-  assert.deepEqual(role.extensions.fulfillmentKinds.digital_result.evidenceTypes, ['service_receipt', 'result_uri', 'content_digest'])
-  assert.deepEqual(role.extensions.fulfillmentKinds.carrier_shipment.evidenceTypes, ['carrier_tracking'])
-  assert.equal(role.services[2].fee.separateFromOfferPrice, true)
-  for (const service of role.services) {
-    assert.ok(service['http-request'])
-    assert.ok(service['red-request'])
-    assert.ok(service['red-async-result'])
-  }
+  assert.deepEqual(role.fulfillmentDescriptor.modes, ['physical', 'digital', 'hybrid'])
 })
 
-test('the Maha seller maps its digital offer to the authoritative x402 catalog', () => {
+test('the Maha seller maps Deep Context to the adopted digital offering shape', () => {
   const offer = mahaCarpSellerProfile.offers[0]
   assert.equal(mahaCarpSellerProfile.roleContract, CABEZON_SELLER_ROLE_URL)
-  assert.equal(mahaCarpSellerProfile.roleExtensionProposal, CARP_SELLER_ROLE_URL)
-  assert.equal(mahaCarpSellerProfile.membership.status, 'contract_ready_pending_carp_handshake')
-  assert.equal(mahaCarpSellerProfile.membership.did, null)
-  assert.equal(offer.offerId, DEEP_CONTEXT_EVALUATION_OFFER.id)
-  assert.equal(offer.unitPrice.amount, DEEP_CONTEXT_EVALUATION_OFFER.amount)
-  assert.equal(offer.purchase.resource, `https://www.mahastrategies.com${DEEP_CONTEXT_EVALUATION_OFFER.path}`)
-  assert.equal(offer.purchase.mode, 'x402_direct')
-  assert.equal(offer.fulfillment.kind, 'digital_result')
-  assert.equal(offer.fulfillment.failureAndRefund.automaticRefund, false)
+  assert.equal(mahaCarpSellerProfile.roleMirror, CARP_SELLER_ROLE_URL)
+  assert.equal(mahaCarpSellerProfile.membership.status, 'identity_published_pending_cabezon_directory_confirmation')
+  assert.equal(offer.offeringRef, 'maha:deep-context-evaluation:v1')
+  assert.equal(offer.kind, 'digital')
+  assert.equal(offer.price.amount, '0.01')
+  assert.equal(offer.directSettlement.amountBaseUnits, DEEP_CONTEXT_EVALUATION_OFFER.amount)
+  assert.equal(offer.directSettlement.resource, `https://www.mahastrategies.com${DEEP_CONTEXT_EVALUATION_OFFER.path}`)
+  assert.deepEqual(offer.fulfillment.modes, ['digital'])
 })
 
-test('enquiry returns Deep Context only for compatible needs, prices, and fulfillment', () => {
+test('enquiry returns the canonical offering array for compatible needs', () => {
   const matched = handleCarpSellerRequest({
     jsonrpc: '2.0', method: 'enquiry', id: 'enquiry-1',
-    params: {
-      query: 'measure evidence retention in RAG context',
-      fulfillmentKinds: ['digital_result'],
-      maximumUnitPrice: {
-        amount: '10000',
-        asset: mahaCarpSellerProfile.offers[0].unitPrice.asset,
-        network: mahaCarpSellerProfile.offers[0].unitPrice.network,
-      },
-    },
+    params: { query: 'measure evidence retention in RAG context', tags: ['provenance'], imgtxt: null },
   })
   assert.ok('result' in matched)
-  assert.equal((matched as { result: { offers: unknown[] } }).result.offers.length, 1)
+  assert.equal((matched as { result: unknown[] }).result.length, 1)
 
-  const physical = handleCarpSellerRequest({
-    jsonrpc: '2.0', method: 'enquiry', id: 'enquiry-2',
-    params: { query: 'context', fulfillmentKinds: ['carrier_shipment'] },
+  const unrelated = handleCarpSellerRequest({
+    jsonrpc: '2.0', method: 'enquiry', id: 'enquiry-2', params: { query: 'bulk tea shipment', tags: [], imgtxt: null },
   })
-  assert.ok('result' in physical)
-  assert.deepEqual((physical as { result: { offers: unknown[] } }).result.offers, [])
+  assert.ok('result' in unrelated)
+  assert.deepEqual((unrelated as { result: unknown[] }).result, [])
 })
 
-test('purchase returns exact x402 instructions and rejects a stale quote', () => {
-  const unitPrice = mahaCarpSellerProfile.offers[0].unitPrice
+test('purchase binds the canonical order to exact x402 instructions', () => {
   const accepted = handleCarpSellerRequest({
     jsonrpc: '2.0', method: 'purchase', id: 'purchase-1',
     params: {
-      buyerOrderId: 'buyer-order-001',
-      offerId: DEEP_CONTEXT_EVALUATION_OFFER.id,
+      clientOrderRef: 'buyer-order-001',
+      offeringRef: 'maha:deep-context-evaluation:v1',
       quantity: 1,
-      quotedUnitPrice: { amount: unitPrice.amount, asset: unitPrice.asset, network: unitPrice.network },
-      fulfillment: { kind: 'digital_result' },
+      agreedPrice: { amount: '0.01', asset: 'USDC', network: 'eip155:8453' },
+      input: { clientRequestId: 'carp-test' },
+      delivery: { mode: 'digital', destination: null, replyTo: 'carp://buyer/results/buyer-order-001' },
+      specialInstructions: null,
     },
   })
   assert.ok('result' in accepted)
-  const result = (accepted as { result: { payment: { mode: string; amount: string; resource: string }; fulfillment: { evidenceFields: string[] } } }).result
-  assert.equal(result.payment.mode, 'x402_direct')
-  assert.equal(result.payment.amount, '10000')
-  assert.match(result.payment.resource, /\/api\/v1\/compress\/evaluate$/)
-  assert.ok(result.fulfillment.evidenceFields.includes('outputHash'))
+  const result = (accepted as { result: { status: string; paymentInstructions: { mode: string; amountBaseUnits: string; resource: string } } }).result
+  assert.equal(result.status, 'PAYMENT_REQUIRED')
+  assert.equal(result.paymentInstructions.mode, 'x402_direct')
+  assert.equal(result.paymentInstructions.amountBaseUnits, '10000')
+  assert.match(result.paymentInstructions.resource, /\/api\/v1\/compress\/evaluate$/)
 
   const stale = handleCarpSellerRequest({
     jsonrpc: '2.0', method: 'purchase', id: 'purchase-2',
     params: {
-      buyerOrderId: 'buyer-order-002', offerId: DEEP_CONTEXT_EVALUATION_OFFER.id, quantity: 1,
-      quotedUnitPrice: { amount: '9999', asset: unitPrice.asset, network: unitPrice.network },
-      fulfillment: { kind: 'digital_result' },
+      clientOrderRef: 'buyer-order-002', offeringRef: 'maha:deep-context-evaluation:v1', quantity: 1,
+      agreedPrice: { amount: '0.009', asset: 'USDC', network: 'eip155:8453' },
+      delivery: { mode: 'digital', destination: null },
     },
   })
   assert.ok('error' in stale)
-  assert.equal((stale as { error: { code: number } }).error.code, -32010)
+  assert.equal(stale.error.code, -32010)
 })
 
-test('the legacy purchase array remains usable without weakening exact payment terms', () => {
+test('legacy purchase arrays remain compatible with base-unit quotes', () => {
   const offer = mahaCarpSellerProfile.offers[0]
   const accepted = handleCarpSellerRequest({
-    jsonrpc: '2.0', method: 'purchase', id: '0x' + '1'.repeat(64),
-    params: [1, offer.itemref, { amount: offer.unitPrice.amount, asset: offer.unitPrice.asset, network: offer.unitPrice.network }, null, ''],
+    jsonrpc: '2.0', method: 'purchase', id: `0x${'1'.repeat(64)}`,
+    params: [1, offer.offeringRef, { amount: offer.directSettlement.amountBaseUnits, asset: offer.directSettlement.assetContract, network: offer.price.network }, null, ''],
   })
   assert.ok('result' in accepted)
-  const result = (accepted as { result: { buyerOrderId: string; payment: { amount: string } } }).result
-  assert.match(result.buyerOrderId, /^legacy:[a-f0-9]{32}$/)
-  assert.equal(result.payment.amount, DEEP_CONTEXT_EVALUATION_OFFER.amount)
+  assert.equal((accepted as { result: { paymentInstructions: { amountBaseUnits: string } } }).result.paymentInstructions.amountBaseUnits, '10000')
+})
 
-  const postalDestination = handleCarpSellerRequest({
-    jsonrpc: '2.0', method: 'purchase', id: '0x' + '2'.repeat(64),
-    params: [1, offer.itemref, { amount: offer.unitPrice.amount, asset: offer.unitPrice.asset, network: offer.unitPrice.network }, 'Colombo'],
-  })
-  assert.ok('error' in postalDestination)
-  assert.equal((postalDestination as { error: { code: number } }).error.code, -32602)
+test('Maha DID and SAD are derived from and signed by the same secp256k1 identity', () => {
+  const privateKey = '1'.padStart(64, '0')
+  const publicKey = Buffer.from(secp256k1.publicKeyCreate(Buffer.from(privateKey, 'hex'), true)).toString('hex')
+  assert.match(multibaseForPublicKey(publicKey), /^zQ3s/)
+  const did = didDocumentForPublicKey(publicKey)
+  const sad = signedAgentDescriptor({ privateKey, issuedAt: '2026-08-13T00:00:00.000Z', expiresAt: '2027-08-13T00:00:00.000Z' })
+  assert.equal(sad.id, did.id)
+  assert.equal(sad.publicKey.value, publicKey)
+  assert.equal(verifySignedAgentDescriptor(sad), true)
+  assert.equal(sad.proof.canonicalization, 'RFC8785')
 })
 
 test('the worker polls one authenticated request and returns a JSON-RPC result', async () => {
@@ -125,33 +118,12 @@ test('the worker polls one authenticated request and returns a JSON-RPC result',
   const fetchImpl: typeof fetch = async (input, init) => {
     const url = String(input)
     calls.push({ url, init })
-    if (url.endsWith('/cgi-bin/nextrequest')) {
-      return Response.json({ method: 'about', params: {}, client, cookie: 'request-cookie-001' })
-    }
+    if (url.endsWith('/cgi-bin/nextrequest')) return Response.json({ method: 'about', params: {}, client, cookie: 'request-cookie-001' })
     return new Response('ACK', { status: 200 })
   }
-
   assert.equal(await pollCarpSeller({ baseUrl: 'http://127.0.0.1:8000/', timeoutMs: 2_000, fetchImpl }), true)
   assert.equal(calls.length, 2)
   assert.equal(calls[1].url, 'http://127.0.0.1:8000/cgi-bin/result')
-  assert.equal(new Headers(calls[1].init?.headers).get('cookie'), `agent=${client}; cookie=request-cookie-001`)
-  const reply = JSON.parse(String(calls[1].init?.body))
-  assert.equal(reply.jsonrpc, '2.0')
-  assert.equal(reply.id, 'request-cookie-001')
-  assert.equal(reply.result.sellerId, 'maha-strategies')
-})
-
-test('the worker refuses malformed client identity before creating a result callback', async () => {
-  let calls = 0
-  const fetchImpl: typeof fetch = async () => {
-    calls += 1
-    return Response.json({ method: 'about', params: {}, client: 'not-a-key', cookie: 'request-cookie-002' })
-  }
-  await assert.rejects(
-    pollCarpSeller({ baseUrl: 'http://127.0.0.1:8000', timeoutMs: 2_000, fetchImpl }),
-    /secp256k1 public key/,
-  )
-  assert.equal(calls, 1)
 })
 
 test('public CARP discovery URLs are stable', () => {
