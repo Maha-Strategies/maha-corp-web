@@ -16,7 +16,19 @@ import {
 import ExportButton from './ExportButton';
 import { TrackedLink } from '@/components/ConversionTracker';
 import { MAHA_ORGANIZATION_ID } from '@/lib/entity'
-import { getKnowledgeForIntelligenceBrief, knowledgeArticlePath } from '@/lib/knowledge-data'
+import { KNOWLEDGE_KIND_META, knowledgeArticlePath } from '@/lib/knowledge-data'
+import { knowledgeSupplierPath } from '@/lib/knowledge-process-profiles'
+import {
+  getSupportingKnowledgeObjects,
+  type IntelligenceKnowledgeRelationship,
+} from '@/lib/intelligence-knowledge-links'
+
+const relationshipLabels: Record<IntelligenceKnowledgeRelationship, string> = {
+  'technical-foundation': 'Technical foundation',
+  'process-dependency': 'Process dependency',
+  'risk-control': 'Risk and control',
+  'supplier-context': 'Supplier context',
+}
 
 export function generateStaticParams() {
   return getAllBriefSlugs().map((slug) => ({ slug }));
@@ -129,7 +141,9 @@ export default async function BriefPage(
   const { slug } = await params;
   const brief = getBriefBySlug(slug);
   if (!brief) notFound();
-  const supportingKnowledge = getKnowledgeForIntelligenceBrief(brief.slug);
+  const supportingObjects = getSupportingKnowledgeObjects(brief.slug);
+  const supportingKnowledge = supportingObjects.filter((item) => item.objectType === 'knowledge' && item.article !== undefined);
+  const supportingSuppliers = supportingObjects.filter((item) => item.objectType === 'supplier' && item.supplier !== undefined);
 
   const url = `${SITE_URL}/intelligence/briefs/${brief.slug}`;
   const jsonLd = {
@@ -142,6 +156,9 @@ export default async function BriefPage(
     datePublished: brief.datePublished,
     dateModified: brief.dateModified ?? brief.datePublished,
     mainEntityOfPage: { '@type': 'WebPage', '@id': url },
+    isBasedOn: supportingObjects.map((item) => item.objectType === 'knowledge'
+      ? `${SITE_URL}${knowledgeArticlePath(item.article!)}`
+      : `${SITE_URL}${knowledgeSupplierPath(item.supplier!)}`),
   };
 
   return (
@@ -180,19 +197,38 @@ export default async function BriefPage(
               </div>
             </aside>
 
-            {supportingKnowledge.length > 0 && (
+            {supportingObjects.length > 0 && (
               <aside className="border border-cyan-900/60 bg-cyan-950/10 p-5 mb-10 not-prose">
-                <p className="font-mono text-[10px] text-cyan-300 tracking-widest uppercase mb-2">[ Technical foundations ]</p>
-                <p className="text-sm text-zinc-400 leading-relaxed mb-4">
-                  Follow the underlying processes, materials, and failure modes in the Knowledge graph.
+                <div className="flex flex-wrap items-center gap-3">
+                  <p className="font-mono text-[10px] text-cyan-300 tracking-widest uppercase">[ Supporting Knowledge graph ]</p>
+                  <span className="border border-cyan-500/30 bg-cyan-500/10 px-2 py-1 font-mono text-[9px] uppercase tracking-widest text-cyan-200">
+                    {relationshipLabels[supportingObjects[0].relationship]}
+                  </span>
+                </div>
+                <p className="mt-4 text-sm text-zinc-400 leading-relaxed">
+                  {supportingObjects[0].rationale}
                 </p>
-                <div className="grid gap-2 sm:grid-cols-2">
-                  {supportingKnowledge.map((article) => (
-                    <Link key={article.id} href={knowledgeArticlePath(article)} className="border border-zinc-800 px-3 py-2 font-mono text-[10px] uppercase tracking-widest text-zinc-300 hover:border-cyan-500/50 hover:text-cyan-200 transition-colors">
-                      {article.shortTitle} →
+                <div className="mt-5 grid gap-3 sm:grid-cols-2">
+                  {supportingKnowledge.map(({ article }) => (
+                    <Link key={article!.id} href={knowledgeArticlePath(article!)} className="border border-zinc-800 bg-zinc-950/70 p-4 hover:border-cyan-500/50 transition-colors">
+                      <span className="font-mono text-[9px] uppercase tracking-widest text-cyan-300">{KNOWLEDGE_KIND_META[article!.kind].label}</span>
+                      <span className="mt-2 block text-sm font-semibold text-white">{article!.shortTitle} →</span>
+                      <span className="mt-2 block text-xs leading-5 text-zinc-500">{article!.description}</span>
                     </Link>
                   ))}
                 </div>
+                {supportingSuppliers.length > 0 && (
+                  <div className="mt-5 border-t border-zinc-800 pt-5">
+                    <p className="font-mono text-[9px] uppercase tracking-widest text-zinc-500">Supplier capability context</p>
+                    <div className="mt-3 flex flex-wrap gap-2">
+                      {supportingSuppliers.map(({ supplier }) => (
+                        <Link key={supplier!.id} href={knowledgeSupplierPath(supplier!)} className="border border-zinc-800 px-3 py-2 font-mono text-[9px] uppercase tracking-widest text-zinc-400 hover:border-cyan-500/50 hover:text-cyan-200 transition-colors">
+                          {supplier!.name} →
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                )}
               </aside>
             )}
 
