@@ -78,6 +78,13 @@ export type X402ErrorCode =
   | 'signature_rejected'
   | 'payment_rejected'
   | 'payment_already_used'
+  // Distinct from payment_already_used on purpose. All three settle the
+  // payment and then refuse delivery, and a payer needs to know which of their
+  // own inputs to change -- telling them the authorization was spent when the
+  // hash disagreed is worse than useless.
+  | 'input_hash_mismatch'
+  | 'idempotency_key_mismatch'
+  | 'idempotency_conflict'
   | 'ledger_unavailable'
   | 'resource_at_capacity'
 
@@ -374,6 +381,25 @@ async function refusalFor(
   const context = { requirement, authorization }
 
   if (response.status === 409) {
+    // Mapped by the server's error code, not by the status alone. The route
+    // returns 409 for several unrelated conditions, and flattening them all to
+    // "the authorization has been spent" told a payer whose request hash
+    // disagreed that their money was gone -- which sent a Production
+    // investigation down the wrong path for a day. The status says a conflict
+    // occurred; only the code says which.
+    if (code === 'input_hash_mismatch') {
+      return new X402PaymentError('input_hash_mismatch', providerMessage
+        ?? 'The request body does not hash to the declared x-maha-input-hash. Send the body that hashes to it, or use a new idempotency key.',
+        { ...context, status: 409, settled: true })
+    }
+    if (code === 'idempotency_key_mismatch') {
+      return new X402PaymentError('idempotency_key_mismatch', providerMessage
+        ?? 'x-maha-idempotency-key must equal clientRequestId.', { ...context, status: 409, settled: true })
+    }
+    if (code === 'idempotency_conflict') {
+      return new X402PaymentError('idempotency_conflict', providerMessage
+        ?? 'This idempotency key was already used with different input.', { ...context, status: 409, settled: true })
+    }
     return new X402PaymentError('payment_already_used', 'Payment already used. This authorization has been spent; a new payment is needed for another request.', { ...context, status: 409, settled: true })
   }
   if (response.status === 503) {
