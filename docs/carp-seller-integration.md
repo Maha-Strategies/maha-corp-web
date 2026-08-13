@@ -1,63 +1,93 @@
 # Maha CARP/CABEZON Seller Integration
 
-Maha's first CABEZON offering is **Deep Context Evaluation**, a digitally delivered service paid directly through its existing x402 v2 resource on Base Mainnet.
+Maha's first CABEZON Seller offering is **Deep Context Evaluation**, a digitally delivered service with a fixed direct-x402 price of **0.01 USDC** on Base Mainnet.
 
-## Public contracts and proposal status
+## Public identity and contracts
 
-- Canonical CABEZON Seller role: `https://raw.githubusercontent.com/bitsanity/cabezon/master/roles/seller.json`
-- Maha Seller role extension proposal: `https://www.mahastrategies.com/.well-known/carp/seller-role.json`
-- Maha seller profile: `https://www.mahastrategies.com/.well-known/carp/seller.json`
+- Canonical Seller role: `https://raw.githubusercontent.com/bitsanity/cabezon/master/roles/seller.json`
+- Maha's merged upstream contribution: `https://github.com/bitsanity/cabezon/pull/1`
+- Maha role mirror: `https://www.mahastrategies.com/.well-known/carp/seller-role.json`
+- Maha Seller profile: `https://www.mahastrategies.com/.well-known/carp/seller.json`
+- Maha DID: `https://www.mahastrategies.com/.well-known/carp/did.json`
+- Maha signed Agent Descriptor (SAD): `https://www.mahastrategies.com/.well-known/carp/sad.json`
+- CARP endpoint: `https://www.mahastrategies.com`
 - Fulfillment resource: `POST https://www.mahastrategies.com/api/v1/compress/evaluate`
 
-The extension is a Maha proposal, not an adopted CABEZON standard. It keeps the canonical `about`, `enquiry`, and `purchase` services and the existing CARP wire fields, while defining delivery evidence that distinguishes a digital result from a carrier shipment. Do not describe it as CABEZON v0.2 unless the upstream project adopts it.
+The public DID is a `did:key` derived from a dedicated secp256k1 key. The SAD is RFC 8785-canonicalized and signed as detached ES256K JWS. The private key is stored only as the sensitive Production environment variable `CARP_AGENT_PRIVATE_KEY`; it must never appear in this repository, logs, artifacts, or discovery responses.
 
-The seller profile intentionally reports `contract_ready_pending_carp_handshake`. Maha is not a CABEZON member until a dedicated CARP host has a signed DID and SAD, completes the Concierge and Registrar handshakes, and is accepted into the directory. The public profile contains null identity fields until that happens; it is not a substitute for the signed documents served by the CARP host.
+The Seller role is no longer a Maha-only proposal. Bryan merged Maha's physical/digital fulfillment generalization as CABEZON Seller model v0.2. The public mirror therefore records the canonical source and contribution rather than claiming an unadopted extension.
 
-## Order and payment boundary
+## Transport and trust boundary
 
-The CARP `purchase` fee and the selected offer price are different payments:
+The public CARP compatibility layer implements:
 
-1. The optional CARP fee pays the Seller Agent to admit and process an order. CABEZON uses it to deter denial-of-service and token-burning attacks.
-2. The Deep Context Evaluation price is exactly 10,000 USDC base units ($0.01) and is paid to the declared x402 resource.
+- `GET /cgi-bin/did`
+- `GET /cgi-bin/maha-strategies`
+- `GET /cgi-bin/challenge`
+- `POST /cgi-bin/response`
+- `POST /cgi-bin/encrequest`
+- `POST /cgi-bin/encresult`
 
-The purchase result therefore returns `mode: x402_direct`. It does not invent an escrow transaction for a synchronous digital utility. Digital delivery is evidenced by the returned `evaluationId`, `outputHash`, and x402 `PAYMENT-RESPONSE` transaction. The shared Seller proposal also defines `carrier_shipment` for physical goods, where a carrier and tracking reference are the delivery evidence.
+Identity proof uses ADILOS. Seller requests and asynchronous results use `ecjsonrpc` encrypted JSON-RPC. Only El-Cabezon's published compressed public key is currently allowlisted. Session challenges and received answers use environment-scoped Upstash keys rather than instance-local files, so serverless invocations do not pretend to have persistent local state.
 
-Deep Context Evaluation does **not** promise an automatic refund. A malformed application payload may fail after an x402 settlement because the gateway handles payment before the route validates the body. The seller profile states this boundary and directs delivery failures to support with order and payment evidence rather than inventing a recovery guarantee.
+The implementation intentionally does not expose the reference host's LAN-only `nextrequest`, `nextanswer`, `result`, `adddid`, or `obrequest` CGI endpoints. Seller replies are handled at the request boundary and delivered asynchronously to El-Cabezon's `encresult` endpoint using Next.js `after()`.
 
-## Dedicated CARP host
+## Deep Context fulfillment model
 
-CARP's reference implementation uses CGI scripts plus writable local directories for ACLs, sessions, requests, answers, and used payment references. Do not deploy that stateful interface inside Vercel.
+The enquiry result follows the merged Seller v0.2 shape:
 
-1. Provision a small persistent host isolated from the application and clone `https://github.com/bitsanity/agent-crvp`.
-2. Configure TLS or a private tunnel, writable runtime directories, Node.js, `adilosjs`, and `ecjsonrpc` as required by the reference implementation.
-3. Add `about`, `enquiry`, and `purchase` to the reference `cgi-bin/worker.js` service allowlist. Keep `about` and `enquiry` free in `cgi-bin/fees.js`. Set any `purchase` admission fee according to CABEZON policy after independently reviewing the amount, recipient, chain, and replay handling; do not confuse it with the $0.01 offer price.
-4. Place the reviewed Seller declaration on the CARP host and include the three services in its `index.json`/menu. Preserve the canonical CARP field names. The Maha extension accepts the legacy purchase array and recommends the object form for exact network, asset, price, fulfillment, and idempotency binding.
-5. Generate a dedicated secp256k1 CARP identity on that host. Keep the private key out of this repository, Vercel, logs, and discovery documents.
-6. Replace the example DID and SAD with signed Maha documents containing the real public CARP URL. Publish only after verifying signatures and expiry.
-7. Run the Maha worker on the same private network:
+- `offeringRef: maha:deep-context-evaluation:v1`
+- `kind: digital`
+- `price: { amount: "0.01", asset: "USDC", network: "eip155:8453" }`
+- digital JSON fulfillment in an estimated 60 seconds with a 120-second deadline
+- input and output schema links to the public offer contract
+- exact limitations preserved from the authoritative x402 catalog
+
+The purchase method accepts the v0.2 object shape and the legacy array during the compatibility period. It validates the exact offering, quantity, price, network and digital delivery mode before returning an order-bound direct-x402 instruction.
+
+CABEZON v0.2 describes escrow as authoritative for its standard order lifecycle. Maha's initial bounded experiment makes the existing direct-x402 settlement explicit instead of inventing an escrower. The purchase response therefore includes `mode: x402_direct`, `service: x402`, the exact resource, Base USDC contract, payee and base-unit amount. It must not be represented as an escrow-backed CABEZON order until a compatible escrower exists and has been tested.
+
+Digital delivery evidence consists of:
+
+- the x402 `PAYMENT-RESPONSE` transaction,
+- Deep Context `evaluationId`,
+- `outputHash`, and
+- the returned result bytes when a content digest is published.
+
+A digest proves byte identity, not correctness, quality, buyer acceptance, or entitlement to release escrowed funds. No source text or compiled context is placed in a public fulfillment descriptor.
+
+## Verification sequence
+
+1. Verify the published DID and SAD signature:
 
    ```bash
-   CARP_INTERFACE_URL=http://127.0.0.1:8000 npm run worker:carp-seller
+   npm run verify:carp-identity -- https://www.mahastrategies.com/.well-known/carp/sad.json
    ```
 
-8. Verify `about`, free `enquiry`, legacy and object-form purchases, a rejected price mismatch, a rejected postal destination on the digital offer, and a successful payment instruction in a local handshake.
-9. Shake hands with El-Cabezon and the Registrar. Join the Seller role and pay any reviewed membership/rent only after the advertised amounts and destination are independently verified.
-10. Update the public profile from `contract_ready_pending_carp_handshake` only after the Concierge returns Maha in its Seller directory.
+2. Run the non-paying identity handshake and encrypted Concierge `about` request:
+
+   ```bash
+   CARP_AGENT_PRIVATE_KEY='<dedicated-key>' npm run handshake:carp
+   ```
+
+   This creates a sanitized artifact containing public identity, peer identity, check results and a request ID. It never records the private key, session key, ADILOS challenge/response, encrypted payload, or result content.
+
+3. Ask Bryan to complete the reciprocal operator step and confirm that El-Cabezon returns Maha's SAD under the Seller directory. Until that happens, the public profile remains `identity_published_pending_cabezon_directory_confirmation`.
+
+4. Run one free encrypted `enquiry` for context/evidence retention and verify the canonical offering.
+
+5. Run one `purchase` and verify that it returns exactly 10,000 USDC base units to the existing Deep Context resource. A CARP admission fee, Mall rent, or escrow payment is out of scope unless its real recipient and terms are separately reviewed.
+
+6. Only with fresh authorization, make one bounded 10,000-base-unit x402 payment and preserve the resulting transaction, evaluation ID and output hash. Do not repeat a signed payment after an ambiguous response.
+
+7. Publish the sanitized evidence and ask Bryan to cite the verified integration. Directory confirmation and a completed delivery are facts to prove separately.
 
 ## Failure boundaries
 
-- The worker rejects a quoted amount, asset, or network that differs from the current catalog.
-- The worker accepts the legacy purchase array only when its price element contains the same exact amount, asset, and network object returned by enquiry.
-- It does not sign an x402 payment for the buyer.
-- It does not assert that a result was delivered merely because payment instructions were issued.
-- An x402 failure stays an x402 failure; it is not translated into a false CARP shipment event.
-- Physical orders require a delivery destination and carrier evidence. Digital orders do not collect a postal address.
-
-## Upstream contribution boundary
-
-The extension proposal is suitable for discussion with Bryan and for a focused change to `bitsanity/cabezon/roles/seller.json`. Do not submit it upstream as an adopted contract or deploy it as a CABEZON identity until:
-
-1. Bryan confirms the compatibility approach and preferred versioning.
-2. A local CARP handshake proves both parameter shapes.
-3. The canonical example uses placeholders rather than Maha's payee, asset, price, or product identifiers.
-4. The upstream diff changes only the Seller role and its explanatory documentation.
+- An unknown CARP key is rejected before decrypting a request.
+- A stale quote, wrong network, wrong asset, physical destination, or duplicate logical order is refused.
+- The Seller never signs the buyer's x402 payment.
+- Payment instructions are not delivery evidence.
+- A transport acknowledgment is not directory membership.
+- No CARP rent, admission fee, or escrow amount is inferred from placeholder role files.
+- An x402 failure remains an x402 failure; it is not translated into a shipment or fulfillment event.

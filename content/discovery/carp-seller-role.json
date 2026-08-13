@@ -1,214 +1,56 @@
 {
-  "descrip": "Draft extension to the CABEZON Seller role for verifiable digital results and carrier-shipped physical goods. It preserves the established about, enquiry and purchase services and their CARP wire-field names.",
-  "role": "Seller",
-  "version": "0.2-draft",
-  "proposalStatus": "maha-extension-proposal-not-yet-adopted-by-cabezon",
-  "canonicalRole": "https://raw.githubusercontent.com/bitsanity/cabezon/master/roles/seller.json",
-  "compatibility": {
-    "preservesServices": ["about", "enquiry", "purchase"],
-    "preservesTransportFields": ["http-request", "red-request", "red-async-result"],
-    "legacyPurchaseParams": "[quantity, itemref, quotedUnitPrice, shipto, specialInstructions]",
-    "preferredPurchaseParams": "object",
-    "note": "Implementations may accept both parameter shapes during transition. Payment instructions and delivery evidence use the same result shape."
-  },
-  "extensions": {
-    "fulfillmentKinds": {
-      "digital_result": {
-        "destinationRequired": false,
-        "evidenceTypes": ["service_receipt", "result_uri", "content_digest"],
-        "description": "A machine-readable result delivered by an API or agent. Evidence binds the result to the order and payment receipt."
-      },
-      "carrier_shipment": {
-        "destinationRequired": true,
-        "evidenceTypes": ["carrier_tracking"],
-        "description": "A physical good delivered to a destination. Evidence names the carrier and tracking reference."
-      }
-    }
+  "descrip": "CARP services provided by a Seller Agent for physical goods, digital services, or hybrid offerings",
+  "source": "https://raw.githubusercontent.com/bitsanity/cabezon/master/roles/seller.json",
+  "sourceVersion": "0.2",
+  "upstreamStatus": "adopted-in-bitsanity-cabezon-after-maha-pr-1",
+  "mahaContribution": "https://github.com/bitsanity/cabezon/pull/1",
+  "model": {
+    "version": "0.2",
+    "compatibility": "The about, enquiry, and purchase service names are retained. Legacy itemref/upc values map to offeringRef, shipto maps to delivery.destination, and a tracking reference remains a valid fulfillment reference.",
+    "fees": "A CARP service fee admits and protects a request. It is separate from the offering price, buyer bond, escrow fee, and settlement amount.",
+    "fulfillment": "A physical order is fulfilled by delivery through a carrier; a digital order by delivering a result or retrieval reference; a hybrid order by both.",
+    "security": "Implementations must validate untrusted parameters before storing or forwarding them. Fulfillment descriptors should contain hashes and opaque references rather than private customer data or access credentials."
   },
   "services": [
     {
       "service": "about",
-      "descrip": "Get a machine-readable information package about this Seller and its fulfillment capabilities.",
       "authentication": true,
       "synchronous": false,
       "fee": null,
-      "http-request": {
-        "method": "POST",
-        "url": "/cgi-bin/encrequest",
-        "body": {
-          "msghex": "<encrypted-message-of-red-request>",
-          "sighex": "<ecdsa-signature-of-message>",
-          "spkhex": "<signers-EC-public-key>"
-        }
-      },
-      "red-request": {
-        "jsonrpc": "2.0",
-        "method": "about",
-        "params": {},
-        "id": "<cookie>"
-      },
-      "http-response": { "status": "200 OK" },
-      "red-async-result": {
-        "jsonrpc": "2.0",
-        "result": {
-          "sellerId": "<stable-seller-id>",
-          "name": "<seller-name>",
-          "description": "<seller-description>",
-          "fulfillmentKinds": ["digital_result", "carrier_shipment"],
-          "termsUrl": "<https-url-or-null>"
-        },
-        "id": "<cookie>"
-      }
+      "red-request": { "jsonrpc": "2.0", "method": "about", "params": [], "id": "<cookie>" }
     },
     {
       "service": "enquiry",
-      "descrip": "Find current offerings by plain-language need, tags, fulfillment kind, quantity and optional exact price ceiling.",
       "authentication": true,
       "synchronous": false,
       "fee": null,
-      "http-request": {
-        "method": "POST",
-        "url": "/cgi-bin/encrequest",
-        "body": {
-          "msghex": "<encrypted-message-of-red-request>",
-          "sighex": "<ecdsa-signature-of-message>",
-          "spkhex": "<signers-EC-public-key>"
-        }
-      },
-      "red-request": {
-        "jsonrpc": "2.0",
-        "method": "enquiry",
-        "params": {
-          "query": "<plain-language-need-or-empty-string>",
-          "tags": ["<tag>"],
-          "fulfillmentKinds": ["digital_result"],
-          "quantity": "<positive-integer-or-null>",
-          "maximumUnitPrice": {
-            "amount": "<decimal-integer-smallest-units>",
-            "asset": "<asset-identifier>",
-            "network": "<network-identifier>"
-          }
-        },
-        "id": "<cookie>"
-      },
-      "http-response": { "status": "200 OK" },
-      "http-response-error": {
-        "status": "400 Bad Request",
-        "contenttype": "application/json",
-        "content": "{ <error-obj> }"
-      },
-      "red-async-result": {
-        "jsonrpc": "2.0",
-        "result": {
-          "offers": [
-            {
-              "offerId": "<stable-offer-id>",
-              "itemref": "<seller-item-reference>",
-              "kind": "digital_service|physical_good",
-              "title": "<offer-title>",
-              "description": "<offer-description>",
-              "tags": ["<tag>"],
-              "unitPrice": {
-                "amount": "<decimal-integer-smallest-units>",
-                "asset": "<asset-identifier>",
-                "assetDecimals": "<non-negative-integer>",
-                "network": "<network-identifier>"
-              },
-              "quantity": { "minimum": 1, "maximum": 1, "increment": 1 },
-              "fulfillment": {
-                "kind": "digital_result|carrier_shipment",
-                "evidenceTypes": ["<evidence-type>"],
-                "estimatedDeliverySeconds": "<non-negative-integer-or-null>"
-              },
-              "termsUrl": "<https-url-or-null>"
-            }
-          ]
-        },
-        "id": "<cookie>"
-      }
+      "red-request": { "jsonrpc": "2.0", "method": "enquiry", "params": { "query": "<text-or-null>", "tags": ["<tag>"], "imgtxt": null }, "id": "<cookie>" }
     },
     {
       "service": "purchase",
-      "descrip": "Accept one selected offer and return order-bound payment and fulfillment instructions. The CARP method fee is order admission and abuse deterrence; it is separate from the offer price.",
       "authentication": true,
       "synchronous": false,
-      "fee": {
-        "purpose": "order_admission_and_abuse_deterrence",
-        "amt": "<operator-defined>",
-        "separateFromOfferPrice": true
-      },
-      "http-request": {
-        "method": "POST",
-        "url": "/cgi-bin/encrequest",
-        "body": {
-          "msghex": "<encrypted-message-of-red-request>",
-          "sighex": "<ecdsa-signature-of-message>",
-          "spkhex": "<signers-EC-public-key>"
-        }
-      },
+      "fee": "seller-defined-admission-fee-separate-from-offer-price",
       "red-request": {
         "jsonrpc": "2.0",
         "method": "purchase",
-        "params": ["<quantity>", "<itemref>", "<quoted-unit-price>", "<shipto-or-null>", "<special-instructions>"],
-        "id": "<cookie>"
-      },
-      "red-request-object-v0.2": {
-        "jsonrpc": "2.0",
-        "method": "purchase",
         "params": {
-          "buyerOrderId": "<buyer-generated-idempotency-key>",
-          "offerId": "<stable-offer-id>",
+          "clientOrderRef": "<buyer-idempotency-reference>",
+          "offeringRef": "<selected-offering-reference>",
           "quantity": 1,
-          "quotedUnitPrice": {
-            "amount": "<decimal-integer-smallest-units>",
-            "asset": "<asset-identifier>",
-            "network": "<network-identifier>"
-          },
-          "fulfillment": {
-            "kind": "digital_result|carrier_shipment",
-            "destination": "<structured-destination-required-only-for-carrier-shipment>"
-          },
-          "specialInstructions": "<text-or-empty-string>"
-        },
-        "id": "<cookie>"
-      },
-      "http-response": { "status": "200 OK" },
-      "http-response-error": {
-        "status": "400 Bad Request",
-        "contenttype": "application/json",
-        "content": "{ <error-obj> }"
-      },
-      "red-async-result": {
-        "jsonrpc": "2.0",
-        "result": {
-          "orderId": "<seller-order-id>",
-          "buyerOrderId": "<echoed-buyer-order-id>",
-          "status": "payment_instructions_issued",
-          "payment": {
-            "mode": "escrow|x402_direct",
-            "amount": "<decimal-integer-smallest-units>",
-            "asset": "<asset-identifier>",
-            "network": "<network-identifier>",
-            "payee": "<payee-or-null>",
-            "resource": "<x402-resource-or-null>",
-            "escrower": "<escrower-reference-or-null>",
-            "escrowOrderId": "<escrow-order-id-or-null>",
-            "expiresAt": "<ISO-8601-or-null>"
-          },
-          "fulfillment": {
-            "kind": "digital_result|carrier_shipment",
-            "evidenceRequired": ["<evidence-type>"],
-            "completionCondition": "<machine-readable-condition>",
-            "failureAndRefund": {
-              "automaticRefund": "<boolean>",
-              "invalidBuyerInputAfterSettlement": "<policy-code>",
-              "deliveryFailureAfterSettlement": "<policy-code>",
-              "supportUrl": "<https-url-or-null>"
-            }
-          }
+          "agreedPrice": { "amount": "<decimal-string>", "asset": "<asset>", "network": "<network>" },
+          "input": "<offering-specific-input-or-null>",
+          "delivery": { "mode": "physical|digital|hybrid", "destination": null, "replyTo": null },
+          "specialInstructions": null
         },
         "id": "<cookie>"
       }
     }
-  ]
+  ],
+  "fulfillmentDescriptor": {
+    "version": "0.1",
+    "modes": ["physical", "digital", "hybrid"],
+    "proofTypes": ["carrier-tracking", "content-digest", "signed-receipt", "composite"],
+    "warning": "A content digest proves byte identity, not correctness, quality, buyer acceptance, or entitlement to release funds."
+  }
 }
