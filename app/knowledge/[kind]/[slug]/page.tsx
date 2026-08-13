@@ -19,6 +19,7 @@ import {
   getProcessExpansion,
   knowledgeSupplierPath,
 } from '@/lib/knowledge-process-profiles'
+import { getIntelligenceBriefSlugsForKnowledgeObject } from '@/lib/intelligence-knowledge-links'
 
 type PageProps = { params: Promise<{ kind: string; slug: string }> }
 
@@ -78,7 +79,11 @@ export default async function KnowledgeArticlePage({ params }: PageProps) {
   const sourceNumbers = new Map(sources.map((source, index) => [source.id, index + 1]))
   const claims = new Map(article.claims.map((claim) => [claim.id, claim]))
   const relatedArticles = article.relatedArticleIds.map(getKnowledgeArticle).filter((item) => item !== undefined)
-  const relatedBriefs = article.intelligenceSlugs.map(getBriefBySlug).filter((brief) => brief !== undefined)
+  const relatedBriefSlugs = [...new Set([
+    ...article.intelligenceSlugs,
+    ...getIntelligenceBriefSlugsForKnowledgeObject(article.id),
+  ])]
+  const relatedBriefs = relatedBriefSlugs.map(getBriefBySlug).filter((brief) => brief !== undefined)
   const processExpansion = getProcessExpansion(article.id)
   const suppliers = processExpansion?.supplierIds.map(getKnowledgeSupplier).filter((supplier) => supplier !== undefined) ?? []
   const jsonLd = {
