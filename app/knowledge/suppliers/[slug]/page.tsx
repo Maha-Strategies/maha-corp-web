@@ -2,13 +2,14 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 
-import { SITE_URL } from '@/lib/briefs-data'
+import { SITE_URL, getBriefBySlug } from '@/lib/briefs-data'
 import { getKnowledgeArticle, getKnowledgeSource, knowledgeArticlePath } from '@/lib/knowledge-data'
 import {
   KNOWLEDGE_SUPPLIERS,
   getKnowledgeSupplierBySlug,
   knowledgeSupplierPath,
 } from '@/lib/knowledge-process-profiles'
+import { getIntelligenceBriefSlugsForKnowledgeObject } from '@/lib/intelligence-knowledge-links'
 
 type PageProps = { params: Promise<{ slug: string }> }
 
@@ -31,6 +32,7 @@ export default async function SupplierProfilePage({ params }: PageProps) {
   if (!supplier) notFound()
   const processes = supplier.processIds.map(getKnowledgeArticle).filter((article) => article !== undefined)
   const sources = supplier.sourceIds.map(getKnowledgeSource).filter((source) => source !== undefined)
+  const relatedBriefs = getIntelligenceBriefSlugsForKnowledgeObject(supplier.id).map(getBriefBySlug).filter((brief) => brief !== undefined)
   const jsonLd = {
     '@context': 'https://schema.org', '@type': 'ProfilePage',
     mainEntity: { '@type': 'Organization', name: supplier.name, description: supplier.summary },
@@ -79,6 +81,23 @@ export default async function SupplierProfilePage({ params }: PageProps) {
             ))}
           </div>
         </section>
+
+        {relatedBriefs.length > 0 && (
+          <section className="mt-14 border-t border-zinc-800 pt-8">
+            <p className="font-mono text-[10px] uppercase tracking-widest text-indigo-300">Applied in Intelligence</p>
+            <h2 className="mt-3 text-2xl font-semibold text-white">Briefs using this capability context</h2>
+            <p className="mt-3 max-w-3xl text-sm leading-6 text-zinc-500">These links identify where the supplier&rsquo;s public capability profile supports an analytical brief. They do not imply endorsement, customer status, or process-of-record qualification.</p>
+            <div className="mt-6 grid gap-4 sm:grid-cols-2">
+              {relatedBriefs.map((brief) => (
+                <Link key={brief.slug} href={`/intelligence/briefs/${brief.slug}`} className="border border-zinc-800 bg-indigo-950/10 p-5 hover:border-indigo-500/50">
+                  <p className="font-mono text-[9px] uppercase tracking-widest text-indigo-300">Intelligence brief</p>
+                  <h3 className="mt-3 font-semibold text-white">{brief.title}</h3>
+                  <p className="mt-3 text-sm leading-6 text-zinc-500">{brief.description}</p>
+                </Link>
+              ))}
+            </div>
+          </section>
+        )}
 
         <section className="mt-14 border-t border-zinc-800 pt-8">
           <h2 className="text-2xl font-semibold text-white">Sources</h2>
