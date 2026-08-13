@@ -9,6 +9,7 @@ import {
 } from '@/lib/knowledge-data'
 import { SITE_URL } from '@/lib/briefs-data'
 import { SEMICONDUCTOR_PROCESS_MAP_PATH, getProcessMapStepCount } from '@/lib/semiconductor-process-map'
+import { KNOWLEDGE_SUPPLIERS } from '@/lib/knowledge-process-profiles'
 
 export const metadata: Metadata = {
   title: 'Knowledge | Maha Strategies',
@@ -59,9 +60,13 @@ export default function KnowledgePage() {
               <Link href={SEMICONDUCTOR_PROCESS_MAP_PATH} className="mt-8 inline-block border border-cyan-500 px-5 py-3 font-mono text-[10px] uppercase tracking-widest text-cyan-300 transition-colors hover:bg-cyan-400 hover:text-black">
                 Explore the complete {getProcessMapStepCount()}-node semiconductor process map →
               </Link>
+              <Link href="/knowledge/suppliers" className="ml-0 mt-3 inline-block border border-zinc-700 px-5 py-3 font-mono text-[10px] uppercase tracking-widest text-zinc-300 transition-colors hover:border-cyan-500 hover:text-cyan-300 sm:ml-3">
+                Browse {KNOWLEDGE_SUPPLIERS.length} supplier profiles →
+              </Link>
             </div>
             <div className="border border-zinc-800 bg-zinc-950 p-5 font-mono text-xs leading-6 text-zinc-500">
               <p className="text-zinc-200">{KNOWLEDGE_ARTICLES.length} published nodes</p>
+              <p>{KNOWLEDGE_SUPPLIERS.length} evidence-bounded supplier profiles</p>
               <p>{SEMICONDUCTOR_STAGES.length} lifecycle stages</p>
               <p>Claim-level evidence status</p>
               <p>Bidirectional Intelligence links</p>

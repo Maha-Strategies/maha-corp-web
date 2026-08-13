@@ -14,6 +14,11 @@ import {
   type KnowledgeEvidenceStatus,
 } from '@/lib/knowledge-data'
 import { SEMICONDUCTOR_PROCESS_MAP_PATH } from '@/lib/semiconductor-process-map'
+import {
+  getKnowledgeSupplier,
+  getProcessExpansion,
+  knowledgeSupplierPath,
+} from '@/lib/knowledge-process-profiles'
 
 type PageProps = { params: Promise<{ kind: string; slug: string }> }
 
@@ -74,6 +79,8 @@ export default async function KnowledgeArticlePage({ params }: PageProps) {
   const claims = new Map(article.claims.map((claim) => [claim.id, claim]))
   const relatedArticles = article.relatedArticleIds.map(getKnowledgeArticle).filter((item) => item !== undefined)
   const relatedBriefs = article.intelligenceSlugs.map(getBriefBySlug).filter((brief) => brief !== undefined)
+  const processExpansion = getProcessExpansion(article.id)
+  const suppliers = processExpansion?.supplierIds.map(getKnowledgeSupplier).filter((supplier) => supplier !== undefined) ?? []
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'TechArticle',
@@ -149,6 +156,52 @@ export default async function KnowledgeArticlePage({ params }: PageProps) {
               </ol>
             </section>
 
+            {processExpansion && (
+              <section className="mt-14 border-t border-zinc-800 pt-10">
+                <p className="font-mono text-[10px] uppercase tracking-widest text-cyan-300">Process control profile</p>
+                <h2 className="mt-3 text-2xl font-semibold text-white">Materials, equipment, defects, and metrology</h2>
+                <p className="mt-3 max-w-3xl text-sm leading-6 text-zinc-500">These records connect a physical input and tool module to its failure mechanism, detection method, and release decision. They complement the broader inventories in the control surface.</p>
+                <div className="mt-7 grid gap-4 md:grid-cols-2">
+                  {processExpansion.materialFocus.map((item) => (
+                    <div key={item.name} className="border border-zinc-800 bg-zinc-950/60 p-5">
+                      <p className="font-mono text-[9px] uppercase tracking-widest text-emerald-300">Material focus</p>
+                      <h3 className="mt-3 font-semibold text-white">{item.name}</h3>
+                      <p className="mt-3 text-sm leading-6 text-zinc-400">{item.role}</p>
+                      <p className="mt-4 border-l border-zinc-700 pl-3 text-xs leading-5 text-zinc-500"><span className="text-zinc-300">Control:</span> {item.control}</p>
+                      <p className="mt-3 border-l border-amber-700/60 pl-3 text-xs leading-5 text-zinc-500"><span className="text-amber-300">Failure link:</span> {item.failureLink}</p>
+                    </div>
+                  ))}
+                  {processExpansion.equipmentFocus.map((item) => (
+                    <div key={item.name} className="border border-zinc-800 bg-zinc-950/60 p-5">
+                      <p className="font-mono text-[9px] uppercase tracking-widest text-cyan-300">Equipment module</p>
+                      <h3 className="mt-3 font-semibold text-white">{item.name}</h3>
+                      <p className="mt-3 text-sm leading-6 text-zinc-400">{item.role}</p>
+                      <p className="mt-4 border-l border-zinc-700 pl-3 text-xs leading-5 text-zinc-500"><span className="text-zinc-300">Control variables:</span> {item.controlVariables}</p>
+                      <p className="mt-3 border-l border-amber-700/60 pl-3 text-xs leading-5 text-zinc-500"><span className="text-amber-300">Integration risk:</span> {item.integrationRisk}</p>
+                    </div>
+                  ))}
+                  {processExpansion.defectFocus.map((item) => (
+                    <div key={item.name} className="border border-zinc-800 bg-zinc-950/60 p-5">
+                      <p className="font-mono text-[9px] uppercase tracking-widest text-rose-300">Defect mechanism</p>
+                      <h3 className="mt-3 font-semibold text-white">{item.name}</h3>
+                      <p className="mt-3 text-sm leading-6 text-zinc-400">{item.mechanism}</p>
+                      <p className="mt-4 border-l border-zinc-700 pl-3 text-xs leading-5 text-zinc-500"><span className="text-zinc-300">Detection:</span> {item.detection}</p>
+                      <p className="mt-3 border-l border-amber-700/60 pl-3 text-xs leading-5 text-zinc-500"><span className="text-amber-300">Downstream effect:</span> {item.downstreamEffect}</p>
+                    </div>
+                  ))}
+                  {processExpansion.metrologyFocus.map((item) => (
+                    <div key={item.name} className="border border-zinc-800 bg-zinc-950/60 p-5">
+                      <p className="font-mono text-[9px] uppercase tracking-widest text-violet-300">Metrology gate</p>
+                      <h3 className="mt-3 font-semibold text-white">{item.name}</h3>
+                      <p className="mt-3 text-sm leading-6 text-zinc-400">{item.measurement}</p>
+                      <p className="mt-4 border-l border-zinc-700 pl-3 text-xs leading-5 text-zinc-500"><span className="text-zinc-300">Release decision:</span> {item.releaseDecision}</p>
+                      <p className="mt-3 border-l border-amber-700/60 pl-3 text-xs leading-5 text-zinc-500"><span className="text-amber-300">Limitation:</span> {item.limitation}</p>
+                    </div>
+                  ))}
+                </div>
+              </section>
+            )}
+
             <div className="mt-8 space-y-12 font-serif text-lg leading-8">
               {article.sections.map((section) => (
                 <section key={section.heading}>
@@ -192,6 +245,29 @@ export default async function KnowledgeArticlePage({ params }: PageProps) {
                 ))}
               </ol>
             </section>
+
+            {suppliers.length > 0 && (
+              <section className="mt-14 border-t border-zinc-800 pt-8">
+                <div className="flex flex-wrap items-end justify-between gap-4">
+                  <div>
+                    <p className="font-mono text-[10px] uppercase tracking-widest text-cyan-300">Public capability landscape</p>
+                    <h2 className="mt-3 text-2xl font-semibold text-white">Supplier profiles</h2>
+                  </div>
+                  <Link href="/knowledge/suppliers" className="font-mono text-[10px] uppercase tracking-widest text-zinc-500 hover:text-cyan-300">Browse all suppliers →</Link>
+                </div>
+                <p className="mt-3 max-w-3xl text-sm leading-6 text-zinc-500">Named companies are research leads based on public evidence. Inclusion does not establish customer qualification, process-of-record status, available capacity, or supplier ranking.</p>
+                <div className="mt-6 grid gap-4 sm:grid-cols-2">
+                  {suppliers.map((supplier) => (
+                    <Link key={supplier.id} href={knowledgeSupplierPath(supplier)} className="border border-zinc-800 bg-zinc-950/60 p-5 hover:border-cyan-500/50">
+                      <p className="font-mono text-[9px] uppercase tracking-widest text-cyan-300">{supplier.supplierType}</p>
+                      <h3 className="mt-3 font-semibold text-white">{supplier.name}</h3>
+                      <p className="mt-3 text-sm leading-6 text-zinc-500">{supplier.summary}</p>
+                      <p className="mt-4 font-mono text-[9px] uppercase tracking-widest text-zinc-600">Evidence profile →</p>
+                    </Link>
+                  ))}
+                </div>
+              </section>
+            )}
           </article>
 
           <aside className="space-y-8">

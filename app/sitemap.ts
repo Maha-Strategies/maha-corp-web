@@ -5,6 +5,7 @@ import { unfinishedSpeciesSections } from '@/lib/unfinished-species'
 import { openBookEditions } from '@/lib/open-book-editions'
 import { KNOWLEDGE_ARTICLES, knowledgeArticlePath } from '@/lib/knowledge-data'
 import { SEMICONDUCTOR_PROCESS_MAP_DATE, SEMICONDUCTOR_PROCESS_MAP_PATH } from '@/lib/semiconductor-process-map'
+import { KNOWLEDGE_SUPPLIERS, knowledgeSupplierPath } from '@/lib/knowledge-process-profiles'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = MAHA_SITE_URL
@@ -22,6 +23,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${baseUrl}/doctrine` },
     { url: `${baseUrl}/research` },
     { url: `${baseUrl}/knowledge`, lastModified: new Date('2026-08-13') },
+    { url: `${baseUrl}/knowledge/suppliers`, lastModified: new Date('2026-08-13') },
     { url: `${baseUrl}${SEMICONDUCTOR_PROCESS_MAP_PATH}`, lastModified: new Date(SEMICONDUCTOR_PROCESS_MAP_DATE) },
     { url: `${baseUrl}/start` },
     { url: `${baseUrl}/policy` },
@@ -339,5 +341,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     url: `${baseUrl}${knowledgeArticlePath(article)}`,
     lastModified: new Date(article.dateModified),
   }))
-  return [...staticPages, ...knowledgePages, ...unfinishedSpeciesReader, ...otherOpenBookReaders, ...published.map((publication) => ({ url: `${baseUrl}/insights/${publication.slug}`, lastModified: new Date(publication.updated_at) }))]
+
+  const knowledgeSupplierPages = KNOWLEDGE_SUPPLIERS.map((supplier) => ({
+    url: `${baseUrl}${knowledgeSupplierPath(supplier)}`,
+    lastModified: new Date('2026-08-13'),
+  }))
+  return [...staticPages, ...knowledgePages, ...knowledgeSupplierPages, ...unfinishedSpeciesReader, ...otherOpenBookReaders, ...published.map((publication) => ({ url: `${baseUrl}/insights/${publication.slug}`, lastModified: new Date(publication.updated_at) }))]
 }
