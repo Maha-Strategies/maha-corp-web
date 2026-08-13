@@ -52,12 +52,12 @@
     "test": "node --test --experimental-strip-types test/*.test.ts"
   },
   "dependencies": {
-    "@anthropic-ai/sdk": "^0.115.0",
+    "@anthropic-ai/sdk": "^0.116.0",
     "@scalar/api-reference-react": "^0.9.60",
     "@sentry/nextjs": "^10.69.0",
     "@stripe/stripe-js": "^9.12.1",
-    "@supabase/supabase-js": "^2.112.0",
-    "@upstash/redis": "^1.38.1",
+    "@supabase/supabase-js": "^2.112.2",
+    "@upstash/redis": "^1.38.2",
     "@x402/core": "^2.21.0",
     "@x402/extensions": "^2.21.0",
     "adilosjs": "^1.0.0",
