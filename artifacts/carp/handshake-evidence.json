@@ -1,0 +1,28 @@
+{
+  "schemaVersion": "1.0.0",
+  "verifiedAt": "2026-08-13T07:06:05.195Z",
+  "outcome": "blocked_by_peer_configuration",
+  "maha": {
+    "didUrl": "https://www.mahastrategies.com/.well-known/carp/did.json",
+    "sadUrl": "https://www.mahastrategies.com/.well-known/carp/sad.json"
+  },
+  "peer": {
+    "did": "did:key:zQ3shX2W5Nys6KxovY5mVQpsSjS9n8p5UeCFP8kMHWqxi1v96",
+    "carpUrl": "http://70.66.243.75:8000",
+    "publicKey": "028edf3b1d5900c50e1d4ddf3db5edabd4850bc9889674a695208959aa9f8e0fb9"
+  },
+  "checks": {
+    "publishedDidMatchesSad": true,
+    "sadSignatureVerified": true,
+    "elCabezonChallengeAnswered": true,
+    "elCabezonAcknowledgedMahaKey": true,
+    "encryptedAboutAccepted": false,
+    "asynchronousResultPending": false
+  },
+  "requestId": "maha-handshake-1786604764198",
+  "blocker": "El-Cabezon encrypted about request returned HTTP 502: async result delivery failed: caller has no CARP url on file\n",
+  "caveats": [
+    "This is partial handshake evidence, not proof of directory inclusion or end-to-end delivery.",
+    "No CARP rent, admission fee, escrow payment, or x402 payment was made by this handshake."
+  ]
+}
