@@ -138,6 +138,46 @@ Maha with WSO2's native Prompt Compressor. Those are deployment-stage gates.
 
 ## Bounded WSO2 evaluation
 
+### 2026-08-14 single-workload integration result
+
+The first live integration check ran WSO2 AI Gateway 1.1.0 locally with one
+Anthropic provider and three application-facing proxies. All three paths used
+Claude Haiku 4.5, temperature 0, a 220-token output ceiling, and the same
+synthetic three-document decision task. This is integration evidence, not a
+benchmark corpus.
+
+| Path | Provider input tokens | Input reduction | End-to-end latency | Required facts | Cited sources | Estimated provider cost |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| WSO2 baseline | 545 | — | 1,971 ms | 3/3 | 3/3 | $0.001375 |
+| WSO2 Prompt Compressor | 327 | 40.0% | 2,173 ms | 3/3 | 3/3 | $0.001177 |
+| WSO2 + Maha Context Compiler | 314 | 42.4% | 2,463 ms | 3/3 | 3/3 | $0.001174 |
+
+Maha's compiler evidence separately reported 374 model-neutral estimated input
+tokens, 203 compiled tokens, 45.7% estimated reduction, 100% source coverage,
+and five included passages. The upstream model cited source-and-passage IDs on
+the Maha path; the other two paths cited document-level source IDs.
+
+At Anthropic's published Haiku 4.5 standard rates of $1 per million input
+tokens and $5 per million output tokens, the controlled three-path comparison
+cost an estimated $0.003726. Including one exploratory baseline request used to
+tighten the output format, actual authorized evaluation usage was an estimated
+$0.005347. The failed pre-deployment 404 reached no provider and incurred no
+model charge.
+
+The request-phase interceptor was observed returning HTTP 200 before WSO2
+forwarded exactly one rewritten request upstream. The gateway-injected
+credential was not supplied by the caller, and Maha removed it from the
+forwarded request. The checked-in sanitized result is
+`content/integrations/wso2-context-compiler-three-path-result.json`.
+
+This result does not support a general claim that Maha outperforms WSO2's
+native compressor. It shows a small input-token advantage on one labelled
+workload while adding passage-level provenance, hashes, an explicit source
+coverage measurement, and a zero-retention declaration. Latency is one
+observation per path, not a percentile measurement.
+
+### Larger evaluation gate
+
 Run the same 20 labelled workloads through three paths:
 
 1. unmodified WSO2 request;
