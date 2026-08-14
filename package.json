@@ -44,6 +44,7 @@
     "generate:context-playground": "node --experimental-strip-types scripts/generate-context-playground-workload.ts",
     "benchmark:context-retention": "node --experimental-strip-types scripts/run-context-retention-benchmark.ts",
     "benchmark:context-retention:publish": "node --experimental-strip-types scripts/run-context-retention-benchmark.ts --write",
+    "evaluate:wso2-context-interceptor": "node --experimental-strip-types scripts/run-wso2-context-interceptor-evaluation.ts",
     "verify:x402-sepolia": "node --experimental-strip-types scripts/verify-x402-sepolia.ts",
     "build:sdk": "npm --prefix packages/sdk run build",
     "pack:sdk": "npm --prefix packages/sdk run pack:dry-run",

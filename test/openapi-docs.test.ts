@@ -96,6 +96,11 @@ const PRIVATE_ROUTES = new Set([
   '/api/navigator/assessments',
   '/api/internal/ops-alerts',
   '/api/integrations/base44/openapi',
+  // WSO2 request-phase compatibility prototype. It implements WSO2's own
+  // interceptor contract, is protected by a dedicated integration credential,
+  // and is not a general Maha REST operation. Promote only after the bounded
+  // WSO2 deployment test and production authentication review pass.
+  '/api/integrations/wso2/context-compiler/handle-request',
   '/api/cron/inbound-digest',
   '/api/cron/job-reclaim',
   '/api/cron/market-scout',
