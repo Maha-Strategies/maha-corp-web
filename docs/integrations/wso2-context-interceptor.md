@@ -190,6 +190,31 @@ generalize beyond the labelled corpus. A useful result must show what Maha adds
 beyond token reduction: explicit source provenance, a fixed budget, stable
 hashes, and a measurable retention boundary.
 
+The frozen corpus for this gate is
+`content/integrations/wso2-context-compiler-corpus.json`. It contains exactly
+20 synthetic workloads spanning easy, medium, and hard cases and 20 document
+structures, including timelines, email threads, tables, configuration files,
+multilingual text, noisy OCR, version conflicts, distractor-heavy prose, and
+prompt-injection-like text. Every required fact is labelled with an exact
+evidence span and expected source citation before any model path is run. The corpus
+contains no customer data, personal data, credentials, or production secrets.
+It carries a SHA-256 label-freeze digest over every request, source document,
+required fact, expected citation, and prohibited assertion. The preflight
+recomputes that digest; changing an input or label after seeing model output
+fails validation instead of silently changing the scoring target.
+
+Run the zero-cost deterministic preflight before the three-path evaluation:
+
+```bash
+npm run validate:wso2-evaluation-corpus
+```
+
+This preflight verifies corpus shape, label integrity, expected citations, and
+the frozen-label digest. It does not execute any comparison path, score a model,
+or establish a competitive result. The provider-backed comparison must use the
+same frozen requests and labels, report
+every workload rather than only aggregate winners, and preserve failures.
+
 ## Non-fit and failure boundaries
 
 - This is extractive ranking and deduplication, not claim verification.
