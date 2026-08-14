@@ -95,7 +95,7 @@ const rewritten = JSON.parse(Buffer.from(response.body, 'base64').toString('utf8
 const rendered = JSON.stringify(rewritten)
 assert.equal(rendered.includes(WSO2_CONTEXT_EXTENSION), false)
 assert.equal(rendered.includes(WSO2_CONTEXT_PLACEHOLDER), false)
-for (const fact of workload.requiredFacts) assert.ok(rendered.includes(fact.text), `Missing required fact: ${fact.id}`)
+for (const fact of workload.requiredFacts) assert.ok(rendered.includes(fact), `Missing required fact: ${fact}`)
 
 console.log(JSON.stringify({
   status: 'pass',
