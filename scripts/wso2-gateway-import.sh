@@ -13,7 +13,7 @@ set -euo pipefail
 
 BASE="${WSO2_MANAGEMENT_API:-http://localhost:9090/api/management/v0.9}"
 AUTH="${WSO2_MANAGEMENT_AUTH:-admin:admin}"
-: "${MAHA_INTERCEPTOR_ENDPOINT:?Set MAHA_INTERCEPTOR_ENDPOINT to the reachable interceptor URL}"
+: "${MAHA_INTERCEPTOR_BASE:?Set MAHA_INTERCEPTOR_BASE to the interceptor BASE url (the policy appends /handle-request itself)}"
 : "${WSO2_CONTEXT_INTERCEPTOR_SECRET:?Set WSO2_CONTEXT_INTERCEPTOR_SECRET (never commit it)}"
 
 echo "provider: anthropic-eval"
@@ -35,7 +35,11 @@ for artifact in content/integrations/wso2-apis/*.json; do
       for (const entry of policy.paths ?? []) {
         const p = entry.params ?? {}
         if (p.endpointFromEnv) { p.endpoint = process.env[p.endpointFromEnv]; delete p.endpointFromEnv }
-        if (p.credentialFromEnv) { p.credential = process.env[p.credentialFromEnv]; delete p.credentialFromEnv }
+        // The gateway-only token, injected by set-headers. Substituted here so
+        // the secret never lands in a committed artifact.
+        for (const header of p.request?.headers ?? []) {
+          if (header.valueFromEnv) { header.value = process.env[header.valueFromEnv]; delete header.valueFromEnv }
+        }
       }
     }
     console.log(JSON.stringify(doc))

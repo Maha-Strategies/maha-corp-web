@@ -13,19 +13,38 @@
     "version": "v1",
     "policies": [
       {
-        "name": "interceptor-service",
-        "version": "v1.0",
+        "name": "set-headers",
+        "version": "v1.0.1",
         "paths": [
           {
             "path": "/*",
             "params": {
-              "requestPhase": true,
-              "includeRequestBody": true,
-              "includeRequestHeaders": true,
-              "endpointFromEnv": "MAHA_INTERCEPTOR_ENDPOINT",
-              "credentialHeader": "x-maha-wso2-interceptor-token",
-              "credentialFromEnv": "WSO2_CONTEXT_INTERCEPTOR_SECRET",
-              "failClosed": true
+              "request": {
+                "headers": [
+                  {
+                    "name": "x-maha-wso2-interceptor-token",
+                    "valueFromEnv": "WSO2_CONTEXT_INTERCEPTOR_SECRET"
+                  }
+                ]
+              }
+            }
+          }
+        ]
+      },
+      {
+        "name": "interceptor-service",
+        "version": "v1.0.0",
+        "paths": [
+          {
+            "path": "/*",
+            "params": {
+              "endpointFromEnv": "MAHA_INTERCEPTOR_BASE",
+              "request": {
+                "includeRequestHeaders": true,
+                "includeRequestBody": true,
+                "passthroughOnError": false
+              },
+              "timeoutMillis": 20000
             }
           }
         ]

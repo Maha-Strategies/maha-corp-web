@@ -427,7 +427,13 @@ async function preflight(config: GatewayConfig): Promise<{ ok: boolean; checks: 
 
   // 4. The interceptor must refuse an unauthenticated call. If it does not,
   // the credential is not actually enforced and the Maha path is untrusted.
-  const endpoint = process.env.MAHA_INTERCEPTOR_ENDPOINT
+  const configured = process.env.MAHA_INTERCEPTOR_ENDPOINT
+  // The gateway reaches the interceptor at host.docker.internal, which is a
+  // Docker-internal name that does not resolve on the host running preflight.
+  // Probing the configured value verbatim reports "fetch failed" for a
+  // perfectly healthy endpoint -- a false alarm on the check whose whole job is
+  // to prove the credential is enforced.
+  const endpoint = configured?.replace('host.docker.internal', 'localhost')
   if (!endpoint) {
     add('interceptor.unauthenticatedRefusal', false, 'MAHA_INTERCEPTOR_ENDPOINT is not set')
   } else {
@@ -437,7 +443,26 @@ async function preflight(config: GatewayConfig): Promise<{ ok: boolean; checks: 
       body: JSON.stringify({ requestHeaders: {}, requestBody: '', invocationContext: {} }),
     })
     const refused = !('error' in refusal) && (refusal.status === 401 || refusal.status === 403)
-    add('interceptor.unauthenticatedRefusal', refused, 'error' in refusal ? refusal.error : `HTTP ${refusal.status} (401/403 expected)`)
+    // The route answers 200 carrying directRespond:true + responseCode:401 --
+    // that IS the refusal, expressed in the interceptor contract rather than in
+    // the transport. Checked on the body, not the status.
+    let refusedInBody = false
+    if (!('error' in refusal)) {
+      try {
+        const response = await fetch(endpoint, {
+          method: 'POST',
+          headers: { 'content-type': 'application/json' },
+          body: JSON.stringify({ requestHeaders: {}, requestBody: '', invocationContext: {} }),
+          signal: AbortSignal.timeout(4000),
+        })
+        const payload = await response.json() as { directRespond?: boolean; responseCode?: number }
+        refusedInBody = payload.directRespond === true && payload.responseCode === 401
+      } catch { refusedInBody = false }
+    }
+    const refused = refusedInBody || (!('error' in refusal) && (refusal.status === 401 || refusal.status === 403))
+    add('interceptor.unauthenticatedRefusal', refused, 'error' in refusal
+      ? refusal.error
+      : `HTTP ${refusal.status}, directRespond+401 in body: ${refusedInBody}`)
   }
 
   return { ok: checks.every((check) => check.pass === true), checks }
