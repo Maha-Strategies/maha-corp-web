@@ -1,0 +1,231 @@
+{
+  "schemaVersion": "maha-context-proof-fixture-v1",
+  "proofContractVersion": 3,
+  "fixtureId": "duplicate-retained-set",
+  "description": "Sanitized exact-duplicate workload proving that the retained set contains unique passage hashes.",
+  "privacyClassification": "sanitized_synthetic_or_published_source",
+  "normalizationBasis": "normalized_source_v1",
+  "offsetEncoding": "utf8",
+  "offsetRange": "half_open",
+  "hashEncoding": "sha256:<64_lowercase_hex>",
+  "tokenAccounting": {
+    "tokenEstimatorVersion": "maha_model_neutral_v1",
+    "budgetMode": "guaranteed",
+    "declaredTokenBudget": 1024,
+    "compilerSelectionBudget": 737,
+    "retainedPassageReportedTokens": 53,
+    "compiledContextReportedTokens": 101,
+    "reportedTokenArithmeticValid": true,
+    "tokenEstimatorVerified": false,
+    "providerTokenBudgetGuaranteed": false
+  },
+  "proofDecision": {
+    "status": "success",
+    "shouldAttemptProof": true,
+    "retainedPassageCount": 4,
+    "maximumSupportedRetainedPassages": 128,
+    "chargePermitted": true
+  },
+  "compilerCommitments": {
+    "inputHash": "sha256:3f2b2392d1886b8983c76f154593400069305e17fc5aff2d776b1b801619a627",
+    "outputHash": "sha256:85f700e3054eb2f74626c626161501548b02e69d799e48a46feedef40dc79c9f",
+    "originalEstimatedTokens": 70,
+    "compiledEstimatedTokens": 101,
+    "sourceCoveragePercent": 100,
+    "duplicatePassagesRemoved": 1
+  },
+  "claimBoundaries": {
+    "provesNormalizedSourceHashBinding": true,
+    "provesRetainedPassageByteRangeBinding": true,
+    "provesRetainedSetHashUniqueness": true,
+    "provesSourceCoverageArithmetic": true,
+    "provesReportedTokenArithmetic": true,
+    "provesCandidateSetCompleteness": false,
+    "provesRankingCorrectness": false,
+    "provesTokenEstimatorCorrectness": false,
+    "provesProviderTokenizerCompatibility": false,
+    "provesSemanticCompleteness": false
+  },
+  "privateWitness": {
+    "request": {
+      "task": "Retain the release condition, rollback trigger, and audit evidence without duplicate passages.",
+      "tokenBudget": 1024,
+      "documents": [
+        {
+          "id": "release-plan",
+          "title": "Release Plan",
+          "text": "A release requires signed credential-rotation evidence and a passing canary in every production region.\n\nRollback begins if API errors exceed two percent for five minutes.\n\nThe audit record stores metadata and hashes, never source payloads."
+        },
+        {
+          "id": "review-notes",
+          "title": "Review Notes",
+          "text": "A release requires signed credential-rotation evidence and a passing canary in every production region.\n\nThe reviewer approved the bounded deployment after checking the evidence digest."
+        }
+      ],
+      "provenance": "compact",
+      "scoring": "bm25",
+      "budgetMode": "guaranteed"
+    },
+    "sources": [
+      {
+        "sourceId": "release-plan",
+        "title": "Release Plan",
+        "normalizedBytesLen": 240,
+        "sourceHash": "sha256:c9229b28f39515406a7d8cfeb7ff1a88b2c8b0304ec4f502e4a8e009505657a3",
+        "normalizedText": "A release requires signed credential-rotation evidence and a passing canary in every production region.\n\nRollback begins if API errors exceed two percent for five minutes.\n\nThe audit record stores metadata and hashes, never source payloads."
+      },
+      {
+        "sourceId": "review-notes",
+        "title": "Review Notes",
+        "normalizedBytesLen": 185,
+        "sourceHash": "sha256:6f0af8de5a618c99601f5a4177774e69b5b7b05bf3c56b42dbb040790cb0ad78",
+        "normalizedText": "A release requires signed credential-rotation evidence and a passing canary in every production region.\n\nThe reviewer approved the bounded deployment after checking the evidence digest."
+      }
+    ],
+    "candidatePassages": [
+      {
+        "passageId": "release-plan:1",
+        "sourceId": "release-plan",
+        "sourceStartByte": 0,
+        "sourceEndByte": 103,
+        "text": "A release requires signed credential-rotation evidence and a passing canary in every production region.",
+        "passageHash": "sha256:917bf4e33471dfa9c94ce3a51440fe6ab0baa9134182274f27deb95f770886c4",
+        "reportedEstimatedTokens": 17,
+        "dedupStatus": "unique",
+        "duplicateOf": null,
+        "retained": true,
+        "dropReason": null
+      },
+      {
+        "passageId": "release-plan:2",
+        "sourceId": "release-plan",
+        "sourceStartByte": 105,
+        "sourceEndByte": 171,
+        "text": "Rollback begins if API errors exceed two percent for five minutes.",
+        "passageHash": "sha256:a63572792a40f152a6187c6b760840540382522864188753c3dcfb0b25b919ea",
+        "reportedEstimatedTokens": 12,
+        "dedupStatus": "unique",
+        "duplicateOf": null,
+        "retained": true,
+        "dropReason": null
+      },
+      {
+        "passageId": "release-plan:3",
+        "sourceId": "release-plan",
+        "sourceStartByte": 173,
+        "sourceEndByte": 240,
+        "text": "The audit record stores metadata and hashes, never source payloads.",
+        "passageHash": "sha256:3e3a7b7fd40dfc205500c0835ea126017ac341ecdf00a0f23f43d1a6e5b15775",
+        "reportedEstimatedTokens": 12,
+        "dedupStatus": "unique",
+        "duplicateOf": null,
+        "retained": true,
+        "dropReason": null
+      },
+      {
+        "passageId": "review-notes:1",
+        "sourceId": "review-notes",
+        "sourceStartByte": 0,
+        "sourceEndByte": 103,
+        "text": "A release requires signed credential-rotation evidence and a passing canary in every production region.",
+        "passageHash": "sha256:917bf4e33471dfa9c94ce3a51440fe6ab0baa9134182274f27deb95f770886c4",
+        "reportedEstimatedTokens": 17,
+        "dedupStatus": "unique",
+        "duplicateOf": null,
+        "retained": true,
+        "dropReason": null
+      },
+      {
+        "passageId": "review-notes:2",
+        "sourceId": "review-notes",
+        "sourceStartByte": 105,
+        "sourceEndByte": 185,
+        "text": "The reviewer approved the bounded deployment after checking the evidence digest.",
+        "passageHash": "sha256:7631c0e53636e8d3416b920d1c83af096d3d0ae08965cd907731f6b4b075bf1e",
+        "reportedEstimatedTokens": 12,
+        "dedupStatus": "unique",
+        "duplicateOf": null,
+        "retained": true,
+        "dropReason": null
+      }
+    ],
+    "retainedPassageIdsInOutputOrder": [
+      "release-plan:3",
+      "release-plan:2",
+      "release-plan:1",
+      "review-notes:2",
+      "review-notes:1"
+    ],
+    "compiledContext": "# Context Pack\n\nTask: Retain the release condition, rollback trigger, and audit evidence without duplicate passages.\n\n\n\n[release-plan:3] The audit record stores metadata and hashes, never source payloads.\n\n[release-plan:2] Rollback begins if API errors exceed two percent for five minutes.\n\n[release-plan:1] A release requires signed credential-rotation evidence and a passing canary in every production region.\n\n[review-notes:2] The reviewer approved the bounded deployment after checking the evidence digest."
+  },
+  "expectedPublicValues": {
+    "proofContractVersion": 3,
+    "status": "success",
+    "sources": [
+      {
+        "sourceId": "release-plan",
+        "sourceHash": "sha256:c9229b28f39515406a7d8cfeb7ff1a88b2c8b0304ec4f502e4a8e009505657a3"
+      },
+      {
+        "sourceId": "review-notes",
+        "sourceHash": "sha256:6f0af8de5a618c99601f5a4177774e69b5b7b05bf3c56b42dbb040790cb0ad78"
+      }
+    ],
+    "retainedPassages": [
+      {
+        "passageId": "release-plan:3",
+        "sourceId": "release-plan",
+        "sourceStartByte": 173,
+        "sourceEndByte": 240,
+        "passageHash": "sha256:3e3a7b7fd40dfc205500c0835ea126017ac341ecdf00a0f23f43d1a6e5b15775"
+      },
+      {
+        "passageId": "release-plan:2",
+        "sourceId": "release-plan",
+        "sourceStartByte": 105,
+        "sourceEndByte": 171,
+        "passageHash": "sha256:a63572792a40f152a6187c6b760840540382522864188753c3dcfb0b25b919ea"
+      },
+      {
+        "passageId": "release-plan:1",
+        "sourceId": "release-plan",
+        "sourceStartByte": 0,
+        "sourceEndByte": 103,
+        "passageHash": "sha256:917bf4e33471dfa9c94ce3a51440fe6ab0baa9134182274f27deb95f770886c4"
+      },
+      {
+        "passageId": "review-notes:2",
+        "sourceId": "review-notes",
+        "sourceStartByte": 105,
+        "sourceEndByte": 185,
+        "passageHash": "sha256:7631c0e53636e8d3416b920d1c83af096d3d0ae08965cd907731f6b4b075bf1e"
+      }
+    ],
+    "inputHash": "sha256:3f2b2392d1886b8983c76f154593400069305e17fc5aff2d776b1b801619a627",
+    "outputHash": "sha256:85f700e3054eb2f74626c626161501548b02e69d799e48a46feedef40dc79c9f",
+    "tokenBudget": 1024,
+    "compilerSelectionBudget": 737,
+    "retainedPassageReportedTokens": 53,
+    "compiledContextReportedTokens": 101,
+    "includedPassageCount": 4,
+    "coverageNumerator": 2,
+    "coverageDenominator": 2,
+    "coveragePercentageBps": 10000,
+    "reportedTokenArithmeticValid": true,
+    "tokenEstimatorVerified": false,
+    "providerTokenBudgetGuaranteed": false,
+    "tokenEstimatorVersion": "maha_model_neutral_v1"
+  },
+  "prototypeCompatibility": {
+    "guestDigestAssessed": "sha256:2b208e449719961e777c294ce7f78e37eb8d90671156b7cbe424c716e1a896e0",
+    "compatible": false,
+    "blockers": [
+      "Prototype guest recomputes whitespace token counts; v1 must prove arithmetic over Maha-reported counts without claiming estimator verification.",
+      "Prototype guest derives different inputHash and outputHash values instead of validating Maha production hashes.",
+      "Prototype guest reselects passages in source/offset order; v1 must validate the compiler-retained set without claiming BM25 ranking correctness.",
+      "Prototype guest computes byte coverage; Maha production coverage is the number of represented sources over total sources.",
+      "Prototype guest has no unsupported_passage_count preflight for retained passage counts above 128.",
+      "Prototype public values omit the explicit token-estimator non-claims required by proof contract v3."
+    ]
+  }
+}

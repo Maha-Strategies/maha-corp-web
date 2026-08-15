@@ -1,0 +1,28 @@
+{
+  "schemaVersion": "maha-context-proof-fixture-v1",
+  "proofContractVersion": 3,
+  "maximumSupportedRetainedPassages": 128,
+  "bundles": [
+    {
+      "id": "representative-n70",
+      "path": "representative-n70/fixture.json",
+      "expectedStatus": "success"
+    },
+    {
+      "id": "boundary-n128",
+      "path": "boundary-n128/fixture.json",
+      "expectedStatus": "success"
+    },
+    {
+      "id": "unsupported-n129",
+      "path": "unsupported-n129/fixture.json",
+      "expectedStatus": "unsupported_passage_count"
+    },
+    {
+      "id": "duplicate-retained-set",
+      "path": "duplicate-retained-set/fixture.json",
+      "adversarialPath": "duplicate-retained-set/adversarial-retained-duplicate.json",
+      "expectedStatus": "success"
+    }
+  ]
+}
