@@ -15,6 +15,12 @@ import {
   CELESTIAL_FACT_PATH,
   CELESTIAL_FACT_SCHEMA_VERSION,
 } from '@/lib/celestial-facts'
+import {
+  ASTRONOMY_ARTICLES,
+  ASTRONOMY_KNOWLEDGE_PATH,
+  ASTRONOMY_KNOWLEDGE_VERSION,
+  ASTRONOMY_SOURCES,
+} from '@/lib/astronomy-knowledge'
 
 export const metadata: Metadata = {
   title: 'Knowledge | Maha Strategies',
@@ -51,6 +57,12 @@ export default function KnowledgePage() {
         url: `${SITE_URL}${CELESTIAL_FACT_PATH}`,
         version: CELESTIAL_FACT_SCHEMA_VERSION,
       },
+      {
+        '@type': 'CollectionPage',
+        name: 'Maha Astronomy Knowledge',
+        url: `${SITE_URL}${ASTRONOMY_KNOWLEDGE_PATH}`,
+        version: ASTRONOMY_KNOWLEDGE_VERSION,
+      },
       ...KNOWLEDGE_ARTICLES.map((article) => ({
         '@type': 'TechArticle',
         name: article.title,
@@ -78,11 +90,12 @@ export default function KnowledgePage() {
               </Link>
             </div>
             <div className="border border-zinc-800 bg-zinc-950 p-5 font-mono text-xs leading-6 text-zinc-500">
-              <p className="text-zinc-200">2 domain surfaces</p>
+              <p className="text-zinc-200">3 domain surfaces</p>
               <p>{KNOWLEDGE_ARTICLES.length} published semiconductor nodes</p>
               <p>{KNOWLEDGE_SUPPLIERS.length} evidence-bounded supplier profiles</p>
               <p>{SEMICONDUCTOR_STAGES.length} lifecycle stages</p>
               <p>{CELESTIAL_AUTHORITY_SOURCES.length} celestial authority contracts</p>
+              <p>{ASTRONOMY_ARTICLES.length} Astronomy explainers</p>
               <p>Claim-level evidence status</p>
               <p>Bidirectional Intelligence links</p>
             </div>
@@ -93,7 +106,7 @@ export default function KnowledgePage() {
       <section className="border-b border-zinc-900 px-6 py-14 sm:px-12">
         <div className="mx-auto max-w-6xl">
           <p className="font-mono text-[10px] uppercase tracking-widest text-zinc-500">Knowledge domains</p>
-          <div className="mt-5 grid gap-4 lg:grid-cols-2">
+          <div className="mt-5 grid gap-4 lg:grid-cols-3">
             <Link href={SEMICONDUCTOR_PROCESS_MAP_PATH} className="group border border-zinc-800 bg-zinc-950/60 p-6 transition-colors hover:border-cyan-500/50">
               <p className="font-mono text-[10px] uppercase tracking-widest text-cyan-300">Technical knowledge system</p>
               <h2 className="mt-4 text-2xl font-semibold text-white group-hover:text-cyan-200">Semiconductor manufacturing</h2>
@@ -104,8 +117,15 @@ export default function KnowledgePage() {
               <p className="font-mono text-[10px] uppercase tracking-widest text-sky-300">Foundational source layer · {CELESTIAL_FACT_SCHEMA_VERSION}</p>
               <h2 className="mt-4 text-2xl font-semibold text-white group-hover:text-sky-200">Celestial facts</h2>
               <p className="mt-3 text-sm leading-6 text-zinc-400">A reproducible contract for time, observer, ephemeris, reference frame, corrections, coordinates, and source provenance.</p>
-              <p className="mt-4 border-l border-amber-700/60 pl-3 text-xs leading-5 text-amber-200">Fact layer only. Astronomy explanations and astrological interpretation are intentionally absent.</p>
+              <p className="mt-4 border-l border-amber-700/60 pl-3 text-xs leading-5 text-amber-200">Fact layer only. Explanation and interpretation remain outside this contract.</p>
               <p className="mt-6 font-mono text-[10px] uppercase tracking-widest text-zinc-600 group-hover:text-sky-300">Inspect {CELESTIAL_AUTHORITY_SOURCES.length} authority contracts →</p>
+            </Link>
+            <Link href={ASTRONOMY_KNOWLEDGE_PATH} className="group border border-indigo-900/60 bg-indigo-950/10 p-6 transition-colors hover:border-indigo-400">
+              <p className="font-mono text-[10px] uppercase tracking-widest text-indigo-300">Explanatory layer · {ASTRONOMY_KNOWLEDGE_VERSION}</p>
+              <h2 className="mt-4 text-2xl font-semibold text-white group-hover:text-indigo-200">Astronomy knowledge</h2>
+              <p className="mt-3 text-sm leading-6 text-zinc-400">A cited graph from observation and calibration through physical models, inference boundaries, and open questions.</p>
+              <p className="mt-4 border-l border-amber-700/60 pl-3 text-xs leading-5 text-amber-200">Scientific explanation only. Astrological interpretation is outside this layer.</p>
+              <p className="mt-6 font-mono text-[10px] uppercase tracking-widest text-zinc-600 group-hover:text-indigo-300">Explore {ASTRONOMY_ARTICLES.length} explainers · {ASTRONOMY_SOURCES.length} sources →</p>
             </Link>
           </div>
         </div>

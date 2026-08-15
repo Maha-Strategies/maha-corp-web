@@ -9,6 +9,7 @@ import {
   CELESTIAL_FACT_SCHEMA_PATH,
   CELESTIAL_FACT_SCHEMA_VERSION,
 } from '@/lib/celestial-facts'
+import { ASTRONOMY_ARTICLES, ASTRONOMY_KNOWLEDGE_PATH } from '@/lib/astronomy-knowledge'
 
 export const metadata: Metadata = {
   title: 'Celestial Fact Layer | Maha Knowledge',
@@ -41,7 +42,7 @@ const requiredGroups = [
 ] as const
 
 const excluded = [
-  'No physical explanation, object biography, cosmology, stellar evolution, or other Astronomy knowledge has been added.',
+  'No physical explanation, object biography, cosmology, or stellar evolution is stored inside a fact bundle; those belong to the separate Astronomy layer.',
   'No zodiac, house, aspect, dignity, rulership, ayanamsa, or interpretive rule is part of this schema.',
   'No generated celestial position is published unless it preserves an authoritative provider response and reproducible calculation contract.',
   'No accuracy is inferred from decimal places. Precision, uncertainty, provider limitations, and transformation choices remain separate fields.',
@@ -82,7 +83,7 @@ export default function CelestialFactLayerPage() {
               <p>UTC, TAI, TT, TDB and UT1 preserved</p>
               <p>Topocentric and origin-aware records</p>
               <p>Interpretation fields: prohibited</p>
-              <p className="mt-4 border-t border-zinc-800 pt-4 text-amber-300">Astronomy knowledge layer: not built</p>
+              <p className="mt-4 border-t border-zinc-800 pt-4 text-emerald-300">Astronomy knowledge layer: live and separate</p>
             </div>
           </div>
         </div>
@@ -115,6 +116,7 @@ export default function CelestialFactLayerPage() {
             <div className="mt-6 border border-zinc-800 p-6">
               <p className="font-mono text-[10px] uppercase tracking-widest text-zinc-500">Future compatibility</p>
               <p className="mt-3 text-sm leading-6 text-zinc-400">Astronomy and any later interpretive tradition may reference an immutable fact bundle. Neither layer may rewrite its time resolution, observer, coordinate frame, correction choices, or provider provenance.</p>
+              <Link href={ASTRONOMY_KNOWLEDGE_PATH} className="mt-5 inline-block font-mono text-[10px] uppercase tracking-widest text-sky-300 hover:text-white">Explore {ASTRONOMY_ARTICLES.length} Astronomy explainers →</Link>
             </div>
           </div>
         </div>
