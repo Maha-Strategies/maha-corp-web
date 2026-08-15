@@ -315,19 +315,51 @@ test('every gateway API artifact is deployable and free of secrets', () => {
   assert.equal(files.length, 3, 'one artifact per evaluation path')
 
   for (const file of files) {
-    const artifact = JSON.parse(readFileSync(join(dir, file), 'utf8')) as {
-      name?: string; context?: string; upstream?: string
-      policies?: { credentialFromEnv?: string; endpointFromEnv?: string; endpoint?: string }[]
-    }
-    assert.ok(artifact.name && artifact.context && artifact.upstream, `${file} must be importable`)
     const text = readFileSync(join(dir, file), 'utf8')
-    // A credential or a baked endpoint in a committed artifact is how a secret
-    // reaches a repository, and how a placeholder reaches a live gateway.
+    const artifact = JSON.parse(text) as {
+      kind?: string
+      metadata?: { name?: string }
+      spec?: { context?: string; provider?: { id?: string }; policies?: { name?: string; paths?: { params?: Record<string, unknown> }[] }[] }
+    }
+    assert.equal(artifact.kind, 'LlmProxy', `${file}: the entity is an LlmProxy, not an API`)
+    assert.ok(artifact.metadata?.name, `${file} needs metadata.name`)
+    assert.ok(artifact.spec?.context, `${file} needs spec.context -- that is the routing field`)
+    assert.ok(artifact.spec?.provider?.id, `${file} needs a provider`)
+
     assert.ok(!/sk-ant|Bearer\s+\S+/.test(text), `${file} must contain no credential`)
     assert.ok(!text.includes('<maha-preview-deployment>'), `${file} must contain no placeholder endpoint`)
-    for (const policy of artifact.policies ?? []) {
-      if (policy.credentialFromEnv) assert.equal(policy.credentialFromEnv, 'WSO2_CONTEXT_INTERCEPTOR_SECRET')
-      if (policy.endpointFromEnv) assert.ok(!policy.endpoint, 'an env-driven endpoint must not also be hard-coded')
+
+    for (const policy of artifact.spec?.policies ?? []) {
+      // The defect that cost the most time: parameters as a sibling of `name`
+      // are accepted and silently dropped, so the policy deploys at its
+      // default and reports success. They belong at paths[].params.
+      assert.ok(
+        Array.isArray(policy.paths) && policy.paths.length > 0,
+        `${file}: policy ${policy.name} must carry paths[] -- parameters live there`,
+      )
+      for (const entry of policy.paths ?? []) {
+        assert.ok(entry.params, `${file}: policy ${policy.name} must supply paths[].params`)
+      }
+      assert.ok(
+        !Object.hasOwn(policy as object, 'params') && !Object.hasOwn(policy as object, 'parameters'),
+        `${file}: policy ${policy.name} has parameters as a sibling of name; the gateway ignores them there`,
+      )
     }
   }
+})
+
+test('the compressor artifact pins the ratio the evaluation was designed around', () => {
+  const artifact = JSON.parse(
+    readFileSync(new URL('../content/integrations/wso2-apis/native-compressor.json', import.meta.url), 'utf8'),
+  ) as { spec: { policies: { name: string; version: string; paths: { params: { rules: { upperTokenLimit: number; type: string; value: number }[] } }[] }[] } }
+
+  const policy = artifact.spec.policies[0]
+  assert.equal(policy.name, 'prompt-compressor', 'the deployed policy name, not promptCompressor')
+  assert.equal(policy.version, 'v0.9.0', 'the deployed version string carries the v prefix')
+
+  const rules = policy.paths[0].params.rules
+  // A -1 catch-all is required by the policy schema; without it the rule set is
+  // rejected and the compressor falls back to its default.
+  assert.ok(rules.some((rule) => rule.upperTokenLimit === -1), 'a -1 catch-all rule is required')
+  assert.deepEqual(rules[0], { upperTokenLimit: -1, type: 'ratio', value: 0.55 })
 })

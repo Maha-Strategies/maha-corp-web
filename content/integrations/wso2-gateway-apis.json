@@ -6,7 +6,13 @@
     "product": "WSO2 AI Gateway",
     "version": "1.1.0",
     "ingress": "http://localhost:8080",
-    "controllerApi": "http://localhost:9090"
+    "controllerApi": "http://localhost:9090",
+    "managementApiBase": "http://localhost:9090/api/management/v0.9",
+    "authScheme": "basic",
+    "entityKind": "LlmProxy",
+    "routingField": "spec.context",
+    "policyParameterPath": "spec.policies[].paths[].params",
+    "deployment": "automatic on create; no separate deploy call"
   },
   "invariants": {
     "note": "Only the context-processing policy may differ between these three APIs. Model, temperature, output ceiling, task prompt, source documents and citation instructions are supplied identically by the harness, so any measured difference is attributable to the policy and not to the request.",
@@ -30,7 +36,7 @@
       "pathId": "wso2-native-prompt-compressor",
       "name": "maha-eval-native-compressor",
       "version": "v1",
-      "context": "/eval/native-compressor",
+      "context": "/eval/native",
       "resource": "/v1/chat/completions",
       "method": "POST",
       "policies": [
@@ -48,7 +54,7 @@
       "pathId": "wso2-maha-context-compiler",
       "name": "maha-eval-context-compiler",
       "version": "v1",
-      "context": "/eval/maha-compiler",
+      "context": "/eval/maha",
       "resource": "/v1/chat/completions",
       "method": "POST",
       "policies": [

@@ -350,6 +350,14 @@ async function callThroughGateway(url: string, body: Record<string, unknown>): P
  */
 async function preflight(config: GatewayConfig): Promise<{ ok: boolean; checks: Record<string, unknown>[] }> {
   const checks: Record<string, unknown>[] = []
+  // The management API is basic-auth protected. Defaulted for the disposable
+  // local gateway and overridable, so a shared instance never needs the
+  // credential written down here.
+  const auth = `Basic ${Buffer.from(process.env.WSO2_MANAGEMENT_AUTH ?? 'admin:admin').toString('base64')}`
+  const managed = (init: RequestInit = {}): RequestInit => ({
+    ...init,
+    headers: { ...(init.headers as Record<string, string> ?? {}), authorization: auth },
+  })
   const add = (id: string, pass: boolean, detail: unknown) => { checks.push({ id, pass, detail }) }
 
   const probe = async (url: string, init?: RequestInit): Promise<{ status: number } | { error: string }> => {
@@ -364,8 +372,8 @@ async function preflight(config: GatewayConfig): Promise<{ ok: boolean; checks: 
   // 1. Controller must answer, and we must be able to read DEPLOYED state --
   // not the local JSON. A previous version checked the repository file and
   // called that a gateway check, which would pass with no gateway running.
-  const listUrl = `${config.gateway.controllerApi.replace(/\/$/, '')}/api/v1/apis`
-  const list = await probe(listUrl)
+  const listUrl = `${config.gateway.controllerApi.replace(/\/$/, '')}/api/management/v0.9/llm-proxies`
+  const list = await probe(listUrl, managed())
   if ('error' in list) {
     add('controller.reachable', false, list.error)
     add('controller.deployedState', false, 'not read: controller unreachable')
@@ -375,9 +383,9 @@ async function preflight(config: GatewayConfig): Promise<{ ok: boolean; checks: 
 
   let deployed: { name?: string; context?: string; policies?: { name?: string; version?: string; parameters?: Record<string, unknown> }[] }[] = []
   try {
-    const response = await fetch(listUrl, { signal: AbortSignal.timeout(4000) })
-    const payload = await response.json() as { list?: typeof deployed } | typeof deployed
-    deployed = Array.isArray(payload) ? payload : (payload.list ?? [])
+    const response = await fetch(listUrl, managed({ signal: AbortSignal.timeout(4000) }))
+    const payload = await response.json() as { proxies?: typeof deployed; list?: typeof deployed } | typeof deployed
+    deployed = Array.isArray(payload) ? payload : (payload.proxies ?? payload.list ?? [])
     add('controller.deployedState', true, `${deployed.length} API(s) deployed`)
   } catch (error) {
     add('controller.deployedState', false, error instanceof Error ? error.message : 'unreadable')
@@ -388,7 +396,7 @@ async function preflight(config: GatewayConfig): Promise<{ ok: boolean; checks: 
   // not deployed; treating any HTTP response as success -- which the previous
   // version did -- would have green-lit a gateway serving nothing.
   for (const api of config.apis) {
-    const live = deployed.find((entry) => entry.context === api.context)
+    const live = deployed.find((entry) => (entry as { spec?: { context?: string } }).spec?.context === api.context || entry.context === api.context)
     add(`api.${api.pathId}.deployed`, Boolean(live), live ? `context ${api.context}` : `no deployed API at ${api.context}`)
 
     const result = await probe(routeFor(config, api.pathId), { method: 'POST', headers: { 'content-type': 'application/json' }, body: '{}' })
@@ -405,12 +413,16 @@ async function preflight(config: GatewayConfig): Promise<{ ok: boolean; checks: 
   // 3. The compressor version must come from DEPLOYED policy state, not from
   // the file that merely says what we intended to deploy.
   const nativeApi = config.apis.find((api) => api.pathId === 'wso2-native-prompt-compressor')
-  const deployedNative = deployed.find((entry) => entry.context === nativeApi?.context)
-  const policy = deployedNative?.policies?.find((entry) => entry.name === 'promptCompressor')
+  const deployedNative = deployed.find((entry) => (entry as { spec?: { context?: string } }).spec?.context === nativeApi?.context)
+  const nativeSpec = (deployedNative as { spec?: { policies?: { name?: string; version?: string; paths?: { params?: { rules?: { value?: number }[] } }[] }[] } } | undefined)?.spec
+  const policy = nativeSpec?.policies?.find((entry) => entry.name === 'prompt-compressor')
+  const ratio = policy?.paths?.[0]?.params?.rules?.[0]?.value
   add(
     'policy.promptCompressor.deployed',
-    policy?.version === '0.9.0',
-    policy ? `deployed v${policy.version}, retainedRatio=${String(policy.parameters?.retainedRatio)}` : 'not present in deployed state',
+    policy?.version === 'v0.9.0' && typeof ratio === 'number',
+    policy
+      ? `deployed ${policy.version}, ratio=${String(ratio)}${typeof ratio === 'number' ? '' : ' (PARAMETERS DID NOT PERSIST -- the policy is at its default)'}`
+      : 'not present in deployed state',
   )
 
   // 4. The interceptor must refuse an unauthenticated call. If it does not,

@@ -1,16 +1,16 @@
 {
-  "type": "api",
-  "version": "v1.1.0",
-  "upstream": "https://api.anthropic.com",
-  "resources": [
-    {
-      "path": "/v1/chat/completions",
-      "methods": [
-        "POST"
-      ]
-    }
-  ],
-  "name": "maha-eval-baseline",
-  "context": "/eval/baseline",
-  "policies": []
+  "apiVersion": "gateway.api-platform.wso2.com/v1alpha1",
+  "kind": "LlmProxy",
+  "metadata": {
+    "name": "maha-eval-baseline"
+  },
+  "spec": {
+    "displayName": "Maha Eval Baseline",
+    "provider": {
+      "id": "anthropic-eval"
+    },
+    "context": "/eval/baseline",
+    "version": "v1",
+    "policies": []
+  }
 }
