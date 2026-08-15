@@ -1,0 +1,29 @@
+{
+  "type": "api",
+  "version": "v1.1.0",
+  "upstream": "https://api.anthropic.com",
+  "resources": [
+    {
+      "path": "/v1/chat/completions",
+      "methods": [
+        "POST"
+      ]
+    }
+  ],
+  "name": "maha-eval-context-compiler",
+  "context": "/eval/maha-compiler",
+  "policies": [
+    {
+      "name": "interceptorService",
+      "phase": "request",
+      "endpointFromEnv": "MAHA_INTERCEPTOR_ENDPOINT",
+      "includes": [
+        "request_headers",
+        "request_body"
+      ],
+      "credentialHeader": "x-maha-wso2-interceptor-token",
+      "credentialFromEnv": "WSO2_CONTEXT_INTERCEPTOR_SECRET",
+      "failClosed": true
+    }
+  ]
+}

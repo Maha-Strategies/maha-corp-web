@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict'
-import { readFileSync } from 'node:fs'
+import { readFileSync, readdirSync } from 'node:fs'
+import { join } from 'node:path'
 import test from 'node:test'
 
 import { parseWso2EvaluationCorpus } from '../lib/integrations/wso2-evaluation-corpus.ts'
@@ -269,4 +270,64 @@ test('a compiled request forwards messages and no maha_context', () => {
   assert.ok(Array.isArray(body.messages))
   assert.equal(body[WSO2_CONTEXT_EXTENSION], undefined, 'the extension must not reach the provider')
   assert.equal(JSON.stringify(body.messages).includes(WSO2_CONTEXT_PLACEHOLDER), false, 'the placeholder must be replaced')
+})
+
+// --- The gateway must be the thing that compiles ----------------------------
+
+test('the live Maha request carries maha_context untouched, so WSO2 does the compiling', async () => {
+  // The defect this pins: the runner used to compile locally and send the
+  // rewritten body, so the gateway's interceptor policy received an
+  // already-compiled request and had nothing to do. The evaluation measured
+  // this process and reported it as the gateway.
+  //
+  // Read from source because the live body is assembled inside a paid path.
+  // A test that had to spend $0.005 to check this would not be run.
+  const runner = readFileSync(new URL('../scripts/run-wso2-three-path-evaluation.ts', import.meta.url), 'utf8')
+
+  // The live branch returns the envelope, and the envelope is the thing that
+  // still carries the extension key.
+  const liveBranch = runner.slice(runner.indexOf("if (mode === 'live')"), runner.indexOf("const result = handleWso2ContextRequest"))
+  assert.match(liveBranch, /providerBody: envelope/, 'the live path must send the untouched envelope')
+  assert.match(liveBranch, /compiledInGateway: true/, 'and must record that the gateway compiled it')
+  assert.ok(
+    !liveBranch.includes('handleWso2ContextRequest'),
+    'the live path must not call the interceptor in-process',
+  )
+
+  // The local compile survives, but only for the non-executing modes.
+  assert.match(runner, /prepare\(workload, call\.path, MOCK_INTERCEPTOR_SECRET, 'measure'\)/)
+  assert.match(runner, /prepare\(workload, call\.path, secret, 'live'\)/)
+})
+
+test('the envelope sent live still contains the extension the gateway acts on', () => {
+  // If the extension key were stripped before sending, the gateway's policy
+  // would have nothing to trigger on and the path would silently degrade to
+  // baseline while still being labelled as Maha.
+  const runner = readFileSync(new URL('../scripts/run-wso2-three-path-evaluation.ts', import.meta.url), 'utf8')
+  const envelopeBlock = runner.slice(runner.indexOf('const envelope = {'), runner.indexOf("if (mode === 'live')"))
+  assert.match(envelopeBlock, /\[WSO2_CONTEXT_EXTENSION\]: workload\.request/)
+  assert.match(envelopeBlock, /WSO2_CONTEXT_PLACEHOLDER/, 'and the placeholder the interceptor replaces')
+})
+
+test('every gateway API artifact is deployable and free of secrets', () => {
+  const dir = new URL('../content/integrations/wso2-apis/', import.meta.url).pathname
+  const files = readdirSync(dir).filter((file) => file.endsWith('.json'))
+  assert.equal(files.length, 3, 'one artifact per evaluation path')
+
+  for (const file of files) {
+    const artifact = JSON.parse(readFileSync(join(dir, file), 'utf8')) as {
+      name?: string; context?: string; upstream?: string
+      policies?: { credentialFromEnv?: string; endpointFromEnv?: string; endpoint?: string }[]
+    }
+    assert.ok(artifact.name && artifact.context && artifact.upstream, `${file} must be importable`)
+    const text = readFileSync(join(dir, file), 'utf8')
+    // A credential or a baked endpoint in a committed artifact is how a secret
+    // reaches a repository, and how a placeholder reaches a live gateway.
+    assert.ok(!/sk-ant|Bearer\s+\S+/.test(text), `${file} must contain no credential`)
+    assert.ok(!text.includes('<maha-preview-deployment>'), `${file} must contain no placeholder endpoint`)
+    for (const policy of artifact.policies ?? []) {
+      if (policy.credentialFromEnv) assert.equal(policy.credentialFromEnv, 'WSO2_CONTEXT_INTERCEPTOR_SECRET')
+      if (policy.endpointFromEnv) assert.ok(!policy.endpoint, 'an env-driven endpoint must not also be hard-coded')
+    }
+  }
 })

@@ -1,0 +1,16 @@
+{
+  "type": "api",
+  "version": "v1.1.0",
+  "upstream": "https://api.anthropic.com",
+  "resources": [
+    {
+      "path": "/v1/chat/completions",
+      "methods": [
+        "POST"
+      ]
+    }
+  ],
+  "name": "maha-eval-baseline",
+  "context": "/eval/baseline",
+  "policies": []
+}

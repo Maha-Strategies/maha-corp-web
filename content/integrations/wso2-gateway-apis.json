@@ -55,11 +55,14 @@
         {
           "name": "interceptorService",
           "phase": "request",
-          "endpoint": "https://<maha-preview-deployment>/api/integrations/wso2/context-compiler/handle-request",
-          "includes": ["request_headers", "request_body"],
+          "includes": [
+            "request_headers",
+            "request_body"
+          ],
           "credentialHeader": "x-maha-wso2-interceptor-token",
-          "credentialSource": "WSO2_CONTEXT_INTERCEPTOR_SECRET",
-          "failClosed": true
+          "failClosed": true,
+          "endpointFromEnv": "MAHA_INTERCEPTOR_ENDPOINT",
+          "credentialFromEnv": "WSO2_CONTEXT_INTERCEPTOR_SECRET"
         }
       ],
       "note": "The credential is a gateway-only value supplied from the environment; it is never written here and the interceptor strips the header before upstream forwarding. failClosed is required for this evaluation: a refusal must stop the request, never fall through to the provider uncompiled."
@@ -74,5 +77,7 @@
       "interceptor endpoint reachable and refusing an unauthenticated request",
       "upstream model, temperature and output ceiling identical across all three"
     ]
-  }
+  },
+  "deployableArtifacts": "content/integrations/wso2-apis/*.json",
+  "importCommand": "scripts/wso2-gateway-import.sh"
 }

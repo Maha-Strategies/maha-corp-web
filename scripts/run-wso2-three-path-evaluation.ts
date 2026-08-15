@@ -157,7 +157,16 @@ function wholeDocumentContext(workload: Wso2EvaluationWorkload): string {
     .join('\n\n')
 }
 
-function prepare(workload: Wso2EvaluationWorkload, path: Wso2EvaluationPath, secret: string): PreparedContext {
+/**
+ * `mode` decides who compiles. 'live' hands WSO2 the untouched envelope;
+ * 'measure' compiles in-process for the non-executing modes only.
+ */
+function prepare(
+  workload: Wso2EvaluationWorkload,
+  path: Wso2EvaluationPath,
+  secret: string,
+  mode: 'live' | 'measure',
+): PreparedContext {
   if (path === 'wso2-baseline') {
     const context = wholeDocumentContext(workload)
     return { forwardedContext: context, providerBody: baseRequest(workload, context), measurements: { contextStrategy: 'whole-documents' } }
@@ -190,11 +199,37 @@ function prepare(workload: Wso2EvaluationWorkload, path: Wso2EvaluationPath, sec
     }
   }
 
-  // The real interceptor, exercised exactly as the gateway would call it.
+  // The Maha path sends the envelope UNTOUCHED, with maha_context intact.
+  //
+  // The previous version compiled here and sent the rewritten body, so WSO2's
+  // interceptor policy received an already-compiled request and had nothing to
+  // do. That measured this process and reported it as the gateway. The whole
+  // claim under test is that the gateway calls Maha, so the gateway has to be
+  // the thing that calls Maha.
+  //
+  // `mode: 'measure'` still compiles locally, but only in the non-executing
+  // modes, and only to produce pre-inference numbers without a provider. It
+  // never supplies the live request body.
   const envelope = {
     ...baseRequest(workload, WSO2_CONTEXT_PLACEHOLDER),
     [WSO2_CONTEXT_EXTENSION]: workload.request,
   }
+
+  if (mode === 'live') {
+    return {
+      forwardedContext: '',
+      providerBody: envelope,
+      measurements: {
+        contextStrategy: 'maha-context-compiler',
+        compiledInGateway: true,
+        passageLevelCitationCapable: true,
+        // Filled from the x-maha-* response headers the gateway returns. Null
+        // here rather than guessed: this process did not compile anything.
+        preInferenceMeasurementsAvailable: false,
+      },
+    }
+  }
+
   const result = handleWso2ContextRequest({
     requestHeaders: { 'content-type': 'application/json', [WSO2_INTERCEPTOR_TOKEN_HEADER]: secret },
     requestBody: Buffer.from(JSON.stringify(envelope), 'utf8').toString('base64'),
@@ -209,11 +244,6 @@ function prepare(workload: Wso2EvaluationWorkload, path: Wso2EvaluationPath, sec
 
   if (!result.body) throw new Error(`The interceptor refused workload ${workload.id} instead of compiling it.`)
   const rewritten = JSON.parse(Buffer.from(result.body, 'base64').toString('utf8')) as Record<string, unknown>
-  // A refusal comes back as a body carrying `error`, with no directRespond and
-  // no messages -- so `!result.body` does not catch it. Checked explicitly
-  // because the alternative is JSON.stringify(undefined) returning the *value*
-  // undefined and the failure surfacing hundreds of lines later as a
-  // toLowerCase on nothing. See docs for the fail-shape note.
   if (!Array.isArray(rewritten.messages)) {
     throw new Error(`The interceptor returned no messages for ${workload.id}: ${JSON.stringify(rewritten.error ?? rewritten).slice(0, 200)}`)
   }
@@ -223,11 +253,11 @@ function prepare(workload: Wso2EvaluationWorkload, path: Wso2EvaluationPath, sec
     providerBody: rewritten,
     measurements: {
       contextStrategy: 'maha-context-compiler',
+      compiledInGateway: false,
       passageLevelCitationCapable: true,
       packId: headers['x-maha-context-pack-id'],
       inputHash: headers['x-maha-context-input-hash'],
       outputHash: headers['x-maha-context-output-hash'],
-      // Model-neutral, and labelled so it is never read as billing usage.
       mahaEstimatedOriginalTokens: Number(headers['x-maha-original-estimated-tokens']),
       mahaEstimatedCompiledTokens: Number(headers['x-maha-compiled-estimated-tokens']),
       mahaEstimatedReductionPercent: Number(headers['x-maha-estimated-reduction-percent']),
@@ -242,7 +272,9 @@ function prepare(workload: Wso2EvaluationWorkload, path: Wso2EvaluationPath, sec
 
 // --- Provider ---------------------------------------------------------------
 
-type ProviderResponse = { ok: true; answer: string; inputTokens: number; outputTokens: number } | { ok: false; error: string }
+type ProviderResponse =
+  | { ok: true; answer: string; inputTokens: number; outputTokens: number; gatewayHeaders?: Record<string, string> }
+  | { ok: false; error: string; status?: number }
 
 /** Deterministic stand-in used by every non-execute mode. Never opens a socket. */
 function mockProvider(workload: Wso2EvaluationWorkload, forwardedContext: string): ProviderResponse {
@@ -281,7 +313,14 @@ async function callThroughGateway(url: string, body: Record<string, unknown>): P
       },
       body: JSON.stringify(body),
     })
-    if (!response.ok) return { ok: false, error: `gateway HTTP ${response.status}` }
+    if (!response.ok) return { ok: false, error: `gateway HTTP ${response.status}`, status: response.status }
+    // The interceptor's evidence headers, echoed by the gateway. On the Maha
+    // live path these are the ONLY source of pre-inference measurements, since
+    // this process no longer compiles anything.
+    const gatewayHeaders: Record<string, string> = {}
+    response.headers.forEach((headerValue, headerName) => {
+      if (headerName.toLowerCase().startsWith('x-maha-')) gatewayHeaders[headerName.toLowerCase()] = headerValue
+    })
     const payload = await response.json() as {
       content?: { text?: string }[]
       choices?: { message?: { content?: string } }[]
@@ -295,6 +334,7 @@ async function callThroughGateway(url: string, body: Record<string, unknown>): P
       answer,
       inputTokens: payload.usage?.input_tokens ?? payload.usage?.prompt_tokens ?? 0,
       outputTokens: payload.usage?.output_tokens ?? payload.usage?.completion_tokens ?? 0,
+      gatewayHeaders,
     }
   } catch (error) {
     return { ok: false, error: error instanceof Error ? error.message : 'gateway request failed' }
@@ -310,31 +350,85 @@ async function callThroughGateway(url: string, body: Record<string, unknown>): P
  */
 async function preflight(config: GatewayConfig): Promise<{ ok: boolean; checks: Record<string, unknown>[] }> {
   const checks: Record<string, unknown>[] = []
-  const reach = async (url: string): Promise<string> => {
+  const add = (id: string, pass: boolean, detail: unknown) => { checks.push({ id, pass, detail }) }
+
+  const probe = async (url: string, init?: RequestInit): Promise<{ status: number } | { error: string }> => {
     try {
-      const response = await fetch(url, { signal: AbortSignal.timeout(3000) })
-      return `HTTP ${response.status}`
+      const response = await fetch(url, { signal: AbortSignal.timeout(4000), ...init })
+      return { status: response.status }
     } catch (error) {
-      return `unreachable: ${error instanceof Error ? error.message : 'error'}`
+      return { error: error instanceof Error ? error.message : 'request failed' }
     }
   }
 
-  checks.push({ id: 'controller.reachable', detail: await reach(config.gateway.controllerApi) })
-  for (const api of config.apis) {
-    checks.push({ id: `api.${api.pathId}.route`, url: routeFor(config, api.pathId), detail: await reach(routeFor(config, api.pathId)) })
+  // 1. Controller must answer, and we must be able to read DEPLOYED state --
+  // not the local JSON. A previous version checked the repository file and
+  // called that a gateway check, which would pass with no gateway running.
+  const listUrl = `${config.gateway.controllerApi.replace(/\/$/, '')}/api/v1/apis`
+  const list = await probe(listUrl)
+  if ('error' in list) {
+    add('controller.reachable', false, list.error)
+    add('controller.deployedState', false, 'not read: controller unreachable')
+    return { ok: false, checks }
   }
-  const compressor = config.apis
-    .find((api) => api.pathId === 'wso2-native-prompt-compressor')?.policies
-    ?.find((policy) => (policy as { name?: string }).name === 'promptCompressor') as { version?: string; parameters?: { retainedRatio?: number } } | undefined
-  checks.push({
-    id: 'policy.promptCompressor',
-    version: compressor?.version ?? null,
-    retainedRatio: compressor?.parameters?.retainedRatio ?? null,
-    detail: compressor?.version === '0.9.0' ? 'declared v0.9.0' : 'MISSING or wrong version',
-  })
+  add('controller.reachable', list.status === 200, `HTTP ${list.status}`)
 
-  const ok = checks.every((check) => !String(check.detail).startsWith('unreachable') && !String(check.detail).startsWith('MISSING'))
-  return { ok, checks }
+  let deployed: { name?: string; context?: string; policies?: { name?: string; version?: string; parameters?: Record<string, unknown> }[] }[] = []
+  try {
+    const response = await fetch(listUrl, { signal: AbortSignal.timeout(4000) })
+    const payload = await response.json() as { list?: typeof deployed } | typeof deployed
+    deployed = Array.isArray(payload) ? payload : (payload.list ?? [])
+    add('controller.deployedState', true, `${deployed.length} API(s) deployed`)
+  } catch (error) {
+    add('controller.deployedState', false, error instanceof Error ? error.message : 'unreadable')
+    return { ok: false, checks }
+  }
+
+  // 2. Each route must exist AND answer as expected. A 404 is a route that is
+  // not deployed; treating any HTTP response as success -- which the previous
+  // version did -- would have green-lit a gateway serving nothing.
+  for (const api of config.apis) {
+    const live = deployed.find((entry) => entry.context === api.context)
+    add(`api.${api.pathId}.deployed`, Boolean(live), live ? `context ${api.context}` : `no deployed API at ${api.context}`)
+
+    const result = await probe(routeFor(config, api.pathId), { method: 'POST', headers: { 'content-type': 'application/json' }, body: '{}' })
+    if ('error' in result) {
+      add(`api.${api.pathId}.route`, false, result.error)
+      continue
+    }
+    // An empty body must be rejected by the gateway or upstream -- never 404
+    // (route missing) and never 200 (a model call we did not intend to make).
+    const acceptable = result.status !== 404 && result.status !== 200
+    add(`api.${api.pathId}.route`, acceptable, `HTTP ${result.status}${result.status === 404 ? ' (route not deployed)' : ''}${result.status === 200 ? ' (unexpected success on an empty body)' : ''}`)
+  }
+
+  // 3. The compressor version must come from DEPLOYED policy state, not from
+  // the file that merely says what we intended to deploy.
+  const nativeApi = config.apis.find((api) => api.pathId === 'wso2-native-prompt-compressor')
+  const deployedNative = deployed.find((entry) => entry.context === nativeApi?.context)
+  const policy = deployedNative?.policies?.find((entry) => entry.name === 'promptCompressor')
+  add(
+    'policy.promptCompressor.deployed',
+    policy?.version === '0.9.0',
+    policy ? `deployed v${policy.version}, retainedRatio=${String(policy.parameters?.retainedRatio)}` : 'not present in deployed state',
+  )
+
+  // 4. The interceptor must refuse an unauthenticated call. If it does not,
+  // the credential is not actually enforced and the Maha path is untrusted.
+  const endpoint = process.env.MAHA_INTERCEPTOR_ENDPOINT
+  if (!endpoint) {
+    add('interceptor.unauthenticatedRefusal', false, 'MAHA_INTERCEPTOR_ENDPOINT is not set')
+  } else {
+    const refusal = await probe(endpoint, {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ requestHeaders: {}, requestBody: '', invocationContext: {} }),
+    })
+    const refused = !('error' in refusal) && (refusal.status === 401 || refusal.status === 403)
+    add('interceptor.unauthenticatedRefusal', refused, 'error' in refusal ? refusal.error : `HTTP ${refusal.status} (401/403 expected)`)
+  }
+
+  return { ok: checks.every((check) => check.pass === true), checks }
 }
 
 // --- Run --------------------------------------------------------------------
@@ -403,7 +497,7 @@ async function run(): Promise<void> {
     // the whole pipeline is exercised without a provider.
     const results = resume.toRun.map((call) => {
       const workload = corpus.workloads.find((candidate) => candidate.id === call.workloadId)!
-      const prepared = prepare(workload, call.path, MOCK_INTERCEPTOR_SECRET)
+      const prepared = prepare(workload, call.path, MOCK_INTERCEPTOR_SECRET, 'measure')
       const response = mockProvider(workload, prepared.forwardedContext)
       return score(workload, call.path, prepared, response, 0)
     })
@@ -430,7 +524,7 @@ async function run(): Promise<void> {
       break
     }
     const workload = corpus.workloads.find((candidate) => candidate.id === call.workloadId)!
-    const prepared = prepare(workload, call.path, secret)
+    const prepared = prepare(workload, call.path, secret, 'live')
     const startedAt = Date.now()
     const response = await callThroughGateway(routeFor(config, call.path), prepared.providerBody)
     const latency = Date.now() - startedAt
@@ -468,6 +562,21 @@ function score(
   const verdicts = workload.labels.requiredFacts.map((fact) => ({ id: fact.id, verdict: scoreRequiredFact(answer, fact) }))
   const citations = [...answer.matchAll(/\[([A-Za-z0-9._:-]+)\]/g)].map((match) => match[1])
 
+  // Evidence the gateway reported. Present only when the gateway ran the
+  // interceptor, which is exactly the proof that it did.
+  const fromGateway = (response.ok && response.gatewayHeaders) ? response.gatewayHeaders : {}
+  const gatewayEvidence = Object.keys(fromGateway).length === 0 ? {} : {
+    compiledInGateway: true,
+    packId: fromGateway['x-maha-context-pack-id'],
+    inputHash: fromGateway['x-maha-context-input-hash'],
+    outputHash: fromGateway['x-maha-context-output-hash'],
+    mahaEstimatedCompiledTokens: Number(fromGateway['x-maha-compiled-estimated-tokens']),
+    sourceCoveragePercent: Number(fromGateway['x-maha-source-coverage-percent']),
+    includedPassageCount: Number(fromGateway['x-maha-included-passage-count']),
+    hardBudgetCompliant: Number(fromGateway['x-maha-compiled-estimated-tokens']) <= workload.request.tokenBudget,
+    preInferenceMeasurementsAvailable: true,
+  }
+
   return {
     workloadId: workload.id,
     difficulty: workload.difficulty,
@@ -479,6 +588,7 @@ function score(
       requiredSourceIdsRepresented: [...sourceIds].filter((id) => prepared.forwardedContext.includes(id)).length,
       requiredSourceIdsTotal: sourceIds.size,
       ...prepared.measurements,
+      ...gatewayEvidence,
     },
     // Downstream: a property of the answer, not of the context.
     answer: {
