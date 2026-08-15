@@ -10,14 +10,19 @@ import {
 import { SITE_URL } from '@/lib/briefs-data'
 import { SEMICONDUCTOR_PROCESS_MAP_PATH, getProcessMapStepCount } from '@/lib/semiconductor-process-map'
 import { KNOWLEDGE_SUPPLIERS } from '@/lib/knowledge-process-profiles'
+import {
+  CELESTIAL_AUTHORITY_SOURCES,
+  CELESTIAL_FACT_PATH,
+  CELESTIAL_FACT_SCHEMA_VERSION,
+} from '@/lib/celestial-facts'
 
 export const metadata: Metadata = {
   title: 'Knowledge | Maha Strategies',
-  description: 'A cited technical knowledge graph of semiconductor processes, materials, equipment, and concepts that supports Maha Strategies Intelligence.',
+  description: 'A cited, provenance-aware knowledge system spanning technical domains and foundational source layers.',
   alternates: { canonical: '/knowledge' },
   openGraph: {
     title: 'Knowledge | Maha Strategies',
-    description: 'Trace complex technologies from process inputs and controls to failure modes, evidence, and strategic implications.',
+    description: 'Trace complex domains from source-governed facts through evidence, technical explanations, and strategic implications.',
     url: `${SITE_URL}/knowledge`,
     siteName: 'Maha Strategies',
     images: [{ url: '/og-master.png', width: 1200, height: 630, alt: 'Maha Strategies Knowledge' }],
@@ -39,11 +44,19 @@ export default function KnowledgePage() {
     name: 'Maha Strategies Knowledge',
     description: metadata.description,
     url: `${SITE_URL}/knowledge`,
-    hasPart: KNOWLEDGE_ARTICLES.map((article) => ({
-      '@type': 'TechArticle',
-      name: article.title,
-      url: `${SITE_URL}${knowledgeArticlePath(article)}`,
-    })),
+    hasPart: [
+      {
+        '@type': 'Dataset',
+        name: 'Maha Celestial Fact Layer',
+        url: `${SITE_URL}${CELESTIAL_FACT_PATH}`,
+        version: CELESTIAL_FACT_SCHEMA_VERSION,
+      },
+      ...KNOWLEDGE_ARTICLES.map((article) => ({
+        '@type': 'TechArticle',
+        name: article.title,
+        url: `${SITE_URL}${knowledgeArticlePath(article)}`,
+      })),
+    ],
   }
 
   return (
@@ -52,11 +65,11 @@ export default function KnowledgePage() {
 
       <section className="border-b border-zinc-800 px-6 py-20 sm:px-12">
         <div className="mx-auto max-w-6xl">
-          <p className="font-mono text-xs uppercase tracking-[0.24em] text-cyan-300">[ Technical knowledge graph // v0.1 ]</p>
+          <p className="font-mono text-xs uppercase tracking-[0.24em] text-cyan-300">[ Evidence architecture // source to strategy ]</p>
           <div className="mt-8 grid gap-10 lg:grid-cols-[1.6fr_1fr] lg:items-end">
             <div>
               <h1 className="max-w-4xl text-4xl font-bold tracking-tight text-white sm:text-6xl">Understand the machinery beneath the brief.</h1>
-              <p className="mt-6 max-w-3xl font-serif text-lg leading-8 text-zinc-400">Knowledge decomposes complex industries into processes, materials, equipment, controls, and failure modes. Every technical claim carries a citation or an explicit analytical boundary; every article links back to the Intelligence decisions it supports.</p>
+              <p className="mt-6 max-w-3xl font-serif text-lg leading-8 text-zinc-400">Knowledge separates source-governed facts from domain explanations and strategic analysis. Every technical claim carries a citation or an explicit analytical boundary; every article can link back to the immutable facts and Intelligence decisions it supports.</p>
               <Link href={SEMICONDUCTOR_PROCESS_MAP_PATH} className="mt-8 inline-block border border-cyan-500 px-5 py-3 font-mono text-[10px] uppercase tracking-widest text-cyan-300 transition-colors hover:bg-cyan-400 hover:text-black">
                 Explore the complete {getProcessMapStepCount()}-node semiconductor process map →
               </Link>
@@ -65,9 +78,11 @@ export default function KnowledgePage() {
               </Link>
             </div>
             <div className="border border-zinc-800 bg-zinc-950 p-5 font-mono text-xs leading-6 text-zinc-500">
-              <p className="text-zinc-200">{KNOWLEDGE_ARTICLES.length} published nodes</p>
+              <p className="text-zinc-200">2 domain surfaces</p>
+              <p>{KNOWLEDGE_ARTICLES.length} published semiconductor nodes</p>
               <p>{KNOWLEDGE_SUPPLIERS.length} evidence-bounded supplier profiles</p>
               <p>{SEMICONDUCTOR_STAGES.length} lifecycle stages</p>
+              <p>{CELESTIAL_AUTHORITY_SOURCES.length} celestial authority contracts</p>
               <p>Claim-level evidence status</p>
               <p>Bidirectional Intelligence links</p>
             </div>
@@ -77,7 +92,28 @@ export default function KnowledgePage() {
 
       <section className="border-b border-zinc-900 px-6 py-14 sm:px-12">
         <div className="mx-auto max-w-6xl">
-          <p className="font-mono text-[10px] uppercase tracking-widest text-zinc-500">Taxonomy</p>
+          <p className="font-mono text-[10px] uppercase tracking-widest text-zinc-500">Knowledge domains</p>
+          <div className="mt-5 grid gap-4 lg:grid-cols-2">
+            <Link href={SEMICONDUCTOR_PROCESS_MAP_PATH} className="group border border-zinc-800 bg-zinc-950/60 p-6 transition-colors hover:border-cyan-500/50">
+              <p className="font-mono text-[10px] uppercase tracking-widest text-cyan-300">Technical knowledge system</p>
+              <h2 className="mt-4 text-2xl font-semibold text-white group-hover:text-cyan-200">Semiconductor manufacturing</h2>
+              <p className="mt-3 text-sm leading-6 text-zinc-500">A process graph spanning design, materials, equipment, defects, metrology, packaging, suppliers, and supporting Intelligence briefs.</p>
+              <p className="mt-6 font-mono text-[10px] uppercase tracking-widest text-zinc-600 group-hover:text-cyan-400">Explore {getProcessMapStepCount()} process nodes →</p>
+            </Link>
+            <Link href={CELESTIAL_FACT_PATH} className="group border border-sky-900/60 bg-sky-950/10 p-6 transition-colors hover:border-sky-400">
+              <p className="font-mono text-[10px] uppercase tracking-widest text-sky-300">Foundational source layer · {CELESTIAL_FACT_SCHEMA_VERSION}</p>
+              <h2 className="mt-4 text-2xl font-semibold text-white group-hover:text-sky-200">Celestial facts</h2>
+              <p className="mt-3 text-sm leading-6 text-zinc-400">A reproducible contract for time, observer, ephemeris, reference frame, corrections, coordinates, and source provenance.</p>
+              <p className="mt-4 border-l border-amber-700/60 pl-3 text-xs leading-5 text-amber-200">Fact layer only. Astronomy explanations and astrological interpretation are intentionally absent.</p>
+              <p className="mt-6 font-mono text-[10px] uppercase tracking-widest text-zinc-600 group-hover:text-sky-300">Inspect {CELESTIAL_AUTHORITY_SOURCES.length} authority contracts →</p>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      <section className="border-b border-zinc-900 px-6 py-14 sm:px-12">
+        <div className="mx-auto max-w-6xl">
+          <p className="font-mono text-[10px] uppercase tracking-widest text-zinc-500">Semiconductor taxonomy</p>
           <div className="mt-5 grid gap-px border border-zinc-800 bg-zinc-800 sm:grid-cols-2 lg:grid-cols-5">
             {kindOrder.map((kind) => {
               const meta = KNOWLEDGE_KIND_META[kind]

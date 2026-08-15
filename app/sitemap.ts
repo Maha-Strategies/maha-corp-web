@@ -6,6 +6,7 @@ import { openBookEditions } from '@/lib/open-book-editions'
 import { KNOWLEDGE_ARTICLES, knowledgeArticlePath } from '@/lib/knowledge-data'
 import { SEMICONDUCTOR_PROCESS_MAP_DATE, SEMICONDUCTOR_PROCESS_MAP_PATH } from '@/lib/semiconductor-process-map'
 import { KNOWLEDGE_SUPPLIERS, knowledgeSupplierPath } from '@/lib/knowledge-process-profiles'
+import { CELESTIAL_FACT_PATH, CELESTIAL_FACT_RELEASE_DATE } from '@/lib/celestial-facts'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = MAHA_SITE_URL
@@ -22,7 +23,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${baseUrl}/software` },
     { url: `${baseUrl}/doctrine` },
     { url: `${baseUrl}/research` },
-    { url: `${baseUrl}/knowledge`, lastModified: new Date('2026-08-13') },
+    { url: `${baseUrl}/knowledge`, lastModified: new Date(CELESTIAL_FACT_RELEASE_DATE) },
+    { url: `${baseUrl}${CELESTIAL_FACT_PATH}`, lastModified: new Date(CELESTIAL_FACT_RELEASE_DATE) },
     { url: `${baseUrl}/knowledge/suppliers`, lastModified: new Date('2026-08-13') },
     { url: `${baseUrl}${SEMICONDUCTOR_PROCESS_MAP_PATH}`, lastModified: new Date(SEMICONDUCTOR_PROCESS_MAP_DATE) },
     { url: `${baseUrl}/start` },
