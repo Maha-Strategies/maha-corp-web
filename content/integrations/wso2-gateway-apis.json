@@ -1,0 +1,78 @@
+{
+  "schemaVersion": "1.0.0",
+  "name": "WSO2 AI Gateway APIs for the three-path Context Compiler evaluation",
+  "description": "Config-as-code for the three gateway APIs the evaluation routes through. The original definitions lived only in the gateway's runtime state and were lost when it stopped, which is why they are in the repository now: an evaluation whose comparator cannot be rebuilt is not reproducible.",
+  "gateway": {
+    "product": "WSO2 AI Gateway",
+    "version": "1.1.0",
+    "ingress": "http://localhost:8080",
+    "controllerApi": "http://localhost:9090"
+  },
+  "invariants": {
+    "note": "Only the context-processing policy may differ between these three APIs. Model, temperature, output ceiling, task prompt, source documents and citation instructions are supplied identically by the harness, so any measured difference is attributable to the policy and not to the request.",
+    "model": "claude-haiku-4-5-20251001",
+    "temperature": 0,
+    "maxOutputTokens": 220,
+    "upstream": "https://api.anthropic.com"
+  },
+  "apis": [
+    {
+      "pathId": "wso2-baseline",
+      "name": "maha-eval-baseline",
+      "version": "v1",
+      "context": "/eval/baseline",
+      "resource": "/v1/chat/completions",
+      "method": "POST",
+      "policies": [],
+      "note": "No context policy. Whole documents are forwarded. Establishes the token and latency reference point."
+    },
+    {
+      "pathId": "wso2-native-prompt-compressor",
+      "name": "maha-eval-native-compressor",
+      "version": "v1",
+      "context": "/eval/native-compressor",
+      "resource": "/v1/chat/completions",
+      "method": "POST",
+      "policies": [
+        {
+          "name": "promptCompressor",
+          "version": "0.9.0",
+          "parameters": {
+            "retainedRatio": 0.55
+          }
+        }
+      ],
+      "note": "The real WSO2 Prompt Compressor v0.9.0 at the retained ratio the earlier single-workload run used. This replaces the local truncation stand-in, which retained 100% of evidence spans and therefore compressed nothing -- comparing against it would have flattered Maha by measuring it against a comparator that was not doing the job."
+    },
+    {
+      "pathId": "wso2-maha-context-compiler",
+      "name": "maha-eval-context-compiler",
+      "version": "v1",
+      "context": "/eval/maha-compiler",
+      "resource": "/v1/chat/completions",
+      "method": "POST",
+      "policies": [
+        {
+          "name": "interceptorService",
+          "phase": "request",
+          "endpoint": "https://<maha-preview-deployment>/api/integrations/wso2/context-compiler/handle-request",
+          "includes": ["request_headers", "request_body"],
+          "credentialHeader": "x-maha-wso2-interceptor-token",
+          "credentialSource": "WSO2_CONTEXT_INTERCEPTOR_SECRET",
+          "failClosed": true
+        }
+      ],
+      "note": "The credential is a gateway-only value supplied from the environment; it is never written here and the interceptor strips the header before upstream forwarding. failClosed is required for this evaluation: a refusal must stop the request, never fall through to the provider uncompiled."
+    }
+  ],
+  "preflight": {
+    "note": "Every check below is answerable without a model call. The gateway must be running and all three APIs deployed before any paid pilot.",
+    "checks": [
+      "controller API reachable",
+      "all three APIs deployed and their contexts resolvable",
+      "prompt compressor policy reports version 0.9.0",
+      "interceptor endpoint reachable and refusing an unauthenticated request",
+      "upstream model, temperature and output ceiling identical across all three"
+    ]
+  }
+}

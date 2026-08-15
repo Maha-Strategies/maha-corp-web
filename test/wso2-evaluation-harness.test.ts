@@ -1,5 +1,8 @@
 import assert from 'node:assert/strict'
+import { readFileSync } from 'node:fs'
 import test from 'node:test'
+
+import { parseWso2EvaluationCorpus } from '../lib/integrations/wso2-evaluation-corpus.ts'
 
 import {
   WSO2_EVALUATION_PATHS,
@@ -183,4 +186,87 @@ test('evidence-span retention measures the forwarded context, not the answer', (
 test('retention counts spans, so a fact with several spans is not one unit', () => {
   const facts = [{ evidence: ['alpha span', 'beta span'] }]
   assert.deepEqual(countRetainedEvidenceSpans('alpha span only', facts), { retained: 1, total: 2 })
+})
+
+// --- Interceptor fail-closed shape -----------------------------------------
+//
+// Recorded because it was misdiagnosed. A probe read `directRespond?.statusCode`
+// on a boolean, printed "none", and produced a report claiming the interceptor
+// could leak an error body upstream as a model request. It does not. The
+// difference between "the code is wrong" and "my probe was wrong" is worth a
+// test rather than a memory.
+
+import {
+  WSO2_CONTEXT_EXTENSION,
+  WSO2_CONTEXT_PLACEHOLDER,
+  WSO2_INTERCEPTOR_TOKEN_HEADER,
+  handleWso2ContextRequest,
+} from '../lib/integrations/wso2-context-interceptor.ts'
+
+const SECRET = 'wso2-evaluation-secret-at-least-32-characters'
+
+// A real frozen workload rather than a hand-made one. A minimal envelope is
+// refused by the compiler for missing fields, which is correct behaviour but
+// makes the compile-path test measure the wrong thing.
+const CORPUS = parseWso2EvaluationCorpus(
+  JSON.parse(readFileSync(new URL('../content/integrations/wso2-context-compiler-corpus.json', import.meta.url), 'utf8')),
+)
+
+function envelope(): string {
+  return Buffer.from(JSON.stringify({
+    model: 'm',
+    messages: [
+      { role: 'system', content: `x\n\n${WSO2_CONTEXT_PLACEHOLDER}` },
+      { role: 'user', content: CORPUS.workloads[0].request.task },
+    ],
+    [WSO2_CONTEXT_EXTENSION]: CORPUS.workloads[0].request,
+  }), 'utf8').toString('base64')
+}
+
+const context = { requestId: 'r', apiName: 'a', apiVersion: 'v1', method: 'POST', path: '/v1/chat/completions' }
+
+test('a bad credential fails closed: directRespond, 401, and the token stripped', () => {
+  for (const [label, sent] of [
+    ['under-length', 'too-short-to-be-a-secret'],
+    ['wrong value', 'x'.repeat(SECRET.length)],
+    ['absent', undefined],
+  ] as const) {
+    const headers: Record<string, string> = { 'content-type': 'application/json' }
+    if (sent) headers[WSO2_INTERCEPTOR_TOKEN_HEADER] = sent
+    const result = handleWso2ContextRequest({ requestHeaders: headers, requestBody: envelope(), invocationContext: context }, SECRET)
+
+    assert.equal(result.directRespond, true, `${label}: WSO2 must stop the request, not forward it`)
+    assert.equal(result.responseCode, 401, `${label}: refusal must be a 401`)
+    // The gateway-only credential must never reach the provider, even on refusal.
+    assert.ok(result.headersToRemove?.includes(WSO2_INTERCEPTOR_TOKEN_HEADER), `${label}: token must be stripped`)
+    // A stale content-length on a replaced body is how a proxy truncates or hangs.
+    assert.ok(result.headersToRemove?.includes('content-length'), `${label}: content-length must be recalculated`)
+  }
+})
+
+test('a refusal body is never mistakable for a compiled request', () => {
+  const result = handleWso2ContextRequest({
+    requestHeaders: { 'content-type': 'application/json', [WSO2_INTERCEPTOR_TOKEN_HEADER]: 'wrong' },
+    requestBody: envelope(),
+    invocationContext: context,
+  }, SECRET)
+  const body = JSON.parse(Buffer.from(result.body!, 'base64').toString('utf8')) as Record<string, unknown>
+  assert.ok(body.error, 'a refusal carries an error')
+  assert.equal(body.messages, undefined, 'and carries no messages a provider could answer')
+  // Both together: directRespond stops it, and the shape could not be answered
+  // even if something forwarded it anyway.
+  assert.equal(result.directRespond, true)
+})
+
+test('a compiled request forwards messages and no maha_context', () => {
+  const result = handleWso2ContextRequest({
+    requestHeaders: { 'content-type': 'application/json', [WSO2_INTERCEPTOR_TOKEN_HEADER]: SECRET },
+    requestBody: envelope(),
+    invocationContext: context,
+  }, SECRET)
+  assert.equal(result.directRespond, undefined)
+  const body = JSON.parse(Buffer.from(result.body!, 'base64').toString('utf8')) as Record<string, unknown>
+  assert.ok(Array.isArray(body.messages))
+  assert.equal(body[WSO2_CONTEXT_EXTENSION], undefined, 'the extension must not reach the provider')
+  assert.equal(JSON.stringify(body.messages).includes(WSO2_CONTEXT_PLACEHOLDER), false, 'the placeholder must be replaced')
 })

@@ -66,8 +66,27 @@ const UPPER_BOUND_OUTPUT_TOKENS = MAX_OUTPUT_TOKENS
  */
 const MOCK_INTERCEPTOR_SECRET = 'mock-interceptor-secret-for-non-executing-modes-only'
 
+type GatewayConfig = {
+  gateway: { version: string; ingress: string; controllerApi: string }
+  apis: { pathId: Wso2EvaluationPath; name: string; context: string; resource: string; policies: unknown[] }[]
+}
+
+function gatewayConfig(): GatewayConfig {
+  return JSON.parse(
+    readFileSync(join(process.cwd(), 'content/integrations/wso2-gateway-apis.json'), 'utf8'),
+  ) as GatewayConfig
+}
+
+/** The gateway URL a path is routed through. Every path goes through WSO2. */
+function routeFor(config: GatewayConfig, path: Wso2EvaluationPath): string {
+  const api = config.apis.find((entry) => entry.pathId === path)
+  if (!api) throw new Error(`No gateway API is defined for ${path}.`)
+  return `${config.gateway.ingress.replace(/\/$/, '')}${api.context}${api.resource}`
+}
+
 type Options = {
   execute: boolean
+  preflight: boolean
   validateOnly: boolean
   dryRun: boolean
   force: boolean
@@ -90,6 +109,7 @@ function parseArgs(argv: string[]): Options {
   const ceiling = value('--max-provider-cost-usd')
   return {
     execute: argv.includes('--execute'),
+    preflight: argv.includes('--preflight'),
     validateOnly: argv.includes('--validate-only'),
     dryRun: argv.includes('--dry-run'),
     force: argv.includes('--force-repeat-completed-calls'),
@@ -137,21 +157,6 @@ function wholeDocumentContext(workload: Wso2EvaluationWorkload): string {
     .join('\n\n')
 }
 
-/**
- * A local stand-in for the WSO2 Prompt Compressor.
- *
- * Truncation-style reduction to the same token budget, applied without
- * provenance. It is NOT the real v0.9.0 component: the real one runs in the
- * gateway. Reported as a local approximation wherever it appears, because
- * presenting it as the vendor's product would make the comparison dishonest in
- * exactly the direction that flatters us.
- */
-function approximateNativeCompressorContext(workload: Wso2EvaluationWorkload): string {
-  const budgetCharacters = workload.request.tokenBudget * 4
-  const joined = wholeDocumentContext(workload)
-  return joined.length <= budgetCharacters ? joined : `${joined.slice(0, budgetCharacters)}…`
-}
-
 function prepare(workload: Wso2EvaluationWorkload, path: Wso2EvaluationPath, secret: string): PreparedContext {
   if (path === 'wso2-baseline') {
     const context = wholeDocumentContext(workload)
@@ -159,16 +164,28 @@ function prepare(workload: Wso2EvaluationWorkload, path: Wso2EvaluationPath, sec
   }
 
   if (path === 'wso2-native-prompt-compressor') {
-    const context = approximateNativeCompressorContext(workload)
+    // Whole documents in. The gateway's Prompt Compressor v0.9.0 policy does
+    // the reduction, so nothing is approximated here -- the previous local
+    // truncation stand-in retained 100% of evidence spans, compressed nothing,
+    // and would have made Maha look better by comparison with a comparator that
+    // was not doing its job.
+    //
+    // Consequently the pre-inference measurements for this path are unknown to
+    // this process: it never sees the compressed context. They are recorded as
+    // null rather than guessed, and the provider input-token count is the
+    // honest measure of what the policy actually did.
+    const context = wholeDocumentContext(workload)
     return {
       forwardedContext: context,
       providerBody: baseRequest(workload, context),
       measurements: {
-        contextStrategy: 'local-approximation-of-wso2-prompt-compressor',
+        contextStrategy: 'wso2-prompt-compressor-v0.9.0',
+        compressedInGateway: true,
         passageLevelCitationCapable: false,
         hardBudgetCompliant: null,
         sourceCoveragePercent: null,
-        approximationDisclosure: 'Local truncation stand-in, not WSO2 Prompt Compressor v0.9.0.',
+        preInferenceMeasurementsAvailable: false,
+        note: 'Compression happens inside the gateway; spans measured here are pre-compression and are not what the provider received.',
       },
     }
   }
@@ -247,38 +264,77 @@ function mockProvider(workload: Wso2EvaluationWorkload, forwardedContext: string
  * already asked, and the operator authorized a call count rather than an
  * outcome.
  */
-async function callProvider(body: Record<string, unknown>): Promise<ProviderResponse> {
+async function callThroughGateway(url: string, body: Record<string, unknown>): Promise<ProviderResponse> {
+  // Through WSO2, never straight to the provider. Calling Anthropic directly
+  // for all three paths -- which the first version of this runner did -- does
+  // not test the gateway at all: it measures three context strategies in this
+  // process and reports them as a gateway comparison.
   const key = process.env.ANTHROPIC_API_KEY
   if (!key) return { ok: false, error: 'ANTHROPIC_API_KEY is not set.' }
-  const messages = body.messages as { role: string; content: string }[]
-  const system = messages.find((message) => message.role === 'system')?.content ?? ''
-  const user = messages.find((message) => message.role === 'user')?.content ?? ''
   try {
-    const response = await fetch('https://api.anthropic.com/v1/messages', {
+    const response = await fetch(url, {
       method: 'POST',
-      headers: { 'content-type': 'application/json', 'x-api-key': key, 'anthropic-version': '2023-06-01' },
-      body: JSON.stringify({
-        model: MODEL,
-        max_tokens: MAX_OUTPUT_TOKENS,
-        temperature: TEMPERATURE,
-        system,
-        messages: [{ role: 'user', content: user }],
-      }),
+      headers: {
+        'content-type': 'application/json',
+        'x-api-key': key,
+        'anthropic-version': '2023-06-01',
+      },
+      body: JSON.stringify(body),
     })
-    if (!response.ok) return { ok: false, error: `provider HTTP ${response.status}` }
+    if (!response.ok) return { ok: false, error: `gateway HTTP ${response.status}` }
     const payload = await response.json() as {
       content?: { text?: string }[]
-      usage?: { input_tokens?: number; output_tokens?: number }
+      choices?: { message?: { content?: string } }[]
+      usage?: { input_tokens?: number; output_tokens?: number; prompt_tokens?: number; completion_tokens?: number }
     }
+    const answer = (payload.content ?? []).map((part) => part.text ?? '').join('')
+      || payload.choices?.[0]?.message?.content
+      || ''
     return {
       ok: true,
-      answer: (payload.content ?? []).map((part) => part.text ?? '').join(''),
-      inputTokens: payload.usage?.input_tokens ?? 0,
-      outputTokens: payload.usage?.output_tokens ?? 0,
+      answer,
+      inputTokens: payload.usage?.input_tokens ?? payload.usage?.prompt_tokens ?? 0,
+      outputTokens: payload.usage?.output_tokens ?? payload.usage?.completion_tokens ?? 0,
     }
   } catch (error) {
-    return { ok: false, error: error instanceof Error ? error.message : 'provider request failed' }
+    return { ok: false, error: error instanceof Error ? error.message : 'gateway request failed' }
   }
+}
+
+/**
+ * Zero-cost preflight. Answers every question that does not need a model.
+ *
+ * Run before any paid pilot: a gateway that is not running, or an API that is
+ * not deployed, must be discovered for free rather than by spending on sixty
+ * failed calls.
+ */
+async function preflight(config: GatewayConfig): Promise<{ ok: boolean; checks: Record<string, unknown>[] }> {
+  const checks: Record<string, unknown>[] = []
+  const reach = async (url: string): Promise<string> => {
+    try {
+      const response = await fetch(url, { signal: AbortSignal.timeout(3000) })
+      return `HTTP ${response.status}`
+    } catch (error) {
+      return `unreachable: ${error instanceof Error ? error.message : 'error'}`
+    }
+  }
+
+  checks.push({ id: 'controller.reachable', detail: await reach(config.gateway.controllerApi) })
+  for (const api of config.apis) {
+    checks.push({ id: `api.${api.pathId}.route`, url: routeFor(config, api.pathId), detail: await reach(routeFor(config, api.pathId)) })
+  }
+  const compressor = config.apis
+    .find((api) => api.pathId === 'wso2-native-prompt-compressor')?.policies
+    ?.find((policy) => (policy as { name?: string }).name === 'promptCompressor') as { version?: string; parameters?: { retainedRatio?: number } } | undefined
+  checks.push({
+    id: 'policy.promptCompressor',
+    version: compressor?.version ?? null,
+    retainedRatio: compressor?.parameters?.retainedRatio ?? null,
+    detail: compressor?.version === '0.9.0' ? 'declared v0.9.0' : 'MISSING or wrong version',
+  })
+
+  const ok = checks.every((check) => !String(check.detail).startsWith('unreachable') && !String(check.detail).startsWith('MISSING'))
+  return { ok, checks }
 }
 
 // --- Run --------------------------------------------------------------------
@@ -305,6 +361,15 @@ async function run(): Promise<void> {
     JSON.parse(readFileSync(join(process.cwd(), 'content/integrations/wso2-context-compiler-corpus.json'), 'utf8')),
   )
   const digest = corpus.labelFreeze.digest
+
+  const config = gatewayConfig()
+
+  if (options.preflight) {
+    const result = await preflight(config)
+    console.log(JSON.stringify({ mode: 'preflight', gatewayVersion: config.gateway.version, liveModelCalls: 0, ...result }, null, 2))
+    if (!result.ok) process.exitCode = 1
+    return
+  }
 
   if (options.validateOnly) {
     console.log(JSON.stringify({ mode: 'validate-only', digest, workloads: corpus.workloads.length, plannedCalls: planCalls(corpus.workloads).length }, null, 2))
@@ -367,7 +432,7 @@ async function run(): Promise<void> {
     const workload = corpus.workloads.find((candidate) => candidate.id === call.workloadId)!
     const prepared = prepare(workload, call.path, secret)
     const startedAt = Date.now()
-    const response = await callProvider(prepared.providerBody)
+    const response = await callThroughGateway(routeFor(config, call.path), prepared.providerBody)
     const latency = Date.now() - startedAt
     const cost = response.ok ? callCostMicrodollars(response.inputTokens, response.outputTokens, PRICING) : BigInt(0)
 
