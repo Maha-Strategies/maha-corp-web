@@ -442,7 +442,6 @@ async function preflight(config: GatewayConfig): Promise<{ ok: boolean; checks: 
       headers: { 'content-type': 'application/json' },
       body: JSON.stringify({ requestHeaders: {}, requestBody: '', invocationContext: {} }),
     })
-    const refused = !('error' in refusal) && (refusal.status === 401 || refusal.status === 403)
     // The route answers 200 carrying directRespond:true + responseCode:401 --
     // that IS the refusal, expressed in the interceptor contract rather than in
     // the transport. Checked on the body, not the status.

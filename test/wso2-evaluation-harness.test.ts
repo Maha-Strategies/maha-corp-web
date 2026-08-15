@@ -363,3 +363,18 @@ test('the compressor artifact pins the ratio the evaluation was designed around'
   assert.ok(rules.some((rule) => rule.upperTokenLimit === -1), 'a -1 catch-all rule is required')
   assert.deepEqual(rules[0], { upperTokenLimit: -1, type: 'ratio', value: 0.55 })
 })
+
+test('the evaluation runner parses, because tsconfig excludes scripts/', async () => {
+  // tsconfig excludes scripts/, so `npm run typecheck` never sees this file.
+  // A duplicate const declaration therefore reached the operator as a runtime
+  // SyntaxError after they had already started a gateway and exported a
+  // secret. Importing it here is the cheapest way to make the test suite cover
+  // what the type checker does not.
+  //
+  // Import only: the module runs nothing unless invoked as the entry point,
+  // and every paid path is behind --execute.
+  await assert.doesNotReject(
+    () => import('../scripts/run-wso2-three-path-evaluation.ts'),
+    'the runner must at least parse and load',
+  )
+})
