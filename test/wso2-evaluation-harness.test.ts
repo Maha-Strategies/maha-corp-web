@@ -1,0 +1,186 @@
+import assert from 'node:assert/strict'
+import test from 'node:test'
+
+import {
+  WSO2_EVALUATION_PATHS,
+  assertCheckpointMatches,
+  authorizeNextCall,
+  callCostMicrodollars,
+  countRetainedEvidenceSpans,
+  emptyCheckpoint,
+  findProhibitedAssertions,
+  formatMicrodollars,
+  parseUsdToMicrodollars,
+  planCalls,
+  planResume,
+  scoreRequiredFact,
+  spentMicrodollars,
+  type Wso2CallRecord,
+} from '../lib/integrations/wso2-evaluation-harness.ts'
+
+// Claude Haiku 4.5, the model the single-workload evaluation used.
+const PRICING = { inputPerMillion: BigInt(1_000_000), outputPerMillion: BigInt(5_000_000) }
+
+// --- Exact money ------------------------------------------------------------
+
+test('dollar strings parse to exact microdollars, and floating point is never involved', () => {
+  assert.equal(parseUsdToMicrodollars('0.10'), BigInt(100_000))
+  assert.equal(parseUsdToMicrodollars('0.250000'), BigInt(250_000))
+  assert.equal(parseUsdToMicrodollars('1'), BigInt(1_000_000))
+  // 0.1 + 0.2 !== 0.3 in binary floating point. It does here.
+  assert.equal(parseUsdToMicrodollars('0.1') + parseUsdToMicrodollars('0.2'), parseUsdToMicrodollars('0.3'))
+})
+
+test('an inexact or malformed ceiling is refused rather than coerced', () => {
+  for (const bad of ['', '0.1234567', 'ten cents', '-1', '1e-3', '$0.25', ' ']) {
+    assert.throws(() => parseUsdToMicrodollars(bad), /exact dollar amount/, `${bad} must not parse`)
+  }
+})
+
+test('per-call cost rounds up, so sixty calls cannot undercount the ceiling', () => {
+  // 1 input token at $1/M is 1 microdollar exactly.
+  assert.equal(callCostMicrodollars(1_000_000, 0, PRICING), BigInt(1_000_000))
+  // A single token is a fraction of a microdollar and must still cost one.
+  assert.equal(callCostMicrodollars(1, 0, PRICING), BigInt(1))
+  // Output is priced at $5/M, so one output token is five microdollars -- not
+  // one. Asserting symmetry here was wrong and would have hidden a 5x
+  // undercount of the output side of every projection.
+  assert.equal(callCostMicrodollars(0, 1, PRICING), BigInt(5))
+  assert.equal(callCostMicrodollars(0, 0, PRICING), BigInt(0))
+})
+
+test('the ceiling is enforced before the call, not after', () => {
+  const ceiling = parseUsdToMicrodollars('1.00')
+  const spent = parseUsdToMicrodollars('0.90')
+
+  const fits = authorizeNextCall(spent, parseUsdToMicrodollars('0.10'), ceiling)
+  assert.equal(fits.allowed, true, 'landing exactly on the ceiling is allowed')
+
+  const overruns = authorizeNextCall(spent, parseUsdToMicrodollars('0.100001'), ceiling)
+  assert.equal(overruns.allowed, false, 'one microdollar over must refuse')
+  if (!overruns.allowed) {
+    assert.match(overruns.reason, /Refusing the next call/)
+    // The operator needs all three numbers to act, not just a refusal.
+    assert.match(overruns.reason, /0\.900000/)
+    assert.match(overruns.reason, /1\.000000/)
+  }
+})
+
+test('formatting round-trips, so a reported ceiling is the enforced one', () => {
+  for (const value of ['0.000001', '0.005347', '0.250000', '12.345678']) {
+    assert.equal(formatMicrodollars(parseUsdToMicrodollars(value)), value)
+  }
+})
+
+// --- Deterministic planning -------------------------------------------------
+
+test('the plan is 60 calls in a stable order', () => {
+  const workloads = Array.from({ length: 20 }, (_, index) => ({ id: `wl-${String(index + 1).padStart(2, '0')}` }))
+  const calls = planCalls(workloads)
+  assert.equal(calls.length, 60)
+  assert.deepEqual(calls.slice(0, 3).map((call) => call.path), [...WSO2_EVALUATION_PATHS])
+  assert.deepEqual(planCalls(workloads), calls, 'planning twice must give the same sequence')
+})
+
+test('filters narrow the plan without reordering it', () => {
+  const workloads = [{ id: 'a' }, { id: 'b' }]
+  assert.equal(planCalls(workloads, { workloadId: 'b' }).length, 3)
+  assert.equal(planCalls(workloads, { path: 'wso2-baseline' }).length, 2)
+  assert.equal(planCalls(workloads, { workloadId: 'a', path: 'wso2-baseline' }).length, 1)
+})
+
+// --- Checkpoint and no-repeat ----------------------------------------------
+
+const record = (workloadId: string, path: typeof WSO2_EVALUATION_PATHS[number], cost = '1000'): Wso2CallRecord => ({
+  workloadId, path, outcome: 'ok', costMicrodollars: cost, completedAt: '2026-08-14T00:00:00.000Z',
+})
+
+test('a resumed run repeats no completed call, so an interruption costs nothing', () => {
+  const workloads = [{ id: 'a' }, { id: 'b' }]
+  const planned = planCalls(workloads)
+  const checkpoint = emptyCheckpoint('digest', 'model')
+  checkpoint.records.push(record('a', 'wso2-baseline'), record('a', 'wso2-native-prompt-compressor'))
+
+  const resume = planResume(planned, checkpoint, { upperBoundPerCall: BigInt(1000) })
+  assert.equal(resume.toRun.length, 4)
+  assert.equal(resume.alreadyComplete.length, 2)
+  assert.equal(resume.repeatUpperBound, BigInt(0))
+  assert.ok(!resume.toRun.some((call) => call.workloadId === 'a' && call.path === 'wso2-baseline'))
+})
+
+test('forcing repeats reports the exact additional maximum cost', () => {
+  const planned = planCalls([{ id: 'a' }])
+  const checkpoint = emptyCheckpoint('digest', 'model')
+  checkpoint.records.push(record('a', 'wso2-baseline'), record('a', 'wso2-maha-context-compiler'))
+
+  const forced = planResume(planned, checkpoint, { force: true, upperBoundPerCall: parseUsdToMicrodollars('0.01') })
+  assert.equal(forced.toRun.length, 3, 'force re-runs everything planned')
+  // Two completed calls would be paid for a second time. The operator sees the
+  // number before it happens, not in the invoice.
+  assert.equal(formatMicrodollars(forced.repeatUpperBound), '0.020000')
+})
+
+test('a failure is a recorded result, never a retry', () => {
+  const planned = planCalls([{ id: 'a' }])
+  const checkpoint = emptyCheckpoint('digest', 'model')
+  checkpoint.records.push({ ...record('a', 'wso2-baseline'), outcome: 'failed' })
+
+  const resume = planResume(planned, checkpoint, { upperBoundPerCall: BigInt(1000) })
+  assert.ok(
+    !resume.toRun.some((call) => call.path === 'wso2-baseline'),
+    'a failed call is complete: re-running it is a second charge for a question already answered',
+  )
+})
+
+test('spend is summed exactly from the checkpoint', () => {
+  const checkpoint = emptyCheckpoint('digest', 'model')
+  for (let index = 0; index < 60; index += 1) {
+    checkpoint.records.push(record(`w${index}`, 'wso2-baseline', '1'))
+  }
+  assert.equal(spentMicrodollars(checkpoint), BigInt(60))
+})
+
+test('a checkpoint from a different corpus or model is refused', () => {
+  const checkpoint = emptyCheckpoint('digest-a', 'model-a')
+  assert.throws(() => assertCheckpointMatches(checkpoint, 'digest-b', 'model-a'), /different corpus digest/)
+  assert.throws(() => assertCheckpointMatches(checkpoint, 'digest-a', 'model-b'), /mixing models/)
+  assert.doesNotThrow(() => assertCheckpointMatches(checkpoint, 'digest-a', 'model-a'))
+})
+
+// --- Scoring ----------------------------------------------------------------
+
+const fact = { statement: 'The rollback threshold is two percent over five minutes.', evidence: ['Rollback if API errors exceed 2 percent for five minutes'] }
+
+test('an exact evidence span scores as answered', () => {
+  assert.equal(scoreRequiredFact('The runbook says: Rollback if API errors exceed 2 percent for five minutes.', fact), 'answered')
+})
+
+test('an unrelated answer scores as not answered', () => {
+  assert.equal(scoreRequiredFact('The weather in Colombo is warm today.', fact), 'not_answered')
+})
+
+test('a plausible paraphrase is flagged for review, not silently failed or passed', () => {
+  // The honest case. A deterministic scorer cannot tell this from a wrong
+  // answer, and guessing in either direction would misreport every path.
+  const verdict = scoreRequiredFact('Roll back when the error rate passes two percent across a five minute window.', fact)
+  assert.equal(verdict, 'manual_review_required')
+})
+
+test('prohibited assertions are matched exactly, and absence is not inferred', () => {
+  const banned = ['the rollback threshold is 5 percent']
+  assert.deepEqual(findProhibitedAssertions('The rollback threshold is 5 percent.', banned), banned)
+  assert.deepEqual(findProhibitedAssertions('The rollback threshold is 2 percent.', banned), [])
+})
+
+test('evidence-span retention measures the forwarded context, not the answer', () => {
+  // The distinction the report must not collapse: a span can survive
+  // compression and still go unused, and an answer can be right without it.
+  const facts = [fact, { evidence: ['credential-rotation evidence'] }]
+  const forwarded = 'Rollback if API errors exceed 2 percent for five minutes. Nothing about rotation here.'
+  assert.deepEqual(countRetainedEvidenceSpans(forwarded, facts), { retained: 1, total: 2 })
+})
+
+test('retention counts spans, so a fact with several spans is not one unit', () => {
+  const facts = [{ evidence: ['alpha span', 'beta span'] }]
+  assert.deepEqual(countRetainedEvidenceSpans('alpha span only', facts), { retained: 1, total: 2 })
+})
