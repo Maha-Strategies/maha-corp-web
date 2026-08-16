@@ -92,6 +92,12 @@ export interface ChartCondition {
    */
   requiresSubjects?: string[]
   /**
+   * A pañcāṅga limb the condition reads, and the values that satisfy it.
+   * Any-of semantics. Present only on rules whose condition is a calendar
+   * value rather than a planetary position.
+   */
+  requiresLimb?: { limb: 'tithi' | 'nakshatra' | 'yoga' | 'karana' | 'vara'; anyOf: string[] }
+  /**
    * `direct` conditions are decidable from a fact bundle alone. `requires-derivation`
    * conditions need a computation the compiler does not perform — orientality,
    * dominion, house cusps. Marking them is what lets the compiler fail closed
@@ -295,7 +301,7 @@ const MUHURTA_BOUNDARY = 'The pañcāṅga input is computed and reproducible, b
 export const ASTROLOGY_RULES: InterpretationRule[] = [
   {
     id: 'bs-muhurta-vishti-prohibition', traditionId: 'vedic-jyotisha', technique: 'karaṇa selection', chartTypes: ['electional'],
-    conditions: [{ factField: 'panchanga.karana', description: 'The karaṇa current at the moment under consideration is Viṣṭi (Bhadra).', derivation: 'requires-derivation' }],
+    conditions: [{ factField: 'panchanga.karana', description: 'The karaṇa current at the moment under consideration is Viṣṭi (Bhadra).', requiresLimb: { limb: 'karana', anyOf: ['Viṣṭi'] }, derivation: 'direct' }],
     interpretation: 'The tradition holds that auspicious undertakings are not to be begun during the Viṣṭi (Bhadra) karaṇa.',
     passageIds: ['bs-99-7-vishti'], provenance: 'restates-source', empirical: UNVALIDATED,
     disagreements: ['Later muhūrta literature narrows the prohibition by the portion of Bhadra that falls in daylight and by which loka it is held to occupy, so practice varies on how much of the period is avoided.'],
@@ -303,7 +309,7 @@ export const ASTROLOGY_RULES: InterpretationRule[] = [
   },
   {
     id: 'bs-muhurta-bava-favourable', traditionId: 'vedic-jyotisha', technique: 'karaṇa selection', chartTypes: ['electional'],
-    conditions: [{ factField: 'panchanga.karana', description: 'The karaṇa current at the moment under consideration is Bava.', derivation: 'requires-derivation' }],
+    conditions: [{ factField: 'panchanga.karana', description: 'The karaṇa current at the moment under consideration is Bava.', requiresLimb: { limb: 'karana', anyOf: ['Bava'] }, derivation: 'direct' }],
     interpretation: 'The tradition holds that the Bava karaṇa suits auspicious undertakings, whether of a moveable or a fixed character, and acts directed at health and comfort.',
     passageIds: ['bs-99-6-bava'], provenance: 'restates-source', empirical: UNVALIDATED,
     disagreements: [],
@@ -311,7 +317,7 @@ export const ASTROLOGY_RULES: InterpretationRule[] = [
   },
   {
     id: 'bs-muhurta-kimstughna-favourable', traditionId: 'vedic-jyotisha', technique: 'karaṇa selection', chartTypes: ['electional'],
-    conditions: [{ factField: 'panchanga.karana', description: 'The karaṇa current at the moment under consideration is Kiṃstughna.', derivation: 'requires-derivation' }],
+    conditions: [{ factField: 'panchanga.karana', description: 'The karaṇa current at the moment under consideration is Kiṃstughna.', requiresLimb: { limb: 'karana', anyOf: ['Kiṃstughna'] }, derivation: 'direct' }],
     interpretation: 'The tradition holds that the Kiṃstughna karaṇa suits work for health and comfort and auspicious undertakings generally.',
     passageIds: ['bs-99-8-kimstughna'], provenance: 'restates-source', empirical: UNVALIDATED,
     disagreements: [],
@@ -319,7 +325,7 @@ export const ASTROLOGY_RULES: InterpretationRule[] = [
   },
   {
     id: 'bs-tithi-groups', traditionId: 'vedic-jyotisha', technique: 'tithi selection', chartTypes: ['electional'],
-    conditions: [{ factField: 'panchanga.tithi', description: 'The tithi current at the moment under consideration, taken within its fortnight.', derivation: 'requires-derivation' }],
+    conditions: [{ factField: 'panchanga.tithi', description: 'The tithi current at the moment under consideration, taken within its fortnight.', derivation: 'direct' }],
     interpretation: 'The tradition sorts the fifteen tithis of a fortnight into five named groups — Nandā, Bhadrā, Vijayā, Riktā and Pūrṇā — which later practice treats as the basis for selecting or avoiding a lunar day, Riktā being the group generally avoided.',
     passageIds: ['bs-99-2-tithi-groups'], provenance: 'restates-source', empirical: UNVALIDATED,
     disagreements: ['The cited verse names the five groups but does not itself rank them; the avoidance of Riktā is later doctrine, and treating it as Varāhamihira’s own statement would overread the passage.'],
@@ -327,7 +333,7 @@ export const ASTROLOGY_RULES: InterpretationRule[] = [
   },
   {
     id: 'bs-fixed-karana-placement', traditionId: 'vedic-jyotisha', technique: 'karaṇa structure', chartTypes: ['electional', 'natal'],
-    conditions: [{ factField: 'panchanga.karana', description: 'The position of the four fixed karaṇas within the lunar month.', derivation: 'requires-derivation' }],
+    conditions: [{ factField: 'panchanga.karana', description: 'The position of the four fixed karaṇas within the lunar month.', derivation: 'direct' }],
     interpretation: 'The tradition places the four fixed karaṇas — Śakuni, Catuṣpada, Nāga and Kiṃstughna — beginning from the second half of the fourteenth day of the waning moon.',
     passageIds: ['bs-99-5-fixed-karanas'], provenance: 'restates-source', empirical: UNVALIDATED,
     disagreements: [],
