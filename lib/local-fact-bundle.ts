@@ -10,7 +10,7 @@
 
 import { createHash } from 'node:crypto'
 
-import { EclipticGeoMoon, SunPosition } from 'astronomy-engine'
+import { Body, Ecliptic, EclipticGeoMoon, GeoVector, SunPosition } from 'astronomy-engine'
 
 import { CELESTIAL_FACT_SCHEMA_VERSION, type CelestialFactBundle, type CelestialPositionFact, type CelestialReferenceContract } from './celestial-facts.ts'
 
@@ -38,6 +38,20 @@ function normalize(degrees: number): number {
   return ((degrees % 360) + 360) % 360
 }
 
+/**
+ * The seven classical grahas. Rules keyed to a body absent from the bundle are
+ * excluded as `condition-unsatisfied`, which reads as a judgement about the
+ * chart when it is really a missing input — so all seven are always computed.
+ */
+export const CLASSICAL_BODIES = ['Sun', 'Moon', 'Mercury', 'Venus', 'Mars', 'Jupiter', 'Saturn'] as const
+export type ClassicalBody = typeof CLASSICAL_BODIES[number]
+
+function eclipticLongitude(body: ClassicalBody, instant: Date): number {
+  if (body === 'Sun') return SunPosition(instant).elon
+  if (body === 'Moon') return EclipticGeoMoon(instant).lon
+  return Ecliptic(GeoVector(Body[body], instant, true)).elon
+}
+
 export interface LocalBundleInput {
   instant: Date
   latitudeDegrees: number
@@ -50,10 +64,7 @@ export function buildLocalFactBundle(input: LocalBundleInput): CelestialFactBund
   const { instant, latitudeDegrees, longitudeDegrees, elevationMeters = 0, observerId = 'obs-local' } = input
   const iso = instant.toISOString()
 
-  const positions: [string, number][] = [
-    ['Sun', normalize(SunPosition(instant).elon)],
-    ['Moon', normalize(EclipticGeoMoon(instant).lon)],
-  ]
+  const positions: [string, number][] = CLASSICAL_BODIES.map((body) => [body, normalize(eclipticLongitude(body, instant))])
 
   const facts: CelestialPositionFact[] = positions.map(([name, longitude]) => ({
     id: `fact-${name.toLowerCase()}`,
@@ -64,13 +75,13 @@ export function buildLocalFactBundle(input: LocalBundleInput): CelestialFactBund
     provenance: {
       providerSourceId: LOCAL_EPHEMERIS_SOURCE_ID,
       providerRequestUrl: 'https://github.com/cosinekitty/astronomy',
-      providerRequestParameters: { body: name, instant: iso, method: name === 'Moon' ? 'EclipticGeoMoon' : 'SunPosition' },
+      providerRequestParameters: { body: name, instant: iso, method: name === 'Sun' ? 'SunPosition' : name === 'Moon' ? 'EclipticGeoMoon' : 'GeoVector+Ecliptic' },
       providerResponseSha256: sha256(JSON.stringify({ body: name, instant: iso, longitude })),
       retrievedAt: iso,
       software: { name: 'astronomy-engine', version: '2.1.19' },
       limitations: [
         'Computed in process rather than fetched, so the digest covers the computed value and not a provider response body.',
-        'Apparent geocentric ecliptic longitude of date; latitude and distance are not carried because the pañcāṅga does not read them.',
+        'Apparent geocentric ecliptic longitude of date; latitude and distance are not carried because no rule in the corpus reads them.',
       ],
     },
   }))
