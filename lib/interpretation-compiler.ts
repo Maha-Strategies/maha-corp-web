@@ -29,6 +29,7 @@ import {
   type InterpretationRule,
 } from './astrology-traditions.ts'
 import { canonicalCelestialFactBundle, validateCelestialFactBundle, type CelestialFactBundle } from './celestial-facts.ts'
+import { computePanchanga, type Panchanga } from './panchanga.ts'
 
 export const COMPILER_VERSION = 'interpretation-compiler/0.1' as const
 
@@ -63,6 +64,10 @@ export type ExclusionReason =
   | 'report-policy'
   | 'requires-derivation'
   | 'condition-unsatisfied'
+  /** The limb the rule depends on sits too close to a division edge to assert. */
+  | 'limb-uncertain'
+  /** The bundle carries no observer, so no pañcāṅga could be derived. */
+  | 'panchanga-unavailable'
 
 export interface RuleExclusion {
   ruleId: string
@@ -80,6 +85,8 @@ export interface CompiledModule {
   passageIds: string[]
   sourceIds: string[]
   factIds: string[]
+  /** Pañcāṅga limb values this module matched on, e.g. "karana=Viṣṭi". */
+  observedLimbs: string[]
   disagreements: string[]
   boundary: string
 }
@@ -107,6 +114,8 @@ export interface CompiledReport {
   conflictPolicy: string
   modules: CompiledModule[]
   exclusions: RuleExclusion[]
+  /** The pañcāṅga derived for this moment, when the bundle allowed one. */
+  panchanga: Panchanga | null
   provenance: ProvenanceBundle
 }
 
@@ -147,12 +156,24 @@ function subjectIndex(bundle: CelestialFactBundle): Map<string, string[]> {
   return index
 }
 
+/** Reads one limb off a computed pañcāṅga. */
+function limbValue(panchanga: Panchanga, limb: NonNullable<InterpretationRule['conditions'][number]['requiresLimb']>['limb']): { name: string; nearBoundary: boolean } {
+  switch (limb) {
+    case 'tithi': return { name: panchanga.tithi.name, nearBoundary: panchanga.tithi.nearBoundary }
+    case 'nakshatra': return { name: panchanga.nakshatra.name, nearBoundary: panchanga.nakshatra.nearBoundary }
+    case 'yoga': return { name: panchanga.yoga.name, nearBoundary: panchanga.yoga.nearBoundary }
+    case 'karana': return { name: panchanga.karana.name, nearBoundary: panchanga.karana.nearBoundary }
+    case 'vara': return { name: panchanga.vara.name, nearBoundary: false }
+  }
+}
+
 /** Decides one rule's fate. Returns the fact ids it reads, or the reason it was excluded. */
 function screenRule(
   rule: InterpretationRule,
   chartType: AstrologyChartType,
   subjects: Map<string, string[]>,
-): { included: true; factIds: string[] } | { included: false; exclusion: RuleExclusion } {
+  panchanga: Panchanga | null,
+): { included: true; factIds: string[]; observed: string[] } | { included: false; exclusion: RuleExclusion } {
   const base = { ruleId: rule.id, technique: rule.technique }
 
   if (!rule.chartTypes.includes(chartType)) {
@@ -167,10 +188,33 @@ function screenRule(
   }
 
   const factIds: string[] = []
+  const observed: string[] = []
   for (const condition of rule.conditions) {
     if (condition.derivation === 'requires-derivation') {
       return { included: false, exclusion: { ...base, reason: 'requires-derivation', detail: `Condition on ${condition.factField} needs a derivation the compiler does not perform: ${condition.description}` } }
     }
+
+    if (condition.factField.startsWith('panchanga.')) {
+      if (!panchanga) {
+        return { included: false, exclusion: { ...base, reason: 'panchanga-unavailable', detail: 'No observer is present in the fact bundle, so no pañcāṅga could be derived for this moment.' } }
+      }
+      if (condition.requiresLimb) {
+        const { limb, anyOf } = condition.requiresLimb
+        const value = limbValue(panchanga, limb)
+        // A limb within tolerance of a division edge would flip on a small
+        // change of ayanāṁśa or instant. Reporting a verdict off it would be
+        // asserting more precision than the input carries.
+        if (value.nearBoundary) {
+          return { included: false, exclusion: { ...base, reason: 'limb-uncertain', detail: `The ${limb} is within the boundary tolerance of a division edge, so it is not asserted for this moment.` } }
+        }
+        if (!anyOf.includes(value.name)) {
+          return { included: false, exclusion: { ...base, reason: 'condition-unsatisfied', detail: `The ${limb} is ${value.name}; this rule requires ${anyOf.join(' or ')}.` } }
+        }
+        observed.push(`${limb}=${value.name}`)
+      }
+      continue
+    }
+
     if (condition.requiresSubjects) {
       const matched = condition.requiresSubjects.flatMap((subject) => subjects.get(subject) ?? [])
       if (matched.length === 0) {
@@ -180,7 +224,7 @@ function screenRule(
     }
   }
 
-  return { included: true, factIds: [...new Set(factIds)] }
+  return { included: true, factIds: [...new Set(factIds)], observed }
 }
 
 export function compileReport(input: CompileInput): CompiledReport {
@@ -200,11 +244,22 @@ export function compileReport(input: CompileInput): CompiledReport {
 
   // Stage 3 — screen every rule, recording why each one was kept or withheld.
   const subjects = subjectIndex(factBundle)
+  // Derived from the bundle rather than passed in, so the report cannot be
+  // compiled against a pañcāṅga belonging to a different moment or place.
+  const observer = factBundle.observers[0]
+  const panchanga = observer
+    ? computePanchanga({
+      instant: new Date(factBundle.time.utcInstant),
+      latitudeDegrees: observer.latitudeDegrees,
+      longitudeDegrees: observer.longitudeDegrees,
+      elevationMeters: observer.elevationMeters,
+    })
+    : null
   const modules: CompiledModule[] = []
   const exclusions: RuleExclusion[] = []
 
   for (const rule of rules) {
-    const screened = screenRule(rule, chartType, subjects)
+    const screened = screenRule(rule, chartType, subjects, panchanga)
     if (!screened.included) { exclusions.push(screened.exclusion); continue }
 
     const sourceIds = [...new Set(rule.passageIds.map((id) => getAstrologyPassage(id)?.sourceId).filter((id) => id !== undefined))]
@@ -216,6 +271,7 @@ export function compileReport(input: CompileInput): CompiledReport {
       passageIds: [...rule.passageIds],
       sourceIds,
       factIds: screened.factIds,
+      observedLimbs: screened.observed,
       disagreements: [...rule.disagreements],
       boundary: rule.boundary,
     })
@@ -225,7 +281,7 @@ export function compileReport(input: CompileInput): CompiledReport {
 
   // Stage 4 — provenance, keyed to digests of the exact inputs.
   const factBundleSha256 = sha256(canonicalCelestialFactBundle(factBundle))
-  const inputSha256 = sha256(JSON.stringify({ factBundleSha256, traditionId, chartType, compilerVersion: COMPILER_VERSION, registryVersion: ASTROLOGY_VERSION }))
+  const inputSha256 = sha256(JSON.stringify({ factBundleSha256, traditionId, chartType, compilerVersion: COMPILER_VERSION, registryVersion: ASTROLOGY_VERSION, panchangaVersion: panchanga?.version ?? null }))
 
   const report: CompiledReport = {
     reportId: `rep_${inputSha256.slice(7, 27)}`,
@@ -237,6 +293,7 @@ export function compileReport(input: CompileInput): CompiledReport {
     conflictPolicy: CONFLICT_POLICY,
     modules,
     exclusions,
+    panchanga,
     provenance: {
       compilerVersion: COMPILER_VERSION,
       traditionRegistryVersion: ASTROLOGY_VERSION,
