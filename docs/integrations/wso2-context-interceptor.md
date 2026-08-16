@@ -39,6 +39,17 @@ The route does not store source text or compiled context. Evidence returned to
 the gateway is limited to the pack identifier, input/output hashes, aggregate
 token measurements, source coverage, passage count, and contract version.
 
+### Minimum-size and non-expansion bypass
+
+The interceptor does not substitute a compiled pack when the rendered
+whole-document input is below 1,024 model-neutral estimated tokens. It forwards that original
+source-linked context instead. Above the threshold it still compares the
+compiled and original rendered contexts and selects the original whenever the
+compiler framing would be the same size or larger. The response identifies the
+decision with `x-maha-context-bypassed` and
+`x-maha-context-bypass-reason`. This guarantees that enabling the policy does
+not increase the estimated provider context on small or non-reducing inputs.
+
 ## OpenAI-compatible input extension
 
 ```json
@@ -234,6 +245,24 @@ the frozen-label digest. It does not execute any comparison path, score a model,
 or establish a competitive result. The provider-backed comparison must use the
 same frozen requests and labels, report
 every workload rather than only aggregate winners, and preserve failures.
+
+The separate cost corpus is
+`content/integrations/wso2-large-context-cost-corpus.json`. Its twenty
+synthetic workloads range from 20,006 to 99,983 model-neutral estimated tokens
+and cover RAG exports, manuals, contracts, incident timelines, audit streams,
+transcripts and mixed enterprise records. Run it without provider calls with:
+
+```bash
+node --experimental-strip-types scripts/run-wso2-three-path-evaluation.ts \
+  --dry-run \
+  --corpus=content/integrations/wso2-large-context-cost-corpus.json
+```
+
+The runner writes model answers to a separate sanitized, path-blinded human
+adjudication artifact. The response-to-path key is written separately; the
+ordinary comparison artifact contains scores and aggregates but no answer
+text. Live runs checkpoint the sanitized answer with each paid result so an
+interruption cannot force a duplicate call or make prior answers unreviewable.
 
 ## Non-fit and failure boundaries
 

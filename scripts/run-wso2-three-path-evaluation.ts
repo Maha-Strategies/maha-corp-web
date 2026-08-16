@@ -6,6 +6,7 @@ import {
   WSO2_EVALUATION_PATHS,
   assertCheckpointMatches,
   authorizeNextCall,
+  buildBlindedAdjudication,
   callCostMicrodollars,
   checkpointResults,
   countRetainedEvidenceSpans,
@@ -18,6 +19,7 @@ import {
   planCalls,
   planResume,
   scoreRequiredFact,
+  sanitizeAdjudicationAnswer,
   spentMicrodollars,
   type Microdollars,
   type Wso2CallRecord,
@@ -54,9 +56,6 @@ const MODEL = 'claude-haiku-4-5-20251001'
 const PRICING = { inputPerMillion: BigInt(1_000_000), outputPerMillion: BigInt(5_000_000) }
 const TEMPERATURE = 0
 const MAX_OUTPUT_TOKENS = 220
-
-/** Conservative per-call bound, used for projection before anything is spent. */
-const UPPER_BOUND_INPUT_TOKENS = 4_000
 const UPPER_BOUND_OUTPUT_TOKENS = MAX_OUTPUT_TOKENS
 
 /**
@@ -98,6 +97,9 @@ type Options = {
   ceiling?: Microdollars
   output: string
   checkpoint: string
+  corpus: string
+  adjudicationOutput: string
+  adjudicationKeyOutput: string
 }
 
 function parseArgs(argv: string[]): Options {
@@ -121,6 +123,9 @@ function parseArgs(argv: string[]): Options {
     ceiling: ceiling === undefined ? undefined : parseUsdToMicrodollars(ceiling),
     output: value('--output') ?? 'artifacts/wso2/three-path-evaluation.json',
     checkpoint: value('--checkpoint') ?? 'artifacts/wso2/three-path-checkpoint.json',
+    corpus: value('--corpus') ?? 'content/integrations/wso2-context-compiler-corpus.json',
+    adjudicationOutput: value('--adjudication-output') ?? 'artifacts/wso2/three-path-adjudication-blinded.json',
+    adjudicationKeyOutput: value('--adjudication-key-output') ?? 'artifacts/wso2/three-path-adjudication-key.json',
   }
 }
 
@@ -266,6 +271,8 @@ function prepare(
       mahaEstimatedReductionPercent: Number(headers['x-maha-estimated-reduction-percent']),
       sourceCoveragePercent: Number(headers['x-maha-source-coverage-percent']),
       includedPassageCount: Number(headers['x-maha-included-passage-count']),
+      bypassApplied: headers['x-maha-context-bypassed'] === 'true',
+      bypassReason: headers['x-maha-context-bypass-reason'],
       hardBudgetCompliant: Number(headers['x-maha-compiled-estimated-tokens']) <= workload.request.tokenBudget,
       sourceTextStored: false,
       compiledContextStored: false,
@@ -281,14 +288,6 @@ type ProviderResponse =
 
 type ScoredResult = ReturnType<typeof score>
 
-const PUBLICATION_THRESHOLDS = {
-  requiredFactsAnswered: 56,
-  requiredFactsTotal: 58,
-  expectedCitationsResolved: 65,
-  expectedCitationsTotal: 68,
-  mahaHardBudgetCompliant: 20,
-} as const
-
 /** Publication eligibility is computed, never inferred from an aggregate. */
 function publicationGates(results: readonly ScoredResult[], plannedCallCount: number) {
   const maha = results.filter((result) => result.path === 'wso2-maha-context-compiler')
@@ -300,25 +299,28 @@ function publicationGates(results: readonly ScoredResult[], plannedCallCount: nu
   const prohibitedAssertions = results.reduce((sum, result) => sum + result.answer.prohibitedAssertions.length, 0)
   const failures = results.filter((result) => !result.answer.ok)
   const failuresDisclosed = failures.every((result) => typeof result.answer.error === 'string' && result.answer.error.length > 0)
+  const requiredFactsAnswered = Math.ceil(factsTotal * 0.95)
+  const requiredCitationsResolved = Math.ceil(citationsTotal * 0.95)
+  const requiredMahaBudgetResults = Math.floor(plannedCallCount / WSO2_EVALUATION_PATHS.length)
 
   const checks = {
     allPlannedResultsPresent: { pass: results.length === plannedCallCount, actual: results.length, required: plannedCallCount },
     requiredFactsAnswered: {
-      pass: factsAnswered >= PUBLICATION_THRESHOLDS.requiredFactsAnswered && factsTotal === PUBLICATION_THRESHOLDS.requiredFactsTotal,
+      pass: factsAnswered >= requiredFactsAnswered,
       actual: factsAnswered,
       total: factsTotal,
-      required: PUBLICATION_THRESHOLDS.requiredFactsAnswered,
+      required: requiredFactsAnswered,
     },
     expectedCitationsResolved: {
-      pass: citationsResolved >= PUBLICATION_THRESHOLDS.expectedCitationsResolved && citationsTotal === PUBLICATION_THRESHOLDS.expectedCitationsTotal,
+      pass: citationsResolved >= requiredCitationsResolved,
       actual: citationsResolved,
       total: citationsTotal,
-      required: PUBLICATION_THRESHOLDS.expectedCitationsResolved,
+      required: requiredCitationsResolved,
     },
     mahaHardBudgetCompliant: {
-      pass: hardBudgetCompliant === PUBLICATION_THRESHOLDS.mahaHardBudgetCompliant && maha.length === PUBLICATION_THRESHOLDS.mahaHardBudgetCompliant,
+      pass: hardBudgetCompliant === requiredMahaBudgetResults && maha.length === requiredMahaBudgetResults,
       actual: hardBudgetCompliant,
-      required: PUBLICATION_THRESHOLDS.mahaHardBudgetCompliant,
+      required: requiredMahaBudgetResults,
     },
     prohibitedAssertions: { pass: prohibitedAssertions === 0, actual: prohibitedAssertions, required: 0 },
     failuresDisclosed: { pass: failuresDisclosed, failures: failures.length },
@@ -594,7 +596,7 @@ function writeJson(path: string, value: unknown): void {
 async function run(): Promise<void> {
   const options = parseArgs(process.argv.slice(2))
   const corpus = parseWso2EvaluationCorpus(
-    JSON.parse(readFileSync(join(process.cwd(), 'content/integrations/wso2-context-compiler-corpus.json'), 'utf8')),
+    JSON.parse(readFileSync(join(process.cwd(), options.corpus), 'utf8')),
   )
   const digest = corpus.labelFreeze.digest
 
@@ -613,14 +615,27 @@ async function run(): Promise<void> {
   }
 
   const planned = planCalls(corpus.workloads, { workloadId: options.workloadId, path: options.path })
-  const upperBoundPerCall = callCostMicrodollars(UPPER_BOUND_INPUT_TOKENS, UPPER_BOUND_OUTPUT_TOKENS, PRICING)
+  // JSON UTF-8 bytes / 2 is deliberately conservative for these sanitized
+  // prose corpora and includes system/task framing. It is computed after the
+  // corpus is frozen, so the authorization request is based on what will be
+  // sent rather than a hard-coded small-prompt assumption.
+  const callUpperBound = (call: { workloadId: string }) => {
+    const workload = corpus.workloads.find((candidate) => candidate.id === call.workloadId)!
+    const providerBody = baseRequest(workload, wholeDocumentContext(workload))
+    const inputTokens = Math.ceil(Buffer.byteLength(JSON.stringify(providerBody), 'utf8') / 2)
+    return callCostMicrodollars(inputTokens, UPPER_BOUND_OUTPUT_TOKENS, PRICING)
+  }
+  const upperBoundPerCall = planned.reduce((maximum, call) => {
+    const bound = callUpperBound(call)
+    return bound > maximum ? bound : maximum
+  }, BigInt(0))
   const checkpoint = readCheckpoint(options.checkpoint, digest)
   const resume = planResume(planned, checkpoint, { force: options.force, upperBoundPerCall })
   // A paid call recorded without its result cannot be repaired safely: omitting
   // it corrupts the report, while repeating it spends twice. Refuse before any
   // new call. Fresh checkpoints are unaffected.
   checkpointResults<ScoredResult>(resume.alreadyComplete, checkpoint)
-  const projection = BigInt(resume.toRun.length) * upperBoundPerCall
+  const projection = resume.toRun.reduce((total, call) => total + callUpperBound(call), BigInt(0))
 
   if (options.force && resume.repeatUpperBound > BigInt(0)) {
     console.log(`FORCE: repeating ${resume.alreadyComplete.length} completed calls costs up to an ADDITIONAL $${formatMicrodollars(resume.repeatUpperBound)}.`)
@@ -648,7 +663,10 @@ async function run(): Promise<void> {
       return score(workload, call.path, prepared, response, 0)
     })
     const gates = publicationGates(results, planned.length)
-    writeJson(options.output, { mode: options.dryRun ? 'dry-run' : 'mock', ...summary, publicationGates: gates, results })
+    const adjudication = buildBlindedAdjudication(digest, corpus.workloads, results)
+    writeJson(options.adjudicationOutput, adjudication.blinded)
+    writeJson(options.adjudicationKeyOutput, adjudication.key)
+    writeJson(options.output, { mode: options.dryRun ? 'dry-run' : 'mock', ...summary, comparison: comparisonSummary(results), publicationGates: gates, results: results.map(publicResult) })
     console.log(JSON.stringify({ ...summary, mode: options.dryRun ? 'dry-run' : 'mock', wrote: options.output, liveCalls: 0 }, null, 2))
     if (!gates.pass) process.exitCode = 1
     return
@@ -666,7 +684,7 @@ async function run(): Promise<void> {
 
   let executedThisRun = 0
   for (const call of resume.toRun) {
-    const decision = authorizeNextCall(spentMicrodollars(checkpoint), upperBoundPerCall, options.ceiling)
+    const decision = authorizeNextCall(spentMicrodollars(checkpoint), callUpperBound(call), options.ceiling)
     if (!decision.allowed) {
       console.error(decision.reason)
       break
@@ -701,7 +719,10 @@ async function run(): Promise<void> {
 
   const results = checkpointResults<ScoredResult>(planned, checkpoint)
   const gates = publicationGates(results, planned.length)
-  const artifact = { mode: 'live', ...summary, spentUsd: formatMicrodollars(spentMicrodollars(checkpoint)), publicationGates: gates, results }
+  const adjudication = buildBlindedAdjudication(digest, corpus.workloads, results)
+  writeJson(options.adjudicationOutput, adjudication.blinded)
+  writeJson(options.adjudicationKeyOutput, adjudication.key)
+  const artifact = { mode: 'live', ...summary, spentUsd: formatMicrodollars(spentMicrodollars(checkpoint)), comparison: comparisonSummary(results), publicationGates: gates, results: results.map(publicResult) }
   writeJson(options.output, artifact)
   console.log(JSON.stringify({ ...summary, mode: 'live', liveCalls: executedThisRun, durableResults: results.length, publicationGatesPass: gates.pass, spentUsd: formatMicrodollars(spentMicrodollars(checkpoint)), artifactHash: hashArtifact(artifact) }, null, 2))
 }
@@ -733,6 +754,8 @@ function score(
     mahaEstimatedCompiledTokens: Number(fromGateway['x-maha-compiled-estimated-tokens']),
     sourceCoveragePercent: Number(fromGateway['x-maha-source-coverage-percent']),
     includedPassageCount: Number(fromGateway['x-maha-included-passage-count']),
+    bypassApplied: fromGateway['x-maha-context-bypassed'] === 'true',
+    bypassReason: fromGateway['x-maha-context-bypass-reason'],
     hardBudgetCompliant: Number(fromGateway['x-maha-compiled-estimated-tokens']) <= workload.request.tokenBudget,
     preInferenceMeasurementsAvailable: true,
   }
@@ -768,8 +791,55 @@ function score(
       providerInputTokens: response.ok ? response.inputTokens : null,
       providerOutputTokens: response.ok ? response.outputTokens : null,
       latencyMs,
+      // Checkpoints retain only this sanitized form. The public results
+      // artifact omits it; a separate path-blinded file is generated for the
+      // human adjudicator, with the path mapping written separately.
+      reviewText: sanitizeAdjudicationAnswer(answer),
     },
   }
+}
+
+function publicResult(result: ScoredResult) {
+  const answer: Omit<ScoredResult['answer'], 'reviewText'> & { reviewText?: string } = { ...result.answer }
+  delete answer.reviewText
+  return { ...result, answer }
+}
+
+function percentile(values: number[], fraction: number): number | null {
+  if (values.length === 0) return null
+  const sorted = [...values].sort((left, right) => left - right)
+  return sorted[Math.min(sorted.length - 1, Math.ceil(sorted.length * fraction) - 1)]
+}
+
+function comparisonSummary(results: readonly ScoredResult[]) {
+  return Object.fromEntries(WSO2_EVALUATION_PATHS.map((path) => {
+    const pathResults = results.filter((result) => result.path === path)
+    const successful = pathResults.filter((result) => result.answer.ok)
+    const inputTokens = successful.reduce((sum, result) => sum + (result.answer.providerInputTokens ?? 0), 0)
+    const outputTokens = successful.reduce((sum, result) => sum + (result.answer.providerOutputTokens ?? 0), 0)
+    const latencies = successful.map((result) => result.answer.latencyMs)
+    const cost = successful.reduce(
+      (sum, result) => sum + callCostMicrodollars(result.answer.providerInputTokens ?? 0, result.answer.providerOutputTokens ?? 0, PRICING),
+      BigInt(0),
+    )
+    return [path, {
+      calls: pathResults.length,
+      successfulCalls: successful.length,
+      providerInputTokens: inputTokens,
+      providerOutputTokens: outputTokens,
+      providerCostUsd: formatMicrodollars(cost),
+      requiredFactsAnswered: pathResults.reduce((sum, result) => sum + result.answer.requiredFactsAnswered, 0),
+      requiredFactsTotal: pathResults.reduce((sum, result) => sum + result.answer.requiredFactsTotal, 0),
+      expectedCitationLinksResolved: pathResults.reduce((sum, result) => sum + result.answer.expectedCitationLinksResolved, 0),
+      expectedCitationLinksTotal: pathResults.reduce((sum, result) => sum + result.answer.expectedCitationLinksTotal, 0),
+      latencyMs: {
+        mean: latencies.length === 0 ? null : Math.round(latencies.reduce((sum, value) => sum + value, 0) / latencies.length),
+        p50: percentile(latencies, 0.5),
+        p95: percentile(latencies, 0.95),
+      },
+      mahaBypassCount: pathResults.filter((result) => result.context.bypassApplied === true).length,
+    }]
+  }))
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {

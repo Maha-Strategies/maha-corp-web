@@ -9,6 +9,7 @@ import {
   WSO2_EVALUATION_PATHS,
   assertCheckpointMatches,
   authorizeNextCall,
+  buildBlindedAdjudication,
   callCostMicrodollars,
   checkpointResults,
   countRetainedEvidenceSpans,
@@ -20,9 +21,33 @@ import {
   planCalls,
   planResume,
   scoreRequiredFact,
+  sanitizeAdjudicationAnswer,
   spentMicrodollars,
   type Wso2CallRecord,
 } from '../lib/integrations/wso2-evaluation-harness.ts'
+
+test('human-review answers are sanitized and path identities are kept in a separate key', () => {
+  const corpus = parseWso2EvaluationCorpus(
+    JSON.parse(readFileSync(new URL('../content/integrations/wso2-context-compiler-corpus.json', import.meta.url), 'utf8')),
+  )
+  const workload = corpus.workloads[0]
+  const results = WSO2_EVALUATION_PATHS.map((path) => ({
+    workloadId: workload.id,
+    path,
+    answer: { reviewText: sanitizeAdjudicationAnswer('Allowed answer. Bearer secret-token-value-1234567890 sk-ant-abcdefghijklmnop') },
+  }))
+  const review = buildBlindedAdjudication(corpus.labelFreeze.digest, [workload], results)
+  const blindText = JSON.stringify(review.blinded)
+
+  assert.equal(review.blinded.responses.length, 3)
+  assert.equal(blindText.includes('wso2-baseline'), false)
+  assert.equal(blindText.includes('wso2-native-prompt-compressor'), false)
+  assert.equal(blindText.includes('wso2-maha-context-compiler'), false)
+  assert.equal(blindText.includes('secret-token-value'), false)
+  assert.equal(blindText.includes('abcdefghijklmnop'), false)
+  assert.deepEqual(new Set(review.key.mappings.map((entry) => entry.path)), new Set(WSO2_EVALUATION_PATHS))
+  assert.ok(review.blinded.responses.every((entry) => entry.requiredFacts.every((fact) => fact.verdict === null)))
+})
 
 // Claude Haiku 4.5, the model the single-workload evaluation used.
 const PRICING = { inputPerMillion: BigInt(1_000_000), outputPerMillion: BigInt(5_000_000) }

@@ -1,4 +1,4 @@
-import { createHash } from 'node:crypto'
+import { createHash, randomBytes } from 'node:crypto'
 
 import type { Wso2EvaluationWorkload } from './wso2-evaluation-corpus.ts'
 
@@ -326,4 +326,62 @@ export function isResolvableSourceCitation(citation: string, sourceIds: Set<stri
 
 export function hashArtifact(value: unknown): string {
   return `sha256:${createHash('sha256').update(JSON.stringify(value)).digest('hex')}`
+}
+
+// --- Human adjudication ----------------------------------------------------
+
+const MAX_ADJUDICATION_ANSWER_CHARS = 16_000
+
+/** Retain reviewable model output without retaining credential-shaped strings. */
+export function sanitizeAdjudicationAnswer(value: string): string {
+  return value
+    .normalize('NFC')
+    .replace(/[\u0000-\u0008\u000B\u000C\u000E-\u001F\u007F]/g, '')
+    .replace(/\b(?:sk-ant-|sk-|xox[baprs]-)[A-Za-z0-9_-]{12,}\b/g, '[REDACTED_CREDENTIAL]')
+    .replace(/\bBearer\s+[A-Za-z0-9._~+\/-]+=*/gi, 'Bearer [REDACTED_CREDENTIAL]')
+    .replace(/\b0x[a-fA-F0-9]{64}\b/g, '[REDACTED_PRIVATE_KEY_SHAPE]')
+    .slice(0, MAX_ADJUDICATION_ANSWER_CHARS)
+}
+
+type ReviewableResult = {
+  workloadId: string
+  path: Wso2EvaluationPath
+  answer: { reviewText?: string }
+}
+
+export function buildBlindedAdjudication(
+  corpusDigest: string,
+  workloads: readonly Wso2EvaluationWorkload[],
+  results: readonly ReviewableResult[],
+) {
+  const workloadById = new Map(workloads.map((workload) => [workload.id, workload]))
+  const joined = results.map((result) => {
+    const workload = workloadById.get(result.workloadId)
+    if (!workload) throw new Error(`No frozen workload exists for ${result.workloadId}.`)
+    if (typeof result.answer.reviewText !== 'string') throw new Error(`Result ${callKey(result)} has no sanitized answer for adjudication.`)
+    // Random rather than a digest of the path: the latter is reversible from
+    // this open-source code and the three known path names, so it is not blind.
+    const responseId = `review_${randomBytes(12).toString('hex')}`
+    return {
+      blind: {
+        responseId,
+        workloadId: workload.id,
+        difficulty: workload.difficulty,
+        answer: result.answer.reviewText,
+        requiredFacts: workload.labels.requiredFacts.map((fact) => ({ id: fact.id, statement: fact.statement, sourceIds: fact.sourceIds, verdict: null })),
+        mustNotAssert: workload.labels.mustNotAssert,
+      },
+      key: { responseId, workloadId: workload.id, path: result.path },
+    }
+  })
+  joined.sort((left, right) => left.blind.responseId.localeCompare(right.blind.responseId))
+  return {
+    blinded: {
+      schemaVersion: '1',
+      corpusDigest,
+      instructions: 'Review answers without access to path identity. Set each requiredFacts[].verdict to answered, not_answered, or unsupported, and record notes separately.',
+      responses: joined.map((entry) => entry.blind),
+    },
+    key: { schemaVersion: '1', corpusDigest, mappings: joined.map((entry) => entry.key) },
+  }
 }

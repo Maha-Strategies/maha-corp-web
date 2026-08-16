@@ -4,12 +4,14 @@ import test from 'node:test'
 import workload from '../content/integrations/wso2-context-compiler-workload.json' with { type: 'json' }
 import {
   MAX_WSO2_OPENAI_BODY_BYTES,
+  WSO2_CONTEXT_MINIMUM_COMPILE_TOKENS,
   WSO2_CONTEXT_EXTENSION,
   WSO2_CONTEXT_PLACEHOLDER,
   WSO2_INTERCEPTOR_TOKEN_HEADER,
   handleWso2ContextRequest,
   handleWso2ContextResponse,
 } from '../lib/integrations/wso2-context-interceptor.ts'
+import { estimateTokens } from '../lib/context-compiler.ts'
 
 const secret = 'wso2-context-interceptor-test-secret'
 
@@ -74,7 +76,7 @@ test('WSO2 context requests rewrite one explicit placeholder and return bounded 
   assert.equal(rewritten.temperature, 0)
   const rendered = JSON.stringify(rewritten.messages)
   assert.equal(rendered.includes(WSO2_CONTEXT_PLACEHOLDER), false)
-  assert.match(rendered, /\[release-policy:/)
+  assert.match(rendered, /\[release-policy(?::|\])/)
   for (const fact of workload.requiredFacts) assert.match(rendered.toLowerCase(), new RegExp(fact.toLowerCase().replaceAll(/[.*+?^${}()|[\]\\]/g, '\\$&')))
 
   // Evidence carries hashes and aggregate measurements, never supplied text.
@@ -95,6 +97,55 @@ test('WSO2 response phase verifies sealed evidence and returns it only to the ca
   assert.equal(response.headersToAdd?.['x-maha-context-input-hash'], request.interceptorContext?.inputHash)
   assert.equal(response.headersToAdd?.['x-maha-context-output-hash'], request.interceptorContext?.outputHash)
   assert.equal(response.headersToAdd?.['x-maha-context-pack-id'], request.interceptorContext?.packId)
+})
+
+test('small contexts bypass compilation and can never expand the provider context', () => {
+  const request = {
+    clientRequestId: 'small-bypass-test',
+    task: 'Identify the approved release condition.',
+    tokenBudget: 256,
+    documents: [{ id: 'release', title: 'Release', text: 'Release is approved after the owner signs the evidence record.' }],
+  }
+  const result = handleWso2ContextRequest(envelope({
+    messages: [{ role: 'system', content: WSO2_CONTEXT_PLACEHOLDER }],
+    [WSO2_CONTEXT_EXTENSION]: request,
+  }), secret)
+  const rewritten = JSON.parse(Buffer.from(result.body!, 'base64').toString('utf8')) as { messages: { content: string }[] }
+  const original = `[release] Release\n${request.documents[0].text}`
+  const response = handleWso2ContextResponse({ interceptorContext: result.interceptorContext }, secret)
+
+  assert.ok(estimateTokens(original) < WSO2_CONTEXT_MINIMUM_COMPILE_TOKENS)
+  assert.equal(rewritten.messages[0].content, original)
+  assert.equal(response.headersToAdd?.['x-maha-context-bypassed'], 'true')
+  assert.equal(response.headersToAdd?.['x-maha-context-bypass-reason'], 'below_minimum_size')
+  assert.equal(
+    Number(response.headersToAdd?.['x-maha-compiled-estimated-tokens']),
+    Number(response.headersToAdd?.['x-maha-original-estimated-tokens']),
+  )
+  assert.equal(response.headersToAdd?.['x-maha-saved-estimated-tokens'], '0')
+})
+
+test('the non-expansion guard preserves a large original when compiler framing is not cheaper', () => {
+  const compactText = Array.from({ length: WSO2_CONTEXT_MINIMUM_COMPILE_TOKENS + 50 }, (_, index) => `k${index}`).join(' ')
+  const request = {
+    clientRequestId: 'non-expansion-guard-test',
+    task: 'Return the complete ordered key sequence without omission.',
+    tokenBudget: 16_000,
+    documents: [{ id: 'keys', text: compactText }],
+  }
+  const result = handleWso2ContextRequest(envelope({
+    messages: [{ role: 'system', content: WSO2_CONTEXT_PLACEHOLDER }],
+    [WSO2_CONTEXT_EXTENSION]: request,
+  }), secret)
+  const response = handleWso2ContextResponse({ interceptorContext: result.interceptorContext }, secret)
+  const selected = Number(response.headersToAdd?.['x-maha-compiled-estimated-tokens'])
+  const original = Number(response.headersToAdd?.['x-maha-original-estimated-tokens'])
+
+  assert.ok(original >= WSO2_CONTEXT_MINIMUM_COMPILE_TOKENS)
+  assert.ok(selected <= original, 'the selected provider context must never exceed the original')
+  assert.equal(response.headersToAdd?.['x-maha-context-bypassed'], 'true')
+  assert.equal(response.headersToAdd?.['x-maha-context-bypass-reason'], 'non_expansion_guard')
+  assert.equal(selected, original)
 })
 
 test('WSO2 response phase fails closed on missing or tampered evidence', () => {
