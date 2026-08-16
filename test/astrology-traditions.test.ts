@@ -26,7 +26,7 @@ function withRule(rule: InterpretationRule, run: () => void): void {
 
 const validRule: InterpretationRule = {
   id: 'test-rule', traditionId: 'hellenistic-ptolemaic', technique: 'test', chartTypes: ['natal'],
-  conditions: [{ factField: 'coordinates.values', description: 'A test condition.' }],
+  conditions: [{ factField: 'coordinates.values', description: 'A test condition.', derivation: 'direct' }],
   interpretation: 'A test interpretation long enough to satisfy the minimum length requirement.',
   passageIds: ['ptb-1-5-benefic'], provenance: 'restates-source', empirical: 'unvalidated-tradition',
   disagreements: [], boundary: 'A test boundary that is long enough to satisfy the minimum length rule.',
