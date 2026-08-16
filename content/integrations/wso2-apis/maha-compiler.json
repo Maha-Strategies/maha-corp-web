@@ -1,0 +1,43 @@
+{
+  "apiVersion": "gateway.api-platform.wso2.com/v1alpha1",
+  "kind": "LlmProxy",
+  "metadata": {
+    "name": "maha-eval-compiler"
+  },
+  "spec": {
+    "displayName": "Maha Eval Context Compiler",
+    "provider": {
+      "id": "anthropic-eval"
+    },
+    "context": "/eval/maha",
+    "version": "v1",
+    "policies": [
+      {
+        "name": "interceptor-service",
+        "version": "v1",
+        "paths": [
+          {
+            "path": "/v1/chat/completions",
+            "methods": ["POST"],
+            "params": {
+              "endpointFromEnv": "MAHA_INTERCEPTOR_BASE",
+              "request": {
+                "includeRequestHeaders": true,
+                "includeRequestBody": true,
+                "passthroughOnError": false
+              },
+              "response": {
+                "includeRequestHeaders": false,
+                "includeRequestBody": false,
+                "includeResponseHeaders": false,
+                "includeResponseBody": false,
+                "passthroughOnError": false
+              },
+              "timeoutMillis": 20000
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

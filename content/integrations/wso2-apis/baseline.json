@@ -1,0 +1,16 @@
+{
+  "apiVersion": "gateway.api-platform.wso2.com/v1alpha1",
+  "kind": "LlmProxy",
+  "metadata": {
+    "name": "maha-eval-baseline"
+  },
+  "spec": {
+    "displayName": "Maha Eval Baseline",
+    "provider": {
+      "id": "anthropic-eval"
+    },
+    "context": "/eval/baseline",
+    "version": "v1",
+    "policies": []
+  }
+}

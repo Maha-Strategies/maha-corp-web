@@ -1,0 +1,80 @@
+{
+  "evaluationId": "wso2_bounded_evaluation_001",
+  "evaluatedAt": "2026-08-14",
+  "scope": "single synthetic three-document workload",
+  "gateway": "WSO2 AI Gateway 1.1.0 (local standalone runtime)",
+  "model": "claude-haiku-4-5-20251001",
+  "generation": {
+    "temperature": 0,
+    "maxOutputTokens": 220
+  },
+  "pricingAssumptionUsdPerMillionTokens": {
+    "input": 1,
+    "output": 5
+  },
+  "paths": [
+    {
+      "id": "baseline",
+      "policies": [],
+      "httpStatus": 200,
+      "latencyMilliseconds": 1971,
+      "providerInputTokens": 545,
+      "providerOutputTokens": 166,
+      "estimatedProviderCostUsd": 0.001375,
+      "requiredFactsRetained": 3,
+      "requiredFactsTotal": 3,
+      "citedSources": 3,
+      "sourceCount": 3,
+      "citationGranularity": "source identifier"
+    },
+    {
+      "id": "wso2-native-prompt-compressor",
+      "policies": ["prompt-compressor:v0.9.0"],
+      "configuredRetainedRatio": 0.55,
+      "httpStatus": 200,
+      "latencyMilliseconds": 2173,
+      "providerInputTokens": 327,
+      "providerOutputTokens": 170,
+      "inputTokenReductionVersusBaselinePercent": 40,
+      "estimatedProviderCostUsd": 0.001177,
+      "requiredFactsRetained": 3,
+      "requiredFactsTotal": 3,
+      "citedSources": 3,
+      "sourceCount": 3,
+      "citationGranularity": "source identifier"
+    },
+    {
+      "id": "maha-context-compiler",
+      "policies": ["set-headers:v1", "interceptor-service:v1"],
+      "httpStatus": 200,
+      "latencyMilliseconds": 2463,
+      "providerInputTokens": 314,
+      "providerOutputTokens": 172,
+      "inputTokenReductionVersusBaselinePercent": 42.4,
+      "estimatedProviderCostUsd": 0.001174,
+      "requiredFactsRetained": 3,
+      "requiredFactsTotal": 3,
+      "citedSources": 3,
+      "sourceCount": 3,
+      "citationGranularity": "source and passage identifier",
+      "compilerEvidence": {
+        "originalEstimatedTokens": 374,
+        "compiledEstimatedTokens": 203,
+        "estimatedReductionPercent": 45.7,
+        "sourceCoveragePercent": 100,
+        "includedPassageCount": 5,
+        "sourceTextStored": false,
+        "compiledContextStored": false
+      }
+    }
+  ],
+  "comparisonProviderCostUsd": 0.003726,
+  "totalAuthorizedEvaluationProviderCostUsd": 0.005347,
+  "notes": [
+    "The total includes one exploratory baseline request used to tighten the output format before the controlled three-path comparison.",
+    "All three paths retained all labelled facts and cited all three sources on this one synthetic workload.",
+    "This result does not establish performance on customer data or a larger labelled corpus.",
+    "Provider token counts are Anthropic billing usage; compiler token counts are model-neutral estimates and are not interchangeable.",
+    "Latency is one local end-to-end observation per controlled path, not a p50 or p95 measurement."
+  ]
+}

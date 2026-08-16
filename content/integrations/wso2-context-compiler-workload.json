@@ -1,0 +1,34 @@
+{
+  "name": "Governed AI release decision",
+  "description": "Synthetic multi-source RAG workload for the WSO2 request-phase interceptor. It contains deliberate duplication and three required operational facts.",
+  "requiredFacts": [
+    "credential-rotation evidence",
+    "API errors exceed 2 percent for five minutes",
+    "Source text is not retained"
+  ],
+  "request": {
+    "clientRequestId": "wso2_bounded_evaluation_001",
+    "task": "Identify the release condition, rollback trigger, and data-retention boundary while removing duplicated operational background.",
+    "tokenBudget": 320,
+    "provenance": "compact",
+    "scoring": "bm25",
+    "budgetMode": "guaranteed",
+    "documents": [
+      {
+        "id": "release-policy",
+        "title": "Release policy",
+        "text": "The platform is deployed through a reviewed release workflow. Every change is compiled, typed, linted, and tested before deployment. Operators inspect the readiness endpoint and preserve a last-known-good deployment. The platform is deployed through a reviewed release workflow. Every change is compiled, typed, linted, and tested before deployment. Operators inspect the readiness endpoint and preserve a last-known-good deployment.\n\nRelease may proceed only after the security owner attaches credential-rotation evidence and the production canary passes in every region. A passing build without the security evidence is not approval to release.\n\nRoutine deployment notes, branch labels, and build timestamps are administrative context. They do not override the release condition."
+      },
+      {
+        "id": "rollback-runbook",
+        "title": "Rollback runbook",
+        "text": "The service maintains a last-known-good deployment and a health record for each release. Operators inspect the readiness endpoint and preserve a last-known-good deployment. The service maintains a last-known-good deployment and a health record for each release. Operators inspect the readiness endpoint and preserve a last-known-good deployment.\n\nRollback if API errors exceed 2 percent for five minutes or if verified payment failures breach the operational alert threshold. Restore the last-known-good deployment before reopening traffic.\n\nA single malformed client request is not a rollback trigger. Investigate it as a client error unless the aggregate threshold is crossed."
+      },
+      {
+        "id": "data-boundary",
+        "title": "Context data boundary",
+        "text": "The compiler performs extractive ranking and deduplication. It returns passage identifiers, source hashes, an input hash, an output hash, and model-neutral token estimates. The compiler performs extractive ranking and deduplication. It returns passage identifiers, source hashes, an input hash, an output hash, and model-neutral token estimates.\n\nSource text is not retained, and compiled context is not retained, after the synchronous response completes. Operational telemetry contains counts and timings rather than prompt contents.\n\nThe compiler does not verify claims, guarantee completeness, or prevent hallucination. Applications remain responsible for checking the cited source passages."
+      }
+    ]
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "apiVersion": "gateway.api-platform.wso2.com/v1alpha1",
+  "kind": "LlmProxy",
+  "metadata": {
+    "name": "maha-eval-native"
+  },
+  "spec": {
+    "displayName": "Maha Eval Native Compressor",
+    "provider": {
+      "id": "anthropic-eval"
+    },
+    "context": "/eval/native",
+    "version": "v1",
+    "policies": [
+      {
+        "name": "prompt-compressor",
+        "version": "v0",
+        "paths": [
+          {
+            "path": "/v1/chat/completions",
+            "methods": ["POST"],
+            "params": {
+              "jsonPath": "$.messages[0].content",
+              "rules": [
+                {
+                  "upperTokenLimit": -1,
+                  "type": "ratio",
+                  "value": 0.55
+                }
+              ]
+            }
+          }
+        ]
+      }
+    ]
+  }
+}
