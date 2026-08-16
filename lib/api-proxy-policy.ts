@@ -31,6 +31,10 @@ export const SELF_MANAGED_KEY_ROUTES = new Set([
  */
 export const SELF_MANAGED_KEY_ROUTE_PREFIXES = [
   '/api/v1/mps/audit/',
+  // Private hypothesis-registry routes use their own dedicated, constant-time
+  // operations token. Sending them through the customer credit gate consumes
+  // the Authorization header before the registry can authenticate it.
+  '/api/v1/celestial-hypotheses/',
 ] as const
 
 export const API_CORS_HEADERS = {
