@@ -202,6 +202,7 @@ import {
   WSO2_CONTEXT_PLACEHOLDER,
   WSO2_INTERCEPTOR_TOKEN_HEADER,
   handleWso2ContextRequest,
+  handleWso2ContextResponse,
 } from '../lib/integrations/wso2-context-interceptor.ts'
 
 const SECRET = 'wso2-evaluation-secret-at-least-32-characters'
@@ -270,6 +271,9 @@ test('a compiled request forwards messages and no maha_context', () => {
   assert.ok(Array.isArray(body.messages))
   assert.equal(body[WSO2_CONTEXT_EXTENSION], undefined, 'the extension must not reach the provider')
   assert.equal(JSON.stringify(body.messages).includes(WSO2_CONTEXT_PLACEHOLDER), false, 'the placeholder must be replaced')
+  assert.equal(result.headersToAdd, undefined, 'response evidence must not leak upstream')
+  const response = handleWso2ContextResponse({ interceptorContext: result.interceptorContext }, SECRET)
+  assert.match(response.headersToAdd?.['x-maha-context-input-hash'] ?? '', /^sha256:/)
 })
 
 // --- The gateway must be the thing that compiles ----------------------------
@@ -319,7 +323,7 @@ test('every gateway API artifact is deployable and free of secrets', () => {
     const artifact = JSON.parse(text) as {
       kind?: string
       metadata?: { name?: string }
-      spec?: { context?: string; provider?: { id?: string }; policies?: { name?: string; paths?: { params?: Record<string, unknown> }[] }[] }
+      spec?: { context?: string; provider?: { id?: string }; policies?: { name?: string; version?: string; paths?: { path?: string; methods?: string[]; params?: Record<string, unknown> }[] }[] }
     }
     assert.equal(artifact.kind, 'LlmProxy', `${file}: the entity is an LlmProxy, not an API`)
     assert.ok(artifact.metadata?.name, `${file} needs metadata.name`)
@@ -330,6 +334,7 @@ test('every gateway API artifact is deployable and free of secrets', () => {
     assert.ok(!text.includes('<maha-preview-deployment>'), `${file} must contain no placeholder endpoint`)
 
     for (const policy of artifact.spec?.policies ?? []) {
+      assert.match(policy.version ?? '', /^v\d+$/, `${file}: operation policies attach by major version only`)
       // The defect that cost the most time: parameters as a sibling of `name`
       // are accepted and silently dropped, so the policy deploys at its
       // default and reports success. They belong at paths[].params.
@@ -339,6 +344,8 @@ test('every gateway API artifact is deployable and free of secrets', () => {
       )
       for (const entry of policy.paths ?? []) {
         assert.ok(entry.params, `${file}: policy ${policy.name} must supply paths[].params`)
+        assert.equal(entry.path, '/v1/chat/completions', `${file}: policy must bind the evaluated operation exactly`)
+        assert.deepEqual(entry.methods, ['POST'], `${file}: policy must bind POST only`)
       }
       assert.ok(
         !Object.hasOwn(policy as object, 'params') && !Object.hasOwn(policy as object, 'parameters'),
@@ -355,13 +362,26 @@ test('the compressor artifact pins the ratio the evaluation was designed around'
 
   const policy = artifact.spec.policies[0]
   assert.equal(policy.name, 'prompt-compressor', 'the deployed policy name, not promptCompressor')
-  assert.equal(policy.version, 'v0.9.0', 'the deployed version string carries the v prefix')
+  assert.equal(policy.version, 'v0', 'WSO2 operation attachments accept major versions only')
 
   const rules = policy.paths[0].params.rules
   // A -1 catch-all is required by the policy schema; without it the rule set is
   // rejected and the compressor falls back to its default.
   assert.ok(rules.some((rule) => rule.upperTokenLimit === -1), 'a -1 catch-all rule is required')
   assert.deepEqual(rules[0], { upperTokenLimit: -1, type: 'ratio', value: 0.55 })
+})
+
+test('the Maha artifact configures fail-closed request and response phases', () => {
+  const artifact = JSON.parse(
+    readFileSync(new URL('../content/integrations/wso2-apis/maha-compiler.json', import.meta.url), 'utf8'),
+  ) as { spec: { policies: { version: string; paths: { params: { request?: Record<string, unknown>; response?: Record<string, unknown> } }[] }[] } }
+  const policy = artifact.spec.policies[0]
+  const params = policy.paths[0].params
+  assert.equal(policy.version, 'v1')
+  assert.equal(params.request?.passthroughOnError, false)
+  assert.equal(params.response?.passthroughOnError, false)
+  assert.equal(params.response?.includeRequestBody, false)
+  assert.equal(params.response?.includeResponseBody, false)
 })
 
 test('the evaluation runner parses, because tsconfig excludes scripts/', async () => {

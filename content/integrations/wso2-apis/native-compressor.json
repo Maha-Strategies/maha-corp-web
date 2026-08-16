@@ -14,10 +14,11 @@
     "policies": [
       {
         "name": "prompt-compressor",
-        "version": "v0.9.0",
+        "version": "v0",
         "paths": [
           {
-            "path": "/*",
+            "path": "/v1/chat/completions",
+            "methods": ["POST"],
             "params": {
               "jsonPath": "$.messages[0].content",
               "rules": [

@@ -101,6 +101,7 @@ const PRIVATE_ROUTES = new Set([
   // and is not a general Maha REST operation. Promote only after the bounded
   // WSO2 deployment test and production authentication review pass.
   '/api/integrations/wso2/context-compiler/handle-request',
+  '/api/integrations/wso2/context-compiler/handle-response',
   '/api/cron/inbound-digest',
   '/api/cron/job-reclaim',
   '/api/cron/market-scout',

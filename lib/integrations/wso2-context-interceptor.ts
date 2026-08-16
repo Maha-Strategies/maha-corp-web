@@ -1,4 +1,4 @@
-import { createHash, timingSafeEqual } from 'node:crypto'
+import { createHash, createHmac, timingSafeEqual } from 'node:crypto'
 
 import { compileContextPack, parseContextPackRequest } from '../context-compiler.ts'
 
@@ -9,6 +9,21 @@ export const WSO2_INTERCEPTOR_TOKEN_HEADER = 'x-maha-wso2-interceptor-token'
 export const MAX_WSO2_OPENAI_BODY_BYTES = 512_000
 
 type StringMap = Record<string, string>
+
+const EVIDENCE_FIELDS = [
+  'version',
+  'packId',
+  'inputHash',
+  'outputHash',
+  'originalEstimatedTokens',
+  'compiledEstimatedTokens',
+  'tokensSaved',
+  'estimatedReductionPercent',
+  'sourceCoveragePercent',
+  'includedPassageCount',
+] as const
+
+const EVIDENCE_SEAL_FIELD = 'evidenceSeal'
 
 export type Wso2RequestHandlerResponse = {
   directRespond?: boolean
@@ -41,6 +56,22 @@ function secureEqual(left: string, right: string): boolean {
   const leftHash = createHash('sha256').update(left).digest()
   const rightHash = createHash('sha256').update(right).digest()
   return timingSafeEqual(leftHash, rightHash)
+}
+
+function evidencePayload(evidence: StringMap): string {
+  return EVIDENCE_FIELDS.map((field) => `${field}:${evidence[field] ?? ''}`).join('\n')
+}
+
+function evidenceSeal(evidence: StringMap, secret: string): string {
+  return createHmac('sha256', secret).update(evidencePayload(evidence)).digest('hex')
+}
+
+function validEvidence(value: unknown, secret: string): StringMap | null {
+  const context = stringMap(value)
+  if (!context || !EVIDENCE_FIELDS.every((field) => context[field]?.length > 0)) return null
+  const supplied = context[EVIDENCE_SEAL_FIELD]
+  if (!supplied || !secureEqual(supplied, evidenceSeal(context, secret))) return null
+  return context
 }
 
 function encodeBody(value: unknown): string {
@@ -163,23 +194,47 @@ export function handleWso2ContextRequest(
 
     return {
       body: Buffer.from(rewritten, 'utf8').toString('base64'),
-      headersToAdd: {
-        'x-maha-context-pack-id': evidence.packId,
-        'x-maha-context-input-hash': evidence.inputHash,
-        'x-maha-context-output-hash': evidence.outputHash,
-        'x-maha-original-estimated-tokens': evidence.originalEstimatedTokens,
-        'x-maha-compiled-estimated-tokens': evidence.compiledEstimatedTokens,
-        'x-maha-saved-estimated-tokens': evidence.tokensSaved,
-        'x-maha-estimated-reduction-percent': evidence.estimatedReductionPercent,
-        'x-maha-source-coverage-percent': evidence.sourceCoveragePercent,
-        'x-maha-included-passage-count': evidence.includedPassageCount,
-        'x-maha-zero-data-retention': 'true',
-        'x-maha-wso2-contract-version': evidence.version,
-      },
       headersToRemove: [WSO2_INTERCEPTOR_TOKEN_HEADER, 'content-length'],
-      interceptorContext: evidence,
+      // Request-phase headers are upstream request headers. Evidence belongs
+      // in the private policy context until the response phase, otherwise it
+      // is disclosed to the model provider rather than returned to the caller.
+      interceptorContext: { ...evidence, [EVIDENCE_SEAL_FIELD]: evidenceSeal(evidence, configuredSecret) },
     }
   } catch (error) {
     return directResponse(400, 'context_compilation_rejected', error instanceof Error ? error.message : 'The context request is invalid.')
+  }
+}
+
+/**
+ * Convert the sealed request-phase evidence into downstream response headers.
+ * No model request or response body is included in this phase.
+ */
+export function handleWso2ContextResponse(
+  value: unknown,
+  configuredSecret: string | undefined,
+): Wso2RequestHandlerResponse {
+  if (!configuredSecret || configuredSecret.length < 32) {
+    return directResponse(503, 'interceptor_not_configured', 'The Maha WSO2 interceptor is not configured.')
+  }
+  const envelope = object(value)
+  const evidence = validEvidence(envelope?.interceptorContext, configuredSecret)
+  if (!evidence) {
+    return directResponse(500, 'invalid_interceptor_evidence', 'The request-phase context evidence is missing or invalid.')
+  }
+
+  return {
+    headersToAdd: {
+      'x-maha-context-pack-id': evidence.packId,
+      'x-maha-context-input-hash': evidence.inputHash,
+      'x-maha-context-output-hash': evidence.outputHash,
+      'x-maha-original-estimated-tokens': evidence.originalEstimatedTokens,
+      'x-maha-compiled-estimated-tokens': evidence.compiledEstimatedTokens,
+      'x-maha-saved-estimated-tokens': evidence.tokensSaved,
+      'x-maha-estimated-reduction-percent': evidence.estimatedReductionPercent,
+      'x-maha-source-coverage-percent': evidence.sourceCoveragePercent,
+      'x-maha-included-passage-count': evidence.includedPassageCount,
+      'x-maha-zero-data-retention': 'true',
+      'x-maha-wso2-contract-version': evidence.version,
+    },
   }
 }

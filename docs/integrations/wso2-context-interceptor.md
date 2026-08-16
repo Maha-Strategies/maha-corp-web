@@ -10,7 +10,7 @@ tokens alone is not enough when the operator also needs a fixed selection
 budget, source-linked passages, reproducible hashes, source-coverage evidence,
 and an explicit retention boundary before the request reaches the model.
 
-This prototype implements WSO2's request-phase Interceptor Service v1 contract.
+This prototype implements WSO2's request- and response-phase Interceptor Service v1 contract.
 It rewrites only requests that explicitly supply a `maha_context` block and one
 `{{MAHA_CONTEXT_PACK}}` marker. Other requests pass through unchanged.
 
@@ -31,6 +31,9 @@ It rewrites only requests that explicitly supply a `maha_context` block and one
    marker, and returns WSO2's standard body mutation.
 5. Maha tells WSO2 to remove both the integration token and stale
    `content-length` before the request continues to the LLM.
+6. Aggregate evidence is sealed in WSO2's private interceptor context. The
+   response phase verifies that seal and adds `x-maha-*` headers to the
+   downstream response without sending the model response body to Maha.
 
 The route does not store source text or compiled context. Evidence returned to
 the gateway is limited to the pack identifier, input/output hashes, aggregate
@@ -79,11 +82,13 @@ URL. Configure the base endpoint as:
 https://www.mahastrategies.com/api/integrations/wso2/context-compiler
 ```
 
-Use request-only interception with `includeRequestHeaders: true`,
-`includeRequestBody: true`, `passthroughOnError: false`, TLS verification on,
-and an initial timeout of 3000 ms. The fail-closed setting is intentional for
-the evaluation: it prevents an oversized raw request from silently bypassing
-the stated context policy.
+Use request interception with `includeRequestHeaders: true`,
+`includeRequestBody: true`, and response interception with all request and
+response body/header inclusion disabled. Both phases set
+`passthroughOnError: false`. The response phase receives only the private
+interceptor context needed to return aggregate evidence. TLS verification stays
+on and the initial timeout is 3000 ms. The fail-closed setting is intentional:
+an invalid or absent evidence seal must not become a successful response.
 
 Policy order matters. The test-credential header must be set before the
 interceptor runs, using `mode: set` so a client-supplied value is overwritten:
@@ -99,16 +104,31 @@ policies:
           - name: x-maha-wso2-interceptor-token
             value: "REPLACE_WITH_DEDICATED_EVALUATION_SECRET"
   - name: interceptor-service
-    version: v1.0
-    params:
-      endpoint: https://www.mahastrategies.com/api/integrations/wso2/context-compiler
-      request:
-        includeRequestHeaders: true
-        includeRequestBody: true
-        passthroughOnError: false
-      timeoutMillis: 3000
-      tlsSkipVerify: false
+    version: v1
+    paths:
+      - path: /v1/chat/completions
+        methods: [POST]
+        params:
+          endpoint: https://www.mahastrategies.com/api/integrations/wso2/context-compiler
+          request:
+            includeRequestHeaders: true
+            includeRequestBody: true
+            passthroughOnError: false
+          response:
+            includeRequestHeaders: false
+            includeRequestBody: false
+            includeResponseHeaders: false
+            includeResponseBody: false
+            passthroughOnError: false
+          timeoutMillis: 3000
+          tlsSkipVerify: false
 ```
+
+Operation-level policy attachments use major versions (`v1` for Interceptor
+Service and `v0` for Prompt Compressor), even though the installed policies are
+v1.0.0 and v0.9.0. WSO2 AI Gateway 1.1.0 accepts a proxy definition containing
+a full semantic policy version but omits that policy from the effective runtime
+chain. The import verification rejects that silent-failure shape.
 
 The upstream WSO2 policy currently has no separate interceptor-call
 authentication parameter. This prototype therefore uses a header inserted by

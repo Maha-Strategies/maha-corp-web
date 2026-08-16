@@ -14,15 +14,23 @@
     "policies": [
       {
         "name": "interceptor-service",
-        "version": "v1.0.0",
+        "version": "v1",
         "paths": [
           {
-            "path": "/*",
+            "path": "/v1/chat/completions",
+            "methods": ["POST"],
             "params": {
               "endpointFromEnv": "MAHA_INTERCEPTOR_BASE",
               "request": {
                 "includeRequestHeaders": true,
                 "includeRequestBody": true,
+                "passthroughOnError": false
+              },
+              "response": {
+                "includeRequestHeaders": false,
+                "includeRequestBody": false,
+                "includeResponseHeaders": false,
+                "includeResponseBody": false,
                 "passthroughOnError": false
               },
               "timeoutMillis": 20000

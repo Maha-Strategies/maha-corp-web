@@ -31,6 +31,7 @@ import {
   WSO2_CONTEXT_PLACEHOLDER,
   WSO2_INTERCEPTOR_TOKEN_HEADER,
   handleWso2ContextRequest,
+  handleWso2ContextResponse,
 } from '../lib/integrations/wso2-context-interceptor.ts'
 
 /**
@@ -189,7 +190,7 @@ function prepare(
       providerBody: baseRequest(workload, context),
       measurements: {
         contextStrategy: 'wso2-prompt-compressor-v0.9.0',
-        compressedInGateway: true,
+        policyAttachedInGateway: true,
         passageLevelCitationCapable: false,
         hardBudgetCompliant: null,
         sourceCoveragePercent: null,
@@ -247,7 +248,7 @@ function prepare(
   if (!Array.isArray(rewritten.messages)) {
     throw new Error(`The interceptor returned no messages for ${workload.id}: ${JSON.stringify(rewritten.error ?? rewritten).slice(0, 200)}`)
   }
-  const headers = result.headersToAdd ?? {}
+  const headers = handleWso2ContextResponse({ interceptorContext: result.interceptorContext }, secret).headersToAdd ?? {}
   return {
     forwardedContext: JSON.stringify(rewritten.messages),
     providerBody: rewritten,
@@ -300,6 +301,7 @@ async function callThroughGateway(
   url: string,
   body: Record<string, unknown>,
   interceptorToken?: string,
+  requireMahaEvidence = false,
 ): Promise<ProviderResponse> {
   // Through WSO2, never straight to the provider. Calling Anthropic directly
   // for all three paths -- which the first version of this runner did -- does
@@ -330,6 +332,20 @@ async function callThroughGateway(
     response.headers.forEach((headerValue, headerName) => {
       if (headerName.toLowerCase().startsWith('x-maha-')) gatewayHeaders[headerName.toLowerCase()] = headerValue
     })
+    if (requireMahaEvidence) {
+      const required = [
+        'x-maha-context-pack-id',
+        'x-maha-context-input-hash',
+        'x-maha-context-output-hash',
+        'x-maha-compiled-estimated-tokens',
+        'x-maha-source-coverage-percent',
+        'x-maha-included-passage-count',
+      ]
+      const missing = required.filter((name) => !gatewayHeaders[name])
+      if (missing.length > 0) {
+        return { ok: false, error: `Maha policy produced no verifiable downstream evidence; missing ${missing.join(', ')}.` }
+      }
+    }
     const payload = await response.json() as {
       content?: { text?: string }[]
       choices?: { message?: { content?: string } }[]
@@ -439,12 +455,30 @@ async function preflight(config: GatewayConfig): Promise<{ ok: boolean; checks: 
   const deployedNative = deployed.find((entry) => (entry as { spec?: { context?: string } }).spec?.context === nativeApi?.context)
   const nativeSpec = (deployedNative as { spec?: { policies?: { name?: string; version?: string; paths?: { params?: { rules?: { value?: number }[] } }[] }[] } } | undefined)?.spec
   const policy = nativeSpec?.policies?.find((entry) => entry.name === 'prompt-compressor')
-  const ratio = policy?.paths?.[0]?.params?.rules?.[0]?.value
+  const nativeRoute = policy?.paths?.[0] as ({ path?: string; methods?: string[]; params?: { rules?: { value?: number }[] } } | undefined)
+  const ratio = nativeRoute?.params?.rules?.[0]?.value
   add(
     'policy.promptCompressor.deployed',
-    policy?.version === 'v0.9.0' && typeof ratio === 'number',
+    policy?.version === 'v0' && nativeRoute?.path === '/v1/chat/completions' && nativeRoute.methods?.includes('POST') === true && typeof ratio === 'number',
     policy
-      ? `deployed ${policy.version}, ratio=${String(ratio)}${typeof ratio === 'number' ? '' : ' (PARAMETERS DID NOT PERSIST -- the policy is at its default)'}`
+      ? `attached by ${policy.version}, operation=${String(nativeRoute?.path)}, ratio=${String(ratio)}${typeof ratio === 'number' ? '' : ' (PARAMETERS DID NOT PERSIST -- the policy is at its default)'}`
+      : 'not present in deployed state',
+  )
+
+  const mahaApi = config.apis.find((api) => api.pathId === 'wso2-maha-context-compiler')
+  const deployedMaha = deployed.find((entry) => (entry as { spec?: { context?: string } }).spec?.context === mahaApi?.context)
+  const mahaSpec = (deployedMaha as { spec?: { policies?: { name?: string; version?: string; paths?: { path?: string; methods?: string[]; params?: { request?: unknown; response?: unknown } }[] }[] } } | undefined)?.spec
+  const mahaPolicy = mahaSpec?.policies?.find((entry) => entry.name === 'interceptor-service')
+  const mahaRoute = mahaPolicy?.paths?.[0]
+  add(
+    'policy.mahaInterceptor.deployed',
+    mahaPolicy?.version === 'v1'
+      && mahaRoute?.path === '/v1/chat/completions'
+      && mahaRoute.methods?.includes('POST') === true
+      && Boolean(mahaRoute.params?.request)
+      && Boolean(mahaRoute.params?.response),
+    mahaPolicy
+      ? `attached by ${String(mahaPolicy.version)}, operation=${String(mahaRoute?.path)}, request+response=${Boolean(mahaRoute?.params?.request) && Boolean(mahaRoute?.params?.response)}`
       : 'not present in deployed state',
   )
 
@@ -589,6 +623,7 @@ async function run(): Promise<void> {
       routeFor(config, call.path),
       prepared.providerBody,
       call.path === 'wso2-maha-context-compiler' ? secret : undefined,
+      call.path === 'wso2-maha-context-compiler',
     )
     const latency = Date.now() - startedAt
     const cost = response.ok ? callCostMicrodollars(response.inputTokens, response.outputTokens, PRICING) : BigInt(0)

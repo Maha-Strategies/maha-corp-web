@@ -8,6 +8,7 @@ import {
   WSO2_CONTEXT_PLACEHOLDER,
   WSO2_INTERCEPTOR_TOKEN_HEADER,
   handleWso2ContextRequest,
+  handleWso2ContextResponse,
 } from '../lib/integrations/wso2-context-interceptor.ts'
 
 const secret = 'wso2-context-interceptor-test-secret'
@@ -59,14 +60,13 @@ test('WSO2 context requests rewrite one explicit placeholder and return bounded 
 
   assert.equal(result.directRespond, undefined)
   assert.ok(result.body)
-  assert.ok(result.headersToAdd)
+  assert.equal(result.headersToAdd, undefined, 'request evidence must not be sent upstream as request headers')
   assert.ok(result.interceptorContext)
   assert.ok(result.headersToRemove?.includes(WSO2_INTERCEPTOR_TOKEN_HEADER))
   assert.ok(result.headersToRemove?.includes('content-length'))
-  assert.equal(result.headersToAdd['x-maha-zero-data-retention'], 'true')
-  assert.match(result.headersToAdd['x-maha-context-input-hash'], /^sha256:[a-f0-9]{64}$/)
-  assert.match(result.headersToAdd['x-maha-context-output-hash'], /^sha256:[a-f0-9]{64}$/)
-  assert.equal(result.interceptorContext.inputHash, result.headersToAdd['x-maha-context-input-hash'])
+  assert.match(result.interceptorContext.inputHash, /^sha256:[a-f0-9]{64}$/)
+  assert.match(result.interceptorContext.outputHash, /^sha256:[a-f0-9]{64}$/)
+  assert.match(result.interceptorContext.evidenceSeal, /^[a-f0-9]{64}$/)
 
   const rewritten = JSON.parse(Buffer.from(result.body, 'base64').toString('utf8')) as Record<string, unknown>
   assert.equal(rewritten[WSO2_CONTEXT_EXTENSION], undefined)
@@ -78,8 +78,38 @@ test('WSO2 context requests rewrite one explicit placeholder and return bounded 
   for (const fact of workload.requiredFacts) assert.match(rendered.toLowerCase(), new RegExp(fact.toLowerCase().replaceAll(/[.*+?^${}()|[\]\\]/g, '\\$&')))
 
   // Evidence carries hashes and aggregate measurements, never supplied text.
-  const evidence = JSON.stringify({ headers: result.headersToAdd, context: result.interceptorContext })
+  const evidence = JSON.stringify({ context: result.interceptorContext })
   for (const document of workload.request.documents) assert.equal(evidence.includes(document.text), false)
+})
+
+test('WSO2 response phase verifies sealed evidence and returns it only to the caller', () => {
+  const request = handleWso2ContextRequest(envelope({
+    model: 'test-model',
+    messages: [{ role: 'system', content: WSO2_CONTEXT_PLACEHOLDER }],
+    [WSO2_CONTEXT_EXTENSION]: workload.request,
+  }), secret)
+  const response = handleWso2ContextResponse({ interceptorContext: request.interceptorContext }, secret)
+
+  assert.equal(response.directRespond, undefined)
+  assert.equal(response.headersToAdd?.['x-maha-zero-data-retention'], 'true')
+  assert.equal(response.headersToAdd?.['x-maha-context-input-hash'], request.interceptorContext?.inputHash)
+  assert.equal(response.headersToAdd?.['x-maha-context-output-hash'], request.interceptorContext?.outputHash)
+  assert.equal(response.headersToAdd?.['x-maha-context-pack-id'], request.interceptorContext?.packId)
+})
+
+test('WSO2 response phase fails closed on missing or tampered evidence', () => {
+  const request = handleWso2ContextRequest(envelope({
+    messages: [{ role: 'system', content: WSO2_CONTEXT_PLACEHOLDER }],
+    [WSO2_CONTEXT_EXTENSION]: workload.request,
+  }), secret)
+  const tampered = { ...request.interceptorContext, compiledEstimatedTokens: '1' }
+
+  for (const context of [undefined, tampered]) {
+    const response = handleWso2ContextResponse({ interceptorContext: context }, secret)
+    assert.equal(response.directRespond, true)
+    assert.equal(response.responseCode, 500)
+    assert.equal(responseError(response).error.code, 'invalid_interceptor_evidence')
+  }
 })
 
 test('WSO2 context requests require exactly one placeholder', () => {
