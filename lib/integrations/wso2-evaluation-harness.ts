@@ -285,6 +285,11 @@ export function countRetainedEvidenceSpans(
   return { retained, total }
 }
 
+/** A passage citation (`sourceId:passage`) resolves to its source as well. */
+export function isResolvableSourceCitation(citation: string, sourceIds: Set<string>): boolean {
+  return [...sourceIds].some((sourceId) => citation === sourceId || citation.startsWith(`${sourceId}:`))
+}
+
 export function hashArtifact(value: unknown): string {
   return `sha256:${createHash('sha256').update(JSON.stringify(value)).digest('hex')}`
 }

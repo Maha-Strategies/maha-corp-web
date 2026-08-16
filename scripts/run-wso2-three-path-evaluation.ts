@@ -12,6 +12,7 @@ import {
   findProhibitedAssertions,
   formatMicrodollars,
   hashArtifact,
+  isResolvableSourceCitation,
   parseUsdToMicrodollars,
   planCalls,
   planResume,
@@ -655,6 +656,7 @@ function score(
   latencyMs: number,
 ) {
   const retention = countRetainedEvidenceSpans(prepared.forwardedContext, workload.labels.requiredFacts)
+  const forwardedContextVisible = prepared.forwardedContext.length > 0
   const sourceIds = new Set(workload.request.documents.map((document) => document.id))
   const answer = response.ok ? response.answer : ''
   const verdicts = workload.labels.requiredFacts.map((fact) => ({ id: fact.id, verdict: scoreRequiredFact(answer, fact) }))
@@ -681,9 +683,11 @@ function score(
     path,
     // Pre-inference: a property of the context, not of the answer.
     context: {
-      requiredEvidenceSpansPresent: retention.retained,
+      requiredEvidenceSpansPresent: forwardedContextVisible ? retention.retained : null,
       requiredEvidenceSpansTotal: retention.total,
-      requiredSourceIdsRepresented: [...sourceIds].filter((id) => prepared.forwardedContext.includes(id)).length,
+      requiredSourceIdsRepresented: forwardedContextVisible
+        ? [...sourceIds].filter((id) => prepared.forwardedContext.includes(id)).length
+        : null,
       requiredSourceIdsTotal: sourceIds.size,
       ...prepared.measurements,
       ...gatewayEvidence,
@@ -697,7 +701,7 @@ function score(
       manualReviewRequired: verdicts.filter((entry) => entry.verdict === 'manual_review_required').map((entry) => entry.id),
       verdicts,
       citationsReturned: citations.length,
-      citationsResolvable: citations.filter((id) => sourceIds.has(id)).length,
+      citationsResolvable: citations.filter((id) => isResolvableSourceCitation(id, sourceIds)).length,
       prohibitedAssertions: findProhibitedAssertions(answer, workload.labels.mustNotAssert),
       providerInputTokens: response.ok ? response.inputTokens : null,
       providerOutputTokens: response.ok ? response.outputTokens : null,

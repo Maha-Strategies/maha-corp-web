@@ -14,6 +14,7 @@ import {
   emptyCheckpoint,
   findProhibitedAssertions,
   formatMicrodollars,
+  isResolvableSourceCitation,
   parseUsdToMicrodollars,
   planCalls,
   planResume,
@@ -182,6 +183,14 @@ test('evidence-span retention measures the forwarded context, not the answer', (
   const facts = [fact, { evidence: ['credential-rotation evidence'] }]
   const forwarded = 'Rollback if API errors exceed 2 percent for five minutes. Nothing about rotation here.'
   assert.deepEqual(countRetainedEvidenceSpans(forwarded, facts), { retained: 1, total: 2 })
+})
+
+test('source-level and source-linked passage citations both resolve', () => {
+  const sources = new Set(['release-policy', 'rollback-runbook'])
+  assert.equal(isResolvableSourceCitation('release-policy', sources), true)
+  assert.equal(isResolvableSourceCitation('release-policy:1', sources), true)
+  assert.equal(isResolvableSourceCitation('release-policy:appendix:2', sources), true)
+  assert.equal(isResolvableSourceCitation('unknown:1', sources), false)
 })
 
 test('retention counts spans, so a fact with several spans is not one unit', () => {
