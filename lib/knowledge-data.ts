@@ -1,4 +1,5 @@
 import { SITE_URL } from './briefs-data.ts'
+import { assertClaimEvidence, requiresBoundary, type ClaimEvidence } from './claim-evidence.ts'
 
 export const KNOWLEDGE_BASE_URL = `${SITE_URL}/knowledge`
 
@@ -20,12 +21,6 @@ export const SEMICONDUCTOR_STAGES = [
 ] as const
 export type SemiconductorStageId = typeof SEMICONDUCTOR_STAGES[number]
 
-export type KnowledgeEvidenceStatus =
-  | 'source-supported'
-  | 'method-basis'
-  | 'bounded-inference'
-  | 'open-question'
-
 export interface KnowledgeSource {
   id: string
   title: string
@@ -36,10 +31,9 @@ export interface KnowledgeSource {
   accessed: string
 }
 
-export interface KnowledgeClaim {
+export interface KnowledgeClaim extends ClaimEvidence {
   id: string
   statement: string
-  status: KnowledgeEvidenceStatus
   sourceIds: string[]
   boundary?: string
 }
@@ -162,9 +156,9 @@ export const KNOWLEDGE_ARTICLES: KnowledgeArticle[] = [
       { heading: 'Packaging is part of system performance', paragraphs: ['Modern packages carry power, signals, memory, mechanical protection, and heat. For multi-die products, package architecture can determine bandwidth, latency, thermal limits, and how much known-good silicon is exposed to an assembly failure.'], claimIds: ['sm-003'] },
     ],
     claims: [
-      { id: 'sm-001', statement: 'Integrated circuits are manufactured through repeated layer-by-layer patterning and material-processing steps on a wafer.', status: 'source-supported', sourceIds: ['asml-chip-making', 'intel-semiconductor-101'] },
-      { id: 'sm-002', statement: 'Lithography transfers reticle patterns into photosensitive material, after which development and etch convert that image into physical wafer structures.', status: 'source-supported', sourceIds: ['asml-chip-making', 'asml-lithography'] },
-      { id: 'sm-003', statement: 'Advanced packaging combines multiple die and interconnect technologies to optimize system-level performance, power, form factor, and cost.', status: 'source-supported', sourceIds: ['tsmc-3dfabric'] },
+      { id: 'sm-001', statement: 'Integrated circuits are manufactured through repeated layer-by-layer patterning and material-processing steps on a wafer.', provenance: 'combines-sources', empirical: 'established', sourceIds: ['asml-chip-making', 'intel-semiconductor-101'] },
+      { id: 'sm-002', statement: 'Lithography transfers reticle patterns into photosensitive material, after which development and etch convert that image into physical wafer structures.', provenance: 'combines-sources', empirical: 'established', sourceIds: ['asml-chip-making', 'asml-lithography'] },
+      { id: 'sm-003', statement: 'Advanced packaging combines multiple die and interconnect technologies to optimize system-level performance, power, form factor, and cost.', provenance: 'restates-source', empirical: 'interested-party', sourceIds: ['tsmc-3dfabric'], boundary: 'The optimization framing is TSMC describing the value of its own packaging portfolio, not an independent comparison.' },
     ],
     sourceIds: ['asml-chip-making', 'intel-semiconductor-101', 'tsmc-3dfabric'], relatedArticleIds: ['process-photolithography', 'process-thin-film-deposition', 'process-plasma-etch', 'process-ion-implantation-annealing', 'process-copper-interconnect-cmp', 'process-advanced-packaging'],
     intelligenceSlugs: ['angstrom-era-soc-architecture', 'semiconductor-bifurcation', 'us-foundry-sovereignization'],
@@ -184,9 +178,9 @@ export const KNOWLEDGE_ARTICLES: KnowledgeArticle[] = [
       { heading: 'Resolution is a system property', paragraphs: ['Printed feature size is not determined by wavelength alone. Numerical aperture, process factor, resist behavior, mask correction, focus, exposure dose, and later pattern-transfer steps determine whether a nominal image becomes a usable device feature.'], claimIds: ['litho-003'] },
     ],
     claims: [
-      { id: 'litho-001', statement: 'A lithography scanner projects a reticle pattern through optics onto photosensitive material on a wafer.', status: 'source-supported', sourceIds: ['asml-lithography'] },
-      { id: 'litho-002', statement: 'After exposure, baking and development remove selected resist regions to create openings for later process steps.', status: 'source-supported', sourceIds: ['asml-chip-making'] },
-      { id: 'litho-003', statement: 'The Rayleigh relationship links printable critical dimension to wavelength, numerical aperture, and a process-dependent factor.', status: 'method-basis', sourceIds: ['asml-rayleigh'], boundary: 'The relationship is a resolution framework, not a complete predictor of production yield or pattern fidelity.' },
+      { id: 'litho-001', statement: 'A lithography scanner projects a reticle pattern through optics onto photosensitive material on a wafer.', provenance: 'restates-source', empirical: 'established', sourceIds: ['asml-lithography'] },
+      { id: 'litho-002', statement: 'After exposure, baking and development remove selected resist regions to create openings for later process steps.', provenance: 'restates-source', empirical: 'established', sourceIds: ['asml-chip-making'] },
+      { id: 'litho-003', statement: 'The Rayleigh relationship links printable critical dimension to wavelength, numerical aperture, and a process-dependent factor.', provenance: 'restates-source', empirical: 'method-basis', sourceIds: ['asml-rayleigh'], boundary: 'The relationship is a resolution framework, not a complete predictor of production yield or pattern fidelity.' },
     ],
     sourceIds: ['asml-lithography', 'asml-rayleigh', 'asml-chip-making'], relatedArticleIds: ['domain-semiconductor-manufacturing', 'process-plasma-etch', 'material-ppg-derivatives'], intelligenceSlugs: ['angstrom-era-soc-architecture', 'semiconductor-wfe-doping-annealing-landscape'],
   },
@@ -205,9 +199,9 @@ export const KNOWLEDGE_ARTICLES: KnowledgeArticle[] = [
       { heading: 'Three-dimensional structures raise the conformality burden', paragraphs: ['As device structures become deeper and more three-dimensional, line-of-sight coverage becomes insufficient for some films. Conformal deposition must coat sidewalls and recessed surfaces without closing an opening prematurely or creating a seam.'], claimIds: ['dep-003'] },
     ],
     claims: [
-      { id: 'dep-001', statement: 'PVD, CVD, and ALD use distinct physical and chemical mechanisms to deposit semiconductor films.', status: 'source-supported', sourceIds: ['applied-deposition'] },
-      { id: 'dep-002', statement: 'Deposited semiconductor materials include conductors, insulators, barriers, and other functional compounds.', status: 'source-supported', sourceIds: ['applied-deposition'] },
-      { id: 'dep-003', statement: 'ALD uses sequential self-limiting surface reactions to achieve atomic-scale thickness control and conformal coverage.', status: 'source-supported', sourceIds: ['applied-ald'] },
+      { id: 'dep-001', statement: 'PVD, CVD, and ALD use distinct physical and chemical mechanisms to deposit semiconductor films.', provenance: 'restates-source', empirical: 'established', sourceIds: ['applied-deposition'] },
+      { id: 'dep-002', statement: 'Deposited semiconductor materials include conductors, insulators, barriers, and other functional compounds.', provenance: 'restates-source', empirical: 'established', sourceIds: ['applied-deposition'] },
+      { id: 'dep-003', statement: 'ALD uses sequential self-limiting surface reactions to achieve atomic-scale thickness control and conformal coverage.', provenance: 'restates-source', empirical: 'established', sourceIds: ['applied-ald'] },
     ],
     sourceIds: ['applied-deposition', 'applied-ald'], relatedArticleIds: ['domain-semiconductor-manufacturing', 'process-photolithography', 'process-plasma-etch', 'process-copper-interconnect-cmp'], intelligenceSlugs: ['angstrom-era-soc-architecture', 'semiconductor-wfe-doping-annealing-landscape'],
   },
@@ -226,9 +220,9 @@ export const KNOWLEDGE_ARTICLES: KnowledgeArticle[] = [
       { heading: 'Profile control is as important as removal', paragraphs: ['A successful etch does not merely clear a film. It maintains the intended linewidth, sidewall shape, bottom condition, selectivity to neighboring layers, and electrical integrity while producing removable by-products.'], claimIds: ['etch-003'] },
     ],
     claims: [
-      { id: 'etch-001', statement: 'Wet etching uses liquid chemistry and is commonly isotropic, while dry etching uses gases under vacuum and can provide directional profile control.', status: 'source-supported', sourceIds: ['lam-etch'] },
-      { id: 'etch-002', statement: 'Plasma etching combines chemical reactions with ion-assisted physical effects.', status: 'source-supported', sourceIds: ['lam-etch'] },
-      { id: 'etch-003', statement: 'Advanced etch processes are controlled by profile, selectivity, critical dimension, damage, and by-product removal—not etch rate alone.', status: 'bounded-inference', sourceIds: ['lam-etch'], boundary: 'The relative importance and acceptable window are specific to the target film stack and device structure.' },
+      { id: 'etch-001', statement: 'Wet etching uses liquid chemistry and is commonly isotropic, while dry etching uses gases under vacuum and can provide directional profile control.', provenance: 'restates-source', empirical: 'established', sourceIds: ['lam-etch'] },
+      { id: 'etch-002', statement: 'Plasma etching combines chemical reactions with ion-assisted physical effects.', provenance: 'restates-source', empirical: 'established', sourceIds: ['lam-etch'] },
+      { id: 'etch-003', statement: 'Advanced etch processes are controlled by profile, selectivity, critical dimension, damage, and by-product removal—not etch rate alone.', provenance: 'maha-inference', empirical: 'bounded-inference', sourceIds: ['lam-etch'], boundary: 'The relative importance and acceptable window are specific to the target film stack and device structure.' },
     ],
     sourceIds: ['lam-etch'], relatedArticleIds: ['domain-semiconductor-manufacturing', 'process-photolithography', 'process-thin-film-deposition'], intelligenceSlugs: ['angstrom-era-soc-architecture', 'backside-microchannel-semiconductors'],
   },
@@ -247,8 +241,8 @@ export const KNOWLEDGE_ARTICLES: KnowledgeArticle[] = [
       { heading: 'Annealing completes the electrical process', paragraphs: ['Implantation disrupts the crystal lattice. Thermal processing is used to repair damage and move dopants into electrically active configurations, while limiting unwanted diffusion that would blur a shallow junction.'], claimIds: ['implant-002'] },
     ],
     claims: [
-      { id: 'implant-001', statement: 'Ion implantation is a semiconductor doping process, with distinct equipment classes serving different energy and dose regimes.', status: 'source-supported', sourceIds: ['applied-implant'] },
-      { id: 'implant-002', statement: 'A useful implant process must be evaluated together with its activation and thermal budget.', status: 'bounded-inference', sourceIds: ['applied-implant'], boundary: 'The source establishes implantation roles; the precise anneal sequence and activation target depend on the device integration flow.' },
+      { id: 'implant-001', statement: 'Ion implantation is a semiconductor doping process, with distinct equipment classes serving different energy and dose regimes.', provenance: 'restates-source', empirical: 'established', sourceIds: ['applied-implant'] },
+      { id: 'implant-002', statement: 'A useful implant process must be evaluated together with its activation and thermal budget.', provenance: 'maha-inference', empirical: 'bounded-inference', sourceIds: ['applied-implant'], boundary: 'The source establishes implantation roles; the precise anneal sequence and activation target depend on the device integration flow.' },
     ],
     sourceIds: ['applied-implant'], relatedArticleIds: ['domain-semiconductor-manufacturing', 'process-photolithography', 'process-thin-film-deposition'], intelligenceSlugs: ['semiconductor-wfe-doping-annealing-landscape', 'angstrom-era-soc-architecture'],
   },
@@ -268,9 +262,9 @@ export const KNOWLEDGE_ARTICLES: KnowledgeArticle[] = [
       { heading: 'Plating additives are controlled process materials', paragraphs: ['Polyether suppressors can participate in copper-fill control, but performance depends on the complete bath and feature geometry. Additive degradation and bath aging can change electrochemical behavior, so replenishment and analytical control are part of the process.'], claimIds: ['cu-003'] },
     ],
     claims: [
-      { id: 'cu-001', statement: 'Metal deposition technologies form contacts and interconnects, with barriers, liners, and conductive films serving distinct electrical and reliability roles.', status: 'source-supported', sourceIds: ['applied-deposition'] },
-      { id: 'cu-002', statement: 'CMP removes excess material and restores wafer planarity for subsequent patterning and film formation.', status: 'source-supported', sourceIds: ['applied-cmp'] },
-      { id: 'cu-003', statement: 'PEG–PPG copolymers can function as copper-electrodeposition suppressors, and their degradation can change bath and deposited-film behavior.', status: 'source-supported', sourceIds: ['ppg-copper-study'] },
+      { id: 'cu-001', statement: 'Metal deposition technologies form contacts and interconnects, with barriers, liners, and conductive films serving distinct electrical and reliability roles.', provenance: 'restates-source', empirical: 'established', sourceIds: ['applied-deposition'] },
+      { id: 'cu-002', statement: 'CMP removes excess material and restores wafer planarity for subsequent patterning and film formation.', provenance: 'restates-source', empirical: 'established', sourceIds: ['applied-cmp'] },
+      { id: 'cu-003', statement: 'PEG–PPG copolymers can function as copper-electrodeposition suppressors, and their degradation can change bath and deposited-film behavior.', provenance: 'restates-source', empirical: 'established', sourceIds: ['ppg-copper-study'] },
     ],
     sourceIds: ['applied-deposition', 'applied-cmp', 'ppg-copper-study'], relatedArticleIds: ['domain-semiconductor-manufacturing', 'process-thin-film-deposition', 'process-plasma-etch', 'material-ppg-derivatives'], intelligenceSlugs: ['ppg-derivatives-semiconductor-applications', 'known-good-die-storage-yield'],
   },
@@ -289,8 +283,8 @@ export const KNOWLEDGE_ARTICLES: KnowledgeArticle[] = [
       { heading: 'Test must be inserted before value accumulates', paragraphs: ['Multi-die assembly compounds value. Wafer probe, known-good-die strategy, interposer screening, intermediate test, and final test should be planned together so that a latent defect is found before it strands more expensive components.'], claimIds: ['pkg-002'] },
     ],
     claims: [
-      { id: 'pkg-001', statement: 'TSMC groups SoIC, CoWoS, and InFO as complementary silicon-stacking and advanced-packaging technologies for heterogeneous integration.', status: 'source-supported', sourceIds: ['tsmc-3dfabric'] },
-      { id: 'pkg-002', statement: 'Advanced packaging strategy requires connected design, assembly, test, and materials decisions because package interfaces jointly determine system behavior and yield exposure.', status: 'bounded-inference', sourceIds: ['tsmc-3dfabric', 'tsmc-cowos'], boundary: 'The exact test insertion points and commercial risk allocation are product- and supplier-specific.' },
+      { id: 'pkg-001', statement: 'TSMC groups SoIC, CoWoS, and InFO as complementary silicon-stacking and advanced-packaging technologies for heterogeneous integration.', provenance: 'restates-source', empirical: 'established', sourceIds: ['tsmc-3dfabric'] },
+      { id: 'pkg-002', statement: 'Advanced packaging strategy requires connected design, assembly, test, and materials decisions because package interfaces jointly determine system behavior and yield exposure.', provenance: 'maha-inference', empirical: 'bounded-inference', sourceIds: ['tsmc-3dfabric', 'tsmc-cowos'], boundary: 'The exact test insertion points and commercial risk allocation are product- and supplier-specific.' },
     ],
     sourceIds: ['tsmc-3dfabric', 'tsmc-cowos'], relatedArticleIds: ['domain-semiconductor-manufacturing', 'concept-direct-to-silicon-cooling', 'material-ppg-derivatives'], intelligenceSlugs: ['advanced-packaging-test-cpo-sockets', 'smartphone-ap-fan-out-substrate-thickness', 'smartphone-ap-osat-commercial-risk-allocation', 'known-good-die-storage-yield'],
   },
@@ -309,8 +303,8 @@ export const KNOWLEDGE_ARTICLES: KnowledgeArticle[] = [
       { heading: 'Qualification is broader than a thermal result', paragraphs: ['A production decision needs temperature, pressure-drop, pump-power, leakage, coolant-compatibility, contamination, mechanical, and lifetime evidence under the same architecture. A bench demonstration does not establish server-fleet readiness.'], claimIds: ['dts-002'] },
     ],
     claims: [
-      { id: 'dts-001', statement: 'TSMC has publicly demonstrated direct silicon water-cooling structures for high-power 3D-IC applications.', status: 'source-supported', sourceIds: ['tsmc-direct-cooling'] },
-      { id: 'dts-002', statement: 'Fleet adoption should be gated by package manufacturability, leak reliability, coolant-loop compatibility, monitoring, and serviceability in addition to thermal performance.', status: 'bounded-inference', sourceIds: ['tsmc-direct-cooling'], boundary: 'Public demonstrations establish feasibility, not a universal production architecture or adoption forecast.' },
+      { id: 'dts-001', statement: 'TSMC has publicly demonstrated direct silicon water-cooling structures for high-power 3D-IC applications.', provenance: 'restates-source', empirical: 'established', sourceIds: ['tsmc-direct-cooling'] },
+      { id: 'dts-002', statement: 'Fleet adoption should be gated by package manufacturability, leak reliability, coolant-loop compatibility, monitoring, and serviceability in addition to thermal performance.', provenance: 'maha-inference', empirical: 'bounded-inference', sourceIds: ['tsmc-direct-cooling'], boundary: 'Public demonstrations establish feasibility, not a universal production architecture or adoption forecast.' },
     ],
     sourceIds: ['tsmc-direct-cooling'], relatedArticleIds: ['process-advanced-packaging', 'domain-semiconductor-manufacturing'], intelligenceSlugs: ['backside-microchannel-semiconductors'],
   },
@@ -329,9 +323,9 @@ export const KNOWLEDGE_ARTICLES: KnowledgeArticle[] = [
       { heading: 'Two publicly evidenced use families', paragraphs: ['Polyether suppressors have been studied in copper electrodeposition, while electronic-grade propylene-glycol ethers are marketed for photoresist, thinner, and edge-bead-removal applications. Packaging uses require separate formulation-level evidence because reactive ingredients become part of a cured network.'], claimIds: ['ppg-002', 'ppg-003'] },
     ],
     claims: [
-      { id: 'ppg-001', statement: 'PPG polymers, EO/PO block copolymers, propylene-glycol ethers, and functional polyethers are distinct material families despite related propylene-oxide chemistry.', status: 'method-basis', sourceIds: ['dow-elecpure', 'ppg-copper-study'] },
-      { id: 'ppg-002', statement: 'PEG–PPG copolymers have been studied as suppressors in copper electrodeposition.', status: 'source-supported', sourceIds: ['ppg-copper-study'] },
-      { id: 'ppg-003', statement: 'Dow markets an electronic-grade propylene-glycol ether for semiconductor photoresist, thinner, and edge-bead-removal uses.', status: 'source-supported', sourceIds: ['dow-elecpure'], boundary: 'A supplier product page does not establish qualification at a named fab or in a named product.' },
+      { id: 'ppg-001', statement: 'PPG polymers, EO/PO block copolymers, propylene-glycol ethers, and functional polyethers are distinct material families despite related propylene-oxide chemistry.', provenance: 'maha-inference', empirical: 'method-basis', sourceIds: ['dow-elecpure', 'ppg-copper-study'], boundary: 'The separation is a Maha classification framework for qualification decisions; the cited sources describe individual materials rather than asserting the taxonomy.' },
+      { id: 'ppg-002', statement: 'PEG–PPG copolymers have been studied as suppressors in copper electrodeposition.', provenance: 'restates-source', empirical: 'established', sourceIds: ['ppg-copper-study'] },
+      { id: 'ppg-003', statement: 'Dow markets an electronic-grade propylene-glycol ether for semiconductor photoresist, thinner, and edge-bead-removal uses.', provenance: 'restates-source', empirical: 'interested-party', sourceIds: ['dow-elecpure'], boundary: 'A supplier product page does not establish qualification at a named fab or in a named product.' },
     ],
     sourceIds: ['dow-elecpure', 'ppg-copper-study'], relatedArticleIds: ['process-photolithography', 'process-copper-interconnect-cmp', 'process-advanced-packaging'], intelligenceSlugs: ['ppg-derivatives-semiconductor-applications'],
   },
@@ -350,8 +344,8 @@ export const KNOWLEDGE_ARTICLES: KnowledgeArticle[] = [
       { heading: 'The process design kit binds design to fabrication', paragraphs: ['Models, rules, libraries, and extraction data translate the foundry process into constraints that design tools can analyze. A change in process assumptions can therefore invalidate results even when the logical function is unchanged.'], claimIds: ['tape-002'] },
     ],
     claims: [
-      { id: 'tape-001', statement: 'IC design progresses from specification and architecture through logical and physical implementation to verification and manufacturing release.', status: 'source-supported', sourceIds: ['synopsys-ic-design', 'synopsys-chip-design'] },
-      { id: 'tape-002', statement: 'Physical signoff evaluates whether the layout satisfies process rules and implementation constraints before tape-out.', status: 'source-supported', sourceIds: ['synopsys-physical-design', 'synopsys-drc'] },
+      { id: 'tape-001', statement: 'IC design progresses from specification and architecture through logical and physical implementation to verification and manufacturing release.', provenance: 'combines-sources', empirical: 'established', sourceIds: ['synopsys-ic-design', 'synopsys-chip-design'] },
+      { id: 'tape-002', statement: 'Physical signoff evaluates whether the layout satisfies process rules and implementation constraints before tape-out.', provenance: 'combines-sources', empirical: 'established', sourceIds: ['synopsys-physical-design', 'synopsys-drc'] },
     ],
     sourceIds: ['synopsys-ic-design', 'synopsys-chip-design', 'synopsys-physical-design', 'synopsys-drc'], relatedArticleIds: ['process-rtl-to-physical-design', 'process-mask-data-reticle-fabrication', 'domain-semiconductor-manufacturing'], intelligenceSlugs: ['angstrom-era-soc-architecture'],
   },
@@ -370,8 +364,8 @@ export const KNOWLEDGE_ARTICLES: KnowledgeArticle[] = [
       { heading: 'Physical design creates the geometric implementation', paragraphs: ['Floorplanning, placement, clock construction, and routing turn a netlist into layout. Extraction then feeds the physical effects of wires and devices back into timing, power, and signal-integrity analysis.'], claimIds: ['rtl-002'] },
     ],
     claims: [
-      { id: 'rtl-001', statement: 'RTL models synchronous digital behavior in terms of data transfers and operations between registers.', status: 'source-supported', sourceIds: ['synopsys-rtl-design'] },
-      { id: 'rtl-002', statement: 'Physical design transforms a logical netlist into an implemented layout through floorplanning, placement, clocking, routing, and signoff analysis.', status: 'source-supported', sourceIds: ['synopsys-physical-design'] },
+      { id: 'rtl-001', statement: 'RTL models synchronous digital behavior in terms of data transfers and operations between registers.', provenance: 'restates-source', empirical: 'established', sourceIds: ['synopsys-rtl-design'] },
+      { id: 'rtl-002', statement: 'Physical design transforms a logical netlist into an implemented layout through floorplanning, placement, clocking, routing, and signoff analysis.', provenance: 'restates-source', empirical: 'established', sourceIds: ['synopsys-physical-design'] },
     ],
     sourceIds: ['synopsys-rtl-design', 'synopsys-physical-design'], relatedArticleIds: ['process-ic-design-tapeout', 'process-mask-data-reticle-fabrication'], intelligenceSlugs: ['angstrom-era-soc-architecture'],
   },
@@ -390,8 +384,8 @@ export const KNOWLEDGE_ARTICLES: KnowledgeArticle[] = [
       { heading: 'Reticle defects repeat', paragraphs: ['A reticle is reused across many wafer fields. Defects that print can therefore be replicated across many die, which makes inspection, review, cleaning, repair, and controlled release central to mask economics and yield protection.'], claimIds: ['mask-002'] },
     ],
     claims: [
-      { id: 'mask-001', statement: 'Lithography uses a reticle as the master pattern projected onto photosensitive material on the wafer.', status: 'source-supported', sourceIds: ['asml-lithography'] },
-      { id: 'mask-002', statement: 'Reticle inspection and metrology protect yield because printable reticle defects can repeat across wafer fields.', status: 'source-supported', sourceIds: ['kla-2019-10k', 'kla-2024-10k'] },
+      { id: 'mask-001', statement: 'Lithography uses a reticle as the master pattern projected onto photosensitive material on the wafer.', provenance: 'restates-source', empirical: 'established', sourceIds: ['asml-lithography'] },
+      { id: 'mask-002', statement: 'Reticle inspection and metrology protect yield because printable reticle defects can repeat across wafer fields.', provenance: 'combines-sources', empirical: 'established', sourceIds: ['kla-2019-10k', 'kla-2024-10k'] },
     ],
     sourceIds: ['asml-lithography', 'kla-2019-10k', 'kla-2024-10k'], relatedArticleIds: ['process-ic-design-tapeout', 'process-photolithography', 'concept-metrology-defect-inspection'], intelligenceSlugs: ['angstrom-era-soc-architecture'],
   },
@@ -410,8 +404,8 @@ export const KNOWLEDGE_ARTICLES: KnowledgeArticle[] = [
       { heading: 'Preparation removes damage while controlling geometry', paragraphs: ['Slicing creates mechanical damage and thickness variation. Edge shaping, lapping, etching, polishing, and cleaning progressively establish the flat, low-defect surface and stable geometry required by wafer-fab tools.'], claimIds: ['wafer-002'] },
     ],
     claims: [
-      { id: 'wafer-001', statement: 'Semiconductor wafers are produced from high-purity single-crystal material and provide the substrate on which repeated chip-fabrication steps are performed.', status: 'source-supported', sourceIds: ['samsung-wafer'] },
-      { id: 'wafer-002', statement: 'Wafer manufacturing includes ingot processing, slicing, grinding, and polishing before device fabrication.', status: 'source-supported', sourceIds: ['samsung-wafer', 'disco-process'] },
+      { id: 'wafer-001', statement: 'Semiconductor wafers are produced from high-purity single-crystal material and provide the substrate on which repeated chip-fabrication steps are performed.', provenance: 'restates-source', empirical: 'established', sourceIds: ['samsung-wafer'] },
+      { id: 'wafer-002', statement: 'Wafer manufacturing includes ingot processing, slicing, grinding, and polishing before device fabrication.', provenance: 'combines-sources', empirical: 'established', sourceIds: ['samsung-wafer', 'disco-process'] },
     ],
     sourceIds: ['samsung-wafer', 'disco-process'], relatedArticleIds: ['process-wafer-cleaning-surface-preparation', 'domain-semiconductor-manufacturing'], intelligenceSlugs: ['semiconductor-bifurcation'],
   },
@@ -430,8 +424,8 @@ export const KNOWLEDGE_ARTICLES: KnowledgeArticle[] = [
       { heading: 'Edges and backsides matter', paragraphs: ['Films and particles on the bevel or backside can transfer to chucks, distort thermal contact, or shed into later chambers. Production clean strategies commonly treat these surfaces as part of contamination control rather than as inactive wafer area.'], claimIds: ['clean-002'] },
     ],
     claims: [
-      { id: 'clean-001', statement: 'Wafer cleaning is used repeatedly to remove particles, residues, and unwanted films between semiconductor process steps.', status: 'source-supported', sourceIds: ['lam-wet-clean', 'tel-process-equipment'] },
-      { id: 'clean-002', statement: 'Backside and bevel film removal can prevent contamination and downstream process interference.', status: 'source-supported', sourceIds: ['lam-wet-clean'] },
+      { id: 'clean-001', statement: 'Wafer cleaning is used repeatedly to remove particles, residues, and unwanted films between semiconductor process steps.', provenance: 'combines-sources', empirical: 'established', sourceIds: ['lam-wet-clean', 'tel-process-equipment'] },
+      { id: 'clean-002', statement: 'Backside and bevel film removal can prevent contamination and downstream process interference.', provenance: 'restates-source', empirical: 'established', sourceIds: ['lam-wet-clean'] },
     ],
     sourceIds: ['lam-wet-clean', 'tel-process-equipment'], relatedArticleIds: ['process-silicon-wafer-preparation', 'process-photolithography', 'process-plasma-etch', 'process-copper-interconnect-cmp'], intelligenceSlugs: ['ppg-derivatives-semiconductor-applications'],
   },
@@ -450,8 +444,8 @@ export const KNOWLEDGE_ARTICLES: KnowledgeArticle[] = [
       { heading: 'Batch and rapid processing trade time against control', paragraphs: ['Batch furnaces provide high wafer throughput and long, stable exposures; rapid thermal tools shorten the exposure and can limit diffusion. The correct choice depends on the reaction, uniformity target, and material stack.'], claimIds: ['thermal-002'] },
     ],
     claims: [
-      { id: 'thermal-001', statement: 'Semiconductor thermal processing includes oxidation, diffusion, and other controlled heat treatments used during wafer fabrication.', status: 'source-supported', sourceIds: ['tel-process-equipment'] },
-      { id: 'thermal-002', statement: 'Thermal processing must be managed as part of a cumulative integration budget because later heat can alter structures created earlier.', status: 'bounded-inference', sourceIds: ['tel-process-equipment', 'applied-implant'], boundary: 'Exact allowable histories depend on the device, materials, and node.' },
+      { id: 'thermal-001', statement: 'Semiconductor thermal processing includes oxidation, diffusion, and other controlled heat treatments used during wafer fabrication.', provenance: 'restates-source', empirical: 'established', sourceIds: ['tel-process-equipment'] },
+      { id: 'thermal-002', statement: 'Thermal processing must be managed as part of a cumulative integration budget because later heat can alter structures created earlier.', provenance: 'maha-inference', empirical: 'bounded-inference', sourceIds: ['tel-process-equipment', 'applied-implant'], boundary: 'Exact allowable histories depend on the device, materials, and node.' },
     ],
     sourceIds: ['tel-process-equipment', 'applied-implant'], relatedArticleIds: ['process-ion-implantation-annealing', 'process-thin-film-deposition', 'concept-yield-learning-spc'], intelligenceSlugs: ['semiconductor-wfe-doping-annealing-landscape'],
   },
@@ -470,8 +464,8 @@ export const KNOWLEDGE_ARTICLES: KnowledgeArticle[] = [
       { heading: 'Inspection and review form a learning loop', paragraphs: ['High-throughput inspection finds candidate anomalies; review and classification determine which signals represent meaningful defect mechanisms. Correlation with process history and electrical yield turns those observations into root-cause evidence.'], claimIds: ['metro-002'] },
     ],
     claims: [
-      { id: 'metro-001', statement: 'Semiconductor process control relies on inspection, metrology, and data analysis across reticle, wafer, and packaging operations.', status: 'source-supported', sourceIds: ['kla-2024-10k'] },
-      { id: 'metro-002', statement: 'Inspection and metrology data can be combined with analysis to identify defect sources and support yield improvement.', status: 'source-supported', sourceIds: ['kla-2019-10k', 'kla-2024-10k'] },
+      { id: 'metro-001', statement: 'Semiconductor process control relies on inspection, metrology, and data analysis across reticle, wafer, and packaging operations.', provenance: 'restates-source', empirical: 'established', sourceIds: ['kla-2024-10k'] },
+      { id: 'metro-002', statement: 'Inspection and metrology data can be combined with analysis to identify defect sources and support yield improvement.', provenance: 'combines-sources', empirical: 'interested-party', sourceIds: ['kla-2019-10k', 'kla-2024-10k'], boundary: 'A supplier annual report describes the intended benefit of its own inspection products; it does not independently quantify yield gains.' },
     ],
     sourceIds: ['kla-2024-10k', 'kla-2019-10k'], relatedArticleIds: ['concept-yield-learning-spc', 'process-mask-data-reticle-fabrication', 'concept-cleanrooms-fab-utilities'], intelligenceSlugs: ['semiconductor-bifurcation'],
   },
@@ -490,8 +484,8 @@ export const KNOWLEDGE_ARTICLES: KnowledgeArticle[] = [
       { heading: 'Yield is a lifecycle feedback signal', paragraphs: ['Loss can originate in design sensitivity, masks, wafer processing, probing, handling, assembly, or test. The most valuable yield systems preserve genealogy across these boundaries so a downstream signature can be traced to upstream conditions.'], claimIds: ['yield-002'] },
     ],
     claims: [
-      { id: 'yield-001', statement: 'Inspection and metrology information is analyzed to support process monitoring, root-cause identification, and yield improvement.', status: 'source-supported', sourceIds: ['kla-2019-10k', 'kla-2024-10k'] },
-      { id: 'yield-002', statement: 'Manufacturing engineering uses integrated process and equipment control to improve capability and sustain production performance.', status: 'source-supported', sourceIds: ['tsmc-engineering'] },
+      { id: 'yield-001', statement: 'Inspection and metrology information is analyzed to support process monitoring, root-cause identification, and yield improvement.', provenance: 'combines-sources', empirical: 'interested-party', sourceIds: ['kla-2019-10k', 'kla-2024-10k'], boundary: 'KLA describes the purpose of its own metrology portfolio; independent evidence would be needed to size the yield contribution.' },
+      { id: 'yield-002', statement: 'Manufacturing engineering uses integrated process and equipment control to improve capability and sustain production performance.', provenance: 'restates-source', empirical: 'interested-party', sourceIds: ['tsmc-engineering'], boundary: 'TSMC describes the performance of its own manufacturing engineering; the claim is not independently audited.' },
     ],
     sourceIds: ['kla-2019-10k', 'kla-2024-10k', 'tsmc-engineering'], relatedArticleIds: ['concept-metrology-defect-inspection', 'concept-cleanrooms-fab-utilities', 'process-wafer-sort'], intelligenceSlugs: ['known-good-die-storage-yield', 'semiconductor-bifurcation'],
   },
@@ -510,8 +504,8 @@ export const KNOWLEDGE_ARTICLES: KnowledgeArticle[] = [
       { heading: 'Utilities influence process results', paragraphs: ['Temperature, vibration, pressure, water chemistry, gas purity, and power stability can shift tool performance. Monitoring utility genealogy alongside wafer history helps distinguish a process excursion from a facility-driven event.'], claimIds: ['fab-002'] },
     ],
     claims: [
-      { id: 'fab-001', statement: 'Semiconductor fabrication is performed in highly controlled cleanroom environments to limit contamination during repeated wafer-processing steps.', status: 'source-supported', sourceIds: ['samsung-fab'] },
-      { id: 'fab-002', statement: 'Stable production depends on the integration of process tools, engineering controls, and the fab environment.', status: 'bounded-inference', sourceIds: ['samsung-fab', 'tsmc-engineering'], boundary: 'Exact utility specifications and contamination limits vary by technology and factory.' },
+      { id: 'fab-001', statement: 'Semiconductor fabrication is performed in highly controlled cleanroom environments to limit contamination during repeated wafer-processing steps.', provenance: 'restates-source', empirical: 'established', sourceIds: ['samsung-fab'] },
+      { id: 'fab-002', statement: 'Stable production depends on the integration of process tools, engineering controls, and the fab environment.', provenance: 'maha-inference', empirical: 'bounded-inference', sourceIds: ['samsung-fab', 'tsmc-engineering'], boundary: 'Exact utility specifications and contamination limits vary by technology and factory.' },
     ],
     sourceIds: ['samsung-fab', 'tsmc-engineering'], relatedArticleIds: ['process-wafer-cleaning-surface-preparation', 'concept-metrology-defect-inspection', 'concept-yield-learning-spc'], intelligenceSlugs: ['us-foundry-sovereignization'],
   },
@@ -530,8 +524,8 @@ export const KNOWLEDGE_ARTICLES: KnowledgeArticle[] = [
       { heading: 'Known-good die is a probability, not an absolute', paragraphs: ['Wafer sort is constrained by contact, time, temperature, coverage, and observability. A passing die is a qualified candidate for assembly under a defined test flow, not proof that every latent defect or later package interaction has been eliminated.'], claimIds: ['sort-002'] },
     ],
     claims: [
-      { id: 'sort-001', statement: 'Wafer test evaluates individual die before packaging and uses test content optimized for the wafer stage.', status: 'source-supported', sourceIds: ['advantest-test-briefing', 'ase-test'] },
-      { id: 'sort-002', statement: 'Wafer-level screening reduces the risk of assembling defective die but cannot replace package and system-level testing.', status: 'bounded-inference', sourceIds: ['advantest-test-briefing', 'amkor-test'], boundary: 'Coverage and economic tradeoffs depend on product architecture, test access, and package value.' },
+      { id: 'sort-001', statement: 'Wafer test evaluates individual die before packaging and uses test content optimized for the wafer stage.', provenance: 'combines-sources', empirical: 'established', sourceIds: ['advantest-test-briefing', 'ase-test'] },
+      { id: 'sort-002', statement: 'Wafer-level screening reduces the risk of assembling defective die but cannot replace package and system-level testing.', provenance: 'maha-inference', empirical: 'bounded-inference', sourceIds: ['advantest-test-briefing', 'amkor-test'], boundary: 'Coverage and economic tradeoffs depend on product architecture, test access, and package value.' },
     ],
     sourceIds: ['advantest-test-briefing', 'ase-test', 'amkor-test'], relatedArticleIds: ['concept-yield-learning-spc', 'process-wafer-thinning-dicing', 'process-final-burn-in-system-test'], intelligenceSlugs: ['known-good-die-storage-yield'],
   },
@@ -550,8 +544,8 @@ export const KNOWLEDGE_ARTICLES: KnowledgeArticle[] = [
       { heading: 'Singulation method changes the defect signature', paragraphs: ['Blade, laser, stealth, and dicing-before-grinding flows create different thermal, mechanical, particulate, and edge-damage conditions. Method selection depends on wafer stack, die size, thickness, street width, throughput, and downstream reliability.'], claimIds: ['dice-002'] },
     ],
     claims: [
-      { id: 'dice-001', statement: 'Back grinding thins semiconductor wafers, while polishing or other stress relief can remove grinding damage and improve die strength.', status: 'source-supported', sourceIds: ['disco-thinning-strength', 'disco-process'] },
-      { id: 'dice-002', statement: 'Semiconductor die can be singulated by blade and laser-based methods, with chipping and microcracking among the controlled risks.', status: 'source-supported', sourceIds: ['disco-process', 'disco-thinning-strength'] },
+      { id: 'dice-001', statement: 'Back grinding thins semiconductor wafers, while polishing or other stress relief can remove grinding damage and improve die strength.', provenance: 'combines-sources', empirical: 'interested-party', sourceIds: ['disco-thinning-strength', 'disco-process'], boundary: 'DISCO supplies grinding and polishing equipment and is describing the benefit of its own process step.' },
+      { id: 'dice-002', statement: 'Semiconductor die can be singulated by blade and laser-based methods, with chipping and microcracking among the controlled risks.', provenance: 'combines-sources', empirical: 'established', sourceIds: ['disco-process', 'disco-thinning-strength'] },
     ],
     sourceIds: ['disco-process', 'disco-thinning-strength'], relatedArticleIds: ['process-wafer-sort', 'process-wire-bond-flip-chip', 'process-advanced-packaging'], intelligenceSlugs: ['known-good-die-storage-yield'],
   },
@@ -570,8 +564,8 @@ export const KNOWLEDGE_ARTICLES: KnowledgeArticle[] = [
       { heading: 'Known-good sites protect expensive die', paragraphs: ['When die are attached to a prebuilt RDL or substrate, inspection and electrical test of that structure can prevent valuable die from being placed on known-defective sites. That changes the economic value of upstream substrate yield.'], claimIds: ['rdl-002'] },
     ],
     claims: [
-      { id: 'rdl-001', statement: 'Advanced packages use redistribution and interconnect structures to integrate multiple components and connect them at package scale.', status: 'source-supported', sourceIds: ['tsmc-3dfabric', 'amkor-rdl-pop'] },
-      { id: 'rdl-002', statement: 'RDL structures can be inspected before die attach so costly die are placed only on known-good sites.', status: 'source-supported', sourceIds: ['amkor-rdl-pop'] },
+      { id: 'rdl-001', statement: 'Advanced packages use redistribution and interconnect structures to integrate multiple components and connect them at package scale.', provenance: 'combines-sources', empirical: 'established', sourceIds: ['tsmc-3dfabric', 'amkor-rdl-pop'] },
+      { id: 'rdl-002', statement: 'RDL structures can be inspected before die attach so costly die are placed only on known-good sites.', provenance: 'restates-source', empirical: 'established', sourceIds: ['amkor-rdl-pop'] },
     ],
     sourceIds: ['tsmc-3dfabric', 'amkor-rdl-pop'], relatedArticleIds: ['process-advanced-packaging', 'process-wire-bond-flip-chip', 'process-encapsulation-underfill-molding'], intelligenceSlugs: ['smartphone-ap-advanced-packaging', 'smartphone-package-substrate-manufacturers'],
   },
@@ -590,8 +584,8 @@ export const KNOWLEDGE_ARTICLES: KnowledgeArticle[] = [
       { heading: 'Bond formation is an interface process', paragraphs: ['Electrical continuity alone does not establish long-term quality. The bond must have suitable intermetallic structure, mechanical strength, cleanliness, and stress behavior through assembly and use conditions.'], claimIds: ['bond-002'] },
     ],
     claims: [
-      { id: 'bond-001', statement: 'Production die-stacking flows can combine die attach, wire bonding, and flip-chip assembly within the same package family.', status: 'source-supported', sourceIds: ['amkor-3d-stack'] },
-      { id: 'bond-002', statement: 'The choice between wire bond, flip chip, or a mixed flow changes density, geometry, equipment, and reliability controls.', status: 'bounded-inference', sourceIds: ['amkor-3d-stack', 'amkor-rdl-pop'], boundary: 'The best architecture is product- and package-specific.' },
+      { id: 'bond-001', statement: 'Production die-stacking flows can combine die attach, wire bonding, and flip-chip assembly within the same package family.', provenance: 'restates-source', empirical: 'established', sourceIds: ['amkor-3d-stack'] },
+      { id: 'bond-002', statement: 'The choice between wire bond, flip chip, or a mixed flow changes density, geometry, equipment, and reliability controls.', provenance: 'maha-inference', empirical: 'bounded-inference', sourceIds: ['amkor-3d-stack', 'amkor-rdl-pop'], boundary: 'The best architecture is product- and package-specific.' },
     ],
     sourceIds: ['amkor-3d-stack', 'amkor-rdl-pop'], relatedArticleIds: ['process-package-substrates-rdl', 'process-encapsulation-underfill-molding', 'process-advanced-packaging'], intelligenceSlugs: ['smartphone-ap-advanced-packaging'],
   },
@@ -610,8 +604,8 @@ export const KNOWLEDGE_ARTICLES: KnowledgeArticle[] = [
       { heading: 'Void-free appearance is not the only release criterion', paragraphs: ['A qualified encapsulation process also controls cure state, adhesion, contamination, warpage, stress, and reliability after moisture and temperature exposure. Material substitution requires package-level evidence.'], claimIds: ['mold-002'] },
     ],
     claims: [
-      { id: 'mold-001', statement: 'Fan-out and flip-chip package flows can use underfill or molded-underfill material around die-to-RDL interconnects.', status: 'source-supported', sourceIds: ['amkor-rdl-pop'] },
-      { id: 'mold-002', statement: 'Encapsulation material should be qualified as part of the complete package because its flow, cure, adhesion, and stress interact with die and interconnects.', status: 'bounded-inference', sourceIds: ['amkor-rdl-pop', 'tsmc-3dfabric'], boundary: 'Material limits depend on package geometry, assembly flow, and use conditions.' },
+      { id: 'mold-001', statement: 'Fan-out and flip-chip package flows can use underfill or molded-underfill material around die-to-RDL interconnects.', provenance: 'restates-source', empirical: 'established', sourceIds: ['amkor-rdl-pop'] },
+      { id: 'mold-002', statement: 'Encapsulation material should be qualified as part of the complete package because its flow, cure, adhesion, and stress interact with die and interconnects.', provenance: 'maha-inference', empirical: 'bounded-inference', sourceIds: ['amkor-rdl-pop', 'tsmc-3dfabric'], boundary: 'Material limits depend on package geometry, assembly flow, and use conditions.' },
     ],
     sourceIds: ['amkor-rdl-pop', 'tsmc-3dfabric'], relatedArticleIds: ['process-wire-bond-flip-chip', 'process-package-substrates-rdl', 'concept-package-reliability-failure-analysis'], intelligenceSlugs: ['smartphone-ap-advanced-packaging'],
   },
@@ -630,8 +624,8 @@ export const KNOWLEDGE_ARTICLES: KnowledgeArticle[] = [
       { heading: 'Screening is an economic allocation problem', paragraphs: ['More coverage, temperature points, and stress can reduce escape risk but add equipment time and may consume device life. Test flows allocate content to the stage where it produces the strongest risk reduction per unit of cost and time.'], claimIds: ['final-002'] },
     ],
     claims: [
-      { id: 'final-001', statement: 'Semiconductor test flows can include wafer test, final package test, burn-in, and system-level test, with content optimized by stage and application.', status: 'source-supported', sourceIds: ['advantest-test-briefing', 'ase-test', 'amkor-test'] },
-      { id: 'final-002', statement: 'Test coverage and screening intensity are balanced against test time, equipment capacity, product risk, and the value of avoiding field escapes.', status: 'bounded-inference', sourceIds: ['advantest-test-briefing', 'amkor-test'], boundary: 'The optimum is specific to product quality goals, architecture, and economics.' },
+      { id: 'final-001', statement: 'Semiconductor test flows can include wafer test, final package test, burn-in, and system-level test, with content optimized by stage and application.', provenance: 'combines-sources', empirical: 'established', sourceIds: ['advantest-test-briefing', 'ase-test', 'amkor-test'] },
+      { id: 'final-002', statement: 'Test coverage and screening intensity are balanced against test time, equipment capacity, product risk, and the value of avoiding field escapes.', provenance: 'maha-inference', empirical: 'bounded-inference', sourceIds: ['advantest-test-briefing', 'amkor-test'], boundary: 'The optimum is specific to product quality goals, architecture, and economics.' },
     ],
     sourceIds: ['advantest-test-briefing', 'ase-test', 'amkor-test'], relatedArticleIds: ['process-wafer-sort', 'concept-package-reliability-failure-analysis', 'process-advanced-packaging'], intelligenceSlugs: ['known-good-die-storage-yield'],
   },
@@ -650,8 +644,8 @@ export const KNOWLEDGE_ARTICLES: KnowledgeArticle[] = [
       { heading: 'Failure analysis moves from symptom to mechanism', paragraphs: ['The sequence normally narrows from electrical signature and package-level localization to progressively more invasive inspection. Preserving evidence and comparing good and failed units helps prevent an artifact from being mistaken for root cause.'], claimIds: ['rel-002'] },
     ],
     claims: [
-      { id: 'rel-001', statement: 'Semiconductor quality systems combine qualification, production monitoring, reliability assessment, and continuous improvement across the product lifecycle.', status: 'source-supported', sourceIds: ['tsmc-quality', 'jedec-home'] },
-      { id: 'rel-002', statement: 'Failure-analysis conclusions should distinguish observed symptoms, localized physical evidence, inferred mechanisms, and verified corrective action.', status: 'method-basis', sourceIds: ['tsmc-quality'], boundary: 'Specific analytical sequences depend on the package, device, and failure signature.' },
+      { id: 'rel-001', statement: 'Semiconductor quality systems combine qualification, production monitoring, reliability assessment, and continuous improvement across the product lifecycle.', provenance: 'combines-sources', empirical: 'established', sourceIds: ['tsmc-quality', 'jedec-home'] },
+      { id: 'rel-002', statement: 'Failure-analysis conclusions should distinguish observed symptoms, localized physical evidence, inferred mechanisms, and verified corrective action.', provenance: 'restates-source', empirical: 'method-basis', sourceIds: ['tsmc-quality'], boundary: 'Specific analytical sequences depend on the package, device, and failure signature.' },
     ],
     sourceIds: ['tsmc-quality', 'jedec-home'], relatedArticleIds: ['process-final-burn-in-system-test', 'process-encapsulation-underfill-molding', 'process-advanced-packaging'], intelligenceSlugs: ['known-good-die-storage-yield', 'smartphone-ap-advanced-packaging'],
   },
@@ -710,6 +704,8 @@ export function assertKnowledgeIntegrity(): void {
     for (const claim of article.claims) {
       if (claimIds.has(claim.id)) throw new Error(`Duplicate claim ${claim.id} in ${article.id}`)
       claimIds.add(claim.id)
+      assertClaimEvidence(claim, claim.id)
+      if (requiresBoundary(claim) && !claim.boundary) throw new Error(`${claim.id} needs a boundary: ${claim.provenance} / ${claim.empirical} is not readable without one`)
       for (const sourceId of claim.sourceIds) if (!sourceIds.has(sourceId)) throw new Error(`${claim.id} references missing source ${sourceId}`)
     }
     for (const section of article.sections) for (const claimId of section.claimIds ?? []) if (!claimIds.has(claimId)) throw new Error(`${article.id} section references missing claim ${claimId}`)

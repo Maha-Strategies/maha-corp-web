@@ -1,6 +1,7 @@
 import { BRIEFS } from './briefs-data.ts'
 import { INTELLIGENCE_KNOWLEDGE_LINKS, getIntelligenceBriefSlugsForKnowledgeObject } from './intelligence-knowledge-links.ts'
-import { KNOWLEDGE_ARTICLES, KNOWLEDGE_SOURCES, knowledgeArticlePath, type KnowledgeEvidenceStatus } from './knowledge-data.ts'
+import { type ClaimEmpiricalStatus, type ClaimProvenance } from './claim-evidence.ts'
+import { KNOWLEDGE_ARTICLES, KNOWLEDGE_SOURCES, knowledgeArticlePath } from './knowledge-data.ts'
 import { KNOWLEDGE_SUPPLIERS, knowledgeSupplierPath } from './knowledge-process-profiles.ts'
 
 export const EDITORIAL_REVIEW_POLICY = {
@@ -22,7 +23,8 @@ export interface EditorialClaimFinding {
   articleId: string
   articleTitle: string
   claimId: string
-  claimStatus: KnowledgeEvidenceStatus
+  claimProvenance: ClaimProvenance
+  claimEmpirical: ClaimEmpiricalStatus
   statement: string
   sourceCount: number
   reason: string
@@ -71,10 +73,11 @@ function isReviewSensitiveStatus(status: string): boolean {
   return /(PRELIMINARY|CRITICAL|VOLATILE|EMERGING|TRANSITION|COMPLIANCE|STRUCTURAL SHIFT)/i.test(status)
 }
 
-function weakEvidenceReason(status: KnowledgeEvidenceStatus, sourceCount: number): string | null {
-  if (status === 'open-question') return 'Open question has not yet reached an evidenced conclusion.'
-  if (status === 'bounded-inference') return 'Bounded inference needs either stronger corroboration or a fresh boundary review.'
-  if (status === 'method-basis' && sourceCount < 2) return 'Method claim relies on fewer than two cited sources.'
+function weakEvidenceReason(empirical: ClaimEmpiricalStatus, sourceCount: number): string | null {
+  if (empirical === 'open-question') return 'Open question has not yet reached an evidenced conclusion.'
+  if (empirical === 'bounded-inference') return 'Bounded inference needs either stronger corroboration or a fresh boundary review.'
+  if (empirical === 'interested-party') return 'Only support is a party with a commercial stake in the claim; seek independent corroboration.'
+  if (empirical === 'method-basis' && sourceCount < 2) return 'Method claim relies on fewer than two cited sources.'
   if (sourceCount === 0) return 'Claim has no resolving citation.'
   return null
 }
@@ -126,12 +129,13 @@ export function buildEditorialCoverageAudit(asOf = new Date()): EditorialCoverag
         articleId: article.id,
         articleTitle: article.title,
         claimId: claim.id,
-        claimStatus: claim.status,
+        claimProvenance: claim.provenance,
+        claimEmpirical: claim.empirical,
         statement: claim.statement,
         sourceCount: claim.sourceIds.length,
         href: `${knowledgeArticlePath(article)}#claim-${claim.id}`,
       }
-      const weakReason = weakEvidenceReason(claim.status, claim.sourceIds.length)
+      const weakReason = weakEvidenceReason(claim.empirical, claim.sourceIds.length)
       if (weakReason) weakEvidence.push({ ...base, reason: weakReason })
 
       const sources = claim.sourceIds.map((id) => sourceById.get(id)).filter((source) => source !== undefined)
