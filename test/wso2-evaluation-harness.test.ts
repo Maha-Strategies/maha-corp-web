@@ -10,6 +10,7 @@ import {
   assertCheckpointMatches,
   authorizeNextCall,
   callCostMicrodollars,
+  checkpointResults,
   countRetainedEvidenceSpans,
   emptyCheckpoint,
   findProhibitedAssertions,
@@ -111,6 +112,41 @@ test('a resumed run repeats no completed call, so an interruption costs nothing'
   assert.equal(resume.alreadyComplete.length, 2)
   assert.equal(resume.repeatUpperBound, BigInt(0))
   assert.ok(!resume.toRun.some((call) => call.workloadId === 'a' && call.path === 'wso2-baseline'))
+})
+
+test('a resumed artifact retains prior scored results in planned order', () => {
+  const planned = planCalls([{ id: 'a' }, { id: 'b' }])
+  const checkpoint = emptyCheckpoint('digest', 'model')
+  checkpoint.records.push(
+    { ...record('a', 'wso2-baseline'), result: { marker: 'first' } },
+    { ...record('a', 'wso2-native-prompt-compressor'), result: { marker: 'second' } },
+  )
+
+  assert.deepEqual(checkpointResults<{ marker: string }>(planned, checkpoint), [
+    { marker: 'first' },
+    { marker: 'second' },
+  ])
+})
+
+test('a completed call without a scored result fails closed instead of being omitted or repeated', () => {
+  const planned = planCalls([{ id: 'a' }])
+  const checkpoint = emptyCheckpoint('digest', 'model')
+  checkpoint.records.push(record('a', 'wso2-baseline'))
+  assert.throws(
+    () => checkpointResults(planned, checkpoint),
+    /marked complete but has no scored result[\s\S]*fresh checkpoint/,
+  )
+})
+
+test('a forced repeat keeps spend history but uses the latest scored result once', () => {
+  const planned = planCalls([{ id: 'a' }], { path: 'wso2-baseline' })
+  const checkpoint = emptyCheckpoint('digest', 'model')
+  checkpoint.records.push(
+    { ...record('a', 'wso2-baseline', '7'), result: { marker: 'old' } },
+    { ...record('a', 'wso2-baseline', '11'), result: { marker: 'new' } },
+  )
+  assert.equal(spentMicrodollars(checkpoint), BigInt(18), 'both paid attempts remain in spend history')
+  assert.deepEqual(checkpointResults<{ marker: string }>(planned, checkpoint), [{ marker: 'new' }])
 })
 
 test('forcing repeats reports the exact additional maximum cost', () => {

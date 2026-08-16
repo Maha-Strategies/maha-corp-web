@@ -145,6 +145,14 @@ export type Wso2CallRecord = {
   outcome: 'ok' | 'failed'
   costMicrodollars: string
   completedAt: string
+  /**
+   * The scored, sanitized result produced by this call.
+   *
+   * Identity without the result prevents duplicate billing but cannot rebuild
+   * the report after an interruption. Older checkpoints may lack this field;
+   * callers must fail closed rather than repeat the paid call or omit it.
+   */
+  result?: unknown
   [key: string]: unknown
 }
 
@@ -211,6 +219,32 @@ export function planResume(
     alreadyComplete,
     repeatUpperBound: options.force ? BigInt(alreadyComplete.length) * options.upperBoundPerCall : BigInt(0),
   }
+}
+
+/**
+ * Rebuilds the artifact from durable checkpoint records in planned-call order.
+ *
+ * Later records win when an operator explicitly forced a repeat, while every
+ * record remains in the checkpoint so cumulative spend is never erased.
+ */
+export function checkpointResults<T>(
+  planned: readonly Wso2EvaluationCall[],
+  checkpoint: Wso2Checkpoint,
+): T[] {
+  const latest = new Map<string, Wso2CallRecord>()
+  for (const record of checkpoint.records) latest.set(callKey(record), record)
+
+  return planned.flatMap((call) => {
+    const record = latest.get(callKey(call))
+    if (!record) return []
+    if (record.result === undefined) {
+      throw new Error(
+        `Checkpoint call ${callKey(call)} is marked complete but has no scored result. `
+        + 'Use a fresh checkpoint; repeating the provider call automatically is forbidden.',
+      )
+    }
+    return [record.result as T]
+  })
 }
 
 // --- Deterministic scoring --------------------------------------------------
