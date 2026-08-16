@@ -17,6 +17,15 @@ const PRIVATE_ROUTES = new Set([
   '/api/v1/a2a/agents',
   '/api/v1/a2a/gateway/[agentId]',
   '/api/v1/a2a/register',
+  // Confirmatory-research control plane. These routes expose participant
+  // pseudonyms, locked plans, and outcome state and require the dedicated
+  // registry operations token. A privacy-reviewed public projection does not
+  // exist yet, so none belongs in the customer OpenAPI contract.
+  '/api/v1/celestial-hypotheses/drafts',
+  '/api/v1/celestial-hypotheses/[experimentId]',
+  '/api/v1/celestial-hypotheses/[experimentId]/register',
+  '/api/v1/celestial-hypotheses/[experimentId]/outcomes',
+  '/api/v1/celestial-hypotheses/[experimentId]/provenance',
   '/api/admin/mps-operations/actions',
   '/api/admin/commercial-api-metering',
   '/api/admin/chargeback-export',
