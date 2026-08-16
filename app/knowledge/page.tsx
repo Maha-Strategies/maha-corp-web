@@ -22,6 +22,7 @@ import {
   ASTRONOMY_SOURCES,
 } from '@/lib/astronomy-knowledge'
 import { ASTROLOGY_PATH, ASTROLOGY_RULES, ASTROLOGY_TRADITIONS, ASTROLOGY_VERSION } from '@/lib/astrology-traditions'
+import { PANCHANGA_VERSION } from '@/lib/panchanga'
 
 export const metadata: Metadata = {
   title: 'Knowledge | Maha Strategies',
@@ -134,6 +135,13 @@ export default function KnowledgePage() {
               <p className="mt-3 text-sm leading-6 text-zinc-400">Named interpretive traditions with passage-level provenance from rights-cleared sources, recorded with their disagreements.</p>
               <p className="mt-4 border-l border-rose-700/60 pl-3 text-xs leading-5 text-rose-200">Every rule is unvalidated tradition. Provenance is claimed; predictive validity is not, and the schema cannot express it.</p>
               <p className="mt-6 font-mono text-[10px] uppercase tracking-widest text-zinc-600 group-hover:text-violet-300">Inspect {ASTROLOGY_TRADITIONS.length} traditions · {ASTROLOGY_RULES.length} rules →</p>
+            </Link>
+            <Link href="/knowledge/panchanga" className="group border border-amber-900/60 bg-amber-950/10 p-6 transition-colors hover:border-amber-400">
+              <p className="font-mono text-[10px] uppercase tracking-widest text-amber-300">Calendrical layer · {PANCHANGA_VERSION}</p>
+              <h2 className="mt-4 text-2xl font-semibold text-white group-hover:text-amber-200">Pañcāṅga</h2>
+              <p className="mt-3 text-sm leading-6 text-zinc-400">Tithi, nakshatra, yoga, karaṇa, and vāra computed live from Sun and Moon geometry with a stated ayanāṁśa and flagged boundaries.</p>
+              <p className="mt-4 border-l border-amber-700/60 pl-3 text-xs leading-5 text-amber-200">Calendar arithmetic only. Whether a moment is auspicious is a tradition claim and is not made here.</p>
+              <p className="mt-6 font-mono text-[10px] uppercase tracking-widest text-zinc-600 group-hover:text-amber-300">Compute for four reference cities →</p>
             </Link>
           </div>
         </div>
