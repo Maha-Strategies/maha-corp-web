@@ -86,6 +86,18 @@ export interface ChartCondition {
   /** The celestial fact this condition reads. Ties a rule to the fact layer rather than to prose. */
   factField: string
   description: string
+  /**
+   * Subjects whose facts must be present for the condition to hold. Any-of
+   * semantics: one matching subject satisfies it.
+   */
+  requiresSubjects?: string[]
+  /**
+   * `direct` conditions are decidable from a fact bundle alone. `requires-derivation`
+   * conditions need a computation the compiler does not perform — orientality,
+   * dominion, house cusps. Marking them is what lets the compiler fail closed
+   * instead of quietly guessing.
+   */
+  derivation: 'direct' | 'requires-derivation'
 }
 
 export interface InterpretationRule {
@@ -214,7 +226,7 @@ const DESCRIPTIVE_BOUNDARY = 'Recorded as historical doctrine of the named tradi
 export const ASTROLOGY_RULES: InterpretationRule[] = [
   {
     id: 'ptb-planet-nature-benefic', traditionId: 'hellenistic-ptolemaic', technique: 'planetary nature', chartTypes: ['natal', 'mundane'],
-    conditions: [{ factField: 'subject.identifiers', description: 'Jupiter or Venus is present in the chart.' }],
+    conditions: [{ factField: 'subject.identifiers', description: 'Jupiter or Venus is present in the chart.', requiresSubjects: ['Jupiter', 'Venus'], derivation: 'direct' }],
     interpretation: 'The tradition classes Jupiter and Venus as benefic, deriving the classification from a predominance of the heat and moisture held to be nutritive.',
     passageIds: ['ptb-1-5-benefic'], provenance: 'restates-source', empirical: UNVALIDATED,
     disagreements: ['Later traditions treat benefic and malefic as contextual rather than fixed, conditioning the classification on sect, dignity, and house placement.'],
@@ -222,7 +234,7 @@ export const ASTROLOGY_RULES: InterpretationRule[] = [
   },
   {
     id: 'ptb-planet-nature-malefic', traditionId: 'hellenistic-ptolemaic', technique: 'planetary nature', chartTypes: ['natal', 'mundane'],
-    conditions: [{ factField: 'subject.identifiers', description: 'Saturn or Mars is present in the chart.' }],
+    conditions: [{ factField: 'subject.identifiers', description: 'Saturn or Mars is present in the chart.', requiresSubjects: ['Saturn', 'Mars'], derivation: 'direct' }],
     interpretation: 'The tradition classes Saturn and Mars as malefic, attributing the classification to an excess of cold in Saturn and an excess of dryness in Mars.',
     passageIds: ['ptb-1-5-malefic'], provenance: 'restates-source', empirical: UNVALIDATED,
     disagreements: ['Psychological astrology of the 20th century generally rejects the benefic/malefic division as a description of outcomes.'],
@@ -230,7 +242,7 @@ export const ASTROLOGY_RULES: InterpretationRule[] = [
   },
   {
     id: 'ptb-planet-nature-common', traditionId: 'hellenistic-ptolemaic', technique: 'planetary nature', chartTypes: ['natal', 'mundane'],
-    conditions: [{ factField: 'subject.identifiers', description: 'The Sun or Mercury is present in the chart.' }],
+    conditions: [{ factField: 'subject.identifiers', description: 'The Sun or Mercury is present in the chart.', requiresSubjects: ['Sun', 'Mercury'], derivation: 'direct' }],
     interpretation: 'The tradition treats the Sun and Mercury as of common influence, taking their effect from the planets they are configured with rather than from a fixed nature.',
     passageIds: ['ptb-1-5-common'], provenance: 'restates-source', empirical: UNVALIDATED,
     disagreements: ['Some Hellenistic authors treat the Sun as malefic when too close to another planet, a condition Ptolemy does not frame this way here.'],
@@ -238,7 +250,7 @@ export const ASTROLOGY_RULES: InterpretationRule[] = [
   },
   {
     id: 'ptb-planet-gender-feminine', traditionId: 'hellenistic-ptolemaic', technique: 'planetary gender', chartTypes: ['natal'],
-    conditions: [{ factField: 'subject.identifiers', description: 'The Moon or Venus is present in the chart.' }],
+    conditions: [{ factField: 'subject.identifiers', description: 'The Moon or Venus is present in the chart.', requiresSubjects: ['Moon', 'Venus'], derivation: 'direct' }],
     interpretation: 'The tradition assigns the Moon and Venus to the feminine category on the grounds that their qualities are principally moist.',
     passageIds: ['ptb-1-6-feminine'], provenance: 'restates-source', empirical: UNVALIDATED,
     disagreements: ['The gendered classification of planets is rejected or reinterpreted as symbolic polarity across most contemporary practice.'],
@@ -246,7 +258,7 @@ export const ASTROLOGY_RULES: InterpretationRule[] = [
   },
   {
     id: 'ptb-planet-gender-masculine', traditionId: 'hellenistic-ptolemaic', technique: 'planetary gender', chartTypes: ['natal'],
-    conditions: [{ factField: 'subject.identifiers', description: 'The Sun, Saturn, Jupiter, or Mars is present in the chart.' }],
+    conditions: [{ factField: 'subject.identifiers', description: 'The Sun, Saturn, Jupiter, or Mars is present in the chart.', requiresSubjects: ['Sun', 'Saturn', 'Jupiter', 'Mars'], derivation: 'direct' }],
     interpretation: 'The tradition assigns the Sun, Saturn, Jupiter, and Mars to the masculine category, and treats Mercury as common to both because it produces dryness and moisture in equal ratio.',
     passageIds: ['ptb-1-6-masculine'], provenance: 'restates-source', empirical: UNVALIDATED,
     disagreements: ['The gendered classification of planets is rejected or reinterpreted as symbolic polarity across most contemporary practice.'],
@@ -254,7 +266,7 @@ export const ASTROLOGY_RULES: InterpretationRule[] = [
   },
   {
     id: 'ptb-genethlialogy-scope', traditionId: 'hellenistic-ptolemaic', technique: 'scope of nativities', chartTypes: ['natal'],
-    conditions: [{ factField: 'time.utcInstant', description: 'A birth moment is given.' }],
+    conditions: [{ factField: 'time.utcInstant', description: 'A birth moment is given.', derivation: 'direct' }],
     interpretation: 'The tradition names the study of individual nativities Genethlialogy and separates it from the general or mundane inquiry treated earlier in the work.',
     passageIds: ['ptb-3-1-genethlialogy'], provenance: 'restates-source', empirical: UNVALIDATED,
     disagreements: [],
@@ -262,7 +274,7 @@ export const ASTROLOGY_RULES: InterpretationRule[] = [
   },
   {
     id: 'ptb-life-precedence', traditionId: 'hellenistic-ptolemaic', technique: 'order of judgement', chartTypes: ['natal'],
-    conditions: [{ factField: 'time.utcInstant', description: 'A birth moment is given.' }],
+    conditions: [{ factField: 'time.utcInstant', description: 'A birth moment is given.', derivation: 'direct' }],
     interpretation: 'The tradition holds that the question of the duration of life is taken up before all other post-natal questions, on the reasoning that other predictions are moot without it.',
     passageIds: ['ptb-3-11-life'], provenance: 'restates-source', empirical: UNVALIDATED,
     disagreements: ['Contemporary practice generally abandons length-of-life technique entirely, on both evidential and ethical grounds.'],
@@ -271,8 +283,8 @@ export const ASTROLOGY_RULES: InterpretationRule[] = [
   {
     id: 'ptb-prorogatory-places', traditionId: 'hellenistic-ptolemaic', technique: 'prorogation', chartTypes: ['natal'],
     conditions: [
-      { factField: 'coordinates.values', description: 'Ecliptic longitudes of the angles are computed.' },
-      { factField: 'observer.position', description: 'Observer latitude is known, since the angles depend on it.' },
+      { factField: 'coordinates.values', description: 'Ecliptic longitudes of the angles are computed.', derivation: 'requires-derivation' },
+      { factField: 'observer.position', description: 'Observer latitude is known, since the angles depend on it.', derivation: 'requires-derivation' },
     ],
     interpretation: 'The tradition restricts the prorogatory places to a defined set, beginning with the region of the ascendant running from five degrees above the horizon to twenty-five degrees below it.',
     passageIds: ['ptb-3-12-prorogatory'], provenance: 'restates-source', empirical: UNVALIDATED,
@@ -281,7 +293,7 @@ export const ASTROLOGY_RULES: InterpretationRule[] = [
   },
   {
     id: 'ptb-body-saturn', traditionId: 'hellenistic-ptolemaic', technique: 'bodily form', chartTypes: ['natal'],
-    conditions: [{ factField: 'coordinates.values', description: 'Saturn holds dominion and is oriental to the Sun.' }],
+    conditions: [{ factField: 'coordinates.values', description: 'Saturn holds dominion and is oriental to the Sun.', requiresSubjects: ['Saturn'], derivation: 'requires-derivation' }],
     interpretation: 'The tradition holds that Saturn oriental gives a yellowish complexion, black curled hair, a broad chest, and proportionate size.',
     passageIds: ['ptb-3-16-saturn'], provenance: 'restates-source', empirical: UNVALIDATED,
     disagreements: ['Physical-description technique is abandoned in most contemporary practice.'],
@@ -289,7 +301,7 @@ export const ASTROLOGY_RULES: InterpretationRule[] = [
   },
   {
     id: 'ptb-body-jupiter', traditionId: 'hellenistic-ptolemaic', technique: 'bodily form', chartTypes: ['natal'],
-    conditions: [{ factField: 'coordinates.values', description: 'Jupiter holds dominion and is oriental to the Sun.' }],
+    conditions: [{ factField: 'coordinates.values', description: 'Jupiter holds dominion and is oriental to the Sun.', requiresSubjects: ['Jupiter'], derivation: 'requires-derivation' }],
     interpretation: 'The tradition holds that Jupiter oriental gives a fair and clear complexion, moderate hair, large eyes, and dignified stature.',
     passageIds: ['ptb-3-16-jupiter'], provenance: 'restates-source', empirical: UNVALIDATED,
     disagreements: ['Physical-description technique is abandoned in most contemporary practice.'],
@@ -297,7 +309,7 @@ export const ASTROLOGY_RULES: InterpretationRule[] = [
   },
   {
     id: 'ptb-body-mars', traditionId: 'hellenistic-ptolemaic', technique: 'bodily form', chartTypes: ['natal'],
-    conditions: [{ factField: 'coordinates.values', description: 'Mars holds dominion and is ascending.' }],
+    conditions: [{ factField: 'coordinates.values', description: 'Mars holds dominion and is ascending.', requiresSubjects: ['Mars'], derivation: 'requires-derivation' }],
     interpretation: 'The tradition holds that Mars ascending gives ruddiness, large size, blue or grey eyes, and a sturdy figure.',
     passageIds: ['ptb-3-16-mars'], provenance: 'restates-source', empirical: UNVALIDATED,
     disagreements: ['Physical-description technique is abandoned in most contemporary practice.'],
@@ -305,7 +317,7 @@ export const ASTROLOGY_RULES: InterpretationRule[] = [
   },
   {
     id: 'ptb-body-venus', traditionId: 'hellenistic-ptolemaic', technique: 'bodily form', chartTypes: ['natal'],
-    conditions: [{ factField: 'coordinates.values', description: 'Venus holds dominion over the form.' }],
+    conditions: [{ factField: 'coordinates.values', description: 'Venus holds dominion over the form.', requiresSubjects: ['Venus'], derivation: 'requires-derivation' }],
     interpretation: 'The tradition holds that Venus works as Jupiter does but more gracefully, and is said to make the eyes beautiful and azure.',
     passageIds: ['ptb-3-16-venus'], provenance: 'restates-source', empirical: UNVALIDATED,
     disagreements: ['Physical-description technique is abandoned in most contemporary practice.'],
@@ -313,7 +325,7 @@ export const ASTROLOGY_RULES: InterpretationRule[] = [
   },
   {
     id: 'ptb-body-mercury', traditionId: 'hellenistic-ptolemaic', technique: 'bodily form', chartTypes: ['natal'],
-    conditions: [{ factField: 'coordinates.values', description: 'Mercury holds dominion and is oriental to the Sun.' }],
+    conditions: [{ factField: 'coordinates.values', description: 'Mercury holds dominion and is oriental to the Sun.', requiresSubjects: ['Mercury'], derivation: 'requires-derivation' }],
     interpretation: 'The tradition holds that Mercury oriental gives a yellowish complexion, proportionate and well-shaped stature, small eyes, and moderate hair.',
     passageIds: ['ptb-3-16-mercury'], provenance: 'restates-source', empirical: UNVALIDATED,
     disagreements: ['Physical-description technique is abandoned in most contemporary practice.'],
@@ -321,7 +333,7 @@ export const ASTROLOGY_RULES: InterpretationRule[] = [
   },
   {
     id: 'ptb-injury-angles', traditionId: 'hellenistic-ptolemaic', technique: 'bodily injury', chartTypes: ['natal'],
-    conditions: [{ factField: 'coordinates.values', description: 'The ascendant and descendant are computed, and malefic configurations to them are examined.' }],
+    conditions: [{ factField: 'coordinates.values', description: 'The ascendant and descendant are computed, and malefic configurations to them are examined.', derivation: 'requires-derivation' }],
     interpretation: 'The tradition directs that the ascendant and western angle be examined first when the question concerns bodily injury or disease.',
     passageIds: ['ptb-3-17-injury-angles'], provenance: 'restates-source', empirical: UNVALIDATED,
     disagreements: ['Medical application of astrology is rejected by contemporary medicine and by most contemporary astrological practice.'],
@@ -330,8 +342,8 @@ export const ASTROLOGY_RULES: InterpretationRule[] = [
   {
     id: 'ptb-mind-mercury', traditionId: 'hellenistic-ptolemaic', technique: 'quality of mind', chartTypes: ['natal'],
     conditions: [
-      { factField: 'coordinates.values', description: 'The position of Mercury is computed.' },
-      { factField: 'coordinates.values', description: 'The position of the Moon and its applications and separations are computed.' },
+      { factField: 'coordinates.values', description: 'The position of Mercury is computed.', requiresSubjects: ['Mercury'], derivation: 'requires-derivation' },
+      { factField: 'coordinates.values', description: 'The position of the Moon and its applications and separations are computed.', requiresSubjects: ['Moon'], derivation: 'requires-derivation' },
     ],
     interpretation: 'The tradition assigns the intellectual qualities to the situation of Mercury, and the sensitive faculties independent of reason to the Moon and the stars configured with her.',
     passageIds: ['ptb-3-18-mind'], provenance: 'restates-source', empirical: UNVALIDATED,
