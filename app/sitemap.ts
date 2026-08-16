@@ -7,6 +7,7 @@ import { KNOWLEDGE_ARTICLES, knowledgeArticlePath } from '@/lib/knowledge-data'
 import { SEMICONDUCTOR_PROCESS_MAP_DATE, SEMICONDUCTOR_PROCESS_MAP_PATH } from '@/lib/semiconductor-process-map'
 import { KNOWLEDGE_SUPPLIERS, knowledgeSupplierPath } from '@/lib/knowledge-process-profiles'
 import { CELESTIAL_FACT_PATH, CELESTIAL_FACT_RELEASE_DATE } from '@/lib/celestial-facts'
+import { ASTROLOGY_PATH, ASTROLOGY_RELEASE_DATE, ASTROLOGY_TRADITIONS, astrologyTraditionPath } from '@/lib/astrology-traditions'
 import { ASTRONOMY_ARTICLES, ASTRONOMY_KNOWLEDGE_PATH, ASTRONOMY_KNOWLEDGE_RELEASE_DATE, astronomyArticlePath } from '@/lib/astronomy-knowledge'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
@@ -27,6 +28,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${baseUrl}/knowledge`, lastModified: new Date(CELESTIAL_FACT_RELEASE_DATE) },
     { url: `${baseUrl}${CELESTIAL_FACT_PATH}`, lastModified: new Date(CELESTIAL_FACT_RELEASE_DATE) },
     { url: `${baseUrl}${ASTRONOMY_KNOWLEDGE_PATH}`, lastModified: new Date(ASTRONOMY_KNOWLEDGE_RELEASE_DATE) },
+    { url: `${baseUrl}${ASTROLOGY_PATH}`, lastModified: new Date(ASTROLOGY_RELEASE_DATE) },
     { url: `${baseUrl}/knowledge/suppliers`, lastModified: new Date('2026-08-13') },
     { url: `${baseUrl}${SEMICONDUCTOR_PROCESS_MAP_PATH}`, lastModified: new Date(SEMICONDUCTOR_PROCESS_MAP_DATE) },
     { url: `${baseUrl}/start` },
@@ -354,5 +356,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     url: `${baseUrl}${knowledgeSupplierPath(supplier)}`,
     lastModified: new Date('2026-08-13'),
   }))
-  return [...staticPages, ...knowledgePages, ...astronomyKnowledgePages, ...knowledgeSupplierPages, ...unfinishedSpeciesReader, ...otherOpenBookReaders, ...published.map((publication) => ({ url: `${baseUrl}/insights/${publication.slug}`, lastModified: new Date(publication.updated_at) }))]
+  const astrologyTraditionPages = ASTROLOGY_TRADITIONS.map((tradition) => ({
+    url: `${baseUrl}${astrologyTraditionPath(tradition)}`,
+    lastModified: new Date(ASTROLOGY_RELEASE_DATE),
+  }))
+
+  return [...staticPages, ...knowledgePages, ...astronomyKnowledgePages, ...astrologyTraditionPages, ...knowledgeSupplierPages, ...unfinishedSpeciesReader, ...otherOpenBookReaders, ...published.map((publication) => ({ url: `${baseUrl}/insights/${publication.slug}`, lastModified: new Date(publication.updated_at) }))]
 }

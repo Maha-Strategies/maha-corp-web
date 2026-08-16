@@ -11,8 +11,8 @@ import {
   getKnowledgeRouteParams,
   getKnowledgeSource,
   knowledgeArticlePath,
-  type KnowledgeEvidenceStatus,
 } from '@/lib/knowledge-data'
+import { CLAIM_EMPIRICAL_META, CLAIM_PROVENANCE_META, type ClaimEmpiricalStatus } from '@/lib/claim-evidence'
 import { SEMICONDUCTOR_PROCESS_MAP_PATH } from '@/lib/semiconductor-process-map'
 import {
   getKnowledgeSupplier,
@@ -50,11 +50,22 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   }
 }
 
-const evidenceMeta: Record<KnowledgeEvidenceStatus, { label: string; className: string }> = {
-  'source-supported': { label: 'Source-supported', className: 'border-emerald-500/30 bg-emerald-500/10 text-emerald-300' },
-  'method-basis': { label: 'Method basis', className: 'border-cyan-500/30 bg-cyan-500/10 text-cyan-300' },
-  'bounded-inference': { label: 'Bounded inference', className: 'border-amber-500/30 bg-amber-500/10 text-amber-300' },
-  'open-question': { label: 'Open question', className: 'border-zinc-600 bg-zinc-900 text-zinc-400' },
+// The two axes are styled differently on purpose. Provenance is a neutral
+// statement about sourcing fidelity, so it stays monochrome; empirical support
+// is the axis a reader should weigh, so it carries the colour.
+const provenanceClassName = 'border-zinc-700 bg-zinc-900 text-zinc-400'
+
+const empiricalClassName: Record<ClaimEmpiricalStatus, string> = {
+  'direct-observation': 'border-emerald-500/30 bg-emerald-500/10 text-emerald-300',
+  'calibrated-measurement': 'border-emerald-500/30 bg-emerald-500/10 text-emerald-300',
+  established: 'border-emerald-500/30 bg-emerald-500/10 text-emerald-300',
+  'consensus-summary': 'border-teal-500/30 bg-teal-500/10 text-teal-300',
+  'method-basis': 'border-cyan-500/30 bg-cyan-500/10 text-cyan-300',
+  'model-dependent': 'border-cyan-500/30 bg-cyan-500/10 text-cyan-300',
+  'bounded-inference': 'border-amber-500/30 bg-amber-500/10 text-amber-300',
+  'interested-party': 'border-rose-500/30 bg-rose-500/10 text-rose-300',
+  'open-question': 'border-zinc-600 bg-zinc-900 text-zinc-400',
+  'unvalidated-tradition': 'border-rose-500/30 bg-rose-500/10 text-rose-300',
 }
 
 function DataList({ title, items }: { title: string; items: string[] }) {
@@ -217,11 +228,11 @@ export default async function KnowledgeArticlePage({ params }: PageProps) {
                       {section.claimIds?.map((claimId) => {
                         const claim = claims.get(claimId)
                         if (!claim) return null
-                        const meta = evidenceMeta[claim.status]
                         return (
                           <div key={claim.id} id={`claim-${claim.id}`} className="scroll-mt-24 border border-zinc-800 bg-zinc-950/70 p-4 font-sans text-sm leading-6">
                             <div className="flex flex-wrap items-center gap-2">
-                              <span className={`border px-2 py-0.5 font-mono text-[9px] uppercase tracking-widest ${meta.className}`}>{meta.label}</span>
+                              <span title={CLAIM_EMPIRICAL_META[claim.empirical].description} className={`border px-2 py-0.5 font-mono text-[9px] uppercase tracking-widest ${empiricalClassName[claim.empirical]}`}>{CLAIM_EMPIRICAL_META[claim.empirical].label}</span>
+                              <span title={CLAIM_PROVENANCE_META[claim.provenance].description} className={`border px-2 py-0.5 font-mono text-[9px] uppercase tracking-widest ${provenanceClassName}`}>{CLAIM_PROVENANCE_META[claim.provenance].label}</span>
                               {claim.sourceIds.map((sourceId) => sourceNumbers.get(sourceId)).filter(Boolean).map((number) => (
                                 <a key={number} href={`#source-${number}`} className="font-mono text-[10px] text-cyan-300 hover:text-white">[{number}]</a>
                               ))}

@@ -27,7 +27,8 @@ test('coverage gaps identify both unlinked briefs and orphan Knowledge objects',
 
 test('weak evidence queue is claim-level and actionable', () => {
   assert.ok(audit.weakEvidence.length > 0)
-  assert.ok(audit.weakEvidence.some((item) => item.claimStatus === 'bounded-inference'))
+  assert.ok(audit.weakEvidence.some((item) => item.claimEmpirical === 'bounded-inference'))
+  assert.ok(audit.weakEvidence.some((item) => item.claimEmpirical === 'interested-party'), 'vendor-only support must surface as weak evidence')
   for (const finding of audit.weakEvidence) {
     assert.match(finding.href, /^\/knowledge\/.+#claim-/)
     assert.ok(finding.statement.length >= 40)

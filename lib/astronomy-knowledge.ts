@@ -1,6 +1,10 @@
 import { SITE_URL } from './briefs-data.ts'
+import { CLAIM_EVIDENCE_SCHEMA, assertClaimEvidence, type ClaimEmpiricalStatus, type ClaimProvenance } from './claim-evidence.ts'
 
-export const ASTRONOMY_KNOWLEDGE_VERSION = 'astronomy-knowledge/0.1' as const
+// 0.2 adds the required `provenance` axis to every claim record. Adding a
+// required field is breaking for strict consumers of the 0.1 registry, so the
+// version moves with it.
+export const ASTRONOMY_KNOWLEDGE_VERSION = 'astronomy-knowledge/0.2' as const
 export const ASTRONOMY_KNOWLEDGE_RELEASE_DATE = '2026-08-15' as const
 export const ASTRONOMY_KNOWLEDGE_PATH = '/knowledge/astronomy' as const
 export const ASTRONOMY_REGISTRY_PATH = '/knowledge/astronomy/registry' as const
@@ -12,7 +16,13 @@ export type AstronomyTrack = typeof ASTRONOMY_TRACKS[number]
 export const ASTRONOMY_KINDS = ['foundation', 'method', 'object-system', 'physical-process', 'model'] as const
 export type AstronomyKind = typeof ASTRONOMY_KINDS[number]
 
-export const ASTRONOMY_EVIDENCE_STATES = ['direct-observation', 'calibrated-measurement', 'method-basis', 'model-dependent', 'consensus-summary', 'open-question'] as const
+/**
+ * Astronomy's evidence states are the subset of the shared empirical axis that
+ * this layer can produce. The `satisfies` clause is load-bearing: it makes any
+ * future divergence from the shared vocabulary a compile error rather than a
+ * second private enum that happens to overlap.
+ */
+export const ASTRONOMY_EVIDENCE_STATES = ['direct-observation', 'calibrated-measurement', 'method-basis', 'model-dependent', 'consensus-summary', 'open-question'] as const satisfies readonly ClaimEmpiricalStatus[]
 export type AstronomyEvidenceState = typeof ASTRONOMY_EVIDENCE_STATES[number]
 
 export const ASTRONOMY_FACT_FIELDS = [
@@ -36,7 +46,10 @@ export interface AstronomySource {
 export interface AstronomyClaim {
   id: string
   statement: string
+  /** The empirical axis. Named `evidenceState` for continuity with 0.1 records. */
   evidenceState: AstronomyEvidenceState
+  /** The provenance axis: how faithfully the claim represents its sources. */
+  provenance: ClaimProvenance
   sourceIds: string[]
   boundary: string
 }
@@ -122,9 +135,13 @@ interface ArticleSeed extends Omit<AstronomyArticle, 'id' | 'claims' | 'sections
 function makeArticle(seed: ArticleSeed): AstronomyArticle {
   const id = `astronomy-${seed.slug}`
   const claims: AstronomyClaim[] = [
-    { id: `${id}-observation`, statement: seed.observationClaim, evidenceState: seed.observationState ?? 'calibrated-measurement', sourceIds: [seed.sourceIds[0]], boundary: seed.limitations[0] },
-    { id: `${id}-inference`, statement: seed.inferenceClaim, evidenceState: 'model-dependent', sourceIds: seed.sourceIds, boundary: seed.assumptions[0] },
-    { id: `${id}-uncertainty`, statement: seed.uncertaintyClaim, evidenceState: 'open-question', sourceIds: [seed.sourceIds.at(-1) ?? seed.sourceIds[0]], boundary: seed.limitations.at(-1) ?? seed.limitations[0] },
+    // Provenance is assigned per slot because the slots differ in kind: the
+    // observation restates one mission source, the inference draws on all of
+    // them, and the uncertainty statement is Maha's framing of what the
+    // sources leave open rather than something they assert.
+    { id: `${id}-observation`, statement: seed.observationClaim, evidenceState: seed.observationState ?? 'calibrated-measurement', provenance: 'restates-source', sourceIds: [seed.sourceIds[0]], boundary: seed.limitations[0] },
+    { id: `${id}-inference`, statement: seed.inferenceClaim, evidenceState: 'model-dependent', provenance: seed.sourceIds.length > 1 ? 'combines-sources' : 'restates-source', sourceIds: seed.sourceIds, boundary: seed.assumptions[0] },
+    { id: `${id}-uncertainty`, statement: seed.uncertaintyClaim, evidenceState: 'open-question', provenance: 'maha-inference', sourceIds: [seed.sourceIds.at(-1) ?? seed.sourceIds[0]], boundary: seed.limitations.at(-1) ?? seed.limitations[0] },
   ]
   return {
     ...seed, id, claims, sourceIds: [...new Set(seed.sourceIds)],
@@ -173,10 +190,12 @@ export const ASTRONOMY_KNOWLEDGE_SCHEMA = {
   $defs: {
     claim: {
       type: 'object', additionalProperties: false,
-      required: ['id', 'statement', 'evidenceState', 'sourceIds', 'boundary'],
+      required: ['id', 'statement', 'evidenceState', 'provenance', 'sourceIds', 'boundary'],
       properties: {
         id: { type: 'string', minLength: 1 }, statement: { type: 'string', minLength: 40 },
-        evidenceState: { enum: ASTRONOMY_EVIDENCE_STATES }, sourceIds: { type: 'array', minItems: 1, items: { type: 'string', minLength: 1 } },
+        evidenceState: { enum: ASTRONOMY_EVIDENCE_STATES, description: CLAIM_EVIDENCE_SCHEMA.empirical.description },
+        provenance: CLAIM_EVIDENCE_SCHEMA.provenance,
+        sourceIds: { type: 'array', minItems: 1, items: { type: 'string', minLength: 1 } },
         boundary: { type: 'string', minLength: 30 },
       },
     },
@@ -256,6 +275,7 @@ export function assertAstronomyKnowledgeIntegrity(): void {
     for (const relatedId of article.relatedArticleIds) if (!articleIds.has(relatedId)) throw new Error(`${article.id} references missing article ${relatedId}.`)
     for (const claim of article.claims) {
       if (claim.sourceIds.length === 0 || claim.boundary.length < 30) throw new Error(`${claim.id} lacks evidence or a boundary.`)
+      assertClaimEvidence({ provenance: claim.provenance, empirical: claim.evidenceState }, claim.id)
       for (const sourceId of claim.sourceIds) if (!sourceIds.has(sourceId)) throw new Error(`${claim.id} references missing source ${sourceId}.`)
     }
   }
