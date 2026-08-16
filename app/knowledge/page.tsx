@@ -143,6 +143,13 @@ export default function KnowledgePage() {
               <p className="mt-4 border-l border-amber-700/60 pl-3 text-xs leading-5 text-amber-200">Calendar arithmetic only. Whether a moment is auspicious is a tradition claim and is not made here.</p>
               <p className="mt-6 font-mono text-[10px] uppercase tracking-widest text-zinc-600 group-hover:text-amber-300">Compute for four reference cities →</p>
             </Link>
+            <Link href="/knowledge/muhurta" className="group border border-violet-900/60 bg-violet-950/10 p-6 transition-colors hover:border-violet-400">
+              <p className="font-mono text-[10px] uppercase tracking-widest text-violet-300">Compiled verdict · {ASTROLOGY_VERSION}</p>
+              <h2 className="mt-4 text-2xl font-semibold text-white group-hover:text-violet-200">Muhūrta verdict</h2>
+              <p className="mt-3 text-sm leading-6 text-zinc-400">What the Jyotiṣa tradition holds about a chosen moment, compiled from the pañcāṅga with every source passage attached.</p>
+              <p className="mt-4 border-l border-rose-700/60 pl-3 text-xs leading-5 text-rose-200">Every withheld rule is shown with its reason, so the reading cannot look stronger than it is.</p>
+              <p className="mt-6 font-mono text-[10px] uppercase tracking-widest text-zinc-600 group-hover:text-violet-300">Compile a moment →</p>
+            </Link>
           </div>
         </div>
       </section>

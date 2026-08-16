@@ -230,6 +230,38 @@ const BS = 'brihat-samhita-iyer'
  */
 const BRIHAT_SAMHITA_PASSAGES: AstrologyPassage[] = [
   {
+    id: 'bs-98-6-dhruva-list', sourceId: BS, locator: 'Chapter 98, verse 6 — On the constellations',
+    excerpt: 'Of these 28 constellations (nakṣatra), those of Uttaraphālguni, Uttarāṣāḍha and Uttarabhādrapada together with the constellation of Rohiṇī are known as (Dhruva) stable asterisms.',
+    transcriptionNote: 'The edition transliterates the nakshatra names differently from the forms used in `lib/panchanga.ts`; the rule maps them to the canonical forms and the mapping is stated in its boundary.',
+  },
+  {
+    id: 'bs-98-6-dhruva-acts', sourceId: BS, locator: 'Chapter 98, verse 6 — On the constellations',
+    excerpt: 'Coronation of kings, expiatory ceremonies, planting of trees, the building of towns, acts of public utility, the sowing of seeds and acts of permanent effects shall he commenced when the Moon passes through the stable asterisms.',
+    transcriptionNote: 'The cited edition reads “shall he commenced”, evidently a compositor’s error for “shall be commenced”. Transcribed as printed rather than silently corrected.',
+  },
+  {
+    id: 'bs-98-9-laghu-list', sourceId: BS, locator: 'Chapter 98, verse 9 — On the constellations',
+    excerpt: 'The constellations (nakṣatra) of Hasta. Aśvinī and Puṣya are known as (Laghu) light asterisms.',
+    transcriptionNote: 'The full stop after “Hasta” is a comma in the printed text; retained here as the edition transcribes it.',
+  },
+  {
+    id: 'bs-98-9-laghu-acts', sourceId: BS, locator: 'Chapter 98, verse 9 — On the constellations',
+    excerpt: 'Sales, acts of sexual love, acquisition of knowledge, wearing of ornaments, arts, sculpture, medicine purchase of carriage and the like shall be commenced when the Moon passes through the light asterisms.',
+  },
+  {
+    id: 'bs-98-10-mridu-list', sourceId: BS, locator: 'Chapter 98, verse 10 — On the constellations',
+    excerpt: 'The constellations (nakṣatra) of Anurādhā, Citrā, Revatī and Mṛgaśīrṣa are known as (Mṛdu) soft asterisms.',
+  },
+  {
+    id: 'bs-98-10-mridu-acts', sourceId: BS, locator: 'Chapter 98, verse 10 — On the constellations',
+    excerpt: 'Acts of friendship, sexual union, the purchase of clothes, the wearing or making of ornaments, any auspicious deeds and music shall be commenced when the Moon passes through the soft asterisms.',
+  },
+  {
+    id: 'bs-98-13-prohibited-times', sourceId: BS, locator: 'Chapter 98, verse 13 — On the constellations',
+    excerpt: 'Shaving is prohibited in twilight hours, hours of night, on Tuesdays, Saturdays and Sundays, on Rikta Tithis, on the ninth lunar day and when the karaṇa is Bhadra.',
+    transcriptionNote: 'A footnote marker after “Rikta” in the source is omitted. This verse is the evidence that Riktā avoidance and the Bhadra prohibition are Varāhamihira’s own, not only later doctrine.',
+  },
+  {
     id: 'bs-99-2-tithi-groups', sourceId: BS, locator: 'Chapter 99, verse 2 — On lunar days and half lunar days',
     excerpt: 'The 1st, 6th and 11th lunar days are known as Nandā; the 2nd, 7th, and 12th, lunar days are known as Bhadrā; the 3rd, 8th and 13th lunar days are known as Vijayā; the 4th, 9th, and 14th lunar days are known as Riktā and the 5th, 10th and 15th lunar days are known as Pūrṇā.',
   },
@@ -300,6 +332,38 @@ const MUHURTA_BOUNDARY = 'The pañcāṅga input is computed and reproducible, b
 
 export const ASTROLOGY_RULES: InterpretationRule[] = [
   {
+    id: 'bs-nakshatra-dhruva', traditionId: 'vedic-jyotisha', technique: 'nakshatra selection', chartTypes: ['electional'],
+    conditions: [{ factField: 'panchanga.nakshatra', description: 'The Moon occupies one of the four stable (Dhruva) nakshatras.', requiresLimb: { limb: 'nakshatra', anyOf: ['Uttara Phalgunī', 'Uttara Āṣāḍhā', 'Uttara Bhādrapadā', 'Rohiṇī'] }, derivation: 'direct' }],
+    interpretation: 'The tradition classes these four nakshatras as stable (Dhruva) and directs that undertakings meant to endure — planting, building, sowing, and acts of public utility — be begun while the Moon passes through them.',
+    passageIds: ['bs-98-6-dhruva-list', 'bs-98-6-dhruva-acts'], provenance: 'restates-source', empirical: UNVALIDATED,
+    disagreements: [],
+    boundary: `${MUHURTA_BOUNDARY} The nakshatra names are matched against the canonical forms used by the pañcāṅga computation; the 1884 edition spells them Uttaraphālguni, Uttarāṣāḍha and Uttarabhādrapada, and that normalisation is a transcription decision rather than a doctrinal one.`,
+  },
+  {
+    id: 'bs-nakshatra-laghu', traditionId: 'vedic-jyotisha', technique: 'nakshatra selection', chartTypes: ['electional'],
+    conditions: [{ factField: 'panchanga.nakshatra', description: 'The Moon occupies one of the three light (Laghu) nakshatras.', requiresLimb: { limb: 'nakshatra', anyOf: ['Hasta', 'Aśvinī', 'Puṣya'] }, derivation: 'direct' }],
+    interpretation: 'The tradition classes these three nakshatras as light (Laghu) and associates them with sales, the acquisition of knowledge, the arts, and similar undertakings.',
+    passageIds: ['bs-98-9-laghu-list', 'bs-98-9-laghu-acts'], provenance: 'restates-source', empirical: UNVALIDATED,
+    disagreements: [],
+    boundary: MUHURTA_BOUNDARY,
+  },
+  {
+    id: 'bs-nakshatra-mridu', traditionId: 'vedic-jyotisha', technique: 'nakshatra selection', chartTypes: ['electional'],
+    conditions: [{ factField: 'panchanga.nakshatra', description: 'The Moon occupies one of the four soft (Mṛdu) nakshatras.', requiresLimb: { limb: 'nakshatra', anyOf: ['Anurādhā', 'Citrā', 'Revatī', 'Mṛgaśīrṣa'] }, derivation: 'direct' }],
+    interpretation: 'The tradition classes these four nakshatras as soft (Mṛdu) and associates them with acts of friendship, the making of ornaments, music, and auspicious undertakings generally.',
+    passageIds: ['bs-98-10-mridu-list', 'bs-98-10-mridu-acts'], provenance: 'restates-source', empirical: UNVALIDATED,
+    disagreements: [],
+    boundary: MUHURTA_BOUNDARY,
+  },
+  {
+    id: 'bs-vara-prohibited-days', traditionId: 'vedic-jyotisha', technique: 'vāra selection', chartTypes: ['electional'],
+    conditions: [{ factField: 'panchanga.vara', description: 'The vāra is Tuesday, Saturday or Sunday.', requiresLimb: { limb: 'vara', anyOf: ['Maṅgalavāra', 'Śanivāra', 'Ravivāra'] }, derivation: 'direct' }],
+    interpretation: 'The tradition prohibits shaving on Tuesdays, Saturdays and Sundays, and the same verse extends the prohibition to twilight and night hours, Riktā tithis, the ninth lunar day, and the Bhadra karaṇa.',
+    passageIds: ['bs-98-13-prohibited-times'], provenance: 'restates-source', empirical: UNVALIDATED,
+    disagreements: ['The verse conditions a single act on several limbs at once. This rule fires on the vāra alone; the tithi and karaṇa conditions in the same verse are recorded in the passage but are not separately evaluated, so the rule is narrower than the source.'],
+    boundary: `${MUHURTA_BOUNDARY} The rule is deliberately narrower than its verse: the source joins several conditions with "or", which the condition model, being a conjunction of limbs, cannot express.`,
+  },
+  {
     id: 'bs-muhurta-vishti-prohibition', traditionId: 'vedic-jyotisha', technique: 'karaṇa selection', chartTypes: ['electional'],
     conditions: [{ factField: 'panchanga.karana', description: 'The karaṇa current at the moment under consideration is Viṣṭi (Bhadra).', requiresLimb: { limb: 'karana', anyOf: ['Viṣṭi'] }, derivation: 'direct' }],
     interpretation: 'The tradition holds that auspicious undertakings are not to be begun during the Viṣṭi (Bhadra) karaṇa.',
@@ -328,7 +392,7 @@ export const ASTROLOGY_RULES: InterpretationRule[] = [
     conditions: [{ factField: 'panchanga.tithi', description: 'The tithi current at the moment under consideration, taken within its fortnight.', derivation: 'direct' }],
     interpretation: 'The tradition sorts the fifteen tithis of a fortnight into five named groups — Nandā, Bhadrā, Vijayā, Riktā and Pūrṇā — which later practice treats as the basis for selecting or avoiding a lunar day, Riktā being the group generally avoided.',
     passageIds: ['bs-99-2-tithi-groups'], provenance: 'restates-source', empirical: UNVALIDATED,
-    disagreements: ['The cited verse names the five groups but does not itself rank them; the avoidance of Riktā is later doctrine, and treating it as Varāhamihira’s own statement would overread the passage.'],
+    disagreements: ['Verse 2 names the five groups without ranking them, but Chapter 98 verse 13 prohibits an act on Riktā tithis, so the avoidance of Riktā is Varāhamihira’s own and not purely later doctrine. An earlier revision of this record claimed otherwise and was corrected when the further chapter was transcribed.'],
     boundary: `${MUHURTA_BOUNDARY} The grouping is transcribed from the source; the avoidance ranking attached to it is later practice and is flagged as such in the recorded disagreement.`,
   },
   {
