@@ -56,15 +56,33 @@ explicitly so it stays visible.
 
 ## Why this matters beyond semiconductors
 
-The astrology tradition layer is the sharpest version of the same problem. An
-interpretation rule quoted precisely from Ptolemy has strong provenance and no
-empirical support whatsoever. Under a single axis the only options are to tag it
-`SOURCED` — which readers will hear as endorsement — or `UNVERIFIED`, which
-misdescribes work that is faithfully transcribed from a primary source.
+The astrology tradition layer (`lib/astrology-traditions.ts`) is the sharpest
+version of the same problem, and it is now implemented. An interpretation rule
+quoted precisely from Ptolemy has strong provenance and no empirical support
+whatsoever. Under a single axis the only options are to tag it `SOURCED` — which
+readers will hear as endorsement — or `UNVERIFIED`, which misdescribes work that
+is faithfully transcribed from a primary source.
 
-Two axes let the record say both true things at once. That is the prerequisite
-for publishing interpretive traditions without laundering them into the same
-epistemic register as the semiconductor and astronomy corpora.
+Two axes let the record say both true things at once. `unvalidated-tradition`
+exists on the empirical axis for exactly this, and the astrology layer fixes
+every rule to it: the schema declares `empirical` as `{ const:
+'unvalidated-tradition' }`, so the layer is structurally incapable of claiming
+that a rule predicts anything.
+
+Three further invariants are enforced in `assertAstrologyIntegrity()` rather
+than left to review:
+
+- **`traditionId` is mandatory.** A rule detached from its tradition belongs to
+  none of them, and blending incompatible systems is how a corpus acquires an
+  authoritative-sounding synthesis nobody can check.
+- **No rule without a transcribed passage.** An interpretation with no verbatim
+  source text is not a record.
+- **No excerpting an in-copyright edition.** Rights status is a property of the
+  source, and the check refuses the passage outright.
+
+Where a cited edition differs from others, the difference is recorded in a
+`transcriptionNote` rather than silently corrected — see `ptb-3-18-mind`, where
+the Gutenberg text reads "national" for what other printings give as "rational".
 
 ## Open items
 
@@ -77,3 +95,10 @@ epistemic register as the semiconductor and astronomy corpora.
   source registry is almost entirely vendor-published. Six clear cases were
   reclassified to `interested-party`; a full editorial pass over the rest has not
   been done.
+- **Two astrology traditions carry no rules.** `horary-lilly` and
+  `western-sidereal` are registered with a stated `unpopulatedReason` — no
+  proofread public-domain transcription and an unresolved licensing decision
+  respectively. Populating either is a sourcing problem, not a schema problem.
+- **No interpretation compiler.** This layer records what traditions hold. It
+  does not generate reports, resolve conflicting rules, or bind rules to a
+  computed chart; those sit above it and do not exist yet.

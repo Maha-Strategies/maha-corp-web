@@ -21,6 +21,7 @@ import {
   ASTRONOMY_KNOWLEDGE_VERSION,
   ASTRONOMY_SOURCES,
 } from '@/lib/astronomy-knowledge'
+import { ASTROLOGY_PATH, ASTROLOGY_RULES, ASTROLOGY_TRADITIONS, ASTROLOGY_VERSION } from '@/lib/astrology-traditions'
 
 export const metadata: Metadata = {
   title: 'Knowledge | Maha Strategies',
@@ -126,6 +127,13 @@ export default function KnowledgePage() {
               <p className="mt-3 text-sm leading-6 text-zinc-400">A cited graph from observation and calibration through physical models, inference boundaries, and open questions.</p>
               <p className="mt-4 border-l border-amber-700/60 pl-3 text-xs leading-5 text-amber-200">Scientific explanation only. Astrological interpretation is outside this layer.</p>
               <p className="mt-6 font-mono text-[10px] uppercase tracking-widest text-zinc-600 group-hover:text-indigo-300">Explore {ASTRONOMY_ARTICLES.length} explainers · {ASTRONOMY_SOURCES.length} sources →</p>
+            </Link>
+            <Link href={ASTROLOGY_PATH} className="group border border-violet-900/60 bg-violet-950/10 p-6 transition-colors hover:border-violet-400">
+              <p className="font-mono text-[10px] uppercase tracking-widest text-violet-300">Interpretive layer · {ASTROLOGY_VERSION}</p>
+              <h2 className="mt-4 text-2xl font-semibold text-white group-hover:text-violet-200">Astrology traditions</h2>
+              <p className="mt-3 text-sm leading-6 text-zinc-400">Named interpretive traditions with passage-level provenance from rights-cleared sources, recorded with their disagreements.</p>
+              <p className="mt-4 border-l border-rose-700/60 pl-3 text-xs leading-5 text-rose-200">Every rule is unvalidated tradition. Provenance is claimed; predictive validity is not, and the schema cannot express it.</p>
+              <p className="mt-6 font-mono text-[10px] uppercase tracking-widest text-zinc-600 group-hover:text-violet-300">Inspect {ASTROLOGY_TRADITIONS.length} traditions · {ASTROLOGY_RULES.length} rules →</p>
             </Link>
           </div>
         </div>

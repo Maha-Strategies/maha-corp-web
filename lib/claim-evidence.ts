@@ -42,6 +42,7 @@ export const CLAIM_EMPIRICAL = [
   'bounded-inference',
   'interested-party',
   'open-question',
+  'unvalidated-tradition',
 ] as const
 export type ClaimEmpiricalStatus = typeof CLAIM_EMPIRICAL[number]
 
@@ -66,6 +67,7 @@ export const CLAIM_EMPIRICAL_META: Record<ClaimEmpiricalStatus, { label: string;
   'bounded-inference': { label: 'Bounded inference', description: 'Reasonable given the evidence, but scope-limited.' },
   'interested-party': { label: 'Interested party', description: 'Asserted by a party with a commercial stake, without independent verification.' },
   'open-question': { label: 'Open question', description: 'Contested, unresolved, or beyond what present evidence settles.' },
+  'unvalidated-tradition': { label: 'Unvalidated tradition', description: 'Documented interpretive doctrine with no empirical validation. Accurate transcription is claimed; predictive validity is not.' },
 }
 
 /**
@@ -80,6 +82,10 @@ export const CLAIM_EMPIRICAL_META: Record<ClaimEmpiricalStatus, { label: string;
 export function toMpsTag(evidence: ClaimEvidence): 'VERIFIED' | 'SOURCED' | 'BOUNDARY' | 'UNVERIFIED' {
   const { provenance, empirical } = evidence
 
+  // An interpretive rule quoted precisely from a primary source is faithfully
+  // sourced and empirically unsupported at the same time. SOURCED would read as
+  // endorsement, so it maps to BOUNDARY — the honest-uncertainty tag.
+  if (empirical === 'unvalidated-tradition') return 'BOUNDARY'
   if (empirical === 'open-question' || empirical === 'bounded-inference') return 'BOUNDARY'
   if (empirical === 'interested-party') return provenance === 'maha-inference' ? 'UNVERIFIED' : 'SOURCED'
   if (provenance === 'maha-inference') return 'BOUNDARY'
@@ -96,7 +102,7 @@ export function toMpsTag(evidence: ClaimEvidence): 'VERIFIED' | 'SOURCED' | 'BOU
  */
 export function requiresBoundary(evidence: ClaimEvidence): boolean {
   return evidence.provenance === 'maha-inference'
-    || ['method-basis', 'model-dependent', 'bounded-inference', 'interested-party', 'open-question'].includes(evidence.empirical)
+    || ['method-basis', 'model-dependent', 'bounded-inference', 'interested-party', 'open-question', 'unvalidated-tradition'].includes(evidence.empirical)
 }
 
 const PROVENANCE_SET = new Set<string>(CLAIM_PROVENANCE)

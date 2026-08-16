@@ -65,6 +65,7 @@ const empiricalClassName: Record<ClaimEmpiricalStatus, string> = {
   'bounded-inference': 'border-amber-500/30 bg-amber-500/10 text-amber-300',
   'interested-party': 'border-rose-500/30 bg-rose-500/10 text-rose-300',
   'open-question': 'border-zinc-600 bg-zinc-900 text-zinc-400',
+  'unvalidated-tradition': 'border-rose-500/30 bg-rose-500/10 text-rose-300',
 }
 
 function DataList({ title, items }: { title: string; items: string[] }) {
