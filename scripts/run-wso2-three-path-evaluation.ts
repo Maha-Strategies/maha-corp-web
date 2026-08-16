@@ -7,6 +7,7 @@ import {
   assertCheckpointMatches,
   authorizeNextCall,
   callCostMicrodollars,
+  checkpointResults,
   countRetainedEvidenceSpans,
   emptyCheckpoint,
   findProhibitedAssertions,
@@ -277,6 +278,53 @@ function prepare(
 type ProviderResponse =
   | { ok: true; answer: string; inputTokens: number; outputTokens: number; gatewayHeaders?: Record<string, string> }
   | { ok: false; error: string; status?: number }
+
+type ScoredResult = ReturnType<typeof score>
+
+const PUBLICATION_THRESHOLDS = {
+  requiredFactsAnswered: 56,
+  requiredFactsTotal: 58,
+  expectedCitationsResolved: 65,
+  expectedCitationsTotal: 68,
+  mahaHardBudgetCompliant: 20,
+} as const
+
+/** Publication eligibility is computed, never inferred from an aggregate. */
+function publicationGates(results: readonly ScoredResult[], plannedCallCount: number) {
+  const maha = results.filter((result) => result.path === 'wso2-maha-context-compiler')
+  const factsAnswered = maha.reduce((sum, result) => sum + result.answer.requiredFactsAnswered, 0)
+  const factsTotal = maha.reduce((sum, result) => sum + result.answer.requiredFactsTotal, 0)
+  const citationsResolved = maha.reduce((sum, result) => sum + result.answer.expectedCitationLinksResolved, 0)
+  const citationsTotal = maha.reduce((sum, result) => sum + result.answer.expectedCitationLinksTotal, 0)
+  const hardBudgetCompliant = maha.filter((result) => result.context.hardBudgetCompliant === true).length
+  const prohibitedAssertions = results.reduce((sum, result) => sum + result.answer.prohibitedAssertions.length, 0)
+  const failures = results.filter((result) => !result.answer.ok)
+  const failuresDisclosed = failures.every((result) => typeof result.answer.error === 'string' && result.answer.error.length > 0)
+
+  const checks = {
+    allPlannedResultsPresent: { pass: results.length === plannedCallCount, actual: results.length, required: plannedCallCount },
+    requiredFactsAnswered: {
+      pass: factsAnswered >= PUBLICATION_THRESHOLDS.requiredFactsAnswered && factsTotal === PUBLICATION_THRESHOLDS.requiredFactsTotal,
+      actual: factsAnswered,
+      total: factsTotal,
+      required: PUBLICATION_THRESHOLDS.requiredFactsAnswered,
+    },
+    expectedCitationsResolved: {
+      pass: citationsResolved >= PUBLICATION_THRESHOLDS.expectedCitationsResolved && citationsTotal === PUBLICATION_THRESHOLDS.expectedCitationsTotal,
+      actual: citationsResolved,
+      total: citationsTotal,
+      required: PUBLICATION_THRESHOLDS.expectedCitationsResolved,
+    },
+    mahaHardBudgetCompliant: {
+      pass: hardBudgetCompliant === PUBLICATION_THRESHOLDS.mahaHardBudgetCompliant && maha.length === PUBLICATION_THRESHOLDS.mahaHardBudgetCompliant,
+      actual: hardBudgetCompliant,
+      required: PUBLICATION_THRESHOLDS.mahaHardBudgetCompliant,
+    },
+    prohibitedAssertions: { pass: prohibitedAssertions === 0, actual: prohibitedAssertions, required: 0 },
+    failuresDisclosed: { pass: failuresDisclosed, failures: failures.length },
+  }
+  return { pass: Object.values(checks).every((check) => check.pass), checks }
+}
 
 /** Deterministic stand-in used by every non-execute mode. Never opens a socket. */
 function mockProvider(workload: Wso2EvaluationWorkload, forwardedContext: string): ProviderResponse {
@@ -568,6 +616,10 @@ async function run(): Promise<void> {
   const upperBoundPerCall = callCostMicrodollars(UPPER_BOUND_INPUT_TOKENS, UPPER_BOUND_OUTPUT_TOKENS, PRICING)
   const checkpoint = readCheckpoint(options.checkpoint, digest)
   const resume = planResume(planned, checkpoint, { force: options.force, upperBoundPerCall })
+  // A paid call recorded without its result cannot be repaired safely: omitting
+  // it corrupts the report, while repeating it spends twice. Refuse before any
+  // new call. Fresh checkpoints are unaffected.
+  checkpointResults<ScoredResult>(resume.alreadyComplete, checkpoint)
   const projection = BigInt(resume.toRun.length) * upperBoundPerCall
 
   if (options.force && resume.repeatUpperBound > BigInt(0)) {
@@ -595,8 +647,10 @@ async function run(): Promise<void> {
       const response = mockProvider(workload, prepared.forwardedContext)
       return score(workload, call.path, prepared, response, 0)
     })
-    writeJson(options.output, { mode: options.dryRun ? 'dry-run' : 'mock', ...summary, results })
+    const gates = publicationGates(results, planned.length)
+    writeJson(options.output, { mode: options.dryRun ? 'dry-run' : 'mock', ...summary, publicationGates: gates, results })
     console.log(JSON.stringify({ ...summary, mode: options.dryRun ? 'dry-run' : 'mock', wrote: options.output, liveCalls: 0 }, null, 2))
+    if (!gates.pass) process.exitCode = 1
     return
   }
 
@@ -610,7 +664,7 @@ async function run(): Promise<void> {
     throw new Error(`Refusing to start: the projected upper bound of $${formatMicrodollars(projection)} plus $${formatMicrodollars(spentMicrodollars(checkpoint))} already spent exceeds the ceiling of $${formatMicrodollars(options.ceiling)}.`)
   }
 
-  const results: unknown[] = []
+  let executedThisRun = 0
   for (const call of resume.toRun) {
     const decision = authorizeNextCall(spentMicrodollars(checkpoint), upperBoundPerCall, options.ceiling)
     if (!decision.allowed) {
@@ -630,21 +684,26 @@ async function run(): Promise<void> {
     const cost = response.ok ? callCostMicrodollars(response.inputTokens, response.outputTokens, PRICING) : BigInt(0)
 
     const scored = score(workload, call.path, prepared, response, latency)
-    results.push(scored)
-    // Written after every call, so an interruption never repeats a paid one.
+    // Identity, spend and the scored result are one durable write. After an
+    // interruption the report can be rebuilt without omitting or repeating a
+    // provider call.
     checkpoint.records.push({
       workloadId: call.workloadId,
       path: call.path,
       outcome: response.ok ? 'ok' : 'failed',
       costMicrodollars: cost.toString(),
       completedAt: new Date().toISOString(),
+      result: scored,
     } satisfies Wso2CallRecord)
     writeJson(options.checkpoint, checkpoint)
+    executedThisRun += 1
   }
 
-  const artifact = { mode: 'live', ...summary, spentUsd: formatMicrodollars(spentMicrodollars(checkpoint)), results }
+  const results = checkpointResults<ScoredResult>(planned, checkpoint)
+  const gates = publicationGates(results, planned.length)
+  const artifact = { mode: 'live', ...summary, spentUsd: formatMicrodollars(spentMicrodollars(checkpoint)), publicationGates: gates, results }
   writeJson(options.output, artifact)
-  console.log(JSON.stringify({ ...summary, mode: 'live', liveCalls: results.length, spentUsd: formatMicrodollars(spentMicrodollars(checkpoint)), artifactHash: hashArtifact(artifact) }, null, 2))
+  console.log(JSON.stringify({ ...summary, mode: 'live', liveCalls: executedThisRun, durableResults: results.length, publicationGatesPass: gates.pass, spentUsd: formatMicrodollars(spentMicrodollars(checkpoint)), artifactHash: hashArtifact(artifact) }, null, 2))
 }
 
 /** Phase C: context measurements and answer measurements, kept apart. */
@@ -661,6 +720,7 @@ function score(
   const answer = response.ok ? response.answer : ''
   const verdicts = workload.labels.requiredFacts.map((fact) => ({ id: fact.id, verdict: scoreRequiredFact(answer, fact) }))
   const citations = [...answer.matchAll(/\[([A-Za-z0-9._:-]+)\]/g)].map((match) => match[1])
+  const expectedCitationLinks = workload.labels.requiredFacts.flatMap((fact) => fact.sourceIds)
 
   // Evidence the gateway reported. Present only when the gateway ran the
   // interceptor, which is exactly the proof that it did.
@@ -702,6 +762,8 @@ function score(
       verdicts,
       citationsReturned: citations.length,
       citationsResolvable: citations.filter((id) => isResolvableSourceCitation(id, sourceIds)).length,
+      expectedCitationLinksResolved: expectedCitationLinks.filter((sourceId) => citations.some((citation) => isResolvableSourceCitation(citation, new Set([sourceId])))).length,
+      expectedCitationLinksTotal: expectedCitationLinks.length,
       prohibitedAssertions: findProhibitedAssertions(answer, workload.labels.mustNotAssert),
       providerInputTokens: response.ok ? response.inputTokens : null,
       providerOutputTokens: response.ok ? response.outputTokens : null,
