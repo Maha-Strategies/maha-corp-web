@@ -296,7 +296,11 @@ function mockProvider(workload: Wso2EvaluationWorkload, forwardedContext: string
  * already asked, and the operator authorized a call count rather than an
  * outcome.
  */
-async function callThroughGateway(url: string, body: Record<string, unknown>): Promise<ProviderResponse> {
+async function callThroughGateway(
+  url: string,
+  body: Record<string, unknown>,
+  interceptorToken?: string,
+): Promise<ProviderResponse> {
   // Through WSO2, never straight to the provider. Calling Anthropic directly
   // for all three paths -- which the first version of this runner did -- does
   // not test the gateway at all: it measures three context strategies in this
@@ -310,6 +314,11 @@ async function callThroughGateway(url: string, body: Record<string, unknown>): P
         'content-type': 'application/json',
         'x-api-key': key,
         'anthropic-version': '2023-06-01',
+        // The gateway forwards request headers to the interceptor, which
+        // validates this and strips it before upstream forwarding -- so it
+        // never reaches Anthropic. Sent by the client because set-headers
+        // v1.0.1 breaks policy-chain construction on this gateway build.
+        ...(interceptorToken ? { [WSO2_INTERCEPTOR_TOKEN_HEADER]: interceptorToken } : {}),
       },
       body: JSON.stringify(body),
     })
@@ -404,10 +413,24 @@ async function preflight(config: GatewayConfig): Promise<{ ok: boolean; checks: 
       add(`api.${api.pathId}.route`, false, result.error)
       continue
     }
-    // An empty body must be rejected by the gateway or upstream -- never 404
-    // (route missing) and never 200 (a model call we did not intend to make).
-    const acceptable = result.status !== 404 && result.status !== 200
-    add(`api.${api.pathId}.route`, acceptable, `HTTP ${result.status}${result.status === 404 ? ' (route not deployed)' : ''}${result.status === 200 ? ' (unexpected success on an empty body)' : ''}`)
+    // The probe must reach the UPSTREAM and be rejected there, which proves the
+    // whole chain resolves. Anything else is a gateway fault wearing a status
+    // code.
+    //
+    // 5xx was previously accepted, and it hid the defect this check exists to
+    // catch: the controller reported "deployed successfully" while the runtime
+    // logged "Policy chain not found for route, returning 500". Roughly forty
+    // of sixty calls would have failed after the ceiling was authorized.
+    //
+    // 401/403 is the expected pass: the request reached Anthropic and was
+    // refused for want of a key. 404 means the route is absent, 200 means a
+    // model call nobody intended, 5xx means the gateway itself broke.
+    const reason = result.status === 404 ? 'route not deployed'
+      : result.status === 200 ? 'unexpected success on an empty body -- a model call was made'
+      : result.status >= 500 ? 'gateway fault: the request never reached the upstream'
+      : result.status === 401 || result.status === 403 ? ''
+      : 'unexpected status; the probe should be refused by the upstream, not the gateway'
+    add(`api.${api.pathId}.route`, reason === '', `HTTP ${result.status}${reason ? ` (${reason})` : ' (reached upstream)'}`)
   }
 
   // 3. The compressor version must come from DEPLOYED policy state, not from
@@ -562,7 +585,11 @@ async function run(): Promise<void> {
     const workload = corpus.workloads.find((candidate) => candidate.id === call.workloadId)!
     const prepared = prepare(workload, call.path, secret, 'live')
     const startedAt = Date.now()
-    const response = await callThroughGateway(routeFor(config, call.path), prepared.providerBody)
+    const response = await callThroughGateway(
+      routeFor(config, call.path),
+      prepared.providerBody,
+      call.path === 'wso2-maha-context-compiler' ? secret : undefined,
+    )
     const latency = Date.now() - startedAt
     const cost = response.ok ? callCostMicrodollars(response.inputTokens, response.outputTokens, PRICING) : BigInt(0)
 

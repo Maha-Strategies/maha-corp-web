@@ -13,25 +13,6 @@
     "version": "v1",
     "policies": [
       {
-        "name": "set-headers",
-        "version": "v1.0.1",
-        "paths": [
-          {
-            "path": "/*",
-            "params": {
-              "request": {
-                "headers": [
-                  {
-                    "name": "x-maha-wso2-interceptor-token",
-                    "valueFromEnv": "WSO2_CONTEXT_INTERCEPTOR_SECRET"
-                  }
-                ]
-              }
-            }
-          }
-        ]
-      },
-      {
         "name": "interceptor-service",
         "version": "v1.0.0",
         "paths": [
