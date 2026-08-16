@@ -65,6 +65,25 @@ test('the lunar month opens with Kiṃstughna and closes with the fixed karaṇa
   assert.equal(computePanchanga({ instant: new Date(newMoon.date.getTime() - 60_000), ...CHENNAI }).karana.name, 'Nāga')
 })
 
+test('the fixed karaṇas begin where the Bṛhat Saṃhitā says they do', () => {
+  // Chapter 99 verse 5: the four fixed karaṇas "begin from the second half of
+  // the 14th day of the waning moon". The 14th waning tithi is the 29th of the
+  // lunar month, spanning 336°–348° of elongation, so its second half begins at
+  // 342°. This checks an independently implemented sequence against a 6th-century
+  // structural claim — it validates the arithmetic, not the tradition.
+  const secondHalf = SearchMoonPhase(343, new Date('2026-08-01T00:00:00Z'), 40)
+  assert.ok(secondHalf)
+  const panchanga = computePanchanga({ instant: secondHalf.date, ...CHENNAI })
+  assert.equal(panchanga.tithi.absoluteIndex, 29, 'the 14th day of the waning moon')
+  assert.equal(panchanga.tithi.paksha, 'kṛṣṇa')
+  assert.equal(panchanga.karana.name, 'Śakuni', 'the first fixed karaṇa')
+
+  // The first half of the same tithi is still a movable karaṇa.
+  const firstHalf = SearchMoonPhase(339, new Date('2026-08-01T00:00:00Z'), 40)
+  assert.ok(firstHalf)
+  assert.equal(computePanchanga({ instant: firstHalf.date, ...CHENNAI }).karana.name, 'Viṣṭi')
+})
+
 test('tithi and karaṇa do not depend on the ayanāṁśa', () => {
   // Both derive from the Sun–Moon elongation, so a different sidereal zero
   // point must leave them untouched. Nakshatra and yoga are not so lucky, which

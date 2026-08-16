@@ -147,6 +147,19 @@ export const ASTROLOGY_SOURCES: AstrologySource[] = [
     accessed: '2026-08-16',
   },
   {
+    id: 'brihat-samhita-iyer',
+    title: 'The Bṛhat Saṃhitā of Varāha Mihira',
+    author: 'Varāhamihira',
+    originalComposed: 'circa 6th century CE',
+    translator: 'N. Chidambaram Iyer',
+    edition: '1884 English translation, proofread transcription published by wisdomlib.org',
+    editionYear: 1884,
+    url: 'https://www.wisdomlib.org/hinduism/book/brihat-samhita',
+    rightsStatus: 'public-domain',
+    rightsNote: 'The 1884 Chidambaram Iyer translation is out of copyright. Transcribed from the proofread wisdomlib presentation rather than the Internet Archive scan, whose OCR renders the English as Devanagari mojibake and is unusable for verbatim quotation.',
+    accessed: '2026-08-16',
+  },
+  {
     id: 'lilly-christian-astrology-1647',
     title: 'Christian Astrology',
     author: 'William Lilly',
@@ -187,8 +200,7 @@ export const ASTROLOGY_TRADITIONS: AstrologyTradition[] = [
     period: 'classical Indian, transmitted continuously to present practice',
     zodiac: 'sidereal',
     chartTypes: ['natal', 'electional', 'mundane'],
-    description: 'The Indian sidereal system, whose electional branch (muhūrta) judges the fitness of a moment from the five limbs of the pañcāṅga. Its calendrical arithmetic is computed in `lib/panchanga.ts` and is fully reproducible; the judgements built on that arithmetic are what this registry would record, and they are not yet sourced.',
-    unpopulatedReason: 'The pañcāṅga computation is implemented and tested, but no muhūrta rule is published: this layer refuses a rule without a verbatim passage from a rights-cleared edition, and the classical sources have not yet been transcribed. Bṛhat Saṃhitā in the 1884 Chidambaram Iyer translation is public domain and is the likely first source; most Muhūrta Cintāmaṇi translations are in copyright.',
+    description: 'The Indian sidereal system, whose electional branch (muhūrta) judges the fitness of a moment from the five limbs of the pañcāṅga. Its calendrical arithmetic is computed in `lib/panchanga.ts` and is fully reproducible; the judgements built on that arithmetic are recorded here, sourced to Varāhamihira.',
   },
   {
     id: 'western-sidereal',
@@ -202,9 +214,46 @@ export const ASTROLOGY_TRADITIONS: AstrologyTradition[] = [
   },
 ]
 
+const BS = 'brihat-samhita-iyer'
+
+/**
+ * Bṛhat Saṃhitā, Chapter 99 — on lunar days and half lunar days.
+ *
+ * The chapter that governs karaṇa and tithi selection, which is the part of
+ * muhūrta the pañcāṅga layer can already compute.
+ */
+const BRIHAT_SAMHITA_PASSAGES: AstrologyPassage[] = [
+  {
+    id: 'bs-99-2-tithi-groups', sourceId: BS, locator: 'Chapter 99, verse 2 — On lunar days and half lunar days',
+    excerpt: 'The 1st, 6th and 11th lunar days are known as Nandā; the 2nd, 7th, and 12th, lunar days are known as Bhadrā; the 3rd, 8th and 13th lunar days are known as Vijayā; the 4th, 9th, and 14th lunar days are known as Riktā and the 5th, 10th and 15th lunar days are known as Pūrṇā.',
+  },
+  {
+    id: 'bs-99-4-movable-karanas', sourceId: BS, locator: 'Chapter 99, verse 4 — On lunar days and half lunar days',
+    excerpt: 'The lords of the seven Karaṇas are, viz. Bava, Bālava, Kaulava, Taitila, Gara, Vaṇija, and Viṣṭi, are Indra, Brahmā, Mitra, Aryaman, Bhū, Śrī and Yama.',
+  },
+  {
+    id: 'bs-99-5-fixed-karanas', sourceId: BS, locator: 'Chapter 99, verse 5 — On lunar days and half lunar days',
+    excerpt: 'The four Dhruva (fixed) Karaṇas are—Śakuni, Catuṣpada, Nāga and Kiṃstughna and they begin from the second half of the 14th day of the waning moon.',
+  },
+  {
+    id: 'bs-99-6-bava', sourceId: BS, locator: 'Chapter 99, verse 6 — On lunar days and half lunar days',
+    excerpt: 'In a Bava Karaṇa shall be done deeds of an auspicious, a moveable or a fixed character as well as deeds for the promotion of a person’s health or comfort.',
+  },
+  {
+    id: 'bs-99-7-vishti', sourceId: BS, locator: 'Chapter 99, verse 7 — On lunar days and half lunar days',
+    excerpt: 'In a Viṣṭi or Bhadra Karaṇa, auspicious deeds shall not be done but acts aimed at the ruin of enemies and those connected with poison may be done.',
+    transcriptionNote: 'Transcribed in full for fidelity. Only the prohibition is carried into a rule; the remainder of the verse is recorded as historical text and is not acted on, and the prohibited uses attached to this layer forbid it.',
+  },
+  {
+    id: 'bs-99-8-kimstughna', sourceId: BS, locator: 'Chapter 99, verse 8 — On lunar days and half lunar days',
+    excerpt: 'In a Kiṃstughna Karaṇa, a person shall do any work for the increase of his health and comfort as well as auspicious deeds.',
+  },
+]
+
 const P = 'ptolemy-tetrabiblos-ashmand'
 
 export const ASTROLOGY_PASSAGES: AstrologyPassage[] = [
+  ...BRIHAT_SAMHITA_PASSAGES,
   { id: 'ptb-1-5-benefic', sourceId: P, locator: 'Book I, Chapter V — Benefics and Malefics', excerpt: 'Therefore, two of the planets, on account of their temperate quality, and because heat and moisture are predominant in them, are considered by the ancients as benefic, or causers of good: these are Jupiter and Venus.' },
   { id: 'ptb-1-5-malefic', sourceId: P, locator: 'Book I, Chapter V — Benefics and Malefics', excerpt: 'But Saturn and Mars are esteemed of a contrary nature, and malefic, or causers of evil: the first from his excess of cold, the other from his excess of dryness.' },
   { id: 'ptb-1-5-common', sourceId: P, locator: 'Book I, Chapter V — Benefics and Malefics', excerpt: 'The Sun and Mercury are deemed of common influence, and productive either of good or evil in unison with whatever planets they may be connected with.' },
@@ -233,7 +282,57 @@ const UNVALIDATED = 'unvalidated-tradition' as const
 /** Boundary text shared by rules that describe a person's body or mind from a chart. */
 const DESCRIPTIVE_BOUNDARY = 'Recorded as historical doctrine of the named tradition. There is no evidence that planetary position corresponds to physical appearance or mental character, and this rule must not be used to describe, assess, or make decisions about any person.'
 
+/**
+ * Muhūrta boundary shared by the Jyotiṣa timing rules.
+ *
+ * These rules are unusual in this corpus: their chart conditions are fully
+ * computable today, so the temptation to present the output as a real verdict
+ * is at its strongest here. Reproducible arithmetic feeding a rule does not
+ * make the rule predictive.
+ */
+const MUHURTA_BOUNDARY = 'The pañcāṅga input is computed and reproducible, but the rule built on it is documented tradition with no empirical support. A moment being Viṣṭi or Riktā is a fact about the Sun and Moon; that such a moment is unfavourable for an undertaking is not, and no outcome should be expected either way.'
+
 export const ASTROLOGY_RULES: InterpretationRule[] = [
+  {
+    id: 'bs-muhurta-vishti-prohibition', traditionId: 'vedic-jyotisha', technique: 'karaṇa selection', chartTypes: ['electional'],
+    conditions: [{ factField: 'panchanga.karana', description: 'The karaṇa current at the moment under consideration is Viṣṭi (Bhadra).', derivation: 'requires-derivation' }],
+    interpretation: 'The tradition holds that auspicious undertakings are not to be begun during the Viṣṭi (Bhadra) karaṇa.',
+    passageIds: ['bs-99-7-vishti'], provenance: 'restates-source', empirical: UNVALIDATED,
+    disagreements: ['Later muhūrta literature narrows the prohibition by the portion of Bhadra that falls in daylight and by which loka it is held to occupy, so practice varies on how much of the period is avoided.'],
+    boundary: `${MUHURTA_BOUNDARY} Only the prohibition in the cited verse is carried into this rule; the remainder of the verse is recorded in the passage for transcription fidelity and is not acted on.`,
+  },
+  {
+    id: 'bs-muhurta-bava-favourable', traditionId: 'vedic-jyotisha', technique: 'karaṇa selection', chartTypes: ['electional'],
+    conditions: [{ factField: 'panchanga.karana', description: 'The karaṇa current at the moment under consideration is Bava.', derivation: 'requires-derivation' }],
+    interpretation: 'The tradition holds that the Bava karaṇa suits auspicious undertakings, whether of a moveable or a fixed character, and acts directed at health and comfort.',
+    passageIds: ['bs-99-6-bava'], provenance: 'restates-source', empirical: UNVALIDATED,
+    disagreements: [],
+    boundary: MUHURTA_BOUNDARY,
+  },
+  {
+    id: 'bs-muhurta-kimstughna-favourable', traditionId: 'vedic-jyotisha', technique: 'karaṇa selection', chartTypes: ['electional'],
+    conditions: [{ factField: 'panchanga.karana', description: 'The karaṇa current at the moment under consideration is Kiṃstughna.', derivation: 'requires-derivation' }],
+    interpretation: 'The tradition holds that the Kiṃstughna karaṇa suits work for health and comfort and auspicious undertakings generally.',
+    passageIds: ['bs-99-8-kimstughna'], provenance: 'restates-source', empirical: UNVALIDATED,
+    disagreements: [],
+    boundary: MUHURTA_BOUNDARY,
+  },
+  {
+    id: 'bs-tithi-groups', traditionId: 'vedic-jyotisha', technique: 'tithi selection', chartTypes: ['electional'],
+    conditions: [{ factField: 'panchanga.tithi', description: 'The tithi current at the moment under consideration, taken within its fortnight.', derivation: 'requires-derivation' }],
+    interpretation: 'The tradition sorts the fifteen tithis of a fortnight into five named groups — Nandā, Bhadrā, Vijayā, Riktā and Pūrṇā — which later practice treats as the basis for selecting or avoiding a lunar day, Riktā being the group generally avoided.',
+    passageIds: ['bs-99-2-tithi-groups'], provenance: 'restates-source', empirical: UNVALIDATED,
+    disagreements: ['The cited verse names the five groups but does not itself rank them; the avoidance of Riktā is later doctrine, and treating it as Varāhamihira’s own statement would overread the passage.'],
+    boundary: `${MUHURTA_BOUNDARY} The grouping is transcribed from the source; the avoidance ranking attached to it is later practice and is flagged as such in the recorded disagreement.`,
+  },
+  {
+    id: 'bs-fixed-karana-placement', traditionId: 'vedic-jyotisha', technique: 'karaṇa structure', chartTypes: ['electional', 'natal'],
+    conditions: [{ factField: 'panchanga.karana', description: 'The position of the four fixed karaṇas within the lunar month.', derivation: 'requires-derivation' }],
+    interpretation: 'The tradition places the four fixed karaṇas — Śakuni, Catuṣpada, Nāga and Kiṃstughna — beginning from the second half of the fourteenth day of the waning moon.',
+    passageIds: ['bs-99-5-fixed-karanas'], provenance: 'restates-source', empirical: UNVALIDATED,
+    disagreements: [],
+    boundary: 'This is a structural claim about the calendar rather than a judgement about a moment, and it is one of the few places where a classical text can be checked directly against the computation: `test/panchanga.test.ts` asserts that the implemented karaṇa sequence puts Śakuni at exactly this point. Agreement confirms the arithmetic matches the tradition; it says nothing about whether the tradition predicts anything.',
+  },
   {
     id: 'ptb-planet-nature-benefic', traditionId: 'hellenistic-ptolemaic', technique: 'planetary nature', chartTypes: ['natal', 'mundane'],
     conditions: [{ factField: 'subject.identifiers', description: 'Jupiter or Venus is present in the chart.', requiresSubjects: ['Jupiter', 'Venus'], derivation: 'direct' }],
