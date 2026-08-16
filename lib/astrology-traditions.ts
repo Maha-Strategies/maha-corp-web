@@ -181,6 +181,16 @@ export const ASTROLOGY_TRADITIONS: AstrologyTradition[] = [
     unpopulatedReason: 'No rights-cleared, proofread transcription of the 1647 text is available. The source is public domain, but every machine transcription found is unproofread OCR; publishing rules from it would violate this layer’s transcription-fidelity claim.',
   },
   {
+    id: 'vedic-jyotisha',
+    slug: 'vedic-jyotisha',
+    name: 'Vedic (Jyotiṣa)',
+    period: 'classical Indian, transmitted continuously to present practice',
+    zodiac: 'sidereal',
+    chartTypes: ['natal', 'electional', 'mundane'],
+    description: 'The Indian sidereal system, whose electional branch (muhūrta) judges the fitness of a moment from the five limbs of the pañcāṅga. Its calendrical arithmetic is computed in `lib/panchanga.ts` and is fully reproducible; the judgements built on that arithmetic are what this registry would record, and they are not yet sourced.',
+    unpopulatedReason: 'The pañcāṅga computation is implemented and tested, but no muhūrta rule is published: this layer refuses a rule without a verbatim passage from a rights-cleared edition, and the classical sources have not yet been transcribed. Bṛhat Saṃhitā in the 1884 Chidambaram Iyer translation is public domain and is the likely first source; most Muhūrta Cintāmaṇi translations are in copyright.',
+  },
+  {
     id: 'western-sidereal',
     slug: 'western-sidereal',
     name: 'Western sidereal',
