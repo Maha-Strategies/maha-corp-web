@@ -26,6 +26,12 @@ export const CELESTIAL_AUTHORITY_SOURCES: CelestialAuthoritySource[] = [
     boundary: 'Horizons output is authoritative only with the complete query contract preserved; transformed or rounded values require their own provenance record.',
   },
   {
+    id: 'astronomy-engine-2.1.19', authority: 'Don Cross (cosinekitty)', title: 'Astronomy Engine',
+    url: 'https://github.com/cosinekitty/astronomy', role: 'ephemeris', version: '2.1.19', verifiedOn: '2026-08-16', mutable: false,
+    establishes: 'Locally computed Sun and Moon positions derived from the VSOP87 and JPL-derived lunar theories, together with rise and set times, at the accuracy stated in the library documentation.',
+    boundary: 'Positions are computed in process rather than fetched from an authority, so a fact citing this source carries a digest over the computed values and not over a provider response body. Its accuracy is adequate for calendrical work and is not a substitute for a Horizons query where sub-arcsecond agreement matters.',
+  },
+  {
     id: 'naif-spice-frames-2021', authority: 'NASA/JPL Navigation and Ancillary Information Facility', title: 'SPICE Reference Frames',
     url: 'https://naif.jpl.nasa.gov/pub/naif/toolkit_docs/C/req/frames.html', role: 'reference-frames', version: '2021-12-31 revision', verifiedOn: CELESTIAL_FACT_RELEASE_DATE, mutable: true,
     establishes: 'Frame identifiers, frame centers, transformations, orientation relationships, and the distinction between frames and coordinate representations.',
