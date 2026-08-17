@@ -131,9 +131,9 @@ const J2000_MS = Date.UTC(2000, 0, 1, 12, 0, 0)
  * Lahiri (Chitrapakṣa) ayanāṁśa.
  *
  * Anchored to the Indian Calendar Reform Committee value at J2000.0 and
- * advanced by the IAU 2006 general-precession-in-longitude polynomial. Agrees
- * with published Lahiri tables to within roughly an arcsecond across the modern
- * era, which is far finer than the 0.05° boundary tolerance applied above.
+ * advanced by the IAU 2006 general-precession-in-longitude polynomial. The
+ * independent conformance corpus measures a maximum 0.0042° difference from
+ * Swiss SIDM_LAHIRI over 1600–2099, below the 0.05° boundary tolerance.
  *
  * Deriving the value from Spica's computed position instead was tried and
  * rejected: it drifted about 0.35° by 2026 against published tables.
@@ -258,7 +258,7 @@ export function computePanchanga(input: PanchangaInput): Panchanga {
     ayanamsa: {
       name: 'lahiri',
       degrees: ayanamsa,
-      accuracyNote: 'Lahiri (Chitrapakṣa), anchored at J2000.0 and advanced by IAU 2006 general precession in longitude. Agrees with published tables to about an arcsecond over the modern era. A different ayanāṁśa shifts nakshatra and yoga, and leaves tithi and karaṇa unchanged.',
+      accuracyNote: 'Lahiri (Chitrapakṣa), anchored at J2000.0 and advanced by IAU 2006 general precession in longitude. Independently measured within 0.0042° of Swiss SIDM_LAHIRI over the 1600–2099 conformance corpus. A different ayanāṁśa shifts nakshatra and yoga, and leaves tithi and karaṇa unchanged.',
     },
     sunLongitudeTropical: sunTropical,
     moonLongitudeTropical: moonTropical,
