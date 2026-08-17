@@ -17,13 +17,19 @@ import {
   type AstrologyChartType,
 } from './astrology-traditions.ts'
 import { CompilerRefusal, compileReport } from './interpretation-compiler.ts'
+import {
+  HistoricalCalibrationError,
+  compileHistoricalCalibration,
+  type HistoricalCalibration,
+  type HistoricalMilestoneInput,
+} from './historical-calibration.ts'
 import { buildLocalFactBundle } from './local-fact-bundle.ts'
 import { computeNatalChart, type NatalChart } from './natal-chart.ts'
 import { computeNatalTiming, type NatalTiming } from './natal-timing.ts'
 import { computePanchanga, type Panchanga } from './panchanga.ts'
 import { ZonedTimeError, zonedWallTimeToUtc, type CivilTimeFold } from './zoned-time.ts'
 
-export const BIRTH_REPORT_VERSION = 'birth-report/0.4' as const
+export const BIRTH_REPORT_VERSION = 'birth-report/0.5' as const
 
 export interface BirthInput {
   /** `YYYY-MM-DD` local to the birth place. */
@@ -38,6 +44,8 @@ export interface BirthInput {
   placeLabel?: string
   /** ISO-8601 UTC instant used for daśā selection and transit geometry. Defaults to birth. */
   timingInstantUtc?: string
+  /** Optional evidence-bounded events used only for an in-request exploratory calibration. */
+  historicalMilestones?: HistoricalMilestoneInput[]
 }
 
 export interface RenderedPassage {
@@ -84,6 +92,7 @@ export interface BirthReport {
   panchanga: Panchanga
   natalChart: NatalChart
   timing: NatalTiming
+  historicalCalibration: HistoricalCalibration | null
   factBundleId: string
   traditions: RenderedTraditionReport[]
   /** Values too close to a division edge to assert at this instant. */
@@ -166,6 +175,22 @@ export function buildBirthReport(input: BirthInput): BirthReport {
     latitudeDegrees: latitude,
     longitudeDegrees: longitude,
   })
+  let historicalCalibration: HistoricalCalibration | null = null
+  if (input.historicalMilestones?.length) {
+    try {
+      historicalCalibration = compileHistoricalCalibration({
+        natalChart,
+        birthInstant: resolved.instant,
+        compiledAt: timingInstant,
+        latitudeDegrees: latitude,
+        longitudeDegrees: longitude,
+        milestones: input.historicalMilestones,
+      })
+    } catch (error) {
+      if (error instanceof HistoricalCalibrationError) throw new BirthInputError(error.message)
+      throw error
+    }
+  }
 
   return {
     version: BIRTH_REPORT_VERSION,
@@ -179,6 +204,7 @@ export function buildBirthReport(input: BirthInput): BirthReport {
     panchanga,
     natalChart,
     timing,
+    historicalCalibration,
     factBundleId: factBundle.bundleId,
     traditions: [
       compileFor(factBundle, 'vedic-jyotisha', 'natal'),

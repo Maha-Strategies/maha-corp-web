@@ -1,6 +1,7 @@
 'use server'
 
 import { BirthInputError, buildBirthReport, type BirthReport } from '@/lib/birth-report'
+import type { HistoricalMilestoneInput } from '@/lib/historical-calibration'
 
 export type BirthActionState =
   | { status: 'idle' }
@@ -17,6 +18,16 @@ export type BirthActionState =
 export async function computeBirthReport(_previous: BirthActionState, formData: FormData): Promise<BirthActionState> {
   try {
     const timingMoment = String(formData.get('timingInstantUtc') ?? '')
+    const milestonePayload = String(formData.get('historicalMilestones') ?? '[]')
+    if (milestonePayload.length > 50_000) throw new BirthInputError('Historical milestone data is too large.')
+    let historicalMilestones: HistoricalMilestoneInput[]
+    try {
+      const parsed: unknown = JSON.parse(milestonePayload)
+      if (!Array.isArray(parsed)) throw new Error('not-an-array')
+      historicalMilestones = parsed as HistoricalMilestoneInput[]
+    } catch {
+      throw new BirthInputError('Historical milestones could not be read.')
+    }
     const report = buildBirthReport({
       date: String(formData.get('date') ?? ''),
       time: String(formData.get('time') ?? ''),
@@ -26,6 +37,7 @@ export async function computeBirthReport(_previous: BirthActionState, formData: 
       elevationMeters: formData.get('elevation') === '' ? undefined : Number(formData.get('elevation')),
       placeLabel: String(formData.get('placeLabel') ?? ''),
       timingInstantUtc: timingMoment ? `${timingMoment}:00.000Z` : undefined,
+      historicalMilestones,
     })
     return { status: 'ok', report }
   } catch (error) {
