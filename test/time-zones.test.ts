@@ -44,6 +44,8 @@ test('a place preset resolves by full key or bare name', () => {
   assert.equal(findBirthPlace('Chennai, India')?.timeZone, 'Asia/Kolkata')
   assert.equal(findBirthPlace('chennai')?.latitude, 13.0827)
   assert.equal(findBirthPlace('International Falls')?.timeZone, 'America/Chicago')
+  assert.equal(findBirthPlace('International Falls, MN')?.timeZone, 'America/Chicago')
+  assert.equal(findBirthPlace('international falls minnesota')?.timeZone, 'America/Chicago')
   assert.equal(findBirthPlace('Cheyenne')?.timeZone, 'America/Denver')
   assert.equal(findBirthPlace('Nowhere'), undefined)
 })
@@ -70,7 +72,7 @@ test('the International Falls preset reproduces the founder birth instant', () =
   })
   assert.equal(report.instantUtc, '1992-12-01T02:09:00.000Z')
   assert.equal(report.utcOffset, '-06:00')
-  assert.equal(report.placeLabel, 'International Falls, United States')
+  assert.equal(report.placeLabel, 'International Falls, Minnesota, United States')
 })
 
 test('Nepal\u2019s 1986 offset change is honoured, not flattened', () => {

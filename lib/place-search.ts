@@ -84,8 +84,22 @@ export async function searchPlaces(query: string, fetchImpl: typeof fetch = fetc
     throw new PlaceSearchError('Enter a place name between 2 and 120 characters.')
   }
 
+  // The provider's `name` parameter searches a settlement name, so a useful
+  // qualifier such as "MN" can accidentally become part of the name and yield
+  // nothing. Try the full text first, then retry only the text before the first
+  // comma. Results still display their region and country for explicit choice.
+  const primaryName = normalizedQuery.split(',')[0]?.trim() ?? ''
+  const candidates = [...new Set([normalizedQuery, primaryName])].filter((candidate) => candidate.length >= 2)
+  for (const candidate of candidates) {
+    const results = await requestPlaces(candidate, fetchImpl)
+    if (results.length) return results
+  }
+  return []
+}
+
+async function requestPlaces(query: string, fetchImpl: typeof fetch): Promise<PlaceSearchResult[]> {
   const url = new URL(GEOCODING_ENDPOINT)
-  url.searchParams.set('name', normalizedQuery)
+  url.searchParams.set('name', query)
   url.searchParams.set('count', String(MAX_RESULTS))
   url.searchParams.set('language', 'en')
   url.searchParams.set('format', 'json')

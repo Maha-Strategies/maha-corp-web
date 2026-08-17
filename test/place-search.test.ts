@@ -51,6 +51,29 @@ test('search encodes the query and returns normalized results', async () => {
   assert.equal(results[0]?.timeZone, 'Atlantic/Reykjavik')
 })
 
+test('retries the settlement name when a region qualifier prevents a match', async () => {
+  const requestedNames: string[] = []
+  const mockFetch: typeof fetch = async (input) => {
+    const name = new URL(String(input)).searchParams.get('name') ?? ''
+    requestedNames.push(name)
+    if (name.includes(',')) return Response.json({ results: [] })
+    return Response.json({ results: [{
+      id: 5031404,
+      name: 'International Falls',
+      admin1: 'Minnesota',
+      country: 'United States',
+      latitude: 48.60105,
+      longitude: -93.41098,
+      timezone: 'America/Chicago',
+    }] })
+  }
+
+  const results = await searchPlaces('International Falls, MN', mockFetch)
+  assert.deepEqual(requestedNames, ['International Falls, MN', 'International Falls'])
+  assert.equal(results[0]?.label, 'International Falls, Minnesota, United States')
+  assert.equal(results[0]?.timeZone, 'America/Chicago')
+})
+
 test('rejects invalid queries before contacting the provider', async () => {
   let called = false
   const mockFetch: typeof fetch = async () => { called = true; return Response.json({}) }
