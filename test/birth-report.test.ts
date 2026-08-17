@@ -37,6 +37,7 @@ test('a birth report carries the pañcāṅga and its resolved instant', () => {
   assert.ok(report.natalChart.aspects.length > 0)
   assert.equal(report.timing.referenceInstantUtc, report.instantUtc)
   assert.equal(report.timing.vimshottari.activeMahadasha.activeAtReference, true)
+  assert.equal(report.historicalCalibration, null)
   assert.ok(report.panchanga.ayanamsa.degrees > 23 && report.panchanga.ayanamsa.degrees < 24)
 })
 
@@ -50,6 +51,9 @@ test('the public birth report renders chart relationships and their boundary', a
   assert.match(form, /Active mahādaśā/)
   assert.match(form, /Timing moment \(UTC\)/)
   assert.match(form, /not evidence that astrology forecasts real outcomes/)
+  assert.match(form, /Historical calibration/)
+  assert.match(form, /hypothesis generation only/i)
+  assert.match(form, /not stored/)
 })
 
 test('the report accepts an explicit reproducible timing moment', () => {

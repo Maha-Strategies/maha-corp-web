@@ -10,7 +10,7 @@ import BirthForm from './BirthForm'
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: 'Birth chart report | Maha Strategies',
-  description: 'A reproducible Vedic birth-chart and timing map with whole-sign houses, Vimśottarī periods, transit geometry, pañcāṅga, and source-bound tradition notes.',
+  description: 'A reproducible Vedic birth-chart and timing map with whole-sign houses, Vimśottarī periods, transit geometry, historical calibration, pañcāṅga, and source-bound tradition notes.',
   alternates: { canonical: '/knowledge/birth' },
   robots: { index: true, follow: true },
 }
@@ -29,7 +29,7 @@ export default function BirthPage() {
           <p className="font-mono text-[10px] uppercase tracking-widest text-violet-300">{BIRTH_REPORT_VERSION}</p>
           <h1 className="mt-6 text-4xl font-bold tracking-tight text-white sm:text-6xl">Birth chart report</h1>
           <p className="mt-6 max-w-3xl font-serif text-lg leading-8 text-zinc-400">
-            Your complete chart and timing map before interpretation: natal structure, Vimśottarī period dates, and transit-to-natal geometry in Lahiri sidereal, with source-bound tradition notes visibly separate from calculations and conventions.
+            Your complete chart and timing map before interpretation: natal structure, Vimśottarī period dates, transit-to-natal geometry, and optional evidence-bounded historical calibration in Lahiri sidereal, with source-bound tradition notes visibly separate from calculations and conventions.
           </p>
         </header>
 

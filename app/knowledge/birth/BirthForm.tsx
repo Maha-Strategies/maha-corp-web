@@ -4,6 +4,7 @@ import { useActionState, useEffect, useMemo, useRef, useState } from 'react'
 
 import { BIRTH_PLACES, birthPlaceKey, findBirthPlace } from '@/lib/birth-places'
 import type { BirthReport, RenderedTraditionReport } from '@/lib/birth-report'
+import type { HistoricalMilestoneInput, MilestoneSourceKind, MilestoneType } from '@/lib/historical-calibration'
 import type { NatalChartPoint } from '@/lib/natal-chart'
 import type { PlaceSearchResult } from '@/lib/place-search'
 import { groupTimeZones, timeZoneLabel } from '@/lib/time-zones'
@@ -21,6 +22,38 @@ const REASON_LABEL: Record<string, string> = {
 
 const FIELD = 'border border-zinc-700 bg-black px-3 py-2 font-mono text-sm text-zinc-200 focus:border-violet-500 focus:outline-none'
 const LABEL = 'font-mono text-[10px] uppercase tracking-widest text-zinc-500'
+
+interface MilestoneDraft {
+  eventId: string
+  title: string
+  occurredAtUtc: string
+  uncertaintyMinutes: string
+  type: MilestoneType
+  sourceKind: MilestoneSourceKind
+  sourceReference: string
+  includeMetric: boolean
+  metricId: string
+  metricName: string
+  metricValue: string
+  metricTarget: string
+  metricUnit: string
+  metricDirection: 'higher-is-better' | 'lower-is-better'
+  metricDataSourceId: string
+}
+
+const MILESTONE_TYPE_OPTIONS: { value: MilestoneType; label: string }[] = [
+  { value: 'client-work', label: 'Client work' }, { value: 'revenue', label: 'Revenue' },
+  { value: 'company-formation', label: 'Company formation' }, { value: 'creative-work', label: 'Creative work' },
+  { value: 'product-release', label: 'Product release' }, { value: 'audience-growth', label: 'Audience growth' },
+  { value: 'other', label: 'Other' },
+]
+
+const SOURCE_OPTIONS: { value: MilestoneSourceKind; label: string }[] = [
+  { value: 'platform-record', label: 'Platform record' }, { value: 'bank-record', label: 'Bank record' },
+  { value: 'government-record', label: 'Government filing' }, { value: 'file-metadata', label: 'File metadata' },
+  { value: 'analytics-record', label: 'Analytics record' }, { value: 'contemporaneous-note', label: 'Contemporaneous note' },
+  { value: 'recollection', label: 'Recollection' },
+]
 
 function Limb({ label, value, detail, uncertain }: { label: string; value: string; detail: string; uncertain: boolean }) {
   return (
@@ -317,6 +350,79 @@ function TimingSection({ report }: { report: BirthReport }) {
   )
 }
 
+function HistoricalCalibrationSection({ report }: { report: BirthReport }) {
+  const calibration = report.historicalCalibration
+  if (!calibration) return null
+  return (
+    <section className="mt-6 border border-emerald-900/60 bg-emerald-950/10 p-6">
+      <div className="flex flex-wrap items-start justify-between gap-4">
+        <div>
+          <p className={LABEL}>Historical calibration</p>
+          <h2 className="mt-2 text-3xl font-semibold text-white">Repeated celestial correspondences</h2>
+        </div>
+        <span className="border border-amber-600/40 bg-amber-500/10 px-3 py-1 font-mono text-[9px] uppercase tracking-widest text-amber-300">Exploratory · hypothesis generation only</span>
+      </div>
+      <p className="mt-4 max-w-3xl text-sm leading-6 text-zinc-400">Each milestone was independently recomputed at its timestamp. The engine retains features stable across the declared uncertainty window, then reports only features repeated across at least two selected events.</p>
+
+      <div className="mt-6 grid gap-3 sm:grid-cols-3">
+        <article className="border border-zinc-800 bg-black/30 p-4"><p className={LABEL}>Milestones compiled</p><p className="mt-2 text-2xl text-white">{calibration.milestones.length}</p></article>
+        <article className="border border-zinc-800 bg-black/30 p-4"><p className={LABEL}>Repeated features</p><p className="mt-2 text-2xl text-white">{calibration.correspondences.length}</p></article>
+        <article className="border border-zinc-800 bg-black/30 p-4"><p className={LABEL}>Test candidates</p><p className="mt-2 text-2xl text-white">{calibration.prospectiveCandidates.length}</p></article>
+      </div>
+
+      <div className="mt-8">
+        <h3 className="text-xl font-semibold text-white">Milestone state vectors</h3>
+        <div className="mt-4 grid gap-3 lg:grid-cols-2">
+          {calibration.milestones.map((milestone) => (
+            <article key={milestone.eventId} className="border border-zinc-800 bg-black/30 p-4">
+              <div className="flex flex-wrap items-baseline justify-between gap-2"><h4 className="text-white">{milestone.title}</h4><span className="font-mono text-[9px] uppercase tracking-widest text-zinc-600">{milestone.type}</span></div>
+              <p className="mt-2 font-mono text-[10px] text-zinc-500">{milestone.occurredAtUtc} · ±{milestone.uncertaintyMinutes / 2} min</p>
+              <p className="mt-3 text-sm text-emerald-200">{milestone.activeMahadasha} / {milestone.activeAntardasha}</p>
+              <p className="mt-2 text-xs leading-5 text-zinc-400">{milestone.slowTransitHouses.map((entry) => `${entry.point}: H${entry.house} ${entry.sign}`).join(' · ')}</p>
+              <p className="mt-3 text-xs leading-5 text-zinc-500">{milestone.stableFeatures.length} stable features{milestone.unstableFeatures.length ? ` · ${milestone.unstableFeatures.length} withheld as time-sensitive` : ''}</p>
+              {milestone.metric && <p className="mt-2 text-xs text-zinc-400">{milestone.metric.name}: {milestone.metric.value} {milestone.metric.unit} vs {milestone.metric.target} target · <span className={milestone.metric.metTarget ? 'text-emerald-300' : 'text-amber-300'}>{milestone.metric.metTarget ? 'met' : 'not met'}</span></p>}
+              <p className="mt-3 font-mono text-[9px] text-zinc-600">{milestone.sourceKind} · {milestone.sourceReference} · {milestone.stateVectorSha256}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+
+      <div className="mt-8 grid gap-6 lg:grid-cols-2">
+        <div>
+          <h3 className="text-xl font-semibold text-white">Observed recurrences</h3>
+          <div className="mt-4 space-y-2">
+            {calibration.correspondences.length ? calibration.correspondences.map((entry) => (
+              <article key={entry.feature.key} className="border border-zinc-800 bg-black/30 p-4">
+                <p className="text-sm text-white">{entry.feature.label}</p>
+                <p className="mt-1 font-mono text-[10px] text-emerald-300">{entry.occurrences}/{calibration.milestones.length} selected milestones</p>
+                <p className="mt-2 text-xs leading-5 text-zinc-500">{entry.eventTitles.join(' · ')}</p>
+              </article>
+            )) : <p className="text-sm leading-6 text-zinc-500">No stable feature repeats yet. Add more independently evidenced milestones; the engine will not force a pattern.</p>}
+          </div>
+        </div>
+        <div>
+          <h3 className="text-xl font-semibold text-white">Prospective tests to register</h3>
+          <div className="mt-4 space-y-2">
+            {calibration.prospectiveCandidates.length ? calibration.prospectiveCandidates.map((candidate) => (
+              <article key={candidate.candidateId} className="border border-zinc-800 bg-black/30 p-4">
+                <p className="text-sm leading-6 text-zinc-300">{candidate.statementTemplate}</p>
+                <p className="mt-2 font-mono text-[9px] uppercase tracking-widest text-amber-300">Unregistered · minimum n={candidate.minimumProspectiveObservations}</p>
+              </article>
+            )) : <p className="text-sm leading-6 text-zinc-500">A test candidate appears only after a feature recurs. It still must be pre-registered before future outcomes are known.</p>}
+          </div>
+        </div>
+      </div>
+
+      <details className="mt-8 border-t border-zinc-800 pt-5">
+        <summary className="cursor-pointer font-mono text-[10px] uppercase tracking-widest text-zinc-400">Methods, limitations, and reproducibility</summary>
+        <p className="mt-4 border-l border-amber-700/60 pl-3 text-xs leading-5 text-zinc-400">{calibration.boundary}</p>
+        <ul className="mt-4 space-y-2">{calibration.methodology.map((item) => <li key={item} className="border-l border-zinc-800 pl-3 text-xs leading-5 text-zinc-500">{item}</li>)}</ul>
+        <p className="mt-4 break-all font-mono text-[9px] text-zinc-600">Input {calibration.inputSha256} · bundle {calibration.bundleSha256} · {calibration.version}</p>
+      </details>
+    </section>
+  )
+}
+
 function TraditionSection({ tradition }: { tradition: RenderedTraditionReport }) {
   return (
     <section className="mt-10 border border-zinc-800 p-6">
@@ -389,6 +495,7 @@ function Report({ report }: { report: BirthReport }) {
       <ChartSummary report={report} />
       <ChartStructure report={report} />
       <TimingSection report={report} />
+      <HistoricalCalibrationSection report={report} />
 
       <section className="mt-10">
         <div className="flex flex-wrap items-baseline justify-between gap-3">
@@ -431,11 +538,30 @@ export default function BirthForm() {
   const [placeResults, setPlaceResults] = useState<PlaceSearchResult[]>([])
   const [placeStatus, setPlaceStatus] = useState<'idle' | 'searching' | 'results' | 'error'>('idle')
   const [placeMessage, setPlaceMessage] = useState('')
+  const [milestones, setMilestones] = useState<MilestoneDraft[]>([])
   const placeRequestId = useRef(0)
 
   const zoneGroups = useMemo(() => groupTimeZones(), [])
   const coordinatesReady = Number.isFinite(Number(latitude)) && latitude !== '' && Number.isFinite(Number(longitude)) && longitude !== ''
   const canSubmit = date !== '' && time !== '' && timingInstantUtc !== '' && coordinatesReady && timeZone !== ''
+  const serializedMilestones = useMemo(() => JSON.stringify(milestones.map((milestone): HistoricalMilestoneInput => ({
+    eventId: milestone.eventId,
+    title: milestone.title,
+    occurredAtUtc: `${milestone.occurredAtUtc}:00.000Z`,
+    uncertaintyMinutes: Number(milestone.uncertaintyMinutes),
+    type: milestone.type,
+    sourceKind: milestone.sourceKind,
+    sourceReference: milestone.sourceReference,
+    ...(milestone.includeMetric ? { metric: {
+      metricId: milestone.metricId,
+      name: milestone.metricName,
+      value: Number(milestone.metricValue),
+      target: Number(milestone.metricTarget),
+      unit: milestone.metricUnit,
+      direction: milestone.metricDirection,
+      dataSourceId: milestone.metricDataSourceId,
+    } } : {}),
+  }))), [milestones])
 
   useEffect(() => {
     if (state.status !== 'ok') return
@@ -514,6 +640,21 @@ export default function BirthForm() {
       setPlaceStatus('error')
       setPlaceMessage('Place search is temporarily unavailable. You can retry or use manual location details.')
     }
+  }
+
+  function addMilestone() {
+    if (milestones.length >= 12) return
+    setMilestones((current) => [...current, {
+      eventId: `evt_${crypto.randomUUID().replaceAll('-', '')}`,
+      title: '', occurredAtUtc: '', uncertaintyMinutes: '0', type: 'revenue',
+      sourceKind: 'platform-record', sourceReference: '', includeMetric: false,
+      metricId: '', metricName: '', metricValue: '', metricTarget: '', metricUnit: '',
+      metricDirection: 'higher-is-better', metricDataSourceId: '',
+    }])
+  }
+
+  function updateMilestone(eventId: string, patch: Partial<MilestoneDraft>) {
+    setMilestones((current) => current.map((milestone) => milestone.eventId === eventId ? { ...milestone, ...patch } : milestone))
   }
 
   return (
@@ -609,7 +750,47 @@ export default function BirthForm() {
           </div>
         </details>
 
+        <details className="mt-5 border border-emerald-900/60 bg-emerald-950/10 p-4">
+          <summary className="cursor-pointer font-mono text-[10px] uppercase tracking-widest text-emerald-300">Historical calibration ({milestones.length} milestones)</summary>
+          <div className="mt-4 flex flex-wrap items-start justify-between gap-4">
+            <p className="max-w-3xl text-xs leading-5 text-zinc-500">Optional. Add dated, independently evidenced milestones to discover repeated daśā and slow-transit states. Times are UTC; uncertainty prevents false precision. Entries are sent by POST for this calculation and are not stored.</p>
+            <button type="button" onClick={addMilestone} disabled={milestones.length >= 12} className="shrink-0 border border-emerald-600 px-4 py-2 font-mono text-[9px] uppercase tracking-widest text-emerald-300 hover:bg-emerald-500 hover:text-black disabled:opacity-40">Add milestone</button>
+          </div>
+
+          <div className="mt-5 space-y-4">
+            {milestones.map((milestone, index) => (
+              <fieldset key={milestone.eventId} className="border border-zinc-800 bg-black/30 p-4">
+                <div className="flex items-center justify-between gap-3">
+                  <legend className="font-mono text-[10px] uppercase tracking-widest text-zinc-400">Milestone {index + 1}</legend>
+                  <button type="button" onClick={() => setMilestones((current) => current.filter((entry) => entry.eventId !== milestone.eventId))} className="font-mono text-[9px] uppercase tracking-widest text-rose-400 hover:text-white">Remove</button>
+                </div>
+                <div className="mt-4 grid gap-4 sm:grid-cols-2">
+                  <label className="flex flex-col gap-2 sm:col-span-2"><span className={LABEL}>What happened</span><input required value={milestone.title} onInput={(event) => updateMilestone(milestone.eventId, { title: event.currentTarget.value })} placeholder="First paid client milestone" className={FIELD} /></label>
+                  <label className="flex flex-col gap-2"><span className={LABEL}>When (UTC)</span><input required type="datetime-local" value={milestone.occurredAtUtc} onInput={(event) => updateMilestone(milestone.eventId, { occurredAtUtc: event.currentTarget.value })} className={FIELD} /></label>
+                  <label className="flex flex-col gap-2"><span className={LABEL}>Time precision</span><select value={milestone.uncertaintyMinutes} onChange={(event) => updateMilestone(milestone.eventId, { uncertaintyMinutes: event.target.value })} className={FIELD}><option value="0">Exact minute</option><option value="60">Approximate hour</option><option value="1440">Date known (±12 hours)</option><option value="10080">Week known (±3.5 days)</option></select></label>
+                  <label className="flex flex-col gap-2"><span className={LABEL}>Milestone type</span><select value={milestone.type} onChange={(event) => updateMilestone(milestone.eventId, { type: event.target.value as MilestoneType })} className={FIELD}>{MILESTONE_TYPE_OPTIONS.map((option) => <option key={option.value} value={option.value}>{option.label}</option>)}</select></label>
+                  <label className="flex flex-col gap-2"><span className={LABEL}>Evidence class</span><select value={milestone.sourceKind} onChange={(event) => updateMilestone(milestone.eventId, { sourceKind: event.target.value as MilestoneSourceKind })} className={FIELD}>{SOURCE_OPTIONS.map((option) => <option key={option.value} value={option.value}>{option.label}</option>)}</select></label>
+                  <label className="flex flex-col gap-2 sm:col-span-2"><span className={LABEL}>Evidence reference</span><input required value={milestone.sourceReference} onInput={(event) => updateMilestone(milestone.eventId, { sourceReference: event.currentTarget.value })} placeholder="Record ID, statement period, or bounded file locator—never document contents" className={FIELD} /></label>
+                </div>
+
+                <label className="mt-4 flex items-center gap-3 text-xs text-zinc-400"><input type="checkbox" checked={milestone.includeMetric} onChange={(event) => updateMilestone(milestone.eventId, { includeMetric: event.target.checked })} className="accent-emerald-500" /> Attach an objective outcome metric</label>
+                {milestone.includeMetric && <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                  <label className="flex flex-col gap-2"><span className={LABEL}>Metric ID</span><input required pattern="[a-z][a-z0-9_-]{2,63}" value={milestone.metricId} onInput={(event) => updateMilestone(milestone.eventId, { metricId: event.currentTarget.value })} placeholder="monthly_revenue" className={FIELD} /></label>
+                  <label className="flex flex-col gap-2"><span className={LABEL}>Metric name</span><input required value={milestone.metricName} onInput={(event) => updateMilestone(milestone.eventId, { metricName: event.currentTarget.value })} placeholder="Monthly revenue" className={FIELD} /></label>
+                  <label className="flex flex-col gap-2"><span className={LABEL}>Unit</span><input required value={milestone.metricUnit} onInput={(event) => updateMilestone(milestone.eventId, { metricUnit: event.currentTarget.value })} placeholder="USD" className={FIELD} /></label>
+                  <label className="flex flex-col gap-2"><span className={LABEL}>Observed value</span><input required type="number" step="any" value={milestone.metricValue} onInput={(event) => updateMilestone(milestone.eventId, { metricValue: event.currentTarget.value })} className={FIELD} /></label>
+                  <label className="flex flex-col gap-2"><span className={LABEL}>Target</span><input required type="number" step="any" value={milestone.metricTarget} onInput={(event) => updateMilestone(milestone.eventId, { metricTarget: event.currentTarget.value })} className={FIELD} /></label>
+                  <label className="flex flex-col gap-2"><span className={LABEL}>Direction</span><select value={milestone.metricDirection} onChange={(event) => updateMilestone(milestone.eventId, { metricDirection: event.target.value as MilestoneDraft['metricDirection'] })} className={FIELD}><option value="higher-is-better">Higher is better</option><option value="lower-is-better">Lower is better</option></select></label>
+                  <label className="flex flex-col gap-2 sm:col-span-2 lg:col-span-3"><span className={LABEL}>Metric system of record</span><input required value={milestone.metricDataSourceId} onInput={(event) => updateMilestone(milestone.eventId, { metricDataSourceId: event.currentTarget.value })} placeholder="Platform dashboard or ledger ID" className={FIELD} /></label>
+                </div>}
+              </fieldset>
+            ))}
+            {milestones.length === 0 && <p className="border border-dashed border-zinc-800 p-4 text-xs leading-5 text-zinc-600">No milestones added. The ordinary chart and timing report will still compute.</p>}
+          </div>
+        </details>
+
         <input type="hidden" name="elevation" value={elevation} />
+        <input type="hidden" name="historicalMilestones" value={serializedMilestones} />
 
         <div className="mt-5">
           <button type="submit" disabled={pending || !canSubmit} className="border border-violet-500 px-6 py-3 font-mono text-[10px] uppercase tracking-widest text-violet-300 hover:bg-violet-400 hover:text-black disabled:cursor-not-allowed disabled:opacity-40">
