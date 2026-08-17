@@ -1,0 +1,40 @@
+{
+  "name": "@mahastrategies/x402-agentcore",
+  "version": "0.1.0",
+  "description": "Application-owned x402 purchase controls for Amazon Bedrock AgentCore Payments and OpenAI agent tools.",
+  "keywords": [
+    "x402",
+    "agentcore",
+    "openai-agents",
+    "payments",
+    "policy",
+    "ai-agents"
+  ],
+  "license": "Apache-2.0",
+  "type": "module",
+  "sideEffects": false,
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "main": "./dist/agentcore.js",
+  "types": "./dist/agentcore.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/agentcore.d.ts",
+      "import": "./dist/agentcore.js",
+      "default": "./dist/agentcore.js"
+    }
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "tsc --project tsconfig.json",
+    "pack:dry-run": "npm pack --dry-run",
+    "prepack": "npm run build"
+  }
+}
