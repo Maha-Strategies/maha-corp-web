@@ -1,0 +1,2 @@
+export const ASTROLOGY_VERSION = 'astrology-traditions/0.2' as const
+export const ASTROLOGY_RELEASE_DATE = '2026-08-17' as const

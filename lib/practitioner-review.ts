@@ -81,6 +81,20 @@ export type PractitionerReviewRecord = Omit<PractitionerReviewInput, 'idempotenc
   recordSha256: string
 }
 
+export type PublicationReviewStatus = 'awaiting-review' | 'accepted' | 'revision-required'
+
+export interface RulePublicationReview {
+  ruleId: string
+  status: PublicationReviewStatus
+  requirements: {
+    targetId: string
+    targetVersion: string
+    targetSha256: string
+    scope: 'source-fidelity' | 'rule-formalization'
+    status: PublicationReviewStatus
+  }[]
+}
+
 const CALCULATION_CRITERIA: ReviewCriterion[] = [
   { id: 'lahiri-ayanamsa', label: 'Lahiri ayanamsa', question: 'Is the declared Lahiri zero point, precession method, uncertainty, and boundary handling suitable and accurately described?' },
   { id: 'lunar-node-model', label: 'Mean versus true node', question: 'Is use of the mean lunar node appropriate for this profile, and is the distinction from the true oscillating node explicit?' },
@@ -124,6 +138,45 @@ export function buildPractitionerReviewTargets(): PractitionerReviewTarget[] {
     return { scope: 'rule-formalization', targetType: 'interpretation-rule', targetId: rule.id, targetVersion: ASTROLOGY_VERSION, targetSha256: digestOf(payload), title: `Interpretation rule: ${rule.id}`, payload, criteria: RULE_CRITERIA }
   })
   return [calculationTarget(), ...passages, ...rules]
+}
+
+function activeReviewsForTarget(target: PractitionerReviewTarget, reviews: PractitionerReviewRecord[]): PractitionerReviewRecord[] {
+  const matching = reviews.filter((review) => review.targetId === target.targetId && review.targetVersion === target.targetVersion && review.targetSha256 === target.targetSha256)
+  const superseded = new Set(matching.map((review) => review.supersedesReviewId).filter((id): id is string => id !== null))
+  return matching.filter((review) => !superseded.has(review.reviewId))
+}
+
+function publicationStatusForTarget(target: PractitionerReviewTarget, reviews: PractitionerReviewRecord[]): PublicationReviewStatus {
+  const active = activeReviewsForTarget(target, reviews)
+  if (active.some((review) => review.verdict === 'revision-required' || review.verdict === 'disagreed')) return 'revision-required'
+  if (active.some((review) => review.verdict === 'accepted' || review.verdict === 'accepted-with-reservations')) return 'accepted'
+  return 'awaiting-review'
+}
+
+/**
+ * A source-bound rule is publishable only when its own formalization and every
+ * passage it cites have accepted, digest-bound practitioner reviews.
+ */
+export function assessRulePublicationReview(ruleId: string, reviews: PractitionerReviewRecord[]): RulePublicationReview {
+  const rule = ASTROLOGY_RULES.find((candidate) => candidate.id === ruleId)
+  if (!rule) throw new Error(`Unknown interpretation rule ${ruleId}.`)
+  const targetById = new Map(buildPractitionerReviewTargets().map((target) => [`${target.scope}:${target.targetId}`, target]))
+  const targets = [
+    ...rule.passageIds.map((passageId) => targetById.get(`source-fidelity:${passageId}`)),
+    targetById.get(`rule-formalization:${rule.id}`),
+  ]
+  if (targets.some((target) => !target)) throw new Error(`${ruleId} is missing a required practitioner-review target.`)
+  const requirements = (targets as PractitionerReviewTarget[]).map((target) => ({
+    targetId: target.targetId,
+    targetVersion: target.targetVersion,
+    targetSha256: target.targetSha256,
+    scope: target.scope as 'source-fidelity' | 'rule-formalization',
+    status: publicationStatusForTarget(target, reviews),
+  }))
+  const status = requirements.some((requirement) => requirement.status === 'revision-required')
+    ? 'revision-required'
+    : requirements.every((requirement) => requirement.status === 'accepted') ? 'accepted' : 'awaiting-review'
+  return { ruleId, status, requirements }
 }
 
 const TARGETS = buildPractitionerReviewTargets()

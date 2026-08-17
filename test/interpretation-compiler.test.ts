@@ -4,6 +4,7 @@ import test from 'node:test'
 import { SearchMoonPhase } from 'astronomy-engine'
 
 import { validateCelestialFactBundle, type CelestialFactBundle, type CelestialPositionFact } from '../lib/celestial-facts.ts'
+import { ASTROLOGY_RULES } from '../lib/astrology-traditions.ts'
 import { BLOCKED_TECHNIQUES, CompilerRefusal, auditReport, compileReport } from '../lib/interpretation-compiler.ts'
 
 const DIGEST = `sha256:${'a'.repeat(64)}`
@@ -120,6 +121,16 @@ test('medical and personality techniques are specifically withheld', () => {
   const withheld = new Set(report.exclusions.filter((e) => e.reason === 'report-policy').map((e) => e.technique))
   for (const technique of ['bodily injury', 'quality of mind', 'bodily form', 'order of judgement']) {
     assert.ok(withheld.has(technique), `${technique} must be withheld by policy`)
+  }
+})
+
+test('new source-bound Jyotisha rules cannot enter reports before scoped practitioner review', () => {
+  const report = compileReport({ factBundle: bundle(), traditionId: 'vedic-jyotisha', chartType: 'natal' })
+  const gatedNatalRules = ASTROLOGY_RULES.filter((rule) => rule.traditionId === 'vedic-jyotisha' && rule.chartTypes.includes('natal') && rule.sourceBoundCoverage)
+  assert.ok(gatedNatalRules.length > 0)
+  for (const rule of gatedNatalRules) {
+    assert.equal(report.modules.some((module) => module.ruleId === rule.id), false)
+    assert.equal(report.exclusions.find((exclusion) => exclusion.ruleId === rule.id)?.reason, 'practitioner-review-required')
   }
 })
 

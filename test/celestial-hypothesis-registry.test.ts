@@ -17,6 +17,7 @@ import {
   type OutcomeRecord,
 } from '../lib/celestial-hypotheses/types.ts'
 import { buildLocalFactBundle } from '../lib/local-fact-bundle.ts'
+import { ASTROLOGY_VERSION } from '../lib/astrology-version.ts'
 
 const NOW = () => new Date('2026-09-01T00:00:00Z')
 
@@ -45,7 +46,7 @@ function validDraft(overrides: Partial<ExperimentDraft> = {}): ExperimentDraft {
     factBundleId: factBundle.bundleId,
     factBundleSha256: digestOf(factBundle),
     compilerVersion: 'interpretation-compiler/0.1',
-    ruleRegistryVersion: 'astrology-traditions/0.1',
+    ruleRegistryVersion: ASTROLOGY_VERSION,
     metric: {
       metricId: 'rollback_free_release',
       name: 'Releases completing without rollback',
@@ -520,7 +521,7 @@ test('the provenance bundle carries every required hash and the source chain', (
   assert.equal(bundle.registeredAtUtc, registration.registeredAtUtc)
   assert.equal(bundle.factBundleSha256, registration.draft.factBundleSha256)
   assert.equal(bundle.compilerVersion, 'interpretation-compiler/0.1')
-  assert.equal(bundle.ruleRegistryVersion, 'astrology-traditions/0.1')
+  assert.equal(bundle.ruleRegistryVersion, ASTROLOGY_VERSION)
   assert.deepEqual(bundle.ruleIds, ['bs-muhurta-bava-favourable'])
   assert.ok(bundle.passageIds.length > 0, 'the rule must resolve to a transcribed passage')
   assert.ok(bundle.sourceIds.includes('brihat-samhita-iyer'))

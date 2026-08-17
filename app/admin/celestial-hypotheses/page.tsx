@@ -3,6 +3,7 @@
 import { useMemo, useState } from 'react'
 
 import { REGISTRY_EPISTEMIC_BOUNDARY } from '@/lib/celestial-hypotheses/types'
+import { ASTROLOGY_VERSION } from '@/lib/astrology-version'
 
 type JsonObject = Record<string, unknown>
 
@@ -25,11 +26,11 @@ const EMPTY_DRAFT = JSON.stringify({
     factBundleId: 'cel_local_replace_me',
     factBundleSha256: 'sha256:replace_me',
     compilerVersion: 'interpretation-compiler/0.1',
-    ruleRegistryVersion: 'astrology-traditions/0.1',
+    ruleRegistryVersion: ASTROLOGY_VERSION,
     verdict: {
       verdictVersion: 'celestial-verdict/0.1', activityCorpusVersion: 'celestial-activity-rules/0.1',
       resolutionPolicyVersion: 'preserve-conflict-and-abstain/1', activityType: 'software-release', traditionId: 'vedic-jyotisha',
-      factBundleId: 'cel_local_replace_me', factBundleSha256: 'sha256:replace_me', ruleRegistryVersion: 'astrology-traditions/0.1',
+      factBundleId: 'cel_local_replace_me', factBundleSha256: 'sha256:replace_me', ruleRegistryVersion: ASTROLOGY_VERSION,
       applicableRuleIds: ['bs-muhurta-bava-favourable'], applicationIds: ['maha-software-release-bava'],
       favorableApplicationIds: ['maha-software-release-bava'], unfavorableApplicationIds: [], unresolvedVariantGroupIds: [], conflictApplicationIds: [],
       classification: 'favorable',
