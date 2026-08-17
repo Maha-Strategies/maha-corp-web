@@ -1,10 +1,12 @@
 import assert from 'node:assert/strict'
+import { readFile } from 'node:fs/promises'
 import test from 'node:test'
 
 import { SearchMoonPhase } from 'astronomy-engine'
 
 import { ASTROLOGY_PASSAGES, ASTROLOGY_RULES, getRulesForTradition } from '../lib/astrology-traditions.ts'
 import { CELESTIAL_AUTHORITY_SOURCES, validateCelestialFactBundle } from '../lib/celestial-facts.ts'
+import { resolveActivityVerdict } from '../lib/celestial-hypotheses/verdict.ts'
 import { compileReport } from '../lib/interpretation-compiler.ts'
 import { LOCAL_EPHEMERIS_SOURCE_ID, buildLocalFactBundle } from '../lib/local-fact-bundle.ts'
 import { parseInstant } from '../lib/muhurta-input.ts'
@@ -55,6 +57,32 @@ test('a Viṣṭi moment over Ujjain compiles a multi-limb verdict', () => {
   // The corpus now reaches beyond karaṇa.
   assert.ok(observed.some((limb) => limb.startsWith('nakshatra=')), 'a nakshatra rule should fire')
   assert.ok(observed.some((limb) => limb.startsWith('vara=')), 'a vāra rule should fire')
+})
+
+test('activity verdicts are visible resolutions of the rules that actually fired', () => {
+  const bava = verdictAt(9)
+  assert.equal(bava.panchanga?.karana.name, 'Bava')
+  const favorable = resolveActivityVerdict({
+    activityType: 'software-release', traditionId: bava.traditionId,
+    applicableRuleIds: bava.modules.map((entry) => entry.ruleId),
+  })
+  assert.equal(favorable.classification, 'favorable')
+  assert.deepEqual(favorable.applicationIds, ['maha-software-release-bava'])
+
+  const vishti = verdictAt(45)
+  const abstention = resolveActivityVerdict({
+    activityType: 'software-release', traditionId: vishti.traditionId,
+    applicableRuleIds: vishti.modules.map((entry) => entry.ruleId),
+  })
+  assert.equal(abstention.classification, 'abstain-unresolved-variant')
+  assert.deepEqual(abstention.unresolvedVariantGroupIds, ['vishti-scope'])
+})
+
+test('the public Muhurta page exposes activity selection and the verdict boundary', async () => {
+  const page = await readFile(new URL('../app/knowledge/muhurta/page.tsx', import.meta.url), 'utf8')
+  assert.match(page, /name="activity"/)
+  assert.match(page, /Activity verdict/)
+  assert.match(page, /Preview only · not pre-registered · not empirically calibrated/)
 })
 
 test('every rule remains accounted for as reported or withheld', () => {
