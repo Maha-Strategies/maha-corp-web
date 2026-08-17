@@ -4,6 +4,7 @@ import { useActionState, useEffect, useMemo, useRef, useState } from 'react'
 
 import { BIRTH_PLACES, birthPlaceKey, findBirthPlace } from '@/lib/birth-places'
 import type { BirthReport, RenderedTraditionReport } from '@/lib/birth-report'
+import type { PlaceSearchResult } from '@/lib/place-search'
 import { groupTimeZones, timeZoneLabel } from '@/lib/time-zones'
 
 import { computeBirthReport, type BirthActionState } from './actions'
@@ -124,8 +125,13 @@ export default function BirthForm() {
   const [timeZone, setTimeZone] = useState('UTC')
   const [latitude, setLatitude] = useState('')
   const [longitude, setLongitude] = useState('')
+  const [elevation, setElevation] = useState('')
   const [placeLabel, setPlaceLabel] = useState('')
   const [placeQuery, setPlaceQuery] = useState('')
+  const [placeResults, setPlaceResults] = useState<PlaceSearchResult[]>([])
+  const [placeStatus, setPlaceStatus] = useState<'idle' | 'searching' | 'results' | 'error'>('idle')
+  const [placeMessage, setPlaceMessage] = useState('')
+  const placeRequestId = useRef(0)
 
   const zoneGroups = useMemo(() => groupTimeZones(), [])
   const coordinatesReady = Number.isFinite(Number(latitude)) && latitude !== '' && Number.isFinite(Number(longitude)) && longitude !== ''
@@ -137,37 +143,128 @@ export default function BirthForm() {
     document.getElementById('birth-report-result')?.focus({ preventScroll: true })
   }, [state.status])
 
-  function applyPlace(value: string) {
-    setPlaceQuery(value)
-    const place = findBirthPlace(value)
-    if (!place) return
+  function selectPlace(place: Pick<PlaceSearchResult, 'label' | 'latitude' | 'longitude' | 'elevationMeters' | 'timeZone'>) {
+    setPlaceQuery(place.label)
     setLatitude(String(place.latitude))
     setLongitude(String(place.longitude))
+    setElevation(place.elevationMeters === null ? '' : String(place.elevationMeters))
     setTimeZone(place.timeZone)
-    setPlaceLabel(birthPlaceKey(place))
+    setPlaceLabel(place.label)
+    setPlaceResults([])
+    setPlaceStatus('idle')
+    setPlaceMessage('')
+  }
+
+  function updatePlaceQuery(value: string) {
+    setPlaceQuery(value)
+    setPlaceResults([])
+    setPlaceStatus('idle')
+    setPlaceMessage('')
+    const place = findBirthPlace(value)
+    if (place) {
+      selectPlace({
+        label: birthPlaceKey(place),
+        latitude: place.latitude,
+        longitude: place.longitude,
+        elevationMeters: null,
+        timeZone: place.timeZone,
+      })
+      return
+    }
+    // Never submit coordinates belonging to a previously selected city after
+    // the user has edited its visible label.
+    if (value !== placeLabel) {
+      setLatitude('')
+      setLongitude('')
+      setElevation('')
+      setTimeZone('UTC')
+      setPlaceLabel('')
+    }
+  }
+
+  async function findPlace() {
+    const query = placeQuery.trim()
+    if (query.length < 2) {
+      setPlaceStatus('error')
+      setPlaceMessage('Enter at least two characters of a city or birthplace.')
+      return
+    }
+
+    const requestId = ++placeRequestId.current
+    setPlaceStatus('searching')
+    setPlaceMessage('Searching…')
+    setPlaceResults([])
+    try {
+      const response = await fetch('/api/geocoding/places', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ query }),
+      })
+      const payload: unknown = await response.json()
+      if (requestId !== placeRequestId.current) return
+      if (!response.ok || typeof payload !== 'object' || payload === null || !('results' in payload) || !Array.isArray(payload.results)) {
+        throw new Error('search-failed')
+      }
+      const results = payload.results as PlaceSearchResult[]
+      setPlaceResults(results)
+      setPlaceStatus(results.length ? 'results' : 'error')
+      setPlaceMessage(results.length ? 'Choose the correct match.' : 'No matching place was found. Try adding a region or country.')
+    } catch {
+      if (requestId !== placeRequestId.current) return
+      setPlaceStatus('error')
+      setPlaceMessage('Place search is temporarily unavailable. You can retry or use manual location details.')
+    }
   }
 
   return (
     <>
       <form action={formAction} className="mt-8 border border-zinc-800 bg-zinc-950/60 p-6">
         <div className="grid gap-5 sm:grid-cols-2">
-          <label className="flex flex-col gap-2 sm:col-span-2">
-            <span className={LABEL}>Birth place</span>
-            <input
-              list="birth-places"
-              value={placeQuery}
-              onInput={(event) => applyPlace(event.currentTarget.value)}
-              placeholder="Start typing a city, then choose it"
-              autoComplete="off"
-              aria-describedby="birth-place-help"
-              className={FIELD}
-            />
-            <datalist id="birth-places">
-              {BIRTH_PLACES.map((place) => <option key={birthPlaceKey(place)} value={birthPlaceKey(place)} />)}
-            </datalist>
-            <span id="birth-place-help" className="text-xs leading-5 text-zinc-600">Choosing a listed city fills its coordinates and historical time zone. If it is not listed, use manual location details below.</span>
+          <div className="flex flex-col gap-2 sm:col-span-2">
+            <label htmlFor="birth-place" className={LABEL}>Birth place</label>
+            <span className="flex flex-col gap-2 sm:flex-row">
+              <input
+                id="birth-place"
+                value={placeQuery}
+                onInput={(event) => updatePlaceQuery(event.currentTarget.value)}
+                onKeyDown={(event) => { if (event.key === 'Enter') { event.preventDefault(); void findPlace() } }}
+                placeholder="City, region, or country"
+                autoComplete="off"
+                aria-describedby="birth-place-help"
+                className={`${FIELD} min-w-0 flex-1`}
+              />
+              <button
+                type="button"
+                onClick={() => void findPlace()}
+                disabled={placeStatus === 'searching' || placeQuery.trim().length < 2}
+                className="border border-violet-500 px-5 py-2 font-mono text-[10px] uppercase tracking-widest text-violet-300 hover:bg-violet-400 hover:text-black disabled:cursor-not-allowed disabled:opacity-40"
+              >
+                {placeStatus === 'searching' ? 'Searching…' : 'Find location'}
+              </button>
+            </span>
+            <span id="birth-place-help" className="text-xs leading-5 text-zinc-600">Search sends only the place text to Open-Meteo&apos;s GeoNames-backed service. Your birth date and time are not sent.</span>
+            <div aria-live="polite">
+              {placeMessage && <p className={`text-xs leading-5 ${placeStatus === 'error' ? 'text-amber-300' : 'text-zinc-400'}`}>{placeMessage}</p>}
+              {placeResults.length > 0 && (
+                <div className="grid gap-2" role="listbox" aria-label="Matching birth places">
+                  {placeResults.map((place) => (
+                    <button
+                      key={place.id}
+                      type="button"
+                      role="option"
+                      aria-selected="false"
+                      onClick={() => selectPlace(place)}
+                      className="border border-zinc-800 bg-black px-3 py-3 text-left hover:border-violet-600 hover:bg-violet-950/20"
+                    >
+                      <span className="block text-sm text-zinc-200">{place.label}</span>
+                      <span className="mt-1 block font-mono text-[10px] text-zinc-600">{place.timeZone}</span>
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
             {placeLabel && coordinatesReady && <span className="border-l border-emerald-700/60 pl-3 font-mono text-[10px] leading-5 text-emerald-300">{placeLabel} · {latitude}, {longitude} · {timeZone}</span>}
-          </label>
+          </div>
 
           <label className="flex flex-col gap-2">
             <span className={LABEL}>Birth date</span>
@@ -206,12 +303,14 @@ export default function BirthForm() {
           </div>
         </details>
 
+        <input type="hidden" name="elevation" value={elevation} />
+
         <div className="mt-5">
           <button type="submit" disabled={pending || !canSubmit} className="border border-violet-500 px-6 py-3 font-mono text-[10px] uppercase tracking-widest text-violet-300 hover:bg-violet-400 hover:text-black disabled:cursor-not-allowed disabled:opacity-40">
             {pending ? 'Computing…' : 'Compute report'}
           </button>
           <p className="mt-3 font-mono text-[10px] leading-5 text-zinc-600">
-            {BIRTH_PLACES.length} place shortcuts · {zoneGroups.reduce((total, group) => total + group.zones.length, 0)} historical time zones · submitted by POST and not stored.
+            Global place search + {BIRTH_PLACES.length} instant shortcuts · {zoneGroups.reduce((total, group) => total + group.zones.length, 0)} historical time zones · submitted by POST and not stored.
           </p>
         </div>
       </form>

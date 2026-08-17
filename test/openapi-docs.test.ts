@@ -12,6 +12,7 @@ const APP_DIR = join(import.meta.dirname, '..', 'app')
 // surfaces are private; nested preflight routes are covered by their product
 // page; the docs route documents itself by serving the spec.
 const PRIVATE_ROUTES = new Set([
+  '/api/geocoding/places',
   // Compatibility prototype. Promote only after the controlled A2A + MCP E2E
   // passes against Preview and the contract is reviewed for public support.
   '/api/v1/a2a/agents',
