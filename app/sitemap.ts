@@ -31,6 +31,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${baseUrl}${ASTROLOGY_PATH}`, lastModified: new Date(ASTROLOGY_RELEASE_DATE) },
     { url: `${baseUrl}/knowledge/muhurta`, lastModified: new Date(ASTROLOGY_RELEASE_DATE) },
     { url: `${baseUrl}/knowledge/birth`, lastModified: new Date(ASTROLOGY_RELEASE_DATE) },
+    { url: `${baseUrl}/reports/celestial`, lastModified: new Date(ASTROLOGY_RELEASE_DATE) },
     { url: `${baseUrl}/knowledge/suppliers`, lastModified: new Date('2026-08-13') },
     { url: `${baseUrl}${SEMICONDUCTOR_PROCESS_MAP_PATH}`, lastModified: new Date(SEMICONDUCTOR_PROCESS_MAP_DATE) },
     { url: `${baseUrl}/start` },

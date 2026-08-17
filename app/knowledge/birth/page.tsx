@@ -33,6 +33,8 @@ export default function BirthPage() {
           </p>
         </header>
 
+        <BirthForm />
+
         <section className="mt-8 border-l-2 border-rose-500 bg-rose-950/10 p-6">
           <h2 className="font-mono text-[10px] uppercase tracking-widest text-rose-300">Read this before you read the output</h2>
           <div className="mt-3 max-w-3xl space-y-3 text-sm leading-6 text-zinc-300">
@@ -47,8 +49,6 @@ export default function BirthPage() {
             </p>
           </div>
         </section>
-
-        <BirthForm />
 
         <section className="mt-12 border border-zinc-800 bg-zinc-950/60 p-6">
           <h2 className="font-mono text-[10px] uppercase tracking-widest text-zinc-400">Prohibited uses</h2>
