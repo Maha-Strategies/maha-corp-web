@@ -475,7 +475,30 @@ async function preflight(config: GatewayConfig): Promise<{ ok: boolean; checks: 
     const live = deployed.find((entry) => (entry as { spec?: { context?: string } }).spec?.context === api.context || entry.context === api.context)
     add(`api.${api.pathId}.deployed`, Boolean(live), live ? `context ${api.context}` : `no deployed API at ${api.context}`)
 
-    const result = await probe(routeFor(config, api.pathId), { method: 'POST', headers: { 'content-type': 'application/json' }, body: '{}' })
+    const interceptorSecret = process.env.WSO2_CONTEXT_INTERCEPTOR_SECRET
+    const probeBody = api.pathId === 'wso2-maha-context-compiler'
+      ? JSON.stringify({
+          model: MODEL,
+          max_tokens: 1,
+          messages: [{ role: 'user', content: WSO2_CONTEXT_PLACEHOLDER }],
+          [WSO2_CONTEXT_EXTENSION]: {
+            clientRequestId: 'wso2_preflight_no_provider_call',
+            task: 'Confirm that the interceptor can compile a minimal request.',
+            tokenBudget: 64,
+            documents: [{ id: 'preflight', text: 'A local preflight document. No provider credential is supplied.' }],
+          },
+        })
+      : '{}'
+    const result = await probe(routeFor(config, api.pathId), {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json',
+        ...(api.pathId === 'wso2-maha-context-compiler' && interceptorSecret
+          ? { [WSO2_INTERCEPTOR_TOKEN_HEADER]: interceptorSecret }
+          : {}),
+      },
+      body: probeBody,
+    })
     if ('error' in result) {
       add(`api.${api.pathId}.route`, false, result.error)
       continue

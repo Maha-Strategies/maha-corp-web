@@ -383,6 +383,20 @@ test('the envelope sent live still contains the extension the gateway acts on', 
   assert.match(envelopeBlock, /WSO2_CONTEXT_PLACEHOLDER/, 'and the placeholder the interceptor replaces')
 })
 
+test('preflight authenticates the Maha request-phase probe without authenticating baseline paths', () => {
+  // The Maha route runs both request and response interceptors. Probing it
+  // without the shared token makes the request interceptor refuse the request,
+  // then leaves the response interceptor without evidence and produces a 503.
+  // That is a probe defect, not evidence that the deployed route is broken.
+  const runner = readFileSync(new URL('../scripts/run-wso2-three-path-evaluation.ts', import.meta.url), 'utf8')
+  const preflightBlock = runner.slice(runner.indexOf('async function preflight'), runner.indexOf('async function main'))
+  assert.match(preflightBlock, /process\.env\.WSO2_CONTEXT_INTERCEPTOR_SECRET/)
+  assert.match(preflightBlock, /api\.pathId === 'wso2-maha-context-compiler'/)
+  assert.match(preflightBlock, /\[WSO2_INTERCEPTOR_TOKEN_HEADER\]: interceptorSecret/)
+  assert.match(preflightBlock, /\[WSO2_CONTEXT_EXTENSION\]/, 'the probe must opt into compilation')
+  assert.match(preflightBlock, /content: WSO2_CONTEXT_PLACEHOLDER/, 'the probe must give the interceptor one replacement target')
+})
+
 test('every gateway API artifact is deployable and free of secrets', () => {
   const dir = new URL('../content/integrations/wso2-apis/', import.meta.url).pathname
   const files = readdirSync(dir).filter((file) => file.endsWith('.json'))
