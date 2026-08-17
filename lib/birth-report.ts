@@ -19,10 +19,11 @@ import {
 import { CompilerRefusal, compileReport } from './interpretation-compiler.ts'
 import { buildLocalFactBundle } from './local-fact-bundle.ts'
 import { computeNatalChart, type NatalChart } from './natal-chart.ts'
+import { computeNatalTiming, type NatalTiming } from './natal-timing.ts'
 import { computePanchanga, type Panchanga } from './panchanga.ts'
 import { ZonedTimeError, zonedWallTimeToUtc, type CivilTimeFold } from './zoned-time.ts'
 
-export const BIRTH_REPORT_VERSION = 'birth-report/0.3' as const
+export const BIRTH_REPORT_VERSION = 'birth-report/0.4' as const
 
 export interface BirthInput {
   /** `YYYY-MM-DD` local to the birth place. */
@@ -35,6 +36,8 @@ export interface BirthInput {
   longitudeDegrees: number
   elevationMeters?: number
   placeLabel?: string
+  /** ISO-8601 UTC instant used for daśā selection and transit geometry. Defaults to birth. */
+  timingInstantUtc?: string
 }
 
 export interface RenderedPassage {
@@ -80,6 +83,7 @@ export interface BirthReport {
   longitudeDegrees: number
   panchanga: Panchanga
   natalChart: NatalChart
+  timing: NatalTiming
   factBundleId: string
   traditions: RenderedTraditionReport[]
   /** Values too close to a division edge to assert at this instant. */
@@ -152,6 +156,16 @@ export function buildBirthReport(input: BirthInput): BirthReport {
   const panchanga = computePanchanga({ instant: resolved.instant, latitudeDegrees: latitude, longitudeDegrees: longitude, elevationMeters })
   const factBundle = buildLocalFactBundle({ instant: resolved.instant, latitudeDegrees: latitude, longitudeDegrees: longitude, elevationMeters })
   const natalChart = computeNatalChart({ instant: resolved.instant, latitudeDegrees: latitude, longitudeDegrees: longitude })
+  const timingInstant = input.timingInstantUtc ? new Date(input.timingInstantUtc) : resolved.instant
+  if (!Number.isFinite(timingInstant.getTime())) throw new BirthInputError('Timing moment must be a valid UTC date and time.')
+  if (timingInstant < resolved.instant) throw new BirthInputError('Timing moment cannot precede the birth instant.')
+  const timing = computeNatalTiming({
+    natalChart,
+    birthInstant: resolved.instant,
+    referenceInstant: timingInstant,
+    latitudeDegrees: latitude,
+    longitudeDegrees: longitude,
+  })
 
   return {
     version: BIRTH_REPORT_VERSION,
@@ -164,6 +178,7 @@ export function buildBirthReport(input: BirthInput): BirthReport {
     longitudeDegrees: longitude,
     panchanga,
     natalChart,
+    timing,
     factBundleId: factBundle.bundleId,
     traditions: [
       compileFor(factBundle, 'vedic-jyotisha', 'natal'),
