@@ -11,6 +11,7 @@ import { ASTROLOGY_PROHIBITED_USES, ASTROLOGY_VERSION, getAstrologyTradition, ge
 import { validateCelestialFactBundle } from '../celestial-facts.ts'
 import { BLOCKED_TECHNIQUES, COMPILER_VERSION } from '../interpretation-compiler.ts'
 import { digestOf, isExplicitUtcInstant } from './canonical.ts'
+import { buildStructuredVerdict, structuredVerdictDigest } from './verdict.ts'
 import {
   ACTIVITY_TYPES,
   EXPERIMENT_ID_PATTERN,
@@ -90,12 +91,15 @@ export function parseExperimentDraft(value: unknown): { ok: true; draft: Experim
   const comparator = object(root.comparator)
   const matching = object(comparator?.matching)
   const analysisPlan = object(root.analysisPlan)
+  const verdict = object(root.verdict)
+  const prediction = object(verdict?.prediction)
   const factBundle = object(root.factBundle)
   const factTime = object(factBundle?.time)
   for (const [name, item] of [
     ['hypothesis', hypothesis], ['metric', metric], ['comparator', comparator],
     ['comparator.matching', matching], ['analysisPlan', analysisPlan],
     ['factBundle', factBundle], ['factBundle.time', factTime],
+    ['verdict', verdict], ['verdict.prediction', prediction],
   ] as const) if (!item) issues.push(`draft.${name} must be an object.`)
 
   for (const [path, item] of [
@@ -116,6 +120,20 @@ export function parseExperimentDraft(value: unknown): { ok: true; draft: Experim
     ['analysisPlan.metricId', analysisPlan?.metricId],
     ['analysisPlan.stoppingRule', analysisPlan?.stoppingRule],
     ['analysisPlan.multiplicityPolicy', analysisPlan?.multiplicityPolicy],
+    ['verdict.verdictVersion', verdict?.verdictVersion],
+    ['verdict.activityCorpusVersion', verdict?.activityCorpusVersion],
+    ['verdict.resolutionPolicyVersion', verdict?.resolutionPolicyVersion],
+    ['verdict.activityType', verdict?.activityType],
+    ['verdict.traditionId', verdict?.traditionId],
+    ['verdict.factBundleId', verdict?.factBundleId],
+    ['verdict.factBundleSha256', verdict?.factBundleSha256],
+    ['verdict.ruleRegistryVersion', verdict?.ruleRegistryVersion],
+    ['verdict.classification', verdict?.classification],
+    ['verdict.prediction.metricId', prediction?.metricId],
+    ['verdict.prediction.metricDirection', prediction?.metricDirection],
+    ['verdict.prediction.relationToTarget', prediction?.relationToTarget],
+    ['verdict.empiricalCalibrationStatus', verdict?.empiricalCalibrationStatus],
+    ['verdict.epistemicBoundary', verdict?.epistemicBoundary],
   ] as const) if (typeof item !== 'string') issues.push(`draft.${path} must be a string.`)
 
   for (const [path, item] of [
@@ -123,6 +141,7 @@ export function parseExperimentDraft(value: unknown): { ok: true; draft: Experim
     ['analysisPlan.targetRate', analysisPlan?.targetRate],
     ['analysisPlan.minimumObservations', analysisPlan?.minimumObservations],
     ['sampleSizeTarget', root.sampleSizeTarget],
+    ['verdict.prediction.targetRate', prediction?.targetRate],
   ] as const) if (typeof item !== 'number') issues.push(`draft.${path} must be a number.`)
 
   if (typeof root.prohibitedUseAttestation !== 'boolean') issues.push('draft.prohibitedUseAttestation must be a boolean.')
@@ -142,6 +161,9 @@ export function parseExperimentDraft(value: unknown): { ok: true; draft: Experim
   if (!Array.isArray(root.exclusionCriteria)) issues.push('draft.exclusionCriteria must be an array.')
   if (!Array.isArray(factBundle?.observers)) issues.push('draft.factBundle.observers must be an array.')
   if (!Array.isArray(factBundle?.facts)) issues.push('draft.factBundle.facts must be an array.')
+  for (const field of ['applicableRuleIds', 'applicationIds', 'favorableApplicationIds', 'unfavorableApplicationIds', 'unresolvedVariantGroupIds', 'conflictApplicationIds']) {
+    if (!Array.isArray(verdict?.[field])) issues.push(`draft.verdict.${field} must be an array.`)
+  }
 
   return issues.length > 0
     ? { ok: false, issues }
@@ -228,6 +250,24 @@ function validateActivity(draft: ExperimentDraft, issues: string[]): void {
   if (prohibited) issues.push(`activityType touches a prohibited domain ("${prohibited}").`)
   if (!draft.prohibitedUseAttestation) {
     issues.push(`prohibitedUseAttestation is required. Prohibited uses: ${ASTROLOGY_PROHIBITED_USES.join('; ')}.`)
+  }
+}
+
+function validateVerdict(draft: ExperimentDraft, issues: string[]): void {
+  if (!draft.verdict) { issues.push('verdict is required and must be locked before the outcome.'); return }
+  const expected = buildStructuredVerdict({
+    activityType: draft.activityType,
+    traditionId: draft.hypothesis.traditionId,
+    applicableRuleIds: draft.hypothesis.ruleIds,
+    factBundleId: draft.factBundleId,
+    factBundleSha256: draft.factBundleSha256,
+    ruleRegistryVersion: draft.ruleRegistryVersion,
+    metricId: draft.metric?.metricId,
+    metricDirection: draft.metric?.direction,
+    targetRate: draft.analysisPlan?.targetRate,
+  })
+  if (structuredVerdictDigest(draft.verdict) !== structuredVerdictDigest(expected)) {
+    issues.push('verdict must exactly match the deterministic structured verdict for the declared activity, rules, fact bundle, metric, and target.')
   }
 }
 
@@ -386,6 +426,7 @@ export function validateDraft(draft: ExperimentDraft): string[] {
   validateIdentity(draft, issues)
   validateHypothesis(draft, issues)
   validateActivity(draft, issues)
+  validateVerdict(draft, issues)
   validateWindows(draft, issues)
   validateMetric(draft, issues)
   validateComparator(draft, issues)

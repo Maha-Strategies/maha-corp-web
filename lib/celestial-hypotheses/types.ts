@@ -16,8 +16,9 @@
 
 import type { ClaimEmpiricalStatus, ClaimProvenance } from '../claim-evidence.ts'
 import type { CelestialFactBundle } from '../celestial-facts.ts'
+import type { StructuredVerdict } from './verdict.ts'
 
-export const HYPOTHESIS_REGISTRY_VERSION = 'celestial-hypothesis-registry/0.1' as const
+export const HYPOTHESIS_REGISTRY_VERSION = 'celestial-hypothesis-registry/0.2' as const
 
 /**
  * The immutable lifecycle. Progress is forward-only and each transition is
@@ -190,6 +191,8 @@ export interface ExperimentDraft {
   factBundleSha256: string
   compilerVersion: string
   ruleRegistryVersion: string
+  /** Exact categorical output locked before the action and outcome. */
+  verdict: StructuredVerdict
   metric: OutcomeMetric
   comparator: ComparatorPolicy
   analysisPlan: AnalysisPlan
@@ -271,6 +274,8 @@ export interface ExperimentProvenanceBundle {
   factBundleSha256: string
   compilerVersion: string
   ruleRegistryVersion: string
+  verdictSha256: string
+  verdictClassification: StructuredVerdict['classification']
   traditionId: string
   ruleIds: string[]
   passageIds: string[]

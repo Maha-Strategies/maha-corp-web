@@ -10,6 +10,7 @@ import { OutcomeRejected, buildOutcomeRecord, horizonComplete } from '../lib/cel
 import * as outcomeModule from '../lib/celestial-hypotheses/outcomes.ts'
 import { buildProvenanceBundle, publicView } from '../lib/celestial-hypotheses/provenance.ts'
 import { RegistrationRejected, parseExperimentDraft, registerExperiment, registrationDigest, validateDraft } from '../lib/celestial-hypotheses/registration.ts'
+import { buildStructuredVerdict, structuredVerdictDigest } from '../lib/celestial-hypotheses/verdict.ts'
 import {
   REGISTRY_EPISTEMIC_BOUNDARY,
   type ExperimentDraft,
@@ -26,7 +27,7 @@ function validDraft(overrides: Partial<ExperimentDraft> = {}): ExperimentDraft {
     longitudeDegrees: 75.7885,
     elevationMeters: 494,
   })
-  return {
+  const draft = {
     experimentId: 'exp_a1b2c3d4e5f60718',
     participantPseudonym: 'pseudo_7fa91c22',
     studyRole: 'confirmatory',
@@ -78,7 +79,19 @@ function validDraft(overrides: Partial<ExperimentDraft> = {}): ExperimentDraft {
     sampleSizeTarget: 20,
     prohibitedUseAttestation: true,
     ...overrides,
-  }
+  } as ExperimentDraft
+  draft.verdict = overrides.verdict ?? buildStructuredVerdict({
+    activityType: draft.activityType,
+    traditionId: draft.hypothesis.traditionId,
+    applicableRuleIds: draft.hypothesis.ruleIds,
+    factBundleId: draft.factBundleId,
+    factBundleSha256: draft.factBundleSha256,
+    ruleRegistryVersion: draft.ruleRegistryVersion,
+    metricId: draft.metric.metricId,
+    metricDirection: draft.metric.direction,
+    targetRate: draft.analysisPlan.targetRate,
+  })
+  return draft
 }
 
 function registered(draft = validDraft()) {
@@ -127,6 +140,7 @@ test('changing any locked field changes the digest', () => {
     { metric: { ...validDraft().metric, horizonHours: 96 } },
     { comparator: { ...validDraft().comparator, draws: 9 } },
     { analysisPlan: { ...validDraft().analysisPlan, targetRate: 0.7 } },
+    { verdict: { ...validDraft().verdict, classification: 'unfavorable' } },
   ]
   for (const mutation of mutations) {
     assert.notEqual(registrationDigest(validDraft(mutation)), baseline, `${Object.keys(mutation)[0]} must be inside the seal`)
@@ -149,6 +163,38 @@ test('a well-formed confirmatory draft registers', () => {
   assert.equal(registration.status, 'registered')
   assert.equal(registration.registeredAtUtc, '2026-09-01T00:00:00.000Z')
   assert.match(registration.registrationSha256, /^sha256:[a-f0-9]{64}$/)
+})
+
+test('the registration locks a deterministic categorical verdict, not a vague score', () => {
+  const draft = validDraft()
+  assert.equal(draft.verdict.classification, 'favorable')
+  assert.equal(draft.verdict.prediction.relationToTarget, 'meets-or-exceeds-target')
+  assert.equal(draft.verdict.empiricalCalibrationStatus, 'unvalidated')
+  assert.ok(!('score' in draft.verdict))
+  assert.ok(!('confidence' in draft.verdict))
+  assert.match(structuredVerdictDigest(draft.verdict), /^sha256:[a-f0-9]{64}$/)
+})
+
+test('the verdict abstains when a selected rule retains an unresolved source variant', () => {
+  const draft = validDraft({
+    hypothesis: {
+      ...validDraft().hypothesis,
+      statement: 'Software releases begun during Vishti miss the rollback-free target rate declared before outcomes are known.',
+      ruleIds: ['bs-muhurta-vishti-prohibition'],
+    },
+  })
+  assert.equal(draft.verdict.classification, 'abstain-unresolved-variant')
+  assert.deepEqual(draft.verdict.unresolvedVariantGroupIds, ['vishti-scope'])
+  assert.equal(draft.verdict.prediction.relationToTarget, 'no-prediction')
+})
+
+test('registration refuses a hand-edited verdict even when its fields are well formed', () => {
+  const draft = validDraft()
+  const issues = validateDraft({
+    ...draft,
+    verdict: { ...draft.verdict, classification: 'unfavorable' },
+  })
+  assert.ok(issues.some((issue) => issue.includes('must exactly match')))
 })
 
 test('registration refuses an unknown tradition', () => {
