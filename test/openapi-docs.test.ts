@@ -27,6 +27,13 @@ const PRIVATE_ROUTES = new Set([
   '/api/v1/celestial-hypotheses/[experimentId]/register',
   '/api/v1/celestial-hypotheses/[experimentId]/outcomes',
   '/api/v1/celestial-hypotheses/[experimentId]/provenance',
+  // Exploratory historical corpus control plane. It carries pseudonymous
+  // timelines and remains behind the same private operations token; only a
+  // future privacy-reviewed aggregate projection may enter public OpenAPI.
+  '/api/v1/celestial-corpus/corpora',
+  '/api/v1/celestial-corpus/corpora/[corpusId]/lock',
+  '/api/v1/celestial-corpus/corpora/[corpusId]/schedule',
+  '/api/v1/celestial-corpus/corpora/[corpusId]/observations',
   '/api/admin/mps-operations/actions',
   '/api/admin/commercial-api-metering',
   '/api/admin/chargeback-export',
