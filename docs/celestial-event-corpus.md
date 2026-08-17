@@ -26,3 +26,7 @@ The database prevents updates or deletion of observations, rejects observations 
 - `GET /api/v1/celestial-corpus/corpora/{corpusId}/observations` — inspect records and descriptive exposure summary.
 
 All routes use the existing private celestial registry bearer token and service-role database connection. The operator console is at `/admin/celestial-corpus`.
+
+## Production operational verification
+
+The manual `Production celestial study` workflow runs one synthetic corpus lifecycle and one harmless hypothesis-registry lifecycle against the canonical Production host. It requires approval through the `production-canary` environment. Its published artifact contains lifecycle states, digests, aggregate counts, and epistemic boundaries only; a recursive denylist refuses participant, natal, birth, observer, coordinate, and raw-evidence fields before publication.
