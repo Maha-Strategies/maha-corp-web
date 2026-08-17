@@ -45,6 +45,7 @@ export default function Navbar() {
     { name: 'Tools & API', href: '/tools' },
     { name: 'Developer Infrastructure', href: '/developers' },
     { name: 'About Maha', href: '/about' },
+    { name: 'Celestial Reports', href: '/reports/celestial' },
     { name: 'MPS Standard', href: '/mps' },
     { name: 'Timing Board', href: '/operations/timing' },
     { name: 'Research', href: '/research' },

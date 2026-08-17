@@ -22,6 +22,7 @@ export async function computeBirthReport(_previous: BirthActionState, formData: 
       timeZone: String(formData.get('timeZone') ?? ''),
       latitudeDegrees: Number(formData.get('latitude')),
       longitudeDegrees: Number(formData.get('longitude')),
+      elevationMeters: formData.get('elevation') === '' ? undefined : Number(formData.get('elevation')),
       placeLabel: String(formData.get('placeLabel') ?? ''),
     })
     return { status: 'ok', report }

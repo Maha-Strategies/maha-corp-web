@@ -1,11 +1,9 @@
 /**
  * Convenience presets that fill coordinates and zone together.
  *
- * Not a geocoder and not exhaustive. Looking a birth place up against a
- * third-party geocoding service would send the place off to someone else, which
- * is the opposite of how this form treats birth data — so the presets are a
- * local table and the coordinate fields stay freely editable for anywhere not
- * listed.
+ * Not a geocoder and not exhaustive. These common places resolve locally,
+ * avoiding a network request. The form can also use its disclosed geocoding
+ * service for places outside this table, and keeps manual fields as a fallback.
  *
  * Coordinates are city-centre to about a hundredth of a degree, which is far
  * finer than any limb boundary in the pañcāṅga is sensitive to.
@@ -13,7 +11,9 @@
 
 export interface BirthPlace {
   name: string
+  region?: string
   country: string
+  aliases?: string[]
   latitude: number
   longitude: number
   timeZone: string
@@ -58,7 +58,10 @@ export const BIRTH_PLACES: BirthPlace[] = [
   { name: 'Moscow', country: 'Russia', latitude: 55.7558, longitude: 37.6173, timeZone: 'Europe/Moscow' },
   { name: 'New York', country: 'United States', latitude: 40.7128, longitude: -74.006, timeZone: 'America/New_York' },
   { name: 'Chicago', country: 'United States', latitude: 41.8781, longitude: -87.6298, timeZone: 'America/Chicago' },
+  { name: 'International Falls', region: 'Minnesota', country: 'United States', aliases: ['International Falls, MN', 'International Falls MN'], latitude: 48.588, longitude: -93.4084, timeZone: 'America/Chicago' },
   { name: 'Denver', country: 'United States', latitude: 39.7392, longitude: -104.9903, timeZone: 'America/Denver' },
+  { name: 'Cheyenne', country: 'United States', latitude: 41.14, longitude: -104.8202, timeZone: 'America/Denver' },
+  { name: 'Sheridan', country: 'United States', latitude: 44.7972, longitude: -106.9562, timeZone: 'America/Denver' },
   { name: 'Los Angeles', country: 'United States', latitude: 34.0522, longitude: -118.2437, timeZone: 'America/Los_Angeles' },
   { name: 'San Francisco', country: 'United States', latitude: 37.7749, longitude: -122.4194, timeZone: 'America/Los_Angeles' },
   { name: 'Toronto', country: 'Canada', latitude: 43.6532, longitude: -79.3832, timeZone: 'America/Toronto' },
@@ -81,11 +84,22 @@ export const BIRTH_PLACES: BirthPlace[] = [
 ]
 
 export function birthPlaceKey(place: BirthPlace): string {
-  return `${place.name}, ${place.country}`
+  return [place.name, place.region, place.country].filter(Boolean).join(', ')
 }
 
 export function findBirthPlace(key: string): BirthPlace | undefined {
-  const normalized = key.trim().toLowerCase()
-  return BIRTH_PLACES.find((place) => birthPlaceKey(place).toLowerCase() === normalized)
-    ?? BIRTH_PLACES.find((place) => place.name.toLowerCase() === normalized)
+  const normalized = normalizePlaceKey(key)
+  return BIRTH_PLACES.find((place) => {
+    const candidates = [
+      birthPlaceKey(place),
+      place.name,
+      place.region ? `${place.name}, ${place.region}` : '',
+      ...(place.aliases ?? []),
+    ]
+    return candidates.some((candidate) => candidate && normalizePlaceKey(candidate) === normalized)
+  })
+}
+
+function normalizePlaceKey(value: string): string {
+  return value.trim().toLocaleLowerCase().replace(/[.,]/g, ' ').replace(/\s+/g, ' ')
 }
