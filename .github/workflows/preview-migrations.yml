@@ -114,7 +114,7 @@ jobs:
           } > "$EVIDENCE/request.txt"
           cat "$EVIDENCE/request.txt"
 
-      - uses: supabase/setup-cli@v1
+      - uses: supabase/setup-cli@v3
         with:
           version: latest
 
