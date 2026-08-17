@@ -6,7 +6,7 @@ import { SITE_URL } from '@/lib/briefs-data'
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: 'Celestial reports | Maha Strategies',
-  description: 'Choose a reproducible birth or electional timing report, with declared methods, source passages, withheld rules, and interpretive boundaries.',
+  description: 'Choose a reproducible individual, electional, or corporate-event report, with declared methods, source passages, withheld rules, and interpretive boundaries.',
   alternates: { canonical: '/reports/celestial' },
 }
 
@@ -24,6 +24,13 @@ const reports = [
     title: 'Moment report',
     description: 'Inspect what the Jyotiṣa muhūrta corpus says about a chosen moment. Every applied rule includes its source passage, and every withheld rule remains visible.',
     action: 'Inspect a moment',
+  },
+  {
+    href: '/knowledge/corporate',
+    eyebrow: 'Available now · corporate / mundane',
+    title: 'Corporate formation event',
+    description: 'Record a filing, transaction, deployment, launch, or merger as an evidenced organization event. The report audits time uncertainty and location policy before applying an explicitly named corporate framework.',
+    action: 'Build a corporate report',
   },
 ] as const
 
@@ -43,7 +50,7 @@ export default function CelestialReportsPage() {
           <p className="mt-6 max-w-3xl font-serif text-lg leading-8 text-zinc-400">The current reports compute celestial and calendrical facts deterministically, then compile only the rules recorded for a declared tradition. They do not use a language model to invent interpretations.</p>
         </header>
 
-        <section className="mt-8 grid gap-5 md:grid-cols-2" aria-label="Available reports">
+        <section className="mt-8 grid gap-5 md:grid-cols-2 lg:grid-cols-3" aria-label="Available reports">
           {reports.map((report) => (
             <article key={report.href} className="flex flex-col border border-zinc-800 bg-zinc-950/60 p-6">
               <p className="font-mono text-[10px] uppercase tracking-widest text-emerald-300">{report.eyebrow}</p>
