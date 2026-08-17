@@ -16,6 +16,7 @@ export type BirthActionState =
  */
 export async function computeBirthReport(_previous: BirthActionState, formData: FormData): Promise<BirthActionState> {
   try {
+    const timingMoment = String(formData.get('timingInstantUtc') ?? '')
     const report = buildBirthReport({
       date: String(formData.get('date') ?? ''),
       time: String(formData.get('time') ?? ''),
@@ -24,6 +25,7 @@ export async function computeBirthReport(_previous: BirthActionState, formData: 
       longitudeDegrees: Number(formData.get('longitude')),
       elevationMeters: formData.get('elevation') === '' ? undefined : Number(formData.get('elevation')),
       placeLabel: String(formData.get('placeLabel') ?? ''),
+      timingInstantUtc: timingMoment ? `${timingMoment}:00.000Z` : undefined,
     })
     return { status: 'ok', report }
   } catch (error) {

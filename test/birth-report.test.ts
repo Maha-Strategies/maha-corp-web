@@ -35,6 +35,8 @@ test('a birth report carries the pañcāṅga and its resolved instant', () => {
   assert.ok(report.natalChart.placements.length === 9)
   assert.equal(report.natalChart.houses.length, 12)
   assert.ok(report.natalChart.aspects.length > 0)
+  assert.equal(report.timing.referenceInstantUtc, report.instantUtc)
+  assert.equal(report.timing.vimshottari.activeMahadasha.activeAtReference, true)
   assert.ok(report.panchanga.ayanamsa.degrees > 23 && report.panchanga.ayanamsa.degrees < 24)
 })
 
@@ -44,6 +46,21 @@ test('the public birth report renders chart relationships and their boundary', a
   assert.match(form, /Angular relationships/)
   assert.match(form, /All twelve house rulers and occupants/)
   assert.match(form, /No personality or outcome meaning is inferred here/)
+  assert.match(form, /Daśā periods and current transits/)
+  assert.match(form, /Active mahādaśā/)
+  assert.match(form, /Timing moment \(UTC\)/)
+  assert.match(form, /not evidence that astrology forecasts real outcomes/)
+})
+
+test('the report accepts an explicit reproducible timing moment', () => {
+  const report = buildBirthReport({
+    date: '1992-11-30', time: '20:09', timeZone: 'America/Chicago',
+    latitudeDegrees: 48.588, longitudeDegrees: -93.4084,
+    timingInstantUtc: '2026-08-17T06:45:00.000Z',
+  })
+  assert.equal(report.timing.referenceInstantUtc, '2026-08-17T06:45:00.000Z')
+  assert.equal(report.timing.vimshottari.activeMahadasha.lord, 'Jupiter')
+  assert.equal(report.timing.vimshottari.activeAntardasha.lord, 'Rahu')
 })
 
 test('the fact bundle carries all seven classical bodies', () => {
