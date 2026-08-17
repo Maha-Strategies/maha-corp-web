@@ -118,6 +118,18 @@ export interface StructuredVerdict {
   epistemicBoundary: string
 }
 
+export interface ActivityVerdictResolution {
+  activityType: ActivityType
+  traditionId: string
+  applicableRuleIds: string[]
+  applicationIds: string[]
+  favorableApplicationIds: string[]
+  unfavorableApplicationIds: string[]
+  unresolvedVariantGroupIds: string[]
+  conflictApplicationIds: string[]
+  classification: VerdictClassification
+}
+
 export interface BuildStructuredVerdictInput {
   activityType: ActivityType
   traditionId: string
@@ -133,7 +145,7 @@ export interface BuildStructuredVerdictInput {
 export const VERDICT_EPISTEMIC_BOUNDARY =
   'This categorical verdict is a pre-registered output of an unvalidated interpretive tradition. It is not a probability, scientific confidence estimate, or guarantee of an outcome.'
 
-export function buildStructuredVerdict(input: BuildStructuredVerdictInput): StructuredVerdict {
+export function resolveActivityVerdict(input: Pick<BuildStructuredVerdictInput, 'activityType' | 'traditionId' | 'applicableRuleIds'>): ActivityVerdictResolution {
   const selected = ACTIVITY_RULE_APPLICATIONS.filter((item) =>
     item.activityType === input.activityType
     && item.traditionId === input.traditionId
@@ -151,9 +163,25 @@ export function buildStructuredVerdict(input: BuildStructuredVerdictInput): Stru
   else if (favorable.length > 0) classification = 'favorable'
   else classification = 'unfavorable'
 
-  const relationToTarget = classification === 'favorable'
+  return {
+    activityType: input.activityType,
+    traditionId: input.traditionId,
+    applicableRuleIds: [...input.applicableRuleIds].sort(),
+    applicationIds: selected.map((item) => item.id).sort(),
+    favorableApplicationIds: favorable.map((item) => item.id).sort(),
+    unfavorableApplicationIds: unfavorable.map((item) => item.id).sort(),
+    unresolvedVariantGroupIds,
+    conflictApplicationIds,
+    classification,
+  }
+}
+
+export function buildStructuredVerdict(input: BuildStructuredVerdictInput): StructuredVerdict {
+  const resolution = resolveActivityVerdict(input)
+
+  const relationToTarget = resolution.classification === 'favorable'
     ? 'meets-or-exceeds-target'
-    : classification === 'unfavorable'
+    : resolution.classification === 'unfavorable'
       ? 'misses-target'
       : 'no-prediction'
 
@@ -166,13 +194,13 @@ export function buildStructuredVerdict(input: BuildStructuredVerdictInput): Stru
     factBundleId: input.factBundleId,
     factBundleSha256: input.factBundleSha256,
     ruleRegistryVersion: input.ruleRegistryVersion,
-    applicableRuleIds: [...input.applicableRuleIds].sort(),
-    applicationIds: selected.map((item) => item.id).sort(),
-    favorableApplicationIds: favorable.map((item) => item.id).sort(),
-    unfavorableApplicationIds: unfavorable.map((item) => item.id).sort(),
-    unresolvedVariantGroupIds,
-    conflictApplicationIds,
-    classification,
+    applicableRuleIds: resolution.applicableRuleIds,
+    applicationIds: resolution.applicationIds,
+    favorableApplicationIds: resolution.favorableApplicationIds,
+    unfavorableApplicationIds: resolution.unfavorableApplicationIds,
+    unresolvedVariantGroupIds: resolution.unresolvedVariantGroupIds,
+    conflictApplicationIds: resolution.conflictApplicationIds,
+    classification: resolution.classification,
     prediction: {
       metricId: input.metricId,
       metricDirection: input.metricDirection,

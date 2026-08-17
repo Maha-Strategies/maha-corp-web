@@ -3,6 +3,14 @@ import Link from 'next/link'
 
 import { ASTROLOGY_PATH, getAstrologyPassage, getAstrologySource } from '@/lib/astrology-traditions'
 import { SITE_URL } from '@/lib/briefs-data'
+import {
+  ACTIVITY_RULE_APPLICATIONS,
+  ACTIVITY_RULE_CORPUS_VERSION,
+  STRUCTURED_VERDICT_VERSION,
+  resolveActivityVerdict,
+  type VerdictClassification,
+} from '@/lib/celestial-hypotheses/verdict'
+import { ACTIVITY_TYPES, type ActivityType } from '@/lib/celestial-hypotheses/types'
 import { CompilerRefusal, compileReport, type CompiledReport } from '@/lib/interpretation-compiler'
 import { buildLocalFactBundle } from '@/lib/local-fact-bundle'
 import { parseInstant } from '@/lib/muhurta-input'
@@ -32,7 +40,45 @@ const REASON_LABEL: Record<string, string> = {
   'panchanga-unavailable': 'No pañcāṅga derivable',
 }
 
-type SearchParams = Promise<{ at?: string; place?: string }>
+const ACTIVITY_LABELS: Record<ActivityType, string> = {
+  'software-release': 'Software release',
+  'content-publication': 'Content publication',
+  'outbound-campaign-send': 'Outbound campaign',
+  'meeting-scheduling': 'Meeting',
+  'travel-departure': 'Travel departure',
+  'equipment-maintenance-window': 'Equipment maintenance',
+  'batch-job-scheduling': 'Batch job',
+}
+
+const VERDICT_DISPLAY: Record<VerdictClassification, { label: string; summary: string; className: string }> = {
+  favorable: {
+    label: 'Favorable symbolic indication',
+    summary: 'Every mapped rule that applies points in the favorable direction for this activity.',
+    className: 'border-emerald-600/60 bg-emerald-950/20 text-emerald-200',
+  },
+  unfavorable: {
+    label: 'Unfavorable symbolic indication',
+    summary: 'Every mapped rule that applies points in the unfavorable direction for this activity.',
+    className: 'border-rose-600/60 bg-rose-950/20 text-rose-200',
+  },
+  conflicting: {
+    label: 'Conflicting indications',
+    summary: 'Applicable mappings point in opposite directions. The system preserves the conflict instead of averaging it.',
+    className: 'border-amber-600/60 bg-amber-950/20 text-amber-100',
+  },
+  'abstain-no-coverage': {
+    label: 'No activity-specific verdict',
+    summary: 'Rules describe this moment, but the current corpus does not defensibly map any of them to the selected activity.',
+    className: 'border-zinc-700 bg-zinc-950/70 text-zinc-200',
+  },
+  'abstain-unresolved-variant': {
+    label: 'Abstained — unresolved variant',
+    summary: 'A mapped rule applies, but its recorded scope disagreement is unresolved. The system refuses to choose a direction.',
+    className: 'border-amber-600/60 bg-amber-950/20 text-amber-100',
+  },
+}
+
+type SearchParams = Promise<{ at?: string; place?: string; activity?: string }>
 
 function Modules({ report }: { report: CompiledReport }) {
   return (
@@ -77,6 +123,9 @@ export default async function MuhurtaPage({ searchParams }: { searchParams: Sear
   const params = await searchParams
   const placeKey = params.place && PLACES[params.place] ? params.place : 'ujjain'
   const place = PLACES[placeKey]
+  const activityType: ActivityType = ACTIVITY_TYPES.includes(params.activity as ActivityType)
+    ? params.activity as ActivityType
+    : 'software-release'
   const { instant, invalid } = parseInstant(params.at)
 
   const factBundle = buildLocalFactBundle({ instant, latitudeDegrees: place.lat, longitudeDegrees: place.lon, elevationMeters: place.elevation })
@@ -91,6 +140,17 @@ export default async function MuhurtaPage({ searchParams }: { searchParams: Sear
   }
 
   const panchanga = report?.panchanga
+  const activityVerdict = report
+    ? resolveActivityVerdict({
+      activityType,
+      traditionId: report.traditionId,
+      applicableRuleIds: report.modules.map((entry) => entry.ruleId),
+    })
+    : null
+  const verdictDisplay = activityVerdict ? VERDICT_DISPLAY[activityVerdict.classification] : null
+  const verdictApplications = activityVerdict
+    ? activityVerdict.applicationIds.flatMap((id) => ACTIVITY_RULE_APPLICATIONS.filter((item) => item.id === id))
+    : []
 
   return (
     <main className="min-h-screen bg-[#0a0a0c] px-6 py-16 text-zinc-300 selection:bg-violet-400 selection:text-black sm:px-12">
@@ -120,6 +180,12 @@ export default async function MuhurtaPage({ searchParams }: { searchParams: Sear
               {Object.entries(PLACES).map(([key, value]) => <option key={key} value={key}>{value.label}</option>)}
             </select>
           </label>
+          <label className="flex flex-col gap-2">
+            <span className="font-mono text-[10px] uppercase tracking-widest text-zinc-500">Activity</span>
+            <select name="activity" defaultValue={activityType} className="border border-zinc-700 bg-black px-3 py-2 font-mono text-sm text-zinc-200">
+              {ACTIVITY_TYPES.map((activity) => <option key={activity} value={activity}>{ACTIVITY_LABELS[activity]}</option>)}
+            </select>
+          </label>
           <button type="submit" className="border border-violet-500 px-5 py-2 font-mono text-[10px] uppercase tracking-widest text-violet-300 hover:bg-violet-400 hover:text-black">Compile</button>
           {invalid && <p className="font-mono text-[10px] uppercase tracking-widest text-amber-400">Unparseable moment — using now</p>}
         </form>
@@ -146,6 +212,46 @@ export default async function MuhurtaPage({ searchParams }: { searchParams: Sear
                 {uncertain && <p className="mt-1 font-mono text-[9px] uppercase tracking-widest text-amber-400">Near boundary</p>}
               </div>
             ))}
+          </section>
+        )}
+
+        {activityVerdict && verdictDisplay && (
+          <section aria-labelledby="activity-verdict-heading" className={`mt-8 border p-6 sm:p-8 ${verdictDisplay.className}`}>
+            <div className="flex flex-wrap items-center justify-between gap-3">
+              <div>
+                <p className="font-mono text-[10px] uppercase tracking-[0.2em] opacity-70">Activity verdict · {ACTIVITY_LABELS[activityType]}</p>
+                <h2 id="activity-verdict-heading" className="mt-3 text-2xl font-semibold text-white sm:text-3xl">{verdictDisplay.label}</h2>
+              </div>
+              <span className="border border-current/30 px-3 py-1 font-mono text-[9px] uppercase tracking-widest">{activityVerdict.classification}</span>
+            </div>
+            <p className="mt-4 max-w-3xl text-sm leading-7 opacity-90">{verdictDisplay.summary}</p>
+
+            {verdictApplications.length > 0 ? (
+              <div className="mt-6 grid gap-3">
+                {verdictApplications.map((application) => (
+                  <article key={application.id} className="border border-current/20 bg-black/20 p-4">
+                    <div className="flex flex-wrap gap-2 font-mono text-[9px] uppercase tracking-widest opacity-75">
+                      <span>{application.direction}</span>
+                      <span>·</span>
+                      <span>{application.mappingProvenance}</span>
+                      <span>·</span>
+                      <span>{application.ruleId}</span>
+                    </div>
+                    <p className="mt-3 text-sm leading-6 text-zinc-200">{application.rationale}</p>
+                    {application.unresolvedVariant && (
+                      <p className="mt-3 border-l border-amber-400/60 pl-3 text-xs leading-5 text-amber-100">Unresolved variant group: {application.variantGroupId}. This forces abstention under the published resolution policy.</p>
+                    )}
+                  </article>
+                ))}
+              </div>
+            ) : (
+              <p className="mt-5 border-l border-current/40 pl-4 text-xs leading-6 opacity-80">No modern activity mapping was found among the rules that fired. This is a coverage gap, not a neutral or unfavorable prediction.</p>
+            )}
+
+            <div className="mt-6 border-t border-current/20 pt-5">
+              <p className="font-mono text-[9px] uppercase tracking-widest opacity-60">Preview only · not pre-registered · not empirically calibrated</p>
+              <p className="mt-2 max-w-3xl text-xs leading-6 opacity-75">This is the exact categorical resolution the current corpus would produce. A testable prediction still requires an objective KPI, target, outcome horizon, and immutable registration before the action.</p>
+            </div>
           </section>
         )}
 
@@ -188,6 +294,8 @@ export default async function MuhurtaPage({ searchParams }: { searchParams: Sear
                 <div><dt className="text-zinc-600">Report</dt><dd className="break-all text-zinc-300">{report.reportId}</dd></div>
                 <div><dt className="text-zinc-600">Compiler</dt><dd className="text-zinc-300">{report.provenance.compilerVersion}</dd></div>
                 <div><dt className="text-zinc-600">Registry</dt><dd className="text-zinc-300">{report.provenance.traditionRegistryVersion}</dd></div>
+                <div><dt className="text-zinc-600">Verdict contract</dt><dd className="text-zinc-300">{STRUCTURED_VERDICT_VERSION}</dd></div>
+                <div><dt className="text-zinc-600">Activity corpus</dt><dd className="text-zinc-300">{ACTIVITY_RULE_CORPUS_VERSION}</dd></div>
                 <div><dt className="text-zinc-600">Pañcāṅga</dt><dd className="text-zinc-300">{panchanga?.version ?? '—'}</dd></div>
                 <div className="sm:col-span-2"><dt className="text-zinc-600">Fact bundle</dt><dd className="break-all text-zinc-300">{report.provenance.factBundleId} · {report.provenance.factBundleSha256}</dd></div>
                 <div className="sm:col-span-2"><dt className="text-zinc-600">Input digest</dt><dd className="break-all text-zinc-300">{report.provenance.inputSha256}</dd></div>
