@@ -35,6 +35,10 @@ export const SELF_MANAGED_KEY_ROUTE_PREFIXES = [
   // operations token. Sending them through the customer credit gate consumes
   // the Authorization header before the registry can authenticate it.
   '/api/v1/celestial-hypotheses/',
+  // The event corpus shares the private registry bearer and service-role
+  // database boundary. It must reach its route-level gate with that bearer
+  // intact rather than being interpreted as a customer API key.
+  '/api/v1/celestial-corpus/',
 ] as const
 
 export const API_CORS_HEADERS = {

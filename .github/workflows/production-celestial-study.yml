@@ -1,0 +1,68 @@
+name: Production celestial study
+
+on:
+  workflow_dispatch:
+    inputs:
+      reason:
+        description: Why this synthetic Production study is needed (minimum 12 characters)
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: production-celestial-study
+  cancel-in-progress: false
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    environment:
+      name: production-canary
+      url: ${{ vars.PRODUCTION_CANARY_BASE_URL }}
+    env:
+      PRODUCTION_BASE_URL: ${{ vars.PRODUCTION_CANARY_BASE_URL }}
+      CELESTIAL_REGISTRY_TOKEN: ${{ secrets.CELESTIAL_REGISTRY_TOKEN }}
+      PRODUCTION_CELESTIAL_STUDY_OUTPUT_PATH: ${{ github.workspace }}/production-celestial-study.json
+    steps:
+      - name: Require a stated reason
+        env:
+          REASON: ${{ inputs.reason }}
+        run: test "${#REASON}" -ge 12
+
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+
+      - name: Run both synthetic research lifecycles
+        run: |
+          set -o pipefail
+          node --experimental-strip-types scripts/run-production-celestial-study.ts 2>&1 \
+            | tee "$RUNNER_TEMP/production-celestial-study.log"
+
+      - name: Publish sanitized summary
+        if: success()
+        run: |
+          echo '## Synthetic Production celestial study' >> "$GITHUB_STEP_SUMMARY"
+          echo '' >> "$GITHUB_STEP_SUMMARY"
+          echo 'The attached evidence passed the repository privacy denylist and contains no participant or personal chart fields.' >> "$GITHUB_STEP_SUMMARY"
+          echo '' >> "$GITHUB_STEP_SUMMARY"
+          echo '```json' >> "$GITHUB_STEP_SUMMARY"
+          cat "$PRODUCTION_CELESTIAL_STUDY_OUTPUT_PATH" >> "$GITHUB_STEP_SUMMARY"
+          echo '```' >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Upload sanitized provenance evidence
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: production-celestial-study-${{ github.run_id }}
+          path: |
+            ${{ env.PRODUCTION_CELESTIAL_STUDY_OUTPUT_PATH }}
+            ${{ runner.temp }}/production-celestial-study.log
+          if-no-files-found: warn
+          retention-days: 365
