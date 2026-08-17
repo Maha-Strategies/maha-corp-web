@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict'
+import { readFile } from 'node:fs/promises'
 import test from 'node:test'
 
 import { BirthInputError, buildBirthReport } from '../lib/birth-report.ts'
@@ -32,7 +33,17 @@ test('a birth report carries the pañcāṅga and its resolved instant', () => {
   assert.equal(report.panchanga.nakshatra.name, 'Bharaṇī')
   assert.equal(report.panchanga.tithi.paksha, 'kṛṣṇa')
   assert.ok(report.natalChart.placements.length === 9)
+  assert.equal(report.natalChart.houses.length, 12)
+  assert.ok(report.natalChart.aspects.length > 0)
   assert.ok(report.panchanga.ayanamsa.degrees > 23 && report.panchanga.ayanamsa.degrees < 24)
+})
+
+test('the public birth report renders chart relationships and their boundary', async () => {
+  const form = await readFile(new URL('../app/knowledge/birth/BirthForm.tsx', import.meta.url), 'utf8')
+  assert.match(form, /Relationships in the chart/)
+  assert.match(form, /Angular relationships/)
+  assert.match(form, /All twelve house rulers and occupants/)
+  assert.match(form, /No personality or outcome meaning is inferred here/)
 })
 
 test('the fact bundle carries all seven classical bodies', () => {

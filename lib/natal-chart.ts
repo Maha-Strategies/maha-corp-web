@@ -12,7 +12,7 @@ import { SiderealTime } from 'astronomy-engine'
 import { CLASSICAL_BODIES, classicalEclipticLongitude, type ClassicalBody } from './local-fact-bundle.ts'
 import { NAKSHATRA_NAMES, lahiriAyanamsa } from './panchanga.ts'
 
-export const NATAL_CHART_VERSION = 'natal-chart/0.1' as const
+export const NATAL_CHART_VERSION = 'natal-chart/0.2' as const
 
 export const ZODIAC_SIGNS = [
   'Aries', 'Taurus', 'Gemini', 'Cancer', 'Leo', 'Virgo',
@@ -22,6 +22,33 @@ export const ZODIAC_SIGNS = [
 export type ZodiacSign = typeof ZODIAC_SIGNS[number]
 export type ChartPointName = 'Ascendant' | ClassicalBody | 'Rahu' | 'Ketu'
 export type ChartMotion = 'direct' | 'retrograde' | 'stationary' | 'not-applicable'
+export type NatalAspectName = 'conjunction' | 'sextile' | 'square' | 'trine' | 'opposition'
+
+export interface NatalAspect {
+  first: ChartPointName
+  second: ChartPointName
+  name: NatalAspectName
+  exactAngle: 0 | 60 | 90 | 120 | 180
+  separationDegrees: number
+  orbDegrees: number
+  maximumOrbDegrees: number
+}
+
+export interface NatalHouse {
+  number: number
+  sign: ZodiacSign
+  ruler: ClassicalBody
+  rulerSign: ZodiacSign
+  rulerHouse: number
+  occupants: ChartPointName[]
+}
+
+export interface NodalAxis {
+  rahu: { sign: ZodiacSign; house: number }
+  ketu: { sign: ZodiacSign; house: number }
+  separationDegrees: number
+  method: string
+}
 
 export interface ZodiacPosition {
   longitude: number
@@ -55,6 +82,9 @@ export interface NatalChart {
   nodeModel: 'mean-lunar-node'
   ascendant: NatalChartPoint
   placements: NatalChartPoint[]
+  houses: NatalHouse[]
+  aspects: NatalAspect[]
+  nodalAxis: NodalAxis
   methodology: string[]
 }
 
@@ -62,12 +92,76 @@ const J2000_MS = Date.UTC(2000, 0, 1, 12)
 const DAY_MS = 86_400_000
 const NAKSHATRA_ARC = 360 / 27
 
+const TRADITIONAL_SIGN_RULERS: Record<ZodiacSign, ClassicalBody> = {
+  Aries: 'Mars', Taurus: 'Venus', Gemini: 'Mercury', Cancer: 'Moon',
+  Leo: 'Sun', Virgo: 'Mercury', Libra: 'Venus', Scorpio: 'Mars',
+  Sagittarius: 'Jupiter', Capricorn: 'Saturn', Aquarius: 'Saturn', Pisces: 'Jupiter',
+}
+
+const ASPECT_DEFINITIONS: { name: NatalAspectName; angle: NatalAspect['exactAngle']; maximumOrbDegrees: number }[] = [
+  { name: 'conjunction', angle: 0, maximumOrbDegrees: 8 },
+  { name: 'sextile', angle: 60, maximumOrbDegrees: 4 },
+  { name: 'square', angle: 90, maximumOrbDegrees: 6 },
+  { name: 'trine', angle: 120, maximumOrbDegrees: 6 },
+  { name: 'opposition', angle: 180, maximumOrbDegrees: 8 },
+]
+
 function normalize(degrees: number): number {
   return ((degrees % 360) + 360) % 360
 }
 
 function signedDifference(to: number, from: number): number {
   return ((to - from + 540) % 360) - 180
+}
+
+function angularSeparation(first: number, second: number): number {
+  return Math.abs(signedDifference(first, second))
+}
+
+function computeAspects(points: NatalChartPoint[]): NatalAspect[] {
+  const aspects: NatalAspect[] = []
+  for (let firstIndex = 0; firstIndex < points.length; firstIndex += 1) {
+    for (let secondIndex = firstIndex + 1; secondIndex < points.length; secondIndex += 1) {
+      const first = points[firstIndex]
+      const second = points[secondIndex]
+      const separationDegrees = angularSeparation(first.sidereal.longitude, second.sidereal.longitude)
+      for (const definition of ASPECT_DEFINITIONS) {
+        const orbDegrees = Math.abs(separationDegrees - definition.angle)
+        if (orbDegrees > definition.maximumOrbDegrees) continue
+        aspects.push({
+          first: first.name,
+          second: second.name,
+          name: definition.name,
+          exactAngle: definition.angle,
+          separationDegrees,
+          orbDegrees,
+          maximumOrbDegrees: definition.maximumOrbDegrees,
+        })
+      }
+    }
+  }
+  return aspects.sort((first, second) => first.orbDegrees - second.orbDegrees
+    || first.first.localeCompare(second.first) || first.second.localeCompare(second.second))
+}
+
+function computeHouses(ascendant: NatalChartPoint, placements: NatalChartPoint[]): NatalHouse[] {
+  const ascendantSignIndex = ZODIAC_SIGNS.indexOf(ascendant.sidereal.sign)
+  const pointMap = new Map(placements.map((placement) => [placement.name, placement]))
+  return Array.from({ length: 12 }, (_, index) => {
+    const number = index + 1
+    const sign = ZODIAC_SIGNS[(ascendantSignIndex + index) % 12]
+    const ruler = TRADITIONAL_SIGN_RULERS[sign]
+    const rulerPlacement = pointMap.get(ruler)
+    if (!rulerPlacement) throw new Error(`Natal chart is missing house ruler ${ruler}.`)
+    return {
+      number,
+      sign,
+      ruler,
+      rulerSign: rulerPlacement.sidereal.sign,
+      rulerHouse: rulerPlacement.wholeSignHouse,
+      occupants: placements.filter((placement) => placement.wholeSignHouse === number).map((placement) => placement.name),
+    }
+  })
 }
 
 function zodiacPosition(longitude: number): ZodiacPosition {
@@ -186,6 +280,16 @@ export function computeNatalChart(input: NatalChartInput): NatalChart {
     'Point exactly opposite the mean ascending lunar node.',
   )
 
+  const placements = [...classical, rahu, ketu]
+  const houses = computeHouses(ascendant, placements)
+  const aspects = computeAspects([ascendant, ...placements])
+  const nodalAxis: NodalAxis = {
+    rahu: { sign: rahu.sidereal.sign, house: rahu.wholeSignHouse },
+    ketu: { sign: ketu.sidereal.sign, house: ketu.wholeSignHouse },
+    separationDegrees: angularSeparation(rahu.sidereal.longitude, ketu.sidereal.longitude),
+    method: 'Ketu is defined as the point exactly opposite the mean ascending lunar node.',
+  }
+
   return {
     version: NATAL_CHART_VERSION,
     instantUtc: instant.toISOString(),
@@ -193,11 +297,16 @@ export function computeNatalChart(input: NatalChartInput): NatalChart {
     houseSystem: 'whole-sign',
     nodeModel: 'mean-lunar-node',
     ascendant,
-    placements: [...classical, rahu, ketu],
+    placements,
+    houses,
+    aspects,
+    nodalAxis,
     methodology: [
       'Tropical positions use the true equinox of date; Lahiri sidereal positions subtract the stated ayanāṁśa.',
       'Houses are whole-sign houses counted from the Lahiri-sidereal ascendant sign.',
       'Rahu is the mean ascending lunar node and Ketu is its exact opposite; true-node charts can differ slightly.',
+      'House rulers use the traditional seven-planet rulership scheme; nodes do not rule signs in this calculation.',
+      'Displayed aspects are geometric classifications using declared maximum orbs: conjunction 8°, sextile 4°, square 6°, trine 6°, opposition 8°. Orb choices are conventions and vary by tradition.',
       'Signs, houses, nakṣatras, and pādas are chart classifications, not evidence that interpretations predict outcomes.',
     ],
   }
