@@ -18,10 +18,11 @@ import {
 } from './astrology-traditions.ts'
 import { CompilerRefusal, compileReport } from './interpretation-compiler.ts'
 import { buildLocalFactBundle } from './local-fact-bundle.ts'
+import { computeNatalChart, type NatalChart } from './natal-chart.ts'
 import { computePanchanga, type Panchanga } from './panchanga.ts'
 import { ZonedTimeError, zonedWallTimeToUtc, type CivilTimeFold } from './zoned-time.ts'
 
-export const BIRTH_REPORT_VERSION = 'birth-report/0.1' as const
+export const BIRTH_REPORT_VERSION = 'birth-report/0.2' as const
 
 export interface BirthInput {
   /** `YYYY-MM-DD` local to the birth place. */
@@ -78,6 +79,7 @@ export interface BirthReport {
   latitudeDegrees: number
   longitudeDegrees: number
   panchanga: Panchanga
+  natalChart: NatalChart
   factBundleId: string
   traditions: RenderedTraditionReport[]
   /** Values too close to a division edge to assert at this instant. */
@@ -149,6 +151,7 @@ export function buildBirthReport(input: BirthInput): BirthReport {
   const elevationMeters = Number.isFinite(Number(input.elevationMeters)) ? Number(input.elevationMeters) : 0
   const panchanga = computePanchanga({ instant: resolved.instant, latitudeDegrees: latitude, longitudeDegrees: longitude, elevationMeters })
   const factBundle = buildLocalFactBundle({ instant: resolved.instant, latitudeDegrees: latitude, longitudeDegrees: longitude, elevationMeters })
+  const natalChart = computeNatalChart({ instant: resolved.instant, latitudeDegrees: latitude, longitudeDegrees: longitude })
 
   return {
     version: BIRTH_REPORT_VERSION,
@@ -160,6 +163,7 @@ export function buildBirthReport(input: BirthInput): BirthReport {
     latitudeDegrees: latitude,
     longitudeDegrees: longitude,
     panchanga,
+    natalChart,
     factBundleId: factBundle.bundleId,
     traditions: [
       compileFor(factBundle, 'vedic-jyotisha', 'natal'),

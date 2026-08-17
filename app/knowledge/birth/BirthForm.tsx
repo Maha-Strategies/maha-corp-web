@@ -4,6 +4,7 @@ import { useActionState, useEffect, useMemo, useRef, useState } from 'react'
 
 import { BIRTH_PLACES, birthPlaceKey, findBirthPlace } from '@/lib/birth-places'
 import type { BirthReport, RenderedTraditionReport } from '@/lib/birth-report'
+import type { NatalChartPoint } from '@/lib/natal-chart'
 import type { PlaceSearchResult } from '@/lib/place-search'
 import { groupTimeZones, timeZoneLabel } from '@/lib/time-zones'
 
@@ -29,6 +30,100 @@ function Limb({ label, value, detail, uncertain }: { label: string; value: strin
       <p className="mt-1 font-mono text-[10px] text-zinc-600">{detail}</p>
       {uncertain && <p className="mt-2 font-mono text-[9px] uppercase tracking-widest text-amber-400">Near a boundary — not asserted</p>}
     </div>
+  )
+}
+
+function zodiacDegree(point: NatalChartPoint, frame: 'sidereal' | 'tropical'): string {
+  const position = point[frame]
+  const degrees = Math.floor(position.degreeInSign)
+  const minutes = Math.floor((position.degreeInSign - degrees) * 60)
+  return `${position.sign} ${degrees}°${String(minutes).padStart(2, '0')}′`
+}
+
+function motionLabel(point: NatalChartPoint): string {
+  if (point.motion === 'not-applicable') return '—'
+  if (point.motion === 'retrograde') return 'Retrograde'
+  if (point.motion === 'stationary') return 'Stationary'
+  return 'Direct'
+}
+
+function ChartSummary({ report }: { report: BirthReport }) {
+  const chart = report.natalChart
+  const moon = chart.placements.find((point) => point.name === 'Moon')!
+  const sun = chart.placements.find((point) => point.name === 'Sun')!
+  const order = ['Ascendant', 'Sun', 'Moon', 'Mars', 'Mercury', 'Jupiter', 'Venus', 'Saturn', 'Rahu', 'Ketu']
+  const points = [chart.ascendant, ...chart.placements].sort((a, b) => order.indexOf(a.name) - order.indexOf(b.name))
+
+  return (
+    <>
+      <section className="mt-8 border border-violet-800/50 bg-violet-950/10 p-6">
+        <div className="flex flex-wrap items-start justify-between gap-4">
+          <div>
+            <p className={LABEL}>Your chart map</p>
+            <h2 className="mt-2 text-3xl font-semibold text-white">Lahiri sidereal · whole-sign houses</h2>
+          </div>
+          <span className="border border-emerald-600/40 bg-emerald-500/10 px-3 py-1 font-mono text-[9px] uppercase tracking-widest text-emerald-300">Computed chart facts</span>
+        </div>
+        <p className="mt-4 max-w-3xl text-sm leading-6 text-zinc-400">This is the stable natal baseline used for later timing comparisons. It tells you where each point falls under the declared chart conventions; it does not by itself establish what those placements mean or predict.</p>
+
+        <div className="mt-6 grid gap-3 sm:grid-cols-3">
+          {[
+            ['Ascendant', zodiacDegree(chart.ascendant, 'sidereal'), `${chart.ascendant.nakshatra.name} · pāda ${chart.ascendant.nakshatra.pada}`],
+            ['Moon', zodiacDegree(moon, 'sidereal'), `House ${moon.wholeSignHouse} · ${moon.nakshatra.name} ${moon.nakshatra.pada}`],
+            ['Sun', zodiacDegree(sun, 'sidereal'), `House ${sun.wholeSignHouse} · ${sun.nakshatra.name} ${sun.nakshatra.pada}`],
+          ].map(([label, value, detail]) => (
+            <div key={label} className="border border-zinc-800 bg-black/40 p-4">
+              <p className={LABEL}>{label}</p>
+              <p className="mt-2 text-xl text-white">{value}</p>
+              <p className="mt-1 font-mono text-[10px] text-zinc-500">{detail}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section className="mt-6 border border-zinc-800 bg-zinc-950/60 p-6">
+        <div className="flex flex-wrap items-baseline justify-between gap-3">
+          <h2 className="text-2xl font-semibold text-white">Complete placement table</h2>
+          <p className="font-mono text-[9px] uppercase tracking-widest text-zinc-600">Mean node · astronomy-engine 2.1.19</p>
+        </div>
+        <div className="mt-5 overflow-x-auto">
+          <table className="w-full min-w-[760px] border-collapse text-left">
+            <thead className="border-b border-zinc-700 font-mono text-[9px] uppercase tracking-widest text-zinc-500">
+              <tr>
+                <th className="px-3 py-3">Point</th>
+                <th className="px-3 py-3">Lahiri sidereal</th>
+                <th className="px-3 py-3">House</th>
+                <th className="px-3 py-3">Nakṣatra</th>
+                <th className="px-3 py-3">Pāda</th>
+                <th className="px-3 py-3">Tropical comparison</th>
+                <th className="px-3 py-3">Motion</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-zinc-900">
+              {points.map((point) => (
+                <tr key={point.name} className="text-sm text-zinc-300">
+                  <th className="px-3 py-3 font-medium text-white">{point.name}</th>
+                  <td className="px-3 py-3 font-mono text-xs text-violet-200">{zodiacDegree(point, 'sidereal')}</td>
+                  <td className="px-3 py-3">{point.wholeSignHouse}</td>
+                  <td className="px-3 py-3">{point.nakshatra.name}</td>
+                  <td className="px-3 py-3">{point.nakshatra.pada}</td>
+                  <td className="px-3 py-3 font-mono text-xs text-zinc-500">{zodiacDegree(point, 'tropical')}</td>
+                  <td className={`px-3 py-3 text-xs ${point.motion === 'retrograde' ? 'text-amber-300' : 'text-zinc-500'}`}>{motionLabel(point)}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        <details className="mt-5 border-t border-zinc-800 pt-4">
+          <summary className="cursor-pointer font-mono text-[10px] uppercase tracking-widest text-zinc-400">Calculation choices and boundaries</summary>
+          <ul className="mt-3 space-y-2">
+            {chart.methodology.map((item) => <li key={item} className="border-l border-zinc-800 pl-3 text-xs leading-5 text-zinc-500">{item}</li>)}
+          </ul>
+          <p className="mt-3 font-mono text-[10px] text-zinc-600">Ayanāṁśa {chart.ayanamsa.degrees.toFixed(6)}° · {chart.version}</p>
+        </details>
+      </section>
+    </>
   )
 }
 
@@ -101,14 +196,26 @@ function Report({ report }: { report: BirthReport }) {
         {report.nonexistentLocalTime && <p className="text-amber-400">That local time does not exist on this date — the clocks moved forward over it. The instant shown is the reading after the transition.</p>}
       </section>
 
-      <section className="mt-6 grid gap-3 sm:grid-cols-3 lg:grid-cols-5">
+      <ChartSummary report={report} />
+
+      <section className="mt-10">
+        <div className="flex flex-wrap items-baseline justify-between gap-3">
+          <h2 className="text-2xl font-semibold text-white">Birth pañcāṅga</h2>
+          <p className="font-mono text-[9px] uppercase tracking-widest text-zinc-600">Sun–Moon calendrical geometry</p>
+        </div>
+        <div className="mt-4 grid gap-3 sm:grid-cols-3 lg:grid-cols-5">
         <Limb label="Janma nakṣatra" value={p.nakshatra.name} detail={`${p.nakshatra.index}/27 · ${(p.nakshatra.fraction * 100).toFixed(1)}% elapsed`} uncertain={p.nakshatra.nearBoundary} />
         <Limb label="Tithi" value={p.tithi.name} detail={`${p.tithi.paksha} · ${p.tithi.absoluteIndex}/30`} uncertain={p.tithi.nearBoundary} />
         <Limb label="Yoga" value={p.yoga.name} detail={`${p.yoga.index}/27`} uncertain={p.yoga.nearBoundary} />
         <Limb label="Karaṇa" value={p.karana.name} detail={`${p.karana.index}/60`} uncertain={p.karana.nearBoundary} />
         <Limb label="Vāra" value={p.vara.name} detail="sunrise to sunrise" uncertain={false} />
+        </div>
       </section>
 
+      <section className="mt-10 border-t border-zinc-800 pt-8">
+        <h2 className="text-2xl font-semibold text-white">Source-bound tradition notes</h2>
+        <p className="mt-3 max-w-3xl text-sm leading-6 text-zinc-500">Only rules tied to a named tradition and transcribed passage appear below. These are historical or contemporary interpretive claims—not additional chart facts and not empirically validated predictions.</p>
+      </section>
       {report.traditions.map((tradition) => <TraditionSection key={tradition.traditionId} tradition={tradition} />)}
     </div>
   )
