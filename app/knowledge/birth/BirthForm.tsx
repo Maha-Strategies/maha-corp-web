@@ -10,6 +10,7 @@ import type { PlaceSearchResult } from '@/lib/place-search'
 import { groupTimeZones, timeZoneLabel } from '@/lib/time-zones'
 
 import { computeBirthReport, type BirthActionState } from './actions'
+import EvidenceBundlePanel from '@/app/celestial/components/EvidenceBundlePanel'
 
 const REASON_LABEL: Record<string, string> = {
   'chart-type-mismatch': 'Belongs to a different chart type',
@@ -491,6 +492,8 @@ function Report({ report }: { report: BirthReport }) {
         {report.fold === 'earlier-offset' && <p className="text-amber-400">That local time occurs twice on this date; the earlier occurrence was used.</p>}
         {report.nonexistentLocalTime && <p className="text-amber-400">That local time does not exist on this date — the clocks moved forward over it. The instant shown is the reading after the transition.</p>}
       </section>
+
+      <EvidenceBundlePanel bundle={report.evidenceBundle} />
 
       <ChartSummary report={report} />
       <ChartStructure report={report} />

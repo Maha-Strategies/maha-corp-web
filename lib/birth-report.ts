@@ -16,6 +16,11 @@ import {
   getAstrologyTradition,
   type AstrologyChartType,
 } from './astrology-traditions.ts'
+import {
+  buildCelestialEvidenceBundle,
+  type CelestialEvidenceBundle,
+  type EvidenceTradition,
+} from './celestial-evidence.ts'
 import { CompilerRefusal, compileReport } from './interpretation-compiler.ts'
 import {
   HistoricalCalibrationError,
@@ -29,7 +34,7 @@ import { computeNatalTiming, type NatalTiming } from './natal-timing.ts'
 import { computePanchanga, type Panchanga } from './panchanga.ts'
 import { ZonedTimeError, zonedWallTimeToUtc, type CivilTimeFold } from './zoned-time.ts'
 
-export const BIRTH_REPORT_VERSION = 'birth-report/0.5' as const
+export const BIRTH_REPORT_VERSION = 'birth-report/0.6' as const
 
 export interface BirthInput {
   /** `YYYY-MM-DD` local to the birth place. */
@@ -46,6 +51,8 @@ export interface BirthInput {
   timingInstantUtc?: string
   /** Optional evidence-bounded events used only for an in-request exploratory calibration. */
   historicalMilestones?: HistoricalMilestoneInput[]
+  /** Explicit issuance clock for the attached Evidence Bundle. */
+  evidenceIssuedAtUtc?: string
 }
 
 export interface RenderedPassage {
@@ -95,11 +102,34 @@ export interface BirthReport {
   historicalCalibration: HistoricalCalibration | null
   factBundleId: string
   traditions: RenderedTraditionReport[]
+  evidenceBundle: CelestialEvidenceBundle
   /** Values too close to a division edge to assert at this instant. */
   uncertainLimbs: string[]
 }
 
 export class BirthInputError extends Error {}
+
+function evidenceTraditions(traditions: RenderedTraditionReport[]): EvidenceTradition[] {
+  return traditions.map((tradition) => ({
+    traditionId: tradition.traditionId,
+    traditionName: tradition.traditionName,
+    chartType: tradition.chartType,
+    reportId: tradition.reportId,
+    inputSha256: tradition.inputSha256,
+    modules: tradition.modules.map((module) => ({
+      id: module.id,
+      heading: module.heading,
+      ruleId: module.ruleId,
+      interpretation: module.paragraph,
+      observedLimbs: [...module.observedLimbs],
+      disagreements: [...module.disagreements],
+      boundary: module.boundary,
+      passages: module.passages,
+    })),
+    withheld: tradition.withheld,
+    refusal: tradition.refusal,
+  }))
+}
 
 function renderPassages(passageIds: string[]): RenderedPassage[] {
   return passageIds.flatMap((passageId) => {
@@ -192,6 +222,26 @@ export function buildBirthReport(input: BirthInput): BirthReport {
     }
   }
 
+  const traditions = [
+    compileFor(factBundle, 'vedic-jyotisha', 'natal'),
+    compileFor(factBundle, 'hellenistic-ptolemaic', 'natal'),
+  ]
+  const issuedAtUtc = input.evidenceIssuedAtUtc ?? timing.referenceInstantUtc
+  const evidenceBundle = buildCelestialEvidenceBundle({
+    issuedAtUtc,
+    reportVersion: BIRTH_REPORT_VERSION,
+    instantUtc: resolved.instant.toISOString(),
+    utcOffset: resolved.utcOffset,
+    fold: resolved.fold,
+    nonexistentLocalTime: resolved.nonexistent,
+    factBundle,
+    panchanga,
+    natalChart,
+    timing,
+    traditions: evidenceTraditions(traditions),
+    historicalCalibration,
+  })
+
   return {
     version: BIRTH_REPORT_VERSION,
     instantUtc: resolved.instant.toISOString(),
@@ -206,10 +256,8 @@ export function buildBirthReport(input: BirthInput): BirthReport {
     timing,
     historicalCalibration,
     factBundleId: factBundle.bundleId,
-    traditions: [
-      compileFor(factBundle, 'vedic-jyotisha', 'natal'),
-      compileFor(factBundle, 'hellenistic-ptolemaic', 'natal'),
-    ],
+    traditions,
+    evidenceBundle,
     uncertainLimbs: panchanga.uncertainLimbs,
   }
 }

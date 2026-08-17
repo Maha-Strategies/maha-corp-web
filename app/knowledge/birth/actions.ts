@@ -38,6 +38,7 @@ export async function computeBirthReport(_previous: BirthActionState, formData: 
       placeLabel: String(formData.get('placeLabel') ?? ''),
       timingInstantUtc: timingMoment ? `${timingMoment}:00.000Z` : undefined,
       historicalMilestones,
+      evidenceIssuedAtUtc: new Date().toISOString(),
     })
     return { status: 'ok', report }
   } catch (error) {

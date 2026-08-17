@@ -150,12 +150,12 @@ export default function KnowledgePage() {
               <p className="mt-4 border-l border-rose-700/60 pl-3 text-xs leading-5 text-rose-200">Every withheld rule is shown with its reason, so the reading cannot look stronger than it is.</p>
               <p className="mt-6 font-mono text-[10px] uppercase tracking-widest text-zinc-600 group-hover:text-violet-300">Compile a moment →</p>
             </Link>
-            <Link href="/knowledge/birth" className="group border border-violet-900/60 bg-violet-950/10 p-6 transition-colors hover:border-violet-400">
-              <p className="font-mono text-[10px] uppercase tracking-widest text-violet-300">Compiled verdict · natal</p>
-              <h2 className="mt-4 text-2xl font-semibold text-white group-hover:text-violet-200">Birth pañcāṅga</h2>
+            <Link href="/celestial/birth" className="group border border-violet-900/60 bg-violet-950/10 p-6 transition-colors hover:border-violet-400">
+              <p className="font-mono text-[10px] uppercase tracking-widest text-violet-300">Separate vertical · Maha Celestial</p>
+              <h2 className="mt-4 text-2xl font-semibold text-white group-hover:text-violet-200">Evidence-bound birth report</h2>
               <p className="mt-3 text-sm leading-6 text-zinc-400">Janma nakṣatra, tithi, yoga, karaṇa and vāra for a birth moment, with every sourced rule that applies to them.</p>
               <p className="mt-4 border-l border-rose-700/60 pl-3 text-xs leading-5 text-rose-200">Not a personality reading. Character, appearance and health rules are withheld by policy and shown as withheld.</p>
-              <p className="mt-6 font-mono text-[10px] uppercase tracking-widest text-zinc-600 group-hover:text-violet-300">Enter a birth moment →</p>
+              <p className="mt-6 font-mono text-[10px] uppercase tracking-widest text-zinc-600 group-hover:text-violet-300">Continue to Maha Celestial →</p>
             </Link>
           </div>
         </div>

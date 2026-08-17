@@ -38,11 +38,14 @@ test('a birth report carries the pañcāṅga and its resolved instant', () => {
   assert.equal(report.timing.referenceInstantUtc, report.instantUtc)
   assert.equal(report.timing.vimshottari.activeMahadasha.activeAtReference, true)
   assert.equal(report.historicalCalibration, null)
+  assert.equal(report.evidenceBundle.astronomicalFacts.bundleId, report.factBundleId)
+  assert.equal(report.evidenceBundle.issuer.product, 'Maha Celestial')
   assert.ok(report.panchanga.ayanamsa.degrees > 23 && report.panchanga.ayanamsa.degrees < 24)
 })
 
 test('the public birth report renders chart relationships and their boundary', async () => {
   const form = await readFile(new URL('../app/knowledge/birth/BirthForm.tsx', import.meta.url), 'utf8')
+  const evidencePanel = await readFile(new URL('../app/celestial/components/EvidenceBundlePanel.tsx', import.meta.url), 'utf8')
   assert.match(form, /Relationships in the chart/)
   assert.match(form, /Angular relationships/)
   assert.match(form, /All twelve house rulers and occupants/)
@@ -54,6 +57,7 @@ test('the public birth report renders chart relationships and their boundary', a
   assert.match(form, /Historical calibration/)
   assert.match(form, /hypothesis generation only/i)
   assert.match(form, /not stored/)
+  assert.match(evidencePanel, /Maha Celestial Evidence Bundle/)
 })
 
 test('the report accepts an explicit reproducible timing moment', () => {

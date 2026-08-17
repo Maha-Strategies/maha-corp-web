@@ -34,6 +34,9 @@ const PRIVATE_ROUTES = new Set([
   '/api/v1/celestial-corpus/corpora/[corpusId]/lock',
   '/api/v1/celestial-corpus/corpora/[corpusId]/schedule',
   '/api/v1/celestial-corpus/corpora/[corpusId]/observations',
+  // Standalone Maha Celestial verifier UI backend. The vertical will publish
+  // its own commercial API contract rather than entering the enterprise spec.
+  '/api/v1/celestial/evidence/verify',
   '/api/admin/mps-operations/actions',
   '/api/admin/commercial-api-metering',
   '/api/admin/chargeback-export',

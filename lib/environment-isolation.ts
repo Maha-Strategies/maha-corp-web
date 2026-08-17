@@ -68,6 +68,7 @@ export const ISOLATION_POLICY: Readonly<Record<string, IsolationTier>> = {
   PUBLIC_UTILITY_RATE_LIMIT_SECRET: 'must_differ',
   TURNSTILE_SECRET_KEY: 'must_differ',
   RESEND_API_KEY: 'must_differ',
+  MAHA_CELESTIAL_EVIDENCE_PRIVATE_KEY: 'must_differ',
 
   // Live price identifiers. A live price with a test key simply fails, so this
   // is correctness rather than security.
