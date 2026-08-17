@@ -1,0 +1,204 @@
+/**
+ * Deterministic natal chart geometry.
+ *
+ * Planetary longitudes and the horizon intersection are calculations. The
+ * Lahiri subtraction, mean-node choice, and whole-sign house assignment are
+ * declared chart conventions. Keeping those labels in the returned object
+ * prevents a useful chart table from masquerading as empirical interpretation.
+ */
+
+import { SiderealTime } from 'astronomy-engine'
+
+import { CLASSICAL_BODIES, classicalEclipticLongitude, type ClassicalBody } from './local-fact-bundle.ts'
+import { NAKSHATRA_NAMES, lahiriAyanamsa } from './panchanga.ts'
+
+export const NATAL_CHART_VERSION = 'natal-chart/0.1' as const
+
+export const ZODIAC_SIGNS = [
+  'Aries', 'Taurus', 'Gemini', 'Cancer', 'Leo', 'Virgo',
+  'Libra', 'Scorpio', 'Sagittarius', 'Capricorn', 'Aquarius', 'Pisces',
+] as const
+
+export type ZodiacSign = typeof ZODIAC_SIGNS[number]
+export type ChartPointName = 'Ascendant' | ClassicalBody | 'Rahu' | 'Ketu'
+export type ChartMotion = 'direct' | 'retrograde' | 'stationary' | 'not-applicable'
+
+export interface ZodiacPosition {
+  longitude: number
+  sign: ZodiacSign
+  degreeInSign: number
+}
+
+export interface NakshatraPosition {
+  index: number
+  name: string
+  pada: 1 | 2 | 3 | 4
+  fraction: number
+}
+
+export interface NatalChartPoint {
+  name: ChartPointName
+  tropical: ZodiacPosition
+  sidereal: ZodiacPosition
+  nakshatra: NakshatraPosition
+  wholeSignHouse: number
+  motion: ChartMotion
+  dailyMotionDegrees: number | null
+  method: string
+}
+
+export interface NatalChart {
+  version: typeof NATAL_CHART_VERSION
+  instantUtc: string
+  ayanamsa: { name: 'lahiri'; degrees: number }
+  houseSystem: 'whole-sign'
+  nodeModel: 'mean-lunar-node'
+  ascendant: NatalChartPoint
+  placements: NatalChartPoint[]
+  methodology: string[]
+}
+
+const J2000_MS = Date.UTC(2000, 0, 1, 12)
+const DAY_MS = 86_400_000
+const NAKSHATRA_ARC = 360 / 27
+
+function normalize(degrees: number): number {
+  return ((degrees % 360) + 360) % 360
+}
+
+function signedDifference(to: number, from: number): number {
+  return ((to - from + 540) % 360) - 180
+}
+
+function zodiacPosition(longitude: number): ZodiacPosition {
+  const normalized = normalize(longitude)
+  const signIndex = Math.floor(normalized / 30)
+  return { longitude: normalized, sign: ZODIAC_SIGNS[signIndex], degreeInSign: normalized % 30 }
+}
+
+function nakshatraPosition(siderealLongitude: number): NakshatraPosition {
+  const normalized = normalize(siderealLongitude)
+  const raw = normalized / NAKSHATRA_ARC
+  const index = Math.floor(raw)
+  const fraction = raw - index
+  return {
+    index: index + 1,
+    name: NAKSHATRA_NAMES[index],
+    pada: (Math.floor(fraction * 4) + 1) as 1 | 2 | 3 | 4,
+    fraction,
+  }
+}
+
+function wholeSignHouse(siderealLongitude: number, ascendantSiderealLongitude: number): number {
+  const sign = Math.floor(normalize(siderealLongitude) / 30)
+  const ascendantSign = Math.floor(normalize(ascendantSiderealLongitude) / 30)
+  return ((sign - ascendantSign + 12) % 12) + 1
+}
+
+/** IAU-style mean obliquity, sufficient to far below displayed ascendant precision. */
+function meanObliquityDegrees(instant: Date): number {
+  const centuries = (instant.getTime() - J2000_MS) / (36_525 * DAY_MS)
+  const arcseconds = 21.448 - 46.815 * centuries - 0.00059 * centuries ** 2 + 0.001813 * centuries ** 3
+  return 23 + 26 / 60 + arcseconds / 3600
+}
+
+/** Eastern intersection of the ecliptic and local horizon, tropical longitude of date. */
+export function tropicalAscendantLongitude(instant: Date, latitudeDegrees: number, longitudeDegrees: number): number {
+  const radians = Math.PI / 180
+  const localSidereal = normalize(SiderealTime(instant) * 15 + longitudeDegrees) * radians
+  const latitude = latitudeDegrees * radians
+  const obliquity = meanObliquityDegrees(instant) * radians
+  const longitude = Math.atan2(
+    Math.cos(localSidereal),
+    -(Math.sin(localSidereal) * Math.cos(obliquity) + Math.tan(latitude) * Math.sin(obliquity)),
+  ) / radians
+  return normalize(longitude)
+}
+
+/** Mean ascending lunar node in the ecliptic of date (Meeus polynomial). */
+export function meanNodeLongitude(instant: Date): number {
+  const centuries = (instant.getTime() - J2000_MS) / (36_525 * DAY_MS)
+  return normalize(125.04452 - 1934.136261 * centuries + 0.0020708 * centuries ** 2 + centuries ** 3 / 450_000)
+}
+
+function point(
+  name: ChartPointName,
+  tropicalLongitude: number,
+  ayanamsa: number,
+  ascendantSidereal: number,
+  motion: ChartMotion,
+  dailyMotionDegrees: number | null,
+  method: string,
+): NatalChartPoint {
+  const siderealLongitude = normalize(tropicalLongitude - ayanamsa)
+  return {
+    name,
+    tropical: zodiacPosition(tropicalLongitude),
+    sidereal: zodiacPosition(siderealLongitude),
+    nakshatra: nakshatraPosition(siderealLongitude),
+    wholeSignHouse: wholeSignHouse(siderealLongitude, ascendantSidereal),
+    motion,
+    dailyMotionDegrees,
+    method,
+  }
+}
+
+function classicalMotion(body: ClassicalBody, instant: Date): { motion: ChartMotion; dailyMotionDegrees: number } {
+  const later = new Date(instant.getTime() + DAY_MS)
+  const dailyMotionDegrees = signedDifference(classicalEclipticLongitude(body, later), classicalEclipticLongitude(body, instant))
+  const motion: ChartMotion = Math.abs(dailyMotionDegrees) < 0.01 ? 'stationary' : dailyMotionDegrees < 0 ? 'retrograde' : 'direct'
+  return { motion, dailyMotionDegrees }
+}
+
+export interface NatalChartInput {
+  instant: Date
+  latitudeDegrees: number
+  longitudeDegrees: number
+}
+
+export function computeNatalChart(input: NatalChartInput): NatalChart {
+  const { instant, latitudeDegrees, longitudeDegrees } = input
+  const ayanamsa = lahiriAyanamsa(instant)
+  const ascendantTropical = tropicalAscendantLongitude(instant, latitudeDegrees, longitudeDegrees)
+  const ascendantSidereal = normalize(ascendantTropical - ayanamsa)
+  const ascendant = point(
+    'Ascendant', ascendantTropical, ayanamsa, ascendantSidereal, 'not-applicable', null,
+    'Eastern ecliptic–horizon intersection; local apparent sidereal time and mean obliquity of date.',
+  )
+
+  const classical = CLASSICAL_BODIES.map((body) => {
+    const motion = classicalMotion(body, instant)
+    return point(
+      body, classicalEclipticLongitude(body, instant), ayanamsa, ascendantSidereal,
+      motion.motion, motion.dailyMotionDegrees,
+      'Apparent geocentric ecliptic longitude of date from astronomy-engine 2.1.19.',
+    )
+  })
+
+  const rahuTropical = meanNodeLongitude(instant)
+  const nodeDailyMotion = signedDifference(meanNodeLongitude(new Date(instant.getTime() + DAY_MS)), rahuTropical)
+  const rahu = point(
+    'Rahu', rahuTropical, ayanamsa, ascendantSidereal, 'retrograde', nodeDailyMotion,
+    'Mean ascending lunar node; Meeus polynomial, not the true oscillating node.',
+  )
+  const ketu = point(
+    'Ketu', normalize(rahuTropical + 180), ayanamsa, ascendantSidereal, 'retrograde', nodeDailyMotion,
+    'Point exactly opposite the mean ascending lunar node.',
+  )
+
+  return {
+    version: NATAL_CHART_VERSION,
+    instantUtc: instant.toISOString(),
+    ayanamsa: { name: 'lahiri', degrees: ayanamsa },
+    houseSystem: 'whole-sign',
+    nodeModel: 'mean-lunar-node',
+    ascendant,
+    placements: [...classical, rahu, ketu],
+    methodology: [
+      'Tropical positions use the true equinox of date; Lahiri sidereal positions subtract the stated ayanāṁśa.',
+      'Houses are whole-sign houses counted from the Lahiri-sidereal ascendant sign.',
+      'Rahu is the mean ascending lunar node and Ketu is its exact opposite; true-node charts can differ slightly.',
+      'Signs, houses, nakṣatras, and pādas are chart classifications, not evidence that interpretations predict outcomes.',
+    ],
+  }
+}

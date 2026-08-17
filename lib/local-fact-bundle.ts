@@ -46,7 +46,7 @@ function normalize(degrees: number): number {
 export const CLASSICAL_BODIES = ['Sun', 'Moon', 'Mercury', 'Venus', 'Mars', 'Jupiter', 'Saturn'] as const
 export type ClassicalBody = typeof CLASSICAL_BODIES[number]
 
-function eclipticLongitude(body: ClassicalBody, instant: Date): number {
+export function classicalEclipticLongitude(body: ClassicalBody, instant: Date): number {
   if (body === 'Sun') return SunPosition(instant).elon
   if (body === 'Moon') return EclipticGeoMoon(instant).lon
   return Ecliptic(GeoVector(Body[body], instant, true)).elon
@@ -64,7 +64,7 @@ export function buildLocalFactBundle(input: LocalBundleInput): CelestialFactBund
   const { instant, latitudeDegrees, longitudeDegrees, elevationMeters = 0, observerId = 'obs-local' } = input
   const iso = instant.toISOString()
 
-  const positions: [string, number][] = CLASSICAL_BODIES.map((body) => [body, normalize(eclipticLongitude(body, instant))])
+  const positions: [string, number][] = CLASSICAL_BODIES.map((body) => [body, normalize(classicalEclipticLongitude(body, instant))])
 
   const facts: CelestialPositionFact[] = positions.map(([name, longitude]) => ({
     id: `fact-${name.toLowerCase()}`,

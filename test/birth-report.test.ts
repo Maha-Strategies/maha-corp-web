@@ -31,6 +31,7 @@ test('a birth report carries the pañcāṅga and its resolved instant', () => {
   assert.equal(report.utcOffset, '+05:30')
   assert.equal(report.panchanga.nakshatra.name, 'Bharaṇī')
   assert.equal(report.panchanga.tithi.paksha, 'kṛṣṇa')
+  assert.ok(report.natalChart.placements.length === 9)
   assert.ok(report.panchanga.ayanamsa.degrees > 23 && report.panchanga.ayanamsa.degrees < 24)
 })
 

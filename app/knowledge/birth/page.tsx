@@ -9,8 +9,8 @@ import BirthForm from './BirthForm'
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  title: 'Birth pañcāṅga | Maha Strategies',
-  description: 'The calendrical facts of a birth moment — janma nakṣatra, tithi, yoga, karaṇa, vāra — with every sourced rule that applies and every rule withheld, and its reason.',
+  title: 'Birth chart report | Maha Strategies',
+  description: 'A reproducible Vedic birth-chart map with ascendant, planetary signs, whole-sign houses, nakṣatras, pādas, tropical comparison, pañcāṅga, and source-bound tradition notes.',
   alternates: { canonical: '/knowledge/birth' },
   robots: { index: true, follow: true },
 }
@@ -22,14 +22,14 @@ export default function BirthPage() {
         <nav aria-label="Breadcrumb" className="font-mono text-[10px] uppercase tracking-widest text-zinc-600">
           <Link href="/knowledge" className="hover:text-white">Knowledge</Link>
           <span className="px-2">/</span>
-          <span className="text-zinc-400">Birth pañcāṅga</span>
+          <span className="text-zinc-400">Birth chart report</span>
         </nav>
 
         <header className="mt-10 border-b border-zinc-800 pb-10">
           <p className="font-mono text-[10px] uppercase tracking-widest text-violet-300">{BIRTH_REPORT_VERSION}</p>
-          <h1 className="mt-6 text-4xl font-bold tracking-tight text-white sm:text-6xl">Birth pañcāṅga</h1>
+          <h1 className="mt-6 text-4xl font-bold tracking-tight text-white sm:text-6xl">Birth chart report</h1>
           <p className="mt-6 max-w-3xl font-serif text-lg leading-8 text-zinc-400">
-            The calendrical facts of a birth moment, computed from an ephemeris and a stated ayanāṁśa, with every sourced rule that applies to them — and every rule that was withheld, with its reason.
+            Your complete chart map before interpretation: ascendant, planetary signs and degrees, whole-sign houses, nakṣatras and pādas in Lahiri sidereal, with tropical positions retained for comparison. Source-bound tradition notes remain visibly separate from the calculations.
           </p>
         </header>
 
@@ -39,7 +39,7 @@ export default function BirthPage() {
           <h2 className="font-mono text-[10px] uppercase tracking-widest text-rose-300">Read this before you read the output</h2>
           <div className="mt-3 max-w-3xl space-y-3 text-sm leading-6 text-zinc-300">
             <p>
-              <strong className="text-white">The pañcāṅga is arithmetic.</strong> Your janma nakṣatra, tithi, yoga, karaṇa and vāra follow from where the Sun and Moon were. Those values are checkable and reproducible, and a different ayanāṁśa would move the nakṣatra and yoga but not the tithi or karaṇa.
+              <strong className="text-white">The chart map and pañcāṅga are calculations.</strong> Positions, the ascendant, and Sun–Moon geometry are checkable and reproducible. Signs and houses additionally depend on the explicitly stated zodiac frame, ayanāṁśa, node model, and house system.
             </p>
             <p>
               <strong className="text-white">Everything built on top of it is unvalidated tradition.</strong> Each rule below is recorded as documented doctrine from a named source. There is no evidence that any of it predicts anything about a person, and the schema this layer uses cannot express such a claim.
