@@ -61,6 +61,7 @@ yarn-error.log*
 # env files (can opt-in for committing if needed)
 .env*
 !.env.example
+.agentcore-payment-session.json
 
 # vercel
 .vercel

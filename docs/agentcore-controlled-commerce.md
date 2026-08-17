@@ -67,8 +67,9 @@ account.
 
 Do not run a value-bearing test until all of these are satisfied:
 
-1. A reviewed AgentCore Payments adapter implements the currently supported AWS
-   SDK, with roles and opt-ins separated.
+1. The optional `@mahastrategies/x402-agentcore/aws` adapter uses the official
+   AWS JavaScript SDK, separate management and execution clients, exact base-
+   unit-to-USD ceiling conversion, and one `ProcessPayment` call.
 2. A durable atomic ledger replaces the in-memory reference ledger.
 3. The exact merchant resource, purpose, network, asset, payee, and maximum
    amount are confirmed from a fresh unpaid challenge.
@@ -78,6 +79,32 @@ Do not run a value-bearing test until all of these are satisfied:
    automatic retry.
 6. Session cleanup, merchant receipt verification, independent settlement
    confirmation, and sanitized evidence all pass.
+
+## Base Sepolia rehearsal
+
+The test runner is fail-closed and defaults to a configuration-only preflight:
+
+```bash
+npm run verify:agentcore-sepolia
+```
+
+An authorized `--execute` run first performs a live recovery drill: it creates
+and journals a bounded session without generating a proof, reconstructs state
+as a restarted process, inspects and deletes the session, and confirms the
+journal is gone. Only then may it inspect a fresh merchant challenge, create a
+new session, call `ProcessPayment` once, make one paid retry, validate the
+`PAYMENT-RESPONSE` against an independent Base Sepolia RPC receipt, and delete
+the session in `finally`.
+
+The durable journal contains only session identity and lifecycle state. It is
+required to live outside the repository. Any stale journal blocks a new
+payment; `--recover-session` can inspect and delete that session without
+calling `ProcessPayment` or the merchant. AWS SDK clients set `maxAttempts: 1`.
+
+Required local variables are documented in `.env.example`. Execution also
+requires the exact opt-in phrase printed there. This is a testnet-only gate;
+the runner rejects any challenge other than `eip155:84532` and makes no
+mainnet path available.
 
 Merchant HTTP 200 acceptance is not blockchain finality. The evidence contract
 keeps `settlementVerified` false unless the caller's independent verifier

@@ -55,6 +55,7 @@
     "build:x402-agentcore": "npm --prefix packages/x402-agentcore run build",
     "pack:x402-agentcore": "npm --prefix packages/x402-agentcore run pack:dry-run",
     "demo:agentcore-commerce": "node --experimental-strip-types scripts/run-agentcore-controlled-commerce-demo.ts",
+    "verify:agentcore-sepolia": "node --experimental-strip-types scripts/run-agentcore-sepolia-e2e.ts",
     "test": "node --test --experimental-strip-types test/*.test.ts"
   },
   "dependencies": {
@@ -81,6 +82,8 @@
     "stripe": "^22.3.2"
   },
   "devDependencies": {
+    "@aws-sdk/client-bedrock-agentcore": "^3.1111.0",
+    "@aws-sdk/credential-providers": "^3.1111.0",
     "@coinbase/cdp-sdk": "^1.55.0",
     "@tailwindcss/postcss": "^4",
     "@tailwindcss/typography": "^0.5.20",

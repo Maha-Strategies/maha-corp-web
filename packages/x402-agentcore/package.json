@@ -24,6 +24,11 @@
       "types": "./dist/agentcore.d.ts",
       "import": "./dist/agentcore.js",
       "default": "./dist/agentcore.js"
+    },
+    "./aws": {
+      "types": "./dist/aws-agentcore.d.ts",
+      "import": "./dist/aws-agentcore.js",
+      "default": "./dist/aws-agentcore.js"
     }
   },
   "engines": {
@@ -31,6 +36,14 @@
   },
   "publishConfig": {
     "access": "public"
+  },
+  "peerDependencies": {
+    "@aws-sdk/client-bedrock-agentcore": "^3.1111.0"
+  },
+  "peerDependenciesMeta": {
+    "@aws-sdk/client-bedrock-agentcore": {
+      "optional": true
+    }
   },
   "scripts": {
     "build": "tsc --project tsconfig.json",

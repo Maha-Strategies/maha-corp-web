@@ -63,6 +63,14 @@ export type MerchantChallenge = {
   declaredResource: string
   requirement: PaymentRequirementLike
   schema: SchemaEvidence
+  /**
+   * The decoded v2 PAYMENT-REQUIRED document. It stays at the application
+   * boundary and is passed to AgentCore only after policy authorization.
+   */
+  paymentRequired?: {
+    version: string
+    payload: unknown
+  }
 }
 
 export type MerchantPaidResponse<Report> = {
@@ -103,8 +111,9 @@ export interface AgentCorePaymentsAdapter {
   createPaymentProof(input: {
     session: AgentCorePaymentSession
     authorization: PaymentAuthorization
+    challenge: MerchantChallenge
     idempotencyKey: string
-  }): Promise<{ paymentHeader: string }>
+  }): Promise<{ paymentHeader: string; providerReference?: string }>
   deleteSession(session: AgentCorePaymentSession): Promise<void>
 }
 
@@ -302,6 +311,7 @@ export function createAgentCoreControlledCommerceTool<Report>(config: AgentCoreC
         const proof = await config.payments.createPaymentProof({
             session,
             authorization,
+            challenge,
             idempotencyKey: control.idempotencyKey,
           }).catch((error: unknown) =>
             fail('payment_proof_invalid', 'The bounded payment proof could not be created.', error),

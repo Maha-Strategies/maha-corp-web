@@ -25,13 +25,37 @@ settlement verifier.
 - Audit events contain lifecycle outcomes, never session handles, payment
   headers, wallet keys, or merchant response content.
 
+## AWS SDK adapter
+
+The base import remains provider-neutral. Applications using the official AWS
+JavaScript SDK can opt into the concrete subpath:
+
+```ts
+import { BedrockAgentCoreClient } from '@aws-sdk/client-bedrock-agentcore'
+import { createAwsAgentCorePaymentsAdapter } from '@mahastrategies/x402-agentcore/aws'
+
+const payments = createAwsAgentCorePaymentsAdapter({
+  managementClient, // management IAM role, maxAttempts: 1
+  executionClient,  // ProcessPayment IAM role, maxAttempts: 1
+  paymentManagerArn,
+  paymentInstrumentId,
+  userId,
+  agentName,
+  journal,
+})
+```
+
+The two clients must be different instances. The adapter creates the shortest
+AgentCore-supported session, converts integer USDC base units to an exact USD
+decimal session ceiling, submits one `CRYPTO_X402` `ProcessPayment` command,
+and requires a confirmed hard delete. It never retries a payment operation.
+
 ## Integration boundary
 
-The package deliberately defines small callback interfaces rather than taking a
-direct dependency on an AgentCore preview SDK. Implement
-`AgentCorePaymentsAdapter` with the supported SDK in your AWS account and
-`AgentCoreMerchantAdapter` with your protected resource client. The policy
-behavior stays testable without AWS credentials or value transfer.
+The package keeps small callback interfaces around the concrete optional AWS
+adapter. Implement `AgentCoreMerchantAdapter` with your protected resource
+client. The policy behavior stays testable without AWS credentials or value
+transfer.
 
 ```ts
 import {

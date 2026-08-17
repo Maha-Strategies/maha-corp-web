@@ -45,6 +45,14 @@ export type MerchantChallenge = {
     declaredResource: string;
     requirement: PaymentRequirementLike;
     schema: SchemaEvidence;
+    /**
+     * The decoded v2 PAYMENT-REQUIRED document. It stays at the application
+     * boundary and is passed to AgentCore only after policy authorization.
+     */
+    paymentRequired?: {
+        version: string;
+        payload: unknown;
+    };
 };
 export type MerchantPaidResponse<Report> = {
     status: number;
@@ -80,9 +88,11 @@ export interface AgentCorePaymentsAdapter {
     createPaymentProof(input: {
         session: AgentCorePaymentSession;
         authorization: PaymentAuthorization;
+        challenge: MerchantChallenge;
         idempotencyKey: string;
     }): Promise<{
         paymentHeader: string;
+        providerReference?: string;
     }>;
     deleteSession(session: AgentCorePaymentSession): Promise<void>;
 }

@@ -157,6 +157,7 @@ export function createAgentCoreControlledCommerceTool(config) {
                 const proof = await config.payments.createPaymentProof({
                     session,
                     authorization,
+                    challenge,
                     idempotencyKey: control.idempotencyKey,
                 }).catch((error) => fail('payment_proof_invalid', 'The bounded payment proof could not be created.', error));
                 if (!proof || typeof proof.paymentHeader !== 'string' || proof.paymentHeader.trim().length < 8) {
