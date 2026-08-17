@@ -13,6 +13,7 @@
 import { getAstrologyPassage, getRulesForTradition } from '../astrology-traditions.ts'
 import { analysisPlanDigest } from './registration.ts'
 import { comparatorSeedCommitment } from './comparator.ts'
+import { structuredVerdictDigest } from './verdict.ts'
 import {
   HYPOTHESIS_REGISTRY_VERSION,
   REGISTRY_EPISTEMIC_BOUNDARY,
@@ -59,6 +60,8 @@ export function buildProvenanceBundle({ registration, outcomes, analysis }: Buil
     factBundleSha256: draft.factBundleSha256,
     compilerVersion: draft.compilerVersion,
     ruleRegistryVersion: draft.ruleRegistryVersion,
+    verdictSha256: structuredVerdictDigest(draft.verdict),
+    verdictClassification: draft.verdict.classification,
     traditionId: draft.hypothesis.traditionId,
     ruleIds: [...draft.hypothesis.ruleIds],
     passageIds,
@@ -103,6 +106,12 @@ export function publicView(bundle: ExperimentProvenanceBundle, registration: Exp
     activityType: registration.draft.activityType,
     hypothesisStatement: registration.draft.hypothesis.statement,
     ruleEmpiricalStatus: registration.draft.hypothesis.ruleEmpiricalStatus,
+    verdict: {
+      classification: registration.draft.verdict.classification,
+      prediction: registration.draft.verdict.prediction,
+      verdictSha256: bundle.verdictSha256,
+      empiricalCalibrationStatus: registration.draft.verdict.empiricalCalibrationStatus,
+    },
     metric: {
       name: registration.draft.metric.name,
       kind: registration.draft.metric.kind,

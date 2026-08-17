@@ -26,6 +26,17 @@ const EMPTY_DRAFT = JSON.stringify({
     factBundleSha256: 'sha256:replace_me',
     compilerVersion: 'interpretation-compiler/0.1',
     ruleRegistryVersion: 'astrology-traditions/0.1',
+    verdict: {
+      verdictVersion: 'celestial-verdict/0.1', activityCorpusVersion: 'celestial-activity-rules/0.1',
+      resolutionPolicyVersion: 'preserve-conflict-and-abstain/1', activityType: 'software-release', traditionId: 'vedic-jyotisha',
+      factBundleId: 'cel_local_replace_me', factBundleSha256: 'sha256:replace_me', ruleRegistryVersion: 'astrology-traditions/0.1',
+      applicableRuleIds: ['bs-muhurta-bava-favourable'], applicationIds: ['maha-software-release-bava'],
+      favorableApplicationIds: ['maha-software-release-bava'], unfavorableApplicationIds: [], unresolvedVariantGroupIds: [], conflictApplicationIds: [],
+      classification: 'favorable',
+      prediction: { metricId: 'rollback_free_release', metricDirection: 'higher-is-better', targetRate: 0.8, relationToTarget: 'meets-or-exceeds-target' },
+      empiricalCalibrationStatus: 'unvalidated',
+      epistemicBoundary: 'This categorical verdict is a pre-registered output of an unvalidated interpretive tradition. It is not a probability, scientific confidence estimate, or guarantee of an outcome.',
+    },
     metric: {
       metricId: 'rollback_free_release', name: 'Releases completing without rollback', kind: 'binary', unit: 'releases',
       direction: 'higher-is-better', horizonHours: 72, source: 'instrumented', dataSourceId: 'github-actions',
