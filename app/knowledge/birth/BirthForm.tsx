@@ -47,6 +47,10 @@ function motionLabel(point: NatalChartPoint): string {
   return 'Direct'
 }
 
+function compactDegrees(value: number): string {
+  return `${value.toFixed(2)}°`
+}
+
 function ChartSummary({ report }: { report: BirthReport }) {
   const chart = report.natalChart
   const moon = chart.placements.find((point) => point.name === 'Moon')!
@@ -127,6 +131,85 @@ function ChartSummary({ report }: { report: BirthReport }) {
   )
 }
 
+function ChartStructure({ report }: { report: BirthReport }) {
+  const chart = report.natalChart
+  const firstHouse = chart.houses[0]
+  const occupiedHouses = chart.houses.filter((house) => house.occupants.length > 0)
+  const concentrations = occupiedHouses.filter((house) => house.occupants.length > 1)
+
+  return (
+    <section className="mt-6 border border-cyan-900/60 bg-cyan-950/10 p-6">
+      <div className="flex flex-wrap items-start justify-between gap-4">
+        <div>
+          <p className={LABEL}>Natal structure</p>
+          <h2 className="mt-2 text-3xl font-semibold text-white">Relationships in the chart</h2>
+        </div>
+        <span className="border border-cyan-600/40 bg-cyan-500/10 px-3 py-1 font-mono text-[9px] uppercase tracking-widest text-cyan-300">Computed geometry + declared conventions</span>
+      </div>
+      <p className="mt-4 max-w-3xl text-sm leading-6 text-zinc-400">These statements describe how the chart is connected. Angular separation is geometry; aspect orbs, whole-sign houses, and traditional sign rulers are declared astrological conventions. No personality or outcome meaning is inferred here.</p>
+
+      <div className="mt-6 grid gap-3 md:grid-cols-3">
+        <article className="border border-zinc-800 bg-black/30 p-4">
+          <p className={LABEL}>Ascendant ruler</p>
+          <p className="mt-2 text-lg text-white">{firstHouse.ruler} in house {firstHouse.rulerHouse}</p>
+          <p className="mt-2 text-xs leading-5 text-zinc-500">{chart.ascendant.sidereal.sign} rises, so the traditional ruler is {firstHouse.ruler}; it is placed in {firstHouse.rulerSign}.</p>
+        </article>
+        <article className="border border-zinc-800 bg-black/30 p-4">
+          <p className={LABEL}>Nodal axis</p>
+          <p className="mt-2 text-lg text-white">Houses {chart.nodalAxis.rahu.house}–{chart.nodalAxis.ketu.house}</p>
+          <p className="mt-2 text-xs leading-5 text-zinc-500">Rahu in {chart.nodalAxis.rahu.sign}; Ketu in {chart.nodalAxis.ketu.sign}. Separation {compactDegrees(chart.nodalAxis.separationDegrees)} by construction.</p>
+        </article>
+        <article className="border border-zinc-800 bg-black/30 p-4">
+          <p className={LABEL}>Concentrations</p>
+          <p className="mt-2 text-lg text-white">{concentrations.length || 'None'}</p>
+          <p className="mt-2 text-xs leading-5 text-zinc-500">{concentrations.length > 0
+            ? concentrations.map((house) => `House ${house.number}: ${house.occupants.join(' + ')}`).join(' · ')
+            : 'No whole-sign house contains more than one computed point.'}</p>
+        </article>
+      </div>
+
+      <div className="mt-8">
+        <div className="flex flex-wrap items-baseline justify-between gap-3">
+          <h3 className="text-xl font-semibold text-white">Angular relationships</h3>
+          <p className="font-mono text-[9px] uppercase tracking-widest text-zinc-600">Sorted by tightest orb</p>
+        </div>
+        {chart.aspects.length > 0 ? (
+          <div className="mt-4 grid gap-2 sm:grid-cols-2">
+            {chart.aspects.map((aspect) => (
+              <div key={`${aspect.first}-${aspect.second}-${aspect.name}`} className="flex items-baseline justify-between gap-4 border border-zinc-800 bg-black/30 px-4 py-3">
+                <p className="text-sm text-zinc-200"><span className="text-white">{aspect.first}</span> {aspect.name} <span className="text-white">{aspect.second}</span></p>
+                <p className="shrink-0 font-mono text-[10px] text-cyan-300">orb {compactDegrees(aspect.orbDegrees)}</p>
+              </div>
+            ))}
+          </div>
+        ) : <p className="mt-4 text-sm text-zinc-500">No relationship falls inside the declared aspect orbs.</p>}
+      </div>
+
+      <details className="mt-8 border-t border-zinc-800 pt-5">
+        <summary className="cursor-pointer font-mono text-[10px] uppercase tracking-widest text-zinc-400">All twelve house rulers and occupants</summary>
+        <div className="mt-4 overflow-x-auto">
+          <table className="w-full min-w-[650px] border-collapse text-left">
+            <thead className="border-b border-zinc-700 font-mono text-[9px] uppercase tracking-widest text-zinc-500">
+              <tr><th className="px-3 py-3">House</th><th className="px-3 py-3">Sign</th><th className="px-3 py-3">Traditional ruler</th><th className="px-3 py-3">Ruler placement</th><th className="px-3 py-3">Occupants</th></tr>
+            </thead>
+            <tbody className="divide-y divide-zinc-900">
+              {chart.houses.map((house) => (
+                <tr key={house.number} className="text-sm text-zinc-300">
+                  <th className="px-3 py-3 text-white">{house.number}</th>
+                  <td className="px-3 py-3">{house.sign}</td>
+                  <td className="px-3 py-3 text-violet-200">{house.ruler}</td>
+                  <td className="px-3 py-3">{house.rulerSign} · house {house.rulerHouse}</td>
+                  <td className="px-3 py-3 text-zinc-500">{house.occupants.join(', ') || '—'}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </details>
+    </section>
+  )
+}
+
 function TraditionSection({ tradition }: { tradition: RenderedTraditionReport }) {
   return (
     <section className="mt-10 border border-zinc-800 p-6">
@@ -197,6 +280,7 @@ function Report({ report }: { report: BirthReport }) {
       </section>
 
       <ChartSummary report={report} />
+      <ChartStructure report={report} />
 
       <section className="mt-10">
         <div className="flex flex-wrap items-baseline justify-between gap-3">

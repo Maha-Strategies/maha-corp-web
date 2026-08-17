@@ -55,3 +55,41 @@ test('every chart point carries a nakshatra, pada, house, and calculation method
   assert.equal(chart.nodeModel, 'mean-lunar-node')
   assert.equal(chart.houseSystem, 'whole-sign')
 })
+
+test('the founder house-lord network is computed from the Cancer whole-sign ascendant', () => {
+  const chart = computeNatalChart(FOUNDER)
+  const expected = [
+    [1, 'Cancer', 'Moon', 8], [2, 'Leo', 'Sun', 5], [3, 'Virgo', 'Mercury', 4],
+    [4, 'Libra', 'Venus', 6], [5, 'Scorpio', 'Mars', 1], [6, 'Sagittarius', 'Jupiter', 3],
+    [7, 'Capricorn', 'Saturn', 7], [8, 'Aquarius', 'Saturn', 7], [9, 'Pisces', 'Jupiter', 3],
+    [10, 'Aries', 'Mars', 1], [11, 'Taurus', 'Venus', 6], [12, 'Gemini', 'Mercury', 4],
+  ] as const
+  assert.equal(chart.houses.length, 12)
+  for (const [number, sign, ruler, rulerHouse] of expected) {
+    const house = chart.houses[number - 1]
+    assert.equal(house.sign, sign, `house ${number} sign`)
+    assert.equal(house.ruler, ruler, `house ${number} ruler`)
+    assert.equal(house.rulerHouse, rulerHouse, `house ${number} ruler placement`)
+  }
+  assert.deepEqual(chart.houses[4].occupants, ['Sun', 'Rahu'])
+})
+
+test('aspects preserve exact geometry and declared orb conventions', () => {
+  const chart = computeNatalChart(FOUNDER)
+  const nodeOpposition = chart.aspects.find((aspect) =>
+    aspect.name === 'opposition' && new Set([aspect.first, aspect.second]).has('Rahu')
+    && new Set([aspect.first, aspect.second]).has('Ketu'))
+  assert.ok(nodeOpposition)
+  assert.ok(nodeOpposition.orbDegrees < 1e-9)
+  assert.equal(nodeOpposition.separationDegrees, 180)
+  assert.ok(chart.aspects.every((aspect) => aspect.orbDegrees <= aspect.maximumOrbDegrees))
+  assert.deepEqual([...chart.aspects].sort((a, b) => a.orbDegrees - b.orbDegrees), chart.aspects)
+  assert.match(chart.methodology.join(' '), /aspect.*orbs/i)
+})
+
+test('the nodal axis is explicit rather than inferred in narrative', () => {
+  const chart = computeNatalChart(FOUNDER)
+  assert.deepEqual(chart.nodalAxis.rahu, { sign: 'Scorpio', house: 5 })
+  assert.deepEqual(chart.nodalAxis.ketu, { sign: 'Taurus', house: 11 })
+  assert.equal(chart.nodalAxis.separationDegrees, 180)
+})

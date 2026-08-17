@@ -22,7 +22,7 @@ import { computeNatalChart, type NatalChart } from './natal-chart.ts'
 import { computePanchanga, type Panchanga } from './panchanga.ts'
 import { ZonedTimeError, zonedWallTimeToUtc, type CivilTimeFold } from './zoned-time.ts'
 
-export const BIRTH_REPORT_VERSION = 'birth-report/0.2' as const
+export const BIRTH_REPORT_VERSION = 'birth-report/0.3' as const
 
 export interface BirthInput {
   /** `YYYY-MM-DD` local to the birth place. */
