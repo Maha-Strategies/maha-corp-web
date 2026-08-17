@@ -11,6 +11,19 @@ export type ContextCompressResponse = {
   inputHash: string; outputHash: string; sourceTextStored: false; compiledContextStored: false
 }
 export type ProvenanceVerifyResponse = { claim_id: string; title: string; summary: string; status: 'VERIFIED' | 'SOURCED' | 'ILLUSTRATIVE' | 'UNVERIFIED'; latex_formulation: string; sources: string[]; tags: string[]; canonical_url: string }
+export type CelestialConsent = { policyVersion: 'celestial-consent/1'; basis: 'explicit-subject-consent' | 'authorized-organizational-record' | 'public-record'; capturedAtUtc: string; consentReferenceSha256: string }
+export type CelestialReportRequest<TInput = Record<string, unknown>> = {
+  apiVersion: 'maha-celestial-api/1'; clientRequestId: string; reportType: 'individual-birth' | 'corporate-event'
+  interpretationPack: { packId: 'facts-only' | 'jyotisha-source-bound' | 'comparative-natal'; version: string }
+  dataPolicy: { saveReport: boolean; retentionDays: number; consent: CelestialConsent }; input: TInput
+}
+export type CelestialReport = {
+  apiVersion: 'maha-celestial-api/1'; reportId: string; clientRequestId: string; tenantId: string
+  reportType: 'individual-birth' | 'corporate-event'; status: 'completed'; generatedAtUtc: string; expiresAtUtc: string | null; saved: boolean
+  interpretationPack: { packId: string; version: string; packSha256: string }; dataGovernance: Record<string, unknown>
+  result: Record<string, unknown>; reproducibility: { policyVersion: string; requestSha256: string; resultSha256: string; astrologyRegistryVersion: string; compilerVersion: string; guarantee: string }; boundaries: string[]
+}
+export type CelestialReportResponse = { report: CelestialReport; idempotentReplay: boolean; billableUnits: number }
 
 // --- Audit & MCP Types ---
 export type AuditExportOptions = { format?: 'csv' | 'pdf'; startTime?: number; endTime?: number }
@@ -103,6 +116,29 @@ export class MahaClient {
     getSettings: async (): Promise<TenantBillingSettings> => this.request('/api/v1/billing/settings'),
     subscribe: async (tier: 'builder' | 'scale', clientRequestId = crypto.randomUUID().replaceAll('-', '')): Promise<{ url: string }> => this.request('/api/v1/billing/subscription', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ tier, clientRequestId }) }),
     setAutoTopup: async (enabled: boolean): Promise<{ autoTopupEnabled: boolean }> => this.request('/api/v1/billing/settings', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ autoTopupEnabled: enabled }) }),
+  }
+
+  public readonly celestial = {
+    createReport: async <TInput = Record<string, unknown>>(payload: CelestialReportRequest<TInput>): Promise<CelestialReportResponse> => this.request('/api/v1/celestial/reports', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) }),
+    getReport: async (reportId: string): Promise<{ report: CelestialReport }> => this.request(`/api/v1/celestial/reports/${encodeURIComponent(reportId)}`),
+    deleteReport: async (reportId: string): Promise<{ reportId: string; deleted: true }> => this.request(`/api/v1/celestial/reports/${encodeURIComponent(reportId)}`, { method: 'DELETE' }),
+    listPacks: async (): Promise<{ packs: Array<Record<string, unknown>> }> => this.request('/api/v1/celestial/packs'),
+    installPack: async (packId: 'facts-only' | 'jyotisha-source-bound' | 'comparative-natal', version: string, reportType: 'individual-birth' | 'corporate-event'): Promise<Record<string, unknown>> => this.request('/api/v1/celestial/packs', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ packId, version, reportType }) }),
+    getUsage: async (period: { start?: string; end?: string } = {}): Promise<Record<string, unknown>> => {
+      const query = new URLSearchParams()
+      if (period.start) query.set('start', period.start)
+      if (period.end) query.set('end', period.end)
+      return this.request(`/api/v1/celestial/usage${query.size ? `?${query}` : ''}`)
+    },
+    createBatch: async (clientRequestId: string, requests: CelestialReportRequest[]): Promise<Record<string, unknown>> => this.request('/api/v1/celestial/batches', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ clientRequestId, requests }) }),
+    registerWebhook: async (targetUrl: string, eventTypes: Array<'report.completed' | 'batch.completed' | 'batch.partially-failed'>): Promise<Record<string, unknown>> => this.request('/api/v1/celestial/webhooks', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ targetUrl, eventTypes }) }),
+    exportReport: async (reportId: string, format: 'json' | 'pdf' = 'json'): Promise<{ data: ArrayBuffer | Blob | string; filename: string }> => {
+      const response = await fetch(`${this.baseUrl}/api/v1/celestial/reports/${encodeURIComponent(reportId)}/export?format=${format}`, { headers: { Authorization: `Bearer ${this.options.apiKey}` } })
+      if (!response.ok) throw new MahaApiError(response.status, `http_${response.status}`, 'Celestial evidence export failed.')
+      const filename = response.headers.get('content-disposition')?.match(/filename="([^"]+)"/)?.[1] ?? `${reportId}-evidence.${format}`
+      if (format === 'json') return { data: await response.text(), filename }
+      return { data: typeof window === 'undefined' ? await response.arrayBuffer() : await response.blob(), filename }
+    },
   }
 
   public readonly optimization = {

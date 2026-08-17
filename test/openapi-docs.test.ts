@@ -127,6 +127,8 @@ const PRIVATE_ROUTES = new Set([
   '/api/cron/market-scout',
   '/api/cron/x402-observatory',
   '/api/cron/utility-upload-cleanup',
+  '/api/cron/celestial-webhooks',
+  '/api/cron/celestial-retention',
   '/api/conversion-events',
   '/api/cron/utility-upload-cleanup',
   '/api/mps-audits/[auditId]',
