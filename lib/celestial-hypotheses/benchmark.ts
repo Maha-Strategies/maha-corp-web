@@ -61,6 +61,52 @@ export interface BenchmarkScore {
   accuracyWhenAnswered: number | null
 }
 
+export interface BenchmarkParticipant {
+  protocolId: string
+  participantPseudonym: string
+  participantKind: BenchmarkParticipantKind
+  recruitedAtUtc: string
+  eligibilityAttestation: string
+  conflictDisclosure: string
+  participantSha256: string
+}
+
+export interface BlindedBenchmarkTask {
+  protocolId: string
+  blindedTaskId: string
+  activityType: ActivityType
+  prompt: string
+  scheduledMomentUtc: string
+  submissionDeadlineUtc: string
+  outcomeAvailableAtUtc: string
+  taskSha256: string
+}
+
+export interface BenchmarkAssignment {
+  protocolId: string
+  blindedTaskId: string
+  participantPseudonym: string
+  assignedAtUtc: string
+  assignmentSha256: string
+}
+
+export interface PairedBenchmarkComparison {
+  firstParticipantPseudonym: string
+  secondParticipantPseudonym: string
+  matchedTasks: number
+  firstAccuracy: number
+  secondAccuracy: number
+  accuracyDifference: number
+  firstOnlyCorrect: number
+  secondOnlyCorrect: number
+  bothCorrect: number
+  bothIncorrect: number
+  mcnemarExactPValue: number
+  multiplicityAdjustedPValue: number | null
+  inference: 'insufficient-tasks' | 'no-difference-detected' | 'difference-detected'
+  boundary: string
+}
+
 export function buildBenchmarkProtocol(input: Omit<BenchmarkProtocol, 'protocolVersion' | 'primaryMetric' | 'secondaryMetrics' | 'protocolSha256'>): BenchmarkProtocol {
   const core = {
     protocolVersion: BENCHMARK_PROTOCOL_VERSION,
@@ -73,6 +119,37 @@ export function buildBenchmarkProtocol(input: Omit<BenchmarkProtocol, 'protocolV
 
 export function buildBenchmarkSubmission(input: Omit<BenchmarkSubmission, 'submissionSha256'>): BenchmarkSubmission {
   return { ...input, submissionSha256: digestOf(input) }
+}
+
+export function recruitBenchmarkParticipant(input: Omit<BenchmarkParticipant, 'participantSha256'>): BenchmarkParticipant {
+  if (!/^bench_[a-z0-9]{16,48}$/.test(input.protocolId) || !/^pseudo_[a-z0-9]{8,64}$/.test(input.participantPseudonym)) throw new Error('Participant recruitment requires stable protocol and pseudonymous participant identifiers.')
+  if (!BENCHMARK_PARTICIPANT_KINDS.includes(input.participantKind) || !isExplicitUtcInstant(input.recruitedAtUtc)) throw new Error('Participant kind or recruitment instant is invalid.')
+  if (input.eligibilityAttestation.trim().length < 30 || input.conflictDisclosure.trim().length < 10) throw new Error('Recruitment requires a substantive eligibility attestation and conflict disclosure.')
+  return { ...input, participantSha256: digestOf(input) }
+}
+
+export function buildBlindedBenchmarkTask(input: Omit<BlindedBenchmarkTask, 'taskSha256'>): BlindedBenchmarkTask {
+  if (!/^task_[a-z0-9]{16,48}$/.test(input.blindedTaskId) || !/^bench_[a-z0-9]{16,48}$/.test(input.protocolId)) throw new Error('Task identifiers are invalid.')
+  if (!ACTIVITY_TYPES.includes(input.activityType) || input.prompt.trim().length < 20) throw new Error('Task activity or prompt is invalid.')
+  for (const instant of [input.scheduledMomentUtc, input.submissionDeadlineUtc, input.outcomeAvailableAtUtc]) if (!isExplicitUtcInstant(instant)) throw new Error('Every task time must be explicit UTC.')
+  if (new Date(input.submissionDeadlineUtc) >= new Date(input.scheduledMomentUtc)) throw new Error('The submission deadline must precede the scheduled activity moment.')
+  if (new Date(input.submissionDeadlineUtc) >= new Date(input.outcomeAvailableAtUtc)) throw new Error('The submission deadline must precede outcome availability.')
+  return { ...input, taskSha256: digestOf(input) }
+}
+
+/** Assigns the same frozen task set to every participant, preserving paired comparisons. */
+export function distributeBenchmarkTasks(protocol: BenchmarkProtocol, participants: BenchmarkParticipant[], tasks: BlindedBenchmarkTask[], assignedAtUtc: string): BenchmarkAssignment[] {
+  if (validateBenchmarkProtocol(protocol).length) throw new Error('Cannot distribute an invalid benchmark protocol.')
+  if (!isExplicitUtcInstant(assignedAtUtc) || tasks.length < protocol.minimumTasks) throw new Error('Distribution requires a valid instant and the protocol minimum task count.')
+  if (participants.length < 2) throw new Error('Paired benchmarking requires at least two recruited participants.')
+  const participantIds = new Set(participants.map((participant) => participant.participantPseudonym))
+  const taskIds = new Set(tasks.map((task) => task.blindedTaskId))
+  if (participantIds.size !== participants.length || taskIds.size !== tasks.length) throw new Error('Participants and tasks must be unique.')
+  if (participants.some((participant) => participant.protocolId !== protocol.protocolId) || tasks.some((task) => task.protocolId !== protocol.protocolId || task.activityType !== protocol.activityType)) throw new Error('Every participant and task must bind the distributed protocol.')
+  return participants.flatMap((participant) => tasks.map((task) => {
+    const core = { protocolId: protocol.protocolId, blindedTaskId: task.blindedTaskId, participantPseudonym: participant.participantPseudonym, assignedAtUtc }
+    return { ...core, assignmentSha256: digestOf(core) }
+  }))
 }
 
 export function validateBenchmarkProtocol(protocol: BenchmarkProtocol): string[] {
@@ -158,4 +235,71 @@ export function scoreBenchmarkParticipant(submissions: BenchmarkSubmission[], ou
     coverage: answered / tasks,
     accuracyWhenAnswered: answered === 0 ? null : correct / answered,
   }
+}
+
+function exactBinomialTwoSided(successes: number, trials: number): number {
+  if (trials === 0) return 1
+  const choose = (n: number, k: number) => {
+    let value = 1
+    for (let index = 1; index <= k; index += 1) value *= (n - k + index) / index
+    return value
+  }
+  const lower = Math.min(successes, trials - successes)
+  let tail = 0
+  for (let value = 0; value <= lower; value += 1) tail += choose(trials, value) * 0.5 ** trials
+  return Math.min(1, 2 * tail)
+}
+
+function correctness(submission: BenchmarkSubmission, outcome: BenchmarkTaskOutcome): boolean {
+  if (submission.prediction === 'abstain') return false
+  const observed: BenchmarkPrediction = outcome.observedRate >= outcome.targetRate ? 'meets-or-exceeds-target' : 'misses-target'
+  return submission.prediction === observed
+}
+
+export function compareBenchmarkParticipants(first: BenchmarkSubmission[], second: BenchmarkSubmission[], outcomes: BenchmarkTaskOutcome[], protocol: BenchmarkProtocol): PairedBenchmarkComparison {
+  if (validateBenchmarkProtocol(protocol).length) throw new Error('Cannot compare under an invalid benchmark protocol.')
+  if (!first.length || !second.length) throw new Error('Both participants require submissions.')
+  const firstId = first[0]!.participantPseudonym; const secondId = second[0]!.participantPseudonym
+  if (firstId === secondId) throw new Error('Paired comparison requires two different participants.')
+  if (first.some((item) => item.participantPseudonym !== firstId || item.protocolId !== protocol.protocolId) || second.some((item) => item.participantPseudonym !== secondId || item.protocolId !== protocol.protocolId)) throw new Error('Submission sets must each contain one participant under the declared protocol.')
+  const firstMap = new Map(first.map((item) => [item.blindedTaskId, item]))
+  const secondMap = new Map(second.map((item) => [item.blindedTaskId, item]))
+  const outcomeMap = new Map(outcomes.map((item) => [item.blindedTaskId, item]))
+  const taskIds = [...firstMap.keys()].filter((id) => secondMap.has(id) && outcomeMap.has(id)).sort()
+  if (taskIds.length < protocol.minimumTasks) throw new Error('Paired analysis cannot run before the pre-registered minimum matched task count.')
+  let firstOnlyCorrect = 0; let secondOnlyCorrect = 0; let bothCorrect = 0; let bothIncorrect = 0
+  for (const taskId of taskIds) {
+    const firstSubmission = firstMap.get(taskId)!; const secondSubmission = secondMap.get(taskId)!; const outcome = outcomeMap.get(taskId)!
+    const issues = [...validateBenchmarkSubmission(firstSubmission, outcome), ...validateBenchmarkSubmission(secondSubmission, outcome)]
+    if (issues.length) throw new Error(`Invalid paired submission for ${taskId}: ${issues.join(' ')}`)
+    const firstResult = correctness(firstSubmission, outcome); const secondResult = correctness(secondSubmission, outcome)
+    if (firstResult && secondResult) bothCorrect += 1
+    else if (firstResult) firstOnlyCorrect += 1
+    else if (secondResult) secondOnlyCorrect += 1
+    else bothIncorrect += 1
+  }
+  const firstAccuracy = (bothCorrect + firstOnlyCorrect) / taskIds.length
+  const secondAccuracy = (bothCorrect + secondOnlyCorrect) / taskIds.length
+  const pValue = exactBinomialTwoSided(firstOnlyCorrect, firstOnlyCorrect + secondOnlyCorrect)
+  return {
+    firstParticipantPseudonym: firstId, secondParticipantPseudonym: secondId, matchedTasks: taskIds.length,
+    firstAccuracy, secondAccuracy, accuracyDifference: firstAccuracy - secondAccuracy,
+    firstOnlyCorrect, secondOnlyCorrect, bothCorrect, bothIncorrect, mcnemarExactPValue: pValue,
+    multiplicityAdjustedPValue: null,
+    inference: taskIds.length < protocol.minimumTasks ? 'insufficient-tasks' : pValue < 0.05 ? 'difference-detected' : 'no-difference-detected',
+    boundary: 'McNemar’s exact test compares paired categorical correctness on the same frozen tasks. Statistical difference is not practical superiority, causal evidence, or proof of astrology; the protocol’s multiplicity policy and stopping rule still govern publication.',
+  }
+}
+
+/** Holm adjustment across the exact set of comparisons declared before scoring. */
+export function applyHolmAdjustment(comparisons: PairedBenchmarkComparison[]): PairedBenchmarkComparison[] {
+  const ordered = comparisons.map((comparison, index) => ({ comparison, index })).sort((a, b) => a.comparison.mcnemarExactPValue - b.comparison.mcnemarExactPValue)
+  const adjusted = Array(comparisons.length).fill(1) as number[]
+  let previous = 0
+  for (let rank = 0; rank < ordered.length; rank += 1) {
+    const value = Math.min(1, ordered[rank]!.comparison.mcnemarExactPValue * (ordered.length - rank))
+    previous = Math.max(previous, value)
+    adjusted[ordered[rank]!.index] = previous
+  }
+  return comparisons.map((comparison, index) => ({ ...comparison, multiplicityAdjustedPValue: adjusted[index]!, inference: adjusted[index]! < 0.05 ? 'difference-detected' : 'no-difference-detected' }))
 }
