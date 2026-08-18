@@ -15,6 +15,7 @@ import { TIMING_REFERENCE_PATH, TIMING_REFERENCE_RELEASE_DATE, TIMING_REFERENCES
 import { CORPORATE_MUNDANE_PATH, CORPORATE_MUNDANE_REFERENCES, CORPORATE_MUNDANE_RELEASE_DATE, corporateMundaneReferencePath } from '@/lib/corporate-mundane-references'
 import { TROPICAL_SIDEREAL_COMPARISON_PATH, TROPICAL_SIDEREAL_COMPARISON_RELEASE_DATE, TROPICAL_SIDEREAL_COMPARISONS, tropicalSiderealComparisonPath } from '@/lib/tropical-sidereal-comparisons'
 import { MATHEMATICAL_CONCEPTS, MATHEMATICS_KNOWLEDGE_PATH, MATHEMATICS_KNOWLEDGE_RELEASE_DATE, mathematicsConceptPath } from '@/lib/mathematics-knowledge'
+import { RELIGION_COMPARISONS, RELIGION_COMPARISONS_PATH, RELIGION_CONCEPTS, RELIGION_KNOWLEDGE_PATH, RELIGION_KNOWLEDGE_RELEASE_DATE, religionComparisonPath, religionConceptPath } from '@/lib/religion-knowledge'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = MAHA_SITE_URL
@@ -38,6 +39,16 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...MATHEMATICAL_CONCEPTS.map((concept) => ({
       url: `${baseUrl}${mathematicsConceptPath(concept)}`,
       lastModified: new Date(MATHEMATICS_KNOWLEDGE_RELEASE_DATE),
+    })),
+    { url: `${baseUrl}${RELIGION_KNOWLEDGE_PATH}`, lastModified: new Date(RELIGION_KNOWLEDGE_RELEASE_DATE) },
+    ...RELIGION_CONCEPTS.map((concept) => ({
+      url: `${baseUrl}${religionConceptPath(concept)}`,
+      lastModified: new Date(RELIGION_KNOWLEDGE_RELEASE_DATE),
+    })),
+    { url: `${baseUrl}${RELIGION_COMPARISONS_PATH}`, lastModified: new Date(RELIGION_KNOWLEDGE_RELEASE_DATE) },
+    ...RELIGION_COMPARISONS.map((comparison) => ({
+      url: `${baseUrl}${religionComparisonPath(comparison)}`,
+      lastModified: new Date(RELIGION_KNOWLEDGE_RELEASE_DATE),
     })),
     { url: `${baseUrl}${ASTROLOGY_PATH}`, lastModified: new Date(ASTROLOGY_RELEASE_DATE) },
     { url: `${baseUrl}/knowledge/muhurta`, lastModified: new Date(ASTROLOGY_RELEASE_DATE) },

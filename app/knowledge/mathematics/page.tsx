@@ -14,6 +14,7 @@ import {
   MATHEMATICS_REGISTRY_PATH,
   mathematicsConceptPath,
 } from '@/lib/mathematics-knowledge'
+import { RELIGION_KNOWLEDGE_PATH, RELIGION_MATHEMATICS_BRIDGES } from '@/lib/religion-knowledge'
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -48,6 +49,11 @@ export default function MathematicsKnowledgePage() {
           <div className="border border-sky-900/60 bg-sky-950/10 p-5"><p className="font-mono text-[9px] uppercase tracking-widest text-sky-300">Typed bridge</p><p className="mt-3 text-sm leading-6 text-zinc-400">Each of the {MATHEMATICAL_BRIDGES.length} records declares inputs, transformation, outputs, evidence role, destination, and limitations.</p></div>
           <div className="border border-rose-900/60 bg-rose-950/10 p-5"><p className="font-mono text-[9px] uppercase tracking-widest text-rose-300">No validity transfer</p><p className="mt-3 text-sm leading-6 text-zinc-400">Formalizing an astrological rule can establish consistency and provenance. Only prospective empirical tests can estimate predictive performance.</p></div>
         </section>
+
+        <Link href={RELIGION_KNOWLEDGE_PATH} className="mt-6 block border border-teal-900/60 bg-teal-950/10 p-5 transition-colors hover:border-teal-400">
+          <p className="font-mono text-[9px] uppercase tracking-widest text-teal-300">New connected domain · {RELIGION_MATHEMATICS_BRIDGES.length} explicit bridges</p>
+          <p className="mt-3 text-sm leading-6 text-zinc-400">See how graphs, uncertainty, formal logic, time series, and causal inference connect to religion and contemplative studies without certifying metaphysical claims. <span className="text-teal-300">Open the methodology layer →</span></p>
+        </Link>
 
         <section className="mt-14 border-t border-zinc-800 pt-9">
           <div className="flex flex-wrap items-end justify-between gap-4"><div><p className="font-mono text-[10px] uppercase tracking-widest text-zinc-500">Cross-domain bridge matrix</p><h2 className="mt-3 text-3xl font-semibold text-white">Six systems, one inspectable grammar</h2></div><a href={MATHEMATICS_REGISTRY_PATH} className="font-mono text-[10px] uppercase tracking-widest text-emerald-300 hover:text-white">Open JSON registry →</a></div>
