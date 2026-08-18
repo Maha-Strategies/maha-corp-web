@@ -23,6 +23,12 @@ import {
 } from '@/lib/astronomy-knowledge'
 import { ASTROLOGY_PATH, ASTROLOGY_RULES, ASTROLOGY_TRADITIONS, ASTROLOGY_VERSION } from '@/lib/astrology-traditions'
 import { PANCHANGA_VERSION } from '@/lib/panchanga'
+import {
+  MATHEMATICAL_BRIDGES,
+  MATHEMATICAL_CONCEPTS,
+  MATHEMATICS_KNOWLEDGE_PATH,
+  MATHEMATICS_KNOWLEDGE_VERSION,
+} from '@/lib/mathematics-knowledge'
 
 export const metadata: Metadata = {
   title: 'Knowledge | Maha Strategies',
@@ -65,6 +71,12 @@ export default function KnowledgePage() {
         url: `${SITE_URL}${ASTRONOMY_KNOWLEDGE_PATH}`,
         version: ASTRONOMY_KNOWLEDGE_VERSION,
       },
+      {
+        '@type': 'CollectionPage',
+        name: 'Maha Mathematics Knowledge System',
+        url: `${SITE_URL}${MATHEMATICS_KNOWLEDGE_PATH}`,
+        version: MATHEMATICS_KNOWLEDGE_VERSION,
+      },
       ...KNOWLEDGE_ARTICLES.map((article) => ({
         '@type': 'TechArticle',
         name: article.title,
@@ -92,12 +104,13 @@ export default function KnowledgePage() {
               </Link>
             </div>
             <div className="border border-zinc-800 bg-zinc-950 p-5 font-mono text-xs leading-6 text-zinc-500">
-              <p className="text-zinc-200">3 domain surfaces</p>
+              <p className="text-zinc-200">4 domain surfaces plus connective mathematics</p>
               <p>{KNOWLEDGE_ARTICLES.length} published semiconductor nodes</p>
               <p>{KNOWLEDGE_SUPPLIERS.length} evidence-bounded supplier profiles</p>
               <p>{SEMICONDUCTOR_STAGES.length} lifecycle stages</p>
               <p>{CELESTIAL_AUTHORITY_SOURCES.length} celestial authority contracts</p>
               <p>{ASTRONOMY_ARTICLES.length} Astronomy explainers</p>
+              <p>{MATHEMATICAL_CONCEPTS.length} mathematical concepts · {MATHEMATICAL_BRIDGES.length} bridges</p>
               <p>Claim-level evidence status</p>
               <p>Bidirectional Intelligence links</p>
             </div>
@@ -128,6 +141,13 @@ export default function KnowledgePage() {
               <p className="mt-3 text-sm leading-6 text-zinc-400">A cited graph from observation and calibration through physical models, inference boundaries, and open questions.</p>
               <p className="mt-4 border-l border-amber-700/60 pl-3 text-xs leading-5 text-amber-200">Scientific explanation only. Astrological interpretation is outside this layer.</p>
               <p className="mt-6 font-mono text-[10px] uppercase tracking-widest text-zinc-600 group-hover:text-indigo-300">Explore {ASTRONOMY_ARTICLES.length} explainers · {ASTRONOMY_SOURCES.length} sources →</p>
+            </Link>
+            <Link href={MATHEMATICS_KNOWLEDGE_PATH} className="group border border-emerald-900/60 bg-emerald-950/10 p-6 transition-colors hover:border-emerald-400">
+              <p className="font-mono text-[10px] uppercase tracking-widest text-emerald-300">Connective grammar · {MATHEMATICS_KNOWLEDGE_VERSION}</p>
+              <h2 className="mt-4 text-2xl font-semibold text-white group-hover:text-emerald-200">Mathematics knowledge</h2>
+              <p className="mt-3 text-sm leading-6 text-zinc-400">Geometry, time, numerical methods, statistics, networks, and decision procedures connected to each domain through explicit typed records.</p>
+              <p className="mt-4 border-l border-rose-700/60 pl-3 text-xs leading-5 text-rose-200">Shared mathematics does not transfer scientific validity between physical models and interpretive traditions.</p>
+              <p className="mt-6 font-mono text-[10px] uppercase tracking-widest text-zinc-600 group-hover:text-emerald-300">Inspect {MATHEMATICAL_CONCEPTS.length} concepts · {MATHEMATICAL_BRIDGES.length} bridges →</p>
             </Link>
             <Link href={ASTROLOGY_PATH} className="group border border-violet-900/60 bg-violet-950/10 p-6 transition-colors hover:border-violet-400">
               <p className="font-mono text-[10px] uppercase tracking-widest text-violet-300">Interpretive layer · {ASTROLOGY_VERSION}</p>

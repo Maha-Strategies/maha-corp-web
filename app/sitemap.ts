@@ -14,6 +14,7 @@ import { CALCULATION_REFERENCE_PATH, CALCULATION_REFERENCE_RELEASE_DATE, CALCULA
 import { TIMING_REFERENCE_PATH, TIMING_REFERENCE_RELEASE_DATE, TIMING_REFERENCES, timingReferencePath } from '@/lib/celestial-timing-references'
 import { CORPORATE_MUNDANE_PATH, CORPORATE_MUNDANE_REFERENCES, CORPORATE_MUNDANE_RELEASE_DATE, corporateMundaneReferencePath } from '@/lib/corporate-mundane-references'
 import { TROPICAL_SIDEREAL_COMPARISON_PATH, TROPICAL_SIDEREAL_COMPARISON_RELEASE_DATE, TROPICAL_SIDEREAL_COMPARISONS, tropicalSiderealComparisonPath } from '@/lib/tropical-sidereal-comparisons'
+import { MATHEMATICAL_CONCEPTS, MATHEMATICS_KNOWLEDGE_PATH, MATHEMATICS_KNOWLEDGE_RELEASE_DATE, mathematicsConceptPath } from '@/lib/mathematics-knowledge'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = MAHA_SITE_URL
@@ -33,6 +34,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${baseUrl}/knowledge`, lastModified: new Date(CELESTIAL_FACT_RELEASE_DATE) },
     { url: `${baseUrl}${CELESTIAL_FACT_PATH}`, lastModified: new Date(CELESTIAL_FACT_RELEASE_DATE) },
     { url: `${baseUrl}${ASTRONOMY_KNOWLEDGE_PATH}`, lastModified: new Date(ASTRONOMY_KNOWLEDGE_RELEASE_DATE) },
+    { url: `${baseUrl}${MATHEMATICS_KNOWLEDGE_PATH}`, lastModified: new Date(MATHEMATICS_KNOWLEDGE_RELEASE_DATE) },
+    ...MATHEMATICAL_CONCEPTS.map((concept) => ({
+      url: `${baseUrl}${mathematicsConceptPath(concept)}`,
+      lastModified: new Date(MATHEMATICS_KNOWLEDGE_RELEASE_DATE),
+    })),
     { url: `${baseUrl}${ASTROLOGY_PATH}`, lastModified: new Date(ASTROLOGY_RELEASE_DATE) },
     { url: `${baseUrl}/knowledge/muhurta`, lastModified: new Date(ASTROLOGY_RELEASE_DATE) },
     { url: `${baseUrl}/knowledge/birth`, lastModified: new Date(ASTROLOGY_RELEASE_DATE) },
