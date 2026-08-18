@@ -117,7 +117,7 @@ export const CELESTIAL_GUIDES = {
         paragraphs: ['The compiler preserves separate feature namespaces, rule packs, predictions, and scores. A tropical rule cannot consume a sidereal placement unless the rule explicitly declares that cross-system dependency. Historical calibration can compare both systems against the same outcome, but it must report model selection and multiple-testing controls.'],
       },
     ],
-    relatedReports: [{ href: '/knowledge/birth', label: 'View both coordinate frames in a birth report' }, { href: '/knowledge/astrology', label: 'Browse named traditions and source-bound rules' }],
+    relatedReports: [{ href: '/knowledge/astrology/tropical-vs-sidereal/comparisons', label: 'Browse 12 preserved-disagreement comparisons' }, { href: '/knowledge/birth', label: 'View both coordinate frames in a birth report' }, { href: '/knowledge/astrology', label: 'Browse named traditions and source-bound rules' }],
   },
   corporate: {
     path: '/knowledge/astrology/corporate-charts',

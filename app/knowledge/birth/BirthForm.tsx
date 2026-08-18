@@ -506,6 +506,7 @@ function Report({ report }: { report: BirthReport }) {
           <Link href="/knowledge/astrology/jupiter-transits" className="border border-zinc-700 px-3 py-2 hover:border-violet-500 hover:text-white">Jupiter transit method</Link>
           <Link href="/knowledge/astrology/timing" className="border border-zinc-700 px-3 py-2 hover:border-violet-500 hover:text-white">All timing references</Link>
           <Link href="/knowledge/astrology/tropical-vs-sidereal" className="border border-zinc-700 px-3 py-2 hover:border-violet-500 hover:text-white">Tropical vs. sidereal</Link>
+          <Link href="/knowledge/astrology/tropical-vs-sidereal/comparisons" className="border border-zinc-700 px-3 py-2 hover:border-amber-500 hover:text-white">Frame disagreements</Link>
         </div>
       </section>
 

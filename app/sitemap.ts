@@ -13,6 +13,7 @@ import { CELESTIAL_GUIDE_LIST, CELESTIAL_GUIDE_RELEASE_DATE } from '@/lib/celest
 import { CALCULATION_REFERENCE_PATH, CALCULATION_REFERENCE_RELEASE_DATE, CALCULATION_REFERENCES, calculationReferencePath } from '@/lib/celestial-calculation-references'
 import { TIMING_REFERENCE_PATH, TIMING_REFERENCE_RELEASE_DATE, TIMING_REFERENCES, timingReferencePath } from '@/lib/celestial-timing-references'
 import { CORPORATE_MUNDANE_PATH, CORPORATE_MUNDANE_REFERENCES, CORPORATE_MUNDANE_RELEASE_DATE, corporateMundaneReferencePath } from '@/lib/corporate-mundane-references'
+import { TROPICAL_SIDEREAL_COMPARISON_PATH, TROPICAL_SIDEREAL_COMPARISON_RELEASE_DATE, TROPICAL_SIDEREAL_COMPARISONS, tropicalSiderealComparisonPath } from '@/lib/tropical-sidereal-comparisons'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = MAHA_SITE_URL
@@ -55,6 +56,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...CORPORATE_MUNDANE_REFERENCES.map((entry) => ({
       url: `${baseUrl}${corporateMundaneReferencePath(entry)}`,
       lastModified: new Date(CORPORATE_MUNDANE_RELEASE_DATE),
+    })),
+    { url: `${baseUrl}${TROPICAL_SIDEREAL_COMPARISON_PATH}`, lastModified: new Date(TROPICAL_SIDEREAL_COMPARISON_RELEASE_DATE) },
+    ...TROPICAL_SIDEREAL_COMPARISONS.map((entry) => ({
+      url: `${baseUrl}${tropicalSiderealComparisonPath(entry)}`,
+      lastModified: new Date(TROPICAL_SIDEREAL_COMPARISON_RELEASE_DATE),
     })),
     { url: `${baseUrl}/knowledge/suppliers`, lastModified: new Date('2026-08-13') },
     { url: `${baseUrl}${SEMICONDUCTOR_PROCESS_MAP_PATH}`, lastModified: new Date(SEMICONDUCTOR_PROCESS_MAP_DATE) },
