@@ -42,7 +42,9 @@ export const mahaCarpSellerProfile = Object.freeze({
   roleMirror: CARP_SELLER_ROLE_URL,
   membership: {
     network: 'CABEZON',
-    status: 'identity_published_pending_cabezon_directory_confirmation',
+    status: 'directory_confirmed_by_cabezon_operator',
+    confirmedAt: '2026-08-13',
+    confirmationUrl: 'https://github.com/bitsanity/cabezon/pull/1#issuecomment-5281334301',
     did: identity?.did.id ?? null,
     didUrl: MAHA_CARP_DID_URL,
     sad: identity ? MAHA_CARP_SAD_URL : null,

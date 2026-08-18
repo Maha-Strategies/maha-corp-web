@@ -34,7 +34,9 @@ test('the Maha seller maps Deep Context to the adopted digital offering shape', 
   const offer = mahaCarpSellerProfile.offers[0]
   assert.equal(mahaCarpSellerProfile.roleContract, CABEZON_SELLER_ROLE_URL)
   assert.equal(mahaCarpSellerProfile.roleMirror, CARP_SELLER_ROLE_URL)
-  assert.equal(mahaCarpSellerProfile.membership.status, 'identity_published_pending_cabezon_directory_confirmation')
+  assert.equal(mahaCarpSellerProfile.membership.status, 'directory_confirmed_by_cabezon_operator')
+  assert.equal(mahaCarpSellerProfile.membership.confirmedAt, '2026-08-13')
+  assert.equal(mahaCarpSellerProfile.membership.confirmationUrl, 'https://github.com/bitsanity/cabezon/pull/1#issuecomment-5281334301')
   assert.equal(offer.offeringRef, 'maha:deep-context-evaluation:v1')
   assert.equal(offer.kind, 'digital')
   assert.equal(offer.price.amount, '0.01')

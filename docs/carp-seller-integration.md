@@ -17,6 +17,8 @@ The public DID is a `did:key` derived from a dedicated secp256k1 key. The SAD is
 
 The Seller role is no longer a Maha-only proposal. Bryan merged Maha's physical/digital fulfillment generalization as CABEZON Seller model v0.2. The public mirror therefore records the canonical source and contribution rather than claiming an unadopted extension.
 
+On 13 August 2026, the CABEZON operator [confirmed Maha's DID/SAD verification, ACL entry, Seller-directory persistence, and reciprocal ADILOS handshake](https://github.com/bitsanity/cabezon/pull/1#issuecomment-5281334301). The public Seller profile records this as `directory_confirmed_by_cabezon_operator`. This establishes operator-confirmed directory membership; it does not establish a completed purchase or delivery.
+
 ## Transport and trust boundary
 
 The public CARP compatibility layer implements:
@@ -72,7 +74,7 @@ A digest proves byte identity, not correctness, quality, buyer acceptance, or en
 
    This creates a sanitized artifact containing public identity, peer identity, check results and a request ID. It never records the private key, session key, ADILOS challenge/response, encrypted payload, or result content.
 
-3. Ask Bryan to complete the reciprocal operator step and confirm that El-Cabezon returns Maha's SAD under the Seller directory. Until that happens, the public profile remains `identity_published_pending_cabezon_directory_confirmation`.
+3. Verify the operator confirmation linked by the public Seller profile. El-Cabezon completed the reciprocal handshake and persisted Maha's SAD under the Seller role on 13 August 2026. Treat this separately from purchase and delivery evidence.
 
 4. Run one free encrypted `enquiry` for context/evidence retention and verify the canonical offering.
 
