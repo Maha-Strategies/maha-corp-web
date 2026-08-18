@@ -9,9 +9,15 @@ import {
   validateContextProofFixture,
   type ContextProofFixture,
 } from '../lib/context-proof-fixture.ts'
+import {
+  fixtureFileDigest,
+  recomputeContextCompilerInputHash,
+  recomputeContextCompilerOutputHash,
+} from '../lib/context-proof-canonicalization.ts'
 import { compileContextPack } from '../lib/context-compiler.ts'
 
 const fixtureRoot = join(import.meta.dirname, 'fixtures', 'context-proof')
+const addendumRoot = join(import.meta.dirname, 'fixtures', 'context-proof-addendum-v3.1')
 const index = JSON.parse(readFileSync(join(fixtureRoot, 'index.json'), 'utf8')) as {
   bundles: Array<{ id: string; path: string; adversarialPath?: string }>
 }
@@ -96,4 +102,41 @@ test('the sidecar preserves an omitted document title when reproducing inputHash
 
   assert.equal(proofFixture.privateWitness.request.documents[0].title, undefined)
   validateContextProofFixture(proofFixture)
+})
+
+test('the canonicalization addendum does not mutate the validated checkpoint', () => {
+  const addendum = JSON.parse(readFileSync(join(addendumRoot, 'index.json'), 'utf8')) as {
+    frozenCheckpointSha256: Record<string, string>
+  }
+  for (const [path, digest] of Object.entries(addendum.frozenCheckpointSha256)) {
+    assert.equal(fixtureFileDigest(readFileSync(join(fixtureRoot, path))), digest, path)
+  }
+})
+
+test('production input and output commitments follow the executable preimage rules', () => {
+  for (const path of ['representative-n70/fixture.json', 'boundary-n128/fixture.json', 'duplicate-retained-set/fixture.json']) {
+    const proofFixture = fixture(path)
+    assert.equal(recomputeContextCompilerInputHash(proofFixture.privateWitness.request), proofFixture.compilerCommitments.inputHash)
+    assert.equal(recomputeContextCompilerOutputHash(proofFixture.privateWitness.compiledContext), proofFixture.compilerCommitments.outputHash)
+  }
+})
+
+test('the input commitment excludes only the documented production fields', () => {
+  const proofFixture = fixture('duplicate-retained-set/fixture.json')
+  const request = proofFixture.privateWitness.request
+  const original = recomputeContextCompilerInputHash(request)
+  const changedRouting = { ...request, provenance: 'none' as const, scoring: 'keyword' as const, budgetMode: 'estimated' as const }
+  assert.equal(recomputeContextCompilerInputHash(changedRouting), original)
+  assert.notEqual(recomputeContextCompilerInputHash({ ...request, tokenBudget: request.tokenBudget + 1 }), original)
+  assert.notEqual(recomputeContextCompilerInputHash({ ...request, task: `${request.task} Additional constraint.` }), original)
+})
+
+test('partial coverage is independently reproduced as three of four sources', () => {
+  const partial = JSON.parse(readFileSync(join(addendumRoot, 'partial-coverage-3-of-4', 'fixture.json'), 'utf8')) as ContextProofFixture
+  validateContextProofFixture(partial)
+  assert.ok(partial.expectedPublicValues)
+  assert.equal(partial.expectedPublicValues.coverageNumerator, 3)
+  assert.equal(partial.expectedPublicValues.coverageDenominator, 4)
+  assert.equal(partial.expectedPublicValues.coveragePercentageBps, 7_500)
+  assert.deepEqual(new Set(partial.privateWitness.retainedPassageIdsInOutputOrder.map((id) => id.split(':')[0])), new Set(['release', 'rotation', 'rollback']))
 })

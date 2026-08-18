@@ -46,6 +46,7 @@
     "verify:mps-production": "node --experimental-strip-types scripts/run-mps-production-verification.ts",
     "generate:context-playground": "node --experimental-strip-types scripts/generate-context-playground-workload.ts",
     "generate:context-proof-fixtures": "node --experimental-strip-types scripts/generate-context-proof-fixtures.ts",
+    "generate:context-proof-addendum": "node --experimental-strip-types scripts/generate-context-proof-addendum.ts",
     "export:context-proof-sidecar": "node --experimental-strip-types scripts/export-context-proof-sidecar.ts",
     "validate:context-proof-fixtures": "node --experimental-strip-types scripts/validate-context-proof-fixtures.ts",
     "benchmark:context-retention": "node --experimental-strip-types scripts/run-context-retention-benchmark.ts",
