@@ -18,6 +18,9 @@ import { ASTRONOMY_KNOWLEDGE_PATH } from '@/lib/astronomy-knowledge'
 import { SITE_URL } from '@/lib/briefs-data'
 import { CELESTIAL_FACT_PATH } from '@/lib/celestial-facts'
 import { CELESTIAL_GUIDE_LIST } from '@/lib/celestial-guides'
+import { CALCULATION_REFERENCE_PATH, CALCULATION_REFERENCES } from '@/lib/celestial-calculation-references'
+import { TIMING_REFERENCE_PATH, TIMING_REFERENCES } from '@/lib/celestial-timing-references'
+import { CORPORATE_MUNDANE_PATH, CORPORATE_MUNDANE_REFERENCES } from '@/lib/corporate-mundane-references'
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -79,9 +82,24 @@ export default function AstrologyTraditionsPage() {
         <section className="mt-14">
           <div className="flex flex-wrap items-baseline justify-between gap-4">
             <h2 className="text-2xl font-semibold text-white">Calculations and methods</h2>
-            <p className="font-mono text-[10px] uppercase tracking-widest text-zinc-600">Crawlable technical guides</p>
+            <Link href={CALCULATION_REFERENCE_PATH} className="font-mono text-[10px] uppercase tracking-widest text-cyan-300 hover:text-cyan-100">Browse all {CALCULATION_REFERENCES.length} calculation contracts →</Link>
           </div>
-          <p className="mt-3 max-w-3xl text-sm leading-6 text-zinc-500">These guides explain what is calculated, which convention changes the result, and where interpretation begins. They do not turn a traditional doctrine into an empirical claim.</p>
+          <p className="mt-3 max-w-3xl text-sm leading-6 text-zinc-500">The reference library documents time resolution, ephemerides, frames, zodiac conversions, houses, lunar limbs, aspects, uncertainty, and provenance. These longer guides connect those contracts to complete report methods.</p>
+          <Link href={CALCULATION_REFERENCE_PATH} className="mt-6 block border border-cyan-800/70 bg-cyan-950/10 p-5 hover:border-cyan-500">
+            <p className="font-mono text-[9px] uppercase tracking-widest text-cyan-300">Calculation authority library · {CALCULATION_REFERENCES.length} references</p>
+            <h3 className="mt-3 text-lg font-semibold text-white">Every number needs a declared convention</h3>
+            <p className="mt-2 max-w-3xl text-sm leading-6 text-zinc-400">Inspect required inputs, procedures, production status, uncertainty behavior, authoritative sources, and the exact boundary between geometry and interpretation.</p>
+          </Link>
+          <Link href={TIMING_REFERENCE_PATH} className="mt-4 block border border-violet-800/70 bg-violet-950/10 p-5 hover:border-violet-500">
+            <p className="font-mono text-[9px] uppercase tracking-widest text-violet-300">Timing reference library · {TIMING_REFERENCES.length} canonical pages</p>
+            <h3 className="mt-3 text-lg font-semibold text-white">Ingresses, stations, lunations, and Vimśottarī chronology</h3>
+            <p className="mt-2 max-w-3xl text-sm leading-6 text-zinc-400">Inspect event definitions, root-finding procedures, frame choices, repeated crossings, period boundaries, uncertainty, source roles, and the exact limit on what each date can support.</p>
+          </Link>
+          <Link href={CORPORATE_MUNDANE_PATH} className="mt-4 block border border-cyan-800/70 bg-cyan-950/10 p-5 hover:border-cyan-500">
+            <p className="font-mono text-[9px] uppercase tracking-widest text-cyan-300">Corporate and mundane library · {CORPORATE_MUNDANE_REFERENCES.length} finite pages</p>
+            <h3 className="mt-3 text-lg font-semibold text-white">Formation, transaction, deployment, launch, and merger events</h3>
+            <p className="mt-2 max-w-3xl text-sm leading-6 text-zinc-400">Inspect evidence requirements, event-selection rules, location and time uncertainty, organization-specific geometry, preregistration methods, and sanitized system demonstrations.</p>
+          </Link>
           <div className="mt-6 grid gap-4 md:grid-cols-2">
             {CELESTIAL_GUIDE_LIST.map((guide) => (
               <Link key={guide.path} href={guide.path} className="block border border-zinc-800 p-5 hover:border-violet-500/50">

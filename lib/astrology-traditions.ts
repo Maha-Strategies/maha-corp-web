@@ -19,6 +19,7 @@
 
 import { SITE_URL } from './briefs-data.ts'
 import { CLAIM_EVIDENCE_SCHEMA, assertClaimEvidence, type ClaimProvenance } from './claim-evidence.ts'
+import { JYOTISHA_EXPANSION_PASSAGES, JYOTISHA_EXPANSION_RULES } from './jyotisha-classical-expansion.ts'
 import { ASTROLOGY_RELEASE_DATE, ASTROLOGY_VERSION } from './astrology-version.ts'
 
 export { ASTROLOGY_RELEASE_DATE, ASTROLOGY_VERSION } from './astrology-version.ts'
@@ -38,6 +39,7 @@ export const JYOTISHA_COVERAGE_AREAS = [
   'dasha-interpretation',
   'transit-interpretation',
   'mundane-corporate-charts',
+  'panchanga-selection',
 ] as const
 export type JyotishaCoverageArea = typeof JYOTISHA_COVERAGE_AREAS[number]
 export type DoctrineStatus = 'historical-doctrine' | 'translator-commentary' | 'contemporary-practice' | 'maha-synthesis'
@@ -364,6 +366,7 @@ const BRIHAT_JATAKA_PASSAGES: AstrologyPassage[] = [
 export const ASTROLOGY_PASSAGES: AstrologyPassage[] = [
   ...BRIHAT_SAMHITA_PASSAGES,
   ...BRIHAT_JATAKA_PASSAGES,
+  ...JYOTISHA_EXPANSION_PASSAGES,
   { id: 'ptb-1-5-benefic', sourceId: P, locator: 'Book I, Chapter V — Benefics and Malefics', excerpt: 'Therefore, two of the planets, on account of their temperate quality, and because heat and moisture are predominant in them, are considered by the ancients as benefic, or causers of good: these are Jupiter and Venus.' },
   { id: 'ptb-1-5-malefic', sourceId: P, locator: 'Book I, Chapter V — Benefics and Malefics', excerpt: 'But Saturn and Mars are esteemed of a contrary nature, and malefic, or causers of evil: the first from his excess of cold, the other from his excess of dryness.' },
   { id: 'ptb-1-5-common', sourceId: P, locator: 'Book I, Chapter V — Benefics and Malefics', excerpt: 'The Sun and Mercury are deemed of common influence, and productive either of good or evil in unison with whatever planets they may be connected with.' },
@@ -547,6 +550,7 @@ export const ASTROLOGY_RULES: InterpretationRule[] = [
     boundary: 'This is explicitly Maha’s synthesis, not classical doctrine. It must be preregistered and tested against corporate outcomes before any predictive claim; it cannot guide legal, investment, or financial decisions and carries no assurance about a company’s future.',
     sourceBoundCoverage: { area: 'mundane-corporate-charts', doctrineStatus: 'maha-synthesis', publicationGate: 'practitioner-review-required' },
   },
+  ...JYOTISHA_EXPANSION_RULES,
   {
     id: 'ptb-planet-nature-benefic', traditionId: 'hellenistic-ptolemaic', technique: 'planetary nature', chartTypes: ['natal', 'mundane'],
     conditions: [{ factField: 'subject.identifiers', description: 'Jupiter or Venus is present in the chart.', requiresSubjects: ['Jupiter', 'Venus'], derivation: 'direct' }],

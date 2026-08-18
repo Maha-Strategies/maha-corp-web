@@ -10,6 +10,10 @@ import { CELESTIAL_FACT_PATH, CELESTIAL_FACT_RELEASE_DATE } from '@/lib/celestia
 import { ASTROLOGY_PATH, ASTROLOGY_RELEASE_DATE, ASTROLOGY_TRADITIONS, astrologyTraditionPath } from '@/lib/astrology-traditions'
 import { ASTRONOMY_ARTICLES, ASTRONOMY_KNOWLEDGE_PATH, ASTRONOMY_KNOWLEDGE_RELEASE_DATE, astronomyArticlePath } from '@/lib/astronomy-knowledge'
 import { CELESTIAL_GUIDE_LIST, CELESTIAL_GUIDE_RELEASE_DATE } from '@/lib/celestial-guides'
+import { CALCULATION_REFERENCE_PATH, CALCULATION_REFERENCE_RELEASE_DATE, CALCULATION_REFERENCES, calculationReferencePath } from '@/lib/celestial-calculation-references'
+import { TIMING_REFERENCE_PATH, TIMING_REFERENCE_RELEASE_DATE, TIMING_REFERENCES, timingReferencePath } from '@/lib/celestial-timing-references'
+import { CORPORATE_MUNDANE_PATH, CORPORATE_MUNDANE_REFERENCES, CORPORATE_MUNDANE_RELEASE_DATE, corporateMundaneReferencePath } from '@/lib/corporate-mundane-references'
+import { TROPICAL_SIDEREAL_COMPARISON_PATH, TROPICAL_SIDEREAL_COMPARISON_RELEASE_DATE, TROPICAL_SIDEREAL_COMPARISONS, tropicalSiderealComparisonPath } from '@/lib/tropical-sidereal-comparisons'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = MAHA_SITE_URL
@@ -37,6 +41,26 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...CELESTIAL_GUIDE_LIST.map((guide) => ({
       url: `${baseUrl}${guide.path}`,
       lastModified: new Date(CELESTIAL_GUIDE_RELEASE_DATE),
+    })),
+    { url: `${baseUrl}${CALCULATION_REFERENCE_PATH}`, lastModified: new Date(CALCULATION_REFERENCE_RELEASE_DATE) },
+    ...CALCULATION_REFERENCES.map((entry) => ({
+      url: `${baseUrl}${calculationReferencePath(entry)}`,
+      lastModified: new Date(CALCULATION_REFERENCE_RELEASE_DATE),
+    })),
+    { url: `${baseUrl}${TIMING_REFERENCE_PATH}`, lastModified: new Date(TIMING_REFERENCE_RELEASE_DATE) },
+    ...TIMING_REFERENCES.map((entry) => ({
+      url: `${baseUrl}${timingReferencePath(entry)}`,
+      lastModified: new Date(TIMING_REFERENCE_RELEASE_DATE),
+    })),
+    { url: `${baseUrl}${CORPORATE_MUNDANE_PATH}`, lastModified: new Date(CORPORATE_MUNDANE_RELEASE_DATE) },
+    ...CORPORATE_MUNDANE_REFERENCES.map((entry) => ({
+      url: `${baseUrl}${corporateMundaneReferencePath(entry)}`,
+      lastModified: new Date(CORPORATE_MUNDANE_RELEASE_DATE),
+    })),
+    { url: `${baseUrl}${TROPICAL_SIDEREAL_COMPARISON_PATH}`, lastModified: new Date(TROPICAL_SIDEREAL_COMPARISON_RELEASE_DATE) },
+    ...TROPICAL_SIDEREAL_COMPARISONS.map((entry) => ({
+      url: `${baseUrl}${tropicalSiderealComparisonPath(entry)}`,
+      lastModified: new Date(TROPICAL_SIDEREAL_COMPARISON_RELEASE_DATE),
     })),
     { url: `${baseUrl}/knowledge/suppliers`, lastModified: new Date('2026-08-13') },
     { url: `${baseUrl}${SEMICONDUCTOR_PROCESS_MAP_PATH}`, lastModified: new Date(SEMICONDUCTOR_PROCESS_MAP_DATE) },
