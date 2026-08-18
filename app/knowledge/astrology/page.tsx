@@ -17,6 +17,7 @@ import {
 import { ASTRONOMY_KNOWLEDGE_PATH } from '@/lib/astronomy-knowledge'
 import { SITE_URL } from '@/lib/briefs-data'
 import { CELESTIAL_FACT_PATH } from '@/lib/celestial-facts'
+import { CELESTIAL_GUIDE_LIST } from '@/lib/celestial-guides'
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -73,6 +74,23 @@ export default function AstrologyTraditionsPage() {
               <li key={use} className="border-l border-rose-900/60 pl-3 text-sm leading-6 text-zinc-400">{use}</li>
             ))}
           </ul>
+        </section>
+
+        <section className="mt-14">
+          <div className="flex flex-wrap items-baseline justify-between gap-4">
+            <h2 className="text-2xl font-semibold text-white">Calculations and methods</h2>
+            <p className="font-mono text-[10px] uppercase tracking-widest text-zinc-600">Crawlable technical guides</p>
+          </div>
+          <p className="mt-3 max-w-3xl text-sm leading-6 text-zinc-500">These guides explain what is calculated, which convention changes the result, and where interpretation begins. They do not turn a traditional doctrine into an empirical claim.</p>
+          <div className="mt-6 grid gap-4 md:grid-cols-2">
+            {CELESTIAL_GUIDE_LIST.map((guide) => (
+              <Link key={guide.path} href={guide.path} className="block border border-zinc-800 p-5 hover:border-violet-500/50">
+                <p className="font-mono text-[9px] uppercase tracking-widest text-violet-300">{guide.eyebrow}</p>
+                <h3 className="mt-3 text-lg font-semibold text-white">{guide.title}</h3>
+                <p className="mt-2 text-sm leading-6 text-zinc-400">{guide.description}</p>
+              </Link>
+            ))}
+          </div>
         </section>
 
         <section className="mt-14">

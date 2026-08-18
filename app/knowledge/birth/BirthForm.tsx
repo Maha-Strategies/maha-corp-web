@@ -1,5 +1,6 @@
 'use client'
 
+import Link from 'next/link'
 import { useActionState, useEffect, useMemo, useRef, useState } from 'react'
 
 import { BIRTH_PLACES, birthPlaceKey, findBirthPlace } from '@/lib/birth-places'
@@ -496,6 +497,16 @@ function Report({ report }: { report: BirthReport }) {
       <ChartStructure report={report} />
       <TimingSection report={report} />
       <HistoricalCalibrationSection report={report} />
+
+      <section className="mt-10 border border-zinc-800 bg-zinc-950/40 p-5">
+        <h2 className="font-mono text-[10px] uppercase tracking-widest text-violet-300">Understand this report</h2>
+        <div className="mt-4 flex flex-wrap gap-3 text-xs">
+          <Link href="/knowledge/astrology/vimshottari-dasha" className="border border-zinc-700 px-3 py-2 hover:border-violet-500 hover:text-white">Vimśottarī daśā method</Link>
+          <Link href="/knowledge/astrology/lahiri-ayanamsa" className="border border-zinc-700 px-3 py-2 hover:border-violet-500 hover:text-white">Lahiri calculation</Link>
+          <Link href="/knowledge/astrology/jupiter-transits" className="border border-zinc-700 px-3 py-2 hover:border-violet-500 hover:text-white">Jupiter transit method</Link>
+          <Link href="/knowledge/astrology/tropical-vs-sidereal" className="border border-zinc-700 px-3 py-2 hover:border-violet-500 hover:text-white">Tropical vs. sidereal</Link>
+        </div>
+      </section>
 
       <section className="mt-10">
         <div className="flex flex-wrap items-baseline justify-between gap-3">

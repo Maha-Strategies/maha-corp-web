@@ -27,6 +27,7 @@ export default function CorporateReportPage() {
           <p className="font-mono text-[10px] uppercase tracking-widest text-violet-300">{CORPORATE_REPORT_VERSION} · organization subject</p>
           <h1 className="mt-6 text-4xl font-bold tracking-tight text-white sm:text-6xl">Corporate formation-event report</h1>
           <p className="mt-6 max-w-3xl font-serif text-lg leading-8 text-zinc-400">Record the event that constituted or materially began an organization, attach its evidence, and compute a formation chart without pretending an organization is a human subject. Uncertain times and nonstandard location choices remain visible in the result.</p>
+          <Link href="/knowledge/astrology/corporate-charts" className="mt-5 inline-block text-sm text-violet-300 underline decoration-violet-700 underline-offset-4 hover:text-white">Read the corporate-chart method before calculating →</Link>
         </header>
 
         <CorporateForm />

@@ -1,5 +1,6 @@
 'use client'
 
+import Link from 'next/link'
 import { useActionState, useEffect, useState } from 'react'
 
 import type { CorporateReport, EventTimeConfidence } from '@/lib/corporate-report'
@@ -113,6 +114,15 @@ function Report({ report }: { report: CorporateReport }) {
         <h2 className="text-2xl font-semibold text-white">What this report refuses to infer</h2>
         <p className="mt-3 max-w-3xl text-sm leading-6 text-zinc-300">No valuation estimate, investment return, or guarantee of revenue, growth, survival, financing, or legal validity is produced.</p>
         <ul className="mt-4 grid gap-2 sm:grid-cols-2">{report.refusals.map((item) => <li key={item} className="border-l border-rose-900/60 pl-3 text-sm leading-6 text-zinc-400">{item}</li>)}</ul>
+      </section>
+
+      <section className="mt-6 border border-zinc-800 p-5">
+        <p className={LABEL}>Method documentation</p>
+        <div className="mt-4 flex flex-wrap gap-3 text-xs">
+          <Link href="/knowledge/astrology/corporate-charts" className="border border-zinc-700 px-3 py-2 hover:border-violet-500 hover:text-white">Corporate chart method</Link>
+          <Link href="/knowledge/astrology/lahiri-ayanamsa" className="border border-zinc-700 px-3 py-2 hover:border-violet-500 hover:text-white">Lahiri calculation</Link>
+          <Link href="/knowledge/astrology/jupiter-transits" className="border border-zinc-700 px-3 py-2 hover:border-violet-500 hover:text-white">Transit methodology</Link>
+        </div>
       </section>
 
       <section className="mt-6 border-t border-zinc-800 pt-6 font-mono text-[10px] text-zinc-600">
