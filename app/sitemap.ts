@@ -12,6 +12,7 @@ import { ASTRONOMY_ARTICLES, ASTRONOMY_KNOWLEDGE_PATH, ASTRONOMY_KNOWLEDGE_RELEA
 import { CELESTIAL_GUIDE_LIST, CELESTIAL_GUIDE_RELEASE_DATE } from '@/lib/celestial-guides'
 import { CALCULATION_REFERENCE_PATH, CALCULATION_REFERENCE_RELEASE_DATE, CALCULATION_REFERENCES, calculationReferencePath } from '@/lib/celestial-calculation-references'
 import { TIMING_REFERENCE_PATH, TIMING_REFERENCE_RELEASE_DATE, TIMING_REFERENCES, timingReferencePath } from '@/lib/celestial-timing-references'
+import { CORPORATE_MUNDANE_PATH, CORPORATE_MUNDANE_REFERENCES, CORPORATE_MUNDANE_RELEASE_DATE, corporateMundaneReferencePath } from '@/lib/corporate-mundane-references'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = MAHA_SITE_URL
@@ -49,6 +50,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...TIMING_REFERENCES.map((entry) => ({
       url: `${baseUrl}${timingReferencePath(entry)}`,
       lastModified: new Date(TIMING_REFERENCE_RELEASE_DATE),
+    })),
+    { url: `${baseUrl}${CORPORATE_MUNDANE_PATH}`, lastModified: new Date(CORPORATE_MUNDANE_RELEASE_DATE) },
+    ...CORPORATE_MUNDANE_REFERENCES.map((entry) => ({
+      url: `${baseUrl}${corporateMundaneReferencePath(entry)}`,
+      lastModified: new Date(CORPORATE_MUNDANE_RELEASE_DATE),
     })),
     { url: `${baseUrl}/knowledge/suppliers`, lastModified: new Date('2026-08-13') },
     { url: `${baseUrl}${SEMICONDUCTOR_PROCESS_MAP_PATH}`, lastModified: new Date(SEMICONDUCTOR_PROCESS_MAP_DATE) },

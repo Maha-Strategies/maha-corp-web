@@ -120,6 +120,7 @@ function Report({ report }: { report: CorporateReport }) {
         <p className={LABEL}>Method documentation</p>
         <div className="mt-4 flex flex-wrap gap-3 text-xs">
           <Link href="/knowledge/astrology/corporate-charts" className="border border-zinc-700 px-3 py-2 hover:border-violet-500 hover:text-white">Corporate chart method</Link>
+          <Link href="/knowledge/astrology/corporate-mundane" className="border border-zinc-700 px-3 py-2 hover:border-cyan-500 hover:text-white">Corporate methodology library</Link>
           <Link href="/knowledge/astrology/lahiri-ayanamsa" className="border border-zinc-700 px-3 py-2 hover:border-violet-500 hover:text-white">Lahiri calculation</Link>
           <Link href="/knowledge/astrology/jupiter-transits" className="border border-zinc-700 px-3 py-2 hover:border-violet-500 hover:text-white">Transit methodology</Link>
         </div>

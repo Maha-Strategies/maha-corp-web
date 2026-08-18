@@ -20,6 +20,7 @@ import { CELESTIAL_FACT_PATH } from '@/lib/celestial-facts'
 import { CELESTIAL_GUIDE_LIST } from '@/lib/celestial-guides'
 import { CALCULATION_REFERENCE_PATH, CALCULATION_REFERENCES } from '@/lib/celestial-calculation-references'
 import { TIMING_REFERENCE_PATH, TIMING_REFERENCES } from '@/lib/celestial-timing-references'
+import { CORPORATE_MUNDANE_PATH, CORPORATE_MUNDANE_REFERENCES } from '@/lib/corporate-mundane-references'
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -93,6 +94,11 @@ export default function AstrologyTraditionsPage() {
             <p className="font-mono text-[9px] uppercase tracking-widest text-violet-300">Timing reference library · {TIMING_REFERENCES.length} canonical pages</p>
             <h3 className="mt-3 text-lg font-semibold text-white">Ingresses, stations, lunations, and Vimśottarī chronology</h3>
             <p className="mt-2 max-w-3xl text-sm leading-6 text-zinc-400">Inspect event definitions, root-finding procedures, frame choices, repeated crossings, period boundaries, uncertainty, source roles, and the exact limit on what each date can support.</p>
+          </Link>
+          <Link href={CORPORATE_MUNDANE_PATH} className="mt-4 block border border-cyan-800/70 bg-cyan-950/10 p-5 hover:border-cyan-500">
+            <p className="font-mono text-[9px] uppercase tracking-widest text-cyan-300">Corporate and mundane library · {CORPORATE_MUNDANE_REFERENCES.length} finite pages</p>
+            <h3 className="mt-3 text-lg font-semibold text-white">Formation, transaction, deployment, launch, and merger events</h3>
+            <p className="mt-2 max-w-3xl text-sm leading-6 text-zinc-400">Inspect evidence requirements, event-selection rules, location and time uncertainty, organization-specific geometry, preregistration methods, and sanitized system demonstrations.</p>
           </Link>
           <div className="mt-6 grid gap-4 md:grid-cols-2">
             {CELESTIAL_GUIDE_LIST.map((guide) => (
