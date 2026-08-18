@@ -274,7 +274,10 @@ async function execute(config: Config): Promise<void> {
   let lastChallenge: MerchantChallenge | null = null
   let recovery: RecoveryState | null = null
   const { management, execution } = awsClients(config)
-  const requestId = `agentcore-request-${Date.now()}`
+  // AgentCore clientToken values must contain at least 33 characters. Keep
+  // both AWS-bound identifiers comfortably above that service constraint.
+  const runNonce = Date.now()
+  const requestId = `agentcore-request-${runNonce}-bounded`
   const journal: AwsAgentCoreSessionJournal = {
     async created(handle) {
       recovery = { version: 1, phase: 'session_created', handle, requestId, updatedAt: new Date().toISOString() }
@@ -361,7 +364,12 @@ async function execute(config: Config): Promise<void> {
   try {
     const result = await tool.purchase(
       { resourceUrl: config.resourceUrl, purpose: 'controlled_agentcore_rehearsal' },
-      { requestId, taskId: `agentcore-task-${Date.now()}`, authorizationId: `agentcore-authorization-${Date.now()}`, idempotencyKey: `agentcore-payment-${Date.now()}` },
+      {
+        requestId,
+        taskId: `agentcore-task-${runNonce}`,
+        authorizationId: `agentcore-authorization-${runNonce}`,
+        idempotencyKey: `agentcore-payment-${runNonce}-bounded`,
+      },
     )
     console.log(JSON.stringify({
       status: result.status,
