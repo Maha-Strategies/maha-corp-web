@@ -48,46 +48,113 @@ export default function ContextRetentionBenchmarkPage() {
   const maha = measurement.results.find((result) => result.method === 'maha_bm25')!
   const front = measurement.results.find((result) => result.method === 'front_truncation')!
   const oracle = measurement.results.find((result) => result.method === 'oracle_ceiling')!
+  const completeCases = Math.round(measurement.dataset.cases * maha.completeEvidenceSetPercent / 100)
+  const anyEvidenceCases = Math.round(measurement.dataset.cases * maha.anyEvidenceHitPercent / 100)
+  const incompleteCases = measurement.dataset.cases - completeCases
+  const partialCases = anyEvidenceCases - completeCases
+  const missedCases = measurement.dataset.cases - anyEvidenceCases
   const grossMultiple = measurement.economics.mahaGrossInputCostAvoidedUsd / measurement.economics.productionX402FeeUsd
 
-  return <main className="min-h-screen bg-[#0a0a0c] px-6 py-20 text-zinc-200 sm:py-28"><div className="mx-auto max-w-6xl">
-    <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, '\\u003c') }} />
-    <nav><Link href="/context-compiler" className="font-mono text-[10px] uppercase tracking-widest text-cyan-200 hover:text-white">← Context Compiler</Link></nav>
-    <header className="mt-8 max-w-4xl">
-      <p className="font-mono text-[10px] uppercase tracking-[0.24em] text-cyan-300">[ Original benchmark // MCRB-1 ]</p>
-      <h1 className="mt-5 text-4xl font-light leading-tight text-white sm:text-6xl">How much evidence survives a fixed context budget?</h1>
-      <p className="mt-6 text-lg leading-8 text-zinc-300">MCRB-1 evaluates six extractive selectors on {measurement.dataset.cases} independently annotated questions across {measurement.dataset.uniquePapers} full scientific papers. The primary result is exact and auditable: did at least one complete human evidence set survive?</p>
-    </header>
+  return (
+    <main className="evidence-page">
+      <div className="evidence-container">
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, '\\u003c') }} />
 
-    <section className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4" aria-label="Primary results">
-      <Metric label="Maha complete evidence" value={`${maha.completeEvidenceSetPercent}%`} detail={`95% CI ${maha.completeEvidenceSetWilson95.low}–${maha.completeEvidenceSetWilson95.high}%`} />
-      <Metric label="Mean token reduction" value={`${maha.meanReductionPercent}%`} detail={`${maha.meanOutputTokens.toLocaleString()} output tokens`} />
-      <Metric label="Front truncation" value={`${front.completeEvidenceSetPercent}%`} detail={`${(maha.completeEvidenceSetPercent / front.completeEvidenceSetPercent).toFixed(2)}× lower complete-set retention than Maha`} />
-      <Metric label="Known-evidence ceiling" value={`${oracle.completeEvidenceSetPercent}%`} detail={`${(oracle.completeEvidenceSetPercent - maha.completeEvidenceSetPercent).toFixed(1)} points of headroom remain`} />
-    </section>
+        <header className="border-t border-[var(--border-default)] pt-5">
+          <p className="evidence-kicker flex flex-wrap justify-between gap-3"><span>Original benchmark · MCRB-1</span><span>Measured {measurement.measuredOn}</span></p>
+          <h1 className="evidence-title">How much evidence survives a fixed context budget?</h1>
+          <p className="evidence-lede mt-7">Six extractive selectors. {measurement.dataset.cases} independently annotated questions. {measurement.dataset.uniquePapers} full scientific papers. One auditable question: did at least one complete human evidence set survive?</p>
+          <p className="evidence-copy mt-5">MCRB-1 is a deliberately narrow retrieval benchmark. It measures exact evidence survival under a declared {measurement.protocol.declaredTokenBudget.toLocaleString()}-token budget—not generated-answer quality.</p>
+          <div className="mt-9 flex flex-wrap gap-3"><a className="evidence-action evidence-action--primary" href="/benchmarks/mcrb-1/cases.jsonl">Download raw records ↗</a><Link className="evidence-action evidence-action--secondary" href="/context-compiler">Context Compiler ↗</Link></div>
+        </header>
 
-    <section className="mt-16" aria-labelledby="comparison-table">
-      <div className="max-w-3xl"><p className="font-mono text-[10px] uppercase tracking-widest text-cyan-300">Measured comparison</p><h2 id="comparison-table" className="mt-3 text-3xl font-light text-white">Maha leads every deployable baseline tested.</h2><p className="mt-4 leading-7 text-zinc-400">All methods received the same fixed selection allowance and returned passage-level citations. The oracle uses gold labels and is shown only as an upper bound.</p></div>
-      <div className="mt-7 overflow-x-auto border border-zinc-800">
-        <table className="min-w-full text-left text-sm"><thead className="bg-zinc-950 font-mono text-[10px] uppercase tracking-widest text-zinc-400"><tr><th className="px-4 py-3">Method</th><th className="px-4 py-3">Complete evidence</th><th className="px-4 py-3">Any evidence</th><th className="px-4 py-3">Mean recall</th><th className="px-4 py-3">Reduction</th><th className="px-4 py-3">p95 local</th></tr></thead>
-          <tbody>{measurement.results.map((result) => <tr key={result.method} className={`border-t border-zinc-800 ${result.method === 'maha_bm25' ? 'bg-cyan-950/20 text-cyan-50' : 'text-zinc-300'}`}><th className="whitespace-nowrap px-4 py-3 font-medium">{labels[result.method] ?? result.method}</th><td className="px-4 py-3">{result.completeEvidenceSetPercent}%</td><td className="px-4 py-3">{result.anyEvidenceHitPercent}%</td><td className="px-4 py-3">{result.meanEvidenceRecallPercent}%</td><td className="px-4 py-3">{result.meanReductionPercent}%</td><td className="px-4 py-3">{result.latencyMs.p95} ms</td></tr>)}</tbody>
-        </table>
+        <section className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4" aria-label="Primary results">
+          <Metric label="Complete evidence" value={`${maha.completeEvidenceSetPercent}%`} detail={`${completeCases}/${measurement.dataset.cases} cases · 95% CI ${maha.completeEvidenceSetWilson95.low}–${maha.completeEvidenceSetWilson95.high}%`} status="verified" />
+          <Metric label="Mean token reduction" value={`${maha.meanReductionPercent}%`} detail={`${maha.meanOutputTokens.toLocaleString()} mean output tokens`} status="sourced" />
+          <Metric label="Front truncation" value={`${front.completeEvidenceSetPercent}%`} detail={`${(maha.completeEvidenceSetPercent / front.completeEvidenceSetPercent).toFixed(2)}× lower complete-set retention`} status="boundary" />
+          <Metric label="Oracle ceiling" value={`${oracle.completeEvidenceSetPercent}%`} detail={`${(oracle.completeEvidenceSetPercent - maha.completeEvidenceSetPercent).toFixed(1)} points of ranking headroom`} status="illustrative" />
+        </section>
+
+        <section className="evidence-section" aria-labelledby="protocol-heading">
+          <p className="evidence-kicker">Frozen protocol</p>
+          <h2 id="protocol-heading" className="evidence-section-title mt-4">The labels came from people, not the system being tested.</h2>
+          <p className="evidence-copy mt-5">The cohort is the first 250 eligible, answerable QASPER development questions ordered by SHA-256 of question ID. Every method receives the same fixed selection allowance. Exact human-highlighted spans determine retention; no LLM judge participates in the primary metric.</p>
+          <dl className="mt-8 grid gap-px border border-[var(--border-default)] bg-[var(--border-default)] sm:grid-cols-2 lg:grid-cols-4">
+            <ProtocolFact label="Dataset" value="QASPER v0.3.0 dev" />
+            <ProtocolFact label="Mean input" value={`${measurement.dataset.meanInputTokensBpe.toLocaleString()} BPE tokens`} />
+            <ProtocolFact label="Declared budget" value={`${measurement.protocol.declaredTokenBudget.toLocaleString()} tokens`} />
+            <ProtocolFact label="Primary metric" value="Complete evidence set" />
+          </dl>
+        </section>
+
+        <section className="evidence-section" aria-labelledby="comparison-heading">
+          <p className="evidence-kicker">Measured comparison</p>
+          <h2 id="comparison-heading" className="evidence-section-title mt-4">BM25 leads the deployable baselines—and still fails often.</h2>
+          <p className="evidence-copy mt-5">The oracle uses known gold evidence and is an unattainable upper bound, not a competing product. Passage identifiers make traceability 100% for every extractive method by construction.</p>
+          <div className="mt-8 overflow-x-auto border border-[var(--border-default)] bg-[var(--surface-raised)]">
+            <table className="min-w-full text-left text-sm">
+              <thead className="border-b border-[var(--border-default)] font-mono text-[0.65rem] uppercase tracking-[0.12em] text-[var(--text-muted)]"><tr><th className="px-4 py-3">Method</th><th className="px-4 py-3">Complete</th><th className="px-4 py-3">Any evidence</th><th className="px-4 py-3">Mean recall</th><th className="px-4 py-3">Reduction</th><th className="px-4 py-3">p95 local</th></tr></thead>
+              <tbody>{measurement.results.map((result) => <tr key={result.method} className={`border-t border-[var(--border-subtle)] ${result.method === 'maha_bm25' ? 'bg-[rgba(35,122,85,0.08)] font-medium' : ''}`}><th className="whitespace-nowrap px-4 py-3 font-medium">{labels[result.method] ?? result.method}</th><td className="px-4 py-3">{result.completeEvidenceSetPercent}%</td><td className="px-4 py-3">{result.anyEvidenceHitPercent}%</td><td className="px-4 py-3">{result.meanEvidenceRecallPercent}%</td><td className="px-4 py-3">{result.meanReductionPercent}%</td><td className="px-4 py-3">{result.latencyMs.p95} ms</td></tr>)}</tbody>
+            </table>
+          </div>
+        </section>
+
+        <section className="evidence-section" aria-labelledby="failures-heading">
+          <p className="evidence-kicker text-[var(--status-unverified)]">Failure analysis</p>
+          <h2 id="failures-heading" className="evidence-section-title mt-4">The {incompleteCases} incomplete cases split into two different observability problems.</h2>
+          <p className="evidence-copy mt-5">A single aggregate retention rate hides whether ranking found some of the needed evidence or never reached it. Those failures call for different diagnostics.</p>
+          <div className="mt-8 grid gap-4 md:grid-cols-3">
+            <FailureCard count={completeCases} label="Complete" body="At least one entire human-annotated evidence set survived selection." status="verified" />
+            <FailureCard count={partialCases} label="Partial hit" body="Some annotated evidence survived, but no complete evidence set did." status="boundary" />
+            <FailureCard count={missedCases} label="Total miss" body="None of the annotated evidence appeared in the selected context." status="unverified" />
+          </div>
+          <div className="mt-8 grid gap-6 lg:grid-cols-2">
+            <article className="evidence-card"><p className="evidence-kicker">Position breakdown</p><h3 className="evidence-card-title mt-4">Location bias is reduced, not eliminated.</h3><div className="mt-6 space-y-4">{Object.entries(maha.byEvidencePosition).map(([position, value]) => <div key={position} className="grid grid-cols-[1fr_auto] gap-4 border-b border-[var(--border-subtle)] pb-3 text-sm"><span className="capitalize text-[var(--text-secondary)]">{position} evidence ({value.cases} cases)</span><span className="font-mono text-xs text-[var(--text-primary)]">{value.completeEvidenceSetPercent}% complete</span></div>)}</div><p className="evidence-card-copy mt-5">Front truncation retained 0% of complete evidence sets in both the middle and back buckets. BM25 retained {maha.byEvidencePosition.middle.completeEvidenceSetPercent}% and {maha.byEvidencePosition.back.completeEvidenceSetPercent}%.</p></article>
+            <article className="evidence-card"><p className="evidence-kicker">Capacity diagnosis</p><h3 className="evidence-card-title mt-4">The budget could usually hold the evidence.</h3><p className="evidence-card-copy mt-5">The gold-label oracle preserved a complete evidence set in {oracle.completeEvidenceSetPercent}% of cases under the same allowance. The {(oracle.completeEvidenceSetPercent - maha.completeEvidenceSetPercent).toFixed(1)}-point gap is therefore primarily selection and ranking headroom, not proof that a larger context window is required.</p><p className="evidence-card-copy mt-4">That is the operational lesson: monitor no-hit, partial-hit, and complete-hit outcomes separately whenever evaluation labels exist.</p></article>
+          </div>
+        </section>
+
+        <section className="evidence-section grid gap-6 lg:grid-cols-2">
+          <article className="evidence-card"><p className="evidence-kicker">Economics · workload-specific</p><h2 className="evidence-card-title mt-4">Measured savings exceeded the machine fee.</h2><dl className="mt-6 grid grid-cols-2 gap-5 text-sm"><Economic label="Mean input" value={`${measurement.dataset.meanInputTokensBpe.toLocaleString()} tokens`} /><Economic label="Tokens avoided" value={`${measurement.economics.mahaMeanInputTokensAvoided.toLocaleString()}`} /><Economic label="Gross avoided" value={`$${measurement.economics.mahaGrossInputCostAvoidedUsd.toFixed(6)}`} /><Economic label="$0.001 multiple" value={`${grossMultiple.toFixed(2)}×`} /></dl><p className="evidence-card-copy mt-6">Uses a declared reference input rate of ${measurement.economics.referenceInputPriceUsdPerMillionTokens}/million tokens. Output generation is excluded equally. This is not a universal savings promise.</p></article>
+          <article className="border-l-[3px] border-[var(--status-boundary)] bg-[rgba(160,111,20,0.08)] p-6 sm:p-8"><p className="evidence-kicker text-[var(--status-boundary)]">Interpretation boundary</p><h2 className="evidence-card-title mt-4">Retention is not answer quality.</h2><p className="evidence-card-copy mt-5">MCRB-1 tests whether independently highlighted evidence remains available to a downstream model. It does not test whether that model reasons correctly, cites correctly, or tells the truth. Generative summarizers are excluded because exact-span scoring penalizes paraphrase, while an LLM judge would make the primary result model-dependent.</p></article>
+        </section>
+
+        <section className="evidence-section" aria-labelledby="reproduce-heading">
+          <p className="evidence-kicker">Reproduce and audit</p>
+          <h2 id="reproduce-heading" className="evidence-section-title mt-4">Every case and measurement is public.</h2>
+          <p className="evidence-copy mt-5">The cohort manifest contains IDs, hashes, token counts, and position buckets without source document text. The raw record file contains all 1,500 case-method measurements.</p>
+          <div className="mt-7 flex flex-wrap gap-3"><a href="/benchmarks/mcrb-1/results.json" className="evidence-action evidence-action--primary">Aggregate JSON</a><a href="/benchmarks/mcrb-1/cases.jsonl" className="evidence-action evidence-action--secondary">1,500 raw records</a><a href="/benchmarks/mcrb-1/cohort.json" className="evidence-action evidence-action--secondary">Frozen cohort</a><a href="https://github.com/Maha-Strategies/maha-corp-web/blob/main/scripts/run-context-retention-benchmark.ts" className="evidence-action evidence-action--secondary">Runner source ↗</a></div>
+          <pre className="evidence-code mt-7 overflow-x-auto p-5 text-sm"><code>npm run benchmark:context-retention</code></pre>
+          <p className="evidence-card-copy mt-5">Dataset: <a href="https://allenai.org/data/qasper" className="evidence-link">QASPER v0.3.0 ↗</a>, licensed CC BY 4.0. See the <a href="https://aclanthology.org/2021.naacl-main.365/" className="evidence-link">original paper ↗</a>.</p>
+        </section>
+
+        <section className="evidence-section" aria-labelledby="guides-heading">
+          <p className="evidence-kicker">Related implementation notes</p><h2 id="guides-heading" className="evidence-section-title mt-4">Carry the measurement boundary into production.</h2>
+          <div className="mt-7 grid gap-3 sm:grid-cols-2"><GuideLink href="/guides/retrieval-augmented-generation-lewis-2020" title="Lewis et al. (2020) RAG developer summary" /><GuideLink href="/guides/context-compression-vs-conversation-summarization" title="Compression vs. conversation summarization" /><GuideLink href="/guides/preserve-citations-reducing-llm-context" title="Preserve citations while reducing context" /><GuideLink href="/context-compiler/playground" title="Inspect a Context Pack in the playground" /></div>
+        </section>
       </div>
-    </section>
-
-    <section className="mt-16 grid gap-6 lg:grid-cols-2">
-      <article className="border border-zinc-800 p-7"><p className="font-mono text-[10px] uppercase tracking-widest text-cyan-300">Economics</p><h2 className="mt-3 text-2xl text-white">The measured savings exceed the machine fee.</h2><dl className="mt-6 grid grid-cols-2 gap-5 text-sm"><Economic label="Mean input" value={`${measurement.dataset.meanInputTokensBpe.toLocaleString()} tokens`} /><Economic label="Tokens avoided" value={`${measurement.economics.mahaMeanInputTokensAvoided.toLocaleString()}`} /><Economic label="Gross cost avoided" value={`$${measurement.economics.mahaGrossInputCostAvoidedUsd.toFixed(6)}`} /><Economic label="$0.001 fee multiple" value={`${grossMultiple.toFixed(2)}×`} /></dl><p className="mt-6 text-xs leading-6 text-zinc-500">Uses a declared reference input rate of ${measurement.economics.referenceInputPriceUsdPerMillionTokens}/million tokens. Output generation cost is excluded equally. This is a workload result, not a universal savings promise.</p></article>
-      <article className="border border-zinc-800 p-7"><p className="font-mono text-[10px] uppercase tracking-widest text-cyan-300">Position robustness</p><h2 className="mt-3 text-2xl text-white">Ranking matters after the introduction.</h2><div className="mt-6 space-y-4">{Object.entries(maha.byEvidencePosition).map(([position, value]) => <div key={position} className="grid grid-cols-[1fr_auto] gap-4 border-b border-zinc-800 pb-3 text-sm"><span className="capitalize text-zinc-400">{position} evidence ({value.cases} cases)</span><span className="text-white">{value.completeEvidenceSetPercent}% complete</span></div>)}</div><p className="mt-6 text-xs leading-6 text-zinc-500">Front truncation retained 0% of complete evidence sets in both the middle and back buckets. Maha BM25 retained {maha.byEvidencePosition.middle.completeEvidenceSetPercent}% and {maha.byEvidencePosition.back.completeEvidenceSetPercent}%, respectively.</p></article>
-    </section>
-
-    <section className="mt-16 border border-amber-900/70 bg-amber-950/10 p-7"><p className="font-mono text-[10px] uppercase tracking-widest text-amber-300">Interpretation boundary</p><h2 className="mt-3 text-2xl text-white">Retention is not answer quality.</h2><p className="mt-4 max-w-4xl leading-7 text-zinc-300">MCRB-1 tests whether independently highlighted evidence remains available to a downstream model. It does not test whether that model reasons correctly, cites correctly, or tells the truth. Generative summarizers and LangChain summarization are excluded from v1 because exact-span scoring penalizes paraphrase, while an LLM judge would make the primary result model-dependent.</p></section>
-
-    <section className="mt-16"><p className="font-mono text-[10px] uppercase tracking-widest text-cyan-300">Apply the evidence</p><h2 className="mt-3 text-3xl font-light text-white">Turn the benchmark into an implementation boundary.</h2><div className="mt-6 grid gap-3 sm:grid-cols-2"><GuideLink href="/guides/retrieval-augmented-generation-lewis-2020" title="Lewis et al. (2020) RAG developer summary" /><GuideLink href="/guides/context-compression-vs-conversation-summarization" title="Compression vs. conversation summarization" /><GuideLink href="/guides/preserve-citations-reducing-llm-context" title="Preserve citations while reducing context" /><GuideLink href="/guides/crewai-context-compression-provenance" title="CrewAI context compression with provenance" /><GuideLink href="/context-compiler/playground" title="Inspect a Context Pack in the playground" /></div></section>
-
-    <section className="mt-16"><p className="font-mono text-[10px] uppercase tracking-widest text-cyan-300">Reproduce and audit</p><h2 className="mt-3 text-3xl font-light text-white">Every case and measurement is public.</h2><div className="mt-6 flex flex-wrap gap-3"><a href="/benchmarks/mcrb-1/results.json" className="border border-cyan-700 px-4 py-3 font-mono text-xs text-cyan-100 hover:bg-cyan-950/30">Aggregate JSON</a><a href="/benchmarks/mcrb-1/cases.jsonl" className="border border-zinc-700 px-4 py-3 font-mono text-xs text-zinc-300 hover:border-cyan-600">1,500 raw records</a><a href="/benchmarks/mcrb-1/cohort.json" className="border border-zinc-700 px-4 py-3 font-mono text-xs text-zinc-300 hover:border-cyan-600">Frozen cohort</a><a href="https://github.com/Maha-Strategies/maha-corp-web/blob/main/scripts/run-context-retention-benchmark.ts" className="border border-zinc-700 px-4 py-3 font-mono text-xs text-zinc-300 hover:border-cyan-600">Runner source ↗</a><a href="https://allenai.org/data/qasper" className="border border-zinc-700 px-4 py-3 font-mono text-xs text-zinc-300 hover:border-cyan-600">QASPER source ↗</a></div><pre className="mt-7 overflow-x-auto border border-zinc-800 bg-black p-5 text-sm text-cyan-100">npm run benchmark:context-retention</pre></section>
-  </div></main>
+    </main>
+  )
 }
 
-function Metric({ label, value, detail }: { label: string; value: string; detail: string }) { return <article className="border border-zinc-800 bg-zinc-950/60 p-5"><p className="font-mono text-[10px] uppercase tracking-widest text-zinc-500">{label}</p><p className="mt-3 text-3xl text-white">{value}</p><p className="mt-2 text-xs leading-5 text-zinc-500">{detail}</p></article> }
-function Economic({ label, value }: { label: string; value: string }) { return <div><dt className="font-mono text-[10px] uppercase tracking-widest text-zinc-500">{label}</dt><dd className="mt-2 text-lg text-white">{value}</dd></div> }
-function GuideLink({ href, title }: { href: string; title: string }) { return <Link href={href} className="border border-zinc-800 px-4 py-4 text-sm text-zinc-300 hover:border-cyan-700 hover:text-white">{title} →</Link> }
+function Metric({ label, value, detail, status }: { label: string; value: string; detail: string; status: 'verified' | 'sourced' | 'boundary' | 'illustrative' }) {
+  const colors = { verified: 'var(--status-verified)', sourced: 'var(--status-sourced)', boundary: 'var(--status-boundary)', illustrative: 'var(--status-illustrative)' }
+  return <article className="evidence-card border-t-[3px]" style={{ borderTopColor: colors[status] }}><p className="evidence-kicker">{label}</p><p className="font-editorial mt-3 text-4xl text-[var(--text-primary)]">{value}</p><p className="evidence-card-copy mt-2">{detail}</p></article>
+}
+
+function ProtocolFact({ label, value }: { label: string; value: string }) {
+  return <div className="bg-[var(--surface-raised)] p-5"><dt className="evidence-kicker">{label}</dt><dd className="mt-3 text-sm text-[var(--text-primary)]">{value}</dd></div>
+}
+
+function FailureCard({ count, label, body, status }: { count: number; label: string; body: string; status: 'verified' | 'boundary' | 'unverified' }) {
+  const colors = { verified: 'var(--status-verified)', boundary: 'var(--status-boundary)', unverified: 'var(--status-unverified)' }
+  return <article className="evidence-card"><p className="font-editorial text-5xl" style={{ color: colors[status] }}>{count}</p><h3 className="evidence-card-title mt-3">{label}</h3><p className="evidence-card-copy mt-3">{body}</p></article>
+}
+
+function Economic({ label, value }: { label: string; value: string }) {
+  return <div><dt className="evidence-kicker">{label}</dt><dd className="mt-2 text-lg text-[var(--text-primary)]">{value}</dd></div>
+}
+
+function GuideLink({ href, title }: { href: string; title: string }) {
+  return <Link href={href} className="evidence-card evidence-card-copy text-[var(--text-primary)]">{title} →</Link>
+}

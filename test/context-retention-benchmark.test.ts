@@ -47,6 +47,26 @@ test('MCRB-1 aggregates match the published case records', async () => {
   }
 })
 
+test('MCRB-1 failure analysis separates partial evidence from total misses', async () => {
+  const [page, raw] = await Promise.all([
+    readFile(new URL('app/benchmarks/context-retention/page.tsx', root), 'utf8'),
+    readFile(new URL('benchmarks/mcrb-1/cases.jsonl', root), 'utf8'),
+  ])
+  const rows = raw.trim().split('\n').map((line) => JSON.parse(line))
+  const bm25 = rows.filter((row: { method: string }) => row.method === 'maha_bm25')
+  const complete = bm25.filter((row: { completeEvidenceSet: boolean }) => row.completeEvidenceSet)
+  const partial = bm25.filter((row: { completeEvidenceSet: boolean; anyEvidenceHit: boolean }) => !row.completeEvidenceSet && row.anyEvidenceHit)
+  const missed = bm25.filter((row: { anyEvidenceHit: boolean }) => !row.anyEvidenceHit)
+
+  assert.equal(complete.length, 151)
+  assert.equal(partial.length, 29)
+  assert.equal(missed.length, 70)
+  assert.equal(complete.length + partial.length + missed.length, 250)
+  assert.match(page, /Partial hit/)
+  assert.match(page, /Total miss/)
+  assert.match(page, /monitor no-hit, partial-hit, and complete-hit outcomes separately/i)
+})
+
 test('MCRB-1 states its comparison boundary', async () => {
   const readme = await readFile(new URL('benchmarks/mcrb-1/README.md', root), 'utf8')
   assert.match(readme, /CC BY 4\.0/)
