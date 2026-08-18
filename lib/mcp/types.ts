@@ -68,4 +68,9 @@ export interface MCPProxyContext {
   serverId: string;
   agentId?: string;
   traceId: string;
+  taskId?: string;
+  inputSha256?: string;
+  inputBytes?: number;
+  actionId?: string;
+  approvalId?: string;
 }

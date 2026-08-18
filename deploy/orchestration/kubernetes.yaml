@@ -1,0 +1,125 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: maha-orchestration-config
+data:
+  ORCHESTRATION_DEPLOYMENT_MODE: private
+  ORCHESTRATION_PRIVATE_TENANT_ID: tenant.customer.0001
+  ORCHESTRATION_STORAGE_PROVIDER: upstash-rest
+  ORCHESTRATION_RETENTION_DAYS: "30"
+  MAHA_REDIS_NAMESPACE: orchestration_private
+  DEPLOYMENT_VERSION: private-v1
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: maha-orchestration
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: maha-orchestration
+  template:
+    metadata:
+      labels:
+        app: maha-orchestration
+    spec:
+      automountServiceAccountToken: false
+      securityContext:
+        runAsNonRoot: true
+        seccompProfile:
+          type: RuntimeDefault
+      containers:
+        - name: control-plane
+          image: replace-with-private-registry/maha-orchestration:replace-with-digest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: http
+              containerPort: 3000
+          envFrom:
+            - configMapRef:
+                name: maha-orchestration-config
+            - secretRef:
+                name: maha-orchestration-secrets
+          readinessProbe:
+            httpGet:
+              path: /admin/orchestration
+              port: http
+            initialDelaySeconds: 10
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /admin/orchestration
+              port: http
+            initialDelaySeconds: 20
+            periodSeconds: 30
+          resources:
+            requests:
+              cpu: 250m
+              memory: 512Mi
+            limits:
+              cpu: "1"
+              memory: 1Gi
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            capabilities:
+              drop: ["ALL"]
+          volumeMounts:
+            - name: tmp
+              mountPath: /tmp
+            - name: next-cache
+              mountPath: /app/.next/cache
+      terminationGracePeriodSeconds: 30
+      volumes:
+        - name: tmp
+          emptyDir:
+            medium: Memory
+            sizeLimit: 64Mi
+        - name: next-cache
+          emptyDir:
+            sizeLimit: 128Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: maha-orchestration
+spec:
+  type: ClusterIP
+  selector:
+    app: maha-orchestration
+  ports:
+    - name: http
+      port: 80
+      targetPort: http
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: maha-orchestration
+spec:
+  podSelector:
+    matchLabels:
+      app: maha-orchestration
+  policyTypes: ["Ingress", "Egress"]
+  ingress:
+    - from:
+        - namespaceSelector: {}
+      ports:
+        - protocol: TCP
+          port: 3000
+  egress:
+    - to:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: kube-system
+      ports:
+        - protocol: UDP
+          port: 53
+        - protocol: TCP
+          port: 53
+    # Replace this broad HTTPS rule with the resolved Redis REST egress range
+    # or an internal endpoint policy supported by the customer's CNI.
+    - ports:
+        - protocol: TCP
+          port: 443

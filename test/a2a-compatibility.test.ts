@@ -2,6 +2,8 @@ import assert from 'node:assert/strict'
 import test from 'node:test'
 import { parseA2AAgentCard, parseA2APaymentPolicy, parseA2ATaskPolicy, parseA2ARequest, evaluateA2ATaskPolicy } from '../lib/a2a/validation.ts'
 import { A2AProxyEngine } from '../lib/a2a/proxy.ts'
+import { MemoryWorkflowTaskStore } from '../lib/workflows/task-state.ts'
+import { MemoryRecoveryStore, workflowActionIdForExternal } from '../lib/workflows/recovery.ts'
 import type { A2ATaskBudgetReservation, A2ATaskBudgetState, A2ATaskBudgetStore } from '../lib/a2a/task-budget.ts'
 import type { A2AAgentConfig, A2AJsonRpcRequest } from '../lib/a2a/types.ts'
 import { encodeChallengeHeader } from '../lib/x402/protocol.ts'
@@ -16,6 +18,7 @@ const card = {
 }
 
 class MemoryTaskBudgets implements A2ATaskBudgetStore {
+  reserveCalls = 0
   private readonly states = new Map<string, A2ATaskBudgetState>()
   private readonly reservations = new Map<string, { taskId: string; amount: bigint; status: 'reserved' | 'cancelled' | 'settled' }>()
   private readonly settlements = new Set<string>()
@@ -36,6 +39,7 @@ class MemoryTaskBudgets implements A2ATaskBudgetStore {
     return { allowed, state: { ...state } }
   }
   async reserve(input: A2ATaskBudgetReservation) {
+    this.reserveCalls++
     const state = await this.current(input)
     if (this.reservations.has(input.authorizationId)) return { reserved: false as const, reason: 'authorization_replayed' as const, state: { ...state } }
     if (state.status === 'closed') return { reserved: false as const, reason: 'task_closed' as const, state: { ...state } }
@@ -143,23 +147,46 @@ test('A2A proxy passes an allowed challenge and blocks an over-ceiling challenge
     const body = { x402Version: 2 as const, resource: { url: config.rpcUrl }, accepts: [{ scheme: 'exact' as const, network: 'eip155:8453' as const, amount, payTo: paymentPolicy.approvedPayees[0], maxTimeoutSeconds: 60, asset: paymentPolicy.assetRules[0].asset }], error: 'Payment required.' }
     return new Response(JSON.stringify(body), { status: 402, headers: { 'PAYMENT-REQUIRED': encodeChallengeHeader(body) } })
   }
-  const baseOptions = { tenantId: 'tenant-1', traceId: 'trace-12345678', taskClass: 'research.summarize', paymentSignature: null, a2aVersion: '0.3.0', controls, assertPublicHost: async () => {} }
+  const recovery = new MemoryRecoveryStore()
+  const baseOptions = { tenantId: 'tenant-1', traceId: 'trace-12345678', taskClass: 'research.summarize', inputBytes: 4, paymentSignature: null, a2aVersion: '0.3.0', controls, assertPublicHost: async () => {}, recovery }
   const taskBudgets = new MemoryTaskBudgets()
-  const allowed = await A2AProxyEngine.dispatch(config, request, { ...baseOptions, taskBudgets, fetchImpl: async () => challenge('1000') })
+  const workflowTasks = new MemoryWorkflowTaskStore()
+  const allowed = await A2AProxyEngine.dispatch(config, request, { ...baseOptions, actionId: workflowActionIdForExternal('challenge-action.0001'), taskBudgets, workflowTasks, fetchImpl: async () => challenge('1000') })
   assert.equal(allowed.status, 402)
   assert.ok(allowed.headers?.['PAYMENT-REQUIRED'])
-  const blocked = await A2AProxyEngine.dispatch(config, request, { ...baseOptions, taskBudgets, fetchImpl: async () => challenge('1001') })
+  assert.equal(allowed.headers?.['X-Maha-Governance-Outcome'], 'proceed')
+  assert.equal(allowed.headers?.['X-Maha-Workflow-State'], 'awaiting_payment')
+  assert.match(allowed.headers?.['X-Maha-Governance-Evidence'] ?? '', /^sha256:[a-f0-9]{64}$/)
+  const blocked = await A2AProxyEngine.dispatch(config, request, { ...baseOptions, actionId: workflowActionIdForExternal('challenge-action.0002'), taskBudgets, workflowTasks: new MemoryWorkflowTaskStore(), fetchImpl: async () => challenge('1001') })
   assert.equal(blocked.status, 403)
 
   const payer = '0x7b7ff44288fADe4A1829abA2584DFCeB952146f2'
   const accepted = { scheme: 'exact', network: 'eip155:8453', amount: '1000', payTo: paymentPolicy.approvedPayees[0], maxTimeoutSeconds: 60, asset: paymentPolicy.assetRules[0].asset }
   const paymentSignature = Buffer.from(JSON.stringify({ x402Version: 2, resource: { url: config.rpcUrl }, accepted, payload: { signature: `0x${'1'.repeat(130)}`, authorization: { from: payer } } }), 'utf8').toString('base64')
   const receipt = Buffer.from(JSON.stringify({ success: true, transaction: `0x${'2'.repeat(64)}`, network: 'eip155:8453', payer }), 'utf8').toString('base64')
-  const paidFetch = async () => new Response(JSON.stringify({ jsonrpc: '2.0', id: request.id, result: { status: { state: 'completed' } } }), { status: 200, headers: { 'PAYMENT-RESPONSE': receipt } })
-  const paid = await A2AProxyEngine.dispatch(config, request, { ...baseOptions, taskBudgets, paymentSignature, fetchImpl: paidFetch, audit: async () => {} })
+  let paidFetches = 0
+  const paidFetch = async () => { paidFetches++; return new Response(JSON.stringify({ jsonrpc: '2.0', id: request.id, result: { status: { state: 'completed' } } }), { status: 200, headers: { 'PAYMENT-RESPONSE': receipt } }) }
+  const paidActionId = workflowActionIdForExternal('paid-action.0001')
+  const paid = await A2AProxyEngine.dispatch(config, request, { ...baseOptions, actionId: paidActionId, taskBudgets, workflowTasks, paymentSignature, fetchImpl: paidFetch, audit: async () => {} })
   assert.equal(paid.status, 200)
   assert.equal(paid.headers?.['X-Maha-Task-Spent'], '1000')
-  const missingReceipt = await A2AProxyEngine.dispatch(config, request, { ...baseOptions, taskBudgets: new MemoryTaskBudgets(), paymentSignature, fetchImpl: async () => new Response(JSON.stringify({ jsonrpc: '2.0', id: request.id, result: {} }), { status: 200 }), audit: async () => {} })
+  assert.equal(paid.headers?.['X-Maha-Governance-Outcome'], 'proceed')
+  assert.equal(paid.headers?.['X-Maha-Workflow-State'], 'running')
+  const replay = await A2AProxyEngine.dispatch(config, request, { ...baseOptions, traceId: 'trace-replay-12345678', actionId: paidActionId, taskBudgets, workflowTasks, paymentSignature, fetchImpl: paidFetch, audit: async () => {} })
+  assert.equal(replay.status, 409)
+  assert.equal(replay.headers?.['X-Maha-Recovery-State'], 'succeeded')
+  assert.equal(paidFetches, 1)
+  assert.equal(taskBudgets.reserveCalls, 1, 'recovery is consulted before a duplicate payment reservation')
+  const readConfig = { ...config, taskPolicy: { ...config.taskPolicy, allowedMethods: ['message/send', 'tasks/get'] } }
+  const readRequest: A2AJsonRpcRequest = { jsonrpc: '2.0', id: 'request-2', method: 'tasks/get', params: { id: 'message-12345678' } }
+  const terminalRead = await A2AProxyEngine.dispatch(readConfig, readRequest, {
+    ...baseOptions, actionId: workflowActionIdForExternal('read-action.0001'), taskClass: null, inputBytes: 0, taskBudgets, workflowTasks,
+    fetchImpl: async () => new Response(JSON.stringify({ jsonrpc: '2.0', id: readRequest.id, result: { status: { state: 'completed' } } }), { status: 200 }),
+    audit: async () => {},
+  })
+  assert.equal(terminalRead.status, 200)
+  assert.equal(terminalRead.headers?.['X-Maha-Workflow-State'], 'running')
+  const missingReceipt = await A2AProxyEngine.dispatch(config, request, { ...baseOptions, actionId: workflowActionIdForExternal('paid-action.0002'), taskBudgets: new MemoryTaskBudgets(), workflowTasks: new MemoryWorkflowTaskStore(), paymentSignature, fetchImpl: async () => new Response(JSON.stringify({ jsonrpc: '2.0', id: request.id, result: {} }), { status: 200 }), audit: async () => {} })
   assert.equal(missingReceipt.status, 502)
 })
 

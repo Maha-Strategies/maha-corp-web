@@ -1,0 +1,47 @@
+{
+  "policy": {
+    "schemaVersion": "0.1.0",
+    "policyId": "policy.demo.context",
+    "policyVersion": "2026-08-18",
+    "allowedTenantIds": ["tenant.demo.0001"],
+    "allowedAgentIds": ["agent.demo.0001"],
+    "allowedTransports": ["mcp", "http-x402"],
+    "allowedTargetIds": ["maha.context.compiler"],
+    "allowedResources": ["https://www.mahastrategies.com/api/v1/compress"],
+    "allowedOperations": ["tools/call", "POST"],
+    "allowedCapabilities": ["context.compress"],
+    "maxInputBytes": 1200000,
+    "maxHops": 2,
+    "maxTimeoutMs": 30000,
+    "review": { "operations": [], "capabilities": [] },
+    "payment": { "mode": "delegate", "allowedBuyerPolicyIds": ["buyer.maha.context"] }
+  },
+  "envelope": {
+    "schemaVersion": "0.1.0",
+    "requestId": "request.demo.0001",
+    "taskId": "task.demo.0001",
+    "issuedAt": "2026-08-18T08:00:00Z",
+    "expiresAt": "2026-08-18T08:05:00Z",
+    "subject": { "tenantId": "tenant.demo.0001", "agentId": "agent.demo.0001" },
+    "action": {
+      "transport": "http-x402",
+      "targetId": "maha.context.compiler",
+      "resource": "https://www.mahastrategies.com/api/v1/compress",
+      "operation": "POST",
+      "capability": "context.compress"
+    },
+    "context": {
+      "inputSha256": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "inputBytes": 100000,
+      "contentRetained": false
+    },
+    "execution": { "hopCount": 1, "timeoutMs": 15000 },
+    "payment": {
+      "status": "authorized",
+      "buyerPolicyId": "buyer.maha.context",
+      "buyerPolicyVersion": "1",
+      "buyerDecisionCode": "allowed",
+      "authorizationSha256": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+    }
+  }
+}

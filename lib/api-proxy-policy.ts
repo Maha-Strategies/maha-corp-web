@@ -30,6 +30,11 @@ export const SELF_MANAGED_KEY_ROUTES = new Set([
  * exact rather than prefix-based.
  */
 export const SELF_MANAGED_KEY_ROUTE_PREFIXES = [
+  // The orchestration control plane authenticates tenant-bound operator
+  // credentials at the route. Customer API credits must never consume or
+  // reinterpret that bearer before the control-plane gate sees it.
+  '/api/v1/orchestration/',
+  '/api/v1/workflows/',
   '/api/v1/mps/audit/',
   // Private hypothesis-registry routes use their own dedicated, constant-time
   // operations token. Sending them through the customer credit gate consumes

@@ -1,0 +1,69 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://www.mahastrategies.com/schemas/maha-governance-envelope-0.1.0.json",
+  "title": "Maha Governance Envelope",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "requestId", "taskId", "issuedAt", "expiresAt", "subject", "action", "context", "execution", "payment"],
+  "properties": {
+    "schemaVersion": { "const": "0.1.0" },
+    "requestId": { "type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{7,199}$" },
+    "taskId": { "type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{7,199}$" },
+    "issuedAt": { "type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(?:\\.\\d{1,3})?Z$" },
+    "expiresAt": { "type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(?:\\.\\d{1,3})?Z$" },
+    "subject": {
+      "type": "object", "additionalProperties": false, "required": ["tenantId", "agentId"],
+      "properties": {
+        "tenantId": { "type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{7,199}$" },
+        "agentId": { "type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{7,199}$" }
+      }
+    },
+    "action": {
+      "type": "object", "additionalProperties": false, "required": ["transport", "targetId", "resource", "operation"],
+      "properties": {
+        "transport": { "enum": ["a2a", "mcp", "http-x402"] },
+        "targetId": { "type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{7,199}$" },
+        "resource": { "type": "string", "pattern": "^https://" },
+        "operation": { "type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,199}$" },
+        "capability": { "type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,199}$" }
+      }
+    },
+    "context": {
+      "type": "object", "additionalProperties": false, "required": ["inputSha256", "inputBytes", "contentRetained"],
+      "properties": {
+        "inputSha256": { "type": "string", "pattern": "^sha256:[a-f0-9]{64}$" },
+        "inputBytes": { "type": "integer", "minimum": 0, "maximum": 2147483647 },
+        "contentRetained": { "const": false }
+      }
+    },
+    "execution": {
+      "type": "object", "additionalProperties": false, "required": ["hopCount", "timeoutMs"],
+      "properties": {
+        "hopCount": { "type": "integer", "minimum": 0, "maximum": 2147483647 },
+        "timeoutMs": { "type": "integer", "minimum": 1, "maximum": 2147483647 }
+      }
+    },
+    "payment": {
+      "oneOf": [
+        {
+          "type": "object", "additionalProperties": false,
+          "required": ["status", "buyerPolicyId", "buyerPolicyVersion", "buyerDecisionCode", "authorizationSha256"],
+          "properties": {
+            "status": { "const": "authorized" },
+            "buyerPolicyId": { "type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{7,199}$" },
+            "buyerPolicyVersion": { "type": "string", "minLength": 1, "maxLength": 100 },
+            "buyerDecisionCode": { "const": "allowed" },
+            "authorizationSha256": { "type": "string", "pattern": "^sha256:[a-f0-9]{64}$" }
+          }
+        },
+        {
+          "type": "object", "additionalProperties": false, "required": ["status"],
+          "properties": {
+            "status": { "enum": ["not_required", "denied", "not_checked"] },
+            "buyerDecisionCode": { "type": "string", "minLength": 1, "maxLength": 200 }
+          }
+        }
+      ]
+    }
+  }
+}

@@ -33,6 +33,8 @@ export const ISOLATION_POLICY: Readonly<Record<string, IsolationTier>> = {
   AGENT_REVIEW_TOKEN: 'must_differ',
   AGENT_INQUIRY_TOKEN: 'must_differ',
   REVENUE_CONTROL_TOKEN: 'must_differ',
+  WORKFLOW_CONTROL_TOKEN: 'must_differ',
+  ORCHESTRATION_TENANT_TOKENS: 'must_differ',
   MPS_OPERATIONS_TOKEN: 'must_differ',
   INBOUND_OPERATIONS_TOKEN: 'must_differ',
   MARKET_MAPPING_TOKEN: 'must_differ',

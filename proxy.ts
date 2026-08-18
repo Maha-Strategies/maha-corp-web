@@ -6,6 +6,7 @@ import { maybeSendLowCreditAlert } from '@/lib/observability/alerts'
 import { X402_HEADERS, paidRequestHeaders, resolveX402 } from '@/lib/x402/gateway'
 import { metersAtProxy, recordContextCompilerUsage } from '@/lib/context-compiler-metering'
 import { discoverySourceFrom, offerChallengeFor, recordOfferUsage } from '@/lib/x402/offer-telemetry'
+import { privateDeploymentPathDecision } from '@/lib/workflows/deployment-boundary'
 
 function json(body: unknown, status: number, headers: HeadersInit = {}) {
   return NextResponse.json(body, { status, headers: { ...API_CORS_HEADERS, ...headers } })
@@ -13,6 +14,10 @@ function json(body: unknown, status: number, headers: HeadersInit = {}) {
 
 export async function proxy(request: NextRequest, event: NextFetchEvent) {
   const { pathname } = request.nextUrl
+  const privateBoundary = privateDeploymentPathDecision(pathname, process.env.ORCHESTRATION_DEPLOYMENT_MODE)
+  if (privateBoundary === 'redirect_console') return NextResponse.redirect(new URL('/admin/orchestration', request.url))
+  if (privateBoundary === 'deny') return NextResponse.json({ error: 'Not found.' }, { status: 404, headers: { 'Cache-Control': 'no-store' } })
+  if (!pathname.startsWith('/api/v1/')) return NextResponse.next()
   const gate = apiProxyGate(pathname, request.method, apiKeyServiceConfigured())
   if (gate === 'preflight') return new NextResponse(null, { status: 204, headers: API_CORS_HEADERS })
   if (gate === 'self_managed') return NextResponse.next({ headers: API_CORS_HEADERS })
@@ -92,4 +97,4 @@ export async function proxy(request: NextRequest, event: NextFetchEvent) {
   event.waitUntil(maybeSendLowCreditAlert({ tenantId: access.tenantId, remainingCredits: access.remainingCredits }).then(() => undefined))
   const headers = new Headers(request.headers); headers.set('x-maha-api-key-id', access.keyId); headers.set('x-maha-tenant-id', access.tenantId); headers.set('x-maha-api-key-tier', access.tier); headers.set('x-maha-zero-data-retention', String(access.zeroDataRetention)); headers.set('x-maha-credits-remaining', String(access.remainingCredits)); return NextResponse.next({ request: { headers }, headers: API_CORS_HEADERS })
 }
-export const config = { matcher: ['/api/v1/:path*'] }
+export const config = { matcher: ['/((?!_next/static|_next/image|favicon.ico).*)'] }

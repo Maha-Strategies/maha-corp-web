@@ -8,6 +8,8 @@ import { sendMcpConnectivityAlert } from '@/lib/observability/alerts';
 import { evaluateMcpServerPolicy } from '@/lib/mcp/validation';
 import { isAttributable, resolveTaskAttribution, resolveTenantId } from '@/lib/agent-task-attribution';
 import { recordAgentTaskSpend } from '@/lib/agent-task-spend';
+import { workflowTaskIdForExternal } from '@/lib/workflows/task-state';
+import { workflowActionIdForExternal } from '@/lib/workflows/recovery';
 
 export async function POST(
   req: NextRequest,
@@ -56,13 +58,21 @@ export async function POST(
     )
 
     const traceId = `trc_${crypto.randomBytes(8).toString('hex')}`;
+    const attribution = resolveTaskAttribution(req.headers)
+    const externalActionId = req.headers.get('x-maha-action-id')
+    if (externalActionId && !/^[A-Za-z0-9][A-Za-z0-9._:-]{7,199}$/.test(externalActionId)) return NextResponse.json({ jsonrpc: '2.0', id: body.id, error: { code: -32600, message: 'Invalid X-Maha-Action-ID' } }, { status: 400, headers: { 'Cache-Control': 'no-store' } })
     const result = await MCPProxyEngine.dispatch(serverConfig, body, {
       tenantId,
       serverId,
-      traceId
+      traceId,
+      ...(attribution.taskId ? { taskId: workflowTaskIdForExternal(attribution.taskId) } : {}),
+      actionId: workflowActionIdForExternal(externalActionId ?? traceId),
+      approvalId: req.headers.get('x-maha-approval-id') ?? undefined,
+      inputSha256: `sha256:${crypto.createHash('sha256').update(text, 'utf8').digest('hex')}`,
+      inputBytes: new TextEncoder().encode(text).byteLength,
     });
 
-    const headers: Record<string, string> = { 'Cache-Control': 'no-store' }
+    const headers: Record<string, string> = { 'Cache-Control': 'no-store', ...(result.headers ?? {}) }
     if (result.retryAfterSeconds) headers['Retry-After'] = String(result.retryAfterSeconds)
     if (result.connectivityFailure) {
       const alert = result.connectivityFailure
@@ -72,7 +82,6 @@ export async function POST(
     // Recorded after the response exists and through `after`, so attribution
     // adds nothing to the latency of a call that is already proxying to a
     // third-party server.
-    const attribution = resolveTaskAttribution(req.headers)
     // The gateway already authenticated `tenantId` above from the same header
     // this resolves, so they agree; resolved through the shared function so a
     // future change to the header name cannot leave one surface behind.
