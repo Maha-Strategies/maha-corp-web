@@ -162,6 +162,9 @@ export function createAwsAgentCorePaymentsAdapter(config: AwsAgentCorePaymentsCo
       if (!paymentRequired || paymentRequired.version !== '2' || !paymentRequired.payload) {
         throw new Error('The merchant did not provide a decoded x402 v2 PAYMENT-REQUIRED payload.')
       }
+      // AgentCore expects the selected payment requirement, not the outer
+      // PAYMENT-REQUIRED envelope. The envelope contains `accepts`; the data
+      // plane payload begins directly with `scheme`, `network`, and `amount`.
       const output = await config.executionClient.send(new ProcessPaymentCommand({
         userId,
         agentName,
@@ -169,7 +172,7 @@ export function createAwsAgentCorePaymentsAdapter(config: AwsAgentCorePaymentsCo
         paymentSessionId: handle.paymentSessionId,
         paymentInstrumentId,
         paymentType: 'CRYPTO_X402',
-        paymentInput: { cryptoX402: { version: paymentRequired.version, payload: paymentDocument(paymentRequired.payload) } },
+        paymentInput: { cryptoX402: { version: paymentRequired.version, payload: paymentDocument(input.challenge.requirement) } },
         clientToken: input.idempotencyKey,
       }))
       if (output.status !== 'PROOF_GENERATED' || output.paymentSessionId !== handle.paymentSessionId) {

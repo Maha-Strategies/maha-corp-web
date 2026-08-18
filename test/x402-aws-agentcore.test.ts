@@ -130,7 +130,7 @@ test('AWS adapter separates management from execution and emits one x402 proof',
   const process = h.executionCommands[0].input as { paymentType: string; paymentInput: { cryptoX402: { version: string; payload: unknown } } }
   assert.equal(process.paymentType, 'CRYPTO_X402')
   assert.equal(process.paymentInput.cryptoX402.version, '2')
-  assert.deepEqual(process.paymentInput.cryptoX402.payload, challenge.paymentRequired?.payload)
+  assert.deepEqual(process.paymentInput.cryptoX402.payload, challenge.requirement)
   assert.deepEqual(JSON.parse(Buffer.from(proof.paymentHeader, 'base64').toString('utf8')), {
     x402Version: 2,
     payload: { signature: '0xsigned' },
