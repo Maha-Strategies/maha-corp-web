@@ -13,7 +13,7 @@ import { dirname, isAbsolute, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
 import { BedrockAgentCoreClient } from '@aws-sdk/client-bedrock-agentcore'
-import { fromTemporaryCredentials } from '@aws-sdk/credential-providers'
+import { fromIni, fromTemporaryCredentials } from '@aws-sdk/credential-providers'
 
 import { createAgentCoreControlledCommerceTool, type AgentCorePaymentsAdapter, type MerchantChallenge } from '../lib/x402/agentcore.ts'
 import {
@@ -25,6 +25,7 @@ import {
 import { createInMemoryBuyerPolicyLedger, type BuyerPolicy } from '../lib/x402/buyer-policy.ts'
 import { confirmSettlement, rpcUrlFor } from '../lib/x402/chain.ts'
 import { decodeChallenge, decodeReceipt, PAYMENT_REQUIRED_HEADER, PAYMENT_RESPONSE_HEADER, PAYMENT_SIGNATURE_HEADER } from '../lib/x402/client.ts'
+import { agentCoreCredentialMode, type AgentCoreRunnerCredentialConfig } from '../lib/x402/agentcore-runner-auth.ts'
 
 const BASE_SEPOLIA = 'eip155:84532'
 const DEFAULT_STATE = '/private/tmp/maha-agentcore-sepolia-session.json'
@@ -38,13 +39,11 @@ type RecoveryState = {
   updatedAt: string
 }
 
-type Config = {
+type Config = AgentCoreRunnerCredentialConfig & {
   region: string
   resourceUrl: string
   paymentManagerArn: string
   paymentInstrumentId: string
-  managementRoleArn: string
-  executionRoleArn: string
   userId: string
   agentName: string
   payer: string
@@ -65,6 +64,8 @@ function loadConfig(): Config {
     resourceUrl: value('AGENTCORE_TEST_RESOURCE_URL'),
     paymentManagerArn: value('AGENTCORE_PAYMENT_MANAGER_ARN'),
     paymentInstrumentId: value('AGENTCORE_PAYMENT_INSTRUMENT_ID'),
+    managementProfile: value('AGENTCORE_MANAGEMENT_AWS_PROFILE'),
+    executionProfile: value('AGENTCORE_EXECUTION_AWS_PROFILE'),
     managementRoleArn: value('AGENTCORE_MANAGEMENT_ROLE_ARN'),
     executionRoleArn: value('AGENTCORE_EXECUTION_ROLE_ARN'),
     userId: value('AGENTCORE_TEST_USER_ID'),
@@ -84,13 +85,16 @@ async function exists(path: string): Promise<boolean> {
 }
 
 function configurationChecks(config: Config, mode: 'preflight' | 'execute' | 'recover-session') {
+  const credentialMode = agentCoreCredentialMode(config)
+  const identitiesDiffer = credentialMode === 'profiles'
+    ? config.managementProfile !== config.executionProfile
+    : credentialMode === 'roles' && config.managementRoleArn !== config.executionRoleArn
   const checks = [
     ['resource is public HTTPS', (() => { try { return new URL(config.resourceUrl).protocol === 'https:' } catch { return false } })()],
     ['payment manager ARN configured', config.paymentManagerArn.startsWith('arn:aws:')],
     ['payment instrument configured', config.paymentInstrumentId.length >= 8],
-    ['management role configured', config.managementRoleArn.startsWith('arn:aws:iam::')],
-    ['execution role configured', config.executionRoleArn.startsWith('arn:aws:iam::')],
-    ['management and execution roles differ', Boolean(config.managementRoleArn) && config.managementRoleArn !== config.executionRoleArn],
+    ['exactly one AWS credential mode configured', credentialMode !== 'invalid'],
+    ['management and execution identities differ', identitiesDiffer],
     ['user and agent identities configured', config.userId.length >= 3 && config.agentName.length >= 3],
     ['payer, payee, and asset are EVM addresses', address(config.payer) && address(config.payee) && address(config.asset)],
     ['integer ceiling is positive', /^\d+$/.test(config.maximumBaseUnits) && BigInt(config.maximumBaseUnits || '0') > 0n],
@@ -137,6 +141,12 @@ async function readState(path: string): Promise<RecoveryState> {
 }
 
 function awsClients(config: Config) {
+  if (agentCoreCredentialMode(config) === 'profiles') {
+    return {
+      management: new BedrockAgentCoreClient({ region: config.region, maxAttempts: 1, credentials: fromIni({ profile: config.managementProfile }) }),
+      execution: new BedrockAgentCoreClient({ region: config.region, maxAttempts: 1, credentials: fromIni({ profile: config.executionProfile }) }),
+    }
+  }
   const assumed = (roleArn: string, roleSessionName: string) => fromTemporaryCredentials({
     clientConfig: { region: config.region, maxAttempts: 1 },
     params: { RoleArn: roleArn, RoleSessionName: roleSessionName, DurationSeconds: 900 },

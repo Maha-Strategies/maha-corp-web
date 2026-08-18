@@ -106,6 +106,12 @@ requires the exact opt-in phrase printed there. This is a testnet-only gate;
 the runner rejects any challenge other than `eip155:84532` and makes no
 mainnet path available.
 
+For an IAM Identity Center operator, configure two distinct AWS profiles: one
+assigned only the management permission set and one assigned only the payment
+execution permission set. Identity-enhanced sessions should use those profiles
+directly; they must not attempt a second `sts:AssumeRole` hop. The legacy
+two-role mode remains available for non-Identity-Center credential chains.
+
 Merchant HTTP 200 acceptance is not blockchain finality. The evidence contract
 keeps `settlementVerified` false unless the caller's independent verifier
 returns evidence that binds the transaction, network, asset, payer, payee, and
