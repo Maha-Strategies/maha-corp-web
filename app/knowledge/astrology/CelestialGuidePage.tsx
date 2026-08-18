@@ -3,6 +3,7 @@ import Link from 'next/link'
 import type { CelestialGuide } from '@/lib/celestial-guides'
 import { CELESTIAL_GUIDE_RELEASE_DATE } from '@/lib/celestial-guides'
 import { SITE_URL } from '@/lib/briefs-data'
+import { CALCULATION_REFERENCE_PATH } from '@/lib/celestial-calculation-references'
 
 export default function CelestialGuidePage({ guide }: { guide: CelestialGuide }) {
   const jsonLd = {
@@ -60,6 +61,7 @@ export default function CelestialGuidePage({ guide }: { guide: CelestialGuide })
           <h2 className="text-xl font-semibold text-white">Use the calculation</h2>
           <div className="mt-5 flex flex-wrap gap-3">
             {guide.relatedReports.map((report) => <Link key={report.href} href={report.href} className="border border-violet-500 px-4 py-3 font-mono text-[10px] uppercase tracking-widest text-violet-300 hover:bg-violet-400 hover:text-black">{report.label} →</Link>)}
+            <Link href={CALCULATION_REFERENCE_PATH} className="border border-cyan-700 px-4 py-3 font-mono text-[10px] uppercase tracking-widest text-cyan-300 hover:bg-cyan-300 hover:text-black">Inspect all calculation contracts →</Link>
           </div>
         </section>
       </article>
