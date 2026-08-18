@@ -66,3 +66,36 @@ Maha gateway adapter, not a claim that
 the external calling agent has an independently verified identity. Caller
 agent identity should remain outside the envelope until a real authentication
 source can bind it.
+
+## Durable workflow state
+
+`lib/workflows/task-state.ts` maintains one tenant-and-task-scoped lifecycle
+across A2A agents, MCP servers and an eventual orchestrator. It is separate
+from the A2A payment budget: a payment ledger answers how much a task spent;
+the workflow ledger answers what the task is waiting for and which governed
+actors participated.
+
+The closed states are `pending`, `running`, `awaiting_input`,
+`awaiting_review`, `awaiting_payment`, `completed`, `failed` and `cancelled`.
+Redis applies each transition atomically, rejects illegal transitions, treats
+a repeated transition identifier idempotently and prevents terminal tasks from
+being reopened. A2A waiting states are mapped onto this lifecycle, while an
+A2A participant's terminal result is recorded as a participant event rather
+than falsely completing the multi-agent workflow. An ordinary successful MCP
+call likewise records an action success without declaring the workflow done.
+Only an explicit orchestrator transition can complete, fail or cancel the
+shared task.
+
+The event history contains only versions, timestamps, transport, target,
+operation and governance-evidence digests. It never stores prompts, arguments
+or outputs. State, transition replay keys and the most recent 200 events expire
+after 30 days. Responses carrying workflow attribution expose
+`X-Maha-Workflow-State` and `X-Maha-Workflow-Version` alongside the governance
+headers. An orchestrator can use the exported store interface to approve
+review, supply input, complete, fail or cancel a task without changing either
+gateway protocol.
+
+When the caller supplies `x-maha-task-id`, both gateways derive the same opaque
+workflow identifier from it; the raw customer identifier is not copied into
+this ledger. A2A uses its existing protocol-derived task identifier when that
+header is absent. The A2A payment-budget key remains unchanged and separate.

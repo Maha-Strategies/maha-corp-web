@@ -10,6 +10,7 @@ import { encodeChallengeHeader, parsePaymentHeader, paymentId, PAYMENT_REQUIRED_
 import { evaluatePaymentIntent, verifySettlement, type BuyerPolicy, type PaymentAuthorization, type PaymentRequirementLike } from '../x402/buyer-policy.ts'
 import { evaluateA2AGovernance, governanceResponseHeaders } from '../governance/adapters.ts'
 import type { GovernanceDecision } from '../governance/envelope.ts'
+import { UpstashWorkflowTaskStore, workflowResponseHeaders, workflowTransitionId, type WorkflowTaskState, type WorkflowTaskStore, type WorkflowTransitionEvent } from '../workflows/task-state.ts'
 import { a2aTaskId, a2aTaskIdForExternal, a2aUpstreamTaskId, maxTaskBudgetFor, UpstashA2ATaskBudgetStore, type A2ATaskBudgetReservation, type A2ATaskBudgetState, type A2ATaskBudgetStore } from './task-budget.ts'
 import type { A2AAgentConfig, A2AJsonRpcRequest, A2AJsonRpcResponse } from './types.ts'
 
@@ -31,6 +32,8 @@ type DispatchOptions = {
   controls?: GatewayControls
   assertPublicHost?: (url: string) => Promise<void>
   taskBudgets?: A2ATaskBudgetStore
+  workflowTasks?: WorkflowTaskStore
+  workflowTaskId?: string
   audit?: (config: A2AAgentConfig, request: A2AJsonRpcRequest, options: DispatchOptions, latencyMs: number, paymentAmount: string | null, governance: GovernanceDecision) => Promise<void>
 }
 
@@ -60,6 +63,17 @@ function evaluateRequirement(policy: BuyerPolicy | undefined, taskId: string, co
 
 function object(value: unknown): value is Record<string, unknown> {
   return typeof value === 'object' && value !== null && !Array.isArray(value)
+}
+
+function a2aLifecycleEvent(response: unknown): WorkflowTransitionEvent | null {
+  if (!object(response) || !object(response.result) || !object(response.result.status)) return null
+  const state = response.result.status.state
+  if (state === 'completed') return 'participant_completed'
+  if (state === 'failed' || state === 'rejected') return 'participant_failed'
+  if (state === 'canceled' || state === 'cancelled') return 'participant_cancelled'
+  if (state === 'input-required') return 'input_required'
+  if (state === 'auth-required') return 'review_required'
+  return null
 }
 
 async function readBounded(response: Response): Promise<{ text: string; json: unknown }> {
@@ -126,6 +140,7 @@ export class A2AProxyEngine {
     const taskBudgets = options.taskBudgets ?? new UpstashA2ATaskBudgetStore()
     const requestedTaskId = a2aTaskId(request)
     const durableTaskId = await taskBudgets.resolveTaskId({ tenantId: options.tenantId, agentId: config.id, taskId: requestedTaskId })
+    const workflowTaskId = options.workflowTaskId ?? durableTaskId
 
     let signedAmount: string | null = null
     let authorization: PaymentAuthorization | null = null
@@ -157,22 +172,52 @@ export class A2AProxyEngine {
       request,
       tenantId: options.tenantId,
       traceId: options.traceId,
-      taskId: durableTaskId,
+      taskId: workflowTaskId,
       taskClass: options.taskClass,
       inputBytes: options.inputBytes,
       timeoutMs: policy.timeoutMs,
       paymentAuthorization: authorization,
     })
+    let workflowState: WorkflowTaskState | null = null
     const governed = (result: A2AProxyResult): A2AProxyResult => ({
       ...result,
-      headers: { ...governanceResponseHeaders(governance), ...(result.headers ?? {}) },
+      headers: { ...governanceResponseHeaders(governance), ...(workflowState ? workflowResponseHeaders(workflowState) : {}), ...(result.headers ?? {}) },
     })
+    const workflowTasks = options.workflowTasks ?? new UpstashWorkflowTaskStore()
+    const transition = async (event: WorkflowTransitionEvent) => {
+      const result = await workflowTasks.transition({
+        tenantId: options.tenantId,
+        taskId: workflowTaskId,
+        transitionId: workflowTransitionId({ taskId: workflowTaskId, requestId: request.id, targetId: config.id, operation: request.method, event }),
+        event,
+        actor: { transport: 'a2a', targetId: config.id, operation: request.method },
+        evidenceSha256: governance.evidenceSha256,
+      })
+      workflowState = result.state
+      return result.accepted
+    }
+    const currentWorkflowStatus = (): WorkflowTaskState['status'] | null => workflowState?.status ?? null
     if (governance.outcome !== 'proceed') {
       if (reservation) await taskBudgets.cancel(reservation)
+      const accepted = await transition(governance.outcome === 'require_review' ? 'review_required' : 'action_denied')
+      if (!accepted) return governed({ status: 409, body: rpcError(request.id, -32032, 'The workflow state does not permit this transition.') })
       return governed({
         status: 403,
         body: rpcError(request.id, governance.outcome === 'require_review' ? -32031 : -32030, `Maha governance ${governance.outcome}: ${governance.reasonCodes.join(',')}`),
       })
+    }
+
+    if (authorization && !await transition('payment_authorized')) {
+      if (reservation) await taskBudgets.cancel(reservation)
+      return governed({ status: 409, body: rpcError(request.id, -32032, 'The workflow is not awaiting this payment authorization.') })
+    }
+    let dispatched = await transition('action_dispatched')
+    if (!dispatched && currentWorkflowStatus() === 'awaiting_input' && request.method === 'message/send') {
+      dispatched = await transition('input_received') && await transition('action_dispatched')
+    }
+    if (!dispatched) {
+      if (reservation) await taskBudgets.cancel(reservation)
+      return governed({ status: 409, body: rpcError(request.id, -32032, 'The workflow state does not permit dispatch.') })
     }
 
     const startedAt = Date.now()
@@ -184,9 +229,15 @@ export class A2AProxyEngine {
       if (response.status === 402) {
         if (reservation) await taskBudgets.cancel(reservation)
         const challengeHeader = response.headers.get(PAYMENT_REQUIRED_HEADER)
-        if (!challengeHeader || challengeHeader.length > 16_384) return governed({ status: 502, body: rpcError(request.id, -32022, 'A2A upstream returned a malformed x402 challenge.') })
+        if (!challengeHeader || challengeHeader.length > 16_384) {
+          await transition('action_failed')
+          return governed({ status: 502, body: rpcError(request.id, -32022, 'A2A upstream returned a malformed x402 challenge.') })
+        }
         let challenge
-        try { challenge = decodeChallenge(challengeHeader) } catch { return governed({ status: 502, body: rpcError(request.id, -32022, 'A2A upstream returned a malformed x402 challenge.') }) }
+        try { challenge = decodeChallenge(challengeHeader) } catch {
+          await transition('action_failed')
+          return governed({ status: 502, body: rpcError(request.id, -32022, 'A2A upstream returned a malformed x402 challenge.') })
+        }
         const allowed = []
         for (const requirement of challenge.accepts) {
           const decision = evaluateRequirement(config.paymentPolicy, durableTaskId, config, requirement, challenge.resource.url, `a2a-auth-${crypto.createHash('sha256').update(`${options.traceId}:${requirement.amount}`).digest('hex').slice(0, 32)}`)
@@ -196,17 +247,22 @@ export class A2AProxyEngine {
           const available = await taskBudgets.canReserve({ tenantId: options.tenantId, agentId: config.id, taskId: durableTaskId, network: decision.network, asset: decision.asset, amount: decision.amount, maxTaskBudget })
           if (available.allowed) allowed.push(requirement)
         }
-        if (allowed.length === 0) return governed({ status: 403, body: rpcError(request.id, -32020, 'The upstream payment terms are outside the tenant buyer policy.') })
+        if (allowed.length === 0) {
+          await transition('action_denied')
+          return governed({ status: 403, body: rpcError(request.id, -32020, 'The upstream payment terms are outside the tenant buyer policy.') })
+        }
+        await transition('payment_required')
         const filtered = { ...challenge, accepts: allowed }
         return governed({
           status: 402,
           body: filtered,
-          headers: { 'Cache-Control': 'no-store', 'X-Maha-Task-ID': durableTaskId, [PAYMENT_REQUIRED_HEADER]: encodeChallengeHeader(filtered as Parameters<typeof encodeChallengeHeader>[0]) },
+          headers: { 'Cache-Control': 'no-store', 'X-Maha-Task-ID': workflowTaskId, [PAYMENT_REQUIRED_HEADER]: encodeChallengeHeader(filtered as Parameters<typeof encodeChallengeHeader>[0]) },
         })
       }
       if (reservation && response.status >= 400 && response.status < 500) await taskBudgets.cancel(reservation)
       if (response.status >= 300 && response.status < 400 || response.status >= 500) {
         await controls.recordFailure(options.tenantId, config.id, policy)
+        await transition('action_failed')
         return governed({ status: 502, body: rpcError(request.id, -32603, `Upstream A2A HTTP Error (${response.status}).`) })
       }
       const { json } = await readBounded(response)
@@ -215,17 +271,29 @@ export class A2AProxyEngine {
       let budgetState: A2ATaskBudgetState | null = null
       if (authorization && payer && config.paymentPolicy) {
         const settlement = verifySettlement({ policy: config.paymentPolicy, authorization, payer, receipt: decodeReceipt(receiptHeader) })
-        if (!settlement.verified) return governed({ status: 502, body: rpcError(request.id, -32023, `Upstream payment receipt failed policy verification: ${settlement.code}.`) })
-        if (!reservation) return governed({ status: 502, body: rpcError(request.id, -32025, 'The verified settlement has no durable task-budget reservation.') })
+        if (!settlement.verified) {
+          await transition('action_failed')
+          return governed({ status: 502, body: rpcError(request.id, -32023, `Upstream payment receipt failed policy verification: ${settlement.code}.`) })
+        }
+        if (!reservation) {
+          await transition('action_failed')
+          return governed({ status: 502, body: rpcError(request.id, -32025, 'The verified settlement has no durable task-budget reservation.') })
+        }
         const committed = await taskBudgets.settle({ ...reservation, transaction: settlement.transaction })
-        if (!committed.settled) return governed({ status: 502, body: rpcError(request.id, -32025, `The verified settlement could not be committed to the task budget: ${committed.reason}.`) })
+        if (!committed.settled) {
+          await transition('action_failed')
+          return governed({ status: 502, body: rpcError(request.id, -32025, `The verified settlement could not be committed to the task budget: ${committed.reason}.`) })
+        }
         budgetState = committed.state
       }
       const upstreamTaskId = a2aUpstreamTaskId(json)
       if (upstreamTaskId) await taskBudgets.bindUpstreamTask({ tenantId: options.tenantId, agentId: config.id, taskId: durableTaskId, upstreamTaskId: a2aTaskIdForExternal(upstreamTaskId) })
       await controls.recordSuccess(options.tenantId, config.id)
       await (options.audit ?? recordUsage)(config, request, options, Date.now() - startedAt, signedAmount, governance)
-      const headers: Record<string, string> = { 'Cache-Control': 'no-store', 'X-Maha-Task-ID': durableTaskId }
+      await transition('action_succeeded')
+      const lifecycleEvent = a2aLifecycleEvent(json)
+      if (lifecycleEvent) await transition(lifecycleEvent)
+      const headers: Record<string, string> = { 'Cache-Control': 'no-store', 'X-Maha-Task-ID': workflowTaskId }
       if (budgetState) {
         headers['X-Maha-Task-Spent'] = budgetState.cumulativeSpentBaseUnits
         headers['X-Maha-Task-Budget'] = budgetState.maxTaskBudgetBaseUnits
@@ -235,6 +303,7 @@ export class A2AProxyEngine {
       return governed({ status: response.status, body: json, headers })
     } catch (error) {
       try { await controls.recordFailure(options.tenantId, config.id, policy) } catch {}
+      try { await transition('action_failed') } catch {}
       const timeout = error instanceof Error && (error.name === 'TimeoutError' || /timed out|aborted/i.test(error.message))
       return governed({ status: timeout ? 504 : 502, body: rpcError(request.id, -32603, timeout ? 'Upstream A2A request timed out.' : 'Upstream A2A connection or protocol failure.') })
     }

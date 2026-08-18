@@ -3,6 +3,8 @@ import { A2AProxyEngine } from '@/lib/a2a/proxy'
 import { A2ARegistry } from '@/lib/a2a/registry'
 import { evaluateA2ATaskPolicy, parseA2ARequest } from '@/lib/a2a/validation'
 import { PAYMENT_SIGNATURE_HEADER } from '@/lib/x402/protocol'
+import { resolveTaskAttribution } from '@/lib/agent-task-attribution'
+import { workflowTaskIdForExternal } from '@/lib/workflows/task-state'
 
 export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
@@ -30,6 +32,7 @@ export async function POST(request: Request, context: { params: Promise<{ agentI
     const taskClass = request.headers.get('x-maha-task-class')
     const decision = evaluateA2ATaskPolicy(rpc, taskClass, agent.taskPolicy)
     if (!decision.allowed) return rpcError(rpc.id, decision.code, decision.message, 403)
+    const attribution = resolveTaskAttribution(request.headers)
     const result = await A2AProxyEngine.dispatch(agent, rpc, {
       tenantId,
       traceId: `trc_${crypto.randomBytes(8).toString('hex')}`,
@@ -37,6 +40,7 @@ export async function POST(request: Request, context: { params: Promise<{ agentI
       inputBytes: decision.textBytes,
       paymentSignature: request.headers.get(PAYMENT_SIGNATURE_HEADER),
       a2aVersion: request.headers.get('a2a-version'),
+      ...(attribution.taskId ? { workflowTaskId: workflowTaskIdForExternal(attribution.taskId) } : {}),
     })
     const headers: Record<string, string> = { 'Cache-Control': 'no-store', ...(result.headers ?? {}) }
     if (result.retryAfterSeconds) headers['Retry-After'] = String(result.retryAfterSeconds)

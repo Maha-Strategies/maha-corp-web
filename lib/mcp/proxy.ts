@@ -7,6 +7,7 @@ import { prepareMcpUpstream, readBoundedUpstreamJson } from './upstream.ts';
 import { captureOperationalError, mcpMethodClass, traceMcpUpstream, traceRedisQuery } from '../observability/telemetry.ts';
 import { evaluateMcpGovernance, governanceResponseHeaders } from '../governance/adapters.ts';
 import type { GovernanceDecision } from '../governance/envelope.ts';
+import { UpstashWorkflowTaskStore, workflowResponseHeaders, workflowTransitionId, type WorkflowTaskState, type WorkflowTaskStore, type WorkflowTransitionEvent } from '../workflows/task-state.ts';
 
 const redis = Redis.fromEnv();
 
@@ -32,6 +33,7 @@ type MCPDispatchDependencies = {
   readUpstreamJson?: typeof readBoundedUpstreamJson
   fetchImpl?: typeof fetch
   audit?: (ctx: MCPProxyContext, server: MCPServerConfig, request: JSONRPCRequest, latencyMs: number, governance: GovernanceDecision) => Promise<void>
+  workflowTasks?: WorkflowTaskStore
 }
 
 export class MCPProxyEngine {
@@ -54,8 +56,9 @@ export class MCPProxyEngine {
     const startTime = Date.now();
     let phase: 'controls' | 'transport' | 'audit' = 'controls'
     let governance: GovernanceDecision | null = null
+    let workflowState: WorkflowTaskState | null = null
     const governed = (result: MCPProxyResult): MCPProxyResult => governance
-      ? { ...result, headers: { ...governanceResponseHeaders(governance), ...(result.headers ?? {}) } }
+      ? { ...result, headers: { ...governanceResponseHeaders(governance), ...(workflowState ? workflowResponseHeaders(workflowState) : {}), ...(result.headers ?? {}) } }
       : result
 
     try {
@@ -74,9 +77,34 @@ export class MCPProxyEngine {
         body: { jsonrpc: '2.0', id: rpcPayload.id, error: { code: -32002, message: 'Tenant MCP request limit reached' } },
       }
       governance = evaluateMcpGovernance({ server: serverConfig, request: rpcPayload, context: ctx, timeoutMs: policy.timeoutMs })
-      if (governance.outcome !== 'proceed') return governed({
-        status: 403,
-        body: { jsonrpc: '2.0', id: rpcPayload.id, error: { code: governance.outcome === 'require_review' ? -32031 : -32030, message: `Maha governance ${governance.outcome}: ${governance.reasonCodes.join(',')}` } },
+      const workflowTasks = dependencies.workflowTasks ?? new UpstashWorkflowTaskStore()
+      const transition = async (event: WorkflowTransitionEvent) => {
+        if (!ctx.taskId) return true
+        const result = await workflowTasks.transition({
+          tenantId: ctx.tenantId,
+          taskId: ctx.taskId,
+          transitionId: workflowTransitionId({ taskId: ctx.taskId, requestId: rpcPayload.id, targetId: serverConfig.id, operation: rpcPayload.method, event }),
+          event,
+          actor: { transport: 'mcp', targetId: serverConfig.id, operation: rpcPayload.method },
+          evidenceSha256: governance!.evidenceSha256,
+        })
+        workflowState = result.state
+        return result.accepted
+      }
+      if (governance.outcome !== 'proceed') {
+        const accepted = await transition(governance.outcome === 'require_review' ? 'review_required' : 'action_denied')
+        if (!accepted) return governed({
+          status: 409,
+          body: { jsonrpc: '2.0', id: rpcPayload.id, error: { code: -32032, message: 'The workflow state does not permit this transition.' } },
+        })
+        return governed({
+          status: 403,
+          body: { jsonrpc: '2.0', id: rpcPayload.id, error: { code: governance.outcome === 'require_review' ? -32031 : -32030, message: `Maha governance ${governance.outcome}: ${governance.reasonCodes.join(',')}` } },
+        })
+      }
+      if (!await transition('action_dispatched')) return governed({
+        status: 409,
+        body: { jsonrpc: '2.0', id: rpcPayload.id, error: { code: -32032, message: 'The workflow state does not permit dispatch.' } },
       })
       phase = 'transport'
       const upstream = await (dependencies.prepareUpstream ?? prepareMcpUpstream)(serverConfig, rpcPayload, ctx)
@@ -94,6 +122,7 @@ export class MCPProxyEngine {
         if (response.status >= 500 || response.status >= 300 && response.status < 400) await controls.recordFailure(ctx.tenantId, serverConfig.id, policy)
         else await controls.recordSuccess(ctx.tenantId, serverConfig.id)
         if (response.status >= 500 || response.status >= 300 && response.status < 400) captureOperationalError(new Error(`MCP upstream returned HTTP ${response.status}.`), 'mcp-upstream', mcpMethodClass(rpcPayload.method))
+        await transition('action_failed')
         return governed({
           status: 502,
           ...(response.status >= 500 || response.status >= 300 && response.status < 400 ? { connectivityFailure: { failure: response.status >= 500 ? 'upstream_5xx' : 'redirect_blocked', status: response.status } } : {}),
@@ -104,6 +133,7 @@ export class MCPProxyEngine {
       const jsonRpcData = await (dependencies.readUpstreamJson ?? readBoundedUpstreamJson)(response) as JSONRPCResponse;
       if (!jsonRpcData || jsonRpcData.jsonrpc !== '2.0' || jsonRpcData.id !== rpcPayload.id) throw new Error('Upstream returned an invalid JSON-RPC response.')
       await controls.recordSuccess(ctx.tenantId, serverConfig.id)
+      await transition('action_succeeded')
       phase = 'audit'
 
       // Log invocation to Upstash Redis double-entry audit ledger
@@ -121,6 +151,18 @@ export class MCPProxyEngine {
         } catch (controlError) {
           console.error('[MCP Circuit State Error]:', controlError instanceof Error ? controlError.name : 'unknown_error')
         }
+      }
+      if (phase === 'transport' && governance && ctx.taskId) {
+        try {
+          const workflowTasks = dependencies.workflowTasks ?? new UpstashWorkflowTaskStore()
+          const result = await workflowTasks.transition({
+            tenantId: ctx.tenantId,
+            taskId: ctx.taskId,
+            transitionId: workflowTransitionId({ taskId: ctx.taskId, requestId: rpcPayload.id, targetId: serverConfig.id, operation: rpcPayload.method, event: 'action_failed' }),
+            event: 'action_failed', actor: { transport: 'mcp', targetId: serverConfig.id, operation: rpcPayload.method }, evidenceSha256: governance.evidenceSha256,
+          })
+          workflowState = result.state
+        } catch {}
       }
       const errorMessage = err instanceof Error ? err.message : 'Unknown proxy error';
       if (phase === 'controls') return governed({

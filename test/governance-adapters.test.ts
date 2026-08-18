@@ -5,6 +5,7 @@ import type { A2AAgentConfig, A2AJsonRpcRequest } from '../lib/a2a/types.ts'
 import type { MCPServerConfig } from '../lib/mcp/types.ts'
 import type { PaymentAuthorization } from '../lib/x402/buyer-policy.ts'
 import { MCPProxyEngine } from '../lib/mcp/proxy.ts'
+import { MemoryWorkflowTaskStore } from '../lib/workflows/task-state.ts'
 
 const NOW = new Date('2026-08-18T12:00:00Z')
 
@@ -96,17 +97,19 @@ test('MCP proxy enforces governance before the outbound fetch and returns digest
     async recordSuccess() {}, async recordFailure() {},
   }
   const request = { jsonrpc: '2.0' as const, id: '1', method: 'tools/call', params: { name: 'portfolio.risk' } }
+  const workflowTasks = new MemoryWorkflowTaskStore()
   const denied = await MCPProxyEngine.dispatch(mcpServer, request, {
-    tenantId: mcpServer.tenantId, serverId: mcpServer.id, traceId: 'trace-12345678', inputSha256: `sha256:${'b'.repeat(64)}`, inputBytes: 65_537,
-  }, { controls, fetchImpl: async () => { fetched = true; throw new Error('must not fetch') } })
+    tenantId: mcpServer.tenantId, serverId: mcpServer.id, traceId: 'trace-12345678', taskId: 'task-denied-12345678', inputSha256: `sha256:${'b'.repeat(64)}`, inputBytes: 65_537,
+  }, { controls, workflowTasks, fetchImpl: async () => { fetched = true; throw new Error('must not fetch') } })
   assert.equal(denied.status, 403)
   assert.equal(fetched, false)
   assert.equal(denied.headers?.['X-Maha-Governance-Outcome'], 'deny')
+  assert.equal(denied.headers?.['X-Maha-Workflow-State'], 'pending')
 
   const allowed = await MCPProxyEngine.dispatch(mcpServer, request, {
-    tenantId: mcpServer.tenantId, serverId: mcpServer.id, traceId: 'trace-12345678', inputSha256: `sha256:${'b'.repeat(64)}`, inputBytes: 200,
+    tenantId: mcpServer.tenantId, serverId: mcpServer.id, traceId: 'trace-12345678', taskId: 'task-allowed-12345678', inputSha256: `sha256:${'b'.repeat(64)}`, inputBytes: 200,
   }, {
-    controls,
+    controls, workflowTasks,
     prepareUpstream: async () => ({ url: mcpServer.baseUrl, headers: { 'Content-Type': 'application/json' } }),
     fetchImpl: async () => { fetched = true; return new Response(JSON.stringify({ jsonrpc: '2.0', id: '1', result: { ok: true } }), { status: 200 }) },
     audit: async () => {},
@@ -114,5 +117,8 @@ test('MCP proxy enforces governance before the outbound fetch and returns digest
   assert.equal(allowed.status, 200)
   assert.equal(fetched, true)
   assert.equal(allowed.headers?.['X-Maha-Governance-Outcome'], 'proceed')
+  assert.equal(allowed.headers?.['X-Maha-Workflow-State'], 'running')
+  assert.equal(allowed.headers?.['X-Maha-Workflow-Version'], '2')
   assert.match(allowed.headers?.['X-Maha-Governance-Evidence'] ?? '', /^sha256:[a-f0-9]{64}$/)
+  assert.deepEqual((await workflowTasks.events(mcpServer.tenantId, 'task-allowed-12345678')).map((event) => event.event), ['action_dispatched', 'action_succeeded'])
 })

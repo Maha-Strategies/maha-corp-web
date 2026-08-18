@@ -8,6 +8,7 @@ import { sendMcpConnectivityAlert } from '@/lib/observability/alerts';
 import { evaluateMcpServerPolicy } from '@/lib/mcp/validation';
 import { isAttributable, resolveTaskAttribution, resolveTenantId } from '@/lib/agent-task-attribution';
 import { recordAgentTaskSpend } from '@/lib/agent-task-spend';
+import { workflowTaskIdForExternal } from '@/lib/workflows/task-state';
 
 export async function POST(
   req: NextRequest,
@@ -61,7 +62,7 @@ export async function POST(
       tenantId,
       serverId,
       traceId,
-      ...(attribution.taskId ? { taskId: attribution.taskId } : {}),
+      ...(attribution.taskId ? { taskId: workflowTaskIdForExternal(attribution.taskId) } : {}),
       inputSha256: `sha256:${crypto.createHash('sha256').update(text, 'utf8').digest('hex')}`,
       inputBytes: new TextEncoder().encode(text).byteLength,
     });
