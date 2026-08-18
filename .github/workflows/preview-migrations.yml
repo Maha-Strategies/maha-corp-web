@@ -138,6 +138,8 @@ jobs:
             >> "$EVIDENCE/applied.txt" 2>&1 || echo "version not recorded; migration is idempotent" >> "$EVIDENCE/applied.txt"
 
       - name: Verify the objects the migration was applied for
+        env:
+          MIGRATION: ${{ inputs.migration }}
         run: |
           set -euo pipefail
           url="postgresql://postgres.${SUPABASE_PROJECT_REF}:${SUPABASE_DB_PASSWORD}@aws-0-us-east-1.pooler.supabase.com:5432/postgres"
@@ -164,6 +166,18 @@ jobs:
             echo '::error::record_x402_offer_usage() is still absent after applying.'; exit 1; }
           grep -q 'x402_offer_usage_daily=true' "$EVIDENCE/verify.txt" || {
             echo '::error::x402_offer_usage_daily is still absent after applying.'; exit 1; }
+
+          if [ "$MIGRATION" = '20260818000100_x402_trust_demo_telemetry.sql' ]; then
+            psql "$url" -v ON_ERROR_STOP=1 -At -c "
+              select 'x402_trust_demo_events=' || (to_regclass('public.x402_trust_demo_events') is not null)::text
+              union all
+              select 'record_x402_trust_demo_event=' || (to_regprocedure('public.record_x402_trust_demo_event(text,text,text,timestamptz)') is not null)::text;
+            " | tee -a "$EVIDENCE/verify.txt"
+            grep -q 'x402_trust_demo_events=true' "$EVIDENCE/verify.txt" || {
+              echo '::error::x402_trust_demo_events is absent after applying.'; exit 1; }
+            grep -q 'record_x402_trust_demo_event=true' "$EVIDENCE/verify.txt" || {
+              echo '::error::record_x402_trust_demo_event() is absent after applying.'; exit 1; }
+          fi
 
       # Lets the running deployment and this workflow be proven to share a
       # database without either side printing its reference. Compare this
