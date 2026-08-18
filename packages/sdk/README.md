@@ -60,6 +60,27 @@ const registration = await maha.optimization.solveGeometricRegistration({
     targetPoints: [[2, 3, 4], [3, 3, 4], [2, 4, 4]],
   },
 })
+
+const celestial = await maha.celestial.createReport({
+  apiVersion: 'maha-celestial-api/1',
+  clientRequestId: 'natal_example_001',
+  reportType: 'individual-birth',
+  interpretationPack: { packId: 'facts-only', version: '1.0.0' },
+  dataPolicy: {
+    saveReport: false,
+    retentionDays: 0,
+    consent: {
+      policyVersion: 'celestial-consent/1',
+      basis: 'explicit-subject-consent',
+      capturedAtUtc: new Date().toISOString(),
+      consentReferenceSha256: 'sha256:<digest-of-your-consent-record>',
+    },
+  },
+  input: {
+    date: '1992-11-30', time: '20:09', timeZone: 'America/Chicago',
+    latitudeDegrees: 48.601, longitudeDegrees: -93.411,
+  },
+})
 ```
 
 The tensor-network method uses a declared, bounded transfer-frontier bond
@@ -80,3 +101,5 @@ adapters in `clients/python`; those frameworks are Python-native and are not
 dependencies of this zero-dependency TypeScript package.
 
 See the complete endpoint and schema reference at https://www.mahastrategies.com/docs.
+The enterprise celestial integration and activation checklist is documented in
+`docs/celestial-evidence-api.md` in the source distribution.

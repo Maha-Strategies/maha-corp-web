@@ -30,6 +30,7 @@ import {
 } from './astrology-traditions.ts'
 import { canonicalCelestialFactBundle, validateCelestialFactBundle, type CelestialFactBundle } from './celestial-facts.ts'
 import { computePanchanga, type Panchanga } from './panchanga.ts'
+import { assessRulePublicationReview, type PractitionerReviewRecord } from './practitioner-review.ts'
 
 export const COMPILER_VERSION = 'interpretation-compiler/0.1' as const
 
@@ -48,6 +49,9 @@ export const BLOCKED_TECHNIQUES: Record<string, string> = {
   'planetary gender': 'claims that a chart determines personality, capability, or behaviour',
   'bodily injury': 'medical diagnosis, prognosis, or treatment decisions',
   'order of judgement': 'predictions of death, disaster, or pregnancy outcomes',
+  'natal nakshatra interpretation': 'claims that a chart determines personality, capability, or behaviour',
+  'avocation from house placement': 'investment, trading, or other financial decisions',
+  'avocation from house ruler': 'employment, lending, insurance, or housing decisions about a person',
 }
 
 /**
@@ -68,6 +72,8 @@ export type ExclusionReason =
   | 'limb-uncertain'
   /** The bundle carries no observer, so no pañcāṅga could be derived. */
   | 'panchanga-unavailable'
+  /** A source-bound expansion rule has not passed both scoped review lanes. */
+  | 'practitioner-review-required'
 
 export interface RuleExclusion {
   ruleId: string
@@ -125,6 +131,8 @@ export interface CompileInput {
   chartType: AstrologyChartType
   /** Fixed clock for deterministic output. Defaults to the bundle's own recordedAt. */
   compiledAt?: string
+  /** Frozen, append-only review records. Only digest-matched accepted records can open a publication gate. */
+  practitionerReviews?: PractitionerReviewRecord[]
 }
 
 export class CompilerRefusal extends Error {
@@ -173,11 +181,20 @@ function screenRule(
   chartType: AstrologyChartType,
   subjects: Map<string, string[]>,
   panchanga: Panchanga | null,
+  practitionerReviews: PractitionerReviewRecord[],
 ): { included: true; factIds: string[]; observed: string[] } | { included: false; exclusion: RuleExclusion } {
   const base = { ruleId: rule.id, technique: rule.technique }
 
   if (!rule.chartTypes.includes(chartType)) {
     return { included: false, exclusion: { ...base, reason: 'chart-type-mismatch', detail: `Rule applies to ${rule.chartTypes.join(', ')}, not ${chartType}.` } }
+  }
+
+  if (rule.sourceBoundCoverage?.publicationGate === 'practitioner-review-required') {
+    const review = assessRulePublicationReview(rule.id, practitionerReviews)
+    if (review.status !== 'accepted') {
+      const unresolved = review.requirements.filter((requirement) => requirement.status !== 'accepted').map((requirement) => `${requirement.scope}:${requirement.targetId}=${requirement.status}`)
+      return { included: false, exclusion: { ...base, reason: 'practitioner-review-required', detail: `Rule is ${review.status}; unresolved frozen reviews: ${unresolved.join(', ')}.` } }
+    }
   }
 
   // Policy is screened before conditions: a forbidden rule must not be reported
@@ -259,7 +276,7 @@ export function compileReport(input: CompileInput): CompiledReport {
   const exclusions: RuleExclusion[] = []
 
   for (const rule of rules) {
-    const screened = screenRule(rule, chartType, subjects, panchanga)
+    const screened = screenRule(rule, chartType, subjects, panchanga, input.practitionerReviews ?? [])
     if (!screened.included) { exclusions.push(screened.exclusion); continue }
 
     const sourceIds = [...new Set(rule.passageIds.map((id) => getAstrologyPassage(id)?.sourceId).filter((id) => id !== undefined))]

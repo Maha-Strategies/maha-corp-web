@@ -18,6 +18,27 @@ client.balance()
 client.compress(task="brief the board", documents=[{"id": "d1", "text": "..."}], token_budget=4000)
 client.verify_claim("chronobiological-entrainment")
 client.call_mcp_tool("mcp_srv_...", "tools/call", {"name": "calculateRiskScore", "arguments": {"portfolioId": "pf_1"}})
+
+report = client.create_celestial_report({
+    "apiVersion": "maha-celestial-api/1",
+    "clientRequestId": "birth_case_001",
+    "reportType": "individual-birth",
+    "interpretationPack": {"packId": "facts-only", "version": "1.0.0"},
+    "dataPolicy": {
+        "saveReport": False,
+        "retentionDays": 0,
+        "consent": {
+            "policyVersion": "celestial-consent/1",
+            "basis": "explicit-subject-consent",
+            "capturedAtUtc": "2026-08-17T10:00:00Z",
+            "consentReferenceSha256": "sha256:<digest>",
+        },
+    },
+    "input": {
+        "date": "1992-11-30", "time": "20:09", "timeZone": "America/Chicago",
+        "latitudeDegrees": 48.601, "longitudeDegrees": -93.411,
+    },
+})
 ```
 
 Errors are typed, so an agent can act on them rather than parse strings:

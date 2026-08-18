@@ -19,16 +19,28 @@
 
 import { SITE_URL } from './briefs-data.ts'
 import { CLAIM_EVIDENCE_SCHEMA, assertClaimEvidence, type ClaimProvenance } from './claim-evidence.ts'
+import { ASTROLOGY_RELEASE_DATE, ASTROLOGY_VERSION } from './astrology-version.ts'
 
-export const ASTROLOGY_VERSION = 'astrology-traditions/0.1' as const
-export const ASTROLOGY_RELEASE_DATE = '2026-08-16' as const
+export { ASTROLOGY_RELEASE_DATE, ASTROLOGY_VERSION } from './astrology-version.ts'
 export const ASTROLOGY_PATH = '/knowledge/astrology' as const
 export const ASTROLOGY_REGISTRY_PATH = '/knowledge/astrology/registry' as const
 export const ASTROLOGY_SCHEMA_PATH = '/knowledge/astrology/schema' as const
 
 /** Chart families a rule can apply to. A rule valid for one is not valid for another. */
-export const ASTROLOGY_CHART_TYPES = ['natal', 'horary', 'electional', 'mundane', 'synastry'] as const
+export const ASTROLOGY_CHART_TYPES = ['natal', 'horary', 'electional', 'mundane', 'corporate', 'synastry'] as const
 export type AstrologyChartType = typeof ASTROLOGY_CHART_TYPES[number]
+
+export const JYOTISHA_COVERAGE_AREAS = [
+  'planetary-house-placement',
+  'house-rulers',
+  'nakshatra-interpretation',
+  'explicit-yogas',
+  'dasha-interpretation',
+  'transit-interpretation',
+  'mundane-corporate-charts',
+] as const
+export type JyotishaCoverageArea = typeof JYOTISHA_COVERAGE_AREAS[number]
+export type DoctrineStatus = 'historical-doctrine' | 'translator-commentary' | 'contemporary-practice' | 'maha-synthesis'
 
 /** Where a tradition places the zero point of the zodiac. Traditions that differ here are not interchangeable. */
 export const ZODIAC_FRAMES = ['tropical', 'sidereal', 'unspecified'] as const
@@ -122,6 +134,13 @@ export interface InterpretationRule {
   /** Competing readings, within this tradition or against another. */
   disagreements: string[]
   boundary: string
+  /** Present on the deliberately small, review-gated Jyotiṣa expansion. */
+  sourceBoundCoverage?: {
+    area: JyotishaCoverageArea
+    doctrineStatus: DoctrineStatus
+    /** The compiler withholds this rule until its passages and formalization are reviewed. */
+    publicationGate: 'practitioner-review-required'
+  }
 }
 
 export interface AstrologyTradition {
@@ -166,6 +185,19 @@ export const ASTROLOGY_SOURCES: AstrologySource[] = [
     accessed: '2026-08-16',
   },
   {
+    id: 'brihat-jataka-iyer-1885',
+    title: 'The Bṛhat Jātaka of Varāha Mihira',
+    author: 'Varāhamihira',
+    originalComposed: 'circa 6th century CE',
+    translator: 'N. Chidambaram Iyer',
+    edition: 'Foster Press, Madras, 1885; Wellcome Collection scan',
+    editionYear: 1885,
+    url: 'https://wellcomecollection.org/works/afmgm695',
+    rightsStatus: 'public-domain',
+    rightsNote: 'Wellcome Collection marks this 1885 edition Public Domain. Passages were checked against page images in its scan; machine OCR was used only to locate candidates and is not treated as authoritative text.',
+    accessed: '2026-08-17',
+  },
+  {
     id: 'lilly-christian-astrology-1647',
     title: 'Christian Astrology',
     author: 'William Lilly',
@@ -205,8 +237,8 @@ export const ASTROLOGY_TRADITIONS: AstrologyTradition[] = [
     name: 'Vedic (Jyotiṣa)',
     period: 'classical Indian, transmitted continuously to present practice',
     zodiac: 'sidereal',
-    chartTypes: ['natal', 'electional', 'mundane'],
-    description: 'The Indian sidereal system, whose electional branch (muhūrta) judges the fitness of a moment from the five limbs of the pañcāṅga. Its calendrical arithmetic is computed in `lib/panchanga.ts` and is fully reproducible; the judgements built on that arithmetic are recorded here, sourced to Varāhamihira.',
+    chartTypes: ['natal', 'electional', 'mundane', 'corporate'],
+    description: 'The Indian sidereal system represented here by a deliberately small source-bound corpus. Its calendrical arithmetic is reproducible; every newly encoded natal, timing, mundane, or corporate interpretation remains withheld until passage fidelity and rule formalization receive scoped practitioner review.',
   },
   {
     id: 'western-sidereal',
@@ -216,7 +248,7 @@ export const ASTROLOGY_TRADITIONS: AstrologyTradition[] = [
     zodiac: 'sidereal',
     chartTypes: ['natal'],
     description: 'Western practice that measures the zodiac against the fixed stars rather than the equinox. Registered here to make the frame disagreement explicit: a sidereal rule and a tropical rule that use the same sign name do not refer to the same region of sky.',
-    unpopulatedReason: 'Primary sources for this tradition are 20th-century and in copyright. Passage-level excerpting requires a licensing decision that has not been taken.',
+    unpopulatedReason: 'The relevant modern Western sidereal sources are in copyright. No rule will be encoded until a licence permits passage-level quotation and formalization.',
   },
 ]
 
@@ -289,9 +321,49 @@ const BRIHAT_SAMHITA_PASSAGES: AstrologyPassage[] = [
 ]
 
 const P = 'ptolemy-tetrabiblos-ashmand'
+const BJ = 'brihat-jataka-iyer-1885'
+
+const BRIHAT_JATAKA_PASSAGES: AstrologyPassage[] = [
+  {
+    id: 'bj-10-1-planets-tenth-house', sourceId: BJ, locator: 'Chapter X, stanza 1, printed page 110 (scan image 152) — On Avocation',
+    excerpt: 'A person gets wealth from his father, mother, enemy, friend, brother, wife or servant according as the planet which occupies the 10th house from the Lagna or from the Moon is the Sun, or the Moon, or Mars or Mercury, or Jupiter or Venus or Saturn respectively.',
+    transcriptionNote: 'Checked against the page image. The comma after “enemy” is faint in the scan. The source makes a financial and relational prediction; the corpus records it as historical doctrine and does not authorize financial use.',
+  },
+  {
+    id: 'bj-10-1-tenth-lord-navamsa', sourceId: BJ, locator: 'Chapter X, stanza 1, printed page 110 (scan image 152) — On Avocation',
+    excerpt: 'If there be no such planet, the avocation of a person will be that stated for the planets which might be the lords of the Navamsas occupied by the lords of the 10th houses from Lagna, the Moon and the Sun.',
+    transcriptionNote: 'Checked against the page image. Parenthetical note markers in the printed line are omitted from the bounded excerpt.',
+  },
+  {
+    id: 'bj-12-2-musala-yoga', sourceId: BJ, locator: 'Chapter XII, stanza 2, printed page 122 (scan image 164) — On Nabhasa Yogas',
+    excerpt: 'According to Satyachariyar if all the planets occupy the movable, fixed or common signs, the yogas are respectively known as Rajju, Musala, and Nala and these three form the group of Asraya yogas.',
+    transcriptionNote: 'Checked against the page image. Diacritics are absent in the 1885 edition; the rule retains its spellings rather than silently modernizing them.',
+  },
+  {
+    id: 'bj-12-2-asraya-variant', sourceId: BJ, locator: 'Chapter XII, stanza 2, note (a), printed page 122 (scan image 164) — On Nabhasa Yogas',
+    excerpt: 'One or two or three or all the four of the signs. According to some the planets ought to occupy all the four signs. This is opposed to Garga.',
+    transcriptionNote: 'The note preserves a material disagreement about whether every sign of the relevant modality must be occupied; the rule therefore does not collapse this condition to one reading.',
+  },
+  {
+    id: 'bj-8-10-dasha-upachaya', sourceId: BJ, locator: 'Chapter VIII, stanza 10, printed page 82 (scan image 124) — On Dasas and Antardasas',
+    excerpt: 'if the lord of the dasa period occupy the 3rd, 6th, 10th or 11th house from the Lagna, such dasa period will be a prosperous one',
+    transcriptionNote: 'Checked against the page image. This is one alternative in a longer compound stanza; the rule encodes only this independently testable branch and does not imply that it is the whole stanza.',
+  },
+  {
+    id: 'bj-9-moon-zero-bindus', sourceId: BJ, locator: 'Chapter IX, A.V. of the Moon, printed page 101 (scan image 143) — On Ashtakavargas',
+    excerpt: 'No work shall be commenced when the Moon passes through signs in which there are no figures in the A. V. of the Moon.',
+    transcriptionNote: 'Checked against the page image. “A. V.” abbreviates Ashtakavarga in this edition. Evaluating the condition requires a separately specified Ashtakavarga implementation.',
+  },
+  {
+    id: 'bj-16-1-ashwini', sourceId: BJ, locator: 'Chapter XVI, stanza 1, printed page 157 (scan image 199) — On the Nakshatras',
+    excerpt: 'A person born when the Moon passes through the asterism of Aswini will be fond of ornaments, will be of fine appearance, will be popular, skilled in work and intelligent.',
+    transcriptionNote: 'Checked against the page image. The source spells the asterism “Aswini”; the rule maps it to the calculator’s canonical “Aśvinī” while preserving the edition wording here.',
+  },
+]
 
 export const ASTROLOGY_PASSAGES: AstrologyPassage[] = [
   ...BRIHAT_SAMHITA_PASSAGES,
+  ...BRIHAT_JATAKA_PASSAGES,
   { id: 'ptb-1-5-benefic', sourceId: P, locator: 'Book I, Chapter V — Benefics and Malefics', excerpt: 'Therefore, two of the planets, on account of their temperate quality, and because heat and moisture are predominant in them, are considered by the ancients as benefic, or causers of good: these are Jupiter and Venus.' },
   { id: 'ptb-1-5-malefic', sourceId: P, locator: 'Book I, Chapter V — Benefics and Malefics', excerpt: 'But Saturn and Mars are esteemed of a contrary nature, and malefic, or causers of evil: the first from his excess of cold, the other from his excess of dryness.' },
   { id: 'ptb-1-5-common', sourceId: P, locator: 'Book I, Chapter V — Benefics and Malefics', excerpt: 'The Sun and Mercury are deemed of common influence, and productive either of good or evil in unison with whatever planets they may be connected with.' },
@@ -402,6 +474,78 @@ export const ASTROLOGY_RULES: InterpretationRule[] = [
     passageIds: ['bs-99-5-fixed-karanas'], provenance: 'restates-source', empirical: UNVALIDATED,
     disagreements: [],
     boundary: 'This is a structural claim about the calendar rather than a judgement about a moment, and it is one of the few places where a classical text can be checked directly against the computation: `test/panchanga.test.ts` asserts that the implemented karaṇa sequence puts Śakuni at exactly this point. Agreement confirms the arithmetic matches the tradition; it says nothing about whether the tradition predicts anything.',
+  },
+  {
+    id: 'bj-planetary-tenth-house-avocation', traditionId: 'vedic-jyotisha', technique: 'avocation from house placement', chartTypes: ['natal'],
+    conditions: [{ factField: 'vedicChart.wholeSignHouses.10.occupants', description: 'At least one classical planet occupies the tenth whole-sign house from the ascendant or from the Moon.', derivation: 'requires-derivation' }],
+    interpretation: 'The text maps the planet occupying the tenth house from the ascendant or Moon to an asserted source of wealth: Sun to father, Moon to mother, Mars to enemy, Mercury to friend, Jupiter to brother, Venus to wife, and Saturn to servant.',
+    passageIds: ['bj-10-1-planets-tenth-house'], provenance: 'restates-source', empirical: UNVALIDATED,
+    disagreements: ['The verse gives a compact one-to-one list and does not state how to resolve several occupants or disagreement between the tenth house from the ascendant and the tenth from the Moon; the translator’s note says several occupants indicate several sources.'],
+    boundary: 'Recorded as historical doctrine, not as a reliable account of income, relationships, or work. It must not inform financial, employment, or relationship decisions, and the report compiler withholds it independently of practitioner review.',
+    sourceBoundCoverage: { area: 'planetary-house-placement', doctrineStatus: 'historical-doctrine', publicationGate: 'practitioner-review-required' },
+  },
+  {
+    id: 'bj-tenth-house-ruler-navamsa', traditionId: 'vedic-jyotisha', technique: 'avocation from house ruler', chartTypes: ['natal'],
+    conditions: [{ factField: 'vedicChart.tenthHouseLord.navamsaLord', description: 'No planet occupies the tenth house; derive the Navāṃśa lord occupied by each tenth-house lord counted from the ascendant, Moon, and Sun.', derivation: 'requires-derivation' }],
+    interpretation: 'When no planet occupies the relevant tenth house, the text directs the reader to infer avocation from the planet ruling the Navāṃśa occupied by the lord of the tenth house, considered from the ascendant, Moon, and Sun.',
+    passageIds: ['bj-10-1-tenth-lord-navamsa'], provenance: 'restates-source', empirical: UNVALIDATED,
+    disagreements: ['This formalization treats “no such planet” as a prerequisite. A practitioner must review whether the fallback is evaluated separately for each of the three reference points or only when all three relevant houses are empty.'],
+    boundary: 'Recorded as historical doctrine, not as a reliable description of occupation or earning capacity. The unresolved fallback semantics are preserved, and the report compiler withholds this technique independently of practitioner review.',
+    sourceBoundCoverage: { area: 'house-rulers', doctrineStatus: 'historical-doctrine', publicationGate: 'practitioner-review-required' },
+  },
+  {
+    id: 'bj-natal-ashwini-moon', traditionId: 'vedic-jyotisha', technique: 'natal nakshatra interpretation', chartTypes: ['natal'],
+    conditions: [{ factField: 'panchanga.nakshatra', description: 'At birth, the Moon occupies Aśvinī.', requiresLimb: { limb: 'nakshatra', anyOf: ['Aśvinī'] }, derivation: 'direct' }],
+    interpretation: 'The text attributes fondness for ornaments, fine appearance, popularity, skill in work, and intelligence to a birth with the Moon in the asterism it calls Aswini.',
+    passageIds: ['bj-16-1-ashwini'], provenance: 'restates-source', empirical: UNVALIDATED,
+    disagreements: ['This is a whole-nakshatra statement. Later practice may qualify it by pāda, lordship, aspects, conjunctions, and daśā, none of which appears in the cited stanza.'],
+    boundary: 'Preserved as historical doctrine only. There is no evidence that a lunar mansion determines appearance, popularity, intelligence, capability, or behaviour; this technique is prohibited from generated reports even after source and rule review.',
+    sourceBoundCoverage: { area: 'nakshatra-interpretation', doctrineStatus: 'historical-doctrine', publicationGate: 'practitioner-review-required' },
+  },
+  {
+    id: 'bj-musala-asraya-yoga', traditionId: 'vedic-jyotisha', technique: 'explicit yoga definition', chartTypes: ['natal', 'mundane', 'corporate'],
+    conditions: [{ factField: 'vedicChart.classicalPlanets.signModalities', description: 'All seven classical planets occupy fixed signs under the selected interpretation of the source note.', derivation: 'requires-derivation' }],
+    interpretation: 'The text names the configuration in which all planets occupy fixed signs Musala yoga and places it in the Āśraya group of Nabhasa yogas.',
+    passageIds: ['bj-12-2-musala-yoga', 'bj-12-2-asraya-variant'], provenance: 'restates-source', empirical: UNVALIDATED,
+    disagreements: ['The translator’s note records a live source disagreement: one reading permits occupation of one, two, three, or all four fixed signs, while another requires all four fixed signs to be occupied; Garga is cited against the latter. This rule requires all planets to be in the fixed modality but does not require all four fixed signs.'],
+    boundary: 'This rule only detects and names a configuration. It does not assign an outcome. The seven-planet scope, treatment of the lunar nodes, and disputed all-four-sign requirement require practitioner review before publication.',
+    sourceBoundCoverage: { area: 'explicit-yogas', doctrineStatus: 'historical-doctrine', publicationGate: 'practitioner-review-required' },
+  },
+  {
+    id: 'bj-dasha-lord-upachaya', traditionId: 'vedic-jyotisha', technique: 'daśā interpretation', chartTypes: ['natal'],
+    conditions: [{ factField: 'vedicTiming.activeDashaLord.houseFromDashaLagna', description: 'At the start of the daśā, its lord occupies the third, sixth, tenth, or eleventh house from the daśā commencement ascendant.', derivation: 'requires-derivation' }],
+    interpretation: 'For the encoded branch of stanza 10, the text calls a daśā prosperous when its lord occupies the third, sixth, tenth, or eleventh house from the ascendant cast for the commencement of that period.',
+    passageIds: ['bj-8-10-dasha-upachaya'], provenance: 'restates-source', empirical: UNVALIDATED,
+    disagreements: ['The translator’s note says “Lagna” here means the ascendant at the daśā commencement, not necessarily the natal ascendant. The note also says the rule may apply to an antardaśā. Both convention choices remain unresolved pending review.'],
+    boundary: 'The daśā timetable and commencement chart can be computed reproducibly, but “prosperous” is an unvalidated historical judgement. It is not a financial forecast or assurance and must not guide financial or other high-stakes decisions.',
+    sourceBoundCoverage: { area: 'dasha-interpretation', doctrineStatus: 'historical-doctrine', publicationGate: 'practitioner-review-required' },
+  },
+  {
+    id: 'bj-moon-ashtakavarga-zero-transit', traditionId: 'vedic-jyotisha', technique: 'Aṣṭakavarga transit interpretation', chartTypes: ['electional', 'natal'],
+    conditions: [{ factField: 'vedicTiming.moonTransit.bhinnaAshtakavargaBindus', description: 'The transiting Moon occupies a sign carrying zero bindus in the Moon’s Bhinna Aṣṭakavarga.', derivation: 'requires-derivation' }],
+    interpretation: 'The text directs that work not be commenced while the Moon transits a sign containing no figure in the Moon’s Aṣṭakavarga.',
+    passageIds: ['bj-9-moon-zero-bindus'], provenance: 'restates-source', empirical: UNVALIDATED,
+    disagreements: ['The cited edition abbreviates the method as A.V. and assumes the chapter’s preceding reduction procedure. The exact Aṣṭakavarga calculation and whether later correction methods apply must be fixed as a reviewed calculation convention before this condition is executable.'],
+    boundary: 'Recorded as historical transit doctrine, not evidence that such a transit changes outcomes. The condition remains non-executable until an independently tested Aṣṭakavarga implementation and practitioner-reviewed convention profile exist.',
+    sourceBoundCoverage: { area: 'transit-interpretation', doctrineStatus: 'historical-doctrine', publicationGate: 'practitioner-review-required' },
+  },
+  {
+    id: 'bs-dhruva-mundane-foundation', traditionId: 'vedic-jyotisha', technique: 'mundane foundation timing', chartTypes: ['mundane'],
+    conditions: [{ factField: 'panchanga.nakshatra', description: 'The mundane foundation moment has the Moon in a stable (Dhruva) nakshatra.', requiresLimb: { limb: 'nakshatra', anyOf: ['Uttara Phalgunī', 'Uttara Āṣāḍhā', 'Uttara Bhādrapadā', 'Rohiṇī'] }, derivation: 'direct' }],
+    interpretation: 'For undertakings intended to endure, the source includes building towns and acts of public utility among works to begin while the Moon passes through a stable nakshatra.',
+    passageIds: ['bs-98-6-dhruva-list', 'bs-98-6-dhruva-acts'], provenance: 'restates-source', empirical: UNVALIDATED,
+    disagreements: ['The source describes selecting a commencement moment, not interpreting every mundane chart retrospectively. The rule is therefore limited to a declared foundation event.'],
+    boundary: `${MUHURTA_BOUNDARY} The words “building of towns” and “acts of public utility” are historical categories and are not generalized to every public or institutional event.`,
+    sourceBoundCoverage: { area: 'mundane-corporate-charts', doctrineStatus: 'historical-doctrine', publicationGate: 'practitioner-review-required' },
+  },
+  {
+    id: 'maha-dhruva-corporate-incorporation', traditionId: 'vedic-jyotisha', technique: 'corporate foundation timing', chartTypes: ['corporate'],
+    conditions: [{ factField: 'panchanga.nakshatra', description: 'The legal incorporation moment has the Moon in a stable (Dhruva) nakshatra.', requiresLimb: { limb: 'nakshatra', anyOf: ['Uttara Phalgunī', 'Uttara Āṣāḍhā', 'Uttara Bhādrapadā', 'Rohiṇī'] }, derivation: 'direct' }],
+    interpretation: 'Maha’s synthesis treats legal incorporation as a modern foundation event and tests whether the source’s stable-nakshatra category for permanent works can be operationalized for corporate charts.',
+    passageIds: ['bs-98-6-dhruva-list', 'bs-98-6-dhruva-acts'], provenance: 'maha-inference', empirical: UNVALIDATED,
+    disagreements: ['Varāhamihira does not mention corporations or legal incorporation. This is a contemporary testable extension from building towns, public works, and acts intended to have permanent effects; a reviewer must judge the analogy separately from transcription fidelity.'],
+    boundary: 'This is explicitly Maha’s synthesis, not classical doctrine. It must be preregistered and tested against corporate outcomes before any predictive claim; it cannot guide legal, investment, or financial decisions and carries no assurance about a company’s future.',
+    sourceBoundCoverage: { area: 'mundane-corporate-charts', doctrineStatus: 'maha-synthesis', publicationGate: 'practitioner-review-required' },
   },
   {
     id: 'ptb-planet-nature-benefic', traditionId: 'hellenistic-ptolemaic', technique: 'planetary nature', chartTypes: ['natal', 'mundane'],
@@ -567,6 +711,15 @@ export const ASTROLOGY_SCHEMA = {
         empirical: { const: 'unvalidated-tradition', description: 'Fixed. This layer cannot express empirical support for an interpretive rule.' },
         disagreements: { type: 'array', items: { type: 'string' } },
         boundary: { type: 'string', minLength: 40 },
+        sourceBoundCoverage: {
+          type: 'object', additionalProperties: false,
+          required: ['area', 'doctrineStatus', 'publicationGate'],
+          properties: {
+            area: { enum: JYOTISHA_COVERAGE_AREAS },
+            doctrineStatus: { enum: ['historical-doctrine', 'translator-commentary', 'contemporary-practice', 'maha-synthesis'] },
+            publicationGate: { const: 'practitioner-review-required' },
+          },
+        },
       },
     },
   },
@@ -621,6 +774,13 @@ export function assertAstrologyIntegrity(): void {
     assertClaimEvidence({ provenance: rule.provenance, empirical: rule.empirical }, rule.id)
     if (rule.boundary.length < 40) throw new Error(`${rule.id} needs an explicit boundary.`)
     if (rule.conditions.length === 0) throw new Error(`${rule.id} needs at least one chart condition.`)
+
+    if (rule.sourceBoundCoverage) {
+      if (rule.traditionId !== 'vedic-jyotisha') throw new Error(`${rule.id} claims Jyotiṣa source-bound coverage outside the Jyotiṣa tradition.`)
+      if (rule.sourceBoundCoverage.publicationGate !== 'practitioner-review-required') throw new Error(`${rule.id} must remain practitioner-review gated.`)
+      const synthesis = rule.sourceBoundCoverage.doctrineStatus === 'maha-synthesis'
+      if (synthesis !== (rule.provenance === 'maha-inference')) throw new Error(`${rule.id} must keep Maha synthesis and Maha inference provenance aligned.`)
+    }
 
     const tradition = TRADITION_MAP.get(rule.traditionId)!
     for (const chartType of rule.chartTypes) {

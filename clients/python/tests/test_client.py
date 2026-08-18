@@ -91,6 +91,15 @@ class RequestTests(unittest.TestCase):
         # Generated per call so a retry is not mistaken for a fresh request.
         self.assertTrue(body["clientRequestId"])
 
+    def test_celestial_report_uses_the_versioned_enterprise_route(self) -> None:
+        captured: list = []
+        client = MahaClient(api_key="k", opener=opener_returning({"report": {"reportId": "celrep_1"}}, captured))
+        payload = {"apiVersion": "maha-celestial-api/1", "clientRequestId": "case_0001"}
+        result = client.create_celestial_report(payload)
+        self.assertEqual(result["report"]["reportId"], "celrep_1")
+        self.assertEqual(captured[0].full_url, "https://www.mahastrategies.com/api/v1/celestial/reports")
+        self.assertEqual(json.loads(captured[0].data), payload)
+
 
 class ErrorMappingTests(unittest.TestCase):
     def test_401_becomes_an_authentication_error(self) -> None:

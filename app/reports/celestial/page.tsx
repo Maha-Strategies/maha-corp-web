@@ -2,11 +2,12 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 
 import { SITE_URL } from '@/lib/briefs-data'
+import { CELESTIAL_GUIDE_LIST } from '@/lib/celestial-guides'
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: 'Celestial reports | Maha Strategies',
-  description: 'Choose a reproducible birth or electional timing report, with declared methods, source passages, withheld rules, and interpretive boundaries.',
+  description: 'Choose a reproducible individual, electional, or corporate-event report, with declared methods, source passages, withheld rules, and interpretive boundaries.',
   alternates: { canonical: '/reports/celestial' },
 }
 
@@ -24,6 +25,13 @@ const reports = [
     title: 'Moment report',
     description: 'Inspect what the Jyotiṣa muhūrta corpus says about a chosen moment. Every applied rule includes its source passage, and every withheld rule remains visible.',
     action: 'Inspect a moment',
+  },
+  {
+    href: '/knowledge/corporate',
+    eyebrow: 'Available now · corporate / mundane',
+    title: 'Corporate formation event',
+    description: 'Record a filing, transaction, deployment, launch, or merger as an evidenced organization event. The report audits time uncertainty and location policy before applying an explicitly named corporate framework.',
+    action: 'Build a corporate report',
   },
 ] as const
 
@@ -43,7 +51,7 @@ export default function CelestialReportsPage() {
           <p className="mt-6 max-w-3xl font-serif text-lg leading-8 text-zinc-400">The current reports compute celestial and calendrical facts deterministically, then compile only the rules recorded for a declared tradition. They do not use a language model to invent interpretations.</p>
         </header>
 
-        <section className="mt-8 grid gap-5 md:grid-cols-2" aria-label="Available reports">
+        <section className="mt-8 grid gap-5 md:grid-cols-2 lg:grid-cols-3" aria-label="Available reports">
           {reports.map((report) => (
             <article key={report.href} className="flex flex-col border border-zinc-800 bg-zinc-950/60 p-6">
               <p className="font-mono text-[10px] uppercase tracking-widest text-emerald-300">{report.eyebrow}</p>
@@ -52,6 +60,15 @@ export default function CelestialReportsPage() {
               <Link href={report.href} className="mt-7 self-start border border-violet-500 px-5 py-3 font-mono text-[10px] uppercase tracking-widest text-violet-300 hover:bg-violet-400 hover:text-black">{report.action} →</Link>
             </article>
           ))}
+        </section>
+
+        <section className="mt-8 border border-zinc-800 bg-zinc-950/40 p-6">
+          <p className="font-mono text-[10px] uppercase tracking-widest text-violet-300">Before interpreting a report</p>
+          <h2 className="mt-3 text-2xl font-semibold text-white">Inspect the calculation conventions.</h2>
+          <p className="mt-3 max-w-3xl text-sm leading-6 text-zinc-400">These method pages explain the timing, zodiac, transit, and organization-event choices visible in report output.</p>
+          <div className="mt-5 flex flex-wrap gap-3">
+            {CELESTIAL_GUIDE_LIST.map((guide) => <Link key={guide.path} href={guide.path} className="border border-zinc-700 px-3 py-2 text-xs text-zinc-300 hover:border-violet-500 hover:text-white">{guide.title}</Link>)}
+          </div>
         </section>
 
         <section className="mt-8 border border-cyan-900/60 bg-cyan-950/10 p-6">

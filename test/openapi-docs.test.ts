@@ -83,6 +83,9 @@ const PRIVATE_ROUTES = new Set([
   '/api/admin/content-handoffs',
   '/api/admin/content-publications',
   '/api/admin/content-publication-amendments',
+  // Dedicated-token, append-only expert review surface. It exposes reviewer
+  // identities and internal frozen artifacts, not a customer API contract.
+  '/api/admin/practitioner-reviews',
   '/api/admin/editorial-coverage',
   '/api/admin/inbound-operations',
   '/api/admin/navigator',
@@ -124,6 +127,8 @@ const PRIVATE_ROUTES = new Set([
   '/api/cron/market-scout',
   '/api/cron/x402-observatory',
   '/api/cron/utility-upload-cleanup',
+  '/api/cron/celestial-webhooks',
+  '/api/cron/celestial-retention',
   '/api/conversion-events',
   '/api/cron/utility-upload-cleanup',
   '/api/mps-audits/[auditId]',

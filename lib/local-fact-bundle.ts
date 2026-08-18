@@ -71,7 +71,10 @@ export function buildLocalFactBundle(input: LocalBundleInput): CelestialFactBund
     subject: { name, identifiers: { 'astronomy-engine-body': name } },
     observerId,
     reference: REFERENCE,
-    coordinates: [{ axis: 'longitude', value: longitude, unit: 'degree', precision: 0.000001, uncertainty: 0.0003 }],
+    coordinates: [{
+      axis: 'longitude', value: longitude, unit: 'degree', precision: 0.000001,
+      uncertainty: name === 'Moon' ? 0.02 : 0.005,
+    }],
     provenance: {
       providerSourceId: LOCAL_EPHEMERIS_SOURCE_ID,
       providerRequestUrl: 'https://github.com/cosinekitty/astronomy',
@@ -82,6 +85,7 @@ export function buildLocalFactBundle(input: LocalBundleInput): CelestialFactBund
       limitations: [
         'Computed in process rather than fetched, so the digest covers the computed value and not a provider response body.',
         'Apparent geocentric ecliptic longitude of date; latitude and distance are not carried because no rule in the corpus reads them.',
+        'Uncertainty is a conservative cross-engine conformance envelope, not the number of printed decimal places; the Moon envelope includes the 1600–2099 extremes.',
       ],
     },
   }))

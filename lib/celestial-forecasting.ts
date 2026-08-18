@@ -6,7 +6,7 @@ export type SiderealAyanamsha = typeof SIDEREAL_AYANAMSHAS[number]
 
 export type ReferenceFrame =
   | { zodiac: 'tropical'; origin: 'true-equinox-of-date' }
-  | { zodiac: 'sidereal'; ayanamsha: SiderealAyanamsha; origin: 'swiss-ephemeris-standard' }
+  | { zodiac: 'sidereal'; ayanamsha: SiderealAyanamsha; origin: 'swiss-ephemeris-standard' | 'lahiri-iau-ayanamsa' }
 
 export interface FeatureBundleRef {
   bundleId: string

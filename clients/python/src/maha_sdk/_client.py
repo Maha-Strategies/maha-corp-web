@@ -182,7 +182,7 @@ class MahaClient:
         headers = {
             "Authorization": f"Bearer {self._api_key}",
             "Accept": "application/json",
-            "User-Agent": "maha-sdk-python/0.1.0",
+            "User-Agent": "maha-sdk-python/0.2.0",
         }
         if data is not None:
             headers["Content-Type"] = "application/json"
@@ -305,3 +305,51 @@ class MahaClient:
         """Registered MCP servers for this tenant. Never includes credentials."""
         payload = self._request("/api/v1/mcp/servers")
         return payload if isinstance(payload, list) else payload.get("servers", [])
+
+    # -- Maha Celestial Evidence API ------------------------------------
+
+    def create_celestial_report(self, request: dict[str, Any]) -> dict[str, Any]:
+        """Compile a consent- and retention-bound report under API v1."""
+        return self._request("/api/v1/celestial/reports", method="POST", body=request)
+
+    def get_celestial_report(self, report_id: str) -> dict[str, Any]:
+        """Read an unexpired report saved by this tenant."""
+        return self._request(f"/api/v1/celestial/reports/{urllib.parse.quote(report_id)}")
+
+    def export_celestial_report(self, report_id: str, format: str = "json") -> tuple[bytes, str]:
+        """Download canonical JSON or the human-readable evidence PDF."""
+        if format not in ("json", "pdf"):
+            raise ValueError("format must be json or pdf.")
+        url = f"{self.base_url}/api/v1/celestial/reports/{urllib.parse.quote(report_id)}/export?format={format}"
+        request = urllib.request.Request(url, headers={"Authorization": f"Bearer {self._api_key}", "Accept": "application/json, application/pdf"})
+        try:
+            with self._opener(request, timeout=self.timeout) as response:
+                data = response.read()
+                disposition = response.headers.get("Content-Disposition", "") if getattr(response, "headers", None) else ""
+        except urllib.error.HTTPError as error:
+            raise self._to_error(error) from None
+        filename = f"{report_id}-evidence.{format}"
+        if 'filename="' in disposition:
+            filename = disposition.split('filename="', 1)[1].split('"', 1)[0]
+        return data, filename
+
+    def delete_celestial_report(self, report_id: str) -> dict[str, Any]:
+        """Immediately redact a saved report and retain only its tombstone."""
+        return self._request(f"/api/v1/celestial/reports/{urllib.parse.quote(report_id)}", method="DELETE")
+
+    def create_celestial_batch(self, client_request_id: str, requests: list[dict[str, Any]]) -> dict[str, Any]:
+        """Compile 1-25 isolated reports and persist a non-sensitive manifest."""
+        return self._request("/api/v1/celestial/batches", method="POST", body={"clientRequestId": client_request_id, "requests": requests})
+
+    def list_celestial_packs(self) -> dict[str, Any]:
+        return self._request("/api/v1/celestial/packs")
+
+    def install_celestial_pack(self, pack_id: str, version: str, report_type: str) -> dict[str, Any]:
+        return self._request("/api/v1/celestial/packs", method="POST", body={"packId": pack_id, "version": version, "reportType": report_type})
+
+    def register_celestial_webhook(self, target_url: str, event_types: list[str]) -> dict[str, Any]:
+        return self._request("/api/v1/celestial/webhooks", method="POST", body={"targetUrl": target_url, "eventTypes": event_types})
+
+    def celestial_usage(self, start: str | None = None, end: str | None = None) -> dict[str, Any]:
+        query = urllib.parse.urlencode({key: value for key, value in (("start", start), ("end", end)) if value})
+        return self._request(f"/api/v1/celestial/usage{'?' + query if query else ''}")

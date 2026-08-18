@@ -202,11 +202,20 @@ export function tropicalAscendantLongitude(instant: Date, latitudeDegrees: numbe
   const localSidereal = normalize(SiderealTime(instant) * 15 + longitudeDegrees) * radians
   const latitude = latitudeDegrees * radians
   const obliquity = meanObliquityDegrees(instant) * radians
-  const longitude = Math.atan2(
+  const longitude = normalize(Math.atan2(
     Math.cos(localSidereal),
     -(Math.sin(localSidereal) * Math.cos(obliquity) + Math.tan(latitude) * Math.sin(obliquity)),
-  ) / radians
-  return normalize(longitude)
+  ) / radians)
+
+  // The ecliptic and horizon intersect at two antipodal points. The atan2
+  // branch above normally returns the eastern one, but it can select the
+  // western intersection inside the polar circles. Resolve the branch from
+  // the candidate's projection onto the local east vector instead of assuming
+  // one hemisphere. The antipode has the opposite projection.
+  const candidate = longitude * radians
+  const eastProjection = -Math.cos(candidate) * Math.sin(localSidereal)
+    + Math.sin(candidate) * Math.cos(obliquity) * Math.cos(localSidereal)
+  return eastProjection >= 0 ? longitude : normalize(longitude + 180)
 }
 
 /** Mean ascending lunar node in the ecliptic of date (Meeus polynomial). */

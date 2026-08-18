@@ -1,6 +1,6 @@
 {
   "name": "@mahastrategies/sdk",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Zero-dependency TypeScript client for the Maha Strategies API.",
   "keywords": [
     "maha",
@@ -34,8 +34,5 @@
     "build": "tsc --project tsconfig.json",
     "pack:dry-run": "npm pack --dry-run",
     "prepack": "npm run build"
-  },
-  "dependencies": {
-    "@mahastrategies/sdk": "^0.2.0"
   }
 }

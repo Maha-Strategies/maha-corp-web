@@ -105,8 +105,36 @@ export const openApiDocument = {
     { name: 'Maha OpenAI-compatible Proxy', description: 'Non-streaming OpenAI Chat Completions proxy with transient, deterministic context compaction.' },
     { name: 'GPU Heuristic Optimization', description: 'Bounded asynchronous QUBO/Ising optimization using the benchmarked bounded-bond tensor-network heuristic.' },
     { name: 'GPU Geometric Optimization', description: 'Bounded paired-point SE(3) registration with explicit residual and correspondence boundaries.' },
+    { name: 'Maha Celestial Evidence', description: 'Tenant-scoped reproducible chart and evidence reports with explicit interpretive boundaries.' },
   ],
   paths: {
+    '/api/v1/celestial/reports': {
+      post: { tags: ['Maha Celestial Evidence'], operationId: 'createCelestialReport', summary: 'Compile a versioned individual or corporate celestial report', security: [{ credential: [] }], description: 'Requires a consent-record digest and explicit retention policy. Saved reports are tenant-isolated and application-encrypted. Interpretive provenance is not evidence of predictive validity.', requestBody: { required: true, content: { 'application/json': { schema: { $ref: '#/components/schemas/CelestialReportRequest' } } } }, responses: { '201': { description: 'Completed report and reproducibility bundle.' }, '400': errorResponse('Invalid report input, consent, retention, or pack.'), '403': errorResponse('Organization role lacks report creation permission.'), '409': errorResponse('Idempotency key conflicts with another request.'), '422': errorResponse('Credential retention policy conflicts with the request.') } },
+    },
+    '/api/v1/celestial/reports/{reportId}': {
+      get: { tags: ['Maha Celestial Evidence'], operationId: 'getCelestialReport', summary: 'Read an unexpired saved report', security: [{ credential: [] }], parameters: [{ name: 'reportId', in: 'path', required: true, schema: { type: 'string', pattern: '^celrep_[a-f0-9]{24}$' } }], responses: { '200': { description: 'Decrypted report for the authenticated tenant.' }, '403': errorResponse('Role lacks read permission.'), '404': errorResponse('Report absent, expired, or deleted.') } },
+      delete: { tags: ['Maha Celestial Evidence'], operationId: 'deleteCelestialReport', summary: 'Redact a saved report immediately', security: [{ credential: [] }], parameters: [{ name: 'reportId', in: 'path', required: true, schema: { type: 'string', pattern: '^celrep_[a-f0-9]{24}$' } }], responses: { '200': { description: 'Ciphertext redacted and deletion tombstone recorded.' }, '403': errorResponse('Role lacks deletion permission.'), '404': errorResponse('Report absent or already deleted.') } },
+    },
+    '/api/v1/celestial/reports/{reportId}/export': {
+      get: { tags: ['Maha Celestial Evidence'], operationId: 'exportCelestialReport', summary: 'Export report evidence as canonical JSON or summary PDF', security: [{ credential: [] }], parameters: [{ name: 'reportId', in: 'path', required: true, schema: { type: 'string' } }, { name: 'format', in: 'query', schema: { type: 'string', enum: ['json', 'pdf'], default: 'json' } }], responses: { '200': { description: 'Evidence export.' }, '403': errorResponse('Role lacks export permission.'), '404': errorResponse('Report absent, expired, or deleted.') } },
+    },
+    '/api/v1/celestial/batches': {
+      post: { tags: ['Maha Celestial Evidence'], operationId: 'createCelestialBatch', summary: 'Compile up to 25 isolated reports as one durable batch', security: [{ credential: [] }], requestBody: { required: true, content: { 'application/json': { schema: { type: 'object', required: ['clientRequestId', 'requests'], properties: { clientRequestId: { type: 'string', minLength: 8, maxLength: 96 }, requests: { type: 'array', minItems: 1, maxItems: 25, items: { $ref: '#/components/schemas/CelestialReportRequest' } } } } } } }, responses: { '200': { description: 'Completed, partially failed, or failed batch manifest.' }, '400': errorResponse('Invalid batch request.'), '403': errorResponse('Role lacks batch permission.') } },
+    },
+    '/api/v1/celestial/packs': {
+      get: { tags: ['Maha Celestial Evidence'], operationId: 'listCelestialPacks', summary: 'List frozen interpretation-pack versions and digests', security: [{ credential: [] }], responses: { '200': { description: 'Immutable pack manifests.' }, '403': errorResponse('Role lacks report access.') } },
+      post: { tags: ['Maha Celestial Evidence'], operationId: 'installCelestialPack', summary: 'Install one frozen interpretation-pack version for the tenant', security: [{ credential: [] }], responses: { '200': { description: 'Installed pack entitlement.' }, '400': errorResponse('Pack unavailable for report type.'), '403': errorResponse('Role lacks pack installation permission.') } },
+    },
+    '/api/v1/celestial/webhooks': {
+      get: { tags: ['Maha Celestial Evidence'], operationId: 'listCelestialWebhooks', summary: 'List tenant webhook endpoints without secrets', security: [{ credential: [] }], responses: { '200': { description: 'Sanitized endpoints.' }, '403': errorResponse('Role lacks webhook permission.') } },
+      post: { tags: ['Maha Celestial Evidence'], operationId: 'registerCelestialWebhook', summary: 'Register a signed public HTTPS webhook', security: [{ credential: [] }], responses: { '201': { description: 'Endpoint and one-time signing secret.' }, '400': errorResponse('Unsafe URL or unsupported event.'), '403': errorResponse('Role lacks webhook permission.') } },
+    },
+    '/api/v1/celestial/usage': {
+      get: { tags: ['Maha Celestial Evidence'], operationId: 'getCelestialUsage', summary: 'Summarize tenant report units and bytes', security: [{ credential: [] }], responses: { '200': { description: 'Auditable usage by operation.' }, '403': errorResponse('Role lacks usage permission.') } },
+    },
+    '/api/v1/celestial/service': {
+      get: { tags: ['Maha Celestial Evidence'], operationId: 'getCelestialServicePolicy', summary: 'Read reproducibility, service objectives, and customer-safe incidents', security: [{ credential: [] }], responses: { '200': { description: 'Service policy and incidents.' }, '403': errorResponse('Role lacks incident permission.') } },
+    },
     '/api/discovery/agent-infrastructure-compatibility-pack': {
       get: {
         tags: ['Agentic Commerce'],
@@ -1034,6 +1062,14 @@ export const openApiDocument = {
     },
     schemas: {
       ErrorEnvelope: ERROR_ENVELOPE,
+      CelestialReportRequest: {
+        type: 'object', required: ['apiVersion', 'clientRequestId', 'reportType', 'interpretationPack', 'dataPolicy', 'input'], additionalProperties: false,
+        properties: {
+          apiVersion: { type: 'string', const: 'maha-celestial-api/1' }, clientRequestId: { type: 'string', minLength: 8, maxLength: 96 }, reportType: { type: 'string', enum: ['individual-birth', 'corporate-event'] },
+          interpretationPack: { type: 'object', required: ['packId', 'version'], properties: { packId: { type: 'string', enum: ['facts-only', 'jyotisha-source-bound', 'comparative-natal'] }, version: { type: 'string' } } },
+          dataPolicy: { type: 'object', description: 'Explicit consent basis, consent-record SHA-256 digest, save decision, and bounded retention.' }, input: { type: 'object', description: 'BirthInput or CorporateReportInput as selected by reportType.' },
+        },
+      },
       AuditClaim: {
         type: 'object',
         required: ['excerpt', 'tag', 'rationale', 'action'],
