@@ -4,7 +4,7 @@ import { readFile } from 'node:fs/promises'
 import test from 'node:test'
 import canonicalize from 'canonicalize'
 
-import { GET } from '../app/api/x402-trust/replay/[decision]/route.ts'
+import { GET, dynamicParams, generateStaticParams } from '../app/api/x402-trust/replay/[decision]/route.ts'
 import { POST as recordTelemetry } from '../app/api/x402-trust/telemetry/route.ts'
 import { parseX402TrustDemoEvent, x402TrustDemoEventHash } from '../lib/x402/trust-demo-telemetry.ts'
 import { getPublicX402TrustEvidence, getPublicX402TrustReplays } from '../lib/x402/trust-replay.ts'
@@ -51,6 +51,8 @@ test('each decision produces digest-bound metadata-only downloadable evidence', 
 })
 
 test('the evidence route is an attachment with immutable caching and a matching digest header', async () => {
+  assert.equal(dynamicParams, false)
+  assert.deepEqual(generateStaticParams(), [{ decision: 'proceed' }, { decision: 'review' }, { decision: 'deny' }])
   const response = await GET(new Request('https://www.mahastrategies.com/api/x402-trust/replay/proceed'), { params: Promise.resolve({ decision: 'proceed' }) })
   assert.equal(response.status, 200)
   assert.equal(response.headers.get('content-type'), 'application/json; charset=utf-8')

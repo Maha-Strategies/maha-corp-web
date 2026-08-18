@@ -2,6 +2,11 @@ import { getPublicX402TrustEvidence } from '../../../../../lib/x402/trust-replay
 
 export const runtime = 'nodejs'
 export const dynamic = 'force-static'
+export const dynamicParams = false
+
+export function generateStaticParams() {
+  return ['proceed', 'review', 'deny'].map((decision) => ({ decision }))
+}
 
 type Context = { params: Promise<{ decision: string }> }
 
