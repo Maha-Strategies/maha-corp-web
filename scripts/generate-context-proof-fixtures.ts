@@ -122,6 +122,14 @@ duplicateCandidate.dedupStatus = 'unique'
 duplicateCandidate.duplicateOf = null
 duplicateCandidate.dropReason = null
 adversarialDuplicate.privateWitness.retainedPassageIdsInOutputOrder.push(duplicateCandidate.passageId)
+adversarialDuplicate.proofDecision = {
+  ...adversarialDuplicate.proofDecision,
+  status: 'rejected_invalid_retained_set',
+  shouldAttemptProof: false,
+  retainedPassageCount: adversarialDuplicate.privateWitness.retainedPassageIdsInOutputOrder.length,
+  chargePermitted: false,
+}
+adversarialDuplicate.expectedPublicValues = null
 
 writeBundle('representative-n70', representative)
 writeBundle('boundary-n128', boundary128)
@@ -136,7 +144,14 @@ const index = {
     { id: representative.fixtureId, path: 'representative-n70/fixture.json', expectedStatus: representative.proofDecision.status },
     { id: boundary128.fixtureId, path: 'boundary-n128/fixture.json', expectedStatus: boundary128.proofDecision.status },
     { id: unsupported129.fixtureId, path: 'unsupported-n129/fixture.json', expectedStatus: unsupported129.proofDecision.status },
-    { id: duplicate.fixtureId, path: 'duplicate-retained-set/fixture.json', adversarialPath: 'duplicate-retained-set/adversarial-retained-duplicate.json', expectedStatus: duplicate.proofDecision.status },
+    {
+      id: duplicate.fixtureId,
+      path: 'duplicate-retained-set/fixture.json',
+      adversarialPath: 'duplicate-retained-set/adversarial-retained-duplicate.json',
+      adversarialExpectedStatus: 'rejected_invalid_retained_set',
+      adversarialExpectedError: 'retained_passage_hash_not_unique',
+      expectedStatus: duplicate.proofDecision.status,
+    },
   ],
 }
 writeFileSync(join(outputDirectory, 'index.json'), `${JSON.stringify(index, null, 2)}\n`)

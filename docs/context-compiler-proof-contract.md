@@ -13,7 +13,7 @@ The checked-in bundles live under `test/fixtures/context-proof/`:
 | `representative-n70` | `success` | Published four-source workload retaining 70 passages. |
 | `boundary-n128` | `success` | Exact supported retained-passage boundary. |
 | `unsupported-n129` | `unsupported_passage_count` | No proof attempt and no charge above the boundary. |
-| `duplicate-retained-set` | `success` | Valid exact duplicate plus an adversarial mutation that retains both copies and must fail. |
+| `duplicate-retained-set` | `success` | Valid exact duplicate plus an adversarial mutation explicitly marked `rejected_invalid_retained_set`; it must fail before proving and cannot be charged. |
 
 Regenerate with `npm run generate:context-proof-fixtures` and validate with `npm run validate:context-proof-fixtures`.
 
@@ -59,7 +59,7 @@ A new guest/verifying-key digest is acceptable only when it:
 
 1. executes the three supported fixtures successfully;
 2. returns `unsupported_passage_count` for `N=129` without invoking the prover;
-3. rejects `adversarial-retained-duplicate.json`;
+3. returns `rejected_invalid_retained_set` for `adversarial-retained-duplicate.json` before invoking the prover, emits no public proof values, and permits no charge;
 4. emits public values byte-for-byte equivalent to each fixture's `expectedPublicValues`;
 5. retains all explicit non-claims; and
 6. reports measured cycle count, wall time, peak memory and proof size for `N=70` and `N=128`.

@@ -43,6 +43,11 @@ test('the proof boundary accepts 128 retained passages and rejects 129 without c
 
 test('the retained-set duplicate adversary is rejected', () => {
   const adversarial = fixture('duplicate-retained-set/adversarial-retained-duplicate.json')
+  assert.equal(adversarial.proofDecision.status, 'rejected_invalid_retained_set')
+  assert.equal(adversarial.proofDecision.retainedPassageCount, 5)
+  assert.equal(adversarial.proofDecision.shouldAttemptProof, false)
+  assert.equal(adversarial.proofDecision.chargePermitted, false)
+  assert.equal(adversarial.expectedPublicValues, null)
   assert.throws(() => validateContextProofFixture(adversarial), /Retained passage hashes are not unique/)
 })
 

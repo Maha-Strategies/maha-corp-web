@@ -15,7 +15,7 @@ export const CONTEXT_PROOF_MAX_RETAINED_PASSAGES = 128
 export const CONTEXT_PROOF_PROTOTYPE_GUEST_DIGEST = 'sha256:594ea38106c0f305b1293749b4357c52f6833f594ea66ab706e07b9c056465d0'
 export const CONTEXT_PROOF_PROTOTYPE_VERIFYING_KEY = '0x005b383d68ba6c851fee4a93b4fefb1abce146318dbb2041dbc1f785a1f24b6d'
 
-type ProofStatus = 'success' | 'unsupported_passage_count'
+type ProofStatus = 'success' | 'unsupported_passage_count' | 'rejected_invalid_retained_set'
 
 export type ProofFixtureSource = {
   sourceId: string
