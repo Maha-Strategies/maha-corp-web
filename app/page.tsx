@@ -6,298 +6,97 @@ const SITE_URL = 'https://www.mahastrategies.com'
 
 export const metadata: Metadata = {
   title: 'Make Confident Decisions | Maha Strategies',
-  description:
-    'Get a clear, evidence-led answer before you make a consequential technology, market, or policy decision. Fixed-scope research briefs from Maha Strategies.',
+  description: 'Get a clear, evidence-led answer before you make a consequential technology, market, or policy decision. Fixed-scope research briefs from Maha Strategies.',
   alternates: { canonical: '/' },
   openGraph: {
-    type: 'website',
-    url: SITE_URL,
-    siteName: 'Maha Strategies',
-    title: 'Make Confident Decisions | Maha Strategies',
-    description:
-      'Clear, evidence-led research for decisions where getting it wrong is expensive.',
+    type: 'website', url: SITE_URL, siteName: 'Maha Strategies', title: 'Make Confident Decisions | Maha Strategies',
+    description: 'Clear, evidence-led research for decisions where getting it wrong is expensive.',
     images: [{ url: '/og-master.png', width: 1200, height: 630, alt: 'Maha Strategies — Verified Research Briefs' }],
   },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'Make Confident Decisions | Maha Strategies',
-    description:
-      'Clear, evidence-led research for consequential technology, market, and policy decisions.',
-    images: ['/og-master.png'],
-    creator: '@mayonemaha',
-  },
+  twitter: { card: 'summary_large_image', title: 'Make Confident Decisions | Maha Strategies', description: 'Clear, evidence-led research for consequential technology, market, and policy decisions.', images: ['/og-master.png'], creator: '@mayonemaha' },
 }
 
 const capabilities = [
-  {
-    number: '01',
-    title: 'Technology & AI',
-    href: '/consulting/ai-infrastructure',
-    copy: 'Assess a technology bet, vendor claim, AI deployment path, or emerging technical risk before it reaches a board memo or investment committee.',
-  },
-  {
-    number: '02',
-    title: 'Markets & Supply Chains',
-    href: '/consulting/semiconductor-supply-chain',
-    copy: 'Map semiconductor, manufacturing, and infrastructure exposure with the sources and uncertainty made visible—not buried in a polished narrative.',
-  },
-  {
-    number: '03',
-    title: 'Policy & Evidence',
-    href: '/consulting/evidence-policy',
-    copy: 'Turn a contested question into a decision-ready brief with claims that legal, governance, and policy reviewers can trace.',
-  },
+  { number: '01', title: 'Technology & AI', href: '/consulting/ai-infrastructure', copy: 'Assess a technology bet, vendor claim, AI deployment path, or emerging technical risk before it reaches a board memo or investment committee.' },
+  { number: '02', title: 'Markets & Supply Chains', href: '/consulting/semiconductor-supply-chain', copy: 'Map semiconductor, manufacturing, and infrastructure exposure with the sources and uncertainty made visible—not buried in a polished narrative.' },
+  { number: '03', title: 'Policy & Evidence', href: '/consulting/evidence-policy', copy: 'Turn a contested question into a decision-ready brief with claims that legal, governance, and policy reviewers can trace.' },
 ]
 
 const work = [
-  {
-    category: 'OPEN EDITION',
-    title: 'The Borrowed Light',
-    copy: 'A book about the self, relationship, and the structures we borrow from one another to become real.',
-    href: '/books/the-borrowed-light',
-  },
-  {
-    category: 'OPEN EDITION',
-    title: 'The Orbital Mind',
-    copy: 'A systems psychology of attention, desire, agency, limit, imagination, and integration.',
-    href: '/books/the-orbital-mind',
-  },
-  {
-    category: 'OPEN EDITION',
-    title: 'The Synthetic Self',
-    copy: 'A book about language models, human judgment, and the record we are teaching machines to reflect.',
-    href: '/books/the-synthetic-self',
-  },
-  {
-    category: 'OPEN EDITION',
-    title: 'The Unfinished Species',
-    copy: 'A book about evolution, self-design, and the conditions intelligence creates for its own development.',
-    href: '/books/the-unfinished-species',
-  },
-  {
-    category: 'OPEN EDITION',
-    title: 'The Imagined Life',
-    copy: 'A book about dreaming, imagination, and the work of turning a possible future into an actual one.',
-    href: '/books/the-imagined-life',
-  },
-  {
-    category: 'INTERACTIVE PROTOTYPE',
-    title: 'Overclock',
-    copy: 'A five-round risk game about escalating stakes, imperfect information, and knowing when to bank a decision.',
-    href: '/overclock',
-  },
-  {
-    category: 'SEMICONDUCTOR STRATEGY',
-    title: 'U.S. Foundry Sovereignization',
-    copy: 'A public analysis of the commercial and geopolitical friction around Intel IDM 2.0 and domestic advanced-node capacity.',
-    href: '/intelligence/briefs/us-foundry-sovereignization',
-  },
-  {
-    category: 'AI INFRASTRUCTURE',
-    title: 'The Generative AI Silicon Cycle',
-    copy: 'A public analysis of capacity expansion, the next downturn, and where supply-chain resilience is likely to diverge.',
-    href: '/intelligence/briefs/generative-ai-silicon-cycle-recalibration',
-  },
+  { category: 'OPEN EDITION', title: 'The Borrowed Light', copy: 'A book about the self, relationship, and the structures we borrow from one another to become real.', href: '/books/the-borrowed-light' },
+  { category: 'OPEN EDITION', title: 'The Orbital Mind', copy: 'A systems psychology of attention, desire, agency, limit, imagination, and integration.', href: '/books/the-orbital-mind' },
+  { category: 'OPEN EDITION', title: 'The Synthetic Self', copy: 'A book about language models, human judgment, and the record we are teaching machines to reflect.', href: '/books/the-synthetic-self' },
+  { category: 'OPEN EDITION', title: 'The Unfinished Species', copy: 'A book about evolution, self-design, and the conditions intelligence creates for its own development.', href: '/books/the-unfinished-species' },
+  { category: 'OPEN EDITION', title: 'The Imagined Life', copy: 'A book about dreaming, imagination, and the work of turning a possible future into an actual one.', href: '/books/the-imagined-life' },
+  { category: 'INTERACTIVE PROTOTYPE', title: 'Overclock', copy: 'A five-round risk game about escalating stakes, imperfect information, and knowing when to bank a decision.', href: '/overclock' },
+  { category: 'SEMICONDUCTOR STRATEGY', title: 'U.S. Foundry Sovereignization', copy: 'A public analysis of the commercial and geopolitical friction around Intel IDM 2.0 and domestic advanced-node capacity.', href: '/intelligence/briefs/us-foundry-sovereignization' },
+  { category: 'AI INFRASTRUCTURE', title: 'The Generative AI Silicon Cycle', copy: 'A public analysis of capacity expansion, the next downturn, and where supply-chain resilience is likely to diverge.', href: '/intelligence/briefs/generative-ai-silicon-cycle-recalibration' },
 ]
 
 const serviceJsonLd = {
-  '@context': 'https://schema.org',
-  '@type': 'Service',
-  '@id': `${SITE_URL}/#verified-research-brief`,
-  name: 'Verified Research Brief',
-  serviceType: 'Evidence-tagged strategic research',
-  description:
-    'A decision-ready, evidence-tagged research synthesis for technology, market, policy, and high-stakes claims.',
-  provider: {
-    '@type': 'Organization',
-    '@id': `${SITE_URL}/#organization`,
-    name: 'Maha Strategies LLC',
-    url: SITE_URL,
-  },
-  areaServed: 'Worldwide',
-  offers: {
-    '@type': 'Offer',
-    price: '2500',
-    priceCurrency: 'USD',
-    availability: 'https://schema.org/InStock',
-    url: `${SITE_URL}/consulting`,
-  },
+  '@context': 'https://schema.org', '@type': 'Service', '@id': `${SITE_URL}/#verified-research-brief`, name: 'Verified Research Brief', serviceType: 'Evidence-tagged strategic research',
+  description: 'A decision-ready, evidence-tagged research synthesis for technology, market, policy, and high-stakes claims.',
+  provider: { '@type': 'Organization', '@id': `${SITE_URL}/#organization`, name: 'Maha Strategies LLC', url: SITE_URL }, areaServed: 'Worldwide',
+  offers: { '@type': 'Offer', price: '2500', priceCurrency: 'USD', availability: 'https://schema.org/InStock', url: `${SITE_URL}/consulting` },
 }
 
 export default function CorporateHomepage() {
   return (
-    <main className="min-h-screen bg-[#0a0a0c] text-zinc-300 selection:bg-indigo-500 selection:text-white">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceJsonLd) }}
-      />
-
-      <div className="max-w-4xl mx-auto px-6 py-20 sm:py-28">
-        <section className="max-w-3xl">
-          <p className="font-mono text-[10px] text-indigo-400 tracking-widest uppercase mb-5">
-            [ Maha Strategies // Evidence Assurance ]
-          </p>
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-light text-white leading-[1.08] tracking-tight mb-7">
-            Make AI-assisted documents defensible before they reach review.
-          </h1>
-          <p className="text-xl sm:text-2xl text-zinc-300 font-light leading-relaxed mb-5">
-            For research, policy, and communications teams whose work must survive scrutiny—not merely sound convincing.
-          </p>
-          <p className="text-base sm:text-lg text-zinc-400 leading-relaxed max-w-2xl mb-10">
-            Maha maps substantive claims, makes uncertainty visible, and creates a clear record of what must be verified before publication, review, or decision.
-          </p>
-
-          <div className="flex flex-col sm:flex-row gap-4 mb-8">
-            <TrackedLink
-              href="/mps/preflight"
-              event="cta_homepage_mps_preflight"
-              className="inline-block bg-white text-black font-mono font-bold text-xs tracking-widest uppercase px-7 py-4 hover:bg-zinc-200 transition-colors text-center"
-            >
-              Run a Private Preflight — $49 ↗
-            </TrackedLink>
-            <Link
-              href="/evidence-audit"
-              className="inline-block border border-zinc-600 text-zinc-200 font-mono font-bold text-xs tracking-widest uppercase px-7 py-4 hover:border-white hover:text-white transition-colors text-center"
-            >
-              Request an Evidence Audit ↓
-            </Link>
+    <main className="evidence-page">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceJsonLd) }} />
+      <div className="evidence-container">
+        <header className="max-w-4xl border-t border-[var(--border-default)] pt-5">
+          <p className="evidence-kicker flex flex-wrap justify-between gap-3"><span>Maha Strategies</span><span>Evidence assurance · governed infrastructure</span></p>
+          <h1 className="evidence-title">Make AI-assisted documents defensible before they reach review.</h1>
+          <p className="evidence-lede mt-7">For research, policy, and communications teams whose work must survive scrutiny—not merely sound convincing.</p>
+          <p className="evidence-copy mt-5">Maha maps substantive claims, makes uncertainty visible, and creates a clear record of what must be verified before publication, review, or decision.</p>
+          <div className="mt-9 flex flex-col gap-3 sm:flex-row">
+            <TrackedLink href="/mps/preflight" event="cta_homepage_mps_preflight" className="evidence-action evidence-action--primary">Run a private preflight — $49 ↗</TrackedLink>
+            <Link href="/evidence-audit" className="evidence-action evidence-action--secondary">Request an evidence audit ↓</Link>
           </div>
-          <p className="font-mono text-xs text-zinc-400 tracking-widest uppercase">
-            Free auditor · private preflight · human evidence audit · explicit scope at every step
-          </p>
-        </section>
+          <p className="evidence-kicker mt-5">Free auditor · private preflight · human evidence audit · explicit scope at every step</p>
+        </header>
 
-        <section className="mt-24 border-t border-zinc-800 pt-10">
-          <p className="font-mono text-[10px] text-indigo-400 tracking-widest uppercase mb-8">
-            [ Decisions we help make ]
-          </p>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {capabilities.map((capability) => (
-              <Link key={capability.number} href={capability.href} className="group border-t border-zinc-700 pt-5 hover:border-zinc-400 transition-colors">
-                <p className="font-mono text-[10px] text-zinc-600 tracking-widest mb-3">{capability.number}</p>
-                <h2 className="text-white text-lg mb-3 group-hover:text-indigo-300 transition-colors">{capability.title}</h2>
-                <p className="text-sm text-zinc-400 leading-relaxed">{capability.copy}</p>
-                <span className="inline-block mt-4 font-mono text-xs text-zinc-400 group-hover:text-white tracking-widest uppercase">See how we help ↗</span>
-              </Link>
-            ))}
+        <section className="evidence-section" aria-labelledby="decisions-heading">
+          <p className="evidence-kicker">Decisions we help make</p>
+          <h2 id="decisions-heading" className="evidence-section-title mt-4 max-w-3xl">Start with the decision, then expose the evidence boundary.</h2>
+          <div className="mt-9 grid gap-5 md:grid-cols-3">
+            {capabilities.map((capability) => <Link key={capability.number} href={capability.href} className="evidence-card group flex flex-col"><p className="evidence-kicker">{capability.number}</p><h3 className="evidence-card-title mt-4">{capability.title}</h3><p className="evidence-card-copy mt-4 flex-1">{capability.copy}</p><span className="evidence-kicker mt-6 text-[var(--text-primary)]">See how we help ↗</span></Link>)}
           </div>
         </section>
 
-        <section className="mt-24 border border-indigo-900/50 bg-indigo-950/20 p-7 sm:p-10 relative overflow-hidden">
-          <div className="absolute top-0 left-0 h-full w-1 bg-indigo-500" />
-          <p className="font-mono text-[10px] text-indigo-400 tracking-widest uppercase mb-4">
-            [ What you receive ]
-          </p>
-          <h2 className="text-2xl sm:text-3xl font-light text-white mb-5">
-            A clear answer your team can stand behind.
-          </h2>
-          <p className="text-zinc-400 leading-relaxed max-w-2xl mb-7">
-            In 10–15 pages, you get the decision context, the evidence, the relevant trade-offs, and a clear boundary between what is established and what still needs judgment.
-          </p>
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 font-mono text-[10px] tracking-widest">
-            {['SOURCED', 'VERIFIED', 'ILLUSTRATIVE', 'UNVERIFIED'].map((tag) => (
-              <span key={tag} className="border border-zinc-700 px-3 py-2 text-zinc-300 text-center">{tag}</span>
-            ))}
-          </div>
-          <Link href="/consulting" className="inline-block mt-8 text-xs font-mono text-indigo-300 hover:text-white tracking-widest uppercase transition-colors">
-            See the method behind it ↗
-          </Link>
-          <div className="mt-5 flex flex-col sm:flex-row gap-x-6 gap-y-3 font-mono text-[10px] tracking-widest uppercase">
-            <Link href="/audit" className="text-zinc-400 hover:text-white transition-colors">Try the live auditor ↗</Link>
-            <Link href="/mps" className="text-zinc-400 hover:text-white transition-colors">Read the MPS/0.1 standard ↗</Link>
+        <section className="evidence-section" aria-labelledby="receive-heading">
+          <div className="evidence-inset">
+            <p className="evidence-kicker">What you receive</p><h2 id="receive-heading" className="evidence-section-title mt-4 max-w-3xl">A clear answer your team can stand behind.</h2>
+            <p className="evidence-copy mt-5">In 10–15 pages, you get the decision context, evidence, relevant trade-offs, and a clear boundary between what is established and what still needs judgment.</p>
+            <div className="mt-7 grid grid-cols-2 gap-3 sm:grid-cols-4">{['SOURCED', 'VERIFIED', 'ILLUSTRATIVE', 'UNVERIFIED'].map((tag) => <span key={tag} className="border border-[var(--border-default)] bg-[var(--surface-paper)] px-3 py-2 text-center font-mono text-[10px] tracking-widest text-[var(--text-secondary)]">{tag}</span>)}</div>
+            <div className="mt-7 flex flex-wrap gap-x-6 gap-y-3 font-mono text-xs uppercase tracking-widest"><Link href="/consulting" className="evidence-link">See the method ↗</Link><Link href="/audit" className="evidence-link">Try the live auditor ↗</Link><Link href="/mps" className="evidence-link">Read MPS/0.1 ↗</Link></div>
           </div>
         </section>
 
-        <section className="mt-24">
-          <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-8">
-            <div>
-              <p className="font-mono text-[10px] text-indigo-400 tracking-widest uppercase mb-3">[ Published work ]</p>
-              <h2 className="text-2xl sm:text-3xl font-light text-white">Books, essays, and public analysis.</h2>
-            </div>
-            <div className="flex flex-wrap gap-x-6 gap-y-3 font-mono text-xs tracking-widest uppercase">
-              <Link href="/books" className="text-indigo-300 hover:text-white transition-colors">View all books ↗</Link>
-              <Link href="/intelligence" className="text-zinc-400 hover:text-white transition-colors">View market intelligence ↗</Link>
-            </div>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-            {work.map((item) => (
-              <Link key={item.title} href={item.href} className="group border border-zinc-800 p-6 hover:border-zinc-500 hover:bg-zinc-900/30 transition-colors">
-                <p className="font-mono text-[10px] text-indigo-400 tracking-widest uppercase mb-4">{item.category}</p>
-                <h3 className="text-lg text-zinc-100 group-hover:text-white mb-3">{item.title}</h3>
-                <p className="text-sm text-zinc-400 leading-relaxed">{item.copy}</p>
-                <span className="inline-block mt-5 font-mono text-xs text-zinc-400 group-hover:text-white tracking-widest uppercase">
-                  {item.category === 'OPEN EDITION' ? 'Explore book ↗' : item.category === 'INTERACTIVE PROTOTYPE' ? 'Play prototype ↗' : 'Read analysis ↗'}
-                </span>
-              </Link>
-            ))}
-          </div>
+        <section className="evidence-section" aria-labelledby="work-heading">
+          <div className="flex flex-col justify-between gap-5 sm:flex-row sm:items-end"><div><p className="evidence-kicker">Published work</p><h2 id="work-heading" className="evidence-section-title mt-4">Books, essays, and public analysis.</h2></div><div className="flex flex-wrap gap-5 font-mono text-xs uppercase tracking-widest"><Link href="/books" className="evidence-link">All books ↗</Link><Link href="/intelligence" className="evidence-link">Market intelligence ↗</Link></div></div>
+          <div className="mt-9 grid gap-4 md:grid-cols-2">{work.map((item) => <Link key={item.title} href={item.href} className="evidence-card group"><p className="evidence-kicker">{item.category}</p><h3 className="evidence-card-title mt-3">{item.title}</h3><p className="evidence-card-copy mt-3">{item.copy}</p><span className="evidence-kicker mt-5 inline-block text-[var(--text-primary)]">{item.category === 'OPEN EDITION' ? 'Explore book ↗' : item.category === 'INTERACTIVE PROTOTYPE' ? 'Play prototype ↗' : 'Read analysis ↗'}</span></Link>)}</div>
         </section>
 
-        <section className="mt-24 border-t border-zinc-800 pt-10 grid grid-cols-1 md:grid-cols-2 gap-8">
-          <div>
-            <p className="font-mono text-[10px] text-indigo-400 tracking-widest uppercase mb-3">[ Independent research ]</p>
-            <h2 className="text-xl text-white mb-3">Systemic sovereignty</h2>
-            <p className="text-sm text-zinc-400 leading-relaxed mb-4">
-              Maha Strategies also publishes independent work on semiconductor resilience, edge AI, human autonomy, and the systems that connect them.
-            </p>
-            <Link href="/research" className="font-mono text-xs text-zinc-400 hover:text-white tracking-widest uppercase transition-colors">Browse research ↗</Link>
-          </div>
-          <div>
-            <p className="font-mono text-[10px] text-indigo-400 tracking-widest uppercase mb-3">[ The Maha Principle ]</p>
-            <h2 className="text-xl text-white mb-3">The architecture of human flourishing</h2>
-            <p className="text-sm text-zinc-400 leading-relaxed mb-4">
-              Our book examines the biological, cognitive, and relational foundations of independence in an extractive world.
-            </p>
-            <a href="https://www.themahaprinciple.com" target="_blank" rel="noopener noreferrer" className="font-mono text-xs text-zinc-400 hover:text-white tracking-widest uppercase transition-colors">Read the book brief ↗</a>
-          </div>
+        <section className="evidence-section grid gap-8 md:grid-cols-2">
+          <article><p className="evidence-kicker">Independent research</p><h2 className="evidence-card-title mt-4">Systemic sovereignty</h2><p className="evidence-card-copy mt-4 max-w-xl">Maha publishes independent work on semiconductor resilience, edge AI, human autonomy, and the systems connecting them.</p><Link href="/research" className="evidence-link mt-5 inline-block font-mono text-xs uppercase tracking-widest">Browse research ↗</Link></article>
+          <article><p className="evidence-kicker">The Maha Principle</p><h2 className="evidence-card-title mt-4">The architecture of human flourishing</h2><p className="evidence-card-copy mt-4 max-w-xl">Our book examines the biological, cognitive, and relational foundations of independence in an extractive world.</p><a href="https://www.themahaprinciple.com" target="_blank" rel="noopener noreferrer" className="evidence-link mt-5 inline-block font-mono text-xs uppercase tracking-widest">Read the book brief ↗</a></article>
         </section>
 
-        <section className="mt-24 border-t border-zinc-800 pt-10">
-          <p className="font-mono text-[10px] text-indigo-400 tracking-widest uppercase mb-4">[ Self-service tools ]</p>
-          <h2 className="text-2xl sm:text-3xl font-light text-white mb-4">Use a focused tool when a full brief is more than you need.</h2>
-          <p className="max-w-2xl text-zinc-400 leading-relaxed mb-8">
-            Run a receipt-to-CSV batch without an account, or purchase prepaid MPS audit access for a claim-level workflow. These are separate, scoped products—not consulting retainers.
-          </p>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <Link href="/utilities/receipts" className="border border-zinc-800 p-6 hover:border-emerald-500 transition-colors">
-              <p className="font-mono text-[10px] text-emerald-300 tracking-widest uppercase mb-3">Receipt → CSV</p>
-              <h3 className="text-lg text-white mb-2">Turn receipt photos or text into a CSV</h3>
-              <p className="text-sm text-zinc-400 leading-relaxed">Try a single receipt free, then run a private batch when it parses cleanly.</p>
-            </Link>
-            <Link href="/mps/audit-access" className="border border-zinc-800 p-6 hover:border-indigo-400 transition-colors">
-              <p className="font-mono text-[10px] text-indigo-300 tracking-widest uppercase mb-3">MPS audit API</p>
-              <h3 className="text-lg text-white mb-2">Audit claim-level evidence with prepaid access</h3>
-              <p className="text-sm text-zinc-400 leading-relaxed">Purchase a credential scoped only to the MPS audit endpoint—no subscription and no internal access.</p>
-            </Link>
-          </div>
-          <Link href="/tools" className="inline-block mt-6 font-mono text-xs text-zinc-400 hover:text-white tracking-widest uppercase transition-colors">Explore tools &amp; API ↗</Link>
+        <section className="evidence-section" aria-labelledby="tools-heading">
+          <p className="evidence-kicker">Self-service tools</p><h2 id="tools-heading" className="evidence-section-title mt-4">Use a focused tool when a full brief is more than you need.</h2><p className="evidence-copy mt-5">Run a receipt-to-CSV batch without an account, or purchase prepaid MPS audit access. These are separate, scoped products—not consulting retainers.</p>
+          <div className="mt-8 grid gap-4 md:grid-cols-2"><ProductCard href="/utilities/receipts" label="Receipt → CSV" title="Turn receipt photos or text into a CSV" copy="Try a single receipt free, then run a private batch when it parses cleanly." /><ProductCard href="/mps/audit-access" label="MPS audit API" title="Audit claim-level evidence with prepaid access" copy="Purchase a credential scoped only to the MPS audit endpoint—no subscription and no internal access." /></div><Link href="/tools" className="evidence-link mt-6 inline-block font-mono text-xs uppercase tracking-widest">Explore tools & API ↗</Link>
         </section>
 
-        <section className="mt-24 border border-cyan-900/60 bg-cyan-950/10 p-8 sm:p-10" aria-labelledby="developer-infrastructure-home">
-          <p className="font-mono text-[10px] uppercase tracking-widest text-cyan-300">[ Developer infrastructure ]</p>
-          <h2 id="developer-infrastructure-home" className="mt-4 text-2xl font-light text-white sm:text-3xl">Govern tools, bound context, and measure the evidence path.</h2>
-          <p className="mt-4 max-w-3xl leading-relaxed text-zinc-400">Use Maha&apos;s production APIs for enterprise MCP governance, source-linked context compilation, evidence-retention evaluation, bounded GPU optimization, and MPS preflight—with documented SDKs, benchmarks, and security boundaries.</p>
-          <div className="mt-7 flex flex-wrap gap-5 font-mono text-xs uppercase tracking-widest">
-            <Link href="/developers" className="text-cyan-100 underline underline-offset-4 hover:text-white">Explore developer infrastructure ↗</Link>
-            <Link href="/enterprise-mcp-gateway" className="text-zinc-400 underline underline-offset-4 hover:text-white">Review the Enterprise MCP Gateway ↗</Link>
-            <Link href="/context-compiler" className="text-zinc-400 underline underline-offset-4 hover:text-white">Review the Context Compiler ↗</Link>
-          </div>
-        </section>
+        <section className="evidence-section" aria-labelledby="infrastructure-heading"><div className="evidence-inset"><p className="evidence-kicker">Developer infrastructure</p><h2 id="infrastructure-heading" className="evidence-section-title mt-4">Govern tools, bound context, and measure the evidence path.</h2><p className="evidence-copy mt-5">Use Maha&apos;s production APIs for MCP governance, source-linked context compilation, evidence-retention evaluation, bounded optimization, and MPS preflight.</p><div className="mt-7 flex flex-wrap gap-5 font-mono text-xs uppercase tracking-widest"><Link href="/developers" className="evidence-link">Developer infrastructure ↗</Link><Link href="/enterprise-mcp-gateway" className="evidence-link">Enterprise MCP Gateway ↗</Link><Link href="/context-compiler" className="evidence-link">Context Compiler ↗</Link></div></div></section>
 
-        <section className="mt-24 border border-indigo-900/50 bg-indigo-950/20 p-8 sm:p-12 relative overflow-hidden">
-          <div className="absolute top-0 left-0 h-full w-1 bg-indigo-500" />
-          <p className="font-mono text-[10px] text-indigo-400 tracking-widest uppercase mb-4">[ Start with the decision ]</p>
-          <h2 className="text-2xl sm:text-3xl font-light text-white mb-4">What do you need to know before you act?</h2>
-          <p className="text-zinc-400 leading-relaxed max-w-2xl mb-8">
-            Send the question, the decision it informs, and the deadline you are working to. We reply within two business days with a scope—or tell you plainly if we are not the right fit.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4">
-            <TrackedLink href="/contact?service=verified_research" event="cta_homepage_start_inquiry" className="inline-block bg-white text-black font-mono font-bold text-xs tracking-widest uppercase px-7 py-4 hover:bg-zinc-200 transition-colors text-center">Start an Inquiry ↗</TrackedLink>
-            <Link href="/contact" className="inline-block border border-zinc-600 text-zinc-200 font-mono font-bold text-xs tracking-widest uppercase px-7 py-4 hover:border-white hover:text-white transition-colors text-center">Contact Maha Strategies ↗</Link>
-          </div>
-        </section>
+        <section className="evidence-section" aria-labelledby="start-heading"><p className="evidence-kicker">Start with the decision</p><h2 id="start-heading" className="evidence-section-title mt-4">What do you need to know before you act?</h2><p className="evidence-copy mt-5">Send the question, the decision it informs, and your deadline. We reply within two business days with a scope—or tell you plainly if we are not the right fit.</p><div className="mt-8 flex flex-col gap-3 sm:flex-row"><TrackedLink href="/contact?service=verified_research" event="cta_homepage_start_inquiry" className="evidence-action evidence-action--primary">Start an inquiry ↗</TrackedLink><Link href="/contact" className="evidence-action evidence-action--secondary">Contact Maha Strategies ↗</Link></div></section>
       </div>
-
     </main>
   )
+}
+
+function ProductCard({ href, label, title, copy }: { href: string; label: string; title: string; copy: string }) {
+  return <Link href={href} className="evidence-card"><p className="evidence-kicker">{label}</p><h3 className="evidence-card-title mt-3">{title}</h3><p className="evidence-card-copy mt-3">{copy}</p></Link>
 }
