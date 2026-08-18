@@ -232,7 +232,7 @@ export function buildContextProofFixture(options: {
     budgetMode: request.budgetMode,
   }
 
-  const expectedPublicValues = supported ? {
+  const expectedPublicValues: ContextProofFixture['expectedPublicValues'] = supported ? {
     proofContractVersion: CONTEXT_PROOF_CONTRACT_VERSION,
     status: 'success' as const,
     sources: sources.map((source) => ({ sourceId: source.sourceId, sourceHash: source.sourceHash })),
@@ -384,6 +384,23 @@ export function validateContextProofFixture(fixture: ContextProofFixture): void 
 
   const retained = fixture.privateWitness.candidatePassages.filter((passage) => passage.retained)
   const coveredSources = new Set(retained.map((passage) => passage.sourceId))
+  const expectedSelectionBudget = selectionBudget({
+    clientRequestId: 'proof_validation_budget',
+    ...fixture.privateWitness.request,
+  })
+  const expectedRetainedReportedTokens = retained.reduce((total, passage) => total + passage.reportedEstimatedTokens, 0)
+  if (fixture.tokenAccounting.declaredTokenBudget !== fixture.privateWitness.request.tokenBudget
+    || fixture.tokenAccounting.compilerSelectionBudget !== expectedSelectionBudget) {
+    throw new Error('Token budget fields are inconsistent with the private request.')
+  }
+  if (fixture.tokenAccounting.retainedPassageReportedTokens !== expectedRetainedReportedTokens) {
+    throw new Error('Retained reported-token sum is incorrect.')
+  }
+  const expectedReportedArithmetic = expectedRetainedReportedTokens <= expectedSelectionBudget
+    && fixture.tokenAccounting.compiledContextReportedTokens <= expectedSelectionBudget
+  if (fixture.tokenAccounting.reportedTokenArithmeticValid !== expectedReportedArithmetic) {
+    throw new Error('Reported token-arithmetic verdict is incorrect.')
+  }
   const expectedSupported = retained.length <= CONTEXT_PROOF_MAX_RETAINED_PASSAGES
   if (fixture.proofDecision.shouldAttemptProof !== expectedSupported) throw new Error('Proof decision disagrees with retained passage cap.')
   if (fixture.proofDecision.chargePermitted !== expectedSupported) throw new Error('Unsupported fixtures must not be chargeable.')

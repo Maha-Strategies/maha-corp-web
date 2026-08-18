@@ -1,0 +1,44 @@
+{
+  "addendumVersion": "maha-context-proof-canonicalization-v3.1.0",
+  "wireContractVersion": 3,
+  "compatibility": "backward-compatible clarification; frozen v3 fixture bytes are unchanged",
+  "frozenCheckpointSha256": {
+    "index.json": "6734814e5103b82167dde15a2fff434e98ccf9a34186cb4881ece996dd5459b1",
+    "representative-n70/fixture.json": "a942562c83f38d4e99486306c080b5d1d180fa9866170453d2a122a0235e27be",
+    "boundary-n128/fixture.json": "40097fa9cfc6c2c93412523070f60401803453fa7d13410f27ac7cc4b7fc5b65",
+    "unsupported-n129/fixture.json": "ea23bd581301a6fb0af90351be47c925ac67361eaff6de74e4e40ccfeb1bc61a",
+    "duplicate-retained-set/fixture.json": "7d57e0e092cfd328a35d8ef2af40058851b51b4a470435612294d959a16c6c3d",
+    "duplicate-retained-set/adversarial-retained-duplicate.json": "83ba8cd9d388dd831722545ed4a7ebf01777aa23a57c2964e9f4072c5fb54008"
+  },
+  "bundles": [
+    {
+      "id": "partial-coverage-3-of-4",
+      "path": "partial-coverage-3-of-4/fixture.json",
+      "sha256": "e9a498151639eb110e2e944b2d04b3e0bbd81bbfc6305b4cb1876bd21c4535e1",
+      "expectedStatus": "success",
+      "expectedCoverage": {
+        "numerator": 3,
+        "denominator": 4,
+        "basisPoints": 7500
+      }
+    }
+  ],
+  "rejectionPublicValues": {
+    "unsupportedPassageCount": {
+      "proofContractVersion": 3,
+      "status": "unsupported_passage_count",
+      "reasonCode": "retained_passage_count_exceeds_limit",
+      "observedRetainedPassageCount": 129,
+      "maximumSupportedRetainedPassages": 128,
+      "proofAttempted": false,
+      "chargePermitted": false
+    },
+    "invalidRetainedSet": {
+      "proofContractVersion": 3,
+      "status": "rejected_invalid_retained_set",
+      "reasonCode": "retained_passage_hash_not_unique",
+      "proofAttempted": false,
+      "chargePermitted": false
+    }
+  }
+}
