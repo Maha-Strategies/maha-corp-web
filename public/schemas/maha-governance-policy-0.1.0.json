@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://www.mahastrategies.com/schemas/maha-governance-policy-0.1.0.json",
+  "title": "Maha Governance Policy",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "policyId", "policyVersion", "allowedTenantIds", "allowedAgentIds", "allowedTransports", "allowedTargetIds", "allowedResources", "allowedOperations", "allowedCapabilities", "maxInputBytes", "maxHops", "maxTimeoutMs", "review", "payment"],
+  "properties": {
+    "schemaVersion": { "const": "0.1.0" },
+    "policyId": { "type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{7,199}$" },
+    "policyVersion": { "type": "string", "minLength": 1, "maxLength": 100 },
+    "allowedTenantIds": { "type": "array", "minItems": 1, "maxItems": 100, "items": { "type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{7,199}$" } },
+    "allowedAgentIds": { "type": "array", "minItems": 1, "maxItems": 100, "items": { "type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{7,199}$" } },
+    "allowedTransports": { "type": "array", "minItems": 1, "maxItems": 3, "items": { "enum": ["a2a", "mcp", "http-x402"] } },
+    "allowedTargetIds": { "type": "array", "minItems": 1, "maxItems": 100, "items": { "type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{7,199}$" } },
+    "allowedResources": { "type": "array", "minItems": 1, "maxItems": 100, "items": { "type": "string", "pattern": "^https://" } },
+    "allowedOperations": { "type": "array", "minItems": 1, "maxItems": 100, "items": { "type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,199}$" } },
+    "allowedCapabilities": { "type": "array", "maxItems": 100, "items": { "type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,199}$" } },
+    "maxInputBytes": { "type": "integer", "minimum": 0, "maximum": 2147483647 },
+    "maxHops": { "type": "integer", "minimum": 0, "maximum": 2147483647 },
+    "maxTimeoutMs": { "type": "integer", "minimum": 1, "maximum": 2147483647 },
+    "review": {
+      "type": "object", "additionalProperties": false, "required": ["operations", "capabilities"],
+      "properties": {
+        "operations": { "type": "array", "maxItems": 100, "items": { "type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,199}$" } },
+        "capabilities": { "type": "array", "maxItems": 100, "items": { "type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,199}$" } }
+      }
+    },
+    "payment": {
+      "oneOf": [
+        {
+          "type": "object", "additionalProperties": false, "required": ["mode", "allowedBuyerPolicyIds"],
+          "properties": {
+            "mode": { "const": "forbid" },
+            "allowedBuyerPolicyIds": { "type": "array", "maxItems": 0, "items": { "type": "string" } }
+          }
+        },
+        {
+          "type": "object", "additionalProperties": false, "required": ["mode", "allowedBuyerPolicyIds"],
+          "properties": {
+            "mode": { "const": "delegate" },
+            "allowedBuyerPolicyIds": { "type": "array", "minItems": 1, "maxItems": 100, "items": { "type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{7,199}$" } }
+          }
+        }
+      ]
+    }
+  }
+}

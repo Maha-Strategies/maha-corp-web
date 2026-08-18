@@ -8,7 +8,8 @@
 // anything.
 //
 // Supports: type, const, enum, required, properties, additionalProperties:false,
-// items, minItems/maxItems, minLength/maxLength, minimum/maximum, pattern.
+// items, minItems/maxItems, minLength/maxLength, minimum/maximum, pattern,
+// oneOf.
 // Anything else in a schema is ignored rather than silently treated as passing
 // -- see `unsupportedKeywords`, which fails loudly if the catalog starts using
 // a keyword this cannot check.
@@ -17,6 +18,7 @@ const SUPPORTED = new Set([
   'type', 'const', 'enum', 'required', 'properties', 'additionalProperties',
   'items', 'minItems', 'maxItems', 'minLength', 'maxLength', 'minimum',
   'maximum', 'pattern', 'description', 'default', 'title',
+  'oneOf',
 ])
 
 type Schema = Record<string, unknown>
@@ -41,6 +43,11 @@ export function validate(value: unknown, schema: Schema, path = '$'): string[] {
 
   for (const keyword of Object.keys(schema)) {
     if (!SUPPORTED.has(keyword)) problems.push(`${path}: schema uses unsupported keyword "${keyword}"`)
+  }
+
+  if (Array.isArray(schema.oneOf)) {
+    const matching = schema.oneOf.filter((candidate) => candidate && typeof candidate === 'object' && validate(value, candidate as Schema, path).length === 0)
+    if (matching.length !== 1) problems.push(`${path}: expected exactly one oneOf branch to match, got ${matching.length}`)
   }
 
   if ('const' in schema && JSON.stringify(value) !== JSON.stringify(schema.const)) {
