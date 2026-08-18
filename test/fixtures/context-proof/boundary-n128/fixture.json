@@ -2903,7 +2903,8 @@
     "tokenEstimatorVersion": "maha_model_neutral_v1"
   },
   "prototypeCompatibility": {
-    "guestDigestAssessed": "sha256:2b208e449719961e777c294ce7f78e37eb8d90671156b7cbe424c716e1a896e0",
+    "guestDigestAssessed": "sha256:594ea38106c0f305b1293749b4357c52f6833f594ea66ab706e07b9c056465d0",
+    "verifyingKeyAssessed": "0x005b383d68ba6c851fee4a93b4fefb1abce146318dbb2041dbc1f785a1f24b6d",
     "compatible": false,
     "blockers": [
       "Prototype guest recomputes whitespace token counts; v1 must prove arithmetic over Maha-reported counts without claiming estimator verification.",

@@ -12,7 +12,8 @@ import {
 export const CONTEXT_PROOF_FIXTURE_SCHEMA = 'maha-context-proof-fixture-v1' as const
 export const CONTEXT_PROOF_CONTRACT_VERSION = 3
 export const CONTEXT_PROOF_MAX_RETAINED_PASSAGES = 128
-export const CONTEXT_PROOF_PROTOTYPE_GUEST_DIGEST = 'sha256:2b208e449719961e777c294ce7f78e37eb8d90671156b7cbe424c716e1a896e0'
+export const CONTEXT_PROOF_PROTOTYPE_GUEST_DIGEST = 'sha256:594ea38106c0f305b1293749b4357c52f6833f594ea66ab706e07b9c056465d0'
+export const CONTEXT_PROOF_PROTOTYPE_VERIFYING_KEY = '0x005b383d68ba6c851fee4a93b4fefb1abce146318dbb2041dbc1f785a1f24b6d'
 
 type ProofStatus = 'success' | 'unsupported_passage_count'
 
@@ -121,6 +122,7 @@ export type ContextProofFixture = {
   }
   prototypeCompatibility: {
     guestDigestAssessed: typeof CONTEXT_PROOF_PROTOTYPE_GUEST_DIGEST
+    verifyingKeyAssessed: typeof CONTEXT_PROOF_PROTOTYPE_VERIFYING_KEY
     compatible: false
     blockers: string[]
   }
@@ -315,6 +317,7 @@ export function buildContextProofFixture(options: {
     expectedPublicValues,
     prototypeCompatibility: {
       guestDigestAssessed: CONTEXT_PROOF_PROTOTYPE_GUEST_DIGEST,
+      verifyingKeyAssessed: CONTEXT_PROOF_PROTOTYPE_VERIFYING_KEY,
       compatible: false,
       blockers: [
         'Prototype guest recomputes whitespace token counts; v1 must prove arithmetic over Maha-reported counts without claiming estimator verification.',

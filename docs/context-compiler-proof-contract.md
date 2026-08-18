@@ -42,7 +42,7 @@ The exporter refuses to overwrite an existing output file and prints only status
 
 ## Current prototype compatibility result
 
-The prototype guest identified by `sha256:2b208e449719961e777c294ce7f78e37eb8d90671156b7cbe424c716e1a896e0` is intentionally marked incompatible with proof-contract version 3. It must be updated before running these fixtures because it currently:
+The Docker-reproducible prototype guest identified by ELF digest `sha256:594ea38106c0f305b1293749b4357c52f6833f594ea66ab706e07b9c056465d0` and SP1 verifying key `0x005b383d68ba6c851fee4a93b4fefb1abce146318dbb2041dbc1f785a1f24b6d` is intentionally marked incompatible with proof-contract version 3. Reproducibility is established independently from contract compatibility. The guest must be updated before it can pass these fixtures because it currently:
 
 1. recomputes whitespace token counts;
 2. derives non-production input and output hashes;
