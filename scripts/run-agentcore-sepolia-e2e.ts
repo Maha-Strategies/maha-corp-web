@@ -9,6 +9,7 @@
 
 import { createHash } from 'node:crypto'
 import { mkdir, readFile, rename, rm, stat, writeFile } from 'node:fs/promises'
+import { tmpdir } from 'node:os'
 import { dirname, isAbsolute, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
@@ -28,7 +29,7 @@ import { decodeChallenge, decodeReceipt, PAYMENT_REQUIRED_HEADER, PAYMENT_RESPON
 import { agentCoreCredentialMode, type AgentCoreRunnerCredentialConfig } from '../lib/x402/agentcore-runner-auth.ts'
 
 const BASE_SEPOLIA = 'eip155:84532'
-const DEFAULT_STATE = '/private/tmp/maha-agentcore-sepolia-session.json'
+const DEFAULT_STATE = resolve(tmpdir(), 'maha-agentcore-sepolia-session.json')
 
 type RecoveryState = {
   version: 1
