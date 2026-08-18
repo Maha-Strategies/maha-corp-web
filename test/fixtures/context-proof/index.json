@@ -22,6 +22,8 @@
       "id": "duplicate-retained-set",
       "path": "duplicate-retained-set/fixture.json",
       "adversarialPath": "duplicate-retained-set/adversarial-retained-duplicate.json",
+      "adversarialExpectedStatus": "rejected_invalid_retained_set",
+      "adversarialExpectedError": "retained_passage_hash_not_unique",
       "expectedStatus": "success"
     }
   ]

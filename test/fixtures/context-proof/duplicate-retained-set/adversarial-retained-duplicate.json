@@ -20,11 +20,11 @@
     "providerTokenBudgetGuaranteed": false
   },
   "proofDecision": {
-    "status": "success",
-    "shouldAttemptProof": true,
-    "retainedPassageCount": 4,
+    "status": "rejected_invalid_retained_set",
+    "shouldAttemptProof": false,
+    "retainedPassageCount": 5,
     "maximumSupportedRetainedPassages": 128,
-    "chargePermitted": true
+    "chargePermitted": false
   },
   "compilerCommitments": {
     "inputHash": "sha256:3f2b2392d1886b8983c76f154593400069305e17fc5aff2d776b1b801619a627",
@@ -158,64 +158,7 @@
     ],
     "compiledContext": "# Context Pack\n\nTask: Retain the release condition, rollback trigger, and audit evidence without duplicate passages.\n\n\n\n[release-plan:3] The audit record stores metadata and hashes, never source payloads.\n\n[release-plan:2] Rollback begins if API errors exceed two percent for five minutes.\n\n[release-plan:1] A release requires signed credential-rotation evidence and a passing canary in every production region.\n\n[review-notes:2] The reviewer approved the bounded deployment after checking the evidence digest."
   },
-  "expectedPublicValues": {
-    "proofContractVersion": 3,
-    "status": "success",
-    "sources": [
-      {
-        "sourceId": "release-plan",
-        "sourceHash": "sha256:c9229b28f39515406a7d8cfeb7ff1a88b2c8b0304ec4f502e4a8e009505657a3"
-      },
-      {
-        "sourceId": "review-notes",
-        "sourceHash": "sha256:6f0af8de5a618c99601f5a4177774e69b5b7b05bf3c56b42dbb040790cb0ad78"
-      }
-    ],
-    "retainedPassages": [
-      {
-        "passageId": "release-plan:3",
-        "sourceId": "release-plan",
-        "sourceStartByte": 173,
-        "sourceEndByte": 240,
-        "passageHash": "sha256:3e3a7b7fd40dfc205500c0835ea126017ac341ecdf00a0f23f43d1a6e5b15775"
-      },
-      {
-        "passageId": "release-plan:2",
-        "sourceId": "release-plan",
-        "sourceStartByte": 105,
-        "sourceEndByte": 171,
-        "passageHash": "sha256:a63572792a40f152a6187c6b760840540382522864188753c3dcfb0b25b919ea"
-      },
-      {
-        "passageId": "release-plan:1",
-        "sourceId": "release-plan",
-        "sourceStartByte": 0,
-        "sourceEndByte": 103,
-        "passageHash": "sha256:917bf4e33471dfa9c94ce3a51440fe6ab0baa9134182274f27deb95f770886c4"
-      },
-      {
-        "passageId": "review-notes:2",
-        "sourceId": "review-notes",
-        "sourceStartByte": 105,
-        "sourceEndByte": 185,
-        "passageHash": "sha256:7631c0e53636e8d3416b920d1c83af096d3d0ae08965cd907731f6b4b075bf1e"
-      }
-    ],
-    "inputHash": "sha256:3f2b2392d1886b8983c76f154593400069305e17fc5aff2d776b1b801619a627",
-    "outputHash": "sha256:85f700e3054eb2f74626c626161501548b02e69d799e48a46feedef40dc79c9f",
-    "tokenBudget": 1024,
-    "compilerSelectionBudget": 737,
-    "retainedPassageReportedTokens": 53,
-    "compiledContextReportedTokens": 101,
-    "includedPassageCount": 4,
-    "coverageNumerator": 2,
-    "coverageDenominator": 2,
-    "coveragePercentageBps": 10000,
-    "reportedTokenArithmeticValid": true,
-    "tokenEstimatorVerified": false,
-    "providerTokenBudgetGuaranteed": false,
-    "tokenEstimatorVersion": "maha_model_neutral_v1"
-  },
+  "expectedPublicValues": null,
   "prototypeCompatibility": {
     "guestDigestAssessed": "sha256:594ea38106c0f305b1293749b4357c52f6833f594ea66ab706e07b9c056465d0",
     "verifyingKeyAssessed": "0x005b383d68ba6c851fee4a93b4fefb1abce146318dbb2041dbc1f785a1f24b6d",
