@@ -52,6 +52,7 @@ export const BLOCKED_TECHNIQUES: Record<string, string> = {
   'natal nakshatra interpretation': 'claims that a chart determines personality, capability, or behaviour',
   'avocation from house placement': 'investment, trading, or other financial decisions',
   'avocation from house ruler': 'employment, lending, insurance, or housing decisions about a person',
+  'avocation source mapping': 'investment, trading, or other financial decisions',
 }
 
 /**

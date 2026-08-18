@@ -11,7 +11,7 @@ import {
   type PublicationReviewStatus,
 } from './practitioner-review.ts'
 
-export const JYOTISHA_SOURCE_COVERAGE_VERSION = 'jyotisha-source-coverage/0.1' as const
+export const JYOTISHA_SOURCE_COVERAGE_VERSION = 'jyotisha-source-coverage/0.2' as const
 
 export const JYOTISHA_COVERAGE_LABELS: Record<JyotishaCoverageArea, string> = {
   'planetary-house-placement': 'Planetary house placement',
@@ -21,6 +21,7 @@ export const JYOTISHA_COVERAGE_LABELS: Record<JyotishaCoverageArea, string> = {
   'dasha-interpretation': 'Daśā interpretation',
   'transit-interpretation': 'Transit interpretation',
   'mundane-corporate-charts': 'Mundane and corporate charts',
+  'panchanga-selection': 'Pañcāṅga classification and activity selection',
 }
 
 export interface JyotishaCoverageRule {
@@ -85,6 +86,8 @@ export function buildJyotishaSourceCoverage(reviews: PractitionerReviewRecord[] 
 
 export function assertJyotishaSourceCoverageIntegrity(): void {
   const coverage = buildJyotishaSourceCoverage()
+  const ruleCount = coverage.areas.reduce((sum, area) => sum + area.rules.length, 0)
+  if (ruleCount < 100 || ruleCount > 250) throw new Error(`Source-bound Jyotiṣa coverage must remain between 100 and 250 rules; found ${ruleCount}.`)
   for (const area of coverage.areas) {
     if (area.rules.length === 0) throw new Error(`${area.area} has no source-bound Jyotiṣa rule.`)
     for (const rule of area.rules) {

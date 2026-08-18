@@ -2,6 +2,7 @@ import assert from 'node:assert/strict'
 import test from 'node:test'
 
 import { ASTROLOGY_RULES, ASTROLOGY_TRADITIONS, JYOTISHA_COVERAGE_AREAS, getRulesForTradition } from '../lib/astrology-traditions.ts'
+import { BLOCKED_TECHNIQUES } from '../lib/interpretation-compiler.ts'
 import { buildJyotishaSourceCoverage } from '../lib/jyotisha-source-coverage.ts'
 import { PRACTITIONER_REVIEW_RUBRIC_VERSION, PRACTITIONER_REVIEW_VERSION, assessRulePublicationReview, type PractitionerReviewRecord } from '../lib/practitioner-review.ts'
 
@@ -21,10 +22,12 @@ function acceptedReview(requirement: ReturnType<typeof assessRulePublicationRevi
   }
 }
 
-test('the small Jyotisha expansion covers every declared priority with rights-cleared passages', () => {
+test('the source-bound Jyotisha corpus stays within the declared 100–250-rule scope', () => {
   const coverage = buildJyotishaSourceCoverage()
   assert.deepEqual(coverage.areas.map((area) => area.area), [...JYOTISHA_COVERAGE_AREAS])
-  assert.equal(coverage.areas.reduce((sum, area) => sum + area.rules.length, 0), 8)
+  const total = coverage.areas.reduce((sum, area) => sum + area.rules.length, 0)
+  assert.equal(total, 101)
+  assert.ok(total >= 100 && total <= 250)
   for (const area of coverage.areas) {
     assert.ok(area.rules.length > 0, area.area)
     assert.equal(area.status, 'encoded-awaiting-practitioner-review')
@@ -33,6 +36,42 @@ test('the small Jyotisha expansion covers every declared priority with rights-cl
       assert.ok(rule.reviewRequirements.some((requirement) => requirement.scope === 'source-fidelity'))
       assert.ok(rule.reviewRequirements.some((requirement) => requirement.scope === 'rule-formalization'))
     }
+  }
+})
+
+test('the classical expansion is atomized into auditable rule families', () => {
+  const rules = ASTROLOGY_RULES.filter((rule) => rule.traditionId === 'vedic-jyotisha' && rule.sourceBoundCoverage)
+  const count = (technique: string) => rules.filter((rule) => rule.technique === technique).length
+
+  assert.equal(count('nakshatra class taxonomy'), 27)
+  assert.equal(count('tithi group taxonomy'), 15)
+  assert.equal(count('karaṇa lord taxonomy'), 7)
+  assert.equal(count('fixed karaṇa taxonomy'), 4)
+  assert.equal(count('natal nakshatra interpretation'), 27)
+  assert.equal(count('avocation source mapping'), 7)
+  assert.equal(count('nakshatra activity doctrine'), 5)
+  assert.equal(count('grooming election doctrine'), 1)
+  assert.equal(count('ritual election doctrine'), 1)
+})
+
+test('compound source lists preserve conflicts and normalize calculator names explicitly', () => {
+  const hasta = ASTROLOGY_RULES.find((rule) => rule.id === 'bs-nakshatra-class-hasta')!
+  assert.deepEqual(hasta.passageIds, ['bs-98-9-laghu-list', 'bs-98-11-moving-list'])
+  assert.match(hasta.interpretation, /Laghu.*moving/)
+  assert.match(hasta.disagreements.join(' '), /both classifications/i)
+
+  const fifteenth = ASTROLOGY_RULES.find((rule) => rule.id === 'bs-tithi-class-15')!
+  assert.deepEqual(fifteenth.conditions[0].requiresLimb?.anyOf, ['Pūrṇimā', 'Amāvāsyā'])
+  const satabhisha = ASTROLOGY_RULES.find((rule) => rule.id === 'bj-natal-satabhishak-moon')!
+  assert.deepEqual(satabhisha.conditions[0].requiresLimb?.anyOf, ['Śatabhiṣā'])
+})
+
+test('sensitive natal and avocation doctrine remains blocked independently of review', () => {
+  const sensitive = ASTROLOGY_RULES.filter((rule) => ['natal nakshatra interpretation', 'avocation source mapping'].includes(rule.technique))
+  assert.equal(sensitive.length, 34)
+  for (const rule of sensitive) {
+    assert.match(rule.boundary, /prohibited from generated reports/i)
+    assert.ok(BLOCKED_TECHNIQUES[rule.technique], `${rule.technique} needs an independent compiler block`)
   }
 })
 
