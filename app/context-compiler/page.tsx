@@ -7,19 +7,65 @@ export const metadata: Metadata = {
   alternates: { canonical: '/context-compiler' },
 }
 
+const machineLinks = [
+  { href: '/recipes/bazaar-discovery-to-payment', label: 'Run discovery-to-payment' },
+  { href: '/benchmarks/context-retention', label: 'Review MCRB-1 benchmark' },
+  { href: '/recipes/context-compiler-large-document', label: 'Run the measured workload' },
+  { href: '/context-pack-schema.json', label: 'Read request schema', anchor: true },
+  { href: '/api/docs/openapi', label: 'OpenAPI contract', anchor: true },
+  { href: '/.well-known/maha/offer-selection.json', label: 'Machine-readable offer guide', anchor: true },
+  { href: '/enterprise-mcp-gateway', label: 'Enterprise MCP Gateway' },
+] as const
+
 export default function ContextCompilerPage() {
-  return <main className="min-h-screen bg-[#0a0a0c] px-6 py-20 text-zinc-200 sm:py-28"><div className="mx-auto max-w-4xl">
-    <p className="font-mono text-[10px] uppercase tracking-[0.24em] text-cyan-300">[ Maha Strategies // epistemic middleware ]</p>
-    <h1 className="mt-5 max-w-3xl text-4xl font-light leading-tight text-white sm:text-6xl">Give agents less context. Keep the evidence path.</h1>
-    <p className="mt-6 max-w-3xl text-lg leading-relaxed text-zinc-400">The Maha Context Compiler turns a bounded set of raw documents into a task-specific Context Pack: deduplicated passages, source references, hashes, and transparent before/after measurements. It is deterministic middleware, not a model wrapper.</p>
-    <div className="mt-8 flex flex-wrap gap-3"><Link className="border border-cyan-500 bg-cyan-950/30 px-5 py-3 font-mono text-xs uppercase tracking-widest text-cyan-100 hover:bg-cyan-900/40" href="/context-compiler/playground">Try with sample documents</Link><Link className="border border-zinc-700 px-5 py-3 font-mono text-xs uppercase tracking-widest text-zinc-300 hover:border-cyan-500" href="/benchmarks/context-retention">See the benchmark</Link></div>
-    <section className="mt-10 grid gap-4 md:grid-cols-3"><Card title="Measure" body="Record original and compiled bytes, model-neutral estimated tokens, reduction percentage, source coverage, and duplicates removed." /><Card title="Trace" body="Every included passage points back to a source ID, passage position, and content hash. The original document is never stored." /><Card title="Constrain" body="Set a context budget and an explicit task. Passages that do not fit are excluded visibly rather than silently overflowing the prompt." /></section>
-    <section className="mt-12 border border-cyan-900 bg-cyan-950/15 p-6"><h2 className="text-xl text-white">What this first release does not claim</h2><p className="mt-3 text-sm leading-relaxed text-zinc-300">It does not promise a fixed percentage reduction, exact provider token counts, complete source coverage, factual verification, or hallucination prevention. Those are workload-specific outcomes to measure. Use <Link href="/mps" className="text-cyan-200 underline">MPS</Link> when consequential claims need a separate provenance review.</p></section>
-    <section className="mt-12"><h2 className="text-2xl text-white">Machine integration</h2><p className="mt-3 max-w-3xl text-sm leading-relaxed text-zinc-400">API-key clients or autonomous x402 buyers call the Context Pack API with a task, a token budget, and 1–8 textual sources. The response is returned directly; the service retains only a privacy-safe outcome ledger, not source text or the compiled pack.</p><div className="mt-5 flex flex-wrap gap-3"><Link className="border border-cyan-600 px-4 py-2 font-mono text-xs uppercase tracking-widest text-cyan-100 hover:bg-cyan-950/50" href="/recipes/bazaar-discovery-to-payment">Run discovery-to-payment</Link><Link className="border border-zinc-700 px-4 py-2 font-mono text-xs uppercase tracking-widest text-zinc-300 hover:border-cyan-500" href="/benchmarks/context-retention">Review MCRB-1 benchmark</Link><Link className="border border-zinc-700 px-4 py-2 font-mono text-xs uppercase tracking-widest text-zinc-300 hover:border-cyan-500" href="/recipes/context-compiler-large-document">Run the measured workload</Link><a className="border border-zinc-700 px-4 py-2 font-mono text-xs uppercase tracking-widest text-zinc-300 hover:border-cyan-500" href="/context-pack-schema.json">Read request schema</a><a className="border border-zinc-700 px-4 py-2 font-mono text-xs uppercase tracking-widest text-zinc-300 hover:border-cyan-500" href="/api/docs/openapi">OpenAPI contract</a><a className="border border-zinc-700 px-4 py-2 font-mono text-xs uppercase tracking-widest text-zinc-300 hover:border-cyan-500" href="/.well-known/maha/offer-selection.json">Machine-readable offer selection guide</a><Link className="border border-zinc-700 px-4 py-2 font-mono text-xs uppercase tracking-widest text-zinc-300 hover:border-cyan-500" href="/enterprise-mcp-gateway">Enterprise MCP Gateway</Link></div></section>
-    <section className="mt-12 border-t border-zinc-800 pt-8"><h2 className="text-2xl text-white">Evidence-grounded implementation guides</h2><div className="mt-5 grid gap-3 sm:grid-cols-2"><GuideLink href="/guides/context-compression-vs-conversation-summarization" title="Compression vs. conversation summarization" /><GuideLink href="/guides/preserve-citations-reducing-llm-context" title="Preserve citations while reducing context" /><GuideLink href="/guides/crewai-context-compression-provenance" title="CrewAI compression with provenance" /><GuideLink href="/benchmarks/context-retention" title="MCRB-1 methodology and raw results" /></div></section>
-    <section className="mt-12 border-t border-zinc-800 pt-8"><h2 className="text-2xl text-white">How it unifies Maha</h2><p className="mt-3 max-w-3xl text-sm leading-relaxed text-zinc-400">Context Packs are the portable evidence object between the corporate systems: MPS can review their consequential claims; the Enterprise MCP Gateway can restrict which tools receive them; and the commercial ledger can measure where compact, source-linked context is actually used.</p></section>
-  </div></main>
+  return (
+    <main className="evidence-page">
+      <div className="evidence-container evidence-container--narrow">
+        <header className="border-t border-[var(--border-default)] pt-5">
+          <p className="evidence-kicker flex flex-wrap justify-between gap-3"><span>Context Compiler</span><span>Deterministic · source-linked · model-neutral</span></p>
+          <h1 className="evidence-title evidence-title--product">Give agents less context. Keep the evidence path.</h1>
+          <p className="evidence-lede mt-7">Turn bounded raw documents into a task-specific Context Pack with deduplicated passages, source references, stable hashes, and transparent before-and-after measurements.</p>
+          <p className="evidence-copy mt-5">The compiler is deterministic middleware, not a model wrapper. It reduces what reaches the model while preserving an inspectable relationship to the supplied sources.</p>
+          <div className="mt-9 flex flex-wrap gap-3"><Link className="evidence-action evidence-action--primary" href="/context-compiler/playground">Try sample documents ↗</Link><Link className="evidence-action evidence-action--secondary" href="/benchmarks/context-retention">See the benchmark ↗</Link></div>
+        </header>
+
+        <section className="mt-12 grid gap-4 md:grid-cols-3" aria-label="Context compiler capabilities">
+          <Card label="01 · Measure" body="Record original and compiled bytes, model-neutral estimated tokens, reduction percentage, source coverage, and duplicates removed." />
+          <Card label="02 · Trace" body="Every included passage points to a source ID, passage position, and content hash. The original document is never stored." />
+          <Card label="03 · Constrain" body="Set a context budget and explicit task. Passages that do not fit are excluded visibly rather than silently overflowing the prompt." />
+        </section>
+
+        <section className="evidence-section" aria-labelledby="boundaries-heading">
+          <div className="border-l-[3px] border-[var(--status-boundary)] bg-[rgba(160,111,20,0.08)] p-6 sm:p-8">
+            <p className="evidence-kicker text-[var(--status-boundary)]">Declared boundary</p><h2 id="boundaries-heading" className="evidence-section-title mt-4 text-2xl">What this release does not claim</h2>
+            <p className="evidence-copy mt-4 text-sm">It does not promise a fixed percentage reduction, exact provider token counts, complete source coverage, factual verification, or hallucination prevention. Those are workload-specific outcomes to measure. Use <Link href="/mps" className="evidence-link">MPS</Link> when consequential claims need a separate provenance review.</p>
+          </div>
+        </section>
+
+        <section className="evidence-section" aria-labelledby="machine-integration-heading">
+          <p className="evidence-kicker">Machine integration</p><h2 id="machine-integration-heading" className="evidence-section-title mt-4">A bounded contract for human and autonomous buyers.</h2>
+          <p className="evidence-copy mt-5">API-key clients or autonomous x402 buyers call the Context Pack API with a task, a token budget, and 1–8 textual sources. The response is returned directly; the service retains only a privacy-safe outcome ledger, not source text or the compiled pack.</p>
+          <div className="mt-7 grid gap-3 sm:grid-cols-2">{machineLinks.map((item) => 'anchor' in item ? <a key={item.href} className="evidence-card evidence-kicker text-[var(--text-primary)]" href={item.href}>{item.label} ↗</a> : <Link key={item.href} className="evidence-card evidence-kicker text-[var(--text-primary)]" href={item.href}>{item.label} ↗</Link>)}</div>
+        </section>
+
+        <section className="evidence-section" aria-labelledby="guides-heading">
+          <p className="evidence-kicker">Implementation guides</p><h2 id="guides-heading" className="evidence-section-title mt-4">Reproduce the method before trusting the result.</h2>
+          <div className="mt-7 grid gap-3 sm:grid-cols-2"><GuideLink href="/guides/context-compression-vs-conversation-summarization" title="Compression vs. conversation summarization" /><GuideLink href="/guides/preserve-citations-reducing-llm-context" title="Preserve citations while reducing context" /><GuideLink href="/guides/crewai-context-compression-provenance" title="CrewAI compression with provenance" /><GuideLink href="/benchmarks/context-retention" title="MCRB-1 methodology and raw results" /></div>
+        </section>
+
+        <section className="evidence-section" aria-labelledby="system-heading">
+          <p className="evidence-kicker">System relationship</p><h2 id="system-heading" className="evidence-section-title mt-4">The portable evidence object between Maha&apos;s controls.</h2>
+          <p className="evidence-copy mt-5">MPS can review consequential claims in a Context Pack; the Enterprise MCP Gateway can restrict which tools receive it; and the commercial ledger can measure where compact, source-linked context is actually used.</p>
+        </section>
+      </div>
+    </main>
+  )
 }
 
-function Card({ title, body }: { title: string; body: string }) { return <article className="border border-zinc-800 bg-zinc-950/50 p-5"><p className="font-mono text-[10px] uppercase tracking-widest text-cyan-300">{title}</p><p className="mt-3 text-sm leading-relaxed text-zinc-400">{body}</p></article> }
-function GuideLink({ href, title }: { href: string; title: string }) { return <Link href={href} className="border border-zinc-800 px-4 py-4 text-sm text-zinc-300 hover:border-cyan-700 hover:text-white">{title} →</Link> }
+function Card({ label, body }: { label: string; body: string }) {
+  return <article className="evidence-card"><p className="evidence-kicker">{label}</p><p className="evidence-card-copy mt-4">{body}</p></article>
+}
+
+function GuideLink({ href, title }: { href: string; title: string }) {
+  return <Link href={href} className="evidence-card evidence-card-copy text-[var(--text-primary)]">{title} →</Link>
+}
