@@ -48,6 +48,8 @@ test('approval is exact-bound, expiring, idempotently decided, and single use', 
   assert.equal((await store.consume({ tenantId: 'tenant.one.0001', taskId: 'workflow-task-1234567890abcdef1234567890abcdef', approvalId, actionSha256: D2, policySha256: D2, consumedAt: '2026-08-18T12:02:00.000Z' })).reason, 'binding_mismatch')
   assert.equal((await store.consume({ tenantId: 'tenant.one.0001', taskId: 'workflow-task-1234567890abcdef1234567890abcdef', approvalId, actionSha256: D1, policySha256: D2, consumedAt: '2026-08-18T12:02:00.000Z' })).consumed, true)
   assert.equal((await store.consume({ tenantId: 'tenant.one.0001', taskId: 'workflow-task-1234567890abcdef1234567890abcdef', approvalId, actionSha256: D1, policySha256: D2, consumedAt: '2026-08-18T12:03:00.000Z' })).reason, 'not_approved')
+  assert.deepEqual((await store.list('tenant.one.0001', 'workflow-task-1234567890abcdef1234567890abcdef')).map((record) => record.approvalId), [approvalId])
+  assert.equal((await store.list('tenant.two.0002', 'workflow-task-1234567890abcdef1234567890abcdef')).length, 0)
 })
 
 test('recovery claims prevent redispatch and preserve metadata-only outcome evidence', async () => {
@@ -58,4 +60,6 @@ test('recovery claims prevent redispatch and preserve metadata-only outcome evid
   const done = await store.finish({ tenantId: input.tenantId, taskId: input.taskId, actionId, status: 'succeeded', responseStatus: 200, responseSha256: D1 })
   assert.equal(done.status, 'succeeded'); assert.equal(done.responseSha256, D1)
   assert.equal(JSON.stringify(done).includes('private'), false)
+  assert.deepEqual((await store.list(input.tenantId, input.taskId)).map((record) => record.actionId), [actionId])
+  assert.equal((await store.list('tenant.two.0002', input.taskId)).length, 0)
 })

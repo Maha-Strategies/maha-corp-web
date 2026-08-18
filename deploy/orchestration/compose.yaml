@@ -1,0 +1,18 @@
+services:
+  control-plane:
+    build:
+      context: ../..
+      dockerfile: deploy/orchestration/Dockerfile
+    env_file: .env.private
+    ports:
+      - "127.0.0.1:3000:3000"
+    restart: unless-stopped
+    read_only: true
+    tmpfs:
+      - /tmp:rw,noexec,nosuid,size=64m
+      - /app/.next/cache:rw,noexec,nosuid,size=128m,uid=10001,gid=10001
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    stop_grace_period: 30s

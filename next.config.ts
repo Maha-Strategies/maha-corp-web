@@ -2,6 +2,12 @@ import type { NextConfig } from "next";
 import { withSentryConfig } from '@sentry/nextjs'
 
 const nextConfig: NextConfig = {
+  // The customer-owned container uses Next's minimal standalone server. Maha's
+  // Vercel builds leave this unset and retain the platform adapter.
+  output: process.env.MAHA_STANDALONE_BUILD === 'true' ? 'standalone' : undefined,
+  // Private builds commonly run inside a memory-bounded build VM. Keep their
+  // static-generation fan-out bounded without changing Maha's Vercel builds.
+  experimental: process.env.MAHA_STANDALONE_BUILD === 'true' ? { cpus: 2 } : undefined,
   // The discovery documents keep their canonical public URLs while their
   // internal route-handler paths remain implementation details. The primary
   // agent surfaces are also metered; the CARP proposal is intentionally static

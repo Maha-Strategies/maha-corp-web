@@ -1,5 +1,5 @@
-import { createHash, timingSafeEqual } from 'node:crypto'
 import { UpstashApprovalStore } from '@/lib/workflows/approvals'
+import { authorizeWorkflowControl, workflowTenantId } from '@/lib/workflows/control'
 
 export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
@@ -9,22 +9,12 @@ const APPROVAL_ID = /^approval-[a-f0-9]{64}$/
 const IDEMPOTENCY_KEY = /^[A-Za-z0-9][A-Za-z0-9._:-]{7,199}$/
 const REASON_CODE = /^[A-Za-z0-9][A-Za-z0-9_.:-]{2,79}$/
 
-function authorize(request: Request): { ok: true; reviewerSha256: string } | { ok: false; status: 401 | 503 } {
-  const configured = process.env.WORKFLOW_CONTROL_TOKEN
-  if (!configured || Buffer.byteLength(configured, 'utf8') < 32) return { ok: false, status: 503 }
-  const header = request.headers.get('authorization')
-  if (!header?.startsWith('Bearer ')) return { ok: false, status: 401 }
-  const supplied = Buffer.from(header.slice(7)); const expected = Buffer.from(configured)
-  if (supplied.length !== expected.length || !timingSafeEqual(supplied, expected)) return { ok: false, status: 401 }
-  return { ok: true, reviewerSha256: `sha256:${createHash('sha256').update(configured).digest('hex')}` }
-}
-
 export async function POST(request: Request, context: { params: Promise<{ taskId: string; approvalId: string }> }) {
-  const auth = authorize(request)
+  const auth = authorizeWorkflowControl(request)
   if (!auth.ok) return Response.json({ error: auth.status === 503 ? 'Workflow approval control is unavailable.' : 'Unauthorized.' }, { status: auth.status, headers: { 'Cache-Control': 'no-store' } })
-  const tenantId = request.headers.get('x-maha-tenant-id')
+  const tenantId = workflowTenantId(request, auth)
   const { taskId, approvalId } = await context.params
-  if (!tenantId || !/^[A-Za-z0-9][A-Za-z0-9._:-]{7,199}$/.test(tenantId) || !TASK_ID.test(taskId) || !APPROVAL_ID.test(approvalId)) return Response.json({ error: 'Invalid approval target.' }, { status: 400, headers: { 'Cache-Control': 'no-store' } })
+  if (!tenantId || !TASK_ID.test(taskId) || !APPROVAL_ID.test(approvalId)) return Response.json({ error: 'Invalid approval target.' }, { status: 400, headers: { 'Cache-Control': 'no-store' } })
   if (!request.headers.get('content-type')?.toLowerCase().startsWith('application/json')) return Response.json({ error: 'Content-Type must be application/json.' }, { status: 415, headers: { 'Cache-Control': 'no-store' } })
   const declared = Number(request.headers.get('content-length'))
   if (Number.isFinite(declared) && declared > 2048) return Response.json({ error: 'Approval decision exceeds 2 KB.' }, { status: 413 })

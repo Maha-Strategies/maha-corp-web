@@ -31,6 +31,7 @@ export interface ApprovalStore {
   decide(input: { tenantId: string; taskId: string; approvalId: string; decision: 'approve' | 'deny'; reviewerSha256: string; reasonCode: string; idempotencyKey: string; decidedAt?: string }): Promise<{ accepted: boolean; idempotent: boolean; record: ApprovalRecord | null }>
   consume(input: { tenantId: string; taskId: string; approvalId: string; actionSha256: string; policySha256: string; consumedAt?: string }): Promise<{ consumed: boolean; reason: 'missing' | 'not_approved' | 'expired' | 'binding_mismatch' | null; record: ApprovalRecord | null }>
   get(tenantId: string, taskId: string, approvalId: string): Promise<ApprovalRecord | null>
+  list(tenantId: string, taskId: string): Promise<ApprovalRecord[]>
 }
 
 function assertId(value: string, label: string) { if (!ID.test(value)) throw new Error(`${label} is invalid.`) }
@@ -38,6 +39,7 @@ function assertDigest(value: string, label: string) { if (!SHA256.test(value)) t
 function digest(value: string) { return createHash('sha256').update(value, 'utf8').digest('hex') }
 function key(tenantId: string, taskId: string, approvalId: string) { return scopedRedisKey(`workflow:tenant:${digest(tenantId)}:task:${digest(taskId)}:approval:${digest(approvalId)}`) }
 function decisionKey(tenantId: string, taskId: string, approvalId: string, idempotencyKey: string) { return scopedRedisKey(`workflow:tenant:${digest(tenantId)}:task:${digest(taskId)}:approval:${digest(approvalId)}:decision:${digest(idempotencyKey)}`) }
+function indexKey(tenantId: string, taskId: string) { return scopedRedisKey(`workflow:tenant:${digest(tenantId)}:task:${digest(taskId)}:approvals`) }
 
 export function approvalIdFor(actionSha256: string, policySha256: string): string {
   assertDigest(actionSha256, 'actionSha256'); assertDigest(policySha256, 'policySha256')
@@ -58,6 +60,8 @@ const REQUEST_LUA = `
 if redis.call('EXISTS',KEYS[1])==0 then
  redis.call('HSET',KEYS[1],'approval_id',ARGV[1],'tenant_id',ARGV[2],'task_id',ARGV[3],'action_sha256',ARGV[4],'policy_sha256',ARGV[5],'status','pending','created_at',ARGV[6],'expires_at',ARGV[7],'expires_at_ms',ARGV[8],'decided_at','','consumed_at','','reviewer_sha256','','reason_code','')
  redis.call('EXPIRE',KEYS[1],ARGV[9])
+ redis.call('SADD',KEYS[2],ARGV[1])
+ redis.call('EXPIRE',KEYS[2],ARGV[9])
 end
 return redis.call('HGETALL',KEYS[1])
 `
@@ -86,7 +90,7 @@ export class UpstashApprovalStore implements ApprovalStore {
     validateRequest(input)
     const createdAt = input.createdAt ?? new Date().toISOString()
     const ttl = Math.max(1, Math.min(APPROVAL_TTL_SECONDS, Math.ceil((Date.parse(input.expiresAt) - Date.parse(createdAt)) / 1000)))
-    const raw = await traceRedisQuery('EVAL', () => redis.eval(REQUEST_LUA, [key(input.tenantId, input.taskId, input.approvalId)], [input.approvalId, input.tenantId, input.taskId, input.actionSha256, input.policySha256, createdAt, input.expiresAt, String(Date.parse(input.expiresAt)), String(ttl)]))
+    const raw = await traceRedisQuery('EVAL', () => redis.eval(REQUEST_LUA, [key(input.tenantId, input.taskId, input.approvalId), indexKey(input.tenantId, input.taskId)], [input.approvalId, input.tenantId, input.taskId, input.actionSha256, input.policySha256, createdAt, input.expiresAt, String(Date.parse(input.expiresAt)), String(ttl)]))
     const values = Array.isArray(raw) ? Object.fromEntries(Array.from({ length: raw.length / 2 }, (_, i) => [String(raw[i * 2]), raw[i * 2 + 1]])) : raw as Record<string, unknown>
     return normalize(values)
   }
@@ -108,6 +112,12 @@ export class UpstashApprovalStore implements ApprovalStore {
     const values = await traceRedisQuery('HGETALL', () => redis.hgetall<Record<string, unknown>>(key(tenantId, taskId, approvalId)))
     return values && Object.keys(values).length ? normalize(values) : null
   }
+  async list(tenantId: string, taskId: string) {
+    assertId(tenantId, 'tenantId'); assertId(taskId, 'taskId')
+    const ids = await traceRedisQuery('SMEMBERS', () => redis.smembers(indexKey(tenantId, taskId))) as string[]
+    const records = await Promise.all((ids ?? []).map((approvalId) => this.get(tenantId, taskId, approvalId)))
+    return records.filter((record): record is ApprovalRecord => record !== null).sort((left, right) => right.createdAt.localeCompare(left.createdAt))
+  }
 }
 
 function validateRequest(input: Parameters<ApprovalStore['request']>[0]) {
@@ -128,4 +138,5 @@ export class MemoryApprovalStore implements ApprovalStore {
   async decide(input: Parameters<ApprovalStore['decide']>[0]) { validateDecision(input); const replay = `${input.tenantId}\n${input.taskId}\n${input.approvalId}\n${input.idempotencyKey}`; const record = this.records.get(this.k(input.tenantId, input.taskId, input.approvalId)) ?? null; if (this.decisions.has(replay)) return { accepted: true, idempotent: true, record: record ? { ...record } : null }; if (!record || record.status !== 'pending') return { accepted: false, idempotent: false, record: record ? { ...record } : null }; record.status = input.decision === 'approve' ? 'approved' : 'denied'; record.decidedAt = input.decidedAt ?? new Date().toISOString(); record.reviewerSha256 = input.reviewerSha256; record.reasonCode = input.reasonCode; this.decisions.add(replay); return { accepted: true, idempotent: false, record: { ...record } } }
   async consume(input: Parameters<ApprovalStore['consume']>[0]) { validateConsume(input); const record = this.records.get(this.k(input.tenantId, input.taskId, input.approvalId)) ?? null; let reason: 'missing' | 'not_approved' | 'expired' | 'binding_mismatch' | null = null; if (!record) reason = 'missing'; else if (record.actionSha256 !== input.actionSha256 || record.policySha256 !== input.policySha256) reason = 'binding_mismatch'; else if (Date.parse(record.expiresAt) <= Date.parse(input.consumedAt ?? new Date().toISOString())) { record.status = 'expired'; reason = 'expired' } else if (record.status !== 'approved') reason = 'not_approved'; else { record.status = 'consumed'; record.consumedAt = input.consumedAt ?? new Date().toISOString() } return { consumed: reason === null, reason, record: record ? { ...record } : null } }
   async get(tenantId: string, taskId: string, approvalId: string) { const record = this.records.get(this.k(tenantId, taskId, approvalId)); return record ? { ...record } : null }
+  async list(tenantId: string, taskId: string) { return [...this.records.values()].filter((record) => record.tenantId === tenantId && record.taskId === taskId).sort((left, right) => right.createdAt.localeCompare(left.createdAt)).map((record) => ({ ...record })) }
 }

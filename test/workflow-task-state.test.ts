@@ -76,3 +76,25 @@ test('metadata validation rejects payload-shaped evidence and malformed identifi
   await assert.rejects(() => store.transition({ ...input('action_dispatched'), evidenceSha256: 'private payload' }), /evidenceSha256/)
   await assert.rejects(() => store.transition({ ...input('action_dispatched'), taskId: 'bad task id' }), /taskId/)
 })
+
+test('task creation is durable, idempotent and cannot be repeated with a new transition', async () => {
+  const store = new MemoryWorkflowTaskStore()
+  const created = await store.transition(input('task_created', 'create'))
+  assert.equal(created.accepted, true)
+  assert.equal(created.state.version, 1)
+  assert.equal((await store.transition(input('task_created', 'create'))).idempotent, true)
+  const duplicate = await store.transition(input('task_created', 'create-again'))
+  assert.equal(duplicate.accepted, false)
+  assert.equal(duplicate.state.version, 1)
+  assert.equal((await store.events(tenantId, taskId)).length, 1)
+})
+
+test('task indexes are tenant scoped, ordered by update and bounded', async () => {
+  const store = new MemoryWorkflowTaskStore()
+  await store.transition(input('task_created', 'first'))
+  await store.transition({ ...input('task_created', 'other'), tenantId: 'tenant.workflow.0002', taskId: 'task.workflow.0002', occurredAt: '2026-08-18T12:01:00.000Z' })
+  await store.transition({ ...input('task_created', 'second'), taskId: 'task.workflow.0003', occurredAt: '2026-08-18T12:02:00.000Z' })
+  assert.deepEqual((await store.list(tenantId)).map((state) => state.taskId), ['task.workflow.0003', taskId])
+  assert.equal((await store.list(tenantId, 1)).length, 1)
+  await assert.rejects(() => store.list(tenantId, 101), /limit/)
+})

@@ -146,6 +146,9 @@ const PRIVATE_ROUTES = new Set([
   '/api/utilities/webhook',
   // Operator-only workflow control plane authenticated by a dedicated token;
   // it is not a customer API and must not be advertised in public OpenAPI.
+  '/api/v1/orchestration/tasks',
+  '/api/v1/orchestration/tasks/[taskId]',
+  '/api/v1/orchestration/readiness',
   '/api/v1/workflows/[taskId]/approvals/[approvalId]',
 ])
 

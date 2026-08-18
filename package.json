@@ -49,6 +49,7 @@
     "evaluate:wso2-context-interceptor": "node --experimental-strip-types scripts/run-wso2-context-interceptor-evaluation.ts",
     "validate:wso2-evaluation-corpus": "node --experimental-strip-types scripts/validate-wso2-evaluation-corpus.ts",
     "verify:wso2-context-interceptor:preview": "node --experimental-strip-types scripts/verify-wso2-context-interceptor-preview.ts",
+    "verify:orchestration-deployment": "node --experimental-strip-types scripts/verify-orchestration-deployment.ts",
     "verify:x402-sepolia": "node --experimental-strip-types scripts/verify-x402-sepolia.ts",
     "build:sdk": "npm --prefix packages/sdk run build",
     "pack:sdk": "npm --prefix packages/sdk run pack:dry-run",

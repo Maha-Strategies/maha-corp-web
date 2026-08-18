@@ -2,8 +2,8 @@ import crypto from 'node:crypto'
 import { Redis } from '@upstash/redis'
 import { scopedRedisKey } from '../redis-namespace.ts'
 import { traceRedisQuery } from '../observability/telemetry.ts'
+import { workflowRetentionSeconds } from './deployment.ts'
 
-const WORKFLOW_TTL_SECONDS = 60 * 60 * 24 * 30
 const MAX_RETAINED_EVENTS = 200
 const IDENTIFIER = /^[A-Za-z0-9][A-Za-z0-9._:-]{0,199}$/
 const SHA256 = /^sha256:[a-f0-9]{64}$/
@@ -22,6 +22,7 @@ export type WorkflowTaskStatus =
   | 'cancelled'
 
 export type WorkflowTransitionEvent =
+  | 'task_created'
   | 'action_dispatched'
   | 'action_succeeded'
   | 'action_failed'
@@ -91,12 +92,14 @@ export interface WorkflowTaskStore {
   transition(input: WorkflowTransitionInput): Promise<WorkflowTransitionResult>
   get(tenantId: string, taskId: string): Promise<WorkflowTaskState | null>
   events(tenantId: string, taskId: string): Promise<WorkflowTaskEvent[]>
+  list(tenantId: string, limit?: number): Promise<WorkflowTaskState[]>
 }
 
 const TERMINAL = new Set<WorkflowTaskStatus>(['completed', 'failed', 'cancelled'])
 
 const TRANSITIONS: Record<WorkflowTaskStatus, Partial<Record<WorkflowTransitionEvent, WorkflowTaskStatus>>> = {
   pending: {
+    task_created: 'pending',
     action_dispatched: 'running', action_denied: 'pending', input_required: 'awaiting_input', review_required: 'awaiting_review',
     payment_required: 'awaiting_payment', payment_authorized: 'running', task_failed: 'failed', task_cancelled: 'cancelled',
   },
@@ -166,6 +169,10 @@ function transitionKey(tenantId: string, taskId: string, transitionId: string): 
   return scopedRedisKey(`workflow:tenant:${digest(tenantId)}:task:${digest(taskId)}:transition:${digest(transitionId)}`)
 }
 
+function taskIndexKey(tenantId: string): string {
+  return scopedRedisKey(`workflow:tenant:${digest(tenantId)}:tasks`)
+}
+
 function parseActor(value: unknown): WorkflowActor {
   if (typeof value === 'string') return JSON.parse(value) as WorkflowActor
   return value as WorkflowActor
@@ -197,9 +204,11 @@ function luaTransitionTable(): string {
 }
 
 const TRANSITION_LUA = `
+local exists=redis.call('EXISTS',KEYS[1])==1
 local status=redis.call('HGET',KEYS[1],'status') or 'pending'
 local version=tonumber(redis.call('HGET',KEYS[1],'version') or '0')
 if redis.call('EXISTS',KEYS[3])==1 then return {2,status,version} end
+if ARGV[4]=='task_created' and exists then return {0,status,version} end
 local transitions=${luaTransitionTable()}
 local next=(transitions[status] or {})[ARGV[4]]
 if not next then return {0,status,version} end
@@ -213,6 +222,8 @@ redis.call('RPUSH',KEYS[2],event)
 redis.call('LTRIM',KEYS[2],-tonumber(ARGV[9]),-1)
 redis.call('EXPIRE',KEYS[2],ARGV[8])
 redis.call('SET',KEYS[3],version,'EX',ARGV[8])
+redis.call('ZADD',KEYS[4],ARGV[10],ARGV[2])
+redis.call('EXPIRE',KEYS[4],ARGV[8])
 return {1,next,version}
 `
 
@@ -222,10 +233,10 @@ export class UpstashWorkflowTaskStore implements WorkflowTaskStore {
   async transition(input: WorkflowTransitionInput): Promise<WorkflowTransitionResult> {
     assertTransition(input)
     const occurredAt = input.occurredAt ?? new Date().toISOString()
-    const keys = [taskKey(input.tenantId, input.taskId), eventsKey(input.tenantId, input.taskId), transitionKey(input.tenantId, input.taskId, input.transitionId)]
+    const keys = [taskKey(input.tenantId, input.taskId), eventsKey(input.tenantId, input.taskId), transitionKey(input.tenantId, input.taskId, input.transitionId), taskIndexKey(input.tenantId)]
     const result = await traceRedisQuery('EVAL', () => redis.eval(TRANSITION_LUA, keys, [
       input.tenantId, input.taskId, input.transitionId, input.event, occurredAt, JSON.stringify(input.actor), input.evidenceSha256,
-      String(WORKFLOW_TTL_SECONDS), String(MAX_RETAINED_EVENTS),
+      String(workflowRetentionSeconds()), String(MAX_RETAINED_EVENTS), String(Date.parse(occurredAt)),
     ])) as Array<string | number>
     const code = Number(result[0])
     const state = await this.get(input.tenantId, input.taskId) ?? (code === 0 ? pendingState(input, occurredAt) : null)
@@ -246,6 +257,14 @@ export class UpstashWorkflowTaskStore implements WorkflowTaskStore {
     const values = await traceRedisQuery('LRANGE', () => redis.lrange<string | WorkflowTaskEvent>(eventsKey(tenantId, taskId), 0, -1))
     return (values ?? []).map((value) => typeof value === 'string' ? JSON.parse(value) as WorkflowTaskEvent : value)
   }
+
+  async list(tenantId: string, limit = 100): Promise<WorkflowTaskState[]> {
+    assertIdentifier(tenantId, 'tenantId')
+    if (!Number.isInteger(limit) || limit < 1 || limit > 100) throw new Error('limit must be an integer between 1 and 100.')
+    const taskIds = await traceRedisQuery('ZRANGE', () => redis.zrange<string[]>(taskIndexKey(tenantId), 0, limit - 1, { rev: true }))
+    const states = await Promise.all((taskIds ?? []).map((taskId) => this.get(tenantId, taskId)))
+    return states.filter((state): state is WorkflowTaskState => state !== null)
+  }
 }
 
 export class MemoryWorkflowTaskStore implements WorkflowTaskStore {
@@ -261,6 +280,7 @@ export class MemoryWorkflowTaskStore implements WorkflowTaskStore {
     const replayKey = `${key}\n${input.transitionId}`
     const current = this.states.get(key)
     if (this.transitions.has(replayKey)) return { accepted: true, idempotent: true, state: { ...current!, lastActor: { ...current!.lastActor } } }
+    if (input.event === 'task_created' && current) return { accepted: false, idempotent: false, reason: 'invalid_transition', state: { ...current, lastActor: { ...current.lastActor } } }
     const from = current?.status ?? 'pending'
     const to = nextWorkflowStatus(from, input.event)
     if (!to) {
@@ -289,5 +309,15 @@ export class MemoryWorkflowTaskStore implements WorkflowTaskStore {
 
   async events(tenantId: string, taskId: string): Promise<WorkflowTaskEvent[]> {
     return (this.history.get(this.key(tenantId, taskId)) ?? []).map((event) => ({ ...event, actor: { ...event.actor } }))
+  }
+
+  async list(tenantId: string, limit = 100): Promise<WorkflowTaskState[]> {
+    assertIdentifier(tenantId, 'tenantId')
+    if (!Number.isInteger(limit) || limit < 1 || limit > 100) throw new Error('limit must be an integer between 1 and 100.')
+    return [...this.states.values()]
+      .filter((state) => state.tenantId === tenantId)
+      .sort((left, right) => right.updatedAt.localeCompare(left.updatedAt) || right.taskId.localeCompare(left.taskId))
+      .slice(0, limit)
+      .map((state) => ({ ...state, lastActor: { ...state.lastActor } }))
   }
 }

@@ -145,3 +145,37 @@ not treated as permission to try again automatically. A2A payment negotiation
 uses a distinct action ID for the unpaid challenge and the subsequently
 authorized paid attempt, while its payment authorization and cumulative task
 budget remain independently replay-protected.
+
+## Private orchestration control plane
+
+`/admin/orchestration` is a private visual console over the durable workflow
+ledger. Its API is deliberately absent from public OpenAPI:
+
+- `GET|POST /api/v1/orchestration/tasks` lists or creates metadata-only tasks.
+- `GET|POST /api/v1/orchestration/tasks/{taskId}` reads a complete snapshot or
+  commits an operator-owned lifecycle transition.
+- `POST /api/v1/workflows/{taskId}/approvals/{approvalId}` approves or denies
+  one exact action-and-policy binding.
+
+Every route requires the environment-scoped `WORKFLOW_CONTROL_TOKEN` and an
+explicit tenant header. The token remains in browser memory and is never
+embedded in a client bundle or persisted by the console. Task snapshots join
+state, the bounded event history, pending approvals and replay-recovery records
+using tenant-scoped indexes; they contain digests and metadata, never prompts,
+arguments, outputs, health data or credentials.
+
+The console may create a task, mark requested input as received, or explicitly
+complete, fail or cancel a workflow when the state machine permits it. It
+cannot dispatch an A2A/MCP action, authorize a payment, consume an approval or
+automatically retry an indeterminate action. Approval remains exact-bound and
+single use: the governed caller must present the same action again after an
+operator approves it. A creation event is append-only and create-once, so a
+second transition cannot rewrite a task's origin record.
+
+The same control plane is packaged in two explicit deployment modes. `hosted`
+mode derives one tenant from each environment-managed operator bearer;
+`private` mode binds the installation to one configured customer tenant and
+withholds unrelated Maha routes. Both use configurable 1–365 day workflow and
+recovery retention over the supported Redis REST adapter. Deployment artifacts,
+limits and the private-enterprise runbook are documented in
+`docs/orchestration-control-plane.md` and `deploy/orchestration/`.
