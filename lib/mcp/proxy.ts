@@ -6,7 +6,10 @@ import { MCPControls } from './controls.ts';
 import { prepareMcpUpstream, readBoundedUpstreamJson } from './upstream.ts';
 import { captureOperationalError, mcpMethodClass, traceMcpUpstream, traceRedisQuery } from '../observability/telemetry.ts';
 import { evaluateMcpGovernance, governanceResponseHeaders } from '../governance/adapters.ts';
-import type { GovernanceDecision } from '../governance/envelope.ts';
+import { governanceDigest, type GovernanceDecision } from '../governance/envelope.ts';
+import type { GovernancePolicyLayer } from '../governance/policy-inheritance.ts';
+import { APPROVAL_ID_HEADER, APPROVAL_STATE_HEADER, approvalIdFor, UpstashApprovalStore, type ApprovalStore } from '../workflows/approvals.ts';
+import { recoveryResponseHeaders, UpstashRecoveryStore, workflowActionIdForExternal, type RecoveryRecord, type RecoveryStore } from '../workflows/recovery.ts';
 import { UpstashWorkflowTaskStore, workflowResponseHeaders, workflowTransitionId, type WorkflowTaskState, type WorkflowTaskStore, type WorkflowTransitionEvent } from '../workflows/task-state.ts';
 
 const redis = Redis.fromEnv();
@@ -34,6 +37,9 @@ type MCPDispatchDependencies = {
   fetchImpl?: typeof fetch
   audit?: (ctx: MCPProxyContext, server: MCPServerConfig, request: JSONRPCRequest, latencyMs: number, governance: GovernanceDecision) => Promise<void>
   workflowTasks?: WorkflowTaskStore
+  policyLayers?: GovernancePolicyLayer[]
+  approvals?: ApprovalStore
+  recovery?: RecoveryStore
 }
 
 export class MCPProxyEngine {
@@ -57,8 +63,10 @@ export class MCPProxyEngine {
     let phase: 'controls' | 'transport' | 'audit' = 'controls'
     let governance: GovernanceDecision | null = null
     let workflowState: WorkflowTaskState | null = null
+    let recoveryRecord: RecoveryRecord | null = null
+    let approvalState: string | null = null
     const governed = (result: MCPProxyResult): MCPProxyResult => governance
-      ? { ...result, headers: { ...governanceResponseHeaders(governance), ...(workflowState ? workflowResponseHeaders(workflowState) : {}), ...(result.headers ?? {}) } }
+      ? { ...result, headers: { ...governanceResponseHeaders(governance), ...(workflowState ? workflowResponseHeaders(workflowState) : {}), ...(recoveryRecord ? recoveryResponseHeaders(recoveryRecord) : {}), ...(approvalState ? { [APPROVAL_STATE_HEADER]: approvalState } : {}), ...(result.headers ?? {}) } }
       : result
 
     try {
@@ -76,7 +84,7 @@ export class MCPProxyEngine {
         retryAfterSeconds: rate.retryAfterSeconds,
         body: { jsonrpc: '2.0', id: rpcPayload.id, error: { code: -32002, message: 'Tenant MCP request limit reached' } },
       }
-      governance = evaluateMcpGovernance({ server: serverConfig, request: rpcPayload, context: ctx, timeoutMs: policy.timeoutMs })
+      governance = evaluateMcpGovernance({ server: serverConfig, request: rpcPayload, context: ctx, timeoutMs: policy.timeoutMs, policyLayers: dependencies.policyLayers })
       const workflowTasks = dependencies.workflowTasks ?? new UpstashWorkflowTaskStore()
       const transition = async (event: WorkflowTransitionEvent) => {
         if (!ctx.taskId) return true
@@ -91,21 +99,49 @@ export class MCPProxyEngine {
         workflowState = result.state
         return result.accepted
       }
-      if (governance.outcome !== 'proceed') {
-        const accepted = await transition(governance.outcome === 'require_review' ? 'review_required' : 'action_denied')
-        if (!accepted) return governed({
-          status: 409,
-          body: { jsonrpc: '2.0', id: rpcPayload.id, error: { code: -32032, message: 'The workflow state does not permit this transition.' } },
-        })
-        return governed({
-          status: 403,
-          body: { jsonrpc: '2.0', id: rpcPayload.id, error: { code: governance.outcome === 'require_review' ? -32031 : -32030, message: `Maha governance ${governance.outcome}: ${governance.reasonCodes.join(',')}` } },
-        })
+      const actionSha256 = governanceDigest({ taskId: ctx.taskId ?? governance.request.taskId, targetId: serverConfig.id, operation: rpcPayload.method, capability: rpcPayload.method === 'tools/call' ? rpcPayload.params?.name ?? null : null, inputSha256: ctx.inputSha256 ?? governanceDigest(rpcPayload) })
+      const policySha256 = governance.policy.policySha256!
+      const actionId = ctx.actionId ?? workflowActionIdForExternal(ctx.traceId)
+      const recovery = dependencies.recovery ?? new UpstashRecoveryStore()
+      if (governance.outcome === 'deny') {
+        const accepted = await transition('action_denied')
+        if (!accepted) return governed({ status: 409, body: { jsonrpc: '2.0', id: rpcPayload.id, error: { code: -32032, message: 'The workflow state does not permit this transition.' } } })
+        return governed({ status: 403, body: { jsonrpc: '2.0', id: rpcPayload.id, error: { code: -32030, message: `Maha governance deny: ${governance.reasonCodes.join(',')}` } } })
+      }
+      if (ctx.taskId) {
+        const existing = await recovery.get(ctx.tenantId, ctx.taskId, actionId)
+        if (existing) {
+          recoveryRecord = existing
+          if (existing.actionSha256 !== actionSha256 || existing.policySha256 !== policySha256) return governed({ status: 409, body: { jsonrpc: '2.0', id: rpcPayload.id, error: { code: -32034, message: 'The action ID is already bound to a different request or policy.' } } })
+          return governed({ status: 409, body: { jsonrpc: '2.0', id: rpcPayload.id, error: { code: -32033, message: `Action already ${existing.status}; upstream dispatch was not repeated.` } } })
+        }
+      }
+      if (governance.outcome === 'require_review') {
+        if (!ctx.taskId) return governed({ status: 403, body: { jsonrpc: '2.0', id: rpcPayload.id, error: { code: -32031, message: 'Human review requires X-Maha-Task-ID and X-Maha-Action-ID.' } } })
+        const approvals = dependencies.approvals ?? new UpstashApprovalStore()
+        const expectedApprovalId = approvalIdFor(actionSha256, policySha256)
+        if (!ctx.approvalId) {
+          const record = await approvals.request({ approvalId: expectedApprovalId, tenantId: ctx.tenantId, taskId: ctx.taskId, actionSha256, policySha256, expiresAt: new Date(Date.now() + 15 * 60_000).toISOString() })
+          approvalState = record.status
+          const accepted = await transition('review_required')
+          if (!accepted) return governed({ status: 409, body: { jsonrpc: '2.0', id: rpcPayload.id, error: { code: -32032, message: 'The workflow state does not permit this transition.' } } })
+          return governed({ status: 403, headers: { [APPROVAL_ID_HEADER]: record.approvalId }, body: { jsonrpc: '2.0', id: rpcPayload.id, error: { code: -32031, message: 'Maha governance requires a human approval bound to this action and policy.' } } })
+        }
+        if (ctx.approvalId !== expectedApprovalId) return governed({ status: 403, body: { jsonrpc: '2.0', id: rpcPayload.id, error: { code: -32035, message: 'The supplied approval is not bound to this action and policy.' } } })
+        const consumed = await approvals.consume({ tenantId: ctx.tenantId, taskId: ctx.taskId, approvalId: ctx.approvalId, actionSha256, policySha256 })
+        approvalState = consumed.record?.status ?? consumed.reason
+        if (!consumed.consumed) return governed({ status: 403, headers: { [APPROVAL_ID_HEADER]: ctx.approvalId }, body: { jsonrpc: '2.0', id: rpcPayload.id, error: { code: -32035, message: `Approval cannot be used: ${consumed.reason}.` } } })
+        if (!await transition('review_approved')) return governed({ status: 409, body: { jsonrpc: '2.0', id: rpcPayload.id, error: { code: -32032, message: 'The workflow is not awaiting review approval.' } } })
       }
       if (!await transition('action_dispatched')) return governed({
         status: 409,
         body: { jsonrpc: '2.0', id: rpcPayload.id, error: { code: -32032, message: 'The workflow state does not permit dispatch.' } },
       })
+      if (ctx.taskId) {
+        const claimed = await recovery.claim({ tenantId: ctx.tenantId, taskId: ctx.taskId, actionId, actionSha256, policySha256 })
+        recoveryRecord = claimed.record
+        if (!claimed.execute) return governed({ status: 409, body: { jsonrpc: '2.0', id: rpcPayload.id, error: { code: -32033, message: `Action already ${claimed.record.status}; upstream dispatch was not repeated.` } } })
+      }
       phase = 'transport'
       const upstream = await (dependencies.prepareUpstream ?? prepareMcpUpstream)(serverConfig, rpcPayload, ctx)
       const response = await traceMcpUpstream(rpcPayload.method, new URL(upstream.url).hostname, async (span) => {
@@ -123,6 +159,7 @@ export class MCPProxyEngine {
         else await controls.recordSuccess(ctx.tenantId, serverConfig.id)
         if (response.status >= 500 || response.status >= 300 && response.status < 400) captureOperationalError(new Error(`MCP upstream returned HTTP ${response.status}.`), 'mcp-upstream', mcpMethodClass(rpcPayload.method))
         await transition('action_failed')
+        if (ctx.taskId) recoveryRecord = await recovery.finish({ tenantId: ctx.tenantId, taskId: ctx.taskId, actionId, status: 'failed', responseStatus: 502, responseSha256: governance.evidenceSha256 })
         return governed({
           status: 502,
           ...(response.status >= 500 || response.status >= 300 && response.status < 400 ? { connectivityFailure: { failure: response.status >= 500 ? 'upstream_5xx' : 'redirect_blocked', status: response.status } } : {}),
@@ -134,6 +171,7 @@ export class MCPProxyEngine {
       if (!jsonRpcData || jsonRpcData.jsonrpc !== '2.0' || jsonRpcData.id !== rpcPayload.id) throw new Error('Upstream returned an invalid JSON-RPC response.')
       await controls.recordSuccess(ctx.tenantId, serverConfig.id)
       await transition('action_succeeded')
+      if (ctx.taskId) recoveryRecord = await recovery.finish({ tenantId: ctx.tenantId, taskId: ctx.taskId, actionId, status: 'succeeded', responseStatus: 200, responseSha256: governanceDigest(jsonRpcData) })
       phase = 'audit'
 
       // Log invocation to Upstash Redis double-entry audit ledger
@@ -162,6 +200,10 @@ export class MCPProxyEngine {
             event: 'action_failed', actor: { transport: 'mcp', targetId: serverConfig.id, operation: rpcPayload.method }, evidenceSha256: governance.evidenceSha256,
           })
           workflowState = result.state
+        } catch {}
+        try {
+          const recovery = dependencies.recovery ?? new UpstashRecoveryStore()
+          recoveryRecord = await recovery.finish({ tenantId: ctx.tenantId, taskId: ctx.taskId, actionId: ctx.actionId ?? workflowActionIdForExternal(ctx.traceId), status: 'indeterminate', responseStatus: null, responseSha256: governance.evidenceSha256 })
         } catch {}
       }
       const errorMessage = err instanceof Error ? err.message : 'Unknown proxy error';

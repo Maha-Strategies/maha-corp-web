@@ -5,6 +5,7 @@ import { evaluateA2ATaskPolicy, parseA2ARequest } from '@/lib/a2a/validation'
 import { PAYMENT_SIGNATURE_HEADER } from '@/lib/x402/protocol'
 import { resolveTaskAttribution } from '@/lib/agent-task-attribution'
 import { workflowTaskIdForExternal } from '@/lib/workflows/task-state'
+import { workflowActionIdForExternal } from '@/lib/workflows/recovery'
 
 export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
@@ -33,14 +34,19 @@ export async function POST(request: Request, context: { params: Promise<{ agentI
     const decision = evaluateA2ATaskPolicy(rpc, taskClass, agent.taskPolicy)
     if (!decision.allowed) return rpcError(rpc.id, decision.code, decision.message, 403)
     const attribution = resolveTaskAttribution(request.headers)
+    const traceId = `trc_${crypto.randomBytes(8).toString('hex')}`
+    const externalActionId = request.headers.get('x-maha-action-id')
+    if (externalActionId && !/^[A-Za-z0-9][A-Za-z0-9._:-]{7,199}$/.test(externalActionId)) return rpcError(rpc.id, -32600, 'Invalid X-Maha-Action-ID.', 400)
     const result = await A2AProxyEngine.dispatch(agent, rpc, {
       tenantId,
-      traceId: `trc_${crypto.randomBytes(8).toString('hex')}`,
+      traceId,
       taskClass: decision.taskClass,
       inputBytes: decision.textBytes,
       paymentSignature: request.headers.get(PAYMENT_SIGNATURE_HEADER),
       a2aVersion: request.headers.get('a2a-version'),
       ...(attribution.taskId ? { workflowTaskId: workflowTaskIdForExternal(attribution.taskId) } : {}),
+      actionId: workflowActionIdForExternal(externalActionId ?? traceId),
+      approvalId: request.headers.get('x-maha-approval-id') ?? undefined,
     })
     const headers: Record<string, string> = { 'Cache-Control': 'no-store', ...(result.headers ?? {}) }
     if (result.retryAfterSeconds) headers['Retry-After'] = String(result.retryAfterSeconds)

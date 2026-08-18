@@ -9,7 +9,10 @@ import { decodeChallenge, decodeReceipt } from '../x402/client.ts'
 import { encodeChallengeHeader, parsePaymentHeader, paymentId, PAYMENT_REQUIRED_HEADER, PAYMENT_RESPONSE_HEADER, PAYMENT_SIGNATURE_HEADER } from '../x402/protocol.ts'
 import { evaluatePaymentIntent, verifySettlement, type BuyerPolicy, type PaymentAuthorization, type PaymentRequirementLike } from '../x402/buyer-policy.ts'
 import { evaluateA2AGovernance, governanceResponseHeaders } from '../governance/adapters.ts'
-import type { GovernanceDecision } from '../governance/envelope.ts'
+import { governanceDigest, type GovernanceDecision } from '../governance/envelope.ts'
+import type { GovernancePolicyLayer } from '../governance/policy-inheritance.ts'
+import { APPROVAL_ID_HEADER, APPROVAL_STATE_HEADER, approvalIdFor, UpstashApprovalStore, type ApprovalStore } from '../workflows/approvals.ts'
+import { recoveryResponseHeaders, UpstashRecoveryStore, workflowActionIdForExternal, type RecoveryRecord, type RecoveryStore } from '../workflows/recovery.ts'
 import { UpstashWorkflowTaskStore, workflowResponseHeaders, workflowTransitionId, type WorkflowTaskState, type WorkflowTaskStore, type WorkflowTransitionEvent } from '../workflows/task-state.ts'
 import { a2aTaskId, a2aTaskIdForExternal, a2aUpstreamTaskId, maxTaskBudgetFor, UpstashA2ATaskBudgetStore, type A2ATaskBudgetReservation, type A2ATaskBudgetState, type A2ATaskBudgetStore } from './task-budget.ts'
 import type { A2AAgentConfig, A2AJsonRpcRequest, A2AJsonRpcResponse } from './types.ts'
@@ -34,6 +37,11 @@ type DispatchOptions = {
   taskBudgets?: A2ATaskBudgetStore
   workflowTasks?: WorkflowTaskStore
   workflowTaskId?: string
+  actionId?: string
+  approvalId?: string
+  policyLayers?: GovernancePolicyLayer[]
+  approvals?: ApprovalStore
+  recovery?: RecoveryStore
   audit?: (config: A2AAgentConfig, request: A2AJsonRpcRequest, options: DispatchOptions, latencyMs: number, paymentAmount: string | null, governance: GovernanceDecision) => Promise<void>
 }
 
@@ -145,6 +153,7 @@ export class A2AProxyEngine {
     let signedAmount: string | null = null
     let authorization: PaymentAuthorization | null = null
     let reservation: A2ATaskBudgetReservation | null = null
+    let reservationActive = false
     let payer: string | null = null
     if (options.paymentSignature) {
       const parsed = parsePaymentHeader(options.paymentSignature)
@@ -155,11 +164,8 @@ export class A2AProxyEngine {
       const maxTaskBudget = config.paymentPolicy ? maxTaskBudgetFor(decision.network, decision.asset, config.paymentPolicy.assetRules) : null
       if (!maxTaskBudget) return { status: 403, body: rpcError(request.id, -32021, 'Signed payment was blocked by policy: task_budget_missing.') }
       reservation = { tenantId: options.tenantId, agentId: config.id, taskId: durableTaskId, authorizationId, network: decision.network, asset: decision.asset, amount: decision.amount, maxTaskBudget }
-      const reserved = await taskBudgets.reserve(reservation)
-      if (!reserved.reserved) return { status: 403, body: rpcError(request.id, -32024, `Signed payment was blocked by durable task budget: ${reserved.reason}.`) }
       const paymentAuthorization = object(parsed.payment.payload.authorization) ? parsed.payment.payload.authorization : null
       if (!paymentAuthorization || typeof paymentAuthorization.from !== 'string') {
-        await taskBudgets.cancel(reservation)
         return { status: 403, body: rpcError(request.id, -32021, 'Signed payment was blocked by policy: payer_missing.') }
       }
       authorization = decision
@@ -177,11 +183,14 @@ export class A2AProxyEngine {
       inputBytes: options.inputBytes,
       timeoutMs: policy.timeoutMs,
       paymentAuthorization: authorization,
+      policyLayers: options.policyLayers,
     })
     let workflowState: WorkflowTaskState | null = null
+    let recoveryRecord: RecoveryRecord | null = null
+    let approvalState: string | null = null
     const governed = (result: A2AProxyResult): A2AProxyResult => ({
       ...result,
-      headers: { ...governanceResponseHeaders(governance), ...(workflowState ? workflowResponseHeaders(workflowState) : {}), ...(result.headers ?? {}) },
+      headers: { ...governanceResponseHeaders(governance), ...(workflowState ? workflowResponseHeaders(workflowState) : {}), ...(recoveryRecord ? recoveryResponseHeaders(recoveryRecord) : {}), ...(approvalState ? { [APPROVAL_STATE_HEADER]: approvalState } : {}), ...(result.headers ?? {}) },
     })
     const workflowTasks = options.workflowTasks ?? new UpstashWorkflowTaskStore()
     const transition = async (event: WorkflowTransitionEvent) => {
@@ -197,18 +206,60 @@ export class A2AProxyEngine {
       return result.accepted
     }
     const currentWorkflowStatus = (): WorkflowTaskState['status'] | null => workflowState?.status ?? null
-    if (governance.outcome !== 'proceed') {
-      if (reservation) await taskBudgets.cancel(reservation)
-      const accepted = await transition(governance.outcome === 'require_review' ? 'review_required' : 'action_denied')
+    const actionSha256 = governanceDigest({ taskId: workflowTaskId, targetId: config.id, operation: request.method, taskClass: options.taskClass, inputSha256: governanceDigest(request.params ?? {}) })
+    const policySha256 = governance.policy.policySha256!
+    const actionId = options.actionId ?? workflowActionIdForExternal(options.traceId)
+    const recovery = options.recovery ?? new UpstashRecoveryStore()
+    if (governance.outcome === 'deny') {
+      if (reservationActive && reservation) await taskBudgets.cancel(reservation)
+      const accepted = await transition('action_denied')
       if (!accepted) return governed({ status: 409, body: rpcError(request.id, -32032, 'The workflow state does not permit this transition.') })
-      return governed({
-        status: 403,
-        body: rpcError(request.id, governance.outcome === 'require_review' ? -32031 : -32030, `Maha governance ${governance.outcome}: ${governance.reasonCodes.join(',')}`),
-      })
+      return governed({ status: 403, body: rpcError(request.id, -32030, `Maha governance deny: ${governance.reasonCodes.join(',')}`) })
+    }
+    const existing = await recovery.get(options.tenantId, workflowTaskId, actionId)
+    if (existing) {
+      recoveryRecord = existing
+      if (existing.actionSha256 !== actionSha256 || existing.policySha256 !== policySha256) {
+        if (reservationActive && reservation) await taskBudgets.cancel(reservation)
+        return governed({ status: 409, body: rpcError(request.id, -32034, 'The action ID is already bound to a different request or policy.') })
+      }
+      if (reservationActive && reservation) await taskBudgets.cancel(reservation)
+      return governed({ status: 409, body: rpcError(request.id, -32033, `Action already ${existing.status}; upstream dispatch was not repeated.`) })
+    }
+    if (governance.outcome === 'require_review') {
+      const approvals = options.approvals ?? new UpstashApprovalStore()
+      const expectedApprovalId = approvalIdFor(actionSha256, policySha256)
+      if (!options.approvalId) {
+        const record = await approvals.request({ approvalId: expectedApprovalId, tenantId: options.tenantId, taskId: workflowTaskId, actionSha256, policySha256, expiresAt: new Date(Date.now() + 15 * 60_000).toISOString() })
+        approvalState = record.status
+        if (reservationActive && reservation) await taskBudgets.cancel(reservation)
+        const accepted = await transition('review_required')
+        if (!accepted) return governed({ status: 409, body: rpcError(request.id, -32032, 'The workflow state does not permit this transition.') })
+        return governed({ status: 403, headers: { [APPROVAL_ID_HEADER]: record.approvalId }, body: rpcError(request.id, -32031, 'Maha governance requires a human approval bound to this action and policy.') })
+      }
+      if (options.approvalId !== expectedApprovalId) {
+        if (reservationActive && reservation) await taskBudgets.cancel(reservation)
+        return governed({ status: 403, body: rpcError(request.id, -32035, 'The supplied approval is not bound to this action and policy.') })
+      }
+      const consumed = await approvals.consume({ tenantId: options.tenantId, taskId: workflowTaskId, approvalId: options.approvalId, actionSha256, policySha256 })
+      approvalState = consumed.record?.status ?? consumed.reason
+      if (!consumed.consumed) {
+        if (reservationActive && reservation) await taskBudgets.cancel(reservation)
+        return governed({ status: 403, headers: { [APPROVAL_ID_HEADER]: options.approvalId }, body: rpcError(request.id, -32035, `Approval cannot be used: ${consumed.reason}.`) })
+      }
+      if (!await transition('review_approved')) {
+        if (reservationActive && reservation) await taskBudgets.cancel(reservation)
+        return governed({ status: 409, body: rpcError(request.id, -32032, 'The workflow is not awaiting review approval.') })
+      }
     }
 
+    if (authorization && reservation) {
+      const reserved = await taskBudgets.reserve(reservation)
+      if (!reserved.reserved) return governed({ status: 403, body: rpcError(request.id, -32024, `Signed payment was blocked by durable task budget: ${reserved.reason}.`) })
+      reservationActive = true
+    }
     if (authorization && !await transition('payment_authorized')) {
-      if (reservation) await taskBudgets.cancel(reservation)
+      if (reservationActive && reservation) await taskBudgets.cancel(reservation)
       return governed({ status: 409, body: rpcError(request.id, -32032, 'The workflow is not awaiting this payment authorization.') })
     }
     let dispatched = await transition('action_dispatched')
@@ -216,8 +267,15 @@ export class A2AProxyEngine {
       dispatched = await transition('input_received') && await transition('action_dispatched')
     }
     if (!dispatched) {
-      if (reservation) await taskBudgets.cancel(reservation)
+      if (reservationActive && reservation) await taskBudgets.cancel(reservation)
       return governed({ status: 409, body: rpcError(request.id, -32032, 'The workflow state does not permit dispatch.') })
+    }
+
+    const claimed = await recovery.claim({ tenantId: options.tenantId, taskId: workflowTaskId, actionId, actionSha256, policySha256 })
+    recoveryRecord = claimed.record
+    if (!claimed.execute) {
+      if (reservationActive && reservation) await taskBudgets.cancel(reservation)
+      return governed({ status: 409, body: rpcError(request.id, -32033, `Action already ${claimed.record.status}; upstream dispatch was not repeated.`) })
     }
 
     const startedAt = Date.now()
@@ -227,15 +285,17 @@ export class A2AProxyEngine {
         method: 'POST', headers: await upstreamHeaders(config, request, options), body: JSON.stringify(request), redirect: 'manual', signal: AbortSignal.timeout(policy.timeoutMs),
       })
       if (response.status === 402) {
-        if (reservation) await taskBudgets.cancel(reservation)
+        if (reservationActive && reservation) await taskBudgets.cancel(reservation)
         const challengeHeader = response.headers.get(PAYMENT_REQUIRED_HEADER)
         if (!challengeHeader || challengeHeader.length > 16_384) {
           await transition('action_failed')
+          recoveryRecord = await recovery.finish({ tenantId: options.tenantId, taskId: workflowTaskId, actionId, status: 'failed', responseStatus: 502, responseSha256: governance.evidenceSha256 })
           return governed({ status: 502, body: rpcError(request.id, -32022, 'A2A upstream returned a malformed x402 challenge.') })
         }
         let challenge
         try { challenge = decodeChallenge(challengeHeader) } catch {
           await transition('action_failed')
+          recoveryRecord = await recovery.finish({ tenantId: options.tenantId, taskId: workflowTaskId, actionId, status: 'failed', responseStatus: 502, responseSha256: governance.evidenceSha256 })
           return governed({ status: 502, body: rpcError(request.id, -32022, 'A2A upstream returned a malformed x402 challenge.') })
         }
         const allowed = []
@@ -249,20 +309,23 @@ export class A2AProxyEngine {
         }
         if (allowed.length === 0) {
           await transition('action_denied')
+          recoveryRecord = await recovery.finish({ tenantId: options.tenantId, taskId: workflowTaskId, actionId, status: 'failed', responseStatus: 403, responseSha256: governance.evidenceSha256 })
           return governed({ status: 403, body: rpcError(request.id, -32020, 'The upstream payment terms are outside the tenant buyer policy.') })
         }
         await transition('payment_required')
         const filtered = { ...challenge, accepts: allowed }
+        recoveryRecord = await recovery.finish({ tenantId: options.tenantId, taskId: workflowTaskId, actionId, status: 'awaiting_payment', responseStatus: 402, responseSha256: governanceDigest(filtered) })
         return governed({
           status: 402,
           body: filtered,
           headers: { 'Cache-Control': 'no-store', 'X-Maha-Task-ID': workflowTaskId, [PAYMENT_REQUIRED_HEADER]: encodeChallengeHeader(filtered as Parameters<typeof encodeChallengeHeader>[0]) },
         })
       }
-      if (reservation && response.status >= 400 && response.status < 500) await taskBudgets.cancel(reservation)
+      if (reservationActive && reservation && response.status >= 400 && response.status < 500) { await taskBudgets.cancel(reservation); reservationActive = false }
       if (response.status >= 300 && response.status < 400 || response.status >= 500) {
         await controls.recordFailure(options.tenantId, config.id, policy)
         await transition('action_failed')
+        recoveryRecord = await recovery.finish({ tenantId: options.tenantId, taskId: workflowTaskId, actionId, status: 'failed', responseStatus: 502, responseSha256: governance.evidenceSha256 })
         return governed({ status: 502, body: rpcError(request.id, -32603, `Upstream A2A HTTP Error (${response.status}).`) })
       }
       const { json } = await readBounded(response)
@@ -273,17 +336,21 @@ export class A2AProxyEngine {
         const settlement = verifySettlement({ policy: config.paymentPolicy, authorization, payer, receipt: decodeReceipt(receiptHeader) })
         if (!settlement.verified) {
           await transition('action_failed')
+          recoveryRecord = await recovery.finish({ tenantId: options.tenantId, taskId: workflowTaskId, actionId, status: 'indeterminate', responseStatus: 502, responseSha256: governance.evidenceSha256 })
           return governed({ status: 502, body: rpcError(request.id, -32023, `Upstream payment receipt failed policy verification: ${settlement.code}.`) })
         }
         if (!reservation) {
           await transition('action_failed')
+          recoveryRecord = await recovery.finish({ tenantId: options.tenantId, taskId: workflowTaskId, actionId, status: 'indeterminate', responseStatus: 502, responseSha256: governance.evidenceSha256 })
           return governed({ status: 502, body: rpcError(request.id, -32025, 'The verified settlement has no durable task-budget reservation.') })
         }
         const committed = await taskBudgets.settle({ ...reservation, transaction: settlement.transaction })
         if (!committed.settled) {
           await transition('action_failed')
+          recoveryRecord = await recovery.finish({ tenantId: options.tenantId, taskId: workflowTaskId, actionId, status: 'indeterminate', responseStatus: 502, responseSha256: governance.evidenceSha256, upstreamReferenceSha256: governanceDigest(settlement.transaction) })
           return governed({ status: 502, body: rpcError(request.id, -32025, `The verified settlement could not be committed to the task budget: ${committed.reason}.`) })
         }
+        reservationActive = false
         budgetState = committed.state
       }
       const upstreamTaskId = a2aUpstreamTaskId(json)
@@ -300,11 +367,13 @@ export class A2AProxyEngine {
         headers['X-Maha-Task-Status'] = budgetState.status
       }
       if (receiptHeader) headers[PAYMENT_RESPONSE_HEADER] = receiptHeader
+      recoveryRecord = await recovery.finish({ tenantId: options.tenantId, taskId: workflowTaskId, actionId, status: 'succeeded', responseStatus: response.status, responseSha256: governanceDigest(json), ...(upstreamTaskId ? { upstreamReferenceSha256: governanceDigest(upstreamTaskId) } : {}) })
       return governed({ status: response.status, body: json, headers })
     } catch (error) {
       try { await controls.recordFailure(options.tenantId, config.id, policy) } catch {}
       try { await transition('action_failed') } catch {}
       const timeout = error instanceof Error && (error.name === 'TimeoutError' || /timed out|aborted/i.test(error.message))
+      try { recoveryRecord = await recovery.finish({ tenantId: options.tenantId, taskId: workflowTaskId, actionId, status: 'indeterminate', responseStatus: timeout ? 504 : 502, responseSha256: governance.evidenceSha256 }) } catch {}
       return governed({ status: timeout ? 504 : 502, body: rpcError(request.id, -32603, timeout ? 'Upstream A2A request timed out.' : 'Upstream A2A connection or protocol failure.') })
     }
   }

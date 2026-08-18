@@ -3,6 +3,7 @@ import type { A2AAgentConfig, A2AJsonRpcRequest } from '../a2a/types.ts'
 import type { JSONRPCRequest, MCPProxyContext, MCPServerConfig } from '../mcp/types.ts'
 import type { PaymentAuthorization } from '../x402/buyer-policy.ts'
 import { evaluateGovernedAction, governanceDigest, type GovernanceDecision, type GovernanceEnvelope, type GovernancePolicy } from './envelope.ts'
+import { resolveGovernancePolicy, type GovernancePolicyLayer } from './policy-inheritance.ts'
 
 export const GOVERNANCE_OUTCOME_HEADER = 'X-Maha-Governance-Outcome'
 export const GOVERNANCE_EVIDENCE_HEADER = 'X-Maha-Governance-Evidence'
@@ -44,6 +45,7 @@ export function evaluateA2AGovernance(input: {
   inputBytes: number
   timeoutMs: number
   paymentAuthorization: PaymentAuthorization | null
+  policyLayers?: GovernancePolicyLayer[]
   now?: Date
 }): GovernanceDecision {
   const now = input.now ?? new Date()
@@ -54,7 +56,7 @@ export function evaluateA2AGovernance(input: {
       ? { policyId: input.config.paymentPolicy.policyId, policyVersion: input.config.paymentPolicy.policyVersion }
       : null,
   })
-  const policy: GovernancePolicy = {
+  const rootPolicy: GovernancePolicy = {
     schemaVersion: '0.1.0',
     policyId: `governance.a2a.${input.config.id}`,
     policyVersion,
@@ -73,6 +75,7 @@ export function evaluateA2AGovernance(input: {
       ? { mode: 'delegate', allowedBuyerPolicyIds: [input.config.paymentPolicy.policyId] }
       : { mode: 'forbid', allowedBuyerPolicyIds: [] },
   }
+  const policy = resolveGovernancePolicy(rootPolicy, input.policyLayers)
   const envelope: GovernanceEnvelope = {
     schemaVersion: '0.1.0',
     requestId: input.traceId,
@@ -98,13 +101,14 @@ export function evaluateMcpGovernance(input: {
   request: JSONRPCRequest
   context: MCPProxyContext
   timeoutMs: number
+  policyLayers?: GovernancePolicyLayer[]
   now?: Date
 }): GovernanceDecision {
   const now = input.now ?? new Date()
   const capability = input.request.method === 'tools/call' && typeof input.request.params?.name === 'string'
     ? input.request.params.name
     : null
-  const policy: GovernancePolicy = {
+  const rootPolicy: GovernancePolicy = {
     schemaVersion: '0.1.0',
     policyId: `governance.mcp.${input.server.id}`,
     policyVersion: governanceDigest({
@@ -126,6 +130,7 @@ export function evaluateMcpGovernance(input: {
     review: { operations: [], capabilities: [] },
     payment: { mode: 'forbid', allowedBuyerPolicyIds: [] },
   }
+  const policy = resolveGovernancePolicy(rootPolicy, input.policyLayers)
   const envelope: GovernanceEnvelope = {
     schemaVersion: '0.1.0',
     requestId: input.context.traceId,

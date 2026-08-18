@@ -6,6 +6,8 @@ import type { MCPServerConfig } from '../lib/mcp/types.ts'
 import type { PaymentAuthorization } from '../lib/x402/buyer-policy.ts'
 import { MCPProxyEngine } from '../lib/mcp/proxy.ts'
 import { MemoryWorkflowTaskStore } from '../lib/workflows/task-state.ts'
+import { MemoryRecoveryStore, workflowActionIdForExternal } from '../lib/workflows/recovery.ts'
+import { MemoryApprovalStore } from '../lib/workflows/approvals.ts'
 
 const NOW = new Date('2026-08-18T12:00:00Z')
 
@@ -109,7 +111,7 @@ test('MCP proxy enforces governance before the outbound fetch and returns digest
   const allowed = await MCPProxyEngine.dispatch(mcpServer, request, {
     tenantId: mcpServer.tenantId, serverId: mcpServer.id, traceId: 'trace-12345678', taskId: 'task-allowed-12345678', inputSha256: `sha256:${'b'.repeat(64)}`, inputBytes: 200,
   }, {
-    controls, workflowTasks,
+    controls, workflowTasks, recovery: new MemoryRecoveryStore(),
     prepareUpstream: async () => ({ url: mcpServer.baseUrl, headers: { 'Content-Type': 'application/json' } }),
     fetchImpl: async () => { fetched = true; return new Response(JSON.stringify({ jsonrpc: '2.0', id: '1', result: { ok: true } }), { status: 200 }) },
     audit: async () => {},
@@ -121,4 +123,30 @@ test('MCP proxy enforces governance before the outbound fetch and returns digest
   assert.equal(allowed.headers?.['X-Maha-Workflow-Version'], '2')
   assert.match(allowed.headers?.['X-Maha-Governance-Evidence'] ?? '', /^sha256:[a-f0-9]{64}$/)
   assert.deepEqual((await workflowTasks.events(mcpServer.tenantId, 'task-allowed-12345678')).map((event) => event.event), ['action_dispatched', 'action_succeeded'])
+})
+
+test('MCP approval is action-bound and a completed action is recovered without redispatch', async () => {
+  const controls = {
+    async getPolicy() { return { requestsPerMinute: 60, timeoutMs: 10_000, failureThreshold: 3, cooldownMs: 30_000 } },
+    async beforeRequest() { return { allowed: true, retryAfterSeconds: 0 } }, async consumeRateLimit() { return { allowed: true, remaining: 59, retryAfterSeconds: 0 } },
+    async recordSuccess() {}, async recordFailure() {},
+  }
+  const request = { jsonrpc: '2.0' as const, id: 'approval-request-1', method: 'tools/call', params: { name: 'portfolio.risk' } }
+  const taskId = 'workflow-task-1234567890abcdef1234567890abcdef'; const actionId = workflowActionIdForExternal('risk-action.0001')
+  const approvals = new MemoryApprovalStore(); const recovery = new MemoryRecoveryStore(); const workflowTasks = new MemoryWorkflowTaskStore()
+  const dependencies = {
+    controls, approvals, recovery, workflowTasks,
+    policyLayers: [{ policyId: 'governance.workflow.risk-review', policyVersion: 'v1', parentPolicyId: `governance.mcp.${mcpServer.id}`, scope: 'workflow' as const, constraints: { reviewCapabilities: ['portfolio.risk'] } }],
+    prepareUpstream: async () => ({ url: mcpServer.baseUrl, headers: { 'Content-Type': 'application/json' } }), audit: async () => {},
+  }
+  let fetches = 0
+  const first = await MCPProxyEngine.dispatch(mcpServer, request, { tenantId: mcpServer.tenantId, serverId: mcpServer.id, traceId: 'trace-review-0001', taskId, actionId, inputSha256: `sha256:${'c'.repeat(64)}`, inputBytes: 100 }, { ...dependencies, fetchImpl: async () => { fetches++; throw new Error('must not dispatch before approval') } })
+  assert.equal(first.status, 403); assert.equal(first.headers?.['X-Maha-Approval-State'], 'pending')
+  const approvalId = first.headers?.['X-Maha-Approval-ID']; assert.match(approvalId ?? '', /^approval-[a-f0-9]{64}$/)
+  await approvals.decide({ tenantId: mcpServer.tenantId, taskId, approvalId: approvalId!, decision: 'approve', reviewerSha256: `sha256:${'d'.repeat(64)}`, reasonCode: 'bounded_test_approved', idempotencyKey: 'approval-decision.0001' })
+  const second = await MCPProxyEngine.dispatch(mcpServer, request, { tenantId: mcpServer.tenantId, serverId: mcpServer.id, traceId: 'trace-review-0002', taskId, actionId, approvalId, inputSha256: `sha256:${'c'.repeat(64)}`, inputBytes: 100 }, { ...dependencies, fetchImpl: async () => { fetches++; return new Response(JSON.stringify({ jsonrpc: '2.0', id: request.id, result: { private: 'not retained by recovery' } }), { status: 200 }) } })
+  assert.equal(second.status, 200); assert.equal(second.headers?.['X-Maha-Approval-State'], 'consumed'); assert.equal(second.headers?.['X-Maha-Recovery-State'], 'succeeded'); assert.equal(fetches, 1)
+  const replay = await MCPProxyEngine.dispatch(mcpServer, request, { tenantId: mcpServer.tenantId, serverId: mcpServer.id, traceId: 'trace-review-0003', taskId, actionId, approvalId, inputSha256: `sha256:${'c'.repeat(64)}`, inputBytes: 100 }, { ...dependencies, fetchImpl: async () => { fetches++; throw new Error('must not redispatch') } })
+  assert.equal(replay.status, 409); assert.equal(replay.headers?.['X-Maha-Recovery-State'], 'succeeded'); assert.equal(fetches, 1)
+  assert.equal(JSON.stringify(await recovery.get(mcpServer.tenantId, taskId, actionId)).includes('not retained'), false)
 })

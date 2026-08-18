@@ -99,3 +99,49 @@ When the caller supplies `x-maha-task-id`, both gateways derive the same opaque
 workflow identifier from it; the raw customer identifier is not copied into
 this ledger. A2A uses its existing protocol-derived task identifier when that
 header is absent. The A2A payment-budget key remains unchanged and separate.
+
+## Restrictive inheritance
+
+An orchestrator may supply an ordered tenant, workflow and action policy chain
+to either adapter. Every layer names its immediate parent. Lists are
+intersected, numeric ceilings take the minimum, review requirements accumulate
+and a payment prohibition dominates every descendant. A child therefore
+cannot restore authority removed by an ancestor. Cycles, broken ancestry and
+chains deeper than eight layers fail closed. The resolved policy version is a
+content-derived digest of the complete chain, so an approval under an older
+policy cannot authorize a changed one.
+
+The public routes currently derive their root policy from the registered A2A
+agent or MCP server. Policy layers are an orchestrator input to the proxy
+interfaces; they are not accepted as untrusted request JSON.
+
+## Human approvals
+
+A `require_review` result creates a durable, 15-minute approval request bound
+to the stable action digest, resolved policy digest, tenant and workflow task.
+The gateway returns `X-Maha-Approval-ID` and `X-Maha-Approval-State`. An
+operator decides it through
+`POST /api/v1/workflows/{taskId}/approvals/{approvalId}` using a distinct,
+environment-scoped `WORKFLOW_CONTROL_TOKEN`, an idempotency key and a bounded
+reason code. Only a token fingerprint is retained. Approved grants are
+single-use; denials, expiry, a changed input digest or a changed policy prevent
+dispatch.
+
+## Replay-safe recovery
+
+Callers that need retry correlation supply `x-maha-task-id` and
+`x-maha-action-id`. The routes hash both into opaque identifiers. Before the
+outbound call, Redis atomically claims the action against its stable action and
+policy digests. A repeated action ID is never dispatched again. Instead the
+gateway returns HTTP 409 with `X-Maha-Recovery-State`,
+`X-Maha-Action-ID` and, when known,
+`X-Maha-Recovery-Evidence`.
+
+The recovery record contains only status, timestamps, HTTP status, a response
+digest and an optional hashed upstream reference. It does not retain the
+response body, so it proves prior execution but cannot replay a lost result.
+Transport exceptions after dispatch are recorded as `indeterminate`; they are
+not treated as permission to try again automatically. A2A payment negotiation
+uses a distinct action ID for the unpaid challenge and the subsequently
+authorized paid attempt, while its payment authorization and cumulative task
+budget remain independently replay-protected.
