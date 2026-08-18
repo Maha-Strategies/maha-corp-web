@@ -384,9 +384,17 @@ async function main() {
   const config = loadConfig()
   const executeRequested = process.argv.includes('--execute')
   const recoverRequested = process.argv.includes('--recover-session')
+  const skipRecoveryDrill = process.argv.includes('--skip-recovery-drill')
   if (executeRequested && recoverRequested) throw new Error('Choose either --execute or --recover-session.')
+  if (skipRecoveryDrill && !executeRequested) throw new Error('--skip-recovery-drill is valid only with --execute.')
   const mode = recoverRequested ? 'recover-session' : executeRequested ? 'execute' : 'preflight'
   const checks = configurationChecks(config, mode)
+  if (skipRecoveryDrill) {
+    checks.push({
+      name: 'prior zero-payment recovery drill explicitly attested',
+      pass: value('AGENTCORE_RECOVERY_DRILL_EVIDENCE') === 'passed:2026-08-18:zero-payment',
+    })
+  }
   const staleSession = await exists(config.stateFile)
   console.log(JSON.stringify({
     mode,
@@ -402,6 +410,7 @@ async function main() {
       processPaymentCalls: 1,
       paidMerchantRequests: 1,
       automaticRetries: 0,
+      recoveryDrill: skipRecoveryDrill ? 'previously_verified' : 'run_before_payment',
       digest: authorizationDigest(config),
     },
     networkCalls: executeRequested || recoverRequested ? 'not_started' : 0,
@@ -410,7 +419,7 @@ async function main() {
   if (!checks.every((check) => check.pass)) process.exitCode = 1
   else if (recoverRequested) await recover(config)
   else if (executeRequested) {
-    await recoveryDrill(config)
+    if (!skipRecoveryDrill) await recoveryDrill(config)
     await execute(config)
   }
   else if (staleSession) process.exitCode = 1
