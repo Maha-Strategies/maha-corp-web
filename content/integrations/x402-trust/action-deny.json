@@ -1,0 +1,48 @@
+{
+  "fixtureVersion": "1.0.0",
+  "fixtureId": "x402-trust-action-deny-v1",
+  "frozenAt": "2026-08-18T12:00:00.000Z",
+  "sampleRole": "worst",
+  "policy": { "maxAgeSeconds": 300, "minConfidence": 0.75, "minScoreRangeLow": 65, "requireLiveProbe": false },
+  "input": {
+    "$schema": "https://x402.fuchss.app/schemas/x402-trust-preview.schema.json",
+    "schemaVersion": "1.0.0",
+    "schemaType": "x402-trust-preview",
+    "preview": true,
+    "note": "Frozen synthetic action fixture; not a claim about a live merchant.",
+    "populationSize": 3,
+    "sampled": 1,
+    "samples": [{
+      "role": "worst",
+      "report": {
+        "$schema": "https://x402.fuchss.app/schemas/x402-trust.schema.json",
+        "schemaVersion": "1.0.0",
+        "schemaType": "x402-trust",
+        "resource": "https://fixture-deny.example/x402",
+        "serviceName": "Synthetic deny fixture",
+        "description": null,
+        "generatedAt": 1787054380000,
+        "freshness": { "live": true, "probedAtTs": 1787054370000, "ageSeconds": 30, "liveProbeMs": 100 },
+        "score": 72,
+        "grade": "B",
+        "scoreRange": { "low": 68, "point": 72, "high": 78 },
+        "recommendation": "avoid",
+        "templated": false,
+        "gradeThresholds": { "A": 80, "B": 65, "C": 50, "D": 35, "F": 0 },
+        "confidence": 0.85,
+        "confidenceDetail": { "overall": 0.85, "observation": 0.8, "economic": 0.9 },
+        "breakdown": { "uptime": 0.8, "compliance": 0.7, "latency": 0.75, "age": 0.9, "activity": 0.6, "stability": 0.8 },
+        "subscores": { "technicalReliabilityScore": 74, "specComplianceScore": 70, "economicReputationScore": 68, "economicConfidence": 0.9 },
+        "explanations": [],
+        "flags": ["last-probe-failed"],
+        "flagsDetailed": [{ "code": "last-probe-failed", "severity": "error", "message": "Synthetic adverse condition." }],
+        "advertised": null,
+        "dataCompleteSince": 1784462400000,
+        "stats": { "firstSeenTs": 1784462400000, "observedDays": 30, "probes30d": 30, "probeOk30d": 24, "excluded30d": 0, "scoredProbes30d": 30, "envelopeValid30d": 22, "avgLatencyMs": 200, "latencyVantage": "synthetic", "priceChanges30d": 0, "payTo": null, "payToLastSeenTs": null, "payToStale": false, "payToSharedWith": 0, "settlements30d": 2, "distinctPayers30d": 1, "settledVolumeUnits30d": "2000", "settledVolumeUsd30d": 0.002, "settlementAsset": "USDC", "settlementDecimals": 6, "delisted": false }
+      }
+    }],
+    "paidEndpoint": { "endpoint": "POST /v1/x402-trust", "priceUsd": 0.005, "note": "Not invoked by this fixture." },
+    "mcp": "not invoked"
+  },
+  "expected": { "schemaValid": true, "semanticValid": true, "outcome": "deny", "nextAction": "stop", "reasonCodes": ["provider_recommendation_avoid"], "advisoryOnly": true, "paymentAuthorized": false }
+}

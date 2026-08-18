@@ -541,6 +541,48 @@ export const openApiDocument = {
         },
       },
     },
+    '/api/x402-trust/replay/{decision}': {
+      get: {
+        tags: ['x402 Conformance'],
+        operationId: 'downloadFrozenX402TrustDecisionEvidence',
+        summary: 'Download metadata-only evidence for a frozen x402 Trust policy decision',
+        description: 'Returns one immutable synthetic replay artifact as a JSON attachment. The artifact contains schema and semantic validation, bounded policy inputs, a deterministic advisory action, and integrity digests. It contains no raw report, report prose, credentials, payment material, or payment authorization.',
+        security: [],
+        parameters: [{ name: 'decision', in: 'path', required: true, schema: { type: 'string', enum: ['proceed', 'review', 'deny'] } }],
+        responses: {
+          '200': {
+            description: 'Digest-bound metadata-only evidence attachment.',
+            headers: {
+              'Content-Disposition': { schema: { type: 'string' }, description: 'Attachment filename for the selected frozen decision.' },
+              'X-Maha-Evidence-SHA256': { schema: { type: 'string', pattern: '^sha256:[a-f0-9]{64}$' }, description: 'SHA-256 of the canonical evidence payload.' },
+            },
+            content: { 'application/json': { schema: {
+              type: 'object', required: ['evidence', 'evidenceSha256'],
+              properties: {
+                evidence: {
+                  type: 'object', required: ['evidenceVersion', 'evidenceType', 'issuedAt', 'fixture', 'contract', 'validation', 'observation', 'policy', 'decision', 'retention', 'nonClaims'],
+                  properties: {
+                    evidenceVersion: { type: 'string', const: '1.0.0' },
+                    evidenceType: { type: 'string', const: 'maha-x402-trust-advisory-decision' },
+                    issuedAt: { type: 'string', format: 'date-time' },
+                    fixture: { type: 'object', description: 'Synthetic fixture identity, role, and frozen file digest.' },
+                    contract: { type: 'object', description: 'Pinned adapter and provider-schema versions and digest.' },
+                    validation: { type: 'object', description: 'JSON Schema and semantic validation results.' },
+                    observation: { type: 'object', description: 'Metadata-only score, confidence, freshness, recommendation, and synthetic resource identifier.' },
+                    policy: { type: 'object', description: 'Freshness, confidence, score-floor, and live-probe requirements used for replay.' },
+                    decision: { type: 'object', description: 'Advisory outcome, next action, reason codes, and an explicit false paymentAuthorized field.' },
+                    retention: { type: 'object', description: 'False retention declarations for raw report, report prose, credentials, and payment material.' },
+                    nonClaims: { type: 'array', items: { type: 'string' } },
+                  },
+                },
+                evidenceSha256: { type: 'string', pattern: '^sha256:[a-f0-9]{64}$' },
+              },
+            } } },
+          },
+          '404': errorResponse('No such frozen x402 Trust decision fixture.'),
+        },
+      },
+    },
     '/api/agentic-commerce/offers': {
       get: {
         tags: ['Agentic Commerce'],

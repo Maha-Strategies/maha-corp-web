@@ -17,6 +17,14 @@ export const metadata: Metadata = {
 
 const tools = [
   {
+    eyebrow: 'x402 Trust Policy Replay',
+    title: 'Replay three frozen trust signals through the payment-safety boundary',
+    body: 'Inspect schema validation, evidence floors, and deterministic proceed, human-review, and stop actions. The replay is synthetic, read-only, and cannot authorize payment.',
+    href: '/x402-trust/replay',
+    action: 'Open the read-only replay',
+    accent: 'cyan',
+  },
+  {
     eyebrow: 'Agent Compatibility Pack',
     title: 'Test one A2A agent and one MCP server against explicit policy',
     body: 'Inspect the fixed-price contract, exact schemas, sample evidence report, limitations, and automatic-refund boundary. Runtime payment remains withheld until Production recovery is proven.',

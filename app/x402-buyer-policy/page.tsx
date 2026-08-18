@@ -84,6 +84,7 @@ export default function X402BuyerPolicyPage() {
         </section>
 
         <section className="mt-14 flex flex-wrap gap-5 font-mono text-xs uppercase tracking-widest">
+          <Link href="/x402-trust/replay" className="text-cyan-100 underline underline-offset-4 hover:text-white">Replay advisory trust actions ↗</Link>
           <Link href="/recipes/bazaar-discovery-to-payment" className="text-indigo-100 underline underline-offset-4 hover:text-white">Run the discovery-to-payment recipe ↗</Link>
           <Link href="/x402-observatory" className="text-zinc-300 underline underline-offset-4 hover:text-white">Inspect seller conformance ↗</Link>
           <Link href="/developers" className="text-zinc-300 underline underline-offset-4 hover:text-white">Developer infrastructure ↗</Link>

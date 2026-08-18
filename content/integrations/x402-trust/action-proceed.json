@@ -1,0 +1,48 @@
+{
+  "fixtureVersion": "1.0.0",
+  "fixtureId": "x402-trust-action-proceed-v1",
+  "frozenAt": "2026-08-18T12:00:00.000Z",
+  "sampleRole": "best",
+  "policy": { "maxAgeSeconds": 300, "minConfidence": 0.75, "minScoreRangeLow": 65, "requireLiveProbe": false },
+  "input": {
+    "$schema": "https://x402.fuchss.app/schemas/x402-trust-preview.schema.json",
+    "schemaVersion": "1.0.0",
+    "schemaType": "x402-trust-preview",
+    "preview": true,
+    "note": "Frozen synthetic action fixture; not a claim about a live merchant.",
+    "populationSize": 3,
+    "sampled": 1,
+    "samples": [{
+      "role": "best",
+      "report": {
+        "$schema": "https://x402.fuchss.app/schemas/x402-trust.schema.json",
+        "schemaVersion": "1.0.0",
+        "schemaType": "x402-trust",
+        "resource": "https://fixture-proceed.example/x402",
+        "serviceName": "Synthetic proceed fixture",
+        "description": null,
+        "generatedAt": 1787054380000,
+        "freshness": { "live": true, "probedAtTs": 1787054370000, "ageSeconds": 30, "liveProbeMs": 100 },
+        "score": 90,
+        "grade": "A",
+        "scoreRange": { "low": 85, "point": 90, "high": 94 },
+        "recommendation": "proceed",
+        "templated": false,
+        "gradeThresholds": { "A": 80, "B": 65, "C": 50, "D": 35, "F": 0 },
+        "confidence": 0.95,
+        "confidenceDetail": { "overall": 0.95, "observation": 0.9, "economic": 1 },
+        "breakdown": { "uptime": 0.99, "compliance": 0.99, "latency": 0.8, "age": 0.95, "activity": 0.9, "stability": 1 },
+        "subscores": { "technicalReliabilityScore": 94, "specComplianceScore": 96, "economicReputationScore": 86, "economicConfidence": 1 },
+        "explanations": [],
+        "flags": [],
+        "flagsDetailed": [],
+        "advertised": null,
+        "dataCompleteSince": 1784462400000,
+        "stats": { "firstSeenTs": 1784462400000, "observedDays": 30, "probes30d": 30, "probeOk30d": 30, "excluded30d": 0, "scoredProbes30d": 30, "envelopeValid30d": 30, "avgLatencyMs": 100, "latencyVantage": "synthetic", "priceChanges30d": 0, "payTo": null, "payToLastSeenTs": null, "payToStale": false, "payToSharedWith": 0, "settlements30d": 10, "distinctPayers30d": 4, "settledVolumeUnits30d": "10000", "settledVolumeUsd30d": 0.01, "settlementAsset": "USDC", "settlementDecimals": 6, "delisted": false }
+      }
+    }],
+    "paidEndpoint": { "endpoint": "POST /v1/x402-trust", "priceUsd": 0.005, "note": "Not invoked by this fixture." },
+    "mcp": "not invoked"
+  },
+  "expected": { "schemaValid": true, "semanticValid": true, "outcome": "proceed", "nextAction": "continue_to_buyer_policy", "reasonCodes": ["advisory_thresholds_met"], "advisoryOnly": true, "paymentAuthorized": false }
+}

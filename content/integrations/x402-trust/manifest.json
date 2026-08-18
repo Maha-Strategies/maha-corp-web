@@ -1,0 +1,9 @@
+{
+  "manifestVersion": "1.0.0",
+  "frozenAt": "2026-08-18T12:00:00.000Z",
+  "fixtures": [
+    { "file": "action-proceed.json", "sha256": "sha256:38650d5fcb0dd85481816dca85c700db82b5bd7f8dfc00b2a9adf76c0137ec25", "expectedNextAction": "continue_to_buyer_policy" },
+    { "file": "action-review.json", "sha256": "sha256:d57d7466e4e93d8957fa6a91d250eda7c7a4dd17fa42d4351db7590cc6f0517c", "expectedNextAction": "request_human_review" },
+    { "file": "action-deny.json", "sha256": "sha256:8fc47603e25c683a1b4cc545510359b149cc899302431b884b9ac06b83a3b2f2", "expectedNextAction": "stop" }
+  ]
+}

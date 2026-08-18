@@ -99,6 +99,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${baseUrl}/agent-infrastructure-compatibility-pack`, lastModified: new Date('2026-08-11') },
     { url: `${baseUrl}/x402-observatory`, lastModified: new Date('2026-08-09') },
     { url: `${baseUrl}/x402-buyer-policy`, lastModified: new Date('2026-08-09') },
+    { url: `${baseUrl}/x402-trust/replay`, lastModified: new Date('2026-08-18') },
     { url: `${baseUrl}/tensor-opt`, lastModified: new Date('2026-08-06') },
     { url: `${baseUrl}/geometric-optimization`, lastModified: new Date('2026-08-06') },
     { url: `${baseUrl}/tools/architecture-readiness-assessment`, lastModified: new Date('2026-07-29') },

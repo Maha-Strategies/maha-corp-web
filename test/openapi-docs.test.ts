@@ -130,6 +130,9 @@ const PRIVATE_ROUTES = new Set([
   '/api/cron/celestial-webhooks',
   '/api/cron/celestial-retention',
   '/api/conversion-events',
+  // Cookie-free aggregate replay telemetry. This is an internal measurement
+  // sink rather than a supported customer integration contract.
+  '/api/x402-trust/telemetry',
   '/api/cron/utility-upload-cleanup',
   '/api/mps-audits/[auditId]',
   '/api/mps-preflight/[orderId]',
