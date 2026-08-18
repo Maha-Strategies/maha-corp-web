@@ -27,6 +27,7 @@ import { createInMemoryBuyerPolicyLedger, type BuyerPolicy } from '../lib/x402/b
 import { confirmSettlement, rpcUrlFor } from '../lib/x402/chain.ts'
 import { decodeChallenge, decodeReceipt, PAYMENT_REQUIRED_HEADER, PAYMENT_RESPONSE_HEADER, PAYMENT_SIGNATURE_HEADER } from '../lib/x402/client.ts'
 import { agentCoreCredentialMode, type AgentCoreRunnerCredentialConfig } from '../lib/x402/agentcore-runner-auth.ts'
+import { errorDiagnostics } from '../lib/x402/agentcore-runner-diagnostics.ts'
 
 const BASE_SEPOLIA = 'eip155:84532'
 const DEFAULT_STATE = resolve(tmpdir(), 'maha-agentcore-sepolia-session.json')
@@ -418,7 +419,7 @@ async function main() {
 const isMain = process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url)
 if (isMain) {
   try { await main() } catch (error) {
-    console.error(error instanceof Error ? error.message : String(error))
+    console.error(JSON.stringify({ error: errorDiagnostics(error) }, null, 2))
     process.exitCode = 1
   }
 }
