@@ -19,6 +19,7 @@ import { SITE_URL } from '@/lib/briefs-data'
 import { CELESTIAL_FACT_PATH } from '@/lib/celestial-facts'
 import { CELESTIAL_GUIDE_LIST } from '@/lib/celestial-guides'
 import { CALCULATION_REFERENCE_PATH, CALCULATION_REFERENCES } from '@/lib/celestial-calculation-references'
+import { TIMING_REFERENCE_PATH, TIMING_REFERENCES } from '@/lib/celestial-timing-references'
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -87,6 +88,11 @@ export default function AstrologyTraditionsPage() {
             <p className="font-mono text-[9px] uppercase tracking-widest text-cyan-300">Calculation authority library · {CALCULATION_REFERENCES.length} references</p>
             <h3 className="mt-3 text-lg font-semibold text-white">Every number needs a declared convention</h3>
             <p className="mt-2 max-w-3xl text-sm leading-6 text-zinc-400">Inspect required inputs, procedures, production status, uncertainty behavior, authoritative sources, and the exact boundary between geometry and interpretation.</p>
+          </Link>
+          <Link href={TIMING_REFERENCE_PATH} className="mt-4 block border border-violet-800/70 bg-violet-950/10 p-5 hover:border-violet-500">
+            <p className="font-mono text-[9px] uppercase tracking-widest text-violet-300">Timing reference library · {TIMING_REFERENCES.length} canonical pages</p>
+            <h3 className="mt-3 text-lg font-semibold text-white">Ingresses, stations, lunations, and Vimśottarī chronology</h3>
+            <p className="mt-2 max-w-3xl text-sm leading-6 text-zinc-400">Inspect event definitions, root-finding procedures, frame choices, repeated crossings, period boundaries, uncertainty, source roles, and the exact limit on what each date can support.</p>
           </Link>
           <div className="mt-6 grid gap-4 md:grid-cols-2">
             {CELESTIAL_GUIDE_LIST.map((guide) => (

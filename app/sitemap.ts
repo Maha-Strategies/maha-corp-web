@@ -11,6 +11,7 @@ import { ASTROLOGY_PATH, ASTROLOGY_RELEASE_DATE, ASTROLOGY_TRADITIONS, astrology
 import { ASTRONOMY_ARTICLES, ASTRONOMY_KNOWLEDGE_PATH, ASTRONOMY_KNOWLEDGE_RELEASE_DATE, astronomyArticlePath } from '@/lib/astronomy-knowledge'
 import { CELESTIAL_GUIDE_LIST, CELESTIAL_GUIDE_RELEASE_DATE } from '@/lib/celestial-guides'
 import { CALCULATION_REFERENCE_PATH, CALCULATION_REFERENCE_RELEASE_DATE, CALCULATION_REFERENCES, calculationReferencePath } from '@/lib/celestial-calculation-references'
+import { TIMING_REFERENCE_PATH, TIMING_REFERENCE_RELEASE_DATE, TIMING_REFERENCES, timingReferencePath } from '@/lib/celestial-timing-references'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = MAHA_SITE_URL
@@ -43,6 +44,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...CALCULATION_REFERENCES.map((entry) => ({
       url: `${baseUrl}${calculationReferencePath(entry)}`,
       lastModified: new Date(CALCULATION_REFERENCE_RELEASE_DATE),
+    })),
+    { url: `${baseUrl}${TIMING_REFERENCE_PATH}`, lastModified: new Date(TIMING_REFERENCE_RELEASE_DATE) },
+    ...TIMING_REFERENCES.map((entry) => ({
+      url: `${baseUrl}${timingReferencePath(entry)}`,
+      lastModified: new Date(TIMING_REFERENCE_RELEASE_DATE),
     })),
     { url: `${baseUrl}/knowledge/suppliers`, lastModified: new Date('2026-08-13') },
     { url: `${baseUrl}${SEMICONDUCTOR_PROCESS_MAP_PATH}`, lastModified: new Date(SEMICONDUCTOR_PROCESS_MAP_DATE) },
