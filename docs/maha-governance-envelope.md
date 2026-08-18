@@ -48,9 +48,21 @@ storage remain adapter responsibilities.
 - `/schemas/maha-governance-policy-0.1.0.json`
 - `/governance/maha-governance-example.json`
 
-## Next adapter work
+## Gateway adapters
 
-The first adapters should derive envelopes at the existing A2A and MCP gateway
-boundaries, record only the returned decision, and preserve each protocol's
-native request and response. A later conformance corpus should run the same
-allow, review and deny fixtures through all three transports.
+The A2A and MCP proxy engines derive an envelope after their native protocol
+and allowlist checks and immediately before the outbound fetch. Existing
+tenant-scoped registration records remain authoritative; the adapters convert
+those records into the common policy rather than creating a second policy
+store. A2A accepts a payment attestation only after the x402 buyer-policy
+module has authorized it. MCP declares the action unpaid.
+
+Both gateways return outcome, evidence-digest and policy-digest response
+headers and add those three metadata fields to their existing success audit
+entry. The outcome is the pre-dispatch governance decision, not a claim that
+delivery or settlement later succeeded. Native JSON-RPC request and response
+bodies are unchanged. The current principal is the authenticated tenant's
+Maha gateway adapter, not a claim that
+the external calling agent has an independently verified identity. Caller
+agent identity should remain outside the envelope until a real authentication
+source can bind it.

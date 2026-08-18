@@ -143,11 +143,13 @@ test('A2A proxy passes an allowed challenge and blocks an over-ceiling challenge
     const body = { x402Version: 2 as const, resource: { url: config.rpcUrl }, accepts: [{ scheme: 'exact' as const, network: 'eip155:8453' as const, amount, payTo: paymentPolicy.approvedPayees[0], maxTimeoutSeconds: 60, asset: paymentPolicy.assetRules[0].asset }], error: 'Payment required.' }
     return new Response(JSON.stringify(body), { status: 402, headers: { 'PAYMENT-REQUIRED': encodeChallengeHeader(body) } })
   }
-  const baseOptions = { tenantId: 'tenant-1', traceId: 'trace-12345678', taskClass: 'research.summarize', paymentSignature: null, a2aVersion: '0.3.0', controls, assertPublicHost: async () => {} }
+  const baseOptions = { tenantId: 'tenant-1', traceId: 'trace-12345678', taskClass: 'research.summarize', inputBytes: 4, paymentSignature: null, a2aVersion: '0.3.0', controls, assertPublicHost: async () => {} }
   const taskBudgets = new MemoryTaskBudgets()
   const allowed = await A2AProxyEngine.dispatch(config, request, { ...baseOptions, taskBudgets, fetchImpl: async () => challenge('1000') })
   assert.equal(allowed.status, 402)
   assert.ok(allowed.headers?.['PAYMENT-REQUIRED'])
+  assert.equal(allowed.headers?.['X-Maha-Governance-Outcome'], 'proceed')
+  assert.match(allowed.headers?.['X-Maha-Governance-Evidence'] ?? '', /^sha256:[a-f0-9]{64}$/)
   const blocked = await A2AProxyEngine.dispatch(config, request, { ...baseOptions, taskBudgets, fetchImpl: async () => challenge('1001') })
   assert.equal(blocked.status, 403)
 
@@ -159,6 +161,7 @@ test('A2A proxy passes an allowed challenge and blocks an over-ceiling challenge
   const paid = await A2AProxyEngine.dispatch(config, request, { ...baseOptions, taskBudgets, paymentSignature, fetchImpl: paidFetch, audit: async () => {} })
   assert.equal(paid.status, 200)
   assert.equal(paid.headers?.['X-Maha-Task-Spent'], '1000')
+  assert.equal(paid.headers?.['X-Maha-Governance-Outcome'], 'proceed')
   const missingReceipt = await A2AProxyEngine.dispatch(config, request, { ...baseOptions, taskBudgets: new MemoryTaskBudgets(), paymentSignature, fetchImpl: async () => new Response(JSON.stringify({ jsonrpc: '2.0', id: request.id, result: {} }), { status: 200 }), audit: async () => {} })
   assert.equal(missingReceipt.status, 502)
 })

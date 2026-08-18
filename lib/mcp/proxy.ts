@@ -1,12 +1,38 @@
 import crypto from 'crypto';
 import { Redis } from '@upstash/redis';
-import { MCPServerConfig, JSONRPCRequest, JSONRPCResponse, MCPProxyContext } from './types';
-import { scopedRedisKey } from '../redis-namespace';
-import { MCPControls } from './controls';
-import { prepareMcpUpstream, readBoundedUpstreamJson } from './upstream';
-import { captureOperationalError, mcpMethodClass, traceMcpUpstream, traceRedisQuery } from '../observability/telemetry';
+import type { MCPServerConfig, JSONRPCRequest, JSONRPCResponse, MCPProxyContext } from './types.ts';
+import { scopedRedisKey } from '../redis-namespace.ts';
+import { MCPControls } from './controls.ts';
+import { prepareMcpUpstream, readBoundedUpstreamJson } from './upstream.ts';
+import { captureOperationalError, mcpMethodClass, traceMcpUpstream, traceRedisQuery } from '../observability/telemetry.ts';
+import { evaluateMcpGovernance, governanceResponseHeaders } from '../governance/adapters.ts';
+import type { GovernanceDecision } from '../governance/envelope.ts';
 
 const redis = Redis.fromEnv();
+
+type MCPProxyResult = {
+  body: JSONRPCResponse
+  status: number
+  headers?: Record<string, string>
+  retryAfterSeconds?: number
+  connectivityFailure?: { failure: string; status?: number }
+}
+
+type MCPGatewayControls = {
+  getPolicy(tenantId: string): Promise<{ requestsPerMinute: number; timeoutMs: number; failureThreshold: number; cooldownMs: number }>
+  beforeRequest(tenantId: string, serverId: string, policy: { requestsPerMinute: number; timeoutMs: number; failureThreshold: number; cooldownMs: number }): Promise<{ allowed: boolean; retryAfterSeconds: number }>
+  consumeRateLimit(tenantId: string, limit: number): Promise<{ allowed: boolean; remaining: number; retryAfterSeconds: number }>
+  recordSuccess(tenantId: string, serverId: string): Promise<void>
+  recordFailure(tenantId: string, serverId: string, policy: { requestsPerMinute: number; timeoutMs: number; failureThreshold: number; cooldownMs: number }): Promise<void>
+}
+
+type MCPDispatchDependencies = {
+  controls?: MCPGatewayControls
+  prepareUpstream?: typeof prepareMcpUpstream
+  readUpstreamJson?: typeof readBoundedUpstreamJson
+  fetchImpl?: typeof fetch
+  audit?: (ctx: MCPProxyContext, server: MCPServerConfig, request: JSONRPCRequest, latencyMs: number, governance: GovernanceDecision) => Promise<void>
+}
 
 export class MCPProxyEngine {
   /**
@@ -15,8 +41,9 @@ export class MCPProxyEngine {
   static async dispatch(
     serverConfig: MCPServerConfig,
     rpcPayload: JSONRPCRequest,
-    ctx: MCPProxyContext
-  ): Promise<{ body: JSONRPCResponse; status: number; retryAfterSeconds?: number; connectivityFailure?: { failure: string; status?: number } }> {
+    ctx: MCPProxyContext,
+    dependencies: MCPDispatchDependencies = {},
+  ): Promise<MCPProxyResult> {
     if (serverConfig.status !== 'active') {
       return {
         status: 503,
@@ -26,25 +53,35 @@ export class MCPProxyEngine {
 
     const startTime = Date.now();
     let phase: 'controls' | 'transport' | 'audit' = 'controls'
+    let governance: GovernanceDecision | null = null
+    const governed = (result: MCPProxyResult): MCPProxyResult => governance
+      ? { ...result, headers: { ...governanceResponseHeaders(governance), ...(result.headers ?? {}) } }
+      : result
 
     try {
-      const policy = await MCPControls.getPolicy(ctx.tenantId)
-      const circuit = await MCPControls.beforeRequest(ctx.tenantId, serverConfig.id, policy)
+      const controls = dependencies.controls ?? MCPControls
+      const policy = await controls.getPolicy(ctx.tenantId)
+      const circuit = await controls.beforeRequest(ctx.tenantId, serverConfig.id, policy)
       if (!circuit.allowed) return {
         status: 503,
         retryAfterSeconds: circuit.retryAfterSeconds,
         body: { jsonrpc: '2.0', id: rpcPayload.id, error: { code: -32003, message: 'Upstream circuit breaker is open' } },
       }
-      const rate = await MCPControls.consumeRateLimit(ctx.tenantId, policy.requestsPerMinute)
+      const rate = await controls.consumeRateLimit(ctx.tenantId, policy.requestsPerMinute)
       if (!rate.allowed) return {
         status: 429,
         retryAfterSeconds: rate.retryAfterSeconds,
         body: { jsonrpc: '2.0', id: rpcPayload.id, error: { code: -32002, message: 'Tenant MCP request limit reached' } },
       }
+      governance = evaluateMcpGovernance({ server: serverConfig, request: rpcPayload, context: ctx, timeoutMs: policy.timeoutMs })
+      if (governance.outcome !== 'proceed') return governed({
+        status: 403,
+        body: { jsonrpc: '2.0', id: rpcPayload.id, error: { code: governance.outcome === 'require_review' ? -32031 : -32030, message: `Maha governance ${governance.outcome}: ${governance.reasonCodes.join(',')}` } },
+      })
       phase = 'transport'
-      const upstream = await prepareMcpUpstream(serverConfig, rpcPayload, ctx)
+      const upstream = await (dependencies.prepareUpstream ?? prepareMcpUpstream)(serverConfig, rpcPayload, ctx)
       const response = await traceMcpUpstream(rpcPayload.method, new URL(upstream.url).hostname, async (span) => {
-        const result = await fetch(upstream.url, {
+        const result = await (dependencies.fetchImpl ?? fetch)(upstream.url, {
           method: 'POST', headers: upstream.headers, body: JSON.stringify(rpcPayload),
           signal: AbortSignal.timeout(policy.timeoutMs), redirect: 'manual',
         })
@@ -54,50 +91,51 @@ export class MCPProxyEngine {
       });
 
       if (!response.ok) {
-        if (response.status >= 500 || response.status >= 300 && response.status < 400) await MCPControls.recordFailure(ctx.tenantId, serverConfig.id, policy)
-        else await MCPControls.recordSuccess(ctx.tenantId, serverConfig.id)
+        if (response.status >= 500 || response.status >= 300 && response.status < 400) await controls.recordFailure(ctx.tenantId, serverConfig.id, policy)
+        else await controls.recordSuccess(ctx.tenantId, serverConfig.id)
         if (response.status >= 500 || response.status >= 300 && response.status < 400) captureOperationalError(new Error(`MCP upstream returned HTTP ${response.status}.`), 'mcp-upstream', mcpMethodClass(rpcPayload.method))
-        return {
+        return governed({
           status: 502,
           ...(response.status >= 500 || response.status >= 300 && response.status < 400 ? { connectivityFailure: { failure: response.status >= 500 ? 'upstream_5xx' : 'redirect_blocked', status: response.status } } : {}),
           body: { jsonrpc: '2.0', id: rpcPayload.id, error: { code: -32603, message: `Upstream MCP HTTP Error (${response.status})` } },
-        };
+        });
       }
 
-      const jsonRpcData = await readBoundedUpstreamJson(response) as JSONRPCResponse;
+      const jsonRpcData = await (dependencies.readUpstreamJson ?? readBoundedUpstreamJson)(response) as JSONRPCResponse;
       if (!jsonRpcData || jsonRpcData.jsonrpc !== '2.0' || jsonRpcData.id !== rpcPayload.id) throw new Error('Upstream returned an invalid JSON-RPC response.')
-      await MCPControls.recordSuccess(ctx.tenantId, serverConfig.id)
+      await controls.recordSuccess(ctx.tenantId, serverConfig.id)
       phase = 'audit'
 
       // Log invocation to Upstash Redis double-entry audit ledger
-      await this.recordMCPUsage(ctx, serverConfig, rpcPayload, Date.now() - startTime);
+      await (dependencies.audit ?? this.recordMCPUsage)(ctx, serverConfig, rpcPayload, Date.now() - startTime, governance);
 
-      return { body: jsonRpcData, status: 200 };
+      return governed({ body: jsonRpcData, status: 200 });
 
     } catch (err: unknown) {
       if (phase === 'transport') {
         captureOperationalError(err, 'mcp-upstream', mcpMethodClass(rpcPayload.method))
         try {
-          const policy = await MCPControls.getPolicy(ctx.tenantId)
-          await MCPControls.recordFailure(ctx.tenantId, serverConfig.id, policy)
+          const controls = dependencies.controls ?? MCPControls
+          const policy = await controls.getPolicy(ctx.tenantId)
+          await controls.recordFailure(ctx.tenantId, serverConfig.id, policy)
         } catch (controlError) {
           console.error('[MCP Circuit State Error]:', controlError instanceof Error ? controlError.name : 'unknown_error')
         }
       }
       const errorMessage = err instanceof Error ? err.message : 'Unknown proxy error';
-      if (phase === 'controls') return {
+      if (phase === 'controls') return governed({
         status: 503,
         body: { jsonrpc: '2.0', id: rpcPayload.id, error: { code: -32005, message: 'MCP SLA controls are temporarily unavailable' } },
-      }
-      if (phase === 'audit') return {
+      })
+      if (phase === 'audit') return governed({
         status: 503,
         body: { jsonrpc: '2.0', id: rpcPayload.id, error: { code: -32006, message: 'MCP usage audit could not be committed' } },
-      }
-      return {
+      })
+      return governed({
         status: errorMessage.includes('timed out') || errorMessage.includes('aborted') ? 504 : 502,
         connectivityFailure: { failure: errorMessage.includes('timed out') || errorMessage.includes('aborted') ? 'timeout' : 'connection_or_protocol_error' },
         body: { jsonrpc: '2.0', id: rpcPayload.id, error: { code: -32603, message: 'Upstream MCP Gateway Timeout / Connection Refused' } },
-      };
+      });
     }
   }
 
@@ -108,7 +146,8 @@ export class MCPProxyEngine {
     ctx: MCPProxyContext,
     server: MCPServerConfig,
     req: JSONRPCRequest,
-    latencyMs: number
+    latencyMs: number,
+    governance: GovernanceDecision,
   ): Promise<void> {
     const timestamp = Date.now();
     const ledgerKey = scopedRedisKey(`ledger:tenant:${ctx.tenantId}:entries`);
@@ -129,7 +168,10 @@ export class MCPProxyEngine {
         serverId: server.id,
         method: req.method,
         toolName: req.method === 'tools/call' && typeof req.params?.name === 'string' ? req.params.name : null,
-        latencyMs
+        latencyMs,
+        governanceOutcome: governance.outcome,
+        governanceEvidenceSha256: governance.evidenceSha256,
+        governancePolicySha256: governance.policy.policySha256,
       }
     };
 

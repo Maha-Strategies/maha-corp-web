@@ -34,6 +34,7 @@ export async function POST(request: Request, context: { params: Promise<{ agentI
       tenantId,
       traceId: `trc_${crypto.randomBytes(8).toString('hex')}`,
       taskClass: decision.taskClass,
+      inputBytes: decision.textBytes,
       paymentSignature: request.headers.get(PAYMENT_SIGNATURE_HEADER),
       a2aVersion: request.headers.get('a2a-version'),
     })

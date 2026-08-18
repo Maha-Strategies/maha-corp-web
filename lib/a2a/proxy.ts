@@ -8,6 +8,8 @@ import { traceRedisQuery } from '../observability/telemetry.ts'
 import { decodeChallenge, decodeReceipt } from '../x402/client.ts'
 import { encodeChallengeHeader, parsePaymentHeader, paymentId, PAYMENT_REQUIRED_HEADER, PAYMENT_RESPONSE_HEADER, PAYMENT_SIGNATURE_HEADER } from '../x402/protocol.ts'
 import { evaluatePaymentIntent, verifySettlement, type BuyerPolicy, type PaymentAuthorization, type PaymentRequirementLike } from '../x402/buyer-policy.ts'
+import { evaluateA2AGovernance, governanceResponseHeaders } from '../governance/adapters.ts'
+import type { GovernanceDecision } from '../governance/envelope.ts'
 import { a2aTaskId, a2aTaskIdForExternal, a2aUpstreamTaskId, maxTaskBudgetFor, UpstashA2ATaskBudgetStore, type A2ATaskBudgetReservation, type A2ATaskBudgetState, type A2ATaskBudgetStore } from './task-budget.ts'
 import type { A2AAgentConfig, A2AJsonRpcRequest, A2AJsonRpcResponse } from './types.ts'
 
@@ -22,13 +24,14 @@ type DispatchOptions = {
   tenantId: string
   traceId: string
   taskClass: string | null
+  inputBytes: number
   paymentSignature: string | null
   a2aVersion: string | null
   fetchImpl?: typeof fetch
   controls?: GatewayControls
   assertPublicHost?: (url: string) => Promise<void>
   taskBudgets?: A2ATaskBudgetStore
-  audit?: (config: A2AAgentConfig, request: A2AJsonRpcRequest, options: DispatchOptions, latencyMs: number, paymentAmount: string | null) => Promise<void>
+  audit?: (config: A2AAgentConfig, request: A2AJsonRpcRequest, options: DispatchOptions, latencyMs: number, paymentAmount: string | null, governance: GovernanceDecision) => Promise<void>
 }
 
 type GatewayControls = {
@@ -85,7 +88,7 @@ async function upstreamHeaders(config: A2AAgentConfig, request: A2AJsonRpcReques
   return headers
 }
 
-async function recordUsage(config: A2AAgentConfig, request: A2AJsonRpcRequest, options: DispatchOptions, latencyMs: number, paymentAmount: string | null): Promise<void> {
+async function recordUsage(config: A2AAgentConfig, request: A2AJsonRpcRequest, options: DispatchOptions, latencyMs: number, paymentAmount: string | null, governance: GovernanceDecision): Promise<void> {
   const timestamp = Date.now()
   const entry = {
     id: `a2a_tx_${crypto.randomBytes(6).toString('hex')}`,
@@ -99,7 +102,12 @@ async function recordUsage(config: A2AAgentConfig, request: A2AJsonRpcRequest, o
     inputHash: crypto.createHash('sha256').update(JSON.stringify(request.params ?? {})).digest('hex'),
     outputHash: 'a2a-invoked',
     status: 'COMPLETED',
-    meta: { agentId: config.id, method: request.method, taskClass: options.taskClass, latencyMs, upstreamPaymentAmount: paymentAmount },
+    meta: {
+      agentId: config.id, method: request.method, taskClass: options.taskClass, latencyMs, upstreamPaymentAmount: paymentAmount,
+      governanceOutcome: governance.outcome,
+      governanceEvidenceSha256: governance.evidenceSha256,
+      governancePolicySha256: governance.policy.policySha256,
+    },
   }
   const redis = Redis.fromEnv()
   await traceRedisQuery('ZADD', () => redis.zadd(scopedRedisKey(`ledger:tenant:${options.tenantId}:entries`), { score: timestamp, member: JSON.stringify(entry) }))
@@ -144,6 +152,29 @@ export class A2AProxyEngine {
       signedAmount = parsed.payment.accepted.amount
     }
 
+    const governance = evaluateA2AGovernance({
+      config,
+      request,
+      tenantId: options.tenantId,
+      traceId: options.traceId,
+      taskId: durableTaskId,
+      taskClass: options.taskClass,
+      inputBytes: options.inputBytes,
+      timeoutMs: policy.timeoutMs,
+      paymentAuthorization: authorization,
+    })
+    const governed = (result: A2AProxyResult): A2AProxyResult => ({
+      ...result,
+      headers: { ...governanceResponseHeaders(governance), ...(result.headers ?? {}) },
+    })
+    if (governance.outcome !== 'proceed') {
+      if (reservation) await taskBudgets.cancel(reservation)
+      return governed({
+        status: 403,
+        body: rpcError(request.id, governance.outcome === 'require_review' ? -32031 : -32030, `Maha governance ${governance.outcome}: ${governance.reasonCodes.join(',')}`),
+      })
+    }
+
     const startedAt = Date.now()
     try {
       await (options.assertPublicHost ?? assertPublicUpstreamHost)(config.rpcUrl)
@@ -153,9 +184,9 @@ export class A2AProxyEngine {
       if (response.status === 402) {
         if (reservation) await taskBudgets.cancel(reservation)
         const challengeHeader = response.headers.get(PAYMENT_REQUIRED_HEADER)
-        if (!challengeHeader || challengeHeader.length > 16_384) return { status: 502, body: rpcError(request.id, -32022, 'A2A upstream returned a malformed x402 challenge.') }
+        if (!challengeHeader || challengeHeader.length > 16_384) return governed({ status: 502, body: rpcError(request.id, -32022, 'A2A upstream returned a malformed x402 challenge.') })
         let challenge
-        try { challenge = decodeChallenge(challengeHeader) } catch { return { status: 502, body: rpcError(request.id, -32022, 'A2A upstream returned a malformed x402 challenge.') } }
+        try { challenge = decodeChallenge(challengeHeader) } catch { return governed({ status: 502, body: rpcError(request.id, -32022, 'A2A upstream returned a malformed x402 challenge.') }) }
         const allowed = []
         for (const requirement of challenge.accepts) {
           const decision = evaluateRequirement(config.paymentPolicy, durableTaskId, config, requirement, challenge.resource.url, `a2a-auth-${crypto.createHash('sha256').update(`${options.traceId}:${requirement.amount}`).digest('hex').slice(0, 32)}`)
@@ -165,18 +196,18 @@ export class A2AProxyEngine {
           const available = await taskBudgets.canReserve({ tenantId: options.tenantId, agentId: config.id, taskId: durableTaskId, network: decision.network, asset: decision.asset, amount: decision.amount, maxTaskBudget })
           if (available.allowed) allowed.push(requirement)
         }
-        if (allowed.length === 0) return { status: 403, body: rpcError(request.id, -32020, 'The upstream payment terms are outside the tenant buyer policy.') }
+        if (allowed.length === 0) return governed({ status: 403, body: rpcError(request.id, -32020, 'The upstream payment terms are outside the tenant buyer policy.') })
         const filtered = { ...challenge, accepts: allowed }
-        return {
+        return governed({
           status: 402,
           body: filtered,
           headers: { 'Cache-Control': 'no-store', 'X-Maha-Task-ID': durableTaskId, [PAYMENT_REQUIRED_HEADER]: encodeChallengeHeader(filtered as Parameters<typeof encodeChallengeHeader>[0]) },
-        }
+        })
       }
       if (reservation && response.status >= 400 && response.status < 500) await taskBudgets.cancel(reservation)
       if (response.status >= 300 && response.status < 400 || response.status >= 500) {
         await controls.recordFailure(options.tenantId, config.id, policy)
-        return { status: 502, body: rpcError(request.id, -32603, `Upstream A2A HTTP Error (${response.status}).`) }
+        return governed({ status: 502, body: rpcError(request.id, -32603, `Upstream A2A HTTP Error (${response.status}).`) })
       }
       const { json } = await readBounded(response)
       if (typeof json !== 'object' || json === null || Array.isArray(json) || (json as Record<string, unknown>).jsonrpc !== '2.0' || (json as Record<string, unknown>).id !== request.id) throw new Error('A2A upstream returned an invalid JSON-RPC response.')
@@ -184,16 +215,16 @@ export class A2AProxyEngine {
       let budgetState: A2ATaskBudgetState | null = null
       if (authorization && payer && config.paymentPolicy) {
         const settlement = verifySettlement({ policy: config.paymentPolicy, authorization, payer, receipt: decodeReceipt(receiptHeader) })
-        if (!settlement.verified) return { status: 502, body: rpcError(request.id, -32023, `Upstream payment receipt failed policy verification: ${settlement.code}.`) }
-        if (!reservation) return { status: 502, body: rpcError(request.id, -32025, 'The verified settlement has no durable task-budget reservation.') }
+        if (!settlement.verified) return governed({ status: 502, body: rpcError(request.id, -32023, `Upstream payment receipt failed policy verification: ${settlement.code}.`) })
+        if (!reservation) return governed({ status: 502, body: rpcError(request.id, -32025, 'The verified settlement has no durable task-budget reservation.') })
         const committed = await taskBudgets.settle({ ...reservation, transaction: settlement.transaction })
-        if (!committed.settled) return { status: 502, body: rpcError(request.id, -32025, `The verified settlement could not be committed to the task budget: ${committed.reason}.`) }
+        if (!committed.settled) return governed({ status: 502, body: rpcError(request.id, -32025, `The verified settlement could not be committed to the task budget: ${committed.reason}.`) })
         budgetState = committed.state
       }
       const upstreamTaskId = a2aUpstreamTaskId(json)
       if (upstreamTaskId) await taskBudgets.bindUpstreamTask({ tenantId: options.tenantId, agentId: config.id, taskId: durableTaskId, upstreamTaskId: a2aTaskIdForExternal(upstreamTaskId) })
       await controls.recordSuccess(options.tenantId, config.id)
-      await (options.audit ?? recordUsage)(config, request, options, Date.now() - startedAt, signedAmount)
+      await (options.audit ?? recordUsage)(config, request, options, Date.now() - startedAt, signedAmount, governance)
       const headers: Record<string, string> = { 'Cache-Control': 'no-store', 'X-Maha-Task-ID': durableTaskId }
       if (budgetState) {
         headers['X-Maha-Task-Spent'] = budgetState.cumulativeSpentBaseUnits
@@ -201,11 +232,11 @@ export class A2AProxyEngine {
         headers['X-Maha-Task-Status'] = budgetState.status
       }
       if (receiptHeader) headers[PAYMENT_RESPONSE_HEADER] = receiptHeader
-      return { status: response.status, body: json, headers }
+      return governed({ status: response.status, body: json, headers })
     } catch (error) {
       try { await controls.recordFailure(options.tenantId, config.id, policy) } catch {}
       const timeout = error instanceof Error && (error.name === 'TimeoutError' || /timed out|aborted/i.test(error.message))
-      return { status: timeout ? 504 : 502, body: rpcError(request.id, -32603, timeout ? 'Upstream A2A request timed out.' : 'Upstream A2A connection or protocol failure.') }
+      return governed({ status: timeout ? 504 : 502, body: rpcError(request.id, -32603, timeout ? 'Upstream A2A request timed out.' : 'Upstream A2A connection or protocol failure.') })
     }
   }
 }

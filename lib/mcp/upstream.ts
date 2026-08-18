@@ -1,7 +1,7 @@
 import crypto from 'node:crypto'
-import { MAX_UPSTREAM_RESPONSE_BYTES, assertPublicUpstreamHost } from '../mcp-gateway'
-import { decryptSecret } from './registry'
-import type { JSONRPCRequest, MCPProxyContext, MCPServerConfig } from './types'
+import { MAX_UPSTREAM_RESPONSE_BYTES, assertPublicUpstreamHost } from '../mcp-gateway.ts'
+import { decryptSecret } from './registry.ts'
+import type { JSONRPCRequest, MCPProxyContext, MCPServerConfig } from './types.ts'
 
 export async function prepareMcpUpstream(
   server: MCPServerConfig,
