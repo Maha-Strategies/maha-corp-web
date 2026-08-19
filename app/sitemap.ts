@@ -179,6 +179,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${baseUrl}/guides/enterprise-mcp-governance`, lastModified: new Date('2026-08-08') },
     { url: `${baseUrl}/guides/mcp-gateway-vs-direct-server`, lastModified: new Date('2026-08-08') },
     { url: `${baseUrl}/context-compiler`, lastModified: new Date('2026-07-29') },
+    { url: `${baseUrl}/integrations/wso2`, lastModified: new Date('2026-08-19') },
     { url: `${baseUrl}/context-compiler/playground`, lastModified: new Date('2026-08-08') },
     { url: `${baseUrl}/benchmarks/context-retention`, lastModified: new Date('2026-08-08') },
     { url: `${baseUrl}/guides/retrieval-augmented-generation-lewis-2020`, lastModified: new Date('2026-08-09') },

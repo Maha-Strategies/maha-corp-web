@@ -63,6 +63,7 @@ export default function Navbar() {
     { name: 'Cognitive Gateway', href: '/research/mcp' },
     { name: 'Enterprise MCP Gateway', href: '/enterprise-mcp-gateway' },
     { name: 'Context Compiler', href: '/context-compiler' },
+    { name: 'WSO2 Gateway Integration', href: '/integrations/wso2' },
     { name: 'Context Pack Evaluator', href: '/context-pack-evaluator' },
     { name: 'Maha Navigator', href: '/navigator' },
     { name: 'x402 Conformance Observatory', href: '/x402-observatory' },

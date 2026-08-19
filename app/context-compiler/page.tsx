@@ -15,6 +15,7 @@ const machineLinks = [
   { href: '/api/docs/openapi', label: 'OpenAPI contract', anchor: true },
   { href: '/.well-known/maha/offer-selection.json', label: 'Machine-readable offer guide', anchor: true },
   { href: '/enterprise-mcp-gateway', label: 'Enterprise MCP Gateway' },
+  { href: '/integrations/wso2', label: 'WSO2 Gateway evaluation' },
 ] as const
 
 export default function ContextCompilerPage() {
