@@ -32,6 +32,7 @@ function https(value: unknown): string | null {
 
 export function createProspectId() { return `prospect_${randomUUID().replaceAll('-', '')}` }
 export function createOutboundDraftId() { return `outdraft_${randomUUID().replaceAll('-', '')}` }
+export function createOutboundDeliveryId() { return `outmail_${randomUUID().replaceAll('-', '')}` }
 export function outboundHash(value: string) { return `sha256:${createHash('sha256').update(value).digest('hex')}` }
 
 export function parseProspect(value: unknown): ProspectInput & { idempotencyKey: string } {
@@ -82,9 +83,33 @@ export function parseDraftAction(value: unknown) {
   return { draftId, action: body.action as 'approve_draft' | 'record_manual_send' | 'record_reply' | 'mark_won' | 'mark_lost', note: line(body.note, 'note', 3, 2000, true) ?? '', idempotencyKey: line(body.idempotencyKey, 'idempotencyKey', 8, 120)! }
 }
 
+export function parseDraftRevision(value: unknown) {
+  if (typeof value !== 'object' || value === null || Array.isArray(value)) throw new Error('Request body must be a JSON object.')
+  const body = value as Record<string, unknown>
+  if (body.action !== 'revise_draft') throw new Error('action is not supported.')
+  const draftId = line(body.draftId, 'draftId', 10, 80)!
+  if (!/^outdraft_[a-f0-9]{32}$/.test(draftId)) throw new Error('draftId is invalid.')
+  const subject = line(body.subject, 'subject', 3, 160)!
+  if (typeof body.body !== 'string') throw new Error('body must be a string.')
+  const revisedBody = body.body.trim()
+  if (revisedBody.length < 40 || revisedBody.length > 5000) throw new Error('body must contain between 40 and 5000 characters.')
+  return { draftId, subject, body: revisedBody, idempotencyKey: line(body.idempotencyKey, 'idempotencyKey', 8, 120)! }
+}
+
+export function parseProviderSend(value: unknown) {
+  if (typeof value !== 'object' || value === null || Array.isArray(value)) throw new Error('Request body must be a JSON object.')
+  const body = value as Record<string, unknown>
+  if (body.action !== 'send_approved') throw new Error('action is not supported.')
+  const draftId = line(body.draftId, 'draftId', 10, 80)!
+  if (!/^outdraft_[a-f0-9]{32}$/.test(draftId)) throw new Error('draftId is invalid.')
+  const confirmation = line(body.confirmation, 'confirmation', 10, 100)!
+  if (confirmation !== `SEND ${draftId}`) throw new Error(`confirmation must exactly match SEND ${draftId}.`)
+  return { draftId, confirmation, idempotencyKey: line(body.idempotencyKey, 'idempotencyKey', 8, 120)! }
+}
+
 export function draftSuggestion(prospect: Pick<ProspectInput, 'companyName' | 'contactName' | 'offerId' | 'relevanceNote'>) {
   const greeting = prospect.contactName ? `Hello ${prospect.contactName},` : 'Hello,'
-  const offer = prospect.offerId === 'mps-prepaid-audit-access' ? 'claim-level MPS audit access' : prospect.offerId === 'utility-receipts-to-csv' ? 'receipt-to-CSV processing' : prospect.offerId.replaceAll('-', ' ')
+  const offer = prospect.offerId === 'mps-prepaid-audit-access' ? 'claim-level MPS audit access' : prospect.offerId === 'utility-receipts-to-csv' ? 'receipt-to-CSV processing' : prospect.offerId === 'wso2-context-compiler-pilot' ? 'a bounded WSO2 Context Compiler evaluation' : prospect.offerId.replaceAll('-', ' ')
   return {
     subject: `A question about ${prospect.companyName}'s evidence workflow`,
     body: `${greeting}\n\nI came across ${prospect.relevanceNote}\n\nMaha Strategies offers ${offer} for teams that need a clear, reviewable path from a question to an evidence-backed decision. If this is relevant to your work, would a short conversation be useful?\n\nIf this is not the right person or time, no response is needed.\n\nBest,\nMayone Maha Rajan\nMaha Strategies`,

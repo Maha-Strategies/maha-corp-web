@@ -1,7 +1,8 @@
 import { jsonResponse } from '@/lib/agent-inquiries'
 import { createAgentInquiryLedger } from '@/lib/agent-inquiry-ledger'
 import { authorizeMarketMapping } from '@/lib/market-mapping'
-import { createOutboundDraftId, createProspectId, draftSuggestion, outboundHash, parseDraftAction, parseProspect, parseProspectAction, prospectFitScore } from '@/lib/outbound-control'
+import { Resend } from 'resend'
+import { createOutboundDeliveryId, createOutboundDraftId, createProspectId, draftSuggestion, outboundHash, parseDraftAction, parseDraftRevision, parseProviderSend, parseProspect, parseProspectAction, prospectFitScore } from '@/lib/outbound-control'
 
 export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
@@ -21,12 +22,16 @@ export async function GET(request: Request) {
   if (!authorized(request)) return jsonResponse({ error: { code: 'unauthorized', message: 'A valid market-mapping bearer token is required.' } }, 401)
   const ledger = createAgentInquiryLedger()
   if (!ledger) return unavailable()
-  const [{ data: prospects, error: prospectsError }, { data: drafts, error: draftsError }] = await Promise.all([
+  const [{ data: prospects, error: prospectsError }, { data: drafts, error: draftsError }, { data: deliveries, error: deliveriesError }] = await Promise.all([
     ledger.from('outbound_prospects').select('public_id,source_kind,source_reference,company_name,company_website,contact_name,contact_email,contact_role,contact_basis,offer_id,relevance_note,fit_score,status,reviewer_note,created_at,updated_at').order('fit_score', { ascending: false }).order('created_at', { ascending: true }).limit(200),
     ledger.from('outbound_outreach_drafts').select('public_id,prospect_id,version,subject,body,status,created_at,approved_at,sent_at').order('created_at', { ascending: false }).limit(300),
+    ledger.from('outbound_email_deliveries').select('public_id,prospect_id,draft_id,provider,status,provider_message_id,failure_code,claimed_at,sent_at,failed_at').order('claimed_at', { ascending: false }).limit(300),
   ])
-  if (prospectsError || draftsError) return unavailable(prospectsError?.code ?? draftsError?.code)
-  return jsonResponse({ prospects: prospects ?? [], drafts: drafts ?? [], autonomousOutreachSupported: false, sendingProviderConnected: false }, 200)
+  if (prospectsError || draftsError || deliveriesError) return unavailable(prospectsError?.code ?? draftsError?.code ?? deliveriesError?.code)
+  return jsonResponse({
+    prospects: prospects ?? [], drafts: drafts ?? [], deliveries: deliveries ?? [], autonomousOutreachSupported: false,
+    sendingProviderConnected: process.env.MAHA_OUTBOUND_EMAIL_ENABLED === 'true' && Boolean(process.env.RESEND_API_KEY),
+  }, 200)
 }
 
 export async function POST(request: Request) {
@@ -37,6 +42,62 @@ export async function POST(request: Request) {
   try { body = await request.json() as Record<string, unknown> } catch { return jsonResponse({ error: { code: 'invalid_request', message: 'Request body must be valid JSON.' } }, 400) }
   const ledger = createAgentInquiryLedger()
   if (!ledger) return unavailable()
+
+  if (body.action === 'send_approved') {
+    let input: ReturnType<typeof parseProviderSend>
+    try { input = parseProviderSend(body) } catch (error) { return jsonResponse({ error: { code: 'invalid_request', message: error instanceof Error ? error.message : 'Invalid provider-send request.' } }, 400) }
+    const resendKey = process.env.RESEND_API_KEY
+    if (process.env.MAHA_OUTBOUND_EMAIL_ENABLED !== 'true' || !resendKey) return jsonResponse({ error: { code: 'provider_disabled', message: 'Outbound provider delivery is disabled.' } }, 503)
+
+    const { data: draft, error: draftError } = await ledger.from('outbound_outreach_drafts').select('public_id,prospect_id,subject,body,status').eq('public_id', input.draftId).maybeSingle()
+    if (draftError || !draft) return unavailable(draftError?.code === 'PGRST116' ? 'P0002' : draftError?.code)
+    const { data: prospect, error: prospectError } = await ledger.from('outbound_prospects').select('public_id,company_name,contact_email,status').eq('public_id', draft.prospect_id).maybeSingle()
+    if (prospectError || !prospect) return unavailable(prospectError?.code === 'PGRST116' ? 'P0002' : prospectError?.code)
+    if (draft.status !== 'approved' || prospect.status !== 'approved' || !prospect.contact_email) return jsonResponse({ error: { code: 'operation_not_allowed', message: 'Only an approved draft with a reviewed business recipient can be sent.' } }, 409)
+
+    const deliveryId = createOutboundDeliveryId()
+    const now = new Date().toISOString()
+    const { data: claim, error: claimError } = await ledger.rpc('claim_outbound_provider_send', {
+      p_delivery_id: deliveryId, p_draft_id: input.draftId, p_confirmation: input.confirmation,
+      p_idempotency_hash: outboundHash(input.idempotencyKey), p_actor_fingerprint: auth.actorFingerprint, p_at: now,
+    })
+    if (claimError || typeof claim !== 'object' || claim === null || Array.isArray(claim)) return unavailable(claimError?.code)
+    const claimed = claim as Record<string, unknown>
+    if (claimed.idempotentReplay !== false || claimed.status !== 'claimed' || typeof claimed.deliveryId !== 'string') {
+      return jsonResponse({ error: { code: 'send_already_claimed', message: 'This draft already has a provider-send claim. No retry was made.' }, delivery: claim }, 409)
+    }
+
+    let providerMessageId: string | null = null
+    try {
+      const result = await new Resend(resendKey).emails.send({
+        from: process.env.MAHA_OUTBOUND_FROM ?? 'Mayone Rajan <mayone@mahastrategies.com>',
+        replyTo: process.env.MAHA_OUTBOUND_REPLY_TO ?? 'mayone@mahastrategies.com',
+        to: prospect.contact_email,
+        subject: draft.subject,
+        text: draft.body,
+      }, { idempotencyKey: input.draftId })
+      if (result.error || !result.data?.id) throw new Error('provider_rejected')
+      providerMessageId = result.data.id
+    } catch {
+      await ledger.rpc('fail_outbound_provider_send', { p_delivery_id: claimed.deliveryId, p_failure_code: 'provider_rejected', p_actor_fingerprint: auth.actorFingerprint, p_at: new Date().toISOString() })
+      return jsonResponse({ error: { code: 'delivery_failed', message: 'Provider delivery failed closed. No automatic retry was made.' } }, 502)
+    }
+
+    const { data: finalized, error: finalizeError } = await ledger.rpc('finalize_outbound_provider_send', { p_delivery_id: claimed.deliveryId, p_provider_message_id: providerMessageId, p_actor_fingerprint: auth.actorFingerprint, p_at: new Date().toISOString() })
+    if (finalizeError || typeof finalized !== 'object' || finalized === null || Array.isArray(finalized)) return jsonResponse({ error: { code: 'delivery_reconciliation_required', message: 'The provider accepted the email, but ledger finalization failed. Do not retry.' } }, 503)
+    return jsonResponse({ delivery: finalized, autonomousOutreachSupported: false, automaticRetrySupported: false }, 200)
+  }
+
+  if (body.action === 'revise_draft') {
+    let input: ReturnType<typeof parseDraftRevision>
+    try { input = parseDraftRevision(body) } catch (error) { return jsonResponse({ error: { code: 'invalid_request', message: error instanceof Error ? error.message : 'Invalid draft revision.' } }, 400) }
+    const { data: existing, error: existingError } = await ledger.from('outbound_outreach_drafts').select('public_id,prospect_id,status').eq('public_id', input.draftId).maybeSingle()
+    if (existingError || !existing) return unavailable(existingError?.code === 'PGRST116' ? 'P0002' : existingError?.code)
+    if (existing.status !== 'draft') return jsonResponse({ error: { code: 'operation_not_allowed', message: 'Only an unapproved draft can be revised.' } }, 409)
+    const { data, error } = await ledger.rpc('create_outbound_outreach_draft', { p_draft_id: createOutboundDraftId(), p_prospect_id: existing.prospect_id, p_subject: input.subject, p_body: input.body, p_idempotency_hash: outboundHash(input.idempotencyKey), p_actor_fingerprint: auth.actorFingerprint, p_at: new Date().toISOString() })
+    if (error || typeof data !== 'object' || data === null || Array.isArray(data)) return unavailable(error?.code)
+    return jsonResponse({ draft: data, autonomousOutreachSupported: false }, 201)
+  }
 
   if (body.action === 'approve_draft' || body.action === 'record_manual_send' || body.action === 'record_reply' || body.action === 'mark_won' || body.action === 'mark_lost') {
     let input: ReturnType<typeof parseDraftAction>
