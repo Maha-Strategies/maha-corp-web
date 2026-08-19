@@ -35,6 +35,7 @@ import {
   RELIGION_KNOWLEDGE_PATH,
   RELIGION_KNOWLEDGE_VERSION,
 } from '@/lib/religion-knowledge'
+import { NEUROMORPHIC_COMPARISONS, NEUROMORPHIC_CONCEPTS, NEUROMORPHIC_PATH, NEUROMORPHIC_VERSION } from '@/lib/neuromorphic-biocomputing'
 
 export const metadata: Metadata = {
   title: 'Knowledge | Maha Strategies',
@@ -89,6 +90,7 @@ export default function KnowledgePage() {
         url: `${SITE_URL}${RELIGION_KNOWLEDGE_PATH}`,
         version: RELIGION_KNOWLEDGE_VERSION,
       },
+      { '@type': 'CollectionPage', name: 'Neuromorphic and biocomputing', url: `${SITE_URL}${NEUROMORPHIC_PATH}`, version: NEUROMORPHIC_VERSION },
       ...KNOWLEDGE_ARTICLES.map((article) => ({
         '@type': 'TechArticle',
         name: article.title,
@@ -116,7 +118,7 @@ export default function KnowledgePage() {
               </Link>
             </div>
             <div className="border border-zinc-800 bg-zinc-950 p-5 font-mono text-xs leading-6 text-zinc-500">
-              <p className="text-zinc-200">5 domain surfaces plus connective mathematics</p>
+              <p className="text-zinc-200">6 domain surfaces plus connective mathematics</p>
               <p>{KNOWLEDGE_ARTICLES.length} published semiconductor nodes</p>
               <p>{KNOWLEDGE_SUPPLIERS.length} evidence-bounded supplier profiles</p>
               <p>{SEMICONDUCTOR_STAGES.length} lifecycle stages</p>
@@ -124,6 +126,7 @@ export default function KnowledgePage() {
               <p>{ASTRONOMY_ARTICLES.length} Astronomy explainers</p>
               <p>{MATHEMATICAL_CONCEPTS.length} mathematical concepts · {MATHEMATICAL_BRIDGES.length} bridges</p>
               <p>{RELIGION_CONCEPTS.length} religion methods · {RELIGION_COMPARISONS.length} comparisons</p>
+              <p>{NEUROMORPHIC_CONCEPTS.length} neuromorphic/biocomputing concepts · {NEUROMORPHIC_COMPARISONS.length} comparisons</p>
               <p>Claim-level evidence status</p>
               <p>Bidirectional Intelligence links</p>
             </div>
@@ -168,6 +171,13 @@ export default function KnowledgePage() {
               <p className="mt-3 text-sm leading-6 text-zinc-400">Textual authority, translation, historical evidence, lived practice, theology, first-person experience, and empirical claims kept in their proper evidentiary frames.</p>
               <p className="mt-4 border-l border-rose-700/60 pl-3 text-xs leading-5 text-rose-200">The system documents and compares claims. It does not rank traditions or certify sacred and metaphysical propositions.</p>
               <p className="mt-6 font-mono text-[10px] uppercase tracking-widest text-zinc-600 group-hover:text-teal-300">Inspect {RELIGION_CONCEPTS.length} methods · {RELIGION_COMPARISONS.length} comparisons →</p>
+            </Link>
+            <Link href={NEUROMORPHIC_PATH} className="group border border-lime-900/60 bg-lime-950/10 p-6 transition-colors hover:border-lime-400">
+              <p className="font-mono text-[10px] uppercase tracking-widest text-lime-300">Substrate-aware technical layer · {NEUROMORPHIC_VERSION}</p>
+              <h2 className="mt-4 text-2xl font-semibold text-white group-hover:text-lime-200">Neuromorphic and biocomputing</h2>
+              <p className="mt-3 text-sm leading-6 text-zinc-400">Spiking models, neuromorphic hardware, living neural cultures, molecular computation, bioelectronic interfaces, and hybrid systems under separate evidence contracts.</p>
+              <p className="mt-4 border-l border-rose-700/60 pl-3 text-xs leading-5 text-rose-200">Activity and task performance do not certify consciousness or intelligence; research demonstrations do not imply deployment readiness.</p>
+              <p className="mt-6 font-mono text-[10px] uppercase tracking-widest text-zinc-600 group-hover:text-lime-300">Inspect {NEUROMORPHIC_CONCEPTS.length} concepts · {NEUROMORPHIC_COMPARISONS.length} comparisons →</p>
             </Link>
             <Link href={ASTROLOGY_PATH} className="group border border-violet-900/60 bg-violet-950/10 p-6 transition-colors hover:border-violet-400">
               <p className="font-mono text-[10px] uppercase tracking-widest text-violet-300">Interpretive layer · {ASTROLOGY_VERSION}</p>

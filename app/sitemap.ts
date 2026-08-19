@@ -16,6 +16,7 @@ import { CORPORATE_MUNDANE_PATH, CORPORATE_MUNDANE_REFERENCES, CORPORATE_MUNDANE
 import { TROPICAL_SIDEREAL_COMPARISON_PATH, TROPICAL_SIDEREAL_COMPARISON_RELEASE_DATE, TROPICAL_SIDEREAL_COMPARISONS, tropicalSiderealComparisonPath } from '@/lib/tropical-sidereal-comparisons'
 import { MATHEMATICAL_CONCEPTS, MATHEMATICS_KNOWLEDGE_PATH, MATHEMATICS_KNOWLEDGE_RELEASE_DATE, mathematicsConceptPath } from '@/lib/mathematics-knowledge'
 import { RELIGION_COMPARISONS, RELIGION_COMPARISONS_PATH, RELIGION_CONCEPTS, RELIGION_KNOWLEDGE_PATH, RELIGION_KNOWLEDGE_RELEASE_DATE, religionComparisonPath, religionConceptPath } from '@/lib/religion-knowledge'
+import { NEUROMORPHIC_COMPARISONS, NEUROMORPHIC_COMPARISONS_PATH, NEUROMORPHIC_CONCEPTS, NEUROMORPHIC_PATH, NEUROMORPHIC_RELEASE_DATE, neuromorphicComparisonPath, neuromorphicConceptPath } from '@/lib/neuromorphic-biocomputing'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = MAHA_SITE_URL
@@ -50,6 +51,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       url: `${baseUrl}${religionComparisonPath(comparison)}`,
       lastModified: new Date(RELIGION_KNOWLEDGE_RELEASE_DATE),
     })),
+    { url: `${baseUrl}${NEUROMORPHIC_PATH}`, lastModified: new Date(NEUROMORPHIC_RELEASE_DATE) },
+    ...NEUROMORPHIC_CONCEPTS.map((concept) => ({ url: `${baseUrl}${neuromorphicConceptPath(concept)}`, lastModified: new Date(NEUROMORPHIC_RELEASE_DATE) })),
+    { url: `${baseUrl}${NEUROMORPHIC_COMPARISONS_PATH}`, lastModified: new Date(NEUROMORPHIC_RELEASE_DATE) },
+    ...NEUROMORPHIC_COMPARISONS.map((comparison) => ({ url: `${baseUrl}${neuromorphicComparisonPath(comparison)}`, lastModified: new Date(NEUROMORPHIC_RELEASE_DATE) })),
     { url: `${baseUrl}${ASTROLOGY_PATH}`, lastModified: new Date(ASTROLOGY_RELEASE_DATE) },
     { url: `${baseUrl}/knowledge/muhurta`, lastModified: new Date(ASTROLOGY_RELEASE_DATE) },
     { url: `${baseUrl}/knowledge/birth`, lastModified: new Date(ASTROLOGY_RELEASE_DATE) },

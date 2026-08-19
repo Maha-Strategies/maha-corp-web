@@ -15,6 +15,7 @@ import {
   mathematicsConceptPath,
 } from '@/lib/mathematics-knowledge'
 import { RELIGION_KNOWLEDGE_PATH, RELIGION_MATHEMATICS_BRIDGES } from '@/lib/religion-knowledge'
+import { NEUROMORPHIC_MATHEMATICS_BRIDGES, NEUROMORPHIC_PATH } from '@/lib/neuromorphic-biocomputing'
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -54,9 +55,13 @@ export default function MathematicsKnowledgePage() {
           <p className="font-mono text-[9px] uppercase tracking-widest text-teal-300">New connected domain · {RELIGION_MATHEMATICS_BRIDGES.length} explicit bridges</p>
           <p className="mt-3 text-sm leading-6 text-zinc-400">See how graphs, uncertainty, formal logic, time series, and causal inference connect to religion and contemplative studies without certifying metaphysical claims. <span className="text-teal-300">Open the methodology layer →</span></p>
         </Link>
+        <Link href={NEUROMORPHIC_PATH} className="mt-4 block border border-lime-900/60 bg-lime-950/10 p-5 transition-colors hover:border-lime-400">
+          <p className="font-mono text-[9px] uppercase tracking-widest text-lime-300">New connected technical domain · {NEUROMORPHIC_MATHEMATICS_BRIDGES.length} explicit bridges</p>
+          <p className="mt-3 text-sm leading-6 text-zinc-400">See how dynamics, information, uncertainty, graphs, time series, calibration, constraints, and scoring connect models, silicon, living substrates, and hybrid systems without making them equivalent. <span className="text-lime-300">Open the substrate-aware layer →</span></p>
+        </Link>
 
         <section className="mt-14 border-t border-zinc-800 pt-9">
-          <div className="flex flex-wrap items-end justify-between gap-4"><div><p className="font-mono text-[10px] uppercase tracking-widest text-zinc-500">Cross-domain bridge matrix</p><h2 className="mt-3 text-3xl font-semibold text-white">Six systems, one inspectable grammar</h2></div><a href={MATHEMATICS_REGISTRY_PATH} className="font-mono text-[10px] uppercase tracking-widest text-emerald-300 hover:text-white">Open JSON registry →</a></div>
+          <div className="flex flex-wrap items-end justify-between gap-4"><div><p className="font-mono text-[10px] uppercase tracking-widest text-zinc-500">Cross-domain bridge matrix</p><h2 className="mt-3 text-3xl font-semibold text-white">Core systems, one inspectable grammar</h2></div><a href={MATHEMATICS_REGISTRY_PATH} className="font-mono text-[10px] uppercase tracking-widest text-emerald-300 hover:text-white">Open JSON registry →</a></div>
           <div className="mt-6 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
             {MATHEMATICS_DOMAINS.map((domain) => {
               const bridges = MATHEMATICAL_BRIDGES.filter((bridge) => bridge.domain === domain)
