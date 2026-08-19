@@ -1,0 +1,43 @@
+{
+  "schemaVersion": "1.0.0",
+  "bundleId": "maha-context-compiler-wso2-evaluation",
+  "bundleVersion": "1.0.0",
+  "status": "evaluation-only",
+  "compatibility": {
+    "wso2AiGateway": "1.1.0",
+    "interceptorServiceInstalledVersion": "1.0.0",
+    "interceptorServiceAttachmentVersion": "v1",
+    "managementApi": "/api/management/v0.9"
+  },
+  "contract": {
+    "method": "POST",
+    "resource": "/v1/chat/completions",
+    "credentialHeader": "x-maha-wso2-interceptor-token",
+    "credentialTransport": "caller-supplied evaluation credential; stripped before provider forwarding",
+    "requestPassthroughOnError": false,
+    "responsePassthroughOnError": false,
+    "timeoutMillis": 20000,
+    "tlsSkipVerify": false,
+    "maximumDecodedRequestBodyBytes": 512000,
+    "retainsSourcePayloads": false
+  },
+  "artifacts": [
+    {
+      "path": "llm-proxy.template.json",
+      "sha256": "94f987f84505bb80d10a3c37cb934ed6c9aa0de49d4dcc8cfd2736de3a2a7182"
+    },
+    {
+      "path": "install.sh",
+      "sha256": "75fcf3d1966f1b04e47a996c651363612e5ef7cbbc65105450b2ebc631043573"
+    },
+    {
+      "path": "uninstall.sh",
+      "sha256": "19eb34e20d7d2dc81db0755a8e1202e5a3a8ab4f136d6bb80468c613bcfa2361"
+    },
+    {
+      "path": "README.md",
+      "sha256": "008932cc5ffb328098aa2c459ef15a2dd1bca873a6b75e977ccfd593c3e9ad6f"
+    }
+  ],
+  "productionBlocker": "The tested WSO2 1.1.0 Set Headers attachment broke policy-chain construction. Production requires a reviewed gateway-side secret reference, authenticated service identity, or mTLS; this bundle does not conceal that gap."
+}

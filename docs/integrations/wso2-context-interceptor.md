@@ -258,11 +258,141 @@ node --experimental-strip-types scripts/run-wso2-three-path-evaluation.ts \
   --corpus=content/integrations/wso2-large-context-cost-corpus.json
 ```
 
+### One-command reproduction package
+
+The canonical reproduction entry point is:
+
+```bash
+npm run reproduce:wso2-evaluation
+```
+
+That command is safe by default: it validates the checked-in reproduction
+contract, verifies the frozen 20-workload corpus and configuration digests,
+runs all sixty planned path/workload combinations with deterministic mock
+answers, evaluates the publication gates, and writes a metadata-only run
+manifest. It does not contact WSO2 or Anthropic and permits no provider calls.
+
+The frozen machine-readable contract is
+`content/integrations/wso2-reproduction.json`. It records the corpus and label
+digests, WSO2 and policy versions, Prompt Compressor ratio, provider model,
+temperature, output ceiling, price assumptions, output names, retry policy and
+limitations. The generated
+`artifacts/wso2/reproduction/dry-run/run-manifest.json`
+records the exact input-file and output-artifact hashes plus the Node runtime,
+platform, architecture and completion status. Generated artifacts are ignored
+by Git because blinded answers and the separate blinding key are review
+materials, not application source.
+
+For a live reproduction, first run WSO2 AI Gateway 1.1.0 and the Maha
+interceptor, then set these server-side variables without committing them:
+
+```bash
+export ANTHROPIC_API_KEY='<evaluation provider key>'
+export WSO2_CONTEXT_INTERCEPTOR_SECRET='<dedicated random value, at least 32 characters>'
+export MAHA_INTERCEPTOR_BASE='http://host.docker.internal:3000/api/integrations/wso2/context-compiler'
+```
+
+Then run one bounded command with a ceiling large enough for the frozen corpus:
+
+```bash
+npm run reproduce:wso2-evaluation -- \
+  --execute \
+  --max-provider-cost-usd='<explicit exact ceiling>'
+```
+
+The command performs three stages in order and stops at the first failure:
+
+1. import the provider and three dedicated evaluation proxies from the
+   checked-in artifacts;
+2. inspect deployed WSO2 state and exercise all routes without a provider
+   credential; and
+3. execute the sixty calls with no automatic retries, an exact pre-call spend
+   ceiling and a durable result checkpoint after every call.
+
+An interrupted live run is resumed from
+`artifacts/wso2/reproduction/live/checkpoint.json` by running the same command
+with the same ceiling. Completed calls are reconstructed from the checkpoint
+and are not repeated. Dry-run and live artifacts use separate directories so a
+later mock run cannot be mistaken for, or overwrite, paid evidence.
+`--skip-gateway-import` is available when an operator has already
+deployed and separately reviewed the exact three proxy definitions; preflight
+still runs and cannot be skipped. A distinct output directory would create a
+new checkpoint and can therefore cause new provider calls; it requires the same
+fresh human spending authorization as any other run.
+
 The runner writes model answers to a separate sanitized, path-blinded human
 adjudication artifact. The response-to-path key is written separately; the
 ordinary comparison artifact contains scores and aggregates but no answer
 text. Live runs checkpoint the sanitized answer with each paid result so an
 interruption cannot force a duplicate call or make prior answers unreviewable.
+
+### Sanitized representative trace
+
+`content/integrations/wso2-sanitized-three-path-trace.json` reconstructs one
+real, successful request and response for each path from the frozen synthetic
+corpus and the durable live checkpoint. It includes the same task, source
+metadata and digests, gateway route and policy versions, sanitized model
+answer, token usage, latency, scoring and Maha evidence headers. It retains no
+document bodies, compiled context, raw request headers, provider credential or
+interceptor credential. The artifact identifies its source checkpoint by
+filename and SHA-256 and labels itself as a sanitized reconstruction rather
+than a packet capture.
+
+An operator with the original checkpoint can regenerate it without making a
+provider call:
+
+```bash
+npm run generate:wso2-sanitized-trace -- \
+  --checkpoint=/path/to/wso2-large-live-checkpoint.json \
+  --adjudication=/path/to/wso2-large-live-adjudicated.json
+```
+
+### Failure-path verification
+
+The zero-cost failure suite checks the application interceptor and the exact
+WSO2 Interceptor Service v1 policy implementation separately. It verifies that
+a missing configuration or invalid credential short-circuits, a decoded body
+over 512 KB returns 413, and WSO2 returns an immediate 500 rather than calling
+upstream when the interceptor times out or refuses the connection. Maha's
+deployable policy pins `passthroughOnError: false` in both phases and a 20,000
+ms timeout.
+
+Run it against a reviewed WSO2 gateway-controllers checkout:
+
+```bash
+npm run test:wso2-failure-paths -- \
+  --wso2-source=/path/to/wso2-gateway-controllers
+```
+
+The sanitized checked-in result is
+`content/integrations/wso2-failure-path-result.json`. It contains source and
+configuration digests, statuses and test names, but no payload, credential or
+provider response. The suite makes no provider call.
+
+The same run measures the actual WSO2 `OnRequestBody` policy boundary nine
+times per scenario for a healthy interceptor, a forced 100 ms timeout and a
+connection-refused interceptor. It retains all 27 samples and reports median,
+nearest-rank p95 and min/max range; no conclusion rests on one observation.
+These local policy timings are not presented as deployed gateway or model
+latency.
+
+### Deployable evaluation bundle
+
+The versioned bundle in `content/integrations/wso2-policy-bundle/` contains a
+secret-free `LlmProxy` template, compatibility manifest with SHA-256 artifact
+digests, create-only installer, confirmation-gated uninstaller and concise
+installation guide. Validate it without deploying anything:
+
+```bash
+npm run validate:wso2-policy-bundle
+```
+
+The bundle targets WSO2 AI Gateway 1.1.0 and Interceptor Service 1.0.0 attached
+as `v1`. Its installer reads the deployed proxy back and rejects silent policy
+loss or changed fail-closed parameters. It intentionally remains labelled
+evaluation-only because the working configuration carries a dedicated
+credential from a controlled caller; the observed gateway-side Set Headers
+combination is not packaged as though its policy-chain failure were solved.
 
 ## Non-fit and failure boundaries
 
