@@ -9,6 +9,7 @@ const developerLinks = [
   { href: '/docs', label: 'API documentation' },
   { href: '/enterprise-mcp-gateway', label: 'Enterprise MCP Gateway' },
   { href: '/context-compiler', label: 'Context Compiler' },
+  { href: '/integrations/wso2', label: 'WSO2 Gateway integration' },
   { href: '/context-compiler/playground', label: 'Try Context Compiler' },
   { href: '/x402-observatory', label: 'x402 Conformance Observatory' },
   { href: '/x402-buyer-policy', label: 'x402 Buyer Policy' },
