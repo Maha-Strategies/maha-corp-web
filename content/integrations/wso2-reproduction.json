@@ -1,0 +1,88 @@
+{
+  "schemaVersion": "1.0.0",
+  "suiteId": "maha-wso2-large-context-v1",
+  "description": "Reproducible three-path evaluation of uncompressed WSO2, WSO2 Prompt Compressor, and WSO2 with Maha Context Compiler across twenty frozen synthetic large-context workloads.",
+  "corpus": {
+    "path": "content/integrations/wso2-large-context-cost-corpus.json",
+    "labelFreezeDigest": "a6b95c81e981fcda20576046354105994bc8846e2b6da8a4e77c754a7085a8c9",
+    "fileSha256": "c667f5487ff9645dd69bb27530c189ff5bb93fe01ffb674e7bd9b25b7022d716",
+    "workloadCount": 20,
+    "requiredFactCount": 60,
+    "expectedCitationCount": 60,
+    "synthetic": true,
+    "containsCustomerData": false,
+    "containsPersonalData": false,
+    "containsSecrets": false
+  },
+  "gateway": {
+    "configurationPath": "content/integrations/wso2-gateway-apis.json",
+    "configurationSha256": "6d02a8593f625e9fe75300fc6c2c5e23fccdf48dc959c8d4dff1a22518b3a0d7",
+    "product": "WSO2 AI Gateway",
+    "version": "1.1.0",
+    "paths": [
+      "wso2-baseline",
+      "wso2-native-prompt-compressor",
+      "wso2-maha-context-compiler"
+    ],
+    "promptCompressor": {
+      "installedVersion": "0.9.0",
+      "attachmentVersion": "v0",
+      "retainedRatio": 0.55
+    },
+    "mahaInterceptor": {
+      "installedVersion": "1.0.0",
+      "attachmentVersion": "v1",
+      "failClosed": true
+    },
+    "apiArtifacts": [
+      {
+        "path": "content/integrations/wso2-apis/baseline.json",
+        "sha256": "9ceba9f7e3f1b52244d4ad083fbf147f3a7aa5ec6bcaf4411d970f579f9c1c21"
+      },
+      {
+        "path": "content/integrations/wso2-apis/native-compressor.json",
+        "sha256": "3cc1aaec3c6d1393c32365485d948d98433996574015a4c147890bdcaf94aa84"
+      },
+      {
+        "path": "content/integrations/wso2-apis/maha-compiler.json",
+        "sha256": "22fd630f9e345d2d5d2969da513521c2919d8cb1354e7474f3c686eb18dfc677"
+      }
+    ]
+  },
+  "provider": {
+    "model": "claude-haiku-4-5-20251001",
+    "temperature": 0,
+    "maxOutputTokens": 220,
+    "pricingAssumptionUsdPerMillionTokens": {
+      "input": "1.000000",
+      "output": "5.000000"
+    }
+  },
+  "execution": {
+    "runner": "scripts/run-wso2-three-path-evaluation.ts",
+    "gatewayImporter": "scripts/wso2-gateway-import.sh",
+    "automaticRetries": 0,
+    "checkpointAfterEveryCall": true,
+    "defaultMode": "dry-run",
+    "liveExecutionRequiresExplicitCeiling": true
+  },
+  "outputs": {
+    "directory": "artifacts/wso2/reproduction",
+    "comparison": "evaluation.json",
+    "checkpoint": "checkpoint.json",
+    "blindedAnswers": "adjudication-blinded.json",
+    "blindingKey": "adjudication-key.json",
+    "runManifest": "run-manifest.json",
+    "representativeTrace": "content/integrations/wso2-sanitized-three-path-trace.json",
+    "representativeTraceSha256": "f92905841ab5600c643a6810016a4203b51d50c1f41a25150c539b5aac3c74fd",
+    "failurePathEvidence": "content/integrations/wso2-failure-path-result.json",
+    "failurePathEvidenceSha256": "deb70a6fd203c5895269bec23e1e3fe3dfe8afb72c0d892f7f17ab35fab8ee2d"
+  },
+  "limitations": [
+    "The corpus is synthetic and does not establish performance on a WSO2 customer workload.",
+    "Provider token usage is the billing boundary; Maha model-neutral estimates are not provider token counts.",
+    "Prompt Compressor findings apply only to the declared WSO2 version and retained-ratio configuration.",
+    "Deterministic scoring does not silently convert semantically correct paraphrases into passes.",
+    "A dry run exercises orchestration and publication gates without contacting WSO2 or a model provider."
+  ]
+}

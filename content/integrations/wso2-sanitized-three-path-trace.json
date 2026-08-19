@@ -1,0 +1,459 @@
+{
+  "schemaVersion": "1.0.0",
+  "traceId": "wso2-sanitized-release-evidence-rag",
+  "traceKind": "sanitized-reconstruction-from-frozen-corpus-and-durable-checkpoint",
+  "observedAt": "2026-08-17T04:29:34.971Z",
+  "warning": "This is a sanitized reconstruction for technical review, not a raw packet capture.",
+  "sanitization": {
+    "syntheticWorkload": true,
+    "customerDataRetained": false,
+    "sourceDocumentTextRetained": false,
+    "compiledContextRetained": false,
+    "credentialsRetained": false,
+    "rawRequestHeadersRetained": false,
+    "modelAnswerRetained": true
+  },
+  "provenance": {
+    "checkpointFilename": "wso2-large-live-20260817-v1-checkpoint.json",
+    "checkpointSha256": "sha256:40cb6956b0b732918c1bf6d63852d1076505c0348dd195a86384a5a935f4d0f3",
+    "adjudicationFilename": "wso2-large-live-20260817-v1-adjudicated.json",
+    "adjudicationSha256": "sha256:a77a0e01f86fa1130159e29deb5a6a66eff8e2ea65c41f96404bb02c477dc68d",
+    "corpusDigest": "a6b95c81e981fcda20576046354105994bc8846e2b6da8a4e77c754a7085a8c9",
+    "gatewayVersion": "1.1.0",
+    "model": "claude-haiku-4-5-20251001",
+    "temperature": 0,
+    "maxOutputTokens": 220,
+    "automaticRetries": 0
+  },
+  "workload": {
+    "id": "release-evidence-rag",
+    "difficulty": "easy",
+    "task": "Report the RELEASE ALPHA condition, BRAVO threshold, and CHARLIE retention period. Cite every source.",
+    "tokenBudget": 1024,
+    "documentCount": 3,
+    "totalSourceUtf8Bytes": 40989,
+    "documents": [
+      {
+        "sourceId": "release-source-1",
+        "title": "RAG passage export source 1",
+        "utf8Bytes": 13679,
+        "sha256": "sha256:e88c134ad761ef704e64adcdd46824704a9daa4d4a93d83d61ffab139b34f2a1",
+        "textRetainedInTrace": false
+      },
+      {
+        "sourceId": "release-source-2",
+        "title": "RAG passage export source 2",
+        "utf8Bytes": 13674,
+        "sha256": "sha256:93ea40754f16b3fdd54d102292d1d5c4c3194c734119d08f4fbe033861ddedb6",
+        "textRetainedInTrace": false
+      },
+      {
+        "sourceId": "release-source-3",
+        "title": "RAG passage export source 3",
+        "utf8Bytes": 13636,
+        "sha256": "sha256:b0daf3dbf42debfe411d47b250cbd0b4336f921fc63c6d094bbefbd565e3a3c8",
+        "textRetainedInTrace": false
+      }
+    ]
+  },
+  "traces": [
+    {
+      "path": "wso2-baseline",
+      "gatewayRoute": "/eval/baseline/v1/chat/completions",
+      "policies": [],
+      "request": {
+        "method": "POST",
+        "headers": {
+          "content-type": "application/json",
+          "x-api-key": "[REDACTED]"
+        },
+        "body": {
+          "model": "claude-haiku-4-5-20251001",
+          "temperature": 0,
+          "max_tokens": 220,
+          "stream": false,
+          "messages": [
+            {
+              "role": "system",
+              "content": {
+                "representation": "whole-source-context-redacted",
+                "sourceTextIncluded": false,
+                "sourceDocumentCount": 3,
+                "sourceUtf8Bytes": 40989,
+                "sourceDigests": [
+                  {
+                    "sourceId": "release-source-1",
+                    "sha256": "sha256:e88c134ad761ef704e64adcdd46824704a9daa4d4a93d83d61ffab139b34f2a1"
+                  },
+                  {
+                    "sourceId": "release-source-2",
+                    "sha256": "sha256:93ea40754f16b3fdd54d102292d1d5c4c3194c734119d08f4fbe033861ddedb6"
+                  },
+                  {
+                    "sourceId": "release-source-3",
+                    "sha256": "sha256:b0daf3dbf42debfe411d47b250cbd0b4336f921fc63c6d094bbefbd565e3a3c8"
+                  }
+                ]
+              }
+            },
+            {
+              "role": "user",
+              "content": "Report the RELEASE ALPHA condition, BRAVO threshold, and CHARLIE retention period. Cite every source."
+            }
+          ]
+        }
+      },
+      "response": {
+        "httpStatus": 200,
+        "evidenceHeaders": {},
+        "body": {
+          "answer": "# Release Configuration Report\n\n## RELEASE-1-ALPHA Condition\nRELEASE-1-ALPHA requires owner approval before the controlled action proceeds. [release-source-1]\n\n## RELEASE-1-BRAVO Threshold\nRELEASE-1-BRAVO sets the rollback threshold at 2 consecutive failures. [release-source-2]\n\n## RELEASE-1-CHARLIE Retention Period\nRELEASE-1-CHARLIE requires evidence retention for 30 days. [release-source-3]",
+          "answerSha256": "sha256:184f7bb3913749d7d10bd5d65274ae811fb7d4cb67779d3853e9f75bde018710",
+          "usage": {
+            "inputTokens": 28192,
+            "outputTokens": 118
+          }
+        },
+        "latencyMs": 2839,
+        "estimatedProviderCostUsd": "0.028782"
+      },
+      "evaluation": {
+        "requiredFactsAnsweredByDeterministicScorer": 3,
+        "requiredFactsTotal": 3,
+        "citationsResolvable": 3,
+        "expectedCitationLinksResolved": 3,
+        "expectedCitationLinksTotal": 3,
+        "prohibitedAssertions": [],
+        "contextMeasurements": {
+          "requiredEvidenceSpansPresent": 3,
+          "requiredEvidenceSpansTotal": 3,
+          "requiredSourceIdsRepresented": 3,
+          "requiredSourceIdsTotal": 3,
+          "contextStrategy": "whole-documents"
+        },
+        "humanAdjudication": {
+          "pathBlindedDuringReview": true,
+          "method": "Path-blinded deterministic semantic rubric: ALPHA requires owner approval plus controlled-action meaning; BRAVO requires the exact failure count plus failure and rollback/threshold meaning; CHARLIE requires the exact day count plus retention meaning.",
+          "responseId": "review_93fb05978e7515f29ed2451b",
+          "requiredFactsAnswered": 3,
+          "requiredFactsTotal": 3,
+          "verdicts": [
+            {
+              "id": "release-alpha",
+              "statement": "RELEASE-1-ALPHA requires owner approval before the controlled action proceeds.",
+              "sourceIds": [
+                "release-source-1"
+              ],
+              "verdict": "answered",
+              "basis": "requires both owner approval and controlled-action meaning"
+            },
+            {
+              "id": "release-bravo",
+              "statement": "RELEASE-1-BRAVO sets the rollback threshold at 2 consecutive failures.",
+              "sourceIds": [
+                "release-source-2"
+              ],
+              "verdict": "answered",
+              "basis": "requires 2 plus failure and rollback/threshold meaning"
+            },
+            {
+              "id": "release-charlie",
+              "statement": "RELEASE-1-CHARLIE requires evidence retention for 30 days.",
+              "sourceIds": [
+                "release-source-3"
+              ],
+              "verdict": "answered",
+              "basis": "requires 30 days plus retention meaning"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "path": "wso2-native-prompt-compressor",
+      "gatewayRoute": "/eval/native/v1/chat/completions",
+      "policies": [
+        {
+          "name": "promptCompressor",
+          "installedVersion": "0.9.0",
+          "attachmentVersion": "v0",
+          "parameters": {
+            "retainedRatio": 0.55
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "headers": {
+          "content-type": "application/json",
+          "x-api-key": "[REDACTED]"
+        },
+        "body": {
+          "model": "claude-haiku-4-5-20251001",
+          "temperature": 0,
+          "max_tokens": 220,
+          "stream": false,
+          "messages": [
+            {
+              "role": "system",
+              "content": {
+                "representation": "whole-source-context-redacted",
+                "sourceTextIncluded": false,
+                "sourceDocumentCount": 3,
+                "sourceUtf8Bytes": 40989,
+                "sourceDigests": [
+                  {
+                    "sourceId": "release-source-1",
+                    "sha256": "sha256:e88c134ad761ef704e64adcdd46824704a9daa4d4a93d83d61ffab139b34f2a1"
+                  },
+                  {
+                    "sourceId": "release-source-2",
+                    "sha256": "sha256:93ea40754f16b3fdd54d102292d1d5c4c3194c734119d08f4fbe033861ddedb6"
+                  },
+                  {
+                    "sourceId": "release-source-3",
+                    "sha256": "sha256:b0daf3dbf42debfe411d47b250cbd0b4336f921fc63c6d094bbefbd565e3a3c8"
+                  }
+                ]
+              }
+            },
+            {
+              "role": "user",
+              "content": "Report the RELEASE ALPHA condition, BRAVO threshold, and CHARLIE retention period. Cite every source."
+            }
+          ]
+        }
+      },
+      "response": {
+        "httpStatus": 200,
+        "evidenceHeaders": {},
+        "body": {
+          "answer": "# Release Management Report\n\n## RELEASE-1-ALPHA Condition\n**Approval** [release-source-1]\n\n## RELEASE-1-BRAVO Threshold\n**Authoritative** [release-source-2]\n\n## RELEASE-1-CHARLIE Retention Period\n**Retention** [release-source-3]\n\n---\n\n**Sources Cited:**\n- [release-source-1] RAG 1 RELEASE-1-ALPHA approval\n- [release-source-2] RAG Authoritative RELEASE-1-BRAVO\n- [release-source-3] RAG 3 RELEASE-1-CHARLIE retention",
+          "answerSha256": "sha256:edb2dbdfe7895e9d6791b0222d57ca38506959a23cf4f1557fe6dce7e3474162",
+          "usage": {
+            "inputTokens": 26305,
+            "outputTokens": 153
+          }
+        },
+        "latencyMs": 3420,
+        "estimatedProviderCostUsd": "0.027070"
+      },
+      "evaluation": {
+        "requiredFactsAnsweredByDeterministicScorer": 0,
+        "requiredFactsTotal": 3,
+        "citationsResolvable": 6,
+        "expectedCitationLinksResolved": 3,
+        "expectedCitationLinksTotal": 3,
+        "prohibitedAssertions": [],
+        "contextMeasurements": {
+          "requiredEvidenceSpansPresent": 3,
+          "requiredEvidenceSpansTotal": 3,
+          "requiredSourceIdsRepresented": 3,
+          "requiredSourceIdsTotal": 3,
+          "contextStrategy": "wso2-prompt-compressor-v0.9.0",
+          "policyAttachedInGateway": true,
+          "passageLevelCitationCapable": false,
+          "hardBudgetCompliant": null,
+          "sourceCoveragePercent": null,
+          "preInferenceMeasurementsAvailable": false,
+          "note": "Compression happens inside the gateway; spans measured here are pre-compression and are not what the provider received."
+        },
+        "humanAdjudication": {
+          "pathBlindedDuringReview": true,
+          "method": "Path-blinded deterministic semantic rubric: ALPHA requires owner approval plus controlled-action meaning; BRAVO requires the exact failure count plus failure and rollback/threshold meaning; CHARLIE requires the exact day count plus retention meaning.",
+          "responseId": "review_72b422436464e43ae80c2bfa",
+          "requiredFactsAnswered": 0,
+          "requiredFactsTotal": 3,
+          "verdicts": [
+            {
+              "id": "release-alpha",
+              "statement": "RELEASE-1-ALPHA requires owner approval before the controlled action proceeds.",
+              "sourceIds": [
+                "release-source-1"
+              ],
+              "verdict": "not_answered",
+              "basis": "requires both owner approval and controlled-action meaning"
+            },
+            {
+              "id": "release-bravo",
+              "statement": "RELEASE-1-BRAVO sets the rollback threshold at 2 consecutive failures.",
+              "sourceIds": [
+                "release-source-2"
+              ],
+              "verdict": "not_answered",
+              "basis": "requires 2 plus failure and rollback/threshold meaning"
+            },
+            {
+              "id": "release-charlie",
+              "statement": "RELEASE-1-CHARLIE requires evidence retention for 30 days.",
+              "sourceIds": [
+                "release-source-3"
+              ],
+              "verdict": "not_answered",
+              "basis": "requires 30 days plus retention meaning"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "path": "wso2-maha-context-compiler",
+      "gatewayRoute": "/eval/maha/v1/chat/completions",
+      "policies": [
+        {
+          "name": "interceptorService",
+          "installedVersion": "1.0.0",
+          "attachmentVersion": "v1",
+          "parameters": null
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "headers": {
+          "content-type": "application/json",
+          "x-api-key": "[REDACTED]",
+          "x-maha-interceptor-token": "[REDACTED_AND_STRIPPED_BEFORE_PROVIDER]"
+        },
+        "body": {
+          "model": "claude-haiku-4-5-20251001",
+          "temperature": 0,
+          "max_tokens": 220,
+          "stream": false,
+          "messages": [
+            {
+              "role": "system",
+              "content": {
+                "representation": "maha-context-placeholder",
+                "sourceTextIncluded": false
+              }
+            },
+            {
+              "role": "user",
+              "content": "Report the RELEASE ALPHA condition, BRAVO threshold, and CHARLIE retention period. Cite every source."
+            }
+          ],
+          "maha_context": {
+            "clientRequestId": "wso2_large_01",
+            "tokenBudget": 1024,
+            "documents": [
+              {
+                "sourceId": "release-source-1",
+                "title": "RAG passage export source 1",
+                "utf8Bytes": 13679,
+                "sha256": "sha256:e88c134ad761ef704e64adcdd46824704a9daa4d4a93d83d61ffab139b34f2a1",
+                "textRetainedInTrace": false
+              },
+              {
+                "sourceId": "release-source-2",
+                "title": "RAG passage export source 2",
+                "utf8Bytes": 13674,
+                "sha256": "sha256:93ea40754f16b3fdd54d102292d1d5c4c3194c734119d08f4fbe033861ddedb6",
+                "textRetainedInTrace": false
+              },
+              {
+                "sourceId": "release-source-3",
+                "title": "RAG passage export source 3",
+                "utf8Bytes": 13636,
+                "sha256": "sha256:b0daf3dbf42debfe411d47b250cbd0b4336f921fc63c6d094bbefbd565e3a3c8",
+                "textRetainedInTrace": false
+              }
+            ]
+          }
+        }
+      },
+      "response": {
+        "httpStatus": 200,
+        "evidenceHeaders": {
+          "x-maha-context-pack-id": "ctxpack_45b021c5a6964b9abfc82b5f95cf8510",
+          "x-maha-context-input-hash": "sha256:17283031e53e4a0310fc18aee6bb77644bdbd6fc6095506b88704863b26e0b7e",
+          "x-maha-context-output-hash": "sha256:726acfed4adb0d0314e4c78007e8d860e9a9acbb08f5270700a01cb348fd7354",
+          "x-maha-compiled-estimated-tokens": 725,
+          "x-maha-source-coverage-percent": 100,
+          "x-maha-included-passage-count": 26,
+          "x-maha-context-bypassed": false,
+          "x-maha-context-bypass-reason": "none"
+        },
+        "body": {
+          "answer": "# Release Configuration Report\n\n**RELEASE ALPHA Condition:** Owner approval is required before the controlled action proceeds. [release-source-1:2]\n\n**BRAVO Threshold:** The rollback threshold is set at 2 consecutive failures. [release-source-2:2]\n\n**CHARLIE Retention Period:** Evidence must be retained for 30 days. [release-source-3:2]",
+          "answerSha256": "sha256:f11bf10f573fed5c799b51d3f6de7a87a563d8a15a16639bb6cf5aa63b5d31bd",
+          "usage": {
+            "inputTokens": 967,
+            "outputTokens": 92
+          }
+        },
+        "latencyMs": 1242,
+        "estimatedProviderCostUsd": "0.001427"
+      },
+      "evaluation": {
+        "requiredFactsAnsweredByDeterministicScorer": 0,
+        "requiredFactsTotal": 3,
+        "citationsResolvable": 3,
+        "expectedCitationLinksResolved": 3,
+        "expectedCitationLinksTotal": 3,
+        "prohibitedAssertions": [],
+        "contextMeasurements": {
+          "requiredEvidenceSpansPresent": null,
+          "requiredEvidenceSpansTotal": 3,
+          "requiredSourceIdsRepresented": null,
+          "requiredSourceIdsTotal": 3,
+          "contextStrategy": "maha-context-compiler",
+          "compiledInGateway": true,
+          "passageLevelCitationCapable": true,
+          "preInferenceMeasurementsAvailable": true,
+          "packId": "ctxpack_45b021c5a6964b9abfc82b5f95cf8510",
+          "inputHash": "sha256:17283031e53e4a0310fc18aee6bb77644bdbd6fc6095506b88704863b26e0b7e",
+          "outputHash": "sha256:726acfed4adb0d0314e4c78007e8d860e9a9acbb08f5270700a01cb348fd7354",
+          "mahaEstimatedCompiledTokens": 725,
+          "sourceCoveragePercent": 100,
+          "includedPassageCount": 26,
+          "bypassApplied": false,
+          "bypassReason": "none",
+          "hardBudgetCompliant": true
+        },
+        "humanAdjudication": {
+          "pathBlindedDuringReview": true,
+          "method": "Path-blinded deterministic semantic rubric: ALPHA requires owner approval plus controlled-action meaning; BRAVO requires the exact failure count plus failure and rollback/threshold meaning; CHARLIE requires the exact day count plus retention meaning.",
+          "responseId": "review_b11f47c412ae980b969e3c6b",
+          "requiredFactsAnswered": 3,
+          "requiredFactsTotal": 3,
+          "verdicts": [
+            {
+              "id": "release-alpha",
+              "statement": "RELEASE-1-ALPHA requires owner approval before the controlled action proceeds.",
+              "sourceIds": [
+                "release-source-1"
+              ],
+              "verdict": "answered",
+              "basis": "requires both owner approval and controlled-action meaning"
+            },
+            {
+              "id": "release-bravo",
+              "statement": "RELEASE-1-BRAVO sets the rollback threshold at 2 consecutive failures.",
+              "sourceIds": [
+                "release-source-2"
+              ],
+              "verdict": "answered",
+              "basis": "requires 2 plus failure and rollback/threshold meaning"
+            },
+            {
+              "id": "release-charlie",
+              "statement": "RELEASE-1-CHARLIE requires evidence retention for 30 days.",
+              "sourceIds": [
+                "release-source-3"
+              ],
+              "verdict": "answered",
+              "basis": "requires 30 days plus retention meaning"
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "limitations": [
+    "The workload is synthetic and does not establish performance on customer data.",
+    "Request bodies are structural reconstructions with source text replaced by lengths and digests.",
+    "Prompt Compressor internal context is not observable at this measurement boundary.",
+    "Deterministic fact scoring can send semantically correct paraphrases to manual review.",
+    "One trace is illustrative; aggregate conclusions must use the complete frozen corpus."
+  ]
+}

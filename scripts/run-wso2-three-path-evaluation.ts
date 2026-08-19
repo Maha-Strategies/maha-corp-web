@@ -4,6 +4,10 @@ import { pathToFileURL } from 'node:url'
 
 import {
   WSO2_EVALUATION_PATHS,
+  WSO2_EVALUATION_MAX_OUTPUT_TOKENS,
+  WSO2_EVALUATION_MODEL,
+  WSO2_EVALUATION_PRICING,
+  WSO2_EVALUATION_TEMPERATURE,
   assertCheckpointMatches,
   authorizeNextCall,
   buildBlindedAdjudication,
@@ -51,12 +55,11 @@ import {
  * responses, and writes an artifact; it never opens a socket to a provider.
  */
 
-const MODEL = 'claude-haiku-4-5-20251001'
-// $1 / $5 per million, the assumption the single-workload evaluation recorded.
-const PRICING = { inputPerMillion: BigInt(1_000_000), outputPerMillion: BigInt(5_000_000) }
-const TEMPERATURE = 0
-const MAX_OUTPUT_TOKENS = 220
-const UPPER_BOUND_OUTPUT_TOKENS = MAX_OUTPUT_TOKENS
+const MODEL = WSO2_EVALUATION_MODEL
+const PRICING = WSO2_EVALUATION_PRICING
+const TEMPERATURE = WSO2_EVALUATION_TEMPERATURE
+const MAX_OUTPUT_TOKENS = WSO2_EVALUATION_MAX_OUTPUT_TOKENS
+const UPPER_BOUND_OUTPUT_TOKENS = WSO2_EVALUATION_MAX_OUTPUT_TOKENS
 
 /**
  * Placeholder used only in the non-executing modes, and long enough to satisfy

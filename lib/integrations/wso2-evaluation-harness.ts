@@ -17,6 +17,15 @@ export const WSO2_EVALUATION_PATHS = [
   'wso2-maha-context-compiler',
 ] as const
 
+/** Frozen provider boundary shared by the runner and reproduction contract. */
+export const WSO2_EVALUATION_MODEL = 'claude-haiku-4-5-20251001'
+export const WSO2_EVALUATION_TEMPERATURE = 0
+export const WSO2_EVALUATION_MAX_OUTPUT_TOKENS = 220
+export const WSO2_EVALUATION_PRICING = {
+  inputPerMillion: BigInt(1_000_000),
+  outputPerMillion: BigInt(5_000_000),
+}
+
 export type Wso2EvaluationPath = typeof WSO2_EVALUATION_PATHS[number]
 
 // --- Exact money ------------------------------------------------------------
