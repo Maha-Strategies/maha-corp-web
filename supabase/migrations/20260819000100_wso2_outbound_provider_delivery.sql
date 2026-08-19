@@ -4,6 +4,15 @@
 -- delivery requires two separate operator actions in the application:
 -- approving a draft, then confirming that exact draft's one-time send claim.
 
+-- The original CRM constraint used a doubled backslash in a standard
+-- PostgreSQL string, so ordinary addresses such as info@example.com were
+-- rejected. Keep the application and database validators aligned without
+-- relaxing the surrounding no-whitespace and single-@ requirements.
+alter table public.outbound_prospects drop constraint if exists outbound_prospects_contact_email_check;
+alter table public.outbound_prospects add constraint outbound_prospects_contact_email_check check (
+  contact_email is null or contact_email ~ '^[^[:space:]@]+@[^[:space:]@]+[.][^[:space:]@]+$'
+);
+
 alter table public.outbound_crm_events drop constraint if exists outbound_crm_events_action_check;
 alter table public.outbound_crm_events add constraint outbound_crm_events_action_check check (action in (
   'created','start_review','qualify','reject','draft_prepared','approve_draft',
