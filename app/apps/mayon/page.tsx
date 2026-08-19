@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { MAHA_ORGANIZATION_ID } from '@/lib/entity'
+import { APP_STORE_LINKS } from '@/lib/app-store-links'
 
 const pageUrl = 'https://www.mahastrategies.com/apps/mayon'
 
@@ -40,13 +41,14 @@ const faqJsonLd = {
 
 const appJsonLd = {
   '@context': 'https://schema.org',
-  '@type': 'WebApplication',
+  '@type': 'SoftwareApplication',
   name: 'Mayon',
   applicationCategory: 'EducationalApplication',
-  operatingSystem: 'Web',
+  operatingSystem: 'Web, iOS, Android',
   isAccessibleForFree: true,
-  url: 'https://mayonrajan.com',
-  sameAs: pageUrl,
+  url: APP_STORE_LINKS.mayon.web,
+  sameAs: [pageUrl, APP_STORE_LINKS.mayon.ios, APP_STORE_LINKS.mayon.android],
+  installUrl: [APP_STORE_LINKS.mayon.ios, APP_STORE_LINKS.mayon.android],
   publisher: { '@id': MAHA_ORGANIZATION_ID },
   description: 'A free educational interactive for exploring Mayon Volcano, its landscape, eruption history, and volcanology concepts.',
 }
@@ -62,7 +64,9 @@ export default function MayonDocumentationPage() {
         <p className="mt-7 max-w-3xl text-xl leading-relaxed text-zinc-300">Mayon is a free, true-scale volcano explorer that turns a remarkable landscape into a living lesson—through guided stories, historical places, explanatory interiors, and carefully framed hazard scenarios.</p>
 
         <section className="mt-12 flex flex-wrap gap-4" aria-label="Mayon links">
-          <a href="https://mayonrajan.com" target="_blank" rel="noreferrer" className="border border-cyan-500 bg-cyan-400 px-5 py-3 text-sm font-medium text-black transition hover:bg-cyan-200">Explore Mayon now ↗</a>
+          <a href={APP_STORE_LINKS.mayon.ios} target="_blank" rel="noreferrer" className="border border-white bg-white px-5 py-3 text-sm font-medium text-black transition hover:bg-zinc-200">Download on the App Store ↗</a>
+          <a href={APP_STORE_LINKS.mayon.android} target="_blank" rel="noreferrer" className="border border-cyan-500 bg-cyan-400 px-5 py-3 text-sm font-medium text-black transition hover:bg-cyan-200">Get it on Google Play ↗</a>
+          <a href={APP_STORE_LINKS.mayon.web} target="_blank" rel="noreferrer" className="border border-zinc-700 px-5 py-3 text-sm text-zinc-200 transition hover:border-cyan-500 hover:text-cyan-100">Open the web experience</a>
           <a href="https://mayonrajan.com/teachers/" target="_blank" rel="noreferrer" className="border border-zinc-700 px-5 py-3 text-sm text-zinc-200 transition hover:border-cyan-500 hover:text-cyan-100">Bring it to your classroom</a>
         </section>
 

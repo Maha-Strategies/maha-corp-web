@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import { APP_STORE_LINKS } from '@/lib/app-store-links'
 
 const pageUrl = 'https://www.mahastrategies.com/apps'
 
@@ -30,7 +31,9 @@ export default function AppsPage() {
             <p className="mt-4 max-w-2xl leading-relaxed text-zinc-400">A free, true-scale exploration of Mayon Volcano for learners, educators, and curious visitors. It combines terrain, historical chapters, explanatory interior diagrams, and clearly bounded hazard scenarios.</p>
             <div className="mt-6 flex flex-wrap gap-4 text-sm">
               <Link href="/apps/mayon" className="border border-cyan-700 px-4 py-2 text-cyan-100 transition hover:bg-cyan-900/40">Read the Mayon documentation</Link>
-              <a href="https://mayonrajan.com" className="px-4 py-2 text-cyan-100 underline" target="_blank" rel="noreferrer">Open the interactive</a>
+              <a href={APP_STORE_LINKS.mayon.ios} className="px-4 py-2 text-cyan-100 underline" target="_blank" rel="noreferrer">Download for iOS</a>
+              <a href={APP_STORE_LINKS.mayon.android} className="px-4 py-2 text-cyan-100 underline" target="_blank" rel="noreferrer">Get it for Android</a>
+              <a href={APP_STORE_LINKS.mayon.web} className="px-4 py-2 text-cyan-100 underline" target="_blank" rel="noreferrer">Open the web experience</a>
             </div>
           </article>
           <article className="border border-indigo-900/50 bg-indigo-950/10 p-7 sm:p-9">
@@ -39,17 +42,18 @@ export default function AppsPage() {
             <p className="mt-4 max-w-2xl leading-relaxed text-zinc-400">A local-first companion for focus and metabolic awareness. It is designed to minimize non-essential off-device telemetry and give your device a more intentional default.</p>
             <div className="mt-6 flex flex-wrap gap-4 text-sm">
               <Link href="/apps/maha-os" className="border border-indigo-700 px-4 py-2 text-indigo-100 transition hover:bg-indigo-900/40">Explore Maha OS</Link>
-              <a href="https://apps.apple.com/us/app/maha-os/id6778333838" className="px-4 py-2 text-indigo-100 underline" target="_blank" rel="noreferrer">Download for iOS</a>
-              <a href="https://play.google.com/store/apps/details?id=com.maha.os" className="px-4 py-2 text-indigo-100 underline" target="_blank" rel="noreferrer">Get it for Android</a>
+              <a href={APP_STORE_LINKS.mahaOs.ios} className="px-4 py-2 text-indigo-100 underline" target="_blank" rel="noreferrer">Download for iOS</a>
+              <a href={APP_STORE_LINKS.mahaOs.android} className="px-4 py-2 text-indigo-100 underline" target="_blank" rel="noreferrer">Get it for Android</a>
             </div>
           </article>
           <article className="border border-amber-900/50 bg-amber-950/10 p-7 sm:p-9">
             <p className="font-mono text-[10px] uppercase tracking-widest text-amber-200">[ The Imagined Life · companion app ]</p>
             <h2 className="mt-4 text-3xl font-light text-white">The Dream Engine</h2>
-            <p className="mt-4 max-w-2xl leading-relaxed text-zinc-400">Read <em>The Imagined Life</em>, then use a quiet, private practice for attention, reflection, and ordinary action. Available now on Google Play; App Store release is in preparation.</p>
+            <p className="mt-4 max-w-2xl leading-relaxed text-zinc-400">Read <em>The Imagined Life</em>, then use a quiet, private practice for attention, reflection, and ordinary action. Available now on iOS and Android.</p>
             <div className="mt-6 flex flex-wrap gap-4 text-sm">
               <Link href="/apps/the-engine" className="border border-amber-700 px-4 py-2 text-amber-100 transition hover:bg-amber-900/40">Explore The Dream Engine</Link>
-              <a href="https://play.google.com/store/apps/details?id=com.theimaginedlife.engine" className="px-4 py-2 text-amber-100 underline" target="_blank" rel="noreferrer">Get it on Google Play</a>
+              <a href={APP_STORE_LINKS.dreamEngine.ios} className="px-4 py-2 text-amber-100 underline" target="_blank" rel="noreferrer">Download for iOS</a>
+              <a href={APP_STORE_LINKS.dreamEngine.android} className="px-4 py-2 text-amber-100 underline" target="_blank" rel="noreferrer">Get it for Android</a>
             </div>
           </article>
         </div>

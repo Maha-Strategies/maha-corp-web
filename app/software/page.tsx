@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import { APP_STORE_LINKS } from '@/lib/app-store-links'
 
 export const metadata: Metadata = {
   title: 'Maha OS | Local-First Focus and Awareness App',
@@ -135,7 +136,8 @@ export default function SoftwarePage() {
                 <p className="mt-3 text-sm leading-relaxed text-zinc-400">Read, practice, and keep a private archive for attention, reflection, and ordinary action.</p>
                 <div className="mt-5 flex flex-wrap gap-4 text-sm">
                   <Link href="/apps/the-engine" className="text-amber-100 underline">Explore the app</Link>
-                  <a href="https://play.google.com/store/apps/details?id=com.theimaginedlife.engine" target="_blank" rel="noopener noreferrer" className="text-amber-100 underline">Google Play ↗</a>
+                  <a href={APP_STORE_LINKS.dreamEngine.ios} target="_blank" rel="noopener noreferrer" className="text-amber-100 underline">App Store ↗</a>
+                  <a href={APP_STORE_LINKS.dreamEngine.android} target="_blank" rel="noopener noreferrer" className="text-amber-100 underline">Google Play ↗</a>
                 </div>
               </article>
               <article className="border border-cyan-900/60 bg-cyan-950/10 p-5">
@@ -144,7 +146,9 @@ export default function SoftwarePage() {
                 <p className="mt-3 text-sm leading-relaxed text-zinc-400">A free, true-scale interactive field trip through Mayon Volcano, its history, landscape, and volcanology.</p>
                 <div className="mt-5 flex flex-wrap gap-4 text-sm">
                   <Link href="/apps/mayon" className="text-cyan-100 underline">Explore the app</Link>
-                  <a href="https://mayonrajan.com" target="_blank" rel="noopener noreferrer" className="text-cyan-100 underline">Open Mayon ↗</a>
+                  <a href={APP_STORE_LINKS.mayon.ios} target="_blank" rel="noopener noreferrer" className="text-cyan-100 underline">App Store ↗</a>
+                  <a href={APP_STORE_LINKS.mayon.android} target="_blank" rel="noopener noreferrer" className="text-cyan-100 underline">Google Play ↗</a>
+                  <a href={APP_STORE_LINKS.mayon.web} target="_blank" rel="noopener noreferrer" className="text-cyan-100 underline">Web ↗</a>
                 </div>
               </article>
             </div>

@@ -1,9 +1,10 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { MAHA_ORGANIZATION_ID } from '@/lib/entity'
+import { APP_STORE_LINKS } from '@/lib/app-store-links'
 
 const pageUrl = 'https://www.mahastrategies.com/apps/the-engine'
-const googlePlayUrl = 'https://play.google.com/store/apps/details?id=com.theimaginedlife.engine'
+const { ios: appStoreUrl, android: googlePlayUrl } = APP_STORE_LINKS.dreamEngine
 
 export const metadata: Metadata = {
   title: 'The Dream Engine | Read, Practice, Archive',
@@ -24,7 +25,7 @@ const appJsonLd = {
   applicationCategory: 'LifestyleApplication',
   operatingSystem: 'iOS, Android',
   url: pageUrl,
-  installUrl: googlePlayUrl,
+  installUrl: [appStoreUrl, googlePlayUrl],
   publisher: { '@id': MAHA_ORGANIZATION_ID },
   description: 'A companion app to The Imagined Life, combining the complete book with a private practice for attention, reflection, and action.',
 }
@@ -39,11 +40,11 @@ export default function TheDreamEnginePage() {
         <p className="mt-7 max-w-3xl text-xl leading-relaxed text-zinc-300">The Dream Engine brings the complete text of <em>The Imagined Life: Living Inside a Dreaming Brain</em> together with a deliberately modest, private practice for attention, reflection, and action.</p>
 
         <section className="mt-12 flex flex-wrap gap-4" aria-label="The Dream Engine links">
+          <a href={appStoreUrl} target="_blank" rel="noreferrer" className="border border-white bg-white px-5 py-3 text-sm font-medium text-black transition hover:bg-zinc-200">Download on the App Store ↗</a>
           <a href={googlePlayUrl} target="_blank" rel="noreferrer" className="border border-amber-300 bg-amber-200 px-5 py-3 text-sm font-medium text-black transition hover:bg-amber-100">Get it on Google Play ↗</a>
-          <a href="mailto:mayone@mahastrategies.com?subject=The%20Dream%20Engine%20iOS%20release%20updates" className="border border-zinc-700 px-5 py-3 text-sm text-zinc-200 transition hover:border-amber-300 hover:text-amber-100">Get iOS release updates</a>
           <Link href="/apps/the-engine/privacy" className="border border-zinc-700 px-5 py-3 text-sm text-zinc-200 transition hover:border-amber-300 hover:text-amber-100">Read the privacy policy</Link>
         </section>
-        <p className="mt-5 text-sm text-zinc-500">Now available on Google Play. App Store release is in preparation.</p>
+        <p className="mt-5 text-sm text-zinc-500">Now available on the App Store and Google Play.</p>
 
         <section className="mt-14 border border-amber-900/40 bg-amber-950/10 p-7 sm:p-9">
           <p className="max-w-3xl text-2xl font-light leading-relaxed text-amber-50">“Imagination is not magic. It changes the dreamer, and the dreamer changes what happens next.”</p>

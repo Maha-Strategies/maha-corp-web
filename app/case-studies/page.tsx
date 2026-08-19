@@ -54,7 +54,7 @@ const studies = [
     title: 'Apps: useful defaults, documented boundaries',
     summary: 'Maha Strategies publishes public documentation for Mayon, Maha OS, and The Dream Engine. The products are designed around understandable scope, user agency, and public privacy information rather than opaque data collection as a default.',
     live: [
-      'Maha OS is available on iOS and Android; The Dream Engine is available on Google Play; Mayon is live on the web with mobile releases in preparation.',
+      'Maha OS, The Dream Engine, and Mayon are available on iOS and Android; Mayon also remains available as a public web experience.',
       'Each product has a public description, support route, and privacy documentation or stated data boundary that visitors can inspect before they use it.',
     ],
     boundary: 'Privacy-conscious does not mean that no data can ever leave a device. Product-specific documentation explains the relevant limits, and user-initiated features or third-party platforms have their own terms and practices.',

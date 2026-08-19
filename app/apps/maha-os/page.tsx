@@ -1,10 +1,10 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { MAHA_ORGANIZATION_ID } from '@/lib/entity'
+import { APP_STORE_LINKS } from '@/lib/app-store-links'
 
 const pageUrl = 'https://www.mahastrategies.com/apps/maha-os'
-const appStoreUrl = 'https://apps.apple.com/us/app/maha-os/id6778333838'
-const googlePlayUrl = 'https://play.google.com/store/apps/details?id=com.maha.os'
+const { ios: appStoreUrl, android: googlePlayUrl } = APP_STORE_LINKS.mahaOs
 
 export const metadata: Metadata = {
   title: 'Maha OS | A Local-First App for Focus and Awareness',
