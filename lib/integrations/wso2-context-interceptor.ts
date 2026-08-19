@@ -1,12 +1,14 @@
 import { createHash, createHmac, timingSafeEqual } from 'node:crypto'
 
-import { compileContextPack, parseContextPackRequest } from '../context-compiler.ts'
+import { compileContextPack, estimateTokens, parseContextPackRequest, sha256, type ContextPackRequest } from '../context-compiler.ts'
 
-export const WSO2_CONTEXT_INTERCEPTOR_VERSION = '2026-08-14'
+export const WSO2_CONTEXT_INTERCEPTOR_VERSION = '2026-08-16'
 export const WSO2_CONTEXT_EXTENSION = 'maha_context'
 export const WSO2_CONTEXT_PLACEHOLDER = '{{MAHA_CONTEXT_PACK}}'
 export const WSO2_INTERCEPTOR_TOKEN_HEADER = 'x-maha-wso2-interceptor-token'
 export const MAX_WSO2_OPENAI_BODY_BYTES = 512_000
+/** Below this model-neutral estimate, compiler framing is more likely to add cost than remove it. */
+export const WSO2_CONTEXT_MINIMUM_COMPILE_TOKENS = 1_024
 
 type StringMap = Record<string, string>
 
@@ -21,6 +23,9 @@ const EVIDENCE_FIELDS = [
   'estimatedReductionPercent',
   'sourceCoveragePercent',
   'includedPassageCount',
+  'bypassApplied',
+  'bypassReason',
+  'minimumCompileTokens',
 ] as const
 
 const EVIDENCE_SEAL_FIELD = 'evidenceSeal'
@@ -117,6 +122,12 @@ function replaceContextPlaceholder(messages: unknown[], context: string): unknow
   return rewritten
 }
 
+function wholeDocumentContext(request: ContextPackRequest): string {
+  return request.documents
+    .map((document) => `[${document.id}] ${document.title ?? ''}\n${document.text}`)
+    .join('\n\n')
+}
+
 /**
  * Apply Maha's Context Compiler to an exact WSO2 Interceptor Service v1 request.
  *
@@ -173,8 +184,20 @@ export function handleWso2ContextRequest(
   }
 
   try {
-    const compilation = compileContextPack(parseContextPackRequest(upstreamBody[WSO2_CONTEXT_EXTENSION]))
-    const messages = replaceContextPlaceholder(upstreamBody.messages, compilation.context)
+    const request = parseContextPackRequest(upstreamBody[WSO2_CONTEXT_EXTENSION])
+    const compilation = compileContextPack(request)
+    const originalContext = wholeDocumentContext(request)
+    const originalContextTokens = estimateTokens(originalContext)
+    const compiledContextTokens = estimateTokens(compilation.context)
+    const bypassReason = originalContextTokens < WSO2_CONTEXT_MINIMUM_COMPILE_TOKENS
+      ? 'below_minimum_size'
+      : compiledContextTokens >= originalContextTokens
+        ? 'non_expansion_guard'
+        : 'none'
+    const bypassApplied = bypassReason !== 'none'
+    const selectedContext = bypassApplied ? originalContext : compilation.context
+    const selectedTokens = bypassApplied ? originalContextTokens : compiledContextTokens
+    const messages = replaceContextPlaceholder(upstreamBody.messages, selectedContext)
     const upstream = { ...upstreamBody }
     delete upstream[WSO2_CONTEXT_EXTENSION]
     const rewritten = JSON.stringify({ ...upstream, messages })
@@ -183,13 +206,16 @@ export function handleWso2ContextRequest(
       version: WSO2_CONTEXT_INTERCEPTOR_VERSION,
       packId: compilation.packId,
       inputHash: compilation.inputHash,
-      outputHash: compilation.outputHash,
-      originalEstimatedTokens: String(compilation.metrics.originalEstimatedTokens),
-      compiledEstimatedTokens: String(compilation.metrics.compiledEstimatedTokens),
-      tokensSaved: String(compilation.metrics.tokensSaved),
-      estimatedReductionPercent: String(compilation.metrics.estimatedReductionPercent),
-      sourceCoveragePercent: String(compilation.metrics.sourceCoveragePercent),
-      includedPassageCount: String(compilation.includedPassages.length),
+      outputHash: sha256(selectedContext),
+      originalEstimatedTokens: String(originalContextTokens),
+      compiledEstimatedTokens: String(selectedTokens),
+      tokensSaved: String(Math.max(0, originalContextTokens - selectedTokens)),
+      estimatedReductionPercent: String(originalContextTokens === 0 ? 0 : Math.max(0, Number((((originalContextTokens - selectedTokens) / originalContextTokens) * 100).toFixed(1)))),
+      sourceCoveragePercent: String(bypassApplied ? 100 : compilation.metrics.sourceCoveragePercent),
+      includedPassageCount: String(bypassApplied ? 0 : compilation.includedPassages.length),
+      bypassApplied: String(bypassApplied),
+      bypassReason,
+      minimumCompileTokens: String(WSO2_CONTEXT_MINIMUM_COMPILE_TOKENS),
     }
 
     return {
@@ -233,6 +259,9 @@ export function handleWso2ContextResponse(
       'x-maha-estimated-reduction-percent': evidence.estimatedReductionPercent,
       'x-maha-source-coverage-percent': evidence.sourceCoveragePercent,
       'x-maha-included-passage-count': evidence.includedPassageCount,
+      'x-maha-context-bypassed': evidence.bypassApplied,
+      'x-maha-context-bypass-reason': evidence.bypassReason,
+      'x-maha-minimum-compile-tokens': evidence.minimumCompileTokens,
       'x-maha-zero-data-retention': 'true',
       'x-maha-wso2-contract-version': evidence.version,
     },
