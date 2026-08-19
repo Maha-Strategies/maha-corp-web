@@ -20,6 +20,25 @@ export type OfferDiscoveryContract = {
   /** Example success body. Must validate against `outputSchema`. */
   output: Record<string, unknown>
   outputSchema: JsonSchema
+  /**
+   * Headers a payer must send, and how to compute them.
+   *
+   * Separate from `inputSchema` because that is a JSON Schema for the body: an
+   * unrecognised keyword there documents nothing and breaks validation of the
+   * example beside it. Optional, because only offers with a pre-settlement
+   * claim need one.
+   *
+   * Published because it was not. A required header whose computation lives
+   * only in server code is not a contract -- a payer cannot derive it, and on
+   * the MPS audit getting it wrong cost a full settlement with no job.
+   */
+  requiredHeaders?: Record<string, {
+    /** Exactly what is hashed, in the payer's terms. */
+    preimage: string
+    algorithm: string
+    format: string
+    notes?: string
+  }>
 }
 
 const SHA256_PATTERN = '^sha256:[a-f0-9]{64}$'
@@ -377,15 +396,46 @@ export const DEEP_CONTEXT_EVALUATION_DISCOVERY: OfferDiscoveryContract = {
 // ---------------------------------------------------------------------------
 
 export const MPS_AUTONOMOUS_AUDIT_DISCOVERY: OfferDiscoveryContract = {
+  // The preimage, published because it was not.
+  //
+  // A payer must send x-maha-input-hash, the admission claim is taken against
+  // it *before* the body is read, and the route then refuses a body that does
+  // not reproduce it -- after settlement. So a payer who hashed the wrong
+  // thing paid in full and received nothing, and could not have known what to
+  // hash: the preimage lived only in server code. That is what happened on
+  // 2026-08-12. A required header whose computation is unpublished is not a
+  // contract.
+  // The preimage, published because it was not.
+  //
+  // A payer must send x-maha-input-hash, the admission claim is taken against
+  // it *before* the body is read, and the route then refuses a body that does
+  // not reproduce it -- after settlement. So a payer who hashed the wrong thing
+  // paid in full and received nothing, and could not have known what to hash:
+  // the preimage lived only in server code. That is what happened on
+  // 2026-08-12. A required header whose computation is unpublished is not a
+  // contract.
+  //
+  // A sibling of inputSchema rather than a key inside it: inputSchema is a JSON
+  // Schema, and an unrecognised keyword there does not document a header, it
+  // breaks validation of the very example it sits beside.
+  requiredHeaders: {
+    'x-maha-input-hash': {
+      preimage: 'the text field alone, UTF-8, exactly as sent',
+      algorithm: 'sha256',
+      format: 'sha256:<64 lowercase hex>',
+      notes: 'Not the request body, not the JSON envelope, not text plus clientRequestId. Hash the passage string and nothing else.',
+    },
+  },
   input: MPS_AUDIT_EXAMPLE_INPUT,
   inputSchema: {
     type: 'object',
     additionalProperties: false,
     properties: {
       clientRequestId: { type: 'string', minLength: 8, maxLength: 120, description: 'Caller trace ID. Replaying it returns the same audit rather than charging again.' },
-      text: { type: 'string', minLength: 1, maxLength: 6000, description: 'Nonfiction passage to triage. Transient; only its hash is retained.' },
+      text: { type: 'string', minLength: 1, maxLength: 6000, description: 'Nonfiction passage to triage. Transient; only its hash is retained. The x-maha-input-hash header is sha256 of THIS FIELD ALONE, not of the request body: "sha256:" + hex(sha256(utf8(text))).' },
     },
     required: ['clientRequestId', 'text'],
+
   },
   output: MPS_AUDIT_EXAMPLE_OUTPUT,
   outputSchema: {

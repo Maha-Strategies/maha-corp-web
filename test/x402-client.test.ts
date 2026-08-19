@@ -269,3 +269,37 @@ test('amounts are shown to people in the asset, not in base units', () => {
   assert.equal(formatAmount({ ...REQUIREMENT, amount: '1500000' }), '1.5 USDC')
   assert.equal(formatAmount({ ...REQUIREMENT, amount: '2000000' }), '2 USDC')
 })
+
+test('a 409 is reported by its code, so a hash mismatch is not called a spent payment', async () => {
+  // The mislabelling that misdirected the 2026-08-12 investigation. The route
+  // returns 409 for several unrelated conditions; the client flattened them all
+  // to "this authorization has been spent", so a payer whose body hash
+  // disagreed was told their money was gone. It was, but for a reason they
+  // could act on -- and the message hid it.
+  const cases = [
+    ['input_hash_mismatch', /hash/i],
+    ['idempotency_key_mismatch', /idempotency/i],
+    ['idempotency_conflict', /idempotency/i],
+  ] as const
+
+  for (const [code, expected] of cases) {
+    const { impl } = server({ onPaid: () => new Response(JSON.stringify({ error: { code } }), { status: 409 }) })
+    const paidFetch = createPaidFetch({ signTypedData: signer, address: ADDRESS, chainId: 84532, fetchImpl: impl })
+    const error = await paidFetch('https://maha.test/api/v1/compress').then(() => null, (e) => e as X402PaymentError)
+
+    assert.equal(error?.code, code, `${code} must survive to the caller`)
+    assert.notEqual(error?.code, 'payment_already_used')
+    assert.match(error!.message, expected)
+    // Still true, and still worth saying: the money did move.
+    assert.equal(error?.settled, true)
+  }
+})
+
+test('an unrecognised 409 still reports a spent authorization', async () => {
+  // The default has to stay conservative: an unknown conflict after signing is
+  // more likely a spent payment than a recoverable input error.
+  const { impl } = server({ onPaid: () => new Response(JSON.stringify({ error: { code: 'something_new' } }), { status: 409 }) })
+  const paidFetch = createPaidFetch({ signTypedData: signer, address: ADDRESS, chainId: 84532, fetchImpl: impl })
+  const error = await paidFetch('https://maha.test/api/v1/compress').then(() => null, (e) => e as X402PaymentError)
+  assert.equal(error?.code, 'payment_already_used')
+})

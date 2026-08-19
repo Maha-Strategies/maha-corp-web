@@ -3,6 +3,7 @@ import test from 'node:test'
 
 import {
   acceptPayment,
+  paymentId,
   buildPaymentRequired,
   matchRequirement,
   matchesPaymentContext,
@@ -45,7 +46,7 @@ function facilitator(overrides: Partial<PaymentFacilitator> = {}): PaymentFacili
   }
 }
 
-function guard(seen: Set<string> = new Set()): ReplayGuard {
+function guard_(seen: Set<string> = new Set()): ReplayGuard {
   return {
     claim: async ({ paymentId }) => (seen.has(paymentId) ? 'duplicate' : (seen.add(paymentId), 'claimed')),
     recordSettlement: async () => undefined,
@@ -118,7 +119,7 @@ test('the v2 resource and Bazaar declaration cannot be rewritten by the payer', 
 
 test('a verified payment of the full amount is accepted', async () => {
   const result = await acceptPayment({
-    payment: payment(), requirements: [requirement()], facilitator: facilitator(), replayGuard: guard(),
+    payment: payment(), requirements: [requirement()], facilitator: facilitator(), replayGuard: guard_(),
   })
   assert.equal(result.ok, true)
   if (result.ok) assert.equal(result.transaction, 'tx_1')
@@ -138,7 +139,7 @@ test('the price is enforced by what is sent to the facilitator, not checked afte
     },
   })
   await acceptPayment({
-    payment: payment(), requirements: [requirement({ amount: '1000' })], facilitator: watching, replayGuard: guard(),
+    payment: payment(), requirements: [requirement({ amount: '1000' })], facilitator: watching, replayGuard: guard_(),
   })
   assert.deepEqual(seen, ['1000'])
 })
@@ -150,7 +151,7 @@ test('a facilitator rejection is the underpayment refusal, and never settles', a
     settle: async () => { settled = true; return { ok: true, payer: '0xAgent', transaction: 'tx_2' } },
   })
   const result = await acceptPayment({
-    payment: payment(), requirements: [requirement({ amount: '1000' })], facilitator: short, replayGuard: guard(),
+    payment: payment(), requirements: [requirement({ amount: '1000' })], facilitator: short, replayGuard: guard_(),
   })
   assert.equal(result.ok, false)
   if (!result.ok) {
@@ -162,7 +163,7 @@ test('a facilitator rejection is the underpayment refusal, and never settles', a
 
 test('the amount recorded is the price that was demanded', async () => {
   const result = await acceptPayment({
-    payment: payment(), requirements: [requirement({ amount: '1000' })], facilitator: facilitator(), replayGuard: guard(),
+    payment: payment(), requirements: [requirement({ amount: '1000' })], facilitator: facilitator(), replayGuard: guard_(),
   })
   assert.equal(result.ok, true)
   if (result.ok) assert.equal(result.amountPaid, '1000')
@@ -172,7 +173,7 @@ test('a payment cannot be spent twice', async () => {
   // A payment payload is a bearer instrument. Without this, one payment buys
   // unlimited calls.
   const seen = new Set<string>()
-  const replayGuard = guard(seen)
+  const replayGuard = guard_(seen)
   const first = await acceptPayment({ payment: payment(), requirements: [requirement()], facilitator: facilitator(), replayGuard })
   const second = await acceptPayment({ payment: payment(), requirements: [requirement()], facilitator: facilitator(), replayGuard })
   assert.equal(first.ok, true)
@@ -188,7 +189,7 @@ test('a replayed payment is never settled a second time', async () => {
   const counting = facilitator({
     settle: async (p, r) => { settlements.push(r.amount); return { ok: true, payer: '0xA', transaction: 'tx_3', amountPaid: '1000' } },
   })
-  const replayGuard = guard()
+  const replayGuard = guard_()
   await acceptPayment({ payment: payment(), requirements: [requirement()], facilitator: counting, replayGuard })
   await acceptPayment({ payment: payment(), requirements: [requirement()], facilitator: counting, replayGuard })
   assert.equal(settlements.length, 1)
@@ -201,7 +202,7 @@ test('a failed verification never reaches settlement or claims an identifier', a
     verify: async () => ({ ok: false, reason: 'signature_invalid' }),
     settle: async () => { settled = true; return { ok: true, payer: '0xA', transaction: 'tx_4', amountPaid: '1000' } },
   })
-  const result = await acceptPayment({ payment: payment(), requirements: [requirement()], facilitator: rejecting, replayGuard: guard(seen) })
+  const result = await acceptPayment({ payment: payment(), requirements: [requirement()], facilitator: rejecting, replayGuard: guard_(seen) })
   assert.equal(result.ok, false)
   if (!result.ok) assert.equal(result.reason, 'signature_invalid')
   assert.equal(settled, false)
@@ -235,4 +236,105 @@ test('a ledger that cannot answer is not reported as a replay', async () => {
   // Nothing settled, so the payer keeps their authorization and the retry is
   // genuinely free rather than a second charge.
   assert.equal(settled, false)
+})
+
+// --- The 2026-08-12 Mainnet failure ----------------------------------------
+//
+// One settlement of 100000 base units confirmed on chain, a settled admission,
+// and no job. Every test below is free: fakes only, no chain, no money.
+
+function admission(overrides: Record<string, unknown> = {}) {
+  const calls = { reserve: 0, settled: 0, released: 0 }
+  return {
+    calls,
+    guard: {
+      reserve: async () => {
+        calls.reserve += 1
+        return (overrides.reserve as never) ?? { kind: 'proceed' as const }
+      },
+      settled: async () => { calls.settled += 1 },
+      released: async () => { calls.released += 1 },
+    },
+  }
+}
+
+test('a re-presented authorization for an already-paid request returns the original transaction', async () => {
+  // The recovery path, previously unreachable: the replay guard refused the
+  // authorization as a duplicate before the admission ledger was ever asked.
+  const seen = new Set([await paymentId(payment())])
+  const { calls, guard } = admission({ reserve: { kind: 'already_paid', transaction: 'tx_original' } })
+
+  const result = await acceptPayment({
+    payment: payment(),
+    requirements: [requirement()],
+    facilitator: facilitator({
+      settle: async () => { throw new Error('settle must never run during recovery') },
+    }),
+    replayGuard: guard_(seen),
+    admissionGuard: guard,
+  })
+
+  assert.equal(result.ok, true)
+  if (result.ok) {
+    assert.equal(result.transaction, 'tx_original')
+    assert.equal(result.replayed, true)
+  }
+  assert.equal(calls.reserve, 1, 'the admission ledger must be consulted first')
+  assert.equal(calls.settled, 0, 'recovery settles nothing')
+})
+
+test('a reused authorization under a different logical request is still rejected', async () => {
+  // The replay guard has to keep working. Reordering must not turn a spent
+  // signature into a second free request.
+  const seen = new Set([await paymentId(payment())])
+  const { guard } = admission()
+
+  const result = await acceptPayment({
+    payment: payment(),
+    requirements: [requirement()],
+    facilitator: facilitator({
+      settle: async () => { throw new Error('a duplicate authorization must never settle') },
+    }),
+    replayGuard: guard_(seen),
+    admissionGuard: guard,
+  })
+
+  assert.equal(result.ok, false)
+  if (!result.ok) {
+    assert.equal(result.status, 409)
+    assert.equal(result.reason, 'payment_already_used')
+  }
+})
+
+test('the reservation taken before a rejected replay is released', async () => {
+  // Without this, a replayed authorization under a fresh idempotency key
+  // strands an in_progress admission that nothing clears, and the replay
+  // defence becomes a denial of service against the payer's own key.
+  const seen = new Set([await paymentId(payment())])
+  const { calls, guard } = admission()
+
+  await acceptPayment({
+    payment: payment(),
+    requirements: [requirement()],
+    facilitator: facilitator(),
+    replayGuard: guard_(seen),
+    admissionGuard: guard,
+  })
+
+  assert.equal(calls.reserve, 1)
+  assert.equal(calls.released, 1, 'the reservation must not be left in_progress')
+  assert.equal(calls.settled, 0)
+})
+
+test('an unavailable replay ledger also releases the reservation', async () => {
+  // The same leak by a different door.
+  const { calls, guard } = admission()
+  await acceptPayment({
+    payment: payment(),
+    requirements: [requirement()],
+    facilitator: facilitator(),
+    replayGuard: { claim: async () => 'unavailable', recordSettlement: async () => undefined },
+    admissionGuard: guard,
+  })
+  assert.equal(calls.released, 1)
 })
