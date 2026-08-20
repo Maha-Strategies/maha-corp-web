@@ -18,6 +18,16 @@ const APPROVED_UNAPPLIED_AMENDMENTS = [{
   baseSha256: 'abfcf2b1bfeeb8bd6f8b8e531d4d0331a496584a5af2f32b0a6466489477325c',
   currentSha256: 'fe9bccae4f26fec49275d83660861d4b2ab57b8a6e6911134720d3e2df92c08a',
   evidence: 'https://github.com/Maha-Strategies/maha-corp-web/actions/runs/31473349855',
+}, {
+  // Run 32224409228 proves the first Preview application stopped before the
+  // seed block completed because the pre-existing CRM email constraint rejected
+  // an ordinary public business address. Production had not applied this
+  // migration. The amendment repairs that constraint before replaying the
+  // otherwise-idempotent migration; further byte changes remain forbidden.
+  name: '20260819000100_wso2_outbound_provider_delivery.sql',
+  baseSha256: '829d265c6d5d36402ac9a25edbfce131a5bdd01e5637d44d6720d0b97b53084c',
+  currentSha256: 'c1464987864bc38ae832039b88c9a9145ff0c0974ef6ffa6d872e09aabec1839',
+  evidence: 'https://github.com/Maha-Strategies/maha-corp-web/actions/runs/32224409228',
 }] as const
 
 // Run 31474467637 proved that these Maha OS objects already exist in the

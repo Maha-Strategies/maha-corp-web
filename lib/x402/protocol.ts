@@ -381,26 +381,47 @@ export async function acceptPayment(input: {
   if (!verified.ok) return { ok: false, status: 402, reason: verified.reason }
 
   const id = await paymentId(input.payment)
-  const claimed = await input.replayGuard.claim({ paymentId: id, payer: verified.payer })
-  // Nothing has settled yet, so a refusal here costs the payer nothing -- they
-  // still hold their signed authorization and can present it again.
-  if (claimed === 'unavailable') return { ok: false, status: 503, reason: 'x402_ledger_unavailable' }
-  if (claimed === 'duplicate') return { ok: false, status: 409, reason: 'payment_already_used' }
 
-  // The idempotency claim, taken before settlement and after verification --
-  // the only window where the payer is known and no money has moved. A retry
-  // of a logical request that already settled returns the original
-  // transaction here and never reaches `settle`.
+  // The admission ledger is consulted *before* the replay guard, and the order
+  // is the fix rather than a detail.
+  //
+  // The two guards answer different questions. The replay guard is keyed on the
+  // signed authorization: has this signature been spent? The admission ledger
+  // is keyed on the logical request: has this idempotency key already been paid
+  // for? Asking the replay guard first meant a payer re-presenting their own
+  // authorization to recover a request they had already paid for was refused as
+  // a duplicate payment, and the recovery path below -- which exists precisely
+  // for them -- was unreachable by the only client that needs it.
   const admission = input.admissionGuard
     ? await input.admissionGuard.reserve({ payer: verified.payer })
     : { kind: 'proceed' as const }
 
+  // Recovery. Returns the original transaction and never reaches `settle`, so
+  // no second payment can be taken for a request that already has one.
   if (admission.kind === 'already_paid') {
     return { ok: true, payer: verified.payer, transaction: admission.transaction, amountPaid: requirement.amount, replayed: true }
   }
   if (admission.kind === 'conflict') return { ok: false, status: 409, reason: 'idempotency_key_reused_with_different_request' }
   if (admission.kind === 'in_progress') return { ok: false, status: 409, reason: 'request_already_in_progress' }
   if (admission.kind === 'unavailable') return { ok: false, status: 503, reason: 'x402_ledger_unavailable' }
+
+  const claimed = await input.replayGuard.claim({ paymentId: id, payer: verified.payer })
+  // Nothing has settled yet, so a refusal here costs the payer nothing -- they
+  // still hold their signed authorization and can present it again.
+  //
+  // The reservation taken moments ago must be released on both failure paths.
+  // Reserving first and then refusing the authorization would otherwise strand
+  // an `in_progress` admission that nothing ever clears: a replayed
+  // authorization under a *fresh* idempotency key would permanently lock that
+  // key, turning a replay defence into a denial of service against the payer.
+  if (claimed === 'unavailable') {
+    await input.admissionGuard?.released({ payer: verified.payer })
+    return { ok: false, status: 503, reason: 'x402_ledger_unavailable' }
+  }
+  if (claimed === 'duplicate') {
+    await input.admissionGuard?.released({ payer: verified.payer })
+    return { ok: false, status: 409, reason: 'payment_already_used' }
+  }
 
   const settled = await input.facilitator.settle(input.payment, requirement)
   if (!settled.ok) {

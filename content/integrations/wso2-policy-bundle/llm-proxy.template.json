@@ -1,0 +1,45 @@
+{
+  "apiVersion": "gateway.api-platform.wso2.com/v1alpha1",
+  "kind": "LlmProxy",
+  "metadata": {
+    "nameFromEnv": "WSO2_PROXY_NAME"
+  },
+  "spec": {
+    "displayName": "Maha Context Compiler",
+    "provider": {
+      "idFromEnv": "WSO2_PROVIDER_ID"
+    },
+    "contextFromEnv": "WSO2_PROXY_CONTEXT",
+    "version": "v1",
+    "policies": [
+      {
+        "name": "interceptor-service",
+        "version": "v1",
+        "paths": [
+          {
+            "path": "/v1/chat/completions",
+            "methods": ["POST"],
+            "params": {
+              "endpointFromEnv": "MAHA_INTERCEPTOR_BASE",
+              "request": {
+                "includeRequestHeaders": true,
+                "includeRequestBody": true,
+                "passthroughOnError": false
+              },
+              "response": {
+                "includeRequestHeaders": false,
+                "includeRequestBody": false,
+                "includeResponseHeaders": false,
+                "includeResponseBody": false,
+                "passthroughOnError": false
+              },
+              "timeoutMillis": 20000,
+              "tlsSkipVerify": false,
+              "maxResponseSize": 1048576
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

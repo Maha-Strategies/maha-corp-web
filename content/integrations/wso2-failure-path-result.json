@@ -1,0 +1,177 @@
+{
+  "schemaVersion": "1.0.0",
+  "evaluationId": "maha-wso2-failure-paths-v1",
+  "evaluatedAt": "2026-08-19T04:49:26.140Z",
+  "scope": "zero-cost local contract and exact WSO2 interceptor-service policy tests",
+  "liveProviderCalls": 0,
+  "providerCredentialsUsed": false,
+  "sourcePayloadsRetained": false,
+  "configuration": {
+    "artifact": "content/integrations/wso2-apis/maha-compiler.json",
+    "sha256": "sha256:22fd630f9e345d2d5d2969da513521c2919d8cb1354e7474f3c686eb18dfc677",
+    "requestPassthroughOnError": false,
+    "responsePassthroughOnError": false,
+    "timeoutMillis": 20000
+  },
+  "cases": [
+    {
+      "id": "missing-interceptor-configuration",
+      "layer": "maha-interceptor",
+      "expected": {
+        "httpStatus": 503,
+        "code": "interceptor_not_configured",
+        "upstreamForwarded": false
+      },
+      "observed": {
+        "directRespond": true,
+        "httpStatus": 503,
+        "code": "interceptor_not_configured",
+        "credentialHeaderRemoved": true,
+        "upstreamForwarded": false
+      }
+    },
+    {
+      "id": "invalid-interceptor-credential",
+      "layer": "maha-interceptor",
+      "expected": {
+        "httpStatus": 401,
+        "code": "invalid_interceptor_credential",
+        "upstreamForwarded": false
+      },
+      "observed": {
+        "directRespond": true,
+        "httpStatus": 401,
+        "code": "invalid_interceptor_credential",
+        "credentialHeaderRemoved": true,
+        "upstreamForwarded": false
+      }
+    },
+    {
+      "id": "oversized-decoded-input",
+      "layer": "maha-interceptor",
+      "input": {
+        "decodedBodyBytes": 512001,
+        "maximumDecodedBodyBytes": 512000
+      },
+      "expected": {
+        "httpStatus": 413,
+        "code": "payload_too_large",
+        "upstreamForwarded": false
+      },
+      "observed": {
+        "directRespond": true,
+        "httpStatus": 413,
+        "code": "payload_too_large",
+        "credentialHeaderRemoved": true,
+        "upstreamForwarded": false
+      }
+    },
+    {
+      "id": "interceptor-timeout",
+      "layer": "wso2-interceptor-service-v1",
+      "stimulus": "localhost interceptor sleeps beyond the configured 100 ms test timeout",
+      "observed": {
+        "upstreamTest": "TestOnRequestBody_TimeoutPassthrough",
+        "passed": true,
+        "failClosedBranchReturnsImmediateResponse": true,
+        "upstreamForwarded": false,
+        "httpStatus": 500
+      }
+    },
+    {
+      "id": "interceptor-unavailable",
+      "layer": "wso2-interceptor-service-v1",
+      "stimulus": "connection refused by a closed localhost listener",
+      "observed": {
+        "upstreamTest": "TestMahaUnavailableInterceptorFailsClosed",
+        "passed": true,
+        "failClosedBranchReturnsImmediateResponse": true,
+        "upstreamForwarded": false,
+        "httpStatus": 500
+      }
+    }
+  ],
+  "upstreamPolicyVerification": {
+    "command": "go test -run '^(TestOnRequestBody_ErrorPassthroughOrFail|TestOnRequestBody_TimeoutPassthrough|TestMahaUnavailableInterceptorFailsClosed|TestMahaRepeatedPolicyLatency)$' -count=1 -v",
+    "testsPassed": [
+      "TestOnRequestBody_ErrorPassthroughOrFail",
+      "TestOnRequestBody_TimeoutPassthrough",
+      "TestMahaUnavailableInterceptorFailsClosed",
+      "TestMahaRepeatedPolicyLatency"
+    ],
+    "repeatedLatency": {
+      "measurementBoundary": "WSO2 Interceptor Service v1 OnRequestBody policy action",
+      "repetitionsPerScenario": 9,
+      "statisticMethod": "median; p95 uses nearest-rank; range is minMillis through maxMillis",
+      "scenarios": {
+        "healthyInterceptor": {
+          "samples": 9,
+          "samplesMillis": [
+            0.309,
+            0.106,
+            0.179,
+            0.094,
+            0.077,
+            0.117,
+            0.099,
+            0.087,
+            0.078
+          ],
+          "minMillis": 0.077,
+          "medianMillis": 0.099,
+          "p95Millis": 0.309,
+          "maxMillis": 0.309
+        },
+        "interceptorTimeout": {
+          "samples": 9,
+          "samplesMillis": [
+            101.157,
+            100.291,
+            101.117,
+            101.275,
+            101.262,
+            101.233,
+            101.293,
+            101.347,
+            101.231
+          ],
+          "minMillis": 100.291,
+          "medianMillis": 101.233,
+          "p95Millis": 101.347,
+          "maxMillis": 101.347
+        },
+        "interceptorUnavailable": {
+          "samples": 9,
+          "samplesMillis": [
+            0.169,
+            0.076,
+            0.079,
+            0.061,
+            0.065,
+            0.064,
+            0.079,
+            0.083,
+            0.079
+          ],
+          "minMillis": 0.061,
+          "medianMillis": 0.079,
+          "p95Millis": 0.169,
+          "maxMillis": 0.169
+        }
+      }
+    },
+    "source": {
+      "module": "github.com/wso2/gateway-controllers/policies/interceptor-service",
+      "moduleGoModSha256": "sha256:0f4cf567cfda433681ed1498b5a2568129194cb46edaae9bb932ad939ec8a34d",
+      "implementationSha256": "sha256:ad2c91032b4e7e4279fe3863d5eaf14e22e74fe0746458863d4c19b2478b4fc2",
+      "upstreamTestsSha256": "sha256:34f977f899b23ac2b5d75f3bcf9150b402a9b28d71bb7e16215515016a1a743c",
+      "mahaUnavailableFixtureSha256": "sha256:2cc3dbd8cb5b2054809e4fb8e571129b103011ae2b9bf32686dd5f49d98edc67"
+    }
+  },
+  "limitations": [
+    "These are local contract tests; they do not claim a deployed WSO2 environment was exercised.",
+    "The timeout test uses 100 ms to keep verification bounded; Maha production evaluation configuration pins 20,000 ms.",
+    "Repeated latency measures the local WSO2 policy boundary, not network, deployed gateway, model-provider, or end-to-end request latency.",
+    "No Anthropic request was made, so upstream non-forwarding is established by immediate-response control flow rather than provider logs."
+  ]
+}

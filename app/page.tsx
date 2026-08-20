@@ -5,21 +5,21 @@ import { TrackedLink } from '@/components/ConversionTracker'
 const SITE_URL = 'https://www.mahastrategies.com'
 
 export const metadata: Metadata = {
-  title: 'Make Confident Decisions | Maha Strategies',
-  description: 'Get a clear, evidence-led answer before you make a consequential technology, market, or policy decision. Fixed-scope research briefs from Maha Strategies.',
+  title: 'Governed Infrastructure for AI and Machine Commerce | Maha Strategies',
+  description: 'Maha Strategies governs the path from evidence and context to agent action, payment, delivery, and audit-ready proof.',
   alternates: { canonical: '/' },
   openGraph: {
-    type: 'website', url: SITE_URL, siteName: 'Maha Strategies', title: 'Make Confident Decisions | Maha Strategies',
-    description: 'Clear, evidence-led research for decisions where getting it wrong is expensive.',
+    type: 'website', url: SITE_URL, siteName: 'Maha Strategies', title: 'Governed Infrastructure for AI and Machine Commerce | Maha Strategies',
+    description: 'Govern the path from evidence and context to agent action, payment, delivery, and audit-ready proof.',
     images: [{ url: '/og-master.png', width: 1200, height: 630, alt: 'Maha Strategies — Verified Research Briefs' }],
   },
-  twitter: { card: 'summary_large_image', title: 'Make Confident Decisions | Maha Strategies', description: 'Clear, evidence-led research for consequential technology, market, and policy decisions.', images: ['/og-master.png'], creator: '@mayonemaha' },
+  twitter: { card: 'summary_large_image', title: 'Governed Infrastructure for AI and Machine Commerce | Maha Strategies', description: 'Govern evidence, context, agent action, payment, delivery, and proof.', images: ['/og-master.png'], creator: '@mayonemaha' },
 }
 
 const capabilities = [
-  { number: '01', title: 'Technology & AI', href: '/consulting/ai-infrastructure', copy: 'Assess a technology bet, vendor claim, AI deployment path, or emerging technical risk before it reaches a board memo or investment committee.' },
-  { number: '02', title: 'Markets & Supply Chains', href: '/consulting/semiconductor-supply-chain', copy: 'Map semiconductor, manufacturing, and infrastructure exposure with the sources and uncertainty made visible—not buried in a polished narrative.' },
-  { number: '03', title: 'Policy & Evidence', href: '/consulting/evidence-policy', copy: 'Turn a contested question into a decision-ready brief with claims that legal, governance, and policy reviewers can trace.' },
+  { number: '01', title: 'Evidence & Context', href: '/evidence-audit', copy: 'Compress, evaluate, and verify the material an AI system relies on while preserving provenance, uncertainty, and a reviewable evidence boundary.' },
+  { number: '02', title: 'Agent Control', href: '/enterprise-mcp-gateway', copy: 'Apply inherited policy, approvals, durable task state, and replay-safe recovery before autonomous tools are allowed to act.' },
+  { number: '03', title: 'Machine Commerce', href: '/x402-buyer-policy', copy: 'Govern discovery, trust evaluation, spending authority, payment, delivery, and audit evidence across machine-to-machine transactions.' },
 ]
 
 const work = [
@@ -46,20 +46,20 @@ export default function CorporateHomepage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceJsonLd) }} />
       <div className="evidence-container">
         <header className="max-w-4xl border-t border-[var(--border-default)] pt-5">
-          <p className="evidence-kicker flex flex-wrap justify-between gap-3"><span>Maha Strategies</span><span>Evidence assurance · governed infrastructure</span></p>
-          <h1 className="evidence-title">Make AI-assisted documents defensible before they reach review.</h1>
-          <p className="evidence-lede mt-7">For research, policy, and communications teams whose work must survive scrutiny—not merely sound convincing.</p>
-          <p className="evidence-copy mt-5">Maha maps substantive claims, makes uncertainty visible, and creates a clear record of what must be verified before publication, review, or decision.</p>
+          <p className="evidence-kicker flex flex-wrap justify-between gap-3"><span>Maha Strategies</span><span>Governed intelligence · agent infrastructure · machine commerce</span></p>
+          <h1 className="evidence-title">Govern the path from evidence to autonomous action.</h1>
+          <p className="evidence-lede mt-7">Maha builds infrastructure for AI systems that must reason from traceable context, act within explicit authority, and leave evidence humans can audit.</p>
+          <p className="evidence-copy mt-5">One control layer connects evidence and context to policy, approvals, agent execution, payment, delivery, and replay-safe recovery—so autonomy can expand without making accountability disappear.</p>
           <div className="mt-9 flex flex-col gap-3 sm:flex-row">
-            <TrackedLink href="/mps/preflight" event="cta_homepage_mps_preflight" className="evidence-action evidence-action--primary">Run a private preflight — $49 ↗</TrackedLink>
-            <Link href="/evidence-audit" className="evidence-action evidence-action--secondary">Request an evidence audit ↓</Link>
+            <Link href="/developers" className="evidence-action evidence-action--primary">Explore the infrastructure ↗</Link>
+            <TrackedLink href="/mps/preflight" event="cta_homepage_mps_preflight" className="evidence-action evidence-action--secondary">Run a private preflight — $49 ↗</TrackedLink>
           </div>
-          <p className="evidence-kicker mt-5">Free auditor · private preflight · human evidence audit · explicit scope at every step</p>
+          <p className="evidence-kicker mt-5">Traceable context · bounded authority · controlled payments · durable evidence</p>
         </header>
 
         <section className="evidence-section" aria-labelledby="decisions-heading">
-          <p className="evidence-kicker">Decisions we help make</p>
-          <h2 id="decisions-heading" className="evidence-section-title mt-4 max-w-3xl">Start with the decision, then expose the evidence boundary.</h2>
+          <p className="evidence-kicker">One governance path</p>
+          <h2 id="decisions-heading" className="evidence-section-title mt-4 max-w-3xl">Control what the system knows, what it may do, and how the result is proven.</h2>
           <div className="mt-9 grid gap-5 md:grid-cols-3">
             {capabilities.map((capability) => <Link key={capability.number} href={capability.href} className="evidence-card group flex flex-col"><p className="evidence-kicker">{capability.number}</p><h3 className="evidence-card-title mt-4">{capability.title}</h3><p className="evidence-card-copy mt-4 flex-1">{capability.copy}</p><span className="evidence-kicker mt-6 text-[var(--text-primary)]">See how we help ↗</span></Link>)}
           </div>
