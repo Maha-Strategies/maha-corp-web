@@ -2,6 +2,22 @@
 
 Maha's first CABEZON Seller offering is **Deep Context Evaluation**, a digitally delivered service with a fixed direct-x402 price of **0.01 USDC** on Base Mainnet.
 
+The Seller profile also publishes **Samley Signature Collection Cinnamon Tea — Pallet RFQ** as an enquiry-only physical-goods offer. Maha remains the CABEZON Seller and RFQ coordinator; Samley Teas is named only as the prospective fulfilling exporter, with no CABEZON membership or standing partnership asserted. `purchase` fails closed with `QUOTE_REQUIRED` and returns no payment instructions.
+
+The confirmed reference configuration is item **SG-S8**: 40 g boxes containing 20 individually wrapped tea bags, 24 boxes per master carton, 99 cartons (2,376 boxes) per approximately 230 kg pallet, with a reported three-year shelf life. The supplier indicated an FOB product price of USD 0.60 per box, making the indicative pallet product value USD 1,425.60. This is non-binding, has no named FOB port, and excludes freight, insurance, duties, taxes, clearance, warehousing, and last-mile delivery.
+
+### Physical RFQ gate
+
+Before the physical offer can become purchasable, the durable offer record must bind:
+
+- Samley's confirmation of availability and authority to supply the quoted product;
+- the final carton/pallet dimensions, weight, certificate set, FOB port, price, currency, payment terms, and quote expiry;
+- destination country and the importer/consignee responsible for lawful import;
+- customs, duties, labelling, inspection, carrier, tracking, delivery, rejection, refund, and dispute terms; and
+- a reviewed escrow or payment flow that keeps the product price, CARP admission fee, buyer bond, escrow fee, freight, duties, and Maha margin distinct.
+
+Until every order-specific item is confirmed by the supplier and buyer, the profile is useful only for CABEZON discovery and RFQ enquiries. It cannot take money or create an order.
+
 ## Public identity and contracts
 
 - Canonical Seller role: `https://raw.githubusercontent.com/bitsanity/cabezon/master/roles/seller.json`
