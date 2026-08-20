@@ -36,6 +36,7 @@
     "celestial:conformance": "node --experimental-strip-types scripts/run-celestial-conformance.ts",
     "celestial:validate": "node --experimental-strip-types scripts/run-celestial-validation.ts",
     "audit:x402-trust": "node --experimental-strip-types scripts/run-x402-trust-audit.ts",
+    "vibes:sku-lint": "node --experimental-strip-types scripts/vibes-coded-sku-lint.ts",
     "watch:x402": "node --experimental-strip-types scripts/run-x402-endpoint-watch.ts",
     "watch:x402-inactivity": "node --experimental-strip-types scripts/run-bazaar-inactivity-watch.ts",
     "worker:carp-seller": "node --experimental-strip-types scripts/run-carp-seller-worker.ts",
