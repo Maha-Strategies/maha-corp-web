@@ -7,7 +7,9 @@ import secp256k1 from 'secp256k1'
 import {
   CABEZON_SELLER_ROLE_URL,
   CARP_SELLER_ROLE_URL,
+  SAMLEY_CINNAMON_TEA_RFQ_REF,
   MAHA_CARP_SELLER_URL,
+  SAMLEY_CINNAMON_TEA_RFQ_OFFER,
   handleCarpSellerRequest,
   mahaCarpSellerProfile,
 } from '../lib/carp/seller.ts'
@@ -52,10 +54,61 @@ test('enquiry returns the canonical offering array for compatible needs', () => 
   assert.equal((matched as { result: unknown[] }).result.length, 1)
 
   const unrelated = handleCarpSellerRequest({
-    jsonrpc: '2.0', method: 'enquiry', id: 'enquiry-2', params: { query: 'bulk tea shipment', tags: [], imgtxt: null },
+    jsonrpc: '2.0', method: 'enquiry', id: 'enquiry-2', params: { query: 'monthly accounting software', tags: [], imgtxt: null },
   })
   assert.ok('result' in unrelated)
   assert.deepEqual((unrelated as { result: unknown[] }).result, [])
+})
+
+test('tea enquiries expose the Samley pallet RFQ under Maha without inventing stock or exporter authority', () => {
+  const matched = handleCarpSellerRequest({
+    jsonrpc: '2.0', method: 'enquiry', id: 'cinnamon-enquiry-1',
+    params: { query: 'Pure Ceylon cinnamon exported from Sri Lanka', tags: ['physical', 'spice'], imgtxt: null },
+  })
+  assert.ok('result' in matched)
+  const offers = (matched as { result: typeof mahaCarpSellerProfile.offers }).result
+  assert.equal(offers.length, 1)
+  const offer = offers[0]
+  assert.equal(offer.offeringRef, SAMLEY_CINNAMON_TEA_RFQ_REF)
+  assert.equal(offer.kind, 'physical')
+  assert.equal(SAMLEY_CINNAMON_TEA_RFQ_OFFER.offerType, 'request_for_quote')
+  assert.equal(SAMLEY_CINNAMON_TEA_RFQ_OFFER.status, 'request_for_quote')
+  assert.equal(SAMLEY_CINNAMON_TEA_RFQ_OFFER.commercialAvailability, 'enquiry_only')
+  assert.equal(SAMLEY_CINNAMON_TEA_RFQ_OFFER.price, null)
+  assert.equal(SAMLEY_CINNAMON_TEA_RFQ_OFFER.directSettlement, null)
+  assert.equal(SAMLEY_CINNAMON_TEA_RFQ_OFFER.productSpecification.itemCode, 'SG-S8')
+  assert.equal(SAMLEY_CINNAMON_TEA_RFQ_OFFER.productSpecification.retailPacksPerPallet, 2_376)
+  assert.equal(SAMLEY_CINNAMON_TEA_RFQ_OFFER.indicativeCommercialTerms.indicativePalletProductValue, '1425.60')
+  assert.equal(SAMLEY_CINNAMON_TEA_RFQ_OFFER.supplier.carpMembershipAsserted, false)
+  assert.match(JSON.stringify(SAMLEY_CINNAMON_TEA_RFQ_OFFER.capabilityBoundaries), /Maha is the CABEZON Seller/)
+})
+
+test('the Samley RFQ fails closed at purchase until an order-specific quote exists', () => {
+  const reply = handleCarpSellerRequest({
+    jsonrpc: '2.0', method: 'purchase', id: 'cinnamon-purchase-1',
+    params: {
+      clientOrderRef: 'buyer-cinnamon-001',
+      offeringRef: SAMLEY_CINNAMON_TEA_RFQ_REF,
+      quantity: 1,
+      agreedPrice: { amount: '1.00', asset: 'USDC', network: 'eip155:8453' },
+      delivery: { mode: 'physical', destination: { country: 'US' } },
+    },
+  })
+  assert.ok('error' in reply)
+  assert.equal(reply.error.code, -32011)
+  assert.match(reply.error.message, /QUOTE_REQUIRED/)
+  assert.equal((reply.error.data as { commercialAvailability: string }).commercialAvailability, 'enquiry_only')
+  assert.equal(JSON.stringify(reply).includes('paymentInstructions'), false)
+})
+
+test('the physical RFQ discloses non-binding economics without presenting freight as a fixed price', () => {
+  const offer = SAMLEY_CINNAMON_TEA_RFQ_OFFER
+  assert.equal(offer.productSpecification.masterCartonsPerPallet * offer.productSpecification.retailPacksPerMasterCarton, 2_376)
+  assert.equal((Number(offer.indicativeCommercialTerms.retailPackUnitPrice) * offer.productSpecification.retailPacksPerPallet).toFixed(2), '1425.60')
+  assert.equal(offer.indicativeCommercialTerms.nonBinding, true)
+  assert.equal(offer.indicativeCommercialTerms.namedPort, null)
+  assert.ok(offer.indicativeCommercialTerms.excludes.includes('freight'))
+  assert.doesNotMatch(JSON.stringify(offer), /1500/)
 })
 
 test('purchase binds the canonical order to exact x402 instructions', () => {
@@ -91,7 +144,8 @@ test('purchase binds the canonical order to exact x402 instructions', () => {
 })
 
 test('legacy purchase arrays remain compatible with base-unit quotes', () => {
-  const offer = mahaCarpSellerProfile.offers[0]
+  const offer = mahaCarpSellerProfile.offers.find((candidate) => candidate.offeringRef === 'maha:deep-context-evaluation:v1')
+  assert.ok(offer && offer.directSettlement && offer.price)
   const accepted = handleCarpSellerRequest({
     jsonrpc: '2.0', method: 'purchase', id: `0x${'1'.repeat(64)}`,
     params: [1, offer.offeringRef, { amount: offer.directSettlement.amountBaseUnits, asset: offer.directSettlement.assetContract, network: offer.price.network }, null, ''],

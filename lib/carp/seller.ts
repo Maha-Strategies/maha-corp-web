@@ -12,6 +12,80 @@ const SITE_URL = 'https://www.mahastrategies.com'
 const OFFER = DEEP_CONTEXT_EVALUATION_OFFER
 const identity = configuredIdentity()
 
+export const SAMLEY_CINNAMON_TEA_RFQ_REF = 'maha:samley-cinnamon-tea:rfq-v1'
+
+export const SAMLEY_CINNAMON_TEA_RFQ_OFFER = Object.freeze({
+  offeringRef: SAMLEY_CINNAMON_TEA_RFQ_REF,
+  kind: 'physical',
+  offerType: 'request_for_quote',
+  title: 'Samley Signature Collection Cinnamon Tea — Pallet RFQ',
+  descrip: 'A non-binding request-for-quote offering for one export pallet of Samley Signature Collection Cinnamon Tea. Maha coordinates the agent-commerce enquiry; Samley must confirm stock, final export terms, logistics, and acceptance before any order or payment can exist.',
+  tags: ['cinnamon-tea', 'ceylon-tea', 'samley', 'sri-lanka', 'b2b', 'wholesale', 'physical-fulfillment', 'export-rfq'],
+  status: 'request_for_quote',
+  commercialAvailability: 'enquiry_only',
+  price: null,
+  directSettlement: null,
+  supplier: {
+    name: 'Samley Teas',
+    role: 'prospective_fulfilling_exporter',
+    carpMembershipAsserted: false,
+    confirmationRequiredForEveryOrder: true,
+  },
+  productSpecification: {
+    productName: 'Samley Signature Collection Cinnamon Tea',
+    itemCode: 'SG-S8',
+    teaType: 'Cinnamon tea',
+    originCountry: 'LK',
+    retailPackNetWeightGrams: 40,
+    teaBagsPerRetailPack: 20,
+    teaBagWrapping: 'individually_wrapped',
+    retailPacksPerMasterCarton: 24,
+    masterCartonsPerPallet: 99,
+    retailPacksPerPallet: 2_376,
+    approximatePalletWeightKilograms: 230,
+    shelfLifeMonths: 36,
+    packaging: 'existing Samley-branded packaging',
+    packagingReportedReadyForUsSale: true,
+  },
+  indicativeCommercialTerms: {
+    nonBinding: true,
+    currency: 'USD',
+    basis: 'FOB',
+    namedPort: null,
+    retailPackUnitPrice: '0.60',
+    indicativePalletProductValue: '1425.60',
+    calculation: '2376 retail packs × USD 0.60',
+    minimumOrder: 'one pallet',
+    paymentTerms: '100% in advance after final quote and order acceptance',
+    leadTime: 'subject to material availability; supplier indicated a couple of days if material is available',
+    excludes: ['freight', 'insurance', 'customs duties', 'taxes', 'destination clearance', 'warehousing', 'last-mile delivery'],
+  },
+  quoteRequirements: [
+    'buyer legal name and business contact',
+    'requested pallet quantity',
+    'destination country, postal code, and delivery address or port',
+    'named consignee and importer-of-record status',
+    'requested delivery window and freight preference',
+    'supplier confirmation of availability, final FOB port and price, quote expiry, and production lead time',
+    'order-specific freight, customs, duties, labelling, inspection, rejection, refund, and delivery responsibilities',
+  ],
+  fulfillment: {
+    modes: ['physical'],
+    estimatedSeconds: null,
+    deliveryDeadlineSeconds: null,
+    shipsFrom: 'Sri Lanka',
+    proofTypes: ['supplier-order-confirmation', 'commercial-invoice', 'export-document-reference', 'carrier-tracking', 'signed-receipt'],
+  },
+  capabilityBoundaries: [
+    'Maha is the CABEZON Seller and RFQ coordinator; it does not claim to own inventory or act as the exporter of record.',
+    'Samley Teas is identified only as the prospective fulfilling exporter; no CABEZON membership or standing partnership is asserted.',
+    'The indicative FOB product value is not a delivered price or binding offer and excludes freight, duties, taxes, clearance, and destination services.',
+    'The listing cannot be purchased and returns no payment or escrow instructions until Samley and the buyer confirm an order-specific quote and responsibilities.',
+  ],
+  retention: { orderPersisted: false, personalDataAccepted: false, evidenceReturnedToCaller: true },
+  termsUrl: `${SITE_URL}/contact?service=general`,
+})
+
 export type CarpSellerRequest = {
   jsonrpc: '2.0'
   method: string
@@ -36,7 +110,7 @@ export const mahaCarpSellerProfile = Object.freeze({
   schemaVersion: '0.1.0',
   sellerId: 'maha-strategies',
   name: 'Maha Strategies LLC',
-  description: 'Governed infrastructure and machine-payable utilities for production AI agents.',
+  description: 'Governed infrastructure, machine-payable utilities, and bounded agent-commerce pilots.',
   role: 'Seller',
   roleContract: CABEZON_SELLER_ROLE_URL,
   roleMirror: CARP_SELLER_ROLE_URL,
@@ -48,7 +122,7 @@ export const mahaCarpSellerProfile = Object.freeze({
     sad: identity ? MAHA_CARP_SAD_URL : null,
     carpUrl: identity ? MAHA_CARP_URL : null,
   },
-  fulfillmentModes: ['digital'],
+  fulfillmentModes: ['digital', 'physical'],
   termsUrl: `${SITE_URL}/terms`,
   offers: [
     {
@@ -87,6 +161,7 @@ export const mahaCarpSellerProfile = Object.freeze({
       retention: OFFER.retention,
       termsUrl: `${SITE_URL}/deep-context-evaluation`,
     },
+    SAMLEY_CINNAMON_TEA_RFQ_OFFER,
   ],
 })
 
@@ -136,14 +211,32 @@ function normalizePurchase(params: unknown, requestId: string): NormalizedPurcha
   }
 }
 
-function enquiryMatches(params: Record<string, unknown>) {
-  const terms = [
+function enquiryTerms(params: Record<string, unknown>) {
+  return [
     typeof params.query === 'string' ? params.query : '',
     ...(Array.isArray(params.tags) ? params.tags.filter((tag): tag is string => typeof tag === 'string') : []),
   ].join(' ').trim().toLowerCase()
+}
+
+function enquiryMatchesDigital(terms: string) {
   if (!terms) return true
   return ['context', 'retention', 'evidence', 'rag', 'provenance', 'evaluation', 'digital', 'ai']
     .some((term) => terms.includes(term))
+}
+
+function enquiryMatchesSamleyTea(terms: string) {
+  if (!terms) return true
+  return ['cinnamon', 'tea', 'ceylon', 'samley', 'sri lanka', 'physical', 'export', 'wholesale', 'pallet']
+    .some((term) => terms.includes(term))
+}
+
+function enquiryMatches(params: Record<string, unknown>) {
+  const terms = enquiryTerms(params)
+  return mahaCarpSellerProfile.offers.filter((offer) =>
+    offer.offeringRef === SAMLEY_CINNAMON_TEA_RFQ_REF
+      ? enquiryMatchesSamleyTea(terms)
+      : enquiryMatchesDigital(terms),
+  )
 }
 
 export function handleCarpSellerRequest(request: CarpSellerRequest): CarpSellerReply {
@@ -166,7 +259,7 @@ export function handleCarpSellerRequest(request: CarpSellerRequest): CarpSellerR
     }
     return {
       jsonrpc: '2.0',
-      result: enquiryMatches(params) ? mahaCarpSellerProfile.offers : [],
+      result: enquiryMatches(params),
       id: request.id,
     }
   }
@@ -174,6 +267,19 @@ export function handleCarpSellerRequest(request: CarpSellerRequest): CarpSellerR
   if (request.method !== 'purchase') return jsonError(request.id, -32601, 'Unknown Seller service.')
   const params = normalizePurchase(request.params, request.id)
   if (!params) return jsonError(request.id, -32602, 'purchase params must use the legacy array or the v0.2 object shape.')
+  if (params.offerId === SAMLEY_CINNAMON_TEA_RFQ_REF) {
+    return jsonError(
+      request.id,
+      -32011,
+      'QUOTE_REQUIRED: this physical-goods offering is enquiry-only until the supplier and buyer confirm an order-specific quote.',
+      {
+        offeringRef: SAMLEY_CINNAMON_TEA_RFQ_REF,
+        status: SAMLEY_CINNAMON_TEA_RFQ_OFFER.status,
+        commercialAvailability: SAMLEY_CINNAMON_TEA_RFQ_OFFER.commercialAvailability,
+        quoteRequirements: SAMLEY_CINNAMON_TEA_RFQ_OFFER.quoteRequirements,
+      },
+    )
+  }
   if (params.offerId !== OFFER.id) return jsonError(request.id, -32602, 'Unknown offerId or itemref.')
   if (params.quantity !== 1) return jsonError(request.id, -32602, 'Deep Context Evaluation must be purchased with quantity 1.')
   if (!/^[A-Za-z0-9._:-]{8,120}$/.test(params.clientOrderRef)) {
