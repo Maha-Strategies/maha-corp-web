@@ -140,3 +140,55 @@ test('partial coverage is independently reproduced as three of four sources', ()
   assert.equal(partial.expectedPublicValues.coveragePercentageBps, 7_500)
   assert.deepEqual(new Set(partial.privateWitness.retainedPassageIdsInOutputOrder.map((id) => id.split(':')[0])), new Set(['release', 'rotation', 'rollback']))
 })
+
+test('invalid token arithmetic is frozen as reject-before-proof and no-charge', () => {
+  const addendum = JSON.parse(readFileSync(join(addendumRoot, 'index.json'), 'utf8')) as {
+    rejectionPublicValues: {
+      invalidTokenArithmetic: {
+        proofContractVersion: number
+        status: string
+        reasonCode: string
+        proofAttempted: boolean
+        chargePermitted: boolean
+      }
+    }
+  }
+  assert.deepEqual(addendum.rejectionPublicValues.invalidTokenArithmetic, {
+    proofContractVersion: 3,
+    status: 'rejected_invalid_token_arithmetic',
+    reasonCode: 'retained_passage_token_sum_mismatch',
+    proofAttempted: false,
+    chargePermitted: false,
+  })
+})
+
+test('the v1 evidence checkpoint pins every contract artifact without claiming production acceptance', () => {
+  const evidence = JSON.parse(readFileSync(join(import.meta.dirname, 'fixtures', 'context-proof-evidence-v1.json'), 'utf8')) as {
+    contractArtifacts: Array<{ path: string; sha256: string }>
+    acceptance: {
+      contractFrozen: boolean
+      fixtureBytesFrozen: boolean
+      publicContextCompilerResponseChanged: boolean
+      proofServiceAcceptedForProduction: boolean
+    }
+    partnerEvidence: {
+      reproducibility: {
+        latestAlignedElfDigest: string | null
+        latestAlignedSp1VerifyingKey: string | null
+        status: string
+      }
+    }
+  }
+
+  const repositoryRoot = join(import.meta.dirname, '..')
+  for (const artifact of evidence.contractArtifacts) {
+    assert.equal(fixtureFileDigest(readFileSync(join(repositoryRoot, artifact.path))), artifact.sha256, artifact.path)
+  }
+  assert.equal(evidence.acceptance.contractFrozen, true)
+  assert.equal(evidence.acceptance.fixtureBytesFrozen, true)
+  assert.equal(evidence.acceptance.publicContextCompilerResponseChanged, false)
+  assert.equal(evidence.acceptance.proofServiceAcceptedForProduction, false)
+  assert.equal(evidence.partnerEvidence.reproducibility.latestAlignedElfDigest, null)
+  assert.equal(evidence.partnerEvidence.reproducibility.latestAlignedSp1VerifyingKey, null)
+  assert.match(evidence.partnerEvidence.reproducibility.status, /pending exact identifiers/)
+})

@@ -39,6 +39,13 @@
       "reasonCode": "retained_passage_hash_not_unique",
       "proofAttempted": false,
       "chargePermitted": false
+    },
+    "invalidTokenArithmetic": {
+      "proofContractVersion": 3,
+      "status": "rejected_invalid_token_arithmetic",
+      "reasonCode": "retained_passage_token_sum_mismatch",
+      "proofAttempted": false,
+      "chargePermitted": false
     }
   }
 }

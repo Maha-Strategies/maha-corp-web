@@ -29,7 +29,7 @@ This is not RFC 8785/JCS. Its preimage is the UTF-8 encoding of ECMAScript `JSON
 {"task":"...","tokenBudget":128,"documents":[{"id":"release","title":"Release control","hash":"sha256:..."}]}
 ```
 
-The top-level order is `task`, `tokenBudget`, `documents`. Each document order is `id`, `title`, `hash`; array order is request order. If `title` is absent, `JSON.stringify` omits that property. `hash` is the normalized `sourceHash` above. There is no trailing newline.
+The top-level order is `task`, `tokenBudget`, `documents`. Each document order is `id`, `title`, `hash`; array order is request order. If `title` is absent, `JSON.stringify` omits that property. An explicit `title: null` is invalid input and must not be canonicalized as if it were absent. `hash` is the normalized `sourceHash` above. There is no trailing newline.
 
 The production commitment deliberately excludes `clientRequestId`, `provenance`, `scoring`, and `budgetMode`. Consequently, `inputHash` must not be described as binding those fields. Their effect on a result is instead observable through the separately bound output. `recomputeContextCompilerInputHash()` is the executable reference.
 
@@ -58,12 +58,13 @@ Every success result therefore retains `reportedTokenArithmeticValid: true`, `to
 
 ## Rejection public values
 
-A rejection has no success-shaped `expectedPublicValues`, no proof, and no proof charge. The machine-readable index proposes the complete minimal public records for the two current rejections:
+A rejection has no success-shaped `expectedPublicValues`, no proof, and no proof charge. The machine-readable index defines the complete minimal public records for the three current rejections:
 
 - `unsupported_passage_count`: contract version, status, stable reason code, observed retained count, supported maximum, `proofAttempted: false`, and `chargePermitted: false`.
 - `rejected_invalid_retained_set`: contract version, status, stable reason code, `proofAttempted: false`, and `chargePermitted: false`.
+- `rejected_invalid_token_arithmetic`: contract version, status, stable reason code, `proofAttempted: false`, and `chargePermitted: false`. A retained-token sum mismatch hard-fails; it does not produce a proof carrying `reportedTokenArithmeticValid: false`.
 
-Neither record repeats input/output hashes, coverage, or token metrics from a stale success object. These shapes are the Maha proposal for the guest author to confirm before they become a new wire-contract version.
+No rejection record repeats input/output hashes, coverage, or token metrics from a stale success object.
 
 ## Partial-coverage fixture
 
