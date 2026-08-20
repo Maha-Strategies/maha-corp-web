@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://www.mahastrategies.com/schemas/governed-context-verification-pack-response-1.0.0.json",
+  "title": "Maha Governed Context Verification Pack response",
+  "type": "object",
+  "required": ["schemaVersion", "contract", "sku", "request", "deliverable", "limitations", "sourceTextStored", "compiledContextStored", "responseBodyStored", "delivery"],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "contract": { "type": "object", "required": ["version", "digest"], "properties": { "version": { "const": "seller-endpoint-call-ticket-v1" }, "digest": { "pattern": "^sha256:[a-f0-9]{64}$" } } },
+    "sku": { "type": "object", "required": ["slug", "method", "priceUsd", "priceCents"], "properties": { "slug": { "const": "governed-context-verification-pack" }, "method": { "const": "POST" }, "priceUsd": { "const": "0.50" }, "priceCents": { "const": 50 } } },
+    "request": { "type": "object", "required": ["clientRequestId", "requestHash"], "properties": { "clientRequestId": { "type": "string" }, "requestHash": { "pattern": "^sha256:[a-f0-9]{64}$" } } },
+    "deliverable": { "type": "object", "required": ["evaluationId", "contextPack", "evidence", "metrics", "policy", "budget", "integrity"] },
+    "limitations": { "type": "array", "items": { "type": "string" } },
+    "sourceTextStored": { "const": false },
+    "compiledContextStored": { "const": false },
+    "responseBodyStored": { "const": false },
+    "delivery": { "type": "object", "required": ["receiptId", "state", "responseSha256"], "properties": { "receiptId": { "pattern": "^receipt_[a-f0-9]{32}$" }, "state": { "const": "delivered" }, "responseSha256": { "pattern": "^sha256:[a-f0-9]{64}$" } } }
+  }
+}

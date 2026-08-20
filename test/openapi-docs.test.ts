@@ -150,6 +150,9 @@ const PRIVATE_ROUTES = new Set([
   '/api/v1/orchestration/tasks/[taskId]',
   '/api/v1/orchestration/readiness',
   '/api/v1/workflows/[taskId]/approvals/[approvalId]',
+  // Unpublished Vibes-Coded target. It remains out of Maha's public OpenAPI
+  // contract until Mayone authorizes publication of the separate SKU.
+  '/api/v1/seller-endpoints/governed-context-verification-pack/call',
 ])
 
 function routePathsOnDisk(dir: string, prefix: string): string[] {
