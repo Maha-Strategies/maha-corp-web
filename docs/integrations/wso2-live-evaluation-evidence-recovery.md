@@ -1,7 +1,7 @@
 # WSO2 live evaluation — evidence recovery and verification
 
 **Version:** 1.0.0 · **Recovered:** 2026-08-21 · **Run recovered:** `wso2-large-live-20260817-v1`
-**Outcome:** the primary evidence was **recovered and digest-confirmed**. Every figure published on `/integrations/wso2` is now derived from a committed, per-workload artifact.
+**Outcome:** the primary evidence was **recovered and digest-confirmed** long enough to generate the committed, per-workload artifact. The answer-bearing primary files were stored in volatile `/private/tmp` and are no longer locally available; every public figure remains derived from the committed rows, while full source-to-artifact regeneration now requires reacquiring the digest-identified primary files from controlled storage.
 
 ## Why this document exists
 
@@ -26,7 +26,7 @@ authorization.
 | Every reachable blob, searched for the published figures | The aggregates appear in exactly one file across all history: `app/integrations/wso2/page.tsx` |
 | Stashes | None (0 entries) |
 | Reflog (465 entries), unreachable and dangling objects (615) | Nothing evaluation-related |
-| **36 linked worktrees**, including four WSO2-specific ones under `/private/tmp` | **Primary evidence found** |
+| **36 linked worktrees**, including four WSO2-specific ones under `/private/tmp` | **Primary evidence found and digest-confirmed during recovery.** The volatile source files are no longer present locally; their recorded digests remain the identity check for any reacquired copy. |
 | Ignored `artifacts/wso2/` directories inside worktrees | `/private/tmp/maha-wso2-one-command-evaluation/artifacts/wso2/reproduction/` — inspected and **rejected** as a source: `mode: dry-run`, mock provider, 739,720 baseline input tokens rather than the live 1,621,553 |
 
 The earlier "absent from this machine" finding was a search-scope error: the
@@ -126,12 +126,18 @@ npm run generate:wso2-live-evidence -- \
 
 ## Retention of the primary evidence
 
-The three source files currently live only in `/private/tmp`, which is not
-durable — a reboot can remove them, and recovering them a second time may not be
-possible. **They should be moved to durable, access-controlled storage outside
-the repository**, and must not be committed: they carry model answer text for
-all 60 calls. Their digests are recorded here and inside the artifact so a
-reviewer under NDA can be handed the exact bytes and re-derive the artifact.
+The three source files were recovered from volatile `/private/tmp` during this
+work, but are **not currently present locally**. They must not be committed:
+they carry model answer text for all 60 calls. If a retained copy is available,
+move it to durable, access-controlled storage outside the repository and verify
+its SHA-256 digests against the values recorded here before using it. If no copy
+is retained, a new, explicitly authorized live run is the only way to recreate
+source-to-artifact regeneration evidence.
+
+The committed artifact remains useful: it exposes all 60 answer-free rows and
+mechanically re-derives every displayed aggregate. What it cannot independently
+establish without the primary files is that each derived row was extracted from
+the original answer-bearing checkpoint.
 
 ## Boundaries
 
