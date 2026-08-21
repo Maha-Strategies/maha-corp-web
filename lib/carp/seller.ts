@@ -24,6 +24,7 @@ export const SAMLEY_CINNAMON_TEA_RFQ_OFFER = Object.freeze({
   tags: ['cinnamon-tea', 'ceylon-tea', 'samley', 'sri-lanka', 'b2b', 'wholesale', 'physical-fulfillment', 'export-rfq'],
   status: 'request_for_quote',
   commercialAvailability: 'enquiry_only',
+  purchasable: false,
   price: null,
   directSettlement: null,
   supplier: {
@@ -278,6 +279,7 @@ export function handleCarpSellerRequest(request: CarpSellerRequest): CarpSellerR
         offeringRef: SAMLEY_CINNAMON_TEA_RFQ_REF,
         status: SAMLEY_CINNAMON_TEA_RFQ_OFFER.status,
         commercialAvailability: SAMLEY_CINNAMON_TEA_RFQ_OFFER.commercialAvailability,
+        purchasable: SAMLEY_CINNAMON_TEA_RFQ_OFFER.purchasable,
         quoteRequirements: SAMLEY_CINNAMON_TEA_RFQ_OFFER.quoteRequirements,
       },
     )

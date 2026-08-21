@@ -4,6 +4,8 @@ Maha's first CABEZON Seller offering is **Deep Context Evaluation**, a digitally
 
 The Seller profile also publishes **Samley Signature Collection Cinnamon Tea — Pallet RFQ** as an enquiry-only physical-goods offer. Maha remains the CABEZON Seller and RFQ coordinator; Samley Teas is named only as the prospective fulfilling exporter, with no CABEZON membership or standing partnership asserted. `purchase` fails closed with `QUOTE_REQUIRED` and returns no payment instructions.
 
+The RFQ publishes `purchasable: false` explicitly. Null price and payment fields are not treated as a sufficient machine-readable denial signal.
+
 The confirmed reference configuration is item **SG-S8**: 40 g boxes containing 20 individually wrapped tea bags, 24 boxes per master carton, 99 cartons (2,376 boxes) per approximately 230 kg pallet, with a reported three-year shelf life. The supplier indicated an FOB product price of USD 0.60 per box, making the indicative pallet product value USD 1,425.60. This is non-binding, has no named FOB port, and excludes freight, insurance, duties, taxes, clearance, warehousing, and last-mile delivery.
 
 ### Physical RFQ gate
@@ -82,6 +84,8 @@ For a structured delivery record, `requestDigest` and `resultDigest` use **RFC 8
 Before any escrow-backed physical or digital purchase path is enabled, the release recipient must be checked twice: once before deposit and again immediately before release. The second check must identify the same recipient, be fresh, and carry evidence from the selected payability provider. A missing, stale, mismatched, unsupported, or non-payable release check must enter `RELEASE_BLOCKED_UNPAYABLE_RECIPIENT` and arbitration/recovery; it must not release funds.
 
 This repository now defines and tests that release gate, but **no CABEZON escrower currently enforces it**. Its only successful local result is `RELEASE_RECHECK_PASSED_PENDING_ESCROWER`, which deliberately remains non-authorizing until Bryan's escrow/ClawFace path consumes the attestation at release time. The required recovery tests before money are: delivery retrieval unavailable after confirmation, and a release recipient becoming unpayable after deposit but before release.
+
+The complete pre-money policy is in [`carp-pre-money-gate.md`](./carp-pre-money-gate.md). It adds a token-behavior allowlist, buyer-and-seller screening, recipient-capability checks, a Seller DID-to-address-to-escrow-order binding, and synthetic recovery cases for release failure, buyer non-confirmation, and administrator unavailability. It does not make the current RFQ or direct-x402 offer escrow-backed.
 
 ## Verification sequence
 
