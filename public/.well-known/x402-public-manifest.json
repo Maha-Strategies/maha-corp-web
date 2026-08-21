@@ -1,0 +1,146 @@
+{
+  "schemaVersion": "1.0.0",
+  "generatedAt": "2026-08-21",
+  "provider": {
+    "name": "Maha Strategies LLC",
+    "url": "https://www.mahastrategies.com"
+  },
+  "assertionBoundary": {
+    "assertsConfiguration": true,
+    "assertsLiveness": false,
+    "assertsSettlementHistory": false,
+    "assertsRegistryIndexing": false,
+    "assertsUptime": false,
+    "assertsTrustScore": false,
+    "proofOfPayability": "A live HTTP 402 PAYMENT-REQUIRED challenge from the canonical resource is the only proof an offer can be bought.",
+    "note": "This manifest describes declared configuration at the generated-at timestamp. It does not assert that any endpoint is currently reachable, enabled in a given deployment, indexed by any registry, or has ever settled a payment."
+  },
+  "offers": [
+    {
+      "id": "context-compression",
+      "status": "active",
+      "canonicalResource": "https://www.mahastrategies.com/api/v1/compress",
+      "method": "POST",
+      "payment": {
+        "protocol": "x402",
+        "version": 2,
+        "scheme": "exact",
+        "network": "eip155:8453",
+        "asset": "USDC",
+        "assetDecimals": 6,
+        "amountBaseUnits": "1000",
+        "displayAmount": "0.001000 USDC"
+      },
+      "schemas": {
+        "input": "https://www.mahastrategies.com/api/discovery/x402-offers/context-compression#input",
+        "output": "https://www.mahastrategies.com/api/discovery/x402-offers/context-compression#output"
+      },
+      "declarationIntegrity": {
+        "algorithm": "sha256",
+        "digest": "sha256:c064d367309bac16d4cf8b295584ec8dcbff07ebc59bb743f9e68609c8d27091",
+        "metadataVersion": "1.0.0"
+      },
+      "limits": {
+        "maxRequestBytes": 450000,
+        "concurrencyCap": 8,
+        "requiresIdempotency": false
+      },
+      "retention": {
+        "fullSourceTextStored": false,
+        "verbatimExcerptsRetained": false,
+        "note": "Nothing from the request is stored. The compiled pack is returned and discarded; only hashes, token estimates and a status class are retained."
+      },
+      "capabilityBoundaries": [
+        "Extractive selection, not summarisation or rewriting.",
+        "Does not verify claims, guarantee completeness, or prevent hallucination.",
+        "Token counts are model-neutral estimates, not provider billing counts."
+      ]
+    },
+    {
+      "id": "deep-context-evaluation",
+      "status": "active",
+      "canonicalResource": "https://www.mahastrategies.com/api/v1/compress/evaluate",
+      "method": "POST",
+      "payment": {
+        "protocol": "x402",
+        "version": 2,
+        "scheme": "exact",
+        "network": "eip155:8453",
+        "asset": "USDC",
+        "assetDecimals": 6,
+        "amountBaseUnits": "10000",
+        "displayAmount": "0.010000 USDC"
+      },
+      "schemas": {
+        "input": "https://www.mahastrategies.com/api/discovery/x402-offers/deep-context-evaluation#input",
+        "output": "https://www.mahastrategies.com/api/discovery/x402-offers/deep-context-evaluation#output"
+      },
+      "declarationIntegrity": {
+        "algorithm": "sha256",
+        "digest": "sha256:8ee447c251ccb499ea5dcd768d52bbaebb0413ec8699f1701b7981b55dd6765e",
+        "metadataVersion": "1.0.0"
+      },
+      "limits": {
+        "maxRequestBytes": 1050000,
+        "concurrencyCap": 4,
+        "requiresIdempotency": false
+      },
+      "retention": {
+        "fullSourceTextStored": false,
+        "verbatimExcerptsRetained": false,
+        "note": "Neither the documents nor the evidence spans are stored. Spans are hashed for the retention report; only hashes, counts and token estimates are retained."
+      },
+      "capabilityBoundaries": [
+        "Measures exact retention of caller-labelled evidence spans, nothing else.",
+        "Not factual accuracy, answer quality, verification, or hallucination prevention.",
+        "A retained span means the text survived selection, not that the text is true.",
+        "Extractive and budget-bound: spans that exceed the token budget are dropped and reported."
+      ]
+    },
+    {
+      "id": "mps-autonomous-audit",
+      "status": "withheld",
+      "canonicalResource": "https://www.mahastrategies.com/api/v1/mps/audit",
+      "method": "POST",
+      "payment": null,
+      "schemas": {
+        "input": "https://www.mahastrategies.com/api/discovery/x402-offers/mps-autonomous-audit#input",
+        "output": "https://www.mahastrategies.com/api/discovery/x402-offers/mps-autonomous-audit#output"
+      },
+      "declarationIntegrity": {
+        "algorithm": "sha256",
+        "digest": "sha256:226ee87708c5cf25ce00acc4181054c99519f1844cb928bf425f3bc43414d4f6",
+        "metadataVersion": "1.0.0"
+      },
+      "limits": {
+        "maxRequestBytes": 32768,
+        "concurrencyCap": 2,
+        "requiresIdempotency": true
+      },
+      "retention": {
+        "fullSourceTextStored": false,
+        "verbatimExcerptsRetained": true,
+        "note": "The complete submitted passage is not retained. Audit results retain short verbatim claim excerpts, classifications, rationales, hashes, and operational metadata."
+      },
+      "capabilityBoundaries": [
+        "Automated triage that assigns provenance statuses to claims.",
+        "Not factual certification: a VERIFIED status is a model judgement, not a confirmation.",
+        "Not legal advice.",
+        "Not human verification, and not a substitute for editorial review before publication."
+      ]
+    }
+  ],
+  "evidence": {
+    "conformanceResult": "https://www.mahastrategies.com/.well-known/x402-conformance-result.json",
+    "doctorTool": "npm run x402:doctor",
+    "observatory": "https://www.mahastrategies.com/api/x402-observatory",
+    "integrationNotes": "https://www.mahastrategies.com/x402-buyer-policy"
+  },
+  "limitations": [
+    "Status describes declared configuration, not observed behaviour. Verify payability with a live 402 challenge.",
+    "Protocol conformance and discovery-registry eligibility are separate verdicts; passing one does not imply the other.",
+    "Declaration digests cover the published contract fields, not the implementation behind them.",
+    "Maha publishes its own evidence. It is not an independent trust score, and it should not be treated as one.",
+    "No settlement count, payer history, uptime figure or availability guarantee is asserted anywhere in this document."
+  ]
+}

@@ -33,6 +33,8 @@
     "recipe:bazaar-payment": "node --experimental-strip-types scripts/run-bazaar-discovery-payment-recipe.ts",
     "x402:doctor": "node --experimental-strip-types scripts/x402-doctor.ts",
     "x402:conformance": "node --experimental-strip-types scripts/run-x402-conformance-corpus.ts",
+    "generate:x402-public-evidence": "node --experimental-strip-types scripts/generate-x402-public-evidence.ts",
+    "verify:x402-public-evidence": "node --experimental-strip-types scripts/verify-x402-public-evidence.ts",
     "celestial:conformance": "node --experimental-strip-types scripts/run-celestial-conformance.ts",
     "celestial:validate": "node --experimental-strip-types scripts/run-celestial-validation.ts",
     "audit:x402-trust": "node --experimental-strip-types scripts/run-x402-trust-audit.ts",
