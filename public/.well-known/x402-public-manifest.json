@@ -36,10 +36,10 @@
         "input": "https://www.mahastrategies.com/api/discovery/x402-offers/context-compression#input",
         "output": "https://www.mahastrategies.com/api/discovery/x402-offers/context-compression#output"
       },
-      "declarationIntegrity": {
+      "configurationDigest": {
         "algorithm": "sha256",
         "digest": "sha256:c064d367309bac16d4cf8b295584ec8dcbff07ebc59bb743f9e68609c8d27091",
-        "metadataVersion": "1.0.0"
+        "schemaVersion": "1.0.0"
       },
       "limits": {
         "maxRequestBytes": 450000,
@@ -76,10 +76,10 @@
         "input": "https://www.mahastrategies.com/api/discovery/x402-offers/deep-context-evaluation#input",
         "output": "https://www.mahastrategies.com/api/discovery/x402-offers/deep-context-evaluation#output"
       },
-      "declarationIntegrity": {
+      "configurationDigest": {
         "algorithm": "sha256",
         "digest": "sha256:8ee447c251ccb499ea5dcd768d52bbaebb0413ec8699f1701b7981b55dd6765e",
-        "metadataVersion": "1.0.0"
+        "schemaVersion": "1.0.0"
       },
       "limits": {
         "maxRequestBytes": 1050000,
@@ -108,10 +108,10 @@
         "input": "https://www.mahastrategies.com/api/discovery/x402-offers/mps-autonomous-audit#input",
         "output": "https://www.mahastrategies.com/api/discovery/x402-offers/mps-autonomous-audit#output"
       },
-      "declarationIntegrity": {
+      "configurationDigest": {
         "algorithm": "sha256",
         "digest": "sha256:226ee87708c5cf25ce00acc4181054c99519f1844cb928bf425f3bc43414d4f6",
-        "metadataVersion": "1.0.0"
+        "schemaVersion": "1.0.0"
       },
       "limits": {
         "maxRequestBytes": 32768,

@@ -81,14 +81,14 @@ test('the denials the document relies on are actually present', () => {
   assert.match(limitations, /separate verdicts/i)
 })
 
-test('a mismatched or stale declaration digest is caught', () => {
+test('a mismatched or stale configuration digest is caught', () => {
   const tampered = manifest()
-  tampered.offers[0].declarationIntegrity.digest = `sha256:${'0'.repeat(64)}`
+  tampered.offers[0].configurationDigest.digest = `sha256:${'0'.repeat(64)}`
   assert.notDeepEqual(tampered, buildPublicManifest(tampered.configurationAsOf))
 
   const malformed = manifest()
-  malformed.offers[0].declarationIntegrity.digest = 'not-a-digest'
-  assert.ok(!/^sha256:[0-9a-f]{64}$/.test(malformed.offers[0].declarationIntegrity.digest))
+  malformed.offers[0].configurationDigest.digest = 'not-a-digest'
+  assert.ok(!/^sha256:[0-9a-f]{64}$/.test(malformed.offers[0].configurationDigest.digest))
 })
 
 test('a wrong resource, network or version boundary is caught', () => {

@@ -56,7 +56,8 @@ export type PublicManifestOffer = {
     displayAmount: string
   } | null
   schemas: { input: string; output: string }
-  declarationIntegrity: { algorithm: 'sha256'; digest: string; metadataVersion: string }
+  /** Digest of this manifest's declared offer fields, not the x402 extension. */
+  configurationDigest: { algorithm: 'sha256'; digest: string; schemaVersion: string }
   limits: { maxRequestBytes: number; concurrencyCap: number; requiresIdempotency: boolean }
   retention: { fullSourceTextStored: false; verbatimExcerptsRetained: boolean; note: string }
   capabilityBoundaries: readonly string[]
@@ -92,7 +93,7 @@ export type X402PublicManifest = {
   limitations: string[]
 }
 
-function digestFor(offer: X402Offer): string {
+function configurationDigestFor(offer: X402Offer): string {
   // Content-derived, over the fields a buyer's client actually reads. Anything
   // that changes what a payer is agreeing to changes this digest.
   const canonical = JSON.stringify({
@@ -150,7 +151,7 @@ export function buildPublicManifest(configurationAsOf: string): X402PublicManife
           input: `${ORIGIN}/api/discovery/x402-offers/${offer.id}#input`,
           output: `${ORIGIN}/api/discovery/x402-offers/${offer.id}#output`,
         },
-        declarationIntegrity: { algorithm: 'sha256', digest: digestFor(offer), metadataVersion: X402_PUBLIC_MANIFEST_VERSION },
+        configurationDigest: { algorithm: 'sha256', digest: configurationDigestFor(offer), schemaVersion: X402_PUBLIC_MANIFEST_VERSION },
         limits: {
           maxRequestBytes: offer.maxRequestBytes,
           concurrencyCap: offer.concurrencyCap,

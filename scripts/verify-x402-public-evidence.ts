@@ -49,8 +49,8 @@ for (const offer of X402_OFFERS) {
   if (expected === 'active' && published.payment?.amountBaseUnits !== offer.amount) {
     note(`${offer.id}: published amount does not match the catalog`)
   }
-  if (!/^sha256:[0-9a-f]{64}$/.test(published.declarationIntegrity?.digest ?? '')) {
-    note(`${offer.id}: declaration digest is malformed`)
+  if (!/^sha256:[0-9a-f]{64}$/.test(published.configurationDigest?.digest ?? '')) {
+    note(`${offer.id}: configuration digest is malformed`)
   }
 }
 

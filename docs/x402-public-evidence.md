@@ -10,7 +10,7 @@ GET https://www.mahastrategies.com/.well-known/x402-public-manifest.json
 ```
 
 One document. Per offer: canonical resource, method, payment terms where
-published, schema URLs, declaration-integrity digest, limits, retention
+published, schema URLs, configuration digest, limits, retention
 posture, and capability boundaries.
 
 ## What the manifest does and does not assert
@@ -121,7 +121,7 @@ A reasonable agent policy, in order:
 3. **Compare the challenge to the manifest** — resource, method, network,
    asset, amount. Any disagreement is a stop condition, not a rounding
    difference.
-4. **Check the declaration digest** against the manifest. A mismatch means the
+4. **Check the configuration digest** against the manifest. A mismatch means the
    published contract changed after you read it.
 5. **Read the conformance result.** Treat `not-observed` as unknown, never as
    pass.
