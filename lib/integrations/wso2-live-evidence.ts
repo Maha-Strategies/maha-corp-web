@@ -374,6 +374,17 @@ export function parseWso2LiveEvidence(value: unknown): Wso2LiveEvidenceArtifact 
   }
   if (sanitization.syntheticCorpus !== true) throw new Error('artifact.sanitization.syntheticCorpus must be true.')
 
+  // An empty pricing object serializes away silently and takes every cost
+  // figure's basis with it. Both prices must be present and parseable.
+  const configuration = asRecord(record.configuration, 'artifact.configuration')
+  const pricing = asRecord(configuration.pricingAssumptionUsdPerMillionTokens, 'artifact.configuration.pricingAssumptionUsdPerMillionTokens')
+  for (const side of ['input', 'output'] as const) {
+    const price = asString(pricing[side], `artifact.configuration.pricingAssumptionUsdPerMillionTokens.${side}`)
+    if (!/^\d+\.\d{6}$/.test(price)) {
+      throw new Error(`artifact.configuration.pricingAssumptionUsdPerMillionTokens.${side} must be a six-decimal USD string.`)
+    }
+  }
+
   if (!Array.isArray(record.limitations) || record.limitations.length === 0) {
     throw new Error('artifact.limitations must list at least one limitation.')
   }
