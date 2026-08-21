@@ -1,0 +1,71 @@
+{
+  "subject": {
+    "offerId": "context-compression",
+    "canonicalResource": "https://www.mahastrategies.com/api/v1/compress"
+  },
+  "dimensions": [
+    {
+      "dimension": "challenge-shape",
+      "verdict": "pass",
+      "evidenceClass": "local-contract-test",
+      "category": "protocol-conformance",
+      "detail": "An unpaid request is answered with an x402 v2 PAYMENT-REQUIRED challenge carrying scheme, network, asset and amount."
+    },
+    {
+      "dimension": "replay-protection",
+      "verdict": "pass",
+      "evidenceClass": "local-contract-test",
+      "category": "protocol-conformance",
+      "detail": "A replayed payment is refused without settling a second time."
+    },
+    {
+      "dimension": "fail-closed-on-facilitator-error",
+      "verdict": "pass",
+      "evidenceClass": "local-contract-test",
+      "category": "protocol-conformance",
+      "detail": "An unreachable or erroring facilitator withholds the resource rather than serving it free."
+    },
+    {
+      "dimension": "concurrency-admission",
+      "verdict": "pass",
+      "evidenceClass": "local-contract-test",
+      "category": "protocol-conformance",
+      "detail": "A paid request beyond the concurrency cap is refused with a retry indication rather than queued indefinitely."
+    },
+    {
+      "dimension": "settlement-observed",
+      "verdict": "not-observed",
+      "evidenceClass": "not-observed",
+      "category": "protocol-conformance",
+      "detail": "No paid settlement was performed to produce this document. Payment-path behaviour beyond the unpaid challenge is unverified here."
+    },
+    {
+      "dimension": "declaration-digest-consistency",
+      "verdict": "pass",
+      "evidenceClass": "local-contract-test",
+      "category": "discovery-eligibility",
+      "detail": "The published declaration digest is reproducible from the offer catalog fields it covers."
+    },
+    {
+      "dimension": "resource-description-limit",
+      "verdict": "pass",
+      "evidenceClass": "local-contract-test",
+      "category": "discovery-eligibility",
+      "detail": "The published resource description stays within the facilitator's undocumented length ceiling that previously caused every settlement to be refused."
+    },
+    {
+      "dimension": "registry-indexing",
+      "verdict": "not-observed",
+      "evidenceClass": "not-observed",
+      "category": "discovery-eligibility",
+      "detail": "Whether any third-party registry currently indexes this offer is not asserted by this document."
+    }
+  ],
+  "limitations": [
+    "Protocol conformance and discovery eligibility are reported separately and must not be combined into a single score.",
+    "Dimensions marked not-observed were not measured for this document; they are neither passing nor failing.",
+    "Local contract tests are deterministic and reproducible, but they exercise Maha's implementation, not a deployed third-party facilitator.",
+    "This is Maha's own evidence about Maha. It is not an independent audit and not a trust score.",
+    "No credential, payment signature, request content, response body, raw header or customer data appears in this document."
+  ]
+}
