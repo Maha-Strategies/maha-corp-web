@@ -12,6 +12,8 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "dist/**",
+    // Built package output. Linting it reports every finding once per package.
+    "packages/*/dist/**",
     ".claude/worktrees/**",
     "public/widget.js",
     "next-env.d.ts",

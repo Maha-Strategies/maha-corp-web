@@ -10,7 +10,6 @@ import { compileContextPack, estimateTokens, parseContextPackRequest, sha256 } f
 
 import {
   GATEWAY_CONTEXT_EXTENSION,
-  GATEWAY_DEFAULT_MINIMUM_COMPILE_TOKENS,
   GATEWAY_POLICY_VERSION,
   evidenceHeaders,
   gateContextRequest,

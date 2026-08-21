@@ -159,10 +159,6 @@ export function secureEqual(left: string, right: string): boolean {
   return timingSafeEqual(leftHash, rightHash)
 }
 
-function reject(status: number, code: GatewayRejectionCode, message: string): GatewayCompileResult {
-  return { outcome: 'rejected', status, code, message }
-}
-
 /** The context as the caller would have sent it, had the policy not been attached. */
 export function wholeDocumentContext(request: ContextDocuments): string {
   return request.documents
