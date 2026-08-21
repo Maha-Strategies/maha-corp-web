@@ -1,0 +1,75 @@
+{
+  "schemaVersion": "1.0.0",
+  "benchmark": "mcrb-1",
+  "release": "1.1.0-dense",
+  "additiveTo": {
+    "release": "1.0.0",
+    "measuredOn": "2026-08-09",
+    "primaryMetric": "completeEvidenceSetPercent"
+  },
+  "generatedFrom": "artifacts on disk, after the run completed",
+  "corpus": {
+    "name": "QASPER",
+    "version": "0.3.0",
+    "license": "CC BY 4.0",
+    "archiveUrl": "https://qasper-dataset.s3.us-west-2.amazonaws.com/qasper-train-dev-v0.3.tgz",
+    "archiveSha256": "a28fdf966db827bcee3d873107d6b6669864fb7ca8fbf73a192f5e39191bdb5a",
+    "split": "dev",
+    "cases": 250,
+    "cohortSha256": "sha256:89cf9f4163d5b10098d73d0858545f91d335fc76271ba1000ec99d9f264dad26",
+    "cohortVerifiedAgainstV1": true
+  },
+  "model": {
+    "name": "BAAI/bge-small-en-v1.5",
+    "revision": "5c38ec7c405ec4b44b94cc5a9bb96e735b38267a",
+    "embeddingDimension": 384,
+    "pooling": "cls",
+    "l2Normalized": true,
+    "maxTokens": 512,
+    "queryPrefix": "Represent this sentence for searching relevant passages: ",
+    "similarity": "cosine",
+    "similarityDigest": "sha256:29046d31c4d4de899c11395b1f0e1dd327ab48e7acda7987f8e2ea5a2fc9be16",
+    "license": "MIT",
+    "source": "https://huggingface.co/BAAI/bge-small-en-v1.5",
+    "weightsCommitted": false,
+    "note": "Weights are public, free and credential-free. They are pinned by name and commit revision and are deliberately not committed to this repository."
+  },
+  "environment": {
+    "node": "v26.5.0",
+    "platform": "darwin",
+    "arch": "arm64",
+    "torch": "2.13.0",
+    "numpy": "2.5.2",
+    "seed": 0,
+    "embedWallClockSeconds": 798.4
+  },
+  "protocol": {
+    "declaredTokenBudget": 2048,
+    "tokenizer": "gpt-tokenizer cl100k_base-compatible encode()",
+    "chunking": "v1 harness passagesFor + splitLongParagraph, unchanged",
+    "packing": "v1 harness fit(), unchanged",
+    "scoring": "v1 harness evaluate(), exact-span containment, unchanged",
+    "tuningAfterInspection": "none"
+  },
+  "artifacts": {
+    "results": {
+      "path": "public/benchmarks/mcrb-1/dense/results.json",
+      "sha256": "sha256:b47f69b880a78a268a58869ad1d8592eefe67238369a89a3762173c1374e2810"
+    },
+    "cases": {
+      "path": "public/benchmarks/mcrb-1/dense/cases.jsonl",
+      "sha256": "sha256:41eb0a17a9fafc1b522abf7d657014755a667796baea0eb81409b5a2749a8561"
+    },
+    "frozenV1Results": {
+      "path": "benchmarks/mcrb-1/results.json",
+      "sha256": "sha256:777a1f2837911b5d79963209ca85adf2e851615ba679bada693c1461d099d5eb"
+    },
+    "frozenV1Cohort": {
+      "path": "benchmarks/mcrb-1/cohort.json",
+      "sha256": "sha256:89cf9f4163d5b10098d73d0858545f91d335fc76271ba1000ec99d9f264dad26"
+    }
+  },
+  "runnerCommand": "npm run benchmark:mcrb1-dense:publish",
+  "offlineCommand": "MCRB_QASPER_DEV_JSON=/abs/path/qasper-dev-v0.3.json HF_HUB_OFFLINE=1 npm run benchmark:mcrb1-dense",
+  "methodology": "docs/benchmarks/mcrb1-dense-retriever-baseline.md"
+}

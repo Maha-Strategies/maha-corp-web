@@ -1,0 +1,238 @@
+{
+  "benchmark": "Maha Context Retention Benchmark",
+  "id": "mcrb-1",
+  "release": "1.1.0-dense",
+  "additiveTo": {
+    "release": "1.0.0",
+    "measuredOn": "2026-08-09",
+    "primaryMetric": "completeEvidenceSetPercent"
+  },
+  "measuredOn": "2026-08-21",
+  "scope": "A dense/embedding retrieval baseline evaluated on the frozen MCRB-1 cohort under the v1 budget and scorer. Retrieval only: no generative compression or reconstruction step.",
+  "dataset": {
+    "name": "QASPER",
+    "version": "0.3.0",
+    "license": "CC BY 4.0",
+    "archiveUrl": "https://qasper-dataset.s3.us-west-2.amazonaws.com/qasper-train-dev-v0.3.tgz",
+    "archiveSha256": "a28fdf966db827bcee3d873107d6b6669864fb7ca8fbf73a192f5e39191bdb5a",
+    "split": "dev",
+    "cases": 250,
+    "expectedCases": 250,
+    "cohortSha256": "sha256:89cf9f4163d5b10098d73d0858545f91d335fc76271ba1000ec99d9f264dad26",
+    "cohortVerifiedAgainstV1": true
+  },
+  "model": {
+    "name": "BAAI/bge-small-en-v1.5",
+    "revision": "5c38ec7c405ec4b44b94cc5a9bb96e735b38267a",
+    "embeddingDimension": 384,
+    "pooling": "cls",
+    "l2Normalized": true,
+    "maxTokens": 512,
+    "queryPrefix": "Represent this sentence for searching relevant passages: ",
+    "similarity": "cosine",
+    "similarityDigest": "sha256:29046d31c4d4de899c11395b1f0e1dd327ab48e7acda7987f8e2ea5a2fc9be16",
+    "license": "MIT",
+    "source": "https://huggingface.co/BAAI/bge-small-en-v1.5",
+    "weightsCommitted": false
+  },
+  "environment": {
+    "node": "v26.5.0",
+    "platform": "darwin",
+    "arch": "arm64",
+    "torch": "2.13.0",
+    "numpy": "2.5.2",
+    "seed": 0,
+    "embedWallClockSeconds": 798.4
+  },
+  "protocol": {
+    "declaredTokenBudget": 2048,
+    "tokenizer": "gpt-tokenizer cl100k_base-compatible encode()",
+    "chunking": "v1 harness passagesFor + splitLongParagraph, unchanged",
+    "packing": "v1 harness fit(), unchanged",
+    "scoring": "v1 harness evaluate(), exact-span containment, unchanged",
+    "tuningAfterInspection": "none"
+  },
+  "results": [
+    {
+      "method": "dense_bge_small_en_v15",
+      "cases": 250,
+      "completeEvidenceSetPercent": 71.2,
+      "completeEvidenceSetWilson95": {
+        "low": 65.3,
+        "high": 76.5
+      },
+      "anyEvidenceHitPercent": 82,
+      "anyEvidenceHitWilson95": {
+        "low": 76.8,
+        "high": 86.3
+      },
+      "meanEvidenceRecallPercent": 76.6,
+      "meanOutputTokens": 1579.6,
+      "meanReductionPercent": 73.2,
+      "citationTraceabilityPercent": 100,
+      "latencyMs": {
+        "p50": 9.52,
+        "p95": 22.23
+      },
+      "byEvidencePosition": {
+        "front": {
+          "cases": 95,
+          "completeEvidenceSetPercent": 69.5,
+          "meanEvidenceRecallPercent": 73.2
+        },
+        "middle": {
+          "cases": 93,
+          "completeEvidenceSetPercent": 73.1,
+          "meanEvidenceRecallPercent": 79.5
+        },
+        "back": {
+          "cases": 62,
+          "completeEvidenceSetPercent": 71,
+          "meanEvidenceRecallPercent": 77.6
+        }
+      }
+    }
+  ],
+  "comparison": [
+    {
+      "method": "maha_bm25",
+      "completeEvidenceSetPercent": 60.4,
+      "completeEvidenceSetWilson95": {
+        "low": 54.2,
+        "high": 66.3
+      },
+      "anyEvidenceHitPercent": 72,
+      "meanEvidenceRecallPercent": 66.2,
+      "meanOutputTokens": 1512,
+      "meanReductionPercent": 74.4,
+      "citationTraceabilityPercent": 100,
+      "latencyMs": {
+        "p50": 3.48,
+        "p95": 5.89
+      },
+      "release": "mcrb-1 v1.0.0 (frozen)"
+    },
+    {
+      "method": "maha_keyword",
+      "completeEvidenceSetPercent": 54,
+      "completeEvidenceSetWilson95": {
+        "low": 47.8,
+        "high": 60.1
+      },
+      "anyEvidenceHitPercent": 64,
+      "meanEvidenceRecallPercent": 58.8,
+      "meanOutputTokens": 1506,
+      "meanReductionPercent": 74.5,
+      "citationTraceabilityPercent": 100,
+      "latencyMs": {
+        "p50": 2.98,
+        "p95": 5.33
+      },
+      "release": "mcrb-1 v1.0.0 (frozen)"
+    },
+    {
+      "method": "front_truncation",
+      "completeEvidenceSetPercent": 25.6,
+      "completeEvidenceSetWilson95": {
+        "low": 20.6,
+        "high": 31.4
+      },
+      "anyEvidenceHitPercent": 30.4,
+      "meanEvidenceRecallPercent": 27.9,
+      "meanOutputTokens": 1587.7,
+      "meanReductionPercent": 73.1,
+      "citationTraceabilityPercent": 100,
+      "latencyMs": {
+        "p50": 3.99,
+        "p95": 8.23
+      },
+      "release": "mcrb-1 v1.0.0 (frozen)"
+    },
+    {
+      "method": "tail_recency",
+      "completeEvidenceSetPercent": 20.4,
+      "completeEvidenceSetWilson95": {
+        "low": 15.9,
+        "high": 25.8
+      },
+      "anyEvidenceHitPercent": 25.2,
+      "meanEvidenceRecallPercent": 22.7,
+      "meanOutputTokens": 1578.5,
+      "meanReductionPercent": 73.2,
+      "citationTraceabilityPercent": 100,
+      "latencyMs": {
+        "p50": 4,
+        "p95": 7.92
+      },
+      "release": "mcrb-1 v1.0.0 (frozen)"
+    },
+    {
+      "method": "seeded_random",
+      "completeEvidenceSetPercent": 21.6,
+      "completeEvidenceSetWilson95": {
+        "low": 16.9,
+        "high": 27.1
+      },
+      "anyEvidenceHitPercent": 33.2,
+      "meanEvidenceRecallPercent": 26.9,
+      "meanOutputTokens": 1576.8,
+      "meanReductionPercent": 73.3,
+      "citationTraceabilityPercent": 100,
+      "latencyMs": {
+        "p50": 3.96,
+        "p95": 8.16
+      },
+      "release": "mcrb-1 v1.0.0 (frozen)"
+    },
+    {
+      "method": "oracle_ceiling",
+      "completeEvidenceSetPercent": 99.6,
+      "completeEvidenceSetWilson95": {
+        "low": 97.8,
+        "high": 99.9
+      },
+      "anyEvidenceHitPercent": 99.6,
+      "meanEvidenceRecallPercent": 99.6,
+      "meanOutputTokens": 1575.6,
+      "meanReductionPercent": 73.3,
+      "citationTraceabilityPercent": 100,
+      "latencyMs": {
+        "p50": 5.26,
+        "p95": 10.8
+      },
+      "release": "mcrb-1 v1.0.0 (frozen)"
+    },
+    {
+      "method": "dense_bge_small_en_v15",
+      "completeEvidenceSetPercent": 71.2,
+      "completeEvidenceSetWilson95": {
+        "low": 65.3,
+        "high": 76.5
+      },
+      "anyEvidenceHitPercent": 82,
+      "meanEvidenceRecallPercent": 76.6,
+      "meanOutputTokens": 1579.6,
+      "meanReductionPercent": 73.2,
+      "citationTraceabilityPercent": 100,
+      "latencyMs": {
+        "p50": 9.52,
+        "p95": 22.23
+      },
+      "release": "1.1.0-dense"
+    }
+  ],
+  "failureClasses": {
+    "budgetExceeded": 0,
+    "emptySelection": 0,
+    "rankerShortfall": 0,
+    "casesEvaluated": 250
+  },
+  "limitations": [
+    "Retrieval-only against context compilation is not a like-for-like comparison of systems. The corpus, budget, packer and scorer are identical; the approaches are not.",
+    "One embedding model at one revision. It does not represent dense retrieval in general.",
+    "Passages longer than 512 model tokens are truncated by the embedder before scoring; the packer still sees the full passage.",
+    "Exact-span containment penalises paraphrase equally for every method, and is not generated-answer accuracy.",
+    "Latency excludes embedding wall-clock, which is reported separately in environment.embedWallClockSeconds; the per-case figure measures ordering and packing only.",
+    "Measured locally in one process. It is not a network or service-level measurement."
+  ]
+}
