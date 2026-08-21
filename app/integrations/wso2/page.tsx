@@ -6,6 +6,7 @@ import {
   loadWso2LiveEvidence,
   sha256File,
 } from '@/lib/integrations/wso2-live-evidence'
+import { PUBLIC_EVIDENCE } from '@/lib/evidence/public-evidence-index'
 
 export const metadata: Metadata = {
   title: 'Maha Context Compiler for WSO2 AI Gateway',
@@ -207,6 +208,26 @@ export default function Wso2IntegrationPage() {
               </a>
             ))}
           </div>
+
+          <h3 className="evidence-card-title mt-10">The evidence package</h3>
+          <p className="evidence-copy mt-4">
+            Four documents, each served from this site and each stating its own scope. Read them before the call rather than after it.
+          </p>
+          <ul className="mt-6 space-y-3">
+            {PUBLIC_EVIDENCE.filter((item) => item.id !== 'mcrb1-v1').map((item) => (
+              <li key={item.id} className="border border-[var(--border-subtle)] bg-[var(--surface-raised)] p-4">
+                <a className="evidence-link font-mono text-xs uppercase tracking-widest" href={item.href} target="_blank" rel="noreferrer">
+                  {item.title} ↗
+                </a>
+                <p className="mt-2 text-xs leading-6 text-[var(--text-muted)]">{item.description}</p>
+              </li>
+            ))}
+          </ul>
+          <p className="mt-4 max-w-3xl text-xs leading-6 text-[var(--text-muted)]">
+            The retention benchmark publishes its{' '}
+            <a className="evidence-link" href="/benchmarks/mcrb-1/results.json" target="_blank" rel="noreferrer">v1 results</a>{' '}
+            alongside the dense baseline, so the comparison can be read in full rather than in the direction that flatters us.
+          </p>
           <div className="evidence-code mt-6 overflow-x-auto p-5">
             <code className="font-mono text-xs">npm run reproduce:wso2-evaluation</code>
           </div>
