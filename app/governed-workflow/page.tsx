@@ -77,6 +77,35 @@ export default function GovernedWorkflowPage() {
         </span>
       </div>
 
+      <section aria-labelledby="workflow-fit" style={{ borderTop: '1px solid #e4e8ee', paddingTop: '1.5rem', marginTop: '2rem' }}>
+        <h2 id="workflow-fit" style={{ fontSize: '1.3rem', margin: 0 }}>Where it fits</h2>
+        <p style={{ marginTop: '0.45rem', color: '#3d4a5c' }}>
+          This is for a workflow where an organisation must later answer: what was decided, what evidence was in
+          scope, which policy applied, who approved it, and whether a retry could repeat an effect.
+        </p>
+        <ul style={{ paddingLeft: '1.15rem', margin: '0.75rem 0 0' }}>
+          <li><strong>Claims and policy review</strong> — bind a decision to the exact evidence set and policy version.</li>
+          <li><strong>Procurement</strong> — require a bounded approval before an agent may prepare a purchase action.</li>
+          <li><strong>Document approval</strong> — retain auditable metadata and digests without retaining document text in workflow state.</li>
+          <li><strong>Governed agent actions</strong> — record intended effects, receipts, uncertainty, and safe recovery paths.</li>
+        </ul>
+      </section>
+
+      <section aria-labelledby="evaluation-walkthrough" style={{ borderTop: '1px solid #e4e8ee', paddingTop: '1.5rem', marginTop: '2rem' }}>
+        <h2 id="evaluation-walkthrough" style={{ fontSize: '1.3rem', margin: 0 }}>A bounded evaluation walkthrough</h2>
+        <ol style={{ paddingLeft: '1.25rem', margin: '0.75rem 0 0' }}>
+          <li><strong>Choose one decision.</strong> For example: approve a claim exception, approve a supplier change, or authorize an agent to prepare—not execute—an action.</li>
+          <li><strong>Declare the boundary.</strong> Define required evidence references, policy version, approval role, allowed operation, stop conditions, and retention constraints.</li>
+          <li><strong>Run the workflow twice.</strong> Exercise the normal path and one adverse path such as changed evidence, expired approval, denied policy, or an interrupted action.</li>
+          <li><strong>Review the evidence.</strong> Compare hash-chained transitions, reason codes, approval binding, uncertainty state, and recovery classification.</li>
+          <li><strong>Decide what would be required next.</strong> A production design needs the customer’s identity, storage, key-management, retention, integration, and control-owner decisions. This prototype does not supply them.</li>
+        </ol>
+        <p style={{ marginTop: '0.9rem' }}>
+          <Link href="/contact">Discuss a bounded evaluation</Link>
+          {' '}for a customer-shaped workflow. No source documents, provider credentials, payment authority, or live effects are needed for the initial review.
+        </p>
+      </section>
+
       <h2 style={{ fontSize: '1.3rem', marginTop: '2.25rem' }}>What this view shows and does not show</h2>
       <p style={{ marginTop: '0.4rem' }}>
         The durable event shape has no field that can hold document text. What an operator sees is references, digests,
