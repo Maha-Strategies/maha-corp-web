@@ -240,20 +240,20 @@ test('evidenceHeaders emits exactly the seven contract headers', () => {
 })
 
 test('limits and secret come from the environment with safe fallbacks', () => {
-  assert.deepEqual(gatewayLimitsFrom({} as NodeJS.ProcessEnv), {
+  assert.deepEqual(gatewayLimitsFrom({} as unknown as NodeJS.ProcessEnv), {
     maxBodyBytes: 512_000, minimumCompileTokens: 1_024, timeoutMs: 3_000,
   })
   // A nonsense value falls back rather than disabling the cap.
-  assert.equal(gatewayLimitsFrom({ MAHA_GATEWAY_MAX_BODY_BYTES: '-1' } as NodeJS.ProcessEnv).maxBodyBytes, 512_000)
-  assert.equal(gatewayLimitsFrom({ MAHA_GATEWAY_MAX_BODY_BYTES: 'lots' } as NodeJS.ProcessEnv).maxBodyBytes, 512_000)
-  assert.equal(gatewayLimitsFrom({ MAHA_GATEWAY_TIMEOUT_MS: '1500' } as NodeJS.ProcessEnv).timeoutMs, 1_500)
+  assert.equal(gatewayLimitsFrom({ MAHA_GATEWAY_MAX_BODY_BYTES: '-1' } as unknown as NodeJS.ProcessEnv).maxBodyBytes, 512_000)
+  assert.equal(gatewayLimitsFrom({ MAHA_GATEWAY_MAX_BODY_BYTES: 'lots' } as unknown as NodeJS.ProcessEnv).maxBodyBytes, 512_000)
+  assert.equal(gatewayLimitsFrom({ MAHA_GATEWAY_TIMEOUT_MS: '1500' } as unknown as NodeJS.ProcessEnv).timeoutMs, 1_500)
 
-  assert.equal(gatewaySecretFrom({} as NodeJS.ProcessEnv), undefined)
-  assert.equal(gatewaySecretFrom({ WSO2_CONTEXT_INTERCEPTOR_SECRET: 'legacy' } as NodeJS.ProcessEnv), 'legacy')
+  assert.equal(gatewaySecretFrom({} as unknown as NodeJS.ProcessEnv), undefined)
+  assert.equal(gatewaySecretFrom({ WSO2_CONTEXT_INTERCEPTOR_SECRET: 'legacy' } as unknown as NodeJS.ProcessEnv), 'legacy')
   // The neutral name wins when both are set.
   assert.equal(gatewaySecretFrom({
     WSO2_CONTEXT_INTERCEPTOR_SECRET: 'legacy', MAHA_CONTEXT_INTERCEPTOR_SECRET: 'neutral',
-  } as NodeJS.ProcessEnv), 'neutral')
+  } as unknown as NodeJS.ProcessEnv), 'neutral')
 })
 
 test('WSO2 and the neutral contract share one decision, not two', () => {

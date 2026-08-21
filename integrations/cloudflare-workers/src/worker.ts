@@ -42,7 +42,7 @@ const positiveInteger = (raw: string | undefined, fallback: number): number => {
   return Number.isInteger(parsed) && parsed > 0 ? parsed : fallback
 }
 
-export default {
+const worker = {
   async fetch(request: Request, env: Env): Promise<Response> {
     if (request.method !== 'POST') return fail(405, 'method_not_allowed', 'Only POST is supported.')
     if (!env.MAHA_CONTEXT_INTERCEPTOR_SECRET || env.MAHA_CONTEXT_INTERCEPTOR_SECRET.length < 32) {
@@ -89,11 +89,11 @@ export default {
     }
 
     if (!compiled.ok) {
-      const detail = await compiled.json<{ error?: { code?: string } }>().catch(() => null)
+      const detail = await compiled.json().catch(() => null) as { error?: { code?: string } } | null
       return fail(compiled.status, detail?.error?.code ?? 'context_compilation_rejected', 'The context compiler refused the request.')
     }
 
-    const result = await compiled.json<{ outcome?: string; body?: Record<string, unknown> }>().catch(() => null)
+    const result = await compiled.json().catch(() => null) as { outcome?: string; body?: Record<string, unknown> } | null
     if (result?.outcome === 'passthrough') return forward(raw, request, env, {})
     if (result?.outcome !== 'compiled' || !result.body) {
       return fail(502, 'invalid_compiler_output', 'The compiler returned an unusable result.')
@@ -107,6 +107,8 @@ export default {
     return forward(JSON.stringify(result.body), request, env, evidence)
   },
 }
+
+export default worker
 
 /**
  * Forward to the provider and return its response with evidence attached.

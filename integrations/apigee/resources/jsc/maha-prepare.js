@@ -23,7 +23,7 @@ if (context.getVariable('request.header.x-maha-compiled') === 'true') {
       fail(413, 'payload_too_large');
     } else {
       var parsed = null;
-      try { parsed = JSON.parse(raw); } catch (e) { parsed = null; }
+      try { parsed = JSON.parse(raw); } catch (e) { parsed = null; } // eslint-disable-line @typescript-eslint/no-unused-vars -- Apigee runs Rhino, which has no optional catch binding
       if (parsed === null) {
         fail(400, 'invalid_envelope');
       } else if (parsed.maha_context !== undefined) {

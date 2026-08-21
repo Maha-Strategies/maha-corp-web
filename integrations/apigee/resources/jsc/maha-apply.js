@@ -20,7 +20,7 @@ if (String(status) !== '200' || !raw) {
   context.setVariable('maha.compile.code', 'compiler_unavailable');
 } else {
   var result = null;
-  try { result = JSON.parse(raw); } catch (e) { result = null; }
+  try { result = JSON.parse(raw); } catch (e) { result = null; } // eslint-disable-line @typescript-eslint/no-unused-vars -- Apigee runs Rhino, which has no optional catch binding
 
   if (result && result.outcome === 'passthrough') {
     // Not opted in, or already compiled. Forward the original unchanged.
