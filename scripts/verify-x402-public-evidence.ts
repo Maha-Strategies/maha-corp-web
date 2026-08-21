@@ -25,7 +25,7 @@ const failures: string[] = []
 const note = (message: string): void => { failures.push(message) }
 
 const committedManifest = JSON.parse(readFileSync(X402_PUBLIC_MANIFEST_PATH, 'utf8'))
-const derived = buildPublicManifest(committedManifest.generatedAt)
+const derived = buildPublicManifest(committedManifest.configurationAsOf)
 
 // The manifest must be a pure function of the catalog. A hand edit is a claim
 // nobody derived.

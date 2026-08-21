@@ -32,7 +32,13 @@ export type ConformanceDimension = {
 
 export type X402ConformanceResult = {
   schemaVersion: typeof X402_CONFORMANCE_RESULT_VERSION
-  generatedAt: string
+  /**
+   * The snapshot this static document describes. Same meaning as the
+   * manifest's field, and named the same so a consumer reading both does not
+   * have to work out whether two differently-named dates mean the same thing.
+   * Not a probe time and not a build timestamp.
+   */
+  configurationAsOf: string
   subject: { offerId: string; canonicalResource: string }
   /** Separate roll-ups. There is deliberately no single combined score. */
   verdicts: {
@@ -85,8 +91,8 @@ export function parseConformanceResult(value: unknown): X402ConformanceResult {
   if (record.schemaVersion !== X402_CONFORMANCE_RESULT_VERSION) {
     throw new Error(`Unsupported conformance schema version; this tool reads ${X402_CONFORMANCE_RESULT_VERSION}.`)
   }
-  if (typeof record.generatedAt !== 'string' || !/^\d{4}-\d{2}-\d{2}/.test(record.generatedAt)) {
-    throw new Error('generatedAt must be an ISO date.')
+  if (typeof record.configurationAsOf !== 'string' || !/^\d{4}-\d{2}-\d{2}/.test(record.configurationAsOf)) {
+    throw new Error('configurationAsOf must be an ISO date.')
   }
   if (!Array.isArray(record.dimensions) || record.dimensions.length === 0) {
     throw new Error('dimensions must list at least one measured dimension.')

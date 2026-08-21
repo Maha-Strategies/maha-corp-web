@@ -20,12 +20,13 @@ import {
 } from '../lib/x402/public-conformance.ts'
 
 const DIMENSIONS_SOURCE = 'content/x402/conformance-dimensions.json'
-// Fixed so the artifacts are reproducible; bumped when the evidence changes,
-// not on every run. A timestamp that moves on each build is noise, and it
-// makes "freshness" impossible to reason about.
-const GENERATED_AT = '2026-08-21'
+// Fixed so the artifacts are reproducible; changed when the described
+// configuration changes, not on every run. A value that moved on each build
+// would be a build timestamp wearing a configuration label, and would make
+// "as of" impossible to reason about.
+const CONFIGURATION_AS_OF = '2026-08-21'
 
-const manifest = buildPublicManifest(GENERATED_AT)
+const manifest = buildPublicManifest(CONFIGURATION_AS_OF)
 const forbiddenInManifest = findForbiddenInManifest(manifest)
 if (forbiddenInManifest.length > 0) {
   throw new Error(`Refusing to write: manifest contains forbidden content: ${forbiddenInManifest.join(', ')}`)
@@ -39,7 +40,7 @@ const dimensions = JSON.parse(readFileSync(DIMENSIONS_SOURCE, 'utf8')) as {
 
 const conformance = {
   schemaVersion: '1.0.0' as const,
-  generatedAt: GENERATED_AT,
+  configurationAsOf: CONFIGURATION_AS_OF,
   subject: dimensions.subject,
   verdicts: {
     protocolConformance: rollUp(dimensions.dimensions, 'protocol-conformance'),

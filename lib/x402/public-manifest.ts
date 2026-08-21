@@ -64,7 +64,16 @@ export type PublicManifestOffer = {
 
 export type X402PublicManifest = {
   schemaVersion: typeof X402_PUBLIC_MANIFEST_VERSION
-  generatedAt: string
+  /**
+   * The configuration snapshot this static document describes.
+   *
+   * Named for what it is. `generatedAt` invited the reading "last verified",
+   * which is the one thing this document must never be taken to mean: it is
+   * not a probe time, not a build timestamp, and not a freshness, uptime,
+   * indexing or settlement observation. It moves only when the described
+   * configuration is regenerated, which is what makes it reproducible.
+   */
+  configurationAsOf: string
   provider: { name: string; url: string }
   /** What this document is, and is not, in the document itself. */
   assertionBoundary: {
@@ -74,6 +83,7 @@ export type X402PublicManifest = {
     assertsRegistryIndexing: false
     assertsUptime: false
     assertsTrustScore: false
+    configurationAsOfMeaning: string
     proofOfPayability: string
     note: string
   }
@@ -102,10 +112,10 @@ function digestFor(offer: X402Offer): string {
   return `sha256:${createHash('sha256').update(canonical).digest('hex')}`
 }
 
-export function buildPublicManifest(generatedAt: string): X402PublicManifest {
+export function buildPublicManifest(configurationAsOf: string): X402PublicManifest {
   return {
     schemaVersion: X402_PUBLIC_MANIFEST_VERSION,
-    generatedAt,
+    configurationAsOf,
     provider: { name: 'Maha Strategies LLC', url: ORIGIN },
     assertionBoundary: {
       assertsConfiguration: true,
@@ -114,8 +124,9 @@ export function buildPublicManifest(generatedAt: string): X402PublicManifest {
       assertsRegistryIndexing: false,
       assertsUptime: false,
       assertsTrustScore: false,
+      configurationAsOfMeaning: 'configurationAsOf is the configuration snapshot this document describes. It is not a probe time, a build timestamp, a freshness signal, or an observation of uptime, indexing or settlement.',
       proofOfPayability: 'A live HTTP 402 PAYMENT-REQUIRED challenge from the canonical resource is the only proof an offer can be bought.',
-      note: 'This manifest describes declared configuration at the generated-at timestamp. It does not assert that any endpoint is currently reachable, enabled in a given deployment, indexed by any registry, or has ever settled a payment.',
+      note: 'This manifest describes declared configuration as of configurationAsOf. It does not assert that any endpoint is currently reachable, enabled in a given deployment, indexed by any registry, or has ever settled a payment.',
     },
     offers: X402_OFFERS.map((offer): PublicManifestOffer => {
       const status = publicStatusFor(offer.status)

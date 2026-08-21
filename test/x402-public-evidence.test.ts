@@ -24,7 +24,7 @@ const conformance = () => JSON.parse(readFileSync(join(ROOT, X402_CONFORMANCE_RE
 
 test('the committed manifest reproduces from the offer catalog', () => {
   const committed = manifest()
-  assert.deepEqual(committed, buildPublicManifest(committed.generatedAt))
+  assert.deepEqual(committed, buildPublicManifest(committed.configurationAsOf))
 })
 
 test('every catalog offer appears, with its catalog status', () => {
@@ -84,7 +84,7 @@ test('the denials the document relies on are actually present', () => {
 test('a mismatched or stale declaration digest is caught', () => {
   const tampered = manifest()
   tampered.offers[0].declarationIntegrity.digest = `sha256:${'0'.repeat(64)}`
-  assert.notDeepEqual(tampered, buildPublicManifest(tampered.generatedAt))
+  assert.notDeepEqual(tampered, buildPublicManifest(tampered.configurationAsOf))
 
   const malformed = manifest()
   malformed.offers[0].declarationIntegrity.digest = 'not-a-digest'
@@ -100,7 +100,7 @@ test('a wrong resource, network or version boundary is caught', () => {
   ]) {
     const tampered = manifest()
     mutate(tampered)
-    assert.notDeepEqual(tampered, buildPublicManifest(tampered.generatedAt))
+    assert.notDeepEqual(tampered, buildPublicManifest(tampered.configurationAsOf))
   }
 })
 
@@ -201,7 +201,7 @@ test('a sanitization flag cannot be flipped to permit retention', () => {
 test('a malformed conformance envelope fails closed', () => {
   assert.throws(() => parseConformanceResult('not an object'), /must be a JSON object/)
   assert.throws(() => parseConformanceResult({ ...conformance(), schemaVersion: '2.0.0' }), /Unsupported conformance schema version/)
-  assert.throws(() => parseConformanceResult({ ...conformance(), generatedAt: 'whenever' }), /must be an ISO date/)
+  assert.throws(() => parseConformanceResult({ ...conformance(), configurationAsOf: 'whenever' }), /must be an ISO date/)
   assert.throws(() => parseConformanceResult({ ...conformance(), dimensions: [] }), /at least one measured dimension/)
   const noVerdicts = conformance(); delete noVerdicts.verdicts
   assert.throws(() => parseConformanceResult(noVerdicts), /separately/)
@@ -213,4 +213,35 @@ test('the manifest points only at public evidence surfaces', () => {
     if (value.startsWith('npm run')) continue
     assert.match(value, /^https:\/\/www\.mahastrategies\.com\//, `evidence.${key} is not a public https URL`)
   }
+})
+
+/**
+ * The rename exists because `generatedAt` invited "last verified". A guard, so
+ * the old name cannot come back through a copy-paste and quietly re-acquire
+ * the reading the field was renamed to avoid.
+ */
+test('the snapshot field is configurationAsOf, and generatedAt is gone', () => {
+  for (const document of [manifest(), conformance()]) {
+    assert.equal(typeof document.configurationAsOf, 'string')
+    assert.match(document.configurationAsOf, /^\d{4}-\d{2}-\d{2}$/)
+    assert.ok(!('generatedAt' in document), 'generatedAt is still published')
+    assert.ok(!JSON.stringify(document).includes('generatedAt'), 'generatedAt appears somewhere in the document')
+  }
+})
+
+test('the document says in-band what configurationAsOf does and does not mean', () => {
+  const meaning = manifest().assertionBoundary.configurationAsOfMeaning as string
+  assert.match(meaning, /configuration snapshot this document describes/i)
+  for (const notThis of ['probe time', 'build timestamp', 'freshness', 'uptime', 'indexing', 'settlement']) {
+    assert.ok(meaning.toLowerCase().includes(notThis), `the meaning does not rule out "${notThis}"`)
+  }
+})
+
+test('the snapshot value is deterministic across regeneration', async () => {
+  const { execFileSync } = await import('node:child_process')
+  const before = readFileSync(join(ROOT, X402_PUBLIC_MANIFEST_PATH), 'utf8')
+  execFileSync('node', ['--experimental-strip-types', 'scripts/generate-x402-public-evidence.ts'],
+    { cwd: ROOT, stdio: 'ignore' })
+  const after = readFileSync(join(ROOT, X402_PUBLIC_MANIFEST_PATH), 'utf8')
+  assert.equal(after, before, 'regeneration changed the artifact; the snapshot value is not deterministic')
 })

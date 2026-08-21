@@ -15,11 +15,33 @@ posture, and capability boundaries.
 
 ## What the manifest does and does not assert
 
-It asserts **declared configuration** at its `generatedAt` timestamp. It
-explicitly does not assert liveness, settlement history, registry indexing,
-uptime, or a trust score — and it carries those five denials as machine-readable
-booleans in `assertionBoundary`, so a consumer can check the boundary rather
-than parse prose for it.
+It asserts **declared configuration** as of `configurationAsOf`. It explicitly
+does not assert liveness, settlement history, registry indexing, uptime, or a
+trust score — and it carries those five denials as machine-readable booleans in
+`assertionBoundary`, so a consumer can check the boundary rather than parse
+prose for it.
+
+### `configurationAsOf` is not a freshness signal
+
+The field is named for what it is: **the configuration snapshot this static
+document describes**. It is deliberately not called `generatedAt`, because that
+name invites the reading "last verified" — the one meaning it must never carry.
+
+| It is | It is not |
+| --- | --- |
+| The snapshot of declared configuration in this document | A live probe time |
+| Deterministic, so the artifact is reproducible | A build timestamp |
+| Changed when the described configuration changes | A freshness, uptime, indexing or settlement observation |
+
+The document states this in-band, so a consumer never has to find this page:
+
+```jsonc
+"configurationAsOfMeaning": "configurationAsOf is the configuration snapshot this document describes. It is not a probe time, a build timestamp, a freshness signal, or an observation of uptime, indexing or settlement."
+```
+
+**If you need to know whether an offer is payable right now, send an unpaid
+request and read the 402.** Nothing in this document can answer that, by
+design.
 
 ```jsonc
 "assertionBoundary": {
@@ -29,6 +51,7 @@ than parse prose for it.
   "assertsRegistryIndexing": false,
   "assertsUptime": false,
   "assertsTrustScore": false,
+  "configurationAsOfMeaning": "…not a probe time, a build timestamp, a freshness signal…",
   "proofOfPayability": "A live HTTP 402 PAYMENT-REQUIRED challenge from the canonical resource is the only proof an offer can be bought."
 }
 ```
