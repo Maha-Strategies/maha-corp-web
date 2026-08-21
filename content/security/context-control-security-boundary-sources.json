@@ -38,8 +38,12 @@
       "sha256": "sha256:4407b3297f3faeeea26e6d798334caecb40bc462dfb2cd939f0251bb5890e11d"
     },
     {
+      "path": "lib/integrations/gateway-context-contract.ts",
+      "sha256": "sha256:fc33bb3e5d5886812c096b8d169da55a35594353b41171ea0efc3ac213370a05"
+    },
+    {
       "path": "lib/integrations/wso2-context-interceptor.ts",
-      "sha256": "sha256:b6de80c19c42122e133e75f34c5914e2e310603347c8f44d7db9bd1c7bfbeefd"
+      "sha256": "sha256:efe73a2548c9e6c844b6ed6338da9613915b32079477a9b9daf87e3fa2462dc0"
     },
     {
       "path": "test/context-compiler-recipe.test.ts",
@@ -162,6 +166,11 @@
           "path": "lib/integrations/wso2-context-interceptor.ts",
           "kind": "code",
           "note": "evidence header set is metadata only"
+        },
+        {
+          "path": "lib/integrations/gateway-context-contract.ts",
+          "kind": "code",
+          "note": "evidenceHeaders emits hashes, counts and a policy version, never content"
         }
       ]
     },
@@ -354,9 +363,14 @@
       "text": "Below 1,024 estimated tokens the interceptor forwards your original context instead of a compiled pack, and above it compares the two and forwards the original whenever compilation would not be smaller. Enabling the policy therefore cannot increase the context sent to your provider.",
       "sources": [
         {
+          "path": "lib/integrations/gateway-context-contract.ts",
+          "kind": "code",
+          "note": "minimum-size floor and non-expansion guard, shared by every gateway adapter"
+        },
+        {
           "path": "lib/integrations/wso2-context-interceptor.ts",
           "kind": "code",
-          "note": "WSO2_CONTEXT_MINIMUM_COMPILE_TOKENS and the non-expansion guard"
+          "note": "WSO2 delegates the decision to that shared core"
         },
         {
           "path": "test/wso2-context-interceptor.test.ts",
