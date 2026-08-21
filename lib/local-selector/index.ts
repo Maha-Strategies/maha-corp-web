@@ -30,9 +30,10 @@ import {
 /**
  * The host functions this runtime needs.
  *
- * Injectable so the same selector can run where `node:crypto` does not exist.
- * A caller supplying these is the whole portability story; see the feasibility
- * boundary in the guide.
+ * Injectable so hashing, identifiers, and UTF-8 offset measurement can be
+ * tested independently of the Node defaults. The shared compiler remains a
+ * Node runtime today; these seams are preparation for a separately ported
+ * browser/WASM implementation, not evidence that this module loads there.
  */
 export type LocalSelectorHost = {
   sha256Hex: (value: string) => string
@@ -47,11 +48,10 @@ export const nodeHost: LocalSelectorHost = {
 }
 
 /**
- * A host with no `node:crypto` and no `Buffer`.
+ * A host using Web-compatible primitives for identifiers and byte lengths.
  *
- * Used by the portability test to prove the runtime does not reach for Node
- * built-ins outside these seams. The digest is a placeholder, not a hash
- * function -- `sha256Hex` must be supplied by a real host.
+ * The digest is injected because WebCrypto is asynchronous. This helper does
+ * not make the Node-only shared compiler browser or WASM compatible.
  */
 export function portableHost(digest: (value: string) => string): LocalSelectorHost {
   return {

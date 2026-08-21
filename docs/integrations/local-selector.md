@@ -91,9 +91,10 @@ would imply a port that has not happened.
 What ships instead is the interface that makes a port possible. The runtime
 needs exactly four things from a host, all injectable through
 `LocalSelectorHost`: `sha256Hex`, `randomId`, `utf8ByteLength`, and
-Unicode-aware regex. A test runs the full selector on a host with **no
-`node:crypto` and no `Buffer`** and asserts byte-identical offsets, so the seam
-is proven rather than described.
+Unicode-aware regex. A test supplies a host-provided digest and Web-compatible
+UTF-8/identifier helpers, then asserts byte-identical offsets. That proves the
+helper boundary; it **does not** prove that the current module loads outside
+Node, because the shared compiler it uses is currently Node-only.
 
 `npm run probe:local-selector-wasm` reports the boundary. Today it finds two
 kinds of blocker:
@@ -108,11 +109,12 @@ needs a regex strategy and a parity run across scripts before anyone trusts it.
 
 ### Prospective embedding
 
-For a browser or edge target, the shape is: supply `sha256Hex` from WebCrypto
-(which is async, so the entry point would need an async variant),
-`utf8ByteLength` from `TextEncoder`, `randomId` from `crypto.getRandomValues` —
-the `portableHost` helper already does the latter two — and resolve the regex
-question above.
+For a browser or edge target, the shape is: first port the shared compiler and
+resolve its regex strategy; then supply `sha256Hex` from WebCrypto (which is
+async, so the entry point would need an async variant), `utf8ByteLength` from
+`TextEncoder`, and `randomId` from `crypto.getRandomValues`. The
+`portableHost` helper demonstrates the latter two helpers only; it is not a
+browser or WASM runtime.
 
 ### Browser and edge caveats
 

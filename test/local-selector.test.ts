@@ -180,10 +180,10 @@ test('local selection matches the shared Context Compiler on the frozen fixture'
 })
 
 /**
- * Portability is the WASM feasibility question in miniature: does the runtime
- * reach for Node built-ins outside its four declared seams?
+ * Injected host helpers must preserve hashes and UTF-8 byte offsets. This does
+ * not prove the Node-only shared compiler can load in a browser or WASM host.
  */
-test('the runtime runs on a host with no node:crypto and no Buffer', () => {
+test('injected host helpers preserve hash and offset behaviour', () => {
   const digest = (value: string) => createHash('sha256').update(value).digest('hex')
   const host = portableHost(digest)
   const result = selectLocally(large(), { host })
