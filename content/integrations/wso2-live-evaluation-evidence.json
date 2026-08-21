@@ -32,7 +32,10 @@
     "temperature": 0,
     "maxOutputTokens": 220,
     "automaticRetries": 0,
-    "pricingAssumptionUsdPerMillionTokens": {}
+    "pricingAssumptionUsdPerMillionTokens": {
+      "input": "1.000000",
+      "output": "5.000000"
+    }
   },
   "workloads": [
     {

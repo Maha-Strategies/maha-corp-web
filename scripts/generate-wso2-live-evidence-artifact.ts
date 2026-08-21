@@ -24,6 +24,7 @@ import {
   deriveAggregates,
   deriveComparison,
   findForbiddenKeys,
+  formatCostUsd,
   parseWso2LiveEvidence,
   sha256File,
   type Wso2LiveEvidenceRow,
@@ -167,9 +168,12 @@ const artifact = {
     temperature: WSO2_EVALUATION_TEMPERATURE,
     maxOutputTokens: WSO2_EVALUATION_MAX_OUTPUT_TOKENS,
     automaticRetries: 0 as const,
+    // The harness holds these as BigInt microdollars per million tokens. Read
+    // under the wrong names they silently yield undefined, and JSON.stringify
+    // drops the keys entirely -- which is how this shipped as an empty object.
     pricingAssumptionUsdPerMillionTokens: {
-      input: WSO2_EVALUATION_PRICING.inputUsdPerMillion,
-      output: WSO2_EVALUATION_PRICING.outputUsdPerMillion,
+      input: formatCostUsd(Number(WSO2_EVALUATION_PRICING.inputPerMillion)),
+      output: formatCostUsd(Number(WSO2_EVALUATION_PRICING.outputPerMillion)),
     },
   },
   workloads,

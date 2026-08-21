@@ -145,3 +145,22 @@ test('cost formatting is exact at six decimals and never drifts through a float'
     assert.equal(artifact.aggregates[path].costUsd, formatCostUsd(artifact.aggregates[path].costMicrodollars))
   }
 })
+
+/**
+ * This shipped as an empty object once: the harness holds prices under
+ * `inputPerMillion`, the generator read `inputUsdPerMillion`, and
+ * JSON.stringify dropped the undefined keys without complaint. Every cost
+ * figure in the artifact lost its stated basis and nothing failed.
+ */
+test('the pricing assumption behind every cost figure is present and parseable', () => {
+  const artifact = loadWso2LiveEvidence()
+  const pricing = artifact.configuration.pricingAssumptionUsdPerMillionTokens
+  assert.match(pricing.input, /^\d+\.\d{6}$/)
+  assert.match(pricing.output, /^\d+\.\d{6}$/)
+
+  for (const broken of [{}, { input: '1.000000' }, { input: '1', output: '5' }, { input: 1, output: 5 }]) {
+    const artifactCopy = clone()
+    artifactCopy.configuration.pricingAssumptionUsdPerMillionTokens = broken
+    assert.throws(() => parseWso2LiveEvidence(artifactCopy), /pricingAssumptionUsdPerMillionTokens/)
+  }
+})
