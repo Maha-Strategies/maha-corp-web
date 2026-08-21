@@ -1,0 +1,331 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://maha-strategies.com/schemas/governed-workflow/transition-1.0.0.json",
+  "title": "Governed workflow transition",
+  "description": "One append-only transition record. Metadata only: this schema has no property that can carry source document content.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "transitionId",
+    "workflowInstanceId",
+    "sequence",
+    "priorState",
+    "nextState",
+    "occurredAt",
+    "actor",
+    "policyVersion",
+    "policySha256",
+    "inputSha256",
+    "evidenceRefs",
+    "evidenceSetSha256",
+    "uncertaintyStatus",
+    "authorizationResult",
+    "approvalState",
+    "idempotencyKey",
+    "recoveryClassification",
+    "reasonCodes",
+    "sideEffect",
+    "previousTransitionSha256",
+    "transitionSha256"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "1.0.0"
+    },
+    "transitionId": {
+      "type": "string",
+      "maxLength": 200
+    },
+    "workflowInstanceId": {
+      "type": "string",
+      "maxLength": 200
+    },
+    "sequence": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "priorState": {
+      "enum": [
+        "draft",
+        "evidence_collected",
+        "policy_evaluated",
+        "approval_pending",
+        "approved",
+        "action_authorized",
+        "action_completed",
+        "closed",
+        "denied",
+        "expired",
+        "failed_recoverable",
+        "failed_final",
+        "needs_human_review",
+        "replay_blocked"
+      ]
+    },
+    "nextState": {
+      "enum": [
+        "draft",
+        "evidence_collected",
+        "policy_evaluated",
+        "approval_pending",
+        "approved",
+        "action_authorized",
+        "action_completed",
+        "closed",
+        "denied",
+        "expired",
+        "failed_recoverable",
+        "failed_final",
+        "needs_human_review",
+        "replay_blocked"
+      ]
+    },
+    "occurredAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "actor": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "actorKind",
+        "actorIdSha256",
+        "actorRole"
+      ],
+      "properties": {
+        "actorKind": {
+          "enum": [
+            "agent",
+            "human_reviewer",
+            "system"
+          ]
+        },
+        "actorIdSha256": {
+          "type": "string",
+          "pattern": "^sha256:[0-9a-f]{64}$"
+        },
+        "actorRole": {
+          "type": "string",
+          "maxLength": 120
+        }
+      }
+    },
+    "policyVersion": {
+      "type": "string",
+      "maxLength": 120
+    },
+    "policySha256": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "inputSha256": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "evidenceRefs": {
+      "type": "array",
+      "maxItems": 64,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "evidenceId",
+          "contentSha256"
+        ],
+        "properties": {
+          "evidenceId": {
+            "type": "string",
+            "maxLength": 120
+          },
+          "contentSha256": {
+            "type": "string",
+            "pattern": "^sha256:[0-9a-f]{64}$"
+          }
+        }
+      }
+    },
+    "evidenceSetSha256": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "uncertaintyStatus": {
+      "enum": [
+        "none",
+        "declared_non_blocking",
+        "declared_blocking",
+        "unresolved"
+      ]
+    },
+    "authorizationResult": {
+      "enum": [
+        "allowed",
+        "denied",
+        "not_evaluated"
+      ]
+    },
+    "approvalState": {
+      "enum": [
+        "not_required",
+        "pending",
+        "granted",
+        "denied",
+        "expired",
+        "bypassed"
+      ]
+    },
+    "idempotencyKey": {
+      "type": "string",
+      "maxLength": 200
+    },
+    "recoveryClassification": {
+      "enum": [
+        "not_applicable",
+        "safe_to_retry",
+        "requires_human_review",
+        "indeterminate_side_effect",
+        "blocked_duplicate"
+      ]
+    },
+    "reasonCodes": {
+      "type": "array",
+      "items": {
+        "enum": [
+          "allowed",
+          "policy_denied",
+          "policy_missing",
+          "uncertainty_blocks_decision",
+          "uncertainty_unresolved",
+          "approval_required",
+          "approval_pending",
+          "approval_denied",
+          "approval_expired",
+          "approval_binding_stale",
+          "approval_bypass_attempted",
+          "action_not_authorized",
+          "evidence_missing",
+          "evidence_changed",
+          "replay_duplicate_returned",
+          "replay_material_change_rejected",
+          "invalid_transition",
+          "terminal_state",
+          "side_effect_indeterminate",
+          "exception_invalid"
+        ]
+      }
+    },
+    "sideEffect": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "intent",
+        "receipt"
+      ],
+      "properties": {
+        "intent": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "intentId",
+                "operation",
+                "requestSha256",
+                "simulated"
+              ],
+              "properties": {
+                "intentId": {
+                  "type": "string",
+                  "maxLength": 200
+                },
+                "operation": {
+                  "type": "string",
+                  "maxLength": 200
+                },
+                "requestSha256": {
+                  "type": "string",
+                  "pattern": "^sha256:[0-9a-f]{64}$"
+                },
+                "simulated": {
+                  "const": true
+                }
+              }
+            }
+          ]
+        },
+        "receipt": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "intentId",
+                "receiptId",
+                "outcome",
+                "responseSha256",
+                "observedAt",
+                "simulated"
+              ],
+              "properties": {
+                "intentId": {
+                  "type": "string",
+                  "maxLength": 200
+                },
+                "receiptId": {
+                  "type": "string",
+                  "maxLength": 200
+                },
+                "outcome": {
+                  "enum": [
+                    "succeeded",
+                    "failed",
+                    "indeterminate"
+                  ]
+                },
+                "responseSha256": {
+                  "oneOf": [
+                    {
+                      "type": "null"
+                    },
+                    {
+                      "type": "string",
+                      "pattern": "^sha256:[0-9a-f]{64}$"
+                    }
+                  ]
+                },
+                "observedAt": {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                "simulated": {
+                  "const": true
+                }
+              }
+            }
+          ]
+        }
+      }
+    },
+    "previousTransitionSha256": {
+      "oneOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "string",
+          "pattern": "^sha256:[0-9a-f]{64}$"
+        }
+      ]
+    },
+    "transitionSha256": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    }
+  }
+}

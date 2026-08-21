@@ -106,6 +106,7 @@ export const openApiDocument = {
     { name: 'GPU Heuristic Optimization', description: 'Bounded asynchronous QUBO/Ising optimization using the benchmarked bounded-bond tensor-network heuristic.' },
     { name: 'GPU Geometric Optimization', description: 'Bounded paired-point SE(3) registration with explicit residual and correspondence boundaries.' },
     { name: 'Maha Celestial Evidence', description: 'Tenant-scoped reproducible chart and evidence reports with explicit interpretive boundaries.' },
+    { name: 'Governed Workflow', description: 'Read-only evaluation prototype over a synthetic document-approval workflow. Stateless, metadata-only, and performs no side effect.' },
   ],
   paths: {
     '/api/v1/celestial/reports': {
@@ -575,6 +576,32 @@ export const openApiDocument = {
         tags: ['Agentic Commerce'], operationId: 'getMcpBridgeCompatibility', summary: 'Discover local MCP bridge compatibility',
         description: 'Returns the versioned contract for the local commercial bridge and explicitly distinguishes it from the hosted Cognitive Gateway.',
         responses: { '200': { description: 'Public compatibility manifest.', content: { 'application/json': { schema: { type: 'object', required: ['bridge', 'compatibility', 'security'], properties: { bridge: { type: 'object' }, compatibility: { type: 'object' }, security: { type: 'object' }, distinctServices: { type: 'array' } } } } } } },
+      },
+    },
+    '/api/governed-workflow/demo': {
+      get: {
+        tags: ['Governed Workflow'],
+        operationId: 'getGovernedWorkflowScenario',
+        summary: 'List or replay a synthetic governed-workflow scenario',
+        description: 'Returns the frozen synthetic scenario catalog, or the sanitized transition timeline for one scenario. Evaluation prototype over an invented claims-review corpus: no real claim, document, reviewer, or payment is involved, and responses carry references, digests and bounded classifications only.',
+        parameters: [{ name: 'scenario', in: 'query', required: false, schema: { type: 'string' }, description: 'Scenario id. Omit to list the catalog, operations and schema paths.' }],
+        responses: {
+          '200': { description: 'Scenario catalog, or one sanitized timeline.', content: { 'application/json': { schema: { type: 'object', properties: { synthetic: { const: true }, notice: { type: 'string' }, scenarioId: { type: 'string' }, finalState: { type: 'string' }, recovery: { type: 'object' }, timeline: { type: 'array', items: { type: 'object' } } } } } } },
+          '404': errorResponse('Unknown scenario id.'),
+        },
+      },
+      post: {
+        tags: ['Governed Workflow'],
+        operationId: 'runGovernedWorkflowProgram',
+        summary: 'Run a governed-workflow demo program against the synthetic corpus',
+        description: 'Executes an ordered program of governed-workflow operations against an engine that exists only for the request. Nothing is stored, no side effect is performed, and the clock is fixed so the same program always returns the same digests. Evidence is selected from the synthetic catalog by name; a payload carrying document content is rejected rather than stripped.',
+        requestBody: { required: true, content: { 'application/json': { schema: { type: 'object', required: ['program'], properties: { program: { type: 'array', minItems: 1, maxItems: 24, items: { type: 'object', required: ['operation'], properties: { operation: { type: 'string', enum: ['create_workflow', 'submit_evidence', 'evaluate_policy', 'request_approval', 'record_approval', 'authorize_action', 'replay_recover', 'audit_timeline'] }, evidence: { type: 'array', items: { type: 'string', enum: ['claim_form', 'policy_document', 'assessment_note', 'claim_form_revised'] } }, uncertainties: { type: 'array', items: { type: 'string', enum: ['missing_assessment', 'minor_ambiguity'] } }, intendedState: { type: 'string' }, idempotencyKey: { type: 'string', maxLength: 120 }, action: { type: 'boolean' }, decision: { type: 'string', enum: ['grant', 'deny'] } } } } } } } } },
+        responses: {
+          '200': { description: 'Sanitized program result: per-step outcomes, the metadata-only timeline, chain integrity and recovery classification.', content: { 'application/json': { schema: { type: 'object', required: ['schemaVersion', 'synthetic', 'notice', 'steps', 'finalState', 'timeline', 'chainIntegrity', 'recovery'], properties: { schemaVersion: { type: 'string' }, synthetic: { const: true }, notice: { type: 'string' }, steps: { type: 'array', items: { type: 'object' } }, finalState: { type: 'string' }, timeline: { type: 'array', items: { type: 'object' } }, chainIntegrity: { type: 'object' }, recovery: { type: 'object' } } } } } },
+          '400': errorResponse('Invalid program, or a payload carrying document content rather than metadata.'),
+          '413': errorResponse('Request exceeds the 16 KB demo program limit.'),
+          '415': errorResponse('Content-Type must be application/json.'),
+        },
       },
     },
     '/api/context-packs': {

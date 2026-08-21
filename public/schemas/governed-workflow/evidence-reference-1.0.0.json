@@ -1,0 +1,83 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://maha-strategies.com/schemas/governed-workflow/evidence-reference-1.0.0.json",
+  "title": "Governed workflow evidence reference",
+  "description": "A reference to evidence, never the evidence itself. The three false-valued provenance fields are the trust boundary: a digest commits parties to the same bytes and establishes nothing about their truth, authorship, or execution.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "evidenceId",
+    "kind",
+    "contentSha256",
+    "contentBytes",
+    "provenance",
+    "labels"
+  ],
+  "properties": {
+    "evidenceId": {
+      "type": "string",
+      "maxLength": 120
+    },
+    "kind": {
+      "enum": [
+        "policy_document",
+        "claim_form",
+        "assessment_note",
+        "prior_decision",
+        "external_attestation"
+      ]
+    },
+    "contentSha256": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "contentBytes": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "structureVerifiedLocally",
+        "digestFormatVerified",
+        "trustedPassThrough",
+        "sourceAuthenticityVerified",
+        "factualTruthEstablished",
+        "providerExecutionVerified"
+      ],
+      "properties": {
+        "structureVerifiedLocally": {
+          "type": "boolean"
+        },
+        "digestFormatVerified": {
+          "type": "boolean"
+        },
+        "trustedPassThrough": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "maxLength": 120
+          }
+        },
+        "sourceAuthenticityVerified": {
+          "const": false
+        },
+        "factualTruthEstablished": {
+          "const": false
+        },
+        "providerExecutionVerified": {
+          "const": false
+        }
+      }
+    },
+    "labels": {
+      "type": "object",
+      "maxProperties": 12,
+      "additionalProperties": {
+        "type": "string",
+        "maxLength": 120
+      }
+    }
+  }
+}
