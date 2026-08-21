@@ -187,6 +187,10 @@ test('the release states its fairness limits rather than claiming superiority', 
   for (const banned of ['state of the art', 'state-of-the-art', 'outperforms', 'best-in-class', 'superior to']) {
     assert.ok(!text.toLowerCase().includes(banned), `release claims "${banned}"`)
   }
+
+  const methodology = readFileSync(join(ROOT, 'docs/benchmarks/mcrb1-dense-retriever-baseline.md'), 'utf8')
+  assert.match(methodology, /does not run a paired significance test/i)
+  assert.doesNotMatch(methodology, /intervals overlap[\s\S]{0,100}rather than a statistically separated/i)
 })
 
 test('the manifest binds corpus, results, model and environment', { skip: !published || !existsSync(DENSE_MANIFEST) }, () => {

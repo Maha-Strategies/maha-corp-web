@@ -28,9 +28,10 @@ metric.
 | `tail_recency` | 20.4% | 15.9-25.8 | 25.2% | 22.7% |
 
 A 10.8-point gap on complete-evidence-set retention, and 10.4 points on
-any-evidence hit rate. **The Wilson intervals overlap** in the range 65.3-66.3,
-so this is a clear directional result on 250 cases rather than a statistically
-separated one; a larger cohort would be needed to tighten it.
+any-evidence hit rate. **The individual Wilson intervals overlap** in the range
+65.3-66.3. They describe each method's binary-rate uncertainty; this release
+does not run a paired significance test, so the difference is reported as an
+observed result rather than a claim of statistical significance.
 
 Nothing was tuned in response. The model, prefix, pooling, chunking and
 tie-break were fixed before the first full run, and this section was written

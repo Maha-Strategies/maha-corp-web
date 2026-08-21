@@ -74,8 +74,10 @@ using `BAAI/bge-small-en-v1.5`, evaluated on the same 250 cases under the same
 budget, packer and scorer.
 
 **It scores 71.2% complete-evidence-set retention against `maha_bm25`'s 60.4%.**
-The Wilson intervals overlap at 65.3-66.3, so the result is directional rather
-than statistically separated.
+The individual Wilson intervals overlap at 65.3-66.3. This release reports
+intervals for each method but does not perform a paired significance test, so
+the 10.8-point difference is reported as an observed result rather than a
+claim of statistical significance.
 
 - Artifacts: `benchmarks/mcrb-1/dense/`
 - Methodology and fairness limits: `docs/benchmarks/mcrb1-dense-retriever-baseline.md`
