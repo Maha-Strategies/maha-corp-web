@@ -1,0 +1,1704 @@
+{
+  "schemaVersion": "1.0.0",
+  "artifactId": "maha-wso2-large-context-live-v1",
+  "runLabel": "wso2-large-live-20260817-v1",
+  "observedAt": "2026-08-17T04:33:57.140Z",
+  "generation": {
+    "method": "Derived mechanically from the durable live checkpoint plus the path-blinded adjudication joined to paths through its blinding key. No provider call is made by this generator, and no model answer text is carried forward.",
+    "generator": "scripts/generate-wso2-live-evidence-artifact.ts",
+    "sourceCheckpointFilename": "wso2-large-live-20260817-v1-checkpoint.json",
+    "sourceCheckpointSha256": "sha256:40cb6956b0b732918c1bf6d63852d1076505c0348dd195a86384a5a935f4d0f3",
+    "sourceAdjudicationFilename": "wso2-large-live-20260817-v1-adjudicated.json",
+    "sourceAdjudicationSha256": "sha256:a77a0e01f86fa1130159e29deb5a6a66eff8e2ea65c41f96404bb02c477dc68d",
+    "sourceAdjudicationKeyFilename": "wso2-large-live-20260817-v1-adjudication-key.json",
+    "sourceAdjudicationKeySha256": "sha256:8e1aede6db5bb1264c7a8f094fea5adfeec56413a9fcee4fb4137c994bd40cd4",
+    "primaryEvidenceCommitted": false,
+    "primaryEvidenceWithheldReason": "The checkpoint and adjudication carry the model answer text for every call. They are retained outside the repository and identified here by SHA-256 so a reviewer under NDA can be given the exact bytes this artifact was derived from."
+  },
+  "corpus": {
+    "path": "content/integrations/wso2-large-context-cost-corpus.json",
+    "labelFreezeDigest": "a6b95c81e981fcda20576046354105994bc8846e2b6da8a4e77c754a7085a8c9",
+    "workloadCount": 20,
+    "synthetic": true
+  },
+  "configuration": {
+    "gatewayProduct": "WSO2 AI Gateway",
+    "gatewayVersion": "1.1.0",
+    "promptCompressorVersion": "0.9.0",
+    "promptCompressorRetainedRatio": 0.55,
+    "mahaInterceptorVersion": "1.0.0",
+    "mahaInterceptorFailClosed": true,
+    "model": "claude-haiku-4-5-20251001",
+    "temperature": 0,
+    "maxOutputTokens": 220,
+    "automaticRetries": 0,
+    "pricingAssumptionUsdPerMillionTokens": {}
+  },
+  "workloads": [
+    {
+      "workloadId": "audit-event-stream",
+      "difficulty": "easy",
+      "rows": [
+        {
+          "path": "wso2-baseline",
+          "outcome": "ok",
+          "providerInputTokens": 57280,
+          "providerOutputTokens": 106,
+          "costMicrodollars": 57810,
+          "latencyMs": 2814,
+          "deterministicFacts": {
+            "answered": 0,
+            "total": 3
+          },
+          "adjudicatedFacts": {
+            "answered": 3,
+            "total": 3
+          },
+          "expectedCitationLinks": {
+            "resolved": 3,
+            "total": 3
+          },
+          "prohibitedAssertionCount": 0,
+          "contextStrategy": "whole-documents",
+          "bypassApplied": null,
+          "bypassReason": null
+        },
+        {
+          "path": "wso2-native-prompt-compressor",
+          "outcome": "ok",
+          "providerInputTokens": 52169,
+          "providerOutputTokens": 77,
+          "costMicrodollars": 52554,
+          "latencyMs": 5038,
+          "deterministicFacts": {
+            "answered": 0,
+            "total": 3
+          },
+          "adjudicatedFacts": {
+            "answered": 0,
+            "total": 3
+          },
+          "expectedCitationLinks": {
+            "resolved": 3,
+            "total": 3
+          },
+          "prohibitedAssertionCount": 0,
+          "contextStrategy": "wso2-prompt-compressor-v0.9.0",
+          "bypassApplied": null,
+          "bypassReason": null
+        },
+        {
+          "path": "wso2-maha-context-compiler",
+          "outcome": "ok",
+          "providerInputTokens": 933,
+          "providerOutputTokens": 125,
+          "costMicrodollars": 1558,
+          "latencyMs": 1445,
+          "deterministicFacts": {
+            "answered": 3,
+            "total": 3
+          },
+          "adjudicatedFacts": {
+            "answered": 3,
+            "total": 3
+          },
+          "expectedCitationLinks": {
+            "resolved": 3,
+            "total": 3
+          },
+          "prohibitedAssertionCount": 0,
+          "contextStrategy": "maha-context-compiler",
+          "bypassApplied": false,
+          "bypassReason": "none"
+        }
+      ]
+    },
+    {
+      "workloadId": "board-packet-archive",
+      "difficulty": "medium",
+      "rows": [
+        {
+          "path": "wso2-baseline",
+          "outcome": "ok",
+          "providerInputTokens": 68909,
+          "providerOutputTokens": 112,
+          "costMicrodollars": 69469,
+          "latencyMs": 2664,
+          "deterministicFacts": {
+            "answered": 0,
+            "total": 3
+          },
+          "adjudicatedFacts": {
+            "answered": 3,
+            "total": 3
+          },
+          "expectedCitationLinks": {
+            "resolved": 3,
+            "total": 3
+          },
+          "prohibitedAssertionCount": 0,
+          "contextStrategy": "whole-documents",
+          "bypassApplied": null,
+          "bypassReason": null
+        },
+        {
+          "path": "wso2-native-prompt-compressor",
+          "outcome": "ok",
+          "providerInputTokens": 63074,
+          "providerOutputTokens": 220,
+          "costMicrodollars": 64174,
+          "latencyMs": 8800,
+          "deterministicFacts": {
+            "answered": 0,
+            "total": 3
+          },
+          "adjudicatedFacts": {
+            "answered": 0,
+            "total": 3
+          },
+          "expectedCitationLinks": {
+            "resolved": 3,
+            "total": 3
+          },
+          "prohibitedAssertionCount": 0,
+          "contextStrategy": "wso2-prompt-compressor-v0.9.0",
+          "bypassApplied": null,
+          "bypassReason": null
+        },
+        {
+          "path": "wso2-maha-context-compiler",
+          "outcome": "ok",
+          "providerInputTokens": 941,
+          "providerOutputTokens": 93,
+          "costMicrodollars": 1406,
+          "latencyMs": 2082,
+          "deterministicFacts": {
+            "answered": 0,
+            "total": 3
+          },
+          "adjudicatedFacts": {
+            "answered": 3,
+            "total": 3
+          },
+          "expectedCitationLinks": {
+            "resolved": 3,
+            "total": 3
+          },
+          "prohibitedAssertionCount": 0,
+          "contextStrategy": "maha-context-compiler",
+          "bypassApplied": false,
+          "bypassReason": "none"
+        }
+      ]
+    },
+    {
+      "workloadId": "claims-policy-manual",
+      "difficulty": "easy",
+      "rows": [
+        {
+          "path": "wso2-baseline",
+          "outcome": "ok",
+          "providerInputTokens": 34019,
+          "providerOutputTokens": 104,
+          "costMicrodollars": 34539,
+          "latencyMs": 1949,
+          "deterministicFacts": {
+            "answered": 0,
+            "total": 3
+          },
+          "adjudicatedFacts": {
+            "answered": 3,
+            "total": 3
+          },
+          "expectedCitationLinks": {
+            "resolved": 3,
+            "total": 3
+          },
+          "prohibitedAssertionCount": 0,
+          "contextStrategy": "whole-documents",
+          "bypassApplied": null,
+          "bypassReason": null
+        },
+        {
+          "path": "wso2-native-prompt-compressor",
+          "outcome": "ok",
+          "providerInputTokens": 30359,
+          "providerOutputTokens": 186,
+          "costMicrodollars": 31289,
+          "latencyMs": 2751,
+          "deterministicFacts": {
+            "answered": 0,
+            "total": 3
+          },
+          "adjudicatedFacts": {
+            "answered": 0,
+            "total": 3
+          },
+          "expectedCitationLinks": {
+            "resolved": 3,
+            "total": 3
+          },
+          "prohibitedAssertionCount": 0,
+          "contextStrategy": "wso2-prompt-compressor-v0.9.0",
+          "bypassApplied": null,
+          "bypassReason": null
+        },
+        {
+          "path": "wso2-maha-context-compiler",
+          "outcome": "ok",
+          "providerInputTokens": 958,
+          "providerOutputTokens": 84,
+          "costMicrodollars": 1378,
+          "latencyMs": 1294,
+          "deterministicFacts": {
+            "answered": 0,
+            "total": 3
+          },
+          "adjudicatedFacts": {
+            "answered": 3,
+            "total": 3
+          },
+          "expectedCitationLinks": {
+            "resolved": 3,
+            "total": 3
+          },
+          "prohibitedAssertionCount": 0,
+          "contextStrategy": "maha-context-compiler",
+          "bypassApplied": false,
+          "bypassReason": "none"
+        }
+      ]
+    },
+    {
+      "workloadId": "clinical-protocol-library",
+      "difficulty": "easy",
+      "rows": [
+        {
+          "path": "wso2-baseline",
+          "outcome": "ok",
+          "providerInputTokens": 48188,
+          "providerOutputTokens": 112,
+          "costMicrodollars": 48748,
+          "latencyMs": 2889,
+          "deterministicFacts": {
+            "answered": 0,
+            "total": 3
+          },
+          "adjudicatedFacts": {
+            "answered": 3,
+            "total": 3
+          },
+          "expectedCitationLinks": {
+            "resolved": 3,
+            "total": 3
+          },
+          "prohibitedAssertionCount": 0,
+          "contextStrategy": "whole-documents",
+          "bypassApplied": null,
+          "bypassReason": null
+        },
+        {
+          "path": "wso2-native-prompt-compressor",
+          "outcome": "ok",
+          "providerInputTokens": 43541,
+          "providerOutputTokens": 205,
+          "costMicrodollars": 44566,
+          "latencyMs": 6958,
+          "deterministicFacts": {
+            "answered": 0,
+            "total": 3
+          },
+          "adjudicatedFacts": {
+            "answered": 0,
+            "total": 3
+          },
+          "expectedCitationLinks": {
+            "resolved": 3,
+            "total": 3
+          },
+          "prohibitedAssertionCount": 0,
+          "contextStrategy": "wso2-prompt-compressor-v0.9.0",
+          "bypassApplied": null,
+          "bypassReason": null
+        },
+        {
+          "path": "wso2-maha-context-compiler",
+          "outcome": "ok",
+          "providerInputTokens": 912,
+          "providerOutputTokens": 89,
+          "costMicrodollars": 1357,
+          "latencyMs": 1444,
+          "deterministicFacts": {
+            "answered": 0,
+            "total": 3
+          },
+          "adjudicatedFacts": {
+            "answered": 3,
+            "total": 3
+          },
+          "expectedCitationLinks": {
+            "resolved": 3,
+            "total": 3
+          },
+          "prohibitedAssertionCount": 0,
+          "contextStrategy": "maha-context-compiler",
+          "bypassApplied": false,
+          "bypassReason": "none"
+        }
+      ]
+    },
+    {
+      "workloadId": "customer-success-notes",
+      "difficulty": "hard",
+      "rows": [
+        {
+          "path": "wso2-baseline",
+          "outcome": "ok",
+          "providerInputTokens": 130012,
+          "providerOutputTokens": 97,
+          "costMicrodollars": 130497,
+          "latencyMs": 7594,
+          "deterministicFacts": {
+            "answered": 0,
+            "total": 3
+          },
+          "adjudicatedFacts": {
+            "answered": 3,
+            "total": 3
+          },
+          "expectedCitationLinks": {
+            "resolved": 3,
+            "total": 3
+          },
+          "prohibitedAssertionCount": 0,
+          "contextStrategy": "whole-documents",
+          "bypassApplied": null,
+          "bypassReason": null
+        },
+        {
+          "path": "wso2-native-prompt-compressor",
+          "outcome": "ok",
+          "providerInputTokens": 120355,
+          "providerOutputTokens": 213,
+          "costMicrodollars": 121420,
+          "latencyMs": 13630,
+          "deterministicFacts": {
+            "answered": 0,
+            "total": 3
+          },
+          "adjudicatedFacts": {
+            "answered": 0,
+            "total": 3
+          },
+          "expectedCitationLinks": {
+            "resolved": 3,
+            "total": 3
+          },
+          "prohibitedAssertionCount": 0,
+          "contextStrategy": "wso2-prompt-compressor-v0.9.0",
+          "bypassApplied": null,
+          "bypassReason": null
+        },
+        {
+          "path": "wso2-maha-context-compiler",
+          "outcome": "ok",
+          "providerInputTokens": 928,
+          "providerOutputTokens": 92,
+          "costMicrodollars": 1388,
+          "latencyMs": 1836,
+          "deterministicFacts": {
+            "answered": 0,
+            "total": 3
+          },
+          "adjudicatedFacts": {
+            "answered": 3,
+            "total": 3
+          },
+          "expectedCitationLinks": {
+            "resolved": 3,
+            "total": 3
+          },
+          "prohibitedAssertionCount": 0,
+          "contextStrategy": "maha-context-compiler",
+          "bypassApplied": false,
+          "bypassReason": "none"
+        }
+      ]
+    },
+    {
+      "workloadId": "data-governance-register",
+      "difficulty": "hard",
+      "rows": [
+        {
+          "path": "wso2-baseline",
+          "outcome": "ok",
+          "providerInputTokens": 115010,
+          "providerOutputTokens": 119,
+          "costMicrodollars": 115605,
+          "latencyMs": 3665,
+          "deterministicFacts": {
+            "answered": 0,
+            "total": 3
+          },
+          "adjudicatedFacts": {
+            "answered": 3,
+            "total": 3
+          },
+          "expectedCitationLinks": {
+            "resolved": 3,
+            "total": 3
+          },
+          "prohibitedAssertionCount": 0,
+          "contextStrategy": "whole-documents",
+          "bypassApplied": null,
+          "bypassReason": null
+        },
+        {
+          "path": "wso2-native-prompt-compressor",
+          "outcome": "ok",
+          "providerInputTokens": 105911,
+          "providerOutputTokens": 220,
+          "costMicrodollars": 107011,
+          "latencyMs": 12093,
+          "deterministicFacts": {
+            "answered": 0,
+            "total": 3
+          },
+          "adjudicatedFacts": {
+            "answered": 0,
+            "total": 3
+          },
+          "expectedCitationLinks": {
+            "resolved": 3,
+            "total": 3
+          },
+          "prohibitedAssertionCount": 0,
+          "contextStrategy": "wso2-prompt-compressor-v0.9.0",
+          "bypassApplied": null,
+          "bypassReason": null
+        },
+        {
+          "path": "wso2-maha-context-compiler",
+          "outcome": "ok",
+          "providerInputTokens": 919,
+          "providerOutputTokens": 92,
+          "costMicrodollars": 1379,
+          "latencyMs": 1720,
+          "deterministicFacts": {
+            "answered": 0,
+            "total": 3
+          },
+          "adjudicatedFacts": {
+            "answered": 3,
+            "total": 3
+          },
+          "expectedCitationLinks": {
+            "resolved": 3,
+            "total": 3
+          },
+          "prohibitedAssertionCount": 0,
+          "contextStrategy": "maha-context-compiler",
+          "bypassApplied": false,
+          "bypassReason": "none"
+        }
+      ]
+    },
+    {
+      "workloadId": "engineering-design-records",
+      "difficulty": "medium",
+      "rows": [
+        {
+          "path": "wso2-baseline",
+          "outcome": "ok",
+          "providerInputTokens": 80918,
+          "providerOutputTokens": 105,
+          "costMicrodollars": 81443,
+          "latencyMs": 2665,
+          "deterministicFacts": {
+            "answered": 0,
+            "total": 3
+          },
+          "adjudicatedFacts": {
+            "answered": 3,
+            "total": 3
+          },
+          "expectedCitationLinks": {
+            "resolved": 3,
+            "total": 3
+          },
+          "prohibitedAssertionCount": 0,
+          "contextStrategy": "whole-documents",
+          "bypassApplied": null,
+          "bypassReason": null
+        },
+        {
+          "path": "wso2-native-prompt-compressor",
+          "outcome": "ok",
+          "providerInputTokens": 74089,
+          "providerOutputTokens": 142,
+          "costMicrodollars": 74799,
+          "latencyMs": 6578,
+          "deterministicFacts": {
+            "answered": 0,
+            "total": 3
+          },
+          "adjudicatedFacts": {
+            "answered": 0,
+            "total": 3
+          },
+          "expectedCitationLinks": {
+            "resolved": 3,
+            "total": 3
+          },
+          "prohibitedAssertionCount": 0,
+          "contextStrategy": "wso2-prompt-compressor-v0.9.0",
+          "bypassApplied": null,
+          "bypassReason": null
+        },
+        {
+          "path": "wso2-maha-context-compiler",
+          "outcome": "ok",
+          "providerInputTokens": 912,
+          "providerOutputTokens": 120,
+          "costMicrodollars": 1512,
+          "latencyMs": 2286,
+          "deterministicFacts": {
+            "answered": 3,
+            "total": 3
+          },
+          "adjudicatedFacts": {
+            "answered": 3,
+            "total": 3
+          },
+          "expectedCitationLinks": {
+            "resolved": 3,
+            "total": 3
+          },
+          "prohibitedAssertionCount": 0,
+          "contextStrategy": "maha-context-compiler",
+          "bypassApplied": false,
+          "bypassReason": "none"
+        }
+      ]
+    },
+    {
+      "workloadId": "financial-close-workpapers",
+      "difficulty": "medium",
+      "rows": [
+        {
+          "path": "wso2-baseline",
+          "outcome": "ok",
+          "providerInputTokens": 80563,
+          "providerOutputTokens": 119,
+          "costMicrodollars": 81158,
+          "latencyMs": 2607,
+          "deterministicFacts": {
+            "answered": 3,
+            "total": 3
+          },
+          "adjudicatedFacts": {
+            "answered": 3,
+            "total": 3
+          },
+          "expectedCitationLinks": {
+            "resolved": 3,
+            "total": 3
+          },
+          "prohibitedAssertionCount": 0,
+          "contextStrategy": "whole-documents",
+          "bypassApplied": null,
+          "bypassReason": null
+        },
+        {
+          "path": "wso2-native-prompt-compressor",
+          "outcome": "ok",
+          "providerInputTokens": 73994,
+          "providerOutputTokens": 135,
+          "costMicrodollars": 74669,
+          "latencyMs": 5676,
+          "deterministicFacts": {
+            "answered": 0,
+            "total": 3
+          },
+          "adjudicatedFacts": {
+            "answered": 0,
+            "total": 3
+          },
+          "expectedCitationLinks": {
+            "resolved": 3,
+            "total": 3
+          },
+          "prohibitedAssertionCount": 0,
+          "contextStrategy": "wso2-prompt-compressor-v0.9.0",
+          "bypassApplied": null,
+          "bypassReason": null
+        },
+        {
+          "path": "wso2-maha-context-compiler",
+          "outcome": "ok",
+          "providerInputTokens": 993,
+          "providerOutputTokens": 113,
+          "costMicrodollars": 1558,
+          "latencyMs": 1555,
+          "deterministicFacts": {
+            "answered": 3,
+            "total": 3
+          },
+          "adjudicatedFacts": {
+            "answered": 3,
+            "total": 3
+          },
+          "expectedCitationLinks": {
+            "resolved": 3,
+            "total": 3
+          },
+          "prohibitedAssertionCount": 0,
+          "contextStrategy": "maha-context-compiler",
+          "bypassApplied": false,
+          "bypassReason": "none"
+        }
+      ]
+    },
+    {
+      "workloadId": "incident-timeline",
+      "difficulty": "easy",
+      "rows": [
+        {
+          "path": "wso2-baseline",
+          "outcome": "ok",
+          "providerInputTokens": 42368,
+          "providerOutputTokens": 98,
+          "costMicrodollars": 42858,
+          "latencyMs": 2313,
+          "deterministicFacts": {
+            "answered": 0,
+            "total": 3
+          },
+          "adjudicatedFacts": {
+            "answered": 3,
+            "total": 3
+          },
+          "expectedCitationLinks": {
+            "resolved": 3,
+            "total": 3
+          },
+          "prohibitedAssertionCount": 0,
+          "contextStrategy": "whole-documents",
+          "bypassApplied": null,
+          "bypassReason": null
+        },
+        {
+          "path": "wso2-native-prompt-compressor",
+          "outcome": "ok",
+          "providerInputTokens": 38245,
+          "providerOutputTokens": 142,
+          "costMicrodollars": 38955,
+          "latencyMs": 4727,
+          "deterministicFacts": {
+            "answered": 0,
+            "total": 3
+          },
+          "adjudicatedFacts": {
+            "answered": 0,
+            "total": 3
+          },
+          "expectedCitationLinks": {
+            "resolved": 3,
+            "total": 3
+          },
+          "prohibitedAssertionCount": 0,
+          "contextStrategy": "wso2-prompt-compressor-v0.9.0",
+          "bypassApplied": null,
+          "bypassReason": null
+        },
+        {
+          "path": "wso2-maha-context-compiler",
+          "outcome": "ok",
+          "providerInputTokens": 1015,
+          "providerOutputTokens": 121,
+          "costMicrodollars": 1620,
+          "latencyMs": 1637,
+          "deterministicFacts": {
+            "answered": 3,
+            "total": 3
+          },
+          "adjudicatedFacts": {
+            "answered": 3,
+            "total": 3
+          },
+          "expectedCitationLinks": {
+            "resolved": 3,
+            "total": 3
+          },
+          "prohibitedAssertionCount": 0,
+          "contextStrategy": "maha-context-compiler",
+          "bypassApplied": false,
+          "bypassReason": "none"
+        }
+      ]
+    },
+    {
+      "workloadId": "insurance-case-file",
+      "difficulty": "hard",
+      "rows": [
+        {
+          "path": "wso2-baseline",
+          "outcome": "ok",
+          "providerInputTokens": 128648,
+          "providerOutputTokens": 103,
+          "costMicrodollars": 129163,
+          "latencyMs": 3432,
+          "deterministicFacts": {
+            "answered": 0,
+            "total": 3
+          },
+          "adjudicatedFacts": {
+            "answered": 3,
+            "total": 3
+          },
+          "expectedCitationLinks": {
+            "resolved": 3,
+            "total": 3
+          },
+          "prohibitedAssertionCount": 0,
+          "contextStrategy": "whole-documents",
+          "bypassApplied": null,
+          "bypassReason": null
+        },
+        {
+          "path": "wso2-native-prompt-compressor",
+          "outcome": "ok",
+          "providerInputTokens": 118637,
+          "providerOutputTokens": 220,
+          "costMicrodollars": 119737,
+          "latencyMs": 16655,
+          "deterministicFacts": {
+            "answered": 0,
+            "total": 3
+          },
+          "adjudicatedFacts": {
+            "answered": 0,
+            "total": 3
+          },
+          "expectedCitationLinks": {
+            "resolved": 3,
+            "total": 3
+          },
+          "prohibitedAssertionCount": 0,
+          "contextStrategy": "wso2-prompt-compressor-v0.9.0",
+          "bypassApplied": null,
+          "bypassReason": null
+        },
+        {
+          "path": "wso2-maha-context-compiler",
+          "outcome": "ok",
+          "providerInputTokens": 912,
+          "providerOutputTokens": 95,
+          "costMicrodollars": 1387,
+          "latencyMs": 3415,
+          "deterministicFacts": {
+            "answered": 0,
+            "total": 3
+          },
+          "adjudicatedFacts": {
+            "answered": 3,
+            "total": 3
+          },
+          "expectedCitationLinks": {
+            "resolved": 3,
+            "total": 3
+          },
+          "prohibitedAssertionCount": 0,
+          "contextStrategy": "maha-context-compiler",
+          "bypassApplied": false,
+          "bypassReason": "none"
+        }
+      ]
+    },
+    {
+      "workloadId": "meeting-transcript-archive",
+      "difficulty": "hard",
+      "rows": [
+        {
+          "path": "wso2-baseline",
+          "outcome": "ok",
+          "providerInputTokens": 109645,
+          "providerOutputTokens": 104,
+          "costMicrodollars": 110165,
+          "latencyMs": 3056,
+          "deterministicFacts": {
+            "answered": 0,
+            "total": 3
+          },
+          "adjudicatedFacts": {
+            "answered": 3,
+            "total": 3
+          },
+          "expectedCitationLinks": {
+            "resolved": 3,
+            "total": 3
+          },
+          "prohibitedAssertionCount": 0,
+          "contextStrategy": "whole-documents",
+          "bypassApplied": null,
+          "bypassReason": null
+        },
+        {
+          "path": "wso2-native-prompt-compressor",
+          "outcome": "ok",
+          "providerInputTokens": 101264,
+          "providerOutputTokens": 77,
+          "costMicrodollars": 101649,
+          "latencyMs": 10487,
+          "deterministicFacts": {
+            "answered": 0,
+            "total": 3
+          },
+          "adjudicatedFacts": {
+            "answered": 0,
+            "total": 3
+          },
+          "expectedCitationLinks": {
+            "resolved": 3,
+            "total": 3
+          },
+          "prohibitedAssertionCount": 0,
+          "contextStrategy": "wso2-prompt-compressor-v0.9.0",
+          "bypassApplied": null,
+          "bypassReason": null
+        },
+        {
+          "path": "wso2-maha-context-compiler",
+          "outcome": "ok",
+          "providerInputTokens": 941,
+          "providerOutputTokens": 96,
+          "costMicrodollars": 1421,
+          "latencyMs": 1554,
+          "deterministicFacts": {
+            "answered": 0,
+            "total": 3
+          },
+          "adjudicatedFacts": {
+            "answered": 3,
+            "total": 3
+          },
+          "expectedCitationLinks": {
+            "resolved": 3,
+            "total": 3
+          },
+          "prohibitedAssertionCount": 0,
+          "contextStrategy": "maha-context-compiler",
+          "bypassApplied": false,
+          "bypassReason": "none"
+        }
+      ]
+    },
+    {
+      "workloadId": "mixed-enterprise-rag",
+      "difficulty": "hard",
+      "rows": [
+        {
+          "path": "wso2-baseline",
+          "outcome": "ok",
+          "providerInputTokens": 137543,
+          "providerOutputTokens": 126,
+          "costMicrodollars": 138173,
+          "latencyMs": 3485,
+          "deterministicFacts": {
+            "answered": 3,
+            "total": 3
+          },
+          "adjudicatedFacts": {
+            "answered": 3,
+            "total": 3
+          },
+          "expectedCitationLinks": {
+            "resolved": 3,
+            "total": 3
+          },
+          "prohibitedAssertionCount": 0,
+          "contextStrategy": "whole-documents",
+          "bypassApplied": null,
+          "bypassReason": null
+        },
+        {
+          "path": "wso2-native-prompt-compressor",
+          "outcome": "ok",
+          "providerInputTokens": 128174,
+          "providerOutputTokens": 217,
+          "costMicrodollars": 129259,
+          "latencyMs": 16301,
+          "deterministicFacts": {
+            "answered": 0,
+            "total": 3
+          },
+          "adjudicatedFacts": {
+            "answered": 0,
+            "total": 3
+          },
+          "expectedCitationLinks": {
+            "resolved": 3,
+            "total": 3
+          },
+          "prohibitedAssertionCount": 0,
+          "contextStrategy": "wso2-prompt-compressor-v0.9.0",
+          "bypassApplied": null,
+          "bypassReason": null
+        },
+        {
+          "path": "wso2-maha-context-compiler",
+          "outcome": "ok",
+          "providerInputTokens": 933,
+          "providerOutputTokens": 96,
+          "costMicrodollars": 1413,
+          "latencyMs": 1945,
+          "deterministicFacts": {
+            "answered": 0,
+            "total": 3
+          },
+          "adjudicatedFacts": {
+            "answered": 3,
+            "total": 3
+          },
+          "expectedCitationLinks": {
+            "resolved": 3,
+            "total": 3
+          },
+          "prohibitedAssertionCount": 0,
+          "contextStrategy": "maha-context-compiler",
+          "bypassApplied": false,
+          "bypassReason": "none"
+        }
+      ]
+    },
+    {
+      "workloadId": "observability-log-bundle",
+      "difficulty": "hard",
+      "rows": [
+        {
+          "path": "wso2-baseline",
+          "outcome": "ok",
+          "providerInputTokens": 108211,
+          "providerOutputTokens": 119,
+          "costMicrodollars": 108806,
+          "latencyMs": 4138,
+          "deterministicFacts": {
+            "answered": 0,
+            "total": 3
+          },
+          "adjudicatedFacts": {
+            "answered": 3,
+            "total": 3
+          },
+          "expectedCitationLinks": {
+            "resolved": 3,
+            "total": 3
+          },
+          "prohibitedAssertionCount": 0,
+          "contextStrategy": "whole-documents",
+          "bypassApplied": null,
+          "bypassReason": null
+        },
+        {
+          "path": "wso2-native-prompt-compressor",
+          "outcome": "ok",
+          "providerInputTokens": 99555,
+          "providerOutputTokens": 91,
+          "costMicrodollars": 100010,
+          "latencyMs": 10832,
+          "deterministicFacts": {
+            "answered": 0,
+            "total": 3
+          },
+          "adjudicatedFacts": {
+            "answered": 0,
+            "total": 3
+          },
+          "expectedCitationLinks": {
+            "resolved": 3,
+            "total": 3
+          },
+          "prohibitedAssertionCount": 0,
+          "contextStrategy": "wso2-prompt-compressor-v0.9.0",
+          "bypassApplied": null,
+          "bypassReason": null
+        },
+        {
+          "path": "wso2-maha-context-compiler",
+          "outcome": "ok",
+          "providerInputTokens": 999,
+          "providerOutputTokens": 135,
+          "costMicrodollars": 1674,
+          "latencyMs": 1701,
+          "deterministicFacts": {
+            "answered": 3,
+            "total": 3
+          },
+          "adjudicatedFacts": {
+            "answered": 3,
+            "total": 3
+          },
+          "expectedCitationLinks": {
+            "resolved": 3,
+            "total": 3
+          },
+          "prohibitedAssertionCount": 0,
+          "contextStrategy": "maha-context-compiler",
+          "bypassApplied": false,
+          "bypassReason": "none"
+        }
+      ]
+    },
+    {
+      "workloadId": "procurement-bid-library",
+      "difficulty": "medium",
+      "rows": [
+        {
+          "path": "wso2-baseline",
+          "outcome": "ok",
+          "providerInputTokens": 86375,
+          "providerOutputTokens": 106,
+          "costMicrodollars": 86905,
+          "latencyMs": 2880,
+          "deterministicFacts": {
+            "answered": 0,
+            "total": 3
+          },
+          "adjudicatedFacts": {
+            "answered": 3,
+            "total": 3
+          },
+          "expectedCitationLinks": {
+            "resolved": 3,
+            "total": 3
+          },
+          "prohibitedAssertionCount": 0,
+          "contextStrategy": "whole-documents",
+          "bypassApplied": null,
+          "bypassReason": null
+        },
+        {
+          "path": "wso2-native-prompt-compressor",
+          "outcome": "ok",
+          "providerInputTokens": 79185,
+          "providerOutputTokens": 220,
+          "costMicrodollars": 80285,
+          "latencyMs": 8041,
+          "deterministicFacts": {
+            "answered": 0,
+            "total": 3
+          },
+          "adjudicatedFacts": {
+            "answered": 0,
+            "total": 3
+          },
+          "expectedCitationLinks": {
+            "resolved": 3,
+            "total": 3
+          },
+          "prohibitedAssertionCount": 0,
+          "contextStrategy": "wso2-prompt-compressor-v0.9.0",
+          "bypassApplied": null,
+          "bypassReason": null
+        },
+        {
+          "path": "wso2-maha-context-compiler",
+          "outcome": "ok",
+          "providerInputTokens": 919,
+          "providerOutputTokens": 124,
+          "costMicrodollars": 1539,
+          "latencyMs": 1764,
+          "deterministicFacts": {
+            "answered": 3,
+            "total": 3
+          },
+          "adjudicatedFacts": {
+            "answered": 3,
+            "total": 3
+          },
+          "expectedCitationLinks": {
+            "resolved": 3,
+            "total": 3
+          },
+          "prohibitedAssertionCount": 0,
+          "contextStrategy": "maha-context-compiler",
+          "bypassApplied": false,
+          "bypassReason": "none"
+        }
+      ]
+    },
+    {
+      "workloadId": "regulatory-comment-docket",
+      "difficulty": "medium",
+      "rows": [
+        {
+          "path": "wso2-baseline",
+          "outcome": "ok",
+          "providerInputTokens": 91848,
+          "providerOutputTokens": 109,
+          "costMicrodollars": 92393,
+          "latencyMs": 2867,
+          "deterministicFacts": {
+            "answered": 0,
+            "total": 3
+          },
+          "adjudicatedFacts": {
+            "answered": 3,
+            "total": 3
+          },
+          "expectedCitationLinks": {
+            "resolved": 3,
+            "total": 3
+          },
+          "prohibitedAssertionCount": 0,
+          "contextStrategy": "whole-documents",
+          "bypassApplied": null,
+          "bypassReason": null
+        },
+        {
+          "path": "wso2-native-prompt-compressor",
+          "outcome": "ok",
+          "providerInputTokens": 84288,
+          "providerOutputTokens": 166,
+          "costMicrodollars": 85118,
+          "latencyMs": 10611,
+          "deterministicFacts": {
+            "answered": 0,
+            "total": 3
+          },
+          "adjudicatedFacts": {
+            "answered": 0,
+            "total": 3
+          },
+          "expectedCitationLinks": {
+            "resolved": 3,
+            "total": 3
+          },
+          "prohibitedAssertionCount": 0,
+          "contextStrategy": "wso2-prompt-compressor-v0.9.0",
+          "bypassApplied": null,
+          "bypassReason": null
+        },
+        {
+          "path": "wso2-maha-context-compiler",
+          "outcome": "ok",
+          "providerInputTokens": 977,
+          "providerOutputTokens": 104,
+          "costMicrodollars": 1497,
+          "latencyMs": 2000,
+          "deterministicFacts": {
+            "answered": 0,
+            "total": 3
+          },
+          "adjudicatedFacts": {
+            "answered": 3,
+            "total": 3
+          },
+          "expectedCitationLinks": {
+            "resolved": 3,
+            "total": 3
+          },
+          "prohibitedAssertionCount": 0,
+          "contextStrategy": "maha-context-compiler",
+          "bypassApplied": false,
+          "bypassReason": "none"
+        }
+      ]
+    },
+    {
+      "workloadId": "release-evidence-rag",
+      "difficulty": "easy",
+      "rows": [
+        {
+          "path": "wso2-baseline",
+          "outcome": "ok",
+          "providerInputTokens": 28192,
+          "providerOutputTokens": 118,
+          "costMicrodollars": 28782,
+          "latencyMs": 2839,
+          "deterministicFacts": {
+            "answered": 3,
+            "total": 3
+          },
+          "adjudicatedFacts": {
+            "answered": 3,
+            "total": 3
+          },
+          "expectedCitationLinks": {
+            "resolved": 3,
+            "total": 3
+          },
+          "prohibitedAssertionCount": 0,
+          "contextStrategy": "whole-documents",
+          "bypassApplied": null,
+          "bypassReason": null
+        },
+        {
+          "path": "wso2-native-prompt-compressor",
+          "outcome": "ok",
+          "providerInputTokens": 26305,
+          "providerOutputTokens": 153,
+          "costMicrodollars": 27070,
+          "latencyMs": 3420,
+          "deterministicFacts": {
+            "answered": 0,
+            "total": 3
+          },
+          "adjudicatedFacts": {
+            "answered": 0,
+            "total": 3
+          },
+          "expectedCitationLinks": {
+            "resolved": 3,
+            "total": 3
+          },
+          "prohibitedAssertionCount": 0,
+          "contextStrategy": "wso2-prompt-compressor-v0.9.0",
+          "bypassApplied": null,
+          "bypassReason": null
+        },
+        {
+          "path": "wso2-maha-context-compiler",
+          "outcome": "ok",
+          "providerInputTokens": 967,
+          "providerOutputTokens": 92,
+          "costMicrodollars": 1427,
+          "latencyMs": 1242,
+          "deterministicFacts": {
+            "answered": 0,
+            "total": 3
+          },
+          "adjudicatedFacts": {
+            "answered": 3,
+            "total": 3
+          },
+          "expectedCitationLinks": {
+            "resolved": 3,
+            "total": 3
+          },
+          "prohibitedAssertionCount": 0,
+          "contextStrategy": "maha-context-compiler",
+          "bypassApplied": false,
+          "bypassReason": "none"
+        }
+      ]
+    },
+    {
+      "workloadId": "research-literature-export",
+      "difficulty": "hard",
+      "rows": [
+        {
+          "path": "wso2-baseline",
+          "outcome": "ok",
+          "providerInputTokens": 97286,
+          "providerOutputTokens": 124,
+          "costMicrodollars": 97906,
+          "latencyMs": 3635,
+          "deterministicFacts": {
+            "answered": 0,
+            "total": 3
+          },
+          "adjudicatedFacts": {
+            "answered": 3,
+            "total": 3
+          },
+          "expectedCitationLinks": {
+            "resolved": 3,
+            "total": 3
+          },
+          "prohibitedAssertionCount": 0,
+          "contextStrategy": "whole-documents",
+          "bypassApplied": null,
+          "bypassReason": null
+        },
+        {
+          "path": "wso2-native-prompt-compressor",
+          "outcome": "ok",
+          "providerInputTokens": 89363,
+          "providerOutputTokens": 138,
+          "costMicrodollars": 90053,
+          "latencyMs": 8763,
+          "deterministicFacts": {
+            "answered": 0,
+            "total": 3
+          },
+          "adjudicatedFacts": {
+            "answered": 0,
+            "total": 3
+          },
+          "expectedCitationLinks": {
+            "resolved": 3,
+            "total": 3
+          },
+          "prohibitedAssertionCount": 0,
+          "contextStrategy": "wso2-prompt-compressor-v0.9.0",
+          "bypassApplied": null,
+          "bypassReason": null
+        },
+        {
+          "path": "wso2-maha-context-compiler",
+          "outcome": "ok",
+          "providerInputTokens": 903,
+          "providerOutputTokens": 124,
+          "costMicrodollars": 1523,
+          "latencyMs": 3464,
+          "deterministicFacts": {
+            "answered": 3,
+            "total": 3
+          },
+          "adjudicatedFacts": {
+            "answered": 3,
+            "total": 3
+          },
+          "expectedCitationLinks": {
+            "resolved": 3,
+            "total": 3
+          },
+          "prohibitedAssertionCount": 0,
+          "contextStrategy": "maha-context-compiler",
+          "bypassApplied": false,
+          "bypassReason": "none"
+        }
+      ]
+    },
+    {
+      "workloadId": "security-control-catalog",
+      "difficulty": "medium",
+      "rows": [
+        {
+          "path": "wso2-baseline",
+          "outcome": "ok",
+          "providerInputTokens": 70016,
+          "providerOutputTokens": 176,
+          "costMicrodollars": 70896,
+          "latencyMs": 2983,
+          "deterministicFacts": {
+            "answered": 3,
+            "total": 3
+          },
+          "adjudicatedFacts": {
+            "answered": 3,
+            "total": 3
+          },
+          "expectedCitationLinks": {
+            "resolved": 3,
+            "total": 3
+          },
+          "prohibitedAssertionCount": 0,
+          "contextStrategy": "whole-documents",
+          "bypassApplied": null,
+          "bypassReason": null
+        },
+        {
+          "path": "wso2-native-prompt-compressor",
+          "outcome": "ok",
+          "providerInputTokens": 63911,
+          "providerOutputTokens": 137,
+          "costMicrodollars": 64596,
+          "latencyMs": 6004,
+          "deterministicFacts": {
+            "answered": 0,
+            "total": 3
+          },
+          "adjudicatedFacts": {
+            "answered": 0,
+            "total": 3
+          },
+          "expectedCitationLinks": {
+            "resolved": 3,
+            "total": 3
+          },
+          "prohibitedAssertionCount": 0,
+          "contextStrategy": "wso2-prompt-compressor-v0.9.0",
+          "bypassApplied": null,
+          "bypassReason": null
+        },
+        {
+          "path": "wso2-maha-context-compiler",
+          "outcome": "ok",
+          "providerInputTokens": 903,
+          "providerOutputTokens": 119,
+          "costMicrodollars": 1498,
+          "latencyMs": 1433,
+          "deterministicFacts": {
+            "answered": 3,
+            "total": 3
+          },
+          "adjudicatedFacts": {
+            "answered": 3,
+            "total": 3
+          },
+          "expectedCitationLinks": {
+            "resolved": 3,
+            "total": 3
+          },
+          "prohibitedAssertionCount": 0,
+          "contextStrategy": "maha-context-compiler",
+          "bypassApplied": false,
+          "bypassReason": "none"
+        }
+      ]
+    },
+    {
+      "workloadId": "support-ticket-history",
+      "difficulty": "medium",
+      "rows": [
+        {
+          "path": "wso2-baseline",
+          "outcome": "ok",
+          "providerInputTokens": 63107,
+          "providerOutputTokens": 119,
+          "costMicrodollars": 63702,
+          "latencyMs": 2720,
+          "deterministicFacts": {
+            "answered": 3,
+            "total": 3
+          },
+          "adjudicatedFacts": {
+            "answered": 3,
+            "total": 3
+          },
+          "expectedCitationLinks": {
+            "resolved": 3,
+            "total": 3
+          },
+          "prohibitedAssertionCount": 0,
+          "contextStrategy": "whole-documents",
+          "bypassApplied": null,
+          "bypassReason": null
+        },
+        {
+          "path": "wso2-native-prompt-compressor",
+          "outcome": "ok",
+          "providerInputTokens": 57629,
+          "providerOutputTokens": 138,
+          "costMicrodollars": 58319,
+          "latencyMs": 6618,
+          "deterministicFacts": {
+            "answered": 0,
+            "total": 3
+          },
+          "adjudicatedFacts": {
+            "answered": 0,
+            "total": 3
+          },
+          "expectedCitationLinks": {
+            "resolved": 3,
+            "total": 3
+          },
+          "prohibitedAssertionCount": 0,
+          "contextStrategy": "wso2-prompt-compressor-v0.9.0",
+          "bypassApplied": null,
+          "bypassReason": null
+        },
+        {
+          "path": "wso2-maha-context-compiler",
+          "outcome": "ok",
+          "providerInputTokens": 958,
+          "providerOutputTokens": 97,
+          "costMicrodollars": 1443,
+          "latencyMs": 1501,
+          "deterministicFacts": {
+            "answered": 0,
+            "total": 3
+          },
+          "adjudicatedFacts": {
+            "answered": 3,
+            "total": 3
+          },
+          "expectedCitationLinks": {
+            "resolved": 3,
+            "total": 3
+          },
+          "prohibitedAssertionCount": 0,
+          "contextStrategy": "maha-context-compiler",
+          "bypassApplied": false,
+          "bypassReason": "none"
+        }
+      ]
+    },
+    {
+      "workloadId": "vendor-contract-set",
+      "difficulty": "easy",
+      "rows": [
+        {
+          "path": "wso2-baseline",
+          "outcome": "ok",
+          "providerInputTokens": 43415,
+          "providerOutputTokens": 106,
+          "costMicrodollars": 43945,
+          "latencyMs": 2527,
+          "deterministicFacts": {
+            "answered": 0,
+            "total": 3
+          },
+          "adjudicatedFacts": {
+            "answered": 3,
+            "total": 3
+          },
+          "expectedCitationLinks": {
+            "resolved": 3,
+            "total": 3
+          },
+          "prohibitedAssertionCount": 0,
+          "contextStrategy": "whole-documents",
+          "bypassApplied": null,
+          "bypassReason": null
+        },
+        {
+          "path": "wso2-native-prompt-compressor",
+          "outcome": "ok",
+          "providerInputTokens": 39275,
+          "providerOutputTokens": 88,
+          "costMicrodollars": 39715,
+          "latencyMs": 4617,
+          "deterministicFacts": {
+            "answered": 0,
+            "total": 3
+          },
+          "adjudicatedFacts": {
+            "answered": 0,
+            "total": 3
+          },
+          "expectedCitationLinks": {
+            "resolved": 3,
+            "total": 3
+          },
+          "prohibitedAssertionCount": 0,
+          "contextStrategy": "wso2-prompt-compressor-v0.9.0",
+          "bypassApplied": null,
+          "bypassReason": null
+        },
+        {
+          "path": "wso2-maha-context-compiler",
+          "outcome": "ok",
+          "providerInputTokens": 926,
+          "providerOutputTokens": 95,
+          "costMicrodollars": 1401,
+          "latencyMs": 1887,
+          "deterministicFacts": {
+            "answered": 0,
+            "total": 3
+          },
+          "adjudicatedFacts": {
+            "answered": 3,
+            "total": 3
+          },
+          "expectedCitationLinks": {
+            "resolved": 3,
+            "total": 3
+          },
+          "prohibitedAssertionCount": 0,
+          "contextStrategy": "maha-context-compiler",
+          "bypassApplied": false,
+          "bypassReason": "none"
+        }
+      ]
+    }
+  ],
+  "aggregates": {
+    "wso2-baseline": {
+      "calls": 20,
+      "successfulCalls": 20,
+      "providerInputTokens": 1621553,
+      "providerOutputTokens": 2282,
+      "costMicrodollars": 1632963,
+      "costUsd": "1.632963",
+      "deterministicFacts": {
+        "answered": 15,
+        "total": 60
+      },
+      "adjudicatedFacts": {
+        "answered": 60,
+        "total": 60
+      },
+      "expectedCitationLinks": {
+        "resolved": 60,
+        "total": 60
+      },
+      "latencyMs": {
+        "p50": 2867,
+        "p95": 4138,
+        "min": 1949,
+        "max": 7594
+      },
+      "bypassCount": 0
+    },
+    "wso2-native-prompt-compressor": {
+      "calls": 20,
+      "successfulCalls": 20,
+      "providerInputTokens": 1489323,
+      "providerOutputTokens": 3185,
+      "costMicrodollars": 1505248,
+      "costUsd": "1.505248",
+      "deterministicFacts": {
+        "answered": 0,
+        "total": 60
+      },
+      "adjudicatedFacts": {
+        "answered": 0,
+        "total": 60
+      },
+      "expectedCitationLinks": {
+        "resolved": 60,
+        "total": 60
+      },
+      "latencyMs": {
+        "p50": 6958,
+        "p95": 16301,
+        "min": 2751,
+        "max": 16655
+      },
+      "bypassCount": 0
+    },
+    "wso2-maha-context-compiler": {
+      "calls": 20,
+      "successfulCalls": 20,
+      "providerInputTokens": 18849,
+      "providerOutputTokens": 2106,
+      "costMicrodollars": 29379,
+      "costUsd": "0.029379",
+      "deterministicFacts": {
+        "answered": 24,
+        "total": 60
+      },
+      "adjudicatedFacts": {
+        "answered": 60,
+        "total": 60
+      },
+      "expectedCitationLinks": {
+        "resolved": 60,
+        "total": 60
+      },
+      "latencyMs": {
+        "p50": 1701,
+        "p95": 3415,
+        "min": 1242,
+        "max": 3464
+      },
+      "bypassCount": 0
+    }
+  },
+  "comparison": {
+    "inputTokenReductionPercent": "98.84",
+    "costReductionPercent": "98.20",
+    "baselinePath": "wso2-baseline",
+    "comparedPath": "wso2-maha-context-compiler"
+  },
+  "sanitization": {
+    "syntheticCorpus": true,
+    "modelAnswerTextRetained": false,
+    "sourceDocumentTextRetained": false,
+    "compiledContextRetained": false,
+    "credentialsRetained": false,
+    "requestBodiesRetained": false
+  },
+  "limitations": [
+    "The corpus is synthetic. This run does not establish performance on a WSO2 customer workload.",
+    "This is one execution on 2026-08-17. Latency is a single observation per call, not a percentile over repeated runs.",
+    "Two fact scores are reported per row and they disagree. The deterministic score is exact-span containment and under-counts correct paraphrases; the adjudicated score applies a path-blinded semantic rubric to the same answers. Any published retention figure must say which one it is.",
+    "The Prompt Compressor result is specific to WSO2 AI Gateway 1.1.0, Prompt Compressor 0.9.0 and a 0.55 retained ratio, and must not be generalized before WSO2 or a customer confirms that configuration is the intended production setup.",
+    "Provider cost uses the declared pricing assumption applied to observed token counts; it is not a provider invoice.",
+    "The primary checkpoint and adjudication files are not committed, so this artifact is reproducible only by a holder of those files. The digests above identify them exactly."
+  ]
+}

@@ -1,6 +1,12 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 
+import {
+  WSO2_LIVE_EVIDENCE_PATH,
+  loadWso2LiveEvidence,
+  sha256File,
+} from '@/lib/integrations/wso2-live-evidence'
+
 export const metadata: Metadata = {
   title: 'Maha Context Compiler for WSO2 AI Gateway',
   description: 'A bounded, reproducible evaluation of source-linked context reduction inside an existing WSO2 AI Gateway deployment.',
@@ -17,8 +23,12 @@ const evidenceLinks = [
     label: 'Frozen reproduction manifest',
   },
   {
+    href: 'https://github.com/Maha-Strategies/maha-corp-web/blob/main/content/integrations/wso2-live-evaluation-evidence.json',
+    label: 'Per-workload evidence artifact (all 20 workloads)',
+  },
+  {
     href: 'https://github.com/Maha-Strategies/maha-corp-web/blob/main/content/integrations/wso2-sanitized-three-path-trace.json',
-    label: 'Sanitized three-path trace',
+    label: 'Sanitized trace, one representative workload',
   },
   {
     href: 'https://github.com/Maha-Strategies/maha-corp-web/blob/main/docs/integrations/wso2-context-interceptor.md',
@@ -26,11 +36,31 @@ const evidenceLinks = [
   },
 ] as const
 
-const resultRows = [
-  { path: 'WSO2 baseline', tokens: '1,621,553', cost: '$1.632963', factResult: '60 / 60' },
-  { path: 'WSO2 Prompt Compressor', tokens: '1,489,323', cost: '$1.505248', factResult: '0 / 60*' },
-  { path: 'WSO2 + Maha', tokens: '18,849', cost: '$0.029379', factResult: '60 / 60' },
-] as const
+// Every number in the results table is read from the committed evidence
+// artifact and re-derived from its per-workload rows at load time. Editing a
+// headline figure here is not possible: there is no figure here to edit, and
+// the artifact's own parser rejects a total that disagrees with its rows.
+const evidence = loadWso2LiveEvidence()
+const evidenceSha256 = sha256File(WSO2_LIVE_EVIDENCE_PATH)
+
+const pathLabels = {
+  'wso2-baseline': 'WSO2 baseline',
+  'wso2-native-prompt-compressor': 'WSO2 Prompt Compressor',
+  'wso2-maha-context-compiler': 'WSO2 + Maha',
+} as const
+
+const resultRows = (Object.keys(pathLabels) as (keyof typeof pathLabels)[]).map((path) => {
+  const aggregate = evidence.aggregates[path]
+  return {
+    path: pathLabels[path],
+    tokens: aggregate.providerInputTokens.toLocaleString('en-US'),
+    cost: `$${aggregate.costUsd}`,
+    factResult: `${aggregate.adjudicatedFacts.answered} / ${aggregate.adjudicatedFacts.total}${path === 'wso2-native-prompt-compressor' ? '*' : ''}`,
+    latency: `${aggregate.latencyMs.p50.toLocaleString('en-US')} ms`,
+  }
+})
+
+const callCount = evidence.workloads.length * Object.keys(pathLabels).length
 
 export default function Wso2IntegrationPage() {
   const serviceJsonLd = {
@@ -99,7 +129,7 @@ export default function Wso2IntegrationPage() {
           <p className="evidence-kicker">Preliminary observed result</p>
           <h2 id="observed-results-heading" className="evidence-section-title mt-4">A reason to evaluate—not a universal performance claim.</h2>
           <p className="evidence-copy mt-5">
-            In a 60-call comparison over 20 frozen, synthetic 20K–100K-token workloads, the Maha path reduced provider input tokens by 98.84% and observed model cost by 98.20% relative to baseline. All calls completed without retries or failures.
+            In a {callCount}-call comparison over {evidence.workloads.length} frozen, synthetic 20K–100K-token workloads, run once on {evidence.observedAt.slice(0, 10)}, the Maha path reduced provider input tokens by {evidence.comparison.inputTokenReductionPercent}% and observed model cost by {evidence.comparison.costReductionPercent}% relative to baseline. All {callCount} calls completed without retries or failures.
           </p>
           <div className="mt-7 overflow-x-auto border border-[var(--border-default)] bg-[var(--surface-raised)]">
             <table className="w-full min-w-[620px] border-collapse text-left text-sm">
@@ -108,6 +138,7 @@ export default function Wso2IntegrationPage() {
                   <th className="border-b border-[var(--border-default)] p-4 font-semibold">Path</th>
                   <th className="border-b border-[var(--border-default)] p-4 font-semibold">Provider input tokens</th>
                   <th className="border-b border-[var(--border-default)] p-4 font-semibold">Observed model cost</th>
+                  <th className="border-b border-[var(--border-default)] p-4 font-semibold">Median latency</th>
                   <th className="border-b border-[var(--border-default)] p-4 font-semibold">Required facts retained</th>
                 </tr>
               </thead>
@@ -117,6 +148,7 @@ export default function Wso2IntegrationPage() {
                     <th className="border-b border-[var(--border-subtle)] p-4 font-medium text-[var(--text-primary)]">{row.path}</th>
                     <td className="border-b border-[var(--border-subtle)] p-4 font-mono text-xs">{row.tokens}</td>
                     <td className="border-b border-[var(--border-subtle)] p-4 font-mono text-xs">{row.cost}</td>
+                    <td className="border-b border-[var(--border-subtle)] p-4 font-mono text-xs">{row.latency}</td>
                     <td className="border-b border-[var(--border-subtle)] p-4 font-mono text-xs">{row.factResult}</td>
                   </tr>
                 ))}
@@ -125,6 +157,13 @@ export default function Wso2IntegrationPage() {
           </div>
           <p className="mt-4 max-w-3xl text-xs leading-6 text-[var(--text-muted)]">
             *The Prompt Compressor result is specific to WSO2 AI Gateway 1.1.0, Prompt Compressor 0.9.0, and a 0.55 retained ratio. It should not be generalized before WSO2 or a customer confirms that configuration reflects the intended production setup. Provider pricing assumptions and the full frozen configuration are recorded in the reproduction manifest.
+          </p>
+          <p className="mt-3 max-w-3xl text-xs leading-6 text-[var(--text-muted)]">
+            <strong className="text-[var(--text-secondary)]">Which retention score this is.</strong>{' '}
+            &ldquo;Required facts retained&rdquo; above is the path-blinded semantic rubric applied to the returned answers. A second, stricter scorer measures exact evidence-span containment on the same answers and reports{' '}
+            {evidence.aggregates['wso2-baseline'].deterministicFacts.answered} / {evidence.aggregates['wso2-baseline'].deterministicFacts.total} for the baseline,{' '}
+            {evidence.aggregates['wso2-native-prompt-compressor'].deterministicFacts.answered} / {evidence.aggregates['wso2-native-prompt-compressor'].deterministicFacts.total} for the Prompt Compressor, and{' '}
+            {evidence.aggregates['wso2-maha-context-compiler'].deterministicFacts.answered} / {evidence.aggregates['wso2-maha-context-compiler'].deterministicFacts.total} for Maha, because it scores a correct paraphrase as a miss. Both scores are published per workload in the evidence artifact. Latency is one observation per call on a single run, not a percentile over repeated runs.
           </p>
         </section>
 
@@ -171,6 +210,33 @@ export default function Wso2IntegrationPage() {
           <div className="evidence-code mt-6 overflow-x-auto p-5">
             <code className="font-mono text-xs">npm run reproduce:wso2-evaluation</code>
           </div>
+
+          <h3 className="evidence-card-title mt-10">Check the observed result yourself</h3>
+          <p className="evidence-copy mt-4">
+            The table above is not typed into this page. It is read from a committed artifact that carries every one of the {callCount} calls as its own row, and whose totals are re-derived from those rows each time it is loaded — a hand-edited total fails validation instead of rendering. Verify the artifact you are reading is the one described here:
+          </p>
+          <div className="evidence-code mt-5 overflow-x-auto p-5">
+            <code className="block whitespace-pre font-mono text-xs">{`shasum -a 256 ${WSO2_LIVE_EVIDENCE_PATH}
+npm run validate:wso2-live-evidence`}</code>
+          </div>
+          <dl className="mt-6 space-y-3 text-xs leading-6 text-[var(--text-muted)]">
+            <div>
+              <dt className="font-mono uppercase tracking-widest text-[10px]">Evidence artifact SHA-256</dt>
+              <dd className="mt-1 break-all font-mono text-[var(--text-secondary)]">{evidenceSha256}</dd>
+            </div>
+            <div>
+              <dt className="font-mono uppercase tracking-widest text-[10px]">Frozen corpus label digest</dt>
+              <dd className="mt-1 break-all font-mono text-[var(--text-secondary)]">{evidence.corpus.labelFreezeDigest}</dd>
+            </div>
+            <div>
+              <dt className="font-mono uppercase tracking-widest text-[10px]">Source checkpoint SHA-256 (not published)</dt>
+              <dd className="mt-1 break-all font-mono text-[var(--text-secondary)]">{evidence.generation.sourceCheckpointSha256}</dd>
+            </div>
+          </dl>
+          <p className="mt-5 max-w-3xl text-xs leading-6 text-[var(--text-muted)]">
+            The run&rsquo;s primary evidence — the durable checkpoint and the path-blinded adjudication — is retained outside this repository because both carry the model&rsquo;s answer text for every call. They are identified above by digest so a reviewer under NDA can be handed the exact bytes this artifact was derived from and re-derive it with{' '}
+            <span className="font-mono">npm run generate:wso2-live-evidence</span>. The sanitized single-workload trace remains published separately: it is one representative call, not evidence for the aggregate.
+          </p>
         </section>
 
         <section className="evidence-section" aria-labelledby="boundaries-heading">
