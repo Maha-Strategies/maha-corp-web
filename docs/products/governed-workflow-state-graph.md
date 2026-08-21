@@ -101,9 +101,14 @@ silently ignored.
   replay_blocked ◀── a repeated idempotency key with changed material inputs
 ```
 
-Terminal: `closed`, `denied`, `failed_final`.
-Halted (no automatic progress): the terminal set plus `expired`, `needs_human_review`,
-`replay_blocked`.
+**Terminal** — `closed`, `denied`, `failed_final`. No further transition from anyone.
+These declare no outgoing edges.
+
+**Halted, not finished** — `expired`, `needs_human_review`, `replay_blocked`. No automatic
+progress: an agent is refused with `approval_bypass_attempted`, and only a
+`human_reviewer` may move the workflow along a legal edge. These states exist to hand
+control to a person, so the door out of them is open to a person and closed to the agent
+that arrived there. A reviewer still cannot take an edge the graph does not declare.
 
 **Safe checkpoints for recovery:** `evidence_collected`, `policy_evaluated`, `approved`.
 
@@ -123,6 +128,8 @@ one. That path is classified `indeterminate_side_effect` and routed to a human i
 | A repeated transition with the same key returns the original result | `applyTransition` checks the idempotency record before anything that could cause an effect |
 | A repeated transition with changed material inputs is rejected | `replay_material_change_rejected` → `replay_blocked` |
 | Recovery reconstructs state and finds the last safe checkpoint | `replayWorkflow` + `assessRecovery` |
+| An escalation can be resolved, but only by a human | `isHalted` gate in `applyTransition`, keyed on `actorKind` |
+| One workflow's idempotency key cannot block another's | Records are scoped by workflow instance and key |
 | Every denied or failed transition produces a machine-readable reason code | 20 codes in `GwsgReasonCode`; asserted for every scenario |
 
 ---
@@ -257,6 +264,10 @@ organisation account for what an agent was permitted to do.
    is a worked example, not a service, and should not be treated as one.
 8. **Exception secrets are environment-supplied.** Key management, rotation, and reviewer
    identity provisioning are out of scope.
+9. **Not connected to payment.** Payment is forbidden at the root policy layer, no
+   permitted operation is a payment operation, and the library imports no payment,
+   provider, or durable-store module. This is enforced by a source-level release-boundary
+   test, not by convention. Connecting a real disbursement is deliberately future work.
 
 ---
 
@@ -265,8 +276,11 @@ organisation account for what an agent was permitted to do.
 Run the focused suite:
 
 ```bash
-npm test -- test/governed-workflow-scenarios.test.ts test/governed-workflow-properties.test.ts test/governed-workflow-exceptions.test.ts
+npm test
 ```
+
+The governed-workflow files are `test/governed-workflow-*.test.ts`: scenarios, properties,
+exceptions, demo API, recovery paths, and the release boundary.
 
 The corpus covers all ten required scenarios: normal approved path, denied policy path,
 uncertainty requiring human review, approval expiry, changed evidence after approval,

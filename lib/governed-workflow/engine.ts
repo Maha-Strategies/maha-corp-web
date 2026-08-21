@@ -212,6 +212,11 @@ export class GwsgEngine {
   readonly #approvalTtlMs: number
   readonly #requiredEvidenceKinds: readonly EvidenceReference['kind'][]
   readonly #instances = new Map<string, Pick<GwsgWorkflowInstance, 'workflowInstanceId' | 'workflowTemplateId' | 'tenantId' | 'createdAt'>>()
+  /**
+   * Keyed by workflow instance *and* key. An engine holds many workflows, and
+   * callers reuse ordinary key names like `intake-1`, so an engine-wide map
+   * would let one workflow's key block an unrelated workflow's transition.
+   */
   readonly #idempotency = new Map<string, IdempotencyRecord>()
   readonly #approvals = new Map<string, ApprovalDecisionRecord>()
 
@@ -325,6 +330,7 @@ export class GwsgEngine {
     const priorState: GwsgState = head?.nextState ?? 'draft'
     const now = this.#clock()
 
+    const idempotencyScope = `${request.workflowInstanceId}\n${request.idempotencyKey}`
     const inputSha256 = declaredInputDigest(request.declaredInput)
     const evidenceSetSha256 = evidenceSetDigest(request.evidence)
     const operation = request.action?.operation ?? `transition:${request.intendedState}`
@@ -380,7 +386,7 @@ export class GwsgEngine {
       }
       const transition: GwsgTransition = { ...body, transitionSha256: computeTransitionDigest(body) }
       this.#log.append(transition)
-      this.#idempotency.set(request.idempotencyKey, {
+      this.#idempotency.set(idempotencyScope, {
         idempotencyKey: request.idempotencyKey,
         materialSha256,
         transitionId: transition.transitionId,
@@ -390,17 +396,29 @@ export class GwsgEngine {
       return { accepted, idempotent: false, transition, reasonCodes: fields.reasonCodes }
     }
 
-    // A halted workflow is rejected without appending. Recording a
-    // `denied -> denied` edge would put a transition in the log that the state
-    // graph declares illegal, and would let any caller grow a closed
-    // workflow's history indefinitely.
-    if (isHalted(priorState)) {
-      if (!head) throw new Error('Halted workflow has no head transition.')
+    // Rejected without appending. Recording a `denied -> denied` edge would put
+    // a transition in the log that the state graph declares illegal, and would
+    // let any caller grow a finished workflow's history indefinitely.
+    //
+    // Terminal is absolute: `closed`, `denied` and `failed_final` admit no
+    // further transition from anyone, which is why they declare no edges.
+    if (isTerminal(priorState)) {
+      if (!head) throw new Error('Terminal workflow has no head transition.')
       return { accepted: false, idempotent: false, transition: head, reasonCodes: ['terminal_state'] }
     }
 
+    // `expired`, `needs_human_review` and `replay_blocked` are halted, not
+    // finished. They exist precisely to hand control to a person, so a human
+    // reviewer may move them along a legal edge while an agent may not — a
+    // state that routed to human review but no human could leave would make
+    // the review a dead end rather than an escalation.
+    if (isHalted(priorState) && request.actor.actorKind !== 'human_reviewer') {
+      if (!head) throw new Error('Halted workflow has no head transition.')
+      return { accepted: false, idempotent: false, transition: head, reasonCodes: ['approval_bypass_attempted'] }
+    }
+
     // Replay, before anything else that could cause a second effect.
-    const priorIdempotency = this.#idempotency.get(request.idempotencyKey)
+    const priorIdempotency = this.#idempotency.get(idempotencyScope)
     if (priorIdempotency) {
       const original = events.find((event) => event.transitionId === priorIdempotency.transitionId)
       if (priorIdempotency.materialSha256 !== materialSha256) {
