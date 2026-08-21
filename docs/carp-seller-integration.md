@@ -26,10 +26,13 @@ Until every order-specific item is confirmed by the supplier and buyer, the prof
 - Maha Seller profile: `https://www.mahastrategies.com/.well-known/carp/seller.json`
 - Maha DID: `https://www.mahastrategies.com/.well-known/carp/did.json`
 - Maha signed Agent Descriptor (SAD): `https://www.mahastrategies.com/.well-known/carp/sad.json`
+- Endpoint-control binding: `https://www.mahastrategies.com/.well-known/carp/endpoint-binding.json`
 - CARP endpoint: `https://www.mahastrategies.com`
 - Fulfillment resource: `POST https://www.mahastrategies.com/api/v1/compress/evaluate`
 
 The public DID is a `did:key` derived from a dedicated secp256k1 key. The SAD is RFC 8785-canonicalized and signed as detached ES256K JWS. The private key is stored only as the sensitive Production environment variable `CARP_AGENT_PRIVATE_KEY`; it must never appear in this repository, logs, artifacts, or discovery responses.
+
+The endpoint-control binding is published *at the advertised CARP endpoint* and signed by the same DID key. A verifier must fetch it from the endpoint in the Seller profile, verify its detached ES256K JWS, then confirm that its `id`, `endpoint`, and `bindingUrl` match the SAD and the URL fetched. This is stronger than a DID-only listing: it demonstrates control of the endpoint at verification time. It is not yet an El-Cabezon listing prerequisite or a DNS ownership proof.
 
 The Seller role is no longer a Maha-only proposal. Bryan merged Maha's physical/digital fulfillment generalization as CABEZON Seller model v0.2. The public mirror therefore records the canonical source and contribution rather than claiming an unadopted extension.
 
@@ -71,6 +74,14 @@ Digital delivery evidence consists of:
 - the returned result bytes when a content digest is published.
 
 A digest proves byte identity, not correctness, quality, buyer acceptance, or entitlement to release escrowed funds. No source text or compiled context is placed in a public fulfillment descriptor.
+
+### Digest and release-safety contract
+
+For a structured delivery record, `requestDigest` and `resultDigest` use **RFC 8785/JCS canonical JSON**, UTF-8 encoding, then SHA-256, rendered as `sha256:<lowercase-hex>`. Binary `artifactDigest` values are SHA-256 over the original raw bytes and identify their distinct algorithm explicitly. A delivery reference labels Maha as its seller-generated issuer; it does not represent a provider signature, buyer acceptance, delivery retrieval, or escrow-release authorization.
+
+Before any escrow-backed physical or digital purchase path is enabled, the release recipient must be checked twice: once before deposit and again immediately before release. The second check must identify the same recipient, be fresh, and carry evidence from the selected payability provider. A missing, stale, mismatched, unsupported, or non-payable release check must enter `RELEASE_BLOCKED_UNPAYABLE_RECIPIENT` and arbitration/recovery; it must not release funds.
+
+This repository now defines and tests that release gate, but **no CABEZON escrower currently enforces it**. Its only successful local result is `RELEASE_RECHECK_PASSED_PENDING_ESCROWER`, which deliberately remains non-authorizing until Bryan's escrow/ClawFace path consumes the attestation at release time. The required recovery tests before money are: delivery retrieval unavailable after confirmation, and a release recipient becoming unpayable after deposit but before release.
 
 ## Verification sequence
 

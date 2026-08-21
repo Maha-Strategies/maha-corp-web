@@ -23,6 +23,7 @@ const nextConfig: NextConfig = {
       { source: '/.well-known/carp/seller.json', destination: '/api/discovery/carp/seller-profile' },
       { source: '/.well-known/carp/did.json', destination: '/api/discovery/carp/did' },
       { source: '/.well-known/carp/sad.json', destination: '/api/discovery/carp/sad' },
+      { source: '/.well-known/carp/endpoint-binding.json', destination: '/api/discovery/carp/endpoint-binding' },
       { source: '/cgi-bin/did', destination: '/api/discovery/carp/did' },
       { source: '/cgi-bin/maha-strategies', destination: '/api/discovery/carp/sad' },
       { source: '/cgi-bin/challenge', destination: '/api/carp/challenge' },

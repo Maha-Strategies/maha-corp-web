@@ -3,6 +3,7 @@ import { createHash } from 'node:crypto'
 import { BASE_USDC, MAHA_PAYEE } from '../x402/discovery-payment-recipe.ts'
 import { BASE_MAINNET_CAIP2, DEEP_CONTEXT_EVALUATION_OFFER, USDC_DECIMALS } from '../x402/offers.ts'
 import { configuredIdentity, MAHA_CARP_DID_URL, MAHA_CARP_SAD_URL, MAHA_CARP_URL } from './identity.ts'
+import { MAHA_CARP_ENDPOINT_BINDING_URL } from './endpoint-binding.ts'
 
 export const CARP_SELLER_ROLE_URL = 'https://www.mahastrategies.com/.well-known/carp/seller-role.json'
 export const MAHA_CARP_SELLER_URL = 'https://www.mahastrategies.com/.well-known/carp/seller.json'
@@ -121,6 +122,7 @@ export const mahaCarpSellerProfile = Object.freeze({
     didUrl: MAHA_CARP_DID_URL,
     sad: identity ? MAHA_CARP_SAD_URL : null,
     carpUrl: identity ? MAHA_CARP_URL : null,
+    endpointBinding: identity ? MAHA_CARP_ENDPOINT_BINDING_URL : null,
   },
   fulfillmentModes: ['digital', 'physical'],
   termsUrl: `${SITE_URL}/terms`,

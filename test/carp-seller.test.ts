@@ -13,6 +13,7 @@ import {
   handleCarpSellerRequest,
   mahaCarpSellerProfile,
 } from '../lib/carp/seller.ts'
+import { MAHA_CARP_ENDPOINT_BINDING_URL } from '../lib/carp/endpoint-binding.ts'
 import {
   didDocumentForPublicKey,
   multibaseForPublicKey,
@@ -183,4 +184,6 @@ test('the worker polls one authenticated request and returns a JSON-RPC result',
 test('public CARP discovery URLs are stable', () => {
   assert.equal(CARP_SELLER_ROLE_URL, 'https://www.mahastrategies.com/.well-known/carp/seller-role.json')
   assert.equal(MAHA_CARP_SELLER_URL, 'https://www.mahastrategies.com/.well-known/carp/seller.json')
+  assert.equal(MAHA_CARP_ENDPOINT_BINDING_URL, 'https://www.mahastrategies.com/.well-known/carp/endpoint-binding.json')
+  assert.equal(mahaCarpSellerProfile.membership.endpointBinding, null)
 })

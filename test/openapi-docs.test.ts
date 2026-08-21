@@ -72,6 +72,7 @@ const PRIVATE_ROUTES = new Set([
   // REST OpenAPI operations.
   '/api/discovery/carp/did',
   '/api/discovery/carp/sad',
+  '/api/discovery/carp/endpoint-binding',
   '/api/carp/challenge',
   '/api/carp/response',
   '/api/carp/encrequest',
