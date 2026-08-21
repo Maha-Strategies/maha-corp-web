@@ -65,3 +65,20 @@ MCRB_QASPER_DEV_JSON=/absolute/path/qasper-dev-v0.3.json \
 ## Limitations
 
 QASPER represents NLP research papers, not every enterprise or agent workload. The benchmark measures extractive evidence survival, not generated-answer quality or factuality. Local latency is useful only for relative algorithmic comparison. Input-cost estimates use a declared reference price and exclude output generation equally across methods.
+
+## Additive release: dense retriever baseline (1.1.0-dense)
+
+v1.0.0 above is frozen and unchanged. A separate additive release adds a
+seventh method, `dense_bge_small_en_v15` — an embedding retrieval baseline
+using `BAAI/bge-small-en-v1.5`, evaluated on the same 250 cases under the same
+budget, packer and scorer.
+
+**It scores 71.2% complete-evidence-set retention against `maha_bm25`'s 60.4%.**
+The individual Wilson intervals overlap at 65.3-66.3. This release reports
+intervals for each method but does not perform a paired significance test, so
+the 10.8-point difference is reported as an observed result rather than a
+claim of statistical significance.
+
+- Artifacts: `benchmarks/mcrb-1/dense/`
+- Methodology and fairness limits: `docs/benchmarks/mcrb1-dense-retriever-baseline.md`
+- Run it: `npm run benchmark:mcrb1-dense`
