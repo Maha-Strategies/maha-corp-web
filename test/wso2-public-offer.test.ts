@@ -10,8 +10,11 @@ const ROOT = join(import.meta.dirname, '..')
 test('the public WSO2 offer states its commercial scope and compatibility boundaries', () => {
   const page = readFileSync(join(ROOT, 'app/integrations/wso2/page.tsx'), 'utf8')
 
-  assert.match(page, /Fixed-scope evaluation · \$5,000/)
-  assert.match(page, /Founding design-partner evaluations may be scoped at \$2,500/)
+  // Prices moved to lib/commercial/context-control-assessment-offer.ts when the
+  // evidence package became public; the page renders them rather than spelling
+  // them out. context-control-assessment-offer.test.ts pins the figures.
+  assert.match(page, /ASSESSMENT_TIERS\[0\]\.price/)
+  assert.match(page, /FOUNDING_PARTNER\.price|FOUNDING_PARTNER\.limit/)
   assert.match(page, /not claiming WSO2 partnership, certification, approval, or customer validation/)
   assert.match(page, /public policy bundle is evaluation-only/)
   assert.match(page, /corpus is synthetic/)

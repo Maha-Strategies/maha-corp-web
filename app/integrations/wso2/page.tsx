@@ -7,6 +7,13 @@ import {
   sha256File,
 } from '@/lib/integrations/wso2-live-evidence'
 import { PUBLIC_EVIDENCE } from '@/lib/evidence/public-evidence-index'
+import {
+  ASSESSMENT_EXCLUSIONS,
+  ASSESSMENT_SCOPE,
+  ASSESSMENT_TIERS,
+  FOUNDING_PARTNER,
+  POSITIONING,
+} from '@/lib/commercial/context-control-assessment-offer'
 
 export const metadata: Metadata = {
   title: 'Maha Context Compiler for WSO2 AI Gateway',
@@ -93,7 +100,7 @@ export default function Wso2IntegrationPage() {
         <header className="border-t border-[var(--border-default)] pt-5">
           <p className="evidence-kicker flex flex-wrap justify-between gap-3">
             <span>Independent WSO2 compatibility</span>
-            <span>Fixed-scope evaluation · $5,000</span>
+            <span>Fixed-scope evaluation · {ASSESSMENT_TIERS[0].price}</span>
           </p>
           <h1 className="evidence-title evidence-title--product">Reduce AI context inside WSO2. Keep the evidence path.</h1>
           <p className="evidence-lede mt-7">
@@ -171,28 +178,41 @@ export default function Wso2IntegrationPage() {
         <section className="evidence-section" aria-labelledby="pilot-heading">
           <p className="evidence-kicker">Commercial pilot</p>
           <h2 id="pilot-heading" className="evidence-section-title mt-4">One workload. One fixed fee. A decision at the end.</h2>
-          <div className="mt-7 grid gap-4 md:grid-cols-[1.15fr_0.85fr]">
-            <article className="evidence-card">
-              <p className="evidence-card-title">Standard bounded evaluation</p>
-              <p className="mt-3 font-mono text-2xl font-semibold text-[var(--text-primary)]">$5,000</p>
-              <ul className="mt-5 space-y-3 text-sm leading-6 text-[var(--text-secondary)]">
-                <li>• One sanitized, customer-shaped document or RAG workflow</li>
-                <li>• Up to 1,000 test requests within an agreed provider-spend ceiling</li>
-                <li>• Baseline, WSO2 Prompt Compressor, and Maha comparison</li>
-                <li>• Retention, citations, latency, cost, and fail-closed analysis</li>
-                <li>• Private findings review and production recommendation</li>
-              </ul>
-            </article>
-            <article className="evidence-card">
-              <p className="evidence-card-title">If the result is useful</p>
-              <p className="evidence-card-copy mt-4">
-                Continue with a hosted request-based plan or an annual private-deployment license. Commercial terms are proposed only after the pilot establishes an actual workload advantage.
-              </p>
-              <p className="evidence-card-copy mt-5">
-                Founding design-partner evaluations may be scoped at $2,500 when the customer can provide structured technical feedback and permits an anonymized integration note.
-              </p>
-            </article>
+          <div className="mt-7 grid gap-4 md:grid-cols-2">
+            {ASSESSMENT_TIERS.map((tier) => (
+              <article key={tier.id} className="evidence-card">
+                <p className="evidence-card-title">{tier.name}</p>
+                <p className="mt-3 font-mono text-2xl font-semibold text-[var(--text-primary)]">{tier.price}</p>
+                <p className="evidence-card-copy mt-3">{tier.summary}</p>
+              </article>
+            ))}
           </div>
+
+          <h3 className="evidence-card-title mt-9">What the assessment covers</h3>
+          <ul className="mt-4 space-y-3 text-sm leading-6 text-[var(--text-secondary)]">
+            {ASSESSMENT_SCOPE.map((item) => <li key={item}>• {item}</li>)}
+          </ul>
+
+          <div className="mt-9 border-l-[3px] border-[var(--status-boundary)] bg-[rgba(160,111,20,0.08)] p-6">
+            <p className="evidence-kicker text-[var(--status-boundary)]">Founding design partner · {FOUNDING_PARTNER.price}</p>
+            <p className="evidence-card-copy mt-3">
+              Available to {FOUNDING_PARTNER.limit}, {FOUNDING_PARTNER.requirement}.
+            </p>
+            <p className="mt-3 text-xs leading-6 text-[var(--text-muted)]">{FOUNDING_PARTNER.notADiscount}</p>
+          </div>
+
+          <h3 className="evidence-card-title mt-9">What it does not include</h3>
+          <ul className="mt-4 space-y-3 text-sm leading-6 text-[var(--text-secondary)]">
+            {ASSESSMENT_EXCLUSIONS.map((item) => <li key={item}>• {item}</li>)}
+          </ul>
+
+          <h3 className="evidence-card-title mt-9">What to judge Maha on</h3>
+          <ul className="mt-4 space-y-3 text-sm leading-6 text-[var(--text-secondary)]">
+            {POSITIONING.map((item) => <li key={item}>• {item}</li>)}
+          </ul>
+          <p className="mt-4 max-w-3xl text-xs leading-6 text-[var(--text-muted)]">
+            Retention is deliberately not on that list. The dense retrieval baseline published above scores higher on evidence retention than Maha&rsquo;s production scorer on the frozen MCRB-1 cohort, and a positioning claim our own benchmark contradicts is worth less than none. Read both results and judge the trade for yourself.
+          </p>
         </section>
 
         <section className="evidence-section" aria-labelledby="evidence-heading">
