@@ -1,0 +1,16 @@
+<SharedFlowBundle revision="1" name="maha-context-compiler">
+  <Description>Compiles LLM request context through the Maha compiler before the target call. Fails closed.</Description>
+  <SharedFlows>
+    <SharedFlow>default</SharedFlow>
+  </SharedFlows>
+  <Policies>
+    <Policy>SC-MahaCompile</Policy>
+    <Policy>JS-MahaPrepare</Policy>
+    <Policy>JS-MahaApply</Policy>
+    <Policy>RF-MahaFailClosed</Policy>
+  </Policies>
+  <Resources>
+    <Resource>jsc://maha-prepare.js</Resource>
+    <Resource>jsc://maha-apply.js</Resource>
+  </Resources>
+</SharedFlowBundle>

@@ -1,0 +1,24 @@
+# Placeholders only. Nothing here deploys anywhere real:
+#   - the routes block is commented out, so `wrangler deploy` publishes no route
+#   - the URLs point at a reserved .invalid host that cannot resolve
+#   - the secret is not here; set it with `wrangler secret put`
+name = "maha-context-compiler"
+main = "src/worker.ts"
+compatibility_date = "2026-08-01"
+
+[vars]
+MAHA_COMPILER_URL = "https://replace-me.invalid/api/integrations/gateway/context-compiler"
+MAHA_PROVIDER_URL = "https://replace-me.invalid/v1/chat/completions"
+MAHA_GATEWAY_TIMEOUT_MS = "3000"
+MAHA_GATEWAY_MAX_BODY_BYTES = "512000"
+
+# Secret, never a var:
+#   wrangler secret put MAHA_CONTEXT_INTERCEPTOR_SECRET
+
+# Deliberately commented out. Uncomment only for a deployment you intend.
+# [[routes]]
+# pattern = "llm.example.com/v1/*"
+# zone_name = "example.com"
+
+[dev]
+port = 8787

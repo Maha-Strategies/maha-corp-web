@@ -1,0 +1,17 @@
+<SharedFlow name="default">
+  <Step><Name>JS-MahaPrepare</Name></Step>
+  <Step>
+    <Name>SC-MahaCompile</Name>
+    <Condition>maha.compile.required = "true"</Condition>
+  </Step>
+  <Step>
+    <Name>JS-MahaApply</Name>
+    <Condition>maha.compile.required = "true"</Condition>
+  </Step>
+  <!-- Anything that did not end in a usable compiled body is refused here.
+       There is no branch that forwards an uncompiled prompt to the target. -->
+  <Step>
+    <Name>RF-MahaFailClosed</Name>
+    <Condition>maha.compile.required = "true" and maha.compile.ok != "true"</Condition>
+  </Step>
+</SharedFlow>
