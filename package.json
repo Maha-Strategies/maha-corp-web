@@ -59,6 +59,8 @@
     "generate:wso2-sanitized-trace": "node --experimental-strip-types scripts/generate-wso2-sanitized-trace.ts",
     "test:wso2-failure-paths": "node --experimental-strip-types scripts/run-wso2-failure-path-evaluation.ts",
     "validate:wso2-policy-bundle": "node --test --experimental-strip-types --test-name-pattern='WSO2 policy bundle' test/wso2-reproduction.test.ts",
+    "generate:context-control-security-boundary": "node --experimental-strip-types scripts/generate-context-control-security-boundary.ts",
+    "validate:context-control-security-boundary": "node --experimental-strip-types scripts/validate-context-control-security-boundary.ts",
     "verify:wso2-context-interceptor:preview": "node --experimental-strip-types scripts/verify-wso2-context-interceptor-preview.ts",
     "verify:orchestration-deployment": "node --experimental-strip-types scripts/verify-orchestration-deployment.ts",
     "verify:x402-sepolia": "node --experimental-strip-types scripts/verify-x402-sepolia.ts",
