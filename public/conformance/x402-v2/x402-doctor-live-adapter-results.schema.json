@@ -1,0 +1,62 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://www.mahastrategies.com/conformance/x402-v2/x402-doctor-live-adapter-results.schema.json",
+  "title": "x402-doctor live-adapter results",
+  "description": "A versioned, metadata-only result format for x402-doctor live-adapter checks.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "artifactVersion", "configurationAsOf", "subject", "assertionBoundary", "results"],
+  "properties": {
+    "$schema": { "type": "string", "format": "uri" },
+    "schemaVersion": { "const": "1.0.0" },
+    "artifactVersion": { "type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$" },
+    "configurationAsOf": { "type": "string", "format": "date" },
+    "subject": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["tool", "toolVersion", "mode", "networkCalls"],
+      "properties": {
+        "tool": { "const": "x402-doctor" },
+        "toolVersion": { "type": "string" },
+        "mode": { "enum": ["synthetic_live_adapter", "recorded_live_adapter"] },
+        "networkCalls": { "type": "boolean" }
+      }
+    },
+    "assertionBoundary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["evaluated", "notEvaluated"],
+      "properties": {
+        "evaluated": { "type": "array", "items": { "type": "string" } },
+        "notEvaluated": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "results": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "declaredStatus", "negativeControlStatus", "routeExistence", "discoveryEligibility", "clientInterop"],
+        "properties": {
+          "id": { "type": "string", "pattern": "^[a-z0-9]+(?:[._-][a-z0-9]+)*$" },
+          "declaredStatus": { "type": "integer", "minimum": 100, "maximum": 599 },
+          "negativeControlStatus": { "type": "integer", "minimum": 100, "maximum": 599 },
+          "routeExistence": { "enum": ["confirmed", "absent", "uninformative"] },
+          "discoveryEligibility": { "enum": ["eligible", "not_eligible", "not_evaluated"] },
+          "clientInterop": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["consumer", "strength", "outcome"],
+            "properties": {
+              "consumer": { "type": "string" },
+              "strength": { "enum": ["parse", "execute", "not_evaluated"] },
+              "outcome": { "enum": ["pass", "fail", "not_evaluated"] }
+            }
+          },
+          "candidateDefects": { "type": "array", "items": { "type": "string" } }
+        }
+      }
+    }
+  }
+}

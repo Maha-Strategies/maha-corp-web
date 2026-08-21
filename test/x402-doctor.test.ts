@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
+import { readFile } from 'node:fs/promises'
 
 import { discoveryExtensionsFor } from '../lib/x402/discovery.ts'
 import { diagnoseX402Endpoint, doctorReportToSarif, comparableDeclarations } from '../lib/x402/doctor.ts'
@@ -60,10 +61,30 @@ function bazaarRecord(overrides: Record<string, unknown> = {}) {
 function fetchSequence(responses: Response[]): typeof fetch {
   return (async () => {
     const response = responses.shift()
-    if (!response) throw new Error('Unexpected fetch.')
-    return response
+    // Existing scenarios focus on the declared resource. The doctor now adds
+    // a same-host impossible-path control; a normal 404 is its safe default.
+    return response ?? new Response(null, { status: 404 })
   }) as typeof fetch
 }
+
+test('the public live-adapter artifact is explicit about its synthetic boundary and covers every route verdict', async () => {
+  const artifact = JSON.parse(await readFile(new URL('../public/conformance/x402-v2/x402-doctor-live-adapter-results.json', import.meta.url), 'utf8')) as {
+    $schema: string
+    subject: { tool: string; toolVersion: string; mode: string; networkCalls: boolean }
+    assertionBoundary: { evaluated: string[]; notEvaluated: string[] }
+    results: Array<{ id: string; routeExistence: string; discoveryEligibility: string; clientInterop: { consumer: string; strength: string; outcome: string } }>
+  }
+
+  assert.match(artifact.$schema, /x402-doctor-live-adapter-results\.schema\.json$/)
+  assert.equal(artifact.subject.tool, 'x402-doctor')
+  assert.equal(artifact.subject.toolVersion, '0.1.0')
+  assert.equal(artifact.subject.mode, 'synthetic_live_adapter')
+  assert.equal(artifact.subject.networkCalls, false)
+  assert.equal(artifact.assertionBoundary.notEvaluated.some((item) => item.includes('Live registry indexing')), true)
+  assert.deepEqual(artifact.results.map((result) => result.routeExistence), ['confirmed', 'uninformative', 'uninformative'])
+  assert.equal(artifact.results.every((result) => result.discoveryEligibility === 'eligible'), true)
+  assert.equal(artifact.results.every((result) => result.clientInterop.consumer === 'maha.decodeChallenge' && result.clientInterop.strength === 'parse' && result.clientInterop.outcome === 'pass'), true)
+})
 
 test('validates the live challenge, crawler request, and current Bazaar record', async () => {
   const report = await diagnoseX402Endpoint({
@@ -78,9 +99,52 @@ test('validates the live challenge, crawler request, and current Bazaar record',
 
   assert.equal(report.ok, true)
   assert.equal(report.live?.crawlerStatus, 402)
+  assert.equal(report.live?.routeExistence?.verdict, 'confirmed')
   assert.equal(report.bazaar?.found, true)
   assert.equal(report.bazaar?.matchesLive, true)
   assert.equal(report.findings.some((finding) => finding.ruleId === 'x402.extensions.responses'), true)
+})
+
+test('marks route existence uninformative when the payment gate fires before routing', async () => {
+  const report = await diagnoseX402Endpoint({
+    endpoint,
+    fetchImpl: fetchSequence([
+      challengeResponse(),
+      challengeResponse(),
+      Response.json({ resources: [bazaarRecord()] }),
+      challengeResponse(),
+    ]),
+  })
+
+  assert.equal(report.live?.routeExistence?.verdict, 'uninformative')
+  assert.equal(report.live?.routeExistence?.negativeControl.classification, 'payment_gate_before_routing')
+  assert.equal(report.findings.some((finding) => finding.ruleId === 'x402.route_existence.uninformative_402'), true)
+})
+
+test('reports a same-host soft-200 independently from payment-gate behavior', async () => {
+  const report = await diagnoseX402Endpoint({
+    endpoint,
+    fetchImpl: fetchSequence([
+      challengeResponse(),
+      challengeResponse(),
+      Response.json({ resources: [bazaarRecord()] }),
+      new Response('<title>Not found</title>', { status: 200, headers: { 'content-type': 'text/html' } }),
+    ]),
+  })
+
+  assert.equal(report.live?.routeExistence?.verdict, 'uninformative')
+  assert.equal(report.live?.routeExistence?.negativeControl.classification, 'soft_200')
+  assert.equal(report.findings.some((finding) => finding.ruleId === 'x402.route_existence.soft_200'), true)
+})
+
+test('reports a declared not-found resource as absent', async () => {
+  const report = await diagnoseX402Endpoint({
+    endpoint,
+    fetchImpl: fetchSequence([new Response(null, { status: 404 }), new Response(null, { status: 404 })]),
+  })
+
+  assert.equal(report.live?.routeExistence?.verdict, 'absent')
+  assert.equal(report.findings.some((finding) => finding.ruleId === 'x402.route_existence.absent'), true)
 })
 
 test('detects the accidental crawler 400 and stale Bazaar metadata', async () => {

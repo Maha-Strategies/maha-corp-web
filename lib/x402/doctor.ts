@@ -52,6 +52,22 @@ export type DoctorOptions = {
   paidProbe?: PaidProbe
 }
 
+/**
+ * An inexpensive, same-host control for a claim that a protected resource is
+ * actually routed. A `402` alone does not establish this: some hosts apply a
+ * payment gate before route matching. Conversely, a `200` from an invented
+ * path is a soft-404 signal, not evidence that the resource is live.
+ */
+export type RouteExistence = {
+  verdict: 'confirmed' | 'absent' | 'uninformative'
+  declaredStatus: number
+  negativeControl: {
+    url: string
+    status: number
+    classification: 'not_found' | 'payment_gate_before_routing' | 'soft_200' | 'other'
+  }
+}
+
 export type DoctorReport = {
   schemaVersion: '1.0.0'
   tool: { name: 'x402-doctor'; version: '0.1.0' }
@@ -71,6 +87,7 @@ export type DoctorReport = {
     crawlerStatus?: number
     paidStatus?: number
     transaction?: string
+    routeExistence?: RouteExistence
   }
   bazaar?: {
     found: boolean
@@ -115,6 +132,52 @@ function normalizedUrl(value: string): string {
   const url = new URL(value)
   url.hash = ''
   return url.toString()
+}
+
+function negativeControlUrl(endpoint: string): string {
+  const url = new URL(endpoint)
+  // This path is deliberately not derived from a seller's route. It is a
+  // stable, implausible control path, not an attempt to discover routes.
+  url.pathname = '/.well-known/x402-doctor-route-control-7db823b9-40ff-48d3-aebe-1c0f6a029eb7/does-not-exist.json'
+  url.search = ''
+  url.hash = ''
+  return url.toString()
+}
+
+function classifyRouteExistence(declaredStatus: number, negativeStatus: number): RouteExistence['verdict'] {
+  if (declaredStatus === 404 || declaredStatus === 410) return 'absent'
+  if (declaredStatus === 402 && (negativeStatus === 404 || negativeStatus === 410)) return 'confirmed'
+  return 'uninformative'
+}
+
+function negativeControlClassification(status: number): RouteExistence['negativeControl']['classification'] {
+  if (status === 404 || status === 410) return 'not_found'
+  if (status === 402) return 'payment_gate_before_routing'
+  if (status === 200) return 'soft_200'
+  return 'other'
+}
+
+function recordRouteExistence(report: DoctorReport, endpoint: string, declaredStatus: number, negativeStatus: number): void {
+  const classification = negativeControlClassification(negativeStatus)
+  const verdict = classifyRouteExistence(declaredStatus, negativeStatus)
+  report.live ??= { status: declaredStatus }
+  report.live.routeExistence = {
+    verdict,
+    declaredStatus,
+    negativeControl: { url: negativeControlUrl(endpoint), status: negativeStatus, classification },
+  }
+
+  if (verdict === 'confirmed') {
+    add(report.findings, 'x402.route_existence.confirmed', 'note', 'The protected resource returned 402 while the same-host negative control returned not found.')
+  } else if (verdict === 'absent') {
+    add(report.findings, 'x402.route_existence.absent', 'error', 'The declared resource returned not found; it cannot be treated as a live protected route.')
+  } else if (classification === 'payment_gate_before_routing') {
+    add(report.findings, 'x402.route_existence.uninformative_402', 'note', 'The same-host negative control also returned 402, so the payment challenge does not establish route existence.')
+  } else if (classification === 'soft_200') {
+    add(report.findings, 'x402.route_existence.soft_200', 'warning', 'The same-host negative control returned HTTP 200. Route existence is uninformative; this is distinct from payment-gate-before-routing behavior.')
+  } else {
+    add(report.findings, 'x402.route_existence.uninformative', 'note', 'The negative control did not return not found, so route existence is uninformative.', `negative_status=${negativeStatus}`)
+  }
 }
 
 /**
@@ -347,6 +410,8 @@ export async function diagnoseX402Endpoint(options: DoctorOptions): Promise<Doct
     report.live = { status: first.status }
     extensionResponse(report, 'challenge', first)
     if (first.status !== 402) {
+      const negativeControl = await fetchWithTimeout(fetchImpl, negativeControlUrl(endpoint), { method: 'GET' }, timeoutMs)
+      recordRouteExistence(report, endpoint, first.status, negativeControl.status)
       add(findings, 'x402.http.challenge_status', 'error', `The unpaid request returned HTTP ${first.status}; Bazaar requires HTTP 402.`, first.status === 400 ? 'An accidental validation-first 400 prevents crawler indexing.' : undefined)
       return finalize(report, started)
     }
@@ -492,6 +557,10 @@ export async function diagnoseX402Endpoint(options: DoctorOptions): Promise<Doct
     } else if (report.extensionResponses.some((item) => record(item.value)?.malformed === true)) {
       add(findings, 'x402.extensions.responses', 'warning', 'An EXTENSION-RESPONSES header was present but could not be decoded as JSON.')
     }
+    // A control uses GET with no headers or body copied from the declared
+    // operation. It cannot spend, authenticate, or replay caller input.
+    const negativeControl = await fetchWithTimeout(fetchImpl, negativeControlUrl(endpoint), { method: 'GET' }, timeoutMs)
+    recordRouteExistence(report, endpoint, first.status, negativeControl.status)
   } catch (error) {
     add(findings, 'x402.network', 'error', 'The endpoint inspection could not complete.', error instanceof Error ? error.message : String(error))
   }

@@ -1,0 +1,67 @@
+{
+  "$schema": "https://www.mahastrategies.com/conformance/x402-v2/x402-doctor-live-adapter-results.schema.json",
+  "schemaVersion": "1.0.0",
+  "artifactVersion": "0.1.0",
+  "configurationAsOf": "2026-08-21",
+  "subject": {
+    "tool": "x402-doctor",
+    "toolVersion": "0.1.0",
+    "mode": "synthetic_live_adapter",
+    "networkCalls": false
+  },
+  "assertionBoundary": {
+    "evaluated": [
+      "The declared crawler replay returns HTTP 402 when the fixture declares a valid protected route.",
+      "The same-host negative control distinguishes a route-confirming 404/410 from a payment gate that fires before routing.",
+      "A negative-control HTTP 200 is reported separately as soft_200 and does not confirm the declared route.",
+      "The Maha x402 decoder can parse the fixture's v2 PAYMENT-REQUIRED challenge."
+    ],
+    "notEvaluated": [
+      "Live registry indexing or listing; discovery_eligibility is a static declaration/replay claim only.",
+      "Any third-party x402 client or @x402/core consumer beyond the named Maha parser.",
+      "Payment signing, settlement, receipt verification, facilitator behavior, or chain state.",
+      "A public host at a particular time; this artifact uses in-memory transport adapters."
+    ]
+  },
+  "results": [
+    {
+      "id": "route-existence.confirmed",
+      "declaredStatus": 402,
+      "negativeControlStatus": 404,
+      "routeExistence": "confirmed",
+      "discoveryEligibility": "eligible",
+      "clientInterop": {
+        "consumer": "maha.decodeChallenge",
+        "strength": "parse",
+        "outcome": "pass"
+      },
+      "candidateDefects": []
+    },
+    {
+      "id": "route-existence.payment-gate-before-routing",
+      "declaredStatus": 402,
+      "negativeControlStatus": 402,
+      "routeExistence": "uninformative",
+      "discoveryEligibility": "eligible",
+      "clientInterop": {
+        "consumer": "maha.decodeChallenge",
+        "strength": "parse",
+        "outcome": "pass"
+      },
+      "candidateDefects": ["payment_gate_before_routing"]
+    },
+    {
+      "id": "route-existence.soft-200",
+      "declaredStatus": 402,
+      "negativeControlStatus": 200,
+      "routeExistence": "uninformative",
+      "discoveryEligibility": "eligible",
+      "clientInterop": {
+        "consumer": "maha.decodeChallenge",
+        "strength": "parse",
+        "outcome": "pass"
+      },
+      "candidateDefects": ["soft_200"]
+    }
+  ]
+}

@@ -2,6 +2,32 @@
 
 `x402-doctor` is a read-only-by-default conformance and discovery diagnostic for x402 resource servers. It is motivated by a production failure mode: a seller can publish a correct live declaration while Bazaar continues to serve stale metadata, or can publish a valid-looking input example that the crawler receives as HTTP 400 instead of 402.
 
+Each inspection also issues one unauthenticated `GET` to an intentionally
+impossible path on the same host. This is a negative control for route
+existence, not a resource probe: it has no request body, credentials, or
+payment header. Reports classify the protected resource as:
+
+- `confirmed` when the protected resource returns `402` and the impossible
+  path returns `404` or `410`;
+- `absent` when the declared resource itself returns `404` or `410`; or
+- `uninformative` when the host gates before routing (`402` on both paths),
+  returns a soft `200` to the impossible path, or returns another ambiguous
+  response.
+
+`confirmed` means the route was distinguishable at the time of the probe. It
+does not claim a registry has indexed it, a payment will settle, or that a
+future probe will match.
+
+## Public live-adapter evidence
+
+The [versioned live-adapter result artifact](/conformance/x402-v2/x402-doctor-live-adapter-results.json)
+and its [JSON Schema](/conformance/x402-v2/x402-doctor-live-adapter-results.schema.json)
+exercise the three meaningful same-host control outcomes: route-confirming
+`404`, payment-gated `402`, and soft `200`. It is deliberately a synthetic,
+in-memory transport run. It proves the adapter's classification behavior, not
+the state of a public host, registry listing, third-party client behavior, or
+payment settlement.
+
 The doctor also implements the draft [`declaration-integrity` proposal](./x402-declaration-digest-proposal.md). When a seller and catalog expose the proposed digest, it independently hashes the live declaration and compares that value with the catalog-computed indexed digest. Reports label this source as `catalog`. Until catalogs support the proposal, the existing field-normalization comparison remains available and is explicitly labeled `reconstructed`.
 
 ## Read-only inspection
