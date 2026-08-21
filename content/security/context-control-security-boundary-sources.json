@@ -1,0 +1,473 @@
+{
+  "schemaVersion": "1.0.0",
+  "documentVersion": "1.0.0",
+  "document": "docs/security/context-control-security-boundary.md",
+  "generator": "scripts/generate-context-control-security-boundary.ts",
+  "note": "Each claim in the document maps to one or more committed sources. A digest that no longer matches means the claim must be re-checked against the code before the document is republished.",
+  "sources": [
+    {
+      "path": "app/api/integrations/wso2/context-compiler/handle-request/route.ts",
+      "sha256": "sha256:a0e1666b549933982281aaf261af8e42453c248d5f610222a8265983aa1b54fa"
+    },
+    {
+      "path": "app/api/integrations/wso2/context-compiler/handle-response/route.ts",
+      "sha256": "sha256:5072f26c9f1b49677c72bd434c07b8a675f3e4c48345ae5811d0c7d8fd8948d4"
+    },
+    {
+      "path": "content/integrations/wso2-failure-path-result.json",
+      "sha256": "sha256:deb70a6fd203c5895269bec23e1e3fe3dfe8afb72c0d892f7f17ab35fab8ee2d"
+    },
+    {
+      "path": "content/integrations/wso2-reproduction.json",
+      "sha256": "sha256:dd2e40deedfe80d746322ac7d1686223b91aa7cf2804795b6c0d47285dd53aff"
+    },
+    {
+      "path": "content/integrations/wso2-sanitized-three-path-trace.json",
+      "sha256": "sha256:f92905841ab5600c643a6810016a4203b51d50c1f41a25150c539b5aac3c74fd"
+    },
+    {
+      "path": "docs/integrations/wso2-context-interceptor.md",
+      "sha256": "sha256:2f0f5d601e62ef4a50e2f16eb5cfb4258152085cd13fcb1eccc2d99b7d626650"
+    },
+    {
+      "path": "lib/context-compiler-metering.ts",
+      "sha256": "sha256:ad60a4f357403447ec9a1cbcf5cbb4999566874028a612d46b8f921dcd345f15"
+    },
+    {
+      "path": "lib/context-compiler.ts",
+      "sha256": "sha256:4407b3297f3faeeea26e6d798334caecb40bc462dfb2cd939f0251bb5890e11d"
+    },
+    {
+      "path": "lib/integrations/wso2-context-interceptor.ts",
+      "sha256": "sha256:b6de80c19c42122e133e75f34c5914e2e310603347c8f44d7db9bd1c7bfbeefd"
+    },
+    {
+      "path": "test/context-compiler-recipe.test.ts",
+      "sha256": "sha256:0beef736f20f16477b0a360ab65ab94ab8414dfa4b02166af40a9ee5a2682a4b"
+    },
+    {
+      "path": "test/wso2-context-interceptor.test.ts",
+      "sha256": "sha256:524c4ec32afad086522926aa4ba579ce02d407de2799b388e4070f4470b491a5"
+    }
+  ],
+  "claims": [
+    {
+      "id": "scope.covers",
+      "text": "This covers two things: the Maha Context Compiler, and the bounded interceptor that runs it inside a WSO2 AI Gateway request.",
+      "sources": [
+        {
+          "path": "lib/context-compiler.ts",
+          "kind": "code",
+          "note": "the compiler"
+        },
+        {
+          "path": "lib/integrations/wso2-context-interceptor.ts",
+          "kind": "code",
+          "note": "the interceptor"
+        }
+      ]
+    },
+    {
+      "id": "scope.excludes",
+      "text": "It does not describe your gateway, your model provider, your cloud account, or your deployment. Those keep their own retention, logging and network controls, and this document makes no statement about them.",
+      "sources": [
+        {
+          "path": "docs/integrations/wso2-context-interceptor.md",
+          "kind": "doc",
+          "note": "declared non-fit and failure boundaries"
+        }
+      ]
+    },
+    {
+      "id": "scope.not-a-review",
+      "text": "It is an evidence summary, not a substitute for your own security review.",
+      "sources": [
+        {
+          "path": "docs/integrations/wso2-context-interceptor.md",
+          "kind": "doc",
+          "note": "evaluation-only status"
+        }
+      ]
+    },
+    {
+      "id": "data.request",
+      "text": "A request carries a task string, a token budget, and one to eight documents, each with an identifier, an optional title, and text.",
+      "sources": [
+        {
+          "path": "lib/context-compiler.ts",
+          "kind": "code",
+          "note": "parseContextPackRequest bounds and field set"
+        }
+      ]
+    },
+    {
+      "id": "data.response",
+      "text": "The response returns the compiled context pack, the selected passages verbatim with their identifiers and hashes, a per-source manifest, token and coverage metrics, explicit warnings, and input and output hashes.",
+      "sources": [
+        {
+          "path": "lib/context-compiler.ts",
+          "kind": "code",
+          "note": "compileContextPack return value"
+        }
+      ]
+    },
+    {
+      "id": "data.metering",
+      "text": "On the metered direct API, the only record kept of a call is a usage row of five fields: access mode, credential identifier, status class, and the compiler’s own input and output token estimates. No task, no document, no identifier from your content, and no hash is written to it.",
+      "sources": [
+        {
+          "path": "lib/context-compiler-metering.ts",
+          "kind": "code",
+          "note": "recordContextCompilerUsage writes exactly five parameters"
+        }
+      ]
+    },
+    {
+      "id": "text.processed",
+      "text": "Your source text is processed in the request that carries it. Selection is deterministic ranking and de-duplication over that text; no model is invoked and nothing is sent to a third party by the compiler.",
+      "sources": [
+        {
+          "path": "lib/context-compiler.ts",
+          "kind": "code",
+          "note": "pure function, BM25 selection, no network client imported"
+        }
+      ]
+    },
+    {
+      "id": "text.returned",
+      "text": "The compiler returns the passages it selected, verbatim. That is the product, not a leak: the pack is the text you asked it to choose from your own documents, and it is returned to the caller who supplied them.",
+      "sources": [
+        {
+          "path": "lib/context-compiler.ts",
+          "kind": "code",
+          "note": "includedPassages carries selected passage text"
+        }
+      ]
+    },
+    {
+      "id": "text.interceptor-storage",
+      "text": "In the WSO2 interceptor path, neither route handler imports or invokes any database, cache, queue or filesystem client, and both mark their responses no-store. What the gateway receives back is metadata: a pack identifier, hashes, counts, token measurements and a bypass decision.",
+      "sources": [
+        {
+          "path": "app/api/integrations/wso2/context-compiler/handle-request/route.ts",
+          "kind": "code",
+          "note": "no storage client imported; Cache-Control no-store"
+        },
+        {
+          "path": "app/api/integrations/wso2/context-compiler/handle-response/route.ts",
+          "kind": "code",
+          "note": "no storage client imported; Cache-Control no-store"
+        },
+        {
+          "path": "lib/integrations/wso2-context-interceptor.ts",
+          "kind": "code",
+          "note": "evidence header set is metadata only"
+        }
+      ]
+    },
+    {
+      "id": "text.evidence-retained",
+      "text": "Where evidence is retained, it is hashes and metadata: SHA-256 over each normalised source, a hash per selected passage, source and passage identifiers, passage counts, coverage percentages and token estimates.",
+      "sources": [
+        {
+          "path": "lib/context-compiler.ts",
+          "kind": "code",
+          "note": "sourceHash, passageHash, sourceManifest"
+        }
+      ]
+    },
+    {
+      "id": "text.excluded",
+      "text": "Published and sanitised artifacts exclude document bodies, compiled context, request headers and credentials, and declare those exclusions in the artifact itself.",
+      "sources": [
+        {
+          "path": "content/integrations/wso2-sanitized-three-path-trace.json",
+          "kind": "evidence",
+          "note": "sanitization flags and redacted representation"
+        }
+      ]
+    },
+    {
+      "id": "text.no-universal-claim",
+      "text": "Maha does not claim universal zero retention. The claim above is scoped to these components. Your gateway, your provider and your own logging may retain the same text under settings Maha neither sets nor sees.",
+      "sources": [
+        {
+          "path": "docs/integrations/wso2-context-interceptor.md",
+          "kind": "doc",
+          "note": "deployment-stage gates remain the operator’s"
+        }
+      ]
+    },
+    {
+      "id": "integrity.input-hash",
+      "text": "The input hash commits to the task, the token budget, and for each document its identifier, title and a SHA-256 of its normalised text. Document bodies are not part of the hash preimage.",
+      "sources": [
+        {
+          "path": "lib/context-compiler.ts",
+          "kind": "code",
+          "note": "inputHash construction"
+        }
+      ]
+    },
+    {
+      "id": "integrity.output-hash",
+      "text": "The output hash is a SHA-256 over the exact rendered pack, so the bytes a model received can be identified without republishing them.",
+      "sources": [
+        {
+          "path": "lib/context-compiler.ts",
+          "kind": "code",
+          "note": "outputHash over rendered markdown"
+        }
+      ]
+    },
+    {
+      "id": "integrity.budget",
+      "text": "The declared token budget is enforced, not advised. In the default guaranteed mode the compiler fills to a margin below the stated figure and then removes the lowest-ranked passages until the rendered pack fits.",
+      "sources": [
+        {
+          "path": "lib/context-compiler.ts",
+          "kind": "code",
+          "note": "GUARANTEED_BUDGET_FACTOR and the trim loop"
+        }
+      ]
+    },
+    {
+      "id": "integrity.non-claims",
+      "text": "Every response carries machine-readable non-claims: selection is extractive, evidence retention is best-effort, no claim verification is performed, completeness is not guaranteed, hallucination prevention is not guaranteed, and token counts are model-neutral estimates rather than provider billing counts.",
+      "sources": [
+        {
+          "path": "lib/context-compiler.ts",
+          "kind": "code",
+          "note": "retentionBoundaries and warningCodes"
+        }
+      ]
+    },
+    {
+      "id": "integrity.reviewable",
+      "text": "A reviewer holding the same inputs can recompute both hashes and confirm the pack is the one the evidence describes.",
+      "sources": [
+        {
+          "path": "test/context-compiler-recipe.test.ts",
+          "kind": "test",
+          "note": "reproducible pack contract"
+        }
+      ]
+    },
+    {
+      "id": "fail.unconfigured",
+      "text": "Missing interceptor configuration returns HTTP 503 and forwards nothing upstream.",
+      "sources": [
+        {
+          "path": "test/wso2-context-interceptor.test.ts",
+          "kind": "test",
+          "note": "fails closed when the secret is unset"
+        },
+        {
+          "path": "content/integrations/wso2-failure-path-result.json",
+          "kind": "evidence",
+          "note": "missing-interceptor-configuration"
+        }
+      ]
+    },
+    {
+      "id": "fail.credential",
+      "text": "A missing or invalid interceptor credential returns HTTP 401, is compared in constant time, and is stripped from the request rather than forwarded.",
+      "sources": [
+        {
+          "path": "lib/integrations/wso2-context-interceptor.ts",
+          "kind": "code",
+          "note": "timingSafeEqual and headersToRemove"
+        },
+        {
+          "path": "test/wso2-context-interceptor.test.ts",
+          "kind": "test",
+          "note": "rejects an invalid credential and strips it"
+        },
+        {
+          "path": "content/integrations/wso2-failure-path-result.json",
+          "kind": "evidence",
+          "note": "invalid-interceptor-credential"
+        }
+      ]
+    },
+    {
+      "id": "fail.oversized",
+      "text": "A decoded body above 512,000 bytes is refused with HTTP 413 rather than truncated.",
+      "sources": [
+        {
+          "path": "lib/integrations/wso2-context-interceptor.ts",
+          "kind": "code",
+          "note": "MAX_WSO2_OPENAI_BODY_BYTES"
+        },
+        {
+          "path": "test/wso2-context-interceptor.test.ts",
+          "kind": "test",
+          "note": "rejects oversized decoded bodies"
+        },
+        {
+          "path": "content/integrations/wso2-failure-path-result.json",
+          "kind": "evidence",
+          "note": "oversized-decoded-input"
+        }
+      ]
+    },
+    {
+      "id": "fail.unavailable",
+      "text": "With the interceptor timing out or refusing the connection, the gateway policy returns an immediate error and does not call the model. This was verified against the WSO2 policy implementation itself, not a Maha reimplementation of it.",
+      "sources": [
+        {
+          "path": "content/integrations/wso2-failure-path-result.json",
+          "kind": "evidence",
+          "note": "interceptor-timeout and interceptor-unavailable, upstream Go tests"
+        }
+      ]
+    },
+    {
+      "id": "fail.seal",
+      "text": "The response phase verifies an HMAC seal over the request-phase evidence. Missing or tampered evidence fails closed instead of returning a successful response.",
+      "sources": [
+        {
+          "path": "lib/integrations/wso2-context-interceptor.ts",
+          "kind": "code",
+          "note": "evidenceSeal and validEvidence"
+        },
+        {
+          "path": "test/wso2-context-interceptor.test.ts",
+          "kind": "test",
+          "note": "fails closed on missing or tampered evidence"
+        }
+      ]
+    },
+    {
+      "id": "fail.passthrough",
+      "text": "A request that does not carry the explicit Maha extension passes through untouched.",
+      "sources": [
+        {
+          "path": "test/wso2-context-interceptor.test.ts",
+          "kind": "test",
+          "note": "requests without the extension pass through"
+        }
+      ]
+    },
+    {
+      "id": "budget.minimum",
+      "text": "Below 1,024 estimated tokens the interceptor forwards your original context instead of a compiled pack, and above it compares the two and forwards the original whenever compilation would not be smaller. Enabling the policy therefore cannot increase the context sent to your provider.",
+      "sources": [
+        {
+          "path": "lib/integrations/wso2-context-interceptor.ts",
+          "kind": "code",
+          "note": "WSO2_CONTEXT_MINIMUM_COMPILE_TOKENS and the non-expansion guard"
+        },
+        {
+          "path": "test/wso2-context-interceptor.test.ts",
+          "kind": "test",
+          "note": "small contexts bypass; non-expansion guard preserves the original"
+        }
+      ]
+    },
+    {
+      "id": "budget.declared",
+      "text": "The decision is declared in the response headers, so a bypass is visible rather than silent.",
+      "sources": [
+        {
+          "path": "lib/integrations/wso2-context-interceptor.ts",
+          "kind": "code",
+          "note": "x-maha-context-bypassed and bypass-reason headers"
+        }
+      ]
+    },
+    {
+      "id": "budget.retries",
+      "text": "The published evaluation runner performs no automatic retries and requires an explicit spend ceiling before it may make a paid call.",
+      "sources": [
+        {
+          "path": "content/integrations/wso2-reproduction.json",
+          "kind": "evidence",
+          "note": "automaticRetries 0; liveExecutionRequiresExplicitCeiling"
+        }
+      ]
+    },
+    {
+      "id": "budget.payment-separate",
+      "text": "Context control performs no payment action. The compiler signs nothing, holds no key and authorises no transfer; payment, where it applies at all, is a separate module on a separate resource path and is not part of the interceptor flow.",
+      "sources": [
+        {
+          "path": "lib/context-compiler.ts",
+          "kind": "code",
+          "note": "no payment or signing code path"
+        },
+        {
+          "path": "lib/integrations/wso2-context-interceptor.ts",
+          "kind": "code",
+          "note": "no payment or signing code path"
+        }
+      ]
+    },
+    {
+      "id": "limit.synthetic",
+      "text": "Maha’s published evaluation corpus is synthetic. It establishes nothing about behaviour on your documents.",
+      "sources": [
+        {
+          "path": "content/integrations/wso2-reproduction.json",
+          "kind": "evidence",
+          "note": "corpus.synthetic true; stated limitations"
+        }
+      ]
+    },
+    {
+      "id": "limit.certification",
+      "text": "Maha holds no security certification or regulatory attestation, and this document is not one.",
+      "sources": [
+        {
+          "path": "docs/integrations/wso2-context-interceptor.md",
+          "kind": "doc",
+          "note": "no certification asserted"
+        }
+      ]
+    },
+    {
+      "id": "limit.wso2",
+      "text": "Maha is not a WSO2 partner and claims no WSO2 endorsement, certification, approval or customer validation. The integration is independent compatibility work.",
+      "sources": [
+        {
+          "path": "docs/integrations/wso2-context-interceptor.md",
+          "kind": "doc",
+          "note": "not a WSO2 endorsement"
+        }
+      ]
+    },
+    {
+      "id": "limit.guarantees",
+      "text": "No saving, latency, availability or provider behaviour is guaranteed, and no result is promised before measurement.",
+      "sources": [
+        {
+          "path": "docs/integrations/wso2-context-interceptor.md",
+          "kind": "doc",
+          "note": "no fixed result promised before measurement"
+        }
+      ]
+    },
+    {
+      "id": "limit.injection",
+      "text": "Selection is ranking and de-duplication. It does not verify claims and does not protect against prompt injection, data exfiltration or a hostile document.",
+      "sources": [
+        {
+          "path": "lib/context-compiler.ts",
+          "kind": "code",
+          "note": "claimVerificationPerformed false; extractive_selection_not_verification"
+        }
+      ]
+    },
+    {
+      "id": "limit.customer",
+      "text": "Yours to operate: the gateway-side credential mechanism, TLS termination, network egress, provider retention settings, and your own request logging. The published policy bundle is labelled evaluation-only because the interceptor-call credential is a gateway header rather than a reviewed secret reference.",
+      "sources": [
+        {
+          "path": "docs/integrations/wso2-context-interceptor.md",
+          "kind": "doc",
+          "note": "production promotion blocked pending a reviewed credential mechanism"
+        }
+      ]
+    }
+  ]
+}
