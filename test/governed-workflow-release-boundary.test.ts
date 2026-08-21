@@ -114,3 +114,10 @@ test('the corpus and every public surface declare themselves synthetic', () => {
   // deleted it would still pass a scan that only looked for false claims.
   assert.ok(/evaluation-grade prototype, not a compliance certification/i.test(view))
 })
+
+test('the public operator view gives customers a bounded evaluation path without implying live authority', () => {
+  const view = readFileSync(VIEW, 'utf8')
+  assert.ok(view.includes('A bounded evaluation walkthrough'))
+  assert.ok(view.includes('Discuss a bounded evaluation'))
+  assert.ok(view.includes('No source documents, provider credentials, payment authority, or live effects are needed'))
+})

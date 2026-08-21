@@ -245,6 +245,33 @@ organisation account for what an agent was permitted to do.
 
 ---
 
+## Bounded customer evaluation
+
+The first customer engagement should be an evaluation of **one** customer-shaped decision,
+not a platform deployment. It needs no source documents, provider credentials, payment
+authority, or live side effect.
+
+1. **Choose the decision.** Examples: a claims exception, policy-review decision, supplier
+   change, document approval, or an agent action that remains non-executing.
+2. **Declare the boundary.** Name the evidence-reference kinds, policy version, allowed
+   operation, approval role, retention rule, stop conditions, and one adverse case.
+3. **Create synthetic or sanitized metadata.** The workflow receives only references,
+   digests, bounded labels, and classifications; raw document text stays outside the state
+   graph.
+4. **Run normal and adverse paths.** At minimum, exercise a normal approval and one case of
+   changed evidence, denied policy, expired approval, or interrupted action.
+5. **Review the resulting evidence.** Confirm the hash chain, reason codes, approval
+   binding, uncertainty status, idempotency outcome, and recovery classification.
+6. **Identify production prerequisites.** Customer-owned identity, storage, key management,
+   retention, integration, control ownership, and any external assurance are deliberately
+   separate decisions.
+
+The resulting evaluation report can establish how this reference design behaves against the
+agreed metadata-only scenario. It does not certify regulatory compliance, validate a real
+document or provider execution, or authorize an operational action.
+
+---
+
 ## Known limitations
 
 1. **Evaluation-grade only.** No external audit, no certification, no production
