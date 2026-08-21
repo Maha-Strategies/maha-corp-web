@@ -8,7 +8,7 @@
 | Deliverable | Sample deliverable, produced from a frozen synthetic evaluation corpus |
 | Evaluation run | `wso2-large-live-20260817-v1` |
 | Observed | 2026-08-17 |
-| Evidence artifact SHA-256 | `abe9bc62365b3efc1d1eb40b38f66d7ec5443c9bbb89e669e31fd3d1b8c09954` |
+| Evidence artifact SHA-256 | `78a822dd3c85821a98ca01262b02c12b5c42bc3c1433515909d3a0c5554aa3f1` |
 
 > This document shows the shape and rigour of the evidence package a customer
 > receives after a bounded Context-Control Evidence Assessment. Every figure in
@@ -237,7 +237,7 @@ rhetorical; each one bounds a claim above.
 - Two fact scores are reported per row and they disagree. The deterministic score is exact-span containment and under-counts correct paraphrases; the adjudicated score applies a path-blinded semantic rubric to the same answers. Any published retention figure must say which one it is.
 - The Prompt Compressor result is specific to WSO2 AI Gateway 1.1.0, Prompt Compressor 0.9.0 and a 0.55 retained ratio, and must not be generalized before WSO2 or a customer confirms that configuration is the intended production setup.
 - Provider cost uses the declared pricing assumption applied to observed token counts; it is not a provider invoice.
-- The primary checkpoint and adjudication files are not committed, so this artifact is reproducible only by a holder of those files. The digests above identify them exactly.
+- The primary checkpoint and adjudication files are not committed and are not currently available locally. The public artifact is checkable from its rows to its aggregates; full source-to-row regeneration requires a retained copy of the digest-identified primary files, or an explicitly authorized new run.
 - These are local contract tests; they do not claim a deployed WSO2 environment was exercised.
 - The timeout test uses 100 ms to keep verification bounded; Maha production evaluation configuration pins 20,000 ms.
 - Repeated latency measures the local WSO2 policy boundary, not network, deployed gateway, model-provider, or end-to-end request latency.
@@ -248,13 +248,13 @@ rhetorical; each one bounds a claim above.
   generalized until it has been.
 - Costs are **modeled**: the declared price assumption applied to observed token
   counts. They are not provider invoices and they are not a savings guarantee.
-- The answer-bearing primary evidence - the durable checkpoint and the
-  path-blinded adjudication - is **not committed to the repository and is not
-  distributed with this package**, because both retain the model's answer text
-  for every call. The public artifact is independently checkable from its rows
-  to its aggregates; full source-to-row regeneration additionally requires the
-  digest-identified primary files, which are held outside the repository and
-  must be digest-verified before use.
+- The answer-bearing primary evidence - the checkpoint and the path-blinded
+  adjudication - is **not committed to the repository and is not distributed
+  with this package**, because both retain the model's answer text for every
+  call. The public artifact is independently checkable from its rows to its
+  aggregates. The primary files are not currently available locally; full
+  source-to-row regeneration requires a retained copy matching the listed
+  digests, or an explicitly authorized new run.
 - This document describes a compatibility evaluation. It is not a regulatory
   certification, an accreditation, an endorsement by WSO2, or a statement about
   production reliability.
@@ -289,8 +289,7 @@ behaviour, and every limitation that applies to your run.
 An evaluation that concludes the component does not help your workload is a
 successful evaluation, and it is delivered as plainly as the alternative.
 
-Commercial terms for this engagement are quoted separately and are not part of
-this sample document.
+This sample contains no commercial terms.
 
 ---
 
@@ -321,7 +320,7 @@ it differs from the artifact.
 
 | Artifact | SHA-256 |
 | --- | --- |
-| Evidence artifact (published) | `abe9bc62365b3efc1d1eb40b38f66d7ec5443c9bbb89e669e31fd3d1b8c09954` |
+| Evidence artifact (published) | `78a822dd3c85821a98ca01262b02c12b5c42bc3c1433515909d3a0c5554aa3f1` |
 | Frozen corpus label freeze | `a6b95c81e981fcda20576046354105994bc8846e2b6da8a4e77c754a7085a8c9` |
 | Reproduction manifest | `dd2e40deedfe80d746322ac7d1686223b91aa7cf2804795b6c0d47285dd53aff` |
 | Failure-path evidence | `deb70a6fd203c5895269bec23e1e3fe3dfe8afb72c0d892f7f17ab35fab8ee2d` |

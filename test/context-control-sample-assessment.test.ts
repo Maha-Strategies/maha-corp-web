@@ -142,6 +142,7 @@ test('required limitations are all present', () => {
   for (const required of [
     /corpus is synthetic/i,
     /not committed to the repository/,
+    /not currently available locally/,
     /confirmed by WSO2 or by a\s+customer/,
     /not provider invoices/,
     /not a regulatory\s+certification/,

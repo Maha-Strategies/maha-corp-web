@@ -383,7 +383,7 @@ export async function renderSampleAssessmentPdf(model: SampleAssessment): Promis
     ...failure.limitations,
     `The Prompt Compressor configuration used here (version ${configuration.promptCompressorVersion}, retained ratio ${configuration.promptCompressorRetainedRatio}) has not been confirmed by WSO2 or by a customer as the intended production setup. Its result must not be generalized until it has been.`,
     'Costs are modeled: the declared price assumption applied to observed token counts. They are not provider invoices and they are not a savings guarantee.',
-    'The answer-bearing primary evidence - the durable checkpoint and the path-blinded adjudication - is not committed to the repository and is not distributed with this package, because both retain the model’s answer text for every call. The public artifact is independently checkable from its rows to its aggregates; full source-to-row regeneration additionally requires the digest-identified primary files, which are held outside the repository and must be digest-verified before use.',
+    'The answer-bearing primary evidence - the checkpoint and the path-blinded adjudication - is not committed to the repository and is not distributed with this package, because both retain the model’s answer text for every call. The public artifact is independently checkable from its rows to its aggregates. The primary files are not currently available locally; full source-to-row regeneration requires a retained copy matching the listed digests, or an explicitly authorized new run.',
     'This document describes a compatibility evaluation. It is not a regulatory certification, an accreditation, an endorsement by WSO2, or a statement about production reliability.',
   ], 8.6)
 
@@ -401,8 +401,6 @@ export async function renderSampleAssessmentPdf(model: SampleAssessment): Promis
     layout.text(body, { size: 8.8, indent: 12 })
     layout.y -= 5
   }
-  layout.text('Commercial terms for this engagement are quoted separately and are not part of this sample document.', { color: MUTED, size: 8.6 })
-
   layout.section('8. Technical appendix')
   layout.heading('Verify the figures in section 3', 2)
   layout.text('shasum -a 256 content/integrations/wso2-live-evaluation-evidence.json\nnpm run validate:wso2-live-evidence\nnpm run reproduce:wso2-evaluation', { font: fonts.mono, size: 8 })

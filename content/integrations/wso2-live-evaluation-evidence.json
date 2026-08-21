@@ -1702,6 +1702,6 @@
     "Two fact scores are reported per row and they disagree. The deterministic score is exact-span containment and under-counts correct paraphrases; the adjudicated score applies a path-blinded semantic rubric to the same answers. Any published retention figure must say which one it is.",
     "The Prompt Compressor result is specific to WSO2 AI Gateway 1.1.0, Prompt Compressor 0.9.0 and a 0.55 retained ratio, and must not be generalized before WSO2 or a customer confirms that configuration is the intended production setup.",
     "Provider cost uses the declared pricing assumption applied to observed token counts; it is not a provider invoice.",
-    "The primary checkpoint and adjudication files are not committed, so this artifact is reproducible only by a holder of those files. The digests above identify them exactly."
+    "The primary checkpoint and adjudication files are not committed and are not currently available locally. The public artifact is checkable from its rows to its aggregates; full source-to-row regeneration requires a retained copy of the digest-identified primary files, or an explicitly authorized new run."
   ]
 }
