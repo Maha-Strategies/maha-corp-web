@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { siteThemeForPath } from '@/lib/site-theme';
+import { EXPLORE_NAVIGATION, PRIMARY_NAVIGATION } from '@/lib/navigation/site-navigation';
 
 export default function Navbar() {
   const pathname = usePathname();
@@ -33,43 +34,10 @@ export default function Navbar() {
     return () => window.removeEventListener('keydown', closeOnEscape);
   }, []);
 
-  const primaryLinks = [
-    { name: 'Evidence Audit', href: '/evidence-audit' },
-    { name: 'Intelligence', href: '/intelligence' },
-    { name: 'Knowledge', href: '/knowledge' },
-    { name: 'Books', href: '/books' },
-    { name: 'Apps', href: '/apps' },
-    { name: 'Method', href: '/method' },
-    { name: 'Auditor', href: '/audit' },
-    { name: 'Developers', href: '/developers' },
-    { name: 'Contact', href: '/contact' },
-  ];
-
-  const exploreLinks = [
-    { name: 'Tools & API', href: '/tools' },
-    { name: 'Developer Infrastructure', href: '/developers' },
-    { name: 'About Maha', href: '/about' },
-    { name: 'Celestial Reports', href: '/reports/celestial' },
-    { name: 'MPS Standard', href: '/mps' },
-    { name: 'Timing Board', href: '/operations/timing' },
-    { name: 'Research', href: '/research' },
-    { name: 'Case Studies', href: '/case-studies' },
-    { name: 'Insights', href: '/insights' },
-    { name: 'Policy', href: '/policy' },
-    { name: 'Doctrine', href: '/doctrine' },
-    { name: 'Protocols', href: '/protocols' },
-    { name: 'Overclock Game', href: '/overclock' },
-    { name: 'Maha OS', href: '/software' },
-    { name: 'Cognitive Gateway', href: '/research/mcp' },
-    { name: 'Enterprise MCP Gateway', href: '/enterprise-mcp-gateway' },
-    { name: 'Context Compiler', href: '/context-compiler' },
-    { name: 'WSO2 Gateway Integration', href: '/integrations/wso2' },
-    { name: 'Context Pack Evaluator', href: '/context-pack-evaluator' },
-    { name: 'Maha Navigator', href: '/navigator' },
-    { name: 'x402 Conformance Observatory', href: '/x402-observatory' },
-    { name: 'x402 Buyer Policy', href: '/x402-buyer-policy' },
-    { name: 'Personal Protocols', href: '/start' },
-  ];
+  // Navigation is defined in lib/navigation/site-navigation.ts so the
+  // enterprise/experimental boundary can be asserted without rendering.
+  const primaryLinks = PRIMARY_NAVIGATION;
+  const exploreLinks = EXPLORE_NAVIGATION;
 
   return (
     <>

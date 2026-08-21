@@ -3,27 +3,13 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { siteThemeForPath } from '@/lib/site-theme'
+import {
+  FOOTER_COMPANY_NAVIGATION,
+  FOOTER_DEVELOPER_NAVIGATION,
+} from '@/lib/navigation/site-navigation'
 
-const developerLinks = [
-  { href: '/developers', label: 'Developer infrastructure' },
-  { href: '/docs', label: 'API documentation' },
-  { href: '/enterprise-mcp-gateway', label: 'Enterprise MCP Gateway' },
-  { href: '/context-compiler', label: 'Context Compiler' },
-  { href: '/integrations/wso2', label: 'WSO2 Gateway integration' },
-  { href: '/context-compiler/playground', label: 'Try Context Compiler' },
-  { href: '/x402-observatory', label: 'x402 Conformance Observatory' },
-  { href: '/x402-buyer-policy', label: 'x402 Buyer Policy' },
-] as const
-
-const companyLinks = [
-  { href: '/knowledge', label: 'Knowledge' },
-  { href: '/intelligence', label: 'Intelligence' },
-  { href: '/tools', label: 'Tools & API' },
-  { href: '/navigator', label: 'Maha Navigator' },
-  { href: '/mps/preflight', label: 'MPS Preflight' },
-  { href: '/about', label: 'About Maha' },
-  { href: '/contact', label: 'Contact' },
-] as const
+const developerLinks = FOOTER_DEVELOPER_NAVIGATION
+const companyLinks = FOOTER_COMPANY_NAVIGATION
 
 export default function SiteFooter() {
   const theme = siteThemeForPath(usePathname())
@@ -38,13 +24,13 @@ export default function SiteFooter() {
         <nav aria-label="Developer infrastructure footer links">
           <p className="font-mono text-[10px] uppercase tracking-widest text-[var(--chrome-text)]">Developers</p>
           <ul className="mt-4 space-y-3 text-sm">
-            {developerLinks.map((link) => <li key={link.href}><Link href={link.href} className="hover:text-[var(--chrome-text)]">{link.label}</Link></li>)}
+            {developerLinks.map((link) => <li key={link.href}><Link href={link.href} className="hover:text-[var(--chrome-text)]">{link.name}</Link></li>)}
           </ul>
         </nav>
         <nav aria-label="Company footer links">
           <p className="font-mono text-[10px] uppercase tracking-widest text-[var(--chrome-text)]">Explore</p>
           <ul className="mt-4 space-y-3 text-sm">
-            {companyLinks.map((link) => <li key={link.href}><Link href={link.href} className="hover:text-[var(--chrome-text)]">{link.label}</Link></li>)}
+            {companyLinks.map((link) => <li key={link.href}><Link href={link.href} className="hover:text-[var(--chrome-text)]">{link.name}</Link></li>)}
           </ul>
         </nav>
       </div>

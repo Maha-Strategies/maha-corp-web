@@ -23,12 +23,6 @@ const capabilities = [
 ]
 
 const work = [
-  { category: 'OPEN EDITION', title: 'The Borrowed Light', copy: 'A book about the self, relationship, and the structures we borrow from one another to become real.', href: '/books/the-borrowed-light' },
-  { category: 'OPEN EDITION', title: 'The Orbital Mind', copy: 'A systems psychology of attention, desire, agency, limit, imagination, and integration.', href: '/books/the-orbital-mind' },
-  { category: 'OPEN EDITION', title: 'The Synthetic Self', copy: 'A book about language models, human judgment, and the record we are teaching machines to reflect.', href: '/books/the-synthetic-self' },
-  { category: 'OPEN EDITION', title: 'The Unfinished Species', copy: 'A book about evolution, self-design, and the conditions intelligence creates for its own development.', href: '/books/the-unfinished-species' },
-  { category: 'OPEN EDITION', title: 'The Imagined Life', copy: 'A book about dreaming, imagination, and the work of turning a possible future into an actual one.', href: '/books/the-imagined-life' },
-  { category: 'INTERACTIVE PROTOTYPE', title: 'Overclock', copy: 'A five-round risk game about escalating stakes, imperfect information, and knowing when to bank a decision.', href: '/overclock' },
   { category: 'SEMICONDUCTOR STRATEGY', title: 'U.S. Foundry Sovereignization', copy: 'A public analysis of the commercial and geopolitical friction around Intel IDM 2.0 and domestic advanced-node capacity.', href: '/intelligence/briefs/us-foundry-sovereignization' },
   { category: 'AI INFRASTRUCTURE', title: 'The Generative AI Silicon Cycle', copy: 'A public analysis of capacity expansion, the next downturn, and where supply-chain resilience is likely to diverge.', href: '/intelligence/briefs/generative-ai-silicon-cycle-recalibration' },
 ]
@@ -75,13 +69,13 @@ export default function CorporateHomepage() {
         </section>
 
         <section className="evidence-section" aria-labelledby="work-heading">
-          <div className="flex flex-col justify-between gap-5 sm:flex-row sm:items-end"><div><p className="evidence-kicker">Published work</p><h2 id="work-heading" className="evidence-section-title mt-4">Books, essays, and public analysis.</h2></div><div className="flex flex-wrap gap-5 font-mono text-xs uppercase tracking-widest"><Link href="/books" className="evidence-link">All books ↗</Link><Link href="/intelligence" className="evidence-link">Market intelligence ↗</Link></div></div>
-          <div className="mt-9 grid gap-4 md:grid-cols-2">{work.map((item) => <Link key={item.title} href={item.href} className="evidence-card group"><p className="evidence-kicker">{item.category}</p><h3 className="evidence-card-title mt-3">{item.title}</h3><p className="evidence-card-copy mt-3">{item.copy}</p><span className="evidence-kicker mt-5 inline-block text-[var(--text-primary)]">{item.category === 'OPEN EDITION' ? 'Explore book ↗' : item.category === 'INTERACTIVE PROTOTYPE' ? 'Play prototype ↗' : 'Read analysis ↗'}</span></Link>)}</div>
+          <div className="flex flex-col justify-between gap-5 sm:flex-row sm:items-end"><div><p className="evidence-kicker">Published work</p><h2 id="work-heading" className="evidence-section-title mt-4">Public analysis you can read before you talk to us.</h2></div><div className="flex flex-wrap gap-5 font-mono text-xs uppercase tracking-widest"><Link href="/intelligence" className="evidence-link">Market intelligence ↗</Link><Link href="/case-studies" className="evidence-link">Case studies ↗</Link></div></div>
+          <div className="mt-9 grid gap-4 md:grid-cols-2">{work.map((item) => <Link key={item.title} href={item.href} className="evidence-card group"><p className="evidence-kicker">{item.category}</p><h3 className="evidence-card-title mt-3">{item.title}</h3><p className="evidence-card-copy mt-3">{item.copy}</p><span className="evidence-kicker mt-5 inline-block text-[var(--text-primary)]">Read analysis ↗</span></Link>)}</div>
         </section>
 
         <section className="evidence-section grid gap-8 md:grid-cols-2">
-          <article><p className="evidence-kicker">Independent research</p><h2 className="evidence-card-title mt-4">Systemic sovereignty</h2><p className="evidence-card-copy mt-4 max-w-xl">Maha publishes independent work on semiconductor resilience, edge AI, human autonomy, and the systems connecting them.</p><Link href="/research" className="evidence-link mt-5 inline-block font-mono text-xs uppercase tracking-widest">Browse research ↗</Link></article>
-          <article><p className="evidence-kicker">The Maha Principle</p><h2 className="evidence-card-title mt-4">The architecture of human flourishing</h2><p className="evidence-card-copy mt-4 max-w-xl">Our book examines the biological, cognitive, and relational foundations of independence in an extractive world.</p><a href="https://www.themahaprinciple.com" target="_blank" rel="noopener noreferrer" className="evidence-link mt-5 inline-block font-mono text-xs uppercase tracking-widest">Read the book brief ↗</a></article>
+          <article><p className="evidence-kicker">Reproducible evidence</p><h2 className="evidence-card-title mt-4">Check the result before you trust it</h2><p className="evidence-card-copy mt-4 max-w-xl">The WSO2 gateway evaluation publishes every workload as its own row, with the digests and the one command that re-derives each total from them.</p><Link href="/integrations/wso2" className="evidence-link mt-5 inline-block font-mono text-xs uppercase tracking-widest">Review the evaluation ↗</Link></article>
+          <article><p className="evidence-kicker">Claim-level provenance</p><h2 className="evidence-card-title mt-4">The Maha Provenance Standard</h2><p className="evidence-card-copy mt-4 max-w-xl">A published, citable standard for tagging the epistemic status of substantive claims, with a free auditor and a public claim registry.</p><Link href="/mps" className="evidence-link mt-5 inline-block font-mono text-xs uppercase tracking-widest">Read MPS/0.1 ↗</Link></article>
         </section>
 
         <section className="evidence-section" aria-labelledby="tools-heading">
