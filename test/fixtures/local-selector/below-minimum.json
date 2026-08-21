@@ -1,0 +1,19 @@
+{
+  "contractVersion": "1.0.0",
+  "task": "What is the rollback threshold?",
+  "tokenBudget": 512,
+  "documents": [
+    {
+      "id": "note",
+      "title": "Note",
+      "text": "Rollback begins after 2 consecutive failures."
+    }
+  ],
+  "sanitization": {
+    "synthetic": true,
+    "containsCustomerData": false,
+    "containsPersonalData": false,
+    "containsSecrets": false,
+    "note": "Deliberately below the minimum-size bypass threshold."
+  }
+}

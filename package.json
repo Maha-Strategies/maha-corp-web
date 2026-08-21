@@ -62,6 +62,8 @@
     "generate:wso2-sanitized-trace": "node --experimental-strip-types scripts/generate-wso2-sanitized-trace.ts",
     "test:wso2-failure-paths": "node --experimental-strip-types scripts/run-wso2-failure-path-evaluation.ts",
     "validate:wso2-policy-bundle": "node --test --experimental-strip-types --test-name-pattern='WSO2 policy bundle' test/wso2-reproduction.test.ts",
+    "probe:local-selector-wasm": "node --experimental-strip-types scripts/probe-local-selector-wasm-feasibility.ts",
+    "verify:local-selector": "node --test --experimental-strip-types test/local-selector.test.ts",
     "generate:context-control-security-boundary": "node --experimental-strip-types scripts/generate-context-control-security-boundary.ts",
     "validate:context-control-security-boundary": "node --experimental-strip-types scripts/validate-context-control-security-boundary.ts",
     "sync:public-evidence": "node --experimental-strip-types scripts/sync-public-evidence.ts",
