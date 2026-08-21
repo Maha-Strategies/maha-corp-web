@@ -49,6 +49,8 @@
     "benchmark:context-retention:publish": "node --experimental-strip-types scripts/run-context-retention-benchmark.ts --write",
     "evaluate:wso2-context-interceptor": "node --experimental-strip-types scripts/run-wso2-context-interceptor-evaluation.ts",
     "validate:wso2-evaluation-corpus": "node --experimental-strip-types scripts/validate-wso2-evaluation-corpus.ts",
+    "validate:wso2-live-evidence": "node --experimental-strip-types scripts/validate-wso2-live-evidence.ts",
+    "generate:wso2-live-evidence": "node --experimental-strip-types scripts/generate-wso2-live-evidence-artifact.ts",
     "generate:wso2-large-context-corpus": "node --experimental-strip-types scripts/generate-wso2-large-context-cost-corpus.ts",
     "evaluate:wso2-large-context:dry": "node --experimental-strip-types scripts/run-wso2-three-path-evaluation.ts --dry-run --corpus=content/integrations/wso2-large-context-cost-corpus.json",
     "reproduce:wso2-evaluation": "node --experimental-strip-types scripts/reproduce-wso2-evaluation.ts",
