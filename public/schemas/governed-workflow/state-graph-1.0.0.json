@@ -1,0 +1,164 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://maha-strategies.com/schemas/governed-workflow/state-graph-1.0.0.json",
+  "title": "Governed workflow reference state graph",
+  "description": "The legal edges of the reference workflow, emitted from the same constant the engine enforces.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "states",
+    "transitions",
+    "safeCheckpoints"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "1.0.0"
+    },
+    "states": {
+      "type": "array",
+      "items": {
+        "enum": [
+          "draft",
+          "evidence_collected",
+          "policy_evaluated",
+          "approval_pending",
+          "approved",
+          "action_authorized",
+          "action_completed",
+          "closed",
+          "denied",
+          "expired",
+          "failed_recoverable",
+          "failed_final",
+          "needs_human_review",
+          "replay_blocked"
+        ]
+      }
+    },
+    "transitions": {
+      "type": "object"
+    },
+    "safeCheckpoints": {
+      "type": "array",
+      "items": {
+        "enum": [
+          "draft",
+          "evidence_collected",
+          "policy_evaluated",
+          "approval_pending",
+          "approved",
+          "action_authorized",
+          "action_completed",
+          "closed",
+          "denied",
+          "expired",
+          "failed_recoverable",
+          "failed_final",
+          "needs_human_review",
+          "replay_blocked"
+        ]
+      }
+    }
+  },
+  "examples": [
+    {
+      "schemaVersion": "1.0.0",
+      "states": [
+        "draft",
+        "evidence_collected",
+        "policy_evaluated",
+        "approval_pending",
+        "approved",
+        "action_authorized",
+        "action_completed",
+        "closed",
+        "denied",
+        "expired",
+        "failed_recoverable",
+        "failed_final",
+        "needs_human_review",
+        "replay_blocked"
+      ],
+      "transitions": {
+        "draft": [
+          "evidence_collected",
+          "needs_human_review",
+          "failed_recoverable",
+          "failed_final"
+        ],
+        "evidence_collected": [
+          "policy_evaluated",
+          "needs_human_review",
+          "failed_recoverable",
+          "failed_final"
+        ],
+        "policy_evaluated": [
+          "approval_pending",
+          "approved",
+          "denied",
+          "needs_human_review",
+          "failed_recoverable",
+          "failed_final"
+        ],
+        "approval_pending": [
+          "approved",
+          "denied",
+          "expired",
+          "needs_human_review",
+          "failed_recoverable",
+          "failed_final"
+        ],
+        "approved": [
+          "action_authorized",
+          "denied",
+          "expired",
+          "needs_human_review",
+          "failed_recoverable",
+          "failed_final"
+        ],
+        "action_authorized": [
+          "action_completed",
+          "failed_recoverable",
+          "failed_final",
+          "needs_human_review",
+          "replay_blocked"
+        ],
+        "action_completed": [
+          "closed",
+          "needs_human_review",
+          "failed_final"
+        ],
+        "closed": [],
+        "denied": [],
+        "expired": [
+          "needs_human_review",
+          "failed_final"
+        ],
+        "failed_recoverable": [
+          "evidence_collected",
+          "policy_evaluated",
+          "needs_human_review",
+          "failed_final"
+        ],
+        "failed_final": [],
+        "needs_human_review": [
+          "policy_evaluated",
+          "approval_pending",
+          "denied",
+          "closed",
+          "failed_final"
+        ],
+        "replay_blocked": [
+          "needs_human_review",
+          "failed_final"
+        ]
+      },
+      "safeCheckpoints": [
+        "evidence_collected",
+        "policy_evaluated",
+        "approved"
+      ]
+    }
+  ]
+}

@@ -6,7 +6,12 @@ export type GovernancePolicyLayer = {
   policyId: string
   policyVersion: string
   parentPolicyId: string
-  scope: 'tenant' | 'workflow' | 'action'
+  /**
+   * Descriptive label for the layer. Resolution depends on the parent chain,
+   * not on this value; `instance` was added for the governed workflow state
+   * graph, which distinguishes a workflow template from one instance of it.
+   */
+  scope: 'tenant' | 'workflow' | 'instance' | 'action'
   constraints: {
     allowedTenantIds?: string[]
     allowedAgentIds?: string[]
