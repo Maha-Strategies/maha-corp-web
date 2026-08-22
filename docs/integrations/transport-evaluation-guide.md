@@ -10,6 +10,24 @@ These packages are that shim, shipped.
 
 ---
 
+## A useful local success path
+
+```bash
+npm run demo:context-control
+```
+
+This starts the shipped MCP stdio binary and returns a metadata-only JSON
+record for two successful, locally useful checks:
+
+1. a synthetic request envelope is admissible under the Context Control gate;
+2. the WSO2 gateway artifact passes static contract validation.
+
+The demo has no credential, network endpoint, provider call, payment, or
+customer source text. It is an evaluator journey, not a compression benchmark
+or a production compilation claim.
+
+---
+
 ## One command
 
 ```bash
