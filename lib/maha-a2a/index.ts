@@ -26,6 +26,58 @@ export const A2A_AGENT_VERSION = '0.1.0'
  * rather than omitted: a consumer deciding whether to trust this agent should
  * read the answer, not infer it from an absence.
  */
+/**
+ * The task envelope `handleA2ATask` enforces, published on the agent card.
+ *
+ * Exported so the card and the handler cannot drift: a test asserts that a task
+ * built from this schema is accepted. Without a published schema an independent
+ * caller has to guess the envelope from prose, and the natural guesses — `id`
+ * rather than `taskId`, a nested `input.payload` rather than `request`, an
+ * implied default budget — are all rejected. That gap was found by a caller
+ * that read only the card, which is exactly the caller this schema is for.
+ */
+export const A2A_TASK_INPUT_SCHEMA: Record<string, unknown> = {
+  type: 'object',
+  required: ['taskId', 'policy', 'request'],
+  // Unrecognised fields are ignored rather than refused — except
+  // credential-bearing ones, which are refused loudly (see `not` below).
+  // Declaring `false` here would make the card claim a strictness the handler
+  // does not apply, which is the same drift this schema exists to prevent.
+  additionalProperties: true,
+  properties: {
+    skillId: {
+      const: A2A_CAPABILITY_ID,
+      description: 'Optional. When present it must name this capability; a task addressed to another skill is rejected rather than silently handled by this one.',
+    },
+    taskId: {
+      type: 'string',
+      minLength: 1,
+      description: 'Caller-chosen task identifier. Replaying the same value returns the original result with replayed: true; it does not re-run the task.',
+    },
+    policy: {
+      type: 'object',
+      required: ['tokenBudget'],
+      additionalProperties: false,
+      description: 'Explicit policy for this task. There is no default budget: an omitted tokenBudget is rejected rather than guessed.',
+      properties: {
+        tokenBudget: { type: 'integer', minimum: 1, description: 'Maximum estimated tokens the compiled context may occupy.' },
+        minimumCompileTokens: { type: 'integer', minimum: 0, description: 'Below this size the request is passed through uncompiled.' },
+      },
+    },
+    request: {
+      type: 'object',
+      description: 'The LLM request envelope, carrying the caller-supplied maha_context block. Source text is read transiently and never retained.',
+    },
+  },
+  // Credentials are refused rather than ignored, so the schema says so too.
+  not: {
+    anyOf: [
+      { required: ['secret'] }, { required: ['token'] }, { required: ['credential'] },
+      { required: ['password'] }, { required: ['apiKey'] }, { required: ['authorization'] },
+    ],
+  },
+}
+
 export function a2aAgentCard(baseUrl?: string): Record<string, unknown> {
   return {
     protocolVersion: '0.2',
@@ -41,6 +93,7 @@ export function a2aAgentCard(baseUrl?: string): Record<string, unknown> {
       tags: ['context', 'evidence', 'evaluation'],
       inputModes: ['application/json'],
       outputModes: ['application/json'],
+      inputSchema: A2A_TASK_INPUT_SCHEMA,
     }],
     contract: { version: GATEWAY_CONTRACT_VERSION, policyVersion: GATEWAY_POLICY_VERSION },
     boundaries: {
@@ -109,6 +162,14 @@ export function handleA2ATask(task: unknown): A2ATaskResult {
 
   const taskId = typeof record.taskId === 'string' && record.taskId.length > 0 ? record.taskId : null
   if (!taskId) return reject('invalid_task', 'taskId is required.')
+
+  // A task addressed to a different skill must not be answered by this one.
+  // The card advertises a single capability today, so silently accepting any
+  // skillId would mean that the day a second skill is added, callers aimed at
+  // it start receiving this one's results instead.
+  if (record.skillId !== undefined && record.skillId !== A2A_CAPABILITY_ID) {
+    return reject('unknown_skill', `This agent serves ${A2A_CAPABILITY_ID} only.`)
+  }
 
   const existing = seen.get(taskId)
   if (existing) return { ...existing, replayed: true }

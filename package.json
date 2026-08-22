@@ -86,7 +86,9 @@
     "pack:sdk": "npm --prefix packages/sdk run pack:dry-run",
     "build:x402-buyer-policy": "npm --prefix packages/x402-buyer-policy run build",
     "pack:x402-buyer-policy": "npm --prefix packages/x402-buyer-policy run pack:dry-run",
-    "test": "node --test --experimental-strip-types test/*.test.ts"
+    "test": "node --test --experimental-strip-types test/*.test.ts",
+    "interop:mcp": "node interop/mcp/client-probe.mjs",
+    "interop:a2a": "node interop/a2a/caller.mjs"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.115.0",

@@ -17,7 +17,7 @@ const eslintConfig = defineConfig([
     ".claude/worktrees/**",
     "public/widget.js",
     "next-env.d.ts",
-  ]),
+  'interop/**',]),
   {
     rules: {
       // These pages intentionally contain editorial punctuation in JSX prose.
