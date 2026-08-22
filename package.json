@@ -89,7 +89,8 @@
     "test": "node --test --experimental-strip-types test/*.test.ts",
     "interop:mcp": "node interop/mcp/client-probe.mjs",
     "interop:a2a": "node interop/a2a/caller.mjs",
-    "evaluate:transports": "node --experimental-strip-types scripts/evaluate-transports.ts"
+    "evaluate:transports": "node --experimental-strip-types scripts/evaluate-transports.ts",
+    "evaluate:claims-exception": "node --experimental-strip-types scripts/run-claims-exception-evaluation.ts"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.115.0",
