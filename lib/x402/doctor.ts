@@ -419,6 +419,12 @@ export async function diagnoseX402Endpoint(options: DoctorOptions): Promise<Doct
 
     let challenge: PaymentChallenge
     try { challenge = decodeChallenge(first.headers.get(PAYMENT_REQUIRED_HEADER)) } catch (error) {
+      // A malformed challenge is still a response from a declared route. Keep
+      // the same-host control in the report before returning so callers can
+      // distinguish a decoder failure from a payment gate that runs before
+      // routing. This control never carries a payment header or caller input.
+      const negativeControl = await fetchWithTimeout(fetchImpl, negativeControlUrl(endpoint), { method: 'GET' }, timeoutMs)
+      recordRouteExistence(report, endpoint, first.status, negativeControl.status)
       add(findings, 'x402.header.payment_required', 'error', 'PAYMENT-REQUIRED is missing or malformed.', error instanceof Error ? error.message : String(error))
       return finalize(report, started)
     }

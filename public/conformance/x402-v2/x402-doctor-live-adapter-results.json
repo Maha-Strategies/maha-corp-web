@@ -1,8 +1,8 @@
 {
   "$schema": "https://www.mahastrategies.com/conformance/x402-v2/x402-doctor-live-adapter-results.schema.json",
   "schemaVersion": "1.0.0",
-  "artifactVersion": "0.1.0",
-  "configurationAsOf": "2026-08-21",
+  "artifactVersion": "0.1.1",
+  "configurationAsOf": "2026-08-22",
   "subject": {
     "tool": "x402-doctor",
     "toolVersion": "0.1.0",
@@ -14,7 +14,8 @@
       "The declared crawler replay returns HTTP 402 when the fixture declares a valid protected route.",
       "The same-host negative control distinguishes a route-confirming 404/410 from a payment gate that fires before routing.",
       "A negative-control HTTP 200 is reported separately as soft_200 and does not confirm the declared route.",
-      "The Maha x402 decoder can parse the fixture's v2 PAYMENT-REQUIRED challenge."
+      "The Maha x402 decoder can parse a valid fixture's v2 PAYMENT-REQUIRED challenge and reports a malformed challenge as an explicit parse failure.",
+      "A declared route returning 404/410 is classified as absent, and its client-interop field is explicitly not evaluated."
     ],
     "notEvaluated": [
       "Live registry indexing or listing; discovery_eligibility is a static declaration/replay claim only.",
@@ -62,6 +63,32 @@
         "outcome": "pass"
       },
       "candidateDefects": ["soft_200"]
+    },
+    {
+      "id": "client-interop.malformed-payment-required",
+      "declaredStatus": 402,
+      "negativeControlStatus": 404,
+      "routeExistence": "confirmed",
+      "discoveryEligibility": "not_eligible",
+      "clientInterop": {
+        "consumer": "maha.decodeChallenge",
+        "strength": "parse",
+        "outcome": "fail"
+      },
+      "candidateDefects": ["malformed_payment_required"]
+    },
+    {
+      "id": "route-existence.absent",
+      "declaredStatus": 404,
+      "negativeControlStatus": 404,
+      "routeExistence": "absent",
+      "discoveryEligibility": "not_eligible",
+      "clientInterop": {
+        "consumer": "maha.decodeChallenge",
+        "strength": "not_evaluated",
+        "outcome": "not_evaluated"
+      },
+      "candidateDefects": ["declared_route_not_found"]
     }
   ]
 }
