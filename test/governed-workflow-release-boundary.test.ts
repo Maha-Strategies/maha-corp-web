@@ -20,6 +20,7 @@ import { runDemoProgram, parseDemoRequest } from '../lib/governed-workflow/demo-
 const LIB_DIR = new URL('../lib/governed-workflow/', import.meta.url).pathname
 const ROUTE = new URL('../app/api/governed-workflow/demo/route.ts', import.meta.url).pathname
 const VIEW = new URL('../app/governed-workflow/page.tsx', import.meta.url).pathname
+const EVIDENCE_VIEW = new URL('../app/governed-workflow/evidence/page.tsx', import.meta.url).pathname
 
 function libraryFiles(): { name: string; source: string }[] {
   return readdirSync(LIB_DIR)
@@ -113,6 +114,26 @@ test('the corpus and every public surface declare themselves synthetic', () => {
   // The disclaimer must be present, not merely un-contradicted: a page that
   // deleted it would still pass a scan that only looked for false claims.
   assert.ok(/evaluation-grade prototype, not a compliance certification/i.test(view))
+  // The evidence view is a separate public surface and carries its own caption
+  // rather than relying on the product page a reader may not have come through.
+  const evidenceView = readFileSync(EVIDENCE_VIEW, 'utf8')
+  assert.ok(evidenceView.includes('Synthetic evaluation corpus'))
+  assert.ok(evidenceView.includes('not a customer result'))
+  assert.ok(/evaluation-grade prototype, not a compliance certification/i.test(evidenceView))
+})
+
+test('the product page names the four buyer categories and states the payment boundary', () => {
+  const view = readFileSync(VIEW, 'utf8')
+  for (const category of ['Regulated approvals', 'Procurement', 'Claims and policy review', 'Agentic actions']) {
+    assert.ok(view.includes(category), `the product page must name ${category}`)
+  }
+  // Affirmative: the page must state the boundary, not merely omit a false
+  // claim. A page that quietly dropped this would still pass a scan that only
+  // looked for overreach. Whitespace is normalised so a reflow cannot break it.
+  const prose = view.replace(/\s+/g, ' ')
+  assert.ok(/not connected to payment/i.test(prose))
+  assert.ok(/makes no payments, calls no providers, and dispatches no messages/i.test(prose))
+  assert.ok(/no external audit, no certification/i.test(view))
 })
 
 test('the public operator view gives customers a bounded evaluation path without implying live authority', () => {
