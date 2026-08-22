@@ -1,0 +1,24 @@
+<ServiceCallout name="SC-MahaCompile">
+  <!-- The compiler URL and the credential both come from a Key Value Map at
+       runtime. Neither is written into this bundle: an XML file in version
+       control is not a secret store. -->
+  <Request variable="maha.compile.request" clearPayload="true">
+    <Set>
+      <Verb>POST</Verb>
+      <Headers>
+        <Header name="content-type">application/json</Header>
+        <Header name="x-maha-interceptor-token">{private.maha.interceptor.secret}</Header>
+      </Headers>
+      <Payload contentType="application/json">{maha.compile.payload}</Payload>
+    </Set>
+  </Request>
+  <Response>maha.compile.response</Response>
+  <HTTPTargetConnection>
+    <URL>{private.maha.compiler.url}</URL>
+    <Properties>
+      <Property name="io.timeout.millis">3000</Property>
+      <Property name="connect.timeout.millis">2000</Property>
+      <Property name="success.codes">2xx</Property>
+    </Properties>
+  </HTTPTargetConnection>
+</ServiceCallout>

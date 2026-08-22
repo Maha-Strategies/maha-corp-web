@@ -122,6 +122,11 @@ const PRIVATE_ROUTES = new Set([
   // WSO2 deployment test and production authentication review pass.
   '/api/integrations/wso2/context-compiler/handle-request',
   '/api/integrations/wso2/context-compiler/handle-response',
+  // Gateway-neutral compile endpoint for the Kong, Apigee and Cloudflare
+  // adapters. Same reasoning as the WSO2 routes above: it implements a
+  // middleware contract for a gateway to call, is protected by a dedicated
+  // integration credential, and is not a general Maha REST operation.
+  '/api/integrations/gateway/context-compiler',
   '/api/cron/inbound-digest',
   '/api/cron/job-reclaim',
   '/api/cron/market-scout',

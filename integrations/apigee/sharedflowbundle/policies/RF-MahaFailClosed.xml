@@ -1,0 +1,11 @@
+<RaiseFault name="RF-MahaFailClosed">
+  <FaultResponse>
+    <Set>
+      <StatusCode>{maha.compile.status}</StatusCode>
+      <ReasonPhrase>Context compilation failed</ReasonPhrase>
+      <Headers><Header name="cache-control">no-store</Header></Headers>
+      <Payload contentType="application/json">{"error":{"code":"{maha.compile.code}","message":"Context compilation did not complete."}}</Payload>
+    </Set>
+  </FaultResponse>
+  <IgnoreUnresolvedVariables>false</IgnoreUnresolvedVariables>
+</RaiseFault>

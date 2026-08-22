@@ -1,0 +1,22 @@
+# Local verification configuration. No secret appears here by design: the
+# plugin reads MAHA_CONTEXT_INTERCEPTOR_SECRET from the Kong process
+# environment. The upstream below is a placeholder host that does not resolve,
+# so this file cannot silently proxy to a real provider if applied by accident.
+_format_version: "3.0"
+
+services:
+  - name: llm-upstream
+    url: http://llm-upstream.invalid:8080
+    routes:
+      - name: chat-completions
+        paths:
+          - /v1/chat/completions
+        methods:
+          - POST
+    plugins:
+      - name: maha-context-compiler
+        config:
+          compiler_url: http://host.docker.internal:3000/api/integrations/gateway/context-compiler
+          secret_env: MAHA_CONTEXT_INTERCEPTOR_SECRET
+          timeout_ms: 3000
+          max_body_bytes: 512000

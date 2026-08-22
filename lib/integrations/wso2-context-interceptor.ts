@@ -1,14 +1,21 @@
 import { createHash, createHmac, timingSafeEqual } from 'node:crypto'
 
-import { compileContextPack, estimateTokens, parseContextPackRequest, sha256, type ContextPackRequest } from '../context-compiler.ts'
+import {
+  GATEWAY_CONTEXT_EXTENSION,
+  GATEWAY_CONTEXT_PLACEHOLDER,
+  GATEWAY_DEFAULT_MAX_BODY_BYTES,
+  GATEWAY_DEFAULT_MINIMUM_COMPILE_TOKENS,
+  GATEWAY_POLICY_VERSION,
+  compileContextDecision,
+} from './gateway-context-contract.ts'
 
-export const WSO2_CONTEXT_INTERCEPTOR_VERSION = '2026-08-16'
-export const WSO2_CONTEXT_EXTENSION = 'maha_context'
-export const WSO2_CONTEXT_PLACEHOLDER = '{{MAHA_CONTEXT_PACK}}'
+export const WSO2_CONTEXT_INTERCEPTOR_VERSION = GATEWAY_POLICY_VERSION
+export const WSO2_CONTEXT_EXTENSION = GATEWAY_CONTEXT_EXTENSION
+export const WSO2_CONTEXT_PLACEHOLDER = GATEWAY_CONTEXT_PLACEHOLDER
 export const WSO2_INTERCEPTOR_TOKEN_HEADER = 'x-maha-wso2-interceptor-token'
-export const MAX_WSO2_OPENAI_BODY_BYTES = 512_000
+export const MAX_WSO2_OPENAI_BODY_BYTES = GATEWAY_DEFAULT_MAX_BODY_BYTES
 /** Below this model-neutral estimate, compiler framing is more likely to add cost than remove it. */
-export const WSO2_CONTEXT_MINIMUM_COMPILE_TOKENS = 1_024
+export const WSO2_CONTEXT_MINIMUM_COMPILE_TOKENS = GATEWAY_DEFAULT_MINIMUM_COMPILE_TOKENS
 
 type StringMap = Record<string, string>
 
@@ -105,29 +112,6 @@ function directResponse(status: number, code: string, message: string): Wso2Requ
   }
 }
 
-function replaceContextPlaceholder(messages: unknown[], context: string): unknown[] {
-  let occurrences = 0
-  const rewritten = messages.map((message) => {
-    const record = object(message)
-    if (!record || typeof record.content !== 'string') return message
-    const count = record.content.split(WSO2_CONTEXT_PLACEHOLDER).length - 1
-    occurrences += count
-    return count === 0
-      ? message
-      : { ...record, content: record.content.replaceAll(WSO2_CONTEXT_PLACEHOLDER, context) }
-  })
-  if (occurrences !== 1) {
-    throw new Error(`messages[] must contain ${WSO2_CONTEXT_PLACEHOLDER} exactly once in a string content field.`)
-  }
-  return rewritten
-}
-
-function wholeDocumentContext(request: ContextPackRequest): string {
-  return request.documents
-    .map((document) => `[${document.id}] ${document.title ?? ''}\n${document.text}`)
-    .join('\n\n')
-}
-
 /**
  * Apply Maha's Context Compiler to an exact WSO2 Interceptor Service v1 request.
  *
@@ -183,51 +167,45 @@ export function handleWso2ContextRequest(
     return directResponse(400, 'invalid_openai_request', 'An OpenAI-compatible messages[] array is required.')
   }
 
-  try {
-    const request = parseContextPackRequest(upstreamBody[WSO2_CONTEXT_EXTENSION])
-    const compilation = compileContextPack(request)
-    const originalContext = wholeDocumentContext(request)
-    const originalContextTokens = estimateTokens(originalContext)
-    const compiledContextTokens = estimateTokens(compilation.context)
-    const bypassReason = originalContextTokens < WSO2_CONTEXT_MINIMUM_COMPILE_TOKENS
-      ? 'below_minimum_size'
-      : compiledContextTokens >= originalContextTokens
-        ? 'non_expansion_guard'
-        : 'none'
-    const bypassApplied = bypassReason !== 'none'
-    const selectedContext = bypassApplied ? originalContext : compilation.context
-    const selectedTokens = bypassApplied ? originalContextTokens : compiledContextTokens
-    const messages = replaceContextPlaceholder(upstreamBody.messages, selectedContext)
-    const upstream = { ...upstreamBody }
-    delete upstream[WSO2_CONTEXT_EXTENSION]
-    const rewritten = JSON.stringify({ ...upstream, messages })
+  // The compile-and-measure decision is the shared gateway core, so WSO2 and
+  // the neutral adapters cannot disagree about the budget, the bypass rule or
+  // the hashes. Everything above and below this call is WSO2 envelope
+  // handling, which no other gateway shares.
+  const decision = compileContextDecision(upstreamBody, { minimumCompileTokens: WSO2_CONTEXT_MINIMUM_COMPILE_TOKENS })
+  if (decision.outcome === 'rejected') {
+    return directResponse(decision.status, decision.code === 'invalid_compiler_output' ? 'invalid_compiler_output' : 'context_compilation_rejected', decision.message)
+  }
+  if (decision.outcome !== 'compiled') {
+    return { headersToRemove: [WSO2_INTERCEPTOR_TOKEN_HEADER] }
+  }
 
-    const evidence = {
-      version: WSO2_CONTEXT_INTERCEPTOR_VERSION,
-      packId: compilation.packId,
-      inputHash: compilation.inputHash,
-      outputHash: sha256(selectedContext),
-      originalEstimatedTokens: String(originalContextTokens),
-      compiledEstimatedTokens: String(selectedTokens),
-      tokensSaved: String(Math.max(0, originalContextTokens - selectedTokens)),
-      estimatedReductionPercent: String(originalContextTokens === 0 ? 0 : Math.max(0, Number((((originalContextTokens - selectedTokens) / originalContextTokens) * 100).toFixed(1)))),
-      sourceCoveragePercent: String(bypassApplied ? 100 : compilation.metrics.sourceCoveragePercent),
-      includedPassageCount: String(bypassApplied ? 0 : compilation.includedPassages.length),
-      bypassApplied: String(bypassApplied),
-      bypassReason,
-      minimumCompileTokens: String(WSO2_CONTEXT_MINIMUM_COMPILE_TOKENS),
-    }
+  const rewritten = JSON.stringify(decision.body)
+  const core = decision.evidence
+  const evidence = {
+    version: WSO2_CONTEXT_INTERCEPTOR_VERSION,
+    packId: core.packId,
+    inputHash: core.inputHash,
+    outputHash: core.outputHash,
+    originalEstimatedTokens: String(core.originalEstimatedTokens),
+    compiledEstimatedTokens: String(core.compiledEstimatedTokens),
+    tokensSaved: String(core.tokensSaved),
+    estimatedReductionPercent: String(core.estimatedReductionPercent),
+    // WSO2's published contract reports percent; the neutral adapters report
+    // basis points. Both come from the same measurement.
+    sourceCoveragePercent: String(core.sourceCoverageBps / 100),
+    includedPassageCount: String(core.retainedPassages),
+    bypassApplied: String(core.bypassApplied),
+    bypassReason: core.bypassReason,
+    minimumCompileTokens: String(core.minimumCompileTokens),
+  }
 
-    return {
-      body: Buffer.from(rewritten, 'utf8').toString('base64'),
-      headersToRemove: [WSO2_INTERCEPTOR_TOKEN_HEADER, 'content-length'],
-      // Request-phase headers are upstream request headers. Evidence belongs
-      // in the private policy context until the response phase, otherwise it
-      // is disclosed to the model provider rather than returned to the caller.
-      interceptorContext: { ...evidence, [EVIDENCE_SEAL_FIELD]: evidenceSeal(evidence, configuredSecret) },
-    }
-  } catch (error) {
-    return directResponse(400, 'context_compilation_rejected', error instanceof Error ? error.message : 'The context request is invalid.')
+  return {
+    body: Buffer.from(rewritten, 'utf8').toString('base64'),
+    headersToRemove: [WSO2_INTERCEPTOR_TOKEN_HEADER, 'content-length'],
+    // Request-phase headers are upstream request headers. Evidence belongs
+    // in the private policy context until the response phase, otherwise it
+    // is disclosed to the model provider rather than returned to the caller.
+    interceptorContext: { ...evidence, [EVIDENCE_SEAL_FIELD]: evidenceSeal(evidence, configuredSecret) },
   }
 }
 

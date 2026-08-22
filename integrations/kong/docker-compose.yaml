@@ -1,0 +1,20 @@
+# Local verification only. Start with:
+#   MAHA_CONTEXT_INTERCEPTOR_SECRET=<32+ chars> docker compose up
+# The upstream is deliberately unresolvable; this proves the plugin runs and
+# fails closed, not that a provider call succeeds.
+services:
+  kong:
+    image: kong:3.6
+    environment:
+      KONG_DATABASE: "off"
+      KONG_DECLARATIVE_CONFIG: /kong/kong.declarative.yaml
+      KONG_PLUGINS: bundled,maha-context-compiler
+      KONG_LUA_PACKAGE_PATH: /kong/plugins/?.lua;;
+      KONG_PROXY_LISTEN: 0.0.0.0:8000
+      MAHA_CONTEXT_INTERCEPTOR_SECRET: ${MAHA_CONTEXT_INTERCEPTOR_SECRET:?set this in your shell, never in this file}
+    volumes:
+      - ./kong.declarative.yaml:/kong/kong.declarative.yaml:ro
+      - ./maha-context-compiler.lua:/kong/plugins/maha-context-compiler/handler.lua:ro
+      - ./schema.lua:/kong/plugins/maha-context-compiler/schema.lua:ro
+    ports:
+      - "8000:8000"
