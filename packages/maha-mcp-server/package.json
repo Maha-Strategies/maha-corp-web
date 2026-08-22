@@ -1,0 +1,20 @@
+{
+  "name": "@mahastrategies/maha-mcp-server",
+  "version": "0.1.0",
+  "description": "MCP stdio server for Maha Context Control. Runnable: no transport shim required.",
+  "keywords": ["maha", "context-control", "mcp", "a2a", "evidence", "local-first"],
+  "license": "MIT",
+  "homepage": "https://github.com/Maha-Strategies/maha-corp-web/tree/main/packages/maha-mcp-server#readme",
+  "repository": { "type": "git", "url": "git+https://github.com/Maha-Strategies/maha-corp-web.git", "directory": "packages/maha-mcp-server" },
+  "bugs": { "url": "https://github.com/Maha-Strategies/maha-corp-web/issues" },
+  "type": "module",
+  "files": ["dist", "README.md", "LICENSE"],
+  "main": "./dist/maha-mcp-server/index.js",
+  "types": "./dist/maha-mcp-server/index.d.ts",
+  "exports": { ".": { "types": "./dist/maha-mcp-server/index.d.ts", "import": "./dist/maha-mcp-server/index.js", "default": "./dist/maha-mcp-server/index.js" } },
+  "bin": { "maha-mcp-server": "./dist/maha-mcp-server/cli.js" },
+  "dependencies": {"@modelcontextprotocol/sdk": "^1.29.0"},
+  "engines": { "node": ">=20" },
+  "publishConfig": { "access": "public" },
+  "scripts": { "build": "tsc --project tsconfig.json", "pack:dry-run": "npm pack --dry-run", "prepack": "npm run build" }
+}

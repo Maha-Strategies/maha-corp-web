@@ -1,0 +1,14 @@
+{
+  "taskId": "transport-evaluation-task-0001",
+  "skillId": "maha.context-control.evaluate",
+  "policy": { "tokenBudget": 512 },
+  "request": {
+    "model": "synthetic",
+    "messages": [],
+    "maha_context": {
+      "task": "Summarise the synthetic coverage clause for evaluation.",
+      "tokenBudget": 512,
+      "documents": [{ "id": "syn-doc-1", "text": "Alpha beta gamma delta epsilon zeta eta theta." }]
+    }
+  }
+}

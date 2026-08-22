@@ -78,7 +78,5 @@ next-env.d.ts
 *.sql
 !supabase/migrations/*.sql
 !supabase/seed.sql
-interop/mcp/node_modules
-interop/mcp/package-lock.json
 interop/**/*-evidence.json
 interop/**/synthetic-evidence.json

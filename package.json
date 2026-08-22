@@ -88,10 +88,12 @@
     "pack:x402-buyer-policy": "npm --prefix packages/x402-buyer-policy run pack:dry-run",
     "test": "node --test --experimental-strip-types test/*.test.ts",
     "interop:mcp": "node interop/mcp/client-probe.mjs",
-    "interop:a2a": "node interop/a2a/caller.mjs"
+    "interop:a2a": "node interop/a2a/caller.mjs",
+    "evaluate:transports": "node --experimental-strip-types scripts/evaluate-transports.ts"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.115.0",
+    "@modelcontextprotocol/sdk": "^1.29.0",
     "@scalar/api-reference-react": "^0.9.60",
     "@sentry/nextjs": "^10.69.0",
     "@stripe/stripe-js": "^9.12.1",
