@@ -65,6 +65,7 @@ export default function Navbar() {
     { name: 'Context Compiler', href: '/context-compiler' },
     { name: 'WSO2 Gateway Integration', href: '/integrations/wso2' },
     { name: 'Context Pack Evaluator', href: '/context-pack-evaluator' },
+    { name: 'Governed Workflow State Graph', href: '/governed-workflow' },
     { name: 'Maha Navigator', href: '/navigator' },
     { name: 'x402 Conformance Observatory', href: '/x402-observatory' },
     { name: 'x402 Buyer Policy', href: '/x402-buyer-policy' },

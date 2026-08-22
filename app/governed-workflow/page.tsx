@@ -1,103 +1,127 @@
 // app/governed-workflow/page.tsx
-// Server component: the operator view renders scenarios that run at build time
-// against the real engine, so what a reader sees is engine output rather than
-// hand-written illustration. No 'use client' and no fetch — there is nothing
-// live to fetch, and pretending otherwise would misrepresent a prototype.
+// Product page. Deliberately short: the technical detail and the ten worked
+// scenarios live at /governed-workflow/evidence, so a buyer deciding whether
+// this is relevant does not have to read an engine trace to find out.
+// Server component — no 'use client', nothing live to fetch.
 
 import React from 'react';
 import Link from 'next/link';
 
-import { sanitizeEvidence, sanitizeTimeline } from '@/lib/governed-workflow/audit';
-import { verifyEventChain } from '@/lib/governed-workflow/engine';
-import { GWSG_EVIDENCE } from '@/lib/governed-workflow/fixtures';
-import { runAllScenarios } from '@/lib/governed-workflow/scenarios';
 import { GWSG_SCHEMA_VERSION } from '@/lib/governed-workflow/types';
 
 const SITE_URL = 'https://www.mahastrategies.com';
 
 export const metadata = {
   metadataBase: new URL(SITE_URL),
-  title: 'Governed Workflow State Graph — evaluation prototype | Maha Strategies',
+  title: 'Governed Workflow State Graph | Maha Strategies',
   description:
-    'A read-only operator view over a governed, evidence-bounded workflow state graph. Synthetic evaluation corpus: metadata, digests and policy decisions only, with no source document content retained.',
+    'A governed, evidence-bounded record of one regulated decision: what was decided, on what evidence, under which policy, approved by whom, and whether a retry could repeat an effect. Evaluation-grade prototype on a synthetic corpus.',
   alternates: { canonical: '/governed-workflow' },
   robots: { index: true, follow: true },
+  openGraph: {
+    type: 'website',
+    url: `${SITE_URL}/governed-workflow`,
+    siteName: 'Maha Strategies',
+    title: 'Governed Workflow State Graph',
+    description:
+      'Bind a decision to the exact evidence set and policy version that produced it. Regulated approvals, procurement, claims, and agentic actions.',
+    images: [{ url: '/og-master.png', width: 1200, height: 630, alt: 'Governed Workflow State Graph' }],
+  },
 };
 
 const CAPTION = 'Synthetic evaluation corpus — not a customer result — evaluation-grade prototype, not a compliance certification.';
 
-function Digest({ value }: { value: string | null }) {
-  if (!value) return <span style={{ color: '#8a8a8a' }}>—</span>;
-  const short = value.replace('sha256:', '').slice(0, 12);
+const FITS = [
+  {
+    title: 'Regulated approvals',
+    body: 'Bind a reviewer’s approval to one policy version, one input, and one evidence set — so a later policy change or a revised document cannot silently inherit it.',
+  },
+  {
+    title: 'Procurement',
+    body: 'Require a bounded approval before an agent may prepare a purchase action, and make a lower-level exception incapable of widening what a tenant-level policy forbids.',
+  },
+  {
+    title: 'Claims and policy review',
+    body: 'Adjudicate against a named evidence set, with unresolved questions declared rather than absorbed into the decision.',
+  },
+  {
+    title: 'Agentic actions',
+    body: 'Record the intended effect, the receipt, the uncertainty, and the recovery path — so a retry after an interruption cannot quietly become a second effect.',
+  },
+];
+
+const GUARANTEES = [
+  ['Approvals bind, or they do not apply.', 'The approval is addressed by its content — instance, transition, policy version, input digest, evidence digest set. Change the evidence and the old approval is not found rather than silently reused.'],
+  ['A repeat is not a re-run.', 'The same idempotency key returns the original record and produces no second intent. A repeat with changed material inputs is rejected outright.'],
+  ['Uncertainty is declared, not absorbed.', 'A blocking or unresolved question routes to a human. A signed exception cannot override it.'],
+  ['An escalation can be resolved — only by a human.', 'Agents are refused. Terminal states are shut to everyone.'],
+  ['Documents stay outside the record.', 'The durable event shape has no field that can hold source text. What is retained is references, digests, bounded classifications, and caller-supplied labels.'],
+];
+
+export default function GovernedWorkflowProductPage() {
   return (
-    <code title={value} style={{ fontFamily: 'ui-monospace, SFMono-Regular, Menlo, monospace', fontSize: '0.78rem', color: '#3d4a5c' }}>
-      {short}…
-    </code>
-  );
-}
-
-const STATE_TONE: Record<string, string> = {
-  closed: '#1f6f43', approved: '#1f6f43', action_completed: '#1f6f43', action_authorized: '#1f6f43',
-  denied: '#8c2f2f', failed_final: '#8c2f2f', expired: '#8a5a1f', replay_blocked: '#8a5a1f',
-  needs_human_review: '#8a5a1f', failed_recoverable: '#8a5a1f',
-};
-
-function StateChip({ state }: { state: string }) {
-  return (
-    <span style={{
-      display: 'inline-block', padding: '0.1rem 0.45rem', borderRadius: '3px', fontSize: '0.76rem',
-      fontFamily: 'ui-monospace, SFMono-Regular, Menlo, monospace',
-      background: '#f1f3f6', color: STATE_TONE[state] ?? '#3d4a5c', border: '1px solid #dfe3e9',
-    }}>{state}</span>
-  );
-}
-
-export default function GovernedWorkflowPage() {
-  const scenarios = runAllScenarios();
-  const evidence = sanitizeEvidence([GWSG_EVIDENCE.claimForm, GWSG_EVIDENCE.policyDocument, GWSG_EVIDENCE.assessorNote]);
-
-  return (
-    <main style={{ maxWidth: '62rem', margin: '0 auto', padding: '2.5rem 1.25rem 4rem', color: '#1c2430', lineHeight: 1.55 }}>
+    <main style={{ maxWidth: '48rem', margin: '0 auto', padding: '2.5rem 1.25rem 4rem', color: '#1c2430', lineHeight: 1.6 }}>
       <p style={{ fontSize: '0.78rem', letterSpacing: '0.08em', textTransform: 'uppercase', color: '#8c2f2f', margin: 0 }}>
         Evaluation prototype
       </p>
-      <h1 style={{ fontSize: '2rem', margin: '0.35rem 0 0.75rem', lineHeight: 1.2 }}>Governed Workflow State Graph</h1>
-      <p style={{ fontSize: '1.02rem', color: '#3d4a5c', marginTop: 0 }}>
-        A governed, evidence-bounded representation of one operational workflow: document approval for a regulated
-        decision. It records what was decided, what evidence the decision was bound to, what remained uncertain,
-        who approved it, and how an interrupted run recovers.
+      <h1 style={{ fontSize: '2.1rem', margin: '0.35rem 0 0.85rem', lineHeight: 1.18 }}>Governed Workflow State Graph</h1>
+      <p style={{ fontSize: '1.1rem', color: '#3d4a5c', margin: '0 0 0.85rem' }}>
+        A governed, evidence-bounded record of <strong>one</strong> regulated decision — what was decided, on what
+        evidence, under which policy, approved by whom, and whether a retry could repeat an effect.
+      </p>
+      <p style={{ color: '#3d4a5c', margin: 0 }}>
+        It is not an agent memory store and not an autonomous runner. It decides and records; it never acts. Every
+        side effect is an intent plus a receipt, and in this release the middle is simulated.
       </p>
 
-      <div style={{ border: '1px solid #e0d3b8', background: '#fdf8ec', padding: '0.85rem 1rem', borderRadius: '4px', margin: '1.5rem 0' }}>
+      <div style={{ border: '1px solid #e0d3b8', background: '#fdf8ec', padding: '0.85rem 1rem', borderRadius: '4px', margin: '1.75rem 0' }}>
         <strong style={{ display: 'block', marginBottom: '0.3rem' }}>{CAPTION}</strong>
         <span style={{ fontSize: '0.92rem', color: '#4a4231' }}>
-          Every workflow below is invented for evaluation. No real claim, claimant, document, reviewer, or payment is
-          involved. This is not a deployed enterprise control plane, and it makes no payments and calls no providers —
-          side effects are recorded as an intent plus a receipt, and the middle is simulated.
+          The published corpus is invented for evaluation. No real claim, claimant, document, reviewer, or payment is
+          involved. This release is not connected to payment: it makes no payments, calls no providers, and dispatches
+          no messages.
         </span>
       </div>
 
-      <section aria-labelledby="workflow-fit" style={{ borderTop: '1px solid #e4e8ee', paddingTop: '1.5rem', marginTop: '2rem' }}>
-        <h2 id="workflow-fit" style={{ fontSize: '1.3rem', margin: 0 }}>Where it fits</h2>
-        <p style={{ marginTop: '0.45rem', color: '#3d4a5c' }}>
-          This is for a workflow where an organisation must later answer: what was decided, what evidence was in
-          scope, which policy applied, who approved it, and whether a retry could repeat an effect.
+      <section aria-labelledby="workflow-fit">
+        <h2 id="workflow-fit" style={{ fontSize: '1.35rem', margin: '0 0 0.3rem' }}>Where it fits</h2>
+        <p style={{ margin: 0, color: '#3d4a5c' }}>
+          For a workflow where an organisation must later answer: what was decided, what evidence was in scope, which
+          policy applied, who approved it, and whether a retry could repeat an effect.
         </p>
-        <ul style={{ paddingLeft: '1.15rem', margin: '0.75rem 0 0' }}>
-          <li><strong>Claims and policy review</strong> — bind a decision to the exact evidence set and policy version.</li>
-          <li><strong>Procurement</strong> — require a bounded approval before an agent may prepare a purchase action.</li>
-          <li><strong>Document approval</strong> — retain auditable metadata and digests without retaining document text in workflow state.</li>
-          <li><strong>Governed agent actions</strong> — record intended effects, receipts, uncertainty, and safe recovery paths.</li>
+        <dl style={{ margin: '1rem 0 0' }}>
+          {FITS.map((entry) => (
+            <div key={entry.title} style={{ borderTop: '1px solid #eef1f4', padding: '0.7rem 0' }}>
+              <dt style={{ fontWeight: 600 }}>{entry.title}</dt>
+              <dd style={{ margin: '0.2rem 0 0', color: '#4a5566' }}>{entry.body}</dd>
+            </div>
+          ))}
+        </dl>
+      </section>
+
+      <section aria-labelledby="guarantees" style={{ marginTop: '2.25rem' }}>
+        <h2 id="guarantees" style={{ fontSize: '1.35rem', margin: '0 0 0.3rem' }}>What it guarantees</h2>
+        <p style={{ margin: 0, color: '#3d4a5c' }}>
+          Each of these is enforced by the shape of the model rather than by convention, and each is covered by a test
+          that attacks it.
+        </p>
+        <ul style={{ paddingLeft: '1.15rem', margin: '0.8rem 0 0' }}>
+          {GUARANTEES.map(([claim, detail]) => (
+            <li key={claim} style={{ marginBottom: '0.55rem' }}>
+              <strong>{claim}</strong>{' '}
+              <span style={{ color: '#4a5566' }}>{detail}</span>
+            </li>
+          ))}
         </ul>
       </section>
 
-      <section aria-labelledby="evaluation-walkthrough" style={{ borderTop: '1px solid #e4e8ee', paddingTop: '1.5rem', marginTop: '2rem' }}>
-        <h2 id="evaluation-walkthrough" style={{ fontSize: '1.3rem', margin: 0 }}>A bounded evaluation walkthrough</h2>
+      <section aria-labelledby="evaluation-walkthrough" style={{ marginTop: '2.25rem' }}>
+        <h2 id="evaluation-walkthrough" style={{ fontSize: '1.35rem', margin: '0 0 0.3rem' }}>A bounded evaluation walkthrough</h2>
         <ol style={{ paddingLeft: '1.25rem', margin: '0.75rem 0 0' }}>
           <li><strong>Choose one decision.</strong> For example: approve a claim exception, approve a supplier change, or authorize an agent to prepare—not execute—an action.</li>
-          <li><strong>Declare the boundary.</strong> Define required evidence references, policy version, approval role, allowed operation, stop conditions, and retention constraints.</li>
-          <li><strong>Run the workflow twice.</strong> Exercise the normal path and one adverse path such as changed evidence, expired approval, denied policy, or an interrupted action.</li>
-          <li><strong>Review the evidence.</strong> Compare hash-chained transitions, reason codes, approval binding, uncertainty state, and recovery classification.</li>
+          <li><strong>Declare the boundary.</strong> Required evidence references, policy version, approval role, allowed operation, stop conditions, and retention constraints.</li>
+          <li><strong>Run the workflow twice.</strong> The normal path, and one adverse path such as changed evidence, expired approval, denied policy, or an interrupted action.</li>
+          <li><strong>Review the evidence.</strong> Hash-chained transitions, reason codes, approval binding, uncertainty state, and recovery classification.</li>
           <li><strong>Decide what would be required next.</strong> A production design needs the customer’s identity, storage, key-management, retention, integration, and control-owner decisions. This prototype does not supply them.</li>
         </ol>
         <p style={{ marginTop: '0.9rem' }}>
@@ -106,113 +130,34 @@ export default function GovernedWorkflowPage() {
         </p>
       </section>
 
-      <h2 style={{ fontSize: '1.3rem', marginTop: '2.25rem' }}>What this view shows and does not show</h2>
-      <p style={{ marginTop: '0.4rem' }}>
-        The durable event shape has no field that can hold document text. What an operator sees is references, digests,
-        bounded classifications and caller-supplied labels — enough to audit a decision without reading the file it was
-        made about.
-      </p>
+      <section aria-labelledby="see-for-yourself" style={{ marginTop: '2.25rem', borderTop: '1px solid #e4e8ee', paddingTop: '1.5rem' }}>
+        <h2 id="see-for-yourself" style={{ fontSize: '1.35rem', margin: '0 0 0.5rem' }}>See it for yourself</h2>
+        <ul style={{ paddingLeft: '1.15rem', margin: 0 }}>
+          <li>
+            <Link href="/governed-workflow/evidence">Ten worked scenarios</Link> — the normal approved path, denied
+            policy, uncertainty, approval expiry, changed evidence, duplicate replay, interrupted recovery, attempted
+            bypass, policy conflict, and the metadata-only audit guarantee. Rendered from engine output.
+          </li>
+          <li>
+            <a href={`/schemas/governed-workflow/transition-${GWSG_SCHEMA_VERSION}.json`}>Transition</a>,{' '}
+            <a href={`/schemas/governed-workflow/evidence-reference-${GWSG_SCHEMA_VERSION}.json`}>evidence reference</a>, and{' '}
+            <a href={`/schemas/governed-workflow/state-graph-${GWSG_SCHEMA_VERSION}.json`}>state graph</a> schemas.
+          </li>
+          <li><Link href="/docs">API documentation</Link> — the demo surface is stateless and accepts metadata only.</li>
+        </ul>
+      </section>
 
-      <h3 style={{ fontSize: '1.05rem', marginTop: '1.5rem' }}>Evidence in the reference workflow</h3>
-      <div style={{ overflowX: 'auto' }}>
-        <table style={{ borderCollapse: 'collapse', width: '100%', fontSize: '0.88rem', marginTop: '0.5rem' }}>
-          <thead>
-            <tr style={{ textAlign: 'left', borderBottom: '2px solid #dfe3e9' }}>
-              <th style={{ padding: '0.4rem 0.6rem 0.4rem 0' }}>Reference</th>
-              <th style={{ padding: '0.4rem 0.6rem' }}>Kind</th>
-              <th style={{ padding: '0.4rem 0.6rem' }}>Digest</th>
-              <th style={{ padding: '0.4rem 0.6rem' }}>Bytes</th>
-              <th style={{ padding: '0.4rem 0.6rem' }}>Established</th>
-            </tr>
-          </thead>
-          <tbody>
-            {evidence.map((entry) => (
-              <tr key={entry.evidenceId} style={{ borderBottom: '1px solid #eef1f4' }}>
-                <td style={{ padding: '0.4rem 0.6rem 0.4rem 0' }}><code style={{ fontSize: '0.82rem' }}>{entry.evidenceId}</code></td>
-                <td style={{ padding: '0.4rem 0.6rem' }}>{entry.kind}</td>
-                <td style={{ padding: '0.4rem 0.6rem' }}><Digest value={entry.contentSha256} /></td>
-                <td style={{ padding: '0.4rem 0.6rem' }}>{entry.contentBytes.toLocaleString()}</td>
-                <td style={{ padding: '0.4rem 0.6rem', fontSize: '0.82rem', color: '#4a5566' }}>
-                  structure + digest form only
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-      <p style={{ fontSize: '0.88rem', color: '#4a5566', marginTop: '0.6rem' }}>
-        A digest commits two parties to the same bytes. It does <strong>not</strong> establish that those bytes are
-        true, that the document is authentic, or that any provider executed anything. Those three properties are
-        recorded as <code>false</code> on every reference, because this prototype does not verify them.
-      </p>
+      <section aria-labelledby="honest-status" style={{ marginTop: '2.25rem' }}>
+        <h2 id="honest-status" style={{ fontSize: '1.35rem', margin: '0 0 0.5rem' }}>What this is not, yet</h2>
+        <p style={{ margin: 0, color: '#4a5566' }}>
+          No external audit, no certification, and no production deployment. The reference store is in-memory. Digests
+          are accepted from the caller, so the engine cannot detect a caller that supplies a digest for bytes it does
+          not hold. The event chain is tamper-evident but unsigned. Connecting a real disbursement is deliberately
+          future work, not an omission.
+        </p>
+      </section>
 
-      <h2 style={{ fontSize: '1.3rem', marginTop: '2.5rem' }}>Scenario timelines</h2>
-      <p style={{ marginTop: '0.4rem', color: '#3d4a5c' }}>
-        Each timeline below is produced by running the engine, not written by hand. The chain-integrity column is
-        recomputed for every render.
-      </p>
-
-      {scenarios.map((scenario) => {
-        const timeline = sanitizeTimeline(scenario.timeline);
-        const integrity = verifyEventChain(scenario.timeline);
-        return (
-          <section key={scenario.scenarioId} style={{ marginTop: '2rem', borderTop: '1px solid #e4e8ee', paddingTop: '1.25rem' }}>
-            <h3 style={{ fontSize: '1.08rem', margin: '0 0 0.2rem' }}>
-              {scenario.title} <StateChip state={scenario.instance.currentState} />
-            </h3>
-            <p style={{ margin: '0.25rem 0 0.75rem', color: '#4a5566', fontSize: '0.92rem' }}>{scenario.demonstrates}</p>
-            <p style={{ margin: '0 0 0.6rem', fontSize: '0.84rem', color: '#4a5566' }}>
-              Recovery: <code>{scenario.recovery.classification}</code>
-              {' · '}Chain integrity: <code>{integrity.valid ? 'verified' : `broken at ${integrity.brokenAt}`}</code>
-              {scenario.recovery.lastSafeCheckpoint ? <> · Last safe checkpoint: <code>{scenario.recovery.lastSafeCheckpoint.state}</code></> : null}
-            </p>
-            <div style={{ overflowX: 'auto' }}>
-              <table style={{ borderCollapse: 'collapse', width: '100%', fontSize: '0.84rem' }}>
-                <thead>
-                  <tr style={{ textAlign: 'left', borderBottom: '2px solid #dfe3e9' }}>
-                    <th style={{ padding: '0.35rem 0.5rem 0.35rem 0' }}>#</th>
-                    <th style={{ padding: '0.35rem 0.5rem' }}>Transition</th>
-                    <th style={{ padding: '0.35rem 0.5rem' }}>Actor</th>
-                    <th style={{ padding: '0.35rem 0.5rem' }}>Uncertainty</th>
-                    <th style={{ padding: '0.35rem 0.5rem' }}>Authorization</th>
-                    <th style={{ padding: '0.35rem 0.5rem' }}>Approval</th>
-                    <th style={{ padding: '0.35rem 0.5rem' }}>Evidence set</th>
-                    <th style={{ padding: '0.35rem 0.5rem' }}>Reason codes</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {timeline.map((event) => (
-                    <tr key={event.transitionSha256} style={{ borderBottom: '1px solid #eef1f4' }}>
-                      <td style={{ padding: '0.35rem 0.5rem 0.35rem 0' }}>{event.sequence}</td>
-                      <td style={{ padding: '0.35rem 0.5rem', whiteSpace: 'nowrap' }}>
-                        <StateChip state={event.priorState} /> <span style={{ color: '#9aa4b2' }}>→</span> <StateChip state={event.nextState} />
-                      </td>
-                      <td style={{ padding: '0.35rem 0.5rem' }}>{event.actor.actorRole}</td>
-                      <td style={{ padding: '0.35rem 0.5rem' }}>{event.uncertaintyStatus}</td>
-                      <td style={{ padding: '0.35rem 0.5rem' }}>{event.authorizationResult}</td>
-                      <td style={{ padding: '0.35rem 0.5rem' }}>{event.approvalState}</td>
-                      <td style={{ padding: '0.35rem 0.5rem' }}><Digest value={event.evidenceSetSha256} /></td>
-                      <td style={{ padding: '0.35rem 0.5rem' }}>
-                        <code style={{ fontSize: '0.78rem' }}>{event.reasonCodes.join(', ')}</code>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          </section>
-        );
-      })}
-
-      <h2 style={{ fontSize: '1.3rem', marginTop: '2.75rem' }}>Schemas and documentation</h2>
-      <ul style={{ paddingLeft: '1.15rem' }}>
-        <li><a href={`/schemas/governed-workflow/transition-${GWSG_SCHEMA_VERSION}.json`}>Transition record schema</a></li>
-        <li><a href={`/schemas/governed-workflow/evidence-reference-${GWSG_SCHEMA_VERSION}.json`}>Evidence reference schema</a></li>
-        <li><a href={`/schemas/governed-workflow/state-graph-${GWSG_SCHEMA_VERSION}.json`}>Reference state graph schema</a></li>
-        <li><Link href="/docs">Documentation index</Link></li>
-      </ul>
-
-      <p style={{ marginTop: '2rem', fontSize: '0.86rem', color: '#6a7280', borderTop: '1px solid #e4e8ee', paddingTop: '1rem' }}>
+      <p style={{ marginTop: '2.25rem', fontSize: '0.86rem', color: '#6a7280', borderTop: '1px solid #e4e8ee', paddingTop: '1rem' }}>
         {CAPTION} Schema version {GWSG_SCHEMA_VERSION}.
       </p>
     </main>

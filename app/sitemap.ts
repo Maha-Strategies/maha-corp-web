@@ -30,6 +30,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${baseUrl}/consulting/ai-infrastructure` },
     { url: `${baseUrl}/consulting/evidence-policy` },
     { url: `${baseUrl}/method` },
+    { url: `${baseUrl}/governed-workflow` },
+    { url: `${baseUrl}/governed-workflow/evidence` },
     { url: `${baseUrl}/software` },
     { url: `${baseUrl}/doctrine` },
     { url: `${baseUrl}/research` },
