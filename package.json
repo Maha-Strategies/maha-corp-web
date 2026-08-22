@@ -90,7 +90,9 @@
     "interop:mcp": "node interop/mcp/client-probe.mjs",
     "interop:a2a": "node interop/a2a/caller.mjs",
     "evaluate:transports": "node --experimental-strip-types scripts/evaluate-transports.ts",
-    "evaluate:claims-exception": "node --experimental-strip-types scripts/run-claims-exception-evaluation.ts"
+    "evaluate:claims-exception": "node --experimental-strip-types scripts/run-claims-exception-evaluation.ts",
+    "generate:gateway-interop-fixtures": "node --experimental-strip-types scripts/generate-gateway-interop-fixtures.ts",
+    "verify:gateway-interop": "node --test --experimental-strip-types test/mcp-gateway-interop.test.ts"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.115.0",
