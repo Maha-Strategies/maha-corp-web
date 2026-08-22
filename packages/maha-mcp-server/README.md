@@ -43,6 +43,15 @@ There is no sixth tool, and none deploys, pays, or calls a provider.
 - **Every response states its boundary**, grading each field
   `locally_verified`, `trusted_pass_through`, or `not_established`.
 
+## A note on the dependency
+
+This package declares `@modelcontextprotocol/sdk` as a real dependency, because
+a server that speaks MCP needs it. The Maha web application does **not**: the SDK
+is a devDependency there, used to compile and exercise this package. That
+distinction is load-bearing — the SDK pulls in `express-rate-limit` and, through
+it, an `ip-address` release carrying a high-severity SSRF advisory, which has no
+business in a web application that never imports any of it.
+
 ## What this is not
 
 Not a deployed service — you start it. Not evidence of provider compatibility;
