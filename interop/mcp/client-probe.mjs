@@ -2,27 +2,30 @@
 // stdio. Nothing here is Maha code. Records metadata only.
 import { existsSync, readFileSync } from 'node:fs'
 
-// The SDK is a harness-local dependency and deliberately not a dependency of
-// this repo, so a fresh checkout will not have it. Say so plainly rather than
-// letting the import throw ERR_MODULE_NOT_FOUND at someone.
-const sdkRoot = new URL('./node_modules/@modelcontextprotocol/sdk/', import.meta.url)
-if (!existsSync(sdkRoot)) {
-  console.error('The MCP harness needs its own dependency, which this repo intentionally does not carry.\n  npm --prefix interop/mcp install')
-  process.exit(1)
-}
-
-const { Client } = await import('@modelcontextprotocol/sdk/client/index.js')
-const { StdioClientTransport } = await import('@modelcontextprotocol/sdk/client/stdio.js')
+// The SDK is now a repo dependency, because the product ships an MCP server
+// and a server that speaks MCP may reasonably depend on the MCP SDK.
+import { Client } from '@modelcontextprotocol/sdk/client/index.js'
+import { StdioClientTransport } from '@modelcontextprotocol/sdk/client/stdio.js'
 // The SDK does not export package.json, so read it from disk rather than
 // silently recording an undefined version.
 const sdkVersion = JSON.parse(
-  readFileSync(new URL('./node_modules/@modelcontextprotocol/sdk/package.json', import.meta.url), 'utf8'),
+  readFileSync(new URL('../../node_modules/@modelcontextprotocol/sdk/package.json', import.meta.url), 'utf8'),
 ).version
 
 const evidence = { client: { name: '@modelcontextprotocol/sdk', version: sdkVersion, role: 'third-party MCP client' },
+  server: { name: '@mahastrategies/maha-mcp-server', kind: 'shipped binary, not a harness shim' },
   runtime: { node: process.version }, surface: [], credentialsUsed: false, providerCallsMade: 0, networkEgress: 'none (stdio child process)' }
 
-const transport = new StdioClientTransport({ command: process.execPath, args: ['--experimental-strip-types', new URL('./server-shim.mts', import.meta.url).pathname] })
+// Maha's own shipped server binary. Previously this spawned a transport shim
+// written for the harness, which meant the validation could only ever say the
+// dispatcher was consumable if someone else supplied the wire. It now drives
+// the artifact a customer would actually install.
+const serverBinary = new URL('../../packages/maha-mcp-server/dist/maha-mcp-server/cli.js', import.meta.url).pathname
+if (!existsSync(serverBinary)) {
+  console.error(`Build the server first:\n  npm --prefix packages/maha-mcp-server run build`)
+  process.exit(1)
+}
+const transport = new StdioClientTransport({ command: process.execPath, args: [serverBinary] })
 const client = new Client({ name: 'maha-interop-probe', version: '0.0.0' }, { capabilities: {} })
 
 await client.connect(transport)

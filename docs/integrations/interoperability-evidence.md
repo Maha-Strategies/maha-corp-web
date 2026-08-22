@@ -11,15 +11,20 @@ cannot prove a client could reach it, because the test author constructs request
 shapes by reading the implementation, which is precisely what an outside caller
 cannot do.
 
-## What was found first
+## What was found first, and what changed
 
-Both modules ship **definitions and a dispatcher, and no transport**. There is no
-stdio server, no JSON-RPC loop, and no HTTP listener in either. So neither can be
-connected to as shipped, and both harnesses supply the transport themselves.
+Both modules originally shipped **definitions and a dispatcher, and no
+transport** — no stdio server, no JSON-RPC loop, no HTTP listener. Neither could
+be connected to as shipped, so both harnesses supplied the transport themselves,
+and every claim was bounded accordingly: the schemas were *consumable by a client
+when bound to a transport someone else wrote*.
 
-**This bounds every claim below.** What is validated is that Maha's schemas and
-dispatch are *consumable by a client when bound to a standard transport*. That
-Maha ships a connectable server is **not** claimed, because it does not.
+That gap is now closed. `@mahastrategies/maha-mcp-server` and
+`@mahastrategies/maha-a2a-server` ship the transports, and the MCP harness drives
+**the shipped binary** rather than a shim. See
+`docs/integrations/transport-evaluation-guide.md`.
+
+The A2A grade is unchanged: still local-only, for the reason below.
 
 ---
 
@@ -28,8 +33,9 @@ Maha ships a connectable server is **not** claimed, because it does not.
 | | |
 | --- | --- |
 | Client | `@modelcontextprotocol/sdk` **1.29.0** — the official MCP reference implementation |
+| Server | `@mahastrategies/maha-mcp-server` — the shipped binary, not a harness shim |
 | Runtime | Node v26.5.0 |
-| Transport | stdio to a child process |
+| Transport | stdio to a real child process |
 | Egress | none; no credential read; 0 provider calls |
 
 Reproduce with `npm run interop:mcp`.
@@ -136,8 +142,8 @@ bans.
 
 ## Claims it does **not** support
 
-- That Maha ships an MCP server or an A2A endpoint a client can connect to. It
-  ships neither; both harnesses supply the transport.
+- That either transport is *deployed*. Both bind locally and are started by the
+  evaluator; there is no hosted endpoint.
 - That A2A has been validated against an independent implementation. It has not.
 - That `compile_sanitized` works end to end. It fail-closed on absent
   configuration and was never exercised against a configured compiler.

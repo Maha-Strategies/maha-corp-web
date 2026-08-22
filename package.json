@@ -88,7 +88,8 @@
     "pack:x402-buyer-policy": "npm --prefix packages/x402-buyer-policy run pack:dry-run",
     "test": "node --test --experimental-strip-types test/*.test.ts",
     "interop:mcp": "node interop/mcp/client-probe.mjs",
-    "interop:a2a": "node interop/a2a/caller.mjs"
+    "interop:a2a": "node interop/a2a/caller.mjs",
+    "evaluate:transports": "node --experimental-strip-types scripts/evaluate-transports.ts"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.115.0",
@@ -115,6 +116,7 @@
   },
   "devDependencies": {
     "@coinbase/cdp-sdk": "^1.55.0",
+    "@modelcontextprotocol/sdk": "^1.29.0",
     "@tailwindcss/postcss": "^4",
     "@tailwindcss/typography": "^0.5.20",
     "@types/node": "^26",

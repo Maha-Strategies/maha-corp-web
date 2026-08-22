@@ -1,0 +1,20 @@
+{
+  "name": "@mahastrategies/maha-a2a-server",
+  "version": "0.1.0",
+  "description": "A2A agent card and task endpoint over loopback HTTP for Maha Context Control.",
+  "keywords": ["maha", "context-control", "mcp", "a2a", "evidence", "local-first"],
+  "license": "MIT",
+  "homepage": "https://github.com/Maha-Strategies/maha-corp-web/tree/main/packages/maha-a2a-server#readme",
+  "repository": { "type": "git", "url": "git+https://github.com/Maha-Strategies/maha-corp-web.git", "directory": "packages/maha-a2a-server" },
+  "bugs": { "url": "https://github.com/Maha-Strategies/maha-corp-web/issues" },
+  "type": "module",
+  "files": ["dist", "README.md", "LICENSE"],
+  "main": "./dist/maha-a2a-server/index.js",
+  "types": "./dist/maha-a2a-server/index.d.ts",
+  "exports": { ".": { "types": "./dist/maha-a2a-server/index.d.ts", "import": "./dist/maha-a2a-server/index.js", "default": "./dist/maha-a2a-server/index.js" } },
+  "bin": { "maha-a2a-server": "./dist/maha-a2a-server/cli.js" },
+  "dependencies": {},
+  "engines": { "node": ">=20" },
+  "publishConfig": { "access": "public" },
+  "scripts": { "build": "tsc --project tsconfig.json", "pack:dry-run": "npm pack --dry-run", "prepack": "npm run build" }
+}
