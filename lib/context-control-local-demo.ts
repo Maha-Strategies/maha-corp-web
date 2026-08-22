@@ -21,12 +21,16 @@ export const LOCAL_DEMO_REQUEST = {
 export const LOCAL_DEMO_EXPECTATIONS = {
   requestOutcome: 'proceed',
   gateway: 'wso2',
+  evidenceStatus: 'ok',
 } as const
 
 export function isSuccessfulLocalDemo(result: {
   request?: { outcome?: unknown }
   gateway?: { status?: unknown }
+  evidence?: { status?: unknown; findings?: unknown }
 }): boolean {
   return result.request?.outcome === LOCAL_DEMO_EXPECTATIONS.requestOutcome &&
-    result.gateway?.status === 'ok'
+    result.gateway?.status === 'ok' &&
+    result.evidence?.status === LOCAL_DEMO_EXPECTATIONS.evidenceStatus &&
+    Array.isArray(result.evidence?.findings)
 }

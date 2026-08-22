@@ -17,10 +17,12 @@ npm run demo:context-control
 ```
 
 This starts the shipped MCP stdio binary and returns a metadata-only JSON
-record for two successful, locally useful checks:
+record for three successful, locally useful checks:
 
 1. a synthetic request envelope is admissible under the Context Control gate;
-2. the WSO2 gateway artifact passes static contract validation.
+2. the WSO2 gateway artifact passes static contract validation; and
+3. a synthetic compiled-evidence record is structurally coherent, with hash
+   binding labelled trusted pass-through rather than claimed as verified.
 
 The demo has no credential, network endpoint, provider call, payment, or
 customer source text. It is an evaluator journey, not a compression benchmark

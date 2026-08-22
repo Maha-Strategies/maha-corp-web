@@ -6,6 +6,7 @@
  * verify a metadata-only synthetic evidence record. No credential, network
  * endpoint, provider, payment, or source document is involved.
  */
+import { readFile } from 'node:fs/promises'
 import { existsSync } from 'node:fs'
 import { fileURLToPath } from 'node:url'
 
@@ -16,6 +17,7 @@ import { LOCAL_DEMO_EXPECTATIONS, LOCAL_DEMO_REQUEST, isSuccessfulLocalDemo } fr
 
 const root = fileURLToPath(new URL('..', import.meta.url))
 const binary = `${root}packages/maha-mcp-server/dist/maha-mcp-server/cli.js`
+const evidencePath = `${root}fixtures/context-control-local-demo/evidence.json`
 
 if (!existsSync(binary)) {
   process.stderr.write('Build the shipped MCP server first: npm --prefix packages/maha-mcp-server run build\n')
@@ -35,13 +37,16 @@ function payload(response: { content?: Array<{ text?: string }> }): Record<strin
 
 try {
   await client.connect(transport)
-  const [requestResponse, gatewayResponse] = await Promise.all([
+  const evidence = JSON.parse(await readFile(evidencePath, 'utf8'))
+  const [requestResponse, gatewayResponse, evidenceResponse] = await Promise.all([
     client.callTool({ name: 'context_control.validate_request', arguments: { body: LOCAL_DEMO_REQUEST } }),
     client.callTool({ name: 'context_control.gateway_status', arguments: { gateway: LOCAL_DEMO_EXPECTATIONS.gateway } }),
+    client.callTool({ name: 'context_control.verify_evidence', arguments: { evidence } }),
   ])
 
   const requestPayload = payload(requestResponse)
   const gatewayPayload = payload(gatewayResponse)
+  const evidencePayload = payload(evidenceResponse)
   const result = {
     demo: 'maha-context-control-local-success-path',
     synthetic: true,
@@ -51,7 +56,8 @@ try {
     paymentsInitiated: false,
     request: requestPayload.result,
     gateway: gatewayPayload.result,
-    boundaries: [requestPayload.boundary, gatewayPayload.boundary],
+    evidence: evidencePayload.result,
+    boundaries: [requestPayload.boundary, gatewayPayload.boundary, evidencePayload.boundary],
   }
 
   if (!isSuccessfulLocalDemo(result)) {
