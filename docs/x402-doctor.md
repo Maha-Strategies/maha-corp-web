@@ -22,11 +22,13 @@ future probe will match.
 
 The [versioned live-adapter result artifact](/conformance/x402-v2/x402-doctor-live-adapter-results.json)
 and its [JSON Schema](/conformance/x402-v2/x402-doctor-live-adapter-results.schema.json)
-exercise the three meaningful same-host control outcomes: route-confirming
-`404`, payment-gated `402`, and soft `200`. It is deliberately a synthetic,
-in-memory transport run. It proves the adapter's classification behavior, not
-the state of a public host, registry listing, third-party client behavior, or
-payment settlement.
+exercise all three route-existence verdicts (`confirmed`, `absent`, and
+`uninformative`) as well as a successful and failed named-Maha-parser outcome.
+The fixtures include route-confirming `404`, payment-gated `402`, soft `200`,
+a malformed `PAYMENT-REQUIRED` header, and a declared `404` route. It is
+deliberately a synthetic, in-memory transport run. It proves the adapter's
+classification behavior, not the state of a public host, registry listing,
+third-party client behavior, or payment settlement.
 
 The doctor also implements the draft [`declaration-integrity` proposal](./x402-declaration-digest-proposal.md). When a seller and catalog expose the proposed digest, it independently hashes the live declaration and compares that value with the catalog-computed indexed digest. Reports label this source as `catalog`. Until catalogs support the proposal, the existing field-normalization comparison remains available and is explicitly labeled `reconstructed`.
 
