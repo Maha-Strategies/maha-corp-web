@@ -19,7 +19,24 @@ function readyInput(): PreMoneyGateInput {
     token: { address, behavior: 'standard_erc20' as const, allowlisted: true },
     buyer: clearCounterparty,
     seller: { ...clearCounterparty, accountKind: 'eoa' as const, canWithdrawEth: null, canReceivePlainEth: null },
-    escrow: { sourceVerified: true, timeoutBlocks: 100, releaseFailureRecoveryTest: 'pass' as const, unresponsiveBuyerRecoveryTest: 'pass' as const, administratorUnavailableRecoveryTest: 'pass' as const },
+    escrow: {
+      sourceVerified: true,
+      timeoutBlocks: 100,
+      releaseFailureRecoveryTest: 'pass' as const,
+      unresponsiveBuyerRecoveryTest: 'pass' as const,
+      administratorUnavailableRecoveryTest: 'pass' as const,
+      enforcement: {
+        supportsQuotedOrders: true,
+        enforcesDidAddressOrderBinding: true,
+        enforcesSignedDeliveryReference: true,
+        enforcesTokenBehaviorAllowlist: true,
+        enforcesCounterpartyScreening: true,
+        enforcesRecipientCapabilityCheck: true,
+        enforcesReleasePreflight: true,
+        shipmentDisputeRecovery: 'tested' as const,
+        administratorRecovery: 'panel_tested' as const,
+      },
+    },
     didOrderBinding: { verified: true, sellerDid: 'did:key:zexample', sellerAddress: address, escrowOrderId: orderId },
   }
 }
@@ -60,6 +77,29 @@ test('failed release recovery, unresponsive buyer, and unavailable administrator
     assert.equal(result.decision, 'PRE_MONEY_BLOCKED')
     assert.ok(result.blockingReasons.some((reason) => reason.includes('recovery_test_')))
   }
+})
+
+test('the confirmed current escrobot and ClawFace boundary is blocked for an RFQ order', () => {
+  const input = readyInput()
+  input.escrow.enforcement = {
+    supportsQuotedOrders: false,
+    enforcesDidAddressOrderBinding: false,
+    enforcesSignedDeliveryReference: false,
+    enforcesTokenBehaviorAllowlist: false,
+    enforcesCounterpartyScreening: false,
+    enforcesRecipientCapabilityCheck: false,
+    enforcesReleasePreflight: false,
+    shipmentDisputeRecovery: 'admin_only',
+    administratorRecovery: 'single_admin',
+  }
+  const result = evaluatePreMoneyGate(input)
+  assert.equal(result.version, '1.1.0')
+  assert.equal(result.decision, 'PRE_MONEY_BLOCKED')
+  assert.ok(result.blockingReasons.includes('escrow_does_not_support_quoted_orders'))
+  assert.ok(result.blockingReasons.includes('escrow_does_not_enforce_token_behavior_allowlist'))
+  assert.ok(result.blockingReasons.includes('shipment_dispute_recovery_admin_only'))
+  assert.ok(result.blockingReasons.includes('administrator_recovery_single_admin'))
+  assert.equal(result.moneyAuthorized, false)
 })
 
 test('a Seller DID key binds the exact seller wallet and escrow-generated order id', () => {

@@ -1,6 +1,6 @@
 # CABEZON pre-money gate
 
-Version 1.0.0 · synthetic-contract specification · no live payment authority
+Version 1.1.0 · synthetic-contract specification · no live payment authority
 
 ## Purpose
 
@@ -53,6 +53,34 @@ instructions.
 ## Deployment boundary
 
 This gate is not connected to ClawFace, escrobot, an on-chain screening oracle,
-or a funds-release transaction. Before any payment test, Bryan and the chosen
-escrower must state which conditions they enforce before deposit and immediately
-before release, and how a blocked release is routed to arbitration/recovery.
+or a funds-release transaction. Before any payment test, the chosen escrower
+must state which conditions it enforces before deposit and immediately before
+release, and how a blocked release is routed to arbitration/recovery.
+
+## Confirmed current CABEZON boundary
+
+Recorded 2026-08-22 from Bryan Woods&apos;s implementation description. This is a
+description of the currently confirmed boundary, not an audit of ClawFace or
+escrobot source code.
+
+- **RFQ incompatibility:** escrobot requires a non-zero price to create an
+  order. An enquiry-only offer with `purchasable: false` cannot use it as a
+  paid RFQ escrower.
+- **No protocol-bound commerce evidence:** escrobot does not enforce the
+  Seller DID-to-wallet-to-`bytes32` order binding or a Seller-DID-signed,
+  order-bound delivery reference. Putting a signature inside a tracking field
+  would be an application convention, not an escrow contract control.
+- **No stated escrow allowlist or preflight:** CARP&apos;s ACL establishes a
+  handshake identity boundary; it is not a token-behavior allowlist, sanctions
+  or blocklist screen, payability check, recipient-capability check, or
+  before-release control. ClawFace currently proxies escrobot transactions
+  rather than enforcing this gate.
+- **Recovery remains unproven:** a timeout path and admin force-resolution are
+  described, but shipment disputes can require buyer confirmation or human
+  arbitration. The planned administrator panel is not yet a tested quorum or
+  unavailable-panel recovery mechanism.
+
+Therefore `escrobot_current` is modeled as `PRE_MONEY_BLOCKED` for an RFQ
+order. It may be useful for a separately scoped, non-RFQ commerce test, but it
+does not satisfy this gate. A paid RFQ test needs a specialized escrower or a
+new contract with quoted-order support and explicit evidence/control hooks.

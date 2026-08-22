@@ -1,4 +1,4 @@
-export const CARP_PRE_MONEY_GATE_VERSION = '1.0.0'
+export const CARP_PRE_MONEY_GATE_VERSION = '1.1.0'
 
 export type GateResult = {
   version: typeof CARP_PRE_MONEY_GATE_VERSION
@@ -33,6 +33,17 @@ export type PreMoneyGateInput = {
     releaseFailureRecoveryTest: 'pass' | 'fail' | 'not_run'
     unresponsiveBuyerRecoveryTest: 'pass' | 'fail' | 'not_run'
     administratorUnavailableRecoveryTest: 'pass' | 'fail' | 'not_run'
+    enforcement: {
+      supportsQuotedOrders: boolean
+      enforcesDidAddressOrderBinding: boolean
+      enforcesSignedDeliveryReference: boolean
+      enforcesTokenBehaviorAllowlist: boolean
+      enforcesCounterpartyScreening: boolean
+      enforcesRecipientCapabilityCheck: boolean
+      enforcesReleasePreflight: boolean
+      shipmentDisputeRecovery: 'tested' | 'admin_only' | 'unknown'
+      administratorRecovery: 'panel_tested' | 'single_admin' | 'untested' | 'unknown'
+    }
   }
   didOrderBinding: {
     verified: boolean
@@ -52,6 +63,23 @@ export function evaluatePreMoneyGate(input: PreMoneyGateInput): GateResult {
   const blockingReasons: string[] = []
   const requiredEvidence: string[] = []
   if (!input.escrow.sourceVerified) blockingReasons.push('escrow_source_not_verified')
+  if (!input.escrow.enforcement.supportsQuotedOrders) blockingReasons.push('escrow_does_not_support_quoted_orders')
+  for (const [name, enforced] of Object.entries({
+    did_address_order_binding: input.escrow.enforcement.enforcesDidAddressOrderBinding,
+    signed_delivery_reference: input.escrow.enforcement.enforcesSignedDeliveryReference,
+    token_behavior_allowlist: input.escrow.enforcement.enforcesTokenBehaviorAllowlist,
+    counterparty_screening: input.escrow.enforcement.enforcesCounterpartyScreening,
+    recipient_capability_check: input.escrow.enforcement.enforcesRecipientCapabilityCheck,
+    release_preflight: input.escrow.enforcement.enforcesReleasePreflight,
+  })) {
+    if (!enforced) blockingReasons.push(`escrow_does_not_enforce_${name}`)
+  }
+  if (input.escrow.enforcement.shipmentDisputeRecovery !== 'tested') {
+    blockingReasons.push(`shipment_dispute_recovery_${input.escrow.enforcement.shipmentDisputeRecovery}`)
+  }
+  if (input.escrow.enforcement.administratorRecovery !== 'panel_tested') {
+    blockingReasons.push(`administrator_recovery_${input.escrow.enforcement.administratorRecovery}`)
+  }
   if (!input.token.allowlisted) blockingReasons.push('token_not_allowlisted')
   if (input.token.behavior !== 'standard_erc20') blockingReasons.push(`token_behavior_${input.token.behavior}`)
   for (const [role, counterparty] of [['buyer', input.buyer], ['seller', input.seller]] as const) {
@@ -79,6 +107,7 @@ export function evaluatePreMoneyGate(input: PreMoneyGateInput): GateResult {
     'Seller EOA/contract and ETH-withdraw capability evidence where applicable',
     'Escrow timeout and recovery-test evidence',
     'Seller DID-to-address-to-escrow-order signed binding',
+    'Escrower enforcement statement for quoted orders, pre-deposit, release, and recovery controls',
   )
   return {
     version: CARP_PRE_MONEY_GATE_VERSION,
