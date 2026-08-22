@@ -1,8 +1,18 @@
 // Third-party client probe: the official MCP SDK acting as a real client over
 // stdio. Nothing here is Maha code. Records metadata only.
-import { Client } from '@modelcontextprotocol/sdk/client/index.js'
-import { StdioClientTransport } from '@modelcontextprotocol/sdk/client/stdio.js'
-import { readFileSync } from 'node:fs'
+import { existsSync, readFileSync } from 'node:fs'
+
+// The SDK is a harness-local dependency and deliberately not a dependency of
+// this repo, so a fresh checkout will not have it. Say so plainly rather than
+// letting the import throw ERR_MODULE_NOT_FOUND at someone.
+const sdkRoot = new URL('./node_modules/@modelcontextprotocol/sdk/', import.meta.url)
+if (!existsSync(sdkRoot)) {
+  console.error('The MCP harness needs its own dependency, which this repo intentionally does not carry.\n  npm --prefix interop/mcp install')
+  process.exit(1)
+}
+
+const { Client } = await import('@modelcontextprotocol/sdk/client/index.js')
+const { StdioClientTransport } = await import('@modelcontextprotocol/sdk/client/stdio.js')
 // The SDK does not export package.json, so read it from disk rather than
 // silently recording an undefined version.
 const sdkVersion = JSON.parse(

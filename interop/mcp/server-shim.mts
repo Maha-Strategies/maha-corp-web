@@ -2,9 +2,12 @@
 // Maha's maha-mcp package ships tool definitions and a dispatcher but no
 // wire-protocol server, so this binds them to the official SDK's stdio server
 // purely so a real third-party client has something to connect to.
-import { Server } from '@modelcontextprotocol/sdk/server/index.js'
-import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js'
-import { CallToolRequestSchema, ListToolsRequestSchema } from '@modelcontextprotocol/sdk/types.js'
+// Imported dynamically for the same reason as the probe: the SDK is
+// harness-local, and this file is excluded from the repo typecheck because the
+// product must not gain a dependency on it.
+const { Server } = await import('@modelcontextprotocol/sdk/server/index.js')
+const { StdioServerTransport } = await import('@modelcontextprotocol/sdk/server/stdio.js')
+const { CallToolRequestSchema, ListToolsRequestSchema } = await import('@modelcontextprotocol/sdk/types.js')
 import { MCP_TOOLS, MCP_SERVER_NAME, MCP_SERVER_VERSION, callMcpTool } from '../../lib/maha-mcp/index.ts'
 
 const server = new Server({ name: MCP_SERVER_NAME, version: MCP_SERVER_VERSION }, { capabilities: { tools: {} } })

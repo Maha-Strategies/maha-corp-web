@@ -33,7 +33,8 @@ npm run interop:a2a
 
 `interop:mcp` needs `@modelcontextprotocol/sdk`, which is deliberately **not** a
 dependency of this repo — the product does not depend on it and should not start
-to. Install it into the harness directory only:
+to. Running it without the SDK prints the install line rather than a stack
+trace. Install it into the harness directory only:
 
 ```bash
 npm --prefix interop/mcp install
@@ -49,3 +50,11 @@ serialization boundary between caller and handler, and the caller imports
 nothing from Maha — it builds every request from the published agent card.
 
 That constraint is what surfaced the finding in `docs/integrations/interoperability-evidence.md`.
+
+## Why `interop/` is excluded from the repo typecheck
+
+`tsconfig.json` and the ESLint config both skip this directory. The harness
+imports an SDK the repo does not carry, so including it would make the product's
+CI depend on a package the product does not use — CI proved the point by failing
+exactly that way before the exclusion was added. The harness is typechecked only
+where its own dependency is installed.
