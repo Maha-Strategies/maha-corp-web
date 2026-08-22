@@ -1,0 +1,49 @@
+{
+  "name": "@mahastrategies/maha-mcp",
+  "version": "0.1.0",
+  "description": "MCP server exposing read-only context-control evaluation tools.",
+  "keywords": [
+    "maha",
+    "context-control",
+    "llm",
+    "gateway",
+    "evidence"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/Maha-Strategies/maha-corp-web/tree/main/packages/maha-mcp#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Maha-Strategies/maha-corp-web.git",
+    "directory": "packages/maha-mcp"
+  },
+  "bugs": {
+    "url": "https://github.com/Maha-Strategies/maha-corp-web/issues"
+  },
+  "type": "module",
+  "sideEffects": false,
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "main": "./dist/maha-mcp/index.js",
+  "types": "./dist/maha-mcp/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/maha-mcp/index.d.ts",
+      "import": "./dist/maha-mcp/index.js",
+      "default": "./dist/maha-mcp/index.js"
+    }
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "tsc --project tsconfig.json",
+    "pack:dry-run": "npm pack --dry-run",
+    "prepack": "npm run build"
+  }
+}

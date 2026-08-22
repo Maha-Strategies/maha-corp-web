@@ -1,0 +1,52 @@
+{
+  "name": "@mahastrategies/context-control-cli",
+  "version": "0.1.0",
+  "description": "maha-context CLI: doctor, compile, verify, and static gateway adapter validation.",
+  "keywords": [
+    "maha",
+    "context-control",
+    "llm",
+    "gateway",
+    "evidence"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/Maha-Strategies/maha-corp-web/tree/main/packages/context-control-cli#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Maha-Strategies/maha-corp-web.git",
+    "directory": "packages/context-control-cli"
+  },
+  "bugs": {
+    "url": "https://github.com/Maha-Strategies/maha-corp-web/issues"
+  },
+  "type": "module",
+  "sideEffects": false,
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "main": "./dist/context-control-cli/index.js",
+  "types": "./dist/context-control-cli/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/context-control-cli/index.d.ts",
+      "import": "./dist/context-control-cli/index.js",
+      "default": "./dist/context-control-cli/index.js"
+    }
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "tsc --project tsconfig.json",
+    "pack:dry-run": "npm pack --dry-run",
+    "prepack": "npm run build"
+  },
+  "bin": {
+    "maha-context": "./dist/context-control-cli/cli.js"
+  }
+}

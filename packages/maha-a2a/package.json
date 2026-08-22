@@ -1,0 +1,49 @@
+{
+  "name": "@mahastrategies/maha-a2a",
+  "version": "0.1.0",
+  "description": "A2A agent card and handler for a bounded context-control evaluation capability.",
+  "keywords": [
+    "maha",
+    "context-control",
+    "llm",
+    "gateway",
+    "evidence"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/Maha-Strategies/maha-corp-web/tree/main/packages/maha-a2a#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Maha-Strategies/maha-corp-web.git",
+    "directory": "packages/maha-a2a"
+  },
+  "bugs": {
+    "url": "https://github.com/Maha-Strategies/maha-corp-web/issues"
+  },
+  "type": "module",
+  "sideEffects": false,
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "main": "./dist/maha-a2a/index.js",
+  "types": "./dist/maha-a2a/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/maha-a2a/index.d.ts",
+      "import": "./dist/maha-a2a/index.js",
+      "default": "./dist/maha-a2a/index.js"
+    }
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "tsc --project tsconfig.json",
+    "pack:dry-run": "npm pack --dry-run",
+    "prepack": "npm run build"
+  }
+}

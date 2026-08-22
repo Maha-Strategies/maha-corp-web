@@ -31,7 +31,10 @@ const evidence = (path: string, note: string): SourceRef => ({ path, kind: 'evid
 
 const COMPILER = 'lib/context-compiler.ts'
 const INTERCEPTOR = 'lib/integrations/wso2-context-interceptor.ts'
-const GATEWAY_CONTRACT = 'lib/integrations/gateway-context-contract.ts'
+// The compiler-free half, where the envelope rules, the bypass decision and
+// the header construction actually live. Cited directly so a reviewer opens
+// the file that defines the behaviour, not one that re-exports it.
+const GATEWAY_GATE = 'lib/integrations/gateway-context-gate.ts'
 const INTERCEPTOR_TEST = 'test/wso2-context-interceptor.test.ts'
 const METERING = 'lib/context-compiler-metering.ts'
 const REQUEST_ROUTE = 'app/api/integrations/wso2/context-compiler/handle-request/route.ts'
@@ -106,7 +109,7 @@ export const SECTIONS: readonly Section[] = [
           code(REQUEST_ROUTE, 'no storage client imported; Cache-Control no-store'),
           code(RESPONSE_ROUTE, 'no storage client imported; Cache-Control no-store'),
           code(INTERCEPTOR, 'evidence header set is metadata only'),
-          code(GATEWAY_CONTRACT, 'evidenceHeaders emits hashes, counts and a policy version, never content'),
+          code(GATEWAY_GATE, 'evidenceHeaders emits hashes, counts and a policy version, never content'),
         ],
       },
       {
@@ -202,7 +205,7 @@ export const SECTIONS: readonly Section[] = [
         id: 'budget.minimum',
         text: 'Below 1,024 estimated tokens the interceptor forwards your original context instead of a compiled pack, and above it compares the two and forwards the original whenever compilation would not be smaller. Enabling the policy therefore cannot increase the context sent to your provider.',
         sources: [
-          code(GATEWAY_CONTRACT, 'minimum-size floor and non-expansion guard, shared by every gateway adapter'),
+          code(GATEWAY_GATE, 'minimum-size floor and non-expansion guard, shared by every gateway adapter'),
           code(INTERCEPTOR, 'WSO2 delegates the decision to that shared core'),
           spec(INTERCEPTOR_TEST, 'small contexts bypass; non-expansion guard preserves the original'),
         ],
