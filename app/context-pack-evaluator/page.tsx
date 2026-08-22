@@ -1,17 +1,64 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 
-export const metadata: Metadata = { title: 'Context Pack Evaluator | Maha Strategies', description: 'Measure context efficiency while testing whether named evidence survives compilation.', alternates: { canonical: '/context-pack-evaluator' } }
-
-export default function ContextPackEvaluatorPage() {
-  return <main className="min-h-screen bg-[#0a0a0c] px-6 py-20 text-zinc-200 sm:py-28"><div className="mx-auto max-w-4xl">
-    <p className="font-mono text-[10px] uppercase tracking-[0.24em] text-cyan-300">[ Maha Strategies // measurable epistemic middleware ]</p>
-    <h1 className="mt-5 max-w-3xl text-4xl font-light leading-tight text-white sm:text-6xl">Measure the compression. Test the evidence.</h1>
-    <p className="mt-6 max-w-3xl text-lg leading-relaxed text-zinc-400">The Context Pack Evaluator asks for the source passages that must survive a compacting workflow. It reports how much context changed and whether each required span was retained in the returned pack.</p>
-    <section className="mt-10 grid gap-4 md:grid-cols-3"><Card label="01 // Declare" text="Provide source documents, a task and budget, then list exact required evidence spans with their source IDs." /><Card label="02 // Compile" text="The deterministic compiler ranks, deduplicates and bounds context. No AI model judges the material." /><Card label="03 // Report" text="Receive token/byte metrics, source coverage, duplicate removal, and an exact retained-or-omitted result for each declared span." /></section>
-    <section className="mt-12 border border-cyan-900 bg-cyan-950/15 p-6"><h2 className="text-xl text-white">What an evidence-retention result means</h2><p className="mt-3 text-sm leading-relaxed text-zinc-300"><strong>Retained</strong> means the exact required source span appears in an included passage from its declared source. <strong>Omitted</strong> means it does not. Neither result establishes factual accuracy, model answer quality, legal compliance, or downstream hallucination behavior.</p></section>
-    <section className="mt-12"><h2 className="text-2xl text-white">A credible report, not a sales claim</h2><p className="mt-3 max-w-3xl text-sm leading-relaxed text-zinc-400">Use repeated, representative evaluations to establish a baseline for a specific workflow. Publish the task, budget, source count, required-evidence definition and measured results. Do not generalize one benchmark into a universal savings promise.</p><div className="mt-5 flex flex-wrap gap-3"><a className="border border-cyan-600 px-4 py-2 font-mono text-xs uppercase tracking-widest text-cyan-100 hover:bg-cyan-950/50" href="/context-pack-evaluation-schema.json">Read evaluation schema</a><a className="border border-zinc-700 px-4 py-2 font-mono text-xs uppercase tracking-widest text-zinc-300 hover:border-cyan-500" href="/api/docs/openapi">OpenAPI contract</a><a className="border border-zinc-700 px-4 py-2 font-mono text-xs uppercase tracking-widest text-zinc-300 hover:border-cyan-500" href="https://github.com/Maha-Strategies/maha-corp-web/tree/main/.github/actions/maha-context-evidence">GitHub Action</a><a className="border border-zinc-700 px-4 py-2 font-mono text-xs uppercase tracking-widest text-zinc-300 hover:border-cyan-500" href="/.well-known/maha/offer-selection.json">Machine-readable offer selection guide</a><Link className="border border-zinc-700 px-4 py-2 font-mono text-xs uppercase tracking-widest text-zinc-300 hover:border-cyan-500" href="/context-compiler">Context Compiler</Link></div></section>
-  </div></main>
+export const metadata: Metadata = {
+  title: 'Context Pack Evaluator | Evidence Retention Measurement',
+  description: 'Measure context efficiency while testing whether named evidence survives bounded compilation.',
+  alternates: { canonical: '/context-pack-evaluator' },
 }
 
-function Card({ label, text }: { label: string; text: string }) { return <article className="border border-zinc-800 bg-zinc-950/50 p-5"><p className="font-mono text-[10px] uppercase tracking-widest text-cyan-300">{label}</p><p className="mt-3 text-sm leading-relaxed text-zinc-400">{text}</p></article> }
+const stages = [
+  ['01 · Declare', 'Provide source documents, a task, and a token budget—then name the exact evidence spans that must survive.'],
+  ['02 · Compile', 'The deterministic compiler ranks, deduplicates, and bounds context. No model grades the supplied material.'],
+  ['03 · Report', 'Receive token and byte metrics, source coverage, duplicate removal, and retained-or-omitted results for every declared span.'],
+] as const
+
+export default function ContextPackEvaluatorPage() {
+  return (
+    <main className="evidence-page">
+      <div className="evidence-container evidence-container--narrow">
+        <header className="border-t border-[var(--border-default)] pt-5">
+          <p className="evidence-kicker flex flex-wrap justify-between gap-3"><span>Context Pack Evaluator</span><span>Declared evidence · deterministic measurement</span></p>
+          <h1 className="evidence-title evidence-title--product">Measure the context reduction. Test what evidence survived.</h1>
+          <p className="evidence-lede mt-7">Define the passages a workflow must retain, then test a bounded Context Pack against that requirement instead of accepting a compression claim on faith.</p>
+          <p className="evidence-copy mt-5">The evaluator makes the scope of a result explicit: task, token budget, sources, required evidence, and what did or did not appear in the compiled pack.</p>
+          <div className="mt-9 flex flex-wrap gap-3">
+            <a className="evidence-action evidence-action--primary" href="/context-pack-evaluation-schema.json">Read evaluation schema ↗</a>
+            <Link className="evidence-action evidence-action--secondary" href="/benchmarks/context-retention">Review published benchmark ↗</Link>
+          </div>
+        </header>
+
+        <section className="evidence-section" aria-labelledby="method-heading">
+          <p className="evidence-kicker">Evaluation method</p>
+          <h2 id="method-heading" className="evidence-section-title mt-4">Three things a credible compression result needs.</h2>
+          <div className="mt-8 grid gap-4 md:grid-cols-3">
+            {stages.map(([label, body]) => (
+              <article key={label} className="evidence-card">
+                <p className="evidence-kicker">{label}</p>
+                <p className="evidence-card-copy mt-4">{body}</p>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <section className="evidence-section evidence-inset" aria-labelledby="meaning-heading">
+          <p className="evidence-kicker text-[var(--status-sourced)]">Result boundary</p>
+          <h2 id="meaning-heading" className="evidence-section-title mt-4 text-2xl">Retained is a traceability result, not a truth claim.</h2>
+          <p className="evidence-copy mt-4 text-sm"><strong>Retained</strong> means the exact required span appears in an included passage from its declared source. <strong>Omitted</strong> means it does not. Neither result establishes factual accuracy, model-answer quality, legal compliance, or downstream hallucination behavior.</p>
+        </section>
+
+        <section className="evidence-section" aria-labelledby="assessment-heading">
+          <p className="evidence-kicker">Use in an assessment</p>
+          <h2 id="assessment-heading" className="evidence-section-title mt-4">Compare a real workflow before adopting new infrastructure.</h2>
+          <p className="evidence-copy mt-5">Repeat the evaluation on a representative, sanitized corpus. Publish the task, budget, source count, evidence definition, and measured results. Do not generalize one benchmark into a universal savings or quality promise.</p>
+          <div className="mt-7 flex flex-wrap gap-4 font-mono text-xs uppercase tracking-widest">
+            <a className="evidence-link" href="/api/docs/openapi">OpenAPI contract ↗</a>
+            <a className="evidence-link" href="https://github.com/Maha-Strategies/maha-corp-web/tree/main/.github/actions/maha-context-evidence" target="_blank" rel="noopener noreferrer">GitHub Action ↗</a>
+            <Link className="evidence-link" href="/context-compiler">Context Compiler ↗</Link>
+            <Link className="evidence-link" href="/consulting/ai-infrastructure">Context Control assessment ↗</Link>
+          </div>
+        </section>
+      </div>
+    </main>
+  )
+}
