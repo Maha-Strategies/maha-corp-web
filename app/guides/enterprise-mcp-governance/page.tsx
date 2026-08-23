@@ -31,15 +31,16 @@ export default function EnterpriseMcpGovernanceGuide() {
     author: { '@id': `${SITE_URL}/about#mayone-maha-rajan` }, publisher: { '@id': `${SITE_URL}/#organization` },
     about: ['Model Context Protocol', 'AI agent governance', 'Tool allowlists', 'Audit logging'],
   }
-  return <main className="min-h-screen bg-[#0a0a0c] px-6 py-20 text-[var(--text-secondary)] sm:py-28">
+  return <main className="evidence-page">
     <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd).replace(/</g, '\\u003c') }} />
-    <article className="mx-auto max-w-4xl">
-      <nav><Link href="/enterprise-mcp-gateway" className="font-mono text-[10px] uppercase tracking-widest text-[var(--text-primary)] hover:text-[var(--text-primary)]">← Enterprise MCP Gateway</Link></nav>
-      <header className="mt-8 border-b border-[var(--border-default)] pb-12">
-        <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-[var(--text-muted)]">[ Practical architecture guide ]</p>
-        <h1 className="mt-5 text-4xl font-light leading-tight text-[var(--text-primary)] sm:text-6xl">How to govern enterprise MCP servers with tool allowlists and audit logs.</h1>
-        <p className="mt-7 max-w-3xl text-xl leading-relaxed text-[var(--text-secondary)]">An MCP gateway should make agent access narrower, observable, and revocable. It should not become a universal secret relay or a second uncontrolled copy of the data passing through it.</p>
-        <p className="mt-5 font-mono text-[10px] uppercase tracking-widest text-[var(--text-muted)]">Published August 6, 2026 · Maha Strategies LLC</p>
+    <div className="evidence-container evidence-container--narrow">
+    <article>
+      <nav><Link href="/enterprise-mcp-gateway" className="evidence-kicker evidence-link">← Enterprise MCP Gateway</Link></nav>
+      <header className="mt-8 border-t border-[var(--border-default)] pt-5">
+        <p className="evidence-kicker">Practical architecture guide</p>
+        <h1 className="evidence-title evidence-title--product">How to govern enterprise MCP servers with tool allowlists and audit logs.</h1>
+        <p className="evidence-lede mt-7">An MCP gateway should make agent access narrower, observable, and revocable. It should not become a universal secret relay or a second uncontrolled copy of the data passing through it.</p>
+        <p className="evidence-kicker mt-7 border-t border-[var(--border-subtle)] pt-5">Published August 6, 2026 · Maha Strategies LLC</p>
       </header>
 
       <section className="evidence-section evidence-inset">
@@ -96,5 +97,6 @@ await maha.mcp.updateServerPolicy(serverId, {
         <p className="max-w-3xl text-sm leading-relaxed text-[var(--text-muted)]">Maha’s implementation exposes the same core controls through its <Link href="/enterprise-mcp-gateway" className="text-[var(--text-primary)] underline underline-offset-4">Enterprise MCP Gateway</Link>. Compare it with <Link href="/guides/mcp-gateway-vs-direct-server" className="text-[var(--text-primary)] underline underline-offset-4">direct MCP server connections</Link>, inspect the <a href="/mcp-gateway-contract.json" className="text-[var(--text-primary)] underline underline-offset-4">machine-readable contract</a>, or open the <Link href="/docs" className="text-[var(--text-primary)] underline underline-offset-4">API reference</Link>.</p>
       </footer>
     </article>
+    </div>
   </main>
 }
