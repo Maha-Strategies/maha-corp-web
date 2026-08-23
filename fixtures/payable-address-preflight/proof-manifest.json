@@ -1,0 +1,36 @@
+{
+  "schema_version": "1.0",
+  "publisher": "x402.nsgoods.org",
+  "signers": {
+    "0x41Fb10a9E637C85cE3C1d35c4f059E7de1593fBE": ["payable", "payable-address"]
+  },
+  "signer_registry": {
+    "0x41Fb10a9E637C85cE3C1d35c4f059E7de1593fBE": {
+      "services": ["payable", "payable-address"],
+      "status": "active",
+      "valid_from": null,
+      "valid_until": null
+    }
+  },
+  "signer_rotations": [],
+  "signer_policy": {
+    "pinning": "clients should pin signer addresses from this manifest, not trust on first use",
+    "rotation": "signers do not rotate silently; a rotation adds the new address alongside the old with a validity boundary before the old key stops signing",
+    "unannounced_change": "treat as compromise; fail closed, same as a signature mismatch",
+    "rotation_record_shape": {
+      "address_old": "0x...",
+      "address_new": "0x...",
+      "old_valid_until": "ISO8601",
+      "new_valid_from": "ISO8601",
+      "services": ["..."],
+      "announced_at": "ISO8601"
+    }
+  },
+  "services": [
+    {
+      "name": "payable-address",
+      "base_url": "https://payable.nsgoods.org",
+      "signer": "0x41Fb10a9E637C85cE3C1d35c4f059E7de1593fBE"
+    }
+  ]
+}
