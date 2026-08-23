@@ -57,25 +57,37 @@ export function EvidenceGuide({
   }))
   const jsonLd = { '@context': 'https://schema.org', '@graph': [article, ...scholarlyArticles] }
 
-  return <main className="min-h-screen bg-[#0a0a0c] px-6 py-20 text-zinc-300 sm:py-28">
-    <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, '\\u003c') }} />
-    <article className="mx-auto max-w-4xl">
-      <nav><Link href={backHref} className="font-mono text-[10px] uppercase tracking-widest text-cyan-200 hover:text-white">← {backLabel}</Link></nav>
-      <header className="mt-8 border-b border-zinc-800 pb-12">
-        <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-cyan-300">[ {eyebrow} ]</p>
-        <h1 className="mt-5 text-4xl font-light leading-tight text-white sm:text-6xl">{title}</h1>
-        <p className="mt-7 max-w-3xl text-xl leading-relaxed text-zinc-400">{summary}</p>
-        <p className="mt-5 font-mono text-[10px] uppercase tracking-widest text-zinc-600">Published August 8, 2026 · Maha Strategies LLC</p>
-      </header>
-      {children}
-    </article>
-  </main>
+  return (
+    <main className="evidence-page">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, '\\u003c') }} />
+      <div className="evidence-container evidence-container--narrow">
+        <article>
+          <nav>
+            <Link href={backHref} className="evidence-kicker evidence-link">← {backLabel}</Link>
+          </nav>
+          <header className="mt-8 border-t border-[var(--border-default)] pt-5">
+            <p className="evidence-kicker">{eyebrow}</p>
+            <h1 className="evidence-title evidence-title--product">{title}</h1>
+            <p className="evidence-lede mt-7">{summary}</p>
+            <p className="evidence-kicker mt-7 border-t border-[var(--border-subtle)] pt-5">Published August 8, 2026 · Maha Strategies LLC</p>
+          </header>
+          {children}
+        </article>
+      </div>
+    </main>
+  )
 }
 
 export function GuideMetric({ label, value, detail }: { label: string; value: string; detail: string }) {
-  return <article className="border border-zinc-800 bg-zinc-950/60 p-5"><p className="font-mono text-[10px] uppercase tracking-widest text-zinc-500">{label}</p><p className="mt-3 text-3xl text-white">{value}</p><p className="mt-2 text-xs leading-5 text-zinc-500">{detail}</p></article>
+  return (
+    <article className="evidence-card">
+      <p className="evidence-kicker">{label}</p>
+      <p className="mt-3 font-[var(--font-newsreader)] text-3xl text-[var(--text-primary)]" style={{ fontVariantNumeric: 'tabular-nums' }}>{value}</p>
+      <p className="evidence-card-copy mt-2">{detail}</p>
+    </article>
+  )
 }
 
 export function CodeBlock({ children }: { children: string }) {
-  return <pre className="mt-6 overflow-x-auto border border-zinc-800 bg-black p-5 text-sm leading-7 text-cyan-100"><code>{children}</code></pre>
+  return <pre className="evidence-code mt-6 overflow-x-auto p-5 text-sm leading-7"><code>{children}</code></pre>
 }
