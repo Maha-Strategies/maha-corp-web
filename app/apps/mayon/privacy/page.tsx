@@ -11,19 +11,19 @@ export const metadata: Metadata = {
 
 export default function MayonPrivacyPage() {
   return (
-    <main className="min-h-screen bg-[#0a0a0c] px-6 py-16 text-zinc-300 selection:bg-amber-400 selection:text-black sm:px-12">
-      <article className="mx-auto max-w-3xl">
-        <Link href="/" className="mb-10 block text-xs uppercase tracking-widest text-zinc-500 hover:text-white">
+    <main className="evidence-page">
+      <article className="evidence-container evidence-container--narrow">
+        <Link href="/" className="mb-10 block text-xs uppercase tracking-widest text-[var(--text-muted)] hover:text-[var(--text-primary)]">
           ← Maha Strategies
         </Link>
-        <Link href="/apps/mayon" className="mb-6 block text-xs uppercase tracking-widest text-cyan-300 hover:text-cyan-100">
+        <Link href="/apps/mayon" className="mb-6 block text-xs uppercase tracking-widest text-[var(--status-sourced)] hover:text-[var(--status-sourced)]">
           Mayon documentation →
         </Link>
-        <p className="text-xs uppercase tracking-[0.22em] text-amber-300">Educational volcano explorer</p>
-        <h1 className="mt-4 text-4xl font-light tracking-wide text-white sm:text-5xl">Mayon Privacy Policy</h1>
-        <p className="mt-4 text-sm text-zinc-500">Effective date: 25 July 2026</p>
+        <p className="text-xs uppercase tracking-[0.22em] text-[var(--status-boundary)]">Educational volcano explorer</p>
+        <h1 className="mt-4 text-4xl font-light tracking-wide text-[var(--text-primary)] sm:text-5xl">Mayon Privacy Policy</h1>
+        <p className="mt-4 text-sm text-[var(--text-muted)]">Effective date: 25 July 2026</p>
 
-        <div className="prose prose-invert mt-12 max-w-none leading-relaxed text-zinc-300">
+        <div className="prose mt-12 max-w-none leading-relaxed text-[var(--text-secondary)]">
           <p>Mayon is a free educational application from Maha Strategies. It is designed to help people explore Mayon Volcano, its landscape, history, and hazards. It is not a live warning, forecasting, navigation, or emergency-response service.</p>
 
           <h2>Data the mobile app collects</h2>

@@ -87,24 +87,24 @@ const articleJsonLd = {
 
 export default function SleepStagesExplainedPage() {
   return (
-    <main className="min-h-screen bg-[#0a0a0c] text-zinc-300 selection:bg-indigo-500 selection:text-white">
+    <main className="evidence-page">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }} />
-      <article className="max-w-3xl mx-auto px-6 py-20 sm:py-28">
-        <Link href="/books/the-imagined-life" className="inline-block font-mono text-xs text-indigo-300 hover:text-white tracking-widest uppercase transition-colors mb-12">
+      <article className="evidence-container evidence-container--narrow">
+        <Link href="/books/the-imagined-life" className="inline-block font-mono text-xs text-[var(--status-sourced)] hover:text-[var(--text-primary)] tracking-widest uppercase transition-colors mb-12">
           ← The Imagined Life
         </Link>
 
-        <header className="border-b border-zinc-800 pb-10 mb-12">
-          <p className="font-mono text-xs text-indigo-300 tracking-widest uppercase mb-5">[ Plain-English sleep guide ]</p>
-          <h1 className="text-4xl sm:text-5xl font-light text-white leading-[1.1] tracking-tight mb-6">NREM sleep stages explained: N1, N2, N3, REM, and dreaming</h1>
-          <p className="text-xl text-zinc-300 font-light leading-relaxed">
+        <header className="border-b border-[var(--border-default)] pb-10 mb-12">
+          <p className="font-mono text-xs text-[var(--status-sourced)] tracking-widest uppercase mb-5">[ Plain-English sleep guide ]</p>
+          <h1 className="text-4xl sm:text-5xl font-light text-[var(--text-primary)] leading-[1.1] tracking-tight mb-6">NREM sleep stages explained: N1, N2, N3, REM, and dreaming</h1>
+          <p className="text-xl text-[var(--text-secondary)] font-light leading-relaxed">
             Sleep is not one uniform state. Across the night, the brain and body move repeatedly through non-REM and REM sleep, each identified by characteristic patterns in sleep studies. The stages are measurable; the full purpose of dreaming is still an open scientific question.
           </p>
-          <p className="mt-7 font-mono text-xs text-zinc-500 tracking-widest uppercase">Mayone Maha Rajan · The Imagined Life</p>
+          <p className="mt-7 font-mono text-xs text-[var(--text-muted)] tracking-widest uppercase">Mayone Maha Rajan · The Imagined Life</p>
         </header>
 
         <ArticleTableOfContents contentId="article-content" />
-        <div id="article-content" data-article-content className="prose prose-invert prose-lg max-w-none prose-p:text-zinc-300 prose-p:leading-[1.85] prose-p:mb-7 prose-strong:text-white prose-a:text-indigo-300 prose-a:no-underline hover:prose-a:text-white prose-li:text-zinc-300 prose-li:leading-relaxed">
+        <div id="article-content" data-article-content className="prose prose-lg max-w-none prose-p:text-[var(--text-secondary)] prose-p:leading-[1.85] prose-p:mb-7 prose-strong:text-[var(--text-primary)] prose-a:text-[var(--status-sourced)] prose-a:no-underline hover:prose-a:text-[var(--text-primary)] prose-li:text-[var(--text-secondary)] prose-li:leading-relaxed">
           <h2>Short answer</h2>
           <p>
             <strong>NREM sleep</strong> means non-rapid eye movement sleep. It has three stages: N1, N2, and N3. A typical night alternates between NREM and rapid eye movement (REM) sleep in cycles that commonly last about 80 to 100 minutes. The exact timing and amount of each stage vary by person, age, night, and circumstance. <a href={sources[0].href}>[1]</a>
@@ -202,27 +202,27 @@ export default function SleepStagesExplainedPage() {
           </p>
         </div>
 
-        <section className="mt-16 pt-8 border-t border-zinc-800">
-          <p className="font-mono text-xs text-indigo-300 tracking-widest uppercase mb-5">[ Sources ]</p>
+        <section className="mt-16 pt-8 border-t border-[var(--border-default)]">
+          <p className="font-mono text-xs text-[var(--status-sourced)] tracking-widest uppercase mb-5">[ Sources ]</p>
           <ol className="space-y-5">
             {sources.map((source, index) => (
               <li key={source.href} className="grid grid-cols-[1.5rem_1fr] gap-4 text-sm leading-relaxed">
-                <span className="font-mono text-zinc-600">{index + 1}</span>
+                <span className="font-mono text-[var(--text-muted)]">{index + 1}</span>
                 <div>
-                  <a href={source.href} className="text-zinc-200 hover:text-white transition-colors">{source.title}</a>
-                  <span className="text-zinc-500"> · {source.authors}</span>
-                  <p className="text-zinc-500 mt-1">{source.note}</p>
+                  <a href={source.href} className="text-[var(--text-primary)] hover:text-[var(--text-primary)] transition-colors">{source.title}</a>
+                  <span className="text-[var(--text-muted)]"> · {source.authors}</span>
+                  <p className="text-[var(--text-muted)] mt-1">{source.note}</p>
                 </div>
               </li>
             ))}
           </ol>
         </section>
 
-        <footer className="mt-16 pt-8 border-t border-zinc-800">
-          <p className="font-mono text-xs text-zinc-500 tracking-widest uppercase mb-4">[ Continue reading ]</p>
+        <footer className="mt-16 pt-8 border-t border-[var(--border-default)]">
+          <p className="font-mono text-xs text-[var(--text-muted)] tracking-widest uppercase mb-4">[ Continue reading ]</p>
           <div className="flex flex-col gap-3">
-            <Link href="/books/the-imagined-life/read/what-happens-when-you-sleep" className="text-zinc-300 hover:text-white transition-colors">Read Chapter 1: What Happens When You Sleep ↗</Link>
-            <Link href="/books/the-imagined-life" className="text-zinc-300 hover:text-white transition-colors">Return to The Imagined Life ↗</Link>
+            <Link href="/books/the-imagined-life/read/what-happens-when-you-sleep" className="text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">Read Chapter 1: What Happens When You Sleep ↗</Link>
+            <Link href="/books/the-imagined-life" className="text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">Return to The Imagined Life ↗</Link>
           </div>
         </footer>
       </article>

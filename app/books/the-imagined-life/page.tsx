@@ -50,35 +50,35 @@ export default function TheImaginedLifeHub() {
   // is skipped because the page header already renders the title.
   const blocks = parseMarkdownBlocks(readBookMarkdown('the-imagined-life') ?? '', { skipFirstH1: true })
   return (
-    <main className="min-h-screen bg-[#0a0a0c] text-zinc-300 selection:bg-indigo-500 selection:text-white">
+    <main className="evidence-page">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(bookJsonLd) }} />
-      <article className="max-w-4xl mx-auto px-6 py-20 sm:py-28">
+      <article className="evidence-container evidence-container--narrow">
         <header className="max-w-3xl border-l border-indigo-500 pl-6 sm:pl-8">
-          <p className="font-mono text-xs text-indigo-300 tracking-widest uppercase mb-5">
+          <p className="font-mono text-xs text-[var(--status-sourced)] tracking-widest uppercase mb-5">
             [ Maha Strategies // Open Edition ]
           </p>
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-light text-white leading-[1.08] tracking-tight mb-5">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl font-light text-[var(--text-primary)] leading-[1.08] tracking-tight mb-5">
             The Imagined Life
           </h1>
-          <p className="text-lg sm:text-xl text-zinc-400 font-light leading-relaxed mb-3">
+          <p className="text-lg sm:text-xl text-[var(--text-secondary)] font-light leading-relaxed mb-3">
             Living Inside a Dreaming Brain
           </p>
-          <p className="font-mono text-xs text-zinc-500 tracking-widest uppercase">
+          <p className="font-mono text-xs text-[var(--text-muted)] tracking-widest uppercase">
             By Mayone Maha Rajan
           </p>
         </header>
 
         <section className="mt-16 max-w-3xl">
-          <p className="text-xl sm:text-2xl text-zinc-200 font-light leading-relaxed mb-6">
+          <p className="text-xl sm:text-2xl text-[var(--text-primary)] font-light leading-relaxed mb-6">
             Imagination is not a decoration on the mind. It is the faculty that lets us hold a version of the world that does not yet exist—and, through the actions it changes, begin to make it real.
           </p>
-          <p className="text-base sm:text-lg text-zinc-400 leading-relaxed">
+          <p className="text-base sm:text-lg text-[var(--text-secondary)] leading-relaxed">
             This book begins with the measurable architecture of sleep and dreaming, crosses the uncertain border between brains and generative machines, and ends with the practical question of how to become a deliberate steward of one&apos;s own imagination.
           </p>
         </section>
 
         <Link href="/books/the-imagined-life/read" className="mt-10 inline-block bg-white px-7 py-4 font-mono text-xs font-bold uppercase tracking-widest text-black transition-colors hover:bg-zinc-200">Choose a chapter ↗</Link>
-        <p className="mt-5 text-sm leading-relaxed text-zinc-400">New to the book? Start with the <Link href="/books/the-imagined-life/sleep-stages-explained" className="text-indigo-300 underline underline-offset-4 hover:text-white">plain-English guide to NREM, REM, and sleep stages</Link>.</p>
+        <p className="mt-5 text-sm leading-relaxed text-[var(--text-secondary)]">New to the book? Start with the <Link href="/books/the-imagined-life/sleep-stages-explained" className="text-[var(--status-sourced)] underline underline-offset-4 hover:text-[var(--text-primary)]">plain-English guide to NREM, REM, and sleep stages</Link>.</p>
 
         <BookEndpointCTA title="The Imagined Life" placement="top" />
 

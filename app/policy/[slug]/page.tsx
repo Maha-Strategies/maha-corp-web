@@ -25,7 +25,7 @@ const policyArticles: Record<
         <p className="pt-2">
           <Link
             href="/policy/nutrient-density-standard/paying-for-nutrition"
-            className="font-mono text-sm text-indigo-400 hover:text-indigo-300 transition-colors uppercase tracking-widest"
+            className="font-mono text-sm text-indigo-400 hover:text-[var(--status-sourced)] transition-colors uppercase tracking-widest"
           >
             Read the working paper &#8599;
           </Link>
@@ -174,31 +174,31 @@ export default async function PolicyArticle({ params }: PageProps) {
   };
 
   return (
-    <main className="min-h-screen bg-[#0a0a0c] text-[#e0e0e0] selection:bg-indigo-500 selection:text-white">
+    <main className="evidence-page">
       <div className="max-w-3xl w-full mx-auto px-6 sm:px-12 space-y-12 pb-16 pt-16">
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
 
-      <nav className="font-mono text-xs text-gray-500 tracking-widest uppercase mb-8 flex gap-2">
+      <nav className="font-mono text-xs text-[var(--text-muted)] tracking-widest uppercase mb-8 flex gap-2">
         <Link href="/policy" className="hover:text-indigo-400 transition-colors">
           POLICY INDEX
         </Link>
         <span>/</span>
-        <span className="text-gray-400">DIRECTIVE</span>
+        <span className="text-[var(--text-secondary)]">DIRECTIVE</span>
       </nav>
 
-      <header className="space-y-4 border-b border-gray-800 pb-8">
+      <header className="space-y-4 border-b border-[var(--border-default)] pb-8">
         <div className="font-mono text-xs text-indigo-500 font-semibold tracking-widest uppercase">
           [ FILED: {article.date} ]
         </div>
-        <h1 className="font-sans text-4xl sm:text-5xl font-bold tracking-tight text-white leading-tight">
+        <h1 className="font-sans text-4xl sm:text-5xl font-bold tracking-tight text-[var(--text-primary)] leading-tight">
           {article.title}
         </h1>
       </header>
 
-      <article className="font-serif text-lg leading-relaxed text-gray-300 space-y-6">
+      <article className="font-serif text-lg leading-relaxed text-[var(--text-secondary)] space-y-6">
         {article.content}
       </article>
       </div>
