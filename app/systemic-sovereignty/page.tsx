@@ -101,73 +101,79 @@ const faqJsonLd = {
 }
 
 export default function SystemicSovereigntyPage() {
-  return <main className="min-h-screen bg-[#0a0a0c] px-6 py-20 text-zinc-300 sm:py-28">
+  return <main className="evidence-page">
     <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd).replace(/</g, '\\u003c') }} />
     <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd).replace(/</g, '\\u003c') }} />
-    <article className="mx-auto max-w-4xl">
-      <p className="font-mono text-[10px] uppercase tracking-widest text-indigo-300">[ Maha Strategies · explainer ]</p>
-      <h1 className="mt-5 max-w-3xl text-4xl font-light leading-tight tracking-tight text-white sm:text-6xl">What does systemic sovereignty mean?</h1>
-      <p className="mt-7 max-w-3xl text-xl leading-relaxed text-zinc-300"><strong>Systemic sovereignty is Maha Strategies&rsquo; framework for autonomy across infrastructure, interface, and intellect.</strong> It treats semiconductor supply chains, software and on-device AI, and human attention as connected layers of a single operating environment.</p>
-      <p className="mt-5 font-mono text-[11px] uppercase tracking-widest text-zinc-500">By Mayone Maha Rajan · Maha Strategies LLC · <time dateTime={publicationDate}>July 20, 2026</time></p>
+    <article className="evidence-container evidence-container--narrow">
+      <p className="evidence-kicker">[ Maha Strategies · explainer ]</p>
+      <h1 className="evidence-title evidence-title--product mt-5">What does systemic sovereignty mean?</h1>
+      <p className="evidence-lede mt-7"><strong>Systemic sovereignty is Maha Strategies&rsquo; framework for autonomy across infrastructure, interface, and intellect.</strong> It treats semiconductor supply chains, software and on-device AI, and human attention as connected layers of a single operating environment.</p>
+      <p className="font-mono text-[11px] uppercase tracking-widest text-[var(--text-muted)] mt-5">By Mayone Maha Rajan · Maha Strategies LLC · <time dateTime={publicationDate}>July 20, 2026</time></p>
 
-      <section className="mt-14 border-y border-zinc-800 py-9">
-        <h2 className="text-2xl text-white">The short version</h2>
-        <div className="mt-5 max-w-3xl space-y-4 leading-relaxed text-zinc-400">
+      <section className="evidence-section">
+        <h2 className="evidence-section-title mt-4">The short version</h2>
+        <div className="evidence-copy mt-5">
           <p>The framework asks a practical question: can a person, organization, or society retain meaningful agency when the infrastructure it depends on, the interfaces that shape its choices, and the human capacity to exercise judgment all influence one another?</p>
           <p>It is a Maha Strategies research framework, not an established academic standard or a claim that every dependency can be eliminated. Its purpose is to surface dependencies that are often assessed separately and make trade-offs discussable.</p>
         </div>
       </section>
 
-      <section className="mt-14">
-        <h2 className="text-2xl text-white">The three layers</h2>
+      <section className="evidence-section">
+        <h2 className="evidence-section-title mt-4">The three layers</h2>
         <div className="mt-7 grid gap-4 md:grid-cols-3">
-          {layers.map(([title, description]) => <section key={title} className="border border-zinc-800 bg-zinc-950 p-5">
-            <h3 className="font-mono text-xs font-bold tracking-widest text-indigo-300">{title}</h3>
-            <p className="mt-3 text-sm leading-relaxed text-zinc-400">{description}</p>
+          {layers.map(([title, description]) => <section key={title} className="evidence-card">
+            <p className="font-mono text-xs font-bold tracking-widest text-[var(--text-primary)]">{title}</p>
+            <p className="evidence-card-copy mt-3">{description}</p>
           </section>)}
         </div>
       </section>
 
-      <section className="mt-14 grid gap-10 border-t border-zinc-800 pt-10 md:grid-cols-2">
+      <section className="evidence-section">
+        <div className="mt-6 grid gap-10 md:grid-cols-2">
         <div>
-          <h2 className="text-2xl text-white">How it relates to data sovereignty</h2>
-          <p className="mt-5 leading-relaxed text-zinc-400">Data sovereignty addresses where data lives, who governs it, and which jurisdiction applies. Systemic sovereignty includes those questions, while adding the dependencies beneath and around them: hardware supply, local versus remote computation, software control, and the capacity of people to make informed decisions.</p>
+          <h2 className="text-2xl text-[var(--text-primary)]">How it relates to data sovereignty</h2>
+          <p className="evidence-copy mt-5">Data sovereignty addresses where data lives, who governs it, and which jurisdiction applies. Systemic sovereignty includes those questions, while adding the dependencies beneath and around them: hardware supply, local versus remote computation, software control, and the capacity of people to make informed decisions.</p>
         </div>
         <div>
-          <h2 className="text-2xl text-white">What it does not claim</h2>
-          <p className="mt-5 leading-relaxed text-zinc-400">The framework does not predict a specific economic, technical, or health outcome. It does not establish that any particular policy or product will create autonomy. Those propositions require their own sources, methods, and stated uncertainty.</p>
+          <h2 className="text-2xl text-[var(--text-primary)]">What it does not claim</h2>
+          <p className="evidence-copy mt-5">The framework does not predict a specific economic, technical, or health outcome. It does not establish that any particular policy or product will create autonomy. Those propositions require their own sources, methods, and stated uncertainty.</p>
+        </div>
         </div>
       </section>
 
-      <section className="mt-14 border border-indigo-900/50 bg-indigo-950/20 p-7 sm:p-9">
-        <p className="font-mono text-[10px] uppercase tracking-widest text-indigo-300">[ Citation-ready definition ]</p>
-        <blockquote className="mt-5 max-w-3xl border-l-2 border-indigo-400 pl-5 text-lg leading-relaxed text-zinc-200">“Systemic sovereignty is Maha Strategies&rsquo; framework for evaluating autonomy across infrastructure, interface, and intellect: the connected layers of hardware supply, software and AI systems, and human agency.”</blockquote>
-        <p className="mt-5 text-sm text-zinc-400">Suggested citation: Maha Rajan, M. (2026, July 20). <em>What Does Systemic Sovereignty Mean?</em> Maha Strategies LLC. {canonicalUrl}</p>
+      <section className="evidence-section">
+        <div className="evidence-inset">
+          <p className="font-mono text-[10px] uppercase tracking-widest text-[var(--text-primary)]">[ Citation-ready definition ]</p>
+          <blockquote className="mt-5 max-w-3xl border-l-2 border-[var(--status-sourced)] pl-5 text-lg leading-relaxed evidence-copy">“Systemic sovereignty is Maha Strategies&rsquo; framework for evaluating autonomy across infrastructure, interface, and intellect: the connected layers of hardware supply, software and AI systems, and human agency.”</blockquote>
+          <p className="mt-5 text-sm evidence-card-copy">Suggested citation: Maha Rajan, M. (2026, July 20). <em>What Does Systemic Sovereignty Mean?</em> Maha Strategies LLC. {canonicalUrl}</p>
+        </div>
       </section>
 
-      <section className="mt-14">
-        <h2 className="text-2xl text-white">Frequently asked questions</h2>
-        <div className="mt-6 divide-y divide-zinc-800 border-y border-zinc-800">
+      <section className="evidence-section">
+        <h2 className="evidence-section-title mt-4">Frequently asked questions</h2>
+        <div className="mt-6 divide-y divide-[var(--border-default)] border-y border-[var(--border-default)]">
           {faq.map((item) => <div key={item.question} className="py-6">
-            <h3 className="text-lg text-zinc-100">{item.question}</h3>
-            <p className="mt-3 max-w-3xl leading-relaxed text-zinc-400">{item.answer}</p>
+            <h3 className="text-lg text-[var(--text-primary)]">{item.question}</h3>
+            <p className="mt-3 max-w-3xl leading-relaxed evidence-copy">{item.answer}</p>
           </div>)}
         </div>
       </section>
 
-      <section className="mt-14 border-t border-zinc-800 pt-10">
-        <h2 className="text-2xl text-white">Canonical sources and related work</h2>
-        <ol className="mt-6 space-y-5">
-          {sources.map((source) => <li key={source.url} className="leading-relaxed text-zinc-400">
-            <a className="text-zinc-100 underline underline-offset-4 hover:text-white" href={source.url}>{source.name} ↗</a>
+      <section className="evidence-section">
+        <h2 className="evidence-section-title mt-4">Canonical sources and related work</h2>
+        <ol className="mt-6 space-y-5 evidence-copy">
+          {sources.map((source) => <li key={source.url} className="leading-relaxed">
+            <a className="evidence-link" href={source.url}>{source.name} ↗</a>
             <span className="block mt-1 text-sm">{source.note}</span>
           </li>)}
         </ol>
       </section>
 
-      <section className="mt-14 flex flex-wrap gap-4 border-t border-zinc-800 pt-10">
-        <Link href="/about" className="border border-zinc-600 px-5 py-3 font-mono text-xs font-bold uppercase tracking-widest text-zinc-100 hover:border-white">About Maha Strategies</Link>
-        <Link href="/intelligence" className="border border-zinc-600 px-5 py-3 font-mono text-xs font-bold uppercase tracking-widest text-zinc-100 hover:border-white">Browse intelligence</Link>
+      <section className="evidence-section">
+        <div className="mt-4 flex flex-wrap gap-4">
+          <Link href="/about" className="evidence-action evidence-action--secondary">About Maha Strategies</Link>
+          <Link href="/intelligence" className="evidence-action evidence-action--secondary">Browse intelligence</Link>
+        </div>
       </section>
     </article>
   </main>

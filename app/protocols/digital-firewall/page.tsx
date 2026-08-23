@@ -4,13 +4,13 @@ import 'katex/dist/katex.min.css';
 import { BlockMath } from 'react-katex';
 
 export default function DigitalFirewallProtocol() {
-  
+
   return (
-    <main className="min-h-screen bg-[#0a0a0a] text-[#e0e0e0] py-16 px-6 sm:px-12 selection:bg-gray-700">
-      <div className="max-w-3xl mx-auto">
+    <main className="evidence-page">
+      <div className="evidence-container evidence-container--narrow">
         
         {/* TERMINAL HEADER */}
-        <header className="font-mono text-xs sm:text-sm text-gray-500 mb-16 border-b border-gray-800 pb-4">
+        <header className="font-mono text-xs sm:text-sm text-[var(--text-muted)] mb-16 border-b border-[var(--border-default)] pb-4">
           <p>[SYSTEM DOCTRINE]</p>
           <p>PROTOCOL: Maha Strategies - Sovereign Node v2.0</p>
           <p>VECTOR: Information Scaffolding & Boundary Enforcement</p>
@@ -18,14 +18,14 @@ export default function DigitalFirewallProtocol() {
         </header>
 
         {/* TITLE */}
-        <h1 className="font-sans text-3xl sm:text-4xl font-bold tracking-tight mb-12 text-white">
+        <h1 className="text-4xl sm:text-6xl font-medium tracking-tight mb-12 evidence-title">
           THE SATURNIAN PERIMETER & THE DIGITAL FIREWALL
         </h1>
 
-        <article className="prose prose-invert prose-lg font-serif leading-relaxed text-gray-300">
+        <article className="prose prose-lg font-serif leading-relaxed evidence-copy">
           
           {/* SECTION I */}
-          <h2 className="font-sans text-2xl font-semibold text-white mt-12 mb-6">
+          <h2 className="text-2xl font-semibold text-[var(--text-primary)] mt-12 mb-6">
             I. The Crisis of Runaway Amplification
           </h2>
           <p>
@@ -39,7 +39,7 @@ export default function DigitalFirewallProtocol() {
           </p>
           
           {/* SECTION II */}
-          <h2 className="font-sans text-2xl font-semibold text-white mt-12 mb-6">
+          <h2 className="text-2xl font-semibold text-[var(--text-primary)] mt-12 mb-6">
             II. The Saturnian Limit: Architecting the Firewall
           </h2>
           <p>
@@ -50,7 +50,7 @@ export default function DigitalFirewallProtocol() {
           </p>
 
           {/* LATEX MATH ENGINE */}
-          <div className="my-10 p-6 bg-black border border-gray-800 rounded-md shadow-inner text-center">
+          <div className="my-10 p-6 border border-[var(--border-default)] rounded-md bg-[var(--surface-raised)] shadow-inner text-center">
             <BlockMath math="Cognitive\ Yield = \frac{\sum (Signal_{curated} \times Intent)}{\sum (Noise_{synthetic} \times Friction)}" />
           </div>
 
@@ -61,17 +61,17 @@ export default function DigitalFirewallProtocol() {
             To restore the architecture, we apply the <strong>Saturnian Limit</strong>. In the solar mechanics of the psyche, Saturn represents the Architect—the physics of boundaries, limits, and time. The Digital Firewall is the manifestation of this archetype. It is the absolute, unapologetic restriction of inbound data streams.
           </p>
 
-          <hr className="border-gray-800 my-12" />
+        <hr className="border-[var(--border-default)] my-12" />
 
           {/* SECTION III */}
-          <h2 className="font-sans text-2xl font-semibold text-white mt-12 mb-6">
+          <h2 className="text-2xl font-semibold text-[var(--text-primary)] mt-12 mb-6">
             III. Execution of the Perimeter Defense
           </h2>
           <p>
             Constructing the Digital Firewall requires shifting from a passive consumer of algorithmic feeds to an active, hostile filter of inbound information. 
           </p>
           
-          <ul className="list-disc pl-6 my-6 space-y-3 text-gray-300 marker:text-gray-600">
+          <ul className="list-disc pl-6 my-6 space-y-3 evidence-copy marker:text-[var(--text-muted)]">
             <li><strong>Zero-Payload Feeds:</strong> The Sovereign Node does not scroll. All algorithmic feeds (timelines, recommendations, auto-playing video) must be mathematically zeroed out via browser extensions, DNS blocking, or API-level routing. </li>
             <li><strong>Asynchronous Ingestion:</strong> Information must only be retrieved, never received. Push notifications are a violation of the temporal boundary. The user queries the grid on their own timeline; the grid does not query the user.</li>
             <li><strong>Agentic Isolation:</strong> When interfacing with Large Language Models and synthetic intelligence, interactions must be heavily sandboxed. Pass only the required executable meaning (Zero-Payload Architecture) and reject continuous ambient data collection.</li>
@@ -83,13 +83,13 @@ export default function DigitalFirewallProtocol() {
         </article>
 
         {/* MAHA OS ANCHOR */}
-        <div className="mt-16 p-6 border border-gray-700 bg-gray-900 rounded-lg text-center">
-          <p className="font-mono text-sm text-gray-400 mb-4">ENFORCE THE BOUNDARY</p>
+        <div className="mt-16 p-6 border border-[var(--border-default)] bg-[var(--surface-raised)] rounded-lg text-center">
+          <p className="font-mono text-sm text-[var(--text-secondary)] mb-4">ENFORCE THE BOUNDARY</p>
           <a 
             href="https://play.google.com/store/apps/details?id=com.maha.os" 
             target="_blank" 
             rel="noopener noreferrer"
-            className="inline-block px-6 py-3 bg-white text-black font-sans font-bold text-sm tracking-widest hover:bg-gray-200 transition-colors"
+            className="evidence-action evidence-action--primary inline-block"
           >
             DOWNLOAD MAHA OS: SOVEREIGN ECOSYSTEM
           </a>

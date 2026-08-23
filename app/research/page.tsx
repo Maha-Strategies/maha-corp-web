@@ -39,132 +39,90 @@ const preprints = [
 
 export default function ResearchIndex() {
   return (
-    <div className="min-h-screen bg-[#0a0a0c] text-zinc-300 font-sans p-8 md:p-24 selection:bg-indigo-500 selection:text-white">
-      <div className="max-w-4xl mx-auto">
-        <Link href="/" className="text-xs text-zinc-500 uppercase tracking-widest hover:text-white mb-8 block">← Back to Root Node</Link>
-        
-        <h1 className="text-4xl text-white font-light tracking-wide mb-6 leading-tight">
-          Research & Open Science
-        </h1>
-        
-        <div className="prose prose-invert max-w-none font-light tracking-wide leading-relaxed mb-16">
-          <p className="text-xl text-zinc-400">
-            The theoretical architecture powering Maha Strategies LLC. The manuscripts archived here serve as the foundational doctrine for our custom silicon strategy, sovereign digital infrastructure, and cognitive defense protocols. 
+    <main className="evidence-page">
+      <div className="evidence-container evidence-container--narrow">
+        <section className="evidence-section">
+          <Link href="/" className="evidence-link inline-flex">
+            ← Back to root
+          </Link>
+          <p className="evidence-kicker mt-4">[ Research & Open Science ]</p>
+          <h1 className="evidence-title">Research & Open Science</h1>
+          <p className="evidence-lede mt-7">
+            The theoretical architecture powering Maha Strategies LLC. Manuscripts and syntheses here are foundational doctrine for custom
+            silicon strategy, sovereign digital infrastructure, and cognitive defense protocols.
           </p>
-        </div>
+        </section>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
-          
-          {/* ACADEMIC SUBDOMAIN BLOCK */}
-          <div className="p-8 border border-emerald-900/50 bg-emerald-950/10 flex flex-col justify-between">
-            <div>
-              <p className="text-xs text-emerald-400 tracking-widest uppercase mb-2 font-mono">
-                [ RESEARCH NODE ONLINE ]
+        <section className="evidence-section">
+          <div className="grid gap-4 md:grid-cols-2">
+            <article className="evidence-card">
+              <p className="evidence-kicker">[ Research node ]</p>
+              <p className="evidence-card-title mt-3">Research Syntheses</p>
+              <p className="evidence-card-copy mt-3">
+                Cross-disciplinary syntheses and systemic sovereignty research are hosted on our dedicated research subdomain. These are openly
+                labeled, AI-assisted hypotheses and frameworks — not peer-reviewed conclusions.
               </p>
-              <h2 className="text-2xl text-white font-light mb-3">
-                Research Syntheses
-              </h2>
-              <p className="text-sm text-zinc-400 mb-6">
-                Our cross-disciplinary syntheses and systemic sovereignty research are hosted on our dedicated research subdomain. These are openly-labeled, AI-assisted hypotheses and frameworks — not peer-reviewed conclusions.
-              </p>
-            </div>
-            
-            <div className="space-y-4">
-              <a 
-                href="https://research.mahastrategies.com" 
+              <a
+                href="https://research.mahastrategies.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-block border border-emerald-500 text-emerald-400 font-mono text-[10px] tracking-widest py-3 px-6 hover:bg-emerald-500 hover:text-white transition-colors uppercase w-full text-center"
+                className="evidence-link mt-6 inline-block"
               >
-                Access Subdomain ↗
+                Access subdomain ↗
               </a>
-              
-              <div className="border-t border-emerald-900/50 pt-4 mt-4">
-                <p className="text-[10px] text-zinc-500 font-mono tracking-widest uppercase mb-2">
-                  LATEST PUBLICATION
-                </p>
-                <a 
-                  href="https://research.mahastrategies.com/papers/thermodynamic-isomorphism"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group block"
-                >
-                  <h3 className="text-sm text-emerald-100 font-semibold group-hover:text-emerald-400 transition-colors">
-                    Thermodynamic Isomorphism
-                  </h3>
-                  <span className="text-[10px] text-emerald-600/70 group-hover:text-emerald-400 font-mono transition-colors mt-1 block truncate">
-                    Read Paper ↗
-                  </span>
-                </a>
-              </div>
-            </div>
-          </div>
-
-          {/* MCP INTEGRATION BLOCK */}
-          <div className="p-8 border border-indigo-900/50 bg-indigo-950/10 flex flex-col justify-between">
-            <div>
-              <p className="text-xs text-indigo-400 tracking-widest uppercase mb-2 font-mono">
-                [ ACTIVE INFRASTRUCTURE ]
-              </p>
-              <h2 className="text-2xl text-white font-light mb-3">
-                Cognitive Defense Grid
-              </h2>
-              <p className="text-sm text-zinc-400 mb-6">
-                Integrate the Maha Strategies sovereign baseline directly into your local Claude Desktop instance. Audit cloud infrastructure and retrieve protocols for Zero-Payload architecture in real-time.
-              </p>
-            </div>
-            <div>
-              <Link 
-                href="/research/mcp" 
-                className="inline-block border border-indigo-500 text-indigo-400 font-mono text-[10px] tracking-widest py-3 px-6 hover:bg-indigo-500 hover:text-white transition-colors uppercase w-full text-center"
+              <a
+                href="https://research.mahastrategies.com/papers/thermodynamic-isomorphism"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="evidence-link mt-3 inline-block"
               >
-                Initialize Terminal (MCP) ↗
-              </Link>
-            </div>
-          </div>
-          
-        </div>
+                Latest publication: Thermodynamic Isomorphism ↗
+              </a>
+            </article>
 
-        {/* PREPRINTS LIST */}
-        <div className="space-y-8">
-          <h2 className="text-xs text-zinc-500 tracking-widest uppercase font-mono border-b border-zinc-800 pb-4">
-            [ ARCHIVAL PREPRINTS ]
-          </h2>
-          {preprints.map((paper, index) => (
-            <div key={index} className="pt-4 group">
-              <p className="text-xs text-zinc-500 tracking-widest uppercase mb-3">{paper.date}</p>
-              <h2 className="text-2xl text-white font-light mb-4 group-hover:text-indigo-400 transition-colors">
+            <article className="evidence-card">
+              <p className="evidence-kicker">[ Active infrastructure ]</p>
+              <p className="evidence-card-title mt-3">Cognitive Defense Grid</p>
+              <p className="evidence-card-copy mt-3">
+                Integrate the Maha Strategies sovereign baseline directly into your local Claude Desktop instance. Audit cloud infrastructure and
+                retrieve protocols for zero-payload architecture in real time.
+              </p>
+              <Link href="/research/mcp" className="evidence-link mt-6 inline-block">
+                Initialize MCP terminal ↗
+              </Link>
+            </article>
+          </div>
+        </section>
+
+        <section className="evidence-section">
+          <p className="evidence-kicker">[ Archival preprints ]</p>
+          <div className="mt-4 space-y-4">
+            {preprints.map((paper) => (
+              <article key={paper.slug ?? paper.title} className="evidence-card">
+                <p className="evidence-kicker">{paper.date}</p>
+                <h2 className="evidence-card-title mt-3">
+                  {paper.external ? (
+                    <a href={paper.href} target="_blank" rel="noopener noreferrer">
+                      {paper.title}
+                    </a>
+                  ) : (
+                    <Link href={`/research/${paper.slug}`}>{paper.title}</Link>
+                  )}
+                </h2>
                 {paper.external ? (
-                  <a href={paper.href} target="_blank" rel="noopener noreferrer">
-                    {paper.title}
+                  <a href={paper.href} target="_blank" rel="noopener noreferrer" className="evidence-link mt-3 inline-block">
+                    Read on research subdomain ↗
                   </a>
                 ) : (
-                  <Link href={`/research/${paper.slug}`}>
-                    {paper.title}
+                  <Link href={`/research/${paper.slug}`} className="evidence-link mt-3 inline-block">
+                    Read manuscript ↗
                   </Link>
                 )}
-              </h2>
-              {paper.external ? (
-                <a
-                  href={paper.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-sm font-semibold tracking-widest uppercase text-zinc-400 hover:text-white transition-colors"
-                >
-                  Read on Research Subdomain ↗
-                </a>
-              ) : (
-                <Link
-                  href={`/research/${paper.slug}`}
-                  className="text-sm font-semibold tracking-widest uppercase text-zinc-400 hover:text-white transition-colors"
-                >
-                  Read Manuscript →
-                </Link>
-              )}
-            </div>
-          ))}
-        </div>
+              </article>
+            ))}
+          </div>
+        </section>
       </div>
-    </div>
+    </main>
   )
 }

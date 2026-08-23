@@ -18,58 +18,66 @@ export const metadata: Metadata = {
 
 export default function AppsPage() {
   return (
-    <main className="min-h-screen bg-[#0a0a0c] px-6 py-20 text-zinc-300 sm:py-28">
-      <section className="mx-auto max-w-4xl">
-        <p className="font-mono text-[10px] uppercase tracking-widest text-cyan-300">[ Public application documentation ]</p>
-        <h1 className="mt-5 text-4xl font-light tracking-tight text-white sm:text-6xl">Apps from Maha Strategies</h1>
-        <p className="mt-7 max-w-3xl text-xl leading-relaxed text-zinc-300">Explore the products, documentation, privacy information, and support boundaries behind Maha Strategies&apos; public applications.</p>
+    <main className="evidence-page">
+      <div className="evidence-container evidence-container--narrow">
+        <section className="evidence-section">
+          <p className="evidence-kicker">[ Public application documentation ]</p>
+          <h1 className="evidence-title">Apps from Maha Strategies</h1>
+          <p className="evidence-lede mt-7">Explore the products, documentation, privacy information, and support boundaries behind Maha Strategies&apos; public applications.</p>
+        </section>
 
-        <div className="mt-14 grid gap-6">
-          <article className="border border-cyan-900/50 bg-cyan-950/10 p-7 sm:p-9">
-            <p className="font-mono text-[10px] uppercase tracking-widest text-cyan-300">[ Educational volcano explorer ]</p>
-            <h2 className="mt-4 text-3xl font-light text-white">Mayon</h2>
-            <p className="mt-4 max-w-2xl leading-relaxed text-zinc-400">A free, true-scale exploration of Mayon Volcano for learners, educators, and curious visitors. It combines terrain, historical chapters, explanatory interior diagrams, and clearly bounded hazard scenarios.</p>
-            <div className="mt-6 flex flex-wrap gap-4 text-sm">
-              <Link href="/apps/mayon" className="border border-cyan-700 px-4 py-2 text-cyan-100 transition hover:bg-cyan-900/40">Read the Mayon documentation</Link>
-              <a href={APP_STORE_LINKS.mayon.ios} className="px-4 py-2 text-cyan-100 underline" target="_blank" rel="noreferrer">Download for iOS</a>
-              <a href={APP_STORE_LINKS.mayon.android} className="px-4 py-2 text-cyan-100 underline" target="_blank" rel="noreferrer">Get it for Android</a>
-              <a href={APP_STORE_LINKS.mayon.web} className="px-4 py-2 text-cyan-100 underline" target="_blank" rel="noreferrer">Open the web experience</a>
-            </div>
-          </article>
-          <article className="border border-indigo-900/50 bg-indigo-950/10 p-7 sm:p-9">
-            <p className="font-mono text-[10px] uppercase tracking-widest text-indigo-300">[ Local-first mobile app · iOS and Android ]</p>
-            <h2 className="mt-4 text-3xl font-light text-white">Maha OS</h2>
-            <p className="mt-4 max-w-2xl leading-relaxed text-zinc-400">A local-first companion for focus and metabolic awareness. It is designed to minimize non-essential off-device telemetry and give your device a more intentional default.</p>
-            <div className="mt-6 flex flex-wrap gap-4 text-sm">
-              <Link href="/apps/maha-os" className="border border-indigo-700 px-4 py-2 text-indigo-100 transition hover:bg-indigo-900/40">Explore Maha OS</Link>
-              <a href={APP_STORE_LINKS.mahaOs.ios} className="px-4 py-2 text-indigo-100 underline" target="_blank" rel="noreferrer">Download for iOS</a>
-              <a href={APP_STORE_LINKS.mahaOs.android} className="px-4 py-2 text-indigo-100 underline" target="_blank" rel="noreferrer">Get it for Android</a>
-            </div>
-          </article>
-          <article className="border border-amber-900/50 bg-amber-950/10 p-7 sm:p-9">
-            <p className="font-mono text-[10px] uppercase tracking-widest text-amber-200">[ The Imagined Life · companion app ]</p>
-            <h2 className="mt-4 text-3xl font-light text-white">The Dream Engine</h2>
-            <p className="mt-4 max-w-2xl leading-relaxed text-zinc-400">Read <em>The Imagined Life</em>, then use a quiet, private practice for attention, reflection, and ordinary action. Available now on iOS and Android.</p>
-            <div className="mt-6 flex flex-wrap gap-4 text-sm">
-              <Link href="/apps/the-engine" className="border border-amber-700 px-4 py-2 text-amber-100 transition hover:bg-amber-900/40">Explore The Dream Engine</Link>
-              <a href={APP_STORE_LINKS.dreamEngine.ios} className="px-4 py-2 text-amber-100 underline" target="_blank" rel="noreferrer">Download for iOS</a>
-              <a href={APP_STORE_LINKS.dreamEngine.android} className="px-4 py-2 text-amber-100 underline" target="_blank" rel="noreferrer">Get it for Android</a>
-            </div>
-          </article>
-        </div>
-        <section className="mt-12 border border-zinc-800 bg-[#0d1112] p-7">
-          <p className="font-mono text-[10px] uppercase tracking-widest text-cyan-300">[ Context and provenance ]</p>
-          <h2 className="mt-3 text-2xl font-light text-white">See how the public projects relate</h2>
-          <p className="mt-3 max-w-2xl leading-relaxed text-zinc-400">The applications, research, publishing tools, and book program share an operator or author in different ways. Their evidence and claims are separate. The public map makes those relationships and boundaries explicit.</p>
-          <Link href="/network" className="mt-5 inline-block text-sm text-cyan-100 underline">Open the Maha Knowledge Network</Link>
+        <section className="evidence-section">
+          <div className="grid gap-6">
+            <article className="evidence-card">
+              <p className="evidence-kicker">[ Educational volcano explorer ]</p>
+              <h2 className="evidence-card-title mt-2">Mayon</h2>
+              <p className="evidence-card-copy mt-3">A free, true-scale exploration of Mayon Volcano for learners, educators, and curious visitors. It combines terrain, historical chapters, and clearly bounded hazard scenarios.</p>
+              <div className="mt-6 flex flex-wrap gap-3">
+                <Link href="/apps/mayon" className="evidence-action evidence-action--secondary">Read documentation</Link>
+                <a href={APP_STORE_LINKS.mayon.ios} className="evidence-link" target="_blank" rel="noreferrer">Download for iOS</a>
+                <a href={APP_STORE_LINKS.mayon.android} className="evidence-link" target="_blank" rel="noreferrer">Get it for Android</a>
+                <a href={APP_STORE_LINKS.mayon.web} className="evidence-link" target="_blank" rel="noreferrer">Open the web experience</a>
+              </div>
+            </article>
+
+            <article className="evidence-card">
+              <p className="evidence-kicker">[ Local-first mobile app ]</p>
+              <h2 className="evidence-card-title mt-2">Maha OS</h2>
+              <p className="evidence-card-copy mt-3">A local-first companion for focus and metabolic awareness. It is designed to minimize non-essential off-device telemetry and give your device a more intentional default.</p>
+              <div className="mt-6 flex flex-wrap gap-3">
+                <Link href="/apps/maha-os" className="evidence-action evidence-action--primary">Explore Maha OS</Link>
+                <a href={APP_STORE_LINKS.mahaOs.ios} className="evidence-link" target="_blank" rel="noreferrer">Download for iOS</a>
+                <a href={APP_STORE_LINKS.mahaOs.android} className="evidence-link" target="_blank" rel="noreferrer">Get it for Android</a>
+              </div>
+            </article>
+
+            <article className="evidence-card">
+              <p className="evidence-kicker">[ Companion experience ]</p>
+              <h2 className="evidence-card-title mt-2">The Dream Engine</h2>
+              <p className="evidence-card-copy mt-3">Read <em>The Imagined Life</em>, then use a quiet, private practice for attention, reflection, and ordinary action. Available now on iOS and Android.</p>
+              <div className="mt-6 flex flex-wrap gap-3">
+                <Link href="/apps/the-engine" className="evidence-action evidence-action--secondary">Explore The Dream Engine</Link>
+                <a href={APP_STORE_LINKS.dreamEngine.ios} className="evidence-link" target="_blank" rel="noreferrer">Download for iOS</a>
+                <a href={APP_STORE_LINKS.dreamEngine.android} className="evidence-link" target="_blank" rel="noreferrer">Get it for Android</a>
+              </div>
+            </article>
+          </div>
         </section>
-        <section className="mt-6 border border-zinc-800 bg-[#0d1112] p-7">
-          <p className="font-mono text-[10px] uppercase tracking-widest text-cyan-300">[ Evidence-led operating notes ]</p>
-          <h2 className="mt-3 text-2xl font-light text-white">What is live, and where its boundaries are</h2>
-          <p className="mt-3 max-w-2xl leading-relaxed text-zinc-400">Our case studies link to the live public work and distinguish documented product behavior from future plans or broader claims.</p>
-          <Link href="/case-studies#apps" className="mt-5 inline-block text-sm text-cyan-100 underline">Read the Apps case study</Link>
+
+        <section className="evidence-section">
+          <p className="evidence-kicker">[ Context and provenance ]</p>
+          <h2 className="evidence-section-title">See how the public projects relate</h2>
+          <p className="evidence-copy mt-3">The applications, research, publishing tools, and book program share an operator or author in different ways. Their evidence and claims are separate. The public map makes those relationships and boundaries explicit.</p>
+          <Link href="/network" className="evidence-link mt-5 inline-block">Open the Maha Knowledge Network</Link>
         </section>
-      </section>
+
+        <section className="evidence-section">
+          <p className="evidence-kicker">[ Evidence-led operating notes ]</p>
+          <h2 className="evidence-section-title">What is live, and where boundaries are</h2>
+          <p className="evidence-copy mt-3">Our case studies link to the live public work and distinguish documented product behavior from future plans or broader claims.</p>
+          <Link href="/case-studies#apps" className="evidence-link mt-5 inline-block">Read the Apps case study</Link>
+        </section>
+      </div>
     </main>
   )
 }

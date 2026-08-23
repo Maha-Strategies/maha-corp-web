@@ -101,103 +101,144 @@ const faqJsonLd = {
 }
 
 export default function OnDeviceAiVsCloudPage() {
-  return <main className="min-h-screen bg-[#0a0a0c] px-6 py-20 text-zinc-300 sm:py-28">
-    <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd).replace(/</g, '\\u003c') }} />
-    <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd).replace(/</g, '\\u003c') }} />
-    <article className="mx-auto max-w-4xl">
-      <p className="font-mono text-[10px] uppercase tracking-widest text-indigo-300">[ AI infrastructure · decision guide ]</p>
-      <h1 className="mt-5 max-w-4xl text-4xl font-light leading-tight tracking-tight text-white sm:text-6xl">When should an organization choose on-device AI over cloud AI?</h1>
-      <p className="mt-7 max-w-3xl text-xl leading-relaxed text-zinc-300"><strong>Choose on-device AI when a bounded task gains materially from local data handling, offline operation, or low-latency interaction—and the target hardware can run it reliably.</strong> Choose cloud AI when capability, shared context, centralized operations, or model scale outweigh those local benefits. Many production systems should use both.</p>
-      <p className="mt-5 font-mono text-[11px] uppercase tracking-widest text-zinc-500">By Mayone Maha Rajan · Maha Strategies LLC · <time dateTime={publicationDate}>July 20, 2026</time></p>
+  return (
+    <main className="evidence-page">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd).replace(/</g, '\\u003c') }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd).replace(/</g, '\\u003c') }} />
+      <article className="evidence-container">
+        <p className="evidence-kicker">AI infrastructure · decision guide</p>
+        <h1 className="evidence-title">When should an organization choose on-device AI over cloud AI?</h1>
+        <p className="evidence-lede mt-6">
+          <strong>Choose on-device AI when a bounded task gains materially from local data handling, offline resilience, or low latency and can run reliably on target hardware.</strong> Choose cloud AI when capability, shared context, centralized operations, or model scale outweigh those local benefits. Many production systems should use both.
+        </p>
+        <p className="evidence-kicker mt-5">By Mayone Maha Rajan · Maha Strategies LLC · <time dateTime={publicationDate}>July 20, 2026</time></p>
 
-      <section className="mt-14 border-y border-zinc-800 py-9">
-        <h2 className="text-2xl text-white">Start with the workload, not the slogan</h2>
-        <div className="mt-5 max-w-3xl space-y-4 leading-relaxed text-zinc-400">
-          <p>“On-device” and “cloud” describe where inference or related processing occurs; neither label settles the architecture decision. Begin with the actual task, the data it touches, the quality threshold, device fleet, network conditions, acceptable latency, governance needs, and lifecycle burden.</p>
-          <p>On-device execution can reduce the need to send an input to a remote service. That does not itself make a system private or secure: collection, retention, telemetry, permissions, model delivery, access control, and incident response remain design responsibilities.</p>
-        </div>
-      </section>
+        <section className="evidence-section">
+          <p className="evidence-kicker">Start with the workload, not the slogan</p>
+          <h2 className="evidence-section-title mt-4 max-w-3xl">Model architecture decisions start with constraints, not labels.</h2>
+          <div className="mt-5 space-y-4 evidence-copy">
+            <p>On-device and cloud describe where inference or related processing occurs; neither label settles the architecture decision. Begin with the actual task, the data it touches, the quality threshold, device fleet, network conditions, acceptable latency, governance needs, and lifecycle burden.</p>
+            <p>On-device execution can reduce the need to send an input to a remote service. That does not itself make a system private or secure: collection, retention, telemetry, permissions, model delivery, access control, and incident response remain design responsibilities.</p>
+          </div>
+        </section>
 
-      <section className="mt-14">
-        <h2 className="text-2xl text-white">The deployment decision</h2>
-        <div className="mt-7 grid gap-4">
-          {choices.map(([title, description]) => <section key={title} className="border border-zinc-800 bg-zinc-950 p-6">
-            <h3 className="font-mono text-xs font-bold tracking-widest text-indigo-300">{title}</h3>
-            <p className="mt-3 max-w-3xl leading-relaxed text-zinc-400">{description}</p>
-          </section>)}
-        </div>
-      </section>
+        <section className="evidence-section">
+          <p className="evidence-kicker">Deployment decision</p>
+          <h2 className="evidence-section-title mt-4">Choose the boundary explicitly.</h2>
+          <div className="mt-7 grid gap-4 sm:grid-cols-1 lg:grid-cols-3">
+            {choices.map(([choiceTitle, description]) => (
+              <article key={choiceTitle} className="evidence-card">
+                <p className="evidence-kicker">{choiceTitle}</p>
+                <p className="evidence-copy mt-3">{description}</p>
+              </article>
+            ))}
+          </div>
+        </section>
 
-      <section className="mt-14 grid gap-10 border-t border-zinc-800 pt-10 md:grid-cols-2">
-        <div>
-          <h2 className="text-2xl text-white">Signals for local execution</h2>
-          <ul className="mt-5 list-disc space-y-3 pl-5 leading-relaxed text-zinc-400 marker:text-indigo-300">
-            <li>The input contains personal, proprietary, or safety-sensitive material that should not leave the device unless a user or policy authorizes it.</li>
-            <li>The experience must remain useful during poor or absent connectivity.</li>
-            <li>Interaction quality depends on short, predictable response time.</li>
-            <li>The use case can meet its quality threshold with a compact or specialized model on supported devices.</li>
-          </ul>
-        </div>
-        <div>
-          <h2 className="text-2xl text-white">Signals for cloud execution</h2>
-          <ul className="mt-5 list-disc space-y-3 pl-5 leading-relaxed text-zinc-400 marker:text-indigo-300">
-            <li>The task needs a model, context window, retrieval corpus, or multimodal capability beyond the target fleet.</li>
-            <li>Many users must work from one current shared knowledge base or centrally governed workflow.</li>
-            <li>The organization needs a controlled service layer for policy enforcement, observation, or rapid model changes.</li>
-            <li>Device variability, thermal limits, storage, power, or model distribution make reliable local execution impractical.</li>
-          </ul>
-        </div>
-      </section>
+        <section className="evidence-section">
+          <div className="grid gap-8 lg:grid-cols-2">
+            <article>
+              <p className="evidence-kicker">Signals for local execution</p>
+              <h2 className="evidence-section-title mt-4">When local execution is preferred</h2>
+              <ul className="mt-6 list-disc space-y-3 pl-5 text-sm leading-7 text-[var(--text-secondary)] marker:text-[var(--text-muted)]">
+                <li>The input contains personal, proprietary, or safety-sensitive material that should not leave the device unless a user or policy authorizes it.</li>
+                <li>The experience must remain useful during poor or absent connectivity.</li>
+                <li>Interaction quality depends on short, predictable response time.</li>
+                <li>The use case can meet its quality threshold with a compact or specialized model on supported devices.</li>
+              </ul>
+            </article>
 
-      <section className="mt-14 border border-indigo-900/50 bg-indigo-950/20 p-7 sm:p-9">
-        <p className="font-mono text-[10px] uppercase tracking-widest text-indigo-300">[ Practical default ]</p>
-        <h2 className="mt-4 text-2xl text-white">Minimize unnecessary data movement, then justify every remote dependency.</h2>
-        <p className="mt-4 max-w-3xl leading-relaxed text-zinc-400">A hybrid design is often the most disciplined default: execute local steps that improve privacy, responsiveness, or resilience; make cloud escalation explicit; and measure whether each remote call earns the data flow and operational dependency it introduces.</p>
-      </section>
+            <article>
+              <p className="evidence-kicker">Signals for cloud execution</p>
+              <h2 className="evidence-section-title mt-4">When remote processing is preferred</h2>
+              <ul className="mt-6 list-disc space-y-3 pl-5 text-sm leading-7 text-[var(--text-secondary)] marker:text-[var(--text-muted)]">
+                <li>The task needs a model, context window, retrieval corpus, or multimodal capability beyond the target fleet.</li>
+                <li>Many users must work from one current shared knowledge base or centrally governed workflow.</li>
+                <li>The organization needs a controlled service layer for policy enforcement, observation, or rapid model changes.</li>
+                <li>Device variability, thermal limits, storage, power, or model distribution make reliable local execution impractical.</li>
+              </ul>
+            </article>
+          </div>
+        </section>
 
-      <section className="mt-14 border border-zinc-800 p-7 sm:p-9">
-        <p className="font-mono text-[10px] uppercase tracking-widest text-zinc-500">[ Decision checklist ]</p>
-        <ol className="mt-5 list-decimal space-y-3 pl-5 leading-relaxed text-zinc-400 marker:text-zinc-300">
-          <li>Define the task and minimum acceptable quality before choosing a model or vendor.</li>
-          <li>Map the input, output, retention, telemetry, and authorized data transfers.</li>
-          <li>Test representative target devices under network, thermal, battery, and accessibility constraints.</li>
-          <li>Specify update, rollback, security, and incident-response responsibilities for the chosen architecture.</li>
-          <li>Use a hybrid boundary where it reduces unnecessary transfer without undermining the user outcome.</li>
-        </ol>
-      </section>
+        <section className="evidence-section">
+          <div className="evidence-inset">
+            <p className="evidence-kicker">Practical default</p>
+            <h2 className="evidence-section-title mt-3">Minimize unnecessary data movement, then justify every remote dependency.</h2>
+            <p className="evidence-copy mt-4">
+              A hybrid design is often the most disciplined default: execute local steps that improve privacy, responsiveness, or resilience; make cloud escalation explicit; and measure whether each remote call earns the data flow and operational dependency it introduces.
+            </p>
+          </div>
+        </section>
 
-      <section className="mt-14 border border-indigo-900/50 bg-indigo-950/20 p-7 sm:p-9">
-        <p className="font-mono text-[10px] uppercase tracking-widest text-indigo-300">[ Citation-ready guidance ]</p>
-        <blockquote className="mt-5 max-w-3xl border-l-2 border-indigo-400 pl-5 text-lg leading-relaxed text-zinc-200">“On-device AI is appropriate when a bounded task benefits materially from local data handling, offline resilience, or low latency and can run reliably on target hardware; cloud AI is appropriate when capability, shared context, or centralized operations outweigh those benefits. Hybrid designs often provide the best boundary.”</blockquote>
-        <p className="mt-5 text-sm text-zinc-400">Suggested citation: Maha Rajan, M. (2026, July 20). <em>When Should an Organization Choose On-Device AI Over Cloud AI?</em> Maha Strategies LLC. {canonicalUrl}</p>
-      </section>
+        <section className="evidence-section">
+          <p className="evidence-kicker">Decision checklist</p>
+          <h2 className="evidence-section-title mt-4">A reusable pre-decision checklist</h2>
+          <ol className="mt-6 list-decimal space-y-3 pl-5 text-sm leading-7 text-[var(--text-secondary)] marker:text-[var(--text-primary)]">
+            <li>Define the task and minimum acceptable quality before choosing a model or vendor.</li>
+            <li>Map the input, output, retention, telemetry, and authorized data transfers.</li>
+            <li>Test representative target devices under network, thermal, battery, and accessibility constraints.</li>
+            <li>Specify update, rollback, security, and incident-response responsibilities for the chosen architecture.</li>
+            <li>Use a hybrid boundary where it reduces unnecessary transfer without undermining the user outcome.</li>
+          </ol>
+        </section>
 
-      <section className="mt-14">
-        <h2 className="text-2xl text-white">Frequently asked questions</h2>
-        <div className="mt-6 divide-y divide-zinc-800 border-y border-zinc-800">
-          {faq.map((item) => <div key={item.question} className="py-6">
-            <h3 className="text-lg text-zinc-100">{item.question}</h3>
-            <p className="mt-3 max-w-3xl leading-relaxed text-zinc-400">{item.answer}</p>
-          </div>)}
-        </div>
-      </section>
+        <section className="evidence-section">
+          <p className="evidence-kicker">Citation-ready guidance</p>
+          <h2 className="evidence-section-title mt-4">Recommended summary</h2>
+          <blockquote className="evidence-inset mt-6">
+            <p className="evidence-copy text-base leading-relaxed text-[var(--text-primary)]">
+              On-device AI is appropriate when a bounded task benefits materially from local data handling, offline resilience, or low latency and can run reliably on target hardware; cloud AI is appropriate when capability, shared context, or centralized operations outweigh those benefits. Hybrid designs often provide the best boundary.
+            </p>
+          </blockquote>
+          <p className="evidence-kicker mt-6">Suggested citation: Maha Rajan, M. (2026, July 20). <em>When Should an Organization Choose On-Device AI Over Cloud AI?</em> Maha Strategies LLC. {canonicalUrl}</p>
+        </section>
 
-      <section className="mt-14 border-t border-zinc-800 pt-10">
-        <h2 className="text-2xl text-white">Sources and implementation references</h2>
-        <ol className="mt-6 space-y-5">
-          {sources.map((source) => <li key={source.url} className="leading-relaxed text-zinc-400">
-            <a className="text-zinc-100 underline underline-offset-4 hover:text-white" href={source.url}>{source.name} ↗</a>
-            <span className="block mt-1 text-sm">{source.note}</span>
-          </li>)}
-        </ol>
-      </section>
+        <section className="evidence-section">
+          <p className="evidence-kicker">Frequently asked questions</p>
+          <h2 className="evidence-section-title mt-4">Operational concerns answered</h2>
+          <div className="mt-6 divide-y divide-[var(--border-default)] border-y border-[var(--border-default)]">
+            {faq.map((item) => (
+              <article key={item.question} className="py-6">
+                <h3 className="text-lg text-[var(--text-primary)]">{item.question}</h3>
+                <p className="mt-3 evidence-copy">{item.answer}</p>
+              </article>
+            ))}
+          </div>
+        </section>
 
-      <section className="mt-14 flex flex-wrap gap-4 border-t border-zinc-800 pt-10">
-        <Link href="/mps/learn/implementation" className="border border-zinc-600 px-5 py-3 font-mono text-xs font-bold uppercase tracking-widest text-zinc-100 hover:border-white">Use the implementation framework</Link>
-        <Link href="/mps/learn" className="border border-zinc-600 px-5 py-3 font-mono text-xs font-bold uppercase tracking-widest text-zinc-100 hover:border-white">MPS Learning Center</Link>
-        <Link href="/software" className="border border-zinc-600 px-5 py-3 font-mono text-xs font-bold uppercase tracking-widest text-zinc-100 hover:border-white">Explore Maha OS</Link>
-        <Link href="/systemic-sovereignty" className="border border-zinc-600 px-5 py-3 font-mono text-xs font-bold uppercase tracking-widest text-zinc-100 hover:border-white">Read systemic sovereignty</Link>
-      </section>
-    </article>
-  </main>
+        <section className="evidence-section">
+          <p className="evidence-kicker">Sources and implementation references</p>
+          <h2 className="evidence-section-title mt-4">References</h2>
+          <ol className="mt-6 space-y-5">
+            {sources.map((source) => (
+              <li key={source.url} className="evidence-copy">
+                <a className="evidence-link" href={source.url} target="_blank" rel="noopener noreferrer">
+                  {source.name} ↗
+                </a>
+                <span className="mt-2 block text-sm text-[var(--text-secondary)]">{source.note}</span>
+              </li>
+            ))}
+          </ol>
+        </section>
+
+        <section className="evidence-section">
+          <div className="mt-6 flex flex-wrap gap-3">
+            <Link href="/mps/learn/implementation" className="evidence-action evidence-action--secondary">
+              Use the implementation framework
+            </Link>
+            <Link href="/mps/learn" className="evidence-action evidence-action--secondary">
+              MPS learning center
+            </Link>
+            <Link href="/software" className="evidence-action evidence-action--secondary">
+              Explore Maha OS
+            </Link>
+            <Link href="/systemic-sovereignty" className="evidence-action evidence-action--secondary">
+              How we research
+            </Link>
+          </div>
+        </section>
+      </article>
+    </main>
+  )
 }

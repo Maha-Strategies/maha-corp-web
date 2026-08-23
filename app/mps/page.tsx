@@ -1,31 +1,53 @@
-// app/mps/page.tsx
-// The Maha Provenance Standard v0.1 — public specification page.
-// Static server component; same design system as the auditor at /audit.
+import Link from 'next/link'
+import type { Metadata } from 'next'
 
-import Link from "next/link";
-
-export const metadata = {
-  title: "The Maha Provenance Standard (MPS) v0.1",
+export const metadata: Metadata = {
+  title: 'The Maha Provenance Standard (MPS) v0.1',
   description:
-    "A claim-level tagging standard for AI-assisted nonfiction. Makes the epistemic status of every substantive claim explicit, auditable, and machine-readable.",
-};
+    'A claim-level tagging standard for AI-assisted nonfiction. Makes the epistemic status of every substantive claim explicit, auditable, and machine-readable.',
+}
 
 const TAGS = [
-  { name: "VERIFIED", color: "#237A55", bg: "rgba(35,122,85,0.14)", def: "Confirmed by the author against a primary source, direct computation, or first-hand observation.", test: "Did a human check the primary source or reproduce the result?" },
-  { name: "SOURCED", color: "#2D63B8", bg: "rgba(45,99,184,0.13)", def: "Attributed to an identified, citable secondary source the author has read but not independently verified.", test: "Can the reader follow a citation to a real, identified document?" },
-  { name: "BOUNDARY", color: "#A06F14", bg: "rgba(176,124,30,0.16)", def: "Accurately reports the limits of knowledge: open questions, untested conjectures, contested findings — where the claim's content is the uncertainty itself.", test: "Is the claim honest about what is not known?" },
-  { name: "ILLUSTRATIVE", color: "#6E56A8", bg: "rgba(110,86,168,0.13)", def: "Analogy, thought experiment, composite example, or structural metaphor. Carries explanatory weight only; asserts nothing about the world.", test: "Would the argument survive if this were literally false?" },
-  { name: "UNVERIFIED", color: "#B3402E", bg: "rgba(179,64,46,0.14)", def: "Asserted without confirmation: recalled from memory, AI-generated and unchecked, or awaiting verification. A flag of honesty, not a license.", test: "Is this claim still owed work?" },
-];
+  {
+    name: 'VERIFIED',
+    color: 'var(--status-verified)',
+    def: 'Confirmed by the author against a primary source, direct computation, or first-hand observation.',
+    test: 'Did a human check the primary source or reproduce the result?',
+  },
+  {
+    name: 'SOURCED',
+    color: 'var(--status-sourced)',
+    def: 'Attributed to an identified, citable secondary source the author has read but not independently verified.',
+    test: 'Can the reader follow a citation to a real, identified document?',
+  },
+  {
+    name: 'BOUNDARY',
+    color: 'var(--status-boundary)',
+    def: "Accurately reports the limits of knowledge: open questions, untested conjectures, or contested findings where uncertainty is part of the claim.",
+    test: 'Is the claim honest about what is not known?',
+  },
+  {
+    name: 'ILLUSTRATIVE',
+    color: 'var(--status-illustrative)',
+    def: 'Analogy, thought experiment, composite example, or structural metaphor. Explanatory only; not a claim about the world.',
+    test: 'Would the argument survive if this detail were false?',
+  },
+  {
+    name: 'UNVERIFIED',
+    color: 'var(--status-unverified)',
+    def: 'Asserted without confirmation: recalled from memory, AI-generated and unchecked, or awaiting verification.',
+    test: 'Is this claim still owed work before acting on it?',
+  },
+] as const
 
 const RULES = [
-  "No untagged substantive claims in a compliant document.",
-  "UNVERIFIED is a workflow state, not a shipping state. Production documents should carry zero UNVERIFIED tags or justify each remaining one.",
-  "Quotations and statistics are never ILLUSTRATIVE. A real-seeming number or quote must be VERIFIED or SOURCED, or removed.",
-  "AI-suggested citations are UNVERIFIED until a human opens the source. Citation existence, authorship, and content must all be confirmed for promotion to SOURCED.",
-  "Speculative frameworks (untested theory, forecast, conjecture) presented as context take BOUNDARY; mappings drawn from them take ILLUSTRATIVE.",
-  "Tags describe status, not confidence. A tag is a record of what checking was done, not how sure the author feels.",
-];
+  'No untagged substantive claims in a compliant document.',
+  'UNVERIFIED is a workflow state, not a shipping state. Production documents should carry zero UNVERIFIED tags or justify each remaining one.',
+  'Quotations and statistics are never ILLUSTRATIVE. A real-seeming number or quote must be VERIFIED or SOURCED, or removed.',
+  'AI-suggested citations are UNVERIFIED until a human opens the source. Citation existence, authorship, and content must all be confirmed for promotion to SOURCED.',
+  'Speculative frameworks presented as context take BOUNDARY; derived mappings drawn from them take ILLUSTRATIVE.',
+  'Tags describe status, not confidence. A tag records what checking was done, not how sure the author feels.',
+] as const
 
 const SCHEMA = `{
   "mps_version": "0.1",
@@ -42,163 +64,124 @@ const SCHEMA = `{
     }
   ],
   "summary": { "counts_by_tag": {}, "compliance": "pass | conditional | fail" }
-}`;
-
-const sec = { fontSize: 11, letterSpacing: "0.16em", color: "#5A6660", marginBottom: 14, marginTop: 48 } as const;
-const body = { fontSize: 17.5, lineHeight: 1.7, color: "#1A2420", maxWidth: 680 } as const;
+}`
 
 export default function MpsPage() {
   return (
-    <div className="mps-page" style={{ minHeight: "100vh", background: "#EEF1EC", color: "#1A2420", fontFamily: "'Newsreader', Georgia, serif" }}>
-      <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
-        .mono { font-family: 'IBM Plex Mono', monospace; }
-        .mps-page a { color: #1A2420; }
-      `}</style>
-
-      <div style={{ maxWidth: 880, margin: "0 auto", padding: "40px 20px 100px" }}>
-
-        <div className="mono" style={{ fontSize: 11, letterSpacing: "0.18em", color: "#5A6660", display: "flex", justifyContent: "space-between", borderBottom: "1px solid #C8CEC6", paddingBottom: 12 }}>
-          <span>MAHA PROVENANCE STANDARD</span><span>MPS/0.1 · SPECIFICATION</span>
-        </div>
-
-        <h1 style={{ fontSize: "clamp(34px, 6vw, 54px)", fontWeight: 500, lineHeight: 1.08, margin: "34px 0 14px", letterSpacing: "-0.01em" }}>
-          The Maha Provenance Standard
-        </h1>
-        <p className="mono" style={{ fontSize: 12, letterSpacing: "0.08em", color: "#5A6660", marginBottom: 26 }}>
-          v0.1 · DRAFT FOR PUBLIC COMMENT · MAINTAINED BY MAHA STRATEGIES LLC · SPEC TEXT CC BY 4.0 ·{" "}
-          <a href="https://doi.org/10.5281/zenodo.21241308" style={{ color: "#5A6660" }}>DOI: 10.5281/ZENODO.21241308</a>
-        </p>
-        <p style={{ ...body, fontSize: 19 }}>
-          MPS is a claim-level tagging system for nonfiction produced with or without AI
-          assistance. It makes the epistemic status of every substantive claim in a document
-          explicit, auditable, and machine-readable.
-        </p>
-        <p style={body}>
-          It exists because AI-assisted writing fails in a characteristic way: fluent,
-          confident, well-formatted fabrication. Document-level disclosure — &ldquo;AI was used
-          in this work&rdquo; — tells the reader nothing about <em>which sentences to trust</em>.
-          MPS operates at the claim level.
-        </p>
-        <p style={{ ...body, marginTop: 16 }}>
-          New to the standard? Read <Link href="/mps/what-is-mps">the concise MPS explainer</Link>
-          {' '}for its scope, limits, citation format, and canonical sources.
-        </p>
-        <p style={{ ...body, marginTop: 12 }}>
-          For practical writing guidance, visit the <Link href="/mps/learn">MPS Learning Center</Link>:
-          {' '}claim-level provenance, citing AI-assisted research, and separating source, interpretation, and speculation.
-        </p>
-        <p style={{ marginTop: 22 }}>
-          <Link href="/audit" className="mono" style={{ fontSize: 12, letterSpacing: "0.1em", background: "#1A2420", color: "#EEF1EC", padding: "12px 22px", textDecoration: "none", borderRadius: 2, display: "inline-block" }}>
-            RUN A FREE PREFLIGHT →
-          </Link>
-          <Link href="/mps/preflight" className="mono" style={{ fontSize: 12, letterSpacing: "0.1em", border: "1px solid #1A2420", color: "#1A2420", padding: "11px 20px", textDecoration: "none", borderRadius: 2, display: "inline-block", marginLeft: 10 }}>
-            RUN A PRIVATE PREFLIGHT — $49 →
-          </Link>
-          <Link href="/mps/audit-access" className="mono" style={{ fontSize: 12, letterSpacing: "0.1em", border: "1px solid #1A2420", color: "#1A2420", padding: "11px 20px", textDecoration: "none", borderRadius: 2, display: "inline-block", marginLeft: 10, marginTop: 10 }}>
-            PURCHASE API AUDIT ACCESS →
-          </Link>
-        </p>
-
-        <div className="mono" style={sec}>1 · SCOPE</div>
-        <p style={body}>
-          MPS applies to <strong>substantive claims</strong>: statements of fact, attribution,
-          quantity, causation, or expert consensus that a reader might reasonably rely on. It
-          does not apply to opinion clearly framed as opinion, rhetorical questions, or
-          structural prose.
-        </p>
-
-        <div className="mono" style={sec}>2 · THE FIVE TAGS</div>
-        <p style={{ ...body, marginBottom: 18 }}>Every substantive claim receives exactly one tag.</p>
-        {TAGS.map((t) => (
-          <div key={t.name} style={{ background: t.bg, borderLeft: `3px solid ${t.color}`, padding: "14px 18px", borderRadius: 2, marginBottom: 10, maxWidth: 680 }}>
-            <span className="mono" style={{ fontSize: 12, fontWeight: 600, color: t.color, letterSpacing: "0.08em" }}>[{t.name}]</span>
-            <p style={{ fontSize: 16, lineHeight: 1.55, margin: "6px 0 4px" }}>{t.def}</p>
-            <p style={{ fontSize: 14.5, lineHeight: 1.5, margin: 0, color: "#3A453F", fontStyle: "italic" }}>Test: {t.test}</p>
-          </div>
-        ))}
-
-        <div className="mono" style={sec}>3 · TAG DISCIPLINE RULES</div>
-        <ol style={{ ...body, paddingLeft: 22 }}>
-          {RULES.map((r, i) => (
-            <li key={i} style={{ marginBottom: 12 }}>{r}</li>
-          ))}
-        </ol>
-
-        <div className="mono" style={sec}>4 · MACHINE-READABLE SERIALIZATION</div>
-        <p style={body}>
-          <strong>Inline form</strong> (human-readable documents): a trailing tag per claim or
-          claim cluster — <span className="mono" style={{ fontSize: 14 }}>Claim text. [TAG]</span> —
-          as practiced across the Maha Strategies book series.
-        </p>
-        <p style={{ ...body, marginTop: 14 }}>
-          <strong>Structured form</strong> (audit records): the JSON record below. The live
-          auditor at <Link href="/audit">/audit</Link> exports this format.
-        </p>
-        <pre className="mono" style={{ background: "#1A2420", color: "#DDE2DB", padding: "18px 20px", borderRadius: 3, fontSize: 13, lineHeight: 1.6, overflowX: "auto", maxWidth: 680 }}>
-          {SCHEMA}
-        </pre>
-        <p style={body}>
-          <strong>Site-level declaration:</strong> a document or site may declare its provenance
-          regime in <span className="mono" style={{ fontSize: 14 }}>llms.txt</span> or structured-data
-          metadata: <span className="mono" style={{ fontSize: 14 }}>provenance-standard: MPS/0.1</span>.
-        </p>
-
-        <div className="mono" style={sec}>4A · PUBLIC REGISTRY</div>
-        <p style={body}>
-          The MPS Registry publishes versioned, machine-readable claim records for this standard.
-          Each public record includes its evidence context, review metadata, and a content hash.
-        </p>
-        <p style={{ marginTop: 22 }}>
-          <a href="https://mps.mahastrategies.com/v1/records" target="_blank" rel="noreferrer" className="mono" style={{ fontSize: 12, letterSpacing: "0.1em", background: "#1A2420", color: "#EEF1EC", padding: "12px 22px", textDecoration: "none", borderRadius: 2, display: "inline-block" }}>
-            OPEN THE MPS REGISTRY ↗
-          </a>
-        </p>
-
-        <div className="mono" style={sec}>5 · COMPLIANCE LEVELS</div>
-        <p style={body}>
-          <strong>MPS-Declared</strong> — the document states it follows MPS and tags its claims.<br />
-          <strong>MPS-Audited</strong> — an independent party has produced a structured audit record (§4).<br />
-          <strong>MPS-Certified</strong> <em>(reserved)</em> — audited, with all UNVERIFIED resolved and a
-          published audit trail.
-        </p>
-
-        <div className="mono" style={sec}>6 · RELATIONSHIP TO AI DISCLOSURE</div>
-        <p style={body}>
-          MPS is complementary to, and stricter than, document-level AI-use disclosure. A
-          compliant document additionally discloses how AI was used (drafting, research,
-          editing) in front matter. MPS does not prohibit AI assistance; it prohibits
-          <strong> unlabeled uncertainty</strong>.
-        </p>
-
-        <div className="mono" style={sec}>7 · PROVENANCE OF THIS STANDARD</div>
-        <p style={body}>
-          Developed 2025–2026 across the Maha Strategies book series and research program,
-          including an audit of AI fabrication failure modes and a pre-registered 15,000-query
-          study of model reliability. The standard is published under its own discipline.
-        </p>
-
-        <div className="mono" style={sec}>8 · AUDITS &amp; ADOPTION</div>
-        <p style={body}>
-          Maha Strategies conducts full manuscript audits against this standard — every claim
-          resolved source-by-source, delivered as a structured MPS/0.1 record. To request an
-          audit or discuss adopting MPS for your publication:{" "}
-          <a href="/contact">mahastrategies.com/contact</a> or{" "}
-          <a href="mailto:mayone@mahastrategies.com">mayone@mahastrategies.com</a>.
-        </p>
-        <p style={body}>
-          Start with a <Link href="/audit">free public preflight</Link> for a short passage, or use the
-          private <Link href="/mps/preflight">MPS Preflight</Link> for a longer document extract and a
-          retained private report before commissioning a source-by-source human review.
-        </p>
-
-        <div style={{ borderTop: "1px solid #C8CEC6", marginTop: 56, paddingTop: 18 }}>
-          <p className="mono" style={{ fontSize: 11, letterSpacing: "0.12em", color: "#5A6660", lineHeight: 1.8 }}>
-            MAHA STRATEGIES LLC · MAHASTRATEGIES.COM<br />
-            FEEDBACK & MANUSCRIPT AUDITS: VIA MAHASTRATEGIES.COM · VERSIONING: SEMANTIC
+    <main className="evidence-page">
+      <div className="evidence-container">
+        <header className="border-t border-[var(--border-default)] pt-5">
+          <p className="evidence-kicker flex flex-wrap justify-between gap-3 text-[var(--text-muted)]">
+            <span>MAHA PROVENANCE STANDARD</span>
+            <span>MPS/0.1 · SPECIFICATION</span>
           </p>
-        </div>
+          <h1 className="evidence-title evidence-title--product mt-4">The Maha Provenance Standard</h1>
+          <p className="evidence-kicker mt-3">v0.1 · draft for public comment</p>
+          <p className="evidence-lede mt-7">
+            MPS is a claim-level tagging standard for AI-assisted nonfiction. It makes the epistemic status of every substantive claim explicit, auditable, and machine-readable.
+          </p>
+          <p className="evidence-copy mt-5">
+            In AI-assisted writing, fluent and confident prose can hide unsupported statements. MPS is designed so reviewers can quickly see exactly what was checked, and what remains open.
+          </p>
+          <div className="mt-8 flex flex-wrap gap-3">
+            <Link href="/audit" className="evidence-action evidence-action--secondary">Run a free preflight ↗</Link>
+            <Link href="/mps/preflight" className="evidence-action evidence-action--primary">Run a private preflight · $49 ↗</Link>
+            <Link href="/mps/audit-access" className="evidence-action evidence-action--secondary">Purchase API audit access ↗</Link>
+          </div>
+        </header>
+
+        <section className="evidence-section" aria-labelledby="scope-heading">
+          <p className="evidence-kicker">1 · SCOPE</p>
+          <h2 id="scope-heading" className="evidence-section-title mt-4">What kinds of claims does MPS apply to?</h2>
+          <p className="evidence-copy mt-5">
+            Substantive factual claims: statements of fact, attribution, quantity, causation, or expert consensus that a reader might reasonably rely on.
+          </p>
+          <p className="evidence-copy mt-4">
+            It does not apply to pure opinion or rhetorical style, and it does not replace ordinary editorial judgment.
+          </p>
+        </section>
+
+        <section className="evidence-section" aria-labelledby="tags-heading">
+          <p className="evidence-kicker">2 · THE FIVE TAGS</p>
+          <h2 id="tags-heading" className="evidence-section-title mt-4">Every substantive claim receives one status tag.</h2>
+          <div className="mt-7 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+            {TAGS.map((tag) => (
+              <article key={tag.name} className="evidence-card" style={{ borderLeft: `3px solid ${tag.color}` }}>
+                <p className="evidence-kicker" style={{ color: tag.color }}>{tag.name}</p>
+                <p className="evidence-card-title mt-3">{tag.name}</p>
+                <p className="evidence-copy mt-4">{tag.def}</p>
+                <p className="evidence-copy mt-4 text-[var(--text-primary)]">Validation check: {tag.test}</p>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <section className="evidence-section" aria-labelledby="rules-heading">
+          <p className="evidence-kicker">3 · DISCIPLINE RULES</p>
+          <h2 id="rules-heading" className="evidence-section-title mt-4">Required behavior for compliant documents.</h2>
+          <ol className="evidence-card mt-7 space-y-3 not list-inside marker:text-[var(--text-primary)]">
+            {RULES.map((rule, idx) => (
+              <li key={rule} className="evidence-copy">
+                <span className="font-mono text-xs text-[var(--text-muted)]">{String(idx + 1).padStart(2, '0')}.</span>{' '}
+                {rule}
+              </li>
+            ))}
+          </ol>
+        </section>
+
+        <section className="evidence-section" aria-labelledby="schema-heading">
+          <p className="evidence-kicker">4 · MACHINE-READABLE MODEL</p>
+          <h2 id="schema-heading" className="evidence-section-title mt-4">Structured schema for audits and tooling.</h2>
+          <p className="evidence-copy mt-5">
+            <strong>Inline form:</strong> trailing tags in human-readable text (for quick authoring).
+            <br />
+            <strong>Structured form:</strong> MPS records exported by tools and auditors.
+          </p>
+          <pre className="evidence-code mt-6 overflow-x-auto p-5">{SCHEMA}</pre>
+          <p className="evidence-copy mt-5">
+            Sites can declare a provenance regime in metadata or policy as <span className="font-mono">provenance-standard: MPS/0.1</span>.
+          </p>
+          <p className="evidence-copy mt-4">
+            New to the standard? Start with <Link href="/mps/what-is-mps" className="evidence-link">the concise explainer</Link> and then try{' '}
+            <Link href="/audit" className="evidence-link">a public preflight</Link>.
+          </p>
+        </section>
+
+        <section className="evidence-section" aria-labelledby="compliance-heading">
+          <p className="evidence-kicker">5 · COMPLIANCE LEVELS</p>
+          <h2 id="compliance-heading" className="evidence-section-title mt-4">How to classify the maturity of an output.</h2>
+          <div className="evidence-card mt-7">
+            <p className="evidence-card-copy"><strong>MPS-Declared</strong> — document states it follows MPS and tags substantive claims.</p>
+            <p className="evidence-card-copy mt-3"><strong>MPS-Audited</strong> — independent party generated a structured audit record.</p>
+            <p className="evidence-card-copy mt-3"><strong>MPS-Certified</strong> (reserved) — audited, with all UNVERIFIED tags resolved and a published trail.</p>
+          </div>
+        </section>
+
+        <section className="evidence-section" aria-labelledby="adoption-heading">
+          <p className="evidence-kicker">6 · ADOPTION</p>
+          <h2 id="adoption-heading" className="evidence-section-title mt-4">Maha conducts audits and supports adoption.</h2>
+          <p className="evidence-copy mt-5">
+            If you want MPS support for a publication or product, reach out at{' '}
+            <a className="evidence-link" href="mailto:mayone@mahastrategies.com">mayone@mahastrategies.com</a>.
+          </p>
+          <p className="evidence-copy mt-4">
+            Also reviewed: <a className="evidence-link" href="https://mps.mahastrategies.com/v1/records" target="_blank" rel="noreferrer">MPS Registry</a> and{' '}
+            <Link href="/mps/audit-access" className="evidence-link">Private Audit Access</Link>.
+          </p>
+          <p className="evidence-copy mt-4">
+            Need private review: <Link href="/mps/preflight" className="evidence-link">MPS Preflight</Link>.
+          </p>
+        </section>
+
+        <section className="evidence-section" aria-labelledby="links-heading">
+          <p className="evidence-kicker">7 · LINKS</p>
+          <div className="mt-5 flex flex-wrap gap-4">
+            <a className="evidence-link" href="https://research.mahastrategies.com" target="_blank" rel="noreferrer">Research portal ↗</a>
+            <a className="evidence-link" href="https://doi.org/10.5281/zenodo.21241308" target="_blank" rel="noreferrer">DOI reference ↗</a>
+            <Link className="evidence-link" href="/mps/learn">MPS learning center ↗</Link>
+          </div>
+        </section>
       </div>
-    </div>
-  );
+    </main>
+  )
 }
