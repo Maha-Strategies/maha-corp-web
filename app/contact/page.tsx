@@ -127,7 +127,7 @@ export default function ContactPage() {
         </header>
 
         <section className="evidence-section" aria-label="Path and controls">
-          <EngagementPath />
+          <EngagementPath tone="paper" />
         </section>
 
         <section className="evidence-section" aria-label="Inquiry form">

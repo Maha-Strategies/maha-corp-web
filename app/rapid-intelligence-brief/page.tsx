@@ -97,7 +97,7 @@ export default function RapidIntelligenceBriefPage() {
           </Link>
         </div>
 
-        <EngagementPath offer="rapid" className="mb-24" />
+        <EngagementPath offer="rapid" tone="paper" className="mb-24" />
 
         <section
           id="scope"
