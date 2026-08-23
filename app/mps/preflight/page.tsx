@@ -25,34 +25,45 @@ export default function MpsPreflightPage() {
     provider: { '@type': 'Organization', '@id': 'https://www.mahastrategies.com/#organization', name: 'Maha Strategies LLC' },
     offers: { '@type': 'Offer', price: '49', priceCurrency: 'USD', availability: 'https://schema.org/InStock', url: 'https://www.mahastrategies.com/mps/preflight' },
   }
+
   return (
-    <main className="evidence-page"><div className="evidence-container evidence-container--narrow">
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />
-        <Link href="/mps" className="font-mono text-[11px] uppercase tracking-widest text-[var(--text-muted)] transition-colors hover:text-[var(--text-primary)]">← Maha Provenance Standard</Link>
-        <div className="mt-10 grid gap-12 lg:grid-cols-[1.2fr_.8fr]">
-          <section>
-            <p className="font-mono text-[10px] uppercase tracking-widest text-[var(--text-muted)]">[ MPS/0.1 · self-service document review ]</p>
-            <h1 className="evidence-title evidence-title--product">Know what your draft is asking readers to trust.</h1>
-            <p className="mt-7 max-w-2xl text-lg leading-relaxed text-[var(--text-secondary)]">MPS Preflight turns a short nonfiction draft into a claim-level map before you publish, circulate, or use it in a decision. It is an automated triage—not a certification or substitute for source-by-source human verification.</p>
-            <div className="mt-9 border-y border-[var(--border-default)] py-6">
-              {included.map((item) => <p key={item} className="mb-4 flex gap-3 text-sm leading-relaxed text-[var(--text-secondary)] last:mb-0"><span className="font-mono text-[var(--text-muted)]">01</span>{item}</p>)}
+    <main className="evidence-page">
+      <div className="evidence-container evidence-container--narrow">
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />
+        <header className="border-t border-[var(--border-default)] pt-5">
+          <p className="evidence-kicker">MPS/0.1 · self-service document review</p>
+          <h1 className="evidence-title evidence-title--product">Know what your draft is asking readers to trust.</h1>
+          <p className="evidence-lede mt-7">MPS Preflight turns a short nonfiction draft into a claim-level map before you publish, circulate, or use it in a decision.</p>
+          <p className="evidence-copy mt-5">It is automated triage—not a certification or substitute for source-by-source human verification.</p>
+          <Link href="/mps" className="evidence-link mt-7 inline-block font-mono text-xs uppercase tracking-widest">← Maha Provenance Standard</Link>
+        </header>
+
+        <section className="evidence-section grid gap-10 lg:grid-cols-[1.2fr_.8fr]">
+          <div>
+            <p className="evidence-kicker">Included</p>
+            <div className="mt-6 grid gap-3">
+              {included.map((item, index) => (
+                <article key={item} className="evidence-card flex gap-4">
+                  <span className="evidence-kicker pt-1">{String(index + 1).padStart(2, '0')}</span>
+                  <p className="evidence-card-copy">{item}</p>
+                </article>
+              ))}
             </div>
-            <div className="mt-8 flex flex-wrap gap-3 font-mono text-[10px] uppercase tracking-widest text-[var(--text-muted)]">
-              <span>One-time purchase</span><span>·</span><span>$49 USD</span><span>·</span><span>No account required</span>
-            </div>
-            <p className="mt-5 text-sm leading-relaxed text-[var(--text-secondary)]">Want to see the format first? <Link href="/mps/preflight/example" className="text-[var(--text-muted)] underline underline-offset-4 hover:text-[var(--text-primary)]">Inspect a transparent sample report</Link>.</p>
-            <p className="mt-7 max-w-2xl text-sm leading-relaxed text-[var(--text-muted)]">Need a complete manuscript, source-by-source resolution, or a review that someone can rely on in a high-stakes decision? Start with a <Link href="/contact" className="text-[var(--text-muted)] underline underline-offset-4 hover:text-[var(--text-primary)]">human Evidence Audit inquiry</Link> instead.</p>
-          </section>
-          <aside className="border-l border-[var(--border-default)] pl-0 lg:pl-10">
-            <p className="font-mono text-[10px] uppercase tracking-widest text-[var(--text-muted)]">[ Preflight scope ]</p>
-            <dl className="mt-5 grid gap-5 text-sm">
-              <div><dt className="font-mono text-[10px] uppercase tracking-widest text-[var(--text-muted)]">Best for</dt><dd className="mt-1 leading-relaxed text-[var(--text-secondary)]">A report section, a policy memo, an article, or a manuscript extract.</dd></div>
-              <div><dt className="font-mono text-[10px] uppercase tracking-widest text-[var(--text-muted)]">Not included</dt><dd className="mt-1 leading-relaxed text-[var(--text-secondary)]">Primary-source verification, legal or investment advice, or a public MPS certification.</dd></div>
-              <div><dt className="font-mono text-[10px] uppercase tracking-widest text-[var(--text-muted)]">Privacy</dt><dd className="mt-1 leading-relaxed text-[var(--text-secondary)]">The source document is not saved in the ledger. The report retains an input hash and its claim excerpts.</dd></div>
+            <p className="evidence-kicker mt-8">One-time purchase · $49 USD · no account required</p>
+            <p className="evidence-copy mt-5">Want to see the format first? <Link href="/mps/preflight/example" className="evidence-link">Inspect a transparent sample report</Link>.</p>
+            <p className="evidence-copy mt-6">Need a complete manuscript, source-by-source resolution, or a review that someone can rely on in a high-stakes decision? Start with a <Link href="/contact" className="evidence-link">human Evidence Audit inquiry</Link> instead.</p>
+          </div>
+
+          <aside className="evidence-card h-fit">
+            <p className="evidence-kicker">Preflight scope</p>
+            <dl className="mt-6 grid gap-6">
+              <div><dt className="evidence-kicker">Best for</dt><dd className="evidence-card-copy mt-2">A report section, a policy memo, an article, or a manuscript extract.</dd></div>
+              <div><dt className="evidence-kicker">Not included</dt><dd className="evidence-card-copy mt-2">Primary-source verification, legal or investment advice, or a public MPS certification.</dd></div>
+              <div><dt className="evidence-kicker">Privacy</dt><dd className="evidence-card-copy mt-2">The source document is not saved in the ledger. The report retains an input hash and its claim excerpts.</dd></div>
             </dl>
             <PreflightCheckout />
           </aside>
-        </div>
+        </section>
       </div>
     </main>
   )
