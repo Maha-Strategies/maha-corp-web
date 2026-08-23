@@ -22,23 +22,32 @@ export default async function AuditAccessPage({ searchParams }: { searchParams: 
       dangerouslySetInnerHTML={{ __html: JSON.stringify(mpsAuditServiceJsonLd).replace(/</g, '\\u003c') }}
     />}
     <div className="evidence-container evidence-container--narrow">
-      <Link href="/mps" className="font-mono text-[11px] uppercase tracking-widest text-[var(--text-muted)] hover:text-[var(--text-primary)]">← Maha Provenance Standard</Link>
-      <p className="mt-12 font-mono text-[10px] uppercase tracking-widest text-[var(--text-muted)]">[ MPS/0.1 · prepaid API access ]</p>
-      <h1 className="mt-5 text-4xl font-light leading-tight tracking-tight text-[var(--text-primary)] sm:text-6xl">Claim-level audits, when your workflow needs them.</h1>
-      <p className="mt-7 max-w-2xl text-lg leading-relaxed text-[var(--text-secondary)]">Purchase a fixed pack of audit invocations and receive a credential scoped only to the MPS audit endpoint. No subscription and no access to internal services.</p>
-      <div className="mt-9 grid gap-4 border-y border-[var(--border-default)] py-7 text-sm leading-relaxed sm:grid-cols-3">
-        <p><span className="block font-mono text-[10px] uppercase tracking-widest text-[var(--text-muted)]">Scope</span>MPS audit API only</p>
-        <p><span className="block font-mono text-[10px] uppercase tracking-widest text-[var(--text-muted)]">Billing</span>Prepaid credits</p>
-        <p><span className="block font-mono text-[10px] uppercase tracking-widest text-[var(--text-muted)]">Failures</span>Credit returned automatically</p>
-      </div>
-      <p className="mt-5 text-xs leading-relaxed text-[var(--text-muted)]">Machine-readable terms: <a className="text-[var(--text-secondary)] underline underline-offset-4 hover:text-[var(--text-primary)]" href="/agent-offers.json">commercial manifest</a> · <a className="text-[var(--text-secondary)] underline underline-offset-4 hover:text-[var(--text-primary)]" href="/llm-context/agentic-commerce.md">agent context</a> · <a className="text-[var(--text-secondary)] underline underline-offset-4 hover:text-[var(--text-primary)]" href="/api/docs/openapi">OpenAPI</a></p>
-      {available
-        ? <AuditAccessCheckout purchaseState={typeof purchase === 'string' ? purchase : undefined} />
-        : <div className="mt-10 border border-[var(--border-default)] bg-[var(--surface-raised)]/60 p-6">
-            <p className="font-mono text-[10px] uppercase tracking-widest text-[var(--status-boundary)]">[ purchasing temporarily closed ]</p>
-            <p className="mt-4 text-sm leading-relaxed text-[var(--text-secondary)]">Prepaid audit access is not open for purchase right now. Nothing has been charged and no credential has been issued.</p>
-            <p className="mt-4 text-sm leading-relaxed text-[var(--text-secondary)]">The free bounded preflight at <Link href="/audit" className="text-[var(--text-secondary)] underline underline-offset-4 hover:text-[var(--text-primary)]">/audit</Link> remains available, and <Link href="/contact" className="text-[var(--text-secondary)] underline underline-offset-4 hover:text-[var(--text-primary)]">contact</Link> reaches a human who can arrange access directly.</p>
-          </div>}
+      <header className="border-t border-[var(--border-default)] pt-5">
+        <p className="evidence-kicker">MPS/0.1 · prepaid API access</p>
+        <h1 className="evidence-title evidence-title--product">Claim-level audits, when your workflow needs them.</h1>
+        <p className="evidence-lede mt-7">Purchase a fixed pack of audit invocations and receive a credential scoped only to the MPS audit endpoint.</p>
+        <p className="evidence-copy mt-5">No subscription and no access to internal services.</p>
+        <Link href="/mps" className="evidence-link mt-7 inline-block font-mono text-xs uppercase tracking-widest">← Maha Provenance Standard</Link>
+      </header>
+
+      <section className="evidence-section">
+        <div className="grid gap-4 sm:grid-cols-3">
+          <article className="evidence-card"><p className="evidence-kicker">Scope</p><p className="evidence-card-copy mt-3">MPS audit API only</p></article>
+          <article className="evidence-card"><p className="evidence-kicker">Billing</p><p className="evidence-card-copy mt-3">Prepaid credits</p></article>
+          <article className="evidence-card"><p className="evidence-kicker">Failures</p><p className="evidence-card-copy mt-3">Credit returned automatically</p></article>
+        </div>
+        <p className="evidence-kicker mt-7">Machine-readable terms: <a className="evidence-link normal-case tracking-normal" href="/agent-offers.json">commercial manifest</a> · <a className="evidence-link normal-case tracking-normal" href="/llm-context/agentic-commerce.md">agent context</a> · <a className="evidence-link normal-case tracking-normal" href="/api/docs/openapi">OpenAPI</a></p>
+      </section>
+
+      <section className="evidence-section">
+        {available
+          ? <AuditAccessCheckout purchaseState={typeof purchase === 'string' ? purchase : undefined} />
+          : <div className="evidence-inset">
+              <p className="evidence-kicker text-[var(--status-boundary)]">Purchasing temporarily closed</p>
+              <p className="evidence-copy mt-4">Prepaid audit access is not open for purchase right now. Nothing has been charged and no credential has been issued.</p>
+              <p className="evidence-copy mt-4">The free bounded preflight at <Link href="/audit" className="evidence-link">/audit</Link> remains available, and <Link href="/contact" className="evidence-link">contact</Link> reaches a human who can arrange access directly.</p>
+            </div>}
+      </section>
     </div>
   </main>
 }
