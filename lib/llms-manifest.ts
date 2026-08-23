@@ -47,6 +47,7 @@ export function buildLlmsManifest(claims: readonly MpsClaim[]): string {
     // is capability-specific: Context Compression supports x402, while Stripe
     // checkout and scoped engagements retain their human boundary.
     '## Agentic commerce',
+    '- Maha Machine-Readable Registry (public capabilities, evidence, schemas, and boundaries): https://www.mahastrategies.com/maha-machine-readable-registry.json',
     `- Machine-readable offer manifest: ${AGENTIC_COMMERCE_MANIFEST_URL}`,
     `- Offers API: ${AGENTIC_COMMERCE_API_URL}`,
     `- Agent context note: ${AGENTIC_COMMERCE_CONTEXT_URL}`,
