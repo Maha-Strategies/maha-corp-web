@@ -143,6 +143,14 @@ body {
   color: var(--text-secondary);
   font-size: 1rem;
   line-height: 1.75;
+  /*
+   * Contract addresses, digests and URLs appear throughout this copy and have
+   * no break opportunity. Inside a grid item, whose default min-width is auto,
+   * one such token sizes the whole column and pushes the body into horizontal
+   * scroll on a phone. Wrapping them is cheaper than remembering not to write
+   * one.
+   */
+  overflow-wrap: anywhere;
 }
 
 .evidence-section {
@@ -152,6 +160,7 @@ body {
 }
 
 .evidence-card {
+  min-width: 0;
   border: 1px solid var(--border-default);
   border-radius: 2px;
   background: var(--surface-raised);
@@ -175,6 +184,7 @@ body {
   color: var(--text-secondary);
   font-size: 0.875rem;
   line-height: 1.65;
+  overflow-wrap: anywhere;
 }
 
 .evidence-action {
