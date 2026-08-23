@@ -6,6 +6,7 @@ import test from 'node:test'
 import { doctor, gatewayValidate, verify, GATEWAY_NAMES } from '../lib/context-control-cli/index.ts'
 import { MCP_TOOLS, callMcpTool, mcpManifest, EVIDENCE_BOUNDARY } from '../lib/maha-mcp/index.ts'
 import { a2aAgentCard, handleA2ATask, resetA2AReplayMemory } from '../lib/maha-a2a/index.ts'
+import { mcpCredentialArgumentFields } from '../lib/maha-mcp-server/index.ts'
 
 const ROOT = join(import.meta.dirname, '..')
 const PACKAGES = ['context-control-core', 'context-control-cli', 'maha-mcp', 'maha-a2a'] as const
@@ -156,6 +157,14 @@ test('no MCP tool accepts a credential, whatever the schema says', async () => {
     if (result.ok) continue
     assert.equal(result.error.code, 'credential_rejected')
   }
+})
+
+test('the MCP transport permits only literal false retention declarations', () => {
+  assert.deepEqual(mcpCredentialArgumentFields({ evidence: { credentialsRetained: false, credentialsAccepted: false } }), [])
+  for (const value of [true, 'not-a-real-value', {}, []]) {
+    assert.deepEqual(mcpCredentialArgumentFields({ evidence: { credentialsRetained: value } }), ['arguments.evidence.credentialsRetained'])
+  }
+  assert.deepEqual(mcpCredentialArgumentFields({ evidence: { apiKey: 'not-a-real-value' } }), ['arguments.evidence.apiKey'])
 })
 
 test('every MCP response declares its evidence boundary', async () => {

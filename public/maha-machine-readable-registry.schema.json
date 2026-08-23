@@ -1,0 +1,64 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://www.mahastrategies.com/maha-machine-readable-registry.schema.json",
+  "title": "Maha Strategies Machine-Readable Registry",
+  "description": "A public, versioned index of Maha Strategies capabilities, evaluation assets, machine interfaces, and their explicit evidence boundaries.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["$schema", "registryVersion", "asOf", "provider", "assertionBoundary", "resources"],
+  "properties": {
+    "$schema": { "const": "https://www.mahastrategies.com/maha-machine-readable-registry.schema.json" },
+    "registryVersion": { "type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$" },
+    "asOf": { "type": "string", "format": "date" },
+    "provider": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "url"],
+      "properties": {
+        "name": { "const": "Maha Strategies LLC" },
+        "url": { "type": "string", "format": "uri", "const": "https://www.mahastrategies.com" }
+      }
+    },
+    "assertionBoundary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["publicOnly", "doesNotGuarantee", "noCredentialOrCustomerData"],
+      "properties": {
+        "publicOnly": { "const": true },
+        "noCredentialOrCustomerData": { "const": true },
+        "doesNotGuarantee": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string", "minLength": 1 }
+        }
+      }
+    },
+    "resources": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "kind", "name", "status", "url", "machineReadable", "evidenceBoundary"],
+        "properties": {
+          "id": { "type": "string", "pattern": "^[a-z0-9][a-z0-9-]*$" },
+          "kind": { "enum": ["capability", "evaluation", "integration", "developer_surface", "conformance", "schema", "catalog"] },
+          "name": { "type": "string", "minLength": 1 },
+          "status": { "enum": ["available", "evaluation_available", "public_evidence", "prototype", "not_published"] },
+          "url": { "type": "string", "format": "uri" },
+          "machineReadable": { "type": "boolean" },
+          "evidence": {
+            "type": "array",
+            "items": { "type": "string", "format": "uri" }
+          },
+          "schemas": {
+            "type": "array",
+            "items": { "type": "string", "format": "uri" }
+          },
+          "evidenceBoundary": { "type": "string", "minLength": 1 },
+          "commercialBoundary": { "type": "string", "minLength": 1 }
+        }
+      }
+    }
+  }
+}

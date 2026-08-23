@@ -1,0 +1,106 @@
+{
+  "$schema": "https://www.mahastrategies.com/maha-machine-readable-registry.schema.json",
+  "registryVersion": "1.0.0",
+  "asOf": "2026-08-22",
+  "provider": {
+    "name": "Maha Strategies LLC",
+    "url": "https://www.mahastrategies.com"
+  },
+  "assertionBoundary": {
+    "publicOnly": true,
+    "noCredentialOrCustomerData": true,
+    "doesNotGuarantee": [
+      "That a generative model has crawled, indexed, or been trained on any listed resource.",
+      "A customer-specific outcome, regulatory conclusion, production readiness, or third-party endorsement.",
+      "Availability of unpublished packages, private evidence, credentials, or customer data."
+    ]
+  },
+  "resources": [
+    {
+      "id": "agent-discovery",
+      "kind": "catalog",
+      "name": "Agent discovery and offer catalog",
+      "status": "available",
+      "url": "https://www.mahastrategies.com/.well-known/agent.json",
+      "machineReadable": true,
+      "evidence": [
+        "https://www.mahastrategies.com/agent-offers.json",
+        "https://www.mahastrategies.com/llms.txt",
+        "https://www.mahastrategies.com/api/docs/openapi"
+      ],
+      "evidenceBoundary": "The agent card and offer catalog describe published entry points and commercial boundaries; they do not authorize a charge or a customer engagement.",
+      "commercialBoundary": "Human scope review remains required for enterprise and research engagements."
+    },
+    {
+      "id": "context-control",
+      "kind": "capability",
+      "name": "Context Control",
+      "status": "evaluation_available",
+      "url": "https://www.mahastrategies.com/context-compiler",
+      "machineReadable": true,
+      "evidence": [
+        "https://www.mahastrategies.com/benchmarks/wso2/live-evaluation-evidence.json",
+        "https://www.mahastrategies.com/benchmarks/mcrb-1/results.json",
+        "https://www.mahastrategies.com/assessments/context-control-evidence-assessment-sample.pdf",
+        "https://www.mahastrategies.com/security/context-control-security-boundary.pdf"
+      ],
+      "evidenceBoundary": "Published evidence is sanitized and bounded. It demonstrates the stated corpus, configuration, and measurements only; it does not establish universal retention, savings, or compliance outcomes.",
+      "commercialBoundary": "A Context Control assessment is a human-scoped evaluation; no registry entry authorizes production deployment."
+    },
+    {
+      "id": "wso2-context-interceptor",
+      "kind": "integration",
+      "name": "WSO2 Context Compiler interceptor",
+      "status": "public_evidence",
+      "url": "https://www.mahastrategies.com/integrations/wso2",
+      "machineReadable": true,
+      "evidence": [
+        "https://www.mahastrategies.com/benchmarks/wso2/live-evaluation-evidence.json"
+      ],
+      "evidenceBoundary": "The public artifact records a bounded evaluation configuration and outcome. It is not a WSO2 endorsement, certification, or claim about another deployment.",
+      "commercialBoundary": "Customer gateway installation and security review remain separate from the public artifacts."
+    },
+    {
+      "id": "governed-workflow-state-graph",
+      "kind": "capability",
+      "name": "Governed Workflow State Graph",
+      "status": "evaluation_available",
+      "url": "https://www.mahastrategies.com/governed-workflow",
+      "machineReadable": true,
+      "schemas": [
+        "https://www.mahastrategies.com/schemas/governed-workflow/state-graph-1.0.0.json",
+        "https://www.mahastrategies.com/schemas/governed-workflow/transition-1.0.0.json",
+        "https://www.mahastrategies.com/schemas/governed-workflow/evidence-reference-1.0.0.json"
+      ],
+      "evidenceBoundary": "The public demonstration uses synthetic metadata-only scenarios. It does not retain customer documents, make external effects, or establish a claims, procurement, or regulatory decision.",
+      "commercialBoundary": "A customer-shaped evaluation requires a bounded workflow, agreed evidence boundary, and explicit authority model."
+    },
+    {
+      "id": "x402-doctor",
+      "kind": "conformance",
+      "name": "x402-doctor live-adapter evidence",
+      "status": "public_evidence",
+      "url": "https://www.mahastrategies.com/conformance/x402-v2/x402-doctor-live-adapter-results.json",
+      "machineReadable": true,
+      "evidence": [
+        "https://www.mahastrategies.com/conformance/x402-v2/corpus.json"
+      ],
+      "schemas": [
+        "https://www.mahastrategies.com/conformance/x402-v2/x402-doctor-live-adapter-results.schema.json",
+        "https://www.mahastrategies.com/conformance/x402-v2/corpus.schema.json"
+      ],
+      "evidenceBoundary": "The results name synthetic and not-evaluated conditions explicitly. They do not claim paid settlement, live indexing, or third-party-client coverage where no such observation occurred.",
+      "commercialBoundary": "This public conformance evidence is not a payment instruction or assurance of an endpoint's future availability."
+    },
+    {
+      "id": "developer-evaluation-surfaces",
+      "kind": "developer_surface",
+      "name": "Context Control developer evaluation surfaces",
+      "status": "not_published",
+      "url": "https://www.mahastrategies.com/developers",
+      "machineReadable": false,
+      "evidenceBoundary": "MCP, A2A, CLI, and gateway package source is reviewed in the repository but npm packages are not yet published. No registry entry implies an installable public package.",
+      "commercialBoundary": "External evaluators should use the documented repository workflow until a package publication decision is made."
+    }
+  ]
+}
