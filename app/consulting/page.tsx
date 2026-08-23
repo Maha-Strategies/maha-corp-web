@@ -1,7 +1,8 @@
 // app/consulting/page.tsx
 // Verified Research Brief — productized services page.
-// Design system matches app/page.tsx: zinc/near-black ground, indigo-500 accent,
-// mono uppercase eyebrows, [ BRACKETED ] section labels, left accent bars.
+// On the shared paper system: .evidence-page shell, .evidence-container
+// rhythm, and the --status-* tokens in place of the old indigo/emerald/amber
+// accents, so the accent colour now carries the same meaning as elsewhere.
 
 import Link from 'next/link'
 import type { Metadata } from 'next'
@@ -62,8 +63,8 @@ const consultingJsonLd = {
 const TAGS = [
   {
     key: 'SOURCED',
-    color: 'text-emerald-400 border-emerald-800/60 bg-emerald-950/30',
-    dot: 'bg-emerald-400',
+    color: 'text-[var(--status-verified)] border-[var(--status-verified)] bg-[var(--surface-raised)]',
+    dot: 'bg-[var(--status-verified)]',
     definition:
       'Traceable to a primary source. The citation is linked, and the source actually says what the claim says.',
   },
@@ -76,8 +77,8 @@ const TAGS = [
   },
   {
     key: 'ILLUSTRATIVE',
-    color: 'text-amber-400 border-amber-800/60 bg-amber-950/30',
-    dot: 'bg-amber-400',
+    color: 'text-[var(--status-boundary)] border-[var(--status-boundary)] bg-[var(--surface-raised)]',
+    dot: 'bg-[var(--status-boundary)]',
     definition:
       'An example, analogy, or estimate used for clarity. Useful for reasoning; not evidence.',
   },
@@ -108,27 +109,27 @@ function Tag({ label }: { label: (typeof TAGS)[number]['key'] }) {
 
 export default function ConsultingPage() {
   return (
-    <div className="min-h-screen bg-[#0a0a0c] text-zinc-300">
+    <main className="evidence-page">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(consultingJsonLd).replace(/</g, '\\u003c') }}
       />
-      <div className="max-w-4xl mx-auto px-6 py-20 sm:py-28">
+      <div className="evidence-container evidence-container--narrow">
 
         {/* ================= HERO ================= */}
-        <p className="font-mono text-[10px] text-indigo-400 tracking-widest uppercase mb-4">
+        <p className="evidence-kicker mb-4">
           [ CONSULTING // VERIFIED RESEARCH BRIEF ]
         </p>
-        <h1 className="text-4xl sm:text-5xl font-light text-white leading-tight mb-6">
+        <h1 className="evidence-title evidence-title--product mb-6">
           Research you can put your name on.
         </h1>
-        <p className="text-xl text-zinc-400 font-light leading-relaxed max-w-2xl mb-4">
+        <p className="text-xl text-[var(--text-secondary)] font-light leading-relaxed max-w-2xl mb-4">
           AI has made research synthesis fast — and unaccountable. Over a thousand
           documented court cases now involve fabricated AI citations. Regulators,
           courts, and boards no longer ask whether you used AI. They ask whether
           you verified it.
         </p>
-        <p className="text-xl text-zinc-400 font-light leading-relaxed max-w-2xl mb-12">
+        <p className="text-xl text-[var(--text-secondary)] font-light leading-relaxed max-w-2xl mb-12">
           The Verified Research Brief answers that question in the document itself:
           every claim carries a provenance tag and linked evidence, so your
           reviewers can see — not trust — where each statement comes from.
@@ -138,96 +139,96 @@ export default function ConsultingPage() {
           <TrackedLink
             href="/contact?service=verified_research"
             event="cta_consulting_commission_brief"
-            className="inline-block bg-white text-black font-mono font-bold text-xs tracking-widest uppercase px-8 py-4 hover:bg-zinc-200 transition-colors no-underline text-center"
+            className="evidence-action evidence-action--primary"
           >
             Commission a Brief — $2,500
           </TrackedLink>
           <a
             href="#sample"
-            className="inline-block border border-zinc-600 text-zinc-200 font-mono font-bold text-xs tracking-widest uppercase px-8 py-4 hover:border-white hover:text-white transition-colors no-underline text-center"
+            className="evidence-action evidence-action--secondary"
           >
             See a Tagged Page ↓
           </a>
         </div>
 
-        <EngagementPath offer="verified" className="mb-24" />
+        <EngagementPath offer="verified" tone="paper" className="mb-24" />
 
-        <section className="mb-24 border border-indigo-900/50 bg-indigo-950/20 p-8 sm:p-10 relative overflow-hidden">
-          <div className="absolute top-0 left-0 w-1 h-full bg-indigo-500" />
-          <p className="font-mono text-[10px] text-indigo-400 tracking-widest uppercase mb-4">[ Need a faster, narrower answer? ]</p>
+        <section className="mb-24 border border-[var(--status-sourced)] bg-[var(--surface-raised)] p-8 sm:p-10 relative overflow-hidden">
+          <div className="absolute top-0 left-0 w-1 h-full bg-[var(--status-sourced)]" />
+          <p className="evidence-kicker mb-4">[ Need a faster, narrower answer? ]</p>
           <div className="grid grid-cols-1 md:grid-cols-[1fr_auto] gap-8 items-end">
             <div>
-              <h2 className="text-2xl text-white font-light mb-3">Rapid Intelligence Brief</h2>
-              <p className="text-zinc-400 leading-relaxed max-w-2xl">
+              <h2 className="text-2xl text-[var(--text-primary)] font-light mb-3">Rapid Intelligence Brief</h2>
+              <p className="text-[var(--text-secondary)] leading-relaxed max-w-2xl">
                 One defined market, technology, or policy question. A concise 2–3 page research memo with linked sources, stated assumptions, and decision implications — right-sized for an early decision before it becomes a full diligence program.
               </p>
-              <p className="font-mono text-[10px] text-zinc-500 tracking-widest uppercase mt-5">Starting at $500 · delivered within five business days · fixed scope</p>
+              <p className="font-mono text-[10px] text-[var(--text-muted)] tracking-widest uppercase mt-5">Starting at $500 · delivered within five business days · fixed scope</p>
             </div>
             <TrackedLink
               href="/rapid-intelligence-brief"
               event="cta_consulting_rapid_brief"
-              className="inline-block border border-zinc-500 text-zinc-100 font-mono font-bold text-xs tracking-widest uppercase px-7 py-4 hover:bg-white hover:text-black hover:border-white transition-colors no-underline text-center"
+              className="inline-block border border-[var(--text-muted)] text-[var(--text-primary)] font-mono font-bold text-xs tracking-widest uppercase px-7 py-4 hover:bg-[var(--surface-raised)] hover:text-[var(--text-primary)] hover:border-[var(--text-primary)] transition-colors no-underline text-center"
             >
               Explore Rapid Brief ↗
             </TrackedLink>
           </div>
         </section>
 
-        <section className="mb-24 border-t border-zinc-800 pt-8">
-          <p className="font-mono text-[10px] text-indigo-400 tracking-widest uppercase mb-5">[ Common research scopes ]</p>
+        <section className="mb-24 border-t border-[var(--border-default)] pt-8">
+          <p className="font-mono text-[10px] text-[var(--status-sourced)] tracking-widest uppercase mb-5">[ Common research scopes ]</p>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <Link href="/consulting/semiconductor-supply-chain" className="border border-zinc-800 p-5 hover:border-zinc-500 transition-colors">
-              <h2 className="text-white text-sm mb-2">Semiconductor supply chains</h2>
-              <p className="text-xs text-zinc-500 leading-relaxed">Foundry, packaging, regional diversification, and concentration risk.</p>
+            <Link href="/consulting/semiconductor-supply-chain" className="border border-[var(--border-default)] p-5 hover:border-[var(--text-muted)] transition-colors">
+              <h2 className="text-[var(--text-primary)] text-sm mb-2">Semiconductor supply chains</h2>
+              <p className="text-xs text-[var(--text-muted)] leading-relaxed">Foundry, packaging, regional diversification, and concentration risk.</p>
             </Link>
-            <Link href="/consulting/ai-infrastructure" className="border border-zinc-800 p-5 hover:border-zinc-500 transition-colors">
-              <h2 className="text-white text-sm mb-2">AI infrastructure &amp; edge AI</h2>
-              <p className="text-xs text-zinc-500 leading-relaxed">Deployment paths, hardware constraints, and AI economics.</p>
+            <Link href="/consulting/ai-infrastructure" className="border border-[var(--border-default)] p-5 hover:border-[var(--text-muted)] transition-colors">
+              <h2 className="text-[var(--text-primary)] text-sm mb-2">AI infrastructure &amp; edge AI</h2>
+              <p className="text-xs text-[var(--text-muted)] leading-relaxed">Deployment paths, hardware constraints, and AI economics.</p>
             </Link>
-            <Link href="/consulting/evidence-policy" className="border border-zinc-800 p-5 hover:border-zinc-500 transition-colors">
-              <h2 className="text-white text-sm mb-2">Evidence &amp; policy</h2>
-              <p className="text-xs text-zinc-500 leading-relaxed">Contested claims, policy exposure, and decision-critical evidence.</p>
+            <Link href="/consulting/evidence-policy" className="border border-[var(--border-default)] p-5 hover:border-[var(--text-muted)] transition-colors">
+              <h2 className="text-[var(--text-primary)] text-sm mb-2">Evidence &amp; policy</h2>
+              <p className="text-xs text-[var(--text-muted)] leading-relaxed">Contested claims, policy exposure, and decision-critical evidence.</p>
             </Link>
           </div>
         </section>
 
         {/* ================= THE DELIVERABLE ================= */}
         <section className="mb-24">
-          <h2 className="text-white font-mono text-sm tracking-widest uppercase mb-8">
+          <h2 className="evidence-kicker mb-8">
             [ 01 // WHAT YOU RECEIVE ]
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="border-t border-zinc-800 pt-6">
-              <h3 className="text-white text-sm tracking-widest uppercase mb-3">
+            <div className="border-t border-[var(--border-default)] pt-6">
+              <h3 className="text-[var(--text-primary)] text-sm tracking-widest uppercase mb-3">
                 The Brief
               </h3>
-              <p className="text-sm text-zinc-500 leading-relaxed">
+              <p className="text-sm text-[var(--text-muted)] leading-relaxed">
                 A 10–15 page synthesis of the evidence on one question you define —
                 a technology bet, a market claim, a scientific literature, a
                 competitor&rsquo;s assertion. Written to be read by decision-makers,
                 structured to be audited by reviewers.
               </p>
             </div>
-            <div className="border-t border-zinc-800 pt-6">
-              <h3 className="text-white text-sm tracking-widest uppercase mb-3">
+            <div className="border-t border-[var(--border-default)] pt-6">
+              <h3 className="text-[var(--text-primary)] text-sm tracking-widest uppercase mb-3">
                 The Evidence Layer
               </h3>
-              <p className="text-sm text-zinc-500 leading-relaxed">
-                Every claim tagged <span className="text-emerald-400">SOURCED</span>,{' '}
+              <p className="text-sm text-[var(--text-muted)] leading-relaxed">
+                Every claim tagged <span className="text-[var(--status-verified)]">SOURCED</span>,{' '}
                 <span className="text-sky-400">VERIFIED</span>,{' '}
-                <span className="text-amber-400">ILLUSTRATIVE</span>, or{' '}
+                <span className="text-[var(--status-boundary)]">ILLUSTRATIVE</span>, or{' '}
                 <span className="text-rose-400">UNVERIFIED</span>, with linked
                 citations. Nothing laundered, nothing hidden — including what we
                 could not confirm.
               </p>
             </div>
-            <div className="border-t border-zinc-800 pt-6">
-              <h3 className="text-white text-sm tracking-widest uppercase mb-3">
+            <div className="border-t border-[var(--border-default)] pt-6">
+              <h3 className="text-[var(--text-primary)] text-sm tracking-widest uppercase mb-3">
                 The Terms
               </h3>
-              <p className="text-sm text-zinc-500 leading-relaxed">
-                Fixed scope. Fixed price: <span className="text-white">$2,500</span>.
-                Delivered in <span className="text-white">10 business days</span> from
+              <p className="text-sm text-[var(--text-muted)] leading-relaxed">
+                Fixed scope. Fixed price: <span className="text-[var(--text-primary)]">$2,500</span>.
+                Delivered in <span className="text-[var(--text-primary)]">10 business days</span> from
                 a scoped question. One revision round included. If the question
                 needs narrowing, we narrow it together before you commit.
               </p>
@@ -237,16 +238,16 @@ export default function ConsultingPage() {
 
         {/* ================= TAG LEGEND ================= */}
         <section className="mb-24">
-          <h2 className="text-white font-mono text-sm tracking-widest uppercase mb-8">
+          <h2 className="evidence-kicker mb-8">
             [ 02 // THE PROVENANCE SYSTEM ]
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {TAGS.map((t) => (
-              <div key={t.key} className="border border-zinc-800/70 p-5">
+              <div key={t.key} className="border border-[var(--border-default)]/70 p-5">
                 <div className="mb-3">
                   <Tag label={t.key} />
                 </div>
-                <p className="text-sm text-zinc-500 leading-relaxed">{t.definition}</p>
+                <p className="text-sm text-[var(--text-muted)] leading-relaxed">{t.definition}</p>
               </div>
             ))}
           </div>
@@ -254,26 +255,26 @@ export default function ConsultingPage() {
 
         {/* ================= WORKED SAMPLE ================= */}
         <section id="sample" className="mb-24 scroll-mt-24">
-          <h2 className="text-white font-mono text-sm tracking-widest uppercase mb-4">
+          <h2 className="evidence-kicker mb-4">
             [ 03 // A TAGGED PAGE, NOT A PROMISE ]
           </h2>
-          <p className="text-sm text-zinc-500 max-w-2xl mb-8 leading-relaxed">
+          <p className="text-sm text-[var(--text-muted)] max-w-2xl mb-8 leading-relaxed">
             Excerpt adapted from our published Planet Nine detection forecast
             (Zenodo, DOI&nbsp;
             <a
               href="https://doi.org/10.5281/zenodo.20621056"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-indigo-400 hover:text-indigo-300 underline underline-offset-2"
+              className="text-[var(--status-sourced)] hover:text-[var(--status-sourced)] underline underline-offset-2"
             >
               10.5281/zenodo.20621056
             </a>
             ). This is what every page of a Verified Research Brief looks like.
           </p>
 
-          <div className="border border-indigo-900/50 bg-indigo-950/20 relative overflow-hidden">
-            <div className="absolute top-0 left-0 w-1 h-full bg-indigo-500" />
-            <div className="p-8 sm:p-10 font-light leading-loose text-zinc-300">
+          <div className="border border-[var(--status-sourced)] bg-[var(--surface-raised)] relative overflow-hidden">
+            <div className="absolute top-0 left-0 w-1 h-full bg-[var(--status-sourced)]" />
+            <div className="p-8 sm:p-10 font-light leading-loose text-[var(--text-secondary)]">
               <p className="mb-6">
                 The Vera C. Rubin Observatory&rsquo;s LSST survey is the dominant
                 near-term instrument for a wide-area outer solar system search{' '}
@@ -288,7 +289,7 @@ export default function ConsultingPage() {
                 confirmed against the primary literature within scope{' '}
                 <Tag label="UNVERIFIED" />.
               </p>
-              <p className="font-mono text-[10px] text-zinc-600 tracking-widest uppercase">
+              <p className="font-mono text-[10px] text-[var(--text-muted)] tracking-widest uppercase">
                 Note the correction trail: Revision 3 moved our own headline number.
                 Auditable research means the errors are on the record too.
               </p>
@@ -298,10 +299,10 @@ export default function ConsultingPage() {
 
         {/* ================= WHO IT IS FOR ================= */}
         <section className="mb-24">
-          <h2 className="text-white font-mono text-sm tracking-widest uppercase mb-8">
+          <h2 className="evidence-kicker mb-8">
             [ 04 // BUILT FOR HIGH-STAKES CONTEXTS ]
           </h2>
-          <p className="text-zinc-400 font-light leading-relaxed max-w-2xl mb-6">
+          <p className="text-[var(--text-secondary)] font-light leading-relaxed max-w-2xl mb-6">
             The brief is designed for teams whose documents get audited:
             governance and compliance functions preparing evidence for review,
             legal and policy teams that cannot cite what they cannot trace,
@@ -309,7 +310,7 @@ export default function ConsultingPage() {
             mandates, and investors or operators making a decision where one
             fabricated claim is more expensive than the entire engagement.
           </p>
-          <p className="text-zinc-400 font-light leading-relaxed max-w-2xl">
+          <p className="text-[var(--text-secondary)] font-light leading-relaxed max-w-2xl">
             If your reviewers use words like grounding, audit trail, citation
             verification, or model risk — this document is shaped for their
             checklist.
@@ -318,10 +319,10 @@ export default function ConsultingPage() {
 
         {/* ================= WHY US ================= */}
         <section className="mb-24">
-          <h2 className="text-white font-mono text-sm tracking-widest uppercase mb-8">
+          <h2 className="evidence-kicker mb-8">
             [ 05 // THE METHOD IS PUBLIC ]
           </h2>
-          <p className="text-zinc-400 font-light leading-relaxed max-w-2xl mb-6">
+          <p className="text-[var(--text-secondary)] font-light leading-relaxed max-w-2xl mb-6">
             We did not invent this methodology for clients. We built it for our own
             published research — pre-registered studies, DOI-archived revisions,
             and an audit paper documenting how AI systems fabricate — and have
@@ -332,43 +333,43 @@ export default function ConsultingPage() {
               href="https://research.mahastrategies.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-indigo-400 hover:text-indigo-300 underline underline-offset-2"
+              className="text-[var(--status-sourced)] hover:text-[var(--status-sourced)] underline underline-offset-2"
             >
               research.mahastrategies.com
             </a>
             .
           </p>
-          <p className="font-mono text-xs text-indigo-500 font-semibold tracking-widest uppercase">
+          <p className="font-mono text-xs text-[var(--status-sourced)] font-semibold tracking-widest uppercase">
             [ Zero fabrication. Explicit AI disclosure. Errors corrected on the record. ]
           </p>
         </section>
 
         {/* ================= CTA ================= */}
         <section className="mb-8">
-          <div className="border border-indigo-900/50 bg-indigo-950/20 p-8 sm:p-12 relative overflow-hidden">
-            <div className="absolute top-0 left-0 w-1 h-full bg-indigo-500" />
-            <h2 className="text-white font-mono text-sm tracking-widest uppercase mb-4">
+          <div className="border border-[var(--status-sourced)] bg-[var(--surface-raised)] p-8 sm:p-12 relative overflow-hidden">
+            <div className="absolute top-0 left-0 w-1 h-full bg-[var(--status-sourced)]" />
+            <h2 className="evidence-kicker mb-4">
               [ COMMISSION // VERIFIED RESEARCH BRIEF ]
             </h2>
-            <p className="text-zinc-300 text-lg mb-2 font-light max-w-2xl">
+            <p className="text-[var(--text-secondary)] text-lg mb-2 font-light max-w-2xl">
               Send the question you need answered and the decision it feeds.
               We reply within two business days with a scoped statement of work —
               or a referral elsewhere if the fit is wrong.
             </p>
-            <p className="font-mono text-[10px] text-zinc-500 tracking-widest uppercase mb-8">
+            <p className="font-mono text-[10px] text-[var(--text-muted)] tracking-widest uppercase mb-8">
               $2,500 · 10 business days · one revision round · fixed scope
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
               <TrackedLink
                 href="/contact"
                 event="cta_consulting_start_conversation"
-                className="inline-block bg-white text-black font-mono font-bold text-xs tracking-widest uppercase px-8 py-4 hover:bg-zinc-200 transition-colors no-underline text-center"
+                className="evidence-action evidence-action--primary"
               >
                 Start the Conversation ↗
               </TrackedLink>
               <Link
                 href="/contact"
-                className="inline-block border border-zinc-600 text-zinc-200 font-mono font-bold text-xs tracking-widest uppercase px-8 py-4 hover:border-white hover:text-white transition-colors no-underline text-center"
+                className="evidence-action evidence-action--secondary"
               >
                 Secure Channel / Contact ↗
               </Link>
@@ -377,10 +378,10 @@ export default function ConsultingPage() {
         </section>
 
         {/* ================= FOOTNOTE ================= */}
-        <p className="font-mono text-[10px] text-zinc-700 tracking-widest uppercase text-center mt-16">
+        <p className="font-mono text-[10px] text-[var(--text-muted)] tracking-widest uppercase text-center mt-16">
           &copy; {new Date().getFullYear()} Maha Strategies LLC · Wyoming, USA · Operating from Colombo
         </p>
       </div>
-    </div>
+    </main>
   )
 }
