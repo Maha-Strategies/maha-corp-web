@@ -76,7 +76,7 @@ export default function PayingForNutritionPaper() {
         </header>
 
         {/* PAPER BODY */}
-        <article className="max-w-none">
+        <article className="evidence-prose max-w-none">
         <h2 className="font-sans text-sm font-bold tracking-widest uppercase text-indigo-400 mt-10 mb-3">Abstract</h2>
         <p className="font-serif text-lg leading-relaxed text-[var(--text-secondary)] mb-5">U.S. agricultural policy remains structurally locked into a post-WWII paradigm that optimizes for volumetric crop yield, acreage-based safety nets, and farm-level revenue stability. The primary instruments of this commodity safety net—Price Loss Coverage (PLC), Agriculture Risk Coverage (ARC), and subsidized multi-peril crop insurance—insulate producers from market volatility while indexing risk guarantees to historical yields. Consequently, these programs create powerful institutional disincentives for optimizing the nutritional quality of harvested crops.</p>
         <p className="font-serif text-lg leading-relaxed text-[var(--text-secondary)] mb-5">This paper evaluates the mechanism design of a "Nutrient Density Bonus" (NDB) designed to redirect subsidy weight toward the measured micronutrient and protein content of harvested crops at the farm gate. We formalize the core policy challenge not as a production shortfall, but as an unsolved mechanism-design and measurement problem. At farm scale, crop nutrient density is subject to high stochastic variance driven by soil chemistry, cultivar genetics, weather, ripeness, and post-harvest storage. This variance makes direct outcome measurement costly, contestable, and prone to gaming.</p>

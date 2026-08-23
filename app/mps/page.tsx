@@ -10,31 +10,31 @@ export const metadata: Metadata = {
 const TAGS = [
   {
     name: 'VERIFIED',
-    color: 'var(--status-verified)',
+    surface: 'evidence-status-surface--verified',
     def: 'Confirmed by the author against a primary source, direct computation, or first-hand observation.',
     test: 'Did a human check the primary source or reproduce the result?',
   },
   {
     name: 'SOURCED',
-    color: 'var(--status-sourced)',
+    surface: 'evidence-status-surface--sourced',
     def: 'Attributed to an identified, citable secondary source the author has read but not independently verified.',
     test: 'Can the reader follow a citation to a real, identified document?',
   },
   {
     name: 'BOUNDARY',
-    color: 'var(--status-boundary)',
+    surface: 'evidence-status-surface--boundary',
     def: "Accurately reports the limits of knowledge: open questions, untested conjectures, or contested findings where uncertainty is part of the claim.",
     test: 'Is the claim honest about what is not known?',
   },
   {
     name: 'ILLUSTRATIVE',
-    color: 'var(--status-illustrative)',
+    surface: 'evidence-status-surface--illustrative',
     def: 'Analogy, thought experiment, composite example, or structural metaphor. Explanatory only; not a claim about the world.',
     test: 'Would the argument survive if this detail were false?',
   },
   {
     name: 'UNVERIFIED',
-    color: 'var(--status-unverified)',
+    surface: 'evidence-status-surface--unverified',
     def: 'Asserted without confirmation: recalled from memory, AI-generated and unchecked, or awaiting verification.',
     test: 'Is this claim still owed work before acting on it?',
   },
@@ -106,8 +106,8 @@ export default function MpsPage() {
           <h2 id="tags-heading" className="evidence-section-title mt-4">Every substantive claim receives one status tag.</h2>
           <div className="mt-7 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
             {TAGS.map((tag) => (
-              <article key={tag.name} className="evidence-card" style={{ borderLeft: `3px solid ${tag.color}` }}>
-                <p className="evidence-kicker" style={{ color: tag.color }}>{tag.name}</p>
+              <article key={tag.name} className={`evidence-status-surface ${tag.surface}`}>
+                <p className="evidence-status-label">{tag.name}</p>
                 <p className="evidence-card-title mt-3">{tag.name}</p>
                 <p className="evidence-copy mt-4">{tag.def}</p>
                 <p className="evidence-copy mt-4 text-[var(--text-primary)]">Validation check: {tag.test}</p>
