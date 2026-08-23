@@ -8,11 +8,11 @@
 import React, { useState, useMemo } from "react";
 
 const TAGS: Record<string, { color: string; bg: string; label: string; def: string }> = {
-  VERIFIED: { color: "var(--status-verified)", bg: "rgba(35,122,85,0.14)", label: "VERIFIED", def: "Checked against a primary source or reproduced first-hand." },
-  SOURCED: { color: "var(--status-sourced)", bg: "rgba(45,99,184,0.13)", label: "SOURCED", def: "Attributed to an identified, citable source; not independently verified." },
-  BOUNDARY: { color: "var(--status-boundary)", bg: "rgba(176,124,30,0.16)", label: "BOUNDARY", def: "Honestly reports the limits of knowledge — open questions, conjecture." },
-  ILLUSTRATIVE: { color: "var(--status-illustrative)", bg: "rgba(110,86,168,0.13)", label: "ILLUSTRATIVE", def: "Analogy or example. Explains; asserts nothing about the world." },
-  UNVERIFIED: { color: "var(--status-unverified)", bg: "rgba(179,64,46,0.14)", label: "UNVERIFIED", def: "Asserted without confirmation. A workflow state, not a shipping state." },
+  VERIFIED: { color: "var(--status-verified)", bg: "var(--surface-verified)", label: "VERIFIED", def: "Checked against a primary source or reproduced first-hand." },
+  SOURCED: { color: "var(--status-sourced)", bg: "var(--surface-sourced)", label: "SOURCED", def: "Attributed to an identified, citable source; not independently verified." },
+  BOUNDARY: { color: "var(--status-boundary)", bg: "var(--surface-boundary)", label: "BOUNDARY", def: "Honestly reports the limits of knowledge — open questions, conjecture." },
+  ILLUSTRATIVE: { color: "var(--status-illustrative)", bg: "var(--surface-illustrative)", label: "ILLUSTRATIVE", def: "Analogy or example. Explains; asserts nothing about the world." },
+  UNVERIFIED: { color: "var(--status-unverified)", bg: "var(--surface-unverified)", label: "UNVERIFIED", def: "Asserted without confirmation. A workflow state, not a shipping state." },
 };
 
 const SAMPLE = `M-Theory unified the five competing string theories in the mid-1990s, when Edward Witten showed they were different limits of a single framework. The theory predicts eleven dimensions of spacetime. No experiment has ever confirmed a distinctive prediction of string theory. Studies show that 87% of readers cannot distinguish AI-generated text from human writing. Think of the self as the moon: bright, but shining entirely by borrowed light. Whether M-Theory describes our universe remains an open question that may not be settled for decades. Our previous audit of AI-generated citations found fabricated references in the majority of unchecked drafts.`;

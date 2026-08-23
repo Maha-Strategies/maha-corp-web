@@ -46,8 +46,9 @@ export default function TheDreamEnginePage() {
         </section>
         <p className="mt-5 text-sm text-[var(--text-muted)]">Now available on the App Store and Google Play.</p>
 
-        <section className="mt-14 border border-amber-900/40 bg-amber-950/10 p-7 sm:p-9">
-          <p className="max-w-3xl text-2xl font-light leading-relaxed text-amber-50">“Imagination is not magic. It changes the dreamer, and the dreamer changes what happens next.”</p>
+        <section className="evidence-status-surface evidence-status-surface--illustrative mt-14 p-7 sm:p-9">
+          <p className="evidence-status-label">Illustrative</p>
+          <p className="mt-3 max-w-3xl text-2xl font-light leading-relaxed text-[var(--text-primary)]">“Imagination is not magic. It changes the dreamer, and the dreamer changes what happens next.”</p>
         </section>
 
         <section className="mt-16">

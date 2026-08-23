@@ -36,6 +36,11 @@
   --status-boundary: #a06f14;
   --status-illustrative: #6e56a8;
   --status-unverified: #b3402e;
+  --surface-verified: rgb(35 122 85 / 14%);
+  --surface-sourced: rgb(45 99 184 / 13%);
+  --surface-boundary: rgb(160 111 20 / 16%);
+  --surface-illustrative: rgb(110 86 168 / 13%);
+  --surface-unverified: rgb(179 64 46 / 14%);
   --operator-surface: #0a0a0c;
   --operator-raised: #111113;
   --operator-text: #e0e0e0;
@@ -317,6 +322,70 @@ body {
 .evidence-chip--boundary    { color: var(--status-boundary);    border-color: currentColor; }
 .evidence-chip--illustrative{ color: var(--status-illustrative);border-color: currentColor; }
 .evidence-chip--unverified  { color: var(--status-unverified);  border-color: currentColor; }
+
+/*
+ * Semantic surfaces pair a restrained status tint with ordinary readable copy.
+ * The status colour labels the meaning; it must never become the body-text
+ * colour for a whole panel. This is the site-wide version of the MPS legend.
+ */
+.evidence-status-surface {
+  --evidence-status-color: var(--text-muted);
+  --evidence-status-background: var(--surface-subtle);
+  border: 1px solid var(--border-default);
+  border-left: 3px solid var(--evidence-status-color);
+  background: var(--evidence-status-background);
+  color: var(--text-primary);
+  padding: 1rem 1.25rem;
+}
+
+.evidence-status-surface--verified {
+  --evidence-status-color: var(--status-verified);
+  --evidence-status-background: var(--surface-verified);
+}
+
+.evidence-status-surface--sourced {
+  --evidence-status-color: var(--status-sourced);
+  --evidence-status-background: var(--surface-sourced);
+}
+
+.evidence-status-surface--boundary {
+  --evidence-status-color: var(--status-boundary);
+  --evidence-status-background: var(--surface-boundary);
+}
+
+.evidence-status-surface--illustrative {
+  --evidence-status-color: var(--status-illustrative);
+  --evidence-status-background: var(--surface-illustrative);
+}
+
+.evidence-status-surface--unverified {
+  --evidence-status-color: var(--status-unverified);
+  --evidence-status-background: var(--surface-unverified);
+}
+
+.evidence-status-label {
+  color: var(--evidence-status-color);
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  line-height: 1.5;
+  text-transform: uppercase;
+}
+
+/* Long editorial pages opt in once; descendants cannot retain pale dark-mode headings. */
+.evidence-prose {
+  color: var(--text-secondary);
+}
+
+.evidence-prose :is(h1, h2, h3, h4, h5, h6) {
+  color: var(--text-primary);
+}
+
+/* Legacy error utilities on a paper page must still resolve to readable red. */
+.evidence-page .text-red-300 {
+  color: var(--status-unverified);
+}
 
 /*
  * Forms.
