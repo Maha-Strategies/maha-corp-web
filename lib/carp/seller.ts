@@ -173,6 +173,25 @@ function asRecord(value: unknown): Record<string, unknown> | null {
   return value !== null && typeof value === 'object' && !Array.isArray(value) ? value as Record<string, unknown> : null
 }
 
+const RFQ_PURCHASE_FIELDS = new Set(['offeringRef', 'quantity', 'agreedPrice'])
+
+function rfqPurchaseParamsAreCanonical(params: unknown): boolean {
+  const record = asRecord(params)
+  if (!record || record.offeringRef !== SAMLEY_CINNAMON_TEA_RFQ_REF) return false
+
+  const keys = Object.keys(record)
+  return keys.length === RFQ_PURCHASE_FIELDS.size
+    && keys.every((key) => RFQ_PURCHASE_FIELDS.has(key))
+    && record.quantity === 1
+    && record.agreedPrice === null
+}
+
+function isRfqPurchaseAttempt(params: unknown): boolean {
+  const record = asRecord(params)
+  return record?.offeringRef === SAMLEY_CINNAMON_TEA_RFQ_REF
+    || (Array.isArray(params) && params.includes(SAMLEY_CINNAMON_TEA_RFQ_REF))
+}
+
 function legacyOrderId(requestId: string, itemref: unknown): string {
   const digest = createHash('sha256').update(`${requestId}\n${String(itemref)}`).digest('hex').slice(0, 32)
   return `legacy:${digest}`
@@ -265,6 +284,13 @@ export function handleCarpSellerRequest(request: CarpSellerRequest): CarpSellerR
   }
 
   if (request.method !== 'purchase') return jsonError(request.id, -32601, 'Unknown Seller service.')
+  if (isRfqPurchaseAttempt(request.params) && !rfqPurchaseParamsAreCanonical(request.params)) {
+    return jsonError(
+      request.id,
+      -32602,
+      'RFQ purchase params must use exactly the v0.2 object shape { offeringRef, quantity, agreedPrice }; agreedPrice must be null. Legacy positional arguments and additional fields are refused.',
+    )
+  }
   const params = normalizePurchase(request.params, request.id)
   if (!params) return jsonError(request.id, -32602, 'purchase params must use the legacy array or the v0.2 object shape.')
   if (params.offerId === SAMLEY_CINNAMON_TEA_RFQ_REF) {
