@@ -60,6 +60,15 @@ Spacing is Tailwind utilities on top of these (`mt-3/4/5/7/9`), not bespoke CSS.
 Motion is limited to 150ms border/background transitions, with a global
 `prefers-reduced-motion` override.
 
+### Cyber-light editorial overlay
+
+`/books/**` is the accepted pilot for a bounded technical overlay on Evidence
+Paper. Its frozen route markers, colors, accents, invariants, and three-template
+acceptance set are recorded in
+[`cyber-light-vocabulary-v1.md`](./cyber-light-vocabulary-v1.md). Cyber-light is
+route-scoped; it is not a new global theme and does not apply to Knowledge,
+Intelligence, or operator surfaces.
+
 ### Gaps in the system
 
 Two primitives are missing and are currently re-invented inline per page:
