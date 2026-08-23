@@ -19,7 +19,8 @@ export default function Page() {
   };
 
   return (
-    <main className="min-h-screen bg-[#0a0a0c] text-zinc-300 font-sans p-8 md:p-24 selection:bg-indigo-500 selection:text-white max-w-3xl mx-auto">
+    <main className="evidence-page">
+      <div className="evidence-container evidence-container--narrow text-[var(--text-secondary)] font-sans">
       {/* AI Agent / SEO Crawler Payload */}
       <script
         type="application/ld+json"
@@ -30,44 +31,44 @@ export default function Page() {
       <div className="mb-12">
         <Link 
           href="/doctrine" 
-          className="font-mono text-xs uppercase tracking-widest text-indigo-500 hover:text-indigo-400 transition-colors no-underline flex items-center gap-2"
+          className="font-mono text-xs uppercase tracking-widest text-[var(--status-sourced)] hover:text-[var(--status-sourced)] transition-colors no-underline flex items-center gap-2"
         >
           ← ESCAPE TO DOCTRINE ROOT
         </Link>
       </div>
 
       {/* Header Block */}
-      <header className="border-b border-zinc-800 pb-8 mb-12">
-        <p className="font-mono text-xs text-indigo-500 uppercase tracking-widest mb-3">
+      <header className="border-b border-[var(--border-default)] pb-8 mb-12">
+        <p className="font-mono text-xs text-[var(--status-sourced)] uppercase tracking-widest mb-3">
           [ TACTICAL BRIEF 08 // VISIONARYS.STANDARD ]
         </p>
-        <h1 className="text-4xl text-white font-light tracking-wide uppercase leading-tight m-0">
+        <h1 className="text-4xl text-[var(--text-primary)] font-light tracking-wide uppercase leading-tight m-0">
           The Visionary's Standard:<br />Beauty as Objective Signal
         </h1>
       </header>
 
       {/* Prose Matrix */}
-      <article className="prose prose-invert max-w-none font-light tracking-wide leading-relaxed space-y-6">
+      <article className="prose max-w-none font-light tracking-wide leading-relaxed space-y-6">
         <p>
           Before you can build the new world, you must develop the capacity to see the current one clearly—which requires recovering a perceptual faculty that the modern built environment has systematically degraded: the ability to recognize beauty and to be genuinely disturbed by its absence.
         </p>
 
         {/* Structural Matrix */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 my-8">
-          <div className="bg-zinc-950 border border-zinc-900 p-5 rounded-sm">
-            <h3 className="font-mono text-xs text-rose-500 uppercase tracking-widest mb-2 m-0">
+          <div className="bg-[var(--surface-raised)] border border-[var(--border-default)] p-5 rounded-sm">
+            <h3 className="font-mono text-xs text-[var(--status-unverified)] uppercase tracking-widest mb-2 m-0">
               // THE RELATIVISTIC PREMISE
             </h3>
-            <p className="text-sm text-zinc-400 m-0">
+            <p className="text-sm text-[var(--text-secondary)] m-0">
               The assertion that beauty is subjective—a matter of personal preference with no claim to objective validity. This prevents us from making demands of our environment; if beauty is merely opinion, no one can be held accountable for ugliness.
             </p>
           </div>
 
-          <div className="bg-zinc-950 border border-zinc-900 p-5 rounded-sm">
-            <h3 className="font-mono text-xs text-indigo-500 uppercase tracking-widest mb-2 m-0">
+          <div className="bg-[var(--surface-raised)] border border-[var(--border-default)] p-5 rounded-sm">
+            <h3 className="font-mono text-xs text-[var(--status-sourced)] uppercase tracking-widest mb-2 m-0">
               // THE BIOLOGICAL SIGNAL
             </h3>
-            <p className="text-sm text-zinc-400 m-0">
+            <p className="text-sm text-[var(--text-secondary)] m-0">
               The assertion that beauty is the objective, optical signal of health. The visible form of a complex, self-organizing system operating at high negentropy and functional vitality.
             </p>
           </div>
@@ -89,15 +90,16 @@ export default function Page() {
           The first act of the Visionary is to recover the capacity to be offended by the ugly—to insist that the immediate environment be worthy of the human spirit who inhabits it. Not for vanity. For clarity. You cannot navigate by a star you cannot see. You cannot build toward a vision of human flourishing while surrounded by an aesthetic that denies human flourishing is the point.
         </p>
 
-        <p className="text-zinc-200 font-medium border-l-2 border-indigo-500 pl-4 italic my-8 text-lg">
+        <p className="text-[var(--text-primary)] font-medium border-l-2 border-[var(--status-sourced)] pl-4 italic my-8 text-lg">
           Beauty is negentropy made visible. The Architect who cannot see beauty cannot see what they are building toward.
         </p>
       </article>
 
       {/* Footer System Anchor */}
-      <footer className="mt-16 pt-8 border-t border-zinc-900 text-center font-mono text-[10px] text-zinc-600 tracking-widest">
+      <footer className="mt-16 pt-8 border-t border-[var(--border-default)] text-center font-mono text-[10px] text-[var(--text-muted)] tracking-widest">
         SYSTEM MONITOR: RUNNING // NEGENTROPY.OPTICS.CALIBRATED
       </footer>
+          </div>
     </main>
   );
 }

@@ -22,7 +22,7 @@ export default function OverclockedBrief() {
   };
 
   return (
-    <main className="min-h-screen bg-[#0a0a0c] text-[#e0e0e0] py-16 px-6 sm:px-12 selection:bg-indigo-500 selection:text-white">
+    <main className="evidence-page text-[var(--text-secondary)] py-16 px-6 sm:px-12">
       {/* INJECT SCHEMA ENGINE INTO THE DOM */}
       <script
         type="application/ld+json"
@@ -30,24 +30,24 @@ export default function OverclockedBrief() {
       />
 
       <div className="max-w-6xl mx-auto">
-        
+
         {/* HEADER */}
-        <header className="font-mono text-xs sm:text-sm text-gray-500 mb-12 border-b border-gray-800 pb-4 flex justify-between">
+        <header className="font-mono text-xs sm:text-sm text-[var(--text-muted)] mb-12 border-b border-[var(--border-default)] pb-4 flex justify-between">
           <span>[ TACTICAL BRIEF // ARCHIVED DISPATCH ]</span>
-          <span className="text-indigo-400">STATUS: DEPLOYED</span>
+          <span className="text-[var(--status-sourced)]">STATUS: DEPLOYED</span>
         </header>
 
         {/* TWO-COLUMN ARCHITECTURE */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-16">
-          
+
           {/* COLUMN 1: THE INTELLECTUAL PROPERTY */}
-          <article className="lg:col-span-2 prose prose-invert prose-lg font-serif leading-relaxed text-gray-300 max-w-none">
-            
-            <h1 className="font-sans text-3xl sm:text-5xl font-bold tracking-tight mb-4 text-white uppercase not-prose">
+          <article className="lg:col-span-2 prose prose-lg font-serif leading-relaxed text-[var(--text-secondary)] max-w-none">
+
+            <h1 className="font-sans text-3xl sm:text-5xl font-bold tracking-tight mb-4 text-[var(--text-primary)] uppercase not-prose">
               Overclocked
             </h1>
-            
-            <h2 className="font-sans text-xl text-gray-400 mb-12 uppercase tracking-widest not-prose">
+
+            <h2 className="font-sans text-xl text-[var(--text-secondary)] mb-12 uppercase tracking-widest not-prose">
               The Physics of Modern Anxiety
             </h2>
 
@@ -55,20 +55,20 @@ export default function OverclockedBrief() {
               To understand why the digital environment produces anxiety that feels physical — the tightness in the chest, the inability to sit still, the mental fog that descends after an hour of scrolling — we need to look at how processors fail under excess load.
             </p>
 
-            <div className="p-6 my-8 border border-gray-800 bg-black/40 not-prose font-mono text-sm">
-              <p className="text-white mb-4">
-                <strong className="text-indigo-400">[ OVERCLOCKING ] :</strong> In chip design, there is an immutable relationship between processing speed and heat. Force a processor to run faster than its design specifications allow, and it generates excess thermal energy. 
+            <div className="p-6 my-8 border border-[var(--border-default)] bg-[#141816] not-prose font-mono text-sm">
+              <p className="text-[var(--text-primary)] mb-4">
+                <strong className="text-[var(--status-sourced)]">[ OVERCLOCKING ] :</strong> In chip design, there is an immutable relationship between processing speed and heat. Force a processor to run faster than its design specifications allow, and it generates excess thermal energy.
               </p>
-              <p className="text-white mb-0">
-                <strong className="text-indigo-400">[ THERMAL THROTTLING ] :</strong> If heat cannot dissipate, the hardware executes a safety protocol, deliberately reducing its own performance to lower the temperature. The device stutters. It lags. It refuses to execute demanding tasks.
+              <p className="text-[var(--text-primary)] mb-0">
+                <strong className="text-[var(--status-sourced)]">[ THERMAL THROTTLING ] :</strong> If heat cannot dissipate, the hardware executes a safety protocol, deliberately reducing its own performance to lower the temperature. The device stutters. It lags. It refuses to execute demanding tasks.
               </p>
             </div>
 
             <p>
               The human brain is a biological processor with a specific design frequency. It evolved to handle low-frequency inputs: the movement of weather, the pace of conversation, the sustained engagement of reading. The algorithmic feed is a high-frequency input stream. It delivers thousands of context switches per hour — headlines, images, emotional triggers, notifications — at a rate that the brain&apos;s architecture was never designed to process.
             </p>
-            
-            <p className="font-bold text-white text-xl font-sans uppercase tracking-widest border-l-2 border-indigo-500 pl-4 my-8 not-prose">
+
+            <p className="font-bold text-[var(--text-primary)] text-xl font-sans uppercase tracking-widest border-l-2 border-[var(--status-sourced)] pl-4 my-8 not-prose">
               We are running legacy hardware on modern software at a hundred times its intended clock speed.
             </p>
 
@@ -76,63 +76,63 @@ export default function OverclockedBrief() {
               Anxiety is heat. It is the thermal signature of a processor running beyond its design limits — the friction generated by a system pushed past its capacity.
             </p>
 
-            <h3 className="text-xl text-white font-sans font-bold uppercase tracking-widest mt-12 mb-4">
+            <h3 className="text-xl text-[var(--text-primary)] font-sans font-bold uppercase tracking-widest mt-12 mb-4">
               The Biological Equivalent
             </h3>
 
             <p>
-              In biological terms, the equivalent of overclocking is chronic Sympathetic Nervous System activation — the sustained fight-or-flight state that the constant novelty and threat-detection of the algorithmic feed is designed to trigger. 
+              In biological terms, the equivalent of overclocking is chronic Sympathetic Nervous System activation — the sustained fight-or-flight state that the constant novelty and threat-detection of the algorithmic feed is designed to trigger.
             </p>
             <p>
-              The clinical term for what happens when this state persists without adequate recovery is <strong className="text-white">Allostatic Overload</strong>: the cumulative physiological wear on biological systems subjected to unrelenting stress hormones. The thermal metaphor maps precisely onto the biology. Anxiety is Sympathetic Hyperarousal. Brain fog is the brain&apos;s protective downregulation under Allostatic Overload — not a failure, but a circuit breaker.
+              The clinical term for what happens when this state persists without adequate recovery is <strong className="text-[var(--text-primary)]">Allostatic Overload</strong>: the cumulative physiological wear on biological systems subjected to unrelenting stress hormones. The thermal metaphor maps precisely onto the biology. Anxiety is Sympathetic Hyperarousal. Brain fog is the brain&apos;s protective downregulation under Allostatic Overload — not a failure, but a circuit breaker.
             </p>
             <p>
               Brain fog is thermal throttling. When you find yourself unable to hold a thought after extended screen time, your biology has not failed you. It has protected you. Your system detected a critical load and reduced performance to prevent permanent damage.
             </p>
             <p>
-              <strong className="text-white">Burnout is structural failure</strong> — what happens when the throttling mechanism is overridden repeatedly over months and years until the hardware itself degrades.
+              <strong className="text-[var(--text-primary)]">Burnout is structural failure</strong> — what happens when the throttling mechanism is overridden repeatedly over months and years until the hardware itself degrades.
             </p>
 
-            <div className="mt-12 pt-8 border-t border-gray-800 not-prose">
-              <p className="font-mono text-sm text-indigo-400 mt-6 uppercase tracking-widest">
+            <div className="mt-12 pt-8 border-t border-[var(--border-default)] not-prose">
+              <p className="font-mono text-sm text-[var(--status-sourced)] mt-6 uppercase tracking-widest">
                 You cannot willpower your way through thermal throttling. The only solution is to reduce the input load. The processor cannot cool down while it is still being overclocked.
               </p>
             </div>
-            
+
           </article>
 
           {/* COLUMN 2: THE CONVERSION SIDEBAR (STICKY) */}
           <aside className="lg:col-span-1">
             <div className="sticky top-12 space-y-8">
-              
+
               {/* VECTOR 1: DOCTRINE HUB */}
-              <div className="p-6 border border-gray-800 bg-black">
-                <h3 className="font-sans text-sm font-bold text-white uppercase tracking-widest mb-2">The Sovereign Grid</h3>
-                <p className="font-serif text-xs text-gray-400 mb-4">
+              <div className="p-6 border border-[var(--border-default)] bg-[var(--surface-raised)]">
+                <h3 className="font-sans text-sm font-bold text-[var(--text-primary)] uppercase tracking-widest mb-2">The Sovereign Grid</h3>
+                <p className="font-serif text-xs text-[var(--text-secondary)] mb-4">
                   Access the full architectural framework, including the 81,015-word manuscript of The Maha Principle.
                 </p>
-                <Link href="/doctrine" className="block text-center border border-gray-600 bg-gray-900 text-white font-mono text-[10px] tracking-widest py-3 hover:bg-white hover:text-black transition-colors uppercase">
+                <Link href="/doctrine" className="block text-center border border-[var(--border-default)] bg-[var(--surface-raised)] text-[var(--text-primary)] font-mono text-[10px] tracking-widest py-3 hover:bg-[var(--surface-subtle)] hover:text-black transition-colors uppercase">
                   Initialize Vault ↗
                 </Link>
               </div>
 
               <div className="p-6 border border-orange-900/50 bg-orange-950/10">
-                <h3 className="font-sans text-sm font-bold text-orange-300 uppercase tracking-widest mb-2">Overclock: Interactive Prototype</h3>
-                <p className="font-serif text-xs text-gray-400 mb-4">
+                <h3 className="font-sans text-sm font-bold text-[var(--status-boundary)] uppercase tracking-widest mb-2">Overclock: Interactive Prototype</h3>
+                <p className="font-serif text-xs text-[var(--text-secondary)] mb-4">
                   Play the risk-and-trust system behind this brief: five rounds, escalating stakes, and an oracle whose accuracy can degrade.
                 </p>
-                <Link href="/overclock" className="block text-center border border-orange-400 text-orange-200 font-mono text-[10px] tracking-widest py-3 hover:bg-orange-400 hover:text-black transition-colors uppercase">
+                <Link href="/overclock" className="block text-center border border-orange-400 text-[var(--status-boundary)] font-mono text-[10px] tracking-widest py-3 hover:bg-orange-400 hover:text-black transition-colors uppercase">
                   Run the prototype ↗
                 </Link>
               </div>
 
               {/* VECTOR 2: MAHA OS */}
-              <div className="p-6 border border-indigo-900/50 bg-indigo-950/10">
-                <h3 className="font-sans text-sm font-bold text-indigo-400 uppercase tracking-widest mb-2">Maha OS Alpha</h3>
-                <p className="font-serif text-xs text-gray-400 mb-4">
+              <div className="p-6 border border-[var(--status-sourced)] bg-[var(--surface-subtle)]">
+                <h3 className="font-sans text-sm font-bold text-[var(--status-sourced)] uppercase tracking-widest mb-2">Maha OS Alpha</h3>
+                <p className="font-serif text-xs text-[var(--text-secondary)] mb-4">
                   Deploy the structural defense grid to your local device. Enforce the Zero-Payload Policy.
                 </p>
-                <a href="https://play.google.com/store/apps/details?id=com.mahastrategies.os" target="_blank" rel="noopener noreferrer" className="block text-center border border-indigo-500 text-indigo-400 font-mono text-[10px] tracking-widest py-3 hover:bg-indigo-500 hover:text-white transition-colors uppercase">
+                <a href="https://play.google.com/store/apps/details?id=com.mahastrategies.os" target="_blank" rel="noopener noreferrer" className="block text-center border border-[var(--status-sourced)] text-[var(--status-sourced)] font-mono text-[10px] tracking-widest py-3 hover:bg-[var(--status-sourced)] hover:text-[var(--text-primary)] transition-colors uppercase">
                   Download Client ↓
                 </a>
               </div>
@@ -141,10 +141,10 @@ export default function OverclockedBrief() {
           </aside>
 
         </div>
-        
+
         {/* INTERNAL MESH */}
-        <div className="mt-20 pt-8 border-t border-gray-900 text-center">
-          <Link href="/doctrine" className="font-mono text-xs text-gray-600 hover:text-white transition-colors uppercase tracking-widest">
+        <div className="mt-20 pt-8 border-t border-[var(--border-default)] text-center">
+          <Link href="/doctrine" className="font-mono text-xs text-[var(--text-muted)] hover:text-[var(--text-primary)] transition-colors uppercase tracking-widest">
             [ ← Return to Doctrine Hub ]
           </Link>
         </div>

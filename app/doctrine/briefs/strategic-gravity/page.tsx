@@ -19,7 +19,8 @@ export default function Page() {
   };
 
   return (
-    <main className="min-h-screen bg-[#0a0a0c] text-zinc-300 font-sans p-8 md:p-24 selection:bg-indigo-500 selection:text-white max-w-3xl mx-auto">
+    <main className="evidence-page">
+      <div className="evidence-container evidence-container--narrow text-[var(--text-secondary)] font-sans">
       {/* AI Agent / SEO Crawler Payload */}
       <script
         type="application/ld+json"
@@ -30,29 +31,29 @@ export default function Page() {
       <div className="mb-12">
         <Link 
           href="/doctrine" 
-          className="font-mono text-xs uppercase tracking-widest text-indigo-500 hover:text-indigo-400 transition-colors no-underline flex items-center gap-2"
+          className="font-mono text-xs uppercase tracking-widest text-[var(--status-sourced)] hover:text-[var(--status-sourced)] transition-colors no-underline flex items-center gap-2"
         >
           ← ESCAPE TO DOCTRINE ROOT
         </Link>
       </div>
 
       {/* Header Block */}
-      <header className="border-b border-zinc-800 pb-8 mb-12">
-        <p className="font-mono text-xs text-indigo-500 uppercase tracking-widest mb-3">
+      <header className="border-b border-[var(--border-default)] pb-8 mb-12">
+        <p className="font-mono text-xs text-[var(--status-sourced)] uppercase tracking-widest mb-3">
           [ TACTICAL BRIEF 05 // STRATEGIC.GRAVITY ]
         </p>
-        <h1 className="text-4xl text-white font-light tracking-wide uppercase leading-tight m-0">
+        <h1 className="text-4xl text-[var(--text-primary)] font-light tracking-wide uppercase leading-tight m-0">
           Strategic Gravity:<br />The Architecture of Tension
         </h1>
       </header>
 
       {/* Prose Matrix */}
-      <article className="prose prose-invert max-w-none font-light tracking-wide leading-relaxed space-y-6">
+      <article className="prose max-w-none font-light tracking-wide leading-relaxed space-y-6">
         <p>
           There is a persistent misunderstanding about where power comes from. The amateur believes power is the product of volume—maximum activity, maximum noise, maximum visible effort. To be formidable, you must fill every available space.
         </p>
 
-        <p className="text-zinc-200 font-medium border-l-2 border-indigo-500 pl-4 italic my-8 text-lg">
+        <p className="text-[var(--text-primary)] font-medium border-l-2 border-[var(--status-sourced)] pl-4 italic my-8 text-lg">
           The master understands the opposite. Power comes from space.
         </p>
 
@@ -66,20 +67,20 @@ export default function Page() {
 
         {/* Frequency Comparison Block */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 my-8">
-          <div className="bg-zinc-950 border border-zinc-900 p-5 rounded-sm">
-            <h3 className="font-mono text-xs text-rose-500 uppercase tracking-widest mb-2 m-0">
+          <div className="bg-[var(--surface-raised)] border border-[var(--border-default)] p-5 rounded-sm">
+            <h3 className="font-mono text-xs text-[var(--status-unverified)] uppercase tracking-widest mb-2 m-0">
               // HIGH FREQUENCY (TREBLE)
             </h3>
-            <p className="text-sm text-zinc-400 m-0">
+            <p className="text-sm text-[var(--text-secondary)] m-0">
               Fast, anxious, and short-lived. They dissipate quickly and require constant re-broadcasting to maintain energy. They are the domain of the reactive person: the instant reply, the reflexive comment, the argument that must be won right now.
             </p>
           </div>
 
-          <div className="bg-zinc-950 border border-zinc-900 p-5 rounded-sm">
-            <h3 className="font-mono text-xs text-indigo-500 uppercase tracking-widest mb-2 m-0">
+          <div className="bg-[var(--surface-raised)] border border-[var(--border-default)] p-5 rounded-sm">
+            <h3 className="font-mono text-xs text-[var(--status-sourced)] uppercase tracking-widest mb-2 m-0">
               // LOW FREQUENCY (BASS)
             </h3>
-            <p className="text-sm text-zinc-400 m-0">
+            <p className="text-sm text-[var(--text-secondary)] m-0">
               Slow, physical, and foundational. They sustain. They are the domain of the strategic person: metabolic health, skill depth, long-term relationships, the principles held when it is costly to hold them.
             </p>
           </div>
@@ -99,9 +100,10 @@ export default function Page() {
       </article>
 
       {/* Footer System Anchor */}
-      <footer className="mt-16 pt-8 border-t border-zinc-900 text-center font-mono text-[10px] text-zinc-600 tracking-widest">
+      <footer className="mt-16 pt-8 border-t border-[var(--border-default)] text-center font-mono text-[10px] text-[var(--text-muted)] tracking-widest">
         SYSTEM MONITOR: RUNNING // GRAVIMETRIC.STABILITY.ACHIEVED
       </footer>
+          </div>
     </main>
   );
 }

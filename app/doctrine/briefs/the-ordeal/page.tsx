@@ -19,7 +19,8 @@ export default function Page() {
   };
 
   return (
-    <main className="min-h-screen bg-[#0a0a0c] text-zinc-300 font-sans p-8 md:p-24 selection:bg-indigo-500 selection:text-white max-w-3xl mx-auto">
+    <main className="evidence-page">
+      <div className="evidence-container evidence-container--narrow text-[var(--text-secondary)] font-sans">
       {/* AI Agent / SEO Crawler Payload */}
       <script
         type="application/ld+json"
@@ -30,24 +31,24 @@ export default function Page() {
       <div className="mb-12">
         <Link 
           href="/doctrine" 
-          className="font-mono text-xs uppercase tracking-widest text-indigo-500 hover:text-indigo-400 transition-colors no-underline flex items-center gap-2"
+          className="font-mono text-xs uppercase tracking-widest text-[var(--status-sourced)] hover:text-[var(--status-sourced)] transition-colors no-underline flex items-center gap-2"
         >
           ← ESCAPE TO DOCTRINE ROOT
         </Link>
       </div>
 
       {/* Header Block */}
-      <header className="border-b border-zinc-800 pb-8 mb-12">
-        <p className="font-mono text-xs text-indigo-500 uppercase tracking-widest mb-3">
+      <header className="border-b border-[var(--border-default)] pb-8 mb-12">
+        <p className="font-mono text-xs text-[var(--status-sourced)] uppercase tracking-widest mb-3">
           [ TACTICAL BRIEF 09 // THE.ORDEAL ]
         </p>
-        <h1 className="text-4xl text-white font-light tracking-wide uppercase leading-tight m-0">
+        <h1 className="text-4xl text-[var(--text-primary)] font-light tracking-wide uppercase leading-tight m-0">
           The Ordeal: Earned Identity
         </h1>
       </header>
 
       {/* Prose Matrix */}
-      <article className="prose prose-invert max-w-none font-light tracking-wide leading-relaxed space-y-6">
+      <article className="prose max-w-none font-light tracking-wide leading-relaxed space-y-6">
         <p>
           Identity is cheap in the modern world. You can list any credential in a bio without demonstrating it. You can claim any value without living it. The Maha Individual rejects the self-assigned identity. The title is earned through demonstrated capacity, not through agreement with the philosophy.
         </p>
@@ -57,15 +58,15 @@ export default function Page() {
         </p>
 
         {/* Biological Mechanism Block */}
-        <div className="bg-zinc-950 border border-zinc-900 p-6 rounded-sm my-8">
-          <h3 className="font-mono text-xs text-indigo-500 uppercase tracking-widest mb-4 m-0 flex items-center gap-2">
-            <span className="w-1.5 h-1.5 bg-indigo-500 rounded-full inline-block"></span>
+        <div className="bg-[var(--surface-raised)] border border-[var(--border-default)] p-6 rounded-sm my-8">
+          <h3 className="font-mono text-xs text-[var(--status-sourced)] uppercase tracking-widest mb-4 m-0 flex items-center gap-2">
+            <span className="w-1.5 h-1.5 bg-[var(--status-sourced)] rounded-full inline-block"></span>
             BIOLOGICAL MECHANISM: HORMESIS
           </h3>
-          <p className="text-sm text-zinc-400 m-0 mb-4">
+          <p className="text-sm text-[var(--text-secondary)] m-0 mb-4">
             A hormetic response is the beneficial adaptation produced by exposure to a controlled stressor at a dose that would be harmful if sustained but is adaptive when applied acutely and followed by adequate recovery.
           </p>
-          <ul className="list-none pl-0 space-y-2 font-mono text-[11px] text-zinc-500 uppercase tracking-wider m-0">
+          <ul className="list-none pl-0 space-y-2 font-mono text-[11px] text-[var(--text-muted)] uppercase tracking-wider m-0">
             <li>// MODERATE EXERCISE: Triggers repair and structural overcompensation.</li>
             <li>// COLD EXPOSURE: Triggers noradrenaline release and mitochondrial biogenesis.</li>
             <li>// CONTROLLED FASTING: Triggers autophagy and improved insulin sensitivity.</li>
@@ -84,7 +85,7 @@ export default function Page() {
           For another, it is twenty-four hours of water fasting combined with a sustained physical load—a long march carrying weight, or six hours of continuous manual labor. For another, it is five days in the wilderness alone with nothing to read and no device. The form is secondary. 
         </p>
 
-        <p className="text-zinc-200 font-medium border-l-2 border-indigo-500 pl-4 italic my-8 text-lg">
+        <p className="text-[var(--text-primary)] font-medium border-l-2 border-[var(--status-sourced)] pl-4 italic my-8 text-lg">
           The witness is not—the Ordeal is completed in front of someone who knows what you were attempting and can confirm that you did not stop when stopping became attractive.
         </p>
 
@@ -98,9 +99,10 @@ export default function Page() {
       </article>
 
       {/* Footer System Anchor */}
-      <footer className="mt-16 pt-8 border-t border-zinc-900 text-center font-mono text-[10px] text-zinc-600 tracking-widest">
+      <footer className="mt-16 pt-8 border-t border-[var(--border-default)] text-center font-mono text-[10px] text-[var(--text-muted)] tracking-widest">
         SYSTEM MONITOR: RUNNING // NEUROLOGICAL.CALLUS.FORMED
       </footer>
+          </div>
     </main>
   );
 }

@@ -22,7 +22,7 @@ export default function SoilGutBrainBrief() {
   };
 
   return (
-    <main className="min-h-screen bg-[#0a0a0c] text-[#e0e0e0] py-16 px-6 sm:px-12 selection:bg-indigo-500 selection:text-white">
+    <main className="evidence-page text-[var(--text-secondary)] py-16 px-6 sm:px-12">
       {/* INJECT SCHEMA ENGINE INTO THE DOM */}
       <script
         type="application/ld+json"
@@ -32,26 +32,26 @@ export default function SoilGutBrainBrief() {
       <div className="max-w-6xl mx-auto">
         
         {/* HEADER */}
-        <header className="font-mono text-xs sm:text-sm text-gray-500 mb-12 border-b border-gray-800 pb-4 flex justify-between">
+        <header className="font-mono text-xs sm:text-sm text-[var(--text-muted)] mb-12 border-b border-[var(--border-default)] pb-4 flex justify-between">
           <span>[ TACTICAL BRIEF // ARCHIVED DISPATCH ]</span>
-          <span className="text-indigo-400">STATUS: DEPLOYED</span>
+          <span className="text-[var(--status-sourced)]">STATUS: DEPLOYED</span>
         </header>
 
         {/* TWO-COLUMN ARCHITECTURE */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-16">
           
           {/* COLUMN 1: THE INTELLECTUAL PROPERTY */}
-          <article className="lg:col-span-2 prose prose-invert prose-lg font-serif leading-relaxed text-gray-300 max-w-none">
+          <article className="lg:col-span-2 prose prose-lg font-serif leading-relaxed text-[var(--text-secondary)] max-w-none">
             
-            <h1 className="font-sans text-3xl sm:text-5xl font-bold tracking-tight mb-4 text-white uppercase not-prose">
+            <h1 className="font-sans text-3xl sm:text-5xl font-bold tracking-tight mb-4 text-[var(--text-primary)] uppercase not-prose">
               The Soil-Gut-Brain Axis
             </h1>
             
-            <p className="font-mono text-sm text-indigo-400 mb-12 uppercase tracking-widest not-prose">
+            <p className="font-mono text-sm text-[var(--status-sourced)] mb-12 uppercase tracking-widest not-prose">
               ORIGIN: JANUARY 29, 2026
             </p>
 
-            <h2 className="text-2xl text-white font-sans uppercase tracking-widest border-l-2 border-indigo-500 pl-4 mt-8 mb-6 not-prose">
+            <h2 className="text-2xl text-[var(--text-primary)] font-sans uppercase tracking-widest border-l-2 border-[var(--status-sourced)] pl-4 mt-8 mb-6 not-prose">
               Where the Sickness Starts
             </h2>
             <p>
@@ -61,7 +61,7 @@ export default function SoilGutBrainBrief() {
               For most of human agricultural history, farming was a partnership with biological processes — organic matter decomposed, soil communities of bacteria and fungi thrived, and plants grown in that ecosystem absorbed a dense spectrum of minerals. In the twentieth century, we replaced that partnership with industrial chemistry. We stopped treating soil as a living system and started treating it as an inert medium to be saturated with synthetic inputs.
             </p>
 
-            <h3 className="text-xl text-white font-sans font-bold uppercase tracking-widest mt-12 mb-4">
+            <h3 className="text-xl text-[var(--text-primary)] font-sans font-bold uppercase tracking-widest mt-12 mb-4">
               The Death of the Soil
             </h3>
             <p>
@@ -77,11 +77,11 @@ export default function SoilGutBrainBrief() {
               Simultaneously, the obsession with yield has produced what researchers call nutrient dilution. Synthetic fertilizers — nitrogen, phosphorus, potassium — force rapid, water-heavy crop growth that does not require the plant to develop an extensive root system or draw trace minerals from deep soil. A study published in the Journal of the American College of Nutrition, analyzing USDA nutritional data from 1950 to 1999, found measurable declines in protein, calcium, iron, and key vitamins across 43 garden crops — with some mineral densities down by more than 30% over that period.
             </p>
             
-            <div className="p-6 my-8 border border-gray-800 bg-black/40 not-prose">
-              <p className="font-sans font-bold text-lg text-white mb-0">
+            <div className="p-6 my-8 border border-[var(--border-default)] bg-[#141816] not-prose">
+              <p className="font-sans font-bold text-lg text-[var(--text-primary)] mb-0">
                 We are eating caloric ghosts. 
               </p>
-              <p className="font-serif text-gray-400 mt-2">
+              <p className="font-serif text-[var(--text-secondary)] mt-2">
                 The volume of food is present. The nutritional information it carries is not. We are overfed and undernourished — drowning in calories, gasping for nutrients.
               </p>
             </div>
@@ -93,23 +93,23 @@ export default function SoilGutBrainBrief() {
             <div className="sticky top-12 space-y-8">
               
               {/* VECTOR 1: DOCTRINE HUB */}
-              <div className="p-6 border border-gray-800 bg-black">
-                <h3 className="font-sans text-sm font-bold text-white uppercase tracking-widest mb-2">The Sovereign Grid</h3>
-                <p className="font-serif text-xs text-gray-400 mb-4">
+              <div className="p-6 border border-[var(--border-default)] bg-[var(--surface-raised)]">
+                <h3 className="font-sans text-sm font-bold text-[var(--text-primary)] uppercase tracking-widest mb-2">The Sovereign Grid</h3>
+                <p className="font-serif text-xs text-[var(--text-secondary)] mb-4">
                   Access the full architectural framework, including the 81,015-word manuscript of The Maha Principle.
                 </p>
-                <Link href="/doctrine" className="block text-center border border-gray-600 bg-gray-900 text-white font-mono text-[10px] tracking-widest py-3 hover:bg-white hover:text-black transition-colors uppercase">
+                <Link href="/doctrine" className="block text-center border border-[var(--border-default)] bg-[var(--surface-raised)] text-[var(--text-primary)] font-mono text-[10px] tracking-widest py-3 hover:bg-[var(--surface-subtle)] hover:text-black transition-colors uppercase">
                   Initialize Vault ↗
                 </Link>
               </div>
 
               {/* VECTOR 2: MAHA OS */}
-              <div className="p-6 border border-indigo-900/50 bg-indigo-950/10">
-                <h3 className="font-sans text-sm font-bold text-indigo-400 uppercase tracking-widest mb-2">Maha OS Alpha</h3>
-                <p className="font-serif text-xs text-gray-400 mb-4">
+              <div className="p-6 border border-[var(--status-sourced)] bg-[var(--surface-subtle)]">
+                <h3 className="font-sans text-sm font-bold text-[var(--status-sourced)] uppercase tracking-widest mb-2">Maha OS Alpha</h3>
+                <p className="font-serif text-xs text-[var(--text-secondary)] mb-4">
                   Deploy the structural defense grid to your local device. Enforce the Zero-Payload Policy.
                 </p>
-                <a href="https://play.google.com/store/apps/details?id=com.mahastrategies.os" target="_blank" rel="noopener noreferrer" className="block text-center border border-indigo-500 text-indigo-400 font-mono text-[10px] tracking-widest py-3 hover:bg-indigo-500 hover:text-white transition-colors uppercase">
+                <a href="https://play.google.com/store/apps/details?id=com.mahastrategies.os" target="_blank" rel="noopener noreferrer" className="block text-center border border-[var(--status-sourced)] text-[var(--status-sourced)] font-mono text-[10px] tracking-widest py-3 hover:bg-[var(--status-sourced)] hover:text-[var(--text-primary)] transition-colors uppercase">
                   Download Client ↓
                 </a>
               </div>
@@ -120,8 +120,8 @@ export default function SoilGutBrainBrief() {
         </div>
         
         {/* INTERNAL MESH */}
-        <div className="mt-20 pt-8 border-t border-gray-900 text-center">
-          <Link href="/doctrine" className="font-mono text-xs text-gray-600 hover:text-white transition-colors uppercase tracking-widest">
+        <div className="mt-20 pt-8 border-t border-[var(--border-default)] text-center">
+          <Link href="/doctrine" className="font-mono text-xs text-[var(--text-muted)] hover:text-[var(--text-primary)] transition-colors uppercase tracking-widest">
             [ ← Return to Doctrine Hub ]
           </Link>
         </div>
