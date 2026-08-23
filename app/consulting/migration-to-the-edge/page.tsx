@@ -28,39 +28,39 @@ export default function MigrationToTheEdgePage() {
   };
 
   return (
-    <main className="min-h-screen bg-[#0a0a0c] text-zinc-300 font-sans p-8 md:p-24 selection:bg-indigo-500 selection:text-white">
+    <main className="evidence-page">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
-      <div className="max-w-3xl mx-auto">
+      <div className="evidence-container evidence-container--narrow">
         {/* Navigation Breadcrumb */}
         <div className="mb-12">
           <Link
             href="/consulting"
-            className="font-mono text-xs tracking-widest text-zinc-500 hover:text-white uppercase transition-colors no-underline"
+            className="font-mono text-xs tracking-widest text-[var(--text-muted)] hover:text-[var(--text-primary)] uppercase transition-colors no-underline"
           >
             &larr; BACK TO CONSULTING NODE
           </Link>
         </div>
 
         {/* Title Block */}
-        <header className="border-b border-zinc-800 pb-8 mb-12">
-          <div className="font-mono text-xs tracking-widest text-indigo-500 uppercase mb-3">
+        <header className="border-b border-[var(--border-default)] pb-8 mb-12">
+          <div className="font-mono text-xs tracking-widest text-[var(--status-sourced)] uppercase mb-3">
             STRATEGIC ADVISORY // HARDWARE.GEN_AI
           </div>
-          <h1 className="text-3xl md:text-5xl font-light tracking-tight text-white mb-6 uppercase leading-tight">
+          <h1 className="evidence-title evidence-title--product mb-6">
             The Migration to the Edge
           </h1>
-          <p className="text-zinc-400 font-mono text-xs uppercase tracking-widest">
+          <p className="text-[var(--text-secondary)] font-mono text-xs uppercase tracking-widest">
             Mobile Hardware in the GenAI Era
           </p>
         </header>
 
         {/* Executive Summary */}
-        <div className="bg-zinc-950/40 p-6 mb-12 font-mono text-xs md:text-sm leading-relaxed text-zinc-400 border-l-2 border-l-indigo-500">
-          <span className="text-white block font-bold mb-2 uppercase tracking-wider">
+        <div className="bg-[var(--surface-raised)] p-6 mb-12 font-mono text-xs md:text-sm leading-relaxed text-[var(--text-secondary)] border-l-2 border-l-[var(--status-sourced)]">
+          <span className="text-[var(--text-primary)] block font-bold mb-2 uppercase tracking-wider">
             [ EXECUTIVE SUMMARY ]
           </span>
           The intelligence layer of the mobile network is beginning to
@@ -74,9 +74,9 @@ export default function MigrationToTheEdgePage() {
         </div>
 
         {/* Article Body */}
-        <article className="prose prose-invert max-w-none font-light tracking-wide leading-relaxed space-y-12">
+        <article className="prose max-w-none font-light tracking-wide leading-relaxed space-y-12">
           <section className="space-y-4">
-            <h2 className="text-xl md:text-2xl text-white font-mono tracking-wider uppercase border-l border-zinc-700 pl-4 mt-0">
+            <h2 className="evidence-section-title border-l border-[var(--border-default)] pl-4 mt-0">
               1. The Limits of Cloud-Only AI
             </h2>
             <p>
@@ -98,7 +98,7 @@ export default function MigrationToTheEdgePage() {
           </section>
 
           <section className="space-y-4">
-            <h2 className="text-xl md:text-2xl text-white font-mono tracking-wider uppercase border-l border-zinc-700 pl-4">
+            <h2 className="evidence-section-title border-l border-[var(--border-default)] pl-4">
               2. The New Hardware Baseline
             </h2>
             <p>
@@ -109,11 +109,11 @@ export default function MigrationToTheEdgePage() {
             </p>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 my-8 not-prose font-mono text-xs">
-              <div className="border border-zinc-800 p-5 bg-black">
-                <span className="text-indigo-400 block mb-2 font-bold uppercase tracking-wider">
+              <div className="evidence-card">
+                <span className="text-[var(--status-sourced)] block mb-2 font-bold uppercase tracking-wider">
                   ▲ The Ascendancy of the NPU
                 </span>
-                <p className="text-zinc-400 leading-relaxed m-0">
+                <p className="text-[var(--text-secondary)] leading-relaxed m-0">
                   Flagship mobile SoCs are increasingly defined by their Neural
                   Processing Units. To run compact on-device models like Gemini
                   Nano responsively without severe thermal throttling, leading
@@ -122,11 +122,11 @@ export default function MigrationToTheEdgePage() {
                   generations.
                 </p>
               </div>
-              <div className="border border-zinc-800 p-5 bg-black">
-                <span className="text-zinc-500 block mb-2 font-bold uppercase tracking-wider">
+              <div className="evidence-card">
+                <span className="text-[var(--text-muted)] block mb-2 font-bold uppercase tracking-wider">
                   ▲ The Memory Squeeze
                 </span>
-                <p className="text-zinc-400 leading-relaxed m-0">
+                <p className="text-[var(--text-secondary)] leading-relaxed m-0">
                   Local models are memory-bound: parameters must be held in fast
                   memory and moved quickly. As a result, higher RAM tiers (16GB
                   of LPDDR5X and beyond) are migrating from premium upsell toward
@@ -138,7 +138,7 @@ export default function MigrationToTheEdgePage() {
           </section>
 
           <section className="space-y-4">
-            <h2 className="text-xl md:text-2xl text-white font-mono tracking-wider uppercase border-l border-zinc-700 pl-4">
+            <h2 className="evidence-section-title border-l border-[var(--border-default)] pl-4">
               3. Form Factor: Hardware Built for AI Multitasking
             </h2>
             <p>
@@ -161,7 +161,7 @@ export default function MigrationToTheEdgePage() {
           </section>
 
           <section className="space-y-4">
-            <h2 className="text-xl md:text-2xl text-white font-mono tracking-wider uppercase border-l border-zinc-700 pl-4">
+            <h2 className="evidence-section-title border-l border-[var(--border-default)] pl-4">
               4. Enterprise Integration
             </h2>
             <p>
@@ -172,17 +172,17 @@ export default function MigrationToTheEdgePage() {
               areas warrant near-term attention:
             </p>
 
-            <ul className="space-y-4 list-none pl-0 font-mono text-xs md:text-sm text-zinc-400 mt-6">
-              <li className="p-4 border border-zinc-800 bg-[#111113]">
-                <strong className="text-white block mb-1 uppercase tracking-wider">
+            <ul className="space-y-4 list-none pl-0 font-mono text-xs md:text-sm text-[var(--text-secondary)] mt-6">
+              <li className="p-4 border border-[var(--border-default)] bg-[#111113]">
+                <strong className="text-[var(--text-primary)] block mb-1 uppercase tracking-wider">
                   01. Procurement Criteria:
                 </strong>
                 Device-refresh specs increasingly need to account for NPU
                 capability and memory headroom, not just CPU and camera — under-spec'd
                 fleets can quietly bottleneck AI-enabled workflows.
               </li>
-              <li className="p-4 border border-zinc-800 bg-[#111113]">
-                <strong className="text-white block mb-1 uppercase tracking-wider">
+              <li className="p-4 border border-[var(--border-default)] bg-[#111113]">
+                <strong className="text-[var(--text-primary)] block mb-1 uppercase tracking-wider">
                   02. Edge-Aware Security:
                 </strong>
                 On-device execution and techniques such as federated learning can
@@ -190,8 +190,8 @@ export default function MigrationToTheEdgePage() {
                 the security model toward the device layer rather than the network
                 boundary.
               </li>
-              <li className="p-4 border border-zinc-800 bg-[#111113]">
-                <strong className="text-white block mb-1 uppercase tracking-wider">
+              <li className="p-4 border border-[var(--border-default)] bg-[#111113]">
+                <strong className="text-[var(--text-primary)] block mb-1 uppercase tracking-wider">
                   03. Right-Sized Models:
                 </strong>
                 Smaller, task-specific models (SLMs) tuned to particular corporate
@@ -201,8 +201,8 @@ export default function MigrationToTheEdgePage() {
             </ul>
           </section>
 
-          <section className="space-y-4 pt-4 border-t border-zinc-800">
-            <h2 className="text-xl text-white font-mono uppercase tracking-wider m-0">
+          <section className="space-y-4 pt-4 border-t border-[var(--border-default)]">
+            <h2 className="evidence-card-title m-0">
               Conclusion
             </h2>
             <p>
@@ -214,7 +214,7 @@ export default function MigrationToTheEdgePage() {
             </p>
           </section>
 
-          <p className="text-xs text-zinc-600 font-mono pt-6">
+          <p className="text-xs text-[var(--text-muted)] font-mono pt-6">
             Foldable shipment figures: Counterpoint Research Foldable Smartphone
             Market Forecast (2026). This briefing is general industry analysis,
             not investment advice.
