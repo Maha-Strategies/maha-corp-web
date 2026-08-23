@@ -31,30 +31,30 @@ export default function EnterpriseMcpGovernanceGuide() {
     author: { '@id': `${SITE_URL}/about#mayone-maha-rajan` }, publisher: { '@id': `${SITE_URL}/#organization` },
     about: ['Model Context Protocol', 'AI agent governance', 'Tool allowlists', 'Audit logging'],
   }
-  return <main className="min-h-screen bg-[#0a0a0c] px-6 py-20 text-zinc-300 sm:py-28">
+  return <main className="min-h-screen bg-[#0a0a0c] px-6 py-20 text-[var(--text-secondary)] sm:py-28">
     <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd).replace(/</g, '\\u003c') }} />
     <article className="mx-auto max-w-4xl">
-      <nav><Link href="/enterprise-mcp-gateway" className="font-mono text-[10px] uppercase tracking-widest text-cyan-200 hover:text-white">← Enterprise MCP Gateway</Link></nav>
-      <header className="mt-8 border-b border-zinc-800 pb-12">
-        <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-cyan-300">[ Practical architecture guide ]</p>
-        <h1 className="mt-5 text-4xl font-light leading-tight text-white sm:text-6xl">How to govern enterprise MCP servers with tool allowlists and audit logs.</h1>
-        <p className="mt-7 max-w-3xl text-xl leading-relaxed text-zinc-400">An MCP gateway should make agent access narrower, observable, and revocable. It should not become a universal secret relay or a second uncontrolled copy of the data passing through it.</p>
-        <p className="mt-5 font-mono text-[10px] uppercase tracking-widest text-zinc-600">Published August 6, 2026 · Maha Strategies LLC</p>
+      <nav><Link href="/enterprise-mcp-gateway" className="font-mono text-[10px] uppercase tracking-widest text-[var(--text-primary)] hover:text-[var(--text-primary)]">← Enterprise MCP Gateway</Link></nav>
+      <header className="mt-8 border-b border-[var(--border-default)] pb-12">
+        <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-[var(--text-muted)]">[ Practical architecture guide ]</p>
+        <h1 className="mt-5 text-4xl font-light leading-tight text-[var(--text-primary)] sm:text-6xl">How to govern enterprise MCP servers with tool allowlists and audit logs.</h1>
+        <p className="mt-7 max-w-3xl text-xl leading-relaxed text-[var(--text-secondary)]">An MCP gateway should make agent access narrower, observable, and revocable. It should not become a universal secret relay or a second uncontrolled copy of the data passing through it.</p>
+        <p className="mt-5 font-mono text-[10px] uppercase tracking-widest text-[var(--text-muted)]">Published August 6, 2026 · Maha Strategies LLC</p>
       </header>
 
-      <section className="mt-12 border border-cyan-900/50 bg-cyan-950/10 p-7 sm:p-9">
-        <h2 className="text-2xl text-white">The short answer</h2>
-        <p className="mt-4 leading-relaxed text-zinc-300">Place a tenant-aware policy gateway between agent clients and approved MCP servers. Resolve the upstream from a server registry, authenticate both sides independently, enforce method and tool allowlists before network dispatch, contain upstream failures, and retain only the metadata needed to investigate access and availability.</p>
+      <section className="evidence-section evidence-inset">
+        <h2 className="evidence-card-title">The short answer</h2>
+        <p className="mt-4 leading-relaxed text-[var(--text-secondary)]">Place a tenant-aware policy gateway between agent clients and approved MCP servers. Resolve the upstream from a server registry, authenticate both sides independently, enforce method and tool allowlists before network dispatch, contain upstream failures, and retain only the metadata needed to investigate access and availability.</p>
       </section>
 
-      <section className="mt-14">
-        <h2 className="text-3xl font-light text-white">The five controls that matter</h2>
-        <ol className="mt-7 space-y-5">{controls.map(([name, copy], index) => <li key={name} className="border-l border-zinc-700 pl-5"><p className="font-mono text-[10px] uppercase tracking-widest text-cyan-300">{String(index + 1).padStart(2, '0')} · {name}</p><p className="mt-2 leading-relaxed text-zinc-400">{copy}</p></li>)}</ol>
+      <section className="evidence-section">
+        <h2 className="evidence-section-title">The five controls that matter</h2>
+        <ol className="mt-7 space-y-5">{controls.map(([name, copy], index) => <li key={name} className="border-l border-[var(--border-default)] pl-5"><p className="font-mono text-[10px] uppercase tracking-widest text-[var(--text-muted)]">{String(index + 1).padStart(2, '0')} · {name}</p><p className="mt-2 leading-relaxed text-[var(--text-secondary)]">{copy}</p></li>)}</ol>
       </section>
 
-      <section className="mt-14 border border-zinc-800 p-7 sm:p-9">
-        <h2 className="text-2xl text-white">A defensible request path</h2>
-        <ol className="mt-6 list-decimal space-y-3 pl-5 text-sm leading-relaxed text-zinc-400">
+      <section className="evidence-section border border-[var(--border-default)] p-7 sm:p-9">
+        <h2 className="evidence-card-title">A defensible request path</h2>
+        <ol className="mt-6 list-decimal space-y-3 pl-5 text-sm leading-relaxed text-[var(--text-secondary)]">
           <li>Authenticate the agent credential and resolve its tenant.</li>
           <li>Load the server record using both tenant ID and server ID.</li>
           <li>Validate the JSON-RPC envelope and bounded request size.</li>
@@ -67,9 +67,9 @@ export default function EnterpriseMcpGovernanceGuide() {
         </ol>
       </section>
 
-      <section className="mt-14">
-        <h2 className="text-3xl font-light text-white">Apply an explicit tool policy</h2>
-        <p className="mt-5 leading-relaxed text-zinc-400">Run bounded <code>tools/list</code> discovery first, then approve a subset by exact name. Discovery describes what exists; it does not grant permission.</p>
+      <section className="evidence-section">
+        <h2 className="evidence-section-title">Apply an explicit tool policy</h2>
+        <p className="mt-5 leading-relaxed text-[var(--text-secondary)]">Run bounded <code>tools/list</code> discovery first, then approve a subset by exact name. Discovery describes what exists; it does not grant permission.</p>
         <CodeBlock>{`const discovered = await maha.mcp.discoverTools(serverId)
 const approved = discovered.discovery.tools
   .filter(tool => ["calculateRiskScore", "readPolicy"].includes(tool.name))
@@ -81,19 +81,19 @@ await maha.mcp.updateServerPolicy(serverId, {
 })`}</CodeBlock>
       </section>
 
-      <section className="mt-14">
-        <h2 className="text-3xl font-light text-white">MCP audit logging for AI agents: what not to retain</h2>
-        <p className="mt-5 leading-relaxed text-zinc-400">Tool arguments can contain source documents, customer identifiers, credentials, and regulated data. Full response bodies can be equally sensitive. A default gateway event should therefore identify the tenant, server, credential, MCP method, tool name, outcome, latency, upstream status, and a one-way request hash—not the request body itself.</p>
-        <p className="mt-4 leading-relaxed text-zinc-400">Teams that need payload inspection should define it as a separate, explicit data-processing mode with its own retention policy, access controls, and customer approval.</p>
+      <section className="evidence-section">
+        <h2 className="evidence-section-title">MCP audit logging for AI agents: what not to retain</h2>
+        <p className="mt-5 leading-relaxed text-[var(--text-secondary)]">Tool arguments can contain source documents, customer identifiers, credentials, and regulated data. Full response bodies can be equally sensitive. A default gateway event should therefore identify the tenant, server, credential, MCP method, tool name, outcome, latency, upstream status, and a one-way request hash—not the request body itself.</p>
+        <p className="mt-4 leading-relaxed text-[var(--text-secondary)]">Teams that need payload inspection should define it as a separate, explicit data-processing mode with its own retention policy, access controls, and customer approval.</p>
       </section>
 
-      <section className="mt-14 border border-amber-900/50 bg-amber-950/10 p-7 sm:p-9">
-        <h2 className="text-2xl text-white">The deployment boundary</h2>
-        <p className="mt-4 leading-relaxed text-zinc-400">Application-level SSRF checks are necessary but insufficient for the highest-assurance environments. Combine hostname validation with controlled egress, private connectivity where required, key rotation, incident response, and a tested method for disabling one server without disabling the whole tenant.</p>
+      <section className="evidence-section evidence-inset" style={{ borderLeftColor: 'var(--status-boundary)' }}>
+        <h2 className="evidence-card-title">The deployment boundary</h2>
+        <p className="mt-4 leading-relaxed text-[var(--text-secondary)]">Application-level SSRF checks are necessary but insufficient for the highest-assurance environments. Combine hostname validation with controlled egress, private connectivity where required, key rotation, incident response, and a tested method for disabling one server without disabling the whole tenant.</p>
       </section>
 
-      <footer className="mt-16 border-t border-zinc-800 pt-8">
-        <p className="max-w-3xl text-sm leading-relaxed text-zinc-500">Maha’s implementation exposes the same core controls through its <Link href="/enterprise-mcp-gateway" className="text-cyan-100 underline underline-offset-4">Enterprise MCP Gateway</Link>. Compare it with <Link href="/guides/mcp-gateway-vs-direct-server" className="text-cyan-100 underline underline-offset-4">direct MCP server connections</Link>, inspect the <a href="/mcp-gateway-contract.json" className="text-cyan-100 underline underline-offset-4">machine-readable contract</a>, or open the <Link href="/docs" className="text-cyan-100 underline underline-offset-4">API reference</Link>.</p>
+      <footer className="mt-16 border-t border-[var(--border-default)] pt-8">
+        <p className="max-w-3xl text-sm leading-relaxed text-[var(--text-muted)]">Maha’s implementation exposes the same core controls through its <Link href="/enterprise-mcp-gateway" className="text-[var(--text-primary)] underline underline-offset-4">Enterprise MCP Gateway</Link>. Compare it with <Link href="/guides/mcp-gateway-vs-direct-server" className="text-[var(--text-primary)] underline underline-offset-4">direct MCP server connections</Link>, inspect the <a href="/mcp-gateway-contract.json" className="text-[var(--text-primary)] underline underline-offset-4">machine-readable contract</a>, or open the <Link href="/docs" className="text-[var(--text-primary)] underline underline-offset-4">API reference</Link>.</p>
       </footer>
     </article>
   </main>
