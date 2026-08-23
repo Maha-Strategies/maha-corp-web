@@ -27,21 +27,41 @@ export default function PreflightCheckout() {
   }
 
   return (
-    <form onSubmit={checkout} className="mt-10 max-w-xl border border-zinc-700 bg-zinc-950 p-6 sm:p-8">
-      <p className="font-mono text-[10px] uppercase tracking-widest text-indigo-300">[ Begin a private preflight ]</p>
-      <div className="mt-6 grid gap-5">
-        <label className="grid gap-2 text-sm text-zinc-300">
-          Email for your private report
-          <input required type="email" autoComplete="email" value={email} onChange={(event) => setEmail(event.target.value)} className="border border-zinc-600 bg-black px-3 py-3 text-white outline-none focus:border-indigo-400" placeholder="you@organization.com" />
+    <form onSubmit={checkout} className="evidence-form mt-10 max-w-xl">
+      <p className="evidence-kicker">Begin a private preflight</p>
+      <fieldset className="evidence-fieldset" disabled={loading}>
+        <label className="evidence-field">
+          <span className="evidence-field-label">Email for your private report</span>
+          <input
+            required
+            type="email"
+            autoComplete="email"
+            value={email}
+            onChange={(event) => setEmail(event.target.value)}
+            aria-invalid={error ? true : undefined}
+            aria-describedby="preflight-checkout-note"
+            className="evidence-input"
+            placeholder="you@organization.com"
+          />
         </label>
-        <label className="grid gap-2 text-sm text-zinc-300">
-          Document label <span className="text-zinc-500">(optional)</span>
-          <input value={documentLabel} onChange={(event) => setDocumentLabel(event.target.value)} maxLength={120} className="border border-zinc-600 bg-black px-3 py-3 text-white outline-none focus:border-indigo-400" placeholder="Board memo draft, chapter 3, policy note…" />
+        <label className="evidence-field">
+          <span className="evidence-field-label">
+            Document label <span className="evidence-field-note">(optional)</span>
+          </span>
+          <input
+            value={documentLabel}
+            onChange={(event) => setDocumentLabel(event.target.value)}
+            maxLength={120}
+            className="evidence-input"
+            placeholder="Board memo draft, chapter 3, policy note…"
+          />
         </label>
-      </div>
-      <p className="mt-5 text-xs leading-relaxed text-zinc-500">Secure payment is handled by Stripe. After payment, you paste the document directly into a private session; the full source text is processed transiently and is not kept in the MPS ledger.</p>
-      {error && <p role="alert" className="mt-4 text-sm text-red-300">{error}</p>}
-      <button disabled={loading} className="mt-6 w-full bg-white px-5 py-4 font-mono text-xs font-bold uppercase tracking-widest text-black transition-colors hover:bg-zinc-200 disabled:cursor-wait disabled:bg-zinc-500">
+      </fieldset>
+      <p id="preflight-checkout-note" className="evidence-field-hint">
+        Secure payment is handled by Stripe. After payment, you paste the document directly into a private session; the full source text is processed transiently and is not kept in the MPS ledger.
+      </p>
+      {error && <p role="alert" className="evidence-field-error">{error}</p>}
+      <button disabled={loading} className="evidence-action evidence-action--primary w-full">
         {loading ? 'Opening secure checkout…' : 'Continue to secure checkout — $49'}
       </button>
     </form>

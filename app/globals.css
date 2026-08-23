@@ -318,6 +318,186 @@ body {
 .evidence-chip--illustrative{ color: var(--status-illustrative);border-color: currentColor; }
 .evidence-chip--unverified  { color: var(--status-unverified);  border-color: currentColor; }
 
+/*
+ * Forms.
+ *
+ * Designed against the fourteen paper-theme forms that already exist rather
+ * than a generic control set: text, email, number, checkbox, file, textarea
+ * and select are all in use; radio is not, so there is no radio style here.
+ *
+ * Eleven of those fourteen wrap the control in its <label>, which is valid
+ * association, so `.evidence-field` is built for that idiom instead of
+ * fighting it — a wrapping label and an htmlFor pairing both lay out the same.
+ *
+ * The two things none of them do are associate help text and announce
+ * invalidity: aria-describedby and aria-invalid appear zero times across all
+ * fourteen. So `.evidence-field-hint` is styled to sit in the flow a
+ * describedby would point at, and the invalid treatment keys off
+ * [aria-invalid="true"] rather than a class — the attribute a screen reader
+ * needs is the one that has to be present for the border to turn.
+ */
+.evidence-field {
+  display: grid;
+  gap: 0.5rem;
+  font-size: 0.9375rem;
+  line-height: 1.5;
+  color: var(--text-secondary);
+}
+
+.evidence-field-label {
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+/* "(optional)", units, or a short qualifier sitting beside the label. */
+.evidence-field-note {
+  color: var(--text-muted);
+  font-weight: 400;
+}
+
+.evidence-field-hint {
+  color: var(--text-muted);
+  font-size: 0.8125rem;
+  line-height: 1.55;
+}
+
+.evidence-field-error {
+  color: var(--status-unverified);
+  font-size: 0.8125rem;
+  line-height: 1.55;
+}
+
+/*
+ * One box for every text-like control, so an input, a textarea and a select
+ * line up in the same column without three sets of padding to keep in step.
+ * The min-height matches .evidence-action, which is what sits next to them.
+ */
+.evidence-input {
+  width: 100%;
+  min-height: 2.75rem;
+  border: 1px solid var(--border-default);
+  border-radius: 2px;
+  background: var(--surface-raised);
+  padding: 0.6rem 0.75rem;
+  color: var(--text-primary);
+  font-family: inherit;
+  font-size: 0.9375rem;
+  line-height: 1.5;
+  transition: border-color 150ms ease;
+}
+
+.evidence-input::placeholder { color: var(--text-muted); }
+
+.evidence-input:hover:not(:disabled) { border-color: var(--text-muted); }
+
+.evidence-input:disabled {
+  background: var(--surface-subtle);
+  color: var(--text-muted);
+  cursor: not-allowed;
+}
+
+/* A textarea should grow downward only; horizontal resize breaks the column. */
+textarea.evidence-input {
+  min-height: 7rem;
+  resize: vertical;
+}
+
+select.evidence-input {
+  appearance: none;
+  padding-right: 2.25rem;
+  /* Chevron drawn in the border colour so it tracks the theme. */
+  background-image: linear-gradient(45deg, transparent 50%, var(--text-muted) 50%),
+                    linear-gradient(135deg, var(--text-muted) 50%, transparent 50%);
+  background-position: calc(100% - 1.1rem) 55%, calc(100% - 0.8rem) 55%;
+  background-size: 0.3rem 0.3rem, 0.3rem 0.3rem;
+  background-repeat: no-repeat;
+}
+
+/*
+ * Invalidity keys off the ARIA attribute, not a class. A red border that can
+ * be applied without aria-invalid is a border that lies to a screen reader.
+ */
+
+
+/*
+ * :not([disabled]) is here for specificity, not for logic. The hover rule is
+ * (0,3,0) and would otherwise repaint an invalid field back to the neutral
+ * border the moment a pointer crossed it, which is the one time the red
+ * matters most.
+ */
+.evidence-input[aria-invalid='true']:not([disabled]),
+.evidence-input[aria-invalid='true']:not([disabled]):hover {
+  border-color: var(--status-unverified);
+}
+
+.evidence-checkbox {
+  width: 1.05rem;
+  height: 1.05rem;
+  flex: none;
+  accent-color: var(--status-sourced);
+  cursor: pointer;
+}
+
+/* Checkbox rows read as one line, so the label sits beside rather than above. */
+.evidence-field--inline {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.65rem;
+}
+
+.evidence-file {
+  width: 100%;
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+}
+
+.evidence-file::file-selector-button {
+  margin-right: 0.9rem;
+  border: 1px solid var(--text-primary);
+  border-radius: 2px;
+  background: transparent;
+  padding: 0.5rem 0.9rem;
+  color: var(--text-primary);
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.evidence-file::file-selector-button:hover { background: var(--surface-subtle); }
+
+/* A form panel: the same card language, with room for controls. */
+.evidence-form {
+  display: grid;
+  gap: 1.25rem;
+  border: 1px solid var(--border-default);
+  border-radius: 2px;
+  background: var(--surface-raised);
+  padding: 1.5rem;
+}
+
+.evidence-fieldset {
+  display: grid;
+  gap: 1rem;
+  border: 0;
+  margin: 0;
+  padding: 0;
+}
+
+.evidence-action:disabled {
+  cursor: wait;
+  border-color: var(--text-muted);
+  background: var(--text-muted);
+  color: var(--surface-paper);
+}
+
+.evidence-action--secondary:disabled {
+  background: transparent;
+  color: var(--text-muted);
+}
+
 .evidence-code {
   border: 1px solid #2f3b35;
   border-radius: 2px;
@@ -341,7 +521,7 @@ body {
   --chrome-hover: var(--operator-raised);
 }
 
-:where(a, button, summary):focus-visible {
+:where(a, button, summary, input, textarea, select):focus-visible {
   outline: 2px solid var(--status-sourced);
   outline-offset: 4px;
 }
