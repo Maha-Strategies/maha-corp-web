@@ -58,41 +58,42 @@ const jsonLd = {
 }
 
 export default function MpsLearningCenterPage() {
-  return <main className="min-h-screen bg-[#0a0a0c] px-6 py-20 text-zinc-300 sm:py-28">
+  return <main className="evidence-page"><div className="evidence-container">
     <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, '\\u003c') }} />
-    <article className="mx-auto max-w-4xl">
-      <Link href="/mps" className="font-mono text-[11px] uppercase tracking-widest text-zinc-500 hover:text-white">← Maha Provenance Standard</Link>
-      <p className="mt-12 font-mono text-[10px] uppercase tracking-widest text-indigo-300">[ MPS/0.1 · learning center ]</p>
-      <h1 className="mt-5 max-w-3xl text-4xl font-light leading-tight tracking-tight text-white sm:text-6xl">Research should not lose its boundaries when it travels.</h1>
-      <p className="mt-7 max-w-3xl text-xl leading-relaxed text-zinc-300">These short guides explain the practices behind the Maha Provenance Standard: how a substantive claim can retain its source, epistemic status, scope, and revision history when people—or AI systems—reuse it.</p>
+    <article>
+      <Link href="/mps" className="font-mono text-[11px] uppercase tracking-widest text-[var(--text-muted)] hover:text-[var(--text-primary)]">← Maha Provenance Standard</Link>
+      <p className="mt-12 font-mono text-[10px] uppercase tracking-widest text-[var(--text-muted)]">[ MPS/0.1 · learning center ]</p>
+      <h1 className="evidence-title evidence-title--product max-w-3xl">Research should not lose its boundaries when it travels.</h1>
+      <p className="mt-7 max-w-3xl text-xl leading-relaxed text-[var(--text-secondary)]">These short guides explain the practices behind the Maha Provenance Standard: how a substantive claim can retain its source, epistemic status, scope, and revision history when people—or AI systems—reuse it.</p>
 
       <section className="mt-14 grid gap-4 md:grid-cols-3" aria-label="MPS learning guides">
-        {guides.map((guide) => <Link key={guide.href} href={guide.href} className="border border-zinc-800 bg-zinc-950 p-6 transition hover:border-indigo-400">
-          <h2 className="text-xl font-light text-white">{guide.title}</h2>
-          <p className="mt-4 text-sm leading-relaxed text-zinc-400">{guide.description}</p>
-          <span className="mt-6 block font-mono text-[10px] uppercase tracking-widest text-indigo-300">Read guide →</span>
+        {guides.map((guide) => <Link key={guide.href} href={guide.href} className="border border-[var(--border-default)] bg-[var(--surface-raised)] p-6 transition hover:border-[var(--status-sourced)]">
+          <h2 className="evidence-card-title">{guide.title}</h2>
+          <p className="mt-4 text-sm leading-relaxed text-[var(--text-secondary)]">{guide.description}</p>
+          <span className="mt-6 block font-mono text-[10px] uppercase tracking-widest text-[var(--text-muted)]">Read guide →</span>
         </Link>)}
       </section>
 
-      <section className="mt-16 border-t border-zinc-800 pt-12" aria-labelledby="implementation-library-heading">
-        <p className="font-mono text-[10px] uppercase tracking-widest text-indigo-300">[ MPS implementation library ]</p>
-        <h2 id="implementation-library-heading" className="mt-4 text-3xl font-light text-white">Decide where AI belongs before deciding what it should say.</h2>
-        <p className="mt-4 max-w-3xl leading-relaxed text-zinc-400">This practical library extends the Learning Center from claim provenance into deployment choices. It compares on-device, cloud, and hybrid AI without treating any location as an automatic privacy, security, performance, or sovereignty outcome. Start with a workload, map its data and dependencies, and test the real device and network conditions.</p>
-        <div className="mt-7 grid gap-4 md:grid-cols-3">{implementationGuides.map((guide) => <Link key={guide.href} href={guide.href} className="border border-zinc-800 bg-zinc-950 p-6 transition hover:border-indigo-400"><h3 className="text-xl font-light text-white">{guide.title}</h3><p className="mt-4 text-sm leading-relaxed text-zinc-400">{guide.description}</p><span className="mt-6 block font-mono text-[10px] uppercase tracking-widest text-indigo-300">Open guide →</span></Link>)}</div>
+      <section className="mt-16 border-t border-[var(--border-default)] pt-12" aria-labelledby="implementation-library-heading">
+        <p className="font-mono text-[10px] uppercase tracking-widest text-[var(--text-muted)]">[ MPS implementation library ]</p>
+        <h2 id="implementation-library-heading" className="evidence-section-title mt-4">Decide where AI belongs before deciding what it should say.</h2>
+        <p className="mt-4 max-w-3xl leading-relaxed text-[var(--text-secondary)]">This practical library extends the Learning Center from claim provenance into deployment choices. It compares on-device, cloud, and hybrid AI without treating any location as an automatic privacy, security, performance, or sovereignty outcome. Start with a workload, map its data and dependencies, and test the real device and network conditions.</p>
+        <div className="mt-7 grid gap-4 md:grid-cols-3">{implementationGuides.map((guide) => <Link key={guide.href} href={guide.href} className="border border-[var(--border-default)] bg-[var(--surface-raised)] p-6 transition hover:border-[var(--status-sourced)]"><h3 className="evidence-card-title">{guide.title}</h3><p className="mt-4 text-sm leading-relaxed text-[var(--text-secondary)]">{guide.description}</p><span className="mt-6 block font-mono text-[10px] uppercase tracking-widest text-[var(--text-muted)]">Open guide →</span></Link>)}</div>
         <MpsImplementationLibraryLinks />
       </section>
 
-      <section className="mt-14 grid gap-8 border-y border-zinc-800 py-10 md:grid-cols-2">
-        <div><h2 className="text-2xl text-white">What these guides are</h2><p className="mt-4 leading-relaxed text-zinc-400">A public explanation of one project’s methodology and tools. They use examples from Maha work, including the Research Context Registry and the De Sitter Atlas, to show the difference between a visible source trail and a bare assertion.</p></div>
-        <div><h2 className="text-2xl text-white">What they are not</h2><p className="mt-4 leading-relaxed text-zinc-400">They are not peer-reviewed research, legal guidance, a general certification scheme, or a substitute for reading primary sources. MPS records what was checked and how a claim is framed; it does not make a claim true.</p></div>
+      <section className="mt-14 grid gap-8 border-y border-[var(--border-default)] py-10 md:grid-cols-2">
+        <div><h2 className="evidence-section-title">What these guides are</h2><p className="mt-4 leading-relaxed text-[var(--text-secondary)]">A public explanation of one project’s methodology and tools. They use examples from Maha work, including the Research Context Registry and the De Sitter Atlas, to show the difference between a visible source trail and a bare assertion.</p></div>
+        <div><h2 className="evidence-section-title">What they are not</h2><p className="mt-4 leading-relaxed text-[var(--text-secondary)]">They are not peer-reviewed research, legal guidance, a general certification scheme, or a substitute for reading primary sources. MPS records what was checked and how a claim is framed; it does not make a claim true.</p></div>
       </section>
 
       <section className="mt-14 flex flex-wrap gap-4">
-        <Link href="/audit" className="border border-zinc-600 px-5 py-3 font-mono text-xs uppercase tracking-widest text-zinc-100 hover:border-white">Try the free Auditor</Link>
-        <a href="https://research.mahastrategies.com/registry" className="border border-zinc-600 px-5 py-3 font-mono text-xs uppercase tracking-widest text-zinc-100 hover:border-white">Inspect the Research Registry ↗</a>
-        <a href="https://publish.mahastrategies.com" className="border border-zinc-600 px-5 py-3 font-mono text-xs uppercase tracking-widest text-zinc-100 hover:border-white">Explore Agentic Publishing ↗</a>
+        <Link href="/audit" className="border border-[var(--border-default)] px-5 py-3 font-mono text-xs uppercase tracking-widest text-[var(--text-primary)] hover:border-[var(--text-primary)]">Try the free Auditor</Link>
+        <a href="https://research.mahastrategies.com/registry" className="border border-[var(--border-default)] px-5 py-3 font-mono text-xs uppercase tracking-widest text-[var(--text-primary)] hover:border-[var(--text-primary)]">Inspect the Research Registry ↗</a>
+        <a href="https://publish.mahastrategies.com" className="border border-[var(--border-default)] px-5 py-3 font-mono text-xs uppercase tracking-widest text-[var(--text-primary)] hover:border-[var(--text-primary)]">Explore Agentic Publishing ↗</a>
       </section>
       <MpsLearningLinks />
     </article>
+    </div>
   </main>
 }
