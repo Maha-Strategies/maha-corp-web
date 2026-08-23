@@ -6,11 +6,11 @@ import { BlockMath, InlineMath } from 'react-katex';
 export default function KineticFrictionProtocol() {
   
   return (
-    <main className="min-h-screen bg-[#0a0a0a] text-[#e0e0e0] py-16 px-6 sm:px-12 selection:bg-gray-700">
+    <main className="evidence-page text-[var(--text-secondary)] py-16 px-6 sm:px-12 selection:bg-gray-700">
       <div className="max-w-3xl mx-auto">
         
         {/* TERMINAL HEADER */}
-        <header className="font-mono text-xs sm:text-sm text-gray-500 mb-16 border-b border-gray-800 pb-4">
+        <header className="font-mono text-xs sm:text-sm text-[var(--text-muted)] mb-16 border-b border-[var(--border-default)] pb-4">
           <p>[SYSTEM DOCTRINE]</p>
           <p>PROTOCOL: Maha Strategies - Sovereign Node v2.0</p>
           <p>VECTOR: Kinetic Separation and Anti-Effort Discounting</p>
@@ -18,14 +18,14 @@ export default function KineticFrictionProtocol() {
         </header>
 
         {/* TITLE */}
-        <h1 className="font-sans text-3xl sm:text-4xl font-bold tracking-tight mb-12 text-white">
+        <h1 className="font-sans text-3xl sm:text-4xl font-bold tracking-tight mb-12 text-[var(--text-primary)]">
           THE IRON ENGINE & THE NECESSITY OF FRICTION
         </h1>
 
-        <article className="prose prose-invert prose-lg font-serif leading-relaxed text-gray-300">
+        <article className="prose prose-lg font-serif leading-relaxed text-[var(--text-secondary)]">
           
           {/* SECTION I */}
-          <h2 className="font-sans text-2xl font-semibold text-white mt-12 mb-6">
+          <h2 className="font-sans text-2xl font-semibold text-[var(--text-primary)] mt-12 mb-6">
             I. The Catastrophe of the Frictionless Grid
           </h2>
           <p>
@@ -39,7 +39,7 @@ export default function KineticFrictionProtocol() {
           </p>
           
           {/* SECTION II */}
-          <h2 className="font-sans text-2xl font-semibold text-white mt-12 mb-6">
+          <h2 className="font-sans text-2xl font-semibold text-[var(--text-primary)] mt-12 mb-6">
             II. The Physics of Kinetic Separation
           </h2>
           <p>
@@ -50,7 +50,7 @@ export default function KineticFrictionProtocol() {
           </p>
 
           {/* LATEX MATH ENGINE */}
-          <div className="my-10 p-6 bg-black border border-gray-800 rounded-md shadow-inner text-center">
+          <div className="my-10 p-6 bg-[var(--surface-raised)] border border-[var(--border-default)] rounded-md shadow-inner text-center">
             <BlockMath math="Kinetic\ Drive = \left( \frac{Effort_{exerted}}{Reward_{latency}} \right) \times \mu_{friction}" />
           </div>
 
@@ -58,17 +58,17 @@ export default function KineticFrictionProtocol() {
             Where <InlineMath math="\mu_{friction}" /> represents the coefficient of deliberate resistance designed into a process. If the latency of the reward is zero...
         </p>
 
-          <hr className="border-gray-800 my-12" />
+          <hr className="border-[var(--border-default)] my-12" />
 
           {/* SECTION III */}
-          <h2 className="font-sans text-2xl font-semibold text-white mt-12 mb-6">
+          <h2 className="font-sans text-2xl font-semibold text-[var(--text-primary)] mt-12 mb-6">
             III. Operationalizing the Iron Engine
           </h2>
           <p>
             The Sovereign Node must weaponize friction. Rather than seeking the path of least resistance, the architect must design environments where high-quality cognitive and physical output is the only mechanism for unlocking system rewards. 
           </p>
           
-          <ul className="list-disc pl-6 my-6 space-y-3 text-gray-300 marker:text-gray-600">
+          <ul className="list-disc pl-6 my-6 space-y-3 text-[var(--text-secondary)] marker:text-[var(--text-muted)]">
             <li><strong>Manufactured Delay:</strong> Institutionalize latency between desire and consumption. Implement mandatory cool-down periods (24 to 72 hours) for non-essential digital purchases or algorithmic data ingestion.</li>
             <li><strong>Kinetic Verification:</strong> Tie digital access to biological exertion. Do not permit high-dopamine synthetic inputs (entertainment, social feeds) unless a prerequisite baseline of physical or deep-work friction has been mathematically logged.</li>
             <li><strong>The Separation Protocol:</strong> Routinely execute deliberate, high-friction tasks that offer zero immediate external reward. This re-calibrates the HPA axis, proving to the neurological hardware that the organism remains capable of generating its own kinetic energy.</li>
@@ -80,8 +80,8 @@ export default function KineticFrictionProtocol() {
         </article>
 
         {/* MAHA OS ANCHOR */}
-        <div className="mt-16 p-6 border border-gray-700 bg-gray-900 rounded-lg text-center">
-          <p className="font-mono text-sm text-gray-400 mb-4">LOG KINETIC EXERTION</p>
+        <div className="mt-16 p-6 border border-[var(--border-default)] bg-[var(--surface-raised)] rounded-lg text-center">
+          <p className="font-mono text-sm text-[var(--text-secondary)] mb-4">LOG KINETIC EXERTION</p>
           <a 
             href="https://play.google.com/store/apps/details?id=com.maha.os" 
             target="_blank" 

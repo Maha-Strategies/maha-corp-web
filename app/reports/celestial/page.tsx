@@ -37,49 +37,49 @@ const reports = [
 
 export default function CelestialReportsPage() {
   return (
-    <main className="min-h-screen bg-[#0a0a0c] px-6 py-16 text-zinc-300 selection:bg-violet-400 selection:text-black sm:px-12">
+    <main className="evidence-page px-6 py-16 text-[var(--text-secondary)] sm:px-12">
       <div className="mx-auto max-w-5xl">
-        <nav aria-label="Breadcrumb" className="font-mono text-[10px] uppercase tracking-widest text-zinc-600">
-          <Link href="/" className="hover:text-white">Maha Strategies</Link>
+        <nav aria-label="Breadcrumb" className="font-mono text-[10px] uppercase tracking-widest text-[var(--text-muted)]">
+          <Link href="/" className="hover:text-[var(--text-primary)]">Maha Strategies</Link>
           <span className="px-2">/</span>
-          <span className="text-zinc-400">Celestial reports</span>
+          <span className="text-[var(--text-secondary)]">Celestial reports</span>
         </nav>
 
-        <header className="mt-10 border-b border-zinc-800 pb-10">
-          <p className="font-mono text-[10px] uppercase tracking-widest text-violet-300">Reproducible inputs · named traditions · visible provenance</p>
-          <h1 className="mt-6 max-w-4xl text-4xl font-bold tracking-tight text-white sm:text-6xl">Choose the report you actually need.</h1>
-          <p className="mt-6 max-w-3xl font-serif text-lg leading-8 text-zinc-400">The current reports compute celestial and calendrical facts deterministically, then compile only the rules recorded for a declared tradition. They do not use a language model to invent interpretations.</p>
+        <header className="mt-10 border-b border-[var(--border-default)] pb-10">
+          <p className="font-mono text-[10px] uppercase tracking-widest text-[var(--status-illustrative)]">Reproducible inputs · named traditions · visible provenance</p>
+          <h1 className="mt-6 max-w-4xl text-4xl font-bold tracking-tight text-[var(--text-primary)] sm:text-6xl">Choose the report you actually need.</h1>
+          <p className="mt-6 max-w-3xl font-serif text-lg leading-8 text-[var(--text-secondary)]">The current reports compute celestial and calendrical facts deterministically, then compile only the rules recorded for a declared tradition. They do not use a language model to invent interpretations.</p>
         </header>
 
         <section className="mt-8 grid gap-5 md:grid-cols-2 lg:grid-cols-3" aria-label="Available reports">
           {reports.map((report) => (
-            <article key={report.href} className="flex flex-col border border-zinc-800 bg-zinc-950/60 p-6">
-              <p className="font-mono text-[10px] uppercase tracking-widest text-emerald-300">{report.eyebrow}</p>
-              <h2 className="mt-4 text-2xl font-semibold text-white">{report.title}</h2>
-              <p className="mt-3 flex-1 text-sm leading-6 text-zinc-400">{report.description}</p>
-              <Link href={report.href} className="mt-7 self-start border border-violet-500 px-5 py-3 font-mono text-[10px] uppercase tracking-widest text-violet-300 hover:bg-violet-400 hover:text-black">{report.action} →</Link>
+            <article key={report.href} className="flex flex-col border border-[var(--border-default)] bg-[var(--surface-raised)]/60 p-6">
+              <p className="font-mono text-[10px] uppercase tracking-widest text-[var(--status-verified)]">{report.eyebrow}</p>
+              <h2 className="mt-4 text-2xl font-semibold text-[var(--text-primary)]">{report.title}</h2>
+              <p className="mt-3 flex-1 text-sm leading-6 text-[var(--text-secondary)]">{report.description}</p>
+              <Link href={report.href} className="mt-7 self-start border border-violet-500 px-5 py-3 font-mono text-[10px] uppercase tracking-widest text-[var(--status-illustrative)] hover:bg-violet-400 hover:text-black">{report.action} →</Link>
             </article>
           ))}
         </section>
 
-        <section className="mt-8 border border-zinc-800 bg-zinc-950/40 p-6">
-          <p className="font-mono text-[10px] uppercase tracking-widest text-violet-300">Before interpreting a report</p>
-          <h2 className="mt-3 text-2xl font-semibold text-white">Inspect the calculation conventions.</h2>
-          <p className="mt-3 max-w-3xl text-sm leading-6 text-zinc-400">These method pages explain the timing, zodiac, transit, and organization-event choices visible in report output.</p>
+        <section className="mt-8 border border-[var(--border-default)] bg-[var(--surface-raised)] p-6">
+          <p className="font-mono text-[10px] uppercase tracking-widest text-[var(--status-illustrative)]">Before interpreting a report</p>
+          <h2 className="mt-3 text-2xl font-semibold text-[var(--text-primary)]">Inspect the calculation conventions.</h2>
+          <p className="mt-3 max-w-3xl text-sm leading-6 text-[var(--text-secondary)]">These method pages explain the timing, zodiac, transit, and organization-event choices visible in report output.</p>
           <div className="mt-5 flex flex-wrap gap-3">
-            {CELESTIAL_GUIDE_LIST.map((guide) => <Link key={guide.path} href={guide.path} className="border border-zinc-700 px-3 py-2 text-xs text-zinc-300 hover:border-violet-500 hover:text-white">{guide.title}</Link>)}
+            {CELESTIAL_GUIDE_LIST.map((guide) => <Link key={guide.path} href={guide.path} className="border border-[var(--border-default)] px-3 py-2 text-xs text-[var(--text-secondary)] hover:border-violet-500 hover:text-[var(--text-primary)]">{guide.title}</Link>)}
           </div>
         </section>
 
-        <section className="mt-8 border border-cyan-900/60 bg-cyan-950/10 p-6">
-          <p className="font-mono text-[10px] uppercase tracking-widest text-cyan-300">Phase 2 · calibration in progress</p>
-          <h2 className="mt-3 text-2xl font-semibold text-white">Predictive reports are not available yet.</h2>
-          <p className="mt-3 max-w-3xl text-sm leading-6 text-zinc-400">The forecasting layer can pre-register and score separate tropical and sidereal models against an ordinary baseline. It has not yet demonstrated predictive skill, so this site does not present a forecast as a validated result.</p>
+        <section className="mt-8 border border-cyan-900/60 bg-[var(--surface-subtle)] p-6">
+          <p className="font-mono text-[10px] uppercase tracking-widest text-[var(--status-sourced)]">Phase 2 · calibration in progress</p>
+          <h2 className="mt-3 text-2xl font-semibold text-[var(--text-primary)]">Predictive reports are not available yet.</h2>
+          <p className="mt-3 max-w-3xl text-sm leading-6 text-[var(--text-secondary)]">The forecasting layer can pre-register and score separate tropical and sidereal models against an ordinary baseline. It has not yet demonstrated predictive skill, so this site does not present a forecast as a validated result.</p>
         </section>
 
         <section className="mt-8 border-l-2 border-rose-500 bg-rose-950/10 p-6">
-          <p className="font-mono text-[10px] uppercase tracking-widest text-rose-300">Interpretive boundary</p>
-          <p className="mt-3 max-w-3xl text-sm leading-6 text-zinc-300">Accurate source transcription is not empirical validation. Astrology reports are presented as inspectable cultural and interpretive traditions, not verified prediction or a basis for medical, legal, financial, or other high-stakes decisions.</p>
+          <p className="font-mono text-[10px] uppercase tracking-widest text-[var(--status-unverified)]">Interpretive boundary</p>
+          <p className="mt-3 max-w-3xl text-sm leading-6 text-[var(--text-secondary)]">Accurate source transcription is not empirical validation. Astrology reports are presented as inspectable cultural and interpretive traditions, not verified prediction or a basis for medical, legal, financial, or other high-stakes decisions.</p>
         </section>
       </div>
     </main>
