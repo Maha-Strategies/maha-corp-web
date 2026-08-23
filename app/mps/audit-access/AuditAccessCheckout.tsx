@@ -61,26 +61,26 @@ export default function AuditAccessCheckout({ purchaseState }: { purchaseState?:
   }
 
   if (purchaseState === 'success') {
-    return <div className="mt-10 border border-emerald-800 bg-emerald-950/20 p-6 sm:p-8">
-      <p className="font-mono text-[10px] uppercase tracking-widest text-emerald-300">[ Payment received ]</p>
-      {restoring ? <div aria-hidden className="mt-6 animate-pulse border border-zinc-700 bg-zinc-950 p-5">
-        <p className="font-mono text-[10px] uppercase tracking-widest text-zinc-500">Retrieving secure token…</p>
-        <div className="mt-3 h-12 bg-zinc-900" />
+    return <div className="evidence-inset mt-10" style={{ borderLeftColor: 'var(--status-verified)' }}>
+      <p className="font-mono text-[10px] uppercase tracking-widest text-[var(--status-verified)]">[ Payment received ]</p>
+      {restoring ? <div aria-hidden className="mt-6 animate-pulse border border-[var(--border-default)] bg-[var(--surface-raised)] p-5">
+        <p className="font-mono text-[10px] uppercase tracking-widest text-[var(--text-muted)]">Retrieving secure token…</p>
+        <div className="mt-3 h-12 bg-[var(--surface-raised)]" />
       </div> : purchase ? <ApiAccessTokenReveal credential={purchase.credential} creditQuantity={purchase.creditQuantity} expiresAt={purchase.expiresAt} />
-        : <div role="alert" className="mt-5 border-2 border-red-500 bg-red-950/40 p-5 text-red-100">
-        <p className="font-mono text-xs font-bold uppercase tracking-widest text-red-300">API access token unavailable</p>
+        : <div role="alert" className="mt-5 border-2 border-[var(--status-unverified)] bg-[var(--surface-raised)] p-5 text-[var(--status-unverified)]">
+        <p className="font-mono text-xs font-bold uppercase tracking-widest text-[var(--status-unverified)]">API access token unavailable</p>
         <p className="mt-3 text-sm leading-relaxed">This browser no longer holds the one-time plaintext token, and it cannot be recovered from the credential registry. Contact support with your Stripe receipt.</p>
       </div>}
     </div>
   }
 
-  return <form onSubmit={checkout} className="mt-10 border border-zinc-700 bg-zinc-950 p-6 sm:p-8">
-    <label className="grid gap-2 text-sm text-zinc-300">Receipt email
-      <input required type="email" autoComplete="email" value={email} onChange={(event) => setEmail(event.target.value)} className="border border-zinc-600 bg-black px-3 py-3 text-white outline-none focus:border-indigo-400" placeholder="you@organization.com" />
+  return <form onSubmit={checkout} className="mt-10 border border-[var(--border-default)] bg-[var(--surface-raised)] p-6 sm:p-8">
+    <label className="grid gap-2 text-sm text-[var(--text-secondary)]">Receipt email
+      <input required type="email" autoComplete="email" value={email} onChange={(event) => setEmail(event.target.value)} className="evidence-input" placeholder="you@organization.com" />
     </label>
-    <p className="mt-5 text-xs leading-relaxed text-zinc-500">Stripe handles payment. Your secret credential is generated before checkout, held only in this browser tab, and activated by Stripe’s signed payment confirmation. You must copy it from the completion page before closing the window.</p>
-    {purchaseState === 'cancelled' && <p className="mt-4 text-sm text-amber-200">Checkout was cancelled. No credential was activated.</p>}
-    {error && <p role="alert" className="mt-4 text-sm text-red-300">{error}</p>}
-    <button disabled={loading} className="mt-6 w-full bg-white px-5 py-4 font-mono text-xs font-bold uppercase tracking-widest text-black disabled:cursor-wait disabled:bg-zinc-500">{loading ? 'Opening secure checkout…' : 'Purchase audit access'}</button>
+    <p className="mt-5 text-xs leading-relaxed text-[var(--text-muted)]">Stripe handles payment. Your secret credential is generated before checkout, held only in this browser tab, and activated by Stripe’s signed payment confirmation. You must copy it from the completion page before closing the window.</p>
+    {purchaseState === 'cancelled' && <p className="mt-4 text-sm text-[var(--status-boundary)]">Checkout was cancelled. No credential was activated.</p>}
+    {error && <p role="alert" className="mt-4 text-sm text-[var(--status-unverified)]">{error}</p>}
+    <button disabled={loading} className="evidence-action evidence-action--primary mt-6 w-full">{loading ? 'Opening secure checkout…' : 'Purchase audit access'}</button>
   </form>
 }

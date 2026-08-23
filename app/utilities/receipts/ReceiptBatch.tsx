@@ -218,8 +218,8 @@ export default function ReceiptBatch() {
   if (phase === 'running') {
     return (
       <BatchShell>
-        <p className="font-mono text-sm text-emerald-300">Running your batch… converting receipts to CSV.</p>
-        <p className="mt-2 text-sm text-zinc-500">This can take a few seconds per receipt. Please don&apos;t close the tab.</p>
+        <p className="font-mono text-sm text-[var(--status-verified)]">Running your batch… converting receipts to CSV.</p>
+        <p className="mt-2 text-sm text-[var(--text-muted)]">This can take a few seconds per receipt. Please don&apos;t close the tab.</p>
       </BatchShell>
     )
   }
@@ -227,20 +227,20 @@ export default function ReceiptBatch() {
     return (
       <BatchShell>
         <div className="flex flex-wrap items-center justify-between gap-3">
-          <p className="font-mono text-[11px] uppercase tracking-widest text-emerald-300">
+          <p className="font-mono text-[11px] uppercase tracking-widest text-[var(--status-verified)]">
             {runResult.receiptCount} of {runResult.results.length} receipts parsed · {runResult.rowCount} rows
           </p>
-          <button type="button" onClick={downloadCsv} className="bg-white px-5 py-2.5 font-mono text-[11px] font-bold uppercase tracking-widest text-black hover:bg-zinc-200">
+          <button type="button" onClick={downloadCsv} className="evidence-action evidence-action--primary">
             Download batch CSV ↓
           </button>
         </div>
         <ul className="mt-5 space-y-2 text-sm">
           {runResult.results.map((row) => (
-            <li key={row.index} className="flex items-start gap-3 border-b border-zinc-800/70 pb-2">
-              <span className={`mt-0.5 font-mono text-[10px] uppercase tracking-widest ${row.feasible ? 'text-emerald-300' : 'text-amber-300'}`}>
+            <li key={row.index} className="flex items-start gap-3 border-b border-[var(--border-default)]/70 pb-2">
+              <span className={`mt-0.5 font-mono text-[10px] uppercase tracking-widest ${row.feasible ? 'text-[var(--status-verified)]' : 'text-[var(--status-boundary)]'}`}>
                 #{row.index + 1}{row.source ? ` ${row.source}` : ''} {row.feasible ? 'ok' : 'skipped'}
               </span>
-              <span className="text-zinc-400">
+              <span className="text-[var(--text-secondary)]">
                 {row.feasible
                   ? `${row.merchant ?? 'unknown merchant'} · ${row.rowCount} rows · ${Math.round((row.confidence ?? 0) * 100)}% confidence`
                   : (row.note ?? 'Not a parseable receipt — excluded, not charged for.')}
@@ -248,15 +248,15 @@ export default function ReceiptBatch() {
             </li>
           ))}
         </ul>
-        <p className="mt-5 text-xs text-zinc-500">Receipts that couldn&apos;t be parsed were excluded from the CSV. You were only charged because at least one parsed.</p>
+        <p className="mt-5 text-xs text-[var(--text-muted)]">Receipts that couldn&apos;t be parsed were excluded from the CSV. You were only charged because at least one parsed.</p>
       </BatchShell>
     )
   }
   if (phase === 'refunded') {
     return (
       <BatchShell tone="amber">
-        <p className="font-mono text-xs font-bold uppercase tracking-widest text-amber-300">Automatically refunded</p>
-        <p className="mt-2 text-sm leading-relaxed text-amber-100">
+        <p className="font-mono text-xs font-bold uppercase tracking-widest text-[var(--status-boundary)]">Automatically refunded</p>
+        <p className="mt-2 text-sm leading-relaxed text-[var(--status-boundary)]">
           {runResult?.note ?? 'None of the submitted receipts could be parsed, so your payment was refunded in full.'} Refunds settle back to your card in a few business days.
         </p>
       </BatchShell>
@@ -265,9 +265,9 @@ export default function ReceiptBatch() {
   if (phase === 'cancelled') {
     return (
       <BatchShell tone="amber">
-        <p className="font-mono text-xs font-bold uppercase tracking-widest text-amber-300">Checkout cancelled</p>
-        <p className="mt-2 text-sm text-amber-100">No payment was taken. You can start a new batch below.</p>
-        <button type="button" onClick={() => { setPhase('compose'); setError('') }} className="mt-4 bg-emerald-400 px-6 py-3 font-mono text-[11px] font-bold uppercase tracking-widest text-black hover:bg-emerald-300">
+        <p className="font-mono text-xs font-bold uppercase tracking-widest text-[var(--status-boundary)]">Checkout cancelled</p>
+        <p className="mt-2 text-sm text-[var(--status-boundary)]">No payment was taken. You can start a new batch below.</p>
+        <button type="button" onClick={() => { setPhase('compose'); setError('') }} className="evidence-action evidence-action--primary mt-4">
           Start a new batch →
         </button>
       </BatchShell>
@@ -276,8 +276,8 @@ export default function ReceiptBatch() {
   if (phase === 'missing') {
     return (
       <BatchShell tone="amber">
-        <p className="font-mono text-xs font-bold uppercase tracking-widest text-amber-300">Receipts not found in this browser</p>
-        <p className="mt-2 text-sm leading-relaxed text-amber-100">
+        <p className="font-mono text-xs font-bold uppercase tracking-widest text-[var(--status-boundary)]">Receipts not found in this browser</p>
+        <p className="mt-2 text-sm leading-relaxed text-[var(--status-boundary)]">
           Your payment went through, but the receipts for this run were held in the browser you started from and aren&apos;t here — likely a different device or a cleared session. If a run never completed, the charge is auto-refunded. Contact us if you need help.
         </p>
       </BatchShell>
@@ -286,8 +286,8 @@ export default function ReceiptBatch() {
   if (phase === 'error') {
     return (
       <BatchShell tone="amber">
-        <p className="font-mono text-xs font-bold uppercase tracking-widest text-amber-300">Something went wrong</p>
-        <p className="mt-2 text-sm text-amber-100">{error || 'The batch run could not be completed.'}</p>
+        <p className="font-mono text-xs font-bold uppercase tracking-widest text-[var(--status-boundary)]">Something went wrong</p>
+        <p className="mt-2 text-sm text-[var(--status-boundary)]">{error || 'The batch run could not be completed.'}</p>
       </BatchShell>
     )
   }
@@ -295,8 +295,8 @@ export default function ReceiptBatch() {
   // ---- Compose state ----
   return (
     <BatchShell>
-      <p className="font-mono text-[11px] uppercase tracking-widest text-emerald-300">Paid batch · up to {MAX_BATCH} receipts</p>
-      <p className="mt-3 text-sm leading-relaxed text-zinc-400">
+      <p className="font-mono text-[11px] uppercase tracking-widest text-[var(--status-verified)]">Paid batch · up to {MAX_BATCH} receipts</p>
+      <p className="mt-3 text-sm leading-relaxed text-[var(--text-secondary)]">
         Upload receipt photos or paste text — mix both, up to {MAX_BATCH} total. You pay once on Stripe, then the batch
         runs and downloads as a single CSV. Receipts that aren&apos;t parseable are excluded — and if <em>none</em> parse,
         the payment is refunded automatically. You&apos;ll see the exact price on the secure Stripe checkout before paying.
@@ -304,24 +304,24 @@ export default function ReceiptBatch() {
 
       {/* Image uploads */}
       <div className="mt-6">
-        <label className="font-mono text-[10px] uppercase tracking-widest text-zinc-500">Receipt photos (JPG, PNG, WebP · up to 10 MB each)</label>
+        <label className="font-mono text-[10px] uppercase tracking-widest text-[var(--text-muted)]">Receipt photos (JPG, PNG, WebP · up to 10 MB each)</label>
         <div className="mt-2">
           <input
             type="file" accept="image/jpeg,image/png,image/webp" multiple
             onChange={(event) => { void addImageFiles(event.target.files); event.target.value = '' }}
             disabled={totalReady >= MAX_BATCH}
-            className="block w-full text-sm text-zinc-400 file:mr-4 file:border file:border-zinc-700 file:bg-zinc-900 file:px-4 file:py-2 file:font-mono file:text-[11px] file:uppercase file:tracking-widest file:text-zinc-200 hover:file:border-emerald-500 disabled:opacity-40"
+            className="block w-full text-sm text-[var(--text-secondary)] file:mr-4 file:border file:border-[var(--border-default)] file:bg-[var(--surface-raised)] file:px-4 file:py-2 file:font-mono file:text-[11px] file:uppercase file:tracking-widest file:text-[var(--text-secondary)] hover:file:border-[var(--status-verified)] disabled:opacity-40"
           />
         </div>
         {images.length > 0 && (
           <div className="mt-4 grid grid-cols-3 gap-3 sm:grid-cols-4">
             {images.map((image) => (
-              <div key={image.id} className="group relative border border-zinc-800 bg-black">
+              <div key={image.id} className="evidence-card group relative p-0">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img src={image.previewUrl} alt={image.name} className="h-24 w-full object-cover opacity-90" />
                 <button
                   type="button" onClick={() => removeImage(image.id)}
-                  className="absolute right-1 top-1 bg-black/80 px-2 py-0.5 font-mono text-[10px] uppercase tracking-widest text-zinc-300 hover:text-red-300"
+                  className="absolute right-1 top-1 bg-[var(--surface-paper)] px-2 py-0.5 font-mono text-[10px] uppercase tracking-widest text-[var(--text-secondary)] hover:text-[var(--status-unverified)]"
                 >
                   ✕
                 </button>
@@ -335,9 +335,9 @@ export default function ReceiptBatch() {
         {receipts.map((value, index) => (
           <div key={index}>
             <div className="mb-2 flex items-center justify-between">
-              <label className="font-mono text-[10px] uppercase tracking-widest text-zinc-500">Receipt {index + 1}</label>
+              <label className="font-mono text-[10px] uppercase tracking-widest text-[var(--text-muted)]">Receipt {index + 1}</label>
               {receipts.length > 1 && (
-                <button type="button" onClick={() => removeReceipt(index)} className="font-mono text-[10px] uppercase tracking-widest text-zinc-600 hover:text-red-300">
+                <button type="button" onClick={() => removeReceipt(index)} className="font-mono text-[10px] uppercase tracking-widest text-[var(--text-muted)] hover:text-[var(--status-unverified)]">
                   Remove
                 </button>
               )}
@@ -347,7 +347,7 @@ export default function ReceiptBatch() {
               onChange={(event) => updateReceipt(index, event.target.value)}
               rows={5}
               placeholder={'Paste receipt text…'}
-              className="w-full border border-zinc-700 bg-black px-4 py-3 font-mono text-sm text-zinc-200 outline-none focus:border-emerald-500"
+              className="evidence-input font-mono"
             />
           </div>
         ))}
@@ -358,34 +358,34 @@ export default function ReceiptBatch() {
           type="button"
           onClick={addReceipt}
           disabled={receipts.length >= MAX_BATCH}
-          className="border border-zinc-700 px-5 py-2.5 font-mono text-[11px] uppercase tracking-widest text-zinc-300 hover:border-emerald-500 hover:text-white disabled:cursor-not-allowed disabled:opacity-40"
+          className="border border-[var(--border-default)] px-5 py-2.5 font-mono text-[11px] uppercase tracking-widest text-[var(--text-secondary)] hover:border-[var(--status-verified)] hover:text-[var(--text-primary)] disabled:cursor-not-allowed disabled:opacity-40"
         >
           + Add another receipt
         </button>
-        <span className="font-mono text-[10px] uppercase tracking-widest text-zinc-600">{images.length} photo{images.length === 1 ? '' : 's'} · {textReadyCount} text · {totalReady}/{MAX_BATCH} total</span>
+        <span className="font-mono text-[10px] uppercase tracking-widest text-[var(--text-muted)]">{images.length} photo{images.length === 1 ? '' : 's'} · {textReadyCount} text · {totalReady}/{MAX_BATCH} total</span>
       </div>
 
       <button
         type="button"
         onClick={payAndRun}
         disabled={phase === 'redirecting' || totalReady === 0}
-        className="mt-6 bg-emerald-400 px-7 py-4 font-mono text-xs font-bold uppercase tracking-widest text-black hover:bg-emerald-300 disabled:cursor-not-allowed disabled:bg-zinc-600"
+        className="evidence-action evidence-action--primary mt-6"
       >
         {phase === 'redirecting' ? 'Preparing secure checkout…' : 'Pay & run batch →'}
       </button>
 
-      <p className="mt-5 border-t border-zinc-800 pt-4 text-xs leading-relaxed text-zinc-500">
+      <p className="mt-5 border-t border-[var(--border-default)] pt-4 text-xs leading-relaxed text-[var(--text-muted)]">
         Privacy: photos are stripped of metadata in your browser, uploaded to private, short-lived storage
         (auto-expiring within 24 hours), and used only to read your receipts. Source images are deleted immediately
         after delivery or refund; abandoned uploads are removed by the daily cleanup. We never post public links.
       </p>
 
-      {error && <p role="alert" className="mt-5 text-sm text-red-300">{error}</p>}
+      {error && <p role="alert" className="mt-5 text-sm text-[var(--status-unverified)]">{error}</p>}
     </BatchShell>
   )
 }
 
 function BatchShell({ children, tone = 'emerald' }: { children: React.ReactNode; tone?: 'emerald' | 'amber' }) {
-  const border = tone === 'amber' ? 'border-amber-700/60 bg-amber-950/20' : 'border-zinc-800 bg-zinc-950/40'
+  const border = tone === 'amber' ? 'border-[var(--status-boundary)] bg-[var(--surface-raised)]' : 'border-[var(--border-default)] bg-[var(--surface-raised)]'
   return <div className={`mt-6 border ${border} p-5 sm:p-6`}>{children}</div>
 }
