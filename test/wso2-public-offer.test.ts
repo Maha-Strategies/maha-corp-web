@@ -7,14 +7,12 @@ import { loadWso2LiveEvidence } from '../lib/integrations/wso2-live-evidence.ts'
 
 const ROOT = join(import.meta.dirname, '..')
 
-test('the public WSO2 offer states its commercial scope and compatibility boundaries', () => {
+test('the WSO2 page states compatibility boundaries and sends commercial evaluation to pricing', () => {
   const page = readFileSync(join(ROOT, 'app/integrations/wso2/page.tsx'), 'utf8')
 
-  // Prices moved to lib/commercial/context-control-assessment-offer.ts when the
-  // evidence package became public; the page renders them rather than spelling
-  // them out. context-control-assessment-offer.test.ts pins the figures.
-  assert.match(page, /ASSESSMENT_TIERS\[0\]\.price/)
-  assert.match(page, /FOUNDING_PARTNER\.price|FOUNDING_PARTNER\.limit/)
+  assert.doesNotMatch(page, /ASSESSMENT_TIERS|FOUNDING_PARTNER/)
+  assert.match(page, /href="\/pricing"/)
+  assert.match(page, /Review assessment options/)
   assert.match(page, /not claiming WSO2 partnership, certification, approval, or customer validation/)
   assert.match(page, /public policy bundle is evaluation-only/)
   assert.match(page, /corpus is synthetic/)
