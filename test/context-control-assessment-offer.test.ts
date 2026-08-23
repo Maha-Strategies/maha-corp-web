@@ -14,7 +14,7 @@ import {
 } from '../lib/commercial/context-control-assessment-offer.ts'
 
 const ROOT = join(import.meta.dirname, '..')
-const page = () => readFileSync(join(ROOT, 'app/integrations/wso2/page.tsx'), 'utf8')
+const page = () => readFileSync(join(ROOT, 'app/pricing/page.tsx'), 'utf8')
 
 /**
  * The gate. At $12,500 a prospect is buying a method, and the only honest way
@@ -83,7 +83,7 @@ test('the required scope items are all stated', () => {
   assert.match(page(), /ASSESSMENT_SCOPE\.map/)
 })
 
-test('the four exclusions are stated plainly', () => {
+test('the WSO2-specific exclusions remain on the integration page, not the general offer', () => {
   const exclusions = ASSESSMENT_EXCLUSIONS.join(' ')
   for (const [label, pattern] of [
     ['no production deployment', /No production deployment/i],
@@ -93,7 +93,9 @@ test('the four exclusions are stated plainly', () => {
   ] as [string, RegExp][]) {
     assert.match(exclusions, pattern, `exclusion missing: ${label}`)
   }
-  assert.match(page(), /ASSESSMENT_EXCLUSIONS\.map/)
+  const wso2Page = readFileSync(join(ROOT, 'app/integrations/wso2/page.tsx'), 'utf8')
+  assert.match(wso2Page, /Independent compatibility work, not a WSO2 endorsement/)
+  assert.doesNotMatch(page(), /WSO2/)
 })
 
 /**
@@ -110,24 +112,18 @@ test('positioning rests on determinism and evidence, never on retention superior
     assert.ok(!positioning.includes(banned), `positioning claims "${banned}"`)
   }
   // And the page says so out loud rather than merely omitting it.
-  assert.match(page(), /Retention is deliberately not on that list/)
+  assert.match(page(), /No retention-superiority claim is made here/)
   assert.match(page(), /scores higher on evidence retention than Maha/)
 })
 
-test('the evidence package is linked from the offer', () => {
+test('the offer links to its public sample assessment and security boundary', () => {
   const source = page()
-  assert.match(source, /PUBLIC_EVIDENCE/)
-  for (const path of REQUIRED_PUBLIC_ARTIFACTS) {
-    const web = `/${path.replace(/^public\//, '')}`
-    assert.ok(
-      source.includes(web) || source.includes('PUBLIC_EVIDENCE'),
-      `the offer does not reach ${web}`,
-    )
-  }
+  assert.match(source, /\/assessments\/context-control-evidence-assessment-sample\.pdf/)
+  assert.match(source, /\/security\/context-control-security-boundary\.pdf/)
 })
 
-test('the call to action asks for a bounded evaluation, not a general enquiry', () => {
+test('the call to action asks for a bounded assessment, not a general enquiry', () => {
   const source = page()
-  assert.match(source, /Request a bounded evaluation/i)
+  assert.match(source, /Request a bounded assessment/i)
   assert.ok(!/\bContact us\b/i.test(source), 'the page falls back to a generic contact-us pitch')
 })

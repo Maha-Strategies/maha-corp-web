@@ -42,6 +42,7 @@ export default function Navbar() {
     { name: 'Method', href: '/method' },
     { name: 'Auditor', href: '/audit' },
     { name: 'Developers', href: '/developers' },
+    { name: 'Pricing', href: '/pricing' },
     { name: 'Contact', href: '/contact' },
   ];
 
