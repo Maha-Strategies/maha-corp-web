@@ -206,36 +206,36 @@ export default function ContextCompilerPlayground() {
   }
 
   return (
-    <main className="min-h-screen bg-[#09090b] px-4 py-14 text-zinc-200 sm:px-6 sm:py-20">
-      <div className="mx-auto max-w-7xl">
+    <main className="evidence-page">
+      <div className="evidence-container">
         <header className="max-w-4xl">
-          <p className="font-mono text-[10px] uppercase tracking-[0.26em] text-cyan-300">[ zero-install context lab ]</p>
-          <h1 className="mt-5 text-4xl font-light leading-tight text-white sm:text-6xl">See what survives before you integrate.</h1>
-          <p className="mt-6 max-w-3xl text-lg leading-8 text-zinc-400">Run the production compiler logic against four complete published chapters. Inspect every retained passage, its source handle, and the economics. No account, key, upload, or installation is required.</p>
-          <div className="mt-6 flex flex-wrap gap-3 font-mono text-[10px] uppercase tracking-widest text-zinc-400">
-            <span className="border border-zinc-800 px-3 py-2">106 KB bundled workload</span>
-            <span className="border border-zinc-800 px-3 py-2">Source text not stored</span>
-            <span className="border border-zinc-800 px-3 py-2">Payment optional</span>
+          <p className="font-mono text-[10px] uppercase tracking-[0.26em] text-[var(--text-muted)]">[ zero-install context lab ]</p>
+          <h1 className="mt-5 text-4xl font-light leading-tight text-[var(--text-primary)] sm:text-6xl">See what survives before you integrate.</h1>
+          <p className="mt-6 max-w-3xl text-lg leading-8 text-[var(--text-secondary)]">Run the production compiler logic against four complete published chapters. Inspect every retained passage, its source handle, and the economics. No account, key, upload, or installation is required.</p>
+          <div className="mt-6 flex flex-wrap gap-3 font-mono text-[10px] uppercase tracking-widest text-[var(--text-secondary)]">
+            <span className="border border-[var(--border-default)] px-3 py-2">106 KB bundled workload</span>
+            <span className="border border-[var(--border-default)] px-3 py-2">Source text not stored</span>
+            <span className="border border-[var(--border-default)] px-3 py-2">Payment optional</span>
           </div>
         </header>
 
-        <section className="mt-12 border border-zinc-800 bg-zinc-950/60 p-5 sm:p-7" aria-labelledby="workload-heading">
+        <section className="mt-12 border border-[var(--border-default)] bg-[var(--surface-raised)]/60 p-5 sm:p-7" aria-labelledby="workload-heading">
           <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
             <div className="flex-1">
-              <h2 id="workload-heading" className="text-2xl text-white">Bundled workload</h2>
-              <label htmlFor="task" className="mt-5 block font-mono text-[10px] uppercase tracking-widest text-zinc-500">Analysis task</label>
-              <textarea id="task" value={task} onChange={(event) => setTask(event.target.value)} rows={3} className="mt-2 w-full border border-zinc-700 bg-black px-4 py-3 text-sm leading-6 text-zinc-200 focus:border-cyan-500 focus:outline-none" />
+              <h2 id="workload-heading" className="text-2xl text-[var(--text-primary)]">Bundled workload</h2>
+              <label htmlFor="task" className="mt-5 block font-mono text-[10px] uppercase tracking-widest text-[var(--text-muted)]">Analysis task</label>
+              <textarea id="task" value={task} onChange={(event) => setTask(event.target.value)} rows={3} className="evidence-input mt-2" />
             </div>
             <div className="grid gap-4 sm:grid-cols-2 lg:w-[26rem]">
-              <label className="block font-mono text-[10px] uppercase tracking-widest text-zinc-500">Token budget
-                <input type="number" min={64} max={16000} step={256} value={tokenBudget} onChange={(event) => setTokenBudget(Number(event.target.value))} className="mt-2 block w-full border border-zinc-700 bg-black px-4 py-3 text-sm text-white focus:border-cyan-500 focus:outline-none" />
+              <label className="block font-mono text-[10px] uppercase tracking-widest text-[var(--text-muted)]">Token budget
+                <input type="number" min={64} max={16000} step={256} value={tokenBudget} onChange={(event) => setTokenBudget(Number(event.target.value))} className="evidence-input mt-2 block" />
               </label>
-              <button type="button" onClick={() => void runSample()} disabled={runState === 'loading' || runState === 'running'} className="self-end border border-cyan-500 bg-cyan-950/30 px-5 py-3 font-mono text-xs uppercase tracking-widest text-cyan-100 hover:bg-cyan-900/40 disabled:cursor-wait disabled:opacity-50">
+              <button type="button" onClick={() => void runSample()} disabled={runState === 'loading' || runState === 'running'} className="evidence-action evidence-action--secondary self-end">
                 {runState === 'loading' || runState === 'running' ? 'Compiling…' : 'Run free sample'}
               </button>
             </div>
           </div>
-          {error && <p role="alert" className="mt-5 border border-red-900 bg-red-950/20 px-4 py-3 text-sm text-red-200">{error}</p>}
+          {error && <p role="alert" className="mt-5 border border-[var(--status-unverified)] bg-[var(--surface-raised)] px-4 py-3 text-sm text-[var(--text-secondary)]">{error}</p>}
         </section>
 
         {data && <>
@@ -246,78 +246,78 @@ export default function ContextCompilerPlayground() {
             <Metric label="Gross savings / fee" value={`${economics.multiple.toFixed(1)}×`} detail={`At $${modelPrice.toFixed(2)}/1M input tokens versus the $0.001 x402 fee`} />
           </section>
 
-          <section className="mt-6 grid gap-6 xl:grid-cols-2" aria-labelledby="comparison-heading">
+          <section className="mt-6 grid grid-cols-[minmax(0,1fr)] gap-6 xl:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]" aria-labelledby="comparison-heading">
             <h2 id="comparison-heading" className="sr-only">Original and compiled context comparison</h2>
-            <article className="min-w-0 border border-zinc-800 bg-zinc-950/40">
-              <div className="border-b border-zinc-800 p-5">
-                <p className="font-mono text-[10px] uppercase tracking-widest text-zinc-500">Original sources</p>
-                <p className="mt-2 text-sm text-zinc-400">{number(data.result.metrics.originalBytes)} bytes across {data.workload.documents.length} complete chapters</p>
+            <article className="min-w-0 border border-[var(--border-default)] bg-[var(--surface-raised)]/40">
+              <div className="border-b border-[var(--border-default)] p-5">
+                <p className="font-mono text-[10px] uppercase tracking-widest text-[var(--text-muted)]">Original sources</p>
+                <p className="mt-2 text-sm text-[var(--text-secondary)]">{number(data.result.metrics.originalBytes)} bytes across {data.workload.documents.length} complete chapters</p>
                 <label htmlFor="source" className="sr-only">Choose source document</label>
-                <select id="source" value={selectedSource} onChange={(event) => setSelectedSource(event.target.value)} className="mt-4 w-full border border-zinc-700 bg-black px-3 py-2 text-sm text-zinc-200">
+                <select id="source" value={selectedSource} onChange={(event) => setSelectedSource(event.target.value)} className="evidence-input mt-4">
                   {data.workload.documents.map((document) => <option key={document.id} value={document.id}>{document.title}</option>)}
                 </select>
               </div>
               <div className="max-h-[34rem] overflow-y-auto p-5">
-                <pre className="whitespace-pre-wrap font-sans text-sm leading-7 text-zinc-400">{activeSource?.text}</pre>
+                <pre className="whitespace-pre-wrap font-sans text-sm leading-7 text-[var(--text-secondary)]">{activeSource?.text}</pre>
               </div>
             </article>
-            <article className="min-w-0 border border-cyan-900/70 bg-cyan-950/10">
-              <div className="border-b border-cyan-900/70 p-5">
-                <p className="font-mono text-[10px] uppercase tracking-widest text-cyan-300">Compiled Context Pack</p>
-                <p className="mt-2 text-sm text-zinc-400">{number(data.result.metrics.compiledBytes)} bytes · extractive BM25 selection · guaranteed budget mode</p>
+            <article className="min-w-0 border border-[var(--status-sourced)] bg-[var(--surface-raised)]">
+              <div className="border-b border-[var(--status-sourced)] p-5">
+                <p className="font-mono text-[10px] uppercase tracking-widest text-[var(--text-muted)]">Compiled Context Pack</p>
+                <p className="mt-2 text-sm text-[var(--text-secondary)]">{number(data.result.metrics.compiledBytes)} bytes · extractive BM25 selection · guaranteed budget mode</p>
               </div>
               <div className="max-h-[34rem] overflow-y-auto p-5">
-                <pre className="whitespace-pre-wrap font-mono text-xs leading-6 text-zinc-300">{data.result.context}</pre>
+                <pre className="whitespace-pre-wrap font-mono text-xs leading-6 text-[var(--text-secondary)]">{data.result.context}</pre>
               </div>
             </article>
           </section>
 
-          <section className="mt-6 border border-zinc-800 p-5 sm:p-7" aria-labelledby="provenance-heading">
+          <section className="mt-6 border border-[var(--border-default)] p-5 sm:p-7" aria-labelledby="provenance-heading">
             <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
-              <div><p className="font-mono text-[10px] uppercase tracking-widest text-cyan-300">Evidence path</p><h2 id="provenance-heading" className="mt-2 text-2xl text-white">Retained passages from {activeSource?.title}</h2></div>
-              <p className="font-mono text-xs text-zinc-500">{retainedForSource.length} retained</p>
+              <div><p className="font-mono text-[10px] uppercase tracking-widest text-[var(--text-muted)]">Evidence path</p><h2 id="provenance-heading" className="mt-2 text-2xl text-[var(--text-primary)]">Retained passages from {activeSource?.title}</h2></div>
+              <p className="font-mono text-xs text-[var(--text-muted)]">{retainedForSource.length} retained</p>
             </div>
-            <div className="mt-6 grid gap-3 lg:grid-cols-2">
-              {retainedForSource.map((passage) => <article key={passage.passageId} className="border-l-2 border-cyan-600 bg-cyan-950/10 p-4"><p className="font-mono text-[10px] uppercase tracking-widest text-cyan-300">{passage.passageId}</p><p className="mt-3 text-sm leading-6 text-zinc-300">{passage.text}</p><p className="mt-3 break-all font-mono text-[9px] text-zinc-600">{passage.passageHash}</p></article>)}
+            <div className="mt-6 grid grid-cols-[minmax(0,1fr)] gap-3 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]">
+              {retainedForSource.map((passage) => <article key={passage.passageId} className="border-l-2 border-[var(--status-sourced)] bg-[var(--surface-raised)] p-4"><p className="font-mono text-[10px] uppercase tracking-widest text-[var(--text-muted)]">{passage.passageId}</p><p className="mt-3 text-sm leading-6 text-[var(--text-secondary)]">{passage.text}</p><p className="mt-3 break-all font-mono text-[9px] text-[var(--text-muted)]">{passage.passageHash}</p></article>)}
             </div>
           </section>
 
-          <section className="mt-6 grid gap-6 lg:grid-cols-[1.2fr_0.8fr]">
-            <article className="border border-zinc-800 p-5 sm:p-7">
-              <p className="font-mono text-[10px] uppercase tracking-widest text-emerald-300">Projected economics</p>
-              <h2 className="mt-2 text-2xl text-white">Would the paid call clear its fee?</h2>
-              <label className="mt-6 block max-w-xs font-mono text-[10px] uppercase tracking-widest text-zinc-500">Model input price ($ / 1M tokens)
-                <input type="number" min={0} step={0.1} value={modelPrice} onChange={(event) => setModelPrice(Math.max(0, Number(event.target.value)))} className="mt-2 block w-full border border-zinc-700 bg-black px-4 py-3 text-sm text-white" />
+          <section className="mt-6 grid grid-cols-[minmax(0,1fr)] gap-6 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,0.8fr)]">
+            <article className="border border-[var(--border-default)] p-5 sm:p-7">
+              <p className="font-mono text-[10px] uppercase tracking-widest text-[var(--status-verified)]">Projected economics</p>
+              <h2 className="mt-2 text-2xl text-[var(--text-primary)]">Would the paid call clear its fee?</h2>
+              <label className="mt-6 block max-w-xs font-mono text-[10px] uppercase tracking-widest text-[var(--text-muted)]">Model input price ($ / 1M tokens)
+                <input type="number" min={0} step={0.1} value={modelPrice} onChange={(event) => setModelPrice(Math.max(0, Number(event.target.value)))} className="evidence-input mt-2 block" />
               </label>
               <dl className="mt-6 grid gap-4 sm:grid-cols-3">
                 <Economic label="Gross input cost avoided" value={`$${economics.gross.toFixed(4)}`} />
                 <Economic label="x402 fee" value="$0.0010" />
                 <Economic label="Net projected saving" value={`${economics.net < 0 ? '-' : ''}$${Math.abs(economics.net).toFixed(4)}`} />
               </dl>
-              <p className="mt-5 text-xs leading-5 text-zinc-500">Projection covers one downstream model call and input tokens only. Provider tokenization, cache pricing, output costs, and answer quality are not included.</p>
+              <p className="mt-5 text-xs leading-5 text-[var(--text-muted)]">Projection covers one downstream model call and input tokens only. Provider tokenization, cache pricing, output costs, and answer quality are not included.</p>
             </article>
-            <article className="border border-amber-900/70 bg-amber-950/10 p-5 sm:p-7">
-              <p className="font-mono text-[10px] uppercase tracking-widest text-amber-300">Optional live settlement</p>
-              <h2 className="mt-2 text-2xl text-white">Pay once on Base</h2>
-              <p className="mt-4 text-sm leading-6 text-zinc-400">This repeats the visible workload against the production x402 endpoint. It will request exactly 0.001 USDC after showing the terms in your wallet.</p>
-              <button type="button" onClick={() => void payAndCompile()} disabled={['connecting', 'signing', 'settling'].includes(paymentState)} className="mt-6 w-full border border-amber-600 px-5 py-3 font-mono text-xs uppercase tracking-widest text-amber-100 hover:bg-amber-950/40 disabled:cursor-wait disabled:opacity-50">Pay $0.001 and compile</button>
-              {paymentMessage && <p role="status" className={`mt-4 text-sm leading-6 ${paymentState === 'error' ? 'text-red-300' : paymentState === 'settled' ? 'text-emerald-300' : 'text-zinc-300'}`}>{paymentMessage}</p>}
-              {transaction && <a className="mt-3 block break-all font-mono text-[10px] text-cyan-300 underline" href={`https://basescan.org/tx/${transaction}`} target="_blank" rel="noopener noreferrer">View transaction {transaction} ↗</a>}
+            <article className="border border-[var(--status-boundary)] bg-[var(--surface-raised)] p-5 sm:p-7">
+              <p className="font-mono text-[10px] uppercase tracking-widest text-[var(--status-boundary)]">Optional live settlement</p>
+              <h2 className="mt-2 text-2xl text-[var(--text-primary)]">Pay once on Base</h2>
+              <p className="mt-4 text-sm leading-6 text-[var(--text-secondary)]">This repeats the visible workload against the production x402 endpoint. It will request exactly 0.001 USDC after showing the terms in your wallet.</p>
+              <button type="button" onClick={() => void payAndCompile()} disabled={['connecting', 'signing', 'settling'].includes(paymentState)} className="evidence-action evidence-action--secondary mt-6 w-full">Pay $0.001 and compile</button>
+              {paymentMessage && <p role="status" className={`mt-4 text-sm leading-6 ${paymentState === 'error' ? 'text-[var(--status-unverified)]' : paymentState === 'settled' ? 'text-[var(--status-verified)]' : 'text-[var(--text-secondary)]'}`}>{paymentMessage}</p>}
+              {transaction && <a className="mt-3 block break-all font-mono text-[10px] text-[var(--text-muted)] underline" href={`https://basescan.org/tx/${transaction}`} target="_blank" rel="noopener noreferrer">View transaction {transaction} ↗</a>}
             </article>
           </section>
 
-          <section className="mt-6 border border-zinc-800 bg-zinc-950/50 p-5 sm:p-7" aria-labelledby="integration-heading">
-            <p className="font-mono text-[10px] uppercase tracking-widest text-cyan-300">Take it with you</p>
-            <div className="mt-2 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between"><div><h2 id="integration-heading" className="text-2xl text-white">Copy a working integration</h2><p className="mt-2 text-sm text-zinc-400">Use an API key in application code. The browser payment above is deliberately human-authorized.</p></div><button type="button" onClick={() => void copyCode()} className="border border-zinc-600 px-4 py-2 font-mono text-xs uppercase tracking-widest text-zinc-200 hover:border-cyan-500">{copied ? 'Copied' : 'Copy code'}</button></div>
+          <section className="mt-6 border border-[var(--border-default)] bg-[var(--surface-raised)]/50 p-5 sm:p-7" aria-labelledby="integration-heading">
+            <p className="font-mono text-[10px] uppercase tracking-widest text-[var(--text-muted)]">Take it with you</p>
+            <div className="mt-2 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between"><div><h2 id="integration-heading" className="text-2xl text-[var(--text-primary)]">Copy a working integration</h2><p className="mt-2 text-sm text-[var(--text-secondary)]">Use an API key in application code. The browser payment above is deliberately human-authorized.</p></div><button type="button" onClick={() => void copyCode()} className="evidence-action evidence-action--secondary">{copied ? 'Copied' : 'Copy code'}</button></div>
             <div className="mt-6 flex flex-wrap gap-2" role="tablist" aria-label="Integration language">
-              {(['typescript', 'python', 'crewai', 'langchain'] as const).map((tab) => <button key={tab} type="button" role="tab" aria-selected={codeTab === tab} onClick={() => setCodeTab(tab)} className={`border px-4 py-2 font-mono text-[10px] uppercase tracking-widest ${codeTab === tab ? 'border-cyan-500 bg-cyan-950/30 text-cyan-100' : 'border-zinc-800 text-zinc-500 hover:text-zinc-200'}`}>{tab}</button>)}
+              {(['typescript', 'python', 'crewai', 'langchain'] as const).map((tab) => <button key={tab} type="button" role="tab" aria-selected={codeTab === tab} onClick={() => setCodeTab(tab)} className={`border px-4 py-2 font-mono text-[10px] uppercase tracking-widest ${codeTab === tab ? 'border-[var(--status-sourced)] bg-[var(--surface-raised)] text-[var(--text-muted)]' : 'border-[var(--border-default)] text-[var(--text-muted)] hover:text-[var(--text-secondary)]'}`}>{tab}</button>)}
             </div>
-            <pre className="mt-4 max-h-[32rem] overflow-auto border border-zinc-800 bg-black p-4 font-mono text-xs leading-6 text-cyan-100"><code>{snippets?.[codeTab]}</code></pre>
+            <pre className="mt-4 max-h-[32rem] overflow-auto border border-[var(--border-default)] bg-[var(--surface-raised)] p-4 font-mono text-xs leading-6 text-[var(--text-muted)]"><code>{snippets?.[codeTab]}</code></pre>
           </section>
 
-          <section className="mt-6 border border-zinc-900 p-5 text-xs leading-6 text-zinc-500">
-            <p><strong className="text-zinc-300">Honest boundary:</strong> selection is extractive and best-effort. It does not verify claims, guarantee completeness, or prevent hallucination. Source coverage means each source contributed at least one passage—not that every fact survived.</p>
-            <p className="mt-3 break-all font-mono text-[9px] text-zinc-700">input {data.result.inputHash}<br />output {data.result.outputHash}</p>
+          <section className="mt-6 border border-[var(--border-default)] p-5 text-xs leading-6 text-[var(--text-muted)]">
+            <p><strong className="text-[var(--text-secondary)]">Honest boundary:</strong> selection is extractive and best-effort. It does not verify claims, guarantee completeness, or prevent hallucination. Source coverage means each source contributed at least one passage—not that every fact survived.</p>
+            <p className="mt-3 break-all font-mono text-[9px] text-[var(--text-muted)]">input {data.result.inputHash}<br />output {data.result.outputHash}</p>
           </section>
         </>}
       </div>
@@ -328,11 +328,11 @@ export default function ContextCompilerPlayground() {
 function number(value: number) { return new Intl.NumberFormat('en-US').format(value) }
 
 function Metric({ label, value, detail }: { label: string; value: string; detail: string }) {
-  return <article className="border border-zinc-800 bg-zinc-950/50 p-5"><p className="font-mono text-[10px] uppercase tracking-widest text-cyan-300">{label}</p><p className="mt-3 font-mono text-2xl text-white">{value}</p><p className="mt-3 text-xs leading-5 text-zinc-500">{detail}</p></article>
+  return <article className="border border-[var(--border-default)] bg-[var(--surface-raised)]/50 p-5"><p className="font-mono text-[10px] uppercase tracking-widest text-[var(--text-muted)]">{label}</p><p className="mt-3 font-mono text-2xl text-[var(--text-primary)]">{value}</p><p className="mt-3 text-xs leading-5 text-[var(--text-muted)]">{detail}</p></article>
 }
 
 function Economic({ label, value }: { label: string; value: string }) {
-  return <div><dt className="font-mono text-[10px] uppercase tracking-widest text-zinc-500">{label}</dt><dd className="mt-2 font-mono text-xl text-emerald-200">{value}</dd></div>
+  return <div><dt className="font-mono text-[10px] uppercase tracking-widest text-[var(--text-muted)]">{label}</dt><dd className="mt-2 font-mono text-xl text-[var(--status-verified)]">{value}</dd></div>
 }
 
 function integrationSnippets(request: PlaygroundResponse['request']) {
