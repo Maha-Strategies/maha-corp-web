@@ -4,6 +4,18 @@ Maha's first CABEZON Seller offering is **Deep Context Evaluation**, a digitally
 
 The Seller profile also publishes **Samley Signature Collection Cinnamon Tea — Pallet RFQ** as an enquiry-only physical-goods offer. Maha remains the CABEZON Seller and RFQ coordinator; Samley Teas is named only as the prospective fulfilling exporter, with no CABEZON membership or standing partnership asserted. `purchase` fails closed with `QUOTE_REQUIRED` and returns no payment instructions.
 
+The RFQ purchase boundary accepts exactly this CABEZON v0.2 object while the offer remains enquiry-only:
+
+```json
+{
+  "offeringRef": "maha:samley-cinnamon-tea:rfq-v1",
+  "quantity": 1,
+  "agreedPrice": null
+}
+```
+
+Legacy positional arguments and object fields outside those three keys are refused with JSON-RPC `-32602`. In particular, delivery, payment, escrow, customer-reference, and special-instruction fields are not accepted at this boundary. This prevents a caller from treating an RFQ request as an order or silently supplying pre-quote commercial instructions.
+
 The confirmed reference configuration is item **SG-S8**: 40 g boxes containing 20 individually wrapped tea bags, 24 boxes per master carton, 99 cartons (2,376 boxes) per approximately 230 kg pallet, with a reported three-year shelf life. The supplier indicated an FOB product price of USD 0.60 per box, making the indicative pallet product value USD 1,425.60. This is non-binding, has no named FOB port, and excludes freight, insurance, duties, taxes, clearance, warehousing, and last-mile delivery.
 
 ### Physical RFQ gate
@@ -97,6 +109,10 @@ A digest proves byte identity, not correctness, quality, buyer acceptance, or en
 6. Only with fresh authorization, make one bounded 10,000-base-unit x402 payment and preserve the resulting transaction, evaluation ID and output hash. Do not repeat a signed payment after an ambiguous response.
 
 7. Publish the sanitized evidence and ask Bryan to cite the verified integration. Directory confirmation and a completed delivery are facts to prove separately.
+
+### RFQ purchase verification
+
+The metadata-only record at [`../artifacts/carp/rfq-purchase-verification-v0.2.json`](../artifacts/carp/rfq-purchase-verification-v0.2.json) records the bounded live verification completed through El-Cabezon. It proves the response boundary only: encrypted transport, an explicit `QUOTE_REQUIRED` error, and absence of payment, escrow, and delivery instructions. It does not prove a supplier order, a payment flow, fulfillment, delivery, or settlement.
 
 ## Failure boundaries
 

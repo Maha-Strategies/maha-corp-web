@@ -1,0 +1,56 @@
+{
+  "artifactVersion": "1.0.0",
+  "artifactType": "carp_rfq_purchase_boundary_verification",
+  "configurationAsOf": "2026-08-22T18:45:00Z",
+  "timePrecision": "approximate_to_minute",
+  "subject": {
+    "sellerId": "maha-strategies",
+    "offeringRef": "maha:samley-cinnamon-tea:rfq-v1",
+    "offerType": "request_for_quote",
+    "commercialAvailability": "enquiry_only"
+  },
+  "acceptedRequestShape": {
+    "protocolVersion": "CABEZON Seller v0.2",
+    "method": "purchase",
+    "params": {
+      "offeringRef": "maha:samley-cinnamon-tea:rfq-v1",
+      "quantity": 1,
+      "agreedPrice": null
+    },
+    "additionalFieldsAccepted": false,
+    "legacyPositionalArgumentsAccepted": false
+  },
+  "observedOutcome": {
+    "responseKind": "jsonrpc_error",
+    "errorCode": -32011,
+    "reasonCode": "QUOTE_REQUIRED",
+    "paymentInstructionsPresent": false,
+    "escrowInstructionsPresent": false,
+    "deliveryInstructionsPresent": false
+  },
+  "transport": {
+    "encryptedCarpRoundTripVerified": true,
+    "vercelSystemBypassUsedForBoundedTest": true,
+    "systemBypassRemovedAfterTest": true
+  },
+  "rejectedShapes": [
+    {
+      "kind": "legacy_positional_array",
+      "result": "refused"
+    },
+    {
+      "kind": "object_with_unrecognized_fields",
+      "result": "refused"
+    }
+  ],
+  "retention": {
+    "requestContentsRetained": false,
+    "credentialsRetained": false,
+    "healthDataRetained": false,
+    "paymentDataRetained": false
+  },
+  "limitations": [
+    "This record does not establish supplier availability, a binding quote, an order, payment, escrow, shipment, delivery, settlement, or dispute resolution.",
+    "The error response is a pre-money RFQ boundary; it is not a purchase authorization."
+  ]
+}

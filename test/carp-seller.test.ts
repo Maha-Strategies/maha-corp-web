@@ -87,11 +87,9 @@ test('the Samley RFQ fails closed at purchase until an order-specific quote exis
   const reply = handleCarpSellerRequest({
     jsonrpc: '2.0', method: 'purchase', id: 'cinnamon-purchase-1',
     params: {
-      clientOrderRef: 'buyer-cinnamon-001',
       offeringRef: SAMLEY_CINNAMON_TEA_RFQ_REF,
       quantity: 1,
-      agreedPrice: { amount: '1.00', asset: 'USDC', network: 'eip155:8453' },
-      delivery: { mode: 'physical', destination: { country: 'US' } },
+      agreedPrice: null,
     },
   })
   assert.ok('error' in reply)
@@ -99,6 +97,51 @@ test('the Samley RFQ fails closed at purchase until an order-specific quote exis
   assert.match(reply.error.message, /QUOTE_REQUIRED/)
   assert.equal((reply.error.data as { commercialAvailability: string }).commercialAvailability, 'enquiry_only')
   assert.equal(JSON.stringify(reply).includes('paymentInstructions'), false)
+})
+
+test('the physical RFQ accepts only its exact v0.2 object boundary', () => {
+  const legacy = handleCarpSellerRequest({
+    jsonrpc: '2.0', method: 'purchase', id: 'cinnamon-legacy-1',
+    params: [1, SAMLEY_CINNAMON_TEA_RFQ_REF, null],
+  })
+  assert.ok('error' in legacy)
+  assert.equal(legacy.error.code, -32602)
+  assert.match(legacy.error.message, /Legacy positional arguments/)
+
+  const extraFields = handleCarpSellerRequest({
+    jsonrpc: '2.0', method: 'purchase', id: 'cinnamon-extra-fields-1',
+    params: {
+      offeringRef: SAMLEY_CINNAMON_TEA_RFQ_REF,
+      quantity: 1,
+      agreedPrice: null,
+      delivery: { mode: 'physical', destination: { country: 'US' } },
+    },
+  })
+  assert.ok('error' in extraFields)
+  assert.equal(extraFields.error.code, -32602)
+  assert.match(extraFields.error.message, /additional fields are refused/)
+})
+
+test('the sanitized RFQ verification artifact records only the pre-money response boundary', async () => {
+  const artifact = JSON.parse(await readFile(new URL('../artifacts/carp/rfq-purchase-verification-v0.2.json', import.meta.url), 'utf8'))
+  assert.equal(artifact.subject.offeringRef, SAMLEY_CINNAMON_TEA_RFQ_REF)
+  assert.deepEqual(artifact.acceptedRequestShape.params, {
+    offeringRef: SAMLEY_CINNAMON_TEA_RFQ_REF,
+    quantity: 1,
+    agreedPrice: null,
+  })
+  assert.equal(artifact.acceptedRequestShape.legacyPositionalArgumentsAccepted, false)
+  assert.equal(artifact.acceptedRequestShape.additionalFieldsAccepted, false)
+  assert.equal(artifact.observedOutcome.reasonCode, 'QUOTE_REQUIRED')
+  assert.equal(artifact.observedOutcome.paymentInstructionsPresent, false)
+  assert.equal(artifact.retention.credentialsRetained, false)
+  const forbiddenKeys = new Set(['CARP_AGENT_PRIVATE_KEY', 'privateKey', 'accessToken', 'authorization', 'sessionKey'])
+  const collectKeys = (value: unknown): string[] => {
+    if (Array.isArray(value)) return value.flatMap(collectKeys)
+    if (!value || typeof value !== 'object') return []
+    return Object.entries(value as Record<string, unknown>).flatMap(([key, nested]) => [key, ...collectKeys(nested)])
+  }
+  assert.equal(collectKeys(artifact).some((key) => forbiddenKeys.has(key)), false)
 })
 
 test('the physical RFQ discloses non-binding economics without presenting freight as a fixed price', () => {
