@@ -11,6 +11,8 @@ test('the WSO2 page states compatibility boundaries and sends commercial evaluat
   const page = readFileSync(join(ROOT, 'app/integrations/wso2/page.tsx'), 'utf8')
 
   assert.doesNotMatch(page, /ASSESSMENT_TIERS|FOUNDING_PARTNER/)
+  assert.doesNotMatch(page, /price: '5000'/)
+  assert.doesNotMatch(page, /'@type': 'Offer'/)
   assert.match(page, /href="\/pricing"/)
   assert.match(page, /Review assessment options/)
   assert.match(page, /not claiming WSO2 partnership, certification, approval, or customer validation/)
