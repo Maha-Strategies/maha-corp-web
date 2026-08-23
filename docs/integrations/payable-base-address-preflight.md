@@ -4,9 +4,13 @@ This adapter consumes IllWar5047's public **payable address preflight** contract
 
 The provider schema is pinned at `fixtures/payable-address-preflight/schema.json`; the fixture set is at `fixtures/payable-address-preflight/fixtures.json` (SHA-256 `529fa30d6be7b12cbff6752b53d032a32eb888a39057c54ac3c26bebe52fc893`). The locked preview is retained only to validate the provider's signature construction. Its fixed EOA is not evidence about a buyer, seller, or escrow recipient.
 
+Signer authority is pinned to the provider's public [proof manifest](https://x402.nsgoods.org/proof/index.json), specifically its authoritative `signer_registry` entry for the separate `payable-address` service—not learned from a response's `signed_by` field or the legacy `signers` map. `fixtures/payable-address-preflight/proof-manifest.json` is a minimal public snapshot used only for synthetic verification. The adapter never fetches the manifest or the provider itself.
+
 ## Gate
 
-`evaluatePayableAddressPreflight` requires an explicitly pinned trusted `signed_by` address, a valid ECDSA `personal_sign` response signature, Base chain, exact schema version 1, matching subject address, and a response no older than 60 seconds. Unknown fields and provider values outside the declared enums are refused.
+`evaluatePayableAddressPreflight` requires an already-fetched proof manifest whose active, time-valid `payable-address` registry entry is reachable from Maha's reviewed local root pin, a valid ECDSA `personal_sign` response signature, Base chain, exact schema version 1, matching subject address, and a response no older than 60 seconds. `signed_by` is verification convenience only; it is never trust-on-first-use. Unknown response fields and provider values outside the declared enums are refused.
+
+An unknown, inactive, expired, not-yet-valid, or service-mismatched signer fails closed before any response can advance. A rotated key is accepted only when `signer_rotations` connects it to Maha's local root pin, its `announced_at` precedes activation, and the registry's `valid_from`/`valid_until` values exactly match the published rotation boundary. During a declared overlap, both active time-valid keys can verify responses. An unannounced signer change remains equivalent to a signature mismatch.
 
 | Result | Meaning | May progress to a paid CABEZON test? |
 | --- | --- | --- |
