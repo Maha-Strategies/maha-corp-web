@@ -54,49 +54,83 @@ export default function BazaarDiscoveryToPaymentRecipePage() {
     ],
   }
 
-  return <main className="min-h-screen bg-[#070a0d] text-zinc-300 selection:bg-emerald-300 selection:text-black">
-    <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, '\\u003c') }} />
-    <div className="mx-auto max-w-5xl px-6 py-20 sm:py-28">
-      <header className="max-w-4xl border-l border-emerald-500 pl-6 sm:pl-8">
-        <p className="font-mono text-[10px] uppercase tracking-[0.24em] text-emerald-300">[ Executable x402 v2 buyer // Base Mainnet ]</p>
-        <h1 className="mt-5 text-4xl font-light leading-tight text-white sm:text-6xl">Discover. Constrain. Pay. Verify. Use.</h1>
-        <p className="mt-6 max-w-3xl text-lg leading-8 text-zinc-300">One runnable agent recipe goes from Coinbase Bazaar discovery to a source-linked Maha Context Pack. It supports CDP Server Wallets and plain Viem accounts, and it will not sign if the live terms exceed <span className="font-mono text-emerald-200">$0.005</span> or differ from the expected <span className="font-mono text-emerald-200">$0.001</span> purchase.</p>
-      </header>
+  return (
+    <main className="evidence-page">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, '\\u003c') }} />
+      <div className="evidence-container">
+        <header className="border-t border-[var(--border-default)] pt-5">
+          <p className="evidence-kicker flex flex-wrap justify-between gap-3">
+            <span>Executable x402 v2 buyer</span><span>Base Mainnet</span>
+          </p>
+          <h1 className="evidence-title evidence-title--product">Discover. Constrain. Pay. Verify. Use.</h1>
+          <p className="evidence-lede mt-7">One runnable agent recipe goes from Coinbase Bazaar discovery to a source-linked Maha Context Pack. It supports CDP Server Wallets and plain Viem accounts, and it will not sign if the live terms exceed <span className="font-mono">$0.005</span> or differ from the expected <span className="font-mono">$0.001</span> purchase.</p>
+        </header>
 
-      <section className="mt-14 grid gap-4 md:grid-cols-2" aria-label="Recipe gates">
-        {flow.map(([number, heading, body]) => <article key={number} className="border border-zinc-800 bg-zinc-950/50 p-6"><p className="font-mono text-[10px] uppercase tracking-widest text-emerald-300">Gate {number}</p><h2 className="mt-3 text-xl text-white">{heading}</h2><p className="mt-3 text-sm leading-7 text-zinc-400">{body}</p></article>)}
-      </section>
+        <section className="evidence-section" aria-label="Recipe gates">
+          <p className="evidence-kicker">The gates</p>
+          <h2 className="evidence-section-title mt-4">Five checks before anything is signed.</h2>
+          <div className="mt-9 grid gap-4 md:grid-cols-2">
+            {flow.map(([number, heading, body]) => (
+              <article key={number} className="evidence-card">
+                <p className="evidence-kicker">Gate {number}</p>
+                <h3 className="evidence-card-title mt-3">{heading}</h3>
+                <p className="evidence-card-copy mt-3">{body}</p>
+              </article>
+            ))}
+          </div>
+        </section>
 
-      <section className="mt-14" aria-labelledby="run">
-        <p className="font-mono text-[10px] uppercase tracking-widest text-cyan-300">[ Run the machine flow ]</p>
-        <h2 id="run" className="mt-4 text-3xl font-light text-white">Discovery is free. Payment is an explicit flag.</h2>
-        <div className="mt-7 grid gap-5 lg:grid-cols-3">
-          <Command title="Dry discovery" command="npm run recipe:bazaar-payment" detail="Searches Bazaar, inspects schemas, and evaluates terms. It never loads a wallet." />
-          <Command title="Plain Viem wallet" command={'X402_BUYER_PRIVATE_KEY=0x… npm run recipe:bazaar-payment -- --pay --wallet=viem'} detail="Uses a dedicated limited-balance EOA. The key stays in the process environment." />
-          <Command title="CDP Server Wallet" command={'npm install --save-dev @coinbase/cdp-sdk\nCDP_ACCOUNT_NAME=maha-agent npm run recipe:bazaar-payment -- --pay --wallet=cdp'} detail="Also requires CDP_API_KEY_ID, CDP_API_KEY_SECRET, and CDP_WALLET_SECRET in the environment." />
-        </div>
-        <div className="mt-6 border border-amber-900 bg-amber-950/10 p-5 text-sm leading-7 text-amber-100/80">Fund only the selected Base account with the USDC needed for the test. Do not commit wallet secrets, use a personal high-balance wallet, or remove the local policy checks.</div>
-      </section>
+        <section className="evidence-section" aria-labelledby="run">
+          <p className="evidence-kicker">Run the machine flow</p>
+          <h2 id="run" className="evidence-section-title mt-4">Discovery is free. Payment is an explicit flag.</h2>
+          <div className="mt-9 grid gap-5 lg:grid-cols-3">
+            <Command title="Dry discovery" command="npm run recipe:bazaar-payment" detail="Searches Bazaar, inspects schemas, and evaluates terms. It never loads a wallet." />
+            <Command title="Plain Viem wallet" command={'X402_BUYER_PRIVATE_KEY=0x… npm run recipe:bazaar-payment -- --pay --wallet=viem'} detail="Uses a dedicated limited-balance EOA. The key stays in the process environment." />
+            <Command title="CDP Server Wallet" command={'npm install --save-dev @coinbase/cdp-sdk\nCDP_ACCOUNT_NAME=maha-agent npm run recipe:bazaar-payment -- --pay --wallet=cdp'} detail="Also requires CDP_API_KEY_ID, CDP_API_KEY_SECRET, and CDP_WALLET_SECRET in the environment." />
+          </div>
+          <div className="evidence-inset mt-7" style={{ borderLeftColor: 'var(--status-boundary)' }}>
+            <p className="evidence-copy">Fund only the selected Base account with the USDC needed for the test. Do not commit wallet secrets, use a personal high-balance wallet, or remove the local policy checks.</p>
+          </div>
+        </section>
 
-      <section className="mt-14 grid gap-6 lg:grid-cols-[1fr_0.9fr]" aria-labelledby="policy">
-        <div><p className="font-mono text-[10px] uppercase tracking-widest text-indigo-300">[ Local policy ]</p><h2 id="policy" className="mt-4 text-3xl font-light text-white">The catalog never gets signing authority.</h2><p className="mt-5 text-sm leading-7 text-zinc-400">The recipe evaluates the catalog requirement, then independently evaluates the live <span className="font-mono text-zinc-200">PAYMENT-REQUIRED</span> challenge immediately before signing. A changed price, asset, network, payee, or scheme fails closed.</p><p className="mt-4 text-sm leading-7 text-zinc-400">After the API responds, the recipe decodes <span className="font-mono text-zinc-200">PAYMENT-RESPONSE</span> and binds the success receipt to the wallet, Base network, and on-chain transaction before using the body.</p></div>
-        <pre className="overflow-x-auto border border-zinc-800 bg-black p-5 font-mono text-[11px] leading-6 text-cyan-200"><code>{corePolicy}</code></pre>
-      </section>
+        <section className="evidence-section" aria-labelledby="policy">
+          <p className="evidence-kicker">Local policy</p>
+          <h2 id="policy" className="evidence-section-title mt-4">The catalog never gets signing authority.</h2>
+          <div className="mt-9 grid gap-6 lg:grid-cols-[1fr_0.9fr]">
+            <div>
+              <p className="evidence-copy">The recipe evaluates the catalog requirement, then independently evaluates the live <span className="font-mono">PAYMENT-REQUIRED</span> challenge immediately before signing. A changed price, asset, network, payee, or scheme fails closed.</p>
+              <p className="evidence-copy mt-4">After the API responds, the recipe decodes <span className="font-mono">PAYMENT-RESPONSE</span> and binds the success receipt to the wallet, Base network, and on-chain transaction before using the body.</p>
+            </div>
+            <pre className="evidence-code overflow-x-auto p-5 font-mono text-[11px] leading-6"><code>{corePolicy}</code></pre>
+          </div>
+        </section>
 
-      <section className="mt-14 border-t border-zinc-800 pt-10" aria-labelledby="boundaries">
-        <h2 id="boundaries" className="text-2xl text-white">Operational boundaries</h2>
-        <ul className="mt-6 space-y-3 text-sm leading-7 text-zinc-400">
-          <li><strong className="text-zinc-200">One paid retry:</strong> the buyer answers one 402 once; it does not loop wallet prompts.</li>
-          <li><strong className="text-zinc-200">Discovery fallback:</strong> semantic results can lag settlement metadata. Bazaar merchant discovery provides the deterministic indexed fallback.</li>
-          <li><strong className="text-zinc-200">Receipt verification:</strong> the recipe verifies the signed response metadata. The transaction link is printed for independent Base explorer inspection.</li>
-          <li><strong className="text-zinc-200">Context boundary:</strong> source coverage means sources represented in selected passages, not guaranteed fact retention or downstream answer correctness.</li>
-        </ul>
-        <div className="mt-8 flex flex-wrap gap-4 font-mono text-xs uppercase tracking-widest"><a href={SOURCE_URL} target="_blank" rel="noopener noreferrer" className="bg-white px-5 py-3 font-bold text-black hover:bg-zinc-200">Inspect complete source ↗</a><Link href="/context-compiler/playground" className="border border-emerald-800 px-5 py-3 text-emerald-100 hover:bg-emerald-950/30">Try the compiler ↗</Link><Link href="/benchmarks/context-retention" className="border border-zinc-700 px-5 py-3 text-zinc-300 hover:border-zinc-500">Review MCRB-1 ↗</Link></div>
-      </section>
-    </div>
-  </main>
+        <section className="evidence-section" aria-labelledby="boundaries">
+          <p className="evidence-kicker">Boundaries</p>
+          <h2 id="boundaries" className="evidence-section-title mt-4">Operational boundaries</h2>
+          <ul className="evidence-copy mt-7 flex list-none flex-col gap-3 p-0">
+            <li><strong className="text-[var(--text-primary)]">One paid retry:</strong> the buyer answers one 402 once; it does not loop wallet prompts.</li>
+            <li><strong className="text-[var(--text-primary)]">Discovery fallback:</strong> semantic results can lag settlement metadata. Bazaar merchant discovery provides the deterministic indexed fallback.</li>
+            <li><strong className="text-[var(--text-primary)]">Receipt verification:</strong> the recipe verifies the signed response metadata. The transaction link is printed for independent Base explorer inspection.</li>
+            <li><strong className="text-[var(--text-primary)]">Context boundary:</strong> source coverage means sources represented in selected passages, not guaranteed fact retention or downstream answer correctness.</li>
+          </ul>
+          <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+            <a href={SOURCE_URL} target="_blank" rel="noopener noreferrer" className="evidence-action evidence-action--primary">Inspect complete source ↗</a>
+            <Link href="/context-compiler/playground" className="evidence-action evidence-action--secondary">Try the compiler ↗</Link>
+            <Link href="/benchmarks/context-retention" className="evidence-action evidence-action--secondary">Review MCRB-1 ↗</Link>
+          </div>
+        </section>
+      </div>
+    </main>
+  )
 }
 
 function Command({ title, command, detail }: { title: string; command: string; detail: string }) {
-  return <article className="border border-zinc-800 p-5"><h3 className="text-lg text-white">{title}</h3><pre className="mt-4 overflow-x-auto whitespace-pre-wrap border border-zinc-800 bg-black p-4 font-mono text-[11px] leading-6 text-emerald-200"><code>{command}</code></pre><p className="mt-4 text-xs leading-6 text-zinc-500">{detail}</p></article>
+  return (
+    <article className="evidence-card">
+      <h3 className="evidence-card-title">{title}</h3>
+      <pre className="evidence-code mt-4 overflow-x-auto whitespace-pre-wrap p-4 font-mono text-[11px] leading-6"><code>{command}</code></pre>
+      <p className="evidence-card-copy mt-4">{detail}</p>
+    </article>
+  )
 }

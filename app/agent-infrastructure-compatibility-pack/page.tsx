@@ -18,21 +18,94 @@ export default function AgentInfrastructureCompatibilityPackPage() {
     description: COMPATIBILITY_PACK_CONTRACT.description, provider: { '@type': 'Organization', name: 'Maha Strategies LLC' },
     offers: { '@type': 'Offer', price: '49.00', priceCurrency: 'USD', availability: 'https://schema.org/PreOrder', url: 'https://www.mahastrategies.com/agent-infrastructure-compatibility-pack' },
   }
-  return <main className="min-h-screen bg-[#09090b] px-6 py-20 text-zinc-200 sm:py-28"><div className="mx-auto max-w-5xl">
-    <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-    <p className="font-mono text-[10px] uppercase tracking-[0.24em] text-cyan-300">[ machine product // contract v{COMPATIBILITY_PACK_CONTRACT.version} ]</p>
-    <h1 className="mt-5 max-w-4xl text-4xl font-light leading-tight text-white sm:text-6xl">One agent. One tool server. One compatibility verdict you can inspect.</h1>
-    <p className="mt-6 max-w-3xl text-lg leading-relaxed text-zinc-400">The Agent Infrastructure Compatibility Pack exercises one A2A agent and one MCP server against caller-declared tool, task and payment policy. It returns source-linked, hashed findings—not a generic market report or a certification badge.</p>
-    <div className="mt-8 flex flex-wrap gap-3"><a className="border border-cyan-500 px-4 py-2 font-mono text-xs uppercase tracking-widest text-cyan-100" href={contractUrl}>Machine contract</a><a className="border border-zinc-700 px-4 py-2 font-mono text-xs uppercase tracking-widest text-zinc-300" href={`${contractUrl}/sample`}>Sample JSON report</a></div>
+  return (
+    <main className="evidence-page">
+      <div className="evidence-container">
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+        <header className="border-t border-[var(--border-default)] pt-5">
+          <p className="evidence-kicker flex flex-wrap justify-between gap-3">
+            <span>Machine product</span><span>Contract v{COMPATIBILITY_PACK_CONTRACT.version}</span>
+          </p>
+          <h1 className="evidence-title evidence-title--product">One agent. One tool server. One compatibility verdict you can inspect.</h1>
+          <p className="evidence-lede mt-7">The Agent Infrastructure Compatibility Pack exercises one A2A agent and one MCP server against caller-declared tool, task and payment policy. It returns source-linked, hashed findings&mdash;not a generic market report or a certification badge.</p>
+          <div className="mt-9 flex flex-col gap-3 sm:flex-row">
+            <a className="evidence-action evidence-action--primary" href={contractUrl}>Machine contract ↗</a>
+            <a className="evidence-action evidence-action--secondary" href={`${contractUrl}/sample`}>Sample JSON report ↗</a>
+          </div>
+        </header>
 
-    <section className="mt-12 grid gap-4 md:grid-cols-3"><Card label="Fixed price" value="49.00 USDC" text="Base Mainnet, 49,000,000 base units. The live challenge will be authoritative once payment is promoted." /><Card label="Bounded scope" value="1 A2A + 1 MCP" text="One declared non-mutating skill and tool. JSON-RPC only. No open-ended scanning." /><Card label="Current status" value="Contract published" text="Payment remains withheld until durable delivery and automatic refund recovery pass Production E2E." /></section>
+        <section className="evidence-section" aria-labelledby="scope-heading">
+          <p className="evidence-kicker">Scope</p>
+          <h2 id="scope-heading" className="evidence-section-title mt-4">Fixed price, bounded scope.</h2>
+          <div className="mt-9 grid gap-4 md:grid-cols-3">
+            <Card label="Fixed price" value="49.00 USDC" text="Base Mainnet, 49,000,000 base units. The live challenge will be authoritative once payment is promoted." />
+            <Card label="Bounded scope" value="1 A2A + 1 MCP" text="One declared non-mutating skill and tool. JSON-RPC only. No open-ended scanning." />
+            <Card label="Current status" value="Contract published" text="Payment remains withheld until durable delivery and automatic refund recovery pass Production E2E." />
+          </div>
+        </section>
 
-    <section className="mt-14"><h2 className="text-2xl text-white">What the report answers</h2><div className="mt-5 grid gap-4 sm:grid-cols-2"><Card label="Identity & protocol" value="Discovery bound" text="Agent Card, RPC URL, tools/list inventory, declared methods and schema evidence are captured with timestamps and hashes." /><Card label="Policy" value="Allowlist enforced" text="The selected skill, tool, methods, timeout and per-call/task payment ceilings are evaluated without silently broadening policy." /><Card label="Payment" value="Challenge inspected" text="Network, asset, payee and amount are compared with policy. Maha never holds the buyer key or settles an upstream payment." /><Card label="Auditability" value="Evidence attached" text="Every finding carries a bounded observation, source URL, observed time and SHA-256 digest." /></div></section>
+        <section className="evidence-section" aria-labelledby="answers-heading">
+          <p className="evidence-kicker">The report</p>
+          <h2 id="answers-heading" className="evidence-section-title mt-4">What the report answers</h2>
+          <div className="mt-9 grid gap-4 sm:grid-cols-2">
+            <Card label="Identity & protocol" value="Discovery bound" text="Agent Card, RPC URL, tools/list inventory, declared methods and schema evidence are captured with timestamps and hashes." />
+            <Card label="Policy" value="Allowlist enforced" text="The selected skill, tool, methods, timeout and per-call/task payment ceilings are evaluated without silently broadening policy." />
+            <Card label="Payment" value="Challenge inspected" text="Network, asset, payee and amount are compared with policy. Maha never holds the buyer key or settles an upstream payment." />
+            <Card label="Auditability" value="Evidence attached" text="Every finding carries a bounded observation, source URL, observed time and SHA-256 digest." />
+          </div>
+        </section>
 
-    <section className="mt-14 border border-zinc-800 bg-zinc-950/70 p-6"><h2 className="text-2xl text-white">Sample decision: {sample.decision.replaceAll('_', ' ')}</h2><p className="mt-3 text-sm text-zinc-400">{sample.summary.passed} passed · {sample.summary.failed} failed · {sample.summary.notChecked} not checked · highest severity {sample.summary.highestSeverity}</p><div className="mt-5 space-y-3">{sample.checks.map((check) => <article key={check.id} className="border-l-2 border-cyan-800 pl-4"><p className="font-mono text-[10px] uppercase tracking-widest text-cyan-300">{check.layer} // {check.status}</p><p className="mt-1 text-sm text-zinc-300">{check.summary}</p></article>)}</div></section>
+        <section className="evidence-section" aria-labelledby="sample-heading">
+          <p className="evidence-kicker">Worked example</p>
+          <h2 id="sample-heading" className="evidence-section-title mt-4">Sample decision: {sample.decision.replaceAll('_', ' ')}</h2>
+          <p className="evidence-kicker mt-5 flex flex-wrap gap-x-5 gap-y-2">
+            <span>{sample.summary.passed} passed</span>
+            <span>{sample.summary.failed} failed</span>
+            <span>{sample.summary.notChecked} not checked</span>
+            <span>Highest severity {sample.summary.highestSeverity}</span>
+          </p>
+          <div className="mt-7 flex flex-col gap-4">
+            {sample.checks.map((check) => (
+              <article key={check.id} className="border-l-2 border-[var(--status-sourced)] pl-4">
+                <p className="evidence-kicker">{check.layer} — {check.status}</p>
+                <p className="evidence-card-copy mt-2">{check.summary}</p>
+              </article>
+            ))}
+          </div>
+        </section>
 
-    <section className="mt-14 grid gap-8 md:grid-cols-2"><div><h2 className="text-2xl text-white">Failure and refund behavior</h2><ul className="mt-4 space-y-3 text-sm leading-relaxed text-zinc-400"><li><strong className="text-zinc-200">No charge:</strong> invalid schema, unsafe target, unreachable preflight target, or unsupported authentication.</li><li><strong className="text-zinc-200">Report, no refund:</strong> incompatibility, policy rejection, target timeout/error, or payment terms outside policy. Those are the findings purchased.</li><li><strong className="text-zinc-200">Full automatic refund:</strong> Maha fails after settlement, cannot confirm durable report storage, or misses the delivery target.</li><li><strong className="text-zinc-200">No duplicate charge:</strong> retries bind clientRequestId to the input hash and return the original report.</li></ul></div><div><h2 className="text-2xl text-white">Limitations</h2><ul className="mt-4 list-disc space-y-2 pl-5 text-sm leading-relaxed text-zinc-400">{COMPATIBILITY_PACK_CONTRACT.limitations.map((item) => <li key={item}>{item}</li>)}</ul></div></section>
-  </div></main>
+        <section className="evidence-section" aria-labelledby="behaviour-heading">
+          <p className="evidence-kicker">Boundaries</p>
+          <h2 id="behaviour-heading" className="evidence-section-title mt-4">Failure, refund, and limitations</h2>
+          <div className="mt-9 grid gap-8 md:grid-cols-2">
+            <div>
+              <h3 className="evidence-card-title">Failure and refund behavior</h3>
+              <ul className="evidence-copy mt-4 flex list-none flex-col gap-3 p-0">
+                <li><strong className="text-[var(--text-primary)]">No charge:</strong> invalid schema, unsafe target, unreachable preflight target, or unsupported authentication.</li>
+                <li><strong className="text-[var(--text-primary)]">Report, no refund:</strong> incompatibility, policy rejection, target timeout/error, or payment terms outside policy. Those are the findings purchased.</li>
+                <li><strong className="text-[var(--text-primary)]">Full automatic refund:</strong> Maha fails after settlement, cannot confirm durable report storage, or misses the delivery target.</li>
+                <li><strong className="text-[var(--text-primary)]">No duplicate charge:</strong> retries bind clientRequestId to the input hash and return the original report.</li>
+              </ul>
+            </div>
+            <div>
+              <h3 className="evidence-card-title">Limitations</h3>
+              <ul className="evidence-copy mt-4 flex list-disc flex-col gap-2 pl-5">
+                {COMPATIBILITY_PACK_CONTRACT.limitations.map((item) => <li key={item}>{item}</li>)}
+              </ul>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+  )
 }
 
-function Card({ label, value, text }: { label: string; value: string; text: string }) { return <article className="border border-zinc-800 bg-zinc-950/50 p-5"><p className="font-mono text-[10px] uppercase tracking-widest text-cyan-300">{label}</p><p className="mt-2 text-lg text-white">{value}</p><p className="mt-3 text-sm leading-relaxed text-zinc-400">{text}</p></article> }
+function Card({ label, value, text }: { label: string; value: string; text: string }) {
+  return (
+    <article className="evidence-card">
+      <p className="evidence-kicker">{label}</p>
+      <p className="evidence-card-title mt-3">{value}</p>
+      <p className="evidence-card-copy mt-3">{text}</p>
+    </article>
+  )
+}

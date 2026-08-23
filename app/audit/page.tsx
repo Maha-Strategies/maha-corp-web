@@ -8,11 +8,11 @@
 import React, { useState, useMemo } from "react";
 
 const TAGS: Record<string, { color: string; bg: string; label: string; def: string }> = {
-  VERIFIED: { color: "#237A55", bg: "rgba(35,122,85,0.14)", label: "VERIFIED", def: "Checked against a primary source or reproduced first-hand." },
-  SOURCED: { color: "#2D63B8", bg: "rgba(45,99,184,0.13)", label: "SOURCED", def: "Attributed to an identified, citable source; not independently verified." },
-  BOUNDARY: { color: "#A06F14", bg: "rgba(176,124,30,0.16)", label: "BOUNDARY", def: "Honestly reports the limits of knowledge — open questions, conjecture." },
-  ILLUSTRATIVE: { color: "#6E56A8", bg: "rgba(110,86,168,0.13)", label: "ILLUSTRATIVE", def: "Analogy or example. Explains; asserts nothing about the world." },
-  UNVERIFIED: { color: "#B3402E", bg: "rgba(179,64,46,0.14)", label: "UNVERIFIED", def: "Asserted without confirmation. A workflow state, not a shipping state." },
+  VERIFIED: { color: "var(--status-verified)", bg: "rgba(35,122,85,0.14)", label: "VERIFIED", def: "Checked against a primary source or reproduced first-hand." },
+  SOURCED: { color: "var(--status-sourced)", bg: "rgba(45,99,184,0.13)", label: "SOURCED", def: "Attributed to an identified, citable source; not independently verified." },
+  BOUNDARY: { color: "var(--status-boundary)", bg: "rgba(176,124,30,0.16)", label: "BOUNDARY", def: "Honestly reports the limits of knowledge — open questions, conjecture." },
+  ILLUSTRATIVE: { color: "var(--status-illustrative)", bg: "rgba(110,86,168,0.13)", label: "ILLUSTRATIVE", def: "Analogy or example. Explains; asserts nothing about the world." },
+  UNVERIFIED: { color: "var(--status-unverified)", bg: "rgba(179,64,46,0.14)", label: "UNVERIFIED", def: "Asserted without confirmation. A workflow state, not a shipping state." },
 };
 
 const SAMPLE = `M-Theory unified the five competing string theories in the mid-1990s, when Edward Witten showed they were different limits of a single framework. The theory predicts eleven dimensions of spacetime. No experiment has ever confirmed a distinctive prediction of string theory. Studies show that 87% of readers cannot distinguish AI-generated text from human writing. Think of the self as the moon: bright, but shining entirely by borrowed light. Whether M-Theory describes our universe remains an open question that may not be settled for decades. Our previous audit of AI-generated citations found fabricated references in the majority of unchecked drafts.`;
@@ -130,25 +130,23 @@ export default function AuditPage() {
   const owed = claims ? claims.filter((c: Claim) => c.tag === "UNVERIFIED").length : 0;
 
   return (
-    <div style={{ minHeight: "100vh", background: "#EEF1EC", color: "#1A2420", fontFamily: "'Newsreader', Georgia, serif" }}>
+    <div style={{ minHeight: "100vh", background: "var(--surface-paper)", color: "var(--text-primary)", fontFamily: "'Newsreader', Georgia, serif" }}>
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
         .mono { font-family: 'IBM Plex Mono', monospace; }
         .mark { cursor: pointer; border-radius: 2px; padding: 1px 2px; border-bottom: 2px solid; transition: filter .15s; }
         .mark:hover { filter: brightness(0.92); }
-        textarea:focus, button:focus { outline: 2px solid #1A2420; outline-offset: 2px; }
+        textarea:focus, button:focus { outline: 2px solid var(--text-primary); outline-offset: 2px; }
         @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
       `}</style>
 
-      <div style={{ maxWidth: 880, margin: "0 auto", padding: "40px 20px 80px" }}>
-        <div className="mono" style={{ fontSize: 11, letterSpacing: "0.18em", color: "#5A6660", display: "flex", justifyContent: "space-between", borderBottom: "1px solid #C8CEC6", paddingBottom: 12 }}>
-          <span>MAHA PROVENANCE STANDARD</span><span>MPS/0.1 · FREE PREFLIGHT</span>
-        </div>
+      <div className="evidence-container evidence-container--narrow">
+        <p className="evidence-kicker flex flex-wrap justify-between gap-3 border-t border-[var(--border-default)] pt-5">
+          <span>Maha Provenance Standard</span><span>MPS/0.1 · Free preflight</span>
+        </p>
 
-        <h1 style={{ fontSize: "clamp(34px, 6vw, 54px)", fontWeight: 500, lineHeight: 1.05, margin: "34px 0 14px", letterSpacing: "-0.01em" }}>
-          Run a free claim preflight.
-        </h1>
-        <p style={{ fontSize: 19, lineHeight: 1.55, maxWidth: 620, margin: "0 0 30px", color: "#3A453F" }}>
+        <h1 className="evidence-title evidence-title--product">Run a free claim preflight.</h1>
+        <p className="evidence-lede mt-7 mb-8">
           Paste a short nonfiction passage. MPS isolates its substantive claims and marks
           their epistemic status, so you can see what a reader is being asked to trust.
         </p>
@@ -157,47 +155,47 @@ export default function AuditPage() {
           {Object.entries(TAGS).map(([k, t]) => (
             <div key={k} title={t.def} style={{ background: t.bg, borderLeft: `3px solid ${t.color}`, padding: "6px 10px", borderRadius: 2 }}>
               <span className="mono" style={{ fontSize: 11, fontWeight: 600, color: t.color, letterSpacing: "0.08em" }}>{t.label}</span>
-              <div style={{ fontSize: 12.5, color: "#3A453F", maxWidth: 200, lineHeight: 1.35, marginTop: 2 }}>{t.def}</div>
+              <div style={{ fontSize: 12.5, color: "var(--text-secondary)", maxWidth: 200, lineHeight: 1.35, marginTop: 2 }}>{t.def}</div>
             </div>
           ))}
         </div>
 
-        <div style={{ background: "#FBFCFA", border: "1px solid #C8CEC6", borderRadius: 3, padding: 18 }}>
-          <div className="mono" style={{ fontSize: 11, letterSpacing: "0.14em", color: "#5A6660", marginBottom: 10 }}>PASSAGE UNDER AUDIT · FREE PUBLIC PREFLIGHT</div>
+        <div style={{ background: "var(--surface-raised)", border: "1px solid var(--border-default)", borderRadius: 3, padding: 18 }}>
+          <div className="mono" style={{ fontSize: 11, letterSpacing: "0.14em", color: "var(--text-muted)", marginBottom: 10 }}>PASSAGE UNDER AUDIT · FREE PUBLIC PREFLIGHT</div>
           <textarea
             value={text}
             onChange={(e) => setText(e.target.value)}
             placeholder="Paste up to ~1,000 words of nonfiction prose…"
-            style={{ width: "100%", minHeight: 150, border: "none", background: "transparent", fontFamily: "'Newsreader', Georgia, serif", fontSize: 17, lineHeight: 1.6, color: "#1A2420", resize: "vertical", boxSizing: "border-box" }}
+            style={{ width: "100%", minHeight: 150, border: "none", background: "transparent", fontFamily: "'Newsreader', Georgia, serif", fontSize: 17, lineHeight: 1.6, color: "var(--text-primary)", resize: "vertical", boxSizing: "border-box" }}
           />
           <div style={{ display: "flex", gap: 10, marginTop: 12, flexWrap: "wrap", alignItems: "center" }}>
             <button onClick={runAudit} disabled={loading} className="mono"
-              style={{ background: "#1A2420", color: "#EEF1EC", border: "none", padding: "11px 22px", fontSize: 13, letterSpacing: "0.1em", cursor: loading ? "wait" : "pointer", borderRadius: 2 }}>
+              style={{ background: "var(--text-primary)", color: "var(--surface-paper)", border: "none", padding: "11px 22px", fontSize: 13, letterSpacing: "0.1em", cursor: loading ? "wait" : "pointer", borderRadius: 2 }}>
               {loading ? LOADING_LINES[loadStep] : "RUN FREE PREFLIGHT"}
             </button>
             <button onClick={() => { setText(SAMPLE); setError(""); }} className="mono"
-              style={{ background: "transparent", color: "#1A2420", border: "1px solid #9AA49D", padding: "10px 16px", fontSize: 13, letterSpacing: "0.1em", cursor: "pointer", borderRadius: 2 }}>
+              style={{ background: "transparent", color: "var(--text-primary)", border: "1px solid var(--text-muted)", padding: "10px 16px", fontSize: 13, letterSpacing: "0.1em", cursor: "pointer", borderRadius: 2 }}>
               LOAD SAMPLE
             </button>
-            {error && <span style={{ color: "#B3402E", fontSize: 14 }}>{error}</span>}
+            {error && <span style={{ color: "var(--status-unverified)", fontSize: 14 }}>{error}</span>}
           </div>
-          <p style={{ margin: "14px 0 0", color: "#5A6660", fontSize: 13, lineHeight: 1.5 }}>
+          <p style={{ margin: "14px 0 0", color: "var(--text-muted)", fontSize: 13, lineHeight: 1.5 }}>
             {charactersRemaining.toLocaleString()} characters remaining · 3 free runs per visitor each day. Maha does not save the full passage in its audit ledger; it is sent to an AI provider only to generate this audit.
           </p>
         </div>
 
         {claims && counts && segments && (
           <div style={{ marginTop: 40 }}>
-            <div className="mono" style={{ fontSize: 11, letterSpacing: "0.14em", color: "#5A6660", marginBottom: 8 }}>
+            <div className="mono" style={{ fontSize: 11, letterSpacing: "0.14em", color: "var(--text-muted)", marginBottom: 8 }}>
               PROVENANCE SPECTRUM · {claims.length} CLAIMS · {owed === 0 ? "0 OWED VERIFICATION" : `${owed} OWED VERIFICATION`}
             </div>
-            <div style={{ display: "flex", height: 14, borderRadius: 2, overflow: "hidden", border: "1px solid #C8CEC6", marginBottom: 26 }}>
+            <div style={{ display: "flex", height: 14, borderRadius: 2, overflow: "hidden", border: "1px solid var(--border-default)", marginBottom: 26 }}>
               {Object.entries(TAGS).map(([k, t]) => (counts[k] > 0 ? (
                 <div key={k} style={{ flex: counts[k], background: t.color }} title={`${t.label}: ${counts[k]}`} />
               ) : null))}
             </div>
 
-            <div style={{ background: "#FBFCFA", border: "1px solid #C8CEC6", borderRadius: 3, padding: "22px 24px", fontSize: 17.5, lineHeight: 1.85 }}>
+            <div style={{ background: "var(--surface-raised)", border: "1px solid var(--border-default)", borderRadius: 3, padding: "22px 24px", fontSize: 17.5, lineHeight: 1.85 }}>
               {segments.map((s, i) => s.claim === undefined
                 ? <span key={i}>{s.text}</span>
                 : <span key={i} className="mark"
@@ -213,23 +211,23 @@ export default function AuditPage() {
 
             <div style={{ marginTop: 26 }}>
               <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", marginBottom: 12, flexWrap: "wrap", gap: 8 }}>
-                <div className="mono" style={{ fontSize: 11, letterSpacing: "0.14em", color: "#5A6660" }}>AUDIT LEDGER</div>
+                <div className="mono" style={{ fontSize: 11, letterSpacing: "0.14em", color: "var(--text-muted)" }}>AUDIT LEDGER</div>
                 <button onClick={downloadRecord} className="mono"
-                  style={{ background: "transparent", color: "#1A2420", border: "1px solid #9AA49D", padding: "7px 14px", fontSize: 11, letterSpacing: "0.1em", cursor: "pointer", borderRadius: 2 }}>
+                  style={{ background: "transparent", color: "var(--text-primary)", border: "1px solid var(--text-muted)", padding: "7px 14px", fontSize: 11, letterSpacing: "0.1em", cursor: "pointer", borderRadius: 2 }}>
                   DOWNLOAD AUDIT RECORD (JSON)
                 </button>
               </div>
               {claims.map((c, i) => (
                 <div key={i} onClick={() => setSelected(selected === i ? null : i)}
-                  style={{ background: selected === i ? TAGS[c.tag].bg : "#FBFCFA", border: "1px solid #DDE2DB", borderLeft: `3px solid ${TAGS[c.tag].color}`, padding: "12px 16px", marginBottom: 8, borderRadius: 2, cursor: "pointer" }}>
+                  style={{ background: selected === i ? TAGS[c.tag].bg : "var(--surface-raised)", border: "1px solid var(--border-subtle)", borderLeft: `3px solid ${TAGS[c.tag].color}`, padding: "12px 16px", marginBottom: 8, borderRadius: 2, cursor: "pointer" }}>
                   <div style={{ display: "flex", justifyContent: "space-between", gap: 12, flexWrap: "wrap" }}>
                     <span style={{ fontStyle: "italic", fontSize: 15.5 }}>“{c.excerpt}”</span>
                     <span className="mono" style={{ fontSize: 11, fontWeight: 600, color: TAGS[c.tag].color, letterSpacing: "0.08em", whiteSpace: "nowrap" }}>[{c.tag}]</span>
                   </div>
-                  <div style={{ fontSize: 14.5, color: "#3A453F", marginTop: 6, lineHeight: 1.5 }}>
+                  <div style={{ fontSize: 14.5, color: "var(--text-secondary)", marginTop: 6, lineHeight: 1.5 }}>
                     {c.rationale}
                     {c.action && c.action !== "none" && (
-                      <span className="mono" style={{ marginLeft: 8, fontSize: 11, color: "#1A2420", background: "#E2E7DF", padding: "2px 7px", borderRadius: 2, letterSpacing: "0.06em" }}>
+                      <span className="mono" style={{ marginLeft: 8, fontSize: 11, color: "var(--text-primary)", background: "var(--surface-subtle)", padding: "2px 7px", borderRadius: 2, letterSpacing: "0.06em" }}>
                         ACTION: {c.action.toUpperCase()}
                       </span>
                     )}
@@ -238,17 +236,17 @@ export default function AuditPage() {
               ))}
             </div>
 
-            <p style={{ fontSize: 13.5, color: "#5A6660", marginTop: 22, lineHeight: 1.55, maxWidth: 640 }}>
+            <p style={{ fontSize: 13.5, color: "var(--text-muted)", marginTop: 22, lineHeight: 1.55, maxWidth: 640 }}>
               Free preflight — tags reflect what an auditor can determine from the text alone; VERIFIED
               status requires human confirmation against primary sources. Full manuscript audits produce
               a structured MPS/0.1 record with source-by-source resolution.
               <span className="mono" style={{ display: "block", marginTop: 8, fontSize: 11, letterSpacing: "0.12em" }}>
-                MAHA STRATEGIES LLC · <a href="/mps" style={{ color: "#5A6660" }}>THE STANDARD (MPS/0.1)</a> · <a href="https://doi.org/10.5281/zenodo.21241308" style={{ color: "#5A6660" }}>DOI: 10.5281/ZENODO.21241308</a>
+                MAHA STRATEGIES LLC · <a href="/mps" style={{ color: "var(--text-muted)" }}>THE STANDARD (MPS/0.1)</a> · <a href="https://doi.org/10.5281/zenodo.21241308" style={{ color: "var(--text-muted)" }}>DOI: 10.5281/ZENODO.21241308</a>
               </span>
             </p>
 
-            <div style={{ marginTop: 30, background: "#1A2420", color: "#EEF1EC", borderRadius: 3, padding: "22px 24px", maxWidth: 640 }}>
-              <div className="mono" style={{ fontSize: 11, letterSpacing: "0.16em", color: "#9AA49D", marginBottom: 10 }}>
+            <div style={{ marginTop: 30, background: "var(--text-primary)", color: "var(--surface-paper)", borderRadius: 3, padding: "22px 24px", maxWidth: 640 }}>
+              <div className="mono" style={{ fontSize: 11, letterSpacing: "0.16em", color: "var(--text-muted)", marginBottom: 10 }}>
                 GO BEYOND THE FREE PREFLIGHT
               </div>
               <p style={{ fontSize: 16.5, lineHeight: 1.6, margin: "0 0 16px" }}>
@@ -257,14 +255,14 @@ export default function AuditPage() {
                 resolution, request a human Evidence Audit.
               </p>
               <a href="/mps/preflight" className="mono"
-                style={{ display: "inline-block", background: "#EEF1EC", color: "#1A2420", padding: "10px 18px", fontSize: 12, letterSpacing: "0.1em", textDecoration: "none", borderRadius: 2 }}>
+                style={{ display: "inline-block", background: "var(--surface-paper)", color: "var(--text-primary)", padding: "10px 18px", fontSize: 12, letterSpacing: "0.1em", textDecoration: "none", borderRadius: 2 }}>
                 RUN PRIVATE PREFLIGHT — $49 →
               </a>
-              <a href="/mps/preflight/example" className="mono" style={{ display: "inline-block", marginLeft: 14, fontSize: 12, color: "#EEF1EC", textDecoration: "underline", textUnderlineOffset: 4 }}>
+              <a href="/mps/preflight/example" className="mono" style={{ display: "inline-block", marginLeft: 14, fontSize: 12, color: "var(--surface-paper)", textDecoration: "underline", textUnderlineOffset: 4 }}>
                 SEE SAMPLE REPORT
               </a>
-              <span className="mono" style={{ marginLeft: 14, fontSize: 12, color: "#9AA49D" }}>
-                or <a href="/contact" style={{ color: "#EEF1EC" }}>request human review</a>
+              <span className="mono" style={{ marginLeft: 14, fontSize: 12, color: "var(--text-muted)" }}>
+                or <a href="/contact" style={{ color: "var(--surface-paper)" }}>request human review</a>
               </span>
             </div>
           </div>
