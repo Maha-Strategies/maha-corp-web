@@ -102,11 +102,11 @@ test('every URL the registry advertises is served by this repository', async () 
   assert.deepEqual(dead, [], `the registry advertises paths this repository does not serve: ${dead.join(', ')}`)
 })
 
-test('the registry does not advertise the agent-card path whose redirect does not fire', () => {
-  // Affirmative guard on a specific known-dead path. If the redirect is ever
-  // fixed this can be relaxed, but until then the registry must not point
-  // automated agents at a 404.
-  const raw = readFileSync(new URL('../public/maha-machine-readable-registry.json', import.meta.url), 'utf8')
-  assert.ok(!raw.includes('/.well-known/agent-card.json'), 'this path 404s in production; use /.well-known/agent.json')
-  assert.ok(raw.includes('/.well-known/agent.json'), 'the canonical agent card URL must still be advertised')
+test('canonical rewrite and compatibility agent-card route are both real', async () => {
+  const appDir = new URL('../app/', import.meta.url).pathname
+  const { default: config } = await import('../next.config.ts')
+  const rewrites = (await config.rewrites?.()) ?? []
+  assert.ok((rewrites as { source: string; destination: string }[]).some((entry) => entry.source === '/.well-known/agent.json' && entry.destination === '/api/discovery/agent-card'))
+  assert.equal(existsSync(join(appDir, '.well-known', 'agent-card.json', 'route.ts')), true)
+  assert.ok(buildLlmsManifest([]).includes('/.well-known/agent.json'))
 })
