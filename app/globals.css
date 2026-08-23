@@ -230,6 +230,84 @@ body {
   padding: clamp(1.5rem, 4vw, 2.5rem);
 }
 
+/*
+ * Tables and status chips.
+ *
+ * Both were missing from the system while eight routes rendered a table and
+ * the homepage hand-rolled a chip inline. Added here so a converted page
+ * describes its data with the shared vocabulary instead of inventing a
+ * private one, and so the mobile scroll behaviour is decided once.
+ */
+.evidence-table-wrap {
+  overflow-x: auto;
+  border: 1px solid var(--border-default);
+  border-radius: 2px;
+  background: var(--surface-raised);
+}
+
+.evidence-table {
+  width: 100%;
+  min-width: 34rem;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+  line-height: 1.6;
+}
+
+.evidence-table thead th {
+  position: sticky;
+  top: 0;
+  background: var(--surface-subtle);
+  border-bottom: 1px solid var(--border-default);
+  padding: 0.6rem 0.85rem;
+  text-align: left;
+  white-space: nowrap;
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 0.625rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.evidence-table tbody td {
+  border-bottom: 1px solid var(--border-subtle);
+  padding: 0.6rem 0.85rem;
+  color: var(--text-secondary);
+  vertical-align: top;
+}
+
+.evidence-table tbody tr:last-child td { border-bottom: 0; }
+
+/* Digits that line up in columns should line up. */
+.evidence-table .is-numeric {
+  font-family: var(--font-geist-mono), monospace;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.evidence-chip {
+  display: inline-block;
+  border: 1px solid var(--border-default);
+  border-radius: 2px;
+  background: var(--surface-paper);
+  padding: 0.15rem 0.5rem;
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 0.625rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  line-height: 1.6;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: var(--text-secondary);
+}
+
+/* Status carries meaning, so it is a token rather than an arbitrary colour. */
+.evidence-chip--verified    { color: var(--status-verified);    border-color: currentColor; }
+.evidence-chip--sourced     { color: var(--status-sourced);     border-color: currentColor; }
+.evidence-chip--boundary    { color: var(--status-boundary);    border-color: currentColor; }
+.evidence-chip--illustrative{ color: var(--status-illustrative);border-color: currentColor; }
+.evidence-chip--unverified  { color: var(--status-unverified);  border-color: currentColor; }
+
 .evidence-code {
   border: 1px solid #2f3b35;
   border-radius: 2px;

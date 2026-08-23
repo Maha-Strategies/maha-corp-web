@@ -50,43 +50,58 @@ export default function X402BuyerPolicyPage() {
     runtimePlatform: 'Node.js, Bun, Deno, browsers, and JavaScript agent runtimes',
   }
   return (
-    <main className="min-h-screen bg-[#080a0d] px-6 py-20 text-zinc-300 sm:py-28">
+    <main className="evidence-page">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareJsonLd).replace(/</g, '\u003c') }} />
-      <div className="mx-auto max-w-6xl">
-        <header className="max-w-4xl border-l border-indigo-500 pl-6 sm:pl-8">
-          <p className="font-mono text-[10px] uppercase tracking-[0.24em] text-indigo-300">[ Open x402 buyer controls ]</p>
-          <h1 className="mt-5 text-4xl font-light leading-tight tracking-tight text-white sm:text-6xl">A wallet should be the last gate, not the first.</h1>
-          <p className="mt-7 max-w-3xl text-lg leading-8 text-zinc-400">A zero-dependency reference library that decides whether an agent may pay before any signature—and verifies what settled afterward. It is policy infrastructure, not a wallet or facilitator.</p>
-          <div className="mt-8 flex flex-wrap gap-4 font-mono text-xs uppercase tracking-widest">
-            <a href="https://github.com/Maha-Strategies/maha-corp-web/tree/main/packages/x402-buyer-policy" target="_blank" rel="noopener noreferrer" className="border border-indigo-700 px-4 py-3 text-indigo-100 hover:bg-indigo-950/40">Inspect source package ↗</a>
-            <a href="/schemas/x402-buyer-policy-1.0.0.json" className="px-4 py-3 text-zinc-300 underline underline-offset-4 hover:text-white">Policy JSON Schema ↗</a>
-            <a href="/x402/buyer-policy.example.json" className="px-4 py-3 text-zinc-300 underline underline-offset-4 hover:text-white">Example policy ↗</a>
+      <div className="evidence-container">
+        <header className="border-t border-[var(--border-default)] pt-5">
+          <p className="evidence-kicker flex flex-wrap justify-between gap-3">
+            <span>Open x402 buyer controls</span><span>Policy infrastructure</span>
+          </p>
+          <h1 className="evidence-title evidence-title--product">A wallet should be the last gate, not the first.</h1>
+          <p className="evidence-lede mt-7">A zero-dependency reference library that decides whether an agent may pay before any signature&mdash;and verifies what settled afterward. It is policy infrastructure, not a wallet or facilitator.</p>
+          <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+            <a href="https://github.com/Maha-Strategies/maha-corp-web/tree/main/packages/x402-buyer-policy" target="_blank" rel="noopener noreferrer" className="evidence-action evidence-action--primary">Inspect source package ↗</a>
+            <a href="/schemas/x402-buyer-policy-1.0.0.json" className="evidence-action evidence-action--secondary">Policy JSON Schema ↗</a>
+            <a href="/x402/buyer-policy.example.json" className="evidence-action evidence-action--secondary">Example policy ↗</a>
           </div>
         </header>
 
-        <section className="mt-16 grid gap-4 md:grid-cols-2 lg:grid-cols-3" aria-label="Buyer policy controls">
-          {controls.map(([name, detail]) => <article key={name} className="border border-zinc-800 bg-zinc-950/40 p-6"><h2 className="text-lg text-white">{name}</h2><p className="mt-3 text-sm leading-7 text-zinc-400">{detail}</p></article>)}
-        </section>
-
-        <section className="mt-16 grid gap-8 lg:grid-cols-[0.8fr_1.2fr]">
-          <div>
-            <p className="font-mono text-[10px] uppercase tracking-widest text-indigo-300">[ Pre-signing boundary ]</p>
-            <h2 className="mt-4 text-3xl font-light text-white">One decision before custody is touched.</h2>
-            <p className="mt-5 text-sm leading-7 text-zinc-400">The policy returns structured allow, deny, or approval-required codes. A caller invokes its Viem, CDP, LangChain.js, or MCP signing adapter only after an allow decision and atomic budget reservation.</p>
+        <section className="evidence-section" aria-labelledby="controls-heading">
+          <p className="evidence-kicker">Buyer policy controls</p>
+          <h2 id="controls-heading" className="evidence-section-title mt-4">What the policy decides.</h2>
+          <div className="mt-9 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+            {controls.map(([name, detail]) => (
+              <article key={name} className="evidence-card">
+                <h3 className="evidence-card-title">{name}</h3>
+                <p className="evidence-card-copy mt-3">{detail}</p>
+              </article>
+            ))}
           </div>
-          <pre className="overflow-x-auto border border-zinc-800 bg-black/50 p-5 text-xs leading-6 text-zinc-300"><code>{policyExample}</code></pre>
         </section>
 
-        <section className="mt-16 border-y border-zinc-800 py-10">
-          <p className="font-mono text-[10px] uppercase tracking-widest text-emerald-300">[ Honest integration boundary ]</p>
-          <h2 className="mt-4 text-2xl font-light text-white">Framework-neutral does not mean framework-magical.</h2>
-          <p className="mt-4 max-w-4xl text-sm leading-7 text-zinc-400">LangChain.js, MCP TypeScript clients, and Viem can call the package directly. Python LangChain and CrewAI applications can enforce the same public JSON contract at their wallet boundary; this release does not claim to be a native Python package. Production deployments must replace the included single-process reference ledger with an atomic shared store.</p>
+        <section className="evidence-section" aria-labelledby="boundary-heading">
+          <p className="evidence-kicker">Pre-signing boundary</p>
+          <h2 id="boundary-heading" className="evidence-section-title mt-4">One decision before custody is touched.</h2>
+          <div className="mt-9 grid gap-8 lg:grid-cols-[0.8fr_1.2fr]">
+            <p className="evidence-copy">The policy returns structured allow, deny, or approval-required codes. A caller invokes its Viem, CDP, LangChain.js, or MCP signing adapter only after an allow decision and atomic budget reservation.</p>
+            <pre className="evidence-code overflow-x-auto p-5 text-xs leading-6"><code>{policyExample}</code></pre>
+          </div>
         </section>
 
-        <section className="mt-14 flex flex-wrap gap-5 font-mono text-xs uppercase tracking-widest">
-          <Link href="/recipes/bazaar-discovery-to-payment" className="text-indigo-100 underline underline-offset-4 hover:text-white">Run the discovery-to-payment recipe ↗</Link>
-          <Link href="/x402-observatory" className="text-zinc-300 underline underline-offset-4 hover:text-white">Inspect seller conformance ↗</Link>
-          <Link href="/developers" className="text-zinc-300 underline underline-offset-4 hover:text-white">Developer infrastructure ↗</Link>
+        <section className="evidence-section" aria-labelledby="integration-heading">
+          <div className="evidence-inset" style={{ borderLeftColor: 'var(--status-boundary)' }}>
+            <p className="evidence-kicker">Honest integration boundary</p>
+            <h2 id="integration-heading" className="evidence-section-title mt-4">Framework-neutral does not mean framework-magical.</h2>
+            <p className="evidence-copy mt-5">LangChain.js, MCP TypeScript clients, and Viem can call the package directly. Python LangChain and CrewAI applications can enforce the same public JSON contract at their wallet boundary; this release does not claim to be a native Python package. Production deployments must replace the included single-process reference ledger with an atomic shared store.</p>
+          </div>
+        </section>
+
+        <section className="evidence-section">
+          <div className="flex flex-wrap gap-x-6 gap-y-3 font-mono text-xs uppercase tracking-widest">
+            <Link href="/recipes/bazaar-discovery-to-payment" className="evidence-link">Run the discovery-to-payment recipe ↗</Link>
+            <Link href="/x402-observatory" className="evidence-link">Inspect seller conformance ↗</Link>
+            <Link href="/developers" className="evidence-link">Developer infrastructure ↗</Link>
+          </div>
         </section>
       </div>
     </main>
