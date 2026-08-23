@@ -99,75 +99,76 @@ const tagDefinitions = [
 ]
 
 export default function WhatIsMpsPage() {
-  return <main className="min-h-screen bg-[#0a0a0c] px-6 py-20 text-zinc-300 sm:py-28">
+  return <main className="evidence-page"><div className="evidence-container">
     <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd).replace(/</g, '\\u003c') }} />
     <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd).replace(/</g, '\\u003c') }} />
-    <article className="mx-auto max-w-4xl">
-      <p className="font-mono text-[10px] uppercase tracking-widest text-indigo-300">[ MPS/0.1 · explainer ]</p>
-      <h1 className="mt-5 max-w-3xl text-4xl font-light leading-tight tracking-tight text-white sm:text-6xl">What is the Maha Provenance Standard?</h1>
-      <p className="mt-7 max-w-3xl text-xl leading-relaxed text-zinc-300"><strong>MPS/0.1 is a claim-level provenance framework for nonfiction.</strong> It labels the evidentiary status of substantive claims so a reader can see what was checked, what was attributed, where knowledge ends, and what remains unverified.</p>
-      <p className="mt-5 font-mono text-[11px] uppercase tracking-widest text-zinc-500">By Mayone Maha Rajan · Maha Strategies LLC · <time dateTime={publicationDate}>July 20, 2026</time></p>
+    <article>
+      <p className="font-mono text-[10px] uppercase tracking-widest text-[var(--text-muted)]">[ MPS/0.1 · explainer ]</p>
+      <h1 className="evidence-title evidence-title--product max-w-3xl">What is the Maha Provenance Standard?</h1>
+      <p className="mt-7 max-w-3xl text-xl leading-relaxed text-[var(--text-secondary)]"><strong>MPS/0.1 is a claim-level provenance framework for nonfiction.</strong> It labels the evidentiary status of substantive claims so a reader can see what was checked, what was attributed, where knowledge ends, and what remains unverified.</p>
+      <p className="mt-5 font-mono text-[11px] uppercase tracking-widest text-[var(--text-muted)]">By Mayone Maha Rajan · Maha Strategies LLC · <time dateTime={publicationDate}>July 20, 2026</time></p>
 
-      <section className="mt-14 border-y border-zinc-800 py-9">
-        <h2 className="text-2xl text-white">The short version</h2>
-        <div className="mt-5 max-w-3xl space-y-4 leading-relaxed text-zinc-400">
+      <section className="mt-14 border-y border-[var(--border-default)] py-9">
+        <h2 className="evidence-section-title">The short version</h2>
+        <div className="mt-5 max-w-3xl space-y-4 leading-relaxed text-[var(--text-secondary)]">
           <p>Document-level AI disclosure can say that AI was used, but it does not tell a reader which individual statements were checked. MPS works at the claim level instead. Each substantive claim receives one status tag and, in a structured audit record, a rationale, source field, and recommended action.</p>
           <p>MPS is designed for nonfiction written with or without AI assistance. It is intended to make uncertainty inspectable; it does not turn an assertion into a fact, replace source review, or certify a document merely because it carries MPS tags.</p>
         </div>
       </section>
 
       <section className="mt-14">
-        <h2 className="text-2xl text-white">The five claim-status tags</h2>
+        <h2 className="evidence-section-title">The five claim-status tags</h2>
         <div className="mt-7 grid gap-4 sm:grid-cols-2">
-          {tagDefinitions.map(([tag, definition]) => <div key={tag} className="border border-zinc-800 bg-zinc-950 p-5">
-            <h3 className="font-mono text-xs font-bold tracking-widest text-indigo-300">{tag}</h3>
-            <p className="mt-3 text-sm leading-relaxed text-zinc-400">{definition}</p>
+          {tagDefinitions.map(([tag, definition]) => <div key={tag} className="border border-[var(--border-default)] bg-[var(--surface-raised)] p-5">
+            <h3 className="font-mono text-xs font-bold tracking-widest text-[var(--text-muted)]">{tag}</h3>
+            <p className="mt-3 text-sm leading-relaxed text-[var(--text-secondary)]">{definition}</p>
           </div>)}
         </div>
       </section>
 
-      <section className="mt-14 grid gap-10 border-t border-zinc-800 pt-10 md:grid-cols-2">
+      <section className="mt-14 grid gap-10 border-t border-[var(--border-default)] pt-10 md:grid-cols-2">
         <div>
-          <h2 className="text-2xl text-white">What MPS covers</h2>
-          <p className="mt-5 leading-relaxed text-zinc-400">Statements of fact, attribution, quantity, causation, and expert consensus that a reader might reasonably rely on. A compliant record can be rendered inline for readers or serialized as JSON for audit tools.</p>
+          <h2 className="evidence-section-title">What MPS covers</h2>
+          <p className="mt-5 leading-relaxed text-[var(--text-secondary)]">Statements of fact, attribution, quantity, causation, and expert consensus that a reader might reasonably rely on. A compliant record can be rendered inline for readers or serialized as JSON for audit tools.</p>
         </div>
         <div>
-          <h2 className="text-2xl text-white">What MPS does not claim</h2>
-          <p className="mt-5 leading-relaxed text-zinc-400">It does not independently prove a claim, guarantee completeness, replace a domain expert, or create a blanket certification. In the current specification, MPS-Certified remains reserved; the defined states are MPS-Declared and MPS-Audited.</p>
+          <h2 className="evidence-section-title">What MPS does not claim</h2>
+          <p className="mt-5 leading-relaxed text-[var(--text-secondary)]">It does not independently prove a claim, guarantee completeness, replace a domain expert, or create a blanket certification. In the current specification, MPS-Certified remains reserved; the defined states are MPS-Declared and MPS-Audited.</p>
         </div>
       </section>
 
-      <section className="mt-14 border border-indigo-900/50 bg-indigo-950/20 p-7 sm:p-9">
-        <p className="font-mono text-[10px] uppercase tracking-widest text-indigo-300">[ Citation-ready definition ]</p>
-        <blockquote className="mt-5 max-w-3xl border-l-2 border-indigo-400 pl-5 text-lg leading-relaxed text-zinc-200">“The Maha Provenance Standard (MPS/0.1) is a claim-level provenance framework that makes the evidentiary status of substantive nonfiction claims explicit, auditable, and machine-readable.”</blockquote>
-        <p className="mt-5 text-sm text-zinc-400">Suggested citation: Maha Rajan, M. (2026, July 20). <em>What Is the Maha Provenance Standard (MPS)?</em> Maha Strategies LLC. {canonicalUrl}</p>
+      <section className="mt-14 border border-[var(--status-sourced)] bg-[var(--surface-raised)] p-7 sm:p-9">
+        <p className="font-mono text-[10px] uppercase tracking-widest text-[var(--text-muted)]">[ Citation-ready definition ]</p>
+        <blockquote className="mt-5 max-w-3xl border-l-2 border-[var(--status-sourced)] pl-5 text-lg leading-relaxed text-[var(--text-secondary)]">“The Maha Provenance Standard (MPS/0.1) is a claim-level provenance framework that makes the evidentiary status of substantive nonfiction claims explicit, auditable, and machine-readable.”</blockquote>
+        <p className="mt-5 text-sm text-[var(--text-secondary)]">Suggested citation: Maha Rajan, M. (2026, July 20). <em>What Is the Maha Provenance Standard (MPS)?</em> Maha Strategies LLC. {canonicalUrl}</p>
       </section>
 
       <section className="mt-14">
-        <h2 className="text-2xl text-white">Frequently asked questions</h2>
-        <div className="mt-6 divide-y divide-zinc-800 border-y border-zinc-800">
+        <h2 className="evidence-section-title">Frequently asked questions</h2>
+        <div className="mt-6 divide-y divide-[var(--border-subtle)] border-y border-[var(--border-default)]">
           {faq.map((item) => <div key={item.question} className="py-6">
-            <h3 className="text-lg text-zinc-100">{item.question}</h3>
-            <p className="mt-3 max-w-3xl leading-relaxed text-zinc-400">{item.answer}</p>
+            <h3 className="text-lg text-[var(--text-primary)]">{item.question}</h3>
+            <p className="mt-3 max-w-3xl leading-relaxed text-[var(--text-secondary)]">{item.answer}</p>
           </div>)}
         </div>
       </section>
 
-      <section className="mt-14 border-t border-zinc-800 pt-10">
-        <h2 className="text-2xl text-white">Canonical sources and reference implementations</h2>
+      <section className="mt-14 border-t border-[var(--border-default)] pt-10">
+        <h2 className="evidence-section-title">Canonical sources and reference implementations</h2>
         <ol className="mt-6 space-y-5">
-          {sources.map((source) => <li key={source.url} className="leading-relaxed text-zinc-400">
-            <a className="text-zinc-100 underline underline-offset-4 hover:text-white" href={source.url}>{source.name} ↗</a>
+          {sources.map((source) => <li key={source.url} className="leading-relaxed text-[var(--text-secondary)]">
+            <a className="text-[var(--text-primary)] underline underline-offset-4 hover:text-[var(--text-primary)]" href={source.url}>{source.name} ↗</a>
             <span className="block mt-1 text-sm">{source.note}</span>
           </li>)}
         </ol>
       </section>
 
-      <section className="mt-14 flex flex-wrap gap-4 border-t border-zinc-800 pt-10">
-        <Link href="/mps" className="border border-zinc-600 px-5 py-3 font-mono text-xs font-bold uppercase tracking-widest text-zinc-100 hover:border-white">Read the MPS/0.1 specification</Link>
-        <Link href="/audit" className="border border-zinc-600 px-5 py-3 font-mono text-xs font-bold uppercase tracking-widest text-zinc-100 hover:border-white">Try the free Auditor</Link>
+      <section className="mt-14 flex flex-wrap gap-4 border-t border-[var(--border-default)] pt-10">
+        <Link href="/mps" className="border border-[var(--border-default)] px-5 py-3 font-mono text-xs font-bold uppercase tracking-widest text-[var(--text-primary)] hover:border-[var(--text-primary)]">Read the MPS/0.1 specification</Link>
+        <Link href="/audit" className="border border-[var(--border-default)] px-5 py-3 font-mono text-xs font-bold uppercase tracking-widest text-[var(--text-primary)] hover:border-[var(--text-primary)]">Try the free Auditor</Link>
       </section>
       <MpsLearningLinks />
     </article>
+    </div>
   </main>
 }

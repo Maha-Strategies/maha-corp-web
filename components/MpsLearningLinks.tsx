@@ -20,13 +20,13 @@ const guides = [
 
 export default function MpsLearningLinks({ current }: { current?: string }) {
   return (
-    <section className="mt-14 border-y border-zinc-800 py-8" aria-labelledby="mps-learning-heading">
+    <section className="mt-14 border-y border-[var(--border-default)] py-8" aria-labelledby="mps-learning-heading">
       <div className="flex flex-wrap items-baseline justify-between gap-3">
         <div>
-          <p className="font-mono text-[10px] uppercase tracking-widest text-indigo-300">[ MPS learning center ]</p>
-          <h2 id="mps-learning-heading" className="mt-2 text-2xl font-light text-white">Learn the practice before using the tool.</h2>
+          <p className="font-mono text-[10px] uppercase tracking-widest text-[var(--text-muted)]">[ MPS learning center ]</p>
+          <h2 id="mps-learning-heading" className="evidence-section-title mt-2">Learn the practice before using the tool.</h2>
         </div>
-        <Link href="/mps/learn" className="font-mono text-xs uppercase tracking-widest text-zinc-300 underline underline-offset-4 hover:text-white">
+        <Link href="/mps/learn" className="font-mono text-xs uppercase tracking-widest text-[var(--text-secondary)] underline underline-offset-4 hover:text-[var(--text-primary)]">
           All guides
         </Link>
       </div>
@@ -36,14 +36,14 @@ export default function MpsLearningLinks({ current }: { current?: string }) {
             key={guide.href}
             href={guide.href}
             aria-current={current === guide.href ? 'page' : undefined}
-            className={`border p-4 transition ${current === guide.href ? 'border-indigo-400 bg-indigo-950/25' : 'border-zinc-800 hover:border-zinc-600'}`}
+            className={`border p-4 transition ${current === guide.href ? 'border-[var(--status-sourced)] bg-[var(--surface-raised)]' : 'border-[var(--border-default)] hover:border-[var(--text-muted)]'}`}
           >
-            <h3 className="text-sm text-zinc-100">{guide.label}</h3>
-            <p className="mt-2 text-sm leading-relaxed text-zinc-500">{guide.description}</p>
+            <h3 className="text-sm text-[var(--text-primary)]">{guide.label}</h3>
+            <p className="mt-2 text-sm leading-relaxed text-[var(--text-muted)]">{guide.description}</p>
           </Link>
         ))}
       </div>
-      <p className="mt-6 text-sm leading-relaxed text-zinc-500">
+      <p className="mt-6 text-sm leading-relaxed text-[var(--text-muted)]">
         MPS is a self-published framework and audit aid. It does not certify truth, replace primary-source review, or make an AI output authoritative.
       </p>
     </section>
