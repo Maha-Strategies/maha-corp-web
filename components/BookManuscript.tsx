@@ -17,9 +17,9 @@ function inlineMarkdown(text: string): ReactNode[] {
 
 export default function BookManuscript({ markdown, skipFirstH1 = false, demoteH1 = false }: BookManuscriptProps) {
   return (
-    <div className="prose prose-invert prose-lg max-w-none prose-p:text-zinc-300 prose-p:leading-[1.85] prose-p:mb-7 prose-strong:text-white prose-em:text-zinc-300 prose-li:text-zinc-300 prose-li:leading-relaxed">
+    <div className="prose prose-lg max-w-none prose-p:text-[var(--text-secondary)] prose-p:leading-[1.85] prose-p:mb-7 prose-strong:text-[var(--text-primary)] prose-em:text-[var(--text-secondary)] prose-li:text-[var(--text-secondary)] prose-li:leading-relaxed">
       {parseMarkdownBlocks(markdown, { skipFirstH1 }).map((block, index) => {
-        if (block.type === 'hr') return <hr key={index} className="my-12 border-zinc-800" />
+        if (block.type === 'hr') return <hr key={index} className="my-12 border-[var(--border-default)]" />
         if (block.type === 'list') return <ul key={index}>{block.items.map((item) => <li key={item}>{inlineMarkdown(item)}</li>)}</ul>
         if (block.type === 'paragraph') {
           if (block.text === '&nbsp;') return null

@@ -60,31 +60,31 @@ const faqJsonLd = {
 }
 
 export default function MTheoryFaqPage() {
-  return <main className="min-h-screen bg-[#0a0a0c] text-zinc-300 selection:bg-indigo-500 selection:text-white">
+  return <main className="evidence-page">
     <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
-    <article className="max-w-3xl mx-auto px-6 py-20 sm:py-28">
-      <Link href="/books/the-borrowed-light" className="inline-block font-mono text-xs text-indigo-300 hover:text-white tracking-widest uppercase transition-colors mb-12">← The Borrowed Light</Link>
+    <article className="evidence-container evidence-container--narrow">
+      <Link href="/books/the-borrowed-light" className="inline-block font-mono text-xs text-[var(--status-sourced)] hover:text-[var(--text-primary)] tracking-widest uppercase transition-colors mb-12">← The Borrowed Light</Link>
       <header className="border-l border-indigo-500 pl-6 sm:pl-8">
-        <p className="font-mono text-xs text-indigo-300 tracking-widest uppercase mb-5">[ New reader guide ]</p>
-        <h1 className="text-4xl sm:text-5xl font-light text-white leading-[1.1] tracking-tight mb-5">M-theory, plainly</h1>
-        <p className="text-xl text-zinc-300 font-light leading-relaxed">The physics vocabulary behind <em>The Borrowed Light</em>, and the boundary between what it can and cannot support.</p>
+        <p className="font-mono text-xs text-[var(--status-sourced)] tracking-widest uppercase mb-5">[ New reader guide ]</p>
+        <h1 className="text-4xl sm:text-5xl font-light text-[var(--text-primary)] leading-[1.1] tracking-tight mb-5">M-theory, plainly</h1>
+        <p className="text-xl text-[var(--text-secondary)] font-light leading-relaxed">The physics vocabulary behind <em>The Borrowed Light</em>, and the boundary between what it can and cannot support.</p>
       </header>
-      <section className="mt-12 border border-indigo-900/50 bg-indigo-950/20 p-6 sm:p-7 text-sm leading-relaxed text-zinc-300">
-        <p className="font-mono text-[10px] uppercase tracking-widest text-indigo-300">[ Reading boundary ]</p>
+      <section className="mt-12 border border-indigo-900/50 bg-indigo-950/20 p-6 sm:p-7 text-sm leading-relaxed text-[var(--text-secondary)]">
+        <p className="font-mono text-[10px] uppercase tracking-widest text-[var(--status-sourced)]">[ Reading boundary ]</p>
         <p className="mt-3">This is a guide to concepts, not a claim that fundamental physics explains a human life. The book&apos;s analogies are offered for their structure; they are not evidence.</p>
       </section>
       <section className="mt-14 space-y-10">
-        {questions.map(({ question, answer }) => <div key={question} className="border-b border-zinc-800 pb-10">
-          <h2 className="text-2xl font-light text-white leading-snug">{question}</h2>
-          <p className="mt-4 text-base leading-relaxed text-zinc-400">{answer}</p>
+        {questions.map(({ question, answer }) => <div key={question} className="border-b border-[var(--border-default)] pb-10">
+          <h2 className="text-2xl font-light text-[var(--text-primary)] leading-snug">{question}</h2>
+          <p className="mt-4 text-base leading-relaxed text-[var(--text-secondary)]">{answer}</p>
         </div>)}
       </section>
-      <section className="mt-14 border-t border-zinc-800 pt-8 text-sm leading-relaxed text-zinc-400">
-        <h2 className="font-mono text-xs uppercase tracking-widest text-zinc-300">Further reading</h2>
+      <section className="mt-14 border-t border-[var(--border-default)] pt-8 text-sm leading-relaxed text-[var(--text-secondary)]">
+        <h2 className="font-mono text-xs uppercase tracking-widest text-[var(--text-secondary)]">Further reading</h2>
         <ul className="mt-5 space-y-3">
-          <li><a className="text-indigo-300 underline underline-offset-4 hover:text-white" href="https://arxiv.org/abs/hep-th/9503124">Edward Witten, “String Theory Dynamics in Various Dimensions”</a></li>
-          <li><a className="text-indigo-300 underline underline-offset-4 hover:text-white" href="https://arxiv.org/abs/1806.08362">Obied, Ooguri, Spodyneiko, and Vafa, “De Sitter Space and the Swampland”</a></li>
-          <li><Link className="text-indigo-300 underline underline-offset-4 hover:text-white" href="/books/the-borrowed-light/read/what-m-theory-is-and-isnt">Appendix A: What M-Theory Actually Is and Isn&apos;t</Link></li>
+          <li><a className="text-[var(--status-sourced)] underline underline-offset-4 hover:text-[var(--text-primary)]" href="https://arxiv.org/abs/hep-th/9503124">Edward Witten, “String Theory Dynamics in Various Dimensions”</a></li>
+          <li><a className="text-[var(--status-sourced)] underline underline-offset-4 hover:text-[var(--text-primary)]" href="https://arxiv.org/abs/1806.08362">Obied, Ooguri, Spodyneiko, and Vafa, “De Sitter Space and the Swampland”</a></li>
+          <li><Link className="text-[var(--status-sourced)] underline underline-offset-4 hover:text-[var(--text-primary)]" href="/books/the-borrowed-light/read/what-m-theory-is-and-isnt">Appendix A: What M-Theory Actually Is and Isn&apos;t</Link></li>
         </ul>
       </section>
     </article>

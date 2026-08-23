@@ -12,7 +12,7 @@ function renderInline(text: string): ReactNode[] {
   let match: RegExpExecArray | null
   while ((match = pattern.exec(text)) !== null) {
     if (match.index > lastIndex) nodes.push(<Fragment key={key++}>{text.slice(lastIndex, match.index)}</Fragment>)
-    if (match[1] !== undefined) nodes.push(<strong key={key++} className="font-semibold text-zinc-200">{match[1]}</strong>)
+    if (match[1] !== undefined) nodes.push(<strong key={key++} className="font-semibold text-[var(--text-primary)]">{match[1]}</strong>)
     else nodes.push(<em key={key++}>{match[2]}</em>)
     lastIndex = pattern.lastIndex
   }
@@ -26,23 +26,23 @@ export default function MarkdownArticle({ blocks }: { blocks: MarkdownBlock[] })
     <div className="mt-14 max-w-3xl">
       {blocks.map((block, index) => {
         if (block.type === 'hr') {
-          return <hr key={index} className="my-12 border-zinc-800" />
+          return <hr key={index} className="my-12 border-[var(--border-default)]" />
         }
         if (block.type === 'list') {
           return (
-            <ul key={index} className="my-6 list-disc space-y-2 pl-6 text-base sm:text-lg text-zinc-400 leading-relaxed">
+            <ul key={index} className="my-6 list-disc space-y-2 pl-6 text-base sm:text-lg text-[var(--text-secondary)] leading-relaxed">
               {block.items.map((item, itemIndex) => <li key={itemIndex}>{renderInline(item)}</li>)}
             </ul>
           )
         }
         if (block.type === 'heading') {
           const content = renderInline(block.text)
-          if (block.level <= 1) return <h1 key={index} className="mt-16 mb-5 text-3xl sm:text-4xl font-light leading-tight text-white">{content}</h1>
-          if (block.level === 2) return <h2 key={index} className="mt-12 mb-3 text-2xl sm:text-3xl font-light text-white">{content}</h2>
-          if (block.level === 3) return <h3 key={index} className="mt-10 mb-2 text-xl font-medium text-zinc-200">{content}</h3>
-          return <h4 key={index} className="mt-8 mb-2 text-lg font-medium text-zinc-300">{content}</h4>
+          if (block.level <= 1) return <h1 key={index} className="mt-16 mb-5 text-3xl sm:text-4xl font-light leading-tight text-[var(--text-primary)]">{content}</h1>
+          if (block.level === 2) return <h2 key={index} className="mt-12 mb-3 text-2xl sm:text-3xl font-light text-[var(--text-primary)]">{content}</h2>
+          if (block.level === 3) return <h3 key={index} className="mt-10 mb-2 text-xl font-medium text-[var(--text-primary)]">{content}</h3>
+          return <h4 key={index} className="mt-8 mb-2 text-lg font-medium text-[var(--text-secondary)]">{content}</h4>
         }
-        return <p key={index} className="mb-6 text-base sm:text-lg text-zinc-400 leading-relaxed">{renderInline(block.text)}</p>
+        return <p key={index} className="mb-6 text-base sm:text-lg text-[var(--text-secondary)] leading-relaxed">{renderInline(block.text)}</p>
       })}
     </div>
   )

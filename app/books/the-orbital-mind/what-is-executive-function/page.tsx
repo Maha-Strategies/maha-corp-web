@@ -81,24 +81,24 @@ const articleJsonLd = {
 
 export default function WhatIsExecutiveFunctionPage() {
   return (
-    <main className="min-h-screen bg-[#0a0a0c] text-zinc-300 selection:bg-indigo-500 selection:text-white">
+    <main className="evidence-page">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }} />
-      <article className="max-w-3xl mx-auto px-6 py-20 sm:py-28">
-        <Link href="/books/the-orbital-mind" className="inline-block font-mono text-xs text-indigo-300 hover:text-white tracking-widest uppercase transition-colors mb-12">
+      <article className="evidence-container evidence-container--narrow">
+        <Link href="/books/the-orbital-mind" className="inline-block font-mono text-xs text-[var(--status-sourced)] hover:text-[var(--text-primary)] tracking-widest uppercase transition-colors mb-12">
           ← The Orbital Mind
         </Link>
 
-        <header className="border-b border-zinc-800 pb-10 mb-12">
-          <p className="font-mono text-xs text-indigo-300 tracking-widest uppercase mb-5">[ Plain-English psychology guide ]</p>
-          <h1 className="text-4xl sm:text-5xl font-light text-white leading-[1.1] tracking-tight mb-6">What is executive function?</h1>
-          <p className="text-xl text-zinc-300 font-light leading-relaxed">
+        <header className="border-b border-[var(--border-default)] pb-10 mb-12">
+          <p className="font-mono text-xs text-[var(--status-sourced)] tracking-widest uppercase mb-5">[ Plain-English psychology guide ]</p>
+          <h1 className="text-4xl sm:text-5xl font-light text-[var(--text-primary)] leading-[1.1] tracking-tight mb-6">What is executive function?</h1>
+          <p className="text-xl text-[var(--text-secondary)] font-light leading-relaxed">
             Executive function is the family of cognitive skills that helps us hold information in mind, resist an unhelpful impulse, shift when circumstances change, and keep a goal in view. It is not a personality type, a moral score, or a diagnosis.
           </p>
-          <p className="mt-7 font-mono text-xs text-zinc-500 tracking-widest uppercase">Mayone Maha Rajan · The Orbital Mind</p>
+          <p className="mt-7 font-mono text-xs text-[var(--text-muted)] tracking-widest uppercase">Mayone Maha Rajan · The Orbital Mind</p>
         </header>
 
         <ArticleTableOfContents contentId="article-content" />
-        <div id="article-content" data-article-content className="prose prose-invert prose-lg max-w-none prose-p:text-zinc-300 prose-p:leading-[1.85] prose-p:mb-7 prose-strong:text-white prose-a:text-indigo-300 prose-a:no-underline hover:prose-a:text-white prose-li:text-zinc-300 prose-li:leading-relaxed">
+        <div id="article-content" data-article-content className="prose prose-lg max-w-none prose-p:text-[var(--text-secondary)] prose-p:leading-[1.85] prose-p:mb-7 prose-strong:text-[var(--text-primary)] prose-a:text-[var(--status-sourced)] prose-a:no-underline hover:prose-a:text-[var(--text-primary)] prose-li:text-[var(--text-secondary)] prose-li:leading-relaxed">
           <h2>Short answer</h2>
           <p>
             Executive function is an umbrella term for the control processes we use when a response is not automatic: keeping a rule in mind, pausing before acting, ignoring interference, switching strategies, and organizing steps toward a goal. Research commonly identifies three core components—working memory, inhibitory control, and cognitive flexibility—while also recognizing that they are related without being one single ability. <a href={sources[0].href}>[1]</a> <a href={sources[1].href}>[2]</a>
@@ -173,27 +173,27 @@ export default function WhatIsExecutiveFunctionPage() {
           </p>
         </div>
 
-        <section className="mt-16 pt-8 border-t border-zinc-800">
-          <p className="font-mono text-xs text-indigo-300 tracking-widest uppercase mb-5">[ Sources ]</p>
+        <section className="mt-16 pt-8 border-t border-[var(--border-default)]">
+          <p className="font-mono text-xs text-[var(--status-sourced)] tracking-widest uppercase mb-5">[ Sources ]</p>
           <ol className="space-y-5">
             {sources.map((source, index) => (
               <li key={source.href} className="grid grid-cols-[1.5rem_1fr] gap-4 text-sm leading-relaxed">
-                <span className="font-mono text-zinc-600">{index + 1}</span>
+                <span className="font-mono text-[var(--text-muted)]">{index + 1}</span>
                 <div>
-                  <a href={source.href} className="text-zinc-200 hover:text-white transition-colors">{source.title}</a>
-                  <span className="text-zinc-500"> · {source.authors}</span>
-                  <p className="text-zinc-500 mt-1">{source.note}</p>
+                  <a href={source.href} className="text-[var(--text-primary)] hover:text-[var(--text-primary)] transition-colors">{source.title}</a>
+                  <span className="text-[var(--text-muted)]"> · {source.authors}</span>
+                  <p className="text-[var(--text-muted)] mt-1">{source.note}</p>
                 </div>
               </li>
             ))}
           </ol>
         </section>
 
-        <footer className="mt-16 pt-8 border-t border-zinc-800">
-          <p className="font-mono text-xs text-zinc-500 tracking-widest uppercase mb-4">[ Continue reading ]</p>
+        <footer className="mt-16 pt-8 border-t border-[var(--border-default)]">
+          <p className="font-mono text-xs text-[var(--text-muted)] tracking-widest uppercase mb-4">[ Continue reading ]</p>
           <div className="flex flex-col gap-3">
-            <Link href="/books/the-orbital-mind/the-governing-center" className="text-zinc-300 hover:text-white transition-colors">Read Chapter 1: The Governing Center ↗</Link>
-            <Link href="/books/the-orbital-mind" className="text-zinc-300 hover:text-white transition-colors">Return to The Orbital Mind ↗</Link>
+            <Link href="/books/the-orbital-mind/the-governing-center" className="text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">Read Chapter 1: The Governing Center ↗</Link>
+            <Link href="/books/the-orbital-mind" className="text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">Return to The Orbital Mind ↗</Link>
           </div>
         </footer>
       </article>

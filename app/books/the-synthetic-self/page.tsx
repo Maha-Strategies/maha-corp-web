@@ -51,29 +51,29 @@ export default function TheSyntheticSelfHub() {
   // is skipped because the page header already renders the title.
   const blocks = parseMarkdownBlocks(readBookMarkdown('the-synthetic-self') ?? '', { skipFirstH1: true })
   return (
-    <main className="min-h-screen bg-[#0a0a0c] text-zinc-300 selection:bg-indigo-500 selection:text-white">
+    <main className="evidence-page">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(bookJsonLd) }} />
-      <article className="max-w-4xl mx-auto px-6 py-20 sm:py-28">
+      <article className="evidence-container evidence-container--narrow">
         <header className="max-w-3xl border-l border-indigo-500 pl-6 sm:pl-8">
-          <p className="font-mono text-xs text-indigo-300 tracking-widest uppercase mb-5">
+          <p className="font-mono text-xs text-[var(--status-sourced)] tracking-widest uppercase mb-5">
             [ Maha Strategies // Open Edition ]
           </p>
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-light text-white leading-[1.08] tracking-tight mb-5">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl font-light text-[var(--text-primary)] leading-[1.08] tracking-tight mb-5">
             The Synthetic Self
           </h1>
-          <p className="text-lg sm:text-xl text-zinc-400 font-light leading-relaxed mb-3">
+          <p className="text-lg sm:text-xl text-[var(--text-secondary)] font-light leading-relaxed mb-3">
             Engineering the Soul of the Machine
           </p>
-          <p className="font-mono text-xs text-zinc-500 tracking-widest uppercase">
+          <p className="font-mono text-xs text-[var(--text-muted)] tracking-widest uppercase">
             By Mayone Maha Rajan
           </p>
         </header>
 
         <section className="mt-16 max-w-3xl">
-          <p className="text-xl sm:text-2xl text-zinc-200 font-light leading-relaxed mb-6">
+          <p className="text-xl sm:text-2xl text-[var(--text-primary)] font-light leading-relaxed mb-6">
             A large language model is not a mind that arrived from elsewhere. It is a compression of the human record—built from what we wrote, and therefore destined to reflect it back.
           </p>
-          <p className="text-base sm:text-lg text-zinc-400 leading-relaxed">
+          <p className="text-base sm:text-lg text-[var(--text-secondary)] leading-relaxed">
             This book follows that idea from the machinery of training through energy, hallucination, alignment, work, and responsibility. It is written for curious non-specialists who want the mechanism without the mythology—and the human consequences without the slogans.
           </p>
         </section>
