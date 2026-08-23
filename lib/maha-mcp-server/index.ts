@@ -3,7 +3,7 @@ import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js'
 import { CallToolRequestSchema, ListToolsRequestSchema } from '@modelcontextprotocol/sdk/types.js'
 
 import { EVIDENCE_BOUNDARY, MCP_SERVER_NAME, MCP_SERVER_VERSION, MCP_TOOLS, callMcpTool } from '../maha-mcp/index.ts'
-import { boundaryStatement, findCredentialFields, findUnboundedResponseStrings, type VerificationGrade } from '../maha-transport/boundary.ts'
+import { boundaryStatement, findUnboundedResponseStrings, isCredentialFieldName, type VerificationGrade } from '../maha-transport/boundary.ts'
 
 /**
  * An executable MCP server over stdio.
@@ -45,6 +45,32 @@ export type McpServerOptions = {
   root?: string
 }
 
+/**
+ * Reject credential-shaped arguments before dispatch.
+ *
+ * The only exception is a literal `false` declaration for the two evidence
+ * fields that state no credential was accepted or retained. Those are safety
+ * metadata, not credential values. `true`, strings, objects, arrays, and all
+ * other credential-shaped fields remain refusals.
+ */
+export function mcpCredentialArgumentFields(value: unknown, path = 'arguments', found: string[] = []): string[] {
+  if (Array.isArray(value)) {
+    value.forEach((entry, index) => mcpCredentialArgumentFields(entry, `${path}[${index}]`, found))
+    return found
+  }
+  if (!value || typeof value !== 'object') return found
+  for (const [key, entry] of Object.entries(value)) {
+    const fieldPath = `${path}.${key}`
+    if ((key === 'credentialsRetained' || key === 'credentialsAccepted') && entry === false) continue
+    if (isCredentialFieldName(key)) {
+      found.push(fieldPath)
+      continue
+    }
+    mcpCredentialArgumentFields(entry, fieldPath, found)
+  }
+  return found
+}
+
 export function createMahaMcpServer(options: McpServerOptions = {}): Server {
   const server = new Server(
     { name: MCP_SERVER_NAME, version: MCP_SERVER_VERSION },
@@ -65,7 +91,7 @@ export function createMahaMcpServer(options: McpServerOptions = {}): Server {
 
     // Refuse an inbound credential loudly. A caller who believed one was
     // required needs to find out here, not by having it quietly dropped.
-    const offending = findCredentialFields(args, 'arguments')
+    const offending = mcpCredentialArgumentFields(args)
     if (offending.length > 0) {
       return errorResult(name, 'credential_rejected', `This server never accepts credentials. Remove: ${offending.join(', ')}.`)
     }
