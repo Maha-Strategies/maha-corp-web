@@ -1,11 +1,11 @@
-import type { Metadata } from 'next'
 import Link from 'next/link'
 import { APP_STORE_LINKS } from '@/lib/app-store-links'
+import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
   title: 'Maha OS | Local-First Focus and Awareness App',
   description:
-    'Maha OS is a local-first mobile app built on edge-compute architecture — keeping your data on your device and reducing reliance on cloud surveillance. Available on iOS and Android.',
+    'Maha OS is a local-first mobile app built on edge-compute principles — keeping your data on device and reducing reliance on cloud tracking.',
   alternates: { canonical: 'https://www.mahastrategies.com/software' },
   openGraph: {
     title: 'Maha OS | Local-First Focus and Awareness App',
@@ -15,146 +15,117 @@ export const metadata: Metadata = {
   },
 }
 
+const relatedProducts = [
+  {
+    label: 'Maya',
+    description: 'A free, true-scale interactive field trip through Mayon Volcano, its geology, and history.',
+    href: '/apps/mayon',
+    cta: 'Explore this app →',
+  },
+  {
+    label: 'The Dream Engine',
+    description: 'A private companion product focused on reading, reflection, and attention practices.',
+    href: '/apps/the-engine',
+    cta: 'See the product →',
+  },
+]
+
 export default function SoftwarePage() {
   return (
-    <div className="min-h-screen bg-[#0a0a0c] text-zinc-300 font-sans p-8 md:p-24 selection:bg-indigo-500 selection:text-white">
-      <div className="max-w-3xl mx-auto">
-        <Link
-          href="/"
-          className="text-xs text-zinc-500 uppercase tracking-widest hover:text-white mb-8 block"
-        >
-          ← Back to Root Node
-        </Link>
-        <Link href="/apps" className="mb-6 block text-xs text-indigo-300 uppercase tracking-widest hover:text-white">
-          Explore all apps →
-        </Link>
-
-        <h1 className="text-4xl text-white font-light tracking-wide mb-6 leading-tight">
-          Maha OS: A Local-First Ecosystem
-        </h1>
-
-        <div className="prose prose-invert max-w-none font-light tracking-wide leading-relaxed">
-          <p className="text-xl text-zinc-400 mb-12">
-            Software is the primary medium of human-machine interaction — yet
-            mainstream platforms are increasingly built around data collection,
-            behavioral tracking, and attention capture. Maha OS is built on a
-            different premise: your device should work for you, and your data
-            should stay with you.
+    <main className="evidence-page">
+      <div className="evidence-container evidence-container--narrow">
+        <header className="border-t border-[var(--border-default)] pt-5">
+          <p className="evidence-kicker">[ Local-first infrastructure ]</p>
+          <h1 className="evidence-title evidence-title--product">Maha OS</h1>
+          <p className="evidence-lede mt-7">A local-first ecosystem for attention and privacy, designed to keep the most personal data and signals on your own device.</p>
+          <p className="evidence-copy mt-6">
+            Modern platforms increasingly optimize for surveillance and engagement. Maha OS is built around explicit boundaries: on-device processing, encrypted local storage,
+            and conservative network use.
           </p>
-
-          <h2 className="text-2xl text-white font-light mt-12 mb-4">
-            The Problem
-          </h2>
-          <p>
-            Much of the modern digital economy runs on attention. Many platforms
-            optimize aggressively for engagement, using algorithmic feedback loops
-            and behavioral tracking to maximize time-on-app — often at the
-            expense of the user&apos;s focus and intent. For people who care about
-            data privacy and reclaiming their attention, the default tools
-            increasingly work against those goals.
-          </p>
-
-          <h2 className="text-2xl text-white font-light mt-12 mb-4">
-            Edge-Compute Architecture
-          </h2>
-          <p>
-            Maha OS takes a local-first approach. The system is designed to
-            operate on your device, processing data locally rather than routing it
-            through external servers. By minimizing dependence on cloud APIs, the
-            app reduces the surface area for third-party tracking and keeps your
-            information under your control by default.
-          </p>
-
-          <h2 className="text-2xl text-white font-light mt-12 mb-4">
-            On-Device Storage
-          </h2>
-          <p>
-            Maha OS uses fast local storage engines such as MMKV and SQLite, with
-            data kept on the device and encrypted at rest. The design goal is
-            simple: treat compute and storage as private utilities, so your data
-            and decisions remain yours rather than becoming inputs to someone
-            else&apos;s system.
-          </p>
-
-          {/* RESEARCH COUPLING FRAMEWORK */}
-          <div className="mt-8 border border-zinc-900 bg-black/40 p-6 font-mono text-xs text-zinc-400">
-            <span className="text-white block font-bold mb-1 uppercase tracking-wider">
-              BACKGROUND READING //
-            </span>
-            For a deeper analysis of how attention-optimized systems shape user
-            behavior — and the case for local-first, user-controlled design —
-            see our companion article.
-            <Link
-              href="/research/architecture-of-attention"
-              className="block text-indigo-400 hover:text-indigo-300 mt-3 uppercase tracking-widest no-underline"
+          <div className="mt-9 flex flex-wrap gap-3">
+            <a
+              href={APP_STORE_LINKS.mahaOs.ios}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="evidence-action evidence-action--primary"
             >
-              [ READ: THE ARCHITECTURE OF ATTENTION &rarr; ]
-            </Link>
-            <Link
-              href="/on-device-ai-vs-cloud"
-              className="block text-indigo-400 hover:text-indigo-300 mt-3 uppercase tracking-widest no-underline"
+              Download on the App Store
+            </a>
+            <a
+              href={APP_STORE_LINKS.mahaOs.android}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="evidence-action evidence-action--secondary"
             >
-              [ DECISION GUIDE: ON-DEVICE AI VS CLOUD &rarr; ]
-            </Link>
+              Get it on Google Play
+            </a>
           </div>
+        </header>
 
-          <div className="mt-12 pt-8 border-t border-zinc-800">
-            <p className="text-white font-semibold mb-4 tracking-widest uppercase text-xs">
-              Get Maha OS
-            </p>
-            <p className="text-sm text-zinc-500 mb-6">
-              A local-first foundation for a more private, more intentional
-              relationship with your device. Available for both iOS and Android platforms.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4">
-              <a
-                href="https://apps.apple.com/us/app/maha-os/id6778333838"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-block text-center bg-white text-black px-8 py-3 text-xs font-bold uppercase tracking-widest hover:bg-zinc-200 transition-colors"
-              >
-                Download on the App Store
-              </a>
-              <a
-                href="https://play.google.com/store/apps/details?id=com.maha.os"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-block text-center border border-zinc-700 hover:border-zinc-500 hover:text-white px-8 py-3 text-xs font-bold uppercase tracking-widest transition-colors"
-              >
-                Get it on Google Play
-              </a>
-            </div>
+        <section className="evidence-section">
+          <p className="evidence-kicker">[ Architectural model ]</p>
+          <div className="grid gap-4 md:grid-cols-3">
+            <article className="evidence-card">
+              <p className="evidence-card-title">Edge compute</p>
+              <p className="evidence-card-copy mt-4">Primary inference and processing logic is designed for device-local execution where practical.</p>
+            </article>
+            <article className="evidence-card">
+              <p className="evidence-card-title">Private storage</p>
+              <p className="evidence-card-copy mt-4">Sensitive workflow state and behavior metrics remain device-bound with controlled sync boundaries.</p>
+            </article>
+            <article className="evidence-card">
+              <p className="evidence-card-title">Attention safety</p>
+              <p className="evidence-card-copy mt-4">Product behavior favors intention-aligned work over endless engagement loops.</p>
+            </article>
           </div>
+        </section>
 
-          <section className="mt-16 border-t border-zinc-800 pt-10">
-            <p className="text-white font-semibold mb-4 tracking-widest uppercase text-xs">More from Maha Strategies</p>
-            <p className="max-w-2xl text-sm leading-relaxed text-zinc-500">Different questions call for different instruments. Explore the other public apps from Maha Strategies.</p>
-            <div className="mt-6 grid gap-4 md:grid-cols-2 not-prose">
-              <article className="border border-amber-900/60 bg-amber-950/10 p-5">
-                <p className="font-mono text-[10px] uppercase tracking-widest text-amber-200">The Imagined Life companion</p>
-                <h2 className="mt-3 text-xl font-light text-white">The Dream Engine</h2>
-                <p className="mt-3 text-sm leading-relaxed text-zinc-400">Read, practice, and keep a private archive for attention, reflection, and ordinary action.</p>
-                <div className="mt-5 flex flex-wrap gap-4 text-sm">
-                  <Link href="/apps/the-engine" className="text-amber-100 underline">Explore the app</Link>
-                  <a href={APP_STORE_LINKS.dreamEngine.ios} target="_blank" rel="noopener noreferrer" className="text-amber-100 underline">App Store ↗</a>
-                  <a href={APP_STORE_LINKS.dreamEngine.android} target="_blank" rel="noopener noreferrer" className="text-amber-100 underline">Google Play ↗</a>
-                </div>
+        <section className="evidence-section">
+          <p className="evidence-kicker">[ Position statement ]
+          </p>
+          <p className="evidence-copy">
+            Many enterprise and consumer environments assume cloud-first design and optimize for ad-monetized scale. This is incompatible with high-stakes privacy.
+            Maha OS exists as a practical counterexample: a local-first baseline for individuals who want data continuity without the same collection model.
+          </p>
+          <p className="evidence-copy mt-6">
+            When used in a regulated workflow, this model can reduce attack surface and simplify governance of behavioral and personal telemetry.
+          </p>
+          <Link href="/research/architecture-of-attention" className="evidence-link mt-7 block">
+            Read: The Architecture of Attention ↗
+          </Link>
+          <a href="/on-device-ai-vs-cloud" className="evidence-link mt-3 block">
+            Read the companion on-device-vs-cloud decision guide ↗
+          </a>
+        </section>
+
+        <section className="evidence-section">
+          <p className="evidence-kicker">[ Related products ]</p>
+          <div className="mt-7 grid gap-4 sm:grid-cols-2">
+            {relatedProducts.map((item) => (
+              <article key={item.label} className="evidence-card">
+                <p className="evidence-kicker">{item.label}</p>
+                <p className="evidence-card-title mt-3">Companion application</p>
+                <p className="evidence-card-copy mt-3">{item.description}</p>
+                <Link href={item.href} className="evidence-link mt-5 inline-block">
+                  {item.cta}
+                </Link>
               </article>
-              <article className="border border-cyan-900/60 bg-cyan-950/10 p-5">
-                <p className="font-mono text-[10px] uppercase tracking-widest text-cyan-200">Educational volcano explorer</p>
-                <h2 className="mt-3 text-xl font-light text-white">Mayon</h2>
-                <p className="mt-3 text-sm leading-relaxed text-zinc-400">A free, true-scale interactive field trip through Mayon Volcano, its history, landscape, and volcanology.</p>
-                <div className="mt-5 flex flex-wrap gap-4 text-sm">
-                  <Link href="/apps/mayon" className="text-cyan-100 underline">Explore the app</Link>
-                  <a href={APP_STORE_LINKS.mayon.ios} target="_blank" rel="noopener noreferrer" className="text-cyan-100 underline">App Store ↗</a>
-                  <a href={APP_STORE_LINKS.mayon.android} target="_blank" rel="noopener noreferrer" className="text-cyan-100 underline">Google Play ↗</a>
-                  <a href={APP_STORE_LINKS.mayon.web} target="_blank" rel="noopener noreferrer" className="text-cyan-100 underline">Web ↗</a>
-                </div>
-              </article>
-            </div>
-          </section>
-        </div>
+            ))}
+          </div>
+        </section>
+
+        <section className="evidence-section">
+          <p className="evidence-kicker">[ Next step ]</p>
+          <p className="evidence-copy mt-5">
+            If your team is evaluating local-first software, we can run a bounded discovery and measurement pass to compare on-device retention, usability, and runtime behavior
+            before deployment.
+          </p>
+          <div className="mt-6 flex flex-wrap gap-3">
+            <Link href="/start" className="evidence-action evidence-action--primary">Request a private architecture read</Link>
+            <Link href="/context-compiler" className="evidence-action evidence-action--secondary">See context compiler evidence</Link>
+          </div>
+        </section>
       </div>
-    </div>
+    </main>
   )
 }

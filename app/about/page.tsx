@@ -58,57 +58,85 @@ const pillars = [
 ]
 
 export default function AboutPage() {
-  return <main className="min-h-screen bg-[#0a0a0c] px-6 py-20 text-zinc-300 sm:py-28">
-    <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(aboutJsonLd).replace(/</g, '\\u003c') }} />
-    <div className="mx-auto max-w-4xl">
-      <p className="font-mono text-[10px] uppercase tracking-widest text-indigo-300">[ Entity profile · Maha Strategies LLC ]</p>
-      <h1 className="mt-5 max-w-3xl text-4xl font-light leading-tight tracking-tight text-white sm:text-6xl">Research for systems that can remain autonomous.</h1>
-      <p className="mt-7 max-w-3xl text-lg leading-relaxed text-zinc-400">Maha Strategies LLC is an independent research, publishing, and technology-architecture organization. Its work concerns <Link className="text-zinc-200 underline underline-offset-4 hover:text-white" href="/systemic-sovereignty">systemic sovereignty</Link>: how individuals, companies, and nations can remain autonomous across semiconductor supply chains, software and on-device AI, and human attention.</p>
+  return (
+    <main className="evidence-page">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(aboutJsonLd).replace(/</g, '\\u003c') }} />
+      <div className="evidence-container">
+        <header className="border-t border-[var(--border-default)] pt-5">
+          <p className="evidence-kicker">[ Entity profile · Maha Strategies LLC ]</p>
+          <h1 className="evidence-title evidence-title--product">Research for systems that can remain autonomous.</h1>
+          <p className="evidence-lede mt-7">Maha Strategies LLC is an independent research, publishing, and technology-architecture organization. Its work spans semiconductor supply chains, software, and on-device AI, and the <Link className="evidence-link" href="/mps">evidence standards</Link> that make AI-assisted research reviewable.</p>
+        </header>
 
-      <section className="mt-14 border-y border-zinc-800 py-8">
-        <h2 className="font-mono text-xs uppercase tracking-widest text-zinc-500">The three-layer research model</h2>
-        <div className="mt-7 grid gap-7 md:grid-cols-3">
-          {pillars.map(([title, description]) => <div key={title}>
-            <h3 className="text-lg text-white">{title}</h3>
-            <p className="mt-3 text-sm leading-relaxed text-zinc-400">{description}</p>
-          </div>)}
-        </div>
-      </section>
-
-      <section className="mt-14 grid gap-10 border-b border-zinc-800 pb-14 md:grid-cols-[1fr_2fr]">
-        <h2 className="font-mono text-xs uppercase tracking-widest text-zinc-500">Leadership</h2>
-        <div id="mayone-maha-rajan">
-          <h3 className="text-2xl text-white">Mayone Maha Rajan</h3>
-          <p className="mt-2 font-mono text-xs uppercase tracking-widest text-indigo-300">Founder and Managing Director</p>
-          <p className="mt-5 max-w-2xl leading-relaxed text-zinc-400">Mayone Maha Rajan leads Maha Strategies&rsquo; research, editorial work, and advisory practice. He is responsible for the firm&rsquo;s published arguments, research direction, and the Maha Provenance Standard.</p>
-          <div className="mt-6 flex flex-wrap gap-x-6 gap-y-3 text-sm">
-            <a className="text-zinc-200 underline underline-offset-4 hover:text-white" href="https://www.mayonemaharajan.com" rel="me">Founder dossier ↗</a>
-            <a className="text-zinc-200 underline underline-offset-4 hover:text-white" href="https://github.com/mayonerajan" rel="me">GitHub ↗</a>
-            <a className="text-zinc-200 underline underline-offset-4 hover:text-white" href="https://www.linkedin.com/in/mayonrajan/" rel="me">LinkedIn ↗</a>
+        <section className="evidence-section" aria-label="The three-layer research model">
+          <p className="evidence-kicker">The three-layer research model</p>
+          <h2 className="evidence-section-title mt-4">A structure for boundary clarity before claims.</h2>
+          <div className="mt-7 grid gap-4 md:grid-cols-3">
+            {pillars.map(([title, description]) => (
+              <article key={title} className="evidence-card">
+                <p className="evidence-card-title">{title}</p>
+                <p className="evidence-card-copy mt-3">{description}</p>
+              </article>
+            ))}
           </div>
-        </div>
-      </section>
+        </section>
 
-      <section className="mt-14 grid gap-10 md:grid-cols-[1fr_2fr]">
-        <h2 className="font-mono text-xs uppercase tracking-widest text-zinc-500">Verifiable work</h2>
-        <div className="space-y-5 text-sm leading-relaxed text-zinc-400">
-          <p>The <Link className="text-zinc-200 underline underline-offset-4 hover:text-white" href="/mps">Maha Provenance Standard (MPS/0.1)</Link> is the firm&rsquo;s claim-level provenance framework for AI-assisted nonfiction. Its public archival record is available through <a className="text-zinc-200 underline underline-offset-4 hover:text-white" href="https://doi.org/10.5281/zenodo.21241308">Zenodo DOI 10.5281/zenodo.21241308 ↗</a>.</p>
-          <p>Research and advisory work distinguish sourced evidence, interpretation, and bounded speculation. Read the <Link className="text-zinc-200 underline underline-offset-4 hover:text-white" href="/method">method</Link>, browse <Link className="text-zinc-200 underline underline-offset-4 hover:text-white" href="/intelligence">intelligence</Link>, or <Link className="text-zinc-200 underline underline-offset-4 hover:text-white" href="/contact">contact Maha Strategies</Link>.</p>
-        </div>
-      </section>
-
-      <section className="mt-14 grid gap-10 border-t border-zinc-800 pt-10 md:grid-cols-[1fr_2fr]">
-        <h2 className="font-mono text-xs uppercase tracking-widest text-zinc-500">Public work</h2>
-        <div className="space-y-5 text-sm leading-relaxed text-zinc-400">
-          <p>Maha Strategies is the organization behind a connected public body of research, tools, books, and educational demonstrations. Each project has its own purpose and editorial boundary, and none is evidence for another. Engineering work is published at <a className="text-zinc-200 underline underline-offset-4 hover:text-white" href="https://github.com/Maha-Strategies" rel="me">github.com/Maha-Strategies ↗</a>.</p>
-          <div className="grid gap-4 sm:grid-cols-2">
-            <a className="border border-zinc-800 p-4 transition hover:border-zinc-600" href="https://research.mahastrategies.com"><span className="block text-zinc-200">Maha Strategies Research ↗</span><span className="mt-1 block text-xs text-zinc-500">Open research syntheses and preprints.</span></a>
-            <a className="border border-zinc-800 p-4 transition hover:border-zinc-600" href="https://publish.mahastrategies.com"><span className="block text-zinc-200">Agentic Book Publishing ↗</span><span className="mt-1 block text-xs text-zinc-500">Tools for authors preparing agent queries.</span></a>
-            <a className="border border-zinc-800 p-4 transition hover:border-zinc-600" href="https://www.themahaprinciple.com"><span className="block text-zinc-200">The Maha Principle ↗</span><span className="mt-1 block text-xs text-zinc-500">A reader-facing framework and book project.</span></a>
-            <a className="border border-zinc-800 p-4 transition hover:border-zinc-600" href="https://mayonrajan.com"><span className="block text-zinc-200">Mayon Volcano ↗</span><span className="mt-1 block text-xs text-zinc-500">A free educational volcano explorer.</span></a>
+        <section className="evidence-section" aria-label="Leadership">
+          <p className="evidence-kicker">Leadership</p>
+          <h2 className="evidence-section-title mt-4">Founder and operating boundary</h2>
+          <div id="mayone-maha-rajan" className="evidence-card">
+            <p className="evidence-card-title">Mayone Maha Rajan</p>
+            <p className="evidence-card-copy mt-2 evidence-kicker">Founder and Managing Director</p>
+            <p className="evidence-copy mt-5 text-sm">
+              Mayone Maha Rajan leads Maha Strategies&rsquo; research, editorial work, and advisory practice. He is responsible for the firm&rsquo;s published arguments, research direction, and the Maha Provenance Standard.
+            </p>
+            <div className="mt-6 flex flex-wrap gap-3 text-sm">
+              <a className="evidence-link" href="https://www.mayonemaharajan.com" rel="me">Founder dossier ↗</a>
+              <a className="evidence-link" href="https://github.com/mayonerajan" rel="me">GitHub ↗</a>
+              <a className="evidence-link" href="https://www.linkedin.com/in/mayonrajan/" rel="me">LinkedIn ↗</a>
+            </div>
           </div>
-        </div>
-      </section>
-    </div>
-  </main>
+        </section>
+
+        <section className="evidence-section" aria-label="Verifiable work">
+          <p className="evidence-kicker">Verifiable work</p>
+          <h2 className="evidence-section-title mt-4">What we publish as evidence, not marketing.</h2>
+          <div className="evidence-card">
+            <p className="evidence-copy">
+              The <Link className="evidence-link" href="/mps">Maha Provenance Standard (MPS/0.1)</Link> is the firm&rsquo;s claim-level provenance framework for AI-assisted nonfiction. Its public archival record is available through <a className="evidence-link" href="https://doi.org/10.5281/zenodo.21241308">Zenodo DOI 10.5281/zenodo.21241308 ↗</a>.
+            </p>
+            <p className="evidence-copy mt-5">
+              Research and advisory work separate sourced evidence, interpretation, and bounded speculation. Read the <Link className="evidence-link" href="/method">method</Link>, browse <Link className="evidence-link" href="/intelligence">intelligence</Link>, or <Link className="evidence-link" href="/contact">contact Maha Strategies</Link>.
+            </p>
+          </div>
+        </section>
+
+        <section className="evidence-section" aria-label="Public work">
+          <p className="evidence-kicker">Public work</p>
+          <h2 className="evidence-section-title mt-4">Projects that are intentionally separated by boundary.</h2>
+          <div className="grid gap-4 md:grid-cols-2">
+            <a className="evidence-card evidence-card-copy" href="https://research.mahastrategies.com" target="_blank" rel="noopener noreferrer">
+              <span className="evidence-card-title">Maha Strategies Research ↗</span>
+              <span className="mt-3 block">Open research syntheses and preprints.</span>
+            </a>
+            <a className="evidence-card evidence-card-copy" href="https://publish.mahastrategies.com" target="_blank" rel="noopener noreferrer">
+              <span className="evidence-card-title">Agentic Book Publishing ↗</span>
+              <span className="mt-3 block">Tools for authors preparing agent query workflows.</span>
+            </a>
+            <a className="evidence-card evidence-card-copy" href="https://www.themahaprinciple.com" target="_blank" rel="noopener noreferrer">
+              <span className="evidence-card-title">The Maha Principle ↗</span>
+              <span className="mt-3 block">A reader-facing framework and book project.</span>
+            </a>
+            <a className="evidence-card evidence-card-copy" href="https://mayonrajan.com" target="_blank" rel="noopener noreferrer">
+              <span className="evidence-card-title">Mayon Volcano ↗</span>
+              <span className="mt-3 block">A free educational volcano explorer.</span>
+            </a>
+          </div>
+          <div className="mt-8">
+            <a className="evidence-link" href="https://github.com/Maha-Strategies" rel="me">Engineering and repositories ↗</a>
+          </div>
+        </section>
+      </div>
+    </main>
+  )
 }

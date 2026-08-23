@@ -60,32 +60,59 @@ const graph = {
 }
 
 export default function KnowledgeNetworkPage() {
-  return <main className="min-h-screen bg-[#0a0a0c] px-6 py-20 text-zinc-300 sm:py-28">
-    <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(graph).replace(/</g, '\\u003c') }} />
-    <article className="mx-auto max-w-4xl">
-      <p className="font-mono text-[10px] uppercase tracking-widest text-cyan-300">[ Public entity and relationship map ]</p>
-      <h1 className="mt-5 max-w-3xl text-4xl font-light tracking-tight text-white sm:text-6xl">The Maha Knowledge Network</h1>
-      <p className="mt-7 max-w-3xl text-xl leading-relaxed text-zinc-300">A transparent guide to the public projects connected to Maha Strategies and Mayone Maha Rajan—what each one is for, who operates it, and where its authority begins and ends.</p>
+  return (
+    <main className="evidence-page">
+      <div className="evidence-container evidence-container--narrow">
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(graph).replace(/</g, '\\u003c') }} />
+        <section className="evidence-section">
+          <p className="evidence-kicker">[ Public entity and relationship map ]</p>
+          <h1 className="evidence-title">The Maha Knowledge Network</h1>
+          <p className="evidence-lede mt-7">
+            A transparent guide to the public projects connected to Maha Strategies and Mayone Maha Rajan — what each one is for, who
+            operates it, and where its authority begins and ends.
+          </p>
+        </section>
 
-      <section className="mt-14 border border-amber-900/50 bg-amber-950/10 p-7 text-sm leading-relaxed text-zinc-300">
-        <h2 className="text-lg font-medium text-amber-100">How to read this map</h2>
-        <p className="mt-3">A shared founder or publisher does not make one project evidence for another. Mayon&apos;s educational visualization follows its own methods and source record. Research papers state their own verification status. Publishing tools describe workflow infrastructure. Book material is limited to what may be made public under its publishing terms.</p>
-      </section>
+        <section className="evidence-section">
+          <p className="evidence-kicker">[ Interpretation policy ]</p>
+          <p className="evidence-copy">
+            A shared founder or publisher does not make one project evidence for another. Mayon&apos;s educational visualization follows
+            its own methods and source record. Research papers state their own verification status. Publishing tools describe workflow
+            infrastructure. Book material is limited to what may be made public under its publishing terms.
+          </p>
+        </section>
 
-      <section className="mt-14 grid gap-6">
-        {nodes.map((node) => <article key={node.name} className="border border-zinc-800 bg-[#0d1112] p-7 sm:p-9">
-          <p className="font-mono text-[10px] uppercase tracking-widest text-cyan-300">[ {node.label} ]</p>
-          <h2 className="mt-4 text-3xl font-light text-white"><a className="hover:text-cyan-200" href={node.href}>{node.name}</a></h2>
-          <p className="mt-4 max-w-3xl leading-relaxed text-zinc-400">{node.description}</p>
-          <p className="mt-5 border-l border-cyan-700 pl-4 text-sm leading-relaxed text-zinc-300"><span className="font-medium text-white">Relationship:</span> {node.relationship}</p>
-          <a className="mt-6 inline-block text-sm text-cyan-100 underline" href={node.href}>Open the relevant public page ↗</a>
-        </article>)}
-      </section>
+        <section className="evidence-section">
+          <p className="evidence-kicker">[ Public public nodes ]</p>
+          <div className="grid gap-4">
+            {nodes.map((node) => (
+              <article key={node.name} className="evidence-card">
+                <p className="evidence-kicker">{`[ ${node.label} ]`}</p>
+                <h2 className="evidence-card-title mt-3">
+                  <a className="hover:text-[var(--text-primary)]" href={node.href}>
+                    {node.name}
+                  </a>
+                </h2>
+                <p className="evidence-card-copy mt-3">{node.description}</p>
+                <p className="evidence-card-copy mt-4">Relationship: {node.relationship}</p>
+                <Link href={node.href} className="evidence-link mt-5 inline-block">
+                  Open the relevant public page ↗
+                </Link>
+              </article>
+            ))}
+          </div>
+        </section>
 
-      <section className="mt-16 border-t border-zinc-800 pt-10">
-        <h2 className="text-2xl text-white">Primary operator</h2>
-        <p className="mt-4 max-w-3xl leading-relaxed text-zinc-400">Maha Strategies LLC is an independent research, publishing, and technology-architecture organization, and the operating organization for the public applications and publishing tools above. <Link className="text-cyan-100 underline" href="/about">Read about Maha Strategies and Mayone Maha Rajan</Link>, or use the project-specific pages above for purpose, evidence, status, and contact boundaries.</p>
-      </section>
-    </article>
-  </main>
+        <section className="evidence-section">
+          <h2 className="evidence-section-title">Primary operator</h2>
+          <p className="evidence-copy mt-4">
+            Maha Strategies LLC is an independent research, publishing, and technology-architecture organization and the operating
+            organization for the public applications and publishing tools above. <Link href="/about" className="evidence-link">Read about Maha
+              Strategies and Mayone Maha Rajan</Link>, or use the project-specific pages above for purpose, evidence, and contact
+            boundaries.
+          </p>
+        </section>
+      </div>
+    </main>
+  )
 }

@@ -1,314 +1,358 @@
-// app/contact/page.tsx
-"use client";
+"use client"
 
-import React, { FormEvent, useEffect, useState } from 'react';
-import Link from 'next/link';
-import Script from 'next/script';
-import { trackConversion } from '@/components/ConversionTracker';
-import EngagementPath from '@/components/EngagementPath';
+import React, { FormEvent, useEffect, useState } from 'react'
+import Link from 'next/link'
+import Script from 'next/script'
 
-declare global { interface Window { mahaTurnstileComplete?: (token: string) => void; mahaTurnstileExpired?: () => void } }
+import { trackConversion } from '@/components/ConversionTracker'
+import EngagementPath from '@/components/EngagementPath'
 
-const OFFER_BY_SERVICE: Record<string, string> = {
-  verified_research: 'verified-research-brief', rapid_intelligence: 'rapid-intelligence-brief',
-  mps_evidence_audit: 'mps-evidence-audit', mps_audit: 'mps-evidence-audit',
-  token_request: 'mps-preflight', support: 'mps-preflight', general: 'rapid-intelligence-brief',
-};
-const TURNSTILE_SITE_KEY = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY;
+declare global {
+  interface Window {
+    mahaTurnstileComplete?: (token: string) => void
+    mahaTurnstileExpired?: () => void
+  }
+}
 
-function selectedServiceFromLocation() {
+const TURNSTILE_SITE_KEY = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY
+
+const OFFER_BY_SERVICE = {
+  verified_research: 'verified-research-brief',
+  rapid_intelligence: 'rapid-intelligence-brief',
+  mps_evidence_audit: 'mps-evidence-audit',
+  mps_audit: 'mps-evidence-audit',
+  token_request: 'mps-preflight',
+  support: 'mps-preflight',
+  general: 'rapid-intelligence-brief',
+} as const
+
+type ServiceCode = keyof typeof OFFER_BY_SERVICE
+
+const SERVICE_OPTIONS: Array<{ value: ServiceCode; label: string }> = [
+  { value: 'verified_research', label: 'Verified Research Brief — $2,500 / 10 business days' },
+  { value: 'rapid_intelligence', label: 'Rapid Intelligence Brief — from $500 / five business days' },
+  { value: 'mps_evidence_audit', label: 'MPS Evidence Audit — high-stakes document review' },
+  { value: 'mps_audit', label: 'MPS Evidence Audit — manuscript or report' },
+  { value: 'token_request', label: 'Cognitive Gateway Access Token Request' },
+  { value: 'support', label: 'Technical Support / Troubleshooting' },
+  { value: 'general', label: 'General Inquiry' },
+]
+
+function selectedServiceFromLocation(): ServiceCode {
   if (typeof window === 'undefined') return 'verified_research'
+
   const service = new URLSearchParams(window.location.search).get('service')
-  const supportedServices = new Set(['rapid_intelligence', 'verified_research', 'mps_evidence_audit', 'mps_audit', 'token_request', 'support', 'general'])
-  return service && supportedServices.has(service) ? service : 'verified_research'
+  return service && service in OFFER_BY_SERVICE ? (service as ServiceCode) : 'verified_research'
 }
 
 export default function ContactPage() {
-  const [state, setState] = useState({ success: false, error: null as string | null });
-  const [isPending, setIsPending] = useState(false);
-  const [selectedService, setSelectedService] = useState(selectedServiceFromLocation);
-  const [turnstileToken, setTurnstileToken] = useState('');
+  const [state, setState] = useState({ success: false, error: null as string | null })
+  const [isPending, setIsPending] = useState(false)
+  const [selectedService, setSelectedService] = useState<ServiceCode>(selectedServiceFromLocation)
+  const [turnstileToken, setTurnstileToken] = useState('')
 
   useEffect(() => {
-    if (state.success) trackConversion('contact_form_success');
-  }, [state.success]);
+    if (state.success) trackConversion('contact_form_success')
+  }, [state.success])
 
   useEffect(() => {
-    window.mahaTurnstileComplete = (token) => setTurnstileToken(token);
-    window.mahaTurnstileExpired = () => setTurnstileToken('');
-    return () => { delete window.mahaTurnstileComplete; delete window.mahaTurnstileExpired; };
-  }, []);
+    window.mahaTurnstileComplete = (token) => setTurnstileToken(token)
+    window.mahaTurnstileExpired = () => setTurnstileToken('')
+
+    return () => {
+      delete window.mahaTurnstileComplete
+      delete window.mahaTurnstileExpired
+    }
+  }, [])
 
   async function submit(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    setIsPending(true); setState({ success: false, error: null });
-    const form = new FormData(event.currentTarget);
-    const query = new URLSearchParams(window.location.search);
+    event.preventDefault()
+    setIsPending(true)
+    setState({ success: false, error: null })
+
+    const form = new FormData(event.currentTarget)
+    const query = new URLSearchParams(window.location.search)
     const body = {
       idempotencyKey: `contact:${crypto.randomUUID()}`,
       offerId: OFFER_BY_SERVICE[selectedService],
-      requester: { name: form.get('name'), email: form.get('email'), organization: form.get('organization') || undefined },
-      decision: form.get('decision'), question: form.get('message'), deadline: form.get('deadline') || undefined,
+      requester: {
+        name: form.get('name'),
+        email: form.get('email'),
+        organization: form.get('organization') || undefined,
+      },
+      decision: form.get('decision'),
+      question: form.get('message'),
+      deadline: form.get('deadline') || undefined,
       context: form.get('website') ? `Company or project URL: ${form.get('website')}` : undefined,
-      requesterAuthorized: true, website: form.get('website_trap') || undefined,
-      referralSource: form.get('referralSource'), referralDetail: form.get('referralDetail') || undefined, sourcePath: '/contact',
-      utmSource: query.get('utm_source') || undefined, utmMedium: query.get('utm_medium') || undefined, utmCampaign: query.get('utm_campaign') || undefined,
+      requesterAuthorized: true,
+      website: form.get('website_trap') || undefined,
+      referralSource: form.get('referralSource'),
+      referralDetail: form.get('referralDetail') || undefined,
+      sourcePath: '/contact',
+      utmSource: query.get('utm_source') || undefined,
+      utmMedium: query.get('utm_medium') || undefined,
+      utmCampaign: query.get('utm_campaign') || undefined,
       turnstileToken: turnstileToken || undefined,
-    };
+    }
+
     try {
-      const response = await fetch('/api/inbound-submissions', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
-      const result = await response.json() as { error?: { message?: string } };
-      if (!response.ok) throw new Error(result.error?.message ?? 'Your inquiry could not be sent.');
-      setState({ success: true, error: null });
-    } catch (error) { setState({ success: false, error: error instanceof Error ? error.message : 'Your inquiry could not be sent.' }); }
-    finally { setIsPending(false); }
+      const response = await fetch('/api/inbound-submissions', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body),
+      })
+      const result = await response.json() as { error?: { message?: string } }
+      if (!response.ok) throw new Error(result.error?.message ?? 'Your inquiry could not be sent.')
+      setState({ success: true, error: null })
+    } catch (error) {
+      setState({ success: false, error: error instanceof Error ? error.message : 'Your inquiry could not be sent.' })
+    } finally {
+      setIsPending(false)
+    }
   }
 
   return (
-    <main className="min-h-screen bg-[#0a0a0c] text-[#e0e0e0] py-16 px-6 sm:px-12 font-mono selection:bg-indigo-500 selection:text-white">
-      <div className="max-w-3xl mx-auto">
-        
-        {/* TOP STATUS LINE */}
-        <header className="text-xs text-gray-500 mb-12 border-b border-gray-800 pb-4 flex justify-between items-center">
-          <span>[ MAHA STRATEGIES // INQUIRY ]</span>
-          <span className="text-emerald-400">REPLY: WITHIN TWO BUSINESS DAYS</span>
+    <main className="evidence-page">
+      <div className="evidence-container evidence-container--narrow">
+        <header className="border-t border-[var(--border-default)] pt-5">
+          <p className="evidence-kicker flex justify-between items-start gap-3">
+            <span>[ MAHA STRATEGIES // INQUIRY ]</span>
+            <span className="text-[var(--status-verified)]">REPLY: WITHIN TWO BUSINESS DAYS</span>
+          </p>
+          <h1 className="evidence-title evidence-title--product mt-6">Start an inquiry</h1>
+          <p className="evidence-lede mt-6">
+            Select your objective first. For a Rapid Intelligence Brief or Verified Research Brief, we respond within two
+            business days with a scope—or a clear reason this is not a fit.
+          </p>
         </header>
 
-        <h1 className="font-sans text-2xl sm:text-4xl font-bold tracking-tight text-white uppercase mb-4">
-          Start an inquiry
-        </h1>
+        <section className="evidence-section" aria-label="Path and controls">
+          <EngagementPath tone="paper" />
+        </section>
 
-        <p className="text-sm text-gray-400 leading-relaxed mb-12 font-sans">
-          Start with the decision you need to make. For a Rapid Intelligence Brief or Verified Research Brief, we reply within two business days with a scope—or tell you plainly if we are not the right fit.
-        </p>
-
-        <EngagementPath className="mb-12" />
-
-        {/* CONTACT FORM SECTION */}
-        <section className="mb-12">
-          <h2 className="text-xs text-indigo-400 uppercase tracking-widest border-b border-gray-900 pb-2 mb-6">
-            01 // Tell us what you need
-          </h2>
-          
+        <section className="evidence-section" aria-label="Inquiry form">
+          <p className="evidence-kicker">01 // Decision intake</p>
+          <h2 className="evidence-section-title mt-4">Tell us what you need decided.</h2>
           {state.success ? (
-            <div className="bg-emerald-950/20 border border-emerald-900 p-8 text-center space-y-4">
-               <p className="text-emerald-400 font-bold tracking-widest uppercase text-sm">
-                 [ INQUIRY RECEIVED ]
-               </p>
-               <p className="font-sans text-zinc-400 text-sm">
-                 Your inquiry has been received. Maha Strategies will respond within two business days.
-               </p>
+            <div className="evidence-inset mt-7 border border-[var(--status-verified)] bg-[rgba(16,185,129,0.07)]">
+              <p className="evidence-kicker text-[var(--status-verified)]">[ INQUIRY RECEIVED ]</p>
+              <p className="evidence-copy mt-4">Your inquiry has been received. Maha Strategies will respond within two business days.</p>
             </div>
           ) : (
-            <form 
-              onSubmit={submit}
-              className="space-y-6 font-sans bg-black/30 border border-gray-900 p-6 sm:p-8"
-            >
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                {/* NAME */}
+            <form onSubmit={submit} className="evidence-card mt-8">
+              <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
                 <div className="space-y-2">
-                  <label htmlFor="name" className="block text-xs text-gray-400 uppercase tracking-widest font-mono">
-                    Your name
-                  </label>
+                  <label htmlFor="name" className="block text-xs evidence-card-copy uppercase">Your name</label>
                   <input
                     type="text"
                     id="name"
                     name="name"
                     required
                     disabled={isPending}
-                    className="w-full bg-zinc-900/50 border border-zinc-800 text-white text-sm px-4 py-2.5 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-colors disabled:opacity-50"
+                    className="evidence-input w-full"
                     placeholder="Jane Doe"
                   />
                 </div>
 
-                {/* EMAIL */}
                 <div className="space-y-2">
-                  <label htmlFor="email" className="block text-xs text-gray-400 uppercase tracking-widest font-mono">
-                    Work email
-                  </label>
+                  <label htmlFor="email" className="block text-xs evidence-card-copy uppercase">Work email</label>
                   <input
                     type="email"
                     id="email"
                     name="email"
                     required
                     disabled={isPending}
-                    className="w-full bg-zinc-900/50 border border-zinc-800 text-white text-sm px-4 py-2.5 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-colors disabled:opacity-50"
+                    className="evidence-input w-full"
                     placeholder="jane@example.com"
                   />
                 </div>
 
                 <div className="space-y-2">
-                  <label htmlFor="organization" className="block text-xs text-gray-400 uppercase tracking-widest font-mono">Organization or project</label>
-                  <input type="text" id="organization" name="organization" required disabled={isPending} className="w-full bg-zinc-900/50 border border-zinc-800 text-white text-sm px-4 py-2.5 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-colors disabled:opacity-50" placeholder="Company, publication, or project" />
+                  <label htmlFor="organization" className="block text-xs evidence-card-copy uppercase">Organization or project</label>
+                  <input
+                    type="text"
+                    id="organization"
+                    name="organization"
+                    required
+                    disabled={isPending}
+                    className="evidence-input w-full"
+                    placeholder="Company, publication, or project"
+                  />
+                </div>
+
+                <div className="space-y-2">
+                  <label htmlFor="subject" className="block text-xs evidence-card-copy uppercase">What can we help with?</label>
+                  <select
+                    id="subject"
+                    name="subject"
+                    value={selectedService}
+                    onChange={(event) => setSelectedService(event.target.value as ServiceCode)}
+                    disabled={isPending}
+                    className="evidence-input w-full"
+                  >
+                    {SERVICE_OPTIONS.map((option) => <option key={option.value} value={option.value}>{option.label}</option>)}
+                  </select>
                 </div>
               </div>
 
-              {/* SUBJECT / INQUIRY TYPE */}
-              <div className="space-y-2">
-                <label htmlFor="subject" className="block text-xs text-gray-400 uppercase tracking-widest font-mono">
-                  What can we help with?
-                </label>
-                <select
-                  id="subject"
-                  name="subject"
-                  value={selectedService}
-                  onChange={(event) => setSelectedService(event.target.value)}
-                  disabled={isPending}
-                  className="w-full bg-zinc-900/50 border border-zinc-800 text-white text-sm px-4 py-2.5 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-colors appearance-none disabled:opacity-50"
-                >
-                  <option value="verified_research">Verified Research Brief — $2,500 / 10 business days</option>
-                  <option value="rapid_intelligence">Rapid Intelligence Brief — from $500 / five business days</option>
-                  <option value="mps_evidence_audit">MPS Evidence Audit — high-stakes document review</option>
-                  <option value="mps_audit">MPS Evidence Audit — manuscript or report</option>
-                  <option value="token_request">Cognitive Gateway Access Token Request</option>
-                  <option value="support">Technical Support / Troubleshooting</option>
-                  <option value="general">General Inquiry</option>
-                  
-                </select>
-              </div>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+              <div className="mt-6 grid grid-cols-1 gap-6 sm:grid-cols-2">
                 <div className="space-y-2">
-                  <label htmlFor="decision" className="block text-xs text-gray-400 uppercase tracking-widest font-mono">
-                    Decision to inform
-                  </label>
+                  <label htmlFor="decision" className="block text-xs evidence-card-copy uppercase">Decision to inform</label>
                   <input
                     type="text"
                     id="decision"
                     name="decision"
                     required
                     disabled={isPending}
-                    className="w-full bg-zinc-900/50 border border-zinc-800 text-white text-sm px-4 py-2.5 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-colors disabled:opacity-50"
+                    className="evidence-input w-full"
                     placeholder="An investment, vendor, or strategy decision"
                   />
                 </div>
                 <div className="space-y-2">
-                  <label htmlFor="deadline" className="block text-xs text-gray-400 uppercase tracking-widest font-mono">
-                    Decision deadline (optional)
-                  </label>
+                  <label htmlFor="deadline" className="block text-xs evidence-card-copy uppercase">Decision deadline (optional)</label>
                   <input
                     type="text"
                     id="deadline"
                     name="deadline"
                     disabled={isPending}
-                    className="w-full bg-zinc-900/50 border border-zinc-800 text-white text-sm px-4 py-2.5 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-colors disabled:opacity-50"
+                    className="evidence-input w-full"
                     placeholder="e.g. 15 August 2026"
                   />
                 </div>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                <div className="space-y-2"><label htmlFor="website" className="block text-xs text-gray-400 uppercase tracking-widest font-mono">Company or project URL (optional)</label><input type="url" id="website" name="website" disabled={isPending} className="w-full bg-zinc-900/50 border border-zinc-800 text-white text-sm px-4 py-2.5 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-colors disabled:opacity-50" placeholder="https://example.com" /></div>
-                <div className="space-y-2"><label htmlFor="referralSource" className="block text-xs text-gray-400 uppercase tracking-widest font-mono">How did you find Maha?</label><select id="referralSource" name="referralSource" defaultValue="search" disabled={isPending} className="w-full bg-zinc-900/50 border border-zinc-800 text-white text-sm px-4 py-2.5"><option value="search">Search</option><option value="developer_directory">Developer directory</option><option value="referral">Referral</option><option value="social">Social media</option><option value="newsletter">Newsletter</option><option value="event">Event or community</option><option value="direct">Direct visit</option><option value="other">Other</option></select></div>
+              <div className="mt-6 grid grid-cols-1 gap-6 sm:grid-cols-2">
+                <div className="space-y-2">
+                  <label htmlFor="website" className="block text-xs evidence-card-copy uppercase">Company or project URL (optional)</label>
+                  <input
+                    type="url"
+                    id="website"
+                    name="website"
+                    disabled={isPending}
+                    className="evidence-input w-full"
+                    placeholder="https://example.com"
+                  />
+                </div>
+                <div className="space-y-2">
+                  <label htmlFor="referralSource" className="block text-xs evidence-card-copy uppercase">How did you find Maha?</label>
+                  <select
+                    id="referralSource"
+                    name="referralSource"
+                    defaultValue="search"
+                    disabled={isPending}
+                    className="evidence-input w-full"
+                  >
+                    <option value="search">Search</option>
+                    <option value="developer_directory">Developer directory</option>
+                    <option value="referral">Referral</option>
+                    <option value="social">Social media</option>
+                    <option value="newsletter">Newsletter</option>
+                    <option value="event">Event or community</option>
+                    <option value="direct">Direct visit</option>
+                    <option value="other">Other</option>
+                  </select>
+                </div>
               </div>
-              <div className="space-y-2"><label htmlFor="referralDetail" className="block text-xs text-gray-400 uppercase tracking-widest font-mono">Referral detail (optional)</label><input type="text" id="referralDetail" name="referralDetail" disabled={isPending} className="w-full bg-zinc-900/50 border border-zinc-800 text-white text-sm px-4 py-2.5" placeholder="e.g. Google, Glama, a colleague, or publication" /></div>
 
-              {/* MESSAGE */}
-              <div className="space-y-2">
-                <label htmlFor="message" className="block text-xs text-gray-400 uppercase tracking-widest font-mono">
-                  Your question
-                </label>
+              <div className="mt-6 space-y-2">
+                <label htmlFor="referralDetail" className="block text-xs evidence-card-copy uppercase">Referral detail (optional)</label>
+                <input
+                  type="text"
+                  id="referralDetail"
+                  name="referralDetail"
+                  disabled={isPending}
+                  className="evidence-input w-full"
+                  placeholder="e.g. Google, Glama, a colleague, or publication"
+                />
+              </div>
+
+              <div className="mt-6 space-y-2">
+                <label htmlFor="message" className="block text-xs evidence-card-copy uppercase">Your question</label>
                 <textarea
                   id="message"
                   name="message"
                   rows={5}
                   required
                   disabled={isPending}
-                  className="w-full bg-zinc-900/50 border border-zinc-800 text-white text-sm px-4 py-3 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-colors resize-y disabled:opacity-50"
+                  className="evidence-input w-full resize-y"
                   placeholder="What question do you need answered, and what would change if the answer were different?"
-                ></textarea>
+                />
               </div>
 
-              <div className="hidden" aria-hidden="true"><label htmlFor="website_trap">Leave this blank</label><input id="website_trap" name="website_trap" tabIndex={-1} autoComplete="off" /></div>
-              {TURNSTILE_SITE_KEY && <><Script src="https://challenges.cloudflare.com/turnstile/v0/api.js" strategy="afterInteractive" /><div className="cf-turnstile" data-sitekey={TURNSTILE_SITE_KEY} data-action="contact_inquiry" data-callback="mahaTurnstileComplete" data-expired-callback="mahaTurnstileExpired" /></>}
+              <div className="hidden" aria-hidden="true">
+                <label htmlFor="website_trap">Leave this blank</label>
+                <input id="website_trap" name="website_trap" tabIndex={-1} autoComplete="off" />
+              </div>
 
-              {/* ERROR STATE */}
-              {state.error && (
-                <p className="text-red-400 text-xs font-mono uppercase tracking-widest">
-                  [ ERROR: {state.error} ]
-                </p>
+              {TURNSTILE_SITE_KEY && (
+                <>
+                  <Script src="https://challenges.cloudflare.com/turnstile/v0/api.js" strategy="afterInteractive" />
+                  <div
+                    className="cf-turnstile mt-6"
+                    data-sitekey={TURNSTILE_SITE_KEY}
+                    data-action="contact_inquiry"
+                    data-callback="mahaTurnstileComplete"
+                    data-expired-callback="mahaTurnstileExpired"
+                  />
+                </>
               )}
 
-              {/* SUBMIT BUTTON */}
-              <div className="pt-2">
-                <button
-                  type="submit"
-                  disabled={isPending}
-                  className="bg-indigo-600 hover:bg-indigo-500 text-white text-xs uppercase tracking-widest font-mono px-6 py-3 transition-colors flex items-center justify-center w-full sm:w-auto disabled:bg-indigo-900 disabled:cursor-not-allowed"
-                >
-                  {isPending ? "Sending..." : "Send inquiry \u2192"}
-                </button>
-              </div>
+              {state.error && <p className="evidence-kicker mt-6 text-[var(--status-unverified)]">[ ERROR: {state.error} ]</p>}
+
+              <button
+                type="submit"
+                disabled={isPending}
+                className="evidence-action evidence-action--primary mt-8 w-full disabled:opacity-50 disabled:cursor-not-allowed sm:w-auto"
+              >
+                {isPending ? 'Sending...' : 'Send inquiry →'}
+              </button>
             </form>
           )}
         </section>
 
-        {/* PGP / ALTERNATIVE CONTACT */}
-        <section className="mb-12">
-          <h2 className="text-xs text-indigo-400 uppercase tracking-widest border-b border-gray-900 pb-2 mb-4">
-            02 // Contact directly
-          </h2>
-          <p className="text-sm text-gray-300 leading-relaxed font-sans mb-4">
-            If you prefer not to use the form, email{' '}
-            <a href="mailto:mayone@mahastrategies.com" className="text-indigo-400 hover:text-white underline">
-              mayone@mahastrategies.com
-            </a>{' '}or by phone at{' '}
-            <a href="tel:+13322138380" className="text-indigo-400 hover:text-white underline">
-              +1 332 213 8380
-            </a>.
+        <section className="evidence-section" aria-label="Direct contact options">
+          <p className="evidence-kicker">02 // Direct contact</p>
+          <h2 className="evidence-section-title mt-4">Contact without the form</h2>
+          <p className="evidence-copy mt-5">
+            Email <a href="mailto:mayone@mahastrategies.com" className="evidence-link">mayone@mahastrategies.com</a> or call{' '}
+            <a href="tel:+13322138380" className="evidence-link">+1 332 213 8380</a>. Founder site:{' '}
+            <a href="https://www.mayonemaharajan.com" className="evidence-link" rel="noopener noreferrer">www.mayonemaharajan.com</a>.
           </p>
         </section>
 
-        {/* REGISTERED ENTITY / BUSINESS INFORMATION */}
-        <section className="mb-12">
-          <h2 className="text-xs text-indigo-400 uppercase tracking-widest border-b border-gray-900 pb-2 mb-6">
-            03 // Business details
-          </h2>
-          <address className="not-italic font-sans text-sm text-gray-300 leading-relaxed space-y-4">
-            <div>
-              <p className="text-white font-semibold">Maha Strategies LLC</p>
-              <p className="text-gray-400">
+        <section className="evidence-section" aria-label="Business details">
+          <p className="evidence-kicker">03 // Business details</p>
+          <h2 className="evidence-section-title mt-4">Entity information</h2>
+          <div className="mt-6 grid gap-4 text-sm">
+            <p className="evidence-copy">
+              <span className="evidence-kicker">Entity</span>
+              <span className="block mt-2 text-[var(--text-primary)]">Maha Strategies LLC</span>
+            </p>
+            <p className="evidence-copy">
+              <span className="evidence-kicker">Address</span>
+              <span className="block mt-2 text-[var(--text-secondary)]">
                 1021 E Lincolnway, Unit #1533<br />
                 Cheyenne, WY 82001<br />
                 United States
-              </p>
-            </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-2">
-              <p>
-                <span className="text-gray-500 text-xs uppercase tracking-widest font-mono block mb-1">Phone</span>
-                <a href="tel:+13322138380" className="text-indigo-400 hover:text-white transition-colors">
-                  +1 332 213 8380
-                </a>
-              </p>
-              <p>
-                <span className="text-gray-500 text-xs uppercase tracking-widest font-mono block mb-1">Email</span>
-                <a href="mailto:mayone@mahastrategies.com" className="text-indigo-400 hover:text-white transition-colors">
-                  mayone@mahastrategies.com
-                </a>
-              </p>
-              <p>
-                <span className="text-gray-500 text-xs uppercase tracking-widest font-mono block mb-1">Website</span>
-                <a href="https://www.mayonemaharajan.com" className="text-indigo-400 hover:text-white transition-colors" rel="noopener noreferrer">
-                  www.mayonemaharajan.com
-                </a>
-              </p>
-            </div>
-          </address>
+              </span>
+            </p>
+            <p className="evidence-copy">
+              <span className="evidence-kicker">Reference documents</span>
+              <span className="mt-2 block">
+                <Link href="/about" className="evidence-link">About the firm ↗</Link>
+              </span>
+            </p>
+          </div>
         </section>
 
-        {/* FOOTER */}
-        <footer className="mt-16 pt-8 border-t border-gray-900 flex flex-col sm:flex-row justify-between gap-4 text-xs">
-          <Link href="/" className="text-gray-600 hover:text-white transition-colors">
-            [ &larr; Return home ]
-          </Link>
-          <div className="flex flex-col sm:flex-row gap-4">
-            <Link href="/research/mcp" className="text-indigo-400 hover:text-white transition-colors">
-              [ API documentation &#8599; ]
-            </Link>
+        <footer className="evidence-section">
+          <div className="evidence-inset flex flex-wrap gap-4">
+            <Link href="/" className="evidence-link">[ Home ↗ ]</Link>
+            <Link href="/mps" className="evidence-link">[ MPS overview ↗ ]</Link>
+            <Link href="/research/mcp" className="evidence-link">[ API documentation ↗ ]</Link>
           </div>
         </footer>
-
       </div>
     </main>
-  );
+  )
 }

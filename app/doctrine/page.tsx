@@ -7,248 +7,140 @@ export const metadata: Metadata = {
   alternates: { canonical: 'https://www.mahastrategies.com/doctrine' },
 }
 
+const doctrineBriefs = [
+  { href: '/doctrine/briefs/soil-gut-brain-axis', label: 'The Soil-Gut-Brain Axis', kicker: '[ BRIEF 01 ]' },
+  { href: '/doctrine/briefs/overclocked', label: 'Overclocked: The Physics of Anxiety', kicker: '[ BRIEF 02 ]' },
+  { href: '/doctrine/briefs/physics-of-spirit', label: 'The Physics of Spirit', kicker: '[ BRIEF 03 ]' },
+  { href: '/doctrine/briefs/protocol-of-precision', label: 'Protocol of Precision', kicker: '[ BRIEF 04 ]' },
+  { href: '/doctrine/briefs/strategic-gravity', label: 'Strategic Gravity', kicker: '[ BRIEF 05 ]' },
+  { href: '/doctrine/briefs/harmonic-command', label: 'The Harmonic Command', kicker: '[ BRIEF 06 ]' },
+  { href: '/doctrine/briefs/asymmetric-soundscape', label: 'The Asymmetric Soundscape', kicker: '[ BRIEF 07 ]' },
+  { href: '/doctrine/briefs/visionarys-standard', label: "The Visionary&apos;s Standard", kicker: '[ BRIEF 08 ]' },
+  { href: '/doctrine/briefs/the-ordeal', label: 'The Ordeal: Earned Identity', kicker: '[ BRIEF 09 ]' },
+  { href: '/doctrine/briefs/consumer-to-producer', label: 'Consumer to Producer', kicker: '[ BRIEF 10 ]' },
+  { href: '/doctrine/briefs/saturnian-vision', label: 'The Saturnian Vision', kicker: '[ BRIEF 11 ]' },
+]
+
 export default function DoctrinePage() {
   return (
-    <div className="min-h-screen bg-[#0a0a0c] text-zinc-300 font-sans p-8 md:p-24 selection:bg-indigo-500 selection:text-white">
-      <div className="max-w-4xl mx-auto">
-        <h1 className="text-4xl text-white font-light tracking-wide mb-6 leading-tight">
-          Intellectual Property & Foundational Doctrine
-        </h1>
-        
-        <div className="prose prose-invert max-w-none font-light tracking-wide leading-relaxed">
-          <p>
-            Technology is useless if the mind operating it is compromised. As platforms weaponize algorithmic feedback loops, human cognitive agency is under unprecedented assault. 
-          </p>
-          <p>
-            Through our intellectual property division, Maha Strategies publishes foundational frameworks, sovereign blueprints, and strategic research designed to equip elite actors to resist narrative capture.
-          </p>
+    <main className="evidence-page">
+      <div className="evidence-container">
+        <section className="evidence-section">
+          <p className="evidence-kicker">[ Published doctrine ]</p>
+          <h1 className="evidence-title">Intellectual Property &amp; Foundational Doctrine</h1>
+          <div className="evidence-copy mt-7 space-y-5">
+            <p>
+              Technology is useless if the mind operating it is compromised. As platforms weaponize algorithmic feedback loops,
+              human cognitive agency is under unprecedented assault.
+            </p>
+            <p>
+              Through our intellectual property division, Maha Strategies publishes foundational frameworks, sovereign blueprints, and
+              strategic research designed to equip practitioners to resist narrative capture.
+            </p>
+          </div>
+        </section>
 
-          <h2 className="text-2xl text-white font-light mt-12 mb-4">The Maha Principle</h2>
-          <p>
-            Our primary doctrine, <em>The Maha Principle: The Architecture of Human Flourishing</em>, is an 81,015-word strategic framework designed to reclaim the human biological and cognitive baseline from extractive industrial and technological systems.
-          </p>
-          <p>
-            It establishes the theoretical architecture for Metabolic Sovereignty, Attentional Captivity, and the Nurturing Warrior archetype—the direct philosophy powering Maha OS.
-          </p>
+        <section className="evidence-section">
+          <h2 className="evidence-section-title">The Maha Principle</h2>
+          <div className="evidence-copy mt-5 space-y-5">
+            <p>
+              Our primary doctrine, <em>The Maha Principle: The Architecture of Human Flourishing</em>, is an 81,015-word strategic
+              framework designed to reclaim the human biological and cognitive baseline from extractive industrial and technological systems.
+            </p>
+            <p>
+              It establishes the theoretical architecture for Metabolic Sovereignty, Attentional Captivity, and the Nurturing Warrior
+              archetype—the direct philosophy powering Maha OS.
+            </p>
+          </div>
 
-          {/* THE MAHA PRINCIPLE EXTERNAL LINK */}
-          <a 
-            href="https://www.mayonemaharajan.com/concepts/the-maha-principle" 
+          <a
+            href="https://www.mayonemaharajan.com/concepts/the-maha-principle"
             target="_blank"
             rel="noopener noreferrer"
-            className="group block mt-8 p-6 border-l-4 border-indigo-500 bg-indigo-950/10 hover:bg-indigo-950/20 transition-colors no-underline"
+            className="mt-8 block evidence-card"
           >
-            <p className="font-mono text-xs text-indigo-400 mb-2 uppercase tracking-widest m-0">
-              [ EXTERNAL PORTAL // DISCOVER MORE ]
-            </p>
-            <h3 className="font-sans text-xl font-bold text-white uppercase m-0 mt-2">
-              Explore The Maha Principle
-            </h3>
-            <p className="font-serif text-sm text-zinc-400 italic mt-2 mb-0">
-              Visit the official domain for comprehensive insights on the foundational framework.
-            </p>
-            <div className="mt-4 font-mono text-xs text-zinc-500 group-hover:text-white transition-colors">
-              ACCESS PORTAL ↗
-            </div>
+            <p className="evidence-kicker">[ EXTERNAL PORTAL // DISCOVER MORE ]</p>
+            <h3 className="evidence-card-title mt-3">Explore The Maha Principle</h3>
+            <p className="evidence-copy mt-3">Visit the official domain for comprehensive insights on the foundational framework.</p>
+            <p className="evidence-kicker mt-4">ACCESS PORTAL ↗</p>
           </a>
+        </section>
 
-          {/* THE MAHA PROVENANCE STANDARD */}
-          <h2 className="text-2xl text-white font-light mt-16 mb-4">The Maha Provenance Standard</h2>
-          <p>
-            A doctrine is only as strong as its epistemics. The Maha Provenance Standard (MPS/0.1)
-            is our published, claim-level tagging standard for AI-assisted nonfiction: every
-            substantive claim carries its epistemic status — VERIFIED, SOURCED, BOUNDARY,
-            ILLUSTRATIVE, or UNVERIFIED — making the entire doctrine auditable, by humans and
-            machines alike.
-          </p>
-          <p>
-            The standard is applied across our books and research, archived under a permanent
-            identifier (DOI:{' '}
-            <a
-              href="https://doi.org/10.5281/zenodo.21241308"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-indigo-400 hover:text-white"
-            >
-              10.5281/zenodo.21241308
-            </a>
-            ), and implemented as a live instrument any author or publisher can use.
-          </p>
+        <section className="evidence-section">
+          <h2 className="evidence-section-title">The Maha Provenance Standard</h2>
+          <div className="evidence-copy mt-5 space-y-5">
+            <p>
+              A doctrine is only as strong as its epistemics. The Maha Provenance Standard (MPS/0.1) is our published, claim-level
+              tagging standard for AI-assisted nonfiction: every substantive claim carries its epistemic status — VERIFIED, SOURCED,
+              BOUNDARY, ILLUSTRATIVE, or UNVERIFIED — making the doctrine auditable, by humans and machines alike.
+            </p>
+            <p>
+              The standard is applied across our books and research, archived under a permanent identifier (DOI:{' '}
+              <a href="https://doi.org/10.5281/zenodo.21241308" target="_blank" rel="noopener noreferrer" className="evidence-link">
+                10.5281/zenodo.21241308
+              </a>
+              ), and implemented as a live instrument any author or publisher can use.
+            </p>
+          </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-8">
-            <Link
-              href="/mps"
-              className="group block p-6 border-l-4 border-emerald-500 bg-emerald-950/10 hover:bg-emerald-950/20 transition-colors no-underline"
-            >
-              <p className="font-mono text-xs text-emerald-400 mb-2 uppercase tracking-widest m-0">
-                [ SPECIFICATION // MPS/0.1 ]
-              </p>
-              <h3 className="font-sans text-xl font-bold text-white uppercase m-0 mt-2">
-                Read the Standard
-              </h3>
-              <p className="font-serif text-sm text-zinc-400 italic mt-2 mb-0">
+          <div className="mt-8 grid gap-4 md:grid-cols-2">
+            <Link href="/mps" className="evidence-card">
+              <p className="evidence-kicker">[ SPECIFICATION // MPS/0.1 ]</p>
+              <h3 className="evidence-card-title mt-3">Read the Standard</h3>
+              <p className="evidence-copy mt-3">
                 The five tags, discipline rules, and machine-readable audit-record schema.
               </p>
-              <div className="mt-4 font-mono text-xs text-zinc-500 group-hover:text-white transition-colors">
-                OPEN SPECIFICATION ↗
-              </div>
+              <p className="evidence-kicker mt-4">OPEN SPECIFICATION ↗</p>
             </Link>
 
-            <Link
-              href="/audit"
-              className="group block p-6 border-l-4 border-emerald-500 bg-emerald-950/10 hover:bg-emerald-950/20 transition-colors no-underline"
-            >
-              <p className="font-mono text-xs text-emerald-400 mb-2 uppercase tracking-widest m-0">
-                [ INSTRUMENT // LIVE ]
-              </p>
-              <h3 className="font-sans text-xl font-bold text-white uppercase m-0 mt-2">
-                Run the Auditor
-              </h3>
-              <p className="font-serif text-sm text-zinc-400 italic mt-2 mb-0">
-                Paste a passage; receive claim-level tags and an exportable MPS audit record.
-                Free, no signup.
-              </p>
-              <div className="mt-4 font-mono text-xs text-zinc-500 group-hover:text-white transition-colors">
-                INITIALIZE AUDIT ↗
-              </div>
+            <Link href="/audit" className="evidence-card">
+              <p className="evidence-kicker">[ INSTRUMENT // LIVE ]</p>
+              <h3 className="evidence-card-title mt-3">Run the Auditor</h3>
+              <p className="evidence-copy mt-3">Paste a passage; receive claim-level tags and an exportable MPS audit record. Free, no signup.</p>
+              <p className="evidence-kicker mt-4">INITIALIZE AUDIT ↗</p>
             </Link>
           </div>
+        </section>
 
-          {/* STRATEGIC ARCHIVES / ESSAY ROUTING */}
-          <h2 className="text-2xl text-white font-light mt-16 mb-6">Strategic Archives</h2>
-          
-          <Link href="/doctrine/replacing-willpower" className="group block p-6 border border-zinc-800 bg-black hover:border-zinc-500 transition-colors rounded-sm no-underline mb-12">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between">
+        <section className="evidence-section">
+          <h2 className="evidence-section-title">Strategic Archives</h2>
+          <Link href="/doctrine/replacing-willpower" className="evidence-card mt-6 block">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
               <div>
-                <p className="font-mono text-xs text-indigo-500 mb-2 group-hover:text-indigo-400 transition-colors uppercase tracking-widest">
-                  [ INTELLECTUAL PROPERTY // ARCHIVED ]
-                </p>
-                <h3 className="font-sans text-xl font-bold text-zinc-200 group-hover:text-white transition-colors uppercase m-0">
-                  Replacing Willpower with Architecture
-                </h3>
-                <p className="font-serif text-sm text-zinc-400 italic mt-2 mb-0">
-                  Quantizing Generative AI for Edge-Compute Interventions
-                </p>
+                <p className="evidence-kicker">[ INTELLECTUAL PROPERTY // ARCHIVED ]</p>
+                <h3 className="evidence-card-title mt-3">Replacing Willpower with Architecture</h3>
+                <p className="evidence-copy mt-2">Quantizing Generative AI for Edge-Compute Interventions</p>
               </div>
-              <div className="mt-4 sm:mt-0 font-mono text-sm text-zinc-600 group-hover:text-white transition-colors shrink-0">
-                [ READ DOCUMENT ↗ ]
-              </div>
+              <p className="evidence-kicker">[ READ DOCUMENT ↗ ]</p>
             </div>
           </Link>
+        </section>
 
-          {/* TACTICAL BRIEFS MATRIX */}
-          <div className="mt-16 pt-8 border-t border-zinc-800">
-            <h2 className="text-2xl text-white font-light mb-6">Tactical Briefs</h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-              
-              <Link href="/doctrine/briefs/soil-gut-brain-axis" className="group block p-5 border border-zinc-900 bg-black hover:border-zinc-600 transition-colors no-underline">
-                <p className="font-mono text-[10px] text-indigo-500 mb-2 uppercase tracking-widest">
-                  [ BRIEF 01 ]
-                </p>
-                <h4 className="font-sans text-sm font-bold text-zinc-200 group-hover:text-white transition-colors uppercase m-0 leading-tight">
-                  The Soil-Gut-Brain Axis
-                </h4>
+        <section className="evidence-section">
+          <h2 className="evidence-section-title">Tactical Briefs</h2>
+          <div className="mt-7 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {doctrineBriefs.map((brief) => (
+              <Link key={brief.href} href={brief.href} className="evidence-card">
+                <p className="evidence-kicker">{brief.kicker}</p>
+                <h3 className="evidence-card-title mt-3">{brief.label}</h3>
               </Link>
-
-              <Link href="/doctrine/briefs/overclocked" className="group block p-5 border border-zinc-900 bg-black hover:border-zinc-600 transition-colors no-underline">
-                <p className="font-mono text-[10px] text-indigo-500 mb-2 uppercase tracking-widest">
-                  [ BRIEF 02 ]
-                </p>
-                <h4 className="font-sans text-sm font-bold text-zinc-200 group-hover:text-white transition-colors uppercase m-0 leading-tight">
-                  Overclocked: The Physics of Anxiety
-                </h4>
-              </Link>
-
-              <Link href="/doctrine/briefs/physics-of-spirit" className="group block p-5 border border-zinc-900 bg-black hover:border-zinc-600 transition-colors no-underline">
-                <p className="font-mono text-[10px] text-indigo-500 mb-2 uppercase tracking-widest">
-                  [ BRIEF 03 ]
-                </p>
-                <h4 className="font-sans text-sm font-bold text-zinc-200 group-hover:text-white transition-colors uppercase m-0 leading-tight">
-                  The Physics of Spirit
-                </h4>
-              </Link>
-
-              <Link href="/doctrine/briefs/protocol-of-precision" className="group block p-5 border border-zinc-900 bg-black hover:border-zinc-600 transition-colors no-underline">
-                <p className="font-mono text-[10px] text-indigo-500 mb-2 uppercase tracking-widest">
-                  [ BRIEF 04 ]
-                </p>
-                <h4 className="font-sans text-sm font-bold text-zinc-200 group-hover:text-white transition-colors uppercase m-0 leading-tight">
-                  Protocol of Precision
-                </h4>
-              </Link>
-              <Link href="/doctrine/briefs/strategic-gravity" className="group block p-5 border border-zinc-900 bg-black hover:border-zinc-600 transition-colors no-underline">
-                <p className="font-mono text-[10px] text-indigo-500 mb-2 uppercase tracking-widest">
-                  [ BRIEF 05 ]
-                </p>
-                <h4 className="font-sans text-sm font-bold text-zinc-200 group-hover:text-white transition-colors uppercase m-0 leading-tight">
-                  Strategic Gravity
-                </h4>
-              </Link>
-              <Link href="/doctrine/briefs/harmonic-command" className="group block p-5 border border-zinc-900 bg-black hover:border-zinc-600 transition-colors no-underline">
-                <p className="font-mono text-[10px] text-indigo-500 mb-2 uppercase tracking-widest">
-                  [ BRIEF 06 ]
-                </p>
-                <h4 className="font-sans text-sm font-bold text-zinc-200 group-hover:text-white transition-colors uppercase m-0 leading-tight">
-                  The Harmonic Command
-                </h4>
-              </Link>
-              <Link href="/doctrine/briefs/asymmetric-soundscape" className="group block p-5 border border-zinc-900 bg-black hover:border-zinc-600 transition-colors no-underline">
-                <p className="font-mono text-[10px] text-indigo-500 mb-2 uppercase tracking-widest">
-                  [ BRIEF 07 ]
-                </p>
-                <h4 className="font-sans text-sm font-bold text-zinc-200 group-hover:text-white transition-colors uppercase m-0 leading-tight">
-                  The Asymmetric Soundscape
-                </h4>
-              </Link>
-              <Link href="/doctrine/briefs/visionarys-standard" className="group block p-5 border border-zinc-900 bg-black hover:border-zinc-600 transition-colors no-underline">
-                <p className="font-mono text-[10px] text-indigo-500 mb-2 uppercase tracking-widest">
-                  [ BRIEF 08 ]
-                </p>
-                <h4 className="font-sans text-sm font-bold text-zinc-200 group-hover:text-white transition-colors uppercase m-0 leading-tight">
-                  The Visionary's Standard
-                </h4>
-              </Link>
-              <Link href="/doctrine/briefs/the-ordeal" className="group block p-5 border border-zinc-900 bg-black hover:border-zinc-600 transition-colors no-underline">
-                <p className="font-mono text-[10px] text-indigo-500 mb-2 uppercase tracking-widest">
-                  [ BRIEF 09 ]
-                </p>
-                <h4 className="font-sans text-sm font-bold text-zinc-200 group-hover:text-white transition-colors uppercase m-0 leading-tight">
-                  The Ordeal: Earned Identity
-                </h4>
-              </Link>
-              <Link href="/doctrine/briefs/consumer-to-producer" className="group block p-5 border border-zinc-900 bg-black hover:border-zinc-600 transition-colors no-underline">
-                <p className="font-mono text-[10px] text-indigo-500 mb-2 uppercase tracking-widest">
-                  [ BRIEF 10 ]
-                </p>
-                <h4 className="font-sans text-sm font-bold text-zinc-200 group-hover:text-white transition-colors uppercase m-0 leading-tight">
-                  Consumer to Producer
-                </h4>
-              </Link>
-              <Link href="/doctrine/briefs/saturnian-vision" className="group block p-5 border border-zinc-900 bg-black hover:border-zinc-600 transition-colors no-underline">
-                <p className="font-mono text-[10px] text-indigo-500 mb-2 uppercase tracking-widest">
-                  [ BRIEF 11 ]
-                </p>
-                <h4 className="font-sans text-sm font-bold text-zinc-200 group-hover:text-white transition-colors uppercase m-0 leading-tight">
-                  The Saturnian Vision
-                </h4>
-              </Link>
-            </div>
+            ))}
           </div>
+        </section>
 
-          <div className="mt-12 pt-8 border-t border-zinc-800">
-            <h3 className="text-white text-xs uppercase tracking-widest font-semibold mb-4">Agentic Publishing Node</h3>
-            <p className="text-sm text-zinc-500 mb-6">
-              Access our AI-powered publishing tools, automated query letter generators, and the raw manuscript vault.
-            </p>
-            <a 
-              href="https://publish.mahastrategies.com" 
-              className="inline-block border border-zinc-500 text-zinc-300 px-8 py-3 text-xs font-bold uppercase tracking-widest hover:border-white hover:text-white transition-colors no-underline"
-            >
-              Initialize Publishing Terminal
-            </a>
-          </div>
-        </div>
+        <section className="evidence-section">
+          <p className="evidence-kicker">Agentic Publishing Node</p>
+          <p className="evidence-copy mt-4">
+            Access our AI-powered publishing tools, automated query letter generators, and the raw manuscript vault.
+          </p>
+          <a
+            href="https://publish.mahastrategies.com"
+            className="inline-block mt-6 evidence-action evidence-action--secondary"
+          >
+            Initialize Publishing Terminal
+          </a>
+        </section>
       </div>
-    </div>
+    </main>
   )
 }

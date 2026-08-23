@@ -33,43 +33,75 @@ const buyers = [
 
 export default function EvidenceAuditPage() {
   return (
-    <main className="min-h-screen bg-[#0a0a0c] text-zinc-300 selection:bg-indigo-500 selection:text-white">
-      <div className="mx-auto max-w-4xl px-6 py-20 sm:py-28">
+    <main className="evidence-page">
+      <div className="evidence-container">
         <section className="max-w-3xl">
-          <p className="mb-5 font-mono text-[10px] uppercase tracking-widest text-indigo-400">[ Maha Provenance Standard // Evidence Audit ]</p>
-          <h1 className="text-4xl font-light leading-[1.08] tracking-tight text-white sm:text-5xl md:text-6xl">Make the document defensible before it reaches review.</h1>
-          <p className="mt-7 text-xl font-light leading-relaxed text-zinc-300 sm:text-2xl">An MPS Evidence Audit turns an AI-assisted report, manuscript, or public-facing document into a reviewable record of what is sourced, verified, interpreted, and still unresolved.</p>
-          <p className="mt-5 max-w-2xl text-base leading-relaxed text-zinc-400 sm:text-lg">This is not generic AI writing advice or a polished summary. It is an evidence workflow for work your organization must be able to stand behind.</p>
+          <p className="evidence-kicker mb-3">[ Maha Provenance Standard // Evidence Audit ]</p>
+          <h1 className="evidence-title evidence-title--product">
+            Make the document defensible before it reaches review.
+          </h1>
+          <p className="evidence-lede mt-7">
+            An MPS Evidence Audit turns an AI-assisted report, manuscript, or public-facing document into a reviewable record of what is sourced, verified, interpreted, and still unresolved.
+          </p>
+          <p className="evidence-copy mt-5 max-w-2xl sm:text-lg">
+            This is not generic AI writing advice or a polished summary. It is an evidence workflow for work your organization must be able to stand behind.
+          </p>
           <div className="mt-10 flex flex-col gap-4 sm:flex-row">
-            <TrackedLink href="/mps/preflight" event="cta_evidence_audit_preflight" className="inline-block bg-white px-7 py-4 text-center font-mono text-xs font-bold uppercase tracking-widest text-black transition-colors hover:bg-zinc-200">Run a Private Preflight — $49 ↗</TrackedLink>
-            <TrackedLink href="#scope-an-audit" event="cta_evidence_audit_scope" className="inline-block border border-zinc-600 px-7 py-4 text-center font-mono text-xs font-bold uppercase tracking-widest text-zinc-100 transition-colors hover:border-white hover:text-white">Request an Evidence Audit ↗</TrackedLink>
+            <TrackedLink href="/mps/preflight" event="cta_evidence_audit_preflight" className="evidence-action evidence-action--primary">
+              Run a private preflight — $49 ↗
+            </TrackedLink>
+            <TrackedLink href="#scope-an-audit" event="cta_evidence_audit_scope" className="evidence-action evidence-action--secondary">
+              Request an evidence audit ↗
+            </TrackedLink>
           </div>
-          <p className="mt-5 font-mono text-[10px] uppercase tracking-widest text-zinc-500">Start self-service for a defined extract. Scope a human audit for a high-stakes document.</p>
+          <p className="evidence-kicker mt-5 text-[var(--text-muted)]">Start self-service for a defined extract, and scope a human audit for a high-stakes document.</p>
         </section>
 
-        <section className="mt-24 border-t border-zinc-800 pt-10">
-          <p className="mb-8 font-mono text-[10px] uppercase tracking-widest text-indigo-400">[ The outcome ]</p>
+        <section className="evidence-section">
+          <p className="evidence-kicker mb-3">[ The outcome ]</p>
           <div className="grid gap-5 md:grid-cols-3">
-            {outcomes.map(([title, body], index) => <article key={title} className="border border-zinc-800 p-6"><p className="font-mono text-[10px] tracking-widest text-indigo-300">0{index + 1}</p><h2 className="mt-5 text-xl text-white">{title}</h2><p className="mt-3 text-sm leading-relaxed text-zinc-400">{body}</p></article>)}
+            {outcomes.map(([title, body], index) => (
+              <article key={title} className="evidence-card">
+                <p className="evidence-kicker">0{index + 1}</p>
+                <p className="evidence-card-title mt-3">{title}</p>
+                <p className="evidence-card-copy mt-3">{body}</p>
+              </article>
+            ))}
           </div>
         </section>
 
-        <section className="mt-24 grid gap-10 border-t border-zinc-800 pt-10 md:grid-cols-[1.1fr_0.9fr]">
-          <div>
-            <p className="mb-5 font-mono text-[10px] uppercase tracking-widest text-indigo-400">[ Who it is for ]</p>
-            <h2 className="text-3xl font-light text-white">For documents where a fluent answer is not enough.</h2>
+        <section className="evidence-section">
+          <div className="grid gap-10 md:grid-cols-[1.1fr_0.9fr]">
+            <div>
+              <p className="evidence-kicker mb-3">[ Who it is for ]</p>
+              <h2 className="evidence-section-title">For documents where a fluent answer is not enough.</h2>
+            </div>
+            <ul className="space-y-4 text-sm leading-relaxed text-[var(--text-primary)]">
+              {buyers.map((buyer) => <li key={buyer} className="border-l border-[var(--border-emphasis)] pl-4">{buyer}</li>)}
+            </ul>
           </div>
-          <ul className="space-y-4 text-sm leading-relaxed text-zinc-400">
-            {buyers.map((buyer) => <li key={buyer} className="border-l border-indigo-500 pl-4">{buyer}</li>)}
-          </ul>
         </section>
 
-        <section className="mt-24 border border-indigo-900/50 bg-indigo-950/20 p-8 sm:p-10">
-          <p className="font-mono text-[10px] uppercase tracking-widest text-indigo-300">[ A clear path ]</p>
-          <div className="mt-7 grid gap-6 md:grid-cols-3">
-            <div><p className="font-mono text-xs text-indigo-200">01</p><h2 className="mt-3 text-lg text-white">Test the extract</h2><p className="mt-2 text-sm leading-relaxed text-zinc-400">Use the private preflight for a bounded claim map and verification backlog.</p></div>
-            <div><p className="font-mono text-xs text-indigo-200">02</p><h2 className="mt-3 text-lg text-white">Scope the review</h2><p className="mt-2 text-sm leading-relaxed text-zinc-400">We define the document, reviewer context, source constraints, deliverable, price, and timing.</p></div>
-            <div><p className="font-mono text-xs text-indigo-200">03</p><h2 className="mt-3 text-lg text-white">Resolve what matters</h2><p className="mt-2 text-sm leading-relaxed text-zinc-400">Receive the agreed evidence record and a clear view of what is ready, conditional, or unresolved.</p></div>
+        <section className="evidence-section">
+          <div className="rounded border border-[var(--border-default)] bg-[var(--surface-elevated)] p-8 sm:p-10">
+            <p className="evidence-kicker">[ A clear path ]</p>
+            <div className="mt-7 grid gap-6 md:grid-cols-3">
+              <article className="evidence-card">
+                <p className="evidence-kicker">01</p>
+                <h2 className="evidence-card-title mt-3">Test the extract</h2>
+                <p className="evidence-card-copy mt-2">Use the private preflight for a bounded claim map and verification backlog.</p>
+              </article>
+              <article className="evidence-card">
+                <p className="evidence-kicker">02</p>
+                <h2 className="evidence-card-title mt-3">Scope the review</h2>
+                <p className="evidence-card-copy mt-2">We define the document, reviewer context, source constraints, deliverable, price, and timing.</p>
+              </article>
+              <article className="evidence-card">
+                <p className="evidence-kicker">03</p>
+                <h2 className="evidence-card-title mt-3">Resolve what matters</h2>
+                <p className="evidence-card-copy mt-2">Receive the agreed evidence record and a clear view of what is ready, conditional, or unresolved.</p>
+              </article>
+            </div>
           </div>
         </section>
 
@@ -77,9 +109,16 @@ export default function EvidenceAuditPage() {
           <EvidenceAuditScopeForm />
         </div>
 
-        <section className="mt-24 border-t border-zinc-800 pt-10">
-          <p className="max-w-2xl text-lg font-light leading-relaxed text-zinc-300">The method is public: MPS makes the epistemic status of substantive claims explicit and machine-readable. An audit applies that discipline to the document in front of you.</p>
-          <div className="mt-7 flex flex-wrap gap-x-6 gap-y-4 font-mono text-xs uppercase tracking-widest"><Link href="/audit" className="text-zinc-300 hover:text-white">Try the free auditor ↗</Link><Link href="/mps" className="text-zinc-400 hover:text-white">Read MPS/0.1 ↗</Link><Link href="/mps/preflight/example" className="text-zinc-400 hover:text-white">See a sample report ↗</Link></div>
+        <section className="evidence-section">
+          <p className="evidence-kicker max-w-2xl">Method statement</p>
+          <p className="evidence-copy mt-2">
+            The method is public: MPS makes the epistemic status of substantive claims explicit and machine-readable. An audit applies that discipline to the document in front of you.
+          </p>
+          <div className="mt-7 flex flex-wrap gap-4">
+            <Link href="/audit" className="evidence-link">Try the free auditor ↗</Link>
+            <Link href="/mps" className="evidence-link">Read MPS/0.1 ↗</Link>
+            <Link href="/mps/preflight/example" className="evidence-link">See a sample report ↗</Link>
+          </div>
         </section>
       </div>
     </main>

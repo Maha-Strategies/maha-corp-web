@@ -7,11 +7,63 @@ export const metadata: Metadata = {
   alternates: { canonical: '/geometric-optimization' },
 }
 
-export default function GeometricOptimizationPage() {
-  return <main className="min-h-screen bg-[#070b10] text-zinc-300"><article className="mx-auto max-w-5xl px-6 py-20 sm:py-28"><p className="font-mono text-[11px] uppercase tracking-widest text-emerald-300">Geometric optimization / live API</p><h1 className="mt-5 max-w-4xl text-5xl font-light tracking-tight text-white sm:text-7xl">Weighted SE(3) point-cloud registration.</h1><p className="mt-7 max-w-3xl text-lg leading-8 text-zinc-400">A real weighted Kabsch SVD solve for the least-squares rigid transform between paired three-dimensional points. Results include the rotation, translation, RMSE, maximum residual, and determinant.</p><section className="mt-12 grid gap-4 sm:grid-cols-3"><Metric label="Paired points" value="3–16,384" /><Metric label="Transform" value="SE(3)" /><Metric label="A10G p95 / 16K" value="108.604 ms" /></section><section className="mt-14 border-y border-zinc-800 py-10"><h2 className="text-2xl text-white">Production boundary</h2><p className="mt-4 max-w-3xl leading-7 text-zinc-400">The contract assumes known point correspondences and rigid motion. It does not search for correspondences, train a geometric model, or perform non-rigid deformation. The API verifies rotation orthogonality and determinant before settling the job.</p></section><pre className="mt-12 overflow-x-auto border border-zinc-800 bg-black/40 p-6 text-sm leading-6 text-emerald-100"><code>{`const result = await maha.optimization.solveGeometricRegistration({
-  clientRequestId: crypto.randomUUID().replaceAll('-', ''),
-  problem: { sourcePoints, targetPoints, weights }
-})`}</code></pre><div className="mt-10 flex flex-wrap gap-4"><Link href="/docs" className="border border-emerald-500 px-5 py-3 font-mono text-xs uppercase tracking-widest text-emerald-100">Open API reference</Link><Link href="/dashboard" className="border border-zinc-700 px-5 py-3 font-mono text-xs uppercase tracking-widest text-zinc-200">Get an API key</Link></div></article></main>
+function Metric({ label, value }: { label: string; value: string }) {
+  return (
+    <article className="evidence-card">
+      <p className="evidence-kicker">{label}</p>
+      <p className="evidence-card-title mt-3">{value}</p>
+    </article>
+  )
 }
 
-function Metric({ label, value }: { label: string; value: string }) { return <div className="border border-zinc-800 p-5"><p className="font-mono text-[10px] uppercase tracking-widest text-zinc-500">{label}</p><p className="mt-3 text-2xl text-white">{value}</p></div> }
+export default function GeometricOptimizationPage() {
+  return (
+    <main className="evidence-page">
+      <div className="evidence-container">
+        <section className="evidence-section">
+          <p className="evidence-kicker">Geometric optimization / live API</p>
+          <h1 className="evidence-title">Weighted SE(3) point-cloud registration.</h1>
+          <p className="evidence-lede mt-7">
+            A real weighted Kabsch SVD solve for the least-squares rigid transform between paired three-dimensional points. Results include the rotation,
+            translation, RMSE, maximum residual, and determinant.
+          </p>
+
+          <div className="mt-10 grid gap-4 sm:grid-cols-3">
+            <Metric label="Paired points" value="3–16,384" />
+            <Metric label="Transform" value="SE(3)" />
+            <Metric label="A10G p95 / 16K" value="108.604 ms" />
+          </div>
+        </section>
+
+        <section className="evidence-section">
+          <h2 className="evidence-section-title">Production boundary</h2>
+          <p className="evidence-copy mt-4">
+            The contract assumes known point correspondences and rigid motion. It does not search for correspondences, train a geometric model, or perform
+            non-rigid deformation. The API verifies rotation orthogonality and determinant before settling the job.
+          </p>
+        </section>
+
+        <section className="evidence-section">
+          <h2 className="evidence-section-title">Example payload</h2>
+          <pre className="evidence-code mt-4 overflow-x-auto p-5 text-xs">
+            <code>{`const result = await maha.optimization.solveGeometricRegistration({
+  clientRequestId: crypto.randomUUID().replaceAll('-', ''),
+  problem: { sourcePoints, targetPoints, weights }
+})`}</code>
+          </pre>
+        </section>
+
+        <section className="evidence-section">
+          <h2 className="evidence-section-title">Where to continue</h2>
+          <p className="evidence-copy mt-4">Use the docs and dashboard to review runtime keys, limits, and policy constraints.</p>
+          <div className="mt-6 flex flex-wrap gap-4">
+            <Link href="/docs" className="evidence-action evidence-action--secondary">
+              Open API reference
+            </Link>
+            <Link href="/dashboard" className="evidence-action evidence-action--secondary">Get an API key</Link>
+          </div>
+        </section>
+      </div>
+    </main>
+  )
+}

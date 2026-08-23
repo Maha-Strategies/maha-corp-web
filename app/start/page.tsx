@@ -1,186 +1,170 @@
-'use client';
+"use client"
 
-import React, { useActionState } from 'react';
-import Link from 'next/link';
-import { subscribeToGateway } from './actions';
-import { TrackedLink } from '@/components/ConversionTracker';
+import React, { useActionState } from 'react'
+import Link from 'next/link'
+
+import { TrackedLink } from '@/components/ConversionTracker'
+import { subscribeToGateway } from './actions'
 
 export default function StartGateway() {
   const [state, formAction, isPending] = useActionState(subscribeToGateway, {
     success: false,
     error: null,
-  });
+  })
 
   return (
-    <main className="min-h-screen bg-[#0a0a0c] text-[#e0e0e0] py-16 px-6 sm:px-12 selection:bg-indigo-500 selection:text-white">
-      <div className="max-w-3xl mx-auto">
-        
-        {/* TERMINAL HEADER */}
-        <header className="font-mono text-xs sm:text-sm text-gray-500 mb-16 border-b border-gray-800 pb-4 flex justify-between">
-          <span>[ GATEWAY NODE // INITIALIZATION ]</span>
-          <span className="text-indigo-400">STATUS: SECURE</span>
+    <main className="evidence-page">
+      <div className="evidence-container">
+        <header className="border-t border-[var(--border-default)] pt-5">
+          <p className="evidence-kicker mb-4 flex justify-between gap-4">
+            <span>[ GATEWAY NODE // INITIALIZATION ]</span>
+            <span className="text-[var(--status-verified)]">STATUS: SECURE</span>
+          </p>
+          <p className="evidence-kicker">[ Personal Protocols // Companion to The Maha Principle ]</p>
+          <h1 className="evidence-title evidence-title--product">Personal Protocol 001: The Stronghold</h1>
+          <p className="evidence-kicker mt-3">[ Start here ]</p>
         </header>
 
-        {/* TITLE */}
-        <p className="font-mono text-[10px] text-indigo-400 uppercase tracking-widest mb-4">
-          [ Personal Protocols // Companion to The Maha Principle ]
-        </p>
-        <h1 className="font-sans text-4xl sm:text-5xl font-bold tracking-tight mb-4 text-white uppercase">
-          Personal Protocol 001: The Stronghold
-        </h1>
-        <p className="font-mono text-sm text-indigo-400 mb-8 uppercase tracking-widest">[ Start here ]</p>
-        <div className="mb-12 border border-zinc-800 bg-zinc-950/50 p-5">
-          <p className="font-sans text-sm text-zinc-400 mb-3">Looking for research for an investment, market, or corporate strategy decision?</p>
-          <TrackedLink href="/consulting" event="cta_personal_protocols_to_consulting" className="font-mono text-[10px] text-indigo-300 hover:text-white tracking-widest uppercase transition-colors">
+        <section className="evidence-inset mt-8">
+          <p className="evidence-copy mb-4">
+            Looking for research for an investment, market, or corporate strategy decision?
+          </p>
+          <TrackedLink
+            href="/consulting"
+            event="cta_personal_protocols_to_consulting"
+            className="evidence-action"
+          >
             Commission a Verified Research Brief ↗
           </TrackedLink>
-        </div>
+        </section>
 
-        <article className="prose prose-invert prose-lg font-serif leading-relaxed text-gray-300 max-w-none">
-          
-          <p className="text-xl text-white font-light">
-            The war is no longer fought on a battlefield. It is fought in the supermarket aisle, in the notifications tab, and in the mitochondria of your cells.
+        <article className="evidence-section">
+          <p className="evidence-copy text-xl">The war is no longer fought on a battlefield. It is fought in the supermarket aisle, in the notifications tab, and in the mitochondria of your cells.</p>
+          <p className="evidence-copy mt-7">
+            We are currently living through a period of <strong>Metabolic Colonialism</strong>. The modern industrial environment is
+            not designed to support your life; it is designed to harvest your attention and your biology for profit.
           </p>
+          <p className="evidence-copy mt-7">The symptoms are everywhere, but we mistake them for personal failures:</p>
 
-          <p>
-            We are currently living through a period of <strong>Metabolic Colonialism</strong>. The modern industrial environment is not designed to support your life; it is designed to harvest your attention and your biology for profit.
-          </p>
-
-          <p className="mb-8">The symptoms are everywhere, but we mistake them for personal failures:</p>
-
-          {/* DIAGNOSTIC LIST */}
-          <div className="space-y-6 my-8 p-6 sm:p-8 border border-gray-800 bg-black/40">
+          <div className="mt-8 space-y-6 evidence-card">
             <div className="flex gap-4">
-              <span className="font-mono text-indigo-500 font-bold shrink-0">[ FOG ]</span>
-              <p className="m-0 text-sm sm:text-base">You struggle to focus. The pull of every notification is engineered to fragment your attention — and it is working exactly as designed.</p>
+              <span className="shrink-0 text-sm font-bold text-[var(--status-sourced)]">[ FOG ]</span>
+              <p className="evidence-copy mt-0">You struggle to focus. The pull of every notification is engineered to fragment your attention — and it is working exactly as designed.</p>
             </div>
             <div className="flex gap-4">
-              <span className="font-mono text-indigo-500 font-bold shrink-0">[ FATIGUE ]</span>
-              <p className="m-0 text-sm sm:text-base">You feel constantly drained. The modern food environment is built to sell, not to nourish — and the cumulative load it places on the body is real.</p>
+              <span className="shrink-0 text-sm font-bold text-[var(--status-sourced)]">[ FATIGUE ]</span>
+              <p className="evidence-copy mt-0">You feel constantly drained. The modern food environment is built to sell, not to nourish — and the cumulative load it places on the body is real.</p>
             </div>
             <div className="flex gap-4">
-              <span className="font-mono text-indigo-500 font-bold shrink-0">[ DRIFT ]</span>
-              <p className="m-0 text-sm sm:text-base">You feel like a spectator in your own life, unable to focus on what matters.</p>
+              <span className="shrink-0 text-sm font-bold text-[var(--status-sourced)]">[ DRIFT ]</span>
+              <p className="evidence-copy mt-0">You feel like a spectator in your own life, unable to focus on what matters.</p>
             </div>
           </div>
 
-          <p className="font-sans font-bold text-white tracking-widest uppercase border-l-2 border-indigo-500 pl-4 my-12">
-            This publication is not a blog. It is a Field Manual.
+          <p className="evidence-kicker mt-12">[ This publication is not a blog. It is a Field Manual. ]</p>
+          <p className="evidence-copy mt-7">
+            The Maha Principle is a blueprint for reclaiming sovereignty. It is about building a “Stronghold”—a protected space where your biology,
+            your focus, and your family are immune to the entropy of the modern world.
           </p>
-
-          <p>
-            The Maha Principle is a blueprint for reclaiming Sovereignty. It is about building a “Stronghold”—a protected space where your biology, your focus, and your family are immune to the entropy of the modern world.
-          </p>
-          <p className="font-bold text-white mb-16">
-            We do not ask for permission to be healthy. We seize it.
-          </p>
-
+          <p className="evidence-copy mt-6 font-bold">We do not ask for permission to be healthy. We seize it.</p>
         </article>
 
-        {/* ASSET DOWNLOAD SECTOR */}
-        <section className="mt-16 pt-12 border-t border-gray-800">
-          <h3 className="font-sans text-2xl font-bold text-white tracking-widest uppercase mb-2">
-            The Field Assets
-          </h3>
-          <p className="font-serif text-gray-400 mb-8 italic">
-            Theory is useless without logistics. To begin the protocol, you must first secure your perimeter. I have declassified two assets from the manuscript to help you audit your immediate environment today.
+        <section className="evidence-section">
+          <p className="evidence-kicker">[ The Field Assets ]</p>
+          <h2 className="evidence-section-title mt-4">Theory is useless without logistics.</h2>
+          <p className="evidence-copy mt-5 mb-8">
+            To begin the protocol, you must first secure your perimeter. I have declassified two assets from the manuscript to help you
+            audit your immediate environment today.
           </p>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            
-            {/* ASSET 1 */}
-            <div className="flex flex-col justify-between p-6 border border-gray-700 bg-black hover:border-indigo-500 transition-colors">
+          <div className="grid gap-6 md:grid-cols-2">
+            <article className="evidence-card flex flex-col justify-between">
               <div>
-                <h4 className="font-sans text-lg font-bold text-white uppercase mb-2">1. The Shopper’s Integrity Card</h4>
-                <p className="font-serif text-sm text-gray-400 mb-6">
-                  A wallet-sized tactical checklist for spotting ultra-processed products and choosing whole foods instead. Print it. Share it with your household. A simple standard for what makes the cut.
+                <h3 className="evidence-card-title">1. The Shopper&rsquo;s Integrity Card</h3>
+                <p className="evidence-card-copy mt-4">
+                  A wallet-sized tactical checklist for spotting ultra-processed products and choosing whole foods instead. Print it. Share it with
+                  your household. A simple standard for what makes the cut.
                 </p>
               </div>
-              <a 
-                href="/assets/shoppers-integrity-card.pdf" 
-                target="_blank" 
+              <a
+                href="/assets/shoppers-integrity-card.pdf"
+                target="_blank"
                 rel="noopener noreferrer"
-                className="block w-full py-3 border border-gray-600 bg-gray-900 text-center font-mono text-xs text-white hover:bg-white hover:text-black transition-colors uppercase tracking-widest"
+                className="mt-6 evidence-link"
               >
                 Download Integrity Card ↓
               </a>
-            </div>
+            </article>
 
-            {/* ASSET 2 */}
-            <div className="flex flex-col justify-between p-6 border border-gray-700 bg-black hover:border-indigo-500 transition-colors">
+            <article className="evidence-card flex flex-col justify-between">
               <div>
-                <h4 className="font-sans text-lg font-bold text-white uppercase mb-2">2. The School Lunch Audit</h4>
-                <p className="font-serif text-sm text-gray-400 mb-6">
-                  A template for parents to understand and discuss what is in their children’s school meals. Use it to ask informed questions and bring the same standards you set at home into the conversation.
+                <h3 className="evidence-card-title">2. The School Lunch Audit</h3>
+                <p className="evidence-card-copy mt-4">
+                  A template for parents to understand and discuss what is in their children&rsquo;s school meals. Use it to ask informed questions and bring
+                  the same standards you set at home into the conversation.
                 </p>
               </div>
-              <a 
-                href="/assets/school-lunch-audit.pdf" 
-                target="_blank" 
+              <a
+                href="/assets/school-lunch-audit.pdf"
+                target="_blank"
                 rel="noopener noreferrer"
-                className="block w-full py-3 border border-gray-600 bg-gray-900 text-center font-mono text-xs text-white hover:bg-white hover:text-black transition-colors uppercase tracking-widest"
+                className="mt-6 evidence-link"
               >
                 Download Audit Script ↓
               </a>
-            </div>
-
+            </article>
           </div>
         </section>
 
-        {/* NEXT STEPS / MAILING LIST PREP */}
-        <section className="mt-20 p-8 sm:p-12 border border-indigo-900/50 bg-indigo-950/10">
-          <h3 className="font-sans text-xl font-bold text-white tracking-widest uppercase mb-4">
-            The Next Step: The 24-Hour Crucible
-          </h3>
-          <p className="font-serif text-gray-300 mb-8">
-            Once you have secured the perimeter, you are ready for the internal work. Join the network to receive the next dispatch. We are building the Army of the Remnant.
+        <section className="evidence-section">
+          <p className="evidence-kicker">[ The Next Step: The 24-Hour Crucible ]</p>
+          <p className="evidence-copy mt-5">
+            Once you have secured the perimeter, you are ready for the internal work. Join the network to receive the next dispatch. We are building the
+            Army of the Remnant.
           </p>
-          
+
           {state.success ? (
-            <div className="bg-emerald-950/20 border border-emerald-900 p-6 text-center">
-              <p className="text-emerald-400 font-bold font-mono tracking-widest uppercase text-sm">
-                [ PROTOCOL INITIALIZED ]
-              </p>
-              <p className="font-serif text-zinc-400 text-sm mt-3">
-                Your signal has been received. Check your inbox — the next dispatch is inbound.
-              </p>
+            <div className="mt-8 evidence-card border-[var(--status-verified)]">
+              <p className="evidence-kicker text-[var(--status-verified)]">[ PROTOCOL INITIALIZED ]</p>
+              <p className="evidence-copy mt-4 text-[var(--text-primary)]">Your signal has been received. Check your inbox — the next dispatch is inbound.</p>
             </div>
           ) : (
-            <form action={formAction} className="flex flex-col sm:flex-row gap-4">
-              <label htmlFor="gateway-email" className="sr-only">Email address</label>
-              <input
-                type="email"
-                id="gateway-email"
-                name="email"
-                placeholder="ENTER SECURE EMAIL COMMUNICATOR"
-                disabled={isPending}
-                className="flex-grow bg-black border border-gray-700 p-3 font-mono text-xs text-white focus:outline-none focus:border-indigo-500 disabled:opacity-50"
-                required
-              />
-              <button
-                type="submit"
-                disabled={isPending}
-                className="bg-white text-black font-bold font-mono text-xs tracking-widest px-8 py-3 hover:bg-gray-200 transition-colors disabled:bg-gray-500 disabled:cursor-not-allowed"
-              >
-                {isPending ? 'TRANSMITTING…' : 'INITIALIZE PROTOCOL'}
-              </button>
+            <form action={formAction} className="evidence-card mt-8">
+              <div className="grid gap-4 sm:grid-cols-[1fr_auto]">
+                <label className="sr-only" htmlFor="gateway-email">Email address</label>
+                <input
+                  type="email"
+                  id="gateway-email"
+                  name="email"
+                  placeholder="ENTER SECURE EMAIL COMMUNICATOR"
+                  disabled={isPending}
+                  className="evidence-input w-full"
+                  required
+                />
+                <button
+                  type="submit"
+                  disabled={isPending}
+                  className="evidence-action evidence-action--primary min-w-[14rem]"
+                >
+                  {isPending ? 'TRANSMITTING…' : 'INITIALIZE PROTOCOL'}
+                </button>
+              </div>
             </form>
           )}
+
           {state.error && (
-            <p className="text-red-400 text-xs font-mono uppercase tracking-widest mt-4">
-              [ ERROR: {state.error} ]
-            </p>
+            <p className="mt-4 evidence-kicker text-[var(--status-failed)]">[ ERROR: {state.error} ]</p>
           )}
         </section>
 
-        {/* INTERNAL MESH */}
-        <div className="mt-16 text-center">
-          <Link href="/" className="font-mono text-xs text-gray-600 hover:text-white transition-colors">
-            [ RETURN TO MASTER NODE ]
-          </Link>
-        </div>
-
+        <section className="evidence-section">
+          <div className="text-center">
+            <Link href="/" className="evidence-link">
+              [ RETURN TO MASTER NODE ]
+            </Link>
+          </div>
+        </section>
       </div>
     </main>
-  );
+  )
 }

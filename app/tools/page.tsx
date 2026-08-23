@@ -108,44 +108,54 @@ const tools = [
 
 export default function ToolsPage() {
   return (
-    <main className="min-h-screen bg-[#0a0a0c] text-zinc-300 selection:bg-indigo-500 selection:text-white">
-      <div className="mx-auto max-w-4xl px-6 py-20 sm:py-28">
-        <header className="max-w-3xl border-l border-indigo-500 pl-6 sm:pl-8">
-          <p className="mb-5 font-mono text-xs uppercase tracking-widest text-indigo-300">[ Maha Strategies // Tools &amp; API ]</p>
-          <h1 className="mb-6 text-4xl font-light leading-[1.08] tracking-tight text-white sm:text-5xl md:text-6xl">Focused tools for a defined job.</h1>
-          <p className="text-xl font-light leading-relaxed text-zinc-300 sm:text-2xl">
+    <main className="evidence-page">
+      <div className="evidence-container">
+        <header className="border-t border-[var(--border-default)] pt-5">
+          <p className="evidence-kicker">[ Maha Strategies // Tools &amp; API ]</p>
+          <h1 className="evidence-title evidence-title--product">Focused tools for a defined job.</h1>
+          <p className="evidence-lede mt-7">
             Use a self-service tool when you need one bounded outcome—not a consulting engagement.
           </p>
-          <p className="mt-5 text-base leading-relaxed text-zinc-400 sm:text-lg">
-            Each product states its scope, limits, and payment flow before you commit. Consulting and research briefs remain separate services.
+          <p className="evidence-copy mt-6">
+            Each product states its scope, limits, and payment flow before you commit. Consulting and research briefs remain
+            separate services.
           </p>
         </header>
 
-        <aside className="mt-12 border border-cyan-900/70 bg-cyan-950/10 p-6" aria-label="Developer infrastructure">
-          <p className="font-mono text-[10px] uppercase tracking-widest text-cyan-300">Developer infrastructure</p>
-          <p className="mt-3 max-w-2xl text-sm leading-7 text-zinc-400">Looking for authenticated APIs, SDKs, benchmarks, and security boundaries rather than a standalone utility?</p>
-          <Link href="/developers" className="mt-4 inline-block font-mono text-xs uppercase tracking-widest text-cyan-100 underline underline-offset-4 hover:text-white">Explore the complete developer infrastructure map ↗</Link>
+        <aside className="mt-12 evidence-inset" aria-label="Developer infrastructure">
+          <p className="evidence-kicker">Developer infrastructure</p>
+          <p className="evidence-copy mt-4 max-w-2xl">
+            Looking for authenticated APIs, SDKs, benchmarks, and security boundaries rather than a standalone utility?
+          </p>
+          <Link href="/developers" className="evidence-link mt-5 inline-block">
+            Explore the complete developer infrastructure map ↗
+          </Link>
         </aside>
 
-        <section className="mt-20 grid gap-5 md:grid-cols-2" aria-label="Maha Strategies self-service tools">
+        <section className="evidence-section" aria-label="Maha Strategies self-service tools">
+          <p className="evidence-kicker">Products and tools</p>
+          <h2 className="evidence-section-title mt-4">Choose one bounded workflow at a time.</h2>
+          <div className="mt-7 grid gap-5 md:grid-cols-2">
           {tools.map((tool) => {
-            const accent = tool.accent === 'emerald' ? 'text-emerald-300 hover:border-emerald-500' : tool.accent === 'cyan' ? 'text-cyan-200 hover:border-cyan-500' : 'text-indigo-300 hover:border-indigo-400'
+            const accent = tool.accent === 'emerald' ? 'text-[var(--status-verified)] hover:border-[var(--status-verified)]' : tool.accent === 'cyan' ? 'text-[var(--status-sourced)] hover:border-[var(--status-sourced)]' : 'text-[var(--status-illustrative)] hover:border-[var(--status-illustrative)]'
             return (
-              <article key={tool.href} className={`flex min-h-full flex-col border border-zinc-800 p-6 transition-colors ${accent}`}>
-                <p className="mb-4 font-mono text-[10px] uppercase tracking-widest">[ {tool.eyebrow} ]</p>
-                <h2 className="text-xl leading-tight text-white">{tool.title}</h2>
-                <p className="mt-4 flex-1 text-sm leading-relaxed text-zinc-400">{tool.body}</p>
-                <Link href={tool.href} className="mt-7 font-mono text-xs uppercase tracking-widest text-zinc-200 hover:text-white">
+              <article key={tool.href} className={`evidence-card flex min-h-full flex-col transition-colors ${accent}`}>
+                <p className="evidence-kicker">[ {tool.eyebrow} ]</p>
+                <h3 className="evidence-card-title mt-4">{tool.title}</h3>
+                <p className="evidence-card-copy mt-4 flex-1">{tool.body}</p>
+                <Link href={tool.href} className="evidence-link mt-7">
                   {tool.action} ↗
                 </Link>
               </article>
             )
           })}
+          </div>
         </section>
 
-        <section className="mt-16 border-t border-zinc-800 pt-8">
-          <p className="text-sm leading-relaxed text-zinc-400">
-            Need a decision-ready research synthesis instead? <Link href="/consulting" className="text-indigo-200 underline underline-offset-4 hover:text-white">Explore Verified Research Briefs</Link> or <Link href="/rapid-intelligence-brief" className="text-indigo-200 underline underline-offset-4 hover:text-white">Rapid Intelligence Briefs</Link>.
+        <section className="evidence-section" aria-label="Research and intelligence alternatives">
+          <p className="evidence-copy">
+            Need a decision-ready research synthesis instead? <Link href="/consulting" className="evidence-link">Explore Verified
+            Research Briefs</Link> or <Link href="/rapid-intelligence-brief" className="evidence-link">Rapid Intelligence Briefs</Link>.
           </p>
         </section>
       </div>

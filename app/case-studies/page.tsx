@@ -89,50 +89,64 @@ const jsonLd = {
 
 export default function CaseStudiesPage() {
   return (
-    <main className="min-h-screen bg-[#0a0a0c] px-6 py-20 text-zinc-300 sm:py-28">
+    <main className="evidence-page">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-      <article className="mx-auto max-w-4xl">
-        <p className="font-mono text-[10px] uppercase tracking-widest text-cyan-300">[ Case studies ]</p>
-        <h1 className="mt-5 text-4xl font-light tracking-tight text-white sm:text-6xl">Work that can be inspected.</h1>
-        <p className="mt-7 max-w-3xl text-xl leading-relaxed text-zinc-300">These are selected public examples of work operated by Maha Strategies. Each account links to the live work, says what is actually available, and states the boundary we do not want visitors to mistake for a promise.</p>
+      <article className="evidence-container">
+        <p className="evidence-kicker">[ Case studies ]</p>
+        <h1 className="evidence-title evidence-title--product">Work that can be inspected.</h1>
+        <p className="evidence-lede mt-7">
+          These are selected public examples of work operated by Maha Strategies. Each account links to the live work, says what is actually available, and states the boundary we do not want visitors to mistake for a promise.
+        </p>
 
-        <section className="mt-12 border border-amber-900/50 bg-amber-950/10 p-6 sm:p-7">
-          <p className="font-mono text-[10px] uppercase tracking-widest text-amber-200">[ A note on evidence ]</p>
-          <p className="mt-3 leading-relaxed text-zinc-300">These are not performance claims, client testimonials, or a substitute for independent review. They are operating notes: public artifacts, their intended use, and their limits.</p>
+        <section className="evidence-section">
+          <p className="evidence-kicker">[ A note on evidence ]</p>
+          <p className="evidence-card">
+            These are not performance claims, client testimonials, or a substitute for independent review. They are operating notes: public artifacts, their intended use, and their limits.
+          </p>
         </section>
 
         <div className="mt-14 space-y-8">
           {studies.map((study) => (
-            <section key={study.id} id={study.id} className="scroll-mt-24 border border-zinc-800 bg-[#0d1112] p-7 sm:p-9">
-              <p className="font-mono text-[10px] uppercase tracking-widest text-cyan-300">[ {study.label} ]</p>
-              <h2 className="mt-4 text-3xl font-light text-white">{study.title}</h2>
-              <p className="mt-5 max-w-3xl leading-relaxed text-zinc-400">{study.summary}</p>
+            <section
+              key={study.id}
+              id={study.id}
+              className="evidence-section scroll-mt-24 bg-[var(--surface-elevated)] p-1"
+            >
+              <p className="evidence-kicker">[ {study.label} ]</p>
+              <h2 className="evidence-section-title mt-4">{study.title}</h2>
+              <p className="evidence-copy mt-4">{study.summary}</p>
               <div className="mt-8 grid gap-7 md:grid-cols-2">
                 <div>
-                  <h3 className="font-mono text-xs uppercase tracking-widest text-zinc-200">What is live</h3>
-                  <ul className="mt-4 space-y-3 text-sm leading-relaxed text-zinc-400">
+                  <p className="evidence-kicker">What is live</p>
+                  <ul className="mt-4 space-y-3 text-sm leading-relaxed text-[var(--text-primary)]">
                     {study.live.map((item) => <li key={item}>— {item}</li>)}
                   </ul>
                 </div>
                 <div>
-                  <h3 className="font-mono text-xs uppercase tracking-widest text-zinc-200">Operating boundary</h3>
-                  <p className="mt-4 text-sm leading-relaxed text-zinc-400">{study.boundary}</p>
+                  <p className="evidence-kicker">Operating boundary</p>
+                  <p className="evidence-copy mt-4">{study.boundary}</p>
                 </div>
               </div>
               <div className="mt-8 flex flex-wrap gap-x-5 gap-y-3 text-sm">
                 {study.links.map((link) => link.external ? (
-                  <a key={link.href} href={link.href} target="_blank" rel="noreferrer" className="text-cyan-100 underline underline-offset-4">{link.label}</a>
+                  <a key={link.href} href={link.href} target="_blank" rel="noreferrer" className="evidence-link">
+                    {link.label}
+                  </a>
                 ) : (
-                  <Link key={link.href} href={link.href} className="text-cyan-100 underline underline-offset-4">{link.label}</Link>
+                  <Link key={link.href} href={link.href} className="evidence-link">
+                    {link.label}
+                  </Link>
                 ))}
               </div>
             </section>
           ))}
         </div>
 
-        <section className="mt-14 border-t border-zinc-800 pt-10">
-          <h2 className="text-2xl font-light text-white">The operating entity</h2>
-          <p className="mt-4 max-w-3xl leading-relaxed text-zinc-400">Maha Strategies is the operator and publisher connecting these public projects. Their evidence, data practices, audiences, and claims remain distinct. The <Link href="/network" className="text-cyan-100 underline">Maha Knowledge Network</Link> maps the relevant relationships; the underlying sites remain the primary source for each project.</p>
+        <section className="evidence-section">
+          <h2 className="evidence-section-title">The operating entity</h2>
+          <p className="evidence-copy mt-4">
+            Maha Strategies is the operator and publisher connecting these public projects. Their evidence, data practices, audiences, and claims remain distinct. The <Link href="/network" className="evidence-link">Maha Knowledge Network</Link> maps the relevant relationships; the underlying sites remain the primary source for each project.
+          </p>
         </section>
       </article>
     </main>
