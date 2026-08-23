@@ -74,13 +74,6 @@ export default function Wso2IntegrationPage() {
       url: 'https://www.mahastrategies.com',
     },
     description: 'A fixed-scope compatibility evaluation of Maha Context Compiler as a WSO2 AI Gateway request interceptor.',
-    offers: {
-      '@type': 'Offer',
-      price: '5000',
-      priceCurrency: 'USD',
-      availability: 'https://schema.org/InStock',
-      url: 'https://www.mahastrategies.com/integrations/wso2',
-    },
   }
 
   return (
