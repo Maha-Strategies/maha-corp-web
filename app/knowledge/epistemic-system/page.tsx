@@ -86,6 +86,7 @@ export default function EpistemicSystemPage() {
             <Link href={`${EPISTEMIC_SYSTEM_PATH}/migrations`} className="evidence-action evidence-action--secondary">Inspect legacy migration</Link>
             <Link href={`${EPISTEMIC_SYSTEM_PATH}/releases`} className="evidence-action evidence-action--secondary">Inspect canonical releases</Link>
             <Link href={`${EPISTEMIC_SYSTEM_PATH}/pilot-corpus`} className="evidence-action evidence-action--secondary">Inspect Phase 4 pilot</Link>
+            <Link href={`${EPISTEMIC_SYSTEM_PATH}/publishing-factory`} className="evidence-action evidence-action--secondary">Inspect Phases 5–8 factory</Link>
           </div>
         </header>
 
@@ -153,6 +154,13 @@ export default function EpistemicSystemPage() {
             <article className="evidence-card"><p className="evidence-kicker">Atomic terminal event</p><h3 className="evidence-card-title mt-3">Consume or revoke</h3><p className="evidence-card-copy mt-3">The ledger permits one terminal event. Review creation and invitation consumption occur in the same database transaction.</p></article>
           </div>
           <Link href={`${EPISTEMIC_SYSTEM_PATH}/pilot-corpus`} className="evidence-action evidence-action--primary mt-7">Open the frozen pilot corpus</Link>
+        </section>
+
+        <section className="evidence-section" aria-labelledby="factory-heading">
+          <p className="evidence-kicker text-[var(--status-sourced)]">Phases 5–8 · internal scale</p>
+          <h2 id="factory-heading" className="evidence-section-title mt-3">Automated volume stops before authority.</h2>
+          <p className="evidence-copy mt-5 max-w-4xl">The noncanonical factory compiles immutable audits, source/claim matrices, and reviewer-ready packets across bounded batches. Public-authority calculation fixtures run in CI, while candidate packets remain private, noindex, absent from the sitemap, and incapable of satisfying expert review.</p>
+          <Link href={`${EPISTEMIC_SYSTEM_PATH}/publishing-factory`} className="evidence-action evidence-action--primary mt-7">Open the publishing factory protocol</Link>
         </section>
 
         <section className="evidence-section" aria-labelledby="axes-heading">

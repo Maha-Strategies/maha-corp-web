@@ -45,7 +45,7 @@ function contrast(foreground: string, background: string): number {
 
 test('all Knowledge pages inherit one bounded cyber-light layout', () => {
   const routes = pageFiles(new URL('../app/knowledge', import.meta.url).pathname)
-  assert.equal(routes.length, 43)
+  assert.equal(routes.length, 44)
   assert.match(layout, /data-visual-system="cyber-light"/)
   assert.match(layout, /data-visual-scope="knowledge"/)
   assert.match(layout, /knowledge-cyber-light\.module\.css/)

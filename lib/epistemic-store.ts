@@ -6,6 +6,7 @@ import {
   ingestionBatchSnapshot,
   type EpistemicIngestionBatch,
 } from './epistemic-ingestion.ts'
+import type { EpistemicFactoryRun, EpistemicReviewPacket } from './epistemic-factory.ts'
 import {
   epistemicOperationsHash,
   expertReviewProfileHash,
@@ -70,7 +71,7 @@ export async function listEpistemicReviewTargets(client: SupabaseClient) {
       .limit(500),
     client
       .from('epistemic_reingestion_compilations')
-      .select('candidate_record_id,output_candidate_sha256,output_review_target_sha256,source_public_path,base_target_sha256,gate_decision,record_snapshot,compiled_at')
+      .select('candidate_record_id,output_candidate_sha256,output_review_target_sha256,source_public_path,base_target_sha256,gate_decision,record_snapshot,compilation_snapshot,compiled_at')
       .order('compiled_at', { ascending: false })
       .limit(500),
   ])
@@ -91,6 +92,7 @@ export async function listEpistemicReviewTargets(client: SupabaseClient) {
       ingestedAt: row.created_at,
       candidateSnapshot: snapshot.candidateSnapshot,
       baseTargetSha256: null,
+      lineageSnapshot: row.record_snapshot,
     }
   })
   const reingestionTargets = (reingestionResult.data ?? []).map((row) => ({
@@ -106,6 +108,7 @@ export async function listEpistemicReviewTargets(client: SupabaseClient) {
     ingestedAt: row.compiled_at,
     candidateSnapshot: row.record_snapshot as EpistemicRecord | undefined,
     baseTargetSha256: row.base_target_sha256,
+    lineageSnapshot: row.compilation_snapshot,
   }))
   const targets = [...ingestionTargets, ...reingestionTargets]
     .sort((left, right) => String(right.ingestedAt).localeCompare(String(left.ingestedAt)))
@@ -344,4 +347,43 @@ export async function listEpistemicReleaseWithdrawals(client: SupabaseClient): P
     .limit(1_000)
   if (error) throw new Error(`Epistemic release withdrawal read failed: ${error.message}`)
   return (data ?? []).map((row) => row.withdrawal_snapshot as EpistemicReleaseWithdrawal)
+}
+
+export async function insertEpistemicFactoryRun(
+  client: SupabaseClient,
+  run: EpistemicFactoryRun,
+  packets: readonly EpistemicReviewPacket[],
+  idempotencyKey: string,
+  actorFingerprint: string,
+) {
+  const { data, error } = await client.rpc('record_epistemic_factory_run', {
+    p_run: run,
+    p_packets: packets,
+    p_idempotency_hash: epistemicOperationsHash(idempotencyKey),
+    p_actor_fingerprint: actorFingerprint,
+  })
+  if (error) throw new Error(`Epistemic factory run failed [${error.code ?? 'unknown'}]: ${error.message}`)
+  return data as { runId: string; targetCount: number; idempotentReplay: boolean }
+}
+
+export async function listEpistemicFactoryRuns(client: SupabaseClient): Promise<EpistemicFactoryRun[]> {
+  const { data, error } = await client
+    .from('epistemic_factory_runs')
+    .select('run_snapshot')
+    .order('compiled_at', { ascending: false })
+    .limit(100)
+  if (error) throw new Error(`Epistemic factory run read failed: ${error.message}`)
+  return (data ?? []).map((row) => row.run_snapshot as EpistemicFactoryRun)
+}
+
+export async function listEpistemicReviewPackets(client: SupabaseClient, recordId?: string): Promise<EpistemicReviewPacket[]> {
+  let query = client
+    .from('epistemic_review_packets')
+    .select('packet_snapshot')
+    .order('prepared_at', { ascending: false })
+    .limit(recordId ? 20 : 500)
+  if (recordId) query = query.eq('candidate_record_id', recordId)
+  const { data, error } = await query
+  if (error) throw new Error(`Epistemic reviewer packet read failed: ${error.message}`)
+  return (data ?? []).map((row) => row.packet_snapshot as EpistemicReviewPacket)
 }

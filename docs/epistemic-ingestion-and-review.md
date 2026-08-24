@@ -235,3 +235,20 @@ expert review, superseded versions and withdrawn versions cannot enter it.
 An expert decision is scoped evidence about one representation. It is not
 product approval, scientific validation, certification, or proof that every
 claim in the underlying source is true.
+
+## Phases 5–8 noncanonical factory
+
+Migration `20260825010000_epistemic_noncanonical_factory.sql` adds append-only
+factory-run, automated-audit, and reviewer-packet ledgers. The private
+`/api/admin/epistemic-factory` surface compiles current immutable draft targets
+in batches of up to 500. It rejects stale hashes, promoted records, duplicate
+targets, and snapshots that differ from the durable ingestion lineage.
+
+Every packet carries the exact candidate snapshot, claim-to-source matrix,
+published review criteria, and automated findings. All review scopes remain
+explicitly `unreviewed`. Packets are private, marked `noindex`, excluded from
+the sitemap, and cannot call the canonical-release function.
+
+The public factory page and its registry expose only methodology and sanitized
+calculation-conformance evidence. See `docs/epistemic-publishing-factory.md`
+for the operator command and the Phase 5–8 boundaries.

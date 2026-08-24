@@ -21,6 +21,7 @@ import { EPISTEMIC_DOMAINS, EPISTEMIC_RELEASE_DATE, EPISTEMIC_SYSTEM_PATH, PUBLI
 import { epistemicRecordPath } from '@/lib/epistemic-publication'
 import { getActiveEpistemicCanonicalReleases } from '@/lib/public-epistemic-releases'
 import { EPISTEMIC_PHASE4_PILOT_DATE } from '@/lib/epistemic-pilot-corpus'
+import { PUBLIC_AUTHORITY_CONFORMANCE_DATE } from '@/lib/celestial-public-authority-conformance'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = MAHA_SITE_URL
@@ -65,6 +66,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${baseUrl}${EPISTEMIC_SYSTEM_PATH}/migrations`, lastModified: new Date(EPISTEMIC_RELEASE_DATE) },
     { url: `${baseUrl}${EPISTEMIC_SYSTEM_PATH}/releases`, lastModified: new Date(EPISTEMIC_RELEASE_DATE) },
     { url: `${baseUrl}${EPISTEMIC_SYSTEM_PATH}/pilot-corpus`, lastModified: new Date(EPISTEMIC_PHASE4_PILOT_DATE) },
+    { url: `${baseUrl}${EPISTEMIC_SYSTEM_PATH}/publishing-factory`, lastModified: new Date(PUBLIC_AUTHORITY_CONFORMANCE_DATE) },
     ...EPISTEMIC_DOMAINS.map((domain) => ({ url: `${baseUrl}/knowledge/${domain.slug}`, lastModified: new Date(EPISTEMIC_RELEASE_DATE) })),
     ...PUBLIC_EPISTEMIC_RECORDS.map((record) => ({ url: `${baseUrl}${epistemicRecordPath(record)}`, lastModified: new Date(EPISTEMIC_RELEASE_DATE) })),
     { url: `${baseUrl}${ASTROLOGY_PATH}`, lastModified: new Date(ASTROLOGY_RELEASE_DATE) },
