@@ -12,6 +12,7 @@ import {
   type EpistemicExpertReview,
   type ExpertReviewerSnapshot,
 } from './epistemic-review.ts'
+import type { ControlledReingestionCompilation } from './epistemic-reingestion.ts'
 import {
   sourceCompletionIdempotencyHash,
   type SourceCompletionEvent,
@@ -51,15 +52,24 @@ export async function listEpistemicIngestionBatches(client: SupabaseClient) {
 }
 
 export async function listEpistemicReviewTargets(client: SupabaseClient) {
-  const { data, error } = await client
-    .from('epistemic_ingestion_records')
-    .select('candidate_record_id,candidate_sha256,review_target_sha256,source_public_path,gate_decision,record_snapshot,created_at')
-    .order('created_at', { ascending: false })
-    .limit(500)
-  if (error) throw new Error(`Epistemic ingestion target read failed: ${error.message}`)
-  const targets = (data ?? []).map((row) => {
+  const [ingestionResult, reingestionResult] = await Promise.all([
+    client
+      .from('epistemic_ingestion_records')
+      .select('candidate_record_id,candidate_sha256,review_target_sha256,source_public_path,gate_decision,record_snapshot,created_at')
+      .order('created_at', { ascending: false })
+      .limit(500),
+    client
+      .from('epistemic_reingestion_compilations')
+      .select('candidate_record_id,output_candidate_sha256,output_review_target_sha256,source_public_path,base_target_sha256,gate_decision,record_snapshot,compiled_at')
+      .order('compiled_at', { ascending: false })
+      .limit(500),
+  ])
+  if (ingestionResult.error) throw new Error(`Epistemic ingestion target read failed: ${ingestionResult.error.message}`)
+  if (reingestionResult.error) throw new Error(`Epistemic re-ingestion target read failed: ${reingestionResult.error.message}`)
+  const ingestionTargets = (ingestionResult.data ?? []).map((row) => {
     const snapshot = row.record_snapshot as { candidateSnapshot?: EpistemicRecord }
     return {
+      origin: 'ingestion' as const,
       recordId: row.candidate_record_id,
       domainSlug: snapshot.candidateSnapshot?.domainSlug,
       title: snapshot.candidateSnapshot?.title,
@@ -70,11 +80,53 @@ export async function listEpistemicReviewTargets(client: SupabaseClient) {
       gateDecision: row.gate_decision,
       ingestedAt: row.created_at,
       candidateSnapshot: snapshot.candidateSnapshot,
+      baseTargetSha256: null,
     }
   })
+  const reingestionTargets = (reingestionResult.data ?? []).map((row) => ({
+    origin: 'reingestion' as const,
+    recordId: row.candidate_record_id,
+    domainSlug: (row.record_snapshot as EpistemicRecord | null)?.domainSlug,
+    title: (row.record_snapshot as EpistemicRecord | null)?.title,
+    slug: (row.record_snapshot as EpistemicRecord | null)?.slug,
+    candidateSha256: row.output_candidate_sha256,
+    reviewTargetSha256: row.output_review_target_sha256,
+    sourcePublicPath: row.source_public_path,
+    gateDecision: row.gate_decision,
+    ingestedAt: row.compiled_at,
+    candidateSnapshot: row.record_snapshot as EpistemicRecord | undefined,
+    baseTargetSha256: row.base_target_sha256,
+  }))
+  const targets = [...ingestionTargets, ...reingestionTargets]
+    .sort((left, right) => String(right.ingestedAt).localeCompare(String(left.ingestedAt)))
   const latest = new Map<string, (typeof targets)[number]>()
   for (const target of targets) if (!latest.has(target.recordId)) latest.set(target.recordId, target)
   return [...latest.values()]
+}
+
+export async function insertEpistemicReingestionCompilation(
+  client: SupabaseClient,
+  compilation: ControlledReingestionCompilation,
+  idempotencyKey: string,
+  actorFingerprint: string,
+) {
+  const { data, error } = await client.rpc('record_epistemic_reingestion_compilation', {
+    p_compilation: compilation,
+    p_idempotency_hash: epistemicOperationsHash(idempotencyKey),
+    p_actor_fingerprint: actorFingerprint,
+  })
+  if (error) throw new Error(`Epistemic re-ingestion failed [${error.code ?? 'unknown'}]: ${error.message}`)
+  return data as { compilationId: string; outputReviewTargetSha256: string; idempotentReplay: boolean }
+}
+
+export async function listEpistemicReingestionCompilations(client: SupabaseClient): Promise<ControlledReingestionCompilation[]> {
+  const { data, error } = await client
+    .from('epistemic_reingestion_compilations')
+    .select('compilation_snapshot')
+    .order('compiled_at', { ascending: false })
+    .limit(500)
+  if (error) throw new Error(`Epistemic re-ingestion read failed: ${error.message}`)
+  return (data ?? []).map((row) => row.compilation_snapshot as ControlledReingestionCompilation)
 }
 
 export async function insertEpistemicExpertReview(

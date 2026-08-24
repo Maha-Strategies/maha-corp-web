@@ -35,6 +35,7 @@ export interface CompletionEvidence {
   blockerCode: string
   sourceUrl: string
   exactLocator: string | null
+  proposedValue?: string | null
   note: string
   rightsBasis: string | null
 }
@@ -145,6 +146,7 @@ function parseEvidence(value: unknown): CompletionEvidence[] {
       blockerCode: line(candidate.blockerCode, `evidence[${index}].blockerCode`, 3, 240),
       sourceUrl,
       exactLocator: nullableLine(candidate.exactLocator, `evidence[${index}].exactLocator`, 500),
+      proposedValue: nullableLine(candidate.proposedValue, `evidence[${index}].proposedValue`, 4000),
       note: line(candidate.note, `evidence[${index}].note`, 20, 2000),
       rightsBasis: nullableLine(candidate.rightsBasis, `evidence[${index}].rightsBasis`, 120),
     }
