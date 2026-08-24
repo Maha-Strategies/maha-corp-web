@@ -1,0 +1,68 @@
+{
+  "artifactVersion": "1.0.0",
+  "recordedAt": "2026-08-24",
+  "subject": {
+    "offeringRef": "maha:bogawantalawa-legend-black-tea:retail-test-v1",
+    "title": "Bogawantalawa Legend Black Tea — one-box retail test",
+    "sellerOfRecord": "Maha Strategies LLC",
+    "manufacturer": "Bogawantalawa Tea Ceylon (Pvt) Ltd",
+    "manufacturerAuthorizationAsserted": false,
+    "distributorRelationshipAsserted": false
+  },
+  "inventory": {
+    "availableUnits": 1,
+    "countedAsOf": "2026-08-24",
+    "sealed": true,
+    "visibleCondition": "Outer retail box shows minor corner and edge compression/creasing.",
+    "replenishmentPromised": false
+  },
+  "labelTranscription": {
+    "productName": "Bogawantalawa Legend Black Tea",
+    "grade": "High Grown BOPF",
+    "ingredient": "Pure Ceylon high grown BOPF tea",
+    "teaBags": 50,
+    "teaBagWeightGrams": 2,
+    "netWeightGrams": 100,
+    "barcode": "4791037556078",
+    "dateOfManufacture": "2026-01-25",
+    "bestBefore": "2028-01-25",
+    "packedIn": "Sri Lanka"
+  },
+  "evidence": {
+    "kind": "seller-supplied-product-photographs",
+    "imageBytesPublished": false,
+    "sha256": [
+      "372551158aaec48aedf9df2fd54fa487391328282ff25769c34179ac34c6dec2",
+      "4c35d9cde71b4de5c889d05cc8b0892628f7a27f0980967a7bf19ca88f3b0df2",
+      "4109bb16b5b148928cacfdee7a239c315dee136aa53b98ff5e2d99e348d9554d",
+      "b4f5c3b70b41473b37c176a6495b47b1ca89f08079fa6d460a5c0ae2f2d94d6f"
+    ]
+  },
+  "claimBoundary": {
+    "retailAcquisition": "Seller states that the unit was purchased at Cargills in Sri Lanka; the retailer receipt is not included in this artifact.",
+    "manufacturerClaims": "Statements printed on the package are label evidence only and are not independently verified or adopted by Maha.",
+    "healthClaimsAdopted": false,
+    "environmentalClaimsAdopted": false
+  },
+  "commercialBoundary": {
+    "commercialAvailability": "enquiry_only",
+    "purchasable": false,
+    "price": null,
+    "paymentInstructionsPresent": false,
+    "escrowInstructionsPresent": false,
+    "deliveryInstructionsPresent": false,
+    "activationRequires": [
+      "destination-specific import and carrier eligibility",
+      "buyer and recipient details",
+      "shipping, tracking, insurance, duties, and taxes allocation",
+      "buyer acceptance of photographed package condition",
+      "inventory reconfirmation",
+      "final total price and quote expiry"
+    ]
+  },
+  "retention": {
+    "credentialsRetained": false,
+    "personalDataRetained": false,
+    "requestContentsRetained": false
+  }
+}

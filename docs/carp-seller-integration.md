@@ -4,6 +4,12 @@ Maha's first CABEZON Seller offering is **Deep Context Evaluation**, a digitally
 
 The Seller profile also publishes **Samley Signature Collection Cinnamon Tea — Pallet RFQ** as an enquiry-only physical-goods offer. Maha remains the CABEZON Seller and RFQ coordinator; Samley Teas is named only as the prospective fulfilling exporter, with no CABEZON membership or standing partnership asserted. `purchase` fails closed with `QUOTE_REQUIRED` and returns no payment instructions.
 
+The profile additionally publishes **Bogawantalawa Legend Black Tea — one-box retail test** under `maha:bogawantalawa-legend-black-tea:retail-test-v1`. Maha owns one sealed 100 g retail box (50 × 2 g tea bags) purchased locally in Sri Lanka and acts only as the seller of that unit. No manufacturer authorization, distributorship, retailer relationship, replenishment, or long-term availability is asserted. The photographed outer packaging has visible minor compression/creasing, which must be disclosed to and accepted by a buyer.
+
+This one-unit listing is also enquiry-only and `purchasable: false`. A purchase-shaped call using the exact three-field RFQ boundary returns `QUOTE_REQUIRED` without payment, escrow, or delivery instructions. Before creating an order-specific purchasable offer, Maha must reconfirm the unit, check the destination-specific food-import and carrier path, obtain the recipient/importer details, quote shipping and total price, allocate duties and taxes, and record the buyer's acceptance of package condition. Statements printed on the manufacturer packaging are label evidence, not independently verified Maha claims; Maha adopts no health or environmental claim from the box.
+
+The metadata-only product evidence is published at `https://www.mahastrategies.com/artifacts/carp/bogawantalawa-legend-tea-retail-test-v1.json`. It records label transcription, inventory and commercial boundaries, and SHA-256 digests of the four seller-supplied photographs without publishing the image bytes or local file paths.
+
 The RFQ purchase boundary accepts exactly this CABEZON v0.2 object while the offer remains enquiry-only:
 
 ```json

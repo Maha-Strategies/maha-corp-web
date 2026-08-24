@@ -13,6 +13,7 @@ const OFFER = DEEP_CONTEXT_EVALUATION_OFFER
 const identity = configuredIdentity()
 
 export const SAMLEY_CINNAMON_TEA_RFQ_REF = 'maha:samley-cinnamon-tea:rfq-v1'
+export const BOGAWANTALAWA_LEGEND_TEA_TEST_REF = 'maha:bogawantalawa-legend-black-tea:retail-test-v1'
 
 export const SAMLEY_CINNAMON_TEA_RFQ_OFFER = Object.freeze({
   offeringRef: SAMLEY_CINNAMON_TEA_RFQ_REF,
@@ -23,6 +24,7 @@ export const SAMLEY_CINNAMON_TEA_RFQ_OFFER = Object.freeze({
   tags: ['cinnamon-tea', 'ceylon-tea', 'samley', 'sri-lanka', 'b2b', 'wholesale', 'physical-fulfillment', 'export-rfq'],
   status: 'request_for_quote',
   commercialAvailability: 'enquiry_only',
+  purchasable: false,
   price: null,
   directSettlement: null,
   supplier: {
@@ -86,6 +88,79 @@ export const SAMLEY_CINNAMON_TEA_RFQ_OFFER = Object.freeze({
   termsUrl: `${SITE_URL}/contact?service=general`,
 })
 
+export const BOGAWANTALAWA_LEGEND_TEA_TEST_OFFER = Object.freeze({
+  offeringRef: BOGAWANTALAWA_LEGEND_TEA_TEST_REF,
+  kind: 'physical',
+  offerType: 'request_for_quote',
+  title: 'Bogawantalawa Legend Black Tea — one-box retail test',
+  descrip: 'A bounded one-unit resale test for one sealed retail box of Bogawantalawa Legend Black Tea purchased by Maha in Sri Lanka. A buyer may request a destination-specific quote; no order, payment, escrow, or shipment exists until Maha confirms import eligibility, shipping, total price, and acceptance of the photographed package condition.',
+  tags: ['black-tea', 'ceylon-tea', 'bogawantalawa', 'sri-lanka', 'retail', 'single-unit', 'physical-fulfillment', 'test-listing'],
+  status: 'request_for_quote',
+  commercialAvailability: 'enquiry_only',
+  purchasable: false,
+  price: null,
+  directSettlement: null,
+  seller: {
+    name: 'Maha Strategies LLC',
+    role: 'seller_of_record_for_one_retail_unit',
+    manufacturerAuthorizationAsserted: false,
+    distributorRelationshipAsserted: false,
+  },
+  manufacturer: {
+    name: 'Bogawantalawa Tea Ceylon (Pvt) Ltd',
+    relationshipToMaha: 'none_asserted',
+  },
+  inventory: {
+    availableUnits: 1,
+    countedAsOf: '2026-08-24',
+    replenishmentPromised: false,
+    acquisition: 'retail purchase at Cargills in Sri Lanka; seller-declared',
+  },
+  productSpecification: {
+    productName: 'Bogawantalawa Legend Black Tea',
+    teaType: 'Pure Ceylon high grown BOPF black tea',
+    originCountry: 'LK',
+    teaBagsPerRetailPack: 50,
+    teaBagWeightGrams: 2,
+    retailPackNetWeightGrams: 100,
+    barcode: '4791037556078',
+    dateOfManufacture: '2026-01-25',
+    bestBefore: '2028-01-25',
+    packaging: 'manufacturer-branded sealed retail box',
+    visibleCondition: 'sealed; photographed outer box shows minor corner and edge compression/creasing',
+  },
+  evidence: {
+    artifact: `${SITE_URL}/artifacts/carp/bogawantalawa-legend-tea-retail-test-v1.json`,
+    source: 'four seller-supplied photographs of the physical retail box',
+    imageBytesPublished: false,
+  },
+  quoteRequirements: [
+    'buyer legal name and contact',
+    'destination country, postal code, and complete delivery address',
+    'recipient and importer-of-record confirmation where required',
+    'destination-specific food import, labelling, customs, and carrier eligibility check',
+    'shipping service, tracking, insurance, duties, taxes, and delivery responsibility',
+    'buyer acceptance of the photographed package condition and remaining shelf life',
+    'one-unit stock reconfirmation and a final total price with quote expiry',
+  ],
+  fulfillment: {
+    modes: ['physical'],
+    estimatedSeconds: null,
+    deliveryDeadlineSeconds: null,
+    shipsFrom: 'Sri Lanka',
+    proofTypes: ['inventory-reconfirmation', 'package-condition-record', 'carrier-tracking', 'signed-receipt'],
+  },
+  capabilityBoundaries: [
+    'Maha owns and may resell one retail unit; it does not claim manufacturer authorization, distributor status, or a partnership with Bogawantalawa or Cargills.',
+    'Manufacturer packaging statements are transcribed as label evidence and are not independently verified by Maha; no health or environmental claim is adopted as Maha fact.',
+    'The photographed package condition must be disclosed to and accepted by the buyer before an order is activated.',
+    'The listing cannot be purchased and returns no payment, escrow, or delivery instructions until a destination-specific quote and lawful shipment path are confirmed.',
+    'Inventory is limited to one unit and no replenishment or long-term product availability is promised.',
+  ],
+  retention: { orderPersisted: false, personalDataAccepted: false, evidenceReturnedToCaller: true },
+  termsUrl: `${SITE_URL}/contact?service=general`,
+})
+
 export type CarpSellerRequest = {
   jsonrpc: '2.0'
   method: string
@@ -107,7 +182,7 @@ type NormalizedPurchase = {
 }
 
 export const mahaCarpSellerProfile = Object.freeze({
-  schemaVersion: '0.1.0',
+  schemaVersion: '0.1.1',
   sellerId: 'maha-strategies',
   name: 'Maha Strategies LLC',
   description: 'Governed infrastructure, machine-payable utilities, and bounded agent-commerce pilots.',
@@ -162,6 +237,7 @@ export const mahaCarpSellerProfile = Object.freeze({
       termsUrl: `${SITE_URL}/deep-context-evaluation`,
     },
     SAMLEY_CINNAMON_TEA_RFQ_OFFER,
+    BOGAWANTALAWA_LEGEND_TEA_TEST_OFFER,
   ],
 })
 
@@ -174,10 +250,17 @@ function asRecord(value: unknown): Record<string, unknown> | null {
 }
 
 const RFQ_PURCHASE_FIELDS = new Set(['offeringRef', 'quantity', 'agreedPrice'])
+const RFQ_OFFER_REFS = new Set([SAMLEY_CINNAMON_TEA_RFQ_REF, BOGAWANTALAWA_LEGEND_TEA_TEST_REF])
+
+function rfqOfferForRef(offeringRef: unknown) {
+  if (offeringRef === SAMLEY_CINNAMON_TEA_RFQ_REF) return SAMLEY_CINNAMON_TEA_RFQ_OFFER
+  if (offeringRef === BOGAWANTALAWA_LEGEND_TEA_TEST_REF) return BOGAWANTALAWA_LEGEND_TEA_TEST_OFFER
+  return null
+}
 
 function rfqPurchaseParamsAreCanonical(params: unknown): boolean {
   const record = asRecord(params)
-  if (!record || record.offeringRef !== SAMLEY_CINNAMON_TEA_RFQ_REF) return false
+  if (!record || !RFQ_OFFER_REFS.has(String(record.offeringRef))) return false
 
   const keys = Object.keys(record)
   return keys.length === RFQ_PURCHASE_FIELDS.size
@@ -188,8 +271,8 @@ function rfqPurchaseParamsAreCanonical(params: unknown): boolean {
 
 function isRfqPurchaseAttempt(params: unknown): boolean {
   const record = asRecord(params)
-  return record?.offeringRef === SAMLEY_CINNAMON_TEA_RFQ_REF
-    || (Array.isArray(params) && params.includes(SAMLEY_CINNAMON_TEA_RFQ_REF))
+  return RFQ_OFFER_REFS.has(String(record?.offeringRef))
+    || (Array.isArray(params) && params.some((value) => RFQ_OFFER_REFS.has(String(value))))
 }
 
 function legacyOrderId(requestId: string, itemref: unknown): string {
@@ -245,17 +328,25 @@ function enquiryMatchesDigital(terms: string) {
 
 function enquiryMatchesSamleyTea(terms: string) {
   if (!terms) return true
+  if (['bogawantalawa', 'legend', 'bopf', 'black tea', 'single unit'].some((term) => terms.includes(term))) return false
   return ['cinnamon', 'tea', 'ceylon', 'samley', 'sri lanka', 'physical', 'export', 'wholesale', 'pallet']
+    .some((term) => terms.includes(term))
+}
+
+function enquiryMatchesBogawantalawaTea(terms: string) {
+  if (!terms) return true
+  if (['samley', 'cinnamon', 'pallet', 'wholesale'].some((term) => terms.includes(term))) return false
+  return ['black tea', 'tea', 'ceylon', 'bogawantalawa', 'legend', 'bopf', 'sri lanka', 'physical', 'retail', 'single unit']
     .some((term) => terms.includes(term))
 }
 
 function enquiryMatches(params: Record<string, unknown>) {
   const terms = enquiryTerms(params)
-  return mahaCarpSellerProfile.offers.filter((offer) =>
-    offer.offeringRef === SAMLEY_CINNAMON_TEA_RFQ_REF
-      ? enquiryMatchesSamleyTea(terms)
-      : enquiryMatchesDigital(terms),
-  )
+  return mahaCarpSellerProfile.offers.filter((offer) => {
+    if (offer.offeringRef === SAMLEY_CINNAMON_TEA_RFQ_REF) return enquiryMatchesSamleyTea(terms)
+    if (offer.offeringRef === BOGAWANTALAWA_LEGEND_TEA_TEST_REF) return enquiryMatchesBogawantalawaTea(terms)
+    return enquiryMatchesDigital(terms)
+  })
 }
 
 export function handleCarpSellerRequest(request: CarpSellerRequest): CarpSellerReply {
@@ -293,16 +384,17 @@ export function handleCarpSellerRequest(request: CarpSellerRequest): CarpSellerR
   }
   const params = normalizePurchase(request.params, request.id)
   if (!params) return jsonError(request.id, -32602, 'purchase params must use the legacy array or the v0.2 object shape.')
-  if (params.offerId === SAMLEY_CINNAMON_TEA_RFQ_REF) {
+  const rfqOffer = rfqOfferForRef(params.offerId)
+  if (rfqOffer) {
     return jsonError(
       request.id,
       -32011,
-      'QUOTE_REQUIRED: this physical-goods offering is enquiry-only until the supplier and buyer confirm an order-specific quote.',
+      'QUOTE_REQUIRED: this physical-goods offering is enquiry-only until the seller and buyer confirm an order-specific quote and lawful fulfillment path.',
       {
-        offeringRef: SAMLEY_CINNAMON_TEA_RFQ_REF,
-        status: SAMLEY_CINNAMON_TEA_RFQ_OFFER.status,
-        commercialAvailability: SAMLEY_CINNAMON_TEA_RFQ_OFFER.commercialAvailability,
-        quoteRequirements: SAMLEY_CINNAMON_TEA_RFQ_OFFER.quoteRequirements,
+        offeringRef: rfqOffer.offeringRef,
+        status: rfqOffer.status,
+        commercialAvailability: rfqOffer.commercialAvailability,
+        quoteRequirements: rfqOffer.quoteRequirements,
       },
     )
   }
