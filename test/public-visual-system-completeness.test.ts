@@ -22,9 +22,11 @@ const operator = /^(?:admin|dashboard|operations)\//
 const intelligence = /^intelligence\//
 const knowledge = /^knowledge\//
 const books = /^books\//
+const apps = /^apps\//
+const docs = /^docs\//
 
 test('every route belongs to one declared visual system', () => {
-  const groups = { paper: 0, books: 0, knowledge: 0, intelligence: 0, operator: 0 }
+  const groups = { paper: 0, apps: 0, books: 0, docs: 0, knowledge: 0, intelligence: 0, operator: 0 }
   const missingPaperBoundary: string[] = []
 
   for (const path of pages) {
@@ -33,6 +35,8 @@ test('every route belongs to one declared visual system', () => {
     if (intelligence.test(file)) { groups.intelligence += 1; continue }
     if (knowledge.test(file)) { groups.knowledge += 1; continue }
     if (books.test(file)) { groups.books += 1; continue }
+    if (apps.test(file)) { groups.apps += 1; continue }
+    if (docs.test(file)) { groups.docs += 1; continue }
 
     groups.paper += 1
     const source = readFileSync(path, 'utf8')
@@ -42,21 +46,25 @@ test('every route belongs to one declared visual system', () => {
   }
 
   assert.equal(
-    groups.paper + groups.books + groups.knowledge + groups.intelligence + groups.operator,
+    groups.paper + groups.apps + groups.books + groups.docs + groups.knowledge + groups.intelligence + groups.operator,
     pages.length,
   )
   assert.deepEqual(missingPaperBoundary, [])
-  assert.deepEqual(groups, { paper: 115, books: 30, knowledge: 41, intelligence: 2, operator: 27 })
+  assert.deepEqual(groups, { paper: 108, apps: 6, books: 30, docs: 1, knowledge: 41, intelligence: 2, operator: 27 })
 })
 
-test('Books, Knowledge, and Intelligence own bounded cyber-light overlays', () => {
+test('Apps, Books, Docs, Knowledge, and Intelligence own bounded cyber-light overlays', () => {
+  const appsLayout = readFileSync(new URL('../app/apps/layout.tsx', import.meta.url), 'utf8')
   const booksLayout = readFileSync(new URL('../app/books/layout.tsx', import.meta.url), 'utf8')
+  const docsLayout = readFileSync(new URL('../app/docs/layout.tsx', import.meta.url), 'utf8')
   const knowledgeLayout = readFileSync(new URL('../app/knowledge/layout.tsx', import.meta.url), 'utf8')
   const intelligenceLayout = readFileSync(new URL('../app/intelligence/layout.tsx', import.meta.url), 'utf8')
   const rootLayout = readFileSync(new URL('../app/layout.tsx', import.meta.url), 'utf8')
   const siteTheme = readFileSync(new URL('../lib/site-theme.ts', import.meta.url), 'utf8')
 
+  assert.match(appsLayout, /data-visual-scope="apps"/)
   assert.match(booksLayout, /data-visual-system="cyber-light"/)
+  assert.match(docsLayout, /data-visual-scope="docs"/)
   assert.match(knowledgeLayout, /data-visual-system="cyber-light"/)
   assert.match(knowledgeLayout, /data-visual-scope="knowledge"/)
   assert.match(intelligenceLayout, /data-visual-system="cyber-light"/)

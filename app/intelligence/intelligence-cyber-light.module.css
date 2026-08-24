@@ -1,10 +1,6 @@
 /*
- * Cyber-light — intelligence scope.
- *
- * A sibling of the frozen Books cyber-light vocabulary (docs/design/
- * cyber-light-vocabulary-v1.md), not an inheritance of it. Books v1 is scoped
- * to /books/** and explicitly does not extend here, so this file carries its
- * own tokens and its own scope marker.
+ * Cyber-light — analytical interface shared by Intelligence, Apps, Books,
+ * and Docs.
  *
  * The intelligence surface is an analyst ground rather than a reading ground:
  * pale blue-tinted neutral, a technical grid, sharp borders, monospace
@@ -77,6 +73,154 @@
 .root > * {
   position: relative;
   z-index: 1;
+}
+
+/* --------------------------------------------- Evidence Paper adapters -- */
+
+/* Apps, Books, and Docs already speak the Evidence Paper component language.
+ * These scoped adapters give those components the same analytical treatment
+ * as native Intelligence cards without changing content or route behavior. */
+.root :global(.evidence-page) {
+  min-height: 100vh;
+  background: transparent;
+}
+
+.root :global(.evidence-container),
+.root :global(.evidence-container--narrow) {
+  position: relative;
+}
+
+.root :global(.evidence-container)::before,
+.root :global(.evidence-container--narrow)::before {
+  position: absolute;
+  top: 1.25rem;
+  right: 1.5rem;
+  width: 2.75rem;
+  height: 0.45rem;
+  border-top: 1px solid var(--intel-line);
+  border-bottom: 1px solid var(--intel-line);
+  content: '';
+  pointer-events: none;
+}
+
+.root :global(.evidence-section),
+.root :global(.evidence-rule) {
+  border-color: var(--intel-line);
+}
+
+.root :global(.evidence-kicker) {
+  color: var(--intel-accent);
+  letter-spacing: 0.17em;
+}
+
+.root :global(.evidence-title),
+.root :global(.evidence-section-title),
+.root :global(.evidence-card-title) {
+  color: var(--text-primary);
+  text-transform: uppercase;
+}
+
+.root :global(.evidence-title) {
+  font-family: var(--font-geist-sans), ui-sans-serif, sans-serif;
+  font-weight: 800;
+}
+
+.root :global(.evidence-card) {
+  position: relative;
+  border-color: var(--intel-line);
+  background: var(--intel-raised);
+  box-shadow: 4px 4px 0 var(--intel-shadow);
+  transition:
+    border-color 150ms ease,
+    box-shadow 150ms ease,
+    transform 150ms ease;
+}
+
+.root :global(.evidence-card)::before {
+  position: absolute;
+  top: -1px;
+  left: -1px;
+  width: 1.15rem;
+  height: 1.15rem;
+  border-top: 2px solid var(--intel-accent);
+  border-left: 2px solid var(--intel-accent);
+  content: '';
+  pointer-events: none;
+}
+
+.root :global(.evidence-card:hover) {
+  border-color: var(--intel-accent);
+  box-shadow: 6px 6px 0 var(--intel-shadow);
+  transform: translate(-1px, -1px);
+}
+
+.root :global(.evidence-card:hover .evidence-card-title) {
+  color: var(--intel-accent-strong);
+}
+
+.root :global(.evidence-action) {
+  border-color: var(--intel-line-strong);
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  letter-spacing: 0.12em;
+  box-shadow: 2px 2px 0 var(--intel-shadow);
+}
+
+.root :global(.evidence-action--primary) {
+  border-color: var(--intel-accent);
+  background: var(--intel-accent);
+  color: var(--intel-raised);
+}
+
+.root :global(.evidence-action--primary:hover) {
+  border-color: var(--intel-accent-strong);
+  background: var(--intel-accent-strong);
+  color: var(--intel-raised);
+}
+
+.root :global(.evidence-action--secondary) {
+  background: var(--intel-raised);
+  color: var(--intel-accent);
+}
+
+.root :global(.evidence-action--secondary:hover) {
+  border-color: var(--intel-accent);
+  background: var(--intel-accent-soft);
+  color: var(--intel-accent-strong);
+}
+
+.root :global(.evidence-link) {
+  color: var(--intel-accent);
+  text-decoration-color: var(--intel-line-strong);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.3em;
+}
+
+.root :global(.evidence-link:hover) {
+  color: var(--intel-accent-strong);
+  text-decoration-color: var(--intel-accent);
+}
+
+.root :global(nav[aria-label='Chapter navigation'] a) {
+  display: block;
+  border: 1px solid var(--intel-line);
+  background: var(--intel-raised);
+  padding: 0.8rem 1rem;
+}
+
+.root :global(nav[aria-label='Chapter navigation'] a:hover) {
+  border-color: var(--intel-accent);
+  background: var(--intel-accent-soft);
+}
+
+.root :global(nav[aria-label$=' sections'] a) {
+  display: block;
+  border-bottom: 1px solid transparent;
+  padding: 0.45rem 0.25rem;
+}
+
+.root :global(nav[aria-label$=' sections'] a:hover) {
+  border-bottom-color: var(--intel-line);
+  background: var(--intel-accent-soft);
 }
 
 /* ---------------------------------------------------------------- shell -- */
@@ -609,6 +753,17 @@
   .card {
     box-shadow: 3px 3px 0 var(--intel-shadow);
   }
+
+  .root :global(.evidence-container)::before,
+  .root :global(.evidence-container--narrow)::before {
+    top: 0.9rem;
+    right: 1rem;
+    width: 1.8rem;
+  }
+
+  .root :global(.evidence-card) {
+    box-shadow: 3px 3px 0 var(--intel-shadow);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -627,6 +782,14 @@
   }
 
   .card:hover {
+    transform: none;
+  }
+
+  .root :global(.evidence-card) {
+    transition: none;
+  }
+
+  .root :global(.evidence-card:hover) {
     transform: none;
   }
 
