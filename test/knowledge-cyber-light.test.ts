@@ -17,6 +17,14 @@ function pageFiles(directory: string): string[] {
   })
 }
 
+function sourceFiles(directory: string): string[] {
+  return readdirSync(directory, { withFileTypes: true }).flatMap((entry) => {
+    const path = join(directory, entry.name)
+    if (entry.isDirectory()) return sourceFiles(path)
+    return entry.name.endsWith('.tsx') ? [path] : []
+  })
+}
+
 function luminance(hex: string): number {
   const channels = hex.match(/[a-f\d]{2}/gi)?.map((value) => Number.parseInt(value, 16) / 255)
   assert.equal(channels?.length, 3)
@@ -59,10 +67,20 @@ test('Knowledge copy and semantic labels meet readable contrast on light surface
 })
 
 test('Knowledge keeps dark surfaces bounded to machine-readable panels', () => {
+  const legacyDarkTokens = sourceFiles(new URL('../app/knowledge', import.meta.url).pathname)
+    .flatMap((path) => readFileSync(path, 'utf8').match(/bg-(?:black(?:\/\d+)?|\[#0[\da-f]{5}\])/gi) ?? [])
+
+  assert.ok(legacyDarkTokens.length > 0, 'expected the guard to exercise legacy dark utilities')
+  assert.match(stylesheet, /\[class\^='bg-\[#0'/)
+  assert.match(stylesheet, /\[class\^='bg-black'/)
   assert.match(stylesheet, /:global\(pre\)/)
   assert.match(stylesheet, /\.knowledge-machine-panel/)
   assert.match(stylesheet, /color: #edf8f4 !important;/)
   assert.match(stylesheet, /background: #13211c !important;/)
+  assert.ok(
+    stylesheet.indexOf(":global([class^='bg-black'])") < stylesheet.indexOf(':global(.knowledge-machine-panel)'),
+    'intentional machine panels must override the legacy dark-background remap',
+  )
   assert.doesNotMatch(layout, /intelligence|operator|admin/)
 })
 
