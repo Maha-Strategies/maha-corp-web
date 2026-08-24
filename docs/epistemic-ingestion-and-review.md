@@ -61,6 +61,29 @@ one frozen target. Submission moves the old target only to
 record must pass through the adapter again, creating a new target hash and a new
 review backlog.
 
+## Controlled re-ingestion compiler
+
+The private `/admin/epistemic-reingestion` workspace completes the next
+transition without exposing a general-purpose patch surface. Its API accepts
+only blocker codes that the compiler explicitly maps to typed fields. The first
+version covers every correctable blocker present in the 110-record corpus:
+
+- `source-locator-missing:*` → the named source's exact locator
+- `source-publication-date-missing:*` → the named source's publication date
+- `claim-evidence-not-assessed:*` → the named claim's evidence maturity
+
+Each correction must reference a prior `submit-evidence` event on the same
+record and target hash. The caller cannot supply the field path or old value;
+the server derives both from the frozen snapshot. Preview returns the complete
+before/after diff without persistence. Compile records the diff, source event
+digests, output snapshot, remaining blockers and parent/child target hashes in
+the append-only `epistemic_reingestion_compilations` ledger.
+
+Every output is forced to `draft`, `requestedPublicPromotion` is forced to
+`false`, `publishedAt` is removed and all prior review events are cleared. The
+new hash therefore enters fresh source-completion and expert-review queues. The
+compiler has no publication or promotion operation.
+
 ## Persistence boundary
 
 Migration `20260824050000_epistemic_ingestion_and_expert_review.sql` adds four
@@ -76,6 +99,11 @@ append-only `epistemic_source_completion_events` ledger and the sole
 security-definer function permitted to append valid state transitions. The
 service role can read the ledger but cannot insert, update, delete, or truncate
 it directly.
+
+Migration `20260824133000_epistemic_controlled_reingestion.sql` adds the
+append-only compilation ledger and its sole validated append function. It also
+allows expert reviews and later source-completion events to bind compiler-created
+targets without weakening their exact-digest requirements.
 
 Anonymous and authenticated browser roles receive no access. The service role
 has read access but cannot insert, update, delete, or truncate the ledgers

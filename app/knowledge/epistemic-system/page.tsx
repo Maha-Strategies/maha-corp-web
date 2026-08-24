@@ -121,6 +121,10 @@ export default function EpistemicSystemPage() {
             <article className="evidence-card"><p className="evidence-kicker">Append-only work</p><h3 className="evidence-card-title mt-3">Evidence without mutation</h3><p className="evidence-card-copy mt-3">Assignments and evidence submissions bind to the old target hash; they cannot silently rewrite the ingested candidate.</p></article>
             <article className="evidence-card"><p className="evidence-kicker">Scoped handoff</p><h3 className="evidence-card-title mt-3">Review readiness, not approval</h3><p className="evidence-card-copy mt-3">Corrected content must be re-ingested under a new hash before reviewer decisions can count toward the publication gate.</p></article>
           </div>
+          <div className="evidence-status-surface evidence-status-surface--sourced mt-6">
+            <p className="evidence-status-label">Controlled re-ingestion compiler</p>
+            <p className="evidence-copy mt-2">A ready target can now become a new immutable revision through a restricted compiler. The server derives each editable field from an exact blocker, verifies its prior evidence event, emits a before/after diff, assigns new candidate and review digests, clears earlier review events, and resets publication controls to draft. Arbitrary JSON patches and automatic promotion are not supported.</p>
+          </div>
         </section>
 
         <section className="evidence-section" aria-labelledby="axes-heading">

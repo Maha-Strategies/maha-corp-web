@@ -91,6 +91,7 @@ const PRIVATE_ROUTES = new Set([
   '/api/admin/epistemic-ingestion',
   '/api/admin/epistemic-reviews',
   '/api/admin/epistemic-work-queue',
+  '/api/admin/epistemic-reingestion',
   '/api/admin/editorial-coverage',
   '/api/admin/inbound-operations',
   '/api/admin/navigator',

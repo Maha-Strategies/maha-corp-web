@@ -168,7 +168,7 @@ export default function EpistemicIngestionPage() {
           <div><p className="font-mono text-xs uppercase tracking-[0.24em] text-cyan-700">Epistemic operations · append-only</p>
           <h1 className="mt-3 text-4xl font-semibold">Knowledge ingestion and expert review</h1>
           <p className="mt-3 max-w-4xl text-sm leading-6 text-slate-600">Legacy content is hashed and preserved as a candidate. Reviewers decide one scope at a time; any content change invalidates decisions bound to the prior digest.</p></div>
-          <a href="/admin/epistemic-work-queue" className="border border-violet-500 bg-violet-50 px-4 py-3 font-mono text-xs font-bold uppercase tracking-widest text-violet-800">Open Phase 2 queue</a>
+          <div className="flex flex-wrap gap-3"><a href="/admin/epistemic-work-queue" className="border border-violet-500 bg-violet-50 px-4 py-3 font-mono text-xs font-bold uppercase tracking-widest text-violet-800">Open Phase 2 queue</a><a href="/admin/epistemic-reingestion" className="border border-cyan-600 bg-cyan-50 px-4 py-3 font-mono text-xs font-bold uppercase tracking-widest text-cyan-800">Open controlled compiler</a></div>
         </header>
         {notice && <p className="mt-6 border border-cyan-200 bg-cyan-50 p-4 text-sm text-cyan-950">{notice}</p>}
 
