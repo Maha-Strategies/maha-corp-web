@@ -18,7 +18,7 @@ import {
 
 const root = new URL('../', import.meta.url)
 
-function fixture() {
+function fixture(sourceDateValue = '2025-01-15') {
   const candidate = ADAPTED_EPISTEMIC_CANDIDATES[0]
   const source = candidate.record.sources[0]
   const claim = candidate.record.claims[0]
@@ -40,7 +40,7 @@ function fixture() {
   const start = buildSourceCompletionEvent(parseSourceCompletionEvent({ ...base, action: 'start', assigneeId: 'researcher_maha', assigneeName: 'Maha Source Researcher', idempotencyKey: 'reingestion-start-001' }), [triage], candidate.gateDecision.reasons, new Date('2026-08-24T13:31:00.000Z'))
   const evidence = [
     { blockerCode: blockers[0], sourceUrl: source.url, exactLocator: 'Section 2, paragraph 4', proposedValue: 'Section 2, paragraph 4', note: 'The stable source section provides the exact locator retained for compilation.', rightsBasis: source.rights.basis },
-    { blockerCode: blockers[1], sourceUrl: source.url, exactLocator: null, proposedValue: '2025-01-15', note: 'The source metadata records this publication date for the reviewed version.', rightsBasis: source.rights.basis },
+    { blockerCode: blockers[1], sourceUrl: source.url, exactLocator: null, proposedValue: sourceDateValue, note: 'The source metadata records either a publication date or an explicit undated/living-document chronology.', rightsBasis: source.rights.basis },
     { blockerCode: blockers[2], sourceUrl: source.url, exactLocator: null, proposedValue: 'single-study', note: 'The bounded source record supports a single-study evidence maturity assessment.', rightsBasis: source.rights.basis },
   ]
   const submit = buildSourceCompletionEvent(parseSourceCompletionEvent({ ...base, action: 'submit-evidence', assigneeId: 'researcher_maha', assigneeName: 'Maha Source Researcher', evidence, idempotencyKey: 'reingestion-submit-001' }), [triage, start], candidate.gateDecision.reasons, new Date('2026-08-24T13:32:00.000Z'))
@@ -96,6 +96,16 @@ test('the compiler creates a new frozen target, exact diff, and fresh draft revi
   assert.equal(target.candidateSnapshot.sources[0].exactLocator, '')
 })
 
+test('the compiler records undated living-source chronology without inventing a publication date', () => {
+  const chronology = JSON.stringify({ status: 'living-document', accessedAt: '2026-08-24', sourceVersion: 'P5 4.12.0' })
+  const { source, target, request, events } = fixture(chronology)
+  const compilation = buildControlledReingestionCompilation(request, target, events, new Date('2026-08-24T13:33:00.000Z'))
+  const outputSource = compilation.outputRecord.sources.find((candidate) => candidate.id === source.id)!
+  assert.equal(outputSource.publishedAt, '')
+  assert.deepEqual(outputSource.sourceChronology, { status: 'living-document', accessedAt: '2026-08-24', sourceVersion: 'P5 4.12.0' })
+  assert.ok(!compilation.remainingSourceBlockerCodes.includes(`source-publication-date-missing:${source.id}`))
+})
+
 test('output content and target hashes are deterministic for identical frozen inputs', () => {
   const { target, request, events } = fixture()
   const at = new Date('2026-08-24T13:33:00.000Z')
@@ -114,12 +124,14 @@ test('the compiler rejects unsupported patches, unbound evidence, and post-evide
   assert.throws(() => buildControlledReingestionCompilation({ ...request, corrections: [{ ...request.corrections[0], proposedValue: 'A different locator' }] }, target, events), /exact locator recorded/)
   assert.throws(() => buildControlledReingestionCompilation(request, target, events.slice(0, 2)), /not ready/)
   assert.throws(() => parseControlledReingestionRequest({ ...request, corrections: [request.corrections[0], request.corrections[0]] }), /only once/)
+  assert.throws(() => buildControlledReingestionCompilation({ ...request, corrections: [{ ...request.corrections[1], proposedValue: '{"status":"undated"}' }] }, target, events), /proposed value recorded|valid undated/)
   assert.ok(blockers.every((blocker) => target.gateDecision.reasons.includes(blocker)))
 })
 
 test('persistence, API, UI, and target projection remain append-only and non-publishing', async () => {
-  const [sql, route, page, queuePage, store, docs, publicMethod, openApiTest] = await Promise.all([
+  const [sql, chronologySql, route, page, queuePage, store, docs, publicMethod, openApiTest] = await Promise.all([
     'supabase/migrations/20260824133000_epistemic_controlled_reingestion.sql',
+    'supabase/migrations/20260824233000_epistemic_source_chronology.sql',
     'app/api/admin/epistemic-reingestion/route.ts',
     'app/admin/epistemic-reingestion/page.tsx',
     'app/admin/epistemic-work-queue/page.tsx',
@@ -135,6 +147,9 @@ test('persistence, API, UI, and target projection remain append-only and non-pub
   assert.match(sql, /reviewState[\s\S]*draft/)
   assert.match(sql, /revoke insert, update, delete, truncate/)
   assert.doesNotMatch(sql, /publish_epistemic|auto_publish|published_canonical/)
+  assert.match(chronologySql, /undated.*living-document/)
+  assert.match(chronologySql, /coalesce\(item->>'publishedAt',''\) = ''/)
+  assert.doesNotMatch(chronologySql, /requestedPublicPromotion.*true|published-canonical/)
   assert.match(route, /authorizeEpistemicOperations/)
   assert.match(route, /autoPublicationSupported: false/)
   assert.match(route, /Cache-Control': 'no-store/)

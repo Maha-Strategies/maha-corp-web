@@ -84,6 +84,14 @@ Every output is forced to `draft`, `requestedPublicPromotion` is forced to
 new hash therefore enters fresh source-completion and expert-review queues. The
 compiler has no publication or promotion operation.
 
+Source chronology is explicit. A dated source retains its actual
+`publishedAt` value. An authoritative source without a stated publication date
+may instead carry `sourceChronology.status` as `undated` or `living-document`,
+plus the date it was inspected and an optional source version. The compiler
+accepts that chronology only when it is bound to the original date blocker and
+its submitted evidence event. An access date is never written into
+`publishedAt`.
+
 ## Phase 3 canonical release control
 
 The private `/admin/epistemic-releases` workspace is the only application
@@ -153,6 +161,21 @@ For pilot records, the older operations-authenticated review endpoint rejects
 new decisions at the application boundary. This keeps the Phase 4 operating
 sample invitation-only while preserving the previous endpoint for records
 outside the bounded pilot.
+
+The 13 pilot records that remained in source completion after the first
+operating pass have frozen operator-research packages in
+`lib/epistemic-phase4-source-packages.ts`. A package may state that an imported
+source does not support the complete claim; filling the typed locator and
+evidence-status fields must never disguise that mismatch. Run
+`npm run operate:epistemic-phase4-sources` for a read-only Production plan, then
+add `-- --apply` only after reviewing it. The runner can triage, start, submit
+evidence, and compile a fresh immutable draft. It cannot invite a reviewer,
+submit an expert decision, promote content, or create a canonical release.
+
+Phase 4 is operationally complete only after real, named, versioned reviewers
+submit the four required scoped decisions on exact current target hashes and a
+separate release authority operates every passing record. Source packages and
+synthetic lifecycle tests do not satisfy that human gate.
 
 ## Persistence boundary
 
