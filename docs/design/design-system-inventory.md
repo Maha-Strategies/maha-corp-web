@@ -1,143 +1,110 @@
-# Maha design system — inventory and conversion status
+# Maha visual-system inventory
 
-Measured against `origin/main` at `c70c91d` on 23 August 2026. Counts are
-generated from the tree, not estimated.
+**Status:** public conversion and Knowledge cyber-light complete; Intelligence is a separate focused batch
+**Measured against:** `origin/main` at `c496871` plus the final closure patch
+**Route count:** 210 App Router page templates
 
-## 1. The system as it exists
+This inventory records the visual contract rather than estimating adoption from
+individual utility classes. A route is complete when its rendered boundary owns
+one of the five declared systems below. The contract is enforced by
+`test/public-visual-system-completeness.test.ts`.
 
-There is no component library. The design system is **global CSS in
-`app/globals.css`** (277 lines) plus a theme selector in `lib/site-theme.ts`.
-A page is "converted" when its markup uses the `.evidence-*` vocabulary; it is
-not converted merely by avoiding inline styles.
+## Route coverage
 
-### Global shell
+| Visual system | Routes | Scope |
+| --- | ---: | --- |
+| Evidence Paper | 115 | All public product, service, research, policy, tool, protocol, app, and company routes not listed below |
+| Books cyber-light | 30 | `/books/**`; Evidence Paper with the frozen technical editorial overlay |
+| Knowledge cyber-light | 37 | `/knowledge/**`; readable technical grid with semantic evidence colors |
+| Dark editorial archive | 2 | `/intelligence/**`; retained until its separate focused conversion lands |
+| Operator console | 26 | `/admin/**`, `/dashboard`, and `/operations/**`; deliberately dark operational UI |
+| **Total** | **210** | Every `app/**/page.tsx` belongs to exactly one system |
 
-| Piece | Where | Notes |
-| --- | --- | --- |
-| Root layout | `app/layout.tsx` | Loads Geist Sans, Geist Mono, Newsreader; wraps `.site-body` |
-| Theme selector | `lib/site-theme.ts` | `siteThemeForPath()` → `paper` everywhere except `/admin`, `/dashboard`, `/operations`, which get `operator` |
-| Navigation | `components/Navbar.tsx` | 9 primary links + an "Explore" submenu of 20+; themed via `.site-chrome[data-theme]` |
-| Footer | `components/SiteFooter.tsx` | Same chrome tokens |
+The old threshold of “six or more `.evidence-*` strings” is retired. It confused
+shared-template routes with incomplete routes and counted metadata copy as CSS
+usage. The route-boundary contract checks the actual owning shell or an explicit
+shared Paper renderer.
 
-### Tokens
+## Evidence Paper
+
+The public system is global CSS in `app/globals.css`, supported by Tailwind
+utilities and a small set of shared renderers. Pages either own `.evidence-page`
+or delegate their boundary to one of these reviewed renderers:
+
+- `ResearchBriefServicePage`
+- `EvidenceGuide`
+- `ContextCompilerPlayground`
+
+### Surface and text tokens
 
 | Group | Tokens |
 | --- | --- |
-| Surface | `--surface-paper` `#eef1ec`, `--surface-raised` `#fbfcfa`, `--surface-subtle` `#e2e7df` |
-| Text | `--text-primary` `#1a2420`, `--text-secondary` `#3a453f`, `--text-muted` `#5a6660` |
-| Border | `--border-default` `#c8cec6`, `--border-subtle` `#dde2db` |
-| Status | `--status-verified` `#237a55`, `--status-sourced` `#2d63b8`, `--status-boundary` `#a06f14`, `--status-illustrative` `#6e56a8`, `--status-unverified` `#b3402e` |
-| Operator | `--operator-surface` `#0a0a0c`, `--operator-raised`, `--operator-text`, `--operator-muted`, `--operator-border` |
-| Measure | `--measure-copy` `42.5rem`, `--measure-product` `55rem`, `--measure-shell` `72rem` |
+| Surface | `--surface-paper`, `--surface-raised`, `--surface-subtle` |
+| Text | `--text-primary`, `--text-secondary`, `--text-muted` |
+| Border | `--border-default`, `--border-strong`, `--border-subtle` |
+| Status | `--status-verified`, `--status-sourced`, `--status-boundary`, `--status-illustrative`, `--status-unverified` |
+| Status tint | `--surface-verified`, `--surface-sourced`, `--surface-boundary`, `--surface-illustrative`, `--surface-unverified` |
 
-### Typography
+Body copy uses the neutral text tiers. Semantic colors are reserved for labels,
+rules, restrained tints, and status chips. Dark code panels use `.evidence-code`
+with a light code foreground; they must not inherit a Paper text token.
 
-Three faces, each with one job. Newsreader (serif) carries titles and ledes;
-Geist Sans carries body copy; Geist Mono carries kickers, labels and CTA text.
+### Shared vocabulary
 
-| Class | Role |
-| --- | --- |
-| `.evidence-kicker` | Mono, 11px, `0.16em` tracking, uppercase — eyebrow and label |
-| `.evidence-title` / `--product` | Newsreader, `clamp(2.75rem, 7vw, 5.5rem)`, weight 500 |
-| `.evidence-section-title` | Newsreader, `clamp(2rem, 4vw, 3.25rem)` |
-| `.evidence-lede` | Newsreader, `clamp(1.25rem, 2.5vw, 1.6rem)`, max 48rem |
-| `.evidence-copy` | Geist Sans, 1rem/1.75, max `--measure-copy` |
+- Shell: `.evidence-page`, `.evidence-container`, `.evidence-container--narrow`
+- Type: `.evidence-kicker`, `.evidence-title`, `.evidence-section-title`,
+  `.evidence-lede`, `.evidence-copy`, `.evidence-prose`
+- Structure: `.evidence-section`, `.evidence-card`, `.evidence-inset`,
+  `.evidence-table-wrap`, `.evidence-table`
+- Meaning: `.evidence-chip`, `.evidence-status-surface`,
+  `.evidence-status-label`
+- Interaction: `.evidence-action`, `.evidence-link`, `.evidence-field`,
+  `.evidence-input`, `.evidence-form`
+- Technical: `.evidence-code`
 
-### Layout, cards, CTAs
+## Books cyber-light
 
-| Class | Role |
-| --- | --- |
-| `.evidence-page` | Full-height paper ground; sets `::selection` |
-| `.evidence-container` / `--narrow` | `min(100% - 2.5rem, 72rem)` / 55rem, generous vertical rhythm |
-| `.evidence-section` | Top rule + `clamp(4.5rem, 9vw, 7rem)` separation — the primary spacing device |
-| `.evidence-card` (+ `-title`, `-copy`) | 1px border, 2px radius, raised surface, border darkens on hover |
-| `.evidence-inset` | 3px `--status-sourced` left rule — emphasis block |
-| `.evidence-action` (+ `--primary`/`--secondary`) | Mono uppercase, 2.75rem min height |
-| `.evidence-link` | Underline offset `0.3em`, border-coloured until hover |
-| `.evidence-code` | Inverted: dark ground, light text |
+`/books/**` keeps Evidence Paper as its base and adds the route-scoped overlay in
+`app/books/books-cyber-light.module.css`. The vocabulary is frozen in
+[`cyber-light-vocabulary-v1.md`](./cyber-light-vocabulary-v1.md) and accepted on
+book landing, reader/chapter, and editorial/article templates.
 
-Spacing is Tailwind utilities on top of these (`mt-3/4/5/7/9`), not bespoke CSS.
-Motion is limited to 150ms border/background transitions, with a global
-`prefers-reduced-motion` override.
+The Books overlay must not be moved to the root layout, global theme selector,
+Knowledge, Intelligence, or operator surfaces. Knowledge owns a separate
+cyber-light scope whose semantic palette is enforced independently.
 
-### Cyber-light editorial overlay
+## Knowledge cyber-light
 
-`/books/**` is the accepted pilot for a bounded technical overlay on Evidence
-Paper. Its frozen route markers, colors, accents, invariants, and three-template
-acceptance set are recorded in
-[`cyber-light-vocabulary-v1.md`](./cyber-light-vocabulary-v1.md). Cyber-light is
-route-scoped; it is not a new global theme and does not apply to Knowledge,
-Intelligence, or operator surfaces.
+`/knowledge/**` owns a subtree-scoped overlay in
+`app/knowledge/knowledge-cyber-light.module.css`. All 37 page templates inherit
+the same light technical grid, near-black copy, accessible semantic labels,
+light form controls, and explicit focus states. Dark surfaces are reserved for
+machine-readable code or terminal panels and require a light foreground.
 
-### Gaps in the system
+The Knowledge scope maps existing domain accents to fixed meanings without
+rewriting source content: cyan for information, blue for sourced material,
+green for verified or established material, violet for illustrative or modelled
+material, amber for boundaries and uncertainty, and red for unverified,
+prohibited, or failed states.
 
-Two primitives are missing and are currently re-invented inline per page:
+## Intentional dark systems
 
-1. **Tables.** No table class exists. Eight routes render `<table>`, each with
-   its own styling. Any page with a table cannot be converted without one.
-2. **Status chips.** `--status-*` tokens exist with no component; the homepage
-   hand-rolls a chip inline.
+Intelligence remains dark only until its separately reviewed cyber-light batch
+lands. Admin, Dashboard, and Operations remain a dark operator console. A public
+light page may still contain a dark code block or bounded interactive simulation;
+that does not change its route-level visual system.
 
-Both are added in the first conversion batch rather than duplicated again.
+## Completion gates
 
-### Forms
+The conversion is considered complete while all of the following stay true:
 
-No form primitive in the paper system. The only form styling is
-`.navigator-label` / `.navigator-input`, which is dark-theme and specific to
-`/navigator`. Forms are deferred until a batch actually needs one.
+1. Every page template belongs to exactly one declared visual system.
+2. Every public Paper route owns or delegates an Evidence Paper boundary.
+3. Books and Knowledge own independent, subtree-scoped cyber-light markers.
+4. Paper text tiers remain WCAG-AA readable against the Paper surface.
+5. Dark code panels do not use dark Paper foreground tokens.
+6. The shared `--border-strong` token remains defined for the interactive
+   controls that consume it.
 
-## 2. Route inventory
-
-209 page routes.
-
-| Status | Count | Meaning |
-| --- | --- | --- |
-| Converted | 8 | Six or more `.evidence-*` usages; on-system |
-| Partial | 20 | One to five usages; started or borrowing a class |
-| Remaining | 142 | No `.evidence-*` usage |
-| Excluded | 39 | `/knowledge/**` and `/intelligence/**`, out of scope by instruction |
-
-26 of the remaining routes sit under `/admin`, `/dashboard`, or `/operations`
-and resolve to the `operator` theme. They are a separate visual track and
-should not be folded into the paper conversion.
-
-### Converted (the reference set)
-
-| Route | `.evidence-*` uses |
-| --- | --- |
-| `/` | 74 |
-| `/benchmarks/context-retention` | 68 |
-| `/integrations/wso2` | 59 |
-| `/developers` | 48 |
-| `/context-compiler` | 37 |
-| `/context-pack-evaluator` | 31 |
-| `/mcp-bridge` | 29 |
-| `/docs` | 8 |
-
-### Explicitly excluded
-
-`/knowledge` and `/intelligence` and everything beneath them — 39 routes.
-Unchanged by instruction.
-
-## 3. Priority order for the remaining work
-
-The stated objective is that the four pillars should feel like one company.
-Context control is already converted, so the batches are ordered by which
-pillar is most conspicuously off-system.
-
-| Batch | Routes | Pillar |
-| --- | --- | --- |
-| **1 (this PR)** | `/governed-workflow`, `/governed-workflow/evidence`, `/enterprise-mcp-gateway`, `/x402-buyer-policy` | Governed workflow state, gateway middleware, machine-readable infrastructure |
-| 2 | `/audit`, `/mps`, `/mps/preflight`, `/utilities/receipts` | Evaluation and self-service tools |
-| 3 | `/consulting`, `/consulting/*` | Services surfaces |
-| 4 | `/research`, `/books`, `/case-studies` | Published work |
-
-Batch 1 completes the product pillars named in the objective. Everything after
-it is supporting surface.
-
-### Deliberately not in batch 1
-
-`/mps`, `/contact`, `/start`, `/about`, `/tools`, `/docs`, `/x402-observatory`
-and 25 other routes have uncommitted local edits in the primary checkout.
-Converting them here would collide with work in progress, so they are deferred
-to a batch taken after those changes land.
+Adding a page is therefore a visual-contract change: it must adopt Paper or be
+placed deliberately into one of the bounded route families.
