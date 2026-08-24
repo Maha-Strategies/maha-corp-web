@@ -60,6 +60,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${baseUrl}${NEUROMORPHIC_COMPARISONS_PATH}`, lastModified: new Date(NEUROMORPHIC_RELEASE_DATE) },
     ...NEUROMORPHIC_COMPARISONS.map((comparison) => ({ url: `${baseUrl}${neuromorphicComparisonPath(comparison)}`, lastModified: new Date(NEUROMORPHIC_RELEASE_DATE) })),
     { url: `${baseUrl}${EPISTEMIC_SYSTEM_PATH}`, lastModified: new Date(EPISTEMIC_RELEASE_DATE) },
+    { url: `${baseUrl}${EPISTEMIC_SYSTEM_PATH}/migrations`, lastModified: new Date(EPISTEMIC_RELEASE_DATE) },
     ...EPISTEMIC_DOMAINS.map((domain) => ({ url: `${baseUrl}/knowledge/${domain.slug}`, lastModified: new Date(EPISTEMIC_RELEASE_DATE) })),
     ...PUBLIC_EPISTEMIC_RECORDS.map((record) => ({ url: `${baseUrl}${epistemicRecordPath(record)}`, lastModified: new Date(EPISTEMIC_RELEASE_DATE) })),
     { url: `${baseUrl}${ASTROLOGY_PATH}`, lastModified: new Date(ASTROLOGY_RELEASE_DATE) },

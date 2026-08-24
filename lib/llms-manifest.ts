@@ -34,6 +34,8 @@ export function buildLlmsManifest(claims: readonly MpsClaim[]): string {
     '- Astronomy registry schema: https://www.mahastrategies.com/knowledge/astronomy/schema',
     '- Epistemic publication system: https://www.mahastrategies.com/knowledge/epistemic-system',
     '- Epistemic schema: https://www.mahastrategies.com/knowledge/epistemic-system/schema',
+    '- Epistemic legacy migration ledger: https://www.mahastrategies.com/knowledge/epistemic-system/migrations',
+    '- Epistemic machine-readable migration registry: https://www.mahastrategies.com/knowledge/epistemic-system/migration-registry',
     '- Quantum systems pilot registry: https://www.mahastrategies.com/knowledge/quantum-systems/registry',
     '- Synthetic biology pilot registry: https://www.mahastrategies.com/knowledge/synthetic-biology/registry',
     '',

@@ -30,6 +30,16 @@ export function sha256Canonical(value: unknown): string {
   return `sha256:${createHash('sha256').update(canonicalJson(value)).digest('hex')}`
 }
 
+/**
+ * The review target excludes publication workflow state. Expert decisions stay
+ * valid when the same frozen content moves from draft to review, but any change
+ * to a claim, source, section, bridge, or boundary produces a different hash.
+ */
+export function epistemicReviewTargetHash(record: EpistemicRecord): string {
+  const reviewTarget = Object.fromEntries(Object.entries(record).filter(([key]) => key !== 'publication'))
+  return sha256Canonical(reviewTarget)
+}
+
 export function recordKindSegment(record: Pick<EpistemicRecord, 'recordKind'>): string {
   const irregular: Partial<Record<EpistemicRecord['recordKind'], string>> = {
     hypothesis: 'hypotheses',
@@ -58,6 +68,21 @@ export function evaluatePublicationGate(record: EpistemicRecord): PublicationDec
   if (!record.publication.publishedAt) reasons.push('publication-date-missing')
   if (!record.publication.canonicalVersion.trim()) reasons.push('canonical-version-missing')
   if (!record.publication.reviewEvents.some((event) => event.verdict === 'approve')) reasons.push('approval-review-missing')
+
+  const targetSha256 = epistemicReviewTargetHash(record)
+  for (const scope of record.publication.requiredReviewScopes ?? []) {
+    const scoped = record.publication.reviewEvents
+      .filter((event) => event.scope === scope)
+      .sort((left, right) => left.reviewedAt.localeCompare(right.reviewedAt))
+    const latest = scoped.at(-1)
+    if (!latest) {
+      reasons.push(`expert-review-missing:${scope}`)
+      continue
+    }
+    if (!latest.reviewId || !latest.reviewerProfileVersion) reasons.push(`expert-review-identity-incomplete:${scope}`)
+    if (latest.targetSha256 !== targetSha256) reasons.push(`expert-review-stale:${scope}`)
+    if (latest.verdict !== 'approve') reasons.push(`expert-review-not-approved:${scope}`)
+  }
   if (!record.claims.length) reasons.push('claims-missing')
   if (!record.sources.length) reasons.push('sources-missing')
   if (!record.sections.length) reasons.push('sections-missing')
@@ -69,6 +94,7 @@ export function evaluatePublicationGate(record: EpistemicRecord): PublicationDec
 
   for (const source of record.sources) {
     if (!source.url.startsWith('https://')) reasons.push(`source-url-invalid:${source.id}`)
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(source.publishedAt)) reasons.push(`source-publication-date-missing:${source.id}`)
     if (!source.identifiers.length) reasons.push(`source-identifier-missing:${source.id}`)
     if (!source.exactLocator.trim()) reasons.push(`source-locator-missing:${source.id}`)
     if (!source.rights.note.trim()) reasons.push(`source-rights-note-missing:${source.id}`)
@@ -87,6 +113,7 @@ export function evaluatePublicationGate(record: EpistemicRecord): PublicationDec
     if (!claim.scope.trim() || !claim.boundary.trim()) reasons.push(`claim-scope-incomplete:${claim.id}`)
     if (!claim.uncertainty.statement.trim()) reasons.push(`claim-uncertainty-missing:${claim.id}`)
     if (!claim.replication.assessment.trim()) reasons.push(`claim-replication-missing:${claim.id}`)
+    if (claim.evidenceMaturity === 'not-assessed') reasons.push(`claim-evidence-not-assessed:${claim.id}`)
   }
 
   for (const section of record.sections) {

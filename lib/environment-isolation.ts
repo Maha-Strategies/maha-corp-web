@@ -31,6 +31,9 @@ export const ISOLATION_POLICY: Readonly<Record<string, IsolationTier>> = {
   // Operator and reviewer tokens. These authenticate against Production's
   // control planes: credential issuance, the revenue ledger, operator actions.
   AGENT_REVIEW_TOKEN: 'must_differ',
+  PRACTITIONER_REVIEW_TOKEN: 'must_differ',
+  CELESTIAL_REGISTRY_TOKEN: 'must_differ',
+  EPISTEMIC_OPERATIONS_TOKEN: 'must_differ',
   AGENT_INQUIRY_TOKEN: 'must_differ',
   REVENUE_CONTROL_TOKEN: 'must_differ',
   WORKFLOW_CONTROL_TOKEN: 'must_differ',

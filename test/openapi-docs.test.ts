@@ -86,6 +86,10 @@ const PRIVATE_ROUTES = new Set([
   // Dedicated-token, append-only expert review surface. It exposes reviewer
   // identities and internal frozen artifacts, not a customer API contract.
   '/api/admin/practitioner-reviews',
+  // Dedicated-token epistemic operations. These expose legacy ingestion
+  // candidates and reviewer identities, so they remain an internal contract.
+  '/api/admin/epistemic-ingestion',
+  '/api/admin/epistemic-reviews',
   '/api/admin/editorial-coverage',
   '/api/admin/inbound-operations',
   '/api/admin/navigator',

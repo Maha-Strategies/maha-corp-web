@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 
 import { MAHA_SITE_URL } from '@/lib/entity'
+import { EPISTEMIC_MIGRATION_INVENTORY } from '@/lib/epistemic-adapters'
 import {
   BRIDGE_TYPES,
   CLAIM_KINDS,
@@ -81,7 +82,7 @@ export default function EpistemicSystemPage() {
           <p className="evidence-lede mt-7">Maha’s underlying graph may contain drafts, hypotheses, conflicts, and incomplete records. Only records with explicit epistemic axes, source rights, locators, uncertainty, boundaries, and an approving review event become crawlable Knowledge pages.</p>
           <div className="mt-8 flex flex-wrap gap-3">
             <a href={`${EPISTEMIC_SYSTEM_PATH}/schema`} className="evidence-action evidence-action--primary">Open JSON schema</a>
-            <a href="#pilots" className="evidence-action evidence-action--secondary">Inspect pilot domains</a>
+            <Link href={`${EPISTEMIC_SYSTEM_PATH}/migrations`} className="evidence-action evidence-action--secondary">Inspect legacy migration</Link>
           </div>
         </header>
 
@@ -97,6 +98,18 @@ export default function EpistemicSystemPage() {
             <p className="evidence-status-label">Non-transfer rule</p>
             <p className="evidence-copy mt-2">Peer review does not mean independent replication. A formal model does not establish hardware readiness. A cell-system result does not establish clinical benefit. Each proposition retains its own evidence axis.</p>
           </div>
+        </section>
+
+        <section className="evidence-section" aria-labelledby="ingestion-heading">
+          <p className="evidence-kicker">Persistent ingestion and expert review</p>
+          <h2 id="ingestion-heading" className="evidence-section-title mt-3">Five legacy systems now meet the same gate.</h2>
+          <p className="evidence-copy mt-5 max-w-4xl">The semiconductor, mathematics, astronomy, religion, and neuromorphic adapters preserve {EPISTEMIC_MIGRATION_INVENTORY.counts.sourceRecords} source records as immutable candidates. Each batch survives deployments, and every expert decision binds a versioned identity, one review scope, and the candidate’s frozen content hash.</p>
+          <div className="mt-7 grid gap-px border border-[var(--border-default)] bg-[var(--border-default)] sm:grid-cols-3">
+            <div className="bg-[var(--surface-raised)] p-6"><p className="evidence-kicker">Adapters</p><p className="mt-3 font-mono text-3xl text-[var(--text-primary)]">{EPISTEMIC_MIGRATION_INVENTORY.counts.adapters}</p></div>
+            <div className="bg-[var(--surface-raised)] p-6"><p className="evidence-kicker">Imported candidates</p><p className="mt-3 font-mono text-3xl text-[var(--text-primary)]">{EPISTEMIC_MIGRATION_INVENTORY.counts.sourceRecords}</p></div>
+            <div className="bg-[var(--surface-raised)] p-6"><p className="evidence-kicker text-[var(--status-boundary)]">Withheld pending review</p><p className="mt-3 font-mono text-3xl text-[var(--status-boundary)]">{EPISTEMIC_MIGRATION_INVENTORY.counts.withheld}</p></div>
+          </div>
+          <Link href={`${EPISTEMIC_SYSTEM_PATH}/migrations`} className="evidence-action evidence-action--primary mt-7">Open migration ledger</Link>
         </section>
 
         <section className="evidence-section" aria-labelledby="axes-heading">

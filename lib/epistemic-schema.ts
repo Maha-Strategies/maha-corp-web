@@ -11,6 +11,7 @@ export const CLAIM_KINDS = [
 ] as const
 
 export const EVIDENCE_MATURITIES = [
+  'not-assessed',
   'not-applicable',
   'single-study',
   'multi-study',
@@ -18,6 +19,13 @@ export const EVIDENCE_MATURITIES = [
   'contested',
   'historical-attestation',
   'formally-verified',
+] as const
+
+export const EXPERT_REVIEW_SCOPES = [
+  'source-fidelity',
+  'domain-fidelity',
+  'boundary-adequacy',
+  'rights-and-locator',
 ] as const
 
 export const REVIEW_STATES = [
@@ -61,6 +69,7 @@ export type ReviewState = (typeof REVIEW_STATES)[number]
 export type EpistemicRecordKind = (typeof RECORD_KINDS)[number]
 export type BridgeType = (typeof BRIDGE_TYPES)[number]
 export type RightsBasis = (typeof RIGHTS_BASES)[number]
+export type ExpertReviewScope = (typeof EXPERT_REVIEW_SCOPES)[number]
 
 export interface SourceIdentifier {
   scheme: 'doi' | 'isbn' | 'url' | 'dataset' | 'standard' | 'accession'
@@ -116,11 +125,16 @@ export interface EpistemicClaim {
 }
 
 export interface ReviewEvent {
+  reviewId?: string
   reviewerId: string
+  reviewerProfileVersion?: number
   reviewerRole: string
+  scope?: ExpertReviewScope
+  targetSha256?: string
   reviewedAt: string
-  verdict: 'approve' | 'request-changes' | 'reject'
+  verdict: 'approve' | 'request-changes' | 'reject' | 'abstain'
   rationale: string
+  supersedesReviewId?: string | null
 }
 
 export interface PublicationControl {
@@ -129,6 +143,7 @@ export interface PublicationControl {
   canonicalVersion: string
   publishedAt?: string
   lastReviewedAt: string
+  requiredReviewScopes?: ExpertReviewScope[]
   reviewEvents: ReviewEvent[]
 }
 
@@ -204,6 +219,7 @@ export const EPISTEMIC_SCHEMA_DESCRIPTOR = {
   axes: {
     claimKind: CLAIM_KINDS,
     evidenceMaturity: EVIDENCE_MATURITIES,
+    expertReviewScope: EXPERT_REVIEW_SCOPES,
     reviewState: REVIEW_STATES,
     recordKind: RECORD_KINDS,
     bridgeType: BRIDGE_TYPES,
@@ -214,5 +230,6 @@ export const EPISTEMIC_SCHEMA_DESCRIPTOR = {
     'Every public claim resolves to a rights-cleared source with an exact locator.',
     'Analogy and association bridges carry an explicit non-transfer warning.',
     'Only records passing the publication gateway generate crawlable pages.',
+    'Expert decisions bind a versioned reviewer identity and an immutable content hash; reviewer approval is not product approval.',
   ],
 } as const
