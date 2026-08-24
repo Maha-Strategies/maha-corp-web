@@ -78,7 +78,7 @@ export default function TheSyntheticSelfHub() {
           </p>
         </section>
 
-        <Link href="/books/the-synthetic-self/read" className="mt-10 inline-block bg-white px-7 py-4 font-mono text-xs font-bold uppercase tracking-widest text-black transition-colors hover:bg-zinc-200">Choose a chapter ↗</Link>
+        <Link href="/books/the-synthetic-self/read" className="evidence-action evidence-action--primary mt-10 inline-block">Choose a chapter ↗</Link>
 
         <BookEndpointCTA title="The Synthetic Self" placement="top" />
 

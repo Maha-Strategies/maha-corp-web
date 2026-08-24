@@ -77,7 +77,7 @@ export default function TheImaginedLifeHub() {
           </p>
         </section>
 
-        <Link href="/books/the-imagined-life/read" className="mt-10 inline-block bg-white px-7 py-4 font-mono text-xs font-bold uppercase tracking-widest text-black transition-colors hover:bg-zinc-200">Choose a chapter ↗</Link>
+        <Link href="/books/the-imagined-life/read" className="evidence-action evidence-action--primary mt-10 inline-block">Choose a chapter ↗</Link>
         <p className="mt-5 text-sm leading-relaxed text-[var(--text-secondary)]">New to the book? Start with the <Link href="/books/the-imagined-life/sleep-stages-explained" className="text-[var(--status-sourced)] underline underline-offset-4 hover:text-[var(--text-primary)]">plain-English guide to NREM, REM, and sleep stages</Link>.</p>
 
         <BookEndpointCTA title="The Imagined Life" placement="top" />

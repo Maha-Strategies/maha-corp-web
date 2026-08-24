@@ -19,18 +19,18 @@ function routeFile(path: string): string {
 
 const pages = pageFiles(appRoot)
 const operator = /^(?:admin|dashboard|operations)\//
-const darkEditorial = /^intelligence\//
+const intelligence = /^intelligence\//
 const knowledge = /^knowledge\//
 const books = /^books\//
 
 test('every route belongs to one declared visual system', () => {
-  const groups = { paper: 0, books: 0, knowledge: 0, darkEditorial: 0, operator: 0 }
+  const groups = { paper: 0, books: 0, knowledge: 0, intelligence: 0, operator: 0 }
   const missingPaperBoundary: string[] = []
 
   for (const path of pages) {
     const file = routeFile(path)
     if (operator.test(file)) { groups.operator += 1; continue }
-    if (darkEditorial.test(file)) { groups.darkEditorial += 1; continue }
+    if (intelligence.test(file)) { groups.intelligence += 1; continue }
     if (knowledge.test(file)) { groups.knowledge += 1; continue }
     if (books.test(file)) { groups.books += 1; continue }
 
@@ -42,22 +42,25 @@ test('every route belongs to one declared visual system', () => {
   }
 
   assert.equal(
-    groups.paper + groups.books + groups.knowledge + groups.darkEditorial + groups.operator,
+    groups.paper + groups.books + groups.knowledge + groups.intelligence + groups.operator,
     pages.length,
   )
   assert.deepEqual(missingPaperBoundary, [])
-  assert.deepEqual(groups, { paper: 115, books: 30, knowledge: 41, darkEditorial: 2, operator: 27 })
+  assert.deepEqual(groups, { paper: 115, books: 30, knowledge: 41, intelligence: 2, operator: 27 })
 })
 
-test('Books and Knowledge own bounded cyber-light overlays', () => {
+test('Books, Knowledge, and Intelligence own bounded cyber-light overlays', () => {
   const booksLayout = readFileSync(new URL('../app/books/layout.tsx', import.meta.url), 'utf8')
   const knowledgeLayout = readFileSync(new URL('../app/knowledge/layout.tsx', import.meta.url), 'utf8')
+  const intelligenceLayout = readFileSync(new URL('../app/intelligence/layout.tsx', import.meta.url), 'utf8')
   const rootLayout = readFileSync(new URL('../app/layout.tsx', import.meta.url), 'utf8')
   const siteTheme = readFileSync(new URL('../lib/site-theme.ts', import.meta.url), 'utf8')
 
   assert.match(booksLayout, /data-visual-system="cyber-light"/)
   assert.match(knowledgeLayout, /data-visual-system="cyber-light"/)
   assert.match(knowledgeLayout, /data-visual-scope="knowledge"/)
+  assert.match(intelligenceLayout, /data-visual-system="cyber-light"/)
+  assert.match(intelligenceLayout, /data-visual-scope="intelligence"/)
   assert.doesNotMatch(rootLayout, /cyber-light/)
   assert.doesNotMatch(siteTheme, /cyber-light/)
 })
@@ -68,7 +71,7 @@ test('dark code panels cannot use paper-text tokens', () => {
 
   for (const path of pages) {
     const file = routeFile(path)
-    if (operator.test(file) || darkEditorial.test(file) || books.test(file)) continue
+    if (operator.test(file) || intelligence.test(file) || books.test(file)) continue
     if (darkPanelWithPaperText.test(readFileSync(path, 'utf8'))) offenders.push(file)
   }
 

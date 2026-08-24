@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Newsreader } from "next/font/google";
 import Navbar from "@/components/Navbar";
+import RouteThemeBoundary from "@/components/RouteThemeBoundary";
 import SiteFooter from "@/components/SiteFooter";
 import { mahaEntityGraphJsonLd } from '@/lib/entity';
 import "./globals.css";
@@ -20,6 +21,20 @@ const newsreader = Newsreader({
   subsets: ["latin"],
   display: "swap",
 });
+
+const colorSchemeBootstrap = `(() => {
+  try {
+    const saved = window.localStorage.getItem('maha-color-scheme');
+    const scheme = saved === 'light' || saved === 'dark'
+      ? saved
+      : (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    document.documentElement.dataset.colorScheme = scheme;
+    document.documentElement.style.colorScheme = scheme;
+  } catch {
+    document.documentElement.dataset.colorScheme = 'light';
+    document.documentElement.style.colorScheme = 'light';
+  }
+})();`;
 
 export const metadata: Metadata = {
   title: 'Maha Strategies | Verified Research Briefs',
@@ -59,8 +74,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${geistSans.variable} ${geistMono.variable} ${newsreader.variable} h-full antialiased`}>
+    <html
+      lang="en"
+      data-color-scheme="light"
+      suppressHydrationWarning
+      className={`${geistSans.variable} ${geistMono.variable} ${newsreader.variable} h-full antialiased`}
+    >
       <head>
+        <meta name="color-scheme" content="light dark" />
+        <script id="maha-color-scheme" dangerouslySetInnerHTML={{ __html: colorSchemeBootstrap }} />
         <link rel="alternate" type="application/atom+xml" title="Maha Strategies — Intelligence & Explainers" href="/feed.xml" />
         <link rel="alternate" type="text/plain" title="Maha Strategies machine-readable site guide" href="/llms.txt" />
         <script
@@ -70,9 +92,9 @@ export default function RootLayout({
       </head>
       <body className="site-body h-full flex flex-col antialiased">
         <Navbar />
-        <div className="flex-1">
+        <RouteThemeBoundary>
           {children}
-        </div>
+        </RouteThemeBoundary>
         <SiteFooter />
       </body>
     </html>

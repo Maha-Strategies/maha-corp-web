@@ -46,7 +46,7 @@ export default function TheBorrowedLightHub() {
         <p className="text-xl sm:text-2xl text-[var(--text-primary)] font-light leading-relaxed mb-6">The self can feel entirely private and self-made. This book follows the contrary, more generous possibility: that a person is formed in relationship, borrowing light without becoming any less real.</p>
         <p className="text-base sm:text-lg text-[var(--text-secondary)] leading-relaxed">Across eleven chapters and two appendices, it uses the structures of M-theory as a carefully marked analogy—not as proof—to explore intimacy, belief, commitment, grief, and the conditions under which a life can hold its shape.</p>
       </section>
-      <Link href="/books/the-borrowed-light/read" className="mt-10 inline-block bg-white px-7 py-4 font-mono text-xs font-bold uppercase tracking-widest text-black transition-colors hover:bg-zinc-200">Choose a chapter ↗</Link>
+      <Link href="/books/the-borrowed-light/read" className="evidence-action evidence-action--primary mt-10 inline-block">Choose a chapter ↗</Link>
       <p className="mt-5 text-sm leading-relaxed text-[var(--text-secondary)]">New to the physics? Start with the <Link href="/books/the-borrowed-light/m-theory-faq" className="text-[var(--status-sourced)] underline underline-offset-4 hover:text-[var(--text-primary)]">plain-English M-theory FAQ</Link>.</p>
       <MarkdownArticle blocks={blocks} />
     </article>

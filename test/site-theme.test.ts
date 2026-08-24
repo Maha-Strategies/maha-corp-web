@@ -10,7 +10,7 @@ test('public routes use the Evidence Paper shell', () => {
   assert.equal(siteThemeForPath('/audit'), 'paper')
 })
 
-test('operator routes retain the dark console shell', () => {
+test('operator routes retain their dense operator surface independently of color mode', () => {
   assert.equal(siteThemeForPath('/admin'), 'operator')
   assert.equal(siteThemeForPath('/admin/billing'), 'operator')
   assert.equal(siteThemeForPath('/dashboard'), 'operator')
