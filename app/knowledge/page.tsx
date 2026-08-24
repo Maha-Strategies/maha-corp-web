@@ -36,6 +36,7 @@ import {
   RELIGION_KNOWLEDGE_VERSION,
 } from '@/lib/religion-knowledge'
 import { NEUROMORPHIC_COMPARISONS, NEUROMORPHIC_CONCEPTS, NEUROMORPHIC_PATH, NEUROMORPHIC_VERSION } from '@/lib/neuromorphic-biocomputing'
+import { EPISTEMIC_DOMAINS, EPISTEMIC_SYSTEM_PATH, PUBLIC_EPISTEMIC_RECORDS } from '@/lib/epistemic-pilots'
 
 export const metadata: Metadata = {
   title: 'Knowledge | Maha Strategies',
@@ -91,6 +92,8 @@ export default function KnowledgePage() {
         version: RELIGION_KNOWLEDGE_VERSION,
       },
       { '@type': 'CollectionPage', name: 'Neuromorphic and biocomputing', url: `${SITE_URL}${NEUROMORPHIC_PATH}`, version: NEUROMORPHIC_VERSION },
+      { '@type': 'TechArticle', name: 'Maha Epistemic Publication System', url: `${SITE_URL}${EPISTEMIC_SYSTEM_PATH}` },
+      ...EPISTEMIC_DOMAINS.map((domain) => ({ '@type': 'CollectionPage', name: domain.name, url: `${SITE_URL}/knowledge/${domain.slug}` })),
       ...KNOWLEDGE_ARTICLES.map((article) => ({
         '@type': 'TechArticle',
         name: article.title,
@@ -118,7 +121,7 @@ export default function KnowledgePage() {
               </Link>
             </div>
             <div className="border border-zinc-800 bg-zinc-950 p-5 font-mono text-xs leading-6 text-zinc-500">
-              <p className="text-zinc-200">6 domain surfaces plus connective mathematics</p>
+              <p className="text-zinc-200">Universal publication gateway plus governed domain surfaces</p>
               <p>{KNOWLEDGE_ARTICLES.length} published semiconductor nodes</p>
               <p>{KNOWLEDGE_SUPPLIERS.length} evidence-bounded supplier profiles</p>
               <p>{SEMICONDUCTOR_STAGES.length} lifecycle stages</p>
@@ -127,6 +130,7 @@ export default function KnowledgePage() {
               <p>{MATHEMATICAL_CONCEPTS.length} mathematical concepts · {MATHEMATICAL_BRIDGES.length} bridges</p>
               <p>{RELIGION_CONCEPTS.length} religion methods · {RELIGION_COMPARISONS.length} comparisons</p>
               <p>{NEUROMORPHIC_CONCEPTS.length} neuromorphic/biocomputing concepts · {NEUROMORPHIC_COMPARISONS.length} comparisons</p>
+              <p>{EPISTEMIC_DOMAINS.length} adversarial schema pilots · {PUBLIC_EPISTEMIC_RECORDS.length} canonical records</p>
               <p>Claim-level evidence status</p>
               <p>Bidirectional Intelligence links</p>
             </div>
@@ -179,6 +183,22 @@ export default function KnowledgePage() {
               <p className="mt-4 border-l border-rose-700/60 pl-3 text-xs leading-5 text-rose-200">Activity and task performance do not certify consciousness or intelligence; research demonstrations do not imply deployment readiness.</p>
               <p className="mt-6 font-mono text-[10px] uppercase tracking-widest text-zinc-600 group-hover:text-lime-300">Inspect {NEUROMORPHIC_CONCEPTS.length} concepts · {NEUROMORPHIC_COMPARISONS.length} comparisons →</p>
             </Link>
+            <Link href={EPISTEMIC_SYSTEM_PATH} className="group border border-cyan-900/60 bg-cyan-950/10 p-6 transition-colors hover:border-cyan-400">
+              <p className="font-mono text-[10px] uppercase tracking-widest text-cyan-300">Publication gateway · maha-epistemic/1.0</p>
+              <h2 className="mt-4 text-2xl font-semibold text-white group-hover:text-cyan-200">Epistemic publication system</h2>
+              <p className="mt-3 text-sm leading-6 text-zinc-400">A multi-axis schema, source-rights contract, deterministic provenance hash, and enforceable gate between machine records and public pages.</p>
+              <p className="mt-4 border-l border-amber-700/60 pl-3 text-xs leading-5 text-amber-200">A record’s existence does not make it publishable. Drafts and incomplete claims remain below the crawlable layer.</p>
+              <p className="mt-6 font-mono text-[10px] uppercase tracking-widest text-zinc-600 group-hover:text-cyan-300">Inspect the universal contract →</p>
+            </Link>
+            {EPISTEMIC_DOMAINS.map((domain) => (
+              <Link key={domain.slug} href={`/knowledge/${domain.slug}`} className={`group border p-6 transition-colors ${domain.accent === 'blue' ? 'border-blue-900/60 bg-blue-950/10 hover:border-blue-400' : 'border-emerald-900/60 bg-emerald-950/10 hover:border-emerald-400'}`}>
+                <p className={`font-mono text-[10px] uppercase tracking-widest ${domain.accent === 'blue' ? 'text-blue-300' : 'text-emerald-300'}`}>Adversarial Phase 1 pilot</p>
+                <h2 className="mt-4 text-2xl font-semibold text-white group-hover:underline">{domain.name}</h2>
+                <p className="mt-3 text-sm leading-6 text-zinc-400">{domain.description}</p>
+                <p className="mt-4 border-l border-amber-700/60 pl-3 text-xs leading-5 text-amber-200">{domain.stressPoint}</p>
+                <p className="mt-6 font-mono text-[10px] uppercase tracking-widest text-zinc-600 group-hover:text-cyan-300">Open governed domain →</p>
+              </Link>
+            ))}
             <Link href={ASTROLOGY_PATH} className="group border border-violet-900/60 bg-violet-950/10 p-6 transition-colors hover:border-violet-400">
               <p className="font-mono text-[10px] uppercase tracking-widest text-violet-300">Interpretive layer · {ASTROLOGY_VERSION}</p>
               <h2 className="mt-4 text-2xl font-semibold text-white group-hover:text-violet-200">Astrology traditions</h2>

@@ -2,7 +2,7 @@
 
 **Status:** public conversion and Knowledge cyber-light complete; Intelligence is a separate focused batch
 **Measured against:** `origin/main` at `c496871` plus the final closure patch
-**Route count:** 210 App Router page templates
+**Route count:** 215 App Router page templates
 
 This inventory records the visual contract rather than estimating adoption from
 individual utility classes. A route is complete when its rendered boundary owns
@@ -15,10 +15,10 @@ one of the five declared systems below. The contract is enforced by
 | --- | ---: | --- |
 | Evidence Paper | 115 | All public product, service, research, policy, tool, protocol, app, and company routes not listed below |
 | Books cyber-light | 30 | `/books/**`; Evidence Paper with the frozen technical editorial overlay |
-| Knowledge cyber-light | 37 | `/knowledge/**`; readable technical grid with semantic evidence colors |
+| Knowledge cyber-light | 41 | `/knowledge/**`; readable technical grid with semantic evidence colors |
 | Dark editorial archive | 2 | `/intelligence/**`; retained until its separate focused conversion lands |
-| Operator console | 26 | `/admin/**`, `/dashboard`, and `/operations/**`; deliberately dark operational UI |
-| **Total** | **210** | Every `app/**/page.tsx` belongs to exactly one system |
+| Operator console | 27 | `/admin/**`, `/dashboard`, and `/operations/**`; operational workflows remain separately scoped from public Knowledge |
+| **Total** | **215** | Every `app/**/page.tsx` belongs to exactly one system |
 
 The old threshold of “six or more `.evidence-*` strings” is retired. It confused
 shared-template routes with incomplete routes and counted metadata copy as CSS
@@ -76,7 +76,7 @@ cyber-light scope whose semantic palette is enforced independently.
 ## Knowledge cyber-light
 
 `/knowledge/**` owns a subtree-scoped overlay in
-`app/knowledge/knowledge-cyber-light.module.css`. All 37 page templates inherit
+`app/knowledge/knowledge-cyber-light.module.css`. All 40 page templates inherit
 the same light technical grid, near-black copy, accessible semantic labels,
 light form controls, and explicit focus states. Dark surfaces are reserved for
 machine-readable code or terminal panels and require a light foreground.
