@@ -117,6 +117,43 @@ authority must provide a separate 20–500 character public-safe change summary.
 Only the active projection can generate a database-backed canonical page and
 sitemap row.
 
+## Phase 4 bounded corpus and reviewer invitations
+
+Phase 4 begins with a frozen 20-record operating corpus rather than attempting
+to review all 110 migrated records at once. Four records in each migrated
+domain test different failure surfaces: source fidelity, technical
+formalization, uncertainty and non-claim boundaries, and rights/locator
+quality. The public `/knowledge/epistemic-system/pilot-corpus` page and its
+`registry.json` publish the selection, rationale, initial target hashes, and
+source blockers before review outcomes are known. Inclusion is not endorsement.
+
+The private `/admin/epistemic-review-invitations` workspace issues least-
+authority reviewer credentials. Each invitation binds exactly:
+
+- one record in the frozen pilot manifest;
+- the latest immutable target hash;
+- one required expert-review scope;
+- one immutable reviewer profile version; and
+- an expiry between one hour and 30 days.
+
+The plaintext credential is returned only on the first successful creation
+response and is held only in component memory. The ledger retains its SHA-256
+digest. Idempotent replay deliberately cannot recover the credential.
+
+Reviewers use `/review/epistemic`, which accepts only the invitation credential.
+It exposes the frozen record and the three published criteria for the assigned
+scope; it grants no operations, source-completion, re-ingestion, or release
+authority. Submission derives record ID, domain, target hash, scope, and
+reviewer identity from the invitation rather than trusting browser fields.
+Creating the expert decision and consuming the invitation occur in one database
+transaction. Every invitation receives at most one terminal event: `consume`
+or `revoke`.
+
+For pilot records, the older operations-authenticated review endpoint rejects
+new decisions at the application boundary. This keeps the Phase 4 operating
+sample invitation-only while preserving the previous endpoint for records
+outside the bounded pilot.
+
 ## Persistence boundary
 
 Migration `20260824050000_epistemic_ingestion_and_expert_review.sql` adds four
@@ -143,6 +180,12 @@ append-only canonical-release and withdrawal ledgers. Its security-definer
 functions independently re-check current target lineage, allowable remaining
 gate reasons, every exact scoped approval, canonical publication controls,
 supersession state and authority snapshots before appending an event.
+
+Migration `20260824220000_epistemic_reviewer_invitations.sql` freezes the pilot
+manifest and adds invitation and terminal-event ledgers. Its security-definer
+functions independently verify pilot membership, latest-target lineage,
+required scope, reviewer profile identity, expiry, bearer digest, and one-time
+consumption. Direct table mutation remains unavailable to the service role.
 
 Anonymous and authenticated browser roles receive no access. The service role
 has read access but cannot insert, update, delete, or truncate the ledgers

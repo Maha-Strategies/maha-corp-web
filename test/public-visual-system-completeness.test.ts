@@ -18,7 +18,7 @@ function routeFile(path: string): string {
 }
 
 const pages = pageFiles(appRoot)
-const operator = /^(?:admin|dashboard|operations)\//
+const operator = /^(?:admin|dashboard|operations|review)\//
 const intelligence = /^intelligence\//
 const knowledge = /^knowledge\//
 const books = /^books\//
@@ -50,7 +50,7 @@ test('every route belongs to one declared visual system', () => {
     pages.length,
   )
   assert.deepEqual(missingPaperBoundary, [])
-  assert.deepEqual(groups, { paper: 108, apps: 6, books: 35, docs: 1, knowledge: 42, intelligence: 2, operator: 30 })
+  assert.deepEqual(groups, { paper: 108, apps: 6, books: 35, docs: 1, knowledge: 43, intelligence: 2, operator: 32 })
 })
 
 test('Apps, Books, Docs, Knowledge, and Intelligence own bounded cyber-light overlays', () => {
@@ -59,6 +59,7 @@ test('Apps, Books, Docs, Knowledge, and Intelligence own bounded cyber-light ove
   const docsLayout = readFileSync(new URL('../app/docs/layout.tsx', import.meta.url), 'utf8')
   const knowledgeLayout = readFileSync(new URL('../app/knowledge/layout.tsx', import.meta.url), 'utf8')
   const intelligenceLayout = readFileSync(new URL('../app/intelligence/layout.tsx', import.meta.url), 'utf8')
+  const reviewerLayout = readFileSync(new URL('../app/review/layout.tsx', import.meta.url), 'utf8')
   const rootLayout = readFileSync(new URL('../app/layout.tsx', import.meta.url), 'utf8')
   const siteTheme = readFileSync(new URL('../lib/site-theme.ts', import.meta.url), 'utf8')
 
@@ -69,6 +70,8 @@ test('Apps, Books, Docs, Knowledge, and Intelligence own bounded cyber-light ove
   assert.match(knowledgeLayout, /data-visual-scope="knowledge"/)
   assert.match(intelligenceLayout, /data-visual-system="cyber-light"/)
   assert.match(intelligenceLayout, /data-visual-scope="intelligence"/)
+  assert.match(reviewerLayout, /data-visual-system="cyber-light"/)
+  assert.match(reviewerLayout, /data-visual-scope="reviewer"/)
   assert.doesNotMatch(rootLayout, /cyber-light/)
   assert.doesNotMatch(siteTheme, /cyber-light/)
 })

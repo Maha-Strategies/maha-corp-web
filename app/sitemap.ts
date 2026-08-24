@@ -20,6 +20,7 @@ import { NEUROMORPHIC_COMPARISONS, NEUROMORPHIC_COMPARISONS_PATH, NEUROMORPHIC_C
 import { EPISTEMIC_DOMAINS, EPISTEMIC_RELEASE_DATE, EPISTEMIC_SYSTEM_PATH, PUBLIC_EPISTEMIC_RECORDS } from '@/lib/epistemic-pilots'
 import { epistemicRecordPath } from '@/lib/epistemic-publication'
 import { getActiveEpistemicCanonicalReleases } from '@/lib/public-epistemic-releases'
+import { EPISTEMIC_PHASE4_PILOT_DATE } from '@/lib/epistemic-pilot-corpus'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = MAHA_SITE_URL
@@ -63,6 +64,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${baseUrl}${EPISTEMIC_SYSTEM_PATH}`, lastModified: new Date(EPISTEMIC_RELEASE_DATE) },
     { url: `${baseUrl}${EPISTEMIC_SYSTEM_PATH}/migrations`, lastModified: new Date(EPISTEMIC_RELEASE_DATE) },
     { url: `${baseUrl}${EPISTEMIC_SYSTEM_PATH}/releases`, lastModified: new Date(EPISTEMIC_RELEASE_DATE) },
+    { url: `${baseUrl}${EPISTEMIC_SYSTEM_PATH}/pilot-corpus`, lastModified: new Date(EPISTEMIC_PHASE4_PILOT_DATE) },
     ...EPISTEMIC_DOMAINS.map((domain) => ({ url: `${baseUrl}/knowledge/${domain.slug}`, lastModified: new Date(EPISTEMIC_RELEASE_DATE) })),
     ...PUBLIC_EPISTEMIC_RECORDS.map((record) => ({ url: `${baseUrl}${epistemicRecordPath(record)}`, lastModified: new Date(EPISTEMIC_RELEASE_DATE) })),
     { url: `${baseUrl}${ASTROLOGY_PATH}`, lastModified: new Date(ASTROLOGY_RELEASE_DATE) },

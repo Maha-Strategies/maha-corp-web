@@ -81,6 +81,7 @@
     "sync:public-evidence": "node --experimental-strip-types scripts/sync-public-evidence.ts",
     "verify:wso2-context-interceptor:preview": "node --experimental-strip-types scripts/verify-wso2-context-interceptor-preview.ts",
     "verify:orchestration-deployment": "node --experimental-strip-types scripts/verify-orchestration-deployment.ts",
+    "verify:epistemic-phase4": "node --experimental-strip-types scripts/verify-epistemic-phase4-lifecycle.ts",
     "verify:x402-sepolia": "node --experimental-strip-types scripts/verify-x402-sepolia.ts",
     "build:sdk": "npm --prefix packages/sdk run build",
     "pack:sdk": "npm --prefix packages/sdk run pack:dry-run",

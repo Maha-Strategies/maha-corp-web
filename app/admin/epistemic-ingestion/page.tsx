@@ -17,6 +17,7 @@ type ReviewTarget = {
   sourcePublicPath: string
   gateDecision: { reasons?: string[] }
   reviewProgress?: { scopes?: Record<string, { status?: string }> }
+  invitationRequired?: boolean
 }
 
 type CriterionDefinition = { id: string; label: string; question: string }
@@ -168,7 +169,7 @@ export default function EpistemicIngestionPage() {
           <div><p className="font-mono text-xs uppercase tracking-[0.24em] text-cyan-700">Epistemic operations · append-only</p>
           <h1 className="mt-3 text-4xl font-semibold">Knowledge ingestion and expert review</h1>
           <p className="mt-3 max-w-4xl text-sm leading-6 text-slate-600">Legacy content is hashed and preserved as a candidate. Reviewers decide one scope at a time; any content change invalidates decisions bound to the prior digest.</p></div>
-          <div className="flex flex-wrap gap-3"><a href="/admin/epistemic-work-queue" className="border border-violet-500 bg-violet-50 px-4 py-3 font-mono text-xs font-bold uppercase tracking-widest text-violet-800">Open Phase 2 queue</a><a href="/admin/epistemic-reingestion" className="border border-cyan-600 bg-cyan-50 px-4 py-3 font-mono text-xs font-bold uppercase tracking-widest text-cyan-800">Open controlled compiler</a></div>
+          <div className="flex flex-wrap gap-3"><a href="/admin/epistemic-work-queue" className="border border-violet-500 bg-violet-50 px-4 py-3 font-mono text-xs font-bold uppercase tracking-widest text-violet-800">Open Phase 2 queue</a><a href="/admin/epistemic-reingestion" className="border border-cyan-600 bg-cyan-50 px-4 py-3 font-mono text-xs font-bold uppercase tracking-widest text-cyan-800">Open controlled compiler</a><a href="/admin/epistemic-review-invitations" className="border border-amber-600 bg-amber-50 px-4 py-3 font-mono text-xs font-bold uppercase tracking-widest text-amber-800">Phase 4 invitations</a></div>
         </header>
         {notice && <p className="mt-6 border border-cyan-200 bg-cyan-50 p-4 text-sm text-cyan-950">{notice}</p>}
 
@@ -184,14 +185,14 @@ export default function EpistemicIngestionPage() {
             <p className="font-mono text-[11px] uppercase tracking-widest text-slate-500">02 · frozen targets</p>
             <h2 id="review-title" className="mt-2 text-xl font-semibold">Imported candidates</h2>
             <div className="mt-4 max-h-[680px] space-y-2 overflow-auto pr-1">
-              {targets.map((target) => { const approved = Object.values(target.reviewProgress?.scopes ?? {}).filter((item) => item.status === 'approved').length; return <button key={`${target.recordId}:${target.reviewTargetSha256}`} onClick={() => chooseTarget(target)} className={`w-full border p-3 text-left ${selected?.recordId === target.recordId ? 'border-cyan-600 bg-cyan-50' : 'border-slate-200 bg-slate-50'}`}><span className="block text-sm font-medium">{target.title}</span><span className="mt-1 block font-mono text-[9px] text-slate-500">{target.domainSlug} · {approved}/4 scopes · {target.reviewTargetSha256.slice(0, 16)}…</span></button> })}
+              {targets.map((target) => { const approved = Object.values(target.reviewProgress?.scopes ?? {}).filter((item) => item.status === 'approved').length; return <button key={`${target.recordId}:${target.reviewTargetSha256}`} onClick={() => chooseTarget(target)} className={`w-full border p-3 text-left ${selected?.recordId === target.recordId ? 'border-cyan-600 bg-cyan-50' : 'border-slate-200 bg-slate-50'}`}><span className="block text-sm font-medium">{target.title}</span><span className="mt-1 block font-mono text-[9px] text-slate-500">{target.domainSlug} · {approved}/4 scopes · {target.reviewTargetSha256.slice(0, 16)}…{target.invitationRequired ? ' · invitation only' : ''}</span></button> })}
               {!targets.length && <p className="text-sm leading-6 text-slate-500">Run a domain adapter to create review targets.</p>}
             </div>
           </aside>
 
           <div className="space-y-6">
             {selected ? <>
-              <section className="border border-slate-200 bg-white p-6"><p className="font-mono text-[11px] uppercase tracking-widest text-cyan-700">Frozen target</p><h2 className="mt-2 text-2xl font-semibold">{selected.title}</h2><p className="mt-3 break-all font-mono text-[10px] text-slate-500">{selected.reviewTargetSha256}</p><a href={selected.sourcePublicPath} className="mt-3 inline-block text-sm text-cyan-800 underline">Open legacy source page</a></section>
+              <section className="border border-slate-200 bg-white p-6"><p className="font-mono text-[11px] uppercase tracking-widest text-cyan-700">Frozen target</p><h2 className="mt-2 text-2xl font-semibold">{selected.title}</h2><p className="mt-3 break-all font-mono text-[10px] text-slate-500">{selected.reviewTargetSha256}</p><a href={selected.sourcePublicPath} className="mt-3 inline-block text-sm text-cyan-800 underline">Open legacy source page</a>{selected.invitationRequired && <div className="mt-5 border-l-4 border-amber-500 bg-amber-50 p-4 text-sm leading-6 text-amber-950">This record belongs to the frozen Phase 4 pilot. Direct operator-submitted reviews are disabled. <a href="/admin/epistemic-review-invitations" className="font-semibold underline">Issue an exact-scope invitation</a>.</div>}</section>
               <section className="border border-slate-200 bg-white p-6">
                 <p className="font-mono text-[11px] uppercase tracking-widest text-slate-500">03 · versioned reviewer identity</p>
                 <div className="mt-4 grid gap-4 md:grid-cols-2">
@@ -212,7 +213,7 @@ export default function EpistemicIngestionPage() {
                 <div className="mt-5 space-y-4">{criteriaDefinitions[scope]?.map((definition) => { const value = criteria.find((item) => item.criterionId === definition.id); return <div key={definition.id} className="border border-slate-200 bg-slate-50 p-4"><p className="font-medium">{definition.label}</p><p className="mt-1 text-sm text-slate-600">{definition.question}</p><select value={value?.verdict ?? 'satisfied'} onChange={(event) => setCriteria(criteria.map((item) => item.criterionId === definition.id ? { ...item, verdict: event.target.value } : item))} className="mt-3 border border-slate-300 bg-white p-2 text-sm">{criterionVerdicts.map((verdict) => <option key={verdict}>{verdict}</option>)}</select><textarea value={value?.rationale ?? ''} onChange={(event) => setCriteria(criteria.map((item) => item.criterionId === definition.id ? { ...item, rationale: event.target.value } : item))} placeholder="Criterion-specific rationale" rows={3} className="mt-3 w-full border border-slate-300 bg-white p-3 text-sm" /></div>})}</div>
                 <div className="mt-5 grid gap-4 md:grid-cols-2"><TextArea label="Disagreements · one per line" value={disagreements} onChange={setDisagreements} /><Input label="Supersedes review ID (optional)" value={supersedesReviewId} onChange={setSupersedesReviewId} /></div>
                 <TextArea label="Scoped conclusion" value={rationale} onChange={setRationale} />
-                <button onClick={() => void submitReview()} disabled={loading || !criteria.length} className="mt-5 bg-cyan-700 px-5 py-3 font-mono text-xs font-bold uppercase tracking-widest text-white disabled:opacity-40">Record immutable decision</button>
+                <button onClick={() => void submitReview()} disabled={loading || !criteria.length || selected.invitationRequired} className="mt-5 bg-cyan-700 px-5 py-3 font-mono text-xs font-bold uppercase tracking-widest text-white disabled:opacity-40">{selected.invitationRequired ? 'Invitation required for pilot record' : 'Record immutable decision'}</button>
               </section>
             </> : <section className="border border-dashed border-slate-300 bg-white p-10 text-center text-slate-500">Select an imported candidate to begin a scoped review.</section>}
           </div>

@@ -17,6 +17,7 @@ import {
   EPISTEMIC_SYSTEM_PATH,
   PUBLIC_EPISTEMIC_RECORDS,
 } from '@/lib/epistemic-pilots'
+import { EPISTEMIC_PHASE4_PILOT_MANIFEST } from '@/lib/epistemic-pilot-corpus'
 
 export const metadata: Metadata = {
   metadataBase: new URL(MAHA_SITE_URL),
@@ -84,6 +85,7 @@ export default function EpistemicSystemPage() {
             <a href={`${EPISTEMIC_SYSTEM_PATH}/schema`} className="evidence-action evidence-action--primary">Open JSON schema</a>
             <Link href={`${EPISTEMIC_SYSTEM_PATH}/migrations`} className="evidence-action evidence-action--secondary">Inspect legacy migration</Link>
             <Link href={`${EPISTEMIC_SYSTEM_PATH}/releases`} className="evidence-action evidence-action--secondary">Inspect canonical releases</Link>
+            <Link href={`${EPISTEMIC_SYSTEM_PATH}/pilot-corpus`} className="evidence-action evidence-action--secondary">Inspect Phase 4 pilot</Link>
           </div>
         </header>
 
@@ -139,6 +141,18 @@ export default function EpistemicSystemPage() {
           </div>
           <div className="evidence-status-surface evidence-status-surface--verified mt-6"><p className="evidence-status-label">Public projection</p><p className="evidence-copy mt-2">Only the active release generates a canonical database-backed page and sitemap row. The machine-readable registry excludes credentials, operational fingerprints, private reviewer profiles, and non-consented authority identity fields.</p></div>
           <Link href={`${EPISTEMIC_SYSTEM_PATH}/releases`} className="evidence-action evidence-action--primary mt-7">Open canonical release ledger</Link>
+        </section>
+
+        <section className="evidence-section" aria-labelledby="phase-four-heading">
+          <p className="evidence-kicker text-[var(--status-sourced)]">Phase 4 · canonical corpus operations</p>
+          <h2 id="phase-four-heading" className="evidence-section-title mt-3">The protocol now has a frozen operating sample.</h2>
+          <p className="evidence-copy mt-5 max-w-4xl">A public manifest fixes {EPISTEMIC_PHASE4_PILOT_MANIFEST.counts.records} records across {EPISTEMIC_PHASE4_PILOT_MANIFEST.counts.domains} domains before expert decisions are collected. One-time invitations bind a versioned reviewer identity to one required scope on one latest target digest; plaintext credentials are never persisted.</p>
+          <div className="mt-7 grid gap-4 lg:grid-cols-3">
+            <article className="evidence-card"><p className="evidence-kicker">Selection fixed first</p><h3 className="evidence-card-title mt-3">No success-only substitution</h3><p className="evidence-card-copy mt-3">The selected record IDs, rationales, initial hashes, and blocker counts are public before the review lifecycle runs.</p></article>
+            <article className="evidence-card"><p className="evidence-kicker">Least authority</p><h3 className="evidence-card-title mt-3">One reviewer, scope, and hash</h3><p className="evidence-card-copy mt-3">An invitation cannot open another record, review another scope, operate the corpus, re-ingest content, or authorize release.</p></article>
+            <article className="evidence-card"><p className="evidence-kicker">Atomic terminal event</p><h3 className="evidence-card-title mt-3">Consume or revoke</h3><p className="evidence-card-copy mt-3">The ledger permits one terminal event. Review creation and invitation consumption occur in the same database transaction.</p></article>
+          </div>
+          <Link href={`${EPISTEMIC_SYSTEM_PATH}/pilot-corpus`} className="evidence-action evidence-action--primary mt-7">Open the frozen pilot corpus</Link>
         </section>
 
         <section className="evidence-section" aria-labelledby="axes-heading">

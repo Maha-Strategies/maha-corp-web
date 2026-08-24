@@ -13,6 +13,7 @@ import {
   listEpistemicReviewerProfiles,
   listEpistemicReviewTargets,
 } from '@/lib/epistemic-store'
+import { EPISTEMIC_PHASE4_PILOT_RECORD_IDS } from '@/lib/epistemic-pilot-corpus'
 
 export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
@@ -50,6 +51,7 @@ export async function GET(request: Request) {
       criteria: EXPERT_REVIEW_CRITERIA,
       targets: targets.map(({ candidateSnapshot, ...target }) => ({
         ...target,
+        invitationRequired: EPISTEMIC_PHASE4_PILOT_RECORD_IDS.has(target.recordId),
         reviewProgress: candidateSnapshot ? buildExpertReviewProgress(candidateSnapshot, reviews) : null,
       })),
       profiles,
@@ -73,6 +75,9 @@ export async function POST(request: Request) {
   let parsed: ReturnType<typeof parseEpistemicExpertReview>
   try { parsed = parseEpistemicExpertReview(body) } catch (error) {
     return json({ error: { code: 'invalid_request', message: error instanceof Error ? error.message : 'Invalid expert review.' } }, 400)
+  }
+  if (EPISTEMIC_PHASE4_PILOT_RECORD_IDS.has(parsed.recordId)) {
+    return json({ error: { code: 'invitation_required', message: 'Phase 4 pilot decisions must use a one-time, exact-scope reviewer invitation.' } }, 409)
   }
   const client = createEpistemicPersistenceClient()
   if (!client) return unavailable()

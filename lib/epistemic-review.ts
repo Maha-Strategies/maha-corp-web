@@ -125,7 +125,7 @@ function nullableLine(value: unknown, label: string, maximum: number): string | 
   return line(value, label, 1, maximum)
 }
 
-function parseReviewer(value: unknown): ExpertReviewerSnapshot {
+export function parseExpertReviewerSnapshot(value: unknown): ExpertReviewerSnapshot {
   const candidate = object(value, 'reviewer')
   const reviewerId = line(candidate.reviewerId, 'reviewer.reviewerId', 8, 71)
   if (!REVIEWER_ID.test(reviewerId)) throw new Error('reviewer.reviewerId must use the expert_<stable-id> format.')
@@ -182,7 +182,7 @@ export function parseEpistemicExpertReview(value: unknown): ExpertReviewInput {
   if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(domainSlug)) throw new Error('domainSlug is invalid.')
   if (!SHA256.test(targetSha256)) throw new Error('targetSha256 must be a SHA-256 digest.')
   if (!EXPERT_REVIEW_SCOPES.includes(scope)) throw new Error('scope is unsupported.')
-  const reviewer = parseReviewer(candidate.reviewer)
+  const reviewer = parseExpertReviewerSnapshot(candidate.reviewer)
   if (!reviewer.domains.includes(domainSlug)) {
     throw new Error('reviewer.domains must include the target record domain.')
   }
