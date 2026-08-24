@@ -2,12 +2,9 @@
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import { siteThemeForPath } from '@/lib/site-theme';
+import ThemeToggle from '@/components/ThemeToggle';
 
 export default function Navbar() {
-  const pathname = usePathname();
-  const theme = siteThemeForPath(pathname);
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleMenu = () => setIsOpen((open) => !open);
@@ -75,7 +72,7 @@ export default function Navbar() {
 
   return (
     <>
-      <nav data-theme={theme} className="site-chrome relative z-50 border-b border-[var(--chrome-border)] bg-[var(--chrome-surface)] text-[var(--chrome-text)] backdrop-blur-sm">
+      <nav data-theme="paper" className="site-chrome relative z-50 border-b border-[var(--chrome-border)] bg-[var(--chrome-surface)] text-[var(--chrome-text)] backdrop-blur-sm">
         <div className="max-w-6xl mx-auto px-6 py-5 flex justify-between items-center">
           
           {/* Logo */}
@@ -107,6 +104,7 @@ export default function Navbar() {
                 </a>
               </div>
             </details>
+            <ThemeToggle />
           </div>
 
           {/* Mobile Navigation Toggle */}
@@ -125,8 +123,9 @@ export default function Navbar() {
 
       {/* Mobile Full-Screen Overlay */}
       {isOpen && (
-        <div data-theme={theme} id="mobile-navigation" role="dialog" aria-modal="true" aria-label="Primary navigation" className="site-chrome fixed inset-0 z-40 bg-[var(--chrome-surface)] pt-24 px-6 xl:hidden flex flex-col h-[100dvh] overflow-y-auto text-[var(--chrome-text)]">
+        <div data-theme="paper" id="mobile-navigation" role="dialog" aria-modal="true" aria-label="Primary navigation" className="site-chrome fixed inset-0 z-40 bg-[var(--chrome-surface)] pt-24 px-6 xl:hidden flex flex-col h-[100dvh] overflow-y-auto text-[var(--chrome-text)]">
           <div className="flex flex-col gap-6 text-sm text-[var(--chrome-muted)] font-mono tracking-widest uppercase mt-8">
+            <ThemeToggle mobile />
             {primaryLinks.map((link) => (
               <Link
                 key={link.name}

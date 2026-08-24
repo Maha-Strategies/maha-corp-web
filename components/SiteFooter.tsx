@@ -1,8 +1,6 @@
 'use client'
 
 import Link from 'next/link'
-import { usePathname } from 'next/navigation'
-import { siteThemeForPath } from '@/lib/site-theme'
 
 const developerLinks = [
   { href: '/developers', label: 'Developer infrastructure' },
@@ -26,10 +24,8 @@ const companyLinks = [
 ] as const
 
 export default function SiteFooter() {
-  const theme = siteThemeForPath(usePathname())
-
   return (
-    <footer data-theme={theme} className="site-chrome border-t border-[var(--chrome-border)] bg-[var(--chrome-surface)] px-6 py-10 text-[var(--chrome-muted)]">
+    <footer data-theme="paper" className="site-chrome border-t border-[var(--chrome-border)] bg-[var(--chrome-surface)] px-6 py-10 text-[var(--chrome-muted)]">
       <div className="mx-auto grid max-w-6xl gap-10 sm:grid-cols-3">
         <div>
           <p className="font-editorial text-lg font-semibold text-[var(--chrome-text)]">Maha Strategies LLC</p>

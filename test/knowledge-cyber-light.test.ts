@@ -51,7 +51,7 @@ test('Knowledge copy and semantic labels meet readable contrast on light surface
   const surfaces = new Map([
     ['ink', '#13211c'],
     ['copy', '#34463f'],
-    ['muted', '#586a62'],
+    ['muted', '#4d6158'],
     ['cyan', '#0b6675'],
     ['blue', '#235fa4'],
     ['green', '#176b4d'],
