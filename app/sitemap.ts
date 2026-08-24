@@ -17,6 +17,8 @@ import { TROPICAL_SIDEREAL_COMPARISON_PATH, TROPICAL_SIDEREAL_COMPARISON_RELEASE
 import { MATHEMATICAL_CONCEPTS, MATHEMATICS_KNOWLEDGE_PATH, MATHEMATICS_KNOWLEDGE_RELEASE_DATE, mathematicsConceptPath } from '@/lib/mathematics-knowledge'
 import { RELIGION_COMPARISONS, RELIGION_COMPARISONS_PATH, RELIGION_CONCEPTS, RELIGION_KNOWLEDGE_PATH, RELIGION_KNOWLEDGE_RELEASE_DATE, religionComparisonPath, religionConceptPath } from '@/lib/religion-knowledge'
 import { NEUROMORPHIC_COMPARISONS, NEUROMORPHIC_COMPARISONS_PATH, NEUROMORPHIC_CONCEPTS, NEUROMORPHIC_PATH, NEUROMORPHIC_RELEASE_DATE, neuromorphicComparisonPath, neuromorphicConceptPath } from '@/lib/neuromorphic-biocomputing'
+import { EPISTEMIC_DOMAINS, EPISTEMIC_RELEASE_DATE, EPISTEMIC_SYSTEM_PATH, PUBLIC_EPISTEMIC_RECORDS } from '@/lib/epistemic-pilots'
+import { epistemicRecordPath } from '@/lib/epistemic-publication'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = MAHA_SITE_URL
@@ -57,6 +59,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...NEUROMORPHIC_CONCEPTS.map((concept) => ({ url: `${baseUrl}${neuromorphicConceptPath(concept)}`, lastModified: new Date(NEUROMORPHIC_RELEASE_DATE) })),
     { url: `${baseUrl}${NEUROMORPHIC_COMPARISONS_PATH}`, lastModified: new Date(NEUROMORPHIC_RELEASE_DATE) },
     ...NEUROMORPHIC_COMPARISONS.map((comparison) => ({ url: `${baseUrl}${neuromorphicComparisonPath(comparison)}`, lastModified: new Date(NEUROMORPHIC_RELEASE_DATE) })),
+    { url: `${baseUrl}${EPISTEMIC_SYSTEM_PATH}`, lastModified: new Date(EPISTEMIC_RELEASE_DATE) },
+    ...EPISTEMIC_DOMAINS.map((domain) => ({ url: `${baseUrl}/knowledge/${domain.slug}`, lastModified: new Date(EPISTEMIC_RELEASE_DATE) })),
+    ...PUBLIC_EPISTEMIC_RECORDS.map((record) => ({ url: `${baseUrl}${epistemicRecordPath(record)}`, lastModified: new Date(EPISTEMIC_RELEASE_DATE) })),
     { url: `${baseUrl}${ASTROLOGY_PATH}`, lastModified: new Date(ASTROLOGY_RELEASE_DATE) },
     { url: `${baseUrl}/knowledge/muhurta`, lastModified: new Date(ASTROLOGY_RELEASE_DATE) },
     { url: `${baseUrl}/knowledge/birth`, lastModified: new Date(ASTROLOGY_RELEASE_DATE) },
