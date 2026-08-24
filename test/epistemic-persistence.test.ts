@@ -21,6 +21,7 @@ import {
 } from '../lib/epistemic-review.ts'
 import { EXPERT_REVIEW_SCOPES, type EpistemicRecord } from '../lib/epistemic-schema.ts'
 import { epistemicReviewTargetHash, evaluatePublicationGate, sha256Canonical } from '../lib/epistemic-publication.ts'
+import { EPISTEMIC_OPERATIONAL_EVIDENCE } from '../lib/epistemic-operational-evidence.ts'
 
 const root = new URL('../', import.meta.url)
 
@@ -156,6 +157,27 @@ test('database persistence is append-only and cannot publish an imported record'
   assert.doesNotMatch(sql, /publish_epistemic|auto_publish|published_canonical/)
 })
 
+test('aggregate production evidence proves execution without exposing operational data', () => {
+  const evidence = EPISTEMIC_OPERATIONAL_EVIDENCE
+  assert.equal(evidence.environment, 'production')
+  assert.equal(evidence.verification.schemaConverged, true)
+  assert.equal(evidence.verification.applicationHealthPassed, true)
+  assert.deepEqual(evidence.adapterResults.map((adapter) => adapter.recordCount), [25, 24, 23, 18, 20])
+  assert.equal(evidence.totals.persistedBatches, 5)
+  assert.equal(evidence.totals.persistedReviewTargets, 110)
+  assert.equal(evidence.totals.publicEligibleTargets, 0)
+  assert.equal(evidence.totals.reviewerProfiles, 0)
+  assert.equal(evidence.totals.reviewDecisions, 0)
+  assert.equal(evidence.verification.autoPublicationSupported, false)
+  assert.equal(evidence.verification.productApprovalSupported, false)
+  assert.equal(evidence.exclusions.participantDataIncluded, false)
+  assert.equal(evidence.exclusions.natalDataIncluded, false)
+  assert.equal(evidence.exclusions.sourceTextIncluded, false)
+  assert.equal(evidence.exclusions.credentialsIncluded, false)
+  assert.equal(evidence.exclusions.internalIdentifiersIncluded, false)
+  assert.match(evidence.evidenceSha256, /^sha256:[a-f0-9]{64}$/)
+})
+
 test('protected APIs, Cyber-light ledger, sitemap, and machine discovery expose the workflow honestly', async () => {
   const [ingestionRoute, reviewRoute, page, registry, method, sitemap, llms, admin, store] = await Promise.all([
     'app/api/admin/epistemic-ingestion/route.ts',
@@ -176,6 +198,7 @@ test('protected APIs, Cyber-light ledger, sitemap, and machine discovery expose 
   assert.match(page, /Existing knowledge enters as evidence to review/)
   assert.match(page, /evidence-page/)
   assert.match(registry, /EPISTEMIC_MIGRATION_INVENTORY/)
+  assert.match(registry, /EPISTEMIC_OPERATIONAL_EVIDENCE/)
   assert.match(method, /Five legacy systems now meet the same gate/)
   assert.match(sitemap, /EPISTEMIC_SYSTEM_PATH\}\/migrations/)
   assert.match(llms, /Epistemic machine-readable migration registry/)

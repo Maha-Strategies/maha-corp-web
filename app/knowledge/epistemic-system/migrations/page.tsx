@@ -3,6 +3,7 @@ import Link from 'next/link'
 
 import { MAHA_SITE_URL } from '@/lib/entity'
 import { EPISTEMIC_MIGRATION_INVENTORY } from '@/lib/epistemic-adapters'
+import { EPISTEMIC_OPERATIONAL_EVIDENCE } from '@/lib/epistemic-operational-evidence'
 
 const PATH = '/knowledge/epistemic-system/migrations'
 
@@ -22,6 +23,7 @@ export const metadata: Metadata = {
 
 export default function EpistemicMigrationsPage() {
   const inventory = EPISTEMIC_MIGRATION_INVENTORY
+  const evidence = EPISTEMIC_OPERATIONAL_EVIDENCE
   return (
     <main className="evidence-page">
       <div className="evidence-container">
@@ -53,6 +55,33 @@ export default function EpistemicMigrationsPage() {
           <div className="evidence-status-surface evidence-status-surface--boundary mt-6">
             <p className="evidence-status-label">Deliberate zero</p>
             <p className="evidence-copy mt-2">The adapters do not manufacture passage locators, publication dates, replication assessments, or approvals that the source corpus never recorded. Every imported candidate therefore remains below the new publication line until those gaps are reviewed.</p>
+          </div>
+        </section>
+
+        <section className="evidence-section" aria-labelledby="production-execution-heading">
+          <p className="evidence-kicker text-[var(--status-verified)]">Production execution · verified</p>
+          <h2 id="production-execution-heading" className="evidence-section-title mt-3">The five adapters crossed the live gate—and none crossed the publication line.</h2>
+          <p className="evidence-copy mt-5">Executed on <time dateTime={evidence.executedOn}>{evidence.executedOn}</time>. The production schema converged, application health passed, and every imported target remained withheld.</p>
+          <div className="mt-7 grid gap-px border border-[var(--border-default)] bg-[var(--border-default)] sm:grid-cols-4">
+            <div className="bg-[var(--surface-raised)] p-6"><p className="evidence-kicker">Immutable batches</p><p className="mt-3 font-mono text-3xl text-[var(--text-primary)]">{evidence.totals.persistedBatches}</p></div>
+            <div className="bg-[var(--surface-raised)] p-6"><p className="evidence-kicker">Review targets</p><p className="mt-3 font-mono text-3xl text-[var(--text-primary)]">{evidence.totals.persistedReviewTargets}</p></div>
+            <div className="bg-[var(--surface-raised)] p-6"><p className="evidence-kicker text-[var(--status-verified)]">Public eligible</p><p className="mt-3 font-mono text-3xl text-[var(--status-verified)]">{evidence.totals.publicEligibleTargets}</p></div>
+            <div className="bg-[var(--surface-raised)] p-6"><p className="evidence-kicker">Invented reviews</p><p className="mt-3 font-mono text-3xl text-[var(--text-primary)]">{evidence.totals.reviewDecisions}</p></div>
+          </div>
+          <div className="mt-7 grid gap-4 lg:grid-cols-2">
+            {evidence.adapterResults.map((adapter) => (
+              <article key={adapter.adapterId} className="evidence-card">
+                <div className="flex flex-wrap items-start justify-between gap-4">
+                  <h3 className="evidence-card-title">{adapter.adapterId.replaceAll('-', ' ')}</h3>
+                  <span className="evidence-chip">{adapter.recordCount} persisted targets</span>
+                </div>
+              </article>
+            ))}
+          </div>
+          <div className="evidence-status-surface evidence-status-surface--verified mt-6">
+            <p className="evidence-status-label">Aggregate evidence digest</p>
+            <p className="evidence-copy mt-2 break-all font-mono text-xs">{evidence.evidenceSha256}</p>
+            <p className="evidence-copy mt-3">No participant data, natal data, source text, credential, or internal identifier is included. This proves workflow execution, not claim validity.</p>
           </div>
         </section>
 
