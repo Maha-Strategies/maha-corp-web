@@ -111,5 +111,5 @@ test('Knowledge index shares Intelligence geometry and adds a bounded spectrum',
   assert.match(knowledgeIndex, /styles\.indexTitle/)
   assert.match(knowledgeIndex, /styles\.domainGrid/)
   assert.match(knowledgeIndex, /styles\.spectrumRule/)
-  assert.match(stylesheet, /var\(--knowledge-cyber-cyan\).*var\(--knowledge-cyber-green\)/s)
+  assert.match(stylesheet, /var\(--knowledge-cyber-cyan\)[\s\S]*var\(--knowledge-cyber-green\)/)
 })
