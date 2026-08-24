@@ -12,6 +12,10 @@ import {
   type EpistemicExpertReview,
   type ExpertReviewerSnapshot,
 } from './epistemic-review.ts'
+import {
+  sourceCompletionIdempotencyHash,
+  type SourceCompletionEvent,
+} from './epistemic-work-queue.ts'
 
 export function createEpistemicPersistenceClient(): SupabaseClient | null {
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL
@@ -107,4 +111,29 @@ export async function listEpistemicReviewerProfiles(client: SupabaseClient): Pro
     .limit(500)
   if (error) throw new Error(`Epistemic reviewer profile read failed: ${error.message}`)
   return (data ?? []).map((row) => row.profile_snapshot as ExpertReviewerSnapshot)
+}
+
+export async function insertEpistemicSourceCompletionEvent(
+  client: SupabaseClient,
+  event: SourceCompletionEvent,
+  idempotencyKey: string,
+  actorFingerprint: string,
+) {
+  const { data, error } = await client.rpc('record_epistemic_source_completion_event', {
+    p_event: event,
+    p_idempotency_hash: sourceCompletionIdempotencyHash(idempotencyKey),
+    p_actor_fingerprint: actorFingerprint,
+  })
+  if (error) throw new Error(`Epistemic source-completion event failed [${error.code ?? 'unknown'}]: ${error.message}`)
+  return data as { eventId: string; state: string; idempotentReplay: boolean }
+}
+
+export async function listEpistemicSourceCompletionEvents(client: SupabaseClient): Promise<SourceCompletionEvent[]> {
+  const { data, error } = await client
+    .from('epistemic_source_completion_events')
+    .select('event_snapshot')
+    .order('occurred_at', { ascending: false })
+    .limit(2_000)
+  if (error) throw new Error(`Epistemic source-completion event read failed: ${error.message}`)
+  return (data ?? []).map((row) => row.event_snapshot as SourceCompletionEvent)
 }

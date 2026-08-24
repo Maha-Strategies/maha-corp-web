@@ -40,6 +40,27 @@ approvals that the legacy schemas did not retain.
 The private operator workspace is `/admin/epistemic-ingestion`. It keeps the
 bearer token in component memory only and never writes it to browser storage.
 
+## Phase 2 work queues
+
+The private `/admin/epistemic-work-queue` workspace turns the fail-closed gate
+output into an operational backlog without weakening the publication boundary.
+It provides two projections:
+
+- **Source completion:** one record-level queue item with every source, claim,
+  structure, boundary, bridge, and integrity blocker retained by its exact gate
+  reason. Operators can triage, assign, start, submit evidence, return, and close
+  work through constrained transitions.
+- **Expert review:** one queue item per required scope that is missing, stale,
+  abstained, or has changes requested. Items deep-link into the existing review
+  workspace with the record and scope preselected.
+
+Source-completion history is append-only. Evidence rows bind a source URL,
+optional exact locator and rights basis, and a bounded note to one blocker on
+one frozen target. Submission moves the old target only to
+`ready-for-reingestion`; it does not patch the candidate. A corrected source
+record must pass through the adapter again, creating a new target hash and a new
+review backlog.
+
 ## Persistence boundary
 
 Migration `20260824050000_epistemic_ingestion_and_expert_review.sql` adds four
@@ -49,6 +70,12 @@ append-only tables:
 - `epistemic_ingestion_records`
 - `epistemic_expert_reviewer_profiles`
 - `epistemic_expert_review_decisions`
+
+Migration `20260824073000_epistemic_source_completion_queue.sql` adds the
+append-only `epistemic_source_completion_events` ledger and the sole
+security-definer function permitted to append valid state transitions. The
+service role can read the ledger but cannot insert, update, delete, or truncate
+it directly.
 
 Anonymous and authenticated browser roles receive no access. The service role
 has read access but cannot insert, update, delete, or truncate the ledgers

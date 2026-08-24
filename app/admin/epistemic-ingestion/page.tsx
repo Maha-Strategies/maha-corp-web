@@ -68,12 +68,23 @@ export default function EpistemicIngestionPage() {
       if (!ingestionResponse.ok) throw new Error(ingestion.error?.message ?? 'Ingestion registry is unavailable.')
       if (!reviewResponse.ok) throw new Error(review.error?.message ?? 'Expert-review registry is unavailable.')
       const definitions = review.criteria ?? {}
+      const loadedTargets = review.targets ?? ingestion.reviewTargets ?? []
       setAdapters(ingestion.inventory?.adapters ?? [])
-      setTargets(review.targets ?? ingestion.reviewTargets ?? [])
+      setTargets(loadedTargets)
       setReviews(review.reviews ?? [])
       setCriteriaDefinitions(definitions)
       setUnlocked(true)
-      prepareCriteria(scope, definitions)
+      const query = typeof window === 'undefined' ? new URLSearchParams() : new URLSearchParams(window.location.search)
+      const requestedTarget = loadedTargets.find((target) => target.recordId === query.get('record'))
+      const requestedScope = scopes.includes(query.get('scope') as (typeof scopes)[number])
+        ? query.get('scope') as (typeof scopes)[number]
+        : scope
+      if (requestedTarget) {
+        setSelectedRecordId(requestedTarget.recordId)
+        setReviewer((value) => ({ ...value, domains: value.domains || requestedTarget.domainSlug }))
+      }
+      setScope(requestedScope)
+      prepareCriteria(requestedScope, definitions)
     } catch (error) {
       setNotice(error instanceof Error ? error.message : 'The epistemic workspace is unavailable.')
     } finally { setLoading(false) }
@@ -153,10 +164,11 @@ export default function EpistemicIngestionPage() {
   return (
     <main className="min-h-screen bg-[#f3f6fa] px-5 py-10 text-slate-900">
       <div className="mx-auto max-w-7xl">
-        <header className="border-b border-cyan-200 pb-7">
-          <p className="font-mono text-xs uppercase tracking-[0.24em] text-cyan-700">Epistemic operations · append-only</p>
+        <header className="flex flex-wrap items-end justify-between gap-5 border-b border-cyan-200 pb-7">
+          <div><p className="font-mono text-xs uppercase tracking-[0.24em] text-cyan-700">Epistemic operations · append-only</p>
           <h1 className="mt-3 text-4xl font-semibold">Knowledge ingestion and expert review</h1>
-          <p className="mt-3 max-w-4xl text-sm leading-6 text-slate-600">Legacy content is hashed and preserved as a candidate. Reviewers decide one scope at a time; any content change invalidates decisions bound to the prior digest.</p>
+          <p className="mt-3 max-w-4xl text-sm leading-6 text-slate-600">Legacy content is hashed and preserved as a candidate. Reviewers decide one scope at a time; any content change invalidates decisions bound to the prior digest.</p></div>
+          <a href="/admin/epistemic-work-queue" className="border border-violet-500 bg-violet-50 px-4 py-3 font-mono text-xs font-bold uppercase tracking-widest text-violet-800">Open Phase 2 queue</a>
         </header>
         {notice && <p className="mt-6 border border-cyan-200 bg-cyan-50 p-4 text-sm text-cyan-950">{notice}</p>}
 

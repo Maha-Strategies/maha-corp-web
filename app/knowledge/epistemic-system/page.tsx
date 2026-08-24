@@ -112,6 +112,17 @@ export default function EpistemicSystemPage() {
           <Link href={`${EPISTEMIC_SYSTEM_PATH}/migrations`} className="evidence-action evidence-action--primary mt-7">Open migration ledger</Link>
         </section>
 
+        <section className="evidence-section" aria-labelledby="phase-two-heading">
+          <p className="evidence-kicker text-[var(--status-sourced)]">Phase 2 · operational review</p>
+          <h2 id="phase-two-heading" className="evidence-section-title mt-3">Withheld no longer means invisible or unstructured.</h2>
+          <p className="evidence-copy mt-5 max-w-4xl">A private work queue now classifies every gate reason into source completion, expert review, or release control. Operators can triage and assign source work, attach bounded evidence to exact blockers, and route each frozen target into one of four scoped expert-review queues.</p>
+          <div className="mt-7 grid gap-4 lg:grid-cols-3">
+            <article className="evidence-card"><p className="evidence-kicker">Exact blockers</p><h3 className="evidence-card-title mt-3">Reason-coded backlog</h3><p className="evidence-card-copy mt-3">Missing locators, rights notes, publication dates, replication assessments, and integrity errors remain individually inspectable.</p></article>
+            <article className="evidence-card"><p className="evidence-kicker">Append-only work</p><h3 className="evidence-card-title mt-3">Evidence without mutation</h3><p className="evidence-card-copy mt-3">Assignments and evidence submissions bind to the old target hash; they cannot silently rewrite the ingested candidate.</p></article>
+            <article className="evidence-card"><p className="evidence-kicker">Scoped handoff</p><h3 className="evidence-card-title mt-3">Review readiness, not approval</h3><p className="evidence-card-copy mt-3">Corrected content must be re-ingested under a new hash before reviewer decisions can count toward the publication gate.</p></article>
+          </div>
+        </section>
+
         <section className="evidence-section" aria-labelledby="axes-heading">
           <p className="evidence-kicker">Independent axes</p>
           <h2 id="axes-heading" className="evidence-section-title mt-3">No single confidence label can carry all meanings.</h2>

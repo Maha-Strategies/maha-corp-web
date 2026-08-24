@@ -128,7 +128,7 @@ export default function EpistemicMigrationsPage() {
   → scope-specific decision on frozen target hash
   → reviewed source change and a new canonical version
   → publication gate evaluated again`}</code></pre>
-          <p className="evidence-copy mt-5">Database ingestion never edits a public page directly. Promotion remains a separate reviewed release, so compromised credentials cannot turn an imported draft into crawlable authority.</p>
+          <p className="evidence-copy mt-5">Phase 2 inserts an append-only source-completion queue between the gate decision and the reviewed source change. Database ingestion and queue events never edit a public page directly. Promotion remains a separate reviewed release, so compromised credentials cannot turn an imported draft into crawlable authority.</p>
         </section>
       </div>
     </main>
