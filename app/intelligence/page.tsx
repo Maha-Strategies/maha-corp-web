@@ -1,6 +1,8 @@
 import React from 'react';
 import Link from 'next/link';
 import { TrackedLink } from '@/components/ConversionTracker';
+import styles from './intelligence-cyber-light.module.css';
+import { semanticForStatus, type IntelligenceSemantic } from './status-semantics';
 
 export const metadata = {
   title: 'Intelligence | Maha Strategies LLC',
@@ -8,7 +10,7 @@ export const metadata = {
 };
 
 // --- DATA MODEL ---
-type Indicator = { color: string; label: string };
+type Indicator = { semantic: IntelligenceSemantic; label: string };
 
 interface BriefData {
   title: string;
@@ -354,46 +356,53 @@ const BRIEFS: BriefData[] = [
     description: 'An operational framework mapping the timeline of consumer brain-computer interfaces, segmented by physical hurdles, the economic pivot to True Attention Metrics, and resulting lifestyle shifts.',
     href: '/intelligence/briefs/neurotechnology-non-medical-outlook',
     indicators: [
-      { color: 'bg-rose-500', label: 'Hurdles' },
-      { color: 'bg-emerald-500', label: 'Value Shifts' },
-      { color: 'bg-cyan-500', label: 'Societal Impacts' },
+      { semantic: 'unverified', label: 'Hurdles' },
+      { semantic: 'verified', label: 'Value Shifts' },
+      { semantic: 'sourced', label: 'Societal Impacts' },
     ],
   },
 ];
 
 // --- COMPONENTS ---
+const CHIP: Record<IntelligenceSemantic, string> = {
+  verified: styles.chipVerified,
+  sourced: styles.chipSourced,
+  boundary: styles.chipBoundary,
+  illustrative: styles.chipIllustrative,
+  unverified: styles.chipUnverified,
+};
+
+const DOT: Record<IntelligenceSemantic, string> = {
+  verified: styles.indicatorVerified,
+  sourced: styles.indicatorSourced,
+  boundary: styles.indicatorBoundary,
+  illustrative: styles.indicatorIllustrative,
+  unverified: styles.indicatorUnverified,
+};
+
 const BriefCard = ({ data }: { data: BriefData }) => (
-  <Link 
-    href={data.href} 
-    className="group flex flex-col border border-neutral-800 bg-[#0a0a0c] p-6 hover:border-neutral-500 transition-all duration-200 h-full"
-  >
-    <div className="flex items-center justify-between mb-4">
-      <span className="font-mono text-xs tracking-widest text-amber-500 uppercase">
-        {data.category}
-      </span>
-      <span className="font-mono text-[10px] sm:text-xs tracking-widest bg-neutral-900 text-neutral-400 px-2 py-0.5 border border-neutral-800 uppercase group-hover:border-neutral-600">
+  <Link href={data.href} className={styles.card}>
+    <div className="mb-4 flex flex-wrap items-center justify-between gap-2">
+      <span className={styles.category}>{data.category}</span>
+      <span className={`${styles.chip} ${CHIP[semanticForStatus(data.status)]}`}>
         STATUS: {data.status}
       </span>
     </div>
-    
-    <h3 className="text-xl font-bold text-white uppercase tracking-tight group-hover:text-amber-500 transition-colors mb-3">
-      {data.title}
-    </h3>
-    
-    <p className="text-sm text-neutral-400 line-clamp-3 leading-relaxed mb-6">
-      {data.description}
-    </p>
-    
+
+    <h3 className={`${styles.cardTitle} mb-3`}>{data.title}</h3>
+
+    <p className={`${styles.cardBody} line-clamp-3 mb-6`}>{data.description}</p>
+
     <div className="mt-auto">
       {data.indicators && (
-        <div className="flex flex-wrap gap-2 mb-4">
+        <div className="mb-4 flex flex-wrap gap-2">
           {data.indicators.map((ind, i) => (
-            <span key={i} className={`w-2 h-2 rounded-full ${ind.color}`} title={ind.label}></span>
+            <span key={i} className={`${styles.indicator} ${DOT[ind.semantic]}`} title={ind.label}></span>
           ))}
         </div>
       )}
-      <div className="flex items-center gap-2 text-xs font-mono tracking-widest text-white uppercase">
-        ACCESS DATA DEEP-DIVE <span className="group-hover:translate-x-1 transition-transform">→</span>
+      <div className={styles.cardAction}>
+        ACCESS DATA DEEP-DIVE <span className={styles.cardArrow}>&rarr;</span>
       </div>
     </div>
   </Link>
@@ -403,24 +412,22 @@ export default function IntelligenceGrid() {
   const groups = ['MACRO & SYSTEMS', 'HARDWARE & INFRASTRUCTURE', 'INTELLIGENCE & CYBERNETICS'] as const;
 
   return (
-    <main className="min-h-screen bg-[#0a0a0c] text-[#e0e0e0] py-16 px-6 sm:px-12 selection:bg-amber-500 selection:text-black">
-      <div className="max-w-7xl mx-auto">
-        
+    <main className={styles.page}>
+      <div className={styles.shell}>
+
         {/* HEADER */}
-        <header className="mb-16 border-b border-neutral-800 pb-8 max-w-4xl">
-          <h1 className="font-sans text-4xl sm:text-5xl font-extrabold uppercase tracking-tight text-white mb-4">
-            Active Intelligence
-          </h1>
-          <p className="font-mono text-sm text-neutral-500 tracking-widest uppercase">
+        <header className={styles.header}>
+          <h1 className={`${styles.title} mb-4`}>Active Intelligence</h1>
+          <p className={styles.metaMuted}>
             [ Flash-Opinions // Structural Audits // Market Signals ]
           </p>
           <div className="mt-8">
             <TrackedLink
               href="/rapid-intelligence-brief"
               event="cta_intelligence_rapid_brief"
-              className="inline-block border border-indigo-500/70 text-indigo-200 font-mono text-[10px] tracking-widest uppercase px-5 py-3 hover:bg-indigo-500 hover:text-white transition-colors"
+              className={`${styles.action} inline-block w-auto`}
             >
-              Need a focused answer in five days? Rapid Intelligence Brief ↗
+              Need a focused answer in five days? Rapid Intelligence Brief &#8599;
             </TrackedLink>
           </div>
         </header>
@@ -429,14 +436,12 @@ export default function IntelligenceGrid() {
         <div className="space-y-20">
           {groups.map((groupTitle) => (
             <section key={groupTitle}>
-              <div className="flex items-center gap-4 mb-8">
-                <h2 className="font-mono text-sm sm:text-base tracking-widest text-white uppercase">
-                  {groupTitle}
-                </h2>
-                <div className="flex-grow h-[1px] bg-neutral-800"></div>
+              <div className="mb-8 flex items-center gap-4">
+                <h2 className={styles.groupHeading}>{groupTitle}</h2>
+                <div className={styles.rule}></div>
               </div>
-              
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+              <div className="grid grid-cols-[minmax(0,1fr)] gap-6 md:grid-cols-2 lg:grid-cols-3">
                 {BRIEFS.filter(b => b.group === groupTitle).map((brief, idx) => (
                   <BriefCard key={idx} data={brief} />
                 ))}

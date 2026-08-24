@@ -1,0 +1,611 @@
+/*
+ * Cyber-light — intelligence scope.
+ *
+ * A sibling of the frozen Books cyber-light vocabulary (docs/design/
+ * cyber-light-vocabulary-v1.md), not an inheritance of it. Books v1 is scoped
+ * to /books/** and explicitly does not extend here, so this file carries its
+ * own tokens and its own scope marker.
+ *
+ * The intelligence surface is an analyst ground rather than a reading ground:
+ * pale blue-tinted neutral, a technical grid, sharp borders, monospace
+ * metadata and structured data panels. Every rule is nested under .root, so
+ * nothing can leak into another section of the site.
+ *
+ * Contrast: the site-wide --status-* tokens all fall below WCAG AA when set on
+ * their own pale tints (3.44:1 to 4.49:1). This scope darkens them locally so
+ * a pale panel can carry dark corresponding foreground text and still pass.
+ */
+
+.root {
+  /* Ground */
+  --intel-surface: #e9edf3;
+  --intel-raised: #f7f9fc;
+  --intel-sunken: #dfe5ee;
+
+  /* Accent: blue is the informational/sourced state, so it leads the surface. */
+  --intel-accent: #24509a;
+  --intel-accent-strong: #17376e;
+  --intel-accent-soft: rgb(36 80 154 / 8%);
+  --intel-grid: rgb(36 80 154 / 5%);
+  --intel-line: rgb(36 80 154 / 22%);
+  --intel-line-strong: rgb(36 80 154 / 42%);
+  --intel-shadow: rgb(23 55 110 / 14%);
+  --intel-scanline: rgb(36 80 154 / 4%);
+
+  /* Semantic states, darkened for AA on their own tints. */
+  --intel-verified: #1b6146;
+  --intel-sourced: #24509a;
+  --intel-boundary: #6f4a0e;
+  --intel-illustrative: #54407f;
+  --intel-unverified: #93321f;
+
+  --intel-verified-tint: rgb(35 122 85 / 16%);
+  --intel-sourced-tint: rgb(45 99 184 / 16%);
+  --intel-boundary-tint: rgb(160 111 20 / 16%);
+  --intel-illustrative-tint: rgb(110 86 168 / 16%);
+  --intel-unverified-tint: rgb(179 64 46 / 16%);
+
+  position: relative;
+  isolation: isolate;
+  min-height: 100%;
+  background-color: var(--intel-surface);
+  background-image:
+    linear-gradient(var(--intel-grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--intel-grid) 1px, transparent 1px);
+  background-position: center top;
+  background-size: 40px 40px;
+  color: var(--text-primary);
+}
+
+/* Static scanline accent. Never animated, and removed for reduced motion. */
+.root::before {
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  background-image: repeating-linear-gradient(
+    to bottom,
+    var(--intel-scanline) 0,
+    var(--intel-scanline) 1px,
+    transparent 1px,
+    transparent 4px
+  );
+  content: '';
+  pointer-events: none;
+  mask-image: linear-gradient(to bottom, black 0, transparent 24rem);
+}
+
+.root > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* ---------------------------------------------------------------- shell -- */
+
+.page {
+  min-height: 100vh;
+  padding: 4rem 1.5rem;
+}
+
+.shell {
+  margin: 0 auto;
+  max-width: 80rem;
+}
+
+.shellNarrow {
+  margin: 0 auto;
+  max-width: 72rem;
+}
+
+.header {
+  margin-bottom: 4rem;
+  border-bottom: 1px solid var(--intel-line);
+  padding-bottom: 2rem;
+  max-width: 56rem;
+}
+
+.title {
+  color: var(--text-primary);
+  font-size: clamp(2rem, 6vw, 3rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+  text-transform: uppercase;
+}
+
+.briefTitle {
+  color: var(--text-primary);
+  font-size: clamp(1.75rem, 5vw, 3rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  text-transform: uppercase;
+}
+
+.meta {
+  color: var(--intel-accent);
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.17em;
+  text-transform: uppercase;
+}
+
+.metaMuted {
+  color: var(--text-muted);
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.17em;
+  text-transform: uppercase;
+}
+
+.groupHeading {
+  color: var(--text-primary);
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 0.875rem;
+  letter-spacing: 0.17em;
+  text-transform: uppercase;
+}
+
+.rule {
+  flex: 1 1 auto;
+  height: 1px;
+  background: var(--intel-line);
+}
+
+.sectionRule {
+  border-top: 1px solid var(--intel-line);
+}
+
+/* ----------------------------------------------------------------- card -- */
+
+.card {
+  position: relative;
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  border: 1px solid var(--intel-line);
+  background: var(--intel-raised);
+  padding: 1.5rem;
+  box-shadow: 4px 4px 0 var(--intel-shadow);
+  transition:
+    border-color 150ms ease,
+    box-shadow 150ms ease,
+    transform 150ms ease;
+}
+
+.card::before {
+  position: absolute;
+  top: -1px;
+  left: -1px;
+  width: 1.15rem;
+  height: 1.15rem;
+  border-top: 2px solid var(--intel-accent);
+  border-left: 2px solid var(--intel-accent);
+  content: '';
+  pointer-events: none;
+}
+
+.card:hover {
+  border-color: var(--intel-accent);
+  box-shadow: 6px 6px 0 var(--intel-shadow);
+  transform: translate(-1px, -1px);
+}
+
+.cardTitle {
+  color: var(--text-primary);
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: 1.3;
+  text-transform: uppercase;
+  transition: color 150ms ease;
+}
+
+.card:hover .cardTitle {
+  color: var(--intel-accent-strong);
+}
+
+.cardBody {
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+
+.cardAction {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--intel-accent);
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.17em;
+  text-transform: uppercase;
+}
+
+.cardArrow {
+  transition: transform 150ms ease;
+}
+
+.card:hover .cardArrow {
+  transform: translateX(0.25rem);
+}
+
+/* --------------------------------------------------------------- status -- */
+
+.category {
+  color: var(--intel-accent);
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.17em;
+  text-transform: uppercase;
+}
+
+/* Pale tinted chip with the darkened matching foreground. */
+.chip {
+  display: inline-block;
+  border: 1px solid currentcolor;
+  background: var(--chip-tint, var(--intel-sunken));
+  padding: 0.15rem 0.5rem;
+  color: var(--chip-color, var(--text-secondary));
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  line-height: 1.5;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.chipVerified {
+  --chip-color: var(--intel-verified);
+  --chip-tint: var(--intel-verified-tint);
+}
+
+.chipSourced {
+  --chip-color: var(--intel-sourced);
+  --chip-tint: var(--intel-sourced-tint);
+}
+
+.chipBoundary {
+  --chip-color: var(--intel-boundary);
+  --chip-tint: var(--intel-boundary-tint);
+}
+
+.chipIllustrative {
+  --chip-color: var(--intel-illustrative);
+  --chip-tint: var(--intel-illustrative-tint);
+}
+
+.chipUnverified {
+  --chip-color: var(--intel-unverified);
+  --chip-tint: var(--intel-unverified-tint);
+}
+
+.indicator {
+  display: inline-block;
+  width: 0.5rem;
+  height: 0.5rem;
+  border: 1px solid currentcolor;
+  border-radius: 9999px;
+  background: currentcolor;
+}
+
+.indicatorVerified { color: var(--intel-verified); }
+.indicatorSourced { color: var(--intel-sourced); }
+.indicatorBoundary { color: var(--intel-boundary); }
+.indicatorIllustrative { color: var(--intel-illustrative); }
+.indicatorUnverified { color: var(--intel-unverified); }
+
+/* ------------------------------------------------------- data / panels -- */
+
+/* Structured data panel: pale, sharp, monospace. Not a terminal. */
+.dataPanel {
+  margin: 1.5rem 0;
+  border: 1px solid var(--intel-line);
+  background: var(--intel-raised);
+}
+
+.dataPanelHeading {
+  border-bottom: 1px solid var(--intel-line);
+  padding: 0.75rem;
+  color: var(--intel-accent);
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.17em;
+  text-transform: uppercase;
+}
+
+.dataScroll {
+  overflow-x: auto;
+}
+
+.dataTable {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 0.75rem;
+  text-align: left;
+}
+
+.dataTable thead tr {
+  border-bottom: 1px solid var(--intel-line);
+  background: var(--intel-sunken);
+  color: var(--text-secondary);
+}
+
+.dataTable th {
+  padding: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.dataTable tbody tr + tr {
+  border-top: 1px solid var(--intel-line);
+}
+
+.dataTable td {
+  padding: 0.75rem;
+  color: var(--text-secondary);
+  vertical-align: top;
+}
+
+.dataTable td:first-child {
+  color: var(--text-primary);
+  font-weight: 700;
+}
+
+.listPanel {
+  margin: 1.5rem 0;
+  display: grid;
+  gap: 0.75rem;
+  padding-left: 0;
+  list-style: none;
+}
+
+.listItem {
+  border: 1px solid var(--intel-line);
+  border-left: 3px solid var(--intel-accent);
+  background: var(--intel-raised);
+  padding: 1rem;
+  color: var(--text-secondary);
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 0.875rem;
+  line-height: 1.6;
+}
+
+.quote {
+  margin: 1.5rem 0;
+  border-left: 2px solid var(--intel-line-strong);
+  padding-left: 1rem;
+  color: var(--text-secondary);
+  font-style: italic;
+}
+
+/* Semantic side panel: pale tint, dark body copy, colour only on the label. */
+.statusPanel {
+  margin-bottom: 2.5rem;
+  border: 1px solid var(--intel-line);
+  border-left: 3px solid var(--panel-color, var(--intel-accent));
+  background: var(--panel-tint, var(--intel-raised));
+  padding: 1.25rem;
+  color: var(--text-primary);
+}
+
+.statusPanelSourced {
+  --panel-color: var(--intel-sourced);
+  --panel-tint: var(--intel-sourced-tint);
+}
+
+.statusPanelUnverified {
+  --panel-color: var(--intel-unverified);
+  --panel-tint: var(--intel-unverified-tint);
+}
+
+.statusPanelIllustrative {
+  --panel-color: var(--intel-illustrative);
+  --panel-tint: var(--intel-illustrative-tint);
+}
+
+.panelLabel {
+  color: var(--panel-color, var(--intel-accent));
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.panelCopy {
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+  line-height: 1.6;
+}
+
+.sidePanel {
+  border: 1px solid var(--intel-line);
+  background: var(--intel-raised);
+  padding: 1.5rem;
+  box-shadow: 4px 4px 0 var(--intel-shadow);
+}
+
+.sidePanelTitle {
+  color: var(--text-primary);
+  font-size: 0.875rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.tile {
+  display: block;
+  border: 1px solid var(--intel-line);
+  background: var(--intel-raised);
+  padding: 1rem;
+  transition:
+    border-color 150ms ease,
+    background-color 150ms ease;
+}
+
+.tile:hover {
+  border-color: var(--intel-accent);
+  background: var(--intel-accent-soft);
+}
+
+/* -------------------------------------------------------------- actions -- */
+
+.action {
+  display: block;
+  width: 100%;
+  border: 1px solid var(--intel-line-strong);
+  background: var(--intel-raised);
+  padding: 0.75rem 1rem;
+  color: var(--intel-accent);
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.17em;
+  text-align: center;
+  text-transform: uppercase;
+  transition:
+    border-color 150ms ease,
+    background-color 150ms ease,
+    color 150ms ease;
+}
+
+.action:hover {
+  border-color: var(--intel-accent);
+  background: var(--intel-accent-soft);
+  color: var(--intel-accent-strong);
+}
+
+.actionPrimary {
+  border-color: var(--intel-accent);
+  background: var(--intel-accent);
+  color: var(--intel-raised);
+}
+
+.actionPrimary:hover {
+  border-color: var(--intel-accent-strong);
+  background: var(--intel-accent-strong);
+  color: var(--intel-raised);
+}
+
+.link {
+  color: var(--intel-accent);
+  text-decoration: underline;
+  text-decoration-color: var(--intel-line-strong);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.3em;
+  transition:
+    color 140ms ease,
+    text-decoration-color 140ms ease;
+}
+
+.link:hover {
+  color: var(--intel-accent-strong);
+  text-decoration-color: var(--intel-accent);
+}
+
+.quietLink {
+  color: var(--text-muted);
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 0.6875rem;
+  letter-spacing: 0.17em;
+  text-transform: uppercase;
+  transition: color 140ms ease;
+}
+
+.quietLink:hover {
+  color: var(--intel-accent-strong);
+}
+
+/* Focus must stay visible on every interactive affordance. */
+.root a:focus-visible,
+.root button:focus-visible {
+  outline: 2px solid var(--intel-accent);
+  outline-offset: 3px;
+}
+
+/* --------------------------------------------------------------- prose -- */
+
+.prose {
+  color: var(--text-secondary);
+  max-width: none;
+}
+
+.prose :is(h1, h2, h3, h4, h5, h6) {
+  color: var(--text-primary);
+}
+
+.prose p {
+  color: var(--text-secondary);
+}
+
+.prose a {
+  color: var(--intel-accent);
+}
+
+.sectionHeading {
+  margin: 2rem 0 1.5rem;
+  border-left: 2px solid var(--intel-accent);
+  padding-left: 1rem;
+  color: var(--text-primary);
+  font-size: 1.5rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.subHeading {
+  margin: 3rem 0 1rem;
+  color: var(--text-primary);
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.root ::selection {
+  color: var(--text-primary);
+  background: rgb(36 80 154 / 22%);
+}
+
+@media (max-width: 640px) {
+  .root {
+    background-size: 28px 28px;
+  }
+
+  .page {
+    padding: 2.5rem 1.25rem;
+  }
+
+  .card {
+    box-shadow: 3px 3px 0 var(--intel-shadow);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .root::before {
+    display: none;
+  }
+
+  .card,
+  .cardTitle,
+  .cardArrow,
+  .action,
+  .tile,
+  .link,
+  .quietLink {
+    transition: none;
+  }
+
+  .card:hover {
+    transform: none;
+  }
+
+  .card:hover .cardArrow {
+    transform: none;
+  }
+}

@@ -48,7 +48,7 @@ test('the five semantic surfaces use readable copy and restrained status tints',
 
 test('paper-theme pages cannot silently retain pale dark-theme text utilities', () => {
   const appRoot = new URL('../app', import.meta.url).pathname
-  const excludedFamilies = /^(admin|dashboard|operations|knowledge|intelligence)\//
+  const excludedFamilies = /^(admin|dashboard|operations|knowledge)\//
   const proseOverride = 'policy/nutrient-density-standard/paying-for-nutrition/page.tsx'
   const paleText = /text-(?:white|zinc-(?:200|300|400)|slate-(?:200|300|400)|gray-(?:100|200|300|400)|amber-(?:50|100|200))/
   const offenders: string[] = []
