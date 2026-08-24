@@ -685,25 +685,10 @@ select.evidence-input {
   padding-inline: 0.75rem;
 }
 
-/* Scoped cyber-light families consume the same mode without losing their
- * individual accent language. */
-:root[data-color-scheme='dark'] [data-visual-scope='books'] {
-  --book-cyber-accent: #72cdb9;
-  --book-cyber-accent-strong: #a5e6d8;
-  --book-cyber-accent-soft: rgb(114 205 185 / 12%);
-  --book-cyber-grid: rgb(114 205 185 / 8%);
-  --book-cyber-line: rgb(114 205 185 / 28%);
-  --book-cyber-shadow: rgb(0 0 0 / 34%);
-  --status-sourced: #82b2ff;
-  --status-verified: #75d5aa;
-  --status-boundary: #eac06b;
-  --status-unverified: #ff9686;
-}
-
 :root[data-color-scheme='dark'] [data-visual-scope='books'] [class*='bg-indigo-950'],
 :root[data-color-scheme='dark'] [data-visual-scope='books'] nav[aria-label='Chapter navigation'] a {
-  border-color: var(--book-cyber-line) !important;
-  background: rgb(17 27 29 / 92%) !important;
+  border-color: var(--intel-line) !important;
+  background: var(--intel-raised) !important;
   color: var(--text-primary) !important;
 }
 
@@ -742,7 +727,12 @@ select.evidence-input {
   background-color: rgb(17 29 31 / 95%) !important;
 }
 
-:root[data-color-scheme='dark'] [data-visual-scope='intelligence'] {
+:root[data-color-scheme='dark'] :is(
+  [data-visual-scope='apps'],
+  [data-visual-scope='books'],
+  [data-visual-scope='docs'],
+  [data-visual-scope='intelligence']
+) {
   --intel-surface: #0c131b;
   --intel-raised: #131d28;
   --intel-sunken: #1a2836;

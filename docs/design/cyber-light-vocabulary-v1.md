@@ -1,83 +1,103 @@
-# Cyber-light vocabulary v1
+# Cyber-light vocabulary v2
 
-**Status:** frozen  
-**Scope:** `/books/**` pilot only  
-**Accepted in Production:** 23 August 2026  
-**Implementation:** `app/books/layout.tsx` and
-`app/books/books-cyber-light.module.css`
+**Status:** frozen
 
-Cyber-light is a bounded overlay on the Evidence Paper system. It does not
-replace the paper surface, typography, spacing, or content hierarchy. It adds
-just enough technical structure to connect editorial material to Maha's wider
-evidence infrastructure without turning reading pages into an operator console.
+**Scope:** `/apps/**`, `/books/**`, `/docs/**`, and `/intelligence/**`
 
-## Accepted templates
+**Accepted:** 24 August 2026
 
-The vocabulary was checked in Production on these three template classes at
-1280px and 375px. All three carried the `cyber-light` route marker and had no
-body-level horizontal overflow.
+**Canonical implementation:** `app/intelligence/intelligence-cyber-light.module.css`
 
-| Template | Production specimen | Acceptance focus |
-| --- | --- | --- |
-| Book landing | `/books` | editorial hierarchy, edition cards, global navigation |
-| Reader / chapter | `/books/the-orbital-mind/read/the-governing-center` | long-form measure, chapter navigation, quiet reading ground |
-| Editorial / article | `/books/the-orbital-mind/what-is-executive-function` | article metadata, section index, editorial hierarchy |
+Version 2 supersedes the Books-only green pilot. The Intelligence analytical
+interface is now the canonical cyber-light language: a pale blue technical
+ground, restrained grid and scanline accents, near-black readable type, sharp
+panels, monospace metadata, and semantic state colors. Apps, Books, and Docs
+reuse that actual stylesheet rather than approximating it with sibling palettes.
+
+The global header and footer remain the fixed Evidence Paper frame. `/audit`
+also remains fixed paper. Operator surfaces and Knowledge keep their separately
+reviewed visual contracts.
+
+## Route ownership
+
+Each participating nested layout carries both markers:
+
+- `data-visual-system="cyber-light"`
+- `data-visual-scope="apps|books|docs|intelligence"`
+
+The markers do not belong on the root layout. The shared stylesheet is imported
+by each route family, so tokens stay scoped and cannot leak into the global
+chrome, `/audit`, Knowledge, or operator routes.
 
 ## Frozen vocabulary
 
-### Route markers
+### Ground and accent
 
-- `data-visual-system="cyber-light"`
-- `data-visual-scope="books"`
-
-The markers belong on the nested Books layout. They must not be added to the
-root layout or inferred from a global theme.
-
-### Accent and state colors
-
-| Token | Value | Use |
+| Token | Light value | Meaning |
 | --- | --- | --- |
-| `--book-cyber-accent` | `#1f715f` | metadata, focus, card corner, active technical detail |
-| `--book-cyber-accent-strong` | `#155347` | interactive hover state |
-| `--book-cyber-accent-soft` | `rgb(31 113 95 / 8%)` | restrained hover/inset ground |
-| `--book-cyber-grid` | `rgb(31 113 95 / 5%)` | paper-grid line only |
-| `--book-cyber-line` | `rgb(31 113 95 / 24%)` | technical borders and navigation rules |
-| `--status-sourced` | `#1f715f` | sourced or linked evidence |
-| `--status-verified` | `#47704e` | verified state |
-| `--status-boundary` | `#94642f` | limitation or boundary |
-| `--status-unverified` | `#8b4c44` | unverified or refused state |
+| `--intel-surface` | `#e9edf3` | pale analytical ground |
+| `--intel-raised` | `#f7f9fc` | cards, forms, and readable content panels |
+| `--intel-sunken` | `#dfe5ee` | inset or secondary technical surface |
+| `--intel-accent` | `#24509a` | primary metadata, link, and focus accent |
+| `--intel-accent-strong` | `#17376e` | interactive emphasis |
+| `--intel-grid` | `rgb(36 80 154 / 5%)` | technical grid only |
+| `--intel-line` | `rgb(36 80 154 / 22%)` | panel and navigation rules |
 
-Status colors are semantic, not decorative. A template with no status does not
-need a colored chip.
+The persistent site mode may substitute the reviewed dark token values within
+these four scopes. It does not introduce a separate section toggle.
 
-### Technical accents
+### Semantic states
 
-- Square grid: 40px desktop, 28px mobile, 5% accent opacity.
-- Metadata: existing Geist Mono vocabulary with the accent color and `0.17em`
-  tracking.
-- Cards: one accent corner, a restrained offset shadow, and at most a one-pixel
-  hover translation.
-- Navigation: existing links sharpen through border and underline treatment;
-  the information architecture does not change.
-- Focus: two-pixel accent outline with a three-pixel offset.
-- Motion: 140–150ms only, disabled under `prefers-reduced-motion`.
+| State | Token | Use |
+| --- | --- | --- |
+| Verified | `--intel-verified` | confirmed or reproduced evidence |
+| Sourced | `--intel-sourced` | attributed or informational evidence |
+| Boundary | `--intel-boundary` | uncertainty, limitation, or review boundary |
+| Illustrative | `--intel-illustrative` | modelled or example material |
+| Unverified | `--intel-unverified` | failed, refused, or unsupported claim |
+
+State colors carry meaning; they are not decorative card palettes. Every state
+also has a corresponding pale tint. Foreground/tint pairings must remain WCAG-AA
+readable at small metadata sizes.
+
+### Technical structure
+
+- Grid: 40px desktop and 28px mobile.
+- Scanline: static and masked to the upper page; removed for reduced motion.
+- Metadata: Geist Mono, restrained uppercase, and deliberate tracking.
+- Cards: square borders, one accent corner, restrained offset shadow, and at
+  most a one-pixel hover translation.
+- Actions: square, high-contrast, keyboard-visible, and token-driven.
+- Scalar Docs: map native Scalar variables to the same scoped tokens; no second
+  dark-mode control.
+- Books: preserve manuscript measure and chapter hierarchy beneath the shared
+  technical shell.
+
+## Acceptance templates
+
+The original three Books template classes remain required visual specimens:
+
+1. Book landing: `/books`
+2. Reader/chapter: `/books/the-orbital-mind/read/the-governing-center`
+3. Editorial/article: `/books/the-orbital-mind/what-is-executive-function`
+
+The shared release gate additionally checks representative Apps and Docs routes,
+desktop and mobile body overflow, both color modes, and rendered text contrast.
 
 ## Invariants
 
-Cyber-light v1 preserves all of the following:
+1. Content, route behavior, API schemas, checkout, payment, and MCP behavior do
+   not change with the visual layer.
+2. Header and footer remain fixed paper in both modes.
+3. `/audit` remains fixed paper.
+4. Dark code panels keep explicit light foregrounds.
+5. Apps, Books, Docs, and Intelligence reuse one canonical stylesheet.
+6. Mobile pages create no body-level horizontal scrolling.
+7. Motion is bounded and disabled under `prefers-reduced-motion`.
 
-1. Evidence Paper remains the base surface and typography system.
-2. Manuscript and article body copy keep their existing measure and hierarchy.
-3. Code blocks remain dark for contrast; the page itself remains light.
-4. Content, schemas, routes, checkout, payment, and MCP behavior do not change.
-5. `/knowledge/**`, `/intelligence/**`, and operator/admin surfaces do not inherit
-   this overlay.
-6. Mobile pages do not create body-level horizontal scrolling.
+## Excluded treatments
 
-## Not in the vocabulary
-
-Do not add neon glow, animated grid movement, scanlines, terminal chrome,
-full-black panels, decorative warning colors, or global theme selectors. New
-accents or states require a versioned revision and the same three-template
-desktop/mobile acceptance pass.
-
+Do not add neon glow, animated grid movement, full-black page grounds,
+decorative warning colors, terminal cosplay, or per-section mode switches.
+Future changes require a versioned revision and the same desktop/mobile,
+light/dark, contrast, and overflow checks.

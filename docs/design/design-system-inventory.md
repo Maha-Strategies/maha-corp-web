@@ -1,7 +1,7 @@
 # Maha visual-system inventory
 
-**Status:** public conversion and Knowledge cyber-light complete; Intelligence is a separate focused batch
-**Measured against:** `origin/main` at `c496871` plus the final closure patch
+**Status:** public conversion complete; bounded cyber-light families active
+**Measured against:** the route-boundary contract on 24 August 2026
 **Route count:** 215 App Router page templates
 
 This inventory records the visual contract rather than estimating adoption from
@@ -13,10 +13,9 @@ one of the five declared systems below. The contract is enforced by
 
 | Visual system | Routes | Scope |
 | --- | ---: | --- |
-| Evidence Paper | 115 | All public product, service, research, policy, tool, protocol, app, and company routes not listed below |
-| Books cyber-light | 30 | `/books/**`; Evidence Paper with the frozen technical editorial overlay |
+| Evidence Paper | 108 | All public product, service, research, policy, tool, protocol, and company routes not listed below |
+| Shared analytical cyber-light | 39 | `/apps/**`, `/books/**`, `/docs/**`, `/intelligence/**`; one canonical Intelligence vocabulary |
 | Knowledge cyber-light | 41 | `/knowledge/**`; readable technical grid with semantic evidence colors |
-| Dark editorial archive | 2 | `/intelligence/**`; retained until its separate focused conversion lands |
 | Operator console | 27 | `/admin/**`, `/dashboard`, and `/operations/**`; operational workflows remain separately scoped from public Knowledge |
 | **Total** | **215** | Every `app/**/page.tsx` belongs to exactly one system |
 
@@ -62,16 +61,19 @@ with a light code foreground; they must not inherit a Paper text token.
   `.evidence-input`, `.evidence-form`
 - Technical: `.evidence-code`
 
-## Books cyber-light
+## Shared analytical cyber-light
 
-`/books/**` keeps Evidence Paper as its base and adds the route-scoped overlay in
-`app/books/books-cyber-light.module.css`. The vocabulary is frozen in
-[`cyber-light-vocabulary-v1.md`](./cyber-light-vocabulary-v1.md) and accepted on
-book landing, reader/chapter, and editorial/article templates.
+`/apps/**`, `/books/**`, `/docs/**`, and `/intelligence/**` share the canonical
+route-scoped overlay in `app/intelligence/intelligence-cyber-light.module.css`.
+The vocabulary is frozen in
+[`cyber-light-vocabulary-v1.md`](./cyber-light-vocabulary-v1.md). Books preserve
+their editorial hierarchy; Apps adapt the Evidence Paper components; Docs map
+Scalar variables to the same tokens; Intelligence remains the reference
+implementation.
 
-The Books overlay must not be moved to the root layout, global theme selector,
-Knowledge, Intelligence, or operator surfaces. Knowledge owns a separate
-cyber-light scope whose semantic palette is enforced independently.
+The overlay must not be moved to the root layout or global chrome. Knowledge
+owns a separate cyber-light scope whose semantic palette is enforced
+independently.
 
 ## Knowledge cyber-light
 
@@ -89,8 +91,7 @@ prohibited, or failed states.
 
 ## Intentional dark systems
 
-Intelligence remains dark only until its separately reviewed cyber-light batch
-lands. Admin, Dashboard, and Operations remain a dark operator console. A public
+Admin, Dashboard, and Operations remain a dark operator console. A public
 light page may still contain a dark code block or bounded interactive simulation;
 that does not change its route-level visual system.
 
@@ -100,7 +101,7 @@ The conversion is considered complete while all of the following stay true:
 
 1. Every page template belongs to exactly one declared visual system.
 2. Every public Paper route owns or delegates an Evidence Paper boundary.
-3. Books and Knowledge own independent, subtree-scoped cyber-light markers.
+3. Every cyber-light family owns an explicit subtree-scoped marker.
 4. Paper text tiers remain WCAG-AA readable against the Paper surface.
 5. Dark code panels do not use dark Paper foreground tokens.
 6. The shared `--border-strong` token remains defined for the interactive

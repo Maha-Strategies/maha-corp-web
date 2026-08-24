@@ -75,7 +75,7 @@ test('light-mode semantic labels remain readable at small text sizes', () => {
 })
 
 test('every visual family has an explicit dark-mode contract', () => {
-  for (const scope of ['books', 'knowledge', 'intelligence']) {
+  for (const scope of ['apps', 'books', 'docs', 'knowledge', 'intelligence']) {
     assert.match(globals, new RegExp(`data-visual-scope='${scope}'`))
   }
   assert.match(globals, /data-site-surface='operator'/)

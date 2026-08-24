@@ -185,9 +185,13 @@ test('each pale semantic panel carries a readable dark foreground', () => {
   }
 })
 
-test('the scoped stylesheet cannot leak outside the intelligence subtree', () => {
-  // Every selector must be nested under .root, and nothing may target :global.
-  assert.doesNotMatch(moduleCss, /:global/, 'module reaches outside its own scope')
+test('the shared scoped stylesheet cannot leak outside its owning subtree', () => {
+  // Global class adapters are allowed only when explicitly anchored below the
+  // CSS-module root emitted by one of the participating nested layouts.
+  const unscopedGlobals = moduleCss
+    .split('\n')
+    .filter((line) => line.includes(':global') && !line.trimStart().startsWith('.root :global'))
+  assert.deepEqual(unscopedGlobals, [], 'a global adapter escapes the cyber-light root')
   assert.doesNotMatch(moduleCss, /^\s*(html|body)\b/m, 'module styles a document-level element')
 })
 
