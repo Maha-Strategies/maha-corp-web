@@ -161,12 +161,26 @@ export function evaluatePublicationGate(record: EpistemicRecord): PublicationDec
 export function assertGraphIntegrity(records: readonly EpistemicRecord[]): void {
   const ids = new Set<string>()
   const paths = new Set<string>()
+  const bridgeIds = new Set<string>()
   for (const record of records) {
     if (ids.has(record.id)) throw new Error(`Duplicate epistemic record id: ${record.id}`)
     ids.add(record.id)
     const path = epistemicRecordPath(record)
     if (paths.has(path)) throw new Error(`Duplicate epistemic record path: ${path}`)
     paths.add(path)
+  }
+
+  for (const record of records) {
+    for (const bridge of record.bridges) {
+      if (bridgeIds.has(bridge.id)) throw new Error(`Duplicate epistemic bridge id: ${bridge.id}`)
+      bridgeIds.add(bridge.id)
+      if (bridge.sourceConceptId !== record.id) {
+        throw new Error(`Epistemic bridge source mismatch: ${bridge.id}`)
+      }
+      if (!ids.has(bridge.targetConceptId)) {
+        throw new Error(`Unresolved epistemic bridge target: ${bridge.id} -> ${bridge.targetConceptId}`)
+      }
+    }
   }
 }
 

@@ -1,16 +1,17 @@
-import type { EpistemicRecord, EpistemicSource } from './epistemic-schema.ts'
+import type { EpistemicRecord } from './epistemic-schema.ts'
 import {
   epistemicReviewTargetHash,
   evaluatePublicationGate,
   sha256Canonical,
 } from './epistemic-publication.ts'
+import { sourceClaimAlignment, type SourceClaimAlignment } from './epistemic-source-alignment.ts'
 
 export const EPISTEMIC_AUDIT_VERSION = 'maha-epistemic-audit/1.0' as const
 export const EPISTEMIC_AUDIT_COMPILER_VERSION = 'maha-source-claim-auditor/1.0' as const
 
 export type EpistemicAuditSeverity = 'blocker' | 'warning' | 'information'
 export type EpistemicAuditStatus = 'blocked' | 'review-required' | 'automated-checks-passed'
-export type SourceClaimAlignment = 'aligned-by-structure' | 'declared-partial' | 'declared-mismatch' | 'unresolved'
+export type AuditedSourceClaimAlignment = SourceClaimAlignment | 'unresolved'
 
 export interface EpistemicAuditFinding {
   code: string
@@ -23,7 +24,7 @@ export interface EpistemicAuditFinding {
 export interface SourceClaimAuditLink {
   claimId: string
   sourceId: string
-  alignment: SourceClaimAlignment
+  alignment: AuditedSourceClaimAlignment
   locator: string
   establishes: string
   boundary: string
@@ -55,15 +56,6 @@ export interface EpistemicCandidateAudit {
 
 export const EPISTEMIC_AUTOMATED_AUDIT_BOUNDARY = 'Automated audits detect structural omissions, declared source mismatches, and a bounded set of unsupported-inference phrases. They do not read a source like a qualified reviewer, establish empirical truth, satisfy any expert-review scope, or authorize publication.'
 
-const DECLARED_MISMATCH = [
-  /no (?:supporting )?passage (?:was )?(?:located|retrievable)/i,
-  /could not be matched/i,
-  /does not establish (?:the|this|either|which|whether)/i,
-  /do not establish (?:the|this|either|which|whether)/i,
-  /not a matching source/i,
-  /does not support (?:the|this|its)/i,
-]
-
 function expectedDraftWorkflowReason(reason: string): boolean {
   return reason === 'public-promotion-not-requested'
     || reason === 'review-state-not-canonical'
@@ -87,15 +79,6 @@ function structuralGateAudit(record: EpistemicRecord): { gateReasons: string[]; 
   }
 }
 
-const DECLARED_PARTIAL = [
-  /only partially/i,
-  /partial mismatch/i,
-  /extends beyond/i,
-  /does not establish the complete/i,
-  /supports .* but not/i,
-  /must (?:be )?(?:narrowed|reviewed|re-sourced|replaced)/i,
-]
-
 const UNSUPPORTED_INFERENCE_PATTERNS: ReadonlyArray<{ code: string; pattern: RegExp; message: string }> = [
   { code: 'guaranteed-outcome', pattern: /\b(?:guarantees? (?:a |the )?(?:future|success|outcome|result|return|event)|will definitely|is certain to)\b/i, message: 'The narrative asserts a guaranteed future outcome.' },
   { code: 'predictive-validity-overreach', pattern: /\b(?:proves?|scientifically validates?) (?:astrology|an astrological|the tradition|this tradition)\b/i, message: 'The narrative transfers calculation or provenance quality into predictive validation.' },
@@ -103,13 +86,6 @@ const UNSUPPORTED_INFERENCE_PATTERNS: ReadonlyArray<{ code: string; pattern: Reg
   { code: 'high-stakes-directive', pattern: /\b(?:medical diagnosis|legal conclusion|guaranteed investment return|trade solely on|treatment decision based solely on)\b/i, message: 'The narrative contains a prohibited high-stakes directive or conclusion.' },
   { code: 'unbounded-forecast', pattern: /\b(?:predicts? the future|forecasts? events with certainty|will outperform human experts?)\b/i, message: 'The narrative makes an unbounded forecasting-performance claim.' },
 ]
-
-function sourceAlignment(source: EpistemicSource): SourceClaimAlignment {
-  const text = `${source.exactLocator}\n${source.establishes}\n${source.boundary}`
-  if (DECLARED_MISMATCH.some((pattern) => pattern.test(text))) return 'declared-mismatch'
-  if (DECLARED_PARTIAL.some((pattern) => pattern.test(text))) return 'declared-partial'
-  return 'aligned-by-structure'
-}
 
 function narrativeFields(record: EpistemicRecord): Array<{ path: string; value: string }> {
   return [
@@ -143,7 +119,7 @@ function sourceClaimAudit(record: EpistemicRecord): { links: SourceClaimAuditLin
         })
         continue
       }
-      const alignment = sourceAlignment(source)
+      const alignment = sourceClaimAlignment(source)
       links.push({
         claimId: claim.id,
         sourceId,

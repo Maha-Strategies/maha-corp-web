@@ -20,6 +20,7 @@
     "expand-graph": "node --experimental-strip-types scripts/expand-graph.ts",
     "verify:api-credit-billing": "node --experimental-strip-types scripts/verify-api-credit-billing.ts",
     "operate:epistemic-phase4-sources": "node --experimental-strip-types scripts/operate-phase4-source-completion.ts",
+    "operate:epistemic-phase5-alignment": "node --experimental-strip-types scripts/operate-phase5-alignment-repair.ts",
     "operate:epistemic-factory": "node --experimental-strip-types scripts/run-epistemic-publishing-factory.ts",
     "test:capacity": "node --experimental-strip-types scripts/run-capacity-test.ts",
     "test:agent-compatibility": "node --experimental-strip-types scripts/test-agent-compatibility.ts",

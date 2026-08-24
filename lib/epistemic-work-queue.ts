@@ -2,9 +2,10 @@ import { randomUUID } from 'node:crypto'
 
 import type { EpistemicExpertReview } from './epistemic-review.ts'
 import { epistemicOperationsHash } from './epistemic-review.ts'
-import type { ExpertReviewScope } from './epistemic-schema.ts'
+import type { EpistemicRecord, ExpertReviewScope } from './epistemic-schema.ts'
 import { EXPERT_REVIEW_SCOPES } from './epistemic-schema.ts'
 import { sha256Canonical } from './epistemic-publication.ts'
+import { sourceAlignmentBlockers } from './epistemic-source-alignment.ts'
 
 export const EPISTEMIC_WORKFLOW_VERSION = 'maha-epistemic-workflow/1.0' as const
 
@@ -76,6 +77,7 @@ export interface EpistemicQueueTarget {
   reviewTargetSha256: string
   sourcePublicPath: string
   gateDecision: { publicEligible: boolean; reasons: string[] }
+  candidateSnapshot?: EpistemicRecord
   reviewProgress?: QueueReviewProgress | null
 }
 
@@ -263,6 +265,13 @@ export function blockerDescriptor(code: string) {
   return { code, category, label: code.replaceAll(':', ' · ').replaceAll('-', ' '), priority }
 }
 
+export function sourceCompletionReasons(target: Pick<EpistemicQueueTarget, 'gateDecision' | 'candidateSnapshot'>): string[] {
+  return [...new Set([
+    ...target.gateDecision.reasons.filter((reason) => queueLaneForReason(reason) === 'source-completion'),
+    ...(target.candidateSnapshot ? sourceAlignmentBlockers(target.candidateSnapshot) : []),
+  ])].sort()
+}
+
 function highestPriority(priorities: readonly QueuePriority[]): QueuePriority {
   const order: QueuePriority[] = ['critical', 'high', 'normal', 'low']
   return order.find((priority) => priorities.includes(priority)) ?? 'low'
@@ -273,9 +282,7 @@ export function buildSourceCompletionQueue(
   events: readonly SourceCompletionEvent[],
 ): SourceCompletionQueueItem[] {
   return targets.flatMap((target) => {
-    const blockers = target.gateDecision.reasons
-      .filter((reason) => queueLaneForReason(reason) === 'source-completion')
-      .map(blockerDescriptor)
+    const blockers = sourceCompletionReasons(target).map(blockerDescriptor)
     if (!blockers.length) return []
     const relevant = events
       .filter((event) => event.recordId === target.recordId && event.targetSha256 === target.reviewTargetSha256)

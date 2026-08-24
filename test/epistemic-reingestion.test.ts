@@ -3,6 +3,7 @@ import { readFile } from 'node:fs/promises'
 import test from 'node:test'
 
 import { ADAPTED_EPISTEMIC_CANDIDATES } from '../lib/epistemic-adapters.ts'
+import { buildEpistemicCandidateAudit } from '../lib/epistemic-audit.ts'
 import {
   buildControlledReingestionCompilation,
   controlledCorrectionDescriptor,
@@ -10,9 +11,11 @@ import {
   type FrozenReingestionTarget,
 } from '../lib/epistemic-reingestion.ts'
 import { epistemicReviewTargetHash } from '../lib/epistemic-publication.ts'
+import { sourceAlignmentBlockers } from '../lib/epistemic-source-alignment.ts'
 import {
   buildSourceCompletionEvent,
   parseSourceCompletionEvent,
+  sourceCompletionReasons,
   type SourceCompletionEvent,
 } from '../lib/epistemic-work-queue.ts'
 
@@ -106,6 +109,147 @@ test('the compiler records undated living-source chronology without inventing a 
   assert.ok(!compilation.remainingSourceBlockerCodes.includes(`source-publication-date-missing:${source.id}`))
 })
 
+function alignmentFixture(proposedValue: string, evidenceUrl?: string) {
+  const candidate = ADAPTED_EPISTEMIC_CANDIDATES.find((entry) => sourceAlignmentBlockers(entry.record).length > 0)!
+  const blocker = sourceAlignmentBlockers(candidate.record)[0]
+  const sourceId = blocker.slice('source-claim-alignment-mismatch:'.length)
+  const source = candidate.record.sources.find((entry) => entry.id === sourceId)!
+  const reasons = sourceCompletionReasons({ gateDecision: candidate.gateDecision, candidateSnapshot: candidate.record })
+  const base = {
+    recordId: candidate.record.id,
+    targetSha256: candidate.reviewTargetSha256,
+    blockerCodes: [blocker],
+    assigneeId: null,
+    assigneeName: null,
+    evidence: [],
+    note: 'This workflow records evidence for one declared source-to-claim mismatch.',
+  }
+  const triage = buildSourceCompletionEvent(parseSourceCompletionEvent({ ...base, action: 'triage', idempotencyKey: 'alignment-triage-001' }), [], reasons, new Date('2026-08-24T14:00:00.000Z'))
+  const start = buildSourceCompletionEvent(parseSourceCompletionEvent({ ...base, action: 'start', assigneeId: 'researcher_maha', assigneeName: 'Maha Source Researcher', idempotencyKey: 'alignment-start-001' }), [triage], reasons, new Date('2026-08-24T14:01:00.000Z'))
+  const evidence = [{
+    blockerCode: blocker,
+    sourceUrl: evidenceUrl ?? source.url,
+    exactLocator: source.exactLocator || 'Named section and bounded passage',
+    proposedValue,
+    note: 'The proposed alignment metadata is bound to this exact source and remains subject to source-fidelity review.',
+    rightsBasis: source.rights.basis,
+  }]
+  const submit = buildSourceCompletionEvent(parseSourceCompletionEvent({ ...base, action: 'submit-evidence', assigneeId: 'researcher_maha', assigneeName: 'Maha Source Researcher', evidence, idempotencyKey: 'alignment-submit-001' }), [triage, start], reasons, new Date('2026-08-24T14:02:00.000Z'))
+  const target: FrozenReingestionTarget = {
+    recordId: candidate.record.id,
+    sourcePublicPath: candidate.sourcePublicPath,
+    candidateSha256: candidate.candidateSha256,
+    reviewTargetSha256: candidate.reviewTargetSha256,
+    gateDecision: candidate.gateDecision,
+    candidateSnapshot: candidate.record,
+  }
+  const request = parseControlledReingestionRequest({
+    operation: 'compile',
+    recordId: target.recordId,
+    baseTargetSha256: target.reviewTargetSha256,
+    corrections: [{ blockerCode: blocker, evidenceEventId: submit.eventId, proposedValue }],
+    note: 'Compile one evidence-bound alignment correction into a fresh noncanonical target.',
+    idempotencyKey: 'alignment-compile-001',
+  })
+  return { candidate, blocker, source, target, request, events: [triage, start, submit] as SourceCompletionEvent[] }
+}
+
+test('the controlled compiler can refine declared source alignment without creating approval', () => {
+  const proposedValue = JSON.stringify({
+    mode: 'refine',
+    establishes: 'The named official technical page describes the bounded process mechanism and tool role represented by the linked claim.',
+    boundary: 'The source is an interested-party technical description limited to its named product context and is not an independent cross-vendor performance comparison.',
+  })
+  const { blocker, source, target, request, events } = alignmentFixture(proposedValue)
+  assert.equal(controlledCorrectionDescriptor(target.candidateSnapshot, blocker)?.kind, 'source-claim-alignment')
+  const compilation = buildControlledReingestionCompilation(request, target, events, new Date('2026-08-24T14:03:00.000Z'))
+  const revised = compilation.outputRecord.sources.find((entry) => entry.id === source.id)!
+  assert.match(revised.establishes, /bounded process mechanism/)
+  assert.ok(!compilation.remainingSourceBlockerCodes.includes(blocker))
+  assert.ok(!buildEpistemicCandidateAudit(compilation.outputRecord).findings.some((finding) => finding.code === 'source-to-claim-declared-mismatch' && finding.evidence.includes(source.id)))
+  assert.equal(compilation.outputRecord.publication.reviewState, 'draft')
+  assert.deepEqual(compilation.outputRecord.publication.reviewEvents, [])
+})
+
+test('a mismatched source can be replaced only when every linked claim is explicitly remapped', () => {
+  const candidate = ADAPTED_EPISTEMIC_CANDIDATES.find((entry) => sourceAlignmentBlockers(entry.record).length > 0)!
+  const sourceId = sourceAlignmentBlockers(candidate.record)[0].slice('source-claim-alignment-mismatch:'.length)
+  const claimIds = candidate.record.claims.filter((claim) => claim.sourceIds.includes(sourceId)).map((claim) => claim.id)
+  const replacementUrl = 'https://example.org/stable-replacement-source'
+  const proposedValue = JSON.stringify({
+    mode: 'replace',
+    replacement: {
+      id: 'replacement-authority-source',
+      title: 'Stable replacement authority source',
+      authors: ['Example Standards Body'],
+      publisher: 'Example Standards Body',
+      publishedAt: '2026-01-15',
+      url: replacementUrl,
+      identifiers: [{ scheme: 'url', value: replacementUrl }],
+      exactLocator: 'Section 2, paragraphs 3–5',
+      rights: { basis: 'citation-with-paraphrase', quotationUsed: false, note: 'The test fixture retains only a citation and original paraphrase.' },
+      establishes: 'The identified section directly describes the bounded mechanism represented by each explicitly remapped test claim.',
+      boundary: 'The source is limited to the stated mechanism, conditions, and document version; broader performance and deployment claims require separate evidence.',
+    },
+    claimIds,
+  })
+  const { blocker, target, request, events } = alignmentFixture(proposedValue, replacementUrl)
+  const compilation = buildControlledReingestionCompilation(request, target, events, new Date('2026-08-24T14:03:00.000Z'))
+  assert.ok(!compilation.outputRecord.sources.some((source) => source.id === sourceId))
+  assert.ok(compilation.outputRecord.sources.some((source) => source.id === 'replacement-authority-source'))
+  for (const claimId of claimIds) assert.ok(compilation.outputRecord.claims.find((claim) => claim.id === claimId)?.sourceIds.includes('replacement-authority-source'))
+  assert.ok(!compilation.remainingSourceBlockerCodes.includes(blocker))
+
+  const incomplete = JSON.stringify({ ...JSON.parse(proposedValue), claimIds: claimIds.slice(0, -1) })
+  assert.throws(() => buildControlledReingestionCompilation({ ...request, corrections: [{ ...request.corrections[0], proposedValue: incomplete }] }, target, events), /proposed value recorded|remap every claim/)
+})
+
+test('a mismatched multi-claim source can be split without silently moving unrelated claims', () => {
+  const candidate = ADAPTED_EPISTEMIC_CANDIDATES.find((entry) => sourceAlignmentBlockers(entry.record).some((blocker) => {
+    const sourceId = blocker.slice('source-claim-alignment-mismatch:'.length)
+    return entry.record.claims.filter((claim) => claim.sourceIds.includes(sourceId)).length > 1
+  }))!
+  const blocker = sourceAlignmentBlockers(candidate.record).find((code) => {
+    const sourceId = code.slice('source-claim-alignment-mismatch:'.length)
+    return candidate.record.claims.filter((claim) => claim.sourceIds.includes(sourceId)).length > 1
+  })!
+  const sourceId = blocker.slice('source-claim-alignment-mismatch:'.length)
+  const linkedClaimIds = candidate.record.claims.filter((claim) => claim.sourceIds.includes(sourceId)).map((claim) => claim.id)
+  const additionUrl = 'https://example.org/bounded-additional-source'
+  const proposedValue = JSON.stringify({
+    mode: 'split',
+    retained: {
+      establishes: 'The original source directly supports the bounded mechanism represented by the claim retained on that source.',
+      boundary: 'The original source is limited to that retained mechanism; the separately remapped proposition is outside its stated scope.',
+    },
+    addition: {
+      id: 'bounded-additional-source',
+      title: 'Bounded additional source',
+      authors: ['Example Standards Body'],
+      publisher: 'Example Standards Body',
+      publishedAt: '2026-01-16',
+      url: additionUrl,
+      identifiers: [{ scheme: 'url', value: additionUrl }],
+      exactLocator: 'Section 4, paragraphs 2–4',
+      rights: { basis: 'citation-with-paraphrase', quotationUsed: false, note: 'The test fixture retains only a citation and original paraphrase.' },
+      establishes: 'The identified section directly establishes the separate proposition represented by the explicitly remapped claim.',
+      boundary: 'The added source is limited to the named proposition and does not transfer performance across products or operating conditions.',
+    },
+    claimIds: [linkedClaimIds[1]],
+  })
+  const fixture = alignmentFixture(proposedValue, additionUrl)
+  const compilation = buildControlledReingestionCompilation(fixture.request, fixture.target, fixture.events, new Date('2026-08-24T14:03:00.000Z'))
+  const retainedClaim = compilation.outputRecord.claims.find((claim) => claim.id === linkedClaimIds[0])!
+  const remappedClaim = compilation.outputRecord.claims.find((claim) => claim.id === linkedClaimIds[1])!
+  assert.ok(retainedClaim.sourceIds.includes(sourceId))
+  assert.ok(!retainedClaim.sourceIds.includes('bounded-additional-source'))
+  assert.ok(!remappedClaim.sourceIds.includes(sourceId))
+  assert.ok(remappedClaim.sourceIds.includes('bounded-additional-source'))
+  assert.ok(compilation.outputRecord.sources.some((source) => source.id === sourceId))
+  assert.ok(compilation.outputRecord.sources.some((source) => source.id === 'bounded-additional-source'))
+  assert.ok(!compilation.remainingSourceBlockerCodes.includes(blocker))
+})
+
 test('output content and target hashes are deterministic for identical frozen inputs', () => {
   const { target, request, events } = fixture()
   const at = new Date('2026-08-24T13:33:00.000Z')
@@ -129,9 +273,10 @@ test('the compiler rejects unsupported patches, unbound evidence, and post-evide
 })
 
 test('persistence, API, UI, and target projection remain append-only and non-publishing', async () => {
-  const [sql, chronologySql, route, page, queuePage, store, docs, publicMethod, openApiTest] = await Promise.all([
+  const [sql, chronologySql, alignmentSql, route, page, queuePage, store, docs, publicMethod, openApiTest] = await Promise.all([
     'supabase/migrations/20260824133000_epistemic_controlled_reingestion.sql',
     'supabase/migrations/20260824233000_epistemic_source_chronology.sql',
+    'supabase/migrations/20260825160000_epistemic_source_alignment_remediation.sql',
     'app/api/admin/epistemic-reingestion/route.ts',
     'app/admin/epistemic-reingestion/page.tsx',
     'app/admin/epistemic-work-queue/page.tsx',
@@ -150,6 +295,11 @@ test('persistence, API, UI, and target projection remain append-only and non-pub
   assert.match(chronologySql, /undated.*living-document/)
   assert.match(chronologySql, /coalesce\(item->>'publishedAt',''\) = ''/)
   assert.doesNotMatch(chronologySql, /requestedPublicPromotion.*true|published-canonical/)
+  assert.match(alignmentSql, /source-claim-alignment-mismatch:/)
+  assert.match(alignmentSql, /mode.*refine.*replace.*split/)
+  assert.match(alignmentSql, /remapping every linked claim/i)
+  assert.match(alignmentSql, /noncanonical draft/i)
+  assert.doesNotMatch(alignmentSql, /requestedPublicPromotion.*true|published-canonical/)
   assert.match(route, /authorizeEpistemicOperations/)
   assert.match(route, /autoPublicationSupported: false/)
   assert.match(route, /Cache-Control': 'no-store/)
@@ -160,6 +310,7 @@ test('persistence, API, UI, and target projection remain append-only and non-pub
   assert.match(store, /epistemic_reingestion_compilations/)
   assert.match(store, /origin: 'reingestion'/)
   assert.match(docs, /Controlled re-ingestion compiler/)
+  assert.match(docs, /alignment correction/)
   assert.match(publicMethod, /Arbitrary JSON patches and automatic promotion are not supported/)
   assert.match(openApiTest, /\/api\/admin\/epistemic-reingestion/)
 })

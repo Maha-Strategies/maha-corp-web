@@ -7,5 +7,5 @@ export const dynamic = 'force-static'
 const MANIFEST = buildLlmsManifest(claimsData as MpsClaim[])
 
 export function GET() {
-  return new Response(MANIFEST, { headers: { 'Content-Type': 'text/plain; charset=utf-8', 'Cache-Control': 'public, max-age=0, s-maxage=3600' } })
+  return new Response(MANIFEST, { headers: { 'Content-Type': 'text/plain; charset=utf-8', 'Cache-Control': 'public, max-age=0, s-maxage=3600', Link: '</mcp.json>; rel="alternate"; type="application/json"' } })
 }

@@ -2,6 +2,7 @@ import Anthropic from '@anthropic-ai/sdk'
 
 import { createAgentInquiryLedger } from '@/lib/agent-inquiry-ledger'
 import { MpsAuditError, runMpsAudit } from '@/lib/mps-audit-engine'
+import { MPS_PREFLIGHT_MCP_PROTOCOL_VERSION, MPS_PREFLIGHT_MCP_SERVER, MPS_PREFLIGHT_MCP_TOOL } from '@/lib/mps-preflight-mcp'
 import { PUBLIC_MPS_AUDIT_DAILY_LIMIT, PublicMpsAuditConfigurationError, publicAuditVisitorHash } from '@/lib/public-mps-audit'
 
 export const runtime = 'nodejs'
@@ -15,7 +16,7 @@ type JsonRpcId = string | number | null
 type JsonRpcRequest = { jsonrpc?: unknown; id?: unknown; method?: unknown; params?: unknown }
 
 function headers() {
-  return { 'Cache-Control': 'no-store', 'Content-Type': 'application/json; charset=utf-8', 'MCP-Protocol-Version': '2025-11-25', 'X-Content-Type-Options': 'nosniff' }
+  return { 'Cache-Control': 'no-store', 'Content-Type': 'application/json; charset=utf-8', 'MCP-Protocol-Version': MPS_PREFLIGHT_MCP_PROTOCOL_VERSION, 'X-Content-Type-Options': 'nosniff' }
 }
 
 function json(body: object, status = 200) {
@@ -53,30 +54,7 @@ async function recordEvent(
   if (insertError) console.error('Public MPS audit event failed:', insertError.code)
 }
 
-const tool = {
-  name: 'mps_claim_preflight',
-  title: 'MPS Claim Preflight',
-  description: 'Classify substantive claims in a sanitized nonfiction passage using Maha Provenance Standard v0.1. Returns claim excerpts, provenance tags, and suggested actions. Do not submit sensitive, personal, regulated, or confidential material. This is automated triage, not factual verification, certification, or advice.',
-  inputSchema: {
-    type: 'object' as const,
-    additionalProperties: false,
-    required: ['text'],
-    properties: {
-      text: { type: 'string', minLength: 1, maxLength: 6000, description: 'A sanitized nonfiction passage, maximum 6,000 characters.' },
-    },
-  },
-  outputSchema: {
-    type: 'object' as const,
-    additionalProperties: false,
-    required: ['mps_version', 'input_hash', 'claims'],
-    properties: {
-      mps_version: { type: 'string' },
-      input_hash: { type: 'string' },
-      claims: { type: 'array' },
-    },
-  },
-  annotations: { readOnlyHint: true, destructiveHint: false, idempotentHint: false, openWorldHint: false },
-}
+const tool = MPS_PREFLIGHT_MCP_TOOL
 
 async function callPreflight(request: Request, value: unknown) {
   const text = typeof value === 'object' && value !== null && !Array.isArray(value) ? (value as { text?: unknown }).text : undefined
@@ -128,7 +106,7 @@ export async function POST(request: Request) {
   if (requestedVersion && !PROTOCOL_VERSIONS.has(requestedVersion)) return error(requestId, -32600, 'Unsupported MCP protocol version.', 400)
 
   if (message.method === 'initialize') {
-    return json({ jsonrpc: '2.0', id: requestId, result: { protocolVersion: requestedVersion ?? '2025-11-25', capabilities: { tools: { listChanged: false } }, serverInfo: { name: 'maha-mps-preflight', version: '0.1.0', title: 'Maha MPS Preflight', description: 'Public, rate-limited claim-level provenance preflight for sanitized nonfiction passages.' }, instructions: 'Use only with sanitized, non-sensitive passages. The result is automated claim triage, not factual verification or certification.' } })
+    return json({ jsonrpc: '2.0', id: requestId, result: { protocolVersion: requestedVersion ?? MPS_PREFLIGHT_MCP_PROTOCOL_VERSION, capabilities: { tools: { listChanged: false } }, serverInfo: MPS_PREFLIGHT_MCP_SERVER, instructions: 'Use only with sanitized, non-sensitive passages. The result is automated claim triage, not factual verification or certification.' } })
   }
   if (message.method === 'notifications/initialized') return new Response(null, { status: 202, headers: headers() })
   if (message.method === 'ping') return json({ jsonrpc: '2.0', id: requestId, result: {} })

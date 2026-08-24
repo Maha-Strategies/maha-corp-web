@@ -12,7 +12,7 @@ import {
   listEpistemicReviewTargets,
   listEpistemicSourceCompletionEvents,
 } from '@/lib/epistemic-store'
-import { queueLaneForReason } from '@/lib/epistemic-work-queue'
+import { sourceCompletionReasons } from '@/lib/epistemic-work-queue'
 
 export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
@@ -53,7 +53,10 @@ async function readWorkspace(client: NonNullable<ReturnType<typeof createEpistem
       .filter((event) => event.recordId === target.recordId && event.targetSha256 === target.reviewTargetSha256)
       .sort((left, right) => left.occurredAt.localeCompare(right.occurredAt))
     if (relevantEvents.at(-1)?.nextState !== 'ready-for-reingestion') return []
-    const sourceBlockers = reasons.filter((reason) => queueLaneForReason(reason) === 'source-completion')
+    const sourceBlockers = sourceCompletionReasons({
+      gateDecision: { publicEligible: decision.publicEligible === true, reasons },
+      candidateSnapshot: target.candidateSnapshot,
+    })
     const corrections = sourceBlockers.flatMap((blockerCode) => {
       const descriptor = controlledCorrectionDescriptor(target.candidateSnapshot!, blockerCode)
       if (!descriptor) return []

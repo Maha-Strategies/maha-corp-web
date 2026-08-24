@@ -18,9 +18,9 @@ const RESEARCH_URL = 'https://research.mahastrategies.com'
  */
 export function buildLlmsManifest(claims: readonly MpsClaim[]): string {
   return [
-    '# Maha Strategies Research Claim Manifest',
+    '# Maha Strategies Machine-Readable Index',
     '',
-    '> Source-linked scientific claim records. Status labels are material: VERIFIED and SOURCED records identify evidence status; ILLUSTRATIVE and UNVERIFIED records must not be treated as established fact.',
+    '> Public orientation index for Maha knowledge, evidence, APIs, MCP tools, and commercial discovery. Status labels and publication boundaries are material: an indexed draft, source-available package, or unreviewed record must not be treated as canonical, hosted, or validated.',
     '',
     '## Claim index',
     ...claims.flatMap((claim) => [`- ${claim.title} [${claim.status}]`, `  ${claim.summary}`, `  URL: ${RESEARCH_URL}/claims/${claim.claim_id}`, `  Citations: ${claim.sources.join('; ')}`, `  Tags: ${claim.tags.join(', ')}`]),
@@ -45,6 +45,20 @@ export function buildLlmsManifest(claims: readonly MpsClaim[]): string {
     '- Celestial public-authority conformance fixture: https://www.mahastrategies.com/conformance/celestial-public-authority-v1.json',
     '- Quantum systems pilot registry: https://www.mahastrategies.com/knowledge/quantum-systems/registry',
     '- Synthetic biology pilot registry: https://www.mahastrategies.com/knowledge/synthetic-biology/registry',
+    '- Mathematics registry: https://www.mahastrategies.com/knowledge/mathematics/registry',
+    '- Neuromorphic and biocomputing registry: https://www.mahastrategies.com/knowledge/neuromorphic-biocomputing/registry',
+    '- Religion and contemplative traditions registry: https://www.mahastrategies.com/knowledge/religion/registry',
+    '- Astrology traditions registry: https://www.mahastrategies.com/knowledge/astrology/registry',
+    '',
+    '## Automation and MCP',
+    '- Canonical MCP tool manifest: https://www.mahastrategies.com/mcp.json',
+    '- Public MPS Preflight MCP server: https://www.mahastrategies.com/api/mcp/mps-preflight',
+    '- Public MPS Preflight server metadata: https://www.mahastrategies.com/mcp/mps-preflight.server.json',
+    '- Public MPS Preflight documentation: https://www.mahastrategies.com/mcp/mps-preflight.md',
+    '- MCP bridge compatibility manifest: https://www.mahastrategies.com/api/mcp-bridge/manifest',
+    '- MCP gateway contract: https://www.mahastrategies.com/mcp-gateway-contract.json',
+    '- Tool availability is declared per server in mcp.json. The public preflight is callable and rate-limited; the Context Control stdio server is source-available but its npm package is not published.',
+    '- No manifest entry grants authority to deploy infrastructure, spend funds, contact people, or publish canonical knowledge.',
     '',
     '## Open research editions',
     '- Books and essays index: https://www.mahastrategies.com/books',
@@ -82,7 +96,6 @@ export function buildLlmsManifest(claims: readonly MpsClaim[]): string {
     '  - Machine contract and exact schemas: https://www.mahastrategies.com/api/discovery/agent-infrastructure-compatibility-pack',
     '  - Fixed price: 49.00 USDC on Base Mainnet. CONTRACT PUBLISHED, RUNTIME WITHHELD: not currently payable. One A2A agent, one MCP server, one caller-declared non-mutating action per target. Compatibility failures are report findings; Maha delivery failures after settlement receive a full automatic refund.',
     '- Enterprise MCP Gateway: https://www.mahastrategies.com/enterprise-mcp-gateway',
-    '- MCP gateway contract: https://www.mahastrategies.com/mcp-gateway-contract.json',
     '- MCP governance guide: https://www.mahastrategies.com/guides/enterprise-mcp-governance',
     // Naming the exact three, and naming what is excluded, because an agent
     // that assumes every /api/v1 route is payable will sign for one it cannot

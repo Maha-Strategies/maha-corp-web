@@ -2,10 +2,14 @@ import { randomUUID } from 'node:crypto'
 
 import {
   EVIDENCE_MATURITIES,
+  RIGHTS_BASES,
   SOURCE_CHRONOLOGY_STATUSES,
   type EpistemicRecord,
+  type EpistemicSource,
   type EvidenceMaturity,
   type PublicationDecision,
+  type RightsBasis,
+  type SourceIdentifier,
   type SourceChronology,
 } from './epistemic-schema.ts'
 import {
@@ -13,12 +17,16 @@ import {
   evaluatePublicationGate,
   sha256Canonical,
 } from './epistemic-publication.ts'
+import {
+  SOURCE_ALIGNMENT_BLOCKER_PREFIX,
+  sourceAlignmentBlockers,
+} from './epistemic-source-alignment.ts'
 import type { SourceCompletionEvent } from './epistemic-work-queue.ts'
 
 export const EPISTEMIC_REINGESTION_VERSION = 'maha-epistemic-reingestion/1.0' as const
 export const EPISTEMIC_REINGESTION_COMPILER_VERSION = 'maha-controlled-reingestion-compiler/1.0' as const
 
-export type ControlledCorrectionKind = 'source-exact-locator' | 'source-publication-date' | 'claim-evidence-maturity'
+export type ControlledCorrectionKind = 'source-exact-locator' | 'source-publication-date' | 'claim-evidence-maturity' | 'source-claim-alignment'
 
 export interface ControlledCorrectionDescriptor {
   blockerCode: string
@@ -27,7 +35,7 @@ export interface ControlledCorrectionDescriptor {
   entityId: string
   fieldPath: string
   fieldLabel: string
-  inputKind: 'text' | 'date' | 'select'
+  inputKind: 'text' | 'date' | 'select' | 'json'
   options: string[]
   currentValue: string
 }
@@ -92,6 +100,16 @@ export interface FrozenReingestionTarget {
   gateDecision: { publicEligible: boolean; reasons: string[] }
   candidateSnapshot: EpistemicRecord
 }
+
+type SourceAlignmentCorrection =
+  | { mode: 'refine'; establishes: string; boundary: string }
+  | { mode: 'replace'; replacement: EpistemicSource; claimIds: string[] }
+  | {
+      mode: 'split'
+      retained: { establishes: string; boundary: string }
+      addition: EpistemicSource
+      claimIds: string[]
+    }
 
 const SHA256 = /^sha256:[a-f0-9]{64}$/
 const RECORD_ID = /^urn:maha:record:[a-z0-9]+(?:-[a-z0-9]+)*$/
@@ -203,7 +221,117 @@ export function controlledCorrectionDescriptor(
     }
   }
 
+  if (blockerCode.startsWith(SOURCE_ALIGNMENT_BLOCKER_PREFIX)) {
+    const entityId = blockerCode.slice(SOURCE_ALIGNMENT_BLOCKER_PREFIX.length)
+    const source = record.sources.find((candidate) => candidate.id === entityId)
+    if (!source || !sourceAlignmentBlockers(record).includes(blockerCode)) return null
+    const claimIds = record.claims.filter((claim) => claim.sourceIds.includes(entityId)).map((claim) => claim.id)
+    return {
+      blockerCode,
+      kind: 'source-claim-alignment',
+      entityType: 'source',
+      entityId,
+      fieldPath: `sources[id=${entityId}].alignment`,
+      fieldLabel: 'Source-to-claim alignment repair',
+      inputKind: 'json',
+      options: [],
+      currentValue: JSON.stringify({ source, claimIds }),
+    }
+  }
+
   return null
+}
+
+function stringArray(value: unknown, label: string, maximumItems: number): string[] {
+  if (!Array.isArray(value) || value.length < 1 || value.length > maximumItems) throw new Error(`${label} must contain 1-${maximumItems} entries.`)
+  const parsed = value.map((entry, index) => {
+    if (typeof entry !== 'string' || entry.trim().length < 3 || entry.length > 240) throw new Error(`${label}[${index}] is invalid.`)
+    return entry.trim()
+  })
+  if (new Set(parsed).size !== parsed.length) throw new Error(`${label} cannot contain duplicates.`)
+  return parsed
+}
+
+function boundedString(value: unknown, label: string, minimum: number, maximum: number): string {
+  if (typeof value !== 'string' || value.trim().length < minimum || value.trim().length > maximum) throw new Error(`${label} must contain ${minimum}-${maximum} characters.`)
+  return value.trim()
+}
+
+function parseAlignmentSource(value: unknown): EpistemicSource {
+  const candidate = object(value, 'replacement source')
+  const id = boundedString(candidate.id, 'replacement source id', 3, 180)
+  if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(id)) throw new Error('replacement source id must be lower-case and hyphenated.')
+  const url = boundedString(candidate.url, 'replacement source URL', 8, 500)
+  if (!url.startsWith('https://')) throw new Error('replacement source URL must use HTTPS.')
+  const rights = object(candidate.rights, 'replacement source rights')
+  const identifiers: SourceIdentifier[] = Array.isArray(candidate.identifiers) ? candidate.identifiers.map((entry, index) => {
+    const identifier = object(entry, `replacement source identifiers[${index}]`)
+    const scheme = boundedString(identifier.scheme, `replacement source identifiers[${index}].scheme`, 2, 40) as SourceIdentifier['scheme']
+    if (!['doi', 'isbn', 'url', 'dataset', 'standard', 'accession'].includes(scheme)) throw new Error(`replacement source identifiers[${index}].scheme is unsupported.`)
+    return {
+      scheme,
+      value: boundedString(identifier.value, `replacement source identifiers[${index}].value`, 2, 500),
+    }
+  }) : []
+  const publishedAt = boundedString(candidate.publishedAt ?? '', 'replacement source publication date', 0, 10)
+  if (publishedAt && !validIsoDate(publishedAt)) throw new Error('replacement source publication date must be an ISO date.')
+  const chronology = candidate.sourceChronology === undefined ? undefined : parseSourceChronology(JSON.stringify(candidate.sourceChronology))
+  if (!publishedAt && !chronology) throw new Error('replacement source requires a publication date or explicit chronology.')
+  if (publishedAt && chronology) throw new Error('replacement source cannot combine a publication date and explicit chronology.')
+  const rightsBasis = boundedString(rights.basis, 'replacement source rights basis', 3, 120) as RightsBasis
+  if (!RIGHTS_BASES.includes(rightsBasis)) throw new Error('replacement source rights basis is unsupported.')
+  return {
+    id,
+    title: boundedString(candidate.title, 'replacement source title', 3, 500),
+    authors: stringArray(candidate.authors, 'replacement source authors', 50),
+    publisher: boundedString(candidate.publisher, 'replacement source publisher', 2, 300),
+    publishedAt,
+    ...(chronology ? { sourceChronology: chronology } : {}),
+    url,
+    identifiers,
+    exactLocator: boundedString(candidate.exactLocator, 'replacement source locator', 3, 500),
+    rights: {
+      basis: rightsBasis,
+      quotationUsed: rights.quotationUsed === true,
+      note: boundedString(rights.note, 'replacement source rights note', 20, 1000),
+    },
+    establishes: boundedString(candidate.establishes, 'replacement source establishes', 20, 1500),
+    boundary: boundedString(candidate.boundary, 'replacement source boundary', 20, 1500),
+    ...(typeof candidate.conflictsOfInterest === 'string' && candidate.conflictsOfInterest.trim() ? { conflictsOfInterest: candidate.conflictsOfInterest.trim() } : {}),
+  }
+}
+
+function parseSourceAlignmentCorrection(value: string): SourceAlignmentCorrection {
+  let parsed: unknown
+  try { parsed = JSON.parse(value) } catch { throw new Error('source-claim alignment correction must be valid JSON.') }
+  const candidate = object(parsed, 'source-claim alignment correction')
+  if (candidate.mode === 'refine') {
+    return {
+      mode: 'refine',
+      establishes: boundedString(candidate.establishes, 'alignment establishes', 20, 1500),
+      boundary: boundedString(candidate.boundary, 'alignment boundary', 20, 1500),
+    }
+  }
+  if (candidate.mode === 'replace') {
+    return {
+      mode: 'replace',
+      replacement: parseAlignmentSource(candidate.replacement),
+      claimIds: stringArray(candidate.claimIds, 'alignment claimIds', 100),
+    }
+  }
+  if (candidate.mode === 'split') {
+    const retained = object(candidate.retained, 'alignment retained source scope')
+    return {
+      mode: 'split',
+      retained: {
+        establishes: boundedString(retained.establishes, 'retained alignment establishes', 20, 1500),
+        boundary: boundedString(retained.boundary, 'retained alignment boundary', 20, 1500),
+      },
+      addition: parseAlignmentSource(candidate.addition),
+      claimIds: stringArray(candidate.claimIds, 'alignment claimIds', 100),
+    }
+  }
+  throw new Error('source-claim alignment correction mode must be refine, replace, or split.')
 }
 
 function validIsoDate(value: string): boolean {
@@ -255,12 +383,43 @@ function applyCorrection(record: EpistemicRecord, descriptor: ControlledCorrecti
     source.sourceChronology = chronology
     return
   }
-  if (!EVIDENCE_MATURITIES.includes(value as EvidenceMaturity) || value === 'not-assessed') {
-    throw new Error(`${descriptor.blockerCode} requires a published evidence-maturity value other than not-assessed.`)
+  if (descriptor.kind === 'claim-evidence-maturity') {
+    if (!EVIDENCE_MATURITIES.includes(value as EvidenceMaturity) || value === 'not-assessed') {
+      throw new Error(`${descriptor.blockerCode} requires a published evidence-maturity value other than not-assessed.`)
+    }
+    const claim = record.claims.find((candidate) => candidate.id === descriptor.entityId)
+    if (!claim) throw new Error(`The claim for ${descriptor.blockerCode} is no longer present.`)
+    claim.evidenceMaturity = value as EvidenceMaturity
+    return
   }
-  const claim = record.claims.find((candidate) => candidate.id === descriptor.entityId)
-  if (!claim) throw new Error(`The claim for ${descriptor.blockerCode} is no longer present.`)
-  claim.evidenceMaturity = value as EvidenceMaturity
+  const sourceIndex = record.sources.findIndex((candidate) => candidate.id === descriptor.entityId)
+  if (sourceIndex < 0) throw new Error(`The source for ${descriptor.blockerCode} is no longer present.`)
+  const correction = parseSourceAlignmentCorrection(value)
+  if (correction.mode === 'refine') {
+    record.sources[sourceIndex].establishes = correction.establishes
+    record.sources[sourceIndex].boundary = correction.boundary
+    return
+  }
+  const linkedClaimIds = record.claims.filter((claim) => claim.sourceIds.includes(descriptor.entityId)).map((claim) => claim.id).sort()
+  const remappedClaimIds = [...correction.claimIds].sort()
+  if (remappedClaimIds.some((claimId) => !linkedClaimIds.includes(claimId))) throw new Error('Alignment corrections may remap only claims linked to the mismatched source.')
+  if (correction.mode === 'split') {
+    if (remappedClaimIds.length >= linkedClaimIds.length) throw new Error('A split must retain at least one linked claim on the original source; use replacement when remapping every claim.')
+    if (record.sources.some((source) => source.id === correction.addition.id)) throw new Error('split source id already exists on the record.')
+    record.sources[sourceIndex].establishes = correction.retained.establishes
+    record.sources[sourceIndex].boundary = correction.retained.boundary
+    record.sources.push(correction.addition)
+    for (const claim of record.claims) if (correction.claimIds.includes(claim.id)) {
+      claim.sourceIds = claim.sourceIds.map((sourceId) => sourceId === descriptor.entityId ? correction.addition.id : sourceId)
+    }
+    return
+  }
+  if (linkedClaimIds.join('|') !== remappedClaimIds.join('|')) throw new Error('A replacement must explicitly remap every claim linked to the mismatched source.')
+  if (record.sources.some((source, index) => index !== sourceIndex && source.id === correction.replacement.id)) throw new Error('replacement source id already exists on the record.')
+  record.sources[sourceIndex] = correction.replacement
+  for (const claim of record.claims) if (correction.claimIds.includes(claim.id)) {
+    claim.sourceIds = claim.sourceIds.map((sourceId) => sourceId === descriptor.entityId ? correction.replacement.id : sourceId)
+  }
 }
 
 function isSourceCompletionBlocker(reason: string): boolean {
@@ -299,7 +458,7 @@ export function buildControlledReingestionCompilation(
 
   const outputRecord = structuredClone(target.candidateSnapshot)
   const applied: AppliedControlledCorrection[] = []
-  const currentReasons = new Set(currentDecision.reasons)
+  const currentReasons = new Set([...currentDecision.reasons, ...sourceAlignmentBlockers(target.candidateSnapshot)])
 
   for (const correction of input.corrections) {
     if (!currentReasons.has(correction.blockerCode)) throw new Error(`${correction.blockerCode} is not a blocker on this frozen target.`)
@@ -316,6 +475,15 @@ export function buildControlledReingestionCompilation(
     }
     if (evidence.proposedValue && evidence.proposedValue !== correction.proposedValue) {
       throw new Error(`${correction.blockerCode} must use the proposed value recorded in its evidence event.`)
+    }
+    if (descriptor.kind === 'source-claim-alignment') {
+      const alignment = parseSourceAlignmentCorrection(correction.proposedValue)
+      const expectedUrl = alignment.mode === 'replace'
+        ? alignment.replacement.url
+        : alignment.mode === 'split'
+          ? alignment.addition.url
+          : target.candidateSnapshot.sources.find((source) => source.id === descriptor.entityId)?.url
+      if (!expectedUrl || evidence.sourceUrl !== expectedUrl) throw new Error(`${correction.blockerCode} must bind evidence from the aligned source URL.`)
     }
     applyCorrection(outputRecord, descriptor, correction.proposedValue)
     applied.push({
@@ -338,9 +506,10 @@ export function buildControlledReingestionCompilation(
     reviewEvents: [],
   }
   const outputDecision = evaluatePublicationGate(outputRecord)
+  const outputSourceBlockers = [...outputDecision.reasons.filter(isSourceCompletionBlocker), ...sourceAlignmentBlockers(outputRecord)]
   const resolvedBlockerCodes = applied
     .map((correction) => correction.blockerCode)
-    .filter((blocker) => !outputDecision.reasons.includes(blocker))
+    .filter((blocker) => !outputSourceBlockers.includes(blocker))
     .sort()
   if (resolvedBlockerCodes.length !== applied.length) throw new Error('At least one proposed correction did not resolve its bound blocker.')
 
@@ -368,7 +537,7 @@ export function buildControlledReingestionCompilation(
     corrections,
     diff,
     resolvedBlockerCodes,
-    remainingSourceBlockerCodes: outputDecision.reasons.filter(isSourceCompletionBlocker).sort(),
+    remainingSourceBlockerCodes: [...new Set(outputSourceBlockers)].sort(),
     gateDecision: outputDecision,
     outputRecord,
     note: input.note,

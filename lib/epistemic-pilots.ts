@@ -3,6 +3,7 @@ import {
   EPISTEMIC_SCHEMA_VERSION,
   type EpistemicDomain,
   type EpistemicRecord,
+  type MathematicalBridge,
 } from './epistemic-schema.ts'
 import {
   assertGraphIntegrity,
@@ -10,6 +11,8 @@ import {
   epistemicRecordPath,
   evaluatePublicationGate,
 } from './epistemic-publication.ts'
+import { QUANTUM_SYSTEMS_GRAPH_RECORDS } from './quantum-systems-graph.ts'
+import { SYNTHETIC_BIOLOGY_GRAPH_RECORDS } from './synthetic-biology-graph.ts'
 
 export const EPISTEMIC_SYSTEM_PATH = '/knowledge/epistemic-system' as const
 export const EPISTEMIC_RELEASE_DATE = '2026-08-24' as const
@@ -200,6 +203,8 @@ export const EPISTEMIC_RECORDS: readonly EpistemicRecord[] = [
     ],
     publication: canonicalReview('Approved as a source-bounded empirical demonstration with explicit experimental and clinical non-transfer boundaries.'),
   },
+  ...QUANTUM_SYSTEMS_GRAPH_RECORDS,
+  ...SYNTHETIC_BIOLOGY_GRAPH_RECORDS,
   {
     schemaVersion: EPISTEMIC_SCHEMA_VERSION,
     evidencePolicyVersion: EPISTEMIC_POLICY_VERSION,
@@ -268,6 +273,30 @@ export function getPublicDomainRecords(domainSlug: string) {
   return PUBLIC_EPISTEMIC_RECORDS.filter((record) => record.domainSlug === domainSlug)
 }
 
+export function getEpistemicRecord(recordId: string) {
+  return EPISTEMIC_RECORDS.find((record) => record.id === recordId)
+}
+
+export interface EpistemicRecordConnection {
+  direction: 'inbound' | 'outbound'
+  bridge: MathematicalBridge
+  record: EpistemicRecord
+}
+
+export function getEpistemicRecordConnections(recordId: string): EpistemicRecordConnection[] {
+  return EPISTEMIC_RECORDS.flatMap((record): EpistemicRecordConnection[] => record.bridges.flatMap((bridge): EpistemicRecordConnection[] => {
+    if (bridge.sourceConceptId === recordId) {
+      const target = getEpistemicRecord(bridge.targetConceptId)
+      return target ? [{ direction: 'outbound' as const, bridge, record: target }] : []
+    }
+    if (bridge.targetConceptId === recordId) {
+      const source = getEpistemicRecord(bridge.sourceConceptId)
+      return source ? [{ direction: 'inbound' as const, bridge, record: source }] : []
+    }
+    return []
+  }))
+}
+
 export function getPublicEpistemicRecord(domainSlug: string, kindSegment: string, slug: string) {
   return PUBLIC_EPISTEMIC_RECORDS.find(
     (record) => record.domainSlug === domainSlug
@@ -286,6 +315,7 @@ export function buildDomainRegistry(domainSlug: string) {
     domain,
     counts: {
       graphRecords: records.length,
+      graphEdges: records.reduce((count, record) => count + record.bridges.length, 0),
       publicCanonicalRecords: records.filter((record) => evaluatePublicationGate(record).publicEligible).length,
       withheldRecords: records.filter((record) => !evaluatePublicationGate(record).publicEligible).length,
     },

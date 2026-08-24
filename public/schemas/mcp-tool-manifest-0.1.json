@@ -1,0 +1,86 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://www.mahastrategies.com/schemas/mcp-tool-manifest-0.1.json",
+  "title": "Maha MCP Tool Manifest 0.1",
+  "description": "A bounded public catalog of callable and source-available MCP servers, tools, effects, and authority boundaries.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["$schema", "schemaVersion", "canonicalUrl", "publishedAt", "provider", "protocol", "summary", "servers", "automationBoundary", "indexes"],
+  "properties": {
+    "$schema": { "const": "https://www.mahastrategies.com/schemas/mcp-tool-manifest-0.1.json" },
+    "schemaVersion": { "const": "maha-mcp-tools/0.1" },
+    "canonicalUrl": { "const": "https://www.mahastrategies.com/mcp.json" },
+    "publishedAt": { "type": "string", "format": "date" },
+    "provider": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "website", "llmsIndex", "openApi"],
+      "properties": {
+        "name": { "const": "Maha Strategies LLC" },
+        "website": { "type": "string", "format": "uri" },
+        "llmsIndex": { "type": "string", "format": "uri" },
+        "openApi": { "type": "string", "format": "uri" }
+      }
+    },
+    "protocol": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "defaultVersion", "discoveryNote"],
+      "properties": {
+        "name": { "const": "Model Context Protocol" },
+        "defaultVersion": { "type": "string" },
+        "discoveryNote": { "type": "string", "minLength": 1 }
+      }
+    },
+    "summary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["servers", "tools", "callablePublicTools", "sourceAvailablePackageTools"],
+      "properties": {
+        "servers": { "type": "integer", "minimum": 1 },
+        "tools": { "type": "integer", "minimum": 1 },
+        "callablePublicTools": { "type": "integer", "minimum": 0 },
+        "sourceAvailablePackageTools": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "servers": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "title", "version", "status", "transport", "authentication", "documentation", "tools"],
+        "properties": {
+          "id": { "type": "string", "pattern": "^[a-z0-9][a-z0-9.-]*$" },
+          "title": { "type": "string", "minLength": 1 },
+          "version": { "type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$" },
+          "status": { "enum": ["available-public-rate-limited", "source-available-package-not-published"] },
+          "transport": { "type": "object", "minProperties": 2 },
+          "authentication": { "type": "object", "minProperties": 1 },
+          "documentation": { "type": "string", "format": "uri" },
+          "registryMetadata": { "type": "string", "format": "uri" },
+          "tools": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "object",
+              "required": ["name", "description", "inputSchema", "annotations", "effects", "dataBoundary"],
+              "properties": {
+                "name": { "type": "string", "pattern": "^[a-z0-9][a-z0-9._-]*$" },
+                "title": { "type": "string" },
+                "description": { "type": "string", "minLength": 1 },
+                "inputSchema": { "type": "object" },
+                "outputSchema": { "type": "object" },
+                "annotations": { "type": "object" },
+                "effects": { "type": "object" },
+                "dataBoundary": { "type": "object" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "automationBoundary": { "type": "object" },
+    "indexes": { "type": "object" }
+  }
+}

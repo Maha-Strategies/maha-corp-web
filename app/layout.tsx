@@ -85,6 +85,7 @@ export default function RootLayout({
         <script id="maha-color-scheme" dangerouslySetInnerHTML={{ __html: colorSchemeBootstrap }} />
         <link rel="alternate" type="application/atom+xml" title="Maha Strategies — Intelligence & Explainers" href="/feed.xml" />
         <link rel="alternate" type="text/plain" title="Maha Strategies machine-readable site guide" href="/llms.txt" />
+        <link rel="alternate" type="application/json" title="Maha Strategies MCP tool manifest" href="/mcp.json" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(mahaEntityGraphJsonLd).replace(/</g, '\\u003c') }}

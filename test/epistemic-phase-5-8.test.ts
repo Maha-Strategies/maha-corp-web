@@ -63,7 +63,7 @@ test('the factory compiles immutable packets that are always noncanonical and no
   }
 })
 
-test('the factory compiles the complete 110-record legacy graph in one bounded run', () => {
+test('the factory compiles the complete 134-record knowledge graph in one bounded run', () => {
   const targets: EpistemicFactoryTarget[] = ADAPTED_EPISTEMIC_CANDIDATES.map((candidate) => ({
     recordId: candidate.record.id,
     sourcePublicPath: candidate.sourcePublicPath,
@@ -72,11 +72,11 @@ test('the factory compiles the complete 110-record legacy graph in one bounded r
     candidateSnapshot: structuredClone(candidate.record),
   }))
   const result = buildEpistemicFactoryRun(targets, new Date('2026-08-24T12:45:00.000Z'))
-  assert.equal(result.run.targetCount, 110)
-  assert.equal(result.packets.length, 110)
-  assert.equal(new Set(result.packets.map((packet) => packet.packetId)).size, 110)
-  assert.equal(new Set(result.packets.map((packet) => packet.packetSha256)).size, 110)
-  assert.equal(result.packets.reduce((total, packet) => total + packet.reviewScopes.length, 0), 440)
+  assert.equal(result.run.targetCount, 134)
+  assert.equal(result.packets.length, 134)
+  assert.equal(new Set(result.packets.map((packet) => packet.packetId)).size, 134)
+  assert.equal(new Set(result.packets.map((packet) => packet.packetSha256)).size, 134)
+  assert.equal(result.packets.reduce((total, packet) => total + packet.reviewScopes.length, 0), 536)
   assert.equal(result.run.counts.canonical, 0)
   assert.equal(result.run.counts.sitemapEligible, 0)
   assert.equal(result.packets.some((packet) => packet.indexControl.crawlable), false)
