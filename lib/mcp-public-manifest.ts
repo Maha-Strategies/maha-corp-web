@@ -9,6 +9,7 @@ import {
   MPS_PREFLIGHT_MCP_SERVER,
   MPS_PREFLIGHT_MCP_TOOL,
 } from './mps-preflight-mcp.ts'
+import { EPISTEMIC_FACTORY_MCP_TOOLS } from './epistemic-factory-tools.ts'
 
 const SITE_URL = 'https://www.mahastrategies.com'
 
@@ -31,8 +32,8 @@ export const mcpPublicManifest = {
     discoveryNote: 'Availability is declared per server. A manifest entry does not override authentication, quota, review, or payment policy at call time.',
   },
   summary: {
-    servers: 2,
-    tools: 1 + MCP_TOOLS.length,
+    servers: 3,
+    tools: 1 + MCP_TOOLS.length + EPISTEMIC_FACTORY_MCP_TOOLS.length,
     callablePublicTools: 1,
     sourceAvailablePackageTools: MCP_TOOLS.length,
   },
@@ -64,6 +65,42 @@ export const mcpPublicManifest = {
           resultBoundary: 'Automated claim triage. It does not verify facts, certify a document, or replace specialist review.',
         },
       }],
+    },
+    {
+      id: 'maha-epistemic-publication-factory',
+      title: 'Maha Epistemic Publication Factory',
+      version: '0.1.0',
+      status: 'available-private-authenticated',
+      transport: {
+        type: 'streamable-http',
+        url: `${SITE_URL}/api/mcp/epistemic-factory`,
+        method: 'POST',
+      },
+      authentication: {
+        mode: 'bearer-environment-secret',
+        credentialName: 'EPISTEMIC_OPERATIONS_TOKEN',
+        toolArgumentsAcceptCredentials: false,
+      },
+      documentation: `${SITE_URL}/knowledge/epistemic-system/publishing-factory`,
+      tools: EPISTEMIC_FACTORY_MCP_TOOLS.map((tool) => ({
+        name: tool.name,
+        title: tool.title,
+        description: tool.description,
+        inputSchema: tool.inputSchema,
+        annotations: { readOnlyHint: tool.readOnly, destructiveHint: false, openWorldHint: false },
+        effects: {
+          durableQueueWrite: false,
+          canonicalPublication: false,
+          publicSurfaceMutation: false,
+          paymentAuthority: 'none',
+          deploymentAuthority: 'none',
+        },
+        dataBoundary: {
+          acceptedInput: 'Structured noncanonical maha-epistemic/1.0 records without credentials, personal data, or confidential source text.',
+          sourceTextReturned: false,
+          resultBoundary: 'Draft compilation, lexical conflict leads, and bridge-contract validation only. Durable queue submission and canonical release remain separate admin operations.',
+        },
+      })),
     },
     {
       id: MCP_SERVER_NAME,
@@ -105,7 +142,7 @@ export const mcpPublicManifest = {
     yearOnePurpose: 'Stable discovery for bounded research, evidence, and context-control automation.',
     noImpliedAuthority: true,
     prohibitedInferences: [
-      'A listed tool is not authorized to deploy infrastructure, spend funds, contact people, or publish canonical knowledge unless its own contract explicitly grants that authority.',
+      'No listed MCP tool is authorized to deploy infrastructure, spend funds, contact people, enqueue durable work, or publish canonical knowledge.',
       'Tool availability is not evidence that an output is factually correct, independently reviewed, production-ready, or suitable for a high-stakes decision.',
       'Source-available and package-not-published tools are not represented as hosted or installable services.',
     ],

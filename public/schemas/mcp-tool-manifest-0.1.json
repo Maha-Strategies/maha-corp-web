@@ -54,7 +54,7 @@
           "id": { "type": "string", "pattern": "^[a-z0-9][a-z0-9.-]*$" },
           "title": { "type": "string", "minLength": 1 },
           "version": { "type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$" },
-          "status": { "enum": ["available-public-rate-limited", "source-available-package-not-published"] },
+          "status": { "enum": ["available-public-rate-limited", "available-private-authenticated", "source-available-package-not-published"] },
           "transport": { "type": "object", "minProperties": 2 },
           "authentication": { "type": "object", "minProperties": 1 },
           "documentation": { "type": "string", "format": "uri" },

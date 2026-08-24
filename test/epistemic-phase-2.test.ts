@@ -47,7 +47,7 @@ test('source-completion projection preserves exact blockers and excludes release
     sourcePublicPath: candidate.sourcePublicPath,
     gateDecision: candidate.gateDecision,
   })), [])
-  assert.equal(queue.length, 134)
+  assert.equal(queue.length, ADAPTED_EPISTEMIC_CANDIDATES.length)
   assert.ok(queue.every((item) => item.state === 'untriaged'))
   assert.ok(queue.every((item) => item.blockers.length > 0))
   assert.ok(queue.every((item) => !item.blockers.some((blocker) => queueLaneForReason(blocker.code) !== 'source-completion')))
