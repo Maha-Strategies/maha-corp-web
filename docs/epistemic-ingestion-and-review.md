@@ -162,6 +162,21 @@ new decisions at the application boundary. This keeps the Phase 4 operating
 sample invitation-only while preserving the previous endpoint for records
 outside the bounded pilot.
 
+The 13 pilot records that remained in source completion after the first
+operating pass have frozen operator-research packages in
+`lib/epistemic-phase4-source-packages.ts`. A package may state that an imported
+source does not support the complete claim; filling the typed locator and
+evidence-status fields must never disguise that mismatch. Run
+`npm run operate:epistemic-phase4-sources` for a read-only Production plan, then
+add `-- --apply` only after reviewing it. The runner can triage, start, submit
+evidence, and compile a fresh immutable draft. It cannot invite a reviewer,
+submit an expert decision, promote content, or create a canonical release.
+
+Phase 4 is operationally complete only after real, named, versioned reviewers
+submit the four required scoped decisions on exact current target hashes and a
+separate release authority operates every passing record. Source packages and
+synthetic lifecycle tests do not satisfy that human gate.
+
 ## Persistence boundary
 
 Migration `20260824050000_epistemic_ingestion_and_expert_review.sql` adds four

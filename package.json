@@ -19,6 +19,7 @@
     "maha": "node bin/maha.js",
     "expand-graph": "node --experimental-strip-types scripts/expand-graph.ts",
     "verify:api-credit-billing": "node --experimental-strip-types scripts/verify-api-credit-billing.ts",
+    "operate:epistemic-phase4-sources": "node --experimental-strip-types scripts/operate-phase4-source-completion.ts",
     "test:capacity": "node --experimental-strip-types scripts/run-capacity-test.ts",
     "test:agent-compatibility": "node --experimental-strip-types scripts/test-agent-compatibility.ts",
     "verify:x402-limiter": "node --experimental-strip-types scripts/verify-x402-limiter.ts",
