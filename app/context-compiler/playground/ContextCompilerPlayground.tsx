@@ -207,7 +207,7 @@ export default function ContextCompilerPlayground() {
 
   return (
     <main className="evidence-page">
-      <div className="mx-auto max-w-7xl">
+      <div className="evidence-container">
         <header className="max-w-4xl">
           <p className="font-mono text-[10px] uppercase tracking-[0.26em] text-[var(--status-sourced)]">[ zero-install context lab ]</p>
           <h1 className="mt-5 text-4xl font-light leading-tight text-[var(--text-primary)] sm:text-6xl">See what survives before you integrate.</h1>
