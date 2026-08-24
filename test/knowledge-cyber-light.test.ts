@@ -8,6 +8,11 @@ const stylesheet = readFileSync(
   new URL('../app/knowledge/knowledge-cyber-light.module.css', import.meta.url),
   'utf8',
 )
+const intelligenceStylesheet = readFileSync(
+  new URL('../app/intelligence/intelligence-cyber-light.module.css', import.meta.url),
+  'utf8',
+)
+const knowledgeIndex = readFileSync(new URL('../app/knowledge/page.tsx', import.meta.url), 'utf8')
 
 function pageFiles(directory: string): string[] {
   return readdirSync(directory, { withFileTypes: true }).flatMap((entry) => {
@@ -47,7 +52,7 @@ test('all Knowledge pages inherit one bounded cyber-light layout', () => {
 })
 
 test('Knowledge copy and semantic labels meet readable contrast on light surfaces', () => {
-  const paper = '#edf3f1'
+  const paper = '#e9edf3'
   const surfaces = new Map([
     ['ink', '#13211c'],
     ['copy', '#34463f'],
@@ -85,7 +90,26 @@ test('Knowledge keeps dark surfaces bounded to machine-readable panels', () => {
 })
 
 test('Knowledge retains its cyber grid and respects reduced motion', () => {
-  assert.match(stylesheet, /background-size: 36px 36px;/)
-  assert.match(stylesheet, /background-size: 26px 26px;/)
+  assert.match(stylesheet, /40px 40px, 40px 40px;/)
+  assert.match(stylesheet, /28px 28px, 28px 28px;/)
+  assert.match(stylesheet, /\.root::after/)
+  assert.match(stylesheet, /\.spectrumRule/)
+  assert.match(stylesheet, /\.domainGrid > a::before/)
   assert.match(stylesheet, /@media \(prefers-reduced-motion: reduce\)/)
+})
+
+test('Knowledge index shares Intelligence geometry and adds a bounded spectrum', () => {
+  for (const contract of [
+    /max-width: 80rem;/,
+    /40px 40px/,
+    /box-shadow: 4px 4px 0/,
+    /transform: translate\(-1px, -1px\)/,
+  ]) {
+    assert.match(intelligenceStylesheet, contract)
+    assert.match(stylesheet, contract)
+  }
+  assert.match(knowledgeIndex, /styles\.indexTitle/)
+  assert.match(knowledgeIndex, /styles\.domainGrid/)
+  assert.match(knowledgeIndex, /styles\.spectrumRule/)
+  assert.match(stylesheet, /var\(--knowledge-cyber-cyan\).*var\(--knowledge-cyber-green\)/s)
 })

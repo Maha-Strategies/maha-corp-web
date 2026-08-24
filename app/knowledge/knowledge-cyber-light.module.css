@@ -1,13 +1,15 @@
 .root {
-  --knowledge-cyber-paper: #edf3f1;
-  --knowledge-cyber-panel: #f8fbfa;
-  --knowledge-cyber-panel-strong: #e2ece8;
+  --knowledge-cyber-paper: #e9edf3;
+  --knowledge-cyber-panel: #f7f9fc;
+  --knowledge-cyber-panel-strong: #dfe5ee;
   --knowledge-cyber-ink: #13211c;
   --knowledge-cyber-copy: #34463f;
   --knowledge-cyber-muted: #4d6158;
-  --knowledge-cyber-line: #a9bbb4;
-  --knowledge-cyber-line-strong: #758d83;
-  --knowledge-cyber-grid: rgb(19 89 100 / 7%);
+  --knowledge-cyber-line: rgb(36 80 154 / 22%);
+  --knowledge-cyber-line-strong: rgb(36 80 154 / 42%);
+  --knowledge-cyber-grid: rgb(36 80 154 / 6%);
+  --knowledge-cyber-grid-strong: rgb(36 80 154 / 10%);
+  --knowledge-cyber-shadow: rgb(23 55 110 / 14%);
   --knowledge-cyber-cyan: #0b6675;
   --knowledge-cyber-blue: #235fa4;
   --knowledge-cyber-green: #176b4d;
@@ -26,10 +28,12 @@
   color: var(--knowledge-cyber-copy);
   background-color: var(--knowledge-cyber-paper);
   background-image:
+    linear-gradient(var(--knowledge-cyber-grid-strong) 1px, transparent 1px),
+    linear-gradient(90deg, var(--knowledge-cyber-grid-strong) 1px, transparent 1px),
     linear-gradient(var(--knowledge-cyber-grid) 1px, transparent 1px),
     linear-gradient(90deg, var(--knowledge-cyber-grid) 1px, transparent 1px);
   background-position: center top;
-  background-size: 36px 36px;
+  background-size: 200px 200px, 200px 200px, 40px 40px, 40px 40px;
 }
 
 .root::before {
@@ -37,16 +41,214 @@
   z-index: 0;
   inset: 0;
   background:
-    radial-gradient(circle at 8% 4%, rgb(35 95 164 / 9%), transparent 22rem),
-    radial-gradient(circle at 92% 18%, rgb(103 70 168 / 8%), transparent 24rem);
+    radial-gradient(circle at 6% 5%, rgb(11 102 117 / 10%), transparent 19rem),
+    radial-gradient(circle at 25% 2%, rgb(35 95 164 / 9%), transparent 21rem),
+    radial-gradient(circle at 48% 5%, rgb(103 70 168 / 8%), transparent 20rem),
+    radial-gradient(circle at 70% 2%, rgb(155 59 52 / 7%), transparent 19rem),
+    radial-gradient(circle at 86% 7%, rgb(134 86 0 / 8%), transparent 20rem),
+    radial-gradient(circle at 98% 13%, rgb(23 107 77 / 8%), transparent 19rem);
   content: '';
   pointer-events: none;
   mask-image: linear-gradient(to bottom, black 0, transparent 44rem);
 }
 
+.root::after {
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: 4px;
+  background: linear-gradient(
+    90deg,
+    var(--knowledge-cyber-cyan) 0 16.66%,
+    var(--knowledge-cyber-blue) 16.66% 33.32%,
+    var(--knowledge-cyber-violet) 33.32% 49.98%,
+    var(--knowledge-cyber-red) 49.98% 66.64%,
+    var(--knowledge-cyber-amber) 66.64% 83.3%,
+    var(--knowledge-cyber-green) 83.3% 100%
+  );
+  content: '';
+  pointer-events: none;
+}
+
 .root > * {
   position: relative;
   z-index: 1;
+}
+
+/* --------------------------------------------------- Knowledge index -- */
+
+.indexPage {
+  min-height: 100vh;
+}
+
+.indexPage :global(.max-w-6xl) {
+  max-width: 80rem;
+}
+
+.indexHero {
+  padding-top: 5rem;
+  padding-bottom: 4rem;
+}
+
+.indexKicker,
+.domainHeading {
+  color: var(--knowledge-cyber-blue) !important;
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.17em;
+  text-transform: uppercase;
+}
+
+.indexTitle {
+  max-width: 58rem;
+  color: var(--knowledge-cyber-ink) !important;
+  font-size: clamp(2.5rem, 7vw, 4.75rem);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 0.98;
+  text-transform: uppercase;
+}
+
+.indexLede {
+  max-width: 48rem;
+  color: var(--knowledge-cyber-copy) !important;
+  font-family: inherit;
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+.indexAction {
+  display: inline-block;
+  border: 1px solid var(--knowledge-cyber-line-strong) !important;
+  background: var(--knowledge-cyber-panel);
+  padding: 0.75rem 1rem;
+  color: var(--knowledge-cyber-blue) !important;
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.17em;
+  text-transform: uppercase;
+  transition: border-color 150ms ease, background-color 150ms ease, color 150ms ease;
+}
+
+.indexAction:hover {
+  border-color: var(--knowledge-cyber-blue) !important;
+  background: var(--knowledge-cyber-blue-soft);
+  color: var(--knowledge-cyber-ink) !important;
+}
+
+.indexActionPrimary {
+  border-color: var(--knowledge-cyber-blue) !important;
+  background: var(--knowledge-cyber-blue);
+  color: #f7f9fc !important;
+}
+
+.indexActionPrimary:hover {
+  background: #17376e;
+  color: #f7f9fc !important;
+}
+
+.snapshotPanel {
+  position: relative;
+  border: 1px solid var(--knowledge-cyber-line) !important;
+  background: var(--knowledge-cyber-panel) !important;
+  box-shadow: 4px 4px 0 var(--knowledge-cyber-shadow);
+}
+
+.snapshotPanel::before,
+.root .domainGrid > a::after {
+  position: absolute;
+  top: -1px;
+  left: -1px;
+  width: 1.15rem;
+  height: 1.15rem;
+  border-top: 2px solid var(--domain-accent, var(--knowledge-cyber-blue));
+  border-left: 2px solid var(--domain-accent, var(--knowledge-cyber-blue));
+  content: '';
+  pointer-events: none;
+}
+
+.domainHeadingRow {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.spectrumRule {
+  flex: 1 1 auto;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    var(--knowledge-cyber-cyan),
+    var(--knowledge-cyber-blue),
+    var(--knowledge-cyber-violet),
+    var(--knowledge-cyber-red),
+    var(--knowledge-cyber-amber),
+    var(--knowledge-cyber-green)
+  );
+  opacity: 0.72;
+}
+
+.root .domainGrid > a {
+  --domain-accent: var(--knowledge-cyber-cyan);
+  --domain-tint: var(--knowledge-cyber-cyan-soft);
+  position: relative;
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  border: 1px solid var(--knowledge-cyber-line) !important;
+  background: linear-gradient(180deg, var(--domain-tint) 0, var(--knowledge-cyber-panel) 7rem) !important;
+  box-shadow: 4px 4px 0 var(--knowledge-cyber-shadow);
+  transition: border-color 150ms ease, box-shadow 150ms ease, transform 150ms ease;
+}
+
+.root .domainGrid > a::before {
+  position: absolute;
+  top: -1px;
+  right: -1px;
+  left: -1px;
+  height: 3px;
+  background: var(--domain-accent);
+  content: '';
+  pointer-events: none;
+}
+
+.root .domainGrid > a:nth-child(6n + 2) {
+  --domain-accent: var(--knowledge-cyber-blue);
+  --domain-tint: var(--knowledge-cyber-blue-soft);
+}
+
+.root .domainGrid > a:nth-child(6n + 3) {
+  --domain-accent: var(--knowledge-cyber-violet);
+  --domain-tint: var(--knowledge-cyber-violet-soft);
+}
+
+.root .domainGrid > a:nth-child(6n + 4) {
+  --domain-accent: var(--knowledge-cyber-red);
+  --domain-tint: var(--knowledge-cyber-red-soft);
+}
+
+.root .domainGrid > a:nth-child(6n + 5) {
+  --domain-accent: var(--knowledge-cyber-amber);
+  --domain-tint: var(--knowledge-cyber-amber-soft);
+}
+
+.root .domainGrid > a:nth-child(6n + 6) {
+  --domain-accent: var(--knowledge-cyber-green);
+  --domain-tint: var(--knowledge-cyber-green-soft);
+}
+
+.root .domainGrid > a:hover {
+  border-color: var(--domain-accent) !important;
+  box-shadow: 6px 6px 0 var(--knowledge-cyber-shadow);
+  transform: translate(-1px, -1px);
+}
+
+.root .domainGrid > a > :last-child {
+  margin-top: auto;
+  padding-top: 1.5rem;
 }
 
 .root :global(main) {
@@ -96,7 +298,7 @@
 .root :global([class*=' bg-neutral-9']),
 .root :global([class^='bg-gray-9']),
 .root :global([class*=' bg-gray-9']) {
-  background-color: rgb(248 251 250 / 92%) !important;
+  background-color: rgb(247 249 252 / 94%) !important;
 }
 
 /*
@@ -109,7 +311,7 @@
 .root :global([class*=' bg-[#0']),
 .root :global([class^='bg-black']),
 .root :global([class*=' bg-black']) {
-  background-color: rgb(248 251 250 / 94%) !important;
+  background-color: rgb(247 249 252 / 96%) !important;
 }
 
 .root :global(article),
@@ -305,7 +507,20 @@
 
 @media (max-width: 640px) {
   .root {
-    background-size: 26px 26px;
+    background-size: 140px 140px, 140px 140px, 28px 28px, 28px 28px;
+  }
+
+  .indexHero {
+    padding-top: 3.5rem;
+  }
+
+  .indexTitle {
+    font-size: clamp(2.25rem, 13vw, 3.4rem);
+  }
+
+  .root .domainGrid > a,
+  .snapshotPanel {
+    box-shadow: 3px 3px 0 var(--knowledge-cyber-shadow);
   }
 }
 
@@ -315,5 +530,13 @@
   .root *::after {
     scroll-behavior: auto !important;
     transition-duration: 0.01ms !important;
+  }
+
+  .root .domainGrid > a {
+    transition: none;
+  }
+
+  .root .domainGrid > a:hover {
+    transform: none;
   }
 }

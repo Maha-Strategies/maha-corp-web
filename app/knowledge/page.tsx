@@ -37,6 +37,7 @@ import {
 } from '@/lib/religion-knowledge'
 import { NEUROMORPHIC_COMPARISONS, NEUROMORPHIC_CONCEPTS, NEUROMORPHIC_PATH, NEUROMORPHIC_VERSION } from '@/lib/neuromorphic-biocomputing'
 import { EPISTEMIC_DOMAINS, EPISTEMIC_SYSTEM_PATH, PUBLIC_EPISTEMIC_RECORDS } from '@/lib/epistemic-pilots'
+import styles from './knowledge-cyber-light.module.css'
 
 export const metadata: Metadata = {
   title: 'Knowledge | Maha Strategies',
@@ -103,24 +104,24 @@ export default function KnowledgePage() {
   }
 
   return (
-    <main className="min-h-screen bg-[#0a0a0c] text-zinc-300 selection:bg-cyan-400 selection:text-black">
+    <main className={`${styles.indexPage} min-h-screen bg-[#0a0a0c] text-zinc-300 selection:bg-cyan-400 selection:text-black`}>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, '\\u003c') }} />
 
-      <section className="border-b border-zinc-800 px-6 py-20 sm:px-12">
+      <section className={`${styles.indexHero} border-b border-zinc-800 px-6 sm:px-12`}>
         <div className="mx-auto max-w-6xl">
-          <p className="font-mono text-xs uppercase tracking-[0.24em] text-cyan-300">[ Evidence architecture // source to strategy ]</p>
+          <p className={styles.indexKicker}>[ Phase 2 // Evidence architecture // Source to strategy ]</p>
           <div className="mt-8 grid gap-10 lg:grid-cols-[1.6fr_1fr] lg:items-end">
             <div>
-              <h1 className="max-w-4xl text-4xl font-bold tracking-tight text-white sm:text-6xl">Understand the machinery beneath the brief.</h1>
-              <p className="mt-6 max-w-3xl font-serif text-lg leading-8 text-zinc-400">Knowledge separates source-governed facts from domain explanations and strategic analysis. Every technical claim carries a citation or an explicit analytical boundary; every article can link back to the immutable facts and Intelligence decisions it supports.</p>
-              <Link href={SEMICONDUCTOR_PROCESS_MAP_PATH} className="mt-8 inline-block border border-cyan-500 px-5 py-3 font-mono text-[10px] uppercase tracking-widest text-cyan-300 transition-colors hover:bg-cyan-400 hover:text-black">
+              <h1 className={`${styles.indexTitle} max-w-4xl text-white`}>Understand the machinery beneath the brief.</h1>
+              <p className={`${styles.indexLede} mt-6 max-w-3xl text-zinc-400`}>Knowledge separates source-governed facts from domain explanations and strategic analysis. Every technical claim carries a citation or an explicit analytical boundary; every article can link back to the immutable facts and Intelligence decisions it supports.</p>
+              <Link href={SEMICONDUCTOR_PROCESS_MAP_PATH} className={`${styles.indexAction} ${styles.indexActionPrimary} mt-8`}>
                 Explore the complete {getProcessMapStepCount()}-node semiconductor process map →
               </Link>
-              <Link href="/knowledge/suppliers" className="ml-0 mt-3 inline-block border border-zinc-700 px-5 py-3 font-mono text-[10px] uppercase tracking-widest text-zinc-300 transition-colors hover:border-cyan-500 hover:text-cyan-300 sm:ml-3">
+              <Link href="/knowledge/suppliers" className={`${styles.indexAction} ml-0 mt-3 sm:ml-3`}>
                 Browse {KNOWLEDGE_SUPPLIERS.length} supplier profiles →
               </Link>
             </div>
-            <div className="border border-zinc-800 bg-zinc-950 p-5 font-mono text-xs leading-6 text-zinc-500">
+            <div className={`${styles.snapshotPanel} border border-zinc-800 bg-zinc-950 p-5 font-mono text-xs leading-6 text-zinc-500`}>
               <p className="text-zinc-200">Universal publication gateway plus governed domain surfaces</p>
               <p>{KNOWLEDGE_ARTICLES.length} published semiconductor nodes</p>
               <p>{KNOWLEDGE_SUPPLIERS.length} evidence-bounded supplier profiles</p>
@@ -140,8 +141,11 @@ export default function KnowledgePage() {
 
       <section className="border-b border-zinc-900 px-6 py-14 sm:px-12">
         <div className="mx-auto max-w-6xl">
-          <p className="font-mono text-[10px] uppercase tracking-widest text-zinc-500">Knowledge domains</p>
-          <div className="mt-5 grid gap-4 lg:grid-cols-3">
+          <div className={styles.domainHeadingRow}>
+            <p className={styles.domainHeading}>Knowledge domains</p>
+            <div className={styles.spectrumRule} aria-hidden="true" />
+          </div>
+          <div className={`${styles.domainGrid} mt-8 grid gap-6 md:grid-cols-2 lg:grid-cols-3`}>
             <Link href={SEMICONDUCTOR_PROCESS_MAP_PATH} className="group border border-zinc-800 bg-zinc-950/60 p-6 transition-colors hover:border-cyan-500/50">
               <p className="font-mono text-[10px] uppercase tracking-widest text-cyan-300">Technical knowledge system</p>
               <h2 className="mt-4 text-2xl font-semibold text-white group-hover:text-cyan-200">Semiconductor manufacturing</h2>
