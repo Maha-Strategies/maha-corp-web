@@ -88,6 +88,26 @@ test('publication gate blocks missing bridge warnings and formal attachments', (
   assert.ok(evaluatePublicationGate(equivalence).reasons.includes('formal-attachment-missing:urn:maha:bridge:equivalence-gate-fixture'))
 })
 
+test('publication gate accepts explicit undated chronology but never conflates access and publication dates', () => {
+  const base = PUBLIC_EPISTEMIC_RECORDS[0]
+  const source = base.sources[0]
+  const undated: EpistemicRecord = {
+    ...base,
+    sources: base.sources.map((entry) => entry.id === source.id ? {
+      ...entry,
+      publishedAt: '',
+      sourceChronology: { status: 'living-document', accessedAt: '2026-08-24', sourceVersion: 'test-version' },
+    } : entry),
+  }
+  assert.ok(!evaluatePublicationGate(undated).reasons.includes(`source-publication-date-missing:${source.id}`))
+
+  const conflicting: EpistemicRecord = {
+    ...undated,
+    sources: undated.sources.map((entry) => entry.id === source.id ? { ...entry, publishedAt: '2026-01-01' } : entry),
+  }
+  assert.ok(evaluatePublicationGate(conflicting).reasons.includes(`source-chronology-conflict:${source.id}`))
+})
+
 test('canonical provenance is deterministic and path-bound', () => {
   const record = PUBLIC_EPISTEMIC_RECORDS[0]
   assert.equal(canonicalJson({ z: 1, a: 2 }), canonicalJson({ a: 2, z: 1 }))

@@ -63,6 +63,11 @@ export const RIGHTS_BASES = [
   'citation-with-paraphrase',
 ] as const
 
+export const SOURCE_CHRONOLOGY_STATUSES = [
+  'undated',
+  'living-document',
+] as const
+
 export type ClaimKind = (typeof CLAIM_KINDS)[number]
 export type EvidenceMaturity = (typeof EVIDENCE_MATURITIES)[number]
 export type ReviewState = (typeof REVIEW_STATES)[number]
@@ -70,6 +75,7 @@ export type EpistemicRecordKind = (typeof RECORD_KINDS)[number]
 export type BridgeType = (typeof BRIDGE_TYPES)[number]
 export type RightsBasis = (typeof RIGHTS_BASES)[number]
 export type ExpertReviewScope = (typeof EXPERT_REVIEW_SCOPES)[number]
+export type SourceChronologyStatus = (typeof SOURCE_CHRONOLOGY_STATUSES)[number]
 
 export interface SourceIdentifier {
   scheme: 'doi' | 'isbn' | 'url' | 'dataset' | 'standard' | 'accession'
@@ -84,12 +90,19 @@ export interface SourceRights {
   note: string
 }
 
+export interface SourceChronology {
+  status: SourceChronologyStatus
+  accessedAt: string
+  sourceVersion?: string
+}
+
 export interface EpistemicSource {
   id: string
   title: string
   authors: string[]
   publisher: string
   publishedAt: string
+  sourceChronology?: SourceChronology
   url: string
   identifiers: SourceIdentifier[]
   exactLocator: string
@@ -224,10 +237,12 @@ export const EPISTEMIC_SCHEMA_DESCRIPTOR = {
     recordKind: RECORD_KINDS,
     bridgeType: BRIDGE_TYPES,
     rightsBasis: RIGHTS_BASES,
+    sourceChronologyStatus: SOURCE_CHRONOLOGY_STATUSES,
   },
   invariants: [
     'Claim kind, evidence maturity, and review state are independent axes.',
     'Every public claim resolves to a rights-cleared source with an exact locator.',
+    'A source has either a real publication date or explicit undated/living-document chronology with an access date; access dates are never mislabeled as publication dates.',
     'Analogy and association bridges carry an explicit non-transfer warning.',
     'Only records passing the publication gateway generate crawlable pages.',
     'Expert decisions bind a versioned reviewer identity and an immutable content hash; reviewer approval is not product approval.',

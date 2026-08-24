@@ -84,6 +84,14 @@ Every output is forced to `draft`, `requestedPublicPromotion` is forced to
 new hash therefore enters fresh source-completion and expert-review queues. The
 compiler has no publication or promotion operation.
 
+Source chronology is explicit. A dated source retains its actual
+`publishedAt` value. An authoritative source without a stated publication date
+may instead carry `sourceChronology.status` as `undated` or `living-document`,
+plus the date it was inspected and an optional source version. The compiler
+accepts that chronology only when it is bound to the original date blocker and
+its submitted evidence event. An access date is never written into
+`publishedAt`.
+
 ## Phase 3 canonical release control
 
 The private `/admin/epistemic-releases` workspace is the only application

@@ -2,9 +2,11 @@ import { randomUUID } from 'node:crypto'
 
 import {
   EVIDENCE_MATURITIES,
+  SOURCE_CHRONOLOGY_STATUSES,
   type EpistemicRecord,
   type EvidenceMaturity,
   type PublicationDecision,
+  type SourceChronology,
 } from './epistemic-schema.ts'
 import {
   epistemicReviewTargetHash,
@@ -175,9 +177,9 @@ export function controlledCorrectionDescriptor(
       kind: 'source-publication-date',
       entityType: 'source',
       entityId,
-      fieldPath: `sources[id=${entityId}].publishedAt`,
-      fieldLabel: 'Source publication date',
-      inputKind: 'date',
+      fieldPath: `sources[id=${entityId}].publishedAt|sourceChronology`,
+      fieldLabel: 'Publication date or explicit source chronology',
+      inputKind: 'text',
       options: [],
       currentValue: source.publishedAt,
     }
@@ -210,6 +212,27 @@ function validIsoDate(value: string): boolean {
   return Number.isFinite(date.getTime()) && date.toISOString().slice(0, 10) === value
 }
 
+function parseSourceChronology(value: string): SourceChronology | null {
+  let candidate: unknown
+  try {
+    candidate = JSON.parse(value)
+  } catch {
+    return null
+  }
+  if (!candidate || typeof candidate !== 'object' || Array.isArray(candidate)) return null
+  const chronology = candidate as Record<string, unknown>
+  if (typeof chronology.status !== 'string' || !SOURCE_CHRONOLOGY_STATUSES.includes(chronology.status as SourceChronology['status'])) return null
+  if (typeof chronology.accessedAt !== 'string' || !validIsoDate(chronology.accessedAt)) return null
+  if (chronology.sourceVersion !== undefined && (typeof chronology.sourceVersion !== 'string' || chronology.sourceVersion.trim().length < 1 || chronology.sourceVersion.length > 160)) return null
+  const allowed = new Set(['status', 'accessedAt', 'sourceVersion'])
+  if (Object.keys(chronology).some((key) => !allowed.has(key))) return null
+  return {
+    status: chronology.status as SourceChronology['status'],
+    accessedAt: chronology.accessedAt,
+    ...(typeof chronology.sourceVersion === 'string' ? { sourceVersion: chronology.sourceVersion.trim() } : {}),
+  }
+}
+
 function applyCorrection(record: EpistemicRecord, descriptor: ControlledCorrectionDescriptor, value: string): void {
   if (descriptor.kind === 'source-exact-locator') {
     if (value.length < 3 || value.length > 500) throw new Error(`${descriptor.blockerCode} requires a 3-500 character locator.`)
@@ -219,10 +242,17 @@ function applyCorrection(record: EpistemicRecord, descriptor: ControlledCorrecti
     return
   }
   if (descriptor.kind === 'source-publication-date') {
-    if (!validIsoDate(value)) throw new Error(`${descriptor.blockerCode} requires a real YYYY-MM-DD publication date.`)
     const source = record.sources.find((candidate) => candidate.id === descriptor.entityId)
     if (!source) throw new Error(`The source for ${descriptor.blockerCode} is no longer present.`)
-    source.publishedAt = value
+    if (validIsoDate(value)) {
+      source.publishedAt = value
+      delete source.sourceChronology
+      return
+    }
+    const chronology = parseSourceChronology(value)
+    if (!chronology) throw new Error(`${descriptor.blockerCode} requires a real YYYY-MM-DD publication date or valid undated/living-document chronology JSON.`)
+    source.publishedAt = ''
+    source.sourceChronology = chronology
     return
   }
   if (!EVIDENCE_MATURITIES.includes(value as EvidenceMaturity) || value === 'not-assessed') {

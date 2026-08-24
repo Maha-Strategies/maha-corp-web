@@ -2,6 +2,7 @@ import { createHash } from 'node:crypto'
 
 import {
   EPISTEMIC_SCHEMA_VERSION,
+  SOURCE_CHRONOLOGY_STATUSES,
   type EpistemicRecord,
   type PublicationDecision,
   type ProvenanceBundle,
@@ -9,6 +10,13 @@ import {
 
 const SLUG = /^[a-z0-9]+(?:-[a-z0-9]+)*$/
 const URN = /^urn:maha:(?:record|claim|bridge):[a-z0-9]+(?:-[a-z0-9]+)*$/
+const ISO_DATE = /^\d{4}-\d{2}-\d{2}$/
+
+function validIsoDate(value: string | undefined): boolean {
+  if (!value || !ISO_DATE.test(value)) return false
+  const date = new Date(`${value}T00:00:00.000Z`)
+  return Number.isFinite(date.getTime()) && date.toISOString().slice(0, 10) === value
+}
 
 function sortForCanonicalJson(value: unknown): unknown {
   if (Array.isArray(value)) return value.map(sortForCanonicalJson)
@@ -94,7 +102,15 @@ export function evaluatePublicationGate(record: EpistemicRecord): PublicationDec
 
   for (const source of record.sources) {
     if (!source.url.startsWith('https://')) reasons.push(`source-url-invalid:${source.id}`)
-    if (!/^\d{4}-\d{2}-\d{2}$/.test(source.publishedAt)) reasons.push(`source-publication-date-missing:${source.id}`)
+    const hasPublicationDate = validIsoDate(source.publishedAt)
+    const chronology = source.sourceChronology
+    const hasExplicitUndatedChronology = Boolean(
+      chronology
+      && SOURCE_CHRONOLOGY_STATUSES.includes(chronology.status)
+      && validIsoDate(chronology.accessedAt),
+    )
+    if (!hasPublicationDate && !hasExplicitUndatedChronology) reasons.push(`source-publication-date-missing:${source.id}`)
+    if (hasPublicationDate && chronology) reasons.push(`source-chronology-conflict:${source.id}`)
     if (!source.identifiers.length) reasons.push(`source-identifier-missing:${source.id}`)
     if (!source.exactLocator.trim()) reasons.push(`source-locator-missing:${source.id}`)
     if (!source.rights.note.trim()) reasons.push(`source-rights-note-missing:${source.id}`)
