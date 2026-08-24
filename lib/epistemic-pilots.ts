@@ -304,10 +304,21 @@ export function getPublicEpistemicRecord(domainSlug: string, kindSegment: string
   )
 }
 
-export function buildDomainRegistry(domainSlug: string) {
+export function buildDomainRegistry(
+  domainSlug: string,
+  publicRecords: readonly EpistemicRecord[] = getPublicDomainRecords(domainSlug),
+) {
   const domain = getEpistemicDomain(domainSlug)
   if (!domain) return undefined
   const records = getDomainRecords(domainSlug)
+  const canonicalRecords = publicRecords.filter((record) => record.domainSlug === domainSlug)
+  const canonicalIds = new Set(canonicalRecords.map((record) => record.id))
+  const withheld = records.filter((record) => !canonicalIds.has(record.id))
+  const withheldRecordKinds = Object.fromEntries(
+    [...new Set(withheld.map((record) => record.recordKind))]
+      .sort()
+      .map((recordKind) => [recordKind, withheld.filter((record) => record.recordKind === recordKind).length]),
+  )
   return {
     schemaVersion: EPISTEMIC_SCHEMA_VERSION,
     evidencePolicyVersion: EPISTEMIC_POLICY_VERSION,
@@ -316,33 +327,27 @@ export function buildDomainRegistry(domainSlug: string) {
     counts: {
       graphRecords: records.length,
       graphEdges: records.reduce((count, record) => count + record.bridges.length, 0),
-      publicCanonicalRecords: records.filter((record) => evaluatePublicationGate(record).publicEligible).length,
-      withheldRecords: records.filter((record) => !evaluatePublicationGate(record).publicEligible).length,
+      publicCanonicalRecords: canonicalRecords.length,
+      withheldRecords: withheld.length,
     },
-    records: records.map((record) => {
-      const decision = evaluatePublicationGate(record)
-      return decision.publicEligible
-        ? {
-            id: record.id,
-            title: record.title,
-            recordKind: record.recordKind,
-            reviewState: record.publication.reviewState,
-            canonicalPath: epistemicRecordPath(record),
-            contentHash: buildProvenanceBundle(record).contentHash,
-            claims: record.claims,
-            sources: record.sources,
-            boundaries: record.boundaries,
-            prohibitedInferences: record.prohibitedInferences,
-          }
-        : {
-            id: record.id,
-            title: record.title,
-            recordKind: record.recordKind,
-            reviewState: record.publication.reviewState,
-            canonicalPath: null,
-            withheld: true,
-            gateReasons: decision.reasons,
-          }
-    }),
+    records: canonicalRecords.map((record) => ({
+      id: record.id,
+      title: record.title,
+      recordKind: record.recordKind,
+      reviewState: record.publication.reviewState,
+      canonicalPath: epistemicRecordPath(record),
+      contentHash: buildProvenanceBundle(record).contentHash,
+      claims: record.claims,
+      sources: record.sources,
+      boundaries: record.boundaries,
+      prohibitedInferences: record.prohibitedInferences,
+    })),
+    withheldInventory: {
+      recordCount: withheld.length,
+      edgeCount: withheld.reduce((count, record) => count + record.bridges.length, 0),
+      recordKinds: withheldRecordKinds,
+      disclosure: 'aggregate-only',
+    },
+    boundary: 'Only active canonical records are enumerated. Draft identifiers, titles, paths, claims, sources, and gate reasons remain private until canonical release.',
   }
 }

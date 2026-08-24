@@ -10,9 +10,9 @@ import {
   buildDomainRegistry,
   getDomainRecords,
   getEpistemicDomain,
-  getPublicDomainRecords,
 } from '@/lib/epistemic-pilots'
-import { epistemicRecordPath, evaluatePublicationGate } from '@/lib/epistemic-publication'
+import { epistemicRecordPath } from '@/lib/epistemic-publication'
+import { getPublicEpistemicDomainRecords } from '@/lib/public-epistemic-releases'
 
 type PageProps = { params: Promise<{ kind: string }> }
 
@@ -37,11 +37,9 @@ export default async function EpistemicDomainPage({ params }: PageProps) {
   const domain = getEpistemicDomain((await params).kind)
   if (!domain) notFound()
   const graphRecords = getDomainRecords(domain.slug)
-  const publicRecords = getPublicDomainRecords(domain.slug)
-  const withheld = graphRecords.filter((record) => !evaluatePublicationGate(record).publicEligible)
-  const withheldKinds = [...new Set(withheld.map((record) => record.recordKind))]
+  const publicRecords = await getPublicEpistemicDomainRecords(domain.slug)
   const graphEdges = graphRecords.reduce((count, record) => count + record.bridges.length, 0)
-  const registry = buildDomainRegistry(domain.slug)
+  const registry = buildDomainRegistry(domain.slug, publicRecords)
   const path = `/knowledge/${domain.slug}`
   const jsonLd = {
     '@context': 'https://schema.org',
@@ -84,34 +82,11 @@ export default async function EpistemicDomainPage({ params }: PageProps) {
 
         <section className="evidence-section" aria-labelledby="withheld-heading">
           <p className="evidence-kicker text-[var(--status-boundary)]">Below the public line</p>
-          <h2 id="withheld-heading" className="evidence-section-title mt-3">The candidate graph is visible; its claim bodies remain non-pages.</h2>
-          <p className="evidence-copy mt-5">This topology shows what the domain compiler has prepared for review. Titles, record classes, and edge counts are inventory metadata—not canonical publication. Candidate claims and source packets remain behind the gate.</p>
-          <div className="mt-8 space-y-9">
-            {withheldKinds.map((recordKind) => {
-              const records = withheld.filter((record) => record.recordKind === recordKind)
-              return (
-                <section key={recordKind} aria-labelledby={`candidate-${recordKind}`}>
-                  <div className="flex flex-wrap items-end justify-between gap-3">
-                    <h3 id={`candidate-${recordKind}`} className="evidence-card-title capitalize">{recordKind.replaceAll('-', ' ')} records</h3>
-                    <span className="evidence-kicker">{records.length} nodes</span>
-                  </div>
-                  <div className="mt-4 grid gap-3 md:grid-cols-2 xl:grid-cols-3">
-                    {records.map((record) => {
-                      const decision = evaluatePublicationGate(record)
-                      return (
-                        <article key={record.id} className="evidence-status-surface evidence-status-surface--boundary">
-                          <div className="flex items-start justify-between gap-3">
-                            <h4 className="font-editorial text-lg text-[var(--text-primary)]">{record.title}</h4>
-                            <span className="evidence-chip evidence-chip--boundary">{record.publication.reviewState}</span>
-                          </div>
-                          <p className="evidence-kicker mt-4">{record.bridges.length} typed {record.bridges.length === 1 ? 'edge' : 'edges'} · {decision.reasons.length} gate checks open</p>
-                        </article>
-                      )
-                    })}
-                  </div>
-                </section>
-              )
-            })}
+          <h2 id="withheld-heading" className="evidence-section-title mt-3">Draft inventory remains private until canonical release.</h2>
+          <p className="evidence-copy mt-5">The public surface exposes aggregate capacity only. Draft identifiers, titles, routes, claims, source packets, and review blockers are excluded from crawlable pages and registries.</p>
+          <div className="mt-8 grid gap-4 sm:grid-cols-2">
+            <div className="evidence-status-surface evidence-status-surface--boundary"><p className="evidence-kicker">Withheld records</p><p className="mt-3 font-mono text-3xl text-[var(--status-boundary)]">{registry?.withheldInventory.recordCount}</p></div>
+            <div className="evidence-status-surface evidence-status-surface--boundary"><p className="evidence-kicker">Withheld typed edges</p><p className="mt-3 font-mono text-3xl text-[var(--status-boundary)]">{registry?.withheldInventory.edgeCount}</p></div>
           </div>
         </section>
 

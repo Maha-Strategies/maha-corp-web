@@ -59,8 +59,14 @@ test('draft graph records are withheld instead of becoming thin public pages', (
     assert.ok((registry?.counts.graphEdges ?? 0) >= 30)
     assert.equal(registry?.counts.publicCanonicalRecords, 1)
     assert.equal(registry?.counts.withheldRecords, 24)
-    const hidden = registry?.records.find((record) => 'withheld' in record && record.withheld)
-    assert.equal(hidden && 'canonicalPath' in hidden ? hidden.canonicalPath : 'unexpected', null)
+    assert.equal(registry?.records.length, 1)
+    assert.equal(registry?.withheldInventory.recordCount, 24)
+    assert.equal(registry?.withheldInventory.disclosure, 'aggregate-only')
+    const serialized = JSON.stringify(registry)
+    for (const record of withheld.filter((candidate) => candidate.domainSlug === domain.slug)) {
+      assert.equal(serialized.includes(record.id), false)
+      assert.equal(serialized.includes(record.title), false)
+    }
   }
 })
 
@@ -181,7 +187,7 @@ test('Phase 1 routes are static, canonical, Cyber-light scoped, and discoverable
   ].map((path) => readFile(new URL(path, root), 'utf8')))
 
   assert.match(system, /The public page is the result of a passed gate/)
-  assert.match(domain, /The candidate graph is visible/)
+  assert.match(domain, /Draft inventory remains private/)
   assert.match(record, /Every proposition keeps its own evidence state/)
   for (const dynamicRoute of [domain, record, registry, provenance]) assert.match(dynamicRoute, /generateStaticParams/)
   assert.match(record, /alternates: \{ canonical: path \}/)

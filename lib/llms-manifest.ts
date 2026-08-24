@@ -5,6 +5,8 @@ import {
   AGENTIC_COMMERCE_CONTEXT_URL,
   AGENTIC_COMMERCE_MANIFEST_URL,
 } from './agentic-commerce.ts'
+import type { EpistemicRecord } from './epistemic-schema.ts'
+import { epistemicRecordPath } from './epistemic-publication.ts'
 
 const RESEARCH_URL = 'https://research.mahastrategies.com'
 
@@ -16,7 +18,10 @@ const RESEARCH_URL = 'https://research.mahastrategies.com'
  * the commercial surfaces, so an agent reading the conventional orientation
  * file was never pointed at the offers manifest. A test now holds that open.
  */
-export function buildLlmsManifest(claims: readonly MpsClaim[]): string {
+export function buildLlmsManifest(
+  claims: readonly MpsClaim[],
+  canonicalEpistemicRecords: readonly EpistemicRecord[] = [],
+): string {
   return [
     '# Maha Strategies Machine-Readable Index',
     '',
@@ -49,6 +54,15 @@ export function buildLlmsManifest(claims: readonly MpsClaim[]): string {
     '- Neuromorphic and biocomputing registry: https://www.mahastrategies.com/knowledge/neuromorphic-biocomputing/registry',
     '- Religion and contemplative traditions registry: https://www.mahastrategies.com/knowledge/religion/registry',
     '- Astrology traditions registry: https://www.mahastrategies.com/knowledge/astrology/registry',
+    '',
+    '## Canonical epistemic records',
+    ...(canonicalEpistemicRecords.length > 0
+      ? canonicalEpistemicRecords.flatMap((record) => [
+          `- ${record.title} [${record.publication.reviewState}]`,
+          `  URL: https://www.mahastrategies.com${epistemicRecordPath(record)}`,
+          `  Version: ${record.publication.canonicalVersion}`,
+        ])
+      : ['- No active canonical database releases are currently listed.']),
     '',
     '## Automation and MCP',
     '- Canonical MCP tool manifest: https://www.mahastrategies.com/mcp.json',

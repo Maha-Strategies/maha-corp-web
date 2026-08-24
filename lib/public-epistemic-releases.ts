@@ -11,6 +11,9 @@ import {
   listEpistemicCanonicalReleases,
   listEpistemicReleaseWithdrawals,
 } from './epistemic-store.ts'
+import { PUBLIC_EPISTEMIC_RECORDS } from './epistemic-pilots.ts'
+import { epistemicRecordPath } from './epistemic-publication.ts'
+import type { EpistemicRecord } from './epistemic-schema.ts'
 
 export interface PublicEpistemicReleaseHistory {
   releases: EpistemicCanonicalRelease[]
@@ -34,6 +37,17 @@ export async function getPublicEpistemicReleaseHistory(): Promise<PublicEpistemi
 export async function getActiveEpistemicCanonicalReleases(): Promise<EpistemicCanonicalRelease[]> {
   const { releases, withdrawals } = await getPublicEpistemicReleaseHistory()
   return activeEpistemicReleases(releases, withdrawals)
+}
+
+export async function getPublicEpistemicRecords() {
+  const active = await getActiveEpistemicCanonicalReleases()
+  const records = new Map<string, EpistemicRecord>(PUBLIC_EPISTEMIC_RECORDS.map((record) => [record.id, record]))
+  for (const release of active) records.set(release.recordId, release.recordSnapshot)
+  return [...records.values()].sort((left, right) => epistemicRecordPath(left).localeCompare(epistemicRecordPath(right)))
+}
+
+export async function getPublicEpistemicDomainRecords(domainSlug: string) {
+  return (await getPublicEpistemicRecords()).filter((record) => record.domainSlug === domainSlug)
 }
 
 export async function getActiveEpistemicRecordByPath(path: string) {

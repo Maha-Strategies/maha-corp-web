@@ -102,7 +102,7 @@ test('MCP exposure is authenticated and non-mutating while queue and release sta
   assert.match(workerRoute, /completeEpistemicFactoryJob/)
   assert.match(releaseRoute, /authorizeEpistemicReleaseAuthority/)
   assert.equal(releaseRoute.match(/revalidateEpistemicReleasePaths\(/g)?.length, 2)
-  for (const path of ['release.canonicalPath', "'/sitemap.xml'", "'/knowledge/epistemic-system/releases/registry.json'"]) assert.ok(revalidation.includes(path))
+  for (const path of ['release.canonicalPath', "'/sitemap.xml'", "'/llms.txt'", "'/knowledge/epistemic-system/releases/registry.json'"]) assert.ok(revalidation.includes(path))
 })
 
 test('the execution migration makes jobs durable without granting publication authority', async () => {
