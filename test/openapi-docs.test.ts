@@ -90,6 +90,7 @@ const PRIVATE_ROUTES = new Set([
   // candidates and reviewer identities, so they remain an internal contract.
   '/api/admin/epistemic-ingestion',
   '/api/admin/epistemic-reviews',
+  '/api/admin/epistemic-work-queue',
   '/api/admin/editorial-coverage',
   '/api/admin/inbound-operations',
   '/api/admin/navigator',

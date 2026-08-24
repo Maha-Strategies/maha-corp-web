@@ -50,7 +50,7 @@ test('every route belongs to one declared visual system', () => {
     pages.length,
   )
   assert.deepEqual(missingPaperBoundary, [])
-  assert.deepEqual(groups, { paper: 108, apps: 6, books: 30, docs: 1, knowledge: 41, intelligence: 2, operator: 27 })
+  assert.deepEqual(groups, { paper: 108, apps: 6, books: 30, docs: 1, knowledge: 41, intelligence: 2, operator: 28 })
 })
 
 test('Apps, Books, Docs, Knowledge, and Intelligence own bounded cyber-light overlays', () => {
