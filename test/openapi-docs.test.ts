@@ -93,6 +93,7 @@ const PRIVATE_ROUTES = new Set([
   '/api/admin/epistemic-work-queue',
   '/api/admin/epistemic-reingestion',
   '/api/admin/epistemic-review-invitations',
+  '/api/admin/epistemic-factory',
   '/api/reviewer/epistemic-review',
   // Separate-token human release authority. This internal surface can create
   // canonical knowledge releases and is intentionally not a customer API.
