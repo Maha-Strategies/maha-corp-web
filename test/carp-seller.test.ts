@@ -6,6 +6,8 @@ import secp256k1 from 'secp256k1'
 
 import {
   CABEZON_SELLER_ROLE_URL,
+  BOGAWANTALAWA_LEGEND_TEA_TEST_OFFER,
+  BOGAWANTALAWA_LEGEND_TEA_TEST_REF,
   CARP_SELLER_ROLE_URL,
   SAMLEY_CINNAMON_TEA_RFQ_REF,
   MAHA_CARP_SELLER_URL,
@@ -81,6 +83,82 @@ test('tea enquiries expose the Samley pallet RFQ under Maha without inventing st
   assert.equal(SAMLEY_CINNAMON_TEA_RFQ_OFFER.indicativeCommercialTerms.indicativePalletProductValue, '1425.60')
   assert.equal(SAMLEY_CINNAMON_TEA_RFQ_OFFER.supplier.carpMembershipAsserted, false)
   assert.match(JSON.stringify(SAMLEY_CINNAMON_TEA_RFQ_OFFER.capabilityBoundaries), /Maha is the CABEZON Seller/)
+})
+
+test('black tea enquiries expose one bounded retail unit without inventing manufacturer authority', () => {
+  const matched = handleCarpSellerRequest({
+    jsonrpc: '2.0', method: 'enquiry', id: 'black-tea-enquiry-1',
+    params: { query: 'one box of Bogawantalawa high grown BOPF black tea', tags: ['physical'], imgtxt: null },
+  })
+  assert.ok('result' in matched)
+  const offers = (matched as { result: typeof mahaCarpSellerProfile.offers }).result
+  assert.equal(offers.length, 1)
+  assert.equal(offers[0].offeringRef, BOGAWANTALAWA_LEGEND_TEA_TEST_REF)
+  assert.equal(BOGAWANTALAWA_LEGEND_TEA_TEST_OFFER.commercialAvailability, 'enquiry_only')
+  assert.equal(BOGAWANTALAWA_LEGEND_TEA_TEST_OFFER.purchasable, false)
+  assert.equal(BOGAWANTALAWA_LEGEND_TEA_TEST_OFFER.price, null)
+  assert.equal(BOGAWANTALAWA_LEGEND_TEA_TEST_OFFER.directSettlement, null)
+  assert.equal(BOGAWANTALAWA_LEGEND_TEA_TEST_OFFER.inventory.availableUnits, 1)
+  assert.equal(BOGAWANTALAWA_LEGEND_TEA_TEST_OFFER.inventory.replenishmentPromised, false)
+  assert.equal(BOGAWANTALAWA_LEGEND_TEA_TEST_OFFER.productSpecification.barcode, '4791037556078')
+  assert.equal(BOGAWANTALAWA_LEGEND_TEA_TEST_OFFER.seller.manufacturerAuthorizationAsserted, false)
+  assert.equal(BOGAWANTALAWA_LEGEND_TEA_TEST_OFFER.seller.distributorRelationshipAsserted, false)
+  assert.match(BOGAWANTALAWA_LEGEND_TEA_TEST_OFFER.productSpecification.visibleCondition, /compression\/creasing/)
+})
+
+test('the one-box tea test fails closed at purchase pending a destination-specific quote', () => {
+  const reply = handleCarpSellerRequest({
+    jsonrpc: '2.0', method: 'purchase', id: 'black-tea-purchase-1',
+    params: {
+      offeringRef: BOGAWANTALAWA_LEGEND_TEA_TEST_REF,
+      quantity: 1,
+      agreedPrice: null,
+    },
+  })
+  assert.ok('error' in reply)
+  assert.equal(reply.error.code, -32011)
+  assert.match(reply.error.message, /QUOTE_REQUIRED/)
+  assert.equal((reply.error.data as { offeringRef: string }).offeringRef, BOGAWANTALAWA_LEGEND_TEA_TEST_REF)
+  assert.equal(JSON.stringify(reply).includes('paymentInstructions'), false)
+  assert.equal(JSON.stringify(reply).includes('escrowInstructions'), false)
+  assert.equal(JSON.stringify(reply).includes('deliveryInstructions'), false)
+})
+
+test('the one-box tea test rejects legacy and expanded purchase shapes', () => {
+  const legacy = handleCarpSellerRequest({
+    jsonrpc: '2.0', method: 'purchase', id: 'black-tea-legacy-1',
+    params: [1, BOGAWANTALAWA_LEGEND_TEA_TEST_REF, null],
+  })
+  assert.ok('error' in legacy)
+  assert.equal(legacy.error.code, -32602)
+
+  const expanded = handleCarpSellerRequest({
+    jsonrpc: '2.0', method: 'purchase', id: 'black-tea-expanded-1',
+    params: {
+      offeringRef: BOGAWANTALAWA_LEGEND_TEA_TEST_REF,
+      quantity: 1,
+      agreedPrice: null,
+      delivery: { destination: 'undisclosed' },
+    },
+  })
+  assert.ok('error' in expanded)
+  assert.equal(expanded.error.code, -32602)
+  assert.match(expanded.error.message, /additional fields are refused/)
+})
+
+test('the one-box tea evidence is metadata-only and served from the declared public path', async () => {
+  const canonicalBytes = await readFile(new URL('../artifacts/carp/bogawantalawa-legend-tea-retail-test-v1.json', import.meta.url))
+  const publicBytes = await readFile(new URL('../public/artifacts/carp/bogawantalawa-legend-tea-retail-test-v1.json', import.meta.url))
+  assert.deepEqual(publicBytes, canonicalBytes)
+  const artifact = JSON.parse(canonicalBytes.toString('utf8'))
+  assert.equal(artifact.subject.offeringRef, BOGAWANTALAWA_LEGEND_TEA_TEST_REF)
+  assert.equal(artifact.inventory.availableUnits, 1)
+  assert.equal(artifact.commercialBoundary.purchasable, false)
+  assert.equal(artifact.commercialBoundary.paymentInstructionsPresent, false)
+  assert.equal(artifact.claimBoundary.healthClaimsAdopted, false)
+  assert.equal(artifact.evidence.imageBytesPublished, false)
+  assert.equal(artifact.evidence.sha256.length, 4)
+  assert.equal(JSON.stringify(artifact).includes('/Users/'), false)
 })
 
 test('the Samley RFQ fails closed at purchase until an order-specific quote exists', () => {
