@@ -5,17 +5,23 @@ import { notFound } from 'next/navigation'
 import { MAHA_SITE_URL } from '@/lib/entity'
 import { PUBLIC_EPISTEMIC_RECORDS, getEpistemicDomain, getPublicEpistemicRecord } from '@/lib/epistemic-pilots'
 import { buildProvenanceBundle, epistemicProvenancePath, epistemicRecordPath, recordKindSegment } from '@/lib/epistemic-publication'
+import { getActiveEpistemicRecordByPath } from '@/lib/public-epistemic-releases'
 
 type PageProps = { params: Promise<{ kind: string; slug: string; recordSlug: string }> }
 
-export const dynamicParams = false
+export const dynamicParams = true
 export function generateStaticParams() {
   return PUBLIC_EPISTEMIC_RECORDS.map((record) => ({ kind: record.domainSlug, slug: recordKindSegment(record), recordSlug: record.slug }))
 }
 
+async function resolveRecord(kind: string, slug: string, recordSlug: string) {
+  return getPublicEpistemicRecord(kind, slug, recordSlug)
+    ?? await getActiveEpistemicRecordByPath(`/knowledge/${kind}/${slug}/${recordSlug}`)
+}
+
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { kind, slug, recordSlug } = await params
-  const record = getPublicEpistemicRecord(kind, slug, recordSlug)
+  const record = await resolveRecord(kind, slug, recordSlug)
   if (!record) return {}
   const path = epistemicRecordPath(record)
   return {
@@ -30,10 +36,12 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 export default async function EpistemicRecordPage({ params }: PageProps) {
   const { kind, slug, recordSlug } = await params
-  const record = getPublicEpistemicRecord(kind, slug, recordSlug)
+  const record = await resolveRecord(kind, slug, recordSlug)
   if (!record) notFound()
-  const domain = getEpistemicDomain(record.domainSlug)
-  if (!domain) notFound()
+  const domain = getEpistemicDomain(record.domainSlug) ?? {
+    slug: record.domainSlug,
+    name: record.domainSlug.split('-').map((part) => part.charAt(0).toUpperCase() + part.slice(1)).join(' '),
+  }
   const path = epistemicRecordPath(record)
   const provenance = buildProvenanceBundle(record)
   const jsonLd = {

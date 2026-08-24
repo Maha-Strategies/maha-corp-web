@@ -83,6 +83,7 @@ export default function EpistemicSystemPage() {
           <div className="mt-8 flex flex-wrap gap-3">
             <a href={`${EPISTEMIC_SYSTEM_PATH}/schema`} className="evidence-action evidence-action--primary">Open JSON schema</a>
             <Link href={`${EPISTEMIC_SYSTEM_PATH}/migrations`} className="evidence-action evidence-action--secondary">Inspect legacy migration</Link>
+            <Link href={`${EPISTEMIC_SYSTEM_PATH}/releases`} className="evidence-action evidence-action--secondary">Inspect canonical releases</Link>
           </div>
         </header>
 
@@ -125,6 +126,19 @@ export default function EpistemicSystemPage() {
             <p className="evidence-status-label">Controlled re-ingestion compiler</p>
             <p className="evidence-copy mt-2">A ready target can now become a new immutable revision through a restricted compiler. The server derives each editable field from an exact blocker, verifies its prior evidence event, emits a before/after diff, assigns new candidate and review digests, clears earlier review events, and resets publication controls to draft. Arbitrary JSON patches and automatic promotion are not supported.</p>
           </div>
+        </section>
+
+        <section className="evidence-section" aria-labelledby="phase-three-heading">
+          <p className="evidence-kicker text-[var(--status-verified)]">Phase 3 · controlled publication</p>
+          <h2 id="phase-three-heading" className="evidence-section-title mt-3">Approval and release authority are different decisions.</h2>
+          <p className="evidence-copy mt-5 max-w-4xl">A candidate can become canonical only when every required expert scope approves the same frozen target hash and a separately authenticated human release authority accepts the publication-state decision. The operations credential is rejected by the release surface.</p>
+          <div className="mt-7 grid gap-4 lg:grid-cols-3">
+            <article className="evidence-card"><p className="evidence-kicker">Exact target</p><h3 className="evidence-card-title mt-3">Hash-bound approvals</h3><p className="evidence-card-copy mt-3">A changed claim, source, boundary, section, or bridge changes the target digest and makes earlier decisions inapplicable.</p></article>
+            <article className="evidence-card"><p className="evidence-kicker">Separate authority</p><h3 className="evidence-card-title mt-3">No inherited power</h3><p className="evidence-card-copy mt-3">Ingestion, source-completion, re-ingestion, and expert-review credentials cannot publish a canonical route.</p></article>
+            <article className="evidence-card"><p className="evidence-kicker">Append-only history</p><h3 className="evidence-card-title mt-3">Supersede or withdraw</h3><p className="evidence-card-copy mt-3">A correction creates a new release event. Older records remain in the public provenance ledger with an explicit status.</p></article>
+          </div>
+          <div className="evidence-status-surface evidence-status-surface--verified mt-6"><p className="evidence-status-label">Public projection</p><p className="evidence-copy mt-2">Only the active release generates a canonical database-backed page and sitemap row. The machine-readable registry excludes credentials, operational fingerprints, private reviewer profiles, and non-consented authority identity fields.</p></div>
+          <Link href={`${EPISTEMIC_SYSTEM_PATH}/releases`} className="evidence-action evidence-action--primary mt-7">Open canonical release ledger</Link>
         </section>
 
         <section className="evidence-section" aria-labelledby="axes-heading">

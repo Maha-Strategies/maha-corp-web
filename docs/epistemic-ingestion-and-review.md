@@ -84,6 +84,39 @@ Every output is forced to `draft`, `requestedPublicPromotion` is forced to
 new hash therefore enters fresh source-completion and expert-review queues. The
 compiler has no publication or promotion operation.
 
+## Phase 3 canonical release control
+
+The private `/admin/epistemic-releases` workspace is the only application
+surface that can create a database-backed canonical release. It requires the
+separate `EPISTEMIC_RELEASE_AUTHORITY_TOKEN`; the operations token is rejected.
+The two configured secrets must differ and must each contain at least 32 random
+bytes.
+
+For an initial or superseding release, the server:
+
+1. resolves the latest immutable ingestion or re-ingestion target;
+2. verifies that its non-publication content still matches the target digest;
+3. selects the latest review decision in every required scope on that exact
+   digest and requires an unqualified `approve` verdict;
+4. assembles publication controls without changing the reviewed content;
+5. runs `evaluatePublicationGate` again;
+6. binds the canonical version, path, approvals, authority snapshot and record
+   snapshot into one release digest; and
+7. appends the release through the sole validated database function.
+
+An existing active record can be replaced only by an explicit superseding
+release on a different target hash. Withdrawal is a separate append-only event.
+Neither operation updates or deletes the earlier release.
+
+The public `/knowledge/epistemic-system/releases` ledger exposes active,
+superseded and withdrawn history. Its `registry.json` and per-release
+`provenance.json` surfaces omit credentials, operational actor fingerprints,
+private reviewer profiles and authority identity fields without explicit public
+attribution consent. Internal release rationales are never projected; the
+authority must provide a separate 20–500 character public-safe change summary.
+Only the active projection can generate a database-backed canonical page and
+sitemap row.
+
 ## Persistence boundary
 
 Migration `20260824050000_epistemic_ingestion_and_expert_review.sql` adds four
@@ -105,6 +138,12 @@ append-only compilation ledger and its sole validated append function. It also
 allows expert reviews and later source-completion events to bind compiler-created
 targets without weakening their exact-digest requirements.
 
+Migration `20260824190000_epistemic_canonical_release_control.sql` adds the
+append-only canonical-release and withdrawal ledgers. Its security-definer
+functions independently re-check current target lineage, allowable remaining
+gate reasons, every exact scoped approval, canonical publication controls,
+supersession state and authority snapshots before appending an event.
+
 Anonymous and authenticated browser roles receive no access. The service role
 has read access but cannot insert, update, delete, or truncate the ledgers
 directly. Two security-definer functions validate and append ingestion batches
@@ -115,13 +154,17 @@ Configure a dedicated `EPISTEMIC_OPERATIONS_TOKEN` of at least 32 random bytes.
 Do not reuse the practitioner, celestial registry, workflow, financial, or
 general editorial credentials.
 
+Configure `EPISTEMIC_RELEASE_AUTHORITY_TOKEN` separately, also with at least 32
+random bytes. The release boundary fails closed if it equals
+`EPISTEMIC_OPERATIONS_TOKEN`.
+
 ## Publication boundary
 
-The database cannot publish a page. There is no promotion RPC, no mutable
-publication status, and no code path from an ingestion credential to the
-sitemap. Crawlable records still require a reviewed source change whose
-`EpistemicRecord` passes `evaluatePublicationGate` during the application
-release.
+The ingestion database functions cannot publish a page, and there is no mutable
+publication status. Phase 3 adds narrowly validated release RPCs behind a
+separate authority credential. Only an active exact-hash release can enter the
+database-backed public projection; ingestion, source completion, re-ingestion,
+expert review, superseded versions and withdrawn versions cannot enter it.
 
 An expert decision is scoped evidence about one representation. It is not
 product approval, scientific validation, certification, or proof that every
