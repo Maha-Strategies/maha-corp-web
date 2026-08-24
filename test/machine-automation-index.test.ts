@@ -7,6 +7,7 @@ import { buildLlmsManifest } from '../lib/llms-manifest.ts'
 import { MCP_PUBLIC_MANIFEST_VERSION, mcpPublicManifest } from '../lib/mcp-public-manifest.ts'
 import { MCP_TOOLS } from '../lib/maha-mcp/index.ts'
 import { MPS_PREFLIGHT_MCP_SERVER, MPS_PREFLIGHT_MCP_TOOL } from '../lib/mps-preflight-mcp.ts'
+import { EPISTEMIC_FACTORY_MCP_TOOLS } from '../lib/epistemic-factory-tools.ts'
 import type { MpsClaim } from '../scripts/expand-graph.ts'
 
 const root = new URL('../', import.meta.url)
@@ -14,8 +15,8 @@ const root = new URL('../', import.meta.url)
 test('mcp.json is a bounded catalog of the callable and source-available tools that actually exist', () => {
   assert.equal(mcpPublicManifest.schemaVersion, MCP_PUBLIC_MANIFEST_VERSION)
   assert.equal(mcpPublicManifest.canonicalUrl, 'https://www.mahastrategies.com/mcp.json')
-  assert.equal(mcpPublicManifest.summary.servers, 2)
-  assert.equal(mcpPublicManifest.summary.tools, 6)
+  assert.equal(mcpPublicManifest.summary.servers, 3)
+  assert.equal(mcpPublicManifest.summary.tools, 9)
   assert.equal(mcpPublicManifest.summary.callablePublicTools, 1)
   assert.equal(mcpPublicManifest.summary.sourceAvailablePackageTools, 5)
 
@@ -23,6 +24,12 @@ test('mcp.json is a bounded catalog of the callable and source-available tools t
   assert.equal(publicServer?.status, 'available-public-rate-limited')
   assert.equal(publicServer?.transport.type, 'streamable-http')
   assert.deepEqual(publicServer?.tools.map((tool) => tool.name), [MPS_PREFLIGHT_MCP_TOOL.name])
+
+  const factoryServer = mcpPublicManifest.servers.find((server) => server.id === 'maha-epistemic-publication-factory')
+  assert.equal(factoryServer?.status, 'available-private-authenticated')
+  assert.equal(factoryServer?.transport.type, 'streamable-http')
+  assert.deepEqual(factoryServer?.tools.map((tool) => tool.name), EPISTEMIC_FACTORY_MCP_TOOLS.map((tool) => tool.name))
+  assert.ok(factoryServer?.tools.every((tool) => tool.effects.canonicalPublication === false))
 
   const localServer = mcpPublicManifest.servers.find((server) => server.id === 'maha-context-control')
   assert.equal(localServer?.status, 'source-available-package-not-published')
@@ -51,6 +58,7 @@ test('llms.txt is the automation index and points to every principal discovery s
   for (const url of [
     'https://www.mahastrategies.com/mcp.json',
     'https://www.mahastrategies.com/api/mcp/mps-preflight',
+    'https://www.mahastrategies.com/api/mcp/epistemic-factory',
     'https://www.mahastrategies.com/maha-machine-readable-registry.json',
     'https://www.mahastrategies.com/knowledge/quantum-systems/registry',
     'https://www.mahastrategies.com/knowledge/synthetic-biology/registry',

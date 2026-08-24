@@ -20,7 +20,7 @@ export interface EpistemicFactoryTarget {
   reviewTargetSha256: string
   candidateSnapshot: EpistemicRecord
   lineage?: {
-    origin: 'ingestion' | 'reingestion'
+    origin: 'ingestion' | 'reingestion' | 'factory'
     baseTargetSha256: string | null
     snapshot: unknown
   }

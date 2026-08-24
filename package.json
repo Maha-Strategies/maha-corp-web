@@ -22,6 +22,8 @@
     "operate:epistemic-phase4-sources": "node --experimental-strip-types scripts/operate-phase4-source-completion.ts",
     "operate:epistemic-phase5-alignment": "node --experimental-strip-types scripts/operate-phase5-alignment-repair.ts",
     "operate:epistemic-factory": "node --experimental-strip-types scripts/run-epistemic-publishing-factory.ts",
+    "operate:epistemic-factory-worker": "node --experimental-strip-types scripts/run-epistemic-factory-worker.ts",
+    "operate:frontier-pilot-batch": "node --experimental-strip-types scripts/run-frontier-pilot-batch.ts",
     "test:capacity": "node --experimental-strip-types scripts/run-capacity-test.ts",
     "test:agent-compatibility": "node --experimental-strip-types scripts/test-agent-compatibility.ts",
     "verify:x402-limiter": "node --experimental-strip-types scripts/verify-x402-limiter.ts",

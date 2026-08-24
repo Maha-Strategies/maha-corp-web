@@ -1,16 +1,16 @@
 import {
   activeEpistemicReleases,
   authorizeEpistemicReleaseAuthority,
-  buildEpistemicCanonicalRelease,
   buildEpistemicReleaseWithdrawal,
   EPISTEMIC_RELEASE_BOUNDARY,
   epistemicReleaseStatus,
   parseEpistemicReleaseRequest,
   releaseReadiness,
 } from '@/lib/epistemic-release'
+import { executeEpistemicCanonicalRelease } from '@/lib/epistemic-release-execution'
+import { revalidateEpistemicReleasePaths } from '@/lib/epistemic-revalidation'
 import {
   createEpistemicPersistenceClient,
-  insertEpistemicCanonicalRelease,
   insertEpistemicReleaseWithdrawal,
   listEpistemicCanonicalReleases,
   listEpistemicExpertReviews,
@@ -120,34 +120,24 @@ export async function POST(request: Request) {
   const client = createEpistemicPersistenceClient()
   if (!client) return unavailable()
   try {
-    const [targets, reviews, releases, withdrawals] = await Promise.all([
-      listEpistemicReviewTargets(client),
-      listEpistemicExpertReviews(client),
-      listEpistemicCanonicalReleases(client),
-      listEpistemicReleaseWithdrawals(client),
-    ])
-    const active = activeEpistemicReleases(releases, withdrawals)
     if (parsed.operation === 'withdraw') {
+      const [releases, withdrawals] = await Promise.all([
+        listEpistemicCanonicalReleases(client),
+        listEpistemicReleaseWithdrawals(client),
+      ])
+      const active = activeEpistemicReleases(releases, withdrawals)
       const activeRelease = active.find((release) => release.releaseId === parsed.releaseId)
       if (!activeRelease) return json({ error: { code: 'not_found', message: 'The active canonical release was not found.' } }, 404)
       const withdrawal = buildEpistemicReleaseWithdrawal(parsed, activeRelease)
       const persistence = await insertEpistemicReleaseWithdrawal(client, withdrawal, parsed.idempotencyKey, authorization.actorFingerprint)
-      return json({ withdrawal, persistence, persisted: true, autonomousPublicationSupported: false }, persistence.idempotentReplay ? 200 : 201)
+      const revalidatedPaths = revalidateEpistemicReleasePaths(activeRelease)
+      return json({ withdrawal, persistence, persisted: true, revalidatedPaths, autonomousPublicationSupported: false }, persistence.idempotentReplay ? 200 : 201)
     }
 
-    const target = targets.find((candidate) => candidate.recordId === parsed.recordId && candidate.reviewTargetSha256 === parsed.targetSha256)
-    if (!target?.candidateSnapshot) return json({ error: { code: 'not_found', message: 'The current frozen release target was not found.' } }, 404)
-    const previous = active.find((release) => release.recordId === parsed.recordId) ?? null
-    const release = buildEpistemicCanonicalRelease(parsed, {
-      recordId: target.recordId,
-      targetSha256: target.reviewTargetSha256,
-      candidateSnapshot: target.candidateSnapshot,
-    }, reviews, previous)
-    if (parsed.operation === 'preview') {
-      return json({ preview: release, persisted: false, autonomousPublicationSupported: false }, 200)
-    }
-    const persistence = await insertEpistemicCanonicalRelease(client, release, parsed.idempotencyKey, authorization.actorFingerprint)
-    return json({ release, persistence, persisted: true, autonomousPublicationSupported: false }, persistence.idempotentReplay ? 200 : 201)
+    const execution = await executeEpistemicCanonicalRelease(client, parsed, authorization.actorFingerprint)
+    if (!execution.persisted) return json({ preview: execution.release, persisted: false, autonomousPublicationSupported: false }, 200)
+    const revalidatedPaths = revalidateEpistemicReleasePaths(execution.release)
+    return json({ release: execution.release, persistence: execution.persistence, persisted: true, revalidatedPaths, autonomousPublicationSupported: false }, execution.persistence.idempotentReplay ? 200 : 201)
   } catch (error) {
     if (error instanceof Error && !/failed \[/.test(error.message)) {
       return json({ error: { code: 'invalid_request', message: error.message } }, 400)

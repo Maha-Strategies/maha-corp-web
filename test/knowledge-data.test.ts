@@ -8,9 +8,9 @@ import {
   knowledgeArticlePath,
 } from '../lib/knowledge-data.ts'
 
-test('knowledge library publishes 25 foundational explainers and 24 equipment classes', () => {
-  assert.equal(KNOWLEDGE_ARTICLES.length, 49)
-  assert.equal(KNOWLEDGE_ARTICLES.filter((article) => article.kind === 'equipment').length, 24)
+test('knowledge library publishes 25 foundational explainers and 25 equipment classes', () => {
+  assert.equal(KNOWLEDGE_ARTICLES.length, 50)
+  assert.equal(KNOWLEDGE_ARTICLES.filter((article) => article.kind === 'equipment').length, 25)
 
   for (const stage of SEMICONDUCTOR_STAGES) {
     assert.ok(

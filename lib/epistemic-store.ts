@@ -7,6 +7,7 @@ import {
   type EpistemicIngestionBatch,
 } from './epistemic-ingestion.ts'
 import type { EpistemicFactoryRun, EpistemicReviewPacket } from './epistemic-factory.ts'
+import type { EpistemicFactoryQueueJob } from './epistemic-factory-tools.ts'
 import {
   epistemicOperationsHash,
   expertReviewProfileHash,
@@ -63,7 +64,7 @@ export async function listEpistemicIngestionBatches(client: SupabaseClient) {
 }
 
 export async function listEpistemicReviewTargets(client: SupabaseClient) {
-  const [ingestionResult, reingestionResult] = await Promise.all([
+  const [ingestionResult, reingestionResult, factoryResult] = await Promise.all([
     client
       .from('epistemic_ingestion_records')
       .select('candidate_record_id,candidate_sha256,review_target_sha256,source_public_path,gate_decision,record_snapshot,created_at')
@@ -74,9 +75,16 @@ export async function listEpistemicReviewTargets(client: SupabaseClient) {
       .select('candidate_record_id,output_candidate_sha256,output_review_target_sha256,source_public_path,base_target_sha256,gate_decision,record_snapshot,compilation_snapshot,compiled_at')
       .order('compiled_at', { ascending: false })
       .limit(500),
+    client
+      .from('epistemic_factory_draft_targets')
+      .select('candidate_record_id,candidate_sha256,review_target_sha256,source_public_path,gate_decision,record_snapshot,compilation_snapshot,created_at')
+      .order('created_at', { ascending: false })
+      .limit(500),
   ])
   if (ingestionResult.error) throw new Error(`Epistemic ingestion target read failed: ${ingestionResult.error.message}`)
   if (reingestionResult.error) throw new Error(`Epistemic re-ingestion target read failed: ${reingestionResult.error.message}`)
+  const factoryTableMissing = factoryResult.error && ['42P01', 'PGRST205'].includes(factoryResult.error.code ?? '')
+  if (factoryResult.error && !factoryTableMissing) throw new Error(`Epistemic factory target read failed: ${factoryResult.error.message}`)
   const ingestionTargets = (ingestionResult.data ?? []).map((row) => {
     const snapshot = row.record_snapshot as { candidateSnapshot?: EpistemicRecord }
     return {
@@ -110,11 +118,96 @@ export async function listEpistemicReviewTargets(client: SupabaseClient) {
     baseTargetSha256: row.base_target_sha256,
     lineageSnapshot: row.compilation_snapshot,
   }))
-  const targets = [...ingestionTargets, ...reingestionTargets]
+  const factoryTargets = (factoryResult.data ?? []).map((row) => ({
+    origin: 'factory' as const,
+    recordId: row.candidate_record_id,
+    domainSlug: (row.record_snapshot as EpistemicRecord | null)?.domainSlug,
+    title: (row.record_snapshot as EpistemicRecord | null)?.title,
+    slug: (row.record_snapshot as EpistemicRecord | null)?.slug,
+    candidateSha256: row.candidate_sha256,
+    reviewTargetSha256: row.review_target_sha256,
+    sourcePublicPath: row.source_public_path,
+    gateDecision: row.gate_decision,
+    ingestedAt: row.created_at,
+    candidateSnapshot: row.record_snapshot as EpistemicRecord | undefined,
+    baseTargetSha256: null,
+    lineageSnapshot: row.compilation_snapshot,
+  }))
+  const targets = [...ingestionTargets, ...reingestionTargets, ...factoryTargets]
     .sort((left, right) => String(right.ingestedAt).localeCompare(String(left.ingestedAt)))
   const latest = new Map<string, (typeof targets)[number]>()
   for (const target of targets) if (!latest.has(target.recordId)) latest.set(target.recordId, target)
   return [...latest.values()]
+}
+
+export async function enqueueEpistemicFactoryJob(
+  client: SupabaseClient,
+  job: EpistemicFactoryQueueJob,
+  idempotencyKey: string,
+  actorFingerprint: string,
+) {
+  const { data, error } = await client.rpc('enqueue_epistemic_factory_job', {
+    p_job: job,
+    p_idempotency_hash: epistemicOperationsHash(idempotencyKey),
+    p_actor_fingerprint: actorFingerprint,
+  })
+  if (error) throw new Error(`Epistemic factory enqueue failed [${error.code ?? 'unknown'}]: ${error.message}`)
+  return data as { jobId: string; status: string; idempotentReplay: boolean }
+}
+
+export async function claimEpistemicFactoryJobs(
+  client: SupabaseClient,
+  workerFingerprint: string,
+  limit = 10,
+): Promise<EpistemicFactoryQueueJob[]> {
+  const { data, error } = await client.rpc('claim_epistemic_factory_jobs', {
+    p_worker_fingerprint: workerFingerprint,
+    p_limit: limit,
+    p_lease_seconds: 300,
+  })
+  if (error) throw new Error(`Epistemic factory claim failed [${error.code ?? 'unknown'}]: ${error.message}`)
+  return (data ?? []) as EpistemicFactoryQueueJob[]
+}
+
+export async function completeEpistemicFactoryJob(
+  client: SupabaseClient,
+  job: EpistemicFactoryQueueJob,
+  workerFingerprint: string,
+  result: Record<string, unknown>,
+) {
+  const { data, error } = await client.rpc('complete_epistemic_factory_job', {
+    p_job_id: job.jobId,
+    p_payload_sha256: job.payloadSha256,
+    p_result: result,
+    p_worker_fingerprint: workerFingerprint,
+  })
+  if (error) throw new Error(`Epistemic factory completion failed [${error.code ?? 'unknown'}]: ${error.message}`)
+  return data as { jobId: string; factoryTargetId: string; status: string; idempotentReplay: boolean }
+}
+
+export async function failEpistemicFactoryJob(
+  client: SupabaseClient,
+  jobId: string,
+  workerFingerprint: string,
+  errorSnapshot: Record<string, unknown>,
+) {
+  const { data, error } = await client.rpc('fail_epistemic_factory_job', {
+    p_job_id: jobId,
+    p_error: errorSnapshot,
+    p_worker_fingerprint: workerFingerprint,
+  })
+  if (error) throw new Error(`Epistemic factory failure failed [${error.code ?? 'unknown'}]: ${error.message}`)
+  return data as { jobId: string; status: string; idempotentReplay: boolean }
+}
+
+export async function listEpistemicFactoryJobs(client: SupabaseClient, limit = 100) {
+  const { data, error } = await client
+    .from('epistemic_factory_jobs')
+    .select('job_id,operation,status,payload_sha256,attempts,enqueued_at,started_at,completed_at,error_snapshot')
+    .order('enqueued_at', { ascending: false })
+    .limit(limit)
+  if (error) throw new Error(`Epistemic factory queue read failed: ${error.message}`)
+  return data ?? []
 }
 
 export async function insertEpistemicReingestionCompilation(
