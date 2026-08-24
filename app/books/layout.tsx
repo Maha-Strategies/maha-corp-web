@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react'
 
-import styles from './books-cyber-light.module.css'
+import styles from '../intelligence/intelligence-cyber-light.module.css'
 
 export default function BooksLayout({ children }: { children: ReactNode }) {
   return (
