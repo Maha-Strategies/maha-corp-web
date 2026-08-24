@@ -99,6 +99,19 @@
   background-color: rgb(248 251 250 / 92%) !important;
 }
 
+/*
+ * Several Knowledge templates predate the shared palette and use literal near-black
+ * Tailwind utilities. Keep those legacy panels inside the light system instead of
+ * producing a dark card with light-theme foreground tokens. Intentional machine
+ * surfaces are restored below by the dedicated pre/.knowledge-machine-panel rule.
+ */
+.root :global([class^='bg-[#0']),
+.root :global([class*=' bg-[#0']),
+.root :global([class^='bg-black']),
+.root :global([class*=' bg-black']) {
+  background-color: rgb(248 251 250 / 94%) !important;
+}
+
 .root :global(article),
 .root :global(section),
 .root :global(aside),
