@@ -3,7 +3,7 @@ import { resolve, sep } from 'node:path'
 
 export type OpenBookSection = { slug: string; title: string; marker: string }
 export type OpenBookEdition = {
-  slug: 'the-borrowed-light' | 'the-imagined-life' | 'the-orbital-mind' | 'the-synthetic-self'
+  slug: 'the-borrowed-light' | 'the-imagined-life' | 'the-orbital-mind' | 'the-synthetic-self' | 'the-volcanic-engine'
   title: string
   subtitle: string
   manuscriptFiles: string[]
@@ -15,6 +15,34 @@ const CONTENT_ROOT = resolve(process.cwd(), 'content', 'books')
 // These editions read directly from one canonical manuscript each. The reader
 // URLs are derived views, never separately maintained chapter copies.
 export const openBookEditions: Record<OpenBookEdition['slug'], OpenBookEdition> = {
+  'the-volcanic-engine': {
+    slug: 'the-volcanic-engine', title: 'The Volcanic Engine', subtitle: 'Living on a Firing Planet',
+    manuscriptFiles: [
+      'The-Volcanic-Engine-Introduction.md',
+      ...Array.from({ length: 14 }, (_, index) => `The-Volcanic-Engine-Chapter-${index + 1}.md`),
+      'The-Volcanic-Engine-Coda.md',
+      'The-Volcanic-Engine-Sources.md',
+    ],
+    sections: [
+      ['introduction', 'Introduction: The Engine and the Interruption', '# Introduction: The Engine and the Interruption'],
+      ['the-rock-that-flows', 'Chapter 1: The Rock That Flows', '# Chapter 1: The Rock That Flows'],
+      ['the-physics-of-the-cork', 'Chapter 2: The Physics of the Cork', '# Chapter 2: The Physics of the Cork'],
+      ['the-instrument-you-cannot-insert', 'Chapter 3: The Instrument You Cannot Insert', '# Chapter 3: The Instrument You Cannot Insert'],
+      ['the-death-of-the-cavern', 'Chapter 4: The Death of the Cavern', '# Chapter 4: The Death of the Cavern'],
+      ['two-warnings', 'Chapter 5: Two Warnings', '# Chapter 5: Two Warnings'],
+      ['the-vent-at-the-beginning-of-life', 'Chapter 6: The Vent at the Beginning of Life', '# Chapter 6: The Vent at the Beginning of Life'],
+      ['air-ocean-continent', 'Chapter 7: Air, Ocean, Continent', '# Chapter 7: Air, Ocean, Continent'],
+      ['the-dead-worlds-and-the-icy-ones', 'Chapter 8: The Dead Worlds and the Icy Ones', '# Chapter 8: The Dead Worlds and the Icy Ones'],
+      ['is-a-living-planet-necessarily-a-firing-one', 'Chapter 9: Is a Living Planet Necessarily a Firing One?', '# Chapter 9: Is a Living Planet Necessarily a Firing One?'],
+      ['the-caldera-problem', 'Chapter 10: The Caldera Problem', '# Chapter 10: The Caldera Problem'],
+      ['the-great-dyings', 'Chapter 11: The Great Dyings', '# Chapter 11: The Great Dyings'],
+      ['volcanic-winter', 'Chapter 12: Volcanic Winter, and the Temptation to Borrow It', '# Chapter 12: Volcanic Winter, and the Temptation to Borrow It'],
+      ['who-lives-on-the-flank', 'Chapter 13: Who Lives on the Flank', '# Chapter 13: Who Lives on the Flank'],
+      ['tapping-the-furnace', 'Chapter 14: Tapping the Furnace', '# Chapter 14: Tapping the Furnace'],
+      ['the-deep-time-horizon', 'Coda: The Deep-Time Horizon', '# Coda: The Deep-Time Horizon'],
+      ['sources-and-further-reading', 'Sources and Further Reading', '# Sources and Further Reading'],
+    ].map(([slug, title, marker]) => ({ slug, title, marker })),
+  },
   'the-imagined-life': {
     slug: 'the-imagined-life', title: 'The Imagined Life', subtitle: 'Living Inside a Dreaming Brain', manuscriptFiles: ['the-imagined-life.md'],
     sections: [
@@ -117,8 +145,28 @@ function manuscriptPath(book: OpenBookEdition, filename: string) {
 
 export function readOpenBookManuscript(book: OpenBookEdition): string {
   return book.manuscriptFiles
-    .map((filename) => readFileSync(manuscriptPath(book, filename), 'utf8').replace(/^# THE BORROWED LIGHT\s*\r?\n\r?\n?/i, '').trim())
+    .map((filename) => stripRepeatedEditionHeader(readFileSync(manuscriptPath(book, filename), 'utf8'), book))
     .join('\n\n')
+}
+
+// Split-file editions repeat the title, subtitle, author and rule at the top of
+// every source file. Those lines belong to the edition, not to the preceding
+// chapter, so normalize them before deriving the stable section views.
+function stripRepeatedEditionHeader(markdown: string, book: OpenBookEdition): string {
+  const lines = markdown.replace(/\r\n/g, '\n').split('\n')
+  if (lines[0]?.trim().toLowerCase() !== `# ${book.title}`.toLowerCase()) return markdown.trim()
+
+  lines.shift()
+  while (lines[0]?.trim() === '') lines.shift()
+  if (lines[0]?.trim() === `*${book.subtitle}*`) lines.shift()
+  while (lines[0]?.trim() === '') lines.shift()
+  if (/^\*\*Mayone(?: Maha)? Rajan\*\*$/.test(lines[0]?.trim() ?? '')) lines.shift()
+  while (lines[0]?.trim() === '') lines.shift()
+  if (/^-{3,}$/.test(lines[0]?.trim() ?? '')) lines.shift()
+  const normalized = lines.join('\n').trim()
+  return book.slug === 'the-volcanic-engine'
+    ? normalized.replace(/^# Part [IVXLCDM]+ — .+\n+/gm, '').trim()
+    : normalized
 }
 
 export function getOpenBookSection(book: OpenBookEdition, slug: string): { section: OpenBookSection; markdown: string } | null {

@@ -167,6 +167,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${baseUrl}/books/the-imagined-life/the-faculty-of-the-possible`, lastModified: new Date('2026-07-16') },
     { url: `${baseUrl}/books/the-imagined-life/what-happens-when-you-sleep`, lastModified: new Date('2026-07-16') },
     { url: `${baseUrl}/books/the-imagined-life/sleep-stages-explained`, lastModified: new Date('2026-07-22') },
+    { url: `${baseUrl}/books/the-volcanic-engine`, lastModified: new Date('2026-08-24') },
+    { url: `${baseUrl}/books/the-volcanic-engine/why-volcanoes-explode`, lastModified: new Date('2026-08-24') },
+    { url: `${baseUrl}/books/the-volcanic-engine/is-yellowstone-overdue`, lastModified: new Date('2026-08-24') },
 
     // POLICY DIRECTIVES (Five Platform Seeds)
     { url: `${baseUrl}/policy/nutrient-density-standard`, lastModified: new Date('2026-06-02') },
@@ -404,10 +407,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${baseUrl}/books/the-unfinished-species/read`, lastModified: new Date('2026-07-22') },
     ...unfinishedSpeciesSections.map((section) => ({ url: `${baseUrl}/books/the-unfinished-species/read/${section.slug}`, lastModified: new Date('2026-07-22') })),
   ]
-  const otherOpenBookReaders = Object.values(openBookEditions).flatMap((book) => [
-    { url: `${baseUrl}/books/${book.slug}/read`, lastModified: new Date('2026-07-22') },
-    ...book.sections.map((section) => ({ url: `${baseUrl}/books/${book.slug}/read/${section.slug}`, lastModified: new Date('2026-07-22') })),
-  ])
+  const otherOpenBookReaders = Object.values(openBookEditions).flatMap((book) => {
+    const lastModified = new Date(book.slug === 'the-volcanic-engine' ? '2026-08-24' : '2026-07-22')
+    return [
+      { url: `${baseUrl}/books/${book.slug}/read`, lastModified },
+      ...book.sections.map((section) => ({ url: `${baseUrl}/books/${book.slug}/read/${section.slug}`, lastModified })),
+    ]
+  })
   const knowledgePages = KNOWLEDGE_ARTICLES.map((article) => ({
     url: `${baseUrl}${knowledgeArticlePath(article)}`,
     lastModified: new Date(article.dateModified),

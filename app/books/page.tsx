@@ -6,25 +6,34 @@ const SITE_URL = 'https://www.mahastrategies.com'
 export const metadata: Metadata = {
   title: 'Books & Essays | Maha Strategies',
   description:
-    'Open web editions by Mayone Maha Rajan on artificial intelligence, self-regulation, evolution, dreaming, relationship, and the human future.',
+    'Open web editions by Mayone Maha Rajan on artificial intelligence, self-regulation, evolution, dreaming, relationship, planetary systems, and the human future.',
   alternates: { canonical: '/books' },
   openGraph: {
     type: 'website',
     url: `${SITE_URL}/books`,
     title: 'Books & Essays | Maha Strategies',
-    description: 'Five complete open web editions by Mayone Maha Rajan, with guides and essays.',
+    description: 'Six complete open web editions by Mayone Maha Rajan, with guides and essays.',
     images: [{ url: '/og-master.png', width: 1200, height: 630, alt: 'Books & Essays — Maha Strategies' }],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Books & Essays | Maha Strategies',
-    description: 'Five open web editions by Mayone Maha Rajan.',
+    description: 'Six open web editions by Mayone Maha Rajan.',
     images: ['/og-master.png'],
     creator: '@mayonemaha',
   },
 }
 
 const books = [
+  {
+    title: 'The Volcanic Engine',
+    subtitle: 'Living on a Firing Planet',
+    description: 'A research edition about the engine beneath the surface: eruption, warning, climate, habitability, and human life on volcanic ground.',
+    href: '/books/the-volcanic-engine',
+    readHref: '/books/the-volcanic-engine/read',
+    guide: { title: 'Why Do Volcanoes Explode?', href: '/books/the-volcanic-engine/why-volcanoes-explode' },
+    chapter: { title: 'The Rock That Flows', href: '/books/the-volcanic-engine/read/the-rock-that-flows' },
+  },
   {
     title: 'The Borrowed Light',
     subtitle: 'The Physics of a Self Made With Others',
@@ -80,8 +89,8 @@ export default function BooksPage() {
           <p className="evidence-kicker">[ Maha Strategies // Open Editions ]</p>
           <h1 className="evidence-title evidence-title--product mt-5">Books &amp; essays</h1>
           <p className="evidence-lede mt-7">
-            Five works about the systems that shape a person: intelligence, attention, evolution, imagination,
-            relationship, and the choices that follow from them.
+            Six works about the systems that shape a person and a world: intelligence, attention, evolution,
+            imagination, relationship, planetary process, and the choices that follow from them.
           </p>
           <p className="evidence-copy mt-5">
             Each open edition includes the complete manuscript, stable chapter links, and companion essays where available.
