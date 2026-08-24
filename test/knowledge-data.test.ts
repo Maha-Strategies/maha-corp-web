@@ -8,14 +8,34 @@ import {
   knowledgeArticlePath,
 } from '../lib/knowledge-data.ts'
 
-test('knowledge library publishes 25 foundational lifecycle explainers', () => {
-  assert.equal(KNOWLEDGE_ARTICLES.length, 25)
+test('knowledge library publishes 25 foundational explainers and 24 equipment classes', () => {
+  assert.equal(KNOWLEDGE_ARTICLES.length, 49)
+  assert.equal(KNOWLEDGE_ARTICLES.filter((article) => article.kind === 'equipment').length, 24)
 
   for (const stage of SEMICONDUCTOR_STAGES) {
     assert.ok(
       KNOWLEDGE_ARTICLES.some((article) => article.stageIds.includes(stage)),
       `${stage} needs at least one explainer`,
     )
+  }
+})
+
+test('equipment records cover the lifecycle and expose qualification boundaries', () => {
+  const equipment = KNOWLEDGE_ARTICLES.filter((article) => article.kind === 'equipment')
+
+  for (const stage of SEMICONDUCTOR_STAGES) {
+    assert.ok(
+      equipment.some((article) => article.stageIds.includes(stage)),
+      `${stage} needs at least one equipment class`,
+    )
+  }
+
+  for (const article of equipment) {
+    assert.ok(article.inputs.length >= 4, `${article.id} needs declared inputs`)
+    assert.ok(article.outputs.length >= 2, `${article.id} needs declared outputs`)
+    assert.ok(article.metrology.length >= 5, `${article.id} needs control and qualification measurements`)
+    assert.ok(article.equipment.length >= 5, `${article.id} needs named subassemblies`)
+    assert.ok(article.claims.every((claim) => claim.boundary), `${article.id} needs claim boundaries`)
   }
 })
 

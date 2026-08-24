@@ -1,5 +1,6 @@
 import { SITE_URL } from './briefs-data.ts'
 import { assertClaimEvidence, requiresBoundary, type ClaimEvidence } from './claim-evidence.ts'
+import { SEMICONDUCTOR_EQUIPMENT_ARTICLES } from './semiconductor-equipment.ts'
 
 export const KNOWLEDGE_BASE_URL = `${SITE_URL}/knowledge`
 
@@ -131,11 +132,19 @@ export const KNOWLEDGE_SOURCES: KnowledgeSource[] = [
   { id: 'tsmc-direct-cooling', title: 'Ultra High Power Cooling Solution for 3D-ICs', publisher: 'TSMC Research', url: 'https://research.tsmc.com/english/research/interconnect/off-chip-interconnect/publish-time-1.html', year: 2021, sourceType: 'official-technical', accessed: '2026-08-13' },
   { id: 'dow-elecpure', title: 'DOWANOL ELECPURE PM 1 Glycol Ether', publisher: 'Dow', url: 'https://www.dow.com/en-us/pdp.dowanol-elecpure-pm-1-glycol-ether.531279z.html', sourceType: 'official-technical', accessed: '2026-08-13' },
   { id: 'ppg-copper-study', title: 'Degradation of poly(ethylene glycol–propylene glycol) copolymer and its influences on copper electrodeposition', publisher: 'Journal of Electroanalytical Chemistry', url: 'https://doi.org/10.1016/j.jelechem.2013.12.023', year: 2014, sourceType: 'research-paper', accessed: '2026-08-13' },
+  { id: 'asml-duv-systems', title: 'DUV Lithography Systems', publisher: 'ASML', url: 'https://www.asml.com/en/products/duv-lithography-systems', sourceType: 'official-technical', accessed: '2026-08-24' },
+  { id: 'asml-euv-systems', title: 'EUV Lithography Systems', publisher: 'ASML', url: 'https://www.asml.com/en/products/euv-lithography-systems', sourceType: 'official-technical', accessed: '2026-08-24' },
+  { id: 'applied-product-portfolio', title: 'Semiconductor Products', publisher: 'Applied Materials', url: 'https://www.appliedmaterials.com/us/en/semiconductor/products.html', sourceType: 'official-technical', accessed: '2026-08-24' },
+  { id: 'lam-process-portfolio', title: 'Our Processes', publisher: 'Lam Research', url: 'https://www.lamresearch.com/products/our-processes/', sourceType: 'official-technical', accessed: '2026-08-24' },
+  { id: 'jeol-electron-beam-lithography', title: 'Electron Beam Lithography System', publisher: 'JEOL', url: 'https://www.jeol.com/products/semiconductor/ebx/', sourceType: 'official-technical', accessed: '2026-08-24' },
+  { id: 'disco-equipment-portfolio', title: 'Product and Technology Information', publisher: 'DISCO', url: 'https://www.disco.co.jp/eg/technology/index.html', sourceType: 'official-technical', accessed: '2026-08-24' },
+  { id: 'advantest-product-portfolio', title: 'Products and Solutions', publisher: 'Advantest', url: 'https://www.advantest.com/en/products/', sourceType: 'official-technical', accessed: '2026-08-24' },
+  { id: 'besi-assembly-portfolio', title: 'Products and Services', publisher: 'Besi', url: 'https://www.besi.com/company/company-profile/products-services/', sourceType: 'official-technical', accessed: '2026-08-24' },
 ]
 
 const sharedDate = '2026-08-13'
 
-export const KNOWLEDGE_ARTICLES: KnowledgeArticle[] = [
+const FOUNDATIONAL_KNOWLEDGE_ARTICLES: KnowledgeArticle[] = [
   {
     id: 'domain-semiconductor-manufacturing', kind: 'domain', slug: 'semiconductor-manufacturing',
     title: 'How Semiconductors Are Made: The Complete Design-to-Package Process', shortTitle: 'Semiconductor manufacturing',
@@ -649,6 +658,11 @@ export const KNOWLEDGE_ARTICLES: KnowledgeArticle[] = [
     ],
     sourceIds: ['tsmc-quality', 'jedec-home'], relatedArticleIds: ['process-final-burn-in-system-test', 'process-encapsulation-underfill-molding', 'process-advanced-packaging'], intelligenceSlugs: ['known-good-die-storage-yield', 'smartphone-ap-advanced-packaging'],
   },
+]
+
+export const KNOWLEDGE_ARTICLES: KnowledgeArticle[] = [
+  ...FOUNDATIONAL_KNOWLEDGE_ARTICLES,
+  ...SEMICONDUCTOR_EQUIPMENT_ARTICLES,
 ]
 
 const SOURCE_MAP = new Map(KNOWLEDGE_SOURCES.map((source) => [source.id, source]))

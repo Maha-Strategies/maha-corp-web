@@ -29,13 +29,13 @@ test('five adapters preserve every core legacy record and fail closed', () => {
   assert.equal(LEGACY_EPISTEMIC_ADAPTERS.length, 5)
   assert.deepEqual(EPISTEMIC_MIGRATION_INVENTORY.counts, {
     adapters: 5,
-    sourceRecords: 110,
+    sourceRecords: 134,
     publicEligible: 0,
-    withheld: 110,
+    withheld: 134,
   })
   assert.deepEqual(
     EPISTEMIC_MIGRATION_INVENTORY.adapters.map((adapter) => [adapter.id, adapter.counts.sourceRecords]),
-    [['semiconductor', 25], ['mathematics', 24], ['astronomy', 23], ['religion', 18], ['neuromorphic-biocomputing', 20]],
+    [['semiconductor', 49], ['mathematics', 24], ['astronomy', 23], ['religion', 18], ['neuromorphic-biocomputing', 20]],
   )
   for (const candidate of ADAPTED_EPISTEMIC_CANDIDATES) {
     assert.equal(candidate.gateDecision.publicEligible, false)
@@ -55,11 +55,11 @@ test('adapter output hashes are deterministic while ingestion batches remain app
   const parsed = parseEpistemicIngestionRequest({ adapterId: 'semiconductor', idempotencyKey: 'semiconductor-import-001' })
   const first = buildEpistemicIngestionBatch(parsed, new Date('2026-08-24T05:00:00.000Z'))
   const second = buildEpistemicIngestionBatch(parsed, new Date('2026-08-24T05:00:00.000Z'))
-  assert.equal(first.recordCount, 25)
+  assert.equal(first.recordCount, 49)
   assert.notEqual(first.batchId, second.batchId)
   assert.notEqual(first.batchSha256, second.batchSha256)
   assert.equal(first.records[0].candidateSha256, second.records[0].candidateSha256)
-  assert.equal(ingestionBatchSnapshot(first).records.length, 25)
+  assert.equal(ingestionBatchSnapshot(first).records.length, 49)
   assert.throws(() => parseEpistemicIngestionRequest({ adapterId: 'unknown', idempotencyKey: 'long-enough' }), /unsupported/)
 })
 
