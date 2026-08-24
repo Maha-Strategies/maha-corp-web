@@ -54,6 +54,13 @@ test('source-completion projection preserves exact blockers and excludes release
   assert.ok(queue.some((item) => item.blockers.some((blocker) => blocker.code.startsWith('source-locator-missing:'))))
 })
 
+test('source-completion projection exposes declared source alignment as an evidence-bound blocker', () => {
+  const frozen = target()
+  const candidate = ADAPTED_EPISTEMIC_CANDIDATES[0]
+  const [item] = buildSourceCompletionQueue([{ ...frozen, candidateSnapshot: candidate.record }], [])
+  assert.ok(item.blockers.some((blocker) => blocker.code.startsWith('source-claim-alignment-mismatch:')))
+})
+
 test('append-only source workflow enforces transitions and evidence coverage', () => {
   const frozen = target()
   const blocker = frozen.gateDecision.reasons.find((reason) => queueLaneForReason(reason) === 'source-completion')!

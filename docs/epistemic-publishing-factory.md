@@ -15,6 +15,10 @@ Each reviewer packet binds:
 
 Automated audits can block or flag a packet. They cannot approve one, satisfy an expert-review scope, or establish that a source is accurately interpreted.
 
+Declared source-to-claim mismatches are projected back into the source-completion queue as `source-claim-alignment-mismatch:<source-id>`. The controlled compiler can resolve one only from a bound evidence event: refine the source's stated scope, replace the source while explicitly remapping every linked claim, or split a multi-claim source by retaining its bounded claims and moving a declared subset to a newly evidenced source. The resulting hash is a fresh noncanonical target with all review scopes reset to `unreviewed`.
+
+The first Phase 5 alignment package repairs the two mismatches deliberately preserved by the Phase 4 pilot: it separates ion-implant equipment evidence from anneal and thermal-budget evidence, and replaces an instrument-calibration handbook citation with a peer-reviewed probabilistic-calibration source. `npm run operate:epistemic-phase5-alignment` is dry-run by default; `-- --apply` operates only those exact current queue targets and fails closed on blocker or target drift.
+
 ## Phase 6 — bounded batch operation
 
 One run accepts 1–500 current targets. It fails closed on duplicate records, hash drift, stale revisions, promoted records, or a record snapshot that differs from the durable ingestion ledger. Runs, audits, and packets are append-only Supabase records inserted only through the `record_epistemic_factory_run` security-definer function.

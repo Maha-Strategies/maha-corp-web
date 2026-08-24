@@ -127,7 +127,7 @@ export default function EpistemicSystemPage() {
           </div>
           <div className="evidence-status-surface evidence-status-surface--sourced mt-6">
             <p className="evidence-status-label">Controlled re-ingestion compiler</p>
-            <p className="evidence-copy mt-2">A ready target can now become a new immutable revision through a restricted compiler. The server derives each editable field from an exact blocker, verifies its prior evidence event, emits a before/after diff, assigns new candidate and review digests, clears earlier review events, and resets publication controls to draft. Arbitrary JSON patches and automatic promotion are not supported.</p>
+            <p className="evidence-copy mt-2">A ready target can now become a new immutable revision through a restricted compiler. The server derives each editable field from an exact blocker, verifies its prior evidence event, emits a before/after diff, assigns new candidate and review digests, clears earlier review events, and resets publication controls to draft. Declared source-to-claim mismatches can be refined, replaced, or split only through a typed, evidence-bound alignment correction with explicit claim remapping. Arbitrary JSON patches and automatic promotion are not supported.</p>
           </div>
         </section>
 

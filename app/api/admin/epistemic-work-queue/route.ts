@@ -13,6 +13,7 @@ import {
   buildSourceCompletionQueue,
   EPISTEMIC_WORK_QUEUE_BOUNDARY,
   parseSourceCompletionEvent,
+  sourceCompletionReasons,
   type EpistemicQueueTarget,
 } from '@/lib/epistemic-work-queue'
 
@@ -51,6 +52,7 @@ function queueTarget(target: Awaited<ReturnType<typeof listEpistemicReviewTarget
       publicEligible: decision.publicEligible === true,
       reasons: Array.isArray(decision.reasons) ? decision.reasons : [],
     },
+    candidateSnapshot: target.candidateSnapshot,
     reviewProgress: buildExpertReviewProgress(target.candidateSnapshot, reviews),
   }
 }
@@ -103,9 +105,12 @@ export async function POST(request: Request) {
       listEpistemicSourceCompletionEvents(client),
     ])
     const target = targets.find((candidate) => candidate.recordId === parsed.recordId && candidate.reviewTargetSha256 === parsed.targetSha256)
-    if (!target) return json({ error: { code: 'not_found', message: 'The frozen ingestion target was not found.' } }, 404)
+    if (!target?.candidateSnapshot || !target.domainSlug || !target.title) return json({ error: { code: 'not_found', message: 'The frozen ingestion target was not found.' } }, 404)
     const decision = target.gateDecision as { reasons?: string[] }
-    const event = buildSourceCompletionEvent(parsed, events, Array.isArray(decision.reasons) ? decision.reasons : [])
+    const event = buildSourceCompletionEvent(parsed, events, sourceCompletionReasons({
+      gateDecision: { publicEligible: false, reasons: Array.isArray(decision.reasons) ? decision.reasons : [] },
+      candidateSnapshot: target.candidateSnapshot,
+    }))
     const persistence = await insertEpistemicSourceCompletionEvent(client, event, parsed.idempotencyKey, authorization.actorFingerprint)
     return json({ event, persistence, queue: await readQueue(client), autoPublicationSupported: false }, persistence.idempotentReplay ? 200 : 201)
   } catch (error) {

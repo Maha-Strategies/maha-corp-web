@@ -71,6 +71,9 @@ version covers every correctable blocker present in the 110-record corpus:
 - `source-locator-missing:*` → the named source's exact locator
 - `source-publication-date-missing:*` → the named source's publication date
 - `claim-evidence-not-assessed:*` → the named claim's evidence maturity
+- `source-claim-alignment-mismatch:*` → evidence-bound scope refinement,
+  complete source replacement with every linked claim explicitly remapped, or
+  a bounded split that retains some claims and remaps a declared subset
 
 Each correction must reference a prior `submit-evidence` event on the same
 record and target hash. The caller cannot supply the field path or old value;
@@ -91,6 +94,13 @@ plus the date it was inspected and an optional source version. The compiler
 accepts that chronology only when it is bound to the original date blocker and
 its submitted evidence event. An access date is never written into
 `publishedAt`.
+
+An alignment correction is also typed rather than arbitrary. `refine` changes
+only the existing source's `establishes` and `boundary` fields while retaining
+its URL. `replace` requires a complete replacement source and the exact set of
+claim IDs that referenced the displaced source. Both forms must match the
+submitted evidence URL, create a new target hash, clear prior reviews, and
+remain noncanonical until every required expert scope is independently met.
 
 ## Phase 3 canonical release control
 
