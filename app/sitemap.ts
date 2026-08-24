@@ -19,6 +19,7 @@ import { RELIGION_COMPARISONS, RELIGION_COMPARISONS_PATH, RELIGION_CONCEPTS, REL
 import { NEUROMORPHIC_COMPARISONS, NEUROMORPHIC_COMPARISONS_PATH, NEUROMORPHIC_CONCEPTS, NEUROMORPHIC_PATH, NEUROMORPHIC_RELEASE_DATE, neuromorphicComparisonPath, neuromorphicConceptPath } from '@/lib/neuromorphic-biocomputing'
 import { EPISTEMIC_DOMAINS, EPISTEMIC_RELEASE_DATE, EPISTEMIC_SYSTEM_PATH, PUBLIC_EPISTEMIC_RECORDS } from '@/lib/epistemic-pilots'
 import { epistemicRecordPath } from '@/lib/epistemic-publication'
+import { getActiveEpistemicCanonicalReleases } from '@/lib/public-epistemic-releases'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = MAHA_SITE_URL
@@ -61,6 +62,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...NEUROMORPHIC_COMPARISONS.map((comparison) => ({ url: `${baseUrl}${neuromorphicComparisonPath(comparison)}`, lastModified: new Date(NEUROMORPHIC_RELEASE_DATE) })),
     { url: `${baseUrl}${EPISTEMIC_SYSTEM_PATH}`, lastModified: new Date(EPISTEMIC_RELEASE_DATE) },
     { url: `${baseUrl}${EPISTEMIC_SYSTEM_PATH}/migrations`, lastModified: new Date(EPISTEMIC_RELEASE_DATE) },
+    { url: `${baseUrl}${EPISTEMIC_SYSTEM_PATH}/releases`, lastModified: new Date(EPISTEMIC_RELEASE_DATE) },
     ...EPISTEMIC_DOMAINS.map((domain) => ({ url: `${baseUrl}/knowledge/${domain.slug}`, lastModified: new Date(EPISTEMIC_RELEASE_DATE) })),
     ...PUBLIC_EPISTEMIC_RECORDS.map((record) => ({ url: `${baseUrl}${epistemicRecordPath(record)}`, lastModified: new Date(EPISTEMIC_RELEASE_DATE) })),
     { url: `${baseUrl}${ASTROLOGY_PATH}`, lastModified: new Date(ASTROLOGY_RELEASE_DATE) },
@@ -402,7 +404,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       lastModified: new Date('2026-07-15'),
     },
   ]
-  const published = await getPublicContentPublicationSitemapRows()
+  const [published, canonicalReleases] = await Promise.all([
+    getPublicContentPublicationSitemapRows(),
+    getActiveEpistemicCanonicalReleases(),
+  ])
   const unfinishedSpeciesReader = [
     { url: `${baseUrl}/books/the-unfinished-species/read`, lastModified: new Date('2026-07-22') },
     ...unfinishedSpeciesSections.map((section) => ({ url: `${baseUrl}/books/the-unfinished-species/read/${section.slug}`, lastModified: new Date('2026-07-22') })),
@@ -432,5 +437,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     lastModified: new Date(ASTROLOGY_RELEASE_DATE),
   }))
 
-  return [...staticPages, ...knowledgePages, ...astronomyKnowledgePages, ...astrologyTraditionPages, ...knowledgeSupplierPages, ...unfinishedSpeciesReader, ...otherOpenBookReaders, ...published.map((publication) => ({ url: `${baseUrl}/insights/${publication.slug}`, lastModified: new Date(publication.updated_at) }))]
+  const staticEpistemicPaths = new Set(PUBLIC_EPISTEMIC_RECORDS.map(epistemicRecordPath))
+  const canonicalReleasePages = canonicalReleases
+    .filter((release) => !staticEpistemicPaths.has(release.canonicalPath))
+    .map((release) => ({ url: `${baseUrl}${release.canonicalPath}`, lastModified: new Date(release.releasedAt) }))
+
+  return [...staticPages, ...knowledgePages, ...astronomyKnowledgePages, ...astrologyTraditionPages, ...knowledgeSupplierPages, ...unfinishedSpeciesReader, ...otherOpenBookReaders, ...canonicalReleasePages, ...published.map((publication) => ({ url: `${baseUrl}/insights/${publication.slug}`, lastModified: new Date(publication.updated_at) }))]
 }

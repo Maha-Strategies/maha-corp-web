@@ -14,6 +14,12 @@ import {
 } from './epistemic-review.ts'
 import type { ControlledReingestionCompilation } from './epistemic-reingestion.ts'
 import {
+  type EpistemicCanonicalRelease,
+  type EpistemicReleaseWithdrawal,
+  type ReleaseAuthoritySnapshot,
+} from './epistemic-release.ts'
+import { sha256Canonical } from './epistemic-publication.ts'
+import {
   sourceCompletionIdempotencyHash,
   type SourceCompletionEvent,
 } from './epistemic-work-queue.ts'
@@ -188,4 +194,56 @@ export async function listEpistemicSourceCompletionEvents(client: SupabaseClient
     .limit(2_000)
   if (error) throw new Error(`Epistemic source-completion event read failed: ${error.message}`)
   return (data ?? []).map((row) => row.event_snapshot as SourceCompletionEvent)
+}
+
+export async function insertEpistemicCanonicalRelease(
+  client: SupabaseClient,
+  release: EpistemicCanonicalRelease,
+  idempotencyKey: string,
+  actorFingerprint: string,
+) {
+  const { data, error } = await client.rpc('record_epistemic_canonical_release', {
+    p_release: release,
+    p_authority_sha256: sha256Canonical(release.authority satisfies ReleaseAuthoritySnapshot),
+    p_idempotency_hash: epistemicOperationsHash(idempotencyKey),
+    p_actor_fingerprint: actorFingerprint,
+  })
+  if (error) throw new Error(`Epistemic canonical release failed [${error.code ?? 'unknown'}]: ${error.message}`)
+  return data as { releaseId: string; canonicalPath: string; idempotentReplay: boolean }
+}
+
+export async function insertEpistemicReleaseWithdrawal(
+  client: SupabaseClient,
+  withdrawal: EpistemicReleaseWithdrawal,
+  idempotencyKey: string,
+  actorFingerprint: string,
+) {
+  const { data, error } = await client.rpc('record_epistemic_release_withdrawal', {
+    p_withdrawal: withdrawal,
+    p_authority_sha256: sha256Canonical(withdrawal.authority satisfies ReleaseAuthoritySnapshot),
+    p_idempotency_hash: epistemicOperationsHash(idempotencyKey),
+    p_actor_fingerprint: actorFingerprint,
+  })
+  if (error) throw new Error(`Epistemic release withdrawal failed [${error.code ?? 'unknown'}]: ${error.message}`)
+  return data as { withdrawalId: string; releaseId: string; idempotentReplay: boolean }
+}
+
+export async function listEpistemicCanonicalReleases(client: SupabaseClient): Promise<EpistemicCanonicalRelease[]> {
+  const { data, error } = await client
+    .from('epistemic_canonical_releases')
+    .select('release_snapshot')
+    .order('released_at', { ascending: false })
+    .limit(1_000)
+  if (error) throw new Error(`Epistemic canonical release read failed: ${error.message}`)
+  return (data ?? []).map((row) => row.release_snapshot as EpistemicCanonicalRelease)
+}
+
+export async function listEpistemicReleaseWithdrawals(client: SupabaseClient): Promise<EpistemicReleaseWithdrawal[]> {
+  const { data, error } = await client
+    .from('epistemic_release_withdrawals')
+    .select('withdrawal_snapshot')
+    .order('withdrawn_at', { ascending: false })
+    .limit(1_000)
+  if (error) throw new Error(`Epistemic release withdrawal read failed: ${error.message}`)
+  return (data ?? []).map((row) => row.withdrawal_snapshot as EpistemicReleaseWithdrawal)
 }
