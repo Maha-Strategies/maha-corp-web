@@ -1,0 +1,46 @@
+name: Production epistemic canary
+
+on:
+  workflow_dispatch:
+    inputs:
+      operation:
+        description: Readiness only, or publish the six reviewed canaries
+        required: true
+        default: readiness
+        type: choice
+        options:
+          - readiness
+          - publish
+      confirmation:
+        description: Type PROMOTE_6_CANARIES when operation is publish
+        required: false
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: production-epistemic-canary
+  cancel-in-progress: false
+
+jobs:
+  canary:
+    runs-on: ubuntu-latest
+    environment: production-database
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Verify confirmation
+        if: inputs.operation == 'publish'
+        env:
+          CONFIRMATION: ${{ inputs.confirmation }}
+        run: test "$CONFIRMATION" = "PROMOTE_6_CANARIES"
+      - name: Run production canary
+        env:
+          EPISTEMIC_OPERATIONS_TOKEN: ${{ secrets.EPISTEMIC_OPERATIONS_TOKEN }}
+          EPISTEMIC_RELEASE_AUTHORITY_TOKEN: ${{ secrets.EPISTEMIC_RELEASE_AUTHORITY_TOKEN }}
+          EPISTEMIC_CANARY_CONFIRM: ${{ inputs.confirmation }}
+        run: node --experimental-strip-types scripts/run-production-epistemic-canary.ts ${{ inputs.operation == 'publish' && '--publish' || '' }}
