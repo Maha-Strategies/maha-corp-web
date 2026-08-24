@@ -24,7 +24,7 @@ const root = new URL('../', import.meta.url)
 
 test('multi-axis pilot records retain separate claim, evidence, and review states', () => {
   assert.equal(EPISTEMIC_DOMAINS.length, 2)
-  assert.equal(EPISTEMIC_RECORDS.length, 4)
+  assert.equal(EPISTEMIC_RECORDS.length, 50)
   assert.equal(PUBLIC_EPISTEMIC_RECORDS.length, 2)
 
   for (const record of PUBLIC_EPISTEMIC_RECORDS) {
@@ -45,7 +45,7 @@ test('multi-axis pilot records retain separate claim, evidence, and review state
 
 test('draft graph records are withheld instead of becoming thin public pages', () => {
   const withheld = EPISTEMIC_RECORDS.filter((record) => !evaluatePublicationGate(record).publicEligible)
-  assert.equal(withheld.length, 2)
+  assert.equal(withheld.length, 48)
   for (const record of withheld) {
     const decision = evaluatePublicationGate(record)
     assert.ok(decision.reasons.includes('public-promotion-not-requested'))
@@ -55,11 +55,57 @@ test('draft graph records are withheld instead of becoming thin public pages', (
 
   for (const domain of EPISTEMIC_DOMAINS) {
     const registry = buildDomainRegistry(domain.slug)
-    assert.equal(registry?.counts.graphRecords, 2)
+    assert.equal(registry?.counts.graphRecords, 25)
+    assert.ok((registry?.counts.graphEdges ?? 0) >= 30)
     assert.equal(registry?.counts.publicCanonicalRecords, 1)
-    assert.equal(registry?.counts.withheldRecords, 1)
+    assert.equal(registry?.counts.withheldRecords, 24)
     const hidden = registry?.records.find((record) => 'withheld' in record && record.withheld)
     assert.equal(hidden && 'canonicalPath' in hidden ? hidden.canonicalPath : 'unexpected', null)
+  }
+})
+
+test('expanded pilot trees contain source-bound concepts, processes, measurements, and comparisons', () => {
+  const candidates = EPISTEMIC_RECORDS.filter((record) => record.publication.requiredReviewScopes?.length)
+  assert.equal(candidates.length, 46)
+
+  for (const candidate of candidates) {
+    assert.equal(candidate.publication.reviewState, 'draft')
+    assert.equal(candidate.publication.requestedPublicPromotion, false)
+    assert.deepEqual(candidate.publication.requiredReviewScopes, [
+      'source-fidelity',
+      'domain-fidelity',
+      'boundary-adequacy',
+      'rights-and-locator',
+    ])
+    assert.equal(candidate.publication.reviewEvents.length, 0)
+    assert.equal(candidate.claims.length, 1)
+    assert.equal(candidate.sources.length, 1)
+    assert.equal(candidate.sections.length, 2)
+    assert.ok(candidate.boundaries.length >= 2)
+    assert.ok(candidate.prohibitedInferences.length >= 2)
+    assert.deepEqual(evaluatePublicationGate(candidate).reasons, [
+      'public-promotion-not-requested',
+      'review-state-not-canonical',
+      'publication-date-missing',
+      'approval-review-missing',
+      'expert-review-missing:source-fidelity',
+      'expert-review-missing:domain-fidelity',
+      'expert-review-missing:boundary-adequacy',
+      'expert-review-missing:rights-and-locator',
+    ])
+  }
+
+  const allIds = new Set(EPISTEMIC_RECORDS.map((record) => record.id))
+  for (const domain of EPISTEMIC_DOMAINS) {
+    const records = EPISTEMIC_RECORDS.filter((record) => record.domainSlug === domain.slug)
+    const substantive = records.filter((record) => record.recordKind !== 'hypothesis')
+    assert.equal(substantive.length, 24)
+    for (const requiredKind of ['concept', 'mechanism', 'method', 'measurement', 'comparison']) {
+      assert.ok(substantive.some((record) => record.recordKind === requiredKind), `${domain.slug} lacks ${requiredKind}`)
+    }
+    const bridges = records.flatMap((record) => record.bridges)
+    assert.ok(bridges.length >= 30)
+    assert.ok(bridges.every((bridge) => allIds.has(bridge.targetConceptId)))
   }
 })
 
@@ -135,7 +181,7 @@ test('Phase 1 routes are static, canonical, Cyber-light scoped, and discoverable
   ].map((path) => readFile(new URL(path, root), 'utf8')))
 
   assert.match(system, /The public page is the result of a passed gate/)
-  assert.match(domain, /Withheld records remain non-pages/)
+  assert.match(domain, /The candidate graph is visible/)
   assert.match(record, /Every proposition keeps its own evidence state/)
   for (const dynamicRoute of [domain, record, registry, provenance]) assert.match(dynamicRoute, /generateStaticParams/)
   assert.match(record, /alternates: \{ canonical: path \}/)

@@ -39,6 +39,8 @@ export default async function EpistemicDomainPage({ params }: PageProps) {
   const graphRecords = getDomainRecords(domain.slug)
   const publicRecords = getPublicDomainRecords(domain.slug)
   const withheld = graphRecords.filter((record) => !evaluatePublicationGate(record).publicEligible)
+  const withheldKinds = [...new Set(withheld.map((record) => record.recordKind))]
+  const graphEdges = graphRecords.reduce((count, record) => count + record.bridges.length, 0)
   const registry = buildDomainRegistry(domain.slug)
   const path = `/knowledge/${domain.slug}`
   const jsonLd = {
@@ -82,12 +84,33 @@ export default async function EpistemicDomainPage({ params }: PageProps) {
 
         <section className="evidence-section" aria-labelledby="withheld-heading">
           <p className="evidence-kicker text-[var(--status-boundary)]">Below the public line</p>
-          <h2 id="withheld-heading" className="evidence-section-title mt-3">Withheld records remain non-pages.</h2>
-          <p className="evidence-copy mt-5">The registry records that these candidates exist and why they failed. It does not expose an unsupported claim body or generate a crawlable URL.</p>
-          <div className="mt-7 space-y-4">
-            {withheld.map((record) => {
-              const decision = evaluatePublicationGate(record)
-              return <article key={record.id} className="evidence-status-surface evidence-status-surface--boundary"><div className="flex flex-wrap items-baseline justify-between gap-3"><h3 className="font-editorial text-xl text-[var(--text-primary)]">{record.title}</h3><span className="evidence-chip evidence-chip--boundary">{record.publication.reviewState}</span></div><p className="evidence-card-copy mt-3">{record.summary}</p><p className="evidence-kicker mt-4">Gate: {decision.reasons.join(' · ')}</p></article>
+          <h2 id="withheld-heading" className="evidence-section-title mt-3">The candidate graph is visible; its claim bodies remain non-pages.</h2>
+          <p className="evidence-copy mt-5">This topology shows what the domain compiler has prepared for review. Titles, record classes, and edge counts are inventory metadata—not canonical publication. Candidate claims and source packets remain behind the gate.</p>
+          <div className="mt-8 space-y-9">
+            {withheldKinds.map((recordKind) => {
+              const records = withheld.filter((record) => record.recordKind === recordKind)
+              return (
+                <section key={recordKind} aria-labelledby={`candidate-${recordKind}`}>
+                  <div className="flex flex-wrap items-end justify-between gap-3">
+                    <h3 id={`candidate-${recordKind}`} className="evidence-card-title capitalize">{recordKind.replaceAll('-', ' ')} records</h3>
+                    <span className="evidence-kicker">{records.length} nodes</span>
+                  </div>
+                  <div className="mt-4 grid gap-3 md:grid-cols-2 xl:grid-cols-3">
+                    {records.map((record) => {
+                      const decision = evaluatePublicationGate(record)
+                      return (
+                        <article key={record.id} className="evidence-status-surface evidence-status-surface--boundary">
+                          <div className="flex items-start justify-between gap-3">
+                            <h4 className="font-editorial text-lg text-[var(--text-primary)]">{record.title}</h4>
+                            <span className="evidence-chip evidence-chip--boundary">{record.publication.reviewState}</span>
+                          </div>
+                          <p className="evidence-kicker mt-4">{record.bridges.length} typed {record.bridges.length === 1 ? 'edge' : 'edges'} · {decision.reasons.length} gate checks open</p>
+                        </article>
+                      )
+                    })}
+                  </div>
+                </section>
+              )
             })}
           </div>
         </section>
@@ -95,8 +118,9 @@ export default async function EpistemicDomainPage({ params }: PageProps) {
         <section className="evidence-section" aria-labelledby="contract-heading">
           <p className="evidence-kicker">Domain contract</p>
           <h2 id="contract-heading" className="evidence-section-title mt-3">The registry exposes the boundary, not just the content.</h2>
-          <div className="mt-7 grid gap-4 sm:grid-cols-3">
+          <div className="mt-7 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
             <div className="evidence-card"><p className="evidence-kicker">Graph records</p><p className="mt-3 font-mono text-3xl">{registry?.counts.graphRecords}</p></div>
+            <div className="evidence-card"><p className="evidence-kicker">Typed edges</p><p className="mt-3 font-mono text-3xl">{graphEdges}</p></div>
             <div className="evidence-card"><p className="evidence-kicker text-[var(--status-verified)]">Public canonical</p><p className="mt-3 font-mono text-3xl text-[var(--status-verified)]">{registry?.counts.publicCanonicalRecords}</p></div>
             <div className="evidence-card"><p className="evidence-kicker text-[var(--status-boundary)]">Withheld</p><p className="mt-3 font-mono text-3xl text-[var(--status-boundary)]">{registry?.counts.withheldRecords}</p></div>
           </div>

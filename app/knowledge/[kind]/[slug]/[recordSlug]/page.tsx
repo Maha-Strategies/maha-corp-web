@@ -3,8 +3,8 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 
 import { MAHA_SITE_URL } from '@/lib/entity'
-import { PUBLIC_EPISTEMIC_RECORDS, getEpistemicDomain, getPublicEpistemicRecord } from '@/lib/epistemic-pilots'
-import { buildProvenanceBundle, epistemicProvenancePath, epistemicRecordPath, recordKindSegment } from '@/lib/epistemic-publication'
+import { PUBLIC_EPISTEMIC_RECORDS, getEpistemicDomain, getEpistemicRecordConnections, getPublicEpistemicRecord } from '@/lib/epistemic-pilots'
+import { buildProvenanceBundle, epistemicProvenancePath, epistemicRecordPath, evaluatePublicationGate, recordKindSegment } from '@/lib/epistemic-publication'
 import { getActiveEpistemicRecordByPath } from '@/lib/public-epistemic-releases'
 
 type PageProps = { params: Promise<{ kind: string; slug: string; recordSlug: string }> }
@@ -44,6 +44,7 @@ export default async function EpistemicRecordPage({ params }: PageProps) {
   }
   const path = epistemicRecordPath(record)
   const provenance = buildProvenanceBundle(record)
+  const connections = getEpistemicRecordConnections(record.id)
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'TechArticle',
@@ -79,6 +80,32 @@ export default async function EpistemicRecordPage({ params }: PageProps) {
                 {section.claimIds.length > 0 && <p className="evidence-kicker mt-5">Claims: {section.claimIds.join(' · ')}</p>}
               </section>
             ))}
+
+            {connections.length > 0 && (
+              <section className="evidence-section" aria-labelledby="connections-heading">
+                <p className="evidence-kicker">Connected domain graph</p>
+                <h2 id="connections-heading" className="evidence-section-title mt-3">Typed dependencies preserve publication state.</h2>
+                <p className="evidence-copy mt-5">A connection can be inspected here without promoting the connected candidate. Only independently canonical records receive public links and relation statements.</p>
+                <div className="mt-7 grid gap-4 md:grid-cols-2">
+                  {connections.map(({ direction, bridge, record: connected }) => {
+                    const publicEligible = evaluatePublicationGate(connected).publicEligible
+                    return (
+                      <article key={`${direction}:${bridge.id}`} className="evidence-card">
+                        <div className="flex flex-wrap justify-between gap-3">
+                          <span className="evidence-chip evidence-chip--sourced">{bridge.bridgeType.replaceAll('-', ' ')}</span>
+                          <span className={`evidence-chip ${publicEligible ? 'evidence-chip--verified' : 'evidence-chip--boundary'}`}>{publicEligible ? 'canonical' : 'withheld'}</span>
+                        </div>
+                        <h3 className="evidence-card-title mt-5">
+                          {publicEligible ? <Link href={epistemicRecordPath(connected)} className="evidence-link">{connected.title}</Link> : connected.title}
+                        </h3>
+                        <p className="evidence-kicker mt-4">{direction} connection · {connected.recordKind}</p>
+                        {publicEligible && <p className="evidence-card-copy mt-3">{bridge.statement}</p>}
+                      </article>
+                    )
+                  })}
+                </div>
+              </section>
+            )}
 
             <section className="evidence-section" aria-labelledby="claims-heading">
               <p className="evidence-kicker">Claim ledger</p>
