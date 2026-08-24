@@ -425,7 +425,7 @@ export default function IntelligenceGrid() {
             <TrackedLink
               href="/rapid-intelligence-brief"
               event="cta_intelligence_rapid_brief"
-              className={`${styles.action} inline-block w-auto`}
+              className={`${styles.action} ${styles.actionInline}`}
             >
               Need a focused answer in five days? Rapid Intelligence Brief &#8599;
             </TrackedLink>

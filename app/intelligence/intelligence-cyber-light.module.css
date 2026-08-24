@@ -204,6 +204,25 @@
   color: var(--intel-accent-strong);
 }
 
+.tileTitle {
+  color: var(--text-primary);
+  font-size: 0.875rem;
+  font-weight: 700;
+  line-height: 1.4;
+  transition: color 150ms ease;
+}
+
+.tile:hover .tileTitle {
+  color: var(--intel-accent-strong);
+}
+
+.tileCopy {
+  color: var(--text-secondary);
+  font-size: 0.75rem;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
 .cardBody {
   color: var(--text-secondary);
   font-size: 0.875rem;
@@ -479,6 +498,12 @@
   border-color: var(--intel-accent);
   background: var(--intel-accent-soft);
   color: var(--intel-accent-strong);
+}
+
+/* Inline variant: module CSS is unlayered and beats Tailwind's w-auto. */
+.actionInline {
+  display: inline-block;
+  width: auto;
 }
 
 .actionPrimary {

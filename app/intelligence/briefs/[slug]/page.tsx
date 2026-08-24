@@ -206,8 +206,8 @@ export default async function BriefPage(
                   {supportingKnowledge.map(({ article }) => (
                     <Link key={article!.id} href={knowledgeArticlePath(article!)} className={styles.tile}>
                       <span className={styles.category}>{KNOWLEDGE_KIND_META[article!.kind].label}</span>
-                      <span className={`${styles.cardTitle} mt-2 block text-sm`}>{article!.shortTitle} &rarr;</span>
-                      <span className={`${styles.cardBody} mt-2 block text-xs`}>{article!.description}</span>
+                      <span className={`${styles.tileTitle} mt-2 block`}>{article!.shortTitle} &rarr;</span>
+                      <span className={`${styles.tileCopy} mt-2 block`}>{article!.description}</span>
                     </Link>
                   ))}
                 </div>
@@ -216,7 +216,7 @@ export default async function BriefPage(
                     <p className={styles.metaMuted}>Supplier capability context</p>
                     <div className="mt-3 flex flex-wrap gap-2">
                       {supportingSuppliers.map(({ supplier }) => (
-                        <Link key={supplier!.id} href={knowledgeSupplierPath(supplier!)} className={`${styles.action} inline-block w-auto`}>
+                        <Link key={supplier!.id} href={knowledgeSupplierPath(supplier!)} className={`${styles.action} ${styles.actionInline}`}>
                           {supplier!.name} &rarr;
                         </Link>
                       ))}

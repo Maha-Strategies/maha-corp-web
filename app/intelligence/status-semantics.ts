@@ -31,6 +31,7 @@ const STATUS_SEMANTICS: Record<string, IntelligenceSemantic> = {
   'STRUCTURAL SHIFT': 'illustrative',
   'BEHAVIORAL CAPTURE': 'illustrative',
   CRITICAL: 'unverified',
+  'CRITICAL PRIORITY': 'unverified',
 }
 
 /** Unknown statuses fall back to `boundary`: unclassified is a caution, not a claim. */
