@@ -12,6 +12,10 @@ import {
   type EpistemicExpertReview,
   type ExpertReviewerSnapshot,
 } from './epistemic-review.ts'
+import type {
+  EpistemicReviewInvitation,
+  EpistemicReviewInvitationEvent,
+} from './epistemic-review-invitation.ts'
 import type { ControlledReingestionCompilation } from './epistemic-reingestion.ts'
 import {
   type EpistemicCanonicalRelease,
@@ -169,6 +173,100 @@ export async function listEpistemicReviewerProfiles(client: SupabaseClient): Pro
     .limit(500)
   if (error) throw new Error(`Epistemic reviewer profile read failed: ${error.message}`)
   return (data ?? []).map((row) => row.profile_snapshot as ExpertReviewerSnapshot)
+}
+
+export async function insertEpistemicReviewerInvitation(
+  client: SupabaseClient,
+  invitation: EpistemicReviewInvitation,
+  idempotencyKey: string,
+  actorFingerprint: string,
+) {
+  const { data, error } = await client.rpc('record_epistemic_reviewer_invitation', {
+    p_invitation: invitation,
+    p_idempotency_hash: epistemicOperationsHash(idempotencyKey),
+    p_actor_fingerprint: actorFingerprint,
+  })
+  if (error) throw new Error(`Epistemic reviewer invitation failed [${error.code ?? 'unknown'}]: ${error.message}`)
+  return data as { invitationId: string; idempotentReplay: boolean }
+}
+
+export async function listEpistemicReviewerInvitations(client: SupabaseClient): Promise<EpistemicReviewInvitation[]> {
+  const { data, error } = await client
+    .from('epistemic_reviewer_invitations')
+    .select('invitation_snapshot')
+    .order('created_at', { ascending: false })
+    .limit(500)
+  if (error) throw new Error(`Epistemic reviewer invitation read failed: ${error.message}`)
+  return (data ?? []).map((row) => row.invitation_snapshot as EpistemicReviewInvitation)
+}
+
+export async function listEpistemicReviewerInvitationEvents(client: SupabaseClient): Promise<EpistemicReviewInvitationEvent[]> {
+  const { data, error } = await client
+    .from('epistemic_reviewer_invitation_events')
+    .select('event_snapshot')
+    .order('occurred_at', { ascending: false })
+    .limit(500)
+  if (error) throw new Error(`Epistemic reviewer invitation event read failed: ${error.message}`)
+  return (data ?? []).map((row) => row.event_snapshot as EpistemicReviewInvitationEvent)
+}
+
+export async function getEpistemicReviewerInvitationByTokenHash(
+  client: SupabaseClient,
+  tokenSha256: string,
+) {
+  const { data: invitationRow, error: invitationError } = await client
+    .from('epistemic_reviewer_invitations')
+    .select('invitation_snapshot')
+    .eq('token_sha256', tokenSha256)
+    .maybeSingle()
+  if (invitationError) throw new Error(`Epistemic reviewer invitation lookup failed: ${invitationError.message}`)
+  if (!invitationRow) return null
+  const invitation = invitationRow.invitation_snapshot as EpistemicReviewInvitation
+  const { data: eventRow, error: eventError } = await client
+    .from('epistemic_reviewer_invitation_events')
+    .select('event_snapshot')
+    .eq('invitation_id', invitation.invitationId)
+    .maybeSingle()
+  if (eventError) throw new Error(`Epistemic reviewer invitation event lookup failed: ${eventError.message}`)
+  return {
+    invitation,
+    event: eventRow?.event_snapshot as EpistemicReviewInvitationEvent | undefined,
+  }
+}
+
+export async function consumeEpistemicReviewerInvitation(
+  client: SupabaseClient,
+  tokenSha256: string,
+  review: EpistemicExpertReview,
+  idempotencyKey: string,
+  event: EpistemicReviewInvitationEvent,
+) {
+  const { data, error } = await client.rpc('consume_epistemic_reviewer_invitation', {
+    p_token_sha256: tokenSha256,
+    p_review: review,
+    p_profile_sha256: expertReviewProfileHash(review.reviewer),
+    p_idempotency_hash: epistemicOperationsHash(idempotencyKey),
+    p_event: event,
+  })
+  if (error) throw new Error(`Epistemic reviewer invitation consumption failed [${error.code ?? 'unknown'}]: ${error.message}`)
+  return data as { reviewId: string; decision: string; invitationId: string; idempotentReplay: boolean }
+}
+
+export async function revokeEpistemicReviewerInvitation(
+  client: SupabaseClient,
+  invitationId: string,
+  event: EpistemicReviewInvitationEvent,
+  idempotencyKey: string,
+  actorFingerprint: string,
+) {
+  const { data, error } = await client.rpc('revoke_epistemic_reviewer_invitation', {
+    p_invitation_id: invitationId,
+    p_event: event,
+    p_idempotency_hash: epistemicOperationsHash(idempotencyKey),
+    p_actor_fingerprint: actorFingerprint,
+  })
+  if (error) throw new Error(`Epistemic reviewer invitation revocation failed [${error.code ?? 'unknown'}]: ${error.message}`)
+  return data as { eventId: string; invitationId: string; idempotentReplay: boolean }
 }
 
 export async function insertEpistemicSourceCompletionEvent(
