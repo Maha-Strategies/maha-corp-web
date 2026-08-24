@@ -1,7 +1,7 @@
 {
   "$schema": "https://www.mahastrategies.com/maha-machine-readable-registry.schema.json",
-  "registryVersion": "1.0.0",
-  "asOf": "2026-08-22",
+  "registryVersion": "1.1.0",
+  "asOf": "2026-08-24",
   "provider": {
     "name": "Maha Strategies LLC",
     "url": "https://www.mahastrategies.com"
@@ -26,10 +26,29 @@
       "evidence": [
         "https://www.mahastrategies.com/agent-offers.json",
         "https://www.mahastrategies.com/llms.txt",
+        "https://www.mahastrategies.com/mcp.json",
         "https://www.mahastrategies.com/api/docs/openapi"
       ],
       "evidenceBoundary": "The agent card and offer catalog describe published entry points and commercial boundaries; they do not authorize a charge or a customer engagement.",
       "commercialBoundary": "Human scope review remains required for enterprise and research engagements."
+    },
+    {
+      "id": "mcp-tool-manifest",
+      "kind": "catalog",
+      "name": "Maha MCP tool manifest",
+      "status": "available",
+      "url": "https://www.mahastrategies.com/mcp.json",
+      "machineReadable": true,
+      "evidence": [
+        "https://www.mahastrategies.com/mcp/mps-preflight.server.json",
+        "https://www.mahastrategies.com/mcp/mps-preflight.md",
+        "https://www.mahastrategies.com/mcp-gateway-contract.json"
+      ],
+      "schemas": [
+        "https://www.mahastrategies.com/schemas/mcp-tool-manifest-0.1.json"
+      ],
+      "evidenceBoundary": "The manifest catalogs callable and source-available MCP tools with separate status and side-effect declarations. Catalog presence does not prove factual accuracy, package publication, uptime, production readiness, or review approval.",
+      "commercialBoundary": "The manifest grants no payment, deployment, outreach, or canonical-publication authority. Endpoint quotas and acquisition policies remain authoritative at call time."
     },
     {
       "id": "context-control",
