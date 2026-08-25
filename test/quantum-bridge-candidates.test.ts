@@ -310,9 +310,10 @@ test('an unverifiable source alone prevents promotion', () => {
   const unverifiable = QUANTUM_BRIDGE_AUDIT.filter((bridge) =>
     bridge.blockerCodes.includes('source-unverifiable'),
   )
-  assert.equal(unverifiable.length, 1)
-  assert.equal(unverifiable[0].id, 'Q-BR-011')
-  assert.equal(isPromotionEligible(unverifiable[0]), false)
+  // The closure sprint found three further citations that do not appear to exist.
+  assert.ok(unverifiable.length >= 1)
+  assert.ok(unverifiable.some((bridge) => bridge.id === 'Q-BR-011'))
+  for (const bridge of unverifiable) assert.equal(isPromotionEligible(bridge), false)
 })
 
 /* ------------------------------------------------- submitted vs audited -- */

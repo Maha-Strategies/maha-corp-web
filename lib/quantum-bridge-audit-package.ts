@@ -7,6 +7,7 @@ import {
   type BridgeCandidate,
   type CandidateClassification,
 } from './quantum-bridge-candidates.ts'
+import { ledgerEntry } from './bridge-source-ledger.ts'
 import {
   REFERENCE_RESOLVER_VERSION,
   isResolvedOutcome,
@@ -96,15 +97,25 @@ function endpointBlockers(result: ResolutionResult): BlockerCode[] {
   }
 }
 
+/**
+ * Source state comes from the append-only verification ledger, not from the
+ * submitted record, so closing a citation moves every dependent bridge at once.
+ */
 function sourceBlockers(candidate: BridgeCandidate): BlockerCode[] {
   const codes = new Set<BlockerCode>()
+  for (const side of ['A', 'B'] as const) {
+    const entry = ledgerEntry(candidate.id, side)
+    if (entry.verification === 'unverifiable') codes.add('source-unverifiable')
+    if (entry.verification === 'not-independently-verified') codes.add('source-missing-identifier')
+    if (!entry.identifier) codes.add('source-missing-identifier')
+    if (!entry.locator) codes.add('source-missing-locator')
+    if (entry.rightsBasis === 'unverified' || entry.rightsBasis === 'not-applicable-unverifiable') {
+      codes.add('rights-basis-unverified')
+    }
+  }
   for (const source of candidate.sources) {
-    if (source.verification === 'unverifiable') codes.add('source-unverifiable')
-    if (!source.identifier) codes.add('source-missing-identifier')
-    if (!source.locator) codes.add('source-missing-locator')
     if (source.rejectedAssertion) codes.add('claim-strength-rejected')
   }
-  if (candidate.rightsBasis === 'unverified') codes.add('rights-basis-unverified')
   return [...codes]
 }
 
