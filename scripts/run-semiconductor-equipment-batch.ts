@@ -172,17 +172,36 @@ async function drain(baseUrl: string, token: string) {
 
 async function compilePackets(baseUrl: string, token: string) {
   const ids = SEMICONDUCTOR_EQUIPMENT_FACTORY_CANDIDATES.map((candidate) => candidate.record.id)
-  const result = await request(baseUrl, token, '/api/admin/epistemic-factory', {
-    method: 'POST',
-    body: JSON.stringify({
-      operation: 'compile',
-      recordIds: ids,
-      idempotencyKey: `semiconductor-equipment-factory:${stableKey(...ids)}`,
-    }),
-  })
+  let result: Awaited<ReturnType<typeof request>>
+  try {
+    result = await request(baseUrl, token, '/api/admin/epistemic-factory', {
+      method: 'POST',
+      body: JSON.stringify({
+        operation: 'compile',
+        recordIds: ids,
+        idempotencyKey: `semiconductor-equipment-factory:${stableKey(...ids)}`,
+      }),
+    })
+  } catch (cause) {
+    if (!(cause instanceof Error) || !cause.message.includes('returned 409:')) throw cause
+    const exactHashPackets = await Promise.all(SEMICONDUCTOR_EQUIPMENT_FACTORY_CANDIDATES.map(async (candidate) => {
+      const existing = await request(baseUrl, token, `/api/admin/epistemic-factory?recordId=${encodeURIComponent(candidate.record.id)}`)
+      const packets = array(object(existing.body, 'existing factory packets').packets, 'existing factory packets')
+      return packets.some((packet) => (
+        packet.recordId === candidate.record.id
+        && packet.candidateSha256 === candidate.candidateSha256
+        && packet.reviewTargetSha256 === candidate.reviewTargetSha256
+        && packet.canonicalStatus === 'noncanonical-draft'
+      ))
+    }))
+    if (exactHashPackets.some((verified) => !verified)) {
+      throw new Error(`The factory returned 409 and only ${exactHashPackets.filter(Boolean).length}/25 exact-hash reviewer packets could be verified.`)
+    }
+    return { runId: null, targetCount: 25, counts: { exactHashPackets: 25 }, idempotentReplay: true }
+  }
   const run = object(object(result.body, 'factory response').run, 'factory run')
   if (Number(run.targetCount) !== 25) throw new Error(`The equipment factory compiled ${String(run.targetCount)} targets instead of 25.`)
-  return { runId: String(run.runId), targetCount: Number(run.targetCount), counts: run.counts }
+  return { runId: String(run.runId), targetCount: Number(run.targetCount), counts: run.counts, idempotentReplay: false }
 }
 
 async function publishReady(baseUrl: string, token: string, state: ReturnType<typeof readiness>) {
