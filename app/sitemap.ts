@@ -23,6 +23,15 @@ import { getActiveEpistemicCanonicalReleases } from '@/lib/public-epistemic-rele
 import { EPISTEMIC_PHASE4_PILOT_DATE } from '@/lib/epistemic-pilot-corpus'
 import { PUBLIC_AUTHORITY_CONFORMANCE_DATE } from '@/lib/celestial-public-authority-conformance'
 
+/*
+ * The sitemap reads active canonical releases from the database, so it must be
+ * rendered per request. A sitemap Route Handler is cached by default unless it
+ * uses a request-time API or a dynamic config option, which meant a record
+ * released after the last deployment never appeared until the next build. The
+ * llms.txt manifest already renders per request for the same reason.
+ */
+export const dynamic = 'force-dynamic'
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = MAHA_SITE_URL
   
