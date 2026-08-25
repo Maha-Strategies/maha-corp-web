@@ -75,7 +75,7 @@ export default function SecurityPage() {
             no bug bounty and no guaranteed remediation window.
           </p>
 
-          <div className="evidence-status-surface evidence-status-surface--unverified mt-8">
+          <div className="evidence-status-surface evidence-status-surface--boundary mt-8">
             <p className="evidence-status-label">Testing boundaries</p>
             <p className="evidence-copy mt-2">
               Do not test against production accounts you do not control, do not run load or
