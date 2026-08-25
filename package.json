@@ -24,6 +24,7 @@
     "operate:epistemic-factory": "node --experimental-strip-types scripts/run-epistemic-publishing-factory.ts",
     "operate:epistemic-factory-worker": "node --experimental-strip-types scripts/run-epistemic-factory-worker.ts",
     "operate:frontier-pilot-batch": "node --experimental-strip-types scripts/run-frontier-pilot-batch.ts",
+    "operate:semiconductor-equipment-batch": "node --experimental-strip-types scripts/run-semiconductor-equipment-batch.ts",
     "test:capacity": "node --experimental-strip-types scripts/run-capacity-test.ts",
     "test:agent-compatibility": "node --experimental-strip-types scripts/test-agent-compatibility.ts",
     "verify:x402-limiter": "node --experimental-strip-types scripts/verify-x402-limiter.ts",
