@@ -23,8 +23,8 @@ import type { EpistemicRecord } from '../lib/epistemic-schema.ts'
 const root = new URL('../', import.meta.url)
 
 test('multi-axis pilot records retain separate claim, evidence, and review states', () => {
-  assert.equal(EPISTEMIC_DOMAINS.length, 2)
-  assert.equal(EPISTEMIC_RECORDS.length, 50)
+  assert.equal(EPISTEMIC_DOMAINS.length, 10)
+  assert.equal(EPISTEMIC_RECORDS.length, 290)
   assert.equal(PUBLIC_EPISTEMIC_RECORDS.length, 2)
 
   for (const record of PUBLIC_EPISTEMIC_RECORDS) {
@@ -45,7 +45,7 @@ test('multi-axis pilot records retain separate claim, evidence, and review state
 
 test('draft graph records are withheld instead of becoming thin public pages', () => {
   const withheld = EPISTEMIC_RECORDS.filter((record) => !evaluatePublicationGate(record).publicEligible)
-  assert.equal(withheld.length, 48)
+  assert.equal(withheld.length, 288)
   for (const record of withheld) {
     const decision = evaluatePublicationGate(record)
     assert.ok(decision.reasons.includes('public-promotion-not-requested'))
@@ -55,12 +55,13 @@ test('draft graph records are withheld instead of becoming thin public pages', (
 
   for (const domain of EPISTEMIC_DOMAINS) {
     const registry = buildDomainRegistry(domain.slug)
-    assert.equal(registry?.counts.graphRecords, 25)
+    const originalPilot = domain.slug === 'quantum-systems' || domain.slug === 'synthetic-biology'
+    assert.equal(registry?.counts.graphRecords, originalPilot ? 25 : 30)
     assert.ok((registry?.counts.graphEdges ?? 0) >= 30)
-    assert.equal(registry?.counts.publicCanonicalRecords, 1)
-    assert.equal(registry?.counts.withheldRecords, 24)
-    assert.equal(registry?.records.length, 1)
-    assert.equal(registry?.withheldInventory.recordCount, 24)
+    assert.equal(registry?.counts.publicCanonicalRecords, originalPilot ? 1 : 0)
+    assert.equal(registry?.counts.withheldRecords, originalPilot ? 24 : 30)
+    assert.equal(registry?.records.length, originalPilot ? 1 : 0)
+    assert.equal(registry?.withheldInventory.recordCount, originalPilot ? 24 : 30)
     assert.equal(registry?.withheldInventory.disclosure, 'aggregate-only')
     const serialized = JSON.stringify(registry)
     for (const record of withheld.filter((candidate) => candidate.domainSlug === domain.slug)) {
@@ -72,7 +73,7 @@ test('draft graph records are withheld instead of becoming thin public pages', (
 
 test('expanded pilot trees contain source-bound concepts, processes, measurements, and comparisons', () => {
   const candidates = EPISTEMIC_RECORDS.filter((record) => record.publication.requiredReviewScopes?.length)
-  assert.equal(candidates.length, 46)
+  assert.equal(candidates.length, 286)
 
   for (const candidate of candidates) {
     assert.equal(candidate.publication.reviewState, 'draft')
@@ -105,7 +106,8 @@ test('expanded pilot trees contain source-bound concepts, processes, measurement
   for (const domain of EPISTEMIC_DOMAINS) {
     const records = EPISTEMIC_RECORDS.filter((record) => record.domainSlug === domain.slug)
     const substantive = records.filter((record) => record.recordKind !== 'hypothesis')
-    assert.equal(substantive.length, 24)
+    const originalPilot = domain.slug === 'quantum-systems' || domain.slug === 'synthetic-biology'
+    assert.equal(substantive.length, originalPilot ? 24 : 30)
     for (const requiredKind of ['concept', 'mechanism', 'method', 'measurement', 'comparison']) {
       assert.ok(substantive.some((record) => record.recordKind === requiredKind), `${domain.slug} lacks ${requiredKind}`)
     }

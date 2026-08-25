@@ -7,6 +7,7 @@ import {
 } from './agentic-commerce.ts'
 import type { EpistemicRecord } from './epistemic-schema.ts'
 import { epistemicRecordPath } from './epistemic-publication.ts'
+import { EPISTEMIC_DOMAINS } from './epistemic-pilots.ts'
 
 const RESEARCH_URL = 'https://research.mahastrategies.com'
 
@@ -48,8 +49,7 @@ export function buildLlmsManifest(
     '- Epistemic Phases 5–8 publishing factory: https://www.mahastrategies.com/knowledge/epistemic-system/publishing-factory',
     '- Epistemic publishing factory registry: https://www.mahastrategies.com/knowledge/epistemic-system/publishing-factory/registry.json',
     '- Celestial public-authority conformance fixture: https://www.mahastrategies.com/conformance/celestial-public-authority-v1.json',
-    '- Quantum systems pilot registry: https://www.mahastrategies.com/knowledge/quantum-systems/registry',
-    '- Synthetic biology pilot registry: https://www.mahastrategies.com/knowledge/synthetic-biology/registry',
+    ...EPISTEMIC_DOMAINS.map((domain) => `- ${domain.name} governed registry: https://www.mahastrategies.com/knowledge/${domain.slug}/registry`),
     '- Mathematics registry: https://www.mahastrategies.com/knowledge/mathematics/registry',
     '- Neuromorphic and biocomputing registry: https://www.mahastrategies.com/knowledge/neuromorphic-biocomputing/registry',
     '- Religion and contemplative traditions registry: https://www.mahastrategies.com/knowledge/religion/registry',

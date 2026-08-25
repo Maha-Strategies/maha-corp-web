@@ -1,10 +1,16 @@
 import { QUANTUM_SYSTEMS_GRAPH_RECORDS } from './quantum-systems-graph.ts'
 import { SYNTHETIC_BIOLOGY_GRAPH_RECORDS } from './synthetic-biology-graph.ts'
+import { FRONTIER_DOMAIN_GRAPH_RECORDS } from './frontier-domain-graphs.ts'
 import { epistemicRecordPath } from './epistemic-publication.ts'
 
 export const EPISTEMIC_PILOT_RELEASE_RECORDS = [
   ...QUANTUM_SYSTEMS_GRAPH_RECORDS,
   ...SYNTHETIC_BIOLOGY_GRAPH_RECORDS,
+] as const
+
+const EPISTEMIC_FOUNDATIONAL_FACTORY_RECORDS = [
+  ...EPISTEMIC_PILOT_RELEASE_RECORDS,
+  ...FRONTIER_DOMAIN_GRAPH_RECORDS,
 ] as const
 
 export const EPISTEMIC_PILOT_RELEASE_ROUTES = EPISTEMIC_PILOT_RELEASE_RECORDS.map(epistemicRecordPath)
@@ -26,7 +32,7 @@ export function getEpistemicPilotDomainLifecycle(
   domainSlug: string,
   publicRecordIds: ReadonlySet<string>,
 ) {
-  const candidates = EPISTEMIC_PILOT_RELEASE_RECORDS.filter((record) => record.domainSlug === domainSlug)
+  const candidates = EPISTEMIC_FOUNDATIONAL_FACTORY_RECORDS.filter((record) => record.domainSlug === domainSlug)
   const canonical = candidates.filter((record) => publicRecordIds.has(record.id))
   const active = candidates.length > 0 && canonical.length === candidates.length
 

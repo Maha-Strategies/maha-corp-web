@@ -1,0 +1,37 @@
+name: Production frontier domain scale
+
+on:
+  workflow_dispatch:
+    inputs:
+      operation:
+        description: Preview or enqueue, drain, compile, and verify all 240 noncanonical records
+        required: true
+        default: preview
+        type: choice
+        options:
+          - preview
+          - enqueue-drain-verify
+
+permissions:
+  contents: read
+
+concurrency:
+  group: production-frontier-domain-scale
+  cancel-in-progress: false
+
+jobs:
+  operate:
+    runs-on: ubuntu-latest
+    environment: production-database
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Operate eight bounded domain cohorts
+        env:
+          EPISTEMIC_OPERATIONS_TOKEN: ${{ secrets.EPISTEMIC_OPERATIONS_TOKEN }}
+        run: >-
+          node --experimental-strip-types scripts/run-frontier-domain-scale.ts
+          ${{ inputs.operation == 'enqueue-drain-verify' && '--apply --drain' || '' }}

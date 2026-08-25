@@ -131,7 +131,7 @@ export default function KnowledgePage() {
               <p>{MATHEMATICAL_CONCEPTS.length} mathematical concepts · {MATHEMATICAL_BRIDGES.length} bridges</p>
               <p>{RELIGION_CONCEPTS.length} religion methods · {RELIGION_COMPARISONS.length} comparisons</p>
               <p>{NEUROMORPHIC_CONCEPTS.length} neuromorphic/biocomputing concepts · {NEUROMORPHIC_COMPARISONS.length} comparisons</p>
-              <p>{EPISTEMIC_DOMAINS.length} adversarial schema pilots · {PUBLIC_EPISTEMIC_RECORDS.length} canonical records</p>
+              <p>{EPISTEMIC_DOMAINS.length} governed technical domains · {PUBLIC_EPISTEMIC_RECORDS.length} canonical records</p>
               <p>Claim-level evidence status</p>
               <p>Bidirectional Intelligence links</p>
             </div>
@@ -194,15 +194,23 @@ export default function KnowledgePage() {
               <p className="mt-4 border-l border-amber-700/60 pl-3 text-xs leading-5 text-amber-200">A record’s existence does not make it publishable. Drafts and incomplete claims remain below the crawlable layer.</p>
               <p className="mt-6 font-mono text-[10px] uppercase tracking-widest text-zinc-600 group-hover:text-cyan-300">Inspect the universal contract →</p>
             </Link>
-            {EPISTEMIC_DOMAINS.map((domain) => (
-              <Link key={domain.slug} href={`/knowledge/${domain.slug}`} className={`group border p-6 transition-colors ${domain.accent === 'blue' ? 'border-blue-900/60 bg-blue-950/10 hover:border-blue-400' : 'border-emerald-900/60 bg-emerald-950/10 hover:border-emerald-400'}`}>
-                <p className={`font-mono text-[10px] uppercase tracking-widest ${domain.accent === 'blue' ? 'text-blue-300' : 'text-emerald-300'}`}>Adversarial Phase 1 pilot</p>
+            {EPISTEMIC_DOMAINS.map((domain) => {
+              const accent = {
+                blue: { card: 'border-blue-900/60 bg-blue-950/10 hover:border-blue-400', label: 'text-blue-300' },
+                green: { card: 'border-emerald-900/60 bg-emerald-950/10 hover:border-emerald-400', label: 'text-emerald-300' },
+                violet: { card: 'border-violet-900/60 bg-violet-950/10 hover:border-violet-400', label: 'text-violet-300' },
+                amber: { card: 'border-amber-900/60 bg-amber-950/10 hover:border-amber-400', label: 'text-amber-300' },
+              }[domain.accent]
+              return (
+              <Link key={domain.slug} href={`/knowledge/${domain.slug}`} className={`group border p-6 transition-colors ${accent.card}`}>
+                <p className={`font-mono text-[10px] uppercase tracking-widest ${accent.label}`}>Governed frontier domain · maha-epistemic/1.0</p>
                 <h2 className="mt-4 text-2xl font-semibold text-white group-hover:underline">{domain.name}</h2>
                 <p className="mt-3 text-sm leading-6 text-zinc-400">{domain.description}</p>
                 <p className="mt-4 border-l border-amber-700/60 pl-3 text-xs leading-5 text-amber-200">{domain.stressPoint}</p>
                 <p className="mt-6 font-mono text-[10px] uppercase tracking-widest text-zinc-600 group-hover:text-cyan-300">Open governed domain →</p>
               </Link>
-            ))}
+              )
+            })}
             <Link href={ASTROLOGY_PATH} className="group border border-violet-900/60 bg-violet-950/10 p-6 transition-colors hover:border-violet-400">
               <p className="font-mono text-[10px] uppercase tracking-widest text-violet-300">Interpretive layer · {ASTROLOGY_VERSION}</p>
               <h2 className="mt-4 text-2xl font-semibold text-white group-hover:text-violet-200">Astrology traditions</h2>

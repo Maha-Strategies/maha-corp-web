@@ -11,6 +11,18 @@ import {
 
 export const EPISTEMIC_GRAPH_RELEASE_DATE = '2026-08-24' as const
 
+export type EpistemicGraphDomainSlug =
+  | 'quantum-systems'
+  | 'synthetic-biology'
+  | 'fusion-plasma-systems'
+  | 'advanced-materials'
+  | 'biomolecular-engineering'
+  | 'longevity-metabolism'
+  | 'neurotechnology-bci'
+  | 'mechanistic-interpretability'
+  | 'agentic-systems-mcp'
+  | 'critical-supply-chains'
+
 export interface GraphDependency {
   targetId: string
   bridgeType?: BridgeType
@@ -19,7 +31,7 @@ export interface GraphDependency {
 }
 
 export interface EpistemicGraphSeed {
-  domainSlug: 'quantum-systems' | 'synthetic-biology'
+  domainSlug: EpistemicGraphDomainSlug
   recordKind: EpistemicRecordKind
   slug: string
   title: string
