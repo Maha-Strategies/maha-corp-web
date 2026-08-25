@@ -132,6 +132,52 @@ export interface DossierClaim {
   provenanceDigest: string
 }
 
+/**
+ * How a second inspected source stands relative to the first. Corroboration is
+ * the strongest available relation here and is still weaker than replication:
+ * it means two sources agree, not that an empirical result was reproduced.
+ */
+export const SOURCE_RELATIONS = [
+  'corroborating',
+  'contradictory',
+  'materially-different-assumptions',
+  'incomparable',
+] as const
+export type SourceRelation = (typeof SOURCE_RELATIONS)[number]
+
+export interface ComparisonAxis {
+  axis: string
+  /** What each source does on this axis, keyed by sourceId. */
+  values: Readonly<Record<string, string>>
+  comparable: boolean
+  note: string
+}
+
+export interface SourceComparison {
+  comparisonId: string
+  sourceIds: readonly string[]
+  question: string
+  relation: SourceRelation
+  relationRationale: string
+  axes: readonly ComparisonAxis[]
+  /** Points on which the sources agree, stated no more strongly than they are. */
+  agreements: readonly string[]
+  /** Points on which one qualifies or disputes the other. */
+  qualifications: readonly string[]
+  comparabilityLimits: readonly string[]
+  /** Why this comparison is not replication. */
+  replicationAssessment: string
+  provenanceDigest: string
+}
+
+/** An immutable record of a superseded dossier revision. */
+export interface PriorRevision {
+  version: string
+  dossierDigest: string
+  supersededAt: string
+  summary: string
+}
+
 export interface ProvenanceBundle {
   corpusRevision: string
   digestAlgorithm: 'sha256'
@@ -139,6 +185,7 @@ export interface ProvenanceBundle {
   sourceCount: number
   passageCount: number
   claimCount: number
+  comparisonCount: number
   /** Digest of the whole dossier, excluding this field. */
   dossierDigest: string
 }
@@ -159,6 +206,9 @@ export interface EvidenceDossier {
   sources: readonly DossierSource[]
   passages: readonly DossierPassage[]
   claims: readonly DossierClaim[]
+  comparisons: readonly SourceComparison[]
+  /** Superseded revisions, newest last. Never edited once written. */
+  priorRevisions: readonly PriorRevision[]
   contradictions: readonly string[]
   unsupportedInferences: readonly string[]
   limitations: readonly string[]

@@ -1,0 +1,65 @@
+{
+  "task": "Evidence Dossier v0.2 — second inspectable source on stochastic acid generation in EUV photoresist",
+  "searchedOn": "2026-08-25",
+  "stopCondition": "Close with a documented negative result rather than add a metadata-only source.",
+  "outcome": "positive",
+  "databases": [
+    {
+      "name": "OSTI (US DOE Office of Scientific and Technical Information) records API",
+      "queries": [
+        "EUV photoresist stochastic acid generation",
+        "EUV lithography photon shot noise stochastic model photoresist",
+        "extreme ultraviolet resist acid generation secondary electron stochastic simulation",
+        "line edge roughness stochastic EUV resist model Naulleau"
+      ],
+      "result": "Returned DOE-funded records with fulltext links. Most hits were resist chemistry and materials rather than stochastic modelling."
+    },
+    {
+      "name": "arXiv API",
+      "queries": ["EUV lithography stochastic", "EUV lithography photon shot noise", "EUV lithography"],
+      "result": "Returned zero entries for all queries in this session. Treated as an access failure of the query interface, not as evidence that no such preprints exist."
+    },
+    {
+      "name": "Crossref REST API",
+      "queries": ["DOI verification for candidate records"],
+      "result": "Used to confirm identifiers rather than to discover full text."
+    },
+    {
+      "name": "MDPI publisher site",
+      "queries": ["10.3390/molecules28176244 full text"],
+      "result": "HTTP 403 to automated retrieval. Remains metadata-verified only in the dossier and supports no substantive claim."
+    }
+  ],
+  "candidatesConsidered": [
+    {
+      "ref": "osti 2551791 / doi:10.1117/1.JMM.23.4.044601",
+      "title": "Comparison of the spatial statistics of random and defined-sequence photoresist films",
+      "decision": "accepted",
+      "reason": "Directly downloadable accepted manuscript under CC-BY 4.0; addresses photoacid generator placement, shot noise and the RLS tradeoff; inspected and quoted with exact locators."
+    },
+    {
+      "ref": "osti 2551789 / doi:10.1117/1.JMM.23.4.044003",
+      "title": "Characterization of latent image of electron beam resist via CD-RSoXS",
+      "decision": "rejected",
+      "reason": "Electron-beam resist metrology rather than EUV stochastic acid generation. Different exposure mechanism; not meaningfully comparable to the existing source."
+    },
+    {
+      "ref": "osti 3012469, 3022484, 3020769, 3007695, 3022480, 3375238",
+      "title": "Various EUV resist materials and vapour-phase infiltration papers",
+      "decision": "rejected",
+      "reason": "Resist materials chemistry. None models stochastic acid generation, so none would compare against the existing modelling source on any shared axis."
+    },
+    {
+      "ref": "NIST pub_id 932010",
+      "title": "Spectral Analysis of Line Edge and Line Width Roughness using Wavelets",
+      "decision": "rejected",
+      "reason": "Roughness signal analysis method rather than acid generation. Would not support a comparison on dimensionality, dose, statistics or material model."
+    }
+  ],
+  "accessFailures": [
+    "arXiv API returned zero results for all attempted queries.",
+    "MDPI returned HTTP 403 to automated retrieval.",
+    "OSTI full-text endpoint returned HTTP 202 with an empty body on the first attempt; a retry with a browser user agent returned the PDF."
+  ],
+  "note": "A source was found and inspected, so the negative-result path was not taken. The rejected candidates are recorded because the reasons for rejection are part of the evidence about how narrow the genuinely comparable literature is."
+}

@@ -63,6 +63,20 @@ const SOURCES: DossierSource[] = [
     metadataProvenance:
       'DOI registered in the global handle system (responseCode 1) and Crossref metadata retrieved. The publisher returned HTTP 403 to automated retrieval, so the document itself was not inspected and no passage is drawn from it.',
   },
+  {
+    sourceId: 'src_hinsberg_houle_2024',
+    submittedCitation:
+      'Hinsberg, W. D., & Houle, F. A. (2024). Comparison of the spatial statistics of random and defined-sequence photoresist films. Journal of Micro/Nanopatterning, Materials, and Metrology, 23(4), 044601.',
+    correctedCitation: null,
+    identifier: 'doi:10.1117/1.JMM.23.4.044601',
+    publisherUrl: 'https://www.osti.gov/servlets/purl/2551791',
+    publicationType: 'model-or-simulation',
+    rightsBasis: 'open-license CC-BY-4.0',
+    verificationState: 'document-inspected',
+    verifiedAt: '2026-08-25',
+    metadataProvenance:
+      'Located via the OSTI records API (osti_id 2551791), accepted manuscript downloaded from the OSTI full-text endpoint and read directly. Title page, abstract, Section 1, Section 2 with Tables 1 and 2, and Figure 1 inspected. The article states CC-BY 4.0 and peer review on its cover page.',
+  },
 ]
 
 interface PassageSeed {
@@ -149,12 +163,79 @@ const PASSAGE_SEEDS: PassageSeed[] = [
   },
 ]
 
-const PASSAGES: DossierPassage[] = PASSAGE_SEEDS.map((seed) => ({
+const HH_PASSAGE_SEEDS: PassageSeed[] = [
+  {
+    passageId: 'pas_hh_dimensions',
+    sourceId: 'src_hinsberg_houle_2024',
+    locator: 'Section 2 (Materials and Methods), final sentence of first paragraph',
+    locatorKind: 'section',
+    excerpt: 'The volume dimensions used in this work are 31 x 31 x 31 nm.',
+    isParaphrase: false,
+  },
+  {
+    passageId: 'pas_hh_coarse_grained',
+    sourceId: 'src_hinsberg_houle_2024',
+    locator: 'Section 2 (Materials and Methods), first paragraph',
+    locatorKind: 'section',
+    excerpt:
+      'we employ a coarse-grained model of the resist film with a simplified representation of polymer chains as linear strings of spherical monomers. Monomers are connected by bonds with fixed bond lengths and bond angles, while the torsional angles along the chain are unconstrained.',
+    isParaphrase: false,
+  },
+  {
+    passageId: 'pas_hh_composition',
+    sourceId: 'src_hinsberg_houle_2024',
+    locator: 'Section 2.1 (Polymer Sequences and Film Compositions)',
+    locatorKind: 'section',
+    excerpt: 'In all cases, the mole ratios are HOST:TBMA:STYR:PAG:Q = 50:30:6.7:10:3.3.',
+    isParaphrase: false,
+  },
+  {
+    passageId: 'pas_hh_shot_noise',
+    sourceId: 'src_hinsberg_houle_2024',
+    locator: 'Section 1 (Introduction), page 044601-2',
+    locatorKind: 'page',
+    excerpt:
+      'The small number of EUV photons required to print a feature leads to a variation in the number of photons absorbed from one feature to the next. This variation, shot noise, follows Poisson statistics and leads to a significant difference in the extent of photolysis within a collection of features.',
+    isParaphrase: false,
+  },
+  {
+    passageId: 'pas_hh_rls_caution',
+    sourceId: 'src_hinsberg_houle_2024',
+    locator: 'Section 1 (Introduction), page 044601-2',
+    locatorKind: 'page',
+    excerpt:
+      'Consideration of the factors that control image quality in chemically amplified (CA) DUV photoresists identified a resolution-line edge roughness-sensitivity (R-L-S) tradeoff. Because of the statistical variations described above, it is not obvious that how the tradeoff operates is the same in EUV lithography.',
+    isParaphrase: false,
+  },
+  {
+    passageId: 'pas_hh_result',
+    sourceId: 'src_hinsberg_houle_2024',
+    locator: 'Abstract, Results',
+    locatorKind: 'section',
+    excerpt:
+      'In all cases, the spatial distribution of chemical moieties in the film for defined sequence polymers is nearly indistinguishable from random copolymers.',
+    isParaphrase: false,
+  },
+  {
+    passageId: 'pas_hh_model_limits',
+    sourceId: 'src_hinsberg_houle_2024',
+    locator: 'Section 2.2.1 (Polymer packing and film formation-polyscope), final sentence',
+    locatorKind: 'section',
+    excerpt:
+      'Aside from aggregate formation, we do not include in the model other potential interactions between building blocks, such as hydrogen bonding or pi-pi stacking.',
+    isParaphrase: false,
+  },
+]
+
+const PASSAGES: DossierPassage[] = [...PASSAGE_SEEDS, ...HH_PASSAGE_SEEDS].map((seed) => ({
   ...seed,
   extractionMethod: 'direct-pdf-read',
   originalDocumentInspected: true,
   passageHash: `sha256:${sha256Hex(canonicalJson({ locator: seed.locator, excerpt: seed.excerpt }))}`,
-  sourceRevision: 'NIST pub_id=910777, retrieved 2026-08-25',
+  sourceRevision:
+    seed.sourceId === 'src_hinsberg_houle_2024'
+      ? 'OSTI osti_id=2551791 accepted manuscript, retrieved 2026-08-25'
+      : 'NIST pub_id=910777, retrieved 2026-08-25',
 }))
 
 const REVIEWER = {
@@ -353,10 +434,213 @@ const CLAIM_SEEDS: ClaimSeed[] = [
   },
 ]
 
-const CLAIMS: DossierClaim[] = CLAIM_SEEDS.map((seed) => ({
+const HH_CLAIM_SEEDS: ClaimSeed[] = [
+  {
+    claimId: 'clm_hh_three_dimensional',
+    submittedStatement: 'The second source models the resist film in three dimensions.',
+    auditedStatement:
+      'Hinsberg and Houle model a 31 x 31 x 31 nm film volume using a coarse-grained representation of polymer chains as linear strings of spherical monomers.',
+    claimType: 'modelled-result',
+    sourceIds: ['src_hinsberg_houle_2024'],
+    passageIds: ['pas_hh_dimensions', 'pas_hh_coarse_grained'],
+    epistemicStatus: 'passage-supports-bounded-claim',
+    verificationScope:
+      'Checked the stated volume and the coarse-grained representation in Section 2 of the inspected manuscript. Not checked: whether 31 nm is large enough to be representative, which the paper does not establish in the inspected sections.',
+    uncertainty:
+      'A coarse-grained sphere-and-bond representation is an abstraction of real polymer conformation. The paper states it is simplified.',
+    disagreements: [],
+    unsupportedExtensions: [
+      'Do not infer that a 3D model is more accurate than a 2D one; they answer different questions.',
+      'Do not infer printed feature dimensions from the simulation volume.',
+    ],
+    reviewerDecisions: [
+      { decision: 'accept-as-model-description', rationale: 'Quoted from the inspected methods section.', ...REVIEWER },
+    ],
+  },
+  {
+    claimId: 'clm_hh_shot_noise_poisson',
+    submittedStatement: 'Both sources agree that EUV shot noise is Poisson.',
+    auditedStatement:
+      'Hinsberg and Houle state that shot noise, the feature-to-feature variation in absorbed EUV photons, follows Poisson statistics. Gallatin et al. independently apply Poisson statistics to exposure and component densities. Both are modelling papers stating the same distributional premise.',
+    claimType: 'modelled-result',
+    sourceIds: ['src_hinsberg_houle_2024', 'src_gallatin_2012'],
+    passageIds: ['pas_hh_shot_noise', 'pas_poisson'],
+    epistemicStatus: 'passage-supports-bounded-claim',
+    verificationScope:
+      'Checked the Poisson premise in both inspected sources. This is agreement between two models on an assumption, not an empirical measurement and not a reproduction of a result.',
+    uncertainty:
+      'Neither inspected source validates the Poisson assumption against measured resist data in the sections read.',
+    disagreements: [],
+    unsupportedExtensions: [
+      'Do not describe this as replication. Two models sharing an assumption is not an empirical result reproduced twice.',
+      'Do not infer that the assumption is correct because two papers adopt it.',
+    ],
+    reviewerDecisions: [
+      {
+        decision: 'accept-as-shared-assumption',
+        rationale: 'Recorded as agreement on a premise, explicitly not as replication.',
+        ...REVIEWER,
+      },
+    ],
+  },
+  {
+    claimId: 'clm_hh_rls_caution',
+    submittedStatement: 'The RLS tradeoff established for DUV applies to EUV lithography.',
+    auditedStatement:
+      'Hinsberg and Houle state the opposite caution: the R-L-S tradeoff was identified for chemically amplified DUV photoresists, and because of EUV statistical variation it is not obvious that the tradeoff operates the same way in EUV lithography.',
+    claimType: 'author-stated-limitation',
+    sourceIds: ['src_hinsberg_houle_2024'],
+    passageIds: ['pas_hh_rls_caution'],
+    epistemicStatus: 'passage-supports-bounded-claim',
+    verificationScope:
+      'Checked in Section 1 of the inspected manuscript. This qualifies the v0.1 claim clm_rls_tradeoff, which recorded the tradeoff from a source that stated it without this caution.',
+    uncertainty:
+      'The authors state the transfer is not obvious. They do not establish that the tradeoff fails in EUV, only that it should not be assumed.',
+    disagreements: [
+      'The v0.1 dossier recorded the RLS requirement from Gallatin et al. without qualification. This source cautions that the DUV-derived tradeoff may not transfer to EUV.',
+    ],
+    unsupportedExtensions: [
+      'Do not infer that the RLS tradeoff is invalid in EUV; the source says it is not obvious, not that it is false.',
+    ],
+    reviewerDecisions: [
+      {
+        decision: 'record-as-qualification-of-prior-claim',
+        rationale:
+          'The second source materially qualifies a claim carried in v0.1. Both are retained; the v0.1 claim is not deleted.',
+        ...REVIEWER,
+      },
+    ],
+  },
+  {
+    claimId: 'clm_hh_dsp_result',
+    submittedStatement: 'Defined-sequence polymers produce more uniform resist films.',
+    auditedStatement:
+      'In this simulation the spatial distribution of chemical moieties for defined-sequence polymers was nearly indistinguishable from random copolymers of the same composition.',
+    claimType: 'modelled-result',
+    sourceIds: ['src_hinsberg_houle_2024'],
+    passageIds: ['pas_hh_result', 'pas_hh_composition'],
+    epistemicStatus: 'passage-supports-bounded-claim',
+    verificationScope:
+      'Checked the abstract Results statement and the composition in Section 2.1. The submitted statement asserted the opposite of the simulated outcome and was corrected.',
+    uncertainty:
+      'This is a simulated spatial-statistics comparison at one composition, not a lithographic performance measurement.',
+    disagreements: [
+      'The submitted statement claimed improved uniformity; the inspected source reports near-indistinguishability.',
+    ],
+    unsupportedExtensions: [
+      'Do not infer printed line edge roughness from simulated moiety distribution.',
+      'Do not generalise beyond the stated composition ratios.',
+    ],
+    reviewerDecisions: [
+      { decision: 'correct-submitted-statement', rationale: 'Submitted wording contradicted the inspected result.', ...REVIEWER },
+    ],
+  },
+]
+
+const CLAIMS: DossierClaim[] = [...CLAIM_SEEDS, ...HH_CLAIM_SEEDS].map((seed) => ({
   ...seed,
   provenanceDigest: provenanceDigest(seed),
 }))
+
+const G = 'src_gallatin_2012'
+const H = 'src_hinsberg_houle_2024'
+
+const COMPARISON_SEED = {
+  comparisonId: 'cmp_gallatin_hinsberg_houle',
+  sourceIds: [G, H],
+  question:
+    'Do the two inspected sources describe stochastic acid generation in EUV photoresist in ways that can be compared?',
+  relation: 'materially-different-assumptions' as const,
+  relationRationale:
+    'The two agree on the distributional premise and on the framing question, and then diverge on almost everything that determines what their outputs mean. One is a 2D continuum reaction-diffusion model of acid, base and amplifier densities; the other is a 3D coarse-grained molecular packing model of monomers, chains and sequences. They compute different quantities from different state variables, so agreement on the premise does not make their results comparable.',
+  axes: [
+    {
+      axis: 'Dimensionality',
+      values: {
+        [G]: '2D. Densities are assumed uniform through resist thickness and the z dependence is integrated out.',
+        [H]: '3D. A 31 x 31 x 31 nm film volume with periodic boundary conditions.',
+      },
+      comparable: false,
+      note: 'A 2D-reduced continuum field and a 3D packed molecular volume are not the same object; neither is a refinement of the other.',
+    },
+    {
+      axis: 'Model class',
+      values: {
+        [G]: 'Continuum reaction-diffusion equations for acid, base and acid-amplifier densities, solved by operator splitting.',
+        [H]: 'Coarse-grained polymer packing: chains as linear strings of spherical monomers with fixed bonds and free torsions.',
+      },
+      comparable: false,
+      note: 'Continuum densities versus explicit molecular placement. No mapping between the two state representations was supplied by either paper.',
+    },
+    {
+      axis: 'Statistical assumption',
+      values: {
+        [G]: 'Poisson sampling of dose and of PAG, base and amplifier densities in each 1 nm^2 area element.',
+        [H]: 'Photon shot noise follows Poisson statistics; component positions also vary according to Poisson statistics.',
+      },
+      comparable: true,
+      note: 'This is the one axis on which the sources genuinely agree, and it is an agreement about an assumption rather than a measured result.',
+    },
+    {
+      axis: 'Material model',
+      values: {
+        [G]: 'Generic chemically amplified resist expressed as four densities: acid, base, PAG and acid amplifier.',
+        [H]: 'A specific ESCAP-class composition, HOST:TBMA:STYR:PAG:Q = 50:30:6.7:10:3.3, with PAG and quencher bound, free or aggregated.',
+      },
+      comparable: false,
+      note: 'One models a generic resist with an acid amplifier; the other models a named composition without one. The chemistries are not the same system.',
+    },
+    {
+      axis: 'Exposure conditions',
+      values: {
+        [G]: 'Figure 1 uses a 1 nm^2 pixel and a dose corresponding to 5 mJ/cm^2, for a 50/50 nm line/space aerial image.',
+        [H]: 'A simple exposure-deprotection algorithm is applied to the packed film. No dose in mJ/cm^2 appears in the inspected sections.',
+      },
+      comparable: false,
+      note: 'Without a stated dose on both sides, no exposure-level comparison can be made at all.',
+    },
+    {
+      axis: 'Outputs',
+      values: {
+        [G]: 'Deprotection density maps and their dependence on which statistics are enabled.',
+        [H]: 'Spatial statistics of chemical moieties, and developable image structure for defined-sequence versus random copolymers.',
+      },
+      comparable: false,
+      note: 'Different quantities. Neither paper reports the other one, so there is no shared output to compare.',
+    },
+  ],
+  agreements: [
+    'Both treat EUV shot noise as Poisson-distributed.',
+    'Both frame the problem as the interaction of small photon counts with discrete resist chemistry.',
+    'Both are explicit that they are simulations rather than measurements.',
+  ],
+  qualifications: [
+    'Hinsberg and Houle caution that the resolution-line edge roughness-sensitivity tradeoff was identified for DUV resists and that it is not obvious the tradeoff operates the same way in EUV. The v0.1 dossier recorded that tradeoff from Gallatin et al. without this caution. The v0.1 claim is retained and now carries the qualification alongside it.',
+  ],
+  comparabilityLimits: [
+    'No shared output quantity exists between the two papers.',
+    'No exposure dose is stated in the inspected sections of the second source.',
+    'One models an acid amplifier; the other does not model one at all.',
+    'Neither paper cross-validates against the other, and neither cites a common empirical dataset in the sections inspected.',
+    'Only parts of each document were read: sections 1 to 3 and Figure 1 of the first, and the abstract, sections 1 and 2 with Tables 1 and 2 and Figure 1 of the second.',
+  ],
+  replicationAssessment:
+    'Not replication, and it cannot become replication by adding further sources of this kind. Both inspected sources are simulations. Replication in this schema requires at least two independent empirical sources reproducing materially equivalent results under comparable conditions, and neither paper reports an empirical measurement. The dossier therefore carries no replicated-empirical claim, and the validator would refuse one.',
+}
+
+const COMPARISONS = [
+  { ...COMPARISON_SEED, provenanceDigest: provenanceDigest(COMPARISON_SEED) },
+]
+
+const PRIOR_REVISIONS = [
+  {
+    version: 'maha-evidence-dossier/0.1',
+    dossierDigest: 'sha256:4479a411c4ff854bcb1fb5507f81d47b4fd2065d3c27e0ff41c6b43f657e13b9',
+    supersededAt: '2026-08-25',
+    summary:
+      'One inspected modelling source and one metadata-only source; eight claims; no source comparison. Superseded by v0.2, which adds a second directly inspected source and a comparison. The v0.1 digest is recorded here so the earlier revision remains checkable; no v0.1 claim was deleted.',
+  },
+]
 
 const BASE = {
   schemaVersion: DOSSIER_SCHEMA_VERSION,
@@ -376,24 +660,26 @@ const BASE = {
     'Do not present any statement here as independently reviewed by an outside expert.',
   ],
   methodology:
-    'One primary source was downloaded and read directly; each passage cites the section, equation or caption it was taken from. A second source was checked only at the identifier and metadata level because the publisher blocked automated retrieval, and it is marked as such. Submitted statements are preserved beside the audited statement the evidence actually supports. No locator was written that was not read.',
+    'Two primary sources were downloaded and read directly; each passage cites the section, equation or caption it was taken from. A second source was checked only at the identifier and metadata level because the publisher blocked automated retrieval, and it is marked as such. Submitted statements are preserved beside the audited statement the evidence actually supports. No locator was written that was not read.',
   generatedAt: '2026-08-25T00:00:00Z',
-  corpusRevision: 'evidence-dossier-demo/0.1',
+  corpusRevision: 'evidence-dossier-demo/0.2',
   reviewState: 'illustrative-draft' as const,
   sources: SOURCES,
   passages: PASSAGES,
   claims: CLAIMS,
+  comparisons: COMPARISONS,
+  priorRevisions: PRIOR_REVISIONS,
   contradictions: [
     'Two submitted statements were contradicted by the inspected source: that the simulation is three-dimensional, and that the model fully characterises the parameter space. Both submitted statements are retained beside their corrections.',
   ],
   unsupportedInferences: [
-    'The primary source is a simulation study. No statement here is an empirical measurement, and none is replicated.',
+    'Both inspected sources are simulation studies. No statement here is an empirical measurement, and nothing is replicated. Adding further modelling sources cannot establish replication.',
     'Exposure dose in mJ/cm^2 is not scanner source power, intermediate-focus power, wafer-plane power, absorbed power, or plasma power. This dossier relates them to one another nowhere.',
     'Results obtained under one environment do not transfer to argon, vacuum, hydrogen gas or hydrogen-radical environments.',
     'Nothing here supports a manufacturing-yield, tool-lifetime, or process-window extrapolation.',
   ],
   limitations: [
-    'Only one document was read in full. A single modelling paper is not a literature review.',
+    'Two documents were read, both simulations. Two models are not a literature review, and two models agreeing on an assumption is not evidence that the assumption is correct.',
     'The second source is metadata-verified only; its contents are unverified here.',
     'Quoted figures are as the authors state them and were not checked against independent measurement.',
     'This dossier is an illustrative draft. It has not been internally audited through the existing evidence gate, and no external reviewer has seen it.',
@@ -409,6 +695,7 @@ const BUNDLE_BASE = {
   sourceCount: SOURCES.length,
   passageCount: PASSAGES.length,
   claimCount: CLAIMS.length,
+  comparisonCount: COMPARISONS.length,
 }
 
 export const DEMONSTRATION_DOSSIER: EvidenceDossier = {

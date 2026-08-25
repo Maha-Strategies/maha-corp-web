@@ -88,10 +88,47 @@ export function validateDossier(dossier: EvidenceDossier): ValidationIssue[] {
     issues.push(...validateClaim(claim, dossier, sourceIds, passageIds))
   }
 
+  for (const comparison of dossier.comparisons) {
+    const path = `comparisons.${comparison.comparisonId}`
+    if (comparison.sourceIds.length < 2) add('comparison-needs-two-sources', path, 'A comparison needs at least two sources.')
+    for (const sourceId of comparison.sourceIds) {
+      if (!sourceIds.has(sourceId)) add('comparison-orphan-source', path, `Unknown source ${sourceId}.`)
+      const source = dossier.sources.find((entry) => entry.sourceId === sourceId)
+      if (source && source.verificationState !== 'document-inspected') {
+        add('comparison-source-not-inspected', path, `${sourceId} was not inspected; it cannot be compared on content.`)
+      }
+    }
+    if (!comparison.axes.length) add('comparison-without-axes', path, 'At least one comparison axis is required.')
+    if (!comparison.comparabilityLimits.length) {
+      add('comparison-without-limits', path, 'Comparability limits must be stated.')
+    }
+    if (!comparison.replicationAssessment) {
+      add('comparison-without-replication-assessment', path, 'A replication assessment is required.')
+    }
+    // A comparison of modelling sources may never be described as replication.
+    const compared = dossier.sources.filter((entry) => comparison.sourceIds.includes(entry.sourceId))
+    const allModels = compared.every((entry) => entry.publicationType === 'model-or-simulation')
+    if (allModels && /\breplicat(es|ed|ion establish)/i.test(comparison.relationRationale)) {
+      add('comparison-claims-replication', path, 'Modelling sources cannot establish replication.')
+    }
+    if (isPlaceholderDigest(comparison.provenanceDigest)) {
+      add('placeholder-digest', path, 'Comparison digest is the empty-payload SHA-256.')
+    }
+  }
+
+  // Prior revisions are immutable history: each needs a real digest.
+  for (const revision of dossier.priorRevisions) {
+    const path = `priorRevisions.${revision.version}`
+    if (!revision.dossierDigest.startsWith('sha256:')) add('digest-invalid', path, 'Prior digest must be sha256.')
+    if (isPlaceholderDigest(revision.dossierDigest)) add('placeholder-digest', path, 'Prior digest is a placeholder.')
+    if (!revision.summary) add('revision-without-summary', path, 'A superseded revision needs a summary.')
+  }
+
   const bundle = dossier.provenanceBundle
   if (bundle.sourceCount !== dossier.sources.length) add('bundle-count-mismatch', 'provenanceBundle.sourceCount', 'Source count disagrees.')
   if (bundle.passageCount !== dossier.passages.length) add('bundle-count-mismatch', 'provenanceBundle.passageCount', 'Passage count disagrees.')
   if (bundle.claimCount !== dossier.claims.length) add('bundle-count-mismatch', 'provenanceBundle.claimCount', 'Claim count disagrees.')
+  if (bundle.comparisonCount !== dossier.comparisons.length) add('bundle-count-mismatch', 'provenanceBundle.comparisonCount', 'Comparison count disagrees.')
   if (isPlaceholderDigest(bundle.dossierDigest)) {
     add('placeholder-digest', 'provenanceBundle.dossierDigest', 'Dossier digest is the empty-payload SHA-256.')
   }

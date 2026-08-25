@@ -8,6 +8,7 @@ import {
   EPISTEMIC_STATUSES,
   REPLICATED_EMPIRICAL,
   isLegalReviewTransition,
+  SOURCE_RELATIONS,
 } from '../lib/evidence-dossier/schema.ts'
 import {
   EMPTY_PAYLOAD_SHA256,
@@ -32,7 +33,8 @@ const clone = <T,>(value: T): T => JSON.parse(JSON.stringify(value)) as T
 test('the demonstration dossier validates and is an illustrative draft', () => {
   assert.deepEqual(validateDossier(DEMONSTRATION_DOSSIER), [])
   assert.equal(DEMONSTRATION_DOSSIER.reviewState, 'illustrative-draft')
-  assert.ok(DEMONSTRATION_DOSSIER.claims.length >= 5 && DEMONSTRATION_DOSSIER.claims.length <= 10)
+  // v0.1 shipped 8 bounded claims; v0.2 adds four from a second inspected source.
+  assert.ok(DEMONSTRATION_DOSSIER.claims.length >= 8 && DEMONSTRATION_DOSSIER.claims.length <= 14)
 })
 
 test('the vocabulary is bounded, with no binary verified/contested state', () => {
@@ -302,4 +304,136 @@ test('the demonstration header does not assert the cited documents are absent', 
   const header = source.slice(0, source.indexOf('const NIST_URL'))
   assert.doesNotMatch(header, /fabricated|could not have been read|do(es)? not exist/i)
   assert.match(header, /could not be authenticated/i)
+})
+
+/* ------------------------------------------------------------------ v0.2 -- */
+
+test('v0.2 carries two directly inspected sources', () => {
+  const inspected = DEMONSTRATION_DOSSIER.sources.filter(
+    (source) => source.verificationState === 'document-inspected',
+  )
+  assert.equal(inspected.length, 2)
+  for (const source of inspected) {
+    assert.ok(source.identifier, `${source.sourceId} has no identifier`)
+    assert.ok(source.rightsBasis.length > 5)
+    assert.ok(source.verifiedAt)
+    assert.match(source.metadataProvenance, /inspected|read directly/i)
+  }
+})
+
+test('every passage from an inspected source carries an exact locator', () => {
+  for (const passage of DEMONSTRATION_DOSSIER.passages) {
+    assert.ok(passage.locator && passage.locator.trim().length > 5, `${passage.passageId} lacks a locator`)
+    assert.ok(passage.originalDocumentInspected)
+    assert.match(passage.passageHash, /^sha256:[a-f0-9]{64}$/)
+  }
+})
+
+test('the comparison covers the required axes and states its limits', () => {
+  assert.equal(DEMONSTRATION_DOSSIER.comparisons.length, 1)
+  const comparison = DEMONSTRATION_DOSSIER.comparisons[0]
+  const axes = comparison.axes.map((axis) => axis.axis.toLowerCase()).join(' ')
+  for (const required of ['dimensionality', 'model class', 'statistical', 'material model', 'exposure', 'outputs']) {
+    assert.ok(axes.includes(required), `comparison is missing the ${required} axis`)
+  }
+  assert.ok(comparison.comparabilityLimits.length >= 3)
+  assert.ok(comparison.agreements.length >= 1)
+  assert.ok(comparison.relationRationale.length > 100)
+})
+
+test('the relation is one of the four declared classifications', () => {
+  const comparison = DEMONSTRATION_DOSSIER.comparisons[0]
+  assert.ok(SOURCE_RELATIONS.includes(comparison.relation))
+  // Two simulations with different state representations are not corroborating.
+  assert.equal(comparison.relation, 'materially-different-assumptions')
+})
+
+test('a comparison of modelling sources cannot be described as replication', () => {
+  const comparison = DEMONSTRATION_DOSSIER.comparisons[0]
+  assert.match(comparison.replicationAssessment, /not replication/i)
+  assert.match(comparison.replicationAssessment, /simulation/i)
+
+  const broken = clone(DEMONSTRATION_DOSSIER)
+  broken.comparisons[0].relationRationale = 'The second source replicates the first.'
+  assert.ok(validateDossier(broken).some((issue) => issue.code === 'comparison-claims-replication'))
+})
+
+test('a comparison may only cite inspected sources', () => {
+  const broken = clone(DEMONSTRATION_DOSSIER)
+  broken.comparisons[0].sourceIds = [...broken.comparisons[0].sourceIds, 'src_park_2023']
+  assert.ok(validateDossier(broken).some((issue) => issue.code === 'comparison-source-not-inspected'))
+})
+
+test('no claim anywhere is replicated-empirical', () => {
+  for (const claim of DEMONSTRATION_DOSSIER.claims) {
+    assert.notEqual(claim.epistemicStatus, REPLICATED_EMPIRICAL)
+  }
+})
+
+test('the dossier stays an illustrative draft', () => {
+  assert.equal(DEMONSTRATION_DOSSIER.reviewState, 'illustrative-draft')
+})
+
+test('the v0.1 revision is preserved immutably with its original digest', () => {
+  const prior = DEMONSTRATION_DOSSIER.priorRevisions
+  assert.equal(prior.length, 1)
+  assert.equal(prior[0].version, 'maha-evidence-dossier/0.1')
+  assert.equal(
+    prior[0].dossierDigest,
+    'sha256:4479a411c4ff854bcb1fb5507f81d47b4fd2065d3c27e0ff41c6b43f657e13b9',
+  )
+  assert.ok(prior[0].summary.length > 60)
+  // The current digest must differ, since content changed.
+  assert.notEqual(DEMONSTRATION_DOSSIER.provenanceBundle.dossierDigest, prior[0].dossierDigest)
+})
+
+test('every v0.1 claim survives into v0.2', () => {
+  const ids = DEMONSTRATION_DOSSIER.claims.map((claim) => claim.claimId)
+  for (const original of [
+    'clm_rls_tradeoff',
+    'clm_photon_energy',
+    'clm_acid_shot_noise',
+    'clm_poisson_model',
+    'clm_figure_conditions',
+    'clm_2d_reduction',
+    'clm_parameter_space',
+    'clm_photoacid_descriptors',
+  ]) {
+    assert.ok(ids.includes(original), `${original} was dropped rather than qualified`)
+  }
+})
+
+test('the second source qualifies rather than deletes the v0.1 RLS claim', () => {
+  const qualifier = DEMONSTRATION_DOSSIER.claims.find((claim) => claim.claimId === 'clm_hh_rls_caution')!
+  assert.match(qualifier.verificationScope, /clm_rls_tradeoff/)
+  assert.ok(qualifier.disagreements.length >= 1)
+  assert.ok(DEMONSTRATION_DOSSIER.claims.some((claim) => claim.claimId === 'clm_rls_tradeoff'))
+})
+
+test('every digest was recomputed and none collides', () => {
+  const digests = [
+    DEMONSTRATION_DOSSIER.provenanceBundle.dossierDigest,
+    ...DEMONSTRATION_DOSSIER.claims.map((claim) => claim.provenanceDigest),
+    ...DEMONSTRATION_DOSSIER.comparisons.map((comparison) => comparison.provenanceDigest),
+  ]
+  assert.equal(new Set(digests).size, digests.length)
+  for (const digest of digests) assert.ok(!isPlaceholderDigest(digest))
+})
+
+test('the search record documents databases, queries, rejections and access failures', () => {
+  const log = JSON.parse(
+    readFileSync(new URL('../content/bridges/evidence-dossier-v0-2-search-log.json', import.meta.url), 'utf8'),
+  )
+  assert.ok(log.databases.length >= 3)
+  for (const database of log.databases) assert.ok(database.queries.length >= 1)
+  assert.ok(log.candidatesConsidered.length >= 3)
+  for (const candidate of log.candidatesConsidered) assert.ok(candidate.reason.length > 40)
+  assert.ok(log.accessFailures.length >= 2)
+  assert.ok(log.stopCondition.length > 20)
+})
+
+test('the page title tracks the dossier revision rather than a hardcoded version', () => {
+  const page = readFileSync(new URL('../app/internal/evidence-dossier/page.tsx', import.meta.url), 'utf8')
+  assert.doesNotMatch(page, /Evidence Dossier v0\.\d \(draft/, 'the version must not be hardcoded in the title')
+  assert.match(page, /corpusRevision/)
 })
