@@ -40,9 +40,10 @@ test('equipment cohort covers the requested critical process-tool families', () 
 })
 
 test('production operation is exact-batch, idempotent, human-gated, and fail-closed', async () => {
-  const [script, workflow] = await Promise.all([
+  const [script, workflow, migration] = await Promise.all([
     readFile(new URL('scripts/run-semiconductor-equipment-batch.ts', ROOT), 'utf8'),
     readFile(new URL('.github/workflows/production-semiconductor-equipment-batch.yml', ROOT), 'utf8'),
+    readFile(new URL('supabase/migrations/20260825180000_epistemic_factory_packet_targets.sql', ROOT), 'utf8'),
   ])
   for (const contract of [
     '/api/admin/epistemic-factory/jobs',
@@ -61,4 +62,9 @@ test('production operation is exact-batch, idempotent, human-gated, and fail-clo
   assert.match(workflow, /environment: production-database/)
   assert.match(workflow, /EPISTEMIC_OPERATIONS_TOKEN/)
   assert.match(workflow, /EPISTEMIC_RELEASE_AUTHORITY_TOKEN/)
+  assert.match(migration, /create or replace function public\.record_epistemic_factory_run/)
+  assert.match(migration, /from public\.epistemic_factory_draft_targets/)
+  assert.match(migration, /'factory'::text as target_origin/)
+  assert.match(migration, /Reviewer packet is not bound to the latest immutable draft target/)
+  assert.match(migration, /revoke all on function public\.record_epistemic_factory_run/)
 })
