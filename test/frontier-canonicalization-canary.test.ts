@@ -34,11 +34,15 @@ async function fixtureFetch(input: string | URL | Request) {
     const doi = decodeURIComponent(url.slice('https://api.crossref.org/works/'.length))
     const contract = FRONTIER_SOURCE_CONTRACTS.find((entry) => entry.source.identifiers.some((identifier) => identifier.scheme === 'doi' && identifier.value === doi))
     if (!contract) return new Response('missing', { status: 404 })
+    const publishedYear = Number(contract.source.publishedAt.slice(0, 4))
     return Response.json({ message: {
       title: [contract.source.title],
       publisher: contract.source.publisher,
       author: [{ family: surname(contract.source.authors[0]) }],
-      published: { 'date-parts': [[Number(contract.source.publishedAt.slice(0, 4))]] },
+      published: { 'date-parts': [[publishedYear]] },
+      ...(contract.source.id === 'source-longevity-metabolism-nad'
+        ? { 'published-online': { 'date-parts': [[2020, 12, 22]] }, 'published-print': { 'date-parts': [[2021, 2]] } }
+        : {}),
     } })
   }
   const contract = FRONTIER_SOURCE_CONTRACTS.find((entry) => entry.source.url === url)

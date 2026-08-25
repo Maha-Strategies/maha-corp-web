@@ -149,13 +149,14 @@ async function fetchBounded(fetcher: FetchLike, url: string, accept: string) {
   throw lastError instanceof Error ? lastError : new Error('Source request exhausted its retry budget.')
 }
 
-function crossrefYear(message: Record<string, unknown>) {
-  for (const key of ['published-print', 'published-online', 'published', 'issued', 'created']) {
+function crossrefYears(message: Record<string, unknown>) {
+  const years: number[] = []
+  for (const key of ['published', 'published-online', 'issued', 'published-print', 'created']) {
     const value = message[key] as { 'date-parts'?: number[][] } | undefined
     const year = value?.['date-parts']?.[0]?.[0]
-    if (Number.isInteger(year)) return year!
+    if (Number.isInteger(year) && !years.includes(year!)) years.push(year!)
   }
-  return null
+  return years
 }
 
 async function verifyContract(contract: FrontierSourceContract, fetcher: FetchLike): Promise<FrontierSourceVerification> {
@@ -183,14 +184,18 @@ async function verifyContract(contract: FrontierSourceContract, fetcher: FetchLi
         const message = payload.message ?? {}
         observedTitle = Array.isArray(message.title) ? String(message.title[0] ?? '') || null : null
         observedPublisher = typeof message.publisher === 'string' ? message.publisher : null
-        observedPublishedYear = crossrefYear(message)
+        const observedPublishedYears = crossrefYears(message)
+        observedPublishedYear = expectedYear !== null && observedPublishedYears.includes(expectedYear)
+          ? expectedYear
+          : observedPublishedYears[0] ?? null
         titleConfirmed = Boolean(observedTitle && similarity(source.title, observedTitle) >= 0.68)
         const observedAuthors = Array.isArray(message.author) ? message.author as Array<{ family?: string; name?: string }> : []
         const expectedAuthorWords = new Set(source.authors.flatMap(authorWords).filter((word) => word !== 'et' && word !== 'al'))
         authorConfirmed = observedAuthors.some((author) => authorWords(author.family ?? author.name ?? '').some((word) => expectedAuthorWords.has(word)))
-        publishedYearConfirmed = expectedYear === null || observedPublishedYear === expectedYear
+        publishedYearConfirmed = expectedYear === null || observedPublishedYears.includes(expectedYear)
         metadataStatus = titleConfirmed && authorConfirmed && publishedYearConfirmed ? 'registry-confirmed' : 'unresolved'
         if (!publishedYearConfirmed) notes.push(`Expected publication year ${expectedYear}; registry reported ${observedPublishedYear ?? 'none'}.`)
+        else if (observedPublishedYears.length > 1) notes.push(`Registry chronology includes publication years ${observedPublishedYears.join(' and ')} across online, issued, or print fields; the declared year matches one authoritative field.`)
       } else notes.push(`Crossref returned HTTP ${response.status}.`)
     } catch (error) {
       notes.push(`Crossref resolution failed: ${error instanceof Error ? error.name : 'unknown error'}.`)
