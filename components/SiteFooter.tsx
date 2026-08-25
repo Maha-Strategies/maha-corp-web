@@ -23,10 +23,18 @@ const companyLinks = [
   { href: '/contact', label: 'Contact' },
 ] as const
 
+// Only surfaces that exist and make no claim Maha has not already committed to.
+// There is deliberately no Privacy or Terms entry here: those documents do not
+// exist yet, and a link implying otherwise would be the wrong kind of trust signal.
+const trustLinks = [
+  { href: '/security', label: 'Security policy' },
+  { href: '/security/context-control-boundary', label: 'Context-control boundary' },
+] as const
+
 export default function SiteFooter() {
   return (
     <footer data-theme="paper" className="site-chrome border-t border-[var(--chrome-border)] bg-[var(--chrome-surface)] px-6 py-10 text-[var(--chrome-muted)]">
-      <div className="mx-auto grid max-w-6xl gap-10 sm:grid-cols-3">
+      <div className="mx-auto grid max-w-6xl grid-cols-[minmax(0,1fr)] gap-10 sm:grid-cols-2 lg:grid-cols-4">
         <div>
           <p className="font-editorial text-lg font-semibold text-[var(--chrome-text)]">Maha Strategies LLC</p>
           <p className="mt-4 max-w-sm text-sm leading-6 text-[var(--chrome-muted)]">Independent research, evidence assurance, and developer infrastructure for governed AI systems.</p>
@@ -41,6 +49,12 @@ export default function SiteFooter() {
           <p className="font-mono text-[10px] uppercase tracking-widest text-[var(--chrome-text)]">Explore</p>
           <ul className="mt-4 space-y-3 text-sm">
             {companyLinks.map((link) => <li key={link.href}><Link href={link.href} className="hover:text-[var(--chrome-text)]">{link.label}</Link></li>)}
+          </ul>
+        </nav>
+        <nav aria-label="Trust and security footer links">
+          <p className="font-mono text-[10px] uppercase tracking-widest text-[var(--chrome-text)]">Trust</p>
+          <ul className="mt-4 space-y-3 text-sm">
+            {trustLinks.map((link) => <li key={link.href}><Link href={link.href} className="hover:text-[var(--chrome-text)]">{link.label}</Link></li>)}
           </ul>
         </nav>
       </div>
