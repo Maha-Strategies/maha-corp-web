@@ -53,6 +53,7 @@ test('production operation is exact-batch, idempotent, human-gated, and fail-clo
     'PROMOTE_25_EQUIPMENT_RECORDS',
     'The exact-hash publication gate refused',
     "stableKey\\(candidate.record.id, candidate.reviewTargetSha256\\)",
+    'only \\${exactHashPackets.filter\\(Boolean\\).length}/25 exact-hash reviewer packets could be verified',
     'Equipment\\s*·\\s*25',
     '/sitemap.xml',
   ]) assert.match(script, new RegExp(contract))
