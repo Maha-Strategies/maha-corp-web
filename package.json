@@ -26,6 +26,7 @@
     "operate:frontier-pilot-batch": "node --experimental-strip-types scripts/run-frontier-pilot-batch.ts",
     "operate:semiconductor-equipment-batch": "node --experimental-strip-types scripts/run-semiconductor-equipment-batch.ts",
     "operate:frontier-domain-scale": "node --experimental-strip-types scripts/run-frontier-domain-scale.ts",
+    "operate:frontier-canonicalization-canary": "node --experimental-strip-types scripts/run-frontier-canonicalization-canary.ts",
     "test:capacity": "node --experimental-strip-types scripts/run-capacity-test.ts",
     "test:agent-compatibility": "node --experimental-strip-types scripts/test-agent-compatibility.ts",
     "verify:x402-limiter": "node --experimental-strip-types scripts/verify-x402-limiter.ts",

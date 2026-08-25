@@ -1,4 +1,4 @@
-# Epistemic ingestion and expert review
+# Epistemic ingestion and scoped review
 
 ## Purpose
 
@@ -27,9 +27,11 @@ approvals that the legacy schemas did not retain.
 2. The server hashes the complete source dataset and each original record,
    creates deterministic candidate and review-target digests, evaluates the
    publication gate, and records one append-only batch.
-3. An expert reviews one frozen target through
-   `POST /api/admin/epistemic-reviews`. Their profile is retained by stable ID
-   and immutable profile version.
+3. A declared reviewer method evaluates one frozen target through
+   `POST /api/admin/epistemic-reviews`. Its profile is retained by stable ID,
+   immutable profile version, reviewer kind, and method description. External
+   expert, internal editorial, and automated-verifier decisions are never
+   represented as interchangeable.
 4. Source fidelity, domain fidelity, boundary adequacy, and rights/locator
    review are separate decisions. A reservation, request for changes, stale
    digest, or abstention does not pass that scope.
@@ -182,10 +184,12 @@ add `-- --apply` only after reviewing it. The runner can triage, start, submit
 evidence, and compile a fresh immutable draft. It cannot invite a reviewer,
 submit an expert decision, promote content, or create a canonical release.
 
-Phase 4 is operationally complete only after real, named, versioned reviewers
-submit the four required scoped decisions on exact current target hashes and a
-separate release authority operates every passing record. Source packages and
-synthetic lifecycle tests do not satisfy that human gate.
+Canonical release requires four scoped decisions on each exact current target
+hash and a separate human release authority. The decision records must disclose
+whether the method was external expert, internal editorial, or automated. An
+internal editorial pass can prove publishing throughput without claiming
+independent endorsement; external expert review can be added later as a distinct
+revision rather than blocking internal operation.
 
 ## Persistence boundary
 
@@ -242,9 +246,10 @@ separate authority credential. Only an active exact-hash release can enter the
 database-backed public projection; ingestion, source completion, re-ingestion,
 expert review, superseded versions and withdrawn versions cannot enter it.
 
-An expert decision is scoped evidence about one representation. It is not
+Any review decision is scoped evidence about one representation. It is not
 product approval, scientific validation, certification, or proof that every
-claim in the underlying source is true.
+claim in the underlying source is true. Internal editorial review is also not
+external expert review, regardless of how many criteria it satisfies.
 
 ## Phases 5–8 noncanonical factory
 

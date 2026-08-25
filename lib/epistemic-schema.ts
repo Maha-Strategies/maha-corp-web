@@ -142,6 +142,8 @@ export interface ReviewEvent {
   reviewerId: string
   reviewerProfileVersion?: number
   reviewerRole: string
+  reviewerKind?: 'external-expert' | 'internal-editorial' | 'automated-verifier'
+  reviewMethod?: string
   scope?: ExpertReviewScope
   targetSha256?: string
   reviewedAt: string
@@ -232,7 +234,7 @@ export const EPISTEMIC_SCHEMA_DESCRIPTOR = {
   axes: {
     claimKind: CLAIM_KINDS,
     evidenceMaturity: EVIDENCE_MATURITIES,
-    expertReviewScope: EXPERT_REVIEW_SCOPES,
+    scopedReview: EXPERT_REVIEW_SCOPES,
     reviewState: REVIEW_STATES,
     recordKind: RECORD_KINDS,
     bridgeType: BRIDGE_TYPES,
@@ -245,6 +247,6 @@ export const EPISTEMIC_SCHEMA_DESCRIPTOR = {
     'A source has either a real publication date or explicit undated/living-document chronology with an access date; access dates are never mislabeled as publication dates.',
     'Analogy and association bridges carry an explicit non-transfer warning.',
     'Only records passing the publication gateway generate crawlable pages.',
-    'Expert decisions bind a versioned reviewer identity and an immutable content hash; reviewer approval is not product approval.',
+    'Scoped decisions bind a versioned reviewer identity, a declared review method, and an immutable content hash; review approval is not product approval or scientific validation.',
   ],
 } as const

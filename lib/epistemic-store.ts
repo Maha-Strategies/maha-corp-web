@@ -1,6 +1,7 @@
 import { createClient, type SupabaseClient } from '@supabase/supabase-js'
 
 import type { EpistemicRecord } from './epistemic-schema.ts'
+import type { FrontierSourceVerificationReport } from './frontier-source-verification.ts'
 
 import {
   ingestionBatchSnapshot,
@@ -43,7 +44,8 @@ export async function insertEpistemicIngestionBatch(
   idempotencyKey: string,
   actorFingerprint: string,
 ) {
-  const { data, error } = await client.rpc('record_epistemic_ingestion_batch', {
+  const rpc = batch.adapterId === 'frontier-canary' ? 'record_epistemic_frontier_canary_batch' : 'record_epistemic_ingestion_batch'
+  const { data, error } = await client.rpc(rpc, {
     p_batch: ingestionBatchSnapshot(batch),
     p_records: batch.records,
     p_idempotency_hash: epistemicOperationsHash(idempotencyKey),
@@ -388,6 +390,32 @@ export async function listEpistemicSourceCompletionEvents(client: SupabaseClient
     .limit(2_000)
   if (error) throw new Error(`Epistemic source-completion event read failed: ${error.message}`)
   return (data ?? []).map((row) => row.event_snapshot as SourceCompletionEvent)
+}
+
+export async function insertFrontierSourceVerificationReport(
+  client: SupabaseClient,
+  report: FrontierSourceVerificationReport,
+  idempotencyKey: string,
+  actorFingerprint: string,
+) {
+  const { data, error } = await client.rpc('record_epistemic_source_verification_run', {
+    p_report: report,
+    p_idempotency_hash: epistemicOperationsHash(idempotencyKey),
+    p_actor_fingerprint: actorFingerprint,
+  })
+  if (error) throw new Error(`Frontier source verification failed [${error.code ?? 'unknown'}]: ${error.message}`)
+  return data as { reportId: string; reportSha256: string; idempotentReplay: boolean }
+}
+
+export async function listFrontierSourceVerificationReports(client: SupabaseClient): Promise<FrontierSourceVerificationReport[]> {
+  const { data, error } = await client
+    .from('epistemic_source_verification_runs')
+    .select('report_snapshot')
+    .eq('cohort', 'frontier-240')
+    .order('verified_at', { ascending: false })
+    .limit(20)
+  if (error) throw new Error(`Frontier source-verification read failed: ${error.message}`)
+  return (data ?? []).map((row) => row.report_snapshot as FrontierSourceVerificationReport)
 }
 
 export async function insertEpistemicCanonicalRelease(

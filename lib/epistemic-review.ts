@@ -10,6 +10,14 @@ import { epistemicReviewTargetHash, evaluatePublicationGate, sha256Canonical } f
 
 export const EPISTEMIC_REVIEW_VERSION = 'maha-epistemic-review/1.0' as const
 
+export const REVIEWER_KINDS = [
+  'external-expert',
+  'internal-editorial',
+  'automated-verifier',
+] as const
+
+export type ReviewerKind = (typeof REVIEWER_KINDS)[number]
+
 export const EXPERT_CRITERION_VERDICTS = [
   'satisfied',
   'reservation',
@@ -42,6 +50,10 @@ export interface ExpertReviewerSnapshot {
   identityUrl: string | null
   domains: string[]
   conflicts: string[]
+  /** Explicit for new decisions; absent legacy profiles predate this distinction. */
+  reviewerKind?: ReviewerKind
+  /** A bounded protocol description, never a claim of expertise. */
+  reviewMethod?: string
 }
 
 export interface ExpertCriterionDecision {
@@ -132,6 +144,14 @@ export function parseExpertReviewerSnapshot(value: unknown): ExpertReviewerSnaps
   if (!Number.isInteger(candidate.profileVersion) || Number(candidate.profileVersion) < 1) throw new Error('reviewer.profileVersion must be a positive integer.')
   const identityUrl = nullableLine(candidate.identityUrl, 'reviewer.identityUrl', 500)
   if (identityUrl && !identityUrl.startsWith('https://')) throw new Error('reviewer.identityUrl must use HTTPS.')
+  const reviewerKind = candidate.reviewerKind === undefined
+    ? undefined
+    : line(candidate.reviewerKind, 'reviewer.reviewerKind', 8, 40) as ReviewerKind
+  if (reviewerKind && !REVIEWER_KINDS.includes(reviewerKind)) throw new Error('reviewer.reviewerKind is unsupported.')
+  const reviewMethod = nullableLine(candidate.reviewMethod, 'reviewer.reviewMethod', 1000)
+  if ((reviewerKind === undefined) !== (reviewMethod === null)) {
+    throw new Error('reviewer.reviewerKind and reviewer.reviewMethod must be supplied together.')
+  }
   return {
     reviewerId,
     profileVersion: Number(candidate.profileVersion),
@@ -141,6 +161,7 @@ export function parseExpertReviewerSnapshot(value: unknown): ExpertReviewerSnaps
     identityUrl,
     domains: stringArray(candidate.domains, 'reviewer.domains', 20, 80, 1),
     conflicts: stringArray(candidate.conflicts ?? [], 'reviewer.conflicts', 20, 500),
+    ...(reviewerKind ? { reviewerKind, reviewMethod: reviewMethod! } : {}),
   }
 }
 
@@ -186,6 +207,9 @@ export function parseEpistemicExpertReview(value: unknown): ExpertReviewInput {
   if (!reviewer.domains.includes(domainSlug)) {
     throw new Error('reviewer.domains must include the target record domain.')
   }
+  if (reviewer.reviewerKind === 'automated-verifier' && !['source-fidelity', 'rights-and-locator'].includes(scope)) {
+    throw new Error('An automated verifier may decide only source-fidelity or rights-and-locator.')
+  }
   const supersedesReviewId = nullableLine(candidate.supersedesReviewId, 'supersedesReviewId', 42)
   if (supersedesReviewId && !REVIEW_ID.test(supersedesReviewId)) throw new Error('supersedesReviewId is invalid.')
   return {
@@ -228,6 +252,8 @@ export function expertReviewEvent(review: EpistemicExpertReview): ReviewEvent {
     reviewerId: review.reviewer.reviewerId,
     reviewerProfileVersion: review.reviewer.profileVersion,
     reviewerRole: review.reviewer.qualifications.join('; '),
+    reviewerKind: review.reviewer.reviewerKind,
+    reviewMethod: review.reviewer.reviewMethod,
     scope: review.scope,
     targetSha256: review.targetSha256,
     reviewedAt: review.reviewedAt,
@@ -294,4 +320,4 @@ export function authorizeEpistemicOperations(request: Request): { authorized: bo
   return { authorized: true, actorFingerprint: epistemicOperationsHash(configured) }
 }
 
-export const EPISTEMIC_EXPERT_REVIEW_BOUNDARY = 'An expert review binds one versioned identity, one scope, and one frozen content hash. It does not approve Maha as a product, establish empirical truth, or transfer authority beyond the reviewer’s declared qualifications.'
+export const EPISTEMIC_EXPERT_REVIEW_BOUNDARY = 'A scoped review binds one versioned identity, one declared method, one scope, and one frozen content hash. Automated verification, internal editorial review, and external expert review remain distinct; none establishes empirical truth or transfers authority beyond the declared method.'

@@ -105,9 +105,9 @@ export default function EpistemicSystemPage() {
         </section>
 
         <section className="evidence-section" aria-labelledby="ingestion-heading">
-          <p className="evidence-kicker">Persistent ingestion and expert review</p>
+          <p className="evidence-kicker">Persistent ingestion and scoped review</p>
           <h2 id="ingestion-heading" className="evidence-section-title mt-3">Five legacy systems now meet the same gate.</h2>
-          <p className="evidence-copy mt-5 max-w-4xl">The semiconductor, mathematics, astronomy, religion, and neuromorphic adapters preserve {EPISTEMIC_MIGRATION_INVENTORY.counts.sourceRecords} source records as immutable candidates. Each batch survives deployments, and every expert decision binds a versioned identity, one review scope, and the candidate’s frozen content hash.</p>
+          <p className="evidence-copy mt-5 max-w-4xl">The semiconductor, mathematics, astronomy, religion, and neuromorphic adapters preserve {EPISTEMIC_MIGRATION_INVENTORY.counts.sourceRecords} source records as immutable candidates. Each batch survives deployments, and every review decision binds a versioned identity, declared review method, one scope, and the candidate’s frozen content hash. External expert, internal editorial, and automated verification methods remain distinct.</p>
           <div className="mt-7 grid gap-px border border-[var(--border-default)] bg-[var(--border-default)] sm:grid-cols-3">
             <div className="bg-[var(--surface-raised)] p-6"><p className="evidence-kicker">Adapters</p><p className="mt-3 font-mono text-3xl text-[var(--text-primary)]">{EPISTEMIC_MIGRATION_INVENTORY.counts.adapters}</p></div>
             <div className="bg-[var(--surface-raised)] p-6"><p className="evidence-kicker">Imported candidates</p><p className="mt-3 font-mono text-3xl text-[var(--text-primary)]">{EPISTEMIC_MIGRATION_INVENTORY.counts.sourceRecords}</p></div>
@@ -119,7 +119,7 @@ export default function EpistemicSystemPage() {
         <section className="evidence-section" aria-labelledby="phase-two-heading">
           <p className="evidence-kicker text-[var(--status-sourced)]">Phase 2 · operational review</p>
           <h2 id="phase-two-heading" className="evidence-section-title mt-3">Withheld no longer means invisible or unstructured.</h2>
-          <p className="evidence-copy mt-5 max-w-4xl">A private work queue now classifies every gate reason into source completion, expert review, or release control. Operators can triage and assign source work, attach bounded evidence to exact blockers, and route each frozen target into one of four scoped expert-review queues.</p>
+          <p className="evidence-copy mt-5 max-w-4xl">A private work queue now classifies every gate reason into source completion, scoped review, or release control. Operators can triage and assign source work, attach bounded evidence to exact blockers, and route each frozen target into four method-declared review queues.</p>
           <div className="mt-7 grid gap-4 lg:grid-cols-3">
             <article className="evidence-card"><p className="evidence-kicker">Exact blockers</p><h3 className="evidence-card-title mt-3">Reason-coded backlog</h3><p className="evidence-card-copy mt-3">Missing locators, rights notes, publication dates, replication assessments, and integrity errors remain individually inspectable.</p></article>
             <article className="evidence-card"><p className="evidence-kicker">Append-only work</p><h3 className="evidence-card-title mt-3">Evidence without mutation</h3><p className="evidence-card-copy mt-3">Assignments and evidence submissions bind to the old target hash; they cannot silently rewrite the ingested candidate.</p></article>
@@ -134,10 +134,10 @@ export default function EpistemicSystemPage() {
         <section className="evidence-section" aria-labelledby="phase-three-heading">
           <p className="evidence-kicker text-[var(--status-verified)]">Phase 3 · controlled publication</p>
           <h2 id="phase-three-heading" className="evidence-section-title mt-3">Approval and release authority are different decisions.</h2>
-          <p className="evidence-copy mt-5 max-w-4xl">A candidate can become canonical only when every required expert scope approves the same frozen target hash and a separately authenticated human release authority accepts the publication-state decision. The operations credential is rejected by the release surface.</p>
+          <p className="evidence-copy mt-5 max-w-4xl">A candidate can become canonical only when every required scope approves the same frozen target hash and a separately authenticated human release authority accepts the publication-state decision. Each decision discloses whether it came from an external expert, an internal editorial protocol, or an automated verifier. The operations credential is rejected by the release surface.</p>
           <div className="mt-7 grid gap-4 lg:grid-cols-3">
             <article className="evidence-card"><p className="evidence-kicker">Exact target</p><h3 className="evidence-card-title mt-3">Hash-bound approvals</h3><p className="evidence-card-copy mt-3">A changed claim, source, boundary, section, or bridge changes the target digest and makes earlier decisions inapplicable.</p></article>
-            <article className="evidence-card"><p className="evidence-kicker">Separate authority</p><h3 className="evidence-card-title mt-3">No inherited power</h3><p className="evidence-card-copy mt-3">Ingestion, source-completion, re-ingestion, and expert-review credentials cannot publish a canonical route.</p></article>
+            <article className="evidence-card"><p className="evidence-kicker">Separate authority</p><h3 className="evidence-card-title mt-3">No inherited power</h3><p className="evidence-card-copy mt-3">Ingestion, source-completion, re-ingestion, and scoped-review credentials cannot publish a canonical route.</p></article>
             <article className="evidence-card"><p className="evidence-kicker">Append-only history</p><h3 className="evidence-card-title mt-3">Supersede or withdraw</h3><p className="evidence-card-copy mt-3">A correction creates a new release event. Older records remain in the public provenance ledger with an explicit status.</p></article>
           </div>
           <div className="evidence-status-surface evidence-status-surface--verified mt-6"><p className="evidence-status-label">Public projection</p><p className="evidence-copy mt-2">Only the active release generates a canonical database-backed page and sitemap row. The machine-readable registry excludes credentials, operational fingerprints, private reviewer profiles, and non-consented authority identity fields.</p></div>

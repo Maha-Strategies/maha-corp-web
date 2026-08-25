@@ -96,6 +96,8 @@ const PRIVATE_ROUTES = new Set([
   '/api/admin/epistemic-factory',
   '/api/admin/epistemic-factory/jobs',
   '/api/admin/epistemic-factory/worker',
+  '/api/admin/epistemic-source-verifications',
+  '/api/admin/epistemic-frontier-review-queues',
   '/api/mcp/epistemic-factory',
   '/api/reviewer/epistemic-review',
   // Separate-token human release authority. This internal surface can create

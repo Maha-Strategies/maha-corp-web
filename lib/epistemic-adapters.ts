@@ -31,6 +31,7 @@ import {
   RELIGION_SOURCES,
   religionConceptPath,
 } from './religion-knowledge.ts'
+import { FRONTIER_CANARY_RECORDS, FRONTIER_CANARY_VERSION } from './frontier-canonicalization.ts'
 import {
   EPISTEMIC_POLICY_VERSION,
   EPISTEMIC_SCHEMA_VERSION,
@@ -42,6 +43,7 @@ import {
 } from './epistemic-schema.ts'
 import {
   assertGraphIntegrity,
+  epistemicRecordPath,
   epistemicReviewTargetHash,
   evaluatePublicationGate,
   sha256Canonical,
@@ -56,6 +58,7 @@ export const LEGACY_ADAPTER_IDS = [
   'astronomy',
   'religion',
   'neuromorphic-biocomputing',
+  'frontier-canary',
 ] as const
 
 export type LegacyAdapterId = (typeof LEGACY_ADAPTER_IDS)[number]
@@ -439,11 +442,28 @@ export const LEGACY_EPISTEMIC_ADAPTERS: readonly LegacyAdapterDefinition[] = [
   }),
 ] as const
 
+export const FRONTIER_CANARY_EPISTEMIC_ADAPTER: LegacyAdapterDefinition = definition({
+  id: 'frontier-canary',
+  name: 'Frontier canonicalization canary',
+  description: 'The pre-registered five-record-per-domain canary only; controls remain in the private factory target ledger.',
+  sourceDatasetVersion: FRONTIER_CANARY_VERSION,
+  sourceRecords: FRONTIER_CANARY_RECORDS,
+  sourceSources: FRONTIER_CANARY_RECORDS.flatMap((record) => record.sources),
+  build: () => FRONTIER_CANARY_RECORDS.map((record) => ({
+    sourceRecordId: record.id,
+    sourceRecord: record,
+    sourcePublicPath: epistemicRecordPath(record),
+    record: structuredClone(record),
+  })),
+})
+
 export const ADAPTED_EPISTEMIC_CANDIDATES = LEGACY_EPISTEMIC_ADAPTERS.flatMap((adapter) => adapter.adapt())
 assertGraphIntegrity(ADAPTED_EPISTEMIC_CANDIDATES.map((item) => item.record))
 
 export function getLegacyEpistemicAdapter(id: string) {
-  return LEGACY_EPISTEMIC_ADAPTERS.find((adapter) => adapter.id === id)
+  return id === FRONTIER_CANARY_EPISTEMIC_ADAPTER.id
+    ? FRONTIER_CANARY_EPISTEMIC_ADAPTER
+    : LEGACY_EPISTEMIC_ADAPTERS.find((adapter) => adapter.id === id)
 }
 
 export function buildEpistemicMigrationInventory() {
