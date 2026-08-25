@@ -14,6 +14,7 @@ import {
 import { QUANTUM_SYSTEMS_GRAPH_RECORDS } from './quantum-systems-graph.ts'
 import { SYNTHETIC_BIOLOGY_GRAPH_RECORDS } from './synthetic-biology-graph.ts'
 import { getEpistemicPilotDomainLifecycle } from './epistemic-pilot-release.ts'
+import { FRONTIER_DOMAIN_GRAPH_RECORDS, FRONTIER_EPISTEMIC_DOMAINS } from './frontier-domain-graphs.ts'
 
 export const EPISTEMIC_SYSTEM_PATH = '/knowledge/epistemic-system' as const
 export const EPISTEMIC_RELEASE_DATE = '2026-08-24' as const
@@ -33,6 +34,7 @@ export const EPISTEMIC_DOMAINS: readonly EpistemicDomain[] = [
     stressPoint: 'Performance in a cell line, organoid, animal model, and human intervention are different evidence states and cannot be silently collapsed.',
     accent: 'green',
   },
+  ...FRONTIER_EPISTEMIC_DOMAINS,
 ] as const
 
 const canonicalReview = (rationale: string) => ({
@@ -206,6 +208,7 @@ export const EPISTEMIC_RECORDS: readonly EpistemicRecord[] = [
   },
   ...QUANTUM_SYSTEMS_GRAPH_RECORDS,
   ...SYNTHETIC_BIOLOGY_GRAPH_RECORDS,
+  ...FRONTIER_DOMAIN_GRAPH_RECORDS,
   {
     schemaVersion: EPISTEMIC_SCHEMA_VERSION,
     evidencePolicyVersion: EPISTEMIC_POLICY_VERSION,
