@@ -104,6 +104,8 @@ test('production operator parallelizes bounded cohorts without release authority
   assert.match(script, /mapConcurrent\(domainBatches, 4/)
   assert.match(script, /limit: 50/)
   assert.match(script, /automated source-to-claim and unsupported-inference audit/)
+  assert.match(script, /noncanonicalDraftTargets: selected\.length/)
+  assert.doesNotMatch(script, /target\.candidateSnapshot/)
   assert.match(script, /sitemapEligibleRecordPages: 0/)
   assert.match(script, /sampled noncanonical frontier route did not return 404/i)
   assert.doesNotMatch(script, /EPISTEMIC_RELEASE_AUTHORITY_TOKEN/)
