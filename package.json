@@ -102,7 +102,9 @@
     "demo:context-control": "npm --prefix packages/maha-mcp-server run build && node --experimental-strip-types scripts/run-context-control-local-demo.ts",
     "evaluate:claims-exception": "node --experimental-strip-types scripts/run-claims-exception-evaluation.ts",
     "generate:gateway-interop-fixtures": "node --experimental-strip-types scripts/generate-gateway-interop-fixtures.ts",
-    "verify:gateway-interop": "node --test --experimental-strip-types test/mcp-gateway-interop.test.ts"
+    "verify:gateway-interop": "node --test --experimental-strip-types test/mcp-gateway-interop.test.ts",
+    "evidence-dossier:ingest": "node --experimental-strip-types scripts/ingest-evidence-dossier.ts",
+    "evidence-dossier:fixtures": "node --experimental-strip-types scripts/build-evidence-dossier-fixtures.ts"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.115.0",
