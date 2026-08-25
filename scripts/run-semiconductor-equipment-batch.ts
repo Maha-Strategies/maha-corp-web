@@ -143,7 +143,7 @@ async function enqueue(baseUrl: string, token: string) {
       body: JSON.stringify({
         record: candidate.record,
         sourcePublicPath: candidate.sourcePublicPath,
-        idempotencyKey: `semiconductor-equipment:${candidate.record.id}:${candidate.reviewTargetSha256}`,
+        idempotencyKey: `semiconductor-equipment:${stableKey(candidate.record.id, candidate.reviewTargetSha256)}`,
       }),
     })
     const persistence = object(object(result.body, 'enqueue response').persistence, 'enqueue persistence')

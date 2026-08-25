@@ -52,6 +52,7 @@ test('production operation is exact-batch, idempotent, human-gated, and fail-clo
     '/api/admin/epistemic-releases',
     'PROMOTE_25_EQUIPMENT_RECORDS',
     'The exact-hash publication gate refused',
+    "stableKey\\(candidate.record.id, candidate.reviewTargetSha256\\)",
     'Equipment\\s*·\\s*25',
     '/sitemap.xml',
   ]) assert.match(script, new RegExp(contract))
@@ -60,4 +61,3 @@ test('production operation is exact-batch, idempotent, human-gated, and fail-clo
   assert.match(workflow, /EPISTEMIC_OPERATIONS_TOKEN/)
   assert.match(workflow, /EPISTEMIC_RELEASE_AUTHORITY_TOKEN/)
 })
-
