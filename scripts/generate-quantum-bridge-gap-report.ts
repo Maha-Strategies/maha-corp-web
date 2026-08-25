@@ -6,6 +6,9 @@ import {
   endpointTable,
 } from '../lib/quantum-bridge-audit-package.ts'
 import { QUANTUM_BRIDGE_CANDIDATES } from '../lib/quantum-bridge-candidates.ts'
+import { BRIDGE_SOURCE_LEDGER } from '../lib/bridge-source-ledger.ts'
+import { ENDPOINT_DISPOSITIONS, dispositionTotals } from '../lib/bridge-endpoint-dispositions.ts'
+import { ENDPOINT_CANDIDATES, candidateBlockers } from '../lib/bridge-endpoint-candidates.ts'
 
 /**
  * Emits the machine- and human-readable gap report for the Q-BR batch.
@@ -20,7 +23,21 @@ mkdirSync('docs/bridges', { recursive: true })
 
 writeFileSync(
   'content/bridges/quantum-bridge-gap-report.json',
-  `${JSON.stringify({ ...report, endpoints, bridges: QUANTUM_BRIDGE_AUDIT }, null, 2)}\n`,
+  `${JSON.stringify(
+    {
+      ...report,
+      endpoints,
+      bridges: QUANTUM_BRIDGE_AUDIT,
+      sourceLedger: BRIDGE_SOURCE_LEDGER,
+      endpointDispositions: ENDPOINT_DISPOSITIONS,
+      endpointCandidates: ENDPOINT_CANDIDATES.map((candidate) => ({
+        ...candidate,
+        blockers: candidateBlockers(candidate),
+      })),
+    },
+    null,
+    2,
+  )}\n`,
 )
 
 const row = (cells: string[]) => `| ${cells.join(' | ')} |`
@@ -91,6 +108,41 @@ lines.push('### Declared aliases', '')
 lines.push(row(['Alias', 'Target', 'Since', 'Reason']), row(['---', '---', '---', '---']))
 for (const alias of report.namespaces.aliases) {
   lines.push(row([`\`${alias.alias}\``, `\`${alias.target}\``, alias.since, alias.reason]))
+}
+lines.push('')
+
+lines.push('## Source verification ledger (24 citations)', '')
+lines.push(row(['Key', 'State', 'Identifier', 'Locator']), row(['---', '---', '---', '---']))
+for (const entry of BRIDGE_SOURCE_LEDGER) {
+  lines.push(
+    row([
+      entry.key,
+      entry.verification,
+      entry.identifier ? `\`${entry.identifier}\`` : '—',
+      entry.locator ?? '—',
+    ]),
+  )
+}
+lines.push('')
+
+lines.push('## Endpoint dispositions (23 unresolved)', '')
+lines.push(row(['Disposition', 'Count']), row(['---', '---']))
+for (const [name, count] of Object.entries(dispositionTotals())) lines.push(row([name, String(count)]))
+lines.push('')
+lines.push(row(['Key', 'Submitted reference', 'Disposition', 'In batch']), row(['---', '---', '---', '---']))
+for (const entry of ENDPOINT_DISPOSITIONS) {
+  lines.push(
+    row([entry.key, `\`${entry.submittedReference}\``, entry.disposition, entry.inCreationBatch ? 'yes' : 'no']),
+  )
+}
+lines.push('')
+
+lines.push('## Endpoint candidates created', '')
+lines.push(row(['Candidate', 'Domain', 'Class', 'Blockers']), row(['---', '---', '---', '---']))
+for (const candidate of ENDPOINT_CANDIDATES) {
+  lines.push(
+    row([candidate.title, candidate.domainSlug, candidate.recordClass, candidateBlockers(candidate).join(', ') || 'none']),
+  )
 }
 lines.push('')
 
