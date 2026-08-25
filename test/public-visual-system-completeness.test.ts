@@ -24,14 +24,17 @@ const knowledge = /^knowledge\//
 const books = /^books\//
 const apps = /^apps\//
 const docs = /^docs\//
+  // Internal, noindex demonstration surfaces. Not part of the public visual system.
+  const internal = /^internal\//
 
 test('every route belongs to one declared visual system', () => {
-  const groups = { paper: 0, apps: 0, books: 0, docs: 0, knowledge: 0, intelligence: 0, operator: 0 }
+  const groups = { paper: 0, apps: 0, books: 0, docs: 0, knowledge: 0, intelligence: 0, operator: 0, internal: 0 }
   const missingPaperBoundary: string[] = []
 
   for (const path of pages) {
     const file = routeFile(path)
     if (operator.test(file)) { groups.operator += 1; continue }
+    if (internal.test(file)) { groups.internal += 1; continue }
     if (intelligence.test(file)) { groups.intelligence += 1; continue }
     if (knowledge.test(file)) { groups.knowledge += 1; continue }
     if (books.test(file)) { groups.books += 1; continue }
@@ -46,11 +49,11 @@ test('every route belongs to one declared visual system', () => {
   }
 
   assert.equal(
-    groups.paper + groups.apps + groups.books + groups.docs + groups.knowledge + groups.intelligence + groups.operator,
+    groups.paper + groups.apps + groups.books + groups.docs + groups.knowledge + groups.intelligence + groups.operator + groups.internal,
     pages.length,
   )
   assert.deepEqual(missingPaperBoundary, [])
-  assert.deepEqual(groups, { paper: 108, apps: 6, books: 35, docs: 1, knowledge: 44, intelligence: 2, operator: 32 })
+  assert.deepEqual(groups, { paper: 108, apps: 6, books: 35, docs: 1, knowledge: 44, intelligence: 2, operator: 32, internal: 1 })
 })
 
 test('Apps, Books, Docs, Knowledge, and Intelligence own bounded cyber-light overlays', () => {
