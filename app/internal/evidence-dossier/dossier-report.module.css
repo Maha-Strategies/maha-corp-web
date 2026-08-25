@@ -1,0 +1,48 @@
+/* Evidence dossier report. Screen and print share one layout so the browser
+   PDF export matches what the reviewer sees. */
+.page { background: var(--surface-paper); color: var(--text-primary); padding: 3rem 1.5rem; }
+.sheet { margin: 0 auto; max-width: 54rem; }
+
+/* The draft label is the most consequential text on the page, so it carries a
+   locally darkened red: the shared --status-unverified token measures 4.10:1
+   against its own tint, below AA. This scope does not change the token. */
+.draftBanner {
+  --draft-red: #8f2f21;
+  border: 2px solid var(--draft-red);
+  background: var(--surface-unverified);
+  padding: 1rem 1.25rem;
+  margin-bottom: 2rem;
+}
+.draftLabel {
+  color: var(--draft-red);
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 0.75rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase;
+}
+.meta { font-family: var(--font-geist-mono), ui-monospace, monospace; font-size: 0.75rem; color: var(--text-muted); letter-spacing: 0.08em; }
+.h1 { font-size: 2rem; font-weight: 700; line-height: 1.2; margin: 0.75rem 0; }
+.h2 { font-size: 1.125rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; margin: 2.5rem 0 0.75rem; border-bottom: 1px solid var(--border-default); padding-bottom: 0.4rem; }
+.h3 { font-size: 0.95rem; font-weight: 700; margin: 0 0 0.35rem; }
+.copy { font-size: 0.9375rem; line-height: 1.65; color: var(--text-secondary); }
+.claim { border: 1px solid var(--border-default); border-left: 3px solid var(--status-sourced); background: var(--surface-raised); padding: 1rem 1.25rem; margin-bottom: 1rem; break-inside: avoid; }
+.status { display: inline-block; border: 1px solid currentcolor; padding: 0.1rem 0.45rem; font-family: var(--font-geist-mono), ui-monospace, monospace; font-size: 0.6875rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; }
+.statusSupported { color: var(--status-verified); }
+.statusMetadata { color: var(--status-boundary); }
+.label { font-family: var(--font-geist-mono), ui-monospace, monospace; font-size: 0.6875rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); margin-top: 0.75rem; }
+.quote { border-left: 2px solid var(--border-default); padding-left: 0.75rem; font-style: italic; color: var(--text-secondary); }
+.locator { font-family: var(--font-geist-mono), ui-monospace, monospace; font-size: 0.75rem; color: var(--status-sourced); }
+.list { margin: 0.35rem 0 0; padding-left: 1.1rem; }
+.list li { font-size: 0.875rem; line-height: 1.6; color: var(--text-secondary); }
+.digest { font-family: var(--font-geist-mono), ui-monospace, monospace; font-size: 0.6875rem; word-break: break-all; color: var(--text-muted); }
+.tableWrap { overflow-x: auto; }
+.table { width: 100%; border-collapse: collapse; font-size: 0.8125rem; }
+.table th, .table td { border: 1px solid var(--border-default); padding: 0.45rem 0.6rem; text-align: left; vertical-align: top; }
+.table th { background: var(--surface-subtle); font-family: var(--font-geist-mono), ui-monospace, monospace; font-size: 0.6875rem; text-transform: uppercase; letter-spacing: 0.08em; }
+
+@media print {
+  .page { padding: 0; background: #fff; }
+  .noPrint { display: none !important; }
+  .claim, .draftBanner { break-inside: avoid; }
+  .h2 { break-after: avoid; }
+  a[href]::after { content: ' (' attr(href) ')'; font-size: 0.7em; word-break: break-all; }
+  @page { margin: 18mm; }
+}
