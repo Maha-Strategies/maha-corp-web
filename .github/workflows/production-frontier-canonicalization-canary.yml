@@ -1,0 +1,51 @@
+name: Production frontier canonicalization canary
+
+on:
+  workflow_dispatch:
+    inputs:
+      operation:
+        description: Verify and queue, internally review, or publish the exact 40-record canary
+        required: true
+        default: verify-queue
+        type: choice
+        options:
+          - verify-queue
+          - verify-review
+          - verify-review-publish
+      confirmation:
+        description: Type PROMOTE_40_INTERNAL_CANARIES only for publication
+        required: false
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: production-frontier-canonicalization-canary
+  cancel-in-progress: false
+
+jobs:
+  operate:
+    runs-on: ubuntu-latest
+    environment: production-database
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Verify publication confirmation
+        if: inputs.operation == 'verify-review-publish'
+        env:
+          CONFIRMATION: ${{ inputs.confirmation }}
+        run: test "$CONFIRMATION" = "PROMOTE_40_INTERNAL_CANARIES"
+      - name: Operate source verification, domain queues, and canary
+        env:
+          EPISTEMIC_OPERATIONS_TOKEN: ${{ secrets.EPISTEMIC_OPERATIONS_TOKEN }}
+          EPISTEMIC_RELEASE_AUTHORITY_TOKEN: ${{ secrets.EPISTEMIC_RELEASE_AUTHORITY_TOKEN }}
+          EPISTEMIC_FRONTIER_CANARY_CONFIRM: ${{ inputs.confirmation }}
+        run: >-
+          node --experimental-strip-types scripts/run-frontier-canonicalization-canary.ts
+          --apply
+          ${{ inputs.operation != 'verify-queue' && '--review' || '' }}
+          ${{ inputs.operation == 'verify-review-publish' && '--publish' || '' }}

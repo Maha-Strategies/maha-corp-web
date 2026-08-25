@@ -44,6 +44,7 @@ export default async function EpistemicRecordPage({ params }: PageProps) {
   }
   const path = epistemicRecordPath(record)
   const provenance = buildProvenanceBundle(record)
+  const scopedReviews = record.publication.reviewEvents.filter((event) => event.scope)
   const publicRecords = await getPublicEpistemicRecords()
   const publicRecordsById = new Map(publicRecords.map((candidate) => [candidate.id, candidate]))
   const connections = getEpistemicRecordConnections(record.id).flatMap((connection) => {
@@ -141,6 +142,7 @@ export default async function EpistemicRecordPage({ params }: PageProps) {
 
           <aside className="space-y-6">
             <div className="evidence-card"><p className="evidence-kicker">Evidence contract</p><dl className="mt-5 space-y-4 text-sm"><div><dt className="text-[var(--text-muted)]">Claims</dt><dd className="mt-1 font-mono text-[var(--text-primary)]">{record.claims.length}</dd></div><div><dt className="text-[var(--text-muted)]">Sources</dt><dd className="mt-1 font-mono text-[var(--text-primary)]">{record.sources.length}</dd></div><div><dt className="text-[var(--text-muted)]">Canonical version</dt><dd className="mt-1 font-mono text-[var(--text-primary)]">{record.publication.canonicalVersion}</dd></div></dl></div>
+            {scopedReviews.length > 0 && <div className="evidence-card"><p className="evidence-kicker">Review provenance</p><p className="evidence-card-copy mt-3">Canonical status records protocol compliance. Reviewer type and method remain visible so internal review cannot be mistaken for independent expert endorsement.</p><div className="mt-5 space-y-5">{scopedReviews.map((event) => <div key={`${event.scope}:${event.reviewId}`}><p className="evidence-chip evidence-chip--sourced">{event.scope}</p><p className="mt-3 font-mono text-xs text-[var(--text-primary)]">{event.reviewerKind ?? 'legacy reviewer — kind not recorded'}</p>{event.reviewMethod && <p className="mt-2 text-xs leading-5 text-[var(--text-secondary)]">{event.reviewMethod}</p>}</div>)}</div></div>}
             <div className="evidence-status-surface evidence-status-surface--boundary"><p className="evidence-status-label">Prohibited inference</p><ul className="mt-3 space-y-3">{record.prohibitedInferences.map((value) => <li key={value} className="text-sm leading-6 text-[var(--text-secondary)]">{value}</li>)}</ul></div>
             <div className="evidence-code p-5"><p className="font-mono text-[10px] uppercase tracking-widest text-[#a8d5c3]">Canonical content hash</p><p className="mt-3 break-all font-mono text-xs leading-5 text-[#edf8f4]">{provenance.contentHash}</p><a href={epistemicProvenancePath(record)} className="mt-5 inline-block font-mono text-[10px] uppercase tracking-widest text-[#bde8d5] underline">Open provenance.json →</a></div>
           </aside>
