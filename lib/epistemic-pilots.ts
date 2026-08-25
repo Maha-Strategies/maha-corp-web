@@ -13,6 +13,7 @@ import {
 } from './epistemic-publication.ts'
 import { QUANTUM_SYSTEMS_GRAPH_RECORDS } from './quantum-systems-graph.ts'
 import { SYNTHETIC_BIOLOGY_GRAPH_RECORDS } from './synthetic-biology-graph.ts'
+import { getEpistemicPilotDomainLifecycle } from './epistemic-pilot-release.ts'
 
 export const EPISTEMIC_SYSTEM_PATH = '/knowledge/epistemic-system' as const
 export const EPISTEMIC_RELEASE_DATE = '2026-08-24' as const
@@ -313,6 +314,7 @@ export function buildDomainRegistry(
   const records = getDomainRecords(domainSlug)
   const canonicalRecords = publicRecords.filter((record) => record.domainSlug === domainSlug)
   const canonicalIds = new Set(canonicalRecords.map((record) => record.id))
+  const lifecycle = getEpistemicPilotDomainLifecycle(domainSlug, canonicalIds)
   const withheld = records.filter((record) => !canonicalIds.has(record.id))
   const withheldRecordKinds = Object.fromEntries(
     [...new Set(withheld.map((record) => record.recordKind))]
@@ -324,6 +326,7 @@ export function buildDomainRegistry(
     evidencePolicyVersion: EPISTEMIC_POLICY_VERSION,
     generatedAt: `${EPISTEMIC_RELEASE_DATE}T00:00:00.000Z`,
     domain,
+    lifecycle,
     counts: {
       graphRecords: records.length,
       graphEdges: records.reduce((count, record) => count + record.bridges.length, 0),
