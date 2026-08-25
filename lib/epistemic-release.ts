@@ -58,6 +58,8 @@ export interface ScopedReleaseApproval {
   reviewId: string
   reviewSha256: string
   reviewedAt: string
+  reviewerKind?: 'external-expert' | 'internal-editorial' | 'automated-verifier'
+  reviewMethod?: string
 }
 
 export interface EpistemicCanonicalRelease {
@@ -189,7 +191,7 @@ export function releaseReadiness(
   const approvals = (target.candidateSnapshot.publication.requiredReviewScopes ?? EXPERT_REVIEW_SCOPES).flatMap((scope) => {
     const review = latest.get(scope)
     return review?.decision === 'approve'
-      ? [{ scope, reviewId: review.reviewId, reviewSha256: review.reviewSha256, reviewedAt: review.reviewedAt }]
+      ? [{ scope, reviewId: review.reviewId, reviewSha256: review.reviewSha256, reviewedAt: review.reviewedAt, reviewerKind: review.reviewer.reviewerKind, reviewMethod: review.reviewer.reviewMethod }]
       : []
   })
   const reviewed = applyExpertReviews(target.candidateSnapshot, [...latest.values()])
@@ -268,6 +270,8 @@ export function buildEpistemicCanonicalRelease(
     reviewId: review.reviewId,
     reviewSha256: review.reviewSha256,
     reviewedAt: review.reviewedAt,
+    reviewerKind: review.reviewer.reviewerKind,
+    reviewMethod: review.reviewer.reviewMethod,
   })).sort((left, right) => left.scope.localeCompare(right.scope))
   const unsigned = {
     schemaVersion: EPISTEMIC_RELEASE_VERSION,
@@ -349,7 +353,7 @@ export function sanitizedEpistemicRelease(
     canonicalPath: release.canonicalPath,
     canonicalVersion: release.canonicalVersion,
     supersedesReleaseId: release.supersedesReleaseId,
-    approvals: release.approvals.map(({ scope, reviewId, reviewSha256, reviewedAt }) => ({ scope, reviewId, reviewSha256, reviewedAt })),
+    approvals: release.approvals.map(({ scope, reviewId, reviewSha256, reviewedAt, reviewerKind, reviewMethod }) => ({ scope, reviewId, reviewSha256, reviewedAt, reviewerKind, reviewMethod })),
     releaseAuthority: release.authority.publicAttribution
       ? { authorityId: release.authority.authorityId, displayName: release.authority.displayName, role: release.authority.role }
       : { authoritySha256: release.authoritySha256, attribution: 'withheld-by-consent' as const },
@@ -400,4 +404,4 @@ export function authorizeEpistemicReleaseAuthority(request: Request): { authoriz
   return { authorized: true, actorFingerprint: releaseTokenHash(configured) }
 }
 
-export const EPISTEMIC_RELEASE_BOUNDARY = 'A canonical release requires unqualified approvals for every required scope on one exact target hash plus a separately authenticated human release authority. Release authority does not establish empirical truth, and no AI or ingestion credential can publish autonomously.'
+export const EPISTEMIC_RELEASE_BOUNDARY = 'A canonical release requires unqualified, method-declared decisions for every required scope on one exact target hash plus a separately authenticated human release authority. Internal or automated review is never presented as external expert endorsement; release authority does not establish empirical truth.'
