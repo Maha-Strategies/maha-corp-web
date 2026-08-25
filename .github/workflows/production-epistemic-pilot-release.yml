@@ -1,0 +1,46 @@
+name: Production epistemic pilot release
+
+on:
+  workflow_dispatch:
+    inputs:
+      operation:
+        description: Check all 46 records, or publish every reviewed record
+        required: true
+        default: readiness
+        type: choice
+        options:
+          - readiness
+          - publish
+      confirmation:
+        description: Type PROMOTE_46_PILOT_RECORDS when operation is publish
+        required: false
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: production-epistemic-pilot-release
+  cancel-in-progress: false
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    environment: production-database
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Verify confirmation
+        if: inputs.operation == 'publish'
+        env:
+          CONFIRMATION: ${{ inputs.confirmation }}
+        run: test "$CONFIRMATION" = "PROMOTE_46_PILOT_RECORDS"
+      - name: Run complete pilot release
+        env:
+          EPISTEMIC_OPERATIONS_TOKEN: ${{ secrets.EPISTEMIC_OPERATIONS_TOKEN }}
+          EPISTEMIC_RELEASE_AUTHORITY_TOKEN: ${{ secrets.EPISTEMIC_RELEASE_AUTHORITY_TOKEN }}
+          EPISTEMIC_PILOT_RELEASE_CONFIRM: ${{ inputs.confirmation }}
+        run: node --experimental-strip-types scripts/run-production-epistemic-pilot-release.ts ${{ inputs.operation == 'publish' && '--publish' || '' }}

@@ -40,6 +40,8 @@ export default async function EpistemicDomainPage({ params }: PageProps) {
   const publicRecords = await getPublicEpistemicDomainRecords(domain.slug)
   const graphEdges = graphRecords.reduce((count, record) => count + record.bridges.length, 0)
   const registry = buildDomainRegistry(domain.slug, publicRecords)
+  const lifecycle = registry?.lifecycle
+  const activeStructuredDomain = lifecycle?.status === 'active-structured-domain'
   const path = `/knowledge/${domain.slug}`
   const jsonLd = {
     '@context': 'https://schema.org',
@@ -57,10 +59,16 @@ export default async function EpistemicDomainPage({ params }: PageProps) {
       <div className="evidence-container">
         <nav aria-label="Breadcrumb" className="evidence-kicker"><Link href="/knowledge" className="evidence-link">Knowledge</Link><span className="px-2">/</span><span>{domain.name}</span></nav>
         <header className="mt-10 max-w-5xl">
-          <p className="evidence-kicker text-[var(--status-sourced)]">Adversarial pilot · governed domain</p>
+          <p className={`evidence-kicker ${activeStructuredDomain ? 'text-[var(--status-verified)]' : 'text-[var(--status-sourced)]'}`}>
+            {activeStructuredDomain ? 'Active structured domain · foundational corpus' : 'Adversarial pilot · governed domain'}
+          </p>
           <h1 className="evidence-title">{domain.name}</h1>
           <p className="evidence-lede mt-7">{domain.description}</p>
           <div className="evidence-status-surface evidence-status-surface--boundary mt-8"><p className="evidence-status-label">Primary stress point</p><p className="evidence-copy mt-2">{domain.stressPoint}</p></div>
+          <div className={`mt-4 evidence-status-surface ${activeStructuredDomain ? 'evidence-status-surface--verified' : 'evidence-status-surface--boundary'}`}>
+            <p className="evidence-status-label">Canonical factory depth</p>
+            <p className="evidence-copy mt-2">{lifecycle?.canonicalFactoryRecords ?? 0} of {lifecycle?.foundationalTarget ?? 0} governed factory records are active canonical releases. {activeStructuredDomain ? 'The foundational graph is fully public; higher-order hypotheses remain separately gated.' : 'The domain remains a pilot until every foundational factory record independently passes review and release.'}</p>
+          </div>
         </header>
 
         <section className="evidence-section" aria-labelledby="records-heading">
