@@ -272,3 +272,34 @@ test('the frontier canary cohort is unchanged', () => {
   assert.equal(FRONTIER_CANARY_RECORDS.length, 40)
   assert.equal(FRONTIER_CANARY_CONTROL_RECORDS.length, 200)
 })
+
+test('the example audit states unverifiability, not nonexistence', () => {
+  // Absence from the indexes searched is not proof that no related publication
+  // exists. The findings must claim only what the checks establish.
+  const overclaim =
+    /\b(fabricated|does not exist|do not exist|never existed|no such (paper|document|publication) exists|cannot have been read)\b/i
+  for (const finding of ANTIGRAVITY_EXAMPLE_FINDINGS) {
+    assert.doesNotMatch(finding.finding, overclaim, `${finding.ref} asserts more than the checks establish`)
+  }
+
+  const doiFindings = ANTIGRAVITY_EXAMPLE_FINDINGS.filter((entry) => /DOI$/.test(entry.ref))
+  assert.equal(doiFindings.length, 2)
+  for (const finding of doiFindings) {
+    assert.match(finding.finding, /unregistered/i, 'must state the identifier is unregistered')
+    assert.match(finding.finding, /Crossref/i, 'must state no matching Crossref record was located')
+    assert.match(finding.finding, /could not be authenticated/i, 'must state the passage could not be authenticated')
+    assert.match(finding.finding, /unverifiable/i, 'must state the submitted claim is unverifiable')
+  }
+  // At least one finding must explicitly preserve the alternative.
+  assert.ok(
+    doiFindings.some((finding) => /different (identifier|metadata)/i.test(finding.finding)),
+    'the possibility of a publication under different metadata must be preserved',
+  )
+})
+
+test('the demonstration header does not assert the cited documents are absent', () => {
+  const source = readFileSync(new URL('../lib/evidence-dossier/demonstration.ts', import.meta.url), 'utf8')
+  const header = source.slice(0, source.indexOf('const NIST_URL'))
+  assert.doesNotMatch(header, /fabricated|could not have been read|do(es)? not exist/i)
+  assert.match(header, /could not be authenticated/i)
+})

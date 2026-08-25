@@ -24,7 +24,7 @@ export const ANTIGRAVITY_EXAMPLE_FINDINGS: readonly ExampleFinding[] = [
     submitted: 'doi 10.1117/1.JMM.21.3.031202, quoted as measuring 97.8% (+/- 0.3%) single-pass EUV transmission.',
     verdict: 'rejected',
     finding:
-      'The DOI is not registered. The global handle system returns responseCode 100 (handle not found) and Crossref has no record. A passage cannot have been read from a document this identifier does not resolve to, so the quoted transmission figure has no traceable origin.',
+      'The submitted DOI is unregistered: the global handle system returns responseCode 100 (handle not found) and no matching Crossref record was located. The cited document therefore could not be retrieved and the quoted passage could not be authenticated against it, so the submitted claim is unverifiable and is rejected. This is a finding about the submitted metadata, not a determination that no related publication exists; a paper with this content may be indexed under a different identifier, and an exhaustive authoritative search was not performed.',
     checkedAgainst: 'doi.org handle API; Crossref REST API; doi.org HTTP resolution',
   },
   {
@@ -32,7 +32,7 @@ export const ANTIGRAVITY_EXAMPLE_FINDINGS: readonly ExampleFinding[] = [
     submitted: 'doi 10.1117/12.2584112, quoted as observing CNT mass loss under 20 Pa hydrogen radical plasma.',
     verdict: 'rejected',
     finding:
-      'The DOI is not registered. Same result as clm_01: responseCode 100 and no Crossref record.',
+      'The submitted DOI is unregistered: responseCode 100 and no matching Crossref record, the same result as clm_01. The passage could not be authenticated against the cited identifier, so the submitted claim is unverifiable and is rejected. No conclusion is drawn about whether a related publication exists under different metadata.',
     checkedAgainst: 'doi.org handle API; Crossref REST API; doi.org HTTP resolution',
   },
   {
@@ -90,7 +90,7 @@ export const ANTIGRAVITY_EXAMPLE_FINDINGS: readonly ExampleFinding[] = [
     submitted: 'High-NA EUV carbon nanotube pellicle thermal dissipation.',
     verdict: 'rejected',
     finding:
-      'The topic itself is legitimate, but neither supplied source exists and no substitute was found that could be opened and quoted with an exact locator within this sprint. Rather than rebuild the same topic on sources that were never inspected, the demonstration was moved to EUV photoresist stochastics, where the primary source could be downloaded and read.',
+      'The topic itself is legitimate, but neither submitted identifier resolves, so neither passage could be authenticated, and no substitute was found that could be opened and quoted with an exact locator within this sprint. Rather than rebuild the topic on sources that could not be inspected, the demonstration was moved to EUV photoresist stochastics, where the primary source could be downloaded and read.',
     checkedAgainst: 'doi.org handle API; Crossref; publisher availability',
   },
 ]

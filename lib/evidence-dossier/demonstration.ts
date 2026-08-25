@@ -17,9 +17,12 @@ import {
  * Topic: stochastic acid generation in EUV photoresist.
  *
  * This is NOT the topic the commercial brief proposed. The brief's High-NA EUV
- * carbon-nanotube pellicle example was rejected outright: both of its DOIs are
- * unregistered in the global DOI handle system, so its quoted passages could
- * not have been read from the documents it names. See antigravity-example-audit.
+ * carbon-nanotube pellicle example was rejected because both submitted DOIs are
+ * unregistered in the global DOI handle system and no matching Crossref records
+ * were located, so the quoted passages could not be authenticated against the
+ * cited identifiers. That makes the submitted claims unverifiable; it does not
+ * establish that no related publication exists under different metadata. See
+ * antigravity-example-audit.
  *
  * The replacement topic was chosen because its primary source can actually be
  * opened. Every passage below was read from the PDF, and every locator points
