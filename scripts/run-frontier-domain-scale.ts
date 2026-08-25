@@ -155,7 +155,7 @@ async function verifyReviewTargets(baseUrl: string, token: string, records: read
   })
   return {
     exactHashTargets: selected.length,
-    canonical: selected.filter((target) => object(target.candidateSnapshot, 'candidate snapshot').publication && object(object(target.candidateSnapshot, 'candidate snapshot').publication, 'publication').reviewState === 'published-canonical').length,
+    noncanonicalDraftTargets: selected.length,
     requiredReviewScopes: 4,
   }
 }
