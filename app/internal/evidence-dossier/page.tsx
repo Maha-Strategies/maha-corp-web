@@ -5,8 +5,11 @@ import { ANTIGRAVITY_EXAMPLE_FINDINGS } from '@/lib/evidence-dossier/antigravity
 import { validateDossier } from '@/lib/evidence-dossier/validator'
 import styles from './dossier-report.module.css'
 
+// Derived from the dossier so the title cannot drift behind the revision.
+const revision = dossier.corpusRevision.split('/').pop() ?? '0'
+
 export const metadata: Metadata = {
-  title: 'Evidence Dossier v0.1 (draft demonstration) | Maha Strategies',
+  title: `Evidence Dossier v${revision} (draft demonstration) | Maha Strategies`,
   description: 'Internal demonstration of the evidence dossier format. Illustrative draft; not published.',
   robots: { index: false, follow: false, nocache: true },
 }
@@ -164,6 +167,101 @@ export default function EvidenceDossierDemonstrationPage() {
             <p className={styles.digest}>{claim.provenanceDigest}</p>
           </section>
         ))}
+
+        <h2 className={styles.h2}>Source comparison</h2>
+        {dossier.comparisons.map((comparison) => (
+          <section key={comparison.comparisonId}>
+            <p className={styles.copy}>{comparison.question}</p>
+            <p className={styles.label}>Relation</p>
+            <p className={`${styles.status} ${styles.statusMetadata}`}>{comparison.relation}</p>
+            <p className={`${styles.copy} mt-3`}>{comparison.relationRationale}</p>
+
+            <p className={styles.label}>Axis-by-axis</p>
+            <div className={styles.tableWrap}>
+              <table className={styles.table}>
+                <thead>
+                  <tr>
+                    <th>Axis</th>
+                    {comparison.sourceIds.map((sourceId) => (
+                      <th key={sourceId}>{sourceById.get(sourceId)?.submittedCitation.split('(')[0].trim()}</th>
+                    ))}
+                    <th>Comparable</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {comparison.axes.map((axis) => (
+                    <tr key={axis.axis}>
+                      <td>{axis.axis}</td>
+                      {comparison.sourceIds.map((sourceId) => (
+                        <td key={sourceId}>{axis.values[sourceId] ?? '—'}</td>
+                      ))}
+                      <td>
+                        {axis.comparable ? 'yes' : 'no'}
+                        <br />
+                        <span className={styles.meta}>{axis.note}</span>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+
+            <p className={styles.label}>Where they agree</p>
+            <ul className={styles.list}>
+              {comparison.agreements.map((item) => (
+                <li key={item}>{item}</li>
+              ))}
+            </ul>
+
+            {comparison.qualifications.length > 0 && (
+              <>
+                <p className={styles.label}>Where one qualifies the other</p>
+                <ul className={styles.list}>
+                  {comparison.qualifications.map((item) => (
+                    <li key={item}>{item}</li>
+                  ))}
+                </ul>
+              </>
+            )}
+
+            <p className={styles.label}>Comparability limits</p>
+            <ul className={styles.list}>
+              {comparison.comparabilityLimits.map((item) => (
+                <li key={item}>{item}</li>
+              ))}
+            </ul>
+
+            <p className={styles.label}>Is this replication?</p>
+            <p className={styles.copy}>{comparison.replicationAssessment}</p>
+
+            <p className={styles.label}>Comparison digest</p>
+            <p className={styles.digest}>{comparison.provenanceDigest}</p>
+          </section>
+        ))}
+
+        <h2 className={styles.h2}>Prior revisions</h2>
+        <div className={styles.tableWrap}>
+          <table className={styles.table}>
+            <thead>
+              <tr>
+                <th>Version</th>
+                <th>Superseded</th>
+                <th>Digest</th>
+                <th>Summary</th>
+              </tr>
+            </thead>
+            <tbody>
+              {dossier.priorRevisions.map((revision) => (
+                <tr key={revision.version}>
+                  <td>{revision.version}</td>
+                  <td>{revision.supersededAt}</td>
+                  <td className={styles.digest}>{revision.dossierDigest}</td>
+                  <td>{revision.summary}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
 
         <h2 className={styles.h2}>Contradictions</h2>
         <ul className={styles.list}>
