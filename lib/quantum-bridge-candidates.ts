@@ -48,11 +48,6 @@ export const SOURCE_VERIFICATION_STATES = [
 ] as const
 export type SourceVerificationState = (typeof SOURCE_VERIFICATION_STATES)[number]
 
-export type ReferenceResolution =
-  | { status: 'resolved'; recordId: string }
-  | { status: 'unresolved-record'; domainSlug: string; nearestSlug: string | null }
-  | { status: 'unresolved-domain'; domainSlug: string }
-
 export interface CandidateSource {
   side: 'A' | 'B'
   citation: string
@@ -74,8 +69,6 @@ export interface BridgeCandidate {
   /** The proposal's own reference strings, preserved exactly as supplied. */
   declaredSourceRef: string
   declaredTargetRef: string
-  sourceResolution: ReferenceResolution
-  targetResolution: ReferenceResolution
   direction: 'directed' | 'bidirectional'
   mechanism: string
   establishes: string
@@ -152,8 +145,6 @@ export function candidateSha256(candidate: BridgeCandidate): string {
     classification: candidate.classification,
     declaredSourceRef: candidate.declaredSourceRef,
     declaredTargetRef: candidate.declaredTargetRef,
-    sourceResolution: candidate.sourceResolution,
-    targetResolution: candidate.targetResolution,
     mechanism: candidate.mechanism,
     establishes: candidate.establishes,
     doesNotEstablish: candidate.doesNotEstablish,
@@ -170,17 +161,6 @@ export function batchDigest(candidates: readonly BridgeCandidate[]): string {
 
 /* ----------------------------------------------------------- candidates -- */
 
-const unresolvedRecord = (domainSlug: string, nearestSlug: string | null): ReferenceResolution => ({
-  status: 'unresolved-record',
-  domainSlug,
-  nearestSlug,
-})
-
-const unresolvedDomain = (domainSlug: string): ReferenceResolution => ({
-  status: 'unresolved-domain',
-  domainSlug,
-})
-
 const NO_LOCATORS =
   'No exact locator (theorem, equation, section, chapter, figure, table, or page range) was supplied for either side, and none was invented during the audit.'
 
@@ -194,8 +174,6 @@ export const QUANTUM_BRIDGE_CANDIDATES: readonly BridgeCandidate[] = [
     classification: 'SHARED_FORMALISM',
     declaredSourceRef: 'quantum-systems:surface-code-threshold',
     declaredTargetRef: 'mathematics:algebraic-coding-theory',
-    sourceResolution: unresolvedRecord('quantum-systems', 'surface-code-error-correction'),
-    targetResolution: unresolvedDomain('mathematics'),
     direction: 'directed',
     mechanism:
       'CSS construction mapping two classical linear codes C1[n,k1] and C2perp[n,k2] with C2perp subset of C1 onto an [[n, k1-k2, d]] stabilizer code via the symplectic inner product.',
@@ -212,6 +190,7 @@ export const QUANTUM_BRIDGE_CANDIDATES: readonly BridgeCandidate[] = [
         identifier: 'arXiv:quant-ph/9705052',
         locator: null,
         verification: 'not-independently-verified',
+
       },
       {
         side: 'B',
@@ -219,6 +198,7 @@ export const QUANTUM_BRIDGE_CANDIDATES: readonly BridgeCandidate[] = [
         identifier: null,
         locator: null,
         verification: 'not-independently-verified',
+
       },
     ],
     rightsBasis: 'unverified',
@@ -244,8 +224,6 @@ export const QUANTUM_BRIDGE_CANDIDATES: readonly BridgeCandidate[] = [
     classification: 'EXACT_DEPENDENCY',
     declaredSourceRef: 'quantum-systems:transmon-coherence-limits',
     declaredTargetRef: 'semiconductor-manufacturing:thin-film-deposition',
-    sourceResolution: unresolvedRecord('quantum-systems', 'coherence-t1-t2-measurements'),
-    targetResolution: unresolvedDomain('semiconductor-manufacturing'),
     direction: 'directed',
     mechanism:
       'Two-level-system defect dissipation at metal-substrate and metal-air amorphous oxide interfaces causing electric-dipole energy relaxation (T1).',
@@ -260,16 +238,22 @@ export const QUANTUM_BRIDGE_CANDIDATES: readonly BridgeCandidate[] = [
         side: 'A',
         citation:
           'Place, A. P. M. et al. (2021). New material platform for superconducting transmon qubits with coherence times exceeding 0.3 milliseconds. Nature Communications, 12, 1779.',
-        identifier: null,
+        identifier: 'doi:10.1038/s41467-021-22030-5',
         locator: null,
-        verification: 'not-independently-verified',
+        verification: 'verified-correct',
+        correction:
+          'Verified against Crossref on 2026-08-25: Nature Communications 12 (2021), art. 1779',
+
       },
       {
         side: 'B',
         citation: 'George, S. M. (2010). Atomic Layer Deposition: An Overview. Chemical Reviews, 110(1), 111-131.',
-        identifier: null,
+        identifier: 'doi:10.1021/cr900056b',
         locator: null,
-        verification: 'not-independently-verified',
+        verification: 'verified-correct',
+        correction:
+          'Verified against Crossref on 2026-08-25: Chemical Reviews 110(1), 111-131; Crossref issued 2009 online, 2010 print',
+
       },
     ],
     rightsBasis: 'unverified',
@@ -296,11 +280,6 @@ export const QUANTUM_BRIDGE_CANDIDATES: readonly BridgeCandidate[] = [
     classification: 'SHARED_FORMALISM',
     declaredSourceRef: 'quantum-systems:tensor-network-states',
     declaredTargetRef: 'mechanistic-interpretability:sparse-autoencoder-superposition',
-    sourceResolution: unresolvedRecord('quantum-systems', null),
-    targetResolution: unresolvedRecord(
-      'mechanistic-interpretability',
-      'mechanistic-interpretability-sparse-autoencoder-dictionaries',
-    ),
     direction: 'bidirectional',
     mechanism:
       'Low-rank matrix product state SVD with Schmidt-rank truncation, compared with dictionary learning in sparse autoencoders.',
@@ -315,9 +294,12 @@ export const QUANTUM_BRIDGE_CANDIDATES: readonly BridgeCandidate[] = [
         side: 'A',
         citation:
           'Schollwoeck, U. (2011). The density-matrix renormalization group in the age of matrix product states. Annals of Physics, 326(1), 96-192.',
-        identifier: null,
+        identifier: 'doi:10.1016/j.aop.2010.09.012',
         locator: null,
-        verification: 'not-independently-verified',
+        verification: 'verified-correct',
+        correction:
+          'Verified against Crossref on 2026-08-25: Annals of Physics 326(1), 96-192 (2011)',
+
       },
       {
         side: 'B',
@@ -326,6 +308,9 @@ export const QUANTUM_BRIDGE_CANDIDATES: readonly BridgeCandidate[] = [
         identifier: null,
         locator: null,
         verification: 'not-independently-verified',
+        correction:
+          'Transformer Circuits Thread is not indexed in Crossref or DBLP',
+
         rejectedAssertion:
           'Supplied wording claimed the two map "isomorphically" and share "identical linear algebra formalisms". Neither cited work asserts an isomorphism.',
       },
@@ -355,8 +340,6 @@ export const QUANTUM_BRIDGE_CANDIDATES: readonly BridgeCandidate[] = [
     classification: 'COMPUTATIONAL_CANDIDATE',
     declaredSourceRef: 'quantum-systems:phase-estimation-hamiltonian',
     declaredTargetRef: 'biomolecular-engineering:enzyme-active-site-kinetics',
-    sourceResolution: unresolvedRecord('quantum-systems', null),
-    targetResolution: unresolvedRecord('biomolecular-engineering', 'biomolecular-engineering-directed-enzyme-evolution'),
     direction: 'directed',
     mechanism:
       'Mapping second-quantized electronic Hamiltonians of strongly correlated transition-metal clusters onto qubit registers via Jordan-Wigner or Bravyi-Kitaev transformations for quantum phase estimation.',
@@ -371,9 +354,12 @@ export const QUANTUM_BRIDGE_CANDIDATES: readonly BridgeCandidate[] = [
         side: 'A',
         citation:
           'Reiher, M. et al. (2017). Elucidating reaction mechanisms on quantum computers. PNAS, 114(29), 7555-7560.',
-        identifier: null,
+        identifier: 'doi:10.1073/pnas.1619152114',
         locator: null,
-        verification: 'not-independently-verified',
+        verification: 'verified-correct',
+        correction:
+          'Verified against Crossref on 2026-08-25: PNAS 114(29), 7555-7560 (2017)',
+
         rejectedAssertion:
           'Supplied wording claimed QPE "scales polynomially in circuit depth with basis set size", presented as a practical advantage. Resource estimates in this literature are conditional on precision, state preparation and error correction, not generic.',
       },
@@ -384,6 +370,9 @@ export const QUANTUM_BRIDGE_CANDIDATES: readonly BridgeCandidate[] = [
         identifier: null,
         locator: null,
         verification: 'not-independently-verified',
+        correction:
+          'Crossref title search returned no matching record',
+
       },
     ],
     rightsBasis: 'unverified',
@@ -410,8 +399,6 @@ export const QUANTUM_BRIDGE_CANDIDATES: readonly BridgeCandidate[] = [
     classification: 'EXACT_DEPENDENCY',
     declaredSourceRef: 'quantum-systems:cryogenic-dilution-attenuation',
     declaredTargetRef: 'critical-supply-chains:helium-isotope-refinement',
-    sourceResolution: unresolvedRecord('quantum-systems', 'cryogenic-superconducting-control-stack'),
-    targetResolution: unresolvedRecord('critical-supply-chains', 'critical-supply-chains-helium-liquefaction-logistics'),
     direction: 'directed',
     mechanism:
       'Endothermic phase separation and osmotic transport of He-3 across the phase boundary into a dilute He-4 superfluid bath below about 100 mK.',
@@ -428,6 +415,9 @@ export const QUANTUM_BRIDGE_CANDIDATES: readonly BridgeCandidate[] = [
         identifier: null,
         locator: null,
         verification: 'not-independently-verified',
+        correction:
+          'monograph; no catalogue record checked',
+
       },
       {
         side: 'B',
@@ -435,6 +425,9 @@ export const QUANTUM_BRIDGE_CANDIDATES: readonly BridgeCandidate[] = [
         identifier: null,
         locator: null,
         verification: 'not-independently-verified',
+        correction:
+          'no report number, DOI or permanent URL supplied',
+
         rejectedAssertion:
           'No stable report number, DOI, or permanent URL was supplied for this government document, so it could not be resolved to a specific publication.',
       },
@@ -463,8 +456,6 @@ export const QUANTUM_BRIDGE_CANDIDATES: readonly BridgeCandidate[] = [
     classification: 'SHARED_FORMALISM',
     declaredSourceRef: 'quantum-systems:superconducting-gap-depairing',
     declaredTargetRef: 'fusion-plasma:rebco-high-field-magnets',
-    sourceResolution: unresolvedRecord('quantum-systems', 'cryogenic-superconducting-control-stack'),
-    targetResolution: { status: 'resolved', recordId: 'urn:maha:record:fusion-plasma-systems-rebco-high-field-magnets' },
     direction: 'bidirectional',
     mechanism:
       'Ginzburg-Landau and BCS descriptions of Cooper-pair density, London penetration depth, coherence length, and Abrikosov vortex pinning.',
@@ -481,14 +472,20 @@ export const QUANTUM_BRIDGE_CANDIDATES: readonly BridgeCandidate[] = [
         identifier: null,
         locator: null,
         verification: 'not-independently-verified',
+        correction:
+          'monograph',
+
       },
       {
         side: 'B',
         citation:
           'Whyte, D. G. et al. (2016). Smaller & sooner: exploiting high magnetic fields from new superconductors for a more attractive approach to fusion energy. Fusion Engineering and Design, 107, 14-22.',
-        identifier: null,
+        identifier: 'doi:10.1007/s10894-015-0050-1',
         locator: null,
-        verification: 'not-independently-verified',
+        verification: 'verified-with-correction',
+        correction:
+          'Submitted citation named Fusion Engineering and Design 107, 14-22. Journal, volume and page range are all incorrect. Verified against Crossref on 2026-08-25. Journal of Fusion Energy 35(1), 41-53 (2016)',
+
       },
     ],
     rightsBasis: 'unverified',
@@ -515,8 +512,6 @@ export const QUANTUM_BRIDGE_CANDIDATES: readonly BridgeCandidate[] = [
     classification: 'COMPUTATIONAL_CANDIDATE',
     declaredSourceRef: 'quantum-systems:majorana-zero-modes',
     declaredTargetRef: 'advanced-materials:twisted-bilayer-heterostructures',
-    sourceResolution: unresolvedRecord('quantum-systems', null),
-    targetResolution: unresolvedRecord('advanced-materials', 'advanced-materials-graphene-hbn-heterostructures'),
     direction: 'directed',
     mechanism:
       'Proximity-induced s-wave superconductivity in spin-orbit-coupled 2D electron gases or moire flat bands, proposed to produce non-trivial bulk topological invariants and zero-energy boundary modes.',
@@ -531,17 +526,23 @@ export const QUANTUM_BRIDGE_CANDIDATES: readonly BridgeCandidate[] = [
         side: 'A',
         citation:
           'Lutchyn, R. M., Sau, J. D., & Das Sarma, S. (2010). Majorana Fermions and a Topological Phase Transition in Semiconductor-Superconductor Heterostructures. Physical Review Letters, 105(7), 077001.',
-        identifier: null,
+        identifier: 'doi:10.1103/PhysRevLett.105.077001',
         locator: null,
-        verification: 'not-independently-verified',
+        verification: 'verified-correct',
+        correction:
+          'Verified against Crossref on 2026-08-25: Physical Review Letters 105(7), 077001 (2010)',
+
       },
       {
         side: 'B',
         citation:
           'Cao, Y. et al. (2018). Unconventional superconductivity in magic-angle graphene superlattices. Nature, 556(7699), 43-50.',
-        identifier: null,
+        identifier: 'doi:10.1038/nature26160',
         locator: null,
-        verification: 'not-independently-verified',
+        verification: 'verified-correct',
+        correction:
+          'Verified against Crossref on 2026-08-25: Nature 556(7699), 43-50 (2018)',
+
         rejectedAssertion:
           'Supplied wording used this source to establish that 2D superlattices "provide an experimental platform for realizing synthetic non-Abelian Hamiltonian states". The cited work reports unconventional superconductivity; it does not report non-Abelian states or Majorana realisation.',
       },
@@ -569,8 +570,6 @@ export const QUANTUM_BRIDGE_CANDIDATES: readonly BridgeCandidate[] = [
     classification: 'STRUCTURAL_ANALOGY',
     declaredSourceRef: 'quantum-systems:syndrome-extraction-cycle',
     declaredTargetRef: 'neuromorphic-biocomputing:spiking-fault-tolerance',
-    sourceResolution: unresolvedRecord('quantum-systems', 'stabilizer-syndrome-measurement'),
-    targetResolution: unresolvedDomain('neuromorphic-biocomputing'),
     direction: 'bidirectional',
     mechanism:
       'Measurement of stabilizer parity generators without collapsing the logical state, compared with redundant population coding that preserves a signal despite stochastic single-neuron dropout.',
@@ -585,16 +584,22 @@ export const QUANTUM_BRIDGE_CANDIDATES: readonly BridgeCandidate[] = [
         side: 'A',
         citation:
           'Fowler, A. G. et al. (2012). Surface codes: Towards practical large-scale quantum computation. Physical Review A, 86(3), 032324.',
-        identifier: null,
+        identifier: 'doi:10.1103/PhysRevA.86.032324',
         locator: null,
-        verification: 'not-independently-verified',
+        verification: 'verified-correct',
+        correction:
+          'Verified against Crossref on 2026-08-25: Physical Review A 86(3), 032324 (2012)',
+
       },
       {
         side: 'B',
         citation: 'Maass, W. (2016). Searching for principles of brain computation. PNAS, 113(41), 11387-11395.',
-        identifier: null,
+        identifier: 'doi:10.1101/094102',
         locator: null,
         verification: 'not-independently-verified',
+        correction:
+          'Crossref resolved a bioRxiv preprint; the PNAS version of record was not confirmed',
+
       },
     ],
     rightsBasis: 'unverified',
@@ -621,8 +626,6 @@ export const QUANTUM_BRIDGE_CANDIDATES: readonly BridgeCandidate[] = [
     classification: 'EXACT_DEPENDENCY',
     declaredSourceRef: 'quantum-systems:spin-qubit-hyperfine-dephasing',
     declaredTargetRef: 'semiconductor-manufacturing:silicon-crystal-growth-and-wafer-preparation',
-    sourceResolution: unresolvedRecord('quantum-systems', 'silicon-spin-qubits'),
-    targetResolution: unresolvedDomain('semiconductor-manufacturing'),
     direction: 'directed',
     mechanism:
       'Depletion of the 4.685 percent natural abundance of Si-29 (nuclear spin I = 1/2), reducing the fluctuating nuclear Overhauser field that dephases an electron spin.',
@@ -649,9 +652,12 @@ export const QUANTUM_BRIDGE_CANDIDATES: readonly BridgeCandidate[] = [
         side: 'B',
         citation:
           'Itoh, K. M., & Watanabe, H. (2014). Isotope engineering of silicon and diamond for quantum computing and sensing applications. MRS Communications, 4(4), 143-157.',
-        identifier: null,
+        identifier: 'doi:10.1557/mrc.2014.32',
         locator: null,
-        verification: 'not-independently-verified',
+        verification: 'verified-correct',
+        correction:
+          'Verified against Crossref on 2026-08-25: MRS Communications 4(4), 143-157 (2014)',
+
       },
     ],
     rightsBasis: 'unverified',
@@ -681,8 +687,6 @@ export const QUANTUM_BRIDGE_CANDIDATES: readonly BridgeCandidate[] = [
     classification: 'COMPUTATIONAL_CANDIDATE',
     declaredSourceRef: 'quantum-systems:qubo-ising-mapping',
     declaredTargetRef: 'fusion-plasma:grad-shafranov-equilibrium-solver',
-    sourceResolution: unresolvedRecord('quantum-systems', null),
-    targetResolution: unresolvedRecord('fusion-plasma-systems', 'fusion-plasma-systems-tokamak-plasma-equilibrium'),
     direction: 'directed',
     mechanism:
       'Proposed discretisation of the non-linear Grad-Shafranov elliptic PDE into a QUBO or Ising Hamiltonian for annealing or QAOA.',
@@ -696,9 +700,12 @@ export const QUANTUM_BRIDGE_CANDIDATES: readonly BridgeCandidate[] = [
       {
         side: 'A',
         citation: 'Lucas, A. (2014). Ising formulations of many NP problems. Frontiers in Physics, 2, 5.',
-        identifier: null,
+        identifier: 'doi:10.3389/fphy.2014.00005',
         locator: null,
-        verification: 'not-independently-verified',
+        verification: 'verified-correct',
+        correction:
+          'Verified against Crossref on 2026-08-25: Frontiers in Physics 2, art. 5 (2014)',
+
         rejectedAssertion:
           'Used to imply that Grad-Shafranov admits an Ising formulation. The catalogue covers combinatorial NP problems and does not address continuous non-linear PDEs.',
       },
@@ -708,6 +715,9 @@ export const QUANTUM_BRIDGE_CANDIDATES: readonly BridgeCandidate[] = [
         identifier: null,
         locator: null,
         verification: 'not-independently-verified',
+        correction:
+          'supplied container title could not be resolved to a book, chapter or page range',
+
         rejectedAssertion:
           'The supplied container title could not be resolved to a specific book, chapter, or page range.',
       },
@@ -736,8 +746,6 @@ export const QUANTUM_BRIDGE_CANDIDATES: readonly BridgeCandidate[] = [
     classification: 'SHARED_FORMALISM',
     declaredSourceRef: 'quantum-systems:bb84-entanglement-distribution',
     declaredTargetRef: 'agentic-systems:mcp-tool-authorization-enclaves',
-    sourceResolution: unresolvedRecord('quantum-systems', null),
-    targetResolution: unresolvedRecord('agentic-systems-mcp', 'agentic-systems-mcp-mcp-tool-discovery'),
     direction: 'bidirectional',
     mechanism:
       'No-cloning and entropic uncertainty relations bounding information leakage in state transmission, compared with non-interactive zero-knowledge proofs for agent authorization tokens.',
@@ -752,9 +760,12 @@ export const QUANTUM_BRIDGE_CANDIDATES: readonly BridgeCandidate[] = [
         side: 'A',
         citation:
           'Bennett, C. H., & Brassard, G. (1984). Quantum cryptography: Public key distribution and coin tossing. Proceedings of IEEE International Conference on Computers, Systems and Signal Processing, 175-179.',
-        identifier: null,
+        identifier: 'doi:10.1016/j.tcs.2014.05.025',
         locator: null,
-        verification: 'not-independently-verified',
+        verification: 'verified-correct',
+        correction:
+          'Verified against Crossref on 2026-08-25: Original: Proc. IEEE ICCSSP 1984, 175-179. Authoritative reprint: Theoretical Computer Science 560, 7-11 (2014)',
+
       },
       {
         side: 'B',
@@ -763,6 +774,9 @@ export const QUANTUM_BRIDGE_CANDIDATES: readonly BridgeCandidate[] = [
         identifier: null,
         locator: null,
         verification: 'unverifiable',
+        correction:
+          'DBLP title, author and venue search returned no matches; general literature search found nothing. DBLP indexes IEEE S&P comprehensively.',
+
         rejectedAssertion:
           'This citation could not be located. A DBLP title search returned no matching publication, author, or venue record, and a general literature search surfaced no such paper. DBLP indexes IEEE S&P comprehensively. The citation is treated as unverifiable and the record is blocked on it; it was not replaced with a substitute source.',
       },
@@ -792,8 +806,6 @@ export const QUANTUM_BRIDGE_CANDIDATES: readonly BridgeCandidate[] = [
     classification: 'EXACT_DEPENDENCY',
     declaredSourceRef: 'quantum-systems:3d-cavity-resonator-loss',
     declaredTargetRef: 'critical-supply-chains:refractory-tantalum-niobium-refinement',
-    sourceResolution: unresolvedRecord('quantum-systems', null),
-    targetResolution: unresolvedRecord('critical-supply-chains', 'critical-supply-chains-tantalum-concentrate-traceability'),
     direction: 'directed',
     mechanism:
       'High residual-resistance-ratio electron-beam vacuum smelting of niobium and tantalum to reduce interstitial O, H, N and C that contribute to surface hydrides and microwave loss.',
@@ -808,7 +820,7 @@ export const QUANTUM_BRIDGE_CANDIDATES: readonly BridgeCandidate[] = [
         side: 'A',
         citation:
           'Romanenko, A. et al. (2020). Three-Dimensional Superconducting Resonators at T < 20 mK with Photon Lifetimes up to tau = 2 s.',
-        identifier: 'doi:10.1103/PhysRevApplied.13.034032 (arXiv:1810.03703)',
+        identifier: 'doi:10.1103/PhysRevApplied.13.034032',
         locator: null,
         verification: 'verified-with-correction',
         correction:
@@ -820,6 +832,9 @@ export const QUANTUM_BRIDGE_CANDIDATES: readonly BridgeCandidate[] = [
         identifier: null,
         locator: null,
         verification: 'not-independently-verified',
+        correction:
+          'monograph',
+
       },
     ],
     rightsBasis: 'unverified',

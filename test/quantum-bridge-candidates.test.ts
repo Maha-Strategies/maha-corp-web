@@ -13,6 +13,13 @@ import {
   projectCandidateClassification,
 } from '../lib/quantum-bridge-candidates.ts'
 import { EPISTEMIC_SCHEMA_VERSION } from '../lib/epistemic-schema.ts'
+import {
+  QUANTUM_BRIDGE_AUDIT,
+  buildGapReport,
+  isPromotionEligible,
+  promotionReadyBridges,
+} from '../lib/quantum-bridge-audit-package.ts'
+import { isResolvedOutcome } from '../lib/epistemic-reference-resolver.ts'
 import { FRONTIER_CANARY_RECORDS, FRONTIER_CANARY_CONTROL_RECORDS } from '../lib/frontier-canonicalization.ts'
 import { QUANTUM_SYSTEMS_GRAPH_RECORDS } from '../lib/quantum-systems-graph.ts'
 import { SYNTHETIC_BIOLOGY_GRAPH_RECORDS } from '../lib/synthetic-biology-graph.ts'
@@ -86,20 +93,19 @@ test('no candidate is coerced onto mathematical-equivalence', () => {
 /* -------------------------------------------------------- reference gate -- */
 
 test('every source and target resolves, or the candidate is blocked', () => {
-  for (const candidate of CANDIDATES) {
+  for (const bridge of QUANTUM_BRIDGE_AUDIT) {
     const resolved =
-      candidate.sourceResolution.status === 'resolved' && candidate.targetResolution.status === 'resolved'
-    if (!resolved) {
-      assert.equal(candidate.verdict, 'BLOCK', `${candidate.id} has an unresolved reference but is not blocked`)
-    }
+      isResolvedOutcome(bridge.endpoints.source.outcome) && isResolvedOutcome(bridge.endpoints.target.outcome)
+    if (!resolved) assert.equal(bridge.verdict, 'BLOCK', `${bridge.id} has an unresolved endpoint but is not blocked`)
   }
 })
 
 test('a resolution claiming to be resolved names a record that exists', () => {
-  for (const candidate of CANDIDATES) {
-    for (const resolution of [candidate.sourceResolution, candidate.targetResolution]) {
-      if (resolution.status === 'resolved') {
-        assert.ok(CORPUS_IDS.has(resolution.recordId), `${candidate.id} resolves to a non-existent record`)
+  for (const bridge of QUANTUM_BRIDGE_AUDIT) {
+    for (const endpoint of [bridge.endpoints.source, bridge.endpoints.target]) {
+      if (isResolvedOutcome(endpoint.outcome)) {
+        const recordId = (endpoint.outcome as { recordId: string }).recordId
+        assert.ok(CORPUS_IDS.has(recordId), `${bridge.id} resolves to a non-existent record`)
       }
     }
   }
@@ -264,14 +270,104 @@ test('the frontier canary cohort is unchanged by this batch', () => {
   assert.equal(FRONTIER_CANARY_RECORDS.length, 40)
   assert.equal(FRONTIER_CANARY_CONTROL_RECORDS.length, 200)
   const canaryIds = new Set(FRONTIER_CANARY_RECORDS.map((record) => record.id))
-  for (const candidate of CANDIDATES) {
-    for (const resolution of [candidate.sourceResolution, candidate.targetResolution]) {
-      if (resolution.status === 'resolved') {
-        assert.ok(
-          !canaryIds.has(resolution.recordId),
-          `${candidate.id} attaches to a canonical canary record`,
-        )
+  for (const bridge of QUANTUM_BRIDGE_AUDIT) {
+    for (const endpoint of [bridge.endpoints.source, bridge.endpoints.target]) {
+      if (isResolvedOutcome(endpoint.outcome)) {
+        const recordId = (endpoint.outcome as { recordId: string }).recordId
+        assert.ok(!canaryIds.has(recordId), `${bridge.id} attaches to a canonical canary record`)
       }
     }
   }
+})
+
+/* ------------------------------------------------------- ingestion gate -- */
+
+test('no bridge is promotion-eligible while any blocker remains', () => {
+  for (const bridge of QUANTUM_BRIDGE_AUDIT) {
+    assert.equal(bridge.promotionEligible, false)
+    if (bridge.blockerCodes.length) assert.equal(isPromotionEligible(bridge), false)
+  }
+  assert.deepEqual([...promotionReadyBridges()], [])
+})
+
+test('every blocked bridge carries machine-readable blocker codes', () => {
+  for (const bridge of QUANTUM_BRIDGE_AUDIT) {
+    if (bridge.verdict === 'BLOCK') {
+      assert.ok(bridge.blockerCodes.length > 0, `${bridge.id} is blocked with no blocker code`)
+    }
+  }
+})
+
+test('a missing locator alone prevents promotion', () => {
+  const withoutLocator = QUANTUM_BRIDGE_AUDIT.filter((bridge) =>
+    bridge.blockerCodes.includes('source-missing-locator'),
+  )
+  assert.equal(withoutLocator.length, 12, 'no locator was invented for any source')
+  for (const bridge of withoutLocator) assert.equal(isPromotionEligible(bridge), false)
+})
+
+test('an unverifiable source alone prevents promotion', () => {
+  const unverifiable = QUANTUM_BRIDGE_AUDIT.filter((bridge) =>
+    bridge.blockerCodes.includes('source-unverifiable'),
+  )
+  assert.equal(unverifiable.length, 1)
+  assert.equal(unverifiable[0].id, 'Q-BR-011')
+  assert.equal(isPromotionEligible(unverifiable[0]), false)
+})
+
+/* ------------------------------------------------- submitted vs audited -- */
+
+test('submitted references survive resolution and aliasing unchanged', () => {
+  for (const bridge of QUANTUM_BRIDGE_AUDIT) {
+    assert.equal(bridge.endpoints.source.submittedReference, bridge.submitted.sourceReference)
+    assert.equal(bridge.endpoints.target.submittedReference, bridge.submitted.targetReference)
+  }
+  const six = QUANTUM_BRIDGE_AUDIT.find((bridge) => bridge.id === 'Q-BR-006')!
+  // Alias applied, but the submitted reference still reads as submitted.
+  assert.equal(six.endpoints.target.outcome.status, 'alias-resolution')
+  assert.equal(six.submitted.targetReference, 'fusion-plasma:rebco-high-field-magnets')
+})
+
+test('submitted citation metadata survives correction', () => {
+  const corrected = CANDIDATES.flatMap((candidate) => candidate.sources).filter(
+    (source) => source.verification === 'verified-with-correction',
+  )
+  assert.ok(corrected.length >= 3)
+  for (const source of corrected) {
+    // The original citation string is still present alongside the correction.
+    assert.ok(source.citation.length > 20)
+    assert.ok((source.correction ?? '').length > 40)
+  }
+  // Q-BR-012 still carries the wrong submitted venue, next to the correction.
+  const twelve = CANDIDATES.find((candidate) => candidate.id === 'Q-BR-012')!
+  const romanenko = twelve.sources.find((source) => source.side === 'A')!
+  assert.match(romanenko.correction ?? '', /Physical Review Letters, 124\(8\), 086801/)
+  assert.match(romanenko.identifier ?? '', /10\.1103\/PhysRevApplied\.13\.034032/)
+})
+
+test('the audit digest changes when audited content changes', () => {
+  const digests = QUANTUM_BRIDGE_AUDIT.map((bridge) => bridge.auditDigest)
+  assert.equal(new Set(digests).size, 12)
+  for (const digest of digests) assert.match(digest, /^sha256:[a-f0-9]{64}$/)
+})
+
+/* ----------------------------------------------------------- gap report -- */
+
+test('the gap report separates remediable candidates from invalid ones', () => {
+  const report = buildGapReport()
+  assert.equal(report.verdictTotals.BLOCK, 12)
+  assert.equal(Object.keys(report.verdictTotals).length, 1)
+  const invalid = report.conceptuallyInvalid.map((entry) => entry.id)
+  assert.deepEqual(invalid.sort(), ['Q-BR-003', 'Q-BR-010', 'Q-BR-011'])
+  for (const entry of report.conceptuallyInvalid) assert.ok(entry.reason.length > 60)
+  // Everything else is at least describable as remediable.
+  assert.equal(report.remediableToRevise.length, 9)
+  for (const entry of report.remediableToRevise) assert.ok(entry.remediation.length > 10)
+})
+
+test('the gap report reports no unresolved-domain outcomes', () => {
+  const report = buildGapReport()
+  assert.equal(report.endpointTotals['unresolved-domain'] ?? 0, 0)
+  assert.equal(report.endpointTotals['alias-resolution'] ?? 0, 1)
+  assert.equal(report.endpointTotals['unresolved-record'] ?? 0, 23)
 })

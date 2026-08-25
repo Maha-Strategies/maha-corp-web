@@ -1,0 +1,1271 @@
+{
+  "auditPackageVersion": "maha-bridge-audit/1.0",
+  "resolverVersion": "maha-reference-resolver/1.0",
+  "endpointTotals": {
+    "unresolved-record": 23,
+    "alias-resolution": 1
+  },
+  "sourceTotals": {
+    "not-independently-verified": 10,
+    "verified-correct": 10,
+    "verified-with-correction": 3,
+    "unverifiable": 1
+  },
+  "verdictTotals": {
+    "BLOCK": 12
+  },
+  "blockerTotals": {
+    "classification-unmappable": 7,
+    "endpoint-unresolved-record": 12,
+    "rights-basis-unverified": 12,
+    "source-missing-identifier": 8,
+    "source-missing-locator": 12,
+    "claim-strength-rejected": 7,
+    "source-unverifiable": 1
+  },
+  "remediableToRevise": [
+    {
+      "id": "Q-BR-001",
+      "remediation": "create the missing canonical record(s) for the named endpoints; supply exact locators; supply stable identifiers; establish a rights basis"
+    },
+    {
+      "id": "Q-BR-002",
+      "remediation": "create the missing canonical record(s) for the named endpoints; supply exact locators; establish a rights basis"
+    },
+    {
+      "id": "Q-BR-004",
+      "remediation": "create the missing canonical record(s) for the named endpoints; supply exact locators; supply stable identifiers; establish a rights basis"
+    },
+    {
+      "id": "Q-BR-005",
+      "remediation": "create the missing canonical record(s) for the named endpoints; supply exact locators; supply stable identifiers; establish a rights basis"
+    },
+    {
+      "id": "Q-BR-006",
+      "remediation": "create the missing canonical record(s) for the named endpoints; supply exact locators; supply stable identifiers; establish a rights basis"
+    },
+    {
+      "id": "Q-BR-007",
+      "remediation": "create the missing canonical record(s) for the named endpoints; supply exact locators; establish a rights basis"
+    },
+    {
+      "id": "Q-BR-008",
+      "remediation": "create the missing canonical record(s) for the named endpoints; supply exact locators; establish a rights basis"
+    },
+    {
+      "id": "Q-BR-009",
+      "remediation": "create the missing canonical record(s) for the named endpoints; supply exact locators; establish a rights basis"
+    },
+    {
+      "id": "Q-BR-012",
+      "remediation": "create the missing canonical record(s) for the named endpoints; supply exact locators; supply stable identifiers; establish a rights basis"
+    }
+  ],
+  "conceptuallyInvalid": [
+    {
+      "id": "Q-BR-003",
+      "reason": "The submitted bridge asserts an isomorphism between Schmidt-rank truncation and sparse dictionary learning. The objectives differ (entanglement entropy versus an L1 penalty), so no record or citation repairs the claim."
+    },
+    {
+      "id": "Q-BR-010",
+      "reason": "The bridge asserts a QUBO reduction of the Grad-Shafranov PDE that neither cited source supplies. Until a reduction with a stated discretisation and penalty formulation exists, there is nothing to review."
+    },
+    {
+      "id": "Q-BR-011",
+      "reason": "The Side B citation could not be located in any authoritative index. A bridge resting on an unlocatable source is not remediable by adding records."
+    }
+  ],
+  "namespaces": {
+    "resolverVersion": "maha-reference-resolver/1.0",
+    "canonical": [
+      {
+        "domainSlug": "advanced-materials",
+        "recordCount": 30,
+        "backingModule": "lib/epistemic-pilots.ts EPISTEMIC_RECORDS",
+        "canonicalGraph": true,
+        "publicProjection": true
+      },
+      {
+        "domainSlug": "agentic-systems-mcp",
+        "recordCount": 30,
+        "backingModule": "lib/epistemic-pilots.ts EPISTEMIC_RECORDS",
+        "canonicalGraph": true,
+        "publicProjection": true
+      },
+      {
+        "domainSlug": "biomolecular-engineering",
+        "recordCount": 30,
+        "backingModule": "lib/epistemic-pilots.ts EPISTEMIC_RECORDS",
+        "canonicalGraph": true,
+        "publicProjection": true
+      },
+      {
+        "domainSlug": "critical-supply-chains",
+        "recordCount": 30,
+        "backingModule": "lib/epistemic-pilots.ts EPISTEMIC_RECORDS",
+        "canonicalGraph": true,
+        "publicProjection": true
+      },
+      {
+        "domainSlug": "fusion-plasma-systems",
+        "recordCount": 30,
+        "backingModule": "lib/epistemic-pilots.ts EPISTEMIC_RECORDS",
+        "canonicalGraph": true,
+        "publicProjection": true
+      },
+      {
+        "domainSlug": "longevity-metabolism",
+        "recordCount": 30,
+        "backingModule": "lib/epistemic-pilots.ts EPISTEMIC_RECORDS",
+        "canonicalGraph": true,
+        "publicProjection": true
+      },
+      {
+        "domainSlug": "mechanistic-interpretability",
+        "recordCount": 30,
+        "backingModule": "lib/epistemic-pilots.ts EPISTEMIC_RECORDS",
+        "canonicalGraph": true,
+        "publicProjection": true
+      },
+      {
+        "domainSlug": "neurotechnology-bci",
+        "recordCount": 30,
+        "backingModule": "lib/epistemic-pilots.ts EPISTEMIC_RECORDS",
+        "canonicalGraph": true,
+        "publicProjection": true
+      },
+      {
+        "domainSlug": "quantum-systems",
+        "recordCount": 25,
+        "backingModule": "lib/epistemic-pilots.ts EPISTEMIC_RECORDS",
+        "canonicalGraph": true,
+        "publicProjection": true
+      },
+      {
+        "domainSlug": "synthetic-biology",
+        "recordCount": 25,
+        "backingModule": "lib/epistemic-pilots.ts EPISTEMIC_RECORDS",
+        "canonicalGraph": true,
+        "publicProjection": true
+      }
+    ],
+    "pilotOnly": [
+      {
+        "domainSlug": "astronomy",
+        "recordCount": 4,
+        "backingModule": "lib/epistemic-pilot-corpus.ts EPISTEMIC_PHASE4_PILOT_ENTRIES",
+        "canonicalGraph": false,
+        "publicProjection": false
+      },
+      {
+        "domainSlug": "mathematics",
+        "recordCount": 4,
+        "backingModule": "lib/epistemic-pilot-corpus.ts EPISTEMIC_PHASE4_PILOT_ENTRIES",
+        "canonicalGraph": false,
+        "publicProjection": false
+      },
+      {
+        "domainSlug": "neuromorphic-biocomputing",
+        "recordCount": 4,
+        "backingModule": "lib/epistemic-pilot-corpus.ts EPISTEMIC_PHASE4_PILOT_ENTRIES",
+        "canonicalGraph": false,
+        "publicProjection": false
+      },
+      {
+        "domainSlug": "religion",
+        "recordCount": 4,
+        "backingModule": "lib/epistemic-pilot-corpus.ts EPISTEMIC_PHASE4_PILOT_ENTRIES",
+        "canonicalGraph": false,
+        "publicProjection": false
+      },
+      {
+        "domainSlug": "semiconductor",
+        "recordCount": 4,
+        "backingModule": "lib/epistemic-pilot-corpus.ts EPISTEMIC_PHASE4_PILOT_ENTRIES",
+        "canonicalGraph": false,
+        "publicProjection": false
+      }
+    ],
+    "aliases": [
+      {
+        "alias": "fusion-plasma",
+        "target": "fusion-plasma-systems",
+        "since": "maha-reference-resolver/1.0",
+        "reason": "Submitted batches shorten the canonical fusion-plasma-systems domain id."
+      },
+      {
+        "alias": "agentic-systems",
+        "target": "agentic-systems-mcp",
+        "since": "maha-reference-resolver/1.0",
+        "reason": "Submitted batches drop the -mcp suffix from the canonical agentic-systems-mcp domain id."
+      },
+      {
+        "alias": "semiconductor-manufacturing",
+        "target": "semiconductor",
+        "since": "maha-reference-resolver/1.0",
+        "reason": "The Phase-4 pilot corpus uses the domain id \"semiconductor\". This alias makes the namespace difference explicit; it does not make pilot entries canonical."
+      }
+    ]
+  },
+  "endpoints": [
+    {
+      "id": "Q-BR-001",
+      "side": "source",
+      "submittedReference": "quantum-systems:surface-code-threshold",
+      "status": "unresolved-record",
+      "recordId": null,
+      "normalizedReference": null
+    },
+    {
+      "id": "Q-BR-001",
+      "side": "target",
+      "submittedReference": "mathematics:algebraic-coding-theory",
+      "status": "unresolved-record",
+      "recordId": null,
+      "normalizedReference": null
+    },
+    {
+      "id": "Q-BR-002",
+      "side": "source",
+      "submittedReference": "quantum-systems:transmon-coherence-limits",
+      "status": "unresolved-record",
+      "recordId": null,
+      "normalizedReference": null
+    },
+    {
+      "id": "Q-BR-002",
+      "side": "target",
+      "submittedReference": "semiconductor-manufacturing:thin-film-deposition",
+      "status": "unresolved-record",
+      "recordId": null,
+      "normalizedReference": "semiconductor:thin-film-deposition"
+    },
+    {
+      "id": "Q-BR-003",
+      "side": "source",
+      "submittedReference": "quantum-systems:tensor-network-states",
+      "status": "unresolved-record",
+      "recordId": null,
+      "normalizedReference": null
+    },
+    {
+      "id": "Q-BR-003",
+      "side": "target",
+      "submittedReference": "mechanistic-interpretability:sparse-autoencoder-superposition",
+      "status": "unresolved-record",
+      "recordId": null,
+      "normalizedReference": null
+    },
+    {
+      "id": "Q-BR-004",
+      "side": "source",
+      "submittedReference": "quantum-systems:phase-estimation-hamiltonian",
+      "status": "unresolved-record",
+      "recordId": null,
+      "normalizedReference": null
+    },
+    {
+      "id": "Q-BR-004",
+      "side": "target",
+      "submittedReference": "biomolecular-engineering:enzyme-active-site-kinetics",
+      "status": "unresolved-record",
+      "recordId": null,
+      "normalizedReference": null
+    },
+    {
+      "id": "Q-BR-005",
+      "side": "source",
+      "submittedReference": "quantum-systems:cryogenic-dilution-attenuation",
+      "status": "unresolved-record",
+      "recordId": null,
+      "normalizedReference": null
+    },
+    {
+      "id": "Q-BR-005",
+      "side": "target",
+      "submittedReference": "critical-supply-chains:helium-isotope-refinement",
+      "status": "unresolved-record",
+      "recordId": null,
+      "normalizedReference": null
+    },
+    {
+      "id": "Q-BR-006",
+      "side": "source",
+      "submittedReference": "quantum-systems:superconducting-gap-depairing",
+      "status": "unresolved-record",
+      "recordId": null,
+      "normalizedReference": null
+    },
+    {
+      "id": "Q-BR-006",
+      "side": "target",
+      "submittedReference": "fusion-plasma:rebco-high-field-magnets",
+      "status": "alias-resolution",
+      "recordId": "urn:maha:record:fusion-plasma-systems-rebco-high-field-magnets",
+      "normalizedReference": "fusion-plasma-systems:rebco-high-field-magnets"
+    },
+    {
+      "id": "Q-BR-007",
+      "side": "source",
+      "submittedReference": "quantum-systems:majorana-zero-modes",
+      "status": "unresolved-record",
+      "recordId": null,
+      "normalizedReference": null
+    },
+    {
+      "id": "Q-BR-007",
+      "side": "target",
+      "submittedReference": "advanced-materials:twisted-bilayer-heterostructures",
+      "status": "unresolved-record",
+      "recordId": null,
+      "normalizedReference": null
+    },
+    {
+      "id": "Q-BR-008",
+      "side": "source",
+      "submittedReference": "quantum-systems:syndrome-extraction-cycle",
+      "status": "unresolved-record",
+      "recordId": null,
+      "normalizedReference": null
+    },
+    {
+      "id": "Q-BR-008",
+      "side": "target",
+      "submittedReference": "neuromorphic-biocomputing:spiking-fault-tolerance",
+      "status": "unresolved-record",
+      "recordId": null,
+      "normalizedReference": null
+    },
+    {
+      "id": "Q-BR-009",
+      "side": "source",
+      "submittedReference": "quantum-systems:spin-qubit-hyperfine-dephasing",
+      "status": "unresolved-record",
+      "recordId": null,
+      "normalizedReference": null
+    },
+    {
+      "id": "Q-BR-009",
+      "side": "target",
+      "submittedReference": "semiconductor-manufacturing:silicon-crystal-growth-and-wafer-preparation",
+      "status": "unresolved-record",
+      "recordId": null,
+      "normalizedReference": "semiconductor:silicon-crystal-growth-and-wafer-preparation"
+    },
+    {
+      "id": "Q-BR-010",
+      "side": "source",
+      "submittedReference": "quantum-systems:qubo-ising-mapping",
+      "status": "unresolved-record",
+      "recordId": null,
+      "normalizedReference": null
+    },
+    {
+      "id": "Q-BR-010",
+      "side": "target",
+      "submittedReference": "fusion-plasma:grad-shafranov-equilibrium-solver",
+      "status": "unresolved-record",
+      "recordId": null,
+      "normalizedReference": "fusion-plasma-systems:grad-shafranov-equilibrium-solver"
+    },
+    {
+      "id": "Q-BR-011",
+      "side": "source",
+      "submittedReference": "quantum-systems:bb84-entanglement-distribution",
+      "status": "unresolved-record",
+      "recordId": null,
+      "normalizedReference": null
+    },
+    {
+      "id": "Q-BR-011",
+      "side": "target",
+      "submittedReference": "agentic-systems:mcp-tool-authorization-enclaves",
+      "status": "unresolved-record",
+      "recordId": null,
+      "normalizedReference": "agentic-systems-mcp:mcp-tool-authorization-enclaves"
+    },
+    {
+      "id": "Q-BR-012",
+      "side": "source",
+      "submittedReference": "quantum-systems:3d-cavity-resonator-loss",
+      "status": "unresolved-record",
+      "recordId": null,
+      "normalizedReference": null
+    },
+    {
+      "id": "Q-BR-012",
+      "side": "target",
+      "submittedReference": "critical-supply-chains:refractory-tantalum-niobium-refinement",
+      "status": "unresolved-record",
+      "recordId": null,
+      "normalizedReference": null
+    }
+  ],
+  "bridges": [
+    {
+      "id": "Q-BR-001",
+      "submitted": {
+        "title": "CSS Stabilizer Mapping to Classical Linear Codes",
+        "classification": "SHARED_FORMALISM",
+        "sourceReference": "quantum-systems:surface-code-threshold",
+        "targetReference": "mathematics:algebraic-coding-theory",
+        "citations": [
+          "Gottesman, D. (1997). Stabilizer Codes and Quantum Error Correction. Caltech PhD Thesis.",
+          "MacWilliams, F. J., & Sloane, N. J. A. (1977). The Theory of Error-Correcting Codes. North-Holland."
+        ]
+      },
+      "audited": {
+        "mechanism": "CSS construction mapping two classical linear codes C1[n,k1] and C2perp[n,k2] with C2perp subset of C1 onto an [[n, k1-k2, d]] stabilizer code via the symplectic inner product.",
+        "establishes": "Commuting X- and Z-basis stabilizer parity checks can be derived from classical dual parity-check matrices.",
+        "doesNotEstablish": "That classical linear decoding algorithms operate inside real-time decoherence windows without syndrome-decoding latency bottlenecks.",
+        "classificationRationale": "The CSS construction is a shared algebraic formalism, not an equivalence: the quantum code inherits structure from the classical pair but is not the same object.",
+        "wordingCorrections": [
+          "SHARED_FORMALISM must not be projected onto mathematical-equivalence; the shared construction does not make the domains equivalent."
+        ],
+        "prohibitedInferences": [
+          "Do not infer that a quantum stabilizer code and a classical linear code are the same object.",
+          "Do not infer any decoding-latency or throughput property from the algebraic mapping."
+        ],
+        "classificationProjection": {
+          "mappable": false,
+          "reason": "No published bridge type expresses \"the same formalism is used\" without also asserting equivalence. mathematical-equivalence is strictly stronger than the audited claim."
+        }
+      },
+      "endpoints": {
+        "source": {
+          "submittedReference": "quantum-systems:surface-code-threshold",
+          "resolverVersion": "maha-reference-resolver/1.0",
+          "outcome": {
+            "status": "unresolved-record",
+            "domainSlug": "quantum-systems",
+            "nearestSlugSuggestion": "surface-code-error-correction",
+            "candidateCount": 25
+          }
+        },
+        "target": {
+          "submittedReference": "mathematics:algebraic-coding-theory",
+          "resolverVersion": "maha-reference-resolver/1.0",
+          "outcome": {
+            "status": "unresolved-record",
+            "domainSlug": "mathematics",
+            "nearestSlugSuggestion": null,
+            "candidateCount": 0
+          }
+        }
+      },
+      "verdict": "BLOCK",
+      "verdictRationale": "Blocked on unresolvable record references. The audit resolves references against the live corpus; a nearest-slug suggestion is recorded but never substituted. The target names domain \"mathematics\", which does not exist in the corpus. No exact locator (theorem, equation, section, chapter, figure, table, or page range) was supplied for either side, and none was invented during the audit. MacWilliams & Sloane carries no ISBN or other stable identifier.",
+      "blockerCodes": [
+        "classification-unmappable",
+        "endpoint-unresolved-record",
+        "rights-basis-unverified",
+        "source-missing-identifier",
+        "source-missing-locator"
+      ],
+      "promotionEligible": false,
+      "provenance": {
+        "auditPackageVersion": "maha-bridge-audit/1.0",
+        "bridgeSpecificationVersion": "mps-bridge/1.0",
+        "resolverVersion": "maha-reference-resolver/1.0"
+      },
+      "auditDigest": "sha256:85fe0fc22c706508394a3cc1b84e2665da7046eb114a8bf3598ab9c9fe228f60"
+    },
+    {
+      "id": "Q-BR-002",
+      "submitted": {
+        "title": "Cleanroom Interface Dielectric Loss in Transmon Coherence",
+        "classification": "EXACT_DEPENDENCY",
+        "sourceReference": "quantum-systems:transmon-coherence-limits",
+        "targetReference": "semiconductor-manufacturing:thin-film-deposition",
+        "citations": [
+          "Place, A. P. M. et al. (2021). New material platform for superconducting transmon qubits with coherence times exceeding 0.3 milliseconds. Nature Communications, 12, 1779.",
+          "George, S. M. (2010). Atomic Layer Deposition: An Overview. Chemical Reviews, 110(1), 111-131."
+        ]
+      },
+      "audited": {
+        "mechanism": "Two-level-system defect dissipation at metal-substrate and metal-air amorphous oxide interfaces causing electric-dipole energy relaxation (T1).",
+        "establishes": "Transmon T1 is influenced by interfacial chemical residues and amorphous oxidation controlled during thin-film deposition and surface cleaning.",
+        "doesNotEstablish": "That eliminating interface TLS loss alone guarantees multi-qubit gate fidelities above the fault-tolerance threshold, which are also limited by flux noise, quasiparticles, and cross-talk.",
+        "classificationRationale": "A materials-processing dependency on qubit lifetime is a mechanistic dependency; \"exact\" overstates a relationship that is one loss channel among several.",
+        "wordingCorrections": [
+          "\"physically bounded by\" narrowed to \"influenced by\": the cited work reports improvement from materials choice, not a proven bound.",
+          "EXACT_DEPENDENCY retained as a declared classification but projected as mechanistic-dependency, not an exact or exclusive requirement."
+        ],
+        "prohibitedInferences": [
+          "Do not infer a fidelity threshold from a T1 improvement.",
+          "Do not infer that deposition chemistry is the only T1 limit."
+        ],
+        "classificationProjection": {
+          "mappable": true,
+          "bridgeType": "mechanistic-dependency"
+        }
+      },
+      "endpoints": {
+        "source": {
+          "submittedReference": "quantum-systems:transmon-coherence-limits",
+          "resolverVersion": "maha-reference-resolver/1.0",
+          "outcome": {
+            "status": "unresolved-record",
+            "domainSlug": "quantum-systems",
+            "nearestSlugSuggestion": null,
+            "candidateCount": 25
+          }
+        },
+        "target": {
+          "submittedReference": "semiconductor-manufacturing:thin-film-deposition",
+          "resolverVersion": "maha-reference-resolver/1.0",
+          "outcome": {
+            "status": "unresolved-record",
+            "domainSlug": "semiconductor",
+            "nearestSlugSuggestion": null,
+            "candidateCount": 0,
+            "appliedAlias": {
+              "alias": "semiconductor-manufacturing",
+              "target": "semiconductor",
+              "since": "maha-reference-resolver/1.0",
+              "reason": "The Phase-4 pilot corpus uses the domain id \"semiconductor\". This alias makes the namespace difference explicit; it does not make pilot entries canonical."
+            },
+            "normalizedReference": "semiconductor:thin-film-deposition"
+          }
+        }
+      },
+      "verdict": "BLOCK",
+      "verdictRationale": "Blocked on unresolvable record references. The audit resolves references against the live corpus; a nearest-slug suggestion is recorded but never substituted. The target names domain \"semiconductor-manufacturing\", which does not exist in the corpus. No exact locator (theorem, equation, section, chapter, figure, table, or page range) was supplied for either side, and none was invented during the audit.",
+      "blockerCodes": [
+        "endpoint-unresolved-record",
+        "rights-basis-unverified",
+        "source-missing-locator"
+      ],
+      "promotionEligible": false,
+      "provenance": {
+        "auditPackageVersion": "maha-bridge-audit/1.0",
+        "bridgeSpecificationVersion": "mps-bridge/1.0",
+        "resolverVersion": "maha-reference-resolver/1.0"
+      },
+      "auditDigest": "sha256:ad604cdded693f414c778d70b976c05dbf53379dfd879c27da05185407d329d3"
+    },
+    {
+      "id": "Q-BR-003",
+      "submitted": {
+        "title": "Tensor Network Truncation to Neural Activation Geometry",
+        "classification": "SHARED_FORMALISM",
+        "sourceReference": "quantum-systems:tensor-network-states",
+        "targetReference": "mechanistic-interpretability:sparse-autoencoder-superposition",
+        "citations": [
+          "Schollwoeck, U. (2011). The density-matrix renormalization group in the age of matrix product states. Annals of Physics, 326(1), 96-192.",
+          "Bricken, T. et al. (2023). Towards Monosemanticity: Decomposing Language Models With Dictionary Learning. Transformer Circuits Thread."
+        ]
+      },
+      "audited": {
+        "mechanism": "Low-rank matrix product state SVD with Schmidt-rank truncation, compared with dictionary learning in sparse autoencoders.",
+        "establishes": "Both fields use low-rank factorization and truncation to compress high-dimensional representations.",
+        "doesNotEstablish": "That artificial neural network activations exhibit physical quantum coherence, superposition of matter, or entanglement; and that the two decompositions are isomorphic.",
+        "classificationRationale": "Shared use of linear-algebraic compression is a shared formalism at most. MPS truncation is governed by entanglement entropy across a bipartition; sparse dictionary learning is governed by an L1 sparsity penalty over an overcomplete basis. These are different objectives.",
+        "wordingCorrections": [
+          "\"maps isomorphically\" removed: no isomorphism is established by either source.",
+          "\"identical linear algebra formalisms\" narrowed to \"both use low-rank factorization\", which is what the sources support.",
+          "Added an explicit non-equivalence statement, since the truncation objectives differ (entanglement entropy versus L1 sparsity)."
+        ],
+        "prohibitedInferences": [
+          "Do not infer quantum coherence, superposition, or entanglement in neural activations.",
+          "Do not infer that an SAE dictionary is a Schmidt decomposition."
+        ],
+        "classificationProjection": {
+          "mappable": false,
+          "reason": "No published bridge type expresses \"the same formalism is used\" without also asserting equivalence. mathematical-equivalence is strictly stronger than the audited claim."
+        }
+      },
+      "endpoints": {
+        "source": {
+          "submittedReference": "quantum-systems:tensor-network-states",
+          "resolverVersion": "maha-reference-resolver/1.0",
+          "outcome": {
+            "status": "unresolved-record",
+            "domainSlug": "quantum-systems",
+            "nearestSlugSuggestion": null,
+            "candidateCount": 25
+          }
+        },
+        "target": {
+          "submittedReference": "mechanistic-interpretability:sparse-autoencoder-superposition",
+          "resolverVersion": "maha-reference-resolver/1.0",
+          "outcome": {
+            "status": "unresolved-record",
+            "domainSlug": "mechanistic-interpretability",
+            "nearestSlugSuggestion": "mechanistic-interpretability-sparse-autoencoder-dictionaries",
+            "candidateCount": 30
+          }
+        }
+      },
+      "verdict": "BLOCK",
+      "verdictRationale": "Blocked on unresolvable record references. The audit resolves references against the live corpus; a nearest-slug suggestion is recorded but never substituted. Neither reference resolves. Independently of that, the \"isomorphically\" and \"identical linear algebra formalisms\" wording is stronger than the cited sources establish and was rejected rather than silently softened. No exact locator (theorem, equation, section, chapter, figure, table, or page range) was supplied for either side, and none was invented during the audit.",
+      "blockerCodes": [
+        "claim-strength-rejected",
+        "classification-unmappable",
+        "endpoint-unresolved-record",
+        "rights-basis-unverified",
+        "source-missing-identifier",
+        "source-missing-locator"
+      ],
+      "promotionEligible": false,
+      "provenance": {
+        "auditPackageVersion": "maha-bridge-audit/1.0",
+        "bridgeSpecificationVersion": "mps-bridge/1.0",
+        "resolverVersion": "maha-reference-resolver/1.0"
+      },
+      "auditDigest": "sha256:8b940b059184659318ae304492956b4873392aa3a3ad9b394d5dde1b8b258c78"
+    },
+    {
+      "id": "Q-BR-004",
+      "submitted": {
+        "title": "Hamiltonian Phase Estimation for Transition-Metal Active Sites",
+        "classification": "COMPUTATIONAL_CANDIDATE",
+        "sourceReference": "quantum-systems:phase-estimation-hamiltonian",
+        "targetReference": "biomolecular-engineering:enzyme-active-site-kinetics",
+        "citations": [
+          "Reiher, M. et al. (2017). Elucidating reaction mechanisms on quantum computers. PNAS, 114(29), 7555-7560.",
+          "Siegbahn, P. E. M. (2018). Model calculations for understanding the mechanism of nitrogenase. Accounts of Chemical Research, 51(9), 2179-2186."
+        ]
+      },
+      "audited": {
+        "mechanism": "Mapping second-quantized electronic Hamiltonians of strongly correlated transition-metal clusters onto qubit registers via Jordan-Wigner or Bravyi-Kitaev transformations for quantum phase estimation.",
+        "establishes": "A second-quantized electronic Hamiltonian can be encoded onto qubits and addressed by phase estimation. This is a formulation, not a demonstrated advantage.",
+        "doesNotEstablish": "That quantum hardware outperforms DMRG or quantum Monte Carlo for bio-catalytic systems; that QPE cost is polynomial in practice; or that quantum simulation is required to engineer enzymes.",
+        "classificationRationale": "A computational candidate. QPE cost depends jointly on target precision, the Hamiltonian simulation method, state-preparation overlap with the true ground state, and fault-tolerant resource overhead. No generic scaling statement survives those dependencies.",
+        "wordingCorrections": [
+          "Generic \"scales polynomially\" claim removed; replaced with a formulation statement carrying no advantage claim.",
+          "Added explicit no-speedup and no-necessity statements required of every computational candidate."
+        ],
+        "prohibitedInferences": [
+          "Do not infer a practical or asymptotic speedup over classical multi-reference methods.",
+          "Do not infer that a resource estimate under fault tolerance describes current hardware."
+        ],
+        "classificationProjection": {
+          "mappable": false,
+          "reason": "Every published bridge type asserts an established relationship. COMPUTATIONAL_CANDIDATE asserts only that a mapping is worth attempting, which no existing type can carry."
+        }
+      },
+      "endpoints": {
+        "source": {
+          "submittedReference": "quantum-systems:phase-estimation-hamiltonian",
+          "resolverVersion": "maha-reference-resolver/1.0",
+          "outcome": {
+            "status": "unresolved-record",
+            "domainSlug": "quantum-systems",
+            "nearestSlugSuggestion": null,
+            "candidateCount": 25
+          }
+        },
+        "target": {
+          "submittedReference": "biomolecular-engineering:enzyme-active-site-kinetics",
+          "resolverVersion": "maha-reference-resolver/1.0",
+          "outcome": {
+            "status": "unresolved-record",
+            "domainSlug": "biomolecular-engineering",
+            "nearestSlugSuggestion": null,
+            "candidateCount": 30
+          }
+        }
+      },
+      "verdict": "BLOCK",
+      "verdictRationale": "Blocked on unresolvable record references. The audit resolves references against the live corpus; a nearest-slug suggestion is recorded but never substituted. Neither reference resolves. The scaling claim was rejected rather than softened: it omits the precision, state-preparation and fault-tolerance dependencies that determine cost. No exact locator (theorem, equation, section, chapter, figure, table, or page range) was supplied for either side, and none was invented during the audit.",
+      "blockerCodes": [
+        "claim-strength-rejected",
+        "classification-unmappable",
+        "endpoint-unresolved-record",
+        "rights-basis-unverified",
+        "source-missing-identifier",
+        "source-missing-locator"
+      ],
+      "promotionEligible": false,
+      "provenance": {
+        "auditPackageVersion": "maha-bridge-audit/1.0",
+        "bridgeSpecificationVersion": "mps-bridge/1.0",
+        "resolverVersion": "maha-reference-resolver/1.0"
+      },
+      "auditDigest": "sha256:b7c448c07cafec7a32a2d9936898f03ed7c931920ea266cc2483f44e545dd9f8"
+    },
+    {
+      "id": "Q-BR-005",
+      "submitted": {
+        "title": "Helium Isotope Enthalpy for Sub-20 mK Cryogenic Cooling",
+        "classification": "EXACT_DEPENDENCY",
+        "sourceReference": "quantum-systems:cryogenic-dilution-attenuation",
+        "targetReference": "critical-supply-chains:helium-isotope-refinement",
+        "citations": [
+          "Pobell, F. (2007). Matter and Methods at Low Temperatures (3rd ed.). Springer.",
+          "U.S. Department of Energy (2023). Isotope Program: Helium-3 Supply and Allocation Strategy. Office of Science."
+        ]
+      },
+      "audited": {
+        "mechanism": "Endothermic phase separation and osmotic transport of He-3 across the phase boundary into a dilute He-4 superfluid bath below about 100 mK.",
+        "establishes": "Dilution refrigeration, the dominant method for continuous sub-20 mK operation of superconducting and spin-qubit processors, depends on a charge of refined He-3.",
+        "doesNotEstablish": "That no sub-20 mK technique exists without He-3; or that greater He-3 supply resolves thermal load from high-density coaxial and microwave line attenuation.",
+        "classificationRationale": "A supply dependency scoped to dilution refrigeration. Adiabatic nuclear demagnetisation and adiabatic demagnetisation refrigeration reach comparable temperatures without a He-3 circulation charge, so a universal claim over all sub-20 mK systems is false.",
+        "wordingCorrections": [
+          "\"cannot operate without a non-substitutable charge of refined He-3\" scoped to dilution refrigeration specifically.",
+          "Added the counter-example class (nuclear/adiabatic demagnetisation) to the does-not-establish statement."
+        ],
+        "prohibitedInferences": [
+          "Do not infer that every sub-20 mK quantum platform requires He-3.",
+          "Do not infer a supply-security conclusion from a physics dependency."
+        ],
+        "classificationProjection": {
+          "mappable": true,
+          "bridgeType": "mechanistic-dependency"
+        }
+      },
+      "endpoints": {
+        "source": {
+          "submittedReference": "quantum-systems:cryogenic-dilution-attenuation",
+          "resolverVersion": "maha-reference-resolver/1.0",
+          "outcome": {
+            "status": "unresolved-record",
+            "domainSlug": "quantum-systems",
+            "nearestSlugSuggestion": null,
+            "candidateCount": 25
+          }
+        },
+        "target": {
+          "submittedReference": "critical-supply-chains:helium-isotope-refinement",
+          "resolverVersion": "maha-reference-resolver/1.0",
+          "outcome": {
+            "status": "unresolved-record",
+            "domainSlug": "critical-supply-chains",
+            "nearestSlugSuggestion": null,
+            "candidateCount": 30
+          }
+        }
+      },
+      "verdict": "BLOCK",
+      "verdictRationale": "Blocked on unresolvable record references. The audit resolves references against the live corpus; a nearest-slug suggestion is recorded but never substituted. Neither reference resolves. The Side B government report has no resolvable identifier. The universal \"cannot operate without\" and \"non-substitutable\" wording was rejected. No exact locator (theorem, equation, section, chapter, figure, table, or page range) was supplied for either side, and none was invented during the audit.",
+      "blockerCodes": [
+        "claim-strength-rejected",
+        "endpoint-unresolved-record",
+        "rights-basis-unverified",
+        "source-missing-identifier",
+        "source-missing-locator"
+      ],
+      "promotionEligible": false,
+      "provenance": {
+        "auditPackageVersion": "maha-bridge-audit/1.0",
+        "bridgeSpecificationVersion": "mps-bridge/1.0",
+        "resolverVersion": "maha-reference-resolver/1.0"
+      },
+      "auditDigest": "sha256:cbfa41f8c6635b009df8cf2ab0d90560cf2876169486bbc335e4721c9a3a7705"
+    },
+    {
+      "id": "Q-BR-006",
+      "submitted": {
+        "title": "Ginzburg-Landau Vortex Dynamics in Superconducting Films",
+        "classification": "SHARED_FORMALISM",
+        "sourceReference": "quantum-systems:superconducting-gap-depairing",
+        "targetReference": "fusion-plasma:rebco-high-field-magnets",
+        "citations": [
+          "Tinkham, M. (1996). Introduction to Superconductivity (2nd ed.). McGraw-Hill.",
+          "Whyte, D. G. et al. (2016). Smaller & sooner: exploiting high magnetic fields from new superconductors for a more attractive approach to fusion energy. Fusion Engineering and Design, 107, 14-22."
+        ]
+      },
+      "audited": {
+        "mechanism": "Ginzburg-Landau and BCS descriptions of Cooper-pair density, London penetration depth, coherence length, and Abrikosov vortex pinning.",
+        "establishes": "A common condensed-matter framework describes upper critical field and depairing current density in both thin-film resonator metallurgy and REBCO tape.",
+        "doesNotEstablish": "That thin-film metallurgies optimised for low-loss microwave resonators possess the mechanical strength or critical current density required for high-stress toroidal field coils; and that shared equations imply interchangeable materials.",
+        "classificationRationale": "A shared phenomenological framework. Ginzburg-Landau is a description both materials obey; it does not make them substitutable, and REBCO is a strongly anisotropic high-temperature superconductor whose pinning landscape differs qualitatively from elemental Nb or Ta films.",
+        "wordingCorrections": [
+          "Domain slug corrected from fusion-plasma to fusion-plasma-systems; the original declared reference is preserved.",
+          "Added an explicit statement that shared equations do not imply interchangeable materials."
+        ],
+        "prohibitedInferences": [
+          "Do not infer material interchangeability from a shared governing equation.",
+          "Do not infer mechanical or critical-current suitability from microwave loss performance."
+        ],
+        "classificationProjection": {
+          "mappable": false,
+          "reason": "No published bridge type expresses \"the same formalism is used\" without also asserting equivalence. mathematical-equivalence is strictly stronger than the audited claim."
+        }
+      },
+      "endpoints": {
+        "source": {
+          "submittedReference": "quantum-systems:superconducting-gap-depairing",
+          "resolverVersion": "maha-reference-resolver/1.0",
+          "outcome": {
+            "status": "unresolved-record",
+            "domainSlug": "quantum-systems",
+            "nearestSlugSuggestion": "cryogenic-superconducting-control-stack",
+            "candidateCount": 25
+          }
+        },
+        "target": {
+          "submittedReference": "fusion-plasma:rebco-high-field-magnets",
+          "resolverVersion": "maha-reference-resolver/1.0",
+          "outcome": {
+            "status": "alias-resolution",
+            "recordId": "urn:maha:record:fusion-plasma-systems-rebco-high-field-magnets",
+            "domainSlug": "fusion-plasma-systems",
+            "recordRevisionSha256": "sha256:0fedeac77d213a0bdd0d1cee3f01f6f0776dd39b1dc713c3aae7cea443c091d5",
+            "appliedAlias": {
+              "alias": "fusion-plasma",
+              "target": "fusion-plasma-systems",
+              "since": "maha-reference-resolver/1.0",
+              "reason": "Submitted batches shorten the canonical fusion-plasma-systems domain id."
+            },
+            "normalizedReference": "fusion-plasma-systems:rebco-high-field-magnets"
+          }
+        }
+      },
+      "verdict": "BLOCK",
+      "verdictRationale": "Blocked on unresolvable record references. The audit resolves references against the live corpus; a nearest-slug suggestion is recorded but never substituted. The target resolves only after correcting the domain slug from \"fusion-plasma\" to \"fusion-plasma-systems\"; the correction is recorded rather than applied silently. The source reference does not resolve. No exact locator (theorem, equation, section, chapter, figure, table, or page range) was supplied for either side, and none was invented during the audit.",
+      "blockerCodes": [
+        "classification-unmappable",
+        "endpoint-unresolved-record",
+        "rights-basis-unverified",
+        "source-missing-identifier",
+        "source-missing-locator"
+      ],
+      "promotionEligible": false,
+      "provenance": {
+        "auditPackageVersion": "maha-bridge-audit/1.0",
+        "bridgeSpecificationVersion": "mps-bridge/1.0",
+        "resolverVersion": "maha-reference-resolver/1.0"
+      },
+      "auditDigest": "sha256:344b0f58f2a02deda41da9d19024c5d64c51b70e044775fd2d75db96ce316446"
+    },
+    {
+      "id": "Q-BR-007",
+      "submitted": {
+        "title": "Topological Invariants in 2D Superconducting Heterostructures",
+        "classification": "COMPUTATIONAL_CANDIDATE",
+        "sourceReference": "quantum-systems:majorana-zero-modes",
+        "targetReference": "advanced-materials:twisted-bilayer-heterostructures",
+        "citations": [
+          "Lutchyn, R. M., Sau, J. D., & Das Sarma, S. (2010). Majorana Fermions and a Topological Phase Transition in Semiconductor-Superconductor Heterostructures. Physical Review Letters, 105(7), 077001.",
+          "Cao, Y. et al. (2018). Unconventional superconductivity in magic-angle graphene superlattices. Nature, 556(7699), 43-50."
+        ]
+      },
+      "audited": {
+        "mechanism": "Proximity-induced s-wave superconductivity in spin-orbit-coupled 2D electron gases or moire flat bands, proposed to produce non-trivial bulk topological invariants and zero-energy boundary modes.",
+        "establishes": "Magic-angle graphene superlattices exhibit unconventional superconductivity, and separate theory proposes Majorana bound states in proximitised spin-orbit-coupled systems.",
+        "doesNotEstablish": "That 2D superlattices realise non-Abelian states; that zero-bias conductance peaks are proof of non-Abelian braiding, since trivial disorder-induced Andreev bound states produce identical signatures; and that any computational advantage or error-rate benefit follows from topological encoding, which requires a demonstrated non-Abelian state this bridge does not supply.",
+        "classificationRationale": "A computational and experimental candidate only. The two cited works address different systems: one is a theoretical proposal for semiconductor-superconductor nanowires, the other an experimental report of superconductivity in twisted bilayer graphene. Neither reports a realised non-Abelian state.",
+        "wordingCorrections": [
+          "\"provide an experimental platform for realizing synthetic non-Abelian Hamiltonian states\" rejected; replaced with separate statements of what each source actually reports."
+        ],
+        "prohibitedInferences": [
+          "Do not infer Majorana realisation from observed superconductivity.",
+          "Do not infer non-Abelian braiding from a zero-bias conductance peak."
+        ],
+        "classificationProjection": {
+          "mappable": false,
+          "reason": "Every published bridge type asserts an established relationship. COMPUTATIONAL_CANDIDATE asserts only that a mapping is worth attempting, which no existing type can carry."
+        }
+      },
+      "endpoints": {
+        "source": {
+          "submittedReference": "quantum-systems:majorana-zero-modes",
+          "resolverVersion": "maha-reference-resolver/1.0",
+          "outcome": {
+            "status": "unresolved-record",
+            "domainSlug": "quantum-systems",
+            "nearestSlugSuggestion": null,
+            "candidateCount": 25
+          }
+        },
+        "target": {
+          "submittedReference": "advanced-materials:twisted-bilayer-heterostructures",
+          "resolverVersion": "maha-reference-resolver/1.0",
+          "outcome": {
+            "status": "unresolved-record",
+            "domainSlug": "advanced-materials",
+            "nearestSlugSuggestion": null,
+            "candidateCount": 30
+          }
+        }
+      },
+      "verdict": "BLOCK",
+      "verdictRationale": "Blocked on unresolvable record references. The audit resolves references against the live corpus; a nearest-slug suggestion is recorded but never substituted. Neither reference resolves. Side B does not support the assigned side of the bridge: Cao et al. establishes unconventional superconductivity, not non-Abelian states. The rejected assertion is preserved. No exact locator (theorem, equation, section, chapter, figure, table, or page range) was supplied for either side, and none was invented during the audit.",
+      "blockerCodes": [
+        "claim-strength-rejected",
+        "classification-unmappable",
+        "endpoint-unresolved-record",
+        "rights-basis-unverified",
+        "source-missing-locator"
+      ],
+      "promotionEligible": false,
+      "provenance": {
+        "auditPackageVersion": "maha-bridge-audit/1.0",
+        "bridgeSpecificationVersion": "mps-bridge/1.0",
+        "resolverVersion": "maha-reference-resolver/1.0"
+      },
+      "auditDigest": "sha256:5e3440c38797b076323203332b895a68fe948e76bae963eda4a6c7289ba5fe25"
+    },
+    {
+      "id": "Q-BR-008",
+      "submitted": {
+        "title": "Stabilizer Syndrome Extraction vs. Neural Population Coding",
+        "classification": "STRUCTURAL_ANALOGY",
+        "sourceReference": "quantum-systems:syndrome-extraction-cycle",
+        "targetReference": "neuromorphic-biocomputing:spiking-fault-tolerance",
+        "citations": [
+          "Fowler, A. G. et al. (2012). Surface codes: Towards practical large-scale quantum computation. Physical Review A, 86(3), 032324.",
+          "Maass, W. (2016). Searching for principles of brain computation. PNAS, 113(41), 11387-11395."
+        ]
+      },
+      "audited": {
+        "mechanism": "Measurement of stabilizer parity generators without collapsing the logical state, compared with redundant population coding that preserves a signal despite stochastic single-neuron dropout.",
+        "establishes": "Both systems are described as using decentralised redundancy to maintain information stability against local faults. This is a descriptive parallel.",
+        "doesNotEstablish": "Any formal mathematical equivalence, quantum phase coherence in biological tissue, or quantum error correction in nervous systems.",
+        "classificationRationale": "A structural analogy and nothing more. Stabilizer measurement is a designed algebraic procedure with a known code distance; population coding is an emergent statistical property with no syndrome, no decoder, and no threshold theorem.",
+        "wordingCorrections": [
+          "Establishes narrowed to \"are described as using\", marking the parallel as descriptive rather than demonstrated."
+        ],
+        "prohibitedInferences": [
+          "Do not infer quantum error correction in biological nervous systems.",
+          "Do not infer a code distance or threshold for a neural population.",
+          "Do not treat this analogy as transferable evidence in either direction."
+        ],
+        "classificationProjection": {
+          "mappable": true,
+          "bridgeType": "structural-analogy"
+        }
+      },
+      "endpoints": {
+        "source": {
+          "submittedReference": "quantum-systems:syndrome-extraction-cycle",
+          "resolverVersion": "maha-reference-resolver/1.0",
+          "outcome": {
+            "status": "unresolved-record",
+            "domainSlug": "quantum-systems",
+            "nearestSlugSuggestion": null,
+            "candidateCount": 25
+          }
+        },
+        "target": {
+          "submittedReference": "neuromorphic-biocomputing:spiking-fault-tolerance",
+          "resolverVersion": "maha-reference-resolver/1.0",
+          "outcome": {
+            "status": "unresolved-record",
+            "domainSlug": "neuromorphic-biocomputing",
+            "nearestSlugSuggestion": null,
+            "candidateCount": 0
+          }
+        }
+      },
+      "verdict": "BLOCK",
+      "verdictRationale": "Blocked on unresolvable record references. The audit resolves references against the live corpus; a nearest-slug suggestion is recorded but never substituted. The target names domain \"neuromorphic-biocomputing\", which does not exist in the corpus. The analogy itself is stated at appropriate strength and carries its non-equivalence warning. No exact locator (theorem, equation, section, chapter, figure, table, or page range) was supplied for either side, and none was invented during the audit.",
+      "blockerCodes": [
+        "endpoint-unresolved-record",
+        "rights-basis-unverified",
+        "source-missing-locator"
+      ],
+      "promotionEligible": false,
+      "provenance": {
+        "auditPackageVersion": "maha-bridge-audit/1.0",
+        "bridgeSpecificationVersion": "mps-bridge/1.0",
+        "resolverVersion": "maha-reference-resolver/1.0"
+      },
+      "auditDigest": "sha256:54cb730c13fcb9f901395d46915d48d8aaa14f34cd9b56113e2afab36034509d"
+    },
+    {
+      "id": "Q-BR-009",
+      "submitted": {
+        "title": "Isotopic Silicon-28 Purification for Nuclear-Spin Dephasing",
+        "classification": "EXACT_DEPENDENCY",
+        "sourceReference": "quantum-systems:spin-qubit-hyperfine-dephasing",
+        "targetReference": "semiconductor-manufacturing:silicon-crystal-growth-and-wafer-preparation",
+        "citations": [
+          "Veldhorst, M. et al. (2014). An addressable quantum dot qubit with fault-tolerant control-fidelity. Nature Nanotechnology, 9(12), 981-985.",
+          "Itoh, K. M., & Watanabe, H. (2014). Isotope engineering of silicon and diamond for quantum computing and sensing applications. MRS Communications, 4(4), 143-157."
+        ]
+      },
+      "audited": {
+        "mechanism": "Depletion of the 4.685 percent natural abundance of Si-29 (nuclear spin I = 1/2), reducing the fluctuating nuclear Overhauser field that dephases an electron spin.",
+        "establishes": "Electron spin dephasing time in gate-defined quantum dots is substantially longer in isotopically enriched Si-28 than in natural silicon. Veldhorst et al. report T2* = 120 microseconds in an enriched device.",
+        "doesNotEstablish": "That isotopic purity removes 1/f charge-noise dephasing from fluctuating trap states at the silicon/dielectric interface; and that any specific enrichment level follows from the cited experiment.",
+        "classificationRationale": "A materials dependency scoped to nuclear-spin dephasing only. It is not an exclusive requirement: charge noise remains a separate and independent dephasing channel.",
+        "wordingCorrections": [
+          "Citation title corrected to \"fault-tolerant control-fidelity\".",
+          "Natural Si-29 abundance corrected from 4.67 to 4.685 percent.",
+          "\">100x increase\" replaced with the measured value actually reported, plus an explicit note that no paired natural-silicon baseline was supplied.",
+          "Enrichment figure \"<0.005%\" removed as unsupported by the cited source."
+        ],
+        "prohibitedInferences": [
+          "Do not infer a specific enrichment threshold from a single-device report.",
+          "Do not infer that isotopic purity addresses charge noise.",
+          "Do not present a cross-study ratio as a measured comparison."
+        ],
+        "classificationProjection": {
+          "mappable": true,
+          "bridgeType": "mechanistic-dependency"
+        }
+      },
+      "endpoints": {
+        "source": {
+          "submittedReference": "quantum-systems:spin-qubit-hyperfine-dephasing",
+          "resolverVersion": "maha-reference-resolver/1.0",
+          "outcome": {
+            "status": "unresolved-record",
+            "domainSlug": "quantum-systems",
+            "nearestSlugSuggestion": "silicon-spin-qubits",
+            "candidateCount": 25
+          }
+        },
+        "target": {
+          "submittedReference": "semiconductor-manufacturing:silicon-crystal-growth-and-wafer-preparation",
+          "resolverVersion": "maha-reference-resolver/1.0",
+          "outcome": {
+            "status": "unresolved-record",
+            "domainSlug": "semiconductor",
+            "nearestSlugSuggestion": null,
+            "candidateCount": 0,
+            "appliedAlias": {
+              "alias": "semiconductor-manufacturing",
+              "target": "semiconductor",
+              "since": "maha-reference-resolver/1.0",
+              "reason": "The Phase-4 pilot corpus uses the domain id \"semiconductor\". This alias makes the namespace difference explicit; it does not make pilot entries canonical."
+            },
+            "normalizedReference": "semiconductor:silicon-crystal-growth-and-wafer-preparation"
+          }
+        }
+      },
+      "verdict": "BLOCK",
+      "verdictRationale": "Blocked on unresolvable record references. The audit resolves references against the live corpus; a nearest-slug suggestion is recorded but never substituted. The target names domain \"semiconductor-manufacturing\", which does not exist in the corpus. The \">100x\" multiplier and the \"<0.005%\" enrichment figure were not supported by the cited experiment and were rejected rather than restated. The citation title was corrected. No exact locator (theorem, equation, section, chapter, figure, table, or page range) was supplied for either side, and none was invented during the audit.",
+      "blockerCodes": [
+        "claim-strength-rejected",
+        "endpoint-unresolved-record",
+        "rights-basis-unverified",
+        "source-missing-locator"
+      ],
+      "promotionEligible": false,
+      "provenance": {
+        "auditPackageVersion": "maha-bridge-audit/1.0",
+        "bridgeSpecificationVersion": "mps-bridge/1.0",
+        "resolverVersion": "maha-reference-resolver/1.0"
+      },
+      "auditDigest": "sha256:de10051db06be6293e680e9d486f7bbed9d576126951b21f8a4311e897385349"
+    },
+    {
+      "id": "Q-BR-010",
+      "submitted": {
+        "title": "Mapping Tokamak Equilibrium Constraints to Binary Optimization",
+        "classification": "COMPUTATIONAL_CANDIDATE",
+        "sourceReference": "quantum-systems:qubo-ising-mapping",
+        "targetReference": "fusion-plasma:grad-shafranov-equilibrium-solver",
+        "citations": [
+          "Lucas, A. (2014). Ising formulations of many NP problems. Frontiers in Physics, 2, 5.",
+          "Blum, J. (2010). Numerical Simulation of Tokamak Plasmas. In Modeling and Control in Solid Mechanics."
+        ]
+      },
+      "audited": {
+        "mechanism": "Proposed discretisation of the non-linear Grad-Shafranov elliptic PDE into a QUBO or Ising Hamiltonian for annealing or QAOA.",
+        "establishes": "Lucas catalogues Ising formulations for many NP problems, and Blum describes numerical tokamak equilibrium solvers. Each source establishes its own subject.",
+        "doesNotEstablish": "That a valid QUBO reduction of Grad-Shafranov exists; that any such reduction preserves the solution; or that annealing or QAOA yields speedup or precision over classical finite-element solvers.",
+        "classificationRationale": "A computational candidate whose central step is missing. A generic Ising catalogue plus a generic PDE reference does not constitute a reduction: no discretisation, penalty formulation, or variable encoding was supplied, and Grad-Shafranov is a continuous non-linear PDE rather than a combinatorial problem.",
+        "wordingCorrections": [
+          "\"can be formally cast into binary quadratic spin matrices\" rejected: no formal casting was supplied for this PDE.",
+          "Establishes rewritten to state only what each source covers independently."
+        ],
+        "prohibitedInferences": [
+          "Do not infer that a QUBO reduction exists because both topics can be written as optimisation.",
+          "Do not infer any quantum speedup or precision advantage."
+        ],
+        "classificationProjection": {
+          "mappable": false,
+          "reason": "Every published bridge type asserts an established relationship. COMPUTATIONAL_CANDIDATE asserts only that a mapping is worth attempting, which no existing type can carry."
+        }
+      },
+      "endpoints": {
+        "source": {
+          "submittedReference": "quantum-systems:qubo-ising-mapping",
+          "resolverVersion": "maha-reference-resolver/1.0",
+          "outcome": {
+            "status": "unresolved-record",
+            "domainSlug": "quantum-systems",
+            "nearestSlugSuggestion": null,
+            "candidateCount": 25
+          }
+        },
+        "target": {
+          "submittedReference": "fusion-plasma:grad-shafranov-equilibrium-solver",
+          "resolverVersion": "maha-reference-resolver/1.0",
+          "outcome": {
+            "status": "unresolved-record",
+            "domainSlug": "fusion-plasma-systems",
+            "nearestSlugSuggestion": null,
+            "candidateCount": 30,
+            "appliedAlias": {
+              "alias": "fusion-plasma",
+              "target": "fusion-plasma-systems",
+              "since": "maha-reference-resolver/1.0",
+              "reason": "Submitted batches shorten the canonical fusion-plasma-systems domain id."
+            },
+            "normalizedReference": "fusion-plasma-systems:grad-shafranov-equilibrium-solver"
+          }
+        }
+      },
+      "verdict": "BLOCK",
+      "verdictRationale": "Blocked on unresolvable record references. The audit resolves references against the live corpus; a nearest-slug suggestion is recorded but never substituted. Neither reference resolves. The bridge asserts a reduction that neither source supplies, and the Side B container could not be resolved. No exact locator (theorem, equation, section, chapter, figure, table, or page range) was supplied for either side, and none was invented during the audit.",
+      "blockerCodes": [
+        "claim-strength-rejected",
+        "classification-unmappable",
+        "endpoint-unresolved-record",
+        "rights-basis-unverified",
+        "source-missing-identifier",
+        "source-missing-locator"
+      ],
+      "promotionEligible": false,
+      "provenance": {
+        "auditPackageVersion": "maha-bridge-audit/1.0",
+        "bridgeSpecificationVersion": "mps-bridge/1.0",
+        "resolverVersion": "maha-reference-resolver/1.0"
+      },
+      "auditDigest": "sha256:e318c7676c2c7bf3ba4f6de4802f143cf909a15f88c3b0e602a796c56625ddcb"
+    },
+    {
+      "id": "Q-BR-011",
+      "submitted": {
+        "title": "Information-Theoretic Security Bounds in Distributed Enclaves",
+        "classification": "SHARED_FORMALISM",
+        "sourceReference": "quantum-systems:bb84-entanglement-distribution",
+        "targetReference": "agentic-systems:mcp-tool-authorization-enclaves",
+        "citations": [
+          "Bennett, C. H., & Brassard, G. (1984). Quantum cryptography: Public key distribution and coin tossing. Proceedings of IEEE International Conference on Computers, Systems and Signal Processing, 175-179.",
+          "Hou, R. et al. (2024). Formal Verification of Contextual Access Control in Autonomous Multi-Agent Tool-Use Architectures. IEEE S&P."
+        ]
+      },
+      "audited": {
+        "mechanism": "No-cloning and entropic uncertainty relations bounding information leakage in state transmission, compared with non-interactive zero-knowledge proofs for agent authorization tokens.",
+        "establishes": "Nothing beyond the existence of each field separately. No mapping between the two formalisms was supplied.",
+        "doesNotEstablish": "That QKD and zero-knowledge authorization share a formalism; that physical-layer QKD mitigates application-layer agent vulnerabilities such as prompt injection, unauthorized tool execution, or system-prompt override.",
+        "classificationRationale": "Cannot be classified as SHARED_FORMALISM. QKD security rests on physical no-cloning and entropic bounds over a quantum channel; NIZK security rests on computational hardness assumptions and a common reference string. Calling these the same formalism requires a precise mapping that was not supplied and that the audit does not believe exists in this form.",
+        "wordingCorrections": [
+          "\"Shared mathematical frameworks\" rejected; replaced with an explicit statement that no mapping was supplied.",
+          "Recorded that information-theoretic and computational security rest on different assumption classes."
+        ],
+        "prohibitedInferences": [
+          "Do not infer that QKD addresses prompt injection or tool-authorization failures.",
+          "Do not infer a shared formalism between information-theoretic and computational security.",
+          "Do not substitute a different access-control paper to rescue this bridge."
+        ],
+        "classificationProjection": {
+          "mappable": false,
+          "reason": "No published bridge type expresses \"the same formalism is used\" without also asserting equivalence. mathematical-equivalence is strictly stronger than the audited claim."
+        }
+      },
+      "endpoints": {
+        "source": {
+          "submittedReference": "quantum-systems:bb84-entanglement-distribution",
+          "resolverVersion": "maha-reference-resolver/1.0",
+          "outcome": {
+            "status": "unresolved-record",
+            "domainSlug": "quantum-systems",
+            "nearestSlugSuggestion": null,
+            "candidateCount": 25
+          }
+        },
+        "target": {
+          "submittedReference": "agentic-systems:mcp-tool-authorization-enclaves",
+          "resolverVersion": "maha-reference-resolver/1.0",
+          "outcome": {
+            "status": "unresolved-record",
+            "domainSlug": "agentic-systems-mcp",
+            "nearestSlugSuggestion": null,
+            "candidateCount": 30,
+            "appliedAlias": {
+              "alias": "agentic-systems",
+              "target": "agentic-systems-mcp",
+              "since": "maha-reference-resolver/1.0",
+              "reason": "Submitted batches drop the -mcp suffix from the canonical agentic-systems-mcp domain id."
+            },
+            "normalizedReference": "agentic-systems-mcp:mcp-tool-authorization-enclaves"
+          }
+        }
+      },
+      "verdict": "BLOCK",
+      "verdictRationale": "Blocked on unresolvable record references. The audit resolves references against the live corpus; a nearest-slug suggestion is recorded but never substituted. Independently and more seriously, the Side B citation is unverifiable: no matching record exists in DBLP or in general literature search. A bridge resting on an unlocatable source cannot proceed at any review state. No exact locator (theorem, equation, section, chapter, figure, table, or page range) was supplied for either side, and none was invented during the audit.",
+      "blockerCodes": [
+        "claim-strength-rejected",
+        "classification-unmappable",
+        "endpoint-unresolved-record",
+        "rights-basis-unverified",
+        "source-missing-identifier",
+        "source-missing-locator",
+        "source-unverifiable"
+      ],
+      "promotionEligible": false,
+      "provenance": {
+        "auditPackageVersion": "maha-bridge-audit/1.0",
+        "bridgeSpecificationVersion": "mps-bridge/1.0",
+        "resolverVersion": "maha-reference-resolver/1.0"
+      },
+      "auditDigest": "sha256:c23d1b4950191369186b89afdff05b34b7cccbd0f4950dfefd1426ad1d4c8d33"
+    },
+    {
+      "id": "Q-BR-012",
+      "submitted": {
+        "title": "Refractory Metallurgy Purity in 3D Bosonic Cavity Lifetimes",
+        "classification": "EXACT_DEPENDENCY",
+        "sourceReference": "quantum-systems:3d-cavity-resonator-loss",
+        "targetReference": "critical-supply-chains:refractory-tantalum-niobium-refinement",
+        "citations": [
+          "Romanenko, A. et al. (2020). Three-Dimensional Superconducting Resonators at T < 20 mK with Photon Lifetimes up to tau = 2 s.",
+          "Padamsee, H. (2009). RF Superconductivity: Science, Technology, and Applications. Wiley-VCH."
+        ]
+      },
+      "audited": {
+        "mechanism": "High residual-resistance-ratio electron-beam vacuum smelting of niobium and tantalum to reduce interstitial O, H, N and C that contribute to surface hydrides and microwave loss.",
+        "establishes": "Romanenko et al. report photon lifetimes up to about 2 seconds in three-dimensional superconducting cavities below 20 mK. Bulk purity is one contributing factor among several.",
+        "doesNotEstablish": "That bulk ingot purity alone sets the lifetime; the cited work and the SRF literature separate bulk purity from surface preparation, oxide and hydride formation, cavity geometry, trapped flux, and cryogenic losses.",
+        "classificationRationale": "A materials dependency, but not an exact or sole one. The supplied wording collapsed at least five distinct loss contributions into bulk smelting purity.",
+        "wordingCorrections": [
+          "Venue corrected from Physical Review Letters 124(8) 086801 to Physical Review Applied 13(3) 034032.",
+          "\"physically bounded by refractory smelting purity\" replaced with a contributing-factor statement listing the separated loss channels."
+        ],
+        "prohibitedInferences": [
+          "Do not infer that smelting purity alone determines cavity lifetime.",
+          "Do not infer a supply-chain conclusion from a single-cavity measurement."
+        ],
+        "classificationProjection": {
+          "mappable": true,
+          "bridgeType": "mechanistic-dependency"
+        }
+      },
+      "endpoints": {
+        "source": {
+          "submittedReference": "quantum-systems:3d-cavity-resonator-loss",
+          "resolverVersion": "maha-reference-resolver/1.0",
+          "outcome": {
+            "status": "unresolved-record",
+            "domainSlug": "quantum-systems",
+            "nearestSlugSuggestion": null,
+            "candidateCount": 25
+          }
+        },
+        "target": {
+          "submittedReference": "critical-supply-chains:refractory-tantalum-niobium-refinement",
+          "resolverVersion": "maha-reference-resolver/1.0",
+          "outcome": {
+            "status": "unresolved-record",
+            "domainSlug": "critical-supply-chains",
+            "nearestSlugSuggestion": null,
+            "candidateCount": 30
+          }
+        }
+      },
+      "verdict": "BLOCK",
+      "verdictRationale": "Blocked on unresolvable record references. The audit resolves references against the live corpus; a nearest-slug suggestion is recorded but never substituted. Neither reference resolves. The Side A citation named the wrong journal, volume, issue and article number; the correction is recorded and the original assertion preserved. The single-cause wording was rejected. No exact locator (theorem, equation, section, chapter, figure, table, or page range) was supplied for either side, and none was invented during the audit.",
+      "blockerCodes": [
+        "endpoint-unresolved-record",
+        "rights-basis-unverified",
+        "source-missing-identifier",
+        "source-missing-locator"
+      ],
+      "promotionEligible": false,
+      "provenance": {
+        "auditPackageVersion": "maha-bridge-audit/1.0",
+        "bridgeSpecificationVersion": "mps-bridge/1.0",
+        "resolverVersion": "maha-reference-resolver/1.0"
+      },
+      "auditDigest": "sha256:700083f882654522c10c0dabb1ebb5622743ffddbb93d9cde71d5f12c3e35393"
+    }
+  ]
+}
