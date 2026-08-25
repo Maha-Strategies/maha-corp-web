@@ -1,0 +1,51 @@
+name: Production semiconductor equipment batch
+
+on:
+  workflow_dispatch:
+    inputs:
+      operation:
+        description: Preview, enqueue/drain/verify, or publish the exact 25-record cohort
+        required: true
+        default: preview
+        type: choice
+        options:
+          - preview
+          - enqueue-drain-verify
+          - publish
+      confirmation:
+        description: Type PROMOTE_25_EQUIPMENT_RECORDS only when publishing a fully reviewed cohort
+        required: false
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: production-semiconductor-equipment-batch
+  cancel-in-progress: false
+
+jobs:
+  operate:
+    runs-on: ubuntu-latest
+    environment: production-database
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Verify publication confirmation
+        if: inputs.operation == 'publish'
+        env:
+          CONFIRMATION: ${{ inputs.confirmation }}
+        run: test "$CONFIRMATION" = "PROMOTE_25_EQUIPMENT_RECORDS"
+      - name: Run equipment cohort
+        env:
+          EPISTEMIC_OPERATIONS_TOKEN: ${{ secrets.EPISTEMIC_OPERATIONS_TOKEN }}
+          EPISTEMIC_RELEASE_AUTHORITY_TOKEN: ${{ secrets.EPISTEMIC_RELEASE_AUTHORITY_TOKEN }}
+          EPISTEMIC_EQUIPMENT_RELEASE_CONFIRM: ${{ inputs.confirmation }}
+        run: >-
+          node --experimental-strip-types scripts/run-semiconductor-equipment-batch.ts
+          ${{ inputs.operation != 'preview' && '--apply --drain' || '' }}
+          ${{ inputs.operation == 'publish' && '--publish' || '' }}
+
