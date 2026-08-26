@@ -353,10 +353,36 @@ test('the reported totals match the audit', () => {
   const origins = originTotals()
   assert.equal(Object.values(origins).reduce((a, b) => a + b, 0), 240)
   assert.equal(origins['explicit-override'], 2)
-  assert.equal(verdicts.supported, 27)
+  assert.deepEqual(verdicts, {
+    supported: 43,
+    'partially-supported': 18,
+    mismatched: 24,
+    'insufficient-evidence': 140,
+    'inaccessible-source': 15,
+  })
+  assert.equal(FRONTIER_ALIGNMENT_AUDIT.filter((entry) => entry.evidence.sourceContentInspected).length, 86)
   assert.equal(
     FRONTIER_ALIGNMENT_AUDIT.filter((entry) => isAlignmentClear(entry.recordId)).length,
-    27,
+    43,
     'alignment-clear count changed',
   )
+})
+
+test('alignment batch 3 inspects five records in every frontier domain', () => {
+  const inspectedBeforeBatch3: Record<string, number> = {
+    'advanced-materials': 10,
+    'agentic-systems-mcp': 10,
+    'biomolecular-engineering': 5,
+    'critical-supply-chains': 5,
+    'fusion-plasma-systems': 10,
+    'longevity-metabolism': 0,
+    'mechanistic-interpretability': 5,
+    'neurotechnology-bci': 1,
+  }
+  for (const [domain, before] of Object.entries(inspectedBeforeBatch3)) {
+    const after = FRONTIER_ALIGNMENT_AUDIT.filter(
+      (entry) => entry.domainSlug === domain && entry.evidence.sourceContentInspected,
+    ).length
+    assert.equal(after - before, 5, `${domain} did not receive exactly five Batch 3 inspections`)
+  }
 })

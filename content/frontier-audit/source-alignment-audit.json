@@ -1,36 +1,36 @@
 {
   "schemaVersion": "maha-frontier-source-alignment/1.0",
   "auditInputDate": "2026-08-26",
-  "auditDigest": "sha256:26b035175d6d0c14e5358e77d1c23dcc4c49bee4d148c2500bbc26eab03a4332",
+  "auditDigest": "sha256:bf0940347625108e98e481a60b94f7bdf01968ddb0a7add200e4af293ec984a4",
   "totals": {
     "records": 240,
-    "internallyInspectedSourceCount": 46,
-    "metadataResolvedContentNotInspected": 124,
+    "internallyInspectedSourceCount": 86,
+    "metadataResolvedContentNotInspected": 99,
     "chronologicalRiskIndicators": 3,
     "corrected": 2,
-    "alignmentClear": 27,
-    "blocked": 213
+    "alignmentClear": 43,
+    "blocked": 197
   },
   "verdictTotals": {
-    "supported": 27,
-    "partially-supported": 6,
-    "mismatched": 12,
-    "insufficient-evidence": 176,
-    "inaccessible-source": 19
+    "supported": 43,
+    "partially-supported": 18,
+    "mismatched": 24,
+    "insufficient-evidence": 140,
+    "inaccessible-source": 15
   },
   "originTotals": {
     "explicit-override": 2,
-    "positional-legacy": 213,
-    "independently-curated": 25
+    "positional-legacy": 197,
+    "independently-curated": 41
   },
   "blockerTotals": {
-    "source-alignment-insufficient-evidence": 176,
-    "source-assignment-positional-legacy": 213,
-    "source-not-inspected": 194,
-    "source-subject-mismatched": 12,
-    "source-metadata-unverified": 70,
-    "source-subject-partially-supported": 6,
-    "source-inaccessible": 19
+    "source-alignment-insufficient-evidence": 140,
+    "source-assignment-positional-legacy": 197,
+    "source-not-inspected": 154,
+    "source-subject-mismatched": 24,
+    "source-subject-partially-supported": 18,
+    "source-metadata-unverified": 60,
+    "source-inaccessible": 15
   },
   "records": [
     {
@@ -639,24 +639,23 @@
         "metadataVerified": true,
         "metadataMethod": "crossref-rest",
         "metadataNote": "Crossref resolves this identifier to \"Atomically Thin\n                    <mml:math xmlns:mml=\"http://www.w3.org/1998/Math/MathML\" display=\"inline\">\n                      <mml:msub>\n                        <mml:mi>MoS</mml:mi>\n                        <mml:mn>2</mml:mn>\n                      </mml:msub>\n                    </mml:math>\n                    : A New Direct-Gap Semiconductor\" in Physical Review Letters (2010). Registry resolution confirms the document exists; it does not establish subject alignment.",
-        "sourceContentInspected": false,
-        "inspectedContentLocation": null,
-        "subjectAligned": "insufficient-evidence",
-        "mismatchBasis": null,
+        "sourceContentInspected": true,
+        "inspectedContentLocation": "APS abstract and photoluminescence comparison for DOI 10.1103/PhysRevLett.105.136805",
+        "subjectAligned": "mismatched",
+        "mismatchBasis": "inspected-content-different-subject",
         "chronologicalRiskIndicator": false,
         "claimSupported": false,
         "sourceIndependentOfOtherCitedSources": null,
         "independentlyReproduced": false,
         "externallyReviewed": false
       },
-      "reason": "The source was inherited from the positional block assignment and has not been read for this record. Registry metadata alone cannot establish that a source is about a subject.",
+      "reason": "The abstract and photoluminescence comparison concern the direct-gap transition in monolayer MoS2, not interlayer excitons.",
       "transcriptionConfidence": "high",
-      "remediation": "Inspect the bound source against this record subject, then either confirm the mapping as curated or replace it with an explicit override.",
+      "remediation": "Bind a source that directly treats the named subject, or narrow the record to monolayer MoS2 direct-gap evidence.",
       "priorMapping": null,
       "blockers": [
-        "source-alignment-insufficient-evidence",
         "source-assignment-positional-legacy",
-        "source-not-inspected"
+        "source-subject-mismatched"
       ]
     },
     {
@@ -793,24 +792,23 @@
         "metadataVerified": true,
         "metadataMethod": "crossref-rest",
         "metadataNote": "Crossref resolves this identifier to \"Atomically Thin\n                    <mml:math xmlns:mml=\"http://www.w3.org/1998/Math/MathML\" display=\"inline\">\n                      <mml:msub>\n                        <mml:mi>MoS</mml:mi>\n                        <mml:mn>2</mml:mn>\n                      </mml:msub>\n                    </mml:math>\n                    : A New Direct-Gap Semiconductor\" in Physical Review Letters (2010). Registry resolution confirms the document exists; it does not establish subject alignment.",
-        "sourceContentInspected": false,
-        "inspectedContentLocation": null,
-        "subjectAligned": "insufficient-evidence",
-        "mismatchBasis": null,
+        "sourceContentInspected": true,
+        "inspectedContentLocation": "APS abstract and photoluminescence comparison for DOI 10.1103/PhysRevLett.105.136805",
+        "subjectAligned": "mismatched",
+        "mismatchBasis": "inspected-content-different-subject",
         "chronologicalRiskIndicator": false,
         "claimSupported": false,
         "sourceIndependentOfOtherCitedSources": null,
         "independentlyReproduced": false,
         "externallyReviewed": false
       },
-      "reason": "The source was inherited from the positional block assignment and has not been read for this record. Registry metadata alone cannot establish that a source is about a subject.",
+      "reason": "The inspected paper concerns the MoS2 layer-dependent band gap and reports no anomalous Hall state.",
       "transcriptionConfidence": "high",
-      "remediation": "Inspect the bound source against this record subject, then either confirm the mapping as curated or replace it with an explicit override.",
+      "remediation": "Bind a source that directly treats the named subject, or narrow the record to monolayer MoS2 direct-gap evidence.",
       "priorMapping": null,
       "blockers": [
-        "source-alignment-insufficient-evidence",
         "source-assignment-positional-legacy",
-        "source-not-inspected"
+        "source-subject-mismatched"
       ]
     },
     {
@@ -874,24 +872,23 @@
         "metadataVerified": true,
         "metadataMethod": "crossref-rest",
         "metadataNote": "Crossref resolves this identifier to \"Atomically Thin\n                    <mml:math xmlns:mml=\"http://www.w3.org/1998/Math/MathML\" display=\"inline\">\n                      <mml:msub>\n                        <mml:mi>MoS</mml:mi>\n                        <mml:mn>2</mml:mn>\n                      </mml:msub>\n                    </mml:math>\n                    : A New Direct-Gap Semiconductor\" in Physical Review Letters (2010). Registry resolution confirms the document exists; it does not establish subject alignment.",
-        "sourceContentInspected": false,
-        "inspectedContentLocation": null,
-        "subjectAligned": "insufficient-evidence",
-        "mismatchBasis": null,
+        "sourceContentInspected": true,
+        "inspectedContentLocation": "APS abstract and photoluminescence comparison for DOI 10.1103/PhysRevLett.105.136805",
+        "subjectAligned": "mismatched",
+        "mismatchBasis": "inspected-content-different-subject",
         "chronologicalRiskIndicator": false,
         "claimSupported": false,
         "sourceIndependentOfOtherCitedSources": null,
         "independentlyReproduced": false,
         "externallyReviewed": false
       },
-      "reason": "The source was inherited from the positional block assignment and has not been read for this record. Registry metadata alone cannot establish that a source is about a subject.",
+      "reason": "The inspected paper reports MoS2 photoluminescence and band structure, not spin-momentum locking.",
       "transcriptionConfidence": "high",
-      "remediation": "Inspect the bound source against this record subject, then either confirm the mapping as curated or replace it with an explicit override.",
+      "remediation": "Bind a source that directly treats the named subject, or narrow the record to monolayer MoS2 direct-gap evidence.",
       "priorMapping": null,
       "blockers": [
-        "source-alignment-insufficient-evidence",
         "source-assignment-positional-legacy",
-        "source-not-inspected"
+        "source-subject-mismatched"
       ]
     },
     {
@@ -915,9 +912,9 @@
         "metadataVerified": true,
         "metadataMethod": "crossref-rest",
         "metadataNote": "Crossref resolves this identifier to \"Atomically Thin\n                    <mml:math xmlns:mml=\"http://www.w3.org/1998/Math/MathML\" display=\"inline\">\n                      <mml:msub>\n                        <mml:mi>MoS</mml:mi>\n                        <mml:mn>2</mml:mn>\n                      </mml:msub>\n                    </mml:math>\n                    : A New Direct-Gap Semiconductor\" in Physical Review Letters (2010). Registry resolution confirms the document exists; it does not establish subject alignment.",
-        "sourceContentInspected": false,
-        "inspectedContentLocation": null,
-        "subjectAligned": "insufficient-evidence",
+        "sourceContentInspected": true,
+        "inspectedContentLocation": "APS abstract and photoluminescence comparison for DOI 10.1103/PhysRevLett.105.136805",
+        "subjectAligned": "partially-supported",
         "mismatchBasis": null,
         "chronologicalRiskIndicator": false,
         "claimSupported": false,
@@ -925,14 +922,13 @@
         "independentlyReproduced": false,
         "externallyReviewed": false
       },
-      "reason": "The source was inherited from the positional block assignment and has not been read for this record. Registry metadata alone cannot establish that a source is about a subject.",
+      "reason": "The source establishes monolayer MoS2 as a direct-gap TMD, but does not study a heterobilayer.",
       "transcriptionConfidence": "high",
-      "remediation": "Inspect the bound source against this record subject, then either confirm the mapping as curated or replace it with an explicit override.",
+      "remediation": "Bind a source that directly treats the named subject, or narrow the record to monolayer MoS2 direct-gap evidence.",
       "priorMapping": null,
       "blockers": [
-        "source-alignment-insufficient-evidence",
         "source-assignment-positional-legacy",
-        "source-not-inspected"
+        "source-subject-partially-supported"
       ]
     },
     {
@@ -995,24 +991,23 @@
         "metadataVerified": true,
         "metadataMethod": "crossref-rest",
         "metadataNote": "Crossref resolves this identifier to \"Atomically Thin\n                    <mml:math xmlns:mml=\"http://www.w3.org/1998/Math/MathML\" display=\"inline\">\n                      <mml:msub>\n                        <mml:mi>MoS</mml:mi>\n                        <mml:mn>2</mml:mn>\n                      </mml:msub>\n                    </mml:math>\n                    : A New Direct-Gap Semiconductor\" in Physical Review Letters (2010). Registry resolution confirms the document exists; it does not establish subject alignment.",
-        "sourceContentInspected": false,
-        "inspectedContentLocation": null,
-        "subjectAligned": "insufficient-evidence",
-        "mismatchBasis": null,
+        "sourceContentInspected": true,
+        "inspectedContentLocation": "APS abstract and photoluminescence comparison for DOI 10.1103/PhysRevLett.105.136805",
+        "subjectAligned": "mismatched",
+        "mismatchBasis": "inspected-content-different-subject",
         "chronologicalRiskIndicator": false,
         "claimSupported": false,
         "sourceIndependentOfOtherCitedSources": null,
         "independentlyReproduced": false,
         "externallyReviewed": false
       },
-      "reason": "The source was inherited from the positional block assignment and has not been read for this record. Registry metadata alone cannot establish that a source is about a subject.",
+      "reason": "The inspected source concerns monolayer MoS2 and contains no topological-insulator surface-state result.",
       "transcriptionConfidence": "high",
-      "remediation": "Inspect the bound source against this record subject, then either confirm the mapping as curated or replace it with an explicit override.",
+      "remediation": "Bind a source that directly treats the named subject, or narrow the record to monolayer MoS2 direct-gap evidence.",
       "priorMapping": null,
       "blockers": [
-        "source-alignment-insufficient-evidence",
         "source-assignment-positional-legacy",
-        "source-not-inspected"
+        "source-subject-mismatched"
       ]
     },
     {
@@ -1345,30 +1340,26 @@
       "sourceYear": "2024",
       "sourceIdentifier": "10.1162/tacl_a_00638",
       "locator": "Long-context experiments, position effects, retrieval and question-answering tasks, and limitations.",
-      "assignmentOrigin": "positional-legacy",
+      "assignmentOrigin": "independently-curated",
       "evidence": {
         "metadataVerified": true,
         "metadataMethod": "crossref-rest",
         "metadataNote": "Crossref resolves this identifier to \"Lost in the Middle: How Language Models Use Long Contexts\" in Transactions of the Association for Computational Linguistics (2024). Registry resolution confirms the document exists; it does not establish subject alignment.",
-        "sourceContentInspected": false,
-        "inspectedContentLocation": null,
-        "subjectAligned": "insufficient-evidence",
+        "sourceContentInspected": true,
+        "inspectedContentLocation": "arXiv:2307.03172 abstract, multi-document QA and key-value retrieval experiments, position-effect results",
+        "subjectAligned": "supported",
         "mismatchBasis": null,
         "chronologicalRiskIndicator": false,
-        "claimSupported": false,
+        "claimSupported": true,
         "sourceIndependentOfOtherCitedSources": null,
         "independentlyReproduced": false,
         "externallyReviewed": false
       },
-      "reason": "The source was inherited from the positional block assignment and has not been read for this record. Registry metadata alone cannot establish that a source is about a subject.",
+      "reason": "The paper directly measures how answer accuracy changes with the position of relevant information in long contexts.",
       "transcriptionConfidence": "high",
-      "remediation": "Inspect the bound source against this record subject, then either confirm the mapping as curated or replace it with an explicit override.",
+      "remediation": "None. Record the mapping as curated rather than positional.",
       "priorMapping": null,
-      "blockers": [
-        "source-alignment-insufficient-evidence",
-        "source-assignment-positional-legacy",
-        "source-not-inspected"
-      ]
+      "blockers": []
     },
     {
       "recordId": "urn:maha:record:agentic-systems-mcp-context-window-token-degradation",
@@ -1390,9 +1381,9 @@
         "metadataVerified": true,
         "metadataMethod": "crossref-rest",
         "metadataNote": "Crossref resolves this identifier to \"Lost in the Middle: How Language Models Use Long Contexts\" in Transactions of the Association for Computational Linguistics (2024). Registry resolution confirms the document exists; it does not establish subject alignment.",
-        "sourceContentInspected": false,
-        "inspectedContentLocation": null,
-        "subjectAligned": "insufficient-evidence",
+        "sourceContentInspected": true,
+        "inspectedContentLocation": "arXiv:2307.03172 abstract, multi-document QA and key-value retrieval experiments, position-effect results",
+        "subjectAligned": "partially-supported",
         "mismatchBasis": null,
         "chronologicalRiskIndicator": false,
         "claimSupported": false,
@@ -1400,14 +1391,13 @@
         "independentlyReproduced": false,
         "externallyReviewed": false
       },
-      "reason": "The source was inherited from the positional block assignment and has not been read for this record. Registry metadata alone cannot establish that a source is about a subject.",
+      "reason": "The experiments show long-context performance degradation, but not a general monotonic degradation law per token.",
       "transcriptionConfidence": "high",
-      "remediation": "Inspect the bound source against this record subject, then either confirm the mapping as curated or replace it with an explicit override.",
+      "remediation": "Bind a source directly covering the named system boundary, or narrow the record to the inspected long-context result.",
       "priorMapping": null,
       "blockers": [
-        "source-alignment-insufficient-evidence",
         "source-assignment-positional-legacy",
-        "source-not-inspected"
+        "source-subject-partially-supported"
       ]
     },
     {
@@ -1512,24 +1502,23 @@
         "metadataVerified": true,
         "metadataMethod": "crossref-rest",
         "metadataNote": "Crossref resolves this identifier to \"Lost in the Middle: How Language Models Use Long Contexts\" in Transactions of the Association for Computational Linguistics (2024). Registry resolution confirms the document exists; it does not establish subject alignment.",
-        "sourceContentInspected": false,
-        "inspectedContentLocation": null,
-        "subjectAligned": "insufficient-evidence",
-        "mismatchBasis": null,
+        "sourceContentInspected": true,
+        "inspectedContentLocation": "arXiv:2307.03172 abstract, multi-document QA and key-value retrieval experiments, position-effect results",
+        "subjectAligned": "mismatched",
+        "mismatchBasis": "inspected-content-different-subject",
         "chronologicalRiskIndicator": false,
         "claimSupported": false,
         "sourceIndependentOfOtherCitedSources": null,
         "independentlyReproduced": false,
         "externallyReviewed": false
       },
-      "reason": "The source was inherited from the positional block assignment and has not been read for this record. Registry metadata alone cannot establish that a source is about a subject.",
+      "reason": "The paper studies long-context retrieval and question answering, not human approval controls.",
       "transcriptionConfidence": "high",
-      "remediation": "Inspect the bound source against this record subject, then either confirm the mapping as curated or replace it with an explicit override.",
+      "remediation": "Bind a source directly covering the named system boundary, or narrow the record to the inspected long-context result.",
       "priorMapping": null,
       "blockers": [
-        "source-alignment-insufficient-evidence",
         "source-assignment-positional-legacy",
-        "source-not-inspected"
+        "source-subject-mismatched"
       ]
     },
     {
@@ -2071,9 +2060,9 @@
         "metadataVerified": true,
         "metadataMethod": "crossref-rest",
         "metadataNote": "Crossref resolves this identifier to \"Lost in the Middle: How Language Models Use Long Contexts\" in Transactions of the Association for Computational Linguistics (2024). Registry resolution confirms the document exists; it does not establish subject alignment.",
-        "sourceContentInspected": false,
-        "inspectedContentLocation": null,
-        "subjectAligned": "insufficient-evidence",
+        "sourceContentInspected": true,
+        "inspectedContentLocation": "arXiv:2307.03172 abstract, multi-document QA and key-value retrieval experiments, position-effect results",
+        "subjectAligned": "partially-supported",
         "mismatchBasis": null,
         "chronologicalRiskIndicator": false,
         "claimSupported": false,
@@ -2081,14 +2070,13 @@
         "independentlyReproduced": false,
         "externallyReviewed": false
       },
-      "reason": "The source was inherited from the positional block assignment and has not been read for this record. Registry metadata alone cannot establish that a source is about a subject.",
+      "reason": "The multi-document retrieval task bears on context selection, but the paper does not specify a retrieval-selection system.",
       "transcriptionConfidence": "high",
-      "remediation": "Inspect the bound source against this record subject, then either confirm the mapping as curated or replace it with an explicit override.",
+      "remediation": "Bind a source directly covering the named system boundary, or narrow the record to the inspected long-context result.",
       "priorMapping": null,
       "blockers": [
-        "source-alignment-insufficient-evidence",
         "source-assignment-positional-legacy",
-        "source-not-inspected"
+        "source-subject-partially-supported"
       ]
     },
     {
@@ -2309,24 +2297,23 @@
         "metadataVerified": true,
         "metadataMethod": "crossref-rest",
         "metadataNote": "Crossref resolves this identifier to \"Lost in the Middle: How Language Models Use Long Contexts\" in Transactions of the Association for Computational Linguistics (2024). Registry resolution confirms the document exists; it does not establish subject alignment.",
-        "sourceContentInspected": false,
-        "inspectedContentLocation": null,
-        "subjectAligned": "insufficient-evidence",
-        "mismatchBasis": null,
+        "sourceContentInspected": true,
+        "inspectedContentLocation": "arXiv:2307.03172 abstract, multi-document QA and key-value retrieval experiments, position-effect results",
+        "subjectAligned": "mismatched",
+        "mismatchBasis": "inspected-content-different-subject",
         "chronologicalRiskIndicator": false,
         "claimSupported": false,
         "sourceIndependentOfOtherCitedSources": null,
         "independentlyReproduced": false,
         "externallyReviewed": false
       },
-      "reason": "The source was inherited from the positional block assignment and has not been read for this record. Registry metadata alone cannot establish that a source is about a subject.",
+      "reason": "The paper studies document position effects and does not examine tool-result injection.",
       "transcriptionConfidence": "high",
-      "remediation": "Inspect the bound source against this record subject, then either confirm the mapping as curated or replace it with an explicit override.",
+      "remediation": "Bind a source directly covering the named system boundary, or narrow the record to the inspected long-context result.",
       "priorMapping": null,
       "blockers": [
-        "source-alignment-insufficient-evidence",
         "source-assignment-positional-legacy",
-        "source-not-inspected"
+        "source-subject-mismatched"
       ]
     },
     {
@@ -2390,9 +2377,9 @@
         "metadataVerified": true,
         "metadataMethod": "crossref-rest",
         "metadataNote": "Crossref resolves this identifier to \"Cell-free synthetic biology: Engineering in an open world\" in Synthetic and Systems Biotechnology (2017). Registry resolution confirms the document exists; it does not establish subject alignment.",
-        "sourceContentInspected": false,
-        "inspectedContentLocation": null,
-        "subjectAligned": "insufficient-evidence",
+        "sourceContentInspected": true,
+        "inspectedContentLocation": "Open-access abstract and protein-engineering, metabolic-engineering, and artificial-cell sections for DOI 10.1016/j.synbio.2017.02.003",
+        "subjectAligned": "partially-supported",
         "mismatchBasis": null,
         "chronologicalRiskIndicator": false,
         "claimSupported": false,
@@ -2400,14 +2387,13 @@
         "independentlyReproduced": false,
         "externallyReviewed": false
       },
-      "reason": "The source was inherited from the positional block assignment and has not been read for this record. Registry metadata alone cannot establish that a source is about a subject.",
+      "reason": "The review discusses flexible cell-free production but does not establish a bounded reaction-yield measure.",
       "transcriptionConfidence": "high",
-      "remediation": "Inspect the bound source against this record subject, then either confirm the mapping as curated or replace it with an explicit override.",
+      "remediation": "Bind a source or exact section directly supporting the named platform property.",
       "priorMapping": null,
       "blockers": [
-        "source-alignment-insufficient-evidence",
         "source-assignment-positional-legacy",
-        "source-not-inspected"
+        "source-subject-partially-supported"
       ]
     },
     {
@@ -2422,30 +2408,26 @@
       "sourceYear": "2017",
       "sourceIdentifier": "10.1016/j.synbio.2017.02.003",
       "locator": "Cell-free platform, protein engineering, metabolic engineering, artificial-cell engineering, and conclusions sections.",
-      "assignmentOrigin": "positional-legacy",
+      "assignmentOrigin": "independently-curated",
       "evidence": {
         "metadataVerified": true,
         "metadataMethod": "crossref-rest",
         "metadataNote": "Crossref resolves this identifier to \"Cell-free synthetic biology: Engineering in an open world\" in Synthetic and Systems Biotechnology (2017). Registry resolution confirms the document exists; it does not establish subject alignment.",
-        "sourceContentInspected": false,
-        "inspectedContentLocation": null,
-        "subjectAligned": "insufficient-evidence",
+        "sourceContentInspected": true,
+        "inspectedContentLocation": "Open-access abstract and protein-engineering, metabolic-engineering, and artificial-cell sections for DOI 10.1016/j.synbio.2017.02.003",
+        "subjectAligned": "supported",
         "mismatchBasis": null,
         "chronologicalRiskIndicator": false,
-        "claimSupported": false,
+        "claimSupported": true,
         "sourceIndependentOfOtherCitedSources": null,
         "independentlyReproduced": false,
         "externallyReviewed": false
       },
-      "reason": "The source was inherited from the positional block assignment and has not been read for this record. Registry metadata alone cannot establish that a source is about a subject.",
+      "reason": "The review directly treats cell-free protein synthesis and engineering biological parts outside living cells.",
       "transcriptionConfidence": "high",
-      "remediation": "Inspect the bound source against this record subject, then either confirm the mapping as curated or replace it with an explicit override.",
+      "remediation": "None. Record the mapping as curated rather than positional.",
       "priorMapping": null,
-      "blockers": [
-        "source-alignment-insufficient-evidence",
-        "source-assignment-positional-legacy",
-        "source-not-inspected"
-      ]
+      "blockers": []
     },
     {
       "recordId": "urn:maha:record:biomolecular-engineering-compartmentalized-cell-free-systems",
@@ -2504,9 +2486,9 @@
         "metadataVerified": true,
         "metadataMethod": "crossref-rest",
         "metadataNote": "Crossref resolves this identifier to \"Cell-free synthetic biology: Engineering in an open world\" in Synthetic and Systems Biotechnology (2017). Registry resolution confirms the document exists; it does not establish subject alignment.",
-        "sourceContentInspected": false,
-        "inspectedContentLocation": null,
-        "subjectAligned": "insufficient-evidence",
+        "sourceContentInspected": true,
+        "inspectedContentLocation": "Open-access abstract and protein-engineering, metabolic-engineering, and artificial-cell sections for DOI 10.1016/j.synbio.2017.02.003",
+        "subjectAligned": "partially-supported",
         "mismatchBasis": null,
         "chronologicalRiskIndicator": false,
         "claimSupported": false,
@@ -2514,14 +2496,13 @@
         "independentlyReproduced": false,
         "externallyReviewed": false
       },
-      "reason": "The source was inherited from the positional block assignment and has not been read for this record. Registry metadata alone cannot establish that a source is about a subject.",
+      "reason": "The review covers cell-free systems broadly, but the inspected sections do not isolate crude-extract systems.",
       "transcriptionConfidence": "high",
-      "remediation": "Inspect the bound source against this record subject, then either confirm the mapping as curated or replace it with an explicit override.",
+      "remediation": "Bind a source or exact section directly supporting the named platform property.",
       "priorMapping": null,
       "blockers": [
-        "source-alignment-insufficient-evidence",
         "source-assignment-positional-legacy",
-        "source-not-inspected"
+        "source-subject-partially-supported"
       ]
     },
     {
@@ -2696,24 +2677,23 @@
         "metadataVerified": true,
         "metadataMethod": "crossref-rest",
         "metadataNote": "Crossref resolves this identifier to \"Cell-free synthetic biology: Engineering in an open world\" in Synthetic and Systems Biotechnology (2017). Registry resolution confirms the document exists; it does not establish subject alignment.",
-        "sourceContentInspected": false,
-        "inspectedContentLocation": null,
-        "subjectAligned": "insufficient-evidence",
-        "mismatchBasis": null,
+        "sourceContentInspected": true,
+        "inspectedContentLocation": "Open-access abstract and protein-engineering, metabolic-engineering, and artificial-cell sections for DOI 10.1016/j.synbio.2017.02.003",
+        "subjectAligned": "mismatched",
+        "mismatchBasis": "inspected-content-different-subject",
         "chronologicalRiskIndicator": false,
         "claimSupported": false,
         "sourceIndependentOfOtherCitedSources": null,
         "independentlyReproduced": false,
         "externallyReviewed": false
       },
-      "reason": "The source was inherited from the positional block assignment and has not been read for this record. Registry metadata alone cannot establish that a source is about a subject.",
+      "reason": "The inspected review sections do not treat energy-regeneration chemistry or kinetics.",
       "transcriptionConfidence": "high",
-      "remediation": "Inspect the bound source against this record subject, then either confirm the mapping as curated or replace it with an explicit override.",
+      "remediation": "Bind a source or exact section directly supporting the named platform property.",
       "priorMapping": null,
       "blockers": [
-        "source-alignment-insufficient-evidence",
         "source-assignment-positional-legacy",
-        "source-not-inspected"
+        "source-subject-mismatched"
       ]
     },
     {
@@ -3161,9 +3141,9 @@
         "metadataVerified": true,
         "metadataMethod": "crossref-rest",
         "metadataNote": "Crossref resolves this identifier to \"Cell-free synthetic biology: Engineering in an open world\" in Synthetic and Systems Biotechnology (2017). Registry resolution confirms the document exists; it does not establish subject alignment.",
-        "sourceContentInspected": false,
-        "inspectedContentLocation": null,
-        "subjectAligned": "insufficient-evidence",
+        "sourceContentInspected": true,
+        "inspectedContentLocation": "Open-access abstract and protein-engineering, metabolic-engineering, and artificial-cell sections for DOI 10.1016/j.synbio.2017.02.003",
+        "subjectAligned": "partially-supported",
         "mismatchBasis": null,
         "chronologicalRiskIndicator": false,
         "claimSupported": false,
@@ -3171,14 +3151,13 @@
         "independentlyReproduced": false,
         "externallyReviewed": false
       },
-      "reason": "The source was inherited from the positional block assignment and has not been read for this record. Registry metadata alone cannot establish that a source is about a subject.",
+      "reason": "The review covers cell-free expression but does not distinguish purified-component systems in the inspected sections.",
       "transcriptionConfidence": "high",
-      "remediation": "Inspect the bound source against this record subject, then either confirm the mapping as curated or replace it with an explicit override.",
+      "remediation": "Bind a source or exact section directly supporting the named platform property.",
       "priorMapping": null,
       "blockers": [
-        "source-alignment-insufficient-evidence",
         "source-assignment-positional-legacy",
-        "source-not-inspected"
+        "source-subject-partially-supported"
       ]
     },
     {
@@ -3657,9 +3636,9 @@
         "metadataVerified": false,
         "metadataMethod": "none",
         "metadataNote": "No DOI or other registry identifier is declared, and the publisher page was not fetched during this audit.",
-        "sourceContentInspected": false,
-        "inspectedContentLocation": null,
-        "subjectAligned": "insufficient-evidence",
+        "sourceContentInspected": true,
+        "inspectedContentLocation": "USGS Mineral Commodity Summaries 2026, Rare Earths commodity chapter",
+        "subjectAligned": "partially-supported",
         "mismatchBasis": null,
         "chronologicalRiskIndicator": false,
         "claimSupported": false,
@@ -3667,15 +3646,14 @@
         "independentlyReproduced": false,
         "externallyReviewed": false
       },
-      "reason": "The source was inherited from the positional block assignment and has not been read for this record. Registry metadata alone cannot establish that a source is about a subject.",
+      "reason": "The rare-earth chapter covers production, compounds and metals, trade and resources, but not a dysprosium-specific ore-to-oxide process.",
       "transcriptionConfidence": "low",
-      "remediation": "Inspect the bound source against this record subject, then either confirm the mapping as curated or replace it with an explicit override.",
+      "remediation": "Bind process-specific evidence for the named transformation; retain MCS 2026 only for commodity-level context.",
       "priorMapping": null,
       "blockers": [
-        "source-alignment-insufficient-evidence",
         "source-assignment-positional-legacy",
         "source-metadata-unverified",
-        "source-not-inspected"
+        "source-subject-partially-supported"
       ]
     },
     {
@@ -4039,25 +4017,24 @@
         "metadataVerified": false,
         "metadataMethod": "none",
         "metadataNote": "No DOI or other registry identifier is declared, and the publisher page was not fetched during this audit.",
-        "sourceContentInspected": false,
-        "inspectedContentLocation": null,
-        "subjectAligned": "insufficient-evidence",
-        "mismatchBasis": null,
+        "sourceContentInspected": true,
+        "inspectedContentLocation": "USGS Mineral Commodity Summaries 2026, Rare Earths commodity chapter",
+        "subjectAligned": "mismatched",
+        "mismatchBasis": "inspected-content-different-subject",
         "chronologicalRiskIndicator": false,
         "claimSupported": false,
         "sourceIndependentOfOtherCitedSources": null,
         "independentlyReproduced": false,
         "externallyReviewed": false
       },
-      "reason": "The source was inherited from the positional block assignment and has not been read for this record. Registry metadata alone cannot establish that a source is about a subject.",
+      "reason": "The commodity chapter does not describe grain-boundary diffusion in permanent magnets.",
       "transcriptionConfidence": "low",
-      "remediation": "Inspect the bound source against this record subject, then either confirm the mapping as curated or replace it with an explicit override.",
+      "remediation": "Bind process-specific evidence for the named transformation; retain MCS 2026 only for commodity-level context.",
       "priorMapping": null,
       "blockers": [
-        "source-alignment-insufficient-evidence",
         "source-assignment-positional-legacy",
         "source-metadata-unverified",
-        "source-not-inspected"
+        "source-subject-mismatched"
       ]
     },
     {
@@ -4269,9 +4246,9 @@
         "metadataVerified": false,
         "metadataMethod": "none",
         "metadataNote": "No DOI or other registry identifier is declared, and the publisher page was not fetched during this audit.",
-        "sourceContentInspected": false,
-        "inspectedContentLocation": null,
-        "subjectAligned": "insufficient-evidence",
+        "sourceContentInspected": true,
+        "inspectedContentLocation": "USGS Mineral Commodity Summaries 2026, Rare Earths commodity chapter",
+        "subjectAligned": "partially-supported",
         "mismatchBasis": null,
         "chronologicalRiskIndicator": false,
         "claimSupported": false,
@@ -4279,15 +4256,14 @@
         "independentlyReproduced": false,
         "externallyReviewed": false
       },
-      "reason": "The source was inherited from the positional block assignment and has not been read for this record. Registry metadata alone cannot establish that a source is about a subject.",
+      "reason": "The chapter identifies permanent magnets as a rare-earth use but does not specify Nd-Fe-B alloying operations.",
       "transcriptionConfidence": "low",
-      "remediation": "Inspect the bound source against this record subject, then either confirm the mapping as curated or replace it with an explicit override.",
+      "remediation": "Bind process-specific evidence for the named transformation; retain MCS 2026 only for commodity-level context.",
       "priorMapping": null,
       "blockers": [
-        "source-alignment-insufficient-evidence",
         "source-assignment-positional-legacy",
         "source-metadata-unverified",
-        "source-not-inspected"
+        "source-subject-partially-supported"
       ]
     },
     {
@@ -4307,25 +4283,24 @@
         "metadataVerified": false,
         "metadataMethod": "none",
         "metadataNote": "No DOI or other registry identifier is declared, and the publisher page was not fetched during this audit.",
-        "sourceContentInspected": false,
-        "inspectedContentLocation": null,
-        "subjectAligned": "insufficient-evidence",
-        "mismatchBasis": null,
+        "sourceContentInspected": true,
+        "inspectedContentLocation": "USGS Mineral Commodity Summaries 2026, Rare Earths commodity chapter",
+        "subjectAligned": "mismatched",
+        "mismatchBasis": "inspected-content-different-subject",
         "chronologicalRiskIndicator": false,
         "claimSupported": false,
         "sourceIndependentOfOtherCitedSources": null,
         "independentlyReproduced": false,
         "externallyReviewed": false
       },
-      "reason": "The source was inherited from the positional block assignment and has not been read for this record. Registry metadata alone cannot establish that a source is about a subject.",
+      "reason": "The chapter reports commodity supply and trade rather than Nd/Pr separation chemistry.",
       "transcriptionConfidence": "low",
-      "remediation": "Inspect the bound source against this record subject, then either confirm the mapping as curated or replace it with an explicit override.",
+      "remediation": "Bind process-specific evidence for the named transformation; retain MCS 2026 only for commodity-level context.",
       "priorMapping": null,
       "blockers": [
-        "source-alignment-insufficient-evidence",
         "source-assignment-positional-legacy",
         "source-metadata-unverified",
-        "source-not-inspected"
+        "source-subject-mismatched"
       ]
     },
     {
@@ -4467,25 +4442,24 @@
         "metadataVerified": false,
         "metadataMethod": "none",
         "metadataNote": "No DOI or other registry identifier is declared, and the publisher page was not fetched during this audit.",
-        "sourceContentInspected": false,
-        "inspectedContentLocation": null,
-        "subjectAligned": "insufficient-evidence",
-        "mismatchBasis": null,
+        "sourceContentInspected": true,
+        "inspectedContentLocation": "USGS Mineral Commodity Summaries 2026, Rare Earths commodity chapter",
+        "subjectAligned": "mismatched",
+        "mismatchBasis": "inspected-content-different-subject",
         "chronologicalRiskIndicator": false,
         "claimSupported": false,
         "sourceIndependentOfOtherCitedSources": null,
         "independentlyReproduced": false,
         "externallyReviewed": false
       },
-      "reason": "The source was inherited from the positional block assignment and has not been read for this record. Registry metadata alone cannot establish that a source is about a subject.",
+      "reason": "The chapter does not establish a solvent-extraction flowsheet or operating conditions.",
       "transcriptionConfidence": "low",
-      "remediation": "Inspect the bound source against this record subject, then either confirm the mapping as curated or replace it with an explicit override.",
+      "remediation": "Bind process-specific evidence for the named transformation; retain MCS 2026 only for commodity-level context.",
       "priorMapping": null,
       "blockers": [
-        "source-alignment-insufficient-evidence",
         "source-assignment-positional-legacy",
         "source-metadata-unverified",
-        "source-not-inspected"
+        "source-subject-mismatched"
       ]
     },
     {
@@ -4690,31 +4664,26 @@
       "sourceYear": null,
       "sourceIdentifier": null,
       "locator": "Heating and current drive, fuel cycle, vacuum, cryogenic, diagnostics, and tritium breeding system summaries.",
-      "assignmentOrigin": "positional-legacy",
+      "assignmentOrigin": "independently-curated",
       "evidence": {
-        "metadataVerified": false,
-        "metadataMethod": "none",
-        "metadataNote": "No DOI or other registry identifier is declared, and the publisher page was not fetched during this audit.",
-        "sourceContentInspected": false,
-        "inspectedContentLocation": null,
-        "subjectAligned": "insufficient-evidence",
+        "metadataVerified": true,
+        "metadataMethod": "publisher-page",
+        "metadataNote": "Fetched the ITER Supporting Systems index and its linked official pages for tritium breeding, fuelling, diagnostics, cryogenics, and vacuum systems.",
+        "sourceContentInspected": true,
+        "inspectedContentLocation": "ITER Supporting Systems index and linked Tritium Breeding, Fuelling, Diagnostics, Cryogenics, and Vacuum documentation",
+        "subjectAligned": "supported",
         "mismatchBasis": null,
         "chronologicalRiskIndicator": false,
-        "claimSupported": false,
+        "claimSupported": true,
         "sourceIndependentOfOtherCitedSources": null,
         "independentlyReproduced": false,
         "externallyReviewed": false
       },
-      "reason": "The source was inherited from the positional block assignment and has not been read for this record. Registry metadata alone cannot establish that a source is about a subject.",
-      "transcriptionConfidence": "low",
-      "remediation": "Inspect the bound source against this record subject, then either confirm the mapping as curated or replace it with an explicit override.",
+      "reason": "ITER documents test blanket modules and their role in testing tritium breeding and extraction.",
+      "transcriptionConfidence": "high",
+      "remediation": "None. Record the mapping as curated rather than positional.",
       "priorMapping": null,
-      "blockers": [
-        "source-alignment-insufficient-evidence",
-        "source-assignment-positional-legacy",
-        "source-metadata-unverified",
-        "source-not-inspected"
-      ]
+      "blockers": []
     },
     {
       "recordId": "urn:maha:record:fusion-plasma-systems-cable-in-conduit-conductors",
@@ -4798,31 +4767,26 @@
       "sourceYear": null,
       "sourceIdentifier": null,
       "locator": "Heating and current drive, fuel cycle, vacuum, cryogenic, diagnostics, and tritium breeding system summaries.",
-      "assignmentOrigin": "positional-legacy",
+      "assignmentOrigin": "independently-curated",
       "evidence": {
-        "metadataVerified": false,
-        "metadataMethod": "none",
-        "metadataNote": "No DOI or other registry identifier is declared, and the publisher page was not fetched during this audit.",
-        "sourceContentInspected": false,
-        "inspectedContentLocation": null,
-        "subjectAligned": "insufficient-evidence",
+        "metadataVerified": true,
+        "metadataMethod": "publisher-page",
+        "metadataNote": "Fetched the ITER Supporting Systems index and its linked official pages for tritium breeding, fuelling, diagnostics, cryogenics, and vacuum systems.",
+        "sourceContentInspected": true,
+        "inspectedContentLocation": "ITER Supporting Systems index and linked Tritium Breeding, Fuelling, Diagnostics, Cryogenics, and Vacuum documentation",
+        "subjectAligned": "supported",
         "mismatchBasis": null,
         "chronologicalRiskIndicator": false,
-        "claimSupported": false,
+        "claimSupported": true,
         "sourceIndependentOfOtherCitedSources": null,
         "independentlyReproduced": false,
         "externallyReviewed": false
       },
-      "reason": "The source was inherited from the positional block assignment and has not been read for this record. Registry metadata alone cannot establish that a source is about a subject.",
-      "transcriptionConfidence": "low",
-      "remediation": "Inspect the bound source against this record subject, then either confirm the mapping as curated or replace it with an explicit override.",
+      "reason": "The supporting-systems documentation identifies cryogenics as a system supporting ITER magnet operation.",
+      "transcriptionConfidence": "high",
+      "remediation": "None. Record the mapping as curated rather than positional.",
       "priorMapping": null,
-      "blockers": [
-        "source-alignment-insufficient-evidence",
-        "source-assignment-positional-legacy",
-        "source-metadata-unverified",
-        "source-not-inspected"
-      ]
+      "blockers": []
     },
     {
       "recordId": "urn:maha:record:fusion-plasma-systems-disruption-mitigation",
@@ -5204,31 +5168,26 @@
       "sourceYear": null,
       "sourceIdentifier": null,
       "locator": "Heating and current drive, fuel cycle, vacuum, cryogenic, diagnostics, and tritium breeding system summaries.",
-      "assignmentOrigin": "positional-legacy",
+      "assignmentOrigin": "independently-curated",
       "evidence": {
-        "metadataVerified": false,
-        "metadataMethod": "none",
-        "metadataNote": "No DOI or other registry identifier is declared, and the publisher page was not fetched during this audit.",
-        "sourceContentInspected": false,
-        "inspectedContentLocation": null,
-        "subjectAligned": "insufficient-evidence",
+        "metadataVerified": true,
+        "metadataMethod": "publisher-page",
+        "metadataNote": "Fetched the ITER Supporting Systems index and its linked official pages for tritium breeding, fuelling, diagnostics, cryogenics, and vacuum systems.",
+        "sourceContentInspected": true,
+        "inspectedContentLocation": "ITER Supporting Systems index and linked Tritium Breeding, Fuelling, Diagnostics, Cryogenics, and Vacuum documentation",
+        "subjectAligned": "supported",
         "mismatchBasis": null,
         "chronologicalRiskIndicator": false,
-        "claimSupported": false,
+        "claimSupported": true,
         "sourceIndependentOfOtherCitedSources": null,
         "independentlyReproduced": false,
         "externallyReviewed": false
       },
-      "reason": "The source was inherited from the positional block assignment and has not been read for this record. Registry metadata alone cannot establish that a source is about a subject.",
-      "transcriptionConfidence": "low",
-      "remediation": "Inspect the bound source against this record subject, then either confirm the mapping as curated or replace it with an explicit override.",
+      "reason": "The diagnostics page directly describes instruments and measured plasma parameters.",
+      "transcriptionConfidence": "high",
+      "remediation": "None. Record the mapping as curated rather than positional.",
       "priorMapping": null,
-      "blockers": [
-        "source-alignment-insufficient-evidence",
-        "source-assignment-positional-legacy",
-        "source-metadata-unverified",
-        "source-not-inspected"
-      ]
+      "blockers": []
     },
     {
       "recordId": "urn:maha:record:fusion-plasma-systems-plasma-facing-components",
@@ -5714,31 +5673,26 @@
       "sourceYear": null,
       "sourceIdentifier": null,
       "locator": "Heating and current drive, fuel cycle, vacuum, cryogenic, diagnostics, and tritium breeding system summaries.",
-      "assignmentOrigin": "positional-legacy",
+      "assignmentOrigin": "independently-curated",
       "evidence": {
-        "metadataVerified": false,
-        "metadataMethod": "none",
-        "metadataNote": "No DOI or other registry identifier is declared, and the publisher page was not fetched during this audit.",
-        "sourceContentInspected": false,
-        "inspectedContentLocation": null,
-        "subjectAligned": "insufficient-evidence",
+        "metadataVerified": true,
+        "metadataMethod": "publisher-page",
+        "metadataNote": "Fetched the ITER Supporting Systems index and its linked official pages for tritium breeding, fuelling, diagnostics, cryogenics, and vacuum systems.",
+        "sourceContentInspected": true,
+        "inspectedContentLocation": "ITER Supporting Systems index and linked Tritium Breeding, Fuelling, Diagnostics, Cryogenics, and Vacuum documentation",
+        "subjectAligned": "supported",
         "mismatchBasis": null,
         "chronologicalRiskIndicator": false,
-        "claimSupported": false,
+        "claimSupported": true,
         "sourceIndependentOfOtherCitedSources": null,
         "independentlyReproduced": false,
         "externallyReviewed": false
       },
-      "reason": "The source was inherited from the positional block assignment and has not been read for this record. Registry metadata alone cannot establish that a source is about a subject.",
-      "transcriptionConfidence": "low",
-      "remediation": "Inspect the bound source against this record subject, then either confirm the mapping as curated or replace it with an explicit override.",
+      "reason": "The fuelling page directly describes the closed fuel cycle, isotope separation, storage, delivery, and detritiation.",
+      "transcriptionConfidence": "high",
+      "remediation": "None. Record the mapping as curated rather than positional.",
       "priorMapping": null,
-      "blockers": [
-        "source-alignment-insufficient-evidence",
-        "source-assignment-positional-legacy",
-        "source-metadata-unverified",
-        "source-not-inspected"
-      ]
+      "blockers": []
     },
     {
       "recordId": "urn:maha:record:fusion-plasma-systems-vacuum-vessel-boundary",
@@ -5754,12 +5708,12 @@
       "locator": "Heating and current drive, fuel cycle, vacuum, cryogenic, diagnostics, and tritium breeding system summaries.",
       "assignmentOrigin": "positional-legacy",
       "evidence": {
-        "metadataVerified": false,
-        "metadataMethod": "none",
-        "metadataNote": "No DOI or other registry identifier is declared, and the publisher page was not fetched during this audit.",
-        "sourceContentInspected": false,
-        "inspectedContentLocation": null,
-        "subjectAligned": "insufficient-evidence",
+        "metadataVerified": true,
+        "metadataMethod": "publisher-page",
+        "metadataNote": "Fetched the ITER Supporting Systems index and its linked official pages for tritium breeding, fuelling, diagnostics, cryogenics, and vacuum systems.",
+        "sourceContentInspected": true,
+        "inspectedContentLocation": "ITER Supporting Systems index and linked Tritium Breeding, Fuelling, Diagnostics, Cryogenics, and Vacuum documentation",
+        "subjectAligned": "partially-supported",
         "mismatchBasis": null,
         "chronologicalRiskIndicator": false,
         "claimSupported": false,
@@ -5767,15 +5721,13 @@
         "independentlyReproduced": false,
         "externallyReviewed": false
       },
-      "reason": "The source was inherited from the positional block assignment and has not been read for this record. Registry metadata alone cannot establish that a source is about a subject.",
-      "transcriptionConfidence": "low",
-      "remediation": "Inspect the bound source against this record subject, then either confirm the mapping as curated or replace it with an explicit override.",
+      "reason": "The diagnostics documentation identifies port plugs as a primary vacuum boundary, but does not fully specify the vessel boundary.",
+      "transcriptionConfidence": "high",
+      "remediation": "Bind the vacuum-vessel engineering basis for the complete boundary definition.",
       "priorMapping": null,
       "blockers": [
-        "source-alignment-insufficient-evidence",
         "source-assignment-positional-legacy",
-        "source-metadata-unverified",
-        "source-not-inspected"
+        "source-subject-partially-supported"
       ]
     },
     {
@@ -6426,30 +6378,26 @@
       "sourceYear": "2020",
       "sourceIdentifier": "10.1038/s41580-020-00313-x",
       "locator": "NAD+ biosynthesis and consumption, NAD+-dependent mechanisms in ageing, therapeutic targeting, figures 1–4, and supplementary boxes.",
-      "assignmentOrigin": "positional-legacy",
+      "assignmentOrigin": "independently-curated",
       "evidence": {
         "metadataVerified": true,
         "metadataMethod": "crossref-rest",
         "metadataNote": "Crossref resolves this identifier to \"NAD+ metabolism and its roles in cellular processes during ageing\" in Nature Reviews Molecular Cell Biology (2020). Registry resolution confirms the document exists; it does not establish subject alignment.",
-        "sourceContentInspected": false,
-        "inspectedContentLocation": null,
-        "subjectAligned": "insufficient-evidence",
+        "sourceContentInspected": true,
+        "inspectedContentLocation": "PMC7963035, NAD+ biosynthesis, consumption, compartmentalization, and ageing sections",
+        "subjectAligned": "supported",
         "mismatchBasis": null,
         "chronologicalRiskIndicator": false,
-        "claimSupported": false,
+        "claimSupported": true,
         "sourceIndependentOfOtherCitedSources": null,
         "independentlyReproduced": false,
         "externallyReviewed": false
       },
-      "reason": "The source was inherited from the positional block assignment and has not been read for this record. Registry metadata alone cannot establish that a source is about a subject.",
+      "reason": "The review directly identifies PARPs as NAD-consuming enzymes and discusses their ageing-related roles.",
       "transcriptionConfidence": "high",
-      "remediation": "Inspect the bound source against this record subject, then either confirm the mapping as curated or replace it with an explicit override.",
+      "remediation": "None. Record the mapping as curated rather than positional.",
       "priorMapping": null,
-      "blockers": [
-        "source-alignment-insufficient-evidence",
-        "source-assignment-positional-legacy",
-        "source-not-inspected"
-      ]
+      "blockers": []
     },
     {
       "recordId": "urn:maha:record:longevity-metabolism-nad-salvage-pathway",
@@ -6466,30 +6414,26 @@
       "sourceYear": "2020",
       "sourceIdentifier": "10.1038/s41580-020-00313-x",
       "locator": "NAD+ biosynthesis and consumption, NAD+-dependent mechanisms in ageing, therapeutic targeting, figures 1–4, and supplementary boxes.",
-      "assignmentOrigin": "positional-legacy",
+      "assignmentOrigin": "independently-curated",
       "evidence": {
         "metadataVerified": true,
         "metadataMethod": "crossref-rest",
         "metadataNote": "Crossref resolves this identifier to \"NAD+ metabolism and its roles in cellular processes during ageing\" in Nature Reviews Molecular Cell Biology (2020). Registry resolution confirms the document exists; it does not establish subject alignment.",
-        "sourceContentInspected": false,
-        "inspectedContentLocation": null,
-        "subjectAligned": "insufficient-evidence",
+        "sourceContentInspected": true,
+        "inspectedContentLocation": "PMC7963035, NAD+ biosynthesis, consumption, compartmentalization, and ageing sections",
+        "subjectAligned": "supported",
         "mismatchBasis": null,
         "chronologicalRiskIndicator": false,
-        "claimSupported": false,
+        "claimSupported": true,
         "sourceIndependentOfOtherCitedSources": null,
         "independentlyReproduced": false,
         "externallyReviewed": false
       },
-      "reason": "The source was inherited from the positional block assignment and has not been read for this record. Registry metadata alone cannot establish that a source is about a subject.",
+      "reason": "The review describes NAD biosynthesis and salvage pathways directly.",
       "transcriptionConfidence": "high",
-      "remediation": "Inspect the bound source against this record subject, then either confirm the mapping as curated or replace it with an explicit override.",
+      "remediation": "None. Record the mapping as curated rather than positional.",
       "priorMapping": null,
-      "blockers": [
-        "source-alignment-insufficient-evidence",
-        "source-assignment-positional-legacy",
-        "source-not-inspected"
-      ]
+      "blockers": []
     },
     {
       "recordId": "urn:maha:record:longevity-metabolism-nampt-rate-limiting-step",
@@ -6506,30 +6450,26 @@
       "sourceYear": "2020",
       "sourceIdentifier": "10.1038/s41580-020-00313-x",
       "locator": "NAD+ biosynthesis and consumption, NAD+-dependent mechanisms in ageing, therapeutic targeting, figures 1–4, and supplementary boxes.",
-      "assignmentOrigin": "positional-legacy",
+      "assignmentOrigin": "independently-curated",
       "evidence": {
         "metadataVerified": true,
         "metadataMethod": "crossref-rest",
         "metadataNote": "Crossref resolves this identifier to \"NAD+ metabolism and its roles in cellular processes during ageing\" in Nature Reviews Molecular Cell Biology (2020). Registry resolution confirms the document exists; it does not establish subject alignment.",
-        "sourceContentInspected": false,
-        "inspectedContentLocation": null,
-        "subjectAligned": "insufficient-evidence",
+        "sourceContentInspected": true,
+        "inspectedContentLocation": "PMC7963035, NAD+ biosynthesis, consumption, compartmentalization, and ageing sections",
+        "subjectAligned": "supported",
         "mismatchBasis": null,
         "chronologicalRiskIndicator": false,
-        "claimSupported": false,
+        "claimSupported": true,
         "sourceIndependentOfOtherCitedSources": null,
         "independentlyReproduced": false,
         "externallyReviewed": false
       },
-      "reason": "The source was inherited from the positional block assignment and has not been read for this record. Registry metadata alone cannot establish that a source is about a subject.",
+      "reason": "The full-text review treats NAMPT in the NAD salvage pathway and its regulation.",
       "transcriptionConfidence": "high",
-      "remediation": "Inspect the bound source against this record subject, then either confirm the mapping as curated or replace it with an explicit override.",
+      "remediation": "None. Record the mapping as curated rather than positional.",
       "priorMapping": null,
-      "blockers": [
-        "source-alignment-insufficient-evidence",
-        "source-assignment-positional-legacy",
-        "source-not-inspected"
-      ]
+      "blockers": []
     },
     {
       "recordId": "urn:maha:record:longevity-metabolism-nmn-and-nr-precursors",
@@ -6546,30 +6486,26 @@
       "sourceYear": "2020",
       "sourceIdentifier": "10.1038/s41580-020-00313-x",
       "locator": "NAD+ biosynthesis and consumption, NAD+-dependent mechanisms in ageing, therapeutic targeting, figures 1–4, and supplementary boxes.",
-      "assignmentOrigin": "positional-legacy",
+      "assignmentOrigin": "independently-curated",
       "evidence": {
         "metadataVerified": true,
         "metadataMethod": "crossref-rest",
         "metadataNote": "Crossref resolves this identifier to \"NAD+ metabolism and its roles in cellular processes during ageing\" in Nature Reviews Molecular Cell Biology (2020). Registry resolution confirms the document exists; it does not establish subject alignment.",
-        "sourceContentInspected": false,
-        "inspectedContentLocation": null,
-        "subjectAligned": "insufficient-evidence",
+        "sourceContentInspected": true,
+        "inspectedContentLocation": "PMC7963035, NAD+ biosynthesis, consumption, compartmentalization, and ageing sections",
+        "subjectAligned": "supported",
         "mismatchBasis": null,
         "chronologicalRiskIndicator": false,
-        "claimSupported": false,
+        "claimSupported": true,
         "sourceIndependentOfOtherCitedSources": null,
         "independentlyReproduced": false,
         "externallyReviewed": false
       },
-      "reason": "The source was inherited from the positional block assignment and has not been read for this record. Registry metadata alone cannot establish that a source is about a subject.",
+      "reason": "The review directly discusses NMN and NR as NAD precursors.",
       "transcriptionConfidence": "high",
-      "remediation": "Inspect the bound source against this record subject, then either confirm the mapping as curated or replace it with an explicit override.",
+      "remediation": "None. Record the mapping as curated rather than positional.",
       "priorMapping": null,
-      "blockers": [
-        "source-alignment-insufficient-evidence",
-        "source-assignment-positional-legacy",
-        "source-not-inspected"
-      ]
+      "blockers": []
     },
     {
       "recordId": "urn:maha:record:longevity-metabolism-nmnat-compartmentalization",
@@ -6586,30 +6522,26 @@
       "sourceYear": "2020",
       "sourceIdentifier": "10.1038/s41580-020-00313-x",
       "locator": "NAD+ biosynthesis and consumption, NAD+-dependent mechanisms in ageing, therapeutic targeting, figures 1–4, and supplementary boxes.",
-      "assignmentOrigin": "positional-legacy",
+      "assignmentOrigin": "independently-curated",
       "evidence": {
         "metadataVerified": true,
         "metadataMethod": "crossref-rest",
         "metadataNote": "Crossref resolves this identifier to \"NAD+ metabolism and its roles in cellular processes during ageing\" in Nature Reviews Molecular Cell Biology (2020). Registry resolution confirms the document exists; it does not establish subject alignment.",
-        "sourceContentInspected": false,
-        "inspectedContentLocation": null,
-        "subjectAligned": "insufficient-evidence",
+        "sourceContentInspected": true,
+        "inspectedContentLocation": "PMC7963035, NAD+ biosynthesis, consumption, compartmentalization, and ageing sections",
+        "subjectAligned": "supported",
         "mismatchBasis": null,
         "chronologicalRiskIndicator": false,
-        "claimSupported": false,
+        "claimSupported": true,
         "sourceIndependentOfOtherCitedSources": null,
         "independentlyReproduced": false,
         "externallyReviewed": false
       },
-      "reason": "The source was inherited from the positional block assignment and has not been read for this record. Registry metadata alone cannot establish that a source is about a subject.",
+      "reason": "The review identifies NMNAT isoforms and their cellular compartmentalization.",
       "transcriptionConfidence": "high",
-      "remediation": "Inspect the bound source against this record subject, then either confirm the mapping as curated or replace it with an explicit override.",
+      "remediation": "None. Record the mapping as curated rather than positional.",
       "priorMapping": null,
-      "blockers": [
-        "source-alignment-insufficient-evidence",
-        "source-assignment-positional-legacy",
-        "source-not-inspected"
-      ]
+      "blockers": []
     },
     {
       "recordId": "urn:maha:record:longevity-metabolism-oxygen-consumption-rate",
@@ -6985,12 +6917,12 @@
       "locator": "Method definition, correspondence, resampling interventions, examples, and limitations.",
       "assignmentOrigin": "positional-legacy",
       "evidence": {
-        "metadataVerified": false,
-        "metadataMethod": "none",
-        "metadataNote": "No DOI or other registry identifier is declared, and the publisher page was not fetched during this audit.",
-        "sourceContentInspected": false,
-        "inspectedContentLocation": null,
-        "subjectAligned": "insufficient-evidence",
+        "metadataVerified": true,
+        "metadataMethod": "publisher-page",
+        "metadataNote": "Fetched the author publication page and the linked Causal Scrubbing article, which serves the declared method, correspondence, intervention, example, and limitation material.",
+        "sourceContentInspected": true,
+        "inspectedContentLocation": "Causal Scrubbing article, method definition, correspondence, resampling interventions, examples, and limitations",
+        "subjectAligned": "partially-supported",
         "mismatchBasis": null,
         "chronologicalRiskIndicator": false,
         "claimSupported": false,
@@ -6998,15 +6930,13 @@
         "independentlyReproduced": false,
         "externallyReviewed": false
       },
-      "reason": "The source was inherited from the positional block assignment and has not been read for this record. Registry metadata alone cannot establish that a source is about a subject.",
-      "transcriptionConfidence": "low",
-      "remediation": "Inspect the bound source against this record subject, then either confirm the mapping as curated or replace it with an explicit override.",
+      "reason": "Causal scrubbing uses activation-resampling interventions but is not itself a general activation-patching specification.",
+      "transcriptionConfidence": "high",
+      "remediation": "Bind the technique-specific source or narrow the record to causal-scrubbing interventions.",
       "priorMapping": null,
       "blockers": [
-        "source-alignment-insufficient-evidence",
         "source-assignment-positional-legacy",
-        "source-metadata-unverified",
-        "source-not-inspected"
+        "source-subject-partially-supported"
       ]
     },
     {
@@ -7184,31 +7114,26 @@
       "sourceYear": "2022",
       "sourceIdentifier": null,
       "locator": "Method definition, correspondence, resampling interventions, examples, and limitations.",
-      "assignmentOrigin": "positional-legacy",
+      "assignmentOrigin": "independently-curated",
       "evidence": {
-        "metadataVerified": false,
-        "metadataMethod": "none",
-        "metadataNote": "No DOI or other registry identifier is declared, and the publisher page was not fetched during this audit.",
-        "sourceContentInspected": false,
-        "inspectedContentLocation": null,
-        "subjectAligned": "insufficient-evidence",
+        "metadataVerified": true,
+        "metadataMethod": "publisher-page",
+        "metadataNote": "Fetched the author publication page and the linked Causal Scrubbing article, which serves the declared method, correspondence, intervention, example, and limitation material.",
+        "sourceContentInspected": true,
+        "inspectedContentLocation": "Causal Scrubbing article, method definition, correspondence, resampling interventions, examples, and limitations",
+        "subjectAligned": "supported",
         "mismatchBasis": null,
         "chronologicalRiskIndicator": false,
-        "claimSupported": false,
+        "claimSupported": true,
         "sourceIndependentOfOtherCitedSources": null,
         "independentlyReproduced": false,
         "externallyReviewed": false
       },
-      "reason": "The source was inherited from the positional block assignment and has not been read for this record. Registry metadata alone cannot establish that a source is about a subject.",
-      "transcriptionConfidence": "low",
-      "remediation": "Inspect the bound source against this record subject, then either confirm the mapping as curated or replace it with an explicit override.",
+      "reason": "The article defines causal scrubbing as a mechanically derived test of an interpretability hypothesis.",
+      "transcriptionConfidence": "high",
+      "remediation": "None. Record the mapping as curated rather than positional.",
       "priorMapping": null,
-      "blockers": [
-        "source-alignment-insufficient-evidence",
-        "source-assignment-positional-legacy",
-        "source-metadata-unverified",
-        "source-not-inspected"
-      ]
+      "blockers": []
     },
     {
       "recordId": "urn:maha:record:mechanistic-interpretability-circuit-completeness",
@@ -7592,12 +7517,12 @@
       "locator": "Method definition, correspondence, resampling interventions, examples, and limitations.",
       "assignmentOrigin": "positional-legacy",
       "evidence": {
-        "metadataVerified": false,
-        "metadataMethod": "none",
-        "metadataNote": "No DOI or other registry identifier is declared, and the publisher page was not fetched during this audit.",
-        "sourceContentInspected": false,
-        "inspectedContentLocation": null,
-        "subjectAligned": "insufficient-evidence",
+        "metadataVerified": true,
+        "metadataMethod": "publisher-page",
+        "metadataNote": "Fetched the author publication page and the linked Causal Scrubbing article, which serves the declared method, correspondence, intervention, example, and limitation material.",
+        "sourceContentInspected": true,
+        "inspectedContentLocation": "Causal Scrubbing article, method definition, correspondence, resampling interventions, examples, and limitations",
+        "subjectAligned": "partially-supported",
         "mismatchBasis": null,
         "chronologicalRiskIndicator": false,
         "claimSupported": false,
@@ -7605,15 +7530,13 @@
         "independentlyReproduced": false,
         "externallyReviewed": false
       },
-      "reason": "The source was inherited from the positional block assignment and has not been read for this record. Registry metadata alone cannot establish that a source is about a subject.",
-      "transcriptionConfidence": "low",
-      "remediation": "Inspect the bound source against this record subject, then either confirm the mapping as curated or replace it with an explicit override.",
+      "reason": "The method performs correspondence-guided interventions, but the inspected article does not establish the broader interchange-intervention formalism.",
+      "transcriptionConfidence": "high",
+      "remediation": "Bind the technique-specific source or narrow the record to causal-scrubbing interventions.",
       "priorMapping": null,
       "blockers": [
-        "source-alignment-insufficient-evidence",
         "source-assignment-positional-legacy",
-        "source-metadata-unverified",
-        "source-not-inspected"
+        "source-subject-partially-supported"
       ]
     },
     {
@@ -7756,28 +7679,26 @@
       "locator": "Method definition, correspondence, resampling interventions, examples, and limitations.",
       "assignmentOrigin": "positional-legacy",
       "evidence": {
-        "metadataVerified": false,
-        "metadataMethod": "none",
-        "metadataNote": "No DOI or other registry identifier is declared, and the publisher page was not fetched during this audit.",
-        "sourceContentInspected": false,
-        "inspectedContentLocation": null,
-        "subjectAligned": "insufficient-evidence",
-        "mismatchBasis": null,
+        "metadataVerified": true,
+        "metadataMethod": "publisher-page",
+        "metadataNote": "Fetched the author publication page and the linked Causal Scrubbing article, which serves the declared method, correspondence, intervention, example, and limitation material.",
+        "sourceContentInspected": true,
+        "inspectedContentLocation": "Causal Scrubbing article, method definition, correspondence, resampling interventions, examples, and limitations",
+        "subjectAligned": "mismatched",
+        "mismatchBasis": "inspected-content-different-subject",
         "chronologicalRiskIndicator": false,
         "claimSupported": false,
         "sourceIndependentOfOtherCitedSources": null,
         "independentlyReproduced": false,
         "externallyReviewed": false
       },
-      "reason": "The source was inherited from the positional block assignment and has not been read for this record. Registry metadata alone cannot establish that a source is about a subject.",
-      "transcriptionConfidence": "low",
-      "remediation": "Inspect the bound source against this record subject, then either confirm the mapping as curated or replace it with an explicit override.",
+      "reason": "The article tests hypotheses through resampling interventions rather than component ablation.",
+      "transcriptionConfidence": "high",
+      "remediation": "Bind the technique-specific source or narrow the record to causal-scrubbing interventions.",
       "priorMapping": null,
       "blockers": [
-        "source-alignment-insufficient-evidence",
         "source-assignment-positional-legacy",
-        "source-metadata-unverified",
-        "source-not-inspected"
+        "source-subject-mismatched"
       ]
     },
     {
@@ -7833,28 +7754,26 @@
       "locator": "Method definition, correspondence, resampling interventions, examples, and limitations.",
       "assignmentOrigin": "positional-legacy",
       "evidence": {
-        "metadataVerified": false,
-        "metadataMethod": "none",
-        "metadataNote": "No DOI or other registry identifier is declared, and the publisher page was not fetched during this audit.",
-        "sourceContentInspected": false,
-        "inspectedContentLocation": null,
-        "subjectAligned": "insufficient-evidence",
-        "mismatchBasis": null,
+        "metadataVerified": true,
+        "metadataMethod": "publisher-page",
+        "metadataNote": "Fetched the author publication page and the linked Causal Scrubbing article, which serves the declared method, correspondence, intervention, example, and limitation material.",
+        "sourceContentInspected": true,
+        "inspectedContentLocation": "Causal Scrubbing article, method definition, correspondence, resampling interventions, examples, and limitations",
+        "subjectAligned": "mismatched",
+        "mismatchBasis": "inspected-content-different-subject",
         "chronologicalRiskIndicator": false,
         "claimSupported": false,
         "sourceIndependentOfOtherCitedSources": null,
         "independentlyReproduced": false,
         "externallyReviewed": false
       },
-      "reason": "The source was inherited from the positional block assignment and has not been read for this record. Registry metadata alone cannot establish that a source is about a subject.",
-      "transcriptionConfidence": "low",
-      "remediation": "Inspect the bound source against this record subject, then either confirm the mapping as curated or replace it with an explicit override.",
+      "reason": "The article does not define the later path-patching technique.",
+      "transcriptionConfidence": "high",
+      "remediation": "Bind the technique-specific source or narrow the record to causal-scrubbing interventions.",
       "priorMapping": null,
       "blockers": [
-        "source-alignment-insufficient-evidence",
         "source-assignment-positional-legacy",
-        "source-metadata-unverified",
-        "source-not-inspected"
+        "source-subject-mismatched"
       ]
     },
     {
@@ -8191,9 +8110,9 @@
         "metadataVerified": true,
         "metadataMethod": "crossref-rest",
         "metadataNote": "Crossref resolves this identifier to \"Closed-Loop Deep Brain Stimulation Is Superior in Ameliorating Parkinsonism\" in Neuron (2011). Registry resolution confirms the document exists; it does not establish subject alignment.",
-        "sourceContentInspected": false,
-        "inspectedContentLocation": null,
-        "subjectAligned": "insufficient-evidence",
+        "sourceContentInspected": true,
+        "inspectedContentLocation": "Neuron abstract and closed-loop detection, stimulation-timing, and outcome-comparison sections for DOI 10.1016/j.neuron.2011.08.023",
+        "subjectAligned": "partially-supported",
         "mismatchBasis": null,
         "chronologicalRiskIndicator": false,
         "claimSupported": false,
@@ -8201,14 +8120,13 @@
         "independentlyReproduced": false,
         "externallyReviewed": false
       },
-      "reason": "The source was inherited from the positional block assignment and has not been read for this record. Registry metadata alone cannot establish that a source is about a subject.",
+      "reason": "The study demonstrates adaptive closed-loop stimulation triggered by neural activity, but does not establish a general policy framework.",
       "transcriptionConfidence": "high",
-      "remediation": "Inspect the bound source against this record subject, then either confirm the mapping as curated or replace it with an explicit override.",
+      "remediation": "Narrow to the demonstrated stimulation rule or bind a source comparing adaptive policies.",
       "priorMapping": null,
       "blockers": [
-        "source-alignment-insufficient-evidence",
         "source-assignment-positional-legacy",
-        "source-not-inspected"
+        "source-subject-partially-supported"
       ]
     },
     {
@@ -8585,30 +8503,26 @@
       "sourceYear": "2017",
       "sourceIdentifier": "10.1038/nature24636",
       "locator": "Probe architecture, recording sites, channel selection, noise, recordings, and Methods.",
-      "assignmentOrigin": "positional-legacy",
+      "assignmentOrigin": "independently-curated",
       "evidence": {
         "metadataVerified": true,
         "metadataMethod": "crossref-rest",
         "metadataNote": "Crossref resolves this identifier to \"Fully integrated silicon probes for high-density recording of neural activity\" in Nature (2017). Registry resolution confirms the document exists; it does not establish subject alignment.",
-        "sourceContentInspected": false,
-        "inspectedContentLocation": null,
-        "subjectAligned": "inaccessible-source",
+        "sourceContentInspected": true,
+        "inspectedContentLocation": "UCL open-access abstract for DOI 10.1038/nature24636",
+        "subjectAligned": "supported",
         "mismatchBasis": null,
         "chronologicalRiskIndicator": false,
-        "claimSupported": false,
+        "claimSupported": true,
         "sourceIndependentOfOtherCitedSources": null,
         "independentlyReproduced": false,
         "externallyReviewed": false
       },
-      "reason": "Retrieval was attempted for this batch. The publisher redirects to an authentication wall, which was not followed, so the content could not be read. An inaccessible source is never treated as content-confirmed.",
+      "reason": "The abstract directly reports extracellular recordings with sub-millisecond resolution and well-isolated spiking activity.",
       "transcriptionConfidence": "high",
-      "remediation": "Obtain the article through a retrievable route, inspect it, then confirm or replace the mapping.",
+      "remediation": "None. Record the mapping as curated rather than positional.",
       "priorMapping": null,
-      "blockers": [
-        "source-assignment-positional-legacy",
-        "source-inaccessible",
-        "source-not-inspected"
-      ]
+      "blockers": []
     },
     {
       "recordId": "urn:maha:record:neurotechnology-bci-flexible-conformal-electrode-arrays",
@@ -8984,30 +8898,26 @@
       "sourceYear": "2017",
       "sourceIdentifier": "10.1038/nature24636",
       "locator": "Probe architecture, recording sites, channel selection, noise, recordings, and Methods.",
-      "assignmentOrigin": "positional-legacy",
+      "assignmentOrigin": "independently-curated",
       "evidence": {
         "metadataVerified": true,
         "metadataMethod": "crossref-rest",
         "metadataNote": "Crossref resolves this identifier to \"Fully integrated silicon probes for high-density recording of neural activity\" in Nature (2017). Registry resolution confirms the document exists; it does not establish subject alignment.",
-        "sourceContentInspected": false,
-        "inspectedContentLocation": null,
-        "subjectAligned": "inaccessible-source",
+        "sourceContentInspected": true,
+        "inspectedContentLocation": "UCL open-access abstract for DOI 10.1038/nature24636",
+        "subjectAligned": "supported",
         "mismatchBasis": null,
         "chronologicalRiskIndicator": false,
-        "claimSupported": false,
+        "claimSupported": true,
         "sourceIndependentOfOtherCitedSources": null,
         "independentlyReproduced": false,
         "externallyReviewed": false
       },
-      "reason": "Retrieval was attempted for this batch. The publisher redirects to an authentication wall, which was not followed, so the content could not be read. An inaccessible source is never treated as content-confirmed.",
+      "reason": "The abstract states that 384 recording channels can programmably address 960 sites, directly supporting channel selection.",
       "transcriptionConfidence": "high",
-      "remediation": "Obtain the article through a retrievable route, inspect it, then confirm or replace the mapping.",
+      "remediation": "None. Record the mapping as curated rather than positional.",
       "priorMapping": null,
-      "blockers": [
-        "source-assignment-positional-legacy",
-        "source-inaccessible",
-        "source-not-inspected"
-      ]
+      "blockers": []
     },
     {
       "recordId": "urn:maha:record:neurotechnology-bci-neuropixels-cmos-probe",
@@ -9024,30 +8934,26 @@
       "sourceYear": "2017",
       "sourceIdentifier": "10.1038/nature24636",
       "locator": "Probe architecture, recording sites, channel selection, noise, recordings, and Methods.",
-      "assignmentOrigin": "positional-legacy",
+      "assignmentOrigin": "independently-curated",
       "evidence": {
         "metadataVerified": true,
         "metadataMethod": "crossref-rest",
         "metadataNote": "Crossref resolves this identifier to \"Fully integrated silicon probes for high-density recording of neural activity\" in Nature (2017). Registry resolution confirms the document exists; it does not establish subject alignment.",
-        "sourceContentInspected": false,
-        "inspectedContentLocation": null,
-        "subjectAligned": "inaccessible-source",
+        "sourceContentInspected": true,
+        "inspectedContentLocation": "UCL open-access abstract for DOI 10.1038/nature24636",
+        "subjectAligned": "supported",
         "mismatchBasis": null,
         "chronologicalRiskIndicator": false,
-        "claimSupported": false,
+        "claimSupported": true,
         "sourceIndependentOfOtherCitedSources": null,
         "independentlyReproduced": false,
         "externallyReviewed": false
       },
-      "reason": "Retrieval was attempted for this batch. The publisher redirects to an authentication wall, which was not followed, so the content could not be read. An inaccessible source is never treated as content-confirmed.",
+      "reason": "The abstract directly describes a CMOS-compatible, fully integrated silicon probe with on-chip filtering, amplification, multiplexing and digitization.",
       "transcriptionConfidence": "high",
-      "remediation": "Obtain the article through a retrievable route, inspect it, then confirm or replace the mapping.",
+      "remediation": "None. Record the mapping as curated rather than positional.",
       "priorMapping": null,
-      "blockers": [
-        "source-assignment-positional-legacy",
-        "source-inaccessible",
-        "source-not-inspected"
-      ]
+      "blockers": []
     },
     {
       "recordId": "urn:maha:record:neurotechnology-bci-neuropixels-recording-sites",
@@ -9064,30 +8970,26 @@
       "sourceYear": "2017",
       "sourceIdentifier": "10.1038/nature24636",
       "locator": "Probe architecture, recording sites, channel selection, noise, recordings, and Methods.",
-      "assignmentOrigin": "positional-legacy",
+      "assignmentOrigin": "independently-curated",
       "evidence": {
         "metadataVerified": true,
         "metadataMethod": "crossref-rest",
         "metadataNote": "Crossref resolves this identifier to \"Fully integrated silicon probes for high-density recording of neural activity\" in Nature (2017). Registry resolution confirms the document exists; it does not establish subject alignment.",
-        "sourceContentInspected": false,
-        "inspectedContentLocation": null,
-        "subjectAligned": "inaccessible-source",
+        "sourceContentInspected": true,
+        "inspectedContentLocation": "UCL open-access abstract for DOI 10.1038/nature24636",
+        "subjectAligned": "supported",
         "mismatchBasis": null,
         "chronologicalRiskIndicator": false,
-        "claimSupported": false,
+        "claimSupported": true,
         "sourceIndependentOfOtherCitedSources": null,
         "independentlyReproduced": false,
         "externallyReviewed": false
       },
-      "reason": "Retrieval was attempted for this batch. The publisher redirects to an authentication wall, which was not followed, so the content could not be read. An inaccessible source is never treated as content-confirmed.",
+      "reason": "The abstract reports 960 low-impedance recording sites tiled along the probe shank.",
       "transcriptionConfidence": "high",
-      "remediation": "Obtain the article through a retrievable route, inspect it, then confirm or replace the mapping.",
+      "remediation": "None. Record the mapping as curated rather than positional.",
       "priorMapping": null,
-      "blockers": [
-        "source-assignment-positional-legacy",
-        "source-inaccessible",
-        "source-not-inspected"
-      ]
+      "blockers": []
     },
     {
       "recordId": "urn:maha:record:neurotechnology-bci-opsin-spectral-sensitivity",
