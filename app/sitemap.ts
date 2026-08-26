@@ -22,6 +22,7 @@ import { epistemicRecordPath } from '@/lib/epistemic-publication'
 import { getActiveEpistemicCanonicalReleases } from '@/lib/public-epistemic-releases'
 import { EPISTEMIC_PHASE4_PILOT_DATE } from '@/lib/epistemic-pilot-corpus'
 import { PUBLIC_AUTHORITY_CONFORMANCE_DATE } from '@/lib/celestial-public-authority-conformance'
+import { getPublishedSubstantialPage, SUBSTANTIAL_PUBLICATION_DATE } from '@/lib/substantial-page-public'
 
 /*
  * The sitemap reads active canonical releases from the database, so it must be
@@ -456,7 +457,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const staticEpistemicPaths = new Set(PUBLIC_EPISTEMIC_RECORDS.map(epistemicRecordPath))
   const canonicalReleasePages = canonicalReleases
     .filter((release) => !staticEpistemicPaths.has(release.canonicalPath))
-    .map((release) => ({ url: `${baseUrl}${release.canonicalPath}`, lastModified: new Date(release.releasedAt) }))
+    .map((release) => ({
+      url: `${baseUrl}${release.canonicalPath}`,
+      lastModified: new Date(getPublishedSubstantialPage(release.recordId)?.quality.eligible ? SUBSTANTIAL_PUBLICATION_DATE : release.releasedAt),
+    }))
 
   return [...staticPages, ...knowledgePages, ...astronomyKnowledgePages, ...astrologyTraditionPages, ...knowledgeSupplierPages, ...unfinishedSpeciesReader, ...otherOpenBookReaders, ...canonicalReleasePages, ...published.map((publication) => ({ url: `${baseUrl}/insights/${publication.slug}`, lastModified: new Date(publication.updated_at) }))]
 }

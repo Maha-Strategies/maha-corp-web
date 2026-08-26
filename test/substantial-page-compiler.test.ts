@@ -322,7 +322,7 @@ test('pilot artifacts are unlinked from routes, sitemap and llms.txt', () => {
   const sitemap = readFileSync(new URL('../app/sitemap.ts', import.meta.url), 'utf8')
   const llms = readFileSync(new URL('../lib/llms-manifest.ts', import.meta.url), 'utf8')
   for (const source of [sitemap, llms]) {
-    assert.doesNotMatch(source, /substantial-page|substantial-pages/)
+    assert.doesNotMatch(source, /substantial-page-pilots|pilot-contracts|pilot-batch-assessment/)
   }
 })
 
