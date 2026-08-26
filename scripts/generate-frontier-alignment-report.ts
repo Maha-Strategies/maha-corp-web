@@ -8,7 +8,9 @@ import {
   SOURCE_ALIGNMENT_VERSION,
   alignmentBlockers,
   auditDigest,
+  ALIGNMENT_BATCH_MEMBERSHIP,
   BATCH_5_REINSPECTIONS,
+  BATCH_6_REINSPECTIONS,
   batchOf,
   batchStats,
   originTotals,
@@ -96,6 +98,75 @@ lines.push(
   `Records carrying only default state, judged by no batch: **${FRONTIER_ALIGNMENT_AUDIT.filter((entry) => batchOf(entry.recordId) === null).length}**. These were never inspected and block.`,
   '',
 )
+
+lines.push('## Batch 6 membership', '')
+lines.push(
+  'Two disjoint populations. The **cohort** is the forty frozen records batch 6 selected; the **re-inspections** are records an earlier batch judged inaccessible that source recovery has since produced an artifact for. Re-inspections are deliberately not cohort members, so "inspected in the cohort" and "newly inspected overall" are different numbers and are reported separately.',
+  '',
+)
+const b6Cohort = FRONTIER_ALIGNMENT_AUDIT.filter((entry) => ALIGNMENT_BATCH_MEMBERSHIP['batch-6'].includes(entry.recordId))
+const b6Rein = FRONTIER_ALIGNMENT_AUDIT.filter((entry) => BATCH_6_REINSPECTIONS.includes(entry.recordId))
+const insp = (rows: typeof b6Cohort) => rows.filter((entry) => entry.evidence.sourceContentInspected).length
+lines.push(row(['Population', 'Records', 'Inspected', 'Uninspected']), row(['---', '---', '---', '---']))
+lines.push(row(['cohort', String(b6Cohort.length), String(insp(b6Cohort)), String(b6Cohort.length - insp(b6Cohort))]))
+lines.push(row(['re-inspections', String(b6Rein.length), String(insp(b6Rein)), String(b6Rein.length - insp(b6Rein))]))
+lines.push(row(['**newly inspected**', '—', `**${insp(b6Cohort) + insp(b6Rein)}**`, '—']))
+lines.push('')
+
+lines.push('### Cohort, all forty records', '')
+lines.push(
+  row(['Record', 'Source contract', 'Recovery', 'Inspected', 'Depth', 'Location', 'Verdict before', 'Verdict after', 'Control']),
+  row(new Array(9).fill('---')),
+)
+for (const entry of b6Cohort) {
+  // A cohort record was unjudged before batch 6, so its prior verdict is the
+  // default its source contract implied.
+  const before = entry.sourceContractId === 'source-critical-supply-chains-pp1802' ? 'inaccessible-source' : 'insufficient-evidence'
+  lines.push(
+    row([
+      `\`${entry.recordId.replace('urn:maha:record:', '')}\``,
+      `\`${entry.sourceContractId.replace('source-', '')}\``,
+      `\`${entry.evidence.recoveryDisposition}\``,
+      entry.evidence.sourceContentInspected ? 'yes' : 'no',
+      `\`${entry.evidence.inspectionDepth}\``,
+      entry.evidence.inspectedContentLocation ?? '—',
+      `\`${before}\``,
+      `\`${entry.evidence.subjectAligned}\``,
+      entry.evidence.sourceContentInspected ? 'no' : 'yes',
+    ]),
+  )
+}
+lines.push('')
+
+lines.push('### Re-inspections, all fifteen records', '')
+lines.push(
+  row(['Record', 'Source contract', 'Recovery', 'Inspected', 'Depth', 'Verdict before', 'Verdict after']),
+  row(new Array(7).fill('---')),
+)
+for (const entry of b6Rein) {
+  lines.push(
+    row([
+      `\`${entry.recordId.replace('urn:maha:record:', '')}\``,
+      `\`${entry.sourceContractId.replace('source-', '')}\``,
+      `\`${entry.evidence.recoveryDisposition}\``,
+      entry.evidence.sourceContentInspected ? 'yes' : 'no',
+      `\`${entry.evidence.inspectionDepth}\``,
+      `\`${entry.priorJudgement?.verdict ?? '—'}\``,
+      `\`${entry.evidence.subjectAligned}\``,
+    ]),
+  )
+}
+lines.push('')
+
+lines.push('### Inspection depth, newly inspected only', '')
+const depths: Record<string, number> = {}
+for (const entry of [...b6Cohort, ...b6Rein]) {
+  if (!entry.evidence.sourceContentInspected) continue
+  depths[entry.evidence.inspectionDepth] = (depths[entry.evidence.inspectionDepth] ?? 0) + 1
+}
+lines.push(row(['Depth', 'Records']), row(['---', '---']))
+for (const [depth, count] of Object.entries(depths).sort()) lines.push(row([`\`${depth}\``, String(count)]))
+lines.push('')
 
 lines.push('## Verdicts', '')
 lines.push(row(['Verdict', 'Count']), row(['---', '---']))
