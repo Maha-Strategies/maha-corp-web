@@ -1,13 +1,17 @@
 import assert from 'node:assert/strict'
 import { execFileSync } from 'node:child_process'
-import { readFileSync, readdirSync } from 'node:fs'
+import { readFileSync, readdirSync, rmSync, writeFileSync } from 'node:fs'
 import { join } from 'node:path'
 import test from 'node:test'
 
 import {
+  ALIGNMENT_BATCHES,
+  ALIGNMENT_BATCH_MEMBERSHIP,
   ALIGNMENT_VERDICTS,
   ASSIGNMENT_ORIGINS,
   MISMATCH_BASES,
+  batchOf,
+  batchStats,
   FRONTIER_ALIGNMENT_AUDIT,
   alignmentBlockers,
   alignmentFor,
@@ -129,6 +133,128 @@ test('a mismatch basis is never recorded without a mismatch verdict', () => {
     if (entry.evidence.subjectAligned === 'mismatched') continue
     assert.equal(entry.evidence.mismatchBasis, null, `${entry.recordId} carries a stray mismatch basis`)
   }
+})
+
+
+/* --------------------------------------------------- batch registry ------- */
+
+test('batch membership is disjoint and covers every judged record', () => {
+  const seen = new Map<string, string>()
+  for (const batchId of ALIGNMENT_BATCHES) {
+    for (const recordId of ALIGNMENT_BATCH_MEMBERSHIP[batchId]) {
+      assert.ok(!seen.has(recordId), `${recordId} is in both ${seen.get(recordId)} and ${batchId}`)
+      seen.set(recordId, batchId)
+      assert.ok(alignmentFor(recordId), `${recordId} is in ${batchId} but is not a frontier record`)
+    }
+  }
+  const judged = FRONTIER_ALIGNMENT_AUDIT.filter(
+    (entry) => entry.evidence.sourceContentInspected || entry.evidence.subjectAligned !== 'insufficient-evidence',
+  )
+  for (const entry of judged) {
+    if (entry.evidence.subjectAligned === 'inaccessible-source' && batchOf(entry.recordId) === null) continue
+    assert.ok(batchOf(entry.recordId), `${entry.recordId} has a judgement but no batch`)
+  }
+})
+
+test('batch 4 contains exactly forty records, five per domain, none judged earlier', () => {
+  const batch4 = ALIGNMENT_BATCH_MEMBERSHIP['batch-4']
+  assert.equal(batch4.length, 40)
+  const earlier = new Set([
+    ...ALIGNMENT_BATCH_MEMBERSHIP['batch-1'],
+    ...ALIGNMENT_BATCH_MEMBERSHIP['batch-2'],
+    ...ALIGNMENT_BATCH_MEMBERSHIP['batch-3'],
+  ])
+  const perDomain = new Map<string, number>()
+  for (const recordId of batch4) {
+    assert.ok(!earlier.has(recordId), `${recordId} was judged before batch 4`)
+    const entry = alignmentFor(recordId)!
+    perDomain.set(entry.domainSlug, (perDomain.get(entry.domainSlug) ?? 0) + 1)
+  }
+  assert.equal(perDomain.size, 8)
+  for (const [domainSlug, count] of perDomain) assert.equal(count, 5, `${domainSlug} has ${count} batch-4 records`)
+})
+
+test('per-batch statistics sum to the judged population', () => {
+  const stats = batchStats()
+  assert.equal(stats.length, ALIGNMENT_BATCHES.length)
+  const attempted = stats.reduce((total, row) => total + row.attempted, 0)
+  const judged = FRONTIER_ALIGNMENT_AUDIT.filter((entry) => batchOf(entry.recordId) !== null).length
+  assert.equal(attempted, judged)
+  for (const row of stats) {
+    const verdictSum = row.supported + row.partiallySupported + row.mismatched + row.insufficientEvidence + row.inaccessible
+    assert.equal(verdictSum, row.attempted, `${row.batchId} verdicts do not sum to attempted`)
+    assert.ok(row.contentInspected + row.inaccessible <= row.attempted)
+  }
+  const batch4 = stats.find((row) => row.batchId === 'batch-4')!
+  assert.deepEqual(batch4, {
+    batchId: 'batch-4',
+    attempted: 40,
+    contentInspected: 30,
+    inaccessible: 10,
+    supported: 8,
+    partiallySupported: 5,
+    mismatched: 10,
+    insufficientEvidence: 7,
+    alignmentClear: 8,
+  })
+})
+
+/* ------------------------------------------ the guards are actually live -- */
+
+/**
+ * The registry guards run at module load, so proving they fire means loading a
+ * mutated copy. Each case writes a sibling module (so relative imports still
+ * resolve), imports it, and expects a throw. Without this, a guard could be
+ * silently unreachable and every other test would still pass.
+ */
+async function expectGuardRejection(name: string, mutate: (source: string) => string, pattern: RegExp) {
+  const dir = new URL('../lib/', import.meta.url).pathname
+  const original = readFileSync(join(dir, 'frontier-source-alignment.ts'), 'utf8')
+  const probe = join(dir, `__guard_probe_${name}.ts`)
+  writeFileSync(probe, mutate(original))
+  try {
+    await assert.rejects(() => import(`${probe}?v=${Date.now()}`), pattern)
+  } finally {
+    rmSync(probe, { force: true })
+  }
+}
+
+test('the guard rejects a record claimed by two batches', async () => {
+  await expectGuardRejection(
+    'dup',
+    // Swap, not append: the count stays at forty so only disjointness can fire.
+    (source) =>
+      source.replace(
+        `    '${ALIGNMENT_BATCH_MEMBERSHIP['batch-4'][0]}',\n`,
+        `    '${ALIGNMENT_BATCH_MEMBERSHIP['batch-1'][0]}',\n`,
+      ),
+    /must be disjoint/,
+  )
+})
+
+test('the guard rejects a batch 4 that is not exactly forty records', async () => {
+  await expectGuardRejection(
+    'count',
+    (source) => source.replace(`    '${ALIGNMENT_BATCH_MEMBERSHIP['batch-4'][0]}',\n`, ''),
+    /exactly 40 records/,
+  )
+})
+
+test('the guard rejects a batch 4 domain that does not have five records', async () => {
+  // Swap one batch-4 record for an unjudged record in another domain: the count
+  // stays at forty, so only the per-domain rule can catch it.
+  const victim = ALIGNMENT_BATCH_MEMBERSHIP['batch-4'][0]
+  const replacement = FRONTIER_ALIGNMENT_AUDIT.find(
+    (entry) => batchOf(entry.recordId) === null && entry.domainSlug !== alignmentFor(victim)!.domainSlug,
+  )!
+  await expectGuardRejection(
+    'domain',
+    (source) =>
+      source
+        .replace(`    '${victim}',\n`, `    '${replacement.recordId}',\n`)
+        .replace(`  '${victim}': {`, `  '${replacement.recordId}': {`),
+    /five records per domain|no batch|has no judgement/,
+  )
 })
 
 /* ----------------------------------------------------------- fail closed -- */
@@ -354,35 +480,34 @@ test('the reported totals match the audit', () => {
   assert.equal(Object.values(origins).reduce((a, b) => a + b, 0), 240)
   assert.equal(origins['explicit-override'], 2)
   assert.deepEqual(verdicts, {
-    supported: 43,
-    'partially-supported': 18,
-    mismatched: 24,
-    'insufficient-evidence': 140,
-    'inaccessible-source': 15,
+    supported: 51,
+    'partially-supported': 23,
+    mismatched: 34,
+    'insufficient-evidence': 107,
+    'inaccessible-source': 25,
   })
-  assert.equal(FRONTIER_ALIGNMENT_AUDIT.filter((entry) => entry.evidence.sourceContentInspected).length, 86)
+  assert.equal(FRONTIER_ALIGNMENT_AUDIT.filter((entry) => entry.evidence.sourceContentInspected).length, 116)
   assert.equal(
     FRONTIER_ALIGNMENT_AUDIT.filter((entry) => isAlignmentClear(entry.recordId)).length,
-    43,
+    51,
     'alignment-clear count changed',
   )
 })
 
 test('alignment batch 3 inspects five records in every frontier domain', () => {
-  const inspectedBeforeBatch3: Record<string, number> = {
-    'advanced-materials': 10,
-    'agentic-systems-mcp': 10,
-    'biomolecular-engineering': 5,
-    'critical-supply-chains': 5,
-    'fusion-plasma-systems': 10,
-    'longevity-metabolism': 0,
-    'mechanistic-interpretability': 5,
-    'neurotechnology-bci': 1,
+  // This asserted `after - before === 5` against hardcoded per-domain totals of
+  // globally inspected records. That inferred batch membership from a count
+  // delta, so any later batch broke it, and it would have passed even if batch
+  // 3 had inspected the wrong five records. Membership is now first-class, so
+  // the real invariant is asserted against the batch itself.
+  const perDomain = new Map<string, number>()
+  for (const recordId of ALIGNMENT_BATCH_MEMBERSHIP['batch-3']) {
+    const entry = alignmentFor(recordId)!
+    if (!entry.evidence.sourceContentInspected) continue
+    perDomain.set(entry.domainSlug, (perDomain.get(entry.domainSlug) ?? 0) + 1)
   }
-  for (const [domain, before] of Object.entries(inspectedBeforeBatch3)) {
-    const after = FRONTIER_ALIGNMENT_AUDIT.filter(
-      (entry) => entry.domainSlug === domain && entry.evidence.sourceContentInspected,
-    ).length
-    assert.equal(after - before, 5, `${domain} did not receive exactly five Batch 3 inspections`)
+  assert.equal(perDomain.size, 8, 'batch 3 does not span all eight domains')
+  for (const [domain, count] of perDomain) {
+    assert.equal(count, 5, `${domain} did not receive exactly five Batch 3 inspections`)
   }
 })

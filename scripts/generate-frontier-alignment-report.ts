@@ -8,6 +8,8 @@ import {
   SOURCE_ALIGNMENT_VERSION,
   alignmentBlockers,
   auditDigest,
+  batchOf,
+  batchStats,
   originTotals,
   verdictTotals,
 } from '../lib/frontier-source-alignment.ts'
@@ -63,6 +65,36 @@ lines.push(row(['Mappings corrected', String(corrected.length)]))
 lines.push(row(['Alignment-clear', String(clear.length)]))
 lines.push(row(['Blocked from substantial-page generation', String(blocked.length)]))
 lines.push('')
+
+lines.push('## By batch', '')
+lines.push(
+  'Every judged record belongs to exactly one batch, enforced at module load, so these rows sum to the judged total. `alignmentClear` is each batch\'s own contribution, not a running total.',
+  '',
+)
+lines.push(
+  row(['Batch', 'Attempted', 'Content inspected', 'Inaccessible', 'Supported', 'Partial', 'Mismatched', 'Insufficient', 'Alignment-clear']),
+  row(new Array(9).fill('---')),
+)
+for (const stats of batchStats()) {
+  lines.push(
+    row([
+      stats.batchId,
+      String(stats.attempted),
+      String(stats.contentInspected),
+      String(stats.inaccessible),
+      String(stats.supported),
+      String(stats.partiallySupported),
+      String(stats.mismatched),
+      String(stats.insufficientEvidence),
+      String(stats.alignmentClear),
+    ]),
+  )
+}
+lines.push('')
+lines.push(
+  `Records carrying only default state, judged by no batch: **${FRONTIER_ALIGNMENT_AUDIT.filter((entry) => batchOf(entry.recordId) === null).length}**. These were never inspected and block.`,
+  '',
+)
 
 lines.push('## Verdicts', '')
 lines.push(row(['Verdict', 'Count']), row(['---', '---']))
@@ -201,6 +233,7 @@ writeFileSync(
       },
       verdictTotals: verdicts,
       originTotals: origins,
+      batchStats: batchStats(),
       blockerTotals,
       records: FRONTIER_ALIGNMENT_AUDIT.map((entry) => ({
         ...entry,

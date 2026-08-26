@@ -792,6 +792,351 @@ const JUDGEMENTS: Readonly<Record<string, InspectedJudgement>> = {
       'Retrieval was attempted for this batch. The publisher redirects to an authentication wall, which was not followed, so the content could not be read. An inaccessible source is never treated as content-confirmed.',
     remediation: 'Obtain the article through a retrievable route, inspect it, then confirm or replace the mapping.',
   },
+
+  /* ---- alignment batch 4, read 2026-08-26 ------------------------------
+   * Written as explicit object keys, not an Object.fromEntries spread, so a
+   * duplicate is a compiler error and every verdict is type-checked. See the
+   * batch registry below for machine-checkable membership.
+   */
+  'urn:maha:record:fusion-plasma-systems-stellarator-field-optimization': {
+    verdict: 'partially-supported',
+    sourceContentInspected: true,
+    inspectedContentLocation: 'IOP abstract for Nuclear Fusion 61(9), Boozer "Stellarators as a fast path to fusion"',
+    reason:
+      'The abstract makes the demonstrated reliability of computational stellarator design one of its three points, which bears on field optimisation, but the abstract does not develop an optimisation method.',
+    remediation: 'Read the design sections and confirm, or narrow the record to the strategic claim the abstract supports.',
+  },
+  'urn:maha:record:fusion-plasma-systems-stellarator-magnetic-coils': {
+    verdict: 'partially-supported',
+    sourceContentInspected: true,
+    inspectedContentLocation: 'IOP abstract for Nuclear Fusion 61(9), Boozer "Stellarators as a fast path to fusion"',
+    reason:
+      'Coils fall within the paper scope as part of stellarator configuration, but the abstract does not treat coil design in detail.',
+    remediation: 'Read the coil sections named in the declared locator before confirming.',
+  },
+  'urn:maha:record:fusion-plasma-systems-cable-in-conduit-conductors': {
+    verdict: 'insufficient-evidence',
+    sourceContentInspected: true,
+    inspectedContentLocation: 'IOP abstract for Nuclear Fusion 61(9), Boozer "Stellarators as a fast path to fusion"',
+    reason:
+      'Cable-in-conduit conductors do not appear at abstract level. Only the abstract was read, and the declared locator points at sections not inspected, so absence here does not establish that the paper omits the subject.',
+    remediation: 'Read the magnet and coil sections named in the locator, then confirm or replace.',
+  },
+  'urn:maha:record:fusion-plasma-systems-rebco-high-field-magnets': {
+    verdict: 'insufficient-evidence',
+    sourceContentInspected: true,
+    inspectedContentLocation: 'IOP abstract for Nuclear Fusion 61(9), Boozer "Stellarators as a fast path to fusion"',
+    reason:
+      'REBCO does not appear at abstract level. Only the abstract was read, so this is not evidence that the cited sections omit high-field magnets. Recorded as unresolved rather than mismatched.',
+    remediation: 'Read the magnet sections named in the locator. This record also backs the only resolving Q-BR bridge endpoint, so it warrants priority.',
+  },
+  'urn:maha:record:fusion-plasma-systems-superconducting-quench-protection': {
+    verdict: 'insufficient-evidence',
+    sourceContentInspected: true,
+    inspectedContentLocation: 'IOP abstract for Nuclear Fusion 61(9), Boozer "Stellarators as a fast path to fusion"',
+    reason:
+      'Quench protection does not appear at abstract level, and the abstract is the only part read, so nonalignment is not established.',
+    remediation: 'Read the magnet sections named in the locator, then confirm or replace.',
+  },
+  'urn:maha:record:advanced-materials-two-dimensional-magnetism': {
+    verdict: 'mismatched',
+    sourceContentInspected: true,
+    inspectedContentLocation: 'arXiv:1002.3895 abstract and scope statement for Rev Mod Phys 82, 3045',
+    mismatchBasis: 'inspected-content-different-subject',
+    reason:
+      'The source was read. It is a theory colloquium on topological insulators, surface states and spin texture, and it does not treat two-dimensional magnetism. Its subject is electronic band topology, not two-dimensional materials fabrication.',
+    remediation: 'Bind a source that treats two-dimensional material assembly and interface quality.',
+  },
+  'urn:maha:record:advanced-materials-van-der-waals-assembly': {
+    verdict: 'mismatched',
+    sourceContentInspected: true,
+    inspectedContentLocation: 'arXiv:1002.3895 abstract and scope statement for Rev Mod Phys 82, 3045',
+    mismatchBasis: 'inspected-content-different-subject',
+    reason:
+      'The source was read. It is a theory colloquium on topological insulators, surface states and spin texture, and it does not treat van der Waals assembly of exfoliated flakes. Its subject is electronic band topology, not two-dimensional materials fabrication.',
+    remediation: 'Bind a source that treats two-dimensional material assembly and interface quality.',
+  },
+  'urn:maha:record:advanced-materials-dry-transfer-contamination': {
+    verdict: 'mismatched',
+    sourceContentInspected: true,
+    inspectedContentLocation: 'arXiv:1002.3895 abstract and scope statement for Rev Mod Phys 82, 3045',
+    mismatchBasis: 'inspected-content-different-subject',
+    reason:
+      'The source was read. It is a theory colloquium on topological insulators, surface states and spin texture, and it does not treat dry-transfer contamination. Its subject is electronic band topology, not two-dimensional materials fabrication.',
+    remediation: 'Bind a source that treats two-dimensional material assembly and interface quality.',
+  },
+  'urn:maha:record:advanced-materials-interface-bubbles-and-strain': {
+    verdict: 'mismatched',
+    sourceContentInspected: true,
+    inspectedContentLocation: 'arXiv:1002.3895 abstract and scope statement for Rev Mod Phys 82, 3045',
+    mismatchBasis: 'inspected-content-different-subject',
+    reason:
+      'The source was read. It is a theory colloquium on topological insulators, surface states and spin texture, and it does not treat interface bubbles and strain. Its subject is electronic band topology, not two-dimensional materials fabrication.',
+    remediation: 'Bind a source that treats two-dimensional material assembly and interface quality.',
+  },
+  'urn:maha:record:advanced-materials-encapsulation-boundaries': {
+    verdict: 'mismatched',
+    sourceContentInspected: true,
+    inspectedContentLocation: 'arXiv:1002.3895 abstract and scope statement for Rev Mod Phys 82, 3045',
+    mismatchBasis: 'inspected-content-different-subject',
+    reason:
+      'The source was read. It is a theory colloquium on topological insulators, surface states and spin texture, and it does not treat encapsulation of two-dimensional materials. Its subject is electronic band topology, not two-dimensional materials fabrication.',
+    remediation: 'Bind a source that treats two-dimensional material assembly and interface quality.',
+  },
+  'urn:maha:record:biomolecular-engineering-sequence-design-with-proteinmpnn': {
+    verdict: 'supported',
+    sourceContentInspected: true,
+    inspectedContentLocation: 'bioRxiv preprint abstract (10.1101/2022.06.03.494563v1) of the ProteinMPNN study',
+    reason:
+      'The abstract presents ProteinMPNN as a deep-learning protein sequence design method and reports 52.4 percent native sequence recovery against 32.9 percent for Rosetta.',
+    remediation: 'None, subject to confirming the published Science version matches the preprint on this point.',
+    origin: 'independently-curated',
+  },
+  'urn:maha:record:biomolecular-engineering-experimental-fold-validation': {
+    verdict: 'supported',
+    sourceContentInspected: true,
+    inspectedContentLocation: 'bioRxiv preprint abstract (10.1101/2022.06.03.494563v1) of the ProteinMPNN study',
+    reason:
+      'The abstract reports experimental validation of designs by X-ray crystallography, cryo-EM and functional studies.',
+    remediation: 'None, subject to confirming the published version.',
+    origin: 'independently-curated',
+  },
+  'urn:maha:record:biomolecular-engineering-protein-design-success-rate': {
+    verdict: 'partially-supported',
+    sourceContentInspected: true,
+    inspectedContentLocation: 'bioRxiv preprint abstract (10.1101/2022.06.03.494563v1) of the ProteinMPNN study',
+    reason:
+      'The abstract reports rescuing previously failed designs and gives a sequence-recovery figure, but does not establish a design success rate as a bounded measure.',
+    remediation: 'Read the benchmark sections for a success-rate definition, or narrow the record to sequence recovery.',
+  },
+  'urn:maha:record:biomolecular-engineering-off-target-binding-characterization': {
+    verdict: 'insufficient-evidence',
+    sourceContentInspected: true,
+    inspectedContentLocation: 'bioRxiv preprint abstract (10.1101/2022.06.03.494563v1) of the ProteinMPNN study',
+    reason:
+      'Off-target binding is not addressed at abstract level. Only the abstract was read, so absence there does not establish that the study omits it.',
+    remediation: 'Read the supplementary methods, then confirm or replace.',
+  },
+  'urn:maha:record:biomolecular-engineering-design-to-assay-provenance': {
+    verdict: 'insufficient-evidence',
+    sourceContentInspected: true,
+    inspectedContentLocation: 'bioRxiv preprint abstract (10.1101/2022.06.03.494563v1) of the ProteinMPNN study',
+    reason:
+      'Provenance tracking from design to assay is not addressed at abstract level, and deeper sections were not read.',
+    remediation: 'Read the methods for a provenance chain, or bind a source that treats design-to-assay traceability.',
+  },
+  'urn:maha:record:longevity-metabolism-senolytic-selectivity': {
+    verdict: 'supported',
+    sourceContentInspected: true,
+    inspectedContentLocation: 'Aging Cell 14(4) 644-658 article text: survival pathways, compound screening, cell assays and mouse experiments',
+    reason:
+      'The article reports dasatinib and quercetin preferentially killing senescent rather than proliferating cells, which is the record subject.',
+    remediation: 'None. Record the mapping as curated rather than positional.',
+    origin: 'independently-curated',
+  },
+  'urn:maha:record:longevity-metabolism-apoptosis-in-senescent-cells': {
+    verdict: 'supported',
+    sourceContentInspected: true,
+    inspectedContentLocation: 'Aging Cell 14(4) 644-658 article text: survival pathways, compound screening, cell assays and mouse experiments',
+    reason:
+      'The article establishes pro-survival and anti-apoptotic networks in senescent cells and shows selective death on siRNA knockdown and pharmacological intervention.',
+    remediation: 'None. Record the mapping as curated rather than positional.',
+    origin: 'independently-curated',
+  },
+  'urn:maha:record:longevity-metabolism-cellular-senescence-markers': {
+    verdict: 'supported',
+    sourceContentInspected: true,
+    inspectedContentLocation: 'Aging Cell 14(4) 644-658 article text: survival pathways, compound screening, cell assays and mouse experiments',
+    reason:
+      'The article measures SA-beta-galactosidase activity and p16 expression as senescence markers throughout its assays.',
+    remediation: 'None. Record the mapping as curated rather than positional.',
+    origin: 'independently-curated',
+  },
+  'urn:maha:record:longevity-metabolism-senescent-cell-clearance': {
+    verdict: 'supported',
+    sourceContentInspected: true,
+    inspectedContentLocation: 'Aging Cell 14(4) 644-658 article text: survival pathways, compound screening, cell assays and mouse experiments',
+    reason:
+      'The article documents senescent-cell clearance with functional improvement in aged, radiation-exposed and Ercc1 mutant mice.',
+    remediation: 'None. Record the mapping as curated rather than positional.',
+    origin: 'independently-curated',
+  },
+  'urn:maha:record:longevity-metabolism-senescence-associated-secretory-phenotype': {
+    verdict: 'partially-supported',
+    sourceContentInspected: true,
+    inspectedContentLocation: 'Aging Cell 14(4) 644-658 article text: survival pathways, compound screening, cell assays and mouse experiments',
+    reason:
+      'The SASP is referenced as a contributor to dysfunction but is not itself measured or characterised in the inspected sections.',
+    remediation: 'Bind a source that characterises the SASP directly, or narrow the record.',
+  },
+  'urn:maha:record:mechanistic-interpretability-sparse-autoencoder-dictionaries': {
+    verdict: 'supported',
+    sourceContentInspected: true,
+    inspectedContentLocation: 'arXiv:2309.08600 abstract and method summary',
+    reason:
+      'The abstract describes using sparse autoencoders to learn sets of sparsely activating features from language-model activations, which is the dictionary the record names.',
+    remediation: 'None. Record the mapping as curated rather than positional.',
+    origin: 'independently-curated',
+  },
+  'urn:maha:record:mechanistic-interpretability-sae-encoder-decoder': {
+    verdict: 'supported',
+    sourceContentInspected: true,
+    inspectedContentLocation: 'arXiv:2309.08600 abstract and method summary',
+    reason:
+      'The method reconstructs internal activations through an autoencoder, so the encoder and decoder are the mechanism the paper uses.',
+    remediation: 'None. Record the mapping as curated rather than positional.',
+    origin: 'independently-curated',
+  },
+  'urn:maha:record:mechanistic-interpretability-sae-sparsity-fidelity-tradeoff': {
+    verdict: 'partially-supported',
+    sourceContentInspected: true,
+    inspectedContentLocation: 'arXiv:2309.08600 abstract and method summary',
+    reason:
+      'The training objective balances sparsity against reconstruction of activations, but the abstract does not establish a characterised tradeoff curve.',
+    remediation: 'Read the reconstruction and sparsity objective sections for a measured tradeoff before confirming.',
+  },
+  'urn:maha:record:mechanistic-interpretability-feature-splitting': {
+    verdict: 'insufficient-evidence',
+    sourceContentInspected: true,
+    inspectedContentLocation: 'arXiv:2309.08600 abstract and method summary',
+    reason:
+      'Feature splitting is not addressed at abstract level. Only the abstract and method summary were read, and the paper has feature-analysis sections that were not inspected.',
+    remediation: 'Read the feature-analysis sections, then confirm or replace.',
+  },
+  'urn:maha:record:mechanistic-interpretability-feature-absorption': {
+    verdict: 'insufficient-evidence',
+    sourceContentInspected: true,
+    inspectedContentLocation: 'arXiv:2309.08600 abstract and method summary',
+    chronologicalRiskIndicator: true,
+    reason:
+      'Feature absorption is not addressed at abstract level and the feature-analysis sections were not read. The term also postdates this work, which is recorded as a risk indicator and is not itself a basis for mismatch.',
+    remediation: 'Read the feature-analysis sections, or bind a source that treats absorption directly.',
+  },
+  'urn:maha:record:agentic-systems-mcp-agent-plan-execution-separation': {
+    verdict: 'mismatched',
+    sourceContentInspected: true,
+    inspectedContentLocation: 'arXiv:2210.03629 abstract and single-agent trajectory description',
+    mismatchBasis: 'inspected-content-different-subject',
+    reason:
+      'The source was read. ReAct is a single-agent method that interleaves reasoning traces with actions, and it does not treat a separation of planning from execution. The paper affirmatively describes one agent, so this is a statement about what it is, not merely an absence.',
+    remediation: 'Bind a multi-agent source, or for the plan-execution record note that ReAct argues against separating the two.',
+  },
+  'urn:maha:record:agentic-systems-mcp-multi-agent-role-assignment': {
+    verdict: 'mismatched',
+    sourceContentInspected: true,
+    inspectedContentLocation: 'arXiv:2210.03629 abstract and single-agent trajectory description',
+    mismatchBasis: 'inspected-content-different-subject',
+    reason:
+      'The source was read. ReAct is a single-agent method that interleaves reasoning traces with actions, and it does not treat multi-agent role assignment. The paper affirmatively describes one agent, so this is a statement about what it is, not merely an absence.',
+    remediation: 'Bind a multi-agent source, or for the plan-execution record note that ReAct argues against separating the two.',
+  },
+  'urn:maha:record:agentic-systems-mcp-multi-agent-coordination-protocols': {
+    verdict: 'mismatched',
+    sourceContentInspected: true,
+    inspectedContentLocation: 'arXiv:2210.03629 abstract and single-agent trajectory description',
+    mismatchBasis: 'inspected-content-different-subject',
+    reason:
+      'The source was read. ReAct is a single-agent method that interleaves reasoning traces with actions, and it does not treat multi-agent coordination protocols. The paper affirmatively describes one agent, so this is a statement about what it is, not merely an absence.',
+    remediation: 'Bind a multi-agent source, or for the plan-execution record note that ReAct argues against separating the two.',
+  },
+  'urn:maha:record:agentic-systems-mcp-multi-agent-deadlock': {
+    verdict: 'mismatched',
+    sourceContentInspected: true,
+    inspectedContentLocation: 'arXiv:2210.03629 abstract and single-agent trajectory description',
+    mismatchBasis: 'inspected-content-different-subject',
+    reason:
+      'The source was read. ReAct is a single-agent method that interleaves reasoning traces with actions, and it does not treat multi-agent deadlock. The paper affirmatively describes one agent, so this is a statement about what it is, not merely an absence.',
+    remediation: 'Bind a multi-agent source, or for the plan-execution record note that ReAct argues against separating the two.',
+  },
+  'urn:maha:record:agentic-systems-mcp-distributed-agent-consensus': {
+    verdict: 'mismatched',
+    sourceContentInspected: true,
+    inspectedContentLocation: 'arXiv:2210.03629 abstract and single-agent trajectory description',
+    mismatchBasis: 'inspected-content-different-subject',
+    reason:
+      'The source was read. ReAct is a single-agent method that interleaves reasoning traces with actions, and it does not treat distributed agent consensus. The paper affirmatively describes one agent, so this is a statement about what it is, not merely an absence.',
+    remediation: 'Bind a multi-agent source, or for the plan-execution record note that ReAct argues against separating the two.',
+  },
+  'urn:maha:record:neurotechnology-bci-optogenetic-channelrhodopsin': {
+    verdict: 'inaccessible-source',
+    sourceContentInspected: false,
+    inspectedContentLocation: null,
+    reason:
+      'Retrieval was attempted for this batch. The publisher redirects to an authentication wall, which was not followed, so the content could not be read. An inaccessible source is never treated as content-confirmed.',
+    remediation: 'Obtain the article through a retrievable route, inspect it, then confirm or replace the mapping.',
+  },
+  'urn:maha:record:neurotechnology-bci-channelrhodopsin-photocurrent-kinetics': {
+    verdict: 'inaccessible-source',
+    sourceContentInspected: false,
+    inspectedContentLocation: null,
+    reason:
+      'Retrieval was attempted for this batch. The publisher redirects to an authentication wall, which was not followed, so the content could not be read. An inaccessible source is never treated as content-confirmed.',
+    remediation: 'Obtain the article through a retrievable route, inspect it, then confirm or replace the mapping.',
+  },
+  'urn:maha:record:neurotechnology-bci-opsin-spectral-sensitivity': {
+    verdict: 'inaccessible-source',
+    sourceContentInspected: false,
+    inspectedContentLocation: null,
+    reason:
+      'Retrieval was attempted for this batch. The publisher redirects to an authentication wall, which was not followed, so the content could not be read. An inaccessible source is never treated as content-confirmed.',
+    remediation: 'Obtain the article through a retrievable route, inspect it, then confirm or replace the mapping.',
+  },
+  'urn:maha:record:neurotechnology-bci-light-delivery-tissue-heating': {
+    verdict: 'inaccessible-source',
+    sourceContentInspected: false,
+    inspectedContentLocation: null,
+    reason:
+      'Retrieval was attempted for this batch. The publisher redirects to an authentication wall, which was not followed, so the content could not be read. An inaccessible source is never treated as content-confirmed.',
+    remediation: 'Obtain the article through a retrievable route, inspect it, then confirm or replace the mapping.',
+  },
+  'urn:maha:record:neurotechnology-bci-stimulation-artifact-rejection': {
+    verdict: 'inaccessible-source',
+    sourceContentInspected: false,
+    inspectedContentLocation: null,
+    reason:
+      'Retrieval was attempted for this batch. The publisher redirects to an authentication wall, which was not followed, so the content could not be read. An inaccessible source is never treated as content-confirmed.',
+    remediation: 'Obtain the article through a retrievable route, inspect it, then confirm or replace the mapping.',
+  },
+  'urn:maha:record:critical-supply-chains-fluorinated-resist-components': {
+    verdict: 'inaccessible-source',
+    sourceContentInspected: false,
+    inspectedContentLocation: null,
+    reason:
+      'Retrieval was attempted for this batch. The USGS commodity chapter returned HTTP 403, so the content could not be read. An inaccessible source is never treated as content-confirmed.',
+    remediation: 'Obtain the commodity chapter through a retrievable route, inspect it, then confirm or replace the mapping.',
+  },
+  'urn:maha:record:critical-supply-chains-gallium-bauxite-byproduct-flow': {
+    verdict: 'inaccessible-source',
+    sourceContentInspected: false,
+    inspectedContentLocation: null,
+    reason:
+      'Retrieval was attempted for this batch. The USGS commodity chapter returned HTTP 403, so the content could not be read. An inaccessible source is never treated as content-confirmed.',
+    remediation: 'Obtain the commodity chapter through a retrievable route, inspect it, then confirm or replace the mapping.',
+  },
+  'urn:maha:record:critical-supply-chains-gallium-zinc-processing-byproduct': {
+    verdict: 'inaccessible-source',
+    sourceContentInspected: false,
+    inspectedContentLocation: null,
+    reason:
+      'Retrieval was attempted for this batch. The USGS commodity chapter returned HTTP 403, so the content could not be read. An inaccessible source is never treated as content-confirmed.',
+    remediation: 'Obtain the commodity chapter through a retrievable route, inspect it, then confirm or replace the mapping.',
+  },
+  'urn:maha:record:critical-supply-chains-germanium-zinc-refining-flow': {
+    verdict: 'inaccessible-source',
+    sourceContentInspected: false,
+    inspectedContentLocation: null,
+    reason:
+      'Retrieval was attempted for this batch. The USGS commodity chapter returned HTTP 403, so the content could not be read. An inaccessible source is never treated as content-confirmed.',
+    remediation: 'Obtain the commodity chapter through a retrievable route, inspect it, then confirm or replace the mapping.',
+  },
+  'urn:maha:record:critical-supply-chains-germanium-coal-ash-recovery': {
+    verdict: 'inaccessible-source',
+    sourceContentInspected: false,
+    inspectedContentLocation: null,
+    reason:
+      'Retrieval was attempted for this batch. The USGS commodity chapter returned HTTP 403, so the content could not be read. An inaccessible source is never treated as content-confirmed.',
+    remediation: 'Obtain the commodity chapter through a retrievable route, inspect it, then confirm or replace the mapping.',
+  },
 }
 
 /**
@@ -818,10 +1163,239 @@ const PUBLISHER_VERIFIED: Readonly<Record<string, string>> = {
     'Fetched https://transformer-circuits.pub/2022/toy_model/index.html, which serves the declared Toy Models of Superposition article.',
   'source-critical-supply-chains-supply-analysis':
     'Fetched the USGS Mineral Supply Chain Analysis page, which serves the declared criticality and supply-analysis material.',
+  'source-mechanistic-interpretability-sae':
+    'Fetched arXiv:2309.08600, which serves the declared "Sparse Autoencoders Find Highly Interpretable Features in Language Models" record.',
+  'source-agentic-systems-mcp-react':
+    'Fetched arXiv:2210.03629, which serves the declared "ReAct: Synergizing Reasoning and Acting in Language Models" record.',
 }
 
 /** Records whose source URL was requested and could not be retrieved. */
 const INACCESSIBLE_CONTRACTS: ReadonlySet<string> = new Set(['source-critical-supply-chains-pp1802'])
+
+
+/* ------------------------------------------------------ batch registry ---- */
+
+/**
+ * Batch membership, first-class and machine-checkable.
+ *
+ * Batch 3 recorded its judgements as `...Object.fromEntries([...].map(...))`
+ * spreads. Two things follow from that shape, both verified rather than
+ * assumed. A duplicate key inside a spread is not a compiler error, so a record
+ * could be silently re-judged by a later batch and would keep the wrong
+ * `inspectedContentLocation`; only pinned count snapshots would notice, and a
+ * count-preserving duplicate would not be noticed at all. And the verdict
+ * strings inside those arrays are not type-checked: injecting a nonsense
+ * verdict passes `tsc` and reaches `verdictTotals` as an undeclared key with a
+ * NaN count. The existing vocabulary test does catch that, but nothing catches
+ * it at the type or module-load layer.
+ *
+ * Membership is therefore declared explicitly here and enforced below, and
+ * batch 4 is written as plain object keys so both problems are compiler errors
+ * for anything added from now on.
+ */
+
+export const ALIGNMENT_BATCHES = ['batch-1', 'batch-2', 'batch-3', 'batch-4'] as const
+export type AlignmentBatchId = (typeof ALIGNMENT_BATCHES)[number]
+
+const BATCH_1_RECORDS: readonly string[] = [
+    'urn:maha:record:advanced-materials-hexagonal-boron-nitride-dielectrics',
+    'urn:maha:record:agentic-systems-mcp-mcp-capability-negotiation',
+    'urn:maha:record:agentic-systems-mcp-mcp-client-server-roles',
+    'urn:maha:record:agentic-systems-mcp-mcp-tool-discovery',
+    'urn:maha:record:agentic-systems-mcp-mcp-tool-input-schemas',
+    'urn:maha:record:agentic-systems-mcp-mcp-tool-result-contracts',
+    'urn:maha:record:fusion-plasma-systems-central-solenoid-inductive-drive',
+    'urn:maha:record:fusion-plasma-systems-magnetic-confinement',
+    'urn:maha:record:fusion-plasma-systems-poloidal-field-coils',
+    'urn:maha:record:fusion-plasma-systems-tokamak-plasma-equilibrium',
+    'urn:maha:record:fusion-plasma-systems-toroidal-field-coils',
+    'urn:maha:record:neurotechnology-bci-spike-sorting-boundaries',
+]
+
+const BATCH_2_RECORDS: readonly string[] = [
+    'urn:maha:record:advanced-materials-correlated-insulating-states',
+    'urn:maha:record:advanced-materials-direct-gap-mos2',
+    'urn:maha:record:advanced-materials-graphene-hbn-heterostructures',
+    'urn:maha:record:advanced-materials-graphene-monolayers',
+    'urn:maha:record:advanced-materials-magic-angle-superconductivity',
+    'urn:maha:record:advanced-materials-moire-superlattices',
+    'urn:maha:record:advanced-materials-tmd-monolayers',
+    'urn:maha:record:advanced-materials-twist-angle-control',
+    'urn:maha:record:advanced-materials-valley-polarized-excitons',
+    'urn:maha:record:agentic-systems-mcp-mcp-prompt-templates',
+    'urn:maha:record:agentic-systems-mcp-mcp-resource-discovery',
+    'urn:maha:record:agentic-systems-mcp-mcp-session-lifecycle',
+    'urn:maha:record:agentic-systems-mcp-tool-allowlisting',
+    'urn:maha:record:agentic-systems-mcp-tool-deny-by-default',
+    'urn:maha:record:biomolecular-engineering-de-novo-binder-design',
+    'urn:maha:record:biomolecular-engineering-motif-scaffolding',
+    'urn:maha:record:biomolecular-engineering-protein-backbone-diffusion',
+    'urn:maha:record:biomolecular-engineering-structure-prediction-filtering',
+    'urn:maha:record:biomolecular-engineering-unconditional-protein-generation',
+    'urn:maha:record:critical-supply-chains-critical-mineral-import-reliance',
+    'urn:maha:record:critical-supply-chains-export-control-exposure',
+    'urn:maha:record:critical-supply-chains-material-substitution-boundaries',
+    'urn:maha:record:critical-supply-chains-single-country-processing-concentration',
+    'urn:maha:record:critical-supply-chains-supply-chain-data-uncertainty',
+    'urn:maha:record:fusion-plasma-systems-divertor-heat-exhaust',
+    'urn:maha:record:fusion-plasma-systems-edge-localized-modes',
+    'urn:maha:record:fusion-plasma-systems-plasma-facing-components',
+    'urn:maha:record:fusion-plasma-systems-plasma-position-and-shape-control',
+    'urn:maha:record:fusion-plasma-systems-resonant-magnetic-perturbations',
+    'urn:maha:record:mechanistic-interpretability-neural-feature-superposition',
+    'urn:maha:record:mechanistic-interpretability-polysemantic-neurons',
+    'urn:maha:record:mechanistic-interpretability-representation-probing-boundary',
+    'urn:maha:record:mechanistic-interpretability-superposition-geometry',
+    'urn:maha:record:mechanistic-interpretability-toy-models-of-superposition',
+]
+
+const BATCH_3_RECORDS: readonly string[] = [
+    'urn:maha:record:advanced-materials-interlayer-excitons',
+    'urn:maha:record:advanced-materials-quantum-anomalous-hall-state',
+    'urn:maha:record:advanced-materials-spin-momentum-locking',
+    'urn:maha:record:advanced-materials-tmd-heterobilayers',
+    'urn:maha:record:advanced-materials-topological-insulator-surface-states',
+    'urn:maha:record:agentic-systems-mcp-context-window-position-effects',
+    'urn:maha:record:agentic-systems-mcp-context-window-token-degradation',
+    'urn:maha:record:agentic-systems-mcp-human-approval-boundaries',
+    'urn:maha:record:agentic-systems-mcp-retrieval-context-selection',
+    'urn:maha:record:agentic-systems-mcp-tool-result-context-injection',
+    'urn:maha:record:biomolecular-engineering-cell-free-reaction-yield',
+    'urn:maha:record:biomolecular-engineering-cell-free-transcription-translation',
+    'urn:maha:record:biomolecular-engineering-crude-extract-cell-free-systems',
+    'urn:maha:record:biomolecular-engineering-energy-regeneration-in-cell-free-systems',
+    'urn:maha:record:biomolecular-engineering-purified-component-expression-systems',
+    'urn:maha:record:critical-supply-chains-dysprosium-ore-to-oxide',
+    'urn:maha:record:critical-supply-chains-heavy-rare-earth-diffusion',
+    'urn:maha:record:critical-supply-chains-nd-fe-b-magnet-alloying',
+    'urn:maha:record:critical-supply-chains-neodymium-praseodymium-separation',
+    'urn:maha:record:critical-supply-chains-rare-earth-solvent-extraction',
+    'urn:maha:record:fusion-plasma-systems-breeding-blanket-test-modules',
+    'urn:maha:record:fusion-plasma-systems-cryogenic-magnet-cooling',
+    'urn:maha:record:fusion-plasma-systems-plasma-diagnostics',
+    'urn:maha:record:fusion-plasma-systems-tritium-fuel-cycle',
+    'urn:maha:record:fusion-plasma-systems-vacuum-vessel-boundary',
+    'urn:maha:record:longevity-metabolism-autophagic-flux',
+    'urn:maha:record:longevity-metabolism-autophagosome-abundance',
+    'urn:maha:record:longevity-metabolism-lc3-turnover-assays',
+    'urn:maha:record:longevity-metabolism-lysosomal-degradation-blockade',
+    'urn:maha:record:longevity-metabolism-nad-consumption-by-parps',
+    'urn:maha:record:longevity-metabolism-nad-salvage-pathway',
+    'urn:maha:record:longevity-metabolism-nampt-rate-limiting-step',
+    'urn:maha:record:longevity-metabolism-nmn-and-nr-precursors',
+    'urn:maha:record:longevity-metabolism-nmnat-compartmentalization',
+    'urn:maha:record:longevity-metabolism-p62-sqstm1-turnover',
+    'urn:maha:record:mechanistic-interpretability-activation-patching',
+    'urn:maha:record:mechanistic-interpretability-causal-scrubbing',
+    'urn:maha:record:mechanistic-interpretability-interchange-interventions',
+    'urn:maha:record:mechanistic-interpretability-model-component-ablation',
+    'urn:maha:record:mechanistic-interpretability-path-patching',
+    'urn:maha:record:neurotechnology-bci-adaptive-stimulation-policies',
+    'urn:maha:record:neurotechnology-bci-electrocorticography-spatial-resolution',
+    'urn:maha:record:neurotechnology-bci-electrode-tissue-interface',
+    'urn:maha:record:neurotechnology-bci-extracellular-spike-recording',
+    'urn:maha:record:neurotechnology-bci-flexible-conformal-electrode-arrays',
+    'urn:maha:record:neurotechnology-bci-impedance-and-noise',
+    'urn:maha:record:neurotechnology-bci-micro-ecog-arrays',
+    'urn:maha:record:neurotechnology-bci-neuropixels-channel-selection',
+    'urn:maha:record:neurotechnology-bci-neuropixels-cmos-probe',
+    'urn:maha:record:neurotechnology-bci-neuropixels-recording-sites',
+]
+
+const BATCH_4_RECORDS: readonly string[] = [
+    'urn:maha:record:advanced-materials-dry-transfer-contamination',
+    'urn:maha:record:advanced-materials-encapsulation-boundaries',
+    'urn:maha:record:advanced-materials-interface-bubbles-and-strain',
+    'urn:maha:record:advanced-materials-two-dimensional-magnetism',
+    'urn:maha:record:advanced-materials-van-der-waals-assembly',
+    'urn:maha:record:agentic-systems-mcp-agent-plan-execution-separation',
+    'urn:maha:record:agentic-systems-mcp-distributed-agent-consensus',
+    'urn:maha:record:agentic-systems-mcp-multi-agent-coordination-protocols',
+    'urn:maha:record:agentic-systems-mcp-multi-agent-deadlock',
+    'urn:maha:record:agentic-systems-mcp-multi-agent-role-assignment',
+    'urn:maha:record:biomolecular-engineering-design-to-assay-provenance',
+    'urn:maha:record:biomolecular-engineering-experimental-fold-validation',
+    'urn:maha:record:biomolecular-engineering-off-target-binding-characterization',
+    'urn:maha:record:biomolecular-engineering-protein-design-success-rate',
+    'urn:maha:record:biomolecular-engineering-sequence-design-with-proteinmpnn',
+    'urn:maha:record:critical-supply-chains-fluorinated-resist-components',
+    'urn:maha:record:critical-supply-chains-gallium-bauxite-byproduct-flow',
+    'urn:maha:record:critical-supply-chains-gallium-zinc-processing-byproduct',
+    'urn:maha:record:critical-supply-chains-germanium-coal-ash-recovery',
+    'urn:maha:record:critical-supply-chains-germanium-zinc-refining-flow',
+    'urn:maha:record:fusion-plasma-systems-cable-in-conduit-conductors',
+    'urn:maha:record:fusion-plasma-systems-rebco-high-field-magnets',
+    'urn:maha:record:fusion-plasma-systems-stellarator-field-optimization',
+    'urn:maha:record:fusion-plasma-systems-stellarator-magnetic-coils',
+    'urn:maha:record:fusion-plasma-systems-superconducting-quench-protection',
+    'urn:maha:record:longevity-metabolism-apoptosis-in-senescent-cells',
+    'urn:maha:record:longevity-metabolism-cellular-senescence-markers',
+    'urn:maha:record:longevity-metabolism-senescence-associated-secretory-phenotype',
+    'urn:maha:record:longevity-metabolism-senescent-cell-clearance',
+    'urn:maha:record:longevity-metabolism-senolytic-selectivity',
+    'urn:maha:record:mechanistic-interpretability-feature-absorption',
+    'urn:maha:record:mechanistic-interpretability-feature-splitting',
+    'urn:maha:record:mechanistic-interpretability-sae-encoder-decoder',
+    'urn:maha:record:mechanistic-interpretability-sae-sparsity-fidelity-tradeoff',
+    'urn:maha:record:mechanistic-interpretability-sparse-autoencoder-dictionaries',
+    'urn:maha:record:neurotechnology-bci-channelrhodopsin-photocurrent-kinetics',
+    'urn:maha:record:neurotechnology-bci-light-delivery-tissue-heating',
+    'urn:maha:record:neurotechnology-bci-opsin-spectral-sensitivity',
+    'urn:maha:record:neurotechnology-bci-optogenetic-channelrhodopsin',
+    'urn:maha:record:neurotechnology-bci-stimulation-artifact-rejection',
+]
+
+export const ALIGNMENT_BATCH_MEMBERSHIP: Readonly<Record<AlignmentBatchId, readonly string[]>> = {
+  'batch-1': BATCH_1_RECORDS,
+  'batch-2': BATCH_2_RECORDS,
+  'batch-3': BATCH_3_RECORDS,
+  'batch-4': BATCH_4_RECORDS,
+}
+
+/** Which batch judged a record, or null when it carries only default state. */
+export function batchOf(recordId: string): AlignmentBatchId | null {
+  for (const batchId of ALIGNMENT_BATCHES) {
+    if (ALIGNMENT_BATCH_MEMBERSHIP[batchId].includes(recordId)) return batchId
+  }
+  return null
+}
+
+/* -- guards: membership is disjoint, complete, and batch 4 is well formed -- */
+
+{
+  const batch4 = ALIGNMENT_BATCH_MEMBERSHIP['batch-4']
+  if (batch4.length !== 40) throw new Error(`Batch 4 must contain exactly 40 records; found ${batch4.length}.`)
+
+  const seen = new Map<string, AlignmentBatchId>()
+  for (const batchId of ALIGNMENT_BATCHES) {
+    for (const recordId of ALIGNMENT_BATCH_MEMBERSHIP[batchId]) {
+      const prior = seen.get(recordId)
+      if (prior) {
+        throw new Error(`${recordId} is claimed by both ${prior} and ${batchId}; batches must be disjoint.`)
+      }
+      seen.set(recordId, batchId)
+      if (!(recordId in JUDGEMENTS)) throw new Error(`${recordId} is in ${batchId} but has no judgement.`)
+    }
+  }
+  for (const recordId of Object.keys(JUDGEMENTS)) {
+    if (!seen.has(recordId)) throw new Error(`${recordId} is judged but belongs to no batch.`)
+  }
+
+  const earlier = new Set([...BATCH_1_RECORDS, ...BATCH_2_RECORDS, ...BATCH_3_RECORDS])
+  const perDomain = new Map<string, number>()
+  for (const recordId of batch4) {
+    if (earlier.has(recordId)) {
+      throw new Error(`${recordId} was already judged before batch 4; batch 4 must be previously uninspected.`)
+    }
+    const record = FRONTIER_DOMAIN_GRAPH_RECORDS.find((entry) => entry.id === recordId)
+    if (!record) throw new Error(`${recordId} is in batch 4 but is not a frontier record.`)
+    perDomain.set(record.domainSlug, (perDomain.get(record.domainSlug) ?? 0) + 1)
+  }
+  if (perDomain.size !== 8) throw new Error(`Batch 4 must cover eight domains; found ${perDomain.size}.`)
+  for (const [domainSlug, count] of perDomain) {
+    if (count !== 5) throw new Error(`Batch 4 must contain five records per domain; ${domainSlug} has ${count}.`)
+  }
+}
 
 /* ------------------------------------------------------------- compiler --- */
 
@@ -985,6 +1559,41 @@ export function originTotals(): Record<AssignmentOrigin, number> {
   const totals = Object.fromEntries(ASSIGNMENT_ORIGINS.map((origin) => [origin, 0])) as Record<AssignmentOrigin, number>
   for (const entry of FRONTIER_ALIGNMENT_AUDIT) totals[entry.assignmentOrigin] += 1
   return totals
+}
+
+export interface BatchStats {
+  batchId: AlignmentBatchId
+  attempted: number
+  contentInspected: number
+  inaccessible: number
+  supported: number
+  partiallySupported: number
+  mismatched: number
+  insufficientEvidence: number
+  alignmentClear: number
+}
+
+/**
+ * Per-batch outcome. `alignmentClear` is this batch's contribution to the
+ * cleared set, not a running total: every record belongs to exactly one batch,
+ * so the per-batch figures sum to the whole.
+ */
+export function batchStats(): readonly BatchStats[] {
+  return ALIGNMENT_BATCHES.map((batchId) => {
+    const rows = FRONTIER_ALIGNMENT_AUDIT.filter((entry) => batchOf(entry.recordId) === batchId)
+    const count = (verdict: AlignmentVerdict) => rows.filter((entry) => entry.evidence.subjectAligned === verdict).length
+    return {
+      batchId,
+      attempted: rows.length,
+      contentInspected: rows.filter((entry) => entry.evidence.sourceContentInspected).length,
+      inaccessible: count('inaccessible-source'),
+      supported: count('supported'),
+      partiallySupported: count('partially-supported'),
+      mismatched: count('mismatched'),
+      insufficientEvidence: count('insufficient-evidence'),
+      alignmentClear: rows.filter((entry) => alignmentBlockers(entry.recordId).length === 0).length,
+    }
+  })
 }
 
 export function auditDigest(): string {
