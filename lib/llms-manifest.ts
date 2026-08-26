@@ -8,6 +8,7 @@ import {
 import type { EpistemicRecord } from './epistemic-schema.ts'
 import { epistemicRecordPath } from './epistemic-publication.ts'
 import { EPISTEMIC_DOMAINS } from './epistemic-pilots.ts'
+import { getPublishedSubstantialPage } from './substantial-page-public.ts'
 
 const RESEARCH_URL = 'https://research.mahastrategies.com'
 
@@ -63,6 +64,19 @@ export function buildLlmsManifest(
           `  Version: ${record.publication.canonicalVersion}`,
         ])
       : ['- No active canonical database releases are currently listed.']),
+    '',
+    '## Substantial source-bound references',
+    ...canonicalEpistemicRecords.flatMap((record) => {
+      const page = getPublishedSubstantialPage(record.id)
+      return page?.quality.eligible ? [
+        `- ${record.title} [${page.publicationVersion}]`,
+        `  URL: https://www.mahastrategies.com${page.path}`,
+        `  Evidence coverage: ${page.quality.evidenceCoverage.claimsExplained}/${page.quality.evidenceCoverage.claimsTotal} claims; ${page.quality.informationValue.dimensionsCovered} information dimensions`,
+      ] : []
+    }),
+    ...(canonicalEpistemicRecords.some((record) => getPublishedSubstantialPage(record.id)?.quality.eligible)
+      ? []
+      : ['- No quality-gated substantial references are active in the supplied canonical release set.']),
     '',
     '## Automation and MCP',
     '- Canonical MCP tool manifest: https://www.mahastrategies.com/mcp.json',
