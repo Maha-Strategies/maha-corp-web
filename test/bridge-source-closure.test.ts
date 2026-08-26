@@ -16,7 +16,7 @@ import {
 import { QUANTUM_BRIDGE_AUDIT, buildGapReport, promotionReadyBridges } from '../lib/quantum-bridge-audit-package.ts'
 import { QUANTUM_BRIDGE_CANDIDATES } from '../lib/quantum-bridge-candidates.ts'
 import { EPISTEMIC_RECORDS } from '../lib/epistemic-pilots.ts'
-import { resolveEpistemicReference, isResolvedOutcome } from '../lib/epistemic-reference-resolver.ts'
+import { RECORD_ALIASES, resolveEpistemicReference, isResolvedOutcome } from '../lib/epistemic-reference-resolver.ts'
 import { FRONTIER_CANARY_RECORDS, FRONTIER_CANARY_CONTROL_RECORDS } from '../lib/frontier-canonicalization.ts'
 
 /* ---------------------------------------------------------------- ledger -- */
@@ -109,20 +109,27 @@ test('an alias is only used for semantic equivalence, never for a similar topic'
 })
 
 test('every disposition key matches a genuinely unresolved endpoint', () => {
+  // An endpoint may since have been closed by a declared record alias. That is
+  // the alias doing its job, not a stale disposition, so the rule is that an
+  // endpoint resolves only when an alias was explicitly declared for it.
+  const aliased = new Set(RECORD_ALIASES.map((alias) => alias.alias))
   for (const entry of ENDPOINT_DISPOSITIONS) {
     const result = resolveEpistemicReference(entry.submittedReference)
-    assert.equal(
-      isResolvedOutcome(result.outcome),
-      false,
-      `${entry.key} is dispositioned but already resolves`,
-    )
+    if (isResolvedOutcome(result.outcome)) {
+      assert.ok(
+        aliased.has(entry.submittedReference),
+        `${entry.key} resolves without a declared alias`,
+      )
+      continue
+    }
+    assert.equal(isResolvedOutcome(result.outcome), false)
   }
 })
 
 /* ------------------------------------------------------------ candidates -- */
 
-test('the sprint creates at most eight endpoint candidates', () => {
-  assert.ok(ENDPOINT_CANDIDATES.length <= 8)
+test('the endpoint-closure batches create a bounded, unique candidate set', () => {
+  assert.ok(ENDPOINT_CANDIDATES.length <= 11)
   assert.equal(new Set(ENDPOINT_CANDIDATES.map((candidate) => candidate.id)).size, ENDPOINT_CANDIDATES.length)
 })
 
@@ -147,8 +154,17 @@ test('no candidate enters the canonical resolver pool', () => {
 })
 
 test('a candidate without an exact locator cannot be promoted', () => {
+  // Originally every candidate lacked a locator, so this asserted the blocker
+  // was present on all of them. Two candidates now carry inspected locators.
+  // The rule being protected is the implication, not the old snapshot: a
+  // missing locator must still block, and nothing may be promotable.
   for (const candidate of ENDPOINT_CANDIDATES) {
-    assert.ok(candidateBlockers(candidate).includes('source-missing-locator'))
+    if (candidate.sources.some((source) => !source.locator)) {
+      assert.ok(
+        candidateBlockers(candidate).includes('source-missing-locator'),
+        `${candidate.id} is missing a locator without being blocked for it`,
+      )
+    }
   }
   assert.deepEqual([...promotableEndpointCandidates()], [])
 })

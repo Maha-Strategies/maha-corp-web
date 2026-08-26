@@ -8,7 +8,13 @@ import {
 import { QUANTUM_BRIDGE_CANDIDATES } from '../lib/quantum-bridge-candidates.ts'
 import { BRIDGE_SOURCE_LEDGER } from '../lib/bridge-source-ledger.ts'
 import { ENDPOINT_DISPOSITIONS, dispositionTotals } from '../lib/bridge-endpoint-dispositions.ts'
-import { ENDPOINT_CANDIDATES, candidateBlockers } from '../lib/bridge-endpoint-candidates.ts'
+import { ENDPOINT_CANDIDATES, candidateBlockers, promotableEndpointCandidates } from '../lib/bridge-endpoint-candidates.ts'
+import {
+  QBR_ENDPOINT_CLOSURE_PLAN,
+  classificationTotals,
+  liveOutcome,
+  planDigest,
+} from '../lib/endpoint-closure-plan.ts'
 
 /**
  * Emits the machine- and human-readable gap report for the Q-BR batch.
@@ -26,6 +32,13 @@ writeFileSync(
   `${JSON.stringify(
     {
       ...report,
+      endpointClosure: {
+        planVersion: QBR_ENDPOINT_CLOSURE_PLAN.planVersion,
+        planDigest: planDigest(QBR_ENDPOINT_CLOSURE_PLAN),
+        classificationTotals: classificationTotals(QBR_ENDPOINT_CLOSURE_PLAN),
+        candidateCount: ENDPOINT_CANDIDATES.length,
+        promotableCandidateCount: promotableEndpointCandidates().length,
+      },
       endpoints,
       bridges: QUANTUM_BRIDGE_AUDIT,
       sourceLedger: BRIDGE_SOURCE_LEDGER,
@@ -143,6 +156,26 @@ for (const candidate of ENDPOINT_CANDIDATES) {
   lines.push(
     row([candidate.title, candidate.domainSlug, candidate.recordClass, candidateBlockers(candidate).join(', ') || 'none']),
   )
+}
+lines.push('')
+
+lines.push('## Endpoint closure', '')
+lines.push(
+  `Plan \`${QBR_ENDPOINT_CLOSURE_PLAN.planVersion}\` · digest \`${planDigest(QBR_ENDPOINT_CLOSURE_PLAN)}\`. Full reasoning in \`docs/bridges/endpoint-resolution-plan.md\`.`,
+  '',
+)
+lines.push(
+  `Candidates built: **${ENDPOINT_CANDIDATES.length}**, of which **${promotableEndpointCandidates().length}** are promotable. A candidate is not a canonical record, so building one does not resolve its endpoint.`,
+  '',
+)
+lines.push(row(['Classification', 'Count']), row(['---', '---']))
+for (const [name, count] of Object.entries(classificationTotals(QBR_ENDPOINT_CLOSURE_PLAN))) {
+  lines.push(row([name, String(count)]))
+}
+lines.push('')
+lines.push(row(['Key', 'Classification', 'Live resolver outcome']), row(['---', '---', '---']))
+for (const entry of QBR_ENDPOINT_CLOSURE_PLAN.entries) {
+  lines.push(row([entry.key, entry.classification, liveOutcome(entry)]))
 }
 lines.push('')
 

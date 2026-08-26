@@ -2,8 +2,8 @@
   "auditPackageVersion": "maha-bridge-audit/1.0",
   "resolverVersion": "maha-reference-resolver/1.0",
   "endpointTotals": {
-    "unresolved-record": 23,
-    "alias-resolution": 1
+    "unresolved-record": 22,
+    "alias-resolution": 2
   },
   "sourceTotals": {
     "verified-correct": 16,
@@ -206,6 +206,20 @@
       }
     ]
   },
+  "endpointClosure": {
+    "planVersion": "maha-endpoint-closure/1.0",
+    "planDigest": "sha256:c1061e0ff86d1bb4442768aec653fc7f2ba2fbd4bb4968cb8ac4ffb43288b9f3",
+    "classificationTotals": {
+      "existing-record-alias": 1,
+      "new-record-candidate": 10,
+      "compound-endpoint": 4,
+      "invalid-endpoint": 1,
+      "incompatible-record-class": 4,
+      "blocked-pending-evidence": 3
+    },
+    "candidateCount": 10,
+    "promotableCandidateCount": 0
+  },
   "endpoints": [
     {
       "id": "Q-BR-001",
@@ -323,9 +337,9 @@
       "id": "Q-BR-008",
       "side": "source",
       "submittedReference": "quantum-systems:syndrome-extraction-cycle",
-      "status": "unresolved-record",
-      "recordId": null,
-      "normalizedReference": null
+      "status": "alias-resolution",
+      "recordId": "urn:maha:record:stabilizer-syndrome-measurement",
+      "normalizedReference": "quantum-systems:stabilizer-syndrome-measurement"
     },
     {
       "id": "Q-BR-008",
@@ -926,10 +940,18 @@
           "submittedReference": "quantum-systems:syndrome-extraction-cycle",
           "resolverVersion": "maha-reference-resolver/1.0",
           "outcome": {
-            "status": "unresolved-record",
+            "status": "alias-resolution",
+            "recordId": "urn:maha:record:stabilizer-syndrome-measurement",
             "domainSlug": "quantum-systems",
-            "nearestSlugSuggestion": null,
-            "candidateCount": 25
+            "recordRevisionSha256": "sha256:bcf371de57eeaa64ce9449ccfe776e3c76b2042e729ead3abe644ad279b5ae9c",
+            "appliedRecordAlias": {
+              "alias": "quantum-systems:syndrome-extraction-cycle",
+              "targetRecordId": "urn:maha:record:stabilizer-syndrome-measurement",
+              "since": "maha-reference-resolver/1.1",
+              "reason": "Syndrome extraction and syndrome measurement are the same operation under two standard names, and the canonical record already scopes the repeated round rather than a single shot.",
+              "equivalenceEvidence": "The canonical record describes \"Repeated parity measurements that extract error information while preserving the encoded logical state under the code model.\" Repetition is the cycle and extraction is the syndrome, so the submitted name adds nothing the record does not already bound."
+            },
+            "normalizedReference": "quantum-systems:stabilizer-syndrome-measurement"
           }
         },
         "target": {
@@ -955,7 +977,7 @@
         "bridgeSpecificationVersion": "mps-bridge/1.0",
         "resolverVersion": "maha-reference-resolver/1.0"
       },
-      "auditDigest": "sha256:0c05570bb7b1de94c59bd93e90e82e643f661d4fee4e04436a15eb76c585615c"
+      "auditDigest": "sha256:ff807eedaa8edf580ed4c24835e6b481a0194ff89912ef4a3f397ee599694803"
     },
     {
       "id": "Q-BR-009",
@@ -1832,12 +1854,14 @@
       "originEndpointKey": "Q-BR-002A",
       "independentJustification": "Transmon coherence claims are among the most frequently quoted hardware numbers in the field. A record that names the loss channels separately is the prerequisite for reading any of those claims, bridge or no bridge.",
       "id": "urn:maha:candidate:quantum-systems-transmon-coherence-limits",
+      "proposedCanonicalId": "urn:maha:record:quantum-systems-transmon-coherence-limits",
       "reviewState": "draft",
       "reviewerKind": "internal-editorial",
       "requestedPublicPromotion": false,
+      "isPromotedToPublicPage": false,
       "canonical": false,
       "noindex": true,
-      "provenanceDigest": "sha256:c28c6328b28171453f4755b018cf8998837cc72a19c5ffacbfc28e54ffa8f6e5",
+      "provenanceDigest": "sha256:76ff9745407c934b79e5042b12614b60c50168ee4555460bb9c2a5f9b831734f",
       "blockers": [
         "source-missing-locator",
         "single-source-record"
@@ -1871,12 +1895,14 @@
       "originEndpointKey": "Q-BR-004A",
       "independentJustification": "Most quantum-advantage claims in chemistry rest on phase estimation. A bounded record naming the four cost dependencies is the single most useful guard against the generic \"polynomial scaling\" claim, independent of any bridge.",
       "id": "urn:maha:candidate:quantum-systems-phase-estimation-resource-scaling",
+      "proposedCanonicalId": "urn:maha:record:quantum-systems-phase-estimation-resource-scaling",
       "reviewState": "draft",
       "reviewerKind": "internal-editorial",
       "requestedPublicPromotion": false,
+      "isPromotedToPublicPage": false,
       "canonical": false,
       "noindex": true,
-      "provenanceDigest": "sha256:b1b0d6801c560dd4b6497f069774335b39d1ffac7cdd132918e1c73bdaff019b",
+      "provenanceDigest": "sha256:7c7d1caa24851a4fc2955e4c011fae03efd2687b95137985ea13815fcc57137f",
       "blockers": [
         "source-missing-locator",
         "single-source-record"
@@ -1909,12 +1935,14 @@
       "originEndpointKey": "Q-BR-005A",
       "independentJustification": "Dilution refrigeration is the operating precondition for most superconducting and spin-qubit hardware. The corpus records the control stack but not the cooling mechanism, which is a gap regardless of any supply-chain argument.",
       "id": "urn:maha:candidate:quantum-systems-dilution-refrigeration",
+      "proposedCanonicalId": "urn:maha:record:quantum-systems-dilution-refrigeration",
       "reviewState": "draft",
       "reviewerKind": "internal-editorial",
       "requestedPublicPromotion": false,
+      "isPromotedToPublicPage": false,
       "canonical": false,
       "noindex": true,
-      "provenanceDigest": "sha256:af8879fbb385bcf44eb6b96bb2f6266e54b6aa1856d5f7d21a30d9a1ae38368b",
+      "provenanceDigest": "sha256:661169db73bf60ba1997af3471001867412ffc3792f170c6db04591dd979f526",
       "blockers": [
         "source-missing-locator",
         "single-source-record"
@@ -1948,12 +1976,14 @@
       "originEndpointKey": "Q-BR-005B",
       "independentJustification": "He-3 is a genuine single-source critical input with an administrative allocation regime, which is exactly what this domain exists to record. It is unrelated to the existing helium-liquefaction-logistics record.",
       "id": "urn:maha:candidate:critical-supply-chains-helium-3-isotope-supply",
+      "proposedCanonicalId": "urn:maha:record:critical-supply-chains-helium-3-isotope-supply",
       "reviewState": "draft",
       "reviewerKind": "internal-editorial",
       "requestedPublicPromotion": false,
+      "isPromotedToPublicPage": false,
       "canonical": false,
       "noindex": true,
-      "provenanceDigest": "sha256:aefae033639975a1a8f44158ad141fd8d232a103e0decc0121a8db39e86577e9",
+      "provenanceDigest": "sha256:3828e170830e7cab186050fac52b84d9da603be295e1f1f3d2bbbed20fe44f28",
       "blockers": [
         "source-missing-locator",
         "single-source-record"
@@ -1987,12 +2017,14 @@
       "originEndpointKey": "Q-BR-006A",
       "independentJustification": "These quantities are cited across both quantum hardware and fusion magnet work. Recording them once, with the explicit warning that shared equations do not imply interchangeable materials, prevents a recurring category error.",
       "id": "urn:maha:candidate:quantum-systems-superconducting-gap-and-depairing",
+      "proposedCanonicalId": "urn:maha:record:quantum-systems-superconducting-gap-and-depairing",
       "reviewState": "draft",
       "reviewerKind": "internal-editorial",
       "requestedPublicPromotion": false,
+      "isPromotedToPublicPage": false,
       "canonical": false,
       "noindex": true,
-      "provenanceDigest": "sha256:8c741b99fd2abeda5f183762c40785076f6a2386d92685e97ab6a1ca6b87dd01",
+      "provenanceDigest": "sha256:8fbac2acdf3f0216ae209800c4636a4cc86d8f1bbff4b8670ad0d628b85af2fd",
       "blockers": [
         "source-missing-locator",
         "single-source-record"
@@ -2026,12 +2058,14 @@
       "originEndpointKey": "Q-BR-007A",
       "independentJustification": "This is one of the most contested experimental areas in quantum hardware, with a documented history of overstated claims. A record that separates proposal from signature is valuable precisely because the distinction is routinely lost.",
       "id": "urn:maha:candidate:quantum-systems-majorana-zero-modes",
+      "proposedCanonicalId": "urn:maha:record:quantum-systems-majorana-zero-modes",
       "reviewState": "draft",
       "reviewerKind": "internal-editorial",
       "requestedPublicPromotion": false,
+      "isPromotedToPublicPage": false,
       "canonical": false,
       "noindex": true,
-      "provenanceDigest": "sha256:714757809eb2a4b7c56425324425ceba28b2aedc7d487a81ba35a9fd68f91cf0",
+      "provenanceDigest": "sha256:403f90580c3fb178845f25f275537aef9e337436759dc34f182e60d78b162dad",
       "blockers": [
         "source-missing-locator",
         "single-source-record"
@@ -2074,14 +2108,137 @@
       "originEndpointKey": "Q-BR-009A",
       "independentJustification": "Isotopic enrichment is routinely quoted as though it solves spin-qubit decoherence generally. Recording it as one channel among several, with charge noise explicitly excluded, corrects a common overstatement.",
       "id": "urn:maha:candidate:quantum-systems-spin-qubit-hyperfine-dephasing",
+      "proposedCanonicalId": "urn:maha:record:quantum-systems-spin-qubit-hyperfine-dephasing",
       "reviewState": "draft",
       "reviewerKind": "internal-editorial",
       "requestedPublicPromotion": false,
+      "isPromotedToPublicPage": false,
       "canonical": false,
       "noindex": true,
-      "provenanceDigest": "sha256:b460b12e1bf83d9681604444d5b321c4f481aa9a70a89bbadae6db9ca2acf188",
+      "provenanceDigest": "sha256:4ab179a22fdb4f55d96086e9224a85f768ea7896f9dd3714bce742d5859d6952",
       "blockers": [
         "source-missing-locator"
+      ]
+    },
+    {
+      "domainSlug": "quantum-systems",
+      "slug": "tensor-network-states",
+      "recordClass": "concept",
+      "title": "Tensor network states and truncation",
+      "definition": "A family of variational representations - matrix product states foremost among them - that store a many-body wavefunction as a contracted network of low-rank tensors, with a bond dimension that bounds how much entanglement the representation can carry.",
+      "scope": "Covers the representation, the role of bond dimension, and truncation as a controlled approximation. Does not cover any specific simulation result, and asserts nothing about which physical systems are classically simulable in practice.",
+      "uncertainty": "Whether a given state is well approximated at a tractable bond dimension is problem-specific and is usually established empirically rather than proved. Entanglement scaling arguments bound the representation, not the runtime.",
+      "prohibitedInferences": [
+        "Do not infer that a quantum computation is classically simulable because a tensor network approximates some related state.",
+        "Do not treat truncation error as a variational bound on the physical observable.",
+        "Do not equate bond-dimension truncation with sparse dictionary learning: the objectives differ."
+      ],
+      "sources": [
+        {
+          "citation": "Schollwoeck, U. (2011). The density-matrix renormalization group in the age of matrix product states. Annals of Physics, 326(1), 96-192.",
+          "identifier": "doi:10.1016/j.aop.2010.09.012",
+          "locator": null,
+          "verification": "verified-correct",
+          "verificationSource": "Crossref REST API work record",
+          "verifiedAt": "2026-08-25",
+          "rightsBasis": "bibliographic-metadata-only"
+        }
+      ],
+      "rightsBasis": "bibliographic-metadata-only",
+      "originEndpointKey": "Q-BR-003A",
+      "independentJustification": "Every classical-simulability argument made against a quantum hardware claim runs through tensor networks. The record is needed to read those arguments even though the bridge that prompted it is conceptually invalid. Its third prohibited inference is precisely the error Q-BR-003 makes.",
+      "id": "urn:maha:candidate:quantum-systems-tensor-network-states",
+      "proposedCanonicalId": "urn:maha:record:quantum-systems-tensor-network-states",
+      "reviewState": "draft",
+      "reviewerKind": "internal-editorial",
+      "requestedPublicPromotion": false,
+      "isPromotedToPublicPage": false,
+      "canonical": false,
+      "noindex": true,
+      "provenanceDigest": "sha256:87102881ec0c9a4ee82c3aa9be747867ade44ec28974cbc8208aa3c4c691d7c6",
+      "blockers": [
+        "source-missing-locator",
+        "single-source-record"
+      ]
+    },
+    {
+      "domainSlug": "quantum-systems",
+      "slug": "qubo-ising-mapping",
+      "recordClass": "method",
+      "title": "QUBO and Ising formulations of combinatorial problems",
+      "definition": "The standard reduction that rewrites a quadratic unconstrained binary optimisation problem as an Ising spin Hamiltonian, with constraints imposed as penalty terms whose weights must be chosen so that violating a constraint costs more than any feasible gain.",
+      "scope": "Covers the reduction itself and the penalty-weight requirement, for the problem families the cited source catalogues. Does not cover annealing hardware, embedding onto a physical coupling graph, or any claim about solution quality or time to solution.",
+      "uncertainty": "A formulation existing says nothing about whether an annealer finds the ground state. Penalty weights that are sound in principle can be numerically hostile in practice, and embedding overhead is excluded here entirely.",
+      "prohibitedInferences": [
+        "Do not infer a quantum speedup from the existence of an Ising formulation.",
+        "Do not treat a catalogued formulation as an implemented solver.",
+        "Do not assume a continuous PDE admits a QUBO reduction because discrete problems do."
+      ],
+      "sources": [
+        {
+          "citation": "Lucas, A. (2014). Ising formulations of many NP problems. Frontiers in Physics, 2, 5.",
+          "identifier": "doi:10.3389/fphy.2014.00005",
+          "locator": "Sections 2-9 (Ising formulations, from 2.1 number partitioning through 9 graph isomorphisms)",
+          "verification": "verified-correct",
+          "verificationSource": "Frontiers in Physics full text section listing, read 2026-08-26",
+          "verifiedAt": "2026-08-26",
+          "rightsBasis": "bibliographic-metadata-only"
+        }
+      ],
+      "rightsBasis": "bibliographic-metadata-only",
+      "originEndpointKey": "Q-BR-010A",
+      "independentJustification": "The QUBO/Ising reduction is the load-bearing step under every annealing claim, and it is routinely quoted as though it implied an advantage. Its third prohibited inference is the exact error Q-BR-010 makes about the Grad-Shafranov equation.",
+      "id": "urn:maha:candidate:quantum-systems-qubo-ising-mapping",
+      "proposedCanonicalId": "urn:maha:record:quantum-systems-qubo-ising-mapping",
+      "reviewState": "draft",
+      "reviewerKind": "internal-editorial",
+      "requestedPublicPromotion": false,
+      "isPromotedToPublicPage": false,
+      "canonical": false,
+      "noindex": true,
+      "provenanceDigest": "sha256:c4b150a15005a93604f3857c91478276bf52ccadbc47a466ac04ec349f72e4de",
+      "blockers": [
+        "single-source-record"
+      ]
+    },
+    {
+      "domainSlug": "quantum-systems",
+      "slug": "3d-cavity-resonator-loss",
+      "recordClass": "mechanism",
+      "title": "Loss channels in three-dimensional superconducting cavities",
+      "definition": "The mechanisms that bound photon lifetime in a bulk three-dimensional superconducting radio-frequency cavity operated at millikelvin temperatures: two-level-system loss in surface oxides, residual resistance from trapped magnetic flux, quasiparticle dissipation, and coupling to the external measurement chain.",
+      "scope": "Covers the named loss channels and the measured lifetime regime for bulk niobium cavities. Does not cover planar resonators, transmon qubits, or any inference from cavity lifetime to qubit coherence.",
+      "uncertainty": "Attribution among the channels depends on surface treatment history and on the applied thermal cycle, and reported records usually change several process variables at once. Bulk purity is one contributing factor among several, not the determining one.",
+      "prohibitedInferences": [
+        "Do not infer a qubit T1 from a bare-cavity photon lifetime.",
+        "Do not attribute a record lifetime to material purity alone.",
+        "Do not treat a best-cavity result as a process yield."
+      ],
+      "sources": [
+        {
+          "citation": "Romanenko, A. et al. (2020). Three-Dimensional Superconducting Resonators at T < 20 mK with Photon Lifetimes up to tau = 2 s. Physical Review Applied, 13(3), 034032.",
+          "identifier": "doi:10.1103/PhysRevApplied.13.034032",
+          "locator": "Abstract",
+          "verification": "verified-with-correction",
+          "verificationSource": "arXiv:1810.03703 abstract, read 2026-08-26",
+          "verifiedAt": "2026-08-26",
+          "rightsBasis": "bibliographic-metadata-only"
+        }
+      ],
+      "rightsBasis": "bibliographic-metadata-only",
+      "originEndpointKey": "Q-BR-012A",
+      "independentJustification": "Cavity lifetime records are widely quoted as quantum-hardware progress without distinguishing a bare resonator from a qubit. A record that separates the loss channels, and forbids the qubit inference outright, is worth holding on its own.",
+      "id": "urn:maha:candidate:quantum-systems-3d-cavity-resonator-loss",
+      "proposedCanonicalId": "urn:maha:record:quantum-systems-3d-cavity-resonator-loss",
+      "reviewState": "draft",
+      "reviewerKind": "internal-editorial",
+      "requestedPublicPromotion": false,
+      "isPromotedToPublicPage": false,
+      "canonical": false,
+      "noindex": true,
+      "provenanceDigest": "sha256:0ae37bfd2c6d4a6a002af1193a7a4eff7d3f710c27f670b065ecbe16b199f668",
+      "blockers": [
+        "single-source-record"
       ]
     }
   ]
