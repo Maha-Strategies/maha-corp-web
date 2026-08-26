@@ -39,6 +39,14 @@ export const ENDPOINT_CLASSIFICATIONS = [
   'incompatible-record-class',
   /** The record cannot be bounded without evidence that can be inspected. */
   'blocked-pending-evidence',
+  /**
+   * A related existing record may be more appropriate, but the submitted
+   * reference cannot resolve through an alias because semantic equivalence has
+   * not been established. This is the honest middle: it names where the
+   * submitter should probably look without the resolver pretending the two
+   * references mean the same thing.
+   */
+  'revise-reference',
 ] as const
 
 export type EndpointClassification = (typeof ENDPOINT_CLASSIFICATIONS)[number]
@@ -91,6 +99,11 @@ export interface EndpointClosureEntry {
    * still telling the submitter where to look.
    */
   nearMissRecords: readonly string[]
+  /**
+   * Required for `revise-reference`: the records the submitter should consider
+   * instead. Advisory only - never substituted, and never resolved against.
+   */
+  proposedReplacementRecordIds?: readonly string[]
   atomization?: Atomization
   /** Set only when this sprint actually built the candidate. */
   candidateId: string | null
@@ -139,6 +152,23 @@ export function planDigest(plan: EndpointClosurePlan): string {
   }
   return `sha256:${createHash('sha256').update(JSON.stringify(canonical)).digest('hex')}`
 }
+
+/*
+ * Which near misses became `revise-reference`.
+ *
+ * The prior sprint recorded six endpoints as needing a revised reference. Three
+ * moved here; three did not, because a more specific classification says more:
+ *
+ *   Q-BR-001A and Q-BR-003B are `compound-endpoint`. Both name two existing
+ *   records at once, and "revise this reference" would hide that the fix is to
+ *   split the endpoint, not to repoint it.
+ *
+ *   Q-BR-008A is `existing-record-alias`. Equivalence WAS established against
+ *   the canonical record text, so it resolves rather than needing revision.
+ *
+ * Q-BR-010B and Q-BR-011B keep their source blockers. Reclassifying the
+ * endpoint says nothing about the citation, and the blocker list proves it.
+ */
 
 /* ------------------------------------------------------------ Q-BR data --- */
 
@@ -370,12 +400,16 @@ const QBR: readonly EndpointClosureEntry[] = [
     key: 'Q-BR-007B', batchId: 'Q-BR', bridgeId: 'Q-BR-007', side: 'B',
     submittedReference: 'advanced-materials:twisted-bilayer-heterostructures',
     normalizedReference: null,
-    classification: 'new-record-candidate',
-    proposedCanonicalId: 'urn:maha:record:advanced-materials-twisted-bilayer-heterostructures',
+    classification: 'revise-reference',
+    proposedCanonicalId: null,
     reasoning:
-      'The structural concept is legitimate and is not the same as the phenomena it hosts. But the corpus already holds four neighbouring records, and the submitted source is the magic-angle superconductivity paper, which is the near miss. Creating a fifth record risks duplicating what is already there, so this needs an editorial decision rather than a sprint decision.',
-    confidence: 'low',
+      'The structural concept is legitimate and is not the same as the phenomena it hosts, so no alias is justified. But the corpus already holds four neighbouring records and the submitted source IS the magic-angle superconductivity paper, which is one of them. The submitter should point at an existing record rather than have a fifth created that duplicates the graph. Equivalence has not been established, so this stays unresolved.',
+    confidence: 'medium',
     blockers: ['needs-editorial-decision-duplicate-risk'],
+    proposedReplacementRecordIds: [
+      'urn:maha:record:advanced-materials-magic-angle-superconductivity',
+      'urn:maha:record:advanced-materials-moire-superlattices',
+    ],
     nearMissRecords: [
       'urn:maha:record:advanced-materials-magic-angle-superconductivity',
       'urn:maha:record:advanced-materials-moire-superlattices',
@@ -472,10 +506,11 @@ const QBR: readonly EndpointClosureEntry[] = [
     key: 'Q-BR-010B', batchId: 'Q-BR', bridgeId: 'Q-BR-010', side: 'B',
     submittedReference: 'fusion-plasma:grad-shafranov-equilibrium-solver',
     normalizedReference: 'fusion-plasma-systems:grad-shafranov-equilibrium-solver',
-    classification: 'blocked-pending-evidence',
+    classification: 'revise-reference',
     proposedCanonicalId: null,
+    proposedReplacementRecordIds: ['urn:maha:record:fusion-plasma-systems-tokamak-plasma-equilibrium'],
     reasoning:
-      'The domain alias resolves and the canonical domain holds a tokamak-plasma-equilibrium record, but a numerical solver is not the equilibrium it solves, so that record is a near miss rather than a target. The submitted source could not be located, and the plausible substitute found in Crossref is a pending human decision, not a basis for creating a record.',
+      'The domain alias resolves and the canonical domain holds a tokamak-plasma-equilibrium record. A numerical solver is not the equilibrium it solves, so no alias is justified, but that record is where a submitter asking about tokamak equilibrium should be pointed. The source blocker is unchanged and tracked separately: the submitted citation could not be located, and the plausible substitute found in Crossref remains a pending human decision.',
     confidence: 'high',
     blockers: ['source-unverifiable', 'cannot-bound-scope-without-source'],
     nearMissRecords: ['urn:maha:record:fusion-plasma-systems-tokamak-plasma-equilibrium'],
@@ -498,10 +533,15 @@ const QBR: readonly EndpointClosureEntry[] = [
     key: 'Q-BR-011B', batchId: 'Q-BR', bridgeId: 'Q-BR-011', side: 'B',
     submittedReference: 'agentic-systems:mcp-tool-authorization-enclaves',
     normalizedReference: 'agentic-systems-mcp:mcp-tool-authorization-enclaves',
-    classification: 'blocked-pending-evidence',
+    classification: 'revise-reference',
     proposedCanonicalId: null,
+    proposedReplacementRecordIds: [
+      'urn:maha:record:agentic-systems-mcp-least-authority-tokens',
+      'urn:maha:record:agentic-systems-mcp-sandboxed-tool-execution',
+      'urn:maha:record:agentic-systems-mcp-tool-deny-by-default',
+    ],
     reasoning:
-      'The domain alias resolves into a canonical namespace that already holds five neighbouring authorization records, but "authorization enclaves" fuses an access-control question with a hardware-isolation one and its only source could not be found in any authoritative index. Nothing here can be bounded without a source that can be read.',
+      'The domain alias resolves into a canonical namespace that already holds five neighbouring authorization records. "Authorization enclaves" fuses an access-control question with a hardware-isolation one, so equivalence with any single one of them is not established and no alias is justified. The submitter should be pointed at the least-authority, sandboxing and deny-by-default records instead. The source blocker is unchanged and tracked separately: the only cited source could not be found in any authoritative index.',
     confidence: 'high',
     blockers: ['source-unverifiable', 'cannot-bound-scope-without-source'],
     nearMissRecords: [
@@ -574,3 +614,18 @@ export const ENDPOINT_CLOSURE_PLANS: readonly EndpointClosurePlan[] = [QBR_ENDPO
 
 const planKeys = new Set(QBR.map((entry) => entry.key))
 if (planKeys.size !== QBR.length) throw new Error('Duplicate key in the Q-BR endpoint closure plan.')
+
+for (const entry of QBR) {
+  if (entry.classification !== 'revise-reference') continue
+  if (!entry.proposedReplacementRecordIds?.length) {
+    throw new Error(`${entry.key} is revise-reference without a proposed replacement record.`)
+  }
+  if (entry.proposedCanonicalId) {
+    throw new Error(`${entry.key} is revise-reference and must not propose a new canonical id.`)
+  }
+}
+
+/** A revise-reference endpoint is still unresolved. It never counts as closure. */
+export function countsAsResolution(entry: EndpointClosureEntry): boolean {
+  return entry.classification === 'existing-record-alias'
+}

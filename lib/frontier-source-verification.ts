@@ -44,7 +44,7 @@ export interface FrontierSourceVerificationReport {
   reportId: string
   verifiedAt: string
   cohort: 'frontier-240'
-  sourceCount: 48
+  sourceCount: number
   recordCount: 240
   results: FrontierSourceVerification[]
   summary: { verified: number; failed: number; contentConfirmedLocators: number; structuredLocators: number }
@@ -119,11 +119,23 @@ export const FRONTIER_SOURCE_CONTRACTS: readonly FrontierSourceContract[] = (() 
     }
   }
   const result = [...contracts.values()].sort((left, right) => left.source.id.localeCompare(right.source.id))
-  if (result.length !== 48 || result.some((contract) => contract.recordIds.length !== 5)) {
-    throw new Error('Frontier source verification expects 48 source contracts, each bound to five records.')
+  // The contract set used to be exactly 48 sources bound to five records each,
+  // which was the positional block assignment written down as an invariant.
+  // Correcting a record's source necessarily breaks that shape, so the rule
+  // enforced here is the one that actually matters: every frontier record is
+  // covered exactly once, and no contract is left binding nothing.
+  const bindings = result.reduce((total, contract) => total + contract.recordIds.length, 0)
+  if (bindings !== FRONTIER_DOMAIN_GRAPH_RECORDS.length) {
+    throw new Error(`Frontier source verification must cover every record exactly once; covered ${bindings} of ${FRONTIER_DOMAIN_GRAPH_RECORDS.length}.`)
+  }
+  if (result.some((contract) => contract.recordIds.length === 0)) {
+    throw new Error('A frontier source contract binds no record.')
   }
   return result
 })()
+
+/** Derived, not pinned: correcting a record's source changes this. */
+export const FRONTIER_SOURCE_CONTRACT_COUNT = FRONTIER_SOURCE_CONTRACTS.length
 
 async function fetchBounded(fetcher: FetchLike, url: string, accept: string) {
   let lastError: unknown = null
@@ -302,7 +314,7 @@ export async function verifyFrontierSourceContracts(fetcher: FetchLike = fetch, 
     reportId: `episourceverify_${randomUUID().replaceAll('-', '')}`,
     verifiedAt: verifiedAt.toISOString(),
     cohort: 'frontier-240' as const,
-    sourceCount: 48 as const,
+    sourceCount: FRONTIER_SOURCE_CONTRACT_COUNT,
     recordCount: 240 as const,
     results,
     summary: {
@@ -321,17 +333,17 @@ export function parseFrontierSourceVerificationReport(value: unknown): FrontierS
   const report = value as FrontierSourceVerificationReport
   if (report.schemaVersion !== FRONTIER_SOURCE_REPORT_VERSION || report.verifierVersion !== FRONTIER_SOURCE_VERIFIER_VERSION) throw new Error('Source verification schema or verifier version is unsupported.')
   if (!/^episourceverify_[a-f0-9]{32}$/.test(report.reportId) || !/^sha256:[a-f0-9]{64}$/.test(report.reportSha256)) throw new Error('Source verification identifiers are invalid.')
-  if (report.cohort !== 'frontier-240' || report.sourceCount !== 48 || report.recordCount !== 240 || !Array.isArray(report.results) || report.results.length !== 48) throw new Error('Source verification report must cover the exact frontier cohort.')
+  if (report.cohort !== 'frontier-240' || report.sourceCount !== FRONTIER_SOURCE_CONTRACT_COUNT || report.recordCount !== 240 || !Array.isArray(report.results) || report.results.length !== FRONTIER_SOURCE_CONTRACT_COUNT) throw new Error('Source verification report must cover the exact frontier cohort.')
   const expected = new Map(FRONTIER_SOURCE_CONTRACTS.map((contract) => [contract.source.id, contract]))
   for (const result of report.results) {
     const contract = expected.get(result.sourceId)
     if (!contract || result.domainSlug !== contract.domainSlug || result.expectedMetadataSha256 !== sha256Canonical({ title: contract.source.title, authors: contract.source.authors, publisher: contract.source.publisher, publishedAt: contract.source.publishedAt, url: contract.source.url, identifiers: contract.source.identifiers, exactLocator: contract.source.exactLocator })) throw new Error(`Source verification result is not bound to ${result.sourceId}.`)
-    if (result.recordIds.length !== 5 || result.recordIds.some((id) => !contract.recordIds.includes(id))) throw new Error(`Source verification record binding is invalid for ${result.sourceId}.`)
+    if (result.recordIds.length !== contract.recordIds.length || result.recordIds.some((id) => !contract.recordIds.includes(id))) throw new Error(`Source verification record binding is invalid for ${result.sourceId}.`)
   }
-  if (new Set(report.results.map((result) => result.sourceId)).size !== 48) throw new Error('Source verification results cannot contain duplicate sources.')
+  if (new Set(report.results.map((result) => result.sourceId)).size !== FRONTIER_SOURCE_CONTRACT_COUNT) throw new Error('Source verification results cannot contain duplicate sources.')
   const { reportSha256, ...unsigned } = report
   if (sha256Canonical(unsigned) !== reportSha256) throw new Error('Source verification report digest does not match its contents.')
   return report
 }
 
-export const FRONTIER_SOURCE_VERIFICATION_BOUNDARY = 'A source-verification run records machine-observed metadata, URL resolution, and locator evidence for 48 declared source contracts. It does not certify the source’s conclusions, replace domain expertise, or independently reproduce an experiment.'
+export const FRONTIER_SOURCE_VERIFICATION_BOUNDARY = 'A source-verification run records machine-observed metadata, URL resolution, and locator evidence for every declared source contract. It does not certify the source’s conclusions, replace domain expertise, or independently reproduce an experiment.'
