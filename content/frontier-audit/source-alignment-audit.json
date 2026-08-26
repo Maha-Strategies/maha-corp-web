@@ -1,7 +1,7 @@
 {
   "schemaVersion": "maha-frontier-source-alignment/1.0",
   "auditInputDate": "2026-08-26",
-  "auditDigest": "sha256:cdf41aaf32d2e86bc2823cdfa2be74bd62037c0ad4174a191bdb06cda146fcd7",
+  "auditDigest": "sha256:68d966bef5f0b3c8c46140144bf8d4076eb561cf42c3b58e4bfb0ce45db295cf",
   "totals": {
     "records": 240,
     "internallyInspectedSourceCount": 131,
@@ -92,8 +92,17 @@
       "recordId": "urn:maha:record:fusion-plasma-systems-rebco-high-field-magnets",
       "citation": "Whyte, D. G. et al. Smaller & Sooner: Exploiting High Magnetic Fields from New Superconductors for a More Attractive Fusion Energy Development Path. Journal of Fusion Energy 35(1), 41-53 (2016).",
       "identifier": "doi:10.1007/s10894-015-0050-1",
-      "rationale": "Reports high-field REBCO magnets for fusion directly. Metadata is already independently verified in the bridge source ledger, but the content has NOT been inspected for this record, so it is proposed rather than applied.",
-      "decision": "pending-human-decision"
+      "rationale": "Reports high-field REBCO magnets for fusion directly. Proposed rather than applied: adopting a source is a human decision, not an audit output.",
+      "decision": "pending-human-decision",
+      "inspection": {
+        "replacementDecision": "replacement-supported",
+        "metadataVerified": true,
+        "metadataNote": "Crossref resolves doi:10.1007/s10894-015-0050-1 to \"Smaller & Sooner: Exploiting High Magnetic Fields from New Superconductors for a More Attractive Fusion Energy Development Path\", Journal of Fusion Energy 35, 41-53 (2016), six authors beginning Whyte. The inspected copy carries the same six authors in the same order.",
+        "artifactVersion": "accepted-manuscript",
+        "inspectedContentLocation": "MIT PSFC report PSFC/JA-16-17 (December 2015), the institutional-repository accepted manuscript, extracted to text in full (8,079 words). Section 3 \"Proposed Initiatives\", plus Element 4 (cryogenic cooling for HTS magnets), Element 8 (joints for demountable coils) and Element 9 (coil fabrication technology).",
+        "findings": "The text names the material explicitly: \"Three national initiatives centered around new REBCO (Rare Earth Barium Copper Oxide) high-temperature superconductors (HTS) high B-field technology\", and states that \"The REBCO-HTS magnet initiative seeks to produce reliable, economic high-B magnets\". REBCO appears 27 times, HTS 37, tape 26, high-field 13 and magnet 107, with a dedicated treatment of superconductor tape enabling demountable toroidal field coils. This directly addresses REBCO high-field magnets, which is the record subject.",
+        "whatWouldChangeIfAccepted": "Accepting the override would rebind fusion-plasma-systems-rebco-high-field-magnets from the Boozer stellarator review to this paper, move its verdict from mismatched toward supported, and make the Q-BR-006B alias target alignment-clear so the endpoint could become usable. It would NOT clear any other Q-BR blocker: the batch would remain BLOCK on endpoint-unresolved-record, source-missing-locator and the rest, and Q-BR-006 side A would still be unresolved. It would also not promote or canonicalise anything, and the inspected artifact is an accepted manuscript rather than the version of record, so the published text should be checked before adoption."
+      }
     }
   ],
   "blockerTotals": {
@@ -5825,8 +5834,17 @@
       "proposedSourceOverride": {
         "citation": "Whyte, D. G. et al. Smaller & Sooner: Exploiting High Magnetic Fields from New Superconductors for a More Attractive Fusion Energy Development Path. Journal of Fusion Energy 35(1), 41-53 (2016).",
         "identifier": "doi:10.1007/s10894-015-0050-1",
-        "rationale": "Reports high-field REBCO magnets for fusion directly. Metadata is already independently verified in the bridge source ledger, but the content has NOT been inspected for this record, so it is proposed rather than applied.",
-        "decision": "pending-human-decision"
+        "rationale": "Reports high-field REBCO magnets for fusion directly. Proposed rather than applied: adopting a source is a human decision, not an audit output.",
+        "decision": "pending-human-decision",
+        "inspection": {
+          "replacementDecision": "replacement-supported",
+          "metadataVerified": true,
+          "metadataNote": "Crossref resolves doi:10.1007/s10894-015-0050-1 to \"Smaller & Sooner: Exploiting High Magnetic Fields from New Superconductors for a More Attractive Fusion Energy Development Path\", Journal of Fusion Energy 35, 41-53 (2016), six authors beginning Whyte. The inspected copy carries the same six authors in the same order.",
+          "artifactVersion": "accepted-manuscript",
+          "inspectedContentLocation": "MIT PSFC report PSFC/JA-16-17 (December 2015), the institutional-repository accepted manuscript, extracted to text in full (8,079 words). Section 3 \"Proposed Initiatives\", plus Element 4 (cryogenic cooling for HTS magnets), Element 8 (joints for demountable coils) and Element 9 (coil fabrication technology).",
+          "findings": "The text names the material explicitly: \"Three national initiatives centered around new REBCO (Rare Earth Barium Copper Oxide) high-temperature superconductors (HTS) high B-field technology\", and states that \"The REBCO-HTS magnet initiative seeks to produce reliable, economic high-B magnets\". REBCO appears 27 times, HTS 37, tape 26, high-field 13 and magnet 107, with a dedicated treatment of superconductor tape enabling demountable toroidal field coils. This directly addresses REBCO high-field magnets, which is the record subject.",
+          "whatWouldChangeIfAccepted": "Accepting the override would rebind fusion-plasma-systems-rebco-high-field-magnets from the Boozer stellarator review to this paper, move its verdict from mismatched toward supported, and make the Q-BR-006B alias target alignment-clear so the endpoint could become usable. It would NOT clear any other Q-BR blocker: the batch would remain BLOCK on endpoint-unresolved-record, source-missing-locator and the rest, and Q-BR-006 side A would still be unresolved. It would also not promote or canonicalise anything, and the inspected artifact is an accepted manuscript rather than the version of record, so the published text should be checked before adoption."
+        }
       },
       "blockers": [
         "source-assignment-positional-legacy",

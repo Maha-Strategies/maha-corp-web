@@ -44,6 +44,40 @@ This report is generated. Do not edit it by hand.
 | Q-BR-012 | source | `quantum-systems:3d-cavity-resonator-loss` | unresolved-record | — |
 | Q-BR-012 | target | `critical-supply-chains:refractory-tantalum-niobium-refinement` | unresolved-record | — |
 
+## Endpoint usability
+
+Structural resolution and epistemic fitness are different questions and are reported separately. A reference resolving means the namespace found a record; it does not mean that record's bound source can support the bridge. An endpoint is **usable** only when both hold.
+
+| Measure | Count |
+| --- | --- |
+| Structurally resolved | 2 |
+| Epistemically usable | 0 |
+| Structurally resolved but blocked | 2 |
+| Unresolved | 22 |
+
+### Structurally resolved endpoints
+
+| Submitted reference | Structure | Alignment verdict | Usability | Blocker | Audit revision |
+| --- | --- | --- | --- | --- | --- |
+| `fusion-plasma:rebco-high-field-magnets` | alias-resolution | `source-mismatched` | `structurally-resolved-but-epistemically-blocked` | `endpoint-source-alignment-mismatched` | `sha256:0fedeac77d213a0b…` |
+| `quantum-systems:syndrome-extraction-cycle` | alias-resolution | `audit-missing` | `structurally-resolved-but-epistemically-blocked` | `endpoint-alignment-audit-missing` | `sha256:bcf371de57eeaa64…` |
+
+#### Blocker provenance
+
+**`fusion-plasma:rebco-high-field-magnets`** → `urn:maha:record:fusion-plasma-systems-rebco-high-field-magnets`
+
+Audit: subject `mismatched`, origin `positional-legacy`, alignment blockers `source-assignment-positional-legacy`, `source-subject-mismatched`.
+
+The bound source does not treat this record's subject. Full text was extracted and searched. The paper contains zero occurrences of "REBCO", "barium copper", "high-temperature superconduct" and even "superconduct" in any form. It cannot support a record about REBCO high-field magnets. Batch 4 recorded insufficient-evidence from the abstract alone; reading the full text settles it.
+
+_Proposed replacement, **not** applied and **not** canonical._ Whyte, D. G. et al. Smaller & Sooner: Exploiting High Magnetic Fields from New Superconductors for a More Attractive Fusion Energy Development Path. Journal of Fusion Energy 35(1), 41-53 (2016). (`doi:10.1007/s10894-015-0050-1`) — decision `pending-human-decision`, inspection `replacement-supported` from a `accepted-manuscript`. The record still cites `source-fusion-plasma-systems-stellarator-review`.
+
+**`quantum-systems:syndrome-extraction-cycle`** → `urn:maha:record:stabilizer-syndrome-measurement`
+
+Audit: no alignment audit covers this record.
+
+No alignment audit covers this record. Only the frontier cohort is audited, so a resolution outside it carries no evidence about whether its source supports the subject. This fails closed.
+
 ## Source verification (24 citations)
 
 | State | Count |

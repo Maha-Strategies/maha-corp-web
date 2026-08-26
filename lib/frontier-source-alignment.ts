@@ -92,6 +92,20 @@ export const INSPECTED_ARTIFACT_VERSIONS = [
 ] as const
 export type InspectedArtifactVersion = (typeof INSPECTED_ARTIFACT_VERSIONS)[number]
 
+/**
+ * Outcome of inspecting a PROPOSED replacement source. A decision here changes
+ * nothing on its own: the record keeps citing its original source until a human
+ * accepts the override.
+ */
+export const REPLACEMENT_DECISIONS = [
+  'replacement-supported',
+  'replacement-partially-supported',
+  'replacement-mismatched',
+  'replacement-inaccessible',
+  'replacement-insufficient-evidence',
+] as const
+export type ReplacementDecision = (typeof REPLACEMENT_DECISIONS)[number]
+
 export const TRANSCRIPTION_CONFIDENCES = ['high', 'medium', 'low'] as const
 export type TranscriptionConfidence = (typeof TRANSCRIPTION_CONFIDENCES)[number]
 
@@ -201,7 +215,19 @@ interface InspectedJudgement {
     citation: string
     identifier: string
     rationale: string
+    /** Adoption status. Always pending: this layer never applies an override. */
     decision: 'pending-human-decision'
+    /** Present once the proposed source itself has been inspected. */
+    inspection?: {
+      replacementDecision: ReplacementDecision
+      metadataVerified: boolean
+      metadataNote: string
+      artifactVersion: InspectedArtifactVersion
+      inspectedContentLocation: string
+      findings: string
+      /** Exactly what accepting this override would and would not change. */
+      whatWouldChangeIfAccepted: string
+    }
   }
 }
 
@@ -1168,8 +1194,21 @@ const JUDGEMENTS: Readonly<Record<string, InspectedJudgement>> = {
         'Whyte, D. G. et al. Smaller & Sooner: Exploiting High Magnetic Fields from New Superconductors for a More Attractive Fusion Energy Development Path. Journal of Fusion Energy 35(1), 41-53 (2016).',
       identifier: 'doi:10.1007/s10894-015-0050-1',
       rationale:
-        'Reports high-field REBCO magnets for fusion directly. Metadata is already independently verified in the bridge source ledger, but the content has NOT been inspected for this record, so it is proposed rather than applied.',
+        'Reports high-field REBCO magnets for fusion directly. Proposed rather than applied: adopting a source is a human decision, not an audit output.',
       decision: 'pending-human-decision',
+      inspection: {
+        replacementDecision: 'replacement-supported',
+        metadataVerified: true,
+        metadataNote:
+          'Crossref resolves doi:10.1007/s10894-015-0050-1 to "Smaller & Sooner: Exploiting High Magnetic Fields from New Superconductors for a More Attractive Fusion Energy Development Path", Journal of Fusion Energy 35, 41-53 (2016), six authors beginning Whyte. The inspected copy carries the same six authors in the same order.',
+        artifactVersion: 'accepted-manuscript',
+        inspectedContentLocation:
+          'MIT PSFC report PSFC/JA-16-17 (December 2015), the institutional-repository accepted manuscript, extracted to text in full (8,079 words). Section 3 "Proposed Initiatives", plus Element 4 (cryogenic cooling for HTS magnets), Element 8 (joints for demountable coils) and Element 9 (coil fabrication technology).',
+        findings:
+          'The text names the material explicitly: "Three national initiatives centered around new REBCO (Rare Earth Barium Copper Oxide) high-temperature superconductors (HTS) high B-field technology", and states that "The REBCO-HTS magnet initiative seeks to produce reliable, economic high-B magnets". REBCO appears 27 times, HTS 37, tape 26, high-field 13 and magnet 107, with a dedicated treatment of superconductor tape enabling demountable toroidal field coils. This directly addresses REBCO high-field magnets, which is the record subject.',
+        whatWouldChangeIfAccepted:
+          'Accepting the override would rebind fusion-plasma-systems-rebco-high-field-magnets from the Boozer stellarator review to this paper, move its verdict from mismatched toward supported, and make the Q-BR-006B alias target alignment-clear so the endpoint could become usable. It would NOT clear any other Q-BR blocker: the batch would remain BLOCK on endpoint-unresolved-record, source-missing-locator and the rest, and Q-BR-006 side A would still be unresolved. It would also not promote or canonicalise anything, and the inspected artifact is an accepted manuscript rather than the version of record, so the published text should be checked before adoption.',
+      },
     },
   },
   'urn:maha:record:fusion-plasma-systems-cable-in-conduit-conductors': {
@@ -1992,6 +2031,20 @@ export function isBatch5Reinspection(recordId: string): boolean {
     }
     if (judgement.proposedSourceOverride && judgement.proposedSourceOverride.decision !== 'pending-human-decision') {
       throw new Error(`${recordId} carries a source override that is not a pending decision.`)
+    }
+    const inspection = judgement.proposedSourceOverride?.inspection
+    if (inspection) {
+      if (!(REPLACEMENT_DECISIONS as readonly string[]).includes(inspection.replacementDecision)) {
+        throw new Error(`${recordId} declares an undeclared replacement decision.`)
+      }
+      const decided = inspection.replacementDecision === 'replacement-supported'
+        || inspection.replacementDecision === 'replacement-mismatched'
+      if (decided && !inspection.inspectedContentLocation) {
+        throw new Error(`${recordId} decided a replacement without recording where it was read.`)
+      }
+      if (inspection.artifactVersion === 'not-inspected' && decided) {
+        throw new Error(`${recordId} decided a replacement it did not inspect.`)
+      }
     }
   }
 }

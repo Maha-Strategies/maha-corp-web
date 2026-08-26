@@ -10,6 +10,11 @@ import { BRIDGE_SOURCE_LEDGER } from '../lib/bridge-source-ledger.ts'
 import { ENDPOINT_DISPOSITIONS, dispositionTotals } from '../lib/bridge-endpoint-dispositions.ts'
 import { ENDPOINT_CANDIDATES, candidateBlockers, promotableEndpointCandidates } from '../lib/bridge-endpoint-candidates.ts'
 import {
+  endpointUsabilityTotals,
+  resolveUsableEndpoint,
+} from '../lib/endpoint-fitness.ts'
+import { alignmentFor } from '../lib/frontier-source-alignment.ts'
+import {
   QBR_ENDPOINT_CLOSURE_PLAN,
   classificationTotals,
   liveOutcome,
@@ -32,6 +37,20 @@ writeFileSync(
   `${JSON.stringify(
     {
       ...report,
+      endpointUsability: {
+        ...endpointUsabilityTotals(QUANTUM_BRIDGE_CANDIDATES.flatMap((candidate) => [candidate.declaredSourceRef, candidate.declaredTargetRef])),
+        endpoints: QUANTUM_BRIDGE_CANDIDATES.flatMap((candidate) => [candidate.declaredSourceRef, candidate.declaredTargetRef])
+          .map((reference) => resolveUsableEndpoint(reference))
+          .filter((result) => result.fitness !== null)
+          .map((result) => ({
+            submittedReference: result.submittedReference,
+            structure: result.structure.outcome.status,
+            fitness: result.fitness,
+            usability: result.usability,
+            blockers: result.blockers,
+            proposedSourceOverride: alignmentFor(result.fitness!.recordId)?.proposedSourceOverride ?? null,
+          })),
+      },
       endpointClosure: {
         planVersion: QBR_ENDPOINT_CLOSURE_PLAN.planVersion,
         planDigest: planDigest(QBR_ENDPOINT_CLOSURE_PLAN),
@@ -81,6 +100,62 @@ for (const endpoint of endpoints) {
   )
 }
 lines.push('')
+
+lines.push('## Endpoint usability', '')
+lines.push(
+  'Structural resolution and epistemic fitness are different questions and are reported separately. A reference resolving means the namespace found a record; it does not mean that record\'s bound source can support the bridge. An endpoint is **usable** only when both hold.',
+  '',
+)
+const submittedRefs = QUANTUM_BRIDGE_CANDIDATES.flatMap((candidate) => [candidate.declaredSourceRef, candidate.declaredTargetRef])
+const usability = endpointUsabilityTotals(submittedRefs)
+lines.push(row(['Measure', 'Count']), row(['---', '---']))
+lines.push(row(['Structurally resolved', String(usability.structurallyResolved)]))
+lines.push(row(['Epistemically usable', String(usability.usable)]))
+lines.push(row(['Structurally resolved but blocked', String(usability.structurallyResolvedButBlocked)]))
+lines.push(row(['Unresolved', String(usability.unresolved)]))
+lines.push('')
+
+const resolvedEndpoints = submittedRefs
+  .map((reference) => ({ reference, result: resolveUsableEndpoint(reference) }))
+  .filter((entry) => entry.result.fitness !== null)
+lines.push('### Structurally resolved endpoints', '')
+lines.push(
+  row(['Submitted reference', 'Structure', 'Alignment verdict', 'Usability', 'Blocker', 'Audit revision']),
+  row(['---', '---', '---', '---', '---', '---']),
+)
+for (const { reference, result } of resolvedEndpoints) {
+  const fitness = result.fitness!
+  lines.push(
+    row([
+      `\`${reference}\``,
+      result.structure.outcome.status,
+      `\`${fitness.state}\``,
+      `\`${result.usability}\``,
+      fitness.blocker ? `\`${fitness.blocker}\`` : '—',
+      `\`${fitness.recordRevisionSha256.slice(0, 23)}…\``,
+    ]),
+  )
+}
+lines.push('')
+lines.push('#### Blocker provenance', '')
+for (const { reference, result } of resolvedEndpoints) {
+  const fitness = result.fitness!
+  lines.push(`**\`${reference}\`** → \`${fitness.recordId}\``, '')
+  lines.push(
+    `Audit: ${fitness.auditProvenance.audited ? `subject \`${fitness.auditProvenance.subjectAligned}\`, origin \`${fitness.auditProvenance.assignmentOrigin}\`, alignment blockers ${fitness.auditProvenance.alignmentBlockers.map((code) => `\`${code}\``).join(', ') || 'none'}` : 'no alignment audit covers this record'}.`,
+    '',
+  )
+  lines.push(fitness.reason, '')
+
+  const audit = alignmentFor(fitness.recordId)
+  const override = audit?.proposedSourceOverride
+  if (override) {
+    lines.push(
+      `_Proposed replacement, **not** applied and **not** canonical._ ${override.citation} (\`${override.identifier}\`) — decision \`${override.decision}\`${override.inspection ? `, inspection \`${override.inspection.replacementDecision}\` from a \`${override.inspection.artifactVersion}\`` : ', not yet inspected'}. The record still cites \`${audit!.sourceContractId}\`.`,
+      '',
+    )
+  }
+}
 
 lines.push('## Source verification (24 citations)', '')
 lines.push(row(['State', 'Count']), row(['---', '---']))
