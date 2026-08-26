@@ -162,13 +162,11 @@ interface InspectedJudgement {
 }
 
 /**
- * Per-record judgements from this sprint's bounded batch.
- *
- * Four sources were read: the ITER magnets page, the MCP tools specification,
- * the Dean et al. abstract and the Hill et al. quality-metrics sections. Those
- * cover twelve records. Three further records take a `mismatched` verdict from
- * registry metadata alone, which is the one direction that is safe without
- * inspection. Five take `inaccessible-source` after a retrieval attempt failed.
+ * Append-only per-record judgements from the bounded alignment batches.
+ * Batch 3 adds exactly five internally inspected records per frontier domain.
+ * A shared source is judged independently against every attached record: one
+ * document may therefore support one record, partially support another, and
+ * mismatch a third. Inspection is never inferred from registry metadata.
  *
  * Every record NOT named here defaults to `insufficient-evidence`. That is the
  * honest state for an unreviewed positional assignment, and it blocks.
@@ -590,6 +588,102 @@ const JUDGEMENTS: Readonly<Record<string, InspectedJudgement>> = {
       'The page was read and does not treat data uncertainty or its quantification.',
     remediation: 'Bind a source that reports uncertainty in supply-chain data.',
   },
+
+  /* ---- alignment batch 3, read 2026-08-26 ------------------------------ */
+  ...Object.fromEntries([
+    ['advanced-materials-interlayer-excitons', 'mismatched', 'The abstract and photoluminescence comparison concern the direct-gap transition in monolayer MoS2, not interlayer excitons.'],
+    ['advanced-materials-quantum-anomalous-hall-state', 'mismatched', 'The inspected paper concerns the MoS2 layer-dependent band gap and reports no anomalous Hall state.'],
+    ['advanced-materials-spin-momentum-locking', 'mismatched', 'The inspected paper reports MoS2 photoluminescence and band structure, not spin-momentum locking.'],
+    ['advanced-materials-tmd-heterobilayers', 'partially-supported', 'The source establishes monolayer MoS2 as a direct-gap TMD, but does not study a heterobilayer.'],
+    ['advanced-materials-topological-insulator-surface-states', 'mismatched', 'The inspected source concerns monolayer MoS2 and contains no topological-insulator surface-state result.'],
+  ].map(([slug, verdict, reason]) => [`urn:maha:record:${slug}`, {
+    verdict, sourceContentInspected: true,
+    inspectedContentLocation: 'APS abstract and photoluminescence comparison for DOI 10.1103/PhysRevLett.105.136805',
+    ...(verdict === 'mismatched' ? { mismatchBasis: 'inspected-content-different-subject' } : {}),
+    reason,
+    remediation: verdict === 'supported' ? 'None.' : 'Bind a source that directly treats the named subject, or narrow the record to monolayer MoS2 direct-gap evidence.',
+    ...(verdict === 'supported' ? { origin: 'independently-curated' } : {}),
+  }])),
+  ...Object.fromEntries([
+    ['agentic-systems-mcp-context-window-position-effects', 'supported', 'The paper directly measures how answer accuracy changes with the position of relevant information in long contexts.'],
+    ['agentic-systems-mcp-context-window-token-degradation', 'partially-supported', 'The experiments show long-context performance degradation, but not a general monotonic degradation law per token.'],
+    ['agentic-systems-mcp-human-approval-boundaries', 'mismatched', 'The paper studies long-context retrieval and question answering, not human approval controls.'],
+    ['agentic-systems-mcp-retrieval-context-selection', 'partially-supported', 'The multi-document retrieval task bears on context selection, but the paper does not specify a retrieval-selection system.'],
+    ['agentic-systems-mcp-tool-result-context-injection', 'mismatched', 'The paper studies document position effects and does not examine tool-result injection.'],
+  ].map(([slug, verdict, reason]) => [`urn:maha:record:${slug}`, {
+    verdict, sourceContentInspected: true,
+    inspectedContentLocation: 'arXiv:2307.03172 abstract, multi-document QA and key-value retrieval experiments, position-effect results',
+    ...(verdict === 'mismatched' ? { mismatchBasis: 'inspected-content-different-subject' } : {}), reason,
+    remediation: verdict === 'supported' ? 'None. Record the mapping as curated rather than positional.' : 'Bind a source directly covering the named system boundary, or narrow the record to the inspected long-context result.',
+    ...(verdict === 'supported' ? { origin: 'independently-curated' } : {}),
+  }])),
+  ...Object.fromEntries([
+    ['biomolecular-engineering-cell-free-reaction-yield', 'partially-supported', 'The review discusses flexible cell-free production but does not establish a bounded reaction-yield measure.'],
+    ['biomolecular-engineering-cell-free-transcription-translation', 'supported', 'The review directly treats cell-free protein synthesis and engineering biological parts outside living cells.'],
+    ['biomolecular-engineering-crude-extract-cell-free-systems', 'partially-supported', 'The review covers cell-free systems broadly, but the inspected sections do not isolate crude-extract systems.'],
+    ['biomolecular-engineering-energy-regeneration-in-cell-free-systems', 'mismatched', 'The inspected review sections do not treat energy-regeneration chemistry or kinetics.'],
+    ['biomolecular-engineering-purified-component-expression-systems', 'partially-supported', 'The review covers cell-free expression but does not distinguish purified-component systems in the inspected sections.'],
+  ].map(([slug, verdict, reason]) => [`urn:maha:record:${slug}`, {
+    verdict, sourceContentInspected: true,
+    inspectedContentLocation: 'Open-access abstract and protein-engineering, metabolic-engineering, and artificial-cell sections for DOI 10.1016/j.synbio.2017.02.003',
+    ...(verdict === 'mismatched' ? { mismatchBasis: 'inspected-content-different-subject' } : {}), reason,
+    remediation: verdict === 'supported' ? 'None. Record the mapping as curated rather than positional.' : 'Bind a source or exact section directly supporting the named platform property.',
+    ...(verdict === 'supported' ? { origin: 'independently-curated' } : {}),
+  }])),
+  ...Object.fromEntries([
+    ['critical-supply-chains-dysprosium-ore-to-oxide', 'partially-supported', 'The rare-earth chapter covers production, compounds and metals, trade and resources, but not a dysprosium-specific ore-to-oxide process.'],
+    ['critical-supply-chains-heavy-rare-earth-diffusion', 'mismatched', 'The commodity chapter does not describe grain-boundary diffusion in permanent magnets.'],
+    ['critical-supply-chains-nd-fe-b-magnet-alloying', 'partially-supported', 'The chapter identifies permanent magnets as a rare-earth use but does not specify Nd-Fe-B alloying operations.'],
+    ['critical-supply-chains-neodymium-praseodymium-separation', 'mismatched', 'The chapter reports commodity supply and trade rather than Nd/Pr separation chemistry.'],
+    ['critical-supply-chains-rare-earth-solvent-extraction', 'mismatched', 'The chapter does not establish a solvent-extraction flowsheet or operating conditions.'],
+  ].map(([slug, verdict, reason]) => [`urn:maha:record:${slug}`, {
+    verdict, sourceContentInspected: true,
+    inspectedContentLocation: 'USGS Mineral Commodity Summaries 2026, Rare Earths commodity chapter',
+    ...(verdict === 'mismatched' ? { mismatchBasis: 'inspected-content-different-subject' } : {}), reason,
+    remediation: 'Bind process-specific evidence for the named transformation; retain MCS 2026 only for commodity-level context.',
+  }])),
+  ...Object.fromEntries([
+    ['fusion-plasma-systems-breeding-blanket-test-modules', 'supported', 'ITER documents test blanket modules and their role in testing tritium breeding and extraction.'],
+    ['fusion-plasma-systems-cryogenic-magnet-cooling', 'supported', 'The supporting-systems documentation identifies cryogenics as a system supporting ITER magnet operation.'],
+    ['fusion-plasma-systems-plasma-diagnostics', 'supported', 'The diagnostics page directly describes instruments and measured plasma parameters.'],
+    ['fusion-plasma-systems-tritium-fuel-cycle', 'supported', 'The fuelling page directly describes the closed fuel cycle, isotope separation, storage, delivery, and detritiation.'],
+    ['fusion-plasma-systems-vacuum-vessel-boundary', 'partially-supported', 'The diagnostics documentation identifies port plugs as a primary vacuum boundary, but does not fully specify the vessel boundary.'],
+  ].map(([slug, verdict, reason]) => [`urn:maha:record:${slug}`, {
+    verdict, sourceContentInspected: true,
+    inspectedContentLocation: 'ITER Supporting Systems index and linked Tritium Breeding, Fuelling, Diagnostics, Cryogenics, and Vacuum documentation', reason,
+    remediation: verdict === 'supported' ? 'None. Record the mapping as curated rather than positional.' : 'Bind the vacuum-vessel engineering basis for the complete boundary definition.',
+    ...(verdict === 'supported' ? { origin: 'independently-curated' } : {}),
+  }])),
+  ...Object.fromEntries([
+    ['longevity-metabolism-nad-consumption-by-parps', 'supported', 'The review directly identifies PARPs as NAD-consuming enzymes and discusses their ageing-related roles.'],
+    ['longevity-metabolism-nad-salvage-pathway', 'supported', 'The review describes NAD biosynthesis and salvage pathways directly.'],
+    ['longevity-metabolism-nampt-rate-limiting-step', 'supported', 'The full-text review treats NAMPT in the NAD salvage pathway and its regulation.'],
+    ['longevity-metabolism-nmn-and-nr-precursors', 'supported', 'The review directly discusses NMN and NR as NAD precursors.'],
+    ['longevity-metabolism-nmnat-compartmentalization', 'supported', 'The review identifies NMNAT isoforms and their cellular compartmentalization.'],
+  ].map(([slug, verdict, reason]) => [`urn:maha:record:${slug}`, {
+    verdict, sourceContentInspected: true,
+    inspectedContentLocation: 'PMC7963035, NAD+ biosynthesis, consumption, compartmentalization, and ageing sections', reason,
+    remediation: 'None. Record the mapping as curated rather than positional.', origin: 'independently-curated',
+  }])),
+  ...Object.fromEntries([
+    ['mechanistic-interpretability-activation-patching', 'partially-supported', 'Causal scrubbing uses activation-resampling interventions but is not itself a general activation-patching specification.'],
+    ['mechanistic-interpretability-causal-scrubbing', 'supported', 'The article defines causal scrubbing as a mechanically derived test of an interpretability hypothesis.'],
+    ['mechanistic-interpretability-interchange-interventions', 'partially-supported', 'The method performs correspondence-guided interventions, but the inspected article does not establish the broader interchange-intervention formalism.'],
+    ['mechanistic-interpretability-model-component-ablation', 'mismatched', 'The article tests hypotheses through resampling interventions rather than component ablation.'],
+    ['mechanistic-interpretability-path-patching', 'mismatched', 'The article does not define the later path-patching technique.'],
+  ].map(([slug, verdict, reason]) => [`urn:maha:record:${slug}`, {
+    verdict, sourceContentInspected: true,
+    inspectedContentLocation: 'Causal Scrubbing article, method definition, correspondence, resampling interventions, examples, and limitations',
+    ...(verdict === 'mismatched' ? { mismatchBasis: 'inspected-content-different-subject' } : {}), reason,
+    remediation: verdict === 'supported' ? 'None. Record the mapping as curated rather than positional.' : 'Bind the technique-specific source or narrow the record to causal-scrubbing interventions.',
+    ...(verdict === 'supported' ? { origin: 'independently-curated' } : {}),
+  }])),
+  'urn:maha:record:neurotechnology-bci-adaptive-stimulation-policies': {
+    verdict: 'partially-supported', sourceContentInspected: true,
+    inspectedContentLocation: 'Neuron abstract and closed-loop detection, stimulation-timing, and outcome-comparison sections for DOI 10.1016/j.neuron.2011.08.023',
+    reason: 'The study demonstrates adaptive closed-loop stimulation triggered by neural activity, but does not establish a general policy framework.',
+    remediation: 'Narrow to the demonstrated stimulation rule or bind a source comparing adaptive policies.',
+  },
   'urn:maha:record:longevity-metabolism-autophagosome-abundance': {
     verdict: 'inaccessible-source',
     sourceContentInspected: false,
@@ -631,36 +725,32 @@ const JUDGEMENTS: Readonly<Record<string, InspectedJudgement>> = {
     remediation: 'Obtain the guidelines through a retrievable route, inspect the named assay-interpretation sections, then confirm or replace.',
   },
   'urn:maha:record:neurotechnology-bci-neuropixels-cmos-probe': {
-    verdict: 'inaccessible-source',
-    sourceContentInspected: false,
-    inspectedContentLocation: null,
+    verdict: 'supported', sourceContentInspected: true,
+    inspectedContentLocation: 'UCL open-access abstract for DOI 10.1038/nature24636',
     reason:
-      'Retrieval was attempted for this batch. The publisher redirects to an authentication wall, which was not followed, so the content could not be read. An inaccessible source is never treated as content-confirmed.',
-    remediation: 'Obtain the article through a retrievable route, inspect it, then confirm or replace the mapping.',
+      'The abstract directly describes a CMOS-compatible, fully integrated silicon probe with on-chip filtering, amplification, multiplexing and digitization.',
+    remediation: 'None. Record the mapping as curated rather than positional.', origin: 'independently-curated',
   },
   'urn:maha:record:neurotechnology-bci-neuropixels-recording-sites': {
-    verdict: 'inaccessible-source',
-    sourceContentInspected: false,
-    inspectedContentLocation: null,
+    verdict: 'supported', sourceContentInspected: true,
+    inspectedContentLocation: 'UCL open-access abstract for DOI 10.1038/nature24636',
     reason:
-      'Retrieval was attempted for this batch. The publisher redirects to an authentication wall, which was not followed, so the content could not be read. An inaccessible source is never treated as content-confirmed.',
-    remediation: 'Obtain the article through a retrievable route, inspect it, then confirm or replace the mapping.',
+      'The abstract reports 960 low-impedance recording sites tiled along the probe shank.',
+    remediation: 'None. Record the mapping as curated rather than positional.', origin: 'independently-curated',
   },
   'urn:maha:record:neurotechnology-bci-neuropixels-channel-selection': {
-    verdict: 'inaccessible-source',
-    sourceContentInspected: false,
-    inspectedContentLocation: null,
+    verdict: 'supported', sourceContentInspected: true,
+    inspectedContentLocation: 'UCL open-access abstract for DOI 10.1038/nature24636',
     reason:
-      'Retrieval was attempted for this batch. The publisher redirects to an authentication wall, which was not followed, so the content could not be read. An inaccessible source is never treated as content-confirmed.',
-    remediation: 'Obtain the article through a retrievable route, inspect it, then confirm or replace the mapping.',
+      'The abstract states that 384 recording channels can programmably address 960 sites, directly supporting channel selection.',
+    remediation: 'None. Record the mapping as curated rather than positional.', origin: 'independently-curated',
   },
   'urn:maha:record:neurotechnology-bci-extracellular-spike-recording': {
-    verdict: 'inaccessible-source',
-    sourceContentInspected: false,
-    inspectedContentLocation: null,
+    verdict: 'supported', sourceContentInspected: true,
+    inspectedContentLocation: 'UCL open-access abstract for DOI 10.1038/nature24636',
     reason:
-      'Retrieval was attempted for this batch. The publisher redirects to an authentication wall, which was not followed, so the content could not be read. An inaccessible source is never treated as content-confirmed.',
-    remediation: 'Obtain the article through a retrievable route, inspect it, then confirm or replace the mapping.',
+      'The abstract directly reports extracellular recordings with sub-millisecond resolution and well-isolated spiking activity.',
+    remediation: 'None. Record the mapping as curated rather than positional.', origin: 'independently-curated',
   },
   'urn:maha:record:neurotechnology-bci-micro-ecog-arrays': {
     verdict: 'inaccessible-source',
@@ -712,6 +802,10 @@ const JUDGEMENTS: Readonly<Record<string, InspectedJudgement>> = {
  * This is internal editorial verification, not external review.
  */
 const PUBLISHER_VERIFIED: Readonly<Record<string, string>> = {
+  'source-fusion-plasma-systems-iter-support':
+    'Fetched the ITER Supporting Systems index and its linked official pages for tritium breeding, fuelling, diagnostics, cryogenics, and vacuum systems.',
+  'source-mechanistic-interpretability-causal-scrubbing':
+    'Fetched the author publication page and the linked Causal Scrubbing article, which serves the declared method, correspondence, intervention, example, and limitation material.',
   'source-fusion-plasma-systems-iter-magnets':
     'Fetched https://www.iter.org/machine/magnets, which serves the declared ITER magnets documentation covering the toroidal field, poloidal field, central solenoid and correction coil systems.',
   'source-agentic-systems-mcp-mcp-tools':
