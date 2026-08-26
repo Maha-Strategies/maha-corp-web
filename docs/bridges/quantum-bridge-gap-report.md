@@ -14,8 +14,8 @@ This report is generated. Do not edit it by hand.
 
 | Outcome | Count |
 | --- | --- |
-| unresolved-record | 23 |
-| alias-resolution | 1 |
+| unresolved-record | 22 |
+| alias-resolution | 2 |
 
 | ID | Side | Submitted reference | Outcome | Record |
 | --- | --- | --- | --- | --- |
@@ -33,7 +33,7 @@ This report is generated. Do not edit it by hand.
 | Q-BR-006 | target | `fusion-plasma:rebco-high-field-magnets` | alias-resolution | `urn:maha:record:fusion-plasma-systems-rebco-high-field-magnets` |
 | Q-BR-007 | source | `quantum-systems:majorana-zero-modes` | unresolved-record | — |
 | Q-BR-007 | target | `advanced-materials:twisted-bilayer-heterostructures` | unresolved-record | — |
-| Q-BR-008 | source | `quantum-systems:syndrome-extraction-cycle` | unresolved-record | — |
+| Q-BR-008 | source | `quantum-systems:syndrome-extraction-cycle` | alias-resolution | `urn:maha:record:stabilizer-syndrome-measurement` |
 | Q-BR-008 | target | `neuromorphic-biocomputing:spiking-fault-tolerance` | unresolved-record | — |
 | Q-BR-009 | source | `quantum-systems:spin-qubit-hyperfine-dephasing` | unresolved-record | — |
 | Q-BR-009 | target | `semiconductor-manufacturing:silicon-crystal-growth-and-wafer-preparation` | unresolved-record | — |
@@ -190,4 +190,48 @@ These are not fixed by creating records or supplying locators.
 | Superconducting gap, critical field and depairing current | quantum-systems | concept | source-missing-locator, single-source-record |
 | Majorana zero modes: proposal and experimental signature | quantum-systems | concept | source-missing-locator, single-source-record |
 | Hyperfine dephasing in silicon spin qubits | quantum-systems | mechanism | source-missing-locator |
+| Tensor network states and truncation | quantum-systems | concept | source-missing-locator, single-source-record |
+| QUBO and Ising formulations of combinatorial problems | quantum-systems | method | single-source-record |
+| Loss channels in three-dimensional superconducting cavities | quantum-systems | mechanism | single-source-record |
+
+## Endpoint closure
+
+Plan `maha-endpoint-closure/1.0` · digest `sha256:c1061e0ff86d1bb4442768aec653fc7f2ba2fbd4bb4968cb8ac4ffb43288b9f3`. Full reasoning in `docs/bridges/endpoint-resolution-plan.md`.
+
+Candidates built: **10**, of which **0** are promotable. A candidate is not a canonical record, so building one does not resolve its endpoint.
+
+| Classification | Count |
+| --- | --- |
+| existing-record-alias | 1 |
+| new-record-candidate | 10 |
+| compound-endpoint | 4 |
+| invalid-endpoint | 1 |
+| incompatible-record-class | 4 |
+| blocked-pending-evidence | 3 |
+
+| Key | Classification | Live resolver outcome |
+| --- | --- | --- |
+| Q-BR-001A | compound-endpoint | unresolved-record |
+| Q-BR-001B | incompatible-record-class | unresolved-record |
+| Q-BR-002A | new-record-candidate | unresolved-record |
+| Q-BR-002B | incompatible-record-class | unresolved-record |
+| Q-BR-003A | new-record-candidate | unresolved-record |
+| Q-BR-003B | compound-endpoint | unresolved-record |
+| Q-BR-004A | new-record-candidate | unresolved-record |
+| Q-BR-004B | blocked-pending-evidence | unresolved-record |
+| Q-BR-005A | compound-endpoint | unresolved-record |
+| Q-BR-005B | new-record-candidate | unresolved-record |
+| Q-BR-006A | new-record-candidate | unresolved-record |
+| Q-BR-007A | new-record-candidate | unresolved-record |
+| Q-BR-007B | new-record-candidate | unresolved-record |
+| Q-BR-008A | existing-record-alias | alias-resolution |
+| Q-BR-008B | incompatible-record-class | unresolved-record |
+| Q-BR-009A | new-record-candidate | unresolved-record |
+| Q-BR-009B | incompatible-record-class | unresolved-record |
+| Q-BR-010A | new-record-candidate | unresolved-record |
+| Q-BR-010B | blocked-pending-evidence | unresolved-record |
+| Q-BR-011A | invalid-endpoint | unresolved-record |
+| Q-BR-011B | blocked-pending-evidence | unresolved-record |
+| Q-BR-012A | new-record-candidate | unresolved-record |
+| Q-BR-012B | compound-endpoint | unresolved-record |
 

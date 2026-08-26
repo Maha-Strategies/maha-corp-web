@@ -78,6 +78,48 @@ for (const entry of DOMAIN_ALIASES) {
   }
 }
 
+/**
+ * Declared record aliases.
+ *
+ * A domain alias fixes a namespace difference. A record alias fixes a naming
+ * difference for the SAME concept, and is far easier to abuse, so it carries a
+ * higher burden: `equivalenceEvidence` must quote the canonical record text
+ * that demonstrates the two names denote one concept. A merely related, nearby,
+ * or narrower concept is not an alias and must stay unresolved — the submitter
+ * should point at the record that exists rather than have the resolver quietly
+ * redirect them.
+ *
+ * The alias key is the submitted reference verbatim. Nothing is inferred.
+ */
+export interface RecordAlias {
+  alias: string
+  targetRecordId: string
+  since: string
+  reason: string
+  /** Canonical record text showing the two names denote the same concept. */
+  equivalenceEvidence: string
+}
+
+export const RECORD_ALIASES: readonly RecordAlias[] = [
+  {
+    alias: 'quantum-systems:syndrome-extraction-cycle',
+    targetRecordId: 'urn:maha:record:stabilizer-syndrome-measurement',
+    since: 'maha-reference-resolver/1.1',
+    reason:
+      'Syndrome extraction and syndrome measurement are the same operation under two standard names, and the canonical record already scopes the repeated round rather than a single shot.',
+    equivalenceEvidence:
+      'The canonical record describes "Repeated parity measurements that extract error information while preserving the encoded logical state under the code model." Repetition is the cycle and extraction is the syndrome, so the submitted name adds nothing the record does not already bound.',
+  },
+]
+
+const recordAliasCounts = new Map<string, number>()
+for (const entry of RECORD_ALIASES) {
+  recordAliasCounts.set(entry.alias, (recordAliasCounts.get(entry.alias) ?? 0) + 1)
+}
+for (const [alias, count] of recordAliasCounts) {
+  if (count > 1) throw new Error(`Ambiguous record alias: ${alias} is declared ${count} times.`)
+}
+
 /* ---------------------------------------------------------------- corpus -- */
 
 /** Canonical graph records. The only class a bridge endpoint may resolve to. */
@@ -92,6 +134,23 @@ const CANONICAL_DOMAINS = new Set(CANONICAL.map((record) => record.domainSlug))
  */
 const PILOT_DOMAINS = new Set(EPISTEMIC_PHASE4_PILOT_ENTRIES.map((entry) => entry.domainSlug))
 
+/**
+ * A record alias may only point at a canonical record, may never shadow a real
+ * canonical id, and may never point at another alias. Each of these fails at
+ * module load rather than silently producing a wrong resolution.
+ */
+for (const entry of RECORD_ALIASES) {
+  if (CANONICAL_BY_ID.has(entry.alias)) {
+    throw new Error(`Record alias collision: ${entry.alias} is already a canonical record id.`)
+  }
+  if (!CANONICAL_BY_ID.has(entry.targetRecordId)) {
+    throw new Error(`Record alias ${entry.alias} targets ${entry.targetRecordId}, which is not a canonical record.`)
+  }
+  if (recordAliasCounts.has(entry.targetRecordId)) {
+    throw new Error(`Record alias chain rejected: ${entry.targetRecordId} is both an alias and an alias target.`)
+  }
+}
+
 export type ResolutionOutcome =
   | {
       status: 'exact-resolution'
@@ -104,7 +163,9 @@ export type ResolutionOutcome =
       recordId: string
       domainSlug: string
       recordRevisionSha256: string
-      appliedAlias: DomainAlias
+      /** Exactly one of these is set, naming which table did the work. */
+      appliedAlias?: DomainAlias
+      appliedRecordAlias?: RecordAlias
       normalizedReference: string
     }
   | { status: 'unresolved-domain'; requestedDomain: string }
@@ -165,6 +226,26 @@ export function resolveEpistemicReference(submittedReference: string): Resolutio
         recordId: direct.id,
         domainSlug: direct.domainSlug,
         recordRevisionSha256: epistemicReviewTargetHash(direct),
+      },
+    }
+  }
+
+  // 2. A declared record alias, matched on the submitted reference verbatim.
+  //    This runs after the exact-id check so a real canonical id always wins,
+  //    and before namespace interpretation so an alias cannot be assembled out
+  //    of a domain alias plus a guess.
+  const recordAlias = RECORD_ALIASES.find((entry) => entry.alias === submittedReference)
+  if (recordAlias) {
+    const target = CANONICAL_BY_ID.get(recordAlias.targetRecordId)!
+    return {
+      ...base,
+      outcome: {
+        status: 'alias-resolution',
+        recordId: target.id,
+        domainSlug: target.domainSlug,
+        recordRevisionSha256: epistemicReviewTargetHash(target),
+        appliedRecordAlias: recordAlias,
+        normalizedReference: `${target.domainSlug}:${target.slug}`,
       },
     }
   }

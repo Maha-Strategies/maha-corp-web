@@ -369,6 +369,8 @@ test('the gap report separates remediable candidates from invalid ones', () => {
 test('the gap report reports no unresolved-domain outcomes', () => {
   const report = buildGapReport()
   assert.equal(report.endpointTotals['unresolved-domain'] ?? 0, 0)
-  assert.equal(report.endpointTotals['alias-resolution'] ?? 0, 1)
-  assert.equal(report.endpointTotals['unresolved-record'] ?? 0, 23)
+  // One domain alias plus one declared record alias. Every other endpoint is
+  // unresolved at the record level, never at the domain level.
+  assert.equal(report.endpointTotals['alias-resolution'] ?? 0, 2)
+  assert.equal(report.endpointTotals['unresolved-record'] ?? 0, 22)
 })

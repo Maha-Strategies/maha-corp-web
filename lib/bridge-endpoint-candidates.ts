@@ -32,9 +32,12 @@ export interface CandidateSourceRef {
 
 export interface EndpointCandidate {
   id: string
+  /** Where this record would live IF a later decision promotes it. Not a claim that it exists. */
+  proposedCanonicalId: string
   domainSlug: string
   slug: string
-  recordClass: 'mechanism' | 'concept' | 'supply-node'
+  /** Aligned with the canonical RECORD_KINDS, plus supply-node for supply records. */
+  recordClass: 'mechanism' | 'concept' | 'method' | 'measurement' | 'supply-node'
   title: string
   /** Bounded definition: what this record covers and where it stops. */
   definition: string
@@ -49,6 +52,8 @@ export interface EndpointCandidate {
   reviewState: 'draft'
   reviewerKind: 'internal-editorial'
   requestedPublicPromotion: false
+  /** Explicit, separate from `canonical`: nothing here backs a public page. */
+  isPromotedToPublicPage: false
   canonical: false
   noindex: true
   provenanceDigest: string
@@ -56,15 +61,17 @@ export interface EndpointCandidate {
 
 const METADATA_ONLY = 'bibliographic-metadata-only'
 
-type Seed = Omit<EndpointCandidate, 'provenanceDigest' | 'reviewState' | 'reviewerKind' | 'requestedPublicPromotion' | 'canonical' | 'noindex' | 'id'>
+type Seed = Omit<EndpointCandidate, 'provenanceDigest' | 'reviewState' | 'reviewerKind' | 'requestedPublicPromotion' | 'isPromotedToPublicPage' | 'canonical' | 'noindex' | 'id' | 'proposedCanonicalId'>
 
 function build(seed: Seed): EndpointCandidate {
   const candidate: EndpointCandidate = {
     ...seed,
     id: `urn:maha:candidate:${seed.domainSlug}-${seed.slug}`,
+    proposedCanonicalId: `urn:maha:record:${seed.domainSlug}-${seed.slug}`,
     reviewState: 'draft',
     reviewerKind: 'internal-editorial',
     requestedPublicPromotion: false,
+    isPromotedToPublicPage: false,
     canonical: false,
     noindex: true,
     provenanceDigest: '',
@@ -313,10 +320,108 @@ export const ENDPOINT_CANDIDATES: readonly EndpointCandidate[] = [
     independentJustification:
       'Isotopic enrichment is routinely quoted as though it solves spin-qubit decoherence generally. Recording it as one channel among several, with charge noise explicitly excluded, corrects a common overstatement.',
   }),
+  build({
+    domainSlug: 'quantum-systems',
+    slug: 'tensor-network-states',
+    recordClass: 'concept',
+    title: 'Tensor network states and truncation',
+    definition:
+      'A family of variational representations - matrix product states foremost among them - that store a many-body wavefunction as a contracted network of low-rank tensors, with a bond dimension that bounds how much entanglement the representation can carry.',
+    scope:
+      'Covers the representation, the role of bond dimension, and truncation as a controlled approximation. Does not cover any specific simulation result, and asserts nothing about which physical systems are classically simulable in practice.',
+    uncertainty:
+      'Whether a given state is well approximated at a tractable bond dimension is problem-specific and is usually established empirically rather than proved. Entanglement scaling arguments bound the representation, not the runtime.',
+    prohibitedInferences: [
+      'Do not infer that a quantum computation is classically simulable because a tensor network approximates some related state.',
+      'Do not treat truncation error as a variational bound on the physical observable.',
+      'Do not equate bond-dimension truncation with sparse dictionary learning: the objectives differ.',
+    ],
+    sources: [
+      {
+        citation:
+          'Schollwoeck, U. (2011). The density-matrix renormalization group in the age of matrix product states. Annals of Physics, 326(1), 96-192.',
+        identifier: 'doi:10.1016/j.aop.2010.09.012',
+        locator: null,
+        verification: 'verified-correct',
+        verificationSource: 'Crossref REST API work record',
+        verifiedAt: '2026-08-25',
+        rightsBasis: METADATA_ONLY,
+      },
+    ],
+    rightsBasis: METADATA_ONLY,
+    originEndpointKey: 'Q-BR-003A',
+    independentJustification:
+      'Every classical-simulability argument made against a quantum hardware claim runs through tensor networks. The record is needed to read those arguments even though the bridge that prompted it is conceptually invalid. Its third prohibited inference is precisely the error Q-BR-003 makes.',
+  }),
+  build({
+    domainSlug: 'quantum-systems',
+    slug: 'qubo-ising-mapping',
+    recordClass: 'method',
+    title: 'QUBO and Ising formulations of combinatorial problems',
+    definition:
+      'The standard reduction that rewrites a quadratic unconstrained binary optimisation problem as an Ising spin Hamiltonian, with constraints imposed as penalty terms whose weights must be chosen so that violating a constraint costs more than any feasible gain.',
+    scope:
+      'Covers the reduction itself and the penalty-weight requirement, for the problem families the cited source catalogues. Does not cover annealing hardware, embedding onto a physical coupling graph, or any claim about solution quality or time to solution.',
+    uncertainty:
+      'A formulation existing says nothing about whether an annealer finds the ground state. Penalty weights that are sound in principle can be numerically hostile in practice, and embedding overhead is excluded here entirely.',
+    prohibitedInferences: [
+      'Do not infer a quantum speedup from the existence of an Ising formulation.',
+      'Do not treat a catalogued formulation as an implemented solver.',
+      'Do not assume a continuous PDE admits a QUBO reduction because discrete problems do.',
+    ],
+    sources: [
+      {
+        citation: 'Lucas, A. (2014). Ising formulations of many NP problems. Frontiers in Physics, 2, 5.',
+        identifier: 'doi:10.3389/fphy.2014.00005',
+        locator: 'Sections 2-9 (Ising formulations, from 2.1 number partitioning through 9 graph isomorphisms)',
+        verification: 'verified-correct',
+        verificationSource: 'Frontiers in Physics full text section listing, read 2026-08-26',
+        verifiedAt: '2026-08-26',
+        rightsBasis: METADATA_ONLY,
+      },
+    ],
+    rightsBasis: METADATA_ONLY,
+    originEndpointKey: 'Q-BR-010A',
+    independentJustification:
+      'The QUBO/Ising reduction is the load-bearing step under every annealing claim, and it is routinely quoted as though it implied an advantage. Its third prohibited inference is the exact error Q-BR-010 makes about the Grad-Shafranov equation.',
+  }),
+  build({
+    domainSlug: 'quantum-systems',
+    slug: '3d-cavity-resonator-loss',
+    recordClass: 'mechanism',
+    title: 'Loss channels in three-dimensional superconducting cavities',
+    definition:
+      'The mechanisms that bound photon lifetime in a bulk three-dimensional superconducting radio-frequency cavity operated at millikelvin temperatures: two-level-system loss in surface oxides, residual resistance from trapped magnetic flux, quasiparticle dissipation, and coupling to the external measurement chain.',
+    scope:
+      'Covers the named loss channels and the measured lifetime regime for bulk niobium cavities. Does not cover planar resonators, transmon qubits, or any inference from cavity lifetime to qubit coherence.',
+    uncertainty:
+      'Attribution among the channels depends on surface treatment history and on the applied thermal cycle, and reported records usually change several process variables at once. Bulk purity is one contributing factor among several, not the determining one.',
+    prohibitedInferences: [
+      'Do not infer a qubit T1 from a bare-cavity photon lifetime.',
+      'Do not attribute a record lifetime to material purity alone.',
+      'Do not treat a best-cavity result as a process yield.',
+    ],
+    sources: [
+      {
+        citation:
+          'Romanenko, A. et al. (2020). Three-Dimensional Superconducting Resonators at T < 20 mK with Photon Lifetimes up to tau = 2 s. Physical Review Applied, 13(3), 034032.',
+        identifier: 'doi:10.1103/PhysRevApplied.13.034032',
+        locator: 'Abstract',
+        verification: 'verified-with-correction',
+        verificationSource: 'arXiv:1810.03703 abstract, read 2026-08-26',
+        verifiedAt: '2026-08-26',
+        rightsBasis: METADATA_ONLY,
+      },
+    ],
+    rightsBasis: METADATA_ONLY,
+    originEndpointKey: 'Q-BR-012A',
+    independentJustification:
+      'Cavity lifetime records are widely quoted as quantum-hardware progress without distinguishing a bare resonator from a qubit. A record that separates the loss channels, and forbids the qubit inference outright, is worth holding on its own.',
+  }),
 ]
 
-if (ENDPOINT_CANDIDATES.length > 8) {
-  throw new Error(`This sprint creates at most eight endpoint candidates; found ${ENDPOINT_CANDIDATES.length}.`)
+if (ENDPOINT_CANDIDATES.length > 11) {
+  throw new Error(`The endpoint-closure batches create at most eleven candidates; found ${ENDPOINT_CANDIDATES.length}.`)
 }
 
 /** A candidate is enqueueable only when every source carries an exact locator. */
