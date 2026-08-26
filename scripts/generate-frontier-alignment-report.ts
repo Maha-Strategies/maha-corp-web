@@ -8,6 +8,7 @@ import {
   SOURCE_ALIGNMENT_VERSION,
   alignmentBlockers,
   auditDigest,
+  BATCH_5_REINSPECTIONS,
   batchOf,
   batchStats,
   originTotals,
@@ -131,6 +132,95 @@ for (const domain of domains) {
 }
 lines.push('')
 
+lines.push('## Batch 5 — remediation cohort', '')
+const b5 = batchStats().find((row) => row.batchId === 'batch-5')!
+const b5Records = FRONTIER_ALIGNMENT_AUDIT.filter((entry) => batchOf(entry.recordId) === 'batch-5')
+lines.push(
+  `Batch 5 was remediation-focused rather than evenly balanced: **${b5.attempted}** cohort records, **${b5.contentInspected}** with content inspected and **${b5.inaccessible}** unreachable. Domain bounds of three to eight are enforced at module load.`,
+  '',
+)
+lines.push(row(['Domain', 'Selected', 'Inspected', 'Inaccessible']), row(['---', '---', '---', '---']))
+for (const domain of [...new Set(b5Records.map((entry) => entry.domainSlug))].sort()) {
+  const rows = b5Records.filter((entry) => entry.domainSlug === domain)
+  lines.push(
+    row([
+      domain,
+      String(rows.length),
+      String(rows.filter((entry) => entry.evidence.sourceContentInspected).length),
+      String(rows.filter((entry) => entry.evidence.subjectAligned === 'inaccessible-source').length),
+    ]),
+  )
+}
+lines.push('')
+lines.push(
+  row(['Supported', 'Partial', 'Mismatched', 'Insufficient', 'Inaccessible', 'Alignment-clear']),
+  row(['---', '---', '---', '---', '---', '---']),
+)
+lines.push(
+  row([
+    String(b5.supported),
+    String(b5.partiallySupported),
+    String(b5.mismatched),
+    String(b5.insufficientEvidence),
+    String(b5.inaccessible),
+    String(b5.alignmentClear),
+  ]),
+)
+lines.push('')
+
+lines.push('### Artifacts read', '')
+const readArtifacts = new Map<string, string>()
+for (const entry of [...b5Records, ...BATCH_5_REINSPECTIONS.map((id) => FRONTIER_ALIGNMENT_AUDIT.find((row) => row.recordId === id)!)]) {
+  if (entry.evidence.sourceContentInspected && entry.evidence.inspectedContentLocation) {
+    readArtifacts.set(entry.evidence.inspectedContentLocation, entry.evidence.inspectedArtifactVersion)
+  }
+}
+lines.push(row(['Inspected location', 'Artifact version']), row(['---', '---']))
+for (const [location, version] of [...readArtifacts].sort()) lines.push(row([location, `\`${version}\``]))
+lines.push('')
+
+lines.push('### Re-inspections', '')
+lines.push(
+  'These records were already judged by an earlier batch and were re-examined on better evidence. They are **not** counted as new batch 5 inspections, and each preserves its superseded finding.',
+  '',
+)
+lines.push(row(['Record', 'Prior verdict', 'New verdict', 'Why it changed']), row(['---', '---', '---', '---']))
+for (const recordId of BATCH_5_REINSPECTIONS) {
+  const entry = FRONTIER_ALIGNMENT_AUDIT.find((row) => row.recordId === recordId)!
+  lines.push(
+    row([
+      `\`${recordId.replace('urn:maha:record:', '')}\``,
+      entry.priorJudgement ? `\`${entry.priorJudgement.verdict}\`` : '—',
+      `\`${entry.evidence.subjectAligned}\``,
+      entry.reason,
+    ]),
+  )
+}
+lines.push('')
+
+const proposals = FRONTIER_ALIGNMENT_AUDIT.filter((entry) => entry.proposedSourceOverride)
+lines.push('### Proposed source overrides', '')
+if (!proposals.length) lines.push('None.', '')
+else {
+  lines.push(
+    '**Proposed, not applied.** Nothing below changes what a record cites; each needs an explicit decision and content inspection before adoption.',
+    '',
+  )
+  lines.push(row(['Record', 'Proposed source', 'Identifier', 'Rationale', 'Decision']), row(['---', '---', '---', '---', '---']))
+  for (const entry of proposals) {
+    lines.push(
+      row([
+        `\`${entry.recordId.replace('urn:maha:record:', '')}\``,
+        entry.proposedSourceOverride!.citation,
+        `\`${entry.proposedSourceOverride!.identifier}\``,
+        entry.proposedSourceOverride!.rationale,
+        `\`${entry.proposedSourceOverride!.decision}\``,
+      ]),
+    )
+  }
+  lines.push('')
+}
+
 lines.push('## Confirmed mappings', '')
 lines.push(row(['Record', 'Source', 'Inspected at', 'Origin']), row(['---', '---', '---', '---']))
 for (const entry of clear) {
@@ -234,6 +324,11 @@ writeFileSync(
       verdictTotals: verdicts,
       originTotals: origins,
       batchStats: batchStats(),
+      batch5Reinspections: BATCH_5_REINSPECTIONS,
+      proposedSourceOverrides: FRONTIER_ALIGNMENT_AUDIT.filter((entry) => entry.proposedSourceOverride).map((entry) => ({
+        recordId: entry.recordId,
+        ...entry.proposedSourceOverride,
+      })),
       blockerTotals,
       records: FRONTIER_ALIGNMENT_AUDIT.map((entry) => ({
         ...entry,
