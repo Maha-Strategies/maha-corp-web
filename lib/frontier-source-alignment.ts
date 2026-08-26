@@ -76,6 +76,22 @@ export type MismatchBasis = (typeof MISMATCH_BASES)[number]
 export const METADATA_METHODS = ['crossref-rest', 'publisher-page', 'catalogue-record', 'none'] as const
 export type MetadataMethod = (typeof METADATA_METHODS)[number]
 
+/**
+ * Which artifact was actually read. A preprint is never silently treated as the
+ * version of record, and a government report or a living specification is not
+ * a peer-reviewed article. Recorded per judgement so a reviewer sees exactly
+ * what was in front of the editor.
+ */
+export const INSPECTED_ARTIFACT_VERSIONS = [
+  'version-of-record',
+  'accepted-manuscript',
+  'preprint',
+  'government-report',
+  'living-specification',
+  'not-inspected',
+] as const
+export type InspectedArtifactVersion = (typeof INSPECTED_ARTIFACT_VERSIONS)[number]
+
 export const TRANSCRIPTION_CONFIDENCES = ['high', 'medium', 'low'] as const
 export type TranscriptionConfidence = (typeof TRANSCRIPTION_CONFIDENCES)[number]
 
@@ -106,6 +122,8 @@ export interface AlignmentEvidence {
   independentlyReproduced: false
   /** No external reviewer has seen any of this. */
   externallyReviewed: false
+  /** Which artifact the editor actually read. */
+  inspectedArtifactVersion: InspectedArtifactVersion
 }
 
 export interface PriorMapping {
@@ -131,6 +149,10 @@ export interface RecordAlignmentAudit {
   remediation: string
   /** Preserved verbatim when a mapping was corrected. Append-only. */
   priorMapping: PriorMapping | null
+  /** A superseded judgement from an earlier batch, preserved verbatim. */
+  priorJudgement: InspectedJudgement['priorJudgement'] | null
+  /** A proposed replacement source awaiting a human decision. Never applied. */
+  proposedSourceOverride: InspectedJudgement['proposedSourceOverride'] | null
 }
 
 /* ------------------------------------------------------- cached registry -- */
@@ -159,6 +181,28 @@ interface InspectedJudgement {
   origin?: AssignmentOrigin
   mismatchBasis?: MismatchBasis
   chronologicalRiskIndicator?: boolean
+  artifactVersion?: InspectedArtifactVersion
+  /**
+   * A superseded judgement, preserved verbatim when a later batch re-inspected
+   * the same source with better evidence. Append-only: the earlier finding is
+   * never deleted, only nested.
+   */
+  priorJudgement?: {
+    batchId: string
+    verdict: AlignmentVerdict
+    inspectedContentLocation: string | null
+    reason: string
+  }
+  /**
+   * A replacement source proposed but NOT applied. Recording a proposal is not
+   * substituting a source: nothing here changes what the record cites.
+   */
+  proposedSourceOverride?: {
+    citation: string
+    identifier: string
+    rationale: string
+    decision: 'pending-human-decision'
+  }
 }
 
 /**
@@ -798,46 +842,6 @@ const JUDGEMENTS: Readonly<Record<string, InspectedJudgement>> = {
    * duplicate is a compiler error and every verdict is type-checked. See the
    * batch registry below for machine-checkable membership.
    */
-  'urn:maha:record:fusion-plasma-systems-stellarator-field-optimization': {
-    verdict: 'partially-supported',
-    sourceContentInspected: true,
-    inspectedContentLocation: 'IOP abstract for Nuclear Fusion 61(9), Boozer "Stellarators as a fast path to fusion"',
-    reason:
-      'The abstract makes the demonstrated reliability of computational stellarator design one of its three points, which bears on field optimisation, but the abstract does not develop an optimisation method.',
-    remediation: 'Read the design sections and confirm, or narrow the record to the strategic claim the abstract supports.',
-  },
-  'urn:maha:record:fusion-plasma-systems-stellarator-magnetic-coils': {
-    verdict: 'partially-supported',
-    sourceContentInspected: true,
-    inspectedContentLocation: 'IOP abstract for Nuclear Fusion 61(9), Boozer "Stellarators as a fast path to fusion"',
-    reason:
-      'Coils fall within the paper scope as part of stellarator configuration, but the abstract does not treat coil design in detail.',
-    remediation: 'Read the coil sections named in the declared locator before confirming.',
-  },
-  'urn:maha:record:fusion-plasma-systems-cable-in-conduit-conductors': {
-    verdict: 'insufficient-evidence',
-    sourceContentInspected: true,
-    inspectedContentLocation: 'IOP abstract for Nuclear Fusion 61(9), Boozer "Stellarators as a fast path to fusion"',
-    reason:
-      'Cable-in-conduit conductors do not appear at abstract level. Only the abstract was read, and the declared locator points at sections not inspected, so absence here does not establish that the paper omits the subject.',
-    remediation: 'Read the magnet and coil sections named in the locator, then confirm or replace.',
-  },
-  'urn:maha:record:fusion-plasma-systems-rebco-high-field-magnets': {
-    verdict: 'insufficient-evidence',
-    sourceContentInspected: true,
-    inspectedContentLocation: 'IOP abstract for Nuclear Fusion 61(9), Boozer "Stellarators as a fast path to fusion"',
-    reason:
-      'REBCO does not appear at abstract level. Only the abstract was read, so this is not evidence that the cited sections omit high-field magnets. Recorded as unresolved rather than mismatched.',
-    remediation: 'Read the magnet sections named in the locator. This record also backs the only resolving Q-BR bridge endpoint, so it warrants priority.',
-  },
-  'urn:maha:record:fusion-plasma-systems-superconducting-quench-protection': {
-    verdict: 'insufficient-evidence',
-    sourceContentInspected: true,
-    inspectedContentLocation: 'IOP abstract for Nuclear Fusion 61(9), Boozer "Stellarators as a fast path to fusion"',
-    reason:
-      'Quench protection does not appear at abstract level, and the abstract is the only part read, so nonalignment is not established.',
-    remediation: 'Read the magnet sections named in the locator, then confirm or replace.',
-  },
   'urn:maha:record:advanced-materials-two-dimensional-magnetism': {
     verdict: 'mismatched',
     sourceContentInspected: true,
@@ -1137,6 +1141,479 @@ const JUDGEMENTS: Readonly<Record<string, InspectedJudgement>> = {
       'Retrieval was attempted for this batch. The USGS commodity chapter returned HTTP 403, so the content could not be read. An inaccessible source is never treated as content-confirmed.',
     remediation: 'Obtain the commodity chapter through a retrievable route, inspect it, then confirm or replace the mapping.',
   },
+
+  /* ---- alignment batch 5, read 2026-08-26 ------------------------------
+   * Remediation-focused. Priority 1 re-inspects the stellarator block on full
+   * text; those five are re-inspections, not new cohort members, and each
+   * nests its superseded batch-4 finding in priorJudgement.
+   */
+  'urn:maha:record:fusion-plasma-systems-rebco-high-field-magnets': {
+    verdict: 'mismatched',
+    sourceContentInspected: true,
+    inspectedContentLocation: 'arXiv:2104.04621 full text (preprint of Nuclear Fusion 61 096024), extracted to text and searched in full; sections I-IV and appendices',
+    artifactVersion: 'preprint',
+    mismatchBasis: 'inspected-content-different-subject',
+    reason:
+      'Full text was extracted and searched. The paper contains zero occurrences of "REBCO", "barium copper", "high-temperature superconduct" and even "superconduct" in any form. It cannot support a record about REBCO high-field magnets. Batch 4 recorded insufficient-evidence from the abstract alone; reading the full text settles it.',
+    remediation: 'Bind a source that actually reports REBCO conductors. A proposed override is recorded and is NOT applied. This record backs the only resolving Q-BR bridge endpoint, so the override needs an explicit decision.',
+    priorJudgement: {
+      batchId: 'batch-4',
+      verdict: 'insufficient-evidence',
+      inspectedContentLocation: 'IOP abstract for Nuclear Fusion 61(9), Boozer "Stellarators as a fast path to fusion"',
+      reason:
+        'REBCO does not appear at abstract level. Only the abstract was read, so this is not evidence that the cited sections omit high-field magnets.',
+    },
+    proposedSourceOverride: {
+      citation:
+        'Whyte, D. G. et al. Smaller & Sooner: Exploiting High Magnetic Fields from New Superconductors for a More Attractive Fusion Energy Development Path. Journal of Fusion Energy 35(1), 41-53 (2016).',
+      identifier: 'doi:10.1007/s10894-015-0050-1',
+      rationale:
+        'Reports high-field REBCO magnets for fusion directly. Metadata is already independently verified in the bridge source ledger, but the content has NOT been inspected for this record, so it is proposed rather than applied.',
+      decision: 'pending-human-decision',
+    },
+  },
+  'urn:maha:record:fusion-plasma-systems-cable-in-conduit-conductors': {
+    verdict: 'mismatched',
+    sourceContentInspected: true,
+    inspectedContentLocation: 'arXiv:2104.04621 full text (preprint of Nuclear Fusion 61 096024), extracted to text and searched in full; sections I-IV and appendices',
+    artifactVersion: 'preprint',
+    mismatchBasis: 'inspected-content-different-subject',
+    reason:
+      'Full text was extracted and searched. "cable-in-conduit" and "cable in conduit" appear zero times, and the paper contains no superconductor discussion at all.',
+    remediation: 'Bind a source that reports cable-in-conduit conductor design.',
+    priorJudgement: {
+      batchId: 'batch-4',
+      verdict: 'insufficient-evidence',
+      inspectedContentLocation: 'IOP abstract',
+      reason:
+        'Cable-in-conduit conductors do not appear at abstract level.',
+    },
+  },
+  'urn:maha:record:fusion-plasma-systems-superconducting-quench-protection': {
+    verdict: 'mismatched',
+    sourceContentInspected: true,
+    inspectedContentLocation: 'arXiv:2104.04621 full text (preprint of Nuclear Fusion 61 096024), extracted to text and searched in full; sections I-IV and appendices',
+    artifactVersion: 'preprint',
+    mismatchBasis: 'inspected-content-different-subject',
+    reason:
+      'Full text was extracted and searched. "quench" appears zero times and "superconduct" appears zero times, so the paper cannot support a quench-protection record.',
+    remediation: 'Bind a source that reports quench detection and protection.',
+    priorJudgement: {
+      batchId: 'batch-4',
+      verdict: 'insufficient-evidence',
+      inspectedContentLocation: 'IOP abstract',
+      reason:
+        'Quench protection does not appear at abstract level.',
+    },
+  },
+  'urn:maha:record:fusion-plasma-systems-stellarator-magnetic-coils': {
+    verdict: 'supported',
+    sourceContentInspected: true,
+    inspectedContentLocation: 'arXiv:2104.04621 full text (preprint of Nuclear Fusion 61 096024), extracted to text and searched in full; sections I-IV and appendices',
+    artifactVersion: 'preprint',
+    reason:
+      'Full text was extracted and searched. Coils are discussed substantively across the paper: fields produced by external coils, coil systems allowing open access to the plasma chamber, and error-field control coils and their current matrices.',
+    remediation: 'None. Record the mapping as curated rather than positional.',
+    origin: 'independently-curated',
+    priorJudgement: {
+      batchId: 'batch-4',
+      verdict: 'partially-supported',
+      inspectedContentLocation: 'IOP abstract',
+      reason:
+        'Coils fall within the paper scope as part of stellarator configuration, but the abstract does not treat coil design in detail.',
+    },
+  },
+  'urn:maha:record:fusion-plasma-systems-stellarator-field-optimization': {
+    verdict: 'supported',
+    sourceContentInspected: true,
+    inspectedContentLocation: 'arXiv:2104.04621 full text (preprint of Nuclear Fusion 61 096024), extracted to text and searched in full; sections I-IV and appendices',
+    artifactVersion: 'preprint',
+    reason:
+      'Full text was extracted and searched. Section IV addresses computational design, and optimisation is discussed throughout including expected benefits of the optimisation and the reliability of computational stellarator design.',
+    remediation: 'None. Record the mapping as curated rather than positional.',
+    origin: 'independently-curated',
+    priorJudgement: {
+      batchId: 'batch-4',
+      verdict: 'partially-supported',
+      inspectedContentLocation: 'IOP abstract',
+      reason:
+        'The abstract makes the demonstrated reliability of computational stellarator design one of its three points, but does not develop an optimisation method.',
+    },
+  },
+  'urn:maha:record:fusion-plasma-systems-disruption-mitigation': {
+    verdict: 'supported',
+    sourceContentInspected: true,
+    inspectedContentLocation: 'ITER Disruption mitigation page, system overview and shattered pellet injection sections',
+    artifactVersion: 'living-specification',
+    reason:
+      'The page states that disruptions are instabilities that may develop in the tokamak plasma and lead to degradation or loss of magnetic confinement, and describes the mitigation system.',
+    remediation: 'None. Record the mapping as curated rather than positional.',
+    origin: 'independently-curated',
+  },
+  'urn:maha:record:fusion-plasma-systems-shattered-pellet-injection': {
+    verdict: 'supported',
+    sourceContentInspected: true,
+    inspectedContentLocation: 'ITER Disruption mitigation page, system overview and shattered pellet injection sections',
+    artifactVersion: 'living-specification',
+    reason:
+      'The page describes cryogenic pellets accelerated to supersonic speeds and shattered against an inclined surface, which is the record subject.',
+    remediation: 'None. Record the mapping as curated rather than positional.',
+    origin: 'independently-curated',
+  },
+  'urn:maha:record:fusion-plasma-systems-plasma-heating-and-current-drive': {
+    verdict: 'mismatched',
+    sourceContentInspected: true,
+    inspectedContentLocation: 'ITER Disruption mitigation page, system overview and shattered pellet injection sections',
+    artifactVersion: 'living-specification',
+    mismatchBasis: 'inspected-content-different-subject',
+    reason:
+      'The page was read. It covers disruption mitigation and shattered pellet injection and does not treat plasma heating and current drive.',
+    remediation: 'Bind the ITER supporting-systems page or another source that treats the named system.',
+  },
+  'urn:maha:record:fusion-plasma-systems-neutral-beam-injection': {
+    verdict: 'mismatched',
+    sourceContentInspected: true,
+    inspectedContentLocation: 'ITER Disruption mitigation page, system overview and shattered pellet injection sections',
+    artifactVersion: 'living-specification',
+    mismatchBasis: 'inspected-content-different-subject',
+    reason:
+      'The page was read. It covers disruption mitigation and shattered pellet injection and does not treat neutral beam injection.',
+    remediation: 'Bind the ITER supporting-systems page or another source that treats the named system.',
+  },
+  'urn:maha:record:fusion-plasma-systems-electron-cyclotron-heating': {
+    verdict: 'mismatched',
+    sourceContentInspected: true,
+    inspectedContentLocation: 'ITER Disruption mitigation page, system overview and shattered pellet injection sections',
+    artifactVersion: 'living-specification',
+    mismatchBasis: 'inspected-content-different-subject',
+    reason:
+      'The page was read. It covers disruption mitigation and shattered pellet injection and does not treat electron cyclotron heating.',
+    remediation: 'Bind the ITER supporting-systems page or another source that treats the named system.',
+  },
+  'urn:maha:record:agentic-systems-mcp-least-authority-tokens': {
+    verdict: 'mismatched',
+    sourceContentInspected: true,
+    inspectedContentLocation: 'NIST AI 600-1 full PDF extracted to text (21,021 words) and searched in full',
+    artifactVersion: 'government-report',
+    mismatchBasis: 'inspected-content-different-subject',
+    reason:
+      'The full document was extracted to text and searched: "least authority" and "least privilege" each appear zero times. It is a generative-AI risk-management profile and does not specify least-authority tokens.',
+    remediation: 'Bind a source that specifies the named control, such as the MCP specification.',
+  },
+  'urn:maha:record:agentic-systems-mcp-sandboxed-tool-execution': {
+    verdict: 'mismatched',
+    sourceContentInspected: true,
+    inspectedContentLocation: 'NIST AI 600-1 full PDF extracted to text (21,021 words) and searched in full',
+    artifactVersion: 'government-report',
+    mismatchBasis: 'inspected-content-different-subject',
+    reason:
+      'The full document was extracted to text and searched: "sandbox" appears zero times. It is a generative-AI risk-management profile and does not specify sandboxed tool execution.',
+    remediation: 'Bind a source that specifies the named control, such as the MCP specification.',
+  },
+  'urn:maha:record:agentic-systems-mcp-idempotent-tool-calls': {
+    verdict: 'mismatched',
+    sourceContentInspected: true,
+    inspectedContentLocation: 'NIST AI 600-1 full PDF extracted to text (21,021 words) and searched in full',
+    artifactVersion: 'government-report',
+    mismatchBasis: 'inspected-content-different-subject',
+    reason:
+      'The full document was extracted to text and searched: "idempot" appears zero times. It is a generative-AI risk-management profile and does not specify idempotent tool calls.',
+    remediation: 'Bind a source that specifies the named control, such as the MCP specification.',
+  },
+  'urn:maha:record:agentic-systems-mcp-tool-timeout-budgets': {
+    verdict: 'mismatched',
+    sourceContentInspected: true,
+    inspectedContentLocation: 'NIST AI 600-1 full PDF extracted to text (21,021 words) and searched in full',
+    artifactVersion: 'government-report',
+    mismatchBasis: 'inspected-content-different-subject',
+    reason:
+      'The full document was extracted to text and searched: "timeout" appears zero times. It is a generative-AI risk-management profile and does not specify tool timeout budgets.',
+    remediation: 'Bind a source that specifies the named control, such as the MCP specification.',
+  },
+  'urn:maha:record:agentic-systems-mcp-tool-call-traces': {
+    verdict: 'mismatched',
+    sourceContentInspected: true,
+    inspectedContentLocation: 'NIST AI 600-1 full PDF extracted to text (21,021 words) and searched in full',
+    artifactVersion: 'government-report',
+    mismatchBasis: 'inspected-content-different-subject',
+    reason:
+      'The full text was searched. "trace" appears seven times and "provenance" sixty-seven, but in the sense of content provenance and traceability of AI-generated material, not logging of agent tool invocations. The document does not treat tool-call traces.',
+    remediation: 'Bind a source that specifies tool-invocation logging.',
+  },
+  'urn:maha:record:mechanistic-interpretability-circuit-completeness': {
+    verdict: 'mismatched',
+    sourceContentInspected: true,
+    inspectedContentLocation: '"A Mathematical Framework for Transformer Circuits", structured summary of scope',
+    artifactVersion: 'living-specification',
+    mismatchBasis: 'inspected-content-different-subject',
+    reason:
+      'The article was inspected. It reverse-engineers the computations of small toy transformers and does not address whether identified circuits account for all model behaviour.',
+    remediation: 'Bind a source that treats the named property directly.',
+  },
+  'urn:maha:record:mechanistic-interpretability-circuit-faithfulness': {
+    verdict: 'mismatched',
+    sourceContentInspected: true,
+    inspectedContentLocation: '"A Mathematical Framework for Transformer Circuits", structured summary of scope',
+    artifactVersion: 'living-specification',
+    mismatchBasis: 'inspected-content-different-subject',
+    reason:
+      'The article was inspected. It reverse-engineers the computations of small toy transformers and does not address systematic validation that circuit interventions produce predicted changes.',
+    remediation: 'Bind a source that treats the named property directly.',
+  },
+  'urn:maha:record:mechanistic-interpretability-mechanistic-anomaly-detection': {
+    verdict: 'mismatched',
+    sourceContentInspected: true,
+    inspectedContentLocation: '"A Mathematical Framework for Transformer Circuits", structured summary of scope',
+    artifactVersion: 'living-specification',
+    mismatchBasis: 'inspected-content-different-subject',
+    reason:
+      'The article was inspected. It reverse-engineers the computations of small toy transformers and does not address anomaly detection.',
+    remediation: 'Bind a source that treats the named property directly.',
+  },
+  'urn:maha:record:mechanistic-interpretability-benchmark-task-transfer': {
+    verdict: 'mismatched',
+    sourceContentInspected: true,
+    inspectedContentLocation: '"A Mathematical Framework for Transformer Circuits", structured summary of scope',
+    artifactVersion: 'living-specification',
+    mismatchBasis: 'inspected-content-different-subject',
+    reason:
+      'The article was inspected. It reverse-engineers the computations of small toy transformers and does not address transfer across benchmark tasks.',
+    remediation: 'Bind a source that treats the named property directly.',
+  },
+  'urn:maha:record:mechanistic-interpretability-interpretability-claim-boundaries': {
+    verdict: 'partially-supported',
+    sourceContentInspected: true,
+    inspectedContentLocation: '"A Mathematical Framework for Transformer Circuits", structured summary of scope',
+    artifactVersion: 'living-specification',
+    reason:
+      'The authors note that they remain a very long way from fully reverse engineering larger models, which bounds the claim, but the article does not formally delineate interpretability boundaries.',
+    remediation: 'Bind a source that states interpretability claim boundaries explicitly, or narrow the record to the stated limitation.',
+  },
+  'urn:maha:record:advanced-materials-contact-resistance-in-2d-devices': {
+    verdict: 'inaccessible-source',
+    sourceContentInspected: false,
+    inspectedContentLocation: null,
+    artifactVersion: 'not-inspected',
+    reason:
+      'Retrieval was attempted for batch 5 via doi.org and the publisher article page. Nature redirects to an authentication wall, which was not followed, so the content could not be read.',
+    remediation: 'Obtain the artifact through a retrievable route, inspect it, then confirm or replace the mapping.',
+  },
+  'urn:maha:record:advanced-materials-dielectric-screening': {
+    verdict: 'inaccessible-source',
+    sourceContentInspected: false,
+    inspectedContentLocation: null,
+    artifactVersion: 'not-inspected',
+    reason:
+      'Retrieval was attempted for batch 5 via doi.org and the publisher article page. Nature redirects to an authentication wall, which was not followed, so the content could not be read.',
+    remediation: 'Obtain the artifact through a retrievable route, inspect it, then confirm or replace the mapping.',
+  },
+  'urn:maha:record:advanced-materials-wafer-scale-2d-growth': {
+    verdict: 'inaccessible-source',
+    sourceContentInspected: false,
+    inspectedContentLocation: null,
+    artifactVersion: 'not-inspected',
+    reason:
+      'Retrieval was attempted for batch 5 via doi.org and the publisher article page. Nature redirects to an authentication wall, which was not followed, so the content could not be read.',
+    remediation: 'Obtain the artifact through a retrievable route, inspect it, then confirm or replace the mapping.',
+  },
+  'urn:maha:record:advanced-materials-cvd-graphene-grain-boundaries': {
+    verdict: 'inaccessible-source',
+    sourceContentInspected: false,
+    inspectedContentLocation: null,
+    artifactVersion: 'not-inspected',
+    reason:
+      'Retrieval was attempted for batch 5 via doi.org and the publisher article page. Nature redirects to an authentication wall, which was not followed, so the content could not be read.',
+    remediation: 'Obtain the artifact through a retrievable route, inspect it, then confirm or replace the mapping.',
+  },
+  'urn:maha:record:advanced-materials-materials-metrology-transfer': {
+    verdict: 'inaccessible-source',
+    sourceContentInspected: false,
+    inspectedContentLocation: null,
+    artifactVersion: 'not-inspected',
+    reason:
+      'Retrieval was attempted for batch 5 via doi.org and the publisher article page. Nature redirects to an authentication wall, which was not followed, so the content could not be read.',
+    remediation: 'Obtain the artifact through a retrievable route, inspect it, then confirm or replace the mapping.',
+  },
+  'urn:maha:record:longevity-metabolism-mitophagy-flux': {
+    verdict: 'inaccessible-source',
+    sourceContentInspected: false,
+    inspectedContentLocation: null,
+    artifactVersion: 'not-inspected',
+    reason:
+      'Retrieval was attempted for batch 5 via doi.org and the publisher article page. Nature redirects to an authentication wall, which was not followed, so the content could not be read.',
+    remediation: 'Obtain the artifact through a retrievable route, inspect it, then confirm or replace the mapping.',
+  },
+  'urn:maha:record:longevity-metabolism-pink1-parkin-pathway': {
+    verdict: 'inaccessible-source',
+    sourceContentInspected: false,
+    inspectedContentLocation: null,
+    artifactVersion: 'not-inspected',
+    reason:
+      'Retrieval was attempted for batch 5 via doi.org and the publisher article page. Nature redirects to an authentication wall, which was not followed, so the content could not be read.',
+    remediation: 'Obtain the artifact through a retrievable route, inspect it, then confirm or replace the mapping.',
+  },
+  'urn:maha:record:longevity-metabolism-mitochondrial-membrane-potential': {
+    verdict: 'inaccessible-source',
+    sourceContentInspected: false,
+    inspectedContentLocation: null,
+    artifactVersion: 'not-inspected',
+    reason:
+      'Retrieval was attempted for batch 5 via doi.org and the publisher article page. Nature redirects to an authentication wall, which was not followed, so the content could not be read.',
+    remediation: 'Obtain the artifact through a retrievable route, inspect it, then confirm or replace the mapping.',
+  },
+  'urn:maha:record:longevity-metabolism-proton-leak-respiration': {
+    verdict: 'inaccessible-source',
+    sourceContentInspected: false,
+    inspectedContentLocation: null,
+    artifactVersion: 'not-inspected',
+    reason:
+      'Retrieval was attempted for batch 5 via doi.org and the publisher article page. Nature redirects to an authentication wall, which was not followed, so the content could not be read.',
+    remediation: 'Obtain the artifact through a retrievable route, inspect it, then confirm or replace the mapping.',
+  },
+  'urn:maha:record:longevity-metabolism-mitochondrial-uncoupling': {
+    verdict: 'inaccessible-source',
+    sourceContentInspected: false,
+    inspectedContentLocation: null,
+    artifactVersion: 'not-inspected',
+    reason:
+      'Retrieval was attempted for batch 5 via doi.org and the publisher article page. Nature redirects to an authentication wall, which was not followed, so the content could not be read.',
+    remediation: 'Obtain the artifact through a retrievable route, inspect it, then confirm or replace the mapping.',
+  },
+  'urn:maha:record:neurotechnology-bci-chronic-signal-stability': {
+    verdict: 'inaccessible-source',
+    sourceContentInspected: false,
+    inspectedContentLocation: null,
+    artifactVersion: 'not-inspected',
+    reason:
+      'Retrieval was attempted for batch 5 via doi.org, which redirects to the Elsevier platform behind a subscription gate. The content could not be read.',
+    remediation: 'Obtain the artifact through a retrievable route, inspect it, then confirm or replace the mapping.',
+  },
+  'urn:maha:record:neurotechnology-bci-foreign-body-response': {
+    verdict: 'inaccessible-source',
+    sourceContentInspected: false,
+    inspectedContentLocation: null,
+    artifactVersion: 'not-inspected',
+    reason:
+      'Retrieval was attempted for batch 5 via doi.org, which redirects to the Elsevier platform behind a subscription gate. The content could not be read.',
+    remediation: 'Obtain the artifact through a retrievable route, inspect it, then confirm or replace the mapping.',
+  },
+  'urn:maha:record:neurotechnology-bci-wireless-neural-telemetry': {
+    verdict: 'inaccessible-source',
+    sourceContentInspected: false,
+    inspectedContentLocation: null,
+    artifactVersion: 'not-inspected',
+    reason:
+      'Retrieval was attempted for batch 5 via doi.org, which redirects to the Elsevier platform behind a subscription gate. The content could not be read.',
+    remediation: 'Obtain the artifact through a retrievable route, inspect it, then confirm or replace the mapping.',
+  },
+  'urn:maha:record:neurotechnology-bci-neural-data-compression': {
+    verdict: 'inaccessible-source',
+    sourceContentInspected: false,
+    inspectedContentLocation: null,
+    artifactVersion: 'not-inspected',
+    reason:
+      'Retrieval was attempted for batch 5 via doi.org, which redirects to the Elsevier platform behind a subscription gate. The content could not be read.',
+    remediation: 'Obtain the artifact through a retrievable route, inspect it, then confirm or replace the mapping.',
+  },
+  'urn:maha:record:neurotechnology-bci-clinical-translation-boundaries': {
+    verdict: 'inaccessible-source',
+    sourceContentInspected: false,
+    inspectedContentLocation: null,
+    artifactVersion: 'not-inspected',
+    reason:
+      'Retrieval was attempted for batch 5 via doi.org, which redirects to the Elsevier platform behind a subscription gate. The content could not be read.',
+    remediation: 'Obtain the artifact through a retrievable route, inspect it, then confirm or replace the mapping.',
+  },
+  'urn:maha:record:biomolecular-engineering-translational-control-circuits': {
+    verdict: 'inaccessible-source',
+    sourceContentInspected: false,
+    inspectedContentLocation: null,
+    artifactVersion: 'not-inspected',
+    reason:
+      'Retrieval was attempted for batch 5 through PMC. The retrieved article was a different paper (Green et al., toehold switches) rather than the bound source, so the bound source was never inspected and nothing was judged from the wrong artifact.',
+    remediation: 'Obtain the artifact through a retrievable route, inspect it, then confirm or replace the mapping.',
+  },
+  'urn:maha:record:biomolecular-engineering-metabolic-pathway-prototyping': {
+    verdict: 'inaccessible-source',
+    sourceContentInspected: false,
+    inspectedContentLocation: null,
+    artifactVersion: 'not-inspected',
+    reason:
+      'Retrieval was attempted for batch 5 through PMC. The retrieved article was a different paper (Green et al., toehold switches) rather than the bound source, so the bound source was never inspected and nothing was judged from the wrong artifact.',
+    remediation: 'Obtain the artifact through a retrievable route, inspect it, then confirm or replace the mapping.',
+  },
+  'urn:maha:record:biomolecular-engineering-enzyme-cascade-engineering': {
+    verdict: 'inaccessible-source',
+    sourceContentInspected: false,
+    inspectedContentLocation: null,
+    artifactVersion: 'not-inspected',
+    reason:
+      'Retrieval was attempted for batch 5 through PMC. The retrieved article was a different paper (Green et al., toehold switches) rather than the bound source, so the bound source was never inspected and nothing was judged from the wrong artifact.',
+    remediation: 'Obtain the artifact through a retrievable route, inspect it, then confirm or replace the mapping.',
+  },
+  'urn:maha:record:biomolecular-engineering-compartmentalized-cell-free-systems': {
+    verdict: 'inaccessible-source',
+    sourceContentInspected: false,
+    inspectedContentLocation: null,
+    artifactVersion: 'not-inspected',
+    reason:
+      'Retrieval was attempted for batch 5 through PMC. The retrieved article was a different paper (Green et al., toehold switches) rather than the bound source, so the bound source was never inspected and nothing was judged from the wrong artifact.',
+    remediation: 'Obtain the artifact through a retrievable route, inspect it, then confirm or replace the mapping.',
+  },
+  'urn:maha:record:biomolecular-engineering-droplet-microfluidic-screening': {
+    verdict: 'inaccessible-source',
+    sourceContentInspected: false,
+    inspectedContentLocation: null,
+    artifactVersion: 'not-inspected',
+    reason:
+      'Retrieval was attempted for batch 5 through PMC. The retrieved article was a different paper (Green et al., toehold switches) rather than the bound source, so the bound source was never inspected and nothing was judged from the wrong artifact.',
+    remediation: 'Obtain the artifact through a retrievable route, inspect it, then confirm or replace the mapping.',
+  },
+  'urn:maha:record:critical-supply-chains-magnet-recycling': {
+    verdict: 'inaccessible-source',
+    sourceContentInspected: false,
+    inspectedContentLocation: null,
+    artifactVersion: 'not-inspected',
+    reason:
+      'Retrieval was attempted for batch 5 against the full Mineral Commodity Summaries PDF and the commodity chapter, both returning HTTP 403, after earlier batches failed on the same host. Every critical-supply-chains source is a USGS document on this host.',
+    remediation: 'Obtain the artifact through a retrievable route, inspect it, then confirm or replace the mapping.',
+  },
+  'urn:maha:record:critical-supply-chains-graphite-anode-processing': {
+    verdict: 'inaccessible-source',
+    sourceContentInspected: false,
+    inspectedContentLocation: null,
+    artifactVersion: 'not-inspected',
+    reason:
+      'Retrieval was attempted for batch 5 against the full Mineral Commodity Summaries PDF and the commodity chapter, both returning HTTP 403, after earlier batches failed on the same host. Every critical-supply-chains source is a USGS document on this host.',
+    remediation: 'Obtain the artifact through a retrievable route, inspect it, then confirm or replace the mapping.',
+  },
+  'urn:maha:record:critical-supply-chains-cobalt-refining-concentration': {
+    verdict: 'inaccessible-source',
+    sourceContentInspected: false,
+    inspectedContentLocation: null,
+    artifactVersion: 'not-inspected',
+    reason:
+      'Retrieval was attempted for batch 5 against the full Mineral Commodity Summaries PDF and the commodity chapter, both returning HTTP 403, after earlier batches failed on the same host. Every critical-supply-chains source is a USGS document on this host.',
+    remediation: 'Obtain the artifact through a retrievable route, inspect it, then confirm or replace the mapping.',
+  },
+  'urn:maha:record:critical-supply-chains-tungsten-concentrate-processing': {
+    verdict: 'inaccessible-source',
+    sourceContentInspected: false,
+    inspectedContentLocation: null,
+    artifactVersion: 'not-inspected',
+    reason:
+      'Retrieval was attempted for batch 5 against the full Mineral Commodity Summaries PDF and the commodity chapter, both returning HTTP 403, after earlier batches failed on the same host. Every critical-supply-chains source is a USGS document on this host.',
+    remediation: 'Obtain the artifact through a retrievable route, inspect it, then confirm or replace the mapping.',
+  },
+  'urn:maha:record:critical-supply-chains-indium-zinc-byproduct-flow': {
+    verdict: 'inaccessible-source',
+    sourceContentInspected: false,
+    inspectedContentLocation: null,
+    artifactVersion: 'not-inspected',
+    reason:
+      'Retrieval was attempted for batch 5 against the full Mineral Commodity Summaries PDF and the commodity chapter, both returning HTTP 403, after earlier batches failed on the same host. Every critical-supply-chains source is a USGS document on this host.',
+    remediation: 'Obtain the artifact through a retrievable route, inspect it, then confirm or replace the mapping.',
+  },
 }
 
 /**
@@ -1167,6 +1644,10 @@ const PUBLISHER_VERIFIED: Readonly<Record<string, string>> = {
     'Fetched arXiv:2309.08600, which serves the declared "Sparse Autoencoders Find Highly Interpretable Features in Language Models" record.',
   'source-agentic-systems-mcp-react':
     'Fetched arXiv:2210.03629, which serves the declared "ReAct: Synergizing Reasoning and Acting in Language Models" record.',
+  'source-fusion-plasma-systems-iter-disruption':
+    'Fetched the ITER disruption-mitigation page, which serves the declared system overview and shattered-pellet-injection sections.',
+  'source-mechanistic-interpretability-circuits':
+    'Fetched https://transformer-circuits.pub/2021/framework/index.html, which serves the declared "A Mathematical Framework for Transformer Circuits" article.',
 }
 
 /** Records whose source URL was requested and could not be retrieved. */
@@ -1194,7 +1675,7 @@ const INACCESSIBLE_CONTRACTS: ReadonlySet<string> = new Set(['source-critical-su
  * for anything added from now on.
  */
 
-export const ALIGNMENT_BATCHES = ['batch-1', 'batch-2', 'batch-3', 'batch-4'] as const
+export const ALIGNMENT_BATCHES = ['batch-1', 'batch-2', 'batch-3', 'batch-4', 'batch-5'] as const
 export type AlignmentBatchId = (typeof ALIGNMENT_BATCHES)[number]
 
 const BATCH_1_RECORDS: readonly string[] = [
@@ -1345,11 +1826,69 @@ const BATCH_4_RECORDS: readonly string[] = [
     'urn:maha:record:neurotechnology-bci-stimulation-artifact-rejection',
 ]
 
+const BATCH_5_RECORDS: readonly string[] = [
+    'urn:maha:record:advanced-materials-contact-resistance-in-2d-devices',
+    'urn:maha:record:advanced-materials-cvd-graphene-grain-boundaries',
+    'urn:maha:record:advanced-materials-dielectric-screening',
+    'urn:maha:record:advanced-materials-materials-metrology-transfer',
+    'urn:maha:record:advanced-materials-wafer-scale-2d-growth',
+    'urn:maha:record:agentic-systems-mcp-idempotent-tool-calls',
+    'urn:maha:record:agentic-systems-mcp-least-authority-tokens',
+    'urn:maha:record:agentic-systems-mcp-sandboxed-tool-execution',
+    'urn:maha:record:agentic-systems-mcp-tool-call-traces',
+    'urn:maha:record:agentic-systems-mcp-tool-timeout-budgets',
+    'urn:maha:record:biomolecular-engineering-compartmentalized-cell-free-systems',
+    'urn:maha:record:biomolecular-engineering-droplet-microfluidic-screening',
+    'urn:maha:record:biomolecular-engineering-enzyme-cascade-engineering',
+    'urn:maha:record:biomolecular-engineering-metabolic-pathway-prototyping',
+    'urn:maha:record:biomolecular-engineering-translational-control-circuits',
+    'urn:maha:record:critical-supply-chains-cobalt-refining-concentration',
+    'urn:maha:record:critical-supply-chains-graphite-anode-processing',
+    'urn:maha:record:critical-supply-chains-indium-zinc-byproduct-flow',
+    'urn:maha:record:critical-supply-chains-magnet-recycling',
+    'urn:maha:record:critical-supply-chains-tungsten-concentrate-processing',
+    'urn:maha:record:fusion-plasma-systems-disruption-mitigation',
+    'urn:maha:record:fusion-plasma-systems-electron-cyclotron-heating',
+    'urn:maha:record:fusion-plasma-systems-neutral-beam-injection',
+    'urn:maha:record:fusion-plasma-systems-plasma-heating-and-current-drive',
+    'urn:maha:record:fusion-plasma-systems-shattered-pellet-injection',
+    'urn:maha:record:longevity-metabolism-mitochondrial-membrane-potential',
+    'urn:maha:record:longevity-metabolism-mitochondrial-uncoupling',
+    'urn:maha:record:longevity-metabolism-mitophagy-flux',
+    'urn:maha:record:longevity-metabolism-pink1-parkin-pathway',
+    'urn:maha:record:longevity-metabolism-proton-leak-respiration',
+    'urn:maha:record:mechanistic-interpretability-benchmark-task-transfer',
+    'urn:maha:record:mechanistic-interpretability-circuit-completeness',
+    'urn:maha:record:mechanistic-interpretability-circuit-faithfulness',
+    'urn:maha:record:mechanistic-interpretability-interpretability-claim-boundaries',
+    'urn:maha:record:mechanistic-interpretability-mechanistic-anomaly-detection',
+    'urn:maha:record:neurotechnology-bci-chronic-signal-stability',
+    'urn:maha:record:neurotechnology-bci-clinical-translation-boundaries',
+    'urn:maha:record:neurotechnology-bci-foreign-body-response',
+    'urn:maha:record:neurotechnology-bci-neural-data-compression',
+    'urn:maha:record:neurotechnology-bci-wireless-neural-telemetry',
+]
+
+/**
+ * Records an earlier batch already attempted and that batch 5 re-examined with
+ * better evidence. These are NOT cohort members: they were previously judged,
+ * so counting them as new inspections would overstate the batch. Their earlier
+ * finding is preserved in `priorJudgement` rather than discarded.
+ */
+export const BATCH_5_REINSPECTIONS: readonly string[] = [
+    'urn:maha:record:fusion-plasma-systems-cable-in-conduit-conductors',
+    'urn:maha:record:fusion-plasma-systems-rebco-high-field-magnets',
+    'urn:maha:record:fusion-plasma-systems-stellarator-field-optimization',
+    'urn:maha:record:fusion-plasma-systems-stellarator-magnetic-coils',
+    'urn:maha:record:fusion-plasma-systems-superconducting-quench-protection',
+]
+
 export const ALIGNMENT_BATCH_MEMBERSHIP: Readonly<Record<AlignmentBatchId, readonly string[]>> = {
   'batch-1': BATCH_1_RECORDS,
   'batch-2': BATCH_2_RECORDS,
   'batch-3': BATCH_3_RECORDS,
   'batch-4': BATCH_4_RECORDS,
+  'batch-5': BATCH_5_RECORDS,
 }
 
 /** Which batch judged a record, or null when it carries only default state. */
@@ -1360,11 +1899,20 @@ export function batchOf(recordId: string): AlignmentBatchId | null {
   return null
 }
 
+/** True when batch 5 re-examined a record an earlier batch had already judged. */
+export function isBatch5Reinspection(recordId: string): boolean {
+  return BATCH_5_REINSPECTIONS.includes(recordId)
+}
+
 /* -- guards: membership is disjoint, complete, and batch 4 is well formed -- */
 
 {
   const batch4 = ALIGNMENT_BATCH_MEMBERSHIP['batch-4']
   if (batch4.length !== 40) throw new Error(`Batch 4 must contain exactly 40 records; found ${batch4.length}.`)
+
+  const batch5 = ALIGNMENT_BATCH_MEMBERSHIP['batch-5']
+  if (batch5.length !== 40) throw new Error(`Batch 5 must contain exactly 40 records; found ${batch5.length}.`)
+  if (new Set(batch5).size !== batch5.length) throw new Error('Batch 5 membership is not unique.')
 
   const seen = new Map<string, AlignmentBatchId>()
   for (const batchId of ALIGNMENT_BATCHES) {
@@ -1394,6 +1942,57 @@ export function batchOf(recordId: string): AlignmentBatchId | null {
   if (perDomain.size !== 8) throw new Error(`Batch 4 must cover eight domains; found ${perDomain.size}.`)
   for (const [domainSlug, count] of perDomain) {
     if (count !== 5) throw new Error(`Batch 4 must contain five records per domain; ${domainSlug} has ${count}.`)
+  }
+
+  // Batch 5 is remediation-focused, so its cohort is bounded rather than even:
+  // between three and eight per domain, all eight domains represented.
+  const priorBatches = new Set([...BATCH_1_RECORDS, ...BATCH_2_RECORDS, ...BATCH_3_RECORDS, ...BATCH_4_RECORDS])
+  const batch5Domains = new Map<string, number>()
+  for (const recordId of batch5) {
+    if (priorBatches.has(recordId)) {
+      throw new Error(`${recordId} was claimed by an earlier batch and cannot be a new batch 5 inspection.`)
+    }
+    const record = FRONTIER_DOMAIN_GRAPH_RECORDS.find((entry) => entry.id === recordId)
+    if (!record) throw new Error(`${recordId} is in batch 5 but is not a frontier record.`)
+    batch5Domains.set(record.domainSlug, (batch5Domains.get(record.domainSlug) ?? 0) + 1)
+  }
+  if (batch5Domains.size !== 8) throw new Error(`Batch 5 must cover eight domains; found ${batch5Domains.size}.`)
+  for (const [domainSlug, count] of batch5Domains) {
+    if (count < 3 || count > 8) {
+      throw new Error(`Batch 5 requires three to eight records per domain; ${domainSlug} has ${count}.`)
+    }
+  }
+
+  // A re-inspection must belong to an earlier batch and must carry the
+  // superseded finding, so provenance is append-only rather than overwritten.
+  for (const recordId of BATCH_5_REINSPECTIONS) {
+    if (!priorBatches.has(recordId)) {
+      throw new Error(`${recordId} is listed as a batch 5 re-inspection but no earlier batch claimed it.`)
+    }
+    if (batch5.includes(recordId)) {
+      throw new Error(`${recordId} cannot be both a batch 5 cohort member and a re-inspection.`)
+    }
+    const judgement = JUDGEMENTS[recordId]
+    if (!judgement?.priorJudgement) {
+      throw new Error(`${recordId} is a re-inspection but does not preserve its prior judgement.`)
+    }
+  }
+
+  // Verdict vocabulary is validated at runtime, not merely inferred by
+  // TypeScript, because a spread-built judgement bypasses the type entirely.
+  for (const [recordId, judgement] of Object.entries(JUDGEMENTS)) {
+    if (!(ALIGNMENT_VERDICTS as readonly string[]).includes(judgement.verdict)) {
+      throw new Error(`${recordId} declares an undeclared verdict: ${judgement.verdict}.`)
+    }
+    if ((judgement.verdict === 'supported' || judgement.verdict === 'mismatched') && !judgement.sourceContentInspected) {
+      throw new Error(`${recordId} declares ${judgement.verdict} without content inspection.`)
+    }
+    if (judgement.sourceContentInspected && !judgement.inspectedContentLocation) {
+      throw new Error(`${recordId} was inspected but records no exact location.`)
+    }
+    if (judgement.proposedSourceOverride && judgement.proposedSourceOverride.decision !== 'pending-human-decision') {
+      throw new Error(`${recordId} carries a source override that is not a pending decision.`)
+    }
   }
 }
 
@@ -1488,11 +2087,15 @@ function auditRecord(record: EpistemicRecord): RecordAlignmentAudit {
       sourceIndependentOfOtherCitedSources: record.sources.length > 1 ? false : null,
       independentlyReproduced: false,
       externallyReviewed: false,
+      inspectedArtifactVersion:
+        judgement?.artifactVersion ?? (judgement?.sourceContentInspected ? 'version-of-record' : 'not-inspected'),
     },
     reason,
     transcriptionConfidence: metadata.verified ? 'high' : identifier ? 'medium' : 'low',
     remediation,
     priorMapping: PRIOR_MAPPINGS[record.id] ?? null,
+    priorJudgement: judgement?.priorJudgement ?? null,
+    proposedSourceOverride: judgement?.proposedSourceOverride ?? null,
   }
 }
 
