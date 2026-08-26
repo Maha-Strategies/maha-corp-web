@@ -12,19 +12,27 @@ export const metadata: Metadata = {
     type: 'website',
     url: `${SITE_URL}/books`,
     title: 'Books & Essays | Maha Strategies',
-    description: 'Six complete open web editions by Mayone Maha Rajan, with guides and essays.',
+    description: 'Seven complete open web editions by Mayone Maha Rajan, with guides and essays.',
     images: [{ url: '/og-master.png', width: 1200, height: 630, alt: 'Books & Essays — Maha Strategies' }],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Books & Essays | Maha Strategies',
-    description: 'Six open web editions by Mayone Maha Rajan.',
+    description: 'Seven open web editions by Mayone Maha Rajan.',
     images: ['/og-master.png'],
     creator: '@mayonemaha',
   },
 }
 
 const books = [
+  {
+    title: 'The Maha Principle',
+    subtitle: 'The Architecture of Human Flourishing',
+    description: 'A systems manifesto about health, attention, community, capable action, humane governance, and civic renewal.',
+    href: '/books/the-maha-principle',
+    readHref: '/books/the-maha-principle/read',
+    chapter: { title: 'The Poisoned Body', href: '/books/the-maha-principle/read/the-poisoned-body' },
+  },
   {
     title: 'The Volcanic Engine',
     subtitle: 'Living on a Firing Planet',
@@ -89,7 +97,7 @@ export default function BooksPage() {
           <p className="evidence-kicker">[ Maha Strategies // Open Editions ]</p>
           <h1 className="evidence-title evidence-title--product mt-5">Books &amp; essays</h1>
           <p className="evidence-lede mt-7">
-            Six works about the systems that shape a person and a world: intelligence, attention, evolution,
+            Seven works about the systems that shape a person and a world: intelligence, attention, evolution,
             imagination, relationship, planetary process, and the choices that follow from them.
           </p>
           <p className="evidence-copy mt-5">
