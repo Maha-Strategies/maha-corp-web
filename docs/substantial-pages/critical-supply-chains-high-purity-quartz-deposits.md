@@ -12,8 +12,8 @@ Record revision `sha256:c667320cf234997948bffc6fef2aefd2133010aed2a0af4d457dad08
 
 Gate: **BLOCK**
 
-- `source-alignment-insufficient-evidence`
 - `source-assignment-positional-legacy`
+- `source-inaccessible`
 - `source-metadata-unverified`
 - `source-not-inspected`
 
@@ -23,7 +23,7 @@ The most connected record in the domain with six declared edges, a complete loca
 
 ## Source alignment
 
-**insufficient-evidence** — The USGS critical mineral resources volume covers geology, production, processing, uses and supply considerations for selected commodities, which is the record subject.
+**inaccessible-source** — The USGS critical mineral resources volume covers geology, production, processing, uses and supply considerations for selected commodities, which is the record subject.
 
 ## Search intent
 

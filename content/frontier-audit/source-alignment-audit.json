@@ -1,7 +1,7 @@
 {
   "schemaVersion": "maha-frontier-source-alignment/1.0",
   "auditInputDate": "2026-08-26",
-  "auditDigest": "sha256:74d0f566a51cc9d214cf2a012e23fbcbb2e4c1bf1957290e9cf36d7a4774b444",
+  "auditDigest": "sha256:bbde7321ce6987471bcbf900519cf941316fdf3df6497f9c8d30309265f6a8c5",
   "totals": {
     "records": 240,
     "internallyInspectedSourceCount": 146,
@@ -15,8 +15,8 @@
     "supported": 59,
     "partially-supported": 26,
     "mismatched": 55,
-    "insufficient-evidence": 65,
-    "inaccessible-source": 35
+    "insufficient-evidence": 60,
+    "inaccessible-source": 40
   },
   "originTotals": {
     "explicit-override": 2,
@@ -83,11 +83,11 @@
       "batchId": "batch-6",
       "attempted": 40,
       "contentInspected": 5,
-      "inaccessible": 0,
+      "inaccessible": 5,
       "supported": 3,
       "partiallySupported": 1,
       "mismatched": 1,
-      "insufficientEvidence": 35,
+      "insufficientEvidence": 30,
       "alignmentClear": 3
     }
   ],
@@ -117,13 +117,13 @@
     }
   ],
   "blockerTotals": {
-    "source-alignment-insufficient-evidence": 65,
+    "source-alignment-insufficient-evidence": 60,
     "source-assignment-positional-legacy": 181,
     "source-not-inspected": 94,
     "source-subject-mismatched": 55,
     "source-subject-partially-supported": 26,
     "source-metadata-unverified": 35,
-    "source-inaccessible": 35
+    "source-inaccessible": 40
   },
   "records": [
     {
@@ -4325,7 +4325,7 @@
         "metadataNote": "No DOI or other registry identifier is declared, and the publisher page was not fetched during this audit.",
         "sourceContentInspected": false,
         "inspectedContentLocation": null,
-        "subjectAligned": "insufficient-evidence",
+        "subjectAligned": "inaccessible-source",
         "mismatchBasis": null,
         "chronologicalRiskIndicator": false,
         "claimSupported": false,
@@ -4337,15 +4337,15 @@
         "versionRelationshipVerified": false,
         "recoveryDisposition": "version-relationship-unverified"
       },
-      "reason": "Recovery resolved metadata but could not tie any located artifact to the declared citation. USGS documents on this host have refused every direct request across batches. Metadata resolution is not content inspection, so nothing is established about whether this source supports the record subject.",
+      "reason": "Recovery resolved metadata but could not tie any located artifact to the declared citation. The declared USGS document itself has refused every direct request across batches 4, 5 and 6 with HTTP 403, so this is a retrieval failure and not merely an unread source. Metadata resolution is not content inspection.",
       "transcriptionConfidence": "low",
       "remediation": "Obtain an inspectable copy, read it against this record subject, then confirm or replace.",
       "priorMapping": null,
       "priorJudgement": null,
       "proposedSourceOverride": null,
       "blockers": [
-        "source-alignment-insufficient-evidence",
         "source-assignment-positional-legacy",
+        "source-inaccessible",
         "source-metadata-unverified",
         "source-not-inspected"
       ]
@@ -4810,7 +4810,7 @@
         "metadataNote": "No DOI or other registry identifier is declared, and the publisher page was not fetched during this audit.",
         "sourceContentInspected": false,
         "inspectedContentLocation": null,
-        "subjectAligned": "insufficient-evidence",
+        "subjectAligned": "inaccessible-source",
         "mismatchBasis": null,
         "chronologicalRiskIndicator": false,
         "claimSupported": false,
@@ -4822,15 +4822,15 @@
         "versionRelationshipVerified": false,
         "recoveryDisposition": "version-relationship-unverified"
       },
-      "reason": "Recovery resolved metadata but could not tie any located artifact to the declared citation. USGS documents on this host have refused every direct request across batches. Metadata resolution is not content inspection, so nothing is established about whether this source supports the record subject.",
+      "reason": "Recovery resolved metadata but could not tie any located artifact to the declared citation. The declared USGS document itself has refused every direct request across batches 4, 5 and 6 with HTTP 403, so this is a retrieval failure and not merely an unread source. Metadata resolution is not content inspection.",
       "transcriptionConfidence": "low",
       "remediation": "Obtain an inspectable copy, read it against this record subject, then confirm or replace.",
       "priorMapping": null,
       "priorJudgement": null,
       "proposedSourceOverride": null,
       "blockers": [
-        "source-alignment-insufficient-evidence",
         "source-assignment-positional-legacy",
+        "source-inaccessible",
         "source-metadata-unverified",
         "source-not-inspected"
       ]
@@ -5118,7 +5118,7 @@
         "metadataNote": "No DOI or other registry identifier is declared, and the publisher page was not fetched during this audit.",
         "sourceContentInspected": false,
         "inspectedContentLocation": null,
-        "subjectAligned": "insufficient-evidence",
+        "subjectAligned": "inaccessible-source",
         "mismatchBasis": null,
         "chronologicalRiskIndicator": false,
         "claimSupported": false,
@@ -5130,15 +5130,15 @@
         "versionRelationshipVerified": false,
         "recoveryDisposition": "version-relationship-unverified"
       },
-      "reason": "Recovery resolved metadata but could not tie any located artifact to the declared citation. USGS documents on this host have refused every direct request across batches. Metadata resolution is not content inspection, so nothing is established about whether this source supports the record subject.",
+      "reason": "Recovery resolved metadata but could not tie any located artifact to the declared citation. The declared USGS document itself has refused every direct request across batches 4, 5 and 6 with HTTP 403, so this is a retrieval failure and not merely an unread source. Metadata resolution is not content inspection.",
       "transcriptionConfidence": "low",
       "remediation": "Obtain an inspectable copy, read it against this record subject, then confirm or replace.",
       "priorMapping": null,
       "priorJudgement": null,
       "proposedSourceOverride": null,
       "blockers": [
-        "source-alignment-insufficient-evidence",
         "source-assignment-positional-legacy",
+        "source-inaccessible",
         "source-metadata-unverified",
         "source-not-inspected"
       ]
@@ -5166,7 +5166,7 @@
         "metadataNote": "No DOI or other registry identifier is declared, and the publisher page was not fetched during this audit.",
         "sourceContentInspected": false,
         "inspectedContentLocation": null,
-        "subjectAligned": "insufficient-evidence",
+        "subjectAligned": "inaccessible-source",
         "mismatchBasis": null,
         "chronologicalRiskIndicator": false,
         "claimSupported": false,
@@ -5178,15 +5178,15 @@
         "versionRelationshipVerified": false,
         "recoveryDisposition": "version-relationship-unverified"
       },
-      "reason": "Recovery resolved metadata but could not tie any located artifact to the declared citation. USGS documents on this host have refused every direct request across batches. Metadata resolution is not content inspection, so nothing is established about whether this source supports the record subject.",
+      "reason": "Recovery resolved metadata but could not tie any located artifact to the declared citation. The declared USGS document itself has refused every direct request across batches 4, 5 and 6 with HTTP 403, so this is a retrieval failure and not merely an unread source. Metadata resolution is not content inspection.",
       "transcriptionConfidence": "low",
       "remediation": "Obtain an inspectable copy, read it against this record subject, then confirm or replace.",
       "priorMapping": null,
       "priorJudgement": null,
       "proposedSourceOverride": null,
       "blockers": [
-        "source-alignment-insufficient-evidence",
         "source-assignment-positional-legacy",
+        "source-inaccessible",
         "source-metadata-unverified",
         "source-not-inspected"
       ]
@@ -5257,7 +5257,7 @@
         "metadataNote": "No DOI or other registry identifier is declared, and the publisher page was not fetched during this audit.",
         "sourceContentInspected": false,
         "inspectedContentLocation": null,
-        "subjectAligned": "insufficient-evidence",
+        "subjectAligned": "inaccessible-source",
         "mismatchBasis": null,
         "chronologicalRiskIndicator": false,
         "claimSupported": false,
@@ -5269,15 +5269,15 @@
         "versionRelationshipVerified": false,
         "recoveryDisposition": "version-relationship-unverified"
       },
-      "reason": "Recovery resolved metadata but could not tie any located artifact to the declared citation. USGS documents on this host have refused every direct request across batches. Metadata resolution is not content inspection, so nothing is established about whether this source supports the record subject.",
+      "reason": "Recovery resolved metadata but could not tie any located artifact to the declared citation. The declared USGS document itself has refused every direct request across batches 4, 5 and 6 with HTTP 403, so this is a retrieval failure and not merely an unread source. Metadata resolution is not content inspection.",
       "transcriptionConfidence": "low",
       "remediation": "Obtain an inspectable copy, read it against this record subject, then confirm or replace.",
       "priorMapping": null,
       "priorJudgement": null,
       "proposedSourceOverride": null,
       "blockers": [
-        "source-alignment-insufficient-evidence",
         "source-assignment-positional-legacy",
+        "source-inaccessible",
         "source-metadata-unverified",
         "source-not-inspected"
       ]

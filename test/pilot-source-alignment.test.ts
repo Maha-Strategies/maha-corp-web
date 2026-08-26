@@ -184,8 +184,8 @@ test('frontier audit totals are unchanged', () => {
     supported: 59,
     'partially-supported': 26,
     mismatched: 55,
-    'insufficient-evidence': 65,
-    'inaccessible-source': 35,
+    'insufficient-evidence': 60,
+    'inaccessible-source': 40,
   })
   assert.equal(FRONTIER_ALIGNMENT_AUDIT.length, 240)
 })

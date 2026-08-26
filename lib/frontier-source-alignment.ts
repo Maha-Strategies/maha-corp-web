@@ -2099,7 +2099,7 @@ const JUDGEMENTS: Readonly<Record<string, InspectedJudgement>> = {
     remediation: 'Obtain an inspectable copy, read it against this record subject, then confirm or replace.',
   },
   'urn:maha:record:critical-supply-chains-euv-photoresist-precursors': {
-    verdict: 'insufficient-evidence',
+    verdict: 'inaccessible-source',
     sourceContentInspected: false,
     inspectedContentLocation: null,
     artifactVersion: 'not-inspected',
@@ -2107,11 +2107,11 @@ const JUDGEMENTS: Readonly<Record<string, InspectedJudgement>> = {
     versionRelationshipVerified: false,
     recoveryDisposition: 'version-relationship-unverified',
     reason:
-      'Recovery resolved metadata but could not tie any located artifact to the declared citation. USGS documents on this host have refused every direct request across batches. Metadata resolution is not content inspection, so nothing is established about whether this source supports the record subject.',
+      'Recovery resolved metadata but could not tie any located artifact to the declared citation. The declared USGS document itself has refused every direct request across batches 4, 5 and 6 with HTTP 403, so this is a retrieval failure and not merely an unread source. Metadata resolution is not content inspection.',
     remediation: 'Obtain an inspectable copy, read it against this record subject, then confirm or replace.',
   },
   'urn:maha:record:critical-supply-chains-high-purity-quartz-deposits': {
-    verdict: 'insufficient-evidence',
+    verdict: 'inaccessible-source',
     sourceContentInspected: false,
     inspectedContentLocation: null,
     artifactVersion: 'not-inspected',
@@ -2119,11 +2119,11 @@ const JUDGEMENTS: Readonly<Record<string, InspectedJudgement>> = {
     versionRelationshipVerified: false,
     recoveryDisposition: 'version-relationship-unverified',
     reason:
-      'Recovery resolved metadata but could not tie any located artifact to the declared citation. USGS documents on this host have refused every direct request across batches. Metadata resolution is not content inspection, so nothing is established about whether this source supports the record subject.',
+      'Recovery resolved metadata but could not tie any located artifact to the declared citation. The declared USGS document itself has refused every direct request across batches 4, 5 and 6 with HTTP 403, so this is a retrieval failure and not merely an unread source. Metadata resolution is not content inspection.',
     remediation: 'Obtain an inspectable copy, read it against this record subject, then confirm or replace.',
   },
   'urn:maha:record:critical-supply-chains-photoacid-generator-supply': {
-    verdict: 'insufficient-evidence',
+    verdict: 'inaccessible-source',
     sourceContentInspected: false,
     inspectedContentLocation: null,
     artifactVersion: 'not-inspected',
@@ -2131,11 +2131,11 @@ const JUDGEMENTS: Readonly<Record<string, InspectedJudgement>> = {
     versionRelationshipVerified: false,
     recoveryDisposition: 'version-relationship-unverified',
     reason:
-      'Recovery resolved metadata but could not tie any located artifact to the declared citation. USGS documents on this host have refused every direct request across batches. Metadata resolution is not content inspection, so nothing is established about whether this source supports the record subject.',
+      'Recovery resolved metadata but could not tie any located artifact to the declared citation. The declared USGS document itself has refused every direct request across batches 4, 5 and 6 with HTTP 403, so this is a retrieval failure and not merely an unread source. Metadata resolution is not content inspection.',
     remediation: 'Obtain an inspectable copy, read it against this record subject, then confirm or replace.',
   },
   'urn:maha:record:critical-supply-chains-quartz-crucible-manufacturing': {
-    verdict: 'insufficient-evidence',
+    verdict: 'inaccessible-source',
     sourceContentInspected: false,
     inspectedContentLocation: null,
     artifactVersion: 'not-inspected',
@@ -2143,11 +2143,11 @@ const JUDGEMENTS: Readonly<Record<string, InspectedJudgement>> = {
     versionRelationshipVerified: false,
     recoveryDisposition: 'version-relationship-unverified',
     reason:
-      'Recovery resolved metadata but could not tie any located artifact to the declared citation. USGS documents on this host have refused every direct request across batches. Metadata resolution is not content inspection, so nothing is established about whether this source supports the record subject.',
+      'Recovery resolved metadata but could not tie any located artifact to the declared citation. The declared USGS document itself has refused every direct request across batches 4, 5 and 6 with HTTP 403, so this is a retrieval failure and not merely an unread source. Metadata resolution is not content inspection.',
     remediation: 'Obtain an inspectable copy, read it against this record subject, then confirm or replace.',
   },
   'urn:maha:record:critical-supply-chains-semiconductor-grade-polysilicon': {
-    verdict: 'insufficient-evidence',
+    verdict: 'inaccessible-source',
     sourceContentInspected: false,
     inspectedContentLocation: null,
     artifactVersion: 'not-inspected',
@@ -2155,7 +2155,7 @@ const JUDGEMENTS: Readonly<Record<string, InspectedJudgement>> = {
     versionRelationshipVerified: false,
     recoveryDisposition: 'version-relationship-unverified',
     reason:
-      'Recovery resolved metadata but could not tie any located artifact to the declared citation. USGS documents on this host have refused every direct request across batches. Metadata resolution is not content inspection, so nothing is established about whether this source supports the record subject.',
+      'Recovery resolved metadata but could not tie any located artifact to the declared citation. The declared USGS document itself has refused every direct request across batches 4, 5 and 6 with HTTP 403, so this is a retrieval failure and not merely an unread source. Metadata resolution is not content inspection.',
     remediation: 'Obtain an inspectable copy, read it against this record subject, then confirm or replace.',
   },
   'urn:maha:record:fusion-plasma-systems-inertial-confinement-target-chamber': {
