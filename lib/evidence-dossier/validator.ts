@@ -6,7 +6,7 @@ import {
   type DossierClaim,
   type EvidenceDossier,
 } from './schema.ts'
-import { isPlaceholderDigest } from './digest.ts'
+import { isPlaceholderDigest, passageDigest, provenanceDigest } from './digest.ts'
 
 /**
  * Fail-closed validation. Anything missing is an error, never a warning: a
@@ -79,6 +79,9 @@ export function validateDossier(dossier: EvidenceDossier): ValidationIssue[] {
     if (isPlaceholderDigest(passage.passageHash)) {
       add('placeholder-digest', path, 'Passage hash is the empty-payload SHA-256.')
     }
+    if (passage.passageHash !== passageDigest(passage)) {
+      add('passage-hash-mismatch', path, 'Passage hash does not match its canonical evidentiary fields.')
+    }
     if (passage.extractionMethod === 'not-extracted' && passage.originalDocumentInspected) {
       add('extraction-contradiction', path, 'A passage cannot be inspected and not extracted.')
     }
@@ -86,6 +89,9 @@ export function validateDossier(dossier: EvidenceDossier): ValidationIssue[] {
 
   for (const claim of dossier.claims) {
     issues.push(...validateClaim(claim, dossier, sourceIds, passageIds))
+    if (claim.provenanceDigest !== provenanceDigest(claim)) {
+      add('claim-digest-mismatch', `claims.${claim.claimId}`, 'Claim digest does not match its canonical evidentiary fields.')
+    }
   }
 
   for (const comparison of dossier.comparisons) {
@@ -114,6 +120,9 @@ export function validateDossier(dossier: EvidenceDossier): ValidationIssue[] {
     if (isPlaceholderDigest(comparison.provenanceDigest)) {
       add('placeholder-digest', path, 'Comparison digest is the empty-payload SHA-256.')
     }
+    if (comparison.provenanceDigest !== provenanceDigest(comparison)) {
+      add('comparison-digest-mismatch', path, 'Comparison digest does not match its canonical evidentiary fields.')
+    }
   }
 
   // Prior revisions are immutable history: each needs a real digest.
@@ -134,6 +143,9 @@ export function validateDossier(dossier: EvidenceDossier): ValidationIssue[] {
   }
   if (!bundle.dossierDigest.startsWith('sha256:')) {
     add('digest-invalid', 'provenanceBundle.dossierDigest', 'Dossier digest must be a sha256 digest.')
+  }
+  if (bundle.dossierDigest !== provenanceDigest(dossier)) {
+    add('dossier-digest-mismatch', 'provenanceBundle.dossierDigest', 'Dossier digest does not match its canonical evidentiary fields.')
   }
 
   return issues
