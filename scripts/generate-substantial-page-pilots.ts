@@ -93,8 +93,20 @@ batch.push(
 )
 
 batch.push('## Source-to-claim alignment', '')
+const misaligned = pilots.filter((pilot) => pilot.sourceAlignment !== 'record-subject-supported')
+const corrected = pilots.filter((pilot) => pilot.sourceAlignmentNote.startsWith('Corrected in this sprint'))
 batch.push(
-  'Every claim resolves to a source the claim itself declares, so the gate raises no alignment failure. That check is structural. Two records cite a source **narrower than the record subject**, which the gate cannot detect and editorial prose must not paper over:',
+  'Every claim resolves to a source the claim itself declares, so the gate raises no alignment failure. That check is structural: it verifies the link, not whether the source is about the record subject.',
+  '',
+)
+batch.push(
+  misaligned.length === 0
+    ? `**${misaligned.length} pilots remain misaligned.** ${corrected.length} were corrected in this sprint after the pilot surfaced a subject mismatch that the gate cannot detect.`
+    : `**${misaligned.length} pilots cite a source narrower than the record subject**, which the gate cannot detect and editorial prose must not paper over.`,
+  '',
+)
+batch.push(
+  'Root cause, applying beyond these pilots: `buildDomainRecords` assigned a source by position, `seed.sources[Math.floor(index / 5)]`, spreading six sources across thirty concepts in blocks of five. A record therefore inherited whichever source its index landed on. At most six of thirty records per domain can have a subject-matched source that way. A per-concept `sourceOverrides` map now allows a concept to name the source that actually addresses it; the two corrections here are its first uses, and the remaining positional assignments are unreviewed.',
   '',
 )
 batch.push(row(['Record', 'Alignment', 'Finding']), row(['---', '---', '---']))

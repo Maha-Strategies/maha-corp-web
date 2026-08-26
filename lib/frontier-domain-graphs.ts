@@ -31,6 +31,17 @@ interface DomainSeed {
   domain: EpistemicDomain & { slug: EpistemicGraphDomainSlug }
   concepts: readonly string[]
   sources: readonly SourceSeed[]
+  /**
+   * Per-concept source, keyed by concept slug.
+   *
+   * The default assignment below is positional: six sources are spread across
+   * thirty concepts in blocks of five, so a record's source is whichever one
+   * its index lands on rather than one chosen for its subject. That is workable
+   * for a cohort whose members really do share a source, and wrong whenever a
+   * concept's subject is not what its block source studies. An override names
+   * the source that actually addresses the concept.
+   */
+  sourceOverrides?: Readonly<Record<string, SourceSeed>>
 }
 
 const recordKinds: readonly EpistemicRecordKind[] = ['concept', 'mechanism', 'method', 'measurement', 'comparison']
@@ -82,7 +93,10 @@ function buildDomainRecords(seed: DomainSeed): EpistemicRecord[] {
     const slug = `${seed.domain.slug}-${conceptSlug}`
     const title = titleCase(conceptSlug)
     const kind = recordKinds[index % recordKinds.length]
-    const citedSource = source(seed.domain.slug, seed.sources[Math.floor(index / 5)])
+    const citedSource = source(
+      seed.domain.slug,
+      seed.sourceOverrides?.[conceptSlug] ?? seed.sources[Math.floor(index / 5)],
+    )
     const dependencies = index === 0 ? [] : [
       {
         targetId: `urn:maha:record:${seed.domain.slug}-${seed.concepts[index - 1]}`,
@@ -166,6 +180,24 @@ const domainSeeds: readonly DomainSeed[] = [
       { key: 'vdw', title: 'Van der Waals heterostructures', authors: ['A. K. Geim', 'I. V. Grigorieva'], publisher: 'Nature', publishedAt: '2013-07-24', url: 'https://doi.org/10.1038/nature12385', doi: '10.1038/nature12385', locator: 'Assembly, interfaces, device examples, and outlook sections.', establishes: 'The review describes stacking atomically thin crystals into heterostructures and the interface-controlled opportunities and constraints.', boundary: 'Laboratory assembly examples do not establish contamination-free high-volume production.' },
       { key: 'wide-bandgap', title: 'An assessment of wide bandgap semiconductors for power devices', authors: ['Jerry L. Hudgins', 'Grigory S. Simin', 'Enrico Santi', 'M. Asif Khan'], publisher: 'IEEE Transactions on Power Electronics', publishedAt: '2003-05-01', url: 'https://doi.org/10.1109/TPEL.2003.810840', doi: '10.1109/TPEL.2003.810840', locator: 'Pages 907–914: material-property comparison and SiC, GaN, and diamond power-device sections.', establishes: 'The paper compares material properties and device considerations for wide-bandgap semiconductors in power applications.', boundary: 'Intrinsic material properties do not determine wafer quality, epitaxial defect density, package reliability, or cost.' },
     ],
+    sourceOverrides: {
+      // The positional block source for this concept is the 2004 atomically
+      // thin carbon paper, which measures graphene and never mentions boron
+      // nitride. Dean et al. is the study that actually puts hBN under a
+      // device and reports what that changes.
+      'hexagonal-boron-nitride-dielectrics': {
+        key: 'hbn-substrates',
+        title: 'Boron nitride substrates for high-quality graphene electronics',
+        authors: ['C. R. Dean', 'A. F. Young', 'I. Meric', 'C. Lee', 'L. Wang', 'S. Sorgenfrei', 'K. Watanabe', 'T. Taniguchi', 'P. Kim', 'K. L. Shepard', 'J. Hone'],
+        publisher: 'Nature Nanotechnology',
+        publishedAt: '2010-08-22',
+        url: 'https://doi.org/10.1038/nnano.2010.172',
+        doi: '10.1038/nnano.2010.172',
+        locator: 'Abstract: fabrication and characterization of exfoliated mono- and bilayer graphene on single-crystal hexagonal boron nitride substrates.',
+        establishes: 'The study reports devices built on single-crystal hexagonal boron nitride substrates and the device-quality differences observed relative to silicon dioxide.',
+        boundary: 'Substrate-supported device measurements do not establish a dielectric constant, a breakdown field, or wafer-scale manufacturability for boron nitride.',
+      },
+    },
   },
   {
     domain: {
@@ -241,6 +273,24 @@ const domainSeeds: readonly DomainSeed[] = [
       { key: 'intracortical-bci', title: 'Neuronal ensemble control of prosthetic devices by a human with tetraplegia', authors: ['Leigh R. Hochberg', 'Mijail D. Serruya', 'Gerhard M. Friehs', 'et al.'], publisher: 'Nature', publishedAt: '2006-07-13', url: 'https://doi.org/10.1038/nature04970', doi: '10.1038/nature04970', locator: 'Participant, implant, decoding tasks, performance measures, and Methods.', establishes: 'The study reports intracortical neural decoding and device-control tasks in a named clinical research context.', boundary: 'A participant- and task-specific demonstration does not establish durable general-purpose performance or broad clinical benefit.' },
       { key: 'foreign-body', title: 'Response of brain tissue to chronically implanted neural electrodes', authors: ['Vera S. Polikov', 'Patrick A. Tresco', 'William M. Reichert'], publisher: 'Journal of Neuroscience Methods', publishedAt: '2005-10-15', url: 'https://doi.org/10.1016/j.jneumeth.2005.08.015', doi: '10.1016/j.jneumeth.2005.08.015', locator: 'Tissue response, electrode materials, chronic recording stability, and design-factor sections.', establishes: 'The review describes biological responses and engineering variables associated with chronically implanted neural electrodes.', boundary: 'General tissue-response mechanisms do not predict the safety or lifetime of a particular implant in a particular person.' },
     ],
+    sourceOverrides: {
+      // The positional block source for this concept is the Neuropixels probe
+      // paper, which reports instrumentation rather than the sorting step. Hill
+      // et al. is about the errors sorting actually makes, which is what a
+      // boundary record needs.
+      'spike-sorting-boundaries': {
+        key: 'spike-sorting-quality-metrics',
+        title: 'Quality Metrics to Accompany Spike Sorting of Extracellular Signals',
+        authors: ['Daniel N. Hill', 'Samar B. Mehta', 'David Kleinfeld'],
+        publisher: 'Journal of Neuroscience',
+        publishedAt: '2011-06-15',
+        url: 'https://doi.org/10.1523/JNEUROSCI.0971-11.2011',
+        doi: '10.1523/JNEUROSCI.0971-11.2011',
+        locator: 'Quality metrics and Summary matrices sections: false-positive and false-negative error estimates from refractory-period violations, detection threshold, cluster overlap, and censored events.',
+        establishes: 'The paper defines quantitative false-positive and false-negative error estimates for sorted units and argues they should be reported instead of an unquantified claim of good isolation.',
+        boundary: 'Error metrics quantify sorting quality for a given dataset and do not establish that any particular unit is a single neuron or is stable across sessions.',
+      },
+    },
   },
   {
     domain: {

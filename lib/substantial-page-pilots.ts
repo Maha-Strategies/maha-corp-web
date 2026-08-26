@@ -150,67 +150,67 @@ export const PILOT_SPECS: readonly PilotSpec[] = [
     slug: 'advanced-materials-hexagonal-boron-nitride-dielectrics',
     domainSlug: 'advanced-materials',
     selectionRationale:
-      'A mechanism-kind record with a complete locator and rights basis, chosen to exercise tier-2 and tier-3 related-record selection where only two bridge edges exist. It also surfaces a genuine source-alignment defect worth reporting.',
-    sourceAlignment: 'source-narrower-than-record-subject',
+      'A mechanism-kind record with a complete locator and rights basis, chosen to exercise tier-2 and tier-3 related-record selection where only two bridge edges exist. Its source was corrected in this sprint after the pilot surfaced a subject mismatch.',
+    sourceAlignment: 'record-subject-supported',
     sourceAlignmentNote:
-      'The record subject is hexagonal boron nitride as a dielectric, but the cited source is Novoselov et al. (2004), "Electric Field Effect in Atomically Thin Carbon Films", which reports transport in atomically thin carbon and does not establish anything about hBN. The claim resolves to its declared source, so the gate passes, but the source is narrower than the record subject and the page must not describe hBN properties the source never measured.',
+      'Corrected in this sprint. The record previously inherited the positional block source, Novoselov et al. (2004) on atomically thin carbon films, which never mentions boron nitride. It now cites Dean et al. (2010), which builds devices on single-crystal hexagonal boron nitride substrates and is the study that addresses the record subject.',
     searchIntent: {
-      primaryQuery: 'hexagonal boron nitride dielectric',
-      readerQuestion: 'What does the cited evidence actually establish about hexagonal boron nitride as a dielectric?',
-      audience: 'Materials researchers and technical readers checking whether a cited claim covers the material it names.',
+      primaryQuery: 'hexagonal boron nitride substrate graphene',
+      readerQuestion: 'Why is hexagonal boron nitride used underneath two-dimensional devices, and what did the cited study measure?',
+      audience: 'Materials researchers and technical readers assessing what a boron nitride substrate does and does not establish.',
       readerOutcome:
-        'The reader can see exactly what the cited source measures, recognise that it concerns atomically thin carbon rather than boron nitride, and avoid carrying the citation further than it reaches.',
+        'The reader can say what changed when devices were built on boron nitride rather than silicon dioxide, and can name the material properties the cited study does not report.',
       supportingQuestions: [
-        'What does the cited 2004 paper actually measure?',
-        'Does this record establish a dielectric constant or breakdown field for hBN?',
-        'Why is a citation that resolves still not sufficient support?',
-        'What would be needed to bound an hBN dielectric claim properly?',
+        'Why replace silicon dioxide with hexagonal boron nitride under a device?',
+        'What did the cited study actually compare?',
+        'Does this record establish a dielectric constant or breakdown field?',
+        'What would be needed to support a manufacturability claim?',
       ],
       queryVariants: [
-        'hexagonal boron nitride dielectric evidence',
-        'hbn dielectric citation check',
-        'is hbn dielectric claim supported',
+        'why use hbn substrate for graphene',
+        'boron nitride vs silicon dioxide substrate',
+        'hexagonal boron nitride device quality',
       ],
-      title: 'Hexagonal boron nitride dielectrics: checking the source',
+      title: 'Hexagonal boron nitride as a device substrate',
       description:
-        'The cited source for this record reports transport in atomically thin carbon films, not boron nitride. What that means for any hBN dielectric claim resting on it.',
+        'Why devices are built on single-crystal hexagonal boron nitride rather than silicon dioxide, what the cited study measured, and the material properties it does not report.',
       trafficNonClaim: NO_TRAFFIC_CLAIM,
     },
     editorial: {
       directAnswer:
-        'This record is registered as a mechanism covering hexagonal boron nitride used as a dielectric. Its single cited source, however, is the 2004 report of the electric field effect in atomically thin carbon films, which measures transport in carbon and not in boron nitride. The citation resolves, but it is narrower than the record subject, so no property of hBN should be quoted from this record.',
+        'Hexagonal boron nitride is a layered insulator used as the supporting substrate and encapsulant beneath two-dimensional conductors. The cited study reports devices built on single-crystal hexagonal boron nitride substrates and the device-quality differences observed relative to silicon dioxide. It is a device-level comparison, not a measurement of the material constants that are often quoted alongside it.',
       sections: [
         {
           heading: 'What it is',
           paragraphs: [
-            'Hexagonal boron nitride is a layered insulator commonly used as a gate dielectric and encapsulant beneath and above two-dimensional conductors. The record exists to hold that role as a distinct mechanism inside the advanced-materials graph rather than leaving it implicit in records about the conductors themselves.',
-            'What the record does not do is fix any electrical property of the material. It carries a single claim, and that claim is bounded to the scope of its cited locator, which is where the difficulty in this particular record begins.',
+            'A two-dimensional conductor sits on whatever supports it, and the support is not neutral: charge traps, roughness and dangling bonds in the substrate reach into the conducting layer. Hexagonal boron nitride is used in this role because it is itself layered and insulating, so it can support a device without presenting the disorder that an amorphous oxide does.',
+            'The record is registered as a mechanism inside the advanced-materials graph. It is bounded to what the cited study reports about devices built on this substrate, and it deliberately does not pool results from other substrate materials or later process work.',
           ],
         },
         {
           heading: 'How the cited evidence works',
           paragraphs: [
-            'The cited source is Novoselov and colleagues in Science, 22 October 2004, read at the abstract, device preparation, transport measurements and figures one through three. That work reports electric-field effects and transport measurements in atomically thin carbon films, which is a claim about carbon.',
-            'The claim on this record therefore resolves to a real, correctly identified, well-located source that does not address the record subject. This is a source-alignment defect rather than a broken citation: the identifier is right, the locator is exact, and the material under study is still the wrong one for a statement about boron nitride.',
+            'The evidence is Dean and colleagues in Nature Nanotechnology, 22 August 2010, read at the abstract reporting fabrication and characterisation of exfoliated mono- and bilayer graphene on single-crystal hexagonal boron nitride substrates. The comparison is against the silicon dioxide substrates that were standard at the time.',
+            'This is a device-level result: the study measures what the devices do, not what the boron nitride is. That distinction is the reason the record can support a statement about the substrate role while supporting nothing about the material constants, and it is why the claim is recorded at single-study maturity.',
           ],
         },
         {
           heading: 'What remains unresolved',
           paragraphs: [
-            'Everything specific to boron nitride remains unresolved on this record. Dielectric constant, breakdown field, interface trap density and encapsulation quality are all absent from the cited source, so none of them can be quoted here, and the record asserts no quantitative interval.',
-            'Closing the gap requires a source that measures hexagonal boron nitride directly, added with its own exact locator and rights basis. Until then the honest reading of this record is that it names a mechanism the graph needs and does not yet carry evidence for it.',
+            'The material constants are unresolved on this record. Dielectric constant, breakdown field and interface trap density are not reported by the cited study, so none of them can be quoted here, and the record asserts no quantitative interval for any of them.',
+            'Manufacturability is equally unresolved. The cited devices were exfoliated and assembled individually, which establishes nothing about wafer-scale growth, transfer yield or process control, and carrying the result to a manufacturing context needs a separately scoped record.',
           ],
         },
       ],
       originalContribution:
-        'The contribution is a worked example of a citation that passes every structural check while still failing the reader: correct identifier, exact locator, resolving claim, wrong material. Recording that explicitly is more useful than silently inheriting the mismatch.',
+        'The contribution is a corrected citation together with the reason it was wrong: the record previously inherited a positional block source about carbon, and this page states what a boron nitride source does and does not license rather than quietly repairing the reference.',
     },
     comparison: NOT_APPLICABLE_COMPARISON(
       'hexagonal boron nitride dielectrics',
-      'The one cited source does not measure boron nitride at all, so there is no supported side of any axis, let alone two.',
+      'The substrate contrast against silicon dioxide is internal to the cited study rather than a second cited subject, and this record carries one claim bound to one source.',
     ),
     calculation: NOT_APPLICABLE_CALCULATION(
-      'No dielectric quantity for boron nitride appears anywhere in the cited locator, so there is nothing to express, parameterise or reproduce.',
+      'No dielectric constant, breakdown field or mobility threshold is fixed by the cited locator, so there is no quantity to express or reproduce.',
     ),
   },
   {
@@ -351,67 +351,67 @@ export const PILOT_SPECS: readonly PilotSpec[] = [
     slug: 'neurotechnology-bci-spike-sorting-boundaries',
     domainSlug: 'neurotechnology-bci',
     selectionRationale:
-      'A comparison-kind record, included so the pilot set covers that record kind. Complete locator and rights basis, and it surfaces a second source-alignment defect that the gate cannot see.',
-    sourceAlignment: 'source-narrower-than-record-subject',
+      'A comparison-kind record, included so the pilot set covers that record kind. Its source was corrected in this sprint after the pilot surfaced a subject mismatch, and the replacement is unusually well matched to a boundary record.',
+    sourceAlignment: 'record-subject-supported',
     sourceAlignmentNote:
-      'The record subject is the boundary of spike sorting, but the cited source is the Neuropixels probe paper, which reports probe architecture, recording sites, channel selection and noise. Probe capability constrains what sorting can achieve but is not a study of sorting algorithms or their error rates, so the source is narrower than the record subject.',
+      'Corrected in this sprint. The record previously inherited the positional block source, the Neuropixels probe paper, which reports instrumentation rather than sorting. It now cites Hill, Mehta and Kleinfeld (2011), which defines the false-positive and false-negative error estimates that bound what a sorted unit means.',
     searchIntent: {
-      primaryQuery: 'spike sorting limitations',
-      readerQuestion: 'What are the boundaries of spike sorting, and does the cited probe evidence establish unit identity?',
-      audience: 'Neuroscience and BCI readers evaluating single-unit claims made from high-density recordings.',
+      primaryQuery: 'spike sorting quality metrics',
+      readerQuestion: 'What errors does spike sorting make, and how should a sorted unit be qualified?',
+      audience: 'Neuroscience and BCI readers evaluating single-unit claims built on sorted extracellular recordings.',
       readerOutcome:
-        'The reader can state that probe capability and sorting accuracy are different questions, and can see that the cited source addresses the former.',
+        'The reader can name the specific error types the cited work quantifies and can say why a reported error rate is not proof that a unit is one neuron.',
       supportingQuestions: [
-        'What does spike sorting attempt to do?',
-        'Does high channel count guarantee correct unit identity?',
-        'What does the cited probe paper actually report?',
-        'Why is chronic stability a separate question?',
+        'What false positives and false negatives arise in spike sorting?',
+        'How are refractory-period violations used as evidence of error?',
+        'Why report error estimates instead of calling a unit well isolated?',
+        'Does a good metric establish that a unit is a single neuron?',
       ],
       queryVariants: [
-        'spike sorting accuracy limits',
-        'neuropixels unit identity',
-        'high density recording sorting boundaries',
+        'spike sorting error rates',
+        'unit isolation quality metrics',
+        'how to report spike sorting quality',
       ],
-      title: 'Spike sorting boundaries: probe capability is not identity',
+      title: 'Spike sorting boundaries: quantifying sorting error',
       description:
-        'Why high-density probe capability does not establish correct spike sorting or stable unit identity, and what the cited Neuropixels source does and does not report.',
+        'The false-positive and false-negative errors spike sorting makes, how the cited work quantifies them, and why a good metric still does not prove single-neuron identity.',
       trafficNonClaim: NO_TRAFFIC_CLAIM,
     },
     editorial: {
       directAnswer:
-        'Spike sorting assigns recorded voltage events to putative individual neurons. The cited source reports the Neuropixels silicon-probe architecture and specified high-density recordings, which establishes recording capability rather than sorting correctness. Probe capability does not establish perfect unit identity, chronic stability or clinical suitability, and this record should not be read as evidence about sorting algorithms.',
+        'Spike sorting assigns recorded voltage events to putative individual neurons, and it makes errors in both directions. The cited work defines quantitative false-positive and false-negative estimates drawn from refractory-period violations, the detection threshold, cluster overlap and censored events, and argues these should be reported rather than an unquantified claim that units are well isolated.',
       sections: [
         {
           heading: 'What it is',
           paragraphs: [
-            'A dense extracellular probe records voltage at many sites, and a single neuron typically appears on several of them. Spike sorting is the inference step that groups those events into units that are treated as individual neurons for the rest of the analysis, which means every downstream single-unit claim inherits its assumptions.',
-            'The record is registered as a comparison and exists to hold the boundary of that inference. It is bounded to the scope of its cited locator, and it does not pool results across sorting algorithms, laboratories or preparations.',
+            'A dense extracellular probe records voltage at many sites, and one neuron typically appears on several of them. Spike sorting is the inference step that groups those events into units treated as individual neurons, which means every downstream single-unit claim inherits whatever errors the sorting made.',
+            'The record is registered as a comparison and exists to hold the boundary of that inference. It is bounded to the error estimates named in its cited locator and does not pool results across sorting algorithms, laboratories or preparations.',
           ],
         },
         {
           heading: 'How the cited evidence works',
           paragraphs: [
-            'The evidence is the fully integrated silicon probes paper published in Nature on 8 November 2017, read at the probe architecture, recording sites, channel selection, noise, recordings and Methods sections. It reports what the hardware is and what recordings were obtained with it.',
-            'That makes the source a study of instrumentation rather than of the sorting step, which is the alignment limit of this record. Denser and quieter recording improves the conditions under which sorting operates, but the cited work does not measure sorting error, so nothing here quantifies how often unit identity is correct.',
+            'The evidence is Hill, Mehta and Kleinfeld in the Journal of Neuroscience, 15 June 2011, read at the quality-metrics and summary-matrices sections. The work identifies distinct error sources and gives each an estimator: refractory-period violations indicate false positives, the detection threshold implies false negatives, and cluster overlap contributes in both directions.',
+            'What makes this the right source for a boundary record is its recommendation rather than any single number. The authors argue that a paper should publish the error estimates in a matrix, so that a reader can see how well isolated a unit was instead of taking the word for it.',
           ],
         },
         {
           heading: 'What remains unresolved',
           paragraphs: [
-            'Sorting accuracy itself is unresolved on this record. Error rates, the frequency of merged or split units, and the sensitivity of results to algorithm choice would each require a source that studies sorting directly, and none is cited here.',
-            'Chronic stability and clinical suitability are equally unresolved. A unit tracked across sessions may not be the same neuron, and the cited work does not establish that it is, so longitudinal and clinical claims need separately scoped evidence.',
+            'Unit identity itself is unresolved. A low error estimate quantifies how cleanly a cluster separates under stated assumptions; it does not establish that the cluster corresponds to one neuron, and the cited work presents metrics rather than ground truth.',
+            'Chronic stability and clinical suitability are separate questions again. A unit tracked across sessions may not be the same cell, and nothing in the cited locator addresses longitudinal identity, so those claims need separately scoped evidence.',
           ],
         },
       ],
       originalContribution:
-        'The contribution is separating instrument capability from inference correctness in a field where a probe citation is routinely offered as support for single-unit claims, and stating plainly that the cited source covers the instrument.',
+        'The contribution is a corrected citation plus the reason it was wrong: the record previously cited an instrument paper for a claim about inference. Sorting quality is now sourced to work that measures sorting, and the residual gap between a good metric and single-neuron identity is stated explicitly.',
     },
     comparison: NOT_APPLICABLE_COMPARISON(
       'spike sorting boundaries',
-      'Although the record kind is comparison, the single cited source reports one instrument and no sorting alternative, so both columns of any axis would have to be supplied without citation.',
+      'Although the record kind is comparison, the single cited source presents error estimators rather than two separately cited sorting approaches to set against each other.',
     ),
     calculation: NOT_APPLICABLE_CALCULATION(
-      'No sorting error rate, yield figure or signal-to-noise threshold is fixed by the cited locator, so any expression here would imply a quantitative standard that the source does not set.',
+      'The cited work defines error estimators whose form depends on the recording, the refractory assumption and the cluster model in use. Fixing one expression here would imply a standard formula the record does not adopt.',
     ),
   },
   {

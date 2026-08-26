@@ -39,21 +39,26 @@ Comparison is `not-applicable` on **8** of 8 pages and calculation on **8** of 8
 | Selection tier | Links |
 | --- | --- |
 | bridge-edge | 28 |
-| shared-source | 5 |
+| domain-adjacency | 2 |
+| shared-source | 3 |
 
 Tier 1 is a declared bridge edge, tier 2 is co-citation of the same source, tier 3 is domain adjacency used only to reach the gate minimum. No tier compares titles or slugs.
 
 ## Source-to-claim alignment
 
-Every claim resolves to a source the claim itself declares, so the gate raises no alignment failure. That check is structural. Two records cite a source **narrower than the record subject**, which the gate cannot detect and editorial prose must not paper over:
+Every claim resolves to a source the claim itself declares, so the gate raises no alignment failure. That check is structural: it verifies the link, not whether the source is about the record subject.
+
+**0 pilots remain misaligned.** 2 were corrected in this sprint after the pilot surfaced a subject mismatch that the gate cannot detect.
+
+Root cause, applying beyond these pilots: `buildDomainRecords` assigned a source by position, `seed.sources[Math.floor(index / 5)]`, spreading six sources across thirty concepts in blocks of five. A record therefore inherited whichever source its index landed on. At most six of thirty records per domain can have a subject-matched source that way. A per-concept `sourceOverrides` map now allows a concept to name the source that actually addresses it; the two corrections here are its first uses, and the remaining positional assignments are unreviewed.
 
 | Record | Alignment | Finding |
 | --- | --- | --- |
 | `fusion-plasma-systems-magnetic-confinement` | record-subject-supported | The ITER magnets documentation describes the coil systems that confine and shape the plasma, which is the record subject. |
-| `advanced-materials-hexagonal-boron-nitride-dielectrics` | source-narrower-than-record-subject | The record subject is hexagonal boron nitride as a dielectric, but the cited source is Novoselov et al. (2004), "Electric Field Effect in Atomically Thin Carbon Films", which reports transport in atomically thin carbon and does not establish anything about hBN. The claim resolves to its declared source, so the gate passes, but the source is narrower than the record subject and the page must not describe hBN properties the source never measured. |
+| `advanced-materials-hexagonal-boron-nitride-dielectrics` | record-subject-supported | Corrected in this sprint. The record previously inherited the positional block source, Novoselov et al. (2004) on atomically thin carbon films, which never mentions boron nitride. It now cites Dean et al. (2010), which builds devices on single-crystal hexagonal boron nitride substrates and is the study that addresses the record subject. |
 | `biomolecular-engineering-motif-scaffolding` | record-subject-supported | The RFdiffusion paper reports motif scaffolding explicitly among its tasks, and the locator names that section, so the source addresses the record subject. |
 | `longevity-metabolism-lc3-turnover-assays` | record-subject-supported | The autophagy assay guidelines address LC3 interpretation directly, and the locator names the LC3, SQSTM1/p62, lysosomal inhibition and flux sections. |
-| `neurotechnology-bci-spike-sorting-boundaries` | source-narrower-than-record-subject | The record subject is the boundary of spike sorting, but the cited source is the Neuropixels probe paper, which reports probe architecture, recording sites, channel selection and noise. Probe capability constrains what sorting can achieve but is not a study of sorting algorithms or their error rates, so the source is narrower than the record subject. |
+| `neurotechnology-bci-spike-sorting-boundaries` | record-subject-supported | Corrected in this sprint. The record previously inherited the positional block source, the Neuropixels probe paper, which reports instrumentation rather than sorting. It now cites Hill, Mehta and Kleinfeld (2011), which defines the false-positive and false-negative error estimates that bound what a sorted unit means. |
 | `mechanistic-interpretability-neural-feature-superposition` | record-subject-supported | Toy Models of Superposition develops the superposition account directly, and the locator names the definitions, toy models, geometry and sparsity sections. |
 | `agentic-systems-mcp-mcp-capability-negotiation` | record-subject-supported | The MCP tools specification defines the discovery and invocation contracts the record describes, and the locator names those sections. |
 | `critical-supply-chains-high-purity-quartz-deposits` | record-subject-supported | The USGS critical mineral resources volume covers geology, production, processing, uses and supply considerations for selected commodities, which is the record subject. |

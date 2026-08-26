@@ -339,6 +339,46 @@ test('the pilot artifacts regenerate byte for byte', () => {
   })
 })
 
+/* ------------------------------------------------------ source alignment -- */
+
+test('the two corrected records cite a source about their own subject', () => {
+  // Regression guard. Both records previously inherited a positional block
+  // source that studied something else: hBN dielectrics cited a paper on
+  // atomically thin carbon, and spike-sorting boundaries cited a probe paper.
+  const expected: Record<string, string> = {
+    'advanced-materials-hexagonal-boron-nitride-dielectrics': '10.1038/nnano.2010.172',
+    'neurotechnology-bci-spike-sorting-boundaries': '10.1523/JNEUROSCI.0971-11.2011',
+  }
+  for (const [slug, doi] of Object.entries(expected)) {
+    const record = EPISTEMIC_RECORDS.find((entry) => entry.slug === slug)
+    assert.ok(record, `${slug} is missing`)
+    assert.equal(record.sources.length, 1)
+    assert.equal(record.sources[0].identifiers?.[0]?.value, doi, `${slug} lost its corrected source`)
+    assert.ok(record.sources[0].exactLocator.length > 20, `${slug} has no exact locator`)
+    assert.ok(record.sources[0].rights.basis, `${slug} has no rights basis`)
+    for (const claim of record.claims) {
+      assert.deepEqual(claim.sourceIds, [record.sources[0].id], `${slug} claim still points at the old source`)
+    }
+  }
+})
+
+test('no record cites the superseded block source for a subject it does not study', () => {
+  const hbn = EPISTEMIC_RECORDS.find((r) => r.slug === 'advanced-materials-hexagonal-boron-nitride-dielectrics')!
+  assert.doesNotMatch(hbn.sources[0].title, /Atomically Thin Carbon/i)
+  const spike = EPISTEMIC_RECORDS.find((r) => r.slug === 'neurotechnology-bci-spike-sorting-boundaries')!
+  assert.doesNotMatch(spike.sources[0].title, /silicon probes/i)
+})
+
+test('every pilot now cites a source about its own record subject', () => {
+  for (const pilot of PILOTS) {
+    assert.equal(
+      pilot.sourceAlignment,
+      'record-subject-supported',
+      `${pilot.slug} still cites a source narrower than its subject`,
+    )
+  }
+})
+
 /* ------------------------------------------------- revise-reference & bridges */
 
 test('revise-reference never counts as a resolution', () => {

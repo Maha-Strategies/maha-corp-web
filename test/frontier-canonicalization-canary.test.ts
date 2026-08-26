@@ -18,6 +18,7 @@ import {
 import { buildFrontierReviewQueues } from '../lib/frontier-review-queue.ts'
 import {
   FRONTIER_SOURCE_CONTRACTS,
+  FRONTIER_SOURCE_CONTRACT_COUNT,
   parseFrontierSourceVerificationReport,
   verifyFrontierSourceContracts,
 } from '../lib/frontier-source-verification.ts'
@@ -58,12 +59,18 @@ test('the frontier canary is fixed at five exact records per domain with 200 con
   assert.equal(FRONTIER_CANARY_MANIFEST.domains.every((domain) => domain.canary.length === 5 && domain.controls === 25), true)
 })
 
-test('48 source contracts independently resolve into a hash-bound report', async () => {
+test('every source contract independently resolves into a hash-bound report', async () => {
+  // This asserted a literal 48, which was the positional block assignment of
+  // six sources across thirty concepts. Correcting a record's source changes
+  // the count, so the count is derived and the invariants that matter -- every
+  // contract resolves, nothing fails, every locator is content-confirmed, and
+  // the report is tamper-evident -- are asserted against it.
   const report = await verifyFrontierSourceContracts(fixtureFetch, new Date('2026-08-25T20:00:00.000Z'))
-  assert.equal(report.results.length, 48)
-  assert.equal(report.summary.verified, 48, JSON.stringify(report.results.filter((result) => result.status === 'failed')))
+  assert.equal(FRONTIER_SOURCE_CONTRACT_COUNT, FRONTIER_SOURCE_CONTRACTS.length)
+  assert.equal(report.results.length, FRONTIER_SOURCE_CONTRACT_COUNT)
+  assert.equal(report.summary.verified, FRONTIER_SOURCE_CONTRACT_COUNT, JSON.stringify(report.results.filter((result) => result.status === 'failed')))
   assert.equal(report.summary.failed, 0)
-  assert.equal(report.summary.contentConfirmedLocators, 48)
+  assert.equal(report.summary.contentConfirmedLocators, FRONTIER_SOURCE_CONTRACT_COUNT)
   assert.equal(parseFrontierSourceVerificationReport(structuredClone(report)).reportSha256, report.reportSha256)
   const changed = structuredClone(report)
   changed.results[0].observedTitle = 'Changed after verification'
