@@ -7,7 +7,7 @@ import {
   type BridgeCandidate,
   type CandidateClassification,
 } from './quantum-bridge-candidates.ts'
-import { ledgerEntry } from './bridge-source-ledger.ts'
+import { BRIDGE_SOURCE_LEDGER, ledgerEntry } from './bridge-source-ledger.ts'
 import {
   REFERENCE_RESOLVER_VERSION,
   isResolvedOutcome,
@@ -229,10 +229,13 @@ export function buildGapReport(): GapReport {
       endpointTotals[status] = (endpointTotals[status] ?? 0) + 1
     }
   }
-  for (const candidate of QUANTUM_BRIDGE_CANDIDATES) {
-    for (const source of candidate.sources) {
-      sourceTotals[source.verification] = (sourceTotals[source.verification] ?? 0) + 1
-    }
+  // Source verification state is counted from the ledger, which is the single
+  // durable record of what was independently checked. Counting the candidates'
+  // own copy instead let the two drift: the ledger sprint upgraded entries that
+  // the candidate records still described as unverified, and the generated
+  // report then disagreed with its own ledger table.
+  for (const entry of BRIDGE_SOURCE_LEDGER) {
+    sourceTotals[entry.verification] = (sourceTotals[entry.verification] ?? 0) + 1
   }
 
   const remediableToRevise = QUANTUM_BRIDGE_AUDIT.filter((bridge) => !CONCEPTUAL_DEFECTS[bridge.id]).map(

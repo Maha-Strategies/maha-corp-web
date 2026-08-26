@@ -43,6 +43,8 @@ export interface SourceLedgerEntry {
   rightsBasis: string
   verificationSource: string
   verifiedAt: string | null
+  /** Where the locator itself was read. Absent when `locator` is null. */
+  locatorSource?: string
   suggestedRevision?: SuggestedRevision
 }
 
@@ -70,14 +72,14 @@ export const BRIDGE_SOURCE_LEDGER: readonly SourceLedgerEntry[] = [
     key: 'Q-BR-001B',
     bridgeId: 'Q-BR-001',
     side: 'B',
-    verification: 'not-independently-verified',
-    identifier: null,
+    verification: 'verified-correct',
+    identifier: 'isbn:9780444850096',
     locator: null,
     correction:
-      'Open Library, Library of Congress and Google Books queries did not return an authoritative catalogue record in this sprint. Absence of a record from these three channels is not evidence the work does not exist; this is a verification gap, not a finding against the citation.',
+      'Resolved on 2026-08-26. Open Library returns an authoritative catalogue record: F. J. MacWilliams and N. J. A. Sloane, "The Theory of Error-Correcting Codes", North-Holland, 1977, 762 pages, North-Holland Mathematical Library vol. 16, ISBN 9780444850096. The submitted metadata was accurate; the earlier not-independently-verified state was a gap in the previous sprint, not a defect in the citation. No locator: the volume text was not inspected, so the chapter carrying the dual-code and parity-check-matrix material is not recorded.',
     rightsBasis: METADATA_ONLY,
-    verificationSource: 'Open Library, Library of Congress, Google Books (no usable record returned)',
-    verifiedAt: null,
+    verificationSource: OPENLIB,
+    verifiedAt: '2026-08-26',
   },
   {
     key: 'Q-BR-002A',
@@ -85,8 +87,10 @@ export const BRIDGE_SOURCE_LEDGER: readonly SourceLedgerEntry[] = [
     side: 'A',
     verification: 'verified-correct',
     identifier: 'doi:10.1038/s41467-021-22030-5',
-    locator: null,
-    correction: 'Confirmed: Nature Communications 12 (2021), article 1779. Submitted metadata was accurate.',
+    locator:
+      'Abstract',
+    correction: 'Confirmed: Nature Communications 12 (2021), article 1779. Submitted metadata was accurate. Locator confirmed 2026-08-26 against the arXiv preprint abstract, which states that transmon relaxation "likely originates from uncontrolled surfaces, interfaces, and contaminants" and that the devices were made "by replacing niobium with tantalum". This supports the bounded claim that T1 is influenced by interfacial residue and oxidation controlled during deposition and cleaning.',
+    locatorSource: 'arXiv:2003.00024 abstract, read 2026-08-26',
     rightsBasis: METADATA_ONLY,
     verificationSource: CROSSREF,
     verifiedAt: '2026-08-25',
@@ -277,9 +281,11 @@ export const BRIDGE_SOURCE_LEDGER: readonly SourceLedgerEntry[] = [
     side: 'A',
     verification: 'verified-with-correction',
     identifier: 'doi:10.1038/nnano.2014.216',
-    locator: null,
+    locator:
+      'Abstract',
     correction:
-      'Submitted title read "fault-tolerant fidelity"; the published title is "An addressable quantum dot qubit with fault-tolerant control-fidelity". Nature Nanotechnology 9(12), 981-985 (2014); volume, pages and year were accurate.',
+      'Submitted title read "fault-tolerant fidelity"; the published title is "An addressable quantum dot qubit with fault-tolerant control-fidelity". Nature Nanotechnology 9(12), 981-985 (2014); volume, pages and year were accurate. Locator confirmed 2026-08-26 against the arXiv preprint abstract, which reports "T_2* = 120 mus and T_2 = 28 ms" for a qubit in isotopically engineered silicon. This is the exact figure the bounded claim quotes.',
+    locatorSource: 'arXiv:1407.1950 abstract, read 2026-08-26',
     rightsBasis: METADATA_ONLY,
     verificationSource: `${CROSSREF}; ${PUBLISHER}`,
     verifiedAt: '2026-08-25',
@@ -302,8 +308,10 @@ export const BRIDGE_SOURCE_LEDGER: readonly SourceLedgerEntry[] = [
     side: 'A',
     verification: 'verified-correct',
     identifier: 'doi:10.3389/fphy.2014.00005',
-    locator: null,
-    correction: 'Confirmed: Frontiers in Physics 2, article 5 (2014). Submitted metadata was accurate.',
+    locator:
+      'Sections 2-9 (Ising formulations, from 2.1 number partitioning through 9 graph isomorphisms)',
+    correction: 'Confirmed: Frontiers in Physics 2, article 5 (2014). Submitted metadata was accurate. Locator confirmed 2026-08-26 against the open-access full text. Sections 2 through 9 carry the Ising formulations themselves; this supports only the catalogue claim, not any claim about tokamak equilibrium.',
+    locatorSource: 'Frontiers in Physics full text section listing, read 2026-08-26',
     rightsBasis: METADATA_ONLY,
     verificationSource: CROSSREF,
     verifiedAt: '2026-08-25',
@@ -361,9 +369,11 @@ export const BRIDGE_SOURCE_LEDGER: readonly SourceLedgerEntry[] = [
     side: 'A',
     verification: 'verified-with-correction',
     identifier: 'doi:10.1103/PhysRevApplied.13.034032',
-    locator: null,
+    locator:
+      'Abstract',
     correction:
-      'Submitted citation read "Physical Review Letters, 124(8), 086801". The paper is Physical Review Applied 13(3), 034032 (2020); preprint arXiv:1810.03703. Journal, volume, issue and article number are all incorrect.',
+      'Submitted citation read "Physical Review Letters, 124(8), 086801". The paper is Physical Review Applied 13(3), 034032 (2020); preprint arXiv:1810.03703. Journal, volume, issue and article number are all incorrect. Locator confirmed 2026-08-26 against the arXiv preprint abstract, which reports measurements that "reveal record high photon lifetimes up to 2 seconds". This supports the lifetime figure only, not any attribution of that lifetime to bulk purity.',
+    locatorSource: 'arXiv:1810.03703 abstract, read 2026-08-26',
     rightsBasis: METADATA_ONLY,
     verificationSource: `${CROSSREF}; arXiv; OSTI; NASA ADS`,
     verifiedAt: '2026-08-25',

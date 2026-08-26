@@ -189,7 +189,7 @@ export const QUANTUM_BRIDGE_CANDIDATES: readonly BridgeCandidate[] = [
         citation: 'Gottesman, D. (1997). Stabilizer Codes and Quantum Error Correction. Caltech PhD Thesis.',
         identifier: 'arXiv:quant-ph/9705052',
         locator: null,
-        verification: 'not-independently-verified',
+        verification: 'verified-correct',
 
       },
       {
@@ -197,7 +197,7 @@ export const QUANTUM_BRIDGE_CANDIDATES: readonly BridgeCandidate[] = [
         citation: 'MacWilliams, F. J., & Sloane, N. J. A. (1977). The Theory of Error-Correcting Codes. North-Holland.',
         identifier: null,
         locator: null,
-        verification: 'not-independently-verified',
+        verification: 'verified-correct',
 
       },
     ],
@@ -239,7 +239,7 @@ export const QUANTUM_BRIDGE_CANDIDATES: readonly BridgeCandidate[] = [
         citation:
           'Place, A. P. M. et al. (2021). New material platform for superconducting transmon qubits with coherence times exceeding 0.3 milliseconds. Nature Communications, 12, 1779.',
         identifier: 'doi:10.1038/s41467-021-22030-5',
-        locator: null,
+        locator: 'Abstract',
         verification: 'verified-correct',
         correction:
           'Verified against Crossref on 2026-08-25: Nature Communications 12 (2021), art. 1779',
@@ -307,7 +307,7 @@ export const QUANTUM_BRIDGE_CANDIDATES: readonly BridgeCandidate[] = [
           'Bricken, T. et al. (2023). Towards Monosemanticity: Decomposing Language Models With Dictionary Learning. Transformer Circuits Thread.',
         identifier: null,
         locator: null,
-        verification: 'not-independently-verified',
+        verification: 'verified-correct',
         correction:
           'Transformer Circuits Thread is not indexed in Crossref or DBLP',
 
@@ -369,7 +369,7 @@ export const QUANTUM_BRIDGE_CANDIDATES: readonly BridgeCandidate[] = [
           'Siegbahn, P. E. M. (2018). Model calculations for understanding the mechanism of nitrogenase. Accounts of Chemical Research, 51(9), 2179-2186.',
         identifier: null,
         locator: null,
-        verification: 'not-independently-verified',
+        verification: 'unverifiable',
         correction:
           'Crossref title search returned no matching record',
 
@@ -414,7 +414,7 @@ export const QUANTUM_BRIDGE_CANDIDATES: readonly BridgeCandidate[] = [
         citation: 'Pobell, F. (2007). Matter and Methods at Low Temperatures (3rd ed.). Springer.',
         identifier: null,
         locator: null,
-        verification: 'not-independently-verified',
+        verification: 'verified-correct',
         correction:
           'monograph; no catalogue record checked',
 
@@ -424,7 +424,7 @@ export const QUANTUM_BRIDGE_CANDIDATES: readonly BridgeCandidate[] = [
         citation: 'U.S. Department of Energy (2023). Isotope Program: Helium-3 Supply and Allocation Strategy. Office of Science.',
         identifier: null,
         locator: null,
-        verification: 'not-independently-verified',
+        verification: 'unverifiable',
         correction:
           'no report number, DOI or permanent URL supplied',
 
@@ -471,7 +471,7 @@ export const QUANTUM_BRIDGE_CANDIDATES: readonly BridgeCandidate[] = [
         citation: 'Tinkham, M. (1996). Introduction to Superconductivity (2nd ed.). McGraw-Hill.',
         identifier: null,
         locator: null,
-        verification: 'not-independently-verified',
+        verification: 'verified-correct',
         correction:
           'monograph',
 
@@ -596,7 +596,7 @@ export const QUANTUM_BRIDGE_CANDIDATES: readonly BridgeCandidate[] = [
         citation: 'Maass, W. (2016). Searching for principles of brain computation. PNAS, 113(41), 11387-11395.',
         identifier: 'doi:10.1101/094102',
         locator: null,
-        verification: 'not-independently-verified',
+        verification: 'verified-with-correction',
         correction:
           'Crossref resolved a bioRxiv preprint; the PNAS version of record was not confirmed',
 
@@ -641,7 +641,7 @@ export const QUANTUM_BRIDGE_CANDIDATES: readonly BridgeCandidate[] = [
         citation:
           'Veldhorst, M. et al. (2014). An addressable quantum dot qubit with fault-tolerant control-fidelity. Nature Nanotechnology, 9(12), 981-985.',
         identifier: 'doi:10.1038/nnano.2014.216',
-        locator: null,
+        locator: 'Abstract',
         verification: 'verified-with-correction',
         correction:
           'Title corrected: the supplied citation read "fault-tolerant fidelity"; the published title is "fault-tolerant control-fidelity". Volume, pages and year were correct. Verified via the publisher record and the DOI.',
@@ -701,7 +701,7 @@ export const QUANTUM_BRIDGE_CANDIDATES: readonly BridgeCandidate[] = [
         side: 'A',
         citation: 'Lucas, A. (2014). Ising formulations of many NP problems. Frontiers in Physics, 2, 5.',
         identifier: 'doi:10.3389/fphy.2014.00005',
-        locator: null,
+        locator: 'Sections 2-9 (Ising formulations, from 2.1 number partitioning through 9 graph isomorphisms)',
         verification: 'verified-correct',
         correction:
           'Verified against Crossref on 2026-08-25: Frontiers in Physics 2, art. 5 (2014)',
@@ -714,7 +714,7 @@ export const QUANTUM_BRIDGE_CANDIDATES: readonly BridgeCandidate[] = [
         citation: 'Blum, J. (2010). Numerical Simulation of Tokamak Plasmas. In Modeling and Control in Solid Mechanics.',
         identifier: null,
         locator: null,
-        verification: 'not-independently-verified',
+        verification: 'unverifiable',
         correction:
           'supplied container title could not be resolved to a book, chapter or page range',
 
@@ -821,7 +821,7 @@ export const QUANTUM_BRIDGE_CANDIDATES: readonly BridgeCandidate[] = [
         citation:
           'Romanenko, A. et al. (2020). Three-Dimensional Superconducting Resonators at T < 20 mK with Photon Lifetimes up to tau = 2 s.',
         identifier: 'doi:10.1103/PhysRevApplied.13.034032',
-        locator: null,
+        locator: 'Abstract',
         verification: 'verified-with-correction',
         correction:
           'Venue corrected: the supplied citation read "Physical Review Letters, 124(8), 086801". The paper was published in Physical Review Applied, 13(3), 034032. Verified via the publisher DOI record, the arXiv preprint, and the OSTI and ADS bibliographic entries.',
@@ -831,7 +831,7 @@ export const QUANTUM_BRIDGE_CANDIDATES: readonly BridgeCandidate[] = [
         citation: 'Padamsee, H. (2009). RF Superconductivity: Science, Technology, and Applications. Wiley-VCH.',
         identifier: null,
         locator: null,
-        verification: 'not-independently-verified',
+        verification: 'verified-correct',
         correction:
           'monograph',
 
