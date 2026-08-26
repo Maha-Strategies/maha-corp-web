@@ -82,6 +82,14 @@ export function provenanceDigest(value: unknown): string {
   return `sha256:${hex}`
 }
 
+/**
+ * The established passage commitment covers the located text itself. Extraction
+ * metadata remains protected by the enclosing claim and dossier digests.
+ */
+export function passageDigest(passage: { locator: string | null; excerpt: string }): string {
+  return `sha256:${sha256Hex(canonicalJson({ locator: passage.locator, excerpt: passage.excerpt }))}`
+}
+
 export function isPlaceholderDigest(digest: string): boolean {
   return digest.replace(/^sha256:/, '') === EMPTY_PAYLOAD_SHA256
 }

@@ -17,6 +17,7 @@
     "lint": "eslint",
     "typecheck": "next typegen && tsc --noEmit",
     "verify:navigator-client-bundle": "node --experimental-strip-types scripts/verify-navigator-client-bundle.ts",
+    "compile:evidence-dossier-package": "node --experimental-strip-types scripts/compile-evidence-dossier-package.ts",
     "maha": "node bin/maha.js",
     "expand-graph": "node --experimental-strip-types scripts/expand-graph.ts",
     "verify:api-credit-billing": "node --experimental-strip-types scripts/verify-api-credit-billing.ts",
