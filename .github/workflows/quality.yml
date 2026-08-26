@@ -47,6 +47,8 @@ jobs:
         run: npm run verify:x402-sepolia -- --dry-run
       - run: rm -rf .next
       - run: npm run build
+      - name: Verify Navigator browser bundle boundary
+        run: npm run verify:navigator-client-bundle
 
   # The Modal GPU worker ships outside the Vercel build, so nothing else in CI
   # would notice if it stopped importing. Its own test spawns a real GPU job on
