@@ -50,3 +50,22 @@ Schema validity and offer readiness are separate. A valid internal dossier is no
 - internal audit completed.
 
 The decision is binary with explicit blocker codes. It is not a quality score, a promise of demand, or a statement that the evidence is true.
+
+## Substantial-page adapter and rehearsal
+
+`adaptSubstantialPageToDossier` accepts only a substantial-page decision that
+already passes its quality gate. Every cited source must then carry an explicit
+inspection attestation, and every cited claim must resolve to at least one
+bounded passage with an exact locator. It performs no retrieval and does not
+infer that a locator proves support.
+
+Run the sanitized semiconductor-materials rehearsal into a new absolute local
+directory:
+
+```sh
+npm run rehearse:evidence-dossier -- /absolute/new/output-directory
+```
+
+The rehearsal is intentionally below the commercial gate: one claim and one
+inspected source prove workflow integrity, not a $5,000 deliverable, customer
+validation, external review, or revenue.

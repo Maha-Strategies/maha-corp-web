@@ -17,6 +17,9 @@ import {
   type DossierEngagement,
 } from '../lib/evidence-dossier/package.ts'
 import { validateDossier } from '../lib/evidence-dossier/validator.ts'
+import { EPISTEMIC_RECORDS } from '../lib/epistemic-pilots.ts'
+import { compilePilots } from '../lib/substantial-page-pilots.ts'
+import { adaptSubstantialPageToDossier } from '../lib/evidence-dossier/substantial-page-adapter.ts'
 
 const clone = <T,>(value: T): T => JSON.parse(JSON.stringify(value)) as T
 
@@ -174,4 +177,60 @@ test('the compiler remains local, noncanonical, and credential-free', () => {
   assert.doesNotMatch(cli, /fetch\(|process\.env|Authorization/)
   assert.doesNotMatch(sitemap, /compile-evidence-dossier-package/)
   assert.doesNotMatch(llms, /compile-evidence-dossier-package/)
+})
+
+function hbnAdapterInput() {
+  const slug = 'advanced-materials-hexagonal-boron-nitride-dielectrics'
+  const record = EPISTEMIC_RECORDS.find((entry) => entry.slug === slug)!
+  const compiledPage = compilePilots().find((entry) => entry.slug === slug)!
+  const source = record.sources[0]
+  const claim = record.claims[0]
+  return {
+    record,
+    compiledPage,
+    dossierId: 'internal-rehearsal-hbn-dielectrics-test',
+    generatedAt: '2026-08-26T00:00:00Z',
+    corpusRevision: compiledPage.contract.recordRevisionSha256,
+    reviewState: 'illustrative-draft' as const,
+    intendedUse: 'Test the bounded internal adapter workflow without producing a public or customer-facing artifact.',
+    methodology: 'Bind an eligible substantial-page contract to explicitly inspected evidence without retrieval or invented locators.',
+    prohibitedUses: ['No manufacturing inference.', 'No performance guarantee.', 'No external-review claim.'],
+    limitations: ['One bounded claim only.', 'One inspected source only.', 'No replication assessment.', 'No commercial readiness claim.'],
+    disclaimer: 'Internal rehearsal only. It does not establish scientific truth, independent reproduction, external endorsement, or commercial validation.',
+    attestations: [{
+      sourceId: source.id,
+      verifiedAt: '2026-08-26',
+      metadataProvenance: 'Test attestation tied to the inspected publisher abstract.',
+      extractionMethod: 'publisher-html-read' as const,
+      passages: [{
+        passageId: 'passage-hbn-test',
+        claimIds: [claim.id],
+        locator: source.exactLocator,
+        locatorKind: 'section' as const,
+        excerpt: source.establishes,
+        isParaphrase: true,
+        sourceRevision: source.identifiers[0]!.value,
+      }],
+    }],
+  }
+}
+
+test('an eligible substantial page compiles into a bounded dossier rehearsal', () => {
+  const dossier = adaptSubstantialPageToDossier(hbnAdapterInput())
+  assert.deepEqual(validateDossier(dossier), [])
+  assert.equal(dossier.claims.length, 1)
+  assert.equal(dossier.passages[0].originalDocumentInspected, true)
+  const packageBundle = buildEvidenceDossierPackage(dossier, rehearsal())
+  assert.equal(packageBundle.manifest.offerReadiness.readyForFixedFeeOffer, false)
+  assert.ok(packageBundle.manifest.offerReadiness.reasons.includes('offer-claim-scope-outside-8-to-15'))
+})
+
+test('the adapter fails closed without inspected passages or an eligible page', () => {
+  const missing = hbnAdapterInput()
+  missing.attestations = []
+  assert.throws(() => adaptSubstantialPageToDossier(missing), /attestation missing/i)
+
+  const blocked = hbnAdapterInput()
+  blocked.compiledPage = { ...blocked.compiledPage, decision: { ...blocked.compiledPage.decision, pageEligible: false, reasons: ['alignment-blocked'] } }
+  assert.throws(() => adaptSubstantialPageToDossier(blocked), /substantial page is blocked/i)
 })
