@@ -2,9 +2,15 @@
   "compilerVersion": "maha-substantial-page-compiler/0.1",
   "pilotVersion": "maha-substantial-page-pilot/0.1",
   "selectionDeviation": "No frontier-domain record is public; PUBLIC_EPISTEMIC_RECORDS holds two entries outside these domains. Draft canonical records were used and every artifact remains internal, noindex and unrouted.",
-  "passing": 8,
-  "blocked": 0,
-  "blockerCounts": {},
+  "passing": 4,
+  "blocked": 4,
+  "blockerCounts": {
+    "source-alignment-insufficient-evidence": 3,
+    "source-assignment-positional-legacy": 4,
+    "source-not-inspected": 4,
+    "source-metadata-unverified": 2,
+    "source-inaccessible": 1
+  },
   "selectionTierCounts": {
     "bridge-edge": 28,
     "domain-adjacency": 2,
@@ -16,7 +22,7 @@
       "domainSlug": "fusion-plasma-systems",
       "recordKind": "concept",
       "selectionRationale": "Six declared graph edges, the most connected record in the domain, with a complete exact locator and a citation-with-paraphrase rights basis. A concept hub exercises tier-1 related-record selection end to end.",
-      "sourceAlignment": "record-subject-supported",
+      "sourceAlignment": "supported",
       "sourceAlignmentNote": "The ITER magnets documentation describes the coil systems that confine and shape the plasma, which is the record subject.",
       "contractDigest": "sha256:0b329352418de931b4a8aa7240ed59555a55a15db902c034340001f8c29cc70f",
       "decision": {
@@ -224,7 +230,7 @@
       "domainSlug": "advanced-materials",
       "recordKind": "mechanism",
       "selectionRationale": "A mechanism-kind record with a complete locator and rights basis, chosen to exercise tier-2 and tier-3 related-record selection where only two bridge edges exist. Its source was corrected in this sprint after the pilot surfaced a subject mismatch.",
-      "sourceAlignment": "record-subject-supported",
+      "sourceAlignment": "supported",
       "sourceAlignmentNote": "Corrected in this sprint. The record previously inherited the positional block source, Novoselov et al. (2004) on atomically thin carbon films, which never mentions boron nitride. It now cites Dean et al. (2010), which builds devices on single-crystal hexagonal boron nitride substrates and is the study that addresses the record subject.",
       "contractDigest": "sha256:bdc30213fd7db2b6f85f872ca885d08a789ee2b4057f50e3a24bb590122d7ad9",
       "decision": {
@@ -399,14 +405,18 @@
       "domainSlug": "biomolecular-engineering",
       "recordKind": "method",
       "selectionRationale": "A method-kind record with a complete locator and rights basis whose cited source directly addresses the method named. Chosen to contrast with the advanced-materials pilot, where alignment fails.",
-      "sourceAlignment": "record-subject-supported",
+      "sourceAlignment": "insufficient-evidence",
       "sourceAlignmentNote": "The RFdiffusion paper reports motif scaffolding explicitly among its tasks, and the locator names that section, so the source addresses the record subject.",
       "contractDigest": "sha256:b653067dcb8404895edc94059cf7a5715bef42f423eb162545087ea3a3421537",
       "decision": {
         "recordId": "urn:maha:record:biomolecular-engineering-motif-scaffolding",
-        "pageEligible": true,
+        "pageEligible": false,
         "evaluatedAgainst": "maha-substantial-page/0.1",
-        "reasons": [],
+        "reasons": [
+          "source-alignment-insufficient-evidence",
+          "source-assignment-positional-legacy",
+          "source-not-inspected"
+        ],
         "measures": {
           "explanationSections": 3,
           "explanationParagraphs": 6,
@@ -574,14 +584,18 @@
       "domainSlug": "longevity-metabolism",
       "recordKind": "measurement",
       "selectionRationale": "A measurement-kind record whose cited source is a methodological guideline, which makes the static-versus-dynamic distinction unusually well supported. Complete locator and rights basis.",
-      "sourceAlignment": "record-subject-supported",
+      "sourceAlignment": "insufficient-evidence",
       "sourceAlignmentNote": "The autophagy assay guidelines address LC3 interpretation directly, and the locator names the LC3, SQSTM1/p62, lysosomal inhibition and flux sections.",
       "contractDigest": "sha256:cc1092ea4028c76426d807d00e7b422b565a112e2508c9a8d56c937cc9555b26",
       "decision": {
         "recordId": "urn:maha:record:longevity-metabolism-lc3-turnover-assays",
-        "pageEligible": true,
+        "pageEligible": false,
         "evaluatedAgainst": "maha-substantial-page/0.1",
-        "reasons": [],
+        "reasons": [
+          "source-alignment-insufficient-evidence",
+          "source-assignment-positional-legacy",
+          "source-not-inspected"
+        ],
         "measures": {
           "explanationSections": 3,
           "explanationParagraphs": 6,
@@ -749,7 +763,7 @@
       "domainSlug": "neurotechnology-bci",
       "recordKind": "comparison",
       "selectionRationale": "A comparison-kind record, included so the pilot set covers that record kind. Its source was corrected in this sprint after the pilot surfaced a subject mismatch, and the replacement is unusually well matched to a boundary record.",
-      "sourceAlignment": "record-subject-supported",
+      "sourceAlignment": "supported",
       "sourceAlignmentNote": "Corrected in this sprint. The record previously inherited the positional block source, the Neuropixels probe paper, which reports instrumentation rather than sorting. It now cites Hill, Mehta and Kleinfeld (2011), which defines the false-positive and false-negative error estimates that bound what a sorted unit means.",
       "contractDigest": "sha256:caa5884e50430492aa4c538bdd46436126732ccfcaf6eef680221e3af1ddca2e",
       "decision": {
@@ -924,14 +938,19 @@
       "domainSlug": "mechanistic-interpretability",
       "recordKind": "concept",
       "selectionRationale": "The most connected record in the domain with six declared edges, a complete locator and rights basis. Its source addresses the subject directly, and it is the endpoint a Q-BR bridge tried and failed to reach, which makes its boundaries worth rendering carefully.",
-      "sourceAlignment": "record-subject-supported",
+      "sourceAlignment": "insufficient-evidence",
       "sourceAlignmentNote": "Toy Models of Superposition develops the superposition account directly, and the locator names the definitions, toy models, geometry and sparsity sections.",
       "contractDigest": "sha256:a6b6162118b689c314bef3d23e8002416aec21b93a59150428c67cf55920b43a",
       "decision": {
         "recordId": "urn:maha:record:mechanistic-interpretability-neural-feature-superposition",
-        "pageEligible": true,
+        "pageEligible": false,
         "evaluatedAgainst": "maha-substantial-page/0.1",
-        "reasons": [],
+        "reasons": [
+          "source-alignment-insufficient-evidence",
+          "source-assignment-positional-legacy",
+          "source-metadata-unverified",
+          "source-not-inspected"
+        ],
         "measures": {
           "explanationSections": 3,
           "explanationParagraphs": 6,
@@ -1132,7 +1151,7 @@
       "domainSlug": "agentic-systems-mcp",
       "recordKind": "mechanism",
       "selectionRationale": "A mechanism-kind record whose source is a protocol specification, which makes the conformance-versus-safety boundary crisp. Complete locator and rights basis, and directly relevant to the tooling this codebase runs.",
-      "sourceAlignment": "record-subject-supported",
+      "sourceAlignment": "supported",
       "sourceAlignmentNote": "The MCP tools specification defines the discovery and invocation contracts the record describes, and the locator names those sections.",
       "contractDigest": "sha256:d1d2b2861d857437bd7a05e7c81b78b56abb47ffa117f52db412697447fa89fc",
       "decision": {
@@ -1307,14 +1326,19 @@
       "domainSlug": "critical-supply-chains",
       "recordKind": "concept",
       "selectionRationale": "The most connected record in the domain with six declared edges, a complete locator and a government-publication rights basis. A supply-side concept balances the physics and software records in the set.",
-      "sourceAlignment": "record-subject-supported",
+      "sourceAlignment": "inaccessible-source",
       "sourceAlignmentNote": "The USGS critical mineral resources volume covers geology, production, processing, uses and supply considerations for selected commodities, which is the record subject.",
       "contractDigest": "sha256:397138bd24e252f22886ec884927fd2dfe4e94c36ca700bb0ebc1a347f68a781",
       "decision": {
         "recordId": "urn:maha:record:critical-supply-chains-high-purity-quartz-deposits",
-        "pageEligible": true,
+        "pageEligible": false,
         "evaluatedAgainst": "maha-substantial-page/0.1",
-        "reasons": [],
+        "reasons": [
+          "source-assignment-positional-legacy",
+          "source-inaccessible",
+          "source-metadata-unverified",
+          "source-not-inspected"
+        ],
         "measures": {
           "explanationSections": 3,
           "explanationParagraphs": 6,

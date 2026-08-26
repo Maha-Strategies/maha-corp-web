@@ -93,16 +93,14 @@ batch.push(
 )
 
 batch.push('## Source-to-claim alignment', '')
-const misaligned = pilots.filter((pilot) => pilot.sourceAlignment !== 'record-subject-supported')
+const misaligned = pilots.filter((pilot) => pilot.sourceAlignment !== 'supported')
 const corrected = pilots.filter((pilot) => pilot.sourceAlignmentNote.startsWith('Corrected in this sprint'))
 batch.push(
   'Every claim resolves to a source the claim itself declares, so the gate raises no alignment failure. That check is structural: it verifies the link, not whether the source is about the record subject.',
   '',
 )
 batch.push(
-  misaligned.length === 0
-    ? `**${misaligned.length} pilots remain misaligned.** ${corrected.length} were corrected in this sprint after the pilot surfaced a subject mismatch that the gate cannot detect.`
-    : `**${misaligned.length} pilots cite a source narrower than the record subject**, which the gate cannot detect and editorial prose must not paper over.`,
+  `Alignment is now read from the frontier source-alignment audit rather than asserted by the pilot. **${pilots.length - misaligned.length} of ${pilots.length}** pilots have an inspected, subject-aligned source; **${misaligned.length}** do not and are blocked. ${corrected.length} mappings were corrected after the pilot surfaced a subject mismatch.`,
   '',
 )
 batch.push(

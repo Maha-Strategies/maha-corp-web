@@ -18,7 +18,7 @@ Six declared graph edges, the most connected record in the domain, with a comple
 
 ## Source alignment
 
-**record-subject-supported** — The ITER magnets documentation describes the coil systems that confine and shape the plasma, which is the record subject.
+**supported** — The ITER magnets documentation describes the coil systems that confine and shape the plasma, which is the record subject.
 
 ## Search intent
 

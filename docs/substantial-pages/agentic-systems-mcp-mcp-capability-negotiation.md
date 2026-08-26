@@ -18,7 +18,7 @@ A mechanism-kind record whose source is a protocol specification, which makes th
 
 ## Source alignment
 
-**record-subject-supported** — The MCP tools specification defines the discovery and invocation contracts the record describes, and the locator names those sections.
+**supported** — The MCP tools specification defines the discovery and invocation contracts the record describes, and the locator names those sections.
 
 ## Search intent
 

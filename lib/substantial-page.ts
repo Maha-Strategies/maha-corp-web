@@ -125,8 +125,17 @@ export function evaluateSubstantialPageGate(
   record: EpistemicRecord,
   page: SubstantialPageContract,
   graph: readonly EpistemicRecord[],
+  /**
+   * Source-alignment blockers for this record, supplied by the caller.
+   *
+   * A declared source resolving is a structural fact and says nothing about
+   * whether the source is about the record's subject. The contract therefore
+   * accepts alignment findings rather than deriving them, and the compiler
+   * always supplies them so a page cannot be produced without the check.
+   */
+  alignmentBlockers: readonly string[] = [],
 ): SubstantialPageDecision {
-  const reasons: string[] = []
+  const reasons: string[] = [...alignmentBlockers]
   const knownClaims = new Set(record.claims.map((claim) => claim.id))
   const knownSources = new Set(record.sources.map((source) => source.id))
   const claimSources = new Map(record.claims.map((claim) => [claim.id, new Set(claim.sourceIds)]))

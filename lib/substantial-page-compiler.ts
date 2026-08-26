@@ -1,6 +1,7 @@
 import { createHash } from 'node:crypto'
 
 import { epistemicReviewTargetHash } from './epistemic-publication.ts'
+import { alignmentBlockers } from './frontier-source-alignment.ts'
 import type { EpistemicRecord } from './epistemic-schema.ts'
 import {
   SUBSTANTIAL_PAGE_SCHEMA_VERSION,
@@ -323,7 +324,9 @@ export function compileSubstantialPage(input: CompileInput): CompiledSubstantial
     originalContribution: editorial.originalContribution,
   }
 
-  const decision = evaluateSubstantialPageGate(record, contract, graph)
+  // Alignment is computed here, never passed in, so a page cannot be compiled
+  // without it. An unaudited record yields `alignment-audit-missing` and blocks.
+  const decision = evaluateSubstantialPageGate(record, contract, graph, alignmentBlockers(record.id))
 
   return {
     compilerVersion: SUBSTANTIAL_PAGE_COMPILER_VERSION,

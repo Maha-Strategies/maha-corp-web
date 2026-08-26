@@ -1,4 +1,5 @@
 import { EPISTEMIC_RECORDS } from './epistemic-pilots.ts'
+import { alignmentFor, type AlignmentVerdict } from './frontier-source-alignment.ts'
 import {
   compileSubstantialPage,
   type CalculationApplicability,
@@ -28,7 +29,12 @@ import type { SearchIntentContract } from './substantial-page.ts'
 
 export const SUBSTANTIAL_PAGE_PILOT_VERSION = 'maha-substantial-page-pilot/0.1' as const
 
-export type SourceAlignment = 'record-subject-supported' | 'source-narrower-than-record-subject'
+/**
+ * A pilot no longer asserts its own alignment. The verdict is read from the
+ * frontier source-alignment audit, which requires an inspected source before it
+ * will say `supported`. The spec keeps only a human note about the mapping.
+ */
+export type SourceAlignment = AlignmentVerdict | 'not-audited'
 
 /**
  * A pilot supplies prose and says nothing about claim ids. Each pilot record
@@ -44,7 +50,6 @@ export interface PilotSpec {
   slug: string
   domainSlug: string
   selectionRationale: string
-  sourceAlignment: SourceAlignment
   sourceAlignmentNote: string
   searchIntent: SearchIntentContract
   editorial: {
@@ -84,7 +89,6 @@ export const PILOT_SPECS: readonly PilotSpec[] = [
     domainSlug: 'fusion-plasma-systems',
     selectionRationale:
       'Six declared graph edges, the most connected record in the domain, with a complete exact locator and a citation-with-paraphrase rights basis. A concept hub exercises tier-1 related-record selection end to end.',
-    sourceAlignment: 'record-subject-supported',
     sourceAlignmentNote:
       'The ITER magnets documentation describes the coil systems that confine and shape the plasma, which is the record subject.',
     searchIntent: {
@@ -151,7 +155,6 @@ export const PILOT_SPECS: readonly PilotSpec[] = [
     domainSlug: 'advanced-materials',
     selectionRationale:
       'A mechanism-kind record with a complete locator and rights basis, chosen to exercise tier-2 and tier-3 related-record selection where only two bridge edges exist. Its source was corrected in this sprint after the pilot surfaced a subject mismatch.',
-    sourceAlignment: 'record-subject-supported',
     sourceAlignmentNote:
       'Corrected in this sprint. The record previously inherited the positional block source, Novoselov et al. (2004) on atomically thin carbon films, which never mentions boron nitride. It now cites Dean et al. (2010), which builds devices on single-crystal hexagonal boron nitride substrates and is the study that addresses the record subject.',
     searchIntent: {
@@ -218,7 +221,6 @@ export const PILOT_SPECS: readonly PilotSpec[] = [
     domainSlug: 'biomolecular-engineering',
     selectionRationale:
       'A method-kind record with a complete locator and rights basis whose cited source directly addresses the method named. Chosen to contrast with the advanced-materials pilot, where alignment fails.',
-    sourceAlignment: 'record-subject-supported',
     sourceAlignmentNote:
       'The RFdiffusion paper reports motif scaffolding explicitly among its tasks, and the locator names that section, so the source addresses the record subject.',
     searchIntent: {
@@ -285,7 +287,6 @@ export const PILOT_SPECS: readonly PilotSpec[] = [
     domainSlug: 'longevity-metabolism',
     selectionRationale:
       'A measurement-kind record whose cited source is a methodological guideline, which makes the static-versus-dynamic distinction unusually well supported. Complete locator and rights basis.',
-    sourceAlignment: 'record-subject-supported',
     sourceAlignmentNote:
       'The autophagy assay guidelines address LC3 interpretation directly, and the locator names the LC3, SQSTM1/p62, lysosomal inhibition and flux sections.',
     searchIntent: {
@@ -352,7 +353,6 @@ export const PILOT_SPECS: readonly PilotSpec[] = [
     domainSlug: 'neurotechnology-bci',
     selectionRationale:
       'A comparison-kind record, included so the pilot set covers that record kind. Its source was corrected in this sprint after the pilot surfaced a subject mismatch, and the replacement is unusually well matched to a boundary record.',
-    sourceAlignment: 'record-subject-supported',
     sourceAlignmentNote:
       'Corrected in this sprint. The record previously inherited the positional block source, the Neuropixels probe paper, which reports instrumentation rather than sorting. It now cites Hill, Mehta and Kleinfeld (2011), which defines the false-positive and false-negative error estimates that bound what a sorted unit means.',
     searchIntent: {
@@ -419,7 +419,6 @@ export const PILOT_SPECS: readonly PilotSpec[] = [
     domainSlug: 'mechanistic-interpretability',
     selectionRationale:
       'The most connected record in the domain with six declared edges, a complete locator and rights basis. Its source addresses the subject directly, and it is the endpoint a Q-BR bridge tried and failed to reach, which makes its boundaries worth rendering carefully.',
-    sourceAlignment: 'record-subject-supported',
     sourceAlignmentNote:
       'Toy Models of Superposition develops the superposition account directly, and the locator names the definitions, toy models, geometry and sparsity sections.',
     searchIntent: {
@@ -486,7 +485,6 @@ export const PILOT_SPECS: readonly PilotSpec[] = [
     domainSlug: 'agentic-systems-mcp',
     selectionRationale:
       'A mechanism-kind record whose source is a protocol specification, which makes the conformance-versus-safety boundary crisp. Complete locator and rights basis, and directly relevant to the tooling this codebase runs.',
-    sourceAlignment: 'record-subject-supported',
     sourceAlignmentNote:
       'The MCP tools specification defines the discovery and invocation contracts the record describes, and the locator names those sections.',
     searchIntent: {
@@ -553,7 +551,6 @@ export const PILOT_SPECS: readonly PilotSpec[] = [
     domainSlug: 'critical-supply-chains',
     selectionRationale:
       'The most connected record in the domain with six declared edges, a complete locator and a government-publication rights basis. A supply-side concept balances the physics and software records in the set.',
-    sourceAlignment: 'record-subject-supported',
     sourceAlignmentNote:
       'The USGS critical mineral resources volume covers geology, production, processing, uses and supply considerations for selected commodities, which is the record subject.',
     searchIntent: {
@@ -654,7 +651,8 @@ export function compilePilots(): readonly CompiledPilot[] {
       domainSlug: spec.domainSlug,
       recordKind: record.recordKind,
       selectionRationale: spec.selectionRationale,
-      sourceAlignment: spec.sourceAlignment,
+      // Derived from the audit, never asserted by the pilot.
+      sourceAlignment: (alignmentFor(record.id)?.evidence.subjectAligned ?? 'not-audited') as SourceAlignment,
       sourceAlignmentNote: spec.sourceAlignmentNote,
     }
   })
