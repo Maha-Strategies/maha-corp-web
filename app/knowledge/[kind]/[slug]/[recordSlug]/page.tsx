@@ -7,6 +7,7 @@ import { PUBLIC_EPISTEMIC_RECORDS, getEpistemicDomain, getEpistemicRecordConnect
 import { buildProvenanceBundle, epistemicProvenancePath, epistemicRecordPath, epistemicReviewTargetHash, recordKindSegment } from '@/lib/epistemic-publication'
 import { getActiveEpistemicRecordByPath, getPublicEpistemicRecords } from '@/lib/public-epistemic-releases'
 import { getPublishedSubstantialPage } from '@/lib/substantial-page-public'
+import { mayRenderSubstantialMaterial } from '@/lib/substantial-render-guard'
 
 type PageProps = { params: Promise<{ kind: string; slug: string; recordSlug: string }> }
 
@@ -22,7 +23,14 @@ async function resolveRecord(kind: string, slug: string, recordSlug: string) {
 
 function substantialPageFor(record: NonNullable<Awaited<ReturnType<typeof resolveRecord>>>) {
   const page = getPublishedSubstantialPage(record.id)
-  return page?.quality.eligible && page.contract.recordRevisionSha256 === epistemicReviewTargetHash(record) ? page : undefined
+  if (!page) return undefined
+  return mayRenderSubstantialMaterial({
+    eligible: page.quality.eligible,
+    contractRecordRevision: page.contract.recordRevisionSha256,
+    liveRecordRevision: epistemicReviewTargetHash(record),
+  })
+    ? page
+    : undefined
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {

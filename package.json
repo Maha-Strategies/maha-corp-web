@@ -23,6 +23,7 @@
     "recover:sources:live": "node --experimental-strip-types scripts/generate-source-recovery-packets.ts --live",
     "generate:substantial-publication": "node --experimental-strip-types scripts/generate-substantial-publication-batch.ts",
     "generate:substantial-publication-batch-2": "node --experimental-strip-types scripts/generate-substantial-publication-batch-2.ts",
+    "generate:release-reconciliation-batch-2": "node --experimental-strip-types scripts/generate-release-reconciliation-batch-2.ts",
     "maha": "node bin/maha.js",
     "expand-graph": "node --experimental-strip-types scripts/expand-graph.ts",
     "verify:api-credit-billing": "node --experimental-strip-types scripts/verify-api-credit-billing.ts",

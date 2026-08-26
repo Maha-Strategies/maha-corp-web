@@ -1,0 +1,668 @@
+{
+  "schemaVersion": "maha-substantial-release-reconciliation/1.0",
+  "batch": "substantial-publication-batch-2",
+  "boundary": "Release readiness is never inferred from a compiled or eligible substantial page. A canonical release additionally requires scoped review decisions on the exact record revision and a separately authenticated human release authority. This module observes and reports; it never creates a decision, never mutates a release and never repairs an evidence mapping.",
+  "cohortStates": [
+    "compiled",
+    "eligible",
+    "canonically-released",
+    "publicly-reachable",
+    "substantially-rendered"
+  ],
+  "note": "Registry state, route status, sitemap and llms.txt columns are null here by design: they are observations, not derivable facts. The release report carries them.",
+  "totals": {
+    "records": 30,
+    "releaseEligible": 1,
+    "byState": {
+      "ready-for-initial-canonical-release": 1,
+      "released-and-revision-matched": 0,
+      "released-but-revision-drifted": 0,
+      "audit-or-contract-stale": 0,
+      "missing-release-decisions": 29,
+      "source-alignment-blocked": 0,
+      "release-ineligible": 0,
+      "withheld-pending-reaudit": 0
+    },
+    "deterministicCohort": {
+      "compiled": 30,
+      "eligible": 30,
+      "canonically-released": 0,
+      "publicly-reachable": 0,
+      "substantially-rendered": 0
+    }
+  },
+  "blockerTotals": {
+    "publication-gate:approval-review-missing": 29,
+    "publication-gate:expert-review-missing:boundary-adequacy": 29,
+    "publication-gate:expert-review-missing:domain-fidelity": 29,
+    "publication-gate:expert-review-missing:rights-and-locator": 29,
+    "publication-gate:expert-review-missing:source-fidelity": 29,
+    "publication-gate:public-promotion-not-requested": 29,
+    "publication-gate:publication-date-missing": 29,
+    "publication-gate:review-state-not-canonical": 29
+  },
+  "digest": "sha256:16ee32f5df089f1f26521c2eeabd13c5cf0ad1d8e1862ec7181ca1aa5901fa60",
+  "records": [
+    {
+      "recordId": "urn:maha:record:advanced-materials-correlated-insulating-states",
+      "domainSlug": "advanced-materials",
+      "canonicalUrl": "https://www.mahastrategies.com/knowledge/advanced-materials/concepts/advanced-materials-correlated-insulating-states",
+      "contractDigest": "sha256:e24387bd81c31d70907cb148ba6fbe964dc1bec5f264e3fd1175b04f46fd8613",
+      "auditedRecordRevision": "sha256:3bd4d38a7f0f2d5e22a713e2f50ca6e6db51541de53cb7c3f87af5d77d9063d3",
+      "currentRecordRevision": "sha256:3bd4d38a7f0f2d5e22a713e2f50ca6e6db51541de53cb7c3f87af5d77d9063d3",
+      "releaseEligible": false,
+      "state": "missing-release-decisions",
+      "blockers": [
+        "publication-gate:approval-review-missing",
+        "publication-gate:expert-review-missing:boundary-adequacy",
+        "publication-gate:expert-review-missing:domain-fidelity",
+        "publication-gate:expert-review-missing:rights-and-locator",
+        "publication-gate:expert-review-missing:source-fidelity",
+        "publication-gate:public-promotion-not-requested",
+        "publication-gate:publication-date-missing",
+        "publication-gate:review-state-not-canonical"
+      ],
+      "proposedAction": "Obtain scoped expert review decisions for every required scope on this exact revision. No release is possible until they exist."
+    },
+    {
+      "recordId": "urn:maha:record:advanced-materials-graphene-monolayers",
+      "domainSlug": "advanced-materials",
+      "canonicalUrl": "https://www.mahastrategies.com/knowledge/advanced-materials/concepts/advanced-materials-graphene-monolayers",
+      "contractDigest": "sha256:31a1740eb8c2e843adc0953f327f057b7e6fe049be4ecfbcec9c26f6f2768fbc",
+      "auditedRecordRevision": "sha256:fe94138dd99d5ff79c9b69762b7039f9a84eefb7f8998841a423aaf125302fdf",
+      "currentRecordRevision": "sha256:fe94138dd99d5ff79c9b69762b7039f9a84eefb7f8998841a423aaf125302fdf",
+      "releaseEligible": false,
+      "state": "missing-release-decisions",
+      "blockers": [
+        "publication-gate:approval-review-missing",
+        "publication-gate:expert-review-missing:boundary-adequacy",
+        "publication-gate:expert-review-missing:domain-fidelity",
+        "publication-gate:expert-review-missing:rights-and-locator",
+        "publication-gate:expert-review-missing:source-fidelity",
+        "publication-gate:public-promotion-not-requested",
+        "publication-gate:publication-date-missing",
+        "publication-gate:review-state-not-canonical"
+      ],
+      "proposedAction": "Obtain scoped expert review decisions for every required scope on this exact revision. No release is possible until they exist."
+    },
+    {
+      "recordId": "urn:maha:record:advanced-materials-hexagonal-boron-nitride-dielectrics",
+      "domainSlug": "advanced-materials",
+      "canonicalUrl": "https://www.mahastrategies.com/knowledge/advanced-materials/mechanisms/advanced-materials-hexagonal-boron-nitride-dielectrics",
+      "contractDigest": "sha256:d362a5dd2afdf80772bca13c2d63864be547ce0aef8c942448865cbaae3e4c3c",
+      "auditedRecordRevision": "sha256:4caa07bb7312f980fff275aec28c5d7169fd1716dbc982b35e91f788071959a1",
+      "currentRecordRevision": "sha256:4caa07bb7312f980fff275aec28c5d7169fd1716dbc982b35e91f788071959a1",
+      "releaseEligible": false,
+      "state": "missing-release-decisions",
+      "blockers": [
+        "publication-gate:approval-review-missing",
+        "publication-gate:expert-review-missing:boundary-adequacy",
+        "publication-gate:expert-review-missing:domain-fidelity",
+        "publication-gate:expert-review-missing:rights-and-locator",
+        "publication-gate:expert-review-missing:source-fidelity",
+        "publication-gate:public-promotion-not-requested",
+        "publication-gate:publication-date-missing",
+        "publication-gate:review-state-not-canonical"
+      ],
+      "proposedAction": "Obtain scoped expert review decisions for every required scope on this exact revision. No release is possible until they exist."
+    },
+    {
+      "recordId": "urn:maha:record:advanced-materials-magic-angle-superconductivity",
+      "domainSlug": "advanced-materials",
+      "canonicalUrl": "https://www.mahastrategies.com/knowledge/advanced-materials/mechanisms/advanced-materials-magic-angle-superconductivity",
+      "contractDigest": "sha256:2a010f37e40e7e10a020b1b19f9bf23a782c29150daab46cae40b45a5f2a1e3b",
+      "auditedRecordRevision": "sha256:223180830fe00cc27716112698c27bd3c8c34ed198cf313d359e34fe3e9983d3",
+      "currentRecordRevision": "sha256:223180830fe00cc27716112698c27bd3c8c34ed198cf313d359e34fe3e9983d3",
+      "releaseEligible": false,
+      "state": "missing-release-decisions",
+      "blockers": [
+        "publication-gate:approval-review-missing",
+        "publication-gate:expert-review-missing:boundary-adequacy",
+        "publication-gate:expert-review-missing:domain-fidelity",
+        "publication-gate:expert-review-missing:rights-and-locator",
+        "publication-gate:expert-review-missing:source-fidelity",
+        "publication-gate:public-promotion-not-requested",
+        "publication-gate:publication-date-missing",
+        "publication-gate:review-state-not-canonical"
+      ],
+      "proposedAction": "Obtain scoped expert review decisions for every required scope on this exact revision. No release is possible until they exist."
+    },
+    {
+      "recordId": "urn:maha:record:agentic-systems-mcp-context-window-position-effects",
+      "domainSlug": "agentic-systems-mcp",
+      "canonicalUrl": "https://www.mahastrategies.com/knowledge/agentic-systems-mcp/mechanisms/agentic-systems-mcp-context-window-position-effects",
+      "contractDigest": "sha256:62099abc2a718438ab02e96fe808687b5083dc6824060b35741363e4c397a35d",
+      "auditedRecordRevision": "sha256:d58c9eff543c9c2b592772bdaac5922c9c4c13460344a52551e9bd80c0b732fc",
+      "currentRecordRevision": "sha256:d58c9eff543c9c2b592772bdaac5922c9c4c13460344a52551e9bd80c0b732fc",
+      "releaseEligible": false,
+      "state": "missing-release-decisions",
+      "blockers": [
+        "publication-gate:approval-review-missing",
+        "publication-gate:expert-review-missing:boundary-adequacy",
+        "publication-gate:expert-review-missing:domain-fidelity",
+        "publication-gate:expert-review-missing:rights-and-locator",
+        "publication-gate:expert-review-missing:source-fidelity",
+        "publication-gate:public-promotion-not-requested",
+        "publication-gate:publication-date-missing",
+        "publication-gate:review-state-not-canonical"
+      ],
+      "proposedAction": "Obtain scoped expert review decisions for every required scope on this exact revision. No release is possible until they exist."
+    },
+    {
+      "recordId": "urn:maha:record:agentic-systems-mcp-mcp-prompt-templates",
+      "domainSlug": "agentic-systems-mcp",
+      "canonicalUrl": "https://www.mahastrategies.com/knowledge/agentic-systems-mcp/mechanisms/agentic-systems-mcp-mcp-prompt-templates",
+      "contractDigest": "sha256:199ca4b5be61dabee6e0ffbc345c12c090e2c5448a808d03e25065a437ee929c",
+      "auditedRecordRevision": "sha256:8f0c7454dbddb8e89672ab5bb8f71487b13d5f60c0dd9caa8d2f3e3a9133af30",
+      "currentRecordRevision": "sha256:8f0c7454dbddb8e89672ab5bb8f71487b13d5f60c0dd9caa8d2f3e3a9133af30",
+      "releaseEligible": false,
+      "state": "missing-release-decisions",
+      "blockers": [
+        "publication-gate:approval-review-missing",
+        "publication-gate:expert-review-missing:boundary-adequacy",
+        "publication-gate:expert-review-missing:domain-fidelity",
+        "publication-gate:expert-review-missing:rights-and-locator",
+        "publication-gate:expert-review-missing:source-fidelity",
+        "publication-gate:public-promotion-not-requested",
+        "publication-gate:publication-date-missing",
+        "publication-gate:review-state-not-canonical"
+      ],
+      "proposedAction": "Obtain scoped expert review decisions for every required scope on this exact revision. No release is possible until they exist."
+    },
+    {
+      "recordId": "urn:maha:record:agentic-systems-mcp-mcp-resource-discovery",
+      "domainSlug": "agentic-systems-mcp",
+      "canonicalUrl": "https://www.mahastrategies.com/knowledge/agentic-systems-mcp/concepts/agentic-systems-mcp-mcp-resource-discovery",
+      "contractDigest": "sha256:64de3f60b333fab367c0b9f79f819aeb60e0115e585355040c3b73e9b77a617c",
+      "auditedRecordRevision": "sha256:4973e2d14da8933977d08c924b336c2acd89c61eca249abc5022d66d7a4a65b5",
+      "currentRecordRevision": "sha256:4973e2d14da8933977d08c924b336c2acd89c61eca249abc5022d66d7a4a65b5",
+      "releaseEligible": false,
+      "state": "missing-release-decisions",
+      "blockers": [
+        "publication-gate:approval-review-missing",
+        "publication-gate:expert-review-missing:boundary-adequacy",
+        "publication-gate:expert-review-missing:domain-fidelity",
+        "publication-gate:expert-review-missing:rights-and-locator",
+        "publication-gate:expert-review-missing:source-fidelity",
+        "publication-gate:public-promotion-not-requested",
+        "publication-gate:publication-date-missing",
+        "publication-gate:review-state-not-canonical"
+      ],
+      "proposedAction": "Obtain scoped expert review decisions for every required scope on this exact revision. No release is possible until they exist."
+    },
+    {
+      "recordId": "urn:maha:record:agentic-systems-mcp-mcp-tool-result-contracts",
+      "domainSlug": "agentic-systems-mcp",
+      "canonicalUrl": "https://www.mahastrategies.com/knowledge/agentic-systems-mcp/comparisons/agentic-systems-mcp-mcp-tool-result-contracts",
+      "contractDigest": "sha256:aaaf75046a8c2d8a7a22ef20bd9ffec972b260e5c20482b62859db974daefc60",
+      "auditedRecordRevision": "sha256:29e3e05e98eb67e9d0e6543b2bb7cbada7af1c622aaebdef0e4eb46e118ff631",
+      "currentRecordRevision": "sha256:29e3e05e98eb67e9d0e6543b2bb7cbada7af1c622aaebdef0e4eb46e118ff631",
+      "releaseEligible": false,
+      "state": "missing-release-decisions",
+      "blockers": [
+        "publication-gate:approval-review-missing",
+        "publication-gate:expert-review-missing:boundary-adequacy",
+        "publication-gate:expert-review-missing:domain-fidelity",
+        "publication-gate:expert-review-missing:rights-and-locator",
+        "publication-gate:expert-review-missing:source-fidelity",
+        "publication-gate:public-promotion-not-requested",
+        "publication-gate:publication-date-missing",
+        "publication-gate:review-state-not-canonical"
+      ],
+      "proposedAction": "Obtain scoped expert review decisions for every required scope on this exact revision. No release is possible until they exist."
+    },
+    {
+      "recordId": "urn:maha:record:agentic-systems-mcp-tool-deny-by-default",
+      "domainSlug": "agentic-systems-mcp",
+      "canonicalUrl": "https://www.mahastrategies.com/knowledge/agentic-systems-mcp/comparisons/agentic-systems-mcp-tool-deny-by-default",
+      "contractDigest": "sha256:8cd14e31edddb2cbbe4d9ea027b9066a06c5a8b43112b56c64c0cc1ee022aacc",
+      "auditedRecordRevision": "sha256:85adb7771a58aabd372f1ac87856d8eb8cba96405f63084d515ca9474a712adb",
+      "currentRecordRevision": "sha256:85adb7771a58aabd372f1ac87856d8eb8cba96405f63084d515ca9474a712adb",
+      "releaseEligible": false,
+      "state": "missing-release-decisions",
+      "blockers": [
+        "publication-gate:approval-review-missing",
+        "publication-gate:expert-review-missing:boundary-adequacy",
+        "publication-gate:expert-review-missing:domain-fidelity",
+        "publication-gate:expert-review-missing:rights-and-locator",
+        "publication-gate:expert-review-missing:source-fidelity",
+        "publication-gate:public-promotion-not-requested",
+        "publication-gate:publication-date-missing",
+        "publication-gate:review-state-not-canonical"
+      ],
+      "proposedAction": "Obtain scoped expert review decisions for every required scope on this exact revision. No release is possible until they exist."
+    },
+    {
+      "recordId": "urn:maha:record:biomolecular-engineering-cell-free-transcription-translation",
+      "domainSlug": "biomolecular-engineering",
+      "canonicalUrl": "https://www.mahastrategies.com/knowledge/biomolecular-engineering/concepts/biomolecular-engineering-cell-free-transcription-translation",
+      "contractDigest": "sha256:84f72e7c23a96fd08ff832dcd58643daaa154bd15122b839236b7a2ecd124e2d",
+      "auditedRecordRevision": "sha256:fab0b69c3399c2fc046edf1f5c653a02ddee5445dceb8f9976babc948d1b4547",
+      "currentRecordRevision": "sha256:fab0b69c3399c2fc046edf1f5c653a02ddee5445dceb8f9976babc948d1b4547",
+      "releaseEligible": false,
+      "state": "missing-release-decisions",
+      "blockers": [
+        "publication-gate:approval-review-missing",
+        "publication-gate:expert-review-missing:boundary-adequacy",
+        "publication-gate:expert-review-missing:domain-fidelity",
+        "publication-gate:expert-review-missing:rights-and-locator",
+        "publication-gate:expert-review-missing:source-fidelity",
+        "publication-gate:public-promotion-not-requested",
+        "publication-gate:publication-date-missing",
+        "publication-gate:review-state-not-canonical"
+      ],
+      "proposedAction": "Obtain scoped expert review decisions for every required scope on this exact revision. No release is possible until they exist."
+    },
+    {
+      "recordId": "urn:maha:record:biomolecular-engineering-experimental-fold-validation",
+      "domainSlug": "biomolecular-engineering",
+      "canonicalUrl": "https://www.mahastrategies.com/knowledge/biomolecular-engineering/mechanisms/biomolecular-engineering-experimental-fold-validation",
+      "contractDigest": "sha256:2e2e21e7baf28966b47b02bf9b0f08a08075b6b91fa0f4eb51881fcba21beece",
+      "auditedRecordRevision": "sha256:c0fc9d83edcc19113f2ea0c0d9887f42623754876eb1d6e407170b24c244eb63",
+      "currentRecordRevision": "sha256:c0fc9d83edcc19113f2ea0c0d9887f42623754876eb1d6e407170b24c244eb63",
+      "releaseEligible": false,
+      "state": "missing-release-decisions",
+      "blockers": [
+        "publication-gate:approval-review-missing",
+        "publication-gate:expert-review-missing:boundary-adequacy",
+        "publication-gate:expert-review-missing:domain-fidelity",
+        "publication-gate:expert-review-missing:rights-and-locator",
+        "publication-gate:expert-review-missing:source-fidelity",
+        "publication-gate:public-promotion-not-requested",
+        "publication-gate:publication-date-missing",
+        "publication-gate:review-state-not-canonical"
+      ],
+      "proposedAction": "Obtain scoped expert review decisions for every required scope on this exact revision. No release is possible until they exist."
+    },
+    {
+      "recordId": "urn:maha:record:biomolecular-engineering-sequence-design-with-proteinmpnn",
+      "domainSlug": "biomolecular-engineering",
+      "canonicalUrl": "https://www.mahastrategies.com/knowledge/biomolecular-engineering/concepts/biomolecular-engineering-sequence-design-with-proteinmpnn",
+      "contractDigest": "sha256:a59b2d1e37a4ae4c367af86c006b58ba961813ba3d44052f6fac37e2d6b43d53",
+      "auditedRecordRevision": "sha256:b38ab10bfe119c71d5e1d33b0acc4475f4821974a641d50672cbd24021e765cc",
+      "currentRecordRevision": "sha256:b38ab10bfe119c71d5e1d33b0acc4475f4821974a641d50672cbd24021e765cc",
+      "releaseEligible": false,
+      "state": "missing-release-decisions",
+      "blockers": [
+        "publication-gate:approval-review-missing",
+        "publication-gate:expert-review-missing:boundary-adequacy",
+        "publication-gate:expert-review-missing:domain-fidelity",
+        "publication-gate:expert-review-missing:rights-and-locator",
+        "publication-gate:expert-review-missing:source-fidelity",
+        "publication-gate:public-promotion-not-requested",
+        "publication-gate:publication-date-missing",
+        "publication-gate:review-state-not-canonical"
+      ],
+      "proposedAction": "Obtain scoped expert review decisions for every required scope on this exact revision. No release is possible until they exist."
+    },
+    {
+      "recordId": "urn:maha:record:circuit-quantum-electrodynamics",
+      "domainSlug": "quantum-systems",
+      "canonicalUrl": "https://www.mahastrategies.com/knowledge/quantum-systems/concepts/circuit-quantum-electrodynamics",
+      "contractDigest": "sha256:37e9bd124989fb1587d371b14831bca8c13b18f165475d633c8937a5f18d3101",
+      "auditedRecordRevision": "sha256:e40bb12a0a21a56704cf497b3a825173443f8da8fd29118a756c19a866e91944",
+      "currentRecordRevision": "sha256:e40bb12a0a21a56704cf497b3a825173443f8da8fd29118a756c19a866e91944",
+      "releaseEligible": false,
+      "state": "missing-release-decisions",
+      "blockers": [
+        "publication-gate:approval-review-missing",
+        "publication-gate:expert-review-missing:boundary-adequacy",
+        "publication-gate:expert-review-missing:domain-fidelity",
+        "publication-gate:expert-review-missing:rights-and-locator",
+        "publication-gate:expert-review-missing:source-fidelity",
+        "publication-gate:public-promotion-not-requested",
+        "publication-gate:publication-date-missing",
+        "publication-gate:review-state-not-canonical"
+      ],
+      "proposedAction": "Obtain scoped expert review decisions for every required scope on this exact revision. No release is possible until they exist."
+    },
+    {
+      "recordId": "urn:maha:record:critical-supply-chains-critical-mineral-import-reliance",
+      "domainSlug": "critical-supply-chains",
+      "canonicalUrl": "https://www.mahastrategies.com/knowledge/critical-supply-chains/concepts/critical-supply-chains-critical-mineral-import-reliance",
+      "contractDigest": "sha256:494bdcd0c47df5a681bf8f9337184da3f01091c8b737440111a6e507c15fd061",
+      "auditedRecordRevision": "sha256:0561fd738dfdd2daa0769ad4bf6585d6d447c2659052f7f3aca7945cc1547108",
+      "currentRecordRevision": "sha256:0561fd738dfdd2daa0769ad4bf6585d6d447c2659052f7f3aca7945cc1547108",
+      "releaseEligible": false,
+      "state": "missing-release-decisions",
+      "blockers": [
+        "publication-gate:approval-review-missing",
+        "publication-gate:expert-review-missing:boundary-adequacy",
+        "publication-gate:expert-review-missing:domain-fidelity",
+        "publication-gate:expert-review-missing:rights-and-locator",
+        "publication-gate:expert-review-missing:source-fidelity",
+        "publication-gate:public-promotion-not-requested",
+        "publication-gate:publication-date-missing",
+        "publication-gate:review-state-not-canonical"
+      ],
+      "proposedAction": "Obtain scoped expert review decisions for every required scope on this exact revision. No release is possible until they exist."
+    },
+    {
+      "recordId": "urn:maha:record:fusion-plasma-systems-breeding-blanket-test-modules",
+      "domainSlug": "fusion-plasma-systems",
+      "canonicalUrl": "https://www.mahastrategies.com/knowledge/fusion-plasma-systems/measurements/fusion-plasma-systems-breeding-blanket-test-modules",
+      "contractDigest": "sha256:96c467e2b04c583b856619d6e00440cb22c787cbfee0114bceafb5667c65c3bb",
+      "auditedRecordRevision": "sha256:84091c063213ab34fa437a1f6e2a2890da8d5d72ed2bdf148e2aec528fc95776",
+      "currentRecordRevision": "sha256:84091c063213ab34fa437a1f6e2a2890da8d5d72ed2bdf148e2aec528fc95776",
+      "releaseEligible": false,
+      "state": "missing-release-decisions",
+      "blockers": [
+        "publication-gate:approval-review-missing",
+        "publication-gate:expert-review-missing:boundary-adequacy",
+        "publication-gate:expert-review-missing:domain-fidelity",
+        "publication-gate:expert-review-missing:rights-and-locator",
+        "publication-gate:expert-review-missing:source-fidelity",
+        "publication-gate:public-promotion-not-requested",
+        "publication-gate:publication-date-missing",
+        "publication-gate:review-state-not-canonical"
+      ],
+      "proposedAction": "Obtain scoped expert review decisions for every required scope on this exact revision. No release is possible until they exist."
+    },
+    {
+      "recordId": "urn:maha:record:fusion-plasma-systems-disruption-mitigation",
+      "domainSlug": "fusion-plasma-systems",
+      "canonicalUrl": "https://www.mahastrategies.com/knowledge/fusion-plasma-systems/concepts/fusion-plasma-systems-disruption-mitigation",
+      "contractDigest": "sha256:ea1615f07a19a0a97ac712677ad62c9f13336904174108225a39a307d92cf16d",
+      "auditedRecordRevision": "sha256:8b4e21a4f55757d3ba7f4fc65ce6bc9952168f4707e8d2225d9d0b8b8cea2d21",
+      "currentRecordRevision": "sha256:8b4e21a4f55757d3ba7f4fc65ce6bc9952168f4707e8d2225d9d0b8b8cea2d21",
+      "releaseEligible": false,
+      "state": "missing-release-decisions",
+      "blockers": [
+        "publication-gate:approval-review-missing",
+        "publication-gate:expert-review-missing:boundary-adequacy",
+        "publication-gate:expert-review-missing:domain-fidelity",
+        "publication-gate:expert-review-missing:rights-and-locator",
+        "publication-gate:expert-review-missing:source-fidelity",
+        "publication-gate:public-promotion-not-requested",
+        "publication-gate:publication-date-missing",
+        "publication-gate:review-state-not-canonical"
+      ],
+      "proposedAction": "Obtain scoped expert review decisions for every required scope on this exact revision. No release is possible until they exist."
+    },
+    {
+      "recordId": "urn:maha:record:fusion-plasma-systems-divertor-heat-exhaust",
+      "domainSlug": "fusion-plasma-systems",
+      "canonicalUrl": "https://www.mahastrategies.com/knowledge/fusion-plasma-systems/mechanisms/fusion-plasma-systems-divertor-heat-exhaust",
+      "contractDigest": "sha256:f16d0bbeee6e951265c8d43c9c139812562a54702135a6e9d9033d3ab0487aac",
+      "auditedRecordRevision": "sha256:f593e2de8392bab77e626a475b9a7eb425784edcc5c95b81833ce46b96917f58",
+      "currentRecordRevision": "sha256:f593e2de8392bab77e626a475b9a7eb425784edcc5c95b81833ce46b96917f58",
+      "releaseEligible": false,
+      "state": "missing-release-decisions",
+      "blockers": [
+        "publication-gate:approval-review-missing",
+        "publication-gate:expert-review-missing:boundary-adequacy",
+        "publication-gate:expert-review-missing:domain-fidelity",
+        "publication-gate:expert-review-missing:rights-and-locator",
+        "publication-gate:expert-review-missing:source-fidelity",
+        "publication-gate:public-promotion-not-requested",
+        "publication-gate:publication-date-missing",
+        "publication-gate:review-state-not-canonical"
+      ],
+      "proposedAction": "Obtain scoped expert review decisions for every required scope on this exact revision. No release is possible until they exist."
+    },
+    {
+      "recordId": "urn:maha:record:fusion-plasma-systems-plasma-diagnostics",
+      "domainSlug": "fusion-plasma-systems",
+      "canonicalUrl": "https://www.mahastrategies.com/knowledge/fusion-plasma-systems/concepts/fusion-plasma-systems-plasma-diagnostics",
+      "contractDigest": "sha256:c4439bcd0c0dbeb302e8b0a7dd68cbf23e43e83417636dd918f51a00b575ec78",
+      "auditedRecordRevision": "sha256:3e9e131b39bc4d39f6812cc9b4acf224fc1bd711f2e6580195e3440cee6639cc",
+      "currentRecordRevision": "sha256:3e9e131b39bc4d39f6812cc9b4acf224fc1bd711f2e6580195e3440cee6639cc",
+      "releaseEligible": false,
+      "state": "missing-release-decisions",
+      "blockers": [
+        "publication-gate:approval-review-missing",
+        "publication-gate:expert-review-missing:boundary-adequacy",
+        "publication-gate:expert-review-missing:domain-fidelity",
+        "publication-gate:expert-review-missing:rights-and-locator",
+        "publication-gate:expert-review-missing:source-fidelity",
+        "publication-gate:public-promotion-not-requested",
+        "publication-gate:publication-date-missing",
+        "publication-gate:review-state-not-canonical"
+      ],
+      "proposedAction": "Obtain scoped expert review decisions for every required scope on this exact revision. No release is possible until they exist."
+    },
+    {
+      "recordId": "urn:maha:record:fusion-plasma-systems-tritium-fuel-cycle",
+      "domainSlug": "fusion-plasma-systems",
+      "canonicalUrl": "https://www.mahastrategies.com/knowledge/fusion-plasma-systems/methods/fusion-plasma-systems-tritium-fuel-cycle",
+      "contractDigest": "sha256:9217f39dca8146a50ef06342deae660519c584f77c129879604cd913f16cf8e9",
+      "auditedRecordRevision": "sha256:9de5d2839e77ee26fbbdcc9ec1b03e65d3649c86bacbd29a296f65374cbe81f7",
+      "currentRecordRevision": "sha256:9de5d2839e77ee26fbbdcc9ec1b03e65d3649c86bacbd29a296f65374cbe81f7",
+      "releaseEligible": false,
+      "state": "missing-release-decisions",
+      "blockers": [
+        "publication-gate:approval-review-missing",
+        "publication-gate:expert-review-missing:boundary-adequacy",
+        "publication-gate:expert-review-missing:domain-fidelity",
+        "publication-gate:expert-review-missing:rights-and-locator",
+        "publication-gate:expert-review-missing:source-fidelity",
+        "publication-gate:public-promotion-not-requested",
+        "publication-gate:publication-date-missing",
+        "publication-gate:review-state-not-canonical"
+      ],
+      "proposedAction": "Obtain scoped expert review decisions for every required scope on this exact revision. No release is possible until they exist."
+    },
+    {
+      "recordId": "urn:maha:record:mechanistic-interpretability-attention-pattern-evidence",
+      "domainSlug": "mechanistic-interpretability",
+      "canonicalUrl": "https://www.mahastrategies.com/knowledge/mechanistic-interpretability/measurements/mechanistic-interpretability-attention-pattern-evidence",
+      "contractDigest": "sha256:6b6f134dd476ee03d081241f72bb6b84a8e7077eb051361ed56536a3da411249",
+      "auditedRecordRevision": "sha256:e80e5774922091325a1fa831b0514cfe96952f82a7bd473e95624fd8f8eb8387",
+      "currentRecordRevision": "sha256:e80e5774922091325a1fa831b0514cfe96952f82a7bd473e95624fd8f8eb8387",
+      "releaseEligible": false,
+      "state": "missing-release-decisions",
+      "blockers": [
+        "publication-gate:approval-review-missing",
+        "publication-gate:expert-review-missing:boundary-adequacy",
+        "publication-gate:expert-review-missing:domain-fidelity",
+        "publication-gate:expert-review-missing:rights-and-locator",
+        "publication-gate:expert-review-missing:source-fidelity",
+        "publication-gate:public-promotion-not-requested",
+        "publication-gate:publication-date-missing",
+        "publication-gate:review-state-not-canonical"
+      ],
+      "proposedAction": "Obtain scoped expert review decisions for every required scope on this exact revision. No release is possible until they exist."
+    },
+    {
+      "recordId": "urn:maha:record:mechanistic-interpretability-causal-scrubbing",
+      "domainSlug": "mechanistic-interpretability",
+      "canonicalUrl": "https://www.mahastrategies.com/knowledge/mechanistic-interpretability/methods/mechanistic-interpretability-causal-scrubbing",
+      "contractDigest": "sha256:5c290663629ec0e1f70207df0bc1b06d905a3641f0f97f386b1b236b6efc9679",
+      "auditedRecordRevision": "sha256:8fd7d34fe31225012157eb78d84da4c9ffe9d0cad94226f7c27ba6ef83774949",
+      "currentRecordRevision": "sha256:8fd7d34fe31225012157eb78d84da4c9ffe9d0cad94226f7c27ba6ef83774949",
+      "releaseEligible": false,
+      "state": "missing-release-decisions",
+      "blockers": [
+        "publication-gate:approval-review-missing",
+        "publication-gate:expert-review-missing:boundary-adequacy",
+        "publication-gate:expert-review-missing:domain-fidelity",
+        "publication-gate:expert-review-missing:rights-and-locator",
+        "publication-gate:expert-review-missing:source-fidelity",
+        "publication-gate:public-promotion-not-requested",
+        "publication-gate:publication-date-missing",
+        "publication-gate:review-state-not-canonical"
+      ],
+      "proposedAction": "Obtain scoped expert review decisions for every required scope on this exact revision. No release is possible until they exist."
+    },
+    {
+      "recordId": "urn:maha:record:mechanistic-interpretability-in-context-learning-circuits",
+      "domainSlug": "mechanistic-interpretability",
+      "canonicalUrl": "https://www.mahastrategies.com/knowledge/mechanistic-interpretability/methods/mechanistic-interpretability-in-context-learning-circuits",
+      "contractDigest": "sha256:bcbd992efb57e0a480ba78af1a7560cef54ed42c95f4a3b03af5aa311e1b8591",
+      "auditedRecordRevision": "sha256:eb81343071c34f3649873883e737eeb75092e3dc8ebd3b350d1c4fadf24fe78d",
+      "currentRecordRevision": "sha256:eb81343071c34f3649873883e737eeb75092e3dc8ebd3b350d1c4fadf24fe78d",
+      "releaseEligible": false,
+      "state": "missing-release-decisions",
+      "blockers": [
+        "publication-gate:approval-review-missing",
+        "publication-gate:expert-review-missing:boundary-adequacy",
+        "publication-gate:expert-review-missing:domain-fidelity",
+        "publication-gate:expert-review-missing:rights-and-locator",
+        "publication-gate:expert-review-missing:source-fidelity",
+        "publication-gate:public-promotion-not-requested",
+        "publication-gate:publication-date-missing",
+        "publication-gate:review-state-not-canonical"
+      ],
+      "proposedAction": "Obtain scoped expert review decisions for every required scope on this exact revision. No release is possible until they exist."
+    },
+    {
+      "recordId": "urn:maha:record:mechanistic-interpretability-induction-head-circuits",
+      "domainSlug": "mechanistic-interpretability",
+      "canonicalUrl": "https://www.mahastrategies.com/knowledge/mechanistic-interpretability/concepts/mechanistic-interpretability-induction-head-circuits",
+      "contractDigest": "sha256:59ce63ee1bbe3cd5110dbe446515e8d44177709262d3fabda66e9a7c7acad9ce",
+      "auditedRecordRevision": "sha256:f0dcc8f3f5e33931ca881471e01d649d42ef29fd7dbd7bb67dcd5cc3de319f1b",
+      "currentRecordRevision": "sha256:f0dcc8f3f5e33931ca881471e01d649d42ef29fd7dbd7bb67dcd5cc3de319f1b",
+      "releaseEligible": false,
+      "state": "missing-release-decisions",
+      "blockers": [
+        "publication-gate:approval-review-missing",
+        "publication-gate:expert-review-missing:boundary-adequacy",
+        "publication-gate:expert-review-missing:domain-fidelity",
+        "publication-gate:expert-review-missing:rights-and-locator",
+        "publication-gate:expert-review-missing:source-fidelity",
+        "publication-gate:public-promotion-not-requested",
+        "publication-gate:publication-date-missing",
+        "publication-gate:review-state-not-canonical"
+      ],
+      "proposedAction": "Obtain scoped expert review decisions for every required scope on this exact revision. No release is possible until they exist."
+    },
+    {
+      "recordId": "urn:maha:record:mechanistic-interpretability-sae-encoder-decoder",
+      "domainSlug": "mechanistic-interpretability",
+      "canonicalUrl": "https://www.mahastrategies.com/knowledge/mechanistic-interpretability/mechanisms/mechanistic-interpretability-sae-encoder-decoder",
+      "contractDigest": "sha256:7c0dd5c507856dbdf6a0b3bc803e528e9520aef441e3aa79c54e332f08e97a81",
+      "auditedRecordRevision": "sha256:369c160f224159778ec08f586366d8c163e81afe67c769a0c5b9db269a01d54c",
+      "currentRecordRevision": "sha256:369c160f224159778ec08f586366d8c163e81afe67c769a0c5b9db269a01d54c",
+      "releaseEligible": false,
+      "state": "missing-release-decisions",
+      "blockers": [
+        "publication-gate:approval-review-missing",
+        "publication-gate:expert-review-missing:boundary-adequacy",
+        "publication-gate:expert-review-missing:domain-fidelity",
+        "publication-gate:expert-review-missing:rights-and-locator",
+        "publication-gate:expert-review-missing:source-fidelity",
+        "publication-gate:public-promotion-not-requested",
+        "publication-gate:publication-date-missing",
+        "publication-gate:review-state-not-canonical"
+      ],
+      "proposedAction": "Obtain scoped expert review decisions for every required scope on this exact revision. No release is possible until they exist."
+    },
+    {
+      "recordId": "urn:maha:record:mechanistic-interpretability-sparse-autoencoder-dictionaries",
+      "domainSlug": "mechanistic-interpretability",
+      "canonicalUrl": "https://www.mahastrategies.com/knowledge/mechanistic-interpretability/concepts/mechanistic-interpretability-sparse-autoencoder-dictionaries",
+      "contractDigest": "sha256:3afde13650dd3813cd842025b5c9a4127c8eaa0d3120d534b4b89ab0fb4f121d",
+      "auditedRecordRevision": "sha256:3c1bf26d79f8b36ac42e1c9e9471cfa0746527abf8683d98f7835b00acaee19f",
+      "currentRecordRevision": "sha256:3c1bf26d79f8b36ac42e1c9e9471cfa0746527abf8683d98f7835b00acaee19f",
+      "releaseEligible": false,
+      "state": "missing-release-decisions",
+      "blockers": [
+        "publication-gate:approval-review-missing",
+        "publication-gate:expert-review-missing:boundary-adequacy",
+        "publication-gate:expert-review-missing:domain-fidelity",
+        "publication-gate:expert-review-missing:rights-and-locator",
+        "publication-gate:expert-review-missing:source-fidelity",
+        "publication-gate:public-promotion-not-requested",
+        "publication-gate:publication-date-missing",
+        "publication-gate:review-state-not-canonical"
+      ],
+      "proposedAction": "Obtain scoped expert review decisions for every required scope on this exact revision. No release is possible until they exist."
+    },
+    {
+      "recordId": "urn:maha:record:neurotechnology-bci-spike-sorting-boundaries",
+      "domainSlug": "neurotechnology-bci",
+      "canonicalUrl": "https://www.mahastrategies.com/knowledge/neurotechnology-bci/comparisons/neurotechnology-bci-spike-sorting-boundaries",
+      "contractDigest": "sha256:077cebedd3ab955c7dd68e72ba7dfb09494abb431e6d7273108a0c4f1c6f203f",
+      "auditedRecordRevision": "sha256:e16a7245541be0174021e8472e0da388085ba8a917f5983e7d8e576c29bb32cf",
+      "currentRecordRevision": "sha256:e16a7245541be0174021e8472e0da388085ba8a917f5983e7d8e576c29bb32cf",
+      "releaseEligible": false,
+      "state": "missing-release-decisions",
+      "blockers": [
+        "publication-gate:approval-review-missing",
+        "publication-gate:expert-review-missing:boundary-adequacy",
+        "publication-gate:expert-review-missing:domain-fidelity",
+        "publication-gate:expert-review-missing:rights-and-locator",
+        "publication-gate:expert-review-missing:source-fidelity",
+        "publication-gate:public-promotion-not-requested",
+        "publication-gate:publication-date-missing",
+        "publication-gate:review-state-not-canonical"
+      ],
+      "proposedAction": "Obtain scoped expert review decisions for every required scope on this exact revision. No release is possible until they exist."
+    },
+    {
+      "recordId": "urn:maha:record:quantum-error-mitigation",
+      "domainSlug": "quantum-systems",
+      "canonicalUrl": "https://www.mahastrategies.com/knowledge/quantum-systems/methods/quantum-error-mitigation",
+      "contractDigest": "sha256:3f78e1d69faef90adfe993e84ebde313d9f7944622e2ad3b6d62c65a21a24327",
+      "auditedRecordRevision": "sha256:1ba548818ce7ad026b2bb80c5a84466fed89cbd6c61c5a18a8f16cf1517e0832",
+      "currentRecordRevision": "sha256:1ba548818ce7ad026b2bb80c5a84466fed89cbd6c61c5a18a8f16cf1517e0832",
+      "releaseEligible": false,
+      "state": "missing-release-decisions",
+      "blockers": [
+        "publication-gate:approval-review-missing",
+        "publication-gate:expert-review-missing:boundary-adequacy",
+        "publication-gate:expert-review-missing:domain-fidelity",
+        "publication-gate:expert-review-missing:rights-and-locator",
+        "publication-gate:expert-review-missing:source-fidelity",
+        "publication-gate:public-promotion-not-requested",
+        "publication-gate:publication-date-missing",
+        "publication-gate:review-state-not-canonical"
+      ],
+      "proposedAction": "Obtain scoped expert review decisions for every required scope on this exact revision. No release is possible until they exist."
+    },
+    {
+      "recordId": "urn:maha:record:stabilizer-syndrome-measurement",
+      "domainSlug": "quantum-systems",
+      "canonicalUrl": "https://www.mahastrategies.com/knowledge/quantum-systems/mechanisms/stabilizer-syndrome-measurement",
+      "contractDigest": "sha256:c751d4ebc6559fb2e3cbe0327b69e29feea7a88b8cb83d99bf35225f0ac72b6a",
+      "auditedRecordRevision": "sha256:bcf371de57eeaa64ce9449ccfe776e3c76b2042e729ead3abe644ad279b5ae9c",
+      "currentRecordRevision": "sha256:bcf371de57eeaa64ce9449ccfe776e3c76b2042e729ead3abe644ad279b5ae9c",
+      "releaseEligible": false,
+      "state": "missing-release-decisions",
+      "blockers": [
+        "publication-gate:approval-review-missing",
+        "publication-gate:expert-review-missing:boundary-adequacy",
+        "publication-gate:expert-review-missing:domain-fidelity",
+        "publication-gate:expert-review-missing:rights-and-locator",
+        "publication-gate:expert-review-missing:source-fidelity",
+        "publication-gate:public-promotion-not-requested",
+        "publication-gate:publication-date-missing",
+        "publication-gate:review-state-not-canonical"
+      ],
+      "proposedAction": "Obtain scoped expert review decisions for every required scope on this exact revision. No release is possible until they exist."
+    },
+    {
+      "recordId": "urn:maha:record:surface-code-error-correction",
+      "domainSlug": "quantum-systems",
+      "canonicalUrl": "https://www.mahastrategies.com/knowledge/quantum-systems/methods/surface-code-error-correction",
+      "contractDigest": "sha256:ef80129ddb6c172ad303af6da242cb479bf834493bf0a78d874d40cbd2085c88",
+      "auditedRecordRevision": "sha256:28cd4b8686cb6ce90756932d32bcb955c9ff88c5823b94825a8430d6ccd95e8b",
+      "currentRecordRevision": "sha256:28cd4b8686cb6ce90756932d32bcb955c9ff88c5823b94825a8430d6ccd95e8b",
+      "releaseEligible": false,
+      "state": "missing-release-decisions",
+      "blockers": [
+        "publication-gate:approval-review-missing",
+        "publication-gate:expert-review-missing:boundary-adequacy",
+        "publication-gate:expert-review-missing:domain-fidelity",
+        "publication-gate:expert-review-missing:rights-and-locator",
+        "publication-gate:expert-review-missing:source-fidelity",
+        "publication-gate:public-promotion-not-requested",
+        "publication-gate:publication-date-missing",
+        "publication-gate:review-state-not-canonical"
+      ],
+      "proposedAction": "Obtain scoped expert review decisions for every required scope on this exact revision. No release is possible until they exist."
+    },
+    {
+      "recordId": "urn:maha:record:transmon-qubit",
+      "domainSlug": "quantum-systems",
+      "canonicalUrl": "https://www.mahastrategies.com/knowledge/quantum-systems/concepts/transmon-qubit",
+      "contractDigest": "sha256:caac8a5b28bc1e9fd13a8b78b758d62424b4c8fa9fc0a775226bd07ae6e506fb",
+      "auditedRecordRevision": "sha256:5b9d1df90661b0ae55bb9cde26d3d33fde4b82a2588475b11df9398da86e7d82",
+      "currentRecordRevision": "sha256:5b9d1df90661b0ae55bb9cde26d3d33fde4b82a2588475b11df9398da86e7d82",
+      "releaseEligible": true,
+      "state": "ready-for-initial-canonical-release",
+      "blockers": [],
+      "proposedAction": "Eligible for an authorised initial canonical release through the existing release workflow."
+    }
+  ]
+}
