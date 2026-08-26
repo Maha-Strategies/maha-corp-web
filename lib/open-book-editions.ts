@@ -3,7 +3,7 @@ import { resolve, sep } from 'node:path'
 
 export type OpenBookSection = { slug: string; title: string; marker: string }
 export type OpenBookEdition = {
-  slug: 'the-borrowed-light' | 'the-imagined-life' | 'the-orbital-mind' | 'the-synthetic-self' | 'the-volcanic-engine'
+  slug: 'the-borrowed-light' | 'the-imagined-life' | 'the-maha-principle' | 'the-orbital-mind' | 'the-synthetic-self' | 'the-volcanic-engine'
   title: string
   subtitle: string
   manuscriptFiles: string[]
@@ -15,6 +15,54 @@ const CONTENT_ROOT = resolve(process.cwd(), 'content', 'books')
 // These editions read directly from one canonical manuscript each. The reader
 // URLs are derived views, never separately maintained chapter copies.
 export const openBookEditions: Record<OpenBookEdition['slug'], OpenBookEdition> = {
+  'the-maha-principle': {
+    slug: 'the-maha-principle',
+    title: 'The Maha Principle',
+    subtitle: 'The Architecture of Human Flourishing',
+    manuscriptFiles: ['The-Maha-Principle.md'],
+    sections: [
+      ['medical-disclaimer', 'Medical Disclaimer and Notice of Liability', '# MEDICAL DISCLAIMER AND NOTICE OF LIABILITY'],
+      ['dedication', 'Dedication', '# Dedication'],
+      ['authors-note', 'Author’s Note', '# AUTHOR’S NOTE'],
+      ['map-of-the-terrain', 'The Maha Principle: A Map of the Terrain', '# THE MAHA PRINCIPLE: A MAP OF THE TERRAIN'],
+      ['prologue-the-year-2027', 'Prologue: The Year 2027', '# PROLOGUE: THE YEAR 2027'],
+      ['founders-pledge', 'The Founder’s Pledge', '# THE FOUNDER’S PLEDGE'],
+      ['introduction', 'Introduction: The Silent Sickness and the Synchronous Echo', '# INTRODUCTION: The Silent Sickness and the Synchronous Echo'],
+      ['part-i-the-diagnosis', 'Part I: The Diagnosis', '# PART I: The Diagnosis'],
+      ['the-poisoned-body', 'Chapter 1: The Poisoned Body', '# CHAPTER 1: The Poisoned Body'],
+      ['the-biological-audit', 'Protocol 0: The Biological Audit', '# PROTOCOL 0: The Biological Audit'],
+      ['the-fractured-mind', 'Chapter 2: The Fractured Mind', '# CHAPTER 2: The Fractured Mind'],
+      ['the-attention-audit', 'Protocol 1: The Attention Audit', '# PROTOCOL 1: The Attention Audit'],
+      ['the-starving-spirit', 'Chapter 3: The Starving Spirit', '# CHAPTER 3: The Starving Spirit'],
+      ['the-community-audit', 'Protocol 2: The Community Audit', '# PROTOCOL 2: The Community Audit'],
+      ['part-ii-the-doctrine', 'Part II: The Doctrine', '# PART II: The Doctrine'],
+      ['flawless-execution', 'Chapter 4: The Mandate of Flawless Execution', '# CHAPTER 4: The Mandate of Flawless Execution'],
+      ['the-principle-of-strategy', 'Chapter 5: The Principle of Strategy', '# CHAPTER 5: The Principle of Strategy'],
+      ['humane-governance', 'Chapter 6: The Principle of Humane Governance', '# CHAPTER 6: The Principle of Humane Governance'],
+      ['navigating-complexity', 'Chapter 7: The Principle of Navigating Complexity', '# CHAPTER 7: The Principle of Navigating Complexity'],
+      ['the-principle-of-vision', 'Chapter 8: The Principle of Vision', '# CHAPTER 8: The Principle of Vision'],
+      ['part-iii-the-application', 'Part III: The Application', '# PART III: The Application'],
+      ['forging-the-maha-individual', 'Chapter 9: Forging the Maha Individual', '# CHAPTER 9: Forging the Maha Individual'],
+      ['weaving-the-maha-community', 'Chapter 10: Weaving the Maha Community', '# CHAPTER 10: Weaving the Maha Community'],
+      ['architecting-the-maha-nation', 'Chapter 11: Architecting the Maha Nation', '# CHAPTER 11: Architecting the Maha Nation'],
+      ['the-inevitable-spring', 'Conclusion: The Inevitable Spring', '# CONCLUSION: The Inevitable Spring'],
+      ['the-great-bifurcation', 'Epilogue: The Great Bifurcation', '# EPILOGUE: THE GREAT BIFURCATION'],
+      ['about-the-author', 'About the Author', '# ABOUT THE AUTHOR'],
+      ['appendices', 'Appendices', '# APPENDICES'],
+      ['seven-day-sovereignty-challenge', 'Appendix A: The 7-Day Sovereignty Challenge', '# APPENDIX A: The 7-Day Sovereignty Challenge'],
+      ['the-maha-lexicon', 'Appendix B: The Maha Lexicon', '# APPENDIX B: The Maha Lexicon'],
+      ['the-falsifiability-protocol', 'Appendix C: The Falsifiability Protocol', '# APPENDIX C: The Falsifiability Protocol'],
+      ['the-maha-commons-analog-ledger', 'Appendix D: The Maha Commons Analog Ledger', '# APPENDIX D: The Maha Commons Analog Ledger'],
+      ['the-town-hall-toolkit', 'Appendix E: The Town Hall Toolkit', '# APPENDIX E: The Town Hall Toolkit'],
+      ['the-biological-dashboard', 'Appendix F: The Biological Dashboard', '# APPENDIX F: The Biological Dashboard'],
+      ['the-maha-master-protocol', 'Appendix G: The Maha Master Protocol', '# APPENDIX G: The Maha Master Protocol'],
+      ['the-shoppers-integrity-card', 'Appendix H: The Shopper’s Integrity Card', '# APPENDIX H: The Shopper’s Integrity Card'],
+      ['the-school-lunch-audit', 'Appendix I: The School Lunch Audit', '# APPENDIX I: The School Lunch Audit'],
+      ['the-digital-family-constitution', 'Appendix J: The Digital Family Constitution', '# APPENDIX J: The Digital Family Constitution'],
+      ['acknowledgments-and-method', 'Acknowledgments & A Note on Method', '# Acknowledgments & A Note on Method'],
+      ['notes-and-references', 'Notes and References', '# Notes and References'],
+    ].map(([slug, title, marker]) => ({ slug, title, marker })),
+  },
   'the-volcanic-engine': {
     slug: 'the-volcanic-engine', title: 'The Volcanic Engine', subtitle: 'Living on a Firing Planet',
     manuscriptFiles: [

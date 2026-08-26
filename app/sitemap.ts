@@ -162,8 +162,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${baseUrl}/mps/preflight`, lastModified: new Date('2026-07-16') },
     { url: `${baseUrl}/mps/preflight/example`, lastModified: new Date('2026-07-27') },
     { url: `${baseUrl}/overclock`, lastModified: new Date('2026-07-16') },
-    { url: `${baseUrl}/books`, lastModified: new Date('2026-07-28') },
+    { url: `${baseUrl}/books`, lastModified: new Date('2026-08-26') },
     { url: `${baseUrl}/books/mcp-access`, lastModified: new Date('2026-07-20') },
+    { url: `${baseUrl}/books/the-maha-principle`, lastModified: new Date('2026-08-26') },
     { url: `${baseUrl}/books/the-borrowed-light`, lastModified: new Date('2026-07-28') },
     { url: `${baseUrl}/books/the-borrowed-light/m-theory-faq`, lastModified: new Date('2026-07-28') },
     { url: `${baseUrl}/books/the-synthetic-self`, lastModified: new Date('2026-07-16') },
@@ -426,7 +427,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...unfinishedSpeciesSections.map((section) => ({ url: `${baseUrl}/books/the-unfinished-species/read/${section.slug}`, lastModified: new Date('2026-07-22') })),
   ]
   const otherOpenBookReaders = Object.values(openBookEditions).flatMap((book) => {
-    const lastModified = new Date(book.slug === 'the-volcanic-engine' ? '2026-08-24' : '2026-07-22')
+    const lastModified = new Date(
+      book.slug === 'the-maha-principle' ? '2026-08-26' : book.slug === 'the-volcanic-engine' ? '2026-08-24' : '2026-07-22',
+    )
     return [
       { url: `${baseUrl}/books/${book.slug}/read`, lastModified },
       ...book.sections.map((section) => ({ url: `${baseUrl}/books/${book.slug}/read/${section.slug}`, lastModified })),
