@@ -7,6 +7,7 @@ import test from 'node:test'
 import { EPISTEMIC_RECORDS, PUBLIC_EPISTEMIC_RECORDS } from '../lib/epistemic-pilots.ts'
 import { compileSubstantialPage } from '../lib/substantial-page-compiler.ts'
 import { compilePilots, PILOT_SPECS } from '../lib/substantial-page-pilots.ts'
+import { alignmentFor } from '../lib/frontier-source-alignment.ts'
 import { evaluateSubstantialPageGate } from '../lib/substantial-page.ts'
 import { epistemicReviewTargetHash } from '../lib/epistemic-publication.ts'
 import {
@@ -369,14 +370,18 @@ test('no record cites the superseded block source for a subject it does not stud
   assert.doesNotMatch(spike.sources[0].title, /silicon probes/i)
 })
 
-test('every pilot now cites a source about its own record subject', () => {
+test('a pilot reports the audit verdict rather than asserting its own alignment', () => {
+  // This previously asserted that all eight pilots were subject-supported,
+  // which was a claim the pilot made about itself. Alignment is now read from
+  // the audit, which requires an inspected source, so most pilots correctly
+  // report that their mapping has not been established.
   for (const pilot of PILOTS) {
-    assert.equal(
-      pilot.sourceAlignment,
-      'record-subject-supported',
-      `${pilot.slug} still cites a source narrower than its subject`,
-    )
+    const audit = alignmentFor(pilot.contract.recordId)
+    assert.ok(audit, `${pilot.slug} has no audit entry`)
+    assert.equal(pilot.sourceAlignment, audit.evidence.subjectAligned)
+    if (pilot.sourceAlignment === 'supported') assert.ok(audit.evidence.sourceContentInspected)
   }
+  assert.equal(PILOTS.filter((pilot) => pilot.sourceAlignment === 'supported').length, 6)
 })
 
 /* ------------------------------------------------- revise-reference & bridges */

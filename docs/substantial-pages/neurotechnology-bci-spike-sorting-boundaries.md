@@ -18,7 +18,7 @@ A comparison-kind record, included so the pilot set covers that record kind. Its
 
 ## Source alignment
 
-**record-subject-supported** — Corrected in this sprint. The record previously inherited the positional block source, the Neuropixels probe paper, which reports instrumentation rather than sorting. It now cites Hill, Mehta and Kleinfeld (2011), which defines the false-positive and false-negative error estimates that bound what a sorted unit means.
+**supported** — Corrected in this sprint. The record previously inherited the positional block source, the Neuropixels probe paper, which reports instrumentation rather than sorting. It now cites Hill, Mehta and Kleinfeld (2011), which defines the false-positive and false-negative error estimates that bound what a sorted unit means.
 
 ## Search intent
 

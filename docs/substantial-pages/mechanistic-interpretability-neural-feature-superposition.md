@@ -18,7 +18,7 @@ The most connected record in the domain with six declared edges, a complete loca
 
 ## Source alignment
 
-**record-subject-supported** — Toy Models of Superposition develops the superposition account directly, and the locator names the definitions, toy models, geometry and sparsity sections.
+**supported** — Toy Models of Superposition develops the superposition account directly, and the locator names the definitions, toy models, geometry and sparsity sections.
 
 ## Search intent
 

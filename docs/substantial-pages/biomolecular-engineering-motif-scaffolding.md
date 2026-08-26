@@ -18,7 +18,7 @@ A method-kind record with a complete locator and rights basis whose cited source
 
 ## Source alignment
 
-**record-subject-supported** — The RFdiffusion paper reports motif scaffolding explicitly among its tasks, and the locator names that section, so the source addresses the record subject.
+**supported** — The RFdiffusion paper reports motif scaffolding explicitly among its tasks, and the locator names that section, so the source addresses the record subject.
 
 ## Search intent
 

@@ -72,6 +72,12 @@ e2e_image = (
 
 maha_secrets = modal.Secret.from_name("maha-worker-secrets")
 
+# These solvers require CUDA, but not a specific accelerator model. A single
+# A10 request can remain queued during a regional capacity shortage long enough
+# for the public job contract to expire. Keep A10 as the preferred baseline and
+# let Modal select an equivalent, readily available inference GPU when needed.
+GPU_FALLBACKS = ["A10", "L4", "T4"]
+
 
 def _valid_worker_token(provided: str) -> bool:
     """Accept isolated Production and Preview dispatch credentials."""
@@ -165,20 +171,20 @@ def _execute_gpu_job(handoff: Dict[str, Any], expected_kind: str, solve) -> None
     _post_signed_callback(str(handoff.get("callbackUrl", "")), payload)
 
 
-@app.function(gpu="A10G", image=gpu_image, secrets=[maha_secrets], timeout=600)
+@app.function(gpu=GPU_FALLBACKS, image=gpu_image, secrets=[maha_secrets], timeout=600)
 def run_qubo_ising(handoff: Dict[str, Any]) -> None:
     """Execute contract v2 without logging or persisting customer coefficients."""
     from workers.qubo_reference import solve_torch
     _execute_gpu_job(handoff, "qubo-ising", solve_torch)
 
 
-@app.function(gpu="A10G", image=gpu_image, secrets=[maha_secrets], timeout=600)
+@app.function(gpu=GPU_FALLBACKS, image=gpu_image, secrets=[maha_secrets], timeout=600)
 def run_tensor_network(handoff: Dict[str, Any]) -> None:
     from workers.tensor_network import solve_transfer_torch
     _execute_gpu_job(handoff, "tensor-network", solve_transfer_torch)
 
 
-@app.function(gpu="A10G", image=gpu_image, secrets=[maha_secrets], timeout=600)
+@app.function(gpu=GPU_FALLBACKS, image=gpu_image, secrets=[maha_secrets], timeout=600)
 def run_geometric_registration(handoff: Dict[str, Any]) -> None:
     from workers.geometric_registration import solve_kabsch_torch
     _execute_gpu_job(handoff, "geometric-registration", solve_kabsch_torch)

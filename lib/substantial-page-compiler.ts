@@ -1,6 +1,7 @@
 import { createHash } from 'node:crypto'
 
 import { epistemicReviewTargetHash } from './epistemic-publication.ts'
+import { alignmentBlockers } from './frontier-source-alignment.ts'
 import type { EpistemicRecord } from './epistemic-schema.ts'
 import {
   SUBSTANTIAL_PAGE_SCHEMA_VERSION,
@@ -102,6 +103,10 @@ export interface CompiledSubstantialPage {
   /** How each related record was chosen, for review. Not part of the contract. */
   selectionTrace: readonly RelatedSelection[]
   contractDigest: string
+}
+
+export function substantialPageContractDigest(contract: SubstantialPageContract): string {
+  return `sha256:${createHash('sha256').update(JSON.stringify(contract)).digest('hex')}`
 }
 
 /* ------------------------------------------------------------ derivation -- */
@@ -323,7 +328,9 @@ export function compileSubstantialPage(input: CompileInput): CompiledSubstantial
     originalContribution: editorial.originalContribution,
   }
 
-  const decision = evaluateSubstantialPageGate(record, contract, graph)
+  // Alignment is computed here, never passed in, so a page cannot be compiled
+  // without it. An unaudited record yields `alignment-audit-missing` and blocks.
+  const decision = evaluateSubstantialPageGate(record, contract, graph, alignmentBlockers(record.id))
 
   return {
     compilerVersion: SUBSTANTIAL_PAGE_COMPILER_VERSION,
@@ -331,6 +338,6 @@ export function compileSubstantialPage(input: CompileInput): CompiledSubstantial
     // Blocker order must not depend on evaluation order.
     decision: { ...decision, reasons: [...decision.reasons].sort() },
     selectionTrace,
-    contractDigest: `sha256:${createHash('sha256').update(JSON.stringify(contract)).digest('hex')}`,
+    contractDigest: substantialPageContractDigest(contract),
   }
 }

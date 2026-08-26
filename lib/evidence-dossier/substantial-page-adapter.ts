@@ -1,5 +1,12 @@
 import type { EpistemicClaim, EpistemicRecord, EpistemicSource } from '../epistemic-schema.ts'
-import type { CompiledSubstantialPage } from '../substantial-page-compiler.ts'
+import { EPISTEMIC_RECORDS } from '../epistemic-pilots.ts'
+import { epistemicReviewTargetHash } from '../epistemic-publication.ts'
+import { alignmentBlockers } from '../frontier-source-alignment.ts'
+import {
+  substantialPageContractDigest,
+  type CompiledSubstantialPage,
+} from '../substantial-page-compiler.ts'
+import { evaluateSubstantialPageGate } from '../substantial-page.ts'
 import { compileEvidenceDossier, type EvidenceDossierDraft } from './compiler.ts'
 import type {
   ClaimType,
@@ -75,8 +82,27 @@ function citedIds(page: CompiledSubstantialPage): { claimIds: Set<string>; sourc
  */
 export function adaptSubstantialPageToDossier(input: SubstantialPageDossierInput): EvidenceDossier {
   const { record, compiledPage } = input
-  if (!compiledPage.decision.pageEligible) throw new Error(`Substantial page is blocked: ${compiledPage.decision.reasons.join(', ')}`)
+  const canonicalRecord = EPISTEMIC_RECORDS.find((entry) => entry.id === record.id)
+  if (!canonicalRecord) throw new Error('Substantial page is blocked: alignment-audit-missing; canonical record unavailable.')
+  const canonicalRevision = epistemicReviewTargetHash(canonicalRecord)
+  if (epistemicReviewTargetHash(record) !== canonicalRevision) throw new Error('Substantial page record is stale or differs from the canonical record.')
   if (compiledPage.contract.recordId !== record.id || compiledPage.decision.recordId !== record.id) throw new Error('Substantial page and record do not match.')
+  if (compiledPage.contract.recordRevisionSha256 !== canonicalRevision) throw new Error('Substantial page record revision is stale.')
+  const expectedDigest = substantialPageContractDigest(compiledPage.contract)
+  if (compiledPage.contractDigest !== expectedDigest) throw new Error('Substantial page contract digest mismatch.')
+
+  const expectedDecision = evaluateSubstantialPageGate(
+    canonicalRecord,
+    compiledPage.contract,
+    EPISTEMIC_RECORDS,
+    alignmentBlockers(record.id),
+  )
+  const normalizedExpected = { ...expectedDecision, reasons: [...expectedDecision.reasons].sort() }
+  const normalizedSupplied = { ...compiledPage.decision, reasons: [...compiledPage.decision.reasons].sort() }
+  if (JSON.stringify(normalizedSupplied) !== JSON.stringify(normalizedExpected)) {
+    throw new Error('Substantial page decision does not match independent gate evaluation.')
+  }
+  if (!normalizedExpected.pageEligible) throw new Error(`Substantial page is blocked: ${normalizedExpected.reasons.join(', ')}`)
 
   const cited = citedIds(compiledPage)
   const claimsById = new Map(record.claims.map((claim) => [claim.id, claim]))

@@ -18,7 +18,11 @@ import {
 } from '../lib/evidence-dossier/package.ts'
 import { validateDossier } from '../lib/evidence-dossier/validator.ts'
 import { EPISTEMIC_RECORDS } from '../lib/epistemic-pilots.ts'
+import { epistemicReviewTargetHash } from '../lib/epistemic-publication.ts'
+import { FRONTIER_ALIGNMENT_AUDIT, alignmentBlockers, type AlignmentVerdict } from '../lib/frontier-source-alignment.ts'
+import { substantialPageContractDigest } from '../lib/substantial-page-compiler.ts'
 import { compilePilots } from '../lib/substantial-page-pilots.ts'
+import { evaluateSubstantialPageGate } from '../lib/substantial-page.ts'
 import { adaptSubstantialPageToDossier } from '../lib/evidence-dossier/substantial-page-adapter.ts'
 
 const clone = <T,>(value: T): T => JSON.parse(JSON.stringify(value)) as T
@@ -232,5 +236,94 @@ test('the adapter fails closed without inspected passages or an eligible page', 
 
   const blocked = hbnAdapterInput()
   blocked.compiledPage = { ...blocked.compiledPage, decision: { ...blocked.compiledPage.decision, pageEligible: false, reasons: ['alignment-blocked'] } }
-  assert.throws(() => adaptSubstantialPageToDossier(blocked), /substantial page is blocked/i)
+  assert.throws(() => adaptSubstantialPageToDossier(blocked), /decision does not match/i)
+})
+
+function blockedAlignmentInput(verdict: AlignmentVerdict) {
+  const audit = FRONTIER_ALIGNMENT_AUDIT.find((entry) => entry.evidence.subjectAligned === verdict)!
+  const record = EPISTEMIC_RECORDS.find((entry) => entry.id === audit.recordId)!
+  const base = hbnAdapterInput()
+  const contract = {
+    ...clone(base.compiledPage.contract),
+    recordId: record.id,
+    recordRevisionSha256: epistemicReviewTargetHash(record),
+  }
+  const decision = evaluateSubstantialPageGate(record, contract, EPISTEMIC_RECORDS, alignmentBlockers(record.id))
+  return {
+    ...base,
+    record,
+    compiledPage: {
+      ...base.compiledPage,
+      contract,
+      decision: { ...decision, reasons: [...decision.reasons].sort() },
+      contractDigest: substantialPageContractDigest(contract),
+    },
+    attestations: [],
+  }
+}
+
+test('every non-clear alignment state fails at the dossier boundary', () => {
+  for (const [verdict, blocker] of [
+    ['insufficient-evidence', 'source-alignment-insufficient-evidence'],
+    ['inaccessible-source', 'source-inaccessible'],
+    ['mismatched', 'source-subject-mismatched'],
+    ['partially-supported', 'source-subject-partially-supported'],
+  ] as const) {
+    assert.throws(() => adaptSubstantialPageToDossier(blockedAlignmentInput(verdict)), new RegExp(blocker))
+  }
+
+  const positional = FRONTIER_ALIGNMENT_AUDIT.find((entry) => entry.assignmentOrigin === 'positional-legacy')!
+  const positionalInput = blockedAlignmentInput(positional.evidence.subjectAligned)
+  assert.throws(() => adaptSubstantialPageToDossier(positionalInput), /source-assignment-positional-legacy/)
+
+  const unknown = hbnAdapterInput()
+  unknown.record = { ...unknown.record, id: 'urn:maha:record:not-audited' }
+  assert.throws(() => adaptSubstantialPageToDossier(unknown), /alignment-audit-missing/)
+})
+
+test('metadata-only resolution cannot become passage-supported dossier evidence', () => {
+  const audit = FRONTIER_ALIGNMENT_AUDIT.find((entry) => entry.evidence.metadataVerified && !entry.evidence.sourceContentInspected)!
+  const input = blockedAlignmentInput(audit.evidence.subjectAligned)
+  assert.throws(() => adaptSubstantialPageToDossier(input), /source-not-inspected|source-alignment-insufficient-evidence/)
+})
+
+test('the adapter independently rejects forged decisions, stale revisions, and tampered contracts', () => {
+  const forged = hbnAdapterInput()
+  forged.compiledPage = {
+    ...forged.compiledPage,
+    decision: { ...forged.compiledPage.decision, pageEligible: false, reasons: ['caller-supplied'] },
+  }
+  assert.throws(() => adaptSubstantialPageToDossier(forged), /decision does not match/)
+
+  const stale = hbnAdapterInput()
+  stale.compiledPage = {
+    ...stale.compiledPage,
+    contract: { ...stale.compiledPage.contract, recordRevisionSha256: `sha256:${'0'.repeat(64)}` },
+  }
+  stale.compiledPage.contractDigest = substantialPageContractDigest(stale.compiledPage.contract)
+  assert.throws(() => adaptSubstantialPageToDossier(stale), /record revision is stale/)
+
+  const tampered = hbnAdapterInput()
+  tampered.compiledPage = {
+    ...tampered.compiledPage,
+    contract: {
+      ...tampered.compiledPage.contract,
+      directAnswer: { ...tampered.compiledPage.contract.directAnswer, text: `${tampered.compiledPage.contract.directAnswer.text} tampered` },
+    },
+  }
+  assert.throws(() => adaptSubstantialPageToDossier(tampered), /contract digest mismatch/)
+})
+
+test('dossier passages cannot detach from cited claims, declared sources, or exact locators', () => {
+  const unknownClaim = hbnAdapterInput()
+  unknownClaim.attestations[0].passages[0].claimIds = ['urn:maha:claim:not-cited']
+  assert.throws(() => adaptSubstantialPageToDossier(unknownClaim), /unresolved or uncited claim/)
+
+  const wrongSource = hbnAdapterInput()
+  wrongSource.attestations[0].sourceId = 'source-not-declared'
+  assert.throws(() => adaptSubstantialPageToDossier(wrongSource), /attestation missing/)
+
+  const noLocator = hbnAdapterInput()
+  noLocator.attestations[0].passages[0].locator = ''
+  assert.throws(() => adaptSubstantialPageToDossier(noLocator), /requires a locator and bounded text/)
 })

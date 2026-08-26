@@ -371,6 +371,17 @@ const domainSeeds: readonly DomainSeed[] = [
 
 export const FRONTIER_EPISTEMIC_DOMAINS: readonly EpistemicDomain[] = domainSeeds.map((seed) => seed.domain)
 
+/**
+ * Record ids whose source was named for the concept rather than inherited from
+ * the positional block. The alignment audit uses this to tell an override from
+ * a legacy assignment without re-deriving the seed structure.
+ */
+export const FRONTIER_EXPLICIT_SOURCE_OVERRIDES: ReadonlySet<string> = new Set(
+  domainSeeds.flatMap((seed) =>
+    Object.keys(seed.sourceOverrides ?? {}).map((conceptSlug) => `urn:maha:record:${seed.domain.slug}-${conceptSlug}`),
+  ),
+)
+
 export const FRONTIER_DOMAIN_GRAPH_RECORDS: readonly EpistemicRecord[] = domainSeeds.flatMap(buildDomainRecords)
 
 export const FRONTIER_DOMAIN_GRAPH_RECORDS_BY_DOMAIN = Object.fromEntries(
