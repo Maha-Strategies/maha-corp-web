@@ -12,8 +12,8 @@ Record revision `sha256:d41e23431b7c29de0a5301bdaa86aef0a388ad6492f39a4ce6a75bb1
 
 Gate: **BLOCK**
 
-- `source-alignment-insufficient-evidence`
 - `source-assignment-positional-legacy`
+- `source-inaccessible`
 - `source-not-inspected`
 
 ## Why this record was chosen
@@ -22,7 +22,7 @@ A measurement-kind record whose cited source is a methodological guideline, whic
 
 ## Source alignment
 
-**insufficient-evidence** — The autophagy assay guidelines address LC3 interpretation directly, and the locator names the LC3, SQSTM1/p62, lysosomal inhibition and flux sections.
+**inaccessible-source** — The autophagy assay guidelines address LC3 interpretation directly, and the locator names the LC3, SQSTM1/p62, lysosomal inhibition and flux sections.
 
 ## Search intent
 

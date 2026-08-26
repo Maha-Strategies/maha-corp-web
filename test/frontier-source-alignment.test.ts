@@ -7,6 +7,7 @@ import test from 'node:test'
 import {
   ALIGNMENT_VERDICTS,
   ASSIGNMENT_ORIGINS,
+  MISMATCH_BASES,
   FRONTIER_ALIGNMENT_AUDIT,
   alignmentBlockers,
   alignmentFor,
@@ -50,8 +51,8 @@ test('every audit entry uses declared vocabulary', () => {
 test('a resolving DOI alone can never produce a supported verdict', () => {
   for (const entry of FRONTIER_ALIGNMENT_AUDIT) {
     if (entry.evidence.subjectAligned !== 'supported') continue
-    assert.ok(entry.evidence.sourceInspected, `${entry.recordId} is supported without inspection`)
-    assert.ok(entry.evidence.inspectedLocation, `${entry.recordId} is supported with no inspected location`)
+    assert.ok(entry.evidence.sourceContentInspected, `${entry.recordId} is supported without inspection`)
+    assert.ok(entry.evidence.inspectedContentLocation, `${entry.recordId} is supported with no inspected location`)
   }
   // And the converse: plenty of records resolve their DOI and are still not supported.
   const resolvedButNotSupported = FRONTIER_ALIGNMENT_AUDIT.filter(
@@ -62,19 +63,21 @@ test('a resolving DOI alone can never produce a supported verdict', () => {
 
 test('metadata-only evidence never produces content confirmation', () => {
   for (const entry of FRONTIER_ALIGNMENT_AUDIT) {
-    if (entry.evidence.sourceInspected) continue
-    assert.equal(entry.evidence.inspectedLocation, null, `${entry.recordId} records a location it never read`)
+    if (entry.evidence.sourceContentInspected) continue
+    assert.equal(entry.evidence.inspectedContentLocation, null, `${entry.recordId} records a location it never read`)
     assert.equal(entry.evidence.claimSupported, false, `${entry.recordId} claims support without inspection`)
   }
 })
 
-test('no aggregate verified boolean collapses the five evidence axes', () => {
+test('no aggregate verified boolean collapses the six evidence axes', () => {
   for (const entry of FRONTIER_ALIGNMENT_AUDIT) {
     const evidence = entry.evidence as unknown as Record<string, unknown>
     assert.ok(!('verified' in evidence), `${entry.recordId} exposes an aggregate verified flag`)
     assert.equal(evidence.independentlyReproduced, false, `${entry.recordId} claims reproduction`)
+    assert.equal(evidence.externallyReviewed, false, `${entry.recordId} claims external review`)
+    assert.ok(!('inspected' in evidence), `${entry.recordId} exposes an ambiguous inspected flag`)
     assert.equal(typeof evidence.metadataVerified, 'boolean')
-    assert.equal(typeof evidence.sourceInspected, 'boolean')
+    assert.equal(typeof evidence.sourceContentInspected, 'boolean')
     assert.equal(typeof evidence.claimSupported, 'boolean')
   }
 })
@@ -83,6 +86,48 @@ test('a claim cannot be supported by a source that is not subject-aligned', () =
   for (const entry of FRONTIER_ALIGNMENT_AUDIT) {
     if (!entry.evidence.claimSupported) continue
     assert.equal(entry.evidence.subjectAligned, 'supported', `${entry.recordId} supports a claim while misaligned`)
+  }
+})
+
+test('publication chronology alone cannot produce a mismatched verdict', () => {
+  // A source predating a modern technique may still support foundational
+  // material, so a date is a risk indicator and never a basis. Every mismatch
+  // must name one of the declared bases, and chronology is not one of them.
+  for (const entry of FRONTIER_ALIGNMENT_AUDIT) {
+    if (entry.evidence.subjectAligned !== 'mismatched') continue
+    assert.ok(entry.evidence.mismatchBasis, `${entry.recordId} is mismatched with no declared basis`)
+    assert.ok(
+      MISMATCH_BASES.includes(entry.evidence.mismatchBasis),
+      `${entry.recordId} uses an undeclared mismatch basis`,
+    )
+  }
+  assert.ok(!(MISMATCH_BASES as readonly string[]).some((basis) => /chronolog|date|year|predat/i.test(basis)))
+
+  // A record flagged only for chronology must NOT be mismatched on that alone.
+  const chronologyOnly = FRONTIER_ALIGNMENT_AUDIT.filter(
+    (entry) => entry.evidence.chronologicalRiskIndicator && !entry.evidence.sourceContentInspected,
+  )
+  for (const entry of chronologyOnly) {
+    assert.notEqual(
+      entry.evidence.subjectAligned,
+      'mismatched',
+      `${entry.recordId} was called mismatched on chronology alone`,
+    )
+  }
+})
+
+test('an inspected-content mismatch basis requires that the source was inspected', () => {
+  for (const entry of FRONTIER_ALIGNMENT_AUDIT) {
+    if (entry.evidence.mismatchBasis !== 'inspected-content-different-subject') continue
+    assert.ok(entry.evidence.sourceContentInspected, `${entry.recordId} claims inspected content without inspection`)
+    assert.ok(entry.evidence.inspectedContentLocation)
+  }
+})
+
+test('a mismatch basis is never recorded without a mismatch verdict', () => {
+  for (const entry of FRONTIER_ALIGNMENT_AUDIT) {
+    if (entry.evidence.subjectAligned === 'mismatched') continue
+    assert.equal(entry.evidence.mismatchBasis, null, `${entry.recordId} carries a stray mismatch basis`)
   }
 })
 
@@ -112,7 +157,7 @@ test('an inaccessible source fails closed and is never content-confirmed', () =>
   const inaccessible = FRONTIER_ALIGNMENT_AUDIT.filter((entry) => entry.evidence.subjectAligned === 'inaccessible-source')
   assert.ok(inaccessible.length > 0)
   for (const entry of inaccessible) {
-    assert.equal(entry.evidence.sourceInspected, false, `${entry.recordId} inspected an inaccessible source`)
+    assert.equal(entry.evidence.sourceContentInspected, false, `${entry.recordId} inspected an inaccessible source`)
     assert.equal(entry.evidence.claimSupported, false)
     assert.ok(alignmentBlockers(entry.recordId).includes('source-inaccessible'))
   }
@@ -164,10 +209,29 @@ test('the two corrected records remain correctly bound and alignment-clear', () 
     assert.equal(entry.sourceIdentifier, doi)
     assert.equal(entry.assignmentOrigin, 'explicit-override')
     assert.equal(entry.evidence.subjectAligned, 'supported')
-    assert.ok(entry.evidence.sourceInspected)
+    assert.ok(entry.evidence.sourceContentInspected)
     assert.deepEqual(alignmentBlockers(recordId), [])
   }
   assert.equal(FRONTIER_EXPLICIT_SOURCE_OVERRIDES.size, 2)
+})
+
+test('the judgement registry declares no record twice in source', () => {
+  // A duplicate key in an object literal is silently collapsed at runtime, so a
+  // runtime Set cannot detect it. Three records really were declared twice
+  // during this sprint and only the compiler caught it, so the source text is
+  // checked directly.
+  const source = readFileSync(new URL('../lib/frontier-source-alignment.ts', import.meta.url), 'utf8')
+  // Scope to the judgement registry. PRIOR_MAPPINGS legitimately names records
+  // that also appear there, so scanning the whole file would false-positive.
+  const start = source.indexOf('const JUDGEMENTS:')
+  const end = source.indexOf('const PUBLISHER_VERIFIED:')
+  assert.ok(start > 0 && end > start, 'could not locate the judgement registry')
+  const registry = source.slice(start, end)
+  const keys = [...registry.matchAll(/^ {2}'(urn:maha:record:[^']+)':/gm)].map((match) => match[1])
+  const seen = new Set<string>()
+  const duplicates = keys.filter((key) => (seen.has(key) ? true : (seen.add(key), false)))
+  assert.deepEqual(duplicates, [], 'a record is judged twice in the registry')
+  assert.ok(keys.length > 40, 'the registry key scan matched nothing, so this guard is inert')
 })
 
 test('duplicate or conflicting bindings fail at module load', async () => {
@@ -186,8 +250,11 @@ test('the substantial-page gate blocks a record whose alignment is unresolved', 
   const pilots = compilePilots()
   const passing = pilots.filter((pilot) => pilot.decision.pageEligible)
   const blocked = pilots.filter((pilot) => !pilot.decision.pageEligible)
-  assert.equal(passing.length, 4, 'pilot pass count changed')
-  assert.equal(blocked.length, 4)
+  // Batch 1 cleared four pilots; batch 2 inspected the RFdiffusion preprint and
+  // the Toy Models article, clearing two more. The two still blocked are the
+  // ones whose sources could not be retrieved.
+  assert.equal(passing.length, 6, 'pilot pass count changed')
+  assert.equal(blocked.length, 2)
   for (const pilot of blocked) {
     assert.ok(
       pilot.decision.reasons.some((reason) => reason.startsWith('source-')),
@@ -286,10 +353,10 @@ test('the reported totals match the audit', () => {
   const origins = originTotals()
   assert.equal(Object.values(origins).reduce((a, b) => a + b, 0), 240)
   assert.equal(origins['explicit-override'], 2)
-  assert.equal(verdicts.supported, 11)
+  assert.equal(verdicts.supported, 27)
   assert.equal(
     FRONTIER_ALIGNMENT_AUDIT.filter((entry) => isAlignmentClear(entry.recordId)).length,
-    11,
+    27,
     'alignment-clear count changed',
   )
 })

@@ -10,11 +10,7 @@ Contract digest `sha256:b653067dcb8404895edc94059cf7a5715bef42f423eb162545087ea3
 
 Record revision `sha256:ca5e57a43f41f13e0dc0f97c84795152690e1d0bc8fca68488ac2390881a69b9`
 
-Gate: **BLOCK**
-
-- `source-alignment-insufficient-evidence`
-- `source-assignment-positional-legacy`
-- `source-not-inspected`
+Gate: **pass**
 
 ## Why this record was chosen
 
@@ -22,7 +18,7 @@ A method-kind record with a complete locator and rights basis whose cited source
 
 ## Source alignment
 
-**insufficient-evidence** — The RFdiffusion paper reports motif scaffolding explicitly among its tasks, and the locator names that section, so the source addresses the record subject.
+**supported** — The RFdiffusion paper reports motif scaffolding explicitly among its tasks, and the locator names that section, so the source addresses the record subject.
 
 ## Search intent
 

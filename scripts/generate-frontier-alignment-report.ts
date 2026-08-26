@@ -35,9 +35,9 @@ const blocked = FRONTIER_ALIGNMENT_AUDIT.filter((entry) => blockersByRecord.get(
 const blockerTotals: Record<string, number> = {}
 for (const list of blockersByRecord.values()) for (const code of list) blockerTotals[code] = (blockerTotals[code] ?? 0) + 1
 
-const inspected = FRONTIER_ALIGNMENT_AUDIT.filter((entry) => entry.evidence.sourceInspected)
+const internallyInspected = FRONTIER_ALIGNMENT_AUDIT.filter((entry) => entry.evidence.sourceContentInspected)
 const metadataOnly = FRONTIER_ALIGNMENT_AUDIT.filter(
-  (entry) => entry.evidence.metadataVerified && !entry.evidence.sourceInspected,
+  (entry) => entry.evidence.metadataVerified && !entry.evidence.sourceContentInspected,
 )
 const corrected = FRONTIER_ALIGNMENT_AUDIT.filter((entry) => entry.priorMapping !== null)
 
@@ -46,19 +46,19 @@ lines.push('# Frontier source-alignment audit', '')
 lines.push(`Audit \`${SOURCE_ALIGNMENT_VERSION}\` · input date \`${ALIGNMENT_AUDIT_INPUT_DATE}\` · digest \`${auditDigest()}\``, '')
 lines.push(GENERATED, '')
 lines.push(
-  'A source resolving is a structural fact. It does not show that the source is about the record subject. This audit records what was actually checked for each of the 240 frontier records, and keeps five things separate rather than collapsing them into one verified flag: metadata verified, source inspected, subject aligned, claim supported, independently reproduced.',
+  'A source resolving is a structural fact. It does not show that the source is about the record subject. This audit records what was actually checked for each of the 240 frontier records, and keeps six things separate rather than collapsing them into one verified flag: metadata resolved, source content inspected, subject aligned, bounded claim supported, independently reproduced, externally reviewed.',
   '',
 )
 lines.push(
-  '**Nothing here is independent expert review.** It is internal editorial verification. No entry claims scientific truth, commercial readiness, reproduction, or external endorsement, and `independentlyReproduced` is false everywhere.',
+  '**All inspection recorded here is internal editorial work.** It is not independent external review, peer review, or expert endorsement. `internallyInspectedSourceCount` counts sources an internal editor read. No entry claims scientific truth, commercial readiness, reproduction, or external endorsement, and both `independentlyReproduced` and `externallyReviewed` are false on every entry.',
   '',
 )
 
 lines.push('## Coverage', '')
 lines.push(row(['Measure', 'Count']), row(['---', '---']))
 lines.push(row(['Frontier records audited', String(FRONTIER_ALIGNMENT_AUDIT.length)]))
-lines.push(row(['Source inspected', String(inspected.length)]))
-lines.push(row(['Metadata verified but not inspected', String(metadataOnly.length)]))
+lines.push(row(['Source content inspected (internal editorial)', String(internallyInspected.length)]))
+lines.push(row(['Metadata resolved but content not inspected', String(metadataOnly.length)]))
 lines.push(row(['Mappings corrected', String(corrected.length)]))
 lines.push(row(['Alignment-clear', String(clear.length)]))
 lines.push(row(['Blocked from substantial-page generation', String(blocked.length)]))
@@ -106,7 +106,7 @@ for (const entry of clear) {
     row([
       `\`${entry.recordId.replace('urn:maha:record:', '')}\``,
       entry.sourceTitle,
-      entry.evidence.inspectedLocation ?? '—',
+      entry.evidence.inspectedContentLocation ?? '—',
       entry.assignmentOrigin,
     ]),
   )
@@ -134,13 +134,20 @@ lines.push('## Mismatches', '')
 const mismatched = FRONTIER_ALIGNMENT_AUDIT.filter((entry) => entry.evidence.subjectAligned === 'mismatched')
 if (!mismatched.length) lines.push('None.', '')
 else {
-  lines.push(row(['Record', 'Bound source', 'Finding', 'Remediation']), row(['---', '---', '---', '---']))
+  lines.push(row(['Record', 'Bound source', 'Basis', 'Finding']), row(['---', '---', '---', '---']))
   for (const entry of mismatched) {
-    lines.push(row([`\`${entry.recordId.replace('urn:maha:record:', '')}\``, entry.sourceTitle, entry.reason, entry.remediation]))
+    lines.push(
+      row([
+        `\`${entry.recordId.replace('urn:maha:record:', '')}\``,
+        entry.sourceTitle,
+        `\`${entry.evidence.mismatchBasis}\``,
+        entry.reason,
+      ]),
+    )
   }
   lines.push('')
   lines.push(
-    'These verdicts rest on registry metadata rather than inspection. That asymmetry is deliberate: a mismatch can only block a page, never pass one, so it is safe to establish from a registered title and date. Support is never inferred the same way.',
+    'Every mismatch names a declared basis. **Publication chronology is not among them.** A source predating a technique may still support foundational material, so a date is recorded as `chronologicalRiskIndicator` and can never establish a mismatch on its own; a module-load guard enforces this.',
     '',
   )
 }
@@ -185,8 +192,9 @@ writeFileSync(
       auditDigest: auditDigest(),
       totals: {
         records: FRONTIER_ALIGNMENT_AUDIT.length,
-        inspected: inspected.length,
-        metadataOnly: metadataOnly.length,
+        internallyInspectedSourceCount: internallyInspected.length,
+        metadataResolvedContentNotInspected: metadataOnly.length,
+        chronologicalRiskIndicators: FRONTIER_ALIGNMENT_AUDIT.filter((entry) => entry.evidence.chronologicalRiskIndicator).length,
         corrected: corrected.length,
         alignmentClear: clear.length,
         blocked: blocked.length,
@@ -209,8 +217,8 @@ console.log(
     {
       wrote: ['docs/frontier-audit/source-alignment-report.md', 'content/frontier-audit/source-alignment-audit.json'],
       records: FRONTIER_ALIGNMENT_AUDIT.length,
-      inspected: inspected.length,
-      metadataOnly: metadataOnly.length,
+      internallyInspectedSourceCount: internallyInspected.length,
+      metadataResolvedContentNotInspected: metadataOnly.length,
       corrected: corrected.length,
       alignmentClear: clear.length,
       blocked: blocked.length,

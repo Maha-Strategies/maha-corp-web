@@ -10,12 +10,7 @@ Contract digest `sha256:a6b6162118b689c314bef3d23e8002416aec21b93a59150428c67cf5
 
 Record revision `sha256:05a72058cb2682388462fcf950bdd95334b41c6ad0869a5e0f457d3c505eacea`
 
-Gate: **BLOCK**
-
-- `source-alignment-insufficient-evidence`
-- `source-assignment-positional-legacy`
-- `source-metadata-unverified`
-- `source-not-inspected`
+Gate: **pass**
 
 ## Why this record was chosen
 
@@ -23,7 +18,7 @@ The most connected record in the domain with six declared edges, a complete loca
 
 ## Source alignment
 
-**insufficient-evidence** — Toy Models of Superposition develops the superposition account directly, and the locator names the definitions, toy models, geometry and sparsity sections.
+**supported** — Toy Models of Superposition develops the superposition account directly, and the locator names the definitions, toy models, geometry and sparsity sections.
 
 ## Search intent
 

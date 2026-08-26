@@ -13,21 +13,28 @@ import type { EpistemicRecord } from './epistemic-schema.ts'
  * exists on the record — says nothing about whether that source is about the
  * record's subject. This module records, per record, what was actually checked.
  *
- * Five things are tracked separately and never collapsed into one boolean:
+ * ALL INSPECTION RECORDED HERE IS INTERNAL EDITORIAL WORK. It is not
+ * independent external review, peer review, or expert endorsement, and no field
+ * in this module should be read as any of those. `externallyReviewed` is false
+ * on every entry and there is currently no process that would set it true.
  *
- *   metadataVerified      the identifier resolves in an authoritative registry
- *   sourceInspected       a human read the abstract or full text
- *   subjectAligned        the source is about this record's subject
- *   claimSupported        the source supports the record's bounded claim
- *   independentlyReproduced  always false; nothing here reproduces an experiment
+ * Six things are tracked separately and never collapsed into one boolean:
  *
- * `supported` requires inspection. Metadata resolution alone can never produce
- * it, because a DOI resolving proves a document exists, not what it is about.
+ *   metadataVerified          the identifier resolves in an authoritative registry
+ *   sourceContentInspected    an internal editor read the abstract or full text
+ *   subjectAligned            the source is about this record's subject
+ *   claimSupported            the source supports the record's bounded claim
+ *   independentlyReproduced   always false; nothing here reproduces an experiment
+ *   externallyReviewed        always false; no external reviewer has seen this
  *
- * The reverse direction is deliberately asymmetric. A `mismatched` verdict may
- * rest on registry metadata alone — a paper published years before a topic
- * existed cannot be about it — because that verdict can only block a page,
- * never pass one. Every such case records `sourceInspected: false`.
+ * `supported` requires internal content inspection. Metadata resolution alone
+ * can never produce it, because a DOI resolving proves a document exists, not
+ * what it is about.
+ *
+ * `mismatched` is now equally demanding, and chronology is explicitly not a
+ * basis for it. A source predating a modern technique may still support
+ * foundational material, so a publication date is recorded as a risk indicator
+ * and never as proof. A mismatch requires one of the declared bases below.
  */
 
 export const SOURCE_ALIGNMENT_VERSION = 'maha-frontier-source-alignment/1.0' as const
@@ -54,6 +61,18 @@ export const ALIGNMENT_VERDICTS = [
 ] as const
 export type AlignmentVerdict = (typeof ALIGNMENT_VERDICTS)[number]
 
+/**
+ * What may establish a `mismatched` verdict. Publication chronology is
+ * deliberately absent: it is a risk indicator, recorded separately, and a
+ * module-load guard rejects any mismatch that rests on it.
+ */
+export const MISMATCH_BASES = [
+  'inspected-content-different-subject',
+  'metadata-identifies-incompatible-subject',
+  'title-and-abstract-jointly-nonaligned',
+] as const
+export type MismatchBasis = (typeof MISMATCH_BASES)[number]
+
 export const METADATA_METHODS = ['crossref-rest', 'publisher-page', 'catalogue-record', 'none'] as const
 export type MetadataMethod = (typeof METADATA_METHODS)[number]
 
@@ -64,13 +83,29 @@ export interface AlignmentEvidence {
   metadataVerified: boolean
   metadataMethod: MetadataMethod
   metadataNote: string
-  sourceInspected: boolean
+  /** An internal editor read the source. Never external or peer review. */
+  sourceContentInspected: boolean
   /** Exactly where the source was read. Null whenever it was not read. */
-  inspectedLocation: string | null
+  inspectedContentLocation: string | null
   subjectAligned: AlignmentVerdict
+  /** Set only when a mismatch is asserted. Chronology is never a basis. */
+  mismatchBasis: MismatchBasis | null
+  /**
+   * The source predates the record's technique or subject vocabulary. A concern
+   * worth a reviewer's attention, never evidence of mismatch on its own.
+   */
+  chronologicalRiskIndicator: boolean
   claimSupported: boolean
+  /**
+   * Whether this source is independent of the other sources cited by the same
+   * record. Null when the record cites a single source, which is every frontier
+   * record today, so no independence can be asserted either way.
+   */
+  sourceIndependentOfOtherCitedSources: boolean | null
   /** Nothing in this repository reproduces an experiment. */
   independentlyReproduced: false
+  /** No external reviewer has seen any of this. */
+  externallyReviewed: false
 }
 
 export interface PriorMapping {
@@ -117,11 +152,13 @@ const metadataCache: Record<string, MetadataCacheEntry> =
 
 interface InspectedJudgement {
   verdict: AlignmentVerdict
-  inspectedLocation: string | null
-  sourceInspected: boolean
+  inspectedContentLocation: string | null
+  sourceContentInspected: boolean
   reason: string
   remediation: string
   origin?: AssignmentOrigin
+  mismatchBasis?: MismatchBasis
+  chronologicalRiskIndicator?: boolean
 }
 
 /**
@@ -140,8 +177,8 @@ const JUDGEMENTS: Readonly<Record<string, InspectedJudgement>> = {
   // ---- ITER magnets page, read 2026-08-26 --------------------------------
   'urn:maha:record:fusion-plasma-systems-magnetic-confinement': {
     verdict: 'supported',
-    sourceInspected: true,
-    inspectedLocation: 'Machine / Magnets, toroidal field section',
+    sourceContentInspected: true,
+    inspectedContentLocation: 'Machine / Magnets, toroidal field section',
     reason:
       'The page states that the eighteen D-shaped toroidal field magnets produce a field whose primary function is to confine the plasma particles, which is the record subject.',
     remediation: 'None. Keep the mapping and record it as curated rather than positional.',
@@ -149,16 +186,16 @@ const JUDGEMENTS: Readonly<Record<string, InspectedJudgement>> = {
   },
   'urn:maha:record:fusion-plasma-systems-toroidal-field-coils': {
     verdict: 'supported',
-    sourceInspected: true,
-    inspectedLocation: 'Machine / Magnets, toroidal field section',
+    sourceContentInspected: true,
+    inspectedContentLocation: 'Machine / Magnets, toroidal field section',
     reason: 'The page describes the toroidal field coil set and its confining function directly.',
     remediation: 'None. Keep the mapping and record it as curated rather than positional.',
     origin: 'independently-curated',
   },
   'urn:maha:record:fusion-plasma-systems-poloidal-field-coils': {
     verdict: 'supported',
-    sourceInspected: true,
-    inspectedLocation: 'Machine / Magnets, poloidal field section',
+    sourceContentInspected: true,
+    inspectedContentLocation: 'Machine / Magnets, poloidal field section',
     reason:
       'The page describes six ring-shaped poloidal field coils outside the toroidal structure that shape the plasma and contribute to stability.',
     remediation: 'None. Keep the mapping and record it as curated rather than positional.',
@@ -166,8 +203,8 @@ const JUDGEMENTS: Readonly<Record<string, InspectedJudgement>> = {
   },
   'urn:maha:record:fusion-plasma-systems-central-solenoid-inductive-drive': {
     verdict: 'supported',
-    sourceInspected: true,
-    inspectedLocation: 'Machine / Magnets, central solenoid section',
+    sourceContentInspected: true,
+    inspectedContentLocation: 'Machine / Magnets, central solenoid section',
     reason:
       'The page describes the central solenoid as inducing and maintaining plasma current during long pulses, which is the inductive drive the record names.',
     remediation: 'None. Keep the mapping and record it as curated rather than positional.',
@@ -175,8 +212,8 @@ const JUDGEMENTS: Readonly<Record<string, InspectedJudgement>> = {
   },
   'urn:maha:record:fusion-plasma-systems-tokamak-plasma-equilibrium': {
     verdict: 'partially-supported',
-    sourceInspected: true,
-    inspectedLocation: 'Machine / Magnets, poloidal field and correction coil sections',
+    sourceContentInspected: true,
+    inspectedContentLocation: 'Machine / Magnets, poloidal field and correction coil sections',
     reason:
       'The page covers shaping and stability, which bear on equilibrium, but a machine description does not establish plasma equilibrium as a physics result. The coil hardware is supported; the equilibrium concept is not.',
     remediation:
@@ -186,8 +223,8 @@ const JUDGEMENTS: Readonly<Record<string, InspectedJudgement>> = {
   // ---- MCP tools specification, read 2026-08-26 ---------------------------
   'urn:maha:record:agentic-systems-mcp-mcp-client-server-roles': {
     verdict: 'supported',
-    sourceInspected: true,
-    inspectedLocation: 'Protocol Messages and Message Flow sections',
+    sourceContentInspected: true,
+    inspectedContentLocation: 'Protocol Messages and Message Flow sections',
     reason:
       'The specification defines the client and server roles in the tools/list and tools/call exchange, including the sequence between model, client and server.',
     remediation: 'None. Keep the mapping and record it as curated rather than positional.',
@@ -195,8 +232,8 @@ const JUDGEMENTS: Readonly<Record<string, InspectedJudgement>> = {
   },
   'urn:maha:record:agentic-systems-mcp-mcp-capability-negotiation': {
     verdict: 'supported',
-    sourceInspected: true,
-    inspectedLocation: 'Capabilities section',
+    sourceContentInspected: true,
+    inspectedContentLocation: 'Capabilities section',
     reason:
       'The specification states that servers supporting tools MUST declare the tools capability, and defines listChanged notification behaviour. That is the negotiation the record names.',
     remediation: 'None. Keep the mapping and record it as curated rather than positional.',
@@ -204,16 +241,16 @@ const JUDGEMENTS: Readonly<Record<string, InspectedJudgement>> = {
   },
   'urn:maha:record:agentic-systems-mcp-mcp-tool-discovery': {
     verdict: 'supported',
-    sourceInspected: true,
-    inspectedLocation: 'Protocol Messages, Listing Tools section',
+    sourceContentInspected: true,
+    inspectedContentLocation: 'Protocol Messages, Listing Tools section',
     reason: 'The specification defines the tools/list request and its paginated response, which is tool discovery.',
     remediation: 'None. Keep the mapping and record it as curated rather than positional.',
     origin: 'independently-curated',
   },
   'urn:maha:record:agentic-systems-mcp-mcp-tool-input-schemas': {
     verdict: 'supported',
-    sourceInspected: true,
-    inspectedLocation: 'Data Types, Tool definition section',
+    sourceContentInspected: true,
+    inspectedContentLocation: 'Data Types, Tool definition section',
     reason:
       'The specification defines inputSchema as a JSON Schema describing expected parameters, with an optional outputSchema, which is the record subject.',
     remediation: 'None. Keep the mapping and record it as curated rather than positional.',
@@ -221,8 +258,8 @@ const JUDGEMENTS: Readonly<Record<string, InspectedJudgement>> = {
   },
   'urn:maha:record:agentic-systems-mcp-mcp-tool-result-contracts': {
     verdict: 'supported',
-    sourceInspected: true,
-    inspectedLocation: 'Data Types, Tool Result and Structured Content sections',
+    sourceContentInspected: true,
+    inspectedContentLocation: 'Data Types, Tool Result and Structured Content sections',
     reason:
       'The specification defines structured and unstructured result content, the isError convention and output-schema validation, which is the result contract the record names.',
     remediation: 'None. Keep the mapping and record it as curated rather than positional.',
@@ -232,8 +269,8 @@ const JUDGEMENTS: Readonly<Record<string, InspectedJudgement>> = {
   // ---- corrected mappings, read 2026-08-26 -------------------------------
   'urn:maha:record:advanced-materials-hexagonal-boron-nitride-dielectrics': {
     verdict: 'supported',
-    sourceInspected: true,
-    inspectedLocation: 'Abstract',
+    sourceContentInspected: true,
+    inspectedContentLocation: 'Abstract',
     reason:
       'The abstract reports fabrication and characterisation of graphene devices on single-crystal hexagonal boron nitride substrates, which is the record subject.',
     remediation: 'None. The mapping was corrected in this batch.',
@@ -241,40 +278,429 @@ const JUDGEMENTS: Readonly<Record<string, InspectedJudgement>> = {
   },
   'urn:maha:record:neurotechnology-bci-spike-sorting-boundaries': {
     verdict: 'supported',
-    sourceInspected: true,
-    inspectedLocation: 'Quality metrics and Summary matrices sections',
+    sourceContentInspected: true,
+    inspectedContentLocation: 'Quality metrics and Summary matrices sections',
     reason:
       'The paper defines false-positive and false-negative error estimates for sorted units and argues they should be reported, which bounds what spike sorting establishes.',
     remediation: 'None. The mapping was corrected in this batch.',
     origin: 'explicit-override',
   },
 
-  // ---- mismatch established from registry metadata alone -------------------
-  // Safe direction only: these verdicts block a page and can never pass one.
+  /* ---- alignment batch 2, read 2026-08-26 ------------------------------ */
+  'urn:maha:record:fusion-plasma-systems-divertor-heat-exhaust': {
+    verdict: 'supported',
+    sourceContentInspected: true,
+    inspectedContentLocation: 'ITER "Making it work" page, divertor and heat-exhaust sections',
+    reason:
+      'The page describes the divertor as extracting heat and particles from the plasma and protecting the walls, which is the record subject.',
+    remediation: 'None. Record the mapping as curated rather than positional.',
+    origin: 'independently-curated',
+  },
+  'urn:maha:record:fusion-plasma-systems-plasma-facing-components': {
+    verdict: 'partially-supported',
+    sourceContentInspected: true,
+    inspectedContentLocation: 'ITER "Making it work" page, divertor and heat-exhaust sections',
+    reason:
+      'The page treats wall and material loading under extreme neutron and particle flux, but does not develop plasma-facing components as a distinct subject.',
+    remediation: 'Narrow the record to what the page covers, or bind a source that treats plasma-facing components directly.',
+  },
+  'urn:maha:record:fusion-plasma-systems-plasma-position-and-shape-control': {
+    verdict: 'mismatched',
+    sourceContentInspected: true,
+    inspectedContentLocation: 'ITER "Making it work" page, divertor and heat-exhaust sections',
+    mismatchBasis: 'inspected-content-different-subject',
+    reason:
+      'The declared locator claims the page describes plasma control. It was read and does not discuss plasma position or shape control systems at all.',
+    remediation: 'Replace with a source that treats magnetic control of plasma position and shape.',
+  },
+  'urn:maha:record:fusion-plasma-systems-edge-localized-modes': {
+    verdict: 'mismatched',
+    sourceContentInspected: true,
+    inspectedContentLocation: 'ITER "Making it work" page, divertor and heat-exhaust sections',
+    mismatchBasis: 'inspected-content-different-subject',
+    reason:
+      'The page was read and does not mention edge-localized modes anywhere.',
+    remediation: 'Replace with a source that reports ELM physics or mitigation.',
+  },
+  'urn:maha:record:fusion-plasma-systems-resonant-magnetic-perturbations': {
+    verdict: 'mismatched',
+    sourceContentInspected: true,
+    inspectedContentLocation: 'ITER "Making it work" page, divertor and heat-exhaust sections',
+    mismatchBasis: 'inspected-content-different-subject',
+    reason:
+      'The page was read and does not mention resonant magnetic perturbations anywhere.',
+    remediation: 'Replace with a source that reports RMP coils or ELM suppression by perturbation.',
+  },
+  'urn:maha:record:advanced-materials-graphene-monolayers': {
+    verdict: 'supported',
+    sourceContentInspected: true,
+    inspectedContentLocation: 'arXiv:cond-mat/0410550 abstract (the Science 2004 preprint of record)',
+    reason:
+      'The abstract reports a naturally occurring two-dimensional material and an all-metallic field-effect transistor in films down to a few atomic layers, which is the record subject.',
+    remediation: 'None. Record the mapping as curated rather than positional.',
+    origin: 'independently-curated',
+  },
   'urn:maha:record:advanced-materials-graphene-hbn-heterostructures': {
     verdict: 'mismatched',
-    sourceInspected: false,
-    inspectedLocation: null,
+    sourceContentInspected: true,
+    inspectedContentLocation: 'arXiv:cond-mat/0410550 abstract (the Science 2004 preprint of record)',
+    chronologicalRiskIndicator: true,
+    mismatchBasis: 'inspected-content-different-subject',
     reason:
-      'The bound source is registered as "Electric Field Effect in Atomically Thin Carbon Films", Science 2004. It concerns transport in atomically thin carbon and does not involve boron nitride, so it cannot be about graphene-hBN heterostructures.',
-    remediation:
-      'Bind to a source that reports graphene on hexagonal boron nitride. Dean et al. (2010) is already in this corpus and is a candidate, but was not read for this record.',
+      'The source was read. It reports field-effect transport in thin graphitic films and involves no boron nitride, so it cannot support a graphene-on-boron-nitride heterostructure record. This replaces an earlier verdict that rested on publication date; the basis is now the inspected content.',
+    remediation: 'Bind Dean et al. (2010), already in this corpus, after inspecting it for this record.',
   },
   'urn:maha:record:advanced-materials-moire-superlattices': {
     verdict: 'mismatched',
-    sourceInspected: false,
-    inspectedLocation: null,
+    sourceContentInspected: true,
+    inspectedContentLocation: 'arXiv:cond-mat/0410550 abstract (the Science 2004 preprint of record)',
+    chronologicalRiskIndicator: true,
+    mismatchBasis: 'inspected-content-different-subject',
     reason:
-      'The bound source is the 2004 atomically thin carbon paper. Moire superlattice physics in these systems is later work, so a 2004 transport paper cannot establish the record subject.',
-    remediation: 'Bind to a source that reports moire superlattice formation or measurement.',
+      'The source was read. It reports single-film transport and involves no stacked or rotated layers, so no moire superlattice is present. The earlier chronological reasoning has been replaced by inspected content.',
+    remediation: 'Bind a source that reports moire superlattice formation or measurement.',
   },
   'urn:maha:record:advanced-materials-twist-angle-control': {
     verdict: 'mismatched',
-    sourceInspected: false,
-    inspectedLocation: null,
+    sourceContentInspected: true,
+    inspectedContentLocation: 'arXiv:cond-mat/0410550 abstract (the Science 2004 preprint of record)',
+    chronologicalRiskIndicator: true,
+    mismatchBasis: 'inspected-content-different-subject',
     reason:
-      'The bound source is the 2004 atomically thin carbon paper, which involves no twisted stack and no angle control. The subject postdates it.',
-    remediation: 'Bind to a source that reports twist-angle control in assembled stacks.',
+      'The source was read. It involves no twisted stack and no angle control. The earlier chronological reasoning has been replaced by inspected content.',
+    remediation: 'Bind a source that reports twist-angle control in assembled stacks.',
+  },
+  'urn:maha:record:advanced-materials-correlated-insulating-states': {
+    verdict: 'supported',
+    sourceContentInspected: true,
+    inspectedContentLocation: 'arXiv:1803.02342 abstract and reported phase diagram',
+    reason:
+      'The abstract reports correlated insulating states at half-filling in twisted bilayer graphene, which is the record subject.',
+    remediation: 'None. Record the mapping as curated rather than positional.',
+    origin: 'independently-curated',
+  },
+  'urn:maha:record:advanced-materials-magic-angle-superconductivity': {
+    verdict: 'supported',
+    sourceContentInspected: true,
+    inspectedContentLocation: 'arXiv:1803.02342 abstract and reported phase diagram',
+    reason:
+      'The paper reports superconductivity near the first magic angle with a phase diagram and zero-resistance transport, which is the record subject.',
+    remediation: 'None. Record the mapping as curated rather than positional.',
+    origin: 'independently-curated',
+  },
+  'urn:maha:record:advanced-materials-tmd-monolayers': {
+    verdict: 'mismatched',
+    sourceContentInspected: true,
+    inspectedContentLocation: 'arXiv:1803.02342 abstract and reported phase diagram',
+    mismatchBasis: 'inspected-content-different-subject',
+    reason:
+      'The source was read and concerns twisted bilayer graphene exclusively. It involves no transition metal dichalcogenide.',
+    remediation: 'Bind a source that reports TMD monolayers.',
+  },
+  'urn:maha:record:advanced-materials-direct-gap-mos2': {
+    verdict: 'mismatched',
+    sourceContentInspected: true,
+    inspectedContentLocation: 'arXiv:1803.02342 abstract and reported phase diagram',
+    mismatchBasis: 'inspected-content-different-subject',
+    reason:
+      'The source was read and involves no molybdenum disulfide and no band-gap measurement.',
+    remediation: 'Bind a source that reports the direct gap in monolayer MoS2.',
+  },
+  'urn:maha:record:advanced-materials-valley-polarized-excitons': {
+    verdict: 'mismatched',
+    sourceContentInspected: true,
+    inspectedContentLocation: 'arXiv:1803.02342 abstract and reported phase diagram',
+    mismatchBasis: 'inspected-content-different-subject',
+    reason:
+      'The source was read and reports no excitonic or valley-polarisation measurement.',
+    remediation: 'Bind a source that reports valley-polarised excitons.',
+  },
+  'urn:maha:record:biomolecular-engineering-protein-backbone-diffusion': {
+    verdict: 'supported',
+    sourceContentInspected: true,
+    inspectedContentLocation: 'bioRxiv preprint abstract of the same study (10.1101/2022.12.09.519842v2)',
+    reason:
+      'The abstract describes a generative model of protein backbones obtained by fine-tuning a structure prediction network on denoising tasks, which is the record subject.',
+    remediation: 'None, subject to confirming the published Nature version matches the preprint on this point.',
+    origin: 'independently-curated',
+  },
+  'urn:maha:record:biomolecular-engineering-unconditional-protein-generation': {
+    verdict: 'supported',
+    sourceContentInspected: true,
+    inspectedContentLocation: 'bioRxiv preprint abstract of the same study (10.1101/2022.12.09.519842v2)',
+    reason:
+      'The abstract reports unconditional protein monomer design explicitly.',
+    remediation: 'None, subject to confirming the published version.',
+    origin: 'independently-curated',
+  },
+  'urn:maha:record:biomolecular-engineering-motif-scaffolding': {
+    verdict: 'supported',
+    sourceContentInspected: true,
+    inspectedContentLocation: 'bioRxiv preprint abstract of the same study (10.1101/2022.12.09.519842v2)',
+    reason:
+      'The abstract reports motif scaffolding, including symmetric motif scaffolding for therapeutic and metal-binding design.',
+    remediation: 'None, subject to confirming the published version.',
+    origin: 'independently-curated',
+  },
+  'urn:maha:record:biomolecular-engineering-de-novo-binder-design': {
+    verdict: 'supported',
+    sourceContentInspected: true,
+    inspectedContentLocation: 'bioRxiv preprint abstract of the same study (10.1101/2022.12.09.519842v2)',
+    reason:
+      'The abstract reports protein binder design as one of the demonstrated tasks.',
+    remediation: 'None, subject to confirming the published version.',
+    origin: 'independently-curated',
+  },
+  'urn:maha:record:biomolecular-engineering-structure-prediction-filtering': {
+    verdict: 'partially-supported',
+    sourceContentInspected: true,
+    inspectedContentLocation: 'bioRxiv preprint abstract of the same study (10.1101/2022.12.09.519842v2)',
+    reason:
+      'The abstract describes integrating a structure prediction network into the generative model. It does not establish a separate prediction-based filtering stage applied to generated designs, which is what the record names.',
+    remediation: 'Inspect the Methods for an explicit filtering step, or narrow the record to network integration.',
+  },
+  'urn:maha:record:mechanistic-interpretability-neural-feature-superposition': {
+    verdict: 'supported',
+    sourceContentInspected: true,
+    inspectedContentLocation: '"Toy Models of Superposition" article, motivation, background and geometry sections',
+    reason:
+      'The article develops superposition, in which more features are represented than there are dimensions, as its central subject.',
+    remediation: 'None. Record the mapping as curated rather than positional.',
+    origin: 'independently-curated',
+  },
+  'urn:maha:record:mechanistic-interpretability-polysemantic-neurons': {
+    verdict: 'supported',
+    sourceContentInspected: true,
+    inspectedContentLocation: '"Toy Models of Superposition" article, motivation, background and geometry sections',
+    reason:
+      'The article treats neurons responding to multiple unrelated features, which is the record subject.',
+    remediation: 'None. Record the mapping as curated rather than positional.',
+    origin: 'independently-curated',
+  },
+  'urn:maha:record:mechanistic-interpretability-toy-models-of-superposition': {
+    verdict: 'supported',
+    sourceContentInspected: true,
+    inspectedContentLocation: '"Toy Models of Superposition" article, motivation, background and geometry sections',
+    reason:
+      'The article is the toy-model study itself.',
+    remediation: 'None. Record the mapping as curated rather than positional.',
+    origin: 'independently-curated',
+  },
+  'urn:maha:record:mechanistic-interpretability-superposition-geometry': {
+    verdict: 'supported',
+    sourceContentInspected: true,
+    inspectedContentLocation: '"Toy Models of Superposition" article, motivation, background and geometry sections',
+    reason:
+      'The article examines how features arrange geometrically in high-dimensional space under superposition.',
+    remediation: 'None. Record the mapping as curated rather than positional.',
+    origin: 'independently-curated',
+  },
+  'urn:maha:record:mechanistic-interpretability-representation-probing-boundary': {
+    verdict: 'insufficient-evidence',
+    sourceContentInspected: true,
+    inspectedContentLocation: '"Toy Models of Superposition" article, motivation, background and geometry sections',
+    reason:
+      'The article was inspected and no explicit treatment of linear probing methodology was found, but the inspection was a structured summary rather than a full read, so nonalignment is not established either.',
+    remediation: 'Read the full article for probing methodology, or bind a source that treats probing directly.',
+  },
+  'urn:maha:record:agentic-systems-mcp-mcp-resource-discovery': {
+    verdict: 'supported',
+    sourceContentInspected: true,
+    inspectedContentLocation: 'MCP specification index: Features, Security and Trust & Safety sections',
+    reason:
+      'The specification names Resources as a server feature providing context and data to the user or model.',
+    remediation: 'None. Record the mapping as curated rather than positional.',
+    origin: 'independently-curated',
+  },
+  'urn:maha:record:agentic-systems-mcp-mcp-prompt-templates': {
+    verdict: 'supported',
+    sourceContentInspected: true,
+    inspectedContentLocation: 'MCP specification index: Features, Security and Trust & Safety sections',
+    reason:
+      'The specification names Prompts as templated messages and workflows offered by servers.',
+    remediation: 'None. Record the mapping as curated rather than positional.',
+    origin: 'independently-curated',
+  },
+  'urn:maha:record:agentic-systems-mcp-tool-deny-by-default': {
+    verdict: 'supported',
+    sourceContentInspected: true,
+    inspectedContentLocation: 'MCP specification index: Features, Security and Trust & Safety sections',
+    reason:
+      'The specification states that hosts must obtain explicit user consent before invoking any tool, which is a deny-by-default posture.',
+    remediation: 'None. Record the mapping as curated rather than positional.',
+    origin: 'independently-curated',
+  },
+  'urn:maha:record:agentic-systems-mcp-mcp-session-lifecycle': {
+    verdict: 'partially-supported',
+    sourceContentInspected: true,
+    inspectedContentLocation: 'MCP specification index: Features, Security and Trust & Safety sections',
+    reason:
+      'The index names stateful connections and capability negotiation but defers lifecycle detail to a linked page that was not inspected.',
+    remediation: 'Inspect the lifecycle page and bind it, or narrow the record.',
+  },
+  'urn:maha:record:agentic-systems-mcp-tool-allowlisting': {
+    verdict: 'partially-supported',
+    sourceContentInspected: true,
+    inspectedContentLocation: 'MCP specification index: Features, Security and Trust & Safety sections',
+    reason:
+      'The index requires explicit per-tool authorization, which is the policy an allowlist implements, but specifies no allowlist mechanism.',
+    remediation: 'Bind a source that specifies an allowlist mechanism, or narrow the record to consent-gated invocation.',
+  },
+  'urn:maha:record:critical-supply-chains-critical-mineral-import-reliance': {
+    verdict: 'supported',
+    sourceContentInspected: true,
+    inspectedContentLocation: 'USGS Mineral Supply Chain Analysis page, criticality and disruption sections',
+    reason:
+      'The page describes net import reliance statistics reported per commodity, which is the record subject.',
+    remediation: 'None. Record the mapping as curated rather than positional.',
+    origin: 'independently-curated',
+  },
+  'urn:maha:record:critical-supply-chains-single-country-processing-concentration': {
+    verdict: 'partially-supported',
+    sourceContentInspected: true,
+    inspectedContentLocation: 'USGS Mineral Supply Chain Analysis page, criticality and disruption sections',
+    reason:
+      'The page references analysis of global and domestic trends and vulnerability scenarios but does not develop single-country processing concentration as a distinct measure.',
+    remediation: 'Bind a source that quantifies processing concentration, or narrow the record.',
+  },
+  'urn:maha:record:critical-supply-chains-export-control-exposure': {
+    verdict: 'mismatched',
+    sourceContentInspected: true,
+    inspectedContentLocation: 'USGS Mineral Supply Chain Analysis page, criticality and disruption sections',
+    mismatchBasis: 'inspected-content-different-subject',
+    reason:
+      'The page was read and does not treat export controls.',
+    remediation: 'Bind a source that analyses export-control exposure.',
+  },
+  'urn:maha:record:critical-supply-chains-material-substitution-boundaries': {
+    verdict: 'mismatched',
+    sourceContentInspected: true,
+    inspectedContentLocation: 'USGS Mineral Supply Chain Analysis page, criticality and disruption sections',
+    mismatchBasis: 'inspected-content-different-subject',
+    reason:
+      'The page was read and does not treat material substitution.',
+    remediation: 'Bind a source that analyses substitution feasibility and its limits.',
+  },
+  'urn:maha:record:critical-supply-chains-supply-chain-data-uncertainty': {
+    verdict: 'mismatched',
+    sourceContentInspected: true,
+    inspectedContentLocation: 'USGS Mineral Supply Chain Analysis page, criticality and disruption sections',
+    mismatchBasis: 'inspected-content-different-subject',
+    reason:
+      'The page was read and does not treat data uncertainty or its quantification.',
+    remediation: 'Bind a source that reports uncertainty in supply-chain data.',
+  },
+  'urn:maha:record:longevity-metabolism-autophagosome-abundance': {
+    verdict: 'inaccessible-source',
+    sourceContentInspected: false,
+    inspectedContentLocation: null,
+    reason:
+      'Retrieval was attempted for this batch through PubMed and Europe PMC; both returned navigation shells rather than the record, so the content could not be read. An inaccessible source is never treated as content-confirmed.',
+    remediation: 'Obtain the guidelines through a retrievable route, inspect the named assay-interpretation sections, then confirm or replace.',
+  },
+  'urn:maha:record:longevity-metabolism-autophagic-flux': {
+    verdict: 'inaccessible-source',
+    sourceContentInspected: false,
+    inspectedContentLocation: null,
+    reason:
+      'Retrieval was attempted for this batch through PubMed and Europe PMC; both returned navigation shells rather than the record, so the content could not be read. An inaccessible source is never treated as content-confirmed.',
+    remediation: 'Obtain the guidelines through a retrievable route, inspect the named assay-interpretation sections, then confirm or replace.',
+  },
+  'urn:maha:record:longevity-metabolism-lysosomal-degradation-blockade': {
+    verdict: 'inaccessible-source',
+    sourceContentInspected: false,
+    inspectedContentLocation: null,
+    reason:
+      'Retrieval was attempted for this batch through PubMed and Europe PMC; both returned navigation shells rather than the record, so the content could not be read. An inaccessible source is never treated as content-confirmed.',
+    remediation: 'Obtain the guidelines through a retrievable route, inspect the named assay-interpretation sections, then confirm or replace.',
+  },
+  'urn:maha:record:longevity-metabolism-lc3-turnover-assays': {
+    verdict: 'inaccessible-source',
+    sourceContentInspected: false,
+    inspectedContentLocation: null,
+    reason:
+      'Retrieval was attempted for this batch through PubMed and Europe PMC; both returned navigation shells rather than the record, so the content could not be read. An inaccessible source is never treated as content-confirmed.',
+    remediation: 'Obtain the guidelines through a retrievable route, inspect the named assay-interpretation sections, then confirm or replace.',
+  },
+  'urn:maha:record:longevity-metabolism-p62-sqstm1-turnover': {
+    verdict: 'inaccessible-source',
+    sourceContentInspected: false,
+    inspectedContentLocation: null,
+    reason:
+      'Retrieval was attempted for this batch through PubMed and Europe PMC; both returned navigation shells rather than the record, so the content could not be read. An inaccessible source is never treated as content-confirmed.',
+    remediation: 'Obtain the guidelines through a retrievable route, inspect the named assay-interpretation sections, then confirm or replace.',
+  },
+  'urn:maha:record:neurotechnology-bci-neuropixels-cmos-probe': {
+    verdict: 'inaccessible-source',
+    sourceContentInspected: false,
+    inspectedContentLocation: null,
+    reason:
+      'Retrieval was attempted for this batch. The publisher redirects to an authentication wall, which was not followed, so the content could not be read. An inaccessible source is never treated as content-confirmed.',
+    remediation: 'Obtain the article through a retrievable route, inspect it, then confirm or replace the mapping.',
+  },
+  'urn:maha:record:neurotechnology-bci-neuropixels-recording-sites': {
+    verdict: 'inaccessible-source',
+    sourceContentInspected: false,
+    inspectedContentLocation: null,
+    reason:
+      'Retrieval was attempted for this batch. The publisher redirects to an authentication wall, which was not followed, so the content could not be read. An inaccessible source is never treated as content-confirmed.',
+    remediation: 'Obtain the article through a retrievable route, inspect it, then confirm or replace the mapping.',
+  },
+  'urn:maha:record:neurotechnology-bci-neuropixels-channel-selection': {
+    verdict: 'inaccessible-source',
+    sourceContentInspected: false,
+    inspectedContentLocation: null,
+    reason:
+      'Retrieval was attempted for this batch. The publisher redirects to an authentication wall, which was not followed, so the content could not be read. An inaccessible source is never treated as content-confirmed.',
+    remediation: 'Obtain the article through a retrievable route, inspect it, then confirm or replace the mapping.',
+  },
+  'urn:maha:record:neurotechnology-bci-extracellular-spike-recording': {
+    verdict: 'inaccessible-source',
+    sourceContentInspected: false,
+    inspectedContentLocation: null,
+    reason:
+      'Retrieval was attempted for this batch. The publisher redirects to an authentication wall, which was not followed, so the content could not be read. An inaccessible source is never treated as content-confirmed.',
+    remediation: 'Obtain the article through a retrievable route, inspect it, then confirm or replace the mapping.',
+  },
+  'urn:maha:record:neurotechnology-bci-micro-ecog-arrays': {
+    verdict: 'inaccessible-source',
+    sourceContentInspected: false,
+    inspectedContentLocation: null,
+    reason:
+      'Retrieval was attempted for this batch. The publisher redirects to an authentication wall, which was not followed, so the content could not be read. An inaccessible source is never treated as content-confirmed.',
+    remediation: 'Obtain the article through a retrievable route, inspect it, then confirm or replace the mapping.',
+  },
+  'urn:maha:record:neurotechnology-bci-electrocorticography-spatial-resolution': {
+    verdict: 'inaccessible-source',
+    sourceContentInspected: false,
+    inspectedContentLocation: null,
+    reason:
+      'Retrieval was attempted for this batch. The publisher redirects to an authentication wall, which was not followed, so the content could not be read. An inaccessible source is never treated as content-confirmed.',
+    remediation: 'Obtain the article through a retrievable route, inspect it, then confirm or replace the mapping.',
+  },
+  'urn:maha:record:neurotechnology-bci-flexible-conformal-electrode-arrays': {
+    verdict: 'inaccessible-source',
+    sourceContentInspected: false,
+    inspectedContentLocation: null,
+    reason:
+      'Retrieval was attempted for this batch. The publisher redirects to an authentication wall, which was not followed, so the content could not be read. An inaccessible source is never treated as content-confirmed.',
+    remediation: 'Obtain the article through a retrievable route, inspect it, then confirm or replace the mapping.',
+  },
+  'urn:maha:record:neurotechnology-bci-electrode-tissue-interface': {
+    verdict: 'inaccessible-source',
+    sourceContentInspected: false,
+    inspectedContentLocation: null,
+    reason:
+      'Retrieval was attempted for this batch. The publisher redirects to an authentication wall, which was not followed, so the content could not be read. An inaccessible source is never treated as content-confirmed.',
+    remediation: 'Obtain the article through a retrievable route, inspect it, then confirm or replace the mapping.',
+  },
+  'urn:maha:record:neurotechnology-bci-impedance-and-noise': {
+    verdict: 'inaccessible-source',
+    sourceContentInspected: false,
+    inspectedContentLocation: null,
+    reason:
+      'Retrieval was attempted for this batch. The publisher redirects to an authentication wall, which was not followed, so the content could not be read. An inaccessible source is never treated as content-confirmed.',
+    remediation: 'Obtain the article through a retrievable route, inspect it, then confirm or replace the mapping.',
   },
 }
 
@@ -283,12 +709,21 @@ const JUDGEMENTS: Readonly<Record<string, InspectedJudgement>> = {
  * audit and whose declared title matched the served document. A publisher page
  * is an authoritative resolution for a living specification or machine
  * documentation; it is recorded as a distinct method, not as a Crossref record.
+ * This is internal editorial verification, not external review.
  */
 const PUBLISHER_VERIFIED: Readonly<Record<string, string>> = {
   'source-fusion-plasma-systems-iter-magnets':
     'Fetched https://www.iter.org/machine/magnets, which serves the declared ITER magnets documentation covering the toroidal field, poloidal field, central solenoid and correction coil systems.',
   'source-agentic-systems-mcp-mcp-tools':
     'Fetched the Model Context Protocol tools specification, which serves the declared sections on capabilities, tool listing, calls, data types, error handling and security considerations.',
+  'source-fusion-plasma-systems-iter-divertor':
+    'Fetched https://www.iter.org/fusion-energy/making-it-work, which serves the declared ITER page covering heat and particle exhaust and the divertor.',
+  'source-agentic-systems-mcp-mcp-core':
+    'Fetched the Model Context Protocol specification index, which serves the declared architecture, features and security sections.',
+  'source-mechanistic-interpretability-superposition':
+    'Fetched https://transformer-circuits.pub/2022/toy_model/index.html, which serves the declared Toy Models of Superposition article.',
+  'source-critical-supply-chains-supply-analysis':
+    'Fetched the USGS Mineral Supply Chain Analysis page, which serves the declared criticality and supply-analysis material.',
 }
 
 /** Records whose source URL was requested and could not be retrieved. */
@@ -373,12 +808,18 @@ function auditRecord(record: EpistemicRecord): RecordAlignmentAudit {
       metadataVerified: metadata.verified,
       metadataMethod: metadata.method,
       metadataNote: metadata.note,
-      sourceInspected: judgement?.sourceInspected ?? false,
-      inspectedLocation: judgement?.inspectedLocation ?? null,
+      sourceContentInspected: judgement?.sourceContentInspected ?? false,
+      inspectedContentLocation: judgement?.inspectedContentLocation ?? null,
       subjectAligned: verdict,
+      mismatchBasis: verdict === 'mismatched' ? (judgement?.mismatchBasis ?? null) : null,
+      chronologicalRiskIndicator: judgement?.chronologicalRiskIndicator ?? false,
       // A claim is only supported when the source was read AND is about the subject.
-      claimSupported: (judgement?.sourceInspected ?? false) && verdict === 'supported',
+      claimSupported: (judgement?.sourceContentInspected ?? false) && verdict === 'supported',
+      // Every frontier record cites exactly one source, so independence from
+      // other cited sources is not assertable either way.
+      sourceIndependentOfOtherCitedSources: record.sources.length > 1 ? false : null,
       independentlyReproduced: false,
+      externallyReviewed: false,
     },
     reason,
     transcriptionConfidence: metadata.verified ? 'high' : identifier ? 'medium' : 'low',
@@ -400,13 +841,27 @@ if (new Set(FRONTIER_ALIGNMENT_AUDIT.map((entry) => entry.recordId)).size !== FR
   throw new Error('Duplicate record in the alignment audit.')
 }
 for (const entry of FRONTIER_ALIGNMENT_AUDIT) {
-  if (entry.evidence.subjectAligned === 'supported' && !entry.evidence.sourceInspected) {
-    throw new Error(`${entry.recordId}: a supported verdict requires an inspected source.`)
+  if (entry.evidence.subjectAligned === 'supported' && !entry.evidence.sourceContentInspected) {
+    throw new Error(`${entry.recordId}: a supported verdict requires internal content inspection.`)
   }
-  if (entry.evidence.sourceInspected && !entry.evidence.inspectedLocation) {
+  // Chronology is a risk indicator. It may never be the thing that establishes
+  // a mismatch, so a mismatch must name one of the declared bases.
+  if (entry.evidence.subjectAligned === 'mismatched' && !entry.evidence.mismatchBasis) {
+    throw new Error(`${entry.recordId}: a mismatched verdict requires a declared mismatch basis.`)
+  }
+  if (entry.evidence.mismatchBasis && entry.evidence.subjectAligned !== 'mismatched') {
+    throw new Error(`${entry.recordId}: a mismatch basis was recorded without a mismatch verdict.`)
+  }
+  if (entry.evidence.mismatchBasis === 'inspected-content-different-subject' && !entry.evidence.sourceContentInspected) {
+    throw new Error(`${entry.recordId}: an inspected-content mismatch basis requires inspection.`)
+  }
+  if (entry.evidence.externallyReviewed !== false || entry.evidence.independentlyReproduced !== false) {
+    throw new Error(`${entry.recordId}: external review and reproduction are not established by this process.`)
+  }
+  if (entry.evidence.sourceContentInspected && !entry.evidence.inspectedContentLocation) {
     throw new Error(`${entry.recordId}: an inspected source must record where it was read.`)
   }
-  if (!entry.evidence.sourceInspected && entry.evidence.inspectedLocation) {
+  if (!entry.evidence.sourceContentInspected && entry.evidence.inspectedContentLocation) {
     throw new Error(`${entry.recordId}: an inspected location was recorded without inspection.`)
   }
   if (entry.evidence.claimSupported && entry.evidence.subjectAligned !== 'supported') {
@@ -471,7 +926,7 @@ export function alignmentBlockers(recordId: string): readonly string[] {
     default:
       break
   }
-  if (!audit.evidence.sourceInspected) blockers.push('source-not-inspected')
+  if (!audit.evidence.sourceContentInspected) blockers.push('source-not-inspected')
   if (!audit.evidence.metadataVerified) blockers.push('source-metadata-unverified')
   if (!audit.locator) blockers.push('source-locator-missing')
   return [...new Set(blockers)].sort()
