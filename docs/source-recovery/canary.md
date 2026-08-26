@@ -6,19 +6,19 @@ Contracts: 20 · affected records: 100
 
 | Priority | Source contract | Domain | Current state | Search requests |
 | ---: | --- | --- | --- | ---: |
-| 20 | `source-advanced-materials-vdw` | advanced-materials | inaccessible-source | 7 |
+| 20 | `source-advanced-materials-vdw` | advanced-materials | mismatched | 7 |
 | 19 | `source-agentic-systems-mcp-autogen` | agentic-systems-mcp | insufficient-evidence | 4 |
 | 18 | `source-biomolecular-engineering-toehold` | biomolecular-engineering | inaccessible-source | 7 |
 | 17 | `source-biomolecular-engineering-pace` | biomolecular-engineering | insufficient-evidence | 7 |
 | 16 | `source-critical-supply-chains-mcs-specialty` | critical-supply-chains | insufficient-evidence | 5 |
 | 15 | `source-critical-supply-chains-mcs-industrial` | critical-supply-chains | inaccessible-source | 5 |
-| 14 | `source-critical-supply-chains-pp1802` | critical-supply-chains | inaccessible-source | 5 |
+| 14 | `source-critical-supply-chains-pp1802` | critical-supply-chains | insufficient-evidence | 5 |
 | 13 | `source-critical-supply-chains-mcs-gallium-germanium` | critical-supply-chains | inaccessible-source | 5 |
 | 12 | `source-fusion-plasma-systems-nif-ignition` | fusion-plasma-systems | insufficient-evidence | 4 |
 | 11 | `source-longevity-metabolism-autophagy-guidelines` | longevity-metabolism | inaccessible-source | 7 |
 | 10 | `source-longevity-metabolism-hallmarks` | longevity-metabolism | insufficient-evidence | 7 |
-| 9 | `source-longevity-metabolism-mitophagy` | longevity-metabolism | inaccessible-source | 7 |
-| 8 | `source-mechanistic-interpretability-induction` | mechanistic-interpretability | insufficient-evidence | 4 |
+| 9 | `source-longevity-metabolism-mitophagy` | longevity-metabolism | insufficient-evidence, partially-supported, supported | 7 |
+| 8 | `source-mechanistic-interpretability-induction` | mechanistic-interpretability | mismatched, partially-supported, supported | 4 |
 | 7 | `source-mechanistic-interpretability-feature-visualization` | mechanistic-interpretability | insufficient-evidence | 7 |
 | 6 | `source-neurotechnology-bci-intracortical-bci` | neurotechnology-bci | insufficient-evidence | 7 |
 | 5 | `source-neurotechnology-bci-channelrhodopsin` | neurotechnology-bci | inaccessible-source | 7 |

@@ -86,6 +86,7 @@ export const INSPECTED_ARTIFACT_VERSIONS = [
   'version-of-record',
   'accepted-manuscript',
   'preprint',
+  'repository-copy',
   'government-report',
   'living-specification',
   'not-inspected',
@@ -105,6 +106,30 @@ export const REPLACEMENT_DECISIONS = [
   'replacement-insufficient-evidence',
 ] as const
 export type ReplacementDecision = (typeof REPLACEMENT_DECISIONS)[number]
+
+/** How deeply the artifact was actually read. */
+export const INSPECTION_DEPTHS = [
+  'abstract-only',
+  'specified-sections',
+  'full-text-search',
+  'full-document',
+  'not-inspected',
+] as const
+export type InspectionDepth = (typeof INSPECTION_DEPTHS)[number]
+
+/** What the recovery system reported for the record's source contract. */
+export const RECOVERY_DISPOSITIONS = [
+  'not-attempted',
+  'open-copy-located',
+  'manual-inspection-ready',
+  'metadata-only',
+  'version-relationship-unverified',
+  'authentication-wall',
+  'not-found',
+  'wrong-document',
+  'recovery-ready-retrieval-failed',
+] as const
+export type RecoveryDisposition = (typeof RECOVERY_DISPOSITIONS)[number]
 
 export const TRANSCRIPTION_CONFIDENCES = ['high', 'medium', 'low'] as const
 export type TranscriptionConfidence = (typeof TRANSCRIPTION_CONFIDENCES)[number]
@@ -138,6 +163,12 @@ export interface AlignmentEvidence {
   externallyReviewed: false
   /** Which artifact the editor actually read. */
   inspectedArtifactVersion: InspectedArtifactVersion
+  /** How deeply. An abstract supports only what the abstract states. */
+  inspectionDepth: InspectionDepth
+  /** Whether the recovered artifact was tied to the declared citation. */
+  versionRelationshipVerified: boolean
+  /** What source recovery reported, kept distinct from what was inspected. */
+  recoveryDisposition: RecoveryDisposition
 }
 
 export interface PriorMapping {
@@ -196,6 +227,9 @@ interface InspectedJudgement {
   mismatchBasis?: MismatchBasis
   chronologicalRiskIndicator?: boolean
   artifactVersion?: InspectedArtifactVersion
+  inspectionDepth?: InspectionDepth
+  versionRelationshipVerified?: boolean
+  recoveryDisposition?: RecoveryDisposition
   /**
    * A superseded judgement, preserved verbatim when a later batch re-inspected
    * the same source with better evidence. Append-only: the earlier finding is
@@ -822,46 +856,6 @@ const JUDGEMENTS: Readonly<Record<string, InspectedJudgement>> = {
       'The abstract directly reports extracellular recordings with sub-millisecond resolution and well-isolated spiking activity.',
     remediation: 'None. Record the mapping as curated rather than positional.', origin: 'independently-curated',
   },
-  'urn:maha:record:neurotechnology-bci-micro-ecog-arrays': {
-    verdict: 'inaccessible-source',
-    sourceContentInspected: false,
-    inspectedContentLocation: null,
-    reason:
-      'Retrieval was attempted for this batch. The publisher redirects to an authentication wall, which was not followed, so the content could not be read. An inaccessible source is never treated as content-confirmed.',
-    remediation: 'Obtain the article through a retrievable route, inspect it, then confirm or replace the mapping.',
-  },
-  'urn:maha:record:neurotechnology-bci-electrocorticography-spatial-resolution': {
-    verdict: 'inaccessible-source',
-    sourceContentInspected: false,
-    inspectedContentLocation: null,
-    reason:
-      'Retrieval was attempted for this batch. The publisher redirects to an authentication wall, which was not followed, so the content could not be read. An inaccessible source is never treated as content-confirmed.',
-    remediation: 'Obtain the article through a retrievable route, inspect it, then confirm or replace the mapping.',
-  },
-  'urn:maha:record:neurotechnology-bci-flexible-conformal-electrode-arrays': {
-    verdict: 'inaccessible-source',
-    sourceContentInspected: false,
-    inspectedContentLocation: null,
-    reason:
-      'Retrieval was attempted for this batch. The publisher redirects to an authentication wall, which was not followed, so the content could not be read. An inaccessible source is never treated as content-confirmed.',
-    remediation: 'Obtain the article through a retrievable route, inspect it, then confirm or replace the mapping.',
-  },
-  'urn:maha:record:neurotechnology-bci-electrode-tissue-interface': {
-    verdict: 'inaccessible-source',
-    sourceContentInspected: false,
-    inspectedContentLocation: null,
-    reason:
-      'Retrieval was attempted for this batch. The publisher redirects to an authentication wall, which was not followed, so the content could not be read. An inaccessible source is never treated as content-confirmed.',
-    remediation: 'Obtain the article through a retrievable route, inspect it, then confirm or replace the mapping.',
-  },
-  'urn:maha:record:neurotechnology-bci-impedance-and-noise': {
-    verdict: 'inaccessible-source',
-    sourceContentInspected: false,
-    inspectedContentLocation: null,
-    reason:
-      'Retrieval was attempted for this batch. The publisher redirects to an authentication wall, which was not followed, so the content could not be read. An inaccessible source is never treated as content-confirmed.',
-    remediation: 'Obtain the article through a retrievable route, inspect it, then confirm or replace the mapping.',
-  },
 
   /* ---- alignment batch 4, read 2026-08-26 ------------------------------
    * Written as explicit object keys, not an Object.fromEntries spread, so a
@@ -1428,96 +1422,6 @@ const JUDGEMENTS: Readonly<Record<string, InspectedJudgement>> = {
       'The authors note that they remain a very long way from fully reverse engineering larger models, which bounds the claim, but the article does not formally delineate interpretability boundaries.',
     remediation: 'Bind a source that states interpretability claim boundaries explicitly, or narrow the record to the stated limitation.',
   },
-  'urn:maha:record:advanced-materials-contact-resistance-in-2d-devices': {
-    verdict: 'inaccessible-source',
-    sourceContentInspected: false,
-    inspectedContentLocation: null,
-    artifactVersion: 'not-inspected',
-    reason:
-      'Retrieval was attempted for batch 5 via doi.org and the publisher article page. Nature redirects to an authentication wall, which was not followed, so the content could not be read.',
-    remediation: 'Obtain the artifact through a retrievable route, inspect it, then confirm or replace the mapping.',
-  },
-  'urn:maha:record:advanced-materials-dielectric-screening': {
-    verdict: 'inaccessible-source',
-    sourceContentInspected: false,
-    inspectedContentLocation: null,
-    artifactVersion: 'not-inspected',
-    reason:
-      'Retrieval was attempted for batch 5 via doi.org and the publisher article page. Nature redirects to an authentication wall, which was not followed, so the content could not be read.',
-    remediation: 'Obtain the artifact through a retrievable route, inspect it, then confirm or replace the mapping.',
-  },
-  'urn:maha:record:advanced-materials-wafer-scale-2d-growth': {
-    verdict: 'inaccessible-source',
-    sourceContentInspected: false,
-    inspectedContentLocation: null,
-    artifactVersion: 'not-inspected',
-    reason:
-      'Retrieval was attempted for batch 5 via doi.org and the publisher article page. Nature redirects to an authentication wall, which was not followed, so the content could not be read.',
-    remediation: 'Obtain the artifact through a retrievable route, inspect it, then confirm or replace the mapping.',
-  },
-  'urn:maha:record:advanced-materials-cvd-graphene-grain-boundaries': {
-    verdict: 'inaccessible-source',
-    sourceContentInspected: false,
-    inspectedContentLocation: null,
-    artifactVersion: 'not-inspected',
-    reason:
-      'Retrieval was attempted for batch 5 via doi.org and the publisher article page. Nature redirects to an authentication wall, which was not followed, so the content could not be read.',
-    remediation: 'Obtain the artifact through a retrievable route, inspect it, then confirm or replace the mapping.',
-  },
-  'urn:maha:record:advanced-materials-materials-metrology-transfer': {
-    verdict: 'inaccessible-source',
-    sourceContentInspected: false,
-    inspectedContentLocation: null,
-    artifactVersion: 'not-inspected',
-    reason:
-      'Retrieval was attempted for batch 5 via doi.org and the publisher article page. Nature redirects to an authentication wall, which was not followed, so the content could not be read.',
-    remediation: 'Obtain the artifact through a retrievable route, inspect it, then confirm or replace the mapping.',
-  },
-  'urn:maha:record:longevity-metabolism-mitophagy-flux': {
-    verdict: 'inaccessible-source',
-    sourceContentInspected: false,
-    inspectedContentLocation: null,
-    artifactVersion: 'not-inspected',
-    reason:
-      'Retrieval was attempted for batch 5 via doi.org and the publisher article page. Nature redirects to an authentication wall, which was not followed, so the content could not be read.',
-    remediation: 'Obtain the artifact through a retrievable route, inspect it, then confirm or replace the mapping.',
-  },
-  'urn:maha:record:longevity-metabolism-pink1-parkin-pathway': {
-    verdict: 'inaccessible-source',
-    sourceContentInspected: false,
-    inspectedContentLocation: null,
-    artifactVersion: 'not-inspected',
-    reason:
-      'Retrieval was attempted for batch 5 via doi.org and the publisher article page. Nature redirects to an authentication wall, which was not followed, so the content could not be read.',
-    remediation: 'Obtain the artifact through a retrievable route, inspect it, then confirm or replace the mapping.',
-  },
-  'urn:maha:record:longevity-metabolism-mitochondrial-membrane-potential': {
-    verdict: 'inaccessible-source',
-    sourceContentInspected: false,
-    inspectedContentLocation: null,
-    artifactVersion: 'not-inspected',
-    reason:
-      'Retrieval was attempted for batch 5 via doi.org and the publisher article page. Nature redirects to an authentication wall, which was not followed, so the content could not be read.',
-    remediation: 'Obtain the artifact through a retrievable route, inspect it, then confirm or replace the mapping.',
-  },
-  'urn:maha:record:longevity-metabolism-proton-leak-respiration': {
-    verdict: 'inaccessible-source',
-    sourceContentInspected: false,
-    inspectedContentLocation: null,
-    artifactVersion: 'not-inspected',
-    reason:
-      'Retrieval was attempted for batch 5 via doi.org and the publisher article page. Nature redirects to an authentication wall, which was not followed, so the content could not be read.',
-    remediation: 'Obtain the artifact through a retrievable route, inspect it, then confirm or replace the mapping.',
-  },
-  'urn:maha:record:longevity-metabolism-mitochondrial-uncoupling': {
-    verdict: 'inaccessible-source',
-    sourceContentInspected: false,
-    inspectedContentLocation: null,
-    artifactVersion: 'not-inspected',
-    reason:
-      'Retrieval was attempted for batch 5 via doi.org and the publisher article page. Nature redirects to an authentication wall, which was not followed, so the content could not be read.',
-    remediation: 'Obtain the artifact through a retrievable route, inspect it, then confirm or replace the mapping.',
-  },
   'urn:maha:record:neurotechnology-bci-chronic-signal-stability': {
     verdict: 'inaccessible-source',
     sourceContentInspected: false,
@@ -1653,6 +1557,787 @@ const JUDGEMENTS: Readonly<Record<string, InspectedJudgement>> = {
       'Retrieval was attempted for batch 5 against the full Mineral Commodity Summaries PDF and the commodity chapter, both returning HTTP 403, after earlier batches failed on the same host. Every critical-supply-chains source is a USGS document on this host.',
     remediation: 'Obtain the artifact through a retrievable route, inspect it, then confirm or replace the mapping.',
   },
+
+  /* ---- alignment batch 6, read 2026-08-26 ------------------------------
+   * Recovery-driven. The fifteen re-inspections are not cohort members: an
+   * earlier batch already judged them inaccessible, and source recovery has
+   * since produced an artifact worth opening. Each nests its prior finding.
+   */
+  'urn:maha:record:advanced-materials-contact-resistance-in-2d-devices': {
+    verdict: 'mismatched',
+    sourceContentInspected: true,
+    inspectedContentLocation: 'arXiv:1307.6718 full text (preprint of Nature 499, 419-425), extracted to text (7,157 words) and searched in full',
+    artifactVersion: 'preprint',
+    inspectionDepth: 'full-text-search',
+    versionRelationshipVerified: true,
+    recoveryDisposition: 'manual-inspection-ready',
+    mismatchBasis: 'inspected-content-different-subject',
+    reason:
+      'Recovery located an open arXiv copy whose identity and version relationship were verified independently, and the full text was then extracted and searched. "contact resistance" appear zero times, while "graphene" appears 131 times and "heterostructure" 46, so the extraction is sound and the absence is real. The review does not treat contact resistance in two-dimensional devices. Each of the five records attached to this one review was judged separately and all five failed, which is a whole-block positional defect.',
+    remediation: 'Bind a source that reports the named property.',
+    priorJudgement: {
+      batchId: 'batch-5',
+      verdict: 'inaccessible-source',
+      inspectedContentLocation: null,
+      reason:
+        'Retrieval was attempted for batch 5 via doi.org and the publisher article page. Nature redirects to an authentication wall, which was not followed, so the content could not be read.',
+    },
+  },
+  'urn:maha:record:advanced-materials-cvd-graphene-grain-boundaries': {
+    verdict: 'mismatched',
+    sourceContentInspected: true,
+    inspectedContentLocation: 'arXiv:1307.6718 full text (preprint of Nature 499, 419-425), extracted to text (7,157 words) and searched in full',
+    artifactVersion: 'preprint',
+    inspectionDepth: 'full-text-search',
+    versionRelationshipVerified: true,
+    recoveryDisposition: 'manual-inspection-ready',
+    mismatchBasis: 'inspected-content-different-subject',
+    reason:
+      'Recovery located an open arXiv copy whose identity and version relationship were verified independently, and the full text was then extracted and searched. "CVD", "chemical vapour" and "grain boundar" appear zero times, while "graphene" appears 131 times and "heterostructure" 46, so the extraction is sound and the absence is real. The review does not treat CVD graphene grain boundaries. Each of the five records attached to this one review was judged separately and all five failed, which is a whole-block positional defect.',
+    remediation: 'Bind a source that reports the named property.',
+    priorJudgement: {
+      batchId: 'batch-5',
+      verdict: 'inaccessible-source',
+      inspectedContentLocation: null,
+      reason:
+        'Retrieval was attempted for batch 5 via doi.org and the publisher article page. Nature redirects to an authentication wall, which was not followed, so the content could not be read.',
+    },
+  },
+  'urn:maha:record:advanced-materials-dielectric-screening': {
+    verdict: 'mismatched',
+    sourceContentInspected: true,
+    inspectedContentLocation: 'arXiv:1307.6718 full text (preprint of Nature 499, 419-425), extracted to text (7,157 words) and searched in full',
+    artifactVersion: 'preprint',
+    inspectionDepth: 'full-text-search',
+    versionRelationshipVerified: true,
+    recoveryDisposition: 'manual-inspection-ready',
+    mismatchBasis: 'inspected-content-different-subject',
+    reason:
+      'Recovery located an open arXiv copy whose identity and version relationship were verified independently, and the full text was then extracted and searched. "dielectric screening", and even bare "screening", appear zero times, while "graphene" appears 131 times and "heterostructure" 46, so the extraction is sound and the absence is real. The review does not treat dielectric screening. Each of the five records attached to this one review was judged separately and all five failed, which is a whole-block positional defect.',
+    remediation: 'Bind a source that reports the named property.',
+    priorJudgement: {
+      batchId: 'batch-5',
+      verdict: 'inaccessible-source',
+      inspectedContentLocation: null,
+      reason:
+        'Retrieval was attempted for batch 5 via doi.org and the publisher article page. Nature redirects to an authentication wall, which was not followed, so the content could not be read.',
+    },
+  },
+  'urn:maha:record:advanced-materials-materials-metrology-transfer': {
+    verdict: 'mismatched',
+    sourceContentInspected: true,
+    inspectedContentLocation: 'arXiv:1307.6718 full text (preprint of Nature 499, 419-425), extracted to text (7,157 words) and searched in full',
+    artifactVersion: 'preprint',
+    inspectionDepth: 'full-text-search',
+    versionRelationshipVerified: true,
+    recoveryDisposition: 'manual-inspection-ready',
+    mismatchBasis: 'inspected-content-different-subject',
+    reason:
+      'Recovery located an open arXiv copy whose identity and version relationship were verified independently, and the full text was then extracted and searched. "metrology" appear zero times, while "graphene" appears 131 times and "heterostructure" 46, so the extraction is sound and the absence is real. The review does not treat materials metrology transfer. Each of the five records attached to this one review was judged separately and all five failed, which is a whole-block positional defect.',
+    remediation: 'Bind a source that reports the named property.',
+    priorJudgement: {
+      batchId: 'batch-5',
+      verdict: 'inaccessible-source',
+      inspectedContentLocation: null,
+      reason:
+        'Retrieval was attempted for batch 5 via doi.org and the publisher article page. Nature redirects to an authentication wall, which was not followed, so the content could not be read.',
+    },
+  },
+  'urn:maha:record:advanced-materials-wafer-scale-2d-growth': {
+    verdict: 'mismatched',
+    sourceContentInspected: true,
+    inspectedContentLocation: 'arXiv:1307.6718 full text (preprint of Nature 499, 419-425), extracted to text (7,157 words) and searched in full',
+    artifactVersion: 'preprint',
+    inspectionDepth: 'full-text-search',
+    versionRelationshipVerified: true,
+    recoveryDisposition: 'manual-inspection-ready',
+    mismatchBasis: 'inspected-content-different-subject',
+    reason:
+      'Recovery located an open arXiv copy whose identity and version relationship were verified independently, and the full text was then extracted and searched. "wafer-scale" and "wafer scale" appear zero times, while "graphene" appears 131 times and "heterostructure" 46, so the extraction is sound and the absence is real. The review does not treat wafer-scale two-dimensional growth. Each of the five records attached to this one review was judged separately and all five failed, which is a whole-block positional defect.',
+    remediation: 'Bind a source that reports the named property.',
+    priorJudgement: {
+      batchId: 'batch-5',
+      verdict: 'inaccessible-source',
+      inspectedContentLocation: null,
+      reason:
+        'Retrieval was attempted for batch 5 via doi.org and the publisher article page. Nature redirects to an authentication wall, which was not followed, so the content could not be read.',
+    },
+  },
+  'urn:maha:record:longevity-metabolism-pink1-parkin-pathway': {
+    verdict: 'supported',
+    sourceContentInspected: true,
+    inspectedContentLocation: 'PMC4780047 landing page for the NIH author manuscript of Nat Rev Mol Cell Biol 12, 9-14; abstract and metadata only',
+    artifactVersion: 'accepted-manuscript',
+    inspectionDepth: 'abstract-only',
+    versionRelationshipVerified: true,
+    recoveryDisposition: 'manual-inspection-ready',
+    reason:
+      'Recovery located the NIH author manuscript in PMC and identity was confirmed independently. The landing page states the PINK1 and Parkin mechanism that is this record subject. Inspection was abstract and metadata only: PMC returned the landing page rather than the full text, so nothing beyond the abstract is established.',
+    remediation: 'Confirm against the full text before relying on anything beyond the abstract.',
+    origin: 'independently-curated',
+    priorJudgement: {
+      batchId: 'batch-5',
+      verdict: 'inaccessible-source',
+      inspectedContentLocation: null,
+      reason:
+        'Retrieval was attempted for batch 5 via doi.org and the publisher article page. Nature redirects to an authentication wall, which was not followed, so the content could not be read.',
+    },
+  },
+  'urn:maha:record:longevity-metabolism-mitophagy-flux': {
+    verdict: 'partially-supported',
+    sourceContentInspected: true,
+    inspectedContentLocation: 'PMC4780047 landing page for the NIH author manuscript of Nat Rev Mol Cell Biol 12, 9-14; abstract and metadata only',
+    artifactVersion: 'accepted-manuscript',
+    inspectionDepth: 'abstract-only',
+    versionRelationshipVerified: true,
+    recoveryDisposition: 'manual-inspection-ready',
+    reason:
+      'The abstract treats mitophagy mechanisms, but "flux" appears zero times at the level inspected, so the flux measurement this record names is not established.',
+    remediation: 'Read the full text for flux measurement, or narrow the record to mechanism.',
+    priorJudgement: {
+      batchId: 'batch-5',
+      verdict: 'inaccessible-source',
+      inspectedContentLocation: null,
+      reason:
+        'Retrieval was attempted for batch 5 via doi.org and the publisher article page. Nature redirects to an authentication wall, which was not followed, so the content could not be read.',
+    },
+  },
+  'urn:maha:record:longevity-metabolism-mitochondrial-membrane-potential': {
+    verdict: 'partially-supported',
+    sourceContentInspected: true,
+    inspectedContentLocation: 'PMC4780047 landing page for the NIH author manuscript of Nat Rev Mol Cell Biol 12, 9-14; abstract and metadata only',
+    artifactVersion: 'accepted-manuscript',
+    inspectionDepth: 'abstract-only',
+    versionRelationshipVerified: true,
+    recoveryDisposition: 'manual-inspection-ready',
+    reason:
+      'Membrane potential appears once at abstract level, as the depolarisation that drives the pathway rather than as a characterised measurement of its own.',
+    remediation: 'Read the full text before confirming.',
+    priorJudgement: {
+      batchId: 'batch-5',
+      verdict: 'inaccessible-source',
+      inspectedContentLocation: null,
+      reason:
+        'Retrieval was attempted for batch 5 via doi.org and the publisher article page. Nature redirects to an authentication wall, which was not followed, so the content could not be read.',
+    },
+  },
+  'urn:maha:record:longevity-metabolism-mitochondrial-uncoupling': {
+    verdict: 'partially-supported',
+    sourceContentInspected: true,
+    inspectedContentLocation: 'PMC4780047 landing page for the NIH author manuscript of Nat Rev Mol Cell Biol 12, 9-14; abstract and metadata only',
+    artifactVersion: 'accepted-manuscript',
+    inspectionDepth: 'abstract-only',
+    versionRelationshipVerified: true,
+    recoveryDisposition: 'manual-inspection-ready',
+    reason:
+      'Uncoupling appears once at abstract level, apparently as an experimental tool for depolarisation rather than as the record subject.',
+    remediation: 'Read the full text before confirming, or narrow the record.',
+    priorJudgement: {
+      batchId: 'batch-5',
+      verdict: 'inaccessible-source',
+      inspectedContentLocation: null,
+      reason:
+        'Retrieval was attempted for batch 5 via doi.org and the publisher article page. Nature redirects to an authentication wall, which was not followed, so the content could not be read.',
+    },
+  },
+  'urn:maha:record:longevity-metabolism-proton-leak-respiration': {
+    verdict: 'insufficient-evidence',
+    sourceContentInspected: true,
+    inspectedContentLocation: 'PMC4780047 landing page for the NIH author manuscript of Nat Rev Mol Cell Biol 12, 9-14; abstract and metadata only',
+    artifactVersion: 'accepted-manuscript',
+    inspectionDepth: 'abstract-only',
+    versionRelationshipVerified: true,
+    recoveryDisposition: 'manual-inspection-ready',
+    reason:
+      '"proton leak" appears zero times at the level inspected. Only the landing page was read, so absence there does not establish that the full text omits it.',
+    remediation: 'Read the full text, then confirm or replace.',
+    priorJudgement: {
+      batchId: 'batch-5',
+      verdict: 'inaccessible-source',
+      inspectedContentLocation: null,
+      reason:
+        'Retrieval was attempted for batch 5 via doi.org and the publisher article page. Nature redirects to an authentication wall, which was not followed, so the content could not be read.',
+    },
+  },
+  'urn:maha:record:neurotechnology-bci-electrocorticography-spatial-resolution': {
+    verdict: 'inaccessible-source',
+    sourceContentInspected: false,
+    inspectedContentLocation: null,
+    artifactVersion: 'not-inspected',
+    inspectionDepth: 'not-inspected',
+    versionRelationshipVerified: true,
+    recoveryDisposition: 'recovery-ready-retrieval-failed',
+    reason:
+      'Recovery reached manual-inspection-ready with a verified OSTI candidate, but the OSTI host refused every connection from this environment, so the artifact was never opened. Recovery-ready is not inspected, and the record stays inaccessible.',
+    remediation: 'Retry the OSTI copy from a network that can reach it, then inspect and judge.',
+    priorJudgement: {
+      batchId: 'batch-3',
+      verdict: 'inaccessible-source',
+      inspectedContentLocation: null,
+      reason:
+        'Retrieval was attempted and the publisher redirected to an authentication wall, so the content could not be read.',
+    },
+  },
+  'urn:maha:record:neurotechnology-bci-electrode-tissue-interface': {
+    verdict: 'inaccessible-source',
+    sourceContentInspected: false,
+    inspectedContentLocation: null,
+    artifactVersion: 'not-inspected',
+    inspectionDepth: 'not-inspected',
+    versionRelationshipVerified: true,
+    recoveryDisposition: 'recovery-ready-retrieval-failed',
+    reason:
+      'Recovery reached manual-inspection-ready with a verified OSTI candidate, but the OSTI host refused every connection from this environment, so the artifact was never opened. Recovery-ready is not inspected, and the record stays inaccessible.',
+    remediation: 'Retry the OSTI copy from a network that can reach it, then inspect and judge.',
+    priorJudgement: {
+      batchId: 'batch-3',
+      verdict: 'inaccessible-source',
+      inspectedContentLocation: null,
+      reason:
+        'Retrieval was attempted and the publisher redirected to an authentication wall, so the content could not be read.',
+    },
+  },
+  'urn:maha:record:neurotechnology-bci-flexible-conformal-electrode-arrays': {
+    verdict: 'inaccessible-source',
+    sourceContentInspected: false,
+    inspectedContentLocation: null,
+    artifactVersion: 'not-inspected',
+    inspectionDepth: 'not-inspected',
+    versionRelationshipVerified: true,
+    recoveryDisposition: 'recovery-ready-retrieval-failed',
+    reason:
+      'Recovery reached manual-inspection-ready with a verified OSTI candidate, but the OSTI host refused every connection from this environment, so the artifact was never opened. Recovery-ready is not inspected, and the record stays inaccessible.',
+    remediation: 'Retry the OSTI copy from a network that can reach it, then inspect and judge.',
+    priorJudgement: {
+      batchId: 'batch-3',
+      verdict: 'inaccessible-source',
+      inspectedContentLocation: null,
+      reason:
+        'Retrieval was attempted and the publisher redirected to an authentication wall, so the content could not be read.',
+    },
+  },
+  'urn:maha:record:neurotechnology-bci-impedance-and-noise': {
+    verdict: 'inaccessible-source',
+    sourceContentInspected: false,
+    inspectedContentLocation: null,
+    artifactVersion: 'not-inspected',
+    inspectionDepth: 'not-inspected',
+    versionRelationshipVerified: true,
+    recoveryDisposition: 'recovery-ready-retrieval-failed',
+    reason:
+      'Recovery reached manual-inspection-ready with a verified OSTI candidate, but the OSTI host refused every connection from this environment, so the artifact was never opened. Recovery-ready is not inspected, and the record stays inaccessible.',
+    remediation: 'Retry the OSTI copy from a network that can reach it, then inspect and judge.',
+    priorJudgement: {
+      batchId: 'batch-3',
+      verdict: 'inaccessible-source',
+      inspectedContentLocation: null,
+      reason:
+        'Retrieval was attempted and the publisher redirected to an authentication wall, so the content could not be read.',
+    },
+  },
+  'urn:maha:record:neurotechnology-bci-micro-ecog-arrays': {
+    verdict: 'inaccessible-source',
+    sourceContentInspected: false,
+    inspectedContentLocation: null,
+    artifactVersion: 'not-inspected',
+    inspectionDepth: 'not-inspected',
+    versionRelationshipVerified: true,
+    recoveryDisposition: 'recovery-ready-retrieval-failed',
+    reason:
+      'Recovery reached manual-inspection-ready with a verified OSTI candidate, but the OSTI host refused every connection from this environment, so the artifact was never opened. Recovery-ready is not inspected, and the record stays inaccessible.',
+    remediation: 'Retry the OSTI copy from a network that can reach it, then inspect and judge.',
+    priorJudgement: {
+      batchId: 'batch-3',
+      verdict: 'inaccessible-source',
+      inspectedContentLocation: null,
+      reason:
+        'Retrieval was attempted and the publisher redirected to an authentication wall, so the content could not be read.',
+    },
+  },
+  'urn:maha:record:mechanistic-interpretability-induction-head-circuits': {
+    verdict: 'supported',
+    sourceContentInspected: true,
+    inspectedContentLocation: 'arXiv:2209.11895 full text (repository copy of the Transformer Circuits Thread article), extracted to text (21,415 words) and searched in full',
+    artifactVersion: 'repository-copy',
+    inspectionDepth: 'full-text-search',
+    versionRelationshipVerified: true,
+    recoveryDisposition: 'manual-inspection-ready',
+    reason:
+      'Full text searched: "induction head" appears 204 times and the article is the study of those circuits.',
+    remediation: 'None. Record the mapping as curated rather than positional.',
+    origin: 'independently-curated',
+  },
+  'urn:maha:record:mechanistic-interpretability-in-context-learning-circuits': {
+    verdict: 'supported',
+    sourceContentInspected: true,
+    inspectedContentLocation: 'arXiv:2209.11895 full text (repository copy of the Transformer Circuits Thread article), extracted to text (21,415 words) and searched in full',
+    artifactVersion: 'repository-copy',
+    inspectionDepth: 'full-text-search',
+    versionRelationshipVerified: true,
+    recoveryDisposition: 'manual-inspection-ready',
+    reason:
+      'Full text searched: "in-context learning" appears 132 times and is one of the two subjects named in the title.',
+    remediation: 'None. Record the mapping as curated rather than positional.',
+    origin: 'independently-curated',
+  },
+  'urn:maha:record:mechanistic-interpretability-attention-pattern-evidence': {
+    verdict: 'supported',
+    sourceContentInspected: true,
+    inspectedContentLocation: 'arXiv:2209.11895 full text (repository copy of the Transformer Circuits Thread article), extracted to text (21,415 words) and searched in full',
+    artifactVersion: 'repository-copy',
+    inspectionDepth: 'full-text-search',
+    versionRelationshipVerified: true,
+    recoveryDisposition: 'manual-inspection-ready',
+    reason:
+      'Full text searched: "attention pattern" appears 25 times as the evidence used to identify the heads.',
+    remediation: 'None. Record the mapping as curated rather than positional.',
+    origin: 'independently-curated',
+  },
+  'urn:maha:record:mechanistic-interpretability-previous-token-heads': {
+    verdict: 'partially-supported',
+    sourceContentInspected: true,
+    inspectedContentLocation: 'arXiv:2209.11895 full text (repository copy of the Transformer Circuits Thread article), extracted to text (21,415 words) and searched in full',
+    artifactVersion: 'repository-copy',
+    inspectionDepth: 'full-text-search',
+    versionRelationshipVerified: true,
+    recoveryDisposition: 'manual-inspection-ready',
+    reason:
+      'Full text searched: "previous token head" appears once. The concept is present but is not developed enough to carry a record on its own.',
+    remediation: 'Bind a source that treats previous-token heads directly, or narrow the record.',
+  },
+  'urn:maha:record:mechanistic-interpretability-io-identification-circuit': {
+    verdict: 'mismatched',
+    sourceContentInspected: true,
+    inspectedContentLocation: 'arXiv:2209.11895 full text (repository copy of the Transformer Circuits Thread article), extracted to text (21,415 words) and searched in full',
+    artifactVersion: 'repository-copy',
+    inspectionDepth: 'full-text-search',
+    versionRelationshipVerified: true,
+    recoveryDisposition: 'manual-inspection-ready',
+    mismatchBasis: 'inspected-content-different-subject',
+    reason:
+      'Full text searched: "indirect object" and "IOI" appear zero times. Indirect-object identification is a different study, so this article cannot support the record.',
+    remediation: 'Bind the indirect-object identification paper.',
+  },
+  'urn:maha:record:advanced-materials-color-centers-in-diamond': {
+    verdict: 'insufficient-evidence',
+    sourceContentInspected: false,
+    inspectedContentLocation: null,
+    artifactVersion: 'not-inspected',
+    inspectionDepth: 'not-inspected',
+    versionRelationshipVerified: false,
+    recoveryDisposition: 'not-attempted',
+    reason:
+      'This source contract was not among the twenty in the recovery canary, so no open copy was sought and the content was not read. Metadata resolution is not content inspection, so nothing is established about whether this source supports the record subject.',
+    remediation: 'Obtain an inspectable copy, read it against this record subject, then confirm or replace.',
+  },
+  'urn:maha:record:advanced-materials-diamond-thermal-conductivity': {
+    verdict: 'insufficient-evidence',
+    sourceContentInspected: false,
+    inspectedContentLocation: null,
+    artifactVersion: 'not-inspected',
+    inspectionDepth: 'not-inspected',
+    versionRelationshipVerified: false,
+    recoveryDisposition: 'not-attempted',
+    reason:
+      'This source contract was not among the twenty in the recovery canary, so no open copy was sought and the content was not read. Metadata resolution is not content inspection, so nothing is established about whether this source supports the record subject.',
+    remediation: 'Obtain an inspectable copy, read it against this record subject, then confirm or replace.',
+  },
+  'urn:maha:record:advanced-materials-diamond-wafer-substrates': {
+    verdict: 'insufficient-evidence',
+    sourceContentInspected: false,
+    inspectedContentLocation: null,
+    artifactVersion: 'not-inspected',
+    inspectionDepth: 'not-inspected',
+    versionRelationshipVerified: false,
+    recoveryDisposition: 'not-attempted',
+    reason:
+      'This source contract was not among the twenty in the recovery canary, so no open copy was sought and the content was not read. Metadata resolution is not content inspection, so nothing is established about whether this source supports the record subject.',
+    remediation: 'Obtain an inspectable copy, read it against this record subject, then confirm or replace.',
+  },
+  'urn:maha:record:advanced-materials-gallium-nitride-epitaxy': {
+    verdict: 'insufficient-evidence',
+    sourceContentInspected: false,
+    inspectedContentLocation: null,
+    artifactVersion: 'not-inspected',
+    inspectionDepth: 'not-inspected',
+    versionRelationshipVerified: false,
+    recoveryDisposition: 'not-attempted',
+    reason:
+      'This source contract was not among the twenty in the recovery canary, so no open copy was sought and the content was not read. Metadata resolution is not content inspection, so nothing is established about whether this source supports the record subject.',
+    remediation: 'Obtain an inspectable copy, read it against this record subject, then confirm or replace.',
+  },
+  'urn:maha:record:advanced-materials-sic-wide-bandgap-substrates': {
+    verdict: 'insufficient-evidence',
+    sourceContentInspected: false,
+    inspectedContentLocation: null,
+    artifactVersion: 'not-inspected',
+    inspectionDepth: 'not-inspected',
+    versionRelationshipVerified: false,
+    recoveryDisposition: 'not-attempted',
+    reason:
+      'This source contract was not among the twenty in the recovery canary, so no open copy was sought and the content was not read. Metadata resolution is not content inspection, so nothing is established about whether this source supports the record subject.',
+    remediation: 'Obtain an inspectable copy, read it against this record subject, then confirm or replace.',
+  },
+  'urn:maha:record:agentic-systems-mcp-agent-memory-boundaries': {
+    verdict: 'insufficient-evidence',
+    sourceContentInspected: false,
+    inspectedContentLocation: null,
+    artifactVersion: 'not-inspected',
+    inspectionDepth: 'not-inspected',
+    versionRelationshipVerified: false,
+    recoveryDisposition: 'version-relationship-unverified',
+    reason:
+      'Recovery resolved metadata but could not tie any located artifact to the declared citation, so no copy was accepted and the content was not read. Metadata resolution is not content inspection, so nothing is established about whether this source supports the record subject.',
+    remediation: 'Obtain an inspectable copy, read it against this record subject, then confirm or replace.',
+  },
+  'urn:maha:record:agentic-systems-mcp-agentic-evaluation-protocols': {
+    verdict: 'insufficient-evidence',
+    sourceContentInspected: false,
+    inspectedContentLocation: null,
+    artifactVersion: 'not-inspected',
+    inspectionDepth: 'not-inspected',
+    versionRelationshipVerified: false,
+    recoveryDisposition: 'version-relationship-unverified',
+    reason:
+      'Recovery resolved metadata but could not tie any located artifact to the declared citation, so no copy was accepted and the content was not read. Metadata resolution is not content inspection, so nothing is established about whether this source supports the record subject.',
+    remediation: 'Obtain an inspectable copy, read it against this record subject, then confirm or replace.',
+  },
+  'urn:maha:record:agentic-systems-mcp-game-theoretic-incentive-misalignment': {
+    verdict: 'insufficient-evidence',
+    sourceContentInspected: false,
+    inspectedContentLocation: null,
+    artifactVersion: 'not-inspected',
+    inspectionDepth: 'not-inspected',
+    versionRelationshipVerified: false,
+    recoveryDisposition: 'version-relationship-unverified',
+    reason:
+      'Recovery resolved metadata but could not tie any located artifact to the declared citation, so no copy was accepted and the content was not read. Metadata resolution is not content inspection, so nothing is established about whether this source supports the record subject.',
+    remediation: 'Obtain an inspectable copy, read it against this record subject, then confirm or replace.',
+  },
+  'urn:maha:record:agentic-systems-mcp-prompt-injection-through-tools': {
+    verdict: 'insufficient-evidence',
+    sourceContentInspected: false,
+    inspectedContentLocation: null,
+    artifactVersion: 'not-inspected',
+    inspectionDepth: 'not-inspected',
+    versionRelationshipVerified: false,
+    recoveryDisposition: 'version-relationship-unverified',
+    reason:
+      'Recovery resolved metadata but could not tie any located artifact to the declared citation, so no copy was accepted and the content was not read. Metadata resolution is not content inspection, so nothing is established about whether this source supports the record subject.',
+    remediation: 'Obtain an inspectable copy, read it against this record subject, then confirm or replace.',
+  },
+  'urn:maha:record:agentic-systems-mcp-tool-output-trust-boundaries': {
+    verdict: 'insufficient-evidence',
+    sourceContentInspected: false,
+    inspectedContentLocation: null,
+    artifactVersion: 'not-inspected',
+    inspectionDepth: 'not-inspected',
+    versionRelationshipVerified: false,
+    recoveryDisposition: 'version-relationship-unverified',
+    reason:
+      'Recovery resolved metadata but could not tie any located artifact to the declared citation, so no copy was accepted and the content was not read. Metadata resolution is not content inspection, so nothing is established about whether this source supports the record subject.',
+    remediation: 'Obtain an inspectable copy, read it against this record subject, then confirm or replace.',
+  },
+  'urn:maha:record:biomolecular-engineering-directed-enzyme-evolution': {
+    verdict: 'insufficient-evidence',
+    sourceContentInspected: false,
+    inspectedContentLocation: null,
+    artifactVersion: 'not-inspected',
+    inspectionDepth: 'not-inspected',
+    versionRelationshipVerified: false,
+    recoveryDisposition: 'version-relationship-unverified',
+    reason:
+      'Recovery resolved metadata but could not tie any located artifact to the declared citation, so no copy was accepted and the content was not read. Metadata resolution is not content inspection, so nothing is established about whether this source supports the record subject.',
+    remediation: 'Obtain an inspectable copy, read it against this record subject, then confirm or replace.',
+  },
+  'urn:maha:record:biomolecular-engineering-fitness-landscape-accessibility': {
+    verdict: 'insufficient-evidence',
+    sourceContentInspected: false,
+    inspectedContentLocation: null,
+    artifactVersion: 'not-inspected',
+    inspectionDepth: 'not-inspected',
+    versionRelationshipVerified: false,
+    recoveryDisposition: 'version-relationship-unverified',
+    reason:
+      'Recovery resolved metadata but could not tie any located artifact to the declared citation, so no copy was accepted and the content was not read. Metadata resolution is not content inspection, so nothing is established about whether this source supports the record subject.',
+    remediation: 'Obtain an inspectable copy, read it against this record subject, then confirm or replace.',
+  },
+  'urn:maha:record:biomolecular-engineering-mutation-library-generation': {
+    verdict: 'insufficient-evidence',
+    sourceContentInspected: false,
+    inspectedContentLocation: null,
+    artifactVersion: 'not-inspected',
+    inspectionDepth: 'not-inspected',
+    versionRelationshipVerified: false,
+    recoveryDisposition: 'version-relationship-unverified',
+    reason:
+      'Recovery resolved metadata but could not tie any located artifact to the declared citation, so no copy was accepted and the content was not read. Metadata resolution is not content inspection, so nothing is established about whether this source supports the record subject.',
+    remediation: 'Obtain an inspectable copy, read it against this record subject, then confirm or replace.',
+  },
+  'urn:maha:record:biomolecular-engineering-phage-assisted-continuous-evolution': {
+    verdict: 'insufficient-evidence',
+    sourceContentInspected: false,
+    inspectedContentLocation: null,
+    artifactVersion: 'not-inspected',
+    inspectionDepth: 'not-inspected',
+    versionRelationshipVerified: false,
+    recoveryDisposition: 'version-relationship-unverified',
+    reason:
+      'Recovery resolved metadata but could not tie any located artifact to the declared citation, so no copy was accepted and the content was not read. Metadata resolution is not content inspection, so nothing is established about whether this source supports the record subject.',
+    remediation: 'Obtain an inspectable copy, read it against this record subject, then confirm or replace.',
+  },
+  'urn:maha:record:biomolecular-engineering-selection-pressure-coupling': {
+    verdict: 'insufficient-evidence',
+    sourceContentInspected: false,
+    inspectedContentLocation: null,
+    artifactVersion: 'not-inspected',
+    inspectionDepth: 'not-inspected',
+    versionRelationshipVerified: false,
+    recoveryDisposition: 'version-relationship-unverified',
+    reason:
+      'Recovery resolved metadata but could not tie any located artifact to the declared citation, so no copy was accepted and the content was not read. Metadata resolution is not content inspection, so nothing is established about whether this source supports the record subject.',
+    remediation: 'Obtain an inspectable copy, read it against this record subject, then confirm or replace.',
+  },
+  'urn:maha:record:critical-supply-chains-euv-photoresist-precursors': {
+    verdict: 'insufficient-evidence',
+    sourceContentInspected: false,
+    inspectedContentLocation: null,
+    artifactVersion: 'not-inspected',
+    inspectionDepth: 'not-inspected',
+    versionRelationshipVerified: false,
+    recoveryDisposition: 'version-relationship-unverified',
+    reason:
+      'Recovery resolved metadata but could not tie any located artifact to the declared citation. USGS documents on this host have refused every direct request across batches. Metadata resolution is not content inspection, so nothing is established about whether this source supports the record subject.',
+    remediation: 'Obtain an inspectable copy, read it against this record subject, then confirm or replace.',
+  },
+  'urn:maha:record:critical-supply-chains-high-purity-quartz-deposits': {
+    verdict: 'insufficient-evidence',
+    sourceContentInspected: false,
+    inspectedContentLocation: null,
+    artifactVersion: 'not-inspected',
+    inspectionDepth: 'not-inspected',
+    versionRelationshipVerified: false,
+    recoveryDisposition: 'version-relationship-unverified',
+    reason:
+      'Recovery resolved metadata but could not tie any located artifact to the declared citation. USGS documents on this host have refused every direct request across batches. Metadata resolution is not content inspection, so nothing is established about whether this source supports the record subject.',
+    remediation: 'Obtain an inspectable copy, read it against this record subject, then confirm or replace.',
+  },
+  'urn:maha:record:critical-supply-chains-photoacid-generator-supply': {
+    verdict: 'insufficient-evidence',
+    sourceContentInspected: false,
+    inspectedContentLocation: null,
+    artifactVersion: 'not-inspected',
+    inspectionDepth: 'not-inspected',
+    versionRelationshipVerified: false,
+    recoveryDisposition: 'version-relationship-unverified',
+    reason:
+      'Recovery resolved metadata but could not tie any located artifact to the declared citation. USGS documents on this host have refused every direct request across batches. Metadata resolution is not content inspection, so nothing is established about whether this source supports the record subject.',
+    remediation: 'Obtain an inspectable copy, read it against this record subject, then confirm or replace.',
+  },
+  'urn:maha:record:critical-supply-chains-quartz-crucible-manufacturing': {
+    verdict: 'insufficient-evidence',
+    sourceContentInspected: false,
+    inspectedContentLocation: null,
+    artifactVersion: 'not-inspected',
+    inspectionDepth: 'not-inspected',
+    versionRelationshipVerified: false,
+    recoveryDisposition: 'version-relationship-unverified',
+    reason:
+      'Recovery resolved metadata but could not tie any located artifact to the declared citation. USGS documents on this host have refused every direct request across batches. Metadata resolution is not content inspection, so nothing is established about whether this source supports the record subject.',
+    remediation: 'Obtain an inspectable copy, read it against this record subject, then confirm or replace.',
+  },
+  'urn:maha:record:critical-supply-chains-semiconductor-grade-polysilicon': {
+    verdict: 'insufficient-evidence',
+    sourceContentInspected: false,
+    inspectedContentLocation: null,
+    artifactVersion: 'not-inspected',
+    inspectionDepth: 'not-inspected',
+    versionRelationshipVerified: false,
+    recoveryDisposition: 'version-relationship-unverified',
+    reason:
+      'Recovery resolved metadata but could not tie any located artifact to the declared citation. USGS documents on this host have refused every direct request across batches. Metadata resolution is not content inspection, so nothing is established about whether this source supports the record subject.',
+    remediation: 'Obtain an inspectable copy, read it against this record subject, then confirm or replace.',
+  },
+  'urn:maha:record:fusion-plasma-systems-inertial-confinement-target-chamber': {
+    verdict: 'insufficient-evidence',
+    sourceContentInspected: false,
+    inspectedContentLocation: null,
+    artifactVersion: 'not-inspected',
+    inspectionDepth: 'not-inspected',
+    versionRelationshipVerified: false,
+    recoveryDisposition: 'version-relationship-unverified',
+    reason:
+      'Recovery resolved metadata but could not tie any located artifact to the declared citation, so no copy was accepted and the content was not read. Metadata resolution is not content inspection, so nothing is established about whether this source supports the record subject.',
+    remediation: 'Obtain an inspectable copy, read it against this record subject, then confirm or replace.',
+  },
+  'urn:maha:record:fusion-plasma-systems-laser-target-coupling': {
+    verdict: 'insufficient-evidence',
+    sourceContentInspected: false,
+    inspectedContentLocation: null,
+    artifactVersion: 'not-inspected',
+    inspectionDepth: 'not-inspected',
+    versionRelationshipVerified: false,
+    recoveryDisposition: 'version-relationship-unverified',
+    reason:
+      'Recovery resolved metadata but could not tie any located artifact to the declared citation, so no copy was accepted and the content was not read. Metadata resolution is not content inspection, so nothing is established about whether this source supports the record subject.',
+    remediation: 'Obtain an inspectable copy, read it against this record subject, then confirm or replace.',
+  },
+  'urn:maha:record:fusion-plasma-systems-magnetic-mirror-confinement': {
+    verdict: 'insufficient-evidence',
+    sourceContentInspected: false,
+    inspectedContentLocation: null,
+    artifactVersion: 'not-inspected',
+    inspectionDepth: 'not-inspected',
+    versionRelationshipVerified: false,
+    recoveryDisposition: 'version-relationship-unverified',
+    reason:
+      'Recovery resolved metadata but could not tie any located artifact to the declared citation, so no copy was accepted and the content was not read. Metadata resolution is not content inspection, so nothing is established about whether this source supports the record subject.',
+    remediation: 'Obtain an inspectable copy, read it against this record subject, then confirm or replace.',
+  },
+  'urn:maha:record:fusion-plasma-systems-neutron-material-damage': {
+    verdict: 'insufficient-evidence',
+    sourceContentInspected: false,
+    inspectedContentLocation: null,
+    artifactVersion: 'not-inspected',
+    inspectionDepth: 'not-inspected',
+    versionRelationshipVerified: false,
+    recoveryDisposition: 'version-relationship-unverified',
+    reason:
+      'Recovery resolved metadata but could not tie any located artifact to the declared citation, so no copy was accepted and the content was not read. Metadata resolution is not content inspection, so nothing is established about whether this source supports the record subject.',
+    remediation: 'Obtain an inspectable copy, read it against this record subject, then confirm or replace.',
+  },
+  'urn:maha:record:fusion-plasma-systems-remote-handling-maintenance': {
+    verdict: 'insufficient-evidence',
+    sourceContentInspected: false,
+    inspectedContentLocation: null,
+    artifactVersion: 'not-inspected',
+    inspectionDepth: 'not-inspected',
+    versionRelationshipVerified: false,
+    recoveryDisposition: 'version-relationship-unverified',
+    reason:
+      'Recovery resolved metadata but could not tie any located artifact to the declared citation, so no copy was accepted and the content was not read. Metadata resolution is not content inspection, so nothing is established about whether this source supports the record subject.',
+    remediation: 'Obtain an inspectable copy, read it against this record subject, then confirm or replace.',
+  },
+  'urn:maha:record:longevity-metabolism-cd38-nad-consumption': {
+    verdict: 'insufficient-evidence',
+    sourceContentInspected: false,
+    inspectedContentLocation: null,
+    artifactVersion: 'not-inspected',
+    inspectionDepth: 'not-inspected',
+    versionRelationshipVerified: false,
+    recoveryDisposition: 'metadata-only',
+    reason:
+      'Recovery resolved authoritative metadata but reported no open copy, so the content was not read. Metadata resolution is not content inspection, so nothing is established about whether this source supports the record subject.',
+    remediation: 'Obtain an inspectable copy, read it against this record subject, then confirm or replace.',
+  },
+  'urn:maha:record:longevity-metabolism-intervention-biomarker-boundaries': {
+    verdict: 'insufficient-evidence',
+    sourceContentInspected: false,
+    inspectedContentLocation: null,
+    artifactVersion: 'not-inspected',
+    inspectionDepth: 'not-inspected',
+    versionRelationshipVerified: false,
+    recoveryDisposition: 'metadata-only',
+    reason:
+      'Recovery resolved authoritative metadata but reported no open copy, so the content was not read. Metadata resolution is not content inspection, so nothing is established about whether this source supports the record subject.',
+    remediation: 'Obtain an inspectable copy, read it against this record subject, then confirm or replace.',
+  },
+  'urn:maha:record:longevity-metabolism-lifespan-versus-healthspan-endpoints': {
+    verdict: 'insufficient-evidence',
+    sourceContentInspected: false,
+    inspectedContentLocation: null,
+    artifactVersion: 'not-inspected',
+    inspectionDepth: 'not-inspected',
+    versionRelationshipVerified: false,
+    recoveryDisposition: 'metadata-only',
+    reason:
+      'Recovery resolved authoritative metadata but reported no open copy, so the content was not read. Metadata resolution is not content inspection, so nothing is established about whether this source supports the record subject.',
+    remediation: 'Obtain an inspectable copy, read it against this record subject, then confirm or replace.',
+  },
+  'urn:maha:record:longevity-metabolism-sirtuin-nad-dependence': {
+    verdict: 'insufficient-evidence',
+    sourceContentInspected: false,
+    inspectedContentLocation: null,
+    artifactVersion: 'not-inspected',
+    inspectionDepth: 'not-inspected',
+    versionRelationshipVerified: false,
+    recoveryDisposition: 'metadata-only',
+    reason:
+      'Recovery resolved authoritative metadata but reported no open copy, so the content was not read. Metadata resolution is not content inspection, so nothing is established about whether this source supports the record subject.',
+    remediation: 'Obtain an inspectable copy, read it against this record subject, then confirm or replace.',
+  },
+  'urn:maha:record:longevity-metabolism-translation-to-human-outcomes': {
+    verdict: 'insufficient-evidence',
+    sourceContentInspected: false,
+    inspectedContentLocation: null,
+    artifactVersion: 'not-inspected',
+    inspectionDepth: 'not-inspected',
+    versionRelationshipVerified: false,
+    recoveryDisposition: 'metadata-only',
+    reason:
+      'Recovery resolved authoritative metadata but reported no open copy, so the content was not read. Metadata resolution is not content inspection, so nothing is established about whether this source supports the record subject.',
+    remediation: 'Obtain an inspectable copy, read it against this record subject, then confirm or replace.',
+  },
+  'urn:maha:record:neurotechnology-bci-bci-calibration-drift': {
+    verdict: 'insufficient-evidence',
+    sourceContentInspected: false,
+    inspectedContentLocation: null,
+    artifactVersion: 'not-inspected',
+    inspectionDepth: 'not-inspected',
+    versionRelationshipVerified: false,
+    recoveryDisposition: 'version-relationship-unverified',
+    reason:
+      'Recovery resolved metadata but could not tie any located artifact to the declared citation, so no copy was accepted and the content was not read. Metadata resolution is not content inspection, so nothing is established about whether this source supports the record subject.',
+    remediation: 'Obtain an inspectable copy, read it against this record subject, then confirm or replace.',
+  },
+  'urn:maha:record:neurotechnology-bci-cortical-surface-bci': {
+    verdict: 'insufficient-evidence',
+    sourceContentInspected: false,
+    inspectedContentLocation: null,
+    artifactVersion: 'not-inspected',
+    inspectionDepth: 'not-inspected',
+    versionRelationshipVerified: false,
+    recoveryDisposition: 'version-relationship-unverified',
+    reason:
+      'Recovery resolved metadata but could not tie any located artifact to the declared citation, so no copy was accepted and the content was not read. Metadata resolution is not content inspection, so nothing is established about whether this source supports the record subject.',
+    remediation: 'Obtain an inspectable copy, read it against this record subject, then confirm or replace.',
+  },
+  'urn:maha:record:neurotechnology-bci-intracortical-bci': {
+    verdict: 'insufficient-evidence',
+    sourceContentInspected: false,
+    inspectedContentLocation: null,
+    artifactVersion: 'not-inspected',
+    inspectionDepth: 'not-inspected',
+    versionRelationshipVerified: false,
+    recoveryDisposition: 'version-relationship-unverified',
+    reason:
+      'Recovery resolved metadata but could not tie any located artifact to the declared citation, so no copy was accepted and the content was not read. Metadata resolution is not content inspection, so nothing is established about whether this source supports the record subject.',
+    remediation: 'Obtain an inspectable copy, read it against this record subject, then confirm or replace.',
+  },
+  'urn:maha:record:neurotechnology-bci-motor-intention-decoding': {
+    verdict: 'insufficient-evidence',
+    sourceContentInspected: false,
+    inspectedContentLocation: null,
+    artifactVersion: 'not-inspected',
+    inspectionDepth: 'not-inspected',
+    versionRelationshipVerified: false,
+    recoveryDisposition: 'version-relationship-unverified',
+    reason:
+      'Recovery resolved metadata but could not tie any located artifact to the declared citation, so no copy was accepted and the content was not read. Metadata resolution is not content inspection, so nothing is established about whether this source supports the record subject.',
+    remediation: 'Obtain an inspectable copy, read it against this record subject, then confirm or replace.',
+  },
+  'urn:maha:record:neurotechnology-bci-peripheral-nerve-interface': {
+    verdict: 'insufficient-evidence',
+    sourceContentInspected: false,
+    inspectedContentLocation: null,
+    artifactVersion: 'not-inspected',
+    inspectionDepth: 'not-inspected',
+    versionRelationshipVerified: false,
+    recoveryDisposition: 'version-relationship-unverified',
+    reason:
+      'Recovery resolved metadata but could not tie any located artifact to the declared citation, so no copy was accepted and the content was not read. Metadata resolution is not content inspection, so nothing is established about whether this source supports the record subject.',
+    remediation: 'Obtain an inspectable copy, read it against this record subject, then confirm or replace.',
+  },
 }
 
 /**
@@ -1685,6 +2370,8 @@ const PUBLISHER_VERIFIED: Readonly<Record<string, string>> = {
     'Fetched arXiv:2210.03629, which serves the declared "ReAct: Synergizing Reasoning and Acting in Language Models" record.',
   'source-fusion-plasma-systems-iter-disruption':
     'Fetched the ITER disruption-mitigation page, which serves the declared system overview and shattered-pellet-injection sections.',
+  'source-mechanistic-interpretability-induction':
+    'Source recovery located arXiv:2209.11895, whose observed title and identifier match the declared "In-context Learning and Induction Heads" contract; the PDF header confirms the Transformer Circuits Thread article by Olsson et al.',
   'source-mechanistic-interpretability-circuits':
     'Fetched https://transformer-circuits.pub/2021/framework/index.html, which serves the declared "A Mathematical Framework for Transformer Circuits" article.',
 }
@@ -1714,7 +2401,7 @@ const INACCESSIBLE_CONTRACTS: ReadonlySet<string> = new Set(['source-critical-su
  * for anything added from now on.
  */
 
-export const ALIGNMENT_BATCHES = ['batch-1', 'batch-2', 'batch-3', 'batch-4', 'batch-5'] as const
+export const ALIGNMENT_BATCHES = ['batch-1', 'batch-2', 'batch-3', 'batch-4', 'batch-5', 'batch-6'] as const
 export type AlignmentBatchId = (typeof ALIGNMENT_BATCHES)[number]
 
 const BATCH_1_RECORDS: readonly string[] = [
@@ -1922,12 +2609,79 @@ export const BATCH_5_REINSPECTIONS: readonly string[] = [
     'urn:maha:record:fusion-plasma-systems-superconducting-quench-protection',
 ]
 
+const BATCH_6_RECORDS: readonly string[] = [
+    'urn:maha:record:advanced-materials-color-centers-in-diamond',
+    'urn:maha:record:advanced-materials-diamond-thermal-conductivity',
+    'urn:maha:record:advanced-materials-diamond-wafer-substrates',
+    'urn:maha:record:advanced-materials-gallium-nitride-epitaxy',
+    'urn:maha:record:advanced-materials-sic-wide-bandgap-substrates',
+    'urn:maha:record:agentic-systems-mcp-agent-memory-boundaries',
+    'urn:maha:record:agentic-systems-mcp-agentic-evaluation-protocols',
+    'urn:maha:record:agentic-systems-mcp-game-theoretic-incentive-misalignment',
+    'urn:maha:record:agentic-systems-mcp-prompt-injection-through-tools',
+    'urn:maha:record:agentic-systems-mcp-tool-output-trust-boundaries',
+    'urn:maha:record:biomolecular-engineering-directed-enzyme-evolution',
+    'urn:maha:record:biomolecular-engineering-fitness-landscape-accessibility',
+    'urn:maha:record:biomolecular-engineering-mutation-library-generation',
+    'urn:maha:record:biomolecular-engineering-phage-assisted-continuous-evolution',
+    'urn:maha:record:biomolecular-engineering-selection-pressure-coupling',
+    'urn:maha:record:critical-supply-chains-euv-photoresist-precursors',
+    'urn:maha:record:critical-supply-chains-high-purity-quartz-deposits',
+    'urn:maha:record:critical-supply-chains-photoacid-generator-supply',
+    'urn:maha:record:critical-supply-chains-quartz-crucible-manufacturing',
+    'urn:maha:record:critical-supply-chains-semiconductor-grade-polysilicon',
+    'urn:maha:record:fusion-plasma-systems-inertial-confinement-target-chamber',
+    'urn:maha:record:fusion-plasma-systems-laser-target-coupling',
+    'urn:maha:record:fusion-plasma-systems-magnetic-mirror-confinement',
+    'urn:maha:record:fusion-plasma-systems-neutron-material-damage',
+    'urn:maha:record:fusion-plasma-systems-remote-handling-maintenance',
+    'urn:maha:record:longevity-metabolism-cd38-nad-consumption',
+    'urn:maha:record:longevity-metabolism-intervention-biomarker-boundaries',
+    'urn:maha:record:longevity-metabolism-lifespan-versus-healthspan-endpoints',
+    'urn:maha:record:longevity-metabolism-sirtuin-nad-dependence',
+    'urn:maha:record:longevity-metabolism-translation-to-human-outcomes',
+    'urn:maha:record:mechanistic-interpretability-attention-pattern-evidence',
+    'urn:maha:record:mechanistic-interpretability-in-context-learning-circuits',
+    'urn:maha:record:mechanistic-interpretability-induction-head-circuits',
+    'urn:maha:record:mechanistic-interpretability-io-identification-circuit',
+    'urn:maha:record:mechanistic-interpretability-previous-token-heads',
+    'urn:maha:record:neurotechnology-bci-bci-calibration-drift',
+    'urn:maha:record:neurotechnology-bci-cortical-surface-bci',
+    'urn:maha:record:neurotechnology-bci-intracortical-bci',
+    'urn:maha:record:neurotechnology-bci-motor-intention-decoding',
+    'urn:maha:record:neurotechnology-bci-peripheral-nerve-interface',
+]
+
+/**
+ * Records an earlier batch judged inaccessible that source recovery has since
+ * produced an artifact for. Re-inspections, not cohort members: counting them
+ * as new would overstate the batch. Each preserves its prior finding.
+ */
+export const BATCH_6_REINSPECTIONS: readonly string[] = [
+    'urn:maha:record:advanced-materials-contact-resistance-in-2d-devices',
+    'urn:maha:record:advanced-materials-cvd-graphene-grain-boundaries',
+    'urn:maha:record:advanced-materials-dielectric-screening',
+    'urn:maha:record:advanced-materials-materials-metrology-transfer',
+    'urn:maha:record:advanced-materials-wafer-scale-2d-growth',
+    'urn:maha:record:longevity-metabolism-mitochondrial-membrane-potential',
+    'urn:maha:record:longevity-metabolism-mitochondrial-uncoupling',
+    'urn:maha:record:longevity-metabolism-mitophagy-flux',
+    'urn:maha:record:longevity-metabolism-pink1-parkin-pathway',
+    'urn:maha:record:longevity-metabolism-proton-leak-respiration',
+    'urn:maha:record:neurotechnology-bci-electrocorticography-spatial-resolution',
+    'urn:maha:record:neurotechnology-bci-electrode-tissue-interface',
+    'urn:maha:record:neurotechnology-bci-flexible-conformal-electrode-arrays',
+    'urn:maha:record:neurotechnology-bci-impedance-and-noise',
+    'urn:maha:record:neurotechnology-bci-micro-ecog-arrays',
+]
+
 export const ALIGNMENT_BATCH_MEMBERSHIP: Readonly<Record<AlignmentBatchId, readonly string[]>> = {
   'batch-1': BATCH_1_RECORDS,
   'batch-2': BATCH_2_RECORDS,
   'batch-3': BATCH_3_RECORDS,
   'batch-4': BATCH_4_RECORDS,
   'batch-5': BATCH_5_RECORDS,
+  'batch-6': BATCH_6_RECORDS,
 }
 
 /** Which batch judged a record, or null when it carries only default state. */
@@ -1943,6 +2697,11 @@ export function isBatch5Reinspection(recordId: string): boolean {
   return BATCH_5_REINSPECTIONS.includes(recordId)
 }
 
+/** True when batch 6 re-examined a record an earlier batch judged inaccessible. */
+export function isBatch6Reinspection(recordId: string): boolean {
+  return BATCH_6_REINSPECTIONS.includes(recordId)
+}
+
 /* -- guards: membership is disjoint, complete, and batch 4 is well formed -- */
 
 {
@@ -1952,6 +2711,10 @@ export function isBatch5Reinspection(recordId: string): boolean {
   const batch5 = ALIGNMENT_BATCH_MEMBERSHIP['batch-5']
   if (batch5.length !== 40) throw new Error(`Batch 5 must contain exactly 40 records; found ${batch5.length}.`)
   if (new Set(batch5).size !== batch5.length) throw new Error('Batch 5 membership is not unique.')
+
+  const batch6 = ALIGNMENT_BATCH_MEMBERSHIP['batch-6']
+  if (batch6.length !== 40) throw new Error(`Batch 6 must contain exactly 40 records; found ${batch6.length}.`)
+  if (new Set(batch6).size !== batch6.length) throw new Error('Batch 6 membership is not unique.')
 
   const seen = new Map<string, AlignmentBatchId>()
   for (const batchId of ALIGNMENT_BATCHES) {
@@ -1999,6 +2762,30 @@ export function isBatch5Reinspection(recordId: string): boolean {
   for (const [domainSlug, count] of batch5Domains) {
     if (count < 3 || count > 8) {
       throw new Error(`Batch 5 requires three to eight records per domain; ${domainSlug} has ${count}.`)
+    }
+  }
+
+  // Batch 6 is frozen at five records per domain across all eight.
+  const batch6Domains = new Map<string, number>()
+  for (const recordId of batch6) {
+    if (priorBatches.has(recordId) || batch5.includes(recordId)) {
+      throw new Error(`${recordId} was claimed by an earlier batch and cannot be a new batch 6 inspection.`)
+    }
+    const record = FRONTIER_DOMAIN_GRAPH_RECORDS.find((entry) => entry.id === recordId)
+    if (!record) throw new Error(`${recordId} is in batch 6 but is not a frontier record.`)
+    batch6Domains.set(record.domainSlug, (batch6Domains.get(record.domainSlug) ?? 0) + 1)
+  }
+  if (batch6Domains.size !== 8) throw new Error(`Batch 6 must cover eight domains; found ${batch6Domains.size}.`)
+  for (const [domainSlug, count] of batch6Domains) {
+    if (count !== 5) throw new Error(`Batch 6 must contain five records per domain; ${domainSlug} has ${count}.`)
+  }
+
+  for (const recordId of BATCH_6_REINSPECTIONS) {
+    if (batch6.includes(recordId)) {
+      throw new Error(`${recordId} cannot be both a batch 6 cohort member and a re-inspection.`)
+    }
+    if (!JUDGEMENTS[recordId]?.priorJudgement) {
+      throw new Error(`${recordId} is a batch 6 re-inspection but does not preserve its prior judgement.`)
     }
   }
 
@@ -2142,6 +2929,10 @@ function auditRecord(record: EpistemicRecord): RecordAlignmentAudit {
       externallyReviewed: false,
       inspectedArtifactVersion:
         judgement?.artifactVersion ?? (judgement?.sourceContentInspected ? 'version-of-record' : 'not-inspected'),
+      inspectionDepth:
+        judgement?.inspectionDepth ?? (judgement?.sourceContentInspected ? 'abstract-only' : 'not-inspected'),
+      versionRelationshipVerified: judgement?.versionRelationshipVerified ?? false,
+      recoveryDisposition: judgement?.recoveryDisposition ?? 'not-attempted',
     },
     reason,
     transcriptionConfidence: metadata.verified ? 'high' : identifier ? 'medium' : 'low',
@@ -2178,6 +2969,19 @@ for (const entry of FRONTIER_ALIGNMENT_AUDIT) {
   }
   if (entry.evidence.mismatchBasis === 'inspected-content-different-subject' && !entry.evidence.sourceContentInspected) {
     throw new Error(`${entry.recordId}: an inspected-content mismatch basis requires inspection.`)
+  }
+  // Recovery readiness is not inspection, and depth must match the flag.
+  if (entry.evidence.sourceContentInspected && entry.evidence.inspectionDepth === 'not-inspected') {
+    throw new Error(`${entry.recordId} claims inspection with no recorded depth.`)
+  }
+  if (!entry.evidence.sourceContentInspected && entry.evidence.inspectionDepth !== 'not-inspected') {
+    throw new Error(`${entry.recordId} records an inspection depth without inspection.`)
+  }
+  if (entry.evidence.recoveryDisposition === 'wrong-document' && entry.evidence.sourceContentInspected) {
+    throw new Error(`${entry.recordId} inspected an artifact recovery rejected as the wrong document.`)
+  }
+  if (entry.evidence.recoveryDisposition === 'recovery-ready-retrieval-failed' && entry.evidence.sourceContentInspected) {
+    throw new Error(`${entry.recordId} claims inspection although retrieval of the recovered copy failed.`)
   }
   if (entry.evidence.externallyReviewed !== false || entry.evidence.independentlyReproduced !== false) {
     throw new Error(`${entry.recordId}: external review and reproduction are not established by this process.`)
