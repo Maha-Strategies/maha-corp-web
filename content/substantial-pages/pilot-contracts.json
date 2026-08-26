@@ -1,0 +1,1513 @@
+{
+  "compilerVersion": "maha-substantial-page-compiler/0.1",
+  "pilotVersion": "maha-substantial-page-pilot/0.1",
+  "selectionDeviation": "No frontier-domain record is public; PUBLIC_EPISTEMIC_RECORDS holds two entries outside these domains. Draft canonical records were used and every artifact remains internal, noindex and unrouted.",
+  "passing": 8,
+  "blocked": 0,
+  "blockerCounts": {},
+  "selectionTierCounts": {
+    "bridge-edge": 28,
+    "shared-source": 5
+  },
+  "pilots": [
+    {
+      "slug": "fusion-plasma-systems-magnetic-confinement",
+      "domainSlug": "fusion-plasma-systems",
+      "recordKind": "concept",
+      "selectionRationale": "Six declared graph edges, the most connected record in the domain, with a complete exact locator and a citation-with-paraphrase rights basis. A concept hub exercises tier-1 related-record selection end to end.",
+      "sourceAlignment": "record-subject-supported",
+      "sourceAlignmentNote": "The ITER magnets documentation describes the coil systems that confine and shape the plasma, which is the record subject.",
+      "contractDigest": "sha256:0b329352418de931b4a8aa7240ed59555a55a15db902c034340001f8c29cc70f",
+      "decision": {
+        "recordId": "urn:maha:record:fusion-plasma-systems-magnetic-confinement",
+        "pageEligible": true,
+        "evaluatedAgainst": "maha-substantial-page/0.1",
+        "reasons": [],
+        "measures": {
+          "explanationSections": 3,
+          "explanationParagraphs": 6,
+          "comparisonAxes": 0,
+          "calculationInputs": 0,
+          "limitations": 4,
+          "relatedRecords": 6,
+          "supportingQuestions": 4
+        }
+      },
+      "selectionTrace": [
+        {
+          "recordId": "urn:maha:record:fusion-plasma-systems-cable-in-conduit-conductors",
+          "relation": "boundary",
+          "tier": "bridge-edge",
+          "rationale": "Declared strategic-dependency edge into this record, so it is positioned earlier in the same bounded sequence."
+        },
+        {
+          "recordId": "urn:maha:record:fusion-plasma-systems-disruption-mitigation",
+          "relation": "boundary",
+          "tier": "bridge-edge",
+          "rationale": "Declared strategic-dependency edge into this record, so it is positioned earlier in the same bounded sequence."
+        },
+        {
+          "recordId": "urn:maha:record:fusion-plasma-systems-magnetic-mirror-confinement",
+          "relation": "boundary",
+          "tier": "bridge-edge",
+          "rationale": "Declared strategic-dependency edge into this record, so it is positioned earlier in the same bounded sequence."
+        },
+        {
+          "recordId": "urn:maha:record:fusion-plasma-systems-plasma-diagnostics",
+          "relation": "boundary",
+          "tier": "bridge-edge",
+          "rationale": "Declared strategic-dependency edge into this record, so it is positioned earlier in the same bounded sequence."
+        },
+        {
+          "recordId": "urn:maha:record:fusion-plasma-systems-plasma-position-and-shape-control",
+          "relation": "boundary",
+          "tier": "bridge-edge",
+          "rationale": "Declared strategic-dependency edge into this record, so it is positioned earlier in the same bounded sequence."
+        },
+        {
+          "recordId": "urn:maha:record:fusion-plasma-systems-tokamak-plasma-equilibrium",
+          "relation": "prerequisite",
+          "tier": "bridge-edge",
+          "rationale": "Declared mechanistic-dependency edge into this record, so it is positioned earlier in the same bounded sequence."
+        }
+      ],
+      "contract": {
+        "schemaVersion": "maha-substantial-page/0.1",
+        "recordId": "urn:maha:record:fusion-plasma-systems-magnetic-confinement",
+        "recordRevisionSha256": "sha256:1a66b69d5429123c71e8a1f6665a5dea0a49deb410c02c3d64ef461fb4a411aa",
+        "directAnswer": {
+          "text": "Magnetic confinement is the use of shaped magnetic fields to hold a hot plasma away from material walls. The cited ITER documentation records the functions and architecture of the superconducting coil systems that do this: toroidal field, poloidal field, central solenoid and correction coils. It is a description of machine design, not a measurement of how well confinement performs.",
+          "claimIds": [
+            "urn:maha:claim:fusion-plasma-systems-magnetic-confinement"
+          ],
+          "sourceIds": [
+            "source-fusion-plasma-systems-iter-magnets"
+          ]
+        },
+        "searchIntent": {
+          "primaryQuery": "magnetic confinement fusion",
+          "readerQuestion": "What does magnetic confinement actually mean in a tokamak, and what does documenting it not prove?",
+          "audience": "Analysts and engineers reading fusion programme claims who need the boundary between design description and operating evidence.",
+          "readerOutcome": "The reader can state what the cited machine documentation establishes about confinement architecture, and can name the questions it leaves open about performance and cost.",
+          "supportingQuestions": [
+            "Which coil systems are involved in confining and shaping a tokamak plasma?",
+            "Does a documented magnet architecture demonstrate a working power plant?",
+            "What is the difference between a design description and operating evidence?",
+            "Why does this record avoid quoting a confinement time or gain figure?"
+          ],
+          "queryVariants": [
+            "what is magnetic confinement in fusion",
+            "tokamak magnet systems explained",
+            "magnetic confinement vs operating evidence"
+          ],
+          "title": "Magnetic confinement: what the ITER magnet record shows",
+          "description": "What the cited ITER magnet documentation establishes about confining and shaping a tokamak plasma, and the performance and cost questions it deliberately leaves open.",
+          "trafficNonClaim": "This contract describes what the page says and what it declines to say. It does not guarantee rankings, impressions, traffic, or any commercial outcome."
+        },
+        "explanations": [
+          {
+            "heading": "What it is",
+            "paragraphs": [
+              "Magnetic confinement describes an approach in which magnetic fields, rather than a solid vessel, hold a fusion plasma in position. The record is bounded to the machine architecture that implements this: the toroidal field coils, the poloidal field coils, the central solenoid and the correction coils, each with a distinct role in confining and shaping the plasma.",
+              "The record is registered as a concept rather than a measurement. It fixes what the coil systems are for and how they are organised, and it deliberately does not pool figures from other devices or programmes, so nothing here should be read as a statement about fusion machines in general."
+            ],
+            "claimIds": [
+              "urn:maha:claim:fusion-plasma-systems-magnetic-confinement"
+            ],
+            "sourceIds": [
+              "source-fusion-plasma-systems-iter-magnets"
+            ]
+          },
+          {
+            "heading": "How the cited evidence works",
+            "paragraphs": [
+              "The evidence is documentation published by the ITER Organization covering the machine magnets, read at the sections on toroidal field, poloidal field, central solenoid and correction coils. It is an engineering description of a machine under construction, which is the appropriate kind of source for a claim about architecture and function.",
+              "Because the source is design documentation rather than an experimental report, the evidence maturity is recorded as a single study and the claim kind as a theoretical model. The record uses original boundary language and a short paraphrase rather than reproducing any passage, figure or table from the source."
+            ],
+            "claimIds": [
+              "urn:maha:claim:fusion-plasma-systems-magnetic-confinement"
+            ],
+            "sourceIds": [
+              "source-fusion-plasma-systems-iter-magnets"
+            ]
+          },
+          {
+            "heading": "What remains unresolved",
+            "paragraphs": [
+              "A description of magnet architecture does not establish that the machine achieves any particular confinement quality, energy gain or availability. Those are operating results, and the cited source does not report them, so this record asserts no quantitative interval of any kind.",
+              "Independent replication and cross-device transfer have not been compiled for this record. Anyone carrying a statement about ITER magnets across to another tokamak, a stellarator or a commercial design needs a separately scoped comparison, because operating conditions and coil technology differ between them."
+            ],
+            "claimIds": [
+              "urn:maha:claim:fusion-plasma-systems-magnetic-confinement"
+            ],
+            "sourceIds": [
+              "source-fusion-plasma-systems-iter-magnets"
+            ]
+          }
+        ],
+        "comparison": {
+          "status": "not-applicable",
+          "rationale": "A comparison table for magnetic confinement would need claims on both sides of an axis. This record cites one machine documentation source and carries one claim, so there is no second cited configuration to compare against. Presenting one cited source as a two-sided comparison would manufacture a contrast the evidence does not contain.",
+          "axes": []
+        },
+        "calculation": {
+          "status": "not-applicable",
+          "rationale": "The record documents coil architecture and function; it fixes no quantity, and the cited locator reports no confinement time, field strength or gain figure to reproduce. Adding an expression here would create unsupported precision: it would imply the record fixes quantities that its cited locator does not fix, and a reader could reproduce a number that no source stands behind.",
+          "method": "",
+          "expression": "",
+          "inputs": [],
+          "assumptions": [],
+          "reproducibility": "",
+          "claimIds": [],
+          "sourceIds": []
+        },
+        "limitations": [
+          {
+            "statement": "Magnetic confinement does not by itself establish system-level performance, safety, manufacturability, scalability, economic advantage, clinical benefit, or deployment readiness.",
+            "basis": "record-boundary",
+            "basisIndex": 0
+          },
+          {
+            "statement": "A source-bounded mechanism, method, or measurement record does not establish manufacturing yield, economic advantage, safety, clinical benefit, or commercial readiness unless those outcomes are measured in a separately scoped record.",
+            "basis": "record-boundary",
+            "basisIndex": 1
+          },
+          {
+            "statement": "Do not use this magnetic confinement record to claim that the surrounding technology is proven, safe, scalable, commercially available, or strategically superior.",
+            "basis": "prohibited-inference",
+            "basisIndex": 0
+          },
+          {
+            "statement": "Do not transfer a reported result across hardware, organisms, protocols, datasets, operating conditions, or outcome definitions without a declared comparison contract.",
+            "basis": "prohibited-inference",
+            "basisIndex": 1
+          }
+        ],
+        "relatedRecords": [
+          {
+            "recordId": "urn:maha:record:fusion-plasma-systems-cable-in-conduit-conductors",
+            "relation": "boundary",
+            "rationale": "Declared strategic-dependency edge into this record, so it is positioned earlier in the same bounded sequence."
+          },
+          {
+            "recordId": "urn:maha:record:fusion-plasma-systems-disruption-mitigation",
+            "relation": "boundary",
+            "rationale": "Declared strategic-dependency edge into this record, so it is positioned earlier in the same bounded sequence."
+          },
+          {
+            "recordId": "urn:maha:record:fusion-plasma-systems-magnetic-mirror-confinement",
+            "relation": "boundary",
+            "rationale": "Declared strategic-dependency edge into this record, so it is positioned earlier in the same bounded sequence."
+          },
+          {
+            "recordId": "urn:maha:record:fusion-plasma-systems-plasma-diagnostics",
+            "relation": "boundary",
+            "rationale": "Declared strategic-dependency edge into this record, so it is positioned earlier in the same bounded sequence."
+          },
+          {
+            "recordId": "urn:maha:record:fusion-plasma-systems-plasma-position-and-shape-control",
+            "relation": "boundary",
+            "rationale": "Declared strategic-dependency edge into this record, so it is positioned earlier in the same bounded sequence."
+          },
+          {
+            "recordId": "urn:maha:record:fusion-plasma-systems-tokamak-plasma-equilibrium",
+            "relation": "prerequisite",
+            "rationale": "Declared mechanistic-dependency edge into this record, so it is positioned earlier in the same bounded sequence."
+          }
+        ],
+        "originalContribution": "The contribution is the separation itself: an explicit boundary between what published machine documentation establishes about confinement architecture and the operating and economic questions that fusion coverage routinely folds into the same sentence."
+      }
+    },
+    {
+      "slug": "advanced-materials-hexagonal-boron-nitride-dielectrics",
+      "domainSlug": "advanced-materials",
+      "recordKind": "mechanism",
+      "selectionRationale": "A mechanism-kind record with a complete locator and rights basis, chosen to exercise tier-2 and tier-3 related-record selection where only two bridge edges exist. It also surfaces a genuine source-alignment defect worth reporting.",
+      "sourceAlignment": "source-narrower-than-record-subject",
+      "sourceAlignmentNote": "The record subject is hexagonal boron nitride as a dielectric, but the cited source is Novoselov et al. (2004), \"Electric Field Effect in Atomically Thin Carbon Films\", which reports transport in atomically thin carbon and does not establish anything about hBN. The claim resolves to its declared source, so the gate passes, but the source is narrower than the record subject and the page must not describe hBN properties the source never measured.",
+      "contractDigest": "sha256:39fbd2a7b9c11082f0452e622e6fbe42265de18f6838d095442fc5ed8d66cf5a",
+      "decision": {
+        "recordId": "urn:maha:record:advanced-materials-hexagonal-boron-nitride-dielectrics",
+        "pageEligible": true,
+        "evaluatedAgainst": "maha-substantial-page/0.1",
+        "reasons": [],
+        "measures": {
+          "explanationSections": 3,
+          "explanationParagraphs": 6,
+          "comparisonAxes": 0,
+          "calculationInputs": 0,
+          "limitations": 4,
+          "relatedRecords": 3,
+          "supportingQuestions": 4
+        }
+      },
+      "selectionTrace": [
+        {
+          "recordId": "urn:maha:record:advanced-materials-graphene-hbn-heterostructures",
+          "relation": "prerequisite",
+          "tier": "bridge-edge",
+          "rationale": "Declared mechanistic-dependency edge into this record, so it is positioned earlier in the same bounded sequence."
+        },
+        {
+          "recordId": "urn:maha:record:advanced-materials-graphene-monolayers",
+          "relation": "mechanism",
+          "tier": "bridge-edge",
+          "rationale": "Declared mechanistic-dependency edge from this record. The edge is navigational and asserts no equivalence or causation beyond the cited source scope."
+        },
+        {
+          "recordId": "urn:maha:record:advanced-materials-moire-superlattices",
+          "relation": "measurement",
+          "tier": "shared-source",
+          "rationale": "Cites the same source as this record, so the two are related through the evidence rather than through wording."
+        }
+      ],
+      "contract": {
+        "schemaVersion": "maha-substantial-page/0.1",
+        "recordId": "urn:maha:record:advanced-materials-hexagonal-boron-nitride-dielectrics",
+        "recordRevisionSha256": "sha256:376cd21b08d466e7abb081b0ec9119d15c86a1f62a2de387c8297e39ff601bdd",
+        "directAnswer": {
+          "text": "This record is registered as a mechanism covering hexagonal boron nitride used as a dielectric. Its single cited source, however, is the 2004 report of the electric field effect in atomically thin carbon films, which measures transport in carbon and not in boron nitride. The citation resolves, but it is narrower than the record subject, so no property of hBN should be quoted from this record.",
+          "claimIds": [
+            "urn:maha:claim:advanced-materials-hexagonal-boron-nitride-dielectrics"
+          ],
+          "sourceIds": [
+            "source-advanced-materials-graphene"
+          ]
+        },
+        "searchIntent": {
+          "primaryQuery": "hexagonal boron nitride dielectric",
+          "readerQuestion": "What does the cited evidence actually establish about hexagonal boron nitride as a dielectric?",
+          "audience": "Materials researchers and technical readers checking whether a cited claim covers the material it names.",
+          "readerOutcome": "The reader can see exactly what the cited source measures, recognise that it concerns atomically thin carbon rather than boron nitride, and avoid carrying the citation further than it reaches.",
+          "supportingQuestions": [
+            "What does the cited 2004 paper actually measure?",
+            "Does this record establish a dielectric constant or breakdown field for hBN?",
+            "Why is a citation that resolves still not sufficient support?",
+            "What would be needed to bound an hBN dielectric claim properly?"
+          ],
+          "queryVariants": [
+            "hexagonal boron nitride dielectric evidence",
+            "hbn dielectric citation check",
+            "is hbn dielectric claim supported"
+          ],
+          "title": "Hexagonal boron nitride dielectrics: checking the source",
+          "description": "The cited source for this record reports transport in atomically thin carbon films, not boron nitride. What that means for any hBN dielectric claim resting on it.",
+          "trafficNonClaim": "This contract describes what the page says and what it declines to say. It does not guarantee rankings, impressions, traffic, or any commercial outcome."
+        },
+        "explanations": [
+          {
+            "heading": "What it is",
+            "paragraphs": [
+              "Hexagonal boron nitride is a layered insulator commonly used as a gate dielectric and encapsulant beneath and above two-dimensional conductors. The record exists to hold that role as a distinct mechanism inside the advanced-materials graph rather than leaving it implicit in records about the conductors themselves.",
+              "What the record does not do is fix any electrical property of the material. It carries a single claim, and that claim is bounded to the scope of its cited locator, which is where the difficulty in this particular record begins."
+            ],
+            "claimIds": [
+              "urn:maha:claim:advanced-materials-hexagonal-boron-nitride-dielectrics"
+            ],
+            "sourceIds": [
+              "source-advanced-materials-graphene"
+            ]
+          },
+          {
+            "heading": "How the cited evidence works",
+            "paragraphs": [
+              "The cited source is Novoselov and colleagues in Science, 22 October 2004, read at the abstract, device preparation, transport measurements and figures one through three. That work reports electric-field effects and transport measurements in atomically thin carbon films, which is a claim about carbon.",
+              "The claim on this record therefore resolves to a real, correctly identified, well-located source that does not address the record subject. This is a source-alignment defect rather than a broken citation: the identifier is right, the locator is exact, and the material under study is still the wrong one for a statement about boron nitride."
+            ],
+            "claimIds": [
+              "urn:maha:claim:advanced-materials-hexagonal-boron-nitride-dielectrics"
+            ],
+            "sourceIds": [
+              "source-advanced-materials-graphene"
+            ]
+          },
+          {
+            "heading": "What remains unresolved",
+            "paragraphs": [
+              "Everything specific to boron nitride remains unresolved on this record. Dielectric constant, breakdown field, interface trap density and encapsulation quality are all absent from the cited source, so none of them can be quoted here, and the record asserts no quantitative interval.",
+              "Closing the gap requires a source that measures hexagonal boron nitride directly, added with its own exact locator and rights basis. Until then the honest reading of this record is that it names a mechanism the graph needs and does not yet carry evidence for it."
+            ],
+            "claimIds": [
+              "urn:maha:claim:advanced-materials-hexagonal-boron-nitride-dielectrics"
+            ],
+            "sourceIds": [
+              "source-advanced-materials-graphene"
+            ]
+          }
+        ],
+        "comparison": {
+          "status": "not-applicable",
+          "rationale": "A comparison table for hexagonal boron nitride dielectrics would need claims on both sides of an axis. The one cited source does not measure boron nitride at all, so there is no supported side of any axis, let alone two. Presenting one cited source as a two-sided comparison would manufacture a contrast the evidence does not contain.",
+          "axes": []
+        },
+        "calculation": {
+          "status": "not-applicable",
+          "rationale": "No dielectric quantity for boron nitride appears anywhere in the cited locator, so there is nothing to express, parameterise or reproduce. Adding an expression here would create unsupported precision: it would imply the record fixes quantities that its cited locator does not fix, and a reader could reproduce a number that no source stands behind.",
+          "method": "",
+          "expression": "",
+          "inputs": [],
+          "assumptions": [],
+          "reproducibility": "",
+          "claimIds": [],
+          "sourceIds": []
+        },
+        "limitations": [
+          {
+            "statement": "Hexagonal boron nitride dielectrics does not by itself establish system-level performance, safety, manufacturability, scalability, economic advantage, clinical benefit, or deployment readiness.",
+            "basis": "record-boundary",
+            "basisIndex": 0
+          },
+          {
+            "statement": "A source-bounded mechanism, method, or measurement record does not establish manufacturing yield, economic advantage, safety, clinical benefit, or commercial readiness unless those outcomes are measured in a separately scoped record.",
+            "basis": "record-boundary",
+            "basisIndex": 1
+          },
+          {
+            "statement": "Do not use this hexagonal boron nitride dielectrics record to claim that the surrounding technology is proven, safe, scalable, commercially available, or strategically superior.",
+            "basis": "prohibited-inference",
+            "basisIndex": 0
+          },
+          {
+            "statement": "Do not transfer a reported result across hardware, organisms, protocols, datasets, operating conditions, or outcome definitions without a declared comparison contract.",
+            "basis": "prohibited-inference",
+            "basisIndex": 1
+          }
+        ],
+        "relatedRecords": [
+          {
+            "recordId": "urn:maha:record:advanced-materials-graphene-hbn-heterostructures",
+            "relation": "prerequisite",
+            "rationale": "Declared mechanistic-dependency edge into this record, so it is positioned earlier in the same bounded sequence."
+          },
+          {
+            "recordId": "urn:maha:record:advanced-materials-graphene-monolayers",
+            "relation": "mechanism",
+            "rationale": "Declared mechanistic-dependency edge from this record. The edge is navigational and asserts no equivalence or causation beyond the cited source scope."
+          },
+          {
+            "recordId": "urn:maha:record:advanced-materials-moire-superlattices",
+            "relation": "measurement",
+            "rationale": "Cites the same source as this record, so the two are related through the evidence rather than through wording."
+          }
+        ],
+        "originalContribution": "The contribution is a worked example of a citation that passes every structural check while still failing the reader: correct identifier, exact locator, resolving claim, wrong material. Recording that explicitly is more useful than silently inheriting the mismatch."
+      }
+    },
+    {
+      "slug": "biomolecular-engineering-motif-scaffolding",
+      "domainSlug": "biomolecular-engineering",
+      "recordKind": "method",
+      "selectionRationale": "A method-kind record with a complete locator and rights basis whose cited source directly addresses the method named. Chosen to contrast with the advanced-materials pilot, where alignment fails.",
+      "sourceAlignment": "record-subject-supported",
+      "sourceAlignmentNote": "The RFdiffusion paper reports motif scaffolding explicitly among its tasks, and the locator names that section, so the source addresses the record subject.",
+      "contractDigest": "sha256:b653067dcb8404895edc94059cf7a5715bef42f423eb162545087ea3a3421537",
+      "decision": {
+        "recordId": "urn:maha:record:biomolecular-engineering-motif-scaffolding",
+        "pageEligible": true,
+        "evaluatedAgainst": "maha-substantial-page/0.1",
+        "reasons": [],
+        "measures": {
+          "explanationSections": 3,
+          "explanationParagraphs": 6,
+          "comparisonAxes": 0,
+          "calculationInputs": 0,
+          "limitations": 4,
+          "relatedRecords": 3,
+          "supportingQuestions": 4
+        }
+      },
+      "selectionTrace": [
+        {
+          "recordId": "urn:maha:record:biomolecular-engineering-de-novo-binder-design",
+          "relation": "prerequisite",
+          "tier": "bridge-edge",
+          "rationale": "Declared mechanistic-dependency edge into this record, so it is positioned earlier in the same bounded sequence."
+        },
+        {
+          "recordId": "urn:maha:record:biomolecular-engineering-protein-backbone-diffusion",
+          "relation": "prerequisite",
+          "tier": "shared-source",
+          "rationale": "Cites the same source as this record, so the two are related through the evidence rather than through wording."
+        },
+        {
+          "recordId": "urn:maha:record:biomolecular-engineering-unconditional-protein-generation",
+          "relation": "mechanism",
+          "tier": "bridge-edge",
+          "rationale": "Declared mechanistic-dependency edge from this record. The edge is navigational and asserts no equivalence or causation beyond the cited source scope."
+        }
+      ],
+      "contract": {
+        "schemaVersion": "maha-substantial-page/0.1",
+        "recordId": "urn:maha:record:biomolecular-engineering-motif-scaffolding",
+        "recordRevisionSha256": "sha256:ca5e57a43f41f13e0dc0f97c84795152690e1d0bc8fca68488ac2390881a69b9",
+        "directAnswer": {
+          "text": "Motif scaffolding is the protein-design task of building a new structure around a functional motif that must be held in a specific geometry. The cited study reports diffusion-based generation and experimental tests for a set of specified design tasks including this one. Reported success on those tasks is a task-level result and is not a general claim about folding, binding or therapeutic function.",
+          "claimIds": [
+            "urn:maha:claim:biomolecular-engineering-motif-scaffolding"
+          ],
+          "sourceIds": [
+            "source-biomolecular-engineering-rfdiffusion"
+          ]
+        },
+        "searchIntent": {
+          "primaryQuery": "motif scaffolding protein design",
+          "readerQuestion": "What is motif scaffolding in protein design, and what did the cited study actually test?",
+          "audience": "Readers assessing generative protein-design claims who need task-level results separated from general capability claims.",
+          "readerOutcome": "The reader can describe motif scaffolding as a design task and state precisely which outcomes the cited study reports and which it does not.",
+          "supportingQuestions": [
+            "What problem does motif scaffolding solve in protein design?",
+            "Which tasks did the cited study report results for?",
+            "Does reported task success imply general folding or binding capability?",
+            "What would establish therapeutic or safety claims instead?"
+          ],
+          "queryVariants": [
+            "what is motif scaffolding",
+            "rfdiffusion motif scaffolding results",
+            "protein design motif scaffolding evidence"
+          ],
+          "title": "Motif scaffolding: what the cited design study reports",
+          "description": "Motif scaffolding as a protein-design task, the experimental tests the cited RFdiffusion study reports for it, and the general capability claims it does not support.",
+          "trafficNonClaim": "This contract describes what the page says and what it declines to say. It does not guarantee rankings, impressions, traffic, or any commercial outcome."
+        },
+        "explanations": [
+          {
+            "heading": "What it is",
+            "paragraphs": [
+              "A functional motif is often a small arrangement of residues that must be presented in a particular geometry to work. Motif scaffolding is the task of generating a surrounding protein structure that holds that motif in place, which is harder than generating a plausible protein because the constraint is positional rather than merely structural.",
+              "The record registers motif scaffolding as a method inside the biomolecular-engineering graph. Its scope is bounded to what the cited work reports for the named tasks, and it deliberately does not pool results from other design systems or later benchmarks."
+            ],
+            "claimIds": [
+              "urn:maha:claim:biomolecular-engineering-motif-scaffolding"
+            ],
+            "sourceIds": [
+              "source-biomolecular-engineering-rfdiffusion"
+            ]
+          },
+          {
+            "heading": "How the cited evidence works",
+            "paragraphs": [
+              "The evidence is the RFdiffusion paper published in Nature on 11 July 2023, read at the abstract and at the unconditional generation, motif scaffolding, binder design, Methods and Extended Data sections. The study reports both generation and experimental testing, which is what allows a task-level claim rather than a purely computational one.",
+              "The record treats this as a single study at the specified locator. Evidence maturity is recorded accordingly, and the record uses original boundary language with a short paraphrase rather than reproducing figures, tables or passages from the source."
+            ],
+            "claimIds": [
+              "urn:maha:claim:biomolecular-engineering-motif-scaffolding"
+            ],
+            "sourceIds": [
+              "source-biomolecular-engineering-rfdiffusion"
+            ]
+          },
+          {
+            "heading": "What remains unresolved",
+            "paragraphs": [
+              "Success on reported design tasks does not establish universal folding, reliable binding, safety or therapeutic function. Those are separate outcomes requiring their own measurements, and the cited source does not report them, so this record carries no quantitative interval for any of them.",
+              "Cross-system transfer is also unresolved. Results obtained with one generative model, one experimental pipeline and one set of targets do not carry to a different model or a different target class without a declared comparison contract stating what is being held constant."
+            ],
+            "claimIds": [
+              "urn:maha:claim:biomolecular-engineering-motif-scaffolding"
+            ],
+            "sourceIds": [
+              "source-biomolecular-engineering-rfdiffusion"
+            ]
+          }
+        ],
+        "comparison": {
+          "status": "not-applicable",
+          "rationale": "A comparison table for motif scaffolding would need claims on both sides of an axis. The record cites one study and carries one claim, so a second design system would have to be introduced without a citation to fill the other column. Presenting one cited source as a two-sided comparison would manufacture a contrast the evidence does not contain.",
+          "axes": []
+        },
+        "calculation": {
+          "status": "not-applicable",
+          "rationale": "The record describes a design task and its reported testing, not a formula. Success rates in the source are task- and target-specific and are not parameters of any expression this record fixes. Adding an expression here would create unsupported precision: it would imply the record fixes quantities that its cited locator does not fix, and a reader could reproduce a number that no source stands behind.",
+          "method": "",
+          "expression": "",
+          "inputs": [],
+          "assumptions": [],
+          "reproducibility": "",
+          "claimIds": [],
+          "sourceIds": []
+        },
+        "limitations": [
+          {
+            "statement": "Motif scaffolding does not by itself establish system-level performance, safety, manufacturability, scalability, economic advantage, clinical benefit, or deployment readiness.",
+            "basis": "record-boundary",
+            "basisIndex": 0
+          },
+          {
+            "statement": "A source-bounded mechanism, method, or measurement record does not establish manufacturing yield, economic advantage, safety, clinical benefit, or commercial readiness unless those outcomes are measured in a separately scoped record.",
+            "basis": "record-boundary",
+            "basisIndex": 1
+          },
+          {
+            "statement": "Do not use this motif scaffolding record to claim that the surrounding technology is proven, safe, scalable, commercially available, or strategically superior.",
+            "basis": "prohibited-inference",
+            "basisIndex": 0
+          },
+          {
+            "statement": "Do not transfer a reported result across hardware, organisms, protocols, datasets, operating conditions, or outcome definitions without a declared comparison contract.",
+            "basis": "prohibited-inference",
+            "basisIndex": 1
+          }
+        ],
+        "relatedRecords": [
+          {
+            "recordId": "urn:maha:record:biomolecular-engineering-de-novo-binder-design",
+            "relation": "prerequisite",
+            "rationale": "Declared mechanistic-dependency edge into this record, so it is positioned earlier in the same bounded sequence."
+          },
+          {
+            "recordId": "urn:maha:record:biomolecular-engineering-protein-backbone-diffusion",
+            "relation": "prerequisite",
+            "rationale": "Cites the same source as this record, so the two are related through the evidence rather than through wording."
+          },
+          {
+            "recordId": "urn:maha:record:biomolecular-engineering-unconditional-protein-generation",
+            "relation": "mechanism",
+            "rationale": "Declared mechanistic-dependency edge from this record. The edge is navigational and asserts no equivalence or causation beyond the cited source scope."
+          }
+        ],
+        "originalContribution": "The contribution is holding the line between a reported design-task result and the general capability language that surrounds generative protein design, using only what the cited study states about the tasks it actually ran."
+      }
+    },
+    {
+      "slug": "longevity-metabolism-lc3-turnover-assays",
+      "domainSlug": "longevity-metabolism",
+      "recordKind": "measurement",
+      "selectionRationale": "A measurement-kind record whose cited source is a methodological guideline, which makes the static-versus-dynamic distinction unusually well supported. Complete locator and rights basis.",
+      "sourceAlignment": "record-subject-supported",
+      "sourceAlignmentNote": "The autophagy assay guidelines address LC3 interpretation directly, and the locator names the LC3, SQSTM1/p62, lysosomal inhibition and flux sections.",
+      "contractDigest": "sha256:cc1092ea4028c76426d807d00e7b422b565a112e2508c9a8d56c937cc9555b26",
+      "decision": {
+        "recordId": "urn:maha:record:longevity-metabolism-lc3-turnover-assays",
+        "pageEligible": true,
+        "evaluatedAgainst": "maha-substantial-page/0.1",
+        "reasons": [],
+        "measures": {
+          "explanationSections": 3,
+          "explanationParagraphs": 6,
+          "comparisonAxes": 0,
+          "calculationInputs": 0,
+          "limitations": 4,
+          "relatedRecords": 3,
+          "supportingQuestions": 4
+        }
+      },
+      "selectionTrace": [
+        {
+          "recordId": "urn:maha:record:longevity-metabolism-autophagic-flux",
+          "relation": "mechanism",
+          "tier": "shared-source",
+          "rationale": "Cites the same source as this record, so the two are related through the evidence rather than through wording."
+        },
+        {
+          "recordId": "urn:maha:record:longevity-metabolism-lysosomal-degradation-blockade",
+          "relation": "mechanism",
+          "tier": "bridge-edge",
+          "rationale": "Declared mechanistic-dependency edge from this record. The edge is navigational and asserts no equivalence or causation beyond the cited source scope."
+        },
+        {
+          "recordId": "urn:maha:record:longevity-metabolism-p62-sqstm1-turnover",
+          "relation": "prerequisite",
+          "tier": "bridge-edge",
+          "rationale": "Declared mechanistic-dependency edge into this record, so it is positioned earlier in the same bounded sequence."
+        }
+      ],
+      "contract": {
+        "schemaVersion": "maha-substantial-page/0.1",
+        "recordId": "urn:maha:record:longevity-metabolism-lc3-turnover-assays",
+        "recordRevisionSha256": "sha256:d41e23431b7c29de0a5301bdaa86aef0a388ad6492f39a4ce6a75bb1d90dc62d",
+        "directAnswer": {
+          "text": "An LC3 turnover assay compares LC3 signal with and without lysosomal degradation blocked, so that the difference reflects material moving through the pathway rather than the amount present at one moment. The cited guidelines distinguish static autophagosome measurements from dynamic flux and set assay-specific interpretation limits. No single marker establishes an autophagy rate.",
+          "claimIds": [
+            "urn:maha:claim:longevity-metabolism-lc3-turnover-assays"
+          ],
+          "sourceIds": [
+            "source-longevity-metabolism-autophagy-guidelines"
+          ]
+        },
+        "searchIntent": {
+          "primaryQuery": "LC3 turnover assay autophagy",
+          "readerQuestion": "What does an LC3 turnover assay measure, and why is a single LC3 measurement not an autophagy rate?",
+          "audience": "Researchers and technical readers interpreting autophagy assay results and claims built on them.",
+          "readerOutcome": "The reader can distinguish a static autophagosome measurement from a flux measurement and can say why neither establishes an organismal longevity outcome.",
+          "supportingQuestions": [
+            "What is the difference between static LC3 levels and autophagic flux?",
+            "Why is lysosomal inhibition used in these assays?",
+            "Can a single marker establish an autophagy rate?",
+            "Does an assay result support a longevity claim?"
+          ],
+          "queryVariants": [
+            "lc3 turnover assay explained",
+            "autophagic flux vs static lc3",
+            "how to interpret lc3 western blot"
+          ],
+          "title": "LC3 turnover assays: static levels versus real flux",
+          "description": "What LC3 turnover assays measure, why lysosomal inhibition is needed to read flux rather than a snapshot, and why no single marker establishes an autophagy rate.",
+          "trafficNonClaim": "This contract describes what the page says and what it declines to say. It does not guarantee rankings, impressions, traffic, or any commercial outcome."
+        },
+        "explanations": [
+          {
+            "heading": "What it is",
+            "paragraphs": [
+              "LC3 is used as a marker associated with autophagosomes, and a single measurement of it tells you how much is present at the moment of sampling. That quantity can rise either because more autophagosomes are being formed or because they are being cleared more slowly, which are opposite biological situations with the same readout.",
+              "A turnover assay addresses this by measuring under two conditions, one with lysosomal degradation blocked. The record is registered as a measurement and is bounded to the interpretation guidance in its cited locator rather than to any particular experimental result."
+            ],
+            "claimIds": [
+              "urn:maha:claim:longevity-metabolism-lc3-turnover-assays"
+            ],
+            "sourceIds": [
+              "source-longevity-metabolism-autophagy-guidelines"
+            ]
+          },
+          {
+            "heading": "How the cited evidence works",
+            "paragraphs": [
+              "The evidence is the community guidelines for the use and interpretation of assays for monitoring autophagy, published in Autophagy on 1 April 2012, read at the assay interpretation sections covering LC3, SQSTM1/p62, lysosomal inhibition and autophagic flux. Guidelines are the appropriate source class for a claim about how a measurement should be read.",
+              "Because the record cites interpretation guidance rather than an experimental series, the claim is recorded as an observation at single-study maturity, and no cross-source quantitative interval is asserted. The record paraphrases and does not reproduce the source text."
+            ],
+            "claimIds": [
+              "urn:maha:claim:longevity-metabolism-lc3-turnover-assays"
+            ],
+            "sourceIds": [
+              "source-longevity-metabolism-autophagy-guidelines"
+            ]
+          },
+          {
+            "heading": "What remains unresolved",
+            "paragraphs": [
+              "The assay does not by itself establish an autophagy rate, an organismal benefit or a longevity outcome. Those require separate measurements with their own scope, and the guidelines are explicit that assay-specific limits apply, so this record asserts nothing about lifespan or healthspan.",
+              "Comparability across systems is also unresolved. Cell type, blockade agent, exposure time and antibody all shift what the readout means, so carrying a result between protocols needs a declared comparison rather than an assumption that the assay behaves identically."
+            ],
+            "claimIds": [
+              "urn:maha:claim:longevity-metabolism-lc3-turnover-assays"
+            ],
+            "sourceIds": [
+              "source-longevity-metabolism-autophagy-guidelines"
+            ]
+          }
+        ],
+        "comparison": {
+          "status": "not-applicable",
+          "rationale": "A comparison table for LC3 turnover assays would need claims on both sides of an axis. The within-assay contrast between blocked and unblocked conditions is part of the method itself, not a comparison between two separately cited subjects, and only one source is cited. Presenting one cited source as a two-sided comparison would manufacture a contrast the evidence does not contain.",
+          "axes": []
+        },
+        "calculation": {
+          "status": "not-applicable",
+          "rationale": "Turnover is read as a difference between conditions whose normalisation depends on the blot, antibody and cell system used. The cited guidance fixes no expression, so writing one would imply a standard formula the source does not provide. Adding an expression here would create unsupported precision: it would imply the record fixes quantities that its cited locator does not fix, and a reader could reproduce a number that no source stands behind.",
+          "method": "",
+          "expression": "",
+          "inputs": [],
+          "assumptions": [],
+          "reproducibility": "",
+          "claimIds": [],
+          "sourceIds": []
+        },
+        "limitations": [
+          {
+            "statement": "LC3 turnover assays does not by itself establish system-level performance, safety, manufacturability, scalability, economic advantage, clinical benefit, or deployment readiness.",
+            "basis": "record-boundary",
+            "basisIndex": 0
+          },
+          {
+            "statement": "A source-bounded mechanism, method, or measurement record does not establish manufacturing yield, economic advantage, safety, clinical benefit, or commercial readiness unless those outcomes are measured in a separately scoped record.",
+            "basis": "record-boundary",
+            "basisIndex": 1
+          },
+          {
+            "statement": "Do not use this lc3 turnover assays record to claim that the surrounding technology is proven, safe, scalable, commercially available, or strategically superior.",
+            "basis": "prohibited-inference",
+            "basisIndex": 0
+          },
+          {
+            "statement": "Do not transfer a reported result across hardware, organisms, protocols, datasets, operating conditions, or outcome definitions without a declared comparison contract.",
+            "basis": "prohibited-inference",
+            "basisIndex": 1
+          }
+        ],
+        "relatedRecords": [
+          {
+            "recordId": "urn:maha:record:longevity-metabolism-autophagic-flux",
+            "relation": "mechanism",
+            "rationale": "Cites the same source as this record, so the two are related through the evidence rather than through wording."
+          },
+          {
+            "recordId": "urn:maha:record:longevity-metabolism-lysosomal-degradation-blockade",
+            "relation": "mechanism",
+            "rationale": "Declared mechanistic-dependency edge from this record. The edge is navigational and asserts no equivalence or causation beyond the cited source scope."
+          },
+          {
+            "recordId": "urn:maha:record:longevity-metabolism-p62-sqstm1-turnover",
+            "relation": "prerequisite",
+            "rationale": "Declared mechanistic-dependency edge into this record, so it is positioned earlier in the same bounded sequence."
+          }
+        ],
+        "originalContribution": "The contribution is making the static-versus-flux distinction the headline rather than a caveat, and attaching the prohibition on longevity inference directly to the measurement record where such inferences are usually introduced."
+      }
+    },
+    {
+      "slug": "neurotechnology-bci-spike-sorting-boundaries",
+      "domainSlug": "neurotechnology-bci",
+      "recordKind": "comparison",
+      "selectionRationale": "A comparison-kind record, included so the pilot set covers that record kind. Complete locator and rights basis, and it surfaces a second source-alignment defect that the gate cannot see.",
+      "sourceAlignment": "source-narrower-than-record-subject",
+      "sourceAlignmentNote": "The record subject is the boundary of spike sorting, but the cited source is the Neuropixels probe paper, which reports probe architecture, recording sites, channel selection and noise. Probe capability constrains what sorting can achieve but is not a study of sorting algorithms or their error rates, so the source is narrower than the record subject.",
+      "contractDigest": "sha256:62d28623bf4df7703d6bb42de55635b2abc0ab7e0599e0c9b91afef081904972",
+      "decision": {
+        "recordId": "urn:maha:record:neurotechnology-bci-spike-sorting-boundaries",
+        "pageEligible": true,
+        "evaluatedAgainst": "maha-substantial-page/0.1",
+        "reasons": [],
+        "measures": {
+          "explanationSections": 3,
+          "explanationParagraphs": 6,
+          "comparisonAxes": 0,
+          "calculationInputs": 0,
+          "limitations": 4,
+          "relatedRecords": 3,
+          "supportingQuestions": 4
+        }
+      },
+      "selectionTrace": [
+        {
+          "recordId": "urn:maha:record:neurotechnology-bci-extracellular-spike-recording",
+          "relation": "mechanism",
+          "tier": "bridge-edge",
+          "rationale": "Declared mechanistic-dependency edge from this record. The edge is navigational and asserts no equivalence or causation beyond the cited source scope."
+        },
+        {
+          "recordId": "urn:maha:record:neurotechnology-bci-micro-ecog-arrays",
+          "relation": "prerequisite",
+          "tier": "bridge-edge",
+          "rationale": "Declared mechanistic-dependency edge into this record, so it is positioned earlier in the same bounded sequence."
+        },
+        {
+          "recordId": "urn:maha:record:neurotechnology-bci-neuropixels-channel-selection",
+          "relation": "application",
+          "tier": "shared-source",
+          "rationale": "Cites the same source as this record, so the two are related through the evidence rather than through wording."
+        }
+      ],
+      "contract": {
+        "schemaVersion": "maha-substantial-page/0.1",
+        "recordId": "urn:maha:record:neurotechnology-bci-spike-sorting-boundaries",
+        "recordRevisionSha256": "sha256:0438a6ef58edff4d00d9b5cf1b4c9fa2aff72136c4233c85cdc41885956dd0e8",
+        "directAnswer": {
+          "text": "Spike sorting assigns recorded voltage events to putative individual neurons. The cited source reports the Neuropixels silicon-probe architecture and specified high-density recordings, which establishes recording capability rather than sorting correctness. Probe capability does not establish perfect unit identity, chronic stability or clinical suitability, and this record should not be read as evidence about sorting algorithms.",
+          "claimIds": [
+            "urn:maha:claim:neurotechnology-bci-spike-sorting-boundaries"
+          ],
+          "sourceIds": [
+            "source-neurotechnology-bci-neuropixels"
+          ]
+        },
+        "searchIntent": {
+          "primaryQuery": "spike sorting limitations",
+          "readerQuestion": "What are the boundaries of spike sorting, and does the cited probe evidence establish unit identity?",
+          "audience": "Neuroscience and BCI readers evaluating single-unit claims made from high-density recordings.",
+          "readerOutcome": "The reader can state that probe capability and sorting accuracy are different questions, and can see that the cited source addresses the former.",
+          "supportingQuestions": [
+            "What does spike sorting attempt to do?",
+            "Does high channel count guarantee correct unit identity?",
+            "What does the cited probe paper actually report?",
+            "Why is chronic stability a separate question?"
+          ],
+          "queryVariants": [
+            "spike sorting accuracy limits",
+            "neuropixels unit identity",
+            "high density recording sorting boundaries"
+          ],
+          "title": "Spike sorting boundaries: probe capability is not identity",
+          "description": "Why high-density probe capability does not establish correct spike sorting or stable unit identity, and what the cited Neuropixels source does and does not report.",
+          "trafficNonClaim": "This contract describes what the page says and what it declines to say. It does not guarantee rankings, impressions, traffic, or any commercial outcome."
+        },
+        "explanations": [
+          {
+            "heading": "What it is",
+            "paragraphs": [
+              "A dense extracellular probe records voltage at many sites, and a single neuron typically appears on several of them. Spike sorting is the inference step that groups those events into units that are treated as individual neurons for the rest of the analysis, which means every downstream single-unit claim inherits its assumptions.",
+              "The record is registered as a comparison and exists to hold the boundary of that inference. It is bounded to the scope of its cited locator, and it does not pool results across sorting algorithms, laboratories or preparations."
+            ],
+            "claimIds": [
+              "urn:maha:claim:neurotechnology-bci-spike-sorting-boundaries"
+            ],
+            "sourceIds": [
+              "source-neurotechnology-bci-neuropixels"
+            ]
+          },
+          {
+            "heading": "How the cited evidence works",
+            "paragraphs": [
+              "The evidence is the fully integrated silicon probes paper published in Nature on 8 November 2017, read at the probe architecture, recording sites, channel selection, noise, recordings and Methods sections. It reports what the hardware is and what recordings were obtained with it.",
+              "That makes the source a study of instrumentation rather than of the sorting step, which is the alignment limit of this record. Denser and quieter recording improves the conditions under which sorting operates, but the cited work does not measure sorting error, so nothing here quantifies how often unit identity is correct."
+            ],
+            "claimIds": [
+              "urn:maha:claim:neurotechnology-bci-spike-sorting-boundaries"
+            ],
+            "sourceIds": [
+              "source-neurotechnology-bci-neuropixels"
+            ]
+          },
+          {
+            "heading": "What remains unresolved",
+            "paragraphs": [
+              "Sorting accuracy itself is unresolved on this record. Error rates, the frequency of merged or split units, and the sensitivity of results to algorithm choice would each require a source that studies sorting directly, and none is cited here.",
+              "Chronic stability and clinical suitability are equally unresolved. A unit tracked across sessions may not be the same neuron, and the cited work does not establish that it is, so longitudinal and clinical claims need separately scoped evidence."
+            ],
+            "claimIds": [
+              "urn:maha:claim:neurotechnology-bci-spike-sorting-boundaries"
+            ],
+            "sourceIds": [
+              "source-neurotechnology-bci-neuropixels"
+            ]
+          }
+        ],
+        "comparison": {
+          "status": "not-applicable",
+          "rationale": "A comparison table for spike sorting boundaries would need claims on both sides of an axis. Although the record kind is comparison, the single cited source reports one instrument and no sorting alternative, so both columns of any axis would have to be supplied without citation. Presenting one cited source as a two-sided comparison would manufacture a contrast the evidence does not contain.",
+          "axes": []
+        },
+        "calculation": {
+          "status": "not-applicable",
+          "rationale": "No sorting error rate, yield figure or signal-to-noise threshold is fixed by the cited locator, so any expression here would imply a quantitative standard that the source does not set. Adding an expression here would create unsupported precision: it would imply the record fixes quantities that its cited locator does not fix, and a reader could reproduce a number that no source stands behind.",
+          "method": "",
+          "expression": "",
+          "inputs": [],
+          "assumptions": [],
+          "reproducibility": "",
+          "claimIds": [],
+          "sourceIds": []
+        },
+        "limitations": [
+          {
+            "statement": "Spike sorting boundaries does not by itself establish system-level performance, safety, manufacturability, scalability, economic advantage, clinical benefit, or deployment readiness.",
+            "basis": "record-boundary",
+            "basisIndex": 0
+          },
+          {
+            "statement": "A source-bounded mechanism, method, or measurement record does not establish manufacturing yield, economic advantage, safety, clinical benefit, or commercial readiness unless those outcomes are measured in a separately scoped record.",
+            "basis": "record-boundary",
+            "basisIndex": 1
+          },
+          {
+            "statement": "Do not use this spike sorting boundaries record to claim that the surrounding technology is proven, safe, scalable, commercially available, or strategically superior.",
+            "basis": "prohibited-inference",
+            "basisIndex": 0
+          },
+          {
+            "statement": "Do not transfer a reported result across hardware, organisms, protocols, datasets, operating conditions, or outcome definitions without a declared comparison contract.",
+            "basis": "prohibited-inference",
+            "basisIndex": 1
+          }
+        ],
+        "relatedRecords": [
+          {
+            "recordId": "urn:maha:record:neurotechnology-bci-extracellular-spike-recording",
+            "relation": "mechanism",
+            "rationale": "Declared mechanistic-dependency edge from this record. The edge is navigational and asserts no equivalence or causation beyond the cited source scope."
+          },
+          {
+            "recordId": "urn:maha:record:neurotechnology-bci-micro-ecog-arrays",
+            "relation": "prerequisite",
+            "rationale": "Declared mechanistic-dependency edge into this record, so it is positioned earlier in the same bounded sequence."
+          },
+          {
+            "recordId": "urn:maha:record:neurotechnology-bci-neuropixels-channel-selection",
+            "relation": "application",
+            "rationale": "Cites the same source as this record, so the two are related through the evidence rather than through wording."
+          }
+        ],
+        "originalContribution": "The contribution is separating instrument capability from inference correctness in a field where a probe citation is routinely offered as support for single-unit claims, and stating plainly that the cited source covers the instrument."
+      }
+    },
+    {
+      "slug": "mechanistic-interpretability-neural-feature-superposition",
+      "domainSlug": "mechanistic-interpretability",
+      "recordKind": "concept",
+      "selectionRationale": "The most connected record in the domain with six declared edges, a complete locator and rights basis. Its source addresses the subject directly, and it is the endpoint a Q-BR bridge tried and failed to reach, which makes its boundaries worth rendering carefully.",
+      "sourceAlignment": "record-subject-supported",
+      "sourceAlignmentNote": "Toy Models of Superposition develops the superposition account directly, and the locator names the definitions, toy models, geometry and sparsity sections.",
+      "contractDigest": "sha256:a6b6162118b689c314bef3d23e8002416aec21b93a59150428c67cf55920b43a",
+      "decision": {
+        "recordId": "urn:maha:record:mechanistic-interpretability-neural-feature-superposition",
+        "pageEligible": true,
+        "evaluatedAgainst": "maha-substantial-page/0.1",
+        "reasons": [],
+        "measures": {
+          "explanationSections": 3,
+          "explanationParagraphs": 6,
+          "comparisonAxes": 0,
+          "calculationInputs": 0,
+          "limitations": 4,
+          "relatedRecords": 6,
+          "supportingQuestions": 4
+        }
+      },
+      "selectionTrace": [
+        {
+          "recordId": "urn:maha:record:mechanistic-interpretability-activation-patching",
+          "relation": "boundary",
+          "tier": "bridge-edge",
+          "rationale": "Declared strategic-dependency edge into this record, so it is positioned earlier in the same bounded sequence."
+        },
+        {
+          "recordId": "urn:maha:record:mechanistic-interpretability-circuit-completeness",
+          "relation": "boundary",
+          "tier": "bridge-edge",
+          "rationale": "Declared strategic-dependency edge into this record, so it is positioned earlier in the same bounded sequence."
+        },
+        {
+          "recordId": "urn:maha:record:mechanistic-interpretability-dead-features",
+          "relation": "boundary",
+          "tier": "bridge-edge",
+          "rationale": "Declared strategic-dependency edge into this record, so it is positioned earlier in the same bounded sequence."
+        },
+        {
+          "recordId": "urn:maha:record:mechanistic-interpretability-induction-head-circuits",
+          "relation": "boundary",
+          "tier": "bridge-edge",
+          "rationale": "Declared strategic-dependency edge into this record, so it is positioned earlier in the same bounded sequence."
+        },
+        {
+          "recordId": "urn:maha:record:mechanistic-interpretability-polysemantic-neurons",
+          "relation": "prerequisite",
+          "tier": "bridge-edge",
+          "rationale": "Declared mechanistic-dependency edge into this record, so it is positioned earlier in the same bounded sequence."
+        },
+        {
+          "recordId": "urn:maha:record:mechanistic-interpretability-sparse-autoencoder-dictionaries",
+          "relation": "boundary",
+          "tier": "bridge-edge",
+          "rationale": "Declared strategic-dependency edge into this record, so it is positioned earlier in the same bounded sequence."
+        }
+      ],
+      "contract": {
+        "schemaVersion": "maha-substantial-page/0.1",
+        "recordId": "urn:maha:record:mechanistic-interpretability-neural-feature-superposition",
+        "recordRevisionSha256": "sha256:05a72058cb2682388462fcf950bdd95334b41c6ad0869a5e0f457d3c505eacea",
+        "directAnswer": {
+          "text": "Superposition is the proposal that a network can represent more distinct features than it has dimensions by assigning them overlapping, non-orthogonal directions, tolerating interference in exchange for capacity. The cited work develops toy models exhibiting this under specified sparsity conditions. It does not establish that every feature in a production model has the same geometry or semantics.",
+          "claimIds": [
+            "urn:maha:claim:mechanistic-interpretability-neural-feature-superposition"
+          ],
+          "sourceIds": [
+            "source-mechanistic-interpretability-superposition"
+          ]
+        },
+        "searchIntent": {
+          "primaryQuery": "neural feature superposition",
+          "readerQuestion": "What is superposition in a neural network, and what did the toy-model work actually show?",
+          "audience": "Readers of interpretability research who need toy-model results kept separate from claims about production models.",
+          "readerOutcome": "The reader can define superposition, state the sparsity conditions under which it was demonstrated, and avoid transferring toy-model geometry to production systems.",
+          "supportingQuestions": [
+            "What does it mean for a network to represent more features than dimensions?",
+            "What role does sparsity play in superposition?",
+            "Do toy-model results describe production language models?",
+            "How does superposition relate to polysemantic neurons?"
+          ],
+          "queryVariants": [
+            "what is superposition neural network",
+            "toy models of superposition explained",
+            "features than dimensions interpretability"
+          ],
+          "title": "Neural feature superposition: what toy models showed",
+          "description": "Superposition as an account of networks representing more features than dimensions, the sparsity conditions the toy models assumed, and why production models differ.",
+          "trafficNonClaim": "This contract describes what the page says and what it declines to say. It does not guarantee rankings, impressions, traffic, or any commercial outcome."
+        },
+        "explanations": [
+          {
+            "heading": "What it is",
+            "paragraphs": [
+              "If a layer has a fixed number of dimensions, the naive expectation is that it can cleanly represent at most that many features. Superposition is the account under which a network instead packs more features into the space by giving them directions that are not orthogonal, accepting some interference between them as the price of extra capacity.",
+              "The record is registered as a concept and is bounded to the definitions, toy models, geometry, sparsity and feature-interference experiments named in its locator. It is a model of how representation might be organised, not a measurement taken from a deployed system."
+            ],
+            "claimIds": [
+              "urn:maha:claim:mechanistic-interpretability-neural-feature-superposition"
+            ],
+            "sourceIds": [
+              "source-mechanistic-interpretability-superposition"
+            ]
+          },
+          {
+            "heading": "How the cited evidence works",
+            "paragraphs": [
+              "The evidence is Toy Models of Superposition, published on the Transformer Circuits Thread on 14 September 2022. The work constructs small models where the number of features, the dimensionality and the sparsity of feature occurrence are all controlled, then examines the geometry the models adopt.",
+              "The controlled setting is what gives the result its force and also what bounds it. Sparsity is an assumption of the construction rather than a measured property of a production network, so the demonstration is that superposition occurs under stated conditions, recorded here at single-study maturity as a theoretical model."
+            ],
+            "claimIds": [
+              "urn:maha:claim:mechanistic-interpretability-neural-feature-superposition"
+            ],
+            "sourceIds": [
+              "source-mechanistic-interpretability-superposition"
+            ]
+          },
+          {
+            "heading": "What remains unresolved",
+            "paragraphs": [
+              "Whether production models exhibit the same geometry is unresolved. A toy-model mechanism does not establish that features in a large deployed network share that structure or that any particular direction found there carries the semantics an interpreter assigns to it.",
+              "The relationship between superposition and downstream interpretability methods is also unresolved on this record. Techniques that assume a sparse overcomplete basis are motivated by this account but are not validated by it, and treating the motivation as evidence for the method is precisely the transfer this record forbids."
+            ],
+            "claimIds": [
+              "urn:maha:claim:mechanistic-interpretability-neural-feature-superposition"
+            ],
+            "sourceIds": [
+              "source-mechanistic-interpretability-superposition"
+            ]
+          }
+        ],
+        "comparison": {
+          "status": "not-applicable",
+          "rationale": "A comparison table for neural feature superposition would need claims on both sides of an axis. The record cites one work and carries one claim, and the natural contrast, production-model geometry, is precisely what the source does not measure. Presenting one cited source as a two-sided comparison would manufacture a contrast the evidence does not contain.",
+          "axes": []
+        },
+        "calculation": {
+          "status": "not-applicable",
+          "rationale": "Feature counts, dimensionality and sparsity are parameters chosen inside the cited construction rather than quantities this record fixes, so an expression here would imply a general capacity formula the source does not assert. Adding an expression here would create unsupported precision: it would imply the record fixes quantities that its cited locator does not fix, and a reader could reproduce a number that no source stands behind.",
+          "method": "",
+          "expression": "",
+          "inputs": [],
+          "assumptions": [],
+          "reproducibility": "",
+          "claimIds": [],
+          "sourceIds": []
+        },
+        "limitations": [
+          {
+            "statement": "Neural feature superposition does not by itself establish system-level performance, safety, manufacturability, scalability, economic advantage, clinical benefit, or deployment readiness.",
+            "basis": "record-boundary",
+            "basisIndex": 0
+          },
+          {
+            "statement": "A source-bounded mechanism, method, or measurement record does not establish manufacturing yield, economic advantage, safety, clinical benefit, or commercial readiness unless those outcomes are measured in a separately scoped record.",
+            "basis": "record-boundary",
+            "basisIndex": 1
+          },
+          {
+            "statement": "Do not use this neural feature superposition record to claim that the surrounding technology is proven, safe, scalable, commercially available, or strategically superior.",
+            "basis": "prohibited-inference",
+            "basisIndex": 0
+          },
+          {
+            "statement": "Do not transfer a reported result across hardware, organisms, protocols, datasets, operating conditions, or outcome definitions without a declared comparison contract.",
+            "basis": "prohibited-inference",
+            "basisIndex": 1
+          }
+        ],
+        "relatedRecords": [
+          {
+            "recordId": "urn:maha:record:mechanistic-interpretability-activation-patching",
+            "relation": "boundary",
+            "rationale": "Declared strategic-dependency edge into this record, so it is positioned earlier in the same bounded sequence."
+          },
+          {
+            "recordId": "urn:maha:record:mechanistic-interpretability-circuit-completeness",
+            "relation": "boundary",
+            "rationale": "Declared strategic-dependency edge into this record, so it is positioned earlier in the same bounded sequence."
+          },
+          {
+            "recordId": "urn:maha:record:mechanistic-interpretability-dead-features",
+            "relation": "boundary",
+            "rationale": "Declared strategic-dependency edge into this record, so it is positioned earlier in the same bounded sequence."
+          },
+          {
+            "recordId": "urn:maha:record:mechanistic-interpretability-induction-head-circuits",
+            "relation": "boundary",
+            "rationale": "Declared strategic-dependency edge into this record, so it is positioned earlier in the same bounded sequence."
+          },
+          {
+            "recordId": "urn:maha:record:mechanistic-interpretability-polysemantic-neurons",
+            "relation": "prerequisite",
+            "rationale": "Declared mechanistic-dependency edge into this record, so it is positioned earlier in the same bounded sequence."
+          },
+          {
+            "recordId": "urn:maha:record:mechanistic-interpretability-sparse-autoencoder-dictionaries",
+            "relation": "boundary",
+            "rationale": "Declared strategic-dependency edge into this record, so it is positioned earlier in the same bounded sequence."
+          }
+        ],
+        "originalContribution": "The contribution is keeping the toy-model boundary attached to the concept itself, so that the sparsity assumption travels with the idea rather than being dropped when superposition is invoked to justify a downstream interpretability method."
+      }
+    },
+    {
+      "slug": "agentic-systems-mcp-mcp-capability-negotiation",
+      "domainSlug": "agentic-systems-mcp",
+      "recordKind": "mechanism",
+      "selectionRationale": "A mechanism-kind record whose source is a protocol specification, which makes the conformance-versus-safety boundary crisp. Complete locator and rights basis, and directly relevant to the tooling this codebase runs.",
+      "sourceAlignment": "record-subject-supported",
+      "sourceAlignmentNote": "The MCP tools specification defines the discovery and invocation contracts the record describes, and the locator names those sections.",
+      "contractDigest": "sha256:d1d2b2861d857437bd7a05e7c81b78b56abb47ffa117f52db412697447fa89fc",
+      "decision": {
+        "recordId": "urn:maha:record:agentic-systems-mcp-mcp-capability-negotiation",
+        "pageEligible": true,
+        "evaluatedAgainst": "maha-substantial-page/0.1",
+        "reasons": [],
+        "measures": {
+          "explanationSections": 3,
+          "explanationParagraphs": 6,
+          "comparisonAxes": 0,
+          "calculationInputs": 0,
+          "limitations": 4,
+          "relatedRecords": 3,
+          "supportingQuestions": 4
+        }
+      },
+      "selectionTrace": [
+        {
+          "recordId": "urn:maha:record:agentic-systems-mcp-mcp-client-server-roles",
+          "relation": "mechanism",
+          "tier": "bridge-edge",
+          "rationale": "Declared mechanistic-dependency edge from this record. The edge is navigational and asserts no equivalence or causation beyond the cited source scope."
+        },
+        {
+          "recordId": "urn:maha:record:agentic-systems-mcp-mcp-tool-discovery",
+          "relation": "prerequisite",
+          "tier": "bridge-edge",
+          "rationale": "Declared mechanistic-dependency edge into this record, so it is positioned earlier in the same bounded sequence."
+        },
+        {
+          "recordId": "urn:maha:record:agentic-systems-mcp-mcp-tool-input-schemas",
+          "relation": "measurement",
+          "tier": "shared-source",
+          "rationale": "Cites the same source as this record, so the two are related through the evidence rather than through wording."
+        }
+      ],
+      "contract": {
+        "schemaVersion": "maha-substantial-page/0.1",
+        "recordId": "urn:maha:record:agentic-systems-mcp-mcp-capability-negotiation",
+        "recordRevisionSha256": "sha256:04b49adfee9ef25a070060f53ce2b0ce84a57da1c79e77635485c7a8bb60610d",
+        "directAnswer": {
+          "text": "Capability negotiation is the exchange in which an MCP client learns which tools a server exposes and how to call them. The cited specification defines the protocol roles and message contracts for discovering and invoking server-exposed tools, including input schemas, results and error handling. Conformance to those contracts does not establish that a tool is safe, correctly authorized, idempotent or resistant to malicious input.",
+          "claimIds": [
+            "urn:maha:claim:agentic-systems-mcp-mcp-capability-negotiation"
+          ],
+          "sourceIds": [
+            "source-agentic-systems-mcp-mcp-tools"
+          ]
+        },
+        "searchIntent": {
+          "primaryQuery": "MCP capability negotiation",
+          "readerQuestion": "How do MCP clients and servers agree on available tools, and what does conformance not guarantee?",
+          "audience": "Engineers integrating Model Context Protocol servers who need protocol conformance separated from security properties.",
+          "readerOutcome": "The reader can describe how tools are discovered and invoked under the specification, and can state that conformance implies nothing about authorization or safety.",
+          "supportingQuestions": [
+            "How does a client discover which tools a server exposes?",
+            "What contract governs tool inputs and results?",
+            "Does protocol conformance make a tool safe to call?",
+            "Where do authorization decisions actually belong?"
+          ],
+          "queryVariants": [
+            "model context protocol tool discovery",
+            "mcp tools specification explained",
+            "mcp conformance vs tool safety"
+          ],
+          "title": "MCP capability negotiation: conformance is not safety",
+          "description": "How the Model Context Protocol specifies tool discovery, input schemas and result contracts, and why conforming to it establishes nothing about authorization or safety.",
+          "trafficNonClaim": "This contract describes what the page says and what it declines to say. It does not guarantee rankings, impressions, traffic, or any commercial outcome."
+        },
+        "explanations": [
+          {
+            "heading": "What it is",
+            "paragraphs": [
+              "An MCP client connects to a server without prior knowledge of what that server can do. Capability negotiation is the exchange that resolves this: the server advertises the tools it exposes together with schemas describing their inputs, and the client learns what it may call and how the call must be shaped.",
+              "The record is registered as a mechanism and is bounded to the discovery, input schema, call, result, error handling and security consideration sections of its cited locator. It describes the contract, not any particular implementation of it."
+            ],
+            "claimIds": [
+              "urn:maha:claim:agentic-systems-mcp-mcp-capability-negotiation"
+            ],
+            "sourceIds": [
+              "source-agentic-systems-mcp-mcp-tools"
+            ]
+          },
+          {
+            "heading": "How the cited evidence works",
+            "paragraphs": [
+              "The evidence is the Model Context Protocol specification covering tools, read at the sections just named. A specification is the appropriate source class for a claim about roles and message contracts, because the contract is exactly what the document defines.",
+              "The record treats it accordingly as a bounded description rather than a measurement, recorded at single-study maturity as a theoretical model. It paraphrases the contract in original boundary language and reproduces no passage of the specification."
+            ],
+            "claimIds": [
+              "urn:maha:claim:agentic-systems-mcp-mcp-capability-negotiation"
+            ],
+            "sourceIds": [
+              "source-agentic-systems-mcp-mcp-tools"
+            ]
+          },
+          {
+            "heading": "What remains unresolved",
+            "paragraphs": [
+              "Everything about trust remains unresolved. Protocol conformance does not establish that a tool is safe to invoke, that the caller is authorized to invoke it, that repeated invocation is harmless, or that the tool resists inputs crafted to subvert it, and the specification does not claim otherwise.",
+              "The behaviour of tool output is likewise out of scope. A conforming result contract says the shape of a response is valid, not that its content is trustworthy, so the boundary between a well-formed result and a safe one has to be enforced separately by whatever consumes it."
+            ],
+            "claimIds": [
+              "urn:maha:claim:agentic-systems-mcp-mcp-capability-negotiation"
+            ],
+            "sourceIds": [
+              "source-agentic-systems-mcp-mcp-tools"
+            ]
+          }
+        ],
+        "comparison": {
+          "status": "not-applicable",
+          "rationale": "A comparison table for MCP capability negotiation would need claims on both sides of an axis. One specification is cited and one claim is carried, so any comparison against another protocol would need a second source that this record does not have. Presenting one cited source as a two-sided comparison would manufacture a contrast the evidence does not contain.",
+          "axes": []
+        },
+        "calculation": {
+          "status": "not-applicable",
+          "rationale": "The record describes message contracts, which have no numeric parameters. There is no rate, budget or threshold in the cited locator that an expression could reproduce. Adding an expression here would create unsupported precision: it would imply the record fixes quantities that its cited locator does not fix, and a reader could reproduce a number that no source stands behind.",
+          "method": "",
+          "expression": "",
+          "inputs": [],
+          "assumptions": [],
+          "reproducibility": "",
+          "claimIds": [],
+          "sourceIds": []
+        },
+        "limitations": [
+          {
+            "statement": "MCP capability negotiation does not by itself establish system-level performance, safety, manufacturability, scalability, economic advantage, clinical benefit, or deployment readiness.",
+            "basis": "record-boundary",
+            "basisIndex": 0
+          },
+          {
+            "statement": "A source-bounded mechanism, method, or measurement record does not establish manufacturing yield, economic advantage, safety, clinical benefit, or commercial readiness unless those outcomes are measured in a separately scoped record.",
+            "basis": "record-boundary",
+            "basisIndex": 1
+          },
+          {
+            "statement": "Do not use this mcp capability negotiation record to claim that the surrounding technology is proven, safe, scalable, commercially available, or strategically superior.",
+            "basis": "prohibited-inference",
+            "basisIndex": 0
+          },
+          {
+            "statement": "Do not transfer a reported result across hardware, organisms, protocols, datasets, operating conditions, or outcome definitions without a declared comparison contract.",
+            "basis": "prohibited-inference",
+            "basisIndex": 1
+          }
+        ],
+        "relatedRecords": [
+          {
+            "recordId": "urn:maha:record:agentic-systems-mcp-mcp-client-server-roles",
+            "relation": "mechanism",
+            "rationale": "Declared mechanistic-dependency edge from this record. The edge is navigational and asserts no equivalence or causation beyond the cited source scope."
+          },
+          {
+            "recordId": "urn:maha:record:agentic-systems-mcp-mcp-tool-discovery",
+            "relation": "prerequisite",
+            "rationale": "Declared mechanistic-dependency edge into this record, so it is positioned earlier in the same bounded sequence."
+          },
+          {
+            "recordId": "urn:maha:record:agentic-systems-mcp-mcp-tool-input-schemas",
+            "relation": "measurement",
+            "rationale": "Cites the same source as this record, so the two are related through the evidence rather than through wording."
+          }
+        ],
+        "originalContribution": "The contribution is attaching the conformance-is-not-authorization boundary directly to the negotiation mechanism, where integration work tends to assume that a valid schema implies a safe call."
+      }
+    },
+    {
+      "slug": "critical-supply-chains-high-purity-quartz-deposits",
+      "domainSlug": "critical-supply-chains",
+      "recordKind": "concept",
+      "selectionRationale": "The most connected record in the domain with six declared edges, a complete locator and a government-publication rights basis. A supply-side concept balances the physics and software records in the set.",
+      "sourceAlignment": "record-subject-supported",
+      "sourceAlignmentNote": "The USGS critical mineral resources volume covers geology, production, processing, uses and supply considerations for selected commodities, which is the record subject.",
+      "contractDigest": "sha256:397138bd24e252f22886ec884927fd2dfe4e94c36ca700bb0ebc1a347f68a781",
+      "decision": {
+        "recordId": "urn:maha:record:critical-supply-chains-high-purity-quartz-deposits",
+        "pageEligible": true,
+        "evaluatedAgainst": "maha-substantial-page/0.1",
+        "reasons": [],
+        "measures": {
+          "explanationSections": 3,
+          "explanationParagraphs": 6,
+          "comparisonAxes": 0,
+          "calculationInputs": 0,
+          "limitations": 4,
+          "relatedRecords": 6,
+          "supportingQuestions": 4
+        }
+      },
+      "selectionTrace": [
+        {
+          "recordId": "urn:maha:record:critical-supply-chains-critical-mineral-import-reliance",
+          "relation": "boundary",
+          "tier": "bridge-edge",
+          "rationale": "Declared strategic-dependency edge into this record, so it is positioned earlier in the same bounded sequence."
+        },
+        {
+          "recordId": "urn:maha:record:critical-supply-chains-dysprosium-ore-to-oxide",
+          "relation": "boundary",
+          "tier": "bridge-edge",
+          "rationale": "Declared strategic-dependency edge into this record, so it is positioned earlier in the same bounded sequence."
+        },
+        {
+          "recordId": "urn:maha:record:critical-supply-chains-fluorinated-resist-components",
+          "relation": "boundary",
+          "tier": "bridge-edge",
+          "rationale": "Declared strategic-dependency edge into this record, so it is positioned earlier in the same bounded sequence."
+        },
+        {
+          "recordId": "urn:maha:record:critical-supply-chains-helium-liquefaction-logistics",
+          "relation": "boundary",
+          "tier": "bridge-edge",
+          "rationale": "Declared strategic-dependency edge into this record, so it is positioned earlier in the same bounded sequence."
+        },
+        {
+          "recordId": "urn:maha:record:critical-supply-chains-magnet-recycling",
+          "relation": "boundary",
+          "tier": "bridge-edge",
+          "rationale": "Declared strategic-dependency edge into this record, so it is positioned earlier in the same bounded sequence."
+        },
+        {
+          "recordId": "urn:maha:record:critical-supply-chains-quartz-crucible-manufacturing",
+          "relation": "prerequisite",
+          "tier": "bridge-edge",
+          "rationale": "Declared mechanistic-dependency edge into this record, so it is positioned earlier in the same bounded sequence."
+        }
+      ],
+      "contract": {
+        "schemaVersion": "maha-substantial-page/0.1",
+        "recordId": "urn:maha:record:critical-supply-chains-high-purity-quartz-deposits",
+        "recordRevisionSha256": "sha256:c667320cf234997948bffc6fef2aefd2133010aed2a0af4d457dad0817fd93c0",
+        "directAnswer": {
+          "text": "High-purity quartz is a feedstock whose trace-element content matters for downstream semiconductor processing, notably for crucibles used in silicon crystal growth. The cited USGS volume describes geology, production, processing, uses and supply considerations for selected commodities. Geologic occurrence and historical production do not establish that qualified material is available for any specific industrial process.",
+          "claimIds": [
+            "urn:maha:claim:critical-supply-chains-high-purity-quartz-deposits"
+          ],
+          "sourceIds": [
+            "source-critical-supply-chains-pp1802"
+          ]
+        },
+        "searchIntent": {
+          "primaryQuery": "high purity quartz supply",
+          "readerQuestion": "Why does high-purity quartz matter industrially, and does geologic occurrence mean available supply?",
+          "audience": "Supply-chain analysts and policy readers assessing material-availability claims about semiconductor inputs.",
+          "readerOutcome": "The reader can distinguish geologic resources from qualified industrial supply and can say what the cited USGS volume does and does not establish.",
+          "supportingQuestions": [
+            "What makes a quartz deposit high purity?",
+            "What is the difference between a resource and available supply?",
+            "Does historical production establish future availability?",
+            "What qualifies a material for a specific industrial process?"
+          ],
+          "queryVariants": [
+            "high purity quartz crucible supply",
+            "quartz resources vs available supply",
+            "usgs critical minerals quartz"
+          ],
+          "title": "High-purity quartz: resources versus qualified supply",
+          "description": "Why geologic occurrence and historical production of high-purity quartz do not establish qualified material availability for a specific industrial process.",
+          "trafficNonClaim": "This contract describes what the page says and what it declines to say. It does not guarantee rankings, impressions, traffic, or any commercial outcome."
+        },
+        "explanations": [
+          {
+            "heading": "What it is",
+            "paragraphs": [
+              "Quartz is abundant, but the grades that matter industrially are defined by trace-element content at levels where ordinary sources are unusable. High-purity quartz deposits are those whose impurity profile permits the demanding downstream uses, which is a far narrower category than quartz as a mineral.",
+              "The record is registered as a concept in the critical-supply-chains graph and is bounded to the commodity and introductory chapters named in its locator, which distinguish resources, production, processing, uses and supply considerations from one another."
+            ],
+            "claimIds": [
+              "urn:maha:claim:critical-supply-chains-high-purity-quartz-deposits"
+            ],
+            "sourceIds": [
+              "source-critical-supply-chains-pp1802"
+            ]
+          },
+          {
+            "heading": "How the cited evidence works",
+            "paragraphs": [
+              "The evidence is the U.S. Geological Survey volume on critical mineral resources of the United States, published 19 December 2017, read at the commodity chapters and the introductory sections. A national geological survey is an appropriate source for statements about resources, production and processing.",
+              "The structure of that source is what makes the record useful: it keeps resource estimates, production figures and supply considerations as separate categories rather than merging them, which is the distinction the record carries forward at single-study maturity."
+            ],
+            "claimIds": [
+              "urn:maha:claim:critical-supply-chains-high-purity-quartz-deposits"
+            ],
+            "sourceIds": [
+              "source-critical-supply-chains-pp1802"
+            ]
+          },
+          {
+            "heading": "What remains unresolved",
+            "paragraphs": [
+              "Qualified availability for a named process is unresolved. A deposit being geologically present, and having been produced from historically, does not establish that material meeting a specific purity specification can be obtained at a required volume, price or schedule.",
+              "Concentration risk is likewise not quantified here. The record asserts no interval for processing concentration, export exposure or substitution feasibility, and any such figure would need a separately scoped record with its own evidence."
+            ],
+            "claimIds": [
+              "urn:maha:claim:critical-supply-chains-high-purity-quartz-deposits"
+            ],
+            "sourceIds": [
+              "source-critical-supply-chains-pp1802"
+            ]
+          }
+        ],
+        "comparison": {
+          "status": "not-applicable",
+          "rationale": "A comparison table for high-purity quartz deposits would need claims on both sides of an axis. A comparison across producing regions or grades would need per-region claims, and this record carries a single claim bounded to one survey volume. Presenting one cited source as a two-sided comparison would manufacture a contrast the evidence does not contain.",
+          "axes": []
+        },
+        "calculation": {
+          "status": "not-applicable",
+          "rationale": "No purity specification, reserve figure or concentration index is fixed by the cited locator, so any expression would imply a threshold the source does not set. Adding an expression here would create unsupported precision: it would imply the record fixes quantities that its cited locator does not fix, and a reader could reproduce a number that no source stands behind.",
+          "method": "",
+          "expression": "",
+          "inputs": [],
+          "assumptions": [],
+          "reproducibility": "",
+          "claimIds": [],
+          "sourceIds": []
+        },
+        "limitations": [
+          {
+            "statement": "High purity quartz deposits does not by itself establish system-level performance, safety, manufacturability, scalability, economic advantage, clinical benefit, or deployment readiness.",
+            "basis": "record-boundary",
+            "basisIndex": 0
+          },
+          {
+            "statement": "A source-bounded mechanism, method, or measurement record does not establish manufacturing yield, economic advantage, safety, clinical benefit, or commercial readiness unless those outcomes are measured in a separately scoped record.",
+            "basis": "record-boundary",
+            "basisIndex": 1
+          },
+          {
+            "statement": "Do not use this high purity quartz deposits record to claim that the surrounding technology is proven, safe, scalable, commercially available, or strategically superior.",
+            "basis": "prohibited-inference",
+            "basisIndex": 0
+          },
+          {
+            "statement": "Do not transfer a reported result across hardware, organisms, protocols, datasets, operating conditions, or outcome definitions without a declared comparison contract.",
+            "basis": "prohibited-inference",
+            "basisIndex": 1
+          }
+        ],
+        "relatedRecords": [
+          {
+            "recordId": "urn:maha:record:critical-supply-chains-critical-mineral-import-reliance",
+            "relation": "boundary",
+            "rationale": "Declared strategic-dependency edge into this record, so it is positioned earlier in the same bounded sequence."
+          },
+          {
+            "recordId": "urn:maha:record:critical-supply-chains-dysprosium-ore-to-oxide",
+            "relation": "boundary",
+            "rationale": "Declared strategic-dependency edge into this record, so it is positioned earlier in the same bounded sequence."
+          },
+          {
+            "recordId": "urn:maha:record:critical-supply-chains-fluorinated-resist-components",
+            "relation": "boundary",
+            "rationale": "Declared strategic-dependency edge into this record, so it is positioned earlier in the same bounded sequence."
+          },
+          {
+            "recordId": "urn:maha:record:critical-supply-chains-helium-liquefaction-logistics",
+            "relation": "boundary",
+            "rationale": "Declared strategic-dependency edge into this record, so it is positioned earlier in the same bounded sequence."
+          },
+          {
+            "recordId": "urn:maha:record:critical-supply-chains-magnet-recycling",
+            "relation": "boundary",
+            "rationale": "Declared strategic-dependency edge into this record, so it is positioned earlier in the same bounded sequence."
+          },
+          {
+            "recordId": "urn:maha:record:critical-supply-chains-quartz-crucible-manufacturing",
+            "relation": "prerequisite",
+            "rationale": "Declared mechanistic-dependency edge into this record, so it is positioned earlier in the same bounded sequence."
+          }
+        ],
+        "originalContribution": "The contribution is separating three things that supply commentary habitually merges: what is in the ground, what has been produced, and what is qualified for a given process, with the cited volume supporting only the first two."
+      }
+    }
+  ]
+}

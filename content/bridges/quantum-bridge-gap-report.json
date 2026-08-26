@@ -208,14 +208,15 @@
   },
   "endpointClosure": {
     "planVersion": "maha-endpoint-closure/1.0",
-    "planDigest": "sha256:c1061e0ff86d1bb4442768aec653fc7f2ba2fbd4bb4968cb8ac4ffb43288b9f3",
+    "planDigest": "sha256:fc42b7b3f39f23f5e3933c8e349a5d1ac8ea6b53845546ed67b95f2cbaec36f2",
     "classificationTotals": {
       "existing-record-alias": 1,
-      "new-record-candidate": 10,
+      "new-record-candidate": 9,
       "compound-endpoint": 4,
       "invalid-endpoint": 1,
       "incompatible-record-class": 4,
-      "blocked-pending-evidence": 3
+      "blocked-pending-evidence": 1,
+      "revise-reference": 3
     },
     "candidateCount": 10,
     "promotableCandidateCount": 0

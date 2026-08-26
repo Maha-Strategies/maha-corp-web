@@ -196,18 +196,19 @@ These are not fixed by creating records or supplying locators.
 
 ## Endpoint closure
 
-Plan `maha-endpoint-closure/1.0` · digest `sha256:c1061e0ff86d1bb4442768aec653fc7f2ba2fbd4bb4968cb8ac4ffb43288b9f3`. Full reasoning in `docs/bridges/endpoint-resolution-plan.md`.
+Plan `maha-endpoint-closure/1.0` · digest `sha256:fc42b7b3f39f23f5e3933c8e349a5d1ac8ea6b53845546ed67b95f2cbaec36f2`. Full reasoning in `docs/bridges/endpoint-resolution-plan.md`.
 
 Candidates built: **10**, of which **0** are promotable. A candidate is not a canonical record, so building one does not resolve its endpoint.
 
 | Classification | Count |
 | --- | --- |
 | existing-record-alias | 1 |
-| new-record-candidate | 10 |
+| new-record-candidate | 9 |
 | compound-endpoint | 4 |
 | invalid-endpoint | 1 |
 | incompatible-record-class | 4 |
-| blocked-pending-evidence | 3 |
+| blocked-pending-evidence | 1 |
+| revise-reference | 3 |
 
 | Key | Classification | Live resolver outcome |
 | --- | --- | --- |
@@ -223,15 +224,15 @@ Candidates built: **10**, of which **0** are promotable. A candidate is not a ca
 | Q-BR-005B | new-record-candidate | unresolved-record |
 | Q-BR-006A | new-record-candidate | unresolved-record |
 | Q-BR-007A | new-record-candidate | unresolved-record |
-| Q-BR-007B | new-record-candidate | unresolved-record |
+| Q-BR-007B | revise-reference | unresolved-record |
 | Q-BR-008A | existing-record-alias | alias-resolution |
 | Q-BR-008B | incompatible-record-class | unresolved-record |
 | Q-BR-009A | new-record-candidate | unresolved-record |
 | Q-BR-009B | incompatible-record-class | unresolved-record |
 | Q-BR-010A | new-record-candidate | unresolved-record |
-| Q-BR-010B | blocked-pending-evidence | unresolved-record |
+| Q-BR-010B | revise-reference | unresolved-record |
 | Q-BR-011A | invalid-endpoint | unresolved-record |
-| Q-BR-011B | blocked-pending-evidence | unresolved-record |
+| Q-BR-011B | revise-reference | unresolved-record |
 | Q-BR-012A | new-record-candidate | unresolved-record |
 | Q-BR-012B | compound-endpoint | unresolved-record |
 
