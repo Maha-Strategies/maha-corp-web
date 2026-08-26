@@ -138,5 +138,63 @@
         "disposition": "withheld-pending-reaudit — the current revision is alignment-clear and content-inspected, but a superseding release requires scoped review decisions that do not exist."
       }
     ]
+  },
+  {
+    "observationId": "batch-2-reconciliation-002",
+    "supersedes": null,
+    "appendOnlyNote": "Post-deployment confirmation of observation 001. Neither 001 nor the original deployment baseline is edited.",
+    "reconciliationRelease": {
+      "prNumber": 230,
+      "mergeSha": "0fc8f573a392afd076c7b8726f8c72d96df9060d",
+      "deploymentId": "6106599763",
+      "environment": "Production",
+      "state": "success",
+      "dateUtc": "2026-08-26"
+    },
+    "baselineRelease": {
+      "prNumber": 229,
+      "mergeSha": "cd9c91b0d52828bcb239dc912b6c4f08ff9dd2b1"
+    },
+    "productionMutationPerformed": false,
+    "canonicalReleasesCreated": 0,
+    "verifiedAfterDeployment": {
+      "batch2": {
+        "http200": 5,
+        "canonicallyReleased": 4,
+        "substantiallyRendered": 3,
+        "sitemap": 5,
+        "llmsTxt": 5,
+        "canonicalMetadataCorrect": 5,
+        "jsonLdValidTechArticle": 5
+      },
+      "batch1": {
+        "http200": 20,
+        "canonicallyReleased": 20,
+        "substantiallyRendered": 20,
+        "sitemap": 20,
+        "llmsTxt": 20,
+        "canonicalMetadataCorrect": 20,
+        "jsonLdValidTechArticle": 20
+      }
+    },
+    "boundary": {
+      "rejectedRecordsServed": 17,
+      "rejectedContaminatedWithBatch2Material": 0,
+      "heldRecordsServed": 0,
+      "sitemapUrls": 689,
+      "sitemapDuplicates": 0,
+      "llmsSubstantialEntries": 25,
+      "nonpublicAuditRoutesProbed": 7,
+      "nonpublicAuditRoutesPublic": 0
+    },
+    "stillWithheld": {
+      "missingReleaseDecisions": 25,
+      "revisionDrifted": 2,
+      "total": 27,
+      "blocker": "approval-review-missing plus expert-review-missing for source-fidelity, domain-fidelity, boundary-adequacy and rights-and-locator, on each exact record revision."
+    },
+    "measurementWindows": {
+      "note": "No record became newly public, so no new window opens. The three rendered records keep windows anchored to the original batch two deployment date of 2026-08-26."
+    }
   }
 ]
