@@ -1,0 +1,142 @@
+[
+  {
+    "observationId": "batch-2-reconciliation-001",
+    "supersedes": null,
+    "appendOnlyNote": "This observation is additive. The original batch two deployment baseline (publication-batch-2-search-baseline.json) records 5 reachable and 3 substantially rendered and is never edited.",
+    "originalDeployment": {
+      "mergeSha": "bce74b62bc0d6b56d6664d8f37447d023524129c",
+      "reachable": 5,
+      "substantiallyRendered": 3,
+      "deployedAtUtc": "2026-08-26T14:21:56Z"
+    },
+    "reconciliation": {
+      "dateUtc": "2026-08-26",
+      "baselinePrMergeSha": "cd9c91b0d52828bcb239dc912b6c4f08ff9dd2b1",
+      "recordsNewlyReleased": 0,
+      "recordsReAudited": [
+        "urn:maha:record:advanced-materials-hexagonal-boron-nitride-dielectrics",
+        "urn:maha:record:neurotechnology-bci-spike-sorting-boundaries"
+      ],
+      "recordsStillWithheld": [
+        "urn:maha:record:advanced-materials-correlated-insulating-states",
+        "urn:maha:record:advanced-materials-hexagonal-boron-nitride-dielectrics",
+        "urn:maha:record:advanced-materials-magic-angle-superconductivity",
+        "urn:maha:record:agentic-systems-mcp-context-window-position-effects",
+        "urn:maha:record:agentic-systems-mcp-mcp-prompt-templates",
+        "urn:maha:record:agentic-systems-mcp-mcp-resource-discovery",
+        "urn:maha:record:agentic-systems-mcp-tool-deny-by-default",
+        "urn:maha:record:biomolecular-engineering-cell-free-transcription-translation",
+        "urn:maha:record:biomolecular-engineering-experimental-fold-validation",
+        "urn:maha:record:biomolecular-engineering-sequence-design-with-proteinmpnn",
+        "urn:maha:record:circuit-quantum-electrodynamics",
+        "urn:maha:record:critical-supply-chains-critical-mineral-import-reliance",
+        "urn:maha:record:fusion-plasma-systems-breeding-blanket-test-modules",
+        "urn:maha:record:fusion-plasma-systems-disruption-mitigation",
+        "urn:maha:record:fusion-plasma-systems-divertor-heat-exhaust",
+        "urn:maha:record:fusion-plasma-systems-plasma-diagnostics",
+        "urn:maha:record:fusion-plasma-systems-tritium-fuel-cycle",
+        "urn:maha:record:mechanistic-interpretability-attention-pattern-evidence",
+        "urn:maha:record:mechanistic-interpretability-causal-scrubbing",
+        "urn:maha:record:mechanistic-interpretability-in-context-learning-circuits",
+        "urn:maha:record:mechanistic-interpretability-induction-head-circuits",
+        "urn:maha:record:mechanistic-interpretability-sae-encoder-decoder",
+        "urn:maha:record:mechanistic-interpretability-sparse-autoencoder-dictionaries",
+        "urn:maha:record:neurotechnology-bci-spike-sorting-boundaries",
+        "urn:maha:record:quantum-error-mitigation",
+        "urn:maha:record:stabilizer-syndrome-measurement",
+        "urn:maha:record:surface-code-error-correction"
+      ],
+      "productionMutationPerformed": false,
+      "reason": "No canonical release was performed. All 25 unreleased records fail releaseReadiness() for want of scoped expert review decisions on their exact revision, and the 2 drifted records need a superseding release that requires the same decisions. Creating those decisions would fabricate expert review."
+    },
+    "finalCounts": {
+      "compiled": 30,
+      "eligible": 30,
+      "canonicallyReleased": 4,
+      "publiclyReachable": 5,
+      "substantiallyRendered": 3,
+      "sitemap": 5,
+      "llmsTxt": 5
+    },
+    "byState": {
+      "missing-release-decisions": 25,
+      "released-and-revision-matched": 2,
+      "released-but-revision-drifted": 2,
+      "ready-for-initial-canonical-release": 1
+    },
+    "measurementWindows": {
+      "note": "No record became newly public in this reconciliation, so no new window opens. The three already-rendered records keep the windows anchored to the original batch two deployment date.",
+      "anchoredToOriginalDeployment": {
+        "records": [
+          "urn:maha:record:advanced-materials-graphene-monolayers",
+          "urn:maha:record:agentic-systems-mcp-mcp-tool-result-contracts",
+          "urn:maha:record:transmon-qubit"
+        ],
+        "baseline": "2026-08-26",
+        "plus7": "2026-09-02",
+        "plus14": "2026-09-09",
+        "plus28": "2026-09-23"
+      },
+      "pendingRecords": {
+        "count": 27,
+        "note": "Each opens its own +7/+14/+28 window from the date it actually becomes publicly rendered, not from the batch two merge date."
+      }
+    },
+    "driftDispositions": [
+      {
+        "recordId": "urn:maha:record:advanced-materials-hexagonal-boron-nitride-dielectrics",
+        "releaseId": "epirelease_6b639643c3fd40bfbe4615cf9ba9d1b5",
+        "releasedRevision": "sha256:376cd21b08d466e7abb081b0ec9119d15c86a1f62a2de387c8297e39ff601bdd",
+        "auditedRevision": "sha256:4caa07bb7312f980fff275aec28c5d7169fd1716dbc982b35e91f788071959a1",
+        "classification": "source-binding change",
+        "alsoChanged": [
+          "scope",
+          "source identity",
+          "source locator",
+          "evidence status"
+        ],
+        "evidenceNeutral": false,
+        "direction": "The production release still carries the pre-repair positional source assignment; the audited revision carries the subject-matched source. The withheld state protects readers from prose bound to the wrong paper.",
+        "releasedSourceIds": [
+          "source-advanced-materials-graphene"
+        ],
+        "auditedSourceIds": [
+          "source-advanced-materials-hbn-substrates"
+        ],
+        "unchanged": [
+          "claim ids",
+          "claim wording",
+          "uncertainty"
+        ],
+        "disposition": "withheld-pending-reaudit — the current revision is alignment-clear and content-inspected, but a superseding release requires scoped review decisions that do not exist."
+      },
+      {
+        "recordId": "urn:maha:record:neurotechnology-bci-spike-sorting-boundaries",
+        "releaseId": "epirelease_7e2cbf17b2114b1a83efe639f290c606",
+        "releasedRevision": "sha256:0438a6ef58edff4d00d9b5cf1b4c9fa2aff72136c4233c85cdc41885956dd0e8",
+        "auditedRevision": "sha256:e16a7245541be0174021e8472e0da388085ba8a917f5983e7d8e576c29bb32cf",
+        "classification": "source-binding change",
+        "alsoChanged": [
+          "scope",
+          "source identity",
+          "source locator",
+          "evidence status"
+        ],
+        "evidenceNeutral": false,
+        "direction": "The production release still carries the pre-repair positional source assignment; the audited revision carries the subject-matched source. The withheld state protects readers from prose bound to the wrong paper.",
+        "releasedSourceIds": [
+          "source-neurotechnology-bci-neuropixels"
+        ],
+        "auditedSourceIds": [
+          "source-neurotechnology-bci-spike-sorting-quality-metrics"
+        ],
+        "unchanged": [
+          "claim ids",
+          "claim wording",
+          "uncertainty"
+        ],
+        "disposition": "withheld-pending-reaudit — the current revision is alignment-clear and content-inspected, but a superseding release requires scoped review decisions that do not exist."
+      }
+    ]
+  }
+]
