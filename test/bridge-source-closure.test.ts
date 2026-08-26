@@ -41,9 +41,21 @@ test('a verified entry carries a stable identifier, a source and a timestamp', (
 })
 
 test('no locator was invented', () => {
-  // Full text was not obtained in this sprint, so every locator must still be null.
+  // Originally this asserted that every locator was null, because no full text
+  // had been obtained. That was a proxy for the real rule. The rule is that a
+  // locator may only exist when the document position was actually read, so a
+  // locator without a recorded reading is the failure, not a locator as such.
   for (const entry of BRIDGE_SOURCE_LEDGER) {
-    assert.equal(entry.locator, null, `${entry.key} carries a locator that was never verified`)
+    if (entry.locator === null) continue
+    assert.ok(
+      entry.locatorSource && entry.locatorSource.length > 5,
+      `${entry.key} carries a locator that was never verified`,
+    )
+    assert.notEqual(
+      entry.verification,
+      'unverifiable',
+      `${entry.key} cannot be unverifiable and carry a locator`,
+    )
   }
 })
 

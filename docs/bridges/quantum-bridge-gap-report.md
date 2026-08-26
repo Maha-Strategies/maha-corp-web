@@ -48,10 +48,9 @@ This report is generated. Do not edit it by hand.
 
 | State | Count |
 | --- | --- |
-| not-independently-verified | 10 |
-| verified-correct | 10 |
-| verified-with-correction | 3 |
-| unverifiable | 1 |
+| verified-correct | 16 |
+| unverifiable | 4 |
+| verified-with-correction | 4 |
 
 ## Blockers
 
@@ -61,7 +60,7 @@ This report is generated. Do not edit it by hand.
 | classification-unmappable | 7 |
 | endpoint-unresolved-record | 12 |
 | rights-basis-unverified | 4 |
-| source-missing-identifier | 5 |
+| source-missing-identifier | 4 |
 | source-missing-locator | 12 |
 | source-unverifiable | 4 |
 
@@ -69,7 +68,7 @@ This report is generated. Do not edit it by hand.
 
 | ID | Remediation required |
 | --- | --- |
-| Q-BR-001 | create the missing canonical record(s) for the named endpoints; supply exact locators; supply stable identifiers |
+| Q-BR-001 | create the missing canonical record(s) for the named endpoints; supply exact locators |
 | Q-BR-002 | create the missing canonical record(s) for the named endpoints; supply exact locators |
 | Q-BR-004 | create the missing canonical record(s) for the named endpoints; supply exact locators; supply stable identifiers; establish a rights basis |
 | Q-BR-005 | create the missing canonical record(s) for the named endpoints; supply exact locators; supply stable identifiers; establish a rights basis |
@@ -120,8 +119,8 @@ These are not fixed by creating records or supplying locators.
 | Key | State | Identifier | Locator |
 | --- | --- | --- | --- |
 | Q-BR-001A | verified-correct | `doi:10.48550/arXiv.quant-ph/9705052` | — |
-| Q-BR-001B | not-independently-verified | — | — |
-| Q-BR-002A | verified-correct | `doi:10.1038/s41467-021-22030-5` | — |
+| Q-BR-001B | verified-correct | `isbn:9780444850096` | — |
+| Q-BR-002A | verified-correct | `doi:10.1038/s41467-021-22030-5` | Abstract |
 | Q-BR-002B | verified-correct | `doi:10.1021/cr900056b` | — |
 | Q-BR-003A | verified-correct | `doi:10.1016/j.aop.2010.09.012` | — |
 | Q-BR-003B | verified-correct | `https://transformer-circuits.pub/2023/monosemantic-features` | — |
@@ -135,13 +134,13 @@ These are not fixed by creating records or supplying locators.
 | Q-BR-007B | verified-correct | `doi:10.1038/nature26160` | — |
 | Q-BR-008A | verified-correct | `doi:10.1103/PhysRevA.86.032324` | — |
 | Q-BR-008B | verified-with-correction | `doi:10.1016/j.cobeha.2016.06.003` | — |
-| Q-BR-009A | verified-with-correction | `doi:10.1038/nnano.2014.216` | — |
+| Q-BR-009A | verified-with-correction | `doi:10.1038/nnano.2014.216` | Abstract |
 | Q-BR-009B | verified-correct | `doi:10.1557/mrc.2014.32` | — |
-| Q-BR-010A | verified-correct | `doi:10.3389/fphy.2014.00005` | — |
+| Q-BR-010A | verified-correct | `doi:10.3389/fphy.2014.00005` | Sections 2-9 (Ising formulations, from 2.1 number partitioning through 9 graph isomorphisms) |
 | Q-BR-010B | unverifiable | — | — |
 | Q-BR-011A | verified-correct | `doi:10.1016/j.tcs.2014.05.025` | — |
 | Q-BR-011B | unverifiable | — | — |
-| Q-BR-012A | verified-with-correction | `doi:10.1103/PhysRevApplied.13.034032` | — |
+| Q-BR-012A | verified-with-correction | `doi:10.1103/PhysRevApplied.13.034032` | Abstract |
 | Q-BR-012B | verified-correct | `isbn:9783527405725` | — |
 
 ## Endpoint dispositions (23 unresolved)
