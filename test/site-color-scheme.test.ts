@@ -28,6 +28,22 @@ function contrast(a: string, b: string): number {
   return (lighter + 0.05) / (darker + 0.05)
 }
 
+function composite(foreground: string, background: string, opacity: number): string {
+  const foregroundRgb = rgb(foreground)
+  const backgroundRgb = rgb(background)
+  const channels = foregroundRgb.map((channel, index) => Math.round(channel * opacity + backgroundRgb[index] * (1 - opacity)))
+  return `#${channels.map((channel) => channel.toString(16).padStart(2, '0')).join('')}`
+}
+
+function translucentToken(block: string, name: string): { foreground: string; opacity: number } {
+  const match = block.match(new RegExp(`${name}:\\s*rgb\\((\\d+)\\s+(\\d+)\\s+(\\d+)\\s*\\/\\s*(\\d+)%\\)`, 'i'))
+  assert.ok(match, `missing ${name}`)
+  return {
+    foreground: `#${match.slice(1, 4).map((channel) => Number(channel).toString(16).padStart(2, '0')).join('')}`,
+    opacity: Number(match[4]) / 100,
+  }
+}
+
 function token(block: string, name: string): string {
   const match = block.match(new RegExp(`${name}:\\s*(#[\\da-f]{6})`, 'i'))
   assert.ok(match, `missing ${name}`)
@@ -71,6 +87,24 @@ test('light-mode semantic labels remain readable at small text sizes', () => {
   assert.ok(light)
   for (const status of ['--status-verified', '--status-sourced', '--status-boundary', '--status-illustrative', '--status-unverified']) {
     assert.ok(contrast(token(light, status), token(light, '--surface-paper')) >= 4.5, `${status} fell below AA`)
+  }
+})
+
+test('light-mode semantic labels remain readable on their own tinted surfaces', () => {
+  const light = globals.match(/:root\s*\{([\s\S]*?)\n\}/)?.[1]
+  assert.ok(light)
+  const pairs = [
+    ['--status-verified', '--surface-verified'],
+    ['--status-sourced', '--surface-sourced'],
+    ['--status-boundary', '--surface-boundary'],
+    ['--status-illustrative', '--surface-illustrative'],
+    ['--status-unverified', '--surface-unverified'],
+  ] as const
+
+  for (const [status, surface] of pairs) {
+    const tint = translucentToken(light, surface)
+    const renderedSurface = composite(tint.foreground, token(light, '--surface-paper'), tint.opacity)
+    assert.ok(contrast(token(light, status), renderedSurface) >= 4.5, `${status} fell below AA on ${surface}`)
   }
 })
 

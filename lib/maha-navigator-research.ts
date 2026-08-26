@@ -1,5 +1,3 @@
-import { randomUUID } from 'node:crypto'
-
 export const NAVIGATOR_RUBRIC_KEY = 'maha-internal-icp'
 export const NAVIGATOR_RUBRIC_VERSION = 1
 export const NAVIGATOR_CLAIM_TYPES = ['account_fit', 'buying_trigger', 'likely_owner', 'disqualifier'] as const
@@ -177,5 +175,5 @@ export function buildNavigatorQualityGate(rows: NavigatorQualityGateRow[]) {
   }
 }
 
-export function createNavigatorCandidateId(): string { return `navacct_${randomUUID().replaceAll('-', '')}` }
-export function createNavigatorClaimId(): string { return `navclm_${randomUUID().replaceAll('-', '')}` }
+export function createNavigatorCandidateId(): string { return `navacct_${crypto.randomUUID().replaceAll('-', '')}` }
+export function createNavigatorClaimId(): string { return `navclm_${crypto.randomUUID().replaceAll('-', '')}` }

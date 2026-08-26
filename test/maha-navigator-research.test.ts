@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
+import { readFileSync } from 'node:fs'
 
 import {
   buildNavigatorQualityGate,
@@ -9,6 +10,13 @@ import {
   parseNavigatorCandidate,
   type NavigatorDisposition,
 } from '../lib/maha-navigator-research.ts'
+
+const navigatorResearchSource = readFileSync(new URL('../lib/maha-navigator-research.ts', import.meta.url), 'utf8')
+
+test('the browser-shared Navigator contract does not import Node crypto', () => {
+  assert.doesNotMatch(navigatorResearchSource, /from ['"](?:node:)?crypto['"]/)
+  assert.match(navigatorResearchSource, /crypto\.randomUUID\(\)/)
+})
 
 function candidate() {
   return {
