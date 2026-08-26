@@ -105,6 +105,10 @@ export interface CompiledSubstantialPage {
   contractDigest: string
 }
 
+export function substantialPageContractDigest(contract: SubstantialPageContract): string {
+  return `sha256:${createHash('sha256').update(JSON.stringify(contract)).digest('hex')}`
+}
+
 /* ------------------------------------------------------------ derivation -- */
 
 /**
@@ -334,6 +338,6 @@ export function compileSubstantialPage(input: CompileInput): CompiledSubstantial
     // Blocker order must not depend on evaluation order.
     decision: { ...decision, reasons: [...decision.reasons].sort() },
     selectionTrace,
-    contractDigest: `sha256:${createHash('sha256').update(JSON.stringify(contract)).digest('hex')}`,
+    contractDigest: substantialPageContractDigest(contract),
   }
 }
