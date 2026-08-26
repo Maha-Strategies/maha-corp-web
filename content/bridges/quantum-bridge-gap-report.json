@@ -208,8 +208,8 @@
   },
   "endpointUsability": {
     "structurallyResolved": 2,
-    "usable": 0,
-    "structurallyResolvedButBlocked": 2,
+    "usable": 1,
+    "structurallyResolvedButBlocked": 1,
     "unresolved": 22,
     "endpoints": [
       {
@@ -256,21 +256,19 @@
         "structure": "alias-resolution",
         "fitness": {
           "recordId": "urn:maha:record:stabilizer-syndrome-measurement",
-          "state": "audit-missing",
+          "state": "alignment-clear",
           "recordRevisionSha256": "sha256:bcf371de57eeaa64ce9449ccfe776e3c76b2042e729ead3abe644ad279b5ae9c",
           "auditProvenance": {
-            "audited": false,
-            "subjectAligned": null,
-            "assignmentOrigin": null,
+            "audited": true,
+            "subjectAligned": "supported",
+            "assignmentOrigin": "independently-curated",
             "alignmentBlockers": []
           },
-          "blocker": "endpoint-alignment-audit-missing",
-          "reason": "No alignment audit covers this record. Only the frontier cohort is audited, so a resolution outside it carries no evidence about whether its source supports the subject. This fails closed."
+          "blocker": null,
+          "reason": "The alignment audit reports an inspected, subject-aligned source with verified metadata and an exact locator, and raises no blocker."
         },
-        "usability": "structurally-resolved-but-epistemically-blocked",
-        "blockers": [
-          "endpoint-alignment-audit-missing"
-        ],
+        "usability": "usable",
+        "blockers": [],
         "proposedSourceOverride": null
       }
     ]

@@ -6,6 +6,11 @@ import {
   isAlignmentClear,
 } from './frontier-source-alignment.ts'
 import {
+  isPilotAlignmentClear,
+  pilotAlignmentBlockers,
+  pilotAlignmentFor,
+} from './pilot-source-alignment.ts'
+import {
   isResolvedOutcome,
   resolveEpistemicReference,
   type ResolutionResult,
@@ -33,10 +38,13 @@ import {
  *   fitness    what the alignment audit says about that record's source
  *   usability  the conjunction, which is what a bridge may actually rely on
  *
- * Everything fails closed. A record with no alignment audit is not usable, and
- * that is the common case rather than an edge case: only the 240 frontier
- * records are audited, so a resolution into any other domain is unusable until
- * that domain is audited too.
+ * Everything fails closed. A record with no alignment audit is not usable.
+ *
+ * Two audits feed this: the 240-record frontier audit and the 50-record pilot
+ * audit covering quantum-systems and synthetic-biology. They are consulted in
+ * that order and are disjoint by construction. A record covered by neither is
+ * still `audit-missing` and still unusable; adding coverage narrows that set
+ * rather than weakening the rule.
  */
 
 export const ENDPOINT_FITNESS_VERSION = 'maha-endpoint-fitness/1.0' as const
@@ -147,21 +155,37 @@ export function evaluateResolvedEndpointFitness(recordId: string): EndpointFitne
   const cached = fitnessCache.get(recordId)
   if (cached && revision !== null && cached.recordRevisionSha256 === revision) return cached
 
-  const audit = alignmentFor(recordId)
-  const blockers = audit ? alignmentBlockers(recordId) : []
+  // Two disjoint audits. Frontier first, then the pilot domains.
+  const frontier = alignmentFor(recordId)
+  const pilot = frontier ? null : pilotAlignmentFor(recordId)
+  const audit = frontier
+    ? {
+        subjectAligned: frontier.evidence.subjectAligned as string,
+        assignmentOrigin: frontier.assignmentOrigin as string,
+        reason: frontier.reason,
+      }
+    : pilot
+      ? {
+          subjectAligned: pilot.verdict as string,
+          assignmentOrigin: 'independently-curated',
+          reason: pilot.reason,
+        }
+      : null
+  const blockers = frontier ? alignmentBlockers(recordId) : pilot ? pilotAlignmentBlockers(recordId) : []
+  const clear = frontier ? isAlignmentClear(recordId) : pilot ? isPilotAlignmentClear(recordId) : false
 
   let state: EndpointFitnessState
   let reason: string
   if (!audit) {
     state = 'audit-missing'
     reason =
-      'No alignment audit covers this record. Only the frontier cohort is audited, so a resolution outside it carries no evidence about whether its source supports the subject. This fails closed.'
-  } else if (isAlignmentClear(recordId)) {
+      'No alignment audit covers this record. Neither the frontier cohort nor the pilot domains include it, so nothing is established about whether its source supports the subject. This fails closed.'
+  } else if (clear) {
     state = 'alignment-clear'
     reason =
       'The alignment audit reports an inspected, subject-aligned source with verified metadata and an exact locator, and raises no blocker.'
   } else {
-    switch (audit.evidence.subjectAligned) {
+    switch (audit.subjectAligned) {
       case 'mismatched':
         state = 'source-mismatched'
         reason = `The bound source does not treat this record's subject. ${audit.reason}`
@@ -182,7 +206,7 @@ export function evaluateResolvedEndpointFitness(recordId: string): EndpointFitne
         // Verdict is `supported` but a blocker remains, most often a positional
         // assignment or unverified metadata. Report the specific reason.
         state = audit.assignmentOrigin === 'positional-legacy' ? 'positional-legacy' : 'insufficient-evidence'
-        reason = `The audit records ${audit.evidence.subjectAligned} but the endpoint is still blocked by: ${blockers.join(', ')}.`
+        reason = `The audit records ${audit.subjectAligned} but the endpoint is still blocked by: ${blockers.join(', ')}.`
         break
     }
   }
@@ -193,7 +217,7 @@ export function evaluateResolvedEndpointFitness(recordId: string): EndpointFitne
     recordRevisionSha256: revision ?? 'sha256:unknown-record',
     auditProvenance: {
       audited: Boolean(audit),
-      subjectAligned: audit?.evidence.subjectAligned ?? null,
+      subjectAligned: audit?.subjectAligned ?? null,
       assignmentOrigin: audit?.assignmentOrigin ?? null,
       alignmentBlockers: blockers,
     },
