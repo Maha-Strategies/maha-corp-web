@@ -1,0 +1,1413 @@
+{
+  "schemaVersion": "maha-pilot-source-alignment/1.0",
+  "auditInputDate": "2026-08-26",
+  "auditDigest": "sha256:6f81448089c01b30ab865fd2aa4cb031a76e142e9dc497662b4b364a0161a057",
+  "totals": {
+    "records": 50,
+    "contentInspected": 9,
+    "metadataOnly": 39,
+    "sourceless": 2,
+    "alignmentClear": 5,
+    "blocked": 45
+  },
+  "verdictTotals": {
+    "supported": 5,
+    "partially-supported": 3,
+    "mismatched": 0,
+    "insufficient-evidence": 42,
+    "inaccessible-source": 0
+  },
+  "endpointUsability": {
+    "structurallyResolved": 2,
+    "usable": 1,
+    "structurallyResolvedButBlocked": 1,
+    "unresolved": 22
+  },
+  "records": [
+    {
+      "domainSlug": "synthetic-biology",
+      "sourceContractId": "source-gaudelli-abe-2017",
+      "verdict": "insufficient-evidence",
+      "metadataVerified": true,
+      "sourceContentInspected": false,
+      "inspectedContentLocation": null,
+      "artifactVersion": "not-inspected",
+      "versionRelationship": "declared-version-of-record-not-retrieved",
+      "rightsBasis": "citation-with-paraphrase",
+      "reason": "Crossref resolves the declared identifier to 'Programmable base editing of A•T to G•C in genomic DNA without DNA cle', so the work exists and its metadata matches. The content was not read in this sprint, and registry resolution says nothing about whether the source supports this record subject.",
+      "remediation": "Inspect the declared source against this record subject, then confirm or replace the mapping.",
+      "recordId": "urn:maha:record:adenine-base-editing",
+      "slug": "adenine-base-editing",
+      "recordRevisionSha256": "sha256:f01d3ec2cf7f188586f8d5938e430b5eceef5c0b34ce0db2527cf98bb76b5584",
+      "evidence": {
+        "metadataVerified": true,
+        "sourceContentInspected": false,
+        "inspectedContentLocation": null,
+        "subjectAligned": "insufficient-evidence",
+        "independentlyReproduced": false,
+        "externallyReviewed": false
+      },
+      "blockers": [
+        "source-alignment-insufficient-evidence",
+        "source-not-inspected"
+      ]
+    },
+    {
+      "domainSlug": "synthetic-biology",
+      "sourceContractId": "source-noireaux-cell-free-2004",
+      "verdict": "insufficient-evidence",
+      "metadataVerified": true,
+      "sourceContentInspected": false,
+      "inspectedContentLocation": null,
+      "artifactVersion": "not-inspected",
+      "versionRelationship": "declared-version-of-record-not-retrieved",
+      "rightsBasis": "citation-with-paraphrase",
+      "reason": "Crossref resolves the declared identifier to 'A vesicle bioreactor as a step toward an artificial cell assembly', so the work exists and its metadata matches. The content was not read in this sprint, and registry resolution says nothing about whether the source supports this record subject.",
+      "remediation": "Inspect the declared source against this record subject, then confirm or replace the mapping.",
+      "recordId": "urn:maha:record:cell-free-gene-expression",
+      "slug": "cell-free-gene-expression",
+      "recordRevisionSha256": "sha256:aa13c1ff302f9440de61005b80e9b5c585a8e983c107427a1fa3df9d4b3f9f8e",
+      "evidence": {
+        "metadataVerified": true,
+        "sourceContentInspected": false,
+        "inspectedContentLocation": null,
+        "subjectAligned": "insufficient-evidence",
+        "independentlyReproduced": false,
+        "externallyReviewed": false
+      },
+      "blockers": [
+        "source-alignment-insufficient-evidence",
+        "source-not-inspected"
+      ]
+    },
+    {
+      "domainSlug": "synthetic-biology",
+      "sourceContractId": "source-lazzarotto-change-seq-2020",
+      "verdict": "insufficient-evidence",
+      "metadataVerified": true,
+      "sourceContentInspected": false,
+      "inspectedContentLocation": null,
+      "artifactVersion": "not-inspected",
+      "versionRelationship": "declared-version-of-record-not-retrieved",
+      "rightsBasis": "citation-with-paraphrase",
+      "reason": "Crossref resolves the declared identifier to 'CHANGE-seq reveals genetic and epigenetic effects on CRISPR–Cas9 genom', so the work exists and its metadata matches. The content was not read in this sprint, and registry resolution says nothing about whether the source supports this record subject.",
+      "remediation": "Inspect the declared source against this record subject, then confirm or replace the mapping.",
+      "recordId": "urn:maha:record:cell-line-versus-primary-cell-evidence",
+      "slug": "cell-line-versus-primary-cell-evidence",
+      "recordRevisionSha256": "sha256:6b6b99f6540b8e46e2895fcacf978dc6cea7ca8688fe377cbce0201b6957b54d",
+      "evidence": {
+        "metadataVerified": true,
+        "sourceContentInspected": false,
+        "inspectedContentLocation": null,
+        "subjectAligned": "insufficient-evidence",
+        "independentlyReproduced": false,
+        "externallyReviewed": false
+      },
+      "blockers": [
+        "source-alignment-insufficient-evidence",
+        "source-not-inspected"
+      ]
+    },
+    {
+      "domainSlug": "synthetic-biology",
+      "sourceContractId": "source-lazzarotto-change-seq-2020",
+      "verdict": "insufficient-evidence",
+      "metadataVerified": true,
+      "sourceContentInspected": false,
+      "inspectedContentLocation": null,
+      "artifactVersion": "not-inspected",
+      "versionRelationship": "declared-version-of-record-not-retrieved",
+      "rightsBasis": "citation-with-paraphrase",
+      "reason": "Crossref resolves the declared identifier to 'CHANGE-seq reveals genetic and epigenetic effects on CRISPR–Cas9 genom', so the work exists and its metadata matches. The content was not read in this sprint, and registry resolution says nothing about whether the source supports this record subject.",
+      "remediation": "Inspect the declared source against this record subject, then confirm or replace the mapping.",
+      "recordId": "urn:maha:record:change-seq-off-target-nomination",
+      "slug": "change-seq-off-target-nomination",
+      "recordRevisionSha256": "sha256:d29ddb16723627ab8b8c7943944d9549c84f219884bc3dca0aae322a295aeac8",
+      "evidence": {
+        "metadataVerified": true,
+        "sourceContentInspected": false,
+        "inspectedContentLocation": null,
+        "subjectAligned": "insufficient-evidence",
+        "independentlyReproduced": false,
+        "externallyReviewed": false
+      },
+      "blockers": [
+        "source-alignment-insufficient-evidence",
+        "source-not-inspected"
+      ]
+    },
+    {
+      "domainSlug": "quantum-systems",
+      "sourceContractId": "source-blais-circuit-qed-2004",
+      "verdict": "supported",
+      "metadataVerified": true,
+      "sourceContentInspected": true,
+      "inspectedContentLocation": "arXiv:cond-mat/0402216 abstract",
+      "artifactVersion": "preprint",
+      "versionRelationship": "preprint-of-the-declared-version-of-record",
+      "rightsBasis": "citation-with-paraphrase",
+      "reason": "The abstract proposes a realizable architecture using one-dimensional transmission line resonators to reach the strong-coupling limit of cavity QED in superconducting circuits, which is the record subject.",
+      "remediation": "None. The mapping is curated and confirmed.",
+      "recordId": "urn:maha:record:circuit-quantum-electrodynamics",
+      "slug": "circuit-quantum-electrodynamics",
+      "recordRevisionSha256": "sha256:e40bb12a0a21a56704cf497b3a825173443f8da8fd29118a756c19a866e91944",
+      "evidence": {
+        "metadataVerified": true,
+        "sourceContentInspected": true,
+        "inspectedContentLocation": "arXiv:cond-mat/0402216 abstract",
+        "subjectAligned": "supported",
+        "independentlyReproduced": false,
+        "externallyReviewed": false
+      },
+      "blockers": []
+    },
+    {
+      "domainSlug": "quantum-systems",
+      "sourceContractId": "source-arute-random-circuits-2019",
+      "verdict": "insufficient-evidence",
+      "metadataVerified": true,
+      "sourceContentInspected": false,
+      "inspectedContentLocation": null,
+      "artifactVersion": "not-inspected",
+      "versionRelationship": "declared-version-of-record-not-retrieved",
+      "rightsBasis": "citation-with-paraphrase",
+      "reason": "Crossref resolves the declared identifier to 'Quantum supremacy using a programmable superconducting processor', so the work exists and its metadata matches. The content was not read in this sprint, and registry resolution says nothing about whether the source supports this record subject.",
+      "remediation": "Inspect the declared source against this record subject, then confirm or replace the mapping.",
+      "recordId": "urn:maha:record:coherence-t1-t2-measurements",
+      "slug": "coherence-t1-t2-measurements",
+      "recordRevisionSha256": "sha256:d78c924fce3b912bae8f8fa73368d605ee8a36aa88876467f32b5d9d3054ed62",
+      "evidence": {
+        "metadataVerified": true,
+        "sourceContentInspected": false,
+        "inspectedContentLocation": null,
+        "subjectAligned": "insufficient-evidence",
+        "independentlyReproduced": false,
+        "externallyReviewed": false
+      },
+      "blockers": [
+        "source-alignment-insufficient-evidence",
+        "source-not-inspected"
+      ]
+    },
+    {
+      "domainSlug": "synthetic-biology",
+      "sourceContractId": "source-jinek-cas9-2012",
+      "verdict": "insufficient-evidence",
+      "metadataVerified": true,
+      "sourceContentInspected": false,
+      "inspectedContentLocation": null,
+      "artifactVersion": "not-inspected",
+      "versionRelationship": "declared-version-of-record-not-retrieved",
+      "rightsBasis": "citation-with-paraphrase",
+      "reason": "Crossref resolves the declared identifier to 'A Programmable Dual-RNA–Guided DNA Endonuclease in Adaptive Bacterial ', so the work exists and its metadata matches. The content was not read in this sprint, and registry resolution says nothing about whether the source supports this record subject.",
+      "remediation": "Inspect the declared source against this record subject, then confirm or replace the mapping.",
+      "recordId": "urn:maha:record:crispr-cas9-nuclease-editing",
+      "slug": "crispr-cas9-nuclease-editing",
+      "recordRevisionSha256": "sha256:af0966a0ae03aa6f7bcbd936ba194bf84ce302d67601dd93726855bba1c3884a",
+      "evidence": {
+        "metadataVerified": true,
+        "sourceContentInspected": false,
+        "inspectedContentLocation": null,
+        "subjectAligned": "insufficient-evidence",
+        "independentlyReproduced": false,
+        "externallyReviewed": false
+      },
+      "blockers": [
+        "source-alignment-insufficient-evidence",
+        "source-not-inspected"
+      ]
+    },
+    {
+      "domainSlug": "quantum-systems",
+      "sourceContractId": "source-arute-random-circuits-2019",
+      "verdict": "insufficient-evidence",
+      "metadataVerified": true,
+      "sourceContentInspected": false,
+      "inspectedContentLocation": null,
+      "artifactVersion": "not-inspected",
+      "versionRelationship": "declared-version-of-record-not-retrieved",
+      "rightsBasis": "citation-with-paraphrase",
+      "reason": "Crossref resolves the declared identifier to 'Quantum supremacy using a programmable superconducting processor', so the work exists and its metadata matches. The content was not read in this sprint, and registry resolution says nothing about whether the source supports this record subject.",
+      "remediation": "Inspect the declared source against this record subject, then confirm or replace the mapping.",
+      "recordId": "urn:maha:record:cryogenic-superconducting-control-stack",
+      "slug": "cryogenic-superconducting-control-stack",
+      "recordRevisionSha256": "sha256:71221adaf50e139ee7ffc0405584c158926babf0468c96e926f5e70685ebbc5d",
+      "evidence": {
+        "metadataVerified": true,
+        "sourceContentInspected": false,
+        "inspectedContentLocation": null,
+        "subjectAligned": "insufficient-evidence",
+        "independentlyReproduced": false,
+        "externallyReviewed": false
+      },
+      "blockers": [
+        "source-alignment-insufficient-evidence",
+        "source-not-inspected"
+      ]
+    },
+    {
+      "domainSlug": "synthetic-biology",
+      "sourceContractId": "source-komor-cbe-2016",
+      "verdict": "insufficient-evidence",
+      "metadataVerified": true,
+      "sourceContentInspected": false,
+      "inspectedContentLocation": null,
+      "artifactVersion": "not-inspected",
+      "versionRelationship": "declared-version-of-record-not-retrieved",
+      "rightsBasis": "citation-with-paraphrase",
+      "reason": "Crossref resolves the declared identifier to 'Programmable editing of a target base in genomic DNA without double-st', so the work exists and its metadata matches. The content was not read in this sprint, and registry resolution says nothing about whether the source supports this record subject.",
+      "remediation": "Inspect the declared source against this record subject, then confirm or replace the mapping.",
+      "recordId": "urn:maha:record:cytosine-base-editing",
+      "slug": "cytosine-base-editing",
+      "recordRevisionSha256": "sha256:4d8be53b3a2b511149801817f5c1c9821488e91ba44df24616cc592668d8e917",
+      "evidence": {
+        "metadataVerified": true,
+        "sourceContentInspected": false,
+        "inspectedContentLocation": null,
+        "subjectAligned": "insufficient-evidence",
+        "independentlyReproduced": false,
+        "externallyReviewed": false
+      },
+      "blockers": [
+        "source-alignment-insufficient-evidence",
+        "source-not-inspected"
+      ]
+    },
+    {
+      "domainSlug": "synthetic-biology",
+      "sourceContractId": "source-esvelt-pace-2011",
+      "verdict": "insufficient-evidence",
+      "metadataVerified": true,
+      "sourceContentInspected": false,
+      "inspectedContentLocation": null,
+      "artifactVersion": "not-inspected",
+      "versionRelationship": "declared-version-of-record-not-retrieved",
+      "rightsBasis": "citation-with-paraphrase",
+      "reason": "Crossref resolves the declared identifier to 'A system for the continuous directed evolution of biomolecules', so the work exists and its metadata matches. The content was not read in this sprint, and registry resolution says nothing about whether the source supports this record subject.",
+      "remediation": "Inspect the declared source against this record subject, then confirm or replace the mapping.",
+      "recordId": "urn:maha:record:directed-evolution-workflows",
+      "slug": "directed-evolution-workflows",
+      "recordRevisionSha256": "sha256:23639467a2d9f137e25953d72c9f022b6437cb4a13c998c116381750e1dfd746",
+      "evidence": {
+        "metadataVerified": true,
+        "sourceContentInspected": false,
+        "inspectedContentLocation": null,
+        "subjectAligned": "insufficient-evidence",
+        "independentlyReproduced": false,
+        "externallyReviewed": false
+      },
+      "blockers": [
+        "source-alignment-insufficient-evidence",
+        "source-not-inspected"
+      ]
+    },
+    {
+      "domainSlug": "quantum-systems",
+      "sourceContractId": "source-blais-circuit-qed-2004",
+      "verdict": "partially-supported",
+      "metadataVerified": true,
+      "sourceContentInspected": true,
+      "inspectedContentLocation": "arXiv:cond-mat/0402216 abstract",
+      "artifactVersion": "preprint",
+      "versionRelationship": "preprint-of-the-declared-version-of-record",
+      "rightsBasis": "citation-with-paraphrase",
+      "reason": "The abstract references high-fidelity quantum non-demolition measurement of multiple qubit states, which bears on readout, but does not name the dispersive regime. The declared locator points at sections II-V that were not read, so the dispersive analysis itself is unconfirmed.",
+      "remediation": "Read sections II-V for the dispersive-regime analysis before confirming.",
+      "recordId": "urn:maha:record:dispersive-qubit-readout",
+      "slug": "dispersive-qubit-readout",
+      "recordRevisionSha256": "sha256:27c33647763e4282187726e9c47fbe7eeff93809fca432ee4a80233149d6146e",
+      "evidence": {
+        "metadataVerified": true,
+        "sourceContentInspected": true,
+        "inspectedContentLocation": "arXiv:cond-mat/0402216 abstract",
+        "subjectAligned": "partially-supported",
+        "independentlyReproduced": false,
+        "externallyReviewed": false
+      },
+      "blockers": [
+        "source-subject-partially-supported"
+      ]
+    },
+    {
+      "domainSlug": "synthetic-biology",
+      "sourceContractId": "source-cong-multiplex-editing-2013",
+      "verdict": "insufficient-evidence",
+      "metadataVerified": true,
+      "sourceContentInspected": false,
+      "inspectedContentLocation": null,
+      "artifactVersion": "not-inspected",
+      "versionRelationship": "declared-version-of-record-not-retrieved",
+      "rightsBasis": "citation-with-paraphrase",
+      "reason": "Crossref resolves the declared identifier to 'Multiplex Genome Engineering Using CRISPR/Cas Systems', so the work exists and its metadata matches. The content was not read in this sprint, and registry resolution says nothing about whether the source supports this record subject.",
+      "remediation": "Inspect the declared source against this record subject, then confirm or replace the mapping.",
+      "recordId": "urn:maha:record:double-strand-break-repair-outcomes",
+      "slug": "double-strand-break-repair-outcomes",
+      "recordRevisionSha256": "sha256:6560279b2afb7f1850f4ee8877679effb88c69af535aa3669b6410ebd5348660",
+      "evidence": {
+        "metadataVerified": true,
+        "sourceContentInspected": false,
+        "inspectedContentLocation": null,
+        "subjectAligned": "insufficient-evidence",
+        "independentlyReproduced": false,
+        "externallyReviewed": false
+      },
+      "blockers": [
+        "source-alignment-insufficient-evidence",
+        "source-not-inspected"
+      ]
+    },
+    {
+      "domainSlug": "synthetic-biology",
+      "sourceContractId": "source-anzalone-prime-2019-graph",
+      "verdict": "insufficient-evidence",
+      "metadataVerified": true,
+      "sourceContentInspected": false,
+      "inspectedContentLocation": null,
+      "artifactVersion": "not-inspected",
+      "versionRelationship": "declared-version-of-record-not-retrieved",
+      "rightsBasis": "citation-with-paraphrase",
+      "reason": "Crossref resolves the declared identifier to 'Search-and-replace genome editing without double-strand breaks or dono', so the work exists and its metadata matches. The content was not read in this sprint, and registry resolution says nothing about whether the source supports this record subject.",
+      "remediation": "Inspect the declared source against this record subject, then confirm or replace the mapping.",
+      "recordId": "urn:maha:record:editing-efficiency-and-byproduct-measurement",
+      "slug": "editing-efficiency-and-byproduct-measurement",
+      "recordRevisionSha256": "sha256:016c844e61ea2cf840113ac1d34227c4733f14ebf40f922fcf31f98bdcf2b0fe",
+      "evidence": {
+        "metadataVerified": true,
+        "sourceContentInspected": false,
+        "inspectedContentLocation": null,
+        "subjectAligned": "insufficient-evidence",
+        "independentlyReproduced": false,
+        "externallyReviewed": false
+      },
+      "blockers": [
+        "source-alignment-insufficient-evidence",
+        "source-not-inspected"
+      ]
+    },
+    {
+      "domainSlug": "quantum-systems",
+      "sourceContractId": "source-temme-error-mitigation-2017",
+      "verdict": "partially-supported",
+      "metadataVerified": true,
+      "sourceContentInspected": true,
+      "inspectedContentLocation": "arXiv:1612.02058 abstract",
+      "artifactVersion": "preprint",
+      "versionRelationship": "preprint-of-the-declared-version-of-record",
+      "rightsBasis": "citation-with-paraphrase",
+      "reason": "The abstract frames both schemes as mitigation for short-depth circuits without additional qubit resources, which implies the contrast with error correction, but it does not state the comparison explicitly.",
+      "remediation": "Read the discussion for an explicit comparison, or narrow the record to the mitigation schemes.",
+      "recordId": "urn:maha:record:error-mitigation-versus-correction",
+      "slug": "error-mitigation-versus-correction",
+      "recordRevisionSha256": "sha256:45a8ef63679f678ca28e372d7391c092f49909c49fc484b7963cec3b375e9bf5",
+      "evidence": {
+        "metadataVerified": true,
+        "sourceContentInspected": true,
+        "inspectedContentLocation": "arXiv:1612.02058 abstract",
+        "subjectAligned": "partially-supported",
+        "independentlyReproduced": false,
+        "externallyReviewed": false
+      },
+      "blockers": [
+        "source-subject-partially-supported"
+      ]
+    },
+    {
+      "domainSlug": "synthetic-biology",
+      "sourceContractId": "source-frangoul-crispr-2021",
+      "verdict": "insufficient-evidence",
+      "metadataVerified": true,
+      "sourceContentInspected": false,
+      "inspectedContentLocation": null,
+      "artifactVersion": "not-inspected",
+      "versionRelationship": "declared-version-of-record-not-retrieved",
+      "rightsBasis": "citation-with-paraphrase",
+      "reason": "Crossref resolves the declared identifier to 'CRISPR-Cas9 Gene Editing for Sickle Cell Disease and β-Thalassemia', so the work exists and its metadata matches. The content was not read in this sprint, and registry resolution says nothing about whether the source supports this record subject.",
+      "remediation": "Inspect the declared source against this record subject, then confirm or replace the mapping.",
+      "recordId": "urn:maha:record:ex-vivo-genome-editing-workflow",
+      "slug": "ex-vivo-genome-editing-workflow",
+      "recordRevisionSha256": "sha256:3e76f32cc4d0ff6e901f3aeecd576f89bfa43edf09be22e618256a3a0fcc9120",
+      "evidence": {
+        "metadataVerified": true,
+        "sourceContentInspected": false,
+        "inspectedContentLocation": null,
+        "subjectAligned": "insufficient-evidence",
+        "independentlyReproduced": false,
+        "externallyReviewed": false
+      },
+      "blockers": [
+        "source-alignment-insufficient-evidence",
+        "source-not-inspected"
+      ]
+    },
+    {
+      "domainSlug": "quantum-systems",
+      "sourceContractId": "source-fowler-surface-code-2012",
+      "verdict": "partially-supported",
+      "metadataVerified": true,
+      "sourceContentInspected": true,
+      "inspectedContentLocation": "arXiv:1208.0928 abstract",
+      "artifactVersion": "preprint",
+      "versionRelationship": "preprint-of-the-declared-version-of-record",
+      "rightsBasis": "citation-with-paraphrase",
+      "reason": "The abstract gives numerical estimates of logical-qubit fault tolerance, which bears on the threshold, but does not state the threshold condition as such. The declared locator names numerical threshold estimates in sections that were not read.",
+      "remediation": "Read the threshold sections named in the locator before confirming.",
+      "recordId": "urn:maha:record:fault-tolerance-threshold-condition",
+      "slug": "fault-tolerance-threshold-condition",
+      "recordRevisionSha256": "sha256:e0e0d68ff64e4d2b7091b2d0b71e1dc97e72d847591734a46ebf423efc9c9be7",
+      "evidence": {
+        "metadataVerified": true,
+        "sourceContentInspected": true,
+        "inspectedContentLocation": "arXiv:1208.0928 abstract",
+        "subjectAligned": "partially-supported",
+        "independentlyReproduced": false,
+        "externallyReviewed": false
+      },
+      "blockers": [
+        "source-subject-partially-supported"
+      ]
+    },
+    {
+      "domainSlug": "quantum-systems",
+      "sourceContractId": null,
+      "verdict": "insufficient-evidence",
+      "metadataVerified": false,
+      "sourceContentInspected": false,
+      "inspectedContentLocation": null,
+      "artifactVersion": "not-inspected",
+      "versionRelationship": "no-declared-source",
+      "rightsBasis": "not-applicable-no-source",
+      "reason": "This is a hypothesis-kind record that declares no source and carries no claim. There is nothing to align and nothing to support, so it can never be alignment-clear. That is the correct state for a placeholder, not a defect to repair.",
+      "remediation": "Leave unsourced while it remains a hypothesis placeholder, or bind evidence if it is ever asserted.",
+      "recordId": "urn:maha:record:fault-tolerant-industrial-advantage",
+      "slug": "fault-tolerant-industrial-advantage",
+      "recordRevisionSha256": "sha256:341903b96a5ff3c6ab4f473cb2c0892d90c7643fde30d382a0b5a31ad1a9b154",
+      "evidence": {
+        "metadataVerified": false,
+        "sourceContentInspected": false,
+        "inspectedContentLocation": null,
+        "subjectAligned": "insufficient-evidence",
+        "independentlyReproduced": false,
+        "externallyReviewed": false
+      },
+      "blockers": [
+        "source-alignment-insufficient-evidence",
+        "source-metadata-unverified",
+        "source-not-declared",
+        "source-not-inspected"
+      ]
+    },
+    {
+      "domainSlug": "synthetic-biology",
+      "sourceContractId": null,
+      "verdict": "insufficient-evidence",
+      "metadataVerified": false,
+      "sourceContentInspected": false,
+      "inspectedContentLocation": null,
+      "artifactVersion": "not-inspected",
+      "versionRelationship": "no-declared-source",
+      "rightsBasis": "not-applicable-no-source",
+      "reason": "This is a hypothesis-kind record that declares no source and carries no claim. There is nothing to align and nothing to support, so it can never be alignment-clear. That is the correct state for a placeholder, not a defect to repair.",
+      "remediation": "Leave unsourced while it remains a hypothesis placeholder, or bind evidence if it is ever asserted.",
+      "recordId": "urn:maha:record:general-clinical-readiness-prime-editing",
+      "slug": "general-clinical-readiness-prime-editing",
+      "recordRevisionSha256": "sha256:e67a50f96d4e450158e864a9f8d2c0b178147f65ff06b6d14f34d867610bc7a4",
+      "evidence": {
+        "metadataVerified": false,
+        "sourceContentInspected": false,
+        "inspectedContentLocation": null,
+        "subjectAligned": "insufficient-evidence",
+        "independentlyReproduced": false,
+        "externallyReviewed": false
+      },
+      "blockers": [
+        "source-alignment-insufficient-evidence",
+        "source-metadata-unverified",
+        "source-not-declared",
+        "source-not-inspected"
+      ]
+    },
+    {
+      "domainSlug": "synthetic-biology",
+      "sourceContractId": "source-gardner-toggle-2000",
+      "verdict": "insufficient-evidence",
+      "metadataVerified": true,
+      "sourceContentInspected": false,
+      "inspectedContentLocation": null,
+      "artifactVersion": "not-inspected",
+      "versionRelationship": "declared-version-of-record-not-retrieved",
+      "rightsBasis": "citation-with-paraphrase",
+      "reason": "Crossref resolves the declared identifier to 'Construction of a genetic toggle switch in Escherichia coli', so the work exists and its metadata matches. The content was not read in this sprint, and registry resolution says nothing about whether the source supports this record subject.",
+      "remediation": "Inspect the declared source against this record subject, then confirm or replace the mapping.",
+      "recordId": "urn:maha:record:genetic-toggle-switch",
+      "slug": "genetic-toggle-switch",
+      "recordRevisionSha256": "sha256:5ebe87f4d5c1c2512ae655016d283646d46c04b95f0c8ec643c80f4c847397e5",
+      "evidence": {
+        "metadataVerified": true,
+        "sourceContentInspected": false,
+        "inspectedContentLocation": null,
+        "subjectAligned": "insufficient-evidence",
+        "independentlyReproduced": false,
+        "externallyReviewed": false
+      },
+      "blockers": [
+        "source-alignment-insufficient-evidence",
+        "source-not-inspected"
+      ]
+    },
+    {
+      "domainSlug": "synthetic-biology",
+      "sourceContractId": "source-gillmore-in-vivo-2021",
+      "verdict": "insufficient-evidence",
+      "metadataVerified": true,
+      "sourceContentInspected": false,
+      "inspectedContentLocation": null,
+      "artifactVersion": "not-inspected",
+      "versionRelationship": "declared-version-of-record-not-retrieved",
+      "rightsBasis": "citation-with-paraphrase",
+      "reason": "Crossref resolves the declared identifier to 'CRISPR-Cas9 In Vivo Gene Editing for Transthyretin Amyloidosis', so the work exists and its metadata matches. The content was not read in this sprint, and registry resolution says nothing about whether the source supports this record subject.",
+      "remediation": "Inspect the declared source against this record subject, then confirm or replace the mapping.",
+      "recordId": "urn:maha:record:genome-editor-delivery-systems",
+      "slug": "genome-editor-delivery-systems",
+      "recordRevisionSha256": "sha256:96fcae910ef78135fbf36ae41f11fd0fbc6d6ccce6ea326509405f1bb4420fc8",
+      "evidence": {
+        "metadataVerified": true,
+        "sourceContentInspected": false,
+        "inspectedContentLocation": null,
+        "subjectAligned": "insufficient-evidence",
+        "independentlyReproduced": false,
+        "externallyReviewed": false
+      },
+      "blockers": [
+        "source-alignment-insufficient-evidence",
+        "source-not-inspected"
+      ]
+    },
+    {
+      "domainSlug": "synthetic-biology",
+      "sourceContractId": "source-jinek-cas9-2012",
+      "verdict": "insufficient-evidence",
+      "metadataVerified": true,
+      "sourceContentInspected": false,
+      "inspectedContentLocation": null,
+      "artifactVersion": "not-inspected",
+      "versionRelationship": "declared-version-of-record-not-retrieved",
+      "rightsBasis": "citation-with-paraphrase",
+      "reason": "Crossref resolves the declared identifier to 'A Programmable Dual-RNA–Guided DNA Endonuclease in Adaptive Bacterial ', so the work exists and its metadata matches. The content was not read in this sprint, and registry resolution says nothing about whether the source supports this record subject.",
+      "remediation": "Inspect the declared source against this record subject, then confirm or replace the mapping.",
+      "recordId": "urn:maha:record:guide-rna-and-pam-recognition",
+      "slug": "guide-rna-and-pam-recognition",
+      "recordRevisionSha256": "sha256:216a778cf1966d4c7e16153caa81e8432090e462c455f54e33fa72c0acc97fb7",
+      "evidence": {
+        "metadataVerified": true,
+        "sourceContentInspected": false,
+        "inspectedContentLocation": null,
+        "subjectAligned": "insufficient-evidence",
+        "independentlyReproduced": false,
+        "externallyReviewed": false
+      },
+      "blockers": [
+        "source-alignment-insufficient-evidence",
+        "source-not-inspected"
+      ]
+    },
+    {
+      "domainSlug": "synthetic-biology",
+      "sourceContractId": "source-tsai-guide-seq-2015",
+      "verdict": "insufficient-evidence",
+      "metadataVerified": true,
+      "sourceContentInspected": false,
+      "inspectedContentLocation": null,
+      "artifactVersion": "not-inspected",
+      "versionRelationship": "declared-version-of-record-not-retrieved",
+      "rightsBasis": "citation-with-paraphrase",
+      "reason": "Crossref resolves the declared identifier to 'GUIDE-seq enables genome-wide profiling of off-target cleavage by CRIS', so the work exists and its metadata matches. The content was not read in this sprint, and registry resolution says nothing about whether the source supports this record subject.",
+      "remediation": "Inspect the declared source against this record subject, then confirm or replace the mapping.",
+      "recordId": "urn:maha:record:guide-seq-off-target-detection",
+      "slug": "guide-seq-off-target-detection",
+      "recordRevisionSha256": "sha256:5ef01b9f49fc3c5f1c6fcf4afefc0530f809cabbd9c9dc75a255f737081a0e24",
+      "evidence": {
+        "metadataVerified": true,
+        "sourceContentInspected": false,
+        "inspectedContentLocation": null,
+        "subjectAligned": "insufficient-evidence",
+        "independentlyReproduced": false,
+        "externallyReviewed": false
+      },
+      "blockers": [
+        "source-alignment-insufficient-evidence",
+        "source-not-inspected"
+      ]
+    },
+    {
+      "domainSlug": "quantum-systems",
+      "sourceContractId": "source-cross-quantum-volume-2019",
+      "verdict": "insufficient-evidence",
+      "metadataVerified": true,
+      "sourceContentInspected": false,
+      "inspectedContentLocation": null,
+      "artifactVersion": "not-inspected",
+      "versionRelationship": "declared-version-of-record-not-retrieved",
+      "rightsBasis": "citation-with-paraphrase",
+      "reason": "Crossref resolves the declared identifier to 'Validating quantum computers using randomized model circuits', so the work exists and its metadata matches. The content was not read in this sprint, and registry resolution says nothing about whether the source supports this record subject.",
+      "remediation": "Inspect the declared source against this record subject, then confirm or replace the mapping.",
+      "recordId": "urn:maha:record:hardware-benchmark-scope",
+      "slug": "hardware-benchmark-scope",
+      "recordRevisionSha256": "sha256:2b4e00e0138c6df2c5a97dc34f7ea617fdc8508beb310069aff3f73ed2480eca",
+      "evidence": {
+        "metadataVerified": true,
+        "sourceContentInspected": false,
+        "inspectedContentLocation": null,
+        "subjectAligned": "insufficient-evidence",
+        "independentlyReproduced": false,
+        "externallyReviewed": false
+      },
+      "blockers": [
+        "source-alignment-insufficient-evidence",
+        "source-not-inspected"
+      ]
+    },
+    {
+      "domainSlug": "synthetic-biology",
+      "sourceContractId": "source-gillmore-in-vivo-2021",
+      "verdict": "insufficient-evidence",
+      "metadataVerified": true,
+      "sourceContentInspected": false,
+      "inspectedContentLocation": null,
+      "artifactVersion": "not-inspected",
+      "versionRelationship": "declared-version-of-record-not-retrieved",
+      "rightsBasis": "citation-with-paraphrase",
+      "reason": "Crossref resolves the declared identifier to 'CRISPR-Cas9 In Vivo Gene Editing for Transthyretin Amyloidosis', so the work exists and its metadata matches. The content was not read in this sprint, and registry resolution says nothing about whether the source supports this record subject.",
+      "remediation": "Inspect the declared source against this record subject, then confirm or replace the mapping.",
+      "recordId": "urn:maha:record:in-vitro-versus-in-vivo-evidence",
+      "slug": "in-vitro-versus-in-vivo-evidence",
+      "recordRevisionSha256": "sha256:04191ae798998644f3e9e348b443c465e6b6da590f5482685c2b1589eb248072",
+      "evidence": {
+        "metadataVerified": true,
+        "sourceContentInspected": false,
+        "inspectedContentLocation": null,
+        "subjectAligned": "insufficient-evidence",
+        "independentlyReproduced": false,
+        "externallyReviewed": false
+      },
+      "blockers": [
+        "source-alignment-insufficient-evidence",
+        "source-not-inspected"
+      ]
+    },
+    {
+      "domainSlug": "synthetic-biology",
+      "sourceContractId": "source-gillmore-in-vivo-2021",
+      "verdict": "insufficient-evidence",
+      "metadataVerified": true,
+      "sourceContentInspected": false,
+      "inspectedContentLocation": null,
+      "artifactVersion": "not-inspected",
+      "versionRelationship": "declared-version-of-record-not-retrieved",
+      "rightsBasis": "citation-with-paraphrase",
+      "reason": "Crossref resolves the declared identifier to 'CRISPR-Cas9 In Vivo Gene Editing for Transthyretin Amyloidosis', so the work exists and its metadata matches. The content was not read in this sprint, and registry resolution says nothing about whether the source supports this record subject.",
+      "remediation": "Inspect the declared source against this record subject, then confirm or replace the mapping.",
+      "recordId": "urn:maha:record:in-vivo-genome-editing-workflow",
+      "slug": "in-vivo-genome-editing-workflow",
+      "recordRevisionSha256": "sha256:c04affa4a87aba09a28285d08ee2c933963509ae9064cedf1a66c4dff7cd4dd6",
+      "evidence": {
+        "metadataVerified": true,
+        "sourceContentInspected": false,
+        "inspectedContentLocation": null,
+        "subjectAligned": "insufficient-evidence",
+        "independentlyReproduced": false,
+        "externallyReviewed": false
+      },
+      "blockers": [
+        "source-alignment-insufficient-evidence",
+        "source-not-inspected"
+      ]
+    },
+    {
+      "domainSlug": "quantum-systems",
+      "sourceContractId": "source-magesan-interleaved-rb-2012",
+      "verdict": "insufficient-evidence",
+      "metadataVerified": true,
+      "sourceContentInspected": false,
+      "inspectedContentLocation": null,
+      "artifactVersion": "not-inspected",
+      "versionRelationship": "declared-version-of-record-not-retrieved",
+      "rightsBasis": "citation-with-paraphrase",
+      "reason": "Crossref resolves the declared identifier to 'Efficient Measurement of Quantum Gate Error by Interleaved Randomized ', so the work exists and its metadata matches. The content was not read in this sprint, and registry resolution says nothing about whether the source supports this record subject.",
+      "remediation": "Inspect the declared source against this record subject, then confirm or replace the mapping.",
+      "recordId": "urn:maha:record:interleaved-randomized-benchmarking",
+      "slug": "interleaved-randomized-benchmarking",
+      "recordRevisionSha256": "sha256:b93a1312964e246b332b207d310fffe982efe0a1f0065cd9dae67df127266dd2",
+      "evidence": {
+        "metadataVerified": true,
+        "sourceContentInspected": false,
+        "inspectedContentLocation": null,
+        "subjectAligned": "insufficient-evidence",
+        "independentlyReproduced": false,
+        "externallyReviewed": false
+      },
+      "blockers": [
+        "source-alignment-insufficient-evidence",
+        "source-not-inspected"
+      ]
+    },
+    {
+      "domainSlug": "quantum-systems",
+      "sourceContractId": "source-blais-circuit-qed-2004",
+      "verdict": "insufficient-evidence",
+      "metadataVerified": true,
+      "sourceContentInspected": true,
+      "inspectedContentLocation": "arXiv:cond-mat/0402216 abstract",
+      "artifactVersion": "preprint",
+      "versionRelationship": "preprint-of-the-declared-version-of-record",
+      "rightsBasis": "citation-with-paraphrase",
+      "reason": "The abstract concerns the cavity-QED architecture and does not treat the Josephson junction nonlinearity as such. Only the abstract was read and the declared locator names sections that were not, so nonalignment is not established either.",
+      "remediation": "Read the circuit-Hamiltonian sections, or bind a source that treats junction nonlinearity directly.",
+      "recordId": "urn:maha:record:josephson-junction-nonlinearity",
+      "slug": "josephson-junction-nonlinearity",
+      "recordRevisionSha256": "sha256:6a6feddafea5f53be1a7e5389d3a7813d5b3e271ed5df9fd34f1e2847560581e",
+      "evidence": {
+        "metadataVerified": true,
+        "sourceContentInspected": true,
+        "inspectedContentLocation": "arXiv:cond-mat/0402216 abstract",
+        "subjectAligned": "insufficient-evidence",
+        "independentlyReproduced": false,
+        "externallyReviewed": false
+      },
+      "blockers": [
+        "source-alignment-insufficient-evidence"
+      ]
+    },
+    {
+      "domainSlug": "quantum-systems",
+      "sourceContractId": "source-klm-linear-optics-2001",
+      "verdict": "insufficient-evidence",
+      "metadataVerified": true,
+      "sourceContentInspected": false,
+      "inspectedContentLocation": null,
+      "artifactVersion": "not-inspected",
+      "versionRelationship": "declared-version-of-record-not-retrieved",
+      "rightsBasis": "citation-with-paraphrase",
+      "reason": "Crossref resolves the declared identifier to 'A scheme for efficient quantum computation with linear optics', so the work exists and its metadata matches. The content was not read in this sprint, and registry resolution says nothing about whether the source supports this record subject.",
+      "remediation": "Inspect the declared source against this record subject, then confirm or replace the mapping.",
+      "recordId": "urn:maha:record:linear-optical-quantum-computation",
+      "slug": "linear-optical-quantum-computation",
+      "recordRevisionSha256": "sha256:9d4198c21a107aa82c71a0f634c7c05eddced1ca348b77ad7ff2d580d99768a0",
+      "evidence": {
+        "metadataVerified": true,
+        "sourceContentInspected": false,
+        "inspectedContentLocation": null,
+        "subjectAligned": "insufficient-evidence",
+        "independentlyReproduced": false,
+        "externallyReviewed": false
+      },
+      "blockers": [
+        "source-alignment-insufficient-evidence",
+        "source-not-inspected"
+      ]
+    },
+    {
+      "domainSlug": "quantum-systems",
+      "sourceContractId": "source-google-logical-error-2023",
+      "verdict": "insufficient-evidence",
+      "metadataVerified": true,
+      "sourceContentInspected": false,
+      "inspectedContentLocation": null,
+      "artifactVersion": "not-inspected",
+      "versionRelationship": "declared-version-of-record-not-retrieved",
+      "rightsBasis": "citation-with-paraphrase",
+      "reason": "Crossref resolves the declared identifier to 'Suppressing quantum errors by scaling a surface code logical qubit', so the work exists and its metadata matches. The content was not read in this sprint, and registry resolution says nothing about whether the source supports this record subject.",
+      "remediation": "Inspect the declared source against this record subject, then confirm or replace the mapping.",
+      "recordId": "urn:maha:record:logical-error-suppression",
+      "slug": "logical-error-suppression",
+      "recordRevisionSha256": "sha256:2ffe63c33bc6552238a34682a1f203b4b1f3c635fe69fef8261ec8424fa9830e",
+      "evidence": {
+        "metadataVerified": true,
+        "sourceContentInspected": false,
+        "inspectedContentLocation": null,
+        "subjectAligned": "insufficient-evidence",
+        "independentlyReproduced": false,
+        "externallyReviewed": false
+      },
+      "blockers": [
+        "source-alignment-insufficient-evidence",
+        "source-not-inspected"
+      ]
+    },
+    {
+      "domainSlug": "quantum-systems",
+      "sourceContractId": "source-bluvstein-neutral-atom-2023",
+      "verdict": "insufficient-evidence",
+      "metadataVerified": true,
+      "sourceContentInspected": false,
+      "inspectedContentLocation": null,
+      "artifactVersion": "not-inspected",
+      "versionRelationship": "declared-version-of-record-not-retrieved",
+      "rightsBasis": "citation-with-paraphrase",
+      "reason": "Crossref resolves the declared identifier to 'Logical quantum processor based on reconfigurable atom arrays', so the work exists and its metadata matches. The content was not read in this sprint, and registry resolution says nothing about whether the source supports this record subject.",
+      "remediation": "Inspect the declared source against this record subject, then confirm or replace the mapping.",
+      "recordId": "urn:maha:record:neutral-atom-optical-tweezer-arrays",
+      "slug": "neutral-atom-optical-tweezer-arrays",
+      "recordRevisionSha256": "sha256:65bdb504584bbacd52f2d9f099fd93402c4a4ed12510a1bcf9d568683ab0c0c1",
+      "evidence": {
+        "metadataVerified": true,
+        "sourceContentInspected": false,
+        "inspectedContentLocation": null,
+        "subjectAligned": "insufficient-evidence",
+        "independentlyReproduced": false,
+        "externallyReviewed": false
+      },
+      "blockers": [
+        "source-alignment-insufficient-evidence",
+        "source-not-inspected"
+      ]
+    },
+    {
+      "domainSlug": "synthetic-biology",
+      "sourceContractId": "source-lazzarotto-change-seq-2020",
+      "verdict": "insufficient-evidence",
+      "metadataVerified": true,
+      "sourceContentInspected": false,
+      "inspectedContentLocation": null,
+      "artifactVersion": "not-inspected",
+      "versionRelationship": "declared-version-of-record-not-retrieved",
+      "rightsBasis": "citation-with-paraphrase",
+      "reason": "Crossref resolves the declared identifier to 'CHANGE-seq reveals genetic and epigenetic effects on CRISPR–Cas9 genom', so the work exists and its metadata matches. The content was not read in this sprint, and registry resolution says nothing about whether the source supports this record subject.",
+      "remediation": "Inspect the declared source against this record subject, then confirm or replace the mapping.",
+      "recordId": "urn:maha:record:off-target-nomination-versus-confirmation",
+      "slug": "off-target-nomination-versus-confirmation",
+      "recordRevisionSha256": "sha256:b7bced5f8d14674ed18063921b7fa6f4acdab6e3de8b01c51c413a7f02bd7f55",
+      "evidence": {
+        "metadataVerified": true,
+        "sourceContentInspected": false,
+        "inspectedContentLocation": null,
+        "subjectAligned": "insufficient-evidence",
+        "independentlyReproduced": false,
+        "externallyReviewed": false
+      },
+      "blockers": [
+        "source-alignment-insufficient-evidence",
+        "source-not-inspected"
+      ]
+    },
+    {
+      "domainSlug": "quantum-systems",
+      "sourceContractId": "source-shor-qec-1995",
+      "verdict": "insufficient-evidence",
+      "metadataVerified": true,
+      "sourceContentInspected": false,
+      "inspectedContentLocation": null,
+      "artifactVersion": "not-inspected",
+      "versionRelationship": "declared-version-of-record-not-retrieved",
+      "rightsBasis": "citation-with-paraphrase",
+      "reason": "Crossref resolves the declared identifier to 'Scheme for reducing decoherence in quantum computer memory', so the work exists and its metadata matches. The content was not read in this sprint, and registry resolution says nothing about whether the source supports this record subject.",
+      "remediation": "Inspect the declared source against this record subject, then confirm or replace the mapping.",
+      "recordId": "urn:maha:record:physical-and-logical-qubits",
+      "slug": "physical-and-logical-qubits",
+      "recordRevisionSha256": "sha256:f950ccf0da9152d4dbbe784488fe7a02efdd22cf4ad7c1bb071f602efe6354c2",
+      "evidence": {
+        "metadataVerified": true,
+        "sourceContentInspected": false,
+        "inspectedContentLocation": null,
+        "subjectAligned": "insufficient-evidence",
+        "independentlyReproduced": false,
+        "externallyReviewed": false
+      },
+      "blockers": [
+        "source-alignment-insufficient-evidence",
+        "source-not-inspected"
+      ]
+    },
+    {
+      "domainSlug": "synthetic-biology",
+      "sourceContractId": "source-shalem-crispr-screen-2014",
+      "verdict": "insufficient-evidence",
+      "metadataVerified": true,
+      "sourceContentInspected": false,
+      "inspectedContentLocation": null,
+      "artifactVersion": "not-inspected",
+      "versionRelationship": "declared-version-of-record-not-retrieved",
+      "rightsBasis": "citation-with-paraphrase",
+      "reason": "Crossref resolves the declared identifier to 'Genome-Scale CRISPR-Cas9 Knockout Screening in Human Cells', so the work exists and its metadata matches. The content was not read in this sprint, and registry resolution says nothing about whether the source supports this record subject.",
+      "remediation": "Inspect the declared source against this record subject, then confirm or replace the mapping.",
+      "recordId": "urn:maha:record:pooled-crispr-screening",
+      "slug": "pooled-crispr-screening",
+      "recordRevisionSha256": "sha256:959e5b4a8a42988da114a0702a7a9d34381c190305a42ae647f6e061d1f8f2c7",
+      "evidence": {
+        "metadataVerified": true,
+        "sourceContentInspected": false,
+        "inspectedContentLocation": null,
+        "subjectAligned": "insufficient-evidence",
+        "independentlyReproduced": false,
+        "externallyReviewed": false
+      },
+      "blockers": [
+        "source-alignment-insufficient-evidence",
+        "source-not-inspected"
+      ]
+    },
+    {
+      "domainSlug": "synthetic-biology",
+      "sourceContractId": "source-anzalone-prime-editing-2019",
+      "verdict": "insufficient-evidence",
+      "metadataVerified": true,
+      "sourceContentInspected": false,
+      "inspectedContentLocation": null,
+      "artifactVersion": "not-inspected",
+      "versionRelationship": "declared-version-of-record-not-retrieved",
+      "rightsBasis": "citation-with-paraphrase",
+      "reason": "Crossref resolves the declared identifier to 'Search-and-replace genome editing without double-strand breaks or dono', so the work exists and its metadata matches. The content was not read in this sprint, and registry resolution says nothing about whether the source supports this record subject.",
+      "remediation": "Inspect the declared source against this record subject, then confirm or replace the mapping.",
+      "recordId": "urn:maha:record:prime-editing",
+      "slug": "prime-editing",
+      "recordRevisionSha256": "sha256:8145bad0de99c1ec7ac10cc9b2f0e57ee4a651cb82c3610a265c79a1f4ff89f2",
+      "evidence": {
+        "metadataVerified": true,
+        "sourceContentInspected": false,
+        "inspectedContentLocation": null,
+        "subjectAligned": "insufficient-evidence",
+        "independentlyReproduced": false,
+        "externallyReviewed": false
+      },
+      "blockers": [
+        "source-alignment-insufficient-evidence",
+        "source-not-inspected"
+      ]
+    },
+    {
+      "domainSlug": "synthetic-biology",
+      "sourceContractId": "source-anzalone-prime-2019-graph",
+      "verdict": "insufficient-evidence",
+      "metadataVerified": true,
+      "sourceContentInspected": false,
+      "inspectedContentLocation": null,
+      "artifactVersion": "not-inspected",
+      "versionRelationship": "declared-version-of-record-not-retrieved",
+      "rightsBasis": "citation-with-paraphrase",
+      "reason": "Crossref resolves the declared identifier to 'Search-and-replace genome editing without double-strand breaks or dono', so the work exists and its metadata matches. The content was not read in this sprint, and registry resolution says nothing about whether the source supports this record subject.",
+      "remediation": "Inspect the declared source against this record subject, then confirm or replace the mapping.",
+      "recordId": "urn:maha:record:prime-editing-guide-rna-mechanism",
+      "slug": "prime-editing-guide-rna-mechanism",
+      "recordRevisionSha256": "sha256:0b3e9a4522c5b0be9b6ce514fe55945920acf5364ab9c63701ab177042d8ce10",
+      "evidence": {
+        "metadataVerified": true,
+        "sourceContentInspected": false,
+        "inspectedContentLocation": null,
+        "subjectAligned": "insufficient-evidence",
+        "independentlyReproduced": false,
+        "externallyReviewed": false
+      },
+      "blockers": [
+        "source-alignment-insufficient-evidence",
+        "source-not-inspected"
+      ]
+    },
+    {
+      "domainSlug": "quantum-systems",
+      "sourceContractId": "source-shor-qec-1995",
+      "verdict": "insufficient-evidence",
+      "metadataVerified": true,
+      "sourceContentInspected": false,
+      "inspectedContentLocation": null,
+      "artifactVersion": "not-inspected",
+      "versionRelationship": "declared-version-of-record-not-retrieved",
+      "rightsBasis": "citation-with-paraphrase",
+      "reason": "Crossref resolves the declared identifier to 'Scheme for reducing decoherence in quantum computer memory', so the work exists and its metadata matches. The content was not read in this sprint, and registry resolution says nothing about whether the source supports this record subject.",
+      "remediation": "Inspect the declared source against this record subject, then confirm or replace the mapping.",
+      "recordId": "urn:maha:record:quantum-error-correction",
+      "slug": "quantum-error-correction",
+      "recordRevisionSha256": "sha256:2a24e4db12f11d6783766e60642deb8bf3b5f6d61a486da0d834da7d76ada9dd",
+      "evidence": {
+        "metadataVerified": true,
+        "sourceContentInspected": false,
+        "inspectedContentLocation": null,
+        "subjectAligned": "insufficient-evidence",
+        "independentlyReproduced": false,
+        "externallyReviewed": false
+      },
+      "blockers": [
+        "source-alignment-insufficient-evidence",
+        "source-not-inspected"
+      ]
+    },
+    {
+      "domainSlug": "quantum-systems",
+      "sourceContractId": "source-temme-error-mitigation-2017",
+      "verdict": "supported",
+      "metadataVerified": true,
+      "sourceContentInspected": true,
+      "inspectedContentLocation": "arXiv:1612.02058 abstract",
+      "artifactVersion": "preprint",
+      "versionRelationship": "preprint-of-the-declared-version-of-record",
+      "rightsBasis": "citation-with-paraphrase",
+      "reason": "The abstract presents two mitigation schemes: extrapolation to the zero-noise limit using Richardson deferred approach, and cancellation by resampling randomized circuits under a quasi-probability distribution. That is the record subject.",
+      "remediation": "None. The mapping is curated and confirmed.",
+      "recordId": "urn:maha:record:quantum-error-mitigation",
+      "slug": "quantum-error-mitigation",
+      "recordRevisionSha256": "sha256:1ba548818ce7ad026b2bb80c5a84466fed89cbd6c61c5a18a8f16cf1517e0832",
+      "evidence": {
+        "metadataVerified": true,
+        "sourceContentInspected": true,
+        "inspectedContentLocation": "arXiv:1612.02058 abstract",
+        "subjectAligned": "supported",
+        "independentlyReproduced": false,
+        "externallyReviewed": false
+      },
+      "blockers": []
+    },
+    {
+      "domainSlug": "quantum-systems",
+      "sourceContractId": "source-cross-quantum-volume-2019",
+      "verdict": "insufficient-evidence",
+      "metadataVerified": true,
+      "sourceContentInspected": false,
+      "inspectedContentLocation": null,
+      "artifactVersion": "not-inspected",
+      "versionRelationship": "declared-version-of-record-not-retrieved",
+      "rightsBasis": "citation-with-paraphrase",
+      "reason": "Crossref resolves the declared identifier to 'Validating quantum computers using randomized model circuits', so the work exists and its metadata matches. The content was not read in this sprint, and registry resolution says nothing about whether the source supports this record subject.",
+      "remediation": "Inspect the declared source against this record subject, then confirm or replace the mapping.",
+      "recordId": "urn:maha:record:quantum-volume-benchmark",
+      "slug": "quantum-volume-benchmark",
+      "recordRevisionSha256": "sha256:b61ab7a8fbfce50057126880e0e917d46e4be3a94c45a431f7672e783dc957bd",
+      "evidence": {
+        "metadataVerified": true,
+        "sourceContentInspected": false,
+        "inspectedContentLocation": null,
+        "subjectAligned": "insufficient-evidence",
+        "independentlyReproduced": false,
+        "externallyReviewed": false
+      },
+      "blockers": [
+        "source-alignment-insufficient-evidence",
+        "source-not-inspected"
+      ]
+    },
+    {
+      "domainSlug": "quantum-systems",
+      "sourceContractId": "source-arute-random-circuits-2019",
+      "verdict": "insufficient-evidence",
+      "metadataVerified": true,
+      "sourceContentInspected": false,
+      "inspectedContentLocation": null,
+      "artifactVersion": "not-inspected",
+      "versionRelationship": "declared-version-of-record-not-retrieved",
+      "rightsBasis": "citation-with-paraphrase",
+      "reason": "Crossref resolves the declared identifier to 'Quantum supremacy using a programmable superconducting processor', so the work exists and its metadata matches. The content was not read in this sprint, and registry resolution says nothing about whether the source supports this record subject.",
+      "remediation": "Inspect the declared source against this record subject, then confirm or replace the mapping.",
+      "recordId": "urn:maha:record:random-circuit-sampling",
+      "slug": "random-circuit-sampling",
+      "recordRevisionSha256": "sha256:9a55b13c6103a3d54fdd798bf4ceeb49208fef4c65ad1ed5da2cd7f6fe4c8b6c",
+      "evidence": {
+        "metadataVerified": true,
+        "sourceContentInspected": false,
+        "inspectedContentLocation": null,
+        "subjectAligned": "insufficient-evidence",
+        "independentlyReproduced": false,
+        "externallyReviewed": false
+      },
+      "blockers": [
+        "source-alignment-insufficient-evidence",
+        "source-not-inspected"
+      ]
+    },
+    {
+      "domainSlug": "quantum-systems",
+      "sourceContractId": "source-magesan-rb-2011",
+      "verdict": "insufficient-evidence",
+      "metadataVerified": true,
+      "sourceContentInspected": false,
+      "inspectedContentLocation": null,
+      "artifactVersion": "not-inspected",
+      "versionRelationship": "declared-version-of-record-not-retrieved",
+      "rightsBasis": "citation-with-paraphrase",
+      "reason": "Crossref resolves the declared identifier to 'Scalable and Robust Randomized Benchmarking of Quantum Processes', so the work exists and its metadata matches. The content was not read in this sprint, and registry resolution says nothing about whether the source supports this record subject.",
+      "remediation": "Inspect the declared source against this record subject, then confirm or replace the mapping.",
+      "recordId": "urn:maha:record:randomized-benchmarking",
+      "slug": "randomized-benchmarking",
+      "recordRevisionSha256": "sha256:935647bbd1d1c80c3a57610985a588f71413b110f9ea45a398967b3732b74829",
+      "evidence": {
+        "metadataVerified": true,
+        "sourceContentInspected": false,
+        "inspectedContentLocation": null,
+        "subjectAligned": "insufficient-evidence",
+        "independentlyReproduced": false,
+        "externallyReviewed": false
+      },
+      "blockers": [
+        "source-alignment-insufficient-evidence",
+        "source-not-inspected"
+      ]
+    },
+    {
+      "domainSlug": "synthetic-biology",
+      "sourceContractId": "source-elowitz-repressilator-2000",
+      "verdict": "insufficient-evidence",
+      "metadataVerified": true,
+      "sourceContentInspected": false,
+      "inspectedContentLocation": null,
+      "artifactVersion": "not-inspected",
+      "versionRelationship": "declared-version-of-record-not-retrieved",
+      "rightsBasis": "citation-with-paraphrase",
+      "reason": "Crossref resolves the declared identifier to 'A synthetic oscillatory network of transcriptional regulators', so the work exists and its metadata matches. The content was not read in this sprint, and registry resolution says nothing about whether the source supports this record subject.",
+      "remediation": "Inspect the declared source against this record subject, then confirm or replace the mapping.",
+      "recordId": "urn:maha:record:repressilator-gene-oscillator",
+      "slug": "repressilator-gene-oscillator",
+      "recordRevisionSha256": "sha256:4836a066446356da13adb2438a1cf1a694ef61a662b109ea4a7533cf40f04b1c",
+      "evidence": {
+        "metadataVerified": true,
+        "sourceContentInspected": false,
+        "inspectedContentLocation": null,
+        "subjectAligned": "insufficient-evidence",
+        "independentlyReproduced": false,
+        "externallyReviewed": false
+      },
+      "blockers": [
+        "source-alignment-insufficient-evidence",
+        "source-not-inspected"
+      ]
+    },
+    {
+      "domainSlug": "quantum-systems",
+      "sourceContractId": "source-evered-rydberg-gates-2023",
+      "verdict": "insufficient-evidence",
+      "metadataVerified": true,
+      "sourceContentInspected": false,
+      "inspectedContentLocation": null,
+      "artifactVersion": "not-inspected",
+      "versionRelationship": "declared-version-of-record-not-retrieved",
+      "rightsBasis": "citation-with-paraphrase",
+      "reason": "Crossref resolves the declared identifier to 'High-fidelity parallel entangling gates on a neutral-atom quantum comp', so the work exists and its metadata matches. The content was not read in this sprint, and registry resolution says nothing about whether the source supports this record subject.",
+      "remediation": "Inspect the declared source against this record subject, then confirm or replace the mapping.",
+      "recordId": "urn:maha:record:rydberg-blockade-entangling-gates",
+      "slug": "rydberg-blockade-entangling-gates",
+      "recordRevisionSha256": "sha256:65ef58ea8e4368e747561738f8a183c87d440421ab8522307495fc19de7f7404",
+      "evidence": {
+        "metadataVerified": true,
+        "sourceContentInspected": false,
+        "inspectedContentLocation": null,
+        "subjectAligned": "insufficient-evidence",
+        "independentlyReproduced": false,
+        "externallyReviewed": false
+      },
+      "blockers": [
+        "source-alignment-insufficient-evidence",
+        "source-not-inspected"
+      ]
+    },
+    {
+      "domainSlug": "quantum-systems",
+      "sourceContractId": "source-loss-divincenzo-spin-1998",
+      "verdict": "insufficient-evidence",
+      "metadataVerified": true,
+      "sourceContentInspected": false,
+      "inspectedContentLocation": null,
+      "artifactVersion": "not-inspected",
+      "versionRelationship": "declared-version-of-record-not-retrieved",
+      "rightsBasis": "citation-with-paraphrase",
+      "reason": "Crossref resolves the declared identifier to 'Quantum computation with quantum dots', so the work exists and its metadata matches. The content was not read in this sprint, and registry resolution says nothing about whether the source supports this record subject.",
+      "remediation": "Inspect the declared source against this record subject, then confirm or replace the mapping.",
+      "recordId": "urn:maha:record:silicon-spin-qubits",
+      "slug": "silicon-spin-qubits",
+      "recordRevisionSha256": "sha256:4cc65163502a8934463f82e70ba72fc3fd2a24d8dc0c996657c7f24e4ba2c7af",
+      "evidence": {
+        "metadataVerified": true,
+        "sourceContentInspected": false,
+        "inspectedContentLocation": null,
+        "subjectAligned": "insufficient-evidence",
+        "independentlyReproduced": false,
+        "externallyReviewed": false
+      },
+      "blockers": [
+        "source-alignment-insufficient-evidence",
+        "source-not-inspected"
+      ]
+    },
+    {
+      "domainSlug": "synthetic-biology",
+      "sourceContractId": "source-dixit-perturb-seq-2016",
+      "verdict": "insufficient-evidence",
+      "metadataVerified": true,
+      "sourceContentInspected": false,
+      "inspectedContentLocation": null,
+      "artifactVersion": "not-inspected",
+      "versionRelationship": "declared-version-of-record-not-retrieved",
+      "rightsBasis": "citation-with-paraphrase",
+      "reason": "Crossref resolves the declared identifier to 'Perturb-Seq: Dissecting Molecular Circuits with Scalable Single-Cell R', so the work exists and its metadata matches. The content was not read in this sprint, and registry resolution says nothing about whether the source supports this record subject.",
+      "remediation": "Inspect the declared source against this record subject, then confirm or replace the mapping.",
+      "recordId": "urn:maha:record:single-cell-perturbation-readout",
+      "slug": "single-cell-perturbation-readout",
+      "recordRevisionSha256": "sha256:6425d7ab23e2f018b1b857acf0ece2c747053eaab5bfe0e32810efbffb8626cc",
+      "evidence": {
+        "metadataVerified": true,
+        "sourceContentInspected": false,
+        "inspectedContentLocation": null,
+        "subjectAligned": "insufficient-evidence",
+        "independentlyReproduced": false,
+        "externallyReviewed": false
+      },
+      "blockers": [
+        "source-alignment-insufficient-evidence",
+        "source-not-inspected"
+      ]
+    },
+    {
+      "domainSlug": "synthetic-biology",
+      "sourceContractId": "source-liang-embryo-editing-2015",
+      "verdict": "insufficient-evidence",
+      "metadataVerified": true,
+      "sourceContentInspected": false,
+      "inspectedContentLocation": null,
+      "artifactVersion": "not-inspected",
+      "versionRelationship": "declared-version-of-record-not-retrieved",
+      "rightsBasis": "citation-with-paraphrase",
+      "reason": "Crossref resolves the declared identifier to 'CRISPR/Cas9-mediated gene editing in human tripronuclear zygotes', so the work exists and its metadata matches. The content was not read in this sprint, and registry resolution says nothing about whether the source supports this record subject.",
+      "remediation": "Inspect the declared source against this record subject, then confirm or replace the mapping.",
+      "recordId": "urn:maha:record:somatic-versus-germline-editing",
+      "slug": "somatic-versus-germline-editing",
+      "recordRevisionSha256": "sha256:a70486150e1b435628d254e6e59be26d1e9e4f14c335458ec2f548af86d02f34",
+      "evidence": {
+        "metadataVerified": true,
+        "sourceContentInspected": false,
+        "inspectedContentLocation": null,
+        "subjectAligned": "insufficient-evidence",
+        "independentlyReproduced": false,
+        "externallyReviewed": false
+      },
+      "blockers": [
+        "source-alignment-insufficient-evidence",
+        "source-not-inspected"
+      ]
+    },
+    {
+      "domainSlug": "quantum-systems",
+      "sourceContractId": "source-fowler-surface-code-2012",
+      "verdict": "supported",
+      "metadataVerified": true,
+      "sourceContentInspected": true,
+      "inspectedContentLocation": "arXiv:1208.0928 abstract",
+      "artifactVersion": "preprint",
+      "versionRelationship": "preprint-of-the-declared-version-of-record",
+      "rightsBasis": "citation-with-paraphrase",
+      "reason": "The abstract introduces the concept of the stabilizer using two qubits and extends it to stabilizers acting on a two-dimensional array of physical qubits, which is the repeated parity measurement this record bounds.",
+      "remediation": "None. The mapping is curated and confirmed.",
+      "recordId": "urn:maha:record:stabilizer-syndrome-measurement",
+      "slug": "stabilizer-syndrome-measurement",
+      "recordRevisionSha256": "sha256:bcf371de57eeaa64ce9449ccfe776e3c76b2042e729ead3abe644ad279b5ae9c",
+      "evidence": {
+        "metadataVerified": true,
+        "sourceContentInspected": true,
+        "inspectedContentLocation": "arXiv:1208.0928 abstract",
+        "subjectAligned": "supported",
+        "independentlyReproduced": false,
+        "externallyReviewed": false
+      },
+      "blockers": []
+    },
+    {
+      "domainSlug": "quantum-systems",
+      "sourceContractId": "source-fowler-surface-code-2012",
+      "verdict": "supported",
+      "metadataVerified": true,
+      "sourceContentInspected": true,
+      "inspectedContentLocation": "arXiv:1208.0928 abstract",
+      "artifactVersion": "preprint",
+      "versionRelationship": "preprint-of-the-declared-version-of-record",
+      "rightsBasis": "citation-with-paraphrase",
+      "reason": "The abstract introduces the surface code implemented on a two-dimensional array of physical qubits and describes logical qubit formation, braiding and the gate set, which is the record subject.",
+      "remediation": "None. The mapping is curated and confirmed.",
+      "recordId": "urn:maha:record:surface-code-error-correction",
+      "slug": "surface-code-error-correction",
+      "recordRevisionSha256": "sha256:28cd4b8686cb6ce90756932d32bcb955c9ff88c5823b94825a8430d6ccd95e8b",
+      "evidence": {
+        "metadataVerified": true,
+        "sourceContentInspected": true,
+        "inspectedContentLocation": "arXiv:1208.0928 abstract",
+        "subjectAligned": "supported",
+        "independentlyReproduced": false,
+        "externallyReviewed": false
+      },
+      "blockers": []
+    },
+    {
+      "domainSlug": "synthetic-biology",
+      "sourceContractId": "source-tsai-guide-seq-2015",
+      "verdict": "insufficient-evidence",
+      "metadataVerified": true,
+      "sourceContentInspected": false,
+      "inspectedContentLocation": null,
+      "artifactVersion": "not-inspected",
+      "versionRelationship": "declared-version-of-record-not-retrieved",
+      "rightsBasis": "citation-with-paraphrase",
+      "reason": "Crossref resolves the declared identifier to 'GUIDE-seq enables genome-wide profiling of off-target cleavage by CRIS', so the work exists and its metadata matches. The content was not read in this sprint, and registry resolution says nothing about whether the source supports this record subject.",
+      "remediation": "Inspect the declared source against this record subject, then confirm or replace the mapping.",
+      "recordId": "urn:maha:record:targeted-amplicon-sequencing",
+      "slug": "targeted-amplicon-sequencing",
+      "recordRevisionSha256": "sha256:76c7c8eb258d88810584bf93ab38d66f517f10b3498cb285c837114ffe09de83",
+      "evidence": {
+        "metadataVerified": true,
+        "sourceContentInspected": false,
+        "inspectedContentLocation": null,
+        "subjectAligned": "insufficient-evidence",
+        "independentlyReproduced": false,
+        "externallyReviewed": false
+      },
+      "blockers": [
+        "source-alignment-insufficient-evidence",
+        "source-not-inspected"
+      ]
+    },
+    {
+      "domainSlug": "quantum-systems",
+      "sourceContractId": "source-koch-transmon-2007",
+      "verdict": "supported",
+      "metadataVerified": true,
+      "sourceContentInspected": true,
+      "inspectedContentLocation": "arXiv:cond-mat/0703002 abstract",
+      "artifactVersion": "preprint",
+      "versionRelationship": "preprint-of-the-declared-version-of-record",
+      "rightsBasis": "citation-with-paraphrase",
+      "reason": "The abstract defines the transmon as operating at a significantly increased Josephson-to-charging energy ratio, predicts a drastic reduction in sensitivity to charge noise relative to the Cooper pair box, and states that charge dispersion decreases exponentially with EJ/EC while anharmonicity falls only as a weak power law. That is the record subject.",
+      "remediation": "None. The mapping is curated and confirmed.",
+      "recordId": "urn:maha:record:transmon-qubit",
+      "slug": "transmon-qubit",
+      "recordRevisionSha256": "sha256:5b9d1df90661b0ae55bb9cde26d3d33fde4b82a2588475b11df9398da86e7d82",
+      "evidence": {
+        "metadataVerified": true,
+        "sourceContentInspected": true,
+        "inspectedContentLocation": "arXiv:cond-mat/0703002 abstract",
+        "subjectAligned": "supported",
+        "independentlyReproduced": false,
+        "externallyReviewed": false
+      },
+      "blockers": []
+    },
+    {
+      "domainSlug": "quantum-systems",
+      "sourceContractId": "source-pino-qccd-2021",
+      "verdict": "insufficient-evidence",
+      "metadataVerified": true,
+      "sourceContentInspected": false,
+      "inspectedContentLocation": null,
+      "artifactVersion": "not-inspected",
+      "versionRelationship": "declared-version-of-record-not-retrieved",
+      "rightsBasis": "citation-with-paraphrase",
+      "reason": "Crossref resolves the declared identifier to 'Demonstration of the trapped-ion quantum CCD computer architecture', so the work exists and its metadata matches. The content was not read in this sprint, and registry resolution says nothing about whether the source supports this record subject.",
+      "remediation": "Inspect the declared source against this record subject, then confirm or replace the mapping.",
+      "recordId": "urn:maha:record:trapped-ion-qccd-architecture",
+      "slug": "trapped-ion-qccd-architecture",
+      "recordRevisionSha256": "sha256:892f263cc532d38bc18ebb99da507a85296bb54602e8205961540c57102bc6a7",
+      "evidence": {
+        "metadataVerified": true,
+        "sourceContentInspected": false,
+        "inspectedContentLocation": null,
+        "subjectAligned": "insufficient-evidence",
+        "independentlyReproduced": false,
+        "externallyReviewed": false
+      },
+      "blockers": [
+        "source-alignment-insufficient-evidence",
+        "source-not-inspected"
+      ]
+    }
+  ]
+}

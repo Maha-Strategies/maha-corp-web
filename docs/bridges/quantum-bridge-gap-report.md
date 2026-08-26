@@ -51,8 +51,8 @@ Structural resolution and epistemic fitness are different questions and are repo
 | Measure | Count |
 | --- | --- |
 | Structurally resolved | 2 |
-| Epistemically usable | 0 |
-| Structurally resolved but blocked | 2 |
+| Epistemically usable | 1 |
+| Structurally resolved but blocked | 1 |
 | Unresolved | 22 |
 
 ### Structurally resolved endpoints
@@ -60,7 +60,7 @@ Structural resolution and epistemic fitness are different questions and are repo
 | Submitted reference | Structure | Alignment verdict | Usability | Blocker | Audit revision |
 | --- | --- | --- | --- | --- | --- |
 | `fusion-plasma:rebco-high-field-magnets` | alias-resolution | `source-mismatched` | `structurally-resolved-but-epistemically-blocked` | `endpoint-source-alignment-mismatched` | `sha256:0fedeac77d213a0b…` |
-| `quantum-systems:syndrome-extraction-cycle` | alias-resolution | `audit-missing` | `structurally-resolved-but-epistemically-blocked` | `endpoint-alignment-audit-missing` | `sha256:bcf371de57eeaa64…` |
+| `quantum-systems:syndrome-extraction-cycle` | alias-resolution | `alignment-clear` | `usable` | — | `sha256:bcf371de57eeaa64…` |
 
 #### Blocker provenance
 
@@ -74,9 +74,9 @@ _Proposed replacement, **not** applied and **not** canonical._ Whyte, D. G. et a
 
 **`quantum-systems:syndrome-extraction-cycle`** → `urn:maha:record:stabilizer-syndrome-measurement`
 
-Audit: no alignment audit covers this record.
+Audit: subject `supported`, origin `independently-curated`, alignment blockers none.
 
-No alignment audit covers this record. Only the frontier cohort is audited, so a resolution outside it carries no evidence about whether its source supports the subject. This fails closed.
+The alignment audit reports an inspected, subject-aligned source with verified metadata and an exact locator, and raises no blocker.
 
 ## Source verification (24 citations)
 

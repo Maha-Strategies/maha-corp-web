@@ -15,6 +15,7 @@ import {
   resolveUsableEndpoint,
 } from '../lib/endpoint-fitness.ts'
 import { FRONTIER_ALIGNMENT_AUDIT, alignmentFor } from '../lib/frontier-source-alignment.ts'
+import { pilotAlignmentFor } from '../lib/pilot-source-alignment.ts'
 import { EPISTEMIC_RECORDS } from '../lib/epistemic-pilots.ts'
 import { epistemicReviewTargetHash } from '../lib/epistemic-publication.ts'
 import { isResolvedOutcome, resolveEpistemicReference } from '../lib/epistemic-reference-resolver.ts'
@@ -122,13 +123,20 @@ test('metadata-only resolution is unusable', () => {
 })
 
 test('a missing alignment audit fails closed', () => {
-  // Only frontier records are audited; anything else must not become usable.
-  const unaudited = EPISTEMIC_RECORDS.find((record) => !alignmentFor(record.id))!
-  const result = resolveUsableEndpoint(unaudited.id)
-  assert.equal(result.structure.outcome.status, 'exact-resolution')
-  assert.equal(result.fitness!.state, 'audit-missing')
-  assert.deepEqual(result.blockers, ['endpoint-alignment-audit-missing'])
-  assert.equal(result.usability, 'structurally-resolved-but-epistemically-blocked')
+  // This used to pick any record outside the frontier audit. The pilot audit
+  // now covers quantum-systems and synthetic-biology, so every canonical record
+  // is audited and no such record exists. The rule being protected is the
+  // fail-closed default itself, which is asserted directly against a record id
+  // that no audit covers.
+  const audited = EPISTEMIC_RECORDS.filter(
+    (record) => !alignmentFor(record.id) && !pilotAlignmentFor(record.id),
+  )
+  assert.deepEqual(audited, [], 'a canonical record is covered by neither audit')
+
+  const fitness = evaluateResolvedEndpointFitness('urn:maha:record:not-in-any-audit')
+  assert.equal(fitness.state, 'audit-missing')
+  assert.equal(fitness.blocker, 'endpoint-alignment-audit-missing')
+  assert.equal(fitness.auditProvenance.audited, false)
 })
 
 test('an alignment-clear exact resolution is usable', () => {
@@ -205,12 +213,14 @@ test('fitness records blocker provenance from the audit', () => {
 
 /* ------------------------------------------------------------ the batch -- */
 
-test('Q-BR reports two structural resolutions and zero usable endpoints', () => {
+test('Q-BR reports two structural resolutions and one usable endpoint', () => {
   const totals = endpointUsabilityTotals(REFERENCES)
+  // Usable moved 0 -> 1 when the pilot audit gave the syndrome-extraction alias
+  // target a real, inspected, clear verdict. The REBCO alias stays blocked.
   assert.deepEqual(totals, {
     structurallyResolved: 2,
-    usable: 0,
-    structurallyResolvedButBlocked: 2,
+    usable: 1,
+    structurallyResolvedButBlocked: 1,
     unresolved: 22,
   })
 })
