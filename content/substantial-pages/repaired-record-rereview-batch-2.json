@@ -1,0 +1,437 @@
+{
+  "schemaVersion": "maha-repaired-record-rereview/1.0",
+  "cohort": "substantial-publication-batch-2-repaired-revisions",
+  "boundary": "This is AI-assisted internal editorial review performed by the publisher. It is not external expert review, peer review, consensus, independent reproduction, scientific validation, or commercial certification.",
+  "dimensions": [
+    "source-fidelity",
+    "locator-fidelity",
+    "claim-boundedness",
+    "domain-fidelity",
+    "title-and-slug-accuracy",
+    "record-class-suitability",
+    "uncertainty-adequacy",
+    "prohibited-inference-coverage",
+    "rights-basis",
+    "public-wording-safety"
+  ],
+  "summary": {
+    "revisionsReviewed": 2,
+    "dimensionDecisions": 20,
+    "byState": {
+      "internally-approved-ready-for-release-preflight": 1,
+      "revise-again": 1
+    },
+    "canonicalReleasesCreated": 0,
+    "releaseAuthorityUsed": false,
+    "frozenRemainderCohortModified": false
+  },
+  "reviewerPackets": [
+    {
+      "recordId": "urn:maha:record:agentic-systems-mcp-tool-deny-by-default",
+      "revisionSha256": "sha256:bc3682ef4b4613b4cff9c468953c218fb20ebad8786ab8c6cc4bbcc8dccb1a66",
+      "auditDigest": "sha256:904d8b6299008520a26e9e5d43d7b09e87c2f735d482dfe9272e349687643893",
+      "auditedCanonicalPath": "/knowledge/agentic-systems-mcp/concepts/agentic-systems-mcp-human-denial-control-for-tool-invocations",
+      "title": "Human denial control for tool invocations",
+      "slug": "agentic-systems-mcp-human-denial-control-for-tool-invocations",
+      "recordKind": "concept",
+      "claimStatement": "The Model Context Protocol specification recommends, as a normative SHOULD for implementors rather than a protocol mandate, that a human remain in the loop with the ability to deny tool invocations, and states that the protocol itself does not mandate any specific user interaction model.",
+      "claimScope": "Limited to the User Interaction Model warning and the Security Considerations list on the Tools page of the Model Context Protocol specification, version 2024-11-05. It records what the specification recommends to implementors and does not describe any organisation’s allowlist, identity, retention, or approval policy.",
+      "claimBoundary": "A recommendation addressed to implementors is not a protocol requirement, is not evidence that any deployed system denies tools by default, and establishes no system-level performance, safety, scalability, economic advantage, or deployment readiness.",
+      "sourceTitle": "Model Context Protocol specification",
+      "sourceUrl": "https://modelcontextprotocol.io/specification/2024-11-05/server/tools",
+      "sourceIdentifiers": [
+        {
+          "scheme": "url",
+          "value": "https://modelcontextprotocol.io/specification/2024-11-05/index"
+        }
+      ],
+      "exactLocator": "Tools page, version 2024-11-05: the \"User Interaction Model\" warning block and the \"Security Considerations\" list.",
+      "rightsBasis": "citation-with-paraphrase",
+      "boundaries": [
+        "A recommended human denial control does not by itself establish system-level performance, safety, manufacturability, scalability, economic advantage, clinical benefit, or deployment readiness.",
+        "A source-bounded concept record does not establish manufacturing yield, economic advantage, safety, clinical benefit, or commercial readiness unless those outcomes are measured in a separately scoped record."
+      ],
+      "prohibitedInferences": [
+        "Do not use this human denial control record to claim that the surrounding technology is proven, safe, scalable, commercially available, or strategically superior.",
+        "Do not transfer a reported result across hardware, organisms, protocols, datasets, operating conditions, or outcome definitions without a declared comparison contract.",
+        "Do not read a recommended human ability to deny an invocation as a requirement that tools be denied unless explicitly permitted."
+      ],
+      "checklistVersion": "maha-repaired-record-rereview/1.0",
+      "boundary": "This is AI-assisted internal editorial review performed by the publisher. It is not external expert review, peer review, consensus, independent reproduction, scientific validation, or commercial certification.",
+      "packetDigest": "sha256:4f6ebed21ae3e78973bffa67dba0be74e537b63007e037d3d2fd518a1bae99d4"
+    },
+    {
+      "recordId": "urn:maha:record:fusion-plasma-systems-breeding-blanket-test-modules",
+      "revisionSha256": "sha256:3eb362d91f332ac755d9793f8e43d781e445bbe64827d24521af037288e54723",
+      "auditDigest": "sha256:76176aa7e8a914c18fbea7f823f4684d1400160a27fd6e68433f8bf19b86de22",
+      "auditedCanonicalPath": "/knowledge/fusion-plasma-systems/concepts/fusion-plasma-systems-breeding-blanket-test-modules",
+      "title": "Breeding blanket test modules",
+      "slug": "fusion-plasma-systems-breeding-blanket-test-modules",
+      "recordKind": "concept",
+      "claimStatement": "ITER documents a Test Blanket Module programme under which in-vessel modules will be used to test tritium breeding concepts, and states that further research is necessary to demonstrate the feasibility of large-scale tritium production and recycling.",
+      "claimScope": "Limited to the \"ITER Test Blanket Module (TBM) Program\" section of the ITER Tritium Breeding page. It records a planned test programme and its stated objective, and pools no results from other devices, studies, or blanket concepts.",
+      "claimBoundary": "A planned test programme is not a measurement. This record establishes no breeding ratio, no extraction rate, no neutron or heat-load performance, no materials qualification outcome, and no commercial blanket readiness.",
+      "sourceTitle": "Supporting systems",
+      "sourceUrl": "https://www.iter.org/machine/supporting-systems/tritium-breeding",
+      "sourceIdentifiers": [
+        {
+          "scheme": "url",
+          "value": "https://www.iter.org/machine/supporting-systems"
+        }
+      ],
+      "exactLocator": "ITER \"Tritium Breeding\" page: the \"ITER Test Blanket Module (TBM) Program\" section naming the test blanket modules and the four member concepts.",
+      "rightsBasis": "citation-with-paraphrase",
+      "boundaries": [
+        "A documented test programme does not by itself establish system-level performance, safety, manufacturability, scalability, economic advantage, clinical benefit, or deployment readiness.",
+        "A source-bounded concept record does not establish manufacturing yield, economic advantage, safety, clinical benefit, or commercial readiness unless those outcomes are measured in a separately scoped record."
+      ],
+      "prohibitedInferences": [
+        "Do not use this test blanket module programme record to claim that the surrounding technology is proven, safe, scalable, commercially available, or strategically superior.",
+        "Do not transfer a reported result across hardware, organisms, protocols, datasets, operating conditions, or outcome definitions without a declared comparison contract.",
+        "Do not read a planned test programme as demonstrated tritium breeding, measured performance, completed materials qualification, or commercial blanket readiness."
+      ],
+      "checklistVersion": "maha-repaired-record-rereview/1.0",
+      "boundary": "This is AI-assisted internal editorial review performed by the publisher. It is not external expert review, peer review, consensus, independent reproduction, scientific validation, or commercial certification.",
+      "packetDigest": "sha256:da0b8a73c673f20931a13102df476f5d0fda827d20f316e010a2940e0139badb"
+    }
+  ],
+  "ledgers": [
+    {
+      "recordId": "urn:maha:record:agentic-systems-mcp-tool-deny-by-default",
+      "revisionSha256": "sha256:bc3682ef4b4613b4cff9c468953c218fb20ebad8786ab8c6cc4bbcc8dccb1a66",
+      "auditDigest": "sha256:904d8b6299008520a26e9e5d43d7b09e87c2f735d482dfe9272e349687643893",
+      "checklistVersion": "maha-repaired-record-rereview/1.0",
+      "decisions": [
+        {
+          "dimension": "source-fidelity",
+          "recordId": "urn:maha:record:agentic-systems-mcp-tool-deny-by-default",
+          "revisionSha256": "sha256:bc3682ef4b4613b4cff9c468953c218fb20ebad8786ab8c6cc4bbcc8dccb1a66",
+          "reviewerId": "expert_maha-internal-editorial-v2",
+          "reviewerKind": "internal-editorial",
+          "reviewerRole": "Internal editorial reviewer for source-bounded epistemic records",
+          "checklistVersion": "maha-repaired-record-rereview/1.0",
+          "verdict": "approve",
+          "rationale": "The cited artifact is the Model Context Protocol specification at version 2024-11-05, and the record's source title names that artifact rather than a single page. The stable identifier resolves to the version root while the url resolves to the Tools page inside it, which is coherent citation practice: identify the artifact, locate within it. The establishes statement reproduces four distinct specification statements and overstates none of them.",
+          "disagreementsOrUncertainty": "The identifier and the url differ by design here. That is defensible for a multi-page specification but would be a defect for a single-page artifact, and the distinction is recorded so a later reviewer does not read it as an inconsistency.",
+          "notExternalReview": "This is AI-assisted internal editorial review performed by the publisher. It is not external expert review, peer review, consensus, independent reproduction, scientific validation, or commercial certification.",
+          "decisionDigest": "sha256:5bf75418b7fe1241d00beb1b817a0eede3fd6f0fad7d5058c2efdf3791d180af"
+        },
+        {
+          "dimension": "locator-fidelity",
+          "recordId": "urn:maha:record:agentic-systems-mcp-tool-deny-by-default",
+          "revisionSha256": "sha256:bc3682ef4b4613b4cff9c468953c218fb20ebad8786ab8c6cc4bbcc8dccb1a66",
+          "reviewerId": "expert_maha-internal-editorial-v2",
+          "reviewerKind": "internal-editorial",
+          "reviewerRole": "Internal editorial reviewer for source-bounded epistemic records",
+          "checklistVersion": "maha-repaired-record-rereview/1.0",
+          "verdict": "approve",
+          "rationale": "The locator names the \"User Interaction Model\" warning block and the \"Security Considerations\" list on the Tools page of version 2024-11-05. Both headings exist verbatim on the inspected page, and both carry the exact language the claim relies on. The locator is section-level, not whole-document, so a reader can reach the supporting text directly.",
+          "disagreementsOrUncertainty": "No archival snapshot was pinned. The specification version is fixed at 2024-11-05, which bounds drift far more tightly than an unversioned page, but the served rendering could still change.",
+          "notExternalReview": "This is AI-assisted internal editorial review performed by the publisher. It is not external expert review, peer review, consensus, independent reproduction, scientific validation, or commercial certification.",
+          "decisionDigest": "sha256:49234bc6bad08fd6a7f2c539d53de07dcb46329c93784007f6abc792038a32f5"
+        },
+        {
+          "dimension": "claim-boundedness",
+          "recordId": "urn:maha:record:agentic-systems-mcp-tool-deny-by-default",
+          "revisionSha256": "sha256:bc3682ef4b4613b4cff9c468953c218fb20ebad8786ab8c6cc4bbcc8dccb1a66",
+          "reviewerId": "expert_maha-internal-editorial-v2",
+          "reviewerKind": "internal-editorial",
+          "reviewerRole": "Internal editorial reviewer for source-bounded epistemic records",
+          "checklistVersion": "maha-repaired-record-rereview/1.0",
+          "verdict": "approve",
+          "rationale": "The claim asserts exactly two things the page states: a normative SHOULD addressed to implementors that a human remain able to deny tool invocations, and an express statement that the protocol does not mandate any specific user interaction model. It converts neither into a MUST, and it attributes the recommendation to implementors rather than to the protocol. The claim boundary then removes the three readings the evidence cannot carry.",
+          "disagreementsOrUncertainty": "Whether a reader treats \"a human able to deny\" as equivalent to a default-deny posture remains an editorial risk. The claim mitigates it by stating the recommendation rather than naming a posture.",
+          "notExternalReview": "This is AI-assisted internal editorial review performed by the publisher. It is not external expert review, peer review, consensus, independent reproduction, scientific validation, or commercial certification.",
+          "decisionDigest": "sha256:30904fac55bc0c2c87fc453a71db774ffc5714d62bb0b3905b114b941282bd95"
+        },
+        {
+          "dimension": "domain-fidelity",
+          "recordId": "urn:maha:record:agentic-systems-mcp-tool-deny-by-default",
+          "revisionSha256": "sha256:bc3682ef4b4613b4cff9c468953c218fb20ebad8786ab8c6cc4bbcc8dccb1a66",
+          "reviewerId": "expert_maha-internal-editorial-v2",
+          "reviewerKind": "internal-editorial",
+          "reviewerRole": "Internal editorial reviewer for source-bounded epistemic records",
+          "checklistVersion": "maha-repaired-record-rereview/1.0",
+          "verdict": "approve",
+          "rationale": "The record stays inside agentic systems and MCP, describing a protocol specification's guidance to implementors. It does not migrate into organisational security policy, into zero-trust architecture, or into any claim about a named runtime's behaviour. The scope sentence explicitly disclaims describing an organisation's allowlist, identity, retention, or approval policy.",
+          "disagreementsOrUncertainty": "None. The domain boundary is the clearest part of this revision.",
+          "notExternalReview": "This is AI-assisted internal editorial review performed by the publisher. It is not external expert review, peer review, consensus, independent reproduction, scientific validation, or commercial certification.",
+          "decisionDigest": "sha256:9cd4e9ebf345ffda1163c0fb541fee8cbe6e44b63d9846368f0b586e60e29881"
+        },
+        {
+          "dimension": "title-and-slug-accuracy",
+          "recordId": "urn:maha:record:agentic-systems-mcp-tool-deny-by-default",
+          "revisionSha256": "sha256:bc3682ef4b4613b4cff9c468953c218fb20ebad8786ab8c6cc4bbcc8dccb1a66",
+          "reviewerId": "expert_maha-internal-editorial-v2",
+          "reviewerKind": "internal-editorial",
+          "reviewerRole": "Internal editorial reviewer for source-bounded epistemic records",
+          "checklistVersion": "maha-repaired-record-rereview/1.0",
+          "verdict": "approve",
+          "rationale": "The title \"Human denial control for tool invocations\" names an available control, which is what the specification recommends, rather than a default posture, which it never describes. The superseded title asserted \"deny by default\", a phrase absent from the entire inspected page. The slug matches the title and the canonical path moved to the concepts segment with it.",
+          "disagreementsOrUncertainty": "The alternative \"human-in-the-loop-tool-denial\" would also be accurate and is arguably closer to the source's own phrasing. Choosing between them is editorial preference, not accuracy, and the current title is defensible on the text as it stands.",
+          "notExternalReview": "This is AI-assisted internal editorial review performed by the publisher. It is not external expert review, peer review, consensus, independent reproduction, scientific validation, or commercial certification.",
+          "decisionDigest": "sha256:5359a4a5de7d253cfdbf51b7a728744b1cb0a8f38006e62a82b5b6fe40161c94"
+        },
+        {
+          "dimension": "record-class-suitability",
+          "recordId": "urn:maha:record:agentic-systems-mcp-tool-deny-by-default",
+          "revisionSha256": "sha256:bc3682ef4b4613b4cff9c468953c218fb20ebad8786ab8c6cc4bbcc8dccb1a66",
+          "reviewerId": "expert_maha-internal-editorial-v2",
+          "reviewerKind": "internal-editorial",
+          "reviewerRole": "Internal editorial reviewer for source-bounded epistemic records",
+          "checklistVersion": "maha-repaired-record-rereview/1.0",
+          "verdict": "approve",
+          "rationale": "Concept is correct. The artifact defines a recommended control and reports no comparison between exposure postures, so comparison is unavailable; it reports no measured quantity, so measurement is unavailable; and it prescribes no procedure for the reader to execute, so method would overstate. Concept records the bounded existence and force of the recommendation, which is what the page supports.",
+          "disagreementsOrUncertainty": "None material. Mechanism was considered and rejected because nothing causal is described.",
+          "notExternalReview": "This is AI-assisted internal editorial review performed by the publisher. It is not external expert review, peer review, consensus, independent reproduction, scientific validation, or commercial certification.",
+          "decisionDigest": "sha256:9673807ac6e3f8318a8c04d5bf40142d00c665f68df37aaa1cf1eb158f335fb4"
+        },
+        {
+          "dimension": "uncertainty-adequacy",
+          "recordId": "urn:maha:record:agentic-systems-mcp-tool-deny-by-default",
+          "revisionSha256": "sha256:bc3682ef4b4613b4cff9c468953c218fb20ebad8786ab8c6cc4bbcc8dccb1a66",
+          "reviewerId": "expert_maha-internal-editorial-v2",
+          "reviewerKind": "internal-editorial",
+          "reviewerRole": "Internal editorial reviewer for source-bounded epistemic records",
+          "checklistVersion": "maha-repaired-record-rereview/1.0",
+          "verdict": "approve",
+          "rationale": "Uncertainty is declared qualitative, which is right: the page states a recommendation and asserts no interval, rate, or measurement, so a quantitative interval would be fabricated. The replication assessment records that independent replication and cross-platform transfer have not been compiled, and the audit records independentlyReproduced and externallyReviewed as false.",
+          "disagreementsOrUncertainty": "The uncertainty statement is inherited boilerplate rather than written for this record. It is accurate here, but a reviewer should note it was not authored specifically for a recommendation-type claim.",
+          "notExternalReview": "This is AI-assisted internal editorial review performed by the publisher. It is not external expert review, peer review, consensus, independent reproduction, scientific validation, or commercial certification.",
+          "decisionDigest": "sha256:dc4f4d01140f8adaf9d594fae4fee95390702aab9178d9d605f9342fe90b61e2"
+        },
+        {
+          "dimension": "prohibited-inference-coverage",
+          "recordId": "urn:maha:record:agentic-systems-mcp-tool-deny-by-default",
+          "revisionSha256": "sha256:bc3682ef4b4613b4cff9c468953c218fb20ebad8786ab8c6cc4bbcc8dccb1a66",
+          "reviewerId": "expert_maha-internal-editorial-v2",
+          "reviewerKind": "internal-editorial",
+          "reviewerRole": "Internal editorial reviewer for source-bounded epistemic records",
+          "checklistVersion": "maha-repaired-record-rereview/1.0",
+          "verdict": "approve",
+          "rationale": "Three prohibitions are carried, and the third is the one this record specifically needs: do not read a recommended human ability to deny an invocation as a requirement that tools be denied unless explicitly permitted. That closes precisely the overclaim the superseded record made. The general prohibitions on proven, safe, scalable and commercially available readings are also retained.",
+          "disagreementsOrUncertainty": "None. Coverage is specific to this record's failure mode rather than generic.",
+          "notExternalReview": "This is AI-assisted internal editorial review performed by the publisher. It is not external expert review, peer review, consensus, independent reproduction, scientific validation, or commercial certification.",
+          "decisionDigest": "sha256:b26d4fa1eb1e513016259b7de724eed9318f27f5dccddbc4f4886b69e2f83e3b"
+        },
+        {
+          "dimension": "rights-basis",
+          "recordId": "urn:maha:record:agentic-systems-mcp-tool-deny-by-default",
+          "revisionSha256": "sha256:bc3682ef4b4613b4cff9c468953c218fb20ebad8786ab8c6cc4bbcc8dccb1a66",
+          "reviewerId": "expert_maha-internal-editorial-v2",
+          "reviewerKind": "internal-editorial",
+          "reviewerRole": "Internal editorial reviewer for source-bounded epistemic records",
+          "checklistVersion": "maha-repaired-record-rereview/1.0",
+          "verdict": "approve",
+          "rationale": "citation-with-paraphrase against a publicly served specification page. The record reproduces no block of specification prose, no schema, and no diagram; the establishes statement and the claim are original paraphrase. The normative keyword SHOULD is reproduced as a single word because its capitalisation carries the meaning, which is fair citation rather than reproduction.",
+          "disagreementsOrUncertainty": "None.",
+          "notExternalReview": "This is AI-assisted internal editorial review performed by the publisher. It is not external expert review, peer review, consensus, independent reproduction, scientific validation, or commercial certification.",
+          "decisionDigest": "sha256:eaf686f94d56696a9080bf3ae274af43d0050878220c3536278347512973d445"
+        },
+        {
+          "dimension": "public-wording-safety",
+          "recordId": "urn:maha:record:agentic-systems-mcp-tool-deny-by-default",
+          "revisionSha256": "sha256:bc3682ef4b4613b4cff9c468953c218fb20ebad8786ab8c6cc4bbcc8dccb1a66",
+          "reviewerId": "expert_maha-internal-editorial-v2",
+          "reviewerKind": "internal-editorial",
+          "reviewerRole": "Internal editorial reviewer for source-bounded epistemic records",
+          "checklistVersion": "maha-repaired-record-rereview/1.0",
+          "verdict": "approve",
+          "rationale": "Read as a public page, the wording cannot be mistaken for a security mandate. It says \"recommends\", names SHOULD explicitly, attributes the recommendation to implementors, and states in the same sentence that the protocol does not mandate a user interaction model. The honest negations survive in the boundaries and prohibited inferences rather than being trimmed for readability.",
+          "disagreementsOrUncertainty": "The claim sentence is long and carries three qualifications at once. It is accurate but dense; a future editorial pass could split it without weakening it.",
+          "notExternalReview": "This is AI-assisted internal editorial review performed by the publisher. It is not external expert review, peer review, consensus, independent reproduction, scientific validation, or commercial certification.",
+          "decisionDigest": "sha256:4fb21945fcf2e233df5a5d0dcde50bc7b6090c506a358dd8b854619a08176b85"
+        }
+      ],
+      "verdictTotals": {
+        "approve": 10,
+        "revise": 0,
+        "withhold": 0
+      },
+      "state": "internally-approved-ready-for-release-preflight",
+      "blockingDimensions": [],
+      "ledgerDigest": "sha256:987eebfea746032df9c565074befde894532c2188873f0a5f2b643fcec7aecc7"
+    },
+    {
+      "recordId": "urn:maha:record:fusion-plasma-systems-breeding-blanket-test-modules",
+      "revisionSha256": "sha256:3eb362d91f332ac755d9793f8e43d781e445bbe64827d24521af037288e54723",
+      "auditDigest": "sha256:76176aa7e8a914c18fbea7f823f4684d1400160a27fd6e68433f8bf19b86de22",
+      "checklistVersion": "maha-repaired-record-rereview/1.0",
+      "decisions": [
+        {
+          "dimension": "source-fidelity",
+          "recordId": "urn:maha:record:fusion-plasma-systems-breeding-blanket-test-modules",
+          "revisionSha256": "sha256:3eb362d91f332ac755d9793f8e43d781e445bbe64827d24521af037288e54723",
+          "reviewerId": "expert_maha-internal-editorial-v2",
+          "reviewerKind": "internal-editorial",
+          "reviewerRole": "Internal editorial reviewer for source-bounded epistemic records",
+          "checklistVersion": "maha-repaired-record-rereview/1.0",
+          "verdict": "revise",
+          "rationale": "The source binding is internally inconsistent. The url now resolves to the ITER Tritium Breeding page, but the source title still reads \"Supporting systems\" and the stable identifier still resolves to https://www.iter.org/machine/supporting-systems, which is the superseded page that never named the subject. A citation whose title and identifier name one artifact while its url names another cannot be followed reliably: a reader resolving the identifier lands on the page the repair rejected. The source title should read the inspected page's own title and the identifier should resolve to the cited url before this record is reviewed again.",
+          "disagreementsOrUncertainty": "This is a defect in the proposed revision, not in the underlying evidence. The inspected passages and the claim are sound; the citation metadata simply was not carried across when the url changed. Fixing it is mechanical, but it must be a new revision with a new digest rather than an in-place edit.",
+          "notExternalReview": "This is AI-assisted internal editorial review performed by the publisher. It is not external expert review, peer review, consensus, independent reproduction, scientific validation, or commercial certification.",
+          "decisionDigest": "sha256:542fbec57a8931547ca68e78f3711507cdf96963634dec97224589062f57ee9f"
+        },
+        {
+          "dimension": "locator-fidelity",
+          "recordId": "urn:maha:record:fusion-plasma-systems-breeding-blanket-test-modules",
+          "revisionSha256": "sha256:3eb362d91f332ac755d9793f8e43d781e445bbe64827d24521af037288e54723",
+          "reviewerId": "expert_maha-internal-editorial-v2",
+          "reviewerKind": "internal-editorial",
+          "reviewerRole": "Internal editorial reviewer for source-bounded epistemic records",
+          "checklistVersion": "maha-repaired-record-rereview/1.0",
+          "verdict": "approve",
+          "rationale": "The locator names the \"ITER Test Blanket Module (TBM) Program\" section, and that heading exists verbatim on the inspected page. The section names the test blanket modules and the four member concepts, which is exactly the subject the record claims. This is a genuine repair of the original defect, where the locator named neither blankets nor test modules.",
+          "disagreementsOrUncertainty": "The locator is only reachable once the url is followed, and the url is currently contradicted by the title and identifier. The locator itself is correct; its addressability depends on the source-fidelity revision.",
+          "notExternalReview": "This is AI-assisted internal editorial review performed by the publisher. It is not external expert review, peer review, consensus, independent reproduction, scientific validation, or commercial certification.",
+          "decisionDigest": "sha256:04b6d64562fe5f4688750cbb1347fb7a7c2177953e1983114529a392e4e1c737"
+        },
+        {
+          "dimension": "claim-boundedness",
+          "recordId": "urn:maha:record:fusion-plasma-systems-breeding-blanket-test-modules",
+          "revisionSha256": "sha256:3eb362d91f332ac755d9793f8e43d781e445bbe64827d24521af037288e54723",
+          "reviewerId": "expert_maha-internal-editorial-v2",
+          "reviewerKind": "internal-editorial",
+          "reviewerRole": "Internal editorial reviewer for source-bounded epistemic records",
+          "checklistVersion": "maha-repaired-record-rereview/1.0",
+          "verdict": "approve",
+          "rationale": "The claim states that ITER documents a programme under which modules will be used to test breeding concepts, and carries the page's own statement that further research is necessary to demonstrate feasibility. Both halves track sentences on the page. The future tense is preserved throughout, so nothing reads as achieved.",
+          "disagreementsOrUncertainty": "None material.",
+          "notExternalReview": "This is AI-assisted internal editorial review performed by the publisher. It is not external expert review, peer review, consensus, independent reproduction, scientific validation, or commercial certification.",
+          "decisionDigest": "sha256:7c22a0ab313a3241ec55e1f49b81f272f90c83663c0c002382caabccd0c04222"
+        },
+        {
+          "dimension": "domain-fidelity",
+          "recordId": "urn:maha:record:fusion-plasma-systems-breeding-blanket-test-modules",
+          "revisionSha256": "sha256:3eb362d91f332ac755d9793f8e43d781e445bbe64827d24521af037288e54723",
+          "reviewerId": "expert_maha-internal-editorial-v2",
+          "reviewerKind": "internal-editorial",
+          "reviewerRole": "Internal editorial reviewer for source-bounded epistemic records",
+          "checklistVersion": "maha-repaired-record-rereview/1.0",
+          "verdict": "approve",
+          "rationale": "The record stays in fusion and plasma systems and describes an experimental programme on one machine. It does not generalise to DEMO, to power reactors, or across the four TBM concepts, which differ in coolant and breeder and are explicitly not pooled by the scope sentence.",
+          "disagreementsOrUncertainty": "None.",
+          "notExternalReview": "This is AI-assisted internal editorial review performed by the publisher. It is not external expert review, peer review, consensus, independent reproduction, scientific validation, or commercial certification.",
+          "decisionDigest": "sha256:d9a9de17221b34632bfe0ec1f1d7113d0cbe4f75efd307c1e2dafaf436bac443"
+        },
+        {
+          "dimension": "title-and-slug-accuracy",
+          "recordId": "urn:maha:record:fusion-plasma-systems-breeding-blanket-test-modules",
+          "revisionSha256": "sha256:3eb362d91f332ac755d9793f8e43d781e445bbe64827d24521af037288e54723",
+          "reviewerId": "expert_maha-internal-editorial-v2",
+          "reviewerKind": "internal-editorial",
+          "reviewerRole": "Internal editorial reviewer for source-bounded epistemic records",
+          "checklistVersion": "maha-repaired-record-rereview/1.0",
+          "verdict": "approve",
+          "rationale": "The title \"Breeding blanket test modules\" names precisely what the inspected section names. It asserts no performance, no completion, and no readiness, so unlike the MCP record it required no correction. The slug matches the title.",
+          "disagreementsOrUncertainty": "The title names the modules rather than the programme, while the claim is about the programme. The gap is small and the scope sentence closes it, but a future revision might prefer \"ITER test blanket module programme\".",
+          "notExternalReview": "This is AI-assisted internal editorial review performed by the publisher. It is not external expert review, peer review, consensus, independent reproduction, scientific validation, or commercial certification.",
+          "decisionDigest": "sha256:163e2df0a2f7b0d19908ed4264cb7f1232cf4b19e7b651fddb896fa88673831e"
+        },
+        {
+          "dimension": "record-class-suitability",
+          "recordId": "urn:maha:record:fusion-plasma-systems-breeding-blanket-test-modules",
+          "revisionSha256": "sha256:3eb362d91f332ac755d9793f8e43d781e445bbe64827d24521af037288e54723",
+          "reviewerId": "expert_maha-internal-editorial-v2",
+          "reviewerKind": "internal-editorial",
+          "reviewerRole": "Internal editorial reviewer for source-bounded epistemic records",
+          "checklistVersion": "maha-repaired-record-rereview/1.0",
+          "verdict": "approve",
+          "rationale": "Concept is the most defensible class. Measurement is unavailable because the page reports no measured quantity. Method would imply a procedure the reader is instructed to follow, whereas the page describes a programme ITER will run. Concept records the bounded existence and scope of that programme, which is what the section supports.",
+          "disagreementsOrUncertainty": "Method was seriously considered, because a test programme does describe an experimental approach. Concept was chosen because the record captures that the programme exists and what it is for, not how to perform it. A reviewer could reasonably prefer method.",
+          "notExternalReview": "This is AI-assisted internal editorial review performed by the publisher. It is not external expert review, peer review, consensus, independent reproduction, scientific validation, or commercial certification.",
+          "decisionDigest": "sha256:3303a0b7c9c08fc9b91de1376ac66e4735976630a6e5b2d8c3b4c7008db9144e"
+        },
+        {
+          "dimension": "uncertainty-adequacy",
+          "recordId": "urn:maha:record:fusion-plasma-systems-breeding-blanket-test-modules",
+          "revisionSha256": "sha256:3eb362d91f332ac755d9793f8e43d781e445bbe64827d24521af037288e54723",
+          "reviewerId": "expert_maha-internal-editorial-v2",
+          "reviewerKind": "internal-editorial",
+          "reviewerRole": "Internal editorial reviewer for source-bounded epistemic records",
+          "checklistVersion": "maha-repaired-record-rereview/1.0",
+          "verdict": "approve",
+          "rationale": "Qualitative uncertainty is correct for a record whose source reports no measurement. More importantly, the specific uncertainty that matters here is recorded on the alignment audit rather than left implicit: the ITER page carries no publication date, no version number and no last-updated stamp, and no archival snapshot was pinned, so versionRelationshipVerified and archivalSnapshotPinned are both false.",
+          "disagreementsOrUncertainty": "The living-page limitation is a standing risk that no revision can remove without pinning a snapshot. It is disclosed rather than resolved.",
+          "notExternalReview": "This is AI-assisted internal editorial review performed by the publisher. It is not external expert review, peer review, consensus, independent reproduction, scientific validation, or commercial certification.",
+          "decisionDigest": "sha256:77137f6ebb43d07ca17b8eb944f758a7fad666d561baa7398ea50e1b95af0823"
+        },
+        {
+          "dimension": "prohibited-inference-coverage",
+          "recordId": "urn:maha:record:fusion-plasma-systems-breeding-blanket-test-modules",
+          "revisionSha256": "sha256:3eb362d91f332ac755d9793f8e43d781e445bbe64827d24521af037288e54723",
+          "reviewerId": "expert_maha-internal-editorial-v2",
+          "reviewerKind": "internal-editorial",
+          "reviewerRole": "Internal editorial reviewer for source-bounded epistemic records",
+          "checklistVersion": "maha-repaired-record-rereview/1.0",
+          "verdict": "approve",
+          "rationale": "The third prohibition names this record's exact failure mode: do not read a planned test programme as demonstrated tritium breeding, measured performance, completed materials qualification, or commercial blanket readiness. Transfer between TBM concepts is separately forbidden. The claim boundary independently enumerates breeding ratio, extraction rate, neutron and heat-load performance, qualification outcome, and commercial readiness.",
+          "disagreementsOrUncertainty": "None. This is the strongest dimension of the revision.",
+          "notExternalReview": "This is AI-assisted internal editorial review performed by the publisher. It is not external expert review, peer review, consensus, independent reproduction, scientific validation, or commercial certification.",
+          "decisionDigest": "sha256:c9c793d625728997d067f278689b138aec57896784601bb9ba9cf8d0c3cc8805"
+        },
+        {
+          "dimension": "rights-basis",
+          "recordId": "urn:maha:record:fusion-plasma-systems-breeding-blanket-test-modules",
+          "revisionSha256": "sha256:3eb362d91f332ac755d9793f8e43d781e445bbe64827d24521af037288e54723",
+          "reviewerId": "expert_maha-internal-editorial-v2",
+          "reviewerKind": "internal-editorial",
+          "reviewerRole": "Internal editorial reviewer for source-bounded epistemic records",
+          "checklistVersion": "maha-repaired-record-rereview/1.0",
+          "verdict": "approve",
+          "rationale": "citation-with-paraphrase against an authoritative publisher page. No ITER figure, diagram, or block of page text is reproduced; the establishes statement and claim are original paraphrase of two identified sentences.",
+          "disagreementsOrUncertainty": "None.",
+          "notExternalReview": "This is AI-assisted internal editorial review performed by the publisher. It is not external expert review, peer review, consensus, independent reproduction, scientific validation, or commercial certification.",
+          "decisionDigest": "sha256:cbd1de3aa2f35f6fd8ca5da357768b925d34c06d52ea36bef78b3ff3c0e8953d"
+        },
+        {
+          "dimension": "public-wording-safety",
+          "recordId": "urn:maha:record:fusion-plasma-systems-breeding-blanket-test-modules",
+          "revisionSha256": "sha256:3eb362d91f332ac755d9793f8e43d781e445bbe64827d24521af037288e54723",
+          "reviewerId": "expert_maha-internal-editorial-v2",
+          "reviewerKind": "internal-editorial",
+          "reviewerRole": "Internal editorial reviewer for source-bounded epistemic records",
+          "checklistVersion": "maha-repaired-record-rereview/1.0",
+          "verdict": "approve",
+          "rationale": "Read as a public page, the wording cannot be mistaken for a fusion milestone announcement. \"Documents a programme\", \"will be used to test\", and the carried statement that further research is necessary all keep the record in the planning tense. No number appears anywhere in the claim, so there is nothing for a reader to quote as a result.",
+          "disagreementsOrUncertainty": "A casual reader may still take \"ITER will experiment with tritium production\" as more imminent than the 2039 operation date implies. The record does not state a date, which is accurate to the cited section but leaves timing open.",
+          "notExternalReview": "This is AI-assisted internal editorial review performed by the publisher. It is not external expert review, peer review, consensus, independent reproduction, scientific validation, or commercial certification.",
+          "decisionDigest": "sha256:b7e88e115dc0bf36b8268ec315f6510b09b71c5954efb9be2b7eb45d33335bbe"
+        }
+      ],
+      "verdictTotals": {
+        "approve": 9,
+        "revise": 1,
+        "withhold": 0
+      },
+      "state": "revise-again",
+      "blockingDimensions": [
+        "source-fidelity"
+      ],
+      "ledgerDigest": "sha256:11a70d5512a7e7b13c9b842571206cb55fc77e42884607a2ddeea312ae3186d7"
+    }
+  ],
+  "releasePreflight": [
+    {
+      "recordId": "urn:maha:record:agentic-systems-mcp-tool-deny-by-default",
+      "revisionSha256": "sha256:bc3682ef4b4613b4cff9c468953c218fb20ebad8786ab8c6cc4bbcc8dccb1a66",
+      "internalReviewState": "internally-approved-ready-for-release-preflight",
+      "internallyApproved": true,
+      "canonicalReleaseCreated": false,
+      "releaseAuthorityUsed": false,
+      "inFrozenRemainderCohort": false,
+      "proposedNextStep": "Eligible to be proposed for a later, separate two-record repaired-revision canary. That canary is not created or dispatched here, and this record stays outside the frozen 20-record remainder cohort."
+    },
+    {
+      "recordId": "urn:maha:record:fusion-plasma-systems-breeding-blanket-test-modules",
+      "revisionSha256": "sha256:3eb362d91f332ac755d9793f8e43d781e445bbe64827d24521af037288e54723",
+      "internalReviewState": "revise-again",
+      "internallyApproved": false,
+      "canonicalReleaseCreated": false,
+      "releaseAuthorityUsed": false,
+      "inFrozenRemainderCohort": false,
+      "proposedNextStep": "Return to evidence repair for source-fidelity. A corrected revision must carry a new digest and be re-audited before any further review."
+    }
+  ],
+  "digest": "sha256:deb9d9b537e5839b551dd6cddbe45c0009117b298f1d7694fd95fa370da25096"
+}
