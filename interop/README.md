@@ -15,14 +15,14 @@ production. Both record metadata only.
 
 ## What is being validated, precisely
 
-Maha's `lib/maha-mcp` and `lib/maha-a2a` ship **tool/skill definitions and a
-dispatcher — not a wire-protocol server**. There is no stdio server, no
-JSON-RPC loop, no HTTP listener in either module.
+Maha's `lib/maha-mcp` and `lib/maha-a2a` contain the tool/skill definitions and
+dispatchers. The shipped `@mahastrategies/maha-mcp-server` package adds the MCP
+stdio transport; `interop/mcp` drives that binary directly. The A2A server is a
+loopback HTTP server supplied by the local harness.
 
-So these harnesses supply the transport themselves. What that establishes is
-that Maha's schemas and dispatch are **consumable by a real client when bound to
-a standard transport**. It does *not* establish that Maha ships a server a
-client can connect to, because it does not.
+The MCP result establishes that the shipped stdio server is consumable by the
+official MCP client. The A2A result establishes only local wire compatibility:
+the caller is purpose-built and is not third-party validation.
 
 ## Running them
 
@@ -31,13 +31,11 @@ npm run interop:mcp
 npm run interop:a2a
 ```
 
-`interop:mcp` needs `@modelcontextprotocol/sdk`, which is deliberately **not** a
-dependency of this repo — the product does not depend on it and should not start
-to. Running it without the SDK prints the install line rather than a stack
-trace. Install it into the harness directory only:
+`interop:mcp` drives the built server binary. Build it first:
 
 ```bash
-npm --prefix interop/mcp install
+npm --prefix packages/maha-mcp-server run build
+npm run interop:mcp
 ```
 
 ## Why A2A is local-only
@@ -53,8 +51,8 @@ That constraint is what surfaced the finding in `docs/integrations/interoperabil
 
 ## Why `interop/` is excluded from the repo typecheck
 
-`tsconfig.json` and the ESLint config both skip this directory. The harness
-imports an SDK the repo does not carry, so including it would make the product's
-CI depend on a package the product does not use — CI proved the point by failing
-exactly that way before the exclusion was added. The harness is typechecked only
-where its own dependency is installed.
+`tsconfig.json` and the ESLint config both skip this directory. The MCP probe is
+plain JavaScript and imports the MCP SDK as a client-only compatibility check;
+the production server package carries its own SDK dependency. Keeping the probe
+outside the product compilation boundary avoids making application typechecking
+depend on evaluation-only code.
