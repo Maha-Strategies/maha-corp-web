@@ -22,6 +22,14 @@ import {
 export const EPISTEMIC_RELEASE_VERSION = 'maha-epistemic-release/1.0' as const
 export const EPISTEMIC_WITHDRAWAL_VERSION = 'maha-epistemic-withdrawal/1.0' as const
 
+export const REVIEW_ASSURANCE_TIERS = [
+  'internally-reviewed-canonical',
+  'expert-reviewed-canonical',
+  'mixed-review-canonical',
+  'legacy-review-unclassified',
+] as const
+export type ReviewAssuranceTier = (typeof REVIEW_ASSURANCE_TIERS)[number]
+
 export interface ReleaseAuthoritySnapshot {
   authorityId: string
   displayName: string
@@ -73,6 +81,8 @@ export interface EpistemicCanonicalRelease {
   canonicalVersion: string
   supersedesReleaseId: string | null
   approvals: ScopedReleaseApproval[]
+  /** Review provenance, not a claim that the record is true or independently reproduced. */
+  assuranceTier?: ReviewAssuranceTier
   authority: ReleaseAuthoritySnapshot
   authoritySha256: string
   publicChangeSummary: string
@@ -82,6 +92,14 @@ export interface EpistemicCanonicalRelease {
   gateDecision: PublicationDecision
   releasedAt: string
   releaseSha256: string
+}
+
+export function reviewAssuranceTier(approvals: readonly ScopedReleaseApproval[]): ReviewAssuranceTier {
+  const kinds = new Set(approvals.map((approval) => approval.reviewerKind))
+  if (kinds.has(undefined)) return 'legacy-review-unclassified'
+  if (kinds.size === 1 && kinds.has('external-expert')) return 'expert-reviewed-canonical'
+  if (kinds.size === 1 && kinds.has('internal-editorial')) return 'internally-reviewed-canonical'
+  return 'mixed-review-canonical'
 }
 
 export interface EpistemicReleaseWithdrawal {
@@ -284,6 +302,7 @@ export function buildEpistemicCanonicalRelease(
     canonicalVersion: input.canonicalVersion,
     supersedesReleaseId: previousActiveRelease?.releaseId ?? null,
     approvals,
+    assuranceTier: reviewAssuranceTier(approvals),
     authority: input.authority,
     authoritySha256,
     publicChangeSummary: input.publicChangeSummary,
@@ -354,6 +373,7 @@ export function sanitizedEpistemicRelease(
     canonicalVersion: release.canonicalVersion,
     supersedesReleaseId: release.supersedesReleaseId,
     approvals: release.approvals.map(({ scope, reviewId, reviewSha256, reviewedAt, reviewerKind, reviewMethod }) => ({ scope, reviewId, reviewSha256, reviewedAt, reviewerKind, reviewMethod })),
+    assuranceTier: release.assuranceTier ?? reviewAssuranceTier(release.approvals),
     releaseAuthority: release.authority.publicAttribution
       ? { authorityId: release.authority.authorityId, displayName: release.authority.displayName, role: release.authority.role }
       : { authoritySha256: release.authoritySha256, attribution: 'withheld-by-consent' as const },
@@ -404,4 +424,4 @@ export function authorizeEpistemicReleaseAuthority(request: Request): { authoriz
   return { authorized: true, actorFingerprint: releaseTokenHash(configured) }
 }
 
-export const EPISTEMIC_RELEASE_BOUNDARY = 'A canonical release requires unqualified, method-declared decisions for every required scope on one exact target hash plus a separately authenticated human release authority. Internal or automated review is never presented as external expert endorsement; release authority does not establish empirical truth.'
+export const EPISTEMIC_RELEASE_BOUNDARY = 'A canonical release requires unqualified, method-declared decisions for every required scope on one exact target hash plus a separately authenticated human release authority. Internal editorial review is a valid, explicitly labelled publication tier; external expert review remains an optional higher assurance tier. Neither review tier nor release authority establishes empirical truth or independent reproduction.'
