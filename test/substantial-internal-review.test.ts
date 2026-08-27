@@ -3,6 +3,7 @@ import { readFileSync } from 'node:fs'
 import test from 'node:test'
 
 import { buildEpistemicExpertReview } from '../lib/epistemic-review.ts'
+import { SUBSTANTIAL_BATCH_2_INTERNAL_REVIEW_ADAPTER } from '../lib/epistemic-adapters.ts'
 import { releaseReadiness, reviewAssuranceTier } from '../lib/epistemic-release.ts'
 import { epistemicReviewTargetHash } from '../lib/epistemic-publication.ts'
 import { EPISTEMIC_RECORDS } from '../lib/epistemic-pilots.ts'
@@ -33,6 +34,17 @@ test('all 27 packets remain pending and bind exact current revisions', () => {
     assert.equal(Object.values(packet.checklist).flat().every((criterion) => criterion.status === 'pending-record-specific-review'), true)
     assert.ok(packet.sources.every((source) => source.exactLocator && source.rightsBasis))
     assert.ok(packet.claims.every((claim) => claim.sourceIds.every((sourceId) => packet.sources.some((source) => source.sourceId === sourceId))))
+  }
+})
+
+test('the ingestion adapter freezes all 27 current targets without creating decisions', () => {
+  const candidates = SUBSTANTIAL_BATCH_2_INTERNAL_REVIEW_ADAPTER.adapt()
+  assert.equal(candidates.length, 27)
+  assert.deepEqual(candidates.map((candidate) => candidate.record.id).sort(), BATCH_2_INTERNAL_REVIEW_PACKETS.map((packet) => packet.recordId).sort())
+  for (const candidate of candidates) {
+    const packet = BATCH_2_INTERNAL_REVIEW_PACKETS.find((entry) => entry.recordId === candidate.record.id)!
+    assert.equal(candidate.reviewTargetSha256, packet.targetSha256)
+    assert.equal(candidate.record.publication.reviewEvents.length, 0)
   }
 })
 
@@ -103,4 +115,3 @@ test('review packets and decisions do not enter a public route', () => {
   ].map((file) => readFileSync(file, 'utf8')).join('\n')
   for (const marker of ['internal-review-batch-2', 'substantial-internal-review-canary', 'BATCH_2_INTERNAL_REVIEW_PACKETS']) assert.doesNotMatch(routeFiles, new RegExp(marker))
 })
-

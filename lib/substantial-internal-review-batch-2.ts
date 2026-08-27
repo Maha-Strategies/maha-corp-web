@@ -5,33 +5,11 @@ import { EXPERT_REVIEW_CRITERIA } from './epistemic-review.ts'
 import { epistemicReviewTargetHash } from './epistemic-publication.ts'
 import type { ExpertReviewScope } from './epistemic-schema.ts'
 import { SUBSTANTIAL_BATCH_2_PAGES } from './substantial-page-publication-batch-2.ts'
+export { BATCH_2_DRIFTED_RECORD_IDS, BATCH_2_INTERNAL_REVIEW_CANARY_IDS, BATCH_2_INTERNAL_REVIEW_RECORD_IDS } from './substantial-internal-review-cohort.ts'
+import { BATCH_2_INTERNAL_REVIEW_CANARY_IDS, BATCH_2_INTERNAL_REVIEW_RECORD_IDS } from './substantial-internal-review-cohort.ts'
 
 export const INTERNAL_REVIEW_BATCH_2_VERSION = 'maha-internal-review-batch-2/1.0' as const
 export const INTERNAL_REVIEW_BATCH_2_DATE = '2026-08-27' as const
-
-const ALREADY_SUBSTANTIALLY_RENDERED = new Set([
-  'urn:maha:record:advanced-materials-graphene-monolayers',
-  'urn:maha:record:agentic-systems-mcp-mcp-tool-result-contracts',
-  'urn:maha:record:transmon-qubit',
-])
-
-export const BATCH_2_DRIFTED_RECORD_IDS = [
-  'urn:maha:record:advanced-materials-hexagonal-boron-nitride-dielectrics',
-  'urn:maha:record:neurotechnology-bci-spike-sorting-boundaries',
-] as const
-
-export const BATCH_2_INTERNAL_REVIEW_RECORD_IDS = SUBSTANTIAL_BATCH_2_PAGES
-  .map((page) => page.contract.recordId)
-  .filter((recordId) => !ALREADY_SUBSTANTIALLY_RENDERED.has(recordId))
-  .sort()
-
-export const BATCH_2_INTERNAL_REVIEW_CANARY_IDS = [
-  'urn:maha:record:advanced-materials-hexagonal-boron-nitride-dielectrics',
-  'urn:maha:record:agentic-systems-mcp-context-window-position-effects',
-  'urn:maha:record:biomolecular-engineering-cell-free-transcription-translation',
-  'urn:maha:record:fusion-plasma-systems-disruption-mitigation',
-  'urn:maha:record:mechanistic-interpretability-causal-scrubbing',
-] as const
 
 export interface PendingReviewCriterion {
   criterionId: string

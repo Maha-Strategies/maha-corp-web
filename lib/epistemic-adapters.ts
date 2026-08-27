@@ -32,6 +32,9 @@ import {
   religionConceptPath,
 } from './religion-knowledge.ts'
 import { FRONTIER_CANARY_RECORDS, FRONTIER_CANARY_VERSION } from './frontier-canonicalization.ts'
+import { FRONTIER_DOMAIN_GRAPH_RECORDS } from './frontier-domain-graphs.ts'
+import { QUANTUM_SYSTEMS_GRAPH_RECORDS } from './quantum-systems-graph.ts'
+import { BATCH_2_INTERNAL_REVIEW_RECORD_IDS } from './substantial-internal-review-cohort.ts'
 import {
   EPISTEMIC_POLICY_VERSION,
   EPISTEMIC_SCHEMA_VERSION,
@@ -59,6 +62,7 @@ export const LEGACY_ADAPTER_IDS = [
   'religion',
   'neuromorphic-biocomputing',
   'frontier-canary',
+  'substantial-batch-2-internal-review',
 ] as const
 
 export type LegacyAdapterId = (typeof LEGACY_ADAPTER_IDS)[number]
@@ -457,12 +461,37 @@ export const FRONTIER_CANARY_EPISTEMIC_ADAPTER: LegacyAdapterDefinition = defini
   })),
 })
 
+const substantialBatch2ReviewIdSet = new Set<string>(BATCH_2_INTERNAL_REVIEW_RECORD_IDS)
+const substantialBatch2ReviewRecords = [...FRONTIER_DOMAIN_GRAPH_RECORDS, ...QUANTUM_SYSTEMS_GRAPH_RECORDS]
+  .filter((record) => substantialBatch2ReviewIdSet.has(record.id))
+
+if (substantialBatch2ReviewRecords.length !== BATCH_2_INTERNAL_REVIEW_RECORD_IDS.length) {
+  throw new Error(`Batch 2 internal-review adapter resolved ${substantialBatch2ReviewRecords.length}/${BATCH_2_INTERNAL_REVIEW_RECORD_IDS.length} records.`)
+}
+
+export const SUBSTANTIAL_BATCH_2_INTERNAL_REVIEW_ADAPTER: LegacyAdapterDefinition = definition({
+  id: 'substantial-batch-2-internal-review',
+  name: 'Substantial Batch 2 internal-review targets',
+  description: 'The exact 27 current revisions requiring scoped internal editorial decisions; ingestion freezes targets and never approves or publishes them.',
+  sourceDatasetVersion: 'maha-internal-review-batch-2/1.0',
+  sourceRecords: substantialBatch2ReviewRecords,
+  sourceSources: substantialBatch2ReviewRecords.flatMap((record) => record.sources),
+  build: () => substantialBatch2ReviewRecords.map((record) => ({
+    sourceRecordId: record.id,
+    sourceRecord: record,
+    sourcePublicPath: epistemicRecordPath(record),
+    record: structuredClone(record),
+  })),
+})
+
 export const ADAPTED_EPISTEMIC_CANDIDATES = LEGACY_EPISTEMIC_ADAPTERS.flatMap((adapter) => adapter.adapt())
 assertGraphIntegrity(ADAPTED_EPISTEMIC_CANDIDATES.map((item) => item.record))
 
 export function getLegacyEpistemicAdapter(id: string) {
   return id === FRONTIER_CANARY_EPISTEMIC_ADAPTER.id
     ? FRONTIER_CANARY_EPISTEMIC_ADAPTER
+    : id === SUBSTANTIAL_BATCH_2_INTERNAL_REVIEW_ADAPTER.id
+      ? SUBSTANTIAL_BATCH_2_INTERNAL_REVIEW_ADAPTER
     : LEGACY_EPISTEMIC_ADAPTERS.find((adapter) => adapter.id === id)
 }
 
