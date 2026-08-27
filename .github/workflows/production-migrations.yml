@@ -146,7 +146,7 @@ jobs:
         run: node --experimental-strip-types scripts/check-migrations.ts | tee "$EVIDENCE/integrity.txt"
 
       - name: Install pinned Supabase CLI
-        run: npm install --global supabase@2.109.1
+        run: npm install --global supabase@2.116.0
 
       - name: Record authorized request
         env:
@@ -208,25 +208,30 @@ jobs:
       # is waiting to account for it -- is still a hard stop, because that is
       # the case the gate was built for: someone changed Production by hand.
       - name: Record schema drift before applying
+        id: pre_apply_drift
         if: ${{ inputs.check_schema_drift }}
         run: |
           set -euo pipefail
           supabase db diff --linked --schema public > "$EVIDENCE/drift-before.sql"
           if [ ! -s "$EVIDENCE/drift-before.sql" ]; then
+            echo 'classification=no-delta' >> "$GITHUB_OUTPUT"
             echo 'No drift: the live schema matches the migration tree.'
             exit 0
           fi
-          echo '::warning::The live schema differs from the migration tree. See drift-before.sql.'
-          cat "$EVIDENCE/drift-before.sql"
           # `db push --dry-run` prints the versions it would apply, on stderr,
           # which is why the capture above redirects it. Matching the migration
           # filename shape rather than any run of digits keeps CLI banners and
           # version strings from reading as a pending migration.
           if ! grep -qE '[0-9]{14}_[a-z0-9_]+\.sql' "$EVIDENCE/pending.txt"; then
+            echo 'classification=unexplained-drift' >> "$GITHUB_OUTPUT"
+            echo '::warning::The live schema differs from the migration tree and no pending migration explains the delta. See drift-before.sql.'
+            cat "$EVIDENCE/drift-before.sql"
             echo '::error::Live schema differs from the migration tree and no migration is pending to reconcile it. Production was changed outside this workflow.'
             exit 1
           fi
-          echo 'Pending migrations exist to reconcile this drift; convergence is verified after applying.'
+          echo 'classification=expected-pending-delta' >> "$GITHUB_OUTPUT"
+          echo '::notice::Expected schema delta from pending migrations. See drift-before.sql; convergence is verified after applying.'
+          cat "$EVIDENCE/drift-before.sql"
 
       - name: Apply pending migrations
         id: apply
@@ -243,16 +248,76 @@ jobs:
       # agree. Anything left here is a real difference the applied migrations
       # did not account for.
       - name: Verify the schema converged
+        id: post_apply_drift
         if: ${{ inputs.mode == 'apply' && inputs.check_schema_drift }}
         run: |
           set -euo pipefail
           supabase db diff --linked --schema public > "$EVIDENCE/drift-after.sql"
           if [ -s "$EVIDENCE/drift-after.sql" ]; then
+            echo 'classification=residual-drift' >> "$GITHUB_OUTPUT"
             echo '::error::The live schema still differs from the migration tree after applying. Compare drift-before.sql and drift-after.sql.'
             cat "$EVIDENCE/drift-after.sql"
             exit 1
           fi
+          echo 'classification=converged' >> "$GITHUB_OUTPUT"
           echo 'Converged: the live schema now matches the migration tree.'
+
+      - name: Summarize migration drift
+        if: always()
+        env:
+          MODE: ${{ inputs.mode }}
+          CHECK_SCHEMA_DRIFT: ${{ inputs.check_schema_drift }}
+        run: |
+          set -euo pipefail
+          pending_count=0
+          if [ -f "$EVIDENCE/pending.txt" ]; then
+            pending_count="$(grep -cE '[0-9]{14}_[a-z0-9_]+\.sql' "$EVIDENCE/pending.txt" || true)"
+          fi
+
+          if [ "$CHECK_SCHEMA_DRIFT" != 'true' ]; then
+            pre_apply='not-checked'
+          elif [ ! -e "$EVIDENCE/drift-before.sql" ]; then
+            pre_apply='not-reached'
+          elif [ ! -s "$EVIDENCE/drift-before.sql" ]; then
+            pre_apply='no-delta'
+          elif [ "$pending_count" -gt 0 ]; then
+            pre_apply='expected-pending-delta'
+          else
+            pre_apply='unexplained-drift'
+          fi
+
+          if [ "$MODE" != 'apply' ] || [ "$CHECK_SCHEMA_DRIFT" != 'true' ]; then
+            post_apply='not-run'
+          elif [ ! -e "$EVIDENCE/drift-after.sql" ]; then
+            post_apply='not-reached'
+          elif [ -s "$EVIDENCE/drift-after.sql" ]; then
+            post_apply='residual-drift'
+          else
+            post_apply='converged'
+          fi
+
+          if [ "$post_apply" = 'converged' ]; then
+            convergence='converged'
+          elif [ "$post_apply" = 'residual-drift' ]; then
+            convergence='failed-residual-drift'
+          elif [ "$pre_apply" = 'unexplained-drift' ]; then
+            convergence='blocked-unexplained-drift'
+          else
+            convergence='not-applicable'
+          fi
+
+          {
+            echo '## Production migration drift summary'
+            echo
+            echo '| Signal | Classification |'
+            echo '| --- | --- |'
+            echo "| Pre-apply schema comparison | $pre_apply |"
+            echo "| Pending migration files | $pending_count |"
+            echo "| Residual post-apply comparison | $post_apply |"
+            echo "| Convergence status | $convergence |"
+            echo
+            echo 'A pre-apply delta explained by pending migrations is expected and is not residual drift. Only unexplained pre-apply drift emits a warning; an apply run must still finish with an empty drift-after.sql.'
+          } >> "$GITHUB_STEP_SUMMARY"
 
       # Schema changes are only safe once the running application still works
       # against them. This is the same readiness check the release-health and

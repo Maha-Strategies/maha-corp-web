@@ -72,7 +72,8 @@ running application still works against it.
 ## Drift, and how it is gated
 
 `supabase db diff --linked` compares the live schema against the migration tree.
-Output means the database has changes no migration describes — usually a direct
+Output means the live schema and the fully migrated tree differ. A pending
+migration can explain that difference; without one, the likely cause is a direct
 edit in the SQL editor.
 
 The check runs twice, because the obvious design deadlocks. Failing before
@@ -80,15 +81,19 @@ applying whenever live and the tree disagree means a migration *written to
 reconcile drift* can never run: the drift it exists to remove is still present
 when the gate fires. The first real dry-run hit exactly that.
 
-**Before applying**, drift is recorded to `drift-before.sql` and reported as a
-warning. It fails only when drift exists and **no migration is pending** to
-account for it — which is the case the gate was built for: Production changed
-outside this workflow, with nothing on its way to explain it.
+**Before applying**, the schema delta is recorded to `drift-before.sql`. When
+pending migrations explain that delta, the workflow labels it
+`expected-pending-delta` without emitting a warning. It warns and fails only
+when a delta exists and **no migration is pending** to account for it — which is
+the case the gate was built for: Production changed outside this workflow, with
+nothing on its way to explain it.
 
 **After applying**, `drift-after.sql` must be empty. This is the stronger
 property: rather than refusing to act on a disagreement, it requires the end
 state to agree. Anything remaining is a real difference the applied migrations
-did not account for, and the run fails with both files retained for comparison.
+did not reconcile, and the run fails with both files retained for comparison.
+Every run publishes a GitHub step summary that distinguishes the pre-apply
+classification, residual post-apply drift, and convergence state.
 
 Reconcile drift by writing a migration that expresses what is already true, or
 that removes what should not be there. Do not disable `check_schema_drift` to
@@ -148,7 +153,7 @@ monitoring workflows, nothing here runs unattended.
 The workflow never receives `REVENUE_CONTROL_TOKEN`, `MPS_OPERATIONS_TOKEN`, or
 any other mutating application token, and it prints no credential.
 
-The Supabase CLI is pinned to 2.109.1 — the version verified against this
+The Supabase CLI is pinned to 2.116.0 — the version verified against this
 migration tree. Bump it deliberately, and re-run a `dry-run` after any bump.
 
 ## Concurrency
