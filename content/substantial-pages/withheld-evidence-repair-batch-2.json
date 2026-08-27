@@ -1,0 +1,201 @@
+{
+  "schemaVersion": "maha-withheld-evidence-repair/1.0",
+  "cohort": "substantial-publication-batch-2-withheld",
+  "boundary": "This is AI-assisted internal editorial source-repair work performed by the publisher. It is not external expert review, peer review, consensus, independent reproduction, scientific validation, or commercial certification. A repair packet is a proposal for a fresh internal review; it is not approval, validation, or publication.",
+  "counts": {
+    "records": 2,
+    "withProposedRevision": 2,
+    "inspectedPassages": 6,
+    "byDisposition": {
+      "revise-record": 1,
+      "replace-source-pending-review": 1
+    }
+  },
+  "packets": [
+    {
+      "schemaVersion": "maha-withheld-evidence-repair/1.0",
+      "recordId": "urn:maha:record:agentic-systems-mcp-tool-deny-by-default",
+      "submitted": {
+        "revisionSha256": "sha256:85adb7771a58aabd372f1ac87856d8eb8cba96405f63084d515ca9474a712adb",
+        "recordKind": "comparison",
+        "claimStatement": "The cited source supports treating tool deny by default as a distinct comparison within the stated agentic systems and mcp scope.",
+        "sourceId": "source-agentic-systems-mcp-mcp-core",
+        "sourceUrl": "https://modelcontextprotocol.io/specification/2024-11-05/index",
+        "exactLocator": "Architecture, lifecycle, capabilities, resources, prompts, and security sections.",
+        "sourceBoundary": "A protocol primitive does not prescribe an organization’s allowlist, identity, retention, or approval policy."
+      },
+      "auditFindings": [
+        "The submitted claim treats \"tool deny by default\" as a comparison supported by the specification index, whose own source boundary states that a protocol primitive does not prescribe an organisation’s allowlist, identity, retention, or approval policy.",
+        "The frontier alignment audit recorded this record as supported at inspection depth \"abstract-only\", reasoning that hosts must obtain explicit user consent before invoking any tool. That reading is partly right and materially incomplete: on the specification index the word \"must\" appears in lowercase, and the index states in the same section that MCP cannot enforce these security principles at the protocol level.",
+        "The specification declares BCP 14 keywords normative only when they appear in all capitals, so the lowercase \"must\" on the index is not a protocol requirement.",
+        "Direct inspection of the Tools page for the same version does find normative, capitalised language that names the subject: a human SHOULD always be in the loop with the ability to deny tool invocations.",
+        "The specification also states on that page that the protocol itself does not mandate any specific user interaction model, which forecloses reading deny-by-default as an MCP requirement.",
+        "No comparative evidence between default-deny and default-allow exposure exists in the cited artifact, so the record cannot stand as a comparison."
+      ],
+      "inspectedPassages": [
+        {
+          "sourceUrl": "https://modelcontextprotocol.io/specification/2024-11-05/server/tools",
+          "sourceTitle": "Model Context Protocol specification — Tools (version 2024-11-05)",
+          "exactLocator": "Tools page, \"User Interaction Model\" warning block.",
+          "reading": "For trust, safety and security the page states there SHOULD always be a human in the loop with the ability to deny tool invocations, and that applications SHOULD make clear which tools are exposed, indicate invocations, and present confirmation prompts.",
+          "force": "implementation-recommendation",
+          "normativeKeyword": "SHOULD",
+          "inspectionDepth": "specified-sections",
+          "versionRelationship": "Version of record for specification version 2024-11-05, the same version already bound by the submitted record."
+        },
+        {
+          "sourceUrl": "https://modelcontextprotocol.io/specification/2024-11-05/server/tools",
+          "sourceTitle": "Model Context Protocol specification — Tools (version 2024-11-05)",
+          "exactLocator": "Tools page, \"User Interaction Model\" opening paragraphs.",
+          "reading": "The page states that implementations are free to expose tools through any interface pattern and that the protocol itself does not mandate any specific user interaction model.",
+          "force": "protocol-requirement",
+          "normativeKeyword": "none",
+          "inspectionDepth": "specified-sections",
+          "versionRelationship": "Version of record for specification version 2024-11-05."
+        },
+        {
+          "sourceUrl": "https://modelcontextprotocol.io/specification/2024-11-05/server/tools",
+          "sourceTitle": "Model Context Protocol specification — Tools (version 2024-11-05)",
+          "exactLocator": "Tools page, \"Security Considerations\" list.",
+          "reading": "Servers MUST validate all tool inputs, implement proper access controls, rate limit tool invocations, and sanitize tool outputs. Clients SHOULD prompt for user confirmation on sensitive operations.",
+          "force": "protocol-requirement",
+          "normativeKeyword": "MUST",
+          "inspectionDepth": "specified-sections",
+          "versionRelationship": "Version of record for specification version 2024-11-05."
+        },
+        {
+          "sourceUrl": "https://modelcontextprotocol.io/specification/2024-11-05/index",
+          "sourceTitle": "Model Context Protocol specification — index (version 2024-11-05)",
+          "exactLocator": "Specification index, \"Security and Trust & Safety\" section, Key Principles and Implementation Guidelines.",
+          "reading": "The index lists tool safety principles in lowercase prose, including that hosts must obtain explicit user consent before invoking any tool, and then states that MCP itself cannot enforce these security principles at the protocol level, with implementor obligations expressed as SHOULD.",
+          "force": "general-security-principle",
+          "normativeKeyword": "lowercase-must",
+          "inspectionDepth": "specified-sections",
+          "versionRelationship": "Version of record for specification version 2024-11-05; the artifact currently bound by the submitted record."
+        }
+      ],
+      "proposedRevision": {
+        "recordKind": "concept",
+        "claimStatement": "The Model Context Protocol specification recommends, as a normative SHOULD for implementors rather than a protocol mandate, that a human remain in the loop with the ability to deny tool invocations, and states that the protocol itself does not mandate any specific user interaction model.",
+        "claimScope": "Limited to the User Interaction Model warning and the Security Considerations list on the Tools page of the Model Context Protocol specification, version 2024-11-05. It records what the specification recommends to implementors and does not describe any organisation’s allowlist, identity, retention, or approval policy.",
+        "claimBoundary": "A recommendation addressed to implementors is not a protocol requirement, is not evidence that any deployed system denies tools by default, and establishes no system-level performance, safety, scalability, economic advantage, or deployment readiness.",
+        "sourceUrl": "https://modelcontextprotocol.io/specification/2024-11-05/server/tools",
+        "sourceExactLocator": "Tools page, version 2024-11-05: the \"User Interaction Model\" warning block and the \"Security Considerations\" list.",
+        "sourceEstablishes": "The Tools page states that for trust, safety and security there SHOULD always be a human in the loop with the ability to deny tool invocations, that the protocol itself does not mandate any specific user interaction model, that servers MUST implement proper access controls and validate tool inputs, and that clients SHOULD prompt for user confirmation on sensitive operations.",
+        "sourceBoundary": "The specification recommends implementor behaviour and mandates server-side input validation and access control. It does not prescribe an organisation’s allowlist, identity, retention, or approval policy, and it expressly does not mandate a user interaction model.",
+        "rightsBasis": "citation-with-paraphrase",
+        "unsupportedExtensions": [
+          "That MCP requires tools to be denied by default.",
+          "That any named runtime, client, or host implements a default-deny posture.",
+          "That a deny-by-default posture measurably reduces incidents."
+        ]
+      },
+      "revisionDigests": {
+        "before": "sha256:85adb7771a58aabd372f1ac87856d8eb8cba96405f63084d515ca9474a712adb",
+        "after": "sha256:bc2f686b2a68541c07b38c827d5f9fb57c8203e09abe7d0e49c6ffb999b1bb47",
+        "changed": true
+      },
+      "disagreements": [
+        "The frontier alignment audit judged this record supported. This repair disagrees in part: the underlying observation is real, but the audit read a lowercase \"must\" as a requirement and did not record the specification’s own statement that it cannot enforce these principles at the protocol level. Both entries are retained; neither is edited.",
+        "The internal review blocked the record. This repair agrees with that outcome for the submitted claim and proposes a narrower one rather than defending the original."
+      ],
+      "uncertainty": [
+        "Only the 2024-11-05 version was inspected, because that is the version the record binds. Later specification versions add an authorization specification that was deliberately not consulted, since citing it would change the artifact version without a declared version relationship.",
+        "Whether a reader treats \"a human in the loop with the ability to deny\" as equivalent to \"deny by default\" is an editorial judgement. The proposed claim therefore states the recommendation rather than the label."
+      ],
+      "prohibitedInferences": [
+        "Do not present a general least-privilege or zero-trust principle as something the Model Context Protocol mandates.",
+        "Do not read an implementor recommendation as a protocol requirement.",
+        "Do not infer that any deployed host, client, or runtime denies tools by default.",
+        "Do not use this record as evidence that a deny-by-default posture is safer, since the cited artifact reports no comparison."
+      ],
+      "recommendedDisposition": "revise-record",
+      "assuranceStatement": "This is AI-assisted internal editorial source-repair work performed by the publisher. It is not external expert review, peer review, consensus, independent reproduction, scientific validation, or commercial certification. A repair packet is a proposal for a fresh internal review; it is not approval, validation, or publication.",
+      "packetDigest": "sha256:9ddd615cdbd1797eaa4e3a803549b507c7dc850dc02eeb7a8c57393089de297e"
+    },
+    {
+      "schemaVersion": "maha-withheld-evidence-repair/1.0",
+      "recordId": "urn:maha:record:fusion-plasma-systems-breeding-blanket-test-modules",
+      "submitted": {
+        "revisionSha256": "sha256:84091c063213ab34fa437a1f6e2a2890da8d5d72ed2bdf148e2aec528fc95776",
+        "recordKind": "measurement",
+        "claimStatement": "The cited source supports treating breeding blanket test modules as a distinct measurement within the stated fusion and plasma systems scope.",
+        "sourceId": "source-fusion-plasma-systems-iter-support",
+        "sourceUrl": "https://www.iter.org/machine/supporting-systems",
+        "exactLocator": "Heating and current drive, fuel cycle, vacuum, cryogenic, diagnostics, and tritium breeding system summaries.",
+        "sourceBoundary": "A system inventory is not evidence of integrated commercial operation."
+      },
+      "auditFindings": [
+        "The submitted record binds the ITER Supporting Systems index, whose declared locator names heating and current drive, fuel cycle, vacuum, cryogenic, diagnostics and tritium breeding system summaries. It names neither breeding blankets nor test blanket modules.",
+        "The frontier alignment audit recorded this record as supported at inspection depth \"abstract-only\", reasoning that ITER documents test blanket modules. Direct inspection confirms ITER does document them — but on a different page from the one the record binds.",
+        "The submitted record is typed as a measurement while the bound page is a systems inventory whose own boundary states that a system inventory is not evidence of integrated commercial operation. An inventory supplies no measured quantity.",
+        "The ITER Tritium Breeding page does name test blanket modules directly, in a section headed \"ITER Test Blanket Module (TBM) Program\", and identifies four member concepts.",
+        "That page states ITER will experiment with tritium production by way of TBMs and that further research will be necessary to demonstrate the feasibility of large-scale tritium production and recycling, which forecloses any demonstrated-performance reading."
+      ],
+      "inspectedPassages": [
+        {
+          "sourceUrl": "https://www.iter.org/machine/supporting-systems/tritium-breeding",
+          "sourceTitle": "Tritium Breeding | ITER is First Fusion Device to Test",
+          "exactLocator": "\"ITER Test Blanket Module (TBM) Program\" section.",
+          "reading": "The section names test blanket modules and states that ITER will experiment with tritium production within the vacuum vessel by way of TBMs. Four member concepts are identified: water-cooled lithium-lead, water-cooled ceramics breeder, helium-cooled ceramics breeder, and helium-cooled ceramic pebbles.",
+          "force": "protocol-requirement",
+          "normativeKeyword": "none",
+          "inspectionDepth": "specified-sections",
+          "versionRelationship": "Authoritative publisher living page; the version inspected is the one served at the time of this repair. No archival snapshot was pinned."
+        },
+        {
+          "sourceUrl": "https://www.iter.org/machine/supporting-systems/tritium-breeding",
+          "sourceTitle": "Tritium Breeding | ITER is First Fusion Device to Test",
+          "exactLocator": "\"Tritium breeding\" section, closing statement on feasibility.",
+          "reading": "The page states that ITER will be the first fusion device to test tritium self-sustainment, and that further research will be necessary to demonstrate the feasibility of large-scale tritium production and recycling.",
+          "force": "protocol-requirement",
+          "normativeKeyword": "none",
+          "inspectionDepth": "specified-sections",
+          "versionRelationship": "Authoritative publisher living page, inspected directly."
+        }
+      ],
+      "proposedRevision": {
+        "recordKind": "concept",
+        "claimStatement": "ITER documents a Test Blanket Module programme under which in-vessel modules will be used to test tritium breeding concepts, and states that further research is necessary to demonstrate the feasibility of large-scale tritium production and recycling.",
+        "claimScope": "Limited to the \"ITER Test Blanket Module (TBM) Program\" section of the ITER Tritium Breeding page. It records a planned test programme and its stated objective, and pools no results from other devices, studies, or blanket concepts.",
+        "claimBoundary": "A planned test programme is not a measurement. This record establishes no breeding ratio, no extraction rate, no neutron or heat-load performance, no materials qualification outcome, and no commercial blanket readiness.",
+        "sourceUrl": "https://www.iter.org/machine/supporting-systems/tritium-breeding",
+        "sourceExactLocator": "ITER \"Tritium Breeding\" page: the \"ITER Test Blanket Module (TBM) Program\" section naming the test blanket modules and the four member concepts.",
+        "sourceEstablishes": "The page names test blanket modules, states that ITER will experiment with tritium production within the vacuum vessel by way of TBMs, identifies four member TBM concepts, and states that further research will be necessary to demonstrate the feasibility of large-scale tritium production and recycling.",
+        "sourceBoundary": "An authoritative description of a planned test programme is not evidence of demonstrated tritium breeding, of measured performance, or of commercial blanket readiness.",
+        "rightsBasis": "citation-with-paraphrase",
+        "unsupportedExtensions": [
+          "That tritium self-sufficiency has been demonstrated.",
+          "That any breeding ratio or extraction rate has been measured.",
+          "That blanket materials are qualified for a power reactor.",
+          "That a commercial breeding blanket is ready."
+        ]
+      },
+      "revisionDigests": {
+        "before": "sha256:84091c063213ab34fa437a1f6e2a2890da8d5d72ed2bdf148e2aec528fc95776",
+        "after": "sha256:b105cd37afb901481c3f30a5362f916fbc4994faf6f376075727b0e92db3f421",
+        "changed": true
+      },
+      "disagreements": [
+        "The frontier alignment audit judged this record supported because ITER documents TBMs. This repair does not dispute that ITER documents them; it disputes that the page the record binds does. Both entries are retained; neither is edited.",
+        "The proposed source is a different ITER page from the submitted one. It is a proposal for review, not a substitution: the submitted binding is reproduced unchanged in this packet."
+      ],
+      "uncertainty": [
+        "The ITER page is a living publisher page with no version identifier or archival snapshot pinned, so a future reader may find different wording. The version relationship is recorded as such rather than claimed to be stable.",
+        "Whether the record is better typed as a concept or a method for the TBM programme is an editorial judgement. Concept is proposed because the programme is described, not performed.",
+        "IAEA and EUROfusion technical literature on breeding blankets was not inspected for this repair. The single ITER page was sufficient to support the narrowed claim, and adding uninspected sources would widen the binding without widening the evidence."
+      ],
+      "prohibitedInferences": [
+        "Do not infer demonstrated tritium breeding or self-sufficiency from a planned test programme.",
+        "Do not infer any breeding ratio, extraction rate, neutron exposure result, or heat-extraction performance.",
+        "Do not infer materials qualification for a power reactor.",
+        "Do not infer commercial blanket readiness or a delivery timeline.",
+        "Do not transfer results between TBM concepts, which differ in coolant and breeder."
+      ],
+      "recommendedDisposition": "replace-source-pending-review",
+      "assuranceStatement": "This is AI-assisted internal editorial source-repair work performed by the publisher. It is not external expert review, peer review, consensus, independent reproduction, scientific validation, or commercial certification. A repair packet is a proposal for a fresh internal review; it is not approval, validation, or publication.",
+      "packetDigest": "sha256:f2bbe8bc210eb5717649158c088124625372a0cf740a4f09106ba1dd38d0f118"
+    }
+  ],
+  "digest": "sha256:f35d10f036562867dc76d249ff6221d4991e65260b04625f4a3d3283ccc1a684"
+}
