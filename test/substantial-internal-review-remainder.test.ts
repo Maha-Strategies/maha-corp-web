@@ -275,3 +275,33 @@ test('the report separates every required set', () => {
   assert.equal(artifact.sets.reviewed.length, 22)
   assert.equal(artifact.sets.initialReleaseCandidates.length + artifact.sets.supersedingReleaseCandidates.length, artifact.sets.approved.length)
 })
+
+test('verify-only is a pre-flight; strictness applies only after a publish', () => {
+  const runner = readFileSync('scripts/run-substantial-internal-review-remainder.ts', 'utf8')
+  // The strict flag is the publish flag, so a standalone verify reports instead of aborting.
+  assert.match(runner, /verifyProjection\(origin, publish\)/)
+  assert.match(runner, /if \(strict && missing\.length > 0\) throw new Error/)
+  // A withheld record serving substantial material is fatal regardless of strictness.
+  assert.match(runner, /a withheld record is serving Batch 2 substantial material/)
+  const withheldCheck = runner.slice(runner.indexOf('for (const recordId of BATCH_2_REMAINDER_WITHHELD_IDS)'))
+  assert.equal(/strict/.test(withheldCheck.slice(0, withheldCheck.indexOf('return'))), false, 'the withheld leak check must never be conditional on strictness')
+})
+
+test('publication requires the exact confirmation phrase and the separate authority token', () => {
+  const runner = readFileSync('scripts/run-substantial-internal-review-remainder.ts', 'utf8')
+  assert.match(runner, /RELEASE_APPROVED_BATCH2_INTERNAL_REVIEW_REMAINDER/)
+  assert.match(runner, /--publish requires --review/)
+  assert.match(runner, /EPISTEMIC_RELEASE_AUTHORITY_TOKEN/)
+  // Preview always precedes publish.
+  assert.ok(runner.indexOf("operation: 'preview'") < runner.indexOf("operation: 'publish'"))
+  // A superseding release needs a real prior release; an initial release must not overwrite one.
+  assert.match(runner, /reviewed as superseding but no active prior release exists/)
+  assert.match(runner, /reviewed as an initial release but an active release already exists/)
+  // The runner refuses to publish anything not approved.
+  assert.match(runner, /refusing to publish a non-approved record/)
+  const workflow = readFileSync('.github/workflows/production-substantial-internal-review-remainder.yml', 'utf8')
+  assert.match(workflow, /RELEASE_APPROVED_BATCH2_INTERNAL_REVIEW_REMAINDER/)
+  assert.equal(workflow.includes('production-substantial-internal-review-canary'), false, 'the canary workflow must not be repurposed')
+  // No secret value is ever echoed.
+  assert.equal(/echo .*(TOKEN|SECRET)/.test(workflow), false)
+})

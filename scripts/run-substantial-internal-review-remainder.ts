@@ -123,30 +123,36 @@ async function publishApproved(origin: string, releaseToken: string) {
   return results
 }
 
-async function verifyProjection(origin: string) {
+/**
+ * `strict` is true only after a publish in the same run. A standalone verify is
+ * a pre-flight: it reports what is and is not yet live instead of aborting on
+ * the first unreleased record, because verify-only is meant to be run *before*
+ * the release. A withheld record serving substantial material is always fatal.
+ */
+async function verifyProjection(origin: string, strict: boolean) {
   const { EPISTEMIC_RECORDS } = await import('../lib/epistemic-pilots.ts')
   const [sitemap, llms] = await Promise.all([
     fetch(`${origin}/sitemap.xml`, { cache: 'no-store' }).then((response) => response.text()),
     fetch(`${origin}/llms.txt`, { cache: 'no-store' }).then((response) => response.text()),
   ])
 
-  const released: { recordId: string; path: string; status: number }[] = []
+  const released: { recordId: string; path: string; status: number; complete: boolean; missing: string[] }[] = []
   for (const recordId of BATCH_2_REMAINDER_APPROVED_IDS) {
     const record = EPISTEMIC_RECORDS.find((entry) => entry.id === recordId)!
     const path = epistemicRecordPath(record)
     const response = await fetch(`${origin}${path}`, { cache: 'no-store' })
-    const text = await response.text()
-    const failures: string[] = []
-    if (response.status !== 200) failures.push(`status ${response.status}`)
-    if (!text.includes('Substantial reference')) failures.push('substantial source-bound content missing')
-    if (!text.includes('internal-editorial')) failures.push('assurance label missing')
-    if (!text.includes('No external reviewer participated')) failures.push('no-external-review disclosure missing')
-    if (!text.includes(`<link rel="canonical" href="${origin}${path}"`)) failures.push('canonical metadata missing')
-    if (!/"@type"\s*:\s*"TechArticle"/.test(text)) failures.push('TechArticle JSON-LD missing')
-    if (!sitemap.includes(`${origin}${path}`)) failures.push('sitemap membership missing')
-    if (!llms.includes(`${origin}${path}`)) failures.push('llms.txt membership missing')
-    if (failures.length > 0) throw new Error(`${recordId}: production projection incomplete at ${path} (${failures.join('; ')}).`)
-    released.push({ recordId, path, status: response.status })
+    const text = response.status === 200 ? await response.text() : ''
+    const missing: string[] = []
+    if (response.status !== 200) missing.push(`status ${response.status}`)
+    if (!text.includes('Substantial reference')) missing.push('substantial source-bound content')
+    if (!text.includes('internal-editorial')) missing.push('assurance label')
+    if (!text.includes('No external reviewer participated')) missing.push('no-external-review disclosure')
+    if (!text.includes(`<link rel="canonical" href="${origin}${path}"`)) missing.push('canonical metadata')
+    if (!/"@type"\s*:\s*"TechArticle"/.test(text)) missing.push('TechArticle JSON-LD')
+    if (!sitemap.includes(`${origin}${path}`)) missing.push('sitemap membership')
+    if (!llms.includes(`${origin}${path}`)) missing.push('llms.txt membership')
+    if (strict && missing.length > 0) throw new Error(`${recordId}: production projection incomplete at ${path} (${missing.join('; ')}).`)
+    released.push({ recordId, path, status: response.status, complete: missing.length === 0, missing })
   }
 
   // A withheld record may legitimately have an ordinary canonical page. What it
@@ -177,7 +183,7 @@ export async function runSubstantialInternalReviewRemainder(environment = proces
   const ingested = review ? await ingestTargets(origin, token(environment, 'EPISTEMIC_OPERATIONS_TOKEN')) : null
   const reviewed = review ? await submitReviews(origin, token(environment, 'EPISTEMIC_OPERATIONS_TOKEN')) : []
   const released = publish ? await publishApproved(origin, token(environment, 'EPISTEMIC_RELEASE_AUTHORITY_TOKEN')) : []
-  const projection = verify ? await verifyProjection(origin) : null
+  const projection = verify ? await verifyProjection(origin, publish) : null
 
   console.log(JSON.stringify({
     operation: publish ? 'review-publish-verify' : review ? 'review' : 'verify',
@@ -187,7 +193,11 @@ export async function runSubstantialInternalReviewRemainder(environment = proces
     scopedDecisionsSubmitted: reviewed.length,
     released,
     releasedCount: released.filter((entry) => !entry.replayed).length,
-    projection,
+    projection: projection && {
+      ...projection,
+      liveAndComplete: projection.released.filter((entry) => entry.complete).length,
+      notYetLive: projection.released.filter((entry) => !entry.complete).map((entry) => entry.recordId),
+    },
     boundary: 'Internal editorial review is disclosed, exact-revision scoped, and performed by the publisher. It is not external expert review, peer review, consensus, independent reproduction, scientific validation, or commercial certification. External expert review remains an optional append-only upgrade.',
   }, null, 2))
 }
