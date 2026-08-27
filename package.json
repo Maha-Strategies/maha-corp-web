@@ -27,6 +27,7 @@
     "generate:internal-review-remainder": "node --experimental-strip-types scripts/generate-internal-review-remainder-report.ts",
     "generate:withheld-evidence-repair": "node --experimental-strip-types scripts/generate-withheld-evidence-repair.ts",
     "generate:repaired-record-rereview": "node --experimental-strip-types scripts/generate-repaired-record-rereview.ts",
+    "generate:tbm-citation-repair": "node --experimental-strip-types scripts/generate-tbm-citation-identity-repair.ts",
     "generate:internal-review-batch-2": "node --experimental-strip-types scripts/generate-substantial-internal-review-batch-2.ts",
     "maha": "node bin/maha.js",
     "expand-graph": "node --experimental-strip-types scripts/expand-graph.ts",
