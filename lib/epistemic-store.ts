@@ -44,7 +44,11 @@ export async function insertEpistemicIngestionBatch(
   idempotencyKey: string,
   actorFingerprint: string,
 ) {
-  const rpc = batch.adapterId === 'frontier-canary' ? 'record_epistemic_frontier_canary_batch' : 'record_epistemic_ingestion_batch'
+  const rpc = batch.adapterId === 'frontier-canary'
+    ? 'record_epistemic_frontier_canary_batch'
+    : batch.adapterId === 'substantial-batch-2-internal-review'
+      ? 'record_substantial_batch2_internal_review_targets'
+      : 'record_epistemic_ingestion_batch'
   const { data, error } = await client.rpc(rpc, {
     p_batch: ingestionBatchSnapshot(batch),
     p_records: batch.records,
