@@ -43,6 +43,11 @@ async function request(origin: string, bearer: string, path: string, init: Reque
 }
 
 async function submitReviews(origin: string, operationsToken: string) {
+  const targetKey = createHash('sha256').update(BATCH_2_INTERNAL_REVIEW_PACKETS.map((packet) => packet.targetSha256).join('|')).digest('hex')
+  await request(origin, operationsToken, '/api/admin/epistemic-ingestion', {
+    method: 'POST',
+    body: JSON.stringify({ adapterId: 'substantial-batch-2-internal-review', idempotencyKey: `batch2-internal-targets:${targetKey}` }),
+  })
   const decisions = canaryInternalReviewInputs()
   const results = []
   for (const decision of decisions) {
@@ -130,4 +135,3 @@ export async function runSubstantialInternalReviewCanary(environment = process.e
 }
 
 if (import.meta.url === `file://${process.argv[1]}`) runSubstantialInternalReviewCanary().catch((error) => { console.error(error instanceof Error ? error.message : error); process.exitCode = 1 })
-
