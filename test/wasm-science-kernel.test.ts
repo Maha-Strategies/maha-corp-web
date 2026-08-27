@@ -7,9 +7,11 @@ import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 import test from 'node:test'
 
+import { canonicalJson as dossierCanonicalJson } from '../lib/evidence-dossier/digest.ts'
 import { attachCalculationReceiptToDossier, serializeDossierCalculationAttachment } from '../packages/wasm-kernel/dist/dossier.js'
 import { instantiateKernel } from '../packages/wasm-kernel/src/kernel.ts'
 import { createCalculationReceipt, verifyCalculationReceipt } from '../packages/wasm-kernel/src/receipt.ts'
+import { canonicalJson as kernelCanonicalJson } from '../packages/wasm-kernel/src/receipt.ts'
 import * as reference from '../packages/wasm-kernel/src/reference.ts'
 
 const PACKAGE = new URL('../packages/wasm-kernel/', import.meta.url)
@@ -101,6 +103,23 @@ test('calculation receipts are deterministic, normalized, and tamper-evident', a
   assert.equal(first.receiptSha256, reordered.receiptSha256)
   assert.equal(await verifyCalculationReceipt(first), true)
   assert.equal(await verifyCalculationReceipt({ ...first, output: { angle: '0' } }), false)
+})
+
+test('kernel and Evidence Dossier canonicalization are byte-identical for scientific payloads', () => {
+  const cases: unknown[] = [
+    { B: 2, a: 1 },
+    { '1x': 1, Ax: 3, ax: 2 },
+    { az: 2, 'ä': 1 },
+    { 'Å': '3.82', Bc2: '54', mu: '0.13', tau: '1.4', Tc: '92' },
+    { instant: '2026-08-27T05:00+00:00', decomposed: 'A\u030A', nested: { Ω: '12', µ: '0.3' } },
+  ]
+  for (const value of cases) assert.equal(kernelCanonicalJson(value), dossierCanonicalJson(value))
+  assert.equal(kernelCanonicalJson(cases[3]), '{"Bc2":"54","Tc":"92","mu":"0.13","tau":"1.4","Å":"3.82"}')
+})
+
+test('kernel canonicalization contains no locale-sensitive comparator', async () => {
+  const source = await readFile(new URL('../packages/wasm-kernel/src/receipt.ts', import.meta.url), 'utf8')
+  assert.doesNotMatch(source, /localeCompare|Intl\.Collator/)
 })
 
 test('receipt construction rejects missing identity and fake kernel digests', async () => {

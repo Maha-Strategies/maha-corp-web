@@ -1,12 +1,40 @@
 export const KERNEL_RECEIPT_SCHEMA = 'maha-calculation-receipt/1.0';
+const DIGEST_FIELDS = new Set(['provenanceDigest', 'dossierDigest']);
+const INSTANT = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}(:\d{2})?(\.\d+)?(Z|[+-]\d{2}:\d{2})$/;
 function normalized(value) {
-    if (typeof value === 'string')
-        return value.normalize('NFC');
+    if (value === null)
+        return null;
+    if (typeof value === 'string') {
+        const nfc = value.normalize('NFC');
+        if (!INSTANT.test(nfc))
+            return nfc;
+        const parsed = new Date(nfc);
+        return Number.isNaN(parsed.getTime()) ? nfc : `${parsed.toISOString().slice(0, 19)}Z`;
+    }
+    if (typeof value === 'number') {
+        if (!Number.isFinite(value))
+            throw new Error('Non-finite number cannot be canonicalized.');
+        return value;
+    }
+    if (typeof value === 'boolean')
+        return value;
+    if (value instanceof Date)
+        return `${value.toISOString().slice(0, 19)}Z`;
     if (Array.isArray(value))
         return value.map(normalized);
-    if (value && typeof value === 'object')
-        return Object.fromEntries(Object.entries(value).sort(([a], [b]) => a.localeCompare(b)).map(([key, entry]) => [key, normalized(entry)]));
-    return value;
+    if (typeof value === 'object') {
+        const source = value;
+        const output = {};
+        // Array.prototype.sort without a comparator uses stable UTF-16 code-unit
+        // ordering. It is independent of ICU and the host's default locale.
+        for (const key of Object.keys(source).sort()) {
+            if (DIGEST_FIELDS.has(key) || source[key] === undefined)
+                continue;
+            output[key] = normalized(source[key]);
+        }
+        return output;
+    }
+    throw new Error(`Unsupported value of type ${typeof value} in canonicalization.`);
 }
 export const canonicalJson = (value) => JSON.stringify(normalized(value));
 async function sha256(value) {
