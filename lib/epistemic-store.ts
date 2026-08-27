@@ -48,6 +48,8 @@ export async function insertEpistemicIngestionBatch(
     ? 'record_epistemic_frontier_canary_batch'
     : batch.adapterId === 'substantial-batch-2-internal-review'
       ? 'record_substantial_batch2_internal_review_targets'
+      : batch.adapterId === 'repaired-revision-canary'
+        ? 'record_repaired_revision_canary_targets'
       : 'record_epistemic_ingestion_batch'
   const { data, error } = await client.rpc(rpc, {
     p_batch: ingestionBatchSnapshot(batch),
