@@ -16,6 +16,7 @@ import {
   handleCarpSellerRequest,
   mahaCarpSellerProfile,
 } from '../lib/carp/seller.ts'
+import { approvedCarpPeer, THRIVBE } from '../lib/carp/gateway.ts'
 import {
   didDocumentForPublicKey,
   multibaseForPublicKey,
@@ -42,12 +43,27 @@ test('the Maha seller maps Deep Context to the adopted digital offering shape', 
   assert.equal(mahaCarpSellerProfile.membership.status, 'confirmed_cabezon_seller_directory')
   assert.equal(mahaCarpSellerProfile.membership.confirmedAt, '2026-08-21')
   assert.match(mahaCarpSellerProfile.membership.confirmationEvidence, /thrivbe-buyer-review-2026-08-27\.json$/)
+  assert.deepEqual(mahaCarpSellerProfile.membership.directPeerBindings, [{
+    handle: 'thrivbe',
+    status: 'preapproved_pending_adilos',
+    did: THRIVBE.did,
+    sadUrl: 'http://157.180.117.231:8888/cgi-bin/thrivbe',
+    publicKey: THRIVBE.publicKey,
+    carpUrl: THRIVBE.carpUrl,
+  }])
   assert.equal(offer.offeringRef, 'maha:deep-context-evaluation:v1')
   assert.equal(offer.kind, 'digital')
   assert.equal(offer.price.amount, '0.01')
   assert.equal(offer.directSettlement.amountBaseUnits, DEEP_CONTEXT_EVALUATION_OFFER.amount)
   assert.equal(offer.directSettlement.resource, `https://www.mahastrategies.com${DEEP_CONTEXT_EVALUATION_OFFER.path}`)
   assert.deepEqual(offer.fulfillment.modes, ['digital'])
+})
+
+test('the direct CARP allowlist binds Thrivbe to its verified DID key and callback', () => {
+  assert.equal(didDocumentForPublicKey(THRIVBE.publicKey).id, THRIVBE.did)
+  assert.deepEqual(approvedCarpPeer(THRIVBE.publicKey), THRIVBE)
+  assert.deepEqual(approvedCarpPeer(THRIVBE.publicKey.toUpperCase()), THRIVBE)
+  assert.equal(approvedCarpPeer('0279be667ef9dcbbac55a06295ce870b07029bfcdb2dce28d959f2815b16f81798'), null)
 })
 
 test('enquiry returns the canonical offering array for compatible needs', () => {
