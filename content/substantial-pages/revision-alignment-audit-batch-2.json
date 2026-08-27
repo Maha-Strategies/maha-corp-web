@@ -1,0 +1,366 @@
+{
+  "schemaVersion": "maha-revision-alignment-audit/1.0",
+  "cohort": "substantial-publication-batch-2-withheld-revision-audit",
+  "boundary": "This is an independent internal editorial alignment audit of a proposed revision. It is not the internal review decision and it is not a release: an audit that reaches alignment-clear produces a reviewer packet for a separate review pass, performed by a separate operation.",
+  "counts": {
+    "revisionsAudited": 2,
+    "byOutcome": {
+      "alignment-clear-ready-for-internal-rereview": 2
+    },
+    "rereviewPacketsGenerated": 2,
+    "reviewDecisionsRecorded": 0
+  },
+  "audits": [
+    {
+      "schemaVersion": "maha-revision-alignment-audit/1.0",
+      "recordId": "urn:maha:record:agentic-systems-mcp-tool-deny-by-default",
+      "supersededRevision": "sha256:85adb7771a58aabd372f1ac87856d8eb8cba96405f63084d515ca9474a712adb",
+      "proposedRevision": "sha256:bc2f686b2a68541c07b38c827d5f9fb57c8203e09abe7d0e49c6ffb999b1bb47",
+      "auditedRevision": "sha256:bc3682ef4b4613b4cff9c468953c218fb20ebad8786ab8c6cc4bbcc8dccb1a66",
+      "auditedCanonicalPath": "/knowledge/agentic-systems-mcp/concepts/agentic-systems-mcp-human-denial-control-for-tool-invocations",
+      "correction": {
+        "title": "Human denial control for tool invocations",
+        "slug": "agentic-systems-mcp-human-denial-control-for-tool-invocations",
+        "description": "A source-bounded concept record for the human denial control the Model Context Protocol recommends for tool invocations, within agentic systems and MCP.",
+        "boundaries": [
+          "A recommended human denial control does not by itself establish system-level performance, safety, manufacturability, scalability, economic advantage, clinical benefit, or deployment readiness.",
+          "A source-bounded concept record does not establish manufacturing yield, economic advantage, safety, clinical benefit, or commercial readiness unless those outcomes are measured in a separately scoped record."
+        ],
+        "prohibitedInferences": [
+          "Do not use this human denial control record to claim that the surrounding technology is proven, safe, scalable, commercially available, or strategically superior.",
+          "Do not transfer a reported result across hardware, organisms, protocols, datasets, operating conditions, or outcome definitions without a declared comparison contract.",
+          "Do not read a recommended human ability to deny an invocation as a requirement that tools be denied unless explicitly permitted."
+        ]
+      },
+      "dimensions": [
+        {
+          "dimension": "source-identity",
+          "verdict": "satisfied",
+          "finding": "The proposal binds the Tools page of the Model Context Protocol specification, version 2024-11-05. That is the same specification and the same version the superseded record bound, so this is a locator correction within one artifact rather than a change of source identity. The page was re-fetched for this audit and served the same content."
+        },
+        {
+          "dimension": "exact-locator-fidelity",
+          "verdict": "satisfied",
+          "finding": "The locator names the \"User Interaction Model\" warning block and the \"Security Considerations\" list. Both headings exist verbatim on the inspected page, and both contain the language the claim relies on."
+        },
+        {
+          "dimension": "claim-to-passage-alignment",
+          "verdict": "satisfied",
+          "finding": "The claim asserts a normative SHOULD addressed to implementors and an express non-mandate. The page states \"there SHOULD always be a human in the loop with the ability to deny tool invocations\" with SHOULD capitalised, and \"the protocol itself does not mandate any specific user interaction model\". The claim asserts neither more nor less."
+        },
+        {
+          "dimension": "rights-basis",
+          "verdict": "satisfied",
+          "finding": "citation-with-paraphrase against a publicly served specification page. The record retains original paraphrase and reproduces no block of specification text, schema, or diagram."
+        },
+        {
+          "dimension": "scope-and-uncertainty",
+          "verdict": "satisfied",
+          "finding": "Scope is bound to two named sections of one specification version. The uncertainty that matters is recorded: later specification versions add an authorization specification that was deliberately not consulted, because citing it would change the artifact version without a declared version relationship."
+        },
+        {
+          "dimension": "prohibited-inferences",
+          "verdict": "satisfied",
+          "finding": "The prohibitions close the three readings the evidence cannot carry: a general least-privilege principle presented as an MCP mandate, an implementor recommendation read as a protocol requirement, and an inference that any deployed runtime denies tools by default."
+        },
+        {
+          "dimension": "record-classification",
+          "verdict": "corrected",
+          "finding": "PR #241 moved the record from comparison to concept. This audit confirms concept: the artifact defines a recommended control and reports no comparison between exposure postures, so neither comparison nor measurement is available."
+        },
+        {
+          "dimension": "title-to-claim-consistency",
+          "verdict": "corrected",
+          "finding": "The submitted title \"Tool deny by default\" overstates the source. The phrases \"deny by default\", \"default-deny\", \"denied by default\" and \"allowlist\" appear nowhere on the inspected page. What the page supports is a human ability to deny an invocation — a control that must be available, not a posture that must be the default. The audited title is \"Human denial control for tool invocations\" with a matching slug, so the record name no longer asserts more than the locator carries."
+        }
+      ],
+      "evidence": {
+        "metadataVerified": true,
+        "sourceContentInspected": true,
+        "inspectedContentLocation": "Model Context Protocol specification 2024-11-05, Tools page: \"User Interaction Model\" and \"Security Considerations\".",
+        "subjectAligned": "supported",
+        "claimSupported": true,
+        "inspectionDepth": "specified-sections",
+        "versionRelationshipVerified": true,
+        "archivalSnapshotPinned": false,
+        "independentlyReproduced": false,
+        "externallyReviewed": false
+      },
+      "forbiddenLanguage": [
+        "deny by default",
+        "default-deny",
+        "default deny",
+        "denied by default",
+        "allowlist",
+        "MUST always be a human",
+        "protocol requires",
+        "MCP requires",
+        "protocol mandates"
+      ],
+      "outcome": "alignment-clear-ready-for-internal-rereview",
+      "auditDigest": "sha256:904d8b6299008520a26e9e5d43d7b09e87c2f735d482dfe9272e349687643893"
+    },
+    {
+      "schemaVersion": "maha-revision-alignment-audit/1.0",
+      "recordId": "urn:maha:record:fusion-plasma-systems-breeding-blanket-test-modules",
+      "supersededRevision": "sha256:84091c063213ab34fa437a1f6e2a2890da8d5d72ed2bdf148e2aec528fc95776",
+      "proposedRevision": "sha256:b105cd37afb901481c3f30a5362f916fbc4994faf6f376075727b0e92db3f421",
+      "auditedRevision": "sha256:3eb362d91f332ac755d9793f8e43d781e445bbe64827d24521af037288e54723",
+      "auditedCanonicalPath": "/knowledge/fusion-plasma-systems/concepts/fusion-plasma-systems-breeding-blanket-test-modules",
+      "correction": {
+        "description": "A source-bounded concept record for the ITER Test Blanket Module programme within fusion and plasma systems.",
+        "boundaries": [
+          "A documented test programme does not by itself establish system-level performance, safety, manufacturability, scalability, economic advantage, clinical benefit, or deployment readiness.",
+          "A source-bounded concept record does not establish manufacturing yield, economic advantage, safety, clinical benefit, or commercial readiness unless those outcomes are measured in a separately scoped record."
+        ],
+        "prohibitedInferences": [
+          "Do not use this test blanket module programme record to claim that the surrounding technology is proven, safe, scalable, commercially available, or strategically superior.",
+          "Do not transfer a reported result across hardware, organisms, protocols, datasets, operating conditions, or outcome definitions without a declared comparison contract.",
+          "Do not read a planned test programme as demonstrated tritium breeding, measured performance, completed materials qualification, or commercial blanket readiness."
+        ]
+      },
+      "dimensions": [
+        {
+          "dimension": "source-identity",
+          "verdict": "corrected",
+          "finding": "The proposal replaces the ITER Supporting Systems index with the ITER Tritium Breeding page. This is a genuine change of source identity, not a locator correction, and it is why the PR #241 disposition was replace-source-pending-review. The replacement page was re-fetched for this audit and named the subject directly."
+        },
+        {
+          "dimension": "exact-locator-fidelity",
+          "verdict": "satisfied",
+          "finding": "The locator names the \"ITER Test Blanket Module (TBM) Program\" section. That heading exists verbatim on the inspected page, and the section names test blanket modules and four member concepts. The superseded locator named neither blankets nor test modules, which was the original defect."
+        },
+        {
+          "dimension": "claim-to-passage-alignment",
+          "verdict": "satisfied",
+          "finding": "The claim asserts a documented programme under which modules will be used to test breeding, plus the stated need for further research. The page states \"ITER will experiment with tritium production within the vacuum vessel by way of test blanket modules (TBMs)\" and \"Further research will be necessary to demonstrate the feasibility of large-scale tritium production and recycling\". The claim tracks both sentences and adds nothing."
+        },
+        {
+          "dimension": "rights-basis",
+          "verdict": "satisfied",
+          "finding": "citation-with-paraphrase against an authoritative publisher page. No figure, diagram, or block of ITER text is reproduced."
+        },
+        {
+          "dimension": "scope-and-uncertainty",
+          "verdict": "corrected",
+          "finding": "Scope is bound to the single named TBM Program section. The audit re-checked the version position and confirmed the page carries no publication date, no version number and no last-updated stamp, and no archival snapshot was pinned. That limitation is recorded on the audit rather than left implicit, so a future reader is told the wording may have moved."
+        },
+        {
+          "dimension": "prohibited-inferences",
+          "verdict": "satisfied",
+          "finding": "The prohibitions separate the claims the task requires kept apart: tritium breeding, heat extraction, neutron exposure, materials qualification, module geometry, programme scope and commercial readiness. Demonstrated breeding, any breeding ratio, qualification and commercial readiness are each explicitly closed, and transfer between TBM concepts is forbidden because they differ in coolant and breeder."
+        },
+        {
+          "dimension": "record-classification",
+          "verdict": "corrected",
+          "finding": "PR #241 moved the record from measurement to concept, and this audit confirms concept is correct. A measurement would require a measured quantity and the page reports none. A method would imply a procedure the record instructs someone to follow; the page describes a programme that will be run, not a method to apply. Concept records the bounded existence and scope of the TBM programme, which is exactly what the section supports."
+        },
+        {
+          "dimension": "title-to-claim-consistency",
+          "verdict": "satisfied",
+          "finding": "The title \"Breeding blanket test modules\" names precisely what the inspected section names. It asserts no performance, no completion and no readiness, so unlike the MCP record the title needs no correction."
+        }
+      ],
+      "evidence": {
+        "metadataVerified": true,
+        "sourceContentInspected": true,
+        "inspectedContentLocation": "ITER Tritium Breeding page: \"ITER Test Blanket Module (TBM) Program\" section.",
+        "subjectAligned": "supported",
+        "claimSupported": true,
+        "inspectionDepth": "specified-sections",
+        "versionRelationshipVerified": false,
+        "archivalSnapshotPinned": false,
+        "independentlyReproduced": false,
+        "externallyReviewed": false
+      },
+      "forbiddenLanguage": [
+        "demonstrated breeding",
+        "commercially ready",
+        "commercial readiness",
+        "breeding ratio of",
+        "qualification complete",
+        "proven blanket",
+        "measured breeding"
+      ],
+      "outcome": "alignment-clear-ready-for-internal-rereview",
+      "auditDigest": "sha256:76176aa7e8a914c18fbea7f823f4684d1400160a27fd6e68433f8bf19b86de22"
+    }
+  ],
+  "rereviewPackets": [
+    {
+      "schemaVersion": "maha-revision-alignment-audit/1.0",
+      "recordId": "urn:maha:record:agentic-systems-mcp-tool-deny-by-default",
+      "auditedRevision": "sha256:bc3682ef4b4613b4cff9c468953c218fb20ebad8786ab8c6cc4bbcc8dccb1a66",
+      "auditedCanonicalPath": "/knowledge/agentic-systems-mcp/concepts/agentic-systems-mcp-human-denial-control-for-tool-invocations",
+      "auditDigest": "sha256:904d8b6299008520a26e9e5d43d7b09e87c2f735d482dfe9272e349687643893",
+      "title": "Human denial control for tool invocations",
+      "slug": "agentic-systems-mcp-human-denial-control-for-tool-invocations",
+      "recordKind": "concept",
+      "claimStatement": "The Model Context Protocol specification recommends, as a normative SHOULD for implementors rather than a protocol mandate, that a human remain in the loop with the ability to deny tool invocations, and states that the protocol itself does not mandate any specific user interaction model.",
+      "sourceUrl": "https://modelcontextprotocol.io/specification/2024-11-05/server/tools",
+      "exactLocator": "Tools page, version 2024-11-05: the \"User Interaction Model\" warning block and the \"Security Considerations\" list.",
+      "rightsBasis": "citation-with-paraphrase",
+      "checklist": {
+        "source-fidelity": [
+          {
+            "criterionId": "claim-source-alignment",
+            "question": "Does every claim stay within what its cited source establishes?",
+            "status": "pending-record-specific-review"
+          },
+          {
+            "criterionId": "source-context",
+            "question": "Are edition, date, interested-party status, and relevant context represented accurately?",
+            "status": "pending-record-specific-review"
+          },
+          {
+            "criterionId": "transcription-and-paraphrase",
+            "question": "Are quoted or paraphrased statements faithful to the frozen source location?",
+            "status": "pending-record-specific-review"
+          }
+        ],
+        "domain-fidelity": [
+          {
+            "criterionId": "terminology",
+            "question": "Are technical terms used consistently with the named domain and source corpus?",
+            "status": "pending-record-specific-review"
+          },
+          {
+            "criterionId": "mechanism-and-method",
+            "question": "Does the formalized mechanism or method preserve material conditions and exceptions?",
+            "status": "pending-record-specific-review"
+          },
+          {
+            "criterionId": "scope-transfer",
+            "question": "Does the record avoid transferring a result across incompatible systems, scales, or traditions?",
+            "status": "pending-record-specific-review"
+          }
+        ],
+        "boundary-adequacy": [
+          {
+            "criterionId": "uncertainty-and-replication",
+            "question": "Are uncertainty, evidence maturity, and replication limits stated without inflation?",
+            "status": "pending-record-specific-review"
+          },
+          {
+            "criterionId": "non-claims",
+            "question": "Do the boundaries name the most likely unsupported conclusions a reader could draw?",
+            "status": "pending-record-specific-review"
+          },
+          {
+            "criterionId": "high-stakes-use",
+            "question": "Are prohibited inferences adequate for medical, legal, financial, safety, or deterministic claims?",
+            "status": "pending-record-specific-review"
+          }
+        ],
+        "rights-and-locator": [
+          {
+            "criterionId": "locator",
+            "question": "Can another reviewer locate the supporting passage, table, figure, dataset, or standard clause?",
+            "status": "pending-record-specific-review"
+          },
+          {
+            "criterionId": "rights-basis",
+            "question": "Is the rights basis compatible with the text, data, and quotation actually retained?",
+            "status": "pending-record-specific-review"
+          },
+          {
+            "criterionId": "identifier-and-version",
+            "question": "Do identifiers and versions resolve to the reviewed source rather than a mutable substitute?",
+            "status": "pending-record-specific-review"
+          }
+        ]
+      },
+      "decisionStatus": "pending",
+      "boundary": "This is an independent internal editorial alignment audit of a proposed revision. It is not the internal review decision and it is not a release: an audit that reaches alignment-clear produces a reviewer packet for a separate review pass, performed by a separate operation.",
+      "packetDigest": "sha256:c3b383ed4c0ba8be1fb909989f0fba17ea9cb651823f14655cb26feb5c6b7b3d"
+    },
+    {
+      "schemaVersion": "maha-revision-alignment-audit/1.0",
+      "recordId": "urn:maha:record:fusion-plasma-systems-breeding-blanket-test-modules",
+      "auditedRevision": "sha256:3eb362d91f332ac755d9793f8e43d781e445bbe64827d24521af037288e54723",
+      "auditedCanonicalPath": "/knowledge/fusion-plasma-systems/concepts/fusion-plasma-systems-breeding-blanket-test-modules",
+      "auditDigest": "sha256:76176aa7e8a914c18fbea7f823f4684d1400160a27fd6e68433f8bf19b86de22",
+      "title": "Breeding blanket test modules",
+      "slug": "fusion-plasma-systems-breeding-blanket-test-modules",
+      "recordKind": "concept",
+      "claimStatement": "ITER documents a Test Blanket Module programme under which in-vessel modules will be used to test tritium breeding concepts, and states that further research is necessary to demonstrate the feasibility of large-scale tritium production and recycling.",
+      "sourceUrl": "https://www.iter.org/machine/supporting-systems/tritium-breeding",
+      "exactLocator": "ITER \"Tritium Breeding\" page: the \"ITER Test Blanket Module (TBM) Program\" section naming the test blanket modules and the four member concepts.",
+      "rightsBasis": "citation-with-paraphrase",
+      "checklist": {
+        "source-fidelity": [
+          {
+            "criterionId": "claim-source-alignment",
+            "question": "Does every claim stay within what its cited source establishes?",
+            "status": "pending-record-specific-review"
+          },
+          {
+            "criterionId": "source-context",
+            "question": "Are edition, date, interested-party status, and relevant context represented accurately?",
+            "status": "pending-record-specific-review"
+          },
+          {
+            "criterionId": "transcription-and-paraphrase",
+            "question": "Are quoted or paraphrased statements faithful to the frozen source location?",
+            "status": "pending-record-specific-review"
+          }
+        ],
+        "domain-fidelity": [
+          {
+            "criterionId": "terminology",
+            "question": "Are technical terms used consistently with the named domain and source corpus?",
+            "status": "pending-record-specific-review"
+          },
+          {
+            "criterionId": "mechanism-and-method",
+            "question": "Does the formalized mechanism or method preserve material conditions and exceptions?",
+            "status": "pending-record-specific-review"
+          },
+          {
+            "criterionId": "scope-transfer",
+            "question": "Does the record avoid transferring a result across incompatible systems, scales, or traditions?",
+            "status": "pending-record-specific-review"
+          }
+        ],
+        "boundary-adequacy": [
+          {
+            "criterionId": "uncertainty-and-replication",
+            "question": "Are uncertainty, evidence maturity, and replication limits stated without inflation?",
+            "status": "pending-record-specific-review"
+          },
+          {
+            "criterionId": "non-claims",
+            "question": "Do the boundaries name the most likely unsupported conclusions a reader could draw?",
+            "status": "pending-record-specific-review"
+          },
+          {
+            "criterionId": "high-stakes-use",
+            "question": "Are prohibited inferences adequate for medical, legal, financial, safety, or deterministic claims?",
+            "status": "pending-record-specific-review"
+          }
+        ],
+        "rights-and-locator": [
+          {
+            "criterionId": "locator",
+            "question": "Can another reviewer locate the supporting passage, table, figure, dataset, or standard clause?",
+            "status": "pending-record-specific-review"
+          },
+          {
+            "criterionId": "rights-basis",
+            "question": "Is the rights basis compatible with the text, data, and quotation actually retained?",
+            "status": "pending-record-specific-review"
+          },
+          {
+            "criterionId": "identifier-and-version",
+            "question": "Do identifiers and versions resolve to the reviewed source rather than a mutable substitute?",
+            "status": "pending-record-specific-review"
+          }
+        ]
+      },
+      "decisionStatus": "pending",
+      "boundary": "This is an independent internal editorial alignment audit of a proposed revision. It is not the internal review decision and it is not a release: an audit that reaches alignment-clear produces a reviewer packet for a separate review pass, performed by a separate operation.",
+      "packetDigest": "sha256:a530c1c29c610e20c98913846b0098e11167a704d17c1acd6c04b45e069a32d2"
+    }
+  ],
+  "digest": "sha256:ec8e949d630838dcb6e12948694d9a21439f4deca5185d8c083c23ebd6c3d30b"
+}

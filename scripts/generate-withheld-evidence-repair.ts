@@ -13,6 +13,11 @@ import {
   WITHHELD_REPAIR_BOUNDARY,
   WITHHELD_REPAIR_PACKETS,
 } from '../lib/substantial-withheld-evidence-repair.ts'
+import {
+  REVISION_ALIGNMENT_AUDITS,
+  REVISION_AUDIT_BOUNDARY,
+  buildRereviewPackets,
+} from '../lib/substantial-revision-alignment-audit.ts'
 
 const artifact = {
   schemaVersion: WITHHELD_EVIDENCE_REPAIR_VERSION,
@@ -77,4 +82,45 @@ for (const packet of WITHHELD_REPAIR_PACKETS) {
 }
 writeFileSync('docs/substantial-pages/withheld-evidence-repair-batch-2.md', lines.join('\n'))
 
-console.log(JSON.stringify({ counts: artifact.counts, digest: artifact.digest }, null, 1))
+const rereviewPackets = await buildRereviewPackets()
+const auditArtifact = {
+  schemaVersion: REVISION_ALIGNMENT_AUDITS[0]!.schemaVersion,
+  cohort: 'substantial-publication-batch-2-withheld-revision-audit',
+  boundary: REVISION_AUDIT_BOUNDARY,
+  counts: {
+    revisionsAudited: REVISION_ALIGNMENT_AUDITS.length,
+    byOutcome: REVISION_ALIGNMENT_AUDITS.reduce<Record<string, number>>((totals, audit) => {
+      totals[audit.outcome] = (totals[audit.outcome] ?? 0) + 1
+      return totals
+    }, {}),
+    rereviewPacketsGenerated: rereviewPackets.length,
+    reviewDecisionsRecorded: 0,
+  },
+  audits: REVISION_ALIGNMENT_AUDITS,
+  rereviewPackets,
+  digest: `sha256:${createHash('sha256').update(JSON.stringify([REVISION_ALIGNMENT_AUDITS, rereviewPackets])).digest('hex')}`,
+}
+writeFileSync('content/substantial-pages/revision-alignment-audit-batch-2.json', `${JSON.stringify(auditArtifact, null, 2)}\n`)
+
+const auditLines: string[] = []
+auditLines.push('# Batch 2 withheld records — proposed-revision alignment audit', '')
+auditLines.push(REVISION_AUDIT_BOUNDARY, '')
+auditLines.push(`Digest: \`${auditArtifact.digest}\``, '')
+auditLines.push('| Record | Outcome | Superseded | Proposed | Audited |', '|---|---|---|---|---|')
+for (const audit of REVISION_ALIGNMENT_AUDITS) {
+  auditLines.push(`| ${audit.recordId.replace('urn:maha:record:', '')} | \`${audit.outcome}\` | \`${audit.supersededRevision.slice(7, 23)}\` | \`${audit.proposedRevision.slice(7, 23)}\` | \`${audit.auditedRevision.slice(7, 23)}\` |`)
+}
+auditLines.push('')
+for (const audit of REVISION_ALIGNMENT_AUDITS) {
+  auditLines.push(`## \`${audit.recordId.replace('urn:maha:record:', '')}\``, '')
+  auditLines.push(`Audited canonical path: \`${audit.auditedCanonicalPath}\``, '')
+  if (Object.keys(audit.correction).length > 0) auditLines.push(`Correction applied by this audit: \`${JSON.stringify(audit.correction)}\``, '')
+  auditLines.push('| Dimension | Verdict | Finding |', '|---|---|---|')
+  for (const dimension of audit.dimensions) auditLines.push(`| \`${dimension.dimension}\` | ${dimension.verdict} | ${dimension.finding} |`)
+  auditLines.push('', `**Outcome: \`${audit.outcome}\`**`, '')
+}
+auditLines.push('## Reviewer packets', '')
+auditLines.push(`${rereviewPackets.length} packet(s) generated, **0 review decisions recorded**. The internal rereview is a separate operation and was deliberately not performed here.`, '')
+writeFileSync('docs/substantial-pages/revision-alignment-audit-batch-2.md', auditLines.join('\n'))
+
+console.log(JSON.stringify({ counts: artifact.counts, digest: artifact.digest, audit: auditArtifact.counts, auditDigest: auditArtifact.digest }, null, 1))
