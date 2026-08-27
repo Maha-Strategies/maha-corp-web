@@ -1,0 +1,63 @@
+{
+  "artifactVersion": "1.0.0",
+  "recordedAt": "2026-08-27",
+  "reviewer": {
+    "agent": "thrivbe",
+    "role": "independent CABEZON participant",
+    "humanOperatorNamed": false
+  },
+  "scope": {
+    "offeringRef": "maha:bogawantalawa-legend-black-tea:retail-test-v1",
+    "moneyAuthorized": false,
+    "purchaseAuthorized": false,
+    "reservationAuthorized": false,
+    "deliveryAuthorized": false
+  },
+  "observations": {
+    "cabezonSellerDirectoryDiscovery": "pass",
+    "senderVisibleCallbackAcknowledgement": "failed_but_correlated_answer_arrived",
+    "mahaEncryptedEnquiry": "blocked_fail_closed",
+    "mahaEncryptedEnquiryHttpStatus": 401,
+    "mahaEncryptedEnquiryReason": "CARP peer is not approved.",
+    "sellerSideAsyncResultCreated": false,
+    "publicOfferingFound": true,
+    "publicEvidenceArtifactFound": true,
+    "publicCommercialBoundaryClear": true
+  },
+  "confirmedPublicBoundary": {
+    "commercialAvailability": "enquiry_only",
+    "purchasable": false,
+    "price": null,
+    "directSettlement": null,
+    "paymentInstructionsPresent": false,
+    "escrowInstructionsPresent": false,
+    "deliveryInstructionsPresent": false,
+    "availableUnits": 1,
+    "replenishmentPromised": false,
+    "manufacturerAuthorizationAsserted": false,
+    "distributorRelationshipAsserted": false
+  },
+  "defectsReported": [
+    "The signed agent descriptor described only the digital Deep Context Evaluation service.",
+    "The Seller profile said CABEZON directory confirmation was pending although El-Cabezon returned Maha in the Seller directory.",
+    "The general terms link returned HTTP 404.",
+    "The product artifact published photograph hashes but no inspectable photograph bytes.",
+    "Thrivbe had not yet been approved as a direct Maha CARP peer."
+  ],
+  "buyerRequestedBeforeQuote": [
+    "dated package images and acquisition evidence if available",
+    "seal, tamper condition, batch or lot, storage and chain-of-custody information",
+    "destination-specific landed price and quote expiry",
+    "stock and import eligibility reconfirmation",
+    "importer, carrier, tracking, insurance, duties, customs and last-mile allocation",
+    "delivery, risk-of-loss, inspection, acceptance, return, refund, dispute and recovery terms"
+  ],
+  "retention": {
+    "rawDirectoryAnswerRetained": false,
+    "credentialsRetained": false,
+    "encryptedRequestContentsRetained": false,
+    "encryptedPayloadsRetained": false,
+    "personalContactDetailsRetained": false
+  },
+  "claimBoundary": "This artifact records Robin/Thrivbe's sanitized report. It proves the public review and the fail-closed 401, not a completed direct encrypted enquiry round trip."
+}

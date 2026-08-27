@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict'
+import { createHash } from 'node:crypto'
 import { readFile } from 'node:fs/promises'
 import test from 'node:test'
 
@@ -38,7 +39,9 @@ test('the Maha seller maps Deep Context to the adopted digital offering shape', 
   const offer = mahaCarpSellerProfile.offers[0]
   assert.equal(mahaCarpSellerProfile.roleContract, CABEZON_SELLER_ROLE_URL)
   assert.equal(mahaCarpSellerProfile.roleMirror, CARP_SELLER_ROLE_URL)
-  assert.equal(mahaCarpSellerProfile.membership.status, 'identity_published_pending_cabezon_directory_confirmation')
+  assert.equal(mahaCarpSellerProfile.membership.status, 'confirmed_cabezon_seller_directory')
+  assert.equal(mahaCarpSellerProfile.membership.confirmedAt, '2026-08-21')
+  assert.match(mahaCarpSellerProfile.membership.confirmationEvidence, /thrivbe-buyer-review-2026-08-27\.json$/)
   assert.equal(offer.offeringRef, 'maha:deep-context-evaluation:v1')
   assert.equal(offer.kind, 'digital')
   assert.equal(offer.price.amount, '0.01')
@@ -104,6 +107,8 @@ test('black tea enquiries expose one bounded retail unit without inventing manuf
   assert.equal(BOGAWANTALAWA_LEGEND_TEA_TEST_OFFER.seller.manufacturerAuthorizationAsserted, false)
   assert.equal(BOGAWANTALAWA_LEGEND_TEA_TEST_OFFER.seller.distributorRelationshipAsserted, false)
   assert.match(BOGAWANTALAWA_LEGEND_TEA_TEST_OFFER.productSpecification.visibleCondition, /compression\/creasing/)
+  assert.match(BOGAWANTALAWA_LEGEND_TEA_TEST_OFFER.termsUrl, /\/terms\/physical-goods$/)
+  assert.match(BOGAWANTALAWA_LEGEND_TEA_TEST_OFFER.termsManifest, /\/terms\/carp-physical-goods-v1\.json$/)
 })
 
 test('the one-box tea test fails closed at purchase pending a destination-specific quote', () => {
@@ -156,9 +161,42 @@ test('the one-box tea evidence is metadata-only and served from the declared pub
   assert.equal(artifact.commercialBoundary.purchasable, false)
   assert.equal(artifact.commercialBoundary.paymentInstructionsPresent, false)
   assert.equal(artifact.claimBoundary.healthClaimsAdopted, false)
-  assert.equal(artifact.evidence.imageBytesPublished, false)
+  assert.equal(artifact.evidence.imageBytesPublished, true)
   assert.equal(artifact.evidence.sha256.length, 4)
+  assert.equal(artifact.evidence.inspectionCopies.length, 4)
+  for (const [index, copy] of artifact.evidence.inspectionCopies.entries()) {
+    const filename = new URL(copy.url).pathname.split('/').at(-1)
+    assert.ok(filename)
+    const bytes = await readFile(new URL(`../public/artifacts/carp/bogawantalawa-legend-tea-retail-test-v1/${filename}`, import.meta.url))
+    assert.equal(createHash('sha256').update(bytes).digest('hex'), copy.sha256)
+    assert.equal(copy.sha256, artifact.evidence.sha256[index])
+  }
   assert.equal(JSON.stringify(artifact).includes('/Users/'), false)
+})
+
+test('physical-goods terms are served at the declared human and machine paths', async () => {
+  const terms = JSON.parse(await readFile(new URL('../public/terms/carp-physical-goods-v1.json', import.meta.url), 'utf8'))
+  assert.equal(terms.purchasable, false)
+  assert.equal(terms.currentAvailability, 'enquiry_only')
+  assert.equal(terms.boundary.paymentInstructionsAvailable, false)
+  assert.match(terms.failClosed, /suppresses payment, escrow and delivery instructions/)
+  assert.match(await readFile(new URL('../app/terms/page.tsx', import.meta.url), 'utf8'), /\/terms\/physical-goods/)
+  assert.match(await readFile(new URL('../app/terms/physical-goods/page.tsx', import.meta.url), 'utf8'), /Enquiry first/)
+})
+
+test('the sanitized Thrivbe report preserves the blocked round trip without personal or encrypted content', async () => {
+  const canonical = await readFile(new URL('../artifacts/carp/thrivbe-buyer-review-2026-08-27.json', import.meta.url))
+  const published = await readFile(new URL('../public/artifacts/carp/thrivbe-buyer-review-2026-08-27.json', import.meta.url))
+  assert.deepEqual(published, canonical)
+  const artifact = JSON.parse(canonical.toString('utf8'))
+  assert.equal(artifact.observations.cabezonSellerDirectoryDiscovery, 'pass')
+  assert.equal(artifact.observations.mahaEncryptedEnquiryHttpStatus, 401)
+  assert.equal(artifact.observations.sellerSideAsyncResultCreated, false)
+  assert.equal(artifact.scope.moneyAuthorized, false)
+  assert.equal(artifact.retention.credentialsRetained, false)
+  assert.equal(artifact.retention.encryptedPayloadsRetained, false)
+  assert.match(artifact.claimBoundary, /not a completed direct encrypted enquiry/)
+  assert.doesNotMatch(canonical.toString('utf8'), /@|\+47|938 12345|msghex|sighex/)
 })
 
 test('the Samley RFQ fails closed at purchase until an order-specific quote exists', () => {
@@ -285,6 +323,9 @@ test('Maha DID and SAD are derived from and signed by the same secp256k1 identit
   assert.equal(sad.publicKey.value, publicKey)
   assert.equal(verifySignedAgentDescriptor(sad), true)
   assert.equal(sad.proof.canonicalization, 'RFC8785')
+  assert.equal(sad.sequence, 2)
+  assert.match(sad.descrip, /physical-goods enquiries/)
+  assert.match(sad.descrip, /enquiry-only/)
 })
 
 test('the worker polls one authenticated request and returns a JSON-RPC result', async () => {

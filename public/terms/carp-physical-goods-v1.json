@@ -1,0 +1,52 @@
+{
+  "schemaVersion": "1.0.0",
+  "termsVersion": "1.0.0",
+  "effectiveDate": "2026-08-27",
+  "publisher": "Maha Strategies LLC",
+  "scope": "bounded_physical_goods_test",
+  "currentAvailability": "enquiry_only",
+  "purchasable": false,
+  "boundary": {
+    "enquiryCreatesOrder": false,
+    "enquiryReservesInventory": false,
+    "paymentInstructionsAvailable": false,
+    "escrowInstructionsAvailable": false,
+    "deliveryInstructionsAvailable": false
+  },
+  "activationRequires": [
+    "inventory and package condition reconfirmed",
+    "buyer, recipient, destination and importer-of-record identified",
+    "destination import, food-labelling and carrier eligibility checked",
+    "item price, packing, carrier, tracking, insurance, duties, taxes, clearance and last-mile allocation quoted",
+    "delivery window, risk of loss, inspection, acceptance and remedies agreed",
+    "final total, currency and quote expiry accepted by both parties"
+  ],
+  "evidenceRequired": [
+    "dated product and seal images",
+    "label, batch or lot details available to the seller",
+    "visible-condition record",
+    "acquisition evidence if available",
+    "known storage and chain-of-custody record",
+    "inventory reconfirmation",
+    "digests binding inspectable evidence to the quoted unit"
+  ],
+  "recoveryTermsRequired": [
+    "loss",
+    "damage",
+    "delay",
+    "customs rejection",
+    "buyer rejection",
+    "return feasibility",
+    "refund or replacement authority",
+    "dispute and arbitration route",
+    "unavailable buyer, seller, carrier, escrower or administrator"
+  ],
+  "failClosed": "Any absent, uncertain, expired or contradicted requirement keeps the offer enquiry-only and suppresses payment, escrow and delivery instructions.",
+  "limitations": [
+    "Manufacturer statements are label evidence unless independently verified.",
+    "No destination is assumed eligible for import or delivery.",
+    "No recovery outcome is implied by discovery metadata.",
+    "These operational terms are not legal, customs, tax, food-safety or import advice."
+  ],
+  "humanReadable": "https://www.mahastrategies.com/terms/physical-goods"
+}

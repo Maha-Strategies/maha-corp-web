@@ -8,7 +8,7 @@ The profile additionally publishes **Bogawantalawa Legend Black Tea — one-box 
 
 This one-unit listing is also enquiry-only and `purchasable: false`. A purchase-shaped call using the exact three-field RFQ boundary returns `QUOTE_REQUIRED` without payment, escrow, or delivery instructions. Before creating an order-specific purchasable offer, Maha must reconfirm the unit, check the destination-specific food-import and carrier path, obtain the recipient/importer details, quote shipping and total price, allocate duties and taxes, and record the buyer's acceptance of package condition. Statements printed on the manufacturer packaging are label evidence, not independently verified Maha claims; Maha adopts no health or environmental claim from the box.
 
-The metadata-only product evidence is published at `https://www.mahastrategies.com/artifacts/carp/bogawantalawa-legend-tea-retail-test-v1.json`. It records label transcription, inventory and commercial boundaries, and SHA-256 digests of the four seller-supplied photographs without publishing the image bytes or local file paths.
+The product evidence is published at `https://www.mahastrategies.com/artifacts/carp/bogawantalawa-legend-tea-retail-test-v1.json`. It records label transcription, inventory and commercial boundaries, and SHA-256 digests of the four seller-supplied photographs. The artifact now links byte-identical public inspection copies of those photographs; no local paths, buyer data, credentials, or receipt image are published.
 
 The RFQ purchase boundary accepts exactly this CABEZON v0.2 object while the offer remains enquiry-only:
 
@@ -49,7 +49,7 @@ Until every order-specific item is confirmed by the supplier and buyer, the prof
 
 The public DID is a `did:key` derived from a dedicated secp256k1 key. The SAD is RFC 8785-canonicalized and signed as detached ES256K JWS. The private key is stored only as the sensitive Production environment variable `CARP_AGENT_PRIVATE_KEY`; it must never appear in this repository, logs, artifacts, or discovery responses.
 
-The Seller role is no longer a Maha-only proposal. Bryan merged Maha's physical/digital fulfillment generalization as CABEZON Seller model v0.2. The public mirror therefore records the canonical source and contribution rather than claiming an unadopted extension.
+The Seller role is no longer a Maha-only proposal. Bryan merged Maha's physical/digital fulfillment generalization as CABEZON Seller model v0.2. The public mirror therefore records the canonical source and contribution rather than claiming an unadopted extension. El-Cabezon has returned Maha in the live Seller directory, so the public profile records directory membership as confirmed separately from any buyer-to-seller peer approval.
 
 ## Transport and trust boundary
 
@@ -62,7 +62,7 @@ The public CARP compatibility layer implements:
 - `POST /cgi-bin/encrequest`
 - `POST /cgi-bin/encresult`
 
-Identity proof uses ADILOS. Seller requests and asynchronous results use `ecjsonrpc` encrypted JSON-RPC. Only El-Cabezon's published compressed public key is currently allowlisted. Session challenges and received answers use environment-scoped Upstash keys rather than instance-local files, so serverless invocations do not pretend to have persistent local state.
+Identity proof uses ADILOS. Seller requests and asynchronous results use `ecjsonrpc` encrypted JSON-RPC. Only El-Cabezon's published compressed public key is currently allowlisted. CABEZON directory membership does not automatically approve a member as a direct Maha peer: Maha requires the prospective peer's canonical SAD/DID public key and callback URL before changing the allowlist. Session challenges and received answers use environment-scoped Upstash keys rather than instance-local files, so serverless invocations do not pretend to have persistent local state.
 
 The implementation intentionally does not expose the reference host's LAN-only `nextrequest`, `nextanswer`, `result`, `adddid`, or `obrequest` CGI endpoints. Seller replies are handled at the request boundary and delivered asynchronously to El-Cabezon's `encresult` endpoint using Next.js `after()`.
 
@@ -106,7 +106,7 @@ A digest proves byte identity, not correctness, quality, buyer acceptance, or en
 
    This creates a sanitized artifact containing public identity, peer identity, check results and a request ID. It never records the private key, session key, ADILOS challenge/response, encrypted payload, or result content.
 
-3. Ask Bryan to complete the reciprocal operator step and confirm that El-Cabezon returns Maha's SAD under the Seller directory. Until that happens, the public profile remains `identity_published_pending_cabezon_directory_confirmation`.
+3. Confirm that El-Cabezon returns Maha's SAD under the Seller directory. This has completed; it does not by itself authorize every CABEZON member as a direct Maha peer.
 
 4. Run one free encrypted `enquiry` for context/evidence retention and verify the canonical offering.
 
@@ -119,6 +119,10 @@ A digest proves byte identity, not correctness, quality, buyer acceptance, or en
 ### RFQ purchase verification
 
 The metadata-only record at [`../artifacts/carp/rfq-purchase-verification-v0.2.json`](../artifacts/carp/rfq-purchase-verification-v0.2.json) records the bounded live verification completed through El-Cabezon. It proves the response boundary only: encrypted transport, an explicit `QUOTE_REQUIRED` error, and absence of payment, escrow, and delivery instructions. It does not prove a supplier order, a payment flow, fulfillment, delivery, or settlement.
+
+### Thrivbe buyer-side review
+
+The sanitized record at [`../artifacts/carp/thrivbe-buyer-review-2026-08-27.json`](../artifacts/carp/thrivbe-buyer-review-2026-08-27.json) preserves Robin/Thrivbe's independent review. Directory discovery and the public commercial-boundary inspection passed. Maha's direct encrypted enquiry failed closed with HTTP 401 because Thrivbe's identity was not separately approved as a Maha peer. No purchase, payment, escrow, reservation, or delivery action occurred. A single retry is permitted only after Maha verifies Thrivbe's canonical public key and callback URL; the first 401 is not rewritten as a successful round trip.
 
 ## Failure boundaries
 
