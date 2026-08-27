@@ -15,10 +15,15 @@ export interface CalculationReceiptInput {
   runtime: 'wasm-i64-fixed-point'
   proofReferences?: readonly string[]
   witnessReceiptIds?: readonly string[]
+  compiler: Readonly<{ name: 'assemblyscript'; version: string; flags: readonly string[] }>
+  arithmetic: Readonly<{ integerModel: 'signed-i64'; rounding: 'nearest-ties-to-even'; overflow: 'abort' }>
+  conformanceSha256: string
 }
 
 export interface CalculationReceipt extends CalculationReceiptInput {
   schemaVersion: typeof KERNEL_RECEIPT_SCHEMA
+  inputSha256: string
+  outputSha256: string
   receiptSha256: string
 }
 
@@ -39,12 +44,20 @@ async function sha256(value: string): Promise<string> {
 
 export async function createCalculationReceipt(input: CalculationReceiptInput): Promise<CalculationReceipt> {
   if (!/^sha256:[a-f0-9]{64}$/.test(input.kernelSha256)) throw new Error('kernelSha256 must be a SHA-256 digest.')
+  for (const [name, digest] of [['conformanceSha256', input.conformanceSha256]] as const) {
+    if (!/^sha256:[a-f0-9]{64}$/.test(digest)) throw new Error(`${name} must be a SHA-256 digest.`)
+  }
   if (!input.module || !input.operation || !input.precisionPolicy || !input.conformanceVersion) throw new Error('Receipt identity and precision fields are required.')
-  const snapshot = { schemaVersion: KERNEL_RECEIPT_SCHEMA, ...input }
+  if (input.arithmetic.integerModel !== 'signed-i64' || input.arithmetic.rounding !== 'nearest-ties-to-even' || input.arithmetic.overflow !== 'abort') throw new Error('Receipt arithmetic policy does not match the kernel ABI.')
+  const inputSha256 = await sha256(canonicalJson({ constants: input.constants, inputs: input.inputs, units: input.units }))
+  const outputSha256 = await sha256(canonicalJson({ output: input.output, uncertainty: input.uncertainty }))
+  const snapshot = { schemaVersion: KERNEL_RECEIPT_SCHEMA, ...input, inputSha256, outputSha256 }
   return { ...snapshot, receiptSha256: await sha256(canonicalJson(snapshot)) }
 }
 
 export async function verifyCalculationReceipt(receipt: CalculationReceipt): Promise<boolean> {
   const { receiptSha256, ...snapshot } = receipt
-  return receipt.schemaVersion === KERNEL_RECEIPT_SCHEMA && receiptSha256 === await sha256(canonicalJson(snapshot))
+  const expectedInput = await sha256(canonicalJson({ constants: receipt.constants, inputs: receipt.inputs, units: receipt.units }))
+  const expectedOutput = await sha256(canonicalJson({ output: receipt.output, uncertainty: receipt.uncertainty }))
+  return receipt.schemaVersion === KERNEL_RECEIPT_SCHEMA && receipt.inputSha256 === expectedInput && receipt.outputSha256 === expectedOutput && receiptSha256 === await sha256(canonicalJson(snapshot))
 }
