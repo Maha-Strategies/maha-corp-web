@@ -6,8 +6,8 @@ import secp256k1 from 'secp256k1'
 export const MAHA_CARP_URL = 'https://www.mahastrategies.com'
 export const MAHA_CARP_DID_URL = `${MAHA_CARP_URL}/.well-known/carp/did.json`
 export const MAHA_CARP_SAD_URL = `${MAHA_CARP_URL}/.well-known/carp/sad.json`
-export const MAHA_CARP_IDENTITY_ISSUED_AT = '2026-08-13T00:00:00.000Z'
-export const MAHA_CARP_IDENTITY_EXPIRES_AT = '2027-08-13T00:00:00.000Z'
+export const MAHA_CARP_IDENTITY_ISSUED_AT = '2026-08-27T00:00:00.000Z'
+export const MAHA_CARP_IDENTITY_EXPIRES_AT = '2027-08-27T00:00:00.000Z'
 
 const BASE58_ALPHABET = '123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz'
 
@@ -81,13 +81,13 @@ export function signedAgentDescriptor(options: SadOptions) {
     version: '0.1',
     id: didDocument.id,
     handle: 'maha-strategies',
-    sequence: options.sequence ?? 1,
+    sequence: options.sequence ?? 2,
     issuedAt: options.issuedAt,
     expiresAt: options.expiresAt,
     carpUrl: MAHA_CARP_URL,
     publicKey: { type: 'secp256k1', encoding: 'compressed-hex', value: publicKey },
     role: 'Seller',
-    descrip: 'Maha Strategies Seller for Deep Context Evaluation: source-linked, exact-span retention measurement delivered as a machine-readable digital result.',
+    descrip: 'Maha Strategies CABEZON Seller for governed digital services and bounded physical-goods enquiries. Deep Context Evaluation is the only directly payable offering; physical-goods listings remain enquiry-only and explicitly non-purchasable until an order-specific quote is accepted.',
     protocols: [{ name: 'CARP', version: '0.1', minVersion: '0.1', features: ['challenge-response', 'encrypted-jsonrpc', 'async'] }],
     cryptography: { curve: 'secp256k1', signatureAlgorithm: 'ECDSA' },
     social: [

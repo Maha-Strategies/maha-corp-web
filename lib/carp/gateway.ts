@@ -15,6 +15,16 @@ export const EL_CABEZON = Object.freeze({
   carpUrl: 'http://70.66.243.75:8000',
 })
 
+export const THRIVBE = Object.freeze({
+  did: 'did:key:zQ3shs5FSFqMhhCw7MazfRtyWZwBXGMVLs2jLxu8xiihjEbnJ',
+  publicKey: '03b8bd2886d40b5a4b6d12d396ff60c8df6b3b1deecc777411335d60afc5283673',
+  carpUrl: 'http://157.180.117.231:8888',
+})
+
+export type ApprovedCarpPeer = typeof EL_CABEZON | typeof THRIVBE
+
+const APPROVED_CARP_PEERS: readonly ApprovedCarpPeer[] = Object.freeze([EL_CABEZON, THRIVBE])
+
 type BlackMessage = ecjsonrpc.BlackMessage
 type ChallengeRecord = { challenge: string; createdAt: string }
 type StoredAnswer = { answer: unknown; sender: string; receivedAt: string }
@@ -50,9 +60,9 @@ function normalizePublicKey(value: string) {
   return Buffer.from(secp256k1.publicKeyConvert(Buffer.from(value, 'hex'), true)).toString('hex')
 }
 
-function knownPeer(publicKey: string) {
+export function approvedCarpPeer(publicKey: string): ApprovedCarpPeer | null {
   const normalized = normalizePublicKey(publicKey)
-  return normalized === EL_CABEZON.publicKey ? EL_CABEZON : null
+  return APPROVED_CARP_PEERS.find((peer) => peer.publicKey === normalized) ?? null
 }
 
 function blackMessage(value: unknown): BlackMessage {
@@ -93,7 +103,7 @@ export async function acceptChallengeResponse(input: { response: string; challen
   const publicKeyBytes = adilos.validateResponse(input.response, input.challenge)
   if (!publicKeyBytes) throw new Error('ADILOS response is invalid.')
   const publicKey = normalizePublicKey(adilos.toHexString(publicKeyBytes))
-  const peer = knownPeer(publicKey)
+  const peer = approvedCarpPeer(publicKey)
   if (!peer) throw new Error('The proven key is not an approved CARP peer.')
   await Promise.all([
     store.set(peerKey(publicKey), JSON.stringify({ ...peer, authenticatedAt: new Date().toISOString() })),
@@ -104,14 +114,14 @@ export async function acceptChallengeResponse(input: { response: string; challen
 
 export async function prepareSellerReply(input: unknown) {
   const encrypted = blackMessage(input)
-  const peer = knownPeer(encrypted.spkhex)
+  const peer = approvedCarpPeer(encrypted.spkhex)
   if (!peer) throw new Error('CARP peer is not approved.')
   const request = sellerRequest(ecjsonrpc.blackToRed(privateKey(), encrypted))
   const reply = handleCarpSellerRequest(request)
   return { peer, request, reply }
 }
 
-export async function deliverSellerReply(input: { peer: typeof EL_CABEZON; reply: CarpSellerReply }) {
+export async function deliverSellerReply(input: { peer: ApprovedCarpPeer; reply: CarpSellerReply }) {
   const encrypted = ecjsonrpc.redToBlack(privateKey(), input.peer.publicKey, input.reply)
   const response = await fetch(`${input.peer.carpUrl}/cgi-bin/encresult`, {
     method: 'POST',
@@ -125,7 +135,7 @@ export async function deliverSellerReply(input: { peer: typeof EL_CABEZON; reply
 
 export async function storeEncryptedAnswer(input: unknown) {
   const encrypted = blackMessage(input)
-  const peer = knownPeer(encrypted.spkhex)
+  const peer = approvedCarpPeer(encrypted.spkhex)
   if (!peer) throw new Error('CARP peer is not approved.')
   const answer = ecjsonrpc.blackToRed(privateKey(), encrypted)
   if (!answer || typeof answer !== 'object' || !('id' in answer)) throw new Error('CARP result is not JSON-RPC 2.0.')

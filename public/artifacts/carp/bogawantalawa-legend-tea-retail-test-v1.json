@@ -1,5 +1,5 @@
 {
-  "artifactVersion": "1.0.0",
+  "artifactVersion": "1.1.0",
   "recordedAt": "2026-08-24",
   "subject": {
     "offeringRef": "maha:bogawantalawa-legend-black-tea:retail-test-v1",
@@ -30,7 +30,30 @@
   },
   "evidence": {
     "kind": "seller-supplied-product-photographs",
-    "imageBytesPublished": false,
+    "imageBytesPublished": true,
+    "publicationBoundary": "The inspection copies are byte-identical to the four hashed seller-supplied photographs. They show product packaging only; no buyer, credential, receipt, local path, or personal contact record was added or redacted.",
+    "inspectionCopies": [
+      {
+        "label": "back label, barcode, manufacturer and date panel",
+        "url": "https://www.mahastrategies.com/artifacts/carp/bogawantalawa-legend-tea-retail-test-v1/photo-01-back-label.jpeg",
+        "sha256": "372551158aaec48aedf9df2fd54fa487391328282ff25769c34179ac34c6dec2"
+      },
+      {
+        "label": "ingredients and grade panel",
+        "url": "https://www.mahastrategies.com/artifacts/carp/bogawantalawa-legend-tea-retail-test-v1/photo-02-ingredients.jpeg",
+        "sha256": "4c35d9cde71b4de5c889d05cc8b0892628f7a27f0980967a7bf19ca88f3b0df2"
+      },
+      {
+        "label": "package description and visible condition",
+        "url": "https://www.mahastrategies.com/artifacts/carp/bogawantalawa-legend-tea-retail-test-v1/photo-03-package-copy.jpeg",
+        "sha256": "4109bb16b5b148928cacfdee7a239c315dee136aa53b98ff5e2d99e348d9554d"
+      },
+      {
+        "label": "front panel and seal condition",
+        "url": "https://www.mahastrategies.com/artifacts/carp/bogawantalawa-legend-tea-retail-test-v1/photo-04-front.jpeg",
+        "sha256": "b4f5c3b70b41473b37c176a6495b47b1ca89f08079fa6d460a5c0ae2f2d94d6f"
+      }
+    ],
     "sha256": [
       "372551158aaec48aedf9df2fd54fa487391328282ff25769c34179ac34c6dec2",
       "4c35d9cde71b4de5c889d05cc8b0892628f7a27f0980967a7bf19ca88f3b0df2",

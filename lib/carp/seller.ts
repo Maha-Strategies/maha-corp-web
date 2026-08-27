@@ -85,7 +85,8 @@ export const SAMLEY_CINNAMON_TEA_RFQ_OFFER = Object.freeze({
     'The listing cannot be purchased and returns no payment or escrow instructions until Samley and the buyer confirm an order-specific quote and responsibilities.',
   ],
   retention: { orderPersisted: false, personalDataAccepted: false, evidenceReturnedToCaller: true },
-  termsUrl: `${SITE_URL}/contact?service=general`,
+  termsUrl: `${SITE_URL}/terms/physical-goods`,
+  termsManifest: `${SITE_URL}/terms/carp-physical-goods-v1.json`,
 })
 
 export const BOGAWANTALAWA_LEGEND_TEA_TEST_OFFER = Object.freeze({
@@ -132,7 +133,8 @@ export const BOGAWANTALAWA_LEGEND_TEA_TEST_OFFER = Object.freeze({
   evidence: {
     artifact: `${SITE_URL}/artifacts/carp/bogawantalawa-legend-tea-retail-test-v1.json`,
     source: 'four seller-supplied photographs of the physical retail box',
-    imageBytesPublished: false,
+    imageBytesPublished: true,
+    inspectionIndex: `${SITE_URL}/artifacts/carp/bogawantalawa-legend-tea-retail-test-v1.json`,
   },
   quoteRequirements: [
     'buyer legal name and contact',
@@ -158,7 +160,8 @@ export const BOGAWANTALAWA_LEGEND_TEA_TEST_OFFER = Object.freeze({
     'Inventory is limited to one unit and no replenishment or long-term product availability is promised.',
   ],
   retention: { orderPersisted: false, personalDataAccepted: false, evidenceReturnedToCaller: true },
-  termsUrl: `${SITE_URL}/contact?service=general`,
+  termsUrl: `${SITE_URL}/terms/physical-goods`,
+  termsManifest: `${SITE_URL}/terms/carp-physical-goods-v1.json`,
 })
 
 export type CarpSellerRequest = {
@@ -182,7 +185,7 @@ type NormalizedPurchase = {
 }
 
 export const mahaCarpSellerProfile = Object.freeze({
-  schemaVersion: '0.1.1',
+  schemaVersion: '0.1.2',
   sellerId: 'maha-strategies',
   name: 'Maha Strategies LLC',
   description: 'Governed infrastructure, machine-payable utilities, and bounded agent-commerce pilots.',
@@ -191,7 +194,17 @@ export const mahaCarpSellerProfile = Object.freeze({
   roleMirror: CARP_SELLER_ROLE_URL,
   membership: {
     network: 'CABEZON',
-    status: 'identity_published_pending_cabezon_directory_confirmation',
+    status: 'confirmed_cabezon_seller_directory',
+    confirmedAt: '2026-08-21',
+    confirmationEvidence: `${SITE_URL}/artifacts/carp/thrivbe-buyer-review-2026-08-27.json`,
+    directPeerBindings: [{
+      handle: 'thrivbe',
+      status: 'preapproved_pending_adilos',
+      did: 'did:key:zQ3shs5FSFqMhhCw7MazfRtyWZwBXGMVLs2jLxu8xiihjEbnJ',
+      sadUrl: 'http://157.180.117.231:8888/cgi-bin/thrivbe',
+      publicKey: '03b8bd2886d40b5a4b6d12d396ff60c8df6b3b1deecc777411335d60afc5283673',
+      carpUrl: 'http://157.180.117.231:8888',
+    }],
     did: identity?.did.id ?? null,
     didUrl: MAHA_CARP_DID_URL,
     sad: identity ? MAHA_CARP_SAD_URL : null,
