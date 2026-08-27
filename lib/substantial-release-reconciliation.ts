@@ -154,7 +154,7 @@ function proposedActionFor(state: ReleaseReconciliationState): string {
     case 'released-and-revision-matched': return 'No action. The active release matches the audited revision and the page renders its substantial material.'
     case 'released-but-revision-drifted': return 'Re-audit the current revision, then supersede the release only if the new revision passes every gate. Never edit the old contract to match.'
     case 'ready-for-initial-canonical-release': return 'Eligible for an authorised initial canonical release through the existing release workflow.'
-    case 'missing-release-decisions': return 'Obtain scoped expert review decisions for every required scope on this exact revision. No release is possible until they exist.'
+    case 'missing-release-decisions': return 'Complete scoped review decisions for every required scope on this exact revision. An internal-editorial decision may satisfy the publication tier when its method and publisher conflict are disclosed; external expert review remains optional and distinct.'
     case 'source-alignment-blocked': return 'Resolve the source-alignment blocker with audited evidence work. Do not release.'
     case 'audit-or-contract-stale': return 'Recompile the substantial contract against the current record revision and re-audit before considering release.'
     case 'release-ineligible': return 'Withhold. The record does not satisfy the substantial or release preconditions.'
@@ -258,7 +258,7 @@ export function reconciliationDigest(entries: readonly ReleaseReconciliationEntr
 }
 
 export const RELEASE_RECONCILIATION_BOUNDARY =
-  'Release readiness is never inferred from a compiled or eligible substantial page. A canonical release additionally requires scoped review decisions on the exact record revision and a separately authenticated human release authority. This module observes and reports; it never creates a decision, never mutates a release and never repairs an evidence mapping.'
+  'Release readiness is never inferred from a compiled or eligible substantial page. A canonical release additionally requires scoped review decisions on the exact record revision and a separately authenticated human release authority. Internal-editorial decisions create an explicitly labelled internal-review tier; external expert review is an optional upgrade. This module observes and reports; it never creates a decision, never mutates a release and never repairs an evidence mapping.'
 
 
 export interface CohortReleaseStrategy {

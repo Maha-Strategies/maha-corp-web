@@ -67,4 +67,4 @@ Digest: `sha256:16ee32f5df089f1f26521c2eeabd13c5cf0ad1d8e1862ec7181ca1aa5901fa60
 | surface-code-error-correction | quantum-systems | no | `missing-release-decisions` |
 | transmon-qubit | quantum-systems | yes | `ready-for-initial-canonical-release` |
 
-Release readiness is never inferred from a compiled or eligible substantial page. A canonical release additionally requires scoped review decisions on the exact record revision and a separately authenticated human release authority. This module observes and reports; it never creates a decision, never mutates a release and never repairs an evidence mapping.
+Release readiness is never inferred from a compiled or eligible substantial page. A canonical release additionally requires scoped review decisions on the exact record revision and a separately authenticated human release authority. Internal-editorial decisions create an explicitly labelled internal-review tier; external expert review is an optional upgrade. This module observes and reports; it never creates a decision, never mutates a release and never repairs an evidence mapping.

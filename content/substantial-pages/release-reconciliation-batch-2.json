@@ -1,7 +1,7 @@
 {
   "schemaVersion": "maha-substantial-release-reconciliation/1.0",
   "batch": "substantial-publication-batch-2",
-  "boundary": "Release readiness is never inferred from a compiled or eligible substantial page. A canonical release additionally requires scoped review decisions on the exact record revision and a separately authenticated human release authority. This module observes and reports; it never creates a decision, never mutates a release and never repairs an evidence mapping.",
+  "boundary": "Release readiness is never inferred from a compiled or eligible substantial page. A canonical release additionally requires scoped review decisions on the exact record revision and a separately authenticated human release authority. Internal-editorial decisions create an explicitly labelled internal-review tier; external expert review is an optional upgrade. This module observes and reports; it never creates a decision, never mutates a release and never repairs an evidence mapping.",
   "cohortStates": [
     "compiled",
     "eligible",
@@ -62,7 +62,7 @@
         "publication-gate:publication-date-missing",
         "publication-gate:review-state-not-canonical"
       ],
-      "proposedAction": "Obtain scoped expert review decisions for every required scope on this exact revision. No release is possible until they exist."
+      "proposedAction": "Complete scoped review decisions for every required scope on this exact revision. An internal-editorial decision may satisfy the publication tier when its method and publisher conflict are disclosed; external expert review remains optional and distinct."
     },
     {
       "recordId": "urn:maha:record:advanced-materials-graphene-monolayers",
@@ -83,7 +83,7 @@
         "publication-gate:publication-date-missing",
         "publication-gate:review-state-not-canonical"
       ],
-      "proposedAction": "Obtain scoped expert review decisions for every required scope on this exact revision. No release is possible until they exist."
+      "proposedAction": "Complete scoped review decisions for every required scope on this exact revision. An internal-editorial decision may satisfy the publication tier when its method and publisher conflict are disclosed; external expert review remains optional and distinct."
     },
     {
       "recordId": "urn:maha:record:advanced-materials-hexagonal-boron-nitride-dielectrics",
@@ -104,7 +104,7 @@
         "publication-gate:publication-date-missing",
         "publication-gate:review-state-not-canonical"
       ],
-      "proposedAction": "Obtain scoped expert review decisions for every required scope on this exact revision. No release is possible until they exist."
+      "proposedAction": "Complete scoped review decisions for every required scope on this exact revision. An internal-editorial decision may satisfy the publication tier when its method and publisher conflict are disclosed; external expert review remains optional and distinct."
     },
     {
       "recordId": "urn:maha:record:advanced-materials-magic-angle-superconductivity",
@@ -125,7 +125,7 @@
         "publication-gate:publication-date-missing",
         "publication-gate:review-state-not-canonical"
       ],
-      "proposedAction": "Obtain scoped expert review decisions for every required scope on this exact revision. No release is possible until they exist."
+      "proposedAction": "Complete scoped review decisions for every required scope on this exact revision. An internal-editorial decision may satisfy the publication tier when its method and publisher conflict are disclosed; external expert review remains optional and distinct."
     },
     {
       "recordId": "urn:maha:record:agentic-systems-mcp-context-window-position-effects",
@@ -146,7 +146,7 @@
         "publication-gate:publication-date-missing",
         "publication-gate:review-state-not-canonical"
       ],
-      "proposedAction": "Obtain scoped expert review decisions for every required scope on this exact revision. No release is possible until they exist."
+      "proposedAction": "Complete scoped review decisions for every required scope on this exact revision. An internal-editorial decision may satisfy the publication tier when its method and publisher conflict are disclosed; external expert review remains optional and distinct."
     },
     {
       "recordId": "urn:maha:record:agentic-systems-mcp-mcp-prompt-templates",
@@ -167,7 +167,7 @@
         "publication-gate:publication-date-missing",
         "publication-gate:review-state-not-canonical"
       ],
-      "proposedAction": "Obtain scoped expert review decisions for every required scope on this exact revision. No release is possible until they exist."
+      "proposedAction": "Complete scoped review decisions for every required scope on this exact revision. An internal-editorial decision may satisfy the publication tier when its method and publisher conflict are disclosed; external expert review remains optional and distinct."
     },
     {
       "recordId": "urn:maha:record:agentic-systems-mcp-mcp-resource-discovery",
@@ -188,7 +188,7 @@
         "publication-gate:publication-date-missing",
         "publication-gate:review-state-not-canonical"
       ],
-      "proposedAction": "Obtain scoped expert review decisions for every required scope on this exact revision. No release is possible until they exist."
+      "proposedAction": "Complete scoped review decisions for every required scope on this exact revision. An internal-editorial decision may satisfy the publication tier when its method and publisher conflict are disclosed; external expert review remains optional and distinct."
     },
     {
       "recordId": "urn:maha:record:agentic-systems-mcp-mcp-tool-result-contracts",
@@ -209,7 +209,7 @@
         "publication-gate:publication-date-missing",
         "publication-gate:review-state-not-canonical"
       ],
-      "proposedAction": "Obtain scoped expert review decisions for every required scope on this exact revision. No release is possible until they exist."
+      "proposedAction": "Complete scoped review decisions for every required scope on this exact revision. An internal-editorial decision may satisfy the publication tier when its method and publisher conflict are disclosed; external expert review remains optional and distinct."
     },
     {
       "recordId": "urn:maha:record:agentic-systems-mcp-tool-deny-by-default",
@@ -230,7 +230,7 @@
         "publication-gate:publication-date-missing",
         "publication-gate:review-state-not-canonical"
       ],
-      "proposedAction": "Obtain scoped expert review decisions for every required scope on this exact revision. No release is possible until they exist."
+      "proposedAction": "Complete scoped review decisions for every required scope on this exact revision. An internal-editorial decision may satisfy the publication tier when its method and publisher conflict are disclosed; external expert review remains optional and distinct."
     },
     {
       "recordId": "urn:maha:record:biomolecular-engineering-cell-free-transcription-translation",
@@ -251,7 +251,7 @@
         "publication-gate:publication-date-missing",
         "publication-gate:review-state-not-canonical"
       ],
-      "proposedAction": "Obtain scoped expert review decisions for every required scope on this exact revision. No release is possible until they exist."
+      "proposedAction": "Complete scoped review decisions for every required scope on this exact revision. An internal-editorial decision may satisfy the publication tier when its method and publisher conflict are disclosed; external expert review remains optional and distinct."
     },
     {
       "recordId": "urn:maha:record:biomolecular-engineering-experimental-fold-validation",
@@ -272,7 +272,7 @@
         "publication-gate:publication-date-missing",
         "publication-gate:review-state-not-canonical"
       ],
-      "proposedAction": "Obtain scoped expert review decisions for every required scope on this exact revision. No release is possible until they exist."
+      "proposedAction": "Complete scoped review decisions for every required scope on this exact revision. An internal-editorial decision may satisfy the publication tier when its method and publisher conflict are disclosed; external expert review remains optional and distinct."
     },
     {
       "recordId": "urn:maha:record:biomolecular-engineering-sequence-design-with-proteinmpnn",
@@ -293,7 +293,7 @@
         "publication-gate:publication-date-missing",
         "publication-gate:review-state-not-canonical"
       ],
-      "proposedAction": "Obtain scoped expert review decisions for every required scope on this exact revision. No release is possible until they exist."
+      "proposedAction": "Complete scoped review decisions for every required scope on this exact revision. An internal-editorial decision may satisfy the publication tier when its method and publisher conflict are disclosed; external expert review remains optional and distinct."
     },
     {
       "recordId": "urn:maha:record:circuit-quantum-electrodynamics",
@@ -314,7 +314,7 @@
         "publication-gate:publication-date-missing",
         "publication-gate:review-state-not-canonical"
       ],
-      "proposedAction": "Obtain scoped expert review decisions for every required scope on this exact revision. No release is possible until they exist."
+      "proposedAction": "Complete scoped review decisions for every required scope on this exact revision. An internal-editorial decision may satisfy the publication tier when its method and publisher conflict are disclosed; external expert review remains optional and distinct."
     },
     {
       "recordId": "urn:maha:record:critical-supply-chains-critical-mineral-import-reliance",
@@ -335,7 +335,7 @@
         "publication-gate:publication-date-missing",
         "publication-gate:review-state-not-canonical"
       ],
-      "proposedAction": "Obtain scoped expert review decisions for every required scope on this exact revision. No release is possible until they exist."
+      "proposedAction": "Complete scoped review decisions for every required scope on this exact revision. An internal-editorial decision may satisfy the publication tier when its method and publisher conflict are disclosed; external expert review remains optional and distinct."
     },
     {
       "recordId": "urn:maha:record:fusion-plasma-systems-breeding-blanket-test-modules",
@@ -356,7 +356,7 @@
         "publication-gate:publication-date-missing",
         "publication-gate:review-state-not-canonical"
       ],
-      "proposedAction": "Obtain scoped expert review decisions for every required scope on this exact revision. No release is possible until they exist."
+      "proposedAction": "Complete scoped review decisions for every required scope on this exact revision. An internal-editorial decision may satisfy the publication tier when its method and publisher conflict are disclosed; external expert review remains optional and distinct."
     },
     {
       "recordId": "urn:maha:record:fusion-plasma-systems-disruption-mitigation",
@@ -377,7 +377,7 @@
         "publication-gate:publication-date-missing",
         "publication-gate:review-state-not-canonical"
       ],
-      "proposedAction": "Obtain scoped expert review decisions for every required scope on this exact revision. No release is possible until they exist."
+      "proposedAction": "Complete scoped review decisions for every required scope on this exact revision. An internal-editorial decision may satisfy the publication tier when its method and publisher conflict are disclosed; external expert review remains optional and distinct."
     },
     {
       "recordId": "urn:maha:record:fusion-plasma-systems-divertor-heat-exhaust",
@@ -398,7 +398,7 @@
         "publication-gate:publication-date-missing",
         "publication-gate:review-state-not-canonical"
       ],
-      "proposedAction": "Obtain scoped expert review decisions for every required scope on this exact revision. No release is possible until they exist."
+      "proposedAction": "Complete scoped review decisions for every required scope on this exact revision. An internal-editorial decision may satisfy the publication tier when its method and publisher conflict are disclosed; external expert review remains optional and distinct."
     },
     {
       "recordId": "urn:maha:record:fusion-plasma-systems-plasma-diagnostics",
@@ -419,7 +419,7 @@
         "publication-gate:publication-date-missing",
         "publication-gate:review-state-not-canonical"
       ],
-      "proposedAction": "Obtain scoped expert review decisions for every required scope on this exact revision. No release is possible until they exist."
+      "proposedAction": "Complete scoped review decisions for every required scope on this exact revision. An internal-editorial decision may satisfy the publication tier when its method and publisher conflict are disclosed; external expert review remains optional and distinct."
     },
     {
       "recordId": "urn:maha:record:fusion-plasma-systems-tritium-fuel-cycle",
@@ -440,7 +440,7 @@
         "publication-gate:publication-date-missing",
         "publication-gate:review-state-not-canonical"
       ],
-      "proposedAction": "Obtain scoped expert review decisions for every required scope on this exact revision. No release is possible until they exist."
+      "proposedAction": "Complete scoped review decisions for every required scope on this exact revision. An internal-editorial decision may satisfy the publication tier when its method and publisher conflict are disclosed; external expert review remains optional and distinct."
     },
     {
       "recordId": "urn:maha:record:mechanistic-interpretability-attention-pattern-evidence",
@@ -461,7 +461,7 @@
         "publication-gate:publication-date-missing",
         "publication-gate:review-state-not-canonical"
       ],
-      "proposedAction": "Obtain scoped expert review decisions for every required scope on this exact revision. No release is possible until they exist."
+      "proposedAction": "Complete scoped review decisions for every required scope on this exact revision. An internal-editorial decision may satisfy the publication tier when its method and publisher conflict are disclosed; external expert review remains optional and distinct."
     },
     {
       "recordId": "urn:maha:record:mechanistic-interpretability-causal-scrubbing",
@@ -482,7 +482,7 @@
         "publication-gate:publication-date-missing",
         "publication-gate:review-state-not-canonical"
       ],
-      "proposedAction": "Obtain scoped expert review decisions for every required scope on this exact revision. No release is possible until they exist."
+      "proposedAction": "Complete scoped review decisions for every required scope on this exact revision. An internal-editorial decision may satisfy the publication tier when its method and publisher conflict are disclosed; external expert review remains optional and distinct."
     },
     {
       "recordId": "urn:maha:record:mechanistic-interpretability-in-context-learning-circuits",
@@ -503,7 +503,7 @@
         "publication-gate:publication-date-missing",
         "publication-gate:review-state-not-canonical"
       ],
-      "proposedAction": "Obtain scoped expert review decisions for every required scope on this exact revision. No release is possible until they exist."
+      "proposedAction": "Complete scoped review decisions for every required scope on this exact revision. An internal-editorial decision may satisfy the publication tier when its method and publisher conflict are disclosed; external expert review remains optional and distinct."
     },
     {
       "recordId": "urn:maha:record:mechanistic-interpretability-induction-head-circuits",
@@ -524,7 +524,7 @@
         "publication-gate:publication-date-missing",
         "publication-gate:review-state-not-canonical"
       ],
-      "proposedAction": "Obtain scoped expert review decisions for every required scope on this exact revision. No release is possible until they exist."
+      "proposedAction": "Complete scoped review decisions for every required scope on this exact revision. An internal-editorial decision may satisfy the publication tier when its method and publisher conflict are disclosed; external expert review remains optional and distinct."
     },
     {
       "recordId": "urn:maha:record:mechanistic-interpretability-sae-encoder-decoder",
@@ -545,7 +545,7 @@
         "publication-gate:publication-date-missing",
         "publication-gate:review-state-not-canonical"
       ],
-      "proposedAction": "Obtain scoped expert review decisions for every required scope on this exact revision. No release is possible until they exist."
+      "proposedAction": "Complete scoped review decisions for every required scope on this exact revision. An internal-editorial decision may satisfy the publication tier when its method and publisher conflict are disclosed; external expert review remains optional and distinct."
     },
     {
       "recordId": "urn:maha:record:mechanistic-interpretability-sparse-autoencoder-dictionaries",
@@ -566,7 +566,7 @@
         "publication-gate:publication-date-missing",
         "publication-gate:review-state-not-canonical"
       ],
-      "proposedAction": "Obtain scoped expert review decisions for every required scope on this exact revision. No release is possible until they exist."
+      "proposedAction": "Complete scoped review decisions for every required scope on this exact revision. An internal-editorial decision may satisfy the publication tier when its method and publisher conflict are disclosed; external expert review remains optional and distinct."
     },
     {
       "recordId": "urn:maha:record:neurotechnology-bci-spike-sorting-boundaries",
@@ -587,7 +587,7 @@
         "publication-gate:publication-date-missing",
         "publication-gate:review-state-not-canonical"
       ],
-      "proposedAction": "Obtain scoped expert review decisions for every required scope on this exact revision. No release is possible until they exist."
+      "proposedAction": "Complete scoped review decisions for every required scope on this exact revision. An internal-editorial decision may satisfy the publication tier when its method and publisher conflict are disclosed; external expert review remains optional and distinct."
     },
     {
       "recordId": "urn:maha:record:quantum-error-mitigation",
@@ -608,7 +608,7 @@
         "publication-gate:publication-date-missing",
         "publication-gate:review-state-not-canonical"
       ],
-      "proposedAction": "Obtain scoped expert review decisions for every required scope on this exact revision. No release is possible until they exist."
+      "proposedAction": "Complete scoped review decisions for every required scope on this exact revision. An internal-editorial decision may satisfy the publication tier when its method and publisher conflict are disclosed; external expert review remains optional and distinct."
     },
     {
       "recordId": "urn:maha:record:stabilizer-syndrome-measurement",
@@ -629,7 +629,7 @@
         "publication-gate:publication-date-missing",
         "publication-gate:review-state-not-canonical"
       ],
-      "proposedAction": "Obtain scoped expert review decisions for every required scope on this exact revision. No release is possible until they exist."
+      "proposedAction": "Complete scoped review decisions for every required scope on this exact revision. An internal-editorial decision may satisfy the publication tier when its method and publisher conflict are disclosed; external expert review remains optional and distinct."
     },
     {
       "recordId": "urn:maha:record:surface-code-error-correction",
@@ -650,7 +650,7 @@
         "publication-gate:publication-date-missing",
         "publication-gate:review-state-not-canonical"
       ],
-      "proposedAction": "Obtain scoped expert review decisions for every required scope on this exact revision. No release is possible until they exist."
+      "proposedAction": "Complete scoped review decisions for every required scope on this exact revision. An internal-editorial decision may satisfy the publication tier when its method and publisher conflict are disclosed; external expert review remains optional and distinct."
     },
     {
       "recordId": "urn:maha:record:transmon-qubit",
