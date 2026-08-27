@@ -34,7 +34,7 @@ export type PayerSummary = {
   totalBaseUnits: string
   firstBlock: string
   lastBlock: string
-  /** Two or more settlements inside the scanned window. */
+  /** Two or more price-matching settlements inside the scanned window. */
   repeat: boolean
 }
 
@@ -83,6 +83,7 @@ export function buildSettlementWatch(input: {
 }): WatchReport {
   const operators = new Set(input.operatorWallets.map(lower))
   const reported = new Set((input.alreadyReportedPayers ?? []).map(lower))
+  const isExpectedPrice = (settlement: Settlement) => settlement.amountBaseUnits === input.expectedAmountBaseUnits
 
   const grouped = new Map<string, Settlement[]>()
   for (const settlement of input.settlements) {
@@ -90,7 +91,7 @@ export function buildSettlementWatch(input: {
     grouped.set(payer, [...(grouped.get(payer) ?? []), settlement])
   }
 
-  const summaries: PayerSummary[] = [...grouped.entries()].map(([payer, settlements]): PayerSummary => {
+  const summarize = (payer: string, settlements: Settlement[]): PayerSummary => {
     const blocks = settlements.map((settlement) => settlement.blockNumber)
     return {
       payer,
@@ -101,14 +102,22 @@ export function buildSettlementWatch(input: {
       lastBlock: (blocks.reduce((high, block) => (block > high ? block : high))).toString(),
       repeat: settlements.length >= 2,
     }
-  }).sort((left, right) => (left.payer < right.payer ? -1 : left.payer > right.payer ? 1 : 0))
+  }
+
+  const summaries: PayerSummary[] = []
+  for (const [payer, settlements] of grouped) {
+    const counted = operators.has(payer) ? settlements : settlements.filter(isExpectedPrice)
+    if (counted.length === 0) continue
+    summaries.push(summarize(payer, counted))
+  }
+  summaries.sort((left, right) => (left.payer < right.payer ? -1 : left.payer > right.payer ? 1 : 0))
 
   const externalPayers = summaries.filter((summary) => summary.classification === 'external')
   const canaryPayers = summaries.filter((summary) => summary.classification === 'canary')
 
   const notable: NotableEvent[] = []
   for (const summary of externalPayers) {
-    const settlements = grouped.get(summary.payer) ?? []
+    const settlements = (grouped.get(summary.payer) ?? []).filter(isExpectedPrice)
     if (!reported.has(summary.payer)) {
       notable.push({
         kind: 'first_external_settlement',
@@ -116,8 +125,8 @@ export function buildSettlementWatch(input: {
         transactionHash: settlements[0]?.transactionHash ?? '',
       })
     }
-    // The decision gate. A single payment is a trial; a second is the first
-    // evidence that the service was worth calling twice.
+    // The decision gate. A second price-matching payment is the first evidence
+    // that the service was worth calling twice; an unexpected amount is not.
     if (summary.repeat) {
       notable.push({ kind: 'repeat_external_settlement', payer: summary.payer, settlements: summary.settlements })
     }
@@ -153,9 +162,11 @@ export function buildSettlementWatch(input: {
     notable,
     interpretation:
       'Counts cover the scanned block range only. Operator-controlled wallets are excluded from every '
-      + 'external figure: canary traffic converts by construction and is not demand. "Repeat" means two or '
-      + 'more settlements inside this window, so a payer whose two payments straddle the window boundary '
-      + 'reads as two separate single payments -- widen the range before concluding a buyer did not return.',
+      + 'external figure: canary traffic converts by construction and is not demand. External figures '
+      + 'count only transfers at the published price; other amounts are reported separately and are not '
+      + 'sales. "Repeat" means two or more price-matching settlements inside this window, so a payer whose '
+      + 'two payments straddle the window boundary reads as two separate single payments -- widen the range '
+      + 'before concluding a buyer did not return.',
   }
 }
 

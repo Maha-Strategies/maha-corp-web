@@ -84,6 +84,51 @@ test('a transfer that is not the published price is not a sale', () => {
   assert.ok(report.notable.some((event) => event.kind === 'unexpected_amount'))
   const unexpected = report.notable.find((event) => event.kind === 'unexpected_amount')
   assert.equal(unexpected && 'amountBaseUnits' in unexpected ? unexpected.amountBaseUnits : null, '5000000')
+  assert.equal(report.totals.externalSettlements, 0)
+  assert.equal(report.totals.externalPayers, 0)
+  assert.equal(report.externalPayers.length, 0)
+})
+
+test('an external address with only unexpected amounts is not a buyer', () => {
+  const report = watch([settlement(EXTERNAL, 10, BigInt(5_000_000)), settlement(EXTERNAL, 20, BigInt(99))])
+  assert.equal(report.totals.externalSettlements, 0)
+  assert.equal(report.totals.externalPayers, 0)
+  assert.equal(report.totals.repeatExternalPayers, 0)
+  assert.equal(report.externalPayers.length, 0)
+  assert.equal(report.notable.filter((event) => event.kind === 'unexpected_amount').length, 2)
+  assert.equal(report.notable.some((event) => event.kind === 'first_external_settlement'), false)
+  assert.equal(report.notable.some((event) => event.kind === 'repeat_external_settlement'), false)
+})
+
+test('one expected settlement plus one unexpected from the same address is not a repeat buyer', () => {
+  const report = watch([
+    settlement(EXTERNAL, 10),
+    settlement(EXTERNAL, 20, BigInt(5_000_000)),
+  ])
+  assert.equal(report.totals.externalSettlements, 1)
+  assert.equal(report.totals.externalPayers, 1)
+  assert.equal(report.totals.repeatExternalPayers, 0)
+  assert.equal(report.externalPayers[0].settlements, 1)
+  assert.equal(report.externalPayers[0].repeat, false)
+  assert.equal(report.externalPayers[0].totalBaseUnits, '1000')
+  assert.ok(report.notable.some((event) => event.kind === 'first_external_settlement'))
+  assert.equal(report.notable.some((event) => event.kind === 'repeat_external_settlement'), false)
+  assert.ok(report.notable.some((event) => event.kind === 'unexpected_amount'))
+})
+
+test('two expected settlements from one external address remain a repeat buyer', () => {
+  const report = watch([settlement(EXTERNAL, 10), settlement(EXTERNAL, 500)])
+  assert.equal(report.totals.externalSettlements, 2)
+  assert.equal(report.totals.repeatExternalPayers, 1)
+  assert.equal(report.externalPayers[0].repeat, true)
+  assert.ok(report.notable.some((event) => event.kind === 'repeat_external_settlement'))
+})
+
+test('unexpected operator traffic stays visible and is not external demand', () => {
+  const report = watch([settlement(CANARY_BUYER, 10, BigInt(5_000_000))])
+  assert.equal(report.totals.externalSettlements, 0)
+  assert.equal(report.totals.canarySettlements, 1)
+  assert.ok(report.notable.some((event) => event.kind === 'unexpected_amount' && event.payer === CANARY_BUYER.toLowerCase()))
 })
 
 test('several external payers are each summarised separately', () => {
