@@ -1,0 +1,51 @@
+name: Production Batch 2 internal-review remainder
+
+on:
+  workflow_dispatch:
+    inputs:
+      operation:
+        description: Verify, record the approved remainder reviews, or review and release the approved remainder
+        required: true
+        default: verify
+        type: choice
+        options:
+          - verify
+          - review
+          - review-publish-verify
+      confirmation:
+        description: Type RELEASE_APPROVED_BATCH2_INTERNAL_REVIEW_REMAINDER only for publication
+        required: false
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: production-substantial-internal-review-remainder
+  cancel-in-progress: false
+
+jobs:
+  operate:
+    runs-on: ubuntu-latest
+    environment: production-database
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Verify publication confirmation
+        if: inputs.operation == 'review-publish-verify'
+        env:
+          CONFIRMATION: ${{ inputs.confirmation }}
+        run: test "$CONFIRMATION" = "RELEASE_APPROVED_BATCH2_INTERNAL_REVIEW_REMAINDER"
+      - name: Operate the exact-revision remainder cohort
+        env:
+          EPISTEMIC_OPERATIONS_TOKEN: ${{ secrets.EPISTEMIC_OPERATIONS_TOKEN }}
+          EPISTEMIC_RELEASE_AUTHORITY_TOKEN: ${{ secrets.EPISTEMIC_RELEASE_AUTHORITY_TOKEN }}
+          BATCH2_INTERNAL_REMAINDER_CONFIRM: ${{ inputs.confirmation }}
+        run: >-
+          node --experimental-strip-types scripts/run-substantial-internal-review-remainder.ts
+          ${{ inputs.operation != 'verify' && '--review' || '' }}
+          ${{ inputs.operation == 'review-publish-verify' && '--publish' || '' }}
+          ${{ inputs.operation == 'verify' && '--verify' || '' }}
