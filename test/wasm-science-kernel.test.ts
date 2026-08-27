@@ -142,7 +142,13 @@ test('two independent builds produce byte-identical WASM', async () => {
 })
 
 test('the reproducibility manifest binds source, conformance corpus, compiler, and generated kernel', async () => {
-  const manifest = JSON.parse(await readFile(new URL('conformance/kernel-manifest.json', PACKAGE), 'utf8')) as Record<string, any>
+  const manifest = JSON.parse(await readFile(new URL('conformance/kernel-manifest.json', PACKAGE), 'utf8')) as {
+    schemaVersion: string
+    compiler: { version: string; flags: string[] }
+    sourceSha256: string
+    conformanceSha256: string
+    kernelSha256: string
+  }
   const sha = (bytes: Uint8Array): string => `sha256:${createHash('sha256').update(bytes).digest('hex')}`
   assert.equal(manifest.schemaVersion, 'maha-wasm-kernel-manifest/1.0')
   assert.equal(manifest.compiler.version, '0.28.20')
