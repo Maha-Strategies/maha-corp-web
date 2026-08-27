@@ -35,6 +35,7 @@ import { FRONTIER_CANARY_RECORDS, FRONTIER_CANARY_VERSION } from './frontier-can
 import { FRONTIER_DOMAIN_GRAPH_RECORDS } from './frontier-domain-graphs.ts'
 import { QUANTUM_SYSTEMS_GRAPH_RECORDS } from './quantum-systems-graph.ts'
 import { BATCH_2_INTERNAL_REVIEW_RECORD_IDS } from './substantial-internal-review-cohort.ts'
+import { REPAIRED_REVISION_CANARY_RECORDS } from './repaired-revision-canary-targets.ts'
 import {
   EPISTEMIC_POLICY_VERSION,
   EPISTEMIC_SCHEMA_VERSION,
@@ -63,6 +64,7 @@ export const LEGACY_ADAPTER_IDS = [
   'neuromorphic-biocomputing',
   'frontier-canary',
   'substantial-batch-2-internal-review',
+  'repaired-revision-canary',
 ] as const
 
 export type LegacyAdapterId = (typeof LEGACY_ADAPTER_IDS)[number]
@@ -484,6 +486,21 @@ export const SUBSTANTIAL_BATCH_2_INTERNAL_REVIEW_ADAPTER: LegacyAdapterDefinitio
   })),
 })
 
+export const REPAIRED_REVISION_CANARY_ADAPTER: LegacyAdapterDefinition = definition({
+  id: 'repaired-revision-canary',
+  name: 'Repaired revision canonicalization canary',
+  description: 'Exactly two internally reviewed repaired revisions; ingestion freezes their new targets and never approves or publishes them.',
+  sourceDatasetVersion: 'maha-repaired-revision-canary/1.0',
+  sourceRecords: REPAIRED_REVISION_CANARY_RECORDS,
+  sourceSources: REPAIRED_REVISION_CANARY_RECORDS.flatMap((record) => record.sources),
+  build: () => REPAIRED_REVISION_CANARY_RECORDS.map((record) => ({
+    sourceRecordId: record.id,
+    sourceRecord: record,
+    sourcePublicPath: epistemicRecordPath(record),
+    record: structuredClone(record),
+  })),
+})
+
 export const ADAPTED_EPISTEMIC_CANDIDATES = LEGACY_EPISTEMIC_ADAPTERS.flatMap((adapter) => adapter.adapt())
 assertGraphIntegrity(ADAPTED_EPISTEMIC_CANDIDATES.map((item) => item.record))
 
@@ -492,6 +509,8 @@ export function getLegacyEpistemicAdapter(id: string) {
     ? FRONTIER_CANARY_EPISTEMIC_ADAPTER
     : id === SUBSTANTIAL_BATCH_2_INTERNAL_REVIEW_ADAPTER.id
       ? SUBSTANTIAL_BATCH_2_INTERNAL_REVIEW_ADAPTER
+    : id === REPAIRED_REVISION_CANARY_ADAPTER.id
+      ? REPAIRED_REVISION_CANARY_ADAPTER
     : LEGACY_EPISTEMIC_ADAPTERS.find((adapter) => adapter.id === id)
 }
 
