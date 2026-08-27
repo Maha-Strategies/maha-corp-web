@@ -1,0 +1,406 @@
+{
+  "schemaVersion": "maha-tbm-citation-identity-repair/1.0",
+  "recordId": "urn:maha:record:fusion-plasma-systems-breeding-blanket-test-modules",
+  "lineage": {
+    "supersededRevision": "sha256:3eb362d91f332ac755d9793f8e43d781e445bbe64827d24521af037288e54723",
+    "supersededLedgerDigest": "sha256:11a70d5512a7e7b13c9b842571206cb55fc77e42884607a2ddeea312ae3186d7",
+    "supersededState": "revise-again",
+    "correctedRevision": "sha256:4e6718f1603760cec3f677744f669991415c5466c982f9c0aae3f6b39824636a",
+    "changeKind": "citation-identity-repair",
+    "priorRevisionPreserved": true
+  },
+  "sourceIdentityVerification": {
+    "publisher": "ITER Organization",
+    "authoritativePublisherPage": true,
+    "requestedUrl": "https://www.iter.org/machine/supporting-systems/tritium-breeding",
+    "finalUrl": "https://www.iter.org/machine/supporting-systems/tritium-breeding",
+    "canonicalUrl": null,
+    "pageHeading": "Tritium breeding",
+    "htmlTitle": "Tritium Breeding | ITER is First Fusion Device to Test",
+    "stableIdentifier": {
+      "scheme": "url",
+      "value": "https://www.iter.org/machine/supporting-systems/tritium-breeding"
+    },
+    "exactLocator": "“ITER Test Blanket Module (TBM) Program” section and the immediately preceding paragraph ending “Further research will be necessary to demonstrate the feasibility of large-scale tritium production and recycling.”",
+    "publicationDate": null,
+    "lastUpdatedDate": null,
+    "sourceVersion": null,
+    "chronologyStatus": "living-document",
+    "accessedAt": "2026-08-27",
+    "archivalSnapshotPinned": false,
+    "versionRelationship": "Same living ITER publisher page inspected for the first repair; citation identity corrected without claiming a fixed edition or archived snapshot.",
+    "rightsBasis": "citation-with-paraphrase",
+    "rightsNote": "Original bounded paraphrase with a link and exact section locator; no ITER image, figure, table, or extended passage is reproduced.",
+    "metadataProvenance": "Direct inspection of the authoritative ITER publisher page on 2026-08-27. The rendered page supplied its heading, HTML title, publisher identity, final URL, section locator, and copyright footer; it supplied no publication date, update date, edition, or archive identifier.",
+    "contentFindings": [
+      "The page describes a planned Test Blanket Module programme and four member concepts.",
+      "The page states that further research is necessary to demonstrate feasibility of large-scale tritium production and recycling.",
+      "The cited passage reports no completed measurement, breeding ratio, qualification result, operational result, or commercial readiness."
+    ]
+  },
+  "correctedRecord": {
+    "schemaVersion": "maha-epistemic/1.0",
+    "evidencePolicyVersion": "mps/0.1",
+    "id": "urn:maha:record:fusion-plasma-systems-breeding-blanket-test-modules",
+    "domainSlug": "fusion-plasma-systems",
+    "recordKind": "concept",
+    "slug": "fusion-plasma-systems-breeding-blanket-test-modules",
+    "title": "Breeding blanket test modules",
+    "description": "A source-bounded concept record for the ITER Test Blanket Module programme within fusion and plasma systems.",
+    "summary": "Breeding blanket test modules is represented as one reviewable unit in the Fusion and plasma systems graph. Its source, locator, scope, uncertainty, and prohibited inference remain attached to the claim rather than being generalized across the domain.",
+    "claims": [
+      {
+        "id": "urn:maha:claim:fusion-plasma-systems-breeding-blanket-test-modules",
+        "statement": "ITER documents a Test Blanket Module programme under which in-vessel modules will be used to test tritium breeding concepts, and states that further research is necessary to demonstrate the feasibility of large-scale tritium production and recycling.",
+        "claimKind": "observation",
+        "evidenceMaturity": "single-study",
+        "sourceIds": [
+          "source-fusion-plasma-systems-iter-support"
+        ],
+        "scope": "Limited to the \"ITER Test Blanket Module (TBM) Program\" section of the ITER Tritium Breeding page. It records a planned test programme and its stated objective, and pools no results from other devices, studies, or blanket concepts.",
+        "boundary": "A planned test programme is not a measurement. This record establishes no breeding ratio, no extraction rate, no neutron or heat-load performance, no materials qualification outcome, and no commercial blanket readiness.",
+        "uncertainty": {
+          "kind": "qualitative",
+          "statement": "No cross-source quantitative interval is asserted. Definitions, operating conditions, samples, instruments, and outcome measures must be checked against the exact cited locator during review."
+        },
+        "replication": {
+          "independentReplicationCount": null,
+          "assessment": "Independent replication and cross-platform transfer have not been compiled for this candidate; the evidence maturity refers only to the bounded source contract.",
+          "asOfDate": "2026-08-24"
+        }
+      }
+    ],
+    "sources": [
+      {
+        "id": "source-fusion-plasma-systems-iter-support",
+        "title": "Tritium Breeding | ITER is First Fusion Device to Test",
+        "authors": [
+          "ITER Organization"
+        ],
+        "publisher": "ITER Organization",
+        "publishedAt": "",
+        "sourceChronology": {
+          "status": "living-document",
+          "accessedAt": "2026-08-27"
+        },
+        "url": "https://www.iter.org/machine/supporting-systems/tritium-breeding",
+        "identifiers": [
+          {
+            "scheme": "url",
+            "value": "https://www.iter.org/machine/supporting-systems/tritium-breeding"
+          }
+        ],
+        "exactLocator": "“ITER Test Blanket Module (TBM) Program” section and the immediately preceding paragraph ending “Further research will be necessary to demonstrate the feasibility of large-scale tritium production and recycling.”",
+        "rights": {
+          "basis": "citation-with-paraphrase",
+          "quotationUsed": false,
+          "note": "Original bounded paraphrase with a link and exact section locator; no ITER image, figure, table, or extended passage is reproduced."
+        },
+        "establishes": "The page names test blanket modules, states that ITER will experiment with tritium production within the vacuum vessel by way of TBMs, identifies four member TBM concepts, and states that further research will be necessary to demonstrate the feasibility of large-scale tritium production and recycling.",
+        "boundary": "An authoritative description of a planned test programme is not evidence of demonstrated tritium breeding, of measured performance, or of commercial blanket readiness."
+      }
+    ],
+    "sections": [
+      {
+        "heading": "What the cited work establishes",
+        "paragraphs": [
+          "ITER documents a planned Test Blanket Module programme for testing tritium-breeding concepts in the device.",
+          "The cited page states that further research remains necessary to demonstrate feasibility at large scale; this record reports the programme, not a result."
+        ],
+        "claimIds": [
+          "urn:maha:claim:fusion-plasma-systems-breeding-blanket-test-modules"
+        ]
+      },
+      {
+        "heading": "What remains a separate question",
+        "paragraphs": [
+          "The cited page does not establish a measured breeding ratio, extraction rate, neutron or heat-load performance, materials qualification, operational success, or commercial readiness.",
+          "Results cannot be transferred among the four member concepts without separately cited evidence and an explicit comparison contract."
+        ],
+        "claimIds": []
+      }
+    ],
+    "bridges": [
+      {
+        "id": "urn:maha:bridge:fusion-plasma-systems-breeding-blanket-test-modules-1",
+        "sourceConceptId": "urn:maha:record:fusion-plasma-systems-breeding-blanket-test-modules",
+        "targetConceptId": "urn:maha:record:fusion-plasma-systems-tritium-fuel-cycle",
+        "bridgeType": "mechanistic-dependency",
+        "statement": "Breeding blanket test modules is positioned after Tritium fuel cycle in this bounded dependency sequence; the edge is navigational and does not assert equivalence or causation beyond the cited source scope."
+      }
+    ],
+    "boundaries": [
+      "A documented test programme does not by itself establish system-level performance, safety, manufacturability, scalability, economic advantage, clinical benefit, or deployment readiness.",
+      "A source-bounded concept record does not establish manufacturing yield, economic advantage, safety, clinical benefit, or commercial readiness unless those outcomes are measured in a separately scoped record."
+    ],
+    "prohibitedInferences": [
+      "Do not use this test blanket module programme record to claim that the surrounding technology is proven, safe, scalable, commercially available, or strategically superior.",
+      "Do not transfer a reported result across hardware, organisms, protocols, datasets, operating conditions, or outcome definitions without a declared comparison contract.",
+      "Do not read a planned test programme as demonstrated tritium breeding, measured performance, completed materials qualification, or commercial blanket readiness."
+    ],
+    "publication": {
+      "requestedPublicPromotion": false,
+      "reviewState": "draft",
+      "canonicalVersion": "0.1.0",
+      "lastReviewedAt": "2026-08-24T00:00:00.000Z",
+      "requiredReviewScopes": [
+        "source-fidelity",
+        "domain-fidelity",
+        "boundary-adequacy",
+        "rights-and-locator"
+      ],
+      "reviewEvents": []
+    }
+  },
+  "alignmentAudit": {
+    "recordId": "urn:maha:record:fusion-plasma-systems-breeding-blanket-test-modules",
+    "priorRevision": "sha256:3eb362d91f332ac755d9793f8e43d781e445bbe64827d24521af037288e54723",
+    "auditedRevision": "sha256:4e6718f1603760cec3f677744f669991415c5466c982f9c0aae3f6b39824636a",
+    "sourceContentInspected": true,
+    "inspectionDepth": "specified-sections",
+    "exactLocatorVerified": true,
+    "sourceIdentityCoherent": true,
+    "metadataVerified": true,
+    "archivalSnapshotPinned": false,
+    "externallyReviewed": false,
+    "independentlyReproduced": false,
+    "dimensions": [
+      {
+        "dimension": "source-identity",
+        "verdict": "satisfied",
+        "finding": "Title, publisher, URL and the sole stable URL identifier now describe and resolve to the same ITER Tritium Breeding page."
+      },
+      {
+        "dimension": "exact-locator-fidelity",
+        "verdict": "satisfied",
+        "finding": "The named TBM Program heading and preceding feasibility statement are present on the directly inspected page."
+      },
+      {
+        "dimension": "claim-to-passage-alignment",
+        "verdict": "satisfied",
+        "finding": "The claim preserves planning tense and the need for further research; it asserts no measured outcome."
+      },
+      {
+        "dimension": "rights-basis",
+        "verdict": "satisfied",
+        "finding": "The record uses original bounded paraphrase, a direct link and a section locator without reproducing protected media or extended text."
+      },
+      {
+        "dimension": "scope-and-uncertainty",
+        "verdict": "satisfied",
+        "finding": "The living-page and unpinned-snapshot limitations are explicit; no publication or update date is invented."
+      },
+      {
+        "dimension": "prohibited-inferences",
+        "verdict": "satisfied",
+        "finding": "Measured performance, qualification, operational success and commercial readiness are explicitly excluded."
+      },
+      {
+        "dimension": "record-classification",
+        "verdict": "satisfied",
+        "finding": "Concept remains appropriate because the source documents a programme and reports no measurement or executable method."
+      },
+      {
+        "dimension": "title-to-claim-consistency",
+        "verdict": "satisfied",
+        "finding": "The record title names test modules while the claim and scope bound the statement to the ITER programme."
+      }
+    ],
+    "outcome": "alignment-clear-ready-for-internal-rereview",
+    "boundary": "AI-assisted internal editorial verification by Maha Strategies; not external expert review, peer review, independent reproduction, scientific validation, operational qualification, or commercial certification.",
+    "auditDigest": "sha256:58b852482018c9329f6f84cc88fcbaf49dfe9248fd4d06909a8f62b9782dc335"
+  },
+  "substantialPageDecision": {
+    "recordId": "urn:maha:record:fusion-plasma-systems-breeding-blanket-test-modules",
+    "revisionSha256": "sha256:4e6718f1603760cec3f677744f669991415c5466c982f9c0aae3f6b39824636a",
+    "auditDigest": "sha256:58b852482018c9329f6f84cc88fcbaf49dfe9248fd4d06909a8f62b9782dc335",
+    "pageEligible": true,
+    "evidenceCoverage": {
+      "claims": 1,
+      "claimsWithInspectedSourceAndExactLocator": 1
+    },
+    "explanatoryFactsRestrictedToCitedClaim": true,
+    "unsupportedMaterialIncluded": false,
+    "decisionDigest": "sha256:c26ca9dca8c0ee49abc0002b4808a7fb3f37ae63fd001d71e6e8b4ac4afa90ff"
+  },
+  "reviewerPacket": {
+    "recordId": "urn:maha:record:fusion-plasma-systems-breeding-blanket-test-modules",
+    "revisionSha256": "sha256:4e6718f1603760cec3f677744f669991415c5466c982f9c0aae3f6b39824636a",
+    "sourceTitle": "Tritium Breeding | ITER is First Fusion Device to Test",
+    "sourceUrl": "https://www.iter.org/machine/supporting-systems/tritium-breeding",
+    "sourceIdentifiers": [
+      {
+        "scheme": "url",
+        "value": "https://www.iter.org/machine/supporting-systems/tritium-breeding"
+      }
+    ],
+    "exactLocator": "“ITER Test Blanket Module (TBM) Program” section and the immediately preceding paragraph ending “Further research will be necessary to demonstrate the feasibility of large-scale tritium production and recycling.”",
+    "dimensions": [
+      "source-fidelity",
+      "locator-fidelity",
+      "claim-boundedness",
+      "domain-fidelity",
+      "title-and-slug-accuracy",
+      "record-class-suitability",
+      "uncertainty-adequacy",
+      "prohibited-inference-coverage",
+      "rights-basis",
+      "public-wording-safety"
+    ],
+    "boundary": "AI-assisted internal editorial verification by Maha Strategies; not external expert review, peer review, independent reproduction, scientific validation, operational qualification, or commercial certification."
+  },
+  "decisionLedger": {
+    "revisionSha256": "sha256:4e6718f1603760cec3f677744f669991415c5466c982f9c0aae3f6b39824636a",
+    "decisions": [
+      {
+        "dimension": "source-fidelity",
+        "recordId": "urn:maha:record:fusion-plasma-systems-breeding-blanket-test-modules",
+        "revisionSha256": "sha256:4e6718f1603760cec3f677744f669991415c5466c982f9c0aae3f6b39824636a",
+        "reviewerId": "expert_maha-internal-editorial-v3",
+        "reviewerKind": "internal-editorial",
+        "checklistVersion": "maha-repaired-record-rereview/1.1",
+        "verdict": "approve",
+        "rationale": "The corrected title, publisher, final URL and only URL identifier all name the directly inspected ITER Tritium Breeding page. The prior “Supporting systems” title and parent-page identifier are absent, so resolving either machine field reaches the cited artifact.",
+        "disagreementsOrUncertainty": "No external expert review or independent reproduction is claimed; this decision is limited to internal source-bounded editorial review.",
+        "boundary": "AI-assisted internal editorial verification by Maha Strategies; not external expert review, peer review, independent reproduction, scientific validation, operational qualification, or commercial certification.",
+        "decisionDigest": "sha256:5017a7f894cc44c8d052e4f7f4a586d13f3473797afcef6d3aeaf3b5d43879a3"
+      },
+      {
+        "dimension": "locator-fidelity",
+        "recordId": "urn:maha:record:fusion-plasma-systems-breeding-blanket-test-modules",
+        "revisionSha256": "sha256:4e6718f1603760cec3f677744f669991415c5466c982f9c0aae3f6b39824636a",
+        "reviewerId": "expert_maha-internal-editorial-v3",
+        "reviewerKind": "internal-editorial",
+        "checklistVersion": "maha-repaired-record-rereview/1.1",
+        "verdict": "approve",
+        "rationale": "The locator identifies the exact TBM Program heading plus the adjacent feasibility statement used by the claim. Both were re-opened on the authoritative page, while no whole-page locator or inferred page number is asserted.",
+        "disagreementsOrUncertainty": "No external expert review or independent reproduction is claimed; this decision is limited to internal source-bounded editorial review.",
+        "boundary": "AI-assisted internal editorial verification by Maha Strategies; not external expert review, peer review, independent reproduction, scientific validation, operational qualification, or commercial certification.",
+        "decisionDigest": "sha256:41416fcef3cb7167c3af19f0354a4c9957a9594a003043d60b5359dfe1d3cdef"
+      },
+      {
+        "dimension": "claim-boundedness",
+        "recordId": "urn:maha:record:fusion-plasma-systems-breeding-blanket-test-modules",
+        "revisionSha256": "sha256:4e6718f1603760cec3f677744f669991415c5466c982f9c0aae3f6b39824636a",
+        "reviewerId": "expert_maha-internal-editorial-v3",
+        "reviewerKind": "internal-editorial",
+        "checklistVersion": "maha-repaired-record-rereview/1.1",
+        "verdict": "approve",
+        "rationale": "The claim says ITER documents a programme and preserves future-oriented testing language and the stated need for further research. It makes no claim of a completed experiment, measured breeding ratio, extraction performance, or demonstrated self-sufficiency.",
+        "disagreementsOrUncertainty": "No external expert review or independent reproduction is claimed; this decision is limited to internal source-bounded editorial review.",
+        "boundary": "AI-assisted internal editorial verification by Maha Strategies; not external expert review, peer review, independent reproduction, scientific validation, operational qualification, or commercial certification.",
+        "decisionDigest": "sha256:e6f4d3af49a69062feb6969983feb5de7f8b04650ae959b94312af0f9968f76e"
+      },
+      {
+        "dimension": "domain-fidelity",
+        "recordId": "urn:maha:record:fusion-plasma-systems-breeding-blanket-test-modules",
+        "revisionSha256": "sha256:4e6718f1603760cec3f677744f669991415c5466c982f9c0aae3f6b39824636a",
+        "reviewerId": "expert_maha-internal-editorial-v3",
+        "reviewerKind": "internal-editorial",
+        "checklistVersion": "maha-repaired-record-rereview/1.1",
+        "verdict": "approve",
+        "rationale": "The revision remains within fusion and plasma systems and discusses only the ITER TBM programme. It does not generalize to DEMO, commercial reactors, other blanket programmes, or cross-concept performance.",
+        "disagreementsOrUncertainty": "No external expert review or independent reproduction is claimed; this decision is limited to internal source-bounded editorial review.",
+        "boundary": "AI-assisted internal editorial verification by Maha Strategies; not external expert review, peer review, independent reproduction, scientific validation, operational qualification, or commercial certification.",
+        "decisionDigest": "sha256:dbb2d846551991046eec99d2c5b104962aff848a3df26a84942e801817c851a5"
+      },
+      {
+        "dimension": "title-and-slug-accuracy",
+        "recordId": "urn:maha:record:fusion-plasma-systems-breeding-blanket-test-modules",
+        "revisionSha256": "sha256:4e6718f1603760cec3f677744f669991415c5466c982f9c0aae3f6b39824636a",
+        "reviewerId": "expert_maha-internal-editorial-v3",
+        "reviewerKind": "internal-editorial",
+        "checklistVersion": "maha-repaired-record-rereview/1.1",
+        "verdict": "approve",
+        "rationale": "The record title and slug identify breeding blanket test modules without asserting completion or performance. The source title separately carries the page’s actual HTML title, preventing record naming from being confused with source identity.",
+        "disagreementsOrUncertainty": "No external expert review or independent reproduction is claimed; this decision is limited to internal source-bounded editorial review.",
+        "boundary": "AI-assisted internal editorial verification by Maha Strategies; not external expert review, peer review, independent reproduction, scientific validation, operational qualification, or commercial certification.",
+        "decisionDigest": "sha256:f0437c68612f3e5894b80ceda4a1417de54d76c64a84ee481ae1a648101dc48f"
+      },
+      {
+        "dimension": "record-class-suitability",
+        "recordId": "urn:maha:record:fusion-plasma-systems-breeding-blanket-test-modules",
+        "revisionSha256": "sha256:4e6718f1603760cec3f677744f669991415c5466c982f9c0aae3f6b39824636a",
+        "reviewerId": "expert_maha-internal-editorial-v3",
+        "reviewerKind": "internal-editorial",
+        "checklistVersion": "maha-repaired-record-rereview/1.1",
+        "verdict": "approve",
+        "rationale": "Concept is the bounded class supported by the page: it documents that a programme and member concepts exist. Measurement is unavailable because no observed quantity is reported, and method would imply an executable procedure absent from the source.",
+        "disagreementsOrUncertainty": "No external expert review or independent reproduction is claimed; this decision is limited to internal source-bounded editorial review.",
+        "boundary": "AI-assisted internal editorial verification by Maha Strategies; not external expert review, peer review, independent reproduction, scientific validation, operational qualification, or commercial certification.",
+        "decisionDigest": "sha256:91c706da19f91f3aaadc9d02e4a8a812000a94a03c6614612bc39d9a1d5dbccb"
+      },
+      {
+        "dimension": "uncertainty-adequacy",
+        "recordId": "urn:maha:record:fusion-plasma-systems-breeding-blanket-test-modules",
+        "revisionSha256": "sha256:4e6718f1603760cec3f677744f669991415c5466c982f9c0aae3f6b39824636a",
+        "reviewerId": "expert_maha-internal-editorial-v3",
+        "reviewerKind": "internal-editorial",
+        "checklistVersion": "maha-repaired-record-rereview/1.1",
+        "verdict": "approve",
+        "rationale": "The revision records that the source is a living page with no displayed publication date, update date, edition, or pinned archive. Qualitative uncertainty is appropriate because no numerical result or interval is claimed.",
+        "disagreementsOrUncertainty": "No archival snapshot is pinned, so later page drift remains possible and must trigger reinspection before a later revision.",
+        "boundary": "AI-assisted internal editorial verification by Maha Strategies; not external expert review, peer review, independent reproduction, scientific validation, operational qualification, or commercial certification.",
+        "decisionDigest": "sha256:ad797880b54eda7ef7d591b7cb0727625664f7b2c7fa5dc37e25363e52f9f289"
+      },
+      {
+        "dimension": "prohibited-inference-coverage",
+        "recordId": "urn:maha:record:fusion-plasma-systems-breeding-blanket-test-modules",
+        "revisionSha256": "sha256:4e6718f1603760cec3f677744f669991415c5466c982f9c0aae3f6b39824636a",
+        "reviewerId": "expert_maha-internal-editorial-v3",
+        "reviewerKind": "internal-editorial",
+        "checklistVersion": "maha-repaired-record-rereview/1.1",
+        "verdict": "approve",
+        "rationale": "The claim boundary and public sections independently prohibit measured breeding, extraction, neutron or heat-load performance, qualification, operational success, commercial readiness, and transfer among differing TBM concepts.",
+        "disagreementsOrUncertainty": "No external expert review or independent reproduction is claimed; this decision is limited to internal source-bounded editorial review.",
+        "boundary": "AI-assisted internal editorial verification by Maha Strategies; not external expert review, peer review, independent reproduction, scientific validation, operational qualification, or commercial certification.",
+        "decisionDigest": "sha256:271b6f4f7a82b3f503e176c45a822c21e2931c3d3da4c541a1c1de0c0951e7fd"
+      },
+      {
+        "dimension": "rights-basis",
+        "recordId": "urn:maha:record:fusion-plasma-systems-breeding-blanket-test-modules",
+        "revisionSha256": "sha256:4e6718f1603760cec3f677744f669991415c5466c982f9c0aae3f6b39824636a",
+        "reviewerId": "expert_maha-internal-editorial-v3",
+        "reviewerKind": "internal-editorial",
+        "checklistVersion": "maha-repaired-record-rereview/1.1",
+        "verdict": "approve",
+        "rationale": "Citation-with-paraphrase is appropriate for this public publisher page. The record links to the source, supplies an exact section locator, uses original paraphrase, and reproduces no ITER image, table, figure, or extended passage.",
+        "disagreementsOrUncertainty": "No external expert review or independent reproduction is claimed; this decision is limited to internal source-bounded editorial review.",
+        "boundary": "AI-assisted internal editorial verification by Maha Strategies; not external expert review, peer review, independent reproduction, scientific validation, operational qualification, or commercial certification.",
+        "decisionDigest": "sha256:359c47873c7e33d5f8f7b8aa6cf3cda75656d31640ec3e691accb5a99e547478"
+      },
+      {
+        "dimension": "public-wording-safety",
+        "recordId": "urn:maha:record:fusion-plasma-systems-breeding-blanket-test-modules",
+        "revisionSha256": "sha256:4e6718f1603760cec3f677744f669991415c5466c982f9c0aae3f6b39824636a",
+        "reviewerId": "expert_maha-internal-editorial-v3",
+        "reviewerKind": "internal-editorial",
+        "checklistVersion": "maha-repaired-record-rereview/1.1",
+        "verdict": "approve",
+        "rationale": "Every explanatory statement remains in programme or future tense and the limitations explicitly say the source reports no result. A public reader therefore cannot reasonably treat this revision as a completed fusion milestone or commercial-readiness claim.",
+        "disagreementsOrUncertainty": "No external expert review or independent reproduction is claimed; this decision is limited to internal source-bounded editorial review.",
+        "boundary": "AI-assisted internal editorial verification by Maha Strategies; not external expert review, peer review, independent reproduction, scientific validation, operational qualification, or commercial certification.",
+        "decisionDigest": "sha256:ceceb89687dd9bc2e9af9e588b6101ff70d2516bc61c5b31cf71278a94c7c8ec"
+      }
+    ],
+    "verdictTotals": {
+      "approve": 10,
+      "revise": 0,
+      "withhold": 0
+    },
+    "state": "internally-approved-ready-for-release-preflight"
+  },
+  "releasePreflight": {
+    "revisionSha256": "sha256:4e6718f1603760cec3f677744f669991415c5466c982f9c0aae3f6b39824636a",
+    "internallyApproved": true,
+    "alignmentClear": true,
+    "substantialPageEligible": true,
+    "readyForSeparateRepairedRevisionCanary": true,
+    "canonicalReleaseCreated": false,
+    "releaseAuthorityUsed": false,
+    "productionMutation": false,
+    "inFrozenRemainderCohort": false
+  },
+  "boundary": "AI-assisted internal editorial verification by Maha Strategies; not external expert review, peer review, independent reproduction, scientific validation, operational qualification, or commercial certification.",
+  "packageDigest": "sha256:f7cb15e829cb530a7c54a257fda2c5da5023ff93e02ffb807584968b10fae079"
+}
