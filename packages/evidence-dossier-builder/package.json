@@ -1,0 +1,20 @@
+{
+  "name": "@mahastrategies/evidence-dossier-builder",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Operator CLI and library for compiling, validating, verifying, and rendering Maha Evidence Dossier packages. Not published.",
+  "license": "UNLICENSED",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "bin": {
+    "mps-dossier": "./bin/mps-dossier.ts"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "dossier": "node --experimental-strip-types ./bin/mps-dossier.ts"
+  }
+}
