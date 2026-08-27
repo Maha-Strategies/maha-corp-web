@@ -1,0 +1,17 @@
+{
+  "schemaVersion": "maha-wasm-conformance/1.0",
+  "integerModel": "signed-i64",
+  "rounding": "nearest-ties-to-even",
+  "vectors": [
+    { "operation": "normalizeAngleMicrodegrees", "inputs": ["-1"], "output": "359999999" },
+    { "operation": "normalizeAngleMicrodegrees", "inputs": ["720000001"], "output": "1" },
+    { "operation": "divideHalfEven", "inputs": ["5", "2"], "output": "2" },
+    { "operation": "divideHalfEven", "inputs": ["7", "2"], "output": "4" },
+    { "operation": "divideHalfEven", "inputs": ["-5", "2"], "output": "-2" },
+    { "operation": "convertScaled", "inputs": ["1000", "254", "100"], "output": "2540" },
+    { "operation": "intervalAddLower", "inputs": ["-20", "3"], "output": "-17" },
+    { "operation": "intervalAddUpper", "inputs": ["20", "7"], "output": "27" },
+    { "operation": "integerSqrt", "inputs": ["15"], "output": "3" },
+    { "operation": "rootSumSquaresFloor", "inputs": ["3", "4"], "output": "5" }
+  ]
+}

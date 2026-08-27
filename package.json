@@ -105,6 +105,7 @@
     "build:sdk": "npm --prefix packages/sdk run build",
     "pack:sdk": "npm --prefix packages/sdk run pack:dry-run",
     "build:x402-buyer-policy": "npm --prefix packages/x402-buyer-policy run build",
+    "build:wasm-kernel": "npm --prefix packages/wasm-kernel run build",
     "pack:x402-buyer-policy": "npm --prefix packages/x402-buyer-policy run pack:dry-run",
     "test": "node --test --experimental-strip-types test/*.test.ts",
     "interop:mcp": "node interop/mcp/client-probe.mjs",
@@ -152,6 +153,7 @@
     "gpt-tokenizer": "^3.4.0",
     "tailwindcss": "^4",
     "typescript": "^5",
+    "assemblyscript": "^0.28.8",
     "viem": "^2.55.10"
   },
   "overrides": {
