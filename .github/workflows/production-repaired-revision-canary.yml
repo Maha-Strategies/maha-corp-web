@@ -1,0 +1,47 @@
+name: Production repaired-revision canary
+
+on:
+  workflow_dispatch:
+    inputs:
+      operation:
+        description: Verify, review, or review and release the exact two repaired revisions
+        required: true
+        default: verify
+        type: choice
+        options: [verify, review, review-publish-verify]
+      confirmation:
+        description: Type RELEASE_2_REPAIRED_REVISIONS only for publication
+        required: false
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: production-repaired-revision-canary
+  cancel-in-progress: false
+
+jobs:
+  operate:
+    runs-on: ubuntu-latest
+    environment: production-database
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Verify publication confirmation
+        if: inputs.operation == 'review-publish-verify'
+        env:
+          CONFIRMATION: ${{ inputs.confirmation }}
+        run: test "$CONFIRMATION" = "RELEASE_2_REPAIRED_REVISIONS"
+      - name: Operate exact repaired revisions
+        env:
+          EPISTEMIC_OPERATIONS_TOKEN: ${{ secrets.EPISTEMIC_OPERATIONS_TOKEN }}
+          EPISTEMIC_RELEASE_AUTHORITY_TOKEN: ${{ secrets.EPISTEMIC_RELEASE_AUTHORITY_TOKEN }}
+          REPAIRED_REVISION_CANARY_CONFIRM: ${{ inputs.confirmation }}
+        run: >-
+          node --experimental-strip-types scripts/run-repaired-revision-canary.ts
+          ${{ inputs.operation != 'verify' && '--review' || '' }}
+          ${{ inputs.operation == 'review-publish-verify' && '--publish' || '' }}
