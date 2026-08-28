@@ -166,6 +166,22 @@ jobs:
                 exit 1
               fi
               ;;
+            20260828110000_cabezon_preview_seller_adapter.sql)
+              psql "$url" -v ON_ERROR_STOP=1 -At -c "
+                select 'cabezon_lifecycles=' || (to_regclass('public.cabezon_preview_lifecycles') is not null)::text
+                union all select 'cabezon_events=' || (to_regclass('public.cabezon_preview_lifecycle_events') is not null)::text
+                union all select 'cabezon_idempotency=' || (to_regclass('public.cabezon_preview_action_idempotency') is not null)::text
+                union all select 'record_cabezon_enquiry=' || (to_regprocedure('public.record_cabezon_preview_enquiry(jsonb,text,text)') is not null)::text
+                union all select 'read_cabezon_lifecycle=' || (to_regprocedure('public.read_cabezon_preview_lifecycle(text)') is not null)::text
+                union all select 'record_cabezon_delivery=' || (to_regprocedure('public.record_cabezon_preview_delivery(text,text,text,timestamptz,jsonb,jsonb)') is not null)::text
+                union all select 'record_cabezon_ack=' || (to_regprocedure('public.record_cabezon_preview_acknowledgement(text,text,text,text,text,timestamptz,jsonb)') is not null)::text
+                union all select 'cabezon_append_only=' || (to_regprocedure('public.cabezon_preview_forbid_event_mutation()') is not null)::text;
+              " | tee "$EVIDENCE/verify.txt"
+              if grep -q '=false' "$EVIDENCE/verify.txt" || [ "$(wc -l < "$EVIDENCE/verify.txt")" -ne 8 ]; then
+                echo '::error::CABEZON Preview Seller adapter objects did not converge.'
+                exit 1
+              fi
+              ;;
             20260810000300_x402_offer_telemetry.sql|20260810000400_x402_mps_audit_jobs.sql)
               psql "$url" -v ON_ERROR_STOP=1 -At -c "
                 select 'record_x402_offer_usage=' || (to_regprocedure('public.record_x402_offer_usage(text,text,text,text,numeric,numeric,numeric,numeric,numeric,timestamptz)') is not null)::text

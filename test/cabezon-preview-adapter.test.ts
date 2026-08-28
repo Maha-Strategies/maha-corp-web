@@ -232,10 +232,14 @@ test('committed private lifecycle fixture is deterministic, append-only and non-
 
 test('remote canary target is a protected secret rather than dispatcher-controlled input', async () => {
   const workflow = await readFile(new URL('../.github/workflows/preview-cabezon-seller-canary.yml', import.meta.url), 'utf8')
+  const migrationWorkflow = await readFile(new URL('../.github/workflows/preview-migrations.yml', import.meta.url), 'utf8')
   const script = await readFile(new URL('../scripts/run-cabezon-preview-remote-canary.ts', import.meta.url), 'utf8')
   assert.doesNotMatch(workflow, /preview_url:/)
   assert.match(workflow, /CABEZON_PREVIEW_BASE_URL: \$\{\{ secrets\.CABEZON_PREVIEW_BASE_URL \}\}/)
   assert.match(script, /hostname\.endsWith\('\.vercel\.app'\)/)
   assert.match(script, /redirect: 'error'/)
   assert.doesNotMatch(script, /console\.(log|error)\([^\n]*(token|bypass|SELLER_BINDING|CUSTOMER_BINDING)/i)
+  assert.match(workflow, /environment: Preview/)
+  assert.match(migrationWorkflow, /20260828110000_cabezon_preview_seller_adapter\.sql/)
+  for (const object of ['cabezon_preview_lifecycles', 'cabezon_preview_lifecycle_events', 'cabezon_preview_action_idempotency', 'record_cabezon_preview_enquiry', 'record_cabezon_preview_delivery', 'record_cabezon_preview_acknowledgement']) assert.match(migrationWorkflow, new RegExp(object))
 })
