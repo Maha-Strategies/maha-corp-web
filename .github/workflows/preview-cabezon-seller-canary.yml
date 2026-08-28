@@ -26,7 +26,6 @@ jobs:
       CABEZON_PREVIEW_SELLER_BINDING_JSON: ${{ secrets.CABEZON_PREVIEW_SELLER_BINDING_JSON }}
       CABEZON_PREVIEW_CANARY_CUSTOMER_BINDING_JSON: ${{ secrets.CABEZON_PREVIEW_CANARY_CUSTOMER_BINDING_JSON }}
       CABEZON_PREVIEW_CANARY_RUN_ID: gha-${{ github.run_id }}-${{ github.run_attempt }}
-      VERCEL_AUTOMATION_BYPASS_SECRET: ${{ secrets.VERCEL_AUTOMATION_BYPASS_SECRET }}
       CABEZON_PREVIEW_CANARY_EVIDENCE: ${{ runner.temp }}/cabezon-preview/evidence.json
     steps:
       - name: Validate confirmation
