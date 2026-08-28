@@ -1,0 +1,18 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "maha-witness"
+version = "0.1.0"
+description = "Local-first computational provenance receipts for scientific workloads."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+dependencies = []
+
+[project.scripts]
+maha-witness = "maha_witness.cli:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/maha_witness"]

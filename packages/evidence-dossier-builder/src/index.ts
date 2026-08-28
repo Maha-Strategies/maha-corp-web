@@ -10,6 +10,7 @@
  */
 export * from './schema.ts'
 export * from './canonicalize.ts'
+export * from './runtime-witness.ts'
 export * from './validate.ts'
 export * from './compile.ts'
 export * from './verify.ts'
