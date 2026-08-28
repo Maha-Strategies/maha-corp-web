@@ -68,15 +68,25 @@ create index computational_witness_receipts_tenant_created_idx
 create index computational_witness_payloads_expiry_idx
   on public.computational_witness_payloads (retained_until, tenant_id, receipt_sha256);
 
+-- Self-contained immutable-ledger guard. Preview legitimately predates the
+-- broader epistemic ledger function, so this registry cannot depend on that
+-- unrelated migration having been applied first.
+create function public.reject_computational_witness_mutation()
+returns trigger language plpgsql security definer set search_path = public, extensions as $$
+begin
+  raise exception 'Computational witness ledger rows are append-only.' using errcode = '55000';
+end; $$;
+revoke all on function public.reject_computational_witness_mutation() from public, anon, authenticated, service_role;
+
 create trigger computational_witness_receipts_immutable
   before update or delete on public.computational_witness_receipts
-  for each row execute function public.reject_epistemic_ledger_mutation();
+  for each row execute function public.reject_computational_witness_mutation();
 create trigger computational_witness_submissions_immutable
   before update or delete on public.computational_witness_submissions
-  for each row execute function public.reject_epistemic_ledger_mutation();
+  for each row execute function public.reject_computational_witness_mutation();
 create trigger computational_witness_payload_events_immutable
   before update or delete on public.computational_witness_payload_events
-  for each row execute function public.reject_epistemic_ledger_mutation();
+  for each row execute function public.reject_computational_witness_mutation();
 
 alter table public.computational_witness_receipts enable row level security;
 alter table public.computational_witness_payloads enable row level security;

@@ -28,6 +28,16 @@ const APPROVED_UNAPPLIED_AMENDMENTS = [{
   baseSha256: '829d265c6d5d36402ac9a25edbfce131a5bdd01e5637d44d6720d0b97b53084c',
   currentSha256: 'c1464987864bc38ae832039b88c9a9145ff0c0974ef6ffa6d872e09aabec1839',
   evidence: 'https://github.com/Maha-Strategies/maha-corp-web/actions/runs/32224409228',
+}, {
+  // Preview run 33154575313 stopped before executing the migration because the
+  // shared epistemic-ledger trigger function is absent there. Production has
+  // not applied this migration either. The bounded amendment makes the new
+  // registry self-contained with its own immutable trigger; any further byte
+  // change remains forbidden.
+  name: '20260828100000_computational_witness_registry.sql',
+  baseSha256: '4a819a27c9f2540237a9bedaac46a3734d7b96724c671c070ebc5edbd7982625',
+  currentSha256: '9edf1c00e6a84b19651afb2f7feccd86f9af71fba88080245714933683324151',
+  evidence: 'https://github.com/Maha-Strategies/maha-corp-web/actions/runs/33154575313',
 }] as const
 
 // Run 31474467637 proved that these Maha OS objects already exist in the

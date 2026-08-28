@@ -127,12 +127,6 @@ jobs:
           # newer projects, which GitHub runners cannot reach.
           url="postgresql://postgres.${SUPABASE_PROJECT_REF}:${SUPABASE_DB_PASSWORD}@aws-0-us-east-1.pooler.supabase.com:5432/postgres"
           if [ "$MIGRATION" = "20260828100000_computational_witness_registry.sql" ]; then
-            prerequisite=$(psql "$url" -v ON_ERROR_STOP=1 -At -c \
-              "select (to_regprocedure('public.reject_epistemic_ledger_mutation()') is not null)::text;")
-            if [ "$prerequisite" != "true" ]; then
-              echo '::error::Immutable-ledger trigger dependency is absent. Refusing a partial witness migration.'
-              exit 1
-            fi
             psql "$url" -v ON_ERROR_STOP=1 --single-transaction \
               -f "supabase/migrations/$MIGRATION" 2>&1 | tee "$EVIDENCE/applied.txt"
           else
@@ -164,9 +158,10 @@ jobs:
                 union all select 'record_witness=' || (to_regprocedure('public.record_computational_witness_receipt(text,jsonb,text,text,text,text,text,integer)') is not null)::text
                 union all select 'read_witness=' || (to_regprocedure('public.read_computational_witness_receipt(text,text)') is not null)::text
                 union all select 'purge_witness=' || (to_regprocedure('public.purge_computational_witness_payload(text,text,text,text)') is not null)::text
-                union all select 'expire_witness=' || (to_regprocedure('public.purge_expired_computational_witness_payloads(timestamptz,integer)') is not null)::text;
+                union all select 'expire_witness=' || (to_regprocedure('public.purge_expired_computational_witness_payloads(timestamptz,integer)') is not null)::text
+                union all select 'immutable_witness=' || (to_regprocedure('public.reject_computational_witness_mutation()') is not null)::text;
               " | tee "$EVIDENCE/verify.txt"
-              if grep -q '=false' "$EVIDENCE/verify.txt" || [ "$(wc -l < "$EVIDENCE/verify.txt")" -ne 8 ]; then
+              if grep -q '=false' "$EVIDENCE/verify.txt" || [ "$(wc -l < "$EVIDENCE/verify.txt")" -ne 9 ]; then
                 echo '::error::Computational witness registry objects did not converge.'
                 exit 1
               fi
