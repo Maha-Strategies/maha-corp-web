@@ -1,0 +1,21 @@
+{
+  "name": "@maha/wasm-kernel",
+  "version": "0.2.0",
+  "private": true,
+  "type": "module",
+  "sideEffects": false,
+  "files": ["dist", "conformance", "README.md"],
+  "exports": {
+    ".": { "types": "./dist/index.d.ts", "import": "./dist/index.js" },
+    "./conformance/vectors.json": "./conformance/vectors.json"
+  },
+  "scripts": {
+    "build:wasm": "asc assembly/index.ts --outFile dist/kernel.wasm --textFile dist/kernel.wat --optimize --runtime stub --exportRuntime",
+    "build:ts": "tsc -p tsconfig.json",
+    "generate:conformance": "node --experimental-strip-types scripts/generate-conformance.ts",
+    "generate:manifest": "node --experimental-strip-types scripts/generate-manifest.ts",
+    "build": "npm run build:wasm && npm run build:ts && npm run generate:manifest",
+    "prepack": "npm run build",
+    "pack:dry-run": "npm pack --dry-run"
+  }
+}

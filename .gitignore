@@ -82,3 +82,8 @@ next-env.d.ts
 !supabase/seed.sql
 interop/**/*-evidence.json
 interop/**/synthetic-evidence.json
+
+# Reproducibly generated WASM kernel artifacts. Source, compiler lockfile and
+# frozen conformance vectors are tracked; binaries are built for tests/package.
+/packages/wasm-kernel/dist/*.wasm
+/packages/wasm-kernel/dist/*.wat
