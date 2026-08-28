@@ -1,0 +1,46 @@
+{
+  "artifactVersion": "1.0.0",
+  "recordedAt": "2026-08-28",
+  "peer": {
+    "handle": "thrivbe",
+    "did": "did:key:zQ3shs5FSFqMhhCw7MazfRtyWZwBXGMVLs2jLxu8xiihjEbnJ",
+    "publicKey": "03b8bd2886d40b5a4b6d12d396ff60c8df6b3b1deecc777411335d60afc5283673",
+    "carpUrl": "http://157.180.117.231:8888"
+  },
+  "scope": {
+    "operation": "one reciprocal ADILOS proof attempt",
+    "moneyAuthorized": false,
+    "enquiryAuthorized": false,
+    "purchaseAuthorized": false,
+    "reservationAuthorized": false,
+    "escrowAuthorized": false,
+    "deliveryAuthorized": false,
+    "additionalAttemptAuthorized": false
+  },
+  "observations": {
+    "attemptCompletedAt": "2026-08-28T06:51:45.276Z",
+    "mahaSignedDescriptorFetch": "pass",
+    "thrivbeChallengeFetch": "failed_transport",
+    "challengeReceiptConfirmed": false,
+    "responseGenerated": false,
+    "responseSent": false,
+    "reciprocalProofCompleted": false,
+    "encryptedEnquirySent": false,
+    "failureMode": "fail_closed",
+    "boundedError": "fetch failed"
+  },
+  "followUpDiagnosis": {
+    "thrivbeDidEndpointReachableFromOperatorEnvironment": true,
+    "productionToThrivbeTransportConfirmed": false,
+    "nextAttemptRequiresFreshAuthorization": true,
+    "nextAttemptRequiresTransportCorrection": true
+  },
+  "retention": {
+    "privateKeysRetained": false,
+    "adilosChallengesRetained": false,
+    "adilosResponsesRetained": false,
+    "encryptedPayloadsRetained": false,
+    "credentialsRetained": false
+  },
+  "claimBoundary": "This artifact records one authorized, failed-closed reciprocal ADILOS attempt. It does not prove reciprocal trust or a completed encrypted enquiry. The one-use execution route was removed from Production after the attempt."
+}

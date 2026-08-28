@@ -199,11 +199,12 @@ export const mahaCarpSellerProfile = Object.freeze({
     confirmationEvidence: `${SITE_URL}/artifacts/carp/thrivbe-buyer-review-2026-08-27.json`,
     directPeerBindings: [{
       handle: 'thrivbe',
-      status: 'preapproved_pending_adilos',
+      status: 'thrivbe_to_maha_verified_maha_to_thrivbe_transport_blocked',
       did: 'did:key:zQ3shs5FSFqMhhCw7MazfRtyWZwBXGMVLs2jLxu8xiihjEbnJ',
       sadUrl: 'http://157.180.117.231:8888/cgi-bin/thrivbe',
       publicKey: '03b8bd2886d40b5a4b6d12d396ff60c8df6b3b1deecc777411335d60afc5283673',
       carpUrl: 'http://157.180.117.231:8888',
+      reciprocalEvidence: `${SITE_URL}/artifacts/carp/thrivbe-reciprocal-attempt-2026-08-28.json`,
     }],
     did: identity?.did.id ?? null,
     didUrl: MAHA_CARP_DID_URL,
