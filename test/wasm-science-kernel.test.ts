@@ -76,7 +76,8 @@ test('semiconductor thermal primitives preserve declared units and half-even rou
   const wasm = await kernel()
   const resistance = wasm.layerThermalResistanceNanoKelvinPerWatt(BigInt('100'), BigInt('1000000'), BigInt('100000'))
   assert.equal(resistance, BigInt('1000000'))
-  assert.equal(wasm.temperatureRiseMicrokelvin(BigInt('1000'), resistance), BigInt('1'))
+  // 1000 mW = 1 W and 1,000,000 nK/W = 1,000 µK/W.
+  assert.equal(wasm.temperatureRiseMicrokelvin(BigInt('1000'), resistance), BigInt('1000'))
   assert.throws(() => wasm.layerThermalResistanceNanoKelvinPerWatt(BigInt('1'), BigInt('0'), BigInt('1')), WebAssembly.RuntimeError)
 })
 

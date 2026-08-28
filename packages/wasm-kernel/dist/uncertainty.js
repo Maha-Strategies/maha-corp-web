@@ -9,11 +9,11 @@ function parsed(interval, name) {
     return { lower, upper };
 }
 function floorDivide(numerator, denominator) {
-    if (denominator <= 0n)
+    if (denominator <= BigInt('0'))
         throw new Error('Uncertainty denominator must be positive.');
     const quotient = numerator / denominator;
     const remainder = numerator % denominator;
-    return remainder < 0n ? quotient - 1n : quotient;
+    return remainder < BigInt('0') ? quotient - BigInt('1') : quotient;
 }
 function ceilDivide(numerator, denominator) {
     return -floorDivide(-numerator, denominator);
@@ -38,9 +38,9 @@ export function thermalResistanceInterval(input) {
     const thickness = parsed(input.thicknessNanometers, 'thicknessNanometers');
     const area = parsed(input.areaSquareMicrometers, 'areaSquareMicrometers');
     const conductivity = parsed(input.conductivityMilliwattsPerMeterKelvin, 'conductivityMilliwattsPerMeterKelvin');
-    if (thickness.lower < 0n || area.lower <= 0n || conductivity.lower <= 0n)
+    if (thickness.lower < BigInt('0') || area.lower <= BigInt('0') || conductivity.lower <= BigInt('0'))
         throw new Error('Thermal uncertainty intervals must remain inside the positive model domain.');
-    const scale = 1000000000000000n;
+    const scale = BigInt('1000000000000000');
     return {
         lower: floorDivide(thickness.lower * scale, area.upper * conductivity.upper).toString(),
         upper: ceilDivide(thickness.upper * scale, area.lower * conductivity.lower).toString(),
@@ -50,11 +50,11 @@ export function thermalResistanceInterval(input) {
 export function temperatureRiseInterval(input) {
     const heat = parsed(input.heatMilliwatts, 'heatMilliwatts');
     const resistance = parsed(input.resistanceNanoKelvinPerWatt, 'resistanceNanoKelvinPerWatt');
-    if (heat.lower < 0n || resistance.lower < 0n)
+    if (heat.lower < BigInt('0') || resistance.lower < BigInt('0'))
         throw new Error('Temperature-rise uncertainty intervals must remain non-negative.');
     return {
-        lower: floorDivide(heat.lower * resistance.lower, 1000000000n).toString(),
-        upper: ceilDivide(heat.upper * resistance.upper, 1000000000n).toString(),
+        lower: floorDivide(heat.lower * resistance.lower, BigInt('1000000')).toString(),
+        upper: ceilDivide(heat.upper * resistance.upper, BigInt('1000000')).toString(),
         unit: 'uK',
     };
 }

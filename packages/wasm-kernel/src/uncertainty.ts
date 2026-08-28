@@ -61,8 +61,8 @@ export function temperatureRiseInterval(input: { heatMilliwatts: IntegerInterval
   const resistance = parsed(input.resistanceNanoKelvinPerWatt, 'resistanceNanoKelvinPerWatt')
   if (heat.lower < BigInt('0') || resistance.lower < BigInt('0')) throw new Error('Temperature-rise uncertainty intervals must remain non-negative.')
   return {
-    lower: floorDivide(heat.lower * resistance.lower, BigInt('1000000000')).toString(),
-    upper: ceilDivide(heat.upper * resistance.upper, BigInt('1000000000')).toString(),
+    lower: floorDivide(heat.lower * resistance.lower, BigInt('1000000')).toString(),
+    upper: ceilDivide(heat.upper * resistance.upper, BigInt('1000000')).toString(),
     unit: 'uK',
   }
 }

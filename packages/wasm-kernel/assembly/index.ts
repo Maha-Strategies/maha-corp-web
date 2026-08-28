@@ -1,6 +1,8 @@
 const FULL_CIRCLE_MICRODEGREES: i64 = 360_000_000
 const SIGN_MICRODEGREES: i64 = 30_000_000
-const NANO_PER_KELVIN: i64 = 1_000_000_000
+// mW × nK/W produces 10^-12 K; one µK is 10^-6 K, so the
+// integer product is divided by 10^6 to return microkelvin.
+const MILLI_NANO_PER_MICRO: i64 = 1_000_000
 const I64_MIN: i64 = -9_223_372_036_854_775_807 - 1
 
 function checkedAdd(a: i64, b: i64): i64 {
@@ -92,5 +94,5 @@ export function temperatureRiseMicrokelvin(
   resistanceNanoKelvinPerWatt: i64,
 ): i64 {
   if (heatMilliwatts < 0 || resistanceNanoKelvinPerWatt < 0) unreachable()
-  return divideHalfEven(checkedMultiply(heatMilliwatts, resistanceNanoKelvinPerWatt), NANO_PER_KELVIN)
+  return divideHalfEven(checkedMultiply(heatMilliwatts, resistanceNanoKelvinPerWatt), MILLI_NANO_PER_MICRO)
 }
