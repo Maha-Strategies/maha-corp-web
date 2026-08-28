@@ -152,10 +152,33 @@ class WitnessTests(unittest.TestCase):
             environment={"machine": "fixture"},
         )
         with self.assertRaises(ValueError):
-            submit_receipt(receipt, registry_url="http://localhost/receipts", bearer_token="token")
+            submit_receipt(receipt, registry_url="http://localhost/receipts", bearer_token="token", idempotency_key="witness-001", retention_days=30)
         tampered = dict(receipt, jobId="changed")
         with self.assertRaisesRegex(ValueError, "invalid receipt"):
-            submit_receipt(tampered, registry_url="https://registry.invalid/receipts", bearer_token="token")
+            submit_receipt(tampered, registry_url="https://registry.invalid/receipts", bearer_token="token", idempotency_key="witness-001", retention_days=30)
+
+        captured = {}
+
+        class FakeResponse:
+            def __enter__(self):
+                return self
+
+            def __exit__(self, *_args):
+                return False
+
+            def read(self):
+                return b'{"status":"created"}'
+
+        def opener(request, **_kwargs):
+            captured["request"] = request
+            return FakeResponse()
+
+        result = submit_receipt(receipt, registry_url="https://registry.invalid/receipts", bearer_token="private-token", idempotency_key="witness-001", retention_days=30, opener=opener)
+        self.assertEqual(result, {"status": "created"})
+        request = captured["request"]
+        self.assertEqual(request.get_header("Idempotency-key"), "witness-001")
+        self.assertEqual(request.get_header("X-maha-witness-retention-days"), "30")
+        self.assertNotIn(b"private-token", request.data)
 
     def test_arbitrary_cli_json_fails_closed(self) -> None:
         self.assertEqual(verify_receipt([]), (False, ("witness-unparseable",)))  # type: ignore[arg-type]

@@ -44,6 +44,10 @@ export const SELF_MANAGED_KEY_ROUTE_PREFIXES = [
   // database boundary. It must reach its route-level gate with that bearer
   // intact rather than being interpreted as a customer API key.
   '/api/v1/celestial-corpus/',
+  // Computational witness routes validate the receipt before consuming one
+  // tenant API unit, then perform their own tenant-scoped authorization. The
+  // generic proxy must preserve the bearer and must not double-charge it.
+  '/api/v1/witness/',
 ] as const
 
 export const API_CORS_HEADERS = {

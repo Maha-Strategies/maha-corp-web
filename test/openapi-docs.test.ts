@@ -151,6 +151,9 @@ const PRIVATE_ROUTES = new Set([
   '/api/cron/utility-upload-cleanup',
   '/api/cron/celestial-webhooks',
   '/api/cron/celestial-retention',
+  // Tenant witness receipt retention is a private scheduled maintenance route
+  // authenticated by CRON_SECRET, not a customer-callable REST operation.
+  '/api/cron/computational-witness-retention',
   '/api/conversion-events',
   '/api/cron/utility-upload-cleanup',
   '/api/mps-audits/[auditId]',
@@ -172,6 +175,11 @@ const PRIVATE_ROUTES = new Set([
   '/api/v1/orchestration/tasks/[taskId]',
   '/api/v1/orchestration/readiness',
   '/api/v1/workflows/[taskId]/approvals/[approvalId]',
+  // Phase-2 computational witness registry. Tenant-authenticated and private
+  // until its migration and production canary have been operated successfully.
+  '/api/v1/witness/receipts',
+  '/api/v1/witness/receipts/[receiptSha256]',
+  '/api/v1/witness/verify',
   // Unpublished Vibes-Coded target. It remains out of Maha's public OpenAPI
   // contract until Mayone authorizes publication of the separate SKU.
   '/api/v1/seller-endpoints/governed-context-verification-pack/call',

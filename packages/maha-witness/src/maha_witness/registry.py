@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import re
 import urllib.parse
 import urllib.request
 from typing import Any, Callable, Mapping
@@ -16,6 +17,8 @@ def submit_receipt(
     *,
     registry_url: str,
     bearer_token: str,
+    idempotency_key: str,
+    retention_days: int,
     timeout_seconds: float = 15.0,
     opener: Callable[..., Any] = urllib.request.urlopen,
 ) -> Mapping[str, Any]:
@@ -27,6 +30,10 @@ def submit_receipt(
         raise ValueError("Registry submission requires an absolute HTTPS URL.")
     if not bearer_token.strip():
         raise ValueError("Registry bearer token is required.")
+    if not re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9._:-]{7,119}", idempotency_key):
+        raise ValueError("Registry idempotency key must contain 8-120 safe identifier characters.")
+    if not 1 <= retention_days <= 3650:
+        raise ValueError("Registry retention_days must be from 1 to 3650.")
     request = urllib.request.Request(
         registry_url,
         data=canonical_json(receipt).encode("utf-8"),
@@ -35,6 +42,9 @@ def submit_receipt(
             "Content-Type": "application/json",
             "Accept": "application/json",
             "User-Agent": "maha-witness/0.1.0",
+            "Idempotency-Key": idempotency_key,
+            "X-Maha-Witness-Retention-Consent": "persist-receipt",
+            "X-Maha-Witness-Retention-Days": str(retention_days),
         },
         method="POST",
     )

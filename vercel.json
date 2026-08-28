@@ -13,6 +13,7 @@
     { "path": "/api/cron/job-reclaim", "schedule": "*/10 * * * *" },
     { "path": "/api/cron/x402-observatory", "schedule": "47 5 * * *" },
     { "path": "/api/cron/celestial-webhooks", "schedule": "*/5 * * * *" },
-    { "path": "/api/cron/celestial-retention", "schedule": "15 4 * * *" }
+    { "path": "/api/cron/celestial-retention", "schedule": "15 4 * * *" },
+    { "path": "/api/cron/computational-witness-retention", "schedule": "45 4 * * *" }
   ]
 }
