@@ -1,7 +1,7 @@
 {
   "$schema": "https://www.mahastrategies.com/maha-machine-readable-registry.schema.json",
-  "registryVersion": "1.1.0",
-  "asOf": "2026-08-24",
+  "registryVersion": "1.2.0",
+  "asOf": "2026-08-28",
   "provider": {
     "name": "Maha Strategies LLC",
     "url": "https://www.mahastrategies.com"
@@ -78,6 +78,19 @@
       ],
       "evidenceBoundary": "The public artifact records a bounded evaluation configuration and outcome. It is not a WSO2 endorsement, certification, or claim about another deployment.",
       "commercialBoundary": "Customer gateway installation and security review remain separate from the public artifacts."
+    },
+    {
+      "id": "fulcra-flow-state-provenance",
+      "kind": "integration",
+      "name": "Fulcra Flow State metadata provenance",
+      "status": "public_evidence",
+      "url": "https://www.mahastrategies.com/artifacts/integrations/fulcra-flow-state-pr-33.json",
+      "machineReadable": true,
+      "evidence": [
+        "https://www.mahastrategies.com/artifacts/integrations/fulcra-flow-state-pr-33.json"
+      ],
+      "evidenceBoundary": "The artifact records an upstream-merged metadata-provenance contribution and its synthetic verification. It does not claim a private session run, live Fulcra API validation, partnership, endorsement or production deployment.",
+      "commercialBoundary": "The contribution is public under the upstream MIT license, but no registry entry represents a customer engagement or commercial validation."
     },
     {
       "id": "governed-workflow-state-graph",
