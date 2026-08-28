@@ -1,5 +1,7 @@
 export declare const KERNEL_RECEIPT_SCHEMA: "maha-calculation-receipt/1.0";
+export declare const KERNEL_CANONICALIZATION_VERSION: "maha-dossier-canonical/1.0";
 export interface CalculationReceiptInput {
+    canonicalizationVersion: typeof KERNEL_CANONICALIZATION_VERSION;
     module: string;
     operation: string;
     inputs: Readonly<Record<string, string>>;

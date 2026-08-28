@@ -59,6 +59,6 @@ export function layerThermalResistanceNanoKelvinPerWatt(thickness, area, conduct
 export function temperatureRiseMicrokelvin(heatMilliwatts, resistanceNanoKelvinPerWatt) {
     if (heatMilliwatts < BigInt("0") || resistanceNanoKelvinPerWatt < BigInt("0"))
         throw new RangeError('thermal inputs are outside the declared domain');
-    return divideHalfEven(checkedI64(heatMilliwatts * resistanceNanoKelvinPerWatt), BigInt("1000000000"));
+    return divideHalfEven(checkedI64(heatMilliwatts * resistanceNanoKelvinPerWatt), BigInt("1000000"));
 }
 //# sourceMappingURL=reference.js.map

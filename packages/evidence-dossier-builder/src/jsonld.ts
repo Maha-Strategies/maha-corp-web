@@ -1,5 +1,6 @@
 import { canonicalJson } from './canonicalize.ts'
 import type { EvidenceDossier } from './schema.ts'
+import type { DossierCalculationAttachment } from '../../wasm-kernel/src/dossier.ts'
 
 export const DOSSIER_JSONLD_CONTEXT = 'https://www.mahastrategies.com/ns/evidence-dossier/v1' as const
 
@@ -38,7 +39,7 @@ export interface DossierJsonLd {
   disclaimer: string
 }
 
-export function renderDossierJsonLd(dossier: EvidenceDossier): DossierJsonLd {
+export function renderDossierJsonLd(dossier: EvidenceDossier, attachments: readonly DossierCalculationAttachment[] = []): DossierJsonLd {
   return {
     '@context': DOSSIER_JSONLD_CONTEXT,
     '@type': 'EvidenceDossier',
@@ -92,9 +93,18 @@ export function renderDossierJsonLd(dossier: EvidenceDossier): DossierJsonLd {
       sourceRevision: passage.sourceRevision,
     })),
 
-    calculations: [],
+    calculations: attachments.map((attachment) => ({
+      '@type': 'Calculation',
+      '@id': attachment.receipt.receiptSha256,
+      module: attachment.receipt.module,
+      operation: attachment.receipt.operation,
+      calculationForClaims: attachment.claimIds,
+      output: attachment.receipt.output,
+      uncertainty: attachment.receipt.uncertainty,
+      precisionPolicy: attachment.receipt.precisionPolicy,
+    })),
     formalProofs: [],
-    runtimeReceipts: [],
+    runtimeReceipts: attachments.map((attachment) => attachment.receipt as unknown as Record<string, unknown>),
 
     assurance: {
       '@type': 'AssuranceStatement',
@@ -130,6 +140,6 @@ export function renderDossierJsonLd(dossier: EvidenceDossier): DossierJsonLd {
 }
 
 /** Deterministic serialization: canonical key order and NFC normalization. */
-export function renderDossierJsonLdText(dossier: EvidenceDossier): string {
-  return `${canonicalJson(renderDossierJsonLd(dossier))}\n`
+export function renderDossierJsonLdText(dossier: EvidenceDossier, attachments: readonly DossierCalculationAttachment[] = []): string {
+  return `${canonicalJson(renderDossierJsonLd(dossier, attachments))}\n`
 }

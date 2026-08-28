@@ -14,6 +14,8 @@ export * from './validate.ts'
 export * from './compile.ts'
 export * from './verify.ts'
 export * from './jsonld.ts'
+export * from './pdf.ts'
+export * from './integrated-package.ts'
 
 export const EVIDENCE_DOSSIER_BUILDER_VERSION = 'maha-evidence-dossier-builder/0.1' as const
 export const EVIDENCE_DOSSIER_BUILDER_BOUNDARY =

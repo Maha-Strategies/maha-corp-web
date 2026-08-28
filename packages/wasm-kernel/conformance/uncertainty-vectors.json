@@ -1,0 +1,31 @@
+{
+  "schemaVersion": "maha-uncertainty-conformance/1.0",
+  "modelVersion": "maha-interval-uncertainty/1.0",
+  "vectors": [
+    {
+      "operation": "thermalResistanceInterval",
+      "inputs": {
+        "thicknessNanometers": { "lower": "95", "upper": "105", "unit": "nm" },
+        "areaSquareMicrometers": { "lower": "9900", "upper": "10100", "unit": "um2" },
+        "conductivityMilliwattsPerMeterKelvin": { "lower": "24000", "upper": "26000", "unit": "mW/(m*K)" }
+      },
+      "output": { "lower": "361766945", "upper": "441919192", "unit": "nK/W" }
+    },
+    {
+      "operation": "temperatureRiseInterval",
+      "inputs": {
+        "heatMilliwatts": { "lower": "900", "upper": "1100", "unit": "mW" },
+        "resistanceNanoKelvinPerWatt": { "lower": "361766945", "upper": "441919192", "unit": "nK/W" }
+      },
+      "output": { "lower": "325590", "upper": "486112", "unit": "uK" }
+    },
+    {
+      "operation": "addIntervals",
+      "inputs": {
+        "left": { "lower": "-2", "upper": "4", "unit": "uK" },
+        "right": { "lower": "3", "upper": "8", "unit": "uK" }
+      },
+      "output": { "lower": "1", "upper": "12", "unit": "uK" }
+    }
+  ]
+}
