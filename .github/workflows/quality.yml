@@ -77,3 +77,8 @@ jobs:
       - name: Test the Python client
         working-directory: clients/python
         run: python -m unittest discover -s tests -v
+      - name: Check the computational provenance witness
+        run: ruff check --isolated --select E9,F82 packages/maha-witness/
+      - name: Test the computational provenance witness
+        working-directory: packages/maha-witness
+        run: PYTHONPATH=src python -m unittest discover -s tests -v
