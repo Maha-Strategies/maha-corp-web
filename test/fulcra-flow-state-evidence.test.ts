@@ -11,7 +11,17 @@ type FulcraEvidence = {
   integration: { pullRequestNumber: number; state: string; mergeCommit: string }
   license: { status: string; upstreamLicense: string }
   publicDisclosure: Record<string, boolean>
-  privateSessionValidation: { sharingScope: string; completionStatus: string }
+  privateSessionValidation: {
+    sharingScope: string
+    completionStatus: string
+    sourceAudio: string
+    thirdPartyAudioUsed: boolean
+    markerDetections: number
+    provenanceVerified: boolean
+    liveFulcraPublicationReadBackVerified: boolean
+    shareRecordCreated: boolean
+    privateArtifactsRetainedOutsideRepository: boolean
+  }
   nonClaims: string[]
   claimBoundary: string
 }
@@ -31,8 +41,15 @@ test('Fulcra evidence records the upstream merge without inflating the claim', (
 
   assert.ok(Object.values(artifact.publicDisclosure).every((value) => value === false))
   assert.equal(artifact.privateSessionValidation.sharingScope, 'private')
-  assert.equal(artifact.privateSessionValidation.completionStatus, 'not_confirmed_complete')
-  assert.match(artifact.claimBoundary, /does not prove a private session run/i)
+  assert.equal(artifact.privateSessionValidation.completionStatus, 'completed_private')
+  assert.equal(artifact.privateSessionValidation.sourceAudio, 'original_synthetic_tones')
+  assert.equal(artifact.privateSessionValidation.thirdPartyAudioUsed, false)
+  assert.equal(artifact.privateSessionValidation.markerDetections, 1)
+  assert.equal(artifact.privateSessionValidation.provenanceVerified, true)
+  assert.equal(artifact.privateSessionValidation.liveFulcraPublicationReadBackVerified, true)
+  assert.equal(artifact.privateSessionValidation.shareRecordCreated, false)
+  assert.equal(artifact.privateSessionValidation.privateArtifactsRetainedOutsideRepository, true)
+  assert.match(artifact.claimBoundary, /does not establish a human performance result/i)
   assert.ok(artifact.nonClaims.some((claim) => /not a Fulcra partnership/i.test(claim)))
 })
 
