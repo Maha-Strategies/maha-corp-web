@@ -255,21 +255,30 @@ test('the daily retention cron is registered and separately authenticated', asyn
   assert.match(route, /immutableIdentityRetained: true/)
 })
 
-test('Preview migration and lifecycle workflows verify the witness registry without Production access', async () => {
-  const [migrationWorkflow, canaryWorkflow, canary] = await Promise.all([
+test('Preview and Production lifecycle workflows are scope-separated around one receipt lifecycle', async () => {
+  const [migrationWorkflow, previewWorkflow, productionWorkflow, canary] = await Promise.all([
     readFile(new URL('.github/workflows/preview-migrations.yml', ROOT), 'utf8'),
     readFile(new URL('.github/workflows/preview-computational-witness-canary.yml', ROOT), 'utf8'),
-    readFile(new URL('scripts/run-preview-witness-canary.py', ROOT), 'utf8'),
+    readFile(new URL('.github/workflows/production-computational-witness-canary.yml', ROOT), 'utf8'),
+    readFile(new URL('scripts/run-witness-lifecycle-canary.py', ROOT), 'utf8'),
   ])
   assert.match(migrationWorkflow, /20260828100000_computational_witness_registry\.sql/)
   assert.match(migrationWorkflow, /immutable_witness=/)
   assert.match(migrationWorkflow, /--single-transaction/)
   for (const object of ['witness_receipts', 'witness_payloads', 'witness_submissions', 'witness_payload_events', 'record_witness', 'read_witness', 'purge_witness', 'expire_witness']) assert.match(migrationWorkflow, new RegExp(`${object}=`))
-  assert.match(canaryWorkflow, /environment: preview-e2e/)
-  assert.match(canaryWorkflow, /RUN PRIVATE WITNESS CANARY/)
-  assert.doesNotMatch(canaryWorkflow, /production-database/)
+  assert.match(previewWorkflow, /environment: preview-e2e/)
+  assert.match(previewWorkflow, /WITNESS_CANARY_SCOPE: preview/)
+  assert.match(previewWorkflow, /RUN PRIVATE WITNESS CANARY/)
+  assert.doesNotMatch(previewWorkflow, /production-database|production-canary/)
+  assert.match(productionWorkflow, /name: production-canary/)
+  assert.match(productionWorkflow, /WITNESS_CANARY_SCOPE: production/)
+  assert.match(productionWorkflow, /RUN PRODUCTION WITNESS CANARY/)
+  assert.match(productionWorkflow, /test "\$TEST_API_URL" = 'https:\/\/www\.mahastrategies\.com'/)
+  assert.doesNotMatch(productionWorkflow, /preview-e2e|PREVIEW_CANARY_API_KEY/)
   for (const method of ['POST', 'GET', 'DELETE']) assert.match(canary, new RegExp(`request\\(\"${method}\"`))
   assert.match(canary, /expected=410/)
   assert.match(canary, /immutableIdentityRetained/)
+  assert.match(canary, /base_url != "https:\/\/www\.mahastrategies\.com"/)
+  assert.match(canary, /hostname\.endswith\("mahastrategies\.com"\)/)
   assert.doesNotMatch(canary, /print\(api_key|print\(bypass/)
 })
