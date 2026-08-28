@@ -57,15 +57,22 @@
   "privateSessionValidation": {
     "authorizationRecordedOutsideThisArtifact": true,
     "sharingScope": "private",
-    "completionStatus": "not_confirmed_complete",
-    "boundary": "PR #33 and its synthetic tests do not establish that the separately authorized private one-session validation was run. Any private result must remain outside this public artifact unless separately authorized for disclosure."
+    "completionStatus": "completed_private",
+    "sourceAudio": "original_synthetic_tones",
+    "thirdPartyAudioUsed": false,
+    "markerDetections": 1,
+    "provenanceVerified": true,
+    "liveFulcraPublicationReadBackVerified": true,
+    "shareRecordCreated": false,
+    "privateArtifactsRetainedOutsideRepository": true,
+    "boundary": "This publishes only the participant-authorized sanitized completion state. Audio, consent references, record digests, Fulcra paths, upload identifiers and the full private result remain outside the repository and public artifact."
   },
   "nonClaims": [
     "This is not a Fulcra partnership, endorsement, certification or security assessment.",
     "This does not attest Fulcra access enforcement or alter the Flow State upload pipeline.",
     "This does not establish creative ownership, marker accuracy, key accuracy or BPM accuracy.",
-    "This does not prove a live Fulcra API session or a human creative session was completed.",
+    "This does not prove that a human musical performance was processed; the completed private validation used original synthetic tones.",
     "This is not evidence of customer adoption or commercial validation."
   ],
-  "claimBoundary": "The merged pull request proves that the bounded metadata-provenance contribution was accepted into the upstream Fulcra community repository at the identified commit. It does not prove a private session run, production deployment, partnership, endorsement or commercial outcome."
+  "claimBoundary": "The merged pull request proves that the bounded metadata-provenance contribution was accepted into the upstream Fulcra community repository at the identified commit. A separately authorized private synthetic-audio session verified one marker-to-MusicalIdea Fulcra round trip and the metadata-only provenance record; it does not establish a human performance result, production deployment, partnership, endorsement or commercial outcome."
 }
