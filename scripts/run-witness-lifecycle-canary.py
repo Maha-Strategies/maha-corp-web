@@ -1,11 +1,10 @@
-"""Private Preview-only lifecycle canary for the computational witness registry."""
+"""Private, scope-guarded lifecycle canary for the computational witness registry."""
 
 from __future__ import annotations
 
 import json
 import os
 import platform
-import sys
 import urllib.error
 import urllib.parse
 import urllib.request
@@ -23,14 +22,23 @@ def required(name: str) -> str:
     return value
 
 
+scope = required("WITNESS_CANARY_SCOPE")
+if scope not in {"preview", "production"}:
+    raise RuntimeError("WITNESS_CANARY_SCOPE must be preview or production.")
+
 base_url = required("TEST_API_URL").rstrip("/")
 parsed = urllib.parse.urlparse(base_url)
-if parsed.scheme != "https" or not parsed.netloc:
-    raise RuntimeError("TEST_API_URL must be an absolute HTTPS URL.")
-if parsed.hostname and parsed.hostname.endswith("mahastrategies.com"):
-    raise RuntimeError("Refusing to run a Preview canary against an apex or custom domain.")
+if parsed.scheme != "https" or not parsed.netloc or parsed.path or parsed.params or parsed.query or parsed.fragment:
+    raise RuntimeError("TEST_API_URL must be an origin-only HTTPS URL.")
 
-api_key = required("PREVIEW_CANARY_API_KEY")
+hostname = parsed.hostname or ""
+if scope == "preview":
+    if hostname.endswith("mahastrategies.com"):
+        raise RuntimeError("Refusing to run a Preview canary against an apex or custom domain.")
+elif base_url != "https://www.mahastrategies.com":
+    raise RuntimeError("Production witness canary target must be exactly https://www.mahastrategies.com.")
+
+api_key = required("WITNESS_CANARY_API_KEY")
 bypass = os.environ.get("VERCEL_AUTOMATION_BYPASS_SECRET", "").strip()
 run_id = required("GITHUB_RUN_ID")
 run_attempt = required("GITHUB_RUN_ATTEMPT")
@@ -72,18 +80,18 @@ started_at = utc_second()
 sum(index * index for index in range(128))
 finished_at = utc_second()
 receipt = build_receipt(
-    job_id=f"preview-witness-canary-{run_id}-{run_attempt}",
-    callable_identity={"module": "scripts.run-preview-witness-canary", "qualname": "bounded_canary_computation"},
+    job_id=f"{scope}-witness-canary-{run_id}-{run_attempt}",
+    callable_identity={"module": "scripts.run-witness-lifecycle-canary", "qualname": "bounded_canary_computation"},
     status="succeeded",
     started_at=started_at,
     finished_at=finished_at,
     artifacts=[],
     environment={"pythonImplementation": platform.python_implementation(), "pythonVersion": platform.python_version(), "system": platform.system()},
-    configuration={"purpose": "private-preview-registry-lifecycle-canary"},
+    configuration={"purpose": f"private-{scope}-registry-lifecycle-canary"},
 )
 digest = str(receipt["receiptSha256"])
 encoded_digest = urllib.parse.quote(digest, safe="")
-idempotency_key = f"preview-witness-{run_id}-{run_attempt}"
+idempotency_key = f"{scope}-witness-{run_id}-{run_attempt}"
 
 created = request("POST", "/api/v1/witness/receipts", body=receipt, headers={
     "Idempotency-Key": idempotency_key,
@@ -110,7 +118,8 @@ if read_after.get("payloadAvailable") is not False or read_after.get("receipt") 
     raise RuntimeError("Post-purge read did not return immutable identity without payload.")
 
 evidence = {
-    "schemaVersion": "maha-witness-preview-canary-evidence/0.1",
+    "schemaVersion": "maha-witness-lifecycle-canary-evidence/1.0",
+    "targetScope": scope,
     "targetHost": parsed.netloc,
     "receiptSha256": digest,
     "created": True,
@@ -124,4 +133,4 @@ evidence = {
 }
 evidence_path.parent.mkdir(parents=True, exist_ok=True)
 evidence_path.write_text(json.dumps(evidence, sort_keys=True, separators=(",", ":")) + "\n", encoding="utf-8")
-print(f"Private Preview witness lifecycle passed for {digest}.")
+print(f"Private {scope.title()} witness lifecycle passed for {digest}.")

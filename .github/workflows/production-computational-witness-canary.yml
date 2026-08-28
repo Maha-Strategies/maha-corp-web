@@ -1,0 +1,63 @@
+name: Production computational witness canary
+
+on:
+  workflow_dispatch:
+    inputs:
+      reason:
+        description: Operator reason (minimum 12 characters)
+        required: true
+        type: string
+      confirmation:
+        description: Type RUN PRODUCTION WITNESS CANARY exactly
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: production-computational-witness-canary
+  cancel-in-progress: false
+
+jobs:
+  canary:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    environment:
+      name: production-canary
+      url: ${{ vars.PRODUCTION_CANARY_BASE_URL }}
+    env:
+      TEST_API_URL: ${{ vars.PRODUCTION_CANARY_BASE_URL }}
+      WITNESS_CANARY_SCOPE: production
+      WITNESS_CANARY_API_KEY: ${{ secrets.PRODUCTION_CANARY_API_KEY }}
+    steps:
+      - name: Validate target, reason and confirmation
+        env:
+          REASON: ${{ inputs.reason }}
+          CONFIRMATION: ${{ inputs.confirmation }}
+        run: |
+          set -euo pipefail
+          test "${#REASON}" -ge 12
+          test "$CONFIRMATION" = 'RUN PRODUCTION WITNESS CANARY'
+          test "$TEST_API_URL" = 'https://www.mahastrategies.com'
+
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+
+      - name: Run private Production lifecycle
+        env:
+          PYTHONPATH: packages/maha-witness/src
+          WITNESS_CANARY_EVIDENCE: ${{ runner.temp }}/witness-canary/evidence.json
+        run: python scripts/run-witness-lifecycle-canary.py
+
+      - name: Upload sanitized evidence
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: production-witness-canary-${{ github.run_id }}
+          path: ${{ runner.temp }}/witness-canary/evidence.json
+          if-no-files-found: warn
+          retention-days: 90

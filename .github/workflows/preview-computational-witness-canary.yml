@@ -26,7 +26,8 @@ jobs:
     environment: preview-e2e
     env:
       TEST_API_URL: ${{ inputs.preview_url }}
-      PREVIEW_CANARY_API_KEY: ${{ secrets.PREVIEW_CANARY_API_KEY }}
+      WITNESS_CANARY_SCOPE: preview
+      WITNESS_CANARY_API_KEY: ${{ secrets.PREVIEW_CANARY_API_KEY }}
       VERCEL_AUTOMATION_BYPASS_SECRET: ${{ secrets.VERCEL_AUTOMATION_BYPASS_SECRET }}
     steps:
       - name: Validate target and confirmation
@@ -58,7 +59,7 @@ jobs:
         env:
           PYTHONPATH: packages/maha-witness/src
           WITNESS_CANARY_EVIDENCE: ${{ runner.temp }}/witness-canary/evidence.json
-        run: python scripts/run-preview-witness-canary.py
+        run: python scripts/run-witness-lifecycle-canary.py
 
       - name: Upload sanitized evidence
         if: always()
