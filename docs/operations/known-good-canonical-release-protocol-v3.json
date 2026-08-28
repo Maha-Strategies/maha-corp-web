@@ -1,0 +1,43 @@
+{
+  "schemaVersion": "maha-known-good-release-protocol/3.0",
+  "protocolId": "isolated-cabezon-preview-migration-and-private-lifecycle-canary",
+  "extends": "docs/operations/known-good-canonical-release-protocol-v2.json",
+  "status": "pending-github-token-revocation",
+  "evidence": {
+    "cabezonPreview": {
+      "branch": "codex/cabezon-preview-adapter",
+      "migrationRunId": 33173876204,
+      "migrationResult": "success",
+      "productionMutationPerformed": false,
+      "lifecycleStatus": "acknowledged",
+      "sharedBypassCredentialUsed": false,
+      "paymentEnabled": false
+    }
+  },
+  "frozenComponents": [
+    {
+      "path": ".github/workflows/preview-migrations.yml",
+      "sha256": "051b3c90e7326fefdc83db34ecbabcdb5f359e7cb0a12d73cdd169c296ab239c"
+    },
+    {
+      "path": ".github/workflows/preview-cabezon-seller-canary.yml",
+      "sha256": "1f52bb9ae1f73bd6d803abf366f31391fc05791f8a766fc23e5317e6e74b4a3c"
+    },
+    {
+      "path": "scripts/run-cabezon-preview-remote-canary.ts",
+      "sha256": "0a5c215106c8f5abfeea506474f2c249f0285cfbe1321921b68101aab86a18d3"
+    },
+    {
+      "path": "supabase/migrations/20260828110000_cabezon_preview_seller_adapter.sql",
+      "sha256": "052d7078cef47eb0e6270c8a7e67675559ed414d72caa8b03e81b90cd15c3cfe"
+    }
+  ],
+  "requiredBoundaries": [
+    "Preview only: the migration and lifecycle canary target the isolated Preview database and Preview deployment.",
+    "GitHub and Vercel secret access was restricted to the exact PR branch codex/cabezon-preview-adapter during validation.",
+    "No Production credential, alias, database or deployment was used or modified.",
+    "No purchase or payment, external delivery, canonical release or broader CABEZON activity was authorized or performed.",
+    "The evidence records only a non-reversible token fingerprint and never the token value.",
+    "The protocol remains pending until GitHub privileged confirmation removes the temporary environment token."
+  ]
+}
