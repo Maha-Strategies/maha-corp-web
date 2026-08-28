@@ -135,6 +135,24 @@ test('Crossref execution normalizes metadata without claiming an open copy', asy
   }
 })
 
+test('DOI resolution preserves the complete identifier and never claims inspection', async () => {
+  const request = packet.requests.find((item) => item.channel === 'doi-resolver')!
+  const prior = globalThis.fetch
+  globalThis.fetch = (async () => new Response(JSON.stringify({ responseCode: 1, values: [{ type: 'URL', data: { value: packet.declaredUrl } }] }), {
+    status: 200,
+    headers: { 'content-type': 'application/json' },
+  })) as typeof fetch
+  try {
+    const result = await executeRecoveryRequest(request)
+    assert.equal(result.observedIdentifier, packet.sourceIdentifier)
+    assert.equal(result.status, 'version-relationship-unverified')
+    assert.equal(result.contentInspected, false)
+    assert.equal(result.exactLocator, null)
+  } finally {
+    globalThis.fetch = prior
+  }
+})
+
 test('the live executor refuses unapproved hosts before network access', async () => {
   let called = false
   const prior = globalThis.fetch

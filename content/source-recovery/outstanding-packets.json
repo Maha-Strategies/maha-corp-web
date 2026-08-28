@@ -1,69 +1,69 @@
 {
   "schemaVersion": "maha-source-recovery-summary/1.0",
-  "contracts": 20,
-  "affectedRecords": 100,
+  "contracts": 19,
+  "affectedRecords": 94,
   "dispositions": {
-    "not-attempted": 20
+    "not-attempted": 19
   },
   "packets": [
     {
       "schemaVersion": "maha-source-recovery/1.0",
       "inputDate": "2026-08-26",
-      "sourceContractId": "source-advanced-materials-vdw",
+      "sourceContractId": "source-advanced-materials-wide-bandgap",
       "domainSlug": "advanced-materials",
-      "sourceTitle": "Van der Waals heterostructures",
-      "sourceIdentifier": "10.1038/nature12385",
-      "declaredUrl": "https://doi.org/10.1038/nature12385",
+      "sourceTitle": "An assessment of wide bandgap semiconductors for power devices",
+      "sourceIdentifier": "10.1109/TPEL.2003.810840",
+      "declaredUrl": "https://doi.org/10.1109/TPEL.2003.810840",
       "affectedRecordIds": [
-        "urn:maha:record:advanced-materials-contact-resistance-in-2d-devices",
-        "urn:maha:record:advanced-materials-cvd-graphene-grain-boundaries",
-        "urn:maha:record:advanced-materials-dielectric-screening",
-        "urn:maha:record:advanced-materials-materials-metrology-transfer",
-        "urn:maha:record:advanced-materials-wafer-scale-2d-growth"
+        "urn:maha:record:advanced-materials-color-centers-in-diamond",
+        "urn:maha:record:advanced-materials-diamond-thermal-conductivity",
+        "urn:maha:record:advanced-materials-diamond-wafer-substrates",
+        "urn:maha:record:advanced-materials-gallium-nitride-epitaxy",
+        "urn:maha:record:advanced-materials-sic-wide-bandgap-substrates"
       ],
       "currentAlignmentStates": [
-        "mismatched"
+        "insufficient-evidence"
       ],
-      "priority": 20,
+      "priority": 19,
       "requests": [
         {
           "channel": "doi-resolver",
-          "url": "https://doi.org/api/handles/10.1038/nature12385",
+          "url": "https://doi.org/api/handles/10.1109/TPEL.2003.810840",
           "purpose": "version-link"
         },
         {
           "channel": "crossref",
-          "url": "https://api.crossref.org/works/10.1038%2Fnature12385",
+          "url": "https://api.crossref.org/works/10.1109%2FTPEL.2003.810840",
           "purpose": "metadata"
         },
         {
           "channel": "europe-pmc",
-          "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI:10.1038%2Fnature12385&format=json",
+          "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI:10.1109%2FTPEL.2003.810840&format=json",
           "purpose": "open-copy"
         },
         {
           "channel": "biorxiv",
-          "url": "https://api.biorxiv.org/details/biorxiv/10.1038%2Fnature12385",
+          "url": "https://api.biorxiv.org/details/biorxiv/10.1109%2FTPEL.2003.810840",
           "purpose": "version-link"
         },
         {
           "channel": "arxiv",
-          "url": "https://export.arxiv.org/api/query?search_query=ti:%22Van%20der%20Waals%20heterostructures%22&max_results=5",
+          "url": "https://export.arxiv.org/api/query?search_query=ti:%22An%20assessment%20of%20wide%20bandgap%20semiconductors%20for%20power%20devices%22&max_results=5",
           "purpose": "open-copy"
         },
         {
           "channel": "osti",
-          "url": "https://www.osti.gov/api/v1/records?q=Van%20der%20Waals%20heterostructures",
+          "url": "https://www.osti.gov/api/v1/records?q=An%20assessment%20of%20wide%20bandgap%20semiconductors%20for%20power%20devices",
           "purpose": "open-copy"
         },
         {
           "channel": "official-publisher",
-          "url": "https://doi.org/10.1038/nature12385",
+          "url": "https://doi.org/10.1109/TPEL.2003.810840",
           "purpose": "open-copy"
         },
         {
           "channel": "institutional-repository",
-          "url": "https://api.openalex.org/works?search=Van%20der%20Waals%20heterostructures&per-page=5",
+          "url": "https://api.openalex.org/works?search=An%20assessment%20of%20wide%20bandgap%20semiconductors%20for%20power%20devices&per-page=5",
           "purpose": "version-link"
         }
       ],
@@ -71,7 +71,7 @@
       "disposition": "not-attempted",
       "inspectionAuthorized": false,
       "canonicalMutationAuthorized": false,
-      "digest": "sha256:60e0eee504b70b9d9a1a22e4bbed4628ca015d60487943306a50479c3bafdc05"
+      "digest": "sha256:161f76cf44879878cbf543e99d726ae54d40dc82b5f47a27a9a58c25654569c2"
     },
     {
       "schemaVersion": "maha-source-recovery/1.0",
@@ -91,7 +91,7 @@
       "currentAlignmentStates": [
         "insufficient-evidence"
       ],
-      "priority": 19,
+      "priority": 18,
       "requests": [
         {
           "channel": "arxiv",
@@ -118,74 +118,7 @@
       "disposition": "not-attempted",
       "inspectionAuthorized": false,
       "canonicalMutationAuthorized": false,
-      "digest": "sha256:7f9e989bdc24f7b159e32b66b960b349ea42a1b50cb996469be56ee9bb0dc2b6"
-    },
-    {
-      "schemaVersion": "maha-source-recovery/1.0",
-      "inputDate": "2026-08-26",
-      "sourceContractId": "source-biomolecular-engineering-toehold",
-      "domainSlug": "biomolecular-engineering",
-      "sourceTitle": "Paper-based synthetic gene networks",
-      "sourceIdentifier": "10.1016/j.cell.2014.10.004",
-      "declaredUrl": "https://doi.org/10.1016/j.cell.2014.10.004",
-      "affectedRecordIds": [
-        "urn:maha:record:biomolecular-engineering-compartmentalized-cell-free-systems",
-        "urn:maha:record:biomolecular-engineering-droplet-microfluidic-screening",
-        "urn:maha:record:biomolecular-engineering-enzyme-cascade-engineering",
-        "urn:maha:record:biomolecular-engineering-metabolic-pathway-prototyping",
-        "urn:maha:record:biomolecular-engineering-translational-control-circuits"
-      ],
-      "currentAlignmentStates": [
-        "inaccessible-source"
-      ],
-      "priority": 18,
-      "requests": [
-        {
-          "channel": "doi-resolver",
-          "url": "https://doi.org/api/handles/10.1016/j.cell.2014.10.004",
-          "purpose": "version-link"
-        },
-        {
-          "channel": "crossref",
-          "url": "https://api.crossref.org/works/10.1016%2Fj.cell.2014.10.004",
-          "purpose": "metadata"
-        },
-        {
-          "channel": "europe-pmc",
-          "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI:10.1016%2Fj.cell.2014.10.004&format=json",
-          "purpose": "open-copy"
-        },
-        {
-          "channel": "biorxiv",
-          "url": "https://api.biorxiv.org/details/biorxiv/10.1016%2Fj.cell.2014.10.004",
-          "purpose": "version-link"
-        },
-        {
-          "channel": "arxiv",
-          "url": "https://export.arxiv.org/api/query?search_query=ti:%22Paper-based%20synthetic%20gene%20networks%22&max_results=5",
-          "purpose": "open-copy"
-        },
-        {
-          "channel": "osti",
-          "url": "https://www.osti.gov/api/v1/records?q=Paper-based%20synthetic%20gene%20networks",
-          "purpose": "open-copy"
-        },
-        {
-          "channel": "official-publisher",
-          "url": "https://doi.org/10.1016/j.cell.2014.10.004",
-          "purpose": "open-copy"
-        },
-        {
-          "channel": "institutional-repository",
-          "url": "https://api.openalex.org/works?search=Paper-based%20synthetic%20gene%20networks&per-page=5",
-          "purpose": "version-link"
-        }
-      ],
-      "observations": [],
-      "disposition": "not-attempted",
-      "inspectionAuthorized": false,
-      "canonicalMutationAuthorized": false,
-      "digest": "sha256:9d43a3dc970344f940e633f25e77cb06e14aa2f6fcc009228f96c6bfe4d35909"
+      "digest": "sha256:c191d96b56c1bf1d8a35e208abc7404e8ec85babc49a30547fcceae40eb5bd2b"
     },
     {
       "schemaVersion": "maha-source-recovery/1.0",
@@ -257,17 +190,17 @@
     {
       "schemaVersion": "maha-source-recovery/1.0",
       "inputDate": "2026-08-26",
-      "sourceContractId": "source-critical-supply-chains-mcs-specialty",
-      "domainSlug": "critical-supply-chains",
-      "sourceTitle": "Mineral Commodity Summaries 2026",
-      "sourceIdentifier": null,
-      "declaredUrl": "https://pubs.usgs.gov/periodicals/mcs2026/mcs2026.pdf",
+      "sourceContractId": "source-biomolecular-engineering-riboregulators",
+      "domainSlug": "biomolecular-engineering",
+      "sourceTitle": "Engineered riboregulators enable post-transcriptional control of gene expression",
+      "sourceIdentifier": "10.1038/nbt986",
+      "declaredUrl": "https://doi.org/10.1038/nbt986",
       "affectedRecordIds": [
-        "urn:maha:record:critical-supply-chains-antimony-smelting-concentration",
-        "urn:maha:record:critical-supply-chains-hafnium-zirconium-separation",
-        "urn:maha:record:critical-supply-chains-helium-liquefaction-logistics",
-        "urn:maha:record:critical-supply-chains-niobium-ferroniobium-production",
-        "urn:maha:record:critical-supply-chains-tantalum-concentrate-traceability"
+        "urn:maha:record:biomolecular-engineering-ligand-binding-aptamer-domains",
+        "urn:maha:record:biomolecular-engineering-riboswitch-expression-platforms",
+        "urn:maha:record:biomolecular-engineering-rna-strand-displacement",
+        "urn:maha:record:biomolecular-engineering-synthetic-riboswitches",
+        "urn:maha:record:biomolecular-engineering-toehold-switches"
       ],
       "currentAlignmentStates": [
         "insufficient-evidence"
@@ -275,28 +208,43 @@
       "priority": 16,
       "requests": [
         {
+          "channel": "doi-resolver",
+          "url": "https://doi.org/api/handles/10.1038/nbt986",
+          "purpose": "version-link"
+        },
+        {
+          "channel": "crossref",
+          "url": "https://api.crossref.org/works/10.1038%2Fnbt986",
+          "purpose": "metadata"
+        },
+        {
+          "channel": "europe-pmc",
+          "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI:10.1038%2Fnbt986&format=json",
+          "purpose": "open-copy"
+        },
+        {
+          "channel": "biorxiv",
+          "url": "https://api.biorxiv.org/details/biorxiv/10.1038%2Fnbt986",
+          "purpose": "version-link"
+        },
+        {
           "channel": "arxiv",
-          "url": "https://export.arxiv.org/api/query?search_query=ti:%22Mineral%20Commodity%20Summaries%202026%22&max_results=5",
+          "url": "https://export.arxiv.org/api/query?search_query=ti:%22Engineered%20riboregulators%20enable%20post-transcriptional%20control%20of%20gene%20expression%22&max_results=5",
           "purpose": "open-copy"
         },
         {
           "channel": "osti",
-          "url": "https://www.osti.gov/api/v1/records?q=Mineral%20Commodity%20Summaries%202026",
+          "url": "https://www.osti.gov/api/v1/records?q=Engineered%20riboregulators%20enable%20post-transcriptional%20control%20of%20gene%20expression",
           "purpose": "open-copy"
         },
         {
           "channel": "official-publisher",
-          "url": "https://pubs.usgs.gov/periodicals/mcs2026/mcs2026.pdf",
-          "purpose": "open-copy"
-        },
-        {
-          "channel": "usgs",
-          "url": "https://pubs.usgs.gov/publication/search?q=Mineral%20Commodity%20Summaries%202026",
+          "url": "https://doi.org/10.1038/nbt986",
           "purpose": "open-copy"
         },
         {
           "channel": "institutional-repository",
-          "url": "https://api.openalex.org/works?search=Mineral%20Commodity%20Summaries%202026&per-page=5",
+          "url": "https://api.openalex.org/works?search=Engineered%20riboregulators%20enable%20post-transcriptional%20control%20of%20gene%20expression&per-page=5",
           "purpose": "version-link"
         }
       ],
@@ -304,22 +252,22 @@
       "disposition": "not-attempted",
       "inspectionAuthorized": false,
       "canonicalMutationAuthorized": false,
-      "digest": "sha256:0fbab43911f8df3ac311baea8a9c9932a750a505c13336df0ebca26519328f6b"
+      "digest": "sha256:a62e188debb3490000effd1d291aec6d1530be19440fd52165d572babd5651f2"
     },
     {
       "schemaVersion": "maha-source-recovery/1.0",
       "inputDate": "2026-08-26",
-      "sourceContractId": "source-critical-supply-chains-mcs-industrial",
-      "domainSlug": "critical-supply-chains",
-      "sourceTitle": "Mineral Commodity Summaries 2026",
-      "sourceIdentifier": null,
-      "declaredUrl": "https://pubs.usgs.gov/periodicals/mcs2026/mcs2026.pdf",
+      "sourceContractId": "source-biomolecular-engineering-toehold",
+      "domainSlug": "biomolecular-engineering",
+      "sourceTitle": "Paper-based synthetic gene networks",
+      "sourceIdentifier": "10.1016/j.cell.2014.10.004",
+      "declaredUrl": "https://doi.org/10.1016/j.cell.2014.10.004",
       "affectedRecordIds": [
-        "urn:maha:record:critical-supply-chains-cobalt-refining-concentration",
-        "urn:maha:record:critical-supply-chains-graphite-anode-processing",
-        "urn:maha:record:critical-supply-chains-indium-zinc-byproduct-flow",
-        "urn:maha:record:critical-supply-chains-magnet-recycling",
-        "urn:maha:record:critical-supply-chains-tungsten-concentrate-processing"
+        "urn:maha:record:biomolecular-engineering-compartmentalized-cell-free-systems",
+        "urn:maha:record:biomolecular-engineering-droplet-microfluidic-screening",
+        "urn:maha:record:biomolecular-engineering-enzyme-cascade-engineering",
+        "urn:maha:record:biomolecular-engineering-metabolic-pathway-prototyping",
+        "urn:maha:record:biomolecular-engineering-translational-control-circuits"
       ],
       "currentAlignmentStates": [
         "inaccessible-source"
@@ -327,28 +275,43 @@
       "priority": 15,
       "requests": [
         {
+          "channel": "doi-resolver",
+          "url": "https://doi.org/api/handles/10.1016/j.cell.2014.10.004",
+          "purpose": "version-link"
+        },
+        {
+          "channel": "crossref",
+          "url": "https://api.crossref.org/works/10.1016%2Fj.cell.2014.10.004",
+          "purpose": "metadata"
+        },
+        {
+          "channel": "europe-pmc",
+          "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI:10.1016%2Fj.cell.2014.10.004&format=json",
+          "purpose": "open-copy"
+        },
+        {
+          "channel": "biorxiv",
+          "url": "https://api.biorxiv.org/details/biorxiv/10.1016%2Fj.cell.2014.10.004",
+          "purpose": "version-link"
+        },
+        {
           "channel": "arxiv",
-          "url": "https://export.arxiv.org/api/query?search_query=ti:%22Mineral%20Commodity%20Summaries%202026%22&max_results=5",
+          "url": "https://export.arxiv.org/api/query?search_query=ti:%22Paper-based%20synthetic%20gene%20networks%22&max_results=5",
           "purpose": "open-copy"
         },
         {
           "channel": "osti",
-          "url": "https://www.osti.gov/api/v1/records?q=Mineral%20Commodity%20Summaries%202026",
+          "url": "https://www.osti.gov/api/v1/records?q=Paper-based%20synthetic%20gene%20networks",
           "purpose": "open-copy"
         },
         {
           "channel": "official-publisher",
-          "url": "https://pubs.usgs.gov/periodicals/mcs2026/mcs2026.pdf",
-          "purpose": "open-copy"
-        },
-        {
-          "channel": "usgs",
-          "url": "https://pubs.usgs.gov/publication/search?q=Mineral%20Commodity%20Summaries%202026",
+          "url": "https://doi.org/10.1016/j.cell.2014.10.004",
           "purpose": "open-copy"
         },
         {
           "channel": "institutional-repository",
-          "url": "https://api.openalex.org/works?search=Mineral%20Commodity%20Summaries%202026&per-page=5",
+          "url": "https://api.openalex.org/works?search=Paper-based%20synthetic%20gene%20networks&per-page=5",
           "purpose": "version-link"
         }
       ],
@@ -356,59 +319,7 @@
       "disposition": "not-attempted",
       "inspectionAuthorized": false,
       "canonicalMutationAuthorized": false,
-      "digest": "sha256:fa6cddb5dc0b23fa5bd0c8cf284014477fa7b9d3e0635c4f877bb54cbf6875c1"
-    },
-    {
-      "schemaVersion": "maha-source-recovery/1.0",
-      "inputDate": "2026-08-26",
-      "sourceContractId": "source-critical-supply-chains-pp1802",
-      "domainSlug": "critical-supply-chains",
-      "sourceTitle": "Critical Mineral Resources of the United States—Economic and Environmental Geology and Prospects for Future Supply",
-      "sourceIdentifier": null,
-      "declaredUrl": "https://pubs.usgs.gov/publication/pp1802",
-      "affectedRecordIds": [
-        "urn:maha:record:critical-supply-chains-euv-photoresist-precursors",
-        "urn:maha:record:critical-supply-chains-high-purity-quartz-deposits",
-        "urn:maha:record:critical-supply-chains-photoacid-generator-supply",
-        "urn:maha:record:critical-supply-chains-quartz-crucible-manufacturing",
-        "urn:maha:record:critical-supply-chains-semiconductor-grade-polysilicon"
-      ],
-      "currentAlignmentStates": [
-        "inaccessible-source"
-      ],
-      "priority": 14,
-      "requests": [
-        {
-          "channel": "arxiv",
-          "url": "https://export.arxiv.org/api/query?search_query=ti:%22Critical%20Mineral%20Resources%20of%20the%20United%20States%E2%80%94Economic%20and%20Environmental%20Geology%20and%20Prospects%20for%20Future%20Supply%22&max_results=5",
-          "purpose": "open-copy"
-        },
-        {
-          "channel": "osti",
-          "url": "https://www.osti.gov/api/v1/records?q=Critical%20Mineral%20Resources%20of%20the%20United%20States%E2%80%94Economic%20and%20Environmental%20Geology%20and%20Prospects%20for%20Future%20Supply",
-          "purpose": "open-copy"
-        },
-        {
-          "channel": "official-publisher",
-          "url": "https://pubs.usgs.gov/publication/pp1802",
-          "purpose": "open-copy"
-        },
-        {
-          "channel": "usgs",
-          "url": "https://pubs.usgs.gov/publication/search?q=Critical%20Mineral%20Resources%20of%20the%20United%20States%E2%80%94Economic%20and%20Environmental%20Geology%20and%20Prospects%20for%20Future%20Supply",
-          "purpose": "open-copy"
-        },
-        {
-          "channel": "institutional-repository",
-          "url": "https://api.openalex.org/works?search=Critical%20Mineral%20Resources%20of%20the%20United%20States%E2%80%94Economic%20and%20Environmental%20Geology%20and%20Prospects%20for%20Future%20Supply&per-page=5",
-          "purpose": "version-link"
-        }
-      ],
-      "observations": [],
-      "disposition": "not-attempted",
-      "inspectionAuthorized": false,
-      "canonicalMutationAuthorized": false,
-      "digest": "sha256:99323cef9381a7ea29eca15f7b2ab4008f19b55654ad84aa6902b8a332643c97"
+      "digest": "sha256:6f61b954b903645f2deeed92e11018552b8cc00f957b63f4b18b62d993cdcce8"
     },
     {
       "schemaVersion": "maha-source-recovery/1.0",
@@ -424,6 +335,58 @@
         "urn:maha:record:critical-supply-chains-gallium-zinc-processing-byproduct",
         "urn:maha:record:critical-supply-chains-germanium-coal-ash-recovery",
         "urn:maha:record:critical-supply-chains-germanium-zinc-refining-flow"
+      ],
+      "currentAlignmentStates": [
+        "inaccessible-source"
+      ],
+      "priority": 14,
+      "requests": [
+        {
+          "channel": "arxiv",
+          "url": "https://export.arxiv.org/api/query?search_query=ti:%22Mineral%20Commodity%20Summaries%202026%22&max_results=5",
+          "purpose": "open-copy"
+        },
+        {
+          "channel": "osti",
+          "url": "https://www.osti.gov/api/v1/records?q=Mineral%20Commodity%20Summaries%202026",
+          "purpose": "open-copy"
+        },
+        {
+          "channel": "official-publisher",
+          "url": "https://pubs.usgs.gov/periodicals/mcs2026/mcs2026.pdf",
+          "purpose": "open-copy"
+        },
+        {
+          "channel": "usgs",
+          "url": "https://pubs.usgs.gov/publication/search?q=Mineral%20Commodity%20Summaries%202026",
+          "purpose": "open-copy"
+        },
+        {
+          "channel": "institutional-repository",
+          "url": "https://api.openalex.org/works?search=Mineral%20Commodity%20Summaries%202026&per-page=5",
+          "purpose": "version-link"
+        }
+      ],
+      "observations": [],
+      "disposition": "not-attempted",
+      "inspectionAuthorized": false,
+      "canonicalMutationAuthorized": false,
+      "digest": "sha256:30697730a9045254fed149c213c0491c6a4633d023d6003c62578e9fb970765a"
+    },
+    {
+      "schemaVersion": "maha-source-recovery/1.0",
+      "inputDate": "2026-08-26",
+      "sourceContractId": "source-critical-supply-chains-mcs-industrial",
+      "domainSlug": "critical-supply-chains",
+      "sourceTitle": "Mineral Commodity Summaries 2026",
+      "sourceIdentifier": null,
+      "declaredUrl": "https://pubs.usgs.gov/periodicals/mcs2026/mcs2026.pdf",
+      "affectedRecordIds": [
+        "urn:maha:record:critical-supply-chains-cobalt-refining-concentration",
+        "urn:maha:record:critical-supply-chains-graphite-anode-processing",
+        "urn:maha:record:critical-supply-chains-indium-zinc-byproduct-flow",
+        "urn:maha:record:critical-supply-chains-magnet-recycling",
+        "urn:maha:record:critical-supply-chains-tungsten-concentrate-processing"
       ],
       "currentAlignmentStates": [
         "inaccessible-source"
@@ -460,7 +423,111 @@
       "disposition": "not-attempted",
       "inspectionAuthorized": false,
       "canonicalMutationAuthorized": false,
-      "digest": "sha256:8fcb427e53a7a9e64ff0f7dc05e1172b635bd6570f9724ab0b1b38c52805453d"
+      "digest": "sha256:ef8c2fbaef2634432194105b628356d0178f5054c667d7b0149d03b437969393"
+    },
+    {
+      "schemaVersion": "maha-source-recovery/1.0",
+      "inputDate": "2026-08-26",
+      "sourceContractId": "source-critical-supply-chains-mcs-specialty",
+      "domainSlug": "critical-supply-chains",
+      "sourceTitle": "Mineral Commodity Summaries 2026",
+      "sourceIdentifier": null,
+      "declaredUrl": "https://pubs.usgs.gov/periodicals/mcs2026/mcs2026.pdf",
+      "affectedRecordIds": [
+        "urn:maha:record:critical-supply-chains-antimony-smelting-concentration",
+        "urn:maha:record:critical-supply-chains-hafnium-zirconium-separation",
+        "urn:maha:record:critical-supply-chains-helium-liquefaction-logistics",
+        "urn:maha:record:critical-supply-chains-niobium-ferroniobium-production",
+        "urn:maha:record:critical-supply-chains-tantalum-concentrate-traceability"
+      ],
+      "currentAlignmentStates": [
+        "insufficient-evidence"
+      ],
+      "priority": 12,
+      "requests": [
+        {
+          "channel": "arxiv",
+          "url": "https://export.arxiv.org/api/query?search_query=ti:%22Mineral%20Commodity%20Summaries%202026%22&max_results=5",
+          "purpose": "open-copy"
+        },
+        {
+          "channel": "osti",
+          "url": "https://www.osti.gov/api/v1/records?q=Mineral%20Commodity%20Summaries%202026",
+          "purpose": "open-copy"
+        },
+        {
+          "channel": "official-publisher",
+          "url": "https://pubs.usgs.gov/periodicals/mcs2026/mcs2026.pdf",
+          "purpose": "open-copy"
+        },
+        {
+          "channel": "usgs",
+          "url": "https://pubs.usgs.gov/publication/search?q=Mineral%20Commodity%20Summaries%202026",
+          "purpose": "open-copy"
+        },
+        {
+          "channel": "institutional-repository",
+          "url": "https://api.openalex.org/works?search=Mineral%20Commodity%20Summaries%202026&per-page=5",
+          "purpose": "version-link"
+        }
+      ],
+      "observations": [],
+      "disposition": "not-attempted",
+      "inspectionAuthorized": false,
+      "canonicalMutationAuthorized": false,
+      "digest": "sha256:d6805014c09d4abf3416e63a78ea6c96e297dd87f5edca1d486194f21e7a1648"
+    },
+    {
+      "schemaVersion": "maha-source-recovery/1.0",
+      "inputDate": "2026-08-26",
+      "sourceContractId": "source-critical-supply-chains-pp1802",
+      "domainSlug": "critical-supply-chains",
+      "sourceTitle": "Critical Mineral Resources of the United States—Economic and Environmental Geology and Prospects for Future Supply",
+      "sourceIdentifier": null,
+      "declaredUrl": "https://pubs.usgs.gov/publication/pp1802",
+      "affectedRecordIds": [
+        "urn:maha:record:critical-supply-chains-euv-photoresist-precursors",
+        "urn:maha:record:critical-supply-chains-high-purity-quartz-deposits",
+        "urn:maha:record:critical-supply-chains-photoacid-generator-supply",
+        "urn:maha:record:critical-supply-chains-quartz-crucible-manufacturing",
+        "urn:maha:record:critical-supply-chains-semiconductor-grade-polysilicon"
+      ],
+      "currentAlignmentStates": [
+        "inaccessible-source"
+      ],
+      "priority": 11,
+      "requests": [
+        {
+          "channel": "arxiv",
+          "url": "https://export.arxiv.org/api/query?search_query=ti:%22Critical%20Mineral%20Resources%20of%20the%20United%20States%E2%80%94Economic%20and%20Environmental%20Geology%20and%20Prospects%20for%20Future%20Supply%22&max_results=5",
+          "purpose": "open-copy"
+        },
+        {
+          "channel": "osti",
+          "url": "https://www.osti.gov/api/v1/records?q=Critical%20Mineral%20Resources%20of%20the%20United%20States%E2%80%94Economic%20and%20Environmental%20Geology%20and%20Prospects%20for%20Future%20Supply",
+          "purpose": "open-copy"
+        },
+        {
+          "channel": "official-publisher",
+          "url": "https://pubs.usgs.gov/publication/pp1802",
+          "purpose": "open-copy"
+        },
+        {
+          "channel": "usgs",
+          "url": "https://pubs.usgs.gov/publication/search?q=Critical%20Mineral%20Resources%20of%20the%20United%20States%E2%80%94Economic%20and%20Environmental%20Geology%20and%20Prospects%20for%20Future%20Supply",
+          "purpose": "open-copy"
+        },
+        {
+          "channel": "institutional-repository",
+          "url": "https://api.openalex.org/works?search=Critical%20Mineral%20Resources%20of%20the%20United%20States%E2%80%94Economic%20and%20Environmental%20Geology%20and%20Prospects%20for%20Future%20Supply&per-page=5",
+          "purpose": "version-link"
+        }
+      ],
+      "observations": [],
+      "disposition": "not-attempted",
+      "inspectionAuthorized": false,
+      "canonicalMutationAuthorized": false,
+      "digest": "sha256:89b101bf8003c133172b009fe3c41938b3b9d7bd2c9e7e7a38bad67b76fca7a8"
     },
     {
       "schemaVersion": "maha-source-recovery/1.0",
@@ -480,7 +547,7 @@
       "currentAlignmentStates": [
         "insufficient-evidence"
       ],
-      "priority": 12,
+      "priority": 10,
       "requests": [
         {
           "channel": "arxiv",
@@ -507,7 +574,7 @@
       "disposition": "not-attempted",
       "inspectionAuthorized": false,
       "canonicalMutationAuthorized": false,
-      "digest": "sha256:020f61107d6b5aa6869bda20554fa265fb25e8810f1ccaabe8f8d836ea8fc42b"
+      "digest": "sha256:aa5f5c648487951d79554f5ae20065c4f77b9bc55f5408ec23e10808bc0b10d1"
     },
     {
       "schemaVersion": "maha-source-recovery/1.0",
@@ -527,7 +594,7 @@
       "currentAlignmentStates": [
         "inaccessible-source"
       ],
-      "priority": 11,
+      "priority": 9,
       "requests": [
         {
           "channel": "doi-resolver",
@@ -574,7 +641,74 @@
       "disposition": "not-attempted",
       "inspectionAuthorized": false,
       "canonicalMutationAuthorized": false,
-      "digest": "sha256:98f2245f814f78e00b895f8a8e04fdb45521609cef50f55a45b0353d5843bafc"
+      "digest": "sha256:237ed17a703f83e891d0707887b1e4e601e7a35e3c66a228994671f7e1c89af0"
+    },
+    {
+      "schemaVersion": "maha-source-recovery/1.0",
+      "inputDate": "2026-08-26",
+      "sourceContractId": "source-longevity-metabolism-bioenergetics",
+      "domainSlug": "longevity-metabolism",
+      "sourceTitle": "Analysis and interpretation of microplate-based oxygen consumption and pH data",
+      "sourceIdentifier": "10.1016/B978-0-12-801415-8.00016-3",
+      "declaredUrl": "https://doi.org/10.1016/B978-0-12-801415-8.00016-3",
+      "affectedRecordIds": [
+        "urn:maha:record:longevity-metabolism-ampk-energy-sensing",
+        "urn:maha:record:longevity-metabolism-atp-linked-respiration",
+        "urn:maha:record:longevity-metabolism-insulin-mtor-signaling",
+        "urn:maha:record:longevity-metabolism-metabolic-flux-tracing",
+        "urn:maha:record:longevity-metabolism-oxygen-consumption-rate"
+      ],
+      "currentAlignmentStates": [
+        "insufficient-evidence"
+      ],
+      "priority": 8,
+      "requests": [
+        {
+          "channel": "doi-resolver",
+          "url": "https://doi.org/api/handles/10.1016/B978-0-12-801415-8.00016-3",
+          "purpose": "version-link"
+        },
+        {
+          "channel": "crossref",
+          "url": "https://api.crossref.org/works/10.1016%2FB978-0-12-801415-8.00016-3",
+          "purpose": "metadata"
+        },
+        {
+          "channel": "europe-pmc",
+          "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI:10.1016%2FB978-0-12-801415-8.00016-3&format=json",
+          "purpose": "open-copy"
+        },
+        {
+          "channel": "biorxiv",
+          "url": "https://api.biorxiv.org/details/biorxiv/10.1016%2FB978-0-12-801415-8.00016-3",
+          "purpose": "version-link"
+        },
+        {
+          "channel": "arxiv",
+          "url": "https://export.arxiv.org/api/query?search_query=ti:%22Analysis%20and%20interpretation%20of%20microplate-based%20oxygen%20consumption%20and%20pH%20data%22&max_results=5",
+          "purpose": "open-copy"
+        },
+        {
+          "channel": "osti",
+          "url": "https://www.osti.gov/api/v1/records?q=Analysis%20and%20interpretation%20of%20microplate-based%20oxygen%20consumption%20and%20pH%20data",
+          "purpose": "open-copy"
+        },
+        {
+          "channel": "official-publisher",
+          "url": "https://doi.org/10.1016/B978-0-12-801415-8.00016-3",
+          "purpose": "open-copy"
+        },
+        {
+          "channel": "institutional-repository",
+          "url": "https://api.openalex.org/works?search=Analysis%20and%20interpretation%20of%20microplate-based%20oxygen%20consumption%20and%20pH%20data&per-page=5",
+          "purpose": "version-link"
+        }
+      ],
+      "observations": [],
+      "disposition": "not-attempted",
+      "inspectionAuthorized": false,
+      "canonicalMutationAuthorized": false,
+      "digest": "sha256:90c2d33af7f74e655fdb3f376eda39fab11a31c775decc09764a5a3c43493261"
     },
     {
       "schemaVersion": "maha-source-recovery/1.0",
@@ -594,7 +728,7 @@
       "currentAlignmentStates": [
         "insufficient-evidence"
       ],
-      "priority": 10,
+      "priority": 7,
       "requests": [
         {
           "channel": "doi-resolver",
@@ -641,125 +775,7 @@
       "disposition": "not-attempted",
       "inspectionAuthorized": false,
       "canonicalMutationAuthorized": false,
-      "digest": "sha256:05a5792752850b1b9aa0069607e594e5b538d088970a3ea55b7d094ccf7e960c"
-    },
-    {
-      "schemaVersion": "maha-source-recovery/1.0",
-      "inputDate": "2026-08-26",
-      "sourceContractId": "source-longevity-metabolism-mitophagy",
-      "domainSlug": "longevity-metabolism",
-      "sourceTitle": "Mechanisms of mitophagy",
-      "sourceIdentifier": "10.1038/nrm3028",
-      "declaredUrl": "https://doi.org/10.1038/nrm3028",
-      "affectedRecordIds": [
-        "urn:maha:record:longevity-metabolism-mitochondrial-membrane-potential",
-        "urn:maha:record:longevity-metabolism-mitochondrial-uncoupling",
-        "urn:maha:record:longevity-metabolism-mitophagy-flux",
-        "urn:maha:record:longevity-metabolism-pink1-parkin-pathway",
-        "urn:maha:record:longevity-metabolism-proton-leak-respiration"
-      ],
-      "currentAlignmentStates": [
-        "insufficient-evidence",
-        "partially-supported",
-        "supported"
-      ],
-      "priority": 9,
-      "requests": [
-        {
-          "channel": "doi-resolver",
-          "url": "https://doi.org/api/handles/10.1038/nrm3028",
-          "purpose": "version-link"
-        },
-        {
-          "channel": "crossref",
-          "url": "https://api.crossref.org/works/10.1038%2Fnrm3028",
-          "purpose": "metadata"
-        },
-        {
-          "channel": "europe-pmc",
-          "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI:10.1038%2Fnrm3028&format=json",
-          "purpose": "open-copy"
-        },
-        {
-          "channel": "biorxiv",
-          "url": "https://api.biorxiv.org/details/biorxiv/10.1038%2Fnrm3028",
-          "purpose": "version-link"
-        },
-        {
-          "channel": "arxiv",
-          "url": "https://export.arxiv.org/api/query?search_query=ti:%22Mechanisms%20of%20mitophagy%22&max_results=5",
-          "purpose": "open-copy"
-        },
-        {
-          "channel": "osti",
-          "url": "https://www.osti.gov/api/v1/records?q=Mechanisms%20of%20mitophagy",
-          "purpose": "open-copy"
-        },
-        {
-          "channel": "official-publisher",
-          "url": "https://doi.org/10.1038/nrm3028",
-          "purpose": "open-copy"
-        },
-        {
-          "channel": "institutional-repository",
-          "url": "https://api.openalex.org/works?search=Mechanisms%20of%20mitophagy&per-page=5",
-          "purpose": "version-link"
-        }
-      ],
-      "observations": [],
-      "disposition": "not-attempted",
-      "inspectionAuthorized": false,
-      "canonicalMutationAuthorized": false,
-      "digest": "sha256:7c509a0a29abe4dd56921df99a123d6c2845cc3a2b72c9d1146a9197b72bccc2"
-    },
-    {
-      "schemaVersion": "maha-source-recovery/1.0",
-      "inputDate": "2026-08-26",
-      "sourceContractId": "source-mechanistic-interpretability-induction",
-      "domainSlug": "mechanistic-interpretability",
-      "sourceTitle": "In-context Learning and Induction Heads",
-      "sourceIdentifier": null,
-      "declaredUrl": "https://transformer-circuits.pub/2022/in-context-learning-and-induction-heads/index.html",
-      "affectedRecordIds": [
-        "urn:maha:record:mechanistic-interpretability-attention-pattern-evidence",
-        "urn:maha:record:mechanistic-interpretability-in-context-learning-circuits",
-        "urn:maha:record:mechanistic-interpretability-induction-head-circuits",
-        "urn:maha:record:mechanistic-interpretability-io-identification-circuit",
-        "urn:maha:record:mechanistic-interpretability-previous-token-heads"
-      ],
-      "currentAlignmentStates": [
-        "mismatched",
-        "partially-supported",
-        "supported"
-      ],
-      "priority": 8,
-      "requests": [
-        {
-          "channel": "arxiv",
-          "url": "https://export.arxiv.org/api/query?search_query=ti:%22In-context%20Learning%20and%20Induction%20Heads%22&max_results=5",
-          "purpose": "open-copy"
-        },
-        {
-          "channel": "osti",
-          "url": "https://www.osti.gov/api/v1/records?q=In-context%20Learning%20and%20Induction%20Heads",
-          "purpose": "open-copy"
-        },
-        {
-          "channel": "official-publisher",
-          "url": "https://transformer-circuits.pub/2022/in-context-learning-and-induction-heads/index.html",
-          "purpose": "open-copy"
-        },
-        {
-          "channel": "institutional-repository",
-          "url": "https://api.openalex.org/works?search=In-context%20Learning%20and%20Induction%20Heads&per-page=5",
-          "purpose": "version-link"
-        }
-      ],
-      "observations": [],
-      "disposition": "not-attempted",
-      "inspectionAuthorized": false,
-      "canonicalMutationAuthorized": false,
-      "digest": "sha256:4cc6a93ec8ec4a407dc2328fc4a478206e95917a34f63eed861d01f0257b8217"
+      "digest": "sha256:05cf199c691c7196579ff90c9528ba65280db1f03c42f0676aade50bab1ded27"
     },
     {
       "schemaVersion": "maha-source-recovery/1.0",
@@ -779,7 +795,7 @@
       "currentAlignmentStates": [
         "insufficient-evidence"
       ],
-      "priority": 7,
+      "priority": 6,
       "requests": [
         {
           "channel": "doi-resolver",
@@ -826,74 +842,7 @@
       "disposition": "not-attempted",
       "inspectionAuthorized": false,
       "canonicalMutationAuthorized": false,
-      "digest": "sha256:016a414e171c3860c63a5fe13b8645562d135aa7e9401196237c87d6b0c0c0ab"
-    },
-    {
-      "schemaVersion": "maha-source-recovery/1.0",
-      "inputDate": "2026-08-26",
-      "sourceContractId": "source-neurotechnology-bci-intracortical-bci",
-      "domainSlug": "neurotechnology-bci",
-      "sourceTitle": "Neuronal ensemble control of prosthetic devices by a human with tetraplegia",
-      "sourceIdentifier": "10.1038/nature04970",
-      "declaredUrl": "https://doi.org/10.1038/nature04970",
-      "affectedRecordIds": [
-        "urn:maha:record:neurotechnology-bci-bci-calibration-drift",
-        "urn:maha:record:neurotechnology-bci-cortical-surface-bci",
-        "urn:maha:record:neurotechnology-bci-intracortical-bci",
-        "urn:maha:record:neurotechnology-bci-motor-intention-decoding",
-        "urn:maha:record:neurotechnology-bci-peripheral-nerve-interface"
-      ],
-      "currentAlignmentStates": [
-        "insufficient-evidence"
-      ],
-      "priority": 6,
-      "requests": [
-        {
-          "channel": "doi-resolver",
-          "url": "https://doi.org/api/handles/10.1038/nature04970",
-          "purpose": "version-link"
-        },
-        {
-          "channel": "crossref",
-          "url": "https://api.crossref.org/works/10.1038%2Fnature04970",
-          "purpose": "metadata"
-        },
-        {
-          "channel": "europe-pmc",
-          "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI:10.1038%2Fnature04970&format=json",
-          "purpose": "open-copy"
-        },
-        {
-          "channel": "biorxiv",
-          "url": "https://api.biorxiv.org/details/biorxiv/10.1038%2Fnature04970",
-          "purpose": "version-link"
-        },
-        {
-          "channel": "arxiv",
-          "url": "https://export.arxiv.org/api/query?search_query=ti:%22Neuronal%20ensemble%20control%20of%20prosthetic%20devices%20by%20a%20human%20with%20tetraplegia%22&max_results=5",
-          "purpose": "open-copy"
-        },
-        {
-          "channel": "osti",
-          "url": "https://www.osti.gov/api/v1/records?q=Neuronal%20ensemble%20control%20of%20prosthetic%20devices%20by%20a%20human%20with%20tetraplegia",
-          "purpose": "open-copy"
-        },
-        {
-          "channel": "official-publisher",
-          "url": "https://doi.org/10.1038/nature04970",
-          "purpose": "open-copy"
-        },
-        {
-          "channel": "institutional-repository",
-          "url": "https://api.openalex.org/works?search=Neuronal%20ensemble%20control%20of%20prosthetic%20devices%20by%20a%20human%20with%20tetraplegia&per-page=5",
-          "purpose": "version-link"
-        }
-      ],
-      "observations": [],
-      "disposition": "not-attempted",
-      "inspectionAuthorized": false,
-      "canonicalMutationAuthorized": false,
-      "digest": "sha256:6b36db31da26ad2dba0add325d4c0360a97cd92821e703453f18a5fe97f32df4"
+      "digest": "sha256:d7e18c03e72824b92785dcbfac879e6b39fd3254f054b8794dd3eb2e81e05c59"
     },
     {
       "schemaVersion": "maha-source-recovery/1.0",
@@ -965,90 +914,21 @@
     {
       "schemaVersion": "maha-source-recovery/1.0",
       "inputDate": "2026-08-26",
-      "sourceContractId": "source-neurotechnology-bci-foreign-body",
-      "domainSlug": "neurotechnology-bci",
-      "sourceTitle": "Response of brain tissue to chronically implanted neural electrodes",
-      "sourceIdentifier": "10.1016/j.jneumeth.2005.08.015",
-      "declaredUrl": "https://doi.org/10.1016/j.jneumeth.2005.08.015",
-      "affectedRecordIds": [
-        "urn:maha:record:neurotechnology-bci-chronic-signal-stability",
-        "urn:maha:record:neurotechnology-bci-clinical-translation-boundaries",
-        "urn:maha:record:neurotechnology-bci-foreign-body-response",
-        "urn:maha:record:neurotechnology-bci-neural-data-compression",
-        "urn:maha:record:neurotechnology-bci-wireless-neural-telemetry"
-      ],
-      "currentAlignmentStates": [
-        "inaccessible-source"
-      ],
-      "priority": 4,
-      "requests": [
-        {
-          "channel": "doi-resolver",
-          "url": "https://doi.org/api/handles/10.1016/j.jneumeth.2005.08.015",
-          "purpose": "version-link"
-        },
-        {
-          "channel": "crossref",
-          "url": "https://api.crossref.org/works/10.1016%2Fj.jneumeth.2005.08.015",
-          "purpose": "metadata"
-        },
-        {
-          "channel": "europe-pmc",
-          "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI:10.1016%2Fj.jneumeth.2005.08.015&format=json",
-          "purpose": "open-copy"
-        },
-        {
-          "channel": "biorxiv",
-          "url": "https://api.biorxiv.org/details/biorxiv/10.1016%2Fj.jneumeth.2005.08.015",
-          "purpose": "version-link"
-        },
-        {
-          "channel": "arxiv",
-          "url": "https://export.arxiv.org/api/query?search_query=ti:%22Response%20of%20brain%20tissue%20to%20chronically%20implanted%20neural%20electrodes%22&max_results=5",
-          "purpose": "open-copy"
-        },
-        {
-          "channel": "osti",
-          "url": "https://www.osti.gov/api/v1/records?q=Response%20of%20brain%20tissue%20to%20chronically%20implanted%20neural%20electrodes",
-          "purpose": "open-copy"
-        },
-        {
-          "channel": "official-publisher",
-          "url": "https://doi.org/10.1016/j.jneumeth.2005.08.015",
-          "purpose": "open-copy"
-        },
-        {
-          "channel": "institutional-repository",
-          "url": "https://api.openalex.org/works?search=Response%20of%20brain%20tissue%20to%20chronically%20implanted%20neural%20electrodes&per-page=5",
-          "purpose": "version-link"
-        }
-      ],
-      "observations": [],
-      "disposition": "not-attempted",
-      "inspectionAuthorized": false,
-      "canonicalMutationAuthorized": false,
-      "digest": "sha256:db8e94fc109520f743afc8ab6559d97a806ee8eeb37ecfbee928ed3e04e2ab21"
-    },
-    {
-      "schemaVersion": "maha-source-recovery/1.0",
-      "inputDate": "2026-08-26",
       "sourceContractId": "source-neurotechnology-bci-closed-loop",
       "domainSlug": "neurotechnology-bci",
       "sourceTitle": "Closed-loop deep brain stimulation is superior in ameliorating parkinsonism",
       "sourceIdentifier": "10.1016/j.neuron.2011.08.023",
       "declaredUrl": "https://doi.org/10.1016/j.neuron.2011.08.023",
       "affectedRecordIds": [
-        "urn:maha:record:neurotechnology-bci-adaptive-stimulation-policies",
         "urn:maha:record:neurotechnology-bci-closed-loop-neural-decoding",
         "urn:maha:record:neurotechnology-bci-decoder-update-latency",
         "urn:maha:record:neurotechnology-bci-neural-feature-extraction",
         "urn:maha:record:neurotechnology-bci-sensing-to-stimulation-loop"
       ],
       "currentAlignmentStates": [
-        "insufficient-evidence",
-        "partially-supported"
+        "insufficient-evidence"
       ],
-      "priority": 3,
+      "priority": 4,
       "requests": [
         {
           "channel": "doi-resolver",
@@ -1095,7 +975,141 @@
       "disposition": "not-attempted",
       "inspectionAuthorized": false,
       "canonicalMutationAuthorized": false,
-      "digest": "sha256:157e382a666cd215544e6b3388643adcc6764d38286684fc09c9278111c5098d"
+      "digest": "sha256:1cbdaac3fd9bc1f88f13fe359402b263f6d476f97009fea73dd0e39b0956553b"
+    },
+    {
+      "schemaVersion": "maha-source-recovery/1.0",
+      "inputDate": "2026-08-26",
+      "sourceContractId": "source-neurotechnology-bci-foreign-body",
+      "domainSlug": "neurotechnology-bci",
+      "sourceTitle": "Response of brain tissue to chronically implanted neural electrodes",
+      "sourceIdentifier": "10.1016/j.jneumeth.2005.08.015",
+      "declaredUrl": "https://doi.org/10.1016/j.jneumeth.2005.08.015",
+      "affectedRecordIds": [
+        "urn:maha:record:neurotechnology-bci-chronic-signal-stability",
+        "urn:maha:record:neurotechnology-bci-clinical-translation-boundaries",
+        "urn:maha:record:neurotechnology-bci-foreign-body-response",
+        "urn:maha:record:neurotechnology-bci-neural-data-compression",
+        "urn:maha:record:neurotechnology-bci-wireless-neural-telemetry"
+      ],
+      "currentAlignmentStates": [
+        "inaccessible-source"
+      ],
+      "priority": 3,
+      "requests": [
+        {
+          "channel": "doi-resolver",
+          "url": "https://doi.org/api/handles/10.1016/j.jneumeth.2005.08.015",
+          "purpose": "version-link"
+        },
+        {
+          "channel": "crossref",
+          "url": "https://api.crossref.org/works/10.1016%2Fj.jneumeth.2005.08.015",
+          "purpose": "metadata"
+        },
+        {
+          "channel": "europe-pmc",
+          "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI:10.1016%2Fj.jneumeth.2005.08.015&format=json",
+          "purpose": "open-copy"
+        },
+        {
+          "channel": "biorxiv",
+          "url": "https://api.biorxiv.org/details/biorxiv/10.1016%2Fj.jneumeth.2005.08.015",
+          "purpose": "version-link"
+        },
+        {
+          "channel": "arxiv",
+          "url": "https://export.arxiv.org/api/query?search_query=ti:%22Response%20of%20brain%20tissue%20to%20chronically%20implanted%20neural%20electrodes%22&max_results=5",
+          "purpose": "open-copy"
+        },
+        {
+          "channel": "osti",
+          "url": "https://www.osti.gov/api/v1/records?q=Response%20of%20brain%20tissue%20to%20chronically%20implanted%20neural%20electrodes",
+          "purpose": "open-copy"
+        },
+        {
+          "channel": "official-publisher",
+          "url": "https://doi.org/10.1016/j.jneumeth.2005.08.015",
+          "purpose": "open-copy"
+        },
+        {
+          "channel": "institutional-repository",
+          "url": "https://api.openalex.org/works?search=Response%20of%20brain%20tissue%20to%20chronically%20implanted%20neural%20electrodes&per-page=5",
+          "purpose": "version-link"
+        }
+      ],
+      "observations": [],
+      "disposition": "not-attempted",
+      "inspectionAuthorized": false,
+      "canonicalMutationAuthorized": false,
+      "digest": "sha256:dde6aba37b98899ff4c2a1e0e438726408bc24c32624f2da0f3ae3a96d86286c"
+    },
+    {
+      "schemaVersion": "maha-source-recovery/1.0",
+      "inputDate": "2026-08-26",
+      "sourceContractId": "source-neurotechnology-bci-intracortical-bci",
+      "domainSlug": "neurotechnology-bci",
+      "sourceTitle": "Neuronal ensemble control of prosthetic devices by a human with tetraplegia",
+      "sourceIdentifier": "10.1038/nature04970",
+      "declaredUrl": "https://doi.org/10.1038/nature04970",
+      "affectedRecordIds": [
+        "urn:maha:record:neurotechnology-bci-bci-calibration-drift",
+        "urn:maha:record:neurotechnology-bci-cortical-surface-bci",
+        "urn:maha:record:neurotechnology-bci-intracortical-bci",
+        "urn:maha:record:neurotechnology-bci-motor-intention-decoding",
+        "urn:maha:record:neurotechnology-bci-peripheral-nerve-interface"
+      ],
+      "currentAlignmentStates": [
+        "insufficient-evidence"
+      ],
+      "priority": 2,
+      "requests": [
+        {
+          "channel": "doi-resolver",
+          "url": "https://doi.org/api/handles/10.1038/nature04970",
+          "purpose": "version-link"
+        },
+        {
+          "channel": "crossref",
+          "url": "https://api.crossref.org/works/10.1038%2Fnature04970",
+          "purpose": "metadata"
+        },
+        {
+          "channel": "europe-pmc",
+          "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI:10.1038%2Fnature04970&format=json",
+          "purpose": "open-copy"
+        },
+        {
+          "channel": "biorxiv",
+          "url": "https://api.biorxiv.org/details/biorxiv/10.1038%2Fnature04970",
+          "purpose": "version-link"
+        },
+        {
+          "channel": "arxiv",
+          "url": "https://export.arxiv.org/api/query?search_query=ti:%22Neuronal%20ensemble%20control%20of%20prosthetic%20devices%20by%20a%20human%20with%20tetraplegia%22&max_results=5",
+          "purpose": "open-copy"
+        },
+        {
+          "channel": "osti",
+          "url": "https://www.osti.gov/api/v1/records?q=Neuronal%20ensemble%20control%20of%20prosthetic%20devices%20by%20a%20human%20with%20tetraplegia",
+          "purpose": "open-copy"
+        },
+        {
+          "channel": "official-publisher",
+          "url": "https://doi.org/10.1038/nature04970",
+          "purpose": "open-copy"
+        },
+        {
+          "channel": "institutional-repository",
+          "url": "https://api.openalex.org/works?search=Neuronal%20ensemble%20control%20of%20prosthetic%20devices%20by%20a%20human%20with%20tetraplegia&per-page=5",
+          "purpose": "version-link"
+        }
+      ],
+      "observations": [],
+      "disposition": "not-attempted",
+      "inspectionAuthorized": false,
+      "canonicalMutationAuthorized": false,
+      "digest": "sha256:109d720056c21ccbd1d9761305829cd23e72e39ce3efb0ca2326f903f847097c"
     },
     {
       "schemaVersion": "maha-source-recovery/1.0",
@@ -1115,7 +1129,7 @@
       "currentAlignmentStates": [
         "inaccessible-source"
       ],
-      "priority": 2,
+      "priority": 1,
       "requests": [
         {
           "channel": "doi-resolver",
@@ -1162,74 +1176,7 @@
       "disposition": "not-attempted",
       "inspectionAuthorized": false,
       "canonicalMutationAuthorized": false,
-      "digest": "sha256:4673e8a7b229443d25b57164f48250b26e02f8ad0082c7f3568d30ef90a99c0f"
-    },
-    {
-      "schemaVersion": "maha-source-recovery/1.0",
-      "inputDate": "2026-08-26",
-      "sourceContractId": "source-longevity-metabolism-bioenergetics",
-      "domainSlug": "longevity-metabolism",
-      "sourceTitle": "Analysis and interpretation of microplate-based oxygen consumption and pH data",
-      "sourceIdentifier": "10.1016/B978-0-12-801415-8.00016-3",
-      "declaredUrl": "https://doi.org/10.1016/B978-0-12-801415-8.00016-3",
-      "affectedRecordIds": [
-        "urn:maha:record:longevity-metabolism-ampk-energy-sensing",
-        "urn:maha:record:longevity-metabolism-atp-linked-respiration",
-        "urn:maha:record:longevity-metabolism-insulin-mtor-signaling",
-        "urn:maha:record:longevity-metabolism-metabolic-flux-tracing",
-        "urn:maha:record:longevity-metabolism-oxygen-consumption-rate"
-      ],
-      "currentAlignmentStates": [
-        "insufficient-evidence"
-      ],
-      "priority": 1,
-      "requests": [
-        {
-          "channel": "doi-resolver",
-          "url": "https://doi.org/api/handles/10.1016/B978-0-12-801415-8.00016-3",
-          "purpose": "version-link"
-        },
-        {
-          "channel": "crossref",
-          "url": "https://api.crossref.org/works/10.1016%2FB978-0-12-801415-8.00016-3",
-          "purpose": "metadata"
-        },
-        {
-          "channel": "europe-pmc",
-          "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI:10.1016%2FB978-0-12-801415-8.00016-3&format=json",
-          "purpose": "open-copy"
-        },
-        {
-          "channel": "biorxiv",
-          "url": "https://api.biorxiv.org/details/biorxiv/10.1016%2FB978-0-12-801415-8.00016-3",
-          "purpose": "version-link"
-        },
-        {
-          "channel": "arxiv",
-          "url": "https://export.arxiv.org/api/query?search_query=ti:%22Analysis%20and%20interpretation%20of%20microplate-based%20oxygen%20consumption%20and%20pH%20data%22&max_results=5",
-          "purpose": "open-copy"
-        },
-        {
-          "channel": "osti",
-          "url": "https://www.osti.gov/api/v1/records?q=Analysis%20and%20interpretation%20of%20microplate-based%20oxygen%20consumption%20and%20pH%20data",
-          "purpose": "open-copy"
-        },
-        {
-          "channel": "official-publisher",
-          "url": "https://doi.org/10.1016/B978-0-12-801415-8.00016-3",
-          "purpose": "open-copy"
-        },
-        {
-          "channel": "institutional-repository",
-          "url": "https://api.openalex.org/works?search=Analysis%20and%20interpretation%20of%20microplate-based%20oxygen%20consumption%20and%20pH%20data&per-page=5",
-          "purpose": "version-link"
-        }
-      ],
-      "observations": [],
-      "disposition": "not-attempted",
-      "inspectionAuthorized": false,
-      "canonicalMutationAuthorized": false,
-      "digest": "sha256:ae96052f60cecb2a22c678268a54772fd0e4f6a95696f6edf1e9f71b78e7519a"
+      "digest": "sha256:056a964a4d5132ecf7d5a63b11b8386e4876f3d46844fffef01aee46cecb4c39"
     }
   ]
 }

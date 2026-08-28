@@ -10,6 +10,15 @@ import {
 import { sha256Canonical } from './epistemic-publication.ts'
 
 export const EPISTEMIC_INGESTION_VERSION = 'maha-epistemic-ingestion/1.0' as const
+export const INGESTION_ALIGNMENT_VERSION = 'maha-ingestion-alignment-gate/1.0' as const
+
+export interface IngestionAlignmentDecision {
+  evaluatedAgainst: typeof INGESTION_ALIGNMENT_VERSION
+  contentInspectionState: 'required-uninspected'
+  explanatoryEligible: false
+  canonicalEligible: false
+  blockerCodes: string[]
+}
 
 export interface EpistemicIngestionRecord {
   schemaVersion: typeof EPISTEMIC_INGESTION_VERSION
@@ -23,6 +32,7 @@ export interface EpistemicIngestionRecord {
   candidateSha256: string
   reviewTargetSha256: string
   gateDecision: LegacyAdapterCandidate['gateDecision']
+  alignmentDecision: IngestionAlignmentDecision
   candidateSnapshot: LegacyAdapterCandidate['record']
 }
 
@@ -71,20 +81,37 @@ export function buildEpistemicIngestionBatch(input: EpistemicIngestionRequest, i
   const adapter = getLegacyEpistemicAdapter(input.adapterId)
   if (!adapter) throw new Error('adapterId is unsupported.')
   const batchId = `epibatch_${randomUUID().replaceAll('-', '')}`
-  const records = adapter.adapt().map((candidate): EpistemicIngestionRecord => ({
-    schemaVersion: EPISTEMIC_INGESTION_VERSION,
-    ingestionRecordId: `epirecord_${sha256Canonical({ batchId, sourceRecordId: candidate.sourceRecordId }).slice('sha256:'.length, 'sha256:'.length + 32)}`,
-    batchId,
-    adapterId: input.adapterId,
-    sourceRecordId: candidate.sourceRecordId,
-    sourceRecordSha256: candidate.sourceRecordSha256,
-    sourcePublicPath: candidate.sourcePublicPath,
-    candidateRecordId: candidate.record.id,
-    candidateSha256: candidate.candidateSha256,
-    reviewTargetSha256: candidate.reviewTargetSha256,
-    gateDecision: candidate.gateDecision,
-    candidateSnapshot: candidate.record,
-  }))
+  const records = adapter.adapt().map((candidate): EpistemicIngestionRecord => {
+    const blockerCodes = candidate.record.sources.length
+      ? candidate.record.sources.map((source) => `source-content-inspection-missing:${source.id}`).sort()
+      : ['source-content-inspection-missing:no-source-declared']
+    const alignmentDecision: IngestionAlignmentDecision = {
+      evaluatedAgainst: INGESTION_ALIGNMENT_VERSION,
+      contentInspectionState: 'required-uninspected',
+      explanatoryEligible: false,
+      canonicalEligible: false,
+      blockerCodes,
+    }
+    return {
+      schemaVersion: EPISTEMIC_INGESTION_VERSION,
+      ingestionRecordId: `epirecord_${sha256Canonical({ batchId, sourceRecordId: candidate.sourceRecordId }).slice('sha256:'.length, 'sha256:'.length + 32)}`,
+      batchId,
+      adapterId: input.adapterId,
+      sourceRecordId: candidate.sourceRecordId,
+      sourceRecordSha256: candidate.sourceRecordSha256,
+      sourcePublicPath: candidate.sourcePublicPath,
+      candidateRecordId: candidate.record.id,
+      candidateSha256: candidate.candidateSha256,
+      reviewTargetSha256: candidate.reviewTargetSha256,
+      gateDecision: {
+        ...candidate.gateDecision,
+        publicEligible: false,
+        reasons: [...new Set([...candidate.gateDecision.reasons, ...blockerCodes])].sort(),
+      },
+      alignmentDecision,
+      candidateSnapshot: candidate.record,
+    }
+  })
   const unsigned = {
     schemaVersion: EPISTEMIC_INGESTION_VERSION,
     batchId,
@@ -118,6 +145,7 @@ export function ingestionBatchSnapshot(batch: EpistemicIngestionBatch) {
       candidateSha256: record.candidateSha256,
       reviewTargetSha256: record.reviewTargetSha256,
       publicEligible: record.gateDecision.publicEligible,
+      alignmentDecision: record.alignmentDecision,
     })),
   }
 }
