@@ -1,0 +1,95 @@
+{
+  "schemaVersion": "maha-cabezon-preview-canary/0.1",
+  "mode": "private-local-lifecycle-canary",
+  "adapterSchemaVersion": "maha-cabezon-preview/1.0",
+  "projection": {
+    "sourceCatalogSha256": "sha256:e17454de341a06e01138a4b240802323df1256179b1b1a37935d2f7384264124",
+    "projectionSha256": "sha256:d0b2b5d8b4e236dfd5a3d9757711fb0bc53b9435183af83db31016320064f6a8",
+    "offerCount": 11,
+    "inquiryAvailableCount": 3,
+    "purchaseEnabledCount": 0
+  },
+  "identityBindings": {
+    "sellerDid": "did:web:mahastrategies.com:cabezon:seller",
+    "sellerBindingSha256": "sha256:5ba1b97ad25f815be6c7e7abd8ec31d21ae88a006cb27f0b6800af53ac892d06",
+    "customerDid": "did:web:cabezon.example:customers:private-canary",
+    "customerBindingSha256": "sha256:e5d444192da21cd3d5552d7488b67e6b984a0fc08406d6be3a1f64fe8c3b8463",
+    "exactBindingRequired": true
+  },
+  "negativeChecks": {
+    "staleOfferStatus": 409,
+    "substitutedEndpointStatus": 403,
+    "unavailableOfferStatus": 409,
+    "unavailableDeliveryStatus": 409
+  },
+  "replayChecks": {
+    "enquiry": "idempotent",
+    "delivery": "idempotent"
+  },
+  "lifecycle": {
+    "lifecycleId": "cbz_b4f926bdd791fba2cb491dac9371c28b",
+    "requestSha256": "sha256:568820b4d2064a0fa11f6d8a7c3bb8dabc8afa348443db53511ea865f80bf1bf",
+    "offerId": "mps-evidence-audit",
+    "status": "acknowledged",
+    "createdAt": "2026-08-28T12:00:00Z",
+    "updatedAt": "2026-08-28T12:03:00Z",
+    "deliveryReference": {
+      "deliveryReferenceVersion": "0.1",
+      "lifecycleId": "cbz_b4f926bdd791fba2cb491dac9371c28b",
+      "orderId": "cbz_b4f926bdd791fba2cb491dac9371c28b",
+      "sellerDid": "did:web:mahastrategies.com:cabezon:seller",
+      "deliveredAt": "2026-08-28T12:03:00Z",
+      "requestSha256": "sha256:568820b4d2064a0fa11f6d8a7c3bb8dabc8afa348443db53511ea865f80bf1bf",
+      "resultSha256": "sha256:b1c1cd32b1256d38b98c442aac3df4164be09b6ef7c635c0d305299748612292",
+      "artifactSha256": null,
+      "retrieval": {
+        "mode": "direct_response",
+        "reference": "urn:maha:cabezon-preview:cbz_b4f926bdd791fba2cb491dac9371c28b:fixture"
+      },
+      "status": "delivered",
+      "paymentEnabled": false,
+      "referenceSha256": "sha256:7a8a79776182b8bb95807f3e5aa7e53c22b45d39ee5653c835c7d652f58a3d55"
+    },
+    "acknowledgementSha256": "sha256:e7e383c83040ea78ac9a68385e86bb72da4054eeb2b6f2bc9ab518468688c33b",
+    "events": [
+      {
+        "sequence": 1,
+        "type": "enquiry_received",
+        "occurredAt": "2026-08-28T12:00:00Z",
+        "payloadSha256": "sha256:b66ec1918eaceea56619c178c6b073d913d7b340f56ffd8171450c53107e0b13"
+      },
+      {
+        "sequence": 2,
+        "type": "offer_returned",
+        "occurredAt": "2026-08-28T12:00:00Z",
+        "payloadSha256": "sha256:c450dd6a1f132568305169a8663e410ba4d7cfc872401cbdb92b67249b990aff"
+      },
+      {
+        "sequence": 3,
+        "type": "delivery_recorded",
+        "occurredAt": "2026-08-28T12:03:00Z",
+        "payloadSha256": "sha256:b522e632388b65e72b557b39b8190452e51f5c664e206104b966829eca01b17d"
+      },
+      {
+        "sequence": 4,
+        "type": "acknowledgement_recorded",
+        "occurredAt": "2026-08-28T12:03:00Z",
+        "payloadSha256": "sha256:65d4b9e28b30a916f2de4a0bbaa2e157fae56e9d67d3a69da5872b2bea2b4e3a"
+      }
+    ],
+    "authority": {
+      "paymentEnabled": false,
+      "escrowEnabled": false,
+      "autonomousExecutionEnabled": false,
+      "canonicalReleaseEnabled": false
+    }
+  },
+  "authority": {
+    "paymentEnabled": false,
+    "escrowEnabled": false,
+    "authenticatedDeliveryEnabled": false,
+    "corpusMutationEnabled": false,
+    "canonicalReleaseEnabled": false
+  },
+  "fixtureSha256": "sha256:bd2e5d4d3889c857c2c1c4442e3b7e5b595c3bef7d5ebb4cf490e73ddd2358fa"
+}
