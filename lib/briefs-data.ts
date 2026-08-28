@@ -46,7 +46,7 @@ export interface Brief {
   protocolPatch?: ProtocolPatch;
 }
 
-export const BRIEFS: Brief[] = [
+const ALL_BRIEFS: Brief[] = [
   {
     slug: 'sea-semiconductor-manufacturing-hedge',
     title: 'Manufacturing Power Semiconductors in SEA as a China-Risk Hedge',
@@ -2163,8 +2163,31 @@ export const BRIEFS: Brief[] = [
   }
 ]
 
+// Public intelligence is allowlisted. New or client-derived work remains
+// unavailable until a separate provenance review explicitly adds its slug.
+export const PUBLIC_INTELLIGENCE_BRIEF_SLUGS = [
+  'ai-software-cost-trajectory-2040',
+] as const
+
+const PUBLIC_INTELLIGENCE_BRIEF_SLUG_SET = new Set<string>(PUBLIC_INTELLIGENCE_BRIEF_SLUGS)
+
+export function isPublicIntelligenceBriefSlug(slug: string): boolean {
+  return PUBLIC_INTELLIGENCE_BRIEF_SLUG_SET.has(slug)
+}
+
+export const BRIEFS: Brief[] = ALL_BRIEFS.filter((brief) =>
+  isPublicIntelligenceBriefSlug(brief.slug),
+)
+
 const BRIEF_MAP: Record<string, Brief> = Object.fromEntries(
   BRIEFS.map((b) => [b.slug, b]),
+)
+
+/** Internal editorial archive. Never use this collection for a public projection. */
+export const INTELLIGENCE_BRIEF_ARCHIVE: readonly Brief[] = ALL_BRIEFS
+
+const ARCHIVE_BRIEF_MAP: Record<string, Brief> = Object.fromEntries(
+  INTELLIGENCE_BRIEF_ARCHIVE.map((brief) => [brief.slug, brief]),
 )
 
 export function getBriefBySlug(slug: string): Brief | undefined {
@@ -2173,4 +2196,12 @@ export function getBriefBySlug(slug: string): Brief | undefined {
 
 export function getAllBriefSlugs(): string[] {
   return BRIEFS.map((b) => b.slug)
+}
+
+export function getArchivedBriefBySlug(slug: string): Brief | undefined {
+  return ARCHIVE_BRIEF_MAP[slug]
+}
+
+export function getAllArchivedBriefSlugs(): string[] {
+  return INTELLIGENCE_BRIEF_ARCHIVE.map((brief) => brief.slug)
 }

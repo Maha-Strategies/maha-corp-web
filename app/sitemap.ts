@@ -5,6 +5,7 @@ import { unfinishedSpeciesSections } from '@/lib/unfinished-species'
 import { openBookEditions } from '@/lib/open-book-editions'
 import { KNOWLEDGE_ARTICLES, knowledgeArticlePath } from '@/lib/knowledge-data'
 import { SEMICONDUCTOR_PROCESS_MAP_DATE, SEMICONDUCTOR_PROCESS_MAP_PATH } from '@/lib/semiconductor-process-map'
+import { BRIEFS } from '@/lib/briefs-data'
 import { KNOWLEDGE_SUPPLIERS, knowledgeSupplierPath } from '@/lib/knowledge-process-profiles'
 import { CELESTIAL_FACT_PATH, CELESTIAL_FACT_RELEASE_DATE } from '@/lib/celestial-facts'
 import { ASTROLOGY_PATH, ASTROLOGY_RELEASE_DATE, ASTROLOGY_TRADITIONS, astrologyTraditionPath } from '@/lib/astrology-traditions'
@@ -464,5 +465,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       lastModified: new Date(getPublishedSubstantialPage(release.recordId)?.quality.eligible ? SUBSTANTIAL_PUBLICATION_DATE : release.releasedAt),
     }))
 
-  return [...staticPages, ...knowledgePages, ...astronomyKnowledgePages, ...astrologyTraditionPages, ...knowledgeSupplierPages, ...unfinishedSpeciesReader, ...otherOpenBookReaders, ...canonicalReleasePages, ...published.map((publication) => ({ url: `${baseUrl}/insights/${publication.slug}`, lastModified: new Date(publication.updated_at) }))]
+  const publicIntelligenceBriefUrls = new Set(
+    BRIEFS.map((brief) => `${baseUrl}/intelligence/briefs/${brief.slug}`),
+  )
+  const publicStaticPages = staticPages.filter(({ url }) =>
+    !url.startsWith(`${baseUrl}/intelligence/briefs/`) || publicIntelligenceBriefUrls.has(url),
+  )
+
+  return [...publicStaticPages, ...knowledgePages, ...astronomyKnowledgePages, ...astrologyTraditionPages, ...knowledgeSupplierPages, ...unfinishedSpeciesReader, ...otherOpenBookReaders, ...canonicalReleasePages, ...published.map((publication) => ({ url: `${baseUrl}/insights/${publication.slug}`, lastModified: new Date(publication.updated_at) }))]
 }

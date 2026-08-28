@@ -7,7 +7,7 @@ test('Atom feed includes the latest citation-ready explainers and intelligence b
   const entries = latestFeedEntries()
   const feed = buildAtomFeed(entries)
 
-  assert.equal(entries.length, 30)
+  assert.ok(entries.length >= 3)
   assert.ok(entries.some((entry) => entry.url.endsWith('/mps/what-is-mps')))
   assert.ok(entries.some((entry) => entry.url.includes('/intelligence/briefs/')))
   assert.match(feed, /<feed xmlns="http:\/\/www\.w3\.org\/2005\/Atom">/)

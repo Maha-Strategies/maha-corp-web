@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
 
-import { getBriefBySlug } from '../lib/briefs-data.ts'
+import { getArchivedBriefBySlug } from '../lib/briefs-data.ts'
 import {
   INTELLIGENCE_KNOWLEDGE_LINKS,
   getIntelligenceBriefSlugsForKnowledgeObject,
@@ -12,7 +12,7 @@ test('semiconductor Intelligence briefs have explicit supporting Knowledge objec
   assert.ok(INTELLIGENCE_KNOWLEDGE_LINKS.length >= 25)
 
   for (const link of INTELLIGENCE_KNOWLEDGE_LINKS) {
-    assert.ok(getBriefBySlug(link.briefSlug), `${link.briefSlug} must resolve to a brief`)
+    assert.ok(getArchivedBriefBySlug(link.briefSlug), `${link.briefSlug} must resolve to an archived brief`)
     assert.ok(link.articleIds.length > 0, `${link.briefSlug} needs a technical foundation`)
     assert.ok(link.rationale.length >= 80, `${link.briefSlug} needs a relationship rationale`)
     assert.equal(
