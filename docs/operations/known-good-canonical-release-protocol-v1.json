@@ -1,0 +1,71 @@
+{
+  "schemaVersion": "maha-known-good-release-protocol/1.0",
+  "protocolId": "canonical-release-with-repaired-revision-canary",
+  "frozenAtUtc": "2026-08-28T04:21:00Z",
+  "verifiedMainSha": "c91832835c9c56528e5bbf56c1289118fc4a2588",
+  "evidence": {
+    "migrationDryRun": {
+      "runId": 33090092159,
+      "headSha": "c91832835c9c56528e5bbf56c1289118fc4a2588",
+      "conclusion": "success",
+      "pendingMigrations": 0,
+      "preApplyClassification": "no-delta",
+      "postApplyClassification": "not-run",
+      "convergence": "not-applicable",
+      "productionMutationPerformed": false
+    },
+    "repairedRevisionRelease": {
+      "runId": 33087830174,
+      "headSha": "0100c0cc60dfc97707dd65377bffc221bc0a1932",
+      "operation": "review-publish-verify",
+      "conclusion": "success",
+      "initialReleases": 2,
+      "replayedReleases": 0
+    },
+    "propagationVerification": {
+      "verifiedAtUtc": "2026-08-28T04:21:00Z",
+      "records": 2,
+      "routeHttp200": 2,
+      "provenanceHttp200": 2,
+      "sitemapComplete": true,
+      "llmsTxtComplete": true,
+      "releaseRegistryComplete": true
+    }
+  },
+  "frozenComponents": [
+    {
+      "path": ".github/workflows/production-migrations.yml",
+      "sha256": "14d482b01f24b69e5292ca9675e721a84a62da43bec4de9fe4984815defd889c"
+    },
+    {
+      "path": ".github/workflows/production-repaired-revision-canary.yml",
+      "sha256": "fe89e9f9c8cbcb5d89b13ce48b1d32da09f3edfc3de1d2250b8337b8f63fdbd1"
+    },
+    {
+      "path": "scripts/run-repaired-revision-canary.ts",
+      "sha256": "c853e35365effd6b801c18e4266572152d9e8d38794114968f1550dc43e4d12b"
+    },
+    {
+      "path": "lib/repaired-revision-canary.ts",
+      "sha256": "2762ef8b930fdc3d77b5883007617a5ab807e07585cc021edaffce145ebc3ba0"
+    },
+    {
+      "path": "scripts/check-migrations.ts",
+      "sha256": "e7ddd2a89daa6b111d768997d6eec8becc7037f224354765805cd1a83dd3faae"
+    },
+    {
+      "path": "supabase/migrations/20260827161500_repaired_revision_canary_rpc.sql",
+      "sha256": "ec4e7d9264846c6f3b3a9da197270545728055517a67935dd03cb9c1d344fd02"
+    }
+  ],
+  "requiredBoundaries": [
+    "Production database identity is asserted before migration inspection.",
+    "A dry-run never applies a migration.",
+    "Unexplained pre-apply drift blocks operation.",
+    "Publication requires the protected production-database environment and exact confirmation phrase.",
+    "Operations and release-authority credentials remain separate.",
+    "Only exact reviewed record revisions may be released.",
+    "A release is not complete until route, provenance, sitemap, llms.txt and registry projection agree.",
+    "Internal editorial review is disclosed and never represented as external endorsement or scientific validation."
+  ]
+}
