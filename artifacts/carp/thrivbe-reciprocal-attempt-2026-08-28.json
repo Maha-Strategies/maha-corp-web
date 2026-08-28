@@ -1,11 +1,17 @@
 {
-  "artifactVersion": "1.0.0",
+  "artifactVersion": "1.1.0",
   "recordedAt": "2026-08-28",
+  "correction": {
+    "supersedesClassification": "failed_transport",
+    "correctedClassification": "http_response_framing_incompatible",
+    "basis": "Thrivbe's Production request log and a strict Node HTTP parser reproduction showed that the request reached Thrivbe and that LF-only CGI response headers caused HPE_INVALID_HEADER_TOKEN."
+  },
   "peer": {
     "handle": "thrivbe",
     "did": "did:key:zQ3shs5FSFqMhhCw7MazfRtyWZwBXGMVLs2jLxu8xiihjEbnJ",
     "publicKey": "03b8bd2886d40b5a4b6d12d396ff60c8df6b3b1deecc777411335d60afc5283673",
-    "carpUrl": "http://157.180.117.231:8888"
+    "carpUrlAtAttempt": "http://157.180.117.231:8888",
+    "currentCarpUrl": "https://carp.thrivbe.com"
   },
   "scope": {
     "operation": "one reciprocal ADILOS proof attempt",
@@ -19,9 +25,14 @@
   },
   "observations": {
     "attemptCompletedAt": "2026-08-28T06:51:45.276Z",
+    "requestReachedThrivbe": true,
+    "requestReceivedAtThrivbe": "2026-08-28T06:51:45.127Z",
     "mahaSignedDescriptorFetch": "pass",
-    "thrivbeChallengeFetch": "failed_transport",
-    "challengeReceiptConfirmed": false,
+    "thrivbeChallengeGenerated": true,
+    "thrivbeChallengeFetch": "failed_http_response_parsing",
+    "thrivbeResponseHeaderFraming": "lf_only",
+    "nodeParserErrorCode": "HPE_INVALID_HEADER_TOKEN",
+    "parseableChallengeReceivedByMaha": false,
     "responseGenerated": false,
     "responseSent": false,
     "reciprocalProofCompleted": false,
@@ -30,10 +41,27 @@
     "boundedError": "fetch failed"
   },
   "followUpDiagnosis": {
-    "thrivbeDidEndpointReachableFromOperatorEnvironment": true,
-    "productionToThrivbeTransportConfirmed": false,
+    "productionToThrivbeRequestTransportConfirmed": true,
+    "strictNodeResponseParsingConfirmedFailure": true,
+    "crlfCorrectionDeployedByThrivbe": true,
+    "standardPortHttpsDeployedByThrivbe": true,
+    "correctedTransportVerifiedByThrivbe": true,
     "nextAttemptRequiresFreshAuthorization": true,
-    "nextAttemptRequiresTransportCorrection": true
+    "nextAttemptRequiresTransportCorrection": false
+  },
+  "refreshedDescriptorVerification": {
+    "verifiedAt": "2026-08-28",
+    "didUrl": "https://carp.thrivbe.com/cgi-bin/did",
+    "sadUrl": "https://carp.thrivbe.com/cgi-bin/thrivbe",
+    "sequence": 2,
+    "carpUrl": "https://carp.thrivbe.com",
+    "publicKeyUnchanged": true,
+    "didDerivedFromPublicKey": true,
+    "signatureVerified": true,
+    "signatureAlgorithm": "ES256K",
+    "canonicalization": "RFC8785",
+    "didDocumentSha256": "24131f042e0e95928e38ee3e96e7d59f8a9faa7a3b9d2c37a653c2a70e94729c",
+    "signedDescriptorSha256": "d2b73321ea247c6ae23f41c595f8defe1e840b1b346c3175e4a2ed20fbaa903d"
   },
   "retention": {
     "privateKeysRetained": false,
@@ -42,5 +70,5 @@
     "encryptedPayloadsRetained": false,
     "credentialsRetained": false
   },
-  "claimBoundary": "This artifact records one authorized, failed-closed reciprocal ADILOS attempt. It does not prove reciprocal trust or a completed encrypted enquiry. The one-use execution route was removed from Production after the attempt."
+  "claimBoundary": "This corrected artifact records one authorized, failed-closed reciprocal ADILOS attempt. The request reached Thrivbe, but Maha's strict Node client rejected the LF-only HTTP response framing before receiving a parseable challenge. It does not prove reciprocal trust or a completed encrypted enquiry. The one-use execution route was removed from Production after the attempt."
 }

@@ -18,7 +18,10 @@ export const EL_CABEZON = Object.freeze({
 export const THRIVBE = Object.freeze({
   did: 'did:key:zQ3shs5FSFqMhhCw7MazfRtyWZwBXGMVLs2jLxu8xiihjEbnJ',
   publicKey: '03b8bd2886d40b5a4b6d12d396ff60c8df6b3b1deecc777411335d60afc5283673',
-  carpUrl: 'http://157.180.117.231:8888',
+  carpUrl: 'https://carp.thrivbe.com',
+  didUrl: 'https://carp.thrivbe.com/cgi-bin/did',
+  sadUrl: 'https://carp.thrivbe.com/cgi-bin/thrivbe',
+  descriptorSequence: 2,
 })
 
 export type ApprovedCarpPeer = typeof EL_CABEZON | typeof THRIVBE
