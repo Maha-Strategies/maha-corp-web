@@ -1,12 +1,12 @@
 import type { RecoveryObservation, RecoveryRequest, RecoveryState } from './source-recovery.ts'
 
 const ALLOWED_HOSTS = new Set([
+  'doi.org',
   'api.crossref.org',
   'api.openalex.org',
   'www.ebi.ac.uk',
   'api.biorxiv.org',
   'arxiv.org',
-  'doi.org',
   'export.arxiv.org',
   'www.osti.gov',
   'pubs.usgs.gov',
@@ -109,6 +109,20 @@ export async function executeRecoveryRequest(request: RecoveryRequest, signal?: 
         artifactVersion: 'version-of-record',
         versionRelationshipVerified: true,
         note: 'Crossref metadata located. Metadata is not an open copy and was not inspected for claim support.',
+      }
+    }
+    if (request.channel === 'doi-resolver') {
+      const json = JSON.parse(await boundedText(response)) as { responseCode?: number; values?: Array<{ type?: string; data?: { value?: string } }> }
+      const candidateUrl = json.values?.find((value) => value.type === 'URL')?.data?.value ?? null
+      const encodedIdentifier = request.url.split('/api/handles/')[1] ?? ''
+      return {
+        ...generic,
+        status: json.responseCode === 1 && candidateUrl?.startsWith('https://') ? 'version-relationship-unverified' : 'not-found',
+        candidateUrl,
+        observedIdentifier: encodedIdentifier.split('/').map((part) => decodeURIComponent(part)).join('/') || null,
+        artifactVersion: 'version-of-record',
+        versionRelationshipVerified: json.responseCode === 1,
+        note: 'The DOI handle registry was queried. Resolution establishes identity routing only; content was not inspected.',
       }
     }
     if (request.channel === 'europe-pmc') {

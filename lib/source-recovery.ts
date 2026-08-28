@@ -30,6 +30,7 @@ export const ARTIFACT_VERSIONS = [
 export type RecoveryArtifactVersion = (typeof ARTIFACT_VERSIONS)[number]
 
 export const RECOVERY_CHANNELS = [
+  'doi-resolver',
   'crossref',
   'europe-pmc',
   'arxiv',
@@ -107,6 +108,13 @@ export const SOURCE_RECOVERY_CANARY_IDS = [
   'source-longevity-metabolism-bioenergetics',
 ] as const
 
+/** Every source contract still attached to at least one uninspected record. */
+export const SOURCE_RECOVERY_OUTSTANDING_IDS = [...new Set(
+  FRONTIER_ALIGNMENT_AUDIT
+    .filter((entry) => !entry.evidence.sourceContentInspected)
+    .map((entry) => entry.sourceContractId),
+)].sort()
+
 function normalizeTitle(value: string): string {
   return value.normalize('NFKD').toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim()
 }
@@ -157,6 +165,8 @@ function query(value: string): string {
 export function recoveryRequests(source: { title: string; url: string; identifier: string | null; publisher: string }): readonly RecoveryRequest[] {
   const requests: RecoveryRequest[] = []
   if (source.identifier) {
+    const handlePath = source.identifier.split('/').map((part) => encodeURIComponent(part)).join('/')
+    requests.push({ channel: 'doi-resolver', url: `https://doi.org/api/handles/${handlePath}`, purpose: 'version-link' })
     requests.push({ channel: 'crossref', url: `https://api.crossref.org/works/${query(source.identifier)}`, purpose: 'metadata' })
     requests.push({ channel: 'europe-pmc', url: `https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI:${query(source.identifier)}&format=json`, purpose: 'open-copy' })
     requests.push({ channel: 'biorxiv', url: `https://api.biorxiv.org/details/biorxiv/${query(source.identifier)}`, purpose: 'version-link' })
@@ -206,7 +216,11 @@ export function validateObservation(source: { title: string; identifier: string 
   return [...new Set(issues)].sort()
 }
 
-export function compileRecoveryPackets(observationsBySource: Readonly<Record<string, readonly RecoveryObservation[]>> = {}): readonly RecoveryPacket[] {
+export function compileRecoveryPackets(
+  observationsBySource: Readonly<Record<string, readonly RecoveryObservation[]>> = {},
+  sourceContractIds: readonly string[] = SOURCE_RECOVERY_CANARY_IDS,
+  uninspectedOnly = false,
+): readonly RecoveryPacket[] {
   const auditsBySource = new Map<string, Array<(typeof FRONTIER_ALIGNMENT_AUDIT)[number]>>()
   for (const audit of FRONTIER_ALIGNMENT_AUDIT) {
     const entries = auditsBySource.get(audit.sourceContractId) ?? []
@@ -214,9 +228,10 @@ export function compileRecoveryPackets(observationsBySource: Readonly<Record<str
     auditsBySource.set(audit.sourceContractId, entries)
   }
   const sourceById = new Map(FRONTIER_DOMAIN_GRAPH_RECORDS.flatMap((record) => record.sources.map((source) => [source.id, source] as const)))
-  return SOURCE_RECOVERY_CANARY_IDS.map((sourceContractId, index) => {
+  return sourceContractIds.map((sourceContractId, index) => {
     const source = sourceById.get(sourceContractId)
-    const audits = auditsBySource.get(sourceContractId)
+    const allAudits = auditsBySource.get(sourceContractId)
+    const audits = uninspectedOnly ? allAudits?.filter((entry) => !entry.evidence.sourceContentInspected) : allAudits
     if (!source || !audits?.length) throw new Error(`${sourceContractId}: canary source does not resolve to the frontier corpus`)
     const identifier = source.identifiers.find((item) => item.scheme === 'doi')?.value ?? null
     const observations = [...(observationsBySource[sourceContractId] ?? [])]
@@ -234,7 +249,7 @@ export function compileRecoveryPackets(observationsBySource: Readonly<Record<str
       declaredUrl: source.url,
       affectedRecordIds: audits.map((item) => item.recordId).sort(),
       currentAlignmentStates: [...new Set(audits.map((item) => item.evidence.subjectAligned))].sort(),
-      priority: 20 - index,
+      priority: sourceContractIds.length - index,
       requests: recoveryRequests({ title: source.title, url: source.url, identifier, publisher: source.publisher }),
       observations,
       disposition: disposition(observations),
@@ -245,6 +260,11 @@ export function compileRecoveryPackets(observationsBySource: Readonly<Record<str
   })
 }
 
+export function compileOutstandingRecoveryPackets(observationsBySource: Readonly<Record<string, readonly RecoveryObservation[]>> = {}): readonly RecoveryPacket[] {
+  return compileRecoveryPackets(observationsBySource, SOURCE_RECOVERY_OUTSTANDING_IDS, true)
+}
+
 if (SOURCE_RECOVERY_CANARY_IDS.length !== 20 || new Set(SOURCE_RECOVERY_CANARY_IDS).size !== 20) {
   throw new Error('The source-recovery canary must contain exactly twenty unique contracts.')
 }
+if (SOURCE_RECOVERY_OUTSTANDING_IDS.length !== 19) throw new Error(`Expected 19 outstanding source contracts, found ${SOURCE_RECOVERY_OUTSTANDING_IDS.length}.`)
