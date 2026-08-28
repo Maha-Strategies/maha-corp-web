@@ -38,7 +38,12 @@ if scope == "preview":
 elif base_url != "https://www.mahastrategies.com":
     raise RuntimeError("Production witness canary target must be exactly https://www.mahastrategies.com.")
 
-api_key = required("WITNESS_CANARY_API_KEY")
+api_key = os.environ.get("WITNESS_CANARY_API_KEY", "").strip()
+provision_disposable = os.environ.get("WITNESS_CANARY_PROVISION_DISPOSABLE_KEY", "").strip() == "true"
+if scope == "preview" and (not api_key or provision_disposable):
+    raise RuntimeError("Preview requires its protected WITNESS_CANARY_API_KEY and cannot provision a Production key.")
+if scope == "production" and (api_key or not provision_disposable):
+    raise RuntimeError("Production must provision a disposable canary key and cannot accept a shared API key.")
 bypass = os.environ.get("VERCEL_AUTOMATION_BYPASS_SECRET", "").strip()
 run_id = required("GITHUB_RUN_ID")
 run_attempt = required("GITHUB_RUN_ATTEMPT")
@@ -49,10 +54,12 @@ def utc_second() -> str:
     return datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
 
 
-def request(method: str, path: str, *, body: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, expected: int) -> Mapping[str, Any]:
+def request(method: str, path: str, *, body: Mapping[str, Any] | None = None, headers: Mapping[str, str] | None = None, expected: int, authenticate: bool = True) -> Mapping[str, Any]:
+    if authenticate and not api_key:
+        raise RuntimeError("The lifecycle request requires an active canary API key.")
     merged = {
-        "Authorization": f"Bearer {api_key}",
         "Accept": "application/json",
+        **({"Authorization": f"Bearer {api_key}"} if authenticate else {}),
         **({"x-vercel-protection-bypass": bypass, "x-vercel-set-bypass-cookie": "false"} if bypass else {}),
         **dict(headers or {}),
     }
@@ -74,63 +81,93 @@ def request(method: str, path: str, *, body: Mapping[str, Any] | None = None, he
     return parsed_payload
 
 
-started_at = utc_second()
-# This bounded computation is the execution being witnessed. Its output is not
-# a scientific claim and is intentionally not persisted as an artifact.
-sum(index * index for index in range(128))
-finished_at = utc_second()
-receipt = build_receipt(
-    job_id=f"{scope}-witness-canary-{run_id}-{run_attempt}",
-    callable_identity={"module": "scripts.run-witness-lifecycle-canary", "qualname": "bounded_canary_computation"},
-    status="succeeded",
-    started_at=started_at,
-    finished_at=finished_at,
-    artifacts=[],
-    environment={"pythonImplementation": platform.python_implementation(), "pythonVersion": platform.python_version(), "system": platform.system()},
-    configuration={"purpose": f"private-{scope}-registry-lifecycle-canary"},
-)
-digest = str(receipt["receiptSha256"])
-encoded_digest = urllib.parse.quote(digest, safe="")
-idempotency_key = f"{scope}-witness-{run_id}-{run_attempt}"
+if scope == "production":
+    generated = request("POST", "/api/v1/keys/generate", body={
+        "email": f"production-witness-canary+{run_id}-{run_attempt}@mahastrategies.com",
+    }, expected=201, authenticate=False)
+    generated_key = generated.get("apiKey")
+    if not isinstance(generated_key, str) or not generated_key:
+        raise RuntimeError("Disposable Production key provisioning returned no API key.")
+    api_key = generated_key
 
-created = request("POST", "/api/v1/witness/receipts", body=receipt, headers={
-    "Idempotency-Key": idempotency_key,
-    "X-Maha-Witness-Retention-Consent": "persist-receipt",
-    "X-Maha-Witness-Retention-Days": "1",
-}, expected=201)
-if created.get("status") != "created" or created.get("receiptSha256") != digest:
-    raise RuntimeError("Receipt creation response did not bind the expected digest.")
+lifecycle_state: dict[str, Any] = {"digest": None, "created": False, "purged": False}
 
-verified = request("POST", "/api/v1/witness/verify", body=receipt, expected=200)
-if verified.get("ok") is not True or verified.get("contentRetained") is not False:
-    raise RuntimeError("Verification endpoint did not return the required non-retention contract.")
 
-read_before = request("GET", f"/api/v1/witness/receipts/{encoded_digest}", expected=200)
-if read_before.get("payloadAvailable") is not True or read_before.get("verification", {}).get("ok") is not True:
-    raise RuntimeError("Stored receipt was unavailable or failed server verification before purge.")
+def run_lifecycle() -> dict[str, Any]:
+    started_at = utc_second()
+    # This bounded computation is the execution being witnessed. Its output is
+    # not a scientific claim and is intentionally not persisted as an artifact.
+    sum(index * index for index in range(128))
+    finished_at = utc_second()
+    receipt = build_receipt(
+        job_id=f"{scope}-witness-canary-{run_id}-{run_attempt}",
+        callable_identity={"module": "scripts.run-witness-lifecycle-canary", "qualname": "bounded_canary_computation"},
+        status="succeeded",
+        started_at=started_at,
+        finished_at=finished_at,
+        artifacts=[],
+        environment={"pythonImplementation": platform.python_implementation(), "pythonVersion": platform.python_version(), "system": platform.system()},
+        configuration={"purpose": f"private-{scope}-registry-lifecycle-canary"},
+    )
+    digest = str(receipt["receiptSha256"])
+    lifecycle_state["digest"] = digest
+    encoded_digest = urllib.parse.quote(digest, safe="")
+    idempotency_key = f"{scope}-witness-{run_id}-{run_attempt}"
 
-purged = request("DELETE", f"/api/v1/witness/receipts/{encoded_digest}", expected=200)
-if purged.get("payloadPurged") is not True or purged.get("immutableIdentityRetained") is not True:
-    raise RuntimeError("Payload purge did not preserve immutable receipt identity.")
+    created = request("POST", "/api/v1/witness/receipts", body=receipt, headers={
+        "Idempotency-Key": idempotency_key,
+        "X-Maha-Witness-Retention-Consent": "persist-receipt",
+        "X-Maha-Witness-Retention-Days": "1",
+    }, expected=201)
+    if created.get("status") != "created" or created.get("receiptSha256") != digest:
+        raise RuntimeError("Receipt creation response did not bind the expected digest.")
+    lifecycle_state["created"] = True
 
-read_after = request("GET", f"/api/v1/witness/receipts/{encoded_digest}", expected=410)
-if read_after.get("payloadAvailable") is not False or read_after.get("receipt") is not None or read_after.get("immutableIdentityRetained") is not True:
-    raise RuntimeError("Post-purge read did not return immutable identity without payload.")
+    verified = request("POST", "/api/v1/witness/verify", body=receipt, expected=200)
+    if verified.get("ok") is not True or verified.get("contentRetained") is not False:
+        raise RuntimeError("Verification endpoint did not return the required non-retention contract.")
 
-evidence = {
-    "schemaVersion": "maha-witness-lifecycle-canary-evidence/1.0",
-    "targetScope": scope,
-    "targetHost": parsed.netloc,
-    "receiptSha256": digest,
-    "created": True,
-    "verifiedWithoutPersistence": True,
-    "readBeforePurge": True,
-    "payloadPurged": True,
-    "immutableIdentityRetained": True,
-    "postPurgeStatus": 410,
-    "scientificValidityCertified": False,
-    "independentlyReproduced": False,
-}
+    read_before = request("GET", f"/api/v1/witness/receipts/{encoded_digest}", expected=200)
+    if read_before.get("payloadAvailable") is not True or read_before.get("verification", {}).get("ok") is not True:
+        raise RuntimeError("Stored receipt was unavailable or failed server verification before purge.")
+
+    purged = request("DELETE", f"/api/v1/witness/receipts/{encoded_digest}", expected=200)
+    if purged.get("payloadPurged") is not True or purged.get("immutableIdentityRetained") is not True:
+        raise RuntimeError("Payload purge did not preserve immutable receipt identity.")
+    lifecycle_state["purged"] = True
+
+    read_after = request("GET", f"/api/v1/witness/receipts/{encoded_digest}", expected=410)
+    if read_after.get("payloadAvailable") is not False or read_after.get("receipt") is not None or read_after.get("immutableIdentityRetained") is not True:
+        raise RuntimeError("Post-purge read did not return immutable identity without payload.")
+
+    return {
+        "schemaVersion": "maha-witness-lifecycle-canary-evidence/1.0",
+        "targetScope": scope,
+        "targetHost": parsed.netloc,
+        "receiptSha256": digest,
+        "created": True,
+        "verifiedWithoutPersistence": True,
+        "readBeforePurge": True,
+        "payloadPurged": True,
+        "immutableIdentityRetained": True,
+        "postPurgeStatus": 410,
+        "scientificValidityCertified": False,
+        "independentlyReproduced": False,
+    }
+
+
+try:
+    evidence = run_lifecycle()
+finally:
+    if scope == "production":
+        digest = lifecycle_state["digest"]
+        if lifecycle_state["created"] and not lifecycle_state["purged"] and isinstance(digest, str):
+            request("DELETE", f"/api/v1/witness/receipts/{urllib.parse.quote(digest, safe='')}", expected=200)
+        revoked = request("POST", "/api/v1/keys/revoke", expected=200)
+        if revoked.get("revoked") is not True:
+            raise RuntimeError("Disposable Production canary key was not revoked.")
+
+evidence["disposableCredentialRevoked"] = scope == "production"
 evidence_path.parent.mkdir(parents=True, exist_ok=True)
 evidence_path.write_text(json.dumps(evidence, sort_keys=True, separators=(",", ":")) + "\n", encoding="utf-8")
 print(f"Private {scope.title()} witness lifecycle passed for {digest}.")

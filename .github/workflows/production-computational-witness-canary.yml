@@ -29,7 +29,7 @@ jobs:
     env:
       TEST_API_URL: ${{ vars.PRODUCTION_CANARY_BASE_URL }}
       WITNESS_CANARY_SCOPE: production
-      WITNESS_CANARY_API_KEY: ${{ secrets.PRODUCTION_CANARY_API_KEY }}
+      WITNESS_CANARY_PROVISION_DISPOSABLE_KEY: 'true'
     steps:
       - name: Validate target, reason and confirmation
         env:
