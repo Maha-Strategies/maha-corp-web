@@ -19,7 +19,7 @@ jobs:
   canary:
     runs-on: ubuntu-latest
     timeout-minutes: 10
-    environment: preview-database
+    environment: Preview
     env:
       CABEZON_PREVIEW_BASE_URL: ${{ secrets.CABEZON_PREVIEW_BASE_URL }}
       CABEZON_PREVIEW_TOKEN: ${{ secrets.CABEZON_PREVIEW_TOKEN }}
