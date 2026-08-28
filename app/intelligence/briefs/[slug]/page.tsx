@@ -182,6 +182,16 @@ export default async function BriefPage(
               <div className={`${styles.quote} mb-8 not-prose`}>{brief.intro}</div>
             )}
 
+            {brief.publicEditionBoundary && (
+              <aside className={`${styles.statusPanel} ${styles.statusPanelIllustrative} not-prose`}>
+                <p className={styles.panelLabel}>[ Sanitized public edition ]</p>
+                <p className={`${styles.panelCopy} mt-2`}>{brief.publicEditionBoundary.note}</p>
+                <p className={`${styles.metaMuted} mt-3`}>
+                  Excludes: {brief.publicEditionBoundary.excludes.join('; ')}.
+                </p>
+              </aside>
+            )}
+
             <aside className={`${styles.statusPanel} ${styles.statusPanelSourced} not-prose`}>
               <p className={styles.panelLabel}>[ Evidence status ]</p>
               <p className={`${styles.panelCopy} mt-2 mb-3`}>
