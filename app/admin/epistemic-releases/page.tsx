@@ -153,7 +153,7 @@ export default function EpistemicReleaseControlPage() {
   if (!workspace) return (
     <main className={styles.page}><div className={styles.shell}><section className={`${styles.hero} ${styles.login}`}>
       <p className={styles.kicker}>Phase 3 · separate release authority</p><h1 className={styles.title}>Canonical release control.</h1>
-      <p className={styles.lede}>Use the dedicated <code>EPISTEMIC_RELEASE_AUTHORITY_TOKEN</code>. The operations token is deliberately rejected here, and this credential is never written to browser storage.</p>
+      <p className={styles.lede}>Use the dedicated release-authority credential. The operations token is deliberately rejected here, and this credential is never written to browser storage.</p>
       <form className="mt-7" onSubmit={load}><label className={styles.fieldLabel} htmlFor="release-token">Release-authority token</label><input id="release-token" className={styles.input} type="password" autoComplete="off" value={token} onChange={(event) => setToken(event.target.value)} /><button className={`${styles.button} mt-4`} disabled={loading || token.length < 32}>{loading ? 'Checking…' : 'Open release control'}</button></form>
       {message && <p className={styles.notice}>{message}</p>}
     </section></div></main>

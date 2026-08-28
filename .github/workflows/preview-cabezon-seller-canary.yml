@@ -1,0 +1,61 @@
+name: Preview CABEZON Seller lifecycle canary
+
+on:
+  workflow_dispatch:
+    inputs:
+      confirmation:
+        description: Type RUN PRIVATE CABEZON CANARY exactly
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: preview-cabezon-seller-canary
+  cancel-in-progress: false
+
+jobs:
+  canary:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    environment: preview-database
+    env:
+      CABEZON_PREVIEW_BASE_URL: ${{ secrets.CABEZON_PREVIEW_BASE_URL }}
+      CABEZON_PREVIEW_TOKEN: ${{ secrets.CABEZON_PREVIEW_TOKEN }}
+      CABEZON_PREVIEW_SELLER_BINDING_JSON: ${{ secrets.CABEZON_PREVIEW_SELLER_BINDING_JSON }}
+      CABEZON_PREVIEW_CANARY_CUSTOMER_BINDING_JSON: ${{ secrets.CABEZON_PREVIEW_CANARY_CUSTOMER_BINDING_JSON }}
+      CABEZON_PREVIEW_CANARY_RUN_ID: gha-${{ github.run_id }}-${{ github.run_attempt }}
+      VERCEL_AUTOMATION_BYPASS_SECRET: ${{ secrets.VERCEL_AUTOMATION_BYPASS_SECRET }}
+      CABEZON_PREVIEW_CANARY_EVIDENCE: ${{ runner.temp }}/cabezon-preview/evidence.json
+    steps:
+      - name: Validate confirmation
+        env:
+          CONFIRMATION: ${{ inputs.confirmation }}
+        run: |
+          set -euo pipefail
+          if [ "$CONFIRMATION" != "RUN PRIVATE CABEZON CANARY" ]; then
+            echo '::error::Confirmation phrase not matched.'
+            exit 1
+          fi
+
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '26'
+          cache: npm
+
+      - run: npm ci
+
+      - name: Run private Preview lifecycle
+        run: node --experimental-strip-types scripts/run-cabezon-preview-remote-canary.ts
+
+      - name: Upload sanitized evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: preview-cabezon-canary-${{ github.run_id }}
+          path: ${{ runner.temp }}/cabezon-preview/evidence.json
+          if-no-files-found: error
+          retention-days: 30

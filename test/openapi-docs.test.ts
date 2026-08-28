@@ -144,6 +144,13 @@ const PRIVATE_ROUTES = new Set([
   // middleware contract for a gateway to call, is protected by a dedicated
   // integration credential, and is not a general Maha REST operation.
   '/api/integrations/gateway/context-compiler',
+  // Preview-only CABEZON compatibility surface. It is hidden outside Vercel
+  // Preview, bearer-protected and purchase-disabled; it is not a public REST
+  // contract until a separate promotion decision is made.
+  '/api/integrations/cabezon/preview/offers',
+  '/api/integrations/cabezon/preview/enquiries',
+  '/api/integrations/cabezon/preview/lifecycles/[lifecycleId]/delivery',
+  '/api/integrations/cabezon/preview/lifecycles/[lifecycleId]/acknowledgement',
   '/api/cron/inbound-digest',
   '/api/cron/job-reclaim',
   '/api/cron/market-scout',
