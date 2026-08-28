@@ -33,7 +33,9 @@ Run it with `node --experimental-strip-types`:
 node --experimental-strip-types packages/evidence-dossier-builder/bin/mps-dossier.ts verify ./out/manifest.json
 ```
 
-PDF rendering is deliberately not included in this sprint.
+The additive `compileIntegratedPackage()` path renders a deterministic PDF and
+binds verified calculation receipts. The original v0.1 compiler remains
+unchanged.
 
 ## Tests
 
@@ -68,9 +70,16 @@ mistaken for another:
 `sourceMetadata` · `claims` · `passages` · `calculations` · `formalProofs` ·
 `runtimeReceipts` · `assurance`
 
-`calculations`, `formalProofs`, and `runtimeReceipts` have no representation in
-the dossier schema today. They are emitted as **empty arrays** rather than
-omitted, so their absence is explicit. They are never populated by inference.
+`calculations` and `runtimeReceipts` are populated only from cryptographically
+verified attachments bound to declared dossier claims. They remain empty when
+no attachment is supplied. `formalProofs` remains empty until a formal-proof
+schema exists. A calculation never creates source or passage support.
+
+Generate the visually inspected sample with:
+
+```sh
+node --experimental-strip-types scripts/generate-integrated-dossier-sample.ts output/pdf
+```
 
 The `assurance` block states `externalExpertReview: false`,
 `independentReproduction: false`, and `certification: 'none'`.
