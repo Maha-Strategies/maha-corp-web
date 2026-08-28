@@ -45,13 +45,13 @@ test('the Maha seller maps Deep Context to the adopted digital offering shape', 
   assert.match(mahaCarpSellerProfile.membership.confirmationEvidence, /thrivbe-buyer-review-2026-08-27\.json$/)
   assert.deepEqual(mahaCarpSellerProfile.membership.directPeerBindings, [{
     handle: 'thrivbe',
-    status: 'thrivbe_to_maha_verified_reciprocal_retry_pending',
+    status: 'bidirectional_adilos_verified_enquiry_retry_pending',
     did: THRIVBE.did,
     sadUrl: THRIVBE.sadUrl,
     descriptorSequence: 2,
     publicKey: THRIVBE.publicKey,
     carpUrl: THRIVBE.carpUrl,
-    reciprocalEvidence: 'https://www.mahastrategies.com/artifacts/carp/thrivbe-reciprocal-attempt-2026-08-28.json',
+    reciprocalEvidence: 'https://www.mahastrategies.com/artifacts/carp/thrivbe-reciprocal-success-2026-08-28.json',
   }])
   assert.equal(offer.offeringRef, 'maha:deep-context-evaluation:v1')
   assert.equal(offer.kind, 'digital')
@@ -241,6 +241,22 @@ test('the reciprocal attempt artifact records the HTTP parsing failure without p
   assert.equal(artifact.refreshedDescriptorVerification.signatureVerified, true)
   assert.equal(artifact.retention.privateKeysRetained, false)
   assert.equal(artifact.retention.adilosChallengesRetained, false)
+  assert.doesNotMatch(canonical.toString('utf8'), /"challenge"\s*:|"response"\s*:|"privateKey"\s*:|CARP_AGENT_PRIVATE_KEY/)
+})
+
+test('the reciprocal success artifact records identity proof only and retains no protocol secrets', async () => {
+  const canonical = await readFile(new URL('../artifacts/carp/thrivbe-reciprocal-success-2026-08-28.json', import.meta.url))
+  const published = await readFile(new URL('../public/artifacts/carp/thrivbe-reciprocal-success-2026-08-28.json', import.meta.url))
+  assert.deepEqual(published, canonical)
+  const artifact = JSON.parse(canonical.toString('utf8'))
+  assert.equal(artifact.outcome, 'reciprocal_proof_completed')
+  assert.equal(artifact.peer.descriptorSequence, 2)
+  assert.equal(artifact.peer.carpUrl, THRIVBE.carpUrl)
+  assert.equal(artifact.checks.acknowledgedPublishedMahaKey, true)
+  assert.equal(artifact.checks.encryptedEnquirySent, false)
+  assert.equal(artifact.checks.moneyUsed, false)
+  assert.equal(artifact.executionBoundary.temporaryRouteRemovedAfterAttempt, true)
+  assert.equal(artifact.retention.privateKeysRetained, false)
   assert.doesNotMatch(canonical.toString('utf8'), /"challenge"\s*:|"response"\s*:|"privateKey"\s*:|CARP_AGENT_PRIVATE_KEY/)
 })
 

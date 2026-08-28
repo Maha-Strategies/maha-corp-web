@@ -1,0 +1,52 @@
+{
+  "artifactVersion": "1.0.0",
+  "recordedAt": "2026-08-28T08:24:29Z",
+  "outcome": "reciprocal_proof_completed",
+  "peer": {
+    "handle": "thrivbe",
+    "did": "did:key:zQ3shs5FSFqMhhCw7MazfRtyWZwBXGMVLs2jLxu8xiihjEbnJ",
+    "publicKey": "03b8bd2886d40b5a4b6d12d396ff60c8df6b3b1deecc777411335d60afc5283673",
+    "descriptorSequence": 2,
+    "carpUrl": "https://carp.thrivbe.com"
+  },
+  "scope": {
+    "operation": "exactly one reciprocal ADILOS proof attempt",
+    "moneyAuthorized": false,
+    "enquiryIncluded": false,
+    "purchaseAuthorized": false,
+    "reservationAuthorized": false,
+    "escrowAuthorized": false,
+    "deliveryAuthorized": false,
+    "additionalProofAttemptAuthorized": false
+  },
+  "checks": {
+    "thrivbeSequence2DescriptorFetched": true,
+    "thrivbeDescriptorSignatureVerified": true,
+    "thrivbeDidAndKeyMatchedPinnedIdentity": true,
+    "thrivbeHttpsCarpUrlMatchedPin": true,
+    "mahaPublishedDescriptorFetched": true,
+    "mahaLocalKeyMatchedPublishedDescriptor": true,
+    "mahaPublishedDescriptorSignatureVerified": true,
+    "challengeParsedByStrictNodeClient": true,
+    "responseAcceptedByThrivbe": true,
+    "acknowledgedPublishedMahaKey": true,
+    "reciprocalProofCompleted": true,
+    "encryptedEnquirySent": false,
+    "moneyUsed": false
+  },
+  "executionBoundary": {
+    "oneUseClaimAppliedBeforeChallenge": true,
+    "temporaryRouteRemovedAfterAttempt": true,
+    "challengeOrResponseReturnedToCaller": false,
+    "privateKeyReturnedToCaller": false
+  },
+  "retention": {
+    "privateKeysRetained": false,
+    "adilosChallengesRetained": false,
+    "adilosResponsesRetained": false,
+    "encryptedPayloadsRetained": false,
+    "credentialsRetained": false,
+    "sanitizedOutcomeRetained": true
+  },
+  "claimBoundary": "This artifact records one successful reciprocal ADILOS proof from Maha to Thrivbe against Thrivbe's pinned sequence-2 HTTPS descriptor. It establishes reciprocal identity proof only. It does not record an encrypted enquiry, purchase, payment, reservation, escrow, or delivery action."
+}
