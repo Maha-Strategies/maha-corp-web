@@ -105,6 +105,7 @@ const base = {
   schemaVersion: 'maha-cabezon-preview-remote-canary/0.1',
   targetHost: baseUrl.hostname,
   runId,
+  tokenSha256: digestJson(token),
   projectionSha256: projection.projectionSha256,
   lifecycleId,
   lifecycleStatus: acknowledged.lifecycle.status,

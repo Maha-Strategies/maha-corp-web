@@ -238,6 +238,7 @@ test('remote canary target is a protected secret rather than dispatcher-controll
   assert.match(workflow, /CABEZON_PREVIEW_BASE_URL: \$\{\{ secrets\.CABEZON_PREVIEW_BASE_URL \}\}/)
   assert.match(script, /hostname\.endsWith\('\.vercel\.app'\)/)
   assert.match(script, /redirect: 'error'/)
+  assert.match(script, /tokenSha256: digestJson\(token\)/)
   assert.doesNotMatch(script, /console\.(log|error)\([^\n]*(token|bypass|SELLER_BINDING|CUSTOMER_BINDING)/i)
   assert.match(workflow, /environment: Preview/)
   assert.match(migrationWorkflow, /20260828110000_cabezon_preview_seller_adapter\.sql/)
