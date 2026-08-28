@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict'
+import { execFileSync } from 'node:child_process'
 import { createHash } from 'node:crypto'
 import { readFileSync } from 'node:fs'
 import test from 'node:test'
@@ -7,6 +8,7 @@ type FrozenComponent = { path: string; sha256: string }
 type Protocol = {
   schemaVersion: string
   protocolId: string
+  verifiedMainSha: string
   evidence: {
     migrationDryRun: { productionMutationPerformed: boolean; pendingMigrations: number; preApplyClassification: string }
     repairedRevisionRelease: { initialReleases: number; replayedReleases: number; operation: string }
@@ -17,14 +19,53 @@ type Protocol = {
 }
 
 const protocol = JSON.parse(readFileSync('docs/operations/known-good-canonical-release-protocol-v1.json', 'utf8')) as Protocol
+const protocolV2 = JSON.parse(readFileSync('docs/operations/known-good-canonical-release-protocol-v2.json', 'utf8')) as {
+  schemaVersion: string
+  extends: string
+  evidence: {
+    unappliedMigrationAmendment: {
+      previewMutationPerformed: boolean
+      productionMutationPerformed: boolean
+      baseSha256: string
+      currentSha256: string
+      disposableDatabaseApplication: {
+        externalPrerequisiteRequired: boolean
+        tablesCreated: number
+        functionsCreated: number
+        singleTransaction: boolean
+      }
+    }
+  }
+  frozenComponents: FrozenComponent[]
+  requiredBoundaries: string[]
+}
 
 test('the known-good release protocol is pinned to byte-exact reviewed components', () => {
   assert.equal(protocol.schemaVersion, 'maha-known-good-release-protocol/1.0')
   assert.equal(protocol.frozenComponents.length, 6)
   for (const component of protocol.frozenComponents) {
-    const actual = createHash('sha256').update(readFileSync(component.path)).digest('hex')
-    assert.equal(actual, component.sha256, `${component.path} changed; create and evidence a new protocol version instead of silently changing v1`)
+    const historical = execFileSync('git', ['show', `${protocol.verifiedMainSha}:${component.path}`])
+    const actual = createHash('sha256').update(historical).digest('hex')
+    assert.equal(actual, component.sha256, `${component.path} does not match the byte-exact v1 historical freeze`)
   }
+})
+
+test('protocol v2 explicitly freezes the bounded unapplied witness migration amendment', () => {
+  assert.equal(protocolV2.schemaVersion, 'maha-known-good-release-protocol/2.0')
+  assert.equal(protocolV2.extends, 'docs/operations/known-good-canonical-release-protocol-v1.json')
+  assert.deepEqual(protocolV2.evidence.unappliedMigrationAmendment.disposableDatabaseApplication, {
+    externalPrerequisiteRequired: false,
+    tablesCreated: 4,
+    functionsCreated: 5,
+    singleTransaction: true,
+  })
+  assert.equal(protocolV2.evidence.unappliedMigrationAmendment.previewMutationPerformed, false)
+  assert.equal(protocolV2.evidence.unappliedMigrationAmendment.productionMutationPerformed, false)
+  for (const component of protocolV2.frozenComponents) {
+    const actual = createHash('sha256').update(readFileSync(component.path)).digest('hex')
+    assert.equal(actual, component.sha256, `${component.path} changed; create and evidence protocol v3 instead of silently changing v2`)
+  }
+  assert.match(protocolV2.requiredBoundaries.join('\n'), /No Production database mutation/)
 })
 
 test('the frozen evidence records a non-mutating migration check and complete canary projection', () => {

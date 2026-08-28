@@ -223,8 +223,9 @@ test('submission plans hash private identifiers and bind retention into the requ
 test('the migration separates immutable identity from purgeable payloads and restricts database access', async () => {
   const sql = await readFile(new URL('supabase/migrations/20260828100000_computational_witness_registry.sql', ROOT), 'utf8')
   for (const table of ['computational_witness_receipts', 'computational_witness_payloads', 'computational_witness_submissions', 'computational_witness_payload_events']) assert.match(sql, new RegExp(`create table public\\.${table}`))
-  assert.match(sql, /computational_witness_receipts_immutable[\s\S]*reject_epistemic_ledger_mutation/)
-  assert.match(sql, /computational_witness_submissions_immutable[\s\S]*reject_epistemic_ledger_mutation/)
+  assert.match(sql, /create function public\.reject_computational_witness_mutation\(\)/)
+  assert.match(sql, /computational_witness_receipts_immutable[\s\S]*reject_computational_witness_mutation/)
+  assert.match(sql, /computational_witness_submissions_immutable[\s\S]*reject_computational_witness_mutation/)
   assert.match(sql, /pg_advisory_xact_lock\(hashtextextended\(p_tenant_id \|\| ':' \|\| p_idempotency_hash, 0\)\)/)
   assert.match(sql, /v_existing_receipt\.retention_days <> p_retention_days/)
   assert.match(sql, /delete from public\.computational_witness_payloads/)
@@ -261,7 +262,7 @@ test('Preview migration and lifecycle workflows verify the witness registry with
     readFile(new URL('scripts/run-preview-witness-canary.py', ROOT), 'utf8'),
   ])
   assert.match(migrationWorkflow, /20260828100000_computational_witness_registry\.sql/)
-  assert.match(migrationWorkflow, /reject_epistemic_ledger_mutation\(\)/)
+  assert.match(migrationWorkflow, /immutable_witness=/)
   assert.match(migrationWorkflow, /--single-transaction/)
   for (const object of ['witness_receipts', 'witness_payloads', 'witness_submissions', 'witness_payload_events', 'record_witness', 'read_witness', 'purge_witness', 'expire_witness']) assert.match(migrationWorkflow, new RegExp(`${object}=`))
   assert.match(canaryWorkflow, /environment: preview-e2e/)
