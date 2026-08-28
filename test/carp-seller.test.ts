@@ -45,11 +45,12 @@ test('the Maha seller maps Deep Context to the adopted digital offering shape', 
   assert.match(mahaCarpSellerProfile.membership.confirmationEvidence, /thrivbe-buyer-review-2026-08-27\.json$/)
   assert.deepEqual(mahaCarpSellerProfile.membership.directPeerBindings, [{
     handle: 'thrivbe',
-    status: 'preapproved_pending_adilos',
+    status: 'thrivbe_to_maha_verified_maha_to_thrivbe_transport_blocked',
     did: THRIVBE.did,
     sadUrl: 'http://157.180.117.231:8888/cgi-bin/thrivbe',
     publicKey: THRIVBE.publicKey,
     carpUrl: THRIVBE.carpUrl,
+    reciprocalEvidence: 'https://www.mahastrategies.com/artifacts/carp/thrivbe-reciprocal-attempt-2026-08-28.json',
   }])
   assert.equal(offer.offeringRef, 'maha:deep-context-evaluation:v1')
   assert.equal(offer.kind, 'digital')
@@ -213,6 +214,23 @@ test('the sanitized Thrivbe report preserves the blocked round trip without pers
   assert.equal(artifact.retention.encryptedPayloadsRetained, false)
   assert.match(artifact.claimBoundary, /not a completed direct encrypted enquiry/)
   assert.doesNotMatch(canonical.toString('utf8'), /@|\+47|938 12345|msghex|sighex/)
+})
+
+test('the reciprocal attempt artifact records the transport failure without protocol secrets', async () => {
+  const canonical = await readFile(new URL('../artifacts/carp/thrivbe-reciprocal-attempt-2026-08-28.json', import.meta.url))
+  const published = await readFile(new URL('../public/artifacts/carp/thrivbe-reciprocal-attempt-2026-08-28.json', import.meta.url))
+  assert.deepEqual(published, canonical)
+  const artifact = JSON.parse(canonical.toString('utf8'))
+  assert.equal(artifact.observations.mahaSignedDescriptorFetch, 'pass')
+  assert.equal(artifact.observations.thrivbeChallengeFetch, 'failed_transport')
+  assert.equal(artifact.observations.responseGenerated, false)
+  assert.equal(artifact.observations.responseSent, false)
+  assert.equal(artifact.observations.reciprocalProofCompleted, false)
+  assert.equal(artifact.observations.encryptedEnquirySent, false)
+  assert.equal(artifact.followUpDiagnosis.nextAttemptRequiresFreshAuthorization, true)
+  assert.equal(artifact.retention.privateKeysRetained, false)
+  assert.equal(artifact.retention.adilosChallengesRetained, false)
+  assert.doesNotMatch(canonical.toString('utf8'), /"challenge"\s*:|"response"\s*:|"privateKey"\s*:|CARP_AGENT_PRIVATE_KEY/)
 })
 
 test('the Samley RFQ fails closed at purchase until an order-specific quote exists', () => {
