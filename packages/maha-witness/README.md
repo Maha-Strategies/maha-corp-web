@@ -36,7 +36,10 @@ maha-witness verify receipt.json
 
 Registry submission is a separate explicit library call. It accepts only HTTPS,
 validates before sending, and receives its bearer token from the caller rather
-than reading or storing credentials.
+than reading or storing credentials. Phase 2 submission also requires a caller
+idempotency key and an explicit 1-3650 day payload-retention period. The
+immutable digest ledger survives payload deletion; the receipt snapshot does
+not.
 
 ## Epistemic boundary
 

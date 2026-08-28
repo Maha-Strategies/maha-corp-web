@@ -1,0 +1,70 @@
+name: Preview computational witness canary
+
+on:
+  workflow_dispatch:
+    inputs:
+      preview_url:
+        description: Exact Vercel Preview URL carrying the witness registry routes
+        required: true
+        type: string
+      confirmation:
+        description: Type RUN PRIVATE WITNESS CANARY exactly
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: preview-computational-witness-canary
+  cancel-in-progress: false
+
+jobs:
+  canary:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    environment: preview-e2e
+    env:
+      TEST_API_URL: ${{ inputs.preview_url }}
+      PREVIEW_CANARY_API_KEY: ${{ secrets.PREVIEW_CANARY_API_KEY }}
+      VERCEL_AUTOMATION_BYPASS_SECRET: ${{ secrets.VERCEL_AUTOMATION_BYPASS_SECRET }}
+    steps:
+      - name: Validate target and confirmation
+        env:
+          CONFIRMATION: ${{ inputs.confirmation }}
+          PRODUCTION_BASE_URL: ${{ vars.PRODUCTION_BASE_URL }}
+        run: |
+          set -euo pipefail
+          if [ "$CONFIRMATION" != "RUN PRIVATE WITNESS CANARY" ]; then
+            echo '::error::Confirmation phrase not matched.'
+            exit 1
+          fi
+          target_host=$(printf '%s' "$TEST_API_URL" | awk -F/ '{print $3}')
+          production_host=$(printf '%s' "${PRODUCTION_BASE_URL:-}" | awk -F/ '{print $3}')
+          case "$TEST_API_URL" in https://*) ;; *) echo '::error::Preview URL must be HTTPS.'; exit 1 ;; esac
+          if [ -z "$target_host" ] || { [ -n "$production_host" ] && [ "$target_host" = "$production_host" ]; }; then
+            echo '::error::Refusing a missing or Production target.'
+            exit 1
+          fi
+          case "$target_host" in *mahastrategies.com) echo '::error::Refusing an apex or custom-domain target.'; exit 1 ;; esac
+
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+
+      - name: Run private lifecycle
+        env:
+          PYTHONPATH: packages/maha-witness/src
+          WITNESS_CANARY_EVIDENCE: ${{ runner.temp }}/witness-canary/evidence.json
+        run: python scripts/run-preview-witness-canary.py
+
+      - name: Upload sanitized evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: preview-witness-canary-${{ github.run_id }}
+          path: ${{ runner.temp }}/witness-canary/evidence.json
+          if-no-files-found: warn
+          retention-days: 30

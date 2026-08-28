@@ -126,7 +126,18 @@ jobs:
           # Session pooler: the direct db.<ref>.supabase.co host is IPv6-only on
           # newer projects, which GitHub runners cannot reach.
           url="postgresql://postgres.${SUPABASE_PROJECT_REF}:${SUPABASE_DB_PASSWORD}@aws-0-us-east-1.pooler.supabase.com:5432/postgres"
-          psql "$url" -v ON_ERROR_STOP=1 -f "supabase/migrations/$MIGRATION" 2>&1 | tee "$EVIDENCE/applied.txt"
+          if [ "$MIGRATION" = "20260828100000_computational_witness_registry.sql" ]; then
+            prerequisite=$(psql "$url" -v ON_ERROR_STOP=1 -At -c \
+              "select (to_regprocedure('public.reject_epistemic_ledger_mutation()') is not null)::text;")
+            if [ "$prerequisite" != "true" ]; then
+              echo '::error::Immutable-ledger trigger dependency is absent. Refusing a partial witness migration.'
+              exit 1
+            fi
+            psql "$url" -v ON_ERROR_STOP=1 --single-transaction \
+              -f "supabase/migrations/$MIGRATION" 2>&1 | tee "$EVIDENCE/applied.txt"
+          else
+            psql "$url" -v ON_ERROR_STOP=1 -f "supabase/migrations/$MIGRATION" 2>&1 | tee "$EVIDENCE/applied.txt"
+          fi
 
           # Record the version so a later `db push` does not treat it as pending.
           # Tolerant of CLI schema differences: the migration itself is
@@ -138,32 +149,44 @@ jobs:
             >> "$EVIDENCE/applied.txt" 2>&1 || echo "version not recorded; migration is idempotent" >> "$EVIDENCE/applied.txt"
 
       - name: Verify the objects the migration was applied for
+        env:
+          MIGRATION: ${{ inputs.migration }}
         run: |
           set -euo pipefail
           url="postgresql://postgres.${SUPABASE_PROJECT_REF}:${SUPABASE_DB_PASSWORD}@aws-0-us-east-1.pooler.supabase.com:5432/postgres"
-          psql "$url" -v ON_ERROR_STOP=1 -At -c "
-            select 'record_x402_offer_usage=' || (to_regprocedure('public.record_x402_offer_usage(text,text,text,text,numeric,numeric,numeric,numeric,numeric,timestamptz)') is not null)::text
-            union all
-            select 'x402_offer_usage_daily=' || (to_regclass('public.x402_offer_usage_daily') is not null)::text;
-          " | tee "$EVIDENCE/verify.txt"
-
-          # Full x402 object census, so a partially-applied database is legible
-          # in one place rather than inferred from a probe that cannot run.
-          psql "$url" -v ON_ERROR_STOP=1 -At -c "
-            select 'x402_readiness_functions=' || (to_regprocedure('public.x402_readiness_functions(text[])') is not null)::text
-            union all select 'x402_payments=' || (to_regclass('public.x402_payments') is not null)::text
-            union all select 'x402_settlements=' || (to_regclass('public.x402_settlements') is not null)::text
-            union all select 'x402_offer_admissions=' || (to_regclass('public.x402_offer_admissions') is not null)::text
-            union all select 'x402_mps_audits=' || (to_regclass('public.x402_mps_audits') is not null)::text
-            union all select 'reserve_x402_admission=' || (to_regprocedure('public.reserve_x402_admission(text,text,text,text,text,numeric,interval)') is not null)::text
-            union all select 'settle_x402_admission=' || (to_regprocedure('public.settle_x402_admission(text,text,text,text)') is not null)::text
-            union all select 'release_x402_admission=' || (to_regprocedure('public.release_x402_admission(text,text,text)') is not null)::text;
-          " | tee -a "$EVIDENCE/verify.txt"
-
-          grep -q 'record_x402_offer_usage=true' "$EVIDENCE/verify.txt" || {
-            echo '::error::record_x402_offer_usage() is still absent after applying.'; exit 1; }
-          grep -q 'x402_offer_usage_daily=true' "$EVIDENCE/verify.txt" || {
-            echo '::error::x402_offer_usage_daily is still absent after applying.'; exit 1; }
+          case "$MIGRATION" in
+            20260828100000_computational_witness_registry.sql)
+              psql "$url" -v ON_ERROR_STOP=1 -At -c "
+                select 'witness_receipts=' || (to_regclass('public.computational_witness_receipts') is not null)::text
+                union all select 'witness_payloads=' || (to_regclass('public.computational_witness_payloads') is not null)::text
+                union all select 'witness_submissions=' || (to_regclass('public.computational_witness_submissions') is not null)::text
+                union all select 'witness_payload_events=' || (to_regclass('public.computational_witness_payload_events') is not null)::text
+                union all select 'record_witness=' || (to_regprocedure('public.record_computational_witness_receipt(text,jsonb,text,text,text,text,text,integer)') is not null)::text
+                union all select 'read_witness=' || (to_regprocedure('public.read_computational_witness_receipt(text,text)') is not null)::text
+                union all select 'purge_witness=' || (to_regprocedure('public.purge_computational_witness_payload(text,text,text,text)') is not null)::text
+                union all select 'expire_witness=' || (to_regprocedure('public.purge_expired_computational_witness_payloads(timestamptz,integer)') is not null)::text;
+              " | tee "$EVIDENCE/verify.txt"
+              if grep -q '=false' "$EVIDENCE/verify.txt" || [ "$(wc -l < "$EVIDENCE/verify.txt")" -ne 8 ]; then
+                echo '::error::Computational witness registry objects did not converge.'
+                exit 1
+              fi
+              ;;
+            20260810000300_x402_offer_telemetry.sql|20260810000400_x402_mps_audit_jobs.sql)
+              psql "$url" -v ON_ERROR_STOP=1 -At -c "
+                select 'record_x402_offer_usage=' || (to_regprocedure('public.record_x402_offer_usage(text,text,text,text,numeric,numeric,numeric,numeric,numeric,timestamptz)') is not null)::text
+                union all select 'x402_offer_usage_daily=' || (to_regclass('public.x402_offer_usage_daily') is not null)::text
+                union all select 'x402_mps_audits=' || (to_regclass('public.x402_mps_audits') is not null)::text;
+              " | tee "$EVIDENCE/verify.txt"
+              if grep -q '=false' "$EVIDENCE/verify.txt"; then
+                echo '::error::Requested x402 objects did not converge.'
+                exit 1
+              fi
+              ;;
+            *)
+              echo "::error::No post-apply verifier is registered for $MIGRATION. Refusing unverifiable application."
+              exit 1
+              ;;
+          esac
 
       # Lets the running deployment and this workflow be proven to share a
       # database without either side printing its reference. Compare this
