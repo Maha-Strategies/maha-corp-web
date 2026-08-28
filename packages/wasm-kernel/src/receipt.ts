@@ -1,6 +1,8 @@
 export const KERNEL_RECEIPT_SCHEMA = 'maha-calculation-receipt/1.0' as const
+export const KERNEL_CANONICALIZATION_VERSION = 'maha-dossier-canonical/1.0' as const
 
 export interface CalculationReceiptInput {
+  canonicalizationVersion: typeof KERNEL_CANONICALIZATION_VERSION
   module: string
   operation: string
   inputs: Readonly<Record<string, string>>
@@ -68,6 +70,7 @@ async function sha256(value: string): Promise<string> {
 }
 
 export async function createCalculationReceipt(input: CalculationReceiptInput): Promise<CalculationReceipt> {
+  if (input.canonicalizationVersion !== KERNEL_CANONICALIZATION_VERSION) throw new Error('Receipt canonicalization version does not match the dossier compiler.')
   if (!/^sha256:[a-f0-9]{64}$/.test(input.kernelSha256)) throw new Error('kernelSha256 must be a SHA-256 digest.')
   for (const [name, digest] of [['conformanceSha256', input.conformanceSha256]] as const) {
     if (!/^sha256:[a-f0-9]{64}$/.test(digest)) throw new Error(`${name} must be a SHA-256 digest.`)
@@ -81,8 +84,15 @@ export async function createCalculationReceipt(input: CalculationReceiptInput): 
 }
 
 export async function verifyCalculationReceipt(receipt: CalculationReceipt): Promise<boolean> {
-  const { receiptSha256, ...snapshot } = receipt
-  const expectedInput = await sha256(canonicalJson({ constants: receipt.constants, inputs: receipt.inputs, units: receipt.units }))
-  const expectedOutput = await sha256(canonicalJson({ output: receipt.output, uncertainty: receipt.uncertainty }))
-  return receipt.schemaVersion === KERNEL_RECEIPT_SCHEMA && receipt.inputSha256 === expectedInput && receipt.outputSha256 === expectedOutput && receiptSha256 === await sha256(canonicalJson(snapshot))
+  try {
+    const { receiptSha256, ...snapshot } = receipt
+    const expectedInput = await sha256(canonicalJson({ constants: receipt.constants, inputs: receipt.inputs, units: receipt.units }))
+    const expectedOutput = await sha256(canonicalJson({ output: receipt.output, uncertainty: receipt.uncertainty }))
+    return receipt.schemaVersion === KERNEL_RECEIPT_SCHEMA
+      && receipt.canonicalizationVersion === KERNEL_CANONICALIZATION_VERSION
+      && receipt.inputSha256 === expectedInput && receipt.outputSha256 === expectedOutput
+      && receiptSha256 === await sha256(canonicalJson(snapshot))
+  } catch {
+    return false
+  }
 }

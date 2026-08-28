@@ -1,6 +1,6 @@
 # @maha/wasm-kernel
 
-An experimental deterministic fixed-point calculation kernel for Maha evidence packages. Version 0.2 exposes signed 64-bit integer operations through WebAssembly and a TypeScript reference implementation.
+An experimental deterministic fixed-point calculation kernel for Maha evidence packages. Version 0.3 exposes signed 64-bit integer operations through WebAssembly and a TypeScript reference implementation.
 
 This package does **not** claim that WebAssembly makes floating-point science reproducible. Its ABI avoids floating-point values, declares nearest-ties-to-even rounding, aborts on detected signed-i64 overflow, and is tested against more than 100 frozen conformance vectors. Inputs must carry their scale and units in the calculation receipt.
 
@@ -10,4 +10,6 @@ The `.wasm` and `.wat` outputs are intentionally not committed. `npm run build` 
 
 Calculation receipts bind the kernel, compiler flags, precision policy, conformance corpus, normalized inputs, outputs, uncertainty fields, optional theorem references, and optional computational-witness receipts. The dossier adapter emits a deterministic JSON-LD attachment but does not upgrade the evidentiary status of any claim. Empty proof or witness references do not imply a proof or witnessed execution. No public Maha route imports this package.
 
-Current limits: interval multiplication, transcendental functions, kinetic modules, interface thermal resistance, and independent cross-compiler conformance are not implemented. Callers must remain within domain-specific validated bounds.
+Phase 3 adds inclusive integer intervals with outward rounding, frozen uncertainty fixtures, receipt canonicalization pinned to `maha-dossier-canonical/1.0`, and artifact-only dossier verification. Calculations are optional: absent interval inputs produce no receipt, and incomplete bounds fail instead of becoming exact or zero.
+
+Current limits: transcendental functions, kinetic modules, interface thermal resistance, correlated uncertainty, probability distributions, and independent cross-compiler conformance are not implemented. Callers must remain within domain-specific validated bounds.

@@ -98,7 +98,7 @@ export function renderDossierJsonLd(dossier: EvidenceDossier, attachments: reado
       '@id': attachment.receipt.receiptSha256,
       module: attachment.receipt.module,
       operation: attachment.receipt.operation,
-      supportsClaims: attachment.claimIds,
+      calculationForClaims: attachment.claimIds,
       output: attachment.receipt.output,
       uncertainty: attachment.receipt.uncertainty,
       precisionPolicy: attachment.receipt.precisionPolicy,

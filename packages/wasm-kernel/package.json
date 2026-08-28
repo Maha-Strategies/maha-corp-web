@@ -1,13 +1,14 @@
 {
   "name": "@maha/wasm-kernel",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "private": true,
   "type": "module",
   "sideEffects": false,
   "files": ["dist", "conformance", "README.md"],
   "exports": {
     ".": { "types": "./dist/index.d.ts", "import": "./dist/index.js" },
-    "./conformance/vectors.json": "./conformance/vectors.json"
+    "./conformance/vectors.json": "./conformance/vectors.json",
+    "./conformance/uncertainty-vectors.json": "./conformance/uncertainty-vectors.json"
   },
   "scripts": {
     "build:wasm": "asc assembly/index.ts --outFile dist/kernel.wasm --textFile dist/kernel.wat --optimize --runtime stub --exportRuntime",

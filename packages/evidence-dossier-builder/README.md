@@ -75,6 +75,12 @@ verified attachments bound to declared dossier claims. They remain empty when
 no attachment is supplied. `formalProofs` remains empty until a formal-proof
 schema exists. A calculation never creates source or passage support.
 
+`verifyIntegratedCalculationEvidence()` reparses the exported artifacts and
+recomputes every receipt digest without trusting compiler objects. Receipt
+bytes use the same `maha-dossier-canonical/1.0` ordering as the dossier.
+Missing calculation input yields no receipt; it is never replaced with inferred
+numbers or zero uncertainty.
+
 Generate the visually inspected sample with:
 
 ```sh

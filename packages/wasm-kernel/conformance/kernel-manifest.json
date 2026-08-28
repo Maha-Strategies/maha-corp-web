@@ -1,6 +1,6 @@
 {
   "schemaVersion": "maha-wasm-kernel-manifest/1.0",
-  "kernelVersion": "0.2.0",
+  "kernelVersion": "0.3.0",
   "abi": "wasm-i64-fixed-point",
   "compiler": {
     "name": "assemblyscript",
@@ -18,5 +18,6 @@
   },
   "sourceSha256": "sha256:9c6705351046df4086eea5708de34e95d75f580c3df11b0391b4c1bdbafceb74",
   "conformanceSha256": "sha256:8746764e67849a2acf9a0569201e698064579592d495ea824c26985220b31c95",
+  "uncertaintyConformanceSha256": "sha256:e02e8ced7d69255640014f1e06802a4204ed74cfa04575ef47d24ef2c07b41f7",
   "kernelSha256": "sha256:a96a260581b3855e898cf76df55b9add052c684d2dfd8ff00e622ef766e0968e"
 }

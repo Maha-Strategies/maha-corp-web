@@ -80,7 +80,7 @@ export async function renderEvidenceDossierPdf(input: {
   for (const attachment of input.attachments) {
     const receipt = attachment.receipt
     line(`${receipt.module}.${receipt.operation}`, { font: bold, gap: 2 })
-    line(`Supports claims: ${attachment.claimIds.join(', ')}`)
+    line(`Bound claims: ${attachment.claimIds.join(', ')}`)
     line(`Output: ${JSON.stringify(receipt.output)} | Uncertainty: ${JSON.stringify(receipt.uncertainty)}`)
     line(`Precision: ${receipt.precisionPolicy}`)
     line(`Receipt: ${receipt.receiptSha256}`, { size: 7.5, font: mono })

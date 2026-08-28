@@ -13,6 +13,7 @@ import { instantiateKernel } from '../packages/wasm-kernel/src/kernel.ts'
 import { createCalculationReceipt, verifyCalculationReceipt } from '../packages/wasm-kernel/src/receipt.ts'
 import { canonicalJson as kernelCanonicalJson } from '../packages/wasm-kernel/src/receipt.ts'
 import * as reference from '../packages/wasm-kernel/src/reference.ts'
+import { addIntervals, createOptionalThermalReceiptInput, temperatureRiseInterval, thermalResistanceInterval } from '../packages/wasm-kernel/src/uncertainty.ts'
 
 const PACKAGE = new URL('../packages/wasm-kernel/', import.meta.url)
 
@@ -89,6 +90,7 @@ test('half-even rounding does not systematically round ties upward', async () =>
 
 test('calculation receipts are deterministic, normalized, and tamper-evident', async () => {
   const input = {
+    canonicalizationVersion: 'maha-dossier-canonical/1.0' as const,
     module: 'core.angle', operation: 'normalize', inputs: { angle: '-1' }, units: { angle: 'microdegree' },
     constants: { fullCircle: '360000000' }, output: { angle: '359999999' }, uncertainty: { angle: '0' },
     precisionPolicy: 'signed i64; exact modulo', kernelVersion: '0.1.0',
@@ -117,6 +119,28 @@ test('kernel and Evidence Dossier canonicalization are byte-identical for scient
   assert.equal(kernelCanonicalJson(cases[3]), '{"Bc2":"54","Tc":"92","mu":"0.13","tau":"1.4","Å":"3.82"}')
 })
 
+test('uncertainty propagation matches frozen reproducibility fixtures with outward rounding', async () => {
+  const fixture = JSON.parse(await readFile(new URL('conformance/uncertainty-vectors.json', PACKAGE), 'utf8')) as { vectors: Array<{ operation: string; inputs: Record<string, unknown>; output: unknown }> }
+  for (const vector of fixture.vectors) {
+    const actual = vector.operation === 'thermalResistanceInterval'
+      ? thermalResistanceInterval(vector.inputs as unknown as Parameters<typeof thermalResistanceInterval>[0])
+      : vector.operation === 'temperatureRiseInterval'
+        ? temperatureRiseInterval(vector.inputs as unknown as Parameters<typeof temperatureRiseInterval>[0])
+        : addIntervals(vector.inputs.left as Parameters<typeof addIntervals>[0], vector.inputs.right as Parameters<typeof addIntervals>[1])
+    assert.deepEqual(actual, vector.output, vector.operation)
+  }
+})
+
+test('optional calculations never invent absent inputs or zero-width uncertainty', () => {
+  assert.equal(createOptionalThermalReceiptInput(), null)
+  assert.throws(() => createOptionalThermalReceiptInput({
+    thicknessNanometers: { lower: '100', upper: '100', unit: 'nm' },
+    areaSquareMicrometers: { lower: '', upper: '', unit: 'um2' },
+    conductivityMilliwattsPerMeterKelvin: { lower: '25000', upper: '25000', unit: 'mW/(m*K)' },
+    kernel: { kernelVersion: '0.3.0', kernelSha256: `sha256:${'a'.repeat(64)}`, conformanceVersion: '3.0', conformanceSha256: `sha256:${'b'.repeat(64)}`, compiler: { name: 'assemblyscript', version: '0.28.20', flags: ['--optimize'] } },
+  }), /must declare integer/)
+})
+
 test('kernel canonicalization contains no locale-sensitive comparator', async () => {
   const source = await readFile(new URL('../packages/wasm-kernel/src/receipt.ts', import.meta.url), 'utf8')
   assert.doesNotMatch(source, /localeCompare|Intl\.Collator/)
@@ -124,6 +148,7 @@ test('kernel canonicalization contains no locale-sensitive comparator', async ()
 
 test('receipt construction rejects missing identity and fake kernel digests', async () => {
   const base = {
+    canonicalizationVersion: 'maha-dossier-canonical/1.0' as const,
     module: 'core', operation: 'x', inputs: {}, units: {}, constants: {}, output: {}, uncertainty: {},
     precisionPolicy: 'exact', kernelVersion: '0.1.0', kernelSha256: 'not-a-digest',
     conformanceVersion: 'maha-wasm-conformance/1.0', runtime: 'wasm-i64-fixed-point' as const,
@@ -137,6 +162,7 @@ test('receipt construction rejects missing identity and fake kernel digests', as
 
 test('dossier attachments accept only valid receipts and serialize deterministically', async () => {
   const receipt = await createCalculationReceipt({
+    canonicalizationVersion: 'maha-dossier-canonical/1.0',
     module: 'semiconductor.thermal', operation: 'layer-resistance', inputs: { thicknessNanometers: '100' }, units: { output: 'nanoK/W' },
     constants: {}, output: { resistance: '1000000' }, uncertainty: { lower: '1000000', upper: '1000000' },
     precisionPolicy: 'signed i64; nearest ties to even; abort on overflow', kernelVersion: '0.2.0', kernelSha256: `sha256:${'a'.repeat(64)}`,
@@ -166,6 +192,7 @@ test('the reproducibility manifest binds source, conformance corpus, compiler, a
     compiler: { version: string; flags: string[] }
     sourceSha256: string
     conformanceSha256: string
+    uncertaintyConformanceSha256: string
     kernelSha256: string
   }
   const sha = (bytes: Uint8Array): string => `sha256:${createHash('sha256').update(bytes).digest('hex')}`
@@ -174,6 +201,7 @@ test('the reproducibility manifest binds source, conformance corpus, compiler, a
   assert.deepEqual(manifest.compiler.flags, ['--optimize', '--runtime=stub', '--exportRuntime'])
   assert.equal(manifest.sourceSha256, sha(await readFile(new URL('assembly/index.ts', PACKAGE))))
   assert.equal(manifest.conformanceSha256, sha(await readFile(new URL('conformance/vectors.json', PACKAGE))))
+  assert.equal(manifest.uncertaintyConformanceSha256, sha(await readFile(new URL('conformance/uncertainty-vectors.json', PACKAGE))))
   assert.equal(manifest.kernelSha256, sha(await readFile(WASM)))
 })
 

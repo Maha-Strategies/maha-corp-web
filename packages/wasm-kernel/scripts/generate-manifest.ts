@@ -10,12 +10,13 @@ if (!compilerVersion) throw new Error('AssemblyScript compiler version is missin
 
 const manifest = {
   schemaVersion: 'maha-wasm-kernel-manifest/1.0',
-  kernelVersion: '0.2.0',
+  kernelVersion: '0.3.0',
   abi: 'wasm-i64-fixed-point',
   compiler: { name: 'assemblyscript', version: compilerVersion, flags: ['--optimize', '--runtime=stub', '--exportRuntime'] },
   arithmetic: { integerModel: 'signed-i64', rounding: 'nearest-ties-to-even', overflow: 'abort' },
   sourceSha256: digest(resolve(root, 'assembly/index.ts')),
   conformanceSha256: digest(resolve(root, 'conformance/vectors.json')),
+  uncertaintyConformanceSha256: digest(resolve(root, 'conformance/uncertainty-vectors.json')),
   kernelSha256: digest(resolve(root, 'dist/kernel.wasm')),
 }
 writeFileSync(resolve(root, 'conformance/kernel-manifest.json'), `${JSON.stringify(manifest, null, 2)}\n`)
