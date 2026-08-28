@@ -45,9 +45,10 @@ test('the Maha seller maps Deep Context to the adopted digital offering shape', 
   assert.match(mahaCarpSellerProfile.membership.confirmationEvidence, /thrivbe-buyer-review-2026-08-27\.json$/)
   assert.deepEqual(mahaCarpSellerProfile.membership.directPeerBindings, [{
     handle: 'thrivbe',
-    status: 'thrivbe_to_maha_verified_maha_to_thrivbe_transport_blocked',
+    status: 'thrivbe_to_maha_verified_reciprocal_retry_pending',
     did: THRIVBE.did,
-    sadUrl: 'http://157.180.117.231:8888/cgi-bin/thrivbe',
+    sadUrl: THRIVBE.sadUrl,
+    descriptorSequence: 2,
     publicKey: THRIVBE.publicKey,
     carpUrl: THRIVBE.carpUrl,
     reciprocalEvidence: 'https://www.mahastrategies.com/artifacts/carp/thrivbe-reciprocal-attempt-2026-08-28.json',
@@ -62,6 +63,8 @@ test('the Maha seller maps Deep Context to the adopted digital offering shape', 
 
 test('the direct CARP allowlist binds Thrivbe to its verified DID key and callback', () => {
   assert.equal(didDocumentForPublicKey(THRIVBE.publicKey).id, THRIVBE.did)
+  assert.equal(THRIVBE.carpUrl, 'https://carp.thrivbe.com')
+  assert.equal(THRIVBE.descriptorSequence, 2)
   assert.deepEqual(approvedCarpPeer(THRIVBE.publicKey), THRIVBE)
   assert.deepEqual(approvedCarpPeer(THRIVBE.publicKey.toUpperCase()), THRIVBE)
   assert.equal(approvedCarpPeer('0279be667ef9dcbbac55a06295ce870b07029bfcdb2dce28d959f2815b16f81798'), null)
@@ -216,18 +219,26 @@ test('the sanitized Thrivbe report preserves the blocked round trip without pers
   assert.doesNotMatch(canonical.toString('utf8'), /@|\+47|938 12345|msghex|sighex/)
 })
 
-test('the reciprocal attempt artifact records the transport failure without protocol secrets', async () => {
+test('the reciprocal attempt artifact records the HTTP parsing failure without protocol secrets', async () => {
   const canonical = await readFile(new URL('../artifacts/carp/thrivbe-reciprocal-attempt-2026-08-28.json', import.meta.url))
   const published = await readFile(new URL('../public/artifacts/carp/thrivbe-reciprocal-attempt-2026-08-28.json', import.meta.url))
   assert.deepEqual(published, canonical)
   const artifact = JSON.parse(canonical.toString('utf8'))
   assert.equal(artifact.observations.mahaSignedDescriptorFetch, 'pass')
-  assert.equal(artifact.observations.thrivbeChallengeFetch, 'failed_transport')
+  assert.equal(artifact.correction.supersedesClassification, 'failed_transport')
+  assert.equal(artifact.observations.requestReachedThrivbe, true)
+  assert.equal(artifact.observations.thrivbeChallengeFetch, 'failed_http_response_parsing')
+  assert.equal(artifact.observations.nodeParserErrorCode, 'HPE_INVALID_HEADER_TOKEN')
+  assert.equal(artifact.observations.parseableChallengeReceivedByMaha, false)
   assert.equal(artifact.observations.responseGenerated, false)
   assert.equal(artifact.observations.responseSent, false)
   assert.equal(artifact.observations.reciprocalProofCompleted, false)
   assert.equal(artifact.observations.encryptedEnquirySent, false)
   assert.equal(artifact.followUpDiagnosis.nextAttemptRequiresFreshAuthorization, true)
+  assert.equal(artifact.refreshedDescriptorVerification.sequence, 2)
+  assert.equal(artifact.refreshedDescriptorVerification.carpUrl, THRIVBE.carpUrl)
+  assert.equal(artifact.refreshedDescriptorVerification.publicKeyUnchanged, true)
+  assert.equal(artifact.refreshedDescriptorVerification.signatureVerified, true)
   assert.equal(artifact.retention.privateKeysRetained, false)
   assert.equal(artifact.retention.adilosChallengesRetained, false)
   assert.doesNotMatch(canonical.toString('utf8'), /"challenge"\s*:|"response"\s*:|"privateKey"\s*:|CARP_AGENT_PRIVATE_KEY/)
