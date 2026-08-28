@@ -241,6 +241,7 @@ test('remote canary target is a protected secret rather than dispatcher-controll
   assert.match(script, /tokenSha256: digestJson\(token\)/)
   assert.doesNotMatch(script, /console\.(log|error)\([^\n]*(token|bypass|SELLER_BINDING|CUSTOMER_BINDING)/i)
   assert.match(workflow, /environment: Preview/)
+  assert.doesNotMatch(workflow, /VERCEL_AUTOMATION_BYPASS_SECRET/)
   assert.match(migrationWorkflow, /20260828110000_cabezon_preview_seller_adapter\.sql/)
   for (const object of ['cabezon_preview_lifecycles', 'cabezon_preview_lifecycle_events', 'cabezon_preview_action_idempotency', 'record_cabezon_preview_enquiry', 'record_cabezon_preview_delivery', 'record_cabezon_preview_acknowledgement']) assert.match(migrationWorkflow, new RegExp(object))
 })
