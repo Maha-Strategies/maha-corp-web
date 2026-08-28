@@ -1,5 +1,6 @@
 // lib/briefs-data.ts
-// SINGLE SOURCE OF TRUTH for all 28 INTELLIGENCE briefs.
+// SINGLE SOURCE OF TRUTH for the internal intelligence archive and its
+// separately derived, confidentiality-scrubbed public editions.
 // Metadata, JSON-LD, and rendering all read from here.
 // Doctrine briefs (soil-gut-brain-axis, overclocked, physics-of-spirit, etc.)
 // are a SEPARATE route and are not included here.
@@ -44,6 +45,11 @@ export interface Brief {
   intro?: string;
   sections: BriefSection[];
   protocolPatch?: ProtocolPatch;
+  publicEditionBoundary?: {
+    reviewState: 'sanitized-public-edition';
+    note: string;
+    excludes: string[];
+  };
 }
 
 const ALL_BRIEFS: Brief[] = [
@@ -2163,21 +2169,164 @@ const ALL_BRIEFS: Brief[] = [
   }
 ]
 
-// Public intelligence is allowlisted. New or client-derived work remains
-// unavailable until a separate provenance review explicitly adds its slug.
-export const PUBLIC_INTELLIGENCE_BRIEF_SLUGS = [
-  'ai-software-cost-trajectory-2040',
+const SANITIZED_PUBLIC_TITLES: Record<string, string> = {
+  'sea-semiconductor-manufacturing-hedge': 'Southeast Asian Power Semiconductor Manufacturing: Capability and Risk',
+  'semiconductor-bifurcation': 'Semiconductor Collaboration Under Export Controls',
+  'physical-ai-deployment': 'Embodied AI Deployment: Hardware and Operational Boundaries',
+  'algorithmic-lock-in': 'Mobile Gaming, Social Status, and Attention Loops',
+  'backside-microchannel-semiconductors': 'Direct-to-Silicon Cooling: Integration and Reliability',
+  'known-good-die-storage-yield': 'Bare-Die Storage: Degradation and Custody Controls',
+  'high-purity-alumina-manufacturing-architecture': 'High-Purity Alumina: Process Routes and Qualification',
+  'angstrom-era-soc-architecture': '2nm System-on-Chip Design: Process, Power, and Packaging',
+  'rad-hard-gan-sic-leo-satellites': 'Semiconductor Design for Low-Earth-Orbit Systems',
+  'generative-ai-silicon-cycle-recalibration': 'AI Infrastructure Cycles: Capacity, Demand, and Downturn Risk',
+  'semiconductor-wfe-doping-annealing-landscape': 'Ion Implantation and Laser Annealing: Technology and Supply Chains',
+  'power-semiconductor-target-setting-metrics': 'Power Semiconductor Metrics Across Device Platforms',
+  'tensor-network-ai-compression': 'Tensor Networks for Large-Language-Model Compression',
+  'neurotechnology-non-medical-outlook': 'Consumer Neurotechnology: Technical and Governance Boundaries',
+  'ultra-thin-shock-absorbing-adhesives': 'Ultra-Thin Shock-Absorbing Adhesives: Materials and Qualification',
+  'hyperscaler-storage-disposition': 'Data-Sanitization and Reuse Controls for Cloud Storage Hardware',
+  'angstrom-foundry-diversification': 'Advanced-Node Foundry Diversification: Readiness and Risk',
+  'strategic-ip-architecture': 'Joint Research IP: Ownership, Licensing, and Freedom to Operate',
+  'electro-photonic-co-integration': 'Co-Packaged Optics: Integration, Thermal, and Test Boundaries',
+  'power-semiconductor-target-architecture': 'Power Semiconductor Strategy: Yield, Margin, and Product Mix',
+  'stm-legacy-distribution': 'Legacy Semiconductor Channels and Customer-Concentration Risk',
+  'arc-welding-robotics-margins': 'Arc-Welding Robotics: Component Economics',
+  'gan-on-diamond-leo-economics': 'GaN-on-Diamond for Space Systems: Thermal and Cost Trade-Offs',
+  'rapidus-2nm-yield-probability': 'Rapidus 2nm: Manufacturing Readiness Framework',
+  'us-foundry-sovereignization': 'U.S. Foundry Modernization: Economics and Customer Trust',
+  'sea-gaming-market-expansion': 'Southeast Asian Gaming: Platforms, Hardware, and Monetization',
+  'upstream-semiconductor-cvc-best-practices': 'Corporate Venture Design for Upstream Semiconductor Suppliers',
+  'european-compressor-suppliers-semiconductor-utilities': 'Compressor Qualification for Semiconductor Utility Systems',
+  'smartphone-ap-fan-out-substrate-thickness': 'Smartphone Application-Processor Packaging: Architecture and Reliability',
+  'smartphone-ap-osat-commercial-risk-allocation': 'Smartphone Packaging Contracts: Yield, Capacity, and Risk Allocation',
+  'smartphone-oem-peripheral-sales-mix': 'Smartphone Ecosystem Portfolios: Scenario Design for Adjacent Devices',
+  'ai-semiconductor-slt-practices': 'System-Level Test for AI Semiconductors',
+  'semiconductor-substrate-price-tolerance': 'Semiconductor Substrate Pricing: A Cost-Pass-Through Framework',
+  'tape-storage-nearline-hdd-demand': 'Archive Storage Boundaries: Tape, Nearline HDD, and AI',
+  'advanced-packaging-test-cpo-sockets': 'Advanced-Packaging Test and Co-Packaged-Optics Sockets',
+  'automotive-cloud-virtual-verification': 'Automotive Software Verification: Cloud, Simulation, and Hardware-in-the-Loop',
+  'ntc-thermistors-embedded-power-modules': 'Embedded Power Modules: NTC Thermistor Requirements',
+  'china-fa-cable-competitive-landscape': 'Factory-Automation Cable Qualification in China',
+  'us-semiconductor-cleanroom-construction': 'U.S. Semiconductor Cleanroom Capacity: A Sizing Method',
+  'ppg-derivatives-semiconductor-applications': 'Polyether Materials in Semiconductor Processing and Packaging',
+}
+
+const PUBLIC_EDITION_EXCLUSIONS = [
+  'client identity and engagement context',
+  'client-supplied question or project wording',
+  'compensation and transaction records',
+  'nonpublic commercial assumptions',
 ] as const
 
-const PUBLIC_INTELLIGENCE_BRIEF_SLUG_SET = new Set<string>(PUBLIC_INTELLIGENCE_BRIEF_SLUGS)
+const PUBLIC_REUSE_PROHIBITED = [
+  /flash[-\s]?opinions?/i,
+  /uzabase/i,
+  /\bsupplied (?:assessment|product hypothesis|willingness-to-pay hypothesis|competitive assessment)\b/i,
+  /\bwillingness[-\s]to[-\s]pay\b/i,
+  /\bWTP\b/,
+  /\bsurvey results?\b/i,
+  /\bpaid response\b/i,
+  /\bpayment metadata\b/i,
+] as const
+
+function mayAppearInPublicEdition(value: string): boolean {
+  return !PUBLIC_REUSE_PROHIBITED.some((pattern) => pattern.test(value))
+}
+
+function removeEngagementFraming(value: string): string {
+  return value
+    .replace(/The supplied assessment makes an important refinement for AI:/i, 'A useful distinction for AI is that')
+    .replace(/The supplied assessment identifies throughput and limited parametric visibility as its central limitations\./i, 'Its central limitations are throughput and limited parametric visibility.')
+    .replace(/The supplied assessment places the highest value in/i, 'The highest potential value lies in')
+    .replace(/The supplied assessment identifies metallization as the largest departure/i, 'Metallization is the largest departure')
+    .replace(/The supplied assessment positions Proterial as/i, 'A preliminary market view positions Proterial as')
+    .replace(/The supplied assessment estimates/i, 'A working estimate places')
+}
+
+function scrubOptionalText(value: string | undefined): string | undefined {
+  if (!value) return undefined
+  const sanitized = removeEngagementFraming(value)
+  return mayAppearInPublicEdition(sanitized) ? sanitized : undefined
+}
+
+function scrubTextList(values: string[] | undefined): string[] | undefined {
+  return values
+    ?.map(scrubOptionalText)
+    .filter((value): value is string => value !== undefined)
+}
+
+function sanitizeSection(section: BriefSection): BriefSection {
+  const table = section.table
+    ? {
+        ...section.table,
+        caption: scrubOptionalText(section.table.caption),
+        header: section.table.header.filter(mayAppearInPublicEdition),
+        rows: section.table.rows.filter((row) => row.every(mayAppearInPublicEdition)),
+      }
+    : undefined
+
+  return {
+    ...section,
+    heading: mayAppearInPublicEdition(section.heading) ? section.heading : 'Public research notes',
+    paragraphs: scrubTextList(section.paragraphs),
+    tag: scrubOptionalText(section.tag),
+    table,
+    blockquote: scrubOptionalText(section.blockquote),
+    listItems: scrubTextList(section.listItems),
+  }
+}
+
+function createPublicEdition(brief: Brief): Brief {
+  const title = SANITIZED_PUBLIC_TITLES[brief.slug] ?? brief.title
+  const description = mayAppearInPublicEdition(brief.description)
+    ? brief.description
+    : `A public research framework for ${title.toLocaleLowerCase('en-US')}, limited to general technical and market context.`
+
+  const protocolPatch = brief.protocolPatch
+    ? {
+        title: mayAppearInPublicEdition(brief.protocolPatch.title)
+          ? brief.protocolPatch.title
+          : 'Public research boundary',
+        paragraphs: scrubTextList(brief.protocolPatch.paragraphs) ?? [],
+        emphasis: scrubOptionalText(brief.protocolPatch.emphasis),
+      }
+    : undefined
+
+  return {
+    ...brief,
+    title,
+    seoTitle: undefined,
+    description,
+    intro: scrubOptionalText(brief.intro),
+    sections: brief.sections.map(sanitizeSection),
+    protocolPatch,
+    dateModified: '2026-08-28',
+    publicEditionBoundary: {
+      reviewState: 'sanitized-public-edition',
+      note: 'This generalized public research edition does not reproduce engagement-specific source material.',
+      excludes: [...PUBLIC_EDITION_EXCLUSIONS],
+    },
+  }
+}
+
+const PREVIOUSLY_REVIEWED_PUBLIC_SLUGS = new Set(['ai-software-cost-trajectory-2040'])
+
+// Fail closed for future archive additions. A record enters the public projection
+// only after receiving either an explicit sanitized title or a prior review marker.
+export const PUBLIC_INTELLIGENCE_BRIEF_SLUGS = ALL_BRIEFS
+  .filter((brief) => SANITIZED_PUBLIC_TITLES[brief.slug] || PREVIOUSLY_REVIEWED_PUBLIC_SLUGS.has(brief.slug))
+  .map((brief) => brief.slug)
+
+const PUBLIC_INTELLIGENCE_BRIEF_SLUG_SET = new Set(PUBLIC_INTELLIGENCE_BRIEF_SLUGS)
 
 export function isPublicIntelligenceBriefSlug(slug: string): boolean {
   return PUBLIC_INTELLIGENCE_BRIEF_SLUG_SET.has(slug)
 }
 
-export const BRIEFS: Brief[] = ALL_BRIEFS.filter((brief) =>
-  isPublicIntelligenceBriefSlug(brief.slug),
-)
+export const BRIEFS: Brief[] = ALL_BRIEFS
+  .filter((brief) => isPublicIntelligenceBriefSlug(brief.slug))
+  .map(createPublicEdition)
 
 const BRIEF_MAP: Record<string, Brief> = Object.fromEntries(
   BRIEFS.map((b) => [b.slug, b]),

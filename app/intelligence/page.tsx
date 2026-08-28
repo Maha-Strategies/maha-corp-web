@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { TrackedLink } from '@/components/ConversionTracker';
-import { isPublicIntelligenceBriefSlug } from '@/lib/briefs-data';
+import { BRIEFS as PUBLIC_BRIEFS } from '@/lib/briefs-data';
 import styles from './intelligence-cyber-light.module.css';
 import { semanticForStatus, type IntelligenceSemantic } from './status-semantics';
 
@@ -364,9 +364,21 @@ const ALL_BRIEF_CARDS: BriefData[] = [
   },
 ];
 
-const BRIEFS = ALL_BRIEF_CARDS.filter((brief) =>
-  isPublicIntelligenceBriefSlug(brief.href.split('/').pop() ?? ''),
-)
+const PUBLIC_BRIEF_BY_SLUG = new Map(PUBLIC_BRIEFS.map((brief) => [brief.slug, brief]))
+
+const BRIEFS = ALL_BRIEF_CARDS.flatMap((card) => {
+  const slug = card.href.split('/').pop() ?? ''
+  const publicBrief = PUBLIC_BRIEF_BY_SLUG.get(slug)
+
+  return publicBrief
+    ? [{
+        ...card,
+        title: publicBrief.title,
+        description: publicBrief.description,
+        status: publicBrief.status,
+      }]
+    : []
+})
 
 // --- COMPONENTS ---
 const CHIP: Record<IntelligenceSemantic, string> = {
