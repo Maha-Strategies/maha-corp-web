@@ -1,4 +1,4 @@
-import { BRIEFS } from './briefs-data.ts'
+import { INTELLIGENCE_BRIEF_ARCHIVE as BRIEFS } from './briefs-data.ts'
 import { INTELLIGENCE_KNOWLEDGE_LINKS, getIntelligenceBriefSlugsForKnowledgeObject } from './intelligence-knowledge-links.ts'
 import { type ClaimEmpiricalStatus, type ClaimProvenance } from './claim-evidence.ts'
 import { KNOWLEDGE_ARTICLES, KNOWLEDGE_SOURCES, knowledgeArticlePath } from './knowledge-data.ts'

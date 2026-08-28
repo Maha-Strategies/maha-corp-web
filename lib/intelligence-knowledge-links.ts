@@ -1,4 +1,4 @@
-import { getAllBriefSlugs } from './briefs-data.ts'
+import { getAllArchivedBriefSlugs } from './briefs-data.ts'
 import { KNOWLEDGE_ARTICLES, getKnowledgeArticle, type KnowledgeArticle } from './knowledge-data.ts'
 import { KNOWLEDGE_SUPPLIERS, getKnowledgeSupplier, type KnowledgeSupplierProfile } from './knowledge-process-profiles.ts'
 
@@ -67,7 +67,7 @@ export function getIntelligenceBriefSlugsForKnowledgeObject(objectId: string): s
 }
 
 export function assertIntelligenceKnowledgeLinkIntegrity(): void {
-  const briefSlugs = new Set(getAllBriefSlugs())
+  const briefSlugs = new Set(getAllArchivedBriefSlugs())
   const articleIds = new Set(KNOWLEDGE_ARTICLES.map((article) => article.id))
   const supplierIds = new Set(KNOWLEDGE_SUPPLIERS.map((supplier) => supplier.id))
   const seenBriefs = new Set<string>()

@@ -3,7 +3,7 @@ import { readFileSync, readdirSync } from 'node:fs'
 import { join, relative } from 'node:path'
 import test from 'node:test'
 
-import { getAllBriefSlugs, getBriefBySlug } from '../lib/briefs-data.ts'
+import { getAllArchivedBriefSlugs, getArchivedBriefBySlug } from '../lib/briefs-data.ts'
 import {
   INTELLIGENCE_SEMANTICS,
   knownStatuses,
@@ -30,7 +30,7 @@ const sources = subtreeFiles(subtree).map((path) => ({
 /* ---------------------------------------------------------------- routes -- */
 
 test('every intelligence route is covered by the cyber-light layout', () => {
-  const slugs = getAllBriefSlugs()
+  const slugs = getAllArchivedBriefSlugs()
   assert.ok(slugs.length >= 40, `expected the full brief corpus, saw ${slugs.length}`)
 
   // One landing page plus one page per brief slug, all under the single layout.
@@ -107,8 +107,8 @@ test('every status in the live brief corpus is explicitly classified', () => {
   // back to `boundary` and quietly mis-label a brief (this caught
   // "CRITICAL PRIORITY", which only appears in the corpus).
   const declared = new Set(knownStatuses().map((status) => status.toUpperCase()))
-  const unmapped = getAllBriefSlugs()
-    .map((slug) => getBriefBySlug(slug)!.status)
+  const unmapped = getAllArchivedBriefSlugs()
+    .map((slug) => getArchivedBriefBySlug(slug)!.status)
     .filter((status) => !declared.has(status.trim().toUpperCase()))
   assert.deepEqual([...new Set(unmapped)], [], 'brief statuses missing an explicit semantic')
 })

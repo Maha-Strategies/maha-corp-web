@@ -1,6 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { TrackedLink } from '@/components/ConversionTracker';
+import { isPublicIntelligenceBriefSlug } from '@/lib/briefs-data';
 import styles from './intelligence-cyber-light.module.css';
 import { semanticForStatus, type IntelligenceSemantic } from './status-semantics';
 
@@ -22,7 +23,7 @@ interface BriefData {
   indicators?: Indicator[];
 }
 
-const BRIEFS: BriefData[] = [
+const ALL_BRIEF_CARDS: BriefData[] = [
   // --- MACRO & SYSTEMS ---
   {
     group: 'MACRO & SYSTEMS',
@@ -363,6 +364,10 @@ const BRIEFS: BriefData[] = [
   },
 ];
 
+const BRIEFS = ALL_BRIEF_CARDS.filter((brief) =>
+  isPublicIntelligenceBriefSlug(brief.href.split('/').pop() ?? ''),
+)
+
 // --- COMPONENTS ---
 const CHIP: Record<IntelligenceSemantic, string> = {
   verified: styles.chipVerified,
@@ -409,7 +414,8 @@ const BriefCard = ({ data }: { data: BriefData }) => (
 );
 
 export default function IntelligenceGrid() {
-  const groups = ['MACRO & SYSTEMS', 'HARDWARE & INFRASTRUCTURE', 'INTELLIGENCE & CYBERNETICS'] as const;
+  const groups = (['MACRO & SYSTEMS', 'HARDWARE & INFRASTRUCTURE', 'INTELLIGENCE & CYBERNETICS'] as const)
+    .filter((groupTitle) => BRIEFS.some((brief) => brief.group === groupTitle));
 
   return (
     <main className={styles.page}>
@@ -419,7 +425,7 @@ export default function IntelligenceGrid() {
         <header className={styles.header}>
           <h1 className={`${styles.title} mb-4`}>Active Intelligence</h1>
           <p className={styles.metaMuted}>
-            [ Flash-Opinions // Structural Audits // Market Signals ]
+            [ Research Briefs // Structural Audits // Market Signals ]
           </p>
           <div className="mt-8">
             <TrackedLink
