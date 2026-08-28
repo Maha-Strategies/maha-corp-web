@@ -34,6 +34,7 @@
     "generate:quantum-bridge-closure": "node --experimental-strip-types scripts/generate-quantum-bridge-closure.ts",
     "generate:substantial-publication": "node --experimental-strip-types scripts/generate-substantial-publication-batch.ts",
     "generate:substantial-publication-batch-2": "node --experimental-strip-types scripts/generate-substantial-publication-batch-2.ts",
+    "generate:substantial-publication-batch-3": "node --experimental-strip-types scripts/generate-substantial-publication-batch-3.ts",
     "generate:release-reconciliation-batch-2": "node --experimental-strip-types scripts/generate-release-reconciliation-batch-2.ts",
     "generate:internal-review-remainder": "node --experimental-strip-types scripts/generate-internal-review-remainder-report.ts",
     "generate:withheld-evidence-repair": "node --experimental-strip-types scripts/generate-withheld-evidence-repair.ts",
