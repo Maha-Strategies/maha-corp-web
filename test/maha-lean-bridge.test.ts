@@ -115,6 +115,18 @@ test('a sorryAx dependency verifies nothing even when the build succeeds', () =>
   assert.ok(outcome.failures.some((f) => f.code === 'sorry-axiom-present'))
 })
 
+test('an axiom-free proof is accepted, not treated as missing', () => {
+  // `decide` and `rfl` proofs depend on no axiom at all, and Lean says so with
+  // different wording. That is the strongest result, so it must not read as a
+  // theorem that failed to report.
+  const outcome = verifyAttachments(
+    baseAttachments(),
+    options({ runAxiomCheck: (_r, names) => ({ ok: true, output: names.map((n) => `'${n}' does not depend on any axioms`).join('\n') }) }),
+  )
+  assert.equal(outcome.failures.length, 0)
+  assert.equal(outcome.verified.length, CLAIMS.bindings.length)
+})
+
 test('a stale source digest is refused', () => {
   const stale = baseAttachments().map((a) => ({ ...a, sourceSha256: `sha256:${'0'.repeat(64)}` }))
   const outcome = verifyAttachments(stale, options())

@@ -52,22 +52,26 @@ try {
 const problems: string[] = []
 if (/sorryAx/.test(output)) problems.push('A theorem depends on sorryAx: the proof is unfinished.')
 
-// Each line reads: 'Name' depends on axioms: [a, b, c]
+// Lean reports one of two forms per theorem:
+//   'Name' depends on axioms: [a, b, c]
+//   'Name' does not depend on any axioms
+// The second is the stronger result — a proof by `decide` or `rfl` needs no
+// axiom at all — so it must be recognised, not treated as a missing report.
+const reported = new Set<string>()
 for (const line of output.split('\n')) {
-  const parsed = /^'([^']+)' depends on axioms: \[([^\]]*)\]/.exec(line.trim())
+  const trimmed = line.trim()
+  const axiomFree = /^'([^']+)' does not depend on any axioms/.exec(trimmed)
+  if (axiomFree) {
+    reported.add(axiomFree[1])
+    continue
+  }
+  const parsed = /^'([^']+)' depends on axioms: \[([^\]]*)\]/.exec(trimmed)
   if (!parsed) continue
+  reported.add(parsed[1])
   const used = parsed[2].split(',').map((a) => a.trim()).filter(Boolean)
   const unexpected = used.filter((axiom) => !PERMITTED.has(axiom))
   if (unexpected.length > 0) problems.push(`${parsed[1]} depends on ${unexpected.join(', ')}`)
 }
-
-// A theorem that produced no line at all was not found in the environment.
-const reported = new Set(
-  output
-    .split('\n')
-    .map((line) => /^'([^']+)' depends on/.exec(line.trim())?.[1])
-    .filter((name): name is string => Boolean(name)),
-)
 for (const name of names) {
   if (!reported.has(name)) problems.push(`${name} produced no axiom report; it may not exist in the build.`)
 }
@@ -78,4 +82,14 @@ if (problems.length > 0) {
   process.exit(1)
 }
 
-console.log(JSON.stringify({ theoremsChecked: names.length, permittedAxiomsOnly: true }, null, 2))
+const axiomFree = names.filter((name) =>
+  new RegExp(`'${name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}' does not depend on any axioms`).test(output),
+).length
+
+console.log(
+  JSON.stringify(
+    { theoremsChecked: names.length, axiomFree, restingOnPermittedAxiomsOnly: names.length - axiomFree },
+    null,
+    2,
+  ),
+)

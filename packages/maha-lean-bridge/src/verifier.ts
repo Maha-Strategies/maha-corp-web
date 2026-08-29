@@ -25,7 +25,9 @@ import {
  *      genuinely closes its goal;
  *   2. `#print axioms <theorem>` does not report `sorryAx`, which is what a
  *      `sorry` leaves behind. A `sorry` only warns during a build, so exit
- *      status alone would let a hole through.
+ *      status alone would let a hole through. Lean reports either
+ *      `depends on axioms: [...]` or `does not depend on any axioms`; the
+ *      second is the stronger result, not a missing one.
  *
  * The escape-token scan is kept as a cheap first refusal, not as the proof.
  */
