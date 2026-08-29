@@ -2,6 +2,7 @@ import { createHash } from 'node:crypto'
 import { readFileSync } from 'node:fs'
 
 import { FRONTIER_DOMAIN_GRAPH_RECORDS, FRONTIER_EXPLICIT_SOURCE_OVERRIDES } from './frontier-domain-graphs.ts'
+import { ALIGNMENT_BATCH_7_DECISIONS } from './frontier-alignment-batch-7.ts'
 import type { EpistemicRecord } from './epistemic-schema.ts'
 
 /**
@@ -217,6 +218,16 @@ const metadataCache: Record<string, MetadataCacheEntry> =
 
 /* --------------------------------------------------- inspected judgements -- */
 
+interface PriorJudgementSnapshot {
+  batchId: string
+  verdict: AlignmentVerdict
+  sourceContentInspected?: boolean
+  inspectionDepth?: InspectionDepth
+  inspectedContentLocation: string | null
+  reason: string
+  priorJudgement?: PriorJudgementSnapshot | null
+}
+
 interface InspectedJudgement {
   verdict: AlignmentVerdict
   inspectedContentLocation: string | null
@@ -235,12 +246,7 @@ interface InspectedJudgement {
    * the same source with better evidence. Append-only: the earlier finding is
    * never deleted, only nested.
    */
-  priorJudgement?: {
-    batchId: string
-    verdict: AlignmentVerdict
-    inspectedContentLocation: string | null
-    reason: string
-  }
+  priorJudgement?: PriorJudgementSnapshot
   /**
    * A replacement source proposed but NOT applied. Recording a proposal is not
    * substituting a source: nothing here changes what the record cites.
@@ -2341,6 +2347,52 @@ const JUDGEMENTS: Readonly<Record<string, InspectedJudgement>> = {
 }
 
 /**
+ * Batch 7 is append-only. Earlier judgements remain in `JUDGEMENTS`; this
+ * overlay records the new decision and nests the superseded state. Thirty-five
+ * entries are re-inspections and five are first judgements.
+ */
+const BATCH_7_JUDGEMENTS: Readonly<Record<string, InspectedJudgement>> = Object.fromEntries(
+  ALIGNMENT_BATCH_7_DECISIONS.map((decision) => {
+    const prior = JUDGEMENTS[decision.recordId]
+    if (decision.priorBatchId && !prior) {
+      throw new Error(`${decision.recordId}: Batch 7 declares ${decision.priorBatchId} but no prior judgement exists.`)
+    }
+    if (!decision.priorBatchId && prior) {
+      throw new Error(`${decision.recordId}: Batch 7 marks a prior judgement as absent, but one exists.`)
+    }
+    return [decision.recordId, {
+      verdict: decision.verdict,
+      sourceContentInspected: decision.sourceContentInspected,
+      inspectedContentLocation: decision.inspectedContentLocation,
+      reason: decision.reason,
+      remediation: decision.remediation,
+      ...(decision.origin ? { origin: decision.origin } : {}),
+      ...(decision.mismatchBasis ? { mismatchBasis: decision.mismatchBasis } : {}),
+      artifactVersion: decision.artifactVersion,
+      inspectionDepth: decision.inspectionDepth,
+      versionRelationshipVerified: decision.versionRelationshipVerified,
+      recoveryDisposition: decision.recoveryDisposition,
+      ...(prior ? {
+        priorJudgement: {
+          batchId: decision.priorBatchId!,
+          verdict: prior.verdict,
+          sourceContentInspected: prior.sourceContentInspected,
+          inspectionDepth: prior.inspectionDepth,
+          inspectedContentLocation: prior.inspectedContentLocation,
+          reason: prior.reason,
+          priorJudgement: prior.priorJudgement ?? null,
+        },
+      } : {}),
+    } satisfies InspectedJudgement]
+  }),
+)
+
+const ACTIVE_JUDGEMENTS: Readonly<Record<string, InspectedJudgement>> = {
+  ...JUDGEMENTS,
+  ...BATCH_7_JUDGEMENTS,
+}
+
+/**
  * Source contracts with no DOI whose publisher page was fetched during this
  * audit and whose declared title matched the served document. A publisher page
  * is an authoritative resolution for a living specification or machine
@@ -2348,6 +2400,12 @@ const JUDGEMENTS: Readonly<Record<string, InspectedJudgement>> = {
  * This is internal editorial verification, not external review.
  */
 const PUBLISHER_VERIFIED: Readonly<Record<string, string>> = {
+  'source-agentic-systems-mcp-autogen':
+    'Fetched arXiv:2308.08155v2 from arxiv.org and inspected the complete HTML article carrying the declared title and authors.',
+  'source-critical-supply-chains-mcs-industrial':
+    'Fetched the official USGS Mineral Commodity Summaries 2026 PDF and inspected the declared cobalt, graphite, indium, and tungsten chapters.',
+  'source-fusion-plasma-systems-nif-ignition':
+    'Fetched the official LLNL/NIF “Achieving Fusion Ignition” living page and inspected the declared target, coupling, ignition, and result sections.',
   'source-fusion-plasma-systems-iter-support':
     'Fetched the ITER Supporting Systems index and its linked official pages for tritium breeding, fuelling, diagnostics, cryogenics, and vacuum systems.',
   'source-mechanistic-interpretability-causal-scrubbing':
@@ -2675,6 +2733,15 @@ export const BATCH_6_REINSPECTIONS: readonly string[] = [
     'urn:maha:record:neurotechnology-bci-micro-ecog-arrays',
 ]
 
+/** Batch 7 operation: thirty-five re-inspections plus five first judgements. */
+export const BATCH_7_REINSPECTIONS: readonly string[] = ALIGNMENT_BATCH_7_DECISIONS
+  .filter((entry) => entry.priorBatchId !== null)
+  .map((entry) => entry.recordId)
+
+export const BATCH_7_FIRST_JUDGEMENTS: readonly string[] = ALIGNMENT_BATCH_7_DECISIONS
+  .filter((entry) => entry.priorBatchId === null)
+  .map((entry) => entry.recordId)
+
 export const ALIGNMENT_BATCH_MEMBERSHIP: Readonly<Record<AlignmentBatchId, readonly string[]>> = {
   'batch-1': BATCH_1_RECORDS,
   'batch-2': BATCH_2_RECORDS,
@@ -2804,9 +2871,40 @@ export function isBatch6Reinspection(recordId: string): boolean {
     }
   }
 
+  // Batch 7 deliberately crosses earlier cohort boundaries. It is a recovery
+  // operation over the frozen 94-record intake, so overlap is expected and
+  // recorded as re-inspection rather than reassignment.
+  if (BATCH_7_REINSPECTIONS.length !== 35 || BATCH_7_FIRST_JUDGEMENTS.length !== 5) {
+    throw new Error(`Batch 7 must contain 35 re-inspections and 5 first judgements; found ${BATCH_7_REINSPECTIONS.length} and ${BATCH_7_FIRST_JUDGEMENTS.length}.`)
+  }
+  const batch7Domains = new Map<string, number>()
+  for (const decision of ALIGNMENT_BATCH_7_DECISIONS) {
+    const record = FRONTIER_DOMAIN_GRAPH_RECORDS.find((entry) => entry.id === decision.recordId)
+    if (!record) throw new Error(`${decision.recordId}: Batch 7 record is absent from the frontier graph.`)
+    if (record.domainSlug !== decision.domainSlug) throw new Error(`${decision.recordId}: Batch 7 domain does not match the record.`)
+    if (!record.claims.some((claim) => claim.sourceIds.includes(decision.sourceContractId))) {
+      throw new Error(`${decision.recordId}: Batch 7 source contract is not bound to the record.`)
+    }
+    const prior = JUDGEMENTS[decision.recordId]
+    if (decision.priorBatchId) {
+      if (!prior || prior.sourceContentInspected) {
+        throw new Error(`${decision.recordId}: Batch 7 re-inspection must supersede an uninspected judgement.`)
+      }
+      if (!BATCH_7_JUDGEMENTS[decision.recordId]?.priorJudgement) {
+        throw new Error(`${decision.recordId}: Batch 7 re-inspection did not preserve its prior judgement.`)
+      }
+    } else if (prior) {
+      throw new Error(`${decision.recordId}: Batch 7 first judgement already existed in the prior registry.`)
+    }
+    batch7Domains.set(decision.domainSlug, (batch7Domains.get(decision.domainSlug) ?? 0) + 1)
+  }
+  if (batch7Domains.size !== 8 || [...batch7Domains.values()].some((count) => count !== 5)) {
+    throw new Error('Batch 7 must contain five records in each of eight domains.')
+  }
+
   // Verdict vocabulary is validated at runtime, not merely inferred by
   // TypeScript, because a spread-built judgement bypasses the type entirely.
-  for (const [recordId, judgement] of Object.entries(JUDGEMENTS)) {
+  for (const [recordId, judgement] of Object.entries(ACTIVE_JUDGEMENTS)) {
     if (!(ALIGNMENT_VERDICTS as readonly string[]).includes(judgement.verdict)) {
       throw new Error(`${recordId} declares an undeclared verdict: ${judgement.verdict}.`)
     }
@@ -2879,7 +2977,7 @@ function auditRecord(record: EpistemicRecord): RecordAlignmentAudit {
   const source = record.sources[0]
   const identifier = source.identifiers.find((entry) => entry.scheme === 'doi')?.value ?? null
   const metadata = metadataFor(identifier, source.id)
-  const judgement = JUDGEMENTS[record.id]
+  const judgement = ACTIVE_JUDGEMENTS[record.id]
   const inaccessible = INACCESSIBLE_CONTRACTS.has(source.id)
 
   const origin: AssignmentOrigin =
@@ -2996,7 +3094,7 @@ for (const entry of FRONTIER_ALIGNMENT_AUDIT) {
     throw new Error(`${entry.recordId}: a claim cannot be supported by a source that is not subject-aligned.`)
   }
 }
-const judgedIds = Object.keys(JUDGEMENTS)
+const judgedIds = Object.keys(ACTIVE_JUDGEMENTS)
 if (new Set(judgedIds).size !== judgedIds.length) throw new Error('Duplicate judgement in the alignment registry.')
 const auditIds = new Set(FRONTIER_ALIGNMENT_AUDIT.map((entry) => entry.recordId))
 for (const id of judgedIds) {

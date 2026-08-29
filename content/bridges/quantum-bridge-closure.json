@@ -1,0 +1,278 @@
+{
+  "version": "maha-quantum-bridge-closure/1.0",
+  "registerDigest": "sha256:e7953c9bb995408e5a702f9c595243807ff00c27109464665654ac0c222539e0",
+  "counts": {
+    "total": 12,
+    "revise": 9,
+    "reject": 3,
+    "promotionEligible": 0
+  },
+  "records": [
+    {
+      "bridgeId": "Q-BR-001",
+      "submittedAuditDigest": "sha256:bd90be1c32dedd67df7d65eb16a394b91a39bb2409b3ac530032aa1e672bf0fd",
+      "submittedVerdict": "BLOCK",
+      "finalDisposition": "REVISE",
+      "blockerSnapshot": [
+        "classification-unmappable",
+        "endpoint-unresolved-record",
+        "source-missing-locator"
+      ],
+      "rationale": "The submitted bridge is not promotable, but its defects are bounded and may be addressed only through a new audited revision.",
+      "requiredNextAction": "Split the compound coding-theory endpoint, create canonical CSS and classical-code records, and bind exact locators before submitting a new bridge revision.",
+      "reconsiderationRule": "The original BLOCK verdict remains immutable; remediation creates a new version and does not inherit clearance.",
+      "remediationArtifacts": [
+        "content/bridges/endpoint-resolution-plan.json",
+        "content/bridges/endpoint-candidate-inventory.json",
+        "content/bridges/quantum-bridge-gap-report.json"
+      ],
+      "promotionEligible": false,
+      "closureDigest": "sha256:eccc5cc811c79aec13e416fd368cc1f608163068cdbf3ac5a2a045216666da8b"
+    },
+    {
+      "bridgeId": "Q-BR-002",
+      "submittedAuditDigest": "sha256:b223b5341a449a26f605c36985ce5fdb6c0d7f2fc740a074dfa8809a438fad21",
+      "submittedVerdict": "BLOCK",
+      "finalDisposition": "REVISE",
+      "blockerSnapshot": [
+        "endpoint-unresolved-record",
+        "source-missing-locator"
+      ],
+      "rationale": "The submitted bridge is not promotable, but its defects are bounded and may be addressed only through a new audited revision.",
+      "requiredNextAction": "Create the named dielectric-loss and transmon-relaxation records, then bind each bounded mechanism to an inspected passage with rights metadata.",
+      "reconsiderationRule": "The original BLOCK verdict remains immutable; remediation creates a new version and does not inherit clearance.",
+      "remediationArtifacts": [
+        "content/bridges/endpoint-resolution-plan.json",
+        "content/bridges/endpoint-candidate-inventory.json",
+        "content/bridges/quantum-bridge-gap-report.json"
+      ],
+      "promotionEligible": false,
+      "closureDigest": "sha256:3dab1fd5383398d2737fa0539878bca6b006c8b228e29ec43b28df8efb684219"
+    },
+    {
+      "bridgeId": "Q-BR-003",
+      "submittedAuditDigest": "sha256:2ef83d0a67168bf2c2a5418099b73875c5dd8509f3040d67d0096972d5f7a97f",
+      "submittedVerdict": "BLOCK",
+      "finalDisposition": "REJECT",
+      "blockerSnapshot": [
+        "claim-strength-rejected",
+        "classification-unmappable",
+        "endpoint-unresolved-record",
+        "source-missing-locator"
+      ],
+      "rationale": "The submitted bridge asserts an isomorphism between Schmidt-rank truncation and sparse dictionary learning. The objectives differ (entanglement entropy versus an L1 penalty), so no record or citation repairs the claim.",
+      "requiredNextAction": "Preserve this specification as rejected. Any reconsideration must be a new specification with a new identifier, new evidence bindings, and a fresh audit.",
+      "reconsiderationRule": "The rejected specification is immutable and cannot be reopened in place.",
+      "remediationArtifacts": [
+        "content/bridges/endpoint-resolution-plan.json",
+        "content/bridges/endpoint-candidate-inventory.json",
+        "content/bridges/quantum-bridge-gap-report.json"
+      ],
+      "promotionEligible": false,
+      "closureDigest": "sha256:f5ef7e79e0219bcb5eafe3236e64352e474fd1ddab0c028afba2b646ab45bf83"
+    },
+    {
+      "bridgeId": "Q-BR-004",
+      "submittedAuditDigest": "sha256:46bf96bba82b53fa0c5281945307256ea63bf276801273704b23df60d058c566",
+      "submittedVerdict": "BLOCK",
+      "finalDisposition": "REVISE",
+      "blockerSnapshot": [
+        "claim-strength-rejected",
+        "classification-unmappable",
+        "endpoint-unresolved-record",
+        "rights-basis-unverified",
+        "source-missing-identifier",
+        "source-missing-locator",
+        "source-unverifiable"
+      ],
+      "rationale": "The submitted bridge is not promotable, but its defects are bounded and may be addressed only through a new audited revision.",
+      "requiredNextAction": "Create separately scoped phase-estimation and metalloenzyme records and narrow the bridge to a computational candidate rather than a chemistry-performance claim.",
+      "reconsiderationRule": "The original BLOCK verdict remains immutable; remediation creates a new version and does not inherit clearance.",
+      "remediationArtifacts": [
+        "content/bridges/endpoint-resolution-plan.json",
+        "content/bridges/endpoint-candidate-inventory.json",
+        "content/bridges/quantum-bridge-gap-report.json"
+      ],
+      "promotionEligible": false,
+      "closureDigest": "sha256:badfb6586976967072cd0c39e2119843c2d2b03e389ff11c1cb763348b82c5e5"
+    },
+    {
+      "bridgeId": "Q-BR-005",
+      "submittedAuditDigest": "sha256:b77223cef6c971b28efe3b576cf912c643a95da62d4a950146b735a997cf59ee",
+      "submittedVerdict": "BLOCK",
+      "finalDisposition": "REVISE",
+      "blockerSnapshot": [
+        "claim-strength-rejected",
+        "endpoint-unresolved-record",
+        "rights-basis-unverified",
+        "source-missing-identifier",
+        "source-missing-locator",
+        "source-unverifiable"
+      ],
+      "rationale": "The submitted bridge is not promotable, but its defects are bounded and may be addressed only through a new audited revision.",
+      "requiredNextAction": "Create canonical helium-3 refinement and cryogenic-base records and supply exact source locators before rereview.",
+      "reconsiderationRule": "The original BLOCK verdict remains immutable; remediation creates a new version and does not inherit clearance.",
+      "remediationArtifacts": [
+        "content/bridges/endpoint-resolution-plan.json",
+        "content/bridges/endpoint-candidate-inventory.json",
+        "content/bridges/quantum-bridge-gap-report.json"
+      ],
+      "promotionEligible": false,
+      "closureDigest": "sha256:27dc1208f4f6661ba16c202679a5f4fb8b9375e8756e3a65221392a1796c9fa6"
+    },
+    {
+      "bridgeId": "Q-BR-006",
+      "submittedAuditDigest": "sha256:0a6a5585550896d877890d9c4e49261bbe107c08fcd16e4074dcafb33d2c5623",
+      "submittedVerdict": "BLOCK",
+      "finalDisposition": "REVISE",
+      "blockerSnapshot": [
+        "classification-unmappable",
+        "endpoint-unresolved-record",
+        "source-missing-locator"
+      ],
+      "rationale": "The submitted bridge is not promotable, but its defects are bounded and may be addressed only through a new audited revision.",
+      "requiredNextAction": "Replace the misaligned REBCO source binding with an inspected, approved revision before relying on the existing structural alias.",
+      "reconsiderationRule": "The original BLOCK verdict remains immutable; remediation creates a new version and does not inherit clearance.",
+      "remediationArtifacts": [
+        "content/bridges/endpoint-resolution-plan.json",
+        "content/bridges/endpoint-candidate-inventory.json",
+        "content/bridges/quantum-bridge-gap-report.json"
+      ],
+      "promotionEligible": false,
+      "closureDigest": "sha256:ba1619c9ca0de0fe5e9ece4f630bb04edba9f89f90fd6350f35ac9061c869cc7"
+    },
+    {
+      "bridgeId": "Q-BR-007",
+      "submittedAuditDigest": "sha256:8976ea029ade5d394b88c4d18f8ed8945bbc49e9d94ef9a1272bc8a4ab1d55ce",
+      "submittedVerdict": "BLOCK",
+      "finalDisposition": "REVISE",
+      "blockerSnapshot": [
+        "claim-strength-rejected",
+        "classification-unmappable",
+        "endpoint-unresolved-record",
+        "source-missing-locator"
+      ],
+      "rationale": "The submitted bridge is not promotable, but its defects are bounded and may be addressed only through a new audited revision.",
+      "requiredNextAction": "Resolve the advanced-materials duplicate-risk decision, create or select the exact topological-mode endpoint, and bind inspected locators.",
+      "reconsiderationRule": "The original BLOCK verdict remains immutable; remediation creates a new version and does not inherit clearance.",
+      "remediationArtifacts": [
+        "content/bridges/endpoint-resolution-plan.json",
+        "content/bridges/endpoint-candidate-inventory.json",
+        "content/bridges/quantum-bridge-gap-report.json"
+      ],
+      "promotionEligible": false,
+      "closureDigest": "sha256:d726cff861e1b0334607a85ac9a6ef83ef336701ab31dcbd8d19a36d5c960f35"
+    },
+    {
+      "bridgeId": "Q-BR-008",
+      "submittedAuditDigest": "sha256:ff807eedaa8edf580ed4c24835e6b481a0194ff89912ef4a3f397ee599694803",
+      "submittedVerdict": "BLOCK",
+      "finalDisposition": "REVISE",
+      "blockerSnapshot": [
+        "endpoint-unresolved-record",
+        "source-missing-locator"
+      ],
+      "rationale": "The submitted bridge is not promotable, but its defects are bounded and may be addressed only through a new audited revision.",
+      "requiredNextAction": "Split the population-code endpoint from its incompatible record class and narrow the analogy so it cannot be read as mechanistic equivalence.",
+      "reconsiderationRule": "The original BLOCK verdict remains immutable; remediation creates a new version and does not inherit clearance.",
+      "remediationArtifacts": [
+        "content/bridges/endpoint-resolution-plan.json",
+        "content/bridges/endpoint-candidate-inventory.json",
+        "content/bridges/quantum-bridge-gap-report.json"
+      ],
+      "promotionEligible": false,
+      "closureDigest": "sha256:31411e3675c68959a24784cbda2378e38629f807ebb9c13b046b2ceabfab7887"
+    },
+    {
+      "bridgeId": "Q-BR-009",
+      "submittedAuditDigest": "sha256:d91f9af3f30c4eab5c5d09f9cd66b4a417393ce9d14aad753b9d7138de68119f",
+      "submittedVerdict": "BLOCK",
+      "finalDisposition": "REVISE",
+      "blockerSnapshot": [
+        "claim-strength-rejected",
+        "endpoint-unresolved-record",
+        "source-missing-locator"
+      ],
+      "rationale": "The submitted bridge is not promotable, but its defects are bounded and may be addressed only through a new audited revision.",
+      "requiredNextAction": "Create canonical silicon-28 purification and spin-qubit hyperfine-limit records and supply exact locators for both sides.",
+      "reconsiderationRule": "The original BLOCK verdict remains immutable; remediation creates a new version and does not inherit clearance.",
+      "remediationArtifacts": [
+        "content/bridges/endpoint-resolution-plan.json",
+        "content/bridges/endpoint-candidate-inventory.json",
+        "content/bridges/quantum-bridge-gap-report.json"
+      ],
+      "promotionEligible": false,
+      "closureDigest": "sha256:cd3743d238d1b84cc80ff7fa28ec2785a5cc68c1942be4e90892fd630609d9f1"
+    },
+    {
+      "bridgeId": "Q-BR-010",
+      "submittedAuditDigest": "sha256:eb07a004db398b2b4d26314a0feadb19299de525abb8fc05ebdc7f5d1b014266",
+      "submittedVerdict": "BLOCK",
+      "finalDisposition": "REJECT",
+      "blockerSnapshot": [
+        "claim-strength-rejected",
+        "classification-unmappable",
+        "endpoint-unresolved-record",
+        "rights-basis-unverified",
+        "source-missing-identifier",
+        "source-missing-locator",
+        "source-unverifiable"
+      ],
+      "rationale": "The bridge asserts a QUBO reduction of the Grad-Shafranov PDE that neither cited source supplies. Until a reduction with a stated discretisation and penalty formulation exists, there is nothing to review.",
+      "requiredNextAction": "Preserve this specification as rejected. Any reconsideration must be a new specification with a new identifier, new evidence bindings, and a fresh audit.",
+      "reconsiderationRule": "The rejected specification is immutable and cannot be reopened in place.",
+      "remediationArtifacts": [
+        "content/bridges/endpoint-resolution-plan.json",
+        "content/bridges/endpoint-candidate-inventory.json",
+        "content/bridges/quantum-bridge-gap-report.json"
+      ],
+      "promotionEligible": false,
+      "closureDigest": "sha256:c7d310c5d9e518d37c30cd9ceac1b9acae06f7ae99e3d1d046a1bbf183454fe5"
+    },
+    {
+      "bridgeId": "Q-BR-011",
+      "submittedAuditDigest": "sha256:c23d1b4950191369186b89afdff05b34b7cccbd0f4950dfefd1426ad1d4c8d33",
+      "submittedVerdict": "BLOCK",
+      "finalDisposition": "REJECT",
+      "blockerSnapshot": [
+        "claim-strength-rejected",
+        "classification-unmappable",
+        "endpoint-unresolved-record",
+        "rights-basis-unverified",
+        "source-missing-identifier",
+        "source-missing-locator",
+        "source-unverifiable"
+      ],
+      "rationale": "The Side B citation could not be located in any authoritative index. A bridge resting on an unlocatable source is not remediable by adding records.",
+      "requiredNextAction": "Preserve this specification as rejected. Any reconsideration must be a new specification with a new identifier, new evidence bindings, and a fresh audit.",
+      "reconsiderationRule": "The rejected specification is immutable and cannot be reopened in place.",
+      "remediationArtifacts": [
+        "content/bridges/endpoint-resolution-plan.json",
+        "content/bridges/endpoint-candidate-inventory.json",
+        "content/bridges/quantum-bridge-gap-report.json"
+      ],
+      "promotionEligible": false,
+      "closureDigest": "sha256:9cd072758c74c0bf30e559d11d71dde293db0a64228763a474aaf4bda747569b"
+    },
+    {
+      "bridgeId": "Q-BR-012",
+      "submittedAuditDigest": "sha256:fcac6eae21afbd8dd6c6afd8ea9dffe92a36a2a6a5e64ff56a53ae3df15c6536",
+      "submittedVerdict": "BLOCK",
+      "finalDisposition": "REVISE",
+      "blockerSnapshot": [
+        "endpoint-unresolved-record",
+        "source-missing-locator"
+      ],
+      "rationale": "The submitted bridge is not promotable, but its defects are bounded and may be addressed only through a new audited revision.",
+      "requiredNextAction": "Create canonical refractory-metallurgy and cavity-loss records, establish rights bases, and bind exact locators before rereview.",
+      "reconsiderationRule": "The original BLOCK verdict remains immutable; remediation creates a new version and does not inherit clearance.",
+      "remediationArtifacts": [
+        "content/bridges/endpoint-resolution-plan.json",
+        "content/bridges/endpoint-candidate-inventory.json",
+        "content/bridges/quantum-bridge-gap-report.json"
+      ],
+      "promotionEligible": false,
+      "closureDigest": "sha256:410e63b386dfe1262fa9c10b90bd143b35ba878f5f26b2bbaffe3bd81857b1c3"
+    }
+  ]
+}
