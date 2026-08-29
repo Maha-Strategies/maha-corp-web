@@ -28,8 +28,11 @@ jobs:
       AGENT_REVIEW_TOKEN: ${{ secrets.AGENT_REVIEW_TOKEN }}
       REVENUE_CONTROL_TOKEN: ${{ secrets.REVENUE_CONTROL_TOKEN }}
       VERCEL_AUTOMATION_BYPASS_SECRET: ${{ secrets.VERCEL_AUTOMATION_BYPASS_SECRET }}
+      SUPABASE_DB_PASSWORD: ${{ secrets.SUPABASE_DB_PASSWORD }}
+      SUPABASE_PROJECT_REF: ${{ secrets.SUPABASE_PROJECT_REF }}
       CABEZON_PREVIEW_CANARY_RUN_ID: gha-${{ github.run_id }}-${{ github.run_attempt }}
       CABEZON_MCP_CANARY_EVIDENCE: ${{ runner.temp }}/cabezon-mcp-federation/evidence.json
+      MCP_MIGRATION_EVIDENCE: ${{ runner.temp }}/cabezon-mcp-federation/migration.json
     steps:
       - name: Enforce bounded Preview branch and confirmation
         env:
@@ -41,6 +44,58 @@ jobs:
           if [ "$REF_NAME" != "codex/cabezon-product-federation" ]; then echo '::error::This private canary is restricted to codex/cabezon-product-federation.'; exit 1; fi
 
       - uses: actions/checkout@v5
+
+      - name: Apply and verify exactly the licensed MCP migration
+        run: |
+          set -euo pipefail
+          migration='20260829000100_mcp_evidence_tool_licensing.sql'
+          path="supabase/migrations/$migration"
+          [ -f "$path" ] || { echo '::error::Dedicated migration is absent.'; exit 1; }
+          [ -n "${SUPABASE_PROJECT_REF:-}" ] || { echo '::error::Preview database ref is missing.'; exit 1; }
+          [ -n "${SUPABASE_DB_PASSWORD:-}" ] || { echo '::error::Preview database password is missing.'; exit 1; }
+          [ "$SUPABASE_PROJECT_REF" != 'uhwuullakihgszxhiygz' ] || { echo '::error::Forbidden database target.'; exit 1; }
+          url="postgresql://postgres.${SUPABASE_PROJECT_REF}:${SUPABASE_DB_PASSWORD}@aws-0-us-east-1.pooler.supabase.com:5432/postgres"
+          existing_count="$(psql "$url" -v ON_ERROR_STOP=1 -At -c "select
+            (to_regclass('public.mcp_evidence_license_plans') is not null)::int
+            + (to_regclass('public.mcp_evidence_license_grants') is not null)::int
+            + (to_regclass('public.mcp_evidence_license_events') is not null)::int
+            + (to_regclass('public.mcp_evidence_executions') is not null)::int
+            + (to_regclass('public.mcp_evidence_execution_events') is not null)::int
+            + (to_regproc('public.record_mcp_evidence_license_grant') is not null)::int
+            + (to_regproc('public.reserve_mcp_evidence_execution') is not null)::int
+            + (to_regproc('public.complete_mcp_evidence_execution') is not null)::int
+            + (to_regproc('public.fail_mcp_evidence_execution') is not null)::int
+            + (to_regproc('public.revoke_mcp_evidence_license_grant') is not null)::int;")"
+          if [ "$existing_count" -ne 10 ]; then
+            psql "$url" -v ON_ERROR_STOP=1 --single-transaction -f "$path" >/dev/null
+          fi
+          version="${migration%%_*}"
+          psql "$url" -v ON_ERROR_STOP=1 -c "insert into supabase_migrations.schema_migrations (version) values ('${version}') on conflict do nothing;" >/dev/null
+          verification="$(psql "$url" -v ON_ERROR_STOP=1 -At -c "
+            select 'mcp_plans=' || (to_regclass('public.mcp_evidence_license_plans') is not null)::text
+            union all select 'mcp_grants=' || (to_regclass('public.mcp_evidence_license_grants') is not null)::text
+            union all select 'mcp_license_events=' || (to_regclass('public.mcp_evidence_license_events') is not null)::text
+            union all select 'mcp_executions=' || (to_regclass('public.mcp_evidence_executions') is not null)::text
+            union all select 'mcp_execution_events=' || (to_regclass('public.mcp_evidence_execution_events') is not null)::text
+            union all select 'record_mcp_grant=' || (to_regproc('public.record_mcp_evidence_license_grant') is not null)::text
+            union all select 'reserve_mcp_execution=' || (to_regproc('public.reserve_mcp_evidence_execution') is not null)::text
+            union all select 'complete_mcp_execution=' || (to_regproc('public.complete_mcp_evidence_execution') is not null)::text
+            union all select 'fail_mcp_execution=' || (to_regproc('public.fail_mcp_evidence_execution') is not null)::text
+            union all select 'revoke_mcp_grant=' || (to_regproc('public.revoke_mcp_evidence_license_grant') is not null)::text;
+          ")"
+          if grep -q '=false' <<<"$verification" || [ "$(wc -l <<<"$verification" | tr -d ' ')" -ne 10 ]; then
+            echo '::error::Licensed MCP objects did not converge.'
+            exit 1
+          fi
+          mkdir -p "$(dirname "$MCP_MIGRATION_EVIDENCE")"
+          jq -n \
+            --arg migration "$migration" \
+            --arg commit "${{ github.sha }}" \
+            --arg migrationSha256 "sha256:$(sha256sum "$path" | cut -d' ' -f1)" \
+            --arg targetFingerprint "sha256:$(printf '%s' "$SUPABASE_PROJECT_REF" | sha256sum | cut -d' ' -f1)" \
+            --argjson objectCount 10 \
+            '{schemaVersion:"maha-preview-mcp-migration-evidence/1.0",migration:$migration,commit:$commit,migrationSha256:$migrationSha256,targetFingerprint:$targetFingerprint,objectCount:$objectCount,converged:true,secretsIncluded:false}' \
+            > "$MCP_MIGRATION_EVIDENCE"
       - uses: actions/setup-node@v6
         with:
           node-version: '26'
@@ -121,6 +176,8 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: preview-cabezon-mcp-federation-${{ github.run_id }}
-          path: ${{ env.CABEZON_MCP_CANARY_EVIDENCE }}
+          path: |
+            ${{ env.MCP_MIGRATION_EVIDENCE }}
+            ${{ env.CABEZON_MCP_CANARY_EVIDENCE }}
           if-no-files-found: error
           retention-days: 30
