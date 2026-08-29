@@ -1,8 +1,6 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
 import { createHash } from 'node:crypto'
-import { readFileSync } from 'node:fs'
-import { resolve } from 'node:path'
 
 import { DEMONSTRATION_DOSSIER } from '../lib/evidence-dossier/demonstration.ts'
 import { compilePackage, compileIntegratedPackage, renderDossierJsonLd, verifyIntegratedCalculationEvidence, verifyIntegratedPackage } from '../packages/evidence-dossier-builder/src/index.ts'
@@ -11,11 +9,9 @@ import { executeAndAttachCalculationToDossier } from '../packages/wasm-kernel/di
 import type { KernelArtifact } from '../packages/wasm-kernel/dist/execution.js'
 import { canonicalJson } from '../lib/evidence-dossier/digest.ts'
 import type { DossierRuntimeWitnessAttachment, ComputationalWitnessReceipt } from '../lib/evidence-dossier/runtime-witness.ts'
+import { kernelArtifact } from './helpers/wasm-kernel.ts'
 
-const artifact: KernelArtifact = {
-  bytes: readFileSync(resolve('packages/wasm-kernel/dist/kernel.wasm')),
-  manifest: JSON.parse(readFileSync(resolve('packages/wasm-kernel/conformance/kernel-manifest.json'), 'utf8')),
-}
+const artifact: KernelArtifact = kernelArtifact() as unknown as KernelArtifact
 
 const sha = (value: unknown) => `sha256:${createHash('sha256').update(canonicalJson(value)).digest('hex')}`
 

@@ -1,4 +1,4 @@
-import { mkdirSync, readFileSync, writeFileSync } from 'node:fs'
+import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs'
 import { resolve } from 'node:path'
 
 import { DEMONSTRATION_DOSSIER } from '../lib/evidence-dossier/demonstration.ts'
@@ -6,10 +6,22 @@ import { compileIntegratedPackage } from '../packages/evidence-dossier-builder/s
 import { executeAndAttachCalculationToDossier } from '../packages/wasm-kernel/dist/dossier.js'
 import type { KernelArtifact } from '../packages/wasm-kernel/dist/execution.js'
 
+/**
+ * The kernel is a build output rather than a tracked file, so a clean checkout
+ * has to build it before this sample can embed it.
+ */
+function readKernel(): Buffer {
+  const path = resolve('packages/wasm-kernel/dist/kernel.wasm')
+  if (!existsSync(path)) {
+    throw new Error('packages/wasm-kernel/dist/kernel.wasm is absent. Run: npm run build:wasm-kernel')
+  }
+  return readFileSync(path)
+}
+
 const output = resolve(process.argv[2] ?? 'output/pdf')
 mkdirSync(output, { recursive: true })
 const artifact: KernelArtifact = {
-  bytes: readFileSync(resolve('packages/wasm-kernel/dist/kernel.wasm')),
+  bytes: readKernel(),
   manifest: JSON.parse(readFileSync(resolve('packages/wasm-kernel/conformance/kernel-manifest.json'), 'utf8')),
 }
 const attachment = await executeAndAttachCalculationToDossier({

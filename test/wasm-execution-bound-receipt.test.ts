@@ -1,6 +1,4 @@
 import assert from 'node:assert/strict'
-import { readFileSync } from 'node:fs'
-import { resolve } from 'node:path'
 import test from 'node:test'
 
 import {
@@ -11,11 +9,9 @@ import {
   type KernelArtifact,
   type KernelExecutionRequest,
 } from '../packages/wasm-kernel/dist/execution.js'
+import { kernelArtifact } from './helpers/wasm-kernel.ts'
 
-const artifact: KernelArtifact = {
-  bytes: readFileSync(resolve('packages/wasm-kernel/dist/kernel.wasm')),
-  manifest: JSON.parse(readFileSync(resolve('packages/wasm-kernel/conformance/kernel-manifest.json'), 'utf8')),
-}
+const artifact: KernelArtifact = kernelArtifact() as unknown as KernelArtifact
 
 const request = (operation: KernelExecutionRequest['operation'], inputs: Record<string, string>, units: Record<string, string>): KernelExecutionRequest => ({
   schemaVersion: 'maha-wasm-execution-request/1.0', operation, inputs, units,

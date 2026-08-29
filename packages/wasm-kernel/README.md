@@ -6,11 +6,18 @@ This package does **not** claim that WebAssembly makes floating-point science re
 
 Phase 2 adds bounded semiconductor thermal-resistance and temperature-rise primitives, plus celestial angular separation, zodiac indexing, and boundary distance. These are arithmetic primitives, not physical model validation or astrological interpretation. The thermal model is one-dimensional steady-state conduction and does not account for interfaces, spreading resistance, anisotropy, radiation, convection, or temperature-dependent conductivity.
 
-The release-bound `kernel.wasm` artifact is committed so a private Evidence
-Dossier can be verified offline from a clean checkout. `npm run build`
-regenerates it from the tracked AssemblyScript source and lockfile, updates the
-manifest digest, and tests compare two independent builds byte-for-byte. The
-human-readable `.wat` remains generated-only.
+The compiled `kernel.wasm` is a build output and is not tracked in git: a
+committed binary cannot be shown to correspond to the source it claims to come
+from. `npm run build:wasm-kernel` regenerates it from the tracked AssemblyScript
+source using the compiler pinned in `package-lock.json` and the flags recorded
+in `kernel-manifest.json`, and the build is deterministic, so repeated builds of
+the same source produce identical bytes. Tests build it on demand and assert the
+result matches `kernelSha256` in the manifest. The human-readable `.wat` is
+likewise generated-only.
+
+A compiled Evidence Dossier package embeds the kernel bytes it was built
+against, so an offline verifier checks the package's own copy against the
+manifest digest and never needs this repository.
 
 Calculation receipts bind the kernel, compiler flags, precision policy, conformance corpus, normalized inputs, outputs, uncertainty fields, optional theorem references, and optional computational-witness receipts. The dossier adapter emits a deterministic JSON-LD attachment but does not upgrade the evidentiary status of any claim. Empty proof or witness references do not imply a proof or witnessed execution. No public Maha route imports this package.
 
