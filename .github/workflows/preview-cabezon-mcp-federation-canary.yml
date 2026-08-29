@@ -48,11 +48,14 @@ jobs:
 
       - uses: actions/checkout@v5
 
-      - name: Apply and verify exactly the licensed MCP migration
+      - name: Apply and verify exactly the two private integration migrations
         run: |
           set -euo pipefail
+          cabezon_migration='20260828110000_cabezon_preview_seller_adapter.sql'
           migration='20260829000100_mcp_evidence_tool_licensing.sql'
+          cabezon_path="supabase/migrations/$cabezon_migration"
           path="supabase/migrations/$migration"
+          [ -f "$cabezon_path" ] || { echo '::error::CABEZON Preview lifecycle migration is absent.'; exit 1; }
           [ -f "$path" ] || { echo '::error::Dedicated migration is absent.'; exit 1; }
           [ -n "${SUPABASE_PROJECT_REF:-}" ] || { echo '::error::Preview database ref is missing.'; exit 1; }
           [ -n "${SUPABASE_DB_PASSWORD:-}" ] || { echo '::error::Preview database password is missing.'; exit 1; }
@@ -70,12 +73,27 @@ jobs:
             + (to_regproc('public.fail_mcp_evidence_execution') is not null)::int
             + (to_regproc('public.revoke_mcp_evidence_license_grant') is not null)::int
             + (to_regproc('public.record_mcp_private_canary_target') is not null)::int;")"
-          # Reapply this one idempotent migration even when all objects exist:
+          # The schema-only branch may not contain the private CABEZON lifecycle
+          # ledger because it is intentionally absent from the public environment.
+          # Apply the
+          # two documented private migrations, in order, and no others.
           # object presence alone cannot prove that ledger constraints and
           # function definitions have converged to the exact checked-in text.
+          psql "$url" -v ON_ERROR_STOP=1 --single-transaction -f "$cabezon_path" >/dev/null
           psql "$url" -v ON_ERROR_STOP=1 --single-transaction -f "$path" >/dev/null
+          cabezon_version="${cabezon_migration%%_*}"
           version="${migration%%_*}"
+          psql "$url" -v ON_ERROR_STOP=1 -c "insert into supabase_migrations.schema_migrations (version) values ('${cabezon_version}') on conflict do nothing;" >/dev/null
           psql "$url" -v ON_ERROR_STOP=1 -c "insert into supabase_migrations.schema_migrations (version) values ('${version}') on conflict do nothing;" >/dev/null
+          cabezon_verification="$(psql "$url" -v ON_ERROR_STOP=1 -At -c "
+            select 'cabezon_lifecycles=' || (to_regclass('public.cabezon_preview_lifecycles') is not null)::text
+            union all select 'cabezon_events=' || (to_regclass('public.cabezon_preview_lifecycle_events') is not null)::text
+            union all select 'cabezon_idempotency=' || (to_regclass('public.cabezon_preview_action_idempotency') is not null)::text
+            union all select 'cabezon_enquiry=' || (to_regproc('public.record_cabezon_preview_enquiry') is not null)::text
+            union all select 'cabezon_read=' || (to_regproc('public.read_cabezon_preview_lifecycle') is not null)::text
+            union all select 'cabezon_delivery=' || (to_regproc('public.record_cabezon_preview_delivery') is not null)::text
+            union all select 'cabezon_acknowledgement=' || (to_regproc('public.record_cabezon_preview_acknowledgement') is not null)::text;
+          ")"
           verification="$(psql "$url" -v ON_ERROR_STOP=1 -At -c "
             select 'mcp_plans=' || (to_regclass('public.mcp_evidence_license_plans') is not null)::text
             union all select 'mcp_grants=' || (to_regclass('public.mcp_evidence_license_grants') is not null)::text
@@ -89,6 +107,10 @@ jobs:
             union all select 'revoke_mcp_grant=' || (to_regproc('public.revoke_mcp_evidence_license_grant') is not null)::text
             union all select 'governed_canary_target=' || (to_regproc('public.record_mcp_private_canary_target') is not null)::text;
           ")"
+          if grep -q '=false' <<<"$cabezon_verification" || [ "$(wc -l <<<"$cabezon_verification" | tr -d ' ')" -ne 7 ]; then
+            echo '::error::CABEZON Preview lifecycle objects did not converge.'
+            exit 1
+          fi
           if grep -q '=false' <<<"$verification" || [ "$(wc -l <<<"$verification" | tr -d ' ')" -ne 11 ]; then
             echo '::error::Licensed MCP objects did not converge.'
             exit 1
@@ -96,11 +118,13 @@ jobs:
           mkdir -p "$(dirname "$MCP_MIGRATION_EVIDENCE")"
           jq -n \
             --arg migration "$migration" \
+            --arg prerequisiteMigration "$cabezon_migration" \
             --arg commit "${{ github.sha }}" \
             --arg migrationSha256 "sha256:$(sha256sum "$path" | cut -d' ' -f1)" \
+            --arg prerequisiteMigrationSha256 "sha256:$(sha256sum "$cabezon_path" | cut -d' ' -f1)" \
             --arg targetFingerprint "sha256:$(printf '%s' "$SUPABASE_PROJECT_REF" | sha256sum | cut -d' ' -f1)" \
-            --argjson objectCount 11 \
-            '{schemaVersion:"maha-preview-mcp-migration-evidence/1.0",migration:$migration,commit:$commit,migrationSha256:$migrationSha256,targetFingerprint:$targetFingerprint,objectCount:$objectCount,converged:true,secretsIncluded:false}' \
+            --argjson objectCount 18 \
+            '{schemaVersion:"maha-preview-mcp-migration-evidence/1.1",prerequisiteMigration:$prerequisiteMigration,migration:$migration,commit:$commit,prerequisiteMigrationSha256:$prerequisiteMigrationSha256,migrationSha256:$migrationSha256,targetFingerprint:$targetFingerprint,objectCount:$objectCount,converged:true,secretsIncluded:false}' \
             > "$MCP_MIGRATION_EVIDENCE"
       - uses: actions/setup-node@v6
         with:
