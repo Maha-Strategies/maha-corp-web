@@ -274,14 +274,14 @@ begin
       or v_existing.release_id <> p_release_id or v_existing.release_sha256 <> p_release_sha256
     then return jsonb_build_object('outcome','idempotency_conflict'); end if;
     if not exists (
-      select 1 from public.mcp_evidence_license_grants grant
-      join public.mcp_evidence_license_plans plan on plan.plan_id=grant.plan_id and plan.plan_version=grant.plan_version
-      join public.agent_client_credentials credential on credential.public_id=grant.credential_id
-      join public.agent_clients client on client.public_id=grant.client_id
-      where grant.grant_id=v_existing.grant_id and grant.client_id=p_client_id and grant.credential_id=p_credential_id
-        and p_observed_at >= grant.valid_from and p_observed_at < grant.valid_until and plan.status='active'
+      select 1 from public.mcp_evidence_license_grants license_grant
+      join public.mcp_evidence_license_plans plan on plan.plan_id=license_grant.plan_id and plan.plan_version=license_grant.plan_version
+      join public.agent_client_credentials credential on credential.public_id=license_grant.credential_id
+      join public.agent_clients client on client.public_id=license_grant.client_id
+      where license_grant.grant_id=v_existing.grant_id and license_grant.client_id=p_client_id and license_grant.credential_id=p_credential_id
+        and p_observed_at >= license_grant.valid_from and p_observed_at < license_grant.valid_until and plan.status='active'
         and credential.status='active' and client.status='active' and p_observed_at < credential.expires_at
-        and not exists (select 1 from public.mcp_evidence_license_events event where event.grant_id=grant.grant_id and event.event_type='revoked')
+        and not exists (select 1 from public.mcp_evidence_license_events event where event.grant_id=license_grant.grant_id and event.event_type='revoked')
     ) then return jsonb_build_object('outcome','license_required'); end if;
     if exists (select 1 from public.mcp_evidence_execution_events where execution_id=v_existing.execution_id and event_type='failed')
     then return jsonb_build_object('outcome','execution_failed'); end if;
@@ -289,17 +289,17 @@ begin
       'planId',v_existing.plan_id,'planVersion',v_existing.plan_version,'quotaPeriodStartedAt',v_existing.quota_period_started_at);
   end if;
 
-  select grant.* into v_grant from public.mcp_evidence_license_grants grant
-  join public.mcp_evidence_license_plans plan on plan.plan_id=grant.plan_id and plan.plan_version=grant.plan_version
-  join public.agent_client_credentials credential on credential.public_id=grant.credential_id
-  join public.agent_clients client on client.public_id=grant.client_id
-  where grant.client_id=p_client_id and grant.credential_id=p_credential_id
-    and p_observed_at >= grant.valid_from and p_observed_at < grant.valid_until
-    and p_tool_name=any(grant.allowed_tools) and plan.status='active'
+  select license_grant.* into v_grant from public.mcp_evidence_license_grants license_grant
+  join public.mcp_evidence_license_plans plan on plan.plan_id=license_grant.plan_id and plan.plan_version=license_grant.plan_version
+  join public.agent_client_credentials credential on credential.public_id=license_grant.credential_id
+  join public.agent_clients client on client.public_id=license_grant.client_id
+  where license_grant.client_id=p_client_id and license_grant.credential_id=p_credential_id
+    and p_observed_at >= license_grant.valid_from and p_observed_at < license_grant.valid_until
+    and p_tool_name=any(license_grant.allowed_tools) and plan.status='active'
     and credential.status='active' and client.status='active'
     and p_observed_at < credential.expires_at
-    and not exists (select 1 from public.mcp_evidence_license_events event where event.grant_id=grant.grant_id and event.event_type='revoked')
-  order by grant.valid_until desc, grant.issued_at desc limit 1 for update of grant;
+    and not exists (select 1 from public.mcp_evidence_license_events event where event.grant_id=license_grant.grant_id and event.event_type='revoked')
+  order by license_grant.valid_until desc, license_grant.issued_at desc limit 1 for update of license_grant;
   if not found then return jsonb_build_object('outcome','license_required'); end if;
 
   v_period := date_trunc('month',p_observed_at at time zone 'UTC') at time zone 'UTC';

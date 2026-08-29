@@ -196,17 +196,18 @@ test('migration enforces append-only grants, atomic active-release checks, repla
     "return jsonb_build_object('outcome','quota_exhausted')",
     "return jsonb_build_object('outcome','license_required')",
     "event.event_type='revoked'",
-    'for update of grant',
+    'for update of license_grant',
   ]) assert.match(migration, new RegExp(required.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')))
   assert.match(
     migration,
-    /if found then[\s\S]+where grant\.grant_id=v_existing\.grant_id[\s\S]+event\.event_type='revoked'[\s\S]+return jsonb_build_object\('outcome','license_required'\)[\s\S]+return jsonb_build_object\('outcome','idempotent_replay'/,
+    /if found then[\s\S]+where license_grant\.grant_id=v_existing\.grant_id[\s\S]+event\.event_type='revoked'[\s\S]+return jsonb_build_object\('outcome','license_required'\)[\s\S]+return jsonb_build_object\('outcome','idempotent_replay'/,
     'idempotent replay must revalidate the original active license before returning stored execution identity',
   )
   assert.match(migration, /'evidence-developer-v1'[\s\S]+10000,125000/)
   assert.match(migration, /'evidence-enterprise-v1'[\s\S]+100000,null/)
   assert.match(migration, /revoke insert, update, delete, truncate[\s\S]+from service_role/)
   assert.doesNotMatch(migration, /grant (?:insert|update|delete)[^;]+to (?:anon|authenticated)/i)
+  assert.doesNotMatch(migration, /mcp_evidence_license_grants\s+grant\b/i, 'GRANT is reserved and cannot be used as an unquoted relation alias')
 })
 
 test('runtime is private-by-discovery until the protected lifecycle canary passes', async () => {
