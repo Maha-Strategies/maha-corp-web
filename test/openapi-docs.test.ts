@@ -40,6 +40,12 @@ const PRIVATE_ROUTES = new Set([
   '/api/admin/mps-operations/lookup',
   '/api/admin/mcp-gateway',
   '/api/mcp-gateway/[serverId]',
+  // Licensed evidence retrieval is private-by-discovery until its isolated
+  // migration and lifecycle canary prove entitlement, quota, replay and
+  // release-substitution boundaries. The companion admin route exposes grant
+  // state and remains an operator-only control plane after tool promotion.
+  '/api/admin/mcp-evidence-licenses',
+  '/api/mcp/evidence',
   '/api/admin/revenue-control-plane',
   // Operator readiness for the x402 payment surface. Behind the readiness
   // bearer token and deliberately undocumented publicly: it reports which

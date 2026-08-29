@@ -124,7 +124,8 @@
     "demo:context-control": "npm --prefix packages/maha-mcp-server run build && node --experimental-strip-types scripts/run-context-control-local-demo.ts",
     "evaluate:claims-exception": "node --experimental-strip-types scripts/run-claims-exception-evaluation.ts",
     "generate:gateway-interop-fixtures": "node --experimental-strip-types scripts/generate-gateway-interop-fixtures.ts",
-    "verify:gateway-interop": "node --test --experimental-strip-types test/mcp-gateway-interop.test.ts"
+    "verify:gateway-interop": "node --test --experimental-strip-types test/mcp-gateway-interop.test.ts",
+    "canary:mcp-evidence:private": "node --experimental-strip-types scripts/run-mcp-evidence-private-canary.ts"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.115.0",
