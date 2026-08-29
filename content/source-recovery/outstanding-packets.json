@@ -1,9 +1,9 @@
 {
   "schemaVersion": "maha-source-recovery-summary/1.0",
-  "contracts": 19,
-  "affectedRecords": 94,
+  "contracts": 12,
+  "affectedRecords": 59,
   "dispositions": {
-    "not-attempted": 19
+    "not-attempted": 12
   },
   "packets": [
     {
@@ -22,9 +22,9 @@
         "urn:maha:record:advanced-materials-sic-wide-bandgap-substrates"
       ],
       "currentAlignmentStates": [
-        "insufficient-evidence"
+        "inaccessible-source"
       ],
-      "priority": 19,
+      "priority": 12,
       "requests": [
         {
           "channel": "doi-resolver",
@@ -71,54 +71,7 @@
       "disposition": "not-attempted",
       "inspectionAuthorized": false,
       "canonicalMutationAuthorized": false,
-      "digest": "sha256:161f76cf44879878cbf543e99d726ae54d40dc82b5f47a27a9a58c25654569c2"
-    },
-    {
-      "schemaVersion": "maha-source-recovery/1.0",
-      "inputDate": "2026-08-26",
-      "sourceContractId": "source-agentic-systems-mcp-autogen",
-      "domainSlug": "agentic-systems-mcp",
-      "sourceTitle": "AutoGen: Enabling Next-Gen LLM Applications via Multi-Agent Conversation",
-      "sourceIdentifier": null,
-      "declaredUrl": "https://arxiv.org/abs/2308.08155",
-      "affectedRecordIds": [
-        "urn:maha:record:agentic-systems-mcp-agent-memory-boundaries",
-        "urn:maha:record:agentic-systems-mcp-agentic-evaluation-protocols",
-        "urn:maha:record:agentic-systems-mcp-game-theoretic-incentive-misalignment",
-        "urn:maha:record:agentic-systems-mcp-prompt-injection-through-tools",
-        "urn:maha:record:agentic-systems-mcp-tool-output-trust-boundaries"
-      ],
-      "currentAlignmentStates": [
-        "insufficient-evidence"
-      ],
-      "priority": 18,
-      "requests": [
-        {
-          "channel": "arxiv",
-          "url": "https://export.arxiv.org/api/query?search_query=ti:%22AutoGen%3A%20Enabling%20Next-Gen%20LLM%20Applications%20via%20Multi-Agent%20Conversation%22&max_results=5",
-          "purpose": "open-copy"
-        },
-        {
-          "channel": "osti",
-          "url": "https://www.osti.gov/api/v1/records?q=AutoGen%3A%20Enabling%20Next-Gen%20LLM%20Applications%20via%20Multi-Agent%20Conversation",
-          "purpose": "open-copy"
-        },
-        {
-          "channel": "official-publisher",
-          "url": "https://arxiv.org/abs/2308.08155",
-          "purpose": "open-copy"
-        },
-        {
-          "channel": "institutional-repository",
-          "url": "https://api.openalex.org/works?search=AutoGen%3A%20Enabling%20Next-Gen%20LLM%20Applications%20via%20Multi-Agent%20Conversation&per-page=5",
-          "purpose": "version-link"
-        }
-      ],
-      "observations": [],
-      "disposition": "not-attempted",
-      "inspectionAuthorized": false,
-      "canonicalMutationAuthorized": false,
-      "digest": "sha256:c191d96b56c1bf1d8a35e208abc7404e8ec85babc49a30547fcceae40eb5bd2b"
+      "digest": "sha256:b9acfaee5eac32b93ccc94f40ac0ac757e41646a4717f1e13423da7704a11faf"
     },
     {
       "schemaVersion": "maha-source-recovery/1.0",
@@ -138,7 +91,7 @@
       "currentAlignmentStates": [
         "insufficient-evidence"
       ],
-      "priority": 17,
+      "priority": 11,
       "requests": [
         {
           "channel": "doi-resolver",
@@ -185,7 +138,7 @@
       "disposition": "not-attempted",
       "inspectionAuthorized": false,
       "canonicalMutationAuthorized": false,
-      "digest": "sha256:cc47957322b6980861764c409ff7dbfae7ceec4a7a0dfc818db9df8f82ba92e8"
+      "digest": "sha256:289c3a057789b51e75946b3c9700becdf959484cda9d6bf3d6199cbfc7cb3ee0"
     },
     {
       "schemaVersion": "maha-source-recovery/1.0",
@@ -205,7 +158,7 @@
       "currentAlignmentStates": [
         "insufficient-evidence"
       ],
-      "priority": 16,
+      "priority": 10,
       "requests": [
         {
           "channel": "doi-resolver",
@@ -252,74 +205,7 @@
       "disposition": "not-attempted",
       "inspectionAuthorized": false,
       "canonicalMutationAuthorized": false,
-      "digest": "sha256:a62e188debb3490000effd1d291aec6d1530be19440fd52165d572babd5651f2"
-    },
-    {
-      "schemaVersion": "maha-source-recovery/1.0",
-      "inputDate": "2026-08-26",
-      "sourceContractId": "source-biomolecular-engineering-toehold",
-      "domainSlug": "biomolecular-engineering",
-      "sourceTitle": "Paper-based synthetic gene networks",
-      "sourceIdentifier": "10.1016/j.cell.2014.10.004",
-      "declaredUrl": "https://doi.org/10.1016/j.cell.2014.10.004",
-      "affectedRecordIds": [
-        "urn:maha:record:biomolecular-engineering-compartmentalized-cell-free-systems",
-        "urn:maha:record:biomolecular-engineering-droplet-microfluidic-screening",
-        "urn:maha:record:biomolecular-engineering-enzyme-cascade-engineering",
-        "urn:maha:record:biomolecular-engineering-metabolic-pathway-prototyping",
-        "urn:maha:record:biomolecular-engineering-translational-control-circuits"
-      ],
-      "currentAlignmentStates": [
-        "inaccessible-source"
-      ],
-      "priority": 15,
-      "requests": [
-        {
-          "channel": "doi-resolver",
-          "url": "https://doi.org/api/handles/10.1016/j.cell.2014.10.004",
-          "purpose": "version-link"
-        },
-        {
-          "channel": "crossref",
-          "url": "https://api.crossref.org/works/10.1016%2Fj.cell.2014.10.004",
-          "purpose": "metadata"
-        },
-        {
-          "channel": "europe-pmc",
-          "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI:10.1016%2Fj.cell.2014.10.004&format=json",
-          "purpose": "open-copy"
-        },
-        {
-          "channel": "biorxiv",
-          "url": "https://api.biorxiv.org/details/biorxiv/10.1016%2Fj.cell.2014.10.004",
-          "purpose": "version-link"
-        },
-        {
-          "channel": "arxiv",
-          "url": "https://export.arxiv.org/api/query?search_query=ti:%22Paper-based%20synthetic%20gene%20networks%22&max_results=5",
-          "purpose": "open-copy"
-        },
-        {
-          "channel": "osti",
-          "url": "https://www.osti.gov/api/v1/records?q=Paper-based%20synthetic%20gene%20networks",
-          "purpose": "open-copy"
-        },
-        {
-          "channel": "official-publisher",
-          "url": "https://doi.org/10.1016/j.cell.2014.10.004",
-          "purpose": "open-copy"
-        },
-        {
-          "channel": "institutional-repository",
-          "url": "https://api.openalex.org/works?search=Paper-based%20synthetic%20gene%20networks&per-page=5",
-          "purpose": "version-link"
-        }
-      ],
-      "observations": [],
-      "disposition": "not-attempted",
-      "inspectionAuthorized": false,
-      "canonicalMutationAuthorized": false,
-      "digest": "sha256:6f61b954b903645f2deeed92e11018552b8cc00f957b63f4b18b62d993cdcce8"
+      "digest": "sha256:3e194dc35b2426f06d7a6195808dcf5c87f10b40588cdd39a3b9fc0fceea62df"
     },
     {
       "schemaVersion": "maha-source-recovery/1.0",
@@ -339,7 +225,7 @@
       "currentAlignmentStates": [
         "inaccessible-source"
       ],
-      "priority": 14,
+      "priority": 9,
       "requests": [
         {
           "channel": "arxiv",
@@ -371,59 +257,7 @@
       "disposition": "not-attempted",
       "inspectionAuthorized": false,
       "canonicalMutationAuthorized": false,
-      "digest": "sha256:30697730a9045254fed149c213c0491c6a4633d023d6003c62578e9fb970765a"
-    },
-    {
-      "schemaVersion": "maha-source-recovery/1.0",
-      "inputDate": "2026-08-26",
-      "sourceContractId": "source-critical-supply-chains-mcs-industrial",
-      "domainSlug": "critical-supply-chains",
-      "sourceTitle": "Mineral Commodity Summaries 2026",
-      "sourceIdentifier": null,
-      "declaredUrl": "https://pubs.usgs.gov/periodicals/mcs2026/mcs2026.pdf",
-      "affectedRecordIds": [
-        "urn:maha:record:critical-supply-chains-cobalt-refining-concentration",
-        "urn:maha:record:critical-supply-chains-graphite-anode-processing",
-        "urn:maha:record:critical-supply-chains-indium-zinc-byproduct-flow",
-        "urn:maha:record:critical-supply-chains-magnet-recycling",
-        "urn:maha:record:critical-supply-chains-tungsten-concentrate-processing"
-      ],
-      "currentAlignmentStates": [
-        "inaccessible-source"
-      ],
-      "priority": 13,
-      "requests": [
-        {
-          "channel": "arxiv",
-          "url": "https://export.arxiv.org/api/query?search_query=ti:%22Mineral%20Commodity%20Summaries%202026%22&max_results=5",
-          "purpose": "open-copy"
-        },
-        {
-          "channel": "osti",
-          "url": "https://www.osti.gov/api/v1/records?q=Mineral%20Commodity%20Summaries%202026",
-          "purpose": "open-copy"
-        },
-        {
-          "channel": "official-publisher",
-          "url": "https://pubs.usgs.gov/periodicals/mcs2026/mcs2026.pdf",
-          "purpose": "open-copy"
-        },
-        {
-          "channel": "usgs",
-          "url": "https://pubs.usgs.gov/publication/search?q=Mineral%20Commodity%20Summaries%202026",
-          "purpose": "open-copy"
-        },
-        {
-          "channel": "institutional-repository",
-          "url": "https://api.openalex.org/works?search=Mineral%20Commodity%20Summaries%202026&per-page=5",
-          "purpose": "version-link"
-        }
-      ],
-      "observations": [],
-      "disposition": "not-attempted",
-      "inspectionAuthorized": false,
-      "canonicalMutationAuthorized": false,
-      "digest": "sha256:ef8c2fbaef2634432194105b628356d0178f5054c667d7b0149d03b437969393"
+      "digest": "sha256:c5a6d9c747d804bc7bd2efd02cd1d0eca0d91608c425aa319fd7dc73467a3184"
     },
     {
       "schemaVersion": "maha-source-recovery/1.0",
@@ -443,7 +277,7 @@
       "currentAlignmentStates": [
         "insufficient-evidence"
       ],
-      "priority": 12,
+      "priority": 8,
       "requests": [
         {
           "channel": "arxiv",
@@ -475,7 +309,7 @@
       "disposition": "not-attempted",
       "inspectionAuthorized": false,
       "canonicalMutationAuthorized": false,
-      "digest": "sha256:d6805014c09d4abf3416e63a78ea6c96e297dd87f5edca1d486194f21e7a1648"
+      "digest": "sha256:8ea038a06bb5a1c0907407210e2d8d38924a7c926092b7c2b4938cf1587518df"
     },
     {
       "schemaVersion": "maha-source-recovery/1.0",
@@ -495,7 +329,7 @@
       "currentAlignmentStates": [
         "inaccessible-source"
       ],
-      "priority": 11,
+      "priority": 7,
       "requests": [
         {
           "channel": "arxiv",
@@ -527,121 +361,7 @@
       "disposition": "not-attempted",
       "inspectionAuthorized": false,
       "canonicalMutationAuthorized": false,
-      "digest": "sha256:89b101bf8003c133172b009fe3c41938b3b9d7bd2c9e7e7a38bad67b76fca7a8"
-    },
-    {
-      "schemaVersion": "maha-source-recovery/1.0",
-      "inputDate": "2026-08-26",
-      "sourceContractId": "source-fusion-plasma-systems-nif-ignition",
-      "domainSlug": "fusion-plasma-systems",
-      "sourceTitle": "Achieving Fusion Ignition",
-      "sourceIdentifier": null,
-      "declaredUrl": "https://lasers.llnl.gov/science/achieving-fusion-ignition",
-      "affectedRecordIds": [
-        "urn:maha:record:fusion-plasma-systems-inertial-confinement-target-chamber",
-        "urn:maha:record:fusion-plasma-systems-laser-target-coupling",
-        "urn:maha:record:fusion-plasma-systems-magnetic-mirror-confinement",
-        "urn:maha:record:fusion-plasma-systems-neutron-material-damage",
-        "urn:maha:record:fusion-plasma-systems-remote-handling-maintenance"
-      ],
-      "currentAlignmentStates": [
-        "insufficient-evidence"
-      ],
-      "priority": 10,
-      "requests": [
-        {
-          "channel": "arxiv",
-          "url": "https://export.arxiv.org/api/query?search_query=ti:%22Achieving%20Fusion%20Ignition%22&max_results=5",
-          "purpose": "open-copy"
-        },
-        {
-          "channel": "osti",
-          "url": "https://www.osti.gov/api/v1/records?q=Achieving%20Fusion%20Ignition",
-          "purpose": "open-copy"
-        },
-        {
-          "channel": "official-publisher",
-          "url": "https://lasers.llnl.gov/science/achieving-fusion-ignition",
-          "purpose": "open-copy"
-        },
-        {
-          "channel": "institutional-repository",
-          "url": "https://api.openalex.org/works?search=Achieving%20Fusion%20Ignition&per-page=5",
-          "purpose": "version-link"
-        }
-      ],
-      "observations": [],
-      "disposition": "not-attempted",
-      "inspectionAuthorized": false,
-      "canonicalMutationAuthorized": false,
-      "digest": "sha256:aa5f5c648487951d79554f5ae20065c4f77b9bc55f5408ec23e10808bc0b10d1"
-    },
-    {
-      "schemaVersion": "maha-source-recovery/1.0",
-      "inputDate": "2026-08-26",
-      "sourceContractId": "source-longevity-metabolism-autophagy-guidelines",
-      "domainSlug": "longevity-metabolism",
-      "sourceTitle": "Guidelines for the use and interpretation of assays for monitoring autophagy",
-      "sourceIdentifier": "10.4161/auto.19496",
-      "declaredUrl": "https://pubmed.ncbi.nlm.nih.gov/22966490/",
-      "affectedRecordIds": [
-        "urn:maha:record:longevity-metabolism-autophagic-flux",
-        "urn:maha:record:longevity-metabolism-autophagosome-abundance",
-        "urn:maha:record:longevity-metabolism-lc3-turnover-assays",
-        "urn:maha:record:longevity-metabolism-lysosomal-degradation-blockade",
-        "urn:maha:record:longevity-metabolism-p62-sqstm1-turnover"
-      ],
-      "currentAlignmentStates": [
-        "inaccessible-source"
-      ],
-      "priority": 9,
-      "requests": [
-        {
-          "channel": "doi-resolver",
-          "url": "https://doi.org/api/handles/10.4161/auto.19496",
-          "purpose": "version-link"
-        },
-        {
-          "channel": "crossref",
-          "url": "https://api.crossref.org/works/10.4161%2Fauto.19496",
-          "purpose": "metadata"
-        },
-        {
-          "channel": "europe-pmc",
-          "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI:10.4161%2Fauto.19496&format=json",
-          "purpose": "open-copy"
-        },
-        {
-          "channel": "biorxiv",
-          "url": "https://api.biorxiv.org/details/biorxiv/10.4161%2Fauto.19496",
-          "purpose": "version-link"
-        },
-        {
-          "channel": "arxiv",
-          "url": "https://export.arxiv.org/api/query?search_query=ti:%22Guidelines%20for%20the%20use%20and%20interpretation%20of%20assays%20for%20monitoring%20autophagy%22&max_results=5",
-          "purpose": "open-copy"
-        },
-        {
-          "channel": "osti",
-          "url": "https://www.osti.gov/api/v1/records?q=Guidelines%20for%20the%20use%20and%20interpretation%20of%20assays%20for%20monitoring%20autophagy",
-          "purpose": "open-copy"
-        },
-        {
-          "channel": "official-publisher",
-          "url": "https://pubmed.ncbi.nlm.nih.gov/22966490/",
-          "purpose": "open-copy"
-        },
-        {
-          "channel": "institutional-repository",
-          "url": "https://api.openalex.org/works?search=Guidelines%20for%20the%20use%20and%20interpretation%20of%20assays%20for%20monitoring%20autophagy&per-page=5",
-          "purpose": "version-link"
-        }
-      ],
-      "observations": [],
-      "disposition": "not-attempted",
-      "inspectionAuthorized": false,
-      "canonicalMutationAuthorized": false,
-      "digest": "sha256:237ed17a703f83e891d0707887b1e4e601e7a35e3c66a228994671f7e1c89af0"
+      "digest": "sha256:3f5060501e577dd6f4d994b8b33985916f2d8f8f60db816a322d691bedd482f3"
     },
     {
       "schemaVersion": "maha-source-recovery/1.0",
@@ -661,7 +381,7 @@
       "currentAlignmentStates": [
         "insufficient-evidence"
       ],
-      "priority": 8,
+      "priority": 6,
       "requests": [
         {
           "channel": "doi-resolver",
@@ -708,7 +428,7 @@
       "disposition": "not-attempted",
       "inspectionAuthorized": false,
       "canonicalMutationAuthorized": false,
-      "digest": "sha256:90c2d33af7f74e655fdb3f376eda39fab11a31c775decc09764a5a3c43493261"
+      "digest": "sha256:bb3ef3dd35d15ab164d7959302f8dd5db3b40ea8c45e74d57768279974065b60"
     },
     {
       "schemaVersion": "maha-source-recovery/1.0",
@@ -728,7 +448,7 @@
       "currentAlignmentStates": [
         "insufficient-evidence"
       ],
-      "priority": 7,
+      "priority": 5,
       "requests": [
         {
           "channel": "doi-resolver",
@@ -775,74 +495,7 @@
       "disposition": "not-attempted",
       "inspectionAuthorized": false,
       "canonicalMutationAuthorized": false,
-      "digest": "sha256:05cf199c691c7196579ff90c9528ba65280db1f03c42f0676aade50bab1ded27"
-    },
-    {
-      "schemaVersion": "maha-source-recovery/1.0",
-      "inputDate": "2026-08-26",
-      "sourceContractId": "source-mechanistic-interpretability-feature-visualization",
-      "domainSlug": "mechanistic-interpretability",
-      "sourceTitle": "Feature Visualization",
-      "sourceIdentifier": "10.23915/distill.00007",
-      "declaredUrl": "https://doi.org/10.23915/distill.00007",
-      "affectedRecordIds": [
-        "urn:maha:record:mechanistic-interpretability-automated-feature-interpretation",
-        "urn:maha:record:mechanistic-interpretability-causal-feature-intervention",
-        "urn:maha:record:mechanistic-interpretability-cross-layer-transcoders",
-        "urn:maha:record:mechanistic-interpretability-dead-features",
-        "urn:maha:record:mechanistic-interpretability-feature-activation-maximization"
-      ],
-      "currentAlignmentStates": [
-        "insufficient-evidence"
-      ],
-      "priority": 6,
-      "requests": [
-        {
-          "channel": "doi-resolver",
-          "url": "https://doi.org/api/handles/10.23915/distill.00007",
-          "purpose": "version-link"
-        },
-        {
-          "channel": "crossref",
-          "url": "https://api.crossref.org/works/10.23915%2Fdistill.00007",
-          "purpose": "metadata"
-        },
-        {
-          "channel": "europe-pmc",
-          "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI:10.23915%2Fdistill.00007&format=json",
-          "purpose": "open-copy"
-        },
-        {
-          "channel": "biorxiv",
-          "url": "https://api.biorxiv.org/details/biorxiv/10.23915%2Fdistill.00007",
-          "purpose": "version-link"
-        },
-        {
-          "channel": "arxiv",
-          "url": "https://export.arxiv.org/api/query?search_query=ti:%22Feature%20Visualization%22&max_results=5",
-          "purpose": "open-copy"
-        },
-        {
-          "channel": "osti",
-          "url": "https://www.osti.gov/api/v1/records?q=Feature%20Visualization",
-          "purpose": "open-copy"
-        },
-        {
-          "channel": "official-publisher",
-          "url": "https://doi.org/10.23915/distill.00007",
-          "purpose": "open-copy"
-        },
-        {
-          "channel": "institutional-repository",
-          "url": "https://api.openalex.org/works?search=Feature%20Visualization&per-page=5",
-          "purpose": "version-link"
-        }
-      ],
-      "observations": [],
-      "disposition": "not-attempted",
-      "inspectionAuthorized": false,
-      "canonicalMutationAuthorized": false,
-      "digest": "sha256:d7e18c03e72824b92785dcbfac879e6b39fd3254f054b8794dd3eb2e81e05c59"
+      "digest": "sha256:7dbd550c285ae925768d78a3bdb4ecf58cd1ec5b1868a8fa5379e9189a92b445"
     },
     {
       "schemaVersion": "maha-source-recovery/1.0",
@@ -862,7 +515,7 @@
       "currentAlignmentStates": [
         "inaccessible-source"
       ],
-      "priority": 5,
+      "priority": 4,
       "requests": [
         {
           "channel": "doi-resolver",
@@ -909,7 +562,7 @@
       "disposition": "not-attempted",
       "inspectionAuthorized": false,
       "canonicalMutationAuthorized": false,
-      "digest": "sha256:aa63f34e2a5bbf299243e7b7a2078959fe50c788c2d6b63a797d7f99f7a1f718"
+      "digest": "sha256:f9f19545678b83d119735923aa14d17c9c1d79519e5380b2a8420b5d0e2f8624"
     },
     {
       "schemaVersion": "maha-source-recovery/1.0",
@@ -928,7 +581,7 @@
       "currentAlignmentStates": [
         "insufficient-evidence"
       ],
-      "priority": 4,
+      "priority": 3,
       "requests": [
         {
           "channel": "doi-resolver",
@@ -975,7 +628,7 @@
       "disposition": "not-attempted",
       "inspectionAuthorized": false,
       "canonicalMutationAuthorized": false,
-      "digest": "sha256:1cbdaac3fd9bc1f88f13fe359402b263f6d476f97009fea73dd0e39b0956553b"
+      "digest": "sha256:d039ef547d78a213cb5e76fc1a18821c4b44ef887c1092425bfd89dac6fb483a"
     },
     {
       "schemaVersion": "maha-source-recovery/1.0",
@@ -995,7 +648,7 @@
       "currentAlignmentStates": [
         "inaccessible-source"
       ],
-      "priority": 3,
+      "priority": 2,
       "requests": [
         {
           "channel": "doi-resolver",
@@ -1042,7 +695,7 @@
       "disposition": "not-attempted",
       "inspectionAuthorized": false,
       "canonicalMutationAuthorized": false,
-      "digest": "sha256:dde6aba37b98899ff4c2a1e0e438726408bc24c32624f2da0f3ae3a96d86286c"
+      "digest": "sha256:6102f9866e4c548e95ff3409ab0f9b450c43cd5aaeeaa46c883c4e60e976c0c3"
     },
     {
       "schemaVersion": "maha-source-recovery/1.0",
@@ -1062,7 +715,7 @@
       "currentAlignmentStates": [
         "insufficient-evidence"
       ],
-      "priority": 2,
+      "priority": 1,
       "requests": [
         {
           "channel": "doi-resolver",
@@ -1109,74 +762,7 @@
       "disposition": "not-attempted",
       "inspectionAuthorized": false,
       "canonicalMutationAuthorized": false,
-      "digest": "sha256:109d720056c21ccbd1d9761305829cd23e72e39ce3efb0ca2326f903f847097c"
-    },
-    {
-      "schemaVersion": "maha-source-recovery/1.0",
-      "inputDate": "2026-08-26",
-      "sourceContractId": "source-neurotechnology-bci-micro-ecog",
-      "domainSlug": "neurotechnology-bci",
-      "sourceTitle": "Flexible, foldable, actively multiplexed, high-density electrode array for mapping brain activity in vivo",
-      "sourceIdentifier": "10.1038/nn.2973",
-      "declaredUrl": "https://doi.org/10.1038/nn.2973",
-      "affectedRecordIds": [
-        "urn:maha:record:neurotechnology-bci-electrocorticography-spatial-resolution",
-        "urn:maha:record:neurotechnology-bci-electrode-tissue-interface",
-        "urn:maha:record:neurotechnology-bci-flexible-conformal-electrode-arrays",
-        "urn:maha:record:neurotechnology-bci-impedance-and-noise",
-        "urn:maha:record:neurotechnology-bci-micro-ecog-arrays"
-      ],
-      "currentAlignmentStates": [
-        "inaccessible-source"
-      ],
-      "priority": 1,
-      "requests": [
-        {
-          "channel": "doi-resolver",
-          "url": "https://doi.org/api/handles/10.1038/nn.2973",
-          "purpose": "version-link"
-        },
-        {
-          "channel": "crossref",
-          "url": "https://api.crossref.org/works/10.1038%2Fnn.2973",
-          "purpose": "metadata"
-        },
-        {
-          "channel": "europe-pmc",
-          "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI:10.1038%2Fnn.2973&format=json",
-          "purpose": "open-copy"
-        },
-        {
-          "channel": "biorxiv",
-          "url": "https://api.biorxiv.org/details/biorxiv/10.1038%2Fnn.2973",
-          "purpose": "version-link"
-        },
-        {
-          "channel": "arxiv",
-          "url": "https://export.arxiv.org/api/query?search_query=ti:%22Flexible%2C%20foldable%2C%20actively%20multiplexed%2C%20high-density%20electrode%20array%20for%20mapping%20brain%20activity%20in%20vivo%22&max_results=5",
-          "purpose": "open-copy"
-        },
-        {
-          "channel": "osti",
-          "url": "https://www.osti.gov/api/v1/records?q=Flexible%2C%20foldable%2C%20actively%20multiplexed%2C%20high-density%20electrode%20array%20for%20mapping%20brain%20activity%20in%20vivo",
-          "purpose": "open-copy"
-        },
-        {
-          "channel": "official-publisher",
-          "url": "https://doi.org/10.1038/nn.2973",
-          "purpose": "open-copy"
-        },
-        {
-          "channel": "institutional-repository",
-          "url": "https://api.openalex.org/works?search=Flexible%2C%20foldable%2C%20actively%20multiplexed%2C%20high-density%20electrode%20array%20for%20mapping%20brain%20activity%20in%20vivo&per-page=5",
-          "purpose": "version-link"
-        }
-      ],
-      "observations": [],
-      "disposition": "not-attempted",
-      "inspectionAuthorized": false,
-      "canonicalMutationAuthorized": false,
-      "digest": "sha256:056a964a4d5132ecf7d5a63b11b8386e4876f3d46844fffef01aee46cecb4c39"
+      "digest": "sha256:183871323d979437902c525443bf27a07be4d1961f52a483c554959c0b778124"
     }
   ]
 }

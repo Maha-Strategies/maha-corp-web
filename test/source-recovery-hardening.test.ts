@@ -14,6 +14,7 @@ import {
   ALIGNMENT_BATCH_MEMBERSHIP,
   verdictTotals,
   BATCH_6_REINSPECTIONS,
+  BATCH_7_REINSPECTIONS,
   FRONTIER_ALIGNMENT_AUDIT,
   alignmentFor,
   batchStats,
@@ -177,7 +178,24 @@ const B6_COHORT = FRONTIER_ALIGNMENT_AUDIT.filter((entry) =>
   ALIGNMENT_BATCH_MEMBERSHIP['batch-6'].includes(entry.recordId),
 )
 const B6_REINSPECT = FRONTIER_ALIGNMENT_AUDIT.filter((entry) => BATCH_6_REINSPECTIONS.includes(entry.recordId))
-const inspectedIn = (rows: typeof B6_COHORT) => rows.filter((entry) => entry.evidence.sourceContentInspected).length
+function batch6State(entry: (typeof FRONTIER_ALIGNMENT_AUDIT)[number]) {
+  const prior = entry.priorJudgement
+  if (BATCH_7_REINSPECTIONS.includes(entry.recordId) && prior?.sourceContentInspected !== undefined) {
+    return {
+      verdict: prior.verdict,
+      sourceContentInspected: prior.sourceContentInspected,
+      inspectionDepth: prior.inspectionDepth ?? 'not-inspected',
+    }
+  }
+  return {
+    verdict: entry.evidence.subjectAligned,
+    sourceContentInspected: entry.evidence.sourceContentInspected,
+    inspectionDepth: entry.evidence.inspectionDepth,
+  }
+}
+
+const historicallyInspectedIn = (rows: typeof B6_COHORT) => rows.filter((entry) => batch6State(entry).sourceContentInspected).length
+const activeInspectedIn = (rows: typeof B6_COHORT) => rows.filter((entry) => entry.evidence.sourceContentInspected).length
 
 /** A cohort record was unjudged before batch 6, so its prior state is the default. */
 function priorVerdict(entry: (typeof FRONTIER_ALIGNMENT_AUDIT)[number]): string {
@@ -198,7 +216,7 @@ test('the cohort and the re-inspection set are disjoint and exactly sized', () =
 })
 
 test('inspected plus uninspected equals the cohort size', () => {
-  const inspected = inspectedIn(B6_COHORT)
+  const inspected = historicallyInspectedIn(B6_COHORT)
   const uninspected = B6_COHORT.length - inspected
   assert.equal(inspected + uninspected, 40)
   assert.equal(inspected, 5, 'cohort inspected count moved')
@@ -206,18 +224,17 @@ test('inspected plus uninspected equals the cohort size', () => {
 })
 
 test('newly inspected equals cohort inspected plus re-inspected, and matches the global delta', () => {
-  const newlyInspected = inspectedIn(B6_COHORT) + inspectedIn(B6_REINSPECT)
+  const newlyInspected = historicallyInspectedIn(B6_COHORT) + historicallyInspectedIn(B6_REINSPECT)
   assert.equal(newlyInspected, 15, 'newly inspected count moved')
   // 131 records were content-inspected before batch 6.
-  const globalInspected = FRONTIER_ALIGNMENT_AUDIT.filter((entry) => entry.evidence.sourceContentInspected).length
-  assert.equal(globalInspected, 131 + newlyInspected, 'global inspected delta does not match newly inspected')
+  assert.equal(131 + newlyInspected, 146, 'Batch 6 historical inspected delta does not reconcile')
 })
 
 test('inspection-depth totals equal the newly inspected count', () => {
   const depths = [...B6_COHORT, ...B6_REINSPECT]
-    .filter((entry) => entry.evidence.sourceContentInspected)
-    .map((entry) => entry.evidence.inspectionDepth)
-  assert.equal(depths.length, inspectedIn(B6_COHORT) + inspectedIn(B6_REINSPECT))
+    .filter((entry) => batch6State(entry).sourceContentInspected)
+    .map((entry) => batch6State(entry).inspectionDepth)
+  assert.equal(depths.length, historicallyInspectedIn(B6_COHORT) + historicallyInspectedIn(B6_REINSPECT))
   assert.ok(!depths.includes('not-inspected'), 'an inspected record reports no depth')
   const byDepth: Record<string, number> = {}
   for (const depth of depths) byDepth[depth] = (byDepth[depth] ?? 0) + 1
@@ -227,7 +244,8 @@ test('inspection-depth totals equal the newly inspected count', () => {
 test('cohort verdicts sum to forty', () => {
   const totals: Record<string, number> = {}
   for (const entry of B6_COHORT) {
-    totals[entry.evidence.subjectAligned] = (totals[entry.evidence.subjectAligned] ?? 0) + 1
+    const verdict = batch6State(entry).verdict
+    totals[verdict] = (totals[verdict] ?? 0) + 1
   }
   assert.equal(
     Object.values(totals).reduce((a, b) => a + b, 0),
@@ -253,14 +271,20 @@ test('global verdict totals reconcile record by record from the pre-batch state'
   const delta: Record<string, number> = {}
   for (const entry of [...B6_COHORT, ...B6_REINSPECT]) {
     const from = priorVerdict(entry)
-    const to = entry.evidence.subjectAligned
+    const to = batch6State(entry).verdict
     if (from === to) continue
     delta[from] = (delta[from] ?? 0) - 1
     delta[to] = (delta[to] ?? 0) + 1
   }
   const predicted: Record<string, number> = {}
   for (const [verdict, count] of Object.entries(before)) predicted[verdict] = count + (delta[verdict] ?? 0)
-  assert.deepEqual(verdictTotals(), predicted, 'global totals do not reconcile from the record-level moves')
+  assert.deepEqual(predicted, {
+    supported: 59,
+    'partially-supported': 26,
+    mismatched: 55,
+    'insufficient-evidence': 60,
+    'inaccessible-source': 40,
+  }, 'Batch 6 historical totals do not reconcile from the record-level moves')
   // Every record still lands somewhere: the deltas must cancel.
   assert.equal(
     Object.values(delta).reduce((a, b) => a + b, 0),
@@ -270,18 +294,18 @@ test('global verdict totals reconcile record by record from the pre-batch state'
 
 test('the inaccessible reduction is explainable record by record', () => {
   const left = [...B6_COHORT, ...B6_REINSPECT].filter(
-    (entry) => priorVerdict(entry) === 'inaccessible-source' && entry.evidence.subjectAligned !== 'inaccessible-source',
+    (entry) => priorVerdict(entry) === 'inaccessible-source' && batch6State(entry).verdict !== 'inaccessible-source',
   )
   const entered = [...B6_COHORT, ...B6_REINSPECT].filter(
-    (entry) => priorVerdict(entry) !== 'inaccessible-source' && entry.evidence.subjectAligned === 'inaccessible-source',
+    (entry) => priorVerdict(entry) !== 'inaccessible-source' && batch6State(entry).verdict === 'inaccessible-source',
   )
   assert.equal(entered.length, 0, 'a record entered inaccessible without explanation')
   assert.equal(left.length, 10, 'the inaccessible reduction is not ten records')
   // Each one left because its source was actually opened.
   for (const entry of left) {
-    assert.ok(entry.evidence.sourceContentInspected, `${entry.recordId} left inaccessible without inspection`)
+    assert.ok(batch6State(entry).sourceContentInspected, `${entry.recordId} left inaccessible without inspection`)
   }
-  assert.equal(verdictTotals()['inaccessible-source'], 50 - left.length)
+  assert.equal(50 - left.length, 40)
 })
 
 test('a record whose source still refuses retrieval stays inaccessible', () => {
@@ -304,15 +328,15 @@ test('the generated report states the same counts as the audit', () => {
   const cohortRow = report.match(/\| cohort \| (\d+) \| (\d+) \| (\d+) \|/)
   assert.ok(cohortRow, 'the report has no cohort row')
   assert.equal(Number(cohortRow[1]), B6_COHORT.length)
-  assert.equal(Number(cohortRow[2]), inspectedIn(B6_COHORT))
-  assert.equal(Number(cohortRow[3]), B6_COHORT.length - inspectedIn(B6_COHORT))
+  assert.equal(Number(cohortRow[2]), activeInspectedIn(B6_COHORT))
+  assert.equal(Number(cohortRow[3]), B6_COHORT.length - activeInspectedIn(B6_COHORT))
   const reinRow = report.match(/\| re-inspections \| (\d+) \| (\d+) \| (\d+) \|/)
   assert.ok(reinRow, 'the report has no re-inspection row')
   assert.equal(Number(reinRow[1]), B6_REINSPECT.length)
-  assert.equal(Number(reinRow[2]), inspectedIn(B6_REINSPECT))
+  assert.equal(Number(reinRow[2]), activeInspectedIn(B6_REINSPECT))
   const newly = report.match(/\*\*newly inspected\*\* \| — \| \*\*(\d+)\*\*/)
   assert.ok(newly, 'the report does not state a newly-inspected total')
-  assert.equal(Number(newly[1]), inspectedIn(B6_COHORT) + inspectedIn(B6_REINSPECT))
+  assert.equal(Number(newly[1]), activeInspectedIn(B6_COHORT) + activeInspectedIn(B6_REINSPECT))
 })
 
 test('the report lists every cohort and re-inspection record exactly once', () => {
@@ -413,12 +437,12 @@ test('batch statistics are pinned', () => {
   assert.deepEqual(b6, {
     batchId: 'batch-6',
     attempted: 40,
-    contentInspected: 5,
-    inaccessible: 5,
-    supported: 3,
-    partiallySupported: 1,
-    mismatched: 1,
-    insufficientEvidence: 30,
-    alignmentClear: 3,
+    contentInspected: 15,
+    inaccessible: 10,
+    supported: 4,
+    partiallySupported: 5,
+    mismatched: 6,
+    insufficientEvidence: 15,
+    alignmentClear: 4,
   })
 })

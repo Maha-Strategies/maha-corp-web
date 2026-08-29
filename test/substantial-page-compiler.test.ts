@@ -381,7 +381,7 @@ test('a pilot reports the audit verdict rather than asserting its own alignment'
     assert.equal(pilot.sourceAlignment, audit.evidence.subjectAligned)
     if (pilot.sourceAlignment === 'supported') assert.ok(audit.evidence.sourceContentInspected)
   }
-  assert.equal(PILOTS.filter((pilot) => pilot.sourceAlignment === 'supported').length, 6)
+  assert.equal(PILOTS.filter((pilot) => pilot.sourceAlignment === 'supported').length, 7)
 })
 
 /* ------------------------------------------------- revise-reference & bridges */

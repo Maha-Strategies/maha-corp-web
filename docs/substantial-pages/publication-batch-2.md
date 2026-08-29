@@ -13,8 +13,8 @@ This generated report measures source-bound information depth. Character counts 
 | Selected | 30 |
 | Currently eligible | 30 |
 | Blocked | 0 |
-| Qualified but not selected | 14 |
-| Rejected by blocker | 226 |
+| Qualified but not selected | 25 |
+| Rejected by blocker | 215 |
 
 | Domain | Records |
 | --- | --- |
@@ -70,37 +70,37 @@ Comparison was genuinely applicable on **0** of 30 pages and calculation on **0*
 
 | Blocker | Records |
 | --- | --- |
-| `alignment-inaccessible-source` | 40 |
-| `alignment-insufficient-evidence` | 102 |
-| `alignment-mismatched` | 55 |
-| `alignment-partially-supported` | 29 |
-| `inspected-locator-missing` | 135 |
+| `alignment-inaccessible-source` | 25 |
+| `alignment-insufficient-evidence` | 82 |
+| `alignment-mismatched` | 68 |
+| `alignment-partially-supported` | 40 |
+| `inspected-locator-missing` | 100 |
 | `record-declares-no-claim` | 2 |
 | `record-declares-no-source` | 2 |
-| `source-assignment-positional-legacy` | 181 |
-| `source-metadata-unverified` | 37 |
-| `source-not-content-inspected` | 135 |
+| `source-assignment-positional-legacy` | 170 |
+| `source-metadata-unverified` | 22 |
+| `source-not-content-inspected` | 100 |
 
 | Record | Domain | Blockers |
 | --- | --- | --- |
 | `adenine-base-editing` | synthetic-biology | `alignment-insufficient-evidence`, `inspected-locator-missing`, `source-not-content-inspected` |
-| `advanced-materials-color-centers-in-diamond` | advanced-materials | `alignment-insufficient-evidence`, `inspected-locator-missing`, `source-assignment-positional-legacy`, `source-not-content-inspected` |
+| `advanced-materials-color-centers-in-diamond` | advanced-materials | `alignment-inaccessible-source`, `inspected-locator-missing`, `source-assignment-positional-legacy`, `source-not-content-inspected` |
 | `advanced-materials-contact-resistance-in-2d-devices` | advanced-materials | `alignment-mismatched`, `source-assignment-positional-legacy` |
 | `advanced-materials-cvd-graphene-grain-boundaries` | advanced-materials | `alignment-mismatched`, `source-assignment-positional-legacy` |
-| `advanced-materials-diamond-thermal-conductivity` | advanced-materials | `alignment-insufficient-evidence`, `inspected-locator-missing`, `source-assignment-positional-legacy`, `source-not-content-inspected` |
-| `advanced-materials-diamond-wafer-substrates` | advanced-materials | `alignment-insufficient-evidence`, `inspected-locator-missing`, `source-assignment-positional-legacy`, `source-not-content-inspected` |
+| `advanced-materials-diamond-thermal-conductivity` | advanced-materials | `alignment-inaccessible-source`, `inspected-locator-missing`, `source-assignment-positional-legacy`, `source-not-content-inspected` |
+| `advanced-materials-diamond-wafer-substrates` | advanced-materials | `alignment-inaccessible-source`, `inspected-locator-missing`, `source-assignment-positional-legacy`, `source-not-content-inspected` |
 | `advanced-materials-dielectric-screening` | advanced-materials | `alignment-mismatched`, `source-assignment-positional-legacy` |
 | `advanced-materials-direct-gap-mos2` | advanced-materials | `alignment-mismatched`, `source-assignment-positional-legacy` |
 | `advanced-materials-dry-transfer-contamination` | advanced-materials | `alignment-mismatched`, `source-assignment-positional-legacy` |
 | `advanced-materials-encapsulation-boundaries` | advanced-materials | `alignment-mismatched`, `source-assignment-positional-legacy` |
-| `advanced-materials-gallium-nitride-epitaxy` | advanced-materials | `alignment-insufficient-evidence`, `inspected-locator-missing`, `source-assignment-positional-legacy`, `source-not-content-inspected` |
+| `advanced-materials-gallium-nitride-epitaxy` | advanced-materials | `alignment-inaccessible-source`, `inspected-locator-missing`, `source-assignment-positional-legacy`, `source-not-content-inspected` |
 | `advanced-materials-graphene-hbn-heterostructures` | advanced-materials | `alignment-mismatched`, `source-assignment-positional-legacy` |
 | `advanced-materials-interface-bubbles-and-strain` | advanced-materials | `alignment-mismatched`, `source-assignment-positional-legacy` |
 | `advanced-materials-interlayer-excitons` | advanced-materials | `alignment-mismatched`, `source-assignment-positional-legacy` |
 | `advanced-materials-materials-metrology-transfer` | advanced-materials | `alignment-mismatched`, `source-assignment-positional-legacy` |
 | `advanced-materials-moire-superlattices` | advanced-materials | `alignment-mismatched`, `source-assignment-positional-legacy` |
 | `advanced-materials-quantum-anomalous-hall-state` | advanced-materials | `alignment-mismatched`, `source-assignment-positional-legacy` |
-| `advanced-materials-sic-wide-bandgap-substrates` | advanced-materials | `alignment-insufficient-evidence`, `inspected-locator-missing`, `source-assignment-positional-legacy`, `source-not-content-inspected` |
+| `advanced-materials-sic-wide-bandgap-substrates` | advanced-materials | `alignment-inaccessible-source`, `inspected-locator-missing`, `source-assignment-positional-legacy`, `source-not-content-inspected` |
 | `advanced-materials-spin-momentum-locking` | advanced-materials | `alignment-mismatched`, `source-assignment-positional-legacy` |
 | `advanced-materials-tmd-heterobilayers` | advanced-materials | `alignment-partially-supported`, `source-assignment-positional-legacy` |
 | `advanced-materials-tmd-monolayers` | advanced-materials | `alignment-mismatched`, `source-assignment-positional-legacy` |
@@ -110,12 +110,12 @@ Comparison was genuinely applicable on **0** of 30 pages and calculation on **0*
 | `advanced-materials-valley-polarized-excitons` | advanced-materials | `alignment-mismatched`, `source-assignment-positional-legacy` |
 | `advanced-materials-van-der-waals-assembly` | advanced-materials | `alignment-mismatched`, `source-assignment-positional-legacy` |
 | `advanced-materials-wafer-scale-2d-growth` | advanced-materials | `alignment-mismatched`, `source-assignment-positional-legacy` |
-| `agentic-systems-mcp-agent-memory-boundaries` | agentic-systems-mcp | `alignment-insufficient-evidence`, `inspected-locator-missing`, `source-assignment-positional-legacy`, `source-metadata-unverified`, `source-not-content-inspected` |
+| `agentic-systems-mcp-agent-memory-boundaries` | agentic-systems-mcp | `alignment-partially-supported`, `source-assignment-positional-legacy` |
 | `agentic-systems-mcp-agent-plan-execution-separation` | agentic-systems-mcp | `alignment-mismatched`, `source-assignment-positional-legacy` |
-| `agentic-systems-mcp-agentic-evaluation-protocols` | agentic-systems-mcp | `alignment-insufficient-evidence`, `inspected-locator-missing`, `source-assignment-positional-legacy`, `source-metadata-unverified`, `source-not-content-inspected` |
+| `agentic-systems-mcp-agentic-evaluation-protocols` | agentic-systems-mcp | `alignment-partially-supported`, `source-assignment-positional-legacy` |
 | `agentic-systems-mcp-context-window-token-degradation` | agentic-systems-mcp | `alignment-partially-supported`, `source-assignment-positional-legacy` |
 | `agentic-systems-mcp-distributed-agent-consensus` | agentic-systems-mcp | `alignment-mismatched`, `source-assignment-positional-legacy` |
-| `agentic-systems-mcp-game-theoretic-incentive-misalignment` | agentic-systems-mcp | `alignment-insufficient-evidence`, `inspected-locator-missing`, `source-assignment-positional-legacy`, `source-metadata-unverified`, `source-not-content-inspected` |
+| `agentic-systems-mcp-game-theoretic-incentive-misalignment` | agentic-systems-mcp | `alignment-mismatched`, `source-assignment-positional-legacy` |
 | `agentic-systems-mcp-human-approval-boundaries` | agentic-systems-mcp | `alignment-mismatched`, `source-assignment-positional-legacy` |
 | `agentic-systems-mcp-idempotent-tool-calls` | agentic-systems-mcp | `alignment-mismatched`, `source-assignment-positional-legacy` |
 | `agentic-systems-mcp-least-authority-tokens` | agentic-systems-mcp | `alignment-mismatched`, `source-assignment-positional-legacy` |
@@ -123,25 +123,25 @@ Comparison was genuinely applicable on **0** of 30 pages and calculation on **0*
 | `agentic-systems-mcp-multi-agent-coordination-protocols` | agentic-systems-mcp | `alignment-mismatched`, `source-assignment-positional-legacy` |
 | `agentic-systems-mcp-multi-agent-deadlock` | agentic-systems-mcp | `alignment-mismatched`, `source-assignment-positional-legacy` |
 | `agentic-systems-mcp-multi-agent-role-assignment` | agentic-systems-mcp | `alignment-mismatched`, `source-assignment-positional-legacy` |
-| `agentic-systems-mcp-prompt-injection-through-tools` | agentic-systems-mcp | `alignment-insufficient-evidence`, `inspected-locator-missing`, `source-assignment-positional-legacy`, `source-metadata-unverified`, `source-not-content-inspected` |
+| `agentic-systems-mcp-prompt-injection-through-tools` | agentic-systems-mcp | `alignment-mismatched`, `source-assignment-positional-legacy` |
 | `agentic-systems-mcp-retrieval-context-selection` | agentic-systems-mcp | `alignment-partially-supported`, `source-assignment-positional-legacy` |
 | `agentic-systems-mcp-sandboxed-tool-execution` | agentic-systems-mcp | `alignment-mismatched`, `source-assignment-positional-legacy` |
 | `agentic-systems-mcp-tool-allowlisting` | agentic-systems-mcp | `alignment-partially-supported`, `source-assignment-positional-legacy` |
 | `agentic-systems-mcp-tool-call-traces` | agentic-systems-mcp | `alignment-mismatched`, `source-assignment-positional-legacy` |
-| `agentic-systems-mcp-tool-output-trust-boundaries` | agentic-systems-mcp | `alignment-insufficient-evidence`, `inspected-locator-missing`, `source-assignment-positional-legacy`, `source-metadata-unverified`, `source-not-content-inspected` |
+| `agentic-systems-mcp-tool-output-trust-boundaries` | agentic-systems-mcp | `alignment-partially-supported`, `source-assignment-positional-legacy` |
 | `agentic-systems-mcp-tool-result-context-injection` | agentic-systems-mcp | `alignment-mismatched`, `source-assignment-positional-legacy` |
 | `agentic-systems-mcp-tool-timeout-budgets` | agentic-systems-mcp | `alignment-mismatched`, `source-assignment-positional-legacy` |
 | `biomolecular-engineering-cell-free-reaction-yield` | biomolecular-engineering | `alignment-partially-supported`, `source-assignment-positional-legacy` |
-| `biomolecular-engineering-compartmentalized-cell-free-systems` | biomolecular-engineering | `alignment-inaccessible-source`, `inspected-locator-missing`, `source-assignment-positional-legacy`, `source-not-content-inspected` |
+| `biomolecular-engineering-compartmentalized-cell-free-systems` | biomolecular-engineering | `alignment-mismatched`, `source-assignment-positional-legacy` |
 | `biomolecular-engineering-crude-extract-cell-free-systems` | biomolecular-engineering | `alignment-partially-supported`, `source-assignment-positional-legacy` |
 | `biomolecular-engineering-design-to-assay-provenance` | biomolecular-engineering | `alignment-insufficient-evidence`, `source-assignment-positional-legacy` |
 | `biomolecular-engineering-directed-enzyme-evolution` | biomolecular-engineering | `alignment-insufficient-evidence`, `inspected-locator-missing`, `source-assignment-positional-legacy`, `source-not-content-inspected` |
-| `biomolecular-engineering-droplet-microfluidic-screening` | biomolecular-engineering | `alignment-inaccessible-source`, `inspected-locator-missing`, `source-assignment-positional-legacy`, `source-not-content-inspected` |
+| `biomolecular-engineering-droplet-microfluidic-screening` | biomolecular-engineering | `alignment-mismatched`, `source-assignment-positional-legacy` |
 | `biomolecular-engineering-energy-regeneration-in-cell-free-systems` | biomolecular-engineering | `alignment-mismatched`, `source-assignment-positional-legacy` |
-| `biomolecular-engineering-enzyme-cascade-engineering` | biomolecular-engineering | `alignment-inaccessible-source`, `inspected-locator-missing`, `source-assignment-positional-legacy`, `source-not-content-inspected` |
+| `biomolecular-engineering-enzyme-cascade-engineering` | biomolecular-engineering | `alignment-mismatched`, `source-assignment-positional-legacy` |
 | `biomolecular-engineering-fitness-landscape-accessibility` | biomolecular-engineering | `alignment-insufficient-evidence`, `inspected-locator-missing`, `source-assignment-positional-legacy`, `source-not-content-inspected` |
 | `biomolecular-engineering-ligand-binding-aptamer-domains` | biomolecular-engineering | `alignment-insufficient-evidence`, `inspected-locator-missing`, `source-assignment-positional-legacy`, `source-not-content-inspected` |
-| `biomolecular-engineering-metabolic-pathway-prototyping` | biomolecular-engineering | `alignment-inaccessible-source`, `inspected-locator-missing`, `source-assignment-positional-legacy`, `source-not-content-inspected` |
+| `biomolecular-engineering-metabolic-pathway-prototyping` | biomolecular-engineering | `alignment-partially-supported`, `source-assignment-positional-legacy` |
 | `biomolecular-engineering-mutation-library-generation` | biomolecular-engineering | `alignment-insufficient-evidence`, `inspected-locator-missing`, `source-assignment-positional-legacy`, `source-not-content-inspected` |
 | `biomolecular-engineering-off-target-binding-characterization` | biomolecular-engineering | `alignment-insufficient-evidence`, `source-assignment-positional-legacy` |
 | `biomolecular-engineering-phage-assisted-continuous-evolution` | biomolecular-engineering | `alignment-insufficient-evidence`, `inspected-locator-missing`, `source-assignment-positional-legacy`, `source-not-content-inspected` |
@@ -153,14 +153,13 @@ Comparison was genuinely applicable on **0** of 30 pages and calculation on **0*
 | `biomolecular-engineering-structure-prediction-filtering` | biomolecular-engineering | `alignment-partially-supported`, `source-assignment-positional-legacy` |
 | `biomolecular-engineering-synthetic-riboswitches` | biomolecular-engineering | `alignment-insufficient-evidence`, `inspected-locator-missing`, `source-assignment-positional-legacy`, `source-not-content-inspected` |
 | `biomolecular-engineering-toehold-switches` | biomolecular-engineering | `alignment-insufficient-evidence`, `inspected-locator-missing`, `source-assignment-positional-legacy`, `source-not-content-inspected` |
-| `biomolecular-engineering-translational-control-circuits` | biomolecular-engineering | `alignment-inaccessible-source`, `inspected-locator-missing`, `source-assignment-positional-legacy`, `source-not-content-inspected` |
 | `cell-free-gene-expression` | synthetic-biology | `alignment-insufficient-evidence`, `inspected-locator-missing`, `source-not-content-inspected` |
 | `cell-line-versus-primary-cell-evidence` | synthetic-biology | `alignment-insufficient-evidence`, `inspected-locator-missing`, `source-not-content-inspected` |
 | `change-seq-off-target-nomination` | synthetic-biology | `alignment-insufficient-evidence`, `inspected-locator-missing`, `source-not-content-inspected` |
 | `coherence-t1-t2-measurements` | quantum-systems | `alignment-insufficient-evidence`, `inspected-locator-missing`, `source-not-content-inspected` |
 | `crispr-cas9-nuclease-editing` | synthetic-biology | `alignment-insufficient-evidence`, `inspected-locator-missing`, `source-not-content-inspected` |
 | `critical-supply-chains-antimony-smelting-concentration` | critical-supply-chains | `alignment-insufficient-evidence`, `inspected-locator-missing`, `source-assignment-positional-legacy`, `source-metadata-unverified`, `source-not-content-inspected` |
-| `critical-supply-chains-cobalt-refining-concentration` | critical-supply-chains | `alignment-inaccessible-source`, `inspected-locator-missing`, `source-assignment-positional-legacy`, `source-metadata-unverified`, `source-not-content-inspected` |
+| `critical-supply-chains-cobalt-refining-concentration` | critical-supply-chains | `alignment-partially-supported`, `source-assignment-positional-legacy` |
 | `critical-supply-chains-dysprosium-ore-to-oxide` | critical-supply-chains | `alignment-partially-supported`, `source-assignment-positional-legacy`, `source-metadata-unverified` |
 | `critical-supply-chains-euv-photoresist-precursors` | critical-supply-chains | `alignment-inaccessible-source`, `inspected-locator-missing`, `source-assignment-positional-legacy`, `source-metadata-unverified`, `source-not-content-inspected` |
 | `critical-supply-chains-export-control-exposure` | critical-supply-chains | `alignment-mismatched`, `source-assignment-positional-legacy` |
@@ -169,13 +168,13 @@ Comparison was genuinely applicable on **0** of 30 pages and calculation on **0*
 | `critical-supply-chains-gallium-zinc-processing-byproduct` | critical-supply-chains | `alignment-inaccessible-source`, `inspected-locator-missing`, `source-assignment-positional-legacy`, `source-metadata-unverified`, `source-not-content-inspected` |
 | `critical-supply-chains-germanium-coal-ash-recovery` | critical-supply-chains | `alignment-inaccessible-source`, `inspected-locator-missing`, `source-assignment-positional-legacy`, `source-metadata-unverified`, `source-not-content-inspected` |
 | `critical-supply-chains-germanium-zinc-refining-flow` | critical-supply-chains | `alignment-inaccessible-source`, `inspected-locator-missing`, `source-assignment-positional-legacy`, `source-metadata-unverified`, `source-not-content-inspected` |
-| `critical-supply-chains-graphite-anode-processing` | critical-supply-chains | `alignment-inaccessible-source`, `inspected-locator-missing`, `source-assignment-positional-legacy`, `source-metadata-unverified`, `source-not-content-inspected` |
+| `critical-supply-chains-graphite-anode-processing` | critical-supply-chains | `alignment-partially-supported`, `source-assignment-positional-legacy` |
 | `critical-supply-chains-hafnium-zirconium-separation` | critical-supply-chains | `alignment-insufficient-evidence`, `inspected-locator-missing`, `source-assignment-positional-legacy`, `source-metadata-unverified`, `source-not-content-inspected` |
 | `critical-supply-chains-heavy-rare-earth-diffusion` | critical-supply-chains | `alignment-mismatched`, `source-assignment-positional-legacy`, `source-metadata-unverified` |
 | `critical-supply-chains-helium-liquefaction-logistics` | critical-supply-chains | `alignment-insufficient-evidence`, `inspected-locator-missing`, `source-assignment-positional-legacy`, `source-metadata-unverified`, `source-not-content-inspected` |
 | `critical-supply-chains-high-purity-quartz-deposits` | critical-supply-chains | `alignment-inaccessible-source`, `inspected-locator-missing`, `source-assignment-positional-legacy`, `source-metadata-unverified`, `source-not-content-inspected` |
-| `critical-supply-chains-indium-zinc-byproduct-flow` | critical-supply-chains | `alignment-inaccessible-source`, `inspected-locator-missing`, `source-assignment-positional-legacy`, `source-metadata-unverified`, `source-not-content-inspected` |
-| `critical-supply-chains-magnet-recycling` | critical-supply-chains | `alignment-inaccessible-source`, `inspected-locator-missing`, `source-assignment-positional-legacy`, `source-metadata-unverified`, `source-not-content-inspected` |
+| `critical-supply-chains-indium-zinc-byproduct-flow` | critical-supply-chains | `alignment-partially-supported`, `source-assignment-positional-legacy` |
+| `critical-supply-chains-magnet-recycling` | critical-supply-chains | `alignment-mismatched`, `source-assignment-positional-legacy` |
 | `critical-supply-chains-material-substitution-boundaries` | critical-supply-chains | `alignment-mismatched`, `source-assignment-positional-legacy` |
 | `critical-supply-chains-nd-fe-b-magnet-alloying` | critical-supply-chains | `alignment-partially-supported`, `source-assignment-positional-legacy`, `source-metadata-unverified` |
 | `critical-supply-chains-neodymium-praseodymium-separation` | critical-supply-chains | `alignment-mismatched`, `source-assignment-positional-legacy`, `source-metadata-unverified` |
@@ -187,7 +186,7 @@ Comparison was genuinely applicable on **0** of 30 pages and calculation on **0*
 | `critical-supply-chains-single-country-processing-concentration` | critical-supply-chains | `alignment-partially-supported`, `source-assignment-positional-legacy` |
 | `critical-supply-chains-supply-chain-data-uncertainty` | critical-supply-chains | `alignment-mismatched`, `source-assignment-positional-legacy` |
 | `critical-supply-chains-tantalum-concentrate-traceability` | critical-supply-chains | `alignment-insufficient-evidence`, `inspected-locator-missing`, `source-assignment-positional-legacy`, `source-metadata-unverified`, `source-not-content-inspected` |
-| `critical-supply-chains-tungsten-concentrate-processing` | critical-supply-chains | `alignment-inaccessible-source`, `inspected-locator-missing`, `source-assignment-positional-legacy`, `source-metadata-unverified`, `source-not-content-inspected` |
+| `critical-supply-chains-tungsten-concentrate-processing` | critical-supply-chains | `alignment-partially-supported`, `source-assignment-positional-legacy` |
 | `cryogenic-superconducting-control-stack` | quantum-systems | `alignment-insufficient-evidence`, `inspected-locator-missing`, `source-not-content-inspected` |
 | `cytosine-base-editing` | synthetic-biology | `alignment-insufficient-evidence`, `inspected-locator-missing`, `source-not-content-inspected` |
 | `directed-evolution-workflows` | synthetic-biology | `alignment-insufficient-evidence`, `inspected-locator-missing`, `source-not-content-inspected` |
@@ -201,16 +200,15 @@ Comparison was genuinely applicable on **0** of 30 pages and calculation on **0*
 | `fusion-plasma-systems-cable-in-conduit-conductors` | fusion-plasma-systems | `alignment-mismatched`, `source-assignment-positional-legacy` |
 | `fusion-plasma-systems-edge-localized-modes` | fusion-plasma-systems | `alignment-mismatched`, `source-assignment-positional-legacy` |
 | `fusion-plasma-systems-electron-cyclotron-heating` | fusion-plasma-systems | `alignment-mismatched`, `source-assignment-positional-legacy` |
-| `fusion-plasma-systems-inertial-confinement-target-chamber` | fusion-plasma-systems | `alignment-insufficient-evidence`, `inspected-locator-missing`, `source-assignment-positional-legacy`, `source-metadata-unverified`, `source-not-content-inspected` |
-| `fusion-plasma-systems-laser-target-coupling` | fusion-plasma-systems | `alignment-insufficient-evidence`, `inspected-locator-missing`, `source-assignment-positional-legacy`, `source-metadata-unverified`, `source-not-content-inspected` |
-| `fusion-plasma-systems-magnetic-mirror-confinement` | fusion-plasma-systems | `alignment-insufficient-evidence`, `inspected-locator-missing`, `source-assignment-positional-legacy`, `source-metadata-unverified`, `source-not-content-inspected` |
+| `fusion-plasma-systems-inertial-confinement-target-chamber` | fusion-plasma-systems | `alignment-partially-supported`, `source-assignment-positional-legacy` |
+| `fusion-plasma-systems-magnetic-mirror-confinement` | fusion-plasma-systems | `alignment-mismatched`, `source-assignment-positional-legacy` |
 | `fusion-plasma-systems-neutral-beam-injection` | fusion-plasma-systems | `alignment-mismatched`, `source-assignment-positional-legacy` |
-| `fusion-plasma-systems-neutron-material-damage` | fusion-plasma-systems | `alignment-insufficient-evidence`, `inspected-locator-missing`, `source-assignment-positional-legacy`, `source-metadata-unverified`, `source-not-content-inspected` |
+| `fusion-plasma-systems-neutron-material-damage` | fusion-plasma-systems | `alignment-mismatched`, `source-assignment-positional-legacy` |
 | `fusion-plasma-systems-plasma-facing-components` | fusion-plasma-systems | `alignment-partially-supported`, `source-assignment-positional-legacy` |
 | `fusion-plasma-systems-plasma-heating-and-current-drive` | fusion-plasma-systems | `alignment-mismatched`, `source-assignment-positional-legacy` |
 | `fusion-plasma-systems-plasma-position-and-shape-control` | fusion-plasma-systems | `alignment-mismatched`, `source-assignment-positional-legacy` |
 | `fusion-plasma-systems-rebco-high-field-magnets` | fusion-plasma-systems | `alignment-mismatched`, `source-assignment-positional-legacy` |
-| `fusion-plasma-systems-remote-handling-maintenance` | fusion-plasma-systems | `alignment-insufficient-evidence`, `inspected-locator-missing`, `source-assignment-positional-legacy`, `source-metadata-unverified`, `source-not-content-inspected` |
+| `fusion-plasma-systems-remote-handling-maintenance` | fusion-plasma-systems | `alignment-mismatched`, `source-assignment-positional-legacy` |
 | `fusion-plasma-systems-resonant-magnetic-perturbations` | fusion-plasma-systems | `alignment-mismatched`, `source-assignment-positional-legacy` |
 | `fusion-plasma-systems-superconducting-quench-protection` | fusion-plasma-systems | `alignment-mismatched`, `source-assignment-positional-legacy` |
 | `fusion-plasma-systems-tokamak-plasma-equilibrium` | fusion-plasma-systems | `alignment-partially-supported`, `source-assignment-positional-legacy` |
@@ -229,34 +227,28 @@ Comparison was genuinely applicable on **0** of 30 pages and calculation on **0*
 | `logical-error-suppression` | quantum-systems | `alignment-insufficient-evidence`, `inspected-locator-missing`, `source-not-content-inspected` |
 | `longevity-metabolism-ampk-energy-sensing` | longevity-metabolism | `alignment-insufficient-evidence`, `inspected-locator-missing`, `source-assignment-positional-legacy`, `source-not-content-inspected` |
 | `longevity-metabolism-atp-linked-respiration` | longevity-metabolism | `alignment-insufficient-evidence`, `inspected-locator-missing`, `source-assignment-positional-legacy`, `source-not-content-inspected` |
-| `longevity-metabolism-autophagic-flux` | longevity-metabolism | `alignment-inaccessible-source`, `inspected-locator-missing`, `source-assignment-positional-legacy`, `source-not-content-inspected` |
-| `longevity-metabolism-autophagosome-abundance` | longevity-metabolism | `alignment-inaccessible-source`, `inspected-locator-missing`, `source-assignment-positional-legacy`, `source-not-content-inspected` |
 | `longevity-metabolism-cd38-nad-consumption` | longevity-metabolism | `alignment-insufficient-evidence`, `inspected-locator-missing`, `source-assignment-positional-legacy`, `source-not-content-inspected` |
 | `longevity-metabolism-insulin-mtor-signaling` | longevity-metabolism | `alignment-insufficient-evidence`, `inspected-locator-missing`, `source-assignment-positional-legacy`, `source-not-content-inspected` |
 | `longevity-metabolism-intervention-biomarker-boundaries` | longevity-metabolism | `alignment-insufficient-evidence`, `inspected-locator-missing`, `source-assignment-positional-legacy`, `source-not-content-inspected` |
-| `longevity-metabolism-lc3-turnover-assays` | longevity-metabolism | `alignment-inaccessible-source`, `inspected-locator-missing`, `source-assignment-positional-legacy`, `source-not-content-inspected` |
 | `longevity-metabolism-lifespan-versus-healthspan-endpoints` | longevity-metabolism | `alignment-insufficient-evidence`, `inspected-locator-missing`, `source-assignment-positional-legacy`, `source-not-content-inspected` |
-| `longevity-metabolism-lysosomal-degradation-blockade` | longevity-metabolism | `alignment-inaccessible-source`, `inspected-locator-missing`, `source-assignment-positional-legacy`, `source-not-content-inspected` |
 | `longevity-metabolism-metabolic-flux-tracing` | longevity-metabolism | `alignment-insufficient-evidence`, `inspected-locator-missing`, `source-assignment-positional-legacy`, `source-not-content-inspected` |
 | `longevity-metabolism-mitochondrial-membrane-potential` | longevity-metabolism | `alignment-partially-supported`, `source-assignment-positional-legacy` |
 | `longevity-metabolism-mitochondrial-uncoupling` | longevity-metabolism | `alignment-partially-supported`, `source-assignment-positional-legacy` |
 | `longevity-metabolism-mitophagy-flux` | longevity-metabolism | `alignment-partially-supported`, `source-assignment-positional-legacy` |
 | `longevity-metabolism-oxygen-consumption-rate` | longevity-metabolism | `alignment-insufficient-evidence`, `inspected-locator-missing`, `source-assignment-positional-legacy`, `source-not-content-inspected` |
-| `longevity-metabolism-p62-sqstm1-turnover` | longevity-metabolism | `alignment-inaccessible-source`, `inspected-locator-missing`, `source-assignment-positional-legacy`, `source-not-content-inspected` |
 | `longevity-metabolism-proton-leak-respiration` | longevity-metabolism | `alignment-insufficient-evidence`, `source-assignment-positional-legacy` |
 | `longevity-metabolism-senescence-associated-secretory-phenotype` | longevity-metabolism | `alignment-partially-supported`, `source-assignment-positional-legacy` |
 | `longevity-metabolism-sirtuin-nad-dependence` | longevity-metabolism | `alignment-insufficient-evidence`, `inspected-locator-missing`, `source-assignment-positional-legacy`, `source-not-content-inspected` |
 | `longevity-metabolism-translation-to-human-outcomes` | longevity-metabolism | `alignment-insufficient-evidence`, `inspected-locator-missing`, `source-assignment-positional-legacy`, `source-not-content-inspected` |
 | `mechanistic-interpretability-activation-patching` | mechanistic-interpretability | `alignment-partially-supported`, `source-assignment-positional-legacy` |
-| `mechanistic-interpretability-automated-feature-interpretation` | mechanistic-interpretability | `alignment-insufficient-evidence`, `inspected-locator-missing`, `source-assignment-positional-legacy`, `source-not-content-inspected` |
+| `mechanistic-interpretability-automated-feature-interpretation` | mechanistic-interpretability | `alignment-mismatched`, `source-assignment-positional-legacy` |
 | `mechanistic-interpretability-benchmark-task-transfer` | mechanistic-interpretability | `alignment-mismatched`, `source-assignment-positional-legacy` |
-| `mechanistic-interpretability-causal-feature-intervention` | mechanistic-interpretability | `alignment-insufficient-evidence`, `inspected-locator-missing`, `source-assignment-positional-legacy`, `source-not-content-inspected` |
+| `mechanistic-interpretability-causal-feature-intervention` | mechanistic-interpretability | `alignment-mismatched`, `source-assignment-positional-legacy` |
 | `mechanistic-interpretability-circuit-completeness` | mechanistic-interpretability | `alignment-mismatched`, `source-assignment-positional-legacy` |
 | `mechanistic-interpretability-circuit-faithfulness` | mechanistic-interpretability | `alignment-mismatched`, `source-assignment-positional-legacy` |
-| `mechanistic-interpretability-cross-layer-transcoders` | mechanistic-interpretability | `alignment-insufficient-evidence`, `inspected-locator-missing`, `source-assignment-positional-legacy`, `source-not-content-inspected` |
-| `mechanistic-interpretability-dead-features` | mechanistic-interpretability | `alignment-insufficient-evidence`, `inspected-locator-missing`, `source-assignment-positional-legacy`, `source-not-content-inspected` |
+| `mechanistic-interpretability-cross-layer-transcoders` | mechanistic-interpretability | `alignment-mismatched`, `source-assignment-positional-legacy` |
+| `mechanistic-interpretability-dead-features` | mechanistic-interpretability | `alignment-mismatched`, `source-assignment-positional-legacy` |
 | `mechanistic-interpretability-feature-absorption` | mechanistic-interpretability | `alignment-insufficient-evidence`, `source-assignment-positional-legacy` |
-| `mechanistic-interpretability-feature-activation-maximization` | mechanistic-interpretability | `alignment-insufficient-evidence`, `inspected-locator-missing`, `source-assignment-positional-legacy`, `source-not-content-inspected` |
 | `mechanistic-interpretability-feature-splitting` | mechanistic-interpretability | `alignment-insufficient-evidence`, `source-assignment-positional-legacy` |
 | `mechanistic-interpretability-interchange-interventions` | mechanistic-interpretability | `alignment-partially-supported`, `source-assignment-positional-legacy` |
 | `mechanistic-interpretability-interpretability-claim-boundaries` | mechanistic-interpretability | `alignment-partially-supported`, `source-assignment-positional-legacy` |
@@ -275,14 +267,11 @@ Comparison was genuinely applicable on **0** of 30 pages and calculation on **0*
 | `neurotechnology-bci-closed-loop-neural-decoding` | neurotechnology-bci | `alignment-insufficient-evidence`, `inspected-locator-missing`, `source-assignment-positional-legacy`, `source-not-content-inspected` |
 | `neurotechnology-bci-cortical-surface-bci` | neurotechnology-bci | `alignment-insufficient-evidence`, `inspected-locator-missing`, `source-assignment-positional-legacy`, `source-not-content-inspected` |
 | `neurotechnology-bci-decoder-update-latency` | neurotechnology-bci | `alignment-insufficient-evidence`, `inspected-locator-missing`, `source-assignment-positional-legacy`, `source-not-content-inspected` |
-| `neurotechnology-bci-electrocorticography-spatial-resolution` | neurotechnology-bci | `alignment-inaccessible-source`, `inspected-locator-missing`, `source-assignment-positional-legacy`, `source-not-content-inspected` |
-| `neurotechnology-bci-electrode-tissue-interface` | neurotechnology-bci | `alignment-inaccessible-source`, `inspected-locator-missing`, `source-assignment-positional-legacy`, `source-not-content-inspected` |
-| `neurotechnology-bci-flexible-conformal-electrode-arrays` | neurotechnology-bci | `alignment-inaccessible-source`, `inspected-locator-missing`, `source-assignment-positional-legacy`, `source-not-content-inspected` |
+| `neurotechnology-bci-electrode-tissue-interface` | neurotechnology-bci | `alignment-partially-supported`, `source-assignment-positional-legacy` |
 | `neurotechnology-bci-foreign-body-response` | neurotechnology-bci | `alignment-inaccessible-source`, `inspected-locator-missing`, `source-assignment-positional-legacy`, `source-not-content-inspected` |
-| `neurotechnology-bci-impedance-and-noise` | neurotechnology-bci | `alignment-inaccessible-source`, `inspected-locator-missing`, `source-assignment-positional-legacy`, `source-not-content-inspected` |
+| `neurotechnology-bci-impedance-and-noise` | neurotechnology-bci | `alignment-partially-supported`, `source-assignment-positional-legacy` |
 | `neurotechnology-bci-intracortical-bci` | neurotechnology-bci | `alignment-insufficient-evidence`, `inspected-locator-missing`, `source-assignment-positional-legacy`, `source-not-content-inspected` |
 | `neurotechnology-bci-light-delivery-tissue-heating` | neurotechnology-bci | `alignment-inaccessible-source`, `inspected-locator-missing`, `source-assignment-positional-legacy`, `source-not-content-inspected` |
-| `neurotechnology-bci-micro-ecog-arrays` | neurotechnology-bci | `alignment-inaccessible-source`, `inspected-locator-missing`, `source-assignment-positional-legacy`, `source-not-content-inspected` |
 | `neurotechnology-bci-motor-intention-decoding` | neurotechnology-bci | `alignment-insufficient-evidence`, `inspected-locator-missing`, `source-assignment-positional-legacy`, `source-not-content-inspected` |
 | `neurotechnology-bci-neural-data-compression` | neurotechnology-bci | `alignment-inaccessible-source`, `inspected-locator-missing`, `source-assignment-positional-legacy`, `source-not-content-inspected` |
 | `neurotechnology-bci-neural-feature-extraction` | neurotechnology-bci | `alignment-insufficient-evidence`, `inspected-locator-missing`, `source-assignment-positional-legacy`, `source-not-content-inspected` |
@@ -316,20 +305,31 @@ These records pass every gate and remain available for a later batch. They were 
 
 | Record | Domain |
 | --- | --- |
+| `biomolecular-engineering-translational-control-circuits` | biomolecular-engineering |
 | `fusion-plasma-systems-cryogenic-magnet-cooling` | fusion-plasma-systems |
+| `fusion-plasma-systems-laser-target-coupling` | fusion-plasma-systems |
 | `fusion-plasma-systems-shattered-pellet-injection` | fusion-plasma-systems |
 | `fusion-plasma-systems-stellarator-field-optimization` | fusion-plasma-systems |
 | `fusion-plasma-systems-stellarator-magnetic-coils` | fusion-plasma-systems |
 | `longevity-metabolism-apoptosis-in-senescent-cells` | longevity-metabolism |
+| `longevity-metabolism-autophagic-flux` | longevity-metabolism |
+| `longevity-metabolism-autophagosome-abundance` | longevity-metabolism |
 | `longevity-metabolism-cellular-senescence-markers` | longevity-metabolism |
+| `longevity-metabolism-lc3-turnover-assays` | longevity-metabolism |
+| `longevity-metabolism-lysosomal-degradation-blockade` | longevity-metabolism |
 | `longevity-metabolism-nad-consumption-by-parps` | longevity-metabolism |
 | `longevity-metabolism-nad-salvage-pathway` | longevity-metabolism |
 | `longevity-metabolism-nampt-rate-limiting-step` | longevity-metabolism |
 | `longevity-metabolism-nmn-and-nr-precursors` | longevity-metabolism |
 | `longevity-metabolism-nmnat-compartmentalization` | longevity-metabolism |
+| `longevity-metabolism-p62-sqstm1-turnover` | longevity-metabolism |
 | `longevity-metabolism-pink1-parkin-pathway` | longevity-metabolism |
 | `longevity-metabolism-senescent-cell-clearance` | longevity-metabolism |
 | `longevity-metabolism-senolytic-selectivity` | longevity-metabolism |
+| `mechanistic-interpretability-feature-activation-maximization` | mechanistic-interpretability |
+| `neurotechnology-bci-electrocorticography-spatial-resolution` | neurotechnology-bci |
+| `neurotechnology-bci-flexible-conformal-electrode-arrays` | neurotechnology-bci |
+| `neurotechnology-bci-micro-ecog-arrays` | neurotechnology-bci |
 
 ## Depth, batch 1 and batch 2 reported separately
 

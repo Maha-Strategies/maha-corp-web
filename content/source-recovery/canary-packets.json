@@ -89,7 +89,8 @@
         "urn:maha:record:agentic-systems-mcp-tool-output-trust-boundaries"
       ],
       "currentAlignmentStates": [
-        "insufficient-evidence"
+        "mismatched",
+        "partially-supported"
       ],
       "priority": 19,
       "requests": [
@@ -118,7 +119,7 @@
       "disposition": "not-attempted",
       "inspectionAuthorized": false,
       "canonicalMutationAuthorized": false,
-      "digest": "sha256:7f9e989bdc24f7b159e32b66b960b349ea42a1b50cb996469be56ee9bb0dc2b6"
+      "digest": "sha256:068e6ff1c76f43795467eb11b7b93e1e5a87051613bfdace4ba443108362b2d4"
     },
     {
       "schemaVersion": "maha-source-recovery/1.0",
@@ -136,7 +137,9 @@
         "urn:maha:record:biomolecular-engineering-translational-control-circuits"
       ],
       "currentAlignmentStates": [
-        "inaccessible-source"
+        "mismatched",
+        "partially-supported",
+        "supported"
       ],
       "priority": 18,
       "requests": [
@@ -185,7 +188,7 @@
       "disposition": "not-attempted",
       "inspectionAuthorized": false,
       "canonicalMutationAuthorized": false,
-      "digest": "sha256:9d43a3dc970344f940e633f25e77cb06e14aa2f6fcc009228f96c6bfe4d35909"
+      "digest": "sha256:5c8dbf2078f40559bd1e4d33f445f18b82004a40039227f922dfa1eb1ff35b88"
     },
     {
       "schemaVersion": "maha-source-recovery/1.0",
@@ -322,7 +325,8 @@
         "urn:maha:record:critical-supply-chains-tungsten-concentrate-processing"
       ],
       "currentAlignmentStates": [
-        "inaccessible-source"
+        "mismatched",
+        "partially-supported"
       ],
       "priority": 15,
       "requests": [
@@ -356,7 +360,7 @@
       "disposition": "not-attempted",
       "inspectionAuthorized": false,
       "canonicalMutationAuthorized": false,
-      "digest": "sha256:fa6cddb5dc0b23fa5bd0c8cf284014477fa7b9d3e0635c4f877bb54cbf6875c1"
+      "digest": "sha256:9bd5b686050201b80c7cdcb0a33a4c52aa5c365c8fde28450d26895f07e93df1"
     },
     {
       "schemaVersion": "maha-source-recovery/1.0",
@@ -478,7 +482,9 @@
         "urn:maha:record:fusion-plasma-systems-remote-handling-maintenance"
       ],
       "currentAlignmentStates": [
-        "insufficient-evidence"
+        "mismatched",
+        "partially-supported",
+        "supported"
       ],
       "priority": 12,
       "requests": [
@@ -507,7 +513,7 @@
       "disposition": "not-attempted",
       "inspectionAuthorized": false,
       "canonicalMutationAuthorized": false,
-      "digest": "sha256:020f61107d6b5aa6869bda20554fa265fb25e8810f1ccaabe8f8d836ea8fc42b"
+      "digest": "sha256:f30c1b152ef15ed0970f7eb84cf130ee64b09840206dc2c10b38a5541572266f"
     },
     {
       "schemaVersion": "maha-source-recovery/1.0",
@@ -525,7 +531,7 @@
         "urn:maha:record:longevity-metabolism-p62-sqstm1-turnover"
       ],
       "currentAlignmentStates": [
-        "inaccessible-source"
+        "supported"
       ],
       "priority": 11,
       "requests": [
@@ -574,7 +580,7 @@
       "disposition": "not-attempted",
       "inspectionAuthorized": false,
       "canonicalMutationAuthorized": false,
-      "digest": "sha256:98f2245f814f78e00b895f8a8e04fdb45521609cef50f55a45b0353d5843bafc"
+      "digest": "sha256:54e3d6710b626ad7aa8efbbe350196e75e638f22adbb90c1cd2b7fab6b13efbe"
     },
     {
       "schemaVersion": "maha-source-recovery/1.0",
@@ -777,7 +783,8 @@
         "urn:maha:record:mechanistic-interpretability-feature-activation-maximization"
       ],
       "currentAlignmentStates": [
-        "insufficient-evidence"
+        "mismatched",
+        "supported"
       ],
       "priority": 7,
       "requests": [
@@ -826,7 +833,7 @@
       "disposition": "not-attempted",
       "inspectionAuthorized": false,
       "canonicalMutationAuthorized": false,
-      "digest": "sha256:016a414e171c3860c63a5fe13b8645562d135aa7e9401196237c87d6b0c0c0ab"
+      "digest": "sha256:4a6c9668a275192308e7566e9956391a28613a09842a1d7e542fa5bb2e582f69"
     },
     {
       "schemaVersion": "maha-source-recovery/1.0",
@@ -1113,7 +1120,8 @@
         "urn:maha:record:neurotechnology-bci-micro-ecog-arrays"
       ],
       "currentAlignmentStates": [
-        "inaccessible-source"
+        "partially-supported",
+        "supported"
       ],
       "priority": 2,
       "requests": [
@@ -1162,7 +1170,7 @@
       "disposition": "not-attempted",
       "inspectionAuthorized": false,
       "canonicalMutationAuthorized": false,
-      "digest": "sha256:4673e8a7b229443d25b57164f48250b26e02f8ad0082c7f3568d30ef90a99c0f"
+      "digest": "sha256:b209c14e5e3dc8418c179bf0cd3de6eb0687606b483f3a22388255eb6439d906"
     },
     {
       "schemaVersion": "maha-source-recovery/1.0",

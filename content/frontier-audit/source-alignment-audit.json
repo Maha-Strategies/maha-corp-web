@@ -1,27 +1,27 @@
 {
   "schemaVersion": "maha-frontier-source-alignment/1.0",
   "auditInputDate": "2026-08-26",
-  "auditDigest": "sha256:bbde7321ce6987471bcbf900519cf941316fdf3df6497f9c8d30309265f6a8c5",
+  "auditDigest": "sha256:f158afe8ed6e503976260f805bf29a1a42568be95eb531b64bfcc82866883ead",
   "totals": {
     "records": 240,
-    "internallyInspectedSourceCount": 146,
-    "metadataResolvedContentNotInspected": 64,
+    "internallyInspectedSourceCount": 181,
+    "metadataResolvedContentNotInspected": 44,
     "chronologicalRiskIndicators": 4,
     "corrected": 2,
-    "alignmentClear": 59,
-    "blocked": 181
+    "alignmentClear": 70,
+    "blocked": 170
   },
   "verdictTotals": {
-    "supported": 59,
-    "partially-supported": 26,
-    "mismatched": 55,
-    "insufficient-evidence": 60,
-    "inaccessible-source": 40
+    "supported": 70,
+    "partially-supported": 37,
+    "mismatched": 68,
+    "insufficient-evidence": 40,
+    "inaccessible-source": 25
   },
   "originTotals": {
     "explicit-override": 2,
-    "positional-legacy": 181,
-    "independently-curated": 57
+    "positional-legacy": 170,
+    "independently-curated": 68
   },
   "batchStats": [
     {
@@ -49,13 +49,13 @@
     {
       "batchId": "batch-3",
       "attempted": 50,
-      "contentInspected": 40,
-      "inaccessible": 10,
-      "supported": 16,
-      "partiallySupported": 12,
+      "contentInspected": 50,
+      "inaccessible": 0,
+      "supported": 24,
+      "partiallySupported": 14,
       "mismatched": 12,
       "insufficientEvidence": 0,
-      "alignmentClear": 16
+      "alignmentClear": 24
     },
     {
       "batchId": "batch-4",
@@ -71,24 +71,24 @@
     {
       "batchId": "batch-5",
       "attempted": 40,
-      "contentInspected": 25,
-      "inaccessible": 15,
-      "supported": 3,
-      "partiallySupported": 4,
-      "mismatched": 17,
+      "contentInspected": 35,
+      "inaccessible": 5,
+      "supported": 4,
+      "partiallySupported": 9,
+      "mismatched": 21,
       "insufficientEvidence": 1,
-      "alignmentClear": 3
+      "alignmentClear": 4
     },
     {
       "batchId": "batch-6",
       "attempted": 40,
-      "contentInspected": 5,
-      "inaccessible": 5,
-      "supported": 3,
-      "partiallySupported": 1,
-      "mismatched": 1,
-      "insufficientEvidence": 30,
-      "alignmentClear": 3
+      "contentInspected": 15,
+      "inaccessible": 10,
+      "supported": 4,
+      "partiallySupported": 5,
+      "mismatched": 6,
+      "insufficientEvidence": 15,
+      "alignmentClear": 4
     }
   ],
   "batch5Reinspections": [
@@ -117,13 +117,13 @@
     }
   ],
   "blockerTotals": {
-    "source-alignment-insufficient-evidence": 60,
-    "source-assignment-positional-legacy": 181,
-    "source-not-inspected": 94,
-    "source-subject-mismatched": 55,
-    "source-subject-partially-supported": 26,
-    "source-metadata-unverified": 35,
-    "source-inaccessible": 40
+    "source-assignment-positional-legacy": 170,
+    "source-inaccessible": 25,
+    "source-not-inspected": 59,
+    "source-subject-mismatched": 68,
+    "source-subject-partially-supported": 37,
+    "source-alignment-insufficient-evidence": 40,
+    "source-metadata-unverified": 20
   },
   "records": [
     {
@@ -148,7 +148,7 @@
         "metadataNote": "Crossref resolves this identifier to \"An assessment of wide bandgap semiconductors for power devices\" in IEEE Transactions on Power Electronics (2003). Registry resolution confirms the document exists; it does not establish subject alignment.",
         "sourceContentInspected": false,
         "inspectedContentLocation": null,
-        "subjectAligned": "insufficient-evidence",
+        "subjectAligned": "inaccessible-source",
         "mismatchBasis": null,
         "chronologicalRiskIndicator": false,
         "claimSupported": false,
@@ -158,17 +158,25 @@
         "inspectedArtifactVersion": "not-inspected",
         "inspectionDepth": "not-inspected",
         "versionRelationshipVerified": false,
-        "recoveryDisposition": "not-attempted"
+        "recoveryDisposition": "authentication-wall"
       },
-      "reason": "This source contract was not among the twenty in the recovery canary, so no open copy was sought and the content was not read. Metadata resolution is not content inspection, so nothing is established about whether this source supports the record subject.",
+      "reason": "The declared IEEE article is closed-access. Crossref and the institutional record verify its identity, while OpenAlex reports no open repository copy; no article content was accepted for inspection.",
       "transcriptionConfidence": "high",
-      "remediation": "Obtain an inspectable copy, read it against this record subject, then confirm or replace.",
+      "remediation": "Obtain an authorized copy of Hudgins et al. 2003 and judge each subject from the actual pages 907–914.",
       "priorMapping": null,
-      "priorJudgement": null,
+      "priorJudgement": {
+        "batchId": "batch-6",
+        "verdict": "insufficient-evidence",
+        "sourceContentInspected": false,
+        "inspectionDepth": "not-inspected",
+        "inspectedContentLocation": null,
+        "reason": "This source contract was not among the twenty in the recovery canary, so no open copy was sought and the content was not read. Metadata resolution is not content inspection, so nothing is established about whether this source supports the record subject.",
+        "priorJudgement": null
+      },
       "proposedSourceOverride": null,
       "blockers": [
-        "source-alignment-insufficient-evidence",
         "source-assignment-positional-legacy",
+        "source-inaccessible",
         "source-not-inspected"
       ]
     },
@@ -332,7 +340,7 @@
         "metadataNote": "Crossref resolves this identifier to \"An assessment of wide bandgap semiconductors for power devices\" in IEEE Transactions on Power Electronics (2003). Registry resolution confirms the document exists; it does not establish subject alignment.",
         "sourceContentInspected": false,
         "inspectedContentLocation": null,
-        "subjectAligned": "insufficient-evidence",
+        "subjectAligned": "inaccessible-source",
         "mismatchBasis": null,
         "chronologicalRiskIndicator": false,
         "claimSupported": false,
@@ -342,17 +350,25 @@
         "inspectedArtifactVersion": "not-inspected",
         "inspectionDepth": "not-inspected",
         "versionRelationshipVerified": false,
-        "recoveryDisposition": "not-attempted"
+        "recoveryDisposition": "authentication-wall"
       },
-      "reason": "This source contract was not among the twenty in the recovery canary, so no open copy was sought and the content was not read. Metadata resolution is not content inspection, so nothing is established about whether this source supports the record subject.",
+      "reason": "The declared IEEE article is closed-access. Crossref and the institutional record verify its identity, while OpenAlex reports no open repository copy; no article content was accepted for inspection.",
       "transcriptionConfidence": "high",
-      "remediation": "Obtain an inspectable copy, read it against this record subject, then confirm or replace.",
+      "remediation": "Obtain an authorized copy of Hudgins et al. 2003 and judge each subject from the actual pages 907–914.",
       "priorMapping": null,
-      "priorJudgement": null,
+      "priorJudgement": {
+        "batchId": "batch-6",
+        "verdict": "insufficient-evidence",
+        "sourceContentInspected": false,
+        "inspectionDepth": "not-inspected",
+        "inspectedContentLocation": null,
+        "reason": "This source contract was not among the twenty in the recovery canary, so no open copy was sought and the content was not read. Metadata resolution is not content inspection, so nothing is established about whether this source supports the record subject.",
+        "priorJudgement": null
+      },
       "proposedSourceOverride": null,
       "blockers": [
-        "source-alignment-insufficient-evidence",
         "source-assignment-positional-legacy",
+        "source-inaccessible",
         "source-not-inspected"
       ]
     },
@@ -378,7 +394,7 @@
         "metadataNote": "Crossref resolves this identifier to \"An assessment of wide bandgap semiconductors for power devices\" in IEEE Transactions on Power Electronics (2003). Registry resolution confirms the document exists; it does not establish subject alignment.",
         "sourceContentInspected": false,
         "inspectedContentLocation": null,
-        "subjectAligned": "insufficient-evidence",
+        "subjectAligned": "inaccessible-source",
         "mismatchBasis": null,
         "chronologicalRiskIndicator": false,
         "claimSupported": false,
@@ -388,17 +404,25 @@
         "inspectedArtifactVersion": "not-inspected",
         "inspectionDepth": "not-inspected",
         "versionRelationshipVerified": false,
-        "recoveryDisposition": "not-attempted"
+        "recoveryDisposition": "authentication-wall"
       },
-      "reason": "This source contract was not among the twenty in the recovery canary, so no open copy was sought and the content was not read. Metadata resolution is not content inspection, so nothing is established about whether this source supports the record subject.",
+      "reason": "The declared IEEE article is closed-access. Crossref and the institutional record verify its identity, while OpenAlex reports no open repository copy; no article content was accepted for inspection.",
       "transcriptionConfidence": "high",
-      "remediation": "Obtain an inspectable copy, read it against this record subject, then confirm or replace.",
+      "remediation": "Obtain an authorized copy of Hudgins et al. 2003 and judge each subject from the actual pages 907–914.",
       "priorMapping": null,
-      "priorJudgement": null,
+      "priorJudgement": {
+        "batchId": "batch-6",
+        "verdict": "insufficient-evidence",
+        "sourceContentInspected": false,
+        "inspectionDepth": "not-inspected",
+        "inspectedContentLocation": null,
+        "reason": "This source contract was not among the twenty in the recovery canary, so no open copy was sought and the content was not read. Metadata resolution is not content inspection, so nothing is established about whether this source supports the record subject.",
+        "priorJudgement": null
+      },
       "proposedSourceOverride": null,
       "blockers": [
-        "source-alignment-insufficient-evidence",
         "source-assignment-positional-legacy",
+        "source-inaccessible",
         "source-not-inspected"
       ]
     },
@@ -603,7 +627,7 @@
         "metadataNote": "Crossref resolves this identifier to \"An assessment of wide bandgap semiconductors for power devices\" in IEEE Transactions on Power Electronics (2003). Registry resolution confirms the document exists; it does not establish subject alignment.",
         "sourceContentInspected": false,
         "inspectedContentLocation": null,
-        "subjectAligned": "insufficient-evidence",
+        "subjectAligned": "inaccessible-source",
         "mismatchBasis": null,
         "chronologicalRiskIndicator": false,
         "claimSupported": false,
@@ -613,17 +637,25 @@
         "inspectedArtifactVersion": "not-inspected",
         "inspectionDepth": "not-inspected",
         "versionRelationshipVerified": false,
-        "recoveryDisposition": "not-attempted"
+        "recoveryDisposition": "authentication-wall"
       },
-      "reason": "This source contract was not among the twenty in the recovery canary, so no open copy was sought and the content was not read. Metadata resolution is not content inspection, so nothing is established about whether this source supports the record subject.",
+      "reason": "The declared IEEE article is closed-access. Crossref and the institutional record verify its identity, while OpenAlex reports no open repository copy; no article content was accepted for inspection.",
       "transcriptionConfidence": "high",
-      "remediation": "Obtain an inspectable copy, read it against this record subject, then confirm or replace.",
+      "remediation": "Obtain an authorized copy of Hudgins et al. 2003 and judge each subject from the actual pages 907–914.",
       "priorMapping": null,
-      "priorJudgement": null,
+      "priorJudgement": {
+        "batchId": "batch-6",
+        "verdict": "insufficient-evidence",
+        "sourceContentInspected": false,
+        "inspectionDepth": "not-inspected",
+        "inspectedContentLocation": null,
+        "reason": "This source contract was not among the twenty in the recovery canary, so no open copy was sought and the content was not read. Metadata resolution is not content inspection, so nothing is established about whether this source supports the record subject.",
+        "priorJudgement": null
+      },
       "proposedSourceOverride": null,
       "blockers": [
-        "source-alignment-insufficient-evidence",
         "source-assignment-positional-legacy",
+        "source-inaccessible",
         "source-not-inspected"
       ]
     },
@@ -1059,7 +1091,7 @@
         "metadataNote": "Crossref resolves this identifier to \"An assessment of wide bandgap semiconductors for power devices\" in IEEE Transactions on Power Electronics (2003). Registry resolution confirms the document exists; it does not establish subject alignment.",
         "sourceContentInspected": false,
         "inspectedContentLocation": null,
-        "subjectAligned": "insufficient-evidence",
+        "subjectAligned": "inaccessible-source",
         "mismatchBasis": null,
         "chronologicalRiskIndicator": false,
         "claimSupported": false,
@@ -1069,17 +1101,25 @@
         "inspectedArtifactVersion": "not-inspected",
         "inspectionDepth": "not-inspected",
         "versionRelationshipVerified": false,
-        "recoveryDisposition": "not-attempted"
+        "recoveryDisposition": "authentication-wall"
       },
-      "reason": "This source contract was not among the twenty in the recovery canary, so no open copy was sought and the content was not read. Metadata resolution is not content inspection, so nothing is established about whether this source supports the record subject.",
+      "reason": "The declared IEEE article is closed-access. Crossref and the institutional record verify its identity, while OpenAlex reports no open repository copy; no article content was accepted for inspection.",
       "transcriptionConfidence": "high",
-      "remediation": "Obtain an inspectable copy, read it against this record subject, then confirm or replace.",
+      "remediation": "Obtain an authorized copy of Hudgins et al. 2003 and judge each subject from the actual pages 907–914.",
       "priorMapping": null,
-      "priorJudgement": null,
+      "priorJudgement": {
+        "batchId": "batch-6",
+        "verdict": "insufficient-evidence",
+        "sourceContentInspected": false,
+        "inspectionDepth": "not-inspected",
+        "inspectedContentLocation": null,
+        "reason": "This source contract was not among the twenty in the recovery canary, so no open copy was sought and the content was not read. Metadata resolution is not content inspection, so nothing is established about whether this source supports the record subject.",
+        "priorJudgement": null
+      },
       "proposedSourceOverride": null,
       "blockers": [
-        "source-alignment-insufficient-evidence",
         "source-assignment-positional-legacy",
+        "source-inaccessible",
         "source-not-inspected"
       ]
     },
@@ -1507,34 +1547,40 @@
       "locator": "Agent roles, conversation patterns, implementation, applications, and limitations.",
       "assignmentOrigin": "positional-legacy",
       "evidence": {
-        "metadataVerified": false,
-        "metadataMethod": "none",
-        "metadataNote": "No DOI or other registry identifier is declared, and the publisher page was not fetched during this audit.",
-        "sourceContentInspected": false,
-        "inspectedContentLocation": null,
-        "subjectAligned": "insufficient-evidence",
+        "metadataVerified": true,
+        "metadataMethod": "publisher-page",
+        "metadataNote": "Fetched arXiv:2308.08155v2 from arxiv.org and inspected the complete HTML article carrying the declared title and authors.",
+        "sourceContentInspected": true,
+        "inspectedContentLocation": "arXiv:2308.08155v2, §§2.1–2.2 and §§3–4 (complete HTML article inspected)",
+        "subjectAligned": "partially-supported",
         "mismatchBasis": null,
         "chronologicalRiskIndicator": false,
         "claimSupported": false,
         "sourceIndependentOfOtherCitedSources": null,
         "independentlyReproduced": false,
         "externallyReviewed": false,
-        "inspectedArtifactVersion": "not-inspected",
-        "inspectionDepth": "not-inspected",
-        "versionRelationshipVerified": false,
-        "recoveryDisposition": "version-relationship-unverified"
+        "inspectedArtifactVersion": "repository-copy",
+        "inspectionDepth": "full-document",
+        "versionRelationshipVerified": true,
+        "recoveryDisposition": "open-copy-located"
       },
-      "reason": "Recovery resolved metadata but could not tie any located artifact to the declared citation, so no copy was accepted and the content was not read. Metadata resolution is not content inspection, so nothing is established about whether this source supports the record subject.",
-      "transcriptionConfidence": "low",
-      "remediation": "Obtain an inspectable copy, read it against this record subject, then confirm or replace.",
+      "reason": "AutoGen states that a conversable agent maintains internal context from sent and received messages, but it does not define persistence, retention, or isolation boundaries for agent memory.",
+      "transcriptionConfidence": "high",
+      "remediation": "Narrow to conversation-context state or bind a source that specifies memory isolation and retention.",
       "priorMapping": null,
-      "priorJudgement": null,
+      "priorJudgement": {
+        "batchId": "batch-6",
+        "verdict": "insufficient-evidence",
+        "sourceContentInspected": false,
+        "inspectionDepth": "not-inspected",
+        "inspectedContentLocation": null,
+        "reason": "Recovery resolved metadata but could not tie any located artifact to the declared citation, so no copy was accepted and the content was not read. Metadata resolution is not content inspection, so nothing is established about whether this source supports the record subject.",
+        "priorJudgement": null
+      },
       "proposedSourceOverride": null,
       "blockers": [
-        "source-alignment-insufficient-evidence",
         "source-assignment-positional-legacy",
-        "source-metadata-unverified",
-        "source-not-inspected"
+        "source-subject-partially-supported"
       ]
     },
     {
@@ -1599,34 +1645,40 @@
       "locator": "Agent roles, conversation patterns, implementation, applications, and limitations.",
       "assignmentOrigin": "positional-legacy",
       "evidence": {
-        "metadataVerified": false,
-        "metadataMethod": "none",
-        "metadataNote": "No DOI or other registry identifier is declared, and the publisher page was not fetched during this audit.",
-        "sourceContentInspected": false,
-        "inspectedContentLocation": null,
-        "subjectAligned": "insufficient-evidence",
+        "metadataVerified": true,
+        "metadataMethod": "publisher-page",
+        "metadataNote": "Fetched arXiv:2308.08155v2 from arxiv.org and inspected the complete HTML article carrying the declared title and authors.",
+        "sourceContentInspected": true,
+        "inspectedContentLocation": "arXiv:2308.08155v2, §§2.1–2.2 and §§3–4 (complete HTML article inspected)",
+        "subjectAligned": "partially-supported",
         "mismatchBasis": null,
         "chronologicalRiskIndicator": false,
         "claimSupported": false,
         "sourceIndependentOfOtherCitedSources": null,
         "independentlyReproduced": false,
         "externallyReviewed": false,
-        "inspectedArtifactVersion": "not-inspected",
-        "inspectionDepth": "not-inspected",
-        "versionRelationshipVerified": false,
-        "recoveryDisposition": "version-relationship-unverified"
+        "inspectedArtifactVersion": "repository-copy",
+        "inspectionDepth": "full-document",
+        "versionRelationshipVerified": true,
+        "recoveryDisposition": "open-copy-located"
       },
-      "reason": "Recovery resolved metadata but could not tie any located artifact to the declared citation, so no copy was accepted and the content was not read. Metadata resolution is not content inspection, so nothing is established about whether this source supports the record subject.",
-      "transcriptionConfidence": "low",
-      "remediation": "Obtain an inspectable copy, read it against this record subject, then confirm or replace.",
+      "reason": "The paper reports benchmarks, pilot studies, ablations, and manually crafted tasks, but not a reusable or preregistered agent-evaluation protocol.",
+      "transcriptionConfidence": "high",
+      "remediation": "Narrow to the paper’s reported evaluations or bind a protocol source with declared tasks, metrics, and controls.",
       "priorMapping": null,
-      "priorJudgement": null,
+      "priorJudgement": {
+        "batchId": "batch-6",
+        "verdict": "insufficient-evidence",
+        "sourceContentInspected": false,
+        "inspectionDepth": "not-inspected",
+        "inspectedContentLocation": null,
+        "reason": "Recovery resolved metadata but could not tie any located artifact to the declared citation, so no copy was accepted and the content was not read. Metadata resolution is not content inspection, so nothing is established about whether this source supports the record subject.",
+        "priorJudgement": null
+      },
       "proposedSourceOverride": null,
       "blockers": [
-        "source-alignment-insufficient-evidence",
         "source-assignment-positional-legacy",
-        "source-metadata-unverified",
-        "source-not-inspected"
+        "source-subject-partially-supported"
       ]
     },
     {
@@ -1778,34 +1830,40 @@
       "locator": "Agent roles, conversation patterns, implementation, applications, and limitations.",
       "assignmentOrigin": "positional-legacy",
       "evidence": {
-        "metadataVerified": false,
-        "metadataMethod": "none",
-        "metadataNote": "No DOI or other registry identifier is declared, and the publisher page was not fetched during this audit.",
-        "sourceContentInspected": false,
-        "inspectedContentLocation": null,
-        "subjectAligned": "insufficient-evidence",
-        "mismatchBasis": null,
+        "metadataVerified": true,
+        "metadataMethod": "publisher-page",
+        "metadataNote": "Fetched arXiv:2308.08155v2 from arxiv.org and inspected the complete HTML article carrying the declared title and authors.",
+        "sourceContentInspected": true,
+        "inspectedContentLocation": "arXiv:2308.08155v2, §§2.1–2.2 and §§3–4 (complete HTML article inspected)",
+        "subjectAligned": "mismatched",
+        "mismatchBasis": "inspected-content-different-subject",
         "chronologicalRiskIndicator": false,
         "claimSupported": false,
         "sourceIndependentOfOtherCitedSources": null,
         "independentlyReproduced": false,
         "externallyReviewed": false,
-        "inspectedArtifactVersion": "not-inspected",
-        "inspectionDepth": "not-inspected",
-        "versionRelationshipVerified": false,
-        "recoveryDisposition": "version-relationship-unverified"
+        "inspectedArtifactVersion": "repository-copy",
+        "inspectionDepth": "full-document",
+        "versionRelationshipVerified": true,
+        "recoveryDisposition": "open-copy-located"
       },
-      "reason": "Recovery resolved metadata but could not tie any located artifact to the declared citation, so no copy was accepted and the content was not read. Metadata resolution is not content inspection, so nothing is established about whether this source supports the record subject.",
-      "transcriptionConfidence": "low",
-      "remediation": "Obtain an inspectable copy, read it against this record subject, then confirm or replace.",
+      "reason": "The full article concerns configurable multi-agent conversation and applications; it supplies no game-theoretic incentive model or incentive-misalignment result.",
+      "transcriptionConfidence": "high",
+      "remediation": "Bind a source that defines agents, utilities, strategic choices, and the claimed misalignment outcome.",
       "priorMapping": null,
-      "priorJudgement": null,
+      "priorJudgement": {
+        "batchId": "batch-6",
+        "verdict": "insufficient-evidence",
+        "sourceContentInspected": false,
+        "inspectionDepth": "not-inspected",
+        "inspectedContentLocation": null,
+        "reason": "Recovery resolved metadata but could not tie any located artifact to the declared citation, so no copy was accepted and the content was not read. Metadata resolution is not content inspection, so nothing is established about whether this source supports the record subject.",
+        "priorJudgement": null
+      },
       "proposedSourceOverride": null,
       "blockers": [
-        "source-alignment-insufficient-evidence",
         "source-assignment-positional-legacy",
-        "source-metadata-unverified",
-        "source-not-inspected"
+        "source-subject-mismatched"
       ]
     },
     {
@@ -2418,34 +2476,40 @@
       "locator": "Agent roles, conversation patterns, implementation, applications, and limitations.",
       "assignmentOrigin": "positional-legacy",
       "evidence": {
-        "metadataVerified": false,
-        "metadataMethod": "none",
-        "metadataNote": "No DOI or other registry identifier is declared, and the publisher page was not fetched during this audit.",
-        "sourceContentInspected": false,
-        "inspectedContentLocation": null,
-        "subjectAligned": "insufficient-evidence",
-        "mismatchBasis": null,
+        "metadataVerified": true,
+        "metadataMethod": "publisher-page",
+        "metadataNote": "Fetched arXiv:2308.08155v2 from arxiv.org and inspected the complete HTML article carrying the declared title and authors.",
+        "sourceContentInspected": true,
+        "inspectedContentLocation": "arXiv:2308.08155v2, §§2.1–2.2 and §§3–4 (complete HTML article inspected)",
+        "subjectAligned": "mismatched",
+        "mismatchBasis": "inspected-content-different-subject",
         "chronologicalRiskIndicator": false,
         "claimSupported": false,
         "sourceIndependentOfOtherCitedSources": null,
         "independentlyReproduced": false,
         "externallyReviewed": false,
-        "inspectedArtifactVersion": "not-inspected",
-        "inspectionDepth": "not-inspected",
-        "versionRelationshipVerified": false,
-        "recoveryDisposition": "version-relationship-unverified"
+        "inspectedArtifactVersion": "repository-copy",
+        "inspectionDepth": "full-document",
+        "versionRelationshipVerified": true,
+        "recoveryDisposition": "open-copy-located"
       },
-      "reason": "Recovery resolved metadata but could not tie any located artifact to the declared citation, so no copy was accepted and the content was not read. Metadata resolution is not content inspection, so nothing is established about whether this source supports the record subject.",
-      "transcriptionConfidence": "low",
-      "remediation": "Obtain an inspectable copy, read it against this record subject, then confirm or replace.",
+      "reason": "The inspected paper describes tool and code execution but does not study prompt injection through tool inputs or outputs.",
+      "transcriptionConfidence": "high",
+      "remediation": "Bind an empirical or security-analysis source that tests indirect prompt injection through tools.",
       "priorMapping": null,
-      "priorJudgement": null,
+      "priorJudgement": {
+        "batchId": "batch-6",
+        "verdict": "insufficient-evidence",
+        "sourceContentInspected": false,
+        "inspectionDepth": "not-inspected",
+        "inspectedContentLocation": null,
+        "reason": "Recovery resolved metadata but could not tie any located artifact to the declared citation, so no copy was accepted and the content was not read. Metadata resolution is not content inspection, so nothing is established about whether this source supports the record subject.",
+        "priorJudgement": null
+      },
       "proposedSourceOverride": null,
       "blockers": [
-        "source-alignment-insufficient-evidence",
         "source-assignment-positional-legacy",
-        "source-metadata-unverified",
-        "source-not-inspected"
+        "source-subject-mismatched"
       ]
     },
     {
@@ -2689,34 +2753,40 @@
       "locator": "Agent roles, conversation patterns, implementation, applications, and limitations.",
       "assignmentOrigin": "positional-legacy",
       "evidence": {
-        "metadataVerified": false,
-        "metadataMethod": "none",
-        "metadataNote": "No DOI or other registry identifier is declared, and the publisher page was not fetched during this audit.",
-        "sourceContentInspected": false,
-        "inspectedContentLocation": null,
-        "subjectAligned": "insufficient-evidence",
+        "metadataVerified": true,
+        "metadataMethod": "publisher-page",
+        "metadataNote": "Fetched arXiv:2308.08155v2 from arxiv.org and inspected the complete HTML article carrying the declared title and authors.",
+        "sourceContentInspected": true,
+        "inspectedContentLocation": "arXiv:2308.08155v2, §§2.1–2.2 and §§3–4 (complete HTML article inspected)",
+        "subjectAligned": "partially-supported",
         "mismatchBasis": null,
         "chronologicalRiskIndicator": false,
         "claimSupported": false,
         "sourceIndependentOfOtherCitedSources": null,
         "independentlyReproduced": false,
         "externallyReviewed": false,
-        "inspectedArtifactVersion": "not-inspected",
-        "inspectionDepth": "not-inspected",
-        "versionRelationshipVerified": false,
-        "recoveryDisposition": "version-relationship-unverified"
+        "inspectedArtifactVersion": "repository-copy",
+        "inspectionDepth": "full-document",
+        "versionRelationshipVerified": true,
+        "recoveryDisposition": "open-copy-located"
       },
-      "reason": "Recovery resolved metadata but could not tie any located artifact to the declared citation, so no copy was accepted and the content was not read. Metadata resolution is not content inspection, so nothing is established about whether this source supports the record subject.",
-      "transcriptionConfidence": "low",
-      "remediation": "Obtain an inspectable copy, read it against this record subject, then confirm or replace.",
+      "reason": "The OptiGuide example places a safeguard before code execution, but the paper does not define a general trust boundary for arbitrary tool outputs.",
+      "transcriptionConfidence": "high",
+      "remediation": "Narrow to the demonstrated code-safeguard workflow or bind a general tool-output validation source.",
       "priorMapping": null,
-      "priorJudgement": null,
+      "priorJudgement": {
+        "batchId": "batch-6",
+        "verdict": "insufficient-evidence",
+        "sourceContentInspected": false,
+        "inspectionDepth": "not-inspected",
+        "inspectedContentLocation": null,
+        "reason": "Recovery resolved metadata but could not tie any located artifact to the declared citation, so no copy was accepted and the content was not read. Metadata resolution is not content inspection, so nothing is established about whether this source supports the record subject.",
+        "priorJudgement": null
+      },
       "proposedSourceOverride": null,
       "blockers": [
-        "source-alignment-insufficient-evidence",
         "source-assignment-positional-legacy",
-        "source-metadata-unverified",
-        "source-not-inspected"
+        "source-subject-partially-supported"
       ]
     },
     {
@@ -2914,30 +2984,36 @@
         "metadataVerified": true,
         "metadataMethod": "crossref-rest",
         "metadataNote": "Crossref resolves this identifier to \"Paper-Based Synthetic Gene Networks\" in Cell (2014). Registry resolution confirms the document exists; it does not establish subject alignment.",
-        "sourceContentInspected": false,
-        "inspectedContentLocation": null,
-        "subjectAligned": "inaccessible-source",
-        "mismatchBasis": null,
+        "sourceContentInspected": true,
+        "inspectedContentLocation": "PMC4243060, abstract, Development of paper-based technology, toehold-switch results, Discussion, and Experimental Procedures",
+        "subjectAligned": "mismatched",
+        "mismatchBasis": "inspected-content-different-subject",
         "chronologicalRiskIndicator": false,
         "claimSupported": false,
         "sourceIndependentOfOtherCitedSources": null,
         "independentlyReproduced": false,
         "externallyReviewed": false,
-        "inspectedArtifactVersion": "not-inspected",
-        "inspectionDepth": "not-inspected",
-        "versionRelationshipVerified": false,
-        "recoveryDisposition": "not-attempted"
+        "inspectedArtifactVersion": "accepted-manuscript",
+        "inspectionDepth": "full-document",
+        "versionRelationshipVerified": true,
+        "recoveryDisposition": "open-copy-located"
       },
-      "reason": "Retrieval was attempted for batch 5 through PMC. The retrieved article was a different paper (Green et al., toehold switches) rather than the bound source, so the bound source was never inspected and nothing was judged from the wrong artifact.",
+      "reason": "The paper embeds cell-free systems in paper and other porous substrates. It mentions liposome work as prior art but does not demonstrate a compartmentalized cell-free system.",
       "transcriptionConfidence": "high",
-      "remediation": "Obtain the artifact through a retrievable route, inspect it, then confirm or replace the mapping.",
+      "remediation": "Bind a source that experimentally implements cell-free reactions in droplets, vesicles, or other compartments.",
       "priorMapping": null,
-      "priorJudgement": null,
+      "priorJudgement": {
+        "batchId": "batch-5",
+        "verdict": "inaccessible-source",
+        "sourceContentInspected": false,
+        "inspectedContentLocation": null,
+        "reason": "Retrieval was attempted for batch 5 through PMC. The retrieved article was a different paper (Green et al., toehold switches) rather than the bound source, so the bound source was never inspected and nothing was judged from the wrong artifact.",
+        "priorJudgement": null
+      },
       "proposedSourceOverride": null,
       "blockers": [
         "source-assignment-positional-legacy",
-        "source-inaccessible",
-        "source-not-inspected"
+        "source-subject-mismatched"
       ]
     },
     {
@@ -3134,30 +3210,36 @@
         "metadataVerified": true,
         "metadataMethod": "crossref-rest",
         "metadataNote": "Crossref resolves this identifier to \"Paper-Based Synthetic Gene Networks\" in Cell (2014). Registry resolution confirms the document exists; it does not establish subject alignment.",
-        "sourceContentInspected": false,
-        "inspectedContentLocation": null,
-        "subjectAligned": "inaccessible-source",
-        "mismatchBasis": null,
+        "sourceContentInspected": true,
+        "inspectedContentLocation": "PMC4243060, abstract, Development of paper-based technology, toehold-switch results, Discussion, and Experimental Procedures",
+        "subjectAligned": "mismatched",
+        "mismatchBasis": "inspected-content-different-subject",
         "chronologicalRiskIndicator": false,
         "claimSupported": false,
         "sourceIndependentOfOtherCitedSources": null,
         "independentlyReproduced": false,
         "externallyReviewed": false,
-        "inspectedArtifactVersion": "not-inspected",
-        "inspectionDepth": "not-inspected",
-        "versionRelationshipVerified": false,
-        "recoveryDisposition": "not-attempted"
+        "inspectedArtifactVersion": "repository-copy",
+        "inspectionDepth": "full-document",
+        "versionRelationshipVerified": true,
+        "recoveryDisposition": "open-copy-located"
       },
-      "reason": "Retrieval was attempted for batch 5 through PMC. The retrieved article was a different paper (Green et al., toehold switches) rather than the bound source, so the bound source was never inspected and nothing was judged from the wrong artifact.",
+      "reason": "The article uses paper-disc arrays and contains no droplet-microfluidic screening experiment.",
       "transcriptionConfidence": "high",
-      "remediation": "Obtain the artifact through a retrievable route, inspect it, then confirm or replace the mapping.",
+      "remediation": "Bind a source that reports droplet generation, sorting, and screening measurements.",
       "priorMapping": null,
-      "priorJudgement": null,
+      "priorJudgement": {
+        "batchId": "batch-5",
+        "verdict": "inaccessible-source",
+        "sourceContentInspected": false,
+        "inspectedContentLocation": null,
+        "reason": "Retrieval was attempted for batch 5 through PMC. The retrieved article was a different paper (Green et al., toehold switches) rather than the bound source, so the bound source was never inspected and nothing was judged from the wrong artifact.",
+        "priorJudgement": null
+      },
       "proposedSourceOverride": null,
       "blockers": [
         "source-assignment-positional-legacy",
-        "source-inaccessible",
-        "source-not-inspected"
+        "source-subject-mismatched"
       ]
     },
     {
@@ -3222,30 +3304,36 @@
         "metadataVerified": true,
         "metadataMethod": "crossref-rest",
         "metadataNote": "Crossref resolves this identifier to \"Paper-Based Synthetic Gene Networks\" in Cell (2014). Registry resolution confirms the document exists; it does not establish subject alignment.",
-        "sourceContentInspected": false,
-        "inspectedContentLocation": null,
-        "subjectAligned": "inaccessible-source",
-        "mismatchBasis": null,
+        "sourceContentInspected": true,
+        "inspectedContentLocation": "PMC4243060, abstract, Development of paper-based technology, toehold-switch results, Discussion, and Experimental Procedures",
+        "subjectAligned": "mismatched",
+        "mismatchBasis": "inspected-content-different-subject",
         "chronologicalRiskIndicator": false,
         "claimSupported": false,
         "sourceIndependentOfOtherCitedSources": null,
         "independentlyReproduced": false,
         "externallyReviewed": false,
-        "inspectedArtifactVersion": "not-inspected",
-        "inspectionDepth": "not-inspected",
-        "versionRelationshipVerified": false,
-        "recoveryDisposition": "not-attempted"
+        "inspectedArtifactVersion": "repository-copy",
+        "inspectionDepth": "full-document",
+        "versionRelationshipVerified": true,
+        "recoveryDisposition": "open-copy-located"
       },
-      "reason": "Retrieval was attempted for batch 5 through PMC. The retrieved article was a different paper (Green et al., toehold switches) rather than the bound source, so the bound source was never inspected and nothing was judged from the wrong artifact.",
+      "reason": "The inspected article demonstrates gene circuits and diagnostics, not engineered multi-enzyme cascades.",
       "transcriptionConfidence": "high",
-      "remediation": "Obtain the artifact through a retrievable route, inspect it, then confirm or replace the mapping.",
+      "remediation": "Bind a source that constructs and measures an enzyme cascade.",
       "priorMapping": null,
-      "priorJudgement": null,
+      "priorJudgement": {
+        "batchId": "batch-5",
+        "verdict": "inaccessible-source",
+        "sourceContentInspected": false,
+        "inspectedContentLocation": null,
+        "reason": "Retrieval was attempted for batch 5 through PMC. The retrieved article was a different paper (Green et al., toehold switches) rather than the bound source, so the bound source was never inspected and nothing was judged from the wrong artifact.",
+        "priorJudgement": null
+      },
       "proposedSourceOverride": null,
       "blockers": [
         "source-assignment-positional-legacy",
-        "source-inaccessible",
-        "source-not-inspected"
+        "source-subject-mismatched"
       ]
     },
     {
@@ -3400,30 +3488,36 @@
         "metadataVerified": true,
         "metadataMethod": "crossref-rest",
         "metadataNote": "Crossref resolves this identifier to \"Paper-Based Synthetic Gene Networks\" in Cell (2014). Registry resolution confirms the document exists; it does not establish subject alignment.",
-        "sourceContentInspected": false,
-        "inspectedContentLocation": null,
-        "subjectAligned": "inaccessible-source",
+        "sourceContentInspected": true,
+        "inspectedContentLocation": "PMC4243060, abstract, Development of paper-based technology, toehold-switch results, Discussion, and Experimental Procedures",
+        "subjectAligned": "partially-supported",
         "mismatchBasis": null,
         "chronologicalRiskIndicator": false,
         "claimSupported": false,
         "sourceIndependentOfOtherCitedSources": null,
         "independentlyReproduced": false,
         "externallyReviewed": false,
-        "inspectedArtifactVersion": "not-inspected",
-        "inspectionDepth": "not-inspected",
-        "versionRelationshipVerified": false,
-        "recoveryDisposition": "not-attempted"
+        "inspectedArtifactVersion": "repository-copy",
+        "inspectionDepth": "full-document",
+        "versionRelationshipVerified": true,
+        "recoveryDisposition": "open-copy-located"
       },
-      "reason": "Retrieval was attempted for batch 5 through PMC. The retrieved article was a different paper (Green et al., toehold switches) rather than the bound source, so the bound source was never inspected and nothing was judged from the wrong artifact.",
+      "reason": "The Discussion proposes extending paper-based reactions to prototyping metabolic pathways, but the study does not demonstrate that application.",
       "transcriptionConfidence": "high",
-      "remediation": "Obtain the artifact through a retrievable route, inspect it, then confirm or replace the mapping.",
+      "remediation": "Narrow to a proposed use or bind a study that prototypes and measures a metabolic pathway.",
       "priorMapping": null,
-      "priorJudgement": null,
+      "priorJudgement": {
+        "batchId": "batch-5",
+        "verdict": "inaccessible-source",
+        "sourceContentInspected": false,
+        "inspectedContentLocation": null,
+        "reason": "Retrieval was attempted for batch 5 through PMC. The retrieved article was a different paper (Green et al., toehold switches) rather than the bound source, so the bound source was never inspected and nothing was judged from the wrong artifact.",
+        "priorJudgement": null
+      },
       "proposedSourceOverride": null,
       "blockers": [
         "source-assignment-positional-legacy",
-        "source-inaccessible",
-        "source-not-inspected"
+        "source-subject-partially-supported"
       ]
     },
     {
@@ -4059,36 +4153,39 @@
       "sourceYear": "2014",
       "sourceIdentifier": "10.1016/j.cell.2014.10.004",
       "locator": "Toehold-switch design, cell-free implementation, freeze-drying, assays, and Methods.",
-      "assignmentOrigin": "positional-legacy",
+      "assignmentOrigin": "independently-curated",
       "evidence": {
         "metadataVerified": true,
         "metadataMethod": "crossref-rest",
         "metadataNote": "Crossref resolves this identifier to \"Paper-Based Synthetic Gene Networks\" in Cell (2014). Registry resolution confirms the document exists; it does not establish subject alignment.",
-        "sourceContentInspected": false,
-        "inspectedContentLocation": null,
-        "subjectAligned": "inaccessible-source",
+        "sourceContentInspected": true,
+        "inspectedContentLocation": "PMC4243060, abstract, Development of paper-based technology, toehold-switch results, Discussion, and Experimental Procedures",
+        "subjectAligned": "supported",
         "mismatchBasis": null,
         "chronologicalRiskIndicator": false,
-        "claimSupported": false,
+        "claimSupported": true,
         "sourceIndependentOfOtherCitedSources": null,
         "independentlyReproduced": false,
         "externallyReviewed": false,
-        "inspectedArtifactVersion": "not-inspected",
-        "inspectionDepth": "not-inspected",
-        "versionRelationshipVerified": false,
-        "recoveryDisposition": "not-attempted"
+        "inspectedArtifactVersion": "repository-copy",
+        "inspectionDepth": "full-document",
+        "versionRelationshipVerified": true,
+        "recoveryDisposition": "open-copy-located"
       },
-      "reason": "Retrieval was attempted for batch 5 through PMC. The retrieved article was a different paper (Green et al., toehold switches) rather than the bound source, so the bound source was never inspected and nothing was judged from the wrong artifact.",
+      "reason": "The article constructs and tests toehold switches and other RNA-actuated circuits that regulate translation in cell-free reactions.",
       "transcriptionConfidence": "high",
-      "remediation": "Obtain the artifact through a retrievable route, inspect it, then confirm or replace the mapping.",
+      "remediation": "None. Keep the mapping and record it as curated rather than positional.",
       "priorMapping": null,
-      "priorJudgement": null,
+      "priorJudgement": {
+        "batchId": "batch-5",
+        "verdict": "inaccessible-source",
+        "sourceContentInspected": false,
+        "inspectedContentLocation": null,
+        "reason": "Retrieval was attempted for batch 5 through PMC. The retrieved article was a different paper (Green et al., toehold switches) rather than the bound source, so the bound source was never inspected and nothing was judged from the wrong artifact.",
+        "priorJudgement": null
+      },
       "proposedSourceOverride": null,
-      "blockers": [
-        "source-assignment-positional-legacy",
-        "source-inaccessible",
-        "source-not-inspected"
-      ]
+      "blockers": []
     },
     {
       "recordId": "urn:maha:record:biomolecular-engineering-unconditional-protein-generation",
@@ -4190,34 +4287,39 @@
       "locator": "Graphite, cobalt, tungsten, and indium commodity chapters.",
       "assignmentOrigin": "positional-legacy",
       "evidence": {
-        "metadataVerified": false,
-        "metadataMethod": "none",
-        "metadataNote": "No DOI or other registry identifier is declared, and the publisher page was not fetched during this audit.",
-        "sourceContentInspected": false,
-        "inspectedContentLocation": null,
-        "subjectAligned": "inaccessible-source",
+        "metadataVerified": true,
+        "metadataMethod": "publisher-page",
+        "metadataNote": "Fetched the official USGS Mineral Commodity Summaries 2026 PDF and inspected the declared cobalt, graphite, indium, and tungsten chapters.",
+        "sourceContentInspected": true,
+        "inspectedContentLocation": "USGS Mineral Commodity Summaries 2026, Cobalt pp. 70–71, Graphite pp. 92–93, Indium pp. 98–99, and Tungsten pp. 200–201",
+        "subjectAligned": "partially-supported",
         "mismatchBasis": null,
         "chronologicalRiskIndicator": false,
         "claimSupported": false,
         "sourceIndependentOfOtherCitedSources": null,
         "independentlyReproduced": false,
         "externallyReviewed": false,
-        "inspectedArtifactVersion": "not-inspected",
-        "inspectionDepth": "not-inspected",
-        "versionRelationshipVerified": false,
-        "recoveryDisposition": "not-attempted"
+        "inspectedArtifactVersion": "government-report",
+        "inspectionDepth": "specified-sections",
+        "versionRelationshipVerified": true,
+        "recoveryDisposition": "open-copy-located"
       },
-      "reason": "Retrieval was attempted for batch 5 against the full Mineral Commodity Summaries PDF and the commodity chapter, both returning HTTP 403, after earlier batches failed on the same host. Every critical-supply-chains source is a USGS document on this host.",
-      "transcriptionConfidence": "low",
-      "remediation": "Obtain the artifact through a retrievable route, inspect it, then confirm or replace the mapping.",
+      "reason": "The cobalt chapter identifies China as the leading refined-cobalt producer and Congo (Kinshasa) as 73% of mined supply, but it does not quantify China’s refining share.",
+      "transcriptionConfidence": "high",
+      "remediation": "Narrow to the reported qualitative concentration or bind refinery-capacity data with explicit shares.",
       "priorMapping": null,
-      "priorJudgement": null,
+      "priorJudgement": {
+        "batchId": "batch-5",
+        "verdict": "inaccessible-source",
+        "sourceContentInspected": false,
+        "inspectedContentLocation": null,
+        "reason": "Retrieval was attempted for batch 5 against the full Mineral Commodity Summaries PDF and the commodity chapter, both returning HTTP 403, after earlier batches failed on the same host. Every critical-supply-chains source is a USGS document on this host.",
+        "priorJudgement": null
+      },
       "proposedSourceOverride": null,
       "blockers": [
         "source-assignment-positional-legacy",
-        "source-inaccessible",
-        "source-metadata-unverified",
-        "source-not-inspected"
+        "source-subject-partially-supported"
       ]
     },
     {
@@ -4626,34 +4728,39 @@
       "locator": "Graphite, cobalt, tungsten, and indium commodity chapters.",
       "assignmentOrigin": "positional-legacy",
       "evidence": {
-        "metadataVerified": false,
-        "metadataMethod": "none",
-        "metadataNote": "No DOI or other registry identifier is declared, and the publisher page was not fetched during this audit.",
-        "sourceContentInspected": false,
-        "inspectedContentLocation": null,
-        "subjectAligned": "inaccessible-source",
+        "metadataVerified": true,
+        "metadataMethod": "publisher-page",
+        "metadataNote": "Fetched the official USGS Mineral Commodity Summaries 2026 PDF and inspected the declared cobalt, graphite, indium, and tungsten chapters.",
+        "sourceContentInspected": true,
+        "inspectedContentLocation": "USGS Mineral Commodity Summaries 2026, Cobalt pp. 70–71, Graphite pp. 92–93, Indium pp. 98–99, and Tungsten pp. 200–201",
+        "subjectAligned": "partially-supported",
         "mismatchBasis": null,
         "chronologicalRiskIndicator": false,
         "claimSupported": false,
         "sourceIndependentOfOtherCitedSources": null,
         "independentlyReproduced": false,
         "externallyReviewed": false,
-        "inspectedArtifactVersion": "not-inspected",
-        "inspectionDepth": "not-inspected",
-        "versionRelationshipVerified": false,
-        "recoveryDisposition": "not-attempted"
+        "inspectedArtifactVersion": "government-report",
+        "inspectionDepth": "specified-sections",
+        "versionRelationshipVerified": true,
+        "recoveryDisposition": "open-copy-located"
       },
-      "reason": "Retrieval was attempted for batch 5 against the full Mineral Commodity Summaries PDF and the commodity chapter, both returning HTTP 403, after earlier batches failed on the same host. Every critical-supply-chains source is a USGS document on this host.",
-      "transcriptionConfidence": "low",
-      "remediation": "Obtain the artifact through a retrievable route, inspect it, then confirm or replace the mapping.",
+      "reason": "The graphite chapter reports active-anode material and spherical-purified-graphite trade and facilities, but not the processing sequence or qualification boundary.",
+      "transcriptionConfidence": "high",
+      "remediation": "Narrow to facility and trade context or bind process-specific anode-production evidence.",
       "priorMapping": null,
-      "priorJudgement": null,
+      "priorJudgement": {
+        "batchId": "batch-5",
+        "verdict": "inaccessible-source",
+        "sourceContentInspected": false,
+        "inspectedContentLocation": null,
+        "reason": "Retrieval was attempted for batch 5 against the full Mineral Commodity Summaries PDF and the commodity chapter, both returning HTTP 403, after earlier batches failed on the same host. Every critical-supply-chains source is a USGS document on this host.",
+        "priorJudgement": null
+      },
       "proposedSourceOverride": null,
       "blockers": [
         "source-assignment-positional-legacy",
-        "source-inaccessible",
-        "source-metadata-unverified",
-        "source-not-inspected"
+        "source-subject-partially-supported"
       ]
     },
     {
@@ -4849,34 +4956,39 @@
       "locator": "Graphite, cobalt, tungsten, and indium commodity chapters.",
       "assignmentOrigin": "positional-legacy",
       "evidence": {
-        "metadataVerified": false,
-        "metadataMethod": "none",
-        "metadataNote": "No DOI or other registry identifier is declared, and the publisher page was not fetched during this audit.",
-        "sourceContentInspected": false,
-        "inspectedContentLocation": null,
-        "subjectAligned": "inaccessible-source",
+        "metadataVerified": true,
+        "metadataMethod": "publisher-page",
+        "metadataNote": "Fetched the official USGS Mineral Commodity Summaries 2026 PDF and inspected the declared cobalt, graphite, indium, and tungsten chapters.",
+        "sourceContentInspected": true,
+        "inspectedContentLocation": "USGS Mineral Commodity Summaries 2026, Cobalt pp. 70–71, Graphite pp. 92–93, Indium pp. 98–99, and Tungsten pp. 200–201",
+        "subjectAligned": "partially-supported",
         "mismatchBasis": null,
         "chronologicalRiskIndicator": false,
         "claimSupported": false,
         "sourceIndependentOfOtherCitedSources": null,
         "independentlyReproduced": false,
         "externallyReviewed": false,
-        "inspectedArtifactVersion": "not-inspected",
-        "inspectionDepth": "not-inspected",
-        "versionRelationshipVerified": false,
-        "recoveryDisposition": "not-attempted"
+        "inspectedArtifactVersion": "government-report",
+        "inspectionDepth": "specified-sections",
+        "versionRelationshipVerified": true,
+        "recoveryDisposition": "open-copy-located"
       },
-      "reason": "Retrieval was attempted for batch 5 against the full Mineral Commodity Summaries PDF and the commodity chapter, both returning HTTP 403, after earlier batches failed on the same host. Every critical-supply-chains source is a USGS document on this host.",
-      "transcriptionConfidence": "low",
-      "remediation": "Obtain the artifact through a retrievable route, inspect it, then confirm or replace the mapping.",
+      "reason": "The indium chapter states that indium is most commonly recovered from zinc-sulfide sphalerite, but does not quantify a zinc-to-indium material flow.",
+      "transcriptionConfidence": "high",
+      "remediation": "Narrow to byproduct provenance or bind a source with recovery yields and flow quantities.",
       "priorMapping": null,
-      "priorJudgement": null,
+      "priorJudgement": {
+        "batchId": "batch-5",
+        "verdict": "inaccessible-source",
+        "sourceContentInspected": false,
+        "inspectedContentLocation": null,
+        "reason": "Retrieval was attempted for batch 5 against the full Mineral Commodity Summaries PDF and the commodity chapter, both returning HTTP 403, after earlier batches failed on the same host. Every critical-supply-chains source is a USGS document on this host.",
+        "priorJudgement": null
+      },
       "proposedSourceOverride": null,
       "blockers": [
         "source-assignment-positional-legacy",
-        "source-inaccessible",
-        "source-metadata-unverified",
-        "source-not-inspected"
+        "source-subject-partially-supported"
       ]
     },
     {
@@ -4893,34 +5005,39 @@
       "locator": "Graphite, cobalt, tungsten, and indium commodity chapters.",
       "assignmentOrigin": "positional-legacy",
       "evidence": {
-        "metadataVerified": false,
-        "metadataMethod": "none",
-        "metadataNote": "No DOI or other registry identifier is declared, and the publisher page was not fetched during this audit.",
-        "sourceContentInspected": false,
-        "inspectedContentLocation": null,
-        "subjectAligned": "inaccessible-source",
-        "mismatchBasis": null,
+        "metadataVerified": true,
+        "metadataMethod": "publisher-page",
+        "metadataNote": "Fetched the official USGS Mineral Commodity Summaries 2026 PDF and inspected the declared cobalt, graphite, indium, and tungsten chapters.",
+        "sourceContentInspected": true,
+        "inspectedContentLocation": "USGS Mineral Commodity Summaries 2026, Cobalt pp. 70–71, Graphite pp. 92–93, Indium pp. 98–99, and Tungsten pp. 200–201",
+        "subjectAligned": "mismatched",
+        "mismatchBasis": "inspected-content-different-subject",
         "chronologicalRiskIndicator": false,
         "claimSupported": false,
         "sourceIndependentOfOtherCitedSources": null,
         "independentlyReproduced": false,
         "externallyReviewed": false,
-        "inspectedArtifactVersion": "not-inspected",
-        "inspectionDepth": "not-inspected",
-        "versionRelationshipVerified": false,
-        "recoveryDisposition": "not-attempted"
+        "inspectedArtifactVersion": "government-report",
+        "inspectionDepth": "specified-sections",
+        "versionRelationshipVerified": true,
+        "recoveryDisposition": "open-copy-located"
       },
-      "reason": "Retrieval was attempted for batch 5 against the full Mineral Commodity Summaries PDF and the commodity chapter, both returning HTTP 403, after earlier batches failed on the same host. Every critical-supply-chains source is a USGS document on this host.",
-      "transcriptionConfidence": "low",
-      "remediation": "Obtain the artifact through a retrievable route, inspect it, then confirm or replace the mapping.",
+      "reason": "The four inspected commodity chapters discuss cobalt, graphite, indium, and tungsten recycling or scrap but do not treat permanent-magnet recycling.",
+      "transcriptionConfidence": "high",
+      "remediation": "Bind a source specific to Nd-Fe-B or other permanent-magnet recovery.",
       "priorMapping": null,
-      "priorJudgement": null,
+      "priorJudgement": {
+        "batchId": "batch-5",
+        "verdict": "inaccessible-source",
+        "sourceContentInspected": false,
+        "inspectedContentLocation": null,
+        "reason": "Retrieval was attempted for batch 5 against the full Mineral Commodity Summaries PDF and the commodity chapter, both returning HTTP 403, after earlier batches failed on the same host. Every critical-supply-chains source is a USGS document on this host.",
+        "priorJudgement": null
+      },
       "proposedSourceOverride": null,
       "blockers": [
         "source-assignment-positional-legacy",
-        "source-inaccessible",
-        "source-metadata-unverified",
-        "source-not-inspected"
+        "source-subject-mismatched"
       ]
     },
     {
@@ -5424,34 +5541,39 @@
       "locator": "Graphite, cobalt, tungsten, and indium commodity chapters.",
       "assignmentOrigin": "positional-legacy",
       "evidence": {
-        "metadataVerified": false,
-        "metadataMethod": "none",
-        "metadataNote": "No DOI or other registry identifier is declared, and the publisher page was not fetched during this audit.",
-        "sourceContentInspected": false,
-        "inspectedContentLocation": null,
-        "subjectAligned": "inaccessible-source",
+        "metadataVerified": true,
+        "metadataMethod": "publisher-page",
+        "metadataNote": "Fetched the official USGS Mineral Commodity Summaries 2026 PDF and inspected the declared cobalt, graphite, indium, and tungsten chapters.",
+        "sourceContentInspected": true,
+        "inspectedContentLocation": "USGS Mineral Commodity Summaries 2026, Cobalt pp. 70–71, Graphite pp. 92–93, Indium pp. 98–99, and Tungsten pp. 200–201",
+        "subjectAligned": "partially-supported",
         "mismatchBasis": null,
         "chronologicalRiskIndicator": false,
         "claimSupported": false,
         "sourceIndependentOfOtherCitedSources": null,
         "independentlyReproduced": false,
         "externallyReviewed": false,
-        "inspectedArtifactVersion": "not-inspected",
-        "inspectionDepth": "not-inspected",
-        "versionRelationshipVerified": false,
-        "recoveryDisposition": "not-attempted"
+        "inspectedArtifactVersion": "government-report",
+        "inspectionDepth": "specified-sections",
+        "versionRelationshipVerified": true,
+        "recoveryDisposition": "open-copy-located"
       },
-      "reason": "Retrieval was attempted for batch 5 against the full Mineral Commodity Summaries PDF and the commodity chapter, both returning HTTP 403, after earlier batches failed on the same host. Every critical-supply-chains source is a USGS document on this host.",
-      "transcriptionConfidence": "low",
-      "remediation": "Obtain the artifact through a retrievable route, inspect it, then confirm or replace the mapping.",
+      "reason": "The tungsten chapter states that U.S. companies convert concentrates, APT, oxide, or scrap into powders and chemicals, but it does not describe the processing route.",
+      "transcriptionConfidence": "high",
+      "remediation": "Narrow to conversion capability or bind a process source with unit operations and yields.",
       "priorMapping": null,
-      "priorJudgement": null,
+      "priorJudgement": {
+        "batchId": "batch-5",
+        "verdict": "inaccessible-source",
+        "sourceContentInspected": false,
+        "inspectedContentLocation": null,
+        "reason": "Retrieval was attempted for batch 5 against the full Mineral Commodity Summaries PDF and the commodity chapter, both returning HTTP 403, after earlier batches failed on the same host. Every critical-supply-chains source is a USGS document on this host.",
+        "priorJudgement": null
+      },
       "proposedSourceOverride": null,
       "blockers": [
         "source-assignment-positional-legacy",
-        "source-inaccessible",
-        "source-metadata-unverified",
-        "source-not-inspected"
+        "source-subject-partially-supported"
       ]
     },
     {
@@ -5794,34 +5916,40 @@
       "locator": "Target, laser coupling, target chamber, ignition, and experimental result sections.",
       "assignmentOrigin": "positional-legacy",
       "evidence": {
-        "metadataVerified": false,
-        "metadataMethod": "none",
-        "metadataNote": "No DOI or other registry identifier is declared, and the publisher page was not fetched during this audit.",
-        "sourceContentInspected": false,
-        "inspectedContentLocation": null,
-        "subjectAligned": "insufficient-evidence",
+        "metadataVerified": true,
+        "metadataMethod": "publisher-page",
+        "metadataNote": "Fetched the official LLNL/NIF “Achieving Fusion Ignition” living page and inspected the declared target, coupling, ignition, and result sections.",
+        "sourceContentInspected": true,
+        "inspectedContentLocation": "LLNL/NIF “Achieving Fusion Ignition”, What Is Ignition, milestones, Gaining New Understanding, and Setting Energy Records",
+        "subjectAligned": "partially-supported",
         "mismatchBasis": null,
         "chronologicalRiskIndicator": false,
         "claimSupported": false,
         "sourceIndependentOfOtherCitedSources": null,
         "independentlyReproduced": false,
         "externallyReviewed": false,
-        "inspectedArtifactVersion": "not-inspected",
-        "inspectionDepth": "not-inspected",
-        "versionRelationshipVerified": false,
-        "recoveryDisposition": "version-relationship-unverified"
+        "inspectedArtifactVersion": "living-specification",
+        "inspectionDepth": "specified-sections",
+        "versionRelationshipVerified": true,
+        "recoveryDisposition": "open-copy-located"
       },
-      "reason": "Recovery resolved metadata but could not tie any located artifact to the declared citation, so no copy was accepted and the content was not read. Metadata resolution is not content inspection, so nothing is established about whether this source supports the record subject.",
-      "transcriptionConfidence": "low",
-      "remediation": "Obtain an inspectable copy, read it against this record subject, then confirm or replace.",
+      "reason": "The page places the target and laser delivery in NIF’s Target Chamber, but does not provide a bounded chamber architecture or engineering specification.",
+      "transcriptionConfidence": "high",
+      "remediation": "Narrow to the experiment location or bind the NIF Target Chamber engineering description.",
       "priorMapping": null,
-      "priorJudgement": null,
+      "priorJudgement": {
+        "batchId": "batch-6",
+        "verdict": "insufficient-evidence",
+        "sourceContentInspected": false,
+        "inspectionDepth": "not-inspected",
+        "inspectedContentLocation": null,
+        "reason": "Recovery resolved metadata but could not tie any located artifact to the declared citation, so no copy was accepted and the content was not read. Metadata resolution is not content inspection, so nothing is established about whether this source supports the record subject.",
+        "priorJudgement": null
+      },
       "proposedSourceOverride": null,
       "blockers": [
-        "source-alignment-insufficient-evidence",
         "source-assignment-positional-legacy",
-        "source-metadata-unverified",
-        "source-not-inspected"
+        "source-subject-partially-supported"
       ]
     },
     {
@@ -5836,37 +5964,40 @@
       "sourceYear": null,
       "sourceIdentifier": null,
       "locator": "Target, laser coupling, target chamber, ignition, and experimental result sections.",
-      "assignmentOrigin": "positional-legacy",
+      "assignmentOrigin": "independently-curated",
       "evidence": {
-        "metadataVerified": false,
-        "metadataMethod": "none",
-        "metadataNote": "No DOI or other registry identifier is declared, and the publisher page was not fetched during this audit.",
-        "sourceContentInspected": false,
-        "inspectedContentLocation": null,
-        "subjectAligned": "insufficient-evidence",
+        "metadataVerified": true,
+        "metadataMethod": "publisher-page",
+        "metadataNote": "Fetched the official LLNL/NIF “Achieving Fusion Ignition” living page and inspected the declared target, coupling, ignition, and result sections.",
+        "sourceContentInspected": true,
+        "inspectedContentLocation": "LLNL/NIF “Achieving Fusion Ignition”, What Is Ignition, milestones, Gaining New Understanding, and Setting Energy Records",
+        "subjectAligned": "supported",
         "mismatchBasis": null,
         "chronologicalRiskIndicator": false,
-        "claimSupported": false,
+        "claimSupported": true,
         "sourceIndependentOfOtherCitedSources": null,
         "independentlyReproduced": false,
         "externallyReviewed": false,
-        "inspectedArtifactVersion": "not-inspected",
-        "inspectionDepth": "not-inspected",
-        "versionRelationshipVerified": false,
-        "recoveryDisposition": "version-relationship-unverified"
+        "inspectedArtifactVersion": "living-specification",
+        "inspectionDepth": "specified-sections",
+        "versionRelationshipVerified": true,
+        "recoveryDisposition": "open-copy-located"
       },
-      "reason": "Recovery resolved metadata but could not tie any located artifact to the declared citation, so no copy was accepted and the content was not read. Metadata resolution is not content inspection, so nothing is established about whether this source supports the record subject.",
-      "transcriptionConfidence": "low",
-      "remediation": "Obtain an inspectable copy, read it against this record subject, then confirm or replace.",
+      "reason": "The page describes laser beams coupling through a hohlraum to x rays that drive the capsule and reports laser energy delivered to the target alongside fusion yield.",
+      "transcriptionConfidence": "high",
+      "remediation": "None. Keep the mapping and its facility-specific boundary.",
       "priorMapping": null,
-      "priorJudgement": null,
+      "priorJudgement": {
+        "batchId": "batch-6",
+        "verdict": "insufficient-evidence",
+        "sourceContentInspected": false,
+        "inspectionDepth": "not-inspected",
+        "inspectedContentLocation": null,
+        "reason": "Recovery resolved metadata but could not tie any located artifact to the declared citation, so no copy was accepted and the content was not read. Metadata resolution is not content inspection, so nothing is established about whether this source supports the record subject.",
+        "priorJudgement": null
+      },
       "proposedSourceOverride": null,
-      "blockers": [
-        "source-alignment-insufficient-evidence",
-        "source-assignment-positional-legacy",
-        "source-metadata-unverified",
-        "source-not-inspected"
-      ]
+      "blockers": []
     },
     {
       "recordId": "urn:maha:record:fusion-plasma-systems-magnetic-confinement",
@@ -5921,34 +6052,40 @@
       "locator": "Target, laser coupling, target chamber, ignition, and experimental result sections.",
       "assignmentOrigin": "positional-legacy",
       "evidence": {
-        "metadataVerified": false,
-        "metadataMethod": "none",
-        "metadataNote": "No DOI or other registry identifier is declared, and the publisher page was not fetched during this audit.",
-        "sourceContentInspected": false,
-        "inspectedContentLocation": null,
-        "subjectAligned": "insufficient-evidence",
-        "mismatchBasis": null,
+        "metadataVerified": true,
+        "metadataMethod": "publisher-page",
+        "metadataNote": "Fetched the official LLNL/NIF “Achieving Fusion Ignition” living page and inspected the declared target, coupling, ignition, and result sections.",
+        "sourceContentInspected": true,
+        "inspectedContentLocation": "LLNL/NIF “Achieving Fusion Ignition”, What Is Ignition, milestones, Gaining New Understanding, and Setting Energy Records",
+        "subjectAligned": "mismatched",
+        "mismatchBasis": "inspected-content-different-subject",
         "chronologicalRiskIndicator": false,
         "claimSupported": false,
         "sourceIndependentOfOtherCitedSources": null,
         "independentlyReproduced": false,
         "externallyReviewed": false,
-        "inspectedArtifactVersion": "not-inspected",
-        "inspectionDepth": "not-inspected",
-        "versionRelationshipVerified": false,
-        "recoveryDisposition": "version-relationship-unverified"
+        "inspectedArtifactVersion": "living-specification",
+        "inspectionDepth": "specified-sections",
+        "versionRelationshipVerified": true,
+        "recoveryDisposition": "open-copy-located"
       },
-      "reason": "Recovery resolved metadata but could not tie any located artifact to the declared citation, so no copy was accepted and the content was not read. Metadata resolution is not content inspection, so nothing is established about whether this source supports the record subject.",
-      "transcriptionConfidence": "low",
-      "remediation": "Obtain an inspectable copy, read it against this record subject, then confirm or replace.",
+      "reason": "The page concerns inertial confinement driven by lasers and contains no magnetic-mirror confinement system.",
+      "transcriptionConfidence": "high",
+      "remediation": "Bind a magnetic-mirror experiment or review.",
       "priorMapping": null,
-      "priorJudgement": null,
+      "priorJudgement": {
+        "batchId": "batch-6",
+        "verdict": "insufficient-evidence",
+        "sourceContentInspected": false,
+        "inspectionDepth": "not-inspected",
+        "inspectedContentLocation": null,
+        "reason": "Recovery resolved metadata but could not tie any located artifact to the declared citation, so no copy was accepted and the content was not read. Metadata resolution is not content inspection, so nothing is established about whether this source supports the record subject.",
+        "priorJudgement": null
+      },
       "proposedSourceOverride": null,
       "blockers": [
-        "source-alignment-insufficient-evidence",
         "source-assignment-positional-legacy",
-        "source-metadata-unverified",
-        "source-not-inspected"
+        "source-subject-mismatched"
       ]
     },
     {
@@ -6007,34 +6144,40 @@
       "locator": "Target, laser coupling, target chamber, ignition, and experimental result sections.",
       "assignmentOrigin": "positional-legacy",
       "evidence": {
-        "metadataVerified": false,
-        "metadataMethod": "none",
-        "metadataNote": "No DOI or other registry identifier is declared, and the publisher page was not fetched during this audit.",
-        "sourceContentInspected": false,
-        "inspectedContentLocation": null,
-        "subjectAligned": "insufficient-evidence",
-        "mismatchBasis": null,
+        "metadataVerified": true,
+        "metadataMethod": "publisher-page",
+        "metadataNote": "Fetched the official LLNL/NIF “Achieving Fusion Ignition” living page and inspected the declared target, coupling, ignition, and result sections.",
+        "sourceContentInspected": true,
+        "inspectedContentLocation": "LLNL/NIF “Achieving Fusion Ignition”, What Is Ignition, milestones, Gaining New Understanding, and Setting Energy Records",
+        "subjectAligned": "mismatched",
+        "mismatchBasis": "inspected-content-different-subject",
         "chronologicalRiskIndicator": false,
         "claimSupported": false,
         "sourceIndependentOfOtherCitedSources": null,
         "independentlyReproduced": false,
         "externallyReviewed": false,
-        "inspectedArtifactVersion": "not-inspected",
-        "inspectionDepth": "not-inspected",
-        "versionRelationshipVerified": false,
-        "recoveryDisposition": "version-relationship-unverified"
+        "inspectedArtifactVersion": "living-specification",
+        "inspectionDepth": "specified-sections",
+        "versionRelationshipVerified": true,
+        "recoveryDisposition": "open-copy-located"
       },
-      "reason": "Recovery resolved metadata but could not tie any located artifact to the declared citation, so no copy was accepted and the content was not read. Metadata resolution is not content inspection, so nothing is established about whether this source supports the record subject.",
-      "transcriptionConfidence": "low",
-      "remediation": "Obtain an inspectable copy, read it against this record subject, then confirm or replace.",
+      "reason": "The inspected sections report neutron yield and diagnostics but do not measure neutron-induced material damage.",
+      "transcriptionConfidence": "high",
+      "remediation": "Bind irradiation data or a materials-damage study.",
       "priorMapping": null,
-      "priorJudgement": null,
+      "priorJudgement": {
+        "batchId": "batch-6",
+        "verdict": "insufficient-evidence",
+        "sourceContentInspected": false,
+        "inspectionDepth": "not-inspected",
+        "inspectedContentLocation": null,
+        "reason": "Recovery resolved metadata but could not tie any located artifact to the declared citation, so no copy was accepted and the content was not read. Metadata resolution is not content inspection, so nothing is established about whether this source supports the record subject.",
+        "priorJudgement": null
+      },
       "proposedSourceOverride": null,
       "blockers": [
-        "source-alignment-insufficient-evidence",
         "source-assignment-positional-legacy",
-        "source-metadata-unverified",
-        "source-not-inspected"
+        "source-subject-mismatched"
       ]
     },
     {
@@ -6316,34 +6459,40 @@
       "locator": "Target, laser coupling, target chamber, ignition, and experimental result sections.",
       "assignmentOrigin": "positional-legacy",
       "evidence": {
-        "metadataVerified": false,
-        "metadataMethod": "none",
-        "metadataNote": "No DOI or other registry identifier is declared, and the publisher page was not fetched during this audit.",
-        "sourceContentInspected": false,
-        "inspectedContentLocation": null,
-        "subjectAligned": "insufficient-evidence",
-        "mismatchBasis": null,
+        "metadataVerified": true,
+        "metadataMethod": "publisher-page",
+        "metadataNote": "Fetched the official LLNL/NIF “Achieving Fusion Ignition” living page and inspected the declared target, coupling, ignition, and result sections.",
+        "sourceContentInspected": true,
+        "inspectedContentLocation": "LLNL/NIF “Achieving Fusion Ignition”, What Is Ignition, milestones, Gaining New Understanding, and Setting Energy Records",
+        "subjectAligned": "mismatched",
+        "mismatchBasis": "inspected-content-different-subject",
         "chronologicalRiskIndicator": false,
         "claimSupported": false,
         "sourceIndependentOfOtherCitedSources": null,
         "independentlyReproduced": false,
         "externallyReviewed": false,
-        "inspectedArtifactVersion": "not-inspected",
-        "inspectionDepth": "not-inspected",
-        "versionRelationshipVerified": false,
-        "recoveryDisposition": "version-relationship-unverified"
+        "inspectedArtifactVersion": "living-specification",
+        "inspectionDepth": "specified-sections",
+        "versionRelationshipVerified": true,
+        "recoveryDisposition": "open-copy-located"
       },
-      "reason": "Recovery resolved metadata but could not tie any located artifact to the declared citation, so no copy was accepted and the content was not read. Metadata resolution is not content inspection, so nothing is established about whether this source supports the record subject.",
-      "transcriptionConfidence": "low",
-      "remediation": "Obtain an inspectable copy, read it against this record subject, then confirm or replace.",
+      "reason": "The inspected page does not describe remote-handling equipment or maintenance operations.",
+      "transcriptionConfidence": "high",
+      "remediation": "Bind a facility engineering source that specifies remote handling and maintenance.",
       "priorMapping": null,
-      "priorJudgement": null,
+      "priorJudgement": {
+        "batchId": "batch-6",
+        "verdict": "insufficient-evidence",
+        "sourceContentInspected": false,
+        "inspectionDepth": "not-inspected",
+        "inspectedContentLocation": null,
+        "reason": "Recovery resolved metadata but could not tie any located artifact to the declared citation, so no copy was accepted and the content was not read. Metadata resolution is not content inspection, so nothing is established about whether this source supports the record subject.",
+        "priorJudgement": null
+      },
       "proposedSourceOverride": null,
       "blockers": [
-        "source-alignment-insufficient-evidence",
         "source-assignment-positional-legacy",
-        "source-metadata-unverified",
-        "source-not-inspected"
+        "source-subject-mismatched"
       ]
     },
     {
@@ -6873,36 +7022,39 @@
       "sourceYear": "2012",
       "sourceIdentifier": "10.4161/auto.19496",
       "locator": "Assay interpretation sections for LC3, SQSTM1/p62, lysosomal inhibition, and autophagic flux.",
-      "assignmentOrigin": "positional-legacy",
+      "assignmentOrigin": "independently-curated",
       "evidence": {
         "metadataVerified": true,
         "metadataMethod": "crossref-rest",
         "metadataNote": "Crossref resolves this identifier to \"Guidelines for the use and interpretation of assays for monitoring autophagy\" in Autophagy (2012). Registry resolution confirms the document exists; it does not establish subject alignment.",
-        "sourceContentInspected": false,
-        "inspectedContentLocation": null,
-        "subjectAligned": "inaccessible-source",
+        "sourceContentInspected": true,
+        "inspectedContentLocation": "PMC3404883, Guidelines §§ “Monitoring autophagy”, “LC3 turnover”, “SQSTM1/p62”, and lysosomal-inhibitor cautions",
+        "subjectAligned": "supported",
         "mismatchBasis": null,
         "chronologicalRiskIndicator": false,
-        "claimSupported": false,
+        "claimSupported": true,
         "sourceIndependentOfOtherCitedSources": null,
         "independentlyReproduced": false,
         "externallyReviewed": false,
-        "inspectedArtifactVersion": "not-inspected",
-        "inspectionDepth": "not-inspected",
-        "versionRelationshipVerified": false,
-        "recoveryDisposition": "not-attempted"
+        "inspectedArtifactVersion": "version-of-record",
+        "inspectionDepth": "specified-sections",
+        "versionRelationshipVerified": true,
+        "recoveryDisposition": "open-copy-located"
       },
-      "reason": "Retrieval was attempted for this batch through PubMed and Europe PMC; both returned navigation shells rather than the record, so the content could not be read. An inaccessible source is never treated as content-confirmed.",
+      "reason": "The guidelines define autophagic flux as the full pathway through lysosomal delivery, breakdown, and product release, and prescribe dynamic measurement.",
       "transcriptionConfidence": "high",
-      "remediation": "Obtain the guidelines through a retrievable route, inspect the named assay-interpretation sections, then confirm or replace.",
+      "remediation": "None. Keep the mapping and assay boundary.",
       "priorMapping": null,
-      "priorJudgement": null,
+      "priorJudgement": {
+        "batchId": "batch-3",
+        "verdict": "inaccessible-source",
+        "sourceContentInspected": false,
+        "inspectedContentLocation": null,
+        "reason": "Retrieval was attempted for this batch through PubMed and Europe PMC; both returned navigation shells rather than the record, so the content could not be read. An inaccessible source is never treated as content-confirmed.",
+        "priorJudgement": null
+      },
       "proposedSourceOverride": null,
-      "blockers": [
-        "source-assignment-positional-legacy",
-        "source-inaccessible",
-        "source-not-inspected"
-      ]
+      "blockers": []
     },
     {
       "recordId": "urn:maha:record:longevity-metabolism-autophagosome-abundance",
@@ -6917,36 +7069,39 @@
       "sourceYear": "2012",
       "sourceIdentifier": "10.4161/auto.19496",
       "locator": "Assay interpretation sections for LC3, SQSTM1/p62, lysosomal inhibition, and autophagic flux.",
-      "assignmentOrigin": "positional-legacy",
+      "assignmentOrigin": "independently-curated",
       "evidence": {
         "metadataVerified": true,
         "metadataMethod": "crossref-rest",
         "metadataNote": "Crossref resolves this identifier to \"Guidelines for the use and interpretation of assays for monitoring autophagy\" in Autophagy (2012). Registry resolution confirms the document exists; it does not establish subject alignment.",
-        "sourceContentInspected": false,
-        "inspectedContentLocation": null,
-        "subjectAligned": "inaccessible-source",
+        "sourceContentInspected": true,
+        "inspectedContentLocation": "PMC3404883, Guidelines §§ “Monitoring autophagy”, “LC3 turnover”, “SQSTM1/p62”, and lysosomal-inhibitor cautions",
+        "subjectAligned": "supported",
         "mismatchBasis": null,
         "chronologicalRiskIndicator": false,
-        "claimSupported": false,
+        "claimSupported": true,
         "sourceIndependentOfOtherCitedSources": null,
         "independentlyReproduced": false,
         "externallyReviewed": false,
-        "inspectedArtifactVersion": "not-inspected",
-        "inspectionDepth": "not-inspected",
-        "versionRelationshipVerified": false,
-        "recoveryDisposition": "not-attempted"
+        "inspectedArtifactVersion": "version-of-record",
+        "inspectionDepth": "specified-sections",
+        "versionRelationshipVerified": true,
+        "recoveryDisposition": "open-copy-located"
       },
-      "reason": "Retrieval was attempted for this batch through PubMed and Europe PMC; both returned navigation shells rather than the record, so the content could not be read. An inaccessible source is never treated as content-confirmed.",
+      "reason": "The guidelines distinguish static autophagosome abundance from flux and explain why abundance alone is ambiguous.",
       "transcriptionConfidence": "high",
-      "remediation": "Obtain the guidelines through a retrievable route, inspect the named assay-interpretation sections, then confirm or replace.",
+      "remediation": "None. Preserve the explicit “abundance is not flux” boundary.",
       "priorMapping": null,
-      "priorJudgement": null,
+      "priorJudgement": {
+        "batchId": "batch-3",
+        "verdict": "inaccessible-source",
+        "sourceContentInspected": false,
+        "inspectedContentLocation": null,
+        "reason": "Retrieval was attempted for this batch through PubMed and Europe PMC; both returned navigation shells rather than the record, so the content could not be read. An inaccessible source is never treated as content-confirmed.",
+        "priorJudgement": null
+      },
       "proposedSourceOverride": null,
-      "blockers": [
-        "source-assignment-positional-legacy",
-        "source-inaccessible",
-        "source-not-inspected"
-      ]
+      "blockers": []
     },
     {
       "recordId": "urn:maha:record:longevity-metabolism-cd38-nad-consumption",
@@ -7144,36 +7299,39 @@
       "sourceYear": "2012",
       "sourceIdentifier": "10.4161/auto.19496",
       "locator": "Assay interpretation sections for LC3, SQSTM1/p62, lysosomal inhibition, and autophagic flux.",
-      "assignmentOrigin": "positional-legacy",
+      "assignmentOrigin": "independently-curated",
       "evidence": {
         "metadataVerified": true,
         "metadataMethod": "crossref-rest",
         "metadataNote": "Crossref resolves this identifier to \"Guidelines for the use and interpretation of assays for monitoring autophagy\" in Autophagy (2012). Registry resolution confirms the document exists; it does not establish subject alignment.",
-        "sourceContentInspected": false,
-        "inspectedContentLocation": null,
-        "subjectAligned": "inaccessible-source",
+        "sourceContentInspected": true,
+        "inspectedContentLocation": "PMC3404883, Guidelines §§ “Monitoring autophagy”, “LC3 turnover”, “SQSTM1/p62”, and lysosomal-inhibitor cautions",
+        "subjectAligned": "supported",
         "mismatchBasis": null,
         "chronologicalRiskIndicator": false,
-        "claimSupported": false,
+        "claimSupported": true,
         "sourceIndependentOfOtherCitedSources": null,
         "independentlyReproduced": false,
         "externallyReviewed": false,
-        "inspectedArtifactVersion": "not-inspected",
-        "inspectionDepth": "not-inspected",
-        "versionRelationshipVerified": false,
-        "recoveryDisposition": "not-attempted"
+        "inspectedArtifactVersion": "version-of-record",
+        "inspectionDepth": "specified-sections",
+        "versionRelationshipVerified": true,
+        "recoveryDisposition": "open-copy-located"
       },
-      "reason": "Retrieval was attempted for this batch through PubMed and Europe PMC; both returned navigation shells rather than the record, so the content could not be read. An inaccessible source is never treated as content-confirmed.",
+      "reason": "The guidelines describe LC3-II turnover and comparison with and without lysosomal inhibitors as a flux assay.",
       "transcriptionConfidence": "high",
-      "remediation": "Obtain the guidelines through a retrievable route, inspect the named assay-interpretation sections, then confirm or replace.",
+      "remediation": "None. Retain the context-specific cautions.",
       "priorMapping": null,
-      "priorJudgement": null,
+      "priorJudgement": {
+        "batchId": "batch-3",
+        "verdict": "inaccessible-source",
+        "sourceContentInspected": false,
+        "inspectedContentLocation": null,
+        "reason": "Retrieval was attempted for this batch through PubMed and Europe PMC; both returned navigation shells rather than the record, so the content could not be read. An inaccessible source is never treated as content-confirmed.",
+        "priorJudgement": null
+      },
       "proposedSourceOverride": null,
-      "blockers": [
-        "source-assignment-positional-legacy",
-        "source-inaccessible",
-        "source-not-inspected"
-      ]
+      "blockers": []
     },
     {
       "recordId": "urn:maha:record:longevity-metabolism-lifespan-versus-healthspan-endpoints",
@@ -7235,36 +7393,39 @@
       "sourceYear": "2012",
       "sourceIdentifier": "10.4161/auto.19496",
       "locator": "Assay interpretation sections for LC3, SQSTM1/p62, lysosomal inhibition, and autophagic flux.",
-      "assignmentOrigin": "positional-legacy",
+      "assignmentOrigin": "independently-curated",
       "evidence": {
         "metadataVerified": true,
         "metadataMethod": "crossref-rest",
         "metadataNote": "Crossref resolves this identifier to \"Guidelines for the use and interpretation of assays for monitoring autophagy\" in Autophagy (2012). Registry resolution confirms the document exists; it does not establish subject alignment.",
-        "sourceContentInspected": false,
-        "inspectedContentLocation": null,
-        "subjectAligned": "inaccessible-source",
+        "sourceContentInspected": true,
+        "inspectedContentLocation": "PMC3404883, Guidelines §§ “Monitoring autophagy”, “LC3 turnover”, “SQSTM1/p62”, and lysosomal-inhibitor cautions",
+        "subjectAligned": "supported",
         "mismatchBasis": null,
         "chronologicalRiskIndicator": false,
-        "claimSupported": false,
+        "claimSupported": true,
         "sourceIndependentOfOtherCitedSources": null,
         "independentlyReproduced": false,
         "externallyReviewed": false,
-        "inspectedArtifactVersion": "not-inspected",
-        "inspectionDepth": "not-inspected",
-        "versionRelationshipVerified": false,
-        "recoveryDisposition": "not-attempted"
+        "inspectedArtifactVersion": "version-of-record",
+        "inspectionDepth": "specified-sections",
+        "versionRelationshipVerified": true,
+        "recoveryDisposition": "open-copy-located"
       },
-      "reason": "Retrieval was attempted for this batch through PubMed and Europe PMC; both returned navigation shells rather than the record, so the content could not be read. An inaccessible source is never treated as content-confirmed.",
+      "reason": "The guidelines specify protease inhibitors, lysosomal pH neutralizers, and fusion blocks, including their interpretation limits.",
       "transcriptionConfidence": "high",
-      "remediation": "Obtain the guidelines through a retrievable route, inspect the named assay-interpretation sections, then confirm or replace.",
+      "remediation": "None. Preserve inhibitor toxicity and off-target cautions.",
       "priorMapping": null,
-      "priorJudgement": null,
+      "priorJudgement": {
+        "batchId": "batch-3",
+        "verdict": "inaccessible-source",
+        "sourceContentInspected": false,
+        "inspectedContentLocation": null,
+        "reason": "Retrieval was attempted for this batch through PubMed and Europe PMC; both returned navigation shells rather than the record, so the content could not be read. An inaccessible source is never treated as content-confirmed.",
+        "priorJudgement": null
+      },
       "proposedSourceOverride": null,
-      "blockers": [
-        "source-assignment-positional-legacy",
-        "source-inaccessible",
-        "source-not-inspected"
-      ]
+      "blockers": []
     },
     {
       "recordId": "urn:maha:record:longevity-metabolism-metabolic-flux-tracing",
@@ -7727,36 +7888,39 @@
       "sourceYear": "2012",
       "sourceIdentifier": "10.4161/auto.19496",
       "locator": "Assay interpretation sections for LC3, SQSTM1/p62, lysosomal inhibition, and autophagic flux.",
-      "assignmentOrigin": "positional-legacy",
+      "assignmentOrigin": "independently-curated",
       "evidence": {
         "metadataVerified": true,
         "metadataMethod": "crossref-rest",
         "metadataNote": "Crossref resolves this identifier to \"Guidelines for the use and interpretation of assays for monitoring autophagy\" in Autophagy (2012). Registry resolution confirms the document exists; it does not establish subject alignment.",
-        "sourceContentInspected": false,
-        "inspectedContentLocation": null,
-        "subjectAligned": "inaccessible-source",
+        "sourceContentInspected": true,
+        "inspectedContentLocation": "PMC3404883, Guidelines §§ “Monitoring autophagy”, “LC3 turnover”, “SQSTM1/p62”, and lysosomal-inhibitor cautions",
+        "subjectAligned": "supported",
         "mismatchBasis": null,
         "chronologicalRiskIndicator": false,
-        "claimSupported": false,
+        "claimSupported": true,
         "sourceIndependentOfOtherCitedSources": null,
         "independentlyReproduced": false,
         "externallyReviewed": false,
-        "inspectedArtifactVersion": "not-inspected",
-        "inspectionDepth": "not-inspected",
-        "versionRelationshipVerified": false,
-        "recoveryDisposition": "not-attempted"
+        "inspectedArtifactVersion": "version-of-record",
+        "inspectionDepth": "specified-sections",
+        "versionRelationshipVerified": true,
+        "recoveryDisposition": "open-copy-located"
       },
-      "reason": "Retrieval was attempted for this batch through PubMed and Europe PMC; both returned navigation shells rather than the record, so the content could not be read. An inaccessible source is never treated as content-confirmed.",
+      "reason": "The guidelines describe SQSTM1/p62 incorporation into autophagosomes, degradation in autolysosomes, and context-dependent turnover assays.",
       "transcriptionConfidence": "high",
-      "remediation": "Obtain the guidelines through a retrievable route, inspect the named assay-interpretation sections, then confirm or replace.",
+      "remediation": "None. Preserve the warning that steady-state p62 can be confounded by synthesis and cell context.",
       "priorMapping": null,
-      "priorJudgement": null,
+      "priorJudgement": {
+        "batchId": "batch-3",
+        "verdict": "inaccessible-source",
+        "sourceContentInspected": false,
+        "inspectedContentLocation": null,
+        "reason": "Retrieval was attempted for this batch through PubMed and Europe PMC; both returned navigation shells rather than the record, so the content could not be read. An inaccessible source is never treated as content-confirmed.",
+        "priorJudgement": null
+      },
       "proposedSourceOverride": null,
-      "blockers": [
-        "source-assignment-positional-legacy",
-        "source-inaccessible",
-        "source-not-inspected"
-      ]
+      "blockers": []
     },
     {
       "recordId": "urn:maha:record:longevity-metabolism-pink1-parkin-pathway",
@@ -8180,30 +8344,29 @@
         "metadataVerified": true,
         "metadataMethod": "crossref-rest",
         "metadataNote": "Crossref resolves this identifier to \"Feature Visualization\" in Distill (2017). Registry resolution confirms the document exists; it does not establish subject alignment.",
-        "sourceContentInspected": false,
-        "inspectedContentLocation": null,
-        "subjectAligned": "insufficient-evidence",
-        "mismatchBasis": null,
+        "sourceContentInspected": true,
+        "inspectedContentLocation": "Distill 2017 “Feature Visualization”, Feature Visualization by Optimization, objectives, regularization, diversity, and interpretation cautions",
+        "subjectAligned": "mismatched",
+        "mismatchBasis": "inspected-content-different-subject",
         "chronologicalRiskIndicator": false,
         "claimSupported": false,
         "sourceIndependentOfOtherCitedSources": null,
         "independentlyReproduced": false,
         "externallyReviewed": false,
-        "inspectedArtifactVersion": "not-inspected",
-        "inspectionDepth": "not-inspected",
-        "versionRelationshipVerified": false,
-        "recoveryDisposition": "not-attempted"
+        "inspectedArtifactVersion": "version-of-record",
+        "inspectionDepth": "full-document",
+        "versionRelationshipVerified": true,
+        "recoveryDisposition": "open-copy-located"
       },
-      "reason": "The source was inherited from the positional block assignment and has not been read for this record. Registry metadata alone cannot establish that a source is about a subject.",
+      "reason": "The article automates input optimization to produce visualizations, but human interpretation remains the object; it does not define automated feature interpretation.",
       "transcriptionConfidence": "high",
-      "remediation": "Inspect the bound source against this record subject, then either confirm the mapping as curated or replace it with an explicit override.",
+      "remediation": "Bind a source that evaluates machine-generated feature descriptions or labels.",
       "priorMapping": null,
       "priorJudgement": null,
       "proposedSourceOverride": null,
       "blockers": [
-        "source-alignment-insufficient-evidence",
         "source-assignment-positional-legacy",
-        "source-not-inspected"
+        "source-subject-mismatched"
       ]
     },
     {
@@ -8270,30 +8433,29 @@
         "metadataVerified": true,
         "metadataMethod": "crossref-rest",
         "metadataNote": "Crossref resolves this identifier to \"Feature Visualization\" in Distill (2017). Registry resolution confirms the document exists; it does not establish subject alignment.",
-        "sourceContentInspected": false,
-        "inspectedContentLocation": null,
-        "subjectAligned": "insufficient-evidence",
-        "mismatchBasis": null,
+        "sourceContentInspected": true,
+        "inspectedContentLocation": "Distill 2017 “Feature Visualization”, Feature Visualization by Optimization, objectives, regularization, diversity, and interpretation cautions",
+        "subjectAligned": "mismatched",
+        "mismatchBasis": "inspected-content-different-subject",
         "chronologicalRiskIndicator": false,
         "claimSupported": false,
         "sourceIndependentOfOtherCitedSources": null,
         "independentlyReproduced": false,
         "externallyReviewed": false,
-        "inspectedArtifactVersion": "not-inspected",
-        "inspectionDepth": "not-inspected",
-        "versionRelationshipVerified": false,
-        "recoveryDisposition": "not-attempted"
+        "inspectedArtifactVersion": "version-of-record",
+        "inspectionDepth": "full-document",
+        "versionRelationshipVerified": true,
+        "recoveryDisposition": "open-copy-located"
       },
-      "reason": "The source was inherited from the positional block assignment and has not been read for this record. Registry metadata alone cannot establish that a source is about a subject.",
+      "reason": "Optimizing an input to activate a unit is not a causal intervention on an internal feature, and the article does not claim that equivalence.",
       "transcriptionConfidence": "high",
-      "remediation": "Inspect the bound source against this record subject, then either confirm the mapping as curated or replace it with an explicit override.",
+      "remediation": "Bind an activation-intervention or causal-mediation source.",
       "priorMapping": null,
       "priorJudgement": null,
       "proposedSourceOverride": null,
       "blockers": [
-        "source-alignment-insufficient-evidence",
         "source-assignment-positional-legacy",
-        "source-not-inspected"
+        "source-subject-mismatched"
       ]
     },
     {
@@ -8447,30 +8609,29 @@
         "metadataVerified": true,
         "metadataMethod": "crossref-rest",
         "metadataNote": "Crossref resolves this identifier to \"Feature Visualization\" in Distill (2017). Registry resolution confirms the document exists; it does not establish subject alignment.",
-        "sourceContentInspected": false,
-        "inspectedContentLocation": null,
-        "subjectAligned": "insufficient-evidence",
-        "mismatchBasis": null,
+        "sourceContentInspected": true,
+        "inspectedContentLocation": "Distill 2017 “Feature Visualization”, Feature Visualization by Optimization, objectives, regularization, diversity, and interpretation cautions",
+        "subjectAligned": "mismatched",
+        "mismatchBasis": "inspected-content-different-subject",
         "chronologicalRiskIndicator": false,
         "claimSupported": false,
         "sourceIndependentOfOtherCitedSources": null,
         "independentlyReproduced": false,
         "externallyReviewed": false,
-        "inspectedArtifactVersion": "not-inspected",
-        "inspectionDepth": "not-inspected",
-        "versionRelationshipVerified": false,
-        "recoveryDisposition": "not-attempted"
+        "inspectedArtifactVersion": "version-of-record",
+        "inspectionDepth": "full-document",
+        "versionRelationshipVerified": true,
+        "recoveryDisposition": "open-copy-located"
       },
-      "reason": "The source was inherited from the positional block assignment and has not been read for this record. Registry metadata alone cannot establish that a source is about a subject.",
+      "reason": "The article predates and does not describe cross-layer transcoders.",
       "transcriptionConfidence": "high",
-      "remediation": "Inspect the bound source against this record subject, then either confirm the mapping as curated or replace it with an explicit override.",
+      "remediation": "Bind the technique-specific source.",
       "priorMapping": null,
       "priorJudgement": null,
       "proposedSourceOverride": null,
       "blockers": [
-        "source-alignment-insufficient-evidence",
         "source-assignment-positional-legacy",
-        "source-not-inspected"
+        "source-subject-mismatched"
       ]
     },
     {
@@ -8492,30 +8653,29 @@
         "metadataVerified": true,
         "metadataMethod": "crossref-rest",
         "metadataNote": "Crossref resolves this identifier to \"Feature Visualization\" in Distill (2017). Registry resolution confirms the document exists; it does not establish subject alignment.",
-        "sourceContentInspected": false,
-        "inspectedContentLocation": null,
-        "subjectAligned": "insufficient-evidence",
-        "mismatchBasis": null,
+        "sourceContentInspected": true,
+        "inspectedContentLocation": "Distill 2017 “Feature Visualization”, Feature Visualization by Optimization, objectives, regularization, diversity, and interpretation cautions",
+        "subjectAligned": "mismatched",
+        "mismatchBasis": "inspected-content-different-subject",
         "chronologicalRiskIndicator": false,
         "claimSupported": false,
         "sourceIndependentOfOtherCitedSources": null,
         "independentlyReproduced": false,
         "externallyReviewed": false,
-        "inspectedArtifactVersion": "not-inspected",
-        "inspectionDepth": "not-inspected",
-        "versionRelationshipVerified": false,
-        "recoveryDisposition": "not-attempted"
+        "inspectedArtifactVersion": "version-of-record",
+        "inspectionDepth": "full-document",
+        "versionRelationshipVerified": true,
+        "recoveryDisposition": "open-copy-located"
       },
-      "reason": "The source was inherited from the positional block assignment and has not been read for this record. Registry metadata alone cannot establish that a source is about a subject.",
+      "reason": "The article discusses visualization objectives and regularization but does not define dead features in learned dictionaries.",
       "transcriptionConfidence": "high",
-      "remediation": "Inspect the bound source against this record subject, then either confirm the mapping as curated or replace it with an explicit override.",
+      "remediation": "Bind a sparse-autoencoder source that measures inactive or dead features.",
       "priorMapping": null,
       "priorJudgement": null,
       "proposedSourceOverride": null,
       "blockers": [
-        "source-alignment-insufficient-evidence",
         "source-assignment-positional-legacy",
-        "source-not-inspected"
+        "source-subject-mismatched"
       ]
     },
     {
@@ -8578,36 +8738,32 @@
       "sourceYear": "2017",
       "sourceIdentifier": "10.23915/distill.00007",
       "locator": "Optimization objectives, regularization, visualization techniques, and interpretation cautions.",
-      "assignmentOrigin": "positional-legacy",
+      "assignmentOrigin": "independently-curated",
       "evidence": {
         "metadataVerified": true,
         "metadataMethod": "crossref-rest",
         "metadataNote": "Crossref resolves this identifier to \"Feature Visualization\" in Distill (2017). Registry resolution confirms the document exists; it does not establish subject alignment.",
-        "sourceContentInspected": false,
-        "inspectedContentLocation": null,
-        "subjectAligned": "insufficient-evidence",
+        "sourceContentInspected": true,
+        "inspectedContentLocation": "Distill 2017 “Feature Visualization”, Feature Visualization by Optimization, objectives, regularization, diversity, and interpretation cautions",
+        "subjectAligned": "supported",
         "mismatchBasis": null,
         "chronologicalRiskIndicator": false,
-        "claimSupported": false,
+        "claimSupported": true,
         "sourceIndependentOfOtherCitedSources": null,
         "independentlyReproduced": false,
         "externallyReviewed": false,
-        "inspectedArtifactVersion": "not-inspected",
-        "inspectionDepth": "not-inspected",
-        "versionRelationshipVerified": false,
-        "recoveryDisposition": "not-attempted"
+        "inspectedArtifactVersion": "version-of-record",
+        "inspectionDepth": "full-document",
+        "versionRelationshipVerified": true,
+        "recoveryDisposition": "open-copy-located"
       },
-      "reason": "The source was inherited from the positional block assignment and has not been read for this record. Registry metadata alone cannot establish that a source is about a subject.",
+      "reason": "The article directly defines optimization of an input to maximize a neuron, channel, layer, or class objective and documents regularization and diversity controls.",
       "transcriptionConfidence": "high",
-      "remediation": "Inspect the bound source against this record subject, then either confirm the mapping as curated or replace it with an explicit override.",
+      "remediation": "None. Keep the mapping and its visualization-not-explanation boundary.",
       "priorMapping": null,
       "priorJudgement": null,
       "proposedSourceOverride": null,
-      "blockers": [
-        "source-alignment-insufficient-evidence",
-        "source-assignment-positional-legacy",
-        "source-not-inspected"
-      ]
+      "blockers": []
     },
     {
       "recordId": "urn:maha:record:mechanistic-interpretability-feature-splitting",
@@ -9780,41 +9936,45 @@
       "sourceYear": "2011",
       "sourceIdentifier": "10.1038/nn.2973",
       "locator": "Array architecture, conformal placement, multiplexing, in-vivo mapping, and Methods.",
-      "assignmentOrigin": "positional-legacy",
+      "assignmentOrigin": "independently-curated",
       "evidence": {
         "metadataVerified": true,
         "metadataMethod": "crossref-rest",
         "metadataNote": "Crossref resolves this identifier to \"Flexible, foldable, actively multiplexed, high-density electrode array for mapping brain activity in vivo\" in Nature Neuroscience (2011). Registry resolution confirms the document exists; it does not establish subject alignment.",
-        "sourceContentInspected": false,
-        "inspectedContentLocation": null,
-        "subjectAligned": "inaccessible-source",
+        "sourceContentInspected": true,
+        "inspectedContentLocation": "PMC3235709, abstract, Electrode array fabrication and testing, in-vivo results, Discussion, and Methods",
+        "subjectAligned": "supported",
         "mismatchBasis": null,
         "chronologicalRiskIndicator": false,
-        "claimSupported": false,
+        "claimSupported": true,
         "sourceIndependentOfOtherCitedSources": null,
         "independentlyReproduced": false,
         "externallyReviewed": false,
-        "inspectedArtifactVersion": "not-inspected",
-        "inspectionDepth": "not-inspected",
+        "inspectedArtifactVersion": "version-of-record",
+        "inspectionDepth": "full-document",
         "versionRelationshipVerified": true,
-        "recoveryDisposition": "recovery-ready-retrieval-failed"
+        "recoveryDisposition": "open-copy-located"
       },
-      "reason": "Recovery reached manual-inspection-ready with a verified OSTI candidate, but the OSTI host refused every connection from this environment, so the artifact was never opened. Recovery-ready is not inspected, and the record stays inaccessible.",
+      "reason": "The paper reports 500 μm electrode spacing over a 10 × 9 mm area and compares that spatial scale with clinical ECoG.",
       "transcriptionConfidence": "high",
-      "remediation": "Retry the OSTI copy from a network that can reach it, then inspect and judge.",
+      "remediation": "None. Keep the mapping and reported geometry.",
       "priorMapping": null,
       "priorJudgement": {
-        "batchId": "batch-3",
+        "batchId": "batch-6",
         "verdict": "inaccessible-source",
+        "sourceContentInspected": false,
+        "inspectionDepth": "not-inspected",
         "inspectedContentLocation": null,
-        "reason": "Retrieval was attempted and the publisher redirected to an authentication wall, so the content could not be read."
+        "reason": "Recovery reached manual-inspection-ready with a verified OSTI candidate, but the OSTI host refused every connection from this environment, so the artifact was never opened. Recovery-ready is not inspected, and the record stays inaccessible.",
+        "priorJudgement": {
+          "batchId": "batch-3",
+          "verdict": "inaccessible-source",
+          "inspectedContentLocation": null,
+          "reason": "Retrieval was attempted and the publisher redirected to an authentication wall, so the content could not be read."
+        }
       },
       "proposedSourceOverride": null,
-      "blockers": [
-        "source-assignment-positional-legacy",
-        "source-inaccessible",
-        "source-not-inspected"
-      ]
+      "blockers": []
     },
     {
       "recordId": "urn:maha:record:neurotechnology-bci-electrode-tissue-interface",
@@ -9836,35 +9996,42 @@
         "metadataVerified": true,
         "metadataMethod": "crossref-rest",
         "metadataNote": "Crossref resolves this identifier to \"Flexible, foldable, actively multiplexed, high-density electrode array for mapping brain activity in vivo\" in Nature Neuroscience (2011). Registry resolution confirms the document exists; it does not establish subject alignment.",
-        "sourceContentInspected": false,
-        "inspectedContentLocation": null,
-        "subjectAligned": "inaccessible-source",
+        "sourceContentInspected": true,
+        "inspectedContentLocation": "PMC3235709, abstract, Electrode array fabrication and testing, in-vivo results, Discussion, and Methods",
+        "subjectAligned": "partially-supported",
         "mismatchBasis": null,
         "chronologicalRiskIndicator": false,
         "claimSupported": false,
         "sourceIndependentOfOtherCitedSources": null,
         "independentlyReproduced": false,
         "externallyReviewed": false,
-        "inspectedArtifactVersion": "not-inspected",
-        "inspectionDepth": "not-inspected",
+        "inspectedArtifactVersion": "version-of-record",
+        "inspectionDepth": "full-document",
         "versionRelationshipVerified": true,
-        "recoveryDisposition": "recovery-ready-retrieval-failed"
+        "recoveryDisposition": "open-copy-located"
       },
-      "reason": "Recovery reached manual-inspection-ready with a verified OSTI candidate, but the OSTI host refused every connection from this environment, so the artifact was never opened. Recovery-ready is not inspected, and the record stays inaccessible.",
+      "reason": "The paper describes non-penetrating electrodes, encapsulation, and placement on cortex, but does not characterize chronic tissue response at the interface.",
       "transcriptionConfidence": "high",
-      "remediation": "Retry the OSTI copy from a network that can reach it, then inspect and judge.",
+      "remediation": "Narrow to the physical interface design or bind chronic histology and interface-stability evidence.",
       "priorMapping": null,
       "priorJudgement": {
-        "batchId": "batch-3",
+        "batchId": "batch-6",
         "verdict": "inaccessible-source",
+        "sourceContentInspected": false,
+        "inspectionDepth": "not-inspected",
         "inspectedContentLocation": null,
-        "reason": "Retrieval was attempted and the publisher redirected to an authentication wall, so the content could not be read."
+        "reason": "Recovery reached manual-inspection-ready with a verified OSTI candidate, but the OSTI host refused every connection from this environment, so the artifact was never opened. Recovery-ready is not inspected, and the record stays inaccessible.",
+        "priorJudgement": {
+          "batchId": "batch-3",
+          "verdict": "inaccessible-source",
+          "inspectedContentLocation": null,
+          "reason": "Retrieval was attempted and the publisher redirected to an authentication wall, so the content could not be read."
+        }
       },
       "proposedSourceOverride": null,
       "blockers": [
         "source-assignment-positional-legacy",
-        "source-inaccessible",
-        "source-not-inspected"
+        "source-subject-partially-supported"
       ]
     },
     {
@@ -9924,41 +10091,45 @@
       "sourceYear": "2011",
       "sourceIdentifier": "10.1038/nn.2973",
       "locator": "Array architecture, conformal placement, multiplexing, in-vivo mapping, and Methods.",
-      "assignmentOrigin": "positional-legacy",
+      "assignmentOrigin": "independently-curated",
       "evidence": {
         "metadataVerified": true,
         "metadataMethod": "crossref-rest",
         "metadataNote": "Crossref resolves this identifier to \"Flexible, foldable, actively multiplexed, high-density electrode array for mapping brain activity in vivo\" in Nature Neuroscience (2011). Registry resolution confirms the document exists; it does not establish subject alignment.",
-        "sourceContentInspected": false,
-        "inspectedContentLocation": null,
-        "subjectAligned": "inaccessible-source",
+        "sourceContentInspected": true,
+        "inspectedContentLocation": "PMC3235709, abstract, Electrode array fabrication and testing, in-vivo results, Discussion, and Methods",
+        "subjectAligned": "supported",
         "mismatchBasis": null,
         "chronologicalRiskIndicator": false,
-        "claimSupported": false,
+        "claimSupported": true,
         "sourceIndependentOfOtherCitedSources": null,
         "independentlyReproduced": false,
         "externallyReviewed": false,
-        "inspectedArtifactVersion": "not-inspected",
-        "inspectionDepth": "not-inspected",
+        "inspectedArtifactVersion": "version-of-record",
+        "inspectionDepth": "full-document",
         "versionRelationshipVerified": true,
-        "recoveryDisposition": "recovery-ready-retrieval-failed"
+        "recoveryDisposition": "open-copy-located"
       },
-      "reason": "Recovery reached manual-inspection-ready with a verified OSTI candidate, but the OSTI host refused every connection from this environment, so the artifact was never opened. Recovery-ready is not inspected, and the record stays inaccessible.",
+      "reason": "The article fabricates an ultrathin flexible array, quantifies reduced bending stiffness, and demonstrates folding around curved geometry for in-vivo mapping.",
       "transcriptionConfidence": "high",
-      "remediation": "Retry the OSTI copy from a network that can reach it, then inspect and judge.",
+      "remediation": "None. Keep the mapping and device-specific dimensions.",
       "priorMapping": null,
       "priorJudgement": {
-        "batchId": "batch-3",
+        "batchId": "batch-6",
         "verdict": "inaccessible-source",
+        "sourceContentInspected": false,
+        "inspectionDepth": "not-inspected",
         "inspectedContentLocation": null,
-        "reason": "Retrieval was attempted and the publisher redirected to an authentication wall, so the content could not be read."
+        "reason": "Recovery reached manual-inspection-ready with a verified OSTI candidate, but the OSTI host refused every connection from this environment, so the artifact was never opened. Recovery-ready is not inspected, and the record stays inaccessible.",
+        "priorJudgement": {
+          "batchId": "batch-3",
+          "verdict": "inaccessible-source",
+          "inspectedContentLocation": null,
+          "reason": "Retrieval was attempted and the publisher redirected to an authentication wall, so the content could not be read."
+        }
       },
       "proposedSourceOverride": null,
-      "blockers": [
-        "source-assignment-positional-legacy",
-        "source-inaccessible",
-        "source-not-inspected"
-      ]
+      "blockers": []
     },
     {
       "recordId": "urn:maha:record:neurotechnology-bci-foreign-body-response",
@@ -10025,35 +10196,42 @@
         "metadataVerified": true,
         "metadataMethod": "crossref-rest",
         "metadataNote": "Crossref resolves this identifier to \"Flexible, foldable, actively multiplexed, high-density electrode array for mapping brain activity in vivo\" in Nature Neuroscience (2011). Registry resolution confirms the document exists; it does not establish subject alignment.",
-        "sourceContentInspected": false,
-        "inspectedContentLocation": null,
-        "subjectAligned": "inaccessible-source",
+        "sourceContentInspected": true,
+        "inspectedContentLocation": "PMC3235709, abstract, Electrode array fabrication and testing, in-vivo results, Discussion, and Methods",
+        "subjectAligned": "partially-supported",
         "mismatchBasis": null,
         "chronologicalRiskIndicator": false,
         "claimSupported": false,
         "sourceIndependentOfOtherCitedSources": null,
         "independentlyReproduced": false,
         "externallyReviewed": false,
-        "inspectedArtifactVersion": "not-inspected",
-        "inspectionDepth": "not-inspected",
+        "inspectedArtifactVersion": "version-of-record",
+        "inspectionDepth": "full-document",
         "versionRelationshipVerified": true,
-        "recoveryDisposition": "recovery-ready-retrieval-failed"
+        "recoveryDisposition": "open-copy-located"
       },
-      "reason": "Recovery reached manual-inspection-ready with a verified OSTI candidate, but the OSTI host refused every connection from this environment, so the artifact was never opened. Recovery-ready is not inspected, and the record stays inaccessible.",
+      "reason": "The paper reports low multiplexer crosstalk and signal-to-noise advantages, but the inspected text does not establish a general electrode-impedance model.",
       "transcriptionConfidence": "high",
-      "remediation": "Retry the OSTI copy from a network that can reach it, then inspect and judge.",
+      "remediation": "Narrow to measured crosstalk and recording quality or bind an impedance-characterization source.",
       "priorMapping": null,
       "priorJudgement": {
-        "batchId": "batch-3",
+        "batchId": "batch-6",
         "verdict": "inaccessible-source",
+        "sourceContentInspected": false,
+        "inspectionDepth": "not-inspected",
         "inspectedContentLocation": null,
-        "reason": "Retrieval was attempted and the publisher redirected to an authentication wall, so the content could not be read."
+        "reason": "Recovery reached manual-inspection-ready with a verified OSTI candidate, but the OSTI host refused every connection from this environment, so the artifact was never opened. Recovery-ready is not inspected, and the record stays inaccessible.",
+        "priorJudgement": {
+          "batchId": "batch-3",
+          "verdict": "inaccessible-source",
+          "inspectedContentLocation": null,
+          "reason": "Retrieval was attempted and the publisher redirected to an authentication wall, so the content could not be read."
+        }
       },
       "proposedSourceOverride": null,
       "blockers": [
         "source-assignment-positional-legacy",
-        "source-inaccessible",
-        "source-not-inspected"
+        "source-subject-partially-supported"
       ]
     },
     {
@@ -10164,41 +10342,45 @@
       "sourceYear": "2011",
       "sourceIdentifier": "10.1038/nn.2973",
       "locator": "Array architecture, conformal placement, multiplexing, in-vivo mapping, and Methods.",
-      "assignmentOrigin": "positional-legacy",
+      "assignmentOrigin": "independently-curated",
       "evidence": {
         "metadataVerified": true,
         "metadataMethod": "crossref-rest",
         "metadataNote": "Crossref resolves this identifier to \"Flexible, foldable, actively multiplexed, high-density electrode array for mapping brain activity in vivo\" in Nature Neuroscience (2011). Registry resolution confirms the document exists; it does not establish subject alignment.",
-        "sourceContentInspected": false,
-        "inspectedContentLocation": null,
-        "subjectAligned": "inaccessible-source",
+        "sourceContentInspected": true,
+        "inspectedContentLocation": "PMC3235709, abstract, Electrode array fabrication and testing, in-vivo results, Discussion, and Methods",
+        "subjectAligned": "supported",
         "mismatchBasis": null,
         "chronologicalRiskIndicator": false,
-        "claimSupported": false,
+        "claimSupported": true,
         "sourceIndependentOfOtherCitedSources": null,
         "independentlyReproduced": false,
         "externallyReviewed": false,
-        "inspectedArtifactVersion": "not-inspected",
-        "inspectionDepth": "not-inspected",
+        "inspectedArtifactVersion": "version-of-record",
+        "inspectionDepth": "full-document",
         "versionRelationshipVerified": true,
-        "recoveryDisposition": "recovery-ready-retrieval-failed"
+        "recoveryDisposition": "open-copy-located"
       },
-      "reason": "Recovery reached manual-inspection-ready with a verified OSTI candidate, but the OSTI host refused every connection from this environment, so the artifact was never opened. Recovery-ready is not inspected, and the record stays inaccessible.",
+      "reason": "The paper directly reports a 360-channel active μECoG array with multiplexed sensors and in-vivo cortical recordings.",
       "transcriptionConfidence": "high",
-      "remediation": "Retry the OSTI copy from a network that can reach it, then inspect and judge.",
+      "remediation": "None. Keep the mapping and device-specific scope.",
       "priorMapping": null,
       "priorJudgement": {
-        "batchId": "batch-3",
+        "batchId": "batch-6",
         "verdict": "inaccessible-source",
+        "sourceContentInspected": false,
+        "inspectionDepth": "not-inspected",
         "inspectedContentLocation": null,
-        "reason": "Retrieval was attempted and the publisher redirected to an authentication wall, so the content could not be read."
+        "reason": "Recovery reached manual-inspection-ready with a verified OSTI candidate, but the OSTI host refused every connection from this environment, so the artifact was never opened. Recovery-ready is not inspected, and the record stays inaccessible.",
+        "priorJudgement": {
+          "batchId": "batch-3",
+          "verdict": "inaccessible-source",
+          "inspectedContentLocation": null,
+          "reason": "Retrieval was attempted and the publisher redirected to an authentication wall, so the content could not be read."
+        }
       },
       "proposedSourceOverride": null,
-      "blockers": [
-        "source-assignment-positional-legacy",
-        "source-inaccessible",
-        "source-not-inspected"
-      ]
+      "blockers": []
     },
     {
       "recordId": "urn:maha:record:neurotechnology-bci-motor-intention-decoding",

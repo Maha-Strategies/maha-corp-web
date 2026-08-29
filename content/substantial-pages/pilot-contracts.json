@@ -2,13 +2,13 @@
   "compilerVersion": "maha-substantial-page-compiler/0.1",
   "pilotVersion": "maha-substantial-page-pilot/0.1",
   "selectionDeviation": "No frontier-domain record is public; PUBLIC_EPISTEMIC_RECORDS holds two entries outside these domains. Draft canonical records were used and every artifact remains internal, noindex and unrouted.",
-  "passing": 6,
-  "blocked": 2,
+  "passing": 7,
+  "blocked": 1,
   "blockerCounts": {
-    "source-assignment-positional-legacy": 2,
-    "source-inaccessible": 2,
-    "source-not-inspected": 2,
-    "source-metadata-unverified": 1
+    "source-assignment-positional-legacy": 1,
+    "source-inaccessible": 1,
+    "source-metadata-unverified": 1,
+    "source-not-inspected": 1
   },
   "selectionTierCounts": {
     "bridge-edge": 28,
@@ -579,18 +579,14 @@
       "domainSlug": "longevity-metabolism",
       "recordKind": "measurement",
       "selectionRationale": "A measurement-kind record whose cited source is a methodological guideline, which makes the static-versus-dynamic distinction unusually well supported. Complete locator and rights basis.",
-      "sourceAlignment": "inaccessible-source",
+      "sourceAlignment": "supported",
       "sourceAlignmentNote": "The autophagy assay guidelines address LC3 interpretation directly, and the locator names the LC3, SQSTM1/p62, lysosomal inhibition and flux sections.",
       "contractDigest": "sha256:cc1092ea4028c76426d807d00e7b422b565a112e2508c9a8d56c937cc9555b26",
       "decision": {
         "recordId": "urn:maha:record:longevity-metabolism-lc3-turnover-assays",
-        "pageEligible": false,
+        "pageEligible": true,
         "evaluatedAgainst": "maha-substantial-page/0.1",
-        "reasons": [
-          "source-assignment-positional-legacy",
-          "source-inaccessible",
-          "source-not-inspected"
-        ],
+        "reasons": [],
         "measures": {
           "explanationSections": 3,
           "explanationParagraphs": 6,

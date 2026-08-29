@@ -267,4 +267,6 @@ export function compileOutstandingRecoveryPackets(observationsBySource: Readonly
 if (SOURCE_RECOVERY_CANARY_IDS.length !== 20 || new Set(SOURCE_RECOVERY_CANARY_IDS).size !== 20) {
   throw new Error('The source-recovery canary must contain exactly twenty unique contracts.')
 }
-if (SOURCE_RECOVERY_OUTSTANDING_IDS.length !== 19) throw new Error(`Expected 19 outstanding source contracts, found ${SOURCE_RECOVERY_OUTSTANDING_IDS.length}.`)
+if (SOURCE_RECOVERY_OUTSTANDING_IDS.length === 0 || new Set(SOURCE_RECOVERY_OUTSTANDING_IDS).size !== SOURCE_RECOVERY_OUTSTANDING_IDS.length) {
+  throw new Error('Outstanding source recovery must contain unique unresolved contracts while a backlog remains.')
+}

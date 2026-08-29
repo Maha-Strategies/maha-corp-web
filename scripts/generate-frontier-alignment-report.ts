@@ -7,15 +7,19 @@ import {
   FRONTIER_ALIGNMENT_AUDIT,
   SOURCE_ALIGNMENT_VERSION,
   alignmentBlockers,
+  alignmentFor,
   auditDigest,
   ALIGNMENT_BATCH_MEMBERSHIP,
   BATCH_5_REINSPECTIONS,
   BATCH_6_REINSPECTIONS,
+  BATCH_7_FIRST_JUDGEMENTS,
+  BATCH_7_REINSPECTIONS,
   batchOf,
   batchStats,
   originTotals,
   verdictTotals,
 } from '../lib/frontier-source-alignment.ts'
+import { ALIGNMENT_BATCH_7_DECISIONS } from '../lib/frontier-alignment-batch-7.ts'
 
 /**
  * Emits the frontier source-alignment audit.
@@ -95,9 +99,23 @@ for (const stats of batchStats()) {
 }
 lines.push('')
 lines.push(
-  `Records carrying only default state, judged by no batch: **${FRONTIER_ALIGNMENT_AUDIT.filter((entry) => batchOf(entry.recordId) === null).length}**. These were never inspected and block.`,
+  `Records carrying only default state, judged by no initial batch or Batch 7: **${FRONTIER_ALIGNMENT_AUDIT.filter((entry) => batchOf(entry.recordId) === null && !BATCH_7_FIRST_JUDGEMENTS.includes(entry.recordId)).length}**. These were never inspected and block.`,
   '',
 )
+
+lines.push('## Batch 7 — closure cohort', '')
+lines.push(
+  'Batch 7 contains 35 re-inspections of records whose content had not been opened and five first judgements. It is append-only: prior judgements remain nested in the active audit entry.',
+  '',
+)
+const b7 = ALIGNMENT_BATCH_7_DECISIONS.map((decision) => alignmentFor(decision.recordId)!)
+lines.push(row(['Measure', 'Count']), row(['---', '---']))
+lines.push(row(['Attempted', String(b7.length)]))
+lines.push(row(['Content inspected', String(b7.filter((entry) => entry.evidence.sourceContentInspected).length)]))
+lines.push(row(['Re-inspections', String(BATCH_7_REINSPECTIONS.length)]))
+lines.push(row(['First judgements', String(BATCH_7_FIRST_JUDGEMENTS.length)]))
+lines.push(row(['Alignment-clear', String(b7.filter((entry) => alignmentBlockers(entry.recordId).length === 0).length)]))
+lines.push('')
 
 lines.push('## Batch 6 membership', '')
 lines.push(
