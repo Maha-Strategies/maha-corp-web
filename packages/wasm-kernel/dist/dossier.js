@@ -1,4 +1,5 @@
 import { canonicalJson, verifyCalculationReceipt } from './receipt.js';
+import { createExecutedCalculationReceipt, verifyExecutedCalculationReceipt, } from './execution.js';
 export const DOSSIER_CALCULATION_ATTACHMENT_SCHEMA = 'maha-dossier-calculation-attachment/1.0';
 export async function attachCalculationReceiptToDossier(input) {
     if (!input.dossierId.trim() || input.claimIds.length === 0 || input.claimIds.some((id) => !id.trim()))
@@ -24,6 +25,13 @@ export async function attachCalculationReceiptToDossier(input) {
             potentialAction: claimIds.map((claimId) => ({ '@type': 'AssessAction', object: claimId })),
         },
     };
+}
+export async function executeAndAttachCalculationToDossier(input) {
+    const receipt = await createExecutedCalculationReceipt(input.request, input.artifact);
+    const findings = await verifyExecutedCalculationReceipt(receipt, input.artifact);
+    if (findings.length)
+        throw new Error(`Executed calculation could not be independently recomputed: ${findings.join(',')}`);
+    return { ...await attachCalculationReceiptToDossier({ dossierId: input.dossierId, claimIds: input.claimIds, receipt }), executionRequest: input.request };
 }
 export const KERNEL_ATTACHMENT_ENCODING = 'maha-calculation-receipt/1.0+json';
 export const serializeDossierCalculationAttachment = (attachment) => `${canonicalJson(attachment)}\n`;

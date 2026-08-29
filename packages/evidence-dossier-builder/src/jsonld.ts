@@ -1,6 +1,7 @@
 import { canonicalJson } from './canonicalize.ts'
 import type { EvidenceDossier } from './schema.ts'
 import type { DossierCalculationAttachment } from '../../wasm-kernel/src/dossier.ts'
+import type { DossierRuntimeWitnessAttachment } from '../../../lib/evidence-dossier/runtime-witness.ts'
 
 export const DOSSIER_JSONLD_CONTEXT = 'https://www.mahastrategies.com/ns/evidence-dossier/v1' as const
 
@@ -39,7 +40,7 @@ export interface DossierJsonLd {
   disclaimer: string
 }
 
-export function renderDossierJsonLd(dossier: EvidenceDossier, attachments: readonly DossierCalculationAttachment[] = []): DossierJsonLd {
+export function renderDossierJsonLd(dossier: EvidenceDossier, attachments: readonly DossierCalculationAttachment[] = [], witnesses: readonly DossierRuntimeWitnessAttachment[] = []): DossierJsonLd {
   return {
     '@context': DOSSIER_JSONLD_CONTEXT,
     '@type': 'EvidenceDossier',
@@ -104,7 +105,7 @@ export function renderDossierJsonLd(dossier: EvidenceDossier, attachments: reado
       precisionPolicy: attachment.receipt.precisionPolicy,
     })),
     formalProofs: [],
-    runtimeReceipts: attachments.map((attachment) => attachment.receipt as unknown as Record<string, unknown>),
+    runtimeReceipts: witnesses.map((attachment) => attachment.receipt as unknown as Record<string, unknown>),
 
     assurance: {
       '@type': 'AssuranceStatement',
@@ -140,6 +141,6 @@ export function renderDossierJsonLd(dossier: EvidenceDossier, attachments: reado
 }
 
 /** Deterministic serialization: canonical key order and NFC normalization. */
-export function renderDossierJsonLdText(dossier: EvidenceDossier, attachments: readonly DossierCalculationAttachment[] = []): string {
-  return `${canonicalJson(renderDossierJsonLd(dossier, attachments))}\n`
+export function renderDossierJsonLdText(dossier: EvidenceDossier, attachments: readonly DossierCalculationAttachment[] = [], witnesses: readonly DossierRuntimeWitnessAttachment[] = []): string {
+  return `${canonicalJson(renderDossierJsonLd(dossier, attachments, witnesses))}\n`
 }
