@@ -70,9 +70,10 @@ jobs:
             + (to_regproc('public.fail_mcp_evidence_execution') is not null)::int
             + (to_regproc('public.revoke_mcp_evidence_license_grant') is not null)::int
             + (to_regproc('public.record_mcp_private_canary_target') is not null)::int;")"
-          if [ "$existing_count" -ne 11 ]; then
-            psql "$url" -v ON_ERROR_STOP=1 --single-transaction -f "$path" >/dev/null
-          fi
+          # Reapply this one idempotent migration even when all objects exist:
+          # object presence alone cannot prove that ledger constraints and
+          # function definitions have converged to the exact checked-in text.
+          psql "$url" -v ON_ERROR_STOP=1 --single-transaction -f "$path" >/dev/null
           version="${migration%%_*}"
           psql "$url" -v ON_ERROR_STOP=1 -c "insert into supabase_migrations.schema_migrations (version) values ('${version}') on conflict do nothing;" >/dev/null
           verification="$(psql "$url" -v ON_ERROR_STOP=1 -At -c "

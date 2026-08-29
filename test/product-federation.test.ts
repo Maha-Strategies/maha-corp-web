@@ -77,3 +77,13 @@ test('Preview migration workflow verifies the private MCP license ledger', async
   assert.match(workflow, /Production ref refused/)
   assert.match(workflow, /codex\/cabezon-product-federation/)
 })
+
+test('private canary migration admits its adapter and converges when reapplied', async () => {
+  const migration = await readFile(new URL('../supabase/migrations/20260829000100_mcp_evidence_tool_licensing.sql', import.meta.url), 'utf8')
+  const workflow = await readFile(new URL('../.github/workflows/preview-cabezon-mcp-federation-canary.yml', import.meta.url), 'utf8')
+  assert.match(migration, /epistemic_ingestion_batches_adapter_id_check[\s\S]*'mcp-private-canary'/)
+  assert.match(migration, /epistemic_ingestion_records_adapter_id_check[\s\S]*'mcp-private-canary'/)
+  assert.match(migration, /drop trigger if exists mcp_evidence_license_plans_immutable/)
+  assert.match(workflow, /object presence alone cannot prove that ledger constraints/)
+  assert.doesNotMatch(workflow, /if \[ "\$existing_count" -ne 11 \]/)
+})

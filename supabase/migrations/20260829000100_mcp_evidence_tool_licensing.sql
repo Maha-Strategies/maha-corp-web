@@ -2,6 +2,41 @@
 -- changes access and quota only; it cannot create, supersede, or withdraw a
 -- canonical release and cannot weaken the publication gate.
 
+-- Admit only the dedicated synthetic Preview adapter in addition to every
+-- adapter already accepted by the immutable ingestion ledger. Reapplying this
+-- migration is safe and is required for isolated Preview canary convergence.
+alter table public.epistemic_ingestion_batches
+  drop constraint if exists epistemic_ingestion_batches_adapter_id_check;
+alter table public.epistemic_ingestion_batches
+  add constraint epistemic_ingestion_batches_adapter_id_check
+  check (adapter_id in (
+    'semiconductor',
+    'mathematics',
+    'astronomy',
+    'religion',
+    'neuromorphic-biocomputing',
+    'frontier-canary',
+    'substantial-batch-2-internal-review',
+    'repaired-revision-canary',
+    'mcp-private-canary'
+  ));
+
+alter table public.epistemic_ingestion_records
+  drop constraint if exists epistemic_ingestion_records_adapter_id_check;
+alter table public.epistemic_ingestion_records
+  add constraint epistemic_ingestion_records_adapter_id_check
+  check (adapter_id in (
+    'semiconductor',
+    'mathematics',
+    'astronomy',
+    'religion',
+    'neuromorphic-biocomputing',
+    'frontier-canary',
+    'substantial-batch-2-internal-review',
+    'repaired-revision-canary',
+    'mcp-private-canary'
+  ));
+
 alter table public.agent_client_credentials
   drop constraint if exists agent_client_credentials_allowed_capabilities_check;
 alter table public.agent_client_credentials
@@ -126,6 +161,12 @@ returns trigger language plpgsql set search_path = public as $$
 begin
   raise exception 'MCP evidence licensing and execution ledgers are append-only.' using errcode = '55000';
 end; $$;
+
+drop trigger if exists mcp_evidence_license_plans_immutable on public.mcp_evidence_license_plans;
+drop trigger if exists mcp_evidence_license_grants_immutable on public.mcp_evidence_license_grants;
+drop trigger if exists mcp_evidence_license_events_immutable on public.mcp_evidence_license_events;
+drop trigger if exists mcp_evidence_executions_immutable on public.mcp_evidence_executions;
+drop trigger if exists mcp_evidence_execution_events_immutable on public.mcp_evidence_execution_events;
 
 create trigger mcp_evidence_license_plans_immutable before update or delete on public.mcp_evidence_license_plans
   for each row execute function public.reject_mcp_evidence_ledger_mutation();
