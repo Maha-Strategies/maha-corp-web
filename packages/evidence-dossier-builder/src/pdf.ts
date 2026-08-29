@@ -2,6 +2,8 @@ import { PDFDocument, StandardFonts, rgb, type PDFFont, type PDFPage } from 'pdf
 
 import type { EvidenceDossier } from './schema.ts'
 import type { DossierCalculationAttachment } from '../../wasm-kernel/src/dossier.ts'
+import type { DossierRuntimeWitnessAttachment } from '../../../lib/evidence-dossier/runtime-witness.ts'
+import { canonicalJson } from './canonicalize.ts'
 
 const PAGE = { width: 612, height: 792, margin: 54, footer: 36 }
 
@@ -36,6 +38,7 @@ function wrap(text: string, font: PDFFont, size: number, width: number): string[
 export async function renderEvidenceDossierPdf(input: {
   dossier: EvidenceDossier
   attachments: readonly DossierCalculationAttachment[]
+  witnesses?: readonly DossierRuntimeWitnessAttachment[]
   packageVersion: string
   engagementLabel: string
 }): Promise<Uint8Array> {
@@ -81,10 +84,18 @@ export async function renderEvidenceDossierPdf(input: {
     const receipt = attachment.receipt
     line(`${receipt.module}.${receipt.operation}`, { font: bold, gap: 2 })
     line(`Bound claims: ${attachment.claimIds.join(', ')}`)
-    line(`Output: ${JSON.stringify(receipt.output)} | Uncertainty: ${JSON.stringify(receipt.uncertainty)}`)
+    line(`Output: ${canonicalJson(receipt.output)} | Uncertainty: ${canonicalJson(receipt.uncertainty)}`)
     line(`Precision: ${receipt.precisionPolicy}`)
     line(`Receipt: ${receipt.receiptSha256}`, { size: 7.5, font: mono })
     line(`Kernel: ${receipt.kernelVersion} ${receipt.kernelSha256}`, { size: 7.5, font: mono })
+  }
+  heading('Observed runtime witnesses')
+  if (!input.witnesses?.length) line('No runtime witness is attached. No observed execution environment is claimed.')
+  for (const attachment of input.witnesses ?? []) {
+    line(`${attachment.receipt.callable.module}.${attachment.receipt.callable.qualname} - ${attachment.receipt.execution.status}`, { font: bold, gap: 2 })
+    line(`Bound claims: ${attachment.claimIds.join(', ')} | Calculation receipts: ${attachment.calculationReceiptIds.join(', ')}`)
+    line(`Witness: ${attachment.receipt.receiptSha256}`, { size: 7.5, font: mono })
+    line(`Environment: ${attachment.receipt.environmentSha256} | Complete: ${attachment.receipt.assurance.environmentComplete}`, { size: 7.5, font: mono })
   }
   heading('Sources and inspected passages')
   for (const source of input.dossier.sources) line(`${source.sourceId} - ${source.verificationState} - ${source.correctedCitation ?? source.submittedCitation}`)
