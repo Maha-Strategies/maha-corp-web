@@ -1,0 +1,26 @@
+name: Preview CABEZON and licensed MCP federation canary
+
+# Registration-only guard. The operational implementation lives on
+# codex/cabezon-product-federation and is selected by workflow_dispatch ref.
+# Dispatching this default-branch stub always fails closed.
+
+on:
+  workflow_dispatch:
+    inputs:
+      confirmation:
+        description: Type RUN PRIVATE FEDERATION CANARY exactly
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  registration-guard:
+    runs-on: ubuntu-latest
+    environment: Preview
+    steps:
+      - name: Refuse default-branch execution
+        run: |
+          echo '::error::Registration stub only. Dispatch codex/cabezon-product-federation.'
+          exit 1
