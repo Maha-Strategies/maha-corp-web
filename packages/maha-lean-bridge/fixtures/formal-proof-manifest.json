@@ -6,49 +6,49 @@
     {
       "formalStatement": "theorem fullCircle_pos : 0 < fullCircle",
       "sourceFile": "Maha/Angles.lean",
-      "sourceSha256": "sha256:138f3f736e3ac46635511c4e441184521154774418e3d49111566550b6d90814",
+      "sourceSha256": "sha256:caba133b1dd833df28308992f0f5809c1e36228bc1718620c3fad99be628e704",
       "theoremName": "fullCircle_pos",
       "theoremNamespace": "Maha.Angle"
     },
     {
       "formalStatement": "theorem normalize_idempotent (a : Int) : normalize (normalize a) = normalize a",
       "sourceFile": "Maha/Angles.lean",
-      "sourceSha256": "sha256:138f3f736e3ac46635511c4e441184521154774418e3d49111566550b6d90814",
+      "sourceSha256": "sha256:caba133b1dd833df28308992f0f5809c1e36228bc1718620c3fad99be628e704",
       "theoremName": "normalize_idempotent",
       "theoremNamespace": "Maha.Angle"
     },
     {
       "formalStatement": "theorem normalize_lt (a : Int) : normalize a < fullCircle",
       "sourceFile": "Maha/Angles.lean",
-      "sourceSha256": "sha256:138f3f736e3ac46635511c4e441184521154774418e3d49111566550b6d90814",
+      "sourceSha256": "sha256:caba133b1dd833df28308992f0f5809c1e36228bc1718620c3fad99be628e704",
       "theoremName": "normalize_lt",
       "theoremNamespace": "Maha.Angle"
     },
     {
       "formalStatement": "theorem normalize_mem (a : Int) : 0 ≤ normalize a ∧ normalize a < fullCircle",
       "sourceFile": "Maha/Angles.lean",
-      "sourceSha256": "sha256:138f3f736e3ac46635511c4e441184521154774418e3d49111566550b6d90814",
+      "sourceSha256": "sha256:caba133b1dd833df28308992f0f5809c1e36228bc1718620c3fad99be628e704",
       "theoremName": "normalize_mem",
       "theoremNamespace": "Maha.Angle"
     },
     {
       "formalStatement": "theorem normalize_nonneg (a : Int) : 0 ≤ normalize a",
       "sourceFile": "Maha/Angles.lean",
-      "sourceSha256": "sha256:138f3f736e3ac46635511c4e441184521154774418e3d49111566550b6d90814",
+      "sourceSha256": "sha256:caba133b1dd833df28308992f0f5809c1e36228bc1718620c3fad99be628e704",
       "theoremName": "normalize_nonneg",
       "theoremNamespace": "Maha.Angle"
     },
     {
       "formalStatement": "theorem separation_le_half (a b : Int) : separation a b ≤ halfCircle",
       "sourceFile": "Maha/Angles.lean",
-      "sourceSha256": "sha256:138f3f736e3ac46635511c4e441184521154774418e3d49111566550b6d90814",
+      "sourceSha256": "sha256:caba133b1dd833df28308992f0f5809c1e36228bc1718620c3fad99be628e704",
       "theoremName": "separation_le_half",
       "theoremNamespace": "Maha.Angle"
     },
     {
       "formalStatement": "theorem separation_nonneg (a b : Int) : 0 ≤ separation a b",
       "sourceFile": "Maha/Angles.lean",
-      "sourceSha256": "sha256:138f3f736e3ac46635511c4e441184521154774418e3d49111566550b6d90814",
+      "sourceSha256": "sha256:caba133b1dd833df28308992f0f5809c1e36228bc1718620c3fad99be628e704",
       "theoremName": "separation_nonneg",
       "theoremNamespace": "Maha.Angle"
     },
@@ -132,21 +132,21 @@
     {
       "formalStatement": "theorem mul_pos_of_pos {a b : Int} (ha : 0 < a) (hb : 0 < b) : 0 < a * b",
       "sourceFile": "Maha/ThermalModel.lean",
-      "sourceSha256": "sha256:22dfbb6e2369d9fae55838070c33934682c2fcb422a8f1cff7526e0fdc85c1b8",
+      "sourceSha256": "sha256:904d98f8417f3e7b32f7fe082ec2dcf083835844637fdc9ea366b460e94c32c9",
       "theoremName": "mul_pos_of_pos",
       "theoremNamespace": "Maha.Thermal"
     },
     {
       "formalStatement": "theorem resistance_nonneg {R L k A : Int} (h : Resistance R L k A) (hL : 0 ≤ L) (hk : 0 < k) (hA : 0 < A) : 0 ≤ R",
       "sourceFile": "Maha/ThermalModel.lean",
-      "sourceSha256": "sha256:22dfbb6e2369d9fae55838070c33934682c2fcb422a8f1cff7526e0fdc85c1b8",
+      "sourceSha256": "sha256:904d98f8417f3e7b32f7fe082ec2dcf083835844637fdc9ea366b460e94c32c9",
       "theoremName": "resistance_nonneg",
       "theoremNamespace": "Maha.Thermal"
     },
     {
       "formalStatement": "theorem temperature_rise_nonneg {dT Q R : Int} (h : TemperatureRise dT Q R) (hQ : 0 ≤ Q) (hR : 0 ≤ R) : 0 ≤ dT",
       "sourceFile": "Maha/ThermalModel.lean",
-      "sourceSha256": "sha256:22dfbb6e2369d9fae55838070c33934682c2fcb422a8f1cff7526e0fdc85c1b8",
+      "sourceSha256": "sha256:904d98f8417f3e7b32f7fe082ec2dcf083835844637fdc9ea366b460e94c32c9",
       "theoremName": "temperature_rise_nonneg",
       "theoremNamespace": "Maha.Thermal"
     }

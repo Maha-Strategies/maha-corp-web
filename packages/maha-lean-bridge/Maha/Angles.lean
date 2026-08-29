@@ -53,16 +53,18 @@ def separation (a b : Int) : Int :=
 
 /-- Separation is bounded below by zero. -/
 theorem separation_nonneg (a b : Int) : 0 ≤ separation a b := by
-  unfold separation
   have hd : 0 ≤ normalize (a - b) := normalize_nonneg _
-  have hc : 0 ≤ fullCircle - normalize (a - b) := by
-    have := normalize_lt (a - b)
-    omega
-  exact le_min hd hc
+  have hc : normalize (a - b) < fullCircle := normalize_lt _
+  simp only [separation]
+  omega
 
 /-- Angular separation never exceeds half a circle. -/
 theorem separation_le_half (a b : Int) : separation a b ≤ halfCircle := by
-  unfold separation halfCircle fullCircle normalize at *
+  have hd : 0 ≤ normalize (a - b) := normalize_nonneg _
+  have hc : normalize (a - b) < fullCircle := normalize_lt _
+  -- Both constants must be literals here: the bound depends on the numeric
+  -- relation between a full and a half circle, not just on their names.
+  simp only [separation, halfCircle, fullCircle] at *
   omega
 
 end Angle

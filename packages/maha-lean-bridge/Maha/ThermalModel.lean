@@ -51,11 +51,16 @@ theorem mul_pos_of_pos {a b : Int} (ha : 0 < a) (hb : 0 < b) : 0 < a * b :=
 theorem resistance_nonneg {R L k A : Int}
     (h : Resistance R L k A) (hL : 0 ≤ L) (hk : 0 < k) (hA : 0 < A) : 0 ≤ R := by
   unfold Resistance at h
-  by_contra hneg
-  push_neg at hneg
-  have hkA : 0 < k * A := Int.mul_pos hk hA
-  have : R * (k * A) < 0 := Int.mul_neg_of_neg_of_pos hneg hkA
-  omega
+  by_cases hR : 0 ≤ R
+  · exact hR
+  · exfalso
+    -- A negative resistance would make the product negative, but the product
+    -- is the thickness, which is nonnegative.
+    have hnegR : 0 < -R := by omega
+    have hkA : 0 < k * A := Int.mul_pos hk hA
+    have hprod : 0 < (-R) * (k * A) := Int.mul_pos hnegR hkA
+    rw [Int.neg_mul, h] at hprod
+    omega
 
 /--
   Under nonnegative heat and resistance, the idealized temperature rise is
