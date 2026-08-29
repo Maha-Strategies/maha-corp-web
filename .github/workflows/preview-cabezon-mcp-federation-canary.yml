@@ -27,12 +27,15 @@ jobs:
       CABEZON_PREVIEW_CANARY_CUSTOMER_BINDING_JSON: ${{ secrets.CABEZON_PREVIEW_CANARY_CUSTOMER_BINDING_JSON }}
       AGENT_REVIEW_TOKEN: ${{ secrets.AGENT_REVIEW_TOKEN }}
       REVENUE_CONTROL_TOKEN: ${{ secrets.REVENUE_CONTROL_TOKEN }}
+      EPISTEMIC_OPERATIONS_TOKEN: ${{ secrets.EPISTEMIC_OPERATIONS_TOKEN }}
+      EPISTEMIC_RELEASE_AUTHORITY_TOKEN: ${{ secrets.EPISTEMIC_RELEASE_AUTHORITY_TOKEN }}
       VERCEL_AUTOMATION_BYPASS_SECRET: ${{ secrets.VERCEL_AUTOMATION_BYPASS_SECRET }}
       SUPABASE_DB_PASSWORD: ${{ secrets.SUPABASE_DB_PASSWORD }}
       SUPABASE_PROJECT_REF: ${{ secrets.SUPABASE_PROJECT_REF }}
       CABEZON_PREVIEW_CANARY_RUN_ID: gha-${{ github.run_id }}-${{ github.run_attempt }}
       CABEZON_MCP_CANARY_EVIDENCE: ${{ github.workspace }}/cabezon-mcp-federation/evidence.json
       MCP_MIGRATION_EVIDENCE: ${{ github.workspace }}/cabezon-mcp-federation/migration.json
+      MCP_GOVERNED_RELEASE_EVIDENCE: ${{ github.workspace }}/cabezon-mcp-federation/governed-release.json
     steps:
       - name: Enforce bounded Preview branch and confirmation
         env:
@@ -65,8 +68,9 @@ jobs:
             + (to_regproc('public.reserve_mcp_evidence_execution') is not null)::int
             + (to_regproc('public.complete_mcp_evidence_execution') is not null)::int
             + (to_regproc('public.fail_mcp_evidence_execution') is not null)::int
-            + (to_regproc('public.revoke_mcp_evidence_license_grant') is not null)::int;")"
-          if [ "$existing_count" -ne 10 ]; then
+            + (to_regproc('public.revoke_mcp_evidence_license_grant') is not null)::int
+            + (to_regproc('public.record_mcp_private_canary_target') is not null)::int;")"
+          if [ "$existing_count" -ne 11 ]; then
             psql "$url" -v ON_ERROR_STOP=1 --single-transaction -f "$path" >/dev/null
           fi
           version="${migration%%_*}"
@@ -81,9 +85,10 @@ jobs:
             union all select 'reserve_mcp_execution=' || (to_regproc('public.reserve_mcp_evidence_execution') is not null)::text
             union all select 'complete_mcp_execution=' || (to_regproc('public.complete_mcp_evidence_execution') is not null)::text
             union all select 'fail_mcp_execution=' || (to_regproc('public.fail_mcp_evidence_execution') is not null)::text
-            union all select 'revoke_mcp_grant=' || (to_regproc('public.revoke_mcp_evidence_license_grant') is not null)::text;
+            union all select 'revoke_mcp_grant=' || (to_regproc('public.revoke_mcp_evidence_license_grant') is not null)::text
+            union all select 'governed_canary_target=' || (to_regproc('public.record_mcp_private_canary_target') is not null)::text;
           ")"
-          if grep -q '=false' <<<"$verification" || [ "$(wc -l <<<"$verification" | tr -d ' ')" -ne 10 ]; then
+          if grep -q '=false' <<<"$verification" || [ "$(wc -l <<<"$verification" | tr -d ' ')" -ne 11 ]; then
             echo '::error::Licensed MCP objects did not converge.'
             exit 1
           fi
@@ -93,7 +98,7 @@ jobs:
             --arg commit "${{ github.sha }}" \
             --arg migrationSha256 "sha256:$(sha256sum "$path" | cut -d' ' -f1)" \
             --arg targetFingerprint "sha256:$(printf '%s' "$SUPABASE_PROJECT_REF" | sha256sum | cut -d' ' -f1)" \
-            --argjson objectCount 10 \
+            --argjson objectCount 11 \
             '{schemaVersion:"maha-preview-mcp-migration-evidence/1.0",migration:$migration,commit:$commit,migrationSha256:$migrationSha256,targetFingerprint:$targetFingerprint,objectCount:$objectCount,converged:true,secretsIncluded:false}' \
             > "$MCP_MIGRATION_EVIDENCE"
       - uses: actions/setup-node@v6
@@ -101,6 +106,20 @@ jobs:
           node-version: '26'
           cache: npm
       - run: npm ci
+
+      - name: Create one fully governed synthetic Preview release
+        run: |
+          set -euo pipefail
+          for name in EPISTEMIC_OPERATIONS_TOKEN EPISTEMIC_RELEASE_AUTHORITY_TOKEN; do
+            [ -n "${!name:-}" ] || { echo "::error::$name is missing."; exit 1; }
+          done
+          [ "$EPISTEMIC_OPERATIONS_TOKEN" != "$EPISTEMIC_RELEASE_AUTHORITY_TOKEN" ] || { echo '::error::Operations and release-authority tokens must be distinct.'; exit 1; }
+          node --experimental-strip-types scripts/run-mcp-private-governed-release.ts
+          jq -e '.synthetic == true and .previewOnly == true and .scopedReviewCount == 4 and .authoritySeparatedFromOperations == true and .secretsIncluded == false' "$MCP_GOVERNED_RELEASE_EVIDENCE" >/dev/null
+          {
+            echo "MCP_EVIDENCE_CANARY_RELEASE_ID=$(jq -er '.releaseId' "$MCP_GOVERNED_RELEASE_EVIDENCE")"
+            echo "MCP_EVIDENCE_CANARY_CANONICAL_PATH=$(jq -er '.canonicalPath' "$MCP_GOVERNED_RELEASE_EVIDENCE")"
+          } >> "$GITHUB_ENV"
 
       - name: Provision an ephemeral evidence credential and internal grant
         run: |
@@ -118,9 +137,8 @@ jobs:
             bypass=(-H "x-vercel-protection-bypass: $VERCEL_AUTOMATION_BYPASS_SECRET")
           fi
 
-          registry="$(curl --fail --silent --show-error "${bypass[@]}" "$base/knowledge/epistemic-system/releases/registry.json")"
-          release_id="$(jq -er '[.releases[] | select(.status == "active")][0].releaseId' <<<"$registry")"
-          canonical_path="$(jq -er '[.releases[] | select(.status == "active")][0].canonicalPath' <<<"$registry")"
+          release_id="${MCP_EVIDENCE_CANARY_RELEASE_ID:?Governed release id is missing}"
+          canonical_path="${MCP_EVIDENCE_CANARY_CANONICAL_PATH:?Governed canonical path is missing}"
           expires_at="$(date -u -d '+2 hours' '+%Y-%m-%dT%H:%M:%SZ')"
 
           credential_response="$(curl --fail --silent --show-error "${bypass[@]}" \
@@ -178,6 +196,7 @@ jobs:
           name: preview-cabezon-mcp-federation-${{ github.run_id }}
           path: |
             ${{ env.MCP_MIGRATION_EVIDENCE }}
+            ${{ env.MCP_GOVERNED_RELEASE_EVIDENCE }}
             ${{ env.CABEZON_MCP_CANARY_EVIDENCE }}
           if-no-files-found: error
           retention-days: 30

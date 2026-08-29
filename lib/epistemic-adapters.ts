@@ -37,6 +37,11 @@ import { QUANTUM_SYSTEMS_GRAPH_RECORDS } from './quantum-systems-graph.ts'
 import { BATCH_2_INTERNAL_REVIEW_RECORD_IDS } from './substantial-internal-review-cohort.ts'
 import { REPAIRED_REVISION_CANARY_RECORDS } from './repaired-revision-canary-targets.ts'
 import {
+  MCP_PRIVATE_CANARY_ADAPTER_ID,
+  MCP_PRIVATE_CANARY_DATASET_VERSION,
+  MCP_PRIVATE_CANARY_RECORD,
+} from './mcp-private-canary-release.ts'
+import {
   EPISTEMIC_POLICY_VERSION,
   EPISTEMIC_SCHEMA_VERSION,
   EXPERT_REVIEW_SCOPES,
@@ -65,6 +70,7 @@ export const LEGACY_ADAPTER_IDS = [
   'frontier-canary',
   'substantial-batch-2-internal-review',
   'repaired-revision-canary',
+  MCP_PRIVATE_CANARY_ADAPTER_ID,
 ] as const
 
 export type LegacyAdapterId = (typeof LEGACY_ADAPTER_IDS)[number]
@@ -501,6 +507,21 @@ export const REPAIRED_REVISION_CANARY_ADAPTER: LegacyAdapterDefinition = definit
   })),
 })
 
+export const MCP_PRIVATE_CANARY_ADAPTER: LegacyAdapterDefinition = definition({
+  id: MCP_PRIVATE_CANARY_ADAPTER_ID,
+  name: 'Synthetic private MCP governed-release canary',
+  description: 'Exactly one synthetic Preview-only method record. Ingestion freezes a draft target and cannot review or release it.',
+  sourceDatasetVersion: MCP_PRIVATE_CANARY_DATASET_VERSION,
+  sourceRecords: [MCP_PRIVATE_CANARY_RECORD],
+  sourceSources: MCP_PRIVATE_CANARY_RECORD.sources,
+  build: () => [{
+    sourceRecordId: MCP_PRIVATE_CANARY_RECORD.id,
+    sourceRecord: MCP_PRIVATE_CANARY_RECORD,
+    sourcePublicPath: '/knowledge/agentic-systems-mcp/methods/synthetic-private-mcp-release-fixture',
+    record: structuredClone(MCP_PRIVATE_CANARY_RECORD),
+  }],
+})
+
 export const ADAPTED_EPISTEMIC_CANDIDATES = LEGACY_EPISTEMIC_ADAPTERS.flatMap((adapter) => adapter.adapt())
 assertGraphIntegrity(ADAPTED_EPISTEMIC_CANDIDATES.map((item) => item.record))
 
@@ -511,6 +532,8 @@ export function getLegacyEpistemicAdapter(id: string) {
       ? SUBSTANTIAL_BATCH_2_INTERNAL_REVIEW_ADAPTER
     : id === REPAIRED_REVISION_CANARY_ADAPTER.id
       ? REPAIRED_REVISION_CANARY_ADAPTER
+    : id === MCP_PRIVATE_CANARY_ADAPTER.id
+      ? MCP_PRIVATE_CANARY_ADAPTER
     : LEGACY_EPISTEMIC_ADAPTERS.find((adapter) => adapter.id === id)
 }
 

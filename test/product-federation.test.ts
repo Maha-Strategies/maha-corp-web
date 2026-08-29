@@ -55,16 +55,18 @@ test('federation and canary remain private and credential-free by construction',
     'lib/product-federation.ts',
     'app/api/integrations/cabezon/preview/federation/route.ts',
     'scripts/run-cabezon-mcp-federation-canary.ts',
-    '.github/workflows/preview-cabezon-mcp-federation-canary.yml',
   ]
   const implementation = await Promise.all(implementationFiles.map((path) => readFile(new URL(path, ROOT), 'utf8')))
   for (const source of implementation) {
     assert.doesNotMatch(source, /EPISTEMIC_RELEASE_AUTHORITY_TOKEN|OPERATIONS_TOKEN|SUPABASE_SERVICE_ROLE_KEY/)
     assert.doesNotMatch(source, /frontier-source-alignment|pilot-source-alignment|evidence-dossier-rehearsal/)
   }
-  const workflow = implementation.at(-1)!
+  const workflow = await readFile(new URL('.github/workflows/preview-cabezon-mcp-federation-canary.yml', ROOT), 'utf8')
   assert.match(workflow, /environment: Preview-CABEZON-Federation/)
   assert.match(workflow, /codex\/cabezon-product-federation/)
+  assert.match(workflow, /EPISTEMIC_OPERATIONS_TOKEN:.*secrets\.EPISTEMIC_OPERATIONS_TOKEN/)
+  assert.match(workflow, /EPISTEMIC_RELEASE_AUTHORITY_TOKEN:.*secrets\.EPISTEMIC_RELEASE_AUTHORITY_TOKEN/)
+  assert.match(workflow, /Operations and release-authority tokens must be distinct/)
   assert.doesNotMatch(workflow, /environment: Production|PRODUCTION/i)
 })
 
