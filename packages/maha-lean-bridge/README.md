@@ -3,9 +3,9 @@
 A private, offline-first Lean 4 package binding machine-checked theorems to
 Evidence Dossier claims.
 
-**Status: the theorems in this package have not yet been machine-checked.**
-See "Verification status" below. Until the Lean workflow is green, every
-attachment carries `proofStatus: "unverified"` and `machineChecked: false`.
+**Status: all 21 theorems are machine-checked in CI.** Six depend on no axiom at
+all; the remaining fifteen rest only on Lean's own `propext`, `Classical.choice`
+and `Quot.sound`. See "Verification status" below.
 
 ## What this is for
 
@@ -52,13 +52,25 @@ so a manifest can never vouch for itself.
 ## Verification status
 
 Machine-checking runs in CI (`.github/workflows/lean-formal-bridge.yml`) on
-Linux, where the Lean toolchain can be installed. It was not possible to install
-the 556 MB toolchain in the environment where this package was written, so the
-proofs here are **written but unchecked**. The verifier's refusal behaviour is
-fully tested with injected Lean results; that establishes the gates work, not
-that the theorems hold.
+Linux with Lean 4.33.1. The workflow builds the proofs, reads every theorem's
+axiom dependencies out of the elaborated environment, requires the regenerated
+manifest to be unchanged, and rebuilds from a cleared `.lake` to confirm the
+manifest is identical across two independent builds.
 
-Treat any theorem here as unproven until the Lean workflow is green.
+Last verified result:
+
+```
+theoremsChecked: 21
+axiomFree: 6
+restingOnPermittedAxiomsOnly: 15
+```
+
+The toolchain could not be installed in the environment where this package was
+written — the 556 MB download ran at 2-6 KB/s — so local runs skip Lean and the
+unit tests inject the Lean result instead. Those tests establish that the
+refusal logic works, not that the theorems hold. **The theorems hold because the
+CI workflow is green**, and an attachment may carry `machineChecked: true` only
+for a commit where it is.
 
 ## Build output
 

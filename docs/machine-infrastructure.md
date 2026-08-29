@@ -51,6 +51,13 @@ Stated plainly, because these are the misreadings that matter:
 4. **Not empirical anything.** `empiricallyValidated`, `independentlyReproduced`
    and `scientificModelCertified` are structurally `false`.
 
+## Current verification status
+
+Verified in CI on Lean 4.33.1 (`x86_64-unknown-linux-gnu`): **21 theorems
+checked, 6 depending on no axiom at all, 15 resting only on `propext`,
+`Classical.choice` and `Quot.sound`.** No theorem depends on `sorryAx`, and two
+independent builds produce an identical proof manifest.
+
 ## Toolchain and verification command
 
 ```
