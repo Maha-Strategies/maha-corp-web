@@ -63,7 +63,7 @@ test('federation and canary remain private and credential-free by construction',
     assert.doesNotMatch(source, /frontier-source-alignment|pilot-source-alignment|evidence-dossier-rehearsal/)
   }
   const workflow = implementation.at(-1)!
-  assert.match(workflow, /environment: Preview/)
+  assert.match(workflow, /environment: Preview-CABEZON-Federation/)
   assert.match(workflow, /codex\/cabezon-product-federation/)
   assert.doesNotMatch(workflow, /environment: Production|PRODUCTION/i)
 })
