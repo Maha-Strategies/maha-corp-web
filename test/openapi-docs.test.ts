@@ -46,6 +46,7 @@ const PRIVATE_ROUTES = new Set([
   // state and remains an operator-only control plane after tool promotion.
   '/api/admin/mcp-evidence-licenses',
   '/api/mcp/evidence',
+  '/api/integrations/cabezon/preview/federation',
   '/api/admin/revenue-control-plane',
   // Operator readiness for the x402 payment surface. Behind the readiness
   // bearer token and deliberately undocumented publicly: it reports which

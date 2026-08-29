@@ -145,6 +145,26 @@ test('delivery reference is deterministic and unavailable delivery fails closed'
   assert.equal(missing.status, 404)
 })
 
+test('licensed evidence delivery binds an exact MCP execution without enabling purchase', () => {
+  const projection = projectCabezonOffers(SELLER)
+  const plan = buildCabezonEnquiryPlan({
+    enquiry: parseCabezonEnquiry(enquiry({ offerId: 'licensed-evidence-mcp' })),
+    config: CONFIG, projection, idempotencyKey: 'licensed-delivery-0001', now: '2026-08-28T10:00:00Z',
+  })
+  const artifact = {
+    sha256: `sha256:${'a'.repeat(64)}`,
+    reference: `urn:maha:mcp-evidence-execution:mcpexe_${'b'.repeat(32)}`,
+  }
+  const delivery = buildDeliveryReference(plan.lifecycle, '2026-08-28T10:01:00Z', artifact)
+  assert.equal(delivery.artifactSha256, artifact.sha256)
+  assert.deepEqual(delivery.retrieval, { mode: 'mcp_execution', reference: artifact.reference })
+  assert.equal(delivery.paymentEnabled, false)
+  assert.throws(() => buildDeliveryReference(
+    buildCabezonEnquiryPlan({ enquiry: parseCabezonEnquiry(enquiry()), config: CONFIG, projection, idempotencyKey: 'ordinary-delivery-0001', now: '2026-08-28T10:00:00Z' }).lifecycle,
+    '2026-08-28T10:01:00Z', artifact,
+  ), (error: unknown) => error instanceof CabezonPreviewError && error.code === 'artifact_delivery_unavailable')
+})
+
 test('append-only enquiry to acknowledgement lifecycle is replay-safe and rejects substitution', async () => {
   const instants = ['2026-08-28T10:00:00Z', '2026-08-28T10:01:00Z', '2026-08-28T10:02:00Z']
   let index = 0

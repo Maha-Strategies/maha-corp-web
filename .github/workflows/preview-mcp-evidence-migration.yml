@@ -1,0 +1,84 @@
+name: Preview licensed MCP evidence migration
+
+on:
+  workflow_dispatch:
+    inputs:
+      confirmation:
+        description: Type APPLY PRIVATE MCP PREVIEW MIGRATION exactly
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: preview-mcp-evidence-migration
+  cancel-in-progress: false
+
+jobs:
+  migrate:
+    runs-on: ubuntu-latest
+    environment: Preview
+    env:
+      SUPABASE_DB_PASSWORD: ${{ secrets.SUPABASE_DB_PASSWORD }}
+      SUPABASE_PROJECT_REF: ${{ secrets.SUPABASE_PROJECT_REF }}
+      EVIDENCE: ${{ github.workspace }}/preview-mcp-migration-evidence
+      MIGRATION: 20260829000100_mcp_evidence_tool_licensing.sql
+    steps:
+      - name: Enforce exact Preview branch and confirmation
+        env:
+          CONFIRMATION: ${{ inputs.confirmation }}
+          REF_NAME: ${{ github.ref_name }}
+        run: |
+          set -euo pipefail
+          if [ "$CONFIRMATION" != "APPLY PRIVATE MCP PREVIEW MIGRATION" ]; then echo '::error::Confirmation phrase not matched.'; exit 1; fi
+          if [ "$REF_NAME" != "codex/cabezon-product-federation" ]; then echo '::error::Migration is restricted to codex/cabezon-product-federation.'; exit 1; fi
+          if [ -z "${SUPABASE_PROJECT_REF:-}" ]; then echo '::error::Preview project ref is missing.'; exit 1; fi
+          if [ "$SUPABASE_PROJECT_REF" = "uhwuullakihgszxhiygz" ]; then echo '::error::Production ref refused.'; exit 1; fi
+          if [ -z "${SUPABASE_DB_PASSWORD:-}" ]; then echo '::error::Preview database password is missing.'; exit 1; fi
+
+      - uses: actions/checkout@v5
+
+      - name: Apply exactly the private MCP migration
+        run: |
+          set -euo pipefail
+          mkdir -p "$EVIDENCE"
+          path="supabase/migrations/$MIGRATION"
+          test -f "$path"
+          url="postgresql://postgres.${SUPABASE_PROJECT_REF}:${SUPABASE_DB_PASSWORD}@aws-0-us-east-1.pooler.supabase.com:5432/postgres"
+          psql "$url" -v ON_ERROR_STOP=1 --single-transaction -f "$path" > "$EVIDENCE/applied.txt" 2>&1
+          version="${MIGRATION%%_*}"
+          psql "$url" -v ON_ERROR_STOP=1 -c "insert into supabase_migrations.schema_migrations (version) values ('${version}') on conflict do nothing;" >> "$EVIDENCE/applied.txt" 2>&1
+          {
+            echo "migration: $MIGRATION"
+            echo "commit: ${{ github.sha }}"
+            echo "sha256: $(sha256sum "$path" | cut -d' ' -f1)"
+            echo "targetFingerprint: sha256:$(printf '%s' "$SUPABASE_PROJECT_REF" | sha256sum | cut -d' ' -f1)"
+          } > "$EVIDENCE/request.txt"
+
+      - name: Verify convergence
+        run: |
+          set -euo pipefail
+          url="postgresql://postgres.${SUPABASE_PROJECT_REF}:${SUPABASE_DB_PASSWORD}@aws-0-us-east-1.pooler.supabase.com:5432/postgres"
+          psql "$url" -v ON_ERROR_STOP=1 -At -c "
+            select 'mcp_plans=' || (to_regclass('public.mcp_evidence_license_plans') is not null)::text
+            union all select 'mcp_grants=' || (to_regclass('public.mcp_evidence_license_grants') is not null)::text
+            union all select 'mcp_license_events=' || (to_regclass('public.mcp_evidence_license_events') is not null)::text
+            union all select 'mcp_executions=' || (to_regclass('public.mcp_evidence_executions') is not null)::text
+            union all select 'mcp_execution_events=' || (to_regclass('public.mcp_evidence_execution_events') is not null)::text
+            union all select 'record_mcp_grant=' || (to_regproc('public.record_mcp_evidence_license_grant') is not null)::text
+            union all select 'reserve_mcp_execution=' || (to_regproc('public.reserve_mcp_evidence_execution') is not null)::text
+            union all select 'complete_mcp_execution=' || (to_regproc('public.complete_mcp_evidence_execution') is not null)::text
+            union all select 'fail_mcp_execution=' || (to_regproc('public.fail_mcp_evidence_execution') is not null)::text
+            union all select 'revoke_mcp_grant=' || (to_regproc('public.revoke_mcp_evidence_license_grant') is not null)::text;
+          " | tee "$EVIDENCE/verify.txt"
+          if grep -q '=false' "$EVIDENCE/verify.txt" || [ "$(wc -l < "$EVIDENCE/verify.txt")" -ne 10 ]; then echo '::error::MCP evidence licensing objects did not converge.'; exit 1; fi
+
+      - name: Upload sanitized evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: preview-mcp-evidence-migration-${{ github.run_id }}
+          path: ${{ env.EVIDENCE }}
+          if-no-files-found: warn
+          retention-days: 30

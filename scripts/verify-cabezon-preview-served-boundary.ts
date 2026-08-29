@@ -11,6 +11,7 @@ async function files(root: string): Promise<string[]> {
 
 const forbiddenLiterals = [
   'CABEZON_PREVIEW_TOKEN',
+  'MCP_EVIDENCE_CANARY_CREDENTIAL',
   'EPISTEMIC_RELEASE_AUTHORITY_TOKEN',
   'SUPABASE_SERVICE_ROLE_KEY',
   'cabezon_preview_lifecycles',
@@ -20,6 +21,7 @@ const forbiddenLiterals = [
 ]
 const secretValues = [
   process.env.CABEZON_PREVIEW_TOKEN,
+  process.env.MCP_EVIDENCE_CANARY_CREDENTIAL,
   process.env.EPISTEMIC_RELEASE_AUTHORITY_TOKEN,
   process.env.SUPABASE_SERVICE_ROLE_KEY,
   process.env.VERCEL_AUTOMATION_BYPASS_SECRET,

@@ -4,15 +4,17 @@
 
 This adapter is a private, Preview-only compatibility surface for testing a bounded CABEZON Seller lifecycle. It does not replace Maha's existing public CARP/CABEZON discovery profile or any separately governed x402 experiment.
 
-The adapter projects the canonical Maha offer catalog without payment terms and supports only:
+The adapter projects Maha's authoritative agent-offer, x402, CARP Seller, licensed MCP, Evidence Dossier, computational-witness and knowledge contracts through one deterministic product federation without copying payment terms. It supports only:
 
 1. exact pre-registered CARP Customer/Seller identity binding;
-2. read-only offer discovery;
+2. read-only portfolio discovery with `informational`, `inquiry_available`, `licensed`, `payable` and `withheld` source states;
 3. a free enquiry;
-4. a deterministic fixture delivery reference; and
+4. a deterministic fixture delivery reference, optionally bound to one licensed MCP execution in the private canary; and
 5. acknowledgement of that reference.
 
-It cannot collect money, establish escrow, execute work autonomously, mutate the knowledge corpus, release canonical records, or deliver a customer artifact. `purchase_disabled` is explicit on every projected offer.
+It cannot collect money, establish escrow, issue or revoke an entitlement, execute work autonomously, inspect or mutate the knowledge corpus, release canonical records, or deliver a customer artifact. `purchase_disabled` is explicit on every projected offer. A source marked `payable` remains payable only through its separately governed source endpoint, never through this Preview adapter.
+
+`Maha Celestial` is projected under the separate `maha-celestial` namespace and remains informational. It is not merged into Maha's enterprise evidence or technical-decision methodology.
 
 ## Identity boundary
 
@@ -30,6 +32,7 @@ The route gate also requires `VERCEL_ENV=preview`; Production returns 404 regard
 ## Private routes
 
 - `GET /api/integrations/cabezon/preview/offers`
+- `GET /api/integrations/cabezon/preview/federation`
 - `POST /api/integrations/cabezon/preview/enquiries`
 - `POST /api/integrations/cabezon/preview/lifecycles/{lifecycleId}/delivery`
 - `POST /api/integrations/cabezon/preview/lifecycles/{lifecycleId}/acknowledgement`
@@ -58,15 +61,30 @@ Its committed, sanitized fixture is `fixtures/cabezon/preview-lifecycle.json`. R
 
 The remote workflow is `.github/workflows/preview-cabezon-seller-canary.yml`. Its target URL is not dispatch input: `CABEZON_PREVIEW_BASE_URL` is a protected environment secret and must be the exact trusted `*.vercel.app` Preview origin. This prevents a dispatcher from redirecting the bearer or Vercel bypass secret to another host.
 
-Before dispatch, configure the `preview-database` environment with:
+The cross-system workflow is `.github/workflows/preview-cabezon-mcp-federation-canary.yml`. It is branch-restricted and proves this private sequence:
+
+`portfolio discovery → licensed-product enquiry → exact MCP release retrieval → idempotent replay → artifact-bound delivery reference → acknowledgement`
+
+The MCP credential and CABEZON bearer remain separate protected Preview secrets. The canary records fingerprints only. It performs no payment, grant issuance, grant revocation, corpus mutation or release operation.
+
+Before dispatch, configure the protected `Preview` environment with:
 
 - `CABEZON_PREVIEW_BASE_URL`
 - `CABEZON_PREVIEW_TOKEN`
 - `CABEZON_PREVIEW_SELLER_BINDING_JSON`
 - `CABEZON_PREVIEW_CANARY_CUSTOMER_BINDING_JSON`
 - `VERCEL_AUTOMATION_BYPASS_SECRET` when deployment protection requires it
+- `MCP_EVIDENCE_CANARY_CREDENTIAL`, already bound to an active internal-canary grant
+- `MCP_EVIDENCE_CANARY_RELEASE_ID` and `MCP_EVIDENCE_CANARY_CANONICAL_PATH`, naming the same active release
 
 Dispatch with confirmation `RUN PRIVATE CABEZON CANARY`. The uploaded artifact contains digests, statuses and event types only—never the bearer, bypass secret or enquiry prose.
+
+Apply and verify both private migrations before the cross-system canary:
+
+- `20260828110000_cabezon_preview_seller_adapter.sql`
+- `20260829000100_mcp_evidence_tool_licensing.sql`
+
+Dispatch the combined workflow with `RUN PRIVATE FEDERATION CANARY` only from `codex/cabezon-product-federation`.
 
 ## Promotion boundary
 

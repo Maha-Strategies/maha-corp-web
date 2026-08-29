@@ -1,0 +1,58 @@
+name: Preview CABEZON and licensed MCP federation canary
+
+on:
+  workflow_dispatch:
+    inputs:
+      confirmation:
+        description: Type RUN PRIVATE FEDERATION CANARY exactly
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: preview-cabezon-mcp-federation-canary
+  cancel-in-progress: false
+
+jobs:
+  canary:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    environment: Preview
+    env:
+      CABEZON_PREVIEW_BASE_URL: ${{ secrets.CABEZON_PREVIEW_BASE_URL }}
+      CABEZON_PREVIEW_TOKEN: ${{ secrets.CABEZON_PREVIEW_TOKEN }}
+      CABEZON_PREVIEW_SELLER_BINDING_JSON: ${{ secrets.CABEZON_PREVIEW_SELLER_BINDING_JSON }}
+      CABEZON_PREVIEW_CANARY_CUSTOMER_BINDING_JSON: ${{ secrets.CABEZON_PREVIEW_CANARY_CUSTOMER_BINDING_JSON }}
+      MCP_EVIDENCE_CANARY_CREDENTIAL: ${{ secrets.MCP_EVIDENCE_CANARY_CREDENTIAL }}
+      MCP_EVIDENCE_CANARY_RELEASE_ID: ${{ secrets.MCP_EVIDENCE_CANARY_RELEASE_ID }}
+      MCP_EVIDENCE_CANARY_CANONICAL_PATH: ${{ secrets.MCP_EVIDENCE_CANARY_CANONICAL_PATH }}
+      CABEZON_PREVIEW_CANARY_RUN_ID: gha-${{ github.run_id }}-${{ github.run_attempt }}
+      CABEZON_MCP_CANARY_EVIDENCE: ${{ runner.temp }}/cabezon-mcp-federation/evidence.json
+    steps:
+      - name: Enforce bounded Preview branch and confirmation
+        env:
+          CONFIRMATION: ${{ inputs.confirmation }}
+          REF_NAME: ${{ github.ref_name }}
+        run: |
+          set -euo pipefail
+          if [ "$CONFIRMATION" != "RUN PRIVATE FEDERATION CANARY" ]; then echo '::error::Confirmation phrase not matched.'; exit 1; fi
+          if [ "$REF_NAME" != "codex/cabezon-product-federation" ]; then echo '::error::This private canary is restricted to codex/cabezon-product-federation.'; exit 1; fi
+
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '26'
+          cache: npm
+      - run: npm ci
+      - name: Run private federated lifecycle
+        run: node --experimental-strip-types scripts/run-cabezon-mcp-federation-canary.ts
+      - name: Upload sanitized evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: preview-cabezon-mcp-federation-${{ github.run_id }}
+          path: ${{ env.CABEZON_MCP_CANARY_EVIDENCE }}
+          if-no-files-found: error
+          retention-days: 30

@@ -1,7 +1,7 @@
 import { createHash, timingSafeEqual } from 'node:crypto'
 
-import agentOffers from '../content/discovery/agent-offers.json' with { type: 'json' }
 import { canonicalJson } from './evidence-dossier/digest.ts'
+import { buildProductFederation, type FederatedProductFamily, type FederatedProductState } from './product-federation.ts'
 
 export const CABEZON_PREVIEW_SCHEMA_VERSION = 'maha-cabezon-preview/1.0' as const
 export const CABEZON_PREVIEW_MAX_BYTES = 16_384
@@ -16,7 +16,6 @@ const IDENTIFIER = /^[A-Za-z0-9][A-Za-z0-9._:-]{7,159}$/
 const DID = /^did:[a-z0-9]+:[A-Za-z0-9._:%-]{8,240}$/
 const LIFECYCLE_ID = /^cbz_[a-f0-9]{32}$/
 const UTC_SECOND = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z$/
-const UTC_INSTANT = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d{3})?Z$/
 
 export type CabezonOfferState = {
   information: 'informational'
@@ -41,6 +40,10 @@ export interface CabezonProjectedOffer {
   name: string
   serviceUrl: string
   sourceStatus: string
+  federationState: FederatedProductState
+  family: FederatedProductFamily
+  namespace: 'maha-strategies' | 'maha-celestial'
+  capability: string | null
   states: CabezonOfferState
 }
 
@@ -88,8 +91,8 @@ export interface CabezonDeliveryReference {
   deliveredAt: string
   requestSha256: string
   resultSha256: string
-  artifactSha256: null
-  retrieval: { mode: 'direct_response'; reference: string }
+  artifactSha256: string | null
+  retrieval: { mode: 'direct_response' | 'mcp_execution'; reference: string }
   status: 'delivered'
   paymentEnabled: false
   referenceSha256: string
@@ -212,29 +215,24 @@ export function authorizeCabezonPreview(request: Request, config: CabezonPreview
   if (supplied.length !== expected.length || !timingSafeEqual(supplied, expected)) throw new CabezonPreviewError(401, 'cabezon_preview_token_invalid', 'CABEZON Preview bearer token is invalid.')
 }
 
-type RawOffer = { id?: unknown; name?: unknown; status?: unknown; serviceUrl?: unknown }
-type RawCatalog = { version?: unknown; updatedAt?: unknown; offers?: unknown }
-
-export function projectCabezonOffers(seller: CarpIdentityBinding, catalogValue: unknown = agentOffers): CabezonOfferProjection {
-  const catalog = exactObject(catalogValue, 'agentOffers', ['schema', 'version', 'updatedAt', 'provider', 'transactionPolicy', 'credentialPolicy', 'bookMachineAccessPolicy', 'provenance', 'technicalCapabilities', 'capabilities', 'offers']) as RawCatalog & Record<string, unknown>
-  const version = line(catalog.version, 'agentOffers.version', 1, 40)
-  const updatedAt = line(catalog.updatedAt, 'agentOffers.updatedAt', 20, 40)
-  if (!UTC_INSTANT.test(updatedAt) || !Number.isFinite(Date.parse(updatedAt))) throw new CabezonPreviewError(503, 'offer_catalog_invalid', 'Agent offer catalog updatedAt must be a UTC instant.')
-  if (!Array.isArray(catalog.offers) || catalog.offers.length < 1 || catalog.offers.length > 100) throw new CabezonPreviewError(503, 'offer_catalog_invalid', 'Agent offer catalog must contain 1-100 offers.')
-  const offers = catalog.offers.map((value, index): CabezonProjectedOffer => {
-    if (!value || typeof value !== 'object' || Array.isArray(value)) throw new CabezonPreviewError(503, 'offer_catalog_invalid', `Offer ${index} is invalid.`)
-    const offer = value as RawOffer
-    const id = line(offer.id, `offers[${index}].id`, 3, 120)
-    const name = line(offer.name, `offers[${index}].name`, 2, 200)
-    const sourceStatus = line(offer.status, `offers[${index}].status`, 3, 100)
-    const serviceUrl = exactHttpsEndpoint(offer.serviceUrl, `offers[${index}].serviceUrl`)
-    return {
-      id, name, serviceUrl, sourceStatus,
-      states: { information: 'informational', enquiry: sourceStatus === 'available_for_inquiry' ? 'inquiry_available' : 'unavailable', purchase: 'purchase_disabled' },
-    }
-  }).sort((left, right) => left.id < right.id ? -1 : left.id > right.id ? 1 : 0)
-  if (new Set(offers.map((offer) => offer.id)).size !== offers.length) throw new CabezonPreviewError(503, 'offer_catalog_invalid', 'Agent offer ids must be unique.')
-  const sourceCatalog = { version, updatedAt, sha256: digestJson(catalogValue) }
+export function projectCabezonOffers(seller: CarpIdentityBinding): CabezonOfferProjection {
+  const federation = buildProductFederation(seller)
+  const offers = federation.products.map((product): CabezonProjectedOffer => ({
+    id: product.productId,
+    name: product.title,
+    serviceUrl: product.discoveryUrl,
+    sourceStatus: product.state,
+    federationState: product.state,
+    family: product.family,
+    namespace: product.namespace,
+    capability: product.capability,
+    states: {
+      information: 'informational',
+      enquiry: product.access.enquiryEnabled ? 'inquiry_available' : 'unavailable',
+      purchase: 'purchase_disabled',
+    },
+  }))
+  const sourceCatalog = { version: federation.schemaVersion, updatedAt: federation.effectiveAt, sha256: federation.projectionSha256 }
   const base = {
     schemaVersion: CABEZON_PREVIEW_SCHEMA_VERSION,
     mode: 'preview-no-payment' as const,
@@ -326,9 +324,11 @@ export function buildCabezonEnquiryPlan(input: { enquiry: CabezonEnquiryInput; c
   return { lifecycle, questionSha256, decisionContextSha256 }
 }
 
-export function buildDeliveryReference(lifecycle: CabezonLifecycle, deliveredAt: string): CabezonDeliveryReference {
+export function buildDeliveryReference(lifecycle: CabezonLifecycle, deliveredAt: string, artifact?: { sha256: string; reference: string }): CabezonDeliveryReference {
   if (!LIFECYCLE_ID.test(lifecycle.lifecycleId)) throw new CabezonPreviewError(400, 'lifecycle_id_invalid', 'Lifecycle id is invalid.')
   if (lifecycle.status !== 'offered') throw new CabezonPreviewError(409, 'delivery_state_invalid', 'Delivery fixture is available only after an offer and before delivery.')
+  if (artifact && lifecycle.offerId !== 'licensed-evidence-mcp') throw new CabezonPreviewError(409, 'artifact_delivery_unavailable', 'Artifact-bound delivery is available only for the licensed evidence MCP canary.')
+  if (artifact && (!DIGEST.test(artifact.sha256) || !/^urn:maha:mcp-evidence-execution:mcpexe_[a-f0-9]{32}$/.test(artifact.reference))) throw new CabezonPreviewError(400, 'artifact_binding_invalid', 'Artifact delivery requires an exact MCP execution digest and reference.')
   const base = {
     deliveryReferenceVersion: '0.1' as const,
     lifecycleId: lifecycle.lifecycleId,
@@ -336,9 +336,11 @@ export function buildDeliveryReference(lifecycle: CabezonLifecycle, deliveredAt:
     sellerDid: lifecycle.seller.did,
     deliveredAt: requireUtcSecond(deliveredAt, 'deliveredAt'),
     requestSha256: lifecycle.requestSha256,
-    resultSha256: digestJson({ lifecycleId: lifecycle.lifecycleId, offerId: lifecycle.offerId, result: 'preview-fixture-delivered' }),
-    artifactSha256: null,
-    retrieval: { mode: 'direct_response' as const, reference: `urn:maha:cabezon-preview:${lifecycle.lifecycleId}:fixture` },
+    resultSha256: digestJson({ lifecycleId: lifecycle.lifecycleId, offerId: lifecycle.offerId, result: artifact ? 'licensed-evidence-retrieved' : 'preview-fixture-delivered', artifactSha256: artifact?.sha256 ?? null }),
+    artifactSha256: artifact?.sha256 ?? null,
+    retrieval: artifact
+      ? { mode: 'mcp_execution' as const, reference: artifact.reference }
+      : { mode: 'direct_response' as const, reference: `urn:maha:cabezon-preview:${lifecycle.lifecycleId}:fixture` },
     status: 'delivered' as const,
     paymentEnabled: false as const,
   }
@@ -347,7 +349,9 @@ export function buildDeliveryReference(lifecycle: CabezonLifecycle, deliveredAt:
 
 export function applyDeliveryToLifecycle(lifecycleValue: CabezonLifecycle, deliveryReference: CabezonDeliveryReference): CabezonLifecycle {
   const lifecycle = structuredClone(lifecycleValue)
-  const expected = buildDeliveryReference(lifecycle, deliveryReference.deliveredAt)
+  const expected = buildDeliveryReference(lifecycle, deliveryReference.deliveredAt, deliveryReference.artifactSha256
+    ? { sha256: deliveryReference.artifactSha256, reference: deliveryReference.retrieval.reference }
+    : undefined)
   if (expected.referenceSha256 !== deliveryReference.referenceSha256 || canonicalJson(expected) !== canonicalJson(deliveryReference)) throw new CabezonPreviewError(409, 'delivery_reference_mismatch', 'Delivery reference is not the deterministic lifecycle reference.')
   lifecycle.deliveryReference = deliveryReference
   lifecycle.status = 'delivered'
@@ -447,6 +451,12 @@ export function createCabezonPreviewHandlers(dependencies: { config: CabezonPrev
   const now = dependencies.now ?? (() => new Date().toISOString().replace(/\.\d{3}Z$/, 'Z'))
   const projection = () => projectCabezonOffers(dependencies.config.seller)
   return {
+    federation: async (request: Request): Promise<Response> => {
+      try {
+        authorizeCabezonPreview(request, dependencies.config)
+        return Response.json(buildProductFederation(dependencies.config.seller), { headers: CABEZON_PREVIEW_HEADERS })
+      } catch (error) { return cabezonPreviewErrorResponse(error) }
+    },
     offers: async (request: Request): Promise<Response> => {
       try {
         authorizeCabezonPreview(request, dependencies.config)
@@ -467,13 +477,19 @@ export function createCabezonPreviewHandlers(dependencies: { config: CabezonPrev
         authorizeCabezonPreview(request, dependencies.config)
         if (!LIFECYCLE_ID.test(lifecycleId)) throw new CabezonPreviewError(400, 'lifecycle_id_invalid', 'Lifecycle id is invalid.')
         const idempotency = actionIdempotency(request, lifecycleId, 'deliver')
-        const body = exactObject(await readBoundedCabezonJson(request), 'delivery', ['expectedRequestSha256'])
+        const body = exactObject(await readBoundedCabezonJson(request), 'delivery', ['expectedRequestSha256', 'artifactSha256', 'retrievalReference'])
         const expectedRequestSha256 = line(body.expectedRequestSha256, 'expectedRequestSha256', 71, 71)
         if (!DIGEST.test(expectedRequestSha256)) throw new CabezonPreviewError(400, 'request_digest_invalid', 'expectedRequestSha256 must be a SHA-256 digest.')
+        const hasArtifact = body.artifactSha256 !== undefined || body.retrievalReference !== undefined
+        if (hasArtifact && (body.artifactSha256 === undefined || body.retrievalReference === undefined)) throw new CabezonPreviewError(400, 'artifact_binding_invalid', 'artifactSha256 and retrievalReference must be supplied together.')
+        const artifact = hasArtifact ? {
+          sha256: line(body.artifactSha256, 'artifactSha256', 71, 71),
+          reference: line(body.retrievalReference, 'retrievalReference', 64, 160),
+        } : undefined
         const lifecycle = await dependencies.store.read(lifecycleId)
         if (!lifecycle) throw new CabezonPreviewError(404, 'lifecycle_not_found', 'CABEZON Preview lifecycle was not found.')
         if (lifecycle.requestSha256 !== expectedRequestSha256) throw new CabezonPreviewError(409, 'request_binding_mismatch', 'Delivery does not bind the lifecycle request.')
-        const deliveryRequestSha256 = digestJson({ lifecycleId, expectedRequestSha256 })
+        const deliveryRequestSha256 = digestJson({ lifecycleId, expectedRequestSha256, artifact: artifact ?? null })
         if (lifecycle.deliveryReference) {
           const result = await dependencies.store.recordDelivery({
             lifecycleId,
@@ -486,7 +502,7 @@ export function createCabezonPreviewHandlers(dependencies: { config: CabezonPrev
           return Response.json({ operation: result.status, lifecycle: publicLifecycle(result.lifecycle) }, { status: result.status === 'created' ? 201 : 200, headers: CABEZON_PREVIEW_HEADERS })
         }
         const deliveredAt = now()
-        const deliveryReference = buildDeliveryReference(lifecycle, deliveredAt)
+        const deliveryReference = buildDeliveryReference(lifecycle, deliveredAt, artifact)
         const updatedLifecycle = applyDeliveryToLifecycle(lifecycle, deliveryReference)
         const result = await dependencies.store.recordDelivery({ lifecycleId, idempotencyHash: idempotency.hash, requestSha256: deliveryRequestSha256, deliveredAt, deliveryReference, updatedLifecycle })
         return Response.json({ operation: result.status, lifecycle: publicLifecycle(result.lifecycle) }, { status: result.status === 'created' ? 201 : 200, headers: CABEZON_PREVIEW_HEADERS })
