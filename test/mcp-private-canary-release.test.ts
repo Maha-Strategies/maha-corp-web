@@ -3,9 +3,11 @@ import { readFile } from 'node:fs/promises'
 import test from 'node:test'
 
 import { getLegacyEpistemicAdapter } from '../lib/epistemic-adapters.ts'
+import { buildEpistemicIngestionBatch } from '../lib/epistemic-ingestion.ts'
 import { buildEpistemicExpertReview } from '../lib/epistemic-review.ts'
 import { releaseReadiness } from '../lib/epistemic-release.ts'
 import {
+  MCP_PRIVATE_CANARY_INSPECTION_SHA256,
   MCP_PRIVATE_CANARY_ADAPTER_ID,
   MCP_PRIVATE_CANARY_RECORD,
   MCP_PRIVATE_CANARY_TARGET_SHA256,
@@ -26,6 +28,11 @@ test('synthetic MCP canary adapter freezes exactly one private draft target', ()
   assert.equal(candidates[0]?.gateDecision.publicEligible, false)
   assert.match(candidates[0]?.record.title ?? '', /^Synthetic private/)
   assert.ok(candidates[0]?.record.boundaries.every((boundary) => !/production release$/i.test(boundary)))
+  const ingestion = buildEpistemicIngestionBatch({ adapterId: MCP_PRIVATE_CANARY_ADAPTER_ID, idempotencyKey: 'synthetic-inspection-attestation' }, new Date('2026-08-29T00:00:00.000Z'))
+  assert.equal(ingestion.records[0]?.alignmentDecision.contentInspectionState, 'internally-inspected-synthetic')
+  assert.equal(ingestion.records[0]?.alignmentDecision.inspectionAttestationSha256, MCP_PRIVATE_CANARY_INSPECTION_SHA256)
+  assert.deepEqual(ingestion.records[0]?.alignmentDecision.blockerCodes, [])
+  assert.ok(!ingestion.records[0]?.gateDecision.reasons.some((reason) => reason.startsWith('source-content-inspection-missing:')))
 })
 
 test('four explicit internal-editorial decisions bind the same exact synthetic target', () => {
@@ -58,6 +65,7 @@ test('database and application gates constrain the canary to one Preview-only re
   assert.match(migration, /recordCount',''\) <> '1'/)
   assert.match(migration, /urn:maha:record:synthetic-private-mcp-release-fixture/)
   assert.match(migration, /reviewState}',''\) <> 'draft'/)
+  assert.match(migration, new RegExp(MCP_PRIVATE_CANARY_INSPECTION_SHA256))
   assert.match(route, /VERCEL_ENV !== 'preview'/)
   assert.match(route, /MCP_PRIVATE_CANARY_ENABLED !== 'true'/)
   assert.match(workflow, /Create one fully governed synthetic Preview release/)

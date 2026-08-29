@@ -1,7 +1,7 @@
 import { createHash } from 'node:crypto'
 
 import { EXPERT_REVIEW_CRITERIA, type ExpertReviewInput } from './epistemic-review.ts'
-import { epistemicReviewTargetHash } from './epistemic-publication.ts'
+import { epistemicReviewTargetHash, sha256Canonical } from './epistemic-publication.ts'
 import {
   EPISTEMIC_POLICY_VERSION,
   EPISTEMIC_SCHEMA_VERSION,
@@ -13,6 +13,19 @@ import {
 export const MCP_PRIVATE_CANARY_ADAPTER_ID = 'mcp-private-canary' as const
 export const MCP_PRIVATE_CANARY_RECORD_ID = 'urn:maha:record:synthetic-private-mcp-release-fixture' as const
 export const MCP_PRIVATE_CANARY_DATASET_VERSION = 'maha-synthetic-private-mcp-release/1.0' as const
+
+export const MCP_PRIVATE_CANARY_INSPECTION = {
+  schemaVersion: 'maha-synthetic-source-inspection/1.0',
+  sourceId: 'source-maha-epistemic-system-boundary',
+  sourceUrl: 'https://www.mahastrategies.com/knowledge/epistemic-system',
+  exactLocator: 'Publication gateway and canonical release boundary sections.',
+  inspectedAt: '2026-08-29',
+  inspectionMethod: 'Internal editorial reading of the named public sections for this synthetic control-path claim only.',
+  verdict: 'supports-bounded-synthetic-claim',
+  externalReview: false,
+} as const
+
+export const MCP_PRIVATE_CANARY_INSPECTION_SHA256 = sha256Canonical(MCP_PRIVATE_CANARY_INSPECTION)
 
 export const MCP_PRIVATE_CANARY_RECORD: EpistemicRecord = {
   schemaVersion: EPISTEMIC_SCHEMA_VERSION,
@@ -62,6 +75,7 @@ export const MCP_PRIVATE_CANARY_RECORD: EpistemicRecord = {
   bridges: [],
   boundaries: [
     'Every identity, decision and commercial state in this fixture is synthetic and internal.',
+    'The named Maha source locator was internally inspected on 2026-08-29 only for the bounded synthetic control-path claim; that inspection is not external review or independent validation.',
     'The release is valid only inside the named ephemeral Preview branch and must disappear when that branch is deleted.',
     'Internal editorial approval is not external expert endorsement or independent reproduction.',
   ],

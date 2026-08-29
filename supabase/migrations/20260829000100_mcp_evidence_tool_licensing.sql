@@ -492,6 +492,15 @@ begin
     or coalesce(v_record->>'candidateSha256','') !~ '^sha256:[a-f0-9]{64}$'
     or coalesce(v_record->>'reviewTargetSha256','') !~ '^sha256:[a-f0-9]{64}$'
     or coalesce(v_record#>>'{gateDecision,publicEligible}','false') <> 'false'
+    or coalesce(v_record#>>'{alignmentDecision,contentInspectionState}','') <> 'internally-inspected-synthetic'
+    or coalesce(v_record#>>'{alignmentDecision,explanatoryEligible}','false') <> 'true'
+    or coalesce(v_record#>>'{alignmentDecision,canonicalEligible}','false') <> 'true'
+    or jsonb_array_length(coalesce(v_record#>'{alignmentDecision,blockerCodes}','[]'::jsonb)) <> 0
+    or coalesce(v_record#>>'{alignmentDecision,inspectionAttestationSha256}','') <> 'sha256:8fabc92268a250186d8520745dda3f5336a60e327248f60f8846da97bd123a93'
+    or exists (
+      select 1 from jsonb_array_elements_text(coalesce(v_record#>'{gateDecision,reasons}','[]'::jsonb)) reason
+      where reason like 'source-content-inspection-missing:%'
+    )
     or coalesce(v_record#>>'{candidateSnapshot,id}','') <> v_record->>'candidateRecordId'
     or coalesce(v_record#>>'{candidateSnapshot,title}','') <> 'Synthetic private MCP release fixture'
     or coalesce(v_record#>>'{candidateSnapshot,publication,reviewState}','') <> 'draft'
