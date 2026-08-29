@@ -1,0 +1,52 @@
+{
+  "schemaVersion": "maha-governed-synthetic-preview-release-operation/1.0",
+  "runId": 33243195770,
+  "commit": "b0acb7b1924e8de5a56f361516a19db2046edeba",
+  "environment": "ephemeral-schema-only-preview",
+  "migration": {
+    "name": "20260829000100_mcp_evidence_tool_licensing.sql",
+    "sha256": "sha256:2de43d51e5024820070106452fbd4b26e8cb11256d1246fe4ac179e090eb0a52",
+    "targetFingerprint": "sha256:440ef354515e018f5fa49ecfd5c79be47fdfad5bf908111925078077bcc09771",
+    "objectCount": 11,
+    "converged": true
+  },
+  "release": {
+    "synthetic": true,
+    "previewOnly": true,
+    "recordId": "urn:maha:record:synthetic-private-mcp-release-fixture",
+    "targetSha256": "sha256:f3394637bd86211463a079e9cfcb5968b70cf74b7ed70c91d579362ed54c687f",
+    "releaseId": "epirelease_68730f380c4940539aa13acea1723ae5",
+    "releaseSha256": "sha256:ca156f7a9048cdde5ab42b8fbf8b812248409d74276d6e9721f53f2966207a4b",
+    "canonicalPath": "/knowledge/agentic-systems-mcp/methods/synthetic-private-mcp-release-fixture",
+    "assuranceTier": "internally-reviewed-canonical",
+    "releaseKind": "initial",
+    "scopedReviewCount": 4,
+    "scopes": [
+      "boundary-adequacy",
+      "domain-fidelity",
+      "rights-and-locator",
+      "source-fidelity"
+    ],
+    "authoritySeparatedFromOperations": true,
+    "evidenceSha256": "sha256:e35c3278a9a3bfb92d1d7786d380d6b399d5ac4a5ff5edc3d2b16069c6023523"
+  },
+  "downstreamLifecycle": {
+    "status": "not-run",
+    "stoppedAt": "ephemeral-credential-provisioning",
+    "httpStatus": 400,
+    "credentialCreated": false,
+    "grantCreated": false,
+    "licensedRetrievalRun": false,
+    "deliveryRun": false,
+    "acknowledgementRun": false
+  },
+  "authority": {
+    "productionMutation": false,
+    "paymentEnabled": false,
+    "escrowEnabled": false,
+    "externalReviewClaimed": false,
+    "scientificValidationClaimed": false,
+    "commercialTransactionClaimed": false
+  },
+  "secretsIncluded": false
+}
