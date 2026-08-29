@@ -7,7 +7,7 @@ import { consumeCredentialRateLimit } from '@/lib/credential-rate-limit'
 // Capabilities are deliberately narrow. `mcp_gateway` authorizes a client to
 // call only the upstream servers registered to its own tenant; it is not a
 // general-purpose outbound proxy permission.
-export const AGENT_CAPABILITIES = ['mps_audit', 'mcp_gateway', 'context_compile'] as const
+export const AGENT_CAPABILITIES = ['mps_audit', 'mcp_gateway', 'context_compile', 'mcp_evidence_retrieval'] as const
 export type AgentCapability = typeof AGENT_CAPABILITIES[number]
 
 export type CredentialAuthorization =

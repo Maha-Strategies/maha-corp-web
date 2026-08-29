@@ -8,16 +8,22 @@ import {
   type LegacyAdapterId,
 } from './epistemic-adapters.ts'
 import { sha256Canonical } from './epistemic-publication.ts'
+import {
+  MCP_PRIVATE_CANARY_INSPECTION,
+  MCP_PRIVATE_CANARY_INSPECTION_SHA256,
+  MCP_PRIVATE_CANARY_RECORD_ID,
+} from './mcp-private-canary-release.ts'
 
 export const EPISTEMIC_INGESTION_VERSION = 'maha-epistemic-ingestion/1.0' as const
 export const INGESTION_ALIGNMENT_VERSION = 'maha-ingestion-alignment-gate/1.0' as const
 
 export interface IngestionAlignmentDecision {
   evaluatedAgainst: typeof INGESTION_ALIGNMENT_VERSION
-  contentInspectionState: 'required-uninspected'
-  explanatoryEligible: false
-  canonicalEligible: false
+  contentInspectionState: 'required-uninspected' | 'internally-inspected-synthetic'
+  explanatoryEligible: boolean
+  canonicalEligible: boolean
   blockerCodes: string[]
+  inspectionAttestationSha256?: string
 }
 
 export interface EpistemicIngestionRecord {
@@ -82,15 +88,25 @@ export function buildEpistemicIngestionBatch(input: EpistemicIngestionRequest, i
   if (!adapter) throw new Error('adapterId is unsupported.')
   const batchId = `epibatch_${randomUUID().replaceAll('-', '')}`
   const records = adapter.adapt().map((candidate): EpistemicIngestionRecord => {
-    const blockerCodes = candidate.record.sources.length
+    const source = candidate.record.sources[0]
+    const syntheticInspectionAttested = input.adapterId === 'mcp-private-canary'
+      && candidate.record.id === MCP_PRIVATE_CANARY_RECORD_ID
+      && candidate.record.sources.length === 1
+      && source?.id === MCP_PRIVATE_CANARY_INSPECTION.sourceId
+      && source.url === MCP_PRIVATE_CANARY_INSPECTION.sourceUrl
+      && source.exactLocator === MCP_PRIVATE_CANARY_INSPECTION.exactLocator
+    const blockerCodes = syntheticInspectionAttested
+      ? []
+      : candidate.record.sources.length
       ? candidate.record.sources.map((source) => `source-content-inspection-missing:${source.id}`).sort()
       : ['source-content-inspection-missing:no-source-declared']
     const alignmentDecision: IngestionAlignmentDecision = {
       evaluatedAgainst: INGESTION_ALIGNMENT_VERSION,
-      contentInspectionState: 'required-uninspected',
-      explanatoryEligible: false,
-      canonicalEligible: false,
+      contentInspectionState: syntheticInspectionAttested ? 'internally-inspected-synthetic' : 'required-uninspected',
+      explanatoryEligible: syntheticInspectionAttested,
+      canonicalEligible: syntheticInspectionAttested,
       blockerCodes,
+      ...(syntheticInspectionAttested ? { inspectionAttestationSha256: MCP_PRIVATE_CANARY_INSPECTION_SHA256 } : {}),
     }
     return {
       schemaVersion: EPISTEMIC_INGESTION_VERSION,

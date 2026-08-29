@@ -1,9 +1,5 @@
 name: Preview CABEZON and licensed MCP federation canary
 
-# Registration-only guard. The operational implementation lives on
-# codex/cabezon-product-federation and is selected by workflow_dispatch ref.
-# Dispatching this default-branch stub always fails closed.
-
 on:
   workflow_dispatch:
     inputs:
@@ -15,12 +11,236 @@ on:
 permissions:
   contents: read
 
+concurrency:
+  group: preview-cabezon-mcp-federation-canary
+  cancel-in-progress: false
+
 jobs:
-  registration-guard:
+  canary:
     runs-on: ubuntu-latest
-    environment: Preview
+    timeout-minutes: 10
+    environment: Preview-CABEZON-Federation
+    env:
+      CABEZON_PREVIEW_BASE_URL: ${{ secrets.CABEZON_PREVIEW_BASE_URL }}
+      CABEZON_PREVIEW_TOKEN: ${{ secrets.CABEZON_PREVIEW_TOKEN }}
+      CABEZON_PREVIEW_SELLER_BINDING_JSON: ${{ secrets.CABEZON_PREVIEW_SELLER_BINDING_JSON }}
+      CABEZON_PREVIEW_CANARY_CUSTOMER_BINDING_JSON: ${{ secrets.CABEZON_PREVIEW_CANARY_CUSTOMER_BINDING_JSON }}
+      AGENT_REVIEW_TOKEN: ${{ secrets.AGENT_REVIEW_TOKEN }}
+      REVENUE_CONTROL_TOKEN: ${{ secrets.REVENUE_CONTROL_TOKEN }}
+      EPISTEMIC_OPERATIONS_TOKEN: ${{ secrets.EPISTEMIC_OPERATIONS_TOKEN }}
+      EPISTEMIC_RELEASE_AUTHORITY_TOKEN: ${{ secrets.EPISTEMIC_RELEASE_AUTHORITY_TOKEN }}
+      VERCEL_AUTOMATION_BYPASS_SECRET: ${{ secrets.VERCEL_AUTOMATION_BYPASS_SECRET }}
+      SUPABASE_DB_PASSWORD: ${{ secrets.SUPABASE_DB_PASSWORD }}
+      SUPABASE_PROJECT_REF: ${{ secrets.SUPABASE_PROJECT_REF }}
+      CABEZON_PREVIEW_CANARY_RUN_ID: gha-${{ github.run_id }}-${{ github.run_attempt }}
+      CABEZON_MCP_CANARY_EVIDENCE: ${{ github.workspace }}/cabezon-mcp-federation/evidence.json
+      MCP_MIGRATION_EVIDENCE: ${{ github.workspace }}/cabezon-mcp-federation/migration.json
+      MCP_GOVERNED_RELEASE_EVIDENCE: ${{ github.workspace }}/cabezon-mcp-federation/governed-release.json
     steps:
-      - name: Refuse default-branch execution
+      - name: Enforce bounded Preview branch and confirmation
+        env:
+          CONFIRMATION: ${{ inputs.confirmation }}
+          REF_NAME: ${{ github.ref_name }}
         run: |
-          echo '::error::Registration stub only. Dispatch codex/cabezon-product-federation.'
-          exit 1
+          set -euo pipefail
+          if [ "$CONFIRMATION" != "RUN PRIVATE FEDERATION CANARY" ]; then echo '::error::Confirmation phrase not matched.'; exit 1; fi
+          if [ "$REF_NAME" != "codex/cabezon-product-federation" ]; then echo '::error::This private canary is restricted to codex/cabezon-product-federation.'; exit 1; fi
+
+      - uses: actions/checkout@v5
+
+      - name: Apply and verify exactly the two private integration migrations
+        run: |
+          set -euo pipefail
+          cabezon_migration='20260828110000_cabezon_preview_seller_adapter.sql'
+          migration='20260829000100_mcp_evidence_tool_licensing.sql'
+          cabezon_path="supabase/migrations/$cabezon_migration"
+          path="supabase/migrations/$migration"
+          [ -f "$cabezon_path" ] || { echo '::error::CABEZON Preview lifecycle migration is absent.'; exit 1; }
+          [ -f "$path" ] || { echo '::error::Dedicated migration is absent.'; exit 1; }
+          [ -n "${SUPABASE_PROJECT_REF:-}" ] || { echo '::error::Preview database ref is missing.'; exit 1; }
+          [ -n "${SUPABASE_DB_PASSWORD:-}" ] || { echo '::error::Preview database password is missing.'; exit 1; }
+          [ "$SUPABASE_PROJECT_REF" != 'uhwuullakihgszxhiygz' ] || { echo '::error::Forbidden database target.'; exit 1; }
+          url="postgresql://postgres.${SUPABASE_PROJECT_REF}:${SUPABASE_DB_PASSWORD}@aws-0-us-east-1.pooler.supabase.com:5432/postgres"
+          existing_count="$(psql "$url" -v ON_ERROR_STOP=1 -At -c "select
+            (to_regclass('public.mcp_evidence_license_plans') is not null)::int
+            + (to_regclass('public.mcp_evidence_license_grants') is not null)::int
+            + (to_regclass('public.mcp_evidence_license_events') is not null)::int
+            + (to_regclass('public.mcp_evidence_executions') is not null)::int
+            + (to_regclass('public.mcp_evidence_execution_events') is not null)::int
+            + (to_regproc('public.record_mcp_evidence_license_grant') is not null)::int
+            + (to_regproc('public.reserve_mcp_evidence_execution') is not null)::int
+            + (to_regproc('public.complete_mcp_evidence_execution') is not null)::int
+            + (to_regproc('public.fail_mcp_evidence_execution') is not null)::int
+            + (to_regproc('public.revoke_mcp_evidence_license_grant') is not null)::int
+            + (to_regproc('public.record_mcp_private_canary_target') is not null)::int;")"
+          # The schema-only branch may not contain the private CABEZON lifecycle
+          # ledger because it is intentionally absent from the public environment.
+          # Apply the
+          # two documented private migrations, in order, and no others.
+          # object presence alone cannot prove that ledger constraints and
+          # function definitions have converged to the exact checked-in text.
+          psql "$url" -v ON_ERROR_STOP=1 --single-transaction -f "$cabezon_path" >/dev/null
+          psql "$url" -v ON_ERROR_STOP=1 --single-transaction -f "$path" >/dev/null
+          cabezon_version="${cabezon_migration%%_*}"
+          version="${migration%%_*}"
+          psql "$url" -v ON_ERROR_STOP=1 -c "insert into supabase_migrations.schema_migrations (version) values ('${cabezon_version}') on conflict do nothing;" >/dev/null
+          psql "$url" -v ON_ERROR_STOP=1 -c "insert into supabase_migrations.schema_migrations (version) values ('${version}') on conflict do nothing;" >/dev/null
+          cabezon_verification="$(psql "$url" -v ON_ERROR_STOP=1 -At -c "
+            select 'cabezon_lifecycles=' || (to_regclass('public.cabezon_preview_lifecycles') is not null)::text
+            union all select 'cabezon_events=' || (to_regclass('public.cabezon_preview_lifecycle_events') is not null)::text
+            union all select 'cabezon_idempotency=' || (to_regclass('public.cabezon_preview_action_idempotency') is not null)::text
+            union all select 'cabezon_enquiry=' || (to_regproc('public.record_cabezon_preview_enquiry') is not null)::text
+            union all select 'cabezon_read=' || (to_regproc('public.read_cabezon_preview_lifecycle') is not null)::text
+            union all select 'cabezon_delivery=' || (to_regproc('public.record_cabezon_preview_delivery') is not null)::text
+            union all select 'cabezon_acknowledgement=' || (to_regproc('public.record_cabezon_preview_acknowledgement') is not null)::text;
+          ")"
+          verification="$(psql "$url" -v ON_ERROR_STOP=1 -At -c "
+            select 'mcp_plans=' || (to_regclass('public.mcp_evidence_license_plans') is not null)::text
+            union all select 'mcp_grants=' || (to_regclass('public.mcp_evidence_license_grants') is not null)::text
+            union all select 'mcp_license_events=' || (to_regclass('public.mcp_evidence_license_events') is not null)::text
+            union all select 'mcp_executions=' || (to_regclass('public.mcp_evidence_executions') is not null)::text
+            union all select 'mcp_execution_events=' || (to_regclass('public.mcp_evidence_execution_events') is not null)::text
+            union all select 'record_mcp_grant=' || (to_regproc('public.record_mcp_evidence_license_grant') is not null)::text
+            union all select 'reserve_mcp_execution=' || (to_regproc('public.reserve_mcp_evidence_execution') is not null)::text
+            union all select 'complete_mcp_execution=' || (to_regproc('public.complete_mcp_evidence_execution') is not null)::text
+            union all select 'fail_mcp_execution=' || (to_regproc('public.fail_mcp_evidence_execution') is not null)::text
+            union all select 'revoke_mcp_grant=' || (to_regproc('public.revoke_mcp_evidence_license_grant') is not null)::text
+            union all select 'governed_canary_target=' || (to_regproc('public.record_mcp_private_canary_target') is not null)::text;
+          ")"
+          if grep -q '=false' <<<"$cabezon_verification" || [ "$(wc -l <<<"$cabezon_verification" | tr -d ' ')" -ne 7 ]; then
+            echo '::error::CABEZON Preview lifecycle objects did not converge.'
+            exit 1
+          fi
+          if grep -q '=false' <<<"$verification" || [ "$(wc -l <<<"$verification" | tr -d ' ')" -ne 11 ]; then
+            echo '::error::Licensed MCP objects did not converge.'
+            exit 1
+          fi
+          mkdir -p "$(dirname "$MCP_MIGRATION_EVIDENCE")"
+          jq -n \
+            --arg migration "$migration" \
+            --arg prerequisiteMigration "$cabezon_migration" \
+            --arg commit "${{ github.sha }}" \
+            --arg migrationSha256 "sha256:$(sha256sum "$path" | cut -d' ' -f1)" \
+            --arg prerequisiteMigrationSha256 "sha256:$(sha256sum "$cabezon_path" | cut -d' ' -f1)" \
+            --arg targetFingerprint "sha256:$(printf '%s' "$SUPABASE_PROJECT_REF" | sha256sum | cut -d' ' -f1)" \
+            --argjson objectCount 18 \
+            '{schemaVersion:"maha-preview-mcp-migration-evidence/1.1",prerequisiteMigration:$prerequisiteMigration,migration:$migration,commit:$commit,prerequisiteMigrationSha256:$prerequisiteMigrationSha256,migrationSha256:$migrationSha256,targetFingerprint:$targetFingerprint,objectCount:$objectCount,converged:true,secretsIncluded:false}' \
+            > "$MCP_MIGRATION_EVIDENCE"
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '26'
+          cache: npm
+      - run: npm ci
+
+      - name: Create one fully governed synthetic Preview release
+        run: |
+          set -euo pipefail
+          for name in EPISTEMIC_OPERATIONS_TOKEN EPISTEMIC_RELEASE_AUTHORITY_TOKEN; do
+            [ -n "${!name:-}" ] || { echo "::error::$name is missing."; exit 1; }
+          done
+          [ "$EPISTEMIC_OPERATIONS_TOKEN" != "$EPISTEMIC_RELEASE_AUTHORITY_TOKEN" ] || { echo '::error::Operations and release-authority tokens must be distinct.'; exit 1; }
+          node --experimental-strip-types scripts/run-mcp-private-governed-release.ts
+          jq -e '.synthetic == true and .previewOnly == true and .scopedReviewCount == 4 and .authoritySeparatedFromOperations == true and .secretsIncluded == false' "$MCP_GOVERNED_RELEASE_EVIDENCE" >/dev/null
+          {
+            echo "MCP_EVIDENCE_CANARY_RELEASE_ID=$(jq -er '.releaseId' "$MCP_GOVERNED_RELEASE_EVIDENCE")"
+            echo "MCP_EVIDENCE_CANARY_CANONICAL_PATH=$(jq -er '.canonicalPath' "$MCP_GOVERNED_RELEASE_EVIDENCE")"
+          } >> "$GITHUB_ENV"
+
+      - name: Provision an ephemeral evidence credential and internal grant
+        run: |
+          set -euo pipefail
+          for name in CABEZON_PREVIEW_BASE_URL AGENT_REVIEW_TOKEN REVENUE_CONTROL_TOKEN; do
+            [ -n "${!name:-}" ] || { echo "::error::$name is missing."; exit 1; }
+          done
+          case "$CABEZON_PREVIEW_BASE_URL" in
+            https://*.vercel.app|https://*.vercel.app/) ;;
+            *) echo '::error::Target must be an HTTPS Vercel Preview origin.'; exit 1 ;;
+          esac
+          base="${CABEZON_PREVIEW_BASE_URL%/}"
+          bypass=()
+          if [ -n "${VERCEL_AUTOMATION_BYPASS_SECRET:-}" ]; then
+            bypass=(-H "x-vercel-protection-bypass: $VERCEL_AUTOMATION_BYPASS_SECRET")
+          fi
+
+          release_id="${MCP_EVIDENCE_CANARY_RELEASE_ID:?Governed release id is missing}"
+          canonical_path="${MCP_EVIDENCE_CANARY_CANONICAL_PATH:?Governed canonical path is missing}"
+          # Grant snapshots require canonical UTC instants. GNU date's default
+          # second-precision form (`...:00Z`) parses as ISO-8601 but is not the
+          # canonical JavaScript form (`...:00.000Z`).
+          expires_at="$(date -u -d '+2 hours' '+%Y-%m-%dT%H:%M:%S.000Z')"
+
+          credential_body="$(mktemp)"
+          grant_body="$(mktemp)"
+          trap 'rm -f "$credential_body" "$grant_body"' EXIT
+
+          credential_status="$(curl --silent --show-error "${bypass[@]}" \
+            --output "$credential_body" --write-out '%{http_code}' \
+            -H "Authorization: Bearer $AGENT_REVIEW_TOKEN" -H 'Content-Type: application/json' \
+            -d "$(jq -nc --arg expires "$expires_at" '{clientName:"CABEZON federation Preview canary",credentialLabel:"Ephemeral licensed evidence canary",allowedCapabilities:["mcp_evidence_retrieval"],rateLimitPerHour:25,expiresAt:$expires}')" \
+            "$base/api/agent-credentials")"
+          if [ "$credential_status" != '201' ]; then
+            jq -c --argjson status "$credential_status" '{stage:"credential-provisioning",httpStatus:$status,errorCode:(.error.code // "unclassified"),errorMessage:(.error.message // "Credential provisioning failed without a bounded error message.")}' "$credential_body" >&2
+            exit 1
+          fi
+          credential_response="$(cat "$credential_body")"
+          credential="$(jq -er '.credential' <<<"$credential_response")"
+          credential_id="$(jq -er '.credentialId' <<<"$credential_response")"
+          echo "::add-mask::$credential"
+          {
+            echo "MCP_EVIDENCE_CANARY_CREDENTIAL=$credential"
+            echo "MCP_EVIDENCE_CANARY_CREDENTIAL_ID=$credential_id"
+          } >> "$GITHUB_ENV"
+
+          grant_status="$(curl --silent --show-error "${bypass[@]}" \
+            --output "$grant_body" --write-out '%{http_code}' \
+            -H "Authorization: Bearer $REVENUE_CONTROL_TOKEN" -H 'Content-Type: application/json' \
+            -d "$(jq -nc --arg credentialId "$credential_id" --arg until "$expires_at" --arg key "federation-grant-${{ github.run_id }}-${{ github.run_attempt }}" '{operation:"grant",idempotencyKey:$key,credentialId:$credentialId,planId:"evidence-internal-canary-v1",validUntil:$until,considerationState:"internal-evaluation",contractedAmountUsdCents:0,receivedAmountUsdCents:0}')" \
+            "$base/api/admin/mcp-evidence-licenses")"
+          if [ "$grant_status" != '201' ]; then
+            jq -c --argjson status "$grant_status" '{stage:"zero-dollar-internal-grant",httpStatus:$status,errorCode:(.error.code // "unclassified"),errorMessage:(.error.message // "Grant creation failed without a bounded error message.")}' "$grant_body" >&2
+            exit 1
+          fi
+          grant_response="$(cat "$grant_body")"
+          grant_id="$(jq -er '.grantId' <<<"$grant_response")"
+
+          {
+            echo "MCP_EVIDENCE_CANARY_GRANT_ID=$grant_id"
+            echo "MCP_EVIDENCE_CANARY_RELEASE_ID=$release_id"
+            echo "MCP_EVIDENCE_CANARY_CANONICAL_PATH=$canonical_path"
+          } >> "$GITHUB_ENV"
+
+      - name: Run private federated lifecycle
+        run: node --experimental-strip-types scripts/run-cabezon-mcp-federation-canary.ts
+
+      - name: Revoke the ephemeral grant and credential
+        if: always()
+        run: |
+          set -euo pipefail
+          base="${CABEZON_PREVIEW_BASE_URL%/}"
+          bypass=()
+          if [ -n "${VERCEL_AUTOMATION_BYPASS_SECRET:-}" ]; then
+            bypass=(-H "x-vercel-protection-bypass: $VERCEL_AUTOMATION_BYPASS_SECRET")
+          fi
+          if [ -n "${MCP_EVIDENCE_CANARY_GRANT_ID:-}" ]; then
+            curl --fail --silent --show-error "${bypass[@]}" \
+              -H "Authorization: Bearer $REVENUE_CONTROL_TOKEN" -H 'Content-Type: application/json' \
+              -d "$(jq -nc --arg grantId "$MCP_EVIDENCE_CANARY_GRANT_ID" --arg key "federation-revoke-${{ github.run_id }}-${{ github.run_attempt }}" '{operation:"revoke",idempotencyKey:$key,grantId:$grantId,reason:"Private Preview federation canary completed; revoke temporary access."}')" \
+              "$base/api/admin/mcp-evidence-licenses" >/dev/null
+          fi
+          if [ -n "${MCP_EVIDENCE_CANARY_CREDENTIAL_ID:-}" ]; then
+            curl --fail --silent --show-error --request PATCH "${bypass[@]}" \
+              -H "Authorization: Bearer $AGENT_REVIEW_TOKEN" -H 'Content-Type: application/json' \
+              -d '{"action":"revoke","reason":"Private Preview federation canary completed."}' \
+              "$base/api/agent-credentials/$MCP_EVIDENCE_CANARY_CREDENTIAL_ID" >/dev/null
+          fi
+      - name: Upload sanitized evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: preview-cabezon-mcp-federation-${{ github.run_id }}
+          path: |
+            ${{ env.MCP_MIGRATION_EVIDENCE }}
+            ${{ env.MCP_GOVERNED_RELEASE_EVIDENCE }}
+            ${{ env.CABEZON_MCP_CANARY_EVIDENCE }}
+          if-no-files-found: error
+          retention-days: 30

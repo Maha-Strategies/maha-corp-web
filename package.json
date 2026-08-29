@@ -114,6 +114,10 @@
     "build:x402-buyer-policy": "npm --prefix packages/x402-buyer-policy run build",
     "build:wasm-kernel": "npm --prefix packages/wasm-kernel run build",
     "pack:x402-buyer-policy": "npm --prefix packages/x402-buyer-policy run pack:dry-run",
+    "canary:cabezon:private": "node --experimental-strip-types scripts/run-cabezon-preview-lifecycle-canary.ts",
+    "canary:cabezon:preview": "node --experimental-strip-types scripts/run-cabezon-preview-remote-canary.ts",
+    "canary:cabezon-mcp-federation:preview": "node --experimental-strip-types scripts/run-cabezon-mcp-federation-canary.ts",
+    "verify:cabezon:served-boundary": "node --experimental-strip-types scripts/verify-cabezon-preview-served-boundary.ts",
     "test": "node --test --experimental-strip-types test/*.test.ts",
     "interop:mcp": "node interop/mcp/client-probe.mjs",
     "interop:a2a": "node interop/a2a/caller.mjs",
@@ -121,7 +125,8 @@
     "demo:context-control": "npm --prefix packages/maha-mcp-server run build && node --experimental-strip-types scripts/run-context-control-local-demo.ts",
     "evaluate:claims-exception": "node --experimental-strip-types scripts/run-claims-exception-evaluation.ts",
     "generate:gateway-interop-fixtures": "node --experimental-strip-types scripts/generate-gateway-interop-fixtures.ts",
-    "verify:gateway-interop": "node --test --experimental-strip-types test/mcp-gateway-interop.test.ts"
+    "verify:gateway-interop": "node --test --experimental-strip-types test/mcp-gateway-interop.test.ts",
+    "canary:mcp-evidence:private": "node --experimental-strip-types scripts/run-mcp-evidence-private-canary.ts"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.115.0",

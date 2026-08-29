@@ -40,6 +40,13 @@ const PRIVATE_ROUTES = new Set([
   '/api/admin/mps-operations/lookup',
   '/api/admin/mcp-gateway',
   '/api/mcp-gateway/[serverId]',
+  // Licensed evidence retrieval is private-by-discovery until its isolated
+  // migration and lifecycle canary prove entitlement, quota, replay and
+  // release-substitution boundaries. The companion admin route exposes grant
+  // state and remains an operator-only control plane after tool promotion.
+  '/api/admin/mcp-evidence-licenses',
+  '/api/mcp/evidence',
+  '/api/integrations/cabezon/preview/federation',
   '/api/admin/revenue-control-plane',
   // Operator readiness for the x402 payment surface. Behind the readiness
   // bearer token and deliberately undocumented publicly: it reports which
@@ -144,6 +151,13 @@ const PRIVATE_ROUTES = new Set([
   // middleware contract for a gateway to call, is protected by a dedicated
   // integration credential, and is not a general Maha REST operation.
   '/api/integrations/gateway/context-compiler',
+  // Preview-only CABEZON compatibility surface. It is hidden outside Vercel
+  // Preview, bearer-protected and purchase-disabled; it is not a public REST
+  // contract until a separate promotion decision is made.
+  '/api/integrations/cabezon/preview/offers',
+  '/api/integrations/cabezon/preview/enquiries',
+  '/api/integrations/cabezon/preview/lifecycles/[lifecycleId]/delivery',
+  '/api/integrations/cabezon/preview/lifecycles/[lifecycleId]/acknowledgement',
   '/api/cron/inbound-digest',
   '/api/cron/job-reclaim',
   '/api/cron/market-scout',

@@ -3,6 +3,7 @@ export const COMMERCIAL_API_OPERATIONS = {
   mps_credit_balance: { endpoint: '/api/mps-credits', method: 'GET' },
   book_entitlement: { endpoint: '/api/books/[id]/entitlement', method: 'GET' },
   book_content: { endpoint: '/api/books/[id]/content', method: 'GET' },
+  mcp_evidence_retrieval: { endpoint: '/api/mcp/evidence', method: 'POST' },
 } as const
 
 export type CommercialApiOperation = keyof typeof COMMERCIAL_API_OPERATIONS
