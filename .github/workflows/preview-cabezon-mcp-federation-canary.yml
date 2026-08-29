@@ -31,8 +31,8 @@ jobs:
       SUPABASE_DB_PASSWORD: ${{ secrets.SUPABASE_DB_PASSWORD }}
       SUPABASE_PROJECT_REF: ${{ secrets.SUPABASE_PROJECT_REF }}
       CABEZON_PREVIEW_CANARY_RUN_ID: gha-${{ github.run_id }}-${{ github.run_attempt }}
-      CABEZON_MCP_CANARY_EVIDENCE: ${{ runner.temp }}/cabezon-mcp-federation/evidence.json
-      MCP_MIGRATION_EVIDENCE: ${{ runner.temp }}/cabezon-mcp-federation/migration.json
+      CABEZON_MCP_CANARY_EVIDENCE: ${{ github.workspace }}/cabezon-mcp-federation/evidence.json
+      MCP_MIGRATION_EVIDENCE: ${{ github.workspace }}/cabezon-mcp-federation/migration.json
     steps:
       - name: Enforce bounded Preview branch and confirmation
         env:
