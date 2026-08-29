@@ -1,0 +1,156 @@
+{
+  "buildConfiguration": "release",
+  "leanVersion": "4.33.1",
+  "schemaVersion": "maha-formal-proof-manifest/0.1",
+  "theorems": [
+    {
+      "formalStatement": "theorem fullCircle_pos : 0 < fullCircle",
+      "sourceFile": "Maha/Angles.lean",
+      "sourceSha256": "sha256:138f3f736e3ac46635511c4e441184521154774418e3d49111566550b6d90814",
+      "theoremName": "fullCircle_pos",
+      "theoremNamespace": "Maha.Angle"
+    },
+    {
+      "formalStatement": "theorem normalize_idempotent (a : Int) : normalize (normalize a) = normalize a",
+      "sourceFile": "Maha/Angles.lean",
+      "sourceSha256": "sha256:138f3f736e3ac46635511c4e441184521154774418e3d49111566550b6d90814",
+      "theoremName": "normalize_idempotent",
+      "theoremNamespace": "Maha.Angle"
+    },
+    {
+      "formalStatement": "theorem normalize_lt (a : Int) : normalize a < fullCircle",
+      "sourceFile": "Maha/Angles.lean",
+      "sourceSha256": "sha256:138f3f736e3ac46635511c4e441184521154774418e3d49111566550b6d90814",
+      "theoremName": "normalize_lt",
+      "theoremNamespace": "Maha.Angle"
+    },
+    {
+      "formalStatement": "theorem normalize_mem (a : Int) : 0 ≤ normalize a ∧ normalize a < fullCircle",
+      "sourceFile": "Maha/Angles.lean",
+      "sourceSha256": "sha256:138f3f736e3ac46635511c4e441184521154774418e3d49111566550b6d90814",
+      "theoremName": "normalize_mem",
+      "theoremNamespace": "Maha.Angle"
+    },
+    {
+      "formalStatement": "theorem normalize_nonneg (a : Int) : 0 ≤ normalize a",
+      "sourceFile": "Maha/Angles.lean",
+      "sourceSha256": "sha256:138f3f736e3ac46635511c4e441184521154774418e3d49111566550b6d90814",
+      "theoremName": "normalize_nonneg",
+      "theoremNamespace": "Maha.Angle"
+    },
+    {
+      "formalStatement": "theorem separation_le_half (a b : Int) : separation a b ≤ halfCircle",
+      "sourceFile": "Maha/Angles.lean",
+      "sourceSha256": "sha256:138f3f736e3ac46635511c4e441184521154774418e3d49111566550b6d90814",
+      "theoremName": "separation_le_half",
+      "theoremNamespace": "Maha.Angle"
+    },
+    {
+      "formalStatement": "theorem separation_nonneg (a b : Int) : 0 ≤ separation a b",
+      "sourceFile": "Maha/Angles.lean",
+      "sourceSha256": "sha256:138f3f736e3ac46635511c4e441184521154774418e3d49111566550b6d90814",
+      "theoremName": "separation_nonneg",
+      "theoremNamespace": "Maha.Angle"
+    },
+    {
+      "formalStatement": "theorem attach_adds_no_empirical_support (c : Claim) (s : Support) (hmem : s ∈ (attachFormalProof c).support) (hemp : isEmpirical s = true) : s ∈ c.support",
+      "sourceFile": "Maha/EvidenceBoundary.lean",
+      "sourceSha256": "sha256:96a5cec6cc65491781a57a551dfee2b958fcadb6c29daccc082aa3818d34a166",
+      "theoremName": "attach_adds_no_empirical_support",
+      "theoremNamespace": "Maha.Evidence"
+    },
+    {
+      "formalStatement": "theorem attach_preserves_assumptions (c : Claim) : (attachFormalProof c).assumptions = c.assumptions",
+      "sourceFile": "Maha/EvidenceBoundary.lean",
+      "sourceSha256": "sha256:96a5cec6cc65491781a57a551dfee2b958fcadb6c29daccc082aa3818d34a166",
+      "theoremName": "attach_preserves_assumptions",
+      "theoremNamespace": "Maha.Evidence"
+    },
+    {
+      "formalStatement": "theorem formalProof_ne_calculation : Support.formalProof ≠ Support.calculation",
+      "sourceFile": "Maha/EvidenceBoundary.lean",
+      "sourceSha256": "sha256:96a5cec6cc65491781a57a551dfee2b958fcadb6c29daccc082aa3818d34a166",
+      "theoremName": "formalProof_ne_calculation",
+      "theoremNamespace": "Maha.Evidence"
+    },
+    {
+      "formalStatement": "theorem formalProof_ne_independentReproduction : Support.formalProof ≠ Support.independentReproduction",
+      "sourceFile": "Maha/EvidenceBoundary.lean",
+      "sourceSha256": "sha256:96a5cec6cc65491781a57a551dfee2b958fcadb6c29daccc082aa3818d34a166",
+      "theoremName": "formalProof_ne_independentReproduction",
+      "theoremNamespace": "Maha.Evidence"
+    },
+    {
+      "formalStatement": "theorem formalProof_ne_sourcePassage : Support.formalProof ≠ Support.sourcePassage",
+      "sourceFile": "Maha/EvidenceBoundary.lean",
+      "sourceSha256": "sha256:96a5cec6cc65491781a57a551dfee2b958fcadb6c29daccc082aa3818d34a166",
+      "theoremName": "formalProof_ne_sourcePassage",
+      "theoremNamespace": "Maha.Evidence"
+    },
+    {
+      "formalStatement": "theorem formalProof_not_empirical : isEmpirical .formalProof = false",
+      "sourceFile": "Maha/EvidenceBoundary.lean",
+      "sourceSha256": "sha256:96a5cec6cc65491781a57a551dfee2b958fcadb6c29daccc082aa3818d34a166",
+      "theoremName": "formalProof_not_empirical",
+      "theoremNamespace": "Maha.Evidence"
+    },
+    {
+      "formalStatement": "theorem add_comm (a b : Interval) : add a b = add b a",
+      "sourceFile": "Maha/Intervals.lean",
+      "sourceSha256": "sha256:6e4086d38d796a55e15480a7d4df1f97932e8bc9727a09af8aafab07b6a697a9",
+      "theoremName": "add_comm",
+      "theoremNamespace": "Maha.Interval"
+    },
+    {
+      "formalStatement": "theorem add_mem {a b : Interval} {x y : Int} (hx : a.Mem x) (hy : b.Mem y) : (add a b).Mem (x + y)",
+      "sourceFile": "Maha/Intervals.lean",
+      "sourceSha256": "sha256:6e4086d38d796a55e15480a7d4df1f97932e8bc9727a09af8aafab07b6a697a9",
+      "theoremName": "add_mem",
+      "theoremNamespace": "Maha.Interval"
+    },
+    {
+      "formalStatement": "theorem add_valid {a b : Interval} (ha : a.Valid) (hb : b.Valid) : (add a b).Valid",
+      "sourceFile": "Maha/Intervals.lean",
+      "sourceSha256": "sha256:6e4086d38d796a55e15480a7d4df1f97932e8bc9727a09af8aafab07b6a697a9",
+      "theoremName": "add_valid",
+      "theoremNamespace": "Maha.Interval"
+    },
+    {
+      "formalStatement": "theorem add_zero (a : Interval) : add a zero = a",
+      "sourceFile": "Maha/Intervals.lean",
+      "sourceSha256": "sha256:6e4086d38d796a55e15480a7d4df1f97932e8bc9727a09af8aafab07b6a697a9",
+      "theoremName": "add_zero",
+      "theoremNamespace": "Maha.Interval"
+    },
+    {
+      "formalStatement": "theorem zero_add (a : Interval) : add zero a = a",
+      "sourceFile": "Maha/Intervals.lean",
+      "sourceSha256": "sha256:6e4086d38d796a55e15480a7d4df1f97932e8bc9727a09af8aafab07b6a697a9",
+      "theoremName": "zero_add",
+      "theoremNamespace": "Maha.Interval"
+    },
+    {
+      "formalStatement": "theorem mul_pos_of_pos {a b : Int} (ha : 0 < a) (hb : 0 < b) : 0 < a * b",
+      "sourceFile": "Maha/ThermalModel.lean",
+      "sourceSha256": "sha256:22dfbb6e2369d9fae55838070c33934682c2fcb422a8f1cff7526e0fdc85c1b8",
+      "theoremName": "mul_pos_of_pos",
+      "theoremNamespace": "Maha.Thermal"
+    },
+    {
+      "formalStatement": "theorem resistance_nonneg {R L k A : Int} (h : Resistance R L k A) (hL : 0 ≤ L) (hk : 0 < k) (hA : 0 < A) : 0 ≤ R",
+      "sourceFile": "Maha/ThermalModel.lean",
+      "sourceSha256": "sha256:22dfbb6e2369d9fae55838070c33934682c2fcb422a8f1cff7526e0fdc85c1b8",
+      "theoremName": "resistance_nonneg",
+      "theoremNamespace": "Maha.Thermal"
+    },
+    {
+      "formalStatement": "theorem temperature_rise_nonneg {dT Q R : Int} (h : TemperatureRise dT Q R) (hQ : 0 ≤ Q) (hR : 0 ≤ R) : 0 ≤ dT",
+      "sourceFile": "Maha/ThermalModel.lean",
+      "sourceSha256": "sha256:22dfbb6e2369d9fae55838070c33934682c2fcb422a8f1cff7526e0fdc85c1b8",
+      "theoremName": "temperature_rise_nonneg",
+      "theoremNamespace": "Maha.Thermal"
+    }
+  ],
+  "toolchain": "leanprover/lean4:v4.33.1",
+  "verificationCommand": "lake build"
+}

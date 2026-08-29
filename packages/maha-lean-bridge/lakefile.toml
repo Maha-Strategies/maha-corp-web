@@ -1,0 +1,10 @@
+name = "maha"
+defaultTargets = ["Maha"]
+
+# No dependencies. Proof verification must not reach the network after the
+# toolchain is installed, and every theorem here is stated over Lean's own
+# Int and Rat, so mathlib is deliberately absent.
+
+[[lean_lib]]
+name = "Maha"
+srcDir = "."

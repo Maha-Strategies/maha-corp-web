@@ -1,0 +1,27 @@
+{
+  "schemaVersion": "maha-formal-claims/0.1",
+  "note": "Claim bindings used by the lifecycle fixture. Each names a theorem whose assumptions and source binding can be stated honestly for that claim. A theorem is not attached merely to demonstrate the mechanism.",
+  "dossierId": "dsr_euv_resist_stochastics",
+  "bindings": [
+    {
+      "theoremId": "thm_interval_add_valid",
+      "qualifiedTheorem": "Maha.Interval.add_valid",
+      "claimIds": ["clm_figure_conditions"],
+      "assumptions": [
+        "Both operands are intervals whose lower bound does not exceed its upper bound.",
+        "The quantities are represented as exact integers in the units declared by the calculation receipt."
+      ],
+      "informalBoundary": "Establishes only that bound-wise addition of two ordered integer intervals yields an ordered interval. It does not establish that the WASM kernel implements this operation, that the inputs describe any measured quantity, or that interval arithmetic is the correct uncertainty model for the cited figure."
+    },
+    {
+      "theoremId": "thm_interval_add_mem",
+      "qualifiedTheorem": "Maha.Interval.add_mem",
+      "claimIds": ["clm_figure_conditions"],
+      "assumptions": [
+        "Each operand contains its respective member.",
+        "Quantities are exact integers in the declared units."
+      ],
+      "informalBoundary": "Establishes only that the sum of two members lies within the summed interval. It is a containment property of the arithmetic, not evidence about measurement error, instrument calibration, or the physical process the figure describes."
+    }
+  ]
+}
