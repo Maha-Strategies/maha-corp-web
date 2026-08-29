@@ -1,5 +1,11 @@
 import type { CalculationReceipt } from './receipt.js'
 import { canonicalJson, verifyCalculationReceipt } from './receipt.js'
+import {
+  createExecutedCalculationReceipt,
+  verifyExecutedCalculationReceipt,
+  type KernelArtifact,
+  type KernelExecutionRequest,
+} from './execution.js'
 
 export const DOSSIER_CALCULATION_ATTACHMENT_SCHEMA = 'maha-dossier-calculation-attachment/1.0' as const
 
@@ -10,6 +16,11 @@ export interface DossierCalculationAttachment {
   receipt: CalculationReceipt
   mediaType: 'application/ld+json'
   jsonLd: Readonly<Record<string, unknown>>
+  executionRequest?: KernelExecutionRequest
+}
+
+export interface ExecutionBoundDossierCalculationAttachment extends DossierCalculationAttachment {
+  executionRequest: KernelExecutionRequest
 }
 
 export async function attachCalculationReceiptToDossier(input: {
@@ -37,6 +48,18 @@ export async function attachCalculationReceiptToDossier(input: {
       potentialAction: claimIds.map((claimId) => ({ '@type': 'AssessAction', object: claimId })),
     },
   }
+}
+
+export async function executeAndAttachCalculationToDossier(input: {
+  dossierId: string
+  claimIds: readonly string[]
+  request: KernelExecutionRequest
+  artifact: KernelArtifact
+}): Promise<ExecutionBoundDossierCalculationAttachment> {
+  const receipt = await createExecutedCalculationReceipt(input.request, input.artifact)
+  const findings = await verifyExecutedCalculationReceipt(receipt, input.artifact)
+  if (findings.length) throw new Error(`Executed calculation could not be independently recomputed: ${findings.join(',')}`)
+  return { ...await attachCalculationReceiptToDossier({ dossierId: input.dossierId, claimIds: input.claimIds, receipt }), executionRequest: input.request }
 }
 
 export const KERNEL_ATTACHMENT_ENCODING = 'maha-calculation-receipt/1.0+json' as const

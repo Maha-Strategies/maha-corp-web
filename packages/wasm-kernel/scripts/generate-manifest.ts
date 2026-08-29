@@ -12,6 +12,7 @@ const manifest = {
   schemaVersion: 'maha-wasm-kernel-manifest/1.0',
   kernelVersion: '0.3.0',
   abi: 'wasm-i64-fixed-point',
+  conformanceVersion: 'maha-wasm-conformance/0.3',
   compiler: { name: 'assemblyscript', version: compilerVersion, flags: ['--optimize', '--runtime=stub', '--exportRuntime'] },
   arithmetic: { integerModel: 'signed-i64', rounding: 'nearest-ties-to-even', overflow: 'abort' },
   sourceSha256: digest(resolve(root, 'assembly/index.ts')),

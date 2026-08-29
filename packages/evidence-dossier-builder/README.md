@@ -25,6 +25,8 @@ mps-dossier validate <input.json>
 mps-dossier compile <input.json> --output <absolute-directory>
 mps-dossier verify <manifest.json>
 mps-dossier render-jsonld <input.json|package-directory>
+mps-dossier compile-integrated <input.json> --kernel <kernel.wasm> --kernel-manifest <manifest.json> --output <absolute-directory>
+mps-dossier verify-integrated <manifest.json>
 ```
 
 Run it with `node --experimental-strip-types`:
@@ -33,9 +35,10 @@ Run it with `node --experimental-strip-types`:
 node --experimental-strip-types packages/evidence-dossier-builder/bin/mps-dossier.ts verify ./out/manifest.json
 ```
 
-The additive `compileIntegratedPackage()` path renders a deterministic PDF and
-binds verified calculation receipts. The original v0.1 compiler remains
-unchanged.
+The additive `compileIntegratedPackage()` path renders a deterministic PDF,
+embeds the exact WASM kernel, binds observed runtime witnesses, and accepts only
+execution-bound calculation receipts. The original v0.1 compiler remains
+unchanged and readable, but it is not described as independently recomputable.
 
 ## Tests
 
@@ -70,14 +73,17 @@ mistaken for another:
 `sourceMetadata` · `claims` · `passages` · `calculations` · `formalProofs` ·
 `runtimeReceipts` · `assurance`
 
-`calculations` and `runtimeReceipts` are populated only from cryptographically
-verified attachments bound to declared dossier claims. They remain empty when
-no attachment is supplied. `formalProofs` remains empty until a formal-proof
-schema exists. A calculation never creates source or passage support.
+`calculations` is populated only by an execution request rerun against the
+embedded kernel. `runtimeReceipts` is populated only by a separately verified
+Computational Provenance Witness attachment; a calculation receipt is not
+mislabelled as a runtime observation. Both remain empty when absent.
+`formalProofs` remains empty until a formal-proof schema exists. A calculation
+never creates source or passage support.
 
-`verifyIntegratedCalculationEvidence()` reparses the exported artifacts and
-recomputes every receipt digest without trusting compiler objects. Receipt
-bytes use the same `maha-dossier-canonical/1.0` ordering as the dossier.
+`verifyIntegratedCalculationEvidence()` reparses the exported artifacts,
+validates the embedded kernel bytes against its manifest, reruns every declared
+operation, and rerenders JSON-LD and PDF for byte comparison. Receipt bytes use
+the same `maha-dossier-canonical/1.0` ordering as the dossier.
 Missing calculation input yields no receipt; it is never replaced with inferred
 numbers or zero uncertainty.
 
