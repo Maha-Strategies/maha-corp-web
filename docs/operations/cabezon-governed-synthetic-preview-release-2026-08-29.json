@@ -31,10 +31,11 @@
     "evidenceSha256": "sha256:e35c3278a9a3bfb92d1d7786d380d6b399d5ac4a5ff5edc3d2b16069c6023523"
   },
   "downstreamLifecycle": {
-    "status": "not-run",
-    "stoppedAt": "ephemeral-credential-provisioning",
+    "status": "credential-created-then-revoked",
+    "stoppedAt": "zero-dollar-internal-grant",
     "httpStatus": 400,
-    "credentialCreated": false,
+    "credentialCreated": true,
+    "credentialRevoked": true,
     "grantCreated": false,
     "licensedRetrievalRun": false,
     "deliveryRun": false,

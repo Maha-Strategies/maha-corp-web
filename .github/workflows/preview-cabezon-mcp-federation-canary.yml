@@ -140,12 +140,25 @@ jobs:
 
           release_id="${MCP_EVIDENCE_CANARY_RELEASE_ID:?Governed release id is missing}"
           canonical_path="${MCP_EVIDENCE_CANARY_CANONICAL_PATH:?Governed canonical path is missing}"
-          expires_at="$(date -u -d '+2 hours' '+%Y-%m-%dT%H:%M:%SZ')"
+          # Grant snapshots require canonical UTC instants. GNU date's default
+          # second-precision form (`...:00Z`) parses as ISO-8601 but is not the
+          # canonical JavaScript form (`...:00.000Z`).
+          expires_at="$(date -u -d '+2 hours' '+%Y-%m-%dT%H:%M:%S.000Z')"
 
-          credential_response="$(curl --fail --silent --show-error "${bypass[@]}" \
+          credential_body="$(mktemp)"
+          grant_body="$(mktemp)"
+          trap 'rm -f "$credential_body" "$grant_body"' EXIT
+
+          credential_status="$(curl --silent --show-error "${bypass[@]}" \
+            --output "$credential_body" --write-out '%{http_code}' \
             -H "Authorization: Bearer $AGENT_REVIEW_TOKEN" -H 'Content-Type: application/json' \
             -d "$(jq -nc --arg expires "$expires_at" '{clientName:"CABEZON federation Preview canary",credentialLabel:"Ephemeral licensed evidence canary",allowedCapabilities:["mcp_evidence_retrieval"],rateLimitPerHour:25,expiresAt:$expires}')" \
             "$base/api/agent-credentials")"
+          if [ "$credential_status" != '201' ]; then
+            jq -c --argjson status "$credential_status" '{stage:"credential-provisioning",httpStatus:$status,errorCode:(.error.code // "unclassified"),errorMessage:(.error.message // "Credential provisioning failed without a bounded error message.")}' "$credential_body" >&2
+            exit 1
+          fi
+          credential_response="$(cat "$credential_body")"
           credential="$(jq -er '.credential' <<<"$credential_response")"
           credential_id="$(jq -er '.credentialId' <<<"$credential_response")"
           echo "::add-mask::$credential"
@@ -154,10 +167,16 @@ jobs:
             echo "MCP_EVIDENCE_CANARY_CREDENTIAL_ID=$credential_id"
           } >> "$GITHUB_ENV"
 
-          grant_response="$(curl --fail --silent --show-error "${bypass[@]}" \
+          grant_status="$(curl --silent --show-error "${bypass[@]}" \
+            --output "$grant_body" --write-out '%{http_code}' \
             -H "Authorization: Bearer $REVENUE_CONTROL_TOKEN" -H 'Content-Type: application/json' \
             -d "$(jq -nc --arg credentialId "$credential_id" --arg until "$expires_at" --arg key "federation-grant-${{ github.run_id }}-${{ github.run_attempt }}" '{operation:"grant",idempotencyKey:$key,credentialId:$credentialId,planId:"evidence-internal-canary-v1",validUntil:$until,considerationState:"internal-evaluation",contractedAmountUsdCents:0,receivedAmountUsdCents:0}')" \
             "$base/api/admin/mcp-evidence-licenses")"
+          if [ "$grant_status" != '201' ]; then
+            jq -c --argjson status "$grant_status" '{stage:"zero-dollar-internal-grant",httpStatus:$status,errorCode:(.error.code // "unclassified"),errorMessage:(.error.message // "Grant creation failed without a bounded error message.")}' "$grant_body" >&2
+            exit 1
+          fi
+          grant_response="$(cat "$grant_body")"
           grant_id="$(jq -er '.grantId' <<<"$grant_response")"
 
           {

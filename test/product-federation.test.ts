@@ -67,6 +67,11 @@ test('federation and canary remain private and credential-free by construction',
   assert.match(workflow, /EPISTEMIC_OPERATIONS_TOKEN:.*secrets\.EPISTEMIC_OPERATIONS_TOKEN/)
   assert.match(workflow, /EPISTEMIC_RELEASE_AUTHORITY_TOKEN:.*secrets\.EPISTEMIC_RELEASE_AUTHORITY_TOKEN/)
   assert.match(workflow, /Operations and release-authority tokens must be distinct/)
+  assert.match(workflow, /\+%Y-%m-%dT%H:%M:%S\.000Z/)
+  assert.match(workflow, /stage:"credential-provisioning"/)
+  assert.match(workflow, /stage:"zero-dollar-internal-grant"/)
+  assert.doesNotMatch(workflow, /credential_response="\$\(curl --fail/)
+  assert.doesNotMatch(workflow, /grant_response="\$\(curl --fail/)
   assert.doesNotMatch(workflow, /environment: Production|PRODUCTION/i)
 })
 

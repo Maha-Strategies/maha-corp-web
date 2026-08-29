@@ -18,6 +18,6 @@ This is operational evidence for one ephemeral Preview environment only. It is n
 
 ## Downstream boundary
 
-The later credential-provisioning step returned HTTP 400, so the workflow stopped before creating a credential, grant, licensed retrieval, delivery, or acknowledgement. The governed synthetic release result remains valid; the broader CARP/CABEZON-to-MCP lifecycle remains unproven by this run and must not be represented as complete.
+The credential request succeeded and returned an ephemeral credential identifier. The following zero-dollar internal-grant request returned HTTP 400, after which the always-run cleanup revoked the credential. No grant, licensed retrieval, delivery, or acknowledgement was created. The original log used `curl --fail`, which hid the bounded response body and caused the first evidence summary to misidentify the failed request; this revision corrects that operational record without inventing the unavailable error detail. The governed synthetic release result remains valid, while the broader CARP/CABEZON-to-MCP lifecycle remains unproven by this run and must not be represented as complete.
 
 The temporary Vercel automation-bypass copy was removed immediately after the run. The ephemeral database branch, exact-branch Vercel variables, credential-bearing Preview deployments, and dedicated GitHub environment were then scheduled for deletion after this sanitized evidence was preserved.
