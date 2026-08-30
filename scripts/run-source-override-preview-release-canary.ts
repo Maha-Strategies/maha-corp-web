@@ -100,9 +100,13 @@ export function classifyExistingFrozenTargets(
   reviewTargets: readonly Json[],
   revisions: readonly { recordId: string; targetSha256: string }[],
 ): 'absent' | 'complete' {
-  const exactCounts = revisions.map((revision) => reviewTargets.filter((target) =>
-    target.recordId === revision.recordId && target.reviewTargetSha256 === revision.targetSha256,
-  ).length)
+  const exactCounts = revisions.map((revision) => reviewTargets.filter((target) => {
+    if (target.recordId !== revision.recordId || target.reviewTargetSha256 !== revision.targetSha256) return false
+    const gateDecision = target.gateDecision
+    if (!gateDecision || typeof gateDecision !== 'object' || Array.isArray(gateDecision)) return false
+    const reasons = (gateDecision as Json).reasons
+    return Array.isArray(reasons) && !reasons.some((reason) => String(reason).startsWith('source-content-inspection-missing:'))
+  }).length)
   if (exactCounts.every((count) => count === 0)) return 'absent'
   if (exactCounts.every((count) => count === 1)) return 'complete'
   throw new Error(`The Preview ingestion ledger contains a partial or duplicate exact-revision cohort: ${exactCounts.join(',')}.`)
@@ -123,7 +127,7 @@ async function ingestAndReview(operationsToken: string) {
       method: 'POST',
       body: JSON.stringify({
         adapterId: 'source-override-revision-canary',
-        idempotencyKey: `source-override-revisions:${setDigest}`,
+        idempotencyKey: `source-override-revisions-v2:${setDigest}`,
       }),
     })
   const decisions = []

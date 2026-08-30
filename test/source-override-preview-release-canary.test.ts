@@ -5,6 +5,7 @@ import { spawnSync } from 'node:child_process'
 import test from 'node:test'
 
 import { getLegacyEpistemicAdapter } from '../lib/epistemic-adapters.ts'
+import { buildEpistemicIngestionBatch } from '../lib/epistemic-ingestion.ts'
 import { epistemicRecordPath, epistemicReviewTargetHash } from '../lib/epistemic-publication.ts'
 import { parseEpistemicExpertReview } from '../lib/epistemic-review.ts'
 import {
@@ -39,6 +40,22 @@ test('the dedicated adapter freezes exactly the five merged-main revisions', () 
     assert.equal(candidate.record.publication.reviewState, 'draft')
     assert.equal(candidate.record.publication.requestedPublicPromotion, false)
     assert.equal(candidate.gateDecision.publicEligible, false)
+  }
+})
+
+test('the dedicated ingestion batch carries only digest-bound inspected-source attestations', () => {
+  const batch = buildEpistemicIngestionBatch({
+    adapterId: 'source-override-revision-canary',
+    idempotencyKey: 'source-override-revision-attestation-test',
+  }, new Date('2026-08-30T00:00:00.000Z'))
+  assert.equal(batch.records.length, 5)
+  for (const record of batch.records) {
+    assert.equal(record.alignmentDecision.contentInspectionState, 'internally-inspected-source-override')
+    assert.equal(record.alignmentDecision.explanatoryEligible, true)
+    assert.equal(record.alignmentDecision.canonicalEligible, true)
+    assert.match(record.alignmentDecision.inspectionAttestationSha256 ?? '', /^sha256:[a-f0-9]{64}$/)
+    assert.equal(record.gateDecision.reasons.some((reason) => reason.startsWith('source-content-inspection-missing:')), false)
+    assert.equal(record.gateDecision.publicEligible, false)
   }
 })
 
@@ -78,6 +95,7 @@ test('the remote canary resumes only from one complete exact frozen cohort', () 
   const targets = revisions.map((revision) => ({
     recordId: revision.recordId,
     reviewTargetSha256: revision.targetSha256,
+    gateDecision: { reasons: ['public-promotion-not-requested'] },
   }))
   assert.equal(classifyExistingFrozenTargets([], revisions), 'absent')
   assert.equal(classifyExistingFrozenTargets(targets, revisions), 'complete')
@@ -89,6 +107,10 @@ test('the remote canary resumes only from one complete exact frozen cohort', () 
     () => classifyExistingFrozenTargets([...targets, targets[0]!], revisions),
     /partial or duplicate exact-revision cohort/,
   )
+  assert.equal(classifyExistingFrozenTargets(targets.map((target) => ({
+    ...target,
+    gateDecision: { reasons: ['source-content-inspection-missing:source'] },
+  })), revisions), 'absent')
 })
 
 test('the three-gate queue admits each record only after an exact active release', () => {
