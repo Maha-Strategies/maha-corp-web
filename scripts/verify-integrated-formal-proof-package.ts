@@ -10,6 +10,8 @@ import { expectedLeanSources, REQUIRED_PROJECT_FILES } from '../packages/evidenc
 import { normalizeSourceText } from '../packages/maha-lean-bridge/src/canonicalize.ts'
 import { compileFromBinding } from '../packages/maha-lean-bridge/src/compiler.ts'
 import { resolveActualLeanVersion, verifyAttachments } from '../packages/maha-lean-bridge/src/verifier.ts'
+import { checkTrustRootSignature, loadSignedTrustRoot } from '../lib/evidence-dossier/formal-proof-trust-roots.ts'
+import { resolveSigningKey } from '../lib/evidence-dossier/formal-proof-signing-keys.ts'
 import type { BindingManifest } from '../packages/maha-lean-bridge/src/bindings.ts'
 import type { ProofManifest } from '../packages/maha-lean-bridge/src/schema.ts'
 import { executeAndAttachCalculationToDossier } from '../packages/wasm-kernel/dist/dossier.js'
@@ -46,6 +48,28 @@ function leanSources(): Record<string, string> {
     out[path] = normalizeSourceText(readFileSync(join(BRIDGE, path), 'utf8'))
   }
   return out
+}
+
+const signedTrustRoot = loadSignedTrustRoot()
+if (!signedTrustRoot) {
+  console.error('The signed trust root is missing. Formal proofs cannot be authorized without it.')
+  process.exit(1)
+}
+const signature = checkTrustRootSignature(signedTrustRoot, FORMAL_PROOF_FIXTURE_DOSSIER.dossierId)
+if (!signature.authentic) {
+  console.error(`Trust-root signature is not authentic: ${signature.failures.join(', ')}`)
+  process.exit(1)
+}
+const signingKey = resolveSigningKey(signedTrustRoot.signature.keyId)
+const authority = {
+  signatureAlgorithm: signedTrustRoot.signature.algorithm,
+  canonicalization: signedTrustRoot.signature.canonicalization,
+  keyId: signedTrustRoot.signature.keyId,
+  authorityEpoch: signedTrustRoot.payload.authorityEpoch,
+  signatureAuthentic: true,
+  bindingManifestSha256: signedTrustRoot.payload.bindingManifestSha256,
+  bindingManifestRevision: signedTrustRoot.payload.bindingManifestRevision,
+  syntheticTestKey: signingKey.syntheticTestKey,
 }
 
 const leanVersion = resolveActualLeanVersion(BRIDGE)
@@ -128,7 +152,8 @@ async function buildPackage() {
   return compileIntegratedPackage(FORMAL_PROOF_FIXTURE_DOSSIER, [calculation], {
     kernelArtifact: kernel,
     formalProofs: outcome.verified,
-    formalProofEvidence: { proofManifest: PROOF_MANIFEST, bindingManifest: BINDINGS, toolchain: TOOLCHAIN, leanSources: leanSources() },
+    formalProofEvidence: { proofManifest: PROOF_MANIFEST, bindingManifest: BINDINGS, toolchain: TOOLCHAIN, leanSources: leanSources(), signedTrustRoot },
+    formalProofAuthority: authority,
     runtimeWitnesses: [witness],
   })
 }
@@ -155,10 +180,21 @@ if (problems.length) {
   process.exit(1)
 }
 
+if (process.env.MAHA_PDF_OUT) {
+  const { writeFileSync, mkdirSync } = await import('node:fs')
+  mkdirSync(process.env.MAHA_PDF_OUT, { recursive: true })
+  writeFileSync(`${process.env.MAHA_PDF_OUT}/evidence-dossier.pdf`, first.files.find((f) => f.path === 'evidence-dossier.pdf')!.bytes)
+}
+
 console.log(
   JSON.stringify(
     {
       leanVersion,
+      signatureAlgorithm: signedTrustRoot.signature.algorithm,
+      signatureKeyId: signedTrustRoot.signature.keyId,
+      signatureAuthentic: true,
+      authorityEpoch: signedTrustRoot.payload.authorityEpoch,
+      syntheticTestKey: signingKey.syntheticTestKey,
       formalProofs: first.manifest.formalProofCount,
       calculations: 1,
       runtimeWitnesses: first.manifest.runtimeWitnessCount,

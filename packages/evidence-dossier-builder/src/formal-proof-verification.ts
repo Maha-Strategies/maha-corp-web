@@ -22,10 +22,14 @@ import {
   verifyAttachments,
 } from '../../maha-lean-bridge/src/verifier.ts'
 import {
-  resolveTrustRoot,
+  checkTrustRootSignature,
+  loadSignedTrustRoot,
+  trustRootFromEnvelope,
   TrustRootError,
   type FormalProofTrustRoot,
 } from '../../../lib/evidence-dossier/formal-proof-trust-roots.ts'
+import type { SignedTrustRootEnvelope } from '../../../lib/evidence-dossier/formal-proof-signing.ts'
+import type { SigningKeyEntry } from '../../../lib/evidence-dossier/formal-proof-signing-keys.ts'
 
 /**
  * Integrated verification of the formal proofs carried by a dossier package.
@@ -133,6 +137,20 @@ export interface PackagedFormalProofInput {
    * authorized.
    */
   trustRoot?: FormalProofTrustRoot
+  /**
+   * The signed envelope carrying that authority.
+   *
+   * `null` means the caller looked and found none — a package that shipped no
+   * authorization — and fails closed. `undefined` means no package context, so
+   * the committed envelope is resolved. The distinction matters: falling back
+   * to the repository's copy when a package omits one would hand every
+   * unauthorized package the repository's authorization for free.
+   */
+  signedTrustRoot?: SignedTrustRootEnvelope | null
+  /** Test-only registry override. Production resolves the committed registry. */
+  signingKeyRegistry?: readonly SigningKeyEntry[]
+  /** Test-only clock for validity windows. */
+  now?: Date
 }
 
 /** Injected Lean runners. Test-only; the production entry point accepts none. */
@@ -140,6 +158,10 @@ export interface LeanRunners {
   runLeanBuild?: (packageRoot: string) => { ok: boolean; output: string }
   runAxiomCheck?: (packageRoot: string, names: readonly string[]) => { ok: boolean; output: string }
   resolveLeanVersion?: () => string | null
+  /** Test-only key registry override. Production resolves the committed one. */
+  signingKeyRegistry?: readonly SigningKeyEntry[]
+  /** Test-only clock for signature validity windows. */
+  now?: Date
 }
 
 /**
@@ -207,11 +229,25 @@ export function verifyPackagedFormalProofs(input: PackagedFormalProofInput, runn
     return findings
   }
 
-  // Authorization first. A package that agrees with itself about the wrong
-  // thing must not reach the Lean recheck and come back clean.
+  // Signature first. Nothing the envelope's payload says may be believed before
+  // the signature over it is checked, or a forged payload would be used to
+  // decide whether the forged payload is acceptable.
+  const envelope = input.signedTrustRoot === undefined ? loadSignedTrustRoot() : (input.signedTrustRoot ?? undefined)
+  const signature = checkTrustRootSignature(envelope, input.dossierId, {
+    registry: input.signingKeyRegistry,
+    now: input.now,
+  })
+  if (!signature.authentic) {
+    for (const failure of signature.failures) findings.push(`integrated-formal-proof-${failure}`)
+    return [...new Set(findings)]
+  }
+
+  // Authorization next. A package that agrees with itself about the wrong thing
+  // must not reach the Lean recheck and come back clean. The authorized facts
+  // come from the signed payload, never from the package.
   let trustRoot: FormalProofTrustRoot
   try {
-    trustRoot = input.trustRoot ?? resolveTrustRoot(input.dossierId)
+    trustRoot = input.trustRoot ?? trustRootFromEnvelope(envelope!)
   } catch (error) {
     findings.push(
       error instanceof TrustRootError && /Ambiguous/.test(error.message)

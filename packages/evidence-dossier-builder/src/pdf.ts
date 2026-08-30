@@ -4,6 +4,7 @@ import type { EvidenceDossier } from './schema.ts'
 import type { DossierCalculationAttachment } from '../../wasm-kernel/src/dossier.ts'
 import type { DossierRuntimeWitnessAttachment } from '../../../lib/evidence-dossier/runtime-witness.ts'
 import type { FormalProofAttachment } from '../../maha-lean-bridge/src/schema.ts'
+import type { FormalProofAuthorityNode } from './jsonld.ts'
 import { canonicalJson } from './canonicalize.ts'
 
 const PAGE = { width: 612, height: 792, margin: 54, footer: 36 }
@@ -41,6 +42,7 @@ export async function renderEvidenceDossierPdf(input: {
   attachments: readonly DossierCalculationAttachment[]
   witnesses?: readonly DossierRuntimeWitnessAttachment[]
   formalProofs?: readonly FormalProofAttachment[]
+  formalProofAuthority?: FormalProofAuthorityNode
   packageVersion: string
   engagementLabel: string
 }): Promise<Uint8Array> {
@@ -121,6 +123,21 @@ export async function renderEvidenceDossierPdf(input: {
     line(`Toolchain: ${proof.toolchain} (Lean ${proof.leanVersion}) | Verify with: ${proof.verificationCommand}`, { size: 7.5, font: mono })
     line(`Boundary: ${proof.informalBoundary}`)
     line('Assurance: machine-checked only. Empirically validated: no. Independently reproduced: no. Compiler equivalence proven: no. Scientific model certified: no.', { gap: 3 })
+  }
+  heading('Authorization of formal statements')
+  const authority = input.formalProofAuthority
+  if (!authority) {
+    line('No signed authorization accompanies this package.')
+  } else {
+    line(`Signature: ${authority.signatureAuthentic ? 'authentic' : 'NOT AUTHENTIC'} | ${authority.signatureAlgorithm} over ${authority.canonicalization}`, { font: bold, gap: 2 })
+    line(`Key: ${authority.keyId} | Authority epoch: ${authority.authorityEpoch}`, { size: 7.5, font: mono })
+    line(`Authorized bindings: ${authority.bindingManifestSha256} rev ${authority.bindingManifestRevision}`, { size: 7.5, font: mono })
+    if (authority.syntheticTestKey) {
+      line('This key is a synthetic fixture key. Its private seed is a published constant, so anyone can produce this signature. It authorizes only internal fixture material.', { gap: 2 })
+    }
+    // Stated at the point of the signature, where the misreading would occur.
+    line('A valid signature establishes that a holder of the named key attested to this set of authorized bindings.', { gap: 1 })
+    line('It does not establish that any theorem holds, that any claim is true, or that any model describes reality.', { gap: 3 })
   }
   heading('Sources and inspected passages')
   for (const source of input.dossier.sources) line(`${source.sourceId} - ${source.verificationState} - ${source.correctedCitation ?? source.submittedCitation}`)

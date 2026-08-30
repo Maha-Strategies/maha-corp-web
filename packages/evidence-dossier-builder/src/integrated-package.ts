@@ -4,7 +4,7 @@ import { basename, dirname, isAbsolute, join, parse, resolve } from 'node:path'
 
 import { provenanceDigest } from './canonicalize.ts'
 import { INTERNAL_REHEARSAL_ENGAGEMENT, compilePackage, type CompileOptions } from './compile.ts'
-import { renderDossierJsonLdText } from './jsonld.ts'
+import { renderDossierJsonLdText, type FormalProofAuthorityNode } from './jsonld.ts'
 import { renderEvidenceDossierPdf } from './pdf.ts'
 import type { EvidenceDossier } from './schema.ts'
 import type { DossierCalculationAttachment } from '../../wasm-kernel/src/dossier.ts'
@@ -12,6 +12,9 @@ import { canonicalJson as calculationCanonicalJson, verifyCalculationReceipt } f
 import { createExecutedCalculationReceipt, verifyExecutedCalculationReceipt, verifyKernelArtifact, type KernelArtifact, type KernelManifest } from '../../wasm-kernel/dist/execution.js'
 import { verifyComputationalWitnessReceipt, type DossierRuntimeWitnessAttachment } from '../../../lib/evidence-dossier/runtime-witness.ts'
 import type { BindingManifest } from '../../maha-lean-bridge/src/bindings.ts'
+import { checkTrustRootSignature } from '../../../lib/evidence-dossier/formal-proof-trust-roots.ts'
+import { resolveSigningKey } from '../../../lib/evidence-dossier/formal-proof-signing-keys.ts'
+import type { SignedTrustRootEnvelope } from '../../../lib/evidence-dossier/formal-proof-signing.ts'
 import type { FormalProofAttachment, ProofManifest } from '../../maha-lean-bridge/src/schema.ts'
 import { verifyPackagedFormalProofs, type LeanRunners } from './formal-proof-verification.ts'
 
@@ -37,6 +40,8 @@ export interface FormalProofEvidence {
   toolchain: string
   /** Package-relative Lean source path to its normalized text. */
   leanSources: Readonly<Record<string, string>>
+  /** The signed authorization, carried for inspection only. */
+  signedTrustRoot?: unknown
 }
 
 export interface IntegratedCompileOptions extends CompileOptions {
@@ -45,6 +50,8 @@ export interface IntegratedCompileOptions extends CompileOptions {
   /** Verified formal proofs. Unverified attachments are refused, not downgraded. */
   formalProofs?: readonly FormalProofAttachment[]
   formalProofEvidence?: FormalProofEvidence
+  /** Signature provenance for the authorization, rendered separately from proofs. */
+  formalProofAuthority?: FormalProofAuthorityNode
 }
 
 const digest = (bytes: Uint8Array) => `sha256:${createHash('sha256').update(bytes).digest('hex')}`
@@ -154,10 +161,10 @@ export async function compileIntegratedPackage(dossier: EvidenceDossier, attachm
   validateFormalProofs(dossier, formalProofs, options.formalProofEvidence)
   const engagement = options.engagement ?? INTERNAL_REHEARSAL_ENGAGEMENT
   const engagementLabel = `${engagement.mode}; list $${engagement.listPriceUsd}; contracted $${engagement.contractedPriceUsd}; received $${engagement.cashReceivedUsd}`
-  const pdf = await renderEvidenceDossierPdf({ dossier, attachments: ordered, witnesses, formalProofs, packageVersion: INTEGRATED_PACKAGE_VERSION, engagementLabel })
+  const pdf = await renderEvidenceDossierPdf({ dossier, attachments: ordered, witnesses, formalProofs, formalProofAuthority: options.formalProofAuthority, packageVersion: INTEGRATED_PACKAGE_VERSION, engagementLabel })
   const files: IntegratedFile[] = [
     ...base.files.map((entry) => encoded(entry.path, entry.mediaType, entry.content)),
-    encoded('dossier.jsonld', 'application/ld+json', renderDossierJsonLdText(dossier, ordered, witnesses, formalProofs)),
+    encoded('dossier.jsonld', 'application/ld+json', renderDossierJsonLdText(dossier, ordered, witnesses, formalProofs, options.formalProofAuthority)),
     encoded('calculation-receipts.json', 'application/json', `${calculationCanonicalJson(ordered)}\n`),
     encoded('runtime-witnesses.json', 'application/json', `${calculationCanonicalJson(witnesses)}\n`),
     encoded('formal-proofs.json', 'application/json', `${calculationCanonicalJson(formalProofs)}\n`),
@@ -168,6 +175,11 @@ export async function compileIntegratedPackage(dossier: EvidenceDossier, attachm
           encoded('formal-proof-manifest.json', 'application/json', `${calculationCanonicalJson(options.formalProofEvidence.proofManifest)}\n`),
           encoded('formal-claim-bindings.json', 'application/json', `${calculationCanonicalJson(options.formalProofEvidence.bindingManifest)}\n`),
           encoded('lean-toolchain', 'text/plain', `${options.formalProofEvidence.toolchain}\n`),
+          // The envelope travels so a reader can see what was signed. The key
+          // that decides whether it counts does not travel with it.
+          ...(options.formalProofEvidence.signedTrustRoot
+            ? [encoded('formal-proof-trust-root.json', 'application/json', `${calculationCanonicalJson(options.formalProofEvidence.signedTrustRoot)}\n`)]
+            : []),
           ...Object.entries(options.formalProofEvidence.leanSources)
             .sort(([a], [b]) => (a < b ? -1 : a > b ? 1 : 0))
             .map(([path, text]) => encoded(`lean/${path}`, 'text/plain', text)),
@@ -217,10 +229,33 @@ export interface IntegratedVerificationResult {
   packageIntegrityValid: boolean
   leanRecheckExecuted: boolean
   bindingAuthorityValid: boolean
-  /** True only when all three hold. */
+  /**
+   * Whether a registered, unrevoked, current key signed the authorization.
+   *
+   * Separate from authority on purpose: a signature can be perfectly valid over
+   * the wrong bindings, and bindings can be right while unsigned. Neither
+   * implies the other, and neither implies the claim is true.
+   */
+  signatureAuthentic: boolean
+  /** True only when all four hold. */
   fullyVerified: boolean
   findings: string[]
 }
+
+const SIGNATURE_CODES = [
+  'integrated-formal-proof-signature-envelope-missing',
+  'integrated-formal-proof-signature-envelope-malformed',
+  'integrated-formal-proof-signature-invalid',
+  'integrated-formal-proof-signature-key-unknown',
+  'integrated-formal-proof-signature-key-ambiguous',
+  'integrated-formal-proof-signature-key-revoked',
+  'integrated-formal-proof-signature-key-epoch-stale',
+  'integrated-formal-proof-signature-key-malformed',
+  'integrated-formal-proof-signature-epoch-stale',
+  'integrated-formal-proof-signature-dossier-mismatch',
+  'integrated-formal-proof-signature-expired',
+  'integrated-formal-proof-signature-not-yet-valid',
+] as const
 
 const AUTHORITY_CODES = [
   'integrated-formal-proof-trust-root-missing',
@@ -263,22 +298,29 @@ export async function verifyIntegratedPackageFullyForTesting(
 
 function classifyFindings(bundle: IntegratedDossierPackage, findings: string[]): IntegratedVerificationResult {
   const hasFormalProofs = Number(bundle.manifest.formalProofCount ?? 0) > 0
-  const authorityFailed = findings.some((finding) => AUTHORITY_CODES.some((code) => finding.startsWith(code)))
-  const recheckFailed = findings.some((finding) => finding.startsWith('integrated-formal-proof-recheck-'))
-  const integrityFailed = findings.some(
-    (finding) => !AUTHORITY_CODES.some((code) => finding.startsWith(code)) && !finding.startsWith('integrated-formal-proof-recheck-'),
-  )
-  const bindingAuthorityValid = hasFormalProofs ? !authorityFailed : true
-  // Authorization is checked before the recheck runs, so a package that failed
-  // authority never had its proofs rechecked and must not be reported as though
-  // it did.
-  const leanRecheckExecuted = hasFormalProofs ? !recheckFailed && !authorityFailed : true
+  const isSignature = (finding: string) => SIGNATURE_CODES.some((code) => finding.startsWith(code))
+  const isAuthority = (finding: string) => AUTHORITY_CODES.some((code) => finding.startsWith(code))
+  const isRecheck = (finding: string) => finding.startsWith('integrated-formal-proof-recheck-')
+
+  const signatureFailed = findings.some(isSignature)
+  const authorityFailed = findings.some(isAuthority)
+  const recheckFailed = findings.some(isRecheck)
+  const integrityFailed = findings.some((finding) => !isSignature(finding) && !isAuthority(finding) && !isRecheck(finding))
+
+  const signatureAuthentic = hasFormalProofs ? !signatureFailed : true
+  // The signature is checked first, so a package that failed it never had its
+  // authorization compared and must not be reported as though it had.
+  const bindingAuthorityValid = hasFormalProofs ? !authorityFailed && !signatureFailed : true
+  // Likewise the recheck runs only after authorization passes.
+  const leanRecheckExecuted = hasFormalProofs ? !recheckFailed && !authorityFailed && !signatureFailed : true
   const packageIntegrityValid = !integrityFailed
   return {
     packageIntegrityValid,
     leanRecheckExecuted,
     bindingAuthorityValid,
-    fullyVerified: packageIntegrityValid && leanRecheckExecuted && bindingAuthorityValid && findings.length === 0,
+    signatureAuthentic,
+    fullyVerified:
+      packageIntegrityValid && leanRecheckExecuted && bindingAuthorityValid && signatureAuthentic && findings.length === 0,
     findings,
   }
 }
@@ -329,6 +371,7 @@ async function verifyIntegratedEvidenceInternal(bundle: IntegratedDossierPackage
     if (witness.dossierId !== dossier.dossierId || witness.calculationReceiptIds.some((id) => !receiptIds.has(id))) findings.push('integrated-runtime-witness-binding-invalid')
   }
   const engagement = bundle.manifest.engagement as typeof INTERNAL_REHEARSAL_ENGAGEMENT
+  let authority: FormalProofAuthorityNode | undefined
   let formalProofs: FormalProofAttachment[]
   try {
     const parsed = JSON.parse(text('formal-proofs.json') ?? '[]') as unknown
@@ -349,6 +392,11 @@ async function verifyIntegratedEvidenceInternal(bundle: IntegratedDossierPackage
       findings.push('integrated-formal-proof-evidence-missing')
       return [...new Set(findings)]
     }
+    const envelope = (() => {
+      const text_ = text('formal-proof-trust-root.json')
+      if (text_ == null) return undefined
+      try { return JSON.parse(text_) as SignedTrustRootEnvelope } catch { return undefined }
+    })()
     let proofManifest: ProofManifest
     let bindingManifest: BindingManifest
     try { proofManifest = JSON.parse(proofManifestText) as ProofManifest } catch { findings.push('integrated-formal-proof-manifest-unparseable'); return [...new Set(findings)] }
@@ -367,12 +415,41 @@ async function verifyIntegratedEvidenceInternal(bundle: IntegratedDossierPackage
         leanSources,
         dossierId: dossier.dossierId,
         declaredClaimIds: dossier.claims.map((claim) => claim.claimId),
+        // Explicitly null when the package carried none, so verification fails
+        // closed instead of falling back to the repository's own envelope.
+        signedTrustRoot: envelope ?? null,
+        signingKeyRegistry: runners.signingKeyRegistry,
+        now: runners.now,
       }, runners),
     )
+
+    // The rendered authority is derived from the signature check, never taken
+    // from the package. A package claiming an authentic signature it does not
+    // have would otherwise have that claim rerendered back at it as agreement.
+    const signature = checkTrustRootSignature(envelope, dossier.dossierId, {
+      registry: runners.signingKeyRegistry,
+      now: runners.now,
+    })
+    if (envelope && signature.authentic) {
+      let syntheticTestKey = true
+      try {
+        syntheticTestKey = resolveSigningKey(envelope.signature.keyId, runners.signingKeyRegistry).syntheticTestKey
+      } catch { syntheticTestKey = true }
+      authority = {
+        signatureAlgorithm: envelope.signature.algorithm,
+        canonicalization: envelope.signature.canonicalization,
+        keyId: envelope.signature.keyId,
+        authorityEpoch: envelope.payload.authorityEpoch,
+        signatureAuthentic: true,
+        bindingManifestSha256: envelope.payload.bindingManifestSha256,
+        bindingManifestRevision: envelope.payload.bindingManifestRevision,
+        syntheticTestKey,
+      }
+    }
   }
 
-  if (text('dossier.jsonld') !== renderDossierJsonLdText(dossier, attachments, witnesses, formalProofs)) findings.push('integrated-jsonld-rerender-mismatch')
-  const expectedPdf = await renderEvidenceDossierPdf({ dossier, attachments, witnesses, formalProofs, packageVersion: INTEGRATED_PACKAGE_VERSION, engagementLabel: `${engagement.mode}; list $${engagement.listPriceUsd}; contracted $${engagement.contractedPriceUsd}; received $${engagement.cashReceivedUsd}` })
+  if (text('dossier.jsonld') !== renderDossierJsonLdText(dossier, attachments, witnesses, formalProofs, authority)) findings.push('integrated-jsonld-rerender-mismatch')
+  const expectedPdf = await renderEvidenceDossierPdf({ dossier, attachments, witnesses, formalProofs, formalProofAuthority: authority, packageVersion: INTEGRATED_PACKAGE_VERSION, engagementLabel: `${engagement.mode}; list $${engagement.listPriceUsd}; contracted $${engagement.contractedPriceUsd}; received $${engagement.cashReceivedUsd}` })
   const pdf = file('evidence-dossier.pdf')
   if (!pdf || digest(pdf.bytes) !== digest(expectedPdf)) findings.push('integrated-pdf-rerender-mismatch')
   try { validateWitnessBindings(dossier, attachments, witnesses) } catch { findings.push('integrated-runtime-witness-binding-invalid') }
