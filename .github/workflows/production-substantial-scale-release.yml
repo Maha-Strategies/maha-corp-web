@@ -1,0 +1,63 @@
+name: Production substantial scale release
+
+on:
+  workflow_dispatch:
+    inputs:
+      cohort:
+        description: Release the ten-record canary or the 54-record remainder
+        required: true
+        default: canary
+        type: choice
+        options: [canary, remainder]
+      operation:
+        description: Verify existing releases or perform review, release, and verification
+        required: true
+        default: verify
+        type: choice
+        options: [verify, review-publish-verify]
+      confirmation:
+        description: Use the exact cohort-specific confirmation phrase for publication
+        required: false
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: production-substantial-scale-release-${{ inputs.cohort }}
+  cancel-in-progress: false
+
+jobs:
+  operate:
+    runs-on: ubuntu-latest
+    environment: production-database
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Verify immutable operation boundary
+        env:
+          COHORT: ${{ inputs.cohort }}
+          OPERATION: ${{ inputs.operation }}
+          CONFIRMATION: ${{ inputs.confirmation }}
+        run: |
+          test "$COHORT" = canary -o "$COHORT" = remainder
+          test "$OPERATION" = verify -o "$OPERATION" = review-publish-verify
+          if [ "$OPERATION" = review-publish-verify ]; then
+            if [ "$COHORT" = canary ]; then
+              test "$CONFIRMATION" = RELEASE_10_SUBSTANTIAL_SCALE_CANARY
+            else
+              test "$CONFIRMATION" = RELEASE_54_SUBSTANTIAL_SCALE_REMAINDER
+            fi
+          fi
+      - name: Operate exact-revision cohort
+        env:
+          EPISTEMIC_OPERATIONS_TOKEN: ${{ secrets.EPISTEMIC_OPERATIONS_TOKEN }}
+          EPISTEMIC_RELEASE_AUTHORITY_TOKEN: ${{ secrets.EPISTEMIC_RELEASE_AUTHORITY_TOKEN }}
+          SUBSTANTIAL_SCALE_CONFIRM: ${{ inputs.confirmation }}
+        run: >-
+          node --experimental-strip-types scripts/run-substantial-scale-release.ts
+          ${{ inputs.cohort == 'remainder' && '--remainder' || '--canary' }}
+          ${{ inputs.operation == 'review-publish-verify' && '--publish' || '--verify' }}
