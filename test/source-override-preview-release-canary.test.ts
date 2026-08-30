@@ -44,6 +44,7 @@ test('the dedicated adapter freezes exactly the five merged-main revisions', () 
 test('twenty scoped review inputs parse and bind the exact revisions', () => {
   const inputs = sourceOverrideRevisionCanaryReviewInputs()
   assert.equal(inputs.length, 20)
+  const expectedDomains = [...new Set(SOURCE_OVERRIDE_REVISED_RECORDS.map((record) => record.domainSlug))].sort()
   for (const record of SOURCE_OVERRIDE_REVISED_RECORDS) {
     const scoped = inputs.filter((input) => input.recordId === record.id)
     assert.equal(scoped.length, 4)
@@ -54,8 +55,18 @@ test('twenty scoped review inputs parse and bind the exact revisions', () => {
       assert.equal(parsed.reviewer.reviewerKind, 'internal-editorial')
       assert.ok(parsed.reviewer.reviewMethod)
       assert.match(parsed.reviewer.reviewMethod, /exact-revision/i)
+      assert.equal(parsed.reviewer.reviewerId, 'expert_maha-internal-source-override-v2')
+      assert.deepEqual(parsed.reviewer.domains, expectedDomains)
+      assert.match(input.idempotencyKey, /^source-override-revision-v2:/)
     }
   }
+})
+
+test('one reviewer profile version cannot drift between canary domains', () => {
+  const profiles = sourceOverrideRevisionCanaryReviewInputs().map((input) => input.reviewer)
+  const first = profiles[0]
+  assert.ok(first)
+  for (const profile of profiles) assert.deepEqual(profile, first)
 })
 
 test('the three-gate queue admits each record only after an exact active release', () => {

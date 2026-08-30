@@ -251,6 +251,7 @@ export interface RevisionScopedDecision {
 }
 
 const REVIEW_SCOPES: readonly ExpertReviewScope[] = ['source-fidelity', 'domain-fidelity', 'boundary-adequacy', 'rights-and-locator']
+const SOURCE_OVERRIDE_REVIEWER_DOMAINS = [...new Set(SOURCE_OVERRIDE_REVISED_RECORDS.map((record) => record.domainSlug))].sort()
 
 export const SOURCE_OVERRIDE_REVISION_DECISIONS: readonly RevisionScopedDecision[] = SOURCE_OVERRIDE_REVISION_AUDITS.flatMap((audit) =>
   REVIEW_SCOPES.map((scope) => {
@@ -302,13 +303,13 @@ export function sourceOverrideRevisionCanaryReviewInputs(): readonly ExpertRevie
         targetSha256: audit.revisedRecordRevisionSha256,
         scope,
         reviewer: {
-          reviewerId: 'expert_maha-internal-source-override-v1',
+          reviewerId: 'expert_maha-internal-source-override-v2',
           profileVersion: 1,
           displayName: 'Maha Strategies internal source-override review',
           qualifications: ['Exact-revision source, locator, rights, scope, and boundary checklist'],
           affiliation: 'Maha Strategies',
           identityUrl: null,
-          domains: [record.domainSlug],
+          domains: SOURCE_OVERRIDE_REVIEWER_DOMAINS,
           conflicts: ['Maha Strategies authors, reviews, and may release this record; this internal review is not independent.'],
           reviewerKind: 'internal-editorial' as const,
           reviewMethod: 'Explicit exact-revision checklist bound to the eight-dimension source-override audit. No external endorsement or independent reproduction is claimed.',
@@ -321,7 +322,7 @@ export function sourceOverrideRevisionCanaryReviewInputs(): readonly ExpertRevie
         disagreements: ['This is an internal editorial decision. External expert review and independent reproduction were not performed.'],
         rationale: `The ${scope} decision is limited to exact revision ${audit.revisedRecordRevisionSha256}. ${sourceFindings}`,
         supersedesReviewId: null,
-        idempotencyKey: `source-override-revision:${idempotencyDigest}`,
+        idempotencyKey: `source-override-revision-v2:${idempotencyDigest}`,
       }
     })
   })
