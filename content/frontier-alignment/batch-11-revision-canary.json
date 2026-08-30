@@ -1,0 +1,774 @@
+{
+  "audits": [
+    {
+      "auditId": "urn:maha:audit:batch-11-revision:agentic-systems-mcp-tool-allowlisting",
+      "auditSha256": "sha256:572ebe447494add6fb1ecf83a95efca1b9bd2d23f9048bfd859de7a0de0d3ef3",
+      "checks": [
+        {
+          "dimension": "source-identity",
+          "finding": "Both pages are served under the /specification/2026-07-28/ path of the protocol's canonical documentation host and carry that revision in their internal cross-links, so the revision inspected is the one named.",
+          "verdict": "satisfied"
+        },
+        {
+          "dimension": "version-relationship",
+          "finding": "Revision 2026-07-28 supersedes the 2024-11-05 revision the record's prior source cited. The prior citation named the specification generically with year 2024; this inspection pins an exact later revision.",
+          "verdict": "satisfied"
+        },
+        {
+          "dimension": "exact-locator",
+          "finding": "Inspected at Tools, section 'Capabilities', sentence beginning 'The set MAY vary by the authorization presented on the request'; and Tools, section 'User Interaction Model', warning beginning 'For trust & safety and security, there SHOULD always be a human in the loop'.; not a whole-document reference.",
+          "verdict": "satisfied"
+        },
+        {
+          "dimension": "rights-basis",
+          "finding": "citation-only-no-reuse-licence: Published specification text on the protocol's public documentation site, quoted for identification. No licence grant is asserted beyond fair quotation of a short passage.",
+          "verdict": "satisfied"
+        },
+        {
+          "dimension": "claim-scope",
+          "finding": "Scope-limited tool exposure and human-in-the-loop denial, at two exact locators in specification revision 2026-07-28.",
+          "verdict": "satisfied"
+        },
+        {
+          "dimension": "quantitative-detail-permission",
+          "finding": "Quantitative detail is withheld: inspection depth was full-text-two-pages, which establishes subject identity only.",
+          "verdict": "satisfied"
+        },
+        {
+          "dimension": "prior-binding-preserved",
+          "finding": "Prior binding \"Model Context Protocol specification\" is retained in the revision's boundaries rather than deleted.",
+          "verdict": "satisfied"
+        },
+        {
+          "dimension": "prohibited-inferences",
+          "finding": "2 explicit non-claims are carried on the revision.",
+          "verdict": "satisfied"
+        }
+      ],
+      "decisionSha256": "sha256:f91ef66bd23d99965abe11df14ccc86ccb7abbc5ebceedadbcac10d1ac627c5a",
+      "exactLocator": "Tools, section 'Capabilities', sentence beginning 'The set MAY vary by the authorization presented on the request'; and Tools, section 'User Interaction Model', warning beginning 'For trust & safety and security, there SHOULD always be a human in the loop'.",
+      "externallyReviewed": false,
+      "independentlyReproduced": false,
+      "inspectionDepth": "full-text-two-pages",
+      "outcome": "alignment-clear-ready-for-revision-scoped-review",
+      "packetDigest": "sha256:699d329fe31c8dedd181a953d87487067d32d3500de04c7240243bc3187d26bb",
+      "priorRecordRevisionSha256": "sha256:5680e38f71e49bcded9e4e2c5cce4497c14bef33b5398d347f8657dd51ea817a",
+      "recordId": "urn:maha:record:agentic-systems-mcp-tool-allowlisting",
+      "revisedRecordRevisionSha256": "sha256:655c3ae116314eb3d2f42d40834b64034cac6a6ca7ea3b2f246f9134585ebaee",
+      "schemaVersion": "maha-batch-11-revision-canary/0.1"
+    },
+    {
+      "auditId": "urn:maha:audit:batch-11-revision:biomolecular-engineering-structure-prediction-filtering",
+      "auditSha256": "sha256:03ad129f7a2feb3664da001337d0bb92ee8e23deea23027681daf0e497203b9c",
+      "checks": [
+        {
+          "dimension": "source-identity",
+          "finding": "The fetched page reports the three lead authors Watson, Juergens and Bennett, matching the authorship of the work the record cites.",
+          "verdict": "satisfied"
+        },
+        {
+          "dimension": "version-relationship",
+          "finding": "IMPORTANT: the inspected preprint carries a DIFFERENT TITLE from the version of record. The record cites 'De novo design of protein structure and function with RFdiffusion' (Nature 620:1089-1100, 2023, doi:10.1038/s41586-023-06415-8). The inspected copy is the bioRxiv v2 preprint titled 'Broadly applicable and accurate protein design by integrating structure prediction networks and diffusion generative models'. Same work, retitled on publication. The locator below is therefore a locator into the PREPRINT and must not be presented as a locator into the Nature article, whose section structure and pagination differ.",
+          "verdict": "satisfied"
+        },
+        {
+          "dimension": "exact-locator",
+          "finding": "Inspected at Preprint v2, section 'Unconditional protein monomer generation'.; not a whole-document reference.",
+          "verdict": "satisfied"
+        },
+        {
+          "dimension": "rights-basis",
+          "finding": "citation-only-no-reuse-licence: bioRxiv preprint. No licence statement was found in the fetched text, so no reuse licence is asserted; the passage is quoted for identification only. The Nature version of record was not used because nature.com redirected to an authentication endpoint, which was not followed.",
+          "verdict": "satisfied"
+        },
+        {
+          "dimension": "claim-scope",
+          "finding": "The explicit in silico filtering step, with its pAE and backbone-RMSD acceptance thresholds, read at a named section of the bioRxiv preprint.",
+          "verdict": "satisfied"
+        },
+        {
+          "dimension": "quantitative-detail-permission",
+          "finding": "A section was read closely enough to carry quantitative detail (full-text-section).",
+          "verdict": "satisfied"
+        },
+        {
+          "dimension": "prior-binding-preserved",
+          "finding": "Prior binding \"De novo design of protein structure and function with RFdiffusion\" is retained in the revision's boundaries rather than deleted.",
+          "verdict": "satisfied"
+        },
+        {
+          "dimension": "prohibited-inferences",
+          "finding": "2 explicit non-claims are carried on the revision.",
+          "verdict": "satisfied"
+        }
+      ],
+      "decisionSha256": "sha256:d526405605c28a6c31d391ec67766460f2ed64f3ff4c4be55ca12c2c51623931",
+      "exactLocator": "Preprint v2, section 'Unconditional protein monomer generation'.",
+      "externallyReviewed": false,
+      "independentlyReproduced": false,
+      "inspectionDepth": "full-text-section",
+      "outcome": "alignment-clear-ready-for-revision-scoped-review",
+      "packetDigest": "sha256:85c9b6b8f20861cedbb6217ac9c5e1b57a615acf37f67cae8d5d8d64a495cb6e",
+      "priorRecordRevisionSha256": "sha256:2f59ecb93f3ad9418b05e01058d2d629fff5368dcc20b838b0e996f651c1db50",
+      "recordId": "urn:maha:record:biomolecular-engineering-structure-prediction-filtering",
+      "revisedRecordRevisionSha256": "sha256:4f41045346753387198fd285374217f7d1448d41a28a569a5e1c07fea844b8de",
+      "schemaVersion": "maha-batch-11-revision-canary/0.1"
+    },
+    {
+      "auditId": "urn:maha:audit:batch-11-revision:critical-supply-chains-high-purity-quartz-deposits",
+      "auditSha256": "sha256:39de94bc5c9502cc6434992a5b12fea9d3a25c6e21c512052a79855ec782dc02",
+      "checks": [
+        {
+          "dimension": "source-identity",
+          "finding": "The page is served from the USGS National Minerals Information Center path on the usgs.gov domain and identifies itself as USGS Silica Statistics and Information.",
+          "verdict": "satisfied"
+        },
+        {
+          "dimension": "version-relationship",
+          "finding": "A continuously maintained commodity page, not a dated edition. No version identifier is available, so this binding cannot be pinned to a fixed revision. The dated Mineral Commodity Summaries quartz chapters would provide that, but the 2025 PDF returned HTTP 403 and was not read.",
+          "verdict": "satisfied"
+        },
+        {
+          "dimension": "exact-locator",
+          "finding": "Inspected at Page body, high-purity quartz definition.; not a whole-document reference.",
+          "verdict": "satisfied"
+        },
+        {
+          "dimension": "rights-basis",
+          "finding": "public-domain-us-government: USGS content is a US Government work in the public domain, as stated on the page. Quotation and reuse are unrestricted.",
+          "verdict": "satisfied"
+        },
+        {
+          "dimension": "claim-scope",
+          "finding": "The high-purity quartz purity specification, under 100 ppm total impurities, and the existence of United States production.",
+          "verdict": "satisfied"
+        },
+        {
+          "dimension": "quantitative-detail-permission",
+          "finding": "Quantitative detail is withheld: inspection depth was full-page, which establishes subject identity only.",
+          "verdict": "satisfied"
+        },
+        {
+          "dimension": "prior-binding-preserved",
+          "finding": "Prior binding \"Critical Mineral Resources of the United States—Economic and Environmental Geology and Prospects for Future Supply\" is retained in the revision's boundaries rather than deleted.",
+          "verdict": "satisfied"
+        },
+        {
+          "dimension": "prohibited-inferences",
+          "finding": "2 explicit non-claims are carried on the revision.",
+          "verdict": "satisfied"
+        }
+      ],
+      "decisionSha256": "sha256:ce8f6ebc9002116022ab02fbf5bcc63e60e906ebe2dee34e0739477c27798c05",
+      "exactLocator": "Page body, high-purity quartz definition.",
+      "externallyReviewed": false,
+      "independentlyReproduced": false,
+      "inspectionDepth": "full-page",
+      "outcome": "alignment-clear-ready-for-revision-scoped-review",
+      "packetDigest": "sha256:2e218ca5c8d32a0d44de016a2848141ca8639ea2ebc1fa1977c6ac8cd239edce",
+      "priorRecordRevisionSha256": "sha256:c667320cf234997948bffc6fef2aefd2133010aed2a0af4d457dad0817fd93c0",
+      "recordId": "urn:maha:record:critical-supply-chains-high-purity-quartz-deposits",
+      "revisedRecordRevisionSha256": "sha256:bf577646700efe497e3cc15b1f0f8eb6aa0c7c7bbcdeff5e2fdc388b2ac07398",
+      "schemaVersion": "maha-batch-11-revision-canary/0.1"
+    },
+    {
+      "auditId": "urn:maha:audit:batch-11-revision:fusion-plasma-systems-tokamak-plasma-equilibrium",
+      "auditSha256": "sha256:360f42d50fd1eb1e670a24cc8aec5be96e80e31c0ca1c4f30ad51e1404c1b25a",
+      "checks": [
+        {
+          "dimension": "source-identity",
+          "finding": "OSTI biblio record 1963025 returns the same title, the three named authors, publication date 2021-06-23 and DOI 10.1016/b978-0-12-819725-7.00230-0. The fetched PDF title page carries the identical title and the same three authors at General Atomics, so the copy inspected is the document the identifier names.",
+          "verdict": "satisfied"
+        },
+        {
+          "dimension": "version-relationship",
+          "finding": "accepted-manuscript-of-record-of-version. The inspected PDF is the DOE-deposited accepted manuscript; the version of record is the Elsevier book chapter behind the DOI. Pagination differs, so the locator below is stated by section heading rather than by publisher page.",
+          "verdict": "satisfied"
+        },
+        {
+          "dimension": "exact-locator",
+          "finding": "Inspected at Section 'Physics principles of toroidal equilibrium and stability', subsection 'Axisymmetric 2D Grad-Shafranov equilibrium', equations (35)-(36).; not a whole-document reference.",
+          "verdict": "satisfied"
+        },
+        {
+          "dimension": "rights-basis",
+          "finding": "citation-only-no-reuse-licence: US DOE public-access deposit via OSTI.GOV. The OSTI record states no explicit licence, so this is recorded as public-access availability of the accepted manuscript, not as an open licence, and no redistribution right is asserted.",
+          "verdict": "satisfied"
+        },
+        {
+          "dimension": "claim-scope",
+          "finding": "Treating tokamak plasma equilibrium as a distinct mechanism, and the Grad-Shafranov force-balance condition read at an exact subsection.",
+          "verdict": "satisfied"
+        },
+        {
+          "dimension": "quantitative-detail-permission",
+          "finding": "A section was read closely enough to carry quantitative detail (full-text).",
+          "verdict": "satisfied"
+        },
+        {
+          "dimension": "prior-binding-preserved",
+          "finding": "Prior binding \"Magnets\" is retained in the revision's boundaries rather than deleted.",
+          "verdict": "satisfied"
+        },
+        {
+          "dimension": "prohibited-inferences",
+          "finding": "2 explicit non-claims are carried on the revision.",
+          "verdict": "satisfied"
+        }
+      ],
+      "decisionSha256": "sha256:20c3483969f3d542becc4de5e214d90f36615345b26dbb9a9c4b717986e663e2",
+      "exactLocator": "Section 'Physics principles of toroidal equilibrium and stability', subsection 'Axisymmetric 2D Grad-Shafranov equilibrium', equations (35)-(36).",
+      "externallyReviewed": false,
+      "independentlyReproduced": false,
+      "inspectionDepth": "full-text",
+      "outcome": "alignment-clear-ready-for-revision-scoped-review",
+      "packetDigest": "sha256:5efd876e25470d6549c8c5f99cde972e91d3969e2c081d3deb39587bb437e757",
+      "priorRecordRevisionSha256": "sha256:cb41216cd3cf8fdc36decedf66f8e768a25b450969b763e83c3d2b756ae57052",
+      "recordId": "urn:maha:record:fusion-plasma-systems-tokamak-plasma-equilibrium",
+      "revisedRecordRevisionSha256": "sha256:b06ae30e9f4b9907e6a603a67e3e8b1639897b2fc1cce47ad36e854b32d50f90",
+      "schemaVersion": "maha-batch-11-revision-canary/0.1"
+    },
+    {
+      "auditId": "urn:maha:audit:batch-11-revision:mechanistic-interpretability-representation-probing-boundary",
+      "auditSha256": "sha256:8780441de21fb9bfa9ea5bbd71c2299cd5a4492bd4ac58b0b60195d45544a5b0",
+      "checks": [
+        {
+          "dimension": "source-identity",
+          "finding": "The arXiv abstract page and the HTML full text both report the same title and the two authors Hewitt and Liang under identifier 1909.03368v1.",
+          "verdict": "satisfied"
+        },
+        {
+          "dimension": "version-relationship",
+          "finding": "v1 is the only arXiv version and corresponds to the EMNLP 2019 paper. The locator is into the arXiv HTML rendering; the ACL Anthology version of record has different pagination and was not inspected.",
+          "verdict": "satisfied"
+        },
+        {
+          "dimension": "exact-locator",
+          "finding": "Inspected at Section 1 'Introduction', caption to Figure 2.; not a whole-document reference.",
+          "verdict": "satisfied"
+        },
+        {
+          "dimension": "rights-basis",
+          "finding": "citation-only-no-reuse-licence: arXiv nonexclusive-distrib 1.0. This permits arXiv to distribute the work; it is NOT an open reuse licence such as CC BY. The passage is quoted for identification only and no redistribution right is asserted.",
+          "verdict": "satisfied"
+        },
+        {
+          "dimension": "claim-scope",
+          "finding": "Treating the representation probing boundary as a distinct mechanism, with selectivity defined against control tasks at a named figure caption.",
+          "verdict": "satisfied"
+        },
+        {
+          "dimension": "quantitative-detail-permission",
+          "finding": "A section was read closely enough to carry quantitative detail (full-text-section).",
+          "verdict": "satisfied"
+        },
+        {
+          "dimension": "prior-binding-preserved",
+          "finding": "Prior binding \"Toy Models of Superposition\" is retained in the revision's boundaries rather than deleted.",
+          "verdict": "satisfied"
+        },
+        {
+          "dimension": "prohibited-inferences",
+          "finding": "2 explicit non-claims are carried on the revision.",
+          "verdict": "satisfied"
+        }
+      ],
+      "decisionSha256": "sha256:2849720f96307f81bbcb3342e7abaa2c5e2af86bc9e573d1d5331f5ccbd36ba3",
+      "exactLocator": "Section 1 'Introduction', caption to Figure 2.",
+      "externallyReviewed": false,
+      "independentlyReproduced": false,
+      "inspectionDepth": "full-text-section",
+      "outcome": "alignment-clear-ready-for-revision-scoped-review",
+      "packetDigest": "sha256:ccb7a3c4eb896bec30d2e46663de390c062cee8ef18cc90336624dc1f47e1411",
+      "priorRecordRevisionSha256": "sha256:83339b28fdea2a81504e0bf44f9229fe06b24e444c774c0a0d513cf1b0bc8b3f",
+      "recordId": "urn:maha:record:mechanistic-interpretability-representation-probing-boundary",
+      "revisedRecordRevisionSha256": "sha256:c87bdda2c7cf974f86499469e46d6fd6aab9e80c6bfe11848c595a8591e9ddc6",
+      "schemaVersion": "maha-batch-11-revision-canary/0.1"
+    }
+  ],
+  "priorBindings": [
+    {
+      "priorExactLocator": "Architecture, lifecycle, capabilities, resources, prompts, and security sections.",
+      "priorRecordRevisionSha256": "sha256:5680e38f71e49bcded9e4e2c5cce4497c14bef33b5398d347f8657dd51ea817a",
+      "priorSourceContractId": "source-agentic-systems-mcp-mcp-core",
+      "priorSourceTitle": "Model Context Protocol specification",
+      "recordId": "urn:maha:record:agentic-systems-mcp-tool-allowlisting"
+    },
+    {
+      "priorExactLocator": "Abstract; unconditional generation, motif scaffolding, binder design, Methods, and Extended Data.",
+      "priorRecordRevisionSha256": "sha256:2f59ecb93f3ad9418b05e01058d2d629fff5368dcc20b838b0e996f651c1db50",
+      "priorSourceContractId": "source-biomolecular-engineering-rfdiffusion",
+      "priorSourceTitle": "De novo design of protein structure and function with RFdiffusion",
+      "recordId": "urn:maha:record:biomolecular-engineering-structure-prediction-filtering"
+    },
+    {
+      "priorExactLocator": "Commodity chapters and introductory sections distinguishing resources, production, processing, uses, and supply considerations.",
+      "priorRecordRevisionSha256": "sha256:c667320cf234997948bffc6fef2aefd2133010aed2a0af4d457dad0817fd93c0",
+      "priorSourceContractId": "source-critical-supply-chains-pp1802",
+      "priorSourceTitle": "Critical Mineral Resources of the United States—Economic and Environmental Geology and Prospects for Future Supply",
+      "recordId": "urn:maha:record:critical-supply-chains-high-purity-quartz-deposits"
+    },
+    {
+      "priorExactLocator": "Machine / Magnets: toroidal field, poloidal field, central solenoid, and correction coil sections.",
+      "priorRecordRevisionSha256": "sha256:cb41216cd3cf8fdc36decedf66f8e768a25b450969b763e83c3d2b756ae57052",
+      "priorSourceContractId": "source-fusion-plasma-systems-iter-magnets",
+      "priorSourceTitle": "Magnets",
+      "recordId": "urn:maha:record:fusion-plasma-systems-tokamak-plasma-equilibrium"
+    },
+    {
+      "priorExactLocator": "Definitions, toy models, geometry, sparsity, and feature-interference experiments.",
+      "priorRecordRevisionSha256": "sha256:83339b28fdea2a81504e0bf44f9229fe06b24e444c774c0a0d513cf1b0bc8b3f",
+      "priorSourceContractId": "source-mechanistic-interpretability-superposition",
+      "priorSourceTitle": "Toy Models of Superposition",
+      "recordId": "urn:maha:record:mechanistic-interpretability-representation-probing-boundary"
+    }
+  ],
+  "releaseCanary": [
+    {
+      "activeCanonicalRelease": false,
+      "auditSha256": "sha256:572ebe447494add6fb1ecf83a95efca1b9bd2d23f9048bfd859de7a0de0d3ef3",
+      "canarySha256": "sha256:3cc910c0d9fec58c7d7a26e53c0441ed4228b1515b37900db6c85a364d1dc23c",
+      "canonicalMutationAuthorized": false,
+      "canonicalPath": "/knowledge/agentic-systems-mcp/measurements/agentic-systems-mcp-tool-allowlisting",
+      "decisionSha256s": [
+        "sha256:2e01c3f17114f976fd24a1c5db99238e2bbd94b56c018ad9764bacd2c69b04ae",
+        "sha256:fa1cb333dc51d079c938205580a636440479447d387a9765901f83972dbc6004",
+        "sha256:96dce2548a004bef3313967155856e78ab8adcdb7285656139b18fcad2ef7abf",
+        "sha256:df6a5fddd201364e198ac19ebfc397707e5c2c709e09e7164e9cd8dd34ea374b"
+      ],
+      "excludedFromPublicationQueue": true,
+      "productionMutationPerformed": false,
+      "queueExclusionEvidence": "Checked against the merged three-gate SUBSTANTIAL_PUBLICATION_QUEUE: no entry admits this record as release-eligible.",
+      "recordId": "urn:maha:record:agentic-systems-mcp-tool-allowlisting",
+      "releaseAuthorityPresent": false,
+      "schemaVersion": "maha-batch-11-release-canary/0.1",
+      "state": "private-preflight-passed-awaiting-release-authority",
+      "targetSha256": "sha256:655c3ae116314eb3d2f42d40834b64034cac6a6ca7ea3b2f246f9134585ebaee"
+    },
+    {
+      "activeCanonicalRelease": false,
+      "auditSha256": "sha256:03ad129f7a2feb3664da001337d0bb92ee8e23deea23027681daf0e497203b9c",
+      "canarySha256": "sha256:ccfa1c85fbfcfed7a5ddcc408010ec6655238ef5acf611ca6aaa58f4ff9e4cc0",
+      "canonicalMutationAuthorized": false,
+      "canonicalPath": "/knowledge/biomolecular-engineering/comparisons/biomolecular-engineering-structure-prediction-filtering",
+      "decisionSha256s": [
+        "sha256:0cb78d0bfa456d74341ec40268b6abfb2e7cc9119d6cac2f6f6da6dc1f2d3fca",
+        "sha256:3a16a73dbff970dac9c75b6e1bea8bf4a6645712c9aaf9d8923526a52a1789b4",
+        "sha256:9377f784a18bd514a06d46478be1b33705baed6b70588ccde9a2915dc7efc96a",
+        "sha256:b9f35c2c9561a70fc3f627aba03e7596376d00c6b868578bf967453fb80e96af"
+      ],
+      "excludedFromPublicationQueue": true,
+      "productionMutationPerformed": false,
+      "queueExclusionEvidence": "Checked against the merged three-gate SUBSTANTIAL_PUBLICATION_QUEUE: no entry admits this record as release-eligible.",
+      "recordId": "urn:maha:record:biomolecular-engineering-structure-prediction-filtering",
+      "releaseAuthorityPresent": false,
+      "schemaVersion": "maha-batch-11-release-canary/0.1",
+      "state": "private-preflight-passed-awaiting-release-authority",
+      "targetSha256": "sha256:4f41045346753387198fd285374217f7d1448d41a28a569a5e1c07fea844b8de"
+    },
+    {
+      "activeCanonicalRelease": false,
+      "auditSha256": "sha256:39de94bc5c9502cc6434992a5b12fea9d3a25c6e21c512052a79855ec782dc02",
+      "canarySha256": "sha256:a4a30f27144f6e3ccd7690d46f61844591ce90abb021449e28be57ecb31c5ca8",
+      "canonicalMutationAuthorized": false,
+      "canonicalPath": "/knowledge/critical-supply-chains/concepts/critical-supply-chains-high-purity-quartz-deposits",
+      "decisionSha256s": [
+        "sha256:7a215698d46e985b90416d44096df9175e14a34ac67d7eba2fd55d277c99eb9f",
+        "sha256:f6c98738f28deeb4d2f57ab845cf4762e3b442d874ea703f67061558cbf6e4b3",
+        "sha256:40ee9dd03db259d6c22d159140f32520ffee7e94972f4ec0fdd5b104af05055c",
+        "sha256:b6c32ba2bee30efa292f699708001f6cbaf66c28809abbb02e7ca5f5bbeda8f1"
+      ],
+      "excludedFromPublicationQueue": true,
+      "productionMutationPerformed": false,
+      "queueExclusionEvidence": "Checked against the merged three-gate SUBSTANTIAL_PUBLICATION_QUEUE: no entry admits this record as release-eligible.",
+      "recordId": "urn:maha:record:critical-supply-chains-high-purity-quartz-deposits",
+      "releaseAuthorityPresent": false,
+      "schemaVersion": "maha-batch-11-release-canary/0.1",
+      "state": "private-preflight-passed-awaiting-release-authority",
+      "targetSha256": "sha256:bf577646700efe497e3cc15b1f0f8eb6aa0c7c7bbcdeff5e2fdc388b2ac07398"
+    },
+    {
+      "activeCanonicalRelease": false,
+      "auditSha256": "sha256:360f42d50fd1eb1e670a24cc8aec5be96e80e31c0ca1c4f30ad51e1404c1b25a",
+      "canarySha256": "sha256:d7f4700f2ffee95412b0606721ed7362318ce47498586911edbdb6082a81b2a2",
+      "canonicalMutationAuthorized": false,
+      "canonicalPath": "/knowledge/fusion-plasma-systems/mechanisms/fusion-plasma-systems-tokamak-plasma-equilibrium",
+      "decisionSha256s": [
+        "sha256:2c15042c11cd9a9dce40c719141ce0fe84073d0bdf6921ab7f8253b8338ccbe8",
+        "sha256:9df3327daa507567373e493a1c2ec84ae19e3d51ded69d1984925caf053711c3",
+        "sha256:c35df13bc8e90c00c94456a452896eb768dd347e30efa43a098b057c650ff234",
+        "sha256:be6e5c311496560d6470599cf582c2d1921ff0d5bf75320bf371f1c671428cd7"
+      ],
+      "excludedFromPublicationQueue": true,
+      "productionMutationPerformed": false,
+      "queueExclusionEvidence": "Checked against the merged three-gate SUBSTANTIAL_PUBLICATION_QUEUE: no entry admits this record as release-eligible.",
+      "recordId": "urn:maha:record:fusion-plasma-systems-tokamak-plasma-equilibrium",
+      "releaseAuthorityPresent": false,
+      "schemaVersion": "maha-batch-11-release-canary/0.1",
+      "state": "private-preflight-passed-awaiting-release-authority",
+      "targetSha256": "sha256:b06ae30e9f4b9907e6a603a67e3e8b1639897b2fc1cce47ad36e854b32d50f90"
+    },
+    {
+      "activeCanonicalRelease": false,
+      "auditSha256": "sha256:8780441de21fb9bfa9ea5bbd71c2299cd5a4492bd4ac58b0b60195d45544a5b0",
+      "canarySha256": "sha256:a3df5ff1e9bcfbc8d07d8acdc06c2dd22ad803134cde68c0be21fa7fb30e0f72",
+      "canonicalMutationAuthorized": false,
+      "canonicalPath": "/knowledge/mechanistic-interpretability/comparisons/mechanistic-interpretability-representation-probing-boundary",
+      "decisionSha256s": [
+        "sha256:88a66dd0d8ef4c30c29ef38baf6fc97bf5a6de1bc676ea73401c5a56198f825e",
+        "sha256:6e8d1d59740f737b33e1da0fc752d199dc701fad8c7f0d017069d77695c5b1d7",
+        "sha256:b9419ce6623f35aec09fbf5ede41e5ff73d248254bc4a8e8ed5a2474ee438b59",
+        "sha256:ca314ad752213b89ea37b4f34ddb69c089a83cb678d152bccf8bead5bba7ef92"
+      ],
+      "excludedFromPublicationQueue": true,
+      "productionMutationPerformed": false,
+      "queueExclusionEvidence": "Checked against the merged three-gate SUBSTANTIAL_PUBLICATION_QUEUE: no entry admits this record as release-eligible.",
+      "recordId": "urn:maha:record:mechanistic-interpretability-representation-probing-boundary",
+      "releaseAuthorityPresent": false,
+      "schemaVersion": "maha-batch-11-release-canary/0.1",
+      "state": "private-preflight-passed-awaiting-release-authority",
+      "targetSha256": "sha256:c87bdda2c7cf974f86499469e46d6fd6aab9e80c6bfe11848c595a8591e9ddc6"
+    }
+  ],
+  "resultDigest": "sha256:260bb7877c14a289a93ba655860b80cc1a38749955ff4f8ce5d99d188dafd4a0",
+  "schemaVersion": "maha-batch-11-revision-canary/0.1",
+  "scopedDecisions": [
+    {
+      "auditSha256": "sha256:572ebe447494add6fb1ecf83a95efca1b9bd2d23f9048bfd859de7a0de0d3ef3",
+      "decisionId": "urn:maha:review:batch-11-revision:agentic-systems-mcp-tool-allowlisting:source-fidelity",
+      "decisionSha256": "sha256:2e01c3f17114f976fd24a1c5db99238e2bbd94b56c018ad9764bacd2c69b04ae",
+      "externallyReviewed": false,
+      "independentlyReproduced": false,
+      "recordId": "urn:maha:record:agentic-systems-mcp-tool-allowlisting",
+      "reviewMethod": "explicit-revision-checklist",
+      "reviewedAt": "2026-08-30T00:00:00Z",
+      "reviewerId": "maha-internal-editorial:batch-11-revision-canary",
+      "reviewerKind": "internal-editorial",
+      "schemaVersion": "maha-batch-11-revision-review/0.1",
+      "scope": "source-fidelity",
+      "targetSha256": "sha256:655c3ae116314eb3d2f42d40834b64034cac6a6ca7ea3b2f246f9134585ebaee",
+      "verdict": "approve"
+    },
+    {
+      "auditSha256": "sha256:572ebe447494add6fb1ecf83a95efca1b9bd2d23f9048bfd859de7a0de0d3ef3",
+      "decisionId": "urn:maha:review:batch-11-revision:agentic-systems-mcp-tool-allowlisting:domain-fidelity",
+      "decisionSha256": "sha256:fa1cb333dc51d079c938205580a636440479447d387a9765901f83972dbc6004",
+      "externallyReviewed": false,
+      "independentlyReproduced": false,
+      "recordId": "urn:maha:record:agentic-systems-mcp-tool-allowlisting",
+      "reviewMethod": "explicit-revision-checklist",
+      "reviewedAt": "2026-08-30T00:00:00Z",
+      "reviewerId": "maha-internal-editorial:batch-11-revision-canary",
+      "reviewerKind": "internal-editorial",
+      "schemaVersion": "maha-batch-11-revision-review/0.1",
+      "scope": "domain-fidelity",
+      "targetSha256": "sha256:655c3ae116314eb3d2f42d40834b64034cac6a6ca7ea3b2f246f9134585ebaee",
+      "verdict": "approve"
+    },
+    {
+      "auditSha256": "sha256:572ebe447494add6fb1ecf83a95efca1b9bd2d23f9048bfd859de7a0de0d3ef3",
+      "decisionId": "urn:maha:review:batch-11-revision:agentic-systems-mcp-tool-allowlisting:rights-and-locator",
+      "decisionSha256": "sha256:96dce2548a004bef3313967155856e78ab8adcdb7285656139b18fcad2ef7abf",
+      "externallyReviewed": false,
+      "independentlyReproduced": false,
+      "recordId": "urn:maha:record:agentic-systems-mcp-tool-allowlisting",
+      "reviewMethod": "explicit-revision-checklist",
+      "reviewedAt": "2026-08-30T00:00:00Z",
+      "reviewerId": "maha-internal-editorial:batch-11-revision-canary",
+      "reviewerKind": "internal-editorial",
+      "schemaVersion": "maha-batch-11-revision-review/0.1",
+      "scope": "rights-and-locator",
+      "targetSha256": "sha256:655c3ae116314eb3d2f42d40834b64034cac6a6ca7ea3b2f246f9134585ebaee",
+      "verdict": "approve"
+    },
+    {
+      "auditSha256": "sha256:572ebe447494add6fb1ecf83a95efca1b9bd2d23f9048bfd859de7a0de0d3ef3",
+      "decisionId": "urn:maha:review:batch-11-revision:agentic-systems-mcp-tool-allowlisting:boundary-adequacy",
+      "decisionSha256": "sha256:df6a5fddd201364e198ac19ebfc397707e5c2c709e09e7164e9cd8dd34ea374b",
+      "externallyReviewed": false,
+      "independentlyReproduced": false,
+      "recordId": "urn:maha:record:agentic-systems-mcp-tool-allowlisting",
+      "reviewMethod": "explicit-revision-checklist",
+      "reviewedAt": "2026-08-30T00:00:00Z",
+      "reviewerId": "maha-internal-editorial:batch-11-revision-canary",
+      "reviewerKind": "internal-editorial",
+      "schemaVersion": "maha-batch-11-revision-review/0.1",
+      "scope": "boundary-adequacy",
+      "targetSha256": "sha256:655c3ae116314eb3d2f42d40834b64034cac6a6ca7ea3b2f246f9134585ebaee",
+      "verdict": "approve"
+    },
+    {
+      "auditSha256": "sha256:03ad129f7a2feb3664da001337d0bb92ee8e23deea23027681daf0e497203b9c",
+      "decisionId": "urn:maha:review:batch-11-revision:biomolecular-engineering-structure-prediction-filtering:source-fidelity",
+      "decisionSha256": "sha256:0cb78d0bfa456d74341ec40268b6abfb2e7cc9119d6cac2f6f6da6dc1f2d3fca",
+      "externallyReviewed": false,
+      "independentlyReproduced": false,
+      "recordId": "urn:maha:record:biomolecular-engineering-structure-prediction-filtering",
+      "reviewMethod": "explicit-revision-checklist",
+      "reviewedAt": "2026-08-30T00:00:00Z",
+      "reviewerId": "maha-internal-editorial:batch-11-revision-canary",
+      "reviewerKind": "internal-editorial",
+      "schemaVersion": "maha-batch-11-revision-review/0.1",
+      "scope": "source-fidelity",
+      "targetSha256": "sha256:4f41045346753387198fd285374217f7d1448d41a28a569a5e1c07fea844b8de",
+      "verdict": "approve"
+    },
+    {
+      "auditSha256": "sha256:03ad129f7a2feb3664da001337d0bb92ee8e23deea23027681daf0e497203b9c",
+      "decisionId": "urn:maha:review:batch-11-revision:biomolecular-engineering-structure-prediction-filtering:domain-fidelity",
+      "decisionSha256": "sha256:3a16a73dbff970dac9c75b6e1bea8bf4a6645712c9aaf9d8923526a52a1789b4",
+      "externallyReviewed": false,
+      "independentlyReproduced": false,
+      "recordId": "urn:maha:record:biomolecular-engineering-structure-prediction-filtering",
+      "reviewMethod": "explicit-revision-checklist",
+      "reviewedAt": "2026-08-30T00:00:00Z",
+      "reviewerId": "maha-internal-editorial:batch-11-revision-canary",
+      "reviewerKind": "internal-editorial",
+      "schemaVersion": "maha-batch-11-revision-review/0.1",
+      "scope": "domain-fidelity",
+      "targetSha256": "sha256:4f41045346753387198fd285374217f7d1448d41a28a569a5e1c07fea844b8de",
+      "verdict": "approve"
+    },
+    {
+      "auditSha256": "sha256:03ad129f7a2feb3664da001337d0bb92ee8e23deea23027681daf0e497203b9c",
+      "decisionId": "urn:maha:review:batch-11-revision:biomolecular-engineering-structure-prediction-filtering:rights-and-locator",
+      "decisionSha256": "sha256:9377f784a18bd514a06d46478be1b33705baed6b70588ccde9a2915dc7efc96a",
+      "externallyReviewed": false,
+      "independentlyReproduced": false,
+      "recordId": "urn:maha:record:biomolecular-engineering-structure-prediction-filtering",
+      "reviewMethod": "explicit-revision-checklist",
+      "reviewedAt": "2026-08-30T00:00:00Z",
+      "reviewerId": "maha-internal-editorial:batch-11-revision-canary",
+      "reviewerKind": "internal-editorial",
+      "schemaVersion": "maha-batch-11-revision-review/0.1",
+      "scope": "rights-and-locator",
+      "targetSha256": "sha256:4f41045346753387198fd285374217f7d1448d41a28a569a5e1c07fea844b8de",
+      "verdict": "approve"
+    },
+    {
+      "auditSha256": "sha256:03ad129f7a2feb3664da001337d0bb92ee8e23deea23027681daf0e497203b9c",
+      "decisionId": "urn:maha:review:batch-11-revision:biomolecular-engineering-structure-prediction-filtering:boundary-adequacy",
+      "decisionSha256": "sha256:b9f35c2c9561a70fc3f627aba03e7596376d00c6b868578bf967453fb80e96af",
+      "externallyReviewed": false,
+      "independentlyReproduced": false,
+      "recordId": "urn:maha:record:biomolecular-engineering-structure-prediction-filtering",
+      "reviewMethod": "explicit-revision-checklist",
+      "reviewedAt": "2026-08-30T00:00:00Z",
+      "reviewerId": "maha-internal-editorial:batch-11-revision-canary",
+      "reviewerKind": "internal-editorial",
+      "schemaVersion": "maha-batch-11-revision-review/0.1",
+      "scope": "boundary-adequacy",
+      "targetSha256": "sha256:4f41045346753387198fd285374217f7d1448d41a28a569a5e1c07fea844b8de",
+      "verdict": "approve"
+    },
+    {
+      "auditSha256": "sha256:39de94bc5c9502cc6434992a5b12fea9d3a25c6e21c512052a79855ec782dc02",
+      "decisionId": "urn:maha:review:batch-11-revision:critical-supply-chains-high-purity-quartz-deposits:source-fidelity",
+      "decisionSha256": "sha256:7a215698d46e985b90416d44096df9175e14a34ac67d7eba2fd55d277c99eb9f",
+      "externallyReviewed": false,
+      "independentlyReproduced": false,
+      "recordId": "urn:maha:record:critical-supply-chains-high-purity-quartz-deposits",
+      "reviewMethod": "explicit-revision-checklist",
+      "reviewedAt": "2026-08-30T00:00:00Z",
+      "reviewerId": "maha-internal-editorial:batch-11-revision-canary",
+      "reviewerKind": "internal-editorial",
+      "schemaVersion": "maha-batch-11-revision-review/0.1",
+      "scope": "source-fidelity",
+      "targetSha256": "sha256:bf577646700efe497e3cc15b1f0f8eb6aa0c7c7bbcdeff5e2fdc388b2ac07398",
+      "verdict": "approve"
+    },
+    {
+      "auditSha256": "sha256:39de94bc5c9502cc6434992a5b12fea9d3a25c6e21c512052a79855ec782dc02",
+      "decisionId": "urn:maha:review:batch-11-revision:critical-supply-chains-high-purity-quartz-deposits:domain-fidelity",
+      "decisionSha256": "sha256:f6c98738f28deeb4d2f57ab845cf4762e3b442d874ea703f67061558cbf6e4b3",
+      "externallyReviewed": false,
+      "independentlyReproduced": false,
+      "recordId": "urn:maha:record:critical-supply-chains-high-purity-quartz-deposits",
+      "reviewMethod": "explicit-revision-checklist",
+      "reviewedAt": "2026-08-30T00:00:00Z",
+      "reviewerId": "maha-internal-editorial:batch-11-revision-canary",
+      "reviewerKind": "internal-editorial",
+      "schemaVersion": "maha-batch-11-revision-review/0.1",
+      "scope": "domain-fidelity",
+      "targetSha256": "sha256:bf577646700efe497e3cc15b1f0f8eb6aa0c7c7bbcdeff5e2fdc388b2ac07398",
+      "verdict": "approve"
+    },
+    {
+      "auditSha256": "sha256:39de94bc5c9502cc6434992a5b12fea9d3a25c6e21c512052a79855ec782dc02",
+      "decisionId": "urn:maha:review:batch-11-revision:critical-supply-chains-high-purity-quartz-deposits:rights-and-locator",
+      "decisionSha256": "sha256:40ee9dd03db259d6c22d159140f32520ffee7e94972f4ec0fdd5b104af05055c",
+      "externallyReviewed": false,
+      "independentlyReproduced": false,
+      "recordId": "urn:maha:record:critical-supply-chains-high-purity-quartz-deposits",
+      "reviewMethod": "explicit-revision-checklist",
+      "reviewedAt": "2026-08-30T00:00:00Z",
+      "reviewerId": "maha-internal-editorial:batch-11-revision-canary",
+      "reviewerKind": "internal-editorial",
+      "schemaVersion": "maha-batch-11-revision-review/0.1",
+      "scope": "rights-and-locator",
+      "targetSha256": "sha256:bf577646700efe497e3cc15b1f0f8eb6aa0c7c7bbcdeff5e2fdc388b2ac07398",
+      "verdict": "approve"
+    },
+    {
+      "auditSha256": "sha256:39de94bc5c9502cc6434992a5b12fea9d3a25c6e21c512052a79855ec782dc02",
+      "decisionId": "urn:maha:review:batch-11-revision:critical-supply-chains-high-purity-quartz-deposits:boundary-adequacy",
+      "decisionSha256": "sha256:b6c32ba2bee30efa292f699708001f6cbaf66c28809abbb02e7ca5f5bbeda8f1",
+      "externallyReviewed": false,
+      "independentlyReproduced": false,
+      "recordId": "urn:maha:record:critical-supply-chains-high-purity-quartz-deposits",
+      "reviewMethod": "explicit-revision-checklist",
+      "reviewedAt": "2026-08-30T00:00:00Z",
+      "reviewerId": "maha-internal-editorial:batch-11-revision-canary",
+      "reviewerKind": "internal-editorial",
+      "schemaVersion": "maha-batch-11-revision-review/0.1",
+      "scope": "boundary-adequacy",
+      "targetSha256": "sha256:bf577646700efe497e3cc15b1f0f8eb6aa0c7c7bbcdeff5e2fdc388b2ac07398",
+      "verdict": "approve"
+    },
+    {
+      "auditSha256": "sha256:360f42d50fd1eb1e670a24cc8aec5be96e80e31c0ca1c4f30ad51e1404c1b25a",
+      "decisionId": "urn:maha:review:batch-11-revision:fusion-plasma-systems-tokamak-plasma-equilibrium:source-fidelity",
+      "decisionSha256": "sha256:2c15042c11cd9a9dce40c719141ce0fe84073d0bdf6921ab7f8253b8338ccbe8",
+      "externallyReviewed": false,
+      "independentlyReproduced": false,
+      "recordId": "urn:maha:record:fusion-plasma-systems-tokamak-plasma-equilibrium",
+      "reviewMethod": "explicit-revision-checklist",
+      "reviewedAt": "2026-08-30T00:00:00Z",
+      "reviewerId": "maha-internal-editorial:batch-11-revision-canary",
+      "reviewerKind": "internal-editorial",
+      "schemaVersion": "maha-batch-11-revision-review/0.1",
+      "scope": "source-fidelity",
+      "targetSha256": "sha256:b06ae30e9f4b9907e6a603a67e3e8b1639897b2fc1cce47ad36e854b32d50f90",
+      "verdict": "approve"
+    },
+    {
+      "auditSha256": "sha256:360f42d50fd1eb1e670a24cc8aec5be96e80e31c0ca1c4f30ad51e1404c1b25a",
+      "decisionId": "urn:maha:review:batch-11-revision:fusion-plasma-systems-tokamak-plasma-equilibrium:domain-fidelity",
+      "decisionSha256": "sha256:9df3327daa507567373e493a1c2ec84ae19e3d51ded69d1984925caf053711c3",
+      "externallyReviewed": false,
+      "independentlyReproduced": false,
+      "recordId": "urn:maha:record:fusion-plasma-systems-tokamak-plasma-equilibrium",
+      "reviewMethod": "explicit-revision-checklist",
+      "reviewedAt": "2026-08-30T00:00:00Z",
+      "reviewerId": "maha-internal-editorial:batch-11-revision-canary",
+      "reviewerKind": "internal-editorial",
+      "schemaVersion": "maha-batch-11-revision-review/0.1",
+      "scope": "domain-fidelity",
+      "targetSha256": "sha256:b06ae30e9f4b9907e6a603a67e3e8b1639897b2fc1cce47ad36e854b32d50f90",
+      "verdict": "approve"
+    },
+    {
+      "auditSha256": "sha256:360f42d50fd1eb1e670a24cc8aec5be96e80e31c0ca1c4f30ad51e1404c1b25a",
+      "decisionId": "urn:maha:review:batch-11-revision:fusion-plasma-systems-tokamak-plasma-equilibrium:rights-and-locator",
+      "decisionSha256": "sha256:c35df13bc8e90c00c94456a452896eb768dd347e30efa43a098b057c650ff234",
+      "externallyReviewed": false,
+      "independentlyReproduced": false,
+      "recordId": "urn:maha:record:fusion-plasma-systems-tokamak-plasma-equilibrium",
+      "reviewMethod": "explicit-revision-checklist",
+      "reviewedAt": "2026-08-30T00:00:00Z",
+      "reviewerId": "maha-internal-editorial:batch-11-revision-canary",
+      "reviewerKind": "internal-editorial",
+      "schemaVersion": "maha-batch-11-revision-review/0.1",
+      "scope": "rights-and-locator",
+      "targetSha256": "sha256:b06ae30e9f4b9907e6a603a67e3e8b1639897b2fc1cce47ad36e854b32d50f90",
+      "verdict": "approve"
+    },
+    {
+      "auditSha256": "sha256:360f42d50fd1eb1e670a24cc8aec5be96e80e31c0ca1c4f30ad51e1404c1b25a",
+      "decisionId": "urn:maha:review:batch-11-revision:fusion-plasma-systems-tokamak-plasma-equilibrium:boundary-adequacy",
+      "decisionSha256": "sha256:be6e5c311496560d6470599cf582c2d1921ff0d5bf75320bf371f1c671428cd7",
+      "externallyReviewed": false,
+      "independentlyReproduced": false,
+      "recordId": "urn:maha:record:fusion-plasma-systems-tokamak-plasma-equilibrium",
+      "reviewMethod": "explicit-revision-checklist",
+      "reviewedAt": "2026-08-30T00:00:00Z",
+      "reviewerId": "maha-internal-editorial:batch-11-revision-canary",
+      "reviewerKind": "internal-editorial",
+      "schemaVersion": "maha-batch-11-revision-review/0.1",
+      "scope": "boundary-adequacy",
+      "targetSha256": "sha256:b06ae30e9f4b9907e6a603a67e3e8b1639897b2fc1cce47ad36e854b32d50f90",
+      "verdict": "approve"
+    },
+    {
+      "auditSha256": "sha256:8780441de21fb9bfa9ea5bbd71c2299cd5a4492bd4ac58b0b60195d45544a5b0",
+      "decisionId": "urn:maha:review:batch-11-revision:mechanistic-interpretability-representation-probing-boundary:source-fidelity",
+      "decisionSha256": "sha256:88a66dd0d8ef4c30c29ef38baf6fc97bf5a6de1bc676ea73401c5a56198f825e",
+      "externallyReviewed": false,
+      "independentlyReproduced": false,
+      "recordId": "urn:maha:record:mechanistic-interpretability-representation-probing-boundary",
+      "reviewMethod": "explicit-revision-checklist",
+      "reviewedAt": "2026-08-30T00:00:00Z",
+      "reviewerId": "maha-internal-editorial:batch-11-revision-canary",
+      "reviewerKind": "internal-editorial",
+      "schemaVersion": "maha-batch-11-revision-review/0.1",
+      "scope": "source-fidelity",
+      "targetSha256": "sha256:c87bdda2c7cf974f86499469e46d6fd6aab9e80c6bfe11848c595a8591e9ddc6",
+      "verdict": "approve"
+    },
+    {
+      "auditSha256": "sha256:8780441de21fb9bfa9ea5bbd71c2299cd5a4492bd4ac58b0b60195d45544a5b0",
+      "decisionId": "urn:maha:review:batch-11-revision:mechanistic-interpretability-representation-probing-boundary:domain-fidelity",
+      "decisionSha256": "sha256:6e8d1d59740f737b33e1da0fc752d199dc701fad8c7f0d017069d77695c5b1d7",
+      "externallyReviewed": false,
+      "independentlyReproduced": false,
+      "recordId": "urn:maha:record:mechanistic-interpretability-representation-probing-boundary",
+      "reviewMethod": "explicit-revision-checklist",
+      "reviewedAt": "2026-08-30T00:00:00Z",
+      "reviewerId": "maha-internal-editorial:batch-11-revision-canary",
+      "reviewerKind": "internal-editorial",
+      "schemaVersion": "maha-batch-11-revision-review/0.1",
+      "scope": "domain-fidelity",
+      "targetSha256": "sha256:c87bdda2c7cf974f86499469e46d6fd6aab9e80c6bfe11848c595a8591e9ddc6",
+      "verdict": "approve"
+    },
+    {
+      "auditSha256": "sha256:8780441de21fb9bfa9ea5bbd71c2299cd5a4492bd4ac58b0b60195d45544a5b0",
+      "decisionId": "urn:maha:review:batch-11-revision:mechanistic-interpretability-representation-probing-boundary:rights-and-locator",
+      "decisionSha256": "sha256:b9419ce6623f35aec09fbf5ede41e5ff73d248254bc4a8e8ed5a2474ee438b59",
+      "externallyReviewed": false,
+      "independentlyReproduced": false,
+      "recordId": "urn:maha:record:mechanistic-interpretability-representation-probing-boundary",
+      "reviewMethod": "explicit-revision-checklist",
+      "reviewedAt": "2026-08-30T00:00:00Z",
+      "reviewerId": "maha-internal-editorial:batch-11-revision-canary",
+      "reviewerKind": "internal-editorial",
+      "schemaVersion": "maha-batch-11-revision-review/0.1",
+      "scope": "rights-and-locator",
+      "targetSha256": "sha256:c87bdda2c7cf974f86499469e46d6fd6aab9e80c6bfe11848c595a8591e9ddc6",
+      "verdict": "approve"
+    },
+    {
+      "auditSha256": "sha256:8780441de21fb9bfa9ea5bbd71c2299cd5a4492bd4ac58b0b60195d45544a5b0",
+      "decisionId": "urn:maha:review:batch-11-revision:mechanistic-interpretability-representation-probing-boundary:boundary-adequacy",
+      "decisionSha256": "sha256:ca314ad752213b89ea37b4f34ddb69c089a83cb678d152bccf8bead5bba7ef92",
+      "externallyReviewed": false,
+      "independentlyReproduced": false,
+      "recordId": "urn:maha:record:mechanistic-interpretability-representation-probing-boundary",
+      "reviewMethod": "explicit-revision-checklist",
+      "reviewedAt": "2026-08-30T00:00:00Z",
+      "reviewerId": "maha-internal-editorial:batch-11-revision-canary",
+      "reviewerKind": "internal-editorial",
+      "schemaVersion": "maha-batch-11-revision-review/0.1",
+      "scope": "boundary-adequacy",
+      "targetSha256": "sha256:c87bdda2c7cf974f86499469e46d6fd6aab9e80c6bfe11848c595a8591e9ddc6",
+      "verdict": "approve"
+    }
+  ],
+  "standing": {
+    "activeCanonicalReleases": 0,
+    "canonicalMutationAuthorized": false,
+    "note": "Private preflight only. Each revision is proved still excluded by the merged three-gate publication queue, and no synthetic active release was created to make that pass.",
+    "productionMutationPerformed": false,
+    "releaseAuthorityPresent": false
+  },
+  "totals": {
+    "activeBindingsChanged": 0,
+    "activeCanonicalReleases": 0,
+    "auditsPassed": 5,
+    "preflightPassed": 5,
+    "quantitativeDetailPermitted": 3,
+    "revisionsBuilt": 5,
+    "scopedDecisions": 20,
+    "selected": 5
+  }
+}
