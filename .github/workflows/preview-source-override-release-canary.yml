@@ -98,6 +98,11 @@ jobs:
             and .release.publishedThisRunCount <= 5
             and .release.supersedingCount == 2
             and .release.initialCount == 3
+            and ([.projection[] | select(.routeStatus == 200)] | length) == 5
+            and ([.projection[] | select(.provenanceStatus == 200)] | length) == 5
+            and ([.projection[] | select(.sitemapIncluded == true)] | length) == 5
+            and ([.projection[] | select(.llmsIncluded == true)] | length) == 5
+            and ([.projection[] | select(.releaseRegistryIncluded == true)] | length) == 5
             and .boundaries.previewOnly == true
             and .boundaries.productionMutationPerformed == false
             and .boundaries.secretsIncluded == false
