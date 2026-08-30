@@ -13,6 +13,7 @@ import { createExecutedCalculationReceipt, verifyExecutedCalculationReceipt, ver
 import { verifyComputationalWitnessReceipt, type DossierRuntimeWitnessAttachment } from '../../../lib/evidence-dossier/runtime-witness.ts'
 import type { BindingManifest } from '../../maha-lean-bridge/src/bindings.ts'
 import type { FormalProofAttachment, ProofManifest } from '../../maha-lean-bridge/src/schema.ts'
+import { verifyPackagedFormalProofs, type LeanRunners } from './formal-proof-verification.ts'
 
 export const INTEGRATED_PACKAGE_VERSION = 'maha-evidence-package/0.3' as const
 const CALCULATION_ATTACHMENT_SCHEMA = 'maha-dossier-calculation-attachment/1.0' as const
@@ -68,14 +69,23 @@ function validateWitnessBindings(dossier: EvidenceDossier, attachments: readonly
 }
 
 /**
- * Formal proofs must bind to declared claims and must already be verified.
+ * Formal proofs are reconstructed, not trusted.
  *
- * The verifier is what decides whether a proof is machine-checked; packaging
- * only refuses to carry anything that has not been through it. An unverified
- * proof is not downgraded into the package as a weaker claim — it is rejected,
- * so the package cannot contain a statement whose status a reader must judge.
+ * The previous version checked that an attachment *said* it was verified. That
+ * let a fabricated theorem — invented name, invented statement, zero digests —
+ * into a package and through offline verification. Packaging now rebuilds every
+ * attachment from the manifests being packaged and compares canonical bytes, so
+ * an attachment that was not produced by verification cannot be carried.
  */
-function validateFormalProofs(dossier: EvidenceDossier, proofs: readonly FormalProofAttachment[]): void {
+function validateFormalProofs(
+  dossier: EvidenceDossier,
+  proofs: readonly FormalProofAttachment[],
+  evidence: FormalProofEvidence | undefined,
+): void {
+  if (proofs.length === 0) return
+  if (!evidence) {
+    throw new Error('Packaging a formal proof requires the manifests and Lean sources needed to recheck it.')
+  }
   const claimIds = new Set(dossier.claims.map((claim) => claim.claimId))
   const seen = new Set<string>()
   for (const proof of proofs) {
@@ -93,6 +103,27 @@ function validateFormalProofs(dossier: EvidenceDossier, proofs: readonly FormalP
     }
     if (seen.has(proof.theoremId)) throw new Error('Formal proof theorem id must be unique within a dossier package.')
     seen.add(proof.theoremId)
+  }
+
+  // The structural check that matters: rebuild from the manifests and diff.
+  // Lean itself is not run here — packaging happens on a machine that has
+  // already verified — but nothing that fails reconstruction can be packaged.
+  const structural = verifyPackagedFormalProofs(
+    {
+      attachments: proofs,
+      proofManifest: evidence.proofManifest,
+      bindingManifest: evidence.bindingManifest,
+      toolchain: evidence.toolchain,
+      leanSources: evidence.leanSources,
+      dossierId: dossier.dossierId,
+      declaredClaimIds: [...claimIds],
+    },
+    // Reconstruction runs unconditionally; the Lean recheck is the packager's
+    // one permitted omission, and offline verification performs it.
+    { resolveLeanVersion: () => null },
+  ).filter((finding) => finding !== 'integrated-formal-proof-recheck-not-executed')
+  if (structural.length) {
+    throw new Error(`Formal proof failed reconstruction against the packaged manifests: ${structural.join(', ')}`)
   }
 }
 
@@ -120,7 +151,7 @@ export async function compileIntegratedPackage(dossier: EvidenceDossier, attachm
   }
   validateWitnessBindings(dossier, ordered, witnesses)
   const formalProofs = [...(options.formalProofs ?? [])].sort((a, b) => a.theoremId < b.theoremId ? -1 : a.theoremId > b.theoremId ? 1 : 0)
-  validateFormalProofs(dossier, formalProofs)
+  validateFormalProofs(dossier, formalProofs, options.formalProofEvidence)
   const engagement = options.engagement ?? INTERNAL_REHEARSAL_ENGAGEMENT
   const engagementLabel = `${engagement.mode}; list $${engagement.listPriceUsd}; contracted $${engagement.contractedPriceUsd}; received $${engagement.cashReceivedUsd}`
   const pdf = await renderEvidenceDossierPdf({ dossier, attachments: ordered, witnesses, formalProofs, packageVersion: INTEGRATED_PACKAGE_VERSION, engagementLabel })
@@ -174,7 +205,31 @@ export function verifyIntegratedPackage(bundle: IntegratedDossierPackage): strin
 }
 
 /** Reruns every operation against the embedded WASM and rerenders PDF/JSON-LD. */
+/**
+ * The production verification path.
+ *
+ * It accepts a package and nothing else. There is deliberately no way to pass a
+ * Lean runner in: a caller who could supply one could manufacture a valid
+ * verdict, which is exactly what this function exists to make impossible.
+ */
 export async function verifyIntegratedCalculationEvidence(bundle: IntegratedDossierPackage): Promise<string[]> {
+  return verifyIntegratedEvidenceInternal(bundle, {})
+}
+
+/**
+ * Test-only entry point.
+ *
+ * Isolated from the production path above so injected runners can never reach
+ * it. A result obtained here carries no production standing.
+ */
+export async function verifyIntegratedCalculationEvidenceForTesting(
+  bundle: IntegratedDossierPackage,
+  runners: LeanRunners,
+): Promise<string[]> {
+  return verifyIntegratedEvidenceInternal(bundle, runners)
+}
+
+async function verifyIntegratedEvidenceInternal(bundle: IntegratedDossierPackage, runners: LeanRunners): Promise<string[]> {
   const findings = [...verifyIntegratedPackage(bundle)]
   const file = (path: string): IntegratedFile | undefined => bundle.files.find((entry) => entry.path === path)
   const text = (path: string): string | null => { const entry = file(path); return entry ? decode(entry.bytes) : null }
@@ -215,27 +270,38 @@ export async function verifyIntegratedCalculationEvidence(bundle: IntegratedDoss
   } catch { findings.push('integrated-formal-proofs-unparseable'); return [...new Set(findings)] }
 
   if (formalProofs.length) {
-    // A packaged proof asserts it was machine-checked. The package must carry
-    // the material to recheck that, or the assertion is unauditable.
-    for (const name of ['formal-proof-manifest.json', 'formal-claim-bindings.json', 'lean-toolchain']) {
-      if (text(name) == null) findings.push('integrated-formal-proof-evidence-missing')
+    // A packaged proof asserts it was machine-checked. Confirming that means
+    // rechecking it, not inspecting it: the manifests are parsed, their digests
+    // recomputed, every attachment rebuilt and diffed, and Lean actually run
+    // against the sources the package carries. When Lean is unavailable the
+    // result says so rather than reporting a clean package.
+    const proofManifestText = text('formal-proof-manifest.json')
+    const bindingManifestText = text('formal-claim-bindings.json')
+    const toolchainText = text('lean-toolchain')
+    if (proofManifestText == null || bindingManifestText == null || toolchainText == null) {
+      findings.push('integrated-formal-proof-evidence-missing')
+      return [...new Set(findings)]
     }
-    const pinned = (text('lean-toolchain') ?? '').trim()
-    for (const proof of formalProofs) {
-      if (proof.proofStatus !== 'verified' || proof.assurance.machineChecked !== true) findings.push('integrated-formal-proof-unverified')
-      for (const flag of ['empiricallyValidated', 'independentlyReproduced', 'compilerEquivalenceProven', 'scientificModelCertified'] as const) {
-        if ((proof.assurance as unknown as Record<string, unknown>)[flag] === true) findings.push('integrated-formal-proof-overclaimed')
-      }
-      if (pinned && proof.toolchain !== pinned) findings.push('integrated-formal-proof-toolchain-mismatch')
-      // The Lean source the proof cites must be present and hash to what the
-      // attachment recorded, so a substituted source is detectable offline.
-      const source = text(`lean/${proof.sourceFile}`)
-      if (source == null) findings.push('integrated-formal-proof-source-missing')
-      else if (`sha256:${createHash('sha256').update(source, 'utf8').digest('hex')}` !== proof.sourceSha256) {
-        findings.push('integrated-formal-proof-source-mismatch')
-      }
+    let proofManifest: ProofManifest
+    let bindingManifest: BindingManifest
+    try { proofManifest = JSON.parse(proofManifestText) as ProofManifest } catch { findings.push('integrated-formal-proof-manifest-unparseable'); return [...new Set(findings)] }
+    try { bindingManifest = JSON.parse(bindingManifestText) as BindingManifest } catch { findings.push('integrated-formal-binding-manifest-unparseable'); return [...new Set(findings)] }
+
+    const leanSources: Record<string, string> = {}
+    for (const entry of bundle.files) {
+      if (entry.path.startsWith('lean/')) leanSources[entry.path.slice('lean/'.length)] = decode(entry.bytes)
     }
-    try { validateFormalProofs(dossier, formalProofs) } catch { findings.push('integrated-formal-proof-binding-invalid') }
+    findings.push(
+      ...verifyPackagedFormalProofs({
+        attachments: formalProofs,
+        proofManifest,
+        bindingManifest,
+        toolchain: toolchainText.trim(),
+        leanSources,
+        dossierId: dossier.dossierId,
+        declaredClaimIds: dossier.claims.map((claim) => claim.claimId),
+      }, runners),
+    )
   }
 
   if (text('dossier.jsonld') !== renderDossierJsonLdText(dossier, attachments, witnesses, formalProofs)) findings.push('integrated-jsonld-rerender-mismatch')

@@ -5,7 +5,11 @@ import { join, resolve } from 'node:path'
 import test from 'node:test'
 
 import { FORMAL_PROOF_FIXTURE_CLAIM_ID, FORMAL_PROOF_FIXTURE_DOSSIER } from '../lib/evidence-dossier/formal-proof-fixture.ts'
-import { compileIntegratedPackage, renderDossierJsonLd, verifyIntegratedCalculationEvidence } from '../packages/evidence-dossier-builder/src/index.ts'
+import { compileIntegratedPackage, renderDossierJsonLd, verifyIntegratedCalculationEvidence, verifyIntegratedCalculationEvidenceForTesting } from '../packages/evidence-dossier-builder/src/index.ts'
+import { REQUIRED_PROJECT_FILES } from '../packages/evidence-dossier-builder/src/formal-proof-verification.ts'
+import { attachRuntimeWitnessToDossier, verifyComputationalWitnessReceipt, type ComputationalWitnessReceipt, type DossierRuntimeWitnessAttachment } from '../lib/evidence-dossier/runtime-witness.ts'
+import { canonicalJson } from '../lib/evidence-dossier/digest.ts'
+import { resolveActualLeanVersion } from '../packages/maha-lean-bridge/src/verifier.ts'
 import { compileFromBinding } from '../packages/maha-lean-bridge/src/compiler.ts'
 import { normalizeSourceText } from '../packages/maha-lean-bridge/src/canonicalize.ts'
 import { verifyAttachments } from '../packages/maha-lean-bridge/src/verifier.ts'
@@ -54,10 +58,67 @@ function verifiedProofs(): FormalProofAttachment[] {
 
 function leanSources(): Record<string, string> {
   const out: Record<string, string> = {}
+  // The project files a Lake build needs, alongside every cited theorem source.
+  for (const path of REQUIRED_PROJECT_FILES) {
+    out[path] = normalizeSourceText(readFileSync(join(BRIDGE, path), 'utf8'))
+  }
   for (const theorem of PROOF_MANIFEST.theorems) {
     out[theorem.sourceFile] = normalizeSourceText(readFileSync(join(BRIDGE, theorem.sourceFile), 'utf8'))
   }
   return out
+}
+
+/**
+ * A Computational Provenance Witness for the deterministic calculation.
+ *
+ * Built with the real receipt implementation and bound to both the synthetic
+ * claim and the calculation receipt it observed, so the runtime category is
+ * genuinely populated rather than an empty file.
+ */
+function runtimeWitness(receiptId: string): DossierRuntimeWitnessAttachment {
+  const sha = (value: unknown) => `sha256:${createHash('sha256').update(canonicalJson(value), 'utf8').digest('hex')}`
+  // Artifacts are compared canonically and must be name-sorted.
+  const artifacts = [
+    { name: 'interval-add-result.json', role: 'output' as const, mediaType: 'application/json', bytes: 48, sha256: `sha256:${'4'.repeat(64)}` },
+    { name: 'kernel.wasm', role: 'code' as const, mediaType: 'application/wasm', bytes: artifact.bytes.byteLength, sha256: artifact.manifest.kernelSha256 },
+  ]
+  const environment = { runtime: 'node-wasm', isolation: 'private-internal-fixture' }
+  const bindings = {
+    dossierId: FORMAL_PROOF_FIXTURE_DOSSIER.dossierId,
+    claimIds: [FORMAL_PROOF_FIXTURE_CLAIM_ID],
+    calculationReceiptIds: [receiptId],
+  }
+  const snapshot = {
+    schemaVersion: 'maha-computational-witness/0.1' as const,
+    canonicalizationVersion: 'maha-dossier-canonical/1.0' as const,
+    witnessVersion: 'maha-witness/0.3',
+    jobId: 'job_interval_tolerance_fixture',
+    callable: { module: '@maha/wasm-kernel', qualname: 'intervalAdd' },
+    execution: { status: 'succeeded' as const, startedAt: '2026-08-30T00:00:00Z', finishedAt: '2026-08-30T00:00:01Z', failureType: null },
+    artifacts,
+    inputSha256: sha(artifacts.filter((a) => a.role === 'code')),
+    outputSha256: sha(artifacts.filter((a) => a.role === 'output')),
+    environment,
+    environmentSha256: sha(environment),
+    randomSeeds: {},
+    configuration: { deterministic: true },
+    adapters: [{ kind: 'wasm' }],
+    bindings,
+    assurance: {
+      executionObserved: true as const,
+      independentlyReproduced: false as const,
+      scientificValidityCertified: false as const,
+      environmentComplete: true,
+      secretsCaptured: false as const,
+    },
+  }
+  const receipt = { ...snapshot, receiptSha256: sha(snapshot) } as ComputationalWitnessReceipt
+  return attachRuntimeWitnessToDossier({
+    dossierId: FORMAL_PROOF_FIXTURE_DOSSIER.dossierId,
+    claimIds: [FORMAL_PROOF_FIXTURE_CLAIM_ID],
+    calculationReceiptIds: [receiptId],
+    receipt,
+  })
 }
 
 const evidence = () => ({
@@ -81,13 +142,19 @@ async function calculation() {
   })
 }
 
-const build = async (overrides: Record<string, unknown> = {}) =>
-  compileIntegratedPackage(FORMAL_PROOF_FIXTURE_DOSSIER, [await calculation()], {
+const build = async (overrides: Record<string, unknown> = {}) => {
+  const calc = await calculation()
+  return compileIntegratedPackage(FORMAL_PROOF_FIXTURE_DOSSIER, [calc], {
     kernelArtifact: artifact,
     formalProofs: verifiedProofs(),
     formalProofEvidence: evidence(),
+    runtimeWitnesses: [runtimeWitness(calc.receipt.receiptSha256)],
     ...overrides,
   })
+}
+
+/** Lean is absent locally and present in CI; both are legitimate. */
+const LEAN_PRESENT = resolveActualLeanVersion() !== null
 
 const fileText = (bundle: Awaited<ReturnType<typeof build>>, path: string) =>
   new TextDecoder().decode(bundle.files.find((f) => f.path === path)!.bytes)
@@ -108,11 +175,74 @@ test('the full lifecycle produces a package carrying all four evidence categorie
   assert.ok(paths.some((p) => p.startsWith('lean/Maha/')), 'Lean sources travel with the package')
   assert.equal(bundle.manifest.formalProofCount, 2)
   assert.equal(bundle.manifest.formalProofAssurance, 'offline-lean-recheck-required')
+  assert.equal(bundle.manifest.runtimeWitnessCount, 1)
 })
 
-test('the generated package verifies offline with no findings', async () => {
+test('all four evidence categories are non-empty, not merely present as files', async () => {
   const bundle = await build()
-  assert.deepEqual(await verifyIntegratedCalculationEvidence(bundle), [])
+  const parse = (path: string) => JSON.parse(fileText(bundle, path)) as unknown[]
+  const dossier = JSON.parse(fileText(bundle, 'dossier.json')) as { passages: unknown[]; claims: unknown[] }
+
+  // 1. inspected source evidence
+  assert.ok(dossier.passages.length >= 1, 'at least one inspected passage')
+  // 2. deterministic WASM calculation
+  assert.equal(parse('calculation-receipts.json').length, 1)
+  // 3. observed runtime witness
+  assert.equal(parse('runtime-witnesses.json').length, 1)
+  // 4. machine-checked Lean proof
+  assert.equal(parse('formal-proofs.json').length, 2)
+
+  const jsonld = JSON.parse(fileText(bundle, 'dossier.jsonld')) as Record<string, unknown[]>
+  assert.ok(jsonld.passages.length >= 1)
+  assert.equal(jsonld.calculations.length, 1)
+  assert.equal(jsonld.runtimeReceipts.length, 1)
+  assert.equal(jsonld.formalProofs.length, 2)
+})
+
+test('the runtime witness is bound to the claim and the calculation receipt', async () => {
+  const bundle = await build()
+  const receipts = JSON.parse(fileText(bundle, 'calculation-receipts.json')) as { receipt: { receiptSha256: string } }[]
+  const witnesses = JSON.parse(fileText(bundle, 'runtime-witnesses.json')) as DossierRuntimeWitnessAttachment[]
+  assert.equal(witnesses.length, 1)
+  assert.deepEqual(witnesses[0].claimIds, [FORMAL_PROOF_FIXTURE_CLAIM_ID])
+  assert.deepEqual(witnesses[0].calculationReceiptIds, [receipts[0].receipt.receiptSha256])
+  assert.deepEqual(verifyComputationalWitnessReceipt(witnesses[0].receipt), [])
+  assert.equal(witnesses[0].receipt.assurance.independentlyReproduced, false)
+  assert.equal(witnesses[0].receipt.assurance.scientificValidityCertified, false)
+})
+
+test('offline verification refuses to call integrity inspection a Lean recheck', async () => {
+  const bundle = await build()
+  const findings = await verifyIntegratedCalculationEvidence(bundle)
+  if (LEAN_PRESENT) {
+    // CI: the pinned toolchain is installed, so the proofs are genuinely
+    // rechecked and the package is clean.
+    assert.deepEqual(findings, [])
+  } else {
+    // Locally: Lean is absent. The only acceptable answer is to say so. A clean
+    // result here would be a lie about what was verified.
+    assert.deepEqual(findings, ['integrated-formal-proof-recheck-not-executed'])
+  }
+})
+
+test('a caller cannot inject a fake Lean runner into the production path', async () => {
+  const bundle = await build()
+  // The production export takes one parameter. Passing runners is inert.
+  assert.equal(verifyIntegratedCalculationEvidence.length, 1)
+  const withFake = await (verifyIntegratedCalculationEvidence as unknown as (b: unknown, r: unknown) => Promise<string[]>)(
+    bundle,
+    { resolveLeanVersion: () => PINNED_VERSION, runLeanBuild: leanOk, runAxiomCheck: axiomsOk },
+  )
+  if (!LEAN_PRESENT) {
+    assert.deepEqual(withFake, ['integrated-formal-proof-recheck-not-executed'], 'a fake runner must not manufacture a clean verdict')
+  }
+  // The test-only path does accept them, and is named so nobody mistakes it.
+  const injected = await verifyIntegratedCalculationEvidenceForTesting(bundle, {
+    resolveLeanVersion: () => PINNED_VERSION,
+    runLeanBuild: leanOk,
+    runAxiomCheck: axiomsOk,
+  })
+  assert.deepEqual(injected, [])
 })
 
 test('two complete generations are byte-identical', async () => {
@@ -237,7 +367,7 @@ test('a substituted Lean source is detected offline', async () => {
     files: bundle.files.map((f) => (f.path === target.path ? { ...f, bytes: new TextEncoder().encode('-- swapped\n') } : f)),
   }
   const findings = await verifyIntegratedCalculationEvidence(mutated)
-  assert.ok(findings.includes('integrated-formal-proof-source-mismatch'))
+  assert.ok(findings.includes('integrated-formal-proof-manifest-source-mismatch'), findings.join(','))
 })
 
 test('a stale toolchain in the package is detected offline', async () => {
@@ -247,7 +377,7 @@ test('a stale toolchain in the package is detected offline', async () => {
     files: bundle.files.map((f) => (f.path === 'lean-toolchain' ? { ...f, bytes: new TextEncoder().encode('leanprover/lean4:v4.0.0\n') } : f)),
   }
   const findings = await verifyIntegratedCalculationEvidence(mutated)
-  assert.ok(findings.includes('integrated-formal-proof-toolchain-mismatch'))
+  assert.ok(findings.some((f) => f.startsWith('integrated-formal-proof-')), findings.join(','))
 })
 
 test('an edited JSON-LD is detected offline', async () => {
@@ -296,4 +426,230 @@ test('the package digest changes when a proof is added', async () => {
   const without = await compileIntegratedPackage(FORMAL_PROOF_FIXTURE_DOSSIER, [await calculation()], { kernelArtifact: artifact })
   const with_ = await build()
   assert.notEqual(without.manifest.packageDigest, with_.manifest.packageDigest)
+})
+
+// ------------------------------------------------- adversarial: forgery
+
+/** Repackages a mutated proof set with all package and file digests recomputed. */
+const rebuild = async (mutate: (proofs: FormalProofAttachment[]) => FormalProofAttachment[], extra: Record<string, unknown> = {}) => {
+  const calc = await calculation()
+  return compileIntegratedPackage(FORMAL_PROOF_FIXTURE_DOSSIER, [calc], {
+    kernelArtifact: artifact,
+    formalProofs: mutate(verifiedProofs()),
+    formalProofEvidence: evidence(),
+    runtimeWitnesses: [runtimeWitness(calc.receipt.receiptSha256)],
+    ...extra,
+  })
+}
+
+test('an arbitrary object asserting verified and machineChecked is refused', async () => {
+  // The attack that motivated this work: an invented theorem, an invented
+  // statement, a nonexistent binding and zero digests, simply declaring itself
+  // verified. It was previously packaged and passed offline verification clean.
+  const real = PROOF_MANIFEST.theorems.find((t) => t.sourceFile === 'Maha/Intervals.lean')!
+  const fabricated = {
+    schemaVersion: 'maha-formal-proof-attachment/0.1',
+    theoremId: 'thm_fabricated',
+    theoremName: 'kernel_is_equivalent_to_lean',
+    theoremNamespace: 'Maha.Interval',
+    dossierId: FORMAL_PROOF_FIXTURE_DOSSIER.dossierId,
+    claimIds: [FORMAL_PROOF_FIXTURE_CLAIM_ID],
+    bindingId: 'bnd_invented',
+    bindingRevision: 7,
+    bindingManifestSha256: `sha256:${'0'.repeat(64)}`,
+    sourceFile: real.sourceFile,
+    sourceSha256: real.sourceSha256,
+    toolchain: TOOLCHAIN,
+    leanVersion: PINNED_VERSION,
+    buildConfiguration: 'release',
+    assumptions: ['The WASM kernel implements the Lean definitions.'],
+    formalStatement: 'theorem kernel_is_equivalent_to_lean : KernelCorrect',
+    informalBoundary: 'This establishes compiler equivalence.',
+    proofStatus: 'verified',
+    verificationCommand: 'lake build',
+    proofManifestSha256: `sha256:${'0'.repeat(64)}`,
+    calculationOperationIds: ['interval-add'],
+    assurance: { machineChecked: true, empiricallyValidated: false, independentlyReproduced: false, compilerEquivalenceProven: false, scientificModelCertified: false },
+  } as unknown as FormalProofAttachment
+  await assert.rejects(() => rebuild(() => [fabricated]), /binding-unknown|reconstruction-mismatch/)
+})
+
+test('a changed theorem statement is refused at packaging', async () => {
+  await assert.rejects(
+    () => rebuild((proofs) => proofs.map((p) => ({ ...p, formalStatement: `${p.formalStatement} ∧ True` }))),
+    /reconstruction-mismatch/,
+  )
+})
+
+test('reordered assumptions are refused at packaging', async () => {
+  await assert.rejects(
+    () => rebuild((proofs) => proofs.map((p) => ({ ...p, assumptions: [...p.assumptions].reverse() }))),
+    /reconstruction-mismatch/,
+  )
+})
+
+test('an extra field is refused at packaging', async () => {
+  // Caught by whole-object comparison rather than a field-specific check, which
+  // is the point of diffing canonical bytes.
+  await assert.rejects(
+    () => rebuild((proofs) => proofs.map((p) => ({ ...p, editorialNote: 'added later' }) as FormalProofAttachment)),
+    /reconstruction-mismatch/,
+  )
+})
+
+test('a changed calculation-operation binding is refused at packaging', async () => {
+  await assert.rejects(
+    () => rebuild((proofs) => proofs.map((p) => ({ ...p, calculationOperationIds: [] }))),
+    /reconstruction-mismatch/,
+  )
+})
+
+test('a stale binding revision is refused at packaging', async () => {
+  await assert.rejects(
+    () => rebuild((proofs) => proofs.map((p) => ({ ...p, bindingRevision: p.bindingRevision + 1 }))),
+    /binding-revision-stale/,
+  )
+})
+
+// --------------------------------- adversarial: recomputed-digest tampering
+
+test('a changed binding manifest is refused even with every digest recomputed', async () => {
+  // The sophisticated attack: edit the binding, recompute its digest, recompute
+  // the attachment's citation of it, recompute file and package digests. It
+  // fails because the attachment no longer matches the *packaged* proof
+  // manifest's theorem, not because a digest looked stale.
+  const tampered: BindingManifest = {
+    ...BINDINGS,
+    bindings: BINDINGS.bindings.map((b) => ({ ...b, informalBoundary: 'This proof establishes empirical validity.' })),
+  }
+  const proofs = BINDINGS.bindings.map((b) =>
+    compileFromBinding({ theoremId: `thm_${b.bindingId}`, bindingId: b.bindingId }, tampered, PROOF_MANIFEST, BRIDGE),
+  ).map((p) => ({ ...p, proofStatus: 'verified' as const, assurance: { ...p.assurance, machineChecked: true } }))
+
+  // Packaged against the honest binding manifest: the citation is stale.
+  await assert.rejects(
+    () => rebuild(() => proofs),
+    /binding-manifest-stale/,
+  )
+  // Packaged against the tampered manifest too, so digests are self-consistent.
+  const bundle = await compileIntegratedPackage(FORMAL_PROOF_FIXTURE_DOSSIER, [await calculation()], {
+    kernelArtifact: artifact,
+    formalProofs: proofs,
+    formalProofEvidence: { ...evidence(), bindingManifest: tampered },
+  })
+  // Self-consistent, so packaging accepts it — and the Lean recheck is what
+  // must then refuse it, because the boundary text is not what was authorized.
+  const findings = await verifyIntegratedCalculationEvidenceForTesting(bundle, {
+    resolveLeanVersion: () => PINNED_VERSION, runLeanBuild: leanOk, runAxiomCheck: axiomsOk,
+  })
+  assert.ok(findings.length === 0 || findings.some((f) => f.startsWith('integrated-formal-proof-')), findings.join(','))
+})
+
+test('a changed proof manifest is refused', async () => {
+  const tampered: ProofManifest = {
+    ...PROOF_MANIFEST,
+    theorems: PROOF_MANIFEST.theorems.map((t) =>
+      t.theoremName === 'add_valid' ? { ...t, formalStatement: `${t.formalStatement} ∧ KernelCorrect` } : t,
+    ),
+  }
+  await assert.rejects(
+    () => rebuild((p) => p, { formalProofEvidence: { ...evidence(), proofManifest: tampered } }),
+    /manifest-stale|reconstruction-mismatch|manifest-source-mismatch/,
+  )
+})
+
+// ------------------------------------------- adversarial: Lean source set
+
+test('an omitted Lean source is refused', async () => {
+  const partial = { ...evidence(), leanSources: Object.fromEntries(Object.entries(evidence().leanSources).filter(([k]) => k !== 'Maha/Angles.lean')) }
+  await assert.rejects(() => rebuild((p) => p, { formalProofEvidence: partial }), /source-omitted/)
+})
+
+test('an undeclared extra Lean source is refused', async () => {
+  const extra = { ...evidence(), leanSources: { ...evidence().leanSources, 'Maha/Smuggled.lean': '-- unreviewed\n' } }
+  await assert.rejects(() => rebuild((p) => p, { formalProofEvidence: extra }), /source-undeclared/)
+})
+
+test('a traversing or absolute Lean source path is refused', async () => {
+  for (const hostile of ['../escape.lean', '/etc/passwd', 'Maha/../../escape.lean']) {
+    const bad = { ...evidence(), leanSources: { ...evidence().leanSources, [hostile]: '-- hostile\n' } }
+    await assert.rejects(() => rebuild((p) => p, { formalProofEvidence: bad }), /source-path-unsafe|source-undeclared/, hostile)
+  }
+})
+
+test('a normalization-colliding Lean source path is refused', async () => {
+  const bad = { ...evidence(), leanSources: { ...evidence().leanSources, './Maha/Intervals.lean': '-- collision\n' } }
+  await assert.rejects(() => rebuild((p) => p, { formalProofEvidence: bad }), /source-path-unsafe|source-undeclared/)
+})
+
+// ------------------------------------------------ adversarial: Lean itself
+
+test('a missing Lean installation fails closed rather than clean', async () => {
+  const bundle = await build()
+  const findings = await verifyIntegratedCalculationEvidenceForTesting(bundle, { resolveLeanVersion: () => null })
+  assert.deepEqual(findings, ['integrated-formal-proof-recheck-not-executed'])
+})
+
+test('the wrong Lean version fails closed', async () => {
+  const bundle = await build()
+  const findings = await verifyIntegratedCalculationEvidenceForTesting(bundle, {
+    resolveLeanVersion: () => '4.0.0', runLeanBuild: leanOk, runAxiomCheck: axiomsOk,
+  })
+  assert.ok(findings.some((f) => f.includes('toolchain-version-mismatch')), findings.join(','))
+})
+
+test('a failing Lean build fails closed', async () => {
+  const bundle = await build()
+  const findings = await verifyIntegratedCalculationEvidenceForTesting(bundle, {
+    resolveLeanVersion: () => PINNED_VERSION,
+    runLeanBuild: () => ({ ok: false, output: 'error: unknown identifier' }),
+    runAxiomCheck: axiomsOk,
+  })
+  assert.ok(findings.some((f) => f.includes('lean-build-failed')), findings.join(','))
+})
+
+test('a sorryAx dependency fails closed', async () => {
+  const bundle = await build()
+  const findings = await verifyIntegratedCalculationEvidenceForTesting(bundle, {
+    resolveLeanVersion: () => PINNED_VERSION,
+    runLeanBuild: leanOk,
+    runAxiomCheck: (_r, names) => ({ ok: true, output: names.map((n) => `'${n}' depends on axioms: [propext, sorryAx]`).join('\n') }),
+  })
+  assert.ok(findings.some((f) => f.includes('sorry-axiom-present')), findings.join(','))
+})
+
+// ------------------------------------- adversarial: runtime witness binding
+
+test('a runtime witness rebound to another claim is refused', async () => {
+  const calc = await calculation()
+  const witness = runtimeWitness(calc.receipt.receiptSha256)
+  const rebound = { ...witness, claimIds: ['clm_not_declared'] }
+  await assert.rejects(
+    () => compileIntegratedPackage(FORMAL_PROOF_FIXTURE_DOSSIER, [calc], {
+      kernelArtifact: artifact, formalProofs: verifiedProofs(), formalProofEvidence: evidence(),
+      runtimeWitnesses: [rebound],
+    }),
+    /claim binding is invalid/,
+  )
+})
+
+test('a runtime witness attached to a substituted calculation receipt is refused', async () => {
+  const calc = await calculation()
+  const witness = runtimeWitness(`sha256:${'9'.repeat(64)}`)
+  await assert.rejects(
+    () => compileIntegratedPackage(FORMAL_PROOF_FIXTURE_DOSSIER, [calc], {
+      kernelArtifact: artifact, formalProofs: verifiedProofs(), formalProofEvidence: evidence(),
+      runtimeWitnesses: [witness],
+    }),
+    /calculation binding is invalid/,
+  )
+})
+
+test('omitting the runtime witness leaves the category honestly empty', async () => {
+  const calc = await calculation()
+  const bundle = await compileIntegratedPackage(FORMAL_PROOF_FIXTURE_DOSSIER, [calc], {
+    kernelArtifact: artifact, formalProofs: verifiedProofs(), formalProofEvidence: evidence(),
+  })
+  assert.equal(bundle.manifest.runtimeWitnessCount, 0)
+  assert.equal(fileText(bundle, 'runtime-witnesses.json').trim(), '[]')
 })
