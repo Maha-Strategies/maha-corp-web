@@ -1,6 +1,7 @@
 import publicationBatch from '../content/substantial-pages/publication-batch-1.json' with { type: 'json' }
 import publicationBatchTwo from '../content/substantial-pages/publication-batch-2.json' with { type: 'json' }
 import publicationBatchThree from '../content/substantial-pages/publication-batch-3.json' with { type: 'json' }
+import publicationBatchFive from '../content/substantial-pages/publication-batch-5.json' with { type: 'json' }
 
 import type { PublishedSubstantialPage } from './substantial-page-publication.ts'
 
@@ -11,7 +12,7 @@ import type { PublishedSubstantialPage } from './substantial-page-publication.ts
  * internal build path.
  */
 export const SUBSTANTIAL_PUBLICATION_VERSION = 'maha-substantial-publication/1.0' as const
-export const SUBSTANTIAL_PUBLICATION_DATE = '2026-08-26' as const
+export const SUBSTANTIAL_PUBLICATION_DATE = '2026-08-30' as const
 
 const batchOnePages = publicationBatch.pages as unknown as readonly PublishedSubstantialPage[]
 
@@ -27,12 +28,32 @@ const batchTwoPages = (publicationBatchTwo.pages as unknown as readonly Publishe
 const batchThreePages = (publicationBatchThree.pages as unknown as readonly PublishedSubstantialPage[]).filter(
   (page) => page.quality.eligible,
 )
-const replacedRecordIds = new Set(batchThreePages.map((page) => page.contract.recordId))
+type ReleasedPublishedPage = PublishedSubstantialPage & {
+  releaseEvidence: {
+    targetSha256: string
+    canonicalPath: string
+    approvalScopes: readonly string[]
+  }
+}
+const requiredReviewScopes = ['boundary-adequacy', 'domain-fidelity', 'rights-and-locator', 'source-fidelity'] as const
+const batchFivePages = (publicationBatchFive.pages as unknown as readonly ReleasedPublishedPage[]).filter((page) => {
+  const scopes = new Set(page.releaseEvidence.approvalScopes)
+  return page.quality.eligible
+    && page.releaseEvidence.targetSha256 === page.contract.recordRevisionSha256
+    && page.releaseEvidence.canonicalPath === page.path
+    && requiredReviewScopes.every((scope) => scopes.has(scope))
+})
+const replacedRecordIds = new Set([
+  ...batchThreePages.map((page) => page.contract.recordId),
+  ...batchFivePages.map((page) => page.contract.recordId),
+])
+const batchFiveRecordIds = new Set(batchFivePages.map((page) => page.contract.recordId))
 
 export const PUBLIC_SUBSTANTIAL_PAGES: readonly PublishedSubstantialPage[] = [
-  ...batchOnePages,
+  ...batchOnePages.filter((page) => !replacedRecordIds.has(page.contract.recordId)),
   ...batchTwoPages.filter((page) => !replacedRecordIds.has(page.contract.recordId)),
-  ...batchThreePages,
+  ...batchThreePages.filter((page) => !batchFiveRecordIds.has(page.contract.recordId)),
+  ...batchFivePages,
 ]
 
 const pageByRecordId = new Map(PUBLIC_SUBSTANTIAL_PAGES.map((page) => [page.contract.recordId, page]))
