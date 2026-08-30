@@ -49,7 +49,7 @@ export async function insertEpistemicIngestionBatch(
     : batch.adapterId === 'substantial-batch-2-internal-review'
       ? 'record_substantial_batch2_internal_review_targets'
       : batch.adapterId === 'substantial-scale-release'
-        ? 'record_substantial_scale_release_targets'
+        ? 'record_substantial_scale_release_targets_v2'
       : batch.adapterId === 'repaired-revision-canary'
         ? 'record_repaired_revision_canary_targets'
       : batch.adapterId === 'source-override-revision-canary'
