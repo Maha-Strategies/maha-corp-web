@@ -1,4 +1,6 @@
 export * from './schema.ts'
+export * from './axioms.ts'
+export * from './bindings.ts'
 export * from './canonicalize.ts'
 export * from './compiler.ts'
 export * from './verifier.ts'

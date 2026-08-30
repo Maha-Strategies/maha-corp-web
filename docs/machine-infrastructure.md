@@ -86,24 +86,77 @@ The second is read out of the elaborated environment and cannot be faked by
 editing text. A token scan for `sorry` is kept as a cheap first refusal, not as
 the guarantee.
 
+## Authorization: existence is not permission
+
+A verifier that only asks "does this claim exist?" will attach a proved theorem
+about interval arithmetic to a claim about resist chemistry. Both are real, the
+proof is genuine, and the result is nonsense.
+
+The **binding manifest** (`fixtures/formal-claim-bindings.json`,
+`maha-formal-claim-binding/0.1`) is the authorization. Each binding fixes the
+dossier, the fully qualified theorem, the exact claim ids, the exact
+assumptions, the exact boundary text and the exact calculation operations, under
+a `bindingId` and a `revision`, and the manifest carries a digest.
+
+The compiler builds attachments **from** bindings; a caller can name a binding
+but cannot invent an association. The verifier then compares every submitted
+field against the binding and fails closed on any difference.
+
+`claimIds`, `assumptions` and `calculationOperationIds` are ordered lists, not
+sets. `assumptions` renders as a numbered list, so reordering changes what a
+reader sees. None of them is sorted before comparison: reordering is a change.
+
+## The verifier never returns the caller's object
+
+Verification reconstructs a clean attachment from trusted inputs — the binding
+manifest and the proof manifest — and returns that. A forged field cannot
+survive by passing some later check, because the forged object is discarded
+rather than corrected.
+
+Assurance overreach is **fatal**, not advisory. An attachment asserting
+`machineChecked`, `empiricallyValidated`, `independentlyReproduced`,
+`compilerEquivalenceProven` or `scientificModelCertified` is refused outright.
+
 ## Failure modes the verifier refuses
 
 Each of these is covered by a test:
 
 - a Lean build failure;
 - a `sorryAx` dependency despite a green build;
-- a caller-supplied `machineChecked: true`;
-- a caller-supplied empirical, reproduction, compiler-equivalence or
-  certification flag;
-- a stale source digest, stale toolchain, or stale proof manifest;
-- a changed theorem statement;
-- an unknown theorem;
-- a duplicate theorem id or a theorem attached twice;
-- a substituted dossier or an undeclared claim;
-- an attachment with no stated boundary.
+- a missing, duplicate or unattributable axiom report;
+- an unexpected or user-declared axiom;
+- any caller-asserted assurance flag;
+- a theorem attached to an unrelated but existing claim;
+- changed, reordered or dropped assumptions;
+- a changed informal boundary;
+- changed calculation-operation ids;
+- a stale binding manifest digest or binding revision;
+- an unauthorized theorem, even one genuinely proved;
+- a source path that is absolute, traverses upward, uses alternate separators,
+  or normalizes differently from what was submitted;
+- a source path differing from the proof manifest's;
+- a stale source digest or changed theorem statement;
+- a proof manifest disagreeing with `lean-toolchain`;
+- a Lean on PATH of the wrong version, or no Lean at all;
+- a duplicate theorem id;
+- a substituted dossier or an undeclared claim.
 
 A failure never downgrades to a warning. An attachment either earns
 `machineChecked` from a real Lean run or does not appear in the output at all.
+
+## `verificationCommand` is descriptive only
+
+It is text for a human reader. The build and axiom commands this process runs
+are fixed in code, and theorem names are written into a probe file rather than
+passed to a shell. Nothing an attachment or manifest carries is ever executed.
+
+## Toolchain identity is read from disk
+
+The manifest's toolchain strings are not trusted on their own — they could be
+edited alongside an attachment. Verification reads the package's own
+`lean-toolchain`, requires the manifest and attachment to agree with it, and
+requires the Lean actually on PATH to report that same version. Missing Lean or
+a version mismatch fails closed.
 
 ## Package format
 

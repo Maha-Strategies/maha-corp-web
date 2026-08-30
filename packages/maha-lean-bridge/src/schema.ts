@@ -67,6 +67,12 @@ export interface FormalProofAttachment {
   dossierId: string
   /** Declared claims in that dossier which this proof relates to. */
   claimIds: readonly string[]
+  /** The trusted binding that authorized this theorem for these claims. */
+  bindingId: string
+  /** Revision of that binding. A binding change invalidates the attachment. */
+  bindingRevision: number
+  /** SHA-256 of the binding manifest this attachment was authorized against. */
+  bindingManifestSha256: string
   /** Repository-relative path of the Lean source, e.g. `Maha/Intervals.lean`. */
   sourceFile: string
   /** SHA-256 of the exact source bytes that were checked. */
