@@ -1,5 +1,6 @@
 import publicationBatch from '../content/substantial-pages/publication-batch-1.json' with { type: 'json' }
 import publicationBatchTwo from '../content/substantial-pages/publication-batch-2.json' with { type: 'json' }
+import publicationBatchThree from '../content/substantial-pages/publication-batch-3.json' with { type: 'json' }
 
 import type { PublishedSubstantialPage } from './substantial-page-publication.ts'
 
@@ -23,8 +24,16 @@ const batchOnePages = publicationBatch.pages as unknown as readonly PublishedSub
 const batchTwoPages = (publicationBatchTwo.pages as unknown as readonly PublishedSubstantialPage[]).filter(
   (page) => page.quality.eligible,
 )
+const batchThreePages = (publicationBatchThree.pages as unknown as readonly PublishedSubstantialPage[]).filter(
+  (page) => page.quality.eligible,
+)
+const replacedRecordIds = new Set(batchThreePages.map((page) => page.contract.recordId))
 
-export const PUBLIC_SUBSTANTIAL_PAGES: readonly PublishedSubstantialPage[] = [...batchOnePages, ...batchTwoPages]
+export const PUBLIC_SUBSTANTIAL_PAGES: readonly PublishedSubstantialPage[] = [
+  ...batchOnePages,
+  ...batchTwoPages.filter((page) => !replacedRecordIds.has(page.contract.recordId)),
+  ...batchThreePages,
+]
 
 const pageByRecordId = new Map(PUBLIC_SUBSTANTIAL_PAGES.map((page) => [page.contract.recordId, page]))
 
