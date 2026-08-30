@@ -56,18 +56,25 @@ jobs:
 
       - uses: actions/checkout@v5
 
-      - name: Apply only the dedicated Preview target migration
+      - name: Apply only the dedicated Preview canary migrations
         run: |
           set -euo pipefail
-          migration='20260830173000_source_override_revision_preview_canary.sql'
-          path="supabase/migrations/$migration"
-          [ -f "$path" ] || { echo '::error::The dedicated migration is absent.'; exit 1; }
           url="postgresql://postgres.${SUPABASE_PROJECT_REF}:${SUPABASE_DB_PASSWORD}@aws-0-us-east-1.pooler.supabase.com:5432/postgres"
-          psql "$url" -v ON_ERROR_STOP=1 --single-transaction -f "$path" >/dev/null
-          version="${migration%%_*}"
-          psql "$url" -v ON_ERROR_STOP=1 -c "insert into supabase_migrations.schema_migrations (version) values ('${version}') on conflict do nothing;" >/dev/null
+          migrations=(
+            '20260830173000_source_override_revision_preview_canary.sql'
+            '20260830174500_source_override_revision_canary_adapter.sql'
+          )
+          for migration in "${migrations[@]}"; do
+            path="supabase/migrations/$migration"
+            [ -f "$path" ] || { echo "::error::Dedicated migration $migration is absent."; exit 1; }
+            psql "$url" -v ON_ERROR_STOP=1 --single-transaction -f "$path" >/dev/null
+            version="${migration%%_*}"
+            psql "$url" -v ON_ERROR_STOP=1 -c "insert into supabase_migrations.schema_migrations (version) values ('${version}') on conflict do nothing;" >/dev/null
+          done
           converged="$(psql "$url" -v ON_ERROR_STOP=1 -At -c "select to_regproc('public.record_source_override_revision_canary_targets') is not null;")"
           [ "$converged" = 't' ] || { echo '::error::The dedicated Preview RPC did not converge.'; exit 1; }
+          adapter_converged="$(psql "$url" -v ON_ERROR_STOP=1 -At -c "select pg_get_constraintdef(oid) like '%source-override-revision-canary%' from pg_constraint where conrelid = 'public.epistemic_ingestion_batches'::regclass and conname = 'epistemic_ingestion_batches_adapter_id_check';")"
+          [ "$adapter_converged" = 't' ] || { echo '::error::The dedicated Preview adapter constraint did not converge.'; exit 1; }
 
       - uses: actions/setup-node@v6
         with:

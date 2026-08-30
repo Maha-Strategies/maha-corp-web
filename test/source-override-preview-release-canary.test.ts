@@ -129,6 +129,32 @@ test('the dedicated migration persists drafts only and cannot publish', () => {
   assert.doesNotMatch(migration, /record_epistemic_expert_review|record_epistemic_canonical_release/)
 })
 
+test('the additive adapter migration preserves prior adapters without widening release authority', () => {
+  const migration = readFileSync(
+    'supabase/migrations/20260830174500_source_override_revision_canary_adapter.sql',
+    'utf8',
+  )
+  const preservedAdapters = [
+    'semiconductor',
+    'mathematics',
+    'astronomy',
+    'religion',
+    'neuromorphic-biocomputing',
+    'frontier-canary',
+    'substantial-batch-2-internal-review',
+    'repaired-revision-canary',
+    'mcp-private-canary',
+  ]
+  assert.match(migration, /epistemic_ingestion_batches_adapter_id_check/)
+  assert.match(migration, /epistemic_ingestion_records_adapter_id_check/)
+  assert.equal((migration.match(/'source-override-revision-canary'/g) ?? []).length, 2)
+  for (const adapter of preservedAdapters) {
+    assert.equal((migration.match(new RegExp(`'${adapter}'`, 'g')) ?? []).length, 2)
+  }
+  assert.doesNotMatch(migration, /epistemic_(?:expert_)?reviews|epistemic_canonical_releases/)
+  assert.doesNotMatch(migration, /grant\s|security\s+definer/i)
+})
+
 test('the remote workflow is exact-branch Preview-only and carries no Production path', () => {
   const workflow = readFileSync('.github/workflows/preview-source-override-release-canary.yml', 'utf8')
   const runner = readFileSync('scripts/run-source-override-preview-release-canary.ts', 'utf8')
@@ -140,6 +166,8 @@ test('the remote workflow is exact-branch Preview-only and carries no Production
   }
   assert.match(workflow, /environment: Preview/)
   assert.match(workflow, /uhwuullakihgszxhiygz/)
+  assert.match(workflow, /20260830173000_source_override_revision_preview_canary\.sql/)
+  assert.match(workflow, /20260830174500_source_override_revision_canary_adapter\.sql/)
 })
 
 test('the Production plan is deterministic and deliberately non-executable', () => {
