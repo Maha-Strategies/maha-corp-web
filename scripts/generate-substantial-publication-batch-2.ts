@@ -2,7 +2,7 @@ import { createHash } from 'node:crypto'
 import { mkdirSync, readFileSync, writeFileSync } from 'node:fs'
 
 import { alignmentFor } from '../lib/frontier-source-alignment.ts'
-import { isPilotAlignmentClear, pilotAlignmentFor } from '../lib/pilot-source-alignment.ts'
+import { pilotAlignmentFor } from '../lib/pilot-source-alignment.ts'
 import { SUBSTANTIAL_PUBLICATION_PAGES } from '../lib/substantial-page-publication.ts'
 import {
   SUBSTANTIAL_BATCH_2_PAGES,
