@@ -56,7 +56,7 @@ async function ingestTargets(operationsToken: string) {
   const digest = createHash('sha256').update(targetSet).digest('hex')
   await request(operationsToken, '/api/admin/epistemic-ingestion', {
     method: 'POST',
-    body: JSON.stringify({ adapterId: 'substantial-scale-release', idempotencyKey: `substantial-scale-targets:${digest}` }),
+    body: JSON.stringify({ adapterId: 'substantial-scale-release', idempotencyKey: `substantial-scale-inspected-targets:${digest}` }),
   })
   return `sha256:${digest}`
 }
