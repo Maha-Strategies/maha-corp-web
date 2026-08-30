@@ -1,0 +1,124 @@
+name: Production substantial scale replay migration
+
+on:
+  workflow_dispatch:
+    inputs:
+      operation:
+        description: Verify or apply the exact replay migration
+        required: true
+        default: verify
+        type: choice
+        options: [verify, apply]
+      confirmation:
+        description: For apply, type APPLY SUBSTANTIAL SCALE REPLAY exactly
+        required: false
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: production-database
+  cancel-in-progress: false
+
+jobs:
+  migrate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    environment: production-database
+    env:
+      SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}
+      SUPABASE_DB_PASSWORD: ${{ secrets.SUPABASE_DB_PASSWORD }}
+      SUPABASE_PROJECT_REF: ${{ vars.SUPABASE_PROJECT_REF }}
+      EVIDENCE: ${{ github.workspace }}/substantial-scale-replay-evidence
+      MIGRATION: 20260830203000_substantial_scale_idempotent_replay.sql
+      MIGRATION_SHA256: a9bba91119c4b9a138a38ab05e15c1b4f382959c908a19a538e6a171d0285a7e
+    steps:
+      - name: Enforce the Production target and exact confirmation
+        env:
+          OPERATION: ${{ inputs.operation }}
+          CONFIRMATION: ${{ inputs.confirmation }}
+        run: |
+          set -euo pipefail
+          production='uhwuullakihgszxhiygz'
+          test "${SUPABASE_PROJECT_REF:-}" = "$production"
+          test "$OPERATION" = verify -o "$OPERATION" = apply
+          if [ "$OPERATION" = apply ]; then
+            test "$CONFIRMATION" = 'APPLY SUBSTANTIAL SCALE REPLAY'
+          fi
+          echo "targetFingerprint=sha256:$(printf '%s' "$SUPABASE_PROJECT_REF" | sha256sum | cut -d' ' -f1)"
+
+      - uses: actions/checkout@v7
+
+      - name: Verify immutable migration bytes
+        run: |
+          set -euo pipefail
+          path="supabase/migrations/$MIGRATION"
+          test -f "$path"
+          test "$(sha256sum "$path" | cut -d' ' -f1)" = "$MIGRATION_SHA256"
+
+      - name: Resolve the Production pooler connection
+        run: |
+          set -euo pipefail
+          poolers=$(curl --fail --silent --show-error \
+            -H "Authorization: Bearer ${SUPABASE_ACCESS_TOKEN}" \
+            "https://api.supabase.com/v1/projects/${SUPABASE_PROJECT_REF}/config/database/pooler")
+          pooler=$(jq -cer '[ .[] | select(.database_type == "PRIMARY") ] | .[0]' <<<"$poolers")
+          echo "SUPABASE_DB_HOST=$(jq -r '.db_host' <<<"$pooler")" >> "$GITHUB_ENV"
+          echo "SUPABASE_DB_PORT=$(jq -r '.db_port' <<<"$pooler")" >> "$GITHUB_ENV"
+          echo "SUPABASE_DB_USER=$(jq -r '.db_user' <<<"$pooler")" >> "$GITHUB_ENV"
+          echo "SUPABASE_DB_NAME=$(jq -r '.db_name' <<<"$pooler")" >> "$GITHUB_ENV"
+
+      - name: Apply exactly the reviewed replay migration
+        if: ${{ inputs.operation == 'apply' }}
+        run: |
+          set -euo pipefail
+          mkdir -p "$EVIDENCE"
+          export PGPASSWORD="$SUPABASE_DB_PASSWORD"
+          dsn="host=${SUPABASE_DB_HOST} port=${SUPABASE_DB_PORT} user=${SUPABASE_DB_USER} dbname=${SUPABASE_DB_NAME} sslmode=require"
+          version="${MIGRATION%%_*}"
+          count="$(psql "$dsn" -At -v ON_ERROR_STOP=1 -c "select count(*) from supabase_migrations.schema_migrations where version = '${version}';")"
+          if [ "$count" = 0 ]; then
+            psql "$dsn" -v ON_ERROR_STOP=1 --single-transaction -f "supabase/migrations/$MIGRATION" > "$EVIDENCE/applied.txt" 2>&1
+            psql "$dsn" -v ON_ERROR_STOP=1 -c "insert into supabase_migrations.schema_migrations (version) values ('${version}') on conflict do nothing;" >> "$EVIDENCE/applied.txt" 2>&1
+          else
+            test "$count" = 1
+            echo 'Migration history already contains this exact version.' > "$EVIDENCE/applied.txt"
+          fi
+
+      - name: Verify replay boundary
+        run: |
+          set -euo pipefail
+          mkdir -p "$EVIDENCE"
+          export PGPASSWORD="$SUPABASE_DB_PASSWORD"
+          dsn="host=${SUPABASE_DB_HOST} port=${SUPABASE_DB_PORT} user=${SUPABASE_DB_USER} dbname=${SUPABASE_DB_NAME} sslmode=require"
+          psql "$dsn" -At -v ON_ERROR_STOP=1 -c "
+            select 'history=' || (exists (select 1 from supabase_migrations.schema_migrations where version = '20260830203000'))::text
+            union all select 'rpc=' || (to_regprocedure('public.record_substantial_scale_release_targets_v2(jsonb,jsonb,text,text)') is not null)::text
+            union all select 'service-role=' || has_function_privilege('service_role','public.record_substantial_scale_release_targets_v2(jsonb,jsonb,text,text)','execute')::text
+            union all select 'anon-denied=' || (not has_function_privilege('anon','public.record_substantial_scale_release_targets_v2(jsonb,jsonb,text,text)','execute'))::text;
+          " | tee "$EVIDENCE/verify.txt"
+          test "$(grep -c '=true' "$EVIDENCE/verify.txt")" = 4
+
+      - name: Record sanitized evidence
+        if: always()
+        env:
+          OPERATION: ${{ inputs.operation }}
+        run: |
+          mkdir -p "$EVIDENCE"
+          {
+            echo "operation: $OPERATION"
+            echo "migration: $MIGRATION"
+            echo "migrationSha256: $MIGRATION_SHA256"
+            echo "commit: $GITHUB_SHA"
+            echo "targetFingerprint: sha256:$(printf '%s' "$SUPABASE_PROJECT_REF" | sha256sum | cut -d' ' -f1)"
+          } > "$EVIDENCE/request.txt"
+
+      - name: Upload sanitized evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: substantial-scale-replay-migration-${{ github.run_id }}
+          path: ${{ env.EVIDENCE }}
+          if-no-files-found: warn
+          retention-days: 90
