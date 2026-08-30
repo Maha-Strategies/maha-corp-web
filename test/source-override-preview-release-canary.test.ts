@@ -49,6 +49,7 @@ test('twenty scoped review inputs parse and bind the exact revisions', () => {
       const parsed = parseEpistemicExpertReview(input)
       assert.equal(parsed.targetSha256, epistemicReviewTargetHash(record))
       assert.equal(parsed.reviewer.reviewerKind, 'internal-editorial')
+      assert.ok(parsed.reviewer.reviewMethod)
       assert.match(parsed.reviewer.reviewMethod, /exact-revision/i)
     }
   }

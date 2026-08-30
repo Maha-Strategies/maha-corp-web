@@ -6,6 +6,7 @@ import { REPAIRED_REVISION_CANARY_RECORDS } from './repaired-revision-canary-tar
 import { SUBSTANTIAL_PUBLICATION_RECORD_IDS } from './substantial-page-publication.ts'
 import { SUBSTANTIAL_BATCH_2_RECORD_IDS } from './substantial-page-publication-batch-2.ts'
 import { SUBSTANTIAL_BATCH_3_RELEASES } from './substantial-page-publication-batch-3.ts'
+import type { EpistemicRecord } from './epistemic-schema.ts'
 
 export const SUBSTANTIAL_PUBLICATION_QUEUE_VERSION = 'maha-substantial-publication-queue/1.0' as const
 export const FROZEN_RELEASE_REGISTRY_SOURCE = 'https://www.mahastrategies.com/knowledge/epistemic-system/releases/registry.json' as const
