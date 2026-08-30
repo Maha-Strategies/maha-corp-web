@@ -9,8 +9,21 @@ export interface FormalProofAuthorityNode {
   signatureAlgorithm: string
   canonicalization: string
   keyId: string
+  /** The authority namespace the key belongs to. Epochs are counted within it. */
+  authorityId: string
   authorityEpoch: number
   signatureAuthentic: boolean
+  /** Whether that key was permitted to sign this payload. */
+  signingAuthorityValid: boolean
+  /**
+   * What the key is permitted to authorize.
+   *
+   * Rendered because it is the load-bearing restriction: the fixture seed is
+   * published, so this list is the only thing preventing a genuine signature
+   * from authorizing an unrelated dossier. A reader who cannot see it cannot
+   * tell what the signature is worth.
+   */
+  permittedDossierIds: readonly string[]
   bindingManifestSha256: string
   bindingManifestRevision: number
   syntheticTestKey: boolean
@@ -175,12 +188,15 @@ export function renderDossierJsonLd(dossier: EvidenceDossier, attachments: reado
           signatureAlgorithm: authority.signatureAlgorithm,
           canonicalization: authority.canonicalization,
           keyId: authority.keyId,
+          authorityId: authority.authorityId,
           authorityEpoch: authority.authorityEpoch,
           signatureAuthentic: authority.signatureAuthentic,
+          signingAuthorityValid: authority.signingAuthorityValid,
+          permittedDossierIds: authority.permittedDossierIds,
           bindingManifestSha256: authority.bindingManifestSha256,
           bindingManifestRevision: authority.bindingManifestRevision,
           syntheticTestKey: authority.syntheticTestKey,
-          note: 'A valid signature establishes that a holder of the named key attested to this set of authorized bindings. It does not establish that any theorem holds, that any claim is true, or that any model describes reality.',
+          note: 'A valid signature establishes that a holder of the named key attested to this set of authorized bindings, and that the key was permitted to do so for this dossier. It does not establish that any theorem holds, that any claim is true, or that any model describes reality.',
         }
       : {
           '@type': 'FormalProofAuthority',

@@ -11,7 +11,7 @@ import { normalizeSourceText } from '../packages/maha-lean-bridge/src/canonicali
 import { compileFromBinding } from '../packages/maha-lean-bridge/src/compiler.ts'
 import { resolveActualLeanVersion, verifyAttachments } from '../packages/maha-lean-bridge/src/verifier.ts'
 import { checkTrustRootSignature, loadSignedTrustRoot } from '../lib/evidence-dossier/formal-proof-trust-roots.ts'
-import { resolveSigningKey } from '../lib/evidence-dossier/formal-proof-signing-keys.ts'
+import { isSyntheticKey, resolveSigningKey } from '../lib/evidence-dossier/formal-proof-signing-keys.ts'
 import type { BindingManifest } from '../packages/maha-lean-bridge/src/bindings.ts'
 import type { ProofManifest } from '../packages/maha-lean-bridge/src/schema.ts'
 import { executeAndAttachCalculationToDossier } from '../packages/wasm-kernel/dist/dossier.js'
@@ -60,16 +60,23 @@ if (!signature.authentic) {
   console.error(`Trust-root signature is not authentic: ${signature.failures.join(', ')}`)
   process.exit(1)
 }
+if (!signature.authorityValid) {
+  console.error(`Signing key is not authorized for this payload: ${signature.authorityFailures.join(', ')}`)
+  process.exit(1)
+}
 const signingKey = resolveSigningKey(signedTrustRoot.signature.keyId)
 const authority = {
   signatureAlgorithm: signedTrustRoot.signature.algorithm,
   canonicalization: signedTrustRoot.signature.canonicalization,
   keyId: signedTrustRoot.signature.keyId,
+  authorityId: signedTrustRoot.payload.authorityId,
   authorityEpoch: signedTrustRoot.payload.authorityEpoch,
   signatureAuthentic: true,
+  signingAuthorityValid: true,
+  permittedDossierIds: signingKey.scope.permittedDossierIds,
   bindingManifestSha256: signedTrustRoot.payload.bindingManifestSha256,
   bindingManifestRevision: signedTrustRoot.payload.bindingManifestRevision,
-  syntheticTestKey: signingKey.syntheticTestKey,
+  syntheticTestKey: isSyntheticKey(signingKey),
 }
 
 const leanVersion = resolveActualLeanVersion(BRIDGE)
@@ -193,8 +200,10 @@ console.log(
       signatureAlgorithm: signedTrustRoot.signature.algorithm,
       signatureKeyId: signedTrustRoot.signature.keyId,
       signatureAuthentic: true,
+      signingAuthorityValid: true,
+      authorityId: signedTrustRoot.payload.authorityId,
       authorityEpoch: signedTrustRoot.payload.authorityEpoch,
-      syntheticTestKey: signingKey.syntheticTestKey,
+      syntheticTestKey: isSyntheticKey(signingKey),
       formalProofs: first.manifest.formalProofCount,
       calculations: 1,
       runtimeWitnesses: first.manifest.runtimeWitnessCount,

@@ -36,6 +36,14 @@ export const SIGNATURE_CANONICALIZATION = 'maha-dossier-canonical/1.0' as const
 
 /** The authorized facts. Everything a verifier compares a package against. */
 export interface TrustRootPayload {
+  /**
+   * The authority namespace this root claims to come from.
+   *
+   * Inside the signed payload so it cannot be substituted: an attacker cannot
+   * take a genuine envelope and re-attribute it to a different authority
+   * without invalidating the signature.
+   */
+  authorityId: string
   dossierId: string
   bindingManifestSha256: string
   bindingManifestRevision: number

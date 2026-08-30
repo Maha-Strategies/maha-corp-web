@@ -21,25 +21,69 @@
 
 export const SIGNING_KEY_REGISTRY_VERSION = 'maha-formal-proof-key-registry/0.1' as const
 
+/**
+ * What a key is permitted to authorize.
+ *
+ * Without this, a key's restriction lives only in prose. The synthetic fixture
+ * seed is published, so anyone can produce a genuine signature over any payload;
+ * the only thing that can stop that signature authorizing an unrelated dossier
+ * is an enforced scope.
+ *
+ * There is deliberately no wildcard. A key that could authorize any dossier is
+ * indistinguishable from an unscoped one, and "permit everything" is exactly the
+ * state this exists to make unrepresentable.
+ */
+export interface AuthorityScope {
+  /**
+   * Whether this key may stand behind real work.
+   *
+   * `synthetic-fixture` keys have published private seeds and authorize only
+   * internal fixture material. No `production` key exists yet.
+   */
+  usage: 'synthetic-fixture' | 'production'
+  /** Exact dossier ids. Never a pattern, never empty. */
+  permittedDossierIds: readonly string[]
+  /** Which validity forms this key may sign. */
+  allowedValidityKinds: readonly ('window' | 'non-expiring-test-fixture')[]
+}
+
 export interface SigningKeyEntry {
   keyId: string
+  /**
+   * The authority namespace this key belongs to.
+   *
+   * Epochs are counted within a namespace. Without that, introducing a key for
+   * an unrelated authority at a higher epoch would silently supersede a valid
+   * key belonging to someone else.
+   */
+  authorityId: string
   /** Raw 32-byte Ed25519 public key, base64. */
   publicKey: string
   status: 'active' | 'revoked'
   /**
-   * The authority generation this key signs for.
+   * The generation this key signs for, within its authority.
    *
    * An envelope must carry the epoch of the key that signed it. Rotation
-   * introduces a new key at a higher epoch and revokes the old one, so a
-   * replayed envelope from before the rotation is stale rather than merely
-   * old-but-valid.
+   * introduces a new key at a higher epoch in the same authority and revokes
+   * the old one, so a replayed envelope from before the rotation is stale
+   * rather than merely old-but-valid.
    */
   epoch: number
+  scope: AuthorityScope
   /** Why the key exists, and for a revoked key, why it was withdrawn. */
   note: string
-  /** True only for keys that authorize nothing outside internal fixtures. */
-  syntheticTestKey: boolean
 }
+
+/** Derived, not stored: a key is synthetic exactly when its scope says so. */
+export function isSyntheticKey(entry: SigningKeyEntry): boolean {
+  return entry.scope.usage === 'synthetic-fixture'
+}
+
+/** The dossier the synthetic fixture key is permitted to authorize. */
+export const SYNTHETIC_FIXTURE_DOSSIER_ID = 'dos_internal_interval_tolerance_fixture' as const
+
+/** The authority namespace the synthetic fixture keys belong to. */
+export const SYNTHETIC_FIXTURE_AUTHORITY_ID = 'maha/internal-fixtures' as const
 
 /**
  * The seed of the synthetic fixture key.
@@ -85,24 +129,44 @@ export const PRODUCTION_SIGNING_BOUNDARY =
 export const SIGNING_KEY_REGISTRY: readonly SigningKeyEntry[] = [
   {
     keyId: SYNTHETIC_TEST_KEY_ID,
-    // Filled from the seed above by scripts/generate-formal-proof-trust-root.ts.
+    authorityId: SYNTHETIC_FIXTURE_AUTHORITY_ID,
     publicKey: 'Vpmpzvhw4v8MAitnaJzHb+BekJFcXwFD+TVspy9K/5k=',
     status: 'active',
     epoch: 2,
+    scope: {
+      usage: 'synthetic-fixture',
+      // Exactly one dossier. The seed is published, so anyone can sign any
+      // payload with this key; this list is what stops such a signature
+      // authorizing anything.
+      permittedDossierIds: [SYNTHETIC_FIXTURE_DOSSIER_ID],
+      allowedValidityKinds: ['non-expiring-test-fixture'],
+    },
     note: 'Synthetic fixture key. Its private seed is a published constant; it authorizes only the internal interval-tolerance fixture.',
-    syntheticTestKey: true,
   },
   {
     keyId: SYNTHETIC_REVOKED_KEY_ID,
+    authorityId: SYNTHETIC_FIXTURE_AUTHORITY_ID,
     publicKey: 'l9Yr12PsuciKKLI/yJqS3Q3gYyl3eUTiUGZtk4iLcJY=',
     status: 'revoked',
     epoch: 1,
+    scope: {
+      usage: 'synthetic-fixture',
+      permittedDossierIds: [SYNTHETIC_FIXTURE_DOSSIER_ID],
+      allowedValidityKinds: ['non-expiring-test-fixture'],
+    },
     note: 'Superseded by v1 at epoch 2. Retained so revocation and epoch staleness are exercised by tests rather than assumed.',
-    syntheticTestKey: true,
   },
 ]
 
-export type SigningKeyErrorCode = 'key-unknown' | 'key-ambiguous' | 'key-revoked' | 'key-epoch-stale' | 'key-malformed'
+export type SigningKeyErrorCode =
+  | 'key-unknown'
+  | 'key-ambiguous'
+  | 'key-revoked'
+  | 'key-epoch-stale'
+  | 'key-malformed'
+  | 'scope-missing'
+  | 'scope-malformed'
+  | 'scope-wildcard'
 
 export class SigningKeyError extends Error {
   // Assigned explicitly rather than as a parameter property: Node's strip-only
@@ -116,11 +180,60 @@ export class SigningKeyError extends Error {
   }
 }
 
-/** The highest active epoch in the registry. Envelopes below it are stale. */
-export function currentAuthorityEpoch(registry: readonly SigningKeyEntry[] = SIGNING_KEY_REGISTRY): number {
-  const active = registry.filter((entry) => entry.status === 'active')
-  if (active.length === 0) throw new SigningKeyError('The registry contains no active key.', 'key-unknown')
+/**
+ * The highest active epoch *within one authority*.
+ *
+ * Scoping this matters: counting across the whole registry would let a new key
+ * belonging to an unrelated authority silently supersede someone else's valid
+ * key simply by being numbered higher.
+ */
+export function currentAuthorityEpoch(
+  authorityId: string,
+  registry: readonly SigningKeyEntry[] = SIGNING_KEY_REGISTRY,
+): number {
+  const active = registry.filter((entry) => entry.status === 'active' && entry.authorityId === authorityId)
+  if (active.length === 0) throw new SigningKeyError(`No active key for authority ${authorityId}.`, 'key-unknown')
   return Math.max(...active.map((entry) => entry.epoch))
+}
+
+const WILDCARDS = ['*', '**', 'any', 'ALL', '.*']
+
+/** Rejects a scope that permits everything, nothing, or something unreadable. */
+export function assertValidScope(entry: SigningKeyEntry): void {
+  const scope = entry.scope
+  if (!scope) throw new SigningKeyError(`Key ${entry.keyId} carries no authority scope.`, 'scope-missing')
+  if (!['synthetic-fixture', 'production'].includes(scope.usage)) {
+    throw new SigningKeyError(`Key ${entry.keyId} has an unknown usage.`, 'scope-malformed')
+  }
+  if (!Array.isArray(scope.permittedDossierIds) || scope.permittedDossierIds.length === 0) {
+    throw new SigningKeyError(`Key ${entry.keyId} permits no dossier.`, 'scope-malformed')
+  }
+  if (new Set(scope.permittedDossierIds).size !== scope.permittedDossierIds.length) {
+    throw new SigningKeyError(`Key ${entry.keyId} lists a dossier twice.`, 'scope-malformed')
+  }
+  for (const id of scope.permittedDossierIds) {
+    if (typeof id !== 'string' || !id.trim()) {
+      throw new SigningKeyError(`Key ${entry.keyId} lists an empty dossier id.`, 'scope-malformed')
+    }
+    if (WILDCARDS.includes(id) || id.includes('*')) {
+      throw new SigningKeyError(`Key ${entry.keyId} uses a wildcard dossier scope.`, 'scope-wildcard')
+    }
+  }
+  if (!Array.isArray(scope.allowedValidityKinds) || scope.allowedValidityKinds.length === 0) {
+    throw new SigningKeyError(`Key ${entry.keyId} permits no validity kind.`, 'scope-malformed')
+  }
+  for (const kind of scope.allowedValidityKinds) {
+    if (!['window', 'non-expiring-test-fixture'].includes(kind)) {
+      throw new SigningKeyError(`Key ${entry.keyId} permits an unknown validity kind.`, 'scope-malformed')
+    }
+  }
+  // A synthetic key must never be usable where production standing is implied.
+  if (scope.usage === 'synthetic-fixture' && !entry.keyId.includes('DO-NOT-USE-IN-PRODUCTION')) {
+    throw new SigningKeyError(`Synthetic key ${entry.keyId} must be named as such.`, 'scope-malformed')
+  }
+  if (!entry.authorityId?.trim()) {
+    throw new SigningKeyError(`Key ${entry.keyId} names no authority.`, 'scope-malformed')
+  }
 }
 
 /**
@@ -141,8 +254,13 @@ export function resolveSigningKey(
   if (!/^[A-Za-z0-9+/]{42,44}={0,2}$/.test(entry.publicKey)) {
     throw new SigningKeyError(`Key ${keyId} has a malformed public key.`, 'key-malformed')
   }
-  if (entry.epoch < currentAuthorityEpoch(registry)) {
-    throw new SigningKeyError(`Key ${keyId} signs for a superseded epoch.`, 'key-epoch-stale')
-  }
+  // Scope is validated on resolution, so an unscoped or wildcard key can never
+  // be handed back for use.
+  assertValidScope(entry)
   return entry
+}
+
+/** Whether a resolved key is superseded within its own authority. */
+export function isEpochStale(entry: SigningKeyEntry, registry: readonly SigningKeyEntry[] = SIGNING_KEY_REGISTRY): boolean {
+  return entry.epoch < currentAuthorityEpoch(entry.authorityId, registry)
 }

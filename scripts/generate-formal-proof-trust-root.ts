@@ -2,6 +2,8 @@ import { readFileSync, writeFileSync } from 'node:fs'
 import { join, resolve } from 'node:path'
 
 import {
+  SIGNING_KEY_REGISTRY,
+  SYNTHETIC_FIXTURE_AUTHORITY_ID,
   SYNTHETIC_TEST_KEY_ID,
   SYNTHETIC_TEST_KEY_SEED_HEX,
 } from '../lib/evidence-dossier/formal-proof-signing-keys.ts'
@@ -26,7 +28,13 @@ const proofManifest = JSON.parse(readFileSync(join(BRIDGE, 'fixtures/formal-proo
 const bindingManifest = JSON.parse(readFileSync(join(BRIDGE, 'fixtures/formal-claim-bindings.json'), 'utf8')) as BindingManifest
 const toolchain = readFileSync(join(BRIDGE, 'lean-toolchain'), 'utf8').trim()
 
+const signingKey = SIGNING_KEY_REGISTRY.find((entry) => entry.keyId === SYNTHETIC_TEST_KEY_ID)!
+if (!signingKey.scope.permittedDossierIds.includes(FORMAL_PROOF_FIXTURE_DOSSIER.dossierId)) {
+  throw new Error('The signing key is not permitted to authorize this dossier.')
+}
+
 const payload: TrustRootPayload = {
+  authorityId: SYNTHETIC_FIXTURE_AUTHORITY_ID,
   dossierId: FORMAL_PROOF_FIXTURE_DOSSIER.dossierId,
   bindingManifestSha256: bindingManifestDigest(bindingManifest),
   bindingManifestRevision: bindingManifest.revision,
@@ -35,7 +43,7 @@ const payload: TrustRootPayload = {
   authorizedTheorems: ['Maha.Interval.add_mem', 'Maha.Interval.add_valid'],
   authorizedCalculationOperationIds: ['interval-add'],
   toolchain,
-  authorityEpoch: 2,
+  authorityEpoch: signingKey.epoch,
   validity: {
     kind: 'non-expiring-test-fixture',
     reason: 'Authorizes only the internal interval-tolerance fixture, signed by a key whose seed is a published constant. A production root carries a bounded window instead.',

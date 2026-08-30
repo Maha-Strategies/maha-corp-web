@@ -8,8 +8,8 @@ import { FORMAL_PROOF_FIXTURE_CLAIM_ID, FORMAL_PROOF_FIXTURE_DOSSIER } from '../
 import { compileIntegratedPackage, renderDossierJsonLd, verifyIntegratedCalculationEvidence, verifyIntegratedCalculationEvidenceForTesting, verifyIntegratedPackageFullyForTesting } from '../packages/evidence-dossier-builder/src/index.ts'
 import { expectedLeanSources, REQUIRED_PROJECT_FILES, verifyPackagedFormalProofs } from '../packages/evidence-dossier-builder/src/formal-proof-verification.ts'
 import { assertValidTrustRoot, resolveTrustRoot } from '../lib/evidence-dossier/formal-proof-trust-roots.ts'
-import { PRODUCTION_SIGNING_BOUNDARY, SIGNING_KEY_REGISTRY, SYNTHETIC_REVOKED_KEY_ID, SYNTHETIC_REVOKED_KEY_SEED_HEX } from '../lib/evidence-dossier/formal-proof-signing-keys.ts'
-import { signTrustRoot } from '../lib/evidence-dossier/formal-proof-signing.ts'
+import { PRODUCTION_SIGNING_BOUNDARY, SIGNING_KEY_REGISTRY, SYNTHETIC_REVOKED_KEY_ID, SYNTHETIC_REVOKED_KEY_SEED_HEX, SYNTHETIC_TEST_KEY_SEED_HEX, isSyntheticKey } from '../lib/evidence-dossier/formal-proof-signing-keys.ts'
+import { rawPublicKeyBase64, signTrustRoot } from '../lib/evidence-dossier/formal-proof-signing.ts'
 import { loadSignedTrustRoot } from '../lib/evidence-dossier/formal-proof-trust-roots.ts'
 import type { FormalProofAuthorityNode } from '../packages/evidence-dossier-builder/src/jsonld.ts'
 import { bindingManifestDigest } from '../packages/maha-lean-bridge/src/bindings.ts'
@@ -139,11 +139,14 @@ const AUTHORITY: FormalProofAuthorityNode = {
   signatureAlgorithm: SIGNED_ROOT.signature.algorithm,
   canonicalization: SIGNED_ROOT.signature.canonicalization,
   keyId: SIGNED_ROOT.signature.keyId,
+  authorityId: SIGNED_ROOT.payload.authorityId,
   authorityEpoch: SIGNED_ROOT.payload.authorityEpoch,
   signatureAuthentic: true,
+  signingAuthorityValid: true,
+  permittedDossierIds: SIGNING_KEY.scope.permittedDossierIds,
   bindingManifestSha256: SIGNED_ROOT.payload.bindingManifestSha256,
   bindingManifestRevision: SIGNED_ROOT.payload.bindingManifestRevision,
-  syntheticTestKey: SIGNING_KEY.syntheticTestKey,
+  syntheticTestKey: isSyntheticKey(SIGNING_KEY),
 }
 
 const evidence = () => ({
@@ -659,9 +662,10 @@ test('integrity, recheck, authority and signature are reported separately', asyn
       lean: clean.leanRecheckExecuted,
       authority: clean.bindingAuthorityValid,
       signature: clean.signatureAuthentic,
+      signingAuthority: clean.signingAuthorityValid,
       full: clean.fullyVerified,
     },
-    { integrity: true, lean: true, authority: true, signature: true, full: true },
+    { integrity: true, lean: true, authority: true, signature: true, signingAuthority: true, full: true },
   )
 
   // A package can be internally perfect and still unauthorized. That is the
@@ -921,7 +925,7 @@ test('the production signing boundary is documented, not implied', () => {
   // The only key in the registry is synthetic and its seed is published, so the
   // gap between this and production signing must be stated rather than left for
   // a reader to infer.
-  assert.equal(SIGNING_KEY_REGISTRY.every((key) => key.syntheticTestKey), true)
+  assert.equal(SIGNING_KEY_REGISTRY.every(isSyntheticKey), true)
   assert.match(PRODUCTION_SIGNING_BOUNDARY, /No production signing key exists/)
   const source = readFileSync(resolve(import.meta.dirname, '../lib/evidence-dossier/formal-proof-signing-keys.ts'), 'utf8')
   assert.match(source, /HSM or KMS/)
@@ -1023,4 +1027,80 @@ test('the JSON-LD states what a signature does and does not establish', async ()
   for (const forbidden of ['certified', 'scientifically proven', 'empirically validated']) {
     assert.equal(new RegExp(forbidden, 'i').test(JSON.stringify(authority)), false, forbidden)
   }
+})
+
+// -------------------------- adversarial: signing authority at package level
+
+test('a package authorized by an out-of-scope key is refused', async () => {
+  // The published seed signs a genuine envelope for a dossier the key may not
+  // authorize. Authenticity holds; signing authority does not; fullyVerified
+  // is false.
+  const honest = await build()
+  const outOfScope = signTrustRoot(
+    { ...SIGNED_ROOT.payload, dossierId: 'dos_attacker_controlled_dossier' },
+    Buffer.from(SYNTHETIC_TEST_KEY_SEED_HEX, 'hex'),
+    SIGNED_ROOT.signature.keyId,
+  )
+  const hostile = repackage(honest, { 'formal-proof-trust-root.json': `${leanCanonicalJson(outOfScope)}\n` })
+  const result = await verifySigned(hostile)
+  assert.equal(result.signingAuthorityValid, false)
+  assert.equal(result.fullyVerified, false)
+  assert.ok(
+    result.findings.some((f) => f.includes('signing-authority-dossier-not-permitted') || f.includes('signature-dossier-mismatch')),
+    result.findings.join(','),
+  )
+})
+
+test('a package citing another authority is refused', async () => {
+  const honest = await build()
+  const reattributed = signTrustRoot(
+    { ...SIGNED_ROOT.payload, authorityId: 'maha/production' },
+    Buffer.from(SYNTHETIC_TEST_KEY_SEED_HEX, 'hex'),
+    SIGNED_ROOT.signature.keyId,
+  )
+  const hostile = repackage(honest, { 'formal-proof-trust-root.json': `${leanCanonicalJson(reattributed)}\n` })
+  const result = await verifySigned(hostile)
+  assert.equal(result.signingAuthorityValid, false)
+  assert.equal(result.fullyVerified, false)
+})
+
+test('an unscoped registry key cannot authorize a package', async () => {
+  const honest = await build()
+  const unscoped = SIGNING_KEY_REGISTRY.map((k) =>
+    k.keyId === SIGNED_ROOT.signature.keyId ? { ...k, scope: { ...k.scope, permittedDossierIds: ['*'] } } : k,
+  )
+  const result = await verifySigned(honest, { signingKeyRegistry: unscoped })
+  assert.equal(result.signingAuthorityValid, false)
+  assert.equal(result.fullyVerified, false)
+  assert.ok(result.findings.some((f) => f.includes('wildcard-scope')), result.findings.join(','))
+})
+
+test('JSON-LD and PDF cannot turn authenticity into authorization', async () => {
+  const bundle = await build()
+  const jsonld = JSON.parse(fileText(bundle, 'dossier.jsonld')) as Record<string, Record<string, unknown>>
+  const authority = jsonld.formalProofAuthority
+  // The rendered note must state the limit of what a signature establishes.
+  assert.match(String(authority.note), /does not establish that any theorem holds/)
+  assert.match(String(authority.note), /attested to this set of authorized bindings/)
+  // No rendered field may assert authorization on the strength of authenticity.
+  for (const forbidden of ['authorizes any dossier', 'proves', 'validates', 'certifies']) {
+    assert.equal(new RegExp(forbidden, 'i').test(JSON.stringify(authority)), false, forbidden)
+  }
+  // A package that claims authenticity it lacks fails the rerender comparison.
+  const forged = { ...authority, signatureAuthentic: true, keyId: 'attacker/v1' }
+  const hostile = repackage(bundle, { 'dossier.jsonld': `${leanCanonicalJson({ ...jsonld, formalProofAuthority: forged })}\n` })
+  const result = await verifySigned(hostile)
+  assert.equal(result.fullyVerified, false)
+  assert.ok(result.findings.includes('integrated-jsonld-rerender-mismatch'), result.findings.join(','))
+})
+
+test('a package-supplied key is still ignored under scope enforcement', async () => {
+  const honest = await build()
+  const attackerSeed = Buffer.alloc(32, 0x42)
+  const forged = signTrustRoot(SIGNED_ROOT.payload, attackerSeed, SIGNED_ROOT.signature.keyId)
+  const withKey = { ...forged, publicKey: rawPublicKeyBase64(attackerSeed) }
+  const hostile = repackage(honest, { 'formal-proof-trust-root.json': `${leanCanonicalJson(withKey)}\n` })
+  const result = await verifySigned(hostile)
+  assert.equal(result.signatureAuthentic, false)
+  assert.ok(result.findings.some((f) => f.includes('signature-invalid')), result.findings.join(','))
 })

@@ -14,6 +14,7 @@ import { verifyComputationalWitnessReceipt, type DossierRuntimeWitnessAttachment
 import type { BindingManifest } from '../../maha-lean-bridge/src/bindings.ts'
 import { checkTrustRootSignature } from '../../../lib/evidence-dossier/formal-proof-trust-roots.ts'
 import { resolveSigningKey } from '../../../lib/evidence-dossier/formal-proof-signing-keys.ts'
+
 import type { SignedTrustRootEnvelope } from '../../../lib/evidence-dossier/formal-proof-signing.ts'
 import type { FormalProofAttachment, ProofManifest } from '../../maha-lean-bridge/src/schema.ts'
 import { verifyPackagedFormalProofs, type LeanRunners } from './formal-proof-verification.ts'
@@ -230,17 +231,39 @@ export interface IntegratedVerificationResult {
   leanRecheckExecuted: boolean
   bindingAuthorityValid: boolean
   /**
-   * Whether a registered, unrevoked, current key signed the authorization.
+   * Whether a registered, unrevoked key produced this signature.
    *
-   * Separate from authority on purpose: a signature can be perfectly valid over
-   * the wrong bindings, and bindings can be right while unsigned. Neither
-   * implies the other, and neither implies the claim is true.
+   * Cryptographic genuineness only. A signature can be perfectly genuine and
+   * still unauthorized, which is why the next verdict exists.
    */
   signatureAuthentic: boolean
-  /** True only when all four hold. */
+  /**
+   * Whether that key was permitted to sign this payload.
+   *
+   * The synthetic fixture seed is published, so anyone can produce a genuine
+   * signature over any dossier. Scope is what stops such a signature
+   * authorizing anything, and it is a different question from whether the
+   * bytes verify.
+   */
+  signingAuthorityValid: boolean
+  /** True only when all five hold. */
   fullyVerified: boolean
   findings: string[]
 }
+
+const SIGNING_AUTHORITY_CODES = [
+  'integrated-formal-proof-signing-authority-scope-missing',
+  'integrated-formal-proof-signing-authority-scope-malformed',
+  'integrated-formal-proof-signing-authority-wildcard-scope',
+  'integrated-formal-proof-signing-authority-mismatch',
+  'integrated-formal-proof-signing-authority-dossier-not-permitted',
+  'integrated-formal-proof-signing-authority-validity-kind-not-permitted',
+  'integrated-formal-proof-signing-authority-epoch-stale',
+  'integrated-formal-proof-signing-authority-key-epoch-superseded',
+  'integrated-formal-proof-signing-authority-production-standing-claimed',
+  'integrated-formal-proof-signing-authority-expired',
+  'integrated-formal-proof-signing-authority-not-yet-valid',
+] as const
 
 const SIGNATURE_CODES = [
   'integrated-formal-proof-signature-envelope-missing',
@@ -298,29 +321,40 @@ export async function verifyIntegratedPackageFullyForTesting(
 
 function classifyFindings(bundle: IntegratedDossierPackage, findings: string[]): IntegratedVerificationResult {
   const hasFormalProofs = Number(bundle.manifest.formalProofCount ?? 0) > 0
+  const isSigningAuthority = (finding: string) => SIGNING_AUTHORITY_CODES.some((code) => finding.startsWith(code))
   const isSignature = (finding: string) => SIGNATURE_CODES.some((code) => finding.startsWith(code))
   const isAuthority = (finding: string) => AUTHORITY_CODES.some((code) => finding.startsWith(code))
   const isRecheck = (finding: string) => finding.startsWith('integrated-formal-proof-recheck-')
 
+  const signingAuthorityFailed = findings.some(isSigningAuthority)
   const signatureFailed = findings.some(isSignature)
   const authorityFailed = findings.some(isAuthority)
   const recheckFailed = findings.some(isRecheck)
-  const integrityFailed = findings.some((finding) => !isSignature(finding) && !isAuthority(finding) && !isRecheck(finding))
+  const integrityFailed = findings.some(
+    (finding) => !isSigningAuthority(finding) && !isSignature(finding) && !isAuthority(finding) && !isRecheck(finding),
+  )
 
   const signatureAuthentic = hasFormalProofs ? !signatureFailed : true
-  // The signature is checked first, so a package that failed it never had its
-  // authorization compared and must not be reported as though it had.
-  const bindingAuthorityValid = hasFormalProofs ? !authorityFailed && !signatureFailed : true
-  // Likewise the recheck runs only after authorization passes.
-  const leanRecheckExecuted = hasFormalProofs ? !recheckFailed && !authorityFailed && !signatureFailed : true
+  const signingAuthorityValid = hasFormalProofs ? !signingAuthorityFailed && !signatureFailed : true
+  const blocked = signatureFailed || signingAuthorityFailed
+  // Each later stage runs only after the earlier ones pass, so a stage that
+  // never ran must not be reported as though it had succeeded.
+  const bindingAuthorityValid = hasFormalProofs ? !authorityFailed && !blocked : true
+  const leanRecheckExecuted = hasFormalProofs ? !recheckFailed && !authorityFailed && !blocked : true
   const packageIntegrityValid = !integrityFailed
   return {
     packageIntegrityValid,
     leanRecheckExecuted,
     bindingAuthorityValid,
     signatureAuthentic,
+    signingAuthorityValid,
     fullyVerified:
-      packageIntegrityValid && leanRecheckExecuted && bindingAuthorityValid && signatureAuthentic && findings.length === 0,
+      packageIntegrityValid &&
+      leanRecheckExecuted &&
+      bindingAuthorityValid &&
+      signatureAuthentic &&
+      signingAuthorityValid &&
+      findings.length === 0,
     findings,
   }
 }
@@ -430,17 +464,23 @@ async function verifyIntegratedEvidenceInternal(bundle: IntegratedDossierPackage
       registry: runners.signingKeyRegistry,
       now: runners.now,
     })
-    if (envelope && signature.authentic) {
-      let syntheticTestKey = true
+    if (envelope && signature.authentic && signature.authorityValid) {
+      const syntheticTestKey = signature.syntheticTestKey
+      // Read from the registry, never from the package: a package must not be
+      // able to describe its own key as more broadly scoped than it is.
+      let permitted: readonly string[] = []
       try {
-        syntheticTestKey = resolveSigningKey(envelope.signature.keyId, runners.signingKeyRegistry).syntheticTestKey
-      } catch { syntheticTestKey = true }
+        permitted = resolveSigningKey(envelope.signature.keyId, runners.signingKeyRegistry).scope.permittedDossierIds
+      } catch { permitted = [] }
       authority = {
         signatureAlgorithm: envelope.signature.algorithm,
         canonicalization: envelope.signature.canonicalization,
         keyId: envelope.signature.keyId,
+        authorityId: envelope.payload.authorityId,
         authorityEpoch: envelope.payload.authorityEpoch,
         signatureAuthentic: true,
+        signingAuthorityValid: true,
+        permittedDossierIds: permitted,
         bindingManifestSha256: envelope.payload.bindingManifestSha256,
         bindingManifestRevision: envelope.payload.bindingManifestRevision,
         syntheticTestKey,

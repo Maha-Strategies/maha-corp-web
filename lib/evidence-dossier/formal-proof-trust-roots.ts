@@ -2,7 +2,13 @@ import { createHash } from 'node:crypto'
 import { readFileSync } from 'node:fs'
 import { resolve } from 'node:path'
 
-import { resolveSigningKey, SigningKeyError, type SigningKeyEntry } from './formal-proof-signing-keys.ts'
+import {
+  isEpochStale,
+  isSyntheticKey,
+  resolveSigningKey,
+  SigningKeyError,
+  type SigningKeyEntry,
+} from './formal-proof-signing-keys.ts'
 import { verifyTrustRootSignature, type SignedTrustRootEnvelope } from './formal-proof-signing.ts'
 
 /**
@@ -140,27 +146,66 @@ export type SignatureFailureCode =
   | 'signature-key-unknown'
   | 'signature-key-ambiguous'
   | 'signature-key-revoked'
-  | 'signature-key-epoch-stale'
   | 'signature-key-malformed'
-  | 'signature-epoch-stale'
   | 'signature-dossier-mismatch'
-  | 'signature-expired'
-  | 'signature-not-yet-valid'
+
+/**
+ * Failures of the key's standing rather than of the cryptography.
+ *
+ * These are separated because a genuine signature by a key that is not
+ * permitted to sign this payload is exactly the case that previously read as
+ * fully valid. The signature really is authentic; the authority is not.
+ */
+export type SigningAuthorityFailureCode =
+  | 'signing-authority-scope-missing'
+  | 'signing-authority-scope-malformed'
+  | 'signing-authority-wildcard-scope'
+  | 'signing-authority-mismatch'
+  | 'signing-authority-dossier-not-permitted'
+  | 'signing-authority-validity-kind-not-permitted'
+  | 'signing-authority-epoch-stale'
+  | 'signing-authority-key-epoch-superseded'
+  | 'signing-authority-production-standing-claimed'
+  | 'signing-authority-expired'
+  | 'signing-authority-not-yet-valid'
 
 export interface SignatureCheck {
+  /** The cryptographic signature is genuine and the key resolves. */
   authentic: boolean
+  /** The resolved key is permitted to sign this payload. */
+  authorityValid: boolean
   failures: SignatureFailureCode[]
+  authorityFailures: SigningAuthorityFailureCode[]
   keyId: string | null
+  authorityId: string | null
   epoch: number | null
+  syntheticTestKey: boolean
 }
 
 const SIGNING_KEY_CODES: Record<string, SignatureFailureCode> = {
   'key-unknown': 'signature-key-unknown',
   'key-ambiguous': 'signature-key-ambiguous',
   'key-revoked': 'signature-key-revoked',
-  'key-epoch-stale': 'signature-key-epoch-stale',
   'key-malformed': 'signature-key-malformed',
 }
+
+const SCOPE_CODES: Record<string, SigningAuthorityFailureCode> = {
+  'scope-missing': 'signing-authority-scope-missing',
+  'scope-malformed': 'signing-authority-scope-malformed',
+  'scope-wildcard': 'signing-authority-wildcard-scope',
+  'key-epoch-stale': 'signing-authority-key-epoch-superseded',
+}
+
+const REFUSED = (failures: SignatureFailureCode[], keyId: string | null): SignatureCheck => ({
+  authentic: false,
+  authorityValid: false,
+  failures,
+  authorityFailures: [],
+  keyId,
+  authorityId: null,
+  epoch: null,
+  syntheticTestKey: true,
+})
 
 /**
  * Checks an envelope's signature against the registry.
@@ -174,16 +219,16 @@ export function checkTrustRootSignature(
   dossierId: string,
   options: { registry?: readonly SigningKeyEntry[]; now?: Date } = {},
 ): SignatureCheck {
-  const failures: SignatureFailureCode[] = []
-  if (!envelope) return { authentic: false, failures: ['signature-envelope-missing'], keyId: null, epoch: null }
+  if (!envelope) return REFUSED(['signature-envelope-missing'], null)
   if (
     typeof envelope !== 'object' ||
     !envelope.payload ||
     !envelope.signature ||
     typeof envelope.signature.keyId !== 'string' ||
-    typeof envelope.signature.value !== 'string'
+    typeof envelope.signature.value !== 'string' ||
+    typeof envelope.payload.authorityId !== 'string'
   ) {
-    return { authentic: false, failures: ['signature-envelope-malformed'], keyId: null, epoch: null }
+    return REFUSED(['signature-envelope-malformed'], null)
   }
 
   const keyId = envelope.signature.keyId
@@ -191,33 +236,83 @@ export function checkTrustRootSignature(
   try {
     key = resolveSigningKey(keyId, options.registry)
   } catch (error) {
-    const code = error instanceof SigningKeyError ? SIGNING_KEY_CODES[error.code] : 'signature-key-unknown'
-    return { authentic: false, failures: [code ?? 'signature-key-unknown'], keyId, epoch: null }
+    if (error instanceof SigningKeyError) {
+      const signatureCode = SIGNING_KEY_CODES[error.code]
+      if (signatureCode) return REFUSED([signatureCode], keyId)
+      // A scope problem is a failure of standing, not of cryptography. The key
+      // exists and is unrevoked, so the signature can still be genuine; what it
+      // cannot be is authorized.
+      const scopeCode = SCOPE_CODES[error.code] ?? 'signing-authority-scope-malformed'
+      return {
+        authentic: false,
+        authorityValid: false,
+        failures: [],
+        authorityFailures: [scopeCode],
+        keyId,
+        authorityId: null,
+        epoch: null,
+        syntheticTestKey: true,
+      }
+    }
+    return REFUSED(['signature-key-unknown'], keyId)
   }
 
-  // The signature must be checked before anything the payload says is believed.
+  // Authenticity first, and nothing the payload says is believed before it.
+  const failures: SignatureFailureCode[] = []
   if (!verifyTrustRootSignature(envelope, key.publicKey)) {
-    return { authentic: false, failures: ['signature-invalid'], keyId, epoch: null }
+    return REFUSED(['signature-invalid'], keyId)
   }
-
-  // Only now is the payload trustworthy enough to compare.
   if (envelope.payload.dossierId !== dossierId) failures.push('signature-dossier-mismatch')
-  if (envelope.payload.authorityEpoch !== key.epoch) failures.push('signature-epoch-stale')
+
+  // Standing next. These are separate because a genuine signature by a key that
+  // may not sign this payload is precisely the case that used to read valid.
+  const authorityFailures: SigningAuthorityFailureCode[] = []
+  if (envelope.payload.authorityId !== key.authorityId) {
+    authorityFailures.push('signing-authority-mismatch')
+  }
+  if (!key.scope.permittedDossierIds.includes(envelope.payload.dossierId)) {
+    authorityFailures.push('signing-authority-dossier-not-permitted')
+  }
+  if (envelope.payload.authorityEpoch !== key.epoch) {
+    authorityFailures.push('signing-authority-epoch-stale')
+  }
+  if (isEpochStale(key, options.registry)) {
+    authorityFailures.push('signing-authority-key-epoch-superseded')
+  }
+  // A synthetic key must never stand behind anything outside its fixture set,
+  // even if the payload otherwise looks well formed.
+  if (isSyntheticKey(key) && !key.scope.permittedDossierIds.includes(envelope.payload.dossierId)) {
+    authorityFailures.push('signing-authority-production-standing-claimed')
+  }
 
   const validity = envelope.payload.validity
-  if (validity?.kind === 'window') {
-    const now = options.now ?? new Date()
-    if (Number.isNaN(Date.parse(validity.notBefore)) || Number.isNaN(Date.parse(validity.notAfter))) {
-      failures.push('signature-envelope-malformed')
-    } else {
-      if (now < new Date(validity.notBefore)) failures.push('signature-not-yet-valid')
-      if (now > new Date(validity.notAfter)) failures.push('signature-expired')
-    }
-  } else if (validity?.kind !== 'non-expiring-test-fixture') {
+  if (!validity || !['window', 'non-expiring-test-fixture'].includes(validity.kind)) {
     failures.push('signature-envelope-malformed')
+  } else {
+    if (!key.scope.allowedValidityKinds.includes(validity.kind)) {
+      authorityFailures.push('signing-authority-validity-kind-not-permitted')
+    }
+    if (validity.kind === 'window') {
+      const now = options.now ?? new Date()
+      if (Number.isNaN(Date.parse(validity.notBefore)) || Number.isNaN(Date.parse(validity.notAfter))) {
+        failures.push('signature-envelope-malformed')
+      } else {
+        if (now < new Date(validity.notBefore)) authorityFailures.push('signing-authority-not-yet-valid')
+        if (now > new Date(validity.notAfter)) authorityFailures.push('signing-authority-expired')
+      }
+    }
   }
 
-  return { authentic: failures.length === 0, failures, keyId, epoch: envelope.payload.authorityEpoch }
+  return {
+    authentic: failures.length === 0,
+    authorityValid: failures.length === 0 && authorityFailures.length === 0,
+    failures,
+    authorityFailures,
+    keyId,
+    authorityId: key.authorityId,
+    epoch: envelope.payload.authorityEpoch,
+    syntheticTestKey: isSyntheticKey(key),
+  }
 }
 
 /** The committed signed envelope for the internal fixture. */

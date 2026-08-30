@@ -237,8 +237,9 @@ export function verifyPackagedFormalProofs(input: PackagedFormalProofInput, runn
     registry: input.signingKeyRegistry,
     now: input.now,
   })
-  if (!signature.authentic) {
+  if (!signature.authentic || !signature.authorityValid) {
     for (const failure of signature.failures) findings.push(`integrated-formal-proof-${failure}`)
+    for (const failure of signature.authorityFailures) findings.push(`integrated-formal-proof-${failure}`)
     return [...new Set(findings)]
   }
 

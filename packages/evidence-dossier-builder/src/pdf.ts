@@ -130,13 +130,17 @@ export async function renderEvidenceDossierPdf(input: {
     line('No signed authorization accompanies this package.')
   } else {
     line(`Signature: ${authority.signatureAuthentic ? 'authentic' : 'NOT AUTHENTIC'} | ${authority.signatureAlgorithm} over ${authority.canonicalization}`, { font: bold, gap: 2 })
-    line(`Key: ${authority.keyId} | Authority epoch: ${authority.authorityEpoch}`, { size: 7.5, font: mono })
+    line(`Key: ${authority.keyId}`, { size: 7.5, font: mono })
+    line(`Authority: ${authority.authorityId} | Epoch: ${authority.authorityEpoch} | Scope valid: ${authority.signingAuthorityValid ? 'yes' : 'NO'}`, { size: 7.5, font: mono })
+    // The permitted scope is what makes the signature mean anything, so it is
+    // shown rather than left implicit.
+    line(`Permitted dossiers: ${authority.permittedDossierIds.join(', ')}`, { size: 7.5, font: mono })
     line(`Authorized bindings: ${authority.bindingManifestSha256} rev ${authority.bindingManifestRevision}`, { size: 7.5, font: mono })
     if (authority.syntheticTestKey) {
       line('This key is a synthetic fixture key. Its private seed is a published constant, so anyone can produce this signature. It authorizes only internal fixture material.', { gap: 2 })
     }
     // Stated at the point of the signature, where the misreading would occur.
-    line('A valid signature establishes that a holder of the named key attested to this set of authorized bindings.', { gap: 1 })
+    line('A valid signature establishes that a holder of the named key attested to this set of authorized bindings, and that the key was permitted to do so for this dossier.', { gap: 1 })
     line('It does not establish that any theorem holds, that any claim is true, or that any model describes reality.', { gap: 3 })
   }
   heading('Sources and inspected passages')

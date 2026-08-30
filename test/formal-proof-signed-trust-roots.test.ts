@@ -8,9 +8,13 @@ import {
   SIGNING_KEY_REGISTRY,
   SYNTHETIC_REVOKED_KEY_ID,
   SYNTHETIC_REVOKED_KEY_SEED_HEX,
+  SYNTHETIC_FIXTURE_AUTHORITY_ID,
+  SYNTHETIC_FIXTURE_DOSSIER_ID,
   SYNTHETIC_TEST_KEY_ID,
   SYNTHETIC_TEST_KEY_SEED_HEX,
+  assertValidScope,
   currentAuthorityEpoch,
+  isSyntheticKey,
   resolveSigningKey,
   type SigningKeyEntry,
 } from '../lib/evidence-dossier/formal-proof-signing-keys.ts'
@@ -38,6 +42,7 @@ const SEED = Buffer.from(SYNTHETIC_TEST_KEY_SEED_HEX, 'hex')
 const REVOKED_SEED = Buffer.from(SYNTHETIC_REVOKED_KEY_SEED_HEX, 'hex')
 
 const payload = (overrides: Partial<TrustRootPayload> = {}): TrustRootPayload => ({
+  authorityId: SYNTHETIC_FIXTURE_AUTHORITY_ID,
   dossierId: DOSSIER,
   bindingManifestSha256: bindingManifestDigest(BINDINGS),
   bindingManifestRevision: BINDINGS.revision,
@@ -187,17 +192,24 @@ test('a revoked key is refused even with a valid signature', () => {
 test('a stale authority epoch is refused', () => {
   // The key is active and the signature genuine, but the payload claims an
   // epoch the key does not sign for: a replayed pre-rotation authorization.
-  const envelope = signed({ authorityEpoch: 1 })
-  assertRefused(checkTrustRootSignature(envelope, DOSSIER), 'signature-epoch-stale')
+  const check = checkTrustRootSignature(signed({ authorityEpoch: 1 }), DOSSIER)
+  assert.equal(check.authentic, true, 'the signature itself is genuine')
+  assert.equal(check.authorityValid, false)
+  assert.ok(check.authorityFailures.includes('signing-authority-epoch-stale'), check.authorityFailures.join(','))
 })
 
 test('a key signing for a superseded epoch is refused', () => {
+  const scope = { usage: 'synthetic-fixture' as const, permittedDossierIds: [DOSSIER], allowedValidityKinds: ['non-expiring-test-fixture' as const] }
   const registry: SigningKeyEntry[] = [
-    { keyId: 'k/v1', publicKey: rawPublicKeyBase64(SEED), status: 'active', epoch: 1, note: 'old', syntheticTestKey: true },
-    { keyId: 'k/v2', publicKey: rawPublicKeyBase64(REVOKED_SEED), status: 'active', epoch: 2, note: 'new', syntheticTestKey: true },
+    { keyId: 'k/DO-NOT-USE-IN-PRODUCTION/v1', authorityId: 'a', publicKey: rawPublicKeyBase64(SEED), status: 'active', epoch: 1, scope, note: 'old' },
+    { keyId: 'k/DO-NOT-USE-IN-PRODUCTION/v2', authorityId: 'a', publicKey: rawPublicKeyBase64(REVOKED_SEED), status: 'active', epoch: 2, scope, note: 'new' },
   ]
-  const envelope = signTrustRoot(payload({ authorityEpoch: 1 }), SEED, 'k/v1')
-  assertRefused(checkTrustRootSignature(envelope, DOSSIER, { registry }), 'signature-key-epoch-stale')
+  const envelope = signTrustRoot(payload({ authorityId: 'a', authorityEpoch: 1 }), SEED, 'k/DO-NOT-USE-IN-PRODUCTION/v1')
+  const check = checkTrustRootSignature(envelope, DOSSIER, { registry })
+  // The signature itself is genuine; the key's standing is what is superseded.
+  assert.equal(check.authentic, true)
+  assert.equal(check.authorityValid, false)
+  assert.ok(check.authorityFailures.includes('signing-authority-key-epoch-superseded'), check.authorityFailures.join(','))
 })
 
 test('duplicate registry entries are ambiguous and refused', () => {
@@ -219,20 +231,42 @@ test('an empty registry authorizes nothing', () => {
 
 // ------------------------------------------------------ adversarial: validity
 
+const windowScope = {
+  usage: 'synthetic-fixture' as const,
+  permittedDossierIds: [DOSSIER],
+  allowedValidityKinds: ['window' as const, 'non-expiring-test-fixture' as const],
+}
+const windowRegistry = (): SigningKeyEntry[] => [
+  { ...SIGNING_KEY_REGISTRY.find((k) => k.keyId === SYNTHETIC_TEST_KEY_ID)!, scope: windowScope },
+]
+
 test('an expired window is refused', () => {
   const envelope = signed({ validity: { kind: 'window', notBefore: '2020-01-01T00:00:00Z', notAfter: '2020-12-31T00:00:00Z' } })
-  assertRefused(checkTrustRootSignature(envelope, DOSSIER, { now: new Date('2026-08-30T00:00:00Z') }), 'signature-expired')
+  const check = checkTrustRootSignature(envelope, DOSSIER, { registry: windowRegistry(), now: new Date('2026-08-30T00:00:00Z') })
+  assert.equal(check.authorityValid, false)
+  assert.ok(check.authorityFailures.includes('signing-authority-expired'), check.authorityFailures.join(','))
 })
 
 test('a not-yet-valid window is refused', () => {
   const envelope = signed({ validity: { kind: 'window', notBefore: '2099-01-01T00:00:00Z', notAfter: '2099-12-31T00:00:00Z' } })
-  assertRefused(checkTrustRootSignature(envelope, DOSSIER, { now: new Date('2026-08-30T00:00:00Z') }), 'signature-not-yet-valid')
+  const check = checkTrustRootSignature(envelope, DOSSIER, { registry: windowRegistry(), now: new Date('2026-08-30T00:00:00Z') })
+  assert.equal(check.authorityValid, false)
+  assert.ok(check.authorityFailures.includes('signing-authority-not-yet-valid'), check.authorityFailures.join(','))
 })
 
-test('a window in force is accepted', () => {
+test('a window in force is accepted when the key permits windows', () => {
+  const envelope = signed({ validity: { kind: 'window', notBefore: '2026-01-01T00:00:00Z', notAfter: '2027-01-01T00:00:00Z' } })
+  const check = checkTrustRootSignature(envelope, DOSSIER, { registry: windowRegistry(), now: new Date('2026-08-30T00:00:00Z') })
+  assert.deepEqual(check.failures, [])
+  assert.deepEqual(check.authorityFailures, [])
+})
+
+test('a validity kind the key may not sign is refused', () => {
+  // The committed key permits only the fixture form.
   const envelope = signed({ validity: { kind: 'window', notBefore: '2026-01-01T00:00:00Z', notAfter: '2027-01-01T00:00:00Z' } })
   const check = checkTrustRootSignature(envelope, DOSSIER, { now: new Date('2026-08-30T00:00:00Z') })
-  assert.deepEqual(check.failures, [])
+  assert.equal(check.authorityValid, false)
+  assert.ok(check.authorityFailures.includes('signing-authority-validity-kind-not-permitted'), check.authorityFailures.join(','))
 })
 
 test('a root with neither a window nor fixture status is refused', () => {
@@ -243,8 +277,8 @@ test('a root with neither a window nor fixture status is refused', () => {
 // ------------------------------------------------------------ key hygiene
 
 test('the registry contains only synthetic keys and no private material', () => {
-  assert.equal(SIGNING_KEY_REGISTRY.every((key) => key.syntheticTestKey), true)
-  assert.equal(currentAuthorityEpoch(), 2)
+  assert.equal(SIGNING_KEY_REGISTRY.every(isSyntheticKey), true)
+  assert.equal(currentAuthorityEpoch(SYNTHETIC_FIXTURE_AUTHORITY_ID), 2)
   const source = readFileSync(resolve(import.meta.dirname, '../lib/evidence-dossier/formal-proof-signing-keys.ts'), 'utf8')
   // The only seeds present are the two published fixture constants, and both
   // are named so they cannot be mistaken for production material.
@@ -260,6 +294,8 @@ test('the committed envelope authorizes only the internal fixture', () => {
   assert.match(envelope.payload.dossierId, /internal|fixture/)
   assert.equal(envelope.payload.validity.kind, 'non-expiring-test-fixture')
   assert.match(envelope.signature.keyId, /DO-NOT-USE-IN-PRODUCTION/)
+  assert.equal(envelope.payload.authorityId, SYNTHETIC_FIXTURE_AUTHORITY_ID)
+  assert.equal(envelope.payload.dossierId, SYNTHETIC_FIXTURE_DOSSIER_ID)
 })
 
 test('assurance vocabulary appears only in negated form', () => {
@@ -280,4 +316,110 @@ test('assurance vocabulary appears only in negated form', () => {
   for (const forbidden of ['is empirically validated', 'is scientifically proven', 'has been certified']) {
     assert.equal(new RegExp(forbidden, 'i').test(rendered), false, forbidden)
   }
+})
+
+// ------------------------------------------ adversarial: authority scope
+
+test('the published seed can sign another dossier, but authorizes nothing', () => {
+  // This is the gap this phase closes. The fixture seed is public, so anyone
+  // can produce a cryptographically genuine signature over any payload. Before
+  // scope enforcement that signature read as fully valid for an unrelated
+  // dossier. Authenticity must still hold — the signature really is genuine —
+  // and authority must refuse it.
+  const attacker = 'dos_attacker_controlled_dossier'
+  const forged = signTrustRoot(payload({ dossierId: attacker }), SEED, SYNTHETIC_TEST_KEY_ID)
+
+  assert.equal(verifyTrustRootSignature(forged, rawPublicKeyBase64(SEED)), true, 'the bytes really do verify')
+  const check = checkTrustRootSignature(forged, attacker)
+  assert.equal(check.authentic, true, 'authenticity is a fact about the bytes and must not be denied')
+  assert.equal(check.authorityValid, false, 'the key is not permitted to authorize this dossier')
+  assert.ok(check.authorityFailures.includes('signing-authority-dossier-not-permitted'), check.authorityFailures.join(','))
+})
+
+test('changing the authority id invalidates the signature', () => {
+  // authorityId is inside the signed payload, so it cannot be re-attributed.
+  const envelope = signed()
+  const reattributed = { ...envelope, payload: { ...envelope.payload, authorityId: 'maha/production' } }
+  assertRefused(checkTrustRootSignature(reattributed, DOSSIER), 'signature-invalid')
+})
+
+test('a cross-authority key substitution fails', () => {
+  // A genuine signature under a key belonging to a different authority, with
+  // the payload claiming this authority.
+  const scope = { usage: 'synthetic-fixture' as const, permittedDossierIds: [DOSSIER], allowedValidityKinds: ['non-expiring-test-fixture' as const] }
+  const registry: SigningKeyEntry[] = [
+    { keyId: 'other/DO-NOT-USE-IN-PRODUCTION/v1', authorityId: 'maha/some-other-authority', publicKey: rawPublicKeyBase64(SEED), status: 'active', epoch: 2, scope, note: 'other authority' },
+  ]
+  const envelope = signTrustRoot(payload({ authorityId: SYNTHETIC_FIXTURE_AUTHORITY_ID }), SEED, 'other/DO-NOT-USE-IN-PRODUCTION/v1')
+  const check = checkTrustRootSignature(envelope, DOSSIER, { registry })
+  assert.equal(check.authentic, true)
+  assert.equal(check.authorityValid, false)
+  assert.ok(check.authorityFailures.includes('signing-authority-mismatch'), check.authorityFailures.join(','))
+})
+
+test('an epoch from another authority does not supersede this one', () => {
+  // Counting epochs across the whole registry would let an unrelated authority
+  // revoke someone else's valid key simply by numbering higher.
+  const scope = { usage: 'synthetic-fixture' as const, permittedDossierIds: [DOSSIER], allowedValidityKinds: ['non-expiring-test-fixture' as const] }
+  const registry: SigningKeyEntry[] = [
+    { keyId: 'ours/DO-NOT-USE-IN-PRODUCTION/v1', authorityId: 'authority/ours', publicKey: rawPublicKeyBase64(SEED), status: 'active', epoch: 1, scope, note: 'ours' },
+    { keyId: 'theirs/DO-NOT-USE-IN-PRODUCTION/v9', authorityId: 'authority/theirs', publicKey: rawPublicKeyBase64(REVOKED_SEED), status: 'active', epoch: 9, scope, note: 'unrelated' },
+  ]
+  const envelope = signTrustRoot(payload({ authorityId: 'authority/ours', authorityEpoch: 1 }), SEED, 'ours/DO-NOT-USE-IN-PRODUCTION/v1')
+  const check = checkTrustRootSignature(envelope, DOSSIER, { registry })
+  assert.deepEqual(check.authorityFailures, [], 'a foreign epoch 9 must not supersede our epoch 1')
+  assert.equal(check.authorityValid, true)
+  assert.equal(currentAuthorityEpoch('authority/ours', registry), 1)
+  assert.equal(currentAuthorityEpoch('authority/theirs', registry), 9)
+})
+
+test('a same-authority higher epoch does supersede', () => {
+  const scope = { usage: 'synthetic-fixture' as const, permittedDossierIds: [DOSSIER], allowedValidityKinds: ['non-expiring-test-fixture' as const] }
+  const registry: SigningKeyEntry[] = [
+    { keyId: 'ours/DO-NOT-USE-IN-PRODUCTION/v1', authorityId: 'authority/ours', publicKey: rawPublicKeyBase64(SEED), status: 'active', epoch: 1, scope, note: 'old' },
+    { keyId: 'ours/DO-NOT-USE-IN-PRODUCTION/v2', authorityId: 'authority/ours', publicKey: rawPublicKeyBase64(REVOKED_SEED), status: 'active', epoch: 2, scope, note: 'new' },
+  ]
+  const envelope = signTrustRoot(payload({ authorityId: 'authority/ours', authorityEpoch: 1 }), SEED, 'ours/DO-NOT-USE-IN-PRODUCTION/v1')
+  const check = checkTrustRootSignature(envelope, DOSSIER, { registry })
+  assert.equal(check.authentic, true)
+  assert.equal(check.authorityValid, false)
+  assert.ok(check.authorityFailures.includes('signing-authority-key-epoch-superseded'), check.authorityFailures.join(','))
+})
+
+test('missing, malformed, duplicated or wildcard scope fails closed', () => {
+  const base = SIGNING_KEY_REGISTRY.find((k) => k.keyId === SYNTHETIC_TEST_KEY_ID)!
+  const cases: Array<[string, SigningKeyEntry]> = [
+    ['missing', { ...base, scope: undefined as unknown as SigningKeyEntry['scope'] }],
+    ['empty dossier list', { ...base, scope: { ...base.scope, permittedDossierIds: [] } }],
+    ['duplicate dossier', { ...base, scope: { ...base.scope, permittedDossierIds: [DOSSIER, DOSSIER] } }],
+    ['wildcard *', { ...base, scope: { ...base.scope, permittedDossierIds: ['*'] } }],
+    ['wildcard prefix', { ...base, scope: { ...base.scope, permittedDossierIds: ['dos_*'] } }],
+    ['empty id', { ...base, scope: { ...base.scope, permittedDossierIds: ['  '] } }],
+    ['no validity kinds', { ...base, scope: { ...base.scope, allowedValidityKinds: [] } }],
+    ['unknown validity kind', { ...base, scope: { ...base.scope, allowedValidityKinds: ['forever' as never] } }],
+    ['unknown usage', { ...base, scope: { ...base.scope, usage: 'unrestricted' as never } }],
+    ['no authority', { ...base, authorityId: '  ' }],
+  ]
+  for (const [label, entry] of cases) {
+    assert.throws(() => assertValidScope(entry), new RegExp('.'), label)
+    const check = checkTrustRootSignature(signed(), DOSSIER, { registry: [entry] })
+    assert.equal(check.authorityValid, false, label)
+    assert.ok(check.authorityFailures.length > 0, label)
+  }
+})
+
+test('a synthetic key must be named as such', () => {
+  const base = SIGNING_KEY_REGISTRY.find((k) => k.keyId === SYNTHETIC_TEST_KEY_ID)!
+  assert.throws(() => assertValidScope({ ...base, keyId: 'looks-official/v1' }), /must be named/)
+})
+
+test('the committed synthetic key is narrowly scoped', () => {
+  const key = SIGNING_KEY_REGISTRY.find((k) => k.keyId === SYNTHETIC_TEST_KEY_ID)!
+  assert.equal(key.scope.usage, 'synthetic-fixture')
+  assert.deepEqual(key.scope.permittedDossierIds, [SYNTHETIC_FIXTURE_DOSSIER_ID])
+  assert.deepEqual(key.scope.allowedValidityKinds, ['non-expiring-test-fixture'])
+  assert.equal(key.authorityId, SYNTHETIC_FIXTURE_AUTHORITY_ID)
+  assert.equal(isSyntheticKey(key), true)
+  // No key in the registry may claim production standing.
+  assert.equal(SIGNING_KEY_REGISTRY.some((k) => k.scope.usage === 'production'), false)
 })
