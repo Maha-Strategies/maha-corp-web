@@ -37,9 +37,9 @@ import { QUANTUM_SYSTEMS_GRAPH_RECORDS } from './quantum-systems-graph.ts'
 import { BATCH_2_INTERNAL_REVIEW_RECORD_IDS } from './substantial-internal-review-cohort.ts'
 import { REPAIRED_REVISION_CANARY_RECORDS } from './repaired-revision-canary-targets.ts'
 import {
-  SOURCE_OVERRIDE_REVISED_RECORDS,
+  SOURCE_OVERRIDE_REVISED_INGESTION_RECORDS,
   SOURCE_OVERRIDE_REVISION_CANARY_VERSION,
-} from './source-override-revision-canary.ts'
+} from './source-override-revision-ingestion-records.ts'
 import {
   MCP_PRIVATE_CANARY_ADAPTER_ID,
   MCP_PRIVATE_CANARY_DATASET_VERSION,
@@ -517,9 +517,9 @@ export const SOURCE_OVERRIDE_REVISION_CANARY_ADAPTER: LegacyAdapterDefinition = 
   name: 'Source-override exact-revision Preview canary',
   description: 'Exactly five internally reviewed replacement-source revisions; ingestion freezes draft targets and cannot approve or release them.',
   sourceDatasetVersion: SOURCE_OVERRIDE_REVISION_CANARY_VERSION,
-  sourceRecords: SOURCE_OVERRIDE_REVISED_RECORDS,
-  sourceSources: SOURCE_OVERRIDE_REVISED_RECORDS.flatMap((record) => record.sources),
-  build: () => SOURCE_OVERRIDE_REVISED_RECORDS.map((record) => ({
+  sourceRecords: SOURCE_OVERRIDE_REVISED_INGESTION_RECORDS,
+  sourceSources: SOURCE_OVERRIDE_REVISED_INGESTION_RECORDS.flatMap((record) => record.sources),
+  build: () => SOURCE_OVERRIDE_REVISED_INGESTION_RECORDS.map((record) => ({
     sourceRecordId: record.id,
     sourceRecord: record,
     sourcePublicPath: epistemicRecordPath(record),

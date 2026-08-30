@@ -13,6 +13,7 @@ import {
   sourceOverrideRevisionCanaryReviewInputs,
 } from '../lib/source-override-revision-canary.ts'
 import { evaluatePublicationQueueCandidate } from '../lib/substantial-publication-queue.ts'
+import snapshot from '../content/epistemic/source-override-revision-ingestion-records.json' with { type: 'json' }
 
 function filesUnder(root: string): string[] {
   if (!existsSync(root)) return []
@@ -31,6 +32,8 @@ test('the dedicated adapter freezes exactly the five merged-main revisions', () 
     candidates.map((candidate) => candidate.reviewTargetSha256),
     SOURCE_OVERRIDE_REVISED_RECORDS.map(epistemicReviewTargetHash),
   )
+  assert.equal(snapshot.records.length, 5)
+  assert.deepEqual(snapshot.records.map((record) => record.id), SOURCE_OVERRIDE_REVISED_RECORDS.map((record) => record.id))
   for (const candidate of candidates) {
     assert.equal(candidate.record.publication.reviewState, 'draft')
     assert.equal(candidate.record.publication.requestedPublicPromotion, false)
