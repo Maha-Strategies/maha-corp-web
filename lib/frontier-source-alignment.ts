@@ -8,6 +8,7 @@ import {
   ALIGNMENT_BATCH_8_SOURCE_DISCOVERIES,
 } from './frontier-alignment-batch-8.ts'
 import { ALIGNMENT_BATCH_9_REMEDIATION_PACKETS } from './frontier-alignment-batch-9.ts'
+import { ALIGNMENT_BATCH_10_REMEDIATION_PACKETS } from './frontier-alignment-batch-10.ts'
 import type { EpistemicRecord } from './epistemic-schema.ts'
 
 /**
@@ -95,6 +96,7 @@ export const INSPECTED_ARTIFACT_VERSIONS = [
   'repository-copy',
   'government-report',
   'living-specification',
+  'patent',
   'not-inspected',
 ] as const
 export type InspectedArtifactVersion = (typeof INSPECTED_ARTIFACT_VERSIONS)[number]
@@ -2478,10 +2480,50 @@ const BATCH_9_REMEDIATION_JUDGEMENTS: Readonly<Record<string, InspectedJudgement
   }),
 )
 
+/**
+ * Batch 10 is a second, disjoint remediation cohort. Like Batch 9, it only
+ * attaches an internally inspected proposal to an active mismatch. The bound
+ * source, active verdict, blockers, and canonical revision remain unchanged.
+ */
+const BATCH_10_REMEDIATION_JUDGEMENTS: Readonly<Record<string, InspectedJudgement>> = Object.fromEntries(
+  ALIGNMENT_BATCH_10_REMEDIATION_PACKETS.map((packet) => {
+    const prior = BATCH_9_REMEDIATION_JUDGEMENTS[packet.recordId]
+      ?? BATCH_8_JUDGEMENTS[packet.recordId]
+      ?? ACTIVE_JUDGEMENTS_AFTER_BATCH_7[packet.recordId]
+    if (!prior) throw new Error(`${packet.recordId}: Batch 10 cannot propose a replacement for an unaudited record.`)
+    if ((ALIGNMENT_VERDICTS as readonly string[]).includes(prior.verdict)
+      && prior.verdict !== 'mismatched') {
+      throw new Error(`${packet.recordId}: Batch 10 replacements require an active mismatched verdict.`)
+    }
+    if (prior.proposedSourceOverride) {
+      throw new Error(`${packet.recordId}: Batch 10 cannot overwrite an existing replacement proposal.`)
+    }
+    return [packet.recordId, {
+      ...prior,
+      proposedSourceOverride: {
+        citation: packet.replacement.citation,
+        identifier: packet.replacement.identifier,
+        rationale: packet.replacement.rationale,
+        decision: 'pending-human-decision',
+        inspection: {
+          replacementDecision: packet.replacement.replacementDecision,
+          metadataVerified: packet.replacement.inspection.metadataVerified,
+          metadataNote: packet.replacement.inspection.metadataNote,
+          artifactVersion: packet.replacement.inspection.artifactVersion,
+          inspectedContentLocation: packet.replacement.inspection.inspectedContentLocation,
+          findings: packet.replacement.inspection.findings,
+          whatWouldChangeIfAccepted: packet.whatWouldChangeIfAccepted,
+        },
+      },
+    } satisfies InspectedJudgement]
+  }),
+)
+
 const ACTIVE_JUDGEMENTS: Readonly<Record<string, InspectedJudgement>> = {
   ...ACTIVE_JUDGEMENTS_AFTER_BATCH_7,
   ...BATCH_8_JUDGEMENTS,
   ...BATCH_9_REMEDIATION_JUDGEMENTS,
+  ...BATCH_10_REMEDIATION_JUDGEMENTS,
 }
 
 /**
@@ -3120,7 +3162,9 @@ export function isBatch6Reinspection(recordId: string): boolean {
     }
     const prior = BATCH_8_JUDGEMENTS[packet.recordId]
       ?? ACTIVE_JUDGEMENTS_AFTER_BATCH_7[packet.recordId]
-    if (!prior || prior.verdict !== 'mismatched' || !prior.sourceContentInspected) {
+    if (!prior
+      || ((ALIGNMENT_VERDICTS as readonly string[]).includes(prior.verdict) && prior.verdict !== 'mismatched')
+      || !prior.sourceContentInspected) {
       throw new Error(`${packet.recordId}: Batch 9 cohort is not an inspected active mismatch.`)
     }
     const expectedPriority = packet.priority.productRelevance
@@ -3156,6 +3200,49 @@ export function isBatch6Reinspection(recordId: string): boolean {
       || active.proposedSourceOverride?.decision !== 'pending-human-decision'
       || active.proposedSourceOverride.identifier !== packet.replacement.identifier) {
       throw new Error(`${packet.recordId}: Batch 9 changed the active judgement or failed to attach the proposal.`)
+    }
+  }
+
+  // Batch 10 is selected from the 66 active mismatches that remain after
+  // excluding Batch 9's frozen cohort. It must remain disjoint and private,
+  // and attaching a proposal must not alter the active source judgement.
+  const batch9RecordIds = new Set(ALIGNMENT_BATCH_9_REMEDIATION_PACKETS.map((packet) => packet.recordId))
+  if (ALIGNMENT_BATCH_10_REMEDIATION_PACKETS.length !== 20
+    || new Set(ALIGNMENT_BATCH_10_REMEDIATION_PACKETS.map((packet) => packet.recordId)).size !== 20
+    || new Set(ALIGNMENT_BATCH_10_REMEDIATION_PACKETS.map((packet) => packet.packetId)).size !== 20
+    || new Set(ALIGNMENT_BATCH_10_REMEDIATION_PACKETS.map((packet) => packet.replacement.proposedSourceContractId)).size !== 20) {
+    throw new Error('Batch 10 must contain twenty unique remediation packets, records, and replacement sources.')
+  }
+  const preRemediationMismatches = Object.entries({
+    ...ACTIVE_JUDGEMENTS_AFTER_BATCH_7,
+    ...BATCH_8_JUDGEMENTS,
+  }).filter(([, judgement]) => judgement.verdict === 'mismatched'
+    || !(ALIGNMENT_VERDICTS as readonly string[]).includes(judgement.verdict))
+  if (preRemediationMismatches.length !== 86
+    || preRemediationMismatches.filter(([recordId]) => !batch9RecordIds.has(recordId)).length !== 66) {
+    throw new Error('Batch 10 selection pool must be the 66 mismatches outside Batch 9.')
+  }
+  for (const packet of ALIGNMENT_BATCH_10_REMEDIATION_PACKETS) {
+    if (batch9RecordIds.has(packet.recordId)) {
+      throw new Error(`${packet.recordId}: Batch 10 overlaps the frozen Batch 9 cohort.`)
+    }
+    const record = FRONTIER_DOMAIN_GRAPH_RECORDS.find((entry) => entry.id === packet.recordId)
+    if (!record || record.domainSlug !== packet.domainSlug) {
+      throw new Error(`${packet.recordId}: Batch 10 record or domain is invalid.`)
+    }
+    const prior = BATCH_8_JUDGEMENTS[packet.recordId]
+      ?? ACTIVE_JUDGEMENTS_AFTER_BATCH_7[packet.recordId]
+    if (!prior
+      || ((ALIGNMENT_VERDICTS as readonly string[]).includes(prior.verdict) && prior.verdict !== 'mismatched')
+      || !prior.sourceContentInspected) {
+      throw new Error(`${packet.recordId}: Batch 10 cohort is not an inspected active mismatch.`)
+    }
+    const active = ACTIVE_JUDGEMENTS[packet.recordId]
+    if (active.verdict !== prior.verdict
+      || active.inspectedContentLocation !== prior.inspectedContentLocation
+      || active.proposedSourceOverride?.decision !== 'pending-human-decision'
+      || active.proposedSourceOverride.identifier !== packet.replacement.identifier) {
+      throw new Error(`${packet.recordId}: Batch 10 changed the active judgement or failed to attach the proposal.`)
     }
   }
 
