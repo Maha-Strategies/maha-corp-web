@@ -3,6 +3,7 @@ import { PDFDocument, StandardFonts, rgb, type PDFFont, type PDFPage } from 'pdf
 import type { EvidenceDossier } from './schema.ts'
 import type { DossierCalculationAttachment } from '../../wasm-kernel/src/dossier.ts'
 import type { DossierRuntimeWitnessAttachment } from '../../../lib/evidence-dossier/runtime-witness.ts'
+import type { FormalProofAttachment } from '../../maha-lean-bridge/src/schema.ts'
 import { canonicalJson } from './canonicalize.ts'
 
 const PAGE = { width: 612, height: 792, margin: 54, footer: 36 }
@@ -39,6 +40,7 @@ export async function renderEvidenceDossierPdf(input: {
   dossier: EvidenceDossier
   attachments: readonly DossierCalculationAttachment[]
   witnesses?: readonly DossierRuntimeWitnessAttachment[]
+  formalProofs?: readonly FormalProofAttachment[]
   packageVersion: string
   engagementLabel: string
 }): Promise<Uint8Array> {
@@ -96,6 +98,29 @@ export async function renderEvidenceDossierPdf(input: {
     line(`Bound claims: ${attachment.claimIds.join(', ')} | Calculation receipts: ${attachment.calculationReceiptIds.join(', ')}`)
     line(`Witness: ${attachment.receipt.receiptSha256}`, { size: 7.5, font: mono })
     line(`Environment: ${attachment.receipt.environmentSha256} | Complete: ${attachment.receipt.assurance.environmentComplete}`, { size: 7.5, font: mono })
+  }
+  heading('Machine-checked formal statements')
+  // The boundary is printed before the proofs, so a reader meets the limits
+  // before the claims rather than after them.
+  line('A machine-checked proof establishes only that the stated conclusion follows from the stated assumptions.', { gap: 1 })
+  line('It is not an experiment. It is not source-passage verification. It is not independent reproduction.', { gap: 1 })
+  line('It is not expert review and not regulatory approval. It does not establish that a scientific model describes reality.', { gap: 1 })
+  line('It does not establish that the Lean definitions are equivalent to the AssemblyScript compiler or the compiled WASM kernel.', { gap: 3 })
+  const verifiedProofs = [...(input.formalProofs ?? [])]
+    .filter((proof) => proof.proofStatus === 'verified' && proof.assurance.machineChecked === true)
+    .sort((a, b) => (a.theoremId < b.theoremId ? -1 : a.theoremId > b.theoremId ? 1 : 0))
+  if (!verifiedProofs.length) line('No formal proof is attached. No machine-checked statement is claimed.')
+  for (const proof of verifiedProofs) {
+    line(`${proof.theoremNamespace}.${proof.theoremName}`, { font: bold, gap: 2 })
+    line(`Statement: ${proof.formalStatement}`, { size: 7.5, font: mono })
+    for (const assumption of proof.assumptions) line(`Assumption: ${assumption}`)
+    line(`Bound claims: ${proof.claimIds.join(', ')}${proof.calculationOperationIds.length ? ` | Calculation operations: ${proof.calculationOperationIds.join(', ')}` : ''}`)
+    line(`Binding: ${proof.bindingId} rev ${proof.bindingRevision} | ${proof.bindingManifestSha256}`, { size: 7.5, font: mono })
+    line(`Source: ${proof.sourceFile} ${proof.sourceSha256}`, { size: 7.5, font: mono })
+    line(`Proof manifest: ${proof.proofManifestSha256}`, { size: 7.5, font: mono })
+    line(`Toolchain: ${proof.toolchain} (Lean ${proof.leanVersion}) | Verify with: ${proof.verificationCommand}`, { size: 7.5, font: mono })
+    line(`Boundary: ${proof.informalBoundary}`)
+    line('Assurance: machine-checked only. Empirically validated: no. Independently reproduced: no. Compiler equivalence proven: no. Scientific model certified: no.', { gap: 3 })
   }
   heading('Sources and inspected passages')
   for (const source of input.dossier.sources) line(`${source.sourceId} - ${source.verificationState} - ${source.correctedCitation ?? source.submittedCitation}`)

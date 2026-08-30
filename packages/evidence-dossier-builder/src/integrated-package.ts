@@ -11,6 +11,8 @@ import type { DossierCalculationAttachment } from '../../wasm-kernel/src/dossier
 import { canonicalJson as calculationCanonicalJson, verifyCalculationReceipt } from '../../wasm-kernel/src/receipt.ts'
 import { createExecutedCalculationReceipt, verifyExecutedCalculationReceipt, verifyKernelArtifact, type KernelArtifact, type KernelManifest } from '../../wasm-kernel/dist/execution.js'
 import { verifyComputationalWitnessReceipt, type DossierRuntimeWitnessAttachment } from '../../../lib/evidence-dossier/runtime-witness.ts'
+import type { BindingManifest } from '../../maha-lean-bridge/src/bindings.ts'
+import type { FormalProofAttachment, ProofManifest } from '../../maha-lean-bridge/src/schema.ts'
 
 export const INTEGRATED_PACKAGE_VERSION = 'maha-evidence-package/0.3' as const
 const CALCULATION_ATTACHMENT_SCHEMA = 'maha-dossier-calculation-attachment/1.0' as const
@@ -20,9 +22,28 @@ export interface IntegratedDossierPackage {
   manifest: Record<string, unknown> & { packageDigest: string; files: readonly IntegratedFileDescriptor[] }
   files: readonly IntegratedFile[]
 }
+/**
+ * The material an offline verifier needs to recheck formal proofs itself.
+ *
+ * Without this the package would assert that proofs were checked and give a
+ * reader no way to confirm it. With it, a verifier can rebuild the manifests,
+ * rehash the Lean sources and rerun the pinned toolchain.
+ */
+export interface FormalProofEvidence {
+  proofManifest: ProofManifest
+  bindingManifest: BindingManifest
+  /** Contents of `lean-toolchain`, without a trailing newline. */
+  toolchain: string
+  /** Package-relative Lean source path to its normalized text. */
+  leanSources: Readonly<Record<string, string>>
+}
+
 export interface IntegratedCompileOptions extends CompileOptions {
   kernelArtifact?: KernelArtifact
   runtimeWitnesses?: readonly DossierRuntimeWitnessAttachment[]
+  /** Verified formal proofs. Unverified attachments are refused, not downgraded. */
+  formalProofs?: readonly FormalProofAttachment[]
+  formalProofEvidence?: FormalProofEvidence
 }
 
 const digest = (bytes: Uint8Array) => `sha256:${createHash('sha256').update(bytes).digest('hex')}`
@@ -43,6 +64,35 @@ function validateWitnessBindings(dossier: EvidenceDossier, attachments: readonly
     if (attachment.calculationReceiptIds.some((id) => !receiptIds.has(id)) || calculationCanonicalJson(attachment.calculationReceiptIds) !== calculationCanonicalJson(attachment.receipt.bindings.calculationReceiptIds)) throw new Error('Runtime witness calculation binding is invalid.')
     if (witnessIds.has(attachment.receipt.receiptSha256)) throw new Error('Runtime witness receipt digest must be unique within a dossier package.')
     witnessIds.add(attachment.receipt.receiptSha256)
+  }
+}
+
+/**
+ * Formal proofs must bind to declared claims and must already be verified.
+ *
+ * The verifier is what decides whether a proof is machine-checked; packaging
+ * only refuses to carry anything that has not been through it. An unverified
+ * proof is not downgraded into the package as a weaker claim — it is rejected,
+ * so the package cannot contain a statement whose status a reader must judge.
+ */
+function validateFormalProofs(dossier: EvidenceDossier, proofs: readonly FormalProofAttachment[]): void {
+  const claimIds = new Set(dossier.claims.map((claim) => claim.claimId))
+  const seen = new Set<string>()
+  for (const proof of proofs) {
+    if (proof.dossierId !== dossier.dossierId) throw new Error('Formal proof dossier binding is invalid.')
+    if (proof.proofStatus !== 'verified' || proof.assurance.machineChecked !== true) {
+      throw new Error('Only a verified, machine-checked formal proof may be packaged.')
+    }
+    for (const flag of ['empiricallyValidated', 'independentlyReproduced', 'compilerEquivalenceProven', 'scientificModelCertified'] as const) {
+      if ((proof.assurance as unknown as Record<string, unknown>)[flag] === true) {
+        throw new Error(`A packaged formal proof cannot assert ${flag}.`)
+      }
+    }
+    if (!proof.claimIds.length || proof.claimIds.some((id) => !claimIds.has(id))) {
+      throw new Error('Formal proof references an unknown dossier claim.')
+    }
+    if (seen.has(proof.theoremId)) throw new Error('Formal proof theorem id must be unique within a dossier package.')
+    seen.add(proof.theoremId)
   }
 }
 
@@ -69,14 +119,29 @@ export async function compileIntegratedPackage(dossier: EvidenceDossier, attachm
     if (requested.receiptSha256 !== attachment.receipt.receiptSha256) throw new Error('Calculation execution request does not reproduce its attached receipt.')
   }
   validateWitnessBindings(dossier, ordered, witnesses)
+  const formalProofs = [...(options.formalProofs ?? [])].sort((a, b) => a.theoremId < b.theoremId ? -1 : a.theoremId > b.theoremId ? 1 : 0)
+  validateFormalProofs(dossier, formalProofs)
   const engagement = options.engagement ?? INTERNAL_REHEARSAL_ENGAGEMENT
   const engagementLabel = `${engagement.mode}; list $${engagement.listPriceUsd}; contracted $${engagement.contractedPriceUsd}; received $${engagement.cashReceivedUsd}`
-  const pdf = await renderEvidenceDossierPdf({ dossier, attachments: ordered, witnesses, packageVersion: INTEGRATED_PACKAGE_VERSION, engagementLabel })
+  const pdf = await renderEvidenceDossierPdf({ dossier, attachments: ordered, witnesses, formalProofs, packageVersion: INTEGRATED_PACKAGE_VERSION, engagementLabel })
   const files: IntegratedFile[] = [
     ...base.files.map((entry) => encoded(entry.path, entry.mediaType, entry.content)),
-    encoded('dossier.jsonld', 'application/ld+json', renderDossierJsonLdText(dossier, ordered, witnesses)),
+    encoded('dossier.jsonld', 'application/ld+json', renderDossierJsonLdText(dossier, ordered, witnesses, formalProofs)),
     encoded('calculation-receipts.json', 'application/json', `${calculationCanonicalJson(ordered)}\n`),
     encoded('runtime-witnesses.json', 'application/json', `${calculationCanonicalJson(witnesses)}\n`),
+    encoded('formal-proofs.json', 'application/json', `${calculationCanonicalJson(formalProofs)}\n`),
+    // The material an offline verifier needs to recheck the proofs itself: the
+    // manifests that authorized them and the exact normalized source bytes.
+    ...(formalProofs.length && options.formalProofEvidence
+      ? [
+          encoded('formal-proof-manifest.json', 'application/json', `${calculationCanonicalJson(options.formalProofEvidence.proofManifest)}\n`),
+          encoded('formal-claim-bindings.json', 'application/json', `${calculationCanonicalJson(options.formalProofEvidence.bindingManifest)}\n`),
+          encoded('lean-toolchain', 'text/plain', `${options.formalProofEvidence.toolchain}\n`),
+          ...Object.entries(options.formalProofEvidence.leanSources)
+            .sort(([a], [b]) => (a < b ? -1 : a > b ? 1 : 0))
+            .map(([path, text]) => encoded(`lean/${path}`, 'text/plain', text)),
+        ]
+      : []),
     { path: 'evidence-dossier.pdf', mediaType: 'application/pdf', bytes: pdf, sha256: digest(pdf) },
     ...(options.kernelArtifact ? [binary('kernel.wasm', 'application/wasm', options.kernelArtifact.bytes), encoded('kernel-manifest.json', 'application/json', `${calculationCanonicalJson(options.kernelArtifact.manifest)}\n`)] : []),
   ].sort((a, b) => a.path < b.path ? -1 : a.path > b.path ? 1 : 0)
@@ -84,7 +149,10 @@ export async function compileIntegratedPackage(dossier: EvidenceDossier, attachm
   const manifestBase = {
     packageVersion: INTEGRATED_PACKAGE_VERSION, dossierId: dossier.dossierId, corpusRevision: dossier.corpusRevision,
     dossierDigest: dossier.provenanceBundle.dossierDigest, engagement, offerReadiness: base.manifest.offerReadiness,
-    calculationAssurance: ordered.length ? 'offline-wasm-reexecution-required' : 'no-calculation-claimed', runtimeWitnessCount: witnesses.length, files: descriptors,
+    calculationAssurance: ordered.length ? 'offline-wasm-reexecution-required' : 'no-calculation-claimed', runtimeWitnessCount: witnesses.length,
+    formalProofCount: formalProofs.length,
+    formalProofAssurance: formalProofs.length ? 'offline-lean-recheck-required' : 'no-formal-proof-claimed',
+    files: descriptors,
   }
   return { files, manifest: { ...manifestBase, packageDigest: provenanceDigest(manifestBase) } }
 }
@@ -139,8 +207,39 @@ export async function verifyIntegratedCalculationEvidence(bundle: IntegratedDoss
     if (witness.dossierId !== dossier.dossierId || witness.calculationReceiptIds.some((id) => !receiptIds.has(id))) findings.push('integrated-runtime-witness-binding-invalid')
   }
   const engagement = bundle.manifest.engagement as typeof INTERNAL_REHEARSAL_ENGAGEMENT
-  if (text('dossier.jsonld') !== renderDossierJsonLdText(dossier, attachments, witnesses)) findings.push('integrated-jsonld-rerender-mismatch')
-  const expectedPdf = await renderEvidenceDossierPdf({ dossier, attachments, witnesses, packageVersion: INTEGRATED_PACKAGE_VERSION, engagementLabel: `${engagement.mode}; list $${engagement.listPriceUsd}; contracted $${engagement.contractedPriceUsd}; received $${engagement.cashReceivedUsd}` })
+  let formalProofs: FormalProofAttachment[]
+  try {
+    const parsed = JSON.parse(text('formal-proofs.json') ?? '[]') as unknown
+    if (!Array.isArray(parsed)) throw new Error()
+    formalProofs = parsed as FormalProofAttachment[]
+  } catch { findings.push('integrated-formal-proofs-unparseable'); return [...new Set(findings)] }
+
+  if (formalProofs.length) {
+    // A packaged proof asserts it was machine-checked. The package must carry
+    // the material to recheck that, or the assertion is unauditable.
+    for (const name of ['formal-proof-manifest.json', 'formal-claim-bindings.json', 'lean-toolchain']) {
+      if (text(name) == null) findings.push('integrated-formal-proof-evidence-missing')
+    }
+    const pinned = (text('lean-toolchain') ?? '').trim()
+    for (const proof of formalProofs) {
+      if (proof.proofStatus !== 'verified' || proof.assurance.machineChecked !== true) findings.push('integrated-formal-proof-unverified')
+      for (const flag of ['empiricallyValidated', 'independentlyReproduced', 'compilerEquivalenceProven', 'scientificModelCertified'] as const) {
+        if ((proof.assurance as unknown as Record<string, unknown>)[flag] === true) findings.push('integrated-formal-proof-overclaimed')
+      }
+      if (pinned && proof.toolchain !== pinned) findings.push('integrated-formal-proof-toolchain-mismatch')
+      // The Lean source the proof cites must be present and hash to what the
+      // attachment recorded, so a substituted source is detectable offline.
+      const source = text(`lean/${proof.sourceFile}`)
+      if (source == null) findings.push('integrated-formal-proof-source-missing')
+      else if (`sha256:${createHash('sha256').update(source, 'utf8').digest('hex')}` !== proof.sourceSha256) {
+        findings.push('integrated-formal-proof-source-mismatch')
+      }
+    }
+    try { validateFormalProofs(dossier, formalProofs) } catch { findings.push('integrated-formal-proof-binding-invalid') }
+  }
+
+  if (text('dossier.jsonld') !== renderDossierJsonLdText(dossier, attachments, witnesses, formalProofs)) findings.push('integrated-jsonld-rerender-mismatch')
+  const expectedPdf = await renderEvidenceDossierPdf({ dossier, attachments, witnesses, formalProofs, packageVersion: INTEGRATED_PACKAGE_VERSION, engagementLabel: `${engagement.mode}; list $${engagement.listPriceUsd}; contracted $${engagement.contractedPriceUsd}; received $${engagement.cashReceivedUsd}` })
   const pdf = file('evidence-dossier.pdf')
   if (!pdf || digest(pdf.bytes) !== digest(expectedPdf)) findings.push('integrated-pdf-rerender-mismatch')
   try { validateWitnessBindings(dossier, attachments, witnesses) } catch { findings.push('integrated-runtime-witness-binding-invalid') }
