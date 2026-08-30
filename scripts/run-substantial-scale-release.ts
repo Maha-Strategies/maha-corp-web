@@ -103,12 +103,22 @@ async function publishRecords(releaseToken: string, recordIds: readonly string[]
       publicChangeSummary: 'Initial canonical publication under the disclosed exact-revision internal editorial tier.',
       rationale: `The exact target passed record-specific source, domain, boundary, rights, locator, and revision checks. No external endorsement, independent reproduction, scientific validation, or fitness for use is claimed. Packet ${packet.packetDigest}.`,
     }
-    await request(releaseToken, '/api/admin/epistemic-releases', {
-      method: 'POST', body: JSON.stringify({ ...common, operation: 'preview', idempotencyKey: `substantial-scale-preview:${key}` }),
-    })
-    const published = object(await request(releaseToken, '/api/admin/epistemic-releases', {
-      method: 'POST', body: JSON.stringify({ ...common, operation: 'publish', idempotencyKey: `substantial-scale-publish:${key}` }),
-    }), `${recordId} publication`)
+    try {
+      await request(releaseToken, '/api/admin/epistemic-releases', {
+        method: 'POST', body: JSON.stringify({ ...common, operation: 'preview', idempotencyKey: `substantial-scale-preview:${key}` }),
+      })
+    } catch (error) {
+      throw new Error(`${recordId}: release preview failed: ${error instanceof Error ? error.message : 'unknown error'}`)
+    }
+    let publication: unknown
+    try {
+      publication = await request(releaseToken, '/api/admin/epistemic-releases', {
+        method: 'POST', body: JSON.stringify({ ...common, operation: 'publish', idempotencyKey: `substantial-scale-publish:${key}` }),
+      })
+    } catch (error) {
+      throw new Error(`${recordId}: canonical persistence failed: ${error instanceof Error ? error.message : 'unknown error'}`)
+    }
+    const published = object(publication, `${recordId} publication`)
     const release = object(published.release, `${recordId} release`)
     results.push({ recordId, releaseId: String(release.releaseId), replayed: false })
   }
