@@ -37,6 +37,10 @@ import { QUANTUM_SYSTEMS_GRAPH_RECORDS } from './quantum-systems-graph.ts'
 import { BATCH_2_INTERNAL_REVIEW_RECORD_IDS } from './substantial-internal-review-cohort.ts'
 import { REPAIRED_REVISION_CANARY_RECORDS } from './repaired-revision-canary-targets.ts'
 import {
+  SOURCE_OVERRIDE_REVISED_RECORDS,
+  SOURCE_OVERRIDE_REVISION_CANARY_VERSION,
+} from './source-override-revision-canary.ts'
+import {
   MCP_PRIVATE_CANARY_ADAPTER_ID,
   MCP_PRIVATE_CANARY_DATASET_VERSION,
   MCP_PRIVATE_CANARY_RECORD,
@@ -70,6 +74,7 @@ export const LEGACY_ADAPTER_IDS = [
   'frontier-canary',
   'substantial-batch-2-internal-review',
   'repaired-revision-canary',
+  'source-override-revision-canary',
   MCP_PRIVATE_CANARY_ADAPTER_ID,
 ] as const
 
@@ -507,6 +512,21 @@ export const REPAIRED_REVISION_CANARY_ADAPTER: LegacyAdapterDefinition = definit
   })),
 })
 
+export const SOURCE_OVERRIDE_REVISION_CANARY_ADAPTER: LegacyAdapterDefinition = definition({
+  id: 'source-override-revision-canary',
+  name: 'Source-override exact-revision Preview canary',
+  description: 'Exactly five internally reviewed replacement-source revisions; ingestion freezes draft targets and cannot approve or release them.',
+  sourceDatasetVersion: SOURCE_OVERRIDE_REVISION_CANARY_VERSION,
+  sourceRecords: SOURCE_OVERRIDE_REVISED_RECORDS,
+  sourceSources: SOURCE_OVERRIDE_REVISED_RECORDS.flatMap((record) => record.sources),
+  build: () => SOURCE_OVERRIDE_REVISED_RECORDS.map((record) => ({
+    sourceRecordId: record.id,
+    sourceRecord: record,
+    sourcePublicPath: epistemicRecordPath(record),
+    record: structuredClone(record),
+  })),
+})
+
 export const MCP_PRIVATE_CANARY_ADAPTER: LegacyAdapterDefinition = definition({
   id: MCP_PRIVATE_CANARY_ADAPTER_ID,
   name: 'Synthetic private MCP governed-release canary',
@@ -532,6 +552,8 @@ export function getLegacyEpistemicAdapter(id: string) {
       ? SUBSTANTIAL_BATCH_2_INTERNAL_REVIEW_ADAPTER
     : id === REPAIRED_REVISION_CANARY_ADAPTER.id
       ? REPAIRED_REVISION_CANARY_ADAPTER
+    : id === SOURCE_OVERRIDE_REVISION_CANARY_ADAPTER.id
+      ? SOURCE_OVERRIDE_REVISION_CANARY_ADAPTER
     : id === MCP_PRIVATE_CANARY_ADAPTER.id
       ? MCP_PRIVATE_CANARY_ADAPTER
     : LEGACY_EPISTEMIC_ADAPTERS.find((adapter) => adapter.id === id)

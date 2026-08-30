@@ -3,6 +3,7 @@ import { ALIGNMENT_BATCH_10_REMEDIATION_PACKETS } from './frontier-alignment-bat
 import { PRIVATE_SOURCE_OVERRIDE_ACTIVATIONS } from './frontier-source-override-activation.ts'
 import { FRONTIER_DOMAIN_GRAPH_RECORDS } from './frontier-domain-graphs.ts'
 import { epistemicRecordPath, epistemicReviewTargetHash, sha256Canonical } from './epistemic-publication.ts'
+import { EXPERT_REVIEW_CRITERIA, type ExpertReviewInput } from './epistemic-review.ts'
 import type { EpistemicRecord, EpistemicSource, ExpertReviewScope } from './epistemic-schema.ts'
 import { publishBatch2Record } from './substantial-page-publication-batch-2.ts'
 import { evaluateSubstantialPageGate } from './substantial-page.ts'
@@ -271,6 +272,60 @@ export const SOURCE_OVERRIDE_REVISION_DECISIONS: readonly RevisionScopedDecision
     return { ...base, decisionSha256: sha256Canonical(base) }
   }),
 )
+
+const REVIEW_DIMENSIONS: Readonly<Record<ExpertReviewScope, readonly (typeof REVISION_AUDIT_DIMENSIONS)[number][]>> = {
+  'source-fidelity': ['source-identity', 'version-relationship', 'exact-locator', 'claim-scope'],
+  'domain-fidelity': ['record-classification', 'claim-scope'],
+  'boundary-adequacy': ['uncertainty-and-boundary', 'prohibited-inferences'],
+  'rights-and-locator': ['rights-basis', 'exact-locator', 'version-relationship'],
+}
+
+export function sourceOverrideRevisionCanaryReviewInputs(): readonly ExpertReviewInput[] {
+  return SOURCE_OVERRIDE_REVISED_RECORDS.flatMap((record) => {
+    const audit = SOURCE_OVERRIDE_REVISION_AUDITS.find((entry) => entry.recordId === record.id)
+    if (!audit) throw new Error(`${record.id}: exact-revision audit is missing.`)
+    return REVIEW_SCOPES.map((scope) => {
+      const sourceFindings = audit.checks
+        .filter((check) => REVIEW_DIMENSIONS[scope].includes(check.dimension))
+        .map((check) => `${check.dimension}: ${check.finding}`)
+        .join(' ')
+      const idempotencyDigest = sha256Canonical({
+        schemaVersion: SOURCE_OVERRIDE_REVISION_CANARY_VERSION,
+        recordId: record.id,
+        targetSha256: audit.revisedRecordRevisionSha256,
+        scope,
+        auditSha256: audit.auditSha256,
+      })
+      return {
+        recordId: record.id,
+        domainSlug: record.domainSlug,
+        targetSha256: audit.revisedRecordRevisionSha256,
+        scope,
+        reviewer: {
+          reviewerId: 'expert_maha-internal-source-override-v1',
+          profileVersion: 1,
+          displayName: 'Maha Strategies internal source-override review',
+          qualifications: ['Exact-revision source, locator, rights, scope, and boundary checklist'],
+          affiliation: 'Maha Strategies',
+          identityUrl: null,
+          domains: [record.domainSlug],
+          conflicts: ['Maha Strategies authors, reviews, and may release this record; this internal review is not independent.'],
+          reviewerKind: 'internal-editorial' as const,
+          reviewMethod: 'Explicit exact-revision checklist bound to the eight-dimension source-override audit. No external endorsement or independent reproduction is claimed.',
+        },
+        criteria: EXPERT_REVIEW_CRITERIA[scope].map((criterion) => ({
+          criterionId: criterion.id,
+          verdict: 'satisfied' as const,
+          rationale: `${criterion.label} was checked against exact revision ${audit.revisedRecordRevisionSha256} and audit ${audit.auditSha256}. ${sourceFindings}`,
+        })),
+        disagreements: ['This is an internal editorial decision. External expert review and independent reproduction were not performed.'],
+        rationale: `The ${scope} decision is limited to exact revision ${audit.revisedRecordRevisionSha256}. ${sourceFindings}`,
+        supersedesReviewId: null,
+        idempotencyKey: `source-override-revision:${idempotencyDigest}`,
+      }
+    })
+  })
+}
 
 export interface RevisionReadinessResult {
   ready: boolean
