@@ -1,0 +1,498 @@
+{
+  "decisions": [
+    {
+      "activeBindingChanged": false,
+      "boundedClaimScope": {
+        "doesNotSupport": [
+          "Any quantitative property of the centre. Only the abstract was read.",
+          "Any claim about diamond as a power-device material, which is what the displaced source was about."
+        ],
+        "quantitativeDetailPermitted": false,
+        "recordClaimForm": "The cited source supports treating {subject} as a distinct mechanism within the stated {domain} scope.",
+        "supports": "Treating colour centres in diamond as a distinct mechanism, established from the abstract of a dedicated review of the nitrogen-vacancy centre."
+      },
+      "canonicalReleaseAuthorized": false,
+      "decisionId": "urn:maha:decision:frontier-alignment-batch-11:advanced-materials-color-centers-in-diamond",
+      "disposition": "accept-source-replacement",
+      "inspectedContentLocator": "Abstract, opening sentence.",
+      "packetDigest": "sha256:0a5f51733532d81b045c71f7202f45fcbbdc2881aa99468e664af25eb6bd730b",
+      "rationale": "The displaced source was a power-device assessment whose text was never readable and which never treated colour centres. The replacement is a dedicated review of the subject, tied to its version of record by publisher DOI. Abstract-level inspection establishes subject identity, which is exactly the claim form this record makes, and nothing beyond it.",
+      "recordId": "urn:maha:record:advanced-materials-color-centers-in-diamond",
+      "recordRevision": {
+        "canonicalVersion": "0.1.0",
+        "recordDigest": "sha256:cb9bfd46e3b4864441d098990b70f7f899329d1321429e9543ef30d825fd2401"
+      },
+      "rightsBasis": "citation-only-no-reuse-licence",
+      "sourceIdentity": "The nitrogen-vacancy colour centre in diamond | doi:10.1016/j.physrep.2013.02.001 | https://arxiv.org/abs/1302.3288",
+      "supersedes": null,
+      "versionRelationship": "arXiv v1 is the author copy of the Physics Reports review. Elsevier holds the version of record; pagination differs, so any locator into the arXiv copy is stated by section rather than journal page."
+    },
+    {
+      "activeBindingChanged": false,
+      "boundedClaimScope": {
+        "doesNotSupport": [
+          "Any transport measurement across a grain boundary. Only the abstract was read.",
+          "Any growth-condition or mobility figure."
+        ],
+        "quantitativeDetailPermitted": false,
+        "recordClaimForm": "The cited source supports treating {subject} as a distinct mechanism within the stated {domain} scope.",
+        "supports": "Treating CVD graphene grain boundaries as a distinct mechanism, established from the abstract's statement that CVD graphene is intrinsically polycrystalline with grains stitched by disordered boundaries."
+      },
+      "canonicalReleaseAuthorized": false,
+      "decisionId": "urn:maha:decision:frontier-alignment-batch-11:advanced-materials-cvd-graphene-grain-boundaries",
+      "disposition": "accept-source-replacement",
+      "inspectedContentLocator": "Abstract.",
+      "packetDigest": "sha256:e19b06011936dab4c894cf1a915a88bef69142de8a85ed9971df3aa6e5867383",
+      "rationale": "The displaced review was full-text searched during earlier recovery and contained neither CVD nor grain boundar, so it could not carry this subject. The replacement states the relation directly. Abstract-level inspection establishes subject identity and no more.",
+      "recordId": "urn:maha:record:advanced-materials-cvd-graphene-grain-boundaries",
+      "recordRevision": {
+        "canonicalVersion": "0.1.0",
+        "recordDigest": "sha256:f83d44b44bdbd91c2c783b990ed9fb2c8f700139f4a2be5710e80260b47ee26e"
+      },
+      "rightsBasis": "citation-only-no-reuse-licence",
+      "sourceIdentity": "Charge Transport in Polycrystalline Graphene: Challenges and Opportunities | doi:10.1002/adma.201401389 | https://arxiv.org/abs/1507.06272",
+      "supersedes": null,
+      "versionRelationship": "The arXiv posting is dated 2015 while the journal article is dated 2014, so this is an author copy deposited after publication rather than a preprint preceding it. Wiley holds the version of record; pagination differs and no journal page locator is asserted."
+    },
+    {
+      "activeBindingChanged": false,
+      "boundedClaimScope": null,
+      "canonicalReleaseAuthorized": false,
+      "decisionId": "urn:maha:decision:frontier-alignment-batch-11:advanced-materials-diamond-thermal-conductivity",
+      "disposition": "reject-or-hold",
+      "inspectedContentLocator": null,
+      "packetDigest": "sha256:a8b8ab730e9a68fb73bd78cb327437171cc93a2ab3cc652e012e9b594fbdc9e6",
+      "rationale": "No open source reporting measured diamond thermal conductivity was established. The existing binding remains behind an IEEE paywall and its content is still unread. The packet proposes nothing and this decision changes nothing; the record keeps its existing binding and blockers.",
+      "recordId": "urn:maha:record:advanced-materials-diamond-thermal-conductivity",
+      "recordRevision": {
+        "canonicalVersion": "0.1.0",
+        "recordDigest": "sha256:be0298d6e8079e377b39f4c984a41d1beef17752c7053e35326ca1e79130015f"
+      },
+      "rightsBasis": null,
+      "sourceIdentity": null,
+      "supersedes": null,
+      "versionRelationship": null
+    },
+    {
+      "activeBindingChanged": false,
+      "boundedClaimScope": null,
+      "canonicalReleaseAuthorized": false,
+      "decisionId": "urn:maha:decision:frontier-alignment-batch-11:advanced-materials-diamond-wafer-substrates",
+      "disposition": "reject-or-hold",
+      "inspectedContentLocator": null,
+      "packetDigest": "sha256:3962f427a7156f4d37541ba79fcc4a41af7385b33df4ee0b7082f3a079c6ea44",
+      "rationale": "No open source on heteroepitaxial diamond wafer growth was established. The existing binding remains unread. The packet proposes nothing and this decision changes nothing; the record keeps its existing binding and blockers.",
+      "recordId": "urn:maha:record:advanced-materials-diamond-wafer-substrates",
+      "recordRevision": {
+        "canonicalVersion": "0.1.0",
+        "recordDigest": "sha256:25fd299d6e0a2fa2e742c133dcdeb89d1dfece44d41541b9460a9aa2ddfb0813"
+      },
+      "rightsBasis": null,
+      "sourceIdentity": null,
+      "supersedes": null,
+      "versionRelationship": null
+    },
+    {
+      "activeBindingChanged": false,
+      "boundedClaimScope": {
+        "doesNotSupport": [
+          "Any screening length, dielectric constant or binding-energy figure. Only the abstract was read.",
+          "Any claim specific to a material system other than the two-dimensional insulators the source treats."
+        ],
+        "quantitativeDetailPermitted": false,
+        "recordClaimForm": "The cited source supports treating {subject} as a distinct mechanism within the stated {domain} scope.",
+        "supports": "Treating dielectric screening as a distinct mechanism, established from the abstract's statement that two-dimensional macroscopic screening is non-local and q-dependent."
+      },
+      "canonicalReleaseAuthorized": false,
+      "decisionId": "urn:maha:decision:frontier-alignment-batch-11:advanced-materials-dielectric-screening",
+      "disposition": "accept-source-replacement",
+      "inspectedContentLocator": "Abstract.",
+      "packetDigest": "sha256:3822324d951edacae9914c138d0ff4fc15ddbc3efb4280dbc0cce4f5ea636541",
+      "rationale": "The displaced review was full-text searched during earlier recovery and contained no occurrence of screening at all. The replacement treats the subject directly and distinguishes the two-dimensional form. Abstract-level inspection establishes subject identity and no more.",
+      "recordId": "urn:maha:record:advanced-materials-dielectric-screening",
+      "recordRevision": {
+        "canonicalVersion": "0.1.0",
+        "recordDigest": "sha256:59be897e7ce0141c04f261b90cb31e23efe2e48d9d9baa48d3ed574ff67ef1ad"
+      },
+      "rightsBasis": "citation-only-no-reuse-licence",
+      "sourceIdentity": "Dielectric screening in two-dimensional insulators: Implications for excitonic and impurity states in graphane | doi:10.1103/PhysRevB.84.085406 | https://arxiv.org/abs/1104.3346",
+      "supersedes": null,
+      "versionRelationship": "arXiv v1 is the author copy of the Physical Review B article. APS holds the version of record; pagination differs, so no journal page locator is asserted."
+    },
+    {
+      "activeBindingChanged": false,
+      "boundedClaimScope": null,
+      "canonicalReleaseAuthorized": false,
+      "decisionId": "urn:maha:decision:frontier-alignment-batch-11:advanced-materials-dry-transfer-contamination",
+      "disposition": "reject-or-hold",
+      "inspectedContentLocator": null,
+      "packetDigest": "sha256:4769e946486349308db1f37466e98523887bc327731aab4ad12a49bf986976da",
+      "rationale": "Attempted and failed. The strongest candidate redirected to an authentication endpoint, which was not followed, so no text was read and no substitute was inspected. The packet proposes nothing and this decision changes nothing; the record keeps its existing binding and blockers.",
+      "recordId": "urn:maha:record:advanced-materials-dry-transfer-contamination",
+      "recordRevision": {
+        "canonicalVersion": "0.1.0",
+        "recordDigest": "sha256:7dab9fdedab71cdddfdab140704b006da9b49f30b7903000fed95e1153a17b00"
+      },
+      "rightsBasis": null,
+      "sourceIdentity": null,
+      "supersedes": null,
+      "versionRelationship": null
+    },
+    {
+      "activeBindingChanged": false,
+      "boundedClaimScope": {
+        "doesNotSupport": [
+          "Any dislocation density, growth rate or wafer specification.",
+          "Any claim beyond the space-photovoltaics framing in which the review treats epitaxy."
+        ],
+        "quantitativeDetailPermitted": true,
+        "recordClaimForm": "The cited source supports treating {subject} as a distinct mechanism within the stated {domain} scope.",
+        "supports": "Treating gallium nitride epitaxy as a distinct mechanism, with heteroepitaxial MOCVD growth and substrate mismatch read at section 4.1."
+      },
+      "canonicalReleaseAuthorized": false,
+      "decisionId": "urn:maha:decision:frontier-alignment-batch-11:advanced-materials-gallium-nitride-epitaxy",
+      "disposition": "accept-source-replacement",
+      "inspectedContentLocator": "Section 4.1 'Influence of Substrate Type and Quality'.",
+      "packetDigest": "sha256:42853cb0d4bb44a0bece1e05d6dccb26ab709d698b9a5e462f84af328bcba47f",
+      "rationale": "The displaced source was never readable. The replacement treats heteroepitaxial GaN growth at a named section under CC BY 4.0. Its overall scope is space photovoltaics rather than epitaxy, so the binding is accepted for the epitaxy section specifically and the scope records that.",
+      "recordId": "urn:maha:record:advanced-materials-gallium-nitride-epitaxy",
+      "recordRevision": {
+        "canonicalVersion": "0.1.0",
+        "recordDigest": "sha256:c9f5c9fcab11fbf07f1bbc256feeaaa4e8e3767b5b31bd9ec5af2193b7b468a9"
+      },
+      "rightsBasis": "cc-by-4.0",
+      "sourceIdentity": "Gallium Nitride for Space Photovoltaics: Properties, Synthesis Methods, Device Architectures and Emerging Market Perspectives | doi:10.3390/mi16121421 | https://pmc.ncbi.nlm.nih.gov/articles/PMC12735247/",
+      "supersedes": null,
+      "versionRelationship": "MDPI publishes the version of record open access and PMC carries the published article rather than an author manuscript, so the inspected copy is the version of record."
+    },
+    {
+      "activeBindingChanged": false,
+      "boundedClaimScope": {
+        "doesNotSupport": [
+          "Any commercial substrate specification, diameter or defect-density figure.",
+          "Any claim about SiC device performance, which the source does not address."
+        ],
+        "quantitativeDetailPermitted": true,
+        "recordClaimForm": "The cited source supports treating {subject} as a distinct mechanism within the stated {domain} scope.",
+        "supports": "Treating SiC wide-bandgap substrates as a distinct mechanism, with physical vapour transport growth of the bulk crystal read in the introduction."
+      },
+      "canonicalReleaseAuthorized": false,
+      "decisionId": "urn:maha:decision:frontier-alignment-batch-11:advanced-materials-sic-wide-bandgap-substrates",
+      "disposition": "accept-source-replacement",
+      "inspectedContentLocator": "Section 'Introduction'.",
+      "packetDigest": "sha256:e601308ca958d0b4082ef360ce67d671a5f40775230da5e8f4e3d4581f59909a",
+      "rationale": "The displaced source was never readable. The replacement treats bulk 4H-SiC growth by PVT, the process that produces substrate material, under CC BY 4.0 with the published version and the inspected copy being the same text.",
+      "recordId": "urn:maha:record:advanced-materials-sic-wide-bandgap-substrates",
+      "recordRevision": {
+        "canonicalVersion": "0.1.0",
+        "recordDigest": "sha256:0b807b567477ca70769371d93eefa0851ab662e32577340748f7afb3fb452313"
+      },
+      "rightsBasis": "cc-by-4.0",
+      "sourceIdentity": "Impact of Mechanical Stress and Nitrogen Doping on the Defect Distribution in the Initial Stage of the 4H-SiC PVT Growth Process | doi:10.3390/ma15051897 | https://pmc.ncbi.nlm.nih.gov/articles/PMC8911631/",
+      "supersedes": null,
+      "versionRelationship": "MDPI publishes the version of record open access and PMC carries the same published article rather than an author manuscript, so the inspected copy and the version of record are the same text."
+    },
+    {
+      "activeBindingChanged": false,
+      "boundedClaimScope": {
+        "doesNotSupport": [
+          "That the Model Context Protocol specification defines a tool allowlist. It does not. A full read found allowlist used twice, for OAuth URL schemes and for client-ID domains, never for tools.",
+          "Any per-tool permitted-set mechanism."
+        ],
+        "quantitativeDetailPermitted": false,
+        "recordClaimForm": "The cited source supports treating {subject} as a distinct mechanism within the stated {domain} scope.",
+        "supports": "Scope-limited tool exposure and human-in-the-loop denial, at two exact locators in specification revision 2026-07-28."
+      },
+      "canonicalReleaseAuthorized": false,
+      "decisionId": "urn:maha:decision:frontier-alignment-batch-11:agentic-systems-mcp-tool-allowlisting",
+      "disposition": "revise-record-scope",
+      "inspectedContentLocator": "Tools, section 'Capabilities', sentence beginning 'The set MAY vary by the authorization presented on the request'; and Tools, section 'User Interaction Model', warning beginning 'For trust & safety and security, there SHOULD always be a human in the loop'.",
+      "packetDigest": "sha256:699d329fe31c8dedd181a953d87487067d32d3500de04c7240243bc3187d26bb",
+      "rationale": "The record names tool allowlisting. The specification specifies no such mechanism, so no replacement can be accepted for that subject. The record is revised to the narrower thing the specification does define. Two pages were read in full; the rest of the revision was not, so this is a narrowing rather than a finding that no allowlist exists anywhere in the specification.",
+      "recordId": "urn:maha:record:agentic-systems-mcp-tool-allowlisting",
+      "recordRevision": {
+        "canonicalVersion": "0.1.0",
+        "recordDigest": "sha256:adcf82aed5f0fa3b468f494e98eb4c420ba22a53bebd17422202c939c4b214b8"
+      },
+      "rightsBasis": "citation-only-no-reuse-licence",
+      "sourceIdentity": "Model Context Protocol specification, revision 2026-07-28: Tools; Security Best Practices | no identifier | https://modelcontextprotocol.io/specification/2026-07-28/server/tools",
+      "supersedes": null,
+      "versionRelationship": "Revision 2026-07-28 supersedes the 2024-11-05 revision the record's prior source cited. The prior citation named the specification generically with year 2024; this inspection pins an exact later revision."
+    },
+    {
+      "activeBindingChanged": false,
+      "boundedClaimScope": {
+        "doesNotSupport": [
+          "A locator into the Nature version of record. The preprint carries a different title and different section structure, so this locator does not transfer.",
+          "Any claim that the published article states these thresholds in these terms, which was not verified because the publisher copy sat behind an authentication redirect."
+        ],
+        "quantitativeDetailPermitted": true,
+        "recordClaimForm": "The cited source supports treating {subject} as a distinct mechanism within the stated {domain} scope.",
+        "supports": "The explicit in silico filtering step, with its pAE and backbone-RMSD acceptance thresholds, read at a named section of the bioRxiv preprint."
+      },
+      "canonicalReleaseAuthorized": false,
+      "decisionId": "urn:maha:decision:frontier-alignment-batch-11:biomolecular-engineering-structure-prediction-filtering",
+      "disposition": "revise-record-scope",
+      "inspectedContentLocator": "Preprint v2, section 'Unconditional protein monomer generation'.",
+      "packetDigest": "sha256:85c9b6b8f20861cedbb6217ac9c5e1b57a615acf37f67cae8d5d8d64a495cb6e",
+      "rationale": "This packet is NOT a source replacement and is not reviewed as one. The record already cites this work; the packet proposes the preprint of the same work. Replacing a source with itself is not a replacement. What the inspection genuinely adds is an exact locator for the filtering step the prior evidence could not establish from the abstract, so the record's scope is revised to that locator rather than its binding being swapped.",
+      "recordId": "urn:maha:record:biomolecular-engineering-structure-prediction-filtering",
+      "recordRevision": {
+        "canonicalVersion": "0.1.0",
+        "recordDigest": "sha256:8fc2fa62ff8521551955d83413d952987410cfc59a352a2eebbfe4b07fe84d84"
+      },
+      "rightsBasis": "citation-only-no-reuse-licence",
+      "sourceIdentity": "Broadly applicable and accurate protein design by integrating structure prediction networks and diffusion generative models | doi:10.1101/2022.12.09.519842 | https://www.biorxiv.org/content/10.1101/2022.12.09.519842v2.full",
+      "supersedes": null,
+      "versionRelationship": "IMPORTANT: the inspected preprint carries a DIFFERENT TITLE from the version of record. The record cites 'De novo design of protein structure and function with RFdiffusion' (Nature 620:1089-1100, 2023, doi:10.1038/s41586-023-06415-8). The inspected copy is the bioRxiv v2 preprint titled 'Broadly applicable and accurate protein design by integrating structure prediction networks and diffusion generative models'. Same work, retitled on publication. The locator below is therefore a locator into the PREPRINT and must not be presented as a locator into the Nature article, whose section structure and pagination differ."
+    },
+    {
+      "activeBindingChanged": false,
+      "boundedClaimScope": null,
+      "canonicalReleaseAuthorized": false,
+      "decisionId": "urn:maha:decision:frontier-alignment-batch-11:critical-supply-chains-dysprosium-ore-to-oxide",
+      "disposition": "reject-or-hold",
+      "inspectedContentLocator": null,
+      "packetDigest": "sha256:d5266e858a01791722ff35cf54a86b5d0bb19c5a6a99075254afa77e8dbe459f",
+      "rationale": "No inspectable source specifying the ore-to-oxide separation route was established. The packet proposes nothing and this decision changes nothing; the record keeps its existing binding and blockers.",
+      "recordId": "urn:maha:record:critical-supply-chains-dysprosium-ore-to-oxide",
+      "recordRevision": {
+        "canonicalVersion": "0.1.0",
+        "recordDigest": "sha256:01a2cd3c8541b36810a0eccb3128d1cca76ec88e0da3dd4aed3b692cf3729aa0"
+      },
+      "rightsBasis": null,
+      "sourceIdentity": null,
+      "supersedes": null,
+      "versionRelationship": null
+    },
+    {
+      "activeBindingChanged": false,
+      "boundedClaimScope": null,
+      "canonicalReleaseAuthorized": false,
+      "decisionId": "urn:maha:decision:frontier-alignment-batch-11:critical-supply-chains-euv-photoresist-precursors",
+      "disposition": "reject-or-hold",
+      "inspectedContentLocator": null,
+      "packetDigest": "sha256:3cac1c4687d5254d3c0a71bee2e3665e3674c2c80371638f0854b2fba54c003c",
+      "rationale": "No inspectable source treating EUV resist precursor materials or their supply was established. The packet proposes nothing and this decision changes nothing; the record keeps its existing binding and blockers.",
+      "recordId": "urn:maha:record:critical-supply-chains-euv-photoresist-precursors",
+      "recordRevision": {
+        "canonicalVersion": "0.1.0",
+        "recordDigest": "sha256:26b0783565e090420e3a48a7499d95d4feb0fb8a7815104c105f0aea4c17755a"
+      },
+      "rightsBasis": null,
+      "sourceIdentity": null,
+      "supersedes": null,
+      "versionRelationship": null
+    },
+    {
+      "activeBindingChanged": false,
+      "boundedClaimScope": null,
+      "canonicalReleaseAuthorized": false,
+      "decisionId": "urn:maha:decision:frontier-alignment-batch-11:critical-supply-chains-helium-liquefaction-logistics",
+      "disposition": "reject-or-hold",
+      "inspectedContentLocator": null,
+      "packetDigest": "sha256:0c82a8a8b9633c29b4e72d3d5cbfe50623d964d8e19867547a5ff6d8de15588c",
+      "rationale": "No inspectable source for a bounded liquefaction-and-transport chain was established. The commodity chapter covers helium production and storage but not the chain the record names. The packet proposes nothing and this decision changes nothing; the record keeps its existing binding and blockers.",
+      "recordId": "urn:maha:record:critical-supply-chains-helium-liquefaction-logistics",
+      "recordRevision": {
+        "canonicalVersion": "0.1.0",
+        "recordDigest": "sha256:54a24d5bbe55325d0ba7e9a32fa2193249c5f644168df355b21f3dadccc830fc"
+      },
+      "rightsBasis": null,
+      "sourceIdentity": null,
+      "supersedes": null,
+      "versionRelationship": null
+    },
+    {
+      "activeBindingChanged": false,
+      "boundedClaimScope": {
+        "doesNotSupport": [
+          "Any deposit or resource assessment. The only deposit-level content located was an image caption naming a North Carolina mine, which is not an assessment.",
+          "Any reserve, tonnage or grade figure."
+        ],
+        "quantitativeDetailPermitted": false,
+        "recordClaimForm": "The cited source supports treating {subject} as a distinct mechanism within the stated {domain} scope.",
+        "supports": "The high-purity quartz purity specification, under 100 ppm total impurities, and the existence of United States production."
+      },
+      "canonicalReleaseAuthorized": false,
+      "decisionId": "urn:maha:decision:frontier-alignment-batch-11:critical-supply-chains-high-purity-quartz-deposits",
+      "disposition": "revise-record-scope",
+      "inspectedContentLocator": "Page body, high-purity quartz definition.",
+      "packetDigest": "sha256:2e218ca5c8d32a0d44de016a2848141ca8639ea2ebc1fa1977c6ac8cd239edce",
+      "rationale": "The record names deposits. The inspected page defines the commodity and confirms production but assesses no deposit, and the dated Mineral Commodity Summaries chapter that would carry a resource assessment returned HTTP 403 and was not read. Definition-only is therefore the most the evidence supports.",
+      "recordId": "urn:maha:record:critical-supply-chains-high-purity-quartz-deposits",
+      "recordRevision": {
+        "canonicalVersion": "0.1.0",
+        "recordDigest": "sha256:7d1460a1ca4bc9a89da90b65bb46c19c7a284194e4de3250f646a58c0f8de7f2"
+      },
+      "rightsBasis": "public-domain-us-government",
+      "sourceIdentity": "Silica Statistics and Information | no identifier | https://www.usgs.gov/centers/national-minerals-information-center/silica-statistics-and-information",
+      "supersedes": null,
+      "versionRelationship": "A continuously maintained commodity page, not a dated edition. No version identifier is available, so this binding cannot be pinned to a fixed revision. The dated Mineral Commodity Summaries quartz chapters would provide that, but the 2025 PDF returned HTTP 403 and was not read."
+    },
+    {
+      "activeBindingChanged": false,
+      "boundedClaimScope": null,
+      "canonicalReleaseAuthorized": false,
+      "decisionId": "urn:maha:decision:frontier-alignment-batch-11:critical-supply-chains-photoacid-generator-supply",
+      "disposition": "reject-or-hold",
+      "inspectedContentLocator": null,
+      "packetDigest": "sha256:61c5e712d30e86ed72fd0b77c205ae95a2d675ce38733ad416abd26239ed80e3",
+      "rationale": "No inspectable source treating photoacid generator chemistry together with its supply position was established. The packet proposes nothing and this decision changes nothing; the record keeps its existing binding and blockers.",
+      "recordId": "urn:maha:record:critical-supply-chains-photoacid-generator-supply",
+      "recordRevision": {
+        "canonicalVersion": "0.1.0",
+        "recordDigest": "sha256:0f15223d30a40bb328c6bf5a1762a04c7803a6c6e3e3ecf7236afa8c523a9448"
+      },
+      "rightsBasis": null,
+      "sourceIdentity": null,
+      "supersedes": null,
+      "versionRelationship": null
+    },
+    {
+      "activeBindingChanged": false,
+      "boundedClaimScope": {
+        "doesNotSupport": [
+          "Any ITER-specific engineering parameter, which came from the displaced magnet page and is not carried by this source.",
+          "Any numeric equilibrium result, since only the derivation subsection was read."
+        ],
+        "quantitativeDetailPermitted": true,
+        "recordClaimForm": "The cited source supports treating {subject} as a distinct mechanism within the stated {domain} scope.",
+        "supports": "Treating tokamak plasma equilibrium as a distinct mechanism, and the Grad-Shafranov force-balance condition read at an exact subsection."
+      },
+      "canonicalReleaseAuthorized": false,
+      "decisionId": "urn:maha:decision:frontier-alignment-batch-11:fusion-plasma-systems-tokamak-plasma-equilibrium",
+      "disposition": "accept-source-replacement",
+      "inspectedContentLocator": "Section 'Physics principles of toroidal equilibrium and stability', subsection 'Axisymmetric 2D Grad-Shafranov equilibrium', equations (35)-(36).",
+      "packetDigest": "sha256:5efd876e25470d6549c8c5f99cde972e91d3969e2c081d3deb39587bb437e757",
+      "rationale": "The displaced source described coil hardware; a machine description cannot establish an equilibrium physics result. The replacement derives the axisymmetric equilibrium equation directly at a named subsection, which is the mechanism the record names.",
+      "recordId": "urn:maha:record:fusion-plasma-systems-tokamak-plasma-equilibrium",
+      "recordRevision": {
+        "canonicalVersion": "0.1.0",
+        "recordDigest": "sha256:33436c81f49ca042301300245f18880d027289bef92b0b4ea7c765628a397769"
+      },
+      "rightsBasis": "citation-only-no-reuse-licence",
+      "sourceIdentity": "Magnetic-Confinement Fusion—Plasma Theory: Tokamak Magnetohydrodynamic Equilibrium and Stability | doi:10.1016/b978-0-12-819725-7.00230-0 | https://www.osti.gov/servlets/purl/1963025",
+      "supersedes": null,
+      "versionRelationship": "accepted-manuscript-of-record-of-version. The inspected PDF is the DOE-deposited accepted manuscript; the version of record is the Elsevier book chapter behind the DOI. Pagination differs, so the locator below is stated by section heading rather than by publisher page."
+    },
+    {
+      "activeBindingChanged": false,
+      "boundedClaimScope": {
+        "doesNotSupport": [
+          "Generalisation of that ratio beyond the flow-cytometry protocol and pancreatic beta-cell system in which it is defined.",
+          "Any flux value, rate or reference range."
+        ],
+        "quantitativeDetailPermitted": true,
+        "recordClaimForm": "The cited source supports treating {subject} as a distinct mechanism within the stated {domain} scope.",
+        "supports": "Treating mitophagy flux as a distinct, operationalised measured quantity, defined as an induced-to-basal ratio at a named section."
+      },
+      "canonicalReleaseAuthorized": false,
+      "decisionId": "urn:maha:decision:frontier-alignment-batch-11:longevity-metabolism-mitophagy-flux",
+      "disposition": "accept-source-replacement",
+      "inspectedContentLocator": "Section 'Representative Results', mitophagy flux ratio definition.",
+      "packetDigest": "sha256:ee3267778f0ee808822ece201ed9a029d0f99c26e2e367ec19294aa816914ae1",
+      "rationale": "The displaced source treats mitophagy mechanisms but the word flux appeared zero times at the level inspected, so it could not carry the measurement the record names. The replacement operationalises flux explicitly. This is the weakest domain fidelity in the accepted set: the source is a protocol paper in one cell type bound to a longevity-metabolism record, and the scope above is bounded accordingly.",
+      "recordId": "urn:maha:record:longevity-metabolism-mitophagy-flux",
+      "recordRevision": {
+        "canonicalVersion": "0.1.0",
+        "recordDigest": "sha256:af9bc1e0f540b39aecec364ec7bba3b60d73da04e8a307fe10ae41c14ea9f7bd"
+      },
+      "rightsBasis": "citation-only-no-reuse-licence",
+      "sourceIdentity": "Complementary Approaches to Interrogate Mitophagy Flux in Pancreatic Beta-Cells | doi:10.3791/65789 | https://pmc.ncbi.nlm.nih.gov/articles/PMC10597842/",
+      "supersedes": null,
+      "versionRelationship": "PMC author manuscript deposited under NIHPA. The publisher version of record is the JoVE article behind the DOI; section structure is shared but pagination is not, so the locator is stated by section heading."
+    },
+    {
+      "activeBindingChanged": false,
+      "boundedClaimScope": {
+        "doesNotSupport": [
+          "The paper's own methodological recommendations about patching metrics, which are its contribution and not what this record binds.",
+          "Any numeric result from the paper's experiments."
+        ],
+        "quantitativeDetailPermitted": true,
+        "recordClaimForm": "The cited source supports treating {subject} as a distinct mechanism within the stated {domain} scope.",
+        "supports": "Treating activation patching as a distinct mechanism, with the clean, corrupted and restore procedure specified at section 2.1."
+      },
+      "canonicalReleaseAuthorized": false,
+      "decisionId": "urn:maha:decision:frontier-alignment-batch-11:mechanistic-interpretability-activation-patching",
+      "disposition": "accept-source-replacement",
+      "inspectedContentLocator": "Section 2.1 'Activation patching', numbered list of the three forward passes, step 3.",
+      "packetDigest": "sha256:343c8fdb05c92718310797254061aad156b195ecd56d035023a97f3594921419",
+      "rationale": "The displaced source applies activation-resampling interventions but does not specify the general technique, which is why it only partially supported the record. The replacement names the technique in its title and specifies the procedure at an exact section, under CC BY 4.0.",
+      "recordId": "urn:maha:record:mechanistic-interpretability-activation-patching",
+      "recordRevision": {
+        "canonicalVersion": "0.1.0",
+        "recordDigest": "sha256:75b9f1bb39ddd339c45d7813146d0d54f9a4dd03de056be3f9a51a4ed72c1953"
+      },
+      "rightsBasis": "cc-by-4.0",
+      "sourceIdentity": "Towards Best Practices of Activation Patching in Language Models: Metrics and Methods | arXiv:2309.16042v2 | https://arxiv.org/html/2309.16042v2",
+      "supersedes": null,
+      "versionRelationship": "v2, submitted 2023-09-27 and last revised 2024-01-17, is the version accepted at ICLR 2024. The locator below is into v2; v1 was not inspected and its section numbering is not assumed to match."
+    },
+    {
+      "activeBindingChanged": false,
+      "boundedClaimScope": {
+        "doesNotSupport": [
+          "Any numeric selectivity value for a particular probe or corpus.",
+          "Any claim about superposition, which is what the displaced source was about."
+        ],
+        "quantitativeDetailPermitted": true,
+        "recordClaimForm": "The cited source supports treating {subject} as a distinct mechanism within the stated {domain} scope.",
+        "supports": "Treating the representation probing boundary as a distinct mechanism, with selectivity defined against control tasks at a named figure caption."
+      },
+      "canonicalReleaseAuthorized": false,
+      "decisionId": "urn:maha:decision:frontier-alignment-batch-11:mechanistic-interpretability-representation-probing-boundary",
+      "disposition": "accept-source-replacement",
+      "inspectedContentLocator": "Section 1 'Introduction', caption to Figure 2.",
+      "packetDigest": "sha256:ccb7a3c4eb896bec30d2e46663de390c062cee8ef18cc90336624dc1f47e1411",
+      "rationale": "The displaced source was inspected and contains no probing methodology. The replacement states the boundary directly: probe accuracy alone cannot distinguish a property encoded in the representation from one the probe learned, and it supplies control tasks and selectivity as the method for telling those apart.",
+      "recordId": "urn:maha:record:mechanistic-interpretability-representation-probing-boundary",
+      "recordRevision": {
+        "canonicalVersion": "0.1.0",
+        "recordDigest": "sha256:3fa9cad966e10d7bb1ba52e2c082873316a8e28dfd2e7131e986e1474fa499c9"
+      },
+      "rightsBasis": "citation-only-no-reuse-licence",
+      "sourceIdentity": "Designing and Interpreting Probes with Control Tasks | arXiv:1909.03368v1 | https://arxiv.org/html/1909.03368v1",
+      "supersedes": null,
+      "versionRelationship": "v1 is the only arXiv version and corresponds to the EMNLP 2019 paper. The locator is into the arXiv HTML rendering; the ACL Anthology version of record has different pagination and was not inspected."
+    },
+    {
+      "activeBindingChanged": false,
+      "boundedClaimScope": null,
+      "canonicalReleaseAuthorized": false,
+      "decisionId": "urn:maha:decision:frontier-alignment-batch-11:neurotechnology-bci-adaptive-stimulation-policies",
+      "disposition": "reject-or-hold",
+      "inspectedContentLocator": null,
+      "packetDigest": "sha256:fc993482ddb0d7f3eabf155963dcaab294e292156c43ba3bb15b61f75c1e89df",
+      "rationale": "No comparative-policy source was inspected. The existing binding demonstrates one adaptive rule, which is not the policy framework the record names. The packet proposes nothing and this decision changes nothing; the record keeps its existing binding and blockers.",
+      "recordId": "urn:maha:record:neurotechnology-bci-adaptive-stimulation-policies",
+      "recordRevision": {
+        "canonicalVersion": "0.1.0",
+        "recordDigest": "sha256:6421b1d7631cd0d8f3a56c8c94d55d133c9622b90382c4d46afea950d5f0f7b0"
+      },
+      "rightsBasis": null,
+      "sourceIdentity": null,
+      "supersedes": null,
+      "versionRelationship": null
+    }
+  ],
+  "resultDigest": "sha256:019d0f11d762aa27b01147032589e06e78a1adbe3c40762f0c3ac7d4f9bdac6e",
+  "schemaVersion": "maha-frontier-alignment-batch-11-review/1.0",
+  "standing": {
+    "activeBindingsChanged": 0,
+    "canonicalReleasesAuthorized": 0,
+    "externallyReviewed": false,
+    "independentlyReproduced": false,
+    "note": "Append-only review artifacts. A decision records what the inspected evidence can carry for a specific packet against a specific record revision. It is not an active binding and does not become one."
+  },
+  "totals": {
+    "acceptSourceReplacement": 9,
+    "activeBindingsChanged": 0,
+    "canonicalReleasesAuthorized": 0,
+    "quantitativeDetailPermitted": 7,
+    "rejectOrHold": 8,
+    "reviewed": 20,
+    "reviseRecordScope": 3
+  }
+}
