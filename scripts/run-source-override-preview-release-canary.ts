@@ -1,4 +1,5 @@
-import { writeFileSync } from 'node:fs'
+import { mkdirSync, writeFileSync } from 'node:fs'
+import { dirname } from 'node:path'
 
 import { epistemicRecordPath, epistemicReviewTargetHash, sha256Canonical } from '../lib/epistemic-publication.ts'
 import {
@@ -180,11 +181,11 @@ async function previewAndPublish(releaseToken: string) {
   for (const entry of entries) {
     const candidate = exactCandidate(before, entry.recordId, entry.targetSha256)
     const active = candidate.activeRelease ? object(candidate.activeRelease, `${entry.recordId} active release`) : null
+    if (active?.targetSha256 === entry.targetSha256) continue
     if (entry.releaseKind === 'superseding') {
       if (!active) throw new Error(`${entry.recordId}: Preview lacks the required prior active release for a superseding canary.`)
       if (active.targetSha256 !== entry.priorReleaseTargetSha256) throw new Error(`${entry.recordId}: Preview prior release target does not match the frozen lineage.`)
     } else if (active) {
-      if (active.targetSha256 === entry.targetSha256) continue
       throw new Error(`${entry.recordId}: initial-release target already has a different active Preview release.`)
     }
     if (candidate.ready !== true) throw new Error(`${entry.recordId}: exact target is not release-ready: ${JSON.stringify(candidate.blockers)}`)
@@ -301,7 +302,8 @@ export async function runSourceOverridePreviewReleaseCanary() {
     review: { ingestionStatus: review.ingestionStatus, ingestionReused: review.ingestionReused, scopedDecisionCount: review.decisions.length },
     release: {
       previewCount: lifecycle.previews.length,
-      publishedCount: lifecycle.published.length,
+      publishedThisRunCount: lifecycle.published.length,
+      activeCount: lifecycle.activeFacts.length,
       supersedingCount: lifecycle.activeFacts.filter((fact) => revisions.find((entry) => entry.recordId === fact.recordId)?.releaseKind === 'superseding').length,
       initialCount: lifecycle.activeFacts.filter((fact) => revisions.find((entry) => entry.recordId === fact.recordId)?.releaseKind === 'initial').length,
       activeFacts: lifecycle.activeFacts,
@@ -316,13 +318,17 @@ export async function runSourceOverridePreviewReleaseCanary() {
     },
   }
   const evidence = { ...body, evidenceSha256: sha256Canonical(body) }
-  if (evidencePath) writeFileSync(evidencePath, `${JSON.stringify(evidence, null, 2)}\n`, { mode: 0o600 })
+  if (evidencePath) {
+    mkdirSync(dirname(evidencePath), { recursive: true, mode: 0o700 })
+    writeFileSync(evidencePath, `${JSON.stringify(evidence, null, 2)}\n`, { mode: 0o600 })
+  }
   console.log(JSON.stringify({
     schemaVersion: evidence.schemaVersion,
     exactRevisionCount: evidence.exactRevisions.length,
     scopedDecisionCount: evidence.review.scopedDecisionCount,
     previewCount: evidence.release.previewCount,
-    publishedCount: evidence.release.publishedCount,
+    publishedThisRunCount: evidence.release.publishedThisRunCount,
+    activeCount: evidence.release.activeCount,
     supersedingCount: evidence.release.supersedingCount,
     initialCount: evidence.release.initialCount,
     routes200: evidence.projection.filter((entry) => entry.routeStatus === 200).length,
