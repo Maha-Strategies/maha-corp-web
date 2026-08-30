@@ -6,7 +6,7 @@ import { EPISTEMIC_RECORDS } from '../lib/epistemic-pilots.ts'
 import { epistemicReviewTargetHash } from '../lib/epistemic-publication.ts'
 import { releaseReadiness } from '../lib/epistemic-release.ts'
 import { SUBSTANTIAL_BATCH_2_PAGES } from '../lib/substantial-page-publication-batch-2.ts'
-import { PUBLIC_SUBSTANTIAL_PAGES } from '../lib/substantial-page-public.ts'
+import { SUBSTANTIAL_PUBLICATION_PAGES } from '../lib/substantial-page-publication.ts'
 import {
   RELEASE_RECONCILIATION_STATES,
   SUBSTANTIAL_COHORT_STATES,
@@ -145,10 +145,9 @@ test('batch one stays twenty of twenty and byte-identical', () => {
   const batch1 = JSON.parse(readFileSync('content/substantial-pages/publication-batch-1.json', 'utf8'))
   assert.equal(batch1.pages.length, 20)
   assert.equal(batch1.pages.filter((page: { quality: { eligible: boolean } }) => page.quality.eligible).length, 20)
-  const batchOnePublic = PUBLIC_SUBSTANTIAL_PAGES.filter((page) => page.publicationVersion === 'maha-substantial-publication/1.0')
-  assert.equal(batchOnePublic.length, 20)
+  assert.equal(SUBSTANTIAL_PUBLICATION_PAGES.length, 20)
   for (const page of batch1.pages) {
-    const published = batchOnePublic.find((candidate) => candidate.contract.recordId === page.contract.recordId)!
+    const published = SUBSTANTIAL_PUBLICATION_PAGES.find((candidate) => candidate.contract.recordId === page.contract.recordId)!
     assert.equal(published.contractDigest, page.contractDigest, 'batch one contract digests are frozen')
     assert.equal(published.publicationDigest, page.publicationDigest, 'batch one publication digests are frozen')
   }
