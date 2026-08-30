@@ -47,7 +47,10 @@ export default function EvidenceAuditPage() {
             This is not generic AI writing advice or a polished summary. It is an evidence workflow for work your organization must be able to stand behind.
           </p>
           <div className="mt-10 flex flex-col gap-4 sm:flex-row">
-            <TrackedLink href="/mps/preflight" event="cta_evidence_audit_preflight" className="evidence-action evidence-action--primary">
+            <TrackedLink href="/tools/evidence-preflight" event="cta_evidence_audit_structural_preflight" className="evidence-action evidence-action--primary">
+              Check three claims for free ↗
+            </TrackedLink>
+            <TrackedLink href="/mps/preflight" event="cta_evidence_audit_preflight" className="evidence-action evidence-action--secondary">
               Run a private preflight — $49 ↗
             </TrackedLink>
             <TrackedLink href="#scope-an-audit" event="cta_evidence_audit_scope" className="evidence-action evidence-action--secondary">
@@ -115,6 +118,7 @@ export default function EvidenceAuditPage() {
             The method is public: MPS makes the epistemic status of substantive claims explicit and machine-readable. An audit applies that discipline to the document in front of you.
           </p>
           <div className="mt-7 flex flex-wrap gap-4">
+            <Link href="/tools/evidence-preflight" className="evidence-link">Check source readiness deterministically ↗</Link>
             <Link href="/audit" className="evidence-link">Try the free auditor ↗</Link>
             <Link href="/mps" className="evidence-link">Read MPS/0.1 ↗</Link>
             <Link href="/mps/preflight/example" className="evidence-link">See a sample report ↗</Link>
