@@ -105,20 +105,29 @@ const LEAN_ENV: NodeJS.ProcessEnv = {
 /**
  * The Lean version actually on PATH, or null when Lean is unavailable.
  *
+ * Resolved inside the package directory on purpose. elan picks a toolchain from
+ * the nearest `lean-toolchain`, so asking from anywhere else either fails or
+ * answers about a different toolchain than the one that will check the proofs.
+ *
  * Parsed from `lean --version`, which prints e.g.
  * `Lean (version 4.33.1, x86_64-unknown-linux-gnu, commit ..., Release)`.
  */
-export function resolveActualLeanVersion(): string | null {
+export function resolveActualLeanVersion(cwd?: string): string | null {
   try {
-    const output = execFileSync('lean', ['--version'], { env: LEAN_ENV, encoding: 'utf8', stdio: 'pipe' })
+    const output = execFileSync('lean', ['--version'], {
+      cwd,
+      env: LEAN_ENV,
+      encoding: 'utf8',
+      stdio: 'pipe',
+    })
     return /version (\d+\.\d+\.\d+)/.exec(output)?.[1] ?? null
   } catch {
     return null
   }
 }
 
-export function leanAvailable(): boolean {
-  return resolveActualLeanVersion() !== null
+export function leanAvailable(cwd?: string): boolean {
+  return resolveActualLeanVersion(cwd) !== null
 }
 
 function defaultBuild(packageRoot: string): { ok: boolean; output: string } {
@@ -400,7 +409,7 @@ export function verifyAttachments(
 
   // The toolchain on PATH must be the one the package pins. A proof checked by
   // a different Lean is not a proof of what the attachment claims.
-  const actualVersion = (options.resolveLeanVersion ?? resolveActualLeanVersion)()
+  const actualVersion = options.resolveLeanVersion ? options.resolveLeanVersion() : resolveActualLeanVersion(root)
   if (actualVersion === null) {
     failures.push({ code: 'lean-unavailable', detail: 'Lean is not available; nothing can be verified.' })
     return { ...empty, failures }

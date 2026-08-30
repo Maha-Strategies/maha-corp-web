@@ -73,6 +73,16 @@ jobs:
           diff first.json second.json
           rm -f first.json second.json
 
+      # The standalone bridge building is not evidence that a dossier package's
+      # proofs recheck. Build the real integrated fixture package twice, compare
+      # bytes, and verify it through the production path with the pinned Lean.
+      - name: Build and verify the integrated formal-proof package
+        working-directory: .
+        run: |
+          npm ci
+          npm run build:wasm-kernel
+          node --experimental-strip-types scripts/verify-integrated-formal-proof-package.ts
+
       - name: Confirm no build output is tracked
         run: |
           cd "$GITHUB_WORKSPACE"

@@ -4,3 +4,6 @@
 .lake/
 build/
 lakefile.olean
+# Generated on every build. It embeds .lake paths and, with no dependencies to
+# pin, carries no lockfile value.
+lake-manifest.json
