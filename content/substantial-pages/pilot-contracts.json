@@ -6,9 +6,7 @@
   "blocked": 1,
   "blockerCounts": {
     "source-assignment-positional-legacy": 1,
-    "source-inaccessible": 1,
-    "source-metadata-unverified": 1,
-    "source-not-inspected": 1
+    "source-subject-partially-supported": 1
   },
   "selectionTierCounts": {
     "bridge-edge": 28,
@@ -1312,7 +1310,7 @@
       "domainSlug": "critical-supply-chains",
       "recordKind": "concept",
       "selectionRationale": "The most connected record in the domain with six declared edges, a complete locator and a government-publication rights basis. A supply-side concept balances the physics and software records in the set.",
-      "sourceAlignment": "inaccessible-source",
+      "sourceAlignment": "partially-supported",
       "sourceAlignmentNote": "The USGS critical mineral resources volume covers geology, production, processing, uses and supply considerations for selected commodities, which is the record subject.",
       "contractDigest": "sha256:397138bd24e252f22886ec884927fd2dfe4e94c36ca700bb0ebc1a347f68a781",
       "decision": {
@@ -1321,9 +1319,7 @@
         "evaluatedAgainst": "maha-substantial-page/0.1",
         "reasons": [
           "source-assignment-positional-legacy",
-          "source-inaccessible",
-          "source-metadata-unverified",
-          "source-not-inspected"
+          "source-subject-partially-supported"
         ],
         "measures": {
           "explanationSections": 3,

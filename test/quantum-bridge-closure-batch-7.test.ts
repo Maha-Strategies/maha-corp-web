@@ -61,16 +61,16 @@ test('Batch 7 inspection is explicit and metadata-only records remain blocked', 
   }
 })
 
-test('Batch 7 produces the reconciled corpus totals', () => {
+test('the active corpus includes the bounded Batch 8 evidence moves without changing Batch 7 decisions', () => {
   assert.deepEqual(verdictTotals(), {
-    supported: 70,
-    'partially-supported': 37,
-    mismatched: 68,
-    'insufficient-evidence': 40,
-    'inaccessible-source': 25,
+    supported: 90,
+    'partially-supported': 50,
+    mismatched: 86,
+    'insufficient-evidence': 9,
+    'inaccessible-source': 5,
   })
-  assert.equal(FRONTIER_ALIGNMENT_AUDIT.filter((entry) => entry.evidence.sourceContentInspected).length, 181)
-  assert.equal(FRONTIER_ALIGNMENT_AUDIT.filter((entry) => alignmentBlockers(entry.recordId).length === 0).length, 70)
+  assert.equal(FRONTIER_ALIGNMENT_AUDIT.filter((entry) => entry.evidence.sourceContentInspected).length, 235)
+  assert.equal(FRONTIER_ALIGNMENT_AUDIT.filter((entry) => alignmentBlockers(entry.recordId).length === 0).length, 90)
 })
 
 test('bridge endpoint and usability invariants do not move under editorial closure', () => {

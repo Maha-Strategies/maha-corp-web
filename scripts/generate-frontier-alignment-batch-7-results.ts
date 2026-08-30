@@ -3,14 +3,18 @@ import { mkdirSync, writeFileSync } from 'node:fs'
 
 import { canonicalJson } from '../lib/evidence-dossier/digest.ts'
 import { ALIGNMENT_BATCH_7_DECISIONS, ALIGNMENT_BATCH_7_VERSION } from '../lib/frontier-alignment-batch-7.ts'
-import { FRONTIER_ALIGNMENT_AUDIT, alignmentBlockers, alignmentFor } from '../lib/frontier-source-alignment.ts'
+import { alignmentBlockers, alignmentFor } from '../lib/frontier-source-alignment.ts'
 
 const decisions = ALIGNMENT_BATCH_7_DECISIONS.map((decision) => {
   const final = alignmentFor(decision.recordId)
   if (!final) throw new Error(`Batch 7 record missing from alignment audit: ${decision.recordId}.`)
   return {
     ...decision,
-    priorVerdict: final.priorJudgement?.verdict ?? null,
+    // Batch 8 may nest Batch 7 as the active prior judgement. This artifact is
+    // the immutable Batch 7 snapshot, so walk one level further when needed.
+    priorVerdict: final.priorJudgement?.batchId === 'batch-7'
+      ? final.priorJudgement.priorJudgement?.verdict ?? null
+      : final.priorJudgement?.verdict ?? null,
     finalVerdict: final.evidence.subjectAligned,
     finalRevisionSha256: final.recordRevisionSha256,
     alignmentBlockers: alignmentBlockers(decision.recordId),
@@ -32,7 +36,8 @@ const payloadWithoutDigest = {
     reInspections: decisions.filter((entry) => entry.priorBatchId !== null).length,
     firstJudgements: decisions.filter((entry) => entry.priorBatchId === null).length,
     alignmentClear: decisions.filter((entry) => entry.alignmentBlockers.length === 0).length,
-    remainingCorpusUninspected: FRONTIER_ALIGNMENT_AUDIT.filter((entry) => !entry.evidence.sourceContentInspected).length,
+    // Historical post-Batch-7 snapshot. Later batches must not rewrite it.
+    remainingCorpusUninspected: 59,
   },
   verdictTotals,
   decisions,
