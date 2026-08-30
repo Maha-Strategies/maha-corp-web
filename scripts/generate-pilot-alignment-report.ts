@@ -95,7 +95,7 @@ for (const entry of inspected) {
 }
 lines.push('')
 lines.push(
-  'Every artifact read this sprint was the arXiv preprint of the declared version of record, recorded as such rather than treated as the published text.',
+  'Inspected artifacts retain their exact version relationship. Publisher abstracts, arXiv preprints, author manuscripts and repository copies are never collapsed into one evidence class or treated as interchangeable with uninspected version-of-record text.',
   '',
 )
 
