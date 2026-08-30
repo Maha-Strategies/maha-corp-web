@@ -41,6 +41,10 @@ import {
   SOURCE_OVERRIDE_REVISION_CANARY_VERSION,
 } from './source-override-revision-ingestion-records.ts'
 import {
+  BATCH_11_REVISED_INGESTION_RECORDS,
+  BATCH_11_REVISION_INGESTION_VERSION,
+} from './batch-11-revision-ingestion-records.ts'
+import {
   MCP_PRIVATE_CANARY_ADAPTER_ID,
   MCP_PRIVATE_CANARY_DATASET_VERSION,
   MCP_PRIVATE_CANARY_RECORD,
@@ -75,6 +79,7 @@ export const LEGACY_ADAPTER_IDS = [
   'substantial-batch-2-internal-review',
   'repaired-revision-canary',
   'source-override-revision-canary',
+  'batch-11-revision-canary',
   MCP_PRIVATE_CANARY_ADAPTER_ID,
 ] as const
 
@@ -527,6 +532,21 @@ export const SOURCE_OVERRIDE_REVISION_CANARY_ADAPTER: LegacyAdapterDefinition = 
   })),
 })
 
+export const BATCH_11_REVISION_CANARY_ADAPTER: LegacyAdapterDefinition = definition({
+  id: 'batch-11-revision-canary',
+  name: 'Batch 11 exact-revision Preview rehearsal',
+  description: 'Exactly five internally reviewed Batch 11 revisions; ingestion freezes draft targets and cannot approve or release them.',
+  sourceDatasetVersion: BATCH_11_REVISION_INGESTION_VERSION,
+  sourceRecords: BATCH_11_REVISED_INGESTION_RECORDS,
+  sourceSources: BATCH_11_REVISED_INGESTION_RECORDS.flatMap((record) => record.sources),
+  build: () => BATCH_11_REVISED_INGESTION_RECORDS.map((record) => ({
+    sourceRecordId: record.id,
+    sourceRecord: record,
+    sourcePublicPath: epistemicRecordPath(record),
+    record: structuredClone(record),
+  })),
+})
+
 export const MCP_PRIVATE_CANARY_ADAPTER: LegacyAdapterDefinition = definition({
   id: MCP_PRIVATE_CANARY_ADAPTER_ID,
   name: 'Synthetic private MCP governed-release canary',
@@ -554,6 +574,8 @@ export function getLegacyEpistemicAdapter(id: string) {
       ? REPAIRED_REVISION_CANARY_ADAPTER
     : id === SOURCE_OVERRIDE_REVISION_CANARY_ADAPTER.id
       ? SOURCE_OVERRIDE_REVISION_CANARY_ADAPTER
+    : id === BATCH_11_REVISION_CANARY_ADAPTER.id
+      ? BATCH_11_REVISION_CANARY_ADAPTER
     : id === MCP_PRIVATE_CANARY_ADAPTER.id
       ? MCP_PRIVATE_CANARY_ADAPTER
     : LEGACY_EPISTEMIC_ADAPTERS.find((adapter) => adapter.id === id)

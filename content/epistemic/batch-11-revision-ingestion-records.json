@@ -1,0 +1,565 @@
+{
+  "schemaVersion": "maha-batch-11-revision-ingestion/1.0",
+  "purpose": "exact-record-ingestion-snapshot",
+  "recordsSha256": "sha256:9b38c837eca58368ce42363d2f556fea484ac16ec2be18c34d9af698aec6169b",
+  "records": [
+    {
+      "schemaVersion": "maha-epistemic/1.0",
+      "evidencePolicyVersion": "mps/0.1",
+      "id": "urn:maha:record:agentic-systems-mcp-tool-allowlisting",
+      "domainSlug": "agentic-systems-mcp",
+      "recordKind": "measurement",
+      "slug": "agentic-systems-mcp-tool-allowlisting",
+      "title": "Tool allowlisting",
+      "description": "A source-bounded measurement record for tool allowlisting within agentic systems and mcp.",
+      "summary": "Tool allowlisting is represented as one reviewable unit in the Agentic systems and MCP graph. Its source, locator, scope, uncertainty, and prohibited inference remain attached to the claim rather than being generalized across the domain.",
+      "claims": [
+        {
+          "id": "urn:maha:claim:agentic-systems-mcp-tool-allowlisting",
+          "statement": "The cited source supports treating tool allowlisting as a distinct measurement within the stated agentic systems and mcp scope.",
+          "claimKind": "observation",
+          "evidenceMaturity": "single-study",
+          "sourceIds": [
+            "source-agentic-systems-mcp-mcp-core"
+          ],
+          "scope": "Limited to Tools, section 'Capabilities', sentence beginning 'The set MAY vary by the authorization presented on the request'; and Tools, section 'User Interaction Model', warning beginning 'For trust & safety and security, there SHOULD always be a human in the loop'. in \"Model Context Protocol specification, revision 2026-07-28: Tools; Security Best Practices\". Scope-limited tool exposure and human-in-the-loop denial, at two exact locators in specification revision 2026-07-28.",
+          "boundary": "Tool allowlisting does not by itself establish system-level performance, safety, manufacturability, scalability, economic advantage, clinical benefit, or deployment readiness.",
+          "uncertainty": {
+            "kind": "qualitative",
+            "statement": "Subject identity only; no quantitative or numerical detail is supported by the inspected evidence. Only two pages of the revision were read in full. A tool allowlist mechanism could in principle be specified on another page of the same revision; this inspection does not exhaust the specification. The record is therefore proposed for narrowing rather than judged unsupportable."
+          },
+          "replication": {
+            "independentReplicationCount": null,
+            "assessment": "Independent replication and cross-platform transfer have not been compiled for this candidate; the evidence maturity refers only to the bounded source contract.",
+            "asOfDate": "2026-08-24"
+          }
+        }
+      ],
+      "sources": [
+        {
+          "id": "source-batch-11-agentic-systems-mcp-tool-allowlisting",
+          "title": "Model Context Protocol specification, revision 2026-07-28: Tools; Security Best Practices",
+          "authors": [
+            "Model Context Protocol contributors"
+          ],
+          "publisher": "See identifier",
+          "publishedAt": "",
+          "url": "https://modelcontextprotocol.io/specification/2026-07-28/server/tools",
+          "identifiers": [
+            {
+              "scheme": "url",
+              "value": "https://modelcontextprotocol.io/specification/2026-07-28/server/tools"
+            }
+          ],
+          "exactLocator": "Tools, section 'Capabilities', sentence beginning 'The set MAY vary by the authorization presented on the request'; and Tools, section 'User Interaction Model', warning beginning 'For trust & safety and security, there SHOULD always be a human in the loop'.",
+          "rights": {
+            "basis": "citation-with-paraphrase",
+            "quotationUsed": false,
+            "note": "Published specification text on the protocol's public documentation site, quoted for identification. No licence grant is asserted beyond fair quotation of a short passage."
+          },
+          "establishes": "Scope-limited tool exposure and human-in-the-loop denial, at two exact locators in specification revision 2026-07-28.",
+          "boundary": "That the Model Context Protocol specification defines a tool allowlist. It does not. A full read found allowlist used twice, for OAuth URL schemes and for client-ID domains, never for tools. Any per-tool permitted-set mechanism."
+        }
+      ],
+      "sections": [
+        {
+          "heading": "What the cited work establishes",
+          "paragraphs": [
+            "The specification defines client, server, and host roles and capability-negotiated protocol primitives.",
+            "Limited to Architecture, lifecycle, capabilities, resources, prompts, and security sections. in “Model Context Protocol specification”; this candidate records the concept boundary and does not pool results from uncited systems or studies."
+          ],
+          "claimIds": [
+            "urn:maha:claim:agentic-systems-mcp-tool-allowlisting"
+          ]
+        },
+        {
+          "heading": "What remains a separate question",
+          "paragraphs": [
+            "Tool allowlisting does not by itself establish system-level performance, safety, manufacturability, scalability, economic advantage, clinical benefit, or deployment readiness.",
+            "A protocol primitive does not prescribe an organization’s allowlist, identity, retention, or approval policy."
+          ],
+          "claimIds": []
+        }
+      ],
+      "bridges": [
+        {
+          "id": "urn:maha:bridge:agentic-systems-mcp-tool-allowlisting-1",
+          "sourceConceptId": "urn:maha:record:agentic-systems-mcp-tool-allowlisting",
+          "targetConceptId": "urn:maha:record:agentic-systems-mcp-mcp-session-lifecycle",
+          "bridgeType": "mechanistic-dependency",
+          "statement": "Tool allowlisting is positioned after MCP session lifecycle in this bounded dependency sequence; the edge is navigational and does not assert equivalence or causation beyond the cited source scope."
+        }
+      ],
+      "boundaries": [
+        "Tool allowlisting does not by itself establish system-level performance, safety, manufacturability, scalability, economic advantage, clinical benefit, or deployment readiness.",
+        "A source-bounded mechanism, method, or measurement record does not establish manufacturing yield, economic advantage, safety, clinical benefit, or commercial readiness unless those outcomes are measured in a separately scoped record.",
+        "That the Model Context Protocol specification defines a tool allowlist. It does not. A full read found allowlist used twice, for OAuth URL schemes and for client-ID domains, never for tools.",
+        "Any per-tool permitted-set mechanism.",
+        "Prior binding, retained for history: \"Model Context Protocol specification\" at Architecture, lifecycle, capabilities, resources, prompts, and security sections.. It was displaced because the inspected evidence did not support this record's subject."
+      ],
+      "prohibitedInferences": [
+        "Do not use this tool allowlisting record to claim that the surrounding technology is proven, safe, scalable, commercially available, or strategically superior.",
+        "Do not transfer a reported result across hardware, organisms, protocols, datasets, operating conditions, or outcome definitions without a declared comparison contract."
+      ],
+      "publication": {
+        "requestedPublicPromotion": false,
+        "reviewState": "draft",
+        "canonicalVersion": "0.1.0",
+        "lastReviewedAt": "2026-08-24T00:00:00.000Z",
+        "requiredReviewScopes": [
+          "source-fidelity",
+          "domain-fidelity",
+          "boundary-adequacy",
+          "rights-and-locator"
+        ],
+        "reviewEvents": []
+      }
+    },
+    {
+      "schemaVersion": "maha-epistemic/1.0",
+      "evidencePolicyVersion": "mps/0.1",
+      "id": "urn:maha:record:biomolecular-engineering-structure-prediction-filtering",
+      "domainSlug": "biomolecular-engineering",
+      "recordKind": "comparison",
+      "slug": "biomolecular-engineering-structure-prediction-filtering",
+      "title": "Structure prediction filtering",
+      "description": "A source-bounded comparison record for structure prediction filtering within biomolecular engineering.",
+      "summary": "Structure prediction filtering is represented as one reviewable unit in the Biomolecular engineering graph. Its source, locator, scope, uncertainty, and prohibited inference remain attached to the claim rather than being generalized across the domain.",
+      "claims": [
+        {
+          "id": "urn:maha:claim:biomolecular-engineering-structure-prediction-filtering",
+          "statement": "The cited source supports treating structure prediction filtering as a distinct comparison within the stated biomolecular engineering scope.",
+          "claimKind": "empirical-claim",
+          "evidenceMaturity": "single-study",
+          "sourceIds": [
+            "source-biomolecular-engineering-rfdiffusion"
+          ],
+          "scope": "Limited to Preprint v2, section 'Unconditional protein monomer generation'. in \"Broadly applicable and accurate protein design by integrating structure prediction networks and diffusion generative models\". The explicit in silico filtering step, with its pAE and backbone-RMSD acceptance thresholds, read at a named section of the bioRxiv preprint.",
+          "boundary": "Structure prediction filtering does not by itself establish system-level performance, safety, manufacturability, scalability, economic advantage, clinical benefit, or deployment readiness.",
+          "uncertainty": {
+            "kind": "qualitative",
+            "statement": "Established for the preprint only. Whether the Nature version states the same thresholds in the same terms was not verified, because the publisher copy was behind an authentication redirect."
+          },
+          "replication": {
+            "independentReplicationCount": null,
+            "assessment": "Independent replication and cross-platform transfer have not been compiled for this candidate; the evidence maturity refers only to the bounded source contract.",
+            "asOfDate": "2026-08-24"
+          }
+        }
+      ],
+      "sources": [
+        {
+          "id": "source-batch-11-biomolecular-engineering-structure-prediction-filtering",
+          "title": "Broadly applicable and accurate protein design by integrating structure prediction networks and diffusion generative models",
+          "authors": [
+            "Watson, Joseph L.",
+            "Juergens, David",
+            "Bennett, Nathaniel R.",
+            "et al."
+          ],
+          "publisher": "See identifier",
+          "publishedAt": "2022-01-01",
+          "url": "https://www.biorxiv.org/content/10.1101/2022.12.09.519842v2.full",
+          "identifiers": [
+            {
+              "scheme": "doi",
+              "value": "10.1101/2022.12.09.519842"
+            }
+          ],
+          "exactLocator": "Preprint v2, section 'Unconditional protein monomer generation'.",
+          "rights": {
+            "basis": "citation-with-paraphrase",
+            "quotationUsed": false,
+            "note": "bioRxiv preprint. No licence statement was found in the fetched text, so no reuse licence is asserted; the passage is quoted for identification only. The Nature version of record was not used because nature.com redirected to an authentication endpoint, which was not followed."
+          },
+          "establishes": "The explicit in silico filtering step, with its pAE and backbone-RMSD acceptance thresholds, read at a named section of the bioRxiv preprint.",
+          "boundary": "A locator into the Nature version of record. The preprint carries a different title and different section structure, so this locator does not transfer. Any claim that the published article states these thresholds in these terms, which was not verified because the publisher copy sat behind an authentication redirect."
+        }
+      ],
+      "sections": [
+        {
+          "heading": "What the cited work establishes",
+          "paragraphs": [
+            "The study reports diffusion-based generation and experimental tests for specified protein-design tasks.",
+            "Limited to Abstract; unconditional generation, motif scaffolding, binder design, Methods, and Extended Data. in “De novo design of protein structure and function with RFdiffusion”; this candidate records the concept boundary and does not pool results from uncited systems or studies."
+          ],
+          "claimIds": [
+            "urn:maha:claim:biomolecular-engineering-structure-prediction-filtering"
+          ]
+        },
+        {
+          "heading": "What remains a separate question",
+          "paragraphs": [
+            "Structure prediction filtering does not by itself establish system-level performance, safety, manufacturability, scalability, economic advantage, clinical benefit, or deployment readiness.",
+            "Reported task success does not establish universal folding, binding, safety, or therapeutic function."
+          ],
+          "claimIds": []
+        }
+      ],
+      "bridges": [
+        {
+          "id": "urn:maha:bridge:biomolecular-engineering-structure-prediction-filtering-1",
+          "sourceConceptId": "urn:maha:record:biomolecular-engineering-structure-prediction-filtering",
+          "targetConceptId": "urn:maha:record:biomolecular-engineering-de-novo-binder-design",
+          "bridgeType": "mechanistic-dependency",
+          "statement": "Structure prediction filtering is positioned after De novo binder design in this bounded dependency sequence; the edge is navigational and does not assert equivalence or causation beyond the cited source scope."
+        }
+      ],
+      "boundaries": [
+        "Structure prediction filtering does not by itself establish system-level performance, safety, manufacturability, scalability, economic advantage, clinical benefit, or deployment readiness.",
+        "A source-bounded mechanism, method, or measurement record does not establish manufacturing yield, economic advantage, safety, clinical benefit, or commercial readiness unless those outcomes are measured in a separately scoped record.",
+        "A locator into the Nature version of record. The preprint carries a different title and different section structure, so this locator does not transfer.",
+        "Any claim that the published article states these thresholds in these terms, which was not verified because the publisher copy sat behind an authentication redirect.",
+        "Prior binding, retained for history: \"De novo design of protein structure and function with RFdiffusion\" at Abstract; unconditional generation, motif scaffolding, binder design, Methods, and Extended Data.. It was displaced because the inspected evidence did not support this record's subject."
+      ],
+      "prohibitedInferences": [
+        "Do not use this structure prediction filtering record to claim that the surrounding technology is proven, safe, scalable, commercially available, or strategically superior.",
+        "Do not transfer a reported result across hardware, organisms, protocols, datasets, operating conditions, or outcome definitions without a declared comparison contract."
+      ],
+      "publication": {
+        "requestedPublicPromotion": false,
+        "reviewState": "draft",
+        "canonicalVersion": "0.1.0",
+        "lastReviewedAt": "2026-08-24T00:00:00.000Z",
+        "requiredReviewScopes": [
+          "source-fidelity",
+          "domain-fidelity",
+          "boundary-adequacy",
+          "rights-and-locator"
+        ],
+        "reviewEvents": []
+      }
+    },
+    {
+      "schemaVersion": "maha-epistemic/1.0",
+      "evidencePolicyVersion": "mps/0.1",
+      "id": "urn:maha:record:critical-supply-chains-high-purity-quartz-deposits",
+      "domainSlug": "critical-supply-chains",
+      "recordKind": "concept",
+      "slug": "critical-supply-chains-high-purity-quartz-deposits",
+      "title": "High purity quartz deposits",
+      "description": "A source-bounded concept record for high purity quartz deposits within critical supply chains.",
+      "summary": "High purity quartz deposits is represented as one reviewable unit in the Critical supply chains graph. Its source, locator, scope, uncertainty, and prohibited inference remain attached to the claim rather than being generalized across the domain.",
+      "claims": [
+        {
+          "id": "urn:maha:claim:critical-supply-chains-high-purity-quartz-deposits",
+          "statement": "The cited source supports treating high purity quartz deposits as a distinct concept within the stated critical supply chains scope.",
+          "claimKind": "theoretical-model",
+          "evidenceMaturity": "single-study",
+          "sourceIds": [
+            "source-critical-supply-chains-pp1802"
+          ],
+          "scope": "Limited to Page body, high-purity quartz definition. in \"Silica Statistics and Information\". The high-purity quartz purity specification, under 100 ppm total impurities, and the existence of United States production.",
+          "boundary": "High purity quartz deposits does not by itself establish system-level performance, safety, manufacturability, scalability, economic advantage, clinical benefit, or deployment readiness.",
+          "uncertainty": {
+            "kind": "qualitative",
+            "statement": "Subject identity only; no quantitative or numerical detail is supported by the inspected evidence. The dated USGS Mineral Commodity Summaries quartz chapter is the source that would carry a deposit and resource assessment. Its 2025 PDF was blocked (HTTP 403) from this environment and remains uninspected, so the record is narrowed rather than resolved."
+          },
+          "replication": {
+            "independentReplicationCount": null,
+            "assessment": "Independent replication and cross-platform transfer have not been compiled for this candidate; the evidence maturity refers only to the bounded source contract.",
+            "asOfDate": "2026-08-24"
+          }
+        }
+      ],
+      "sources": [
+        {
+          "id": "source-batch-11-critical-supply-chains-high-purity-quartz-deposits",
+          "title": "Silica Statistics and Information",
+          "authors": [
+            "U.S. Geological Survey, National Minerals Information Center"
+          ],
+          "publisher": "See identifier",
+          "publishedAt": "",
+          "url": "https://www.usgs.gov/centers/national-minerals-information-center/silica-statistics-and-information",
+          "identifiers": [
+            {
+              "scheme": "url",
+              "value": "https://www.usgs.gov/centers/national-minerals-information-center/silica-statistics-and-information"
+            }
+          ],
+          "exactLocator": "Page body, high-purity quartz definition.",
+          "rights": {
+            "basis": "public-domain",
+            "quotationUsed": true,
+            "note": "USGS content is a US Government work in the public domain, as stated on the page. Quotation and reuse are unrestricted."
+          },
+          "establishes": "The high-purity quartz purity specification, under 100 ppm total impurities, and the existence of United States production.",
+          "boundary": "Any deposit or resource assessment. The only deposit-level content located was an image caption naming a North Carolina mine, which is not an assessment. Any reserve, tonnage or grade figure."
+        }
+      ],
+      "sections": [
+        {
+          "heading": "What the cited work establishes",
+          "paragraphs": [
+            "The USGS volume describes geology, production, processing, uses, and supply considerations for selected mineral commodities.",
+            "Limited to Commodity chapters and introductory sections distinguishing resources, production, processing, uses, and supply considerations. in “Critical Mineral Resources of the United States—Economic and Environmental Geology and Prospects for Future Supply”; this candidate records the concept boundary and does not pool results from uncited systems or studies."
+          ],
+          "claimIds": [
+            "urn:maha:claim:critical-supply-chains-high-purity-quartz-deposits"
+          ]
+        },
+        {
+          "heading": "What remains a separate question",
+          "paragraphs": [
+            "High purity quartz deposits does not by itself establish system-level performance, safety, manufacturability, scalability, economic advantage, clinical benefit, or deployment readiness.",
+            "Geologic occurrence and historical production do not establish qualified material availability for a specific industrial process."
+          ],
+          "claimIds": []
+        }
+      ],
+      "bridges": [],
+      "boundaries": [
+        "High purity quartz deposits does not by itself establish system-level performance, safety, manufacturability, scalability, economic advantage, clinical benefit, or deployment readiness.",
+        "A source-bounded mechanism, method, or measurement record does not establish manufacturing yield, economic advantage, safety, clinical benefit, or commercial readiness unless those outcomes are measured in a separately scoped record.",
+        "Any deposit or resource assessment. The only deposit-level content located was an image caption naming a North Carolina mine, which is not an assessment.",
+        "Any reserve, tonnage or grade figure.",
+        "Prior binding, retained for history: \"Critical Mineral Resources of the United States—Economic and Environmental Geology and Prospects for Future Supply\" at Commodity chapters and introductory sections distinguishing resources, production, processing, uses, and supply considerations.. It was displaced because the inspected evidence did not support this record's subject."
+      ],
+      "prohibitedInferences": [
+        "Do not use this high purity quartz deposits record to claim that the surrounding technology is proven, safe, scalable, commercially available, or strategically superior.",
+        "Do not transfer a reported result across hardware, organisms, protocols, datasets, operating conditions, or outcome definitions without a declared comparison contract."
+      ],
+      "publication": {
+        "requestedPublicPromotion": false,
+        "reviewState": "draft",
+        "canonicalVersion": "0.1.0",
+        "lastReviewedAt": "2026-08-24T00:00:00.000Z",
+        "requiredReviewScopes": [
+          "source-fidelity",
+          "domain-fidelity",
+          "boundary-adequacy",
+          "rights-and-locator"
+        ],
+        "reviewEvents": []
+      }
+    },
+    {
+      "schemaVersion": "maha-epistemic/1.0",
+      "evidencePolicyVersion": "mps/0.1",
+      "id": "urn:maha:record:fusion-plasma-systems-tokamak-plasma-equilibrium",
+      "domainSlug": "fusion-plasma-systems",
+      "recordKind": "mechanism",
+      "slug": "fusion-plasma-systems-tokamak-plasma-equilibrium",
+      "title": "Tokamak plasma equilibrium",
+      "description": "A source-bounded mechanism record for tokamak plasma equilibrium within fusion and plasma systems.",
+      "summary": "Tokamak plasma equilibrium is represented as one reviewable unit in the Fusion and plasma systems graph. Its source, locator, scope, uncertainty, and prohibited inference remain attached to the claim rather than being generalized across the domain.",
+      "claims": [
+        {
+          "id": "urn:maha:claim:fusion-plasma-systems-tokamak-plasma-equilibrium",
+          "statement": "The cited source supports treating tokamak plasma equilibrium as a distinct mechanism within the stated fusion and plasma systems scope.",
+          "claimKind": "theoretical-model",
+          "evidenceMaturity": "single-study",
+          "sourceIds": [
+            "source-fusion-plasma-systems-iter-magnets"
+          ],
+          "scope": "Limited to Section 'Physics principles of toroidal equilibrium and stability', subsection 'Axisymmetric 2D Grad-Shafranov equilibrium', equations (35)-(36). in \"Magnetic-Confinement Fusion—Plasma Theory: Tokamak Magnetohydrodynamic Equilibrium and Stability\". Treating tokamak plasma equilibrium as a distinct mechanism, and the Grad-Shafranov force-balance condition read at an exact subsection.",
+          "boundary": "Tokamak plasma equilibrium does not by itself establish system-level performance, safety, manufacturability, scalability, economic advantage, clinical benefit, or deployment readiness.",
+          "uncertainty": {
+            "kind": "qualitative",
+            "statement": "The locator cites the accepted manuscript's section structure. Anyone checking the Elsevier version of record must locate the same subsection by heading, since manuscript and published pagination differ."
+          },
+          "replication": {
+            "independentReplicationCount": null,
+            "assessment": "Independent replication and cross-platform transfer have not been compiled for this candidate; the evidence maturity refers only to the bounded source contract.",
+            "asOfDate": "2026-08-24"
+          }
+        }
+      ],
+      "sources": [
+        {
+          "id": "source-batch-11-fusion-plasma-systems-tokamak-plasma-equilibrium",
+          "title": "Magnetic-Confinement Fusion—Plasma Theory: Tokamak Magnetohydrodynamic Equilibrium and Stability",
+          "authors": [
+            "Lao, Lang L.",
+            "Liu, Y. Q.",
+            "Turnbull, Alan D."
+          ],
+          "publisher": "Encyclopedia of Nuclear Energy",
+          "publishedAt": "2021-01-01",
+          "url": "https://www.osti.gov/servlets/purl/1963025",
+          "identifiers": [
+            {
+              "scheme": "doi",
+              "value": "10.1016/b978-0-12-819725-7.00230-0"
+            }
+          ],
+          "exactLocator": "Section 'Physics principles of toroidal equilibrium and stability', subsection 'Axisymmetric 2D Grad-Shafranov equilibrium', equations (35)-(36).",
+          "rights": {
+            "basis": "citation-with-paraphrase",
+            "quotationUsed": false,
+            "note": "US DOE public-access deposit via OSTI.GOV. The OSTI record states no explicit licence, so this is recorded as public-access availability of the accepted manuscript, not as an open licence, and no redistribution right is asserted."
+          },
+          "establishes": "Treating tokamak plasma equilibrium as a distinct mechanism, and the Grad-Shafranov force-balance condition read at an exact subsection.",
+          "boundary": "Any ITER-specific engineering parameter, which came from the displaced magnet page and is not carried by this source. Any numeric equilibrium result, since only the derivation subsection was read."
+        }
+      ],
+      "sections": [
+        {
+          "heading": "What the cited work establishes",
+          "paragraphs": [
+            "ITER documents the functions and architecture of the superconducting magnet systems used to confine and shape its plasma.",
+            "Limited to Machine / Magnets: toroidal field, poloidal field, central solenoid, and correction coil sections. in “Magnets”; this candidate records the concept boundary and does not pool results from uncited systems or studies."
+          ],
+          "claimIds": [
+            "urn:maha:claim:fusion-plasma-systems-tokamak-plasma-equilibrium"
+          ]
+        },
+        {
+          "heading": "What remains a separate question",
+          "paragraphs": [
+            "Tokamak plasma equilibrium does not by itself establish system-level performance, safety, manufacturability, scalability, economic advantage, clinical benefit, or deployment readiness.",
+            "A machine design description is not operating evidence for a power plant or a commercial cost estimate."
+          ],
+          "claimIds": []
+        }
+      ],
+      "bridges": [
+        {
+          "id": "urn:maha:bridge:fusion-plasma-systems-tokamak-plasma-equilibrium-1",
+          "sourceConceptId": "urn:maha:record:fusion-plasma-systems-tokamak-plasma-equilibrium",
+          "targetConceptId": "urn:maha:record:fusion-plasma-systems-magnetic-confinement",
+          "bridgeType": "mechanistic-dependency",
+          "statement": "Tokamak plasma equilibrium is positioned after Magnetic confinement in this bounded dependency sequence; the edge is navigational and does not assert equivalence or causation beyond the cited source scope."
+        }
+      ],
+      "boundaries": [
+        "Tokamak plasma equilibrium does not by itself establish system-level performance, safety, manufacturability, scalability, economic advantage, clinical benefit, or deployment readiness.",
+        "A source-bounded mechanism, method, or measurement record does not establish manufacturing yield, economic advantage, safety, clinical benefit, or commercial readiness unless those outcomes are measured in a separately scoped record.",
+        "Any ITER-specific engineering parameter, which came from the displaced magnet page and is not carried by this source.",
+        "Any numeric equilibrium result, since only the derivation subsection was read.",
+        "Prior binding, retained for history: \"Magnets\" at Machine / Magnets: toroidal field, poloidal field, central solenoid, and correction coil sections.. It was displaced because the inspected evidence did not support this record's subject."
+      ],
+      "prohibitedInferences": [
+        "Do not use this tokamak plasma equilibrium record to claim that the surrounding technology is proven, safe, scalable, commercially available, or strategically superior.",
+        "Do not transfer a reported result across hardware, organisms, protocols, datasets, operating conditions, or outcome definitions without a declared comparison contract."
+      ],
+      "publication": {
+        "requestedPublicPromotion": false,
+        "reviewState": "draft",
+        "canonicalVersion": "0.1.0",
+        "lastReviewedAt": "2026-08-24T00:00:00.000Z",
+        "requiredReviewScopes": [
+          "source-fidelity",
+          "domain-fidelity",
+          "boundary-adequacy",
+          "rights-and-locator"
+        ],
+        "reviewEvents": []
+      }
+    },
+    {
+      "schemaVersion": "maha-epistemic/1.0",
+      "evidencePolicyVersion": "mps/0.1",
+      "id": "urn:maha:record:mechanistic-interpretability-representation-probing-boundary",
+      "domainSlug": "mechanistic-interpretability",
+      "recordKind": "comparison",
+      "slug": "mechanistic-interpretability-representation-probing-boundary",
+      "title": "Representation probing boundary",
+      "description": "A source-bounded comparison record for representation probing boundary within mechanistic interpretability.",
+      "summary": "Representation probing boundary is represented as one reviewable unit in the Mechanistic interpretability graph. Its source, locator, scope, uncertainty, and prohibited inference remain attached to the claim rather than being generalized across the domain.",
+      "claims": [
+        {
+          "id": "urn:maha:claim:mechanistic-interpretability-representation-probing-boundary",
+          "statement": "The cited source supports treating representation probing boundary as a distinct comparison within the stated mechanistic interpretability scope.",
+          "claimKind": "empirical-claim",
+          "evidenceMaturity": "single-study",
+          "sourceIds": [
+            "source-mechanistic-interpretability-superposition"
+          ],
+          "scope": "Limited to Section 1 'Introduction', caption to Figure 2. in \"Designing and Interpreting Probes with Control Tasks\". Treating the representation probing boundary as a distinct mechanism, with selectivity defined against control tasks at a named figure caption.",
+          "boundary": "Representation probing boundary does not by itself establish system-level performance, safety, manufacturability, scalability, economic advantage, clinical benefit, or deployment readiness.",
+          "uncertainty": {
+            "kind": "qualitative",
+            "statement": "The locator sits in a figure caption inside the Introduction rather than in a numbered methods section. A reader checking the ACL Anthology version must locate the same Figure 2 caption, since pagination differs."
+          },
+          "replication": {
+            "independentReplicationCount": null,
+            "assessment": "Independent replication and cross-platform transfer have not been compiled for this candidate; the evidence maturity refers only to the bounded source contract.",
+            "asOfDate": "2026-08-24"
+          }
+        }
+      ],
+      "sources": [
+        {
+          "id": "source-batch-11-mechanistic-interpretability-representation-probing-boundary",
+          "title": "Designing and Interpreting Probes with Control Tasks",
+          "authors": [
+            "Hewitt, John",
+            "Liang, Percy"
+          ],
+          "publisher": "See identifier",
+          "publishedAt": "2019-01-01",
+          "url": "https://arxiv.org/html/1909.03368v1",
+          "identifiers": [
+            {
+              "scheme": "url",
+              "value": "arXiv:1909.03368v1"
+            }
+          ],
+          "exactLocator": "Section 1 'Introduction', caption to Figure 2.",
+          "rights": {
+            "basis": "citation-with-paraphrase",
+            "quotationUsed": false,
+            "note": "arXiv nonexclusive-distrib 1.0. This permits arXiv to distribute the work; it is NOT an open reuse licence such as CC BY. The passage is quoted for identification only and no redistribution right is asserted."
+          },
+          "establishes": "Treating the representation probing boundary as a distinct mechanism, with selectivity defined against control tasks at a named figure caption.",
+          "boundary": "Any numeric selectivity value for a particular probe or corpus. Any claim about superposition, which is what the displaced source was about."
+        }
+      ],
+      "sections": [
+        {
+          "heading": "What the cited work establishes",
+          "paragraphs": [
+            "The work develops toy models in which neural networks represent more features than available dimensions under specified sparsity conditions.",
+            "Limited to Definitions, toy models, geometry, sparsity, and feature-interference experiments. in “Toy Models of Superposition”; this candidate records the concept boundary and does not pool results from uncited systems or studies."
+          ],
+          "claimIds": [
+            "urn:maha:claim:mechanistic-interpretability-representation-probing-boundary"
+          ]
+        },
+        {
+          "heading": "What remains a separate question",
+          "paragraphs": [
+            "Representation probing boundary does not by itself establish system-level performance, safety, manufacturability, scalability, economic advantage, clinical benefit, or deployment readiness.",
+            "A toy-model mechanism does not establish that every feature in a production model has the same geometry or semantics."
+          ],
+          "claimIds": []
+        }
+      ],
+      "bridges": [
+        {
+          "id": "urn:maha:bridge:mechanistic-interpretability-representation-probing-boundary-1",
+          "sourceConceptId": "urn:maha:record:mechanistic-interpretability-representation-probing-boundary",
+          "targetConceptId": "urn:maha:record:mechanistic-interpretability-superposition-geometry",
+          "bridgeType": "mechanistic-dependency",
+          "statement": "Representation probing boundary is positioned after Superposition geometry in this bounded dependency sequence; the edge is navigational and does not assert equivalence or causation beyond the cited source scope."
+        }
+      ],
+      "boundaries": [
+        "Representation probing boundary does not by itself establish system-level performance, safety, manufacturability, scalability, economic advantage, clinical benefit, or deployment readiness.",
+        "A source-bounded mechanism, method, or measurement record does not establish manufacturing yield, economic advantage, safety, clinical benefit, or commercial readiness unless those outcomes are measured in a separately scoped record.",
+        "Any numeric selectivity value for a particular probe or corpus.",
+        "Any claim about superposition, which is what the displaced source was about.",
+        "Prior binding, retained for history: \"Toy Models of Superposition\" at Definitions, toy models, geometry, sparsity, and feature-interference experiments.. It was displaced because the inspected evidence did not support this record's subject."
+      ],
+      "prohibitedInferences": [
+        "Do not use this representation probing boundary record to claim that the surrounding technology is proven, safe, scalable, commercially available, or strategically superior.",
+        "Do not transfer a reported result across hardware, organisms, protocols, datasets, operating conditions, or outcome definitions without a declared comparison contract."
+      ],
+      "publication": {
+        "requestedPublicPromotion": false,
+        "reviewState": "draft",
+        "canonicalVersion": "0.1.0",
+        "lastReviewedAt": "2026-08-24T00:00:00.000Z",
+        "requiredReviewScopes": [
+          "source-fidelity",
+          "domain-fidelity",
+          "boundary-adequacy",
+          "rights-and-locator"
+        ],
+        "reviewEvents": []
+      }
+    }
+  ]
+}

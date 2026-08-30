@@ -14,13 +14,14 @@ import {
   MCP_PRIVATE_CANARY_RECORD_ID,
 } from './mcp-private-canary-release.ts'
 import { SOURCE_OVERRIDE_REVISION_INSPECTION_ATTESTATIONS } from './source-override-revision-ingestion-records.ts'
+import { BATCH_11_REVISION_INSPECTION_ATTESTATIONS } from './batch-11-revision-ingestion-records.ts'
 
 export const EPISTEMIC_INGESTION_VERSION = 'maha-epistemic-ingestion/1.0' as const
 export const INGESTION_ALIGNMENT_VERSION = 'maha-ingestion-alignment-gate/1.0' as const
 
 export interface IngestionAlignmentDecision {
   evaluatedAgainst: typeof INGESTION_ALIGNMENT_VERSION
-  contentInspectionState: 'required-uninspected' | 'internally-inspected-synthetic' | 'internally-inspected-source-override'
+  contentInspectionState: 'required-uninspected' | 'internally-inspected-synthetic' | 'internally-inspected-source-override' | 'internally-inspected-batch-11-revision'
   explanatoryEligible: boolean
   canonicalEligible: boolean
   blockerCodes: string[]
@@ -104,7 +105,15 @@ export function buildEpistemicIngestionBatch(input: EpistemicIngestionRequest, i
         && attestation.exactLocator === source.exactLocator,
       )
       : undefined
-    const contentInspectionAttested = syntheticInspectionAttested || Boolean(sourceOverrideAttestation)
+    const batch11Attestation = input.adapterId === 'batch-11-revision-canary'
+      ? BATCH_11_REVISION_INSPECTION_ATTESTATIONS.find((attestation) =>
+        attestation.recordId === candidate.record.id
+        && attestation.reviewTargetSha256 === candidate.reviewTargetSha256
+        && attestation.sourceId === source?.id
+        && attestation.exactLocator === source.exactLocator,
+      )
+      : undefined
+    const contentInspectionAttested = syntheticInspectionAttested || Boolean(sourceOverrideAttestation) || Boolean(batch11Attestation)
     const blockerCodes = contentInspectionAttested
       ? []
       : candidate.record.sources.length
@@ -116,6 +125,8 @@ export function buildEpistemicIngestionBatch(input: EpistemicIngestionRequest, i
         ? 'internally-inspected-synthetic'
         : sourceOverrideAttestation
           ? 'internally-inspected-source-override'
+          : batch11Attestation
+            ? 'internally-inspected-batch-11-revision'
           : 'required-uninspected',
       explanatoryEligible: contentInspectionAttested,
       canonicalEligible: contentInspectionAttested,
@@ -124,6 +135,8 @@ export function buildEpistemicIngestionBatch(input: EpistemicIngestionRequest, i
         ? { inspectionAttestationSha256: MCP_PRIVATE_CANARY_INSPECTION_SHA256 }
         : sourceOverrideAttestation
           ? { inspectionAttestationSha256: sourceOverrideAttestation.attestationSha256 }
+          : batch11Attestation
+            ? { inspectionAttestationSha256: batch11Attestation.attestationSha256 }
           : {}),
     }
     return {

@@ -37,7 +37,7 @@ test('all uninspected positional assignments remain automatically blocked and no
 })
 
 test('new ingestion records enter a required-uninspected alignment audit by default', () => {
-  const explicitlyAttestedAdapters = new Set(['mcp-private-canary', 'source-override-revision-canary'])
+  const explicitlyAttestedAdapters = new Set(['mcp-private-canary', 'source-override-revision-canary', 'batch-11-revision-canary'])
   for (const adapterId of LEGACY_ADAPTER_IDS.filter((candidate) => !explicitlyAttestedAdapters.has(candidate))) {
     const batch = buildEpistemicIngestionBatch({ adapterId, idempotencyKey: `default-alignment-audit-${adapterId}` }, new Date('2026-08-28T00:00:00Z'))
     assert.ok(batch.records.length > 0, adapterId)

@@ -2,18 +2,22 @@ name: Batch 11 Preview lineage rehearsal
 
 # Manual only, and inert unless explicitly authorized at dispatch time.
 #
-# The remote half of this rehearsal creates a Preview database and applies a
-# migration. Neither should ever happen because a branch was pushed, so there is
-# no push or pull_request trigger: a human has to ask for it and type the
-# authorization in.
+# The remote half targets a separately provisioned Preview database and applies
+# one dedicated migration. Neither should happen because a branch was pushed,
+# so there is no push or pull_request trigger: a human must dispatch it with the
+# exact Preview origin and confirmation phrase.
 
 on:
   workflow_dispatch:
     inputs:
-      authorized:
-        description: 'Type EXACTLY "authorize-batch-11-rehearsal" to enable the remote half. Anything else runs plan-only.'
+      preview_origin:
+        description: 'Exact Vercel Preview origin for codex/batch-11-preview-lifecycle'
         required: true
-        default: 'plan-only'
+        type: string
+      confirmation:
+        description: 'Type RELEASE_BATCH_11_MIXED_LINEAGE_IN_PREVIEW exactly'
+        required: true
+        type: string
 
 permissions:
   contents: read
@@ -22,11 +26,50 @@ jobs:
   rehearse:
     runs-on: ubuntu-latest
     timeout-minutes: 20
+    environment: Preview
+    env:
+      MAHA_B11_PREVIEW_ORIGIN: ${{ inputs.preview_origin }}
+      MAHA_B11_REHEARSAL_CONFIRM: ${{ inputs.confirmation }}
+      MAHA_PREVIEW_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
+      MAHA_PREVIEW_SUPABASE_SERVICE_ROLE: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+      EPISTEMIC_OPERATIONS_TOKEN: ${{ secrets.EPISTEMIC_OPERATIONS_TOKEN }}
+      EPISTEMIC_RELEASE_AUTHORITY_TOKEN: ${{ secrets.EPISTEMIC_RELEASE_AUTHORITY_TOKEN }}
+      VERCEL_AUTOMATION_BYPASS_SECRET: ${{ secrets.VERCEL_AUTOMATION_BYPASS_SECRET }}
+      SUPABASE_PROJECT_REF: ${{ secrets.SUPABASE_PROJECT_REF }}
+      SUPABASE_DB_PASSWORD: ${{ secrets.SUPABASE_DB_PASSWORD }}
+      EVIDENCE_PATH: ${{ github.workspace }}/batch-11-preview/evidence.json
     steps:
-      - uses: actions/checkout@v7
-      - uses: actions/setup-node@v7
+      - name: Enforce exact Preview boundary
+        env:
+          REF_NAME: ${{ github.ref_name }}
+        run: |
+          set -euo pipefail
+          [ "$REF_NAME" = 'codex/batch-11-preview-lifecycle' ] || { echo '::error::Wrong branch.'; exit 1; }
+          [ "$MAHA_B11_REHEARSAL_CONFIRM" = 'RELEASE_BATCH_11_MIXED_LINEAGE_IN_PREVIEW' ] || { echo '::error::Confirmation phrase does not match.'; exit 1; }
+          case "$MAHA_B11_PREVIEW_ORIGIN" in https://*.vercel.app|https://*.vercel.app/) ;; *) echo '::error::Preview origin required.'; exit 1 ;; esac
+          case "$MAHA_B11_PREVIEW_ORIGIN" in *mahastrategies.com*) echo '::error::Production host forbidden.'; exit 1 ;; esac
+          for name in MAHA_PREVIEW_SUPABASE_URL MAHA_PREVIEW_SUPABASE_SERVICE_ROLE EPISTEMIC_OPERATIONS_TOKEN EPISTEMIC_RELEASE_AUTHORITY_TOKEN SUPABASE_PROJECT_REF SUPABASE_DB_PASSWORD; do
+            [ -n "${!name:-}" ] || { echo "::error::$name is missing."; exit 1; }
+          done
+          [ "$SUPABASE_PROJECT_REF" != 'uhwuullakihgszxhiygz' ] || { echo '::error::Production database forbidden.'; exit 1; }
+          [ "$EPISTEMIC_OPERATIONS_TOKEN" != "$EPISTEMIC_RELEASE_AUTHORITY_TOKEN" ] || { echo '::error::Credentials must be distinct.'; exit 1; }
+
+      - uses: actions/checkout@v5
+
+      - name: Apply only the dedicated Batch 11 Preview migration
+        run: |
+          set -euo pipefail
+          path='supabase/migrations/20260830200000_batch_11_revision_preview_rehearsal.sql'
+          [ -f "$path" ] || { echo '::error::Dedicated migration is absent.'; exit 1; }
+          url="postgresql://postgres.${SUPABASE_PROJECT_REF}:${SUPABASE_DB_PASSWORD}@aws-0-us-east-1.pooler.supabase.com:5432/postgres"
+          psql "$url" -v ON_ERROR_STOP=1 --single-transaction -f "$path" >/dev/null
+          psql "$url" -v ON_ERROR_STOP=1 -c "insert into supabase_migrations.schema_migrations (version) values ('20260830200000') on conflict do nothing;" >/dev/null
+          converged="$(psql "$url" -v ON_ERROR_STOP=1 -At -c "select to_regproc('public.record_batch_11_revision_canary_targets') is not null and to_regproc('public.bootstrap_batch_11_preview_prior_lineages') is not null;")"
+          [ "$converged" = 't' ] || { echo '::error::Dedicated Batch 11 RPCs did not converge.'; exit 1; }
+
+      - uses: actions/setup-node@v6
         with:
-          node-version: 22
+          node-version: '26'
           cache: npm
       - run: npm ci
 
@@ -34,19 +77,38 @@ jobs:
       - name: Reconcile lineage (plan only)
         run: node --experimental-strip-types scripts/run-batch-11-preview-lineage-rehearsal.ts
 
-      - name: Refuse unauthorized remote half
-        if: inputs.authorized != 'authorize-batch-11-rehearsal'
-        run: |
-          echo "Remote rehearsal not authorized; plan-only run complete."
-          echo "No Preview database was created and no migration was applied."
-
-      # Gated twice: on the typed input here, and on the env var the script
-      # itself requires. Either one missing leaves the remote half off.
       - name: Remote rehearsal
-        if: inputs.authorized == 'authorize-batch-11-rehearsal'
         env:
           MAHA_B11_REHEARSAL_AUTHORIZED: '1'
-          MAHA_PREVIEW_SUPABASE_URL: ${{ secrets.MAHA_PREVIEW_SUPABASE_URL }}
-          MAHA_PREVIEW_SUPABASE_SERVICE_ROLE: ${{ secrets.MAHA_PREVIEW_SUPABASE_SERVICE_ROLE }}
-          EPISTEMIC_RELEASE_AUTHORITY_TOKEN: ${{ secrets.EPISTEMIC_RELEASE_AUTHORITY_TOKEN }}
-        run: node --experimental-strip-types scripts/run-batch-11-preview-lineage-rehearsal.ts
+        run: |
+          mkdir -p "$(dirname "$EVIDENCE_PATH")"
+          node --experimental-strip-types scripts/run-batch-11-preview-lineage-rehearsal.ts > "$EVIDENCE_PATH"
+
+      - name: Verify sanitized evidence
+        run: |
+          set -euo pipefail
+          jq -e '
+            .priorFixture.activePriorLineages == 4
+            and .review.scopedDecisionCount == 20
+            and .release.previewCount == 5
+            and .release.activeCount == 5
+            and .release.initialCount == 1
+            and .release.supersedingCount == 4
+            and ([.projection[] | select(.routeStatus == 200)] | length) == 5
+            and ([.projection[] | select(.provenanceStatus == 200)] | length) == 5
+            and ([.projection[] | select(.sitemapIncluded == true)] | length) == 5
+            and ([.projection[] | select(.llmsIncluded == true)] | length) == 5
+            and ([.projection[] | select(.registryIncluded == true)] | length) == 5
+            and .boundaries.previewOnly == true
+            and .boundaries.productionMutationPerformed == false
+            and .boundaries.secretsIncluded == false
+          ' "$EVIDENCE_PATH" >/dev/null
+
+      - name: Upload sanitized Preview evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: batch-11-preview-rehearsal-${{ github.run_id }}
+          path: ${{ env.EVIDENCE_PATH }}
+          if-no-files-found: error
+          retention-days: 30

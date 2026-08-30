@@ -48,36 +48,50 @@ covered by tests.
 - `record-not-observed`
 - `held-decision-cannot-release`
 
-## Preview rehearsal — currently disabled
+## Preview rehearsal — implemented, manual and disabled by default
 
 ```bash
 # Plan only. Performs no remote operation.
 node --experimental-strip-types scripts/run-batch-11-preview-lineage-rehearsal.ts
 ```
 
-The remote half runs only with `MAHA_B11_REHEARSAL_AUTHORIZED=1`, and even then
-this change leaves it unimplemented and exiting non-zero. That is deliberate:
-authorization alone should not be able to cause an unreviewed remote operation.
+The remote half runs only from `codex/batch-11-preview-lifecycle`, against an
+HTTPS Vercel Preview origin and a non-Production Supabase project, with the exact
+confirmation phrase `RELEASE_BATCH_11_MIXED_LINEAGE_IN_PREVIEW`. The workflow
+applies only `20260830200000_batch_11_revision_preview_rehearsal.sql`, freezes
+five inspected exact-revision targets, records twenty scoped internal decisions,
+and uses a distinct release-authority credential.
+
+An ephemeral schema-only branch has no release history. The dedicated migration
+therefore exposes a narrowly allowlisted bootstrap RPC for the four already-public
+Production lineage heads. It accepts only the four frozen release ids, target
+digests and canonical paths in this manifest. It creates Preview fixtures so the
+real supersession gate can be exercised; it does not create a new Production
+review or release and must never be applied to Production.
 
 ### Required secret names
 
-- `MAHA_PREVIEW_SUPABASE_URL`
-- `MAHA_PREVIEW_SUPABASE_SERVICE_ROLE`
+- `NEXT_PUBLIC_SUPABASE_URL` (mapped to `MAHA_PREVIEW_SUPABASE_URL` in the workflow)
+- `SUPABASE_SERVICE_ROLE_KEY` (mapped to `MAHA_PREVIEW_SUPABASE_SERVICE_ROLE`)
 - `EPISTEMIC_RELEASE_AUTHORITY_TOKEN`
+- `EPISTEMIC_OPERATIONS_TOKEN`
+- `SUPABASE_PROJECT_REF`
+- `SUPABASE_DB_PASSWORD`
+- `VERCEL_AUTOMATION_BYPASS_SECRET` when Preview protection is enabled
 
 Names only. No value appears in this repository, and a test asserts that.
 
 ### Migration scope
 
-One additive migration creating only the Batch 11 rehearsal ingestion table and
-its RPC. No existing table is altered. No row outside the five records is touched.
-Production is never a target of the rehearsal script.
+One additive migration extends the existing ingestion-adapter allowlist, creates
+the five-record draft-target RPC, and creates the exact four-lineage Preview
+bootstrap RPC. No Production object or row is targeted.
 
 ### Cleanup
 
-Drop the rehearsal schema, then delete the Preview branch database. Because the
-migration is additive and scoped to a new table, cleanup does not touch any
-pre-existing object.
+Delete the ephemeral Preview database branch and remove its branch-scoped Vercel
+variables and temporary GitHub Preview credentials after sanitized evidence is
+preserved. Cleanup never targets Production.
 
 ## What the rehearsal would prove
 

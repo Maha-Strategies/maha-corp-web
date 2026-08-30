@@ -6,6 +6,7 @@ import { ALIGNMENT_BATCH_11_PACKETS, type Batch11Packet } from './frontier-align
 import { FRONTIER_DOMAIN_GRAPH_RECORDS } from './frontier-domain-graphs.ts'
 import { epistemicRecordPath, epistemicReviewTargetHash } from './epistemic-publication.ts'
 import type { EpistemicRecord, EpistemicSource, ExpertReviewScope } from './epistemic-schema.ts'
+import { EXPERT_REVIEW_CRITERIA, type ExpertReviewInput } from './epistemic-review.ts'
 import { SUBSTANTIAL_PUBLICATION_QUEUE } from './substantial-publication-queue.ts'
 
 /**
@@ -306,6 +307,63 @@ export const BATCH_11_SCOPED_DECISIONS: readonly Batch11ScopedDecision[] = BATCH
     return { ...base, decisionSha256: sha(base) }
   }),
 )
+
+const BATCH_11_REVIEWER_DOMAINS = [...new Set(BATCH_11_REVISED_RECORDS.map((record) => record.domainSlug))].sort()
+
+const REVIEW_DIMENSIONS: Readonly<Record<ExpertReviewScope, readonly (typeof BATCH_11_AUDIT_DIMENSIONS)[number][]>> = {
+  'source-fidelity': ['source-identity', 'version-relationship', 'exact-locator', 'claim-scope'],
+  'domain-fidelity': ['claim-scope', 'quantitative-detail-permission'],
+  'boundary-adequacy': ['quantitative-detail-permission', 'prior-binding-preserved', 'prohibited-inferences'],
+  'rights-and-locator': ['rights-basis', 'exact-locator', 'version-relationship'],
+}
+
+/** API-ready decisions derived from the same exact-revision checklist. */
+export function batch11RevisionReviewInputs(): readonly ExpertReviewInput[] {
+  return BATCH_11_REVISED_RECORDS.flatMap((record) => {
+    const audit = BATCH_11_REVISION_AUDITS.find((entry) => entry.recordId === record.id)
+    if (!audit) throw new Error(`${record.id}: exact-revision audit is missing.`)
+    return REVIEW_SCOPES.map((scope) => {
+      const findings = audit.checks
+        .filter((check) => REVIEW_DIMENSIONS[scope].includes(check.dimension))
+        .map((check) => `${check.dimension}: ${check.finding}`)
+        .join(' ')
+      const idempotencyDigest = sha({
+        schemaVersion: BATCH_11_CANARY_VERSION,
+        recordId: record.id,
+        targetSha256: audit.revisedRecordRevisionSha256,
+        scope,
+        auditSha256: audit.auditSha256,
+      })
+      return {
+        recordId: record.id,
+        domainSlug: record.domainSlug,
+        targetSha256: audit.revisedRecordRevisionSha256,
+        scope,
+        reviewer: {
+          reviewerId: 'expert_maha-internal-batch-11-v1',
+          profileVersion: 1,
+          displayName: 'Maha Strategies internal Batch 11 revision review',
+          qualifications: ['Exact-revision source, locator, rights, scope, and boundary checklist'],
+          affiliation: 'Maha Strategies',
+          identityUrl: null,
+          domains: BATCH_11_REVIEWER_DOMAINS,
+          conflicts: ['Maha Strategies authors, reviews, and may release this record; this internal review is not independent.'],
+          reviewerKind: 'internal-editorial' as const,
+          reviewMethod: 'Explicit exact-revision checklist bound to the Batch 11 eight-dimension audit. No external endorsement or independent reproduction is claimed.',
+        },
+        criteria: EXPERT_REVIEW_CRITERIA[scope].map((criterion) => ({
+          criterionId: criterion.id,
+          verdict: 'satisfied' as const,
+          rationale: `${criterion.label} was checked against exact revision ${audit.revisedRecordRevisionSha256} and audit ${audit.auditSha256}. ${findings}`,
+        })),
+        disagreements: ['This is an internal editorial decision. External expert review and independent reproduction were not performed.'],
+        rationale: `The ${scope} decision is limited to exact revision ${audit.revisedRecordRevisionSha256}. ${findings}`,
+        supersedesReviewId: null,
+        idempotencyKey: `batch-11-revision-v1:${idempotencyDigest}`,
+      }
+    })
+  })
+}
 
 export interface Batch11ReadinessResult {
   recordId: string
