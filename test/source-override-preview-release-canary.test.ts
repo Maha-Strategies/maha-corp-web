@@ -14,6 +14,7 @@ import {
 } from '../lib/source-override-revision-canary.ts'
 import { evaluatePublicationQueueCandidate } from '../lib/substantial-publication-queue.ts'
 import snapshot from '../content/epistemic/source-override-revision-ingestion-records.json' with { type: 'json' }
+import { classifyExistingFrozenTargets } from '../scripts/run-source-override-preview-release-canary.ts'
 
 function filesUnder(root: string): string[] {
   if (!existsSync(root)) return []
@@ -67,6 +68,27 @@ test('one reviewer profile version cannot drift between canary domains', () => {
   const first = profiles[0]
   assert.ok(first)
   for (const profile of profiles) assert.deepEqual(profile, first)
+})
+
+test('the remote canary resumes only from one complete exact frozen cohort', () => {
+  const revisions = SOURCE_OVERRIDE_REVISED_RECORDS.map((record) => ({
+    recordId: record.id,
+    targetSha256: epistemicReviewTargetHash(record),
+  }))
+  const targets = revisions.map((revision) => ({
+    recordId: revision.recordId,
+    reviewTargetSha256: revision.targetSha256,
+  }))
+  assert.equal(classifyExistingFrozenTargets([], revisions), 'absent')
+  assert.equal(classifyExistingFrozenTargets(targets, revisions), 'complete')
+  assert.throws(
+    () => classifyExistingFrozenTargets(targets.slice(1), revisions),
+    /partial or duplicate exact-revision cohort/,
+  )
+  assert.throws(
+    () => classifyExistingFrozenTargets([...targets, targets[0]!], revisions),
+    /partial or duplicate exact-revision cohort/,
+  )
 })
 
 test('the three-gate queue admits each record only after an exact active release', () => {

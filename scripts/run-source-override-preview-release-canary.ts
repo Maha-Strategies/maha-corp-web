@@ -96,16 +96,36 @@ function staticRevisionEvidence() {
   })
 }
 
+export function classifyExistingFrozenTargets(
+  reviewTargets: readonly Json[],
+  revisions: readonly { recordId: string; targetSha256: string }[],
+): 'absent' | 'complete' {
+  const exactCounts = revisions.map((revision) => reviewTargets.filter((target) =>
+    target.recordId === revision.recordId && target.reviewTargetSha256 === revision.targetSha256,
+  ).length)
+  if (exactCounts.every((count) => count === 0)) return 'absent'
+  if (exactCounts.every((count) => count === 1)) return 'complete'
+  throw new Error(`The Preview ingestion ledger contains a partial or duplicate exact-revision cohort: ${exactCounts.join(',')}.`)
+}
+
 async function ingestAndReview(operationsToken: string) {
   const revisions = staticRevisionEvidence()
   const setDigest = sha256Canonical(revisions.map(({ recordId, targetSha256 }) => ({ recordId, targetSha256 })))
-  const ingestion = await request('/api/admin/epistemic-ingestion', operationsToken, {
-    method: 'POST',
-    body: JSON.stringify({
-      adapterId: 'source-override-revision-canary',
-      idempotencyKey: `source-override-revisions:${setDigest}`,
-    }),
-  })
+  const existing = await request('/api/admin/epistemic-ingestion', operationsToken)
+  const existingBody = object(existing.body, 'epistemic ingestion workspace')
+  const frozenState = classifyExistingFrozenTargets(
+    array(existingBody.reviewTargets, 'epistemic ingestion review targets'),
+    revisions,
+  )
+  const ingestion = frozenState === 'complete'
+    ? existing
+    : await request('/api/admin/epistemic-ingestion', operationsToken, {
+      method: 'POST',
+      body: JSON.stringify({
+        adapterId: 'source-override-revision-canary',
+        idempotencyKey: `source-override-revisions:${setDigest}`,
+      }),
+    })
   const decisions = []
   for (const input of sourceOverrideRevisionCanaryReviewInputs()) {
     const response = await request('/api/admin/epistemic-reviews', operationsToken, {
@@ -114,7 +134,7 @@ async function ingestAndReview(operationsToken: string) {
     })
     decisions.push({ recordId: input.recordId, scope: input.scope, status: response.status })
   }
-  return { ingestionStatus: ingestion.status, decisions }
+  return { ingestionStatus: ingestion.status, ingestionReused: frozenState === 'complete', decisions }
 }
 
 async function workspace(releaseToken: string) {
@@ -274,7 +294,7 @@ export async function runSourceOverridePreviewReleaseCanary() {
     previewOriginFingerprint: sha256Canonical(origin),
     exactRevisions: revisions,
     preReleaseQueue: noReleaseQueue,
-    review: { ingestionStatus: review.ingestionStatus, scopedDecisionCount: review.decisions.length },
+    review: { ingestionStatus: review.ingestionStatus, ingestionReused: review.ingestionReused, scopedDecisionCount: review.decisions.length },
     release: {
       previewCount: lifecycle.previews.length,
       publishedCount: lifecycle.published.length,
