@@ -4,6 +4,31 @@ import type { DossierCalculationAttachment } from '../../wasm-kernel/src/dossier
 import type { DossierRuntimeWitnessAttachment } from '../../../lib/evidence-dossier/runtime-witness.ts'
 import type { FormalProofAttachment } from '../../maha-lean-bridge/src/schema.ts'
 
+/** Signature provenance for the authorization, rendered separately from proofs. */
+export interface FormalProofAuthorityNode {
+  signatureAlgorithm: string
+  canonicalization: string
+  keyId: string
+  /** The authority namespace the key belongs to. Epochs are counted within it. */
+  authorityId: string
+  authorityEpoch: number
+  signatureAuthentic: boolean
+  /** Whether that key was permitted to sign this payload. */
+  signingAuthorityValid: boolean
+  /**
+   * What the key is permitted to authorize.
+   *
+   * Rendered because it is the load-bearing restriction: the fixture seed is
+   * published, so this list is the only thing preventing a genuine signature
+   * from authorizing an unrelated dossier. A reader who cannot see it cannot
+   * tell what the signature is worth.
+   */
+  permittedDossierIds: readonly string[]
+  bindingManifestSha256: string
+  bindingManifestRevision: number
+  syntheticTestKey: boolean
+}
+
 export const DOSSIER_JSONLD_CONTEXT = 'https://www.mahastrategies.com/ns/evidence-dossier/v1' as const
 
 /**
@@ -36,6 +61,14 @@ export interface DossierJsonLd {
   passages: readonly Record<string, unknown>[]
   calculations: readonly Record<string, unknown>[]
   formalProofs: readonly Record<string, unknown>[]
+  /**
+   * Who attested to the authorization, and under which key.
+   *
+   * Deliberately its own field rather than a flag inside each proof: a
+   * signature speaks to who authorized the binding, not to whether the theorem
+   * holds or whether the claim is true.
+   */
+  formalProofAuthority: Record<string, unknown>
   runtimeReceipts: readonly Record<string, unknown>[]
   assurance: Record<string, unknown>
   comparisons: readonly Record<string, unknown>[]
@@ -47,7 +80,7 @@ export interface DossierJsonLd {
   disclaimer: string
 }
 
-export function renderDossierJsonLd(dossier: EvidenceDossier, attachments: readonly DossierCalculationAttachment[] = [], witnesses: readonly DossierRuntimeWitnessAttachment[] = [], formalProofs: readonly FormalProofAttachment[] = []): DossierJsonLd {
+export function renderDossierJsonLd(dossier: EvidenceDossier, attachments: readonly DossierCalculationAttachment[] = [], witnesses: readonly DossierRuntimeWitnessAttachment[] = [], formalProofs: readonly FormalProofAttachment[] = [], authority?: FormalProofAuthorityNode): DossierJsonLd {
   return {
     '@context': DOSSIER_JSONLD_CONTEXT,
     '@type': 'EvidenceDossier',
@@ -149,6 +182,28 @@ export function renderDossierJsonLd(dossier: EvidenceDossier, attachments: reado
       })),
     runtimeReceipts: witnesses.map((attachment) => attachment.receipt as unknown as Record<string, unknown>),
 
+    formalProofAuthority: authority
+      ? {
+          '@type': 'FormalProofAuthority',
+          signatureAlgorithm: authority.signatureAlgorithm,
+          canonicalization: authority.canonicalization,
+          keyId: authority.keyId,
+          authorityId: authority.authorityId,
+          authorityEpoch: authority.authorityEpoch,
+          signatureAuthentic: authority.signatureAuthentic,
+          signingAuthorityValid: authority.signingAuthorityValid,
+          permittedDossierIds: authority.permittedDossierIds,
+          bindingManifestSha256: authority.bindingManifestSha256,
+          bindingManifestRevision: authority.bindingManifestRevision,
+          syntheticTestKey: authority.syntheticTestKey,
+          note: 'A valid signature establishes that a holder of the named key attested to this set of authorized bindings, and that the key was permitted to do so for this dossier. It does not establish that any theorem holds, that any claim is true, or that any model describes reality.',
+        }
+      : {
+          '@type': 'FormalProofAuthority',
+          signatureAuthentic: false,
+          note: 'No signed authorization accompanies this package.',
+        },
+
     assurance: {
       '@type': 'AssuranceStatement',
       reviewState: dossier.reviewState,
@@ -183,6 +238,6 @@ export function renderDossierJsonLd(dossier: EvidenceDossier, attachments: reado
 }
 
 /** Deterministic serialization: canonical key order and NFC normalization. */
-export function renderDossierJsonLdText(dossier: EvidenceDossier, attachments: readonly DossierCalculationAttachment[] = [], witnesses: readonly DossierRuntimeWitnessAttachment[] = [], formalProofs: readonly FormalProofAttachment[] = []): string {
-  return `${canonicalJson(renderDossierJsonLd(dossier, attachments, witnesses, formalProofs))}\n`
+export function renderDossierJsonLdText(dossier: EvidenceDossier, attachments: readonly DossierCalculationAttachment[] = [], witnesses: readonly DossierRuntimeWitnessAttachment[] = [], formalProofs: readonly FormalProofAttachment[] = [], authority?: FormalProofAuthorityNode): string {
+  return `${canonicalJson(renderDossierJsonLd(dossier, attachments, witnesses, formalProofs, authority))}\n`
 }

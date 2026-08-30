@@ -8,6 +8,10 @@ import { FORMAL_PROOF_FIXTURE_CLAIM_ID, FORMAL_PROOF_FIXTURE_DOSSIER } from '../
 import { compileIntegratedPackage, renderDossierJsonLd, verifyIntegratedCalculationEvidence, verifyIntegratedCalculationEvidenceForTesting, verifyIntegratedPackageFullyForTesting } from '../packages/evidence-dossier-builder/src/index.ts'
 import { expectedLeanSources, REQUIRED_PROJECT_FILES, verifyPackagedFormalProofs } from '../packages/evidence-dossier-builder/src/formal-proof-verification.ts'
 import { assertValidTrustRoot, resolveTrustRoot } from '../lib/evidence-dossier/formal-proof-trust-roots.ts'
+import { PRODUCTION_SIGNING_BOUNDARY, SIGNING_KEY_REGISTRY, SYNTHETIC_REVOKED_KEY_ID, SYNTHETIC_REVOKED_KEY_SEED_HEX, SYNTHETIC_TEST_KEY_SEED_HEX, isSyntheticKey } from '../lib/evidence-dossier/formal-proof-signing-keys.ts'
+import { rawPublicKeyBase64, signTrustRoot } from '../lib/evidence-dossier/formal-proof-signing.ts'
+import { loadSignedTrustRoot } from '../lib/evidence-dossier/formal-proof-trust-roots.ts'
+import type { FormalProofAuthorityNode } from '../packages/evidence-dossier-builder/src/jsonld.ts'
 import { bindingManifestDigest } from '../packages/maha-lean-bridge/src/bindings.ts'
 import { manifestDigest } from '../packages/maha-lean-bridge/src/verifier.ts'
 import { provenanceDigest } from '../lib/evidence-dossier/digest.ts'
@@ -128,11 +132,29 @@ function runtimeWitness(receiptId: string): DossierRuntimeWitnessAttachment {
   })
 }
 
+const SIGNED_ROOT = loadSignedTrustRoot(resolve(import.meta.dirname, '../content/evidence-dossier/formal-proof-trust-root.json'))!
+const SIGNING_KEY = SIGNING_KEY_REGISTRY.find((k) => k.keyId === SIGNED_ROOT.signature.keyId)!
+
+const AUTHORITY: FormalProofAuthorityNode = {
+  signatureAlgorithm: SIGNED_ROOT.signature.algorithm,
+  canonicalization: SIGNED_ROOT.signature.canonicalization,
+  keyId: SIGNED_ROOT.signature.keyId,
+  authorityId: SIGNED_ROOT.payload.authorityId,
+  authorityEpoch: SIGNED_ROOT.payload.authorityEpoch,
+  signatureAuthentic: true,
+  signingAuthorityValid: true,
+  permittedDossierIds: SIGNING_KEY.scope.permittedDossierIds,
+  bindingManifestSha256: SIGNED_ROOT.payload.bindingManifestSha256,
+  bindingManifestRevision: SIGNED_ROOT.payload.bindingManifestRevision,
+  syntheticTestKey: isSyntheticKey(SIGNING_KEY),
+}
+
 const evidence = () => ({
   proofManifest: PROOF_MANIFEST,
   bindingManifest: BINDINGS,
   toolchain: TOOLCHAIN,
   leanSources: leanSources(),
+  signedTrustRoot: SIGNED_ROOT,
 })
 
 async function calculation() {
@@ -155,6 +177,7 @@ const build = async (overrides: Record<string, unknown> = {}) => {
     kernelArtifact: artifact,
     formalProofs: verifiedProofs(),
     formalProofEvidence: evidence(),
+    formalProofAuthority: AUTHORITY,
     runtimeWitnesses: [runtimeWitness(calc.receipt.receiptSha256)],
     ...overrides,
   })
@@ -628,14 +651,21 @@ test('a self-consistent rewritten manifest is refused at verification too', asyn
   assert.equal(result.fullyVerified, false)
 })
 
-test('integrity and authority are reported separately', async () => {
+test('integrity, recheck, authority and signature are reported separately', async () => {
   const honest = await build()
   const clean = await verifyIntegratedPackageFullyForTesting(honest, {
     resolveLeanVersion: () => PINNED_VERSION, runLeanBuild: leanOk, runAxiomCheck: axiomsOk,
   })
   assert.deepEqual(
-    { integrity: clean.packageIntegrityValid, lean: clean.leanRecheckExecuted, authority: clean.bindingAuthorityValid, full: clean.fullyVerified },
-    { integrity: true, lean: true, authority: true, full: true },
+    {
+      integrity: clean.packageIntegrityValid,
+      lean: clean.leanRecheckExecuted,
+      authority: clean.bindingAuthorityValid,
+      signature: clean.signatureAuthentic,
+      signingAuthority: clean.signingAuthorityValid,
+      full: clean.fullyVerified,
+    },
+    { integrity: true, lean: true, authority: true, signature: true, signingAuthority: true, full: true },
   )
 
   // A package can be internally perfect and still unauthorized. That is the
@@ -671,7 +701,14 @@ test('a missing trust root is refused, never skipped', async () => {
   // Resolution falls back to the committed registry, which has no entry for a
   // dossier nobody authorized.
   const orphan = verifyPackagedFormalProofs({ ...packagedInput(honest, BINDINGS), dossierId: 'dos_nobody_authorized', trustRoot: undefined }, {})
-  assert.ok(orphan.includes('integrated-formal-proof-trust-root-missing'), orphan.join(','))
+  // The signature is now checked before authorization, so an unauthorized
+  // dossier is refused at the envelope: the signed payload names a different
+  // dossier, which is an earlier and stronger refusal than a missing root.
+  assert.ok(
+    orphan.includes('integrated-formal-proof-signature-dossier-mismatch') ||
+      orphan.includes('integrated-formal-proof-trust-root-missing'),
+    orphan.join(','),
+  )
   assert.ok(!findings.includes('integrated-formal-proof-trust-root-missing'))
 })
 
@@ -862,12 +899,208 @@ test('the committed trust root matches the committed manifests', () => {
   }
 })
 
-test('the trust root claims no signature it does not have', () => {
-  // A trusted digest in reviewed source is what this is. Calling it a signature
-  // would overstate it, so nothing in the module may say so.
-  const source = readFileSync(resolve(import.meta.dirname, '../lib/evidence-dossier/formal-proof-trust-roots.ts'), 'utf8')
-  const claims = source.replace(/^\s*\*.*$/gm, '').replace(/\/\*[\s\S]*?\*\//g, '')
-  for (const word of ['signature', 'signed', 'signingKey']) {
-    assert.equal(new RegExp(`\\b${word}\\b`, 'i').test(claims), false, `trust root code must not claim a ${word}`)
+test('the signing layer does not overstate what a signature means', () => {
+  // Phase 1 guarded against claiming a signature that did not exist. One now
+  // does, so the risk inverts: the danger is describing authenticity as though
+  // it established the claim. A signed trust root over a false claim is a
+  // correctly signed false claim.
+  const files = [
+    '../lib/evidence-dossier/formal-proof-signing.ts',
+    '../lib/evidence-dossier/formal-proof-signing-keys.ts',
+    '../lib/evidence-dossier/formal-proof-trust-roots.ts',
+  ]
+  for (const file of files) {
+    const source = readFileSync(resolve(import.meta.dirname, file), 'utf8')
+    for (const forbidden of ['scientifically proven', 'empirically validated', 'certified', 'guarantees']) {
+      assert.equal(
+        new RegExp(forbidden.replace(' ', '\\s+'), 'i').test(source),
+        false,
+        `${file} must not describe a signature as ${forbidden}`,
+      )
+    }
   }
+})
+
+test('the production signing boundary is documented, not implied', () => {
+  // The only key in the registry is synthetic and its seed is published, so the
+  // gap between this and production signing must be stated rather than left for
+  // a reader to infer.
+  assert.equal(SIGNING_KEY_REGISTRY.every(isSyntheticKey), true)
+  assert.match(PRODUCTION_SIGNING_BOUNDARY, /No production signing key exists/)
+  const source = readFileSync(resolve(import.meta.dirname, '../lib/evidence-dossier/formal-proof-signing-keys.ts'), 'utf8')
+  assert.match(source, /HSM or KMS/)
+  assert.match(source, /other than whoever can merge/)
+})
+
+// ------------------------------- adversarial: signature at package level
+
+const verifySigned = (bundle: Awaited<ReturnType<typeof build>>, runners: Record<string, unknown> = {}) =>
+  verifyIntegratedPackageFullyForTesting(bundle, {
+    resolveLeanVersion: () => PINNED_VERSION, runLeanBuild: leanOk, runAxiomCheck: axiomsOk, ...runners,
+  })
+
+test('a package whose signed envelope was stripped is refused', async () => {
+  const honest = await build()
+  const stripped = { ...honest, files: honest.files.filter((f) => f.path !== 'formal-proof-trust-root.json') }
+  const result = await verifySigned(stripped)
+  assert.equal(result.signatureAuthentic, false)
+  assert.equal(result.fullyVerified, false)
+  assert.ok(result.findings.some((f) => f.includes('signature-envelope-missing')), result.findings.join(','))
+})
+
+test('a package with an altered signed payload is refused', async () => {
+  const honest = await build()
+  const forged = { ...SIGNED_ROOT, payload: { ...SIGNED_ROOT.payload, authorizedTheorems: ['Maha.Fake.kernel_is_correct'] } }
+  const hostile = repackage(honest, { 'formal-proof-trust-root.json': `${leanCanonicalJson(forged)}\n` })
+  const result = await verifySigned(hostile)
+  assert.equal(result.signatureAuthentic, false)
+  assert.equal(result.bindingAuthorityValid, false, 'authorization is not reported valid on an unchecked payload')
+  assert.equal(result.leanRecheckExecuted, false, 'the recheck never ran')
+  assert.ok(result.findings.some((f) => f.includes('signature-invalid')), result.findings.join(','))
+})
+
+test('a package signed by an attacker key is refused', async () => {
+  const honest = await build()
+  const attackerSeed = Buffer.alloc(32, 0x41)
+  const forged = signTrustRoot(
+    { ...SIGNED_ROOT.payload, authorizedTheorems: ['Maha.Fake.kernel_is_correct'] },
+    attackerSeed,
+    SIGNED_ROOT.signature.keyId,
+  )
+  const hostile = repackage(honest, { 'formal-proof-trust-root.json': `${leanCanonicalJson(forged)}\n` })
+  const result = await verifySigned(hostile)
+  assert.equal(result.signatureAuthentic, false)
+  assert.ok(result.findings.some((f) => f.includes('signature-invalid')), result.findings.join(','))
+})
+
+test('a revoked key cannot authorize a package', async () => {
+  const honest = await build()
+  const revokedEnvelope = signTrustRoot(
+    { ...SIGNED_ROOT.payload, authorityEpoch: 1 },
+    Buffer.from(SYNTHETIC_REVOKED_KEY_SEED_HEX, 'hex'),
+    SYNTHETIC_REVOKED_KEY_ID,
+  )
+  const hostile = repackage(honest, { 'formal-proof-trust-root.json': `${leanCanonicalJson(revokedEnvelope)}\n` })
+  const result = await verifySigned(hostile)
+  assert.equal(result.signatureAuthentic, false)
+  assert.ok(result.findings.some((f) => f.includes('signature-key-revoked')), result.findings.join(','))
+})
+
+test('self-consistent package tampering with recomputed digests is still refused', async () => {
+  // Every internal digest recomputed and the signed envelope left untouched:
+  // the package is internally perfect, and the signature over the authorization
+  // is what refuses it, because the bindings no longer match what was signed.
+  const honest = await build()
+  const tampered: BindingManifest = {
+    ...BINDINGS,
+    bindings: BINDINGS.bindings.map((b) => ({ ...b, informalBoundary: 'This proof establishes empirical validity.' })),
+  }
+  const hostile = repackage(honest, { 'formal-claim-bindings.json': `${leanCanonicalJson(tampered)}\n` })
+  const result = await verifySigned(hostile)
+  assert.equal(result.fullyVerified, false)
+  assert.ok(result.findings.some((f) => f.includes('unauthorized')), result.findings.join(','))
+})
+
+test('the rendered authority cannot be forged by the package', async () => {
+  // Claiming an authentic signature in the JSON-LD does not make one. The
+  // authority is rerendered from the verified signature, so a forged claim
+  // fails the rerender comparison.
+  const honest = await build()
+  const jsonld = JSON.parse(fileText(honest, 'dossier.jsonld')) as Record<string, unknown>
+  const forgedAuthority = { ...(jsonld.formalProofAuthority as Record<string, unknown>), keyId: 'attacker-key/v9' }
+  const hostile = repackage(honest, {
+    'dossier.jsonld': `${leanCanonicalJson({ ...jsonld, formalProofAuthority: forgedAuthority })}\n`,
+  })
+  const result = await verifySigned(hostile)
+  assert.equal(result.fullyVerified, false)
+  assert.ok(result.findings.includes('integrated-jsonld-rerender-mismatch'), result.findings.join(','))
+})
+
+test('the JSON-LD states what a signature does and does not establish', async () => {
+  const bundle = await build()
+  const jsonld = JSON.parse(fileText(bundle, 'dossier.jsonld')) as Record<string, Record<string, unknown>>
+  const authority = jsonld.formalProofAuthority
+  assert.equal(authority.signatureAuthentic, true)
+  assert.equal(authority.signatureAlgorithm, 'ed25519')
+  assert.equal(authority.syntheticTestKey, true)
+  assert.match(String(authority.note), /does not establish that any theorem holds/)
+  for (const forbidden of ['certified', 'scientifically proven', 'empirically validated']) {
+    assert.equal(new RegExp(forbidden, 'i').test(JSON.stringify(authority)), false, forbidden)
+  }
+})
+
+// -------------------------- adversarial: signing authority at package level
+
+test('a package authorized by an out-of-scope key is refused', async () => {
+  // The published seed signs a genuine envelope for a dossier the key may not
+  // authorize. Authenticity holds; signing authority does not; fullyVerified
+  // is false.
+  const honest = await build()
+  const outOfScope = signTrustRoot(
+    { ...SIGNED_ROOT.payload, dossierId: 'dos_attacker_controlled_dossier' },
+    Buffer.from(SYNTHETIC_TEST_KEY_SEED_HEX, 'hex'),
+    SIGNED_ROOT.signature.keyId,
+  )
+  const hostile = repackage(honest, { 'formal-proof-trust-root.json': `${leanCanonicalJson(outOfScope)}\n` })
+  const result = await verifySigned(hostile)
+  assert.equal(result.signingAuthorityValid, false)
+  assert.equal(result.fullyVerified, false)
+  assert.ok(
+    result.findings.some((f) => f.includes('signing-authority-dossier-not-permitted') || f.includes('signature-dossier-mismatch')),
+    result.findings.join(','),
+  )
+})
+
+test('a package citing another authority is refused', async () => {
+  const honest = await build()
+  const reattributed = signTrustRoot(
+    { ...SIGNED_ROOT.payload, authorityId: 'maha/production' },
+    Buffer.from(SYNTHETIC_TEST_KEY_SEED_HEX, 'hex'),
+    SIGNED_ROOT.signature.keyId,
+  )
+  const hostile = repackage(honest, { 'formal-proof-trust-root.json': `${leanCanonicalJson(reattributed)}\n` })
+  const result = await verifySigned(hostile)
+  assert.equal(result.signingAuthorityValid, false)
+  assert.equal(result.fullyVerified, false)
+})
+
+test('an unscoped registry key cannot authorize a package', async () => {
+  const honest = await build()
+  const unscoped = SIGNING_KEY_REGISTRY.map((k) =>
+    k.keyId === SIGNED_ROOT.signature.keyId ? { ...k, scope: { ...k.scope, permittedDossierIds: ['*'] } } : k,
+  )
+  const result = await verifySigned(honest, { signingKeyRegistry: unscoped })
+  assert.equal(result.signingAuthorityValid, false)
+  assert.equal(result.fullyVerified, false)
+  assert.ok(result.findings.some((f) => f.includes('wildcard-scope')), result.findings.join(','))
+})
+
+test('JSON-LD and PDF cannot turn authenticity into authorization', async () => {
+  const bundle = await build()
+  const jsonld = JSON.parse(fileText(bundle, 'dossier.jsonld')) as Record<string, Record<string, unknown>>
+  const authority = jsonld.formalProofAuthority
+  // The rendered note must state the limit of what a signature establishes.
+  assert.match(String(authority.note), /does not establish that any theorem holds/)
+  assert.match(String(authority.note), /attested to this set of authorized bindings/)
+  // No rendered field may assert authorization on the strength of authenticity.
+  for (const forbidden of ['authorizes any dossier', 'proves', 'validates', 'certifies']) {
+    assert.equal(new RegExp(forbidden, 'i').test(JSON.stringify(authority)), false, forbidden)
+  }
+  // A package that claims authenticity it lacks fails the rerender comparison.
+  const forged = { ...authority, signatureAuthentic: true, keyId: 'attacker/v1' }
+  const hostile = repackage(bundle, { 'dossier.jsonld': `${leanCanonicalJson({ ...jsonld, formalProofAuthority: forged })}\n` })
+  const result = await verifySigned(hostile)
+  assert.equal(result.fullyVerified, false)
+  assert.ok(result.findings.includes('integrated-jsonld-rerender-mismatch'), result.findings.join(','))
+})
+
+test('a package-supplied key is still ignored under scope enforcement', async () => {
+  const honest = await build()
+  const attackerSeed = Buffer.alloc(32, 0x42)
+  const forged = signTrustRoot(SIGNED_ROOT.payload, attackerSeed, SIGNED_ROOT.signature.keyId)
+  const withKey = { ...forged, publicKey: rawPublicKeyBase64(attackerSeed) }
+  const hostile = repackage(honest, { 'formal-proof-trust-root.json': `${leanCanonicalJson(withKey)}\n` })
+  const result = await verifySigned(hostile)
+  assert.equal(result.signatureAuthentic, false)
+  assert.ok(result.findings.some((f) => f.includes('signature-invalid')), result.findings.join(','))
 })

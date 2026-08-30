@@ -11,13 +11,21 @@ name: Lean formal bridge
 
 on:
   pull_request:
-    paths:
+    paths: &lean-paths
       - 'packages/maha-lean-bridge/**'
       - '.github/workflows/lean-formal-bridge.yml'
+      # The integrated package check exercises these too, so a change here can
+      # break the Lean recheck. Watching only the bridge let this job skip
+      # entirely on a PR that rewrote trust-root signing.
+      - 'packages/evidence-dossier-builder/**'
+      - 'lib/evidence-dossier/**'
+      - 'content/evidence-dossier/**'
+      - 'scripts/verify-integrated-formal-proof-package.ts'
+      - 'scripts/generate-formal-proof-trust-root.ts'
+      - 'packages/wasm-kernel/**'
   push:
     branches: [main]
-    paths:
-      - 'packages/maha-lean-bridge/**'
+    paths: *lean-paths
 
 permissions:
   contents: read
