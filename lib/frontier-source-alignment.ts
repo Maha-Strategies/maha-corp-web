@@ -7,6 +7,7 @@ import {
   ALIGNMENT_BATCH_8_DECISIONS,
   ALIGNMENT_BATCH_8_SOURCE_DISCOVERIES,
 } from './frontier-alignment-batch-8.ts'
+import { ALIGNMENT_BATCH_9_REMEDIATION_PACKETS } from './frontier-alignment-batch-9.ts'
 import type { EpistemicRecord } from './epistemic-schema.ts'
 
 /**
@@ -2436,9 +2437,51 @@ const BATCH_8_JUDGEMENTS: Readonly<Record<string, InspectedJudgement>> = Object.
   }),
 )
 
+/**
+ * Batch 9 adds replacement proposals to mismatched records. The active source,
+ * verdict, blockers, and revision stay unchanged. A proposal already recorded
+ * by an earlier batch (REBCO) is preserved verbatim after identifier agreement
+ * rather than overwritten with a second representation.
+ */
+const BATCH_9_REMEDIATION_JUDGEMENTS: Readonly<Record<string, InspectedJudgement>> = Object.fromEntries(
+  ALIGNMENT_BATCH_9_REMEDIATION_PACKETS.map((packet) => {
+    const prior = BATCH_8_JUDGEMENTS[packet.recordId]
+      ?? ACTIVE_JUDGEMENTS_AFTER_BATCH_7[packet.recordId]
+    if (!prior) throw new Error(`${packet.recordId}: Batch 9 cannot propose a replacement for an unaudited record.`)
+    if (prior.verdict !== 'mismatched') {
+      throw new Error(`${packet.recordId}: Batch 9 replacements require an active mismatched verdict.`)
+    }
+    if (prior.proposedSourceOverride) {
+      if (prior.proposedSourceOverride.identifier !== packet.replacement.identifier) {
+        throw new Error(`${packet.recordId}: Batch 9 conflicts with an earlier replacement proposal.`)
+      }
+      return [packet.recordId, prior]
+    }
+    return [packet.recordId, {
+      ...prior,
+      proposedSourceOverride: {
+        citation: packet.replacement.citation,
+        identifier: packet.replacement.identifier,
+        rationale: packet.replacement.rationale,
+        decision: 'pending-human-decision',
+        inspection: {
+          replacementDecision: packet.replacement.replacementDecision,
+          metadataVerified: packet.replacement.inspection.metadataVerified,
+          metadataNote: packet.replacement.inspection.metadataNote,
+          artifactVersion: packet.replacement.inspection.artifactVersion,
+          inspectedContentLocation: packet.replacement.inspection.inspectedContentLocation,
+          findings: packet.replacement.inspection.findings,
+          whatWouldChangeIfAccepted: packet.whatWouldChangeIfAccepted,
+        },
+      },
+    } satisfies InspectedJudgement]
+  }),
+)
+
 const ACTIVE_JUDGEMENTS: Readonly<Record<string, InspectedJudgement>> = {
   ...ACTIVE_JUDGEMENTS_AFTER_BATCH_7,
   ...BATCH_8_JUDGEMENTS,
+  ...BATCH_9_REMEDIATION_JUDGEMENTS,
 }
 
 /**
@@ -3055,6 +3098,64 @@ export function isBatch6Reinspection(recordId: string): boolean {
     const inspectable = discovery.status !== 'closed-no-authorized-copy'
     if (discovery.contentInspectionAuthorized !== inspectable) {
       throw new Error(`${discovery.sourceContractId}: Batch 8 discovery authorization contradicts its access status.`)
+    }
+  }
+
+  // Batch 9 is a frozen remediation cohort selected only from the 86 active,
+  // content-confirmed mismatches after Batch 8. It adds proposals, never source
+  // mutations. Inspection is necessary for a packet, but never sufficient to
+  // authorize adoption or release.
+  if (ALIGNMENT_BATCH_9_REMEDIATION_PACKETS.length !== 20
+    || new Set(ALIGNMENT_BATCH_9_REMEDIATION_PACKETS.map((packet) => packet.recordId)).size !== 20
+    || new Set(ALIGNMENT_BATCH_9_REMEDIATION_PACKETS.map((packet) => packet.packetId)).size !== 20) {
+    throw new Error('Batch 9 must contain twenty unique remediation packets.')
+  }
+  if (new Set(ALIGNMENT_BATCH_9_REMEDIATION_PACKETS.map((packet) => packet.domainSlug)).size !== 8) {
+    throw new Error('Batch 9 must represent all eight frontier domains.')
+  }
+  for (const packet of ALIGNMENT_BATCH_9_REMEDIATION_PACKETS) {
+    const record = FRONTIER_DOMAIN_GRAPH_RECORDS.find((entry) => entry.id === packet.recordId)
+    if (!record || record.domainSlug !== packet.domainSlug) {
+      throw new Error(`${packet.recordId}: Batch 9 record or domain is invalid.`)
+    }
+    const prior = BATCH_8_JUDGEMENTS[packet.recordId]
+      ?? ACTIVE_JUDGEMENTS_AFTER_BATCH_7[packet.recordId]
+    if (!prior || prior.verdict !== 'mismatched' || !prior.sourceContentInspected) {
+      throw new Error(`${packet.recordId}: Batch 9 cohort is not an inspected active mismatch.`)
+    }
+    const expectedPriority = packet.priority.productRelevance
+      + packet.priority.graphLeverage
+      + packet.priority.correctionValue
+      + packet.priority.inspectability
+    if (packet.priority.total !== expectedPriority || packet.priority.total < 7) {
+      throw new Error(`${packet.recordId}: Batch 9 priority score is invalid or below the frozen threshold.`)
+    }
+    if (!packet.replacement.url.startsWith('https://') || packet.replacement.url.includes('@')) {
+      throw new Error(`${packet.recordId}: Batch 9 replacement URL is not credential-free HTTPS.`)
+    }
+    if (packet.replacement.rights.basis !== 'citation-with-paraphrase'
+      || packet.replacement.rights.quotationUsed !== false
+      || packet.replacement.rights.sourceContentCommitted !== false) {
+      throw new Error(`${packet.recordId}: Batch 9 replacement crossed its citation-only rights boundary.`)
+    }
+    const inspected = packet.replacement.inspection
+    if (!inspected.contentInspected || !inspected.exactLocatorInspected
+      || !inspected.inspectedContentLocation || !inspected.metadataVerified) {
+      throw new Error(`${packet.recordId}: Batch 9 replacement lacks inspected content, locator, or metadata.`)
+    }
+    if (packet.disposition !== 'blocked-pending-source-override-review'
+      || packet.canonicalMutationAuthorized !== false
+      || packet.promotionEligible !== false
+      || packet.externallyReviewed !== false
+      || packet.independentlyReproduced !== false) {
+      throw new Error(`${packet.recordId}: Batch 9 replacement crossed a governance boundary.`)
+    }
+    const active = ACTIVE_JUDGEMENTS[packet.recordId]
+    if (active.verdict !== prior.verdict
+      || active.inspectedContentLocation !== prior.inspectedContentLocation
+      || active.proposedSourceOverride?.decision !== 'pending-human-decision'
+      || active.proposedSourceOverride.identifier !== packet.replacement.identifier) {
+      throw new Error(`${packet.recordId}: Batch 9 changed the active judgement or failed to attach the proposal.`)
     }
   }
 
