@@ -8,6 +8,7 @@ import {
   SOURCE_OVERRIDE_REVISION_CANARY_VERSION,
   SOURCE_OVERRIDE_REVISION_DECISIONS,
 } from '../lib/source-override-revision-canary.ts'
+import { sha256Canonical } from '../lib/epistemic-publication.ts'
 
 const summary = {
   revisedRecords: SOURCE_OVERRIDE_REVISED_RECORDS.length,
@@ -30,10 +31,17 @@ const artifact = {
 }
 
 const jsonPath = resolve('content/epistemic/source-override-revision-canary.json')
+const ingestionPath = resolve('content/epistemic/source-override-revision-ingestion-records.json')
 const markdownPath = resolve('docs/epistemic/source-override-revision-canary.md')
 await mkdir(dirname(jsonPath), { recursive: true })
 await mkdir(dirname(markdownPath), { recursive: true })
 await writeFile(jsonPath, `${JSON.stringify(artifact, null, 2)}\n`)
+await writeFile(ingestionPath, `${JSON.stringify({
+  schemaVersion: SOURCE_OVERRIDE_REVISION_CANARY_VERSION,
+  purpose: 'exact-record-ingestion-snapshot',
+  recordsSha256: sha256Canonical(SOURCE_OVERRIDE_REVISED_RECORDS),
+  records: SOURCE_OVERRIDE_REVISED_RECORDS,
+}, null, 2)}\n`)
 await writeFile(markdownPath, `# Source-override revision canary\n\n` +
   `This deterministic, private preflight constructs **${summary.revisedRecords}** corrected records, audits each exact revision, records **${summary.revisionScopedInternalDecisions}** scoped internal decisions, and verifies substantial-page eligibility without creating a release or changing an active source binding.\n\n` +
   `## Release topology\n\n` +

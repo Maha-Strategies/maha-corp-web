@@ -6,6 +6,7 @@ import { REPAIRED_REVISION_CANARY_RECORDS } from './repaired-revision-canary-tar
 import { SUBSTANTIAL_PUBLICATION_RECORD_IDS } from './substantial-page-publication.ts'
 import { SUBSTANTIAL_BATCH_2_RECORD_IDS } from './substantial-page-publication-batch-2.ts'
 import { SUBSTANTIAL_BATCH_3_RELEASES } from './substantial-page-publication-batch-3.ts'
+import type { EpistemicRecord } from './epistemic-schema.ts'
 
 export const SUBSTANTIAL_PUBLICATION_QUEUE_VERSION = 'maha-substantial-publication-queue/1.0' as const
 export const FROZEN_RELEASE_REGISTRY_SOURCE = 'https://www.mahastrategies.com/knowledge/epistemic-system/releases/registry.json' as const
@@ -121,6 +122,23 @@ export interface PublicationGateFacts {
   releasePathMatchesRecord: boolean
 }
 
+export interface PublicationQueueCandidateInput {
+  record: EpistemicRecord | undefined
+  release: FrozenActiveRelease | undefined
+  inspectedAndAlignmentClear: boolean
+  exactRevisionReviewed: boolean
+  currentSubstantialPage: boolean
+}
+
+export interface PublicationQueueCandidateEvaluation extends PublicationGateFacts {
+  recordId: string | null
+  releaseId: string | null
+  currentSubstantialPage: boolean
+  eligible: boolean
+  blockerCodes: readonly string[]
+  queueDigest: string
+}
+
 export function publicationGateBlockers(facts: PublicationGateFacts): string[] {
   const blockers: string[] = []
   if (!facts.recordFound) blockers.push('record-missing')
@@ -132,39 +150,64 @@ export function publicationGateBlockers(facts: PublicationGateFacts): string[] {
   return blockers.sort()
 }
 
+export function evaluatePublicationQueueCandidate(
+  input: PublicationQueueCandidateInput,
+): PublicationQueueCandidateEvaluation {
+  const releaseRevisionMatchesRecord = Boolean(
+    input.record && input.release && epistemicReviewTargetHash(input.record) === input.release.targetSha256,
+  )
+  const releasePathMatchesRecord = Boolean(
+    input.record && input.release && epistemicRecordPath(input.record) === input.release.canonicalPath,
+  )
+  const facts: PublicationGateFacts = {
+    recordFound: Boolean(input.record),
+    inspectedAndAlignmentClear: input.inspectedAndAlignmentClear,
+    exactRevisionReviewed: input.exactRevisionReviewed,
+    activeCanonicalRelease: Boolean(input.release),
+    releaseRevisionMatchesRecord,
+    releasePathMatchesRecord,
+  }
+  const blockerCodes = publicationGateBlockers(facts)
+  const base = {
+    recordId: input.record?.id ?? input.release?.recordId ?? null,
+    releaseId: input.release?.releaseId ?? null,
+    ...facts,
+    currentSubstantialPage: input.currentSubstantialPage,
+    eligible: blockerCodes.length === 0,
+    blockerCodes,
+  }
+  return { ...base, queueDigest: sha256Canonical(base) }
+}
+
 function queueEntry(release: FrozenActiveRelease): PublicationQueueEntry {
   const record = records.get(release.recordId)
   const scopes = new Set(release.approvalScopes)
   const inspectedAndAlignmentClear = Boolean(record && sourceAlignmentClear(record.id))
   const exactRevisionReviewed = REQUIRED_REVIEW_SCOPES.every((scope) => scopes.has(scope))
-  const releaseRevisionMatchesRecord = Boolean(record && epistemicReviewTargetHash(record) === release.targetSha256)
-  const releasePathMatchesRecord = Boolean(record && epistemicRecordPath(record) === release.canonicalPath)
   const currentSubstantialPage = currentSubstantialRecordIds.has(release.recordId)
-  const activeCanonicalRelease = true
-  const blockers = publicationGateBlockers({
-    recordFound: Boolean(record),
+  const evaluated = evaluatePublicationQueueCandidate({
+    record,
+    release,
     inspectedAndAlignmentClear,
     exactRevisionReviewed,
-    activeCanonicalRelease,
-    releaseRevisionMatchesRecord,
-    releasePathMatchesRecord,
+    currentSubstantialPage,
   })
   const base = {
     recordId: release.recordId,
     releaseId: release.releaseId,
-    recordFound: Boolean(record),
-    inspectedAndAlignmentClear,
-    exactRevisionReviewed,
-    activeCanonicalRelease,
-    releaseRevisionMatchesRecord,
-    releasePathMatchesRecord,
-    currentSubstantialPage,
+    recordFound: evaluated.recordFound,
+    inspectedAndAlignmentClear: evaluated.inspectedAndAlignmentClear,
+    exactRevisionReviewed: evaluated.exactRevisionReviewed,
+    activeCanonicalRelease: evaluated.activeCanonicalRelease,
+    releaseRevisionMatchesRecord: evaluated.releaseRevisionMatchesRecord,
+    releasePathMatchesRecord: evaluated.releasePathMatchesRecord,
+    currentSubstantialPage: evaluated.currentSubstantialPage,
     // An existing substantial page is descriptive, not a publication gate.
     // New pages may enter only when evidence, exact-revision review and the
     // active release all match; requiring a prior page would make the factory
     // incapable of adding a genuinely new released record.
-    eligibleForBatch5: blockers.length === 0,
-    blockerCodes: blockers.sort(),
+    eligibleForBatch5: evaluated.eligible,
+    blockerCodes: evaluated.blockerCodes,
   }
   return { ...base, queueDigest: sha256Canonical(base) }
 }

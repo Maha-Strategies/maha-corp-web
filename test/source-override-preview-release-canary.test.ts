@@ -1,0 +1,173 @@
+import assert from 'node:assert/strict'
+import { existsSync, readFileSync, readdirSync, statSync } from 'node:fs'
+import { join } from 'node:path'
+import { spawnSync } from 'node:child_process'
+import test from 'node:test'
+
+import { getLegacyEpistemicAdapter } from '../lib/epistemic-adapters.ts'
+import { epistemicRecordPath, epistemicReviewTargetHash } from '../lib/epistemic-publication.ts'
+import { parseEpistemicExpertReview } from '../lib/epistemic-review.ts'
+import {
+  PRIVATE_REVISION_RELEASE_CANARY,
+  SOURCE_OVERRIDE_REVISED_RECORDS,
+  sourceOverrideRevisionCanaryReviewInputs,
+} from '../lib/source-override-revision-canary.ts'
+import { evaluatePublicationQueueCandidate } from '../lib/substantial-publication-queue.ts'
+import snapshot from '../content/epistemic/source-override-revision-ingestion-records.json' with { type: 'json' }
+
+function filesUnder(root: string): string[] {
+  if (!existsSync(root)) return []
+  return readdirSync(root).flatMap((name) => {
+    const path = join(root, name)
+    return statSync(path).isDirectory() ? filesUnder(path) : [path]
+  })
+}
+
+test('the dedicated adapter freezes exactly the five merged-main revisions', () => {
+  const adapter = getLegacyEpistemicAdapter('source-override-revision-canary')
+  assert.ok(adapter)
+  const candidates = adapter.adapt()
+  assert.equal(candidates.length, 5)
+  assert.deepEqual(
+    candidates.map((candidate) => candidate.reviewTargetSha256),
+    SOURCE_OVERRIDE_REVISED_RECORDS.map(epistemicReviewTargetHash),
+  )
+  assert.equal(snapshot.records.length, 5)
+  assert.deepEqual(snapshot.records.map((record) => record.id), SOURCE_OVERRIDE_REVISED_RECORDS.map((record) => record.id))
+  for (const candidate of candidates) {
+    assert.equal(candidate.record.publication.reviewState, 'draft')
+    assert.equal(candidate.record.publication.requestedPublicPromotion, false)
+    assert.equal(candidate.gateDecision.publicEligible, false)
+  }
+})
+
+test('twenty scoped review inputs parse and bind the exact revisions', () => {
+  const inputs = sourceOverrideRevisionCanaryReviewInputs()
+  assert.equal(inputs.length, 20)
+  for (const record of SOURCE_OVERRIDE_REVISED_RECORDS) {
+    const scoped = inputs.filter((input) => input.recordId === record.id)
+    assert.equal(scoped.length, 4)
+    assert.equal(new Set(scoped.map((input) => input.scope)).size, 4)
+    for (const input of scoped) {
+      const parsed = parseEpistemicExpertReview(input)
+      assert.equal(parsed.targetSha256, epistemicReviewTargetHash(record))
+      assert.equal(parsed.reviewer.reviewerKind, 'internal-editorial')
+      assert.ok(parsed.reviewer.reviewMethod)
+      assert.match(parsed.reviewer.reviewMethod, /exact-revision/i)
+    }
+  }
+})
+
+test('the three-gate queue admits each record only after an exact active release', () => {
+  for (const record of SOURCE_OVERRIDE_REVISED_RECORDS) {
+    const canary = PRIVATE_REVISION_RELEASE_CANARY.find((entry) => entry.recordId === record.id)
+    assert.ok(canary)
+    const before = evaluatePublicationQueueCandidate({
+      record,
+      release: undefined,
+      inspectedAndAlignmentClear: true,
+      exactRevisionReviewed: true,
+      currentSubstantialPage: false,
+    })
+    assert.equal(before.eligible, false)
+    assert.ok(before.blockerCodes.includes('active-canonical-release-missing'))
+
+    const oldRelease = canary.priorReleaseId ? {
+      recordId: record.id,
+      releaseId: canary.priorReleaseId,
+      targetSha256: canary.priorReleaseTargetSha256!,
+      canonicalPath: epistemicRecordPath(record),
+      approvalScopes: ['boundary-adequacy', 'domain-fidelity', 'rights-and-locator', 'source-fidelity'],
+    } : undefined
+    if (oldRelease) {
+      const stale = evaluatePublicationQueueCandidate({
+        record,
+        release: oldRelease,
+        inspectedAndAlignmentClear: true,
+        exactRevisionReviewed: true,
+        currentSubstantialPage: false,
+      })
+      assert.equal(stale.eligible, false)
+      assert.ok(stale.blockerCodes.includes('active-release-revision-stale'))
+    }
+
+    const exactRelease = {
+      recordId: record.id,
+      releaseId: `epirelease_${epistemicReviewTargetHash(record).slice(7, 39)}`,
+      targetSha256: epistemicReviewTargetHash(record),
+      canonicalPath: epistemicRecordPath(record),
+      approvalScopes: ['boundary-adequacy', 'domain-fidelity', 'rights-and-locator', 'source-fidelity'],
+    }
+    const after = evaluatePublicationQueueCandidate({
+      record,
+      release: exactRelease,
+      inspectedAndAlignmentClear: true,
+      exactRevisionReviewed: true,
+      currentSubstantialPage: false,
+    })
+    assert.equal(after.eligible, true)
+    assert.deepEqual(after.blockerCodes, [])
+
+    const missingReview = evaluatePublicationQueueCandidate({
+      record,
+      release: exactRelease,
+      inspectedAndAlignmentClear: true,
+      exactRevisionReviewed: false,
+      currentSubstantialPage: false,
+    })
+    assert.equal(missingReview.eligible, false)
+    assert.ok(missingReview.blockerCodes.includes('exact-revision-review-incomplete'))
+  }
+})
+
+test('the dedicated migration persists drafts only and cannot publish', () => {
+  const migration = readFileSync('supabase/migrations/20260830173000_source_override_revision_preview_canary.sql', 'utf8')
+  assert.match(migration, /record_source_override_revision_canary_targets/)
+  assert.match(migration, /recordCount',''\) <> '5'/)
+  assert.match(migration, /reviewState\}',''\) <> 'draft'/)
+  assert.match(migration, /requestedPublicPromotion\}',''\) <> 'false'/)
+  assert.doesNotMatch(migration, /record_epistemic_expert_review|record_epistemic_canonical_release/)
+})
+
+test('the remote workflow is exact-branch Preview-only and carries no Production path', () => {
+  const workflow = readFileSync('.github/workflows/preview-source-override-release-canary.yml', 'utf8')
+  const runner = readFileSync('scripts/run-source-override-preview-release-canary.ts', 'utf8')
+  for (const source of [workflow, runner]) {
+    assert.match(source, /codex\/corrected-revision-preview-release/)
+    assert.match(source, /RELEASE_5_SOURCE_OVERRIDE_REVISIONS_IN_PREVIEW/)
+    assert.match(source, /Production.*forbidden|Production hosts are forbidden/i)
+    assert.doesNotMatch(source, /production-database/)
+  }
+  assert.match(workflow, /environment: Preview/)
+  assert.match(workflow, /uhwuullakihgszxhiygz/)
+})
+
+test('the Production plan is deterministic and deliberately non-executable', () => {
+  const run = () => spawnSync(process.execPath, ['--experimental-strip-types', 'scripts/generate-source-override-production-release-plan.ts'], {
+    cwd: process.cwd(), encoding: 'utf8', env: process.env,
+  })
+  assert.equal(run().status, 0)
+  const first = readFileSync('content/epistemic/source-override-production-release-plan.json', 'utf8')
+  assert.equal(run().status, 0)
+  const second = readFileSync('content/epistemic/source-override-production-release-plan.json', 'utf8')
+  assert.equal(second, first)
+  const plan = JSON.parse(first)
+  assert.deepEqual(plan.counts, { total: 5, superseding: 2, initial: 3 })
+  assert.equal(plan.controls.executable, false)
+  assert.equal(plan.controls.productionMutationAuthorized, false)
+  assert.equal(plan.controls.authorityCredentialIncluded, false)
+  assert.equal(plan.controls.explicitFutureAuthorizationRequired, true)
+  assert.equal(plan.targets.every((target: { state: string }) => target.state === 'prepared-not-authorized'), true)
+})
+
+test('private canary vocabulary stays outside public and client projection', () => {
+  const publicSources = [
+    'app/sitemap.ts',
+    'app/llms.txt/route.ts',
+    'lib/llms-manifest.ts',
+    'lib/substantial-page-public.ts',
+  ].map((path) => readFileSync(path, 'utf8')).join('\n')
+  assert.doesNotMatch(publicSources, /source-override-preview-release|Preview-Source-Override-Canary/)
+  const client = filesUnder('.next/static').map((path) => readFileSync(path, 'utf8')).join('\n')
+  assert.doesNotMatch(client, /source-override-preview-release|active-canonical-release-missing/)
+})

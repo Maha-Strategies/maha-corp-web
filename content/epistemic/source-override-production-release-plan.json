@@ -1,0 +1,120 @@
+{
+  "schemaVersion": "maha-source-override-production-release-plan/1.0",
+  "preparedFromCommit": "resolved-at-execution-after-main-merge",
+  "requiredConfirmation": "RELEASE_5_SOURCE_OVERRIDE_REVISIONS_IN_PRODUCTION",
+  "requiredEnvironment": "production-database",
+  "requiredBranch": "main",
+  "targets": [
+    {
+      "recordId": "urn:maha:record:advanced-materials-graphene-hbn-heterostructures",
+      "targetSha256": "sha256:21510525769f2f6176f0823ea8f6234d6eb6485e09b2f112eff351edfd40529f",
+      "canonicalPath": "/knowledge/advanced-materials/methods/advanced-materials-graphene-hbn-heterostructures",
+      "releaseKind": "superseding",
+      "priorReleaseId": "epirelease_cf7d30fd107544bb8cf80ef1d184e5b6",
+      "priorReleaseTargetSha256": "sha256:089357ea824544d5dae02a72384bb9eefea284e439771650d6e60b768ca3c144",
+      "auditSha256": "sha256:be7a2194352725eeb7637db73251d156b678162fc622833ec5e38cf19424ef29",
+      "decisionSha256s": [
+        "sha256:4987238c6118a6bd9265ceee65072520ededbee54ec2369acc309be9c207d3b8",
+        "sha256:81ec2e64aaf595f7e14401cd02ada8c79fe00f37c02502724b2e607f6e848466",
+        "sha256:8d8af68b59361026b13f43dd3a04f60c81183c346807c2971e09a01a071a1e12",
+        "sha256:b7e00bd586df22108feb92f158ecf935a6e709a2ceb22e9de8dca24956d809a5"
+      ],
+      "substantialContractDigest": "sha256:3bab21065b51178cb3c73aaa530c9c96d73fa25f4258da2ef09341cc38c971e2",
+      "requiredCanonicalVersion": "1.1.0",
+      "requiredSupersedesReleaseId": "epirelease_cf7d30fd107544bb8cf80ef1d184e5b6",
+      "state": "prepared-not-authorized"
+    },
+    {
+      "recordId": "urn:maha:record:critical-supply-chains-quartz-crucible-manufacturing",
+      "targetSha256": "sha256:7de6bf64ae565a069abc92dd26c2dbfe4e9d698e11d76c2c97d54eb2f6a232c2",
+      "canonicalPath": "/knowledge/critical-supply-chains/mechanisms/critical-supply-chains-quartz-crucible-manufacturing",
+      "releaseKind": "superseding",
+      "priorReleaseId": "epirelease_ddb8847cfa1748a19c374b2b71bc913e",
+      "priorReleaseTargetSha256": "sha256:4ea4058077b38e83ffe793f62499517702af9b8c0f9c129ab932833fa897e78e",
+      "auditSha256": "sha256:a90bb35a1b5e9075989651b6c61ee59a7b7beb1df2432a92b27cb9f208ab718c",
+      "decisionSha256s": [
+        "sha256:06ea907fa61dd1c991c5c473feb2af287209596cda6de45e7af3dd3b91bb0808",
+        "sha256:74455dcd2067b2fa258f5203b192f3a491c88623591469f0ba5756f1a9e51c9c",
+        "sha256:798c6c459307188a99fdf52acb0b99b0169d4044e4bd800b51054569d53d4440",
+        "sha256:d171050efaf5b9c31b282ad47f2570fdd54ba1f0fccd0fa7b8d2cc7aa51999fc"
+      ],
+      "substantialContractDigest": "sha256:4651e7e22296de7b8d2ce142bf26690f1dde73596cb8c147fd89c46eccb0e5da",
+      "requiredCanonicalVersion": "1.1.0",
+      "requiredSupersedesReleaseId": "epirelease_ddb8847cfa1748a19c374b2b71bc913e",
+      "state": "prepared-not-authorized"
+    },
+    {
+      "recordId": "urn:maha:record:fusion-plasma-systems-rebco-high-field-magnets",
+      "targetSha256": "sha256:af33ed2151a90169d02b2e046dce2066d2a9192ba492166f32a831c1c82b84b7",
+      "canonicalPath": "/knowledge/fusion-plasma-systems/mechanisms/fusion-plasma-systems-rebco-high-field-magnets",
+      "releaseKind": "initial",
+      "priorReleaseId": null,
+      "priorReleaseTargetSha256": null,
+      "auditSha256": "sha256:43f74d0322d42693ed117d3430582d974d5ffbc73fc99933d273bb9c460bf49f",
+      "decisionSha256s": [
+        "sha256:1ac2c34a87322a223aaa5d7027c7f8911d9ca4ccf3f788e6f00e66dc42d41b8c",
+        "sha256:6a6beb5e3d85b7db14f2397760f580a3f6d59918821f7d0853124a5208dc70f6",
+        "sha256:c4d7e26b375a950f32bee127f5c3bf146a8dba45bf2d377335101164f9759382",
+        "sha256:e566f2c62aa3b8c89f87ee6fbae30a2b74d599dcaf2ec58564890a8e469c3cc2"
+      ],
+      "substantialContractDigest": "sha256:a0753efd7b402eacb277a48e2882283c856ba141dd74f9435facac10f76341e2",
+      "requiredCanonicalVersion": "1.0.0",
+      "requiredSupersedesReleaseId": null,
+      "state": "prepared-not-authorized"
+    },
+    {
+      "recordId": "urn:maha:record:agentic-systems-mcp-least-authority-tokens",
+      "targetSha256": "sha256:4430608e0c1ad926fc0dda300c3b8001245461b2f9cbd0b2c36d1261d25053f3",
+      "canonicalPath": "/knowledge/agentic-systems-mcp/concepts/agentic-systems-mcp-least-authority-tokens",
+      "releaseKind": "initial",
+      "priorReleaseId": null,
+      "priorReleaseTargetSha256": null,
+      "auditSha256": "sha256:ed40fe6a3642d1a1839e2d59b5db89530f3a34ef9127e56f1fb572074d34d14d",
+      "decisionSha256s": [
+        "sha256:37a1f5fd80dbc13ae23fe0150bee4cc9c98ca2e3597aad625d81aea14c685773",
+        "sha256:99ec61bdf3a8f8171d82959c9fa708b63e75630dc865085ff45c8cb55a5ba1db",
+        "sha256:b1c9f7f2fff3cbee6120030714f6b5c85197ef4f043335bc4fc2b875fee0b18e",
+        "sha256:dce8a0ec35b06241cdacf26539863fe16be10a21cc5f64dc2cc851bf99f64bd0"
+      ],
+      "substantialContractDigest": "sha256:91c2629e8a10ea4f72d46484ab13dd4f695893a43e18f8feb5a903dc12d24340",
+      "requiredCanonicalVersion": "1.0.0",
+      "requiredSupersedesReleaseId": null,
+      "state": "prepared-not-authorized"
+    },
+    {
+      "recordId": "urn:maha:record:biomolecular-engineering-enzyme-cascade-engineering",
+      "targetSha256": "sha256:718ed37ed33242421598878f51541eeeb2382450be7ef6b19c89c42fec14b47d",
+      "canonicalPath": "/knowledge/biomolecular-engineering/methods/biomolecular-engineering-enzyme-cascade-engineering",
+      "releaseKind": "initial",
+      "priorReleaseId": null,
+      "priorReleaseTargetSha256": null,
+      "auditSha256": "sha256:bfa11549c752a9de15039e5e8a6d1c88d452edbb65e0edd35843f1cb39ed4b9a",
+      "decisionSha256s": [
+        "sha256:0a3b44926904a837935998c7a79dd1bbccd76802a0d6134cd41797e1b6eb3a4a",
+        "sha256:28b1127bfb504a5091dbb626035fd210239b1568a87a4bdb0d0341cf9b54341b",
+        "sha256:8c2849fc1f814d8d0b90be198ed432883a74b0ab2f785bf6963efaea81ff72c2",
+        "sha256:cf5a2c11b11fe54442e6ef9ba41f83b77d3d71e56fd01f73ecd1ee0efe642f95"
+      ],
+      "substantialContractDigest": "sha256:fef7dc50d5124b7a4c6e8b795725a137c270658c5d8b91436330298d13af9170",
+      "requiredCanonicalVersion": "1.0.0",
+      "requiredSupersedesReleaseId": null,
+      "state": "prepared-not-authorized"
+    }
+  ],
+  "counts": {
+    "total": 5,
+    "superseding": 2,
+    "initial": 3
+  },
+  "controls": {
+    "executable": false,
+    "productionMutationAuthorized": false,
+    "authorityCredentialIncluded": false,
+    "operationsCredentialIncluded": false,
+    "explicitFutureAuthorizationRequired": true,
+    "exactMainCommitMustBeRecordedBeforeDispatch": true,
+    "previewEvidenceMustBeAttachedBeforeDispatch": true
+  },
+  "boundary": "This file prepares exact release targets and lineage only. It is not an authorization, workflow dispatch, canonical release, external review, independent reproduction, scientific validation, or commercial certification.",
+  "planSha256": "sha256:1e99f0085d2ca51a51d666656be522d15cbcf74c13cf78c44114d05001460076"
+}

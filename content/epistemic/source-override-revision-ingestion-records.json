@@ -1,0 +1,581 @@
+{
+  "schemaVersion": "maha-source-override-revision-canary/0.1",
+  "purpose": "exact-record-ingestion-snapshot",
+  "recordsSha256": "sha256:cfdcfec16b33026a1beadd9402b1587d8a711acfc1ddaaaf45ff7f1c8cf2e5a8",
+  "records": [
+    {
+      "schemaVersion": "maha-epistemic/1.0",
+      "evidencePolicyVersion": "mps/0.1",
+      "id": "urn:maha:record:advanced-materials-graphene-hbn-heterostructures",
+      "domainSlug": "advanced-materials",
+      "recordKind": "method",
+      "slug": "advanced-materials-graphene-hbn-heterostructures",
+      "title": "Graphene hBN heterostructures",
+      "description": "A source-bounded method record for graphene hbn heterostructures within advanced materials.",
+      "summary": "Graphene hBN heterostructures is bound to one inspected replacement source, exact locator, explicit version relationship, uncertainty statement, and prohibited-inference boundary.",
+      "claims": [
+        {
+          "id": "urn:maha:claim:advanced-materials-graphene-hbn-heterostructures",
+          "statement": "The abstract reports mono- and bilayer graphene devices transferred onto single-crystal hBN, improved transport characteristics, and controlled assembly of layered materials for more complex heterostructures.",
+          "claimKind": "theoretical-model",
+          "evidenceMaturity": "single-study",
+          "sourceIds": [
+            "source-remediation-batch-9-advanced-materials-graphene-hbn-heterostructures"
+          ],
+          "scope": "Limited to arXiv:1005.4917 abstract, mechanical-transfer fabrication and transport-characterization findings. in “Boron nitride substrates for high-quality graphene electronics”. The inspected artifact and version relationship are declared; no uncited system, material, organism, or study is pooled.",
+          "boundary": "The source supports graphene-on-hBN devices; it does not establish every possible encapsulated or moiré heterostructure.",
+          "uncertainty": {
+            "kind": "qualitative",
+            "statement": "No cross-source quantitative interval is asserted. Definitions, operating conditions, samples, instruments, and outcome measures must be checked against the exact cited locator during review."
+          },
+          "replication": {
+            "independentReplicationCount": null,
+            "assessment": "Independent replication and cross-platform transfer have not been compiled for this candidate; the evidence maturity refers only to the bounded source contract.",
+            "asOfDate": "2026-08-24"
+          }
+        }
+      ],
+      "sources": [
+        {
+          "id": "source-remediation-batch-9-advanced-materials-graphene-hbn-heterostructures",
+          "title": "Boron nitride substrates for high-quality graphene electronics",
+          "authors": [
+            "C. R. Dean",
+            "A. F. Young",
+            "I. Meric",
+            "et al."
+          ],
+          "publisher": "Nature Nanotechnology",
+          "publishedAt": "2010-08-22",
+          "url": "https://arxiv.org/abs/1005.4917",
+          "identifiers": [
+            {
+              "scheme": "doi",
+              "value": "10.1038/nnano.2010.172"
+            }
+          ],
+          "exactLocator": "arXiv:1005.4917 abstract, mechanical-transfer fabrication and transport-characterization findings.",
+          "rights": {
+            "basis": "citation-with-paraphrase",
+            "quotationUsed": false,
+            "note": "Citation metadata and original bounded paraphrase only; no article passage, figure, or table is reproduced."
+          },
+          "establishes": "The abstract reports mono- and bilayer graphene devices transferred onto single-crystal hBN, improved transport characteristics, and controlled assembly of layered materials for more complex heterostructures.",
+          "boundary": "The source supports graphene-on-hBN devices; it does not establish every possible encapsulated or moiré heterostructure."
+        }
+      ],
+      "sections": [
+        {
+          "heading": "What the inspected source establishes",
+          "paragraphs": [
+            "The abstract reports mono- and bilayer graphene devices transferred onto single-crystal hBN, improved transport characteristics, and controlled assembly of layered materials for more complex heterostructures.",
+            "Limited to arXiv:1005.4917 abstract, mechanical-transfer fabrication and transport-characterization findings. in “Boron nitride substrates for high-quality graphene electronics”. The inspected artifact and version relationship are declared; no uncited system, material, organism, or study is pooled."
+          ],
+          "claimIds": [
+            "urn:maha:claim:advanced-materials-graphene-hbn-heterostructures"
+          ]
+        },
+        {
+          "heading": "What remains unresolved",
+          "paragraphs": [
+            "The source supports graphene-on-hBN devices; it does not establish every possible encapsulated or moiré heterostructure.",
+            "The internal source inspection is not external expert review, independent reproduction, commercial readiness, or permission to generalize beyond the cited conditions."
+          ],
+          "claimIds": []
+        }
+      ],
+      "bridges": [
+        {
+          "id": "urn:maha:bridge:advanced-materials-graphene-hbn-heterostructures-1",
+          "sourceConceptId": "urn:maha:record:advanced-materials-graphene-hbn-heterostructures",
+          "targetConceptId": "urn:maha:record:advanced-materials-hexagonal-boron-nitride-dielectrics",
+          "bridgeType": "mechanistic-dependency",
+          "statement": "Graphene hBN heterostructures is positioned after Hexagonal boron nitride dielectrics in this bounded dependency sequence; the edge is navigational and does not assert equivalence or causation beyond the cited source scope."
+        }
+      ],
+      "boundaries": [
+        "Graphene hBN heterostructures does not by itself establish system-level performance, safety, manufacturability, scalability, economic advantage, clinical benefit, or deployment readiness.",
+        "A source-bounded mechanism, method, or measurement record does not establish manufacturing yield, economic advantage, safety, clinical benefit, or commercial readiness unless those outcomes are measured in a separately scoped record.",
+        "The source supports graphene-on-hBN devices; it does not establish every possible encapsulated or moiré heterostructure."
+      ],
+      "prohibitedInferences": [
+        "Do not use this graphene hbn heterostructures record to claim that the surrounding technology is proven, safe, scalable, commercially available, or strategically superior.",
+        "Do not transfer a reported result across hardware, organisms, protocols, datasets, operating conditions, or outcome definitions without a declared comparison contract.",
+        "Do not treat internal source inspection, revision audit, or internal review as external expert endorsement or independent reproduction."
+      ],
+      "publication": {
+        "requestedPublicPromotion": false,
+        "reviewState": "draft",
+        "canonicalVersion": "0.2.0-private-candidate",
+        "lastReviewedAt": "2026-08-30T00:00:00.000Z",
+        "requiredReviewScopes": [
+          "source-fidelity",
+          "domain-fidelity",
+          "boundary-adequacy",
+          "rights-and-locator"
+        ],
+        "reviewEvents": []
+      }
+    },
+    {
+      "schemaVersion": "maha-epistemic/1.0",
+      "evidencePolicyVersion": "mps/0.1",
+      "id": "urn:maha:record:critical-supply-chains-quartz-crucible-manufacturing",
+      "domainSlug": "critical-supply-chains",
+      "recordKind": "mechanism",
+      "slug": "critical-supply-chains-quartz-crucible-manufacturing",
+      "title": "Quartz crucible manufacturing",
+      "description": "A source-bounded mechanism record for quartz crucible manufacturing within critical supply chains.",
+      "summary": "Quartz crucible manufacturing is bound to one inspected replacement source, exact locator, explicit version relationship, uncertainty statement, and prohibited-inference boundary.",
+      "claims": [
+        {
+          "id": "urn:maha:claim:critical-supply-chains-quartz-crucible-manufacturing",
+          "statement": "The disclosure describes centrifugal forming in a rotating gas-permeable mold, vacuum gas removal, arc melting, and formation of translucent outer and transparent inner quartz-glass layers.",
+          "claimKind": "theoretical-model",
+          "evidenceMaturity": "single-study",
+          "sourceIds": [
+            "source-remediation-batch-10-critical-supply-chains-quartz-crucible-manufacturing"
+          ],
+          "scope": "Limited to Abstract; Background; production-method description; figure 1; independent manufacturing claims. in “Method for producing quartz glass crucible for use in pulling silicon single crystal”. The inspected artifact and version relationship are declared; no uncited system, material, organism, or study is pooled.",
+          "boundary": "A patent discloses a claimed method, not independent evidence of manufacturing yield, commercial adoption, or comparative superiority.",
+          "uncertainty": {
+            "kind": "qualitative",
+            "statement": "No cross-source quantitative interval is asserted. Definitions, operating conditions, samples, instruments, and outcome measures must be checked against the exact cited locator during review."
+          },
+          "replication": {
+            "independentReplicationCount": null,
+            "assessment": "Independent replication and cross-platform transfer have not been compiled for this candidate; the evidence maturity refers only to the bounded source contract.",
+            "asOfDate": "2026-08-24"
+          }
+        }
+      ],
+      "sources": [
+        {
+          "id": "source-remediation-batch-10-critical-supply-chains-quartz-crucible-manufacturing",
+          "title": "Method for producing quartz glass crucible for use in pulling silicon single crystal",
+          "authors": [
+            "K. Kumagai",
+            "et al."
+          ],
+          "publisher": "United States Patent and Trademark Office",
+          "publishedAt": "2009-09-15",
+          "url": "https://patents.google.com/patent/US7587912B2/en",
+          "identifiers": [
+            {
+              "scheme": "accession",
+              "value": "US7587912B2"
+            }
+          ],
+          "exactLocator": "Abstract; Background; production-method description; figure 1; independent manufacturing claims.",
+          "rights": {
+            "basis": "citation-with-paraphrase",
+            "quotationUsed": false,
+            "note": "Citation and original bounded paraphrase only; no patent drawing, claim text, or extended passage is reproduced."
+          },
+          "establishes": "The disclosure describes centrifugal forming in a rotating gas-permeable mold, vacuum gas removal, arc melting, and formation of translucent outer and transparent inner quartz-glass layers.",
+          "boundary": "A patent discloses a claimed method, not independent evidence of manufacturing yield, commercial adoption, or comparative superiority."
+        }
+      ],
+      "sections": [
+        {
+          "heading": "What the inspected source establishes",
+          "paragraphs": [
+            "The disclosure describes centrifugal forming in a rotating gas-permeable mold, vacuum gas removal, arc melting, and formation of translucent outer and transparent inner quartz-glass layers.",
+            "Limited to Abstract; Background; production-method description; figure 1; independent manufacturing claims. in “Method for producing quartz glass crucible for use in pulling silicon single crystal”. The inspected artifact and version relationship are declared; no uncited system, material, organism, or study is pooled."
+          ],
+          "claimIds": [
+            "urn:maha:claim:critical-supply-chains-quartz-crucible-manufacturing"
+          ]
+        },
+        {
+          "heading": "What remains unresolved",
+          "paragraphs": [
+            "A patent discloses a claimed method, not independent evidence of manufacturing yield, commercial adoption, or comparative superiority.",
+            "The internal source inspection is not external expert review, independent reproduction, commercial readiness, or permission to generalize beyond the cited conditions."
+          ],
+          "claimIds": []
+        }
+      ],
+      "bridges": [
+        {
+          "id": "urn:maha:bridge:critical-supply-chains-quartz-crucible-manufacturing-1",
+          "sourceConceptId": "urn:maha:record:critical-supply-chains-quartz-crucible-manufacturing",
+          "targetConceptId": "urn:maha:record:critical-supply-chains-high-purity-quartz-deposits",
+          "bridgeType": "mechanistic-dependency",
+          "statement": "Quartz crucible manufacturing is positioned after High purity quartz deposits in this bounded dependency sequence; the edge is navigational and does not assert equivalence or causation beyond the cited source scope."
+        }
+      ],
+      "boundaries": [
+        "Quartz crucible manufacturing does not by itself establish system-level performance, safety, manufacturability, scalability, economic advantage, clinical benefit, or deployment readiness.",
+        "A source-bounded mechanism, method, or measurement record does not establish manufacturing yield, economic advantage, safety, clinical benefit, or commercial readiness unless those outcomes are measured in a separately scoped record.",
+        "A patent discloses a claimed method, not independent evidence of manufacturing yield, commercial adoption, or comparative superiority."
+      ],
+      "prohibitedInferences": [
+        "Do not use this quartz crucible manufacturing record to claim that the surrounding technology is proven, safe, scalable, commercially available, or strategically superior.",
+        "Do not transfer a reported result across hardware, organisms, protocols, datasets, operating conditions, or outcome definitions without a declared comparison contract.",
+        "Do not treat internal source inspection, revision audit, or internal review as external expert endorsement or independent reproduction."
+      ],
+      "publication": {
+        "requestedPublicPromotion": false,
+        "reviewState": "draft",
+        "canonicalVersion": "0.2.0-private-candidate",
+        "lastReviewedAt": "2026-08-30T00:00:00.000Z",
+        "requiredReviewScopes": [
+          "source-fidelity",
+          "domain-fidelity",
+          "boundary-adequacy",
+          "rights-and-locator"
+        ],
+        "reviewEvents": []
+      }
+    },
+    {
+      "schemaVersion": "maha-epistemic/1.0",
+      "evidencePolicyVersion": "mps/0.1",
+      "id": "urn:maha:record:fusion-plasma-systems-rebco-high-field-magnets",
+      "domainSlug": "fusion-plasma-systems",
+      "recordKind": "mechanism",
+      "slug": "fusion-plasma-systems-rebco-high-field-magnets",
+      "title": "REBCO high field magnets",
+      "description": "A source-bounded mechanism record for rebco high field magnets within fusion plasma systems.",
+      "summary": "REBCO high field magnets is bound to one inspected replacement source, exact locator, explicit version relationship, uncertainty statement, and prohibited-inference boundary.",
+      "claims": [
+        {
+          "id": "urn:maha:claim:fusion-plasma-systems-rebco-high-field-magnets",
+          "statement": "The manuscript explicitly names REBCO high-temperature superconductors, high-field magnets, conductor tape, cryogenic cooling, demountable-coil joints, and coil fabrication.",
+          "claimKind": "theoretical-model",
+          "evidenceMaturity": "single-study",
+          "sourceIds": [
+            "source-remediation-batch-9-fusion-plasma-systems-rebco-high-field-magnets"
+          ],
+          "scope": "Limited to MIT PSFC/JA-16-17 accepted manuscript, §3 Proposed Initiatives and Elements 4, 8, and 9; complete 8,079-word manuscript searched. in “Smaller & Sooner: Exploiting High Magnetic Fields from New Superconductors for a More Attractive Fusion Energy Development Path”. The inspected artifact and version relationship are declared; no uncited system, material, organism, or study is pooled.",
+          "boundary": "It presents a fusion-development proposal and engineering initiatives, not a completed commercial plant or a version-of-record inspection.",
+          "uncertainty": {
+            "kind": "qualitative",
+            "statement": "No cross-source quantitative interval is asserted. Definitions, operating conditions, samples, instruments, and outcome measures must be checked against the exact cited locator during review."
+          },
+          "replication": {
+            "independentReplicationCount": null,
+            "assessment": "Independent replication and cross-platform transfer have not been compiled for this candidate; the evidence maturity refers only to the bounded source contract.",
+            "asOfDate": "2026-08-24"
+          }
+        }
+      ],
+      "sources": [
+        {
+          "id": "source-remediation-batch-9-fusion-plasma-systems-rebco-high-field-magnets",
+          "title": "Smaller & Sooner: Exploiting High Magnetic Fields from New Superconductors for a More Attractive Fusion Energy Development Path",
+          "authors": [
+            "D. G. Whyte",
+            "B. N. Sorbom",
+            "J. L. Kirtley",
+            "et al."
+          ],
+          "publisher": "Journal of Fusion Energy",
+          "publishedAt": "2016-02-01",
+          "url": "https://dspace.mit.edu/handle/1721.1/105250",
+          "identifiers": [
+            {
+              "scheme": "doi",
+              "value": "10.1007/s10894-015-0050-1"
+            }
+          ],
+          "exactLocator": "MIT PSFC/JA-16-17 accepted manuscript, §3 Proposed Initiatives and Elements 4, 8, and 9; complete 8,079-word manuscript searched.",
+          "rights": {
+            "basis": "citation-with-paraphrase",
+            "quotationUsed": false,
+            "note": "Citation and original bounded paraphrase only; no manuscript passage, figure, or table is reproduced."
+          },
+          "establishes": "The manuscript explicitly names REBCO high-temperature superconductors, high-field magnets, conductor tape, cryogenic cooling, demountable-coil joints, and coil fabrication.",
+          "boundary": "It presents a fusion-development proposal and engineering initiatives, not a completed commercial plant or a version-of-record inspection."
+        }
+      ],
+      "sections": [
+        {
+          "heading": "What the inspected source establishes",
+          "paragraphs": [
+            "The manuscript explicitly names REBCO high-temperature superconductors, high-field magnets, conductor tape, cryogenic cooling, demountable-coil joints, and coil fabrication.",
+            "Limited to MIT PSFC/JA-16-17 accepted manuscript, §3 Proposed Initiatives and Elements 4, 8, and 9; complete 8,079-word manuscript searched. in “Smaller & Sooner: Exploiting High Magnetic Fields from New Superconductors for a More Attractive Fusion Energy Development Path”. The inspected artifact and version relationship are declared; no uncited system, material, organism, or study is pooled."
+          ],
+          "claimIds": [
+            "urn:maha:claim:fusion-plasma-systems-rebco-high-field-magnets"
+          ]
+        },
+        {
+          "heading": "What remains unresolved",
+          "paragraphs": [
+            "It presents a fusion-development proposal and engineering initiatives, not a completed commercial plant or a version-of-record inspection.",
+            "The internal source inspection is not external expert review, independent reproduction, commercial readiness, or permission to generalize beyond the cited conditions."
+          ],
+          "claimIds": []
+        }
+      ],
+      "bridges": [
+        {
+          "id": "urn:maha:bridge:fusion-plasma-systems-rebco-high-field-magnets-1",
+          "sourceConceptId": "urn:maha:record:fusion-plasma-systems-rebco-high-field-magnets",
+          "targetConceptId": "urn:maha:record:fusion-plasma-systems-cable-in-conduit-conductors",
+          "bridgeType": "mechanistic-dependency",
+          "statement": "REBCO high field magnets is positioned after Cable in conduit conductors in this bounded dependency sequence; the edge is navigational and does not assert equivalence or causation beyond the cited source scope."
+        }
+      ],
+      "boundaries": [
+        "REBCO high field magnets does not by itself establish system-level performance, safety, manufacturability, scalability, economic advantage, clinical benefit, or deployment readiness.",
+        "A source-bounded mechanism, method, or measurement record does not establish manufacturing yield, economic advantage, safety, clinical benefit, or commercial readiness unless those outcomes are measured in a separately scoped record.",
+        "It presents a fusion-development proposal and engineering initiatives, not a completed commercial plant or a version-of-record inspection."
+      ],
+      "prohibitedInferences": [
+        "Do not use this rebco high field magnets record to claim that the surrounding technology is proven, safe, scalable, commercially available, or strategically superior.",
+        "Do not transfer a reported result across hardware, organisms, protocols, datasets, operating conditions, or outcome definitions without a declared comparison contract.",
+        "Do not treat internal source inspection, revision audit, or internal review as external expert endorsement or independent reproduction."
+      ],
+      "publication": {
+        "requestedPublicPromotion": false,
+        "reviewState": "draft",
+        "canonicalVersion": "0.2.0-private-candidate",
+        "lastReviewedAt": "2026-08-30T00:00:00.000Z",
+        "requiredReviewScopes": [
+          "source-fidelity",
+          "domain-fidelity",
+          "boundary-adequacy",
+          "rights-and-locator"
+        ],
+        "reviewEvents": []
+      }
+    },
+    {
+      "schemaVersion": "maha-epistemic/1.0",
+      "evidencePolicyVersion": "mps/0.1",
+      "id": "urn:maha:record:agentic-systems-mcp-least-authority-tokens",
+      "domainSlug": "agentic-systems-mcp",
+      "recordKind": "concept",
+      "slug": "agentic-systems-mcp-least-authority-tokens",
+      "title": "Least authority tokens",
+      "description": "A source-bounded concept record for least authority tokens within agentic systems mcp.",
+      "summary": "Least authority tokens is bound to one inspected replacement source, exact locator, explicit version relationship, uncertainty statement, and prohibited-inference boundary.",
+      "claims": [
+        {
+          "id": "urn:maha:claim:agentic-systems-mcp-least-authority-tokens",
+          "statement": "The paper describes bearer credentials whose caveats restrict objects, actions, context, delegation, and third-party approval.",
+          "claimKind": "theoretical-model",
+          "evidenceMaturity": "single-study",
+          "sourceIds": [
+            "source-remediation-batch-10-agentic-systems-mcp-least-authority-tokens"
+          ],
+          "scope": "Limited to Abstract; §I Introduction; §II Motivation and Foundations; figure 1 and caveat construction. in “Macaroons: Cookies with Contextual Caveats for Decentralized Authorization in the Cloud”. The inspected artifact and version relationship are declared; no uncited system, material, organism, or study is pooled.",
+          "boundary": "Macaroons are one least-authority credential design; the paper does not prove that every token deployment is least-authority or secure.",
+          "uncertainty": {
+            "kind": "qualitative",
+            "statement": "No cross-source quantitative interval is asserted. Definitions, operating conditions, samples, instruments, and outcome measures must be checked against the exact cited locator during review."
+          },
+          "replication": {
+            "independentReplicationCount": null,
+            "assessment": "Independent replication and cross-platform transfer have not been compiled for this candidate; the evidence maturity refers only to the bounded source contract.",
+            "asOfDate": "2026-08-24"
+          }
+        }
+      ],
+      "sources": [
+        {
+          "id": "source-remediation-batch-10-agentic-systems-mcp-least-authority-tokens",
+          "title": "Macaroons: Cookies with Contextual Caveats for Decentralized Authorization in the Cloud",
+          "authors": [
+            "A. Birgisson",
+            "J. G. Politz",
+            "Ú. Erlingsson",
+            "et al."
+          ],
+          "publisher": "Network and Distributed System Security Symposium",
+          "publishedAt": "2014-02-23",
+          "url": "https://research.google.com/pubs/archive/41892.pdf",
+          "identifiers": [
+            {
+              "scheme": "url",
+              "value": "https://research.google.com/pubs/archive/41892.pdf"
+            }
+          ],
+          "exactLocator": "Abstract; §I Introduction; §II Motivation and Foundations; figure 1 and caveat construction.",
+          "rights": {
+            "basis": "citation-with-paraphrase",
+            "quotationUsed": false,
+            "note": "Citation and original bounded paraphrase only; no PDF passage, figure, or credential construction is reproduced."
+          },
+          "establishes": "The paper describes bearer credentials whose caveats restrict objects, actions, context, delegation, and third-party approval.",
+          "boundary": "Macaroons are one least-authority credential design; the paper does not prove that every token deployment is least-authority or secure."
+        }
+      ],
+      "sections": [
+        {
+          "heading": "What the inspected source establishes",
+          "paragraphs": [
+            "The paper describes bearer credentials whose caveats restrict objects, actions, context, delegation, and third-party approval.",
+            "Limited to Abstract; §I Introduction; §II Motivation and Foundations; figure 1 and caveat construction. in “Macaroons: Cookies with Contextual Caveats for Decentralized Authorization in the Cloud”. The inspected artifact and version relationship are declared; no uncited system, material, organism, or study is pooled."
+          ],
+          "claimIds": [
+            "urn:maha:claim:agentic-systems-mcp-least-authority-tokens"
+          ]
+        },
+        {
+          "heading": "What remains unresolved",
+          "paragraphs": [
+            "Macaroons are one least-authority credential design; the paper does not prove that every token deployment is least-authority or secure.",
+            "The internal source inspection is not external expert review, independent reproduction, commercial readiness, or permission to generalize beyond the cited conditions."
+          ],
+          "claimIds": []
+        }
+      ],
+      "bridges": [
+        {
+          "id": "urn:maha:bridge:agentic-systems-mcp-least-authority-tokens-1",
+          "sourceConceptId": "urn:maha:record:agentic-systems-mcp-least-authority-tokens",
+          "targetConceptId": "urn:maha:record:agentic-systems-mcp-tool-deny-by-default",
+          "bridgeType": "mechanistic-dependency",
+          "statement": "Least authority tokens is positioned after Tool deny by default in this bounded dependency sequence; the edge is navigational and does not assert equivalence or causation beyond the cited source scope."
+        },
+        {
+          "id": "urn:maha:bridge:agentic-systems-mcp-least-authority-tokens-2",
+          "sourceConceptId": "urn:maha:record:agentic-systems-mcp-least-authority-tokens",
+          "targetConceptId": "urn:maha:record:agentic-systems-mcp-mcp-client-server-roles",
+          "bridgeType": "strategic-dependency",
+          "statement": "Least authority tokens is connected to the cohort root so source, measurement, and readiness boundaries can be traversed without collapsing them."
+        }
+      ],
+      "boundaries": [
+        "Least authority tokens does not by itself establish system-level performance, safety, manufacturability, scalability, economic advantage, clinical benefit, or deployment readiness.",
+        "A source-bounded mechanism, method, or measurement record does not establish manufacturing yield, economic advantage, safety, clinical benefit, or commercial readiness unless those outcomes are measured in a separately scoped record.",
+        "Macaroons are one least-authority credential design; the paper does not prove that every token deployment is least-authority or secure."
+      ],
+      "prohibitedInferences": [
+        "Do not use this least authority tokens record to claim that the surrounding technology is proven, safe, scalable, commercially available, or strategically superior.",
+        "Do not transfer a reported result across hardware, organisms, protocols, datasets, operating conditions, or outcome definitions without a declared comparison contract.",
+        "Do not treat internal source inspection, revision audit, or internal review as external expert endorsement or independent reproduction."
+      ],
+      "publication": {
+        "requestedPublicPromotion": false,
+        "reviewState": "draft",
+        "canonicalVersion": "0.2.0-private-candidate",
+        "lastReviewedAt": "2026-08-30T00:00:00.000Z",
+        "requiredReviewScopes": [
+          "source-fidelity",
+          "domain-fidelity",
+          "boundary-adequacy",
+          "rights-and-locator"
+        ],
+        "reviewEvents": []
+      }
+    },
+    {
+      "schemaVersion": "maha-epistemic/1.0",
+      "evidencePolicyVersion": "mps/0.1",
+      "id": "urn:maha:record:biomolecular-engineering-enzyme-cascade-engineering",
+      "domainSlug": "biomolecular-engineering",
+      "recordKind": "method",
+      "slug": "biomolecular-engineering-enzyme-cascade-engineering",
+      "title": "Enzyme cascade engineering",
+      "description": "A source-bounded method record for enzyme cascade engineering within biomolecular engineering.",
+      "summary": "Enzyme cascade engineering is bound to one inspected replacement source, exact locator, explicit version relationship, uncertainty statement, and prohibited-inference boundary.",
+      "claims": [
+        {
+          "id": "urn:maha:claim:biomolecular-engineering-enzyme-cascade-engineering",
+          "statement": "The study combines perturbation experiments, online mass spectrometry, mechanistic rate laws, parameter estimation, and model-based optimization for a ten-enzyme cascade.",
+          "claimKind": "theoretical-model",
+          "evidenceMaturity": "single-study",
+          "sourceIds": [
+            "source-remediation-batch-10-biomolecular-engineering-enzyme-cascade-engineering"
+          ],
+          "scope": "Limited to Abstract; “Model formulation and parameterization”; “Optimizing a cascade reaction for product concentration”. in “Forward design of a complex enzyme cascade reaction”. The inspected artifact and version relationship are declared; no uncited system, material, organism, or study is pooled.",
+          "boundary": "The result is specific to the constructed in vitro system and does not establish general transfer to all enzyme networks or production scales.",
+          "uncertainty": {
+            "kind": "qualitative",
+            "statement": "No cross-source quantitative interval is asserted. Definitions, operating conditions, samples, instruments, and outcome measures must be checked against the exact cited locator during review."
+          },
+          "replication": {
+            "independentReplicationCount": null,
+            "assessment": "Independent replication and cross-platform transfer have not been compiled for this candidate; the evidence maturity refers only to the bounded source contract.",
+            "asOfDate": "2026-08-24"
+          }
+        }
+      ],
+      "sources": [
+        {
+          "id": "source-remediation-batch-10-biomolecular-engineering-enzyme-cascade-engineering",
+          "title": "Forward design of a complex enzyme cascade reaction",
+          "authors": [
+            "C. Hold",
+            "S. Billerbeck",
+            "S. Panke"
+          ],
+          "publisher": "Nature Communications",
+          "publishedAt": "2016-10-06",
+          "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5052792/",
+          "identifiers": [
+            {
+              "scheme": "doi",
+              "value": "10.1038/ncomms12971"
+            }
+          ],
+          "exactLocator": "Abstract; “Model formulation and parameterization”; “Optimizing a cascade reaction for product concentration”.",
+          "rights": {
+            "basis": "citation-with-paraphrase",
+            "quotationUsed": false,
+            "note": "The source is CC BY 4.0; this record nevertheless retains only citation metadata and original bounded paraphrase."
+          },
+          "establishes": "The study combines perturbation experiments, online mass spectrometry, mechanistic rate laws, parameter estimation, and model-based optimization for a ten-enzyme cascade.",
+          "boundary": "The result is specific to the constructed in vitro system and does not establish general transfer to all enzyme networks or production scales."
+        }
+      ],
+      "sections": [
+        {
+          "heading": "What the inspected source establishes",
+          "paragraphs": [
+            "The study combines perturbation experiments, online mass spectrometry, mechanistic rate laws, parameter estimation, and model-based optimization for a ten-enzyme cascade.",
+            "Limited to Abstract; “Model formulation and parameterization”; “Optimizing a cascade reaction for product concentration”. in “Forward design of a complex enzyme cascade reaction”. The inspected artifact and version relationship are declared; no uncited system, material, organism, or study is pooled."
+          ],
+          "claimIds": [
+            "urn:maha:claim:biomolecular-engineering-enzyme-cascade-engineering"
+          ]
+        },
+        {
+          "heading": "What remains unresolved",
+          "paragraphs": [
+            "The result is specific to the constructed in vitro system and does not establish general transfer to all enzyme networks or production scales.",
+            "The internal source inspection is not external expert review, independent reproduction, commercial readiness, or permission to generalize beyond the cited conditions."
+          ],
+          "claimIds": []
+        }
+      ],
+      "bridges": [
+        {
+          "id": "urn:maha:bridge:biomolecular-engineering-enzyme-cascade-engineering-1",
+          "sourceConceptId": "urn:maha:record:biomolecular-engineering-enzyme-cascade-engineering",
+          "targetConceptId": "urn:maha:record:biomolecular-engineering-metabolic-pathway-prototyping",
+          "bridgeType": "mechanistic-dependency",
+          "statement": "Enzyme cascade engineering is positioned after Metabolic pathway prototyping in this bounded dependency sequence; the edge is navigational and does not assert equivalence or causation beyond the cited source scope."
+        }
+      ],
+      "boundaries": [
+        "Enzyme cascade engineering does not by itself establish system-level performance, safety, manufacturability, scalability, economic advantage, clinical benefit, or deployment readiness.",
+        "A source-bounded mechanism, method, or measurement record does not establish manufacturing yield, economic advantage, safety, clinical benefit, or commercial readiness unless those outcomes are measured in a separately scoped record.",
+        "The result is specific to the constructed in vitro system and does not establish general transfer to all enzyme networks or production scales."
+      ],
+      "prohibitedInferences": [
+        "Do not use this enzyme cascade engineering record to claim that the surrounding technology is proven, safe, scalable, commercially available, or strategically superior.",
+        "Do not transfer a reported result across hardware, organisms, protocols, datasets, operating conditions, or outcome definitions without a declared comparison contract.",
+        "Do not treat internal source inspection, revision audit, or internal review as external expert endorsement or independent reproduction."
+      ],
+      "publication": {
+        "requestedPublicPromotion": false,
+        "reviewState": "draft",
+        "canonicalVersion": "0.2.0-private-candidate",
+        "lastReviewedAt": "2026-08-30T00:00:00.000Z",
+        "requiredReviewScopes": [
+          "source-fidelity",
+          "domain-fidelity",
+          "boundary-adequacy",
+          "rights-and-locator"
+        ],
+        "reviewEvents": []
+      }
+    }
+  ]
+}

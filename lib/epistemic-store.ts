@@ -50,6 +50,8 @@ export async function insertEpistemicIngestionBatch(
       ? 'record_substantial_batch2_internal_review_targets'
       : batch.adapterId === 'repaired-revision-canary'
         ? 'record_repaired_revision_canary_targets'
+      : batch.adapterId === 'source-override-revision-canary'
+        ? 'record_source_override_revision_canary_targets'
       : batch.adapterId === 'mcp-private-canary'
         ? 'record_mcp_private_canary_target'
       : 'record_epistemic_ingestion_batch'
