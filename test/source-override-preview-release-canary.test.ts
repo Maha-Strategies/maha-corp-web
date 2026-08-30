@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict'
 import { existsSync, readFileSync, readdirSync, statSync } from 'node:fs'
 import { join } from 'node:path'
+import { spawnSync } from 'node:child_process'
 import test from 'node:test'
 
 import { getLegacyEpistemicAdapter } from '../lib/epistemic-adapters.ts'
@@ -135,6 +136,24 @@ test('the remote workflow is exact-branch Preview-only and carries no Production
   }
   assert.match(workflow, /environment: Preview/)
   assert.match(workflow, /uhwuullakihgszxhiygz/)
+})
+
+test('the Production plan is deterministic and deliberately non-executable', () => {
+  const run = () => spawnSync(process.execPath, ['--experimental-strip-types', 'scripts/generate-source-override-production-release-plan.ts'], {
+    cwd: process.cwd(), encoding: 'utf8', env: process.env,
+  })
+  assert.equal(run().status, 0)
+  const first = readFileSync('content/epistemic/source-override-production-release-plan.json', 'utf8')
+  assert.equal(run().status, 0)
+  const second = readFileSync('content/epistemic/source-override-production-release-plan.json', 'utf8')
+  assert.equal(second, first)
+  const plan = JSON.parse(first)
+  assert.deepEqual(plan.counts, { total: 5, superseding: 2, initial: 3 })
+  assert.equal(plan.controls.executable, false)
+  assert.equal(plan.controls.productionMutationAuthorized, false)
+  assert.equal(plan.controls.authorityCredentialIncluded, false)
+  assert.equal(plan.controls.explicitFutureAuthorizationRequired, true)
+  assert.equal(plan.targets.every((target: { state: string }) => target.state === 'prepared-not-authorized'), true)
 })
 
 test('private canary vocabulary stays outside public and client projection', () => {
