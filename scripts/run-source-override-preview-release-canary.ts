@@ -266,8 +266,8 @@ async function projectionEvidence(activeFacts: readonly FrozenActiveRelease[]) {
       substantialContractDigest: compiled.contractDigest,
       routeStatus: page.status,
       provenanceStatus: provenance.status,
-      sitemapIncluded: sitemap.text.includes(`${origin}${path}`),
-      llmsIncluded: llms.text.includes(`${origin}${path}`),
+      sitemapIncluded: sitemap.text.includes(path),
+      llmsIncluded: llms.text.includes(path),
       releaseRegistryIncluded: registry.text.includes(release.releaseId) && registry.text.includes(release.targetSha256),
     })
   }

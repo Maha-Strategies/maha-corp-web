@@ -226,6 +226,10 @@ test('the remote workflow is exact-branch Preview-only and carries no Production
   assert.match(workflow, /\.release\.activeCount == 5/)
   assert.match(runner, /mkdirSync\(dirname\(evidencePath\)/)
   assert.match(runner, /active\?\.targetSha256 === entry\.targetSha256/)
+  assert.match(runner, /sitemap\.text\.includes\(path\)/)
+  assert.match(runner, /llms\.text\.includes\(path\)/)
+  assert.match(workflow, /\.sitemapIncluded == true/)
+  assert.match(workflow, /\.llmsIncluded == true/)
 })
 
 test('the Production plan is deterministic and deliberately non-executable', () => {
