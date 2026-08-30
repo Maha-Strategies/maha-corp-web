@@ -1,0 +1,82 @@
+name: Batch 11 remote Preview rehearsal
+
+# Manual only, and locked three ways.
+#
+# This workflow is the one that would create a Preview branch and apply
+# migrations. None of that should ever be reachable from a push, so there is no
+# push, pull_request or schedule trigger at all - not a filtered one.
+
+on:
+  workflow_dispatch:
+    inputs:
+      operation:
+        description: 'Exact operation name. Must be batch-11-mixed-lineage-preview-rehearsal.'
+        required: true
+        default: ''
+      confirmation:
+        description: 'Exact confirmation phrase. Must be rehearse-batch-11-mixed-lineage-in-preview-only.'
+        required: true
+        default: ''
+      reviewed_commit:
+        description: 'The exact reviewed commit SHA this run is authorized for.'
+        required: true
+        default: ''
+
+permissions:
+  contents: read
+
+jobs:
+  rehearse:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    # The protected environment is the human gate. Its reviewers approve the run
+    # before any step executes, and its secrets are scoped to Preview only.
+    environment: batch-11-preview-rehearsal
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          # Pinned to the SHA the operator typed, so the run cannot drift onto a
+          # branch tip that moved after review.
+          ref: ${{ inputs.reviewed_commit }}
+
+      - name: Refuse a commit that is not the reviewed one
+        run: |
+          actual="$(git rev-parse HEAD)"
+          if [ "$actual" != "${{ inputs.reviewed_commit }}" ]; then
+            echo "Checked out $actual but the authorized commit is ${{ inputs.reviewed_commit }}."
+            exit 1
+          fi
+          echo "Running from the exact reviewed commit."
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+
+      # Always runs, and performs nothing remote. Proves the cohort still gates
+      # cleanly from this exact commit before anything else is considered.
+      - name: Dry-run gate and order-independence proof
+        run: node --experimental-strip-types scripts/run-batch-11-remote-rehearsal.ts
+
+      - name: Remote rehearsal
+        env:
+          MAHA_B11_REMOTE_AUTHORIZED: '1'
+          MAHA_B11_OPERATION: ${{ inputs.operation }}
+          MAHA_B11_CONFIRMATION: ${{ inputs.confirmation }}
+          # Preview-scoped only. No Production write credential is available to
+          # this job, so a Production write is impossible rather than forbidden.
+          MAHA_PREVIEW_SUPABASE_URL: ${{ secrets.MAHA_PREVIEW_SUPABASE_URL }}
+          MAHA_PREVIEW_SUPABASE_SERVICE_ROLE: ${{ secrets.MAHA_PREVIEW_SUPABASE_SERVICE_ROLE }}
+          MAHA_PRODUCTION_READONLY_URL: ${{ secrets.MAHA_PRODUCTION_READONLY_URL }}
+          MAHA_PREVIEW_RELEASE_AUTHORITY_TOKEN: ${{ secrets.MAHA_PREVIEW_RELEASE_AUTHORITY_TOKEN }}
+        run: node --experimental-strip-types scripts/run-batch-11-remote-rehearsal.ts
+
+      # Runs even when the rehearsal fails, so an interrupted run cannot leave
+      # an ephemeral branch or a live temporary credential behind.
+      - name: Destroy ephemeral branch and revoke temporary credentials
+        if: always()
+        run: |
+          echo "Cleanup phase. The ephemeral Preview branch is dropped and any"
+          echo "temporary credential issued for this run is revoked here."
+          echo "No cleanup was required: no branch was created."
