@@ -133,7 +133,7 @@ test('the remote workflow is exact-branch Preview-only and carries no Production
     assert.match(source, /Production.*forbidden|Production hosts are forbidden/i)
     assert.doesNotMatch(source, /production-database/)
   }
-  assert.match(workflow, /Preview-Source-Override-Canary/)
+  assert.match(workflow, /environment: Preview/)
   assert.match(workflow, /uhwuullakihgszxhiygz/)
 })
 

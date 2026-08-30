@@ -23,7 +23,7 @@ jobs:
   canary:
     runs-on: ubuntu-latest
     timeout-minutes: 20
-    environment: Preview-Source-Override-Canary
+    environment: Preview
     env:
       SOURCE_OVERRIDE_PREVIEW_ORIGIN: ${{ inputs.preview_origin }}
       SOURCE_OVERRIDE_PREVIEW_CANARY_CONFIRM: ${{ inputs.confirmation }}
