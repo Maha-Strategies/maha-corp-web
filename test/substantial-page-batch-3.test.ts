@@ -48,7 +48,12 @@ test('Batch 3 replaces stale Batch 2 contracts without rewriting them', () => {
     assert.ok(prior)
     assert.notEqual(prior.contract.recordRevisionSha256, page.contract.recordRevisionSha256)
     assert.equal(page.replacesPublicationVersion, 'maha-substantial-publication/1.1')
-    assert.equal(getPublishedSubstantialPage(page.contract.recordId)?.publicationVersion, 'maha-substantial-publication/1.2')
+    assert.ok(
+      ['maha-substantial-publication/1.2', 'maha-substantial-publication/1.4'].includes(
+        getPublishedSubstantialPage(page.contract.recordId)?.publicationVersion ?? '',
+      ),
+      'Batch 3 remains in append-only history even when a later exact-release depth upgrade replaces its public projection',
+    )
   }
   assert.equal(PUBLIC_SUBSTANTIAL_PAGES.length, 55, 'five newly eligible release-matched records must be added exactly once')
   assert.equal(new Set(PUBLIC_SUBSTANTIAL_PAGES.map((page) => page.contract.recordId)).size, 55)
