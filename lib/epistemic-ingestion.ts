@@ -14,13 +14,16 @@ import {
   MCP_PRIVATE_CANARY_RECORD_ID,
 } from './mcp-private-canary-release.ts'
 import { SOURCE_OVERRIDE_REVISION_INSPECTION_ATTESTATIONS } from './source-override-revision-ingestion-records.ts'
+import substantialScaleReviewManifest from '../content/substantial-pages/release-scale-review.json' with { type: 'json' }
+
+const SUBSTANTIAL_SCALE_INGESTION_ATTESTATIONS = substantialScaleReviewManifest.records
 
 export const EPISTEMIC_INGESTION_VERSION = 'maha-epistemic-ingestion/1.0' as const
 export const INGESTION_ALIGNMENT_VERSION = 'maha-ingestion-alignment-gate/1.0' as const
 
 export interface IngestionAlignmentDecision {
   evaluatedAgainst: typeof INGESTION_ALIGNMENT_VERSION
-  contentInspectionState: 'required-uninspected' | 'internally-inspected-synthetic' | 'internally-inspected-source-override'
+  contentInspectionState: 'required-uninspected' | 'internally-inspected-synthetic' | 'internally-inspected-source-override' | 'internally-inspected-substantial-scale'
   explanatoryEligible: boolean
   canonicalEligible: boolean
   blockerCodes: string[]
@@ -104,7 +107,19 @@ export function buildEpistemicIngestionBatch(input: EpistemicIngestionRequest, i
         && attestation.exactLocator === source.exactLocator,
       )
       : undefined
-    const contentInspectionAttested = syntheticInspectionAttested || Boolean(sourceOverrideAttestation)
+    const substantialScaleAttestation = input.adapterId === 'substantial-scale-release'
+      ? SUBSTANTIAL_SCALE_INGESTION_ATTESTATIONS.find((packet) =>
+        packet.recordId === candidate.record.id
+        && packet.targetSha256 === candidate.reviewTargetSha256
+        && packet.alignment.metadataVerified
+        && packet.alignment.sourceContentInspected
+        && packet.alignment.subjectSupported
+        && packet.alignment.exactInspectedLocator.trim().length > 0
+        && packet.sourceIds.length === candidate.record.sources.length
+        && packet.sourceIds.every((sourceId) => candidate.record.sources.some((candidateSource) => candidateSource.id === sourceId)),
+      )
+      : undefined
+    const contentInspectionAttested = syntheticInspectionAttested || Boolean(sourceOverrideAttestation) || Boolean(substantialScaleAttestation)
     const blockerCodes = contentInspectionAttested
       ? []
       : candidate.record.sources.length
@@ -116,6 +131,8 @@ export function buildEpistemicIngestionBatch(input: EpistemicIngestionRequest, i
         ? 'internally-inspected-synthetic'
         : sourceOverrideAttestation
           ? 'internally-inspected-source-override'
+          : substantialScaleAttestation
+            ? 'internally-inspected-substantial-scale'
           : 'required-uninspected',
       explanatoryEligible: contentInspectionAttested,
       canonicalEligible: contentInspectionAttested,
@@ -124,6 +141,8 @@ export function buildEpistemicIngestionBatch(input: EpistemicIngestionRequest, i
         ? { inspectionAttestationSha256: MCP_PRIVATE_CANARY_INSPECTION_SHA256 }
         : sourceOverrideAttestation
           ? { inspectionAttestationSha256: sourceOverrideAttestation.attestationSha256 }
+          : substantialScaleAttestation
+            ? { inspectionAttestationSha256: substantialScaleAttestation.packetDigest }
           : {}),
     }
     return {
