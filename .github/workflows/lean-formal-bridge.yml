@@ -1,0 +1,85 @@
+name: Lean formal bridge
+
+# Machine-checks the formal bridge.
+#
+# This is where proofs actually get verified. The theorem sources are checked by
+# a real `lake build`, and every attached theorem's axiom dependencies are read
+# out of the elaborated environment so a `sorry` cannot pass as a proof.
+#
+# Until this workflow is green on a commit, no attachment from that commit may
+# carry machineChecked: true.
+
+on:
+  pull_request:
+    paths:
+      - 'packages/maha-lean-bridge/**'
+      - '.github/workflows/lean-formal-bridge.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'packages/maha-lean-bridge/**'
+
+permissions:
+  contents: read
+
+jobs:
+  verify-proofs:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    defaults:
+      run:
+        working-directory: packages/maha-lean-bridge
+    steps:
+      - uses: actions/checkout@v7
+
+      # The toolchain is pinned by lean-toolchain; elan installs exactly that
+      # version and nothing else resolves it.
+      - name: Install elan
+        run: |
+          curl -fsSL https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh \
+            -o elan-init.sh
+          sha256sum elan-init.sh
+          sh elan-init.sh -y --default-toolchain none
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+
+      - name: Report the resolved toolchain
+        run: |
+          cat lean-toolchain
+          lean --version
+          lake --version
+
+      # No network access is needed past this point. Any dependency fetch would
+      # mean the package stopped being offline-verifiable.
+      - name: Build the proofs
+        run: lake build
+
+      - name: Reject unfinished proofs
+        run: |
+          # `sorry` only warns, so a green build is not sufficient on its own.
+          # Ask Lean which axioms each theorem actually depends on.
+          node --experimental-strip-types scripts/axiom-check.ts
+
+      - name: Regenerate the manifest and require it to be unchanged
+        run: |
+          node --experimental-strip-types scripts/generate-manifest.ts
+          git diff --exit-code fixtures/formal-proof-manifest.json
+
+      - name: Verify determinism across two builds
+        run: |
+          node --experimental-strip-types scripts/generate-manifest.ts > first.json
+          rm -rf .lake
+          lake build
+          node --experimental-strip-types scripts/generate-manifest.ts > second.json
+          diff first.json second.json
+          rm -f first.json second.json
+
+      - name: Confirm no build output is tracked
+        run: |
+          cd "$GITHUB_WORKSPACE"
+          tracked=$(git ls-files 'packages/maha-lean-bridge' \
+            | grep -E '(/\.lake/|/build/|\.olean$)' || true)
+          if [ -n "$tracked" ]; then
+            echo "Lean build output is committed:"
+            echo "$tracked"
+            exit 1
+          fi
