@@ -13,13 +13,14 @@ import {
   MCP_PRIVATE_CANARY_INSPECTION_SHA256,
   MCP_PRIVATE_CANARY_RECORD_ID,
 } from './mcp-private-canary-release.ts'
+import { SOURCE_OVERRIDE_REVISION_INSPECTION_ATTESTATIONS } from './source-override-revision-ingestion-records.ts'
 
 export const EPISTEMIC_INGESTION_VERSION = 'maha-epistemic-ingestion/1.0' as const
 export const INGESTION_ALIGNMENT_VERSION = 'maha-ingestion-alignment-gate/1.0' as const
 
 export interface IngestionAlignmentDecision {
   evaluatedAgainst: typeof INGESTION_ALIGNMENT_VERSION
-  contentInspectionState: 'required-uninspected' | 'internally-inspected-synthetic'
+  contentInspectionState: 'required-uninspected' | 'internally-inspected-synthetic' | 'internally-inspected-source-override'
   explanatoryEligible: boolean
   canonicalEligible: boolean
   blockerCodes: string[]
@@ -95,18 +96,35 @@ export function buildEpistemicIngestionBatch(input: EpistemicIngestionRequest, i
       && source?.id === MCP_PRIVATE_CANARY_INSPECTION.sourceId
       && source.url === MCP_PRIVATE_CANARY_INSPECTION.sourceUrl
       && source.exactLocator === MCP_PRIVATE_CANARY_INSPECTION.exactLocator
-    const blockerCodes = syntheticInspectionAttested
+    const sourceOverrideAttestation = input.adapterId === 'source-override-revision-canary'
+      ? SOURCE_OVERRIDE_REVISION_INSPECTION_ATTESTATIONS.find((attestation) =>
+        attestation.recordId === candidate.record.id
+        && attestation.reviewTargetSha256 === candidate.reviewTargetSha256
+        && attestation.sourceId === source?.id
+        && attestation.exactLocator === source.exactLocator,
+      )
+      : undefined
+    const contentInspectionAttested = syntheticInspectionAttested || Boolean(sourceOverrideAttestation)
+    const blockerCodes = contentInspectionAttested
       ? []
       : candidate.record.sources.length
       ? candidate.record.sources.map((source) => `source-content-inspection-missing:${source.id}`).sort()
       : ['source-content-inspection-missing:no-source-declared']
     const alignmentDecision: IngestionAlignmentDecision = {
       evaluatedAgainst: INGESTION_ALIGNMENT_VERSION,
-      contentInspectionState: syntheticInspectionAttested ? 'internally-inspected-synthetic' : 'required-uninspected',
-      explanatoryEligible: syntheticInspectionAttested,
-      canonicalEligible: syntheticInspectionAttested,
+      contentInspectionState: syntheticInspectionAttested
+        ? 'internally-inspected-synthetic'
+        : sourceOverrideAttestation
+          ? 'internally-inspected-source-override'
+          : 'required-uninspected',
+      explanatoryEligible: contentInspectionAttested,
+      canonicalEligible: contentInspectionAttested,
       blockerCodes,
-      ...(syntheticInspectionAttested ? { inspectionAttestationSha256: MCP_PRIVATE_CANARY_INSPECTION_SHA256 } : {}),
+      ...(syntheticInspectionAttested
+        ? { inspectionAttestationSha256: MCP_PRIVATE_CANARY_INSPECTION_SHA256 }
+        : sourceOverrideAttestation
+          ? { inspectionAttestationSha256: sourceOverrideAttestation.attestationSha256 }
+          : {}),
     }
     return {
       schemaVersion: EPISTEMIC_INGESTION_VERSION,

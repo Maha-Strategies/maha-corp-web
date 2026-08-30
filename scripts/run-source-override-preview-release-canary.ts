@@ -1,4 +1,5 @@
-import { writeFileSync } from 'node:fs'
+import { mkdirSync, writeFileSync } from 'node:fs'
+import { dirname } from 'node:path'
 
 import { epistemicRecordPath, epistemicReviewTargetHash, sha256Canonical } from '../lib/epistemic-publication.ts'
 import {
@@ -96,16 +97,40 @@ function staticRevisionEvidence() {
   })
 }
 
+export function classifyExistingFrozenTargets(
+  reviewTargets: readonly Json[],
+  revisions: readonly { recordId: string; targetSha256: string }[],
+): 'absent' | 'complete' {
+  const exactCounts = revisions.map((revision) => reviewTargets.filter((target) => {
+    if (target.recordId !== revision.recordId || target.reviewTargetSha256 !== revision.targetSha256) return false
+    const gateDecision = target.gateDecision
+    if (!gateDecision || typeof gateDecision !== 'object' || Array.isArray(gateDecision)) return false
+    const reasons = (gateDecision as Json).reasons
+    return Array.isArray(reasons) && !reasons.some((reason) => String(reason).startsWith('source-content-inspection-missing:'))
+  }).length)
+  if (exactCounts.every((count) => count === 0)) return 'absent'
+  if (exactCounts.every((count) => count === 1)) return 'complete'
+  throw new Error(`The Preview ingestion ledger contains a partial or duplicate exact-revision cohort: ${exactCounts.join(',')}.`)
+}
+
 async function ingestAndReview(operationsToken: string) {
   const revisions = staticRevisionEvidence()
   const setDigest = sha256Canonical(revisions.map(({ recordId, targetSha256 }) => ({ recordId, targetSha256 })))
-  const ingestion = await request('/api/admin/epistemic-ingestion', operationsToken, {
-    method: 'POST',
-    body: JSON.stringify({
-      adapterId: 'source-override-revision-canary',
-      idempotencyKey: `source-override-revisions:${setDigest}`,
-    }),
-  })
+  const existing = await request('/api/admin/epistemic-ingestion', operationsToken)
+  const existingBody = object(existing.body, 'epistemic ingestion workspace')
+  const frozenState = classifyExistingFrozenTargets(
+    array(existingBody.reviewTargets, 'epistemic ingestion review targets'),
+    revisions,
+  )
+  const ingestion = frozenState === 'complete'
+    ? existing
+    : await request('/api/admin/epistemic-ingestion', operationsToken, {
+      method: 'POST',
+      body: JSON.stringify({
+        adapterId: 'source-override-revision-canary',
+        idempotencyKey: `source-override-revisions-v2:${setDigest}`,
+      }),
+    })
   const decisions = []
   for (const input of sourceOverrideRevisionCanaryReviewInputs()) {
     const response = await request('/api/admin/epistemic-reviews', operationsToken, {
@@ -114,7 +139,7 @@ async function ingestAndReview(operationsToken: string) {
     })
     decisions.push({ recordId: input.recordId, scope: input.scope, status: response.status })
   }
-  return { ingestionStatus: ingestion.status, decisions }
+  return { ingestionStatus: ingestion.status, ingestionReused: frozenState === 'complete', decisions }
 }
 
 async function workspace(releaseToken: string) {
@@ -156,11 +181,11 @@ async function previewAndPublish(releaseToken: string) {
   for (const entry of entries) {
     const candidate = exactCandidate(before, entry.recordId, entry.targetSha256)
     const active = candidate.activeRelease ? object(candidate.activeRelease, `${entry.recordId} active release`) : null
+    if (active?.targetSha256 === entry.targetSha256) continue
     if (entry.releaseKind === 'superseding') {
       if (!active) throw new Error(`${entry.recordId}: Preview lacks the required prior active release for a superseding canary.`)
       if (active.targetSha256 !== entry.priorReleaseTargetSha256) throw new Error(`${entry.recordId}: Preview prior release target does not match the frozen lineage.`)
     } else if (active) {
-      if (active.targetSha256 === entry.targetSha256) continue
       throw new Error(`${entry.recordId}: initial-release target already has a different active Preview release.`)
     }
     if (candidate.ready !== true) throw new Error(`${entry.recordId}: exact target is not release-ready: ${JSON.stringify(candidate.blockers)}`)
@@ -241,8 +266,8 @@ async function projectionEvidence(activeFacts: readonly FrozenActiveRelease[]) {
       substantialContractDigest: compiled.contractDigest,
       routeStatus: page.status,
       provenanceStatus: provenance.status,
-      sitemapIncluded: sitemap.text.includes(`${origin}${path}`),
-      llmsIncluded: llms.text.includes(`${origin}${path}`),
+      sitemapIncluded: sitemap.text.includes(path),
+      llmsIncluded: llms.text.includes(path),
       releaseRegistryIncluded: registry.text.includes(release.releaseId) && registry.text.includes(release.targetSha256),
     })
   }
@@ -274,10 +299,11 @@ export async function runSourceOverridePreviewReleaseCanary() {
     previewOriginFingerprint: sha256Canonical(origin),
     exactRevisions: revisions,
     preReleaseQueue: noReleaseQueue,
-    review: { ingestionStatus: review.ingestionStatus, scopedDecisionCount: review.decisions.length },
+    review: { ingestionStatus: review.ingestionStatus, ingestionReused: review.ingestionReused, scopedDecisionCount: review.decisions.length },
     release: {
       previewCount: lifecycle.previews.length,
-      publishedCount: lifecycle.published.length,
+      publishedThisRunCount: lifecycle.published.length,
+      activeCount: lifecycle.activeFacts.length,
       supersedingCount: lifecycle.activeFacts.filter((fact) => revisions.find((entry) => entry.recordId === fact.recordId)?.releaseKind === 'superseding').length,
       initialCount: lifecycle.activeFacts.filter((fact) => revisions.find((entry) => entry.recordId === fact.recordId)?.releaseKind === 'initial').length,
       activeFacts: lifecycle.activeFacts,
@@ -292,13 +318,17 @@ export async function runSourceOverridePreviewReleaseCanary() {
     },
   }
   const evidence = { ...body, evidenceSha256: sha256Canonical(body) }
-  if (evidencePath) writeFileSync(evidencePath, `${JSON.stringify(evidence, null, 2)}\n`, { mode: 0o600 })
+  if (evidencePath) {
+    mkdirSync(dirname(evidencePath), { recursive: true, mode: 0o700 })
+    writeFileSync(evidencePath, `${JSON.stringify(evidence, null, 2)}\n`, { mode: 0o600 })
+  }
   console.log(JSON.stringify({
     schemaVersion: evidence.schemaVersion,
     exactRevisionCount: evidence.exactRevisions.length,
     scopedDecisionCount: evidence.review.scopedDecisionCount,
     previewCount: evidence.release.previewCount,
-    publishedCount: evidence.release.publishedCount,
+    publishedThisRunCount: evidence.release.publishedThisRunCount,
+    activeCount: evidence.release.activeCount,
     supersedingCount: evidence.release.supersedingCount,
     initialCount: evidence.release.initialCount,
     routes200: evidence.projection.filter((entry) => entry.routeStatus === 200).length,
