@@ -124,6 +124,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${baseUrl}/apps/the-engine`, lastModified: new Date('2026-07-26') },
     { url: `${baseUrl}/apps/the-engine/privacy`, lastModified: new Date('2026-07-22') },
     { url: `${baseUrl}/tools` },
+    { url: `${baseUrl}/tools/evidence-preflight`, lastModified: new Date('2026-08-30') },
     { url: `${baseUrl}/navigator`, lastModified: new Date('2026-08-09') },
     { url: `${baseUrl}/developers`, lastModified: new Date('2026-08-06') },
     { url: `${baseUrl}/pricing`, lastModified: new Date('2026-08-23') },
