@@ -93,7 +93,9 @@ jobs:
           ' "$SOURCE_OVERRIDE_PREVIEW_EVIDENCE_PATH" >/dev/null
           jq -e '
             .review.scopedDecisionCount == 20
-            and .release.publishedCount == 5
+            and .release.activeCount == 5
+            and .release.publishedThisRunCount >= 0
+            and .release.publishedThisRunCount <= 5
             and .release.supersedingCount == 2
             and .release.initialCount == 3
             and .boundaries.previewOnly == true

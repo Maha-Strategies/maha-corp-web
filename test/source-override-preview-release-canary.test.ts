@@ -223,6 +223,9 @@ test('the remote workflow is exact-branch Preview-only and carries no Production
   assert.match(workflow, /uhwuullakihgszxhiygz/)
   assert.match(workflow, /20260830173000_source_override_revision_preview_canary\.sql/)
   assert.match(workflow, /20260830174500_source_override_revision_canary_adapter\.sql/)
+  assert.match(workflow, /\.release\.activeCount == 5/)
+  assert.match(runner, /mkdirSync\(dirname\(evidencePath\)/)
+  assert.match(runner, /active\?\.targetSha256 === entry\.targetSha256/)
 })
 
 test('the Production plan is deterministic and deliberately non-executable', () => {
