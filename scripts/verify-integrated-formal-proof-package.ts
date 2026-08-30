@@ -6,7 +6,7 @@ import { FORMAL_PROOF_FIXTURE_CLAIM_ID, FORMAL_PROOF_FIXTURE_DOSSIER } from '../
 import { canonicalJson } from '../lib/evidence-dossier/digest.ts'
 import { attachRuntimeWitnessToDossier, type ComputationalWitnessReceipt } from '../lib/evidence-dossier/runtime-witness.ts'
 import { compileIntegratedPackage, verifyIntegratedCalculationEvidence } from '../packages/evidence-dossier-builder/src/index.ts'
-import { REQUIRED_PROJECT_FILES } from '../packages/evidence-dossier-builder/src/formal-proof-verification.ts'
+import { expectedLeanSources, REQUIRED_PROJECT_FILES } from '../packages/evidence-dossier-builder/src/formal-proof-verification.ts'
 import { normalizeSourceText } from '../packages/maha-lean-bridge/src/canonicalize.ts'
 import { compileFromBinding } from '../packages/maha-lean-bridge/src/compiler.ts'
 import { resolveActualLeanVersion, verifyAttachments } from '../packages/maha-lean-bridge/src/verifier.ts'
@@ -37,14 +37,18 @@ const kernel: KernelArtifact = {
 
 function leanSources(): Record<string, string> {
   const out: Record<string, string> = {}
-  for (const path of REQUIRED_PROJECT_FILES) out[path] = normalizeSourceText(readFileSync(join(BRIDGE, path), 'utf8'))
-  for (const theorem of PROOF_MANIFEST.theorems) {
-    out[theorem.sourceFile] = normalizeSourceText(readFileSync(join(BRIDGE, theorem.sourceFile), 'utf8'))
+  for (const path of REQUIRED_PROJECT_FILES) {
+    out[path] = normalizeSourceText(readFileSync(join(BRIDGE, path), 'utf8'))
+  }
+  // Every module the root imports, not only the ones holding theorems: a
+  // definitions-only module is still required for the build to succeed.
+  for (const path of expectedLeanSources(PROOF_MANIFEST, out['Maha.lean'])) {
+    out[path] = normalizeSourceText(readFileSync(join(BRIDGE, path), 'utf8'))
   }
   return out
 }
 
-const leanVersion = resolveActualLeanVersion()
+const leanVersion = resolveActualLeanVersion(BRIDGE)
 if (leanVersion === null) {
   console.error('Lean is not available. This check exists to run the real toolchain and cannot proceed without it.')
   process.exit(1)

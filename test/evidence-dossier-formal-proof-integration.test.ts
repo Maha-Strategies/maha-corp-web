@@ -6,7 +6,7 @@ import test from 'node:test'
 
 import { FORMAL_PROOF_FIXTURE_CLAIM_ID, FORMAL_PROOF_FIXTURE_DOSSIER } from '../lib/evidence-dossier/formal-proof-fixture.ts'
 import { compileIntegratedPackage, renderDossierJsonLd, verifyIntegratedCalculationEvidence, verifyIntegratedCalculationEvidenceForTesting } from '../packages/evidence-dossier-builder/src/index.ts'
-import { REQUIRED_PROJECT_FILES } from '../packages/evidence-dossier-builder/src/formal-proof-verification.ts'
+import { expectedLeanSources, REQUIRED_PROJECT_FILES } from '../packages/evidence-dossier-builder/src/formal-proof-verification.ts'
 import { attachRuntimeWitnessToDossier, verifyComputationalWitnessReceipt, type ComputationalWitnessReceipt, type DossierRuntimeWitnessAttachment } from '../lib/evidence-dossier/runtime-witness.ts'
 import { canonicalJson } from '../lib/evidence-dossier/digest.ts'
 import { resolveActualLeanVersion } from '../packages/maha-lean-bridge/src/verifier.ts'
@@ -62,8 +62,10 @@ function leanSources(): Record<string, string> {
   for (const path of REQUIRED_PROJECT_FILES) {
     out[path] = normalizeSourceText(readFileSync(join(BRIDGE, path), 'utf8'))
   }
-  for (const theorem of PROOF_MANIFEST.theorems) {
-    out[theorem.sourceFile] = normalizeSourceText(readFileSync(join(BRIDGE, theorem.sourceFile), 'utf8'))
+  // Every module the root imports, not only the ones holding theorems: a
+  // definitions-only module is still required for the build to succeed.
+  for (const path of expectedLeanSources(PROOF_MANIFEST, out['Maha.lean'])) {
+    out[path] = normalizeSourceText(readFileSync(join(BRIDGE, path), 'utf8'))
   }
   return out
 }
@@ -154,7 +156,7 @@ const build = async (overrides: Record<string, unknown> = {}) => {
 }
 
 /** Lean is absent locally and present in CI; both are legitimate. */
-const LEAN_PRESENT = resolveActualLeanVersion() !== null
+const LEAN_PRESENT = resolveActualLeanVersion(BRIDGE) !== null
 
 const fileText = (bundle: Awaited<ReturnType<typeof build>>, path: string) =>
   new TextDecoder().decode(bundle.files.find((f) => f.path === path)!.bytes)

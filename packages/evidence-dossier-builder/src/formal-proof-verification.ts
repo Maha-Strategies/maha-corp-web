@@ -72,13 +72,25 @@ export interface LeanRunners {
 /**
  * The exact set of Lean files a package must carry.
  *
- * Everything a cited theorem lives in, plus the project files needed to build.
+ * Deriving this from theorem-bearing files alone is not enough, and getting it
+ * wrong is silent: `Maha/CanonicalArithmetic.lean` holds only definitions, so it
+ * appears in no theorem's `sourceFile`, and a package without it builds nothing
+ * because every other module imports it.
+ *
+ * The root module is the library's own declaration of what it contains, so the
+ * expected set is what it imports, plus the project files a Lake build needs,
+ * plus every file a cited theorem lives in.
+ *
  * Both directions matter: an omitted source cannot be rechecked, and an
  * undeclared extra source is unreviewed material shipped inside an evidence
  * package.
  */
-export function expectedLeanSources(proofManifest: ProofManifest): string[] {
+export function expectedLeanSources(proofManifest: ProofManifest, rootModuleText: string): string[] {
   const files = new Set<string>(REQUIRED_PROJECT_FILES)
+  for (const line of rootModuleText.split('\n')) {
+    const imported = /^\s*import\s+(Maha(?:\.[A-Za-z_][A-Za-z0-9_']*)*)\s*$/.exec(line)
+    if (imported) files.add(`${imported[1].split('.').join('/')}.lean`)
+  }
   for (const theorem of proofManifest.theorems) files.add(theorem.sourceFile)
   return [...files].sort()
 }
@@ -127,7 +139,12 @@ export function verifyPackagedFormalProofs(input: PackagedFormalProofInput, runn
   const proofDigest = manifestDigest(input.proofManifest)
 
   // Exact source set. Omissions and extras are both refusals.
-  const expected = expectedLeanSources(input.proofManifest)
+  const rootModule = input.leanSources['Maha.lean']
+  if (rootModule === undefined) {
+    findings.push('integrated-formal-proof-source-omitted')
+    return findings
+  }
+  const expected = expectedLeanSources(input.proofManifest, rootModule)
   const supplied = Object.keys(input.leanSources).sort()
   for (const path of supplied) {
     if (!safeSourcePath('/maha-verification-root', path)) findings.push('integrated-formal-proof-source-path-unsafe')
@@ -184,7 +201,7 @@ export function verifyPackagedFormalProofs(input: PackagedFormalProofInput, runn
     if (findings.length) return [...new Set(findings)]
 
     // Lean must actually run. Absent it, say so rather than reporting silence.
-    const leanVersion = (runners.resolveLeanVersion ?? resolveActualLeanVersion)()
+    const leanVersion = runners.resolveLeanVersion ? runners.resolveLeanVersion() : resolveActualLeanVersion(root)
     if (leanVersion === null) {
       findings.push('integrated-formal-proof-recheck-not-executed')
       return findings
