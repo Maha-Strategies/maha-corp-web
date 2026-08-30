@@ -1,0 +1,154 @@
+name: Production substantial scale persistence migration
+
+on:
+  workflow_dispatch:
+    inputs:
+      operation:
+        description: Verify the dedicated schema or apply exactly one reviewed migration
+        required: true
+        default: verify
+        type: choice
+        options: [verify, apply]
+      confirmation:
+        description: For apply, type APPLY SUBSTANTIAL SCALE PERSISTENCE exactly
+        required: false
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: production-database
+  cancel-in-progress: false
+
+jobs:
+  migrate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    environment: production-database
+    env:
+      SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}
+      SUPABASE_DB_PASSWORD: ${{ secrets.SUPABASE_DB_PASSWORD }}
+      SUPABASE_PROJECT_REF: ${{ vars.SUPABASE_PROJECT_REF }}
+      EVIDENCE: ${{ github.workspace }}/substantial-scale-migration-evidence
+      MIGRATION: 20260830200000_substantial_scale_release_targets.sql
+      MIGRATION_SHA256: 72143cd514cabab926a84d9be9eaf76a4ddf5b2f3117294b1483fd01f686f8dd
+    steps:
+      - name: Enforce the Production target and exact confirmation
+        env:
+          OPERATION: ${{ inputs.operation }}
+          CONFIRMATION: ${{ inputs.confirmation }}
+        run: |
+          set -euo pipefail
+          production='uhwuullakihgszxhiygz'
+          if [ "${SUPABASE_PROJECT_REF:-}" != "$production" ]; then
+            echo '::error::SUPABASE_PROJECT_REF is not the reviewed Production project.'
+            exit 1
+          fi
+          if [ "$OPERATION" != 'verify' ] && [ "$OPERATION" != 'apply' ]; then
+            echo '::error::Unsupported operation.'
+            exit 1
+          fi
+          if [ "$OPERATION" = 'apply' ] && [ "$CONFIRMATION" != 'APPLY SUBSTANTIAL SCALE PERSISTENCE' ]; then
+            echo '::error::Exact apply confirmation is required.'
+            exit 1
+          fi
+          echo "targetFingerprint=sha256:$(printf '%s' "$SUPABASE_PROJECT_REF" | sha256sum | cut -d' ' -f1)"
+
+      - uses: actions/checkout@v7
+
+      - name: Verify the immutable migration bytes
+        run: |
+          set -euo pipefail
+          path="supabase/migrations/$MIGRATION"
+          test -f "$path"
+          actual="$(sha256sum "$path" | cut -d' ' -f1)"
+          if [ "$actual" != "$MIGRATION_SHA256" ]; then
+            echo '::error::The migration bytes differ from the reviewed digest.'
+            exit 1
+          fi
+
+      - name: Resolve the Production pooler connection
+        run: |
+          set -euo pipefail
+          poolers=$(curl --fail --silent --show-error \
+            -H "Authorization: Bearer ${SUPABASE_ACCESS_TOKEN}" \
+            "https://api.supabase.com/v1/projects/${SUPABASE_PROJECT_REF}/config/database/pooler")
+          pooler=$(jq -cer '
+            [ .[] | select(.database_type == "PRIMARY") ]
+            | .[0]
+            | select(
+                (.db_host | type == "string" and length > 0)
+                and (.db_port | type == "number")
+                and (.db_user | type == "string" and length > 0)
+                and (.db_name | type == "string" and length > 0)
+              )
+          ' <<<"$poolers")
+          echo "SUPABASE_DB_HOST=$(jq -r '.db_host' <<<"$pooler")" >> "$GITHUB_ENV"
+          echo "SUPABASE_DB_PORT=$(jq -r '.db_port' <<<"$pooler")" >> "$GITHUB_ENV"
+          echo "SUPABASE_DB_USER=$(jq -r '.db_user' <<<"$pooler")" >> "$GITHUB_ENV"
+          echo "SUPABASE_DB_NAME=$(jq -r '.db_name' <<<"$pooler")" >> "$GITHUB_ENV"
+
+      - name: Apply exactly the reviewed migration
+        if: ${{ inputs.operation == 'apply' }}
+        run: |
+          set -euo pipefail
+          mkdir -p "$EVIDENCE"
+          export PGPASSWORD="$SUPABASE_DB_PASSWORD"
+          dsn="host=${SUPABASE_DB_HOST} port=${SUPABASE_DB_PORT} user=${SUPABASE_DB_USER} dbname=${SUPABASE_DB_NAME} sslmode=require"
+          version="${MIGRATION%%_*}"
+          already_applied="$(psql "$dsn" -At -v ON_ERROR_STOP=1 -c "select count(*) from supabase_migrations.schema_migrations where version = '${version}';")"
+          if [ "$already_applied" = '0' ]; then
+            psql "$dsn" -v ON_ERROR_STOP=1 --single-transaction -f "supabase/migrations/$MIGRATION" > "$EVIDENCE/applied.txt" 2>&1
+            psql "$dsn" -v ON_ERROR_STOP=1 -c "insert into supabase_migrations.schema_migrations (version) values ('${version}') on conflict do nothing;" >> "$EVIDENCE/applied.txt" 2>&1
+          elif [ "$already_applied" = '1' ]; then
+            echo 'Migration history already contains the exact version; entering verification-only replay.' > "$EVIDENCE/applied.txt"
+          else
+            echo '::error::Migration history returned an impossible count.'
+            exit 1
+          fi
+
+      - name: Verify the dedicated schema boundary
+        run: |
+          set -euo pipefail
+          mkdir -p "$EVIDENCE"
+          export PGPASSWORD="$SUPABASE_DB_PASSWORD"
+          dsn="host=${SUPABASE_DB_HOST} port=${SUPABASE_DB_PORT} user=${SUPABASE_DB_USER} dbname=${SUPABASE_DB_NAME} sslmode=require"
+          psql "$dsn" -At -v ON_ERROR_STOP=1 -c "
+            select 'history=' || (exists (
+              select 1 from supabase_migrations.schema_migrations where version = '20260830200000'
+            ))::text
+            union all select 'rpc=' || (to_regprocedure('public.record_substantial_scale_release_targets(jsonb,jsonb,text,text)') is not null)::text
+            union all select 'batch-adapter=' || (pg_get_constraintdef(oid) like '%substantial-scale-release%')::text
+              from pg_constraint where conname = 'epistemic_ingestion_batches_adapter_id_check'
+            union all select 'record-adapter=' || (pg_get_constraintdef(oid) like '%substantial-scale-release%')::text
+              from pg_constraint where conname = 'epistemic_ingestion_records_adapter_id_check';
+          " | tee "$EVIDENCE/verify.txt"
+          if grep -q '=false' "$EVIDENCE/verify.txt" || [ "$(wc -l < "$EVIDENCE/verify.txt")" -ne 4 ]; then
+            echo '::error::The dedicated substantial-scale persistence boundary did not converge.'
+            exit 1
+          fi
+
+      - name: Record sanitized evidence
+        if: always()
+        env:
+          OPERATION: ${{ inputs.operation }}
+        run: |
+          set -euo pipefail
+          mkdir -p "$EVIDENCE"
+          {
+            echo "operation: $OPERATION"
+            echo "migration: $MIGRATION"
+            echo "migrationSha256: $MIGRATION_SHA256"
+            echo "commit: $GITHUB_SHA"
+            echo "targetFingerprint: sha256:$(printf '%s' "$SUPABASE_PROJECT_REF" | sha256sum | cut -d' ' -f1)"
+          } > "$EVIDENCE/request.txt"
+
+      - name: Upload sanitized evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: substantial-scale-migration-${{ github.run_id }}
+          path: ${{ env.EVIDENCE }}
+          if-no-files-found: warn
+          retention-days: 90
