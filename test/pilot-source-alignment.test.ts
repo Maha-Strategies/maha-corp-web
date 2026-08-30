@@ -179,13 +179,13 @@ test('no Q-BR verdict changes because an endpoint gained an audit', () => {
   assert.equal(totals['source-unverifiable'], 4)
 })
 
-test('frontier audit totals include the bounded Batch 7 evidence moves', () => {
+test('frontier audit totals include the bounded Batch 8 evidence moves', () => {
   assert.deepEqual(verdictTotals(), {
-    supported: 70,
-    'partially-supported': 37,
-    mismatched: 68,
-    'insufficient-evidence': 40,
-    'inaccessible-source': 25,
+    supported: 90,
+    'partially-supported': 50,
+    mismatched: 86,
+    'insufficient-evidence': 9,
+    'inaccessible-source': 5,
   })
   assert.equal(FRONTIER_ALIGNMENT_AUDIT.length, 240)
 })

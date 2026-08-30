@@ -9,23 +9,23 @@ Contracts: 20 · affected records: 100
 | 20 | `source-advanced-materials-vdw` | advanced-materials | mismatched | 8 |
 | 19 | `source-agentic-systems-mcp-autogen` | agentic-systems-mcp | mismatched, partially-supported | 4 |
 | 18 | `source-biomolecular-engineering-toehold` | biomolecular-engineering | mismatched, partially-supported, supported | 8 |
-| 17 | `source-biomolecular-engineering-pace` | biomolecular-engineering | insufficient-evidence | 8 |
-| 16 | `source-critical-supply-chains-mcs-specialty` | critical-supply-chains | insufficient-evidence | 5 |
+| 17 | `source-biomolecular-engineering-pace` | biomolecular-engineering | partially-supported, supported | 8 |
+| 16 | `source-critical-supply-chains-mcs-specialty` | critical-supply-chains | mismatched, partially-supported, supported | 5 |
 | 15 | `source-critical-supply-chains-mcs-industrial` | critical-supply-chains | mismatched, partially-supported | 5 |
-| 14 | `source-critical-supply-chains-pp1802` | critical-supply-chains | inaccessible-source | 5 |
-| 13 | `source-critical-supply-chains-mcs-gallium-germanium` | critical-supply-chains | inaccessible-source | 5 |
+| 14 | `source-critical-supply-chains-pp1802` | critical-supply-chains | mismatched, partially-supported | 5 |
+| 13 | `source-critical-supply-chains-mcs-gallium-germanium` | critical-supply-chains | mismatched, partially-supported, supported | 5 |
 | 12 | `source-fusion-plasma-systems-nif-ignition` | fusion-plasma-systems | mismatched, partially-supported, supported | 4 |
 | 11 | `source-longevity-metabolism-autophagy-guidelines` | longevity-metabolism | supported | 8 |
-| 10 | `source-longevity-metabolism-hallmarks` | longevity-metabolism | insufficient-evidence | 8 |
+| 10 | `source-longevity-metabolism-hallmarks` | longevity-metabolism | mismatched, partially-supported, supported | 8 |
 | 9 | `source-longevity-metabolism-mitophagy` | longevity-metabolism | insufficient-evidence, partially-supported, supported | 8 |
 | 8 | `source-mechanistic-interpretability-induction` | mechanistic-interpretability | mismatched, partially-supported, supported | 4 |
 | 7 | `source-mechanistic-interpretability-feature-visualization` | mechanistic-interpretability | mismatched, supported | 8 |
-| 6 | `source-neurotechnology-bci-intracortical-bci` | neurotechnology-bci | insufficient-evidence | 8 |
-| 5 | `source-neurotechnology-bci-channelrhodopsin` | neurotechnology-bci | inaccessible-source | 8 |
-| 4 | `source-neurotechnology-bci-foreign-body` | neurotechnology-bci | inaccessible-source | 8 |
-| 3 | `source-neurotechnology-bci-closed-loop` | neurotechnology-bci | insufficient-evidence, partially-supported | 8 |
+| 6 | `source-neurotechnology-bci-intracortical-bci` | neurotechnology-bci | mismatched, partially-supported, supported | 8 |
+| 5 | `source-neurotechnology-bci-channelrhodopsin` | neurotechnology-bci | mismatched, supported | 8 |
+| 4 | `source-neurotechnology-bci-foreign-body` | neurotechnology-bci | insufficient-evidence, partially-supported, supported | 8 |
+| 3 | `source-neurotechnology-bci-closed-loop` | neurotechnology-bci | insufficient-evidence, partially-supported, supported | 8 |
 | 2 | `source-neurotechnology-bci-micro-ecog` | neurotechnology-bci | partially-supported, supported | 8 |
-| 1 | `source-longevity-metabolism-bioenergetics` | longevity-metabolism | insufficient-evidence | 8 |
+| 1 | `source-longevity-metabolism-bioenergetics` | longevity-metabolism | mismatched, supported | 8 |
 
 ## Operating boundary
 

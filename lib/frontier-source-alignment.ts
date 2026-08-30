@@ -3,6 +3,11 @@ import { readFileSync } from 'node:fs'
 
 import { FRONTIER_DOMAIN_GRAPH_RECORDS, FRONTIER_EXPLICIT_SOURCE_OVERRIDES } from './frontier-domain-graphs.ts'
 import { ALIGNMENT_BATCH_7_DECISIONS } from './frontier-alignment-batch-7.ts'
+import {
+  ALIGNMENT_BATCH_8_DECISIONS,
+  ALIGNMENT_BATCH_8_SOURCE_DISCOVERIES,
+} from './frontier-alignment-batch-8.ts'
+import { ALIGNMENT_BATCH_9_REMEDIATION_PACKETS } from './frontier-alignment-batch-9.ts'
 import type { EpistemicRecord } from './epistemic-schema.ts'
 
 /**
@@ -2387,9 +2392,96 @@ const BATCH_7_JUDGEMENTS: Readonly<Record<string, InspectedJudgement>> = Object.
   }),
 )
 
-const ACTIVE_JUDGEMENTS: Readonly<Record<string, InspectedJudgement>> = {
+const ACTIVE_JUDGEMENTS_AFTER_BATCH_7: Readonly<Record<string, InspectedJudgement>> = {
   ...JUDGEMENTS,
   ...BATCH_7_JUDGEMENTS,
+}
+
+/**
+ * Batch 8 closes the complete uninspected backlog that remained after Batch 7.
+ * Every decision supersedes an existing active judgement, which remains nested
+ * verbatim. Five records remain uninspected because the declared source stayed
+ * inaccessible; no substitute source is silently attached.
+ */
+const BATCH_8_JUDGEMENTS: Readonly<Record<string, InspectedJudgement>> = Object.fromEntries(
+  ALIGNMENT_BATCH_8_DECISIONS.map((decision) => {
+    const prior = ACTIVE_JUDGEMENTS_AFTER_BATCH_7[decision.recordId]
+    if (decision.priorBatchId && !prior) {
+      throw new Error(`${decision.recordId}: Batch 8 declares ${decision.priorBatchId} but has no active prior judgement.`)
+    }
+    if (!decision.priorBatchId && prior) {
+      throw new Error(`${decision.recordId}: Batch 8 declares a first judgement but an active prior judgement exists.`)
+    }
+    return [decision.recordId, {
+      verdict: decision.verdict,
+      sourceContentInspected: decision.sourceContentInspected,
+      inspectedContentLocation: decision.inspectedContentLocation,
+      reason: decision.reason,
+      remediation: decision.remediation,
+      ...(decision.origin ? { origin: decision.origin } : {}),
+      ...(decision.mismatchBasis ? { mismatchBasis: decision.mismatchBasis } : {}),
+      artifactVersion: decision.artifactVersion,
+      inspectionDepth: decision.inspectionDepth,
+      versionRelationshipVerified: decision.versionRelationshipVerified,
+      recoveryDisposition: decision.recoveryDisposition,
+      ...(prior ? { priorJudgement: {
+        batchId: decision.priorBatchId!,
+        verdict: prior.verdict,
+        sourceContentInspected: prior.sourceContentInspected,
+        inspectionDepth: prior.inspectionDepth,
+        inspectedContentLocation: prior.inspectedContentLocation,
+        reason: prior.reason,
+        priorJudgement: prior.priorJudgement ?? null,
+      } } : {}),
+    } satisfies InspectedJudgement]
+  }),
+)
+
+/**
+ * Batch 9 adds replacement proposals to mismatched records. The active source,
+ * verdict, blockers, and revision stay unchanged. A proposal already recorded
+ * by an earlier batch (REBCO) is preserved verbatim after identifier agreement
+ * rather than overwritten with a second representation.
+ */
+const BATCH_9_REMEDIATION_JUDGEMENTS: Readonly<Record<string, InspectedJudgement>> = Object.fromEntries(
+  ALIGNMENT_BATCH_9_REMEDIATION_PACKETS.map((packet) => {
+    const prior = BATCH_8_JUDGEMENTS[packet.recordId]
+      ?? ACTIVE_JUDGEMENTS_AFTER_BATCH_7[packet.recordId]
+    if (!prior) throw new Error(`${packet.recordId}: Batch 9 cannot propose a replacement for an unaudited record.`)
+    if (prior.verdict !== 'mismatched') {
+      throw new Error(`${packet.recordId}: Batch 9 replacements require an active mismatched verdict.`)
+    }
+    if (prior.proposedSourceOverride) {
+      if (prior.proposedSourceOverride.identifier !== packet.replacement.identifier) {
+        throw new Error(`${packet.recordId}: Batch 9 conflicts with an earlier replacement proposal.`)
+      }
+      return [packet.recordId, prior]
+    }
+    return [packet.recordId, {
+      ...prior,
+      proposedSourceOverride: {
+        citation: packet.replacement.citation,
+        identifier: packet.replacement.identifier,
+        rationale: packet.replacement.rationale,
+        decision: 'pending-human-decision',
+        inspection: {
+          replacementDecision: packet.replacement.replacementDecision,
+          metadataVerified: packet.replacement.inspection.metadataVerified,
+          metadataNote: packet.replacement.inspection.metadataNote,
+          artifactVersion: packet.replacement.inspection.artifactVersion,
+          inspectedContentLocation: packet.replacement.inspection.inspectedContentLocation,
+          findings: packet.replacement.inspection.findings,
+          whatWouldChangeIfAccepted: packet.whatWouldChangeIfAccepted,
+        },
+      },
+    } satisfies InspectedJudgement]
+  }),
+)
+
+const ACTIVE_JUDGEMENTS: Readonly<Record<string, InspectedJudgement>> = {
+  ...ACTIVE_JUDGEMENTS_AFTER_BATCH_7,
+  ...BATCH_8_JUDGEMENTS,
+  ...BATCH_9_REMEDIATION_JUDGEMENTS,
 }
 
 /**
@@ -2404,6 +2496,12 @@ const PUBLISHER_VERIFIED: Readonly<Record<string, string>> = {
     'Fetched arXiv:2308.08155v2 from arxiv.org and inspected the complete HTML article carrying the declared title and authors.',
   'source-critical-supply-chains-mcs-industrial':
     'Fetched the official USGS Mineral Commodity Summaries 2026 PDF and inspected the declared cobalt, graphite, indium, and tungsten chapters.',
+  'source-critical-supply-chains-mcs-gallium-germanium':
+    'Fetched the official USGS Mineral Commodity Summaries 2026 PDF and inspected the gallium and germanium chapters.',
+  'source-critical-supply-chains-mcs-specialty':
+    'Fetched the official USGS Mineral Commodity Summaries 2026 PDF and inspected the antimony, helium, niobium, tantalum, and zirconium/hafnium chapters.',
+  'source-critical-supply-chains-pp1802':
+    'Fetched the official USGS Professional Paper 1802 complete-book PDF and inspected it through full-document text search and the cited commodity sections.',
   'source-fusion-plasma-systems-nif-ignition':
     'Fetched the official LLNL/NIF “Achieving Fusion Ignition” living page and inspected the declared target, coupling, ignition, and result sections.',
   'source-fusion-plasma-systems-iter-support':
@@ -2434,8 +2532,13 @@ const PUBLISHER_VERIFIED: Readonly<Record<string, string>> = {
     'Fetched https://transformer-circuits.pub/2021/framework/index.html, which serves the declared "A Mathematical Framework for Transformer Circuits" article.',
 }
 
-/** Records whose source URL was requested and could not be retrieved. */
-const INACCESSIBLE_CONTRACTS: ReadonlySet<string> = new Set(['source-critical-supply-chains-pp1802'])
+/**
+ * Default inaccessible contracts for records with no explicit judgement.
+ * PP1802 used to be listed here after an HTTP 403, but Batch 8 inspected the
+ * official complete-book PDF. Inaccessibility now lives only on explicit
+ * per-record decisions, so stale infrastructure state cannot override them.
+ */
+const INACCESSIBLE_CONTRACTS: ReadonlySet<string> = new Set()
 
 
 /* ------------------------------------------------------ batch registry ---- */
@@ -2742,6 +2845,18 @@ export const BATCH_7_FIRST_JUDGEMENTS: readonly string[] = ALIGNMENT_BATCH_7_DEC
   .filter((entry) => entry.priorBatchId === null)
   .map((entry) => entry.recordId)
 
+/** Batch 8 closes the entire active uninspected backlog after Batch 7. */
+export const BATCH_8_COHORT: readonly string[] = ALIGNMENT_BATCH_8_DECISIONS
+  .map((entry) => entry.recordId)
+
+export const BATCH_8_REINSPECTIONS: readonly string[] = ALIGNMENT_BATCH_8_DECISIONS
+  .filter((entry) => entry.priorBatchId !== null)
+  .map((entry) => entry.recordId)
+
+export const BATCH_8_FIRST_JUDGEMENTS: readonly string[] = ALIGNMENT_BATCH_8_DECISIONS
+  .filter((entry) => entry.priorBatchId === null)
+  .map((entry) => entry.recordId)
+
 export const ALIGNMENT_BATCH_MEMBERSHIP: Readonly<Record<AlignmentBatchId, readonly string[]>> = {
   'batch-1': BATCH_1_RECORDS,
   'batch-2': BATCH_2_RECORDS,
@@ -2900,6 +3015,148 @@ export function isBatch6Reinspection(recordId: string): boolean {
   }
   if (batch7Domains.size !== 8 || [...batch7Domains.values()].some((count) => count !== 5)) {
     throw new Error('Batch 7 must contain five records in each of eight domains.')
+  }
+
+  // Batch 8 is frozen to the complete active uninspected backlog after Batch 7.
+  // It may not skip a prior uninspected record or re-open an inspected record.
+  if (ALIGNMENT_BATCH_8_DECISIONS.length !== 59
+    || BATCH_8_REINSPECTIONS.length !== 40
+    || BATCH_8_FIRST_JUDGEMENTS.length !== 19) {
+    throw new Error(`Batch 8 must contain 40 re-inspections and 19 first judgements; found ${BATCH_8_REINSPECTIONS.length} and ${BATCH_8_FIRST_JUDGEMENTS.length}.`)
+  }
+  if (new Set(BATCH_8_COHORT).size !== BATCH_8_COHORT.length) {
+    throw new Error('Batch 8 contains duplicate record decisions.')
+  }
+  if (ALIGNMENT_BATCH_8_SOURCE_DISCOVERIES.length !== 12
+    || new Set(ALIGNMENT_BATCH_8_SOURCE_DISCOVERIES.map((entry) => entry.sourceContractId)).size !== 12) {
+    throw new Error('Batch 8 must contain twelve unique source-discovery records.')
+  }
+  const activeUninspectedAfterBatch7 = FRONTIER_DOMAIN_GRAPH_RECORDS
+    .filter((record) => !ACTIVE_JUDGEMENTS_AFTER_BATCH_7[record.id]?.sourceContentInspected)
+    .map((record) => record.id)
+    .sort()
+  const frozenBatch8 = [...BATCH_8_COHORT].sort()
+  if (JSON.stringify(activeUninspectedAfterBatch7) !== JSON.stringify(frozenBatch8)) {
+    throw new Error('Batch 8 does not exactly match the active uninspected backlog after Batch 7.')
+  }
+  const discoveriesBySource = new Map(
+    ALIGNMENT_BATCH_8_SOURCE_DISCOVERIES.map((entry) => [entry.sourceContractId, entry]),
+  )
+  let inspectedBatch8 = 0
+  let inaccessibleBatch8 = 0
+  for (const decision of ALIGNMENT_BATCH_8_DECISIONS) {
+    const record = FRONTIER_DOMAIN_GRAPH_RECORDS.find((entry) => entry.id === decision.recordId)
+    if (!record) throw new Error(`${decision.recordId}: Batch 8 record is absent from the frontier graph.`)
+    if (record.domainSlug !== decision.domainSlug) throw new Error(`${decision.recordId}: Batch 8 domain does not match the record.`)
+    if (!record.claims.some((claim) => claim.sourceIds.includes(decision.sourceContractId))) {
+      throw new Error(`${decision.recordId}: Batch 8 source contract is not bound to the record.`)
+    }
+    const prior = ACTIVE_JUDGEMENTS_AFTER_BATCH_7[decision.recordId]
+    if (prior?.sourceContentInspected) throw new Error(`${decision.recordId}: Batch 8 cannot supersede an inspected judgement.`)
+    const expectedPriorBatch = ALIGNMENT_BATCH_7_DECISIONS.some((entry) => entry.recordId === decision.recordId)
+      ? 'batch-7'
+      : batchOf(decision.recordId)
+    if (decision.priorBatchId !== expectedPriorBatch) {
+      throw new Error(`${decision.recordId}: Batch 8 declares prior batch ${decision.priorBatchId ?? 'none'}; expected ${expectedPriorBatch ?? 'none'}.`)
+    }
+    const preserved = BATCH_8_JUDGEMENTS[decision.recordId]?.priorJudgement
+    if (prior && (!preserved || preserved.verdict !== prior.verdict || preserved.reason !== prior.reason)) {
+      throw new Error(`${decision.recordId}: Batch 8 did not preserve the active prior judgement.`)
+    }
+    if (!prior && preserved) {
+      throw new Error(`${decision.recordId}: Batch 8 manufactured a prior judgement for a default-state record.`)
+    }
+    const discovery = discoveriesBySource.get(decision.sourceContractId)
+    if (!discovery) throw new Error(`${decision.recordId}: Batch 8 has no source-discovery record.`)
+    if (decision.sourceContentInspected) {
+      inspectedBatch8 += 1
+      if (!decision.inspectedContentLocation || !discovery.contentInspectionAuthorized
+        || discovery.status === 'closed-no-authorized-copy') {
+        throw new Error(`${decision.recordId}: Batch 8 inspection is inconsistent with source discovery.`)
+      }
+    } else {
+      inaccessibleBatch8 += 1
+      if (decision.verdict !== 'inaccessible-source' || decision.inspectedContentLocation
+        || discovery.status !== 'closed-no-authorized-copy') {
+        throw new Error(`${decision.recordId}: Batch 8 inaccessible decision is inconsistent with source discovery.`)
+      }
+    }
+    if (discovery.contentCommitted !== false) {
+      throw new Error(`${decision.recordId}: Batch 8 may not commit retrieved source content.`)
+    }
+  }
+  if (inspectedBatch8 !== 54 || inaccessibleBatch8 !== 5) {
+    throw new Error(`Batch 8 must inspect 54 records and retain five inaccessible records; found ${inspectedBatch8} and ${inaccessibleBatch8}.`)
+  }
+  for (const discovery of ALIGNMENT_BATCH_8_SOURCE_DISCOVERIES) {
+    if (!discovery.artifactUrl.startsWith('https://') || discovery.artifactUrl.includes('@')) {
+      throw new Error(`${discovery.sourceContractId}: Batch 8 discovery URL is not a credential-free HTTPS URL.`)
+    }
+    if (!ALIGNMENT_BATCH_8_DECISIONS.some((decision) => decision.sourceContractId === discovery.sourceContractId)) {
+      throw new Error(`${discovery.sourceContractId}: Batch 8 discovery is not used by a record decision.`)
+    }
+    const inspectable = discovery.status !== 'closed-no-authorized-copy'
+    if (discovery.contentInspectionAuthorized !== inspectable) {
+      throw new Error(`${discovery.sourceContractId}: Batch 8 discovery authorization contradicts its access status.`)
+    }
+  }
+
+  // Batch 9 is a frozen remediation cohort selected only from the 86 active,
+  // content-confirmed mismatches after Batch 8. It adds proposals, never source
+  // mutations. Inspection is necessary for a packet, but never sufficient to
+  // authorize adoption or release.
+  if (ALIGNMENT_BATCH_9_REMEDIATION_PACKETS.length !== 20
+    || new Set(ALIGNMENT_BATCH_9_REMEDIATION_PACKETS.map((packet) => packet.recordId)).size !== 20
+    || new Set(ALIGNMENT_BATCH_9_REMEDIATION_PACKETS.map((packet) => packet.packetId)).size !== 20) {
+    throw new Error('Batch 9 must contain twenty unique remediation packets.')
+  }
+  if (new Set(ALIGNMENT_BATCH_9_REMEDIATION_PACKETS.map((packet) => packet.domainSlug)).size !== 8) {
+    throw new Error('Batch 9 must represent all eight frontier domains.')
+  }
+  for (const packet of ALIGNMENT_BATCH_9_REMEDIATION_PACKETS) {
+    const record = FRONTIER_DOMAIN_GRAPH_RECORDS.find((entry) => entry.id === packet.recordId)
+    if (!record || record.domainSlug !== packet.domainSlug) {
+      throw new Error(`${packet.recordId}: Batch 9 record or domain is invalid.`)
+    }
+    const prior = BATCH_8_JUDGEMENTS[packet.recordId]
+      ?? ACTIVE_JUDGEMENTS_AFTER_BATCH_7[packet.recordId]
+    if (!prior || prior.verdict !== 'mismatched' || !prior.sourceContentInspected) {
+      throw new Error(`${packet.recordId}: Batch 9 cohort is not an inspected active mismatch.`)
+    }
+    const expectedPriority = packet.priority.productRelevance
+      + packet.priority.graphLeverage
+      + packet.priority.correctionValue
+      + packet.priority.inspectability
+    if (packet.priority.total !== expectedPriority || packet.priority.total < 7) {
+      throw new Error(`${packet.recordId}: Batch 9 priority score is invalid or below the frozen threshold.`)
+    }
+    if (!packet.replacement.url.startsWith('https://') || packet.replacement.url.includes('@')) {
+      throw new Error(`${packet.recordId}: Batch 9 replacement URL is not credential-free HTTPS.`)
+    }
+    if (packet.replacement.rights.basis !== 'citation-with-paraphrase'
+      || packet.replacement.rights.quotationUsed !== false
+      || packet.replacement.rights.sourceContentCommitted !== false) {
+      throw new Error(`${packet.recordId}: Batch 9 replacement crossed its citation-only rights boundary.`)
+    }
+    const inspected = packet.replacement.inspection
+    if (!inspected.contentInspected || !inspected.exactLocatorInspected
+      || !inspected.inspectedContentLocation || !inspected.metadataVerified) {
+      throw new Error(`${packet.recordId}: Batch 9 replacement lacks inspected content, locator, or metadata.`)
+    }
+    if (packet.disposition !== 'blocked-pending-source-override-review'
+      || packet.canonicalMutationAuthorized !== false
+      || packet.promotionEligible !== false
+      || packet.externallyReviewed !== false
+      || packet.independentlyReproduced !== false) {
+      throw new Error(`${packet.recordId}: Batch 9 replacement crossed a governance boundary.`)
+    }
+    const active = ACTIVE_JUDGEMENTS[packet.recordId]
+    if (active.verdict !== prior.verdict
+      || active.inspectedContentLocation !== prior.inspectedContentLocation
+      || active.proposedSourceOverride?.decision !== 'pending-human-decision'
+      || active.proposedSourceOverride.identifier !== packet.replacement.identifier) {
+      throw new Error(`${packet.recordId}: Batch 9 changed the active judgement or failed to attach the proposal.`)
+    }
   }
 
   // Verdict vocabulary is validated at runtime, not merely inferred by

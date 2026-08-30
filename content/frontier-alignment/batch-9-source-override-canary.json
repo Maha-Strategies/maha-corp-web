@@ -1,0 +1,150 @@
+{
+  "schemaVersion": "maha-frontier-source-override-canary/0.1",
+  "boundary": {
+    "environment": "private-in-memory-simulation",
+    "activeBindingsChanged": 0,
+    "databaseWrites": 0,
+    "canonicalRecordsMutated": 0,
+    "canonicalReleasesCreated": 0,
+    "publicProjectionAuthorized": false
+  },
+  "counts": {
+    "requested": 5,
+    "compiled": 5,
+    "failed": 0,
+    "applied": 0
+  },
+  "candidates": [
+    {
+      "schemaVersion": "maha-frontier-source-override-canary/0.1",
+      "candidateId": "urn:maha:candidate:frontier-source-override:agentic-systems-mcp-human-approval-boundaries:batch-9",
+      "recordId": "urn:maha:record:agentic-systems-mcp-human-approval-boundaries",
+      "priorRecordRevisionSha256": "sha256:2d18b4ac4d1864911d528a156ae53e1c0a7534bf1485cc1e7fdd420aacebb38e",
+      "priorSourceContractId": "source-agentic-systems-mcp-lost-middle",
+      "proposedSourceContractId": "source-remediation-batch-9-agentic-systems-mcp-human-approval-boundaries",
+      "proposedSourceIdentifier": "url:https://modelcontextprotocol.io/specification/2024-11-05/server/tools",
+      "proposedCitation": "Model Context Protocol contributors. Model Context Protocol specification: Tools, version 2024-11-05.",
+      "proposedUrl": "https://modelcontextprotocol.io/specification/2024-11-05/server/tools",
+      "exactLocator": "MCP 2024-11-05 Tools page, “User Interaction Model” and “Security Considerations”.",
+      "boundedFinding": "The page recommends a human in the loop with the ability to deny tool invocations and confirmation prompts for operations, while stating that MCP does not mandate a specific interaction model.",
+      "limitation": "This is normative guidance and a protocol boundary, not proof that an implementation enforces approval correctly or that every operation requires the same UI.",
+      "claimIds": [
+        "urn:maha:claim:agentic-systems-mcp-human-approval-boundaries"
+      ],
+      "reviewDecisionId": "urn:maha:review:frontier-alignment-batch-9:agentic-systems-mcp-human-approval-boundaries",
+      "reviewDecisionSha256": "sha256:c4ae89afc856e1d8e5320e682a239597b56f7e28f01c430c25b057832f1342d3",
+      "packetContentSha256": "sha256:176812d7f8f6773cfd71a4a0d47ac72de7d7d86d3cfce5840a06394c556b0f32",
+      "applicationState": "private-candidate-only",
+      "canonicalMutationAuthorized": false,
+      "publicProjectionAuthorized": false,
+      "releaseAuthorized": false,
+      "candidateRevisionSha256": "sha256:2111b62d31fd3f59170565d4f1ff08329298319cf52273f15740a1f72315b3fe",
+      "provenanceSha256": "sha256:5be3210b96b29643dce340832ebc302a52c0dfc46253e22c35a9fc23281f56a3"
+    },
+    {
+      "schemaVersion": "maha-frontier-source-override-canary/0.1",
+      "candidateId": "urn:maha:candidate:frontier-source-override:fusion-plasma-systems-rebco-high-field-magnets:batch-9",
+      "recordId": "urn:maha:record:fusion-plasma-systems-rebco-high-field-magnets",
+      "priorRecordRevisionSha256": "sha256:0fedeac77d213a0bdd0d1cee3f01f6f0776dd39b1dc713c3aae7cea443c091d5",
+      "priorSourceContractId": "source-fusion-plasma-systems-stellarator-review",
+      "proposedSourceContractId": "source-remediation-batch-9-fusion-plasma-systems-rebco-high-field-magnets",
+      "proposedSourceIdentifier": "doi:10.1007/s10894-015-0050-1",
+      "proposedCitation": "Whyte, D. G. et al. Smaller & Sooner: Exploiting High Magnetic Fields from New Superconductors for a More Attractive Fusion Energy Development Path. Journal of Fusion Energy 35, 41–53 (2016).",
+      "proposedUrl": "https://dspace.mit.edu/handle/1721.1/105250",
+      "exactLocator": "MIT PSFC/JA-16-17 accepted manuscript, §3 Proposed Initiatives and Elements 4, 8, and 9; complete 8,079-word manuscript searched.",
+      "boundedFinding": "The manuscript explicitly names REBCO high-temperature superconductors, high-field magnets, conductor tape, cryogenic cooling, demountable-coil joints, and coil fabrication.",
+      "limitation": "It presents a fusion-development proposal and engineering initiatives, not a completed commercial plant or a version-of-record inspection.",
+      "claimIds": [
+        "urn:maha:claim:fusion-plasma-systems-rebco-high-field-magnets"
+      ],
+      "reviewDecisionId": "urn:maha:review:frontier-alignment-batch-9:fusion-plasma-systems-rebco-high-field-magnets",
+      "reviewDecisionSha256": "sha256:46496bad9c1e894a0c75f4efb565050b50914045ca71ca0d1e344def5ec1c264",
+      "packetContentSha256": "sha256:e599c2c06ec153bea3f8b63e8d967215cc1f0be81e93439e30aaba2aa63b4be1",
+      "applicationState": "private-candidate-only",
+      "canonicalMutationAuthorized": false,
+      "publicProjectionAuthorized": false,
+      "releaseAuthorized": false,
+      "candidateRevisionSha256": "sha256:f241860ebdb6b2fec87a4c95fc4e1ba34e5dcd09204bfc42b066093498cac089",
+      "provenanceSha256": "sha256:52e1822281e96e9067054ebc6eda8938d554ddd5f1ef431571c65a25c8092008"
+    },
+    {
+      "schemaVersion": "maha-frontier-source-override-canary/0.1",
+      "candidateId": "urn:maha:candidate:frontier-source-override:advanced-materials-direct-gap-mos2:batch-9",
+      "recordId": "urn:maha:record:advanced-materials-direct-gap-mos2",
+      "priorRecordRevisionSha256": "sha256:781b38f3481f94eeaa4b7b0cd1cf3d9b72cbac99522cd5603f710701816a0223",
+      "priorSourceContractId": "source-advanced-materials-magic-angle",
+      "proposedSourceContractId": "source-remediation-batch-9-advanced-materials-direct-gap-mos2",
+      "proposedSourceIdentifier": "doi:10.1103/PhysRevLett.105.136805",
+      "proposedCitation": "Mak, K. F. et al. Atomically thin MoS2: A new direct-gap semiconductor. Physical Review Letters 105, 136805 (2010).",
+      "proposedUrl": "https://arxiv.org/abs/1004.0546",
+      "exactLocator": "arXiv:1004.0546 abstract, optical-spectroscopy methods and thickness-dependent band-gap findings.",
+      "boundedFinding": "Absorption, photoluminescence, and photoconductivity measurements trace a crossover from an indirect bulk gap to a direct gap in the monolayer limit.",
+      "limitation": "The abstract supports the bounded layer-dependent measurement, not manufacturing readiness or every TMD material.",
+      "claimIds": [
+        "urn:maha:claim:advanced-materials-direct-gap-mos2"
+      ],
+      "reviewDecisionId": "urn:maha:review:frontier-alignment-batch-9:advanced-materials-direct-gap-mos2",
+      "reviewDecisionSha256": "sha256:7633b3836e1b02cdf5bab59045ddb78662fc1ad5022eb34a1d4925fd7e38bf0d",
+      "packetContentSha256": "sha256:37d9db750132c9807df8aa85ab97be2bb7a86c4d35b23ba1598e532041a269dd",
+      "applicationState": "private-candidate-only",
+      "canonicalMutationAuthorized": false,
+      "publicProjectionAuthorized": false,
+      "releaseAuthorized": false,
+      "candidateRevisionSha256": "sha256:6231e2b6055f890f7ba156ce61a5d8f10523ddb8c608127cb5e2d8b643165d9d",
+      "provenanceSha256": "sha256:cea30bb96ff36672402d4802720eeb4fe373abc0c7c6e90532ad30ac45c3e840"
+    },
+    {
+      "schemaVersion": "maha-frontier-source-override-canary/0.1",
+      "candidateId": "urn:maha:candidate:frontier-source-override:longevity-metabolism-cd38-nad-consumption:batch-9",
+      "recordId": "urn:maha:record:longevity-metabolism-cd38-nad-consumption",
+      "priorRecordRevisionSha256": "sha256:bcb67344307d24e99ca121e382847627f065901191bf94c6aee1eecd68e627fc",
+      "priorSourceContractId": "source-longevity-metabolism-hallmarks",
+      "proposedSourceContractId": "source-remediation-batch-9-longevity-metabolism-cd38-nad-consumption",
+      "proposedSourceIdentifier": "doi:10.1016/j.cmet.2016.05.006",
+      "proposedCitation": "Camacho-Pereira, J. et al. CD38 dictates age-related NAD decline and mitochondrial dysfunction through a SIRT3-dependent mechanism. Cell Metabolism 23, 1127–1139 (2016).",
+      "proposedUrl": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4911708/",
+      "exactLocator": "PMC4911708 Summary; Results on CD38 expression/NADase activity, NAD levels and knockout experiments; Discussion.",
+      "boundedFinding": "The study reports increased CD38 expression and activity with age, identifies CD38 as an NAD-degrading enzyme, and tests NAD and mitochondrial outcomes in wild-type and knockout mice.",
+      "limitation": "The causal evidence is primarily in mice and does not establish a human therapy, clinical benefit, or universal ageing mechanism.",
+      "claimIds": [
+        "urn:maha:claim:longevity-metabolism-cd38-nad-consumption"
+      ],
+      "reviewDecisionId": "urn:maha:review:frontier-alignment-batch-9:longevity-metabolism-cd38-nad-consumption",
+      "reviewDecisionSha256": "sha256:9ac8aeea93b8f95333471665a7a2e16abafa7b57a4afd3dbe742364a2bf8c7ab",
+      "packetContentSha256": "sha256:3fbc7298f4f0930c3d8c2d15b7c3525fbfc7f3f1a3a837cb2c6176289bb8284f",
+      "applicationState": "private-candidate-only",
+      "canonicalMutationAuthorized": false,
+      "publicProjectionAuthorized": false,
+      "releaseAuthorized": false,
+      "candidateRevisionSha256": "sha256:b52cc878a94192da65f6d18a0e7b52cd01b6e42d606a9724d0234bda884537f6",
+      "provenanceSha256": "sha256:e15da00c67693d1d3dc3b0bd2f7c806df1f5ae49e48e602a77626e359c62086a"
+    },
+    {
+      "schemaVersion": "maha-frontier-source-override-canary/0.1",
+      "candidateId": "urn:maha:candidate:frontier-source-override:neurotechnology-bci-light-delivery-tissue-heating:batch-9",
+      "recordId": "urn:maha:record:neurotechnology-bci-light-delivery-tissue-heating",
+      "priorRecordRevisionSha256": "sha256:33545e9efced454b22091e0f51c8fcd5344cbd17d6ab9838c6617c03a3595684",
+      "priorSourceContractId": "source-neurotechnology-bci-channelrhodopsin",
+      "proposedSourceContractId": "source-remediation-batch-9-neurotechnology-bci-light-delivery-tissue-heating",
+      "proposedSourceIdentifier": "doi:10.1016/j.celrep.2015.06.036",
+      "proposedCitation": "Stujenske, J. M., Spellman, T. & Gordon, J. A. Modeling the spatiotemporal dynamics of light and heat propagation for in vivo optogenetics. Cell Reports 12, 525–534 (2015).",
+      "proposedUrl": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4512881/",
+      "exactLocator": "PMC4512881 Summary; light/heat propagation model; experimental validation and opsin-negative heating controls; Discussion.",
+      "boundedFinding": "The paper models temperature change from in-vivo light delivery, compares the model with measured brain temperature, and reports neural effects from heating under specified optical conditions.",
+      "limitation": "Heating depends on wavelength, power, duty cycle, geometry, tissue, and duration; the study does not define one universal safe exposure threshold.",
+      "claimIds": [
+        "urn:maha:claim:neurotechnology-bci-light-delivery-tissue-heating"
+      ],
+      "reviewDecisionId": "urn:maha:review:frontier-alignment-batch-9:neurotechnology-bci-light-delivery-tissue-heating",
+      "reviewDecisionSha256": "sha256:95991369ed95e014a310836303fdeddd1e8a7a70f6ae08a56ca52a9994639543",
+      "packetContentSha256": "sha256:9ec520b689e345eb286f5cdaabcb8078efa524bdc1f53574bd14def030a2636d",
+      "applicationState": "private-candidate-only",
+      "canonicalMutationAuthorized": false,
+      "publicProjectionAuthorized": false,
+      "releaseAuthorized": false,
+      "candidateRevisionSha256": "sha256:b48e1d8a695dc49e68908c869da0d215dd46a3d022556686d07e90ff05c05133",
+      "provenanceSha256": "sha256:f794d55af7d6728bc70f9b41504ac3e0fdb8dd3c4930ff421246f5520b0fafa8"
+    }
+  ],
+  "artifactSha256": "sha256:41f481e03a8c3a5973803ea3f14f5c3430167383579faa937c68bb3fa8053eed"
+}

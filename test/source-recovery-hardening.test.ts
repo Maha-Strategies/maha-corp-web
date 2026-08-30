@@ -12,9 +12,9 @@ import {
 import { executeRecoveryRequest } from '../lib/source-recovery-live.ts'
 import {
   ALIGNMENT_BATCH_MEMBERSHIP,
-  verdictTotals,
   BATCH_6_REINSPECTIONS,
   BATCH_7_REINSPECTIONS,
+  BATCH_8_COHORT,
   FRONTIER_ALIGNMENT_AUDIT,
   alignmentFor,
   batchStats,
@@ -179,11 +179,13 @@ const B6_COHORT = FRONTIER_ALIGNMENT_AUDIT.filter((entry) =>
 )
 const B6_REINSPECT = FRONTIER_ALIGNMENT_AUDIT.filter((entry) => BATCH_6_REINSPECTIONS.includes(entry.recordId))
 function batch6State(entry: (typeof FRONTIER_ALIGNMENT_AUDIT)[number]) {
-  const prior = entry.priorJudgement
-  if (BATCH_7_REINSPECTIONS.includes(entry.recordId) && prior?.sourceContentInspected !== undefined) {
+  if (BATCH_7_REINSPECTIONS.includes(entry.recordId) || BATCH_8_COHORT.includes(entry.recordId)) {
+    let prior = entry.priorJudgement
+    while (prior && prior.batchId !== 'batch-6') prior = prior.priorJudgement ?? null
+    if (!prior) throw new Error(`${entry.recordId}: cannot reconstruct the frozen Batch 6 state.`)
     return {
       verdict: prior.verdict,
-      sourceContentInspected: prior.sourceContentInspected,
+      sourceContentInspected: prior.sourceContentInspected ?? false,
       inspectionDepth: prior.inspectionDepth ?? 'not-inspected',
     }
   }
@@ -308,17 +310,18 @@ test('the inaccessible reduction is explainable record by record', () => {
   assert.equal(50 - left.length, 40)
 })
 
-test('a record whose source still refuses retrieval stays inaccessible', () => {
-  // pp1802 has returned HTTP 403 across batches 4, 5 and 6. Recovery reporting
-  // version-relationship-unverified does not make it readable, so downgrading
-  // these to insufficient-evidence would understate a known retrieval failure.
+test('PP1802 moves only after the official complete book is inspected', () => {
+  // Batch 8 found an official USGS route after the historical HTTP 403s. The
+  // active state can move only because each record now carries a content
+  // location and a bounded per-record judgement.
   const pp = FRONTIER_ALIGNMENT_AUDIT.filter(
     (entry) => entry.sourceContractId === 'source-critical-supply-chains-pp1802',
   )
   assert.equal(pp.length, 5)
   for (const entry of pp) {
-    assert.equal(entry.evidence.subjectAligned, 'inaccessible-source', `${entry.recordId} was downgraded`)
-    assert.equal(entry.evidence.sourceContentInspected, false)
+    assert.notEqual(entry.evidence.subjectAligned, 'inaccessible-source', `${entry.recordId} remained inaccessible`)
+    assert.equal(entry.evidence.sourceContentInspected, true)
+    assert.ok(entry.evidence.inspectedContentLocation)
   }
 })
 
@@ -437,12 +440,12 @@ test('batch statistics are pinned', () => {
   assert.deepEqual(b6, {
     batchId: 'batch-6',
     attempted: 40,
-    contentInspected: 15,
-    inaccessible: 10,
-    supported: 4,
-    partiallySupported: 5,
-    mismatched: 6,
-    insufficientEvidence: 15,
-    alignmentClear: 4,
+    contentInspected: 35,
+    inaccessible: 5,
+    supported: 12,
+    partiallySupported: 10,
+    mismatched: 13,
+    insufficientEvidence: 0,
+    alignmentClear: 12,
   })
 })
