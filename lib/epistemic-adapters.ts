@@ -34,7 +34,9 @@ import {
 import { FRONTIER_CANARY_RECORDS, FRONTIER_CANARY_VERSION } from './frontier-canonicalization.ts'
 import { FRONTIER_DOMAIN_GRAPH_RECORDS } from './frontier-domain-graphs.ts'
 import { QUANTUM_SYSTEMS_GRAPH_RECORDS } from './quantum-systems-graph.ts'
+import { EPISTEMIC_RECORDS } from './epistemic-pilots.ts'
 import { BATCH_2_INTERNAL_REVIEW_RECORD_IDS } from './substantial-internal-review-cohort.ts'
+import { SUBSTANTIAL_SCALE_RELEASE_RECORD_IDS } from './substantial-scale-cohort.ts'
 import { REPAIRED_REVISION_CANARY_RECORDS } from './repaired-revision-canary-targets.ts'
 import {
   SOURCE_OVERRIDE_REVISED_INGESTION_RECORDS,
@@ -73,6 +75,7 @@ export const LEGACY_ADAPTER_IDS = [
   'neuromorphic-biocomputing',
   'frontier-canary',
   'substantial-batch-2-internal-review',
+  'substantial-scale-release',
   'repaired-revision-canary',
   'source-override-revision-canary',
   MCP_PRIVATE_CANARY_ADAPTER_ID,
@@ -497,6 +500,31 @@ export const SUBSTANTIAL_BATCH_2_INTERNAL_REVIEW_ADAPTER: LegacyAdapterDefinitio
   })),
 })
 
+const substantialScaleRecordIds = new Set<string>(SUBSTANTIAL_SCALE_RELEASE_RECORD_IDS)
+const substantialScaleRecords = EPISTEMIC_RECORDS.filter((record) => substantialScaleRecordIds.has(record.id))
+
+if (substantialScaleRecords.length !== SUBSTANTIAL_SCALE_RELEASE_RECORD_IDS.length) {
+  throw new Error(`Substantial scale adapter resolved ${substantialScaleRecords.length}/${SUBSTANTIAL_SCALE_RELEASE_RECORD_IDS.length} records.`)
+}
+
+export const SUBSTANTIAL_SCALE_RELEASE_ADAPTER: LegacyAdapterDefinition = definition({
+  id: 'substantial-scale-release',
+  name: 'Substantial release-scale targets',
+  description: 'Exactly 64 inspected, alignment-clear, substantial-quality-eligible revisions; ingestion freezes targets and never approves or publishes them.',
+  sourceDatasetVersion: 'maha-substantial-scale-review/1.0',
+  sourceRecords: substantialScaleRecords,
+  sourceSources: substantialScaleRecords.flatMap((record) => record.sources),
+  build: () => substantialScaleRecords.map((record) => ({
+    sourceRecordId: record.id,
+    sourceRecord: record,
+    sourcePublicPath: epistemicRecordPath(record),
+    record: {
+      ...structuredClone(record),
+      publication: draftPublication('substantial-scale/1.0', '2026-08-30'),
+    },
+  })),
+})
+
 export const REPAIRED_REVISION_CANARY_ADAPTER: LegacyAdapterDefinition = definition({
   id: 'repaired-revision-canary',
   name: 'Repaired revision canonicalization canary',
@@ -550,6 +578,8 @@ export function getLegacyEpistemicAdapter(id: string) {
     ? FRONTIER_CANARY_EPISTEMIC_ADAPTER
     : id === SUBSTANTIAL_BATCH_2_INTERNAL_REVIEW_ADAPTER.id
       ? SUBSTANTIAL_BATCH_2_INTERNAL_REVIEW_ADAPTER
+    : id === SUBSTANTIAL_SCALE_RELEASE_ADAPTER.id
+      ? SUBSTANTIAL_SCALE_RELEASE_ADAPTER
     : id === REPAIRED_REVISION_CANARY_ADAPTER.id
       ? REPAIRED_REVISION_CANARY_ADAPTER
     : id === SOURCE_OVERRIDE_REVISION_CANARY_ADAPTER.id

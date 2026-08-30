@@ -1,0 +1,2457 @@
+{
+  "schemaVersion": "maha-substantial-scale-review/1.0",
+  "inputDate": "2026-08-30",
+  "records": [
+    {
+      "schemaVersion": "maha-substantial-scale-review/1.0",
+      "recordId": "urn:maha:record:transmon-qubit",
+      "domainSlug": "quantum-systems",
+      "title": "Transmon qubit",
+      "targetSha256": "sha256:5b9d1df90661b0ae55bb9cde26d3d33fde4b82a2588475b11df9398da86e7d82",
+      "contractDigest": "sha256:caac8a5b28bc1e9fd13a8b78b758d62424b4c8fa9fc0a775226bd07ae6e506fb",
+      "sourceIds": [
+        "source-koch-transmon-2007"
+      ],
+      "claimIds": [
+        "urn:maha:claim:transmon-energy-ratio"
+      ],
+      "alignment": {
+        "sourceContractId": "source-koch-transmon-2007",
+        "metadataVerified": true,
+        "sourceContentInspected": true,
+        "exactInspectedLocator": "arXiv:cond-mat/0703002 abstract",
+        "subjectSupported": true,
+        "artifactVersion": "preprint",
+        "inspectionDepth": "bounded inspected artifact",
+        "reason": "The abstract defines the transmon as operating at a significantly increased Josephson-to-charging energy ratio, predicts a drastic reduction in sensitivity to charge noise relative to the Cooper pair box, and states that charge dispersion decreases exponentially with EJ/EC while anharmonicity falls only as a weak power law. That is the record subject."
+      },
+      "checklistFacts": {
+        "claimsResolveToDeclaredSources": true,
+        "everySourceHasExactLocator": true,
+        "everySourceHasRightsBasis": true,
+        "claimScopeAndBoundaryPresent": true,
+        "uncertaintyAndReplicationPresent": true,
+        "prohibitedInferencesPresent": true,
+        "exactRevisionBound": true,
+        "substantialQualityEligible": true,
+        "noActiveReleaseAtSelection": true
+      },
+      "reviewTier": "internally-reviewed-canonical",
+      "publisherConflict": "Maha Strategies authors, reviews, and publishes this record. The review is AI-assisted internal editorial review, not independent expert endorsement, peer review, consensus, reproduction, scientific validation, or commercial certification.",
+      "packetDigest": "sha256:baa73b568f24e1a490180ce910235495002f242712d8c18644e6e4e3e26c47c2"
+    },
+    {
+      "schemaVersion": "maha-substantial-scale-review/1.0",
+      "recordId": "urn:maha:record:circuit-quantum-electrodynamics",
+      "domainSlug": "quantum-systems",
+      "title": "Circuit quantum electrodynamics",
+      "targetSha256": "sha256:e40bb12a0a21a56704cf497b3a825173443f8da8fd29118a756c19a866e91944",
+      "contractDigest": "sha256:37e9bd124989fb1587d371b14831bca8c13b18f165475d633c8937a5f18d3101",
+      "sourceIds": [
+        "source-blais-circuit-qed-2004"
+      ],
+      "claimIds": [
+        "urn:maha:claim:circuit-quantum-electrodynamics"
+      ],
+      "alignment": {
+        "sourceContractId": "source-blais-circuit-qed-2004",
+        "metadataVerified": true,
+        "sourceContentInspected": true,
+        "exactInspectedLocator": "arXiv:cond-mat/0402216 abstract",
+        "subjectSupported": true,
+        "artifactVersion": "preprint",
+        "inspectionDepth": "bounded inspected artifact",
+        "reason": "The abstract proposes a realizable architecture using one-dimensional transmission line resonators to reach the strong-coupling limit of cavity QED in superconducting circuits, which is the record subject."
+      },
+      "checklistFacts": {
+        "claimsResolveToDeclaredSources": true,
+        "everySourceHasExactLocator": true,
+        "everySourceHasRightsBasis": true,
+        "claimScopeAndBoundaryPresent": true,
+        "uncertaintyAndReplicationPresent": true,
+        "prohibitedInferencesPresent": true,
+        "exactRevisionBound": true,
+        "substantialQualityEligible": true,
+        "noActiveReleaseAtSelection": true
+      },
+      "reviewTier": "internally-reviewed-canonical",
+      "publisherConflict": "Maha Strategies authors, reviews, and publishes this record. The review is AI-assisted internal editorial review, not independent expert endorsement, peer review, consensus, reproduction, scientific validation, or commercial certification.",
+      "packetDigest": "sha256:28f98aa76b9622e5359dd5b65466f3dc17c1f795823b752a6f854bbca2890f87"
+    },
+    {
+      "schemaVersion": "maha-substantial-scale-review/1.0",
+      "recordId": "urn:maha:record:josephson-junction-nonlinearity",
+      "domainSlug": "quantum-systems",
+      "title": "Josephson-junction nonlinearity",
+      "targetSha256": "sha256:6a6feddafea5f53be1a7e5389d3a7813d5b3e271ed5df9fd34f1e2847560581e",
+      "contractDigest": "sha256:6ec8999743287fdea99b400c9bab11bf90a48eafeae39bdedfe4002a8605f25f",
+      "sourceIds": [
+        "source-blais-circuit-qed-2004"
+      ],
+      "claimIds": [
+        "urn:maha:claim:josephson-junction-nonlinearity"
+      ],
+      "alignment": {
+        "sourceContractId": "source-blais-circuit-qed-2004",
+        "metadataVerified": true,
+        "sourceContentInspected": true,
+        "exactInspectedLocator": "arXiv:cond-mat/0402216 full text, §III.2–III.3, equations 15–17, and §IV",
+        "subjectSupported": true,
+        "artifactVersion": "repository-copy",
+        "inspectionDepth": "bounded inspected artifact",
+        "reason": "The source writes the Cooper-pair-box Hamiltonian in charging and Josephson energies, maps its lowest states to an artificial atom coupled to a resonator, and treats the resulting anharmonic spectrum."
+      },
+      "checklistFacts": {
+        "claimsResolveToDeclaredSources": true,
+        "everySourceHasExactLocator": true,
+        "everySourceHasRightsBasis": true,
+        "claimScopeAndBoundaryPresent": true,
+        "uncertaintyAndReplicationPresent": true,
+        "prohibitedInferencesPresent": true,
+        "exactRevisionBound": true,
+        "substantialQualityEligible": true,
+        "noActiveReleaseAtSelection": true
+      },
+      "reviewTier": "internally-reviewed-canonical",
+      "publisherConflict": "Maha Strategies authors, reviews, and publishes this record. The review is AI-assisted internal editorial review, not independent expert endorsement, peer review, consensus, reproduction, scientific validation, or commercial certification.",
+      "packetDigest": "sha256:09b8268a19b156dcfa08d3afa15929094e680952768721ce7e3422a706828ce5"
+    },
+    {
+      "schemaVersion": "maha-substantial-scale-review/1.0",
+      "recordId": "urn:maha:record:trapped-ion-qccd-architecture",
+      "domainSlug": "quantum-systems",
+      "title": "Trapped-ion QCCD architecture",
+      "targetSha256": "sha256:892f263cc532d38bc18ebb99da507a85296bb54602e8205961540c57102bc6a7",
+      "contractDigest": "sha256:5f150697785a6d059e5c9d1d015fe4688156b2800648d77ccc10f0e250580972",
+      "sourceIds": [
+        "source-pino-qccd-2021"
+      ],
+      "claimIds": [
+        "urn:maha:claim:trapped-ion-qccd-architecture"
+      ],
+      "alignment": {
+        "sourceContractId": "source-pino-qccd-2021",
+        "metadataVerified": true,
+        "sourceContentInspected": true,
+        "exactInspectedLocator": "Nature version-of-record page, Abstract lines 43–48",
+        "subjectSupported": true,
+        "artifactVersion": "version-of-record",
+        "inspectionDepth": "declared inspected location",
+        "reason": "The abstract reports a cryogenic surface-trap QCCD integrating a scalable trap, parallel interaction zones, fast ion transport, programmable operations, and mid-circuit measurement."
+      },
+      "checklistFacts": {
+        "claimsResolveToDeclaredSources": true,
+        "everySourceHasExactLocator": true,
+        "everySourceHasRightsBasis": true,
+        "claimScopeAndBoundaryPresent": true,
+        "uncertaintyAndReplicationPresent": true,
+        "prohibitedInferencesPresent": true,
+        "exactRevisionBound": true,
+        "substantialQualityEligible": true,
+        "noActiveReleaseAtSelection": true
+      },
+      "reviewTier": "internally-reviewed-canonical",
+      "publisherConflict": "Maha Strategies authors, reviews, and publishes this record. The review is AI-assisted internal editorial review, not independent expert endorsement, peer review, consensus, reproduction, scientific validation, or commercial certification.",
+      "packetDigest": "sha256:f693eaabd06364c1ee36f15265070b2fba8f2975401e3ac059c5215102f4c564"
+    },
+    {
+      "schemaVersion": "maha-substantial-scale-review/1.0",
+      "recordId": "urn:maha:record:neutral-atom-optical-tweezer-arrays",
+      "domainSlug": "quantum-systems",
+      "title": "Neutral-atom optical-tweezer arrays",
+      "targetSha256": "sha256:65bdb504584bbacd52f2d9f099fd93402c4a4ed12510a1bcf9d568683ab0c0c1",
+      "contractDigest": "sha256:7991a11b9d292d61e522dd422919ddae8dd8f657dc760cec6392bda1f76d08ec",
+      "sourceIds": [
+        "source-bluvstein-neutral-atom-2023"
+      ],
+      "claimIds": [
+        "urn:maha:claim:neutral-atom-optical-tweezer-arrays"
+      ],
+      "alignment": {
+        "sourceContractId": "source-bluvstein-neutral-atom-2023",
+        "metadataVerified": true,
+        "sourceContentInspected": true,
+        "exactInspectedLocator": "Nature version-of-record page, Abstract lines 58–63",
+        "subjectSupported": true,
+        "artifactVersion": "version-of-record",
+        "inspectionDepth": "declared inspected location",
+        "reason": "The abstract reports a programmable encoded processor using zoned, reconfigurable neutral-atom arrays, arbitrary connectivity, programmable rotations, and mid-circuit readout."
+      },
+      "checklistFacts": {
+        "claimsResolveToDeclaredSources": true,
+        "everySourceHasExactLocator": true,
+        "everySourceHasRightsBasis": true,
+        "claimScopeAndBoundaryPresent": true,
+        "uncertaintyAndReplicationPresent": true,
+        "prohibitedInferencesPresent": true,
+        "exactRevisionBound": true,
+        "substantialQualityEligible": true,
+        "noActiveReleaseAtSelection": true
+      },
+      "reviewTier": "internally-reviewed-canonical",
+      "publisherConflict": "Maha Strategies authors, reviews, and publishes this record. The review is AI-assisted internal editorial review, not independent expert endorsement, peer review, consensus, reproduction, scientific validation, or commercial certification.",
+      "packetDigest": "sha256:31051690be048e6e75117854354c6c60532bd2f223f9f3b8ce2f5e2be4532b4d"
+    },
+    {
+      "schemaVersion": "maha-substantial-scale-review/1.0",
+      "recordId": "urn:maha:record:rydberg-blockade-entangling-gates",
+      "domainSlug": "quantum-systems",
+      "title": "Rydberg-blockade entangling gates",
+      "targetSha256": "sha256:65ef58ea8e4368e747561738f8a183c87d440421ab8522307495fc19de7f7404",
+      "contractDigest": "sha256:444355480cd892c31c1f4eb539f5d0223247e9611a60a871802e854e09ae431a",
+      "sourceIds": [
+        "source-evered-rydberg-gates-2023"
+      ],
+      "claimIds": [
+        "urn:maha:claim:rydberg-blockade-entangling-gates"
+      ],
+      "alignment": {
+        "sourceContractId": "source-evered-rydberg-gates-2023",
+        "metadataVerified": true,
+        "sourceContentInspected": true,
+        "exactInspectedLocator": "Nature open-access version-of-record page, Abstract lines 52–56",
+        "subjectSupported": true,
+        "artifactVersion": "version-of-record",
+        "inspectionDepth": "declared inspected location",
+        "reason": "The abstract reports parallel two-qubit entangling operations mediated through Rydberg interactions, multiple fidelity benchmarks, and demonstrated low-error three-qubit gates."
+      },
+      "checklistFacts": {
+        "claimsResolveToDeclaredSources": true,
+        "everySourceHasExactLocator": true,
+        "everySourceHasRightsBasis": true,
+        "claimScopeAndBoundaryPresent": true,
+        "uncertaintyAndReplicationPresent": true,
+        "prohibitedInferencesPresent": true,
+        "exactRevisionBound": true,
+        "substantialQualityEligible": true,
+        "noActiveReleaseAtSelection": true
+      },
+      "reviewTier": "internally-reviewed-canonical",
+      "publisherConflict": "Maha Strategies authors, reviews, and publishes this record. The review is AI-assisted internal editorial review, not independent expert endorsement, peer review, consensus, reproduction, scientific validation, or commercial certification.",
+      "packetDigest": "sha256:bb4ef6dda72989295b0f1f9c1a962ec4558ba538cc667b3e6309038da89c7ce6"
+    },
+    {
+      "schemaVersion": "maha-substantial-scale-review/1.0",
+      "recordId": "urn:maha:record:linear-optical-quantum-computation",
+      "domainSlug": "quantum-systems",
+      "title": "Linear-optical quantum computation",
+      "targetSha256": "sha256:9d4198c21a107aa82c71a0f634c7c05eddced1ca348b77ad7ff2d580d99768a0",
+      "contractDigest": "sha256:e88e0e89c0ac513a2e4d45de1e9d5582eae6da3bcc34138041750f9fac6afac2",
+      "sourceIds": [
+        "source-klm-linear-optics-2001"
+      ],
+      "claimIds": [
+        "urn:maha:claim:linear-optical-quantum-computation"
+      ],
+      "alignment": {
+        "sourceContractId": "source-klm-linear-optics-2001",
+        "metadataVerified": true,
+        "sourceContentInspected": true,
+        "exactInspectedLocator": "Nature version-of-record page, Abstract lines 34–37",
+        "subjectSupported": true,
+        "artifactVersion": "version-of-record",
+        "inspectionDepth": "declared inspected location",
+        "reason": "The abstract states that efficient quantum computation is possible with beam splitters, phase shifters, single-photon sources, photodetectors, and detector feedback, matching the formal construction record."
+      },
+      "checklistFacts": {
+        "claimsResolveToDeclaredSources": true,
+        "everySourceHasExactLocator": true,
+        "everySourceHasRightsBasis": true,
+        "claimScopeAndBoundaryPresent": true,
+        "uncertaintyAndReplicationPresent": true,
+        "prohibitedInferencesPresent": true,
+        "exactRevisionBound": true,
+        "substantialQualityEligible": true,
+        "noActiveReleaseAtSelection": true
+      },
+      "reviewTier": "internally-reviewed-canonical",
+      "publisherConflict": "Maha Strategies authors, reviews, and publishes this record. The review is AI-assisted internal editorial review, not independent expert endorsement, peer review, consensus, reproduction, scientific validation, or commercial certification.",
+      "packetDigest": "sha256:a6e2a55af480e2406e998b902caff3a5d6202a16b35234388b5472084cd633a3"
+    },
+    {
+      "schemaVersion": "maha-substantial-scale-review/1.0",
+      "recordId": "urn:maha:record:silicon-spin-qubits",
+      "domainSlug": "quantum-systems",
+      "title": "Silicon and quantum-dot spin qubits",
+      "targetSha256": "sha256:4cc65163502a8934463f82e70ba72fc3fd2a24d8dc0c996657c7f24e4ba2c7af",
+      "contractDigest": "sha256:c17d71be13fa873dc2b7e956eea0c5b26fc01c027042b16a778b611deab5943d",
+      "sourceIds": [
+        "source-loss-divincenzo-spin-1998"
+      ],
+      "claimIds": [
+        "urn:maha:claim:silicon-spin-qubits"
+      ],
+      "alignment": {
+        "sourceContractId": "source-loss-divincenzo-spin-1998",
+        "metadataVerified": true,
+        "sourceContentInspected": true,
+        "exactInspectedLocator": "Physical Review A version-of-record page, Abstract lines 97–99",
+        "subjectSupported": true,
+        "artifactVersion": "version-of-record",
+        "inspectionDepth": "declared inspected location",
+        "reason": "The abstract proposes universal one- and two-qubit gates using spins in coupled single-electron quantum dots and tunnelling-barrier control, with gate-quality calculations and proposed experiments."
+      },
+      "checklistFacts": {
+        "claimsResolveToDeclaredSources": true,
+        "everySourceHasExactLocator": true,
+        "everySourceHasRightsBasis": true,
+        "claimScopeAndBoundaryPresent": true,
+        "uncertaintyAndReplicationPresent": true,
+        "prohibitedInferencesPresent": true,
+        "exactRevisionBound": true,
+        "substantialQualityEligible": true,
+        "noActiveReleaseAtSelection": true
+      },
+      "reviewTier": "internally-reviewed-canonical",
+      "publisherConflict": "Maha Strategies authors, reviews, and publishes this record. The review is AI-assisted internal editorial review, not independent expert endorsement, peer review, consensus, reproduction, scientific validation, or commercial certification.",
+      "packetDigest": "sha256:95d5ac3b43aa2e5a409a374971684d17284ace8fcd3e30d38f750f98bc42719f"
+    },
+    {
+      "schemaVersion": "maha-substantial-scale-review/1.0",
+      "recordId": "urn:maha:record:physical-and-logical-qubits",
+      "domainSlug": "quantum-systems",
+      "title": "Physical and logical qubits",
+      "targetSha256": "sha256:f950ccf0da9152d4dbbe784488fe7a02efdd22cf4ad7c1bb071f602efe6354c2",
+      "contractDigest": "sha256:bd10c990998f1a4726dff5a9918ae4526acf42a0e7c34547b0ea6a9c6b4dcbb5",
+      "sourceIds": [
+        "source-shor-qec-1995"
+      ],
+      "claimIds": [
+        "urn:maha:claim:physical-and-logical-qubits"
+      ],
+      "alignment": {
+        "sourceContractId": "source-shor-qec-1995",
+        "metadataVerified": true,
+        "sourceContentInspected": true,
+        "exactInspectedLocator": "APS version-of-record full text, §III “Encoding”, pp. R2494–R2495",
+        "subjectSupported": true,
+        "artifactVersion": "version-of-record",
+        "inspectionDepth": "declared inspected location",
+        "reason": "The paper explicitly maps each original qubit into nine physical qubits and explains how the encoded state can be recovered under the stated single-qubit decoherence model."
+      },
+      "checklistFacts": {
+        "claimsResolveToDeclaredSources": true,
+        "everySourceHasExactLocator": true,
+        "everySourceHasRightsBasis": true,
+        "claimScopeAndBoundaryPresent": true,
+        "uncertaintyAndReplicationPresent": true,
+        "prohibitedInferencesPresent": true,
+        "exactRevisionBound": true,
+        "substantialQualityEligible": true,
+        "noActiveReleaseAtSelection": true
+      },
+      "reviewTier": "internally-reviewed-canonical",
+      "publisherConflict": "Maha Strategies authors, reviews, and publishes this record. The review is AI-assisted internal editorial review, not independent expert endorsement, peer review, consensus, reproduction, scientific validation, or commercial certification.",
+      "packetDigest": "sha256:b2fc4ef778376d508f27c0def9639852b10fdbd29f4ad9692f8f3352630133d6"
+    },
+    {
+      "schemaVersion": "maha-substantial-scale-review/1.0",
+      "recordId": "urn:maha:record:quantum-error-correction",
+      "domainSlug": "quantum-systems",
+      "title": "Quantum error correction",
+      "targetSha256": "sha256:2a24e4db12f11d6783766e60642deb8bf3b5f6d61a486da0d834da7d76ada9dd",
+      "contractDigest": "sha256:86e83f92038d65073e0e5dbc060bee811d113a8f231520b0656577ad01a0131d",
+      "sourceIds": [
+        "source-shor-qec-1995"
+      ],
+      "claimIds": [
+        "urn:maha:claim:quantum-error-correction"
+      ],
+      "alignment": {
+        "sourceContractId": "source-shor-qec-1995",
+        "metadataVerified": true,
+        "sourceContentInspected": true,
+        "exactInspectedLocator": "APS version-of-record full text, §III “Encoding”, pp. R2494–R2495",
+        "subjectSupported": true,
+        "artifactVersion": "version-of-record",
+        "inspectionDepth": "declared inspected location",
+        "reason": "The inspected construction gives an explicit nine-qubit encoding, ancilla-assisted error information, and correction under its independent single-qubit decoherence assumption."
+      },
+      "checklistFacts": {
+        "claimsResolveToDeclaredSources": true,
+        "everySourceHasExactLocator": true,
+        "everySourceHasRightsBasis": true,
+        "claimScopeAndBoundaryPresent": true,
+        "uncertaintyAndReplicationPresent": true,
+        "prohibitedInferencesPresent": true,
+        "exactRevisionBound": true,
+        "substantialQualityEligible": true,
+        "noActiveReleaseAtSelection": true
+      },
+      "reviewTier": "internally-reviewed-canonical",
+      "publisherConflict": "Maha Strategies authors, reviews, and publishes this record. The review is AI-assisted internal editorial review, not independent expert endorsement, peer review, consensus, reproduction, scientific validation, or commercial certification.",
+      "packetDigest": "sha256:32bf1aa1af64ec415663b029dc6c45a5303c52f13cdc052136f390dae4c97e29"
+    },
+    {
+      "schemaVersion": "maha-substantial-scale-review/1.0",
+      "recordId": "urn:maha:record:surface-code-error-correction",
+      "domainSlug": "quantum-systems",
+      "title": "Surface-code error correction",
+      "targetSha256": "sha256:28cd4b8686cb6ce90756932d32bcb955c9ff88c5823b94825a8430d6ccd95e8b",
+      "contractDigest": "sha256:ef80129ddb6c172ad303af6da242cb479bf834493bf0a78d874d40cbd2085c88",
+      "sourceIds": [
+        "source-fowler-surface-code-2012"
+      ],
+      "claimIds": [
+        "urn:maha:claim:surface-code-error-correction"
+      ],
+      "alignment": {
+        "sourceContractId": "source-fowler-surface-code-2012",
+        "metadataVerified": true,
+        "sourceContentInspected": true,
+        "exactInspectedLocator": "arXiv:1208.0928 abstract",
+        "subjectSupported": true,
+        "artifactVersion": "preprint",
+        "inspectionDepth": "bounded inspected artifact",
+        "reason": "The abstract introduces the surface code implemented on a two-dimensional array of physical qubits and describes logical qubit formation, braiding and the gate set, which is the record subject."
+      },
+      "checklistFacts": {
+        "claimsResolveToDeclaredSources": true,
+        "everySourceHasExactLocator": true,
+        "everySourceHasRightsBasis": true,
+        "claimScopeAndBoundaryPresent": true,
+        "uncertaintyAndReplicationPresent": true,
+        "prohibitedInferencesPresent": true,
+        "exactRevisionBound": true,
+        "substantialQualityEligible": true,
+        "noActiveReleaseAtSelection": true
+      },
+      "reviewTier": "internally-reviewed-canonical",
+      "publisherConflict": "Maha Strategies authors, reviews, and publishes this record. The review is AI-assisted internal editorial review, not independent expert endorsement, peer review, consensus, reproduction, scientific validation, or commercial certification.",
+      "packetDigest": "sha256:30d0ba6c114680dbf48154a2584ca173cb33dfc91cbf99273f3630bc3dff12c0"
+    },
+    {
+      "schemaVersion": "maha-substantial-scale-review/1.0",
+      "recordId": "urn:maha:record:stabilizer-syndrome-measurement",
+      "domainSlug": "quantum-systems",
+      "title": "Stabilizer and syndrome measurement",
+      "targetSha256": "sha256:bcf371de57eeaa64ce9449ccfe776e3c76b2042e729ead3abe644ad279b5ae9c",
+      "contractDigest": "sha256:c751d4ebc6559fb2e3cbe0327b69e29feea7a88b8cb83d99bf35225f0ac72b6a",
+      "sourceIds": [
+        "source-fowler-surface-code-2012"
+      ],
+      "claimIds": [
+        "urn:maha:claim:stabilizer-syndrome-measurement"
+      ],
+      "alignment": {
+        "sourceContractId": "source-fowler-surface-code-2012",
+        "metadataVerified": true,
+        "sourceContentInspected": true,
+        "exactInspectedLocator": "arXiv:1208.0928 abstract",
+        "subjectSupported": true,
+        "artifactVersion": "preprint",
+        "inspectionDepth": "bounded inspected artifact",
+        "reason": "The abstract introduces the concept of the stabilizer using two qubits and extends it to stabilizers acting on a two-dimensional array of physical qubits, which is the repeated parity measurement this record bounds."
+      },
+      "checklistFacts": {
+        "claimsResolveToDeclaredSources": true,
+        "everySourceHasExactLocator": true,
+        "everySourceHasRightsBasis": true,
+        "claimScopeAndBoundaryPresent": true,
+        "uncertaintyAndReplicationPresent": true,
+        "prohibitedInferencesPresent": true,
+        "exactRevisionBound": true,
+        "substantialQualityEligible": true,
+        "noActiveReleaseAtSelection": true
+      },
+      "reviewTier": "internally-reviewed-canonical",
+      "publisherConflict": "Maha Strategies authors, reviews, and publishes this record. The review is AI-assisted internal editorial review, not independent expert endorsement, peer review, consensus, reproduction, scientific validation, or commercial certification.",
+      "packetDigest": "sha256:553a3ef8a749123b0327f8bcf04471fbc7195a70e41299a965e43b310caac55a"
+    },
+    {
+      "schemaVersion": "maha-substantial-scale-review/1.0",
+      "recordId": "urn:maha:record:logical-error-suppression",
+      "domainSlug": "quantum-systems",
+      "title": "Logical-error suppression with code distance",
+      "targetSha256": "sha256:2ffe63c33bc6552238a34682a1f203b4b1f3c635fe69fef8261ec8424fa9830e",
+      "contractDigest": "sha256:c9cbff582d817806191ba9a6eeb80610e268b224e1259fd563013271305f2228",
+      "sourceIds": [
+        "source-google-logical-error-2023"
+      ],
+      "claimIds": [
+        "urn:maha:claim:logical-error-suppression"
+      ],
+      "alignment": {
+        "sourceContractId": "source-google-logical-error-2023",
+        "metadataVerified": true,
+        "sourceContentInspected": true,
+        "exactInspectedLocator": "Nature open-access version-of-record page, Abstract lines 38–42",
+        "subjectSupported": true,
+        "artifactVersion": "version-of-record",
+        "inspectionDepth": "declared inspected location",
+        "reason": "The abstract reports that a distance-5 surface-code logical qubit modestly outperformed distance-3 logical qubits under the stated cycles and device, exactly the bounded comparison in the record."
+      },
+      "checklistFacts": {
+        "claimsResolveToDeclaredSources": true,
+        "everySourceHasExactLocator": true,
+        "everySourceHasRightsBasis": true,
+        "claimScopeAndBoundaryPresent": true,
+        "uncertaintyAndReplicationPresent": true,
+        "prohibitedInferencesPresent": true,
+        "exactRevisionBound": true,
+        "substantialQualityEligible": true,
+        "noActiveReleaseAtSelection": true
+      },
+      "reviewTier": "internally-reviewed-canonical",
+      "publisherConflict": "Maha Strategies authors, reviews, and publishes this record. The review is AI-assisted internal editorial review, not independent expert endorsement, peer review, consensus, reproduction, scientific validation, or commercial certification.",
+      "packetDigest": "sha256:6cc2da87f106a2711e7cf8959d18bfd48b981d26672f973388258a4bb7831bec"
+    },
+    {
+      "schemaVersion": "maha-substantial-scale-review/1.0",
+      "recordId": "urn:maha:record:randomized-benchmarking",
+      "domainSlug": "quantum-systems",
+      "title": "Randomized benchmarking",
+      "targetSha256": "sha256:935647bbd1d1c80c3a57610985a588f71413b110f9ea45a398967b3732b74829",
+      "contractDigest": "sha256:5bfc5694bfbde0b0bce7e6afe8aaae01bf209da6dc5d6e5db17b8e30bc3082e8",
+      "sourceIds": [
+        "source-magesan-rb-2011"
+      ],
+      "claimIds": [
+        "urn:maha:claim:randomized-benchmarking"
+      ],
+      "alignment": {
+        "sourceContractId": "source-magesan-rb-2011",
+        "metadataVerified": true,
+        "sourceContentInspected": true,
+        "exactInspectedLocator": "Physical Review Letters version-of-record page, Abstract lines 86–88",
+        "subjectSupported": true,
+        "artifactVersion": "version-of-record",
+        "inspectionDepth": "declared inspected location",
+        "reason": "The abstract proposes a scalable protocol, derives fitting models for fidelity decay, and estimates average gate error under a general time- and gate-dependent noise model."
+      },
+      "checklistFacts": {
+        "claimsResolveToDeclaredSources": true,
+        "everySourceHasExactLocator": true,
+        "everySourceHasRightsBasis": true,
+        "claimScopeAndBoundaryPresent": true,
+        "uncertaintyAndReplicationPresent": true,
+        "prohibitedInferencesPresent": true,
+        "exactRevisionBound": true,
+        "substantialQualityEligible": true,
+        "noActiveReleaseAtSelection": true
+      },
+      "reviewTier": "internally-reviewed-canonical",
+      "publisherConflict": "Maha Strategies authors, reviews, and publishes this record. The review is AI-assisted internal editorial review, not independent expert endorsement, peer review, consensus, reproduction, scientific validation, or commercial certification.",
+      "packetDigest": "sha256:f7a6ceeffdde100c05fb69421cbac1382b7170278e8cdc216b000ff0ae1c3145"
+    },
+    {
+      "schemaVersion": "maha-substantial-scale-review/1.0",
+      "recordId": "urn:maha:record:interleaved-randomized-benchmarking",
+      "domainSlug": "quantum-systems",
+      "title": "Interleaved randomized benchmarking",
+      "targetSha256": "sha256:b93a1312964e246b332b207d310fffe982efe0a1f0065cd9dae67df127266dd2",
+      "contractDigest": "sha256:5338f911ae23c0e729d2dae4af37b83ed2177ecf8161dcd1599bc894c77f1b94",
+      "sourceIds": [
+        "source-magesan-interleaved-rb-2012"
+      ],
+      "claimIds": [
+        "urn:maha:claim:interleaved-randomized-benchmarking"
+      ],
+      "alignment": {
+        "sourceContractId": "source-magesan-interleaved-rb-2012",
+        "metadataVerified": true,
+        "sourceContentInspected": true,
+        "exactInspectedLocator": "Physical Review Letters version-of-record page, Abstract lines 89–91",
+        "subjectSupported": true,
+        "artifactVersion": "version-of-record",
+        "inspectionDepth": "declared inspected location",
+        "reason": "The abstract describes interleaving a target gate with random Clifford gates and deriving an estimate and bounds for that gate’s average error under an explicit noise condition."
+      },
+      "checklistFacts": {
+        "claimsResolveToDeclaredSources": true,
+        "everySourceHasExactLocator": true,
+        "everySourceHasRightsBasis": true,
+        "claimScopeAndBoundaryPresent": true,
+        "uncertaintyAndReplicationPresent": true,
+        "prohibitedInferencesPresent": true,
+        "exactRevisionBound": true,
+        "substantialQualityEligible": true,
+        "noActiveReleaseAtSelection": true
+      },
+      "reviewTier": "internally-reviewed-canonical",
+      "publisherConflict": "Maha Strategies authors, reviews, and publishes this record. The review is AI-assisted internal editorial review, not independent expert endorsement, peer review, consensus, reproduction, scientific validation, or commercial certification.",
+      "packetDigest": "sha256:f7343f3a26b976223e6a815ab9298b97ba402f29fc74e87eba176f65368ec922"
+    },
+    {
+      "schemaVersion": "maha-substantial-scale-review/1.0",
+      "recordId": "urn:maha:record:dispersive-qubit-readout",
+      "domainSlug": "quantum-systems",
+      "title": "Dispersive superconducting-qubit readout",
+      "targetSha256": "sha256:27c33647763e4282187726e9c47fbe7eeff93809fca432ee4a80233149d6146e",
+      "contractDigest": "sha256:1722aa09a6f0f422d8367f93aae88ee8da8e27c45478999477c46f3133c38190",
+      "sourceIds": [
+        "source-blais-circuit-qed-2004"
+      ],
+      "claimIds": [
+        "urn:maha:claim:dispersive-qubit-readout"
+      ],
+      "alignment": {
+        "sourceContractId": "source-blais-circuit-qed-2004",
+        "metadataVerified": true,
+        "sourceContentInspected": true,
+        "exactInspectedLocator": "arXiv:cond-mat/0402216 full text, §VI “Dispersive QND Readout of Qubit”, especially §VI.1 and Figure 5",
+        "subjectSupported": true,
+        "artifactVersion": "repository-copy",
+        "inspectionDepth": "bounded inspected artifact",
+        "reason": "The inspected analysis derives qubit-state-dependent cavity pulls and describes readout through the transmitted photon number or phase under explicit dispersive conditions."
+      },
+      "checklistFacts": {
+        "claimsResolveToDeclaredSources": true,
+        "everySourceHasExactLocator": true,
+        "everySourceHasRightsBasis": true,
+        "claimScopeAndBoundaryPresent": true,
+        "uncertaintyAndReplicationPresent": true,
+        "prohibitedInferencesPresent": true,
+        "exactRevisionBound": true,
+        "substantialQualityEligible": true,
+        "noActiveReleaseAtSelection": true
+      },
+      "reviewTier": "internally-reviewed-canonical",
+      "publisherConflict": "Maha Strategies authors, reviews, and publishes this record. The review is AI-assisted internal editorial review, not independent expert endorsement, peer review, consensus, reproduction, scientific validation, or commercial certification.",
+      "packetDigest": "sha256:9c179c1f8644ca3c34d9929d46db009b896dc18d97da73cc0ec8b67f12dcaed8"
+    },
+    {
+      "schemaVersion": "maha-substantial-scale-review/1.0",
+      "recordId": "urn:maha:record:cryogenic-superconducting-control-stack",
+      "domainSlug": "quantum-systems",
+      "title": "Cryogenic superconducting control stack",
+      "targetSha256": "sha256:71221adaf50e139ee7ffc0405584c158926babf0468c96e926f5e70685ebbc5d",
+      "contractDigest": "sha256:e77df698e1b9e73357325e52444516ff3f9ca89204c765b942fe0ee202166b46",
+      "sourceIds": [
+        "source-arute-random-circuits-2019"
+      ],
+      "claimIds": [
+        "urn:maha:claim:cryogenic-superconducting-control-stack"
+      ],
+      "alignment": {
+        "sourceContractId": "source-arute-random-circuits-2019",
+        "metadataVerified": true,
+        "sourceContentInspected": true,
+        "exactInspectedLocator": "Repository copy of Nature 574, 505–510, “Building a high-fidelity processor”, pp. 1–2 and Figure 3",
+        "subjectSupported": true,
+        "artifactVersion": "repository-copy",
+        "inspectionDepth": "bounded inspected artifact",
+        "reason": "The article documents sub-20 mK dilution refrigeration, filters and attenuators, room-temperature signal synthesis, multiplexed readout, cryogenic amplification, digitization, control converters, pulse shaping, optimization, and individually calibrated gates."
+      },
+      "checklistFacts": {
+        "claimsResolveToDeclaredSources": true,
+        "everySourceHasExactLocator": true,
+        "everySourceHasRightsBasis": true,
+        "claimScopeAndBoundaryPresent": true,
+        "uncertaintyAndReplicationPresent": true,
+        "prohibitedInferencesPresent": true,
+        "exactRevisionBound": true,
+        "substantialQualityEligible": true,
+        "noActiveReleaseAtSelection": true
+      },
+      "reviewTier": "internally-reviewed-canonical",
+      "publisherConflict": "Maha Strategies authors, reviews, and publishes this record. The review is AI-assisted internal editorial review, not independent expert endorsement, peer review, consensus, reproduction, scientific validation, or commercial certification.",
+      "packetDigest": "sha256:4757bb7a6e026f8cc34218f0e9fbd02f75d9ab0dc5b8722f6b95544aec0698e0"
+    },
+    {
+      "schemaVersion": "maha-substantial-scale-review/1.0",
+      "recordId": "urn:maha:record:quantum-volume-benchmark",
+      "domainSlug": "quantum-systems",
+      "title": "Quantum volume benchmark",
+      "targetSha256": "sha256:b61ab7a8fbfce50057126880e0e917d46e4be3a94c45a431f7672e783dc957bd",
+      "contractDigest": "sha256:cc455ccbf83729be054abcbf875aab307972174cbe5a5a5e6b1bdd0562e33d4d",
+      "sourceIds": [
+        "source-cross-quantum-volume-2019"
+      ],
+      "claimIds": [
+        "urn:maha:claim:quantum-volume-benchmark"
+      ],
+      "alignment": {
+        "sourceContractId": "source-cross-quantum-volume-2019",
+        "metadataVerified": true,
+        "sourceContentInspected": true,
+        "exactInspectedLocator": "Physical Review A version-of-record page, Abstract lines 93–95",
+        "subjectSupported": true,
+        "artifactVersion": "version-of-record",
+        "inspectionDepth": "declared inspected location",
+        "reason": "The abstract introduces quantum volume, defines it through random circuits of equal width and depth, and reports the protocol on several transmon devices."
+      },
+      "checklistFacts": {
+        "claimsResolveToDeclaredSources": true,
+        "everySourceHasExactLocator": true,
+        "everySourceHasRightsBasis": true,
+        "claimScopeAndBoundaryPresent": true,
+        "uncertaintyAndReplicationPresent": true,
+        "prohibitedInferencesPresent": true,
+        "exactRevisionBound": true,
+        "substantialQualityEligible": true,
+        "noActiveReleaseAtSelection": true
+      },
+      "reviewTier": "internally-reviewed-canonical",
+      "publisherConflict": "Maha Strategies authors, reviews, and publishes this record. The review is AI-assisted internal editorial review, not independent expert endorsement, peer review, consensus, reproduction, scientific validation, or commercial certification.",
+      "packetDigest": "sha256:bfd113fbbff0af1ccf0fb5ed28fc0cfdd013d938d6aefaffef7d2e5c2c6da7bf"
+    },
+    {
+      "schemaVersion": "maha-substantial-scale-review/1.0",
+      "recordId": "urn:maha:record:random-circuit-sampling",
+      "domainSlug": "quantum-systems",
+      "title": "Random-circuit sampling",
+      "targetSha256": "sha256:9a55b13c6103a3d54fdd798bf4ceeb49208fef4c65ad1ed5da2cd7f6fe4c8b6c",
+      "contractDigest": "sha256:2f52187fcc3f7507d46a61124a2c7afae63ae8504d77b73f7a18043f4c40a8fd",
+      "sourceIds": [
+        "source-arute-random-circuits-2019"
+      ],
+      "claimIds": [
+        "urn:maha:claim:random-circuit-sampling"
+      ],
+      "alignment": {
+        "sourceContractId": "source-arute-random-circuits-2019",
+        "metadataVerified": true,
+        "sourceContentInspected": true,
+        "exactInspectedLocator": "Repository copy of Nature 574, 505–510, “A suitable computational task”, “Fidelity estimation in the supremacy regime”, and Figure 4",
+        "subjectSupported": true,
+        "artifactVersion": "repository-copy",
+        "inspectionDepth": "bounded inspected artifact",
+        "reason": "The paper reports pseudo-random circuit sampling on 53 qubits and cross-entropy benchmarking against the corresponding classically simulated circuit probabilities."
+      },
+      "checklistFacts": {
+        "claimsResolveToDeclaredSources": true,
+        "everySourceHasExactLocator": true,
+        "everySourceHasRightsBasis": true,
+        "claimScopeAndBoundaryPresent": true,
+        "uncertaintyAndReplicationPresent": true,
+        "prohibitedInferencesPresent": true,
+        "exactRevisionBound": true,
+        "substantialQualityEligible": true,
+        "noActiveReleaseAtSelection": true
+      },
+      "reviewTier": "internally-reviewed-canonical",
+      "publisherConflict": "Maha Strategies authors, reviews, and publishes this record. The review is AI-assisted internal editorial review, not independent expert endorsement, peer review, consensus, reproduction, scientific validation, or commercial certification.",
+      "packetDigest": "sha256:285c4c5f77cca7ba942439225696bab74d9cecfad1bc345570347c350f4bd186"
+    },
+    {
+      "schemaVersion": "maha-substantial-scale-review/1.0",
+      "recordId": "urn:maha:record:quantum-error-mitigation",
+      "domainSlug": "quantum-systems",
+      "title": "Quantum error mitigation",
+      "targetSha256": "sha256:1ba548818ce7ad026b2bb80c5a84466fed89cbd6c61c5a18a8f16cf1517e0832",
+      "contractDigest": "sha256:3f78e1d69faef90adfe993e84ebde313d9f7944622e2ad3b6d62c65a21a24327",
+      "sourceIds": [
+        "source-temme-error-mitigation-2017"
+      ],
+      "claimIds": [
+        "urn:maha:claim:quantum-error-mitigation"
+      ],
+      "alignment": {
+        "sourceContractId": "source-temme-error-mitigation-2017",
+        "metadataVerified": true,
+        "sourceContentInspected": true,
+        "exactInspectedLocator": "arXiv:1612.02058 abstract",
+        "subjectSupported": true,
+        "artifactVersion": "preprint",
+        "inspectionDepth": "bounded inspected artifact",
+        "reason": "The abstract presents two mitigation schemes: extrapolation to the zero-noise limit using Richardson deferred approach, and cancellation by resampling randomized circuits under a quasi-probability distribution. That is the record subject."
+      },
+      "checklistFacts": {
+        "claimsResolveToDeclaredSources": true,
+        "everySourceHasExactLocator": true,
+        "everySourceHasRightsBasis": true,
+        "claimScopeAndBoundaryPresent": true,
+        "uncertaintyAndReplicationPresent": true,
+        "prohibitedInferencesPresent": true,
+        "exactRevisionBound": true,
+        "substantialQualityEligible": true,
+        "noActiveReleaseAtSelection": true
+      },
+      "reviewTier": "internally-reviewed-canonical",
+      "publisherConflict": "Maha Strategies authors, reviews, and publishes this record. The review is AI-assisted internal editorial review, not independent expert endorsement, peer review, consensus, reproduction, scientific validation, or commercial certification.",
+      "packetDigest": "sha256:99c960ada4dc24bd1665783d61269ee145778a278ae9e87616b6321c825db046"
+    },
+    {
+      "schemaVersion": "maha-substantial-scale-review/1.0",
+      "recordId": "urn:maha:record:error-mitigation-versus-correction",
+      "domainSlug": "quantum-systems",
+      "title": "Error mitigation versus error correction",
+      "targetSha256": "sha256:45a8ef63679f678ca28e372d7391c092f49909c49fc484b7963cec3b375e9bf5",
+      "contractDigest": "sha256:99612b2c49fb1d6d823db5a6aa82c6dc37c9b77483de4dba4c4056c5f9e46bd5",
+      "sourceIds": [
+        "source-temme-error-mitigation-2017"
+      ],
+      "claimIds": [
+        "urn:maha:claim:error-mitigation-versus-correction"
+      ],
+      "alignment": {
+        "sourceContractId": "source-temme-error-mitigation-2017",
+        "metadataVerified": true,
+        "sourceContentInspected": true,
+        "exactInspectedLocator": "ar5iv rendering of arXiv:1612.02058, Abstract and Introduction",
+        "subjectSupported": true,
+        "artifactVersion": "repository-copy",
+        "inspectionDepth": "bounded inspected artifact",
+        "reason": "The source distinguishes expectation-value error mitigation without additional qubits from quantum error correction and states the methods’ assumptions."
+      },
+      "checklistFacts": {
+        "claimsResolveToDeclaredSources": true,
+        "everySourceHasExactLocator": true,
+        "everySourceHasRightsBasis": true,
+        "claimScopeAndBoundaryPresent": true,
+        "uncertaintyAndReplicationPresent": true,
+        "prohibitedInferencesPresent": true,
+        "exactRevisionBound": true,
+        "substantialQualityEligible": true,
+        "noActiveReleaseAtSelection": true
+      },
+      "reviewTier": "internally-reviewed-canonical",
+      "publisherConflict": "Maha Strategies authors, reviews, and publishes this record. The review is AI-assisted internal editorial review, not independent expert endorsement, peer review, consensus, reproduction, scientific validation, or commercial certification.",
+      "packetDigest": "sha256:3520ee482b56223d3d08e188811b2ba48656edcc192cdedbe59fa2ebd5152a74"
+    },
+    {
+      "schemaVersion": "maha-substantial-scale-review/1.0",
+      "recordId": "urn:maha:record:hardware-benchmark-scope",
+      "domainSlug": "quantum-systems",
+      "title": "Quantum hardware benchmark scope",
+      "targetSha256": "sha256:2b4e00e0138c6df2c5a97dc34f7ea617fdc8508beb310069aff3f73ed2480eca",
+      "contractDigest": "sha256:82af92f71bb3786840b8cb10abae0a5dcfdeef2fc208153177abe2cb7f47dea8",
+      "sourceIds": [
+        "source-cross-quantum-volume-2019"
+      ],
+      "claimIds": [
+        "urn:maha:claim:hardware-benchmark-scope"
+      ],
+      "alignment": {
+        "sourceContractId": "source-cross-quantum-volume-2019",
+        "metadataVerified": true,
+        "sourceContentInspected": true,
+        "exactInspectedLocator": "Physical Review A version-of-record page, Abstract lines 93–95",
+        "subjectSupported": true,
+        "artifactVersion": "version-of-record",
+        "inspectionDepth": "declared inspected location",
+        "reason": "The abstract defines quantum volume through a concrete random-circuit protocol and reports its measurement on specified transmon devices, supporting the record’s bounded benchmark-scope claim."
+      },
+      "checklistFacts": {
+        "claimsResolveToDeclaredSources": true,
+        "everySourceHasExactLocator": true,
+        "everySourceHasRightsBasis": true,
+        "claimScopeAndBoundaryPresent": true,
+        "uncertaintyAndReplicationPresent": true,
+        "prohibitedInferencesPresent": true,
+        "exactRevisionBound": true,
+        "substantialQualityEligible": true,
+        "noActiveReleaseAtSelection": true
+      },
+      "reviewTier": "internally-reviewed-canonical",
+      "publisherConflict": "Maha Strategies authors, reviews, and publishes this record. The review is AI-assisted internal editorial review, not independent expert endorsement, peer review, consensus, reproduction, scientific validation, or commercial certification.",
+      "packetDigest": "sha256:5e58045836136ba527291a98a0131f455a3cc4a32c0d4a5e1091656bc80e1f05"
+    },
+    {
+      "schemaVersion": "maha-substantial-scale-review/1.0",
+      "recordId": "urn:maha:record:fault-tolerance-threshold-condition",
+      "domainSlug": "quantum-systems",
+      "title": "Fault-tolerance threshold condition",
+      "targetSha256": "sha256:e0e0d68ff64e4d2b7091b2d0b71e1dc97e72d847591734a46ebf423efc9c9be7",
+      "contractDigest": "sha256:87ad99afdc3162e6a4508906c6508472933d5f5ddfa854a32d087d53c9b11cba",
+      "sourceIds": [
+        "source-fowler-surface-code-2012"
+      ],
+      "claimIds": [
+        "urn:maha:claim:fault-tolerance-threshold-condition"
+      ],
+      "alignment": {
+        "sourceContractId": "source-fowler-surface-code-2012",
+        "metadataVerified": true,
+        "sourceContentInspected": true,
+        "exactInspectedLocator": "Author-hosted manuscript, §VIII “Errors and error correction”, pp. 10–13, Figures 4, 7 and 8",
+        "subjectSupported": true,
+        "artifactVersion": "repository-copy",
+        "inspectionDepth": "bounded inspected artifact",
+        "reason": "The source explicitly defines the below-threshold condition, reports the architecture-specific per-step threshold, and shows how logical error changes with code distance under its noise model."
+      },
+      "checklistFacts": {
+        "claimsResolveToDeclaredSources": true,
+        "everySourceHasExactLocator": true,
+        "everySourceHasRightsBasis": true,
+        "claimScopeAndBoundaryPresent": true,
+        "uncertaintyAndReplicationPresent": true,
+        "prohibitedInferencesPresent": true,
+        "exactRevisionBound": true,
+        "substantialQualityEligible": true,
+        "noActiveReleaseAtSelection": true
+      },
+      "reviewTier": "internally-reviewed-canonical",
+      "publisherConflict": "Maha Strategies authors, reviews, and publishes this record. The review is AI-assisted internal editorial review, not independent expert endorsement, peer review, consensus, reproduction, scientific validation, or commercial certification.",
+      "packetDigest": "sha256:2c437399f1ae5cb3ae75805c3859fb05dad5328264d440fb97d680312de63a60"
+    },
+    {
+      "schemaVersion": "maha-substantial-scale-review/1.0",
+      "recordId": "urn:maha:record:prime-editing",
+      "domainSlug": "synthetic-biology",
+      "title": "Prime editing",
+      "targetSha256": "sha256:8145bad0de99c1ec7ac10cc9b2f0e57ee4a651cb82c3610a265c79a1f4ff89f2",
+      "contractDigest": "sha256:a8331b3978530b995cede8490125f013810a9fc3d57910e6c807f7d9193cae80",
+      "sourceIds": [
+        "source-anzalone-prime-editing-2019"
+      ],
+      "claimIds": [
+        "urn:maha:claim:prime-editing-demonstration"
+      ],
+      "alignment": {
+        "sourceContractId": "source-anzalone-prime-editing-2019",
+        "metadataVerified": true,
+        "sourceContentInspected": true,
+        "exactInspectedLocator": "PMC6907074 author manuscript, Summary",
+        "subjectSupported": true,
+        "artifactVersion": "repository-copy",
+        "inspectionDepth": "bounded inspected artifact",
+        "reason": "The summary reports targeted substitutions, insertions, and deletions across four human cell lines and primary post-mitotic mouse cortical neurons, with varying efficiencies, directly matching the record."
+      },
+      "checklistFacts": {
+        "claimsResolveToDeclaredSources": true,
+        "everySourceHasExactLocator": true,
+        "everySourceHasRightsBasis": true,
+        "claimScopeAndBoundaryPresent": true,
+        "uncertaintyAndReplicationPresent": true,
+        "prohibitedInferencesPresent": true,
+        "exactRevisionBound": true,
+        "substantialQualityEligible": true,
+        "noActiveReleaseAtSelection": true
+      },
+      "reviewTier": "internally-reviewed-canonical",
+      "publisherConflict": "Maha Strategies authors, reviews, and publishes this record. The review is AI-assisted internal editorial review, not independent expert endorsement, peer review, consensus, reproduction, scientific validation, or commercial certification.",
+      "packetDigest": "sha256:f59ddcf28a3ee78c3ba4b53b9306d427c10ddcffb03cb2145883bd97d2182ee0"
+    },
+    {
+      "schemaVersion": "maha-substantial-scale-review/1.0",
+      "recordId": "urn:maha:record:crispr-cas9-nuclease-editing",
+      "domainSlug": "synthetic-biology",
+      "title": "CRISPR-Cas9 nuclease editing",
+      "targetSha256": "sha256:af0966a0ae03aa6f7bcbd936ba194bf84ce302d67601dd93726855bba1c3884a",
+      "contractDigest": "sha256:6580ac55591c5faca59dd990bd91672f961cfb0579cd7a802578a6839653d511",
+      "sourceIds": [
+        "source-jinek-cas9-2012"
+      ],
+      "claimIds": [
+        "urn:maha:claim:crispr-cas9-nuclease-editing"
+      ],
+      "alignment": {
+        "sourceContractId": "source-jinek-cas9-2012",
+        "metadataVerified": true,
+        "sourceContentInspected": true,
+        "exactInspectedLocator": "PMC6286148 repository copy, Conclusions",
+        "subjectSupported": true,
+        "artifactVersion": "repository-copy",
+        "inspectionDepth": "bounded inspected artifact",
+        "reason": "The conclusions identify programmable dual-RNA-guided Cas9 cleavage, distinct nuclease domains, and site-specific double-strand breaks, directly supporting the bounded nuclease-editing record."
+      },
+      "checklistFacts": {
+        "claimsResolveToDeclaredSources": true,
+        "everySourceHasExactLocator": true,
+        "everySourceHasRightsBasis": true,
+        "claimScopeAndBoundaryPresent": true,
+        "uncertaintyAndReplicationPresent": true,
+        "prohibitedInferencesPresent": true,
+        "exactRevisionBound": true,
+        "substantialQualityEligible": true,
+        "noActiveReleaseAtSelection": true
+      },
+      "reviewTier": "internally-reviewed-canonical",
+      "publisherConflict": "Maha Strategies authors, reviews, and publishes this record. The review is AI-assisted internal editorial review, not independent expert endorsement, peer review, consensus, reproduction, scientific validation, or commercial certification.",
+      "packetDigest": "sha256:14eb92ff17eb6b001d4fc37ebc2d3eb828a0b4829fc38ae2d26631802daf7bd0"
+    },
+    {
+      "schemaVersion": "maha-substantial-scale-review/1.0",
+      "recordId": "urn:maha:record:guide-rna-and-pam-recognition",
+      "domainSlug": "synthetic-biology",
+      "title": "Guide RNA and PAM recognition",
+      "targetSha256": "sha256:216a778cf1966d4c7e16153caa81e8432090e462c455f54e33fa72c0acc97fb7",
+      "contractDigest": "sha256:4425d8120fbf170363a4aade355ca538ca23936c268392e2e471634249425eca",
+      "sourceIds": [
+        "source-jinek-cas9-2012"
+      ],
+      "claimIds": [
+        "urn:maha:claim:guide-rna-and-pam-recognition"
+      ],
+      "alignment": {
+        "sourceContractId": "source-jinek-cas9-2012",
+        "metadataVerified": true,
+        "sourceContentInspected": true,
+        "exactInspectedLocator": "PMC6286148 repository copy, Conclusions",
+        "subjectSupported": true,
+        "artifactVersion": "repository-copy",
+        "inspectionDepth": "bounded inspected artifact",
+        "reason": "The conclusions state that Cas9 recognition requires a crRNA seed sequence and adjacent GG-containing PAM and that an engineered single guide can program cleavage, matching the record."
+      },
+      "checklistFacts": {
+        "claimsResolveToDeclaredSources": true,
+        "everySourceHasExactLocator": true,
+        "everySourceHasRightsBasis": true,
+        "claimScopeAndBoundaryPresent": true,
+        "uncertaintyAndReplicationPresent": true,
+        "prohibitedInferencesPresent": true,
+        "exactRevisionBound": true,
+        "substantialQualityEligible": true,
+        "noActiveReleaseAtSelection": true
+      },
+      "reviewTier": "internally-reviewed-canonical",
+      "publisherConflict": "Maha Strategies authors, reviews, and publishes this record. The review is AI-assisted internal editorial review, not independent expert endorsement, peer review, consensus, reproduction, scientific validation, or commercial certification.",
+      "packetDigest": "sha256:59f89e8d84f7ae137d70cf3b38934f8b91486036edaa4b124e3931c286f8ecd7"
+    },
+    {
+      "schemaVersion": "maha-substantial-scale-review/1.0",
+      "recordId": "urn:maha:record:double-strand-break-repair-outcomes",
+      "domainSlug": "synthetic-biology",
+      "title": "Double-strand-break repair outcomes",
+      "targetSha256": "sha256:6560279b2afb7f1850f4ee8877679effb88c69af535aa3669b6410ebd5348660",
+      "contractDigest": "sha256:9f4820aa47701e601db60dfccc9fb363d701bbaa5b9c183b7c2fe82735dd93c1",
+      "sourceIds": [
+        "source-cong-multiplex-editing-2013"
+      ],
+      "claimIds": [
+        "urn:maha:claim:double-strand-break-repair-outcomes"
+      ],
+      "alignment": {
+        "sourceContractId": "source-cong-multiplex-editing-2013",
+        "metadataVerified": true,
+        "sourceContentInspected": true,
+        "exactInspectedLocator": "PMC3795411 author manuscript, “Applications of Cas9 for homologous recombination and multiplex genome engineering”",
+        "subjectSupported": true,
+        "artifactVersion": "repository-copy",
+        "inspectionDepth": "bounded inspected artifact",
+        "reason": "The section reports indel formation, homologous-recombination editing, and a programmed large deletion after Cas9 cleavage."
+      },
+      "checklistFacts": {
+        "claimsResolveToDeclaredSources": true,
+        "everySourceHasExactLocator": true,
+        "everySourceHasRightsBasis": true,
+        "claimScopeAndBoundaryPresent": true,
+        "uncertaintyAndReplicationPresent": true,
+        "prohibitedInferencesPresent": true,
+        "exactRevisionBound": true,
+        "substantialQualityEligible": true,
+        "noActiveReleaseAtSelection": true
+      },
+      "reviewTier": "internally-reviewed-canonical",
+      "publisherConflict": "Maha Strategies authors, reviews, and publishes this record. The review is AI-assisted internal editorial review, not independent expert endorsement, peer review, consensus, reproduction, scientific validation, or commercial certification.",
+      "packetDigest": "sha256:0ec4e6f9ced80789e0ae779d3a15cb75ec83b3a3646e9291bf4d8d25f891e7d3"
+    },
+    {
+      "schemaVersion": "maha-substantial-scale-review/1.0",
+      "recordId": "urn:maha:record:cytosine-base-editing",
+      "domainSlug": "synthetic-biology",
+      "title": "Cytosine base editing",
+      "targetSha256": "sha256:4d8be53b3a2b511149801817f5c1c9821488e91ba44df24616cc592668d8e917",
+      "contractDigest": "sha256:9ee9bb6f129bc3544f035c035d51e262dc427ec9e5ab767e4196b49eae7de104",
+      "sourceIds": [
+        "source-komor-cbe-2016"
+      ],
+      "claimIds": [
+        "urn:maha:claim:cytosine-base-editing"
+      ],
+      "alignment": {
+        "sourceContractId": "source-komor-cbe-2016",
+        "metadataVerified": true,
+        "sourceContentInspected": true,
+        "exactInspectedLocator": "PMC4873371 author manuscript, article abstract and associated-data record",
+        "subjectSupported": true,
+        "artifactVersion": "repository-copy",
+        "inspectionDepth": "bounded inspected artifact",
+        "reason": "The inspected manuscript is the declared cytosine-base-editing study and reports construction and testing of programmable target-base editors in named transformed human and murine cell lines."
+      },
+      "checklistFacts": {
+        "claimsResolveToDeclaredSources": true,
+        "everySourceHasExactLocator": true,
+        "everySourceHasRightsBasis": true,
+        "claimScopeAndBoundaryPresent": true,
+        "uncertaintyAndReplicationPresent": true,
+        "prohibitedInferencesPresent": true,
+        "exactRevisionBound": true,
+        "substantialQualityEligible": true,
+        "noActiveReleaseAtSelection": true
+      },
+      "reviewTier": "internally-reviewed-canonical",
+      "publisherConflict": "Maha Strategies authors, reviews, and publishes this record. The review is AI-assisted internal editorial review, not independent expert endorsement, peer review, consensus, reproduction, scientific validation, or commercial certification.",
+      "packetDigest": "sha256:0945f476bac37e4e2ab9e8eec1da17dd4955056d40577f82c996b64d3ed300c0"
+    },
+    {
+      "schemaVersion": "maha-substantial-scale-review/1.0",
+      "recordId": "urn:maha:record:adenine-base-editing",
+      "domainSlug": "synthetic-biology",
+      "title": "Adenine base editing",
+      "targetSha256": "sha256:f01d3ec2cf7f188586f8d5938e430b5eceef5c0b34ce0db2527cf98bb76b5584",
+      "contractDigest": "sha256:dce7b5639fecab708989a86bd07a657c5cf2a0f7b98cfa689a748f63337a5b37",
+      "sourceIds": [
+        "source-gaudelli-abe-2017"
+      ],
+      "claimIds": [
+        "urn:maha:claim:adenine-base-editing"
+      ],
+      "alignment": {
+        "sourceContractId": "source-gaudelli-abe-2017",
+        "metadataVerified": true,
+        "sourceContentInspected": true,
+        "exactInspectedLocator": "PMC5726555 author manuscript, Summary and “Scope and overview of base editing by an A•T to G•C base editor”",
+        "subjectSupported": true,
+        "artifactVersion": "repository-copy",
+        "inspectionDepth": "bounded inspected artifact",
+        "reason": "The inspected manuscript reports evolution and engineering of adenine base editors and targeted A•T-to-G•C editing in bacteria and named human cell systems, matching the bounded record subject."
+      },
+      "checklistFacts": {
+        "claimsResolveToDeclaredSources": true,
+        "everySourceHasExactLocator": true,
+        "everySourceHasRightsBasis": true,
+        "claimScopeAndBoundaryPresent": true,
+        "uncertaintyAndReplicationPresent": true,
+        "prohibitedInferencesPresent": true,
+        "exactRevisionBound": true,
+        "substantialQualityEligible": true,
+        "noActiveReleaseAtSelection": true
+      },
+      "reviewTier": "internally-reviewed-canonical",
+      "publisherConflict": "Maha Strategies authors, reviews, and publishes this record. The review is AI-assisted internal editorial review, not independent expert endorsement, peer review, consensus, reproduction, scientific validation, or commercial certification.",
+      "packetDigest": "sha256:8b3c0f820e9264103f9cd0cf77510772516eb3241cc09bca727ea82ab5fd1eb2"
+    },
+    {
+      "schemaVersion": "maha-substantial-scale-review/1.0",
+      "recordId": "urn:maha:record:prime-editing-guide-rna-mechanism",
+      "domainSlug": "synthetic-biology",
+      "title": "Prime-editing guide RNA mechanism",
+      "targetSha256": "sha256:0b3e9a4522c5b0be9b6ce514fe55945920acf5364ab9c63701ab177042d8ce10",
+      "contractDigest": "sha256:c0d4a84f69a58cc248dddd18984d7673e658f4df617f5517746e015e2a8ac313",
+      "sourceIds": [
+        "source-anzalone-prime-2019-graph"
+      ],
+      "claimIds": [
+        "urn:maha:claim:prime-editing-guide-rna-mechanism"
+      ],
+      "alignment": {
+        "sourceContractId": "source-anzalone-prime-2019-graph",
+        "metadataVerified": true,
+        "sourceContentInspected": true,
+        "exactInspectedLocator": "PMC6907074 author manuscript, Figure 1 and “Prime editing strategy”",
+        "subjectSupported": true,
+        "artifactVersion": "repository-copy",
+        "inspectionDepth": "bounded inspected artifact",
+        "reason": "The inspected mechanism section describes the nickase–reverse-transcriptase fusion, pegRNA target spacer, primer-binding site, and reverse-transcription template that jointly specify the edit."
+      },
+      "checklistFacts": {
+        "claimsResolveToDeclaredSources": true,
+        "everySourceHasExactLocator": true,
+        "everySourceHasRightsBasis": true,
+        "claimScopeAndBoundaryPresent": true,
+        "uncertaintyAndReplicationPresent": true,
+        "prohibitedInferencesPresent": true,
+        "exactRevisionBound": true,
+        "substantialQualityEligible": true,
+        "noActiveReleaseAtSelection": true
+      },
+      "reviewTier": "internally-reviewed-canonical",
+      "publisherConflict": "Maha Strategies authors, reviews, and publishes this record. The review is AI-assisted internal editorial review, not independent expert endorsement, peer review, consensus, reproduction, scientific validation, or commercial certification.",
+      "packetDigest": "sha256:b9108320dbfc7fa4a6d5ee030de7c3fd5d3f6b33a1e468ded1b90539ed8468fe"
+    },
+    {
+      "schemaVersion": "maha-substantial-scale-review/1.0",
+      "recordId": "urn:maha:record:genome-editor-delivery-systems",
+      "domainSlug": "synthetic-biology",
+      "title": "Genome-editor delivery systems",
+      "targetSha256": "sha256:96fcae910ef78135fbf36ae41f11fd0fbc6d6ccce6ea326509405f1bb4420fc8",
+      "contractDigest": "sha256:d1eee6d9b3dbb12858494bca5d025a3a9cc0723f2bfe3ae86438e0ef7eb478bc",
+      "sourceIds": [
+        "source-gillmore-in-vivo-2021"
+      ],
+      "claimIds": [
+        "urn:maha:claim:genome-editor-delivery-systems"
+      ],
+      "alignment": {
+        "sourceContractId": "source-gillmore-in-vivo-2021",
+        "metadataVerified": true,
+        "sourceContentInspected": true,
+        "exactInspectedLocator": "NEJM DOI 10.1056/NEJMoa2107454, Abstract; Methods—Preclinical Studies; Clinical Study Treatment",
+        "subjectSupported": true,
+        "artifactVersion": "version-of-record",
+        "inspectionDepth": "declared inspected location",
+        "reason": "The methods identify lipid-nanoparticle delivery of Cas9 mRNA and guide RNA and separate preclinical from clinical settings."
+      },
+      "checklistFacts": {
+        "claimsResolveToDeclaredSources": true,
+        "everySourceHasExactLocator": true,
+        "everySourceHasRightsBasis": true,
+        "claimScopeAndBoundaryPresent": true,
+        "uncertaintyAndReplicationPresent": true,
+        "prohibitedInferencesPresent": true,
+        "exactRevisionBound": true,
+        "substantialQualityEligible": true,
+        "noActiveReleaseAtSelection": true
+      },
+      "reviewTier": "internally-reviewed-canonical",
+      "publisherConflict": "Maha Strategies authors, reviews, and publishes this record. The review is AI-assisted internal editorial review, not independent expert endorsement, peer review, consensus, reproduction, scientific validation, or commercial certification.",
+      "packetDigest": "sha256:58ee2f157462044fccac0e17dcb2bff34ad81d86238804db1ea745fb9ce69bd7"
+    },
+    {
+      "schemaVersion": "maha-substantial-scale-review/1.0",
+      "recordId": "urn:maha:record:ex-vivo-genome-editing-workflow",
+      "domainSlug": "synthetic-biology",
+      "title": "Ex-vivo genome-editing workflow",
+      "targetSha256": "sha256:3e76f32cc4d0ff6e901f3aeecd576f89bfa43edf09be22e618256a3a0fcc9120",
+      "contractDigest": "sha256:0e2566d1c648b487aacf4d55459d762208e425e26c3790a1af90a053e8aa03fc",
+      "sourceIds": [
+        "source-frangoul-crispr-2021"
+      ],
+      "claimIds": [
+        "urn:maha:claim:ex-vivo-genome-editing-workflow"
+      ],
+      "alignment": {
+        "sourceContractId": "source-frangoul-crispr-2021",
+        "metadataVerified": true,
+        "sourceContentInspected": true,
+        "exactInspectedLocator": "NEJM DOI 10.1056/NEJMoa2031054, Summary; Patient Demographics and Outcomes; Discussion",
+        "subjectSupported": true,
+        "artifactVersion": "version-of-record",
+        "inspectionDepth": "declared inspected location",
+        "reason": "The article describes collection and ex-vivo editing of autologous cells, conditioning, reinfusion, and bounded outcomes for two participants."
+      },
+      "checklistFacts": {
+        "claimsResolveToDeclaredSources": true,
+        "everySourceHasExactLocator": true,
+        "everySourceHasRightsBasis": true,
+        "claimScopeAndBoundaryPresent": true,
+        "uncertaintyAndReplicationPresent": true,
+        "prohibitedInferencesPresent": true,
+        "exactRevisionBound": true,
+        "substantialQualityEligible": true,
+        "noActiveReleaseAtSelection": true
+      },
+      "reviewTier": "internally-reviewed-canonical",
+      "publisherConflict": "Maha Strategies authors, reviews, and publishes this record. The review is AI-assisted internal editorial review, not independent expert endorsement, peer review, consensus, reproduction, scientific validation, or commercial certification.",
+      "packetDigest": "sha256:8490a4cbe476fe02be974af2169189449a7f27536823e88c9f0913650203f8f8"
+    },
+    {
+      "schemaVersion": "maha-substantial-scale-review/1.0",
+      "recordId": "urn:maha:record:in-vivo-genome-editing-workflow",
+      "domainSlug": "synthetic-biology",
+      "title": "In-vivo genome-editing workflow",
+      "targetSha256": "sha256:c04affa4a87aba09a28285d08ee2c933963509ae9064cedf1a66c4dff7cd4dd6",
+      "contractDigest": "sha256:3d17f399025c5f894f329cfe643e5bee2a8bef9b626f0ba484b29af71bc6755b",
+      "sourceIds": [
+        "source-gillmore-in-vivo-2021"
+      ],
+      "claimIds": [
+        "urn:maha:claim:in-vivo-genome-editing-workflow"
+      ],
+      "alignment": {
+        "sourceContractId": "source-gillmore-in-vivo-2021",
+        "metadataVerified": true,
+        "sourceContentInspected": true,
+        "exactInspectedLocator": "NEJM DOI 10.1056/NEJMoa2107454, Abstract; Clinical Study Treatment; Assessments",
+        "subjectSupported": true,
+        "artifactVersion": "version-of-record",
+        "inspectionDepth": "declared inspected location",
+        "reason": "The source describes systemic administration, dose cohorts, and subsequent clinical and laboratory assessments."
+      },
+      "checklistFacts": {
+        "claimsResolveToDeclaredSources": true,
+        "everySourceHasExactLocator": true,
+        "everySourceHasRightsBasis": true,
+        "claimScopeAndBoundaryPresent": true,
+        "uncertaintyAndReplicationPresent": true,
+        "prohibitedInferencesPresent": true,
+        "exactRevisionBound": true,
+        "substantialQualityEligible": true,
+        "noActiveReleaseAtSelection": true
+      },
+      "reviewTier": "internally-reviewed-canonical",
+      "publisherConflict": "Maha Strategies authors, reviews, and publishes this record. The review is AI-assisted internal editorial review, not independent expert endorsement, peer review, consensus, reproduction, scientific validation, or commercial certification.",
+      "packetDigest": "sha256:7334a82c4be3adf7c088d2eafd1f044424a1930bcb58c9a1709b29c3af9e1a7a"
+    },
+    {
+      "schemaVersion": "maha-substantial-scale-review/1.0",
+      "recordId": "urn:maha:record:guide-seq-off-target-detection",
+      "domainSlug": "synthetic-biology",
+      "title": "GUIDE-seq off-target detection",
+      "targetSha256": "sha256:5ef01b9f49fc3c5f1c6fcf4afefc0530f809cabbd9c9dc75a255f737081a0e24",
+      "contractDigest": "sha256:8e9320e0b1394d548a8f399b496988eefe04ab758f5785e9d42eac81297b1921",
+      "sourceIds": [
+        "source-tsai-guide-seq-2015"
+      ],
+      "claimIds": [
+        "urn:maha:claim:guide-seq-off-target-detection"
+      ],
+      "alignment": {
+        "sourceContractId": "source-tsai-guide-seq-2015",
+        "metadataVerified": true,
+        "sourceContentInspected": true,
+        "exactInspectedLocator": "PMC4320685 author manuscript, Abstract and “Overview of the GUIDE-seq method”",
+        "subjectSupported": true,
+        "artifactVersion": "repository-copy",
+        "inspectionDepth": "bounded inspected artifact",
+        "reason": "The source describes oligodeoxynucleotide capture at nuclease-induced breaks and sequencing-based genome-wide off-target detection."
+      },
+      "checklistFacts": {
+        "claimsResolveToDeclaredSources": true,
+        "everySourceHasExactLocator": true,
+        "everySourceHasRightsBasis": true,
+        "claimScopeAndBoundaryPresent": true,
+        "uncertaintyAndReplicationPresent": true,
+        "prohibitedInferencesPresent": true,
+        "exactRevisionBound": true,
+        "substantialQualityEligible": true,
+        "noActiveReleaseAtSelection": true
+      },
+      "reviewTier": "internally-reviewed-canonical",
+      "publisherConflict": "Maha Strategies authors, reviews, and publishes this record. The review is AI-assisted internal editorial review, not independent expert endorsement, peer review, consensus, reproduction, scientific validation, or commercial certification.",
+      "packetDigest": "sha256:4457b8acf2beb175300feab95ec9a922565a8d84e4407554648c2bdd6db2f371"
+    },
+    {
+      "schemaVersion": "maha-substantial-scale-review/1.0",
+      "recordId": "urn:maha:record:change-seq-off-target-nomination",
+      "domainSlug": "synthetic-biology",
+      "title": "CHANGE-seq off-target nomination",
+      "targetSha256": "sha256:d29ddb16723627ab8b8c7943944d9549c84f219884bc3dca0aae322a295aeac8",
+      "contractDigest": "sha256:e54ae16d8c4264dc599422ef7c6ff9b2439160f2b967cd0efd3e26b6893a2f43",
+      "sourceIds": [
+        "source-lazzarotto-change-seq-2020"
+      ],
+      "claimIds": [
+        "urn:maha:claim:change-seq-off-target-nomination"
+      ],
+      "alignment": {
+        "sourceContractId": "source-lazzarotto-change-seq-2020",
+        "metadataVerified": true,
+        "sourceContentInspected": true,
+        "exactInspectedLocator": "PMC7652380 author manuscript, Abstract and “High-throughput Cas9 genome-wide activity profiling”",
+        "subjectSupported": true,
+        "artifactVersion": "repository-copy",
+        "inspectionDepth": "bounded inspected artifact",
+        "reason": "The source introduces CHANGE-seq as an in-vitro genome-wide method for nominating nuclease activity sites."
+      },
+      "checklistFacts": {
+        "claimsResolveToDeclaredSources": true,
+        "everySourceHasExactLocator": true,
+        "everySourceHasRightsBasis": true,
+        "claimScopeAndBoundaryPresent": true,
+        "uncertaintyAndReplicationPresent": true,
+        "prohibitedInferencesPresent": true,
+        "exactRevisionBound": true,
+        "substantialQualityEligible": true,
+        "noActiveReleaseAtSelection": true
+      },
+      "reviewTier": "internally-reviewed-canonical",
+      "publisherConflict": "Maha Strategies authors, reviews, and publishes this record. The review is AI-assisted internal editorial review, not independent expert endorsement, peer review, consensus, reproduction, scientific validation, or commercial certification.",
+      "packetDigest": "sha256:33032ee8f976a701c9d4d29218706d77ce14a2c5dd4664bb1454baca21c027ff"
+    },
+    {
+      "schemaVersion": "maha-substantial-scale-review/1.0",
+      "recordId": "urn:maha:record:targeted-amplicon-sequencing",
+      "domainSlug": "synthetic-biology",
+      "title": "Targeted amplicon sequencing of edit outcomes",
+      "targetSha256": "sha256:76c7c8eb258d88810584bf93ab38d66f517f10b3498cb285c837114ffe09de83",
+      "contractDigest": "sha256:e9d73a347935edf9dc1b90dec7585a961d2e9c7b465a57a728ccf7b1bf24b523",
+      "sourceIds": [
+        "source-tsai-guide-seq-2015"
+      ],
+      "claimIds": [
+        "urn:maha:claim:targeted-amplicon-sequencing"
+      ],
+      "alignment": {
+        "sourceContractId": "source-tsai-guide-seq-2015",
+        "metadataVerified": true,
+        "sourceContentInspected": true,
+        "exactInspectedLocator": "PMC4320685 author manuscript, “Overview of the GUIDE-seq method” and Discussion",
+        "subjectSupported": true,
+        "artifactVersion": "repository-copy",
+        "inspectionDepth": "bounded inspected artifact",
+        "reason": "The source uses targeted amplicon sequencing to confirm and quantify candidate off-target sites."
+      },
+      "checklistFacts": {
+        "claimsResolveToDeclaredSources": true,
+        "everySourceHasExactLocator": true,
+        "everySourceHasRightsBasis": true,
+        "claimScopeAndBoundaryPresent": true,
+        "uncertaintyAndReplicationPresent": true,
+        "prohibitedInferencesPresent": true,
+        "exactRevisionBound": true,
+        "substantialQualityEligible": true,
+        "noActiveReleaseAtSelection": true
+      },
+      "reviewTier": "internally-reviewed-canonical",
+      "publisherConflict": "Maha Strategies authors, reviews, and publishes this record. The review is AI-assisted internal editorial review, not independent expert endorsement, peer review, consensus, reproduction, scientific validation, or commercial certification.",
+      "packetDigest": "sha256:a3939f94d6944c7524cb41a772eaf80ec40032bd2d0b78125814dae384081835"
+    },
+    {
+      "schemaVersion": "maha-substantial-scale-review/1.0",
+      "recordId": "urn:maha:record:editing-efficiency-and-byproduct-measurement",
+      "domainSlug": "synthetic-biology",
+      "title": "Editing efficiency and byproduct measurement",
+      "targetSha256": "sha256:016c844e61ea2cf840113ac1d34227c4733f14ebf40f922fcf31f98bdcf2b0fe",
+      "contractDigest": "sha256:d57d1ad65a3f0f9eb8211002bcb0dcb41002e1444ecf2717a66c44e20bfb3141",
+      "sourceIds": [
+        "source-anzalone-prime-2019-graph"
+      ],
+      "claimIds": [
+        "urn:maha:claim:editing-efficiency-and-byproduct-measurement"
+      ],
+      "alignment": {
+        "sourceContractId": "source-anzalone-prime-2019-graph",
+        "metadataVerified": true,
+        "sourceContentInspected": true,
+        "exactInspectedLocator": "PMC6907074 author manuscript, Summary; Figure 2; “Prime editing compared with base editing”",
+        "subjectSupported": true,
+        "artifactVersion": "repository-copy",
+        "inspectionDepth": "bounded inspected artifact",
+        "reason": "The inspected source reports target- and condition-specific intended edits, indels, efficiencies, and comparisons using specified sequencing readouts; the record retains those experiment-level boundaries."
+      },
+      "checklistFacts": {
+        "claimsResolveToDeclaredSources": true,
+        "everySourceHasExactLocator": true,
+        "everySourceHasRightsBasis": true,
+        "claimScopeAndBoundaryPresent": true,
+        "uncertaintyAndReplicationPresent": true,
+        "prohibitedInferencesPresent": true,
+        "exactRevisionBound": true,
+        "substantialQualityEligible": true,
+        "noActiveReleaseAtSelection": true
+      },
+      "reviewTier": "internally-reviewed-canonical",
+      "publisherConflict": "Maha Strategies authors, reviews, and publishes this record. The review is AI-assisted internal editorial review, not independent expert endorsement, peer review, consensus, reproduction, scientific validation, or commercial certification.",
+      "packetDigest": "sha256:d205af35bd0a67f3e78432d7cae6230d6fc9cc195f046dfc500b9de70c4bab90"
+    },
+    {
+      "schemaVersion": "maha-substantial-scale-review/1.0",
+      "recordId": "urn:maha:record:off-target-nomination-versus-confirmation",
+      "domainSlug": "synthetic-biology",
+      "title": "Off-target nomination versus confirmation",
+      "targetSha256": "sha256:b7bced5f8d14674ed18063921b7fa6f4acdab6e3de8b01c51c413a7f02bd7f55",
+      "contractDigest": "sha256:e19dd4782989b5a8c9aa2636ea1abaa57dd15af667580537c625b198d47a47a9",
+      "sourceIds": [
+        "source-lazzarotto-change-seq-2020"
+      ],
+      "claimIds": [
+        "urn:maha:claim:off-target-nomination-versus-confirmation"
+      ],
+      "alignment": {
+        "sourceContractId": "source-lazzarotto-change-seq-2020",
+        "metadataVerified": true,
+        "sourceContentInspected": true,
+        "exactInspectedLocator": "PMC7652380 author manuscript, Abstract; activity profiling; chromatin-state sections",
+        "subjectSupported": true,
+        "artifactVersion": "repository-copy",
+        "inspectionDepth": "bounded inspected artifact",
+        "reason": "The source distinguishes biochemical nomination from cell-context editing activity and reports targeted validation."
+      },
+      "checklistFacts": {
+        "claimsResolveToDeclaredSources": true,
+        "everySourceHasExactLocator": true,
+        "everySourceHasRightsBasis": true,
+        "claimScopeAndBoundaryPresent": true,
+        "uncertaintyAndReplicationPresent": true,
+        "prohibitedInferencesPresent": true,
+        "exactRevisionBound": true,
+        "substantialQualityEligible": true,
+        "noActiveReleaseAtSelection": true
+      },
+      "reviewTier": "internally-reviewed-canonical",
+      "publisherConflict": "Maha Strategies authors, reviews, and publishes this record. The review is AI-assisted internal editorial review, not independent expert endorsement, peer review, consensus, reproduction, scientific validation, or commercial certification.",
+      "packetDigest": "sha256:80bd80d5cc185b78df6c27b2b7227f8c0cb6043ac308f1f573fb8ed20aa1c176"
+    },
+    {
+      "schemaVersion": "maha-substantial-scale-review/1.0",
+      "recordId": "urn:maha:record:cell-line-versus-primary-cell-evidence",
+      "domainSlug": "synthetic-biology",
+      "title": "Cell-line versus primary-cell evidence",
+      "targetSha256": "sha256:6b6b99f6540b8e46e2895fcacf978dc6cea7ca8688fe377cbce0201b6957b54d",
+      "contractDigest": "sha256:24e3397eb7bdfe976973347957e9049b3cf496806489c075e9a29e45c33a5eaf",
+      "sourceIds": [
+        "source-lazzarotto-change-seq-2020"
+      ],
+      "claimIds": [
+        "urn:maha:claim:cell-line-versus-primary-cell-evidence"
+      ],
+      "alignment": {
+        "sourceContractId": "source-lazzarotto-change-seq-2020",
+        "metadataVerified": true,
+        "sourceContentInspected": true,
+        "exactInspectedLocator": "PMC7652380 author manuscript, “Chromatin state influences genome editing activity” and “Human genetic variation impacts genome editing nuclease activity”",
+        "subjectSupported": true,
+        "artifactVersion": "repository-copy",
+        "inspectionDepth": "bounded inspected artifact",
+        "reason": "The source compares biochemical nomination with editing activity across cellular contexts and examines primary-cell genetic variation."
+      },
+      "checklistFacts": {
+        "claimsResolveToDeclaredSources": true,
+        "everySourceHasExactLocator": true,
+        "everySourceHasRightsBasis": true,
+        "claimScopeAndBoundaryPresent": true,
+        "uncertaintyAndReplicationPresent": true,
+        "prohibitedInferencesPresent": true,
+        "exactRevisionBound": true,
+        "substantialQualityEligible": true,
+        "noActiveReleaseAtSelection": true
+      },
+      "reviewTier": "internally-reviewed-canonical",
+      "publisherConflict": "Maha Strategies authors, reviews, and publishes this record. The review is AI-assisted internal editorial review, not independent expert endorsement, peer review, consensus, reproduction, scientific validation, or commercial certification.",
+      "packetDigest": "sha256:3cd071f674d3a38e288e5354179cb99a8ca10a9dba9e46c815343893ea1ed8cf"
+    },
+    {
+      "schemaVersion": "maha-substantial-scale-review/1.0",
+      "recordId": "urn:maha:record:in-vitro-versus-in-vivo-evidence",
+      "domainSlug": "synthetic-biology",
+      "title": "In-vitro versus in-vivo evidence",
+      "targetSha256": "sha256:04191ae798998644f3e9e348b443c465e6b6da590f5482685c2b1589eb248072",
+      "contractDigest": "sha256:369668149d5fb6bfca0c0ba2712494e1531278f3cc95ead4104130a4dca02677",
+      "sourceIds": [
+        "source-gillmore-in-vivo-2021"
+      ],
+      "claimIds": [
+        "urn:maha:claim:in-vitro-versus-in-vivo-evidence"
+      ],
+      "alignment": {
+        "sourceContractId": "source-gillmore-in-vivo-2021",
+        "metadataVerified": true,
+        "sourceContentInspected": true,
+        "exactInspectedLocator": "NEJM DOI 10.1056/NEJMoa2107454, Methods—Preclinical Studies and Clinical Study Design and Eligibility",
+        "subjectSupported": true,
+        "artifactVersion": "version-of-record",
+        "inspectionDepth": "declared inspected location",
+        "reason": "The article separates preclinical studies from the human in-vivo clinical study, supporting the evidence-context boundary."
+      },
+      "checklistFacts": {
+        "claimsResolveToDeclaredSources": true,
+        "everySourceHasExactLocator": true,
+        "everySourceHasRightsBasis": true,
+        "claimScopeAndBoundaryPresent": true,
+        "uncertaintyAndReplicationPresent": true,
+        "prohibitedInferencesPresent": true,
+        "exactRevisionBound": true,
+        "substantialQualityEligible": true,
+        "noActiveReleaseAtSelection": true
+      },
+      "reviewTier": "internally-reviewed-canonical",
+      "publisherConflict": "Maha Strategies authors, reviews, and publishes this record. The review is AI-assisted internal editorial review, not independent expert endorsement, peer review, consensus, reproduction, scientific validation, or commercial certification.",
+      "packetDigest": "sha256:094ac026437e391604c23b6bd42ca1a6167702e9ec8549c9eb93b466dc5294b9"
+    },
+    {
+      "schemaVersion": "maha-substantial-scale-review/1.0",
+      "recordId": "urn:maha:record:pooled-crispr-screening",
+      "domainSlug": "synthetic-biology",
+      "title": "Pooled CRISPR screening",
+      "targetSha256": "sha256:959e5b4a8a42988da114a0702a7a9d34381c190305a42ae647f6e061d1f8f2c7",
+      "contractDigest": "sha256:1d3a9317bd56d8a52a3d94d5c2ec661bc22692c7ced31ed679c6c624cdf5f76c",
+      "sourceIds": [
+        "source-shalem-crispr-screen-2014"
+      ],
+      "claimIds": [
+        "urn:maha:claim:pooled-crispr-screening"
+      ],
+      "alignment": {
+        "sourceContractId": "source-shalem-crispr-screen-2014",
+        "metadataVerified": true,
+        "sourceContentInspected": true,
+        "exactInspectedLocator": "PMC4089965 author manuscript, Abstract and pooled GeCKO negative- and positive-selection sections",
+        "subjectSupported": true,
+        "artifactVersion": "repository-copy",
+        "inspectionDepth": "bounded inspected artifact",
+        "reason": "The source reports pooled genome-scale CRISPR-Cas9 knockout screening with negative and positive selection."
+      },
+      "checklistFacts": {
+        "claimsResolveToDeclaredSources": true,
+        "everySourceHasExactLocator": true,
+        "everySourceHasRightsBasis": true,
+        "claimScopeAndBoundaryPresent": true,
+        "uncertaintyAndReplicationPresent": true,
+        "prohibitedInferencesPresent": true,
+        "exactRevisionBound": true,
+        "substantialQualityEligible": true,
+        "noActiveReleaseAtSelection": true
+      },
+      "reviewTier": "internally-reviewed-canonical",
+      "publisherConflict": "Maha Strategies authors, reviews, and publishes this record. The review is AI-assisted internal editorial review, not independent expert endorsement, peer review, consensus, reproduction, scientific validation, or commercial certification.",
+      "packetDigest": "sha256:981859833b612d68fdae1c2f4b53c83550f0df03886c2074df76e16ff37f17b7"
+    },
+    {
+      "schemaVersion": "maha-substantial-scale-review/1.0",
+      "recordId": "urn:maha:record:single-cell-perturbation-readout",
+      "domainSlug": "synthetic-biology",
+      "title": "Single-cell perturbation readout",
+      "targetSha256": "sha256:6425d7ab23e2f018b1b857acf0ece2c747053eaab5bfe0e32810efbffb8626cc",
+      "contractDigest": "sha256:8973348adfc9ffbc1577d23d1039bfdb1699760866ec418083aaba1ca2b0faf4",
+      "sourceIds": [
+        "source-dixit-perturb-seq-2016"
+      ],
+      "claimIds": [
+        "urn:maha:claim:single-cell-perturbation-readout"
+      ],
+      "alignment": {
+        "sourceContractId": "source-dixit-perturb-seq-2016",
+        "metadataVerified": true,
+        "sourceContentInspected": true,
+        "exactInspectedLocator": "PMC5181115 author manuscript, Summary and “Perturb-seq: pooled, combinatorial CRISPR screens with scRNA-seq readout”",
+        "subjectSupported": true,
+        "artifactVersion": "repository-copy",
+        "inspectionDepth": "bounded inspected artifact",
+        "reason": "The source combines pooled CRISPR perturbations with single-cell RNA sequencing and guide-identity readout."
+      },
+      "checklistFacts": {
+        "claimsResolveToDeclaredSources": true,
+        "everySourceHasExactLocator": true,
+        "everySourceHasRightsBasis": true,
+        "claimScopeAndBoundaryPresent": true,
+        "uncertaintyAndReplicationPresent": true,
+        "prohibitedInferencesPresent": true,
+        "exactRevisionBound": true,
+        "substantialQualityEligible": true,
+        "noActiveReleaseAtSelection": true
+      },
+      "reviewTier": "internally-reviewed-canonical",
+      "publisherConflict": "Maha Strategies authors, reviews, and publishes this record. The review is AI-assisted internal editorial review, not independent expert endorsement, peer review, consensus, reproduction, scientific validation, or commercial certification.",
+      "packetDigest": "sha256:7c089d3cae2e9afedfa7abecc61188c739dd4edfda157d3ae8a7c04f20b710f8"
+    },
+    {
+      "schemaVersion": "maha-substantial-scale-review/1.0",
+      "recordId": "urn:maha:record:genetic-toggle-switch",
+      "domainSlug": "synthetic-biology",
+      "title": "Genetic toggle switch",
+      "targetSha256": "sha256:5ebe87f4d5c1c2512ae655016d283646d46c04b95f0c8ec643c80f4c847397e5",
+      "contractDigest": "sha256:a57b8b4208342bedea76513bf1a7271aed825415b4835d8a10263db67d177d6b",
+      "sourceIds": [
+        "source-gardner-toggle-2000"
+      ],
+      "claimIds": [
+        "urn:maha:claim:genetic-toggle-switch"
+      ],
+      "alignment": {
+        "sourceContractId": "source-gardner-toggle-2000",
+        "metadataVerified": true,
+        "sourceContentInspected": true,
+        "exactInspectedLocator": "Nature version-of-record page, Abstract lines 34–37",
+        "subjectSupported": true,
+        "artifactVersion": "version-of-record",
+        "inspectionDepth": "declared inspected location",
+        "reason": "The abstract reports construction of a synthetic bistable toggle in E. coli, transient chemical or thermal switching, stable states, and a measured switching threshold."
+      },
+      "checklistFacts": {
+        "claimsResolveToDeclaredSources": true,
+        "everySourceHasExactLocator": true,
+        "everySourceHasRightsBasis": true,
+        "claimScopeAndBoundaryPresent": true,
+        "uncertaintyAndReplicationPresent": true,
+        "prohibitedInferencesPresent": true,
+        "exactRevisionBound": true,
+        "substantialQualityEligible": true,
+        "noActiveReleaseAtSelection": true
+      },
+      "reviewTier": "internally-reviewed-canonical",
+      "publisherConflict": "Maha Strategies authors, reviews, and publishes this record. The review is AI-assisted internal editorial review, not independent expert endorsement, peer review, consensus, reproduction, scientific validation, or commercial certification.",
+      "packetDigest": "sha256:0e017a181742faac122df4398b5acc537ff2c5e6f7f43bbed07a609a38f18565"
+    },
+    {
+      "schemaVersion": "maha-substantial-scale-review/1.0",
+      "recordId": "urn:maha:record:repressilator-gene-oscillator",
+      "domainSlug": "synthetic-biology",
+      "title": "Repressilator gene oscillator",
+      "targetSha256": "sha256:4836a066446356da13adb2438a1cf1a694ef61a662b109ea4a7533cf40f04b1c",
+      "contractDigest": "sha256:c30c7c084839e93ba50f4c7d3ebc028f3113b7f2b14ae3704b4b1ecd78016b56",
+      "sourceIds": [
+        "source-elowitz-repressilator-2000"
+      ],
+      "claimIds": [
+        "urn:maha:claim:repressilator-gene-oscillator"
+      ],
+      "alignment": {
+        "sourceContractId": "source-elowitz-repressilator-2000",
+        "metadataVerified": true,
+        "sourceContentInspected": true,
+        "exactInspectedLocator": "Nature version-of-record page, Abstract lines 33–36",
+        "subjectSupported": true,
+        "artifactVersion": "version-of-record",
+        "inspectionDepth": "declared inspected location",
+        "reason": "The abstract reports a three-repressor oscillating network in E. coli and periodically induced GFP in individual cells, directly supporting the record."
+      },
+      "checklistFacts": {
+        "claimsResolveToDeclaredSources": true,
+        "everySourceHasExactLocator": true,
+        "everySourceHasRightsBasis": true,
+        "claimScopeAndBoundaryPresent": true,
+        "uncertaintyAndReplicationPresent": true,
+        "prohibitedInferencesPresent": true,
+        "exactRevisionBound": true,
+        "substantialQualityEligible": true,
+        "noActiveReleaseAtSelection": true
+      },
+      "reviewTier": "internally-reviewed-canonical",
+      "publisherConflict": "Maha Strategies authors, reviews, and publishes this record. The review is AI-assisted internal editorial review, not independent expert endorsement, peer review, consensus, reproduction, scientific validation, or commercial certification.",
+      "packetDigest": "sha256:134658a8c92145fd9d7c18327d5b7956e6bbc5c349aaeec55d0c48c62d5746dc"
+    },
+    {
+      "schemaVersion": "maha-substantial-scale-review/1.0",
+      "recordId": "urn:maha:record:cell-free-gene-expression",
+      "domainSlug": "synthetic-biology",
+      "title": "Cell-free gene expression systems",
+      "targetSha256": "sha256:aa13c1ff302f9440de61005b80e9b5c585a8e983c107427a1fa3df9d4b3f9f8e",
+      "contractDigest": "sha256:84786cc1336603ba27451feade13be73ac4a4e6498c38cc5fd2c4885c74198bb",
+      "sourceIds": [
+        "source-noireaux-cell-free-2004"
+      ],
+      "claimIds": [
+        "urn:maha:claim:cell-free-gene-expression"
+      ],
+      "alignment": {
+        "sourceContractId": "source-noireaux-cell-free-2004",
+        "metadataVerified": true,
+        "sourceContentInspected": true,
+        "exactInspectedLocator": "PMC539773 version-of-record repository copy, Abstract and opening methods rationale",
+        "subjectSupported": true,
+        "artifactVersion": "repository-copy",
+        "inspectionDepth": "bounded inspected artifact",
+        "reason": "The source encapsulates an E. coli cell-free expression system in fed phospholipid vesicles and reports transcription–translation of plasmid genes, directly matching the record."
+      },
+      "checklistFacts": {
+        "claimsResolveToDeclaredSources": true,
+        "everySourceHasExactLocator": true,
+        "everySourceHasRightsBasis": true,
+        "claimScopeAndBoundaryPresent": true,
+        "uncertaintyAndReplicationPresent": true,
+        "prohibitedInferencesPresent": true,
+        "exactRevisionBound": true,
+        "substantialQualityEligible": true,
+        "noActiveReleaseAtSelection": true
+      },
+      "reviewTier": "internally-reviewed-canonical",
+      "publisherConflict": "Maha Strategies authors, reviews, and publishes this record. The review is AI-assisted internal editorial review, not independent expert endorsement, peer review, consensus, reproduction, scientific validation, or commercial certification.",
+      "packetDigest": "sha256:c3ec1012100a5210cd41d74fd64ff3f4c5e2400a3891a138361471c09f729dd7"
+    },
+    {
+      "schemaVersion": "maha-substantial-scale-review/1.0",
+      "recordId": "urn:maha:record:directed-evolution-workflows",
+      "domainSlug": "synthetic-biology",
+      "title": "Directed-evolution workflows",
+      "targetSha256": "sha256:23639467a2d9f137e25953d72c9f022b6437cb4a13c998c116381750e1dfd746",
+      "contractDigest": "sha256:c0b632277a3d9baaa3d6bce8283e199fe4fcbb1c7f5106d6cbe80246e8d2e951",
+      "sourceIds": [
+        "source-esvelt-pace-2011"
+      ],
+      "claimIds": [
+        "urn:maha:claim:directed-evolution-workflows"
+      ],
+      "alignment": {
+        "sourceContractId": "source-esvelt-pace-2011",
+        "metadataVerified": true,
+        "sourceContentInspected": true,
+        "exactInspectedLocator": "Nature version-of-record page, Abstract lines 35–39",
+        "subjectSupported": true,
+        "artifactVersion": "version-of-record",
+        "inspectionDepth": "declared inspected location",
+        "reason": "The abstract states that PACE transfers evolving genes through a modified bacteriophage life cycle in E. coli according to target activity and demonstrates continuous selection of T7 RNA polymerase variants."
+      },
+      "checklistFacts": {
+        "claimsResolveToDeclaredSources": true,
+        "everySourceHasExactLocator": true,
+        "everySourceHasRightsBasis": true,
+        "claimScopeAndBoundaryPresent": true,
+        "uncertaintyAndReplicationPresent": true,
+        "prohibitedInferencesPresent": true,
+        "exactRevisionBound": true,
+        "substantialQualityEligible": true,
+        "noActiveReleaseAtSelection": true
+      },
+      "reviewTier": "internally-reviewed-canonical",
+      "publisherConflict": "Maha Strategies authors, reviews, and publishes this record. The review is AI-assisted internal editorial review, not independent expert endorsement, peer review, consensus, reproduction, scientific validation, or commercial certification.",
+      "packetDigest": "sha256:e234f9e65872538dfdae51d71b3f17180ef33b82c67bd302242cc0d53522e882"
+    },
+    {
+      "schemaVersion": "maha-substantial-scale-review/1.0",
+      "recordId": "urn:maha:record:somatic-versus-germline-editing",
+      "domainSlug": "synthetic-biology",
+      "title": "Somatic versus germline genome editing",
+      "targetSha256": "sha256:a70486150e1b435628d254e6e59be26d1e9e4f14c335458ec2f548af86d02f34",
+      "contractDigest": "sha256:4ad9c4d58cfb69f5b6447f97049a57ba36ae19450c85dfe0df09c39bc54758ee",
+      "sourceIds": [
+        "source-liang-embryo-editing-2015"
+      ],
+      "claimIds": [
+        "urn:maha:claim:somatic-versus-germline-editing"
+      ],
+      "alignment": {
+        "sourceContractId": "source-liang-embryo-editing-2015",
+        "metadataVerified": true,
+        "sourceContentInspected": true,
+        "exactInspectedLocator": "Protein & Cell DOI 10.1007/s13238-015-0153-5, Abstract; HBB-editing Results; Discussion",
+        "subjectSupported": true,
+        "artifactVersion": "version-of-record",
+        "inspectionDepth": "declared inspected location",
+        "reason": "The article studies non-viable tripronuclear zygotes and explicitly discusses the germline context and safety barriers."
+      },
+      "checklistFacts": {
+        "claimsResolveToDeclaredSources": true,
+        "everySourceHasExactLocator": true,
+        "everySourceHasRightsBasis": true,
+        "claimScopeAndBoundaryPresent": true,
+        "uncertaintyAndReplicationPresent": true,
+        "prohibitedInferencesPresent": true,
+        "exactRevisionBound": true,
+        "substantialQualityEligible": true,
+        "noActiveReleaseAtSelection": true
+      },
+      "reviewTier": "internally-reviewed-canonical",
+      "publisherConflict": "Maha Strategies authors, reviews, and publishes this record. The review is AI-assisted internal editorial review, not independent expert endorsement, peer review, consensus, reproduction, scientific validation, or commercial certification.",
+      "packetDigest": "sha256:e9b6fe2e1bae304c98671a3279071b1c45c0ffccec84b5e42804d577abe312cd"
+    },
+    {
+      "schemaVersion": "maha-substantial-scale-review/1.0",
+      "recordId": "urn:maha:record:fusion-plasma-systems-divertor-heat-exhaust",
+      "domainSlug": "fusion-plasma-systems",
+      "title": "Divertor heat exhaust",
+      "targetSha256": "sha256:f593e2de8392bab77e626a475b9a7eb425784edcc5c95b81833ce46b96917f58",
+      "contractDigest": "sha256:f16d0bbeee6e951265c8d43c9c139812562a54702135a6e9d9033d3ab0487aac",
+      "sourceIds": [
+        "source-fusion-plasma-systems-iter-divertor"
+      ],
+      "claimIds": [
+        "urn:maha:claim:fusion-plasma-systems-divertor-heat-exhaust"
+      ],
+      "alignment": {
+        "sourceContractId": "source-fusion-plasma-systems-iter-divertor",
+        "metadataVerified": true,
+        "sourceContentInspected": true,
+        "exactInspectedLocator": "ITER \"Making it work\" page, divertor and heat-exhaust sections",
+        "subjectSupported": true,
+        "artifactVersion": "version-of-record",
+        "inspectionDepth": "abstract-only",
+        "reason": "The page describes the divertor as extracting heat and particles from the plasma and protecting the walls, which is the record subject."
+      },
+      "checklistFacts": {
+        "claimsResolveToDeclaredSources": true,
+        "everySourceHasExactLocator": true,
+        "everySourceHasRightsBasis": true,
+        "claimScopeAndBoundaryPresent": true,
+        "uncertaintyAndReplicationPresent": true,
+        "prohibitedInferencesPresent": true,
+        "exactRevisionBound": true,
+        "substantialQualityEligible": true,
+        "noActiveReleaseAtSelection": true
+      },
+      "reviewTier": "internally-reviewed-canonical",
+      "publisherConflict": "Maha Strategies authors, reviews, and publishes this record. The review is AI-assisted internal editorial review, not independent expert endorsement, peer review, consensus, reproduction, scientific validation, or commercial certification.",
+      "packetDigest": "sha256:f6725ca2d591b43e366f29603b3a7761d45834de22c16967ba5285d7691c0d0d"
+    },
+    {
+      "schemaVersion": "maha-substantial-scale-review/1.0",
+      "recordId": "urn:maha:record:fusion-plasma-systems-plasma-diagnostics",
+      "domainSlug": "fusion-plasma-systems",
+      "title": "Plasma diagnostics",
+      "targetSha256": "sha256:3e9e131b39bc4d39f6812cc9b4acf224fc1bd711f2e6580195e3440cee6639cc",
+      "contractDigest": "sha256:c4439bcd0c0dbeb302e8b0a7dd68cbf23e43e83417636dd918f51a00b575ec78",
+      "sourceIds": [
+        "source-fusion-plasma-systems-iter-support"
+      ],
+      "claimIds": [
+        "urn:maha:claim:fusion-plasma-systems-plasma-diagnostics"
+      ],
+      "alignment": {
+        "sourceContractId": "source-fusion-plasma-systems-iter-support",
+        "metadataVerified": true,
+        "sourceContentInspected": true,
+        "exactInspectedLocator": "ITER Supporting Systems index and linked Tritium Breeding, Fuelling, Diagnostics, Cryogenics, and Vacuum documentation",
+        "subjectSupported": true,
+        "artifactVersion": "version-of-record",
+        "inspectionDepth": "abstract-only",
+        "reason": "The diagnostics page directly describes instruments and measured plasma parameters."
+      },
+      "checklistFacts": {
+        "claimsResolveToDeclaredSources": true,
+        "everySourceHasExactLocator": true,
+        "everySourceHasRightsBasis": true,
+        "claimScopeAndBoundaryPresent": true,
+        "uncertaintyAndReplicationPresent": true,
+        "prohibitedInferencesPresent": true,
+        "exactRevisionBound": true,
+        "substantialQualityEligible": true,
+        "noActiveReleaseAtSelection": true
+      },
+      "reviewTier": "internally-reviewed-canonical",
+      "publisherConflict": "Maha Strategies authors, reviews, and publishes this record. The review is AI-assisted internal editorial review, not independent expert endorsement, peer review, consensus, reproduction, scientific validation, or commercial certification.",
+      "packetDigest": "sha256:5e9eff61c885c9379c103b7dd8de82e58373c6b310230840c9a9add49f662d10"
+    },
+    {
+      "schemaVersion": "maha-substantial-scale-review/1.0",
+      "recordId": "urn:maha:record:fusion-plasma-systems-tritium-fuel-cycle",
+      "domainSlug": "fusion-plasma-systems",
+      "title": "Tritium fuel cycle",
+      "targetSha256": "sha256:9de5d2839e77ee26fbbdcc9ec1b03e65d3649c86bacbd29a296f65374cbe81f7",
+      "contractDigest": "sha256:9217f39dca8146a50ef06342deae660519c584f77c129879604cd913f16cf8e9",
+      "sourceIds": [
+        "source-fusion-plasma-systems-iter-support"
+      ],
+      "claimIds": [
+        "urn:maha:claim:fusion-plasma-systems-tritium-fuel-cycle"
+      ],
+      "alignment": {
+        "sourceContractId": "source-fusion-plasma-systems-iter-support",
+        "metadataVerified": true,
+        "sourceContentInspected": true,
+        "exactInspectedLocator": "ITER Supporting Systems index and linked Tritium Breeding, Fuelling, Diagnostics, Cryogenics, and Vacuum documentation",
+        "subjectSupported": true,
+        "artifactVersion": "version-of-record",
+        "inspectionDepth": "abstract-only",
+        "reason": "The fuelling page directly describes the closed fuel cycle, isotope separation, storage, delivery, and detritiation."
+      },
+      "checklistFacts": {
+        "claimsResolveToDeclaredSources": true,
+        "everySourceHasExactLocator": true,
+        "everySourceHasRightsBasis": true,
+        "claimScopeAndBoundaryPresent": true,
+        "uncertaintyAndReplicationPresent": true,
+        "prohibitedInferencesPresent": true,
+        "exactRevisionBound": true,
+        "substantialQualityEligible": true,
+        "noActiveReleaseAtSelection": true
+      },
+      "reviewTier": "internally-reviewed-canonical",
+      "publisherConflict": "Maha Strategies authors, reviews, and publishes this record. The review is AI-assisted internal editorial review, not independent expert endorsement, peer review, consensus, reproduction, scientific validation, or commercial certification.",
+      "packetDigest": "sha256:438aaacc9e66b21180eb89b4b562d9377edf7209769232ee17c1fdf0539f0545"
+    },
+    {
+      "schemaVersion": "maha-substantial-scale-review/1.0",
+      "recordId": "urn:maha:record:fusion-plasma-systems-cryogenic-magnet-cooling",
+      "domainSlug": "fusion-plasma-systems",
+      "title": "Cryogenic magnet cooling",
+      "targetSha256": "sha256:81541da3c3360687ed7c4c24209e88d3479eb103cd5f03b08f3e13410f142cd4",
+      "contractDigest": "sha256:10f516c3da93812e8cfae39a856fc1ca2038cbea26a0190d5092ae230fbae617",
+      "sourceIds": [
+        "source-fusion-plasma-systems-iter-support"
+      ],
+      "claimIds": [
+        "urn:maha:claim:fusion-plasma-systems-cryogenic-magnet-cooling"
+      ],
+      "alignment": {
+        "sourceContractId": "source-fusion-plasma-systems-iter-support",
+        "metadataVerified": true,
+        "sourceContentInspected": true,
+        "exactInspectedLocator": "ITER Supporting Systems index and linked Tritium Breeding, Fuelling, Diagnostics, Cryogenics, and Vacuum documentation",
+        "subjectSupported": true,
+        "artifactVersion": "version-of-record",
+        "inspectionDepth": "abstract-only",
+        "reason": "The supporting-systems documentation identifies cryogenics as a system supporting ITER magnet operation."
+      },
+      "checklistFacts": {
+        "claimsResolveToDeclaredSources": true,
+        "everySourceHasExactLocator": true,
+        "everySourceHasRightsBasis": true,
+        "claimScopeAndBoundaryPresent": true,
+        "uncertaintyAndReplicationPresent": true,
+        "prohibitedInferencesPresent": true,
+        "exactRevisionBound": true,
+        "substantialQualityEligible": true,
+        "noActiveReleaseAtSelection": true
+      },
+      "reviewTier": "internally-reviewed-canonical",
+      "publisherConflict": "Maha Strategies authors, reviews, and publishes this record. The review is AI-assisted internal editorial review, not independent expert endorsement, peer review, consensus, reproduction, scientific validation, or commercial certification.",
+      "packetDigest": "sha256:72807a95e45db2ad902f3ab741b43479d93e6a2c72ecd131916f28af88956f5a"
+    },
+    {
+      "schemaVersion": "maha-substantial-scale-review/1.0",
+      "recordId": "urn:maha:record:advanced-materials-correlated-insulating-states",
+      "domainSlug": "advanced-materials",
+      "title": "Correlated insulating states",
+      "targetSha256": "sha256:3bd4d38a7f0f2d5e22a713e2f50ca6e6db51541de53cb7c3f87af5d77d9063d3",
+      "contractDigest": "sha256:e24387bd81c31d70907cb148ba6fbe964dc1bec5f264e3fd1175b04f46fd8613",
+      "sourceIds": [
+        "source-advanced-materials-magic-angle"
+      ],
+      "claimIds": [
+        "urn:maha:claim:advanced-materials-correlated-insulating-states"
+      ],
+      "alignment": {
+        "sourceContractId": "source-advanced-materials-magic-angle",
+        "metadataVerified": true,
+        "sourceContentInspected": true,
+        "exactInspectedLocator": "arXiv:1803.02342 abstract and reported phase diagram",
+        "subjectSupported": true,
+        "artifactVersion": "version-of-record",
+        "inspectionDepth": "abstract-only",
+        "reason": "The abstract reports correlated insulating states at half-filling in twisted bilayer graphene, which is the record subject."
+      },
+      "checklistFacts": {
+        "claimsResolveToDeclaredSources": true,
+        "everySourceHasExactLocator": true,
+        "everySourceHasRightsBasis": true,
+        "claimScopeAndBoundaryPresent": true,
+        "uncertaintyAndReplicationPresent": true,
+        "prohibitedInferencesPresent": true,
+        "exactRevisionBound": true,
+        "substantialQualityEligible": true,
+        "noActiveReleaseAtSelection": true
+      },
+      "reviewTier": "internally-reviewed-canonical",
+      "publisherConflict": "Maha Strategies authors, reviews, and publishes this record. The review is AI-assisted internal editorial review, not independent expert endorsement, peer review, consensus, reproduction, scientific validation, or commercial certification.",
+      "packetDigest": "sha256:25a98c157d5035d557207c5bff223e4924097886d7964904fdf269f5e2812791"
+    },
+    {
+      "schemaVersion": "maha-substantial-scale-review/1.0",
+      "recordId": "urn:maha:record:advanced-materials-magic-angle-superconductivity",
+      "domainSlug": "advanced-materials",
+      "title": "Magic angle superconductivity",
+      "targetSha256": "sha256:223180830fe00cc27716112698c27bd3c8c34ed198cf313d359e34fe3e9983d3",
+      "contractDigest": "sha256:2a010f37e40e7e10a020b1b19f9bf23a782c29150daab46cae40b45a5f2a1e3b",
+      "sourceIds": [
+        "source-advanced-materials-magic-angle"
+      ],
+      "claimIds": [
+        "urn:maha:claim:advanced-materials-magic-angle-superconductivity"
+      ],
+      "alignment": {
+        "sourceContractId": "source-advanced-materials-magic-angle",
+        "metadataVerified": true,
+        "sourceContentInspected": true,
+        "exactInspectedLocator": "arXiv:1803.02342 abstract and reported phase diagram",
+        "subjectSupported": true,
+        "artifactVersion": "version-of-record",
+        "inspectionDepth": "abstract-only",
+        "reason": "The paper reports superconductivity near the first magic angle with a phase diagram and zero-resistance transport, which is the record subject."
+      },
+      "checklistFacts": {
+        "claimsResolveToDeclaredSources": true,
+        "everySourceHasExactLocator": true,
+        "everySourceHasRightsBasis": true,
+        "claimScopeAndBoundaryPresent": true,
+        "uncertaintyAndReplicationPresent": true,
+        "prohibitedInferencesPresent": true,
+        "exactRevisionBound": true,
+        "substantialQualityEligible": true,
+        "noActiveReleaseAtSelection": true
+      },
+      "reviewTier": "internally-reviewed-canonical",
+      "publisherConflict": "Maha Strategies authors, reviews, and publishes this record. The review is AI-assisted internal editorial review, not independent expert endorsement, peer review, consensus, reproduction, scientific validation, or commercial certification.",
+      "packetDigest": "sha256:6e259110efbb6cfc358e4e5d3e4151d531a8c2abadb3507388ddc171344a44fe"
+    },
+    {
+      "schemaVersion": "maha-substantial-scale-review/1.0",
+      "recordId": "urn:maha:record:biomolecular-engineering-sequence-design-with-proteinmpnn",
+      "domainSlug": "biomolecular-engineering",
+      "title": "Sequence design with proteinmpnn",
+      "targetSha256": "sha256:b38ab10bfe119c71d5e1d33b0acc4475f4821974a641d50672cbd24021e765cc",
+      "contractDigest": "sha256:a59b2d1e37a4ae4c367af86c006b58ba961813ba3d44052f6fac37e2d6b43d53",
+      "sourceIds": [
+        "source-biomolecular-engineering-proteinmpnn"
+      ],
+      "claimIds": [
+        "urn:maha:claim:biomolecular-engineering-sequence-design-with-proteinmpnn"
+      ],
+      "alignment": {
+        "sourceContractId": "source-biomolecular-engineering-proteinmpnn",
+        "metadataVerified": true,
+        "sourceContentInspected": true,
+        "exactInspectedLocator": "bioRxiv preprint abstract (10.1101/2022.06.03.494563v1) of the ProteinMPNN study",
+        "subjectSupported": true,
+        "artifactVersion": "version-of-record",
+        "inspectionDepth": "abstract-only",
+        "reason": "The abstract presents ProteinMPNN as a deep-learning protein sequence design method and reports 52.4 percent native sequence recovery against 32.9 percent for Rosetta."
+      },
+      "checklistFacts": {
+        "claimsResolveToDeclaredSources": true,
+        "everySourceHasExactLocator": true,
+        "everySourceHasRightsBasis": true,
+        "claimScopeAndBoundaryPresent": true,
+        "uncertaintyAndReplicationPresent": true,
+        "prohibitedInferencesPresent": true,
+        "exactRevisionBound": true,
+        "substantialQualityEligible": true,
+        "noActiveReleaseAtSelection": true
+      },
+      "reviewTier": "internally-reviewed-canonical",
+      "publisherConflict": "Maha Strategies authors, reviews, and publishes this record. The review is AI-assisted internal editorial review, not independent expert endorsement, peer review, consensus, reproduction, scientific validation, or commercial certification.",
+      "packetDigest": "sha256:0ac2681c8132d8d3b25a75324b478126a91c539be54a259e2695a1e267991792"
+    },
+    {
+      "schemaVersion": "maha-substantial-scale-review/1.0",
+      "recordId": "urn:maha:record:biomolecular-engineering-experimental-fold-validation",
+      "domainSlug": "biomolecular-engineering",
+      "title": "Experimental fold validation",
+      "targetSha256": "sha256:c0fc9d83edcc19113f2ea0c0d9887f42623754876eb1d6e407170b24c244eb63",
+      "contractDigest": "sha256:2e2e21e7baf28966b47b02bf9b0f08a08075b6b91fa0f4eb51881fcba21beece",
+      "sourceIds": [
+        "source-biomolecular-engineering-proteinmpnn"
+      ],
+      "claimIds": [
+        "urn:maha:claim:biomolecular-engineering-experimental-fold-validation"
+      ],
+      "alignment": {
+        "sourceContractId": "source-biomolecular-engineering-proteinmpnn",
+        "metadataVerified": true,
+        "sourceContentInspected": true,
+        "exactInspectedLocator": "bioRxiv preprint abstract (10.1101/2022.06.03.494563v1) of the ProteinMPNN study",
+        "subjectSupported": true,
+        "artifactVersion": "version-of-record",
+        "inspectionDepth": "abstract-only",
+        "reason": "The abstract reports experimental validation of designs by X-ray crystallography, cryo-EM and functional studies."
+      },
+      "checklistFacts": {
+        "claimsResolveToDeclaredSources": true,
+        "everySourceHasExactLocator": true,
+        "everySourceHasRightsBasis": true,
+        "claimScopeAndBoundaryPresent": true,
+        "uncertaintyAndReplicationPresent": true,
+        "prohibitedInferencesPresent": true,
+        "exactRevisionBound": true,
+        "substantialQualityEligible": true,
+        "noActiveReleaseAtSelection": true
+      },
+      "reviewTier": "internally-reviewed-canonical",
+      "publisherConflict": "Maha Strategies authors, reviews, and publishes this record. The review is AI-assisted internal editorial review, not independent expert endorsement, peer review, consensus, reproduction, scientific validation, or commercial certification.",
+      "packetDigest": "sha256:319bbbee3bd7d88afc73c40a5c6d46ca39092b9fbc62f2cf54c9c9598eab8f29"
+    },
+    {
+      "schemaVersion": "maha-substantial-scale-review/1.0",
+      "recordId": "urn:maha:record:biomolecular-engineering-directed-enzyme-evolution",
+      "domainSlug": "biomolecular-engineering",
+      "title": "Directed enzyme evolution",
+      "targetSha256": "sha256:84b5247c53d2e106390e04dacfd9325874769cf98670ad9f272a53d176b574cd",
+      "contractDigest": "sha256:2ebee0fdb698f4371d0878a507398ccb5d230b8417ec7cf3b497d5aee969dc2e",
+      "sourceIds": [
+        "source-biomolecular-engineering-pace"
+      ],
+      "claimIds": [
+        "urn:maha:claim:biomolecular-engineering-directed-enzyme-evolution"
+      ],
+      "alignment": {
+        "sourceContractId": "source-biomolecular-engineering-pace",
+        "metadataVerified": true,
+        "sourceContentInspected": true,
+        "exactInspectedLocator": "PMC3084352 / NIHMS272507, PACE architecture, selection coupling, mutagenesis, T7 RNA-polymerase experiments, and Methods (full manuscript)",
+        "subjectSupported": true,
+        "artifactVersion": "accepted-manuscript",
+        "inspectionDepth": "full-document",
+        "reason": "PACE continuously evolves T7 RNA polymerase activities and specificity, directly demonstrating directed evolution of an enzyme."
+      },
+      "checklistFacts": {
+        "claimsResolveToDeclaredSources": true,
+        "everySourceHasExactLocator": true,
+        "everySourceHasRightsBasis": true,
+        "claimScopeAndBoundaryPresent": true,
+        "uncertaintyAndReplicationPresent": true,
+        "prohibitedInferencesPresent": true,
+        "exactRevisionBound": true,
+        "substantialQualityEligible": true,
+        "noActiveReleaseAtSelection": true
+      },
+      "reviewTier": "internally-reviewed-canonical",
+      "publisherConflict": "Maha Strategies authors, reviews, and publishes this record. The review is AI-assisted internal editorial review, not independent expert endorsement, peer review, consensus, reproduction, scientific validation, or commercial certification.",
+      "packetDigest": "sha256:d43008b39ce16b576f141e09bcd4ff12b464e7139061734d9915c51dd73c26de"
+    },
+    {
+      "schemaVersion": "maha-substantial-scale-review/1.0",
+      "recordId": "urn:maha:record:longevity-metabolism-senolytic-selectivity",
+      "domainSlug": "longevity-metabolism",
+      "title": "Senolytic selectivity",
+      "targetSha256": "sha256:97051b2ab5681c95d7564cccc58a2982d124f07d562274041fdbe41a500e876a",
+      "contractDigest": "sha256:f6af348d48f0ec38633d602c173a565e1cbfcdc35c2d88c6164f6f6cf12d3ed7",
+      "sourceIds": [
+        "source-longevity-metabolism-senolytics"
+      ],
+      "claimIds": [
+        "urn:maha:claim:longevity-metabolism-senolytic-selectivity"
+      ],
+      "alignment": {
+        "sourceContractId": "source-longevity-metabolism-senolytics",
+        "metadataVerified": true,
+        "sourceContentInspected": true,
+        "exactInspectedLocator": "Aging Cell 14(4) 644-658 article text: survival pathways, compound screening, cell assays and mouse experiments",
+        "subjectSupported": true,
+        "artifactVersion": "version-of-record",
+        "inspectionDepth": "abstract-only",
+        "reason": "The article reports dasatinib and quercetin preferentially killing senescent rather than proliferating cells, which is the record subject."
+      },
+      "checklistFacts": {
+        "claimsResolveToDeclaredSources": true,
+        "everySourceHasExactLocator": true,
+        "everySourceHasRightsBasis": true,
+        "claimScopeAndBoundaryPresent": true,
+        "uncertaintyAndReplicationPresent": true,
+        "prohibitedInferencesPresent": true,
+        "exactRevisionBound": true,
+        "substantialQualityEligible": true,
+        "noActiveReleaseAtSelection": true
+      },
+      "reviewTier": "internally-reviewed-canonical",
+      "publisherConflict": "Maha Strategies authors, reviews, and publishes this record. The review is AI-assisted internal editorial review, not independent expert endorsement, peer review, consensus, reproduction, scientific validation, or commercial certification.",
+      "packetDigest": "sha256:9e6a3230302935b5bfbf0a2f4f03c0e1d97bb522a791970317f2cd0de354d3cc"
+    },
+    {
+      "schemaVersion": "maha-substantial-scale-review/1.0",
+      "recordId": "urn:maha:record:longevity-metabolism-nad-salvage-pathway",
+      "domainSlug": "longevity-metabolism",
+      "title": "NAD+ salvage pathway",
+      "targetSha256": "sha256:f949f2492c19deabe6bab3aecfc1a481ad428f2f7f0684a6bc85be30946e9ecd",
+      "contractDigest": "sha256:3e92e5a7b03c1f7c5cca537ac1b227865729a1773872dda30ef5da0726f26c02",
+      "sourceIds": [
+        "source-longevity-metabolism-nad"
+      ],
+      "claimIds": [
+        "urn:maha:claim:longevity-metabolism-nad-salvage-pathway"
+      ],
+      "alignment": {
+        "sourceContractId": "source-longevity-metabolism-nad",
+        "metadataVerified": true,
+        "sourceContentInspected": true,
+        "exactInspectedLocator": "PMC7963035, NAD+ biosynthesis, consumption, compartmentalization, and ageing sections",
+        "subjectSupported": true,
+        "artifactVersion": "version-of-record",
+        "inspectionDepth": "abstract-only",
+        "reason": "The review describes NAD biosynthesis and salvage pathways directly."
+      },
+      "checklistFacts": {
+        "claimsResolveToDeclaredSources": true,
+        "everySourceHasExactLocator": true,
+        "everySourceHasRightsBasis": true,
+        "claimScopeAndBoundaryPresent": true,
+        "uncertaintyAndReplicationPresent": true,
+        "prohibitedInferencesPresent": true,
+        "exactRevisionBound": true,
+        "substantialQualityEligible": true,
+        "noActiveReleaseAtSelection": true
+      },
+      "reviewTier": "internally-reviewed-canonical",
+      "publisherConflict": "Maha Strategies authors, reviews, and publishes this record. The review is AI-assisted internal editorial review, not independent expert endorsement, peer review, consensus, reproduction, scientific validation, or commercial certification.",
+      "packetDigest": "sha256:887fff66baaa8b71ec7aac2908801d39d5ed010d18127d46e9357ece9f40c937"
+    },
+    {
+      "schemaVersion": "maha-substantial-scale-review/1.0",
+      "recordId": "urn:maha:record:neurotechnology-bci-micro-ecog-arrays",
+      "domainSlug": "neurotechnology-bci",
+      "title": "Micro ECoG arrays",
+      "targetSha256": "sha256:6f91762319e0f12599bdc8940af0b1e8ce73d09464afdd0edb4a03a43a3cfe1f",
+      "contractDigest": "sha256:a9f406948e2e9078d0b0d04352f79f0e7153eace2aae5e12caf3ab065f3f0df7",
+      "sourceIds": [
+        "source-neurotechnology-bci-micro-ecog"
+      ],
+      "claimIds": [
+        "urn:maha:claim:neurotechnology-bci-micro-ecog-arrays"
+      ],
+      "alignment": {
+        "sourceContractId": "source-neurotechnology-bci-micro-ecog",
+        "metadataVerified": true,
+        "sourceContentInspected": true,
+        "exactInspectedLocator": "PMC3235709, abstract, Electrode array fabrication and testing, in-vivo results, Discussion, and Methods",
+        "subjectSupported": true,
+        "artifactVersion": "version-of-record",
+        "inspectionDepth": "full-document",
+        "reason": "The paper directly reports a 360-channel active μECoG array with multiplexed sensors and in-vivo cortical recordings."
+      },
+      "checklistFacts": {
+        "claimsResolveToDeclaredSources": true,
+        "everySourceHasExactLocator": true,
+        "everySourceHasRightsBasis": true,
+        "claimScopeAndBoundaryPresent": true,
+        "uncertaintyAndReplicationPresent": true,
+        "prohibitedInferencesPresent": true,
+        "exactRevisionBound": true,
+        "substantialQualityEligible": true,
+        "noActiveReleaseAtSelection": true
+      },
+      "reviewTier": "internally-reviewed-canonical",
+      "publisherConflict": "Maha Strategies authors, reviews, and publishes this record. The review is AI-assisted internal editorial review, not independent expert endorsement, peer review, consensus, reproduction, scientific validation, or commercial certification.",
+      "packetDigest": "sha256:b117ed119736c157ac5a1189ea7930f07302a08a2470eb06676b35cbe64a500d"
+    },
+    {
+      "schemaVersion": "maha-substantial-scale-review/1.0",
+      "recordId": "urn:maha:record:neurotechnology-bci-intracortical-bci",
+      "domainSlug": "neurotechnology-bci",
+      "title": "Intracortical BCI",
+      "targetSha256": "sha256:9592f598d8258fad3c7da0a30ecbcf698a707f557eae4c263b684f293d046d3e",
+      "contractDigest": "sha256:323a8cd8e571259c7350ee5cb2be680f94398fed0ac0ddfbb3af57c24eed4d99",
+      "sourceIds": [
+        "source-neurotechnology-bci-intracortical-bci"
+      ],
+      "claimIds": [
+        "urn:maha:claim:neurotechnology-bci-intracortical-bci"
+      ],
+      "alignment": {
+        "sourceContractId": "source-neurotechnology-bci-intracortical-bci",
+        "metadataVerified": true,
+        "sourceContentInspected": true,
+        "exactInspectedLocator": "Hochberg et al. 2006 repository copy, pp. 164–171, participant, array, decoding, daily filter building, performance, Discussion, and Methods",
+        "subjectSupported": true,
+        "artifactVersion": "repository-copy",
+        "inspectionDepth": "full-document",
+        "reason": "The study implants a 96-microelectrode array in primary motor cortex and uses intracortical ensemble activity to control external devices."
+      },
+      "checklistFacts": {
+        "claimsResolveToDeclaredSources": true,
+        "everySourceHasExactLocator": true,
+        "everySourceHasRightsBasis": true,
+        "claimScopeAndBoundaryPresent": true,
+        "uncertaintyAndReplicationPresent": true,
+        "prohibitedInferencesPresent": true,
+        "exactRevisionBound": true,
+        "substantialQualityEligible": true,
+        "noActiveReleaseAtSelection": true
+      },
+      "reviewTier": "internally-reviewed-canonical",
+      "publisherConflict": "Maha Strategies authors, reviews, and publishes this record. The review is AI-assisted internal editorial review, not independent expert endorsement, peer review, consensus, reproduction, scientific validation, or commercial certification.",
+      "packetDigest": "sha256:24a3a32910ab3faf7dbc05614124637d0a727136d7d71e329439d4217950c879"
+    },
+    {
+      "schemaVersion": "maha-substantial-scale-review/1.0",
+      "recordId": "urn:maha:record:mechanistic-interpretability-induction-head-circuits",
+      "domainSlug": "mechanistic-interpretability",
+      "title": "Induction head circuits",
+      "targetSha256": "sha256:f0dcc8f3f5e33931ca881471e01d649d42ef29fd7dbd7bb67dcd5cc3de319f1b",
+      "contractDigest": "sha256:59ce63ee1bbe3cd5110dbe446515e8d44177709262d3fabda66e9a7c7acad9ce",
+      "sourceIds": [
+        "source-mechanistic-interpretability-induction"
+      ],
+      "claimIds": [
+        "urn:maha:claim:mechanistic-interpretability-induction-head-circuits"
+      ],
+      "alignment": {
+        "sourceContractId": "source-mechanistic-interpretability-induction",
+        "metadataVerified": true,
+        "sourceContentInspected": true,
+        "exactInspectedLocator": "arXiv:2209.11895 full text (repository copy of the Transformer Circuits Thread article), extracted to text (21,415 words) and searched in full",
+        "subjectSupported": true,
+        "artifactVersion": "repository-copy",
+        "inspectionDepth": "full-text-search",
+        "reason": "Full text searched: \"induction head\" appears 204 times and the article is the study of those circuits."
+      },
+      "checklistFacts": {
+        "claimsResolveToDeclaredSources": true,
+        "everySourceHasExactLocator": true,
+        "everySourceHasRightsBasis": true,
+        "claimScopeAndBoundaryPresent": true,
+        "uncertaintyAndReplicationPresent": true,
+        "prohibitedInferencesPresent": true,
+        "exactRevisionBound": true,
+        "substantialQualityEligible": true,
+        "noActiveReleaseAtSelection": true
+      },
+      "reviewTier": "internally-reviewed-canonical",
+      "publisherConflict": "Maha Strategies authors, reviews, and publishes this record. The review is AI-assisted internal editorial review, not independent expert endorsement, peer review, consensus, reproduction, scientific validation, or commercial certification.",
+      "packetDigest": "sha256:d8d9e2a860f2283edcbdc563e00749395c7076e525b0714f312d74d0c149910e"
+    },
+    {
+      "schemaVersion": "maha-substantial-scale-review/1.0",
+      "recordId": "urn:maha:record:mechanistic-interpretability-sparse-autoencoder-dictionaries",
+      "domainSlug": "mechanistic-interpretability",
+      "title": "Sparse autoencoder dictionaries",
+      "targetSha256": "sha256:3c1bf26d79f8b36ac42e1c9e9471cfa0746527abf8683d98f7835b00acaee19f",
+      "contractDigest": "sha256:3afde13650dd3813cd842025b5c9a4127c8eaa0d3120d534b4b89ab0fb4f121d",
+      "sourceIds": [
+        "source-mechanistic-interpretability-sae"
+      ],
+      "claimIds": [
+        "urn:maha:claim:mechanistic-interpretability-sparse-autoencoder-dictionaries"
+      ],
+      "alignment": {
+        "sourceContractId": "source-mechanistic-interpretability-sae",
+        "metadataVerified": true,
+        "sourceContentInspected": true,
+        "exactInspectedLocator": "arXiv:2309.08600 abstract and method summary",
+        "subjectSupported": true,
+        "artifactVersion": "version-of-record",
+        "inspectionDepth": "abstract-only",
+        "reason": "The abstract describes using sparse autoencoders to learn sets of sparsely activating features from language-model activations, which is the dictionary the record names."
+      },
+      "checklistFacts": {
+        "claimsResolveToDeclaredSources": true,
+        "everySourceHasExactLocator": true,
+        "everySourceHasRightsBasis": true,
+        "claimScopeAndBoundaryPresent": true,
+        "uncertaintyAndReplicationPresent": true,
+        "prohibitedInferencesPresent": true,
+        "exactRevisionBound": true,
+        "substantialQualityEligible": true,
+        "noActiveReleaseAtSelection": true
+      },
+      "reviewTier": "internally-reviewed-canonical",
+      "publisherConflict": "Maha Strategies authors, reviews, and publishes this record. The review is AI-assisted internal editorial review, not independent expert endorsement, peer review, consensus, reproduction, scientific validation, or commercial certification.",
+      "packetDigest": "sha256:f4704a80ba4621b963a5edb4afa055b364cf97b541f7c7d4d19faa5a920f5637"
+    },
+    {
+      "schemaVersion": "maha-substantial-scale-review/1.0",
+      "recordId": "urn:maha:record:agentic-systems-mcp-mcp-resource-discovery",
+      "domainSlug": "agentic-systems-mcp",
+      "title": "MCP resource discovery",
+      "targetSha256": "sha256:4973e2d14da8933977d08c924b336c2acd89c61eca249abc5022d66d7a4a65b5",
+      "contractDigest": "sha256:64de3f60b333fab367c0b9f79f819aeb60e0115e585355040c3b73e9b77a617c",
+      "sourceIds": [
+        "source-agentic-systems-mcp-mcp-core"
+      ],
+      "claimIds": [
+        "urn:maha:claim:agentic-systems-mcp-mcp-resource-discovery"
+      ],
+      "alignment": {
+        "sourceContractId": "source-agentic-systems-mcp-mcp-core",
+        "metadataVerified": true,
+        "sourceContentInspected": true,
+        "exactInspectedLocator": "MCP specification index: Features, Security and Trust & Safety sections",
+        "subjectSupported": true,
+        "artifactVersion": "version-of-record",
+        "inspectionDepth": "abstract-only",
+        "reason": "The specification names Resources as a server feature providing context and data to the user or model."
+      },
+      "checklistFacts": {
+        "claimsResolveToDeclaredSources": true,
+        "everySourceHasExactLocator": true,
+        "everySourceHasRightsBasis": true,
+        "claimScopeAndBoundaryPresent": true,
+        "uncertaintyAndReplicationPresent": true,
+        "prohibitedInferencesPresent": true,
+        "exactRevisionBound": true,
+        "substantialQualityEligible": true,
+        "noActiveReleaseAtSelection": true
+      },
+      "reviewTier": "internally-reviewed-canonical",
+      "publisherConflict": "Maha Strategies authors, reviews, and publishes this record. The review is AI-assisted internal editorial review, not independent expert endorsement, peer review, consensus, reproduction, scientific validation, or commercial certification.",
+      "packetDigest": "sha256:f0041243bda8e7f8c2fe1424cfa50776b60c7fb5b02da5f894b1391f13f509cd"
+    },
+    {
+      "schemaVersion": "maha-substantial-scale-review/1.0",
+      "recordId": "urn:maha:record:critical-supply-chains-critical-mineral-import-reliance",
+      "domainSlug": "critical-supply-chains",
+      "title": "Critical mineral import reliance",
+      "targetSha256": "sha256:0561fd738dfdd2daa0769ad4bf6585d6d447c2659052f7f3aca7945cc1547108",
+      "contractDigest": "sha256:494bdcd0c47df5a681bf8f9337184da3f01091c8b737440111a6e507c15fd061",
+      "sourceIds": [
+        "source-critical-supply-chains-supply-analysis"
+      ],
+      "claimIds": [
+        "urn:maha:claim:critical-supply-chains-critical-mineral-import-reliance"
+      ],
+      "alignment": {
+        "sourceContractId": "source-critical-supply-chains-supply-analysis",
+        "metadataVerified": true,
+        "sourceContentInspected": true,
+        "exactInspectedLocator": "USGS Mineral Supply Chain Analysis page, criticality and disruption sections",
+        "subjectSupported": true,
+        "artifactVersion": "version-of-record",
+        "inspectionDepth": "abstract-only",
+        "reason": "The page describes net import reliance statistics reported per commodity, which is the record subject."
+      },
+      "checklistFacts": {
+        "claimsResolveToDeclaredSources": true,
+        "everySourceHasExactLocator": true,
+        "everySourceHasRightsBasis": true,
+        "claimScopeAndBoundaryPresent": true,
+        "uncertaintyAndReplicationPresent": true,
+        "prohibitedInferencesPresent": true,
+        "exactRevisionBound": true,
+        "substantialQualityEligible": true,
+        "noActiveReleaseAtSelection": true
+      },
+      "reviewTier": "internally-reviewed-canonical",
+      "publisherConflict": "Maha Strategies authors, reviews, and publishes this record. The review is AI-assisted internal editorial review, not independent expert endorsement, peer review, consensus, reproduction, scientific validation, or commercial certification.",
+      "packetDigest": "sha256:48de196260f2d6749d627aa47f3ee82502e785f78153aa1d1645e8a1f34457e7"
+    }
+  ],
+  "canaryRecordIds": [
+    "urn:maha:record:transmon-qubit",
+    "urn:maha:record:circuit-quantum-electrodynamics",
+    "urn:maha:record:josephson-junction-nonlinearity",
+    "urn:maha:record:trapped-ion-qccd-architecture",
+    "urn:maha:record:neutral-atom-optical-tweezer-arrays",
+    "urn:maha:record:rydberg-blockade-entangling-gates",
+    "urn:maha:record:linear-optical-quantum-computation",
+    "urn:maha:record:silicon-spin-qubits",
+    "urn:maha:record:physical-and-logical-qubits",
+    "urn:maha:record:quantum-error-correction"
+  ],
+  "counts": {
+    "records": 64,
+    "canary": 10,
+    "scopedDecisions": 256
+  },
+  "boundary": "Maha Strategies authors, reviews, and publishes this record. The review is AI-assisted internal editorial review, not independent expert endorsement, peer review, consensus, reproduction, scientific validation, or commercial certification.",
+  "manifestDigest": "sha256:b94a6d2cfaf537457a5e7963088704188704501681740dda3b8a2117ccc5a192"
+}
