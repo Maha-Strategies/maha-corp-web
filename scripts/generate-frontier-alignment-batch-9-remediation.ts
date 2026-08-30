@@ -11,6 +11,8 @@ import {
   alignmentBlockers,
   alignmentFor,
 } from '../lib/frontier-source-alignment.ts'
+import { FRONTIER_DOMAIN_GRAPH_RECORDS } from '../lib/frontier-domain-graphs.ts'
+import { epistemicReviewTargetHash } from '../lib/epistemic-publication.ts'
 
 function digest(value: unknown): string {
   return `sha256:${createHash('sha256').update(canonicalJson(value), 'utf8').digest('hex')}`
@@ -18,14 +20,15 @@ function digest(value: unknown): string {
 
 const packets = ALIGNMENT_BATCH_9_REMEDIATION_PACKETS.map((packet) => {
   const active = alignmentFor(packet.recordId)
-  if (!active) throw new Error(`${packet.recordId}: no active alignment record.`)
+  const record = FRONTIER_DOMAIN_GRAPH_RECORDS.find((entry) => entry.id === packet.recordId)
+  if (!active || !record) throw new Error(`${packet.recordId}: no active alignment record.`)
   const prior = {
     sourceContractId: active.sourceContractId,
     sourceIdentifier: active.sourceIdentifier,
     sourceTitle: active.sourceTitle,
     locator: active.locator,
     verdict: active.evidence.subjectAligned,
-    recordRevisionSha256: active.recordRevisionSha256,
+    recordRevisionSha256: epistemicReviewTargetHash(record),
     blockers: alignmentBlockers(packet.recordId),
   }
   const packetWithoutDigest = {
@@ -128,7 +131,7 @@ const lines = [
 ]
 writeFileSync(
   'docs/frontier-audit/alignment-batch-9-remediation-packets.md',
-  `${lines.join('\n')}\n`,
+  `${lines.join('\n').trimEnd()}\n`,
 )
 
 console.log(JSON.stringify({
