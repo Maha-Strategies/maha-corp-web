@@ -21,6 +21,11 @@ import {
   safeSourcePath,
   verifyAttachments,
 } from '../../maha-lean-bridge/src/verifier.ts'
+import {
+  resolveTrustRoot,
+  TrustRootError,
+  type FormalProofTrustRoot,
+} from '../../../lib/evidence-dossier/formal-proof-trust-roots.ts'
 
 /**
  * Integrated verification of the formal proofs carried by a dossier package.
@@ -50,6 +55,68 @@ import {
 /** Project files a Lake build needs beyond the theorem sources themselves. */
 export const REQUIRED_PROJECT_FILES: readonly string[] = ['lakefile.toml', 'Maha.lean']
 
+/**
+ * Checks the packaged manifests against out-of-package authorization.
+ *
+ * Everything else in this file establishes that the package agrees with itself.
+ * This establishes that what it agrees on is what was authorized — a distinct
+ * question, and the one a self-consistent forgery answers falsely.
+ */
+export function checkBindingAuthority(
+  root: FormalProofTrustRoot,
+  bindingManifest: BindingManifest,
+  proofManifest: ProofManifest,
+  attachments: readonly FormalProofAttachment[],
+  dossierId: string,
+): string[] {
+  const findings: string[] = []
+  if (root.dossierId !== dossierId) {
+    findings.push('integrated-formal-proof-trust-root-dossier-mismatch')
+    return findings
+  }
+  if (bindingManifestDigest(bindingManifest) !== root.bindingManifestSha256) {
+    findings.push('integrated-formal-proof-binding-manifest-unauthorized')
+  }
+  if (manifestDigest(proofManifest) !== root.proofManifestSha256) {
+    findings.push('integrated-formal-proof-proof-manifest-unauthorized')
+  }
+  // A revision below the authorized one is a downgrade; above it is a manifest
+  // nobody has authorized yet. Neither is acceptable.
+  if (bindingManifest.revision !== root.bindingManifestRevision) {
+    findings.push('integrated-formal-proof-binding-revision-unauthorized')
+  }
+  for (const binding of bindingManifest.bindings) {
+    if (!root.authorizedTheorems.includes(binding.qualifiedTheorem)) {
+      findings.push('integrated-formal-proof-theorem-unauthorized')
+    }
+    for (const claimId of binding.claimIds) {
+      if (!root.authorizedClaimIds.includes(claimId)) findings.push('integrated-formal-proof-claim-unauthorized')
+    }
+    for (const operationId of binding.calculationOperationIds) {
+      if (!root.authorizedCalculationOperationIds.includes(operationId)) {
+        findings.push('integrated-formal-proof-operation-unauthorized')
+      }
+    }
+  }
+  // The attachments themselves, not only the manifest they cite.
+  for (const attachment of attachments) {
+    if (!root.authorizedTheorems.includes(qualifiedName(attachment))) {
+      findings.push('integrated-formal-proof-theorem-unauthorized')
+    }
+    for (const claimId of attachment.claimIds) {
+      if (!root.authorizedClaimIds.includes(claimId)) findings.push('integrated-formal-proof-claim-unauthorized')
+    }
+    for (const operationId of attachment.calculationOperationIds) {
+      if (!root.authorizedCalculationOperationIds.includes(operationId)) {
+        findings.push('integrated-formal-proof-operation-unauthorized')
+      }
+    }
+    if (attachment.toolchain !== root.toolchain) findings.push('integrated-formal-proof-toolchain-unauthorized')
+  }
+  if (proofManifest.toolchain !== root.toolchain) findings.push('integrated-formal-proof-toolchain-unauthorized')
+  return [...new Set(findings)]
+}
+
 export interface PackagedFormalProofInput {
   attachments: readonly FormalProofAttachment[]
   proofManifest: ProofManifest
@@ -60,6 +127,12 @@ export interface PackagedFormalProofInput {
   leanSources: Readonly<Record<string, string>>
   dossierId: string
   declaredClaimIds: readonly string[]
+  /**
+   * The out-of-package authority. Absent means unauthorized, never "skip the
+   * check": a package that arrives without a trust root is one nobody has
+   * authorized.
+   */
+  trustRoot?: FormalProofTrustRoot
 }
 
 /** Injected Lean runners. Test-only; the production entry point accepts none. */
@@ -133,6 +206,24 @@ export function verifyPackagedFormalProofs(input: PackagedFormalProofInput, runn
     findings.push('integrated-formal-binding-manifest-invalid')
     return findings
   }
+
+  // Authorization first. A package that agrees with itself about the wrong
+  // thing must not reach the Lean recheck and come back clean.
+  let trustRoot: FormalProofTrustRoot
+  try {
+    trustRoot = input.trustRoot ?? resolveTrustRoot(input.dossierId)
+  } catch (error) {
+    findings.push(
+      error instanceof TrustRootError && /Ambiguous/.test(error.message)
+        ? 'integrated-formal-proof-trust-root-ambiguous'
+        : error instanceof TrustRootError && /No trust root/.test(error.message)
+          ? 'integrated-formal-proof-trust-root-missing'
+          : 'integrated-formal-proof-trust-root-malformed',
+    )
+    return findings
+  }
+  findings.push(...checkBindingAuthority(trustRoot, input.bindingManifest, input.proofManifest, input.attachments, input.dossierId))
+  if (findings.length) return [...new Set(findings)]
 
   // The manifests must be the ones the attachments were authorized against.
   const bindingDigest = bindingManifestDigest(input.bindingManifest)

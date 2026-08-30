@@ -44,6 +44,15 @@ export interface FormalClaimBinding {
 
 export interface BindingManifest {
   schemaVersion: typeof BINDING_MANIFEST_VERSION
+  /**
+   * Manifest-level revision, incremented whenever any binding changes.
+   *
+   * Per-binding revisions cannot detect a downgrade: an attacker replaying an
+   * older whole manifest replays its per-binding revisions along with it, and
+   * every one of them agrees with itself. A monotonic number at the manifest
+   * level is what a trust root can pin against.
+   */
+  revision: number
   bindings: readonly FormalClaimBinding[]
 }
 
@@ -75,6 +84,9 @@ export class BindingError extends Error {}
 export function assertValidBindingManifest(manifest: BindingManifest): void {
   if (manifest.schemaVersion !== BINDING_MANIFEST_VERSION) {
     throw new BindingError(`Unknown binding manifest version ${manifest.schemaVersion}.`)
+  }
+  if (!Number.isInteger(manifest.revision) || manifest.revision < 1) {
+    throw new BindingError('A binding manifest must carry an integer revision of at least 1.')
   }
   const seenIds = new Set<string>()
   const seenKeys = new Set<string>()

@@ -5,8 +5,13 @@ import { join, resolve } from 'node:path'
 import test from 'node:test'
 
 import { FORMAL_PROOF_FIXTURE_CLAIM_ID, FORMAL_PROOF_FIXTURE_DOSSIER } from '../lib/evidence-dossier/formal-proof-fixture.ts'
-import { compileIntegratedPackage, renderDossierJsonLd, verifyIntegratedCalculationEvidence, verifyIntegratedCalculationEvidenceForTesting } from '../packages/evidence-dossier-builder/src/index.ts'
-import { expectedLeanSources, REQUIRED_PROJECT_FILES } from '../packages/evidence-dossier-builder/src/formal-proof-verification.ts'
+import { compileIntegratedPackage, renderDossierJsonLd, verifyIntegratedCalculationEvidence, verifyIntegratedCalculationEvidenceForTesting, verifyIntegratedPackageFullyForTesting } from '../packages/evidence-dossier-builder/src/index.ts'
+import { expectedLeanSources, REQUIRED_PROJECT_FILES, verifyPackagedFormalProofs } from '../packages/evidence-dossier-builder/src/formal-proof-verification.ts'
+import { assertValidTrustRoot, resolveTrustRoot } from '../lib/evidence-dossier/formal-proof-trust-roots.ts'
+import { bindingManifestDigest } from '../packages/maha-lean-bridge/src/bindings.ts'
+import { manifestDigest } from '../packages/maha-lean-bridge/src/verifier.ts'
+import { provenanceDigest } from '../lib/evidence-dossier/digest.ts'
+import { canonicalJson as leanCanonicalJson } from '../packages/maha-lean-bridge/src/canonicalize.ts'
 import { attachRuntimeWitnessToDossier, verifyComputationalWitnessReceipt, type ComputationalWitnessReceipt, type DossierRuntimeWitnessAttachment } from '../lib/evidence-dossier/runtime-witness.ts'
 import { canonicalJson } from '../lib/evidence-dossier/digest.ts'
 import { resolveActualLeanVersion } from '../packages/maha-lean-bridge/src/verifier.ts'
@@ -14,7 +19,7 @@ import { compileFromBinding } from '../packages/maha-lean-bridge/src/compiler.ts
 import { normalizeSourceText } from '../packages/maha-lean-bridge/src/canonicalize.ts'
 import { verifyAttachments } from '../packages/maha-lean-bridge/src/verifier.ts'
 import type { BindingManifest } from '../packages/maha-lean-bridge/src/bindings.ts'
-import type { FormalProofAttachment, ProofManifest } from '../packages/maha-lean-bridge/src/schema.ts'
+import { qualifiedName, type FormalProofAttachment, type ProofManifest } from '../packages/maha-lean-bridge/src/schema.ts'
 import { executeAndAttachCalculationToDossier } from '../packages/wasm-kernel/dist/dossier.js'
 import type { KernelArtifact } from '../packages/wasm-kernel/dist/execution.js'
 import { kernelArtifact } from './helpers/wasm-kernel.ts'
@@ -160,6 +165,66 @@ const LEAN_PRESENT = resolveActualLeanVersion(BRIDGE) !== null
 
 const fileText = (bundle: Awaited<ReturnType<typeof build>>, path: string) =>
   new TextDecoder().decode(bundle.files.find((f) => f.path === path)!.bytes)
+
+const TRUST_ROOT = resolveTrustRoot(FORMAL_PROOF_FIXTURE_DOSSIER.dossierId)
+
+/**
+ * Rewrites files inside a built package and recomputes every digest.
+ *
+ * Attacks must not depend on our packager cooperating: this produces the
+ * package an attacker would hand over, internally perfect and externally
+ * unauthorized.
+ */
+function repackage(
+  bundle: Awaited<ReturnType<typeof build>>,
+  replacements: Record<string, string>,
+): Awaited<ReturnType<typeof build>> {
+  const files = bundle.files.map((file) => {
+    const replacement = replacements[file.path]
+    if (replacement === undefined) return file
+    const bytes = new TextEncoder().encode(replacement)
+    return { ...file, bytes, sha256: `sha256:${createHash('sha256').update(bytes).digest('hex')}` }
+  })
+  const descriptors = files.map(({ bytes, ...rest }) => ({ ...rest, bytes: bytes.byteLength }))
+  // The package digest is recomputed from the rewritten manifest, so the
+  // hostile package is as internally consistent as an honest one.
+  const manifestBase = { ...(bundle.manifest as Record<string, unknown>) }
+  delete manifestBase.packageDigest
+  const manifest = { ...manifestBase, files: descriptors }
+  return {
+    files,
+    manifest: { ...manifest, packageDigest: provenanceDigest(manifest) },
+  } as Awaited<ReturnType<typeof build>>
+}
+
+/** The verifier's input, drawn from a package's own bytes. */
+function packagedInput(bundle: Awaited<ReturnType<typeof build>>, bindingManifest: BindingManifest) {
+  const leanSources: Record<string, string> = {}
+  for (const file of bundle.files) {
+    if (file.path.startsWith('lean/')) leanSources[file.path.slice('lean/'.length)] = new TextDecoder().decode(file.bytes)
+  }
+  return {
+    attachments: JSON.parse(fileText(bundle, 'formal-proofs.json')) as FormalProofAttachment[],
+    proofManifest: PROOF_MANIFEST,
+    bindingManifest,
+    toolchain: TOOLCHAIN,
+    leanSources,
+    dossierId: FORMAL_PROOF_FIXTURE_DOSSIER.dossierId,
+    declaredClaimIds: FORMAL_PROOF_FIXTURE_DOSSIER.claims.map((c) => c.claimId),
+  }
+}
+
+/** Verifies a package against a specific binding manifest and trust root. */
+async function verifyPackaged(
+  bundle: Awaited<ReturnType<typeof build>>,
+  bindingManifest: BindingManifest,
+  trustRoot: typeof TRUST_ROOT,
+): Promise<string[]> {
+  return verifyPackagedFormalProofs(
+    { ...packagedInput(bundle, bindingManifest), trustRoot },
+    { resolveLeanVersion: () => PINNED_VERSION, runLeanBuild: leanOk, runAxiomCheck: axiomsOk },
+  )
+}
 
 // -------------------------------------------------------------- lifecycle
 
@@ -473,7 +538,9 @@ test('an arbitrary object asserting verified and machineChecked is refused', asy
     calculationOperationIds: ['interval-add'],
     assurance: { machineChecked: true, empiricallyValidated: false, independentlyReproduced: false, compilerEquivalenceProven: false, scientificModelCertified: false },
   } as unknown as FormalProofAttachment
-  await assert.rejects(() => rebuild(() => [fabricated]), /binding-unknown|reconstruction-mismatch/)
+  // Authorization now fires before reconstruction, which is an earlier and
+  // stronger refusal than the one this test originally expected.
+  await assert.rejects(() => rebuild(() => [fabricated]), /theorem-unauthorized|binding-unknown|reconstruction-mismatch/)
 })
 
 test('a changed theorem statement is refused at packaging', async () => {
@@ -515,36 +582,158 @@ test('a stale binding revision is refused at packaging', async () => {
 
 // --------------------------------- adversarial: recomputed-digest tampering
 
-test('a changed binding manifest is refused even with every digest recomputed', async () => {
-  // The sophisticated attack: edit the binding, recompute its digest, recompute
-  // the attachment's citation of it, recompute file and package digests. It
-  // fails because the attachment no longer matches the *packaged* proof
-  // manifest's theorem, not because a digest looked stale.
+test('a self-consistent rewritten binding manifest is refused', async () => {
+  // The defect this replaced accepted `findings.length === 0`. A manifest that
+  // rewrote the authorized boundary to claim empirical validity, with every
+  // attachment recompiled and every digest recomputed, verified clean: real
+  // Lean ran, the theorems were genuine, every file agreed with every other.
+  // Integrity was intact and authorization was fabricated.
   const tampered: BindingManifest = {
     ...BINDINGS,
-    bindings: BINDINGS.bindings.map((b) => ({ ...b, informalBoundary: 'This proof establishes empirical validity.' })),
+    bindings: BINDINGS.bindings.map((b) => ({ ...b, informalBoundary: 'This proof establishes that the model is empirically valid.' })),
   }
-  const proofs = BINDINGS.bindings.map((b) =>
+  const proofs = tampered.bindings.map((b) =>
     compileFromBinding({ theoremId: `thm_${b.bindingId}`, bindingId: b.bindingId }, tampered, PROOF_MANIFEST, BRIDGE),
   ).map((p) => ({ ...p, proofStatus: 'verified' as const, assurance: { ...p.assurance, machineChecked: true } }))
 
-  // Packaged against the honest binding manifest: the citation is stale.
   await assert.rejects(
-    () => rebuild(() => proofs),
-    /binding-manifest-stale/,
+    () => rebuild(() => proofs, { formalProofEvidence: { ...evidence(), bindingManifest: tampered } }),
+    /binding-manifest-unauthorized/,
   )
-  // Packaged against the tampered manifest too, so digests are self-consistent.
-  const bundle = await compileIntegratedPackage(FORMAL_PROOF_FIXTURE_DOSSIER, [await calculation()], {
-    kernelArtifact: artifact,
-    formalProofs: proofs,
-    formalProofEvidence: { ...evidence(), bindingManifest: tampered },
+})
+
+test('a self-consistent rewritten manifest is refused at verification too', async () => {
+  // Packaging refuses it, but an attacker need not use our packager. Build the
+  // hostile package by rewriting an honest one's files directly, recomputing
+  // every file digest and the package digest, and verify that.
+  const honest = await build()
+  const tampered: BindingManifest = {
+    ...BINDINGS,
+    bindings: BINDINGS.bindings.map((b) => ({ ...b, informalBoundary: 'This proof establishes that the model is empirically valid.' })),
+  }
+  const proofs = tampered.bindings.map((b) =>
+    compileFromBinding({ theoremId: `thm_${b.bindingId}`, bindingId: b.bindingId }, tampered, PROOF_MANIFEST, BRIDGE),
+  ).map((p) => ({ ...p, proofStatus: 'verified' as const, assurance: { ...p.assurance, machineChecked: true } }))
+
+  const hostile = repackage(honest, {
+    'formal-claim-bindings.json': `${leanCanonicalJson(tampered)}\n`,
+    'formal-proofs.json': `${leanCanonicalJson(proofs)}\n`,
   })
-  // Self-consistent, so packaging accepts it — and the Lean recheck is what
-  // must then refuse it, because the boundary text is not what was authorized.
-  const findings = await verifyIntegratedCalculationEvidenceForTesting(bundle, {
+  const result = await verifyIntegratedPackageFullyForTesting(hostile, {
     resolveLeanVersion: () => PINNED_VERSION, runLeanBuild: leanOk, runAxiomCheck: axiomsOk,
   })
-  assert.ok(findings.length === 0 || findings.some((f) => f.startsWith('integrated-formal-proof-')), findings.join(','))
+  // Unconditional. Zero findings is never acceptable here.
+  assert.ok(result.findings.includes('integrated-formal-proof-binding-manifest-unauthorized'), result.findings.join(','))
+  assert.equal(result.bindingAuthorityValid, false)
+  assert.equal(result.fullyVerified, false)
+})
+
+test('integrity and authority are reported separately', async () => {
+  const honest = await build()
+  const clean = await verifyIntegratedPackageFullyForTesting(honest, {
+    resolveLeanVersion: () => PINNED_VERSION, runLeanBuild: leanOk, runAxiomCheck: axiomsOk,
+  })
+  assert.deepEqual(
+    { integrity: clean.packageIntegrityValid, lean: clean.leanRecheckExecuted, authority: clean.bindingAuthorityValid, full: clean.fullyVerified },
+    { integrity: true, lean: true, authority: true, full: true },
+  )
+
+  // A package can be internally perfect and still unauthorized. That is the
+  // distinction the single boolean was hiding.
+  const tampered: BindingManifest = { ...BINDINGS, revision: BINDINGS.revision + 1 }
+  const hostile = repackage(honest, { 'formal-claim-bindings.json': `${leanCanonicalJson(tampered)}\n` })
+  const result = await verifyIntegratedPackageFullyForTesting(hostile, {
+    resolveLeanVersion: () => PINNED_VERSION, runLeanBuild: leanOk, runAxiomCheck: axiomsOk,
+  })
+  assert.equal(result.bindingAuthorityValid, false)
+  assert.equal(result.fullyVerified, false)
+  assert.ok(result.findings.some((f) => f.includes('unauthorized')), result.findings.join(','))
+})
+
+test('a downgrade to an older manifest revision is refused', async () => {
+  const honest = await build()
+  const older: BindingManifest = { ...BINDINGS, revision: 1 }
+  const newerRoot = { ...TRUST_ROOT, bindingManifestRevision: 2 }
+  const result = await verifyPackaged(honest, older, newerRoot)
+  assert.ok(result.includes('integrated-formal-proof-binding-revision-unauthorized'), result.join(','))
+})
+
+test('a trust root for another dossier is refused', async () => {
+  const honest = await build()
+  const result = await verifyPackaged(honest, BINDINGS, { ...TRUST_ROOT, dossierId: 'dos_other_entirely' })
+  assert.ok(result.includes('integrated-formal-proof-trust-root-dossier-mismatch'), result.join(','))
+})
+
+test('a missing trust root is refused, never skipped', async () => {
+  assert.throws(() => resolveTrustRoot('dos_nobody_authorized', []), /No trust root/)
+  const honest = await build()
+  const findings = verifyPackagedFormalProofs(packagedInput(honest, BINDINGS), { resolveLeanVersion: () => PINNED_VERSION })
+  // Resolution falls back to the committed registry, which has no entry for a
+  // dossier nobody authorized.
+  const orphan = verifyPackagedFormalProofs({ ...packagedInput(honest, BINDINGS), dossierId: 'dos_nobody_authorized', trustRoot: undefined }, {})
+  assert.ok(orphan.includes('integrated-formal-proof-trust-root-missing'), orphan.join(','))
+  assert.ok(!findings.includes('integrated-formal-proof-trust-root-missing'))
+})
+
+test('duplicate trust roots are ambiguous and refused', () => {
+  assert.throws(() => resolveTrustRoot(TRUST_ROOT.dossierId, [TRUST_ROOT, { ...TRUST_ROOT }]), /Ambiguous/)
+})
+
+test('a malformed trust root is refused', () => {
+  for (const bad of [
+    { ...TRUST_ROOT, bindingManifestSha256: 'not-a-digest' },
+    { ...TRUST_ROOT, bindingManifestRevision: 0 },
+    { ...TRUST_ROOT, authorizedTheorems: [] },
+    { ...TRUST_ROOT, authorizedClaimIds: [] },
+    { ...TRUST_ROOT, toolchain: '  ' },
+    { ...TRUST_ROOT, authorizedClaimIds: ['a', 'a'] },
+  ]) {
+    assert.throws(() => assertValidTrustRoot(bad as typeof TRUST_ROOT), /must|lists/)
+  }
+})
+
+test('an alternate but genuinely proved theorem is refused', async () => {
+  // Maha.Angle.normalize_idempotent is real and machine-checked. It is not
+  // authorized for this dossier, and being true is not the same as being
+  // permitted.
+  const angle = PROOF_MANIFEST.theorems.find((t) => qualifiedName(t) === 'Maha.Angle.normalize_idempotent')!
+  const swapped: BindingManifest = {
+    ...BINDINGS,
+    bindings: [{ ...BINDINGS.bindings[0], qualifiedTheorem: 'Maha.Angle.normalize_idempotent' }],
+  }
+  const honest = await build()
+  const result = await verifyPackaged(honest, swapped, TRUST_ROOT)
+  assert.ok(result.includes('integrated-formal-proof-theorem-unauthorized'), `${angle.theoremName}: ${result.join(',')}`)
+})
+
+test('reordered or extended claim bindings are refused', async () => {
+  const honest = await build()
+  const extended: BindingManifest = {
+    ...BINDINGS,
+    bindings: BINDINGS.bindings.map((b) => ({ ...b, claimIds: [...b.claimIds, 'clm_smuggled'] })),
+  }
+  const result = await verifyPackaged(honest, extended, TRUST_ROOT)
+  assert.ok(result.includes('integrated-formal-proof-claim-unauthorized'), result.join(','))
+})
+
+test('an unauthorized calculation operation is refused', async () => {
+  const honest = await build()
+  const swapped: BindingManifest = {
+    ...BINDINGS,
+    bindings: BINDINGS.bindings.map((b) => ({ ...b, calculationOperationIds: ['thermal-resistance'] })),
+  }
+  const result = await verifyPackaged(honest, swapped, TRUST_ROOT)
+  assert.ok(result.includes('integrated-formal-proof-operation-unauthorized'), result.join(','))
+})
+
+test('an unauthorized toolchain is refused', async () => {
+  const honest = await build()
+  const drifted = { ...PROOF_MANIFEST, toolchain: 'leanprover/lean4:v4.0.0', leanVersion: '4.0.0' }
+  const findings = verifyPackagedFormalProofs(
+    { ...packagedInput(honest, BINDINGS), proofManifest: drifted, trustRoot: TRUST_ROOT },
+    { resolveLeanVersion: () => PINNED_VERSION },
+  )
+  assert.ok(findings.some((f) => f.includes('unauthorized')), findings.join(','))
 })
 
 test('a changed proof manifest is refused', async () => {
@@ -556,7 +745,7 @@ test('a changed proof manifest is refused', async () => {
   }
   await assert.rejects(
     () => rebuild((p) => p, { formalProofEvidence: { ...evidence(), proofManifest: tampered } }),
-    /manifest-stale|reconstruction-mismatch|manifest-source-mismatch/,
+    /proof-manifest-unauthorized|manifest-stale|reconstruction-mismatch|manifest-source-mismatch/,
   )
 })
 
@@ -654,4 +843,31 @@ test('omitting the runtime witness leaves the category honestly empty', async ()
   })
   assert.equal(bundle.manifest.runtimeWitnessCount, 0)
   assert.equal(fileText(bundle, 'runtime-witnesses.json').trim(), '[]')
+})
+
+test('the committed trust root matches the committed manifests', () => {
+  // If a fixture changes without the trust root being updated, authorization
+  // must fail loudly here rather than at some later verification. Updating the
+  // root is a deliberate, reviewed act; drifting into agreement is not.
+  assert.equal(bindingManifestDigest(BINDINGS), TRUST_ROOT.bindingManifestSha256)
+  assert.equal(manifestDigest(PROOF_MANIFEST), TRUST_ROOT.proofManifestSha256)
+  assert.equal(BINDINGS.revision, TRUST_ROOT.bindingManifestRevision)
+  assert.equal(TOOLCHAIN, TRUST_ROOT.toolchain)
+  for (const binding of BINDINGS.bindings) {
+    assert.ok(TRUST_ROOT.authorizedTheorems.includes(binding.qualifiedTheorem), binding.qualifiedTheorem)
+    for (const claimId of binding.claimIds) assert.ok(TRUST_ROOT.authorizedClaimIds.includes(claimId), claimId)
+    for (const op of binding.calculationOperationIds) {
+      assert.ok(TRUST_ROOT.authorizedCalculationOperationIds.includes(op), op)
+    }
+  }
+})
+
+test('the trust root claims no signature it does not have', () => {
+  // A trusted digest in reviewed source is what this is. Calling it a signature
+  // would overstate it, so nothing in the module may say so.
+  const source = readFileSync(resolve(import.meta.dirname, '../lib/evidence-dossier/formal-proof-trust-roots.ts'), 'utf8')
+  const claims = source.replace(/^\s*\*.*$/gm, '').replace(/\/\*[\s\S]*?\*\//g, '')
+  for (const word of ['signature', 'signed', 'signingKey']) {
+    assert.equal(new RegExp(`\\b${word}\\b`, 'i').test(claims), false, `trust root code must not claim a ${word}`)
+  }
 })

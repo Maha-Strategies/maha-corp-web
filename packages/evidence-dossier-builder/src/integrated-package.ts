@@ -206,14 +206,81 @@ export function verifyIntegratedPackage(bundle: IntegratedDossierPackage): strin
 
 /** Reruns every operation against the embedded WASM and rerenders PDF/JSON-LD. */
 /**
+ * The three questions a package must answer separately.
+ *
+ * Integrity is whether the files agree with one another. Authority is whether
+ * what they agree on is what was authorized. A self-consistent forgery answers
+ * the first yes and the second no, which is why collapsing them into a single
+ * boolean hid the defect this separation exists to expose.
+ */
+export interface IntegratedVerificationResult {
+  packageIntegrityValid: boolean
+  leanRecheckExecuted: boolean
+  bindingAuthorityValid: boolean
+  /** True only when all three hold. */
+  fullyVerified: boolean
+  findings: string[]
+}
+
+const AUTHORITY_CODES = [
+  'integrated-formal-proof-trust-root-missing',
+  'integrated-formal-proof-trust-root-malformed',
+  'integrated-formal-proof-trust-root-ambiguous',
+  'integrated-formal-proof-trust-root-dossier-mismatch',
+  'integrated-formal-proof-binding-manifest-unauthorized',
+  'integrated-formal-proof-proof-manifest-unauthorized',
+  'integrated-formal-proof-binding-revision-unauthorized',
+  'integrated-formal-proof-theorem-unauthorized',
+  'integrated-formal-proof-claim-unauthorized',
+  'integrated-formal-proof-operation-unauthorized',
+  'integrated-formal-proof-toolchain-unauthorized',
+] as const
+
+/**
  * The production verification path.
  *
  * It accepts a package and nothing else. There is deliberately no way to pass a
  * Lean runner in: a caller who could supply one could manufacture a valid
- * verdict, which is exactly what this function exists to make impossible.
+ * verdict, which is exactly what this function exists to make impossible. The
+ * trust root is resolved from reviewed source, never from the package.
  */
 export async function verifyIntegratedCalculationEvidence(bundle: IntegratedDossierPackage): Promise<string[]> {
   return verifyIntegratedEvidenceInternal(bundle, {})
+}
+
+/** The same verification, reported as three separable verdicts. */
+export async function verifyIntegratedPackageFully(bundle: IntegratedDossierPackage): Promise<IntegratedVerificationResult> {
+  return classifyFindings(bundle, await verifyIntegratedEvidenceInternal(bundle, {}))
+}
+
+/** Test-only structured verification. Carries runners; no production standing. */
+export async function verifyIntegratedPackageFullyForTesting(
+  bundle: IntegratedDossierPackage,
+  runners: LeanRunners,
+): Promise<IntegratedVerificationResult> {
+  return classifyFindings(bundle, await verifyIntegratedEvidenceInternal(bundle, runners))
+}
+
+function classifyFindings(bundle: IntegratedDossierPackage, findings: string[]): IntegratedVerificationResult {
+  const hasFormalProofs = Number(bundle.manifest.formalProofCount ?? 0) > 0
+  const authorityFailed = findings.some((finding) => AUTHORITY_CODES.some((code) => finding.startsWith(code)))
+  const recheckFailed = findings.some((finding) => finding.startsWith('integrated-formal-proof-recheck-'))
+  const integrityFailed = findings.some(
+    (finding) => !AUTHORITY_CODES.some((code) => finding.startsWith(code)) && !finding.startsWith('integrated-formal-proof-recheck-'),
+  )
+  const bindingAuthorityValid = hasFormalProofs ? !authorityFailed : true
+  // Authorization is checked before the recheck runs, so a package that failed
+  // authority never had its proofs rechecked and must not be reported as though
+  // it did.
+  const leanRecheckExecuted = hasFormalProofs ? !recheckFailed && !authorityFailed : true
+  const packageIntegrityValid = !integrityFailed
+  return {
+    packageIntegrityValid,
+    leanRecheckExecuted,
+    bindingAuthorityValid,
+    fullyVerified: packageIntegrityValid && leanRecheckExecuted && bindingAuthorityValid && findings.length === 0,
+    findings,
+  }
 }
 
 /**
