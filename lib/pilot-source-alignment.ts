@@ -3,6 +3,9 @@ import { createHash } from 'node:crypto'
 import { EPISTEMIC_RECORDS } from './epistemic-pilots.ts'
 import { epistemicReviewTargetHash } from './epistemic-publication.ts'
 import { ALIGNMENT_VERDICTS, type AlignmentVerdict } from './frontier-source-alignment.ts'
+import { PILOT_BATCH_12_JUDGEMENTS, PILOT_BATCH_12_SLUGS } from './pilot-source-alignment-batch-12.ts'
+import { PILOT_BATCH_13_JUDGEMENTS, PILOT_BATCH_13_SLUGS } from './pilot-source-alignment-batch-13.ts'
+import { PILOT_BATCH_14_JUDGEMENTS, PILOT_BATCH_14_SLUGS } from './pilot-source-alignment-batch-14.ts'
 
 /**
  * Source-alignment audit for the fifty canonical pilot records.
@@ -35,6 +38,7 @@ export const VERSION_RELATIONSHIPS = [
   'preprint-of-the-declared-version-of-record',
   'declared-version-of-record-inspected',
   'declared-version-of-record-not-retrieved',
+  'repository-copy-of-the-declared-version-of-record',
   'no-declared-source',
 ] as const
 export type VersionRelationship = (typeof VERSION_RELATIONSHIPS)[number]
@@ -48,7 +52,7 @@ export const PILOT_ARTIFACT_VERSIONS = [
 ] as const
 export type PilotArtifactVersion = (typeof PILOT_ARTIFACT_VERSIONS)[number]
 
-interface PilotJudgement {
+export interface PilotJudgement {
   domainSlug: PilotDomain
   /** Null only for a hypothesis record that declares no source at all. */
   sourceContractId: string | null
@@ -64,11 +68,10 @@ interface PilotJudgement {
 }
 
 /**
- * Nine records had their source read this sprint, across four artifacts: the
- * Koch transmon paper, the Blais circuit-QED architecture, the Fowler surface
- * code review and the Temme mitigation paper, each as the arXiv preprint of the
- * declared version of record. Everything else is metadata-verified only and is
- * recorded as insufficient-evidence, which blocks.
+ * The initial audit read nine records across four arXiv artifacts. Later
+ * append-only batches overlay exact, inspected judgements while the original
+ * entries remain visible here as the prior state. Everything not inspected is
+ * metadata-only and remains insufficient-evidence, which blocks.
  */
 const PILOT_JUDGEMENTS: Readonly<Record<string, PilotJudgement>> = {
   'adenine-base-editing': {
@@ -773,6 +776,27 @@ const PILOT_JUDGEMENTS: Readonly<Record<string, PilotJudgement>> = {
   },
 }
 
+const ALL_PILOT_JUDGEMENTS: Readonly<Record<string, PilotJudgement>> = {
+  ...PILOT_JUDGEMENTS,
+  ...PILOT_BATCH_12_JUDGEMENTS,
+  ...PILOT_BATCH_13_JUDGEMENTS,
+  ...PILOT_BATCH_14_JUDGEMENTS,
+}
+
+{
+  const prior = new Set<string>([...PILOT_BATCH_12_SLUGS, ...PILOT_BATCH_13_SLUGS])
+  for (const slug of PILOT_BATCH_14_SLUGS) {
+    if (prior.has(slug)) throw new Error(`${slug} appears in more than one Pilot alignment batch.`)
+  }
+}
+
+{
+  const batch12 = new Set<string>(PILOT_BATCH_12_SLUGS)
+  for (const slug of PILOT_BATCH_13_SLUGS) {
+    if (batch12.has(slug)) throw new Error(`${slug} appears in both Pilot Batch 12 and Batch 13.`)
+  }
+}
+
 export interface PilotAlignmentEntry extends PilotJudgement {
   recordId: string
   slug: string
@@ -790,7 +814,7 @@ export interface PilotAlignmentEntry extends PilotJudgement {
 export const PILOT_ALIGNMENT_AUDIT: readonly PilotAlignmentEntry[] = EPISTEMIC_RECORDS
   .filter((record) => (PILOT_DOMAINS as readonly string[]).includes(record.domainSlug))
   .map((record) => {
-    const judgement = PILOT_JUDGEMENTS[record.slug]
+    const judgement = ALL_PILOT_JUDGEMENTS[record.slug]
     if (!judgement) throw new Error(`${record.slug} is a pilot record with no alignment judgement.`)
     return {
       ...judgement,
@@ -819,8 +843,11 @@ export const PILOT_ALIGNMENT_AUDIT: readonly PilotAlignmentEntry[] = EPISTEMIC_R
   if (new Set(ids).size !== ids.length) throw new Error('Duplicate record in the pilot alignment audit.')
 
   const known = new Set(PILOT_ALIGNMENT_AUDIT.map((entry) => entry.slug))
-  for (const slug of Object.keys(PILOT_JUDGEMENTS)) {
+  for (const slug of Object.keys(ALL_PILOT_JUDGEMENTS)) {
     if (!known.has(slug)) throw new Error(`${slug} is judged but is not a pilot record.`)
+  }
+  for (const slug of PILOT_BATCH_12_SLUGS) {
+    if (!Object.hasOwn(PILOT_JUDGEMENTS, slug)) throw new Error(`${slug} is not an existing pilot judgement.`)
   }
   for (const domain of PILOT_DOMAINS) {
     const count = PILOT_ALIGNMENT_AUDIT.filter((entry) => entry.domainSlug === domain).length
