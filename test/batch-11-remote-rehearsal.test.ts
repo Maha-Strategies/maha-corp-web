@@ -34,25 +34,8 @@ const healthy = (): RegistryProbeInput => ({
   statusVocabulary: [...KNOWN_RELEASE_STATUSES],
 })
 const kindOf = (id: string) => BATCH_11_LINEAGE_DECLARATIONS.find((d) => d.recordId === id)!.declaredReleaseKind
-/**
- * A releasable stand-in for the cohort.
- *
- * The real cohort is blocked on source alignment. That is an evidentiary fact
- * about the corpus rather than a property of this machinery, and it is
- * asserted directly in test/batch-11-alignment-eligibility.test.ts. These tests
- * cover the lifecycle mechanism - phases, ordering, digests, refusals, cleanup
- * - which has to keep working whatever the corpus says on a given day.
- *
- * Only the alignment failure is lifted, and only here. Every other gate result
- * is the real one, so a mechanism regression still fails these tests.
- */
-const releasable = <T extends { failures: readonly string[]; ready: boolean }>(gate: T): T => {
-  const failures = gate.failures.filter((failure) => failure !== 'source-alignment-not-clear')
-  return { ...gate, failures, ready: failures.length === 0 }
-}
-
 const gatesFor = (input: RegistryProbeInput) =>
-  BATCH_11_LINEAGE_DECLARATIONS.map((d) => releasable(gateRecord(probeLineage(d.recordId, input), d.declaredReleaseKind)))
+  BATCH_11_LINEAGE_DECLARATIONS.map((d) => gateRecord(probeLineage(d.recordId, input), d.declaredReleaseKind))
 
 // ------------------------------------------------------------- happy path
 
@@ -84,7 +67,7 @@ test('adversarial: empty registry response', () => {
     assert.equal(gateRecord(probe, kindOf(id)).ready, false, id)
   }
   // Critically, the initial record must NOT be licensed by an empty registry.
-  const gate = releasable(gateRecord(probeLineage(INITIAL_ID, input), 'initial'))
+  const gate = gateRecord(probeLineage(INITIAL_ID, input), 'initial')
   assert.ok(gate.failures.includes('initial-requires-absent-lineage'), gate.failures.join(','))
 })
 
@@ -95,7 +78,7 @@ test('adversarial: registry query failure', () => {
     assert.equal(probe.state, 'probe-failed', id)
     assert.equal(gateRecord(probe, kindOf(id)).ready, false, id)
   }
-  const gate = releasable(gateRecord(probeLineage(INITIAL_ID, input), 'initial'))
+  const gate = gateRecord(probeLineage(INITIAL_ID, input), 'initial')
   assert.ok(gate.failures.includes('lineage-probe-failed'))
   assert.ok(gate.failures.includes('initial-requires-absent-lineage'), 'a failed probe must never license an initial release')
 })
@@ -158,7 +141,7 @@ test('adversarial: incomplete status vocabulary blocks an initial release', () =
   // If the projection cannot represent withdrawn rows, zero rows is not
   // conclusive and an initial release must not proceed on it.
   const input: RegistryProbeInput = { ...healthy(), statusVocabulary: ['active'] }
-  const gate = releasable(gateRecord(probeLineage(INITIAL_ID, input), 'initial'))
+  const gate = gateRecord(probeLineage(INITIAL_ID, input), 'initial')
   assert.equal(gate.ready, false)
   assert.ok(gate.failures.includes('status-vocabulary-incomplete'), gate.failures.join(','))
 })
