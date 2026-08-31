@@ -508,6 +508,7 @@ test('a failure after binding still destroys the Preview and ephemeral branch', 
 const WORKFLOW = readFileSync(resolve(ROOT, '.github/workflows/preview-batch-11-remote-rehearsal.yml'), 'utf8')
 const SCRIPT = readFileSync(resolve(ROOT, 'scripts/run-batch-11-remote-rehearsal.ts'), 'utf8')
 const BINDING = readFileSync(resolve(ROOT, 'lib/batch-11-preview-binding.ts'), 'utf8')
+const POOLER = readFileSync(resolve(ROOT, 'lib/batch-11-supabase-pooler.ts'), 'utf8')
 
 test('the rehearsal never exits authorized-but-unimplemented', () => {
   // The mode this change exists to remove. A run that satisfies all three locks
@@ -585,7 +586,8 @@ test('no credential is passed as a command argument', () => {
   for (const valueVariable of ['managementToken', 'branchServiceRole', 'operationsToken', 'authorityToken', 'bypass', 'vercelToken']) {
     assert.ok(!deployArgv.includes(valueVariable), `${valueVariable} must not reach argv`)
   }
-  assert.ok(SCRIPT.includes('PGPASSWORD'), 'the database password must travel in the environment')
+  assert.ok(POOLER.includes('PGPASSWORD: password'), 'the database password must travel in the environment')
+  assert.ok(SCRIPT.includes('branchPassword: String(detail.db_pass)'), 'the isolated branch password must bind the pooler environment')
   assert.match(BINDING, /'--env', 'SUPABASE_SERVICE_ROLE_KEY'/)
   assert.doesNotMatch(deployArgv, /--env', `[^`]*=/, 'Vercel runtime values must be inherited by name, never embedded in argv')
 })

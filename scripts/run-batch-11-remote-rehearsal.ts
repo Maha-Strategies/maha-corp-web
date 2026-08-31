@@ -51,6 +51,7 @@ import {
   vercelDeploymentArguments,
 } from '../lib/batch-11-preview-binding.ts'
 import { batch11RevisionReviewInputs } from '../lib/batch-11-revision-canary.ts'
+import { previewSessionPoolerEnvironment } from '../lib/batch-11-supabase-pooler.ts'
 
 /**
  * Batch 11 mixed-lineage remote Preview rehearsal.
@@ -317,13 +318,12 @@ const driver: RehearsalDriver = {
     const detail = await readyBranchDetail(branchId)
     const branchRef = String(detail.ref)
     const jwtSecret = String(detail.jwt_secret)
-    branchEnv = {
-      PGHOST: String(detail.db_host ?? ''),
-      PGPORT: String(detail.db_port ?? '5432'),
-      PGUSER: String(detail.db_user ?? 'postgres'),
-      PGPASSWORD: String(detail.db_pass),
-      PGDATABASE: 'postgres',
-    }
+    const poolerConfiguration = await management(`/v1/projects/${branchRef}/config/database/pooler`)
+    branchEnv = previewSessionPoolerEnvironment({
+      branchRef,
+      branchPassword: String(detail.db_pass),
+      poolerConfiguration,
+    })
     branchApiUrl = `https://${branchRef}.supabase.co`
     branchServiceRole = deriveEphemeralServiceRole(jwtSecret, Math.floor(Date.now() / 1000))
     lifecycleState.previewBranchCreated = true
