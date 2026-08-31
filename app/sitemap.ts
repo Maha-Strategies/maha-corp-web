@@ -114,7 +114,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${baseUrl}/start` },
     { url: `${baseUrl}/policy` },
     { url: `${baseUrl}/contact` },
-    { url: `${baseUrl}/demo`, lastModified: new Date('2026-08-31') },
     { url: `${baseUrl}/network`, lastModified: new Date('2026-07-26') },
     { url: `${baseUrl}/case-studies`, lastModified: new Date('2026-07-26') },
     { url: `${baseUrl}/projects/mayon`, lastModified: new Date('2026-07-24') },

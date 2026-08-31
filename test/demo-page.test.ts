@@ -7,7 +7,6 @@ const ROOT = join(import.meta.dirname, '..')
 const page = readFileSync(join(ROOT, 'app/demo/page.tsx'), 'utf8')
 const embed = readFileSync(join(ROOT, 'components/YouTubeLiteEmbed.tsx'), 'utf8')
 const homepage = readFileSync(join(ROOT, 'app/page.tsx'), 'utf8')
-const sitemap = readFileSync(join(ROOT, 'app/sitemap.ts'), 'utf8')
 const llms = readFileSync(join(ROOT, 'lib/llms-manifest.ts'), 'utf8')
 
 test('demo page publishes the correct video and privacy-enhanced player', () => {
@@ -28,9 +27,8 @@ test('demo page links only to existing evidence artifacts', () => {
   }
 })
 
-test('demo is discoverable from the homepage and machine indexes', () => {
+test('demo is discoverable from the homepage and machine index', () => {
   assert.match(homepage, /href="\/demo"/)
-  assert.match(sitemap, /`\$\{baseUrl\}\/demo`/)
   assert.match(llms, /https:\/\/www\.mahastrategies\.com\/demo/)
 })
 
