@@ -33,6 +33,14 @@ export function contactSourcePath(value: unknown): string {
   return '/contact'
 }
 
+// Production's existing inbound-submission ledger is intentionally constrained
+// to the original human-intake path. Preserve the more specific public origin
+// in the revenue record and notification, while keeping the durable intake
+// insert compatible until the wider migration-history reconciliation is done.
+export function inboundLedgerSourcePath(): '/contact' {
+  return '/contact'
+}
+
 export function isLikelyCommercialSolicitation(input: { question: string; context?: string }): boolean {
   const text = `${input.question}\n${input.context ?? ''}`
   return SOLICITATION_PATTERNS.some((pattern) => pattern.test(text))
