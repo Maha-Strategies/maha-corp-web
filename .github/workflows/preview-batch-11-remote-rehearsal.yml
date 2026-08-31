@@ -187,7 +187,19 @@ jobs:
               const branches = await listed.json()
               return (Array.isArray(branches) ? branches : []).filter((b) => String(b.name ?? "").includes(marker))
             }
-            const found = await mine()
+            const wait = (milliseconds) => new Promise((resolve) => setTimeout(resolve, milliseconds))
+            // Branch creation is asynchronous. A failed rehearsal can reach
+            // cleanup before a newly-created branch appears in the list, so
+            // absence is accepted only after a bounded settling window.
+            const discover = async () => {
+              for (let attempt = 0; attempt < 15; attempt += 1) {
+                const found = await mine()
+                if (found.length > 0) return found
+                if (attempt < 14) await wait(2_000)
+              }
+              return []
+            }
+            const found = await discover()
             for (const branch of found) {
               const gone = await fetch(`https://api.supabase.com/v1/branches/${branch.id}`, { method: "DELETE", headers })
               // 404 means a concurrent or prior pass already removed it.
@@ -195,6 +207,7 @@ jobs:
                 throw new Error(`Failed to destroy branch ${branch.id}: ${gone.status}`)
               }
             }
+            if (found.length > 0) await wait(2_000)
             const survivors = await mine()
             if (survivors.length > 0) {
               throw new Error(`${survivors.length} ephemeral branch(es) survived cleanup for run ${process.env.GITHUB_RUN_ID}.`)

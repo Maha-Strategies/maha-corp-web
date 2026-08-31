@@ -158,6 +158,7 @@ globalThis.fetch = async (url, init = {}) => {
   listing += 1
   return { ok: next.status >= 200 && next.status < 300, status: next.status, json: async () => next.rows }
 }
+globalThis.setTimeout = (callback) => { callback(); return 0 }
 process.on('exit', () => { record(${JSON.stringify(calls)}, JSON.stringify(deleted)) })
 ${cleanupScript()}
 `
@@ -194,6 +195,19 @@ test('cleanup destroys a branch this run created and proves it is gone', () => {
     listings: [{ status: 200, rows: [branch('77')] }, { status: 200, rows: [] }],
   })
   assert.equal(result.code, 0)
+  assert.deepEqual(result.deleted, ['br_1'])
+  assert.match(result.stdout, /Cleanup converged\. 1 branch\(es\) destroyed, 0 surviving\./)
+})
+
+test('cleanup waits for an asynchronously materialized branch before declaring convergence', () => {
+  const result = runCleanup({
+    listings: [
+      { status: 200, rows: [] },
+      { status: 200, rows: [branch('77')] },
+      { status: 200, rows: [] },
+    ],
+  })
+  assert.equal(result.code, 0, result.stderr)
   assert.deepEqual(result.deleted, ['br_1'])
   assert.match(result.stdout, /Cleanup converged\. 1 branch\(es\) destroyed, 0 surviving\./)
 })

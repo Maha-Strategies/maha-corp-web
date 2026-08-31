@@ -202,8 +202,14 @@ const array = (value: unknown, label: string): Json[] => {
   return value.map((entry, index) => object(entry, `${label}[${index}]`))
 }
 
+interface ManagementResponse {
+  ok: boolean
+  status: number
+  body: unknown
+}
+
 /** Management API call. The token travels in a header, never in an argument. */
-async function management(path: string, init: RequestInit = {}): Promise<unknown> {
+async function managementResponse(path: string, init: RequestInit = {}): Promise<ManagementResponse> {
   const response = await fetch(`${MANAGEMENT_API}${path}`, {
     ...init,
     headers: {
@@ -214,10 +220,17 @@ async function management(path: string, init: RequestInit = {}): Promise<unknown
     cache: 'no-store',
   })
   const text = await response.text()
+  let body: unknown = null
+  try { body = text ? JSON.parse(text) : null } catch { body = text }
+  return { ok: response.ok, status: response.status, body }
+}
+
+async function management(path: string, init: RequestInit = {}): Promise<unknown> {
+  const response = await managementResponse(path, init)
   // The body is not echoed on failure: a Management API error can quote the
   // request, and the request carried a credential.
   if (!response.ok) throw new Error(`Management API ${init.method ?? 'GET'} ${path} returned ${response.status}.`)
-  return text ? JSON.parse(text) : null
+  return response.body
 }
 
 /** Preview-origin call. Tokens travel in headers only. */
@@ -256,7 +269,18 @@ const wait = (milliseconds: number) => new Promise((resolve) => setTimeout(resol
 
 async function readyBranchDetail(branchId: string): Promise<Json> {
   for (let attempt = 0; attempt < 100; attempt += 1) {
-    const detail = object(await management(`/v1/branches/${branchId}`), 'branch detail')
+    const response = await managementResponse(`/v1/branches/${branchId}`)
+    // Branch creation is asynchronous. Supabase can return the branch id from
+    // POST before the config endpoint has materialized, during which GET is a
+    // temporary 404 rather than evidence that creation failed.
+    if (response.status === 404) {
+      await wait(3_000)
+      continue
+    }
+    if (!response.ok) {
+      throw new Error(`Management API GET /v1/branches/${branchId} returned ${response.status}.`)
+    }
+    const detail = object(response.body, 'branch detail')
     if (detail.ref && detail.db_host && detail.db_pass && detail.jwt_secret) return detail
     await wait(3_000)
   }
@@ -315,6 +339,12 @@ const driver: RehearsalDriver = {
     )
     const branchId = String(created.id ?? created.branch_id ?? '')
     if (!branchId) throw new Error('The Management API did not return a branch id.')
+    // The POST is already a remote mutation. Record it before waiting for the
+    // asynchronously-created branch config so a later refusal cannot claim
+    // that nothing was created.
+    lifecycleState.previewBranchCreated = true
+    lifecycleState.branchHandle = { branchId, parentProjectRef: String(created.parent_project_ref ?? parentRef) }
+    lifecycleState.remoteOperationsPerformed += 1
     const detail = await readyBranchDetail(branchId)
     const branchRef = String(detail.ref)
     const jwtSecret = String(detail.jwt_secret)
@@ -326,9 +356,7 @@ const driver: RehearsalDriver = {
     })
     branchApiUrl = `https://${branchRef}.supabase.co`
     branchServiceRole = deriveEphemeralServiceRole(jwtSecret, Math.floor(Date.now() / 1000))
-    lifecycleState.previewBranchCreated = true
     lifecycleState.branchHandle = { branchId, parentProjectRef: String(detail.parent_project_ref ?? parentRef) }
-    lifecycleState.remoteOperationsPerformed += 1
     return {
       branchId,
       parentProjectRef: String(detail.parent_project_ref ?? parentRef),
