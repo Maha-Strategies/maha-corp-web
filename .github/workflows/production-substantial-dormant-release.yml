@@ -1,0 +1,63 @@
+name: Production dormant substantial release
+
+on:
+  workflow_dispatch:
+    inputs:
+      cohort:
+        description: Release the one-record canary or three-record remainder
+        required: true
+        default: canary
+        type: choice
+        options: [canary, remainder]
+      operation:
+        description: Verify state or perform exact-review replay, release, and projection verification
+        required: true
+        default: verify
+        type: choice
+        options: [verify, review-publish-verify]
+      confirmation:
+        description: Exact cohort-specific confirmation phrase; required only for publication
+        required: false
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: production-substantial-dormant-release-${{ inputs.cohort }}
+  cancel-in-progress: false
+
+jobs:
+  operate:
+    runs-on: ubuntu-latest
+    environment: production-database
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Verify immutable operation boundary
+        env:
+          COHORT: ${{ inputs.cohort }}
+          OPERATION: ${{ inputs.operation }}
+          CONFIRMATION: ${{ inputs.confirmation }}
+        run: |
+          test "$COHORT" = canary -o "$COHORT" = remainder
+          test "$OPERATION" = verify -o "$OPERATION" = review-publish-verify
+          if [ "$OPERATION" = review-publish-verify ]; then
+            if [ "$COHORT" = canary ]; then
+              test "$CONFIRMATION" = RELEASE_1_DORMANT_SUBSTANTIAL_CANARY
+            else
+              test "$CONFIRMATION" = RELEASE_3_DORMANT_SUBSTANTIAL_REMAINDER
+            fi
+          fi
+      - name: Operate exact four-record dormant cohort
+        env:
+          EPISTEMIC_OPERATIONS_TOKEN: ${{ secrets.EPISTEMIC_OPERATIONS_TOKEN }}
+          EPISTEMIC_RELEASE_AUTHORITY_TOKEN: ${{ secrets.EPISTEMIC_RELEASE_AUTHORITY_TOKEN }}
+          DORMANT_SUBSTANTIAL_CONFIRM: ${{ inputs.confirmation }}
+        run: >-
+          node --experimental-strip-types scripts/run-substantial-dormant-release.ts
+          ${{ inputs.cohort == 'remainder' && '--remainder' || '--canary' }}
+          ${{ inputs.operation == 'review-publish-verify' && '--publish' || '--verify' }}
