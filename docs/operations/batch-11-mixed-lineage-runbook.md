@@ -1,7 +1,7 @@
 # Batch 11 mixed-lineage release runbook
 
-Five records, two lineages. Four supersede an existing canonical release; one has
-none and must be released as initial. The batch was frozen on the assumption that
+Five records, two lineage classes. Two supersede existing canonical releases;
+three have none and must be released as initial. The batch was frozen on the assumption that
 all five supersede, and that assumption was wrong.
 
 **Nothing in this document has been executed.** No release was performed, no
@@ -12,13 +12,14 @@ presented.
 
 | Record | Kind | Prior release | Proposed revision |
 |---|---|---|---|
-| `agentic-systems-mcp-tool-allowlisting` | **initial** | — none — | `sha256:655c3ae116314eb3d2f…` |
-| `biomolecular-engineering-structure-prediction-filtering` | **superseding** | epirelease_9bf9b14ec8fb48f884efdc43e44ea349 | `sha256:4f41045346753387198…` |
-| `critical-supply-chains-high-purity-quartz-deposits` | **superseding** | epirelease_d9b0cd28c1614fa58192be24afcd2a7a | `sha256:bf577646700efe497e3…` |
-| `fusion-plasma-systems-tokamak-plasma-equilibrium` | **superseding** | epirelease_8e947374097d4695815dbf9ab653177b | `sha256:b06ae30e9f4b9907e6a…` |
-| `mechanistic-interpretability-representation-probing-boundary` | **superseding** | epirelease_93c92eb7a317465b83fabf8d3e6962da | `sha256:c87bdda2c7cf974f864…` |
+| `advanced-materials-color-centers-in-diamond` | **initial** | — none — | generated from the accepted replacement and exact-revision review |
+| `fusion-plasma-systems-tokamak-plasma-equilibrium` | **superseding** | epirelease_8e947374097d4695815dbf9ab653177b | generated from the accepted replacement and exact-revision review |
+| `longevity-metabolism-mitophagy-flux` | **initial** | — none — | generated from the accepted replacement and exact-revision review |
+| `mechanistic-interpretability-activation-patching` | **initial** | — none — | generated from the accepted replacement and exact-revision review |
+| `mechanistic-interpretability-representation-probing-boundary` | **superseding** | epirelease_93c92eb7a317465b83fabf8d3e6962da | generated from the accepted replacement and exact-revision review |
 
-Manifest digest: `sha256:2765fd7430f37a5de403a0bc8b8aa009d17f1488f6a711fcf7175e56fd3d6a4a`
+The manifest digest is generated from the reconciled cohort and is not copied
+into this hand-authored runbook, preventing documentation drift.
 
 ## Why the initial release is declared, not inferred
 
@@ -107,8 +108,8 @@ new tables, cleanup touches no pre-existing object.
 ## What the rehearsal would prove
 
 - All five records enter the release gate.
-- The four superseding releases each bind their exact declared prior release id.
-- The initial release binds no superseded target and carries `supersedesReleaseId` null.
+- The two superseding releases each bind their exact declared prior release id.
+- Each of the three initial releases binds no superseded target and carries `supersedesReleaseId` null.
 - The publication queue admits a record only after its exact-revision release exists.
 - A stale revision digest is refused at the gate.
 - An older revision cannot render revised material.

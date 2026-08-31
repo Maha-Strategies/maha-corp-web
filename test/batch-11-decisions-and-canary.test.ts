@@ -86,7 +86,7 @@ test('abstract-level evidence never permits quantitative detail', () => {
   }
 })
 
-test('the two narrowed records make no claim their source does not carry', () => {
+test('the three scope-only records retain the limits that exclude them from the release builder', () => {
   const mcp = BATCH_11_DECISIONS.find((d) => d.recordId.endsWith('tool-allowlisting'))!
   assert.equal(mcp.disposition, 'revise-record-scope')
   assert.match(mcp.boundedClaimScope!.doesNotSupport.join(' '), /does not|not.*define.*tool allowlist/i)
@@ -96,6 +96,11 @@ test('the two narrowed records make no claim their source does not carry', () =>
   assert.equal(quartz.disposition, 'revise-record-scope')
   assert.match(quartz.boundedClaimScope!.doesNotSupport.join(' '), /deposit or resource assessment/i)
   assert.equal(quartz.boundedClaimScope!.quantitativeDetailPermitted, false)
+
+  const filtering = BATCH_11_DECISIONS.find((d) => d.recordId.endsWith('structure-prediction-filtering'))!
+  assert.equal(filtering.disposition, 'revise-record-scope')
+  assert.ok(filtering.boundedClaimScope!.doesNotSupport.length > 0)
+  assert.equal(filtering.activeBindingChanged, false)
 })
 
 test('all eight fail-closed packets remain held', () => {
@@ -109,11 +114,23 @@ test('all eight fail-closed packets remain held', () => {
 
 // ----------------------------------------------------------------- canary
 
-test('five records entered the canary, all from accepted or narrowed decisions', () => {
+test('five records entered the canary, all from accepted source replacements', () => {
   assert.equal(BATCH_11_CANARY_RECORD_IDS.length, 5)
   for (const id of BATCH_11_CANARY_RECORD_IDS) {
     const d = BATCH_11_DECISIONS.find((x) => x.recordId === id)!
-    assert.notEqual(d.disposition, 'reject-or-hold', `${id} entered the canary while held`)
+    assert.equal(d.disposition, 'accept-source-replacement', `${id} entered the canary without an accepted replacement`)
+  }
+})
+
+test('scope-only decisions cannot enter the revision builder', () => {
+  const scopeOnly = BATCH_11_DECISIONS.filter((decision) => decision.disposition === 'revise-record-scope')
+  assert.equal(scopeOnly.length, 3)
+  for (const decision of scopeOnly) {
+    assert.throws(
+      () => buildBatch11Revision(decision.recordId as CanaryRecordId),
+      /revise-record-scope cannot enter the release rehearsal/,
+      decision.recordId,
+    )
   }
 })
 
@@ -196,7 +213,7 @@ test('a held decision cannot build a revision', () => {
   const held = BATCH_11_DECISIONS.find((d) => d.disposition === 'reject-or-hold')!
   assert.throws(
     () => buildBatch11Revision(held.recordId as CanaryRecordId),
-    /held decision cannot license a revision|no remediation packet|packet binds no source/,
+    /reject-or-hold cannot enter the release rehearsal|held decision cannot license a revision|no remediation packet|packet binds no source/,
   )
 })
 

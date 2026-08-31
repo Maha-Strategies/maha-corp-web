@@ -179,7 +179,7 @@ export interface ImportedLineage {
 }
 
 /**
- * Restricts the import to exactly the four prior lineages, by identity.
+ * Restricts the import to exactly the two prior lineages, by identity.
  *
  * Both directions are checked. Anything outside the allowlist is refused, and
  * a missing or altered member is refused too, so an import cannot be quietly
@@ -190,7 +190,7 @@ export function assertImportAllowed(imported: readonly ImportedLineage[]): void 
   for (const row of imported) {
     const allowed = IMPORT_ALLOWLIST.find((entry) => entry.recordId === row.recordId)
     if (!allowed) {
-      refuse('import-outside-allowlist', phase, `${row.recordId} is not one of the four prior lineages this rehearsal may import.`)
+      refuse('import-outside-allowlist', phase, `${row.recordId} is not one of the two prior lineages this rehearsal may import.`)
     }
     if (row.releaseId !== allowed.priorReleaseId) {
       refuse('import-lineage-mismatch', phase, `${row.recordId}: imported release ${row.releaseId} is not the declared predecessor ${allowed.priorReleaseId}.`)
@@ -504,7 +504,7 @@ export async function runRehearsal(
     for (const declared of BATCH_11_LINEAGE_DECLARATIONS) {
       assertNoPrivateCorpusInBundle(declared.recordId, await driver.fetchServedBundle(declared.recordId))
     }
-    record('verify-transitions', 'executed', `Verified ${observed.length} transitions independently: ${IMPORT_ALLOWLIST.length} superseding with the predecessor retained and marked superseded, one initial superseding nothing.`, 0)
+    record('verify-transitions', 'executed', `Verified ${observed.length} transitions independently: ${IMPORT_ALLOWLIST.length} superseding with the predecessor retained and marked superseded, ${observed.length - IMPORT_ALLOWLIST.length} initial releases superseding nothing.`, 0)
   } finally {
     // Phase 7. Runs whether or not the phases above succeeded.
     await driver.destroyEphemeralBranch(branch.branchId)

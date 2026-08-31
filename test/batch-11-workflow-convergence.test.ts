@@ -135,9 +135,9 @@ test('no Production write credential is referenced', () => {
 })
 
 // 7
-test('only the four declared predecessor lineages can be imported', () => {
+test('only the two declared predecessor lineages can be imported', () => {
   const declaredPredecessors = BATCH_11_LINEAGE_DECLARATIONS.filter((entry) => entry.declaredPriorReleaseId !== null)
-  assert.equal(IMPORT_ALLOWLIST.length, 4)
+  assert.equal(IMPORT_ALLOWLIST.length, 2)
   assert.deepEqual(
     IMPORT_ALLOWLIST.map((entry) => entry.priorReleaseId).sort(),
     declaredPredecessors.map((entry) => entry.declaredPriorReleaseId).sort(),
@@ -145,7 +145,7 @@ test('only the four declared predecessor lineages can be imported', () => {
   const good = IMPORT_ALLOWLIST.map((entry) => ({ recordId: entry.recordId, releaseId: entry.priorReleaseId, targetSha256: entry.priorTargetSha256, status: 'active' }))
   assert.doesNotThrow(() => assertImportAllowed(good))
   assert.throws(() => assertImportAllowed([...good, { recordId: 'urn:maha:record:elsewhere', releaseId: 'epirelease_x', targetSha256: 'sha256:00', status: 'active' }]), RehearsalRefused)
-  assert.throws(() => assertImportAllowed(good.slice(0, 3)), RehearsalRefused)
+  assert.throws(() => assertImportAllowed(good.slice(0, 1)), RehearsalRefused)
 })
 
 // 8
@@ -158,21 +158,24 @@ test('only the dedicated migration can be applied', () => {
 })
 
 // 9
-test('the cohort remains four superseding plus one initial', () => {
+test('the cohort remains two superseding plus three initial', () => {
   const superseding = BATCH_11_LINEAGE_DECLARATIONS.filter((entry) => entry.declaredReleaseKind === 'superseding')
   const initial = BATCH_11_LINEAGE_DECLARATIONS.filter((entry) => entry.declaredReleaseKind === 'initial')
   assert.equal(BATCH_11_LINEAGE_DECLARATIONS.length, 5)
-  assert.equal(superseding.length, 4)
-  assert.equal(initial.length, 1)
+  assert.equal(superseding.length, 2)
+  assert.equal(initial.length, 3)
   for (const entry of superseding) assert.ok(entry.declaredPriorReleaseId, `${entry.recordId} must declare a predecessor`)
 })
 
 // 10
-test('the initial release always supersedes nothing', () => {
-  const initial = BATCH_11_LINEAGE_DECLARATIONS.find((entry) => entry.declaredReleaseKind === 'initial')!
-  assert.equal(initial.declaredPriorReleaseId, null)
-  assert.equal(initial.declaredPriorTargetSha256, null)
-  assert.ok(!IMPORT_ALLOWLIST.some((entry) => entry.recordId === initial.recordId), 'no predecessor may be imported for it')
+test('every initial release always supersedes nothing', () => {
+  const initials = BATCH_11_LINEAGE_DECLARATIONS.filter((entry) => entry.declaredReleaseKind === 'initial')
+  assert.equal(initials.length, 3)
+  for (const initial of initials) {
+    assert.equal(initial.declaredPriorReleaseId, null)
+    assert.equal(initial.declaredPriorTargetSha256, null)
+    assert.ok(!IMPORT_ALLOWLIST.some((entry) => entry.recordId === initial.recordId), 'no predecessor may be imported for it')
+  }
 
   // And the observation-time check refuses one that superseded anything.
   const observed = BATCH_11_LINEAGE_DECLARATIONS.map((entry) => ({
@@ -183,7 +186,7 @@ test('the initial release always supersedes nothing', () => {
     priorStillPresent: true,
     priorStatus: entry.declaredPriorReleaseId === null ? null : 'superseded',
   }))
-  const index = observed.findIndex((row) => row.releaseKind === 'initial')
+  const index = observed.findIndex((row) => row.recordId === initials[0].recordId)
   observed[index] = { ...observed[index], supersededReleaseId: 'epirelease_93c92eb7a317465b83fabf8d3e6962da' }
   assert.throws(() => assertTransitions(observed, []), RehearsalRefused)
 })

@@ -3,37 +3,13 @@
   "registrySchemaVersion": "maha-epistemic-release-registry/1.0",
   "source": "https://www.mahastrategies.com/knowledge/epistemic-system/releases/registry.json",
   "method": "read-only HTTP GET; no credential presented; no mutation performed",
-  "totalReleasesInRegistry": 47,
+  "totalReleasesInRegistry": 115,
   "records": [
     {
-      "recordId": "urn:maha:record:agentic-systems-mcp-tool-allowlisting",
+      "recordId": "urn:maha:record:advanced-materials-color-centers-in-diamond",
       "totalReleases": 0,
       "activeReleases": 0,
       "activeRelease": null
-    },
-    {
-      "recordId": "urn:maha:record:biomolecular-engineering-structure-prediction-filtering",
-      "totalReleases": 1,
-      "activeReleases": 1,
-      "activeRelease": {
-        "releaseId": "epirelease_9bf9b14ec8fb48f884efdc43e44ea349",
-        "releaseKind": "initial",
-        "targetSha256": "sha256:2f59ecb93f3ad9418b05e01058d2d629fff5368dcc20b838b0e996f651c1db50",
-        "canonicalPath": "/knowledge/biomolecular-engineering/comparisons/biomolecular-engineering-structure-prediction-filtering",
-        "canonicalVersion": "1.0.0"
-      }
-    },
-    {
-      "recordId": "urn:maha:record:critical-supply-chains-high-purity-quartz-deposits",
-      "totalReleases": 1,
-      "activeReleases": 1,
-      "activeRelease": {
-        "releaseId": "epirelease_d9b0cd28c1614fa58192be24afcd2a7a",
-        "releaseKind": "initial",
-        "targetSha256": "sha256:c667320cf234997948bffc6fef2aefd2133010aed2a0af4d457dad0817fd93c0",
-        "canonicalPath": "/knowledge/critical-supply-chains/concepts/critical-supply-chains-high-purity-quartz-deposits",
-        "canonicalVersion": "1.0.0"
-      }
     },
     {
       "recordId": "urn:maha:record:fusion-plasma-systems-tokamak-plasma-equilibrium",
@@ -46,6 +22,18 @@
         "canonicalPath": "/knowledge/fusion-plasma-systems/mechanisms/fusion-plasma-systems-tokamak-plasma-equilibrium",
         "canonicalVersion": "1.0.0"
       }
+    },
+    {
+      "recordId": "urn:maha:record:longevity-metabolism-mitophagy-flux",
+      "totalReleases": 0,
+      "activeReleases": 0,
+      "activeRelease": null
+    },
+    {
+      "recordId": "urn:maha:record:mechanistic-interpretability-activation-patching",
+      "totalReleases": 0,
+      "activeReleases": 0,
+      "activeRelease": null
     },
     {
       "recordId": "urn:maha:record:mechanistic-interpretability-representation-probing-boundary",

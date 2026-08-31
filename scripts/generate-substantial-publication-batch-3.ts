@@ -1,4 +1,4 @@
-import { mkdirSync, writeFileSync } from 'node:fs'
+import { mkdirSync, renameSync, writeFileSync } from 'node:fs'
 
 import {
   SUBSTANTIAL_BATCH_3_PAGES,
@@ -45,9 +45,22 @@ const payload = {
   pages: SUBSTANTIAL_BATCH_3_PAGES,
 }
 
+/**
+ * Publishes generated artifacts atomically so concurrent readers see either
+ * the previous complete file or the next complete file, never a truncated
+ * intermediate write. Node's test runner executes files concurrently, and a
+ * JSON import racing a direct write otherwise fails before either test can
+ * evaluate its actual invariant.
+ */
+const writeGeneratedFile = (path: string, contents: string) => {
+  const temporaryPath = `${path}.${process.pid}.tmp`
+  writeFileSync(temporaryPath, contents)
+  renameSync(temporaryPath, path)
+}
+
 mkdirSync('content/substantial-pages', { recursive: true })
 mkdirSync('docs/substantial-pages', { recursive: true })
-writeFileSync('content/substantial-pages/publication-batch-3.json', `${JSON.stringify(payload, null, 2)}\n`)
+writeGeneratedFile('content/substantial-pages/publication-batch-3.json', `${JSON.stringify(payload, null, 2)}\n`)
 
 const row = (cells: readonly string[]) => `| ${cells.join(' | ')} |`
 const lines = [
@@ -109,4 +122,4 @@ const lines = [
   'Internal review and canonical release establish traceable publication lineage, not truth, independent replication, safety, predictive validity, or commercial fitness. No blocked record is upgraded merely because its route is live.',
   '',
 ]
-writeFileSync('docs/substantial-pages/publication-batch-3.md', `${lines.join('\n')}\n`)
+writeGeneratedFile('docs/substantial-pages/publication-batch-3.md', `${lines.join('\n')}\n`)
