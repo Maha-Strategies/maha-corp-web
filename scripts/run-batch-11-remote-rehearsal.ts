@@ -4,6 +4,7 @@ import { dirname, join } from 'node:path'
 
 import {
   BATCH_11_LINEAGE_DECLARATIONS,
+  assertDeclarationCoverage,
   reconcileLineage,
   type RegistryObservation,
 } from '../lib/batch-11-mixed-lineage-release.ts'
@@ -61,6 +62,11 @@ const operation = process.env.MAHA_B11_OPERATION ?? ''
 const confirmation = process.env.MAHA_B11_CONFIRMATION ?? ''
 const previewOrigin = (process.env.MAHA_B11_PREVIEW_ORIGIN ?? '').replace(/\/$/, '')
 const evidencePath = process.env.MAHA_B11_EVIDENCE_PATH?.trim()
+
+// Inherited from the retired plan-only driver: the declarations must cover
+// exactly the canary cohort, no more and no fewer. Checked before anything
+// else so a cohort that drifted cannot reach a gate, let alone a release.
+assertDeclarationCoverage()
 
 const observation = JSON.parse(
   readFileSync('content/frontier-alignment/batch-11-registry-observation.json', 'utf8'),

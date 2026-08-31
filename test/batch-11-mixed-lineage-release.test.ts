@@ -159,26 +159,40 @@ test('the manifest states plainly that nothing was released', () => {
   assert.equal(EMITTED.standing.migrationApplied, false)
 })
 
+// These two properties belonged to the retired plan-only driver. It is gone,
+// and its capabilities are a subset of the authoritative rehearsal, so the
+// properties are re-asserted against the script that survives rather than
+// deleted along with the file that used to carry them.
+
 test('the rehearsal is disabled without explicit authorization', () => {
-  const out = execFileSync('node', ['--experimental-strip-types', 'scripts/run-batch-11-preview-lineage-rehearsal.ts'], {
+  const out = execFileSync('node', ['--experimental-strip-types', 'scripts/run-batch-11-remote-rehearsal.ts'], {
     cwd: ROOT,
     encoding: 'utf8',
-    env: { ...process.env, MAHA_B11_REHEARSAL_AUTHORIZED: '' },
+    env: { ...process.env, MAHA_B11_REMOTE_AUTHORIZED: '' },
   })
   const parsed = JSON.parse(out) as Record<string, unknown>
-  assert.equal(parsed.mode, 'plan-only')
+  assert.equal(parsed.mode, 'dry-run')
   assert.equal(parsed.remoteOperationsPerformed, 0)
-  assert.equal(parsed.previewDatabaseCreated, false)
-  assert.equal(parsed.migrationApplied, false)
-  assert.equal(parsed.credentialPresented, false)
+  assert.equal(parsed.previewBranchCreated, false)
+  assert.equal(parsed.migrationsApplied, 0)
+  assert.equal(parsed.productionWritesPerformed, 0)
+  assert.equal(parsed.credentialsPresented, 0)
 })
 
 test('the rehearsal script embeds no secret value', () => {
-  const source = readFileSync(resolve(ROOT, 'scripts/run-batch-11-preview-lineage-rehearsal.ts'), 'utf8')
-  // Secret NAMES are listed deliberately; values must never appear.
+  const source = readFileSync(resolve(ROOT, 'scripts/run-batch-11-remote-rehearsal.ts'), 'utf8')
+  // Secret NAMES are read from the environment deliberately; values must never appear.
   assert.equal(/eyJ[A-Za-z0-9_-]{20,}/.test(source), false, 'a JWT-shaped value is present')
   assert.equal(/https:\/\/[a-z0-9]{20}\.supabase\.co/.test(source), false, 'a project URL is present')
-  assert.match(source, /MAHA_PREVIEW_SUPABASE_URL/)
+  // The script reaches the credential through the shared constant rather than
+  // a literal, so the name is asserted where it is defined.
+  assert.match(source, /BRANCH_MANAGEMENT_CREDENTIAL/, 'the established branch-management name must be the one used')
+  const engine = readFileSync(resolve(ROOT, 'lib/batch-11-rehearsal-phases.ts'), 'utf8')
+  assert.match(engine, /BRANCH_MANAGEMENT_CREDENTIAL = 'SUPABASE_ACCESS_TOKEN'/)
+  // The names the retired path invented never existed as secrets.
+  for (const invented of ['MAHA_PREVIEW_SUPABASE_URL', 'MAHA_PREVIEW_SUPABASE_SERVICE_ROLE', 'MAHA_PRODUCTION_READONLY_URL', 'MAHA_PREVIEW_RELEASE_AUTHORITY_TOKEN']) {
+    assert.equal(source.includes(invented), false, `${invented} is not a repository secret and must not be referenced`)
+  }
 })
 
 // ---------------------------------------------------------- determinism
