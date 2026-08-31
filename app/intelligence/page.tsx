@@ -1,6 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { TrackedLink } from '@/components/ConversionTracker';
+import { BRIEFS as PUBLIC_BRIEFS } from '@/lib/briefs-data';
 import styles from './intelligence-cyber-light.module.css';
 import { semanticForStatus, type IntelligenceSemantic } from './status-semantics';
 
@@ -22,7 +23,7 @@ interface BriefData {
   indicators?: Indicator[];
 }
 
-const BRIEFS: BriefData[] = [
+const ALL_BRIEF_CARDS: BriefData[] = [
   // --- MACRO & SYSTEMS ---
   {
     group: 'MACRO & SYSTEMS',
@@ -153,6 +154,14 @@ const BRIEFS: BriefData[] = [
     title: 'PPG Derivatives in Semiconductor Manufacturing',
     description: 'A process, purity, and qualification framework for PPG, EO/PO block copolymers, glycol ethers, and reactive polyethers used in semiconductor manufacturing and advanced packaging.',
     href: '/intelligence/briefs/ppg-derivatives-semiconductor-applications',
+  },
+  {
+    group: 'HARDWARE & INFRASTRUCTURE',
+    category: 'ADVANCED.PACKAGING.CMP',
+    status: 'PRELIMINARY',
+    title: 'CMP Pads for Hybrid Bonding and HBM',
+    description: 'A qualification framework for CMP-pad choices as hybrid bonding and high-bandwidth-memory packaging raise the cost of planarization variation, contamination, and rework.',
+    href: '/intelligence/briefs/cmp-pads-hybrid-bonding-hbm',
   },
   {
     group: 'HARDWARE & INFRASTRUCTURE',
@@ -363,6 +372,22 @@ const BRIEFS: BriefData[] = [
   },
 ];
 
+const PUBLIC_BRIEF_BY_SLUG = new Map(PUBLIC_BRIEFS.map((brief) => [brief.slug, brief]))
+
+const BRIEFS = ALL_BRIEF_CARDS.flatMap((card) => {
+  const slug = card.href.split('/').pop() ?? ''
+  const publicBrief = PUBLIC_BRIEF_BY_SLUG.get(slug)
+
+  return publicBrief
+    ? [{
+        ...card,
+        title: publicBrief.title,
+        description: publicBrief.description,
+        status: publicBrief.status,
+      }]
+    : []
+})
+
 // --- COMPONENTS ---
 const CHIP: Record<IntelligenceSemantic, string> = {
   verified: styles.chipVerified,
@@ -409,7 +434,8 @@ const BriefCard = ({ data }: { data: BriefData }) => (
 );
 
 export default function IntelligenceGrid() {
-  const groups = ['MACRO & SYSTEMS', 'HARDWARE & INFRASTRUCTURE', 'INTELLIGENCE & CYBERNETICS'] as const;
+  const groups = (['MACRO & SYSTEMS', 'HARDWARE & INFRASTRUCTURE', 'INTELLIGENCE & CYBERNETICS'] as const)
+    .filter((groupTitle) => BRIEFS.some((brief) => brief.group === groupTitle));
 
   return (
     <main className={styles.page}>
@@ -419,7 +445,7 @@ export default function IntelligenceGrid() {
         <header className={styles.header}>
           <h1 className={`${styles.title} mb-4`}>Active Intelligence</h1>
           <p className={styles.metaMuted}>
-            [ Flash-Opinions // Structural Audits // Market Signals ]
+            [ Research Briefs // Structural Audits // Market Signals ]
           </p>
           <div className="mt-8">
             <TrackedLink

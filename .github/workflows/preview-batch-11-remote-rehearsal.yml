@@ -1,0 +1,203 @@
+name: Batch 11 remote Preview rehearsal
+
+# Manual only, and locked three ways.
+#
+# This workflow is the one that creates an ephemeral Preview branch and applies
+# migrations. None of that should ever be reachable from a push, so there is no
+# push, pull_request or schedule trigger at all - not a filtered one.
+#
+# Every credential below is scoped to this protected Preview rehearsal. The
+# branch database credential is generated only after the ephemeral branch
+# exists and is never stored in GitHub. No Production write credential is
+# available: the only Production access is an unauthenticated GET of the public
+# release registry.
+
+on:
+  workflow_dispatch:
+    inputs:
+      operation:
+        description: 'Exact operation name. Must be batch-11-mixed-lineage-preview-rehearsal.'
+        required: true
+        default: ''
+      confirmation:
+        description: 'Exact confirmation phrase. Must be rehearse-batch-11-mixed-lineage-in-preview-only.'
+        required: true
+        default: ''
+      reviewed_commit:
+        description: 'The exact reviewed commit SHA this run is authorized for.'
+        required: true
+        default: ''
+permissions:
+  contents: read
+
+concurrency:
+  group: batch-11-remote-rehearsal
+  cancel-in-progress: false
+
+jobs:
+  rehearse:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    # The protected environment is the human gate. Its reviewers approve the run
+    # before any step executes, and its secrets are scoped to Preview only.
+    environment: batch-11-preview-rehearsal
+    env:
+      MAHA_B11_EVIDENCE_PATH: ${{ github.workspace }}/batch-11-rehearsal/evidence.json
+      MAHA_B11_REVIEWED_COMMIT: ${{ inputs.reviewed_commit }}
+      # Branch management. Established name; the rehearsal refuses before any
+      # mutation if this is not bound to the environment.
+      SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}
+      SUPABASE_PROJECT_REF: ${{ secrets.SUPABASE_PROJECT_REF }}
+      EPISTEMIC_OPERATIONS_TOKEN: ${{ secrets.EPISTEMIC_OPERATIONS_TOKEN }}
+      EPISTEMIC_RELEASE_AUTHORITY_TOKEN: ${{ secrets.EPISTEMIC_RELEASE_AUTHORITY_TOKEN }}
+      VERCEL_AUTOMATION_BYPASS_SECRET: ${{ secrets.VERCEL_AUTOMATION_BYPASS_SECRET }}
+      VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+    steps:
+      - name: Enforce the Preview boundary before anything is checked out
+        run: |
+          set -euo pipefail
+          export LC_ALL=C
+          for name in SUPABASE_ACCESS_TOKEN SUPABASE_PROJECT_REF EPISTEMIC_OPERATIONS_TOKEN EPISTEMIC_RELEASE_AUTHORITY_TOKEN VERCEL_AUTOMATION_BYPASS_SECRET VERCEL_TOKEN; do
+            [ -n "${!name:-}" ] || { echo "::error::$name is not bound to this environment. The rehearsal cannot provision or destroy the isolated resources without it."; exit 1; }
+            [[ "${!name}" =~ ^[[:graph:]]+$ ]] || { echo "::error::$name contains whitespace or a non-ASCII character and cannot be used safely."; exit 1; }
+          done
+          [ "${#EPISTEMIC_OPERATIONS_TOKEN}" -ge 32 ] || { echo '::error::The Preview operations token is shorter than the application authorization minimum.'; exit 1; }
+          [ "${#EPISTEMIC_RELEASE_AUTHORITY_TOKEN}" -ge 32 ] || { echo '::error::The Preview release-authority token is shorter than the application authorization minimum.'; exit 1; }
+          [ "$EPISTEMIC_OPERATIONS_TOKEN" != "$EPISTEMIC_RELEASE_AUTHORITY_TOKEN" ] || { echo '::error::Operations and release-authority tokens must be distinct.'; exit 1; }
+          # The Production project may never be the parent of a rehearsal branch.
+          [ "$SUPABASE_PROJECT_REF" != 'uhwuullakihgszxhiygz' ] || { echo '::error::The Production Supabase project is forbidden.'; exit 1; }
+
+      - uses: actions/checkout@v7
+        with:
+          # Pinned to the SHA the operator typed, so the run cannot drift onto a
+          # branch tip that moved after review.
+          ref: ${{ inputs.reviewed_commit }}
+          # The adversarial scope check compares the exact reviewed commit with
+          # its first parent. It must not depend on a remote-tracking branch.
+          fetch-depth: 2
+
+      - name: Refuse a commit that is not the reviewed one
+        env:
+          REVIEWED: ${{ inputs.reviewed_commit }}
+        run: |
+          set -euo pipefail
+          actual="$(git rev-parse HEAD)"
+          [ "$actual" = "$REVIEWED" ] || { echo "::error::Checked out $actual but the authorized commit is $REVIEWED."; exit 1; }
+          echo "Running from the exact reviewed commit."
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Install the pinned Vercel deployment client
+        run: npm install --global vercel@58.7.1
+
+      # Always runs, and performs nothing remote. Proves the cohort still gates
+      # cleanly from this exact commit before anything else is considered.
+      - name: Dry-run gate and order-independence proof
+        run: node --experimental-strip-types scripts/run-batch-11-remote-rehearsal.ts
+
+      - name: Adversarial phase tests
+        run: node --test --experimental-strip-types test/batch-11-remote-rehearsal.test.ts test/batch-11-preview-binding.test.ts test/batch-11-rehearsal-phases.test.ts
+
+      - name: Remote rehearsal
+        env:
+          MAHA_B11_REMOTE_AUTHORIZED: '1'
+          MAHA_B11_OPERATION: ${{ inputs.operation }}
+          MAHA_B11_CONFIRMATION: ${{ inputs.confirmation }}
+        run: node --experimental-strip-types scripts/run-batch-11-remote-rehearsal.ts
+
+      - name: Verify the sanitized evidence boundary
+        run: |
+          set -euo pipefail
+          jq -e '
+            .mode == "executed"
+            and .productionWritesPerformed == 0
+            and .previewBranchCreated == true
+            and .previewBranchDestroyed == true
+            and .previewDeploymentCreated == true
+            and .previewDeploymentDestroyed == true
+            and .productionAccess.kind == "public-https-get"
+            and .productionAccess.credentialPresented == false
+            and (.phases | length) == 7
+            and ([.phases[] | select(.status == "executed")] | length) == 7
+            and .fingerprint.cohortSize == 5
+            and .fingerprint.supersedingCount == 2
+            and .fingerprint.initialCount == 3
+            and .fingerprint.orderIndependent == true
+            and .fingerprint.ordersProvenIndependent == 120
+          ' "$MAHA_B11_EVIDENCE_PATH" >/dev/null
+          # A last, independent scan of the artifact that leaves the runner.
+          ! grep -qEi 'bearer [A-Za-z0-9._~+/-]{16,}|sbp_[A-Za-z0-9]{16,}|postgres(ql)?://[^ "]*:[^ "@]+@' "$MAHA_B11_EVIDENCE_PATH"
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: batch-11-rehearsal-evidence
+          path: batch-11-rehearsal/evidence.json
+          if-no-files-found: ignore
+
+      # Runs even when the rehearsal fails. The script destroys both resources
+      # in its finally block; this is the backstop for a runner interrupted
+      # after the isolated deployment or branch was created.
+      #
+      # Cleanup that cannot prove it converged must fail the run. A listing that
+      # errors leaves the state unknown, and reporting unknown as clean is how a
+      # surviving branch outlives the rehearsal that created it.
+      - name: Destroy any surviving Preview deployment and ephemeral branch
+        if: always()
+        run: |
+          set -euo pipefail
+          marker="$GITHUB_WORKSPACE/batch-11-rehearsal/preview-deployment.json"
+          if [ -f "$marker" ]; then
+            deployment_id="$(jq -r '.deploymentId // empty' "$marker")"
+            if [ -n "$deployment_id" ]; then
+              # Idempotent: an already-removed deployment is a converged state,
+              # not a failure. Anything else fails the run.
+              if vercel remove "$deployment_id" --yes --scope mayonerajans-projects >/dev/null 2>/tmp/vercel-remove.err; then
+                echo 'Destroyed the surviving branch-bound Vercel Preview.'
+              elif grep -qiE 'not be found|does not exist|not found|no such deployment' /tmp/vercel-remove.err; then
+                echo 'Preview deployment was already absent; cleanup is idempotent.'
+              else
+                echo "::error::Failed to destroy Preview deployment $deployment_id."
+                sed -E 's/[A-Za-z0-9_-]{24,}/REDACTED/g' /tmp/vercel-remove.err >&2
+                exit 1
+              fi
+            fi
+          fi
+          if [ -z "${SUPABASE_ACCESS_TOKEN:-}" ]; then
+            # The boundary step refuses before checkout when this is unbound, so
+            # no branch can exist to clean up.
+            echo 'No branch-management credential; nothing could have been created.'
+            exit 0
+          fi
+          # The token is read from the environment inside node, never passed as
+          # a command argument where it would appear in the process list.
+          node --input-type=module -e '
+            const token = process.env.SUPABASE_ACCESS_TOKEN
+            const ref = process.env.SUPABASE_PROJECT_REF
+            const marker = `batch-11-mixed-lineage-rehearsal-${process.env.GITHUB_RUN_ID}`
+            const headers = { authorization: `Bearer ${token}` }
+            const mine = async () => {
+              const listed = await fetch(`https://api.supabase.com/v1/projects/${ref}/branches`, { headers })
+              if (!listed.ok) {
+                throw new Error(`Branch listing returned ${listed.status}; cleanup cannot prove convergence.`)
+              }
+              const branches = await listed.json()
+              return (Array.isArray(branches) ? branches : []).filter((b) => String(b.name ?? "").includes(marker))
+            }
+            const found = await mine()
+            for (const branch of found) {
+              const gone = await fetch(`https://api.supabase.com/v1/branches/${branch.id}`, { method: "DELETE", headers })
+              // 404 means a concurrent or prior pass already removed it.
+              if (!gone.ok && gone.status !== 404) {
+                throw new Error(`Failed to destroy branch ${branch.id}: ${gone.status}`)
+              }
+            }
+            const survivors = await mine()
+            if (survivors.length > 0) {
+              throw new Error(`${survivors.length} ephemeral branch(es) survived cleanup for run ${process.env.GITHUB_RUN_ID}.`)
+            }
+            console.log(`Cleanup converged. ${found.length} branch(es) destroyed, 0 surviving.`)
+          '

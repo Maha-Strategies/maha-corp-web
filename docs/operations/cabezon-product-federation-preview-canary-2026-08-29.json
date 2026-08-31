@@ -1,0 +1,51 @@
+{
+  "schemaVersion": "maha-cabezon-product-federation-preview-canary-evidence/1.0",
+  "observedAt": "2026-08-29T07:09:00.000Z",
+  "branch": "codex/cabezon-product-federation",
+  "commit": "77a77822ed1d7ac970a161facc22b4f144e6e1b8",
+  "pullRequest": 271,
+  "workflowRun": 33240121120,
+  "database": {
+    "kind": "ephemeral-schema-only-preview-branch",
+    "productionDataCopied": false,
+    "productionMutation": false,
+    "migration": "20260829000100_mcp_evidence_tool_licensing.sql",
+    "migrationSha256": "sha256:6488200d90da3d47c0621c8d770e52153961059c45e024bd64fae0af09d50d56",
+    "targetFingerprint": "sha256:c05003c9fbb751a1decd52e1a056c299db32c0b80733e46a7a231aae48feaf85",
+    "objectCount": 10,
+    "converged": true,
+    "canonicalReleaseCountBeforeLifecycle": 0,
+    "credentialCountBeforeLifecycle": 0,
+    "licenseGrantCountBeforeLifecycle": 0,
+    "executionCountBeforeLifecycle": 0,
+    "deletedAfterCanary": true
+  },
+  "lifecycle": {
+    "status": "blocked-before-provisioning",
+    "completedStages": [
+      "exact-branch-enforcement",
+      "dedicated-migration-apply",
+      "dedicated-migration-verification"
+    ],
+    "blockedStage": "released-evidence-selection",
+    "blocker": "The schema-only Preview branch contained no active canonical release. The canary refused to infer, copy, or fabricate release state.",
+    "credentialCreated": false,
+    "licenseGrantCreated": false,
+    "executionCreated": false,
+    "paymentAttempted": false,
+    "escrowAttempted": false,
+    "productionMutation": false
+  },
+  "cleanup": {
+    "githubBypassSecretCopyDeleted": true,
+    "githubPreviewEnvironmentDeleted": true,
+    "vercelBranchVariablesDeleted": true,
+    "credentialBearingDeploymentDeleted": true,
+    "supabasePreviewBranchDeleted": true
+  },
+  "decision": {
+    "mergeAuthorized": false,
+    "reason": "The complete private lifecycle did not pass. A later rerun requires an explicitly authorized, non-fabricated release-fixture strategy or a non-schema-only isolated data source."
+  },
+  "secretsIncluded": false
+}

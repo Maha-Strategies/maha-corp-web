@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
 
-import { BRIEFS } from '../lib/briefs-data.ts'
+import { INTELLIGENCE_BRIEF_ARCHIVE } from '../lib/briefs-data.ts'
 import { buildEditorialCoverageAudit } from '../lib/editorial-coverage-audit.ts'
 import { INTELLIGENCE_KNOWLEDGE_LINKS } from '../lib/intelligence-knowledge-links.ts'
 import { KNOWLEDGE_ARTICLES } from '../lib/knowledge-data.ts'
@@ -10,7 +10,7 @@ import { KNOWLEDGE_SUPPLIERS } from '../lib/knowledge-process-profiles.ts'
 const audit = buildEditorialCoverageAudit(new Date('2026-08-13T12:00:00Z'))
 
 test('editorial audit reconciles the published graph', () => {
-  assert.equal(audit.summary.briefs, BRIEFS.length)
+  assert.equal(audit.summary.briefs, INTELLIGENCE_BRIEF_ARCHIVE.length)
   assert.equal(audit.summary.knowledgeObjects, KNOWLEDGE_ARTICLES.length + KNOWLEDGE_SUPPLIERS.length)
   assert.equal(audit.summary.graphEdges, INTELLIGENCE_KNOWLEDGE_LINKS.reduce((total, link) => total + link.articleIds.length + link.supplierIds.length, 0))
   assert.equal(audit.summary.coverageGaps, audit.coverageGaps.length)

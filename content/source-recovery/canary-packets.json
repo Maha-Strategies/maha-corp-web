@@ -89,7 +89,8 @@
         "urn:maha:record:agentic-systems-mcp-tool-output-trust-boundaries"
       ],
       "currentAlignmentStates": [
-        "insufficient-evidence"
+        "mismatched",
+        "partially-supported"
       ],
       "priority": 19,
       "requests": [
@@ -118,7 +119,7 @@
       "disposition": "not-attempted",
       "inspectionAuthorized": false,
       "canonicalMutationAuthorized": false,
-      "digest": "sha256:7f9e989bdc24f7b159e32b66b960b349ea42a1b50cb996469be56ee9bb0dc2b6"
+      "digest": "sha256:068e6ff1c76f43795467eb11b7b93e1e5a87051613bfdace4ba443108362b2d4"
     },
     {
       "schemaVersion": "maha-source-recovery/1.0",
@@ -136,7 +137,9 @@
         "urn:maha:record:biomolecular-engineering-translational-control-circuits"
       ],
       "currentAlignmentStates": [
-        "inaccessible-source"
+        "mismatched",
+        "partially-supported",
+        "supported"
       ],
       "priority": 18,
       "requests": [
@@ -185,7 +188,7 @@
       "disposition": "not-attempted",
       "inspectionAuthorized": false,
       "canonicalMutationAuthorized": false,
-      "digest": "sha256:9d43a3dc970344f940e633f25e77cb06e14aa2f6fcc009228f96c6bfe4d35909"
+      "digest": "sha256:5c8dbf2078f40559bd1e4d33f445f18b82004a40039227f922dfa1eb1ff35b88"
     },
     {
       "schemaVersion": "maha-source-recovery/1.0",
@@ -203,7 +206,8 @@
         "urn:maha:record:biomolecular-engineering-selection-pressure-coupling"
       ],
       "currentAlignmentStates": [
-        "insufficient-evidence"
+        "partially-supported",
+        "supported"
       ],
       "priority": 17,
       "requests": [
@@ -252,7 +256,7 @@
       "disposition": "not-attempted",
       "inspectionAuthorized": false,
       "canonicalMutationAuthorized": false,
-      "digest": "sha256:cc47957322b6980861764c409ff7dbfae7ceec4a7a0dfc818db9df8f82ba92e8"
+      "digest": "sha256:79e40bb2bed351859f2134b7b7a928d9ccfa60d31434eb085c977ac5fb7bbb99"
     },
     {
       "schemaVersion": "maha-source-recovery/1.0",
@@ -270,7 +274,9 @@
         "urn:maha:record:critical-supply-chains-tantalum-concentrate-traceability"
       ],
       "currentAlignmentStates": [
-        "insufficient-evidence"
+        "mismatched",
+        "partially-supported",
+        "supported"
       ],
       "priority": 16,
       "requests": [
@@ -304,7 +310,7 @@
       "disposition": "not-attempted",
       "inspectionAuthorized": false,
       "canonicalMutationAuthorized": false,
-      "digest": "sha256:0fbab43911f8df3ac311baea8a9c9932a750a505c13336df0ebca26519328f6b"
+      "digest": "sha256:ff8a542195caae1acfbebbfcd7cbbcd1827f2fccfb90f52af938dea7041b200b"
     },
     {
       "schemaVersion": "maha-source-recovery/1.0",
@@ -322,7 +328,8 @@
         "urn:maha:record:critical-supply-chains-tungsten-concentrate-processing"
       ],
       "currentAlignmentStates": [
-        "inaccessible-source"
+        "mismatched",
+        "partially-supported"
       ],
       "priority": 15,
       "requests": [
@@ -356,7 +363,7 @@
       "disposition": "not-attempted",
       "inspectionAuthorized": false,
       "canonicalMutationAuthorized": false,
-      "digest": "sha256:fa6cddb5dc0b23fa5bd0c8cf284014477fa7b9d3e0635c4f877bb54cbf6875c1"
+      "digest": "sha256:9bd5b686050201b80c7cdcb0a33a4c52aa5c365c8fde28450d26895f07e93df1"
     },
     {
       "schemaVersion": "maha-source-recovery/1.0",
@@ -374,7 +381,8 @@
         "urn:maha:record:critical-supply-chains-semiconductor-grade-polysilicon"
       ],
       "currentAlignmentStates": [
-        "inaccessible-source"
+        "mismatched",
+        "partially-supported"
       ],
       "priority": 14,
       "requests": [
@@ -408,7 +416,7 @@
       "disposition": "not-attempted",
       "inspectionAuthorized": false,
       "canonicalMutationAuthorized": false,
-      "digest": "sha256:99323cef9381a7ea29eca15f7b2ab4008f19b55654ad84aa6902b8a332643c97"
+      "digest": "sha256:e0cbd647e4cb293e30176a7344d5cdf22824829ef5845cee509d7932ecfa33ea"
     },
     {
       "schemaVersion": "maha-source-recovery/1.0",
@@ -426,7 +434,9 @@
         "urn:maha:record:critical-supply-chains-germanium-zinc-refining-flow"
       ],
       "currentAlignmentStates": [
-        "inaccessible-source"
+        "mismatched",
+        "partially-supported",
+        "supported"
       ],
       "priority": 13,
       "requests": [
@@ -460,7 +470,7 @@
       "disposition": "not-attempted",
       "inspectionAuthorized": false,
       "canonicalMutationAuthorized": false,
-      "digest": "sha256:8fcb427e53a7a9e64ff0f7dc05e1172b635bd6570f9724ab0b1b38c52805453d"
+      "digest": "sha256:4720f732bff29f499619d53083fbdd1e3269301e03cac60e979f94d3a7b4c5fd"
     },
     {
       "schemaVersion": "maha-source-recovery/1.0",
@@ -478,7 +488,9 @@
         "urn:maha:record:fusion-plasma-systems-remote-handling-maintenance"
       ],
       "currentAlignmentStates": [
-        "insufficient-evidence"
+        "mismatched",
+        "partially-supported",
+        "supported"
       ],
       "priority": 12,
       "requests": [
@@ -507,7 +519,7 @@
       "disposition": "not-attempted",
       "inspectionAuthorized": false,
       "canonicalMutationAuthorized": false,
-      "digest": "sha256:020f61107d6b5aa6869bda20554fa265fb25e8810f1ccaabe8f8d836ea8fc42b"
+      "digest": "sha256:f30c1b152ef15ed0970f7eb84cf130ee64b09840206dc2c10b38a5541572266f"
     },
     {
       "schemaVersion": "maha-source-recovery/1.0",
@@ -525,7 +537,7 @@
         "urn:maha:record:longevity-metabolism-p62-sqstm1-turnover"
       ],
       "currentAlignmentStates": [
-        "inaccessible-source"
+        "supported"
       ],
       "priority": 11,
       "requests": [
@@ -574,7 +586,7 @@
       "disposition": "not-attempted",
       "inspectionAuthorized": false,
       "canonicalMutationAuthorized": false,
-      "digest": "sha256:98f2245f814f78e00b895f8a8e04fdb45521609cef50f55a45b0353d5843bafc"
+      "digest": "sha256:54e3d6710b626ad7aa8efbbe350196e75e638f22adbb90c1cd2b7fab6b13efbe"
     },
     {
       "schemaVersion": "maha-source-recovery/1.0",
@@ -592,7 +604,9 @@
         "urn:maha:record:longevity-metabolism-translation-to-human-outcomes"
       ],
       "currentAlignmentStates": [
-        "insufficient-evidence"
+        "mismatched",
+        "partially-supported",
+        "supported"
       ],
       "priority": 10,
       "requests": [
@@ -641,7 +655,7 @@
       "disposition": "not-attempted",
       "inspectionAuthorized": false,
       "canonicalMutationAuthorized": false,
-      "digest": "sha256:05a5792752850b1b9aa0069607e594e5b538d088970a3ea55b7d094ccf7e960c"
+      "digest": "sha256:5bf69f1244f08aa57670c495187bcd04a23d405dbf27a3c66e804ff0565599bd"
     },
     {
       "schemaVersion": "maha-source-recovery/1.0",
@@ -777,7 +791,8 @@
         "urn:maha:record:mechanistic-interpretability-feature-activation-maximization"
       ],
       "currentAlignmentStates": [
-        "insufficient-evidence"
+        "mismatched",
+        "supported"
       ],
       "priority": 7,
       "requests": [
@@ -826,7 +841,7 @@
       "disposition": "not-attempted",
       "inspectionAuthorized": false,
       "canonicalMutationAuthorized": false,
-      "digest": "sha256:016a414e171c3860c63a5fe13b8645562d135aa7e9401196237c87d6b0c0c0ab"
+      "digest": "sha256:4a6c9668a275192308e7566e9956391a28613a09842a1d7e542fa5bb2e582f69"
     },
     {
       "schemaVersion": "maha-source-recovery/1.0",
@@ -844,7 +859,9 @@
         "urn:maha:record:neurotechnology-bci-peripheral-nerve-interface"
       ],
       "currentAlignmentStates": [
-        "insufficient-evidence"
+        "mismatched",
+        "partially-supported",
+        "supported"
       ],
       "priority": 6,
       "requests": [
@@ -893,7 +910,7 @@
       "disposition": "not-attempted",
       "inspectionAuthorized": false,
       "canonicalMutationAuthorized": false,
-      "digest": "sha256:6b36db31da26ad2dba0add325d4c0360a97cd92821e703453f18a5fe97f32df4"
+      "digest": "sha256:eedc315bbe15bffee81a8c6d545e8e4f75b6f47770a06c4d7fc387309a567ac1"
     },
     {
       "schemaVersion": "maha-source-recovery/1.0",
@@ -911,7 +928,8 @@
         "urn:maha:record:neurotechnology-bci-stimulation-artifact-rejection"
       ],
       "currentAlignmentStates": [
-        "inaccessible-source"
+        "mismatched",
+        "supported"
       ],
       "priority": 5,
       "requests": [
@@ -960,7 +978,7 @@
       "disposition": "not-attempted",
       "inspectionAuthorized": false,
       "canonicalMutationAuthorized": false,
-      "digest": "sha256:aa63f34e2a5bbf299243e7b7a2078959fe50c788c2d6b63a797d7f99f7a1f718"
+      "digest": "sha256:90385d3693f5a7517498fb8ac1891f6c51d0a61c1fe327b993cfc3d1d0fdbd97"
     },
     {
       "schemaVersion": "maha-source-recovery/1.0",
@@ -978,7 +996,9 @@
         "urn:maha:record:neurotechnology-bci-wireless-neural-telemetry"
       ],
       "currentAlignmentStates": [
-        "inaccessible-source"
+        "insufficient-evidence",
+        "partially-supported",
+        "supported"
       ],
       "priority": 4,
       "requests": [
@@ -1027,7 +1047,7 @@
       "disposition": "not-attempted",
       "inspectionAuthorized": false,
       "canonicalMutationAuthorized": false,
-      "digest": "sha256:db8e94fc109520f743afc8ab6559d97a806ee8eeb37ecfbee928ed3e04e2ab21"
+      "digest": "sha256:ca2511dc596ca4f55e547752248ba7c7dfd0d3a14f3729657a808ec9133effb4"
     },
     {
       "schemaVersion": "maha-source-recovery/1.0",
@@ -1046,7 +1066,8 @@
       ],
       "currentAlignmentStates": [
         "insufficient-evidence",
-        "partially-supported"
+        "partially-supported",
+        "supported"
       ],
       "priority": 3,
       "requests": [
@@ -1095,7 +1116,7 @@
       "disposition": "not-attempted",
       "inspectionAuthorized": false,
       "canonicalMutationAuthorized": false,
-      "digest": "sha256:157e382a666cd215544e6b3388643adcc6764d38286684fc09c9278111c5098d"
+      "digest": "sha256:ea7f5b2beaeeacaa2eff5092d26692f2e42b3e70a25d63deb669ec1024386c73"
     },
     {
       "schemaVersion": "maha-source-recovery/1.0",
@@ -1113,7 +1134,8 @@
         "urn:maha:record:neurotechnology-bci-micro-ecog-arrays"
       ],
       "currentAlignmentStates": [
-        "inaccessible-source"
+        "partially-supported",
+        "supported"
       ],
       "priority": 2,
       "requests": [
@@ -1162,7 +1184,7 @@
       "disposition": "not-attempted",
       "inspectionAuthorized": false,
       "canonicalMutationAuthorized": false,
-      "digest": "sha256:4673e8a7b229443d25b57164f48250b26e02f8ad0082c7f3568d30ef90a99c0f"
+      "digest": "sha256:b209c14e5e3dc8418c179bf0cd3de6eb0687606b483f3a22388255eb6439d906"
     },
     {
       "schemaVersion": "maha-source-recovery/1.0",
@@ -1180,7 +1202,8 @@
         "urn:maha:record:longevity-metabolism-oxygen-consumption-rate"
       ],
       "currentAlignmentStates": [
-        "insufficient-evidence"
+        "mismatched",
+        "supported"
       ],
       "priority": 1,
       "requests": [
@@ -1229,7 +1252,7 @@
       "disposition": "not-attempted",
       "inspectionAuthorized": false,
       "canonicalMutationAuthorized": false,
-      "digest": "sha256:ae96052f60cecb2a22c678268a54772fd0e4f6a95696f6edf1e9f71b78e7519a"
+      "digest": "sha256:8f25d8ae5d6442cb37f7f2648040078b0babafe3a1dfe50e3fadee5794291785"
     }
   ]
 }

@@ -1,0 +1,45 @@
+{
+  "schemaVersion": "maha-substantial-mcp-private-canary/0.1",
+  "receiptSchemaVersion": "maha-substantial-mcp-receipt/0.1",
+  "fixtureBoundary": "Deterministic private fixture. It proves binding and replay semantics without a credential, payment, production mutation, or public MCP discovery.",
+  "checks": {
+    "exactReleaseRevision": "pass",
+    "exactCanonicalPath": "pass",
+    "eligibleSubstantialPackage": "pass",
+    "unsupportedExplanatoryParagraphs": 0,
+    "deterministicReceipt": "pass",
+    "entitlementChangesEvidenceQuality": false
+  },
+  "receipt": {
+    "schemaVersion": "maha-substantial-mcp-receipt/0.1",
+    "receiptId": "urn:maha:receipt:mcp-substantial:mcpexe_00000000000000000000000000000001",
+    "execution": {
+      "executionId": "mcpexe_00000000000000000000000000000001",
+      "requestSha256": "sha256:c437415b27ab3e321c3a43af5326e23b57c118ce84d252a807e72e8445c2a545",
+      "projectionSha256": "sha256:5abd9b0503a611b1a7e4c5f46312c84ff94f19239cde4704842e3a76a505bbce"
+    },
+    "release": {
+      "releaseId": "epirelease_ec742c5ed8924d4b9f8f3bda5570bb19",
+      "releaseSha256": "sha256:24a48a3687762ceff1eff1d0ce037fae780ae2cb5240ddd85b55a8ae31c2faa0",
+      "targetSha256": "sha256:bc3682ef4b4613b4cff9c468953c218fb20ebad8786ab8c6cc4bbcc8dccb1a66",
+      "canonicalPath": "/knowledge/agentic-systems-mcp/concepts/agentic-systems-mcp-human-denial-control-for-tool-invocations"
+    },
+    "substantialPublication": {
+      "recordId": "urn:maha:record:agentic-systems-mcp-tool-deny-by-default",
+      "publicationVersion": "maha-substantial-publication/1.2",
+      "publicationDigest": "sha256:32abd0d161c4b49552c53fcfb375414b24b42725ee3af1d2516b5ec9b9d9f2e5",
+      "recordRevisionSha256": "sha256:bc3682ef4b4613b4cff9c468953c218fb20ebad8786ab8c6cc4bbcc8dccb1a66",
+      "path": "/knowledge/agentic-systems-mcp/concepts/agentic-systems-mcp-human-denial-control-for-tool-invocations",
+      "claimsExplained": 1,
+      "claimsTotal": 1,
+      "unsupportedExplanationParagraphs": 0
+    },
+    "deliveryState": "private-machine-delivery",
+    "acknowledgementRequired": true,
+    "entitlementChangesEvidenceQuality": false,
+    "receiptSha256": "sha256:7f796f07acbb4b00eb4621c88a04b2f9959f21aa89f509ec459785a5768711a7"
+  },
+  "secretsIncluded": false,
+  "commercialTransactionClaimed": false,
+  "publicDiscoveryAuthorized": false
+}

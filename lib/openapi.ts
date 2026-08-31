@@ -97,6 +97,7 @@ export const openApiDocument = {
     { name: 'Checkout', description: 'Self-service credit purchase.' },
     { name: 'Webhooks', description: 'Stripe payment confirmation (called by Stripe, documented for transparency).' },
     { name: 'Free Preflight', description: 'Rate-limited public demo, no credential required.' },
+    { name: 'Evidence Preflight', description: 'Deterministic structural triage for caller-supplied claim, source, excerpt, locator, and rights metadata. No source inspection or verification is performed.' },
     { name: 'Books', description: 'Purchased-book entitlement checks for the local MCP bridge.' },
     { name: 'Enterprise MCP Gateway', description: 'Tenant-scoped MCP proxy for operator-registered public upstream servers.' },
     { name: 'Context Compiler', description: 'Deterministic, source-linked context-pack compilation with privacy-safe measurement.' },
@@ -1069,6 +1070,70 @@ export const openApiDocument = {
           '429': { $ref: '#/components/responses/FlatError' },
           '502': { $ref: '#/components/responses/FlatError' },
           '503': { $ref: '#/components/responses/FlatError' },
+        },
+      },
+    },
+    '/api/evidence-preflight': {
+      post: {
+        tags: ['Evidence Preflight'],
+        operationId: 'runEvidencePreflight',
+        summary: 'Run deterministic structural evidence preflight for up to three claims',
+        description: 'No credential required. Assesses only the structure and bounded lexical risk of caller-supplied material. Sources are not fetched or independently inspected; findings are not verified Evidence Dossiers. Submission content is returned in the response but not retained. A keyed metadata-only ledger enforces replay safety and a daily visitor limit.',
+        security: [{}],
+        requestBody: {
+          required: true,
+          content: {
+            'application/json': {
+              schema: {
+                type: 'object',
+                additionalProperties: false,
+                required: ['requestId', 'submissionConfirmedNonConfidential', 'claims'],
+                properties: {
+                  requestId: { type: 'string', pattern: '^epf_[a-z0-9-]{16,80}$' },
+                  submissionConfirmedNonConfidential: { type: 'boolean', const: true },
+                  claims: {
+                    type: 'array', minItems: 1, maxItems: 3,
+                    items: {
+                      type: 'object', additionalProperties: false, required: ['claim', 'source', 'rights'],
+                      properties: {
+                        claim: { type: 'string', minLength: 8, maxLength: 1000 },
+                        source: {
+                          type: 'object', additionalProperties: false, required: ['kind', 'identifier'],
+                          properties: {
+                            kind: { type: 'string', enum: ['doi', 'url'] }, identifier: { type: 'string', minLength: 4, maxLength: 500 },
+                            title: { type: 'string', maxLength: 300 }, publisher: { type: 'string', maxLength: 200 }, publicationDate: { type: 'string', format: 'date' },
+                          },
+                        },
+                        excerpt: { type: 'string', maxLength: 1500 },
+                        locator: {
+                          type: 'object', additionalProperties: false, required: ['kind', 'value'],
+                          properties: { kind: { type: 'string', enum: ['page', 'section', 'paragraph', 'figure', 'table', 'equation', 'timestamp', 'other'] }, value: { type: 'string', maxLength: 160 } },
+                        },
+                        rights: {
+                          type: 'object', additionalProperties: false, required: ['basis', 'accessStatus'],
+                          properties: {
+                            basis: { type: 'string', enum: ['public-domain', 'open-license', 'permission-confirmed', 'limited-quotation-review', 'unknown'] },
+                            accessStatus: { type: 'string', enum: ['open', 'restricted', 'unknown'] }, licenseOrPermission: { type: 'string', maxLength: 240 },
+                          },
+                        },
+                      },
+                    },
+                  },
+                },
+              },
+            },
+          },
+        },
+        responses: {
+          '200': { description: 'Idempotent replay of the same request ID and content.' },
+          '201': { description: 'Digest-bound automated structural preflight result. No source was independently inspected.' },
+          '400': errorResponse('Invalid or disallowed submission.'),
+          '403': errorResponse('Request origin is not permitted.'),
+          '409': errorResponse('Request ID was already used with different content.'),
+          '413': errorResponse('Request exceeds 24 KB.'),
+          '415': errorResponse('Content-Type must be application/json.'),
+          '429': errorResponse('Daily free preflight limit reached.'),
+          '503': errorResponse('Privacy ledger or required server configuration is unavailable.'),
         },
       },
     },

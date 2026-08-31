@@ -8,16 +8,28 @@ import {
   type LegacyAdapterId,
 } from './epistemic-adapters.ts'
 import { sha256Canonical } from './epistemic-publication.ts'
+import {
+  MCP_PRIVATE_CANARY_INSPECTION,
+  MCP_PRIVATE_CANARY_INSPECTION_SHA256,
+  MCP_PRIVATE_CANARY_RECORD_ID,
+} from './mcp-private-canary-release.ts'
+import { SOURCE_OVERRIDE_REVISION_INSPECTION_ATTESTATIONS } from './source-override-revision-ingestion-records.ts'
+import { BATCH_11_REVISION_AUDITS } from './batch-11-revision-canary.ts'
+import { BATCH_11_MIXED_LINEAGE_REHEARSAL_ADAPTER } from './batch-11-ingestion-adapter.ts'
+import substantialScaleReviewManifest from '../content/substantial-pages/release-scale-review.json' with { type: 'json' }
+
+const SUBSTANTIAL_SCALE_INGESTION_ATTESTATIONS = substantialScaleReviewManifest.records
 
 export const EPISTEMIC_INGESTION_VERSION = 'maha-epistemic-ingestion/1.0' as const
 export const INGESTION_ALIGNMENT_VERSION = 'maha-ingestion-alignment-gate/1.0' as const
 
 export interface IngestionAlignmentDecision {
   evaluatedAgainst: typeof INGESTION_ALIGNMENT_VERSION
-  contentInspectionState: 'required-uninspected'
-  explanatoryEligible: false
-  canonicalEligible: false
+  contentInspectionState: 'required-uninspected' | 'internally-inspected-synthetic' | 'internally-inspected-source-override' | 'internally-inspected-substantial-scale' | 'internally-inspected-batch-11-revision'
+  explanatoryEligible: boolean
+  canonicalEligible: boolean
   blockerCodes: string[]
+  inspectionAttestationSha256?: string
 }
 
 export interface EpistemicIngestionRecord {
@@ -78,19 +90,77 @@ export function parseEpistemicIngestionRequest(value: unknown): EpistemicIngesti
 
 export function buildEpistemicIngestionBatch(input: EpistemicIngestionRequest, ingestedAt = new Date()): EpistemicIngestionBatch {
   if (!Number.isFinite(ingestedAt.getTime())) throw new Error('ingestedAt must be valid.')
-  const adapter = getLegacyEpistemicAdapter(input.adapterId)
+  const adapter = input.adapterId === 'batch-11-mixed-lineage-rehearsal'
+    ? BATCH_11_MIXED_LINEAGE_REHEARSAL_ADAPTER
+    : getLegacyEpistemicAdapter(input.adapterId)
   if (!adapter) throw new Error('adapterId is unsupported.')
   const batchId = `epibatch_${randomUUID().replaceAll('-', '')}`
   const records = adapter.adapt().map((candidate): EpistemicIngestionRecord => {
-    const blockerCodes = candidate.record.sources.length
+    const source = candidate.record.sources[0]
+    const syntheticInspectionAttested = input.adapterId === 'mcp-private-canary'
+      && candidate.record.id === MCP_PRIVATE_CANARY_RECORD_ID
+      && candidate.record.sources.length === 1
+      && source?.id === MCP_PRIVATE_CANARY_INSPECTION.sourceId
+      && source.url === MCP_PRIVATE_CANARY_INSPECTION.sourceUrl
+      && source.exactLocator === MCP_PRIVATE_CANARY_INSPECTION.exactLocator
+    const sourceOverrideAttestation = input.adapterId === 'source-override-revision-canary'
+      ? SOURCE_OVERRIDE_REVISION_INSPECTION_ATTESTATIONS.find((attestation) =>
+        attestation.recordId === candidate.record.id
+        && attestation.reviewTargetSha256 === candidate.reviewTargetSha256
+        && attestation.sourceId === source?.id
+        && attestation.exactLocator === source.exactLocator,
+      )
+      : undefined
+    const substantialScaleAttestation = input.adapterId === 'substantial-scale-release'
+      ? SUBSTANTIAL_SCALE_INGESTION_ATTESTATIONS.find((packet) =>
+        packet.recordId === candidate.record.id
+        && packet.targetSha256 === candidate.reviewTargetSha256
+        && packet.alignment.metadataVerified
+        && packet.alignment.sourceContentInspected
+        && packet.alignment.subjectSupported
+        && packet.alignment.exactInspectedLocator.trim().length > 0
+        && packet.sourceIds.length === candidate.record.sources.length
+        && packet.sourceIds.every((sourceId) => candidate.record.sources.some((candidateSource) => candidateSource.id === sourceId)),
+      )
+      : undefined
+    const batch11Attestation = input.adapterId === 'batch-11-mixed-lineage-rehearsal'
+      ? BATCH_11_REVISION_AUDITS.find((audit) =>
+        audit.recordId === candidate.record.id
+        && audit.revisedRecordRevisionSha256 === candidate.reviewTargetSha256
+        && audit.exactLocator === source?.exactLocator
+        && audit.outcome === 'alignment-clear-ready-for-revision-scoped-review'
+        && audit.checks.length === 8,
+      )
+      : undefined
+    const contentInspectionAttested = syntheticInspectionAttested || Boolean(sourceOverrideAttestation) || Boolean(substantialScaleAttestation) || Boolean(batch11Attestation)
+    const blockerCodes = contentInspectionAttested
+      ? []
+      : candidate.record.sources.length
       ? candidate.record.sources.map((source) => `source-content-inspection-missing:${source.id}`).sort()
       : ['source-content-inspection-missing:no-source-declared']
     const alignmentDecision: IngestionAlignmentDecision = {
       evaluatedAgainst: INGESTION_ALIGNMENT_VERSION,
-      contentInspectionState: 'required-uninspected',
-      explanatoryEligible: false,
-      canonicalEligible: false,
+      contentInspectionState: syntheticInspectionAttested
+        ? 'internally-inspected-synthetic'
+        : sourceOverrideAttestation
+          ? 'internally-inspected-source-override'
+          : substantialScaleAttestation
+            ? 'internally-inspected-substantial-scale'
+            : batch11Attestation
+              ? 'internally-inspected-batch-11-revision'
+          : 'required-uninspected',
+      explanatoryEligible: contentInspectionAttested,
+      canonicalEligible: contentInspectionAttested,
       blockerCodes,
+      ...(syntheticInspectionAttested
+        ? { inspectionAttestationSha256: MCP_PRIVATE_CANARY_INSPECTION_SHA256 }
+        : sourceOverrideAttestation
+          ? { inspectionAttestationSha256: sourceOverrideAttestation.attestationSha256 }
+          : substantialScaleAttestation
+            ? { inspectionAttestationSha256: substantialScaleAttestation.packetDigest }
+            : batch11Attestation
+              ? { inspectionAttestationSha256: batch11Attestation.auditSha256 }
+          : {}),
     }
     return {
       schemaVersion: EPISTEMIC_INGESTION_VERSION,

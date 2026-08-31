@@ -311,7 +311,7 @@ export function evaluateBatch2Quality(record: EpistemicRecord, compiled: Compile
 
 const canonicalIds = new Set(EPISTEMIC_RECORDS.map((record) => record.id))
 
-function publish(record: EpistemicRecord): PublishedBatch2Page {
+export function publishBatch2Record(record: EpistemicRecord): PublishedBatch2Page {
   const compiled = compileSubstantialPage({
     record,
     graph: EPISTEMIC_RECORDS,
@@ -370,7 +370,7 @@ const recordById = new Map(EPISTEMIC_RECORDS.map((record) => [record.id, record]
 export const SUBSTANTIAL_BATCH_2_PAGES: readonly PublishedBatch2Page[] = SUBSTANTIAL_BATCH_2_RECORD_IDS.map((recordId) => {
   const record = recordById.get(recordId)
   if (!record) throw new Error(`${recordId} is not a canonical record.`)
-  return publish(record)
+  return publishBatch2Record(record)
 })
 
 /* ------------------------------------------------------------- guards ----- */

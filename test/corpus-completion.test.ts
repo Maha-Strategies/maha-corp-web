@@ -13,8 +13,8 @@ import { ARTIFACT_VERSIONS, compileOutstandingRecoveryPackets, RECOVERY_CHANNELS
 test('the outstanding queue covers every and only uninspected frontier record', () => {
   const uninspected = FRONTIER_ALIGNMENT_AUDIT.filter((entry) => !entry.evidence.sourceContentInspected)
   const packets = compileOutstandingRecoveryPackets()
-  assert.equal(uninspected.length, 94)
-  assert.equal(SOURCE_RECOVERY_OUTSTANDING_IDS.length, 19)
+  assert.equal(uninspected.length, 4)
+  assert.equal(SOURCE_RECOVERY_OUTSTANDING_IDS.length, 1)
   assert.deepEqual(packets.flatMap((packet) => packet.affectedRecordIds).sort(), uninspected.map((entry) => entry.recordId).sort())
   for (const packet of packets) {
     assert.equal(packet.inspectionAuthorized, false)
@@ -27,7 +27,7 @@ test('the outstanding queue covers every and only uninspected frontier record', 
 
 test('all uninspected positional assignments remain automatically blocked and non-explanatory', () => {
   const rows = FRONTIER_ALIGNMENT_AUDIT.filter((entry) => !entry.evidence.sourceContentInspected)
-  assert.equal(rows.filter((entry) => entry.assignmentOrigin === 'positional-legacy').length, 94)
+  assert.equal(rows.filter((entry) => entry.assignmentOrigin === 'positional-legacy').length, 4)
   for (const entry of rows) {
     assert.equal(entry.evidence.claimSupported, false)
     assert.equal(entry.evidence.inspectedContentLocation, null)
@@ -37,7 +37,13 @@ test('all uninspected positional assignments remain automatically blocked and no
 })
 
 test('new ingestion records enter a required-uninspected alignment audit by default', () => {
-  for (const adapterId of LEGACY_ADAPTER_IDS) {
+  const explicitlyAttestedAdapters = new Set([
+    'mcp-private-canary',
+    'source-override-revision-canary',
+    'substantial-scale-release',
+    'batch-11-mixed-lineage-rehearsal',
+  ])
+  for (const adapterId of LEGACY_ADAPTER_IDS.filter((candidate) => !explicitlyAttestedAdapters.has(candidate))) {
     const batch = buildEpistemicIngestionBatch({ adapterId, idempotencyKey: `default-alignment-audit-${adapterId}` }, new Date('2026-08-28T00:00:00Z'))
     assert.ok(batch.records.length > 0, adapterId)
     for (const record of batch.records) {
@@ -59,7 +65,7 @@ test('recovery vocabulary covers DOI, repositories, preprints, author manuscript
   }
 })
 
-test('Batch 7 freezes the complete positional-legacy inspection backlog without clearing it', () => {
+test('Batch 7 preserves the immutable pre-inspection backlog snapshot', () => {
   assert.equal(ALIGNMENT_BATCH_7_INTAKE.status, 'inspection-pending')
   assert.equal(ALIGNMENT_BATCH_7_INTAKE.recordCount, 94)
   assert.equal(ALIGNMENT_BATCH_7_INTAKE.sourceContractCount, 19)

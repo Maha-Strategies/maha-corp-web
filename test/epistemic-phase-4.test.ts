@@ -70,10 +70,19 @@ test('review invitations are pilot-bound, expiring, hashed credentials', () => {
   assert.equal(JSON.stringify(credential.invitation).includes(credential.token), false)
   assert.equal(credential.invitation.recordId, TARGET.recordId)
   assert.equal(credential.invitation.reviewerProfileSha256.startsWith('sha256:'), true)
-  const dto = privateEpistemicReviewInvitationDto(credential.invitation, null)
+  // Evaluated at the frozen instant rather than at whatever time the suite
+  // happens to run. Asserting the DTO's own status is the point: routing around
+  // it would leave the field that callers actually read untested.
+  const dto = privateEpistemicReviewInvitationDto(credential.invitation, null, null, NOW)
   assert.equal('tokenSha256' in dto, false)
   assert.equal('invitedByFingerprint' in dto, false)
   assert.equal(dto.status, 'active')
+  assert.equal(epistemicReviewInvitationStatus(credential.invitation, null, NOW), 'active')
+
+  // The same invitation, evaluated after its expiry window, is expired. This is
+  // the assertion wall-clock dependence used to make impossible to state.
+  const afterExpiry = privateEpistemicReviewInvitationDto(credential.invitation, null, null, new Date('2026-09-01T00:00:00.000Z'))
+  assert.equal(afterExpiry.status, 'expired')
 
   assert.throws(() => parseEpistemicReviewInvitationRequest({ ...invitationRequest(), recordId: 'urn:maha:record:not-in-pilot' }, NOW), /outside the bounded Phase 4 pilot/)
   assert.throws(() => parseEpistemicReviewInvitationRequest({ ...invitationRequest(), expiresAt: '2026-10-24T10:00:00.000Z' }, NOW), /between one hour and 30 days/)

@@ -13,6 +13,9 @@ import {
   pilotAuditDigest,
   pilotVerdictTotals,
 } from '../lib/pilot-source-alignment.ts'
+import { PILOT_BATCH_12_SLUGS } from '../lib/pilot-source-alignment-batch-12.ts'
+import { PILOT_BATCH_13_SLUGS } from '../lib/pilot-source-alignment-batch-13.ts'
+import { PILOT_BATCH_14_SLUGS } from '../lib/pilot-source-alignment-batch-14.ts'
 import { ALIGNMENT_VERDICTS, FRONTIER_ALIGNMENT_AUDIT, verdictTotals } from '../lib/frontier-source-alignment.ts'
 import { endpointUsabilityTotals, resolveUsableEndpoint } from '../lib/endpoint-fitness.ts'
 import { EPISTEMIC_RECORDS } from '../lib/epistemic-pilots.ts'
@@ -78,7 +81,7 @@ test('metadata-only evidence cannot claim subject support', () => {
   const metadataOnly = PILOT_ALIGNMENT_AUDIT.filter(
     (entry) => entry.metadataVerified && !entry.sourceContentInspected,
   )
-  assert.ok(metadataOnly.length > 20, 'the metadata-only cohort vanished, so this guard is inert')
+  assert.ok(metadataOnly.length > 0, 'the metadata-only cohort vanished, so this guard is inert')
   for (const entry of metadataOnly) {
     assert.notEqual(entry.verdict, 'supported', `${entry.slug} claims support without inspection`)
     assert.notEqual(entry.verdict, 'mismatched', `${entry.slug} claims mismatch without inspection`)
@@ -90,7 +93,7 @@ test('a resolving DOI alone never produces alignment-clear', () => {
   const resolvedButBlocked = PILOT_ALIGNMENT_AUDIT.filter(
     (entry) => entry.metadataVerified && !isPilotAlignmentClear(entry.recordId),
   )
-  assert.ok(resolvedButBlocked.length > 20)
+  assert.ok(resolvedButBlocked.length > 0)
 })
 
 test('external review and reproduction are false everywhere', () => {
@@ -179,13 +182,13 @@ test('no Q-BR verdict changes because an endpoint gained an audit', () => {
   assert.equal(totals['source-unverifiable'], 4)
 })
 
-test('frontier audit totals are unchanged', () => {
+test('frontier audit totals include the bounded Batch 8 evidence moves', () => {
   assert.deepEqual(verdictTotals(), {
-    supported: 59,
-    'partially-supported': 26,
-    mismatched: 55,
-    'insufficient-evidence': 60,
-    'inaccessible-source': 40,
+    supported: 94,
+    'partially-supported': 47,
+    mismatched: 86,
+    'insufficient-evidence': 9,
+    'inaccessible-source': 4,
   })
   assert.equal(FRONTIER_ALIGNMENT_AUDIT.length, 240)
 })
@@ -197,14 +200,49 @@ test('the canary cohort is unchanged', () => {
 
 test('pilot verdict totals are pinned', () => {
   assert.deepEqual(pilotVerdictTotals(), {
-    supported: 5,
-    'partially-supported': 3,
+    supported: 47,
+    'partially-supported': 0,
     mismatched: 0,
-    'insufficient-evidence': 42,
+    'insufficient-evidence': 3,
     'inaccessible-source': 0,
   })
-  assert.equal(PILOT_ALIGNMENT_AUDIT.filter((entry) => entry.sourceContentInspected).length, 9)
-  assert.equal(PILOT_ALIGNMENT_AUDIT.filter((entry) => isPilotAlignmentClear(entry.recordId)).length, 5)
+  assert.equal(PILOT_ALIGNMENT_AUDIT.filter((entry) => entry.sourceContentInspected).length, 47)
+  assert.equal(PILOT_ALIGNMENT_AUDIT.filter((entry) => isPilotAlignmentClear(entry.recordId)).length, 47)
+})
+
+test('Batch 14 contributes exactly seven full-text-inspected alignment-clear records', () => {
+  assert.equal(PILOT_BATCH_14_SLUGS.length, 7)
+  for (const slug of PILOT_BATCH_14_SLUGS) {
+    const entry = PILOT_ALIGNMENT_AUDIT.find((candidate) => candidate.slug === slug)
+    assert.ok(entry)
+    assert.equal(entry.sourceContentInspected, true)
+    assert.equal(entry.verdict, 'supported')
+    assert.equal(isPilotAlignmentClear(entry.recordId), true)
+  }
+})
+
+test('Batch 13 contributes exactly fourteen inspected alignment-clear records', () => {
+  assert.equal(PILOT_BATCH_13_SLUGS.length, 14)
+  for (const slug of PILOT_BATCH_13_SLUGS) {
+    const entry = PILOT_ALIGNMENT_AUDIT.find((candidate) => candidate.slug === slug)
+    assert.ok(entry, `${slug} is absent from the pilot audit`)
+    assert.equal(entry.sourceContentInspected, true)
+    assert.equal(entry.verdict, 'supported')
+    assert.ok(entry.inspectedContentLocation)
+    assert.equal(isPilotAlignmentClear(entry.recordId), true)
+  }
+})
+
+test('Batch 12 contributes exactly twenty-one inspected alignment-clear records', () => {
+  assert.equal(PILOT_BATCH_12_SLUGS.length, 21)
+  for (const slug of PILOT_BATCH_12_SLUGS) {
+    const entry = PILOT_ALIGNMENT_AUDIT.find((candidate) => candidate.slug === slug)
+    assert.ok(entry, `${slug} is absent from the pilot audit`)
+    assert.equal(entry.sourceContentInspected, true)
+    assert.equal(entry.verdict, 'supported')
+    assert.ok(entry.inspectedContentLocation)
+    assert.equal(isPilotAlignmentClear(entry.recordId), true)
+  }
 })
 
 /* --------------------------------------------------- guards are actually live */
@@ -222,7 +260,12 @@ async function expectGuardRejection(name: string, mutate: (source: string) => st
 }
 
 test('the guard rejects a missing pilot judgement', async () => {
-  const victim = PILOT_ALIGNMENT_AUDIT[0].slug
+  const victim = PILOT_ALIGNMENT_AUDIT.find(
+    (entry) =>
+      !PILOT_BATCH_12_SLUGS.includes(entry.slug as never) &&
+      !PILOT_BATCH_13_SLUGS.includes(entry.slug as never) &&
+      !PILOT_BATCH_14_SLUGS.includes(entry.slug as never),
+  )!.slug
   await expectGuardRejection(
     'missing',
     (source) => {
@@ -235,7 +278,12 @@ test('the guard rejects a missing pilot judgement', async () => {
 })
 
 test('the guard rejects an undeclared verdict at runtime', async () => {
-  const victim = PILOT_ALIGNMENT_AUDIT[0].slug
+  const victim = PILOT_ALIGNMENT_AUDIT.find(
+    (entry) =>
+      !PILOT_BATCH_12_SLUGS.includes(entry.slug as never) &&
+      !PILOT_BATCH_13_SLUGS.includes(entry.slug as never) &&
+      !PILOT_BATCH_14_SLUGS.includes(entry.slug as never),
+  )!.slug
   await expectGuardRejection(
     'verdict',
     (source) => {
@@ -263,7 +311,13 @@ test('the guard rejects a supported verdict without content inspection', async (
 })
 
 test('the guard rejects an inspected record with no exact location', async () => {
-  const victim = PILOT_ALIGNMENT_AUDIT.find((entry) => entry.sourceContentInspected)!.slug
+  const victim = PILOT_ALIGNMENT_AUDIT.find(
+    (entry) =>
+      entry.sourceContentInspected &&
+      !PILOT_BATCH_12_SLUGS.includes(entry.slug as never) &&
+      !PILOT_BATCH_13_SLUGS.includes(entry.slug as never) &&
+      !PILOT_BATCH_14_SLUGS.includes(entry.slug as never),
+  )!.slug
   await expectGuardRejection(
     'nolocation',
     (source) => {

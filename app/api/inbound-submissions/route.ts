@@ -1,6 +1,6 @@
 import { createAgentInquiryLedger } from '@/lib/agent-inquiry-ledger'
 import { jsonResponse } from '@/lib/agent-inquiries'
-import { contactSourcePath, isLikelyCommercialSolicitation, optionalCampaignValue, parseContactReferralSource } from '@/lib/contact-qualification'
+import { contactSourcePath, inboundLedgerSourcePath, isLikelyCommercialSolicitation, optionalCampaignValue, parseContactReferralSource } from '@/lib/contact-qualification'
 import { inboundHash, inboundId, parseInboundSubmission, routeInboundSubmission } from '@/lib/inbound-gatekeeper'
 import { publicUtilityVisitorHash } from '@/lib/public-utility'
 import { createRevenueOpportunityId, revenueSignalHash } from '@/lib/revenue-control-plane'
@@ -11,7 +11,7 @@ export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
 const MAX_BODY_BYTES = 16_384
 
-async function notifyInbound(submission: ReturnType<typeof parseInboundSubmission>, metadata: { referralSource: string; referralDetail?: string; utmSource?: string; utmMedium?: string; utmCampaign?: string }) {
+async function notifyInbound(submission: ReturnType<typeof parseInboundSubmission>, metadata: { referralSource: string; referralDetail?: string; sourcePath: string; utmSource?: string; utmMedium?: string; utmCampaign?: string }) {
   const apiKey = process.env.RESEND_API_KEY
   if (!apiKey) return
   try {
@@ -20,7 +20,7 @@ async function notifyInbound(submission: ReturnType<typeof parseInboundSubmissio
       to: process.env.INBOUND_NOTIFICATION_TO ?? 'mayone@mahastrategies.com',
       replyTo: submission.requester.email,
       subject: `[Maha inquiry] ${submission.offerId}`,
-      text: `NEW QUALIFIED INQUIRY\n\nNAME: ${submission.requester.name}\nEMAIL: ${submission.requester.email}\nORGANIZATION: ${submission.requester.organization ?? 'Not provided'}\nOFFER: ${submission.offerId}\nREFERRAL: ${metadata.referralSource}${metadata.referralDetail ? ` — ${metadata.referralDetail}` : ''}\nCAMPAIGN: ${[metadata.utmSource, metadata.utmMedium, metadata.utmCampaign].filter(Boolean).join(' / ') || 'None'}\n\nDECISION:\n${submission.decision}\n\nQUESTION:\n${submission.question}`,
+      text: `NEW QUALIFIED INQUIRY\n\nNAME: ${submission.requester.name}\nEMAIL: ${submission.requester.email}\nORGANIZATION: ${submission.requester.organization ?? 'Not provided'}\nOFFER: ${submission.offerId}\nSOURCE: ${metadata.sourcePath}\nREFERRAL: ${metadata.referralSource}${metadata.referralDetail ? ` — ${metadata.referralDetail}` : ''}\nCAMPAIGN: ${[metadata.utmSource, metadata.utmMedium, metadata.utmCampaign].filter(Boolean).join(' / ') || 'None'}\n\nDECISION:\n${submission.decision}\n\nQUESTION:\n${submission.question}`,
     })
   } catch { /* The durable ledger is authoritative; alert delivery is best effort. */ }
 }
@@ -67,7 +67,7 @@ export async function POST(request: Request) {
     decision: submission.decision, question: submission.question, deadline: submission.deadline ?? null, context: submission.context ?? null, agent: submission.agent ?? null,
     qualification_status: routing.status, qualification_reasons: routing.qualificationReasons,
     inquiry_class: submission.offerId === 'mps-preflight' ? 'support' : 'buyer', referral_source: metadata.referralSource, referral_detail: metadata.referralDetail ?? null,
-    source_path: metadata.sourcePath, utm_source: metadata.utmSource ?? null, utm_medium: metadata.utmMedium ?? null, utm_campaign: metadata.utmCampaign ?? null,
+    source_path: inboundLedgerSourcePath(), utm_source: metadata.utmSource ?? null, utm_medium: metadata.utmMedium ?? null, utm_campaign: metadata.utmCampaign ?? null,
   }).select('public_id, revenue_opportunity_id').maybeSingle()
   let record = inserted
   let replay = false
@@ -84,7 +84,7 @@ export async function POST(request: Request) {
     p_opportunity_id: createRevenueOpportunityId(), p_source_type: 'website_contact', p_source_reference: sourceReference, p_source_url: null,
     p_offer_id: submission.offerId, p_signal_hash: revenueSignalHash({ sourceType: 'website_contact', sourceReference, offerId: submission.offerId, hasDefinedDecision: true, hasSpecificQuestion: true, hasOrganization: Boolean(submission.requester.organization) }),
     p_route: routing.route, p_qualified: routing.status === 'qualified', p_qualification_reasons: routing.qualificationReasons,
-    p_idempotency_hash: inboundHash(`revenue:${submission.idempotencyKey}`), p_actor_fingerprint: inboundHash('inbound-gateway-v1'), p_reason: 'Public inbound submission passed deterministic validation.', p_reference_id: sourceReference, p_created_at: new Date().toISOString(),
+    p_idempotency_hash: inboundHash(`revenue:${submission.idempotencyKey}`), p_actor_fingerprint: inboundHash('inbound-gateway-v1'), p_reason: `Public inbound submission through ${metadata.sourcePath} passed deterministic validation.`, p_reference_id: sourceReference, p_created_at: new Date().toISOString(),
   })
   if (revenueError || typeof revenue !== 'object' || revenue === null || Array.isArray(revenue)) return jsonResponse({ error: { code: 'ledger_unavailable', message: 'Submission was received but commercial routing is temporarily unavailable. Please retry with the same idempotency key.' } }, 503)
   const opportunityId = (revenue as { opportunityId?: unknown }).opportunityId

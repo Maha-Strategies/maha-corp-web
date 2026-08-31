@@ -1,5 +1,8 @@
 import publicationBatch from '../content/substantial-pages/publication-batch-1.json' with { type: 'json' }
 import publicationBatchTwo from '../content/substantial-pages/publication-batch-2.json' with { type: 'json' }
+import publicationBatchThree from '../content/substantial-pages/publication-batch-3.json' with { type: 'json' }
+import publicationBatchFive from '../content/substantial-pages/publication-batch-5.json' with { type: 'json' }
+import publicationBatchSix from '../content/substantial-pages/publication-batch-6.json' with { type: 'json' }
 
 import type { PublishedSubstantialPage } from './substantial-page-publication.ts'
 
@@ -10,7 +13,7 @@ import type { PublishedSubstantialPage } from './substantial-page-publication.ts
  * internal build path.
  */
 export const SUBSTANTIAL_PUBLICATION_VERSION = 'maha-substantial-publication/1.0' as const
-export const SUBSTANTIAL_PUBLICATION_DATE = '2026-08-26' as const
+export const SUBSTANTIAL_PUBLICATION_DATE = '2026-08-30' as const
 
 const batchOnePages = publicationBatch.pages as unknown as readonly PublishedSubstantialPage[]
 
@@ -23,8 +26,69 @@ const batchOnePages = publicationBatch.pages as unknown as readonly PublishedSub
 const batchTwoPages = (publicationBatchTwo.pages as unknown as readonly PublishedSubstantialPage[]).filter(
   (page) => page.quality.eligible,
 )
+const batchThreePages = (publicationBatchThree.pages as unknown as readonly PublishedSubstantialPage[]).filter(
+  (page) => page.quality.eligible,
+)
+type ReleasedPublishedPage = PublishedSubstantialPage & {
+  releaseEvidence: {
+    targetSha256: string
+    canonicalPath: string
+    approvalScopes: readonly string[]
+  }
+}
+type BatchSixReleasedPublishedPage = ReleasedPublishedPage & {
+  releaseEvidence: ReleasedPublishedPage['releaseEvidence'] & {
+    approvals: readonly { scope: string; reviewerKind: string }[]
+    assuranceTier: string
+  }
+  reviewEvidence: {
+    targetSha256: string
+    alignment: {
+      metadataVerified: boolean
+      sourceContentInspected: boolean
+      exactInspectedLocator: string
+      subjectSupported: boolean
+    }
+  }
+}
+const requiredReviewScopes = ['boundary-adequacy', 'domain-fidelity', 'rights-and-locator', 'source-fidelity'] as const
+const batchFivePages = (publicationBatchFive.pages as unknown as readonly ReleasedPublishedPage[]).filter((page) => {
+  const scopes = new Set(page.releaseEvidence.approvalScopes)
+  return page.quality.eligible
+    && page.releaseEvidence.targetSha256 === page.contract.recordRevisionSha256
+    && page.releaseEvidence.canonicalPath === page.path
+    && requiredReviewScopes.every((scope) => scopes.has(scope))
+})
+const batchSixPages = (publicationBatchSix.pages as unknown as readonly BatchSixReleasedPublishedPage[]).filter((page) => {
+  const scopes = new Set(page.releaseEvidence.approvalScopes)
+  const reviewerScopes = new Set(page.releaseEvidence.approvals.map((approval) => approval.scope))
+  return page.quality.eligible
+    && page.releaseEvidence.targetSha256 === page.contract.recordRevisionSha256
+    && page.reviewEvidence.targetSha256 === page.contract.recordRevisionSha256
+    && page.releaseEvidence.canonicalPath === page.path
+    && page.releaseEvidence.assuranceTier === 'internally-reviewed-canonical'
+    && page.releaseEvidence.approvals.every((approval) => approval.reviewerKind === 'internal-editorial')
+    && requiredReviewScopes.every((scope) => scopes.has(scope) && reviewerScopes.has(scope))
+    && page.reviewEvidence.alignment.metadataVerified
+    && page.reviewEvidence.alignment.sourceContentInspected
+    && page.reviewEvidence.alignment.subjectSupported
+    && page.reviewEvidence.alignment.exactInspectedLocator.trim().length > 0
+})
+const replacedRecordIds = new Set([
+  ...batchThreePages.map((page) => page.contract.recordId),
+  ...batchFivePages.map((page) => page.contract.recordId),
+  ...batchSixPages.map((page) => page.contract.recordId),
+])
+const batchFiveRecordIds = new Set(batchFivePages.map((page) => page.contract.recordId))
+const batchSixRecordIds = new Set(batchSixPages.map((page) => page.contract.recordId))
 
-export const PUBLIC_SUBSTANTIAL_PAGES: readonly PublishedSubstantialPage[] = [...batchOnePages, ...batchTwoPages]
+export const PUBLIC_SUBSTANTIAL_PAGES: readonly PublishedSubstantialPage[] = [
+  ...batchOnePages.filter((page) => !replacedRecordIds.has(page.contract.recordId)),
+  ...batchTwoPages.filter((page) => !replacedRecordIds.has(page.contract.recordId)),
+  ...batchThreePages.filter((page) => !batchFiveRecordIds.has(page.contract.recordId) && !batchSixRecordIds.has(page.contract.recordId)),
+  ...batchFivePages.filter((page) => !batchSixRecordIds.has(page.contract.recordId)),
+  ...batchSixPages,
+]
 
 const pageByRecordId = new Map(PUBLIC_SUBSTANTIAL_PAGES.map((page) => [page.contract.recordId, page]))
 

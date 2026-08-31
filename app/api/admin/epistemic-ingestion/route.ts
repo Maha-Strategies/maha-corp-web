@@ -7,10 +7,10 @@ import {
 import { authorizeEpistemicOperations } from '@/lib/epistemic-review'
 import {
   createEpistemicPersistenceClient,
-  insertEpistemicIngestionBatch,
   listEpistemicIngestionBatches,
   listEpistemicReviewTargets,
 } from '@/lib/epistemic-store'
+import { insertEpistemicIngestionBatch } from '@/lib/epistemic-ingestion-store'
 
 export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
@@ -74,6 +74,9 @@ export async function POST(request: Request) {
   let parsed: ReturnType<typeof parseEpistemicIngestionRequest>
   try { parsed = parseEpistemicIngestionRequest(body) } catch (error) {
     return json({ error: { code: 'invalid_request', message: error instanceof Error ? error.message : 'Invalid ingestion request.' } }, 400)
+  }
+  if (parsed.adapterId === 'mcp-private-canary' && (process.env.VERCEL_ENV !== 'preview' || process.env.MCP_PRIVATE_CANARY_ENABLED !== 'true')) {
+    return json({ error: { code: 'not_found', message: 'The synthetic private canary adapter is unavailable.' } }, 404)
   }
   const client = createEpistemicPersistenceClient()
   if (!client) return unavailable()

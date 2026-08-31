@@ -21,6 +21,7 @@ import {
 } from '../packages/evidence-dossier-builder/src/index.ts'
 import { DOSSIER_SCHEMA_VERSION, type DossierEngagement } from '../packages/evidence-dossier-builder/src/schema.ts'
 import { runCli } from '../packages/evidence-dossier-builder/bin/mps-dossier.ts'
+import { kernelPath } from './helpers/wasm-kernel.ts'
 
 const CLI = 'packages/evidence-dossier-builder/bin/mps-dossier.ts'
 
@@ -278,6 +279,21 @@ test('CLI output is deterministic and byte-identical across runs', () => {
     assert.match(compiled, /"ok": true/)
     const verified = execFileSync('node', ['--experimental-strip-types', CLI, 'verify', join(out, 'manifest.json')], { encoding: 'utf8' })
     assert.match(verified, /"ok": true/)
+  } finally {
+    rmSync(directory, { recursive: true, force: true })
+  }
+})
+
+test('CLI compiles and independently verifies an execution-bound offline package', () => {
+  const directory = scratch()
+  try {
+    const input = join(directory, 'integrated-input.json'); const output = join(directory, 'integrated-package')
+    writeFileSync(input, `${JSON.stringify({ dossier: DEMONSTRATION_DOSSIER, calculations: [{ claimIds: ['clm_figure_conditions'], request: { schemaVersion: 'maha-wasm-execution-request/1.0', operation: 'normalize-angle-microdegrees', inputs: { angleMicrodegrees: '-1' }, units: { angleMicrodegrees: 'microdegree', normalizedAngleMicrodegrees: 'microdegree' } } }] }, null, 2)}\n`)
+    const compiled = execFileSync('node', ['--experimental-strip-types', CLI, 'compile-integrated', input, '--kernel', kernelPath(), '--kernel-manifest', 'packages/wasm-kernel/conformance/kernel-manifest.json', '--output', output], { encoding: 'utf8' })
+    assert.match(compiled, /"ok": true/)
+    const verified = execFileSync('node', ['--experimental-strip-types', CLI, 'verify-integrated', join(output, 'manifest.json')], { encoding: 'utf8' })
+    assert.match(verified, /"ok": true/)
+    assert.ok(readFileSync(join(output, 'kernel.wasm')).byteLength > 100)
   } finally {
     rmSync(directory, { recursive: true, force: true })
   }

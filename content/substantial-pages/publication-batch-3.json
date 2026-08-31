@@ -1,0 +1,2004 @@
+{
+  "schemaVersion": "maha-substantial-publication/1.2",
+  "publicationDate": "2026-08-28",
+  "releaseRegistryGeneratedAt": "2026-08-28T04:53:58.023Z",
+  "boundary": "Batch 3 selects only exact-revision active canonical releases. It restores substantial material for two repaired Batch 2 records and adds five release-matched references made alignment-clear by later source inspection. Eleven active releases remain withheld because source-alignment blockers make explanatory publication ineligible.",
+  "totals": {
+    "activeRegistryReleases": 46,
+    "priorBatchRecordIds": 50,
+    "releaseMatchedContracts": 7,
+    "repairedReplacementContracts": 2,
+    "newlyAlignmentClearContracts": 5,
+    "netNewPages": 5,
+    "activeNovelCandidates": 11,
+    "before": {
+      "sections": 14,
+      "paragraphs": 28,
+      "informationCharacters": 7053
+    },
+    "after": {
+      "sections": 28,
+      "paragraphs": 56,
+      "informationCharacters": 39700
+    },
+    "claimsExplained": 7,
+    "claimsTotal": 7,
+    "unsupportedParagraphs": 0
+  },
+  "withheldActiveCandidates": [
+    {
+      "recordId": "urn:maha:record:fusion-plasma-systems-tokamak-plasma-equilibrium",
+      "domainSlug": "fusion-plasma-systems",
+      "currentRevisionSha256": "sha256:cb41216cd3cf8fdc36decedf66f8e768a25b450969b763e83c3d2b756ae57052",
+      "canonicalPath": "/knowledge/fusion-plasma-systems/mechanisms/fusion-plasma-systems-tokamak-plasma-equilibrium",
+      "blockers": [
+        "source-assignment-positional-legacy",
+        "source-subject-partially-supported"
+      ]
+    },
+    {
+      "recordId": "urn:maha:record:advanced-materials-graphene-hbn-heterostructures",
+      "domainSlug": "advanced-materials",
+      "currentRevisionSha256": "sha256:089357ea824544d5dae02a72384bb9eefea284e439771650d6e60b768ca3c144",
+      "canonicalPath": "/knowledge/advanced-materials/methods/advanced-materials-graphene-hbn-heterostructures",
+      "blockers": [
+        "source-assignment-positional-legacy",
+        "source-subject-mismatched"
+      ]
+    },
+    {
+      "recordId": "urn:maha:record:advanced-materials-moire-superlattices",
+      "domainSlug": "advanced-materials",
+      "currentRevisionSha256": "sha256:e068e9be179055bd276018d4cb160973d97b543ead4a2658066d1af11da7417e",
+      "canonicalPath": "/knowledge/advanced-materials/measurements/advanced-materials-moire-superlattices",
+      "blockers": [
+        "source-assignment-positional-legacy",
+        "source-subject-mismatched"
+      ]
+    },
+    {
+      "recordId": "urn:maha:record:advanced-materials-twist-angle-control",
+      "domainSlug": "advanced-materials",
+      "currentRevisionSha256": "sha256:9a9750914fe0e9429a51dff02b586d4683dec4f1c80cc0d28c7195230330e9cf",
+      "canonicalPath": "/knowledge/advanced-materials/comparisons/advanced-materials-twist-angle-control",
+      "blockers": [
+        "source-assignment-positional-legacy",
+        "source-subject-mismatched"
+      ]
+    },
+    {
+      "recordId": "urn:maha:record:biomolecular-engineering-structure-prediction-filtering",
+      "domainSlug": "biomolecular-engineering",
+      "currentRevisionSha256": "sha256:2f59ecb93f3ad9418b05e01058d2d629fff5368dcc20b838b0e996f651c1db50",
+      "canonicalPath": "/knowledge/biomolecular-engineering/comparisons/biomolecular-engineering-structure-prediction-filtering",
+      "blockers": [
+        "source-assignment-positional-legacy",
+        "source-subject-partially-supported"
+      ]
+    },
+    {
+      "recordId": "urn:maha:record:mechanistic-interpretability-representation-probing-boundary",
+      "domainSlug": "mechanistic-interpretability",
+      "currentRevisionSha256": "sha256:83339b28fdea2a81504e0bf44f9229fe06b24e444c774c0a0d513cf1b0bc8b3f",
+      "canonicalPath": "/knowledge/mechanistic-interpretability/comparisons/mechanistic-interpretability-representation-probing-boundary",
+      "blockers": [
+        "source-alignment-insufficient-evidence",
+        "source-assignment-positional-legacy"
+      ]
+    },
+    {
+      "recordId": "urn:maha:record:critical-supply-chains-high-purity-quartz-deposits",
+      "domainSlug": "critical-supply-chains",
+      "currentRevisionSha256": "sha256:c667320cf234997948bffc6fef2aefd2133010aed2a0af4d457dad0817fd93c0",
+      "canonicalPath": "/knowledge/critical-supply-chains/concepts/critical-supply-chains-high-purity-quartz-deposits",
+      "blockers": [
+        "source-assignment-positional-legacy",
+        "source-subject-partially-supported"
+      ]
+    },
+    {
+      "recordId": "urn:maha:record:critical-supply-chains-quartz-crucible-manufacturing",
+      "domainSlug": "critical-supply-chains",
+      "currentRevisionSha256": "sha256:4ea4058077b38e83ffe793f62499517702af9b8c0f9c129ab932833fa897e78e",
+      "canonicalPath": "/knowledge/critical-supply-chains/mechanisms/critical-supply-chains-quartz-crucible-manufacturing",
+      "blockers": [
+        "source-assignment-positional-legacy",
+        "source-subject-mismatched"
+      ]
+    },
+    {
+      "recordId": "urn:maha:record:critical-supply-chains-semiconductor-grade-polysilicon",
+      "domainSlug": "critical-supply-chains",
+      "currentRevisionSha256": "sha256:16650f77b62196d4e0646eba40145ce3b81eb1c50f72d0342b1f2b2ae6096c79",
+      "canonicalPath": "/knowledge/critical-supply-chains/methods/critical-supply-chains-semiconductor-grade-polysilicon",
+      "blockers": [
+        "source-assignment-positional-legacy",
+        "source-subject-mismatched"
+      ]
+    },
+    {
+      "recordId": "urn:maha:record:critical-supply-chains-euv-photoresist-precursors",
+      "domainSlug": "critical-supply-chains",
+      "currentRevisionSha256": "sha256:fef130954c4d695fc52a1cef16a84d5b4dbde317b8003fb37d0f8a7b7583fc46",
+      "canonicalPath": "/knowledge/critical-supply-chains/measurements/critical-supply-chains-euv-photoresist-precursors",
+      "blockers": [
+        "source-assignment-positional-legacy",
+        "source-subject-mismatched"
+      ]
+    },
+    {
+      "recordId": "urn:maha:record:critical-supply-chains-photoacid-generator-supply",
+      "domainSlug": "critical-supply-chains",
+      "currentRevisionSha256": "sha256:e162b04fef588053f885e1a776241372b62282ee7b4cbb4819cbdb26ca531b69",
+      "canonicalPath": "/knowledge/critical-supply-chains/comparisons/critical-supply-chains-photoacid-generator-supply",
+      "blockers": [
+        "source-assignment-positional-legacy",
+        "source-subject-mismatched"
+      ]
+    }
+  ],
+  "pages": [
+    {
+      "compilerVersion": "maha-substantial-page-compiler/0.1",
+      "contract": {
+        "schemaVersion": "maha-substantial-page/0.1",
+        "recordId": "urn:maha:record:agentic-systems-mcp-tool-deny-by-default",
+        "recordRevisionSha256": "sha256:bc3682ef4b4613b4cff9c468953c218fb20ebad8786ab8c6cc4bbcc8dccb1a66",
+        "directAnswer": {
+          "text": "The Model Context Protocol specification recommends, as a normative SHOULD for implementors rather than a protocol mandate, that a human remain in the loop with the ability to deny tool invocations, and states that the protocol itself does not mandate any specific user interaction model. Within this page, that proposition is limited to Limited to the User Interaction Model warning and the Security Considerations list on the Tools page of the Model Context Protocol specification, version 2024-11-05. It records what the specification recommends to implementors and does not describe any organisation’s allowlist, identity, retention, or approval policy.",
+          "claimIds": [
+            "urn:maha:claim:agentic-systems-mcp-tool-deny-by-default"
+          ],
+          "sourceIds": [
+            "source-agentic-systems-mcp-mcp-core"
+          ]
+        },
+        "searchIntent": {
+          "primaryQuery": "what is human denial control for tool invocations",
+          "readerQuestion": "What does the cited evidence establish about human denial control for tool invocations, and what remains outside its scope?",
+          "audience": "Technical readers evaluating a source-bounded concept before using it in research or strategy.",
+          "readerOutcome": "Understand the bounded definition of human denial control for tool invocations, its technical context, the evidence attached to it, and the inferences the record does not support.",
+          "supportingQuestions": [
+            "How is human denial control for tool invocations defined in this knowledge graph?",
+            "What mechanism or technical context does the cited source establish?",
+            "Which evidence limitations matter when interpreting human denial control for tool invocations?",
+            "Which related records and typed bridges should be examined next?"
+          ],
+          "queryVariants": [
+            "human denial control for tool invocations explained",
+            "human denial control for tool invocations mechanism",
+            "human denial control for tool invocations evidence",
+            "human denial control for tool invocations limitations"
+          ],
+          "title": "Human denial control for tool invocations: evidence and limits",
+          "description": "A source-bound technical reference covering the record’s definition, mechanism, evidence scope, limitations, related records, typed bridges, and complete claim provenance.",
+          "trafficNonClaim": "Search visibility does not guarantee correctness, importance, adoption, or performance."
+        },
+        "explanations": [
+          {
+            "heading": "Definition and evidence boundary",
+            "paragraphs": [
+              "A source-bounded concept record for the human denial control the Model Context Protocol recommends for tool invocations, within agentic systems and MCP. The bounded proposition retained by the canonical record is: The Model Context Protocol specification recommends, as a normative SHOULD for implementors rather than a protocol mandate, that a human remain in the loop with the ability to deny tool invocations, and states that the protocol itself does not mandate any specific user interaction model.",
+              "The applicable scope is Limited to the User Interaction Model warning and the Security Considerations list on the Tools page of the Model Context Protocol specification, version 2024-11-05. It records what the specification recommends to implementors and does not describe any organisation’s allowlist, identity, retention, or approval policy. This definition must not be generalized beyond the cited source and exact record boundary."
+            ],
+            "claimIds": [
+              "urn:maha:claim:agentic-systems-mcp-tool-deny-by-default"
+            ],
+            "sourceIds": [
+              "source-agentic-systems-mcp-mcp-core"
+            ]
+          },
+          {
+            "heading": "Mechanism and technical context",
+            "paragraphs": [
+              "The Tools page states that for trust, safety and security there SHOULD always be a human in the loop with the ability to deny tool invocations, that the protocol itself does not mandate any specific user interaction model, that servers MUST implement proper access controls and validate tool inputs, and that clients SHOULD prompt for user confirmation on sensitive operations. This is the source-bound technical context for the record; no uncited mechanism is added by the compiler.",
+              "A recommendation addressed to implementors is not a protocol requirement, is not evidence that any deployed system denies tools by default, and establishes no system-level performance, safety, scalability, economic advantage, or deployment readiness. The mechanism or method is therefore presented as one component of a larger system, not as evidence for every downstream outcome."
+            ],
+            "claimIds": [
+              "urn:maha:claim:agentic-systems-mcp-tool-deny-by-default"
+            ],
+            "sourceIds": [
+              "source-agentic-systems-mcp-mcp-core"
+            ]
+          },
+          {
+            "heading": "How to interpret the evidence",
+            "paragraphs": [
+              "No cross-source quantitative interval is asserted. Definitions, operating conditions, samples, instruments, and outcome measures must be checked against the exact cited locator during review. The evidence maturity recorded here is single study, and the claim kind is empirical claim.",
+              "Independent replication and cross-platform transfer have not been compiled for this candidate; the evidence maturity refers only to the bounded source contract. The specification recommends implementor behaviour and mandates server-side input validation and access control. It does not prescribe an organisation’s allowlist, identity, retention, or approval policy, and it expressly does not mandate a user interaction model. These qualifications travel with the claim whenever it is reused."
+            ],
+            "claimIds": [
+              "urn:maha:claim:agentic-systems-mcp-tool-deny-by-default"
+            ],
+            "sourceIds": [
+              "source-agentic-systems-mcp-mcp-core"
+            ]
+          },
+          {
+            "heading": "What the source supports and what remains unknown",
+            "paragraphs": [
+              "The inspected source supports exactly this: The Tools page states that for trust, safety and security there SHOULD always be a human in the loop with the ability to deny tool invocations, that the protocol itself does not mandate any specific user interaction model, that servers MUST implement proper access controls and validate tool inputs, and that clients SHOULD prompt for user confirmation on sensitive operations. It was read at Tools page, version 2024-11-05: the \"User Interaction Model\" warning block and the \"Security Considerations\" list.",
+              "What remains unknown is everything outside that locator. A recommendation addressed to implementors is not a protocol requirement, is not evidence that any deployed system denies tools by default, and establishes no system-level performance, safety, scalability, economic advantage, or deployment readiness. No quantity, comparison, or downstream outcome is established here unless a separately scoped record measures it."
+            ],
+            "claimIds": [
+              "urn:maha:claim:agentic-systems-mcp-tool-deny-by-default"
+            ],
+            "sourceIds": [
+              "source-agentic-systems-mcp-mcp-core"
+            ]
+          }
+        ],
+        "comparison": {
+          "status": "not-applicable",
+          "rationale": "This record carries 1 source-bound proposition and therefore has no second supported side. A comparison would have to be manufactured from an adjacent title rather than from a second inspected claim, which the gate forbids.",
+          "axes": []
+        },
+        "calculation": {
+          "status": "not-applicable",
+          "rationale": "The canonical claim declares no reproducible numerical inputs, equation, units, or uncertainty propagation; recorded uncertainty kind is qualitative. Supplying sample values would invent an unsupported quantitative result.",
+          "method": "",
+          "expression": "",
+          "inputs": [],
+          "assumptions": [],
+          "reproducibility": "",
+          "claimIds": [],
+          "sourceIds": []
+        },
+        "limitations": [
+          {
+            "statement": "A recommended human denial control does not by itself establish system-level performance, safety, manufacturability, scalability, economic advantage, clinical benefit, or deployment readiness.",
+            "basis": "record-boundary",
+            "basisIndex": 0
+          },
+          {
+            "statement": "A source-bounded concept record does not establish manufacturing yield, economic advantage, safety, clinical benefit, or commercial readiness unless those outcomes are measured in a separately scoped record.",
+            "basis": "record-boundary",
+            "basisIndex": 1
+          },
+          {
+            "statement": "Do not use this human denial control record to claim that the surrounding technology is proven, safe, scalable, commercially available, or strategically superior.",
+            "basis": "prohibited-inference",
+            "basisIndex": 0
+          },
+          {
+            "statement": "Do not transfer a reported result across hardware, organisms, protocols, datasets, operating conditions, or outcome definitions without a declared comparison contract.",
+            "basis": "prohibited-inference",
+            "basisIndex": 1
+          },
+          {
+            "statement": "Do not read a recommended human ability to deny an invocation as a requirement that tools be denied unless explicitly permitted.",
+            "basis": "prohibited-inference",
+            "basisIndex": 2
+          },
+          {
+            "statement": "This compilation reorganizes an existing inspected claim and its declared source; it does not add a new experiment, measurement, or independent replication.",
+            "basis": "editorial",
+            "basisIndex": null
+          },
+          {
+            "statement": "Internal editorial inspection is not external peer review, and no result on this page has been independently reproduced.",
+            "basis": "editorial",
+            "basisIndex": null
+          }
+        ],
+        "relatedRecords": [
+          {
+            "recordId": "urn:maha:record:agentic-systems-mcp-least-authority-tokens",
+            "relation": "prerequisite",
+            "rationale": "Declared mechanistic-dependency edge into this record, so it is positioned earlier in the same bounded sequence."
+          },
+          {
+            "recordId": "urn:maha:record:agentic-systems-mcp-mcp-prompt-templates",
+            "relation": "mechanism",
+            "rationale": "Cites the same source as this record, so the two are related through the evidence rather than through wording."
+          },
+          {
+            "recordId": "urn:maha:record:agentic-systems-mcp-tool-allowlisting",
+            "relation": "mechanism",
+            "rationale": "Declared mechanistic-dependency edge from this record. The edge is navigational and asserts no equivalence or causation beyond the cited source scope."
+          }
+        ],
+        "originalContribution": "Maha’s contribution is the explicit assembly of definition, mechanism, evidence state, limitations, typed bridges, related records, and provenance into one auditable reading path. It is an editorial structure, not a new factual claim."
+      },
+      "decision": {
+        "recordId": "urn:maha:record:agentic-systems-mcp-tool-deny-by-default",
+        "pageEligible": true,
+        "evaluatedAgainst": "maha-substantial-page/0.1",
+        "reasons": [],
+        "measures": {
+          "explanationSections": 4,
+          "explanationParagraphs": 8,
+          "comparisonAxes": 0,
+          "calculationInputs": 0,
+          "limitations": 7,
+          "relatedRecords": 3,
+          "supportingQuestions": 4
+        }
+      },
+      "selectionTrace": [
+        {
+          "recordId": "urn:maha:record:agentic-systems-mcp-least-authority-tokens",
+          "relation": "prerequisite",
+          "tier": "bridge-edge",
+          "rationale": "Declared mechanistic-dependency edge into this record, so it is positioned earlier in the same bounded sequence."
+        },
+        {
+          "recordId": "urn:maha:record:agentic-systems-mcp-mcp-prompt-templates",
+          "relation": "mechanism",
+          "tier": "shared-source",
+          "rationale": "Cites the same source as this record, so the two are related through the evidence rather than through wording."
+        },
+        {
+          "recordId": "urn:maha:record:agentic-systems-mcp-tool-allowlisting",
+          "relation": "mechanism",
+          "tier": "bridge-edge",
+          "rationale": "Declared mechanistic-dependency edge from this record. The edge is navigational and asserts no equivalence or causation beyond the cited source scope."
+        }
+      ],
+      "contractDigest": "sha256:71fc21b03f6837c54c4b1f5b1c680aaa66c513f2448e4ce7f1176cffe7ef368b",
+      "publicationVersion": "maha-substantial-publication/1.2",
+      "publicationDate": "2026-08-28",
+      "path": "/knowledge/agentic-systems-mcp/concepts/agentic-systems-mcp-human-denial-control-for-tool-invocations",
+      "domainSlug": "agentic-systems-mcp",
+      "qualificationReason": "Active canonical release epirelease_ec742c5ed8924d4b9f8f3bda5570bb19 matches exact revision sha256:bc3682ef4b4613b4cff9c468953c218fb20ebad8786ab8c6cc4bbcc8dccb1a66; the repaired source is inspected, locator-bound, internally reviewed, and fresh substantial-page quality is eligible.",
+      "mathematicalBridges": [
+        {
+          "bridgeId": "urn:maha:bridge:agentic-systems-mcp-tool-deny-by-default-1",
+          "targetRecordId": "urn:maha:record:agentic-systems-mcp-tool-allowlisting",
+          "bridgeType": "mechanistic-dependency",
+          "statement": "Tool deny by default is positioned after Tool allowlisting in this bounded dependency sequence; the edge is navigational and does not assert equivalence or causation beyond the cited source scope.",
+          "interpretation": "Recorded as a mechanistic dependency, navigational within the cited source scope. It asserts neither equivalence nor causation beyond that scope."
+        }
+      ],
+      "quality": {
+        "eligible": true,
+        "reasons": [],
+        "dimensions": [
+          "direct-definition",
+          "mechanism-and-context",
+          "evidence-interpretation",
+          "comparison-boundary",
+          "calculation-boundary",
+          "limitations",
+          "related-records",
+          "claim-provenance",
+          "mathematical-bridges"
+        ],
+        "evidenceCoverage": {
+          "claimsExplained": 1,
+          "claimsTotal": 1,
+          "sourcesBound": 1,
+          "sourcesTotal": 1,
+          "unsupportedExplanationParagraphs": 0
+        },
+        "informationValue": {
+          "dimensionsCovered": 9,
+          "sourceBoundSections": 4,
+          "limitations": 7,
+          "relatedRecords": 3,
+          "comparisonDecisionRecorded": true,
+          "calculationDecisionRecorded": true
+        }
+      },
+      "depth": {
+        "before": {
+          "sections": 2,
+          "paragraphs": 4,
+          "informationCharacters": 1020
+        },
+        "after": {
+          "sections": 4,
+          "paragraphs": 8,
+          "informationCharacters": 6727,
+          "dimensions": 9
+        },
+        "characterDelta": 5707
+      },
+      "replacesPublicationVersion": "maha-substantial-publication/1.1",
+      "releaseEvidence": {
+        "recordId": "urn:maha:record:agentic-systems-mcp-tool-deny-by-default",
+        "releaseId": "epirelease_ec742c5ed8924d4b9f8f3bda5570bb19",
+        "targetSha256": "sha256:bc3682ef4b4613b4cff9c468953c218fb20ebad8786ab8c6cc4bbcc8dccb1a66",
+        "canonicalPath": "/knowledge/agentic-systems-mcp/concepts/agentic-systems-mcp-human-denial-control-for-tool-invocations",
+        "assuranceTier": "internally-reviewed-canonical"
+      },
+      "publicationDigest": "sha256:32abd0d161c4b49552c53fcfb375414b24b42725ee3af1d2516b5ec9b9d9f2e5"
+    },
+    {
+      "compilerVersion": "maha-substantial-page-compiler/0.1",
+      "contract": {
+        "schemaVersion": "maha-substantial-page/0.1",
+        "recordId": "urn:maha:record:fusion-plasma-systems-breeding-blanket-test-modules",
+        "recordRevisionSha256": "sha256:4e6718f1603760cec3f677744f669991415c5466c982f9c0aae3f6b39824636a",
+        "directAnswer": {
+          "text": "ITER documents a Test Blanket Module programme under which in-vessel modules will be used to test tritium breeding concepts, and states that further research is necessary to demonstrate the feasibility of large-scale tritium production and recycling. Within this page, that proposition is limited to Limited to the \"ITER Test Blanket Module (TBM) Program\" section of the ITER Tritium Breeding page. It records a planned test programme and its stated objective, and pools no results from other devices, studies, or blanket concepts.",
+          "claimIds": [
+            "urn:maha:claim:fusion-plasma-systems-breeding-blanket-test-modules"
+          ],
+          "sourceIds": [
+            "source-fusion-plasma-systems-iter-support"
+          ]
+        },
+        "searchIntent": {
+          "primaryQuery": "what is breeding blanket test modules",
+          "readerQuestion": "What does the cited evidence establish about breeding blanket test modules, and what remains outside its scope?",
+          "audience": "Technical readers evaluating a source-bounded concept before using it in research or strategy.",
+          "readerOutcome": "Understand the bounded definition of breeding blanket test modules, its technical context, the evidence attached to it, and the inferences the record does not support.",
+          "supportingQuestions": [
+            "How is breeding blanket test modules defined in this knowledge graph?",
+            "What mechanism or technical context does the cited source establish?",
+            "Which evidence limitations matter when interpreting breeding blanket test modules?",
+            "Which related records and typed bridges should be examined next?"
+          ],
+          "queryVariants": [
+            "breeding blanket test modules explained",
+            "breeding blanket test modules mechanism",
+            "breeding blanket test modules evidence",
+            "breeding blanket test modules limitations"
+          ],
+          "title": "Breeding blanket test modules: evidence, mechanism, and limits",
+          "description": "A source-bound technical reference covering the record’s definition, mechanism, evidence scope, limitations, related records, typed bridges, and complete claim provenance.",
+          "trafficNonClaim": "Search visibility does not guarantee correctness, importance, adoption, or performance."
+        },
+        "explanations": [
+          {
+            "heading": "Definition and evidence boundary",
+            "paragraphs": [
+              "A source-bounded concept record for the ITER Test Blanket Module programme within fusion and plasma systems. The bounded proposition retained by the canonical record is: ITER documents a Test Blanket Module programme under which in-vessel modules will be used to test tritium breeding concepts, and states that further research is necessary to demonstrate the feasibility of large-scale tritium production and recycling.",
+              "The applicable scope is Limited to the \"ITER Test Blanket Module (TBM) Program\" section of the ITER Tritium Breeding page. It records a planned test programme and its stated objective, and pools no results from other devices, studies, or blanket concepts. This definition must not be generalized beyond the cited source and exact record boundary."
+            ],
+            "claimIds": [
+              "urn:maha:claim:fusion-plasma-systems-breeding-blanket-test-modules"
+            ],
+            "sourceIds": [
+              "source-fusion-plasma-systems-iter-support"
+            ]
+          },
+          {
+            "heading": "Mechanism and technical context",
+            "paragraphs": [
+              "The page names test blanket modules, states that ITER will experiment with tritium production within the vacuum vessel by way of TBMs, identifies four member TBM concepts, and states that further research will be necessary to demonstrate the feasibility of large-scale tritium production and recycling. This is the source-bound technical context for the record; no uncited mechanism is added by the compiler.",
+              "A planned test programme is not a measurement. This record establishes no breeding ratio, no extraction rate, no neutron or heat-load performance, no materials qualification outcome, and no commercial blanket readiness. The mechanism or method is therefore presented as one component of a larger system, not as evidence for every downstream outcome."
+            ],
+            "claimIds": [
+              "urn:maha:claim:fusion-plasma-systems-breeding-blanket-test-modules"
+            ],
+            "sourceIds": [
+              "source-fusion-plasma-systems-iter-support"
+            ]
+          },
+          {
+            "heading": "How to interpret the evidence",
+            "paragraphs": [
+              "No cross-source quantitative interval is asserted. Definitions, operating conditions, samples, instruments, and outcome measures must be checked against the exact cited locator during review. The evidence maturity recorded here is single study, and the claim kind is observation.",
+              "Independent replication and cross-platform transfer have not been compiled for this candidate; the evidence maturity refers only to the bounded source contract. An authoritative description of a planned test programme is not evidence of demonstrated tritium breeding, of measured performance, or of commercial blanket readiness. These qualifications travel with the claim whenever it is reused."
+            ],
+            "claimIds": [
+              "urn:maha:claim:fusion-plasma-systems-breeding-blanket-test-modules"
+            ],
+            "sourceIds": [
+              "source-fusion-plasma-systems-iter-support"
+            ]
+          },
+          {
+            "heading": "What the source supports and what remains unknown",
+            "paragraphs": [
+              "The inspected source supports exactly this: The page names test blanket modules, states that ITER will experiment with tritium production within the vacuum vessel by way of TBMs, identifies four member TBM concepts, and states that further research will be necessary to demonstrate the feasibility of large-scale tritium production and recycling. It was read at “ITER Test Blanket Module (TBM) Program” section and the immediately preceding paragraph ending “Further research will be necessary to demonstrate the feasibility of large-scale tritium production and recycling.”.",
+              "What remains unknown is everything outside that locator. A planned test programme is not a measurement. This record establishes no breeding ratio, no extraction rate, no neutron or heat-load performance, no materials qualification outcome, and no commercial blanket readiness. No quantity, comparison, or downstream outcome is established here unless a separately scoped record measures it."
+            ],
+            "claimIds": [
+              "urn:maha:claim:fusion-plasma-systems-breeding-blanket-test-modules"
+            ],
+            "sourceIds": [
+              "source-fusion-plasma-systems-iter-support"
+            ]
+          }
+        ],
+        "comparison": {
+          "status": "not-applicable",
+          "rationale": "This record carries 1 source-bound proposition and therefore has no second supported side. A comparison would have to be manufactured from an adjacent title rather than from a second inspected claim, which the gate forbids.",
+          "axes": []
+        },
+        "calculation": {
+          "status": "not-applicable",
+          "rationale": "The canonical claim declares no reproducible numerical inputs, equation, units, or uncertainty propagation; recorded uncertainty kind is qualitative. Supplying sample values would invent an unsupported quantitative result.",
+          "method": "",
+          "expression": "",
+          "inputs": [],
+          "assumptions": [],
+          "reproducibility": "",
+          "claimIds": [],
+          "sourceIds": []
+        },
+        "limitations": [
+          {
+            "statement": "A documented test programme does not by itself establish system-level performance, safety, manufacturability, scalability, economic advantage, clinical benefit, or deployment readiness.",
+            "basis": "record-boundary",
+            "basisIndex": 0
+          },
+          {
+            "statement": "A source-bounded concept record does not establish manufacturing yield, economic advantage, safety, clinical benefit, or commercial readiness unless those outcomes are measured in a separately scoped record.",
+            "basis": "record-boundary",
+            "basisIndex": 1
+          },
+          {
+            "statement": "Do not use this test blanket module programme record to claim that the surrounding technology is proven, safe, scalable, commercially available, or strategically superior.",
+            "basis": "prohibited-inference",
+            "basisIndex": 0
+          },
+          {
+            "statement": "Do not transfer a reported result across hardware, organisms, protocols, datasets, operating conditions, or outcome definitions without a declared comparison contract.",
+            "basis": "prohibited-inference",
+            "basisIndex": 1
+          },
+          {
+            "statement": "Do not read a planned test programme as demonstrated tritium breeding, measured performance, completed materials qualification, or commercial blanket readiness.",
+            "basis": "prohibited-inference",
+            "basisIndex": 2
+          },
+          {
+            "statement": "This compilation reorganizes an existing inspected claim and its declared source; it does not add a new experiment, measurement, or independent replication.",
+            "basis": "editorial",
+            "basisIndex": null
+          },
+          {
+            "statement": "Internal editorial inspection is not external peer review, and no result on this page has been independently reproduced.",
+            "basis": "editorial",
+            "basisIndex": null
+          }
+        ],
+        "relatedRecords": [
+          {
+            "recordId": "urn:maha:record:fusion-plasma-systems-cable-in-conduit-conductors",
+            "relation": "prerequisite",
+            "rationale": "Same canonical domain (fusion-plasma-systems). Domain membership only: no shared source or declared edge links these two records."
+          },
+          {
+            "recordId": "urn:maha:record:fusion-plasma-systems-cryogenic-magnet-cooling",
+            "relation": "prerequisite",
+            "rationale": "Declared mechanistic-dependency edge into this record, so it is positioned earlier in the same bounded sequence."
+          },
+          {
+            "recordId": "urn:maha:record:fusion-plasma-systems-tritium-fuel-cycle",
+            "relation": "mechanism",
+            "rationale": "Declared mechanistic-dependency edge from this record. The edge is navigational and asserts no equivalence or causation beyond the cited source scope."
+          }
+        ],
+        "originalContribution": "Maha’s contribution is the explicit assembly of definition, mechanism, evidence state, limitations, typed bridges, related records, and provenance into one auditable reading path. It is an editorial structure, not a new factual claim."
+      },
+      "decision": {
+        "recordId": "urn:maha:record:fusion-plasma-systems-breeding-blanket-test-modules",
+        "pageEligible": true,
+        "evaluatedAgainst": "maha-substantial-page/0.1",
+        "reasons": [],
+        "measures": {
+          "explanationSections": 4,
+          "explanationParagraphs": 8,
+          "comparisonAxes": 0,
+          "calculationInputs": 0,
+          "limitations": 7,
+          "relatedRecords": 3,
+          "supportingQuestions": 4
+        }
+      },
+      "selectionTrace": [
+        {
+          "recordId": "urn:maha:record:fusion-plasma-systems-cable-in-conduit-conductors",
+          "relation": "prerequisite",
+          "tier": "domain-adjacency",
+          "rationale": "Same canonical domain (fusion-plasma-systems). Domain membership only: no shared source or declared edge links these two records."
+        },
+        {
+          "recordId": "urn:maha:record:fusion-plasma-systems-cryogenic-magnet-cooling",
+          "relation": "prerequisite",
+          "tier": "bridge-edge",
+          "rationale": "Declared mechanistic-dependency edge into this record, so it is positioned earlier in the same bounded sequence."
+        },
+        {
+          "recordId": "urn:maha:record:fusion-plasma-systems-tritium-fuel-cycle",
+          "relation": "mechanism",
+          "tier": "bridge-edge",
+          "rationale": "Declared mechanistic-dependency edge from this record. The edge is navigational and asserts no equivalence or causation beyond the cited source scope."
+        }
+      ],
+      "contractDigest": "sha256:5aba8865d3d7a3b527bb0e7ab4a3e8a39ec375b7b3d3ad2a2f18220e64dec99a",
+      "publicationVersion": "maha-substantial-publication/1.2",
+      "publicationDate": "2026-08-28",
+      "path": "/knowledge/fusion-plasma-systems/concepts/fusion-plasma-systems-breeding-blanket-test-modules",
+      "domainSlug": "fusion-plasma-systems",
+      "qualificationReason": "Active canonical release epirelease_125e34f72e9d4296a44eae59f921caed matches exact revision sha256:4e6718f1603760cec3f677744f669991415c5466c982f9c0aae3f6b39824636a; the repaired source is inspected, locator-bound, internally reviewed, and fresh substantial-page quality is eligible.",
+      "mathematicalBridges": [
+        {
+          "bridgeId": "urn:maha:bridge:fusion-plasma-systems-breeding-blanket-test-modules-1",
+          "targetRecordId": "urn:maha:record:fusion-plasma-systems-tritium-fuel-cycle",
+          "bridgeType": "mechanistic-dependency",
+          "statement": "Breeding blanket test modules is positioned after Tritium fuel cycle in this bounded dependency sequence; the edge is navigational and does not assert equivalence or causation beyond the cited source scope.",
+          "interpretation": "Recorded as a mechanistic dependency, navigational within the cited source scope. It asserts neither equivalence nor causation beyond that scope."
+        }
+      ],
+      "quality": {
+        "eligible": true,
+        "reasons": [],
+        "dimensions": [
+          "direct-definition",
+          "mechanism-and-context",
+          "evidence-interpretation",
+          "comparison-boundary",
+          "calculation-boundary",
+          "limitations",
+          "related-records",
+          "claim-provenance",
+          "mathematical-bridges"
+        ],
+        "evidenceCoverage": {
+          "claimsExplained": 1,
+          "claimsTotal": 1,
+          "sourcesBound": 1,
+          "sourcesTotal": 1,
+          "unsupportedExplanationParagraphs": 0
+        },
+        "informationValue": {
+          "dimensionsCovered": 9,
+          "sourceBoundSections": 4,
+          "limitations": 7,
+          "relatedRecords": 3,
+          "comparisonDecisionRecorded": true,
+          "calculationDecisionRecorded": true
+        }
+      },
+      "depth": {
+        "before": {
+          "sections": 2,
+          "paragraphs": 4,
+          "informationCharacters": 932
+        },
+        "after": {
+          "sections": 4,
+          "paragraphs": 8,
+          "informationCharacters": 6280,
+          "dimensions": 9
+        },
+        "characterDelta": 5348
+      },
+      "replacesPublicationVersion": "maha-substantial-publication/1.1",
+      "releaseEvidence": {
+        "recordId": "urn:maha:record:fusion-plasma-systems-breeding-blanket-test-modules",
+        "releaseId": "epirelease_125e34f72e9d4296a44eae59f921caed",
+        "targetSha256": "sha256:4e6718f1603760cec3f677744f669991415c5466c982f9c0aae3f6b39824636a",
+        "canonicalPath": "/knowledge/fusion-plasma-systems/concepts/fusion-plasma-systems-breeding-blanket-test-modules",
+        "assuranceTier": "internally-reviewed-canonical"
+      },
+      "publicationDigest": "sha256:b65f3c84b6affed40be599da2a6fcf5a1ce0e45dc32b4e38facd93b0826c3c9a"
+    },
+    {
+      "compilerVersion": "maha-substantial-page-compiler/0.1",
+      "contract": {
+        "schemaVersion": "maha-substantial-page/0.1",
+        "recordId": "urn:maha:record:longevity-metabolism-autophagosome-abundance",
+        "recordRevisionSha256": "sha256:ca4b5b97fcdd716e0e9a9cc9bbb468104e24cce2673595f12ac60a45f8cc7740",
+        "directAnswer": {
+          "text": "The cited source supports treating autophagosome abundance as a distinct concept within the stated longevity and metabolism scope. Within this page, that proposition is limited to Limited to Assay interpretation sections for LC3, SQSTM1/p62, lysosomal inhibition, and autophagic flux. in “Guidelines for the use and interpretation of assays for monitoring autophagy”; this candidate records the concept boundary and does not pool results from uncited systems or studies.",
+          "claimIds": [
+            "urn:maha:claim:longevity-metabolism-autophagosome-abundance"
+          ],
+          "sourceIds": [
+            "source-longevity-metabolism-autophagy-guidelines"
+          ]
+        },
+        "searchIntent": {
+          "primaryQuery": "what is autophagosome abundance",
+          "readerQuestion": "What does the cited evidence establish about autophagosome abundance, and what remains outside its scope?",
+          "audience": "Technical readers evaluating a source-bounded concept before using it in research or strategy.",
+          "readerOutcome": "Understand the bounded definition of autophagosome abundance, its technical context, the evidence attached to it, and the inferences the record does not support.",
+          "supportingQuestions": [
+            "How is autophagosome abundance defined in this knowledge graph?",
+            "What mechanism or technical context does the cited source establish?",
+            "Which evidence limitations matter when interpreting autophagosome abundance?",
+            "Which related records and typed bridges should be examined next?"
+          ],
+          "queryVariants": [
+            "autophagosome abundance explained",
+            "autophagosome abundance mechanism",
+            "autophagosome abundance evidence",
+            "autophagosome abundance limitations"
+          ],
+          "title": "Autophagosome abundance: evidence, mechanism, and limits",
+          "description": "A source-bound technical reference covering the record’s definition, mechanism, evidence scope, limitations, related records, typed bridges, and complete claim provenance.",
+          "trafficNonClaim": "Search visibility does not guarantee correctness, importance, adoption, or performance."
+        },
+        "explanations": [
+          {
+            "heading": "Definition and evidence boundary",
+            "paragraphs": [
+              "A source-bounded concept record for autophagosome abundance within longevity and metabolism. The bounded proposition retained by the canonical record is: The cited source supports treating autophagosome abundance as a distinct concept within the stated longevity and metabolism scope.",
+              "The applicable scope is Limited to Assay interpretation sections for LC3, SQSTM1/p62, lysosomal inhibition, and autophagic flux. in “Guidelines for the use and interpretation of assays for monitoring autophagy”; this candidate records the concept boundary and does not pool results from uncited systems or studies. This definition must not be generalized beyond the cited source and exact record boundary."
+            ],
+            "claimIds": [
+              "urn:maha:claim:longevity-metabolism-autophagosome-abundance"
+            ],
+            "sourceIds": [
+              "source-longevity-metabolism-autophagy-guidelines"
+            ]
+          },
+          {
+            "heading": "Mechanism and technical context",
+            "paragraphs": [
+              "The guidelines distinguish static autophagosome measurements from dynamic flux and describe assay-specific interpretation limits. This is the source-bound technical context for the record; no uncited mechanism is added by the compiler.",
+              "Autophagosome abundance does not by itself establish system-level performance, safety, manufacturability, scalability, economic advantage, clinical benefit, or deployment readiness. The mechanism or method is therefore presented as one component of a larger system, not as evidence for every downstream outcome."
+            ],
+            "claimIds": [
+              "urn:maha:claim:longevity-metabolism-autophagosome-abundance"
+            ],
+            "sourceIds": [
+              "source-longevity-metabolism-autophagy-guidelines"
+            ]
+          },
+          {
+            "heading": "How to interpret the evidence",
+            "paragraphs": [
+              "No cross-source quantitative interval is asserted. Definitions, operating conditions, samples, instruments, and outcome measures must be checked against the exact cited locator during review. The evidence maturity recorded here is single study, and the claim kind is theoretical model.",
+              "Independent replication and cross-platform transfer have not been compiled for this candidate; the evidence maturity refers only to the bounded source contract. No single marker establishes autophagy rate, organismal benefit, or a longevity outcome. These qualifications travel with the claim whenever it is reused."
+            ],
+            "claimIds": [
+              "urn:maha:claim:longevity-metabolism-autophagosome-abundance"
+            ],
+            "sourceIds": [
+              "source-longevity-metabolism-autophagy-guidelines"
+            ]
+          },
+          {
+            "heading": "What the source supports and what remains unknown",
+            "paragraphs": [
+              "The inspected source supports exactly this: The guidelines distinguish static autophagosome measurements from dynamic flux and describe assay-specific interpretation limits. It was read at Assay interpretation sections for LC3, SQSTM1/p62, lysosomal inhibition, and autophagic flux.",
+              "What remains unknown is everything outside that locator. Autophagosome abundance does not by itself establish system-level performance, safety, manufacturability, scalability, economic advantage, clinical benefit, or deployment readiness. No quantity, comparison, or downstream outcome is established here unless a separately scoped record measures it."
+            ],
+            "claimIds": [
+              "urn:maha:claim:longevity-metabolism-autophagosome-abundance"
+            ],
+            "sourceIds": [
+              "source-longevity-metabolism-autophagy-guidelines"
+            ]
+          }
+        ],
+        "comparison": {
+          "status": "not-applicable",
+          "rationale": "This record carries 1 source-bound proposition and therefore has no second supported side. A comparison would have to be manufactured from an adjacent title rather than from a second inspected claim, which the gate forbids.",
+          "axes": []
+        },
+        "calculation": {
+          "status": "not-applicable",
+          "rationale": "The canonical claim declares no reproducible numerical inputs, equation, units, or uncertainty propagation; recorded uncertainty kind is qualitative. Supplying sample values would invent an unsupported quantitative result.",
+          "method": "",
+          "expression": "",
+          "inputs": [],
+          "assumptions": [],
+          "reproducibility": "",
+          "claimIds": [],
+          "sourceIds": []
+        },
+        "limitations": [
+          {
+            "statement": "Autophagosome abundance does not by itself establish system-level performance, safety, manufacturability, scalability, economic advantage, clinical benefit, or deployment readiness.",
+            "basis": "record-boundary",
+            "basisIndex": 0
+          },
+          {
+            "statement": "A source-bounded mechanism, method, or measurement record does not establish manufacturing yield, economic advantage, safety, clinical benefit, or commercial readiness unless those outcomes are measured in a separately scoped record.",
+            "basis": "record-boundary",
+            "basisIndex": 1
+          },
+          {
+            "statement": "Do not use this autophagosome abundance record to claim that the surrounding technology is proven, safe, scalable, commercially available, or strategically superior.",
+            "basis": "prohibited-inference",
+            "basisIndex": 0
+          },
+          {
+            "statement": "Do not transfer a reported result across hardware, organisms, protocols, datasets, operating conditions, or outcome definitions without a declared comparison contract.",
+            "basis": "prohibited-inference",
+            "basisIndex": 1
+          },
+          {
+            "statement": "This compilation reorganizes an existing inspected claim and its declared source; it does not add a new experiment, measurement, or independent replication.",
+            "basis": "editorial",
+            "basisIndex": null
+          },
+          {
+            "statement": "Internal editorial inspection is not external peer review, and no result on this page has been independently reproduced.",
+            "basis": "editorial",
+            "basisIndex": null
+          }
+        ],
+        "relatedRecords": [
+          {
+            "recordId": "urn:maha:record:longevity-metabolism-autophagic-flux",
+            "relation": "prerequisite",
+            "rationale": "Declared mechanistic-dependency edge into this record, so it is positioned earlier in the same bounded sequence."
+          },
+          {
+            "recordId": "urn:maha:record:longevity-metabolism-cellular-senescence-markers",
+            "relation": "boundary",
+            "rationale": "Declared strategic-dependency edge into this record, so it is positioned earlier in the same bounded sequence."
+          },
+          {
+            "recordId": "urn:maha:record:longevity-metabolism-mitophagy-flux",
+            "relation": "boundary",
+            "rationale": "Declared strategic-dependency edge into this record, so it is positioned earlier in the same bounded sequence."
+          },
+          {
+            "recordId": "urn:maha:record:longevity-metabolism-nad-salvage-pathway",
+            "relation": "boundary",
+            "rationale": "Declared strategic-dependency edge into this record, so it is positioned earlier in the same bounded sequence."
+          },
+          {
+            "recordId": "urn:maha:record:longevity-metabolism-oxygen-consumption-rate",
+            "relation": "boundary",
+            "rationale": "Declared strategic-dependency edge into this record, so it is positioned earlier in the same bounded sequence."
+          },
+          {
+            "recordId": "urn:maha:record:longevity-metabolism-sirtuin-nad-dependence",
+            "relation": "boundary",
+            "rationale": "Declared strategic-dependency edge into this record, so it is positioned earlier in the same bounded sequence."
+          }
+        ],
+        "originalContribution": "Maha’s contribution is the explicit assembly of definition, mechanism, evidence state, limitations, typed bridges, related records, and provenance into one auditable reading path. It is an editorial structure, not a new factual claim."
+      },
+      "decision": {
+        "recordId": "urn:maha:record:longevity-metabolism-autophagosome-abundance",
+        "pageEligible": true,
+        "evaluatedAgainst": "maha-substantial-page/0.1",
+        "reasons": [],
+        "measures": {
+          "explanationSections": 4,
+          "explanationParagraphs": 8,
+          "comparisonAxes": 0,
+          "calculationInputs": 0,
+          "limitations": 6,
+          "relatedRecords": 6,
+          "supportingQuestions": 4
+        }
+      },
+      "selectionTrace": [
+        {
+          "recordId": "urn:maha:record:longevity-metabolism-autophagic-flux",
+          "relation": "prerequisite",
+          "tier": "bridge-edge",
+          "rationale": "Declared mechanistic-dependency edge into this record, so it is positioned earlier in the same bounded sequence."
+        },
+        {
+          "recordId": "urn:maha:record:longevity-metabolism-cellular-senescence-markers",
+          "relation": "boundary",
+          "tier": "bridge-edge",
+          "rationale": "Declared strategic-dependency edge into this record, so it is positioned earlier in the same bounded sequence."
+        },
+        {
+          "recordId": "urn:maha:record:longevity-metabolism-mitophagy-flux",
+          "relation": "boundary",
+          "tier": "bridge-edge",
+          "rationale": "Declared strategic-dependency edge into this record, so it is positioned earlier in the same bounded sequence."
+        },
+        {
+          "recordId": "urn:maha:record:longevity-metabolism-nad-salvage-pathway",
+          "relation": "boundary",
+          "tier": "bridge-edge",
+          "rationale": "Declared strategic-dependency edge into this record, so it is positioned earlier in the same bounded sequence."
+        },
+        {
+          "recordId": "urn:maha:record:longevity-metabolism-oxygen-consumption-rate",
+          "relation": "boundary",
+          "tier": "bridge-edge",
+          "rationale": "Declared strategic-dependency edge into this record, so it is positioned earlier in the same bounded sequence."
+        },
+        {
+          "recordId": "urn:maha:record:longevity-metabolism-sirtuin-nad-dependence",
+          "relation": "boundary",
+          "tier": "bridge-edge",
+          "rationale": "Declared strategic-dependency edge into this record, so it is positioned earlier in the same bounded sequence."
+        }
+      ],
+      "contractDigest": "sha256:78f4013003880683295a3f605fabfd6b49774a9212dee903b89498df56258983",
+      "publicationVersion": "maha-substantial-publication/1.2",
+      "publicationDate": "2026-08-28",
+      "path": "/knowledge/longevity-metabolism/concepts/longevity-metabolism-autophagosome-abundance",
+      "domainSlug": "longevity-metabolism",
+      "qualificationReason": "Active canonical release epirelease_544aa352bd1e4db38bee41a97f03b34a matches exact revision sha256:ca4b5b97fcdd716e0e9a9cc9bbb468104e24cce2673595f12ac60a45f8cc7740; the repaired source is inspected, locator-bound, internally reviewed, and fresh substantial-page quality is eligible.",
+      "mathematicalBridges": [],
+      "quality": {
+        "eligible": true,
+        "reasons": [],
+        "dimensions": [
+          "direct-definition",
+          "mechanism-and-context",
+          "evidence-interpretation",
+          "comparison-boundary",
+          "calculation-boundary",
+          "limitations",
+          "related-records",
+          "claim-provenance",
+          "mathematical-bridges"
+        ],
+        "evidenceCoverage": {
+          "claimsExplained": 1,
+          "claimsTotal": 1,
+          "sourcesBound": 1,
+          "sourcesTotal": 1,
+          "unsupportedExplanationParagraphs": 0
+        },
+        "informationValue": {
+          "dimensionsCovered": 9,
+          "sourceBoundSections": 4,
+          "limitations": 6,
+          "relatedRecords": 6,
+          "comparisonDecisionRecorded": true,
+          "calculationDecisionRecorded": true
+        }
+      },
+      "depth": {
+        "before": {
+          "sections": 2,
+          "paragraphs": 4,
+          "informationCharacters": 1024
+        },
+        "after": {
+          "sections": 4,
+          "paragraphs": 8,
+          "informationCharacters": 5302,
+          "dimensions": 9
+        },
+        "characterDelta": 4278
+      },
+      "replacesPublicationVersion": null,
+      "releaseEvidence": {
+        "recordId": "urn:maha:record:longevity-metabolism-autophagosome-abundance",
+        "releaseId": "epirelease_544aa352bd1e4db38bee41a97f03b34a",
+        "targetSha256": "sha256:ca4b5b97fcdd716e0e9a9cc9bbb468104e24cce2673595f12ac60a45f8cc7740",
+        "canonicalPath": "/knowledge/longevity-metabolism/concepts/longevity-metabolism-autophagosome-abundance",
+        "assuranceTier": "internally-reviewed-canonical"
+      },
+      "publicationDigest": "sha256:9848df360be755a0f20bb607a67d263fe92ac12aafc9a5d3e346055094f67024"
+    },
+    {
+      "compilerVersion": "maha-substantial-page-compiler/0.1",
+      "contract": {
+        "schemaVersion": "maha-substantial-page/0.1",
+        "recordId": "urn:maha:record:longevity-metabolism-autophagic-flux",
+        "recordRevisionSha256": "sha256:1db5eca0f68681c48646e0d05ca7a71241751ba1d68c64e36b21fefe08ba75d6",
+        "directAnswer": {
+          "text": "The cited source supports treating autophagic flux as a distinct mechanism within the stated longevity and metabolism scope. Within this page, that proposition is limited to Limited to Assay interpretation sections for LC3, SQSTM1/p62, lysosomal inhibition, and autophagic flux. in “Guidelines for the use and interpretation of assays for monitoring autophagy”; this candidate records the concept boundary and does not pool results from uncited systems or studies.",
+          "claimIds": [
+            "urn:maha:claim:longevity-metabolism-autophagic-flux"
+          ],
+          "sourceIds": [
+            "source-longevity-metabolism-autophagy-guidelines"
+          ]
+        },
+        "searchIntent": {
+          "primaryQuery": "what is autophagic flux",
+          "readerQuestion": "What does the cited evidence establish about autophagic flux, and what remains outside its scope?",
+          "audience": "Technical readers evaluating a source-bounded concept before using it in research or strategy.",
+          "readerOutcome": "Understand the bounded definition of autophagic flux, its technical context, the evidence attached to it, and the inferences the record does not support.",
+          "supportingQuestions": [
+            "How is autophagic flux defined in this knowledge graph?",
+            "What mechanism or technical context does the cited source establish?",
+            "Which evidence limitations matter when interpreting autophagic flux?",
+            "Which related records and typed bridges should be examined next?"
+          ],
+          "queryVariants": [
+            "autophagic flux explained",
+            "autophagic flux mechanism",
+            "autophagic flux evidence",
+            "autophagic flux limitations"
+          ],
+          "title": "Autophagic flux: evidence, mechanism, and limits",
+          "description": "A source-bound technical reference covering the record’s definition, mechanism, evidence scope, limitations, related records, typed bridges, and complete claim provenance.",
+          "trafficNonClaim": "Search visibility does not guarantee correctness, importance, adoption, or performance."
+        },
+        "explanations": [
+          {
+            "heading": "Definition and evidence boundary",
+            "paragraphs": [
+              "A source-bounded mechanism record for autophagic flux within longevity and metabolism. The bounded proposition retained by the canonical record is: The cited source supports treating autophagic flux as a distinct mechanism within the stated longevity and metabolism scope.",
+              "The applicable scope is Limited to Assay interpretation sections for LC3, SQSTM1/p62, lysosomal inhibition, and autophagic flux. in “Guidelines for the use and interpretation of assays for monitoring autophagy”; this candidate records the concept boundary and does not pool results from uncited systems or studies. This definition must not be generalized beyond the cited source and exact record boundary."
+            ],
+            "claimIds": [
+              "urn:maha:claim:longevity-metabolism-autophagic-flux"
+            ],
+            "sourceIds": [
+              "source-longevity-metabolism-autophagy-guidelines"
+            ]
+          },
+          {
+            "heading": "Mechanism and technical context",
+            "paragraphs": [
+              "The guidelines distinguish static autophagosome measurements from dynamic flux and describe assay-specific interpretation limits. This is the source-bound technical context for the record; no uncited mechanism is added by the compiler.",
+              "Autophagic flux does not by itself establish system-level performance, safety, manufacturability, scalability, economic advantage, clinical benefit, or deployment readiness. The mechanism or method is therefore presented as one component of a larger system, not as evidence for every downstream outcome."
+            ],
+            "claimIds": [
+              "urn:maha:claim:longevity-metabolism-autophagic-flux"
+            ],
+            "sourceIds": [
+              "source-longevity-metabolism-autophagy-guidelines"
+            ]
+          },
+          {
+            "heading": "How to interpret the evidence",
+            "paragraphs": [
+              "No cross-source quantitative interval is asserted. Definitions, operating conditions, samples, instruments, and outcome measures must be checked against the exact cited locator during review. The evidence maturity recorded here is single study, and the claim kind is theoretical model.",
+              "Independent replication and cross-platform transfer have not been compiled for this candidate; the evidence maturity refers only to the bounded source contract. No single marker establishes autophagy rate, organismal benefit, or a longevity outcome. These qualifications travel with the claim whenever it is reused."
+            ],
+            "claimIds": [
+              "urn:maha:claim:longevity-metabolism-autophagic-flux"
+            ],
+            "sourceIds": [
+              "source-longevity-metabolism-autophagy-guidelines"
+            ]
+          },
+          {
+            "heading": "What the source supports and what remains unknown",
+            "paragraphs": [
+              "The inspected source supports exactly this: The guidelines distinguish static autophagosome measurements from dynamic flux and describe assay-specific interpretation limits. It was read at Assay interpretation sections for LC3, SQSTM1/p62, lysosomal inhibition, and autophagic flux.",
+              "What remains unknown is everything outside that locator. Autophagic flux does not by itself establish system-level performance, safety, manufacturability, scalability, economic advantage, clinical benefit, or deployment readiness. No quantity, comparison, or downstream outcome is established here unless a separately scoped record measures it."
+            ],
+            "claimIds": [
+              "urn:maha:claim:longevity-metabolism-autophagic-flux"
+            ],
+            "sourceIds": [
+              "source-longevity-metabolism-autophagy-guidelines"
+            ]
+          }
+        ],
+        "comparison": {
+          "status": "not-applicable",
+          "rationale": "This record carries 1 source-bound proposition and therefore has no second supported side. A comparison would have to be manufactured from an adjacent title rather than from a second inspected claim, which the gate forbids.",
+          "axes": []
+        },
+        "calculation": {
+          "status": "not-applicable",
+          "rationale": "The canonical claim declares no reproducible numerical inputs, equation, units, or uncertainty propagation; recorded uncertainty kind is qualitative. Supplying sample values would invent an unsupported quantitative result.",
+          "method": "",
+          "expression": "",
+          "inputs": [],
+          "assumptions": [],
+          "reproducibility": "",
+          "claimIds": [],
+          "sourceIds": []
+        },
+        "limitations": [
+          {
+            "statement": "Autophagic flux does not by itself establish system-level performance, safety, manufacturability, scalability, economic advantage, clinical benefit, or deployment readiness.",
+            "basis": "record-boundary",
+            "basisIndex": 0
+          },
+          {
+            "statement": "A source-bounded mechanism, method, or measurement record does not establish manufacturing yield, economic advantage, safety, clinical benefit, or commercial readiness unless those outcomes are measured in a separately scoped record.",
+            "basis": "record-boundary",
+            "basisIndex": 1
+          },
+          {
+            "statement": "Do not use this autophagic flux record to claim that the surrounding technology is proven, safe, scalable, commercially available, or strategically superior.",
+            "basis": "prohibited-inference",
+            "basisIndex": 0
+          },
+          {
+            "statement": "Do not transfer a reported result across hardware, organisms, protocols, datasets, operating conditions, or outcome definitions without a declared comparison contract.",
+            "basis": "prohibited-inference",
+            "basisIndex": 1
+          },
+          {
+            "statement": "This compilation reorganizes an existing inspected claim and its declared source; it does not add a new experiment, measurement, or independent replication.",
+            "basis": "editorial",
+            "basisIndex": null
+          },
+          {
+            "statement": "Internal editorial inspection is not external peer review, and no result on this page has been independently reproduced.",
+            "basis": "editorial",
+            "basisIndex": null
+          }
+        ],
+        "relatedRecords": [
+          {
+            "recordId": "urn:maha:record:longevity-metabolism-autophagosome-abundance",
+            "relation": "mechanism",
+            "rationale": "Declared mechanistic-dependency edge from this record. The edge is navigational and asserts no equivalence or causation beyond the cited source scope."
+          },
+          {
+            "recordId": "urn:maha:record:longevity-metabolism-lc3-turnover-assays",
+            "relation": "measurement",
+            "rationale": "Cites the same source as this record, so the two are related through the evidence rather than through wording."
+          },
+          {
+            "recordId": "urn:maha:record:longevity-metabolism-lysosomal-degradation-blockade",
+            "relation": "prerequisite",
+            "rationale": "Declared mechanistic-dependency edge into this record, so it is positioned earlier in the same bounded sequence."
+          }
+        ],
+        "originalContribution": "Maha’s contribution is the explicit assembly of definition, mechanism, evidence state, limitations, typed bridges, related records, and provenance into one auditable reading path. It is an editorial structure, not a new factual claim."
+      },
+      "decision": {
+        "recordId": "urn:maha:record:longevity-metabolism-autophagic-flux",
+        "pageEligible": true,
+        "evaluatedAgainst": "maha-substantial-page/0.1",
+        "reasons": [],
+        "measures": {
+          "explanationSections": 4,
+          "explanationParagraphs": 8,
+          "comparisonAxes": 0,
+          "calculationInputs": 0,
+          "limitations": 6,
+          "relatedRecords": 3,
+          "supportingQuestions": 4
+        }
+      },
+      "selectionTrace": [
+        {
+          "recordId": "urn:maha:record:longevity-metabolism-autophagosome-abundance",
+          "relation": "mechanism",
+          "tier": "bridge-edge",
+          "rationale": "Declared mechanistic-dependency edge from this record. The edge is navigational and asserts no equivalence or causation beyond the cited source scope."
+        },
+        {
+          "recordId": "urn:maha:record:longevity-metabolism-lc3-turnover-assays",
+          "relation": "measurement",
+          "tier": "shared-source",
+          "rationale": "Cites the same source as this record, so the two are related through the evidence rather than through wording."
+        },
+        {
+          "recordId": "urn:maha:record:longevity-metabolism-lysosomal-degradation-blockade",
+          "relation": "prerequisite",
+          "tier": "bridge-edge",
+          "rationale": "Declared mechanistic-dependency edge into this record, so it is positioned earlier in the same bounded sequence."
+        }
+      ],
+      "contractDigest": "sha256:4348d11d796e922432c3e6d49e8b09af9a26df6ccb5c613dbdd53f9ccc172d67",
+      "publicationVersion": "maha-substantial-publication/1.2",
+      "publicationDate": "2026-08-28",
+      "path": "/knowledge/longevity-metabolism/mechanisms/longevity-metabolism-autophagic-flux",
+      "domainSlug": "longevity-metabolism",
+      "qualificationReason": "Active canonical release epirelease_0ec7c21d98e14b4fb8f01fdc65c4064b matches exact revision sha256:1db5eca0f68681c48646e0d05ca7a71241751ba1d68c64e36b21fefe08ba75d6; the repaired source is inspected, locator-bound, internally reviewed, and fresh substantial-page quality is eligible.",
+      "mathematicalBridges": [
+        {
+          "bridgeId": "urn:maha:bridge:longevity-metabolism-autophagic-flux-1",
+          "targetRecordId": "urn:maha:record:longevity-metabolism-autophagosome-abundance",
+          "bridgeType": "mechanistic-dependency",
+          "statement": "Autophagic flux is positioned after Autophagosome abundance in this bounded dependency sequence; the edge is navigational and does not assert equivalence or causation beyond the cited source scope.",
+          "interpretation": "Recorded as a mechanistic dependency, navigational within the cited source scope. It asserts neither equivalence nor causation beyond that scope."
+        }
+      ],
+      "quality": {
+        "eligible": true,
+        "reasons": [],
+        "dimensions": [
+          "direct-definition",
+          "mechanism-and-context",
+          "evidence-interpretation",
+          "comparison-boundary",
+          "calculation-boundary",
+          "limitations",
+          "related-records",
+          "claim-provenance",
+          "mathematical-bridges"
+        ],
+        "evidenceCoverage": {
+          "claimsExplained": 1,
+          "claimsTotal": 1,
+          "sourcesBound": 1,
+          "sourcesTotal": 1,
+          "unsupportedExplanationParagraphs": 0
+        },
+        "informationValue": {
+          "dimensionsCovered": 9,
+          "sourceBoundSections": 4,
+          "limitations": 6,
+          "relatedRecords": 3,
+          "comparisonDecisionRecorded": true,
+          "calculationDecisionRecorded": true
+        }
+      },
+      "depth": {
+        "before": {
+          "sections": 2,
+          "paragraphs": 4,
+          "informationCharacters": 1002
+        },
+        "after": {
+          "sections": 4,
+          "paragraphs": 8,
+          "informationCharacters": 5305,
+          "dimensions": 9
+        },
+        "characterDelta": 4303
+      },
+      "replacesPublicationVersion": null,
+      "releaseEvidence": {
+        "recordId": "urn:maha:record:longevity-metabolism-autophagic-flux",
+        "releaseId": "epirelease_0ec7c21d98e14b4fb8f01fdc65c4064b",
+        "targetSha256": "sha256:1db5eca0f68681c48646e0d05ca7a71241751ba1d68c64e36b21fefe08ba75d6",
+        "canonicalPath": "/knowledge/longevity-metabolism/mechanisms/longevity-metabolism-autophagic-flux",
+        "assuranceTier": "internally-reviewed-canonical"
+      },
+      "publicationDigest": "sha256:a3b9f77aa5243f867c5560087870db4bc42fa920b474ff492582f12ccc20982c"
+    },
+    {
+      "compilerVersion": "maha-substantial-page-compiler/0.1",
+      "contract": {
+        "schemaVersion": "maha-substantial-page/0.1",
+        "recordId": "urn:maha:record:longevity-metabolism-lysosomal-degradation-blockade",
+        "recordRevisionSha256": "sha256:b80c01dc2ee3043a7d76441470570ee28019ee3f73f7ad5707128a38d890c794",
+        "directAnswer": {
+          "text": "The cited source supports treating lysosomal degradation blockade as a distinct method within the stated longevity and metabolism scope. Within this page, that proposition is limited to Limited to Assay interpretation sections for LC3, SQSTM1/p62, lysosomal inhibition, and autophagic flux. in “Guidelines for the use and interpretation of assays for monitoring autophagy”; this candidate records the concept boundary and does not pool results from uncited systems or studies.",
+          "claimIds": [
+            "urn:maha:claim:longevity-metabolism-lysosomal-degradation-blockade"
+          ],
+          "sourceIds": [
+            "source-longevity-metabolism-autophagy-guidelines"
+          ]
+        },
+        "searchIntent": {
+          "primaryQuery": "what is lysosomal degradation blockade",
+          "readerQuestion": "What does the cited evidence establish about lysosomal degradation blockade, and what remains outside its scope?",
+          "audience": "Technical readers evaluating a source-bounded concept before using it in research or strategy.",
+          "readerOutcome": "Understand the bounded definition of lysosomal degradation blockade, its technical context, the evidence attached to it, and the inferences the record does not support.",
+          "supportingQuestions": [
+            "How is lysosomal degradation blockade defined in this knowledge graph?",
+            "What mechanism or technical context does the cited source establish?",
+            "Which evidence limitations matter when interpreting lysosomal degradation blockade?",
+            "Which related records and typed bridges should be examined next?"
+          ],
+          "queryVariants": [
+            "lysosomal degradation blockade explained",
+            "lysosomal degradation blockade mechanism",
+            "lysosomal degradation blockade evidence",
+            "lysosomal degradation blockade limitations"
+          ],
+          "title": "Lysosomal degradation blockade: evidence, mechanism, and limits",
+          "description": "A source-bound technical reference covering the record’s definition, mechanism, evidence scope, limitations, related records, typed bridges, and complete claim provenance.",
+          "trafficNonClaim": "Search visibility does not guarantee correctness, importance, adoption, or performance."
+        },
+        "explanations": [
+          {
+            "heading": "Definition and evidence boundary",
+            "paragraphs": [
+              "A source-bounded method record for lysosomal degradation blockade within longevity and metabolism. The bounded proposition retained by the canonical record is: The cited source supports treating lysosomal degradation blockade as a distinct method within the stated longevity and metabolism scope.",
+              "The applicable scope is Limited to Assay interpretation sections for LC3, SQSTM1/p62, lysosomal inhibition, and autophagic flux. in “Guidelines for the use and interpretation of assays for monitoring autophagy”; this candidate records the concept boundary and does not pool results from uncited systems or studies. This definition must not be generalized beyond the cited source and exact record boundary."
+            ],
+            "claimIds": [
+              "urn:maha:claim:longevity-metabolism-lysosomal-degradation-blockade"
+            ],
+            "sourceIds": [
+              "source-longevity-metabolism-autophagy-guidelines"
+            ]
+          },
+          {
+            "heading": "Mechanism and technical context",
+            "paragraphs": [
+              "The guidelines distinguish static autophagosome measurements from dynamic flux and describe assay-specific interpretation limits. This is the source-bound technical context for the record; no uncited mechanism is added by the compiler.",
+              "Lysosomal degradation blockade does not by itself establish system-level performance, safety, manufacturability, scalability, economic advantage, clinical benefit, or deployment readiness. The mechanism or method is therefore presented as one component of a larger system, not as evidence for every downstream outcome."
+            ],
+            "claimIds": [
+              "urn:maha:claim:longevity-metabolism-lysosomal-degradation-blockade"
+            ],
+            "sourceIds": [
+              "source-longevity-metabolism-autophagy-guidelines"
+            ]
+          },
+          {
+            "heading": "How to interpret the evidence",
+            "paragraphs": [
+              "No cross-source quantitative interval is asserted. Definitions, operating conditions, samples, instruments, and outcome measures must be checked against the exact cited locator during review. The evidence maturity recorded here is single study, and the claim kind is theoretical model.",
+              "Independent replication and cross-platform transfer have not been compiled for this candidate; the evidence maturity refers only to the bounded source contract. No single marker establishes autophagy rate, organismal benefit, or a longevity outcome. These qualifications travel with the claim whenever it is reused."
+            ],
+            "claimIds": [
+              "urn:maha:claim:longevity-metabolism-lysosomal-degradation-blockade"
+            ],
+            "sourceIds": [
+              "source-longevity-metabolism-autophagy-guidelines"
+            ]
+          },
+          {
+            "heading": "What the source supports and what remains unknown",
+            "paragraphs": [
+              "The inspected source supports exactly this: The guidelines distinguish static autophagosome measurements from dynamic flux and describe assay-specific interpretation limits. It was read at Assay interpretation sections for LC3, SQSTM1/p62, lysosomal inhibition, and autophagic flux.",
+              "What remains unknown is everything outside that locator. Lysosomal degradation blockade does not by itself establish system-level performance, safety, manufacturability, scalability, economic advantage, clinical benefit, or deployment readiness. No quantity, comparison, or downstream outcome is established here unless a separately scoped record measures it."
+            ],
+            "claimIds": [
+              "urn:maha:claim:longevity-metabolism-lysosomal-degradation-blockade"
+            ],
+            "sourceIds": [
+              "source-longevity-metabolism-autophagy-guidelines"
+            ]
+          }
+        ],
+        "comparison": {
+          "status": "not-applicable",
+          "rationale": "This record carries 1 source-bound proposition and therefore has no second supported side. A comparison would have to be manufactured from an adjacent title rather than from a second inspected claim, which the gate forbids.",
+          "axes": []
+        },
+        "calculation": {
+          "status": "not-applicable",
+          "rationale": "The canonical claim declares no reproducible numerical inputs, equation, units, or uncertainty propagation; recorded uncertainty kind is qualitative. Supplying sample values would invent an unsupported quantitative result.",
+          "method": "",
+          "expression": "",
+          "inputs": [],
+          "assumptions": [],
+          "reproducibility": "",
+          "claimIds": [],
+          "sourceIds": []
+        },
+        "limitations": [
+          {
+            "statement": "Lysosomal degradation blockade does not by itself establish system-level performance, safety, manufacturability, scalability, economic advantage, clinical benefit, or deployment readiness.",
+            "basis": "record-boundary",
+            "basisIndex": 0
+          },
+          {
+            "statement": "A source-bounded mechanism, method, or measurement record does not establish manufacturing yield, economic advantage, safety, clinical benefit, or commercial readiness unless those outcomes are measured in a separately scoped record.",
+            "basis": "record-boundary",
+            "basisIndex": 1
+          },
+          {
+            "statement": "Do not use this lysosomal degradation blockade record to claim that the surrounding technology is proven, safe, scalable, commercially available, or strategically superior.",
+            "basis": "prohibited-inference",
+            "basisIndex": 0
+          },
+          {
+            "statement": "Do not transfer a reported result across hardware, organisms, protocols, datasets, operating conditions, or outcome definitions without a declared comparison contract.",
+            "basis": "prohibited-inference",
+            "basisIndex": 1
+          },
+          {
+            "statement": "This compilation reorganizes an existing inspected claim and its declared source; it does not add a new experiment, measurement, or independent replication.",
+            "basis": "editorial",
+            "basisIndex": null
+          },
+          {
+            "statement": "Internal editorial inspection is not external peer review, and no result on this page has been independently reproduced.",
+            "basis": "editorial",
+            "basisIndex": null
+          }
+        ],
+        "relatedRecords": [
+          {
+            "recordId": "urn:maha:record:longevity-metabolism-autophagic-flux",
+            "relation": "mechanism",
+            "rationale": "Declared mechanistic-dependency edge from this record. The edge is navigational and asserts no equivalence or causation beyond the cited source scope."
+          },
+          {
+            "recordId": "urn:maha:record:longevity-metabolism-autophagosome-abundance",
+            "relation": "prerequisite",
+            "rationale": "Cites the same source as this record, so the two are related through the evidence rather than through wording."
+          },
+          {
+            "recordId": "urn:maha:record:longevity-metabolism-lc3-turnover-assays",
+            "relation": "prerequisite",
+            "rationale": "Declared mechanistic-dependency edge into this record, so it is positioned earlier in the same bounded sequence."
+          }
+        ],
+        "originalContribution": "Maha’s contribution is the explicit assembly of definition, mechanism, evidence state, limitations, typed bridges, related records, and provenance into one auditable reading path. It is an editorial structure, not a new factual claim."
+      },
+      "decision": {
+        "recordId": "urn:maha:record:longevity-metabolism-lysosomal-degradation-blockade",
+        "pageEligible": true,
+        "evaluatedAgainst": "maha-substantial-page/0.1",
+        "reasons": [],
+        "measures": {
+          "explanationSections": 4,
+          "explanationParagraphs": 8,
+          "comparisonAxes": 0,
+          "calculationInputs": 0,
+          "limitations": 6,
+          "relatedRecords": 3,
+          "supportingQuestions": 4
+        }
+      },
+      "selectionTrace": [
+        {
+          "recordId": "urn:maha:record:longevity-metabolism-autophagic-flux",
+          "relation": "mechanism",
+          "tier": "bridge-edge",
+          "rationale": "Declared mechanistic-dependency edge from this record. The edge is navigational and asserts no equivalence or causation beyond the cited source scope."
+        },
+        {
+          "recordId": "urn:maha:record:longevity-metabolism-autophagosome-abundance",
+          "relation": "prerequisite",
+          "tier": "shared-source",
+          "rationale": "Cites the same source as this record, so the two are related through the evidence rather than through wording."
+        },
+        {
+          "recordId": "urn:maha:record:longevity-metabolism-lc3-turnover-assays",
+          "relation": "prerequisite",
+          "tier": "bridge-edge",
+          "rationale": "Declared mechanistic-dependency edge into this record, so it is positioned earlier in the same bounded sequence."
+        }
+      ],
+      "contractDigest": "sha256:35012faede6c81c5c77f40da8a54af31f1c41a9275f486a009615b4d40897bfd",
+      "publicationVersion": "maha-substantial-publication/1.2",
+      "publicationDate": "2026-08-28",
+      "path": "/knowledge/longevity-metabolism/methods/longevity-metabolism-lysosomal-degradation-blockade",
+      "domainSlug": "longevity-metabolism",
+      "qualificationReason": "Active canonical release epirelease_23339b67f1124139b20cebc1e0dd6703 matches exact revision sha256:b80c01dc2ee3043a7d76441470570ee28019ee3f73f7ad5707128a38d890c794; the repaired source is inspected, locator-bound, internally reviewed, and fresh substantial-page quality is eligible.",
+      "mathematicalBridges": [
+        {
+          "bridgeId": "urn:maha:bridge:longevity-metabolism-lysosomal-degradation-blockade-1",
+          "targetRecordId": "urn:maha:record:longevity-metabolism-autophagic-flux",
+          "bridgeType": "mechanistic-dependency",
+          "statement": "Lysosomal degradation blockade is positioned after Autophagic flux in this bounded dependency sequence; the edge is navigational and does not assert equivalence or causation beyond the cited source scope.",
+          "interpretation": "Recorded as a mechanistic dependency, navigational within the cited source scope. It asserts neither equivalence nor causation beyond that scope."
+        }
+      ],
+      "quality": {
+        "eligible": true,
+        "reasons": [],
+        "dimensions": [
+          "direct-definition",
+          "mechanism-and-context",
+          "evidence-interpretation",
+          "comparison-boundary",
+          "calculation-boundary",
+          "limitations",
+          "related-records",
+          "claim-provenance",
+          "mathematical-bridges"
+        ],
+        "evidenceCoverage": {
+          "claimsExplained": 1,
+          "claimsTotal": 1,
+          "sourcesBound": 1,
+          "sourcesTotal": 1,
+          "unsupportedExplanationParagraphs": 0
+        },
+        "informationValue": {
+          "dimensionsCovered": 9,
+          "sourceBoundSections": 4,
+          "limitations": 6,
+          "relatedRecords": 3,
+          "comparisonDecisionRecorded": true,
+          "calculationDecisionRecorded": true
+        }
+      },
+      "depth": {
+        "before": {
+          "sections": 2,
+          "paragraphs": 4,
+          "informationCharacters": 1044
+        },
+        "after": {
+          "sections": 4,
+          "paragraphs": 8,
+          "informationCharacters": 5408,
+          "dimensions": 9
+        },
+        "characterDelta": 4364
+      },
+      "replacesPublicationVersion": null,
+      "releaseEvidence": {
+        "recordId": "urn:maha:record:longevity-metabolism-lysosomal-degradation-blockade",
+        "releaseId": "epirelease_23339b67f1124139b20cebc1e0dd6703",
+        "targetSha256": "sha256:b80c01dc2ee3043a7d76441470570ee28019ee3f73f7ad5707128a38d890c794",
+        "canonicalPath": "/knowledge/longevity-metabolism/methods/longevity-metabolism-lysosomal-degradation-blockade",
+        "assuranceTier": "internally-reviewed-canonical"
+      },
+      "publicationDigest": "sha256:5335abda05695c4b0e14ecc08983f8e495e0553b06c55d2cd833c1c8bddb3a65"
+    },
+    {
+      "compilerVersion": "maha-substantial-page-compiler/0.1",
+      "contract": {
+        "schemaVersion": "maha-substantial-page/0.1",
+        "recordId": "urn:maha:record:longevity-metabolism-lc3-turnover-assays",
+        "recordRevisionSha256": "sha256:d41e23431b7c29de0a5301bdaa86aef0a388ad6492f39a4ce6a75bb1d90dc62d",
+        "directAnswer": {
+          "text": "The cited source supports treating lc3 turnover assays as a distinct measurement within the stated longevity and metabolism scope. Within this page, that proposition is limited to Limited to Assay interpretation sections for LC3, SQSTM1/p62, lysosomal inhibition, and autophagic flux. in “Guidelines for the use and interpretation of assays for monitoring autophagy”; this candidate records the concept boundary and does not pool results from uncited systems or studies.",
+          "claimIds": [
+            "urn:maha:claim:longevity-metabolism-lc3-turnover-assays"
+          ],
+          "sourceIds": [
+            "source-longevity-metabolism-autophagy-guidelines"
+          ]
+        },
+        "searchIntent": {
+          "primaryQuery": "what is lc3 turnover assays",
+          "readerQuestion": "What does the cited evidence establish about lc3 turnover assays, and what remains outside its scope?",
+          "audience": "Technical readers evaluating a source-bounded concept before using it in research or strategy.",
+          "readerOutcome": "Understand the bounded definition of lc3 turnover assays, its technical context, the evidence attached to it, and the inferences the record does not support.",
+          "supportingQuestions": [
+            "How is lc3 turnover assays defined in this knowledge graph?",
+            "What mechanism or technical context does the cited source establish?",
+            "Which evidence limitations matter when interpreting lc3 turnover assays?",
+            "Which related records and typed bridges should be examined next?"
+          ],
+          "queryVariants": [
+            "lc3 turnover assays explained",
+            "lc3 turnover assays mechanism",
+            "lc3 turnover assays evidence",
+            "lc3 turnover assays limitations"
+          ],
+          "title": "LC3 turnover assays: evidence, mechanism, and limits",
+          "description": "A source-bound technical reference covering the record’s definition, mechanism, evidence scope, limitations, related records, typed bridges, and complete claim provenance.",
+          "trafficNonClaim": "Search visibility does not guarantee correctness, importance, adoption, or performance."
+        },
+        "explanations": [
+          {
+            "heading": "Definition and evidence boundary",
+            "paragraphs": [
+              "A source-bounded measurement record for lc3 turnover assays within longevity and metabolism. The bounded proposition retained by the canonical record is: The cited source supports treating lc3 turnover assays as a distinct measurement within the stated longevity and metabolism scope.",
+              "The applicable scope is Limited to Assay interpretation sections for LC3, SQSTM1/p62, lysosomal inhibition, and autophagic flux. in “Guidelines for the use and interpretation of assays for monitoring autophagy”; this candidate records the concept boundary and does not pool results from uncited systems or studies. This definition must not be generalized beyond the cited source and exact record boundary."
+            ],
+            "claimIds": [
+              "urn:maha:claim:longevity-metabolism-lc3-turnover-assays"
+            ],
+            "sourceIds": [
+              "source-longevity-metabolism-autophagy-guidelines"
+            ]
+          },
+          {
+            "heading": "Mechanism and technical context",
+            "paragraphs": [
+              "The guidelines distinguish static autophagosome measurements from dynamic flux and describe assay-specific interpretation limits. This is the source-bound technical context for the record; no uncited mechanism is added by the compiler.",
+              "LC3 turnover assays does not by itself establish system-level performance, safety, manufacturability, scalability, economic advantage, clinical benefit, or deployment readiness. The mechanism or method is therefore presented as one component of a larger system, not as evidence for every downstream outcome."
+            ],
+            "claimIds": [
+              "urn:maha:claim:longevity-metabolism-lc3-turnover-assays"
+            ],
+            "sourceIds": [
+              "source-longevity-metabolism-autophagy-guidelines"
+            ]
+          },
+          {
+            "heading": "How to interpret the evidence",
+            "paragraphs": [
+              "No cross-source quantitative interval is asserted. Definitions, operating conditions, samples, instruments, and outcome measures must be checked against the exact cited locator during review. The evidence maturity recorded here is single study, and the claim kind is observation.",
+              "Independent replication and cross-platform transfer have not been compiled for this candidate; the evidence maturity refers only to the bounded source contract. No single marker establishes autophagy rate, organismal benefit, or a longevity outcome. These qualifications travel with the claim whenever it is reused."
+            ],
+            "claimIds": [
+              "urn:maha:claim:longevity-metabolism-lc3-turnover-assays"
+            ],
+            "sourceIds": [
+              "source-longevity-metabolism-autophagy-guidelines"
+            ]
+          },
+          {
+            "heading": "What the source supports and what remains unknown",
+            "paragraphs": [
+              "The inspected source supports exactly this: The guidelines distinguish static autophagosome measurements from dynamic flux and describe assay-specific interpretation limits. It was read at Assay interpretation sections for LC3, SQSTM1/p62, lysosomal inhibition, and autophagic flux.",
+              "What remains unknown is everything outside that locator. LC3 turnover assays does not by itself establish system-level performance, safety, manufacturability, scalability, economic advantage, clinical benefit, or deployment readiness. No quantity, comparison, or downstream outcome is established here unless a separately scoped record measures it."
+            ],
+            "claimIds": [
+              "urn:maha:claim:longevity-metabolism-lc3-turnover-assays"
+            ],
+            "sourceIds": [
+              "source-longevity-metabolism-autophagy-guidelines"
+            ]
+          }
+        ],
+        "comparison": {
+          "status": "not-applicable",
+          "rationale": "This record carries 1 source-bound proposition and therefore has no second supported side. A comparison would have to be manufactured from an adjacent title rather than from a second inspected claim, which the gate forbids.",
+          "axes": []
+        },
+        "calculation": {
+          "status": "not-applicable",
+          "rationale": "The canonical claim declares no reproducible numerical inputs, equation, units, or uncertainty propagation; recorded uncertainty kind is qualitative. Supplying sample values would invent an unsupported quantitative result.",
+          "method": "",
+          "expression": "",
+          "inputs": [],
+          "assumptions": [],
+          "reproducibility": "",
+          "claimIds": [],
+          "sourceIds": []
+        },
+        "limitations": [
+          {
+            "statement": "LC3 turnover assays does not by itself establish system-level performance, safety, manufacturability, scalability, economic advantage, clinical benefit, or deployment readiness.",
+            "basis": "record-boundary",
+            "basisIndex": 0
+          },
+          {
+            "statement": "A source-bounded mechanism, method, or measurement record does not establish manufacturing yield, economic advantage, safety, clinical benefit, or commercial readiness unless those outcomes are measured in a separately scoped record.",
+            "basis": "record-boundary",
+            "basisIndex": 1
+          },
+          {
+            "statement": "Do not use this lc3 turnover assays record to claim that the surrounding technology is proven, safe, scalable, commercially available, or strategically superior.",
+            "basis": "prohibited-inference",
+            "basisIndex": 0
+          },
+          {
+            "statement": "Do not transfer a reported result across hardware, organisms, protocols, datasets, operating conditions, or outcome definitions without a declared comparison contract.",
+            "basis": "prohibited-inference",
+            "basisIndex": 1
+          },
+          {
+            "statement": "This compilation reorganizes an existing inspected claim and its declared source; it does not add a new experiment, measurement, or independent replication.",
+            "basis": "editorial",
+            "basisIndex": null
+          },
+          {
+            "statement": "Internal editorial inspection is not external peer review, and no result on this page has been independently reproduced.",
+            "basis": "editorial",
+            "basisIndex": null
+          }
+        ],
+        "relatedRecords": [
+          {
+            "recordId": "urn:maha:record:longevity-metabolism-autophagic-flux",
+            "relation": "mechanism",
+            "rationale": "Cites the same source as this record, so the two are related through the evidence rather than through wording."
+          },
+          {
+            "recordId": "urn:maha:record:longevity-metabolism-lysosomal-degradation-blockade",
+            "relation": "mechanism",
+            "rationale": "Declared mechanistic-dependency edge from this record. The edge is navigational and asserts no equivalence or causation beyond the cited source scope."
+          },
+          {
+            "recordId": "urn:maha:record:longevity-metabolism-p62-sqstm1-turnover",
+            "relation": "prerequisite",
+            "rationale": "Declared mechanistic-dependency edge into this record, so it is positioned earlier in the same bounded sequence."
+          }
+        ],
+        "originalContribution": "Maha’s contribution is the explicit assembly of definition, mechanism, evidence state, limitations, typed bridges, related records, and provenance into one auditable reading path. It is an editorial structure, not a new factual claim."
+      },
+      "decision": {
+        "recordId": "urn:maha:record:longevity-metabolism-lc3-turnover-assays",
+        "pageEligible": true,
+        "evaluatedAgainst": "maha-substantial-page/0.1",
+        "reasons": [],
+        "measures": {
+          "explanationSections": 4,
+          "explanationParagraphs": 8,
+          "comparisonAxes": 0,
+          "calculationInputs": 0,
+          "limitations": 6,
+          "relatedRecords": 3,
+          "supportingQuestions": 4
+        }
+      },
+      "selectionTrace": [
+        {
+          "recordId": "urn:maha:record:longevity-metabolism-autophagic-flux",
+          "relation": "mechanism",
+          "tier": "shared-source",
+          "rationale": "Cites the same source as this record, so the two are related through the evidence rather than through wording."
+        },
+        {
+          "recordId": "urn:maha:record:longevity-metabolism-lysosomal-degradation-blockade",
+          "relation": "mechanism",
+          "tier": "bridge-edge",
+          "rationale": "Declared mechanistic-dependency edge from this record. The edge is navigational and asserts no equivalence or causation beyond the cited source scope."
+        },
+        {
+          "recordId": "urn:maha:record:longevity-metabolism-p62-sqstm1-turnover",
+          "relation": "prerequisite",
+          "tier": "bridge-edge",
+          "rationale": "Declared mechanistic-dependency edge into this record, so it is positioned earlier in the same bounded sequence."
+        }
+      ],
+      "contractDigest": "sha256:95241dff649e4a639f605ff2f2f1dfeb8ef0a83bcf319be91d2e3a1b3f1145fd",
+      "publicationVersion": "maha-substantial-publication/1.2",
+      "publicationDate": "2026-08-28",
+      "path": "/knowledge/longevity-metabolism/measurements/longevity-metabolism-lc3-turnover-assays",
+      "domainSlug": "longevity-metabolism",
+      "qualificationReason": "Active canonical release epirelease_0eb6f5296fba403b8a034b3b79d25956 matches exact revision sha256:d41e23431b7c29de0a5301bdaa86aef0a388ad6492f39a4ce6a75bb1d90dc62d; the repaired source is inspected, locator-bound, internally reviewed, and fresh substantial-page quality is eligible.",
+      "mathematicalBridges": [
+        {
+          "bridgeId": "urn:maha:bridge:longevity-metabolism-lc3-turnover-assays-1",
+          "targetRecordId": "urn:maha:record:longevity-metabolism-lysosomal-degradation-blockade",
+          "bridgeType": "mechanistic-dependency",
+          "statement": "LC3 turnover assays is positioned after Lysosomal degradation blockade in this bounded dependency sequence; the edge is navigational and does not assert equivalence or causation beyond the cited source scope.",
+          "interpretation": "Recorded as a mechanistic dependency, navigational within the cited source scope. It asserts neither equivalence nor causation beyond that scope."
+        }
+      ],
+      "quality": {
+        "eligible": true,
+        "reasons": [],
+        "dimensions": [
+          "direct-definition",
+          "mechanism-and-context",
+          "evidence-interpretation",
+          "comparison-boundary",
+          "calculation-boundary",
+          "limitations",
+          "related-records",
+          "claim-provenance",
+          "mathematical-bridges"
+        ],
+        "evidenceCoverage": {
+          "claimsExplained": 1,
+          "claimsTotal": 1,
+          "sourcesBound": 1,
+          "sourcesTotal": 1,
+          "unsupportedExplanationParagraphs": 0
+        },
+        "informationValue": {
+          "dimensionsCovered": 9,
+          "sourceBoundSections": 4,
+          "limitations": 6,
+          "relatedRecords": 3,
+          "comparisonDecisionRecorded": true,
+          "calculationDecisionRecorded": true
+        }
+      },
+      "depth": {
+        "before": {
+          "sections": 2,
+          "paragraphs": 4,
+          "informationCharacters": 1016
+        },
+        "after": {
+          "sections": 4,
+          "paragraphs": 8,
+          "informationCharacters": 5344,
+          "dimensions": 9
+        },
+        "characterDelta": 4328
+      },
+      "replacesPublicationVersion": null,
+      "releaseEvidence": {
+        "recordId": "urn:maha:record:longevity-metabolism-lc3-turnover-assays",
+        "releaseId": "epirelease_0eb6f5296fba403b8a034b3b79d25956",
+        "targetSha256": "sha256:d41e23431b7c29de0a5301bdaa86aef0a388ad6492f39a4ce6a75bb1d90dc62d",
+        "canonicalPath": "/knowledge/longevity-metabolism/measurements/longevity-metabolism-lc3-turnover-assays",
+        "assuranceTier": "internally-reviewed-canonical"
+      },
+      "publicationDigest": "sha256:d8520d8ef998d8e8c67727c6fd643adbb727510ffe118e66fc56f1ed472b1221"
+    },
+    {
+      "compilerVersion": "maha-substantial-page-compiler/0.1",
+      "contract": {
+        "schemaVersion": "maha-substantial-page/0.1",
+        "recordId": "urn:maha:record:longevity-metabolism-p62-sqstm1-turnover",
+        "recordRevisionSha256": "sha256:ed83383369888b5e9940c582d112890a656b507536b84b62911d91265350de1b",
+        "directAnswer": {
+          "text": "The cited source supports treating p62 sqstm1 turnover as a distinct comparison within the stated longevity and metabolism scope. Within this page, that proposition is limited to Limited to Assay interpretation sections for LC3, SQSTM1/p62, lysosomal inhibition, and autophagic flux. in “Guidelines for the use and interpretation of assays for monitoring autophagy”; this candidate records the concept boundary and does not pool results from uncited systems or studies.",
+          "claimIds": [
+            "urn:maha:claim:longevity-metabolism-p62-sqstm1-turnover"
+          ],
+          "sourceIds": [
+            "source-longevity-metabolism-autophagy-guidelines"
+          ]
+        },
+        "searchIntent": {
+          "primaryQuery": "what is p62 sqstm1 turnover",
+          "readerQuestion": "What does the cited evidence establish about p62 sqstm1 turnover, and what remains outside its scope?",
+          "audience": "Technical readers evaluating a source-bounded concept before using it in research or strategy.",
+          "readerOutcome": "Understand the bounded definition of p62 sqstm1 turnover, its technical context, the evidence attached to it, and the inferences the record does not support.",
+          "supportingQuestions": [
+            "How is p62 sqstm1 turnover defined in this knowledge graph?",
+            "What mechanism or technical context does the cited source establish?",
+            "Which evidence limitations matter when interpreting p62 sqstm1 turnover?",
+            "Which related records and typed bridges should be examined next?"
+          ],
+          "queryVariants": [
+            "p62 sqstm1 turnover explained",
+            "p62 sqstm1 turnover mechanism",
+            "p62 sqstm1 turnover evidence",
+            "p62 sqstm1 turnover limitations"
+          ],
+          "title": "P62 sqstm1 turnover: evidence, mechanism, and limits",
+          "description": "A source-bound technical reference covering the record’s definition, mechanism, evidence scope, limitations, related records, typed bridges, and complete claim provenance.",
+          "trafficNonClaim": "Search visibility does not guarantee correctness, importance, adoption, or performance."
+        },
+        "explanations": [
+          {
+            "heading": "Definition and evidence boundary",
+            "paragraphs": [
+              "A source-bounded comparison record for p62 sqstm1 turnover within longevity and metabolism. The bounded proposition retained by the canonical record is: The cited source supports treating p62 sqstm1 turnover as a distinct comparison within the stated longevity and metabolism scope.",
+              "The applicable scope is Limited to Assay interpretation sections for LC3, SQSTM1/p62, lysosomal inhibition, and autophagic flux. in “Guidelines for the use and interpretation of assays for monitoring autophagy”; this candidate records the concept boundary and does not pool results from uncited systems or studies. This definition must not be generalized beyond the cited source and exact record boundary."
+            ],
+            "claimIds": [
+              "urn:maha:claim:longevity-metabolism-p62-sqstm1-turnover"
+            ],
+            "sourceIds": [
+              "source-longevity-metabolism-autophagy-guidelines"
+            ]
+          },
+          {
+            "heading": "Mechanism and technical context",
+            "paragraphs": [
+              "The guidelines distinguish static autophagosome measurements from dynamic flux and describe assay-specific interpretation limits. This is the source-bound technical context for the record; no uncited mechanism is added by the compiler.",
+              "P62 sqstm1 turnover does not by itself establish system-level performance, safety, manufacturability, scalability, economic advantage, clinical benefit, or deployment readiness. The mechanism or method is therefore presented as one component of a larger system, not as evidence for every downstream outcome."
+            ],
+            "claimIds": [
+              "urn:maha:claim:longevity-metabolism-p62-sqstm1-turnover"
+            ],
+            "sourceIds": [
+              "source-longevity-metabolism-autophagy-guidelines"
+            ]
+          },
+          {
+            "heading": "How to interpret the evidence",
+            "paragraphs": [
+              "No cross-source quantitative interval is asserted. Definitions, operating conditions, samples, instruments, and outcome measures must be checked against the exact cited locator during review. The evidence maturity recorded here is single study, and the claim kind is empirical claim.",
+              "Independent replication and cross-platform transfer have not been compiled for this candidate; the evidence maturity refers only to the bounded source contract. No single marker establishes autophagy rate, organismal benefit, or a longevity outcome. These qualifications travel with the claim whenever it is reused."
+            ],
+            "claimIds": [
+              "urn:maha:claim:longevity-metabolism-p62-sqstm1-turnover"
+            ],
+            "sourceIds": [
+              "source-longevity-metabolism-autophagy-guidelines"
+            ]
+          },
+          {
+            "heading": "What the source supports and what remains unknown",
+            "paragraphs": [
+              "The inspected source supports exactly this: The guidelines distinguish static autophagosome measurements from dynamic flux and describe assay-specific interpretation limits. It was read at Assay interpretation sections for LC3, SQSTM1/p62, lysosomal inhibition, and autophagic flux.",
+              "What remains unknown is everything outside that locator. P62 sqstm1 turnover does not by itself establish system-level performance, safety, manufacturability, scalability, economic advantage, clinical benefit, or deployment readiness. No quantity, comparison, or downstream outcome is established here unless a separately scoped record measures it."
+            ],
+            "claimIds": [
+              "urn:maha:claim:longevity-metabolism-p62-sqstm1-turnover"
+            ],
+            "sourceIds": [
+              "source-longevity-metabolism-autophagy-guidelines"
+            ]
+          }
+        ],
+        "comparison": {
+          "status": "not-applicable",
+          "rationale": "This record carries 1 source-bound proposition and therefore has no second supported side. A comparison would have to be manufactured from an adjacent title rather than from a second inspected claim, which the gate forbids.",
+          "axes": []
+        },
+        "calculation": {
+          "status": "not-applicable",
+          "rationale": "The canonical claim declares no reproducible numerical inputs, equation, units, or uncertainty propagation; recorded uncertainty kind is qualitative. Supplying sample values would invent an unsupported quantitative result.",
+          "method": "",
+          "expression": "",
+          "inputs": [],
+          "assumptions": [],
+          "reproducibility": "",
+          "claimIds": [],
+          "sourceIds": []
+        },
+        "limitations": [
+          {
+            "statement": "P62 sqstm1 turnover does not by itself establish system-level performance, safety, manufacturability, scalability, economic advantage, clinical benefit, or deployment readiness.",
+            "basis": "record-boundary",
+            "basisIndex": 0
+          },
+          {
+            "statement": "A source-bounded mechanism, method, or measurement record does not establish manufacturing yield, economic advantage, safety, clinical benefit, or commercial readiness unless those outcomes are measured in a separately scoped record.",
+            "basis": "record-boundary",
+            "basisIndex": 1
+          },
+          {
+            "statement": "Do not use this p62 sqstm1 turnover record to claim that the surrounding technology is proven, safe, scalable, commercially available, or strategically superior.",
+            "basis": "prohibited-inference",
+            "basisIndex": 0
+          },
+          {
+            "statement": "Do not transfer a reported result across hardware, organisms, protocols, datasets, operating conditions, or outcome definitions without a declared comparison contract.",
+            "basis": "prohibited-inference",
+            "basisIndex": 1
+          },
+          {
+            "statement": "This compilation reorganizes an existing inspected claim and its declared source; it does not add a new experiment, measurement, or independent replication.",
+            "basis": "editorial",
+            "basisIndex": null
+          },
+          {
+            "statement": "Internal editorial inspection is not external peer review, and no result on this page has been independently reproduced.",
+            "basis": "editorial",
+            "basisIndex": null
+          }
+        ],
+        "relatedRecords": [
+          {
+            "recordId": "urn:maha:record:longevity-metabolism-autophagic-flux",
+            "relation": "mechanism",
+            "rationale": "Cites the same source as this record, so the two are related through the evidence rather than through wording."
+          },
+          {
+            "recordId": "urn:maha:record:longevity-metabolism-lc3-turnover-assays",
+            "relation": "mechanism",
+            "rationale": "Declared mechanistic-dependency edge from this record. The edge is navigational and asserts no equivalence or causation beyond the cited source scope."
+          },
+          {
+            "recordId": "urn:maha:record:longevity-metabolism-mitophagy-flux",
+            "relation": "prerequisite",
+            "rationale": "Declared mechanistic-dependency edge into this record, so it is positioned earlier in the same bounded sequence."
+          }
+        ],
+        "originalContribution": "Maha’s contribution is the explicit assembly of definition, mechanism, evidence state, limitations, typed bridges, related records, and provenance into one auditable reading path. It is an editorial structure, not a new factual claim."
+      },
+      "decision": {
+        "recordId": "urn:maha:record:longevity-metabolism-p62-sqstm1-turnover",
+        "pageEligible": true,
+        "evaluatedAgainst": "maha-substantial-page/0.1",
+        "reasons": [],
+        "measures": {
+          "explanationSections": 4,
+          "explanationParagraphs": 8,
+          "comparisonAxes": 0,
+          "calculationInputs": 0,
+          "limitations": 6,
+          "relatedRecords": 3,
+          "supportingQuestions": 4
+        }
+      },
+      "selectionTrace": [
+        {
+          "recordId": "urn:maha:record:longevity-metabolism-autophagic-flux",
+          "relation": "mechanism",
+          "tier": "shared-source",
+          "rationale": "Cites the same source as this record, so the two are related through the evidence rather than through wording."
+        },
+        {
+          "recordId": "urn:maha:record:longevity-metabolism-lc3-turnover-assays",
+          "relation": "mechanism",
+          "tier": "bridge-edge",
+          "rationale": "Declared mechanistic-dependency edge from this record. The edge is navigational and asserts no equivalence or causation beyond the cited source scope."
+        },
+        {
+          "recordId": "urn:maha:record:longevity-metabolism-mitophagy-flux",
+          "relation": "prerequisite",
+          "tier": "bridge-edge",
+          "rationale": "Declared mechanistic-dependency edge into this record, so it is positioned earlier in the same bounded sequence."
+        }
+      ],
+      "contractDigest": "sha256:be6383c458459db5ce29bd402125ccec99d5b1a39520f39b00e3805bd1647d7b",
+      "publicationVersion": "maha-substantial-publication/1.2",
+      "publicationDate": "2026-08-28",
+      "path": "/knowledge/longevity-metabolism/comparisons/longevity-metabolism-p62-sqstm1-turnover",
+      "domainSlug": "longevity-metabolism",
+      "qualificationReason": "Active canonical release epirelease_06f942051b6448b7a48e3a4ccd9a0876 matches exact revision sha256:ed83383369888b5e9940c582d112890a656b507536b84b62911d91265350de1b; the repaired source is inspected, locator-bound, internally reviewed, and fresh substantial-page quality is eligible.",
+      "mathematicalBridges": [
+        {
+          "bridgeId": "urn:maha:bridge:longevity-metabolism-p62-sqstm1-turnover-1",
+          "targetRecordId": "urn:maha:record:longevity-metabolism-lc3-turnover-assays",
+          "bridgeType": "mechanistic-dependency",
+          "statement": "P62 sqstm1 turnover is positioned after LC3 turnover assays in this bounded dependency sequence; the edge is navigational and does not assert equivalence or causation beyond the cited source scope.",
+          "interpretation": "Recorded as a mechanistic dependency, navigational within the cited source scope. It asserts neither equivalence nor causation beyond that scope."
+        }
+      ],
+      "quality": {
+        "eligible": true,
+        "reasons": [],
+        "dimensions": [
+          "direct-definition",
+          "mechanism-and-context",
+          "evidence-interpretation",
+          "comparison-boundary",
+          "calculation-boundary",
+          "limitations",
+          "related-records",
+          "claim-provenance",
+          "mathematical-bridges"
+        ],
+        "evidenceCoverage": {
+          "claimsExplained": 1,
+          "claimsTotal": 1,
+          "sourcesBound": 1,
+          "sourcesTotal": 1,
+          "unsupportedExplanationParagraphs": 0
+        },
+        "informationValue": {
+          "dimensionsCovered": 9,
+          "sourceBoundSections": 4,
+          "limitations": 6,
+          "relatedRecords": 3,
+          "comparisonDecisionRecorded": true,
+          "calculationDecisionRecorded": true
+        }
+      },
+      "depth": {
+        "before": {
+          "sections": 2,
+          "paragraphs": 4,
+          "informationCharacters": 1015
+        },
+        "after": {
+          "sections": 4,
+          "paragraphs": 8,
+          "informationCharacters": 5334,
+          "dimensions": 9
+        },
+        "characterDelta": 4319
+      },
+      "replacesPublicationVersion": null,
+      "releaseEvidence": {
+        "recordId": "urn:maha:record:longevity-metabolism-p62-sqstm1-turnover",
+        "releaseId": "epirelease_06f942051b6448b7a48e3a4ccd9a0876",
+        "targetSha256": "sha256:ed83383369888b5e9940c582d112890a656b507536b84b62911d91265350de1b",
+        "canonicalPath": "/knowledge/longevity-metabolism/comparisons/longevity-metabolism-p62-sqstm1-turnover",
+        "assuranceTier": "internally-reviewed-canonical"
+      },
+      "publicationDigest": "sha256:2946eb329562aace202d510d1882d29f3a6a9f26f6c8cf460a82f3e0c2e0f858"
+    }
+  ]
+}

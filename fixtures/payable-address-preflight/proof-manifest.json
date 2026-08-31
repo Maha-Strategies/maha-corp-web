@@ -1,36 +1,327 @@
 {
-  "schema_version": "1.0",
-  "publisher": "x402.nsgoods.org",
-  "signers": {
-    "0x41Fb10a9E637C85cE3C1d35c4f059E7de1593fBE": ["payable", "payable-address"]
-  },
-  "signer_registry": {
-    "0x41Fb10a9E637C85cE3C1d35c4f059E7de1593fBE": {
-      "services": ["payable", "payable-address"],
-      "status": "active",
-      "valid_from": null,
-      "valid_until": null
-    }
-  },
-  "signer_rotations": [],
-  "signer_policy": {
-    "pinning": "clients should pin signer addresses from this manifest, not trust on first use",
-    "rotation": "signers do not rotate silently; a rotation adds the new address alongside the old with a validity boundary before the old key stops signing",
-    "unannounced_change": "treat as compromise; fail closed, same as a signature mismatch",
-    "rotation_record_shape": {
-      "address_old": "0x...",
-      "address_new": "0x...",
-      "old_valid_until": "ISO8601",
-      "new_valid_from": "ISO8601",
-      "services": ["..."],
-      "announced_at": "ISO8601"
-    }
-  },
-  "services": [
-    {
-      "name": "payable-address",
-      "base_url": "https://payable.nsgoods.org",
-      "signer": "0x41Fb10a9E637C85cE3C1d35c4f059E7de1593fBE"
-    }
+ "schema_version": "1.0",
+ "generated_at": "2026-08-24T07:29:18.582013+00:00",
+ "publisher": "x402.nsgoods.org",
+ "signers": {
+  "0x5e63d01d6A266BC17f577B80199a2a07B15053C7": [
+   "signals",
+   "trust"
+  ],
+  "0x01d298d8Df8DA0cbEA1d91e6D8Cffd56Cc026226": [
+   "regime"
+  ],
+  "0x3fA288bB8C49F3AA1CFfE461739c79D43B6Ae00E": [
+   "extractability"
+  ],
+  "0x2E2Dc1E180d8BAbF6Eb8Ca902bb37106e899c693": [
+   "solar"
+  ],
+  "0x57fF0F084Cba33e6761503f90eEF0Da9F159350c": [
+   "sanctions"
+  ],
+  "0x41Fb10a9E637C85cE3C1d35c4f059E7de1593fBE": [
+   "payable",
+   "payable-address"
   ]
+ },
+ "signer_registry": {
+  "0x5e63d01d6A266BC17f577B80199a2a07B15053C7": {
+   "services": [
+    "signals",
+    "trust"
+   ],
+   "status": "active",
+   "valid_from": null,
+   "valid_until": null,
+   "note": "valid_from is null where the first signing date was not recorded before this field existed; valid_until null means this key is currently signing"
+  },
+  "0x01d298d8Df8DA0cbEA1d91e6D8Cffd56Cc026226": {
+   "services": [
+    "regime"
+   ],
+   "status": "active",
+   "valid_from": null,
+   "valid_until": null,
+   "note": "valid_from is null where the first signing date was not recorded before this field existed; valid_until null means this key is currently signing"
+  },
+  "0x3fA288bB8C49F3AA1CFfE461739c79D43B6Ae00E": {
+   "services": [
+    "extractability"
+   ],
+   "status": "active",
+   "valid_from": null,
+   "valid_until": null,
+   "note": "valid_from is null where the first signing date was not recorded before this field existed; valid_until null means this key is currently signing"
+  },
+  "0x2E2Dc1E180d8BAbF6Eb8Ca902bb37106e899c693": {
+   "services": [
+    "solar"
+   ],
+   "status": "active",
+   "valid_from": null,
+   "valid_until": null,
+   "note": "valid_from is null where the first signing date was not recorded before this field existed; valid_until null means this key is currently signing"
+  },
+  "0x57fF0F084Cba33e6761503f90eEF0Da9F159350c": {
+   "services": [
+    "sanctions"
+   ],
+   "status": "active",
+   "valid_from": null,
+   "valid_until": null,
+   "note": "valid_from is null where the first signing date was not recorded before this field existed; valid_until null means this key is currently signing"
+  },
+  "0x41Fb10a9E637C85cE3C1d35c4f059E7de1593fBE": {
+   "services": [
+    "payable",
+    "payable-address"
+   ],
+   "status": "active",
+   "valid_from": null,
+   "valid_until": null,
+   "note": "valid_from is null where the first signing date was not recorded before this field existed; valid_until null means this key is currently signing"
+  }
+ },
+ "signer_rotations": [],
+ "signer_policy": {
+  "pinning": "clients should pin signer addresses from this manifest, not trust on first use",
+  "rotation": "signers do not rotate silently; a rotation adds the new address alongside the old with a validity boundary before the old key stops signing",
+  "unannounced_change": "treat as compromise; fail closed, same as a signature mismatch",
+  "rotation_record_shape": {
+   "address_old": "0x...",
+   "address_new": "0x...",
+   "old_valid_until": "ISO8601",
+   "new_valid_from": "ISO8601",
+   "services": [
+    "..."
+   ],
+   "announced_at": "ISO8601"
+  }
+ },
+ "services": [
+  {
+   "name": "signals",
+   "base_url": "https://signals.nsgoods.org",
+   "signer": "0x5e63d01d6A266BC17f577B80199a2a07B15053C7",
+   "signer_source": "recovered_from_preview",
+   "paid": [
+    {
+     "path": "/signals",
+     "price_usdc": "0.01",
+     "network": "eip155:8453",
+     "payTo": "0xc87a06DEE4c0E85912296002617120BBfd5EF990"
+    }
+   ],
+   "preview": {
+    "path": "/signals/preview",
+    "preview_signed": true,
+    "post_sign_fields": [],
+    "verify": "remove signature and signed_by, canonicalise the remainder as json.dumps(sort_keys=True, separators=(',',':'), ensure_ascii=True) so non-ASCII is \\uXXXX-escaped, then recover the signer with EIP-191 personal_sign (the Ethereum signed-message prefix); recover == signed_by"
+   },
+   "correctness": null,
+   "verifiability": "well-formed and signed; not independently verifiable at issuance",
+   "health": "/health"
+  },
+  {
+   "name": "trust",
+   "base_url": "https://trust.nsgoods.org",
+   "signer": "0x5e63d01d6A266BC17f577B80199a2a07B15053C7",
+   "signer_source": "recovered_from_preview",
+   "paid": [
+    {
+     "path": "/agent-trust",
+     "price_usdc": "0.005",
+     "network": "eip155:8453",
+     "payTo": "0xc87a06DEE4c0E85912296002617120BBfd5EF990"
+    }
+   ],
+   "preview": {
+    "path": "/agent-trust/preview",
+    "preview_signed": true,
+    "post_sign_fields": [],
+    "verify": "remove signature and signed_by, canonicalise the remainder as json.dumps(sort_keys=True, separators=(',',':'), ensure_ascii=True) so non-ASCII is \\uXXXX-escaped, then recover the signer with EIP-191 personal_sign (the Ethereum signed-message prefix); recover == signed_by"
+   },
+   "correctness": null,
+   "health": "/health"
+  },
+  {
+   "name": "regime",
+   "base_url": "https://regime.nsgoods.org",
+   "signer": "0x01d298d8Df8DA0cbEA1d91e6D8Cffd56Cc026226",
+   "signer_source": "well-known",
+   "paid": [
+    {
+     "path": "/regime",
+     "price_usdc": "0.01",
+     "network": "eip155:8453",
+     "payTo": "0xc87a06DEE4c0E85912296002617120BBfd5EF990"
+    }
+   ],
+   "preview": {
+    "path": "/regime/preview",
+    "preview_signed": false,
+    "note": "preview unsigned — recover the signer from a paid response"
+   },
+   "correctness": null,
+   "verifiability": "well-formed and signed; not independently verifiable at issuance",
+   "health": "/health"
+  },
+  {
+   "name": "extractability",
+   "base_url": "https://schema.nsgoods.org",
+   "signer": "0x3fA288bB8C49F3AA1CFfE461739c79D43B6Ae00E",
+   "signer_source": "health",
+   "paid": [
+    {
+     "path": "/extractability",
+     "price_usdc": "0.01",
+     "network": "eip155:8453",
+     "payTo": "0xc87a06DEE4c0E85912296002617120BBfd5EF990"
+    }
+   ],
+   "preview": {
+    "path": "/extractability/preview",
+    "preview_signed": false,
+    "note": "preview unsigned — recover the signer from a paid response"
+   },
+   "correctness": null,
+   "health": "/health"
+  },
+  {
+   "name": "solar",
+   "base_url": "https://solar.nsgoods.org",
+   "signer": "0x2E2Dc1E180d8BAbF6Eb8Ca902bb37106e899c693",
+   "signer_source": "health",
+   "paid": [
+    {
+     "path": "/solar-legality",
+     "price_usdc": "0.005",
+     "network": "eip155:8453",
+     "payTo": "0xc87a06DEE4c0E85912296002617120BBfd5EF990"
+    }
+   ],
+   "preview": {
+    "path": "/solar-legality/preview",
+    "preview_signed": false,
+    "note": "preview unsigned — recover the signer from a paid response"
+   },
+   "correctness": null,
+   "health": "/health"
+  },
+  {
+   "name": "sanctions",
+   "base_url": "https://sanctions.nsgoods.org",
+   "signer": "0x57fF0F084Cba33e6761503f90eEF0Da9F159350c",
+   "signer_source": "recovered_from_preview",
+   "paid": [
+    {
+     "path": "/screen",
+     "price_usdc": "0.005",
+     "network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+     "payTo": "35tCuyL3E7M88jfhTeEaRxhrbuKFyQLWgxJQyf5QcLLe",
+     "asset": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+     "challenge_transport": "PAYMENT-REQUIRED header (base64); 402 body is {}"
+    }
+   ],
+   "preview": {
+    "path": "/screen/preview",
+    "preview_signed": true,
+    "type": "locked_demo",
+    "input_ignored": true,
+    "post_sign_fields": [
+     "preview",
+     "demo_address",
+     "input_ignored",
+     "note"
+    ],
+    "verify": "remove the post_sign_fields, then remove signature and signed_by, then canonicalise the remainder as json.dumps(sort_keys=True, separators=(',',':'), ensure_ascii=True) so non-ASCII is \\uXXXX-escaped, and recover the signer with EIP-191 personal_sign (the Ethereum signed-message prefix); recover == signed_by"
+   },
+   "correctness": {
+    "url": "https://x402.nsgoods.org/ata-audit/correctness_set.json",
+    "sha256": "91c01a28640b7ee4c7fe791d99074211d4eb28da07ad774aa584ab7e937ab0e2",
+    "cases": 20,
+    "passed": 20,
+    "run_at": "2026-08-18T19:10:30.782427+00:00"
+   },
+   "data_freshness": "OFAC SDN refetch every 6h; HTTP 304 means unchanged, not stale",
+   "health": "/health"
+  },
+  {
+   "name": "payable",
+   "base_url": "https://payable.nsgoods.org",
+   "signer": "0x41Fb10a9E637C85cE3C1d35c4f059E7de1593fBE",
+   "signer_source": "recovered_from_preview",
+   "paid": [
+    {
+     "path": "/payable",
+     "price_usdc": "0.005",
+     "network": "eip155:8453",
+     "payTo": "0xc87a06DEE4c0E85912296002617120BBfd5EF990"
+    }
+   ],
+   "preview": {
+    "path": "/payable/preview",
+    "preview_signed": true,
+    "type": "locked_demo",
+    "input_ignored": true,
+    "post_sign_fields": [
+     "preview",
+     "demo_resource",
+     "input_ignored",
+     "note"
+    ],
+    "verify": "remove the post_sign_fields, then remove signature and signed_by, then canonicalise the remainder as json.dumps(sort_keys=True, separators=(',',':'), ensure_ascii=True) so non-ASCII is \\uXXXX-escaped, and recover the signer with EIP-191 personal_sign (the Ethereum signed-message prefix); recover == signed_by"
+   },
+   "correctness": null,
+   "health": "/health"
+  },
+  {
+   "name": "payable-address",
+   "base_url": "https://payable.nsgoods.org",
+   "signer": "0x41Fb10a9E637C85cE3C1d35c4f059E7de1593fBE",
+   "signer_source": "recovered_from_preview",
+   "schema": "address_schema_version 1 (separate contract from payable schema_version 2)",
+   "paid": [
+    {
+     "path": "/payable/address",
+     "price_usdc": "0.005",
+     "network": "eip155:8453",
+     "payTo": "0xc87a06DEE4c0E85912296002617120BBfd5EF990",
+     "params": {
+      "address": "0x EVM address",
+      "chain": "base",
+      "token": "optional ERC-20 (default USDC on Base)"
+     }
+    }
+   ],
+   "preview": {
+    "path": "/payable/address/preview",
+    "preview_signed": true,
+    "type": "locked_demo",
+    "input_ignored": true,
+    "post_sign_fields": [
+     "preview",
+     "demo_address",
+     "input_ignored",
+     "note"
+    ],
+    "verify": "remove the post_sign_fields, then remove signature and signed_by, then canonicalise the remainder as json.dumps(sort_keys=True, separators=(',',':'), ensure_ascii=True) so non-ASCII is \\uXXXX-escaped, and recover the signer with EIP-191 personal_sign (the Ethereum signed-message prefix); recover == signed_by"
+   },
+   "correctness": {
+    "url": "https://payable.nsgoods.org/payable/address/fixtures",
+    "sha256": "529fa30d6be7b12cbff6752b53d032a32eb888a39057c54ac3c26bebe52fc893",
+    "cases": 3,
+    "note": "real Base mainnet fixtures verified live; a transfer-revert fixture is pending (not fabricated)"
+   },
+   "health": "/health"
+  }
+ ],
+ "validation_set": {
+  "url": "https://x402.nsgoods.org/ata-audit/validation_set.json"
+ },
+ "mcp": {
+  "npm": "nsgoods-mcp",
+  "version": "1.0.2"
+ },
+ "note": "This file is regenerated in place; the URL and inode are stable."
 }

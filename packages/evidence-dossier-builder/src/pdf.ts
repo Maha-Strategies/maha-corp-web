@@ -2,6 +2,10 @@ import { PDFDocument, StandardFonts, rgb, type PDFFont, type PDFPage } from 'pdf
 
 import type { EvidenceDossier } from './schema.ts'
 import type { DossierCalculationAttachment } from '../../wasm-kernel/src/dossier.ts'
+import type { DossierRuntimeWitnessAttachment } from '../../../lib/evidence-dossier/runtime-witness.ts'
+import type { FormalProofAttachment } from '../../maha-lean-bridge/src/schema.ts'
+import type { FormalProofAuthorityNode } from './jsonld.ts'
+import { canonicalJson } from './canonicalize.ts'
 
 const PAGE = { width: 612, height: 792, margin: 54, footer: 36 }
 
@@ -36,6 +40,9 @@ function wrap(text: string, font: PDFFont, size: number, width: number): string[
 export async function renderEvidenceDossierPdf(input: {
   dossier: EvidenceDossier
   attachments: readonly DossierCalculationAttachment[]
+  witnesses?: readonly DossierRuntimeWitnessAttachment[]
+  formalProofs?: readonly FormalProofAttachment[]
+  formalProofAuthority?: FormalProofAuthorityNode
   packageVersion: string
   engagementLabel: string
 }): Promise<Uint8Array> {
@@ -81,10 +88,60 @@ export async function renderEvidenceDossierPdf(input: {
     const receipt = attachment.receipt
     line(`${receipt.module}.${receipt.operation}`, { font: bold, gap: 2 })
     line(`Bound claims: ${attachment.claimIds.join(', ')}`)
-    line(`Output: ${JSON.stringify(receipt.output)} | Uncertainty: ${JSON.stringify(receipt.uncertainty)}`)
+    line(`Output: ${canonicalJson(receipt.output)} | Uncertainty: ${canonicalJson(receipt.uncertainty)}`)
     line(`Precision: ${receipt.precisionPolicy}`)
     line(`Receipt: ${receipt.receiptSha256}`, { size: 7.5, font: mono })
     line(`Kernel: ${receipt.kernelVersion} ${receipt.kernelSha256}`, { size: 7.5, font: mono })
+  }
+  heading('Observed runtime witnesses')
+  if (!input.witnesses?.length) line('No runtime witness is attached. No observed execution environment is claimed.')
+  for (const attachment of input.witnesses ?? []) {
+    line(`${attachment.receipt.callable.module}.${attachment.receipt.callable.qualname} - ${attachment.receipt.execution.status}`, { font: bold, gap: 2 })
+    line(`Bound claims: ${attachment.claimIds.join(', ')} | Calculation receipts: ${attachment.calculationReceiptIds.join(', ')}`)
+    line(`Witness: ${attachment.receipt.receiptSha256}`, { size: 7.5, font: mono })
+    line(`Environment: ${attachment.receipt.environmentSha256} | Complete: ${attachment.receipt.assurance.environmentComplete}`, { size: 7.5, font: mono })
+  }
+  heading('Machine-checked formal statements')
+  // The boundary is printed before the proofs, so a reader meets the limits
+  // before the claims rather than after them.
+  line('A machine-checked proof establishes only that the stated conclusion follows from the stated assumptions.', { gap: 1 })
+  line('It is not an experiment. It is not source-passage verification. It is not independent reproduction.', { gap: 1 })
+  line('It is not expert review and not regulatory approval. It does not establish that a scientific model describes reality.', { gap: 1 })
+  line('It does not establish that the Lean definitions are equivalent to the AssemblyScript compiler or the compiled WASM kernel.', { gap: 3 })
+  const verifiedProofs = [...(input.formalProofs ?? [])]
+    .filter((proof) => proof.proofStatus === 'verified' && proof.assurance.machineChecked === true)
+    .sort((a, b) => (a.theoremId < b.theoremId ? -1 : a.theoremId > b.theoremId ? 1 : 0))
+  if (!verifiedProofs.length) line('No formal proof is attached. No machine-checked statement is claimed.')
+  for (const proof of verifiedProofs) {
+    line(`${proof.theoremNamespace}.${proof.theoremName}`, { font: bold, gap: 2 })
+    line(`Statement: ${proof.formalStatement}`, { size: 7.5, font: mono })
+    for (const assumption of proof.assumptions) line(`Assumption: ${assumption}`)
+    line(`Bound claims: ${proof.claimIds.join(', ')}${proof.calculationOperationIds.length ? ` | Calculation operations: ${proof.calculationOperationIds.join(', ')}` : ''}`)
+    line(`Binding: ${proof.bindingId} rev ${proof.bindingRevision} | ${proof.bindingManifestSha256}`, { size: 7.5, font: mono })
+    line(`Source: ${proof.sourceFile} ${proof.sourceSha256}`, { size: 7.5, font: mono })
+    line(`Proof manifest: ${proof.proofManifestSha256}`, { size: 7.5, font: mono })
+    line(`Toolchain: ${proof.toolchain} (Lean ${proof.leanVersion}) | Verify with: ${proof.verificationCommand}`, { size: 7.5, font: mono })
+    line(`Boundary: ${proof.informalBoundary}`)
+    line('Assurance: machine-checked only. Empirically validated: no. Independently reproduced: no. Compiler equivalence proven: no. Scientific model certified: no.', { gap: 3 })
+  }
+  heading('Authorization of formal statements')
+  const authority = input.formalProofAuthority
+  if (!authority) {
+    line('No signed authorization accompanies this package.')
+  } else {
+    line(`Signature: ${authority.signatureAuthentic ? 'authentic' : 'NOT AUTHENTIC'} | ${authority.signatureAlgorithm} over ${authority.canonicalization}`, { font: bold, gap: 2 })
+    line(`Key: ${authority.keyId}`, { size: 7.5, font: mono })
+    line(`Authority: ${authority.authorityId} | Epoch: ${authority.authorityEpoch} | Scope valid: ${authority.signingAuthorityValid ? 'yes' : 'NO'}`, { size: 7.5, font: mono })
+    // The permitted scope is what makes the signature mean anything, so it is
+    // shown rather than left implicit.
+    line(`Permitted dossiers: ${authority.permittedDossierIds.join(', ')}`, { size: 7.5, font: mono })
+    line(`Authorized bindings: ${authority.bindingManifestSha256} rev ${authority.bindingManifestRevision}`, { size: 7.5, font: mono })
+    if (authority.syntheticTestKey) {
+      line('This key is a synthetic fixture key. Its private seed is a published constant, so anyone can produce this signature. It authorizes only internal fixture material.', { gap: 2 })
+    }
+    // Stated at the point of the signature, where the misreading would occur.
+    line('A valid signature establishes that a holder of the named key attested to this set of authorized bindings, and that the key was permitted to do so for this dossier.', { gap: 1 })
+    line('It does not establish that any theorem holds, that any claim is true, or that any model describes reality.', { gap: 3 })
   }
   heading('Sources and inspected passages')
   for (const source of input.dossier.sources) line(`${source.sourceId} - ${source.verificationState} - ${source.correctedCitation ?? source.submittedCitation}`)

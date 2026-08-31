@@ -1,0 +1,32 @@
+{
+  "payload": {
+    "authorityEpoch": 2,
+    "authorityId": "maha/internal-fixtures",
+    "authorizedCalculationOperationIds": [
+      "interval-add"
+    ],
+    "authorizedClaimIds": [
+      "clm_interval_composition"
+    ],
+    "authorizedTheorems": [
+      "Maha.Interval.add_mem",
+      "Maha.Interval.add_valid"
+    ],
+    "bindingManifestRevision": 1,
+    "bindingManifestSha256": "sha256:aa1c9298f2d41c07989fb6a3213e296c2efd4854d071afc4b6e62b3d64d95b7e",
+    "dossierId": "dos_internal_interval_tolerance_fixture",
+    "proofManifestSha256": "sha256:2c6d9fd67836602ae72e4b6fd152dd51a264986ea909abf4386e04521ff69dca",
+    "toolchain": "leanprover/lean4:v4.33.1",
+    "validity": {
+      "kind": "non-expiring-test-fixture",
+      "reason": "Authorizes only the internal interval-tolerance fixture, signed by a key whose seed is a published constant. A production root carries a bounded window instead."
+    }
+  },
+  "schemaVersion": "maha-signed-formal-proof-trust-root/0.1",
+  "signature": {
+    "algorithm": "ed25519",
+    "canonicalization": "maha-dossier-canonical/1.0",
+    "keyId": "synthetic-fixture-key/DO-NOT-USE-IN-PRODUCTION/v1",
+    "value": "VxwWFRRrnj1Xq40NBCz1wDvssgC2YVNARlqBK9Z3zG+NLv4NHa0J9crdy7m5zaaE/U3Ld1fNJCdLNHogUKUsDA=="
+  }
+}

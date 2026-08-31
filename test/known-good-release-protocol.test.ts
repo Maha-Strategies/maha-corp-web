@@ -39,6 +39,24 @@ const protocolV2 = JSON.parse(readFileSync('docs/operations/known-good-canonical
   frozenComponents: FrozenComponent[]
   requiredBoundaries: string[]
 }
+const protocolV3 = JSON.parse(readFileSync('docs/operations/known-good-canonical-release-protocol-v3.json', 'utf8')) as {
+  schemaVersion: string
+  extends: string
+  status: string
+  evidence: {
+    cabezonPreview: {
+      branch: string
+      migrationRunId: number
+      migrationResult: string
+      productionMutationPerformed: boolean
+      lifecycleStatus: string
+      sharedBypassCredentialUsed: boolean
+      paymentEnabled: boolean
+    }
+  }
+  frozenComponents: FrozenComponent[]
+  requiredBoundaries: string[]
+}
 
 test('the known-good release protocol is pinned to byte-exact reviewed components', () => {
   assert.equal(protocol.schemaVersion, 'maha-known-good-release-protocol/1.0')
@@ -61,11 +79,36 @@ test('protocol v2 explicitly freezes the bounded unapplied witness migration ame
   })
   assert.equal(protocolV2.evidence.unappliedMigrationAmendment.previewMutationPerformed, false)
   assert.equal(protocolV2.evidence.unappliedMigrationAmendment.productionMutationPerformed, false)
+  const supersededByV3 = new Set(protocolV3.frozenComponents.map((component) => component.path))
   for (const component of protocolV2.frozenComponents) {
+    if (supersededByV3.has(component.path)) continue
     const actual = createHash('sha256').update(readFileSync(component.path)).digest('hex')
     assert.equal(actual, component.sha256, `${component.path} changed; create and evidence protocol v3 instead of silently changing v2`)
   }
   assert.match(protocolV2.requiredBoundaries.join('\n'), /No Production database mutation/)
+})
+
+test('protocol v3 freezes the isolated CABEZON Preview migration and lifecycle canary', () => {
+  assert.equal(protocolV3.schemaVersion, 'maha-known-good-release-protocol/3.0')
+  assert.equal(protocolV3.extends, 'docs/operations/known-good-canonical-release-protocol-v2.json')
+  assert.equal(protocolV3.status, 'pending-github-token-revocation')
+  assert.deepEqual(protocolV3.evidence.cabezonPreview, {
+    branch: 'codex/cabezon-preview-adapter',
+    migrationRunId: 33173876204,
+    migrationResult: 'success',
+    productionMutationPerformed: false,
+    lifecycleStatus: 'acknowledged',
+    sharedBypassCredentialUsed: false,
+    paymentEnabled: false,
+  })
+  for (const component of protocolV3.frozenComponents) {
+    const actual = createHash('sha256').update(readFileSync(component.path)).digest('hex')
+    assert.equal(actual, component.sha256, `${component.path} does not match the byte-exact v3 freeze`)
+  }
+  const boundaries = protocolV3.requiredBoundaries.join('\n')
+  for (const phrase of ['Preview only', 'exact PR branch', 'No Production credential', 'No purchase or payment', 'fingerprint']) {
+    assert.match(boundaries, new RegExp(phrase))
+  }
 })
 
 test('the frozen evidence records a non-mutating migration check and complete canary projection', () => {

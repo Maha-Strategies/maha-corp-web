@@ -8,6 +8,7 @@ import {
   releaseReadiness,
 } from '@/lib/epistemic-release'
 import { executeEpistemicCanonicalRelease } from '@/lib/epistemic-release-execution'
+import { classifyEpistemicReleaseConflict } from '@/lib/epistemic-release-conflict'
 import { revalidateEpistemicReleasePaths } from '@/lib/epistemic-revalidation'
 import {
   createEpistemicPersistenceClient,
@@ -38,7 +39,13 @@ function gate(request: Request): { actorFingerprint: string } | null {
 function unavailable(error?: unknown) {
   const message = error instanceof Error ? error.message : ''
   if (message.includes('[22023]')) return json({ error: { code: 'invalid_request', message: 'The release failed persistence validation.' } }, 400)
-  if (message.includes('[P0001]') || message.includes('duplicate key')) return json({ error: { code: 'conflict', message: 'The release conflicts with its target, approvals, active lineage, or canonical version.' } }, 409)
+  if (message.includes('[P0001]') || message.includes('duplicate key')) return json({
+    error: {
+      code: 'conflict',
+      conflictCode: classifyEpistemicReleaseConflict(error),
+      message: 'The release conflicts with its target, approvals, active lineage, or canonical version.',
+    },
+  }, 409)
   if (message.includes('[P0002]')) return json({ error: { code: 'not_found', message: 'The frozen target or canonical release was not found.' } }, 404)
   return json({ error: { code: 'epistemic_release_unavailable', message: 'Canonical release control is temporarily unavailable.' } }, 503)
 }

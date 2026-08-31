@@ -1,12 +1,9 @@
-import { mkdirSync, writeFileSync } from 'node:fs'
+import { createHash } from 'node:crypto'
+import { mkdirSync, readFileSync, writeFileSync } from 'node:fs'
 
-import { EPISTEMIC_RECORDS } from '../lib/epistemic-pilots.ts'
-import { alignmentFor, isAlignmentClear } from '../lib/frontier-source-alignment.ts'
-import { isPilotAlignmentClear, pilotAlignmentFor } from '../lib/pilot-source-alignment.ts'
-import {
-  SUBSTANTIAL_PUBLICATION_PAGES,
-  SUBSTANTIAL_PUBLICATION_RECORD_IDS,
-} from '../lib/substantial-page-publication.ts'
+import { alignmentFor } from '../lib/frontier-source-alignment.ts'
+import { pilotAlignmentFor } from '../lib/pilot-source-alignment.ts'
+import { SUBSTANTIAL_PUBLICATION_PAGES } from '../lib/substantial-page-publication.ts'
 import {
   SUBSTANTIAL_BATCH_2_PAGES,
   SUBSTANTIAL_BATCH_2_RECORD_IDS,
@@ -22,9 +19,6 @@ import {
  * input date. Batch one is read for comparison and is never regenerated here.
  */
 
-const selected = new Set(SUBSTANTIAL_BATCH_2_RECORD_IDS as readonly string[])
-const batch1Ids = new Set(SUBSTANTIAL_PUBLICATION_RECORD_IDS as readonly string[])
-
 /* --------------------------------------------- candidate qualification ---- */
 
 interface Rejection {
@@ -33,40 +27,28 @@ interface Rejection {
   blockers: readonly string[]
 }
 
-const rejected: Rejection[] = []
-const qualifiedNotSelected: { recordId: string; domainSlug: string; reason: string }[] = []
-
-for (const record of EPISTEMIC_RECORDS) {
-  if (selected.has(record.id) || batch1Ids.has(record.id)) continue
-  const pilot = pilotAlignmentFor(record.id)
-  const frontier = pilot ? null : alignmentFor(record.id)
-  const clear = pilot ? isPilotAlignmentClear(record.id) : frontier ? isAlignmentClear(record.id) : false
-  if (clear) {
-    qualifiedNotSelected.push({
-      recordId: record.id,
-      domainSlug: record.domainSlug,
-      reason:
-        'Qualified on every gate but deprioritised against the stated relevance preference for AI, quantum, semiconductors, frontier engineering and supply chains, or held back by the per-domain cap.',
-    })
-    continue
-  }
-  const blockers: string[] = []
-  if (!frontier && !pilot) blockers.push('alignment-audit-missing')
-  const verdict = frontier?.evidence.subjectAligned ?? pilot?.verdict ?? null
-  if (verdict && verdict !== 'supported') blockers.push(`alignment-${verdict}`)
-  const inspected = frontier?.evidence.sourceContentInspected ?? pilot?.sourceContentInspected ?? false
-  if (!inspected) blockers.push('source-not-content-inspected')
-  const locator = frontier?.evidence.inspectedContentLocation ?? pilot?.inspectedContentLocation ?? null
-  if (!locator) blockers.push('inspected-locator-missing')
-  const metadataVerified = frontier?.evidence.metadataVerified ?? pilot?.metadataVerified ?? false
-  if (!metadataVerified) blockers.push('source-metadata-unverified')
-  if (frontier?.assignmentOrigin === 'positional-legacy') blockers.push('source-assignment-positional-legacy')
-  if (!record.claims.length) blockers.push('record-declares-no-claim')
-  if (!record.sources.length) blockers.push('record-declares-no-source')
-  rejected.push({ recordId: record.id, domainSlug: record.domainSlug, blockers: [...new Set(blockers)].sort() })
+interface FrozenSelection {
+  selected: number
+  domains: Record<string, number>
+  qualifiedNotSelected: { recordId: string; domainSlug: string; reason: string }[]
+  rejected: Rejection[]
 }
-rejected.sort((left, right) => left.recordId.localeCompare(right.recordId))
-qualifiedNotSelected.sort((left, right) => left.recordId.localeCompare(right.recordId))
+
+// Batch 2 is a historical publication artifact. Later source inspections must
+// feed a new batch rather than rewriting which records were qualified or
+// rejected on 2026-08-26. The digest prevents this committed snapshot from
+// becoming a convenient self-referential input that silently accepts edits.
+const FROZEN_SELECTION_SHA256 = 'a35eddbbde538fe87777d4a46f480ce29a80ea9143fe97896bd7c224a658f078'
+const committedPayload = JSON.parse(
+  readFileSync('content/substantial-pages/publication-batch-2.json', 'utf8'),
+) as { selection: FrozenSelection }
+const frozenSelectionSha256 = createHash('sha256')
+  .update(JSON.stringify(committedPayload.selection))
+  .digest('hex')
+if (frozenSelectionSha256 !== FROZEN_SELECTION_SHA256) {
+  throw new Error('Batch 2 frozen selection snapshot failed its digest check.')
+}
+const { qualifiedNotSelected, rejected } = committedPayload.selection
 
 /* --------------------------------------------------------------- totals --- */
 

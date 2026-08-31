@@ -65,7 +65,13 @@ export function latestFeedEntries(limit = 30, humanPublishedEntries: FeedEntry[]
     category: brief.kicker,
   }))
 
-  return [...explainerEntries, ...intelligenceEntries, ...humanPublishedEntries]
+  const editorialEntries = [...explainerEntries, ...humanPublishedEntries]
+  const intelligenceLimit = Math.max(0, limit - editorialEntries.length)
+  const selectedIntelligence = intelligenceEntries
+    .sort((left, right) => right.updated.localeCompare(left.updated) || right.published.localeCompare(left.published) || left.url.localeCompare(right.url))
+    .slice(0, intelligenceLimit)
+
+  return [...editorialEntries, ...selectedIntelligence]
     .sort((left, right) => right.updated.localeCompare(left.updated) || right.published.localeCompare(left.published) || left.url.localeCompare(right.url))
     .slice(0, limit)
 }

@@ -11,6 +11,9 @@ import {
   ASSIGNMENT_ORIGINS,
   MISMATCH_BASES,
   BATCH_5_REINSPECTIONS,
+  BATCH_7_FIRST_JUDGEMENTS,
+  BATCH_7_REINSPECTIONS,
+  BATCH_8_FIRST_JUDGEMENTS,
   batchOf,
   batchStats,
   isBatch5Reinspection,
@@ -154,6 +157,8 @@ test('batch membership is disjoint and covers every judged record', () => {
   )
   for (const entry of judged) {
     if (entry.evidence.subjectAligned === 'inaccessible-source' && batchOf(entry.recordId) === null) continue
+    if (BATCH_7_FIRST_JUDGEMENTS.includes(entry.recordId)) continue
+    if (BATCH_8_FIRST_JUDGEMENTS.includes(entry.recordId)) continue
     assert.ok(batchOf(entry.recordId), `${entry.recordId} has a judgement but no batch`)
   }
 })
@@ -187,31 +192,31 @@ test('per-batch statistics sum to the judged population', () => {
     assert.equal(verdictSum, row.attempted, `${row.batchId} verdicts do not sum to attempted`)
     assert.ok(row.contentInspected + row.inaccessible <= row.attempted)
   }
-  // Batch 4 figures moved when batch 5 re-inspected five of its records on full
-  // text. They remain batch-4 members; only their verdicts changed.
+  // Later append-only batches can change active outcomes while original
+  // membership remains frozen.
   const batch4 = stats.find((row) => row.batchId === 'batch-4')!
   assert.deepEqual(batch4, {
     batchId: 'batch-4',
     attempted: 40,
-    contentInspected: 30,
-    inaccessible: 10,
-    supported: 10,
-    partiallySupported: 3,
-    mismatched: 13,
+    contentInspected: 40,
+    inaccessible: 0,
+    supported: 16,
+    partiallySupported: 4,
+    mismatched: 16,
     insufficientEvidence: 4,
-    alignmentClear: 10,
+    alignmentClear: 16,
   })
   const batch5 = stats.find((row) => row.batchId === 'batch-5')!
   assert.deepEqual(batch5, {
     batchId: 'batch-5',
     attempted: 40,
-    contentInspected: 25,
-    inaccessible: 15,
-    supported: 3,
-    partiallySupported: 4,
-    mismatched: 17,
-    insufficientEvidence: 1,
-    alignmentClear: 3,
+    contentInspected: 40,
+    inaccessible: 0,
+    supported: 6,
+    partiallySupported: 10,
+    mismatched: 21,
+    insufficientEvidence: 3,
+    alignmentClear: 6,
   })
 })
 
@@ -257,18 +262,19 @@ test('the guard rejects a batch 4 that is not exactly forty records', async () =
 })
 
 test('the guard rejects a batch 4 domain that does not have five records', async () => {
-  // Swap one batch-4 record for an unjudged record in another domain: the count
-  // stays at forty, so only the per-domain rule can catch it.
+  // Swap one batch-4 member with one batch-5 member in another domain. Both
+  // remain judged and uniquely assigned, so only the domain-shape guard can
+  // catch the malformed batch 4.
   const victim = ALIGNMENT_BATCH_MEMBERSHIP['batch-4'][0]
-  const replacement = FRONTIER_ALIGNMENT_AUDIT.find(
-    (entry) => batchOf(entry.recordId) === null && entry.domainSlug !== alignmentFor(victim)!.domainSlug,
+  const replacementId = ALIGNMENT_BATCH_MEMBERSHIP['batch-5'].find(
+    (recordId) => alignmentFor(recordId)!.domainSlug !== alignmentFor(victim)!.domainSlug,
   )!
   await expectGuardRejection(
     'domain',
-    (source) =>
-      source
-        .replace(`    '${victim}',\n`, `    '${replacement.recordId}',\n`)
-        .replace(`  '${victim}': {`, `  '${replacement.recordId}': {`),
+    (source) => source
+      .replace(`    '${victim}',\n`, "    '__batch-swap__',\n")
+      .replace(`    '${replacementId}',\n`, `    '${victim}',\n`)
+      .replace("    '__batch-swap__',\n", `    '${replacementId}',\n`),
     /five records per domain|no batch|has no judgement/,
   )
 })
@@ -393,16 +399,15 @@ test('the guard validates verdict vocabulary at runtime, not just in TypeScript'
 })
 
 test('the guard rejects a supported or mismatched verdict without content inspection', async () => {
-  const victim = FRONTIER_ALIGNMENT_AUDIT.find(
-    (entry) => batchOf(entry.recordId) === 'batch-5' && entry.evidence.subjectAligned === 'inaccessible-source',
-  )!.recordId
   await expectGuardRejection(
-    'b5insp',
+    'b8insp',
     (source) => {
-      const start = source.indexOf(`  '${victim}': {`)
-      const verdictAt = source.indexOf("    verdict: '", start)
-      const end = source.indexOf("',", verdictAt) + 2
-      return source.slice(0, verdictAt) + "    verdict: 'supported'," + source.slice(end)
+      const start = source.indexOf('const BATCH_8_JUDGEMENTS')
+      const target = 'verdict: decision.verdict,\n      sourceContentInspected: decision.sourceContentInspected,'
+      const at = source.indexOf(target, start)
+      return source.slice(0, at)
+        + "verdict: decision.sourceContentInspected ? decision.verdict : 'supported',\n      sourceContentInspected: decision.sourceContentInspected,"
+        + source.slice(at + target.length)
     },
     /without content inspection/,
   )
@@ -530,8 +535,8 @@ test('the substantial-page gate blocks a record whose alignment is unresolved', 
   // Batch 1 cleared four pilots; batch 2 inspected the RFdiffusion preprint and
   // the Toy Models article, clearing two more. The two still blocked are the
   // ones whose sources could not be retrieved.
-  assert.equal(passing.length, 6, 'pilot pass count changed')
-  assert.equal(blocked.length, 2)
+  assert.equal(passing.length, 7, 'pilot pass count changed')
+  assert.equal(blocked.length, 1)
   for (const pilot of blocked) {
     assert.ok(
       pilot.decision.reasons.some((reason) => reason.startsWith('source-')),
@@ -631,16 +636,16 @@ test('the reported totals match the audit', () => {
   assert.equal(Object.values(origins).reduce((a, b) => a + b, 0), 240)
   assert.equal(origins['explicit-override'], 2)
   assert.deepEqual(verdicts, {
-    supported: 59,
-    'partially-supported': 26,
-    mismatched: 55,
-    'insufficient-evidence': 60,
-    'inaccessible-source': 40,
+    supported: 94,
+    'partially-supported': 47,
+    mismatched: 86,
+    'insufficient-evidence': 9,
+    'inaccessible-source': 4,
   })
-  assert.equal(FRONTIER_ALIGNMENT_AUDIT.filter((entry) => entry.evidence.sourceContentInspected).length, 146)
+  assert.equal(FRONTIER_ALIGNMENT_AUDIT.filter((entry) => entry.evidence.sourceContentInspected).length, 236)
   assert.equal(
     FRONTIER_ALIGNMENT_AUDIT.filter((entry) => isAlignmentClear(entry.recordId)).length,
-    59,
+    94,
     'alignment-clear count changed',
   )
 })
@@ -653,6 +658,10 @@ test('alignment batch 3 inspects five records in every frontier domain', () => {
   // the real invariant is asserted against the batch itself.
   const perDomain = new Map<string, number>()
   for (const recordId of ALIGNMENT_BATCH_MEMBERSHIP['batch-3']) {
+    // Batch 7 re-opened ten previously uninspected records that retain their
+    // original Batch 3 membership. Exclude the later operation when asserting
+    // Batch 3's historical inspection cohort.
+    if (BATCH_7_REINSPECTIONS.includes(recordId)) continue
     const entry = alignmentFor(recordId)!
     if (!entry.evidence.sourceContentInspected) continue
     perDomain.set(entry.domainSlug, (perDomain.get(entry.domainSlug) ?? 0) + 1)

@@ -1,0 +1,118 @@
+name: Preview source-override release canary
+
+on:
+  workflow_dispatch:
+    inputs:
+      preview_origin:
+        description: Exact Vercel Preview origin for this branch
+        required: true
+        type: string
+      confirmation:
+        description: Type RELEASE_5_SOURCE_OVERRIDE_REVISIONS_IN_PREVIEW exactly
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: preview-source-override-release-canary
+  cancel-in-progress: false
+
+jobs:
+  canary:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    environment: Preview
+    env:
+      SOURCE_OVERRIDE_PREVIEW_ORIGIN: ${{ inputs.preview_origin }}
+      SOURCE_OVERRIDE_PREVIEW_CANARY_CONFIRM: ${{ inputs.confirmation }}
+      SOURCE_OVERRIDE_PREVIEW_EVIDENCE_PATH: ${{ github.workspace }}/source-override-preview/evidence.json
+      EPISTEMIC_OPERATIONS_TOKEN: ${{ secrets.EPISTEMIC_OPERATIONS_TOKEN }}
+      EPISTEMIC_RELEASE_AUTHORITY_TOKEN: ${{ secrets.EPISTEMIC_RELEASE_AUTHORITY_TOKEN }}
+      VERCEL_AUTOMATION_BYPASS_SECRET: ${{ secrets.VERCEL_AUTOMATION_BYPASS_SECRET }}
+      SUPABASE_PROJECT_REF: ${{ secrets.SUPABASE_PROJECT_REF }}
+      SUPABASE_DB_PASSWORD: ${{ secrets.SUPABASE_DB_PASSWORD }}
+    steps:
+      - name: Enforce exact Preview boundary
+        env:
+          REF_NAME: ${{ github.ref_name }}
+        run: |
+          set -euo pipefail
+          [ "$REF_NAME" = 'codex/corrected-revision-preview-release' ] || { echo '::error::The canary is restricted to codex/corrected-revision-preview-release.'; exit 1; }
+          [ "$SOURCE_OVERRIDE_PREVIEW_CANARY_CONFIRM" = 'RELEASE_5_SOURCE_OVERRIDE_REVISIONS_IN_PREVIEW' ] || { echo '::error::Confirmation phrase does not match.'; exit 1; }
+          case "$SOURCE_OVERRIDE_PREVIEW_ORIGIN" in
+            https://*.vercel.app|https://*.vercel.app/) ;;
+            *) echo '::error::The target must be an HTTPS Vercel Preview origin.'; exit 1 ;;
+          esac
+          case "$SOURCE_OVERRIDE_PREVIEW_ORIGIN" in
+            *mahastrategies.com*) echo '::error::Production hosts are forbidden.'; exit 1 ;;
+          esac
+          for name in EPISTEMIC_OPERATIONS_TOKEN EPISTEMIC_RELEASE_AUTHORITY_TOKEN SUPABASE_PROJECT_REF SUPABASE_DB_PASSWORD; do
+            [ -n "${!name:-}" ] || { echo "::error::$name is missing."; exit 1; }
+          done
+          [ "$EPISTEMIC_OPERATIONS_TOKEN" != "$EPISTEMIC_RELEASE_AUTHORITY_TOKEN" ] || { echo '::error::Operations and release-authority tokens must be distinct.'; exit 1; }
+          [ "$SUPABASE_PROJECT_REF" != 'uhwuullakihgszxhiygz' ] || { echo '::error::The Production Supabase project is forbidden.'; exit 1; }
+
+      - uses: actions/checkout@v5
+
+      - name: Apply only the dedicated Preview canary migrations
+        run: |
+          set -euo pipefail
+          url="postgresql://postgres.${SUPABASE_PROJECT_REF}:${SUPABASE_DB_PASSWORD}@aws-0-us-east-1.pooler.supabase.com:5432/postgres"
+          migrations=(
+            '20260830173000_source_override_revision_preview_canary.sql'
+            '20260830174500_source_override_revision_canary_adapter.sql'
+          )
+          for migration in "${migrations[@]}"; do
+            path="supabase/migrations/$migration"
+            [ -f "$path" ] || { echo "::error::Dedicated migration $migration is absent."; exit 1; }
+            psql "$url" -v ON_ERROR_STOP=1 --single-transaction -f "$path" >/dev/null
+            version="${migration%%_*}"
+            psql "$url" -v ON_ERROR_STOP=1 -c "insert into supabase_migrations.schema_migrations (version) values ('${version}') on conflict do nothing;" >/dev/null
+          done
+          converged="$(psql "$url" -v ON_ERROR_STOP=1 -At -c "select to_regproc('public.record_source_override_revision_canary_targets') is not null;")"
+          [ "$converged" = 't' ] || { echo '::error::The dedicated Preview RPC did not converge.'; exit 1; }
+          adapter_converged="$(psql "$url" -v ON_ERROR_STOP=1 -At -c "select pg_get_constraintdef(oid) like '%source-override-revision-canary%' from pg_constraint where conrelid = 'public.epistemic_ingestion_batches'::regclass and conname = 'epistemic_ingestion_batches_adapter_id_check';")"
+          [ "$adapter_converged" = 't' ] || { echo '::error::The dedicated Preview adapter constraint did not converge.'; exit 1; }
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '26'
+          cache: npm
+      - run: npm ci
+
+      - name: Run exact five-record private lifecycle
+        run: node --experimental-strip-types scripts/run-source-override-preview-release-canary.ts
+
+      - name: Verify sanitized evidence boundary
+        run: |
+          set -euo pipefail
+          jq -e '
+            .exactRevisions | length == 5
+          ' "$SOURCE_OVERRIDE_PREVIEW_EVIDENCE_PATH" >/dev/null
+          jq -e '
+            .review.scopedDecisionCount == 20
+            and .release.activeCount == 5
+            and .release.publishedThisRunCount >= 0
+            and .release.publishedThisRunCount <= 5
+            and .release.supersedingCount == 2
+            and .release.initialCount == 3
+            and ([.projection[] | select(.routeStatus == 200)] | length) == 5
+            and ([.projection[] | select(.provenanceStatus == 200)] | length) == 5
+            and ([.projection[] | select(.sitemapIncluded == true)] | length) == 5
+            and ([.projection[] | select(.llmsIncluded == true)] | length) == 5
+            and ([.projection[] | select(.releaseRegistryIncluded == true)] | length) == 5
+            and .boundaries.previewOnly == true
+            and .boundaries.productionMutationPerformed == false
+            and .boundaries.secretsIncluded == false
+          ' "$SOURCE_OVERRIDE_PREVIEW_EVIDENCE_PATH" >/dev/null
+
+      - name: Upload sanitized Preview evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: source-override-preview-release-${{ github.run_id }}
+          path: ${{ env.SOURCE_OVERRIDE_PREVIEW_EVIDENCE_PATH }}
+          if-no-files-found: error
+          retention-days: 30

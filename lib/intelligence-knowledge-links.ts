@@ -1,4 +1,4 @@
-import { getAllBriefSlugs } from './briefs-data.ts'
+import { getAllArchivedBriefSlugs } from './briefs-data.ts'
 import { KNOWLEDGE_ARTICLES, getKnowledgeArticle, type KnowledgeArticle } from './knowledge-data.ts'
 import { KNOWLEDGE_SUPPLIERS, getKnowledgeSupplier, type KnowledgeSupplierProfile } from './knowledge-process-profiles.ts'
 
@@ -49,6 +49,7 @@ export const INTELLIGENCE_KNOWLEDGE_LINKS: IntelligenceKnowledgeLink[] = [
   { briefSlug: 'ntc-thermistors-embedded-power-modules', relationship: 'process-dependency', rationale: 'Connects embedded sensing concepts to package interconnect, encapsulation, final test, and thermo-mechanical qualification.', articleIds: ['process-wire-bond-flip-chip', 'process-encapsulation-underfill-molding', 'process-final-burn-in-system-test', 'concept-package-reliability-failure-analysis'], supplierIds: ['supplier-ase', 'supplier-amkor'] },
   { briefSlug: 'us-semiconductor-cleanroom-construction', relationship: 'process-dependency', rationale: 'Maps cleanroom construction claims to the utility, contamination, stability, metrology, and production-control environment required by fabs.', articleIds: ['concept-cleanrooms-fab-utilities', 'process-wafer-cleaning-surface-preparation', 'concept-metrology-defect-inspection'], supplierIds: ['supplier-kla', 'supplier-lam-research', 'supplier-tokyo-electron'] },
   { briefSlug: 'ppg-derivatives-semiconductor-applications', relationship: 'technical-foundation', rationale: 'Connects the chemical-family analysis to lithography solvents, wafer cleaning, copper electroplating/CMP, encapsulation, and material qualification boundaries.', articleIds: ['material-ppg-derivatives', 'process-photolithography', 'process-wafer-cleaning-surface-preparation', 'process-copper-interconnect-cmp', 'process-encapsulation-underfill-molding'], supplierIds: ['supplier-dow'] },
+  { briefSlug: 'cmp-pads-hybrid-bonding-hbm', relationship: 'process-dependency', rationale: 'Connects bond-sensitive CMP-pad qualification to copper interconnect planarization, wafer cleaning, defect inspection, yield learning, and advanced-package reliability controls.', articleIds: ['process-copper-interconnect-cmp', 'process-wafer-cleaning-surface-preparation', 'concept-metrology-defect-inspection', 'concept-yield-learning-spc', 'process-advanced-packaging', 'concept-package-reliability-failure-analysis'], supplierIds: ['supplier-applied-materials', 'supplier-kla'] },
 ]
 
 const LINKS_BY_BRIEF = new Map(INTELLIGENCE_KNOWLEDGE_LINKS.map((link) => [link.briefSlug, link]))
@@ -67,7 +68,7 @@ export function getIntelligenceBriefSlugsForKnowledgeObject(objectId: string): s
 }
 
 export function assertIntelligenceKnowledgeLinkIntegrity(): void {
-  const briefSlugs = new Set(getAllBriefSlugs())
+  const briefSlugs = new Set(getAllArchivedBriefSlugs())
   const articleIds = new Set(KNOWLEDGE_ARTICLES.map((article) => article.id))
   const supplierIds = new Set(KNOWLEDGE_SUPPLIERS.map((supplier) => supplier.id))
   const seenBriefs = new Set<string>()

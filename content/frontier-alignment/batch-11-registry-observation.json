@@ -1,0 +1,51 @@
+{
+  "schemaVersion": "maha-batch-11-registry-observation/1.0",
+  "registrySchemaVersion": "maha-epistemic-release-registry/1.0",
+  "source": "https://www.mahastrategies.com/knowledge/epistemic-system/releases/registry.json",
+  "method": "read-only HTTP GET; no credential presented; no mutation performed",
+  "totalReleasesInRegistry": 115,
+  "records": [
+    {
+      "recordId": "urn:maha:record:advanced-materials-color-centers-in-diamond",
+      "totalReleases": 0,
+      "activeReleases": 0,
+      "activeRelease": null
+    },
+    {
+      "recordId": "urn:maha:record:fusion-plasma-systems-tokamak-plasma-equilibrium",
+      "totalReleases": 1,
+      "activeReleases": 1,
+      "activeRelease": {
+        "releaseId": "epirelease_8e947374097d4695815dbf9ab653177b",
+        "releaseKind": "initial",
+        "targetSha256": "sha256:cb41216cd3cf8fdc36decedf66f8e768a25b450969b763e83c3d2b756ae57052",
+        "canonicalPath": "/knowledge/fusion-plasma-systems/mechanisms/fusion-plasma-systems-tokamak-plasma-equilibrium",
+        "canonicalVersion": "1.0.0"
+      }
+    },
+    {
+      "recordId": "urn:maha:record:longevity-metabolism-mitophagy-flux",
+      "totalReleases": 0,
+      "activeReleases": 0,
+      "activeRelease": null
+    },
+    {
+      "recordId": "urn:maha:record:mechanistic-interpretability-activation-patching",
+      "totalReleases": 0,
+      "activeReleases": 0,
+      "activeRelease": null
+    },
+    {
+      "recordId": "urn:maha:record:mechanistic-interpretability-representation-probing-boundary",
+      "totalReleases": 1,
+      "activeReleases": 1,
+      "activeRelease": {
+        "releaseId": "epirelease_93c92eb7a317465b83fabf8d3e6962da",
+        "releaseKind": "initial",
+        "targetSha256": "sha256:83339b28fdea2a81504e0bf44f9229fe06b24e444c774c0a0d513cf1b0bc8b3f",
+        "canonicalPath": "/knowledge/mechanistic-interpretability/comparisons/mechanistic-interpretability-representation-probing-boundary",
+        "canonicalVersion": "1.0.0"
+      }
+    }
+  ]
+}

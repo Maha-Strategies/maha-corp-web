@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
 
-import { contactSourcePath, isLikelyCommercialSolicitation, optionalCampaignValue, parseContactReferralSource } from '../lib/contact-qualification.ts'
+import { contactSourcePath, inboundLedgerSourcePath, isLikelyCommercialSolicitation, optionalCampaignValue, parseContactReferralSource } from '../lib/contact-qualification.ts'
 
 test('contact qualification captures bounded, non-identifying source metadata', () => {
   assert.equal(parseContactReferralSource('developer_directory'), 'developer_directory')
@@ -11,6 +11,7 @@ test('contact qualification captures bounded, non-identifying source metadata', 
   assert.equal(contactSourcePath('/contact'), '/contact')
   assert.equal(contactSourcePath('/evidence-audit'), '/evidence-audit')
   assert.equal(contactSourcePath('/other'), '/contact')
+  assert.equal(inboundLedgerSourcePath(), '/contact')
 })
 
 test('generic agency SEO pitches are screened out while a buyer request remains eligible', () => {

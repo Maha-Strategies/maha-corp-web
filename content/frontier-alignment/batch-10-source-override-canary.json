@@ -1,0 +1,150 @@
+{
+  "schemaVersion": "maha-frontier-source-override-canary/0.2",
+  "boundary": {
+    "environment": "private-in-memory-simulation",
+    "activeBindingsChanged": 0,
+    "databaseWrites": 0,
+    "canonicalRecordsMutated": 0,
+    "canonicalReleasesCreated": 0,
+    "publicProjectionAuthorized": false
+  },
+  "counts": {
+    "requested": 5,
+    "compiled": 5,
+    "failed": 0,
+    "applied": 0
+  },
+  "candidates": [
+    {
+      "schemaVersion": "maha-frontier-source-override-canary/0.2",
+      "candidateId": "urn:maha:candidate:frontier-source-override:agentic-systems-mcp-least-authority-tokens:batch-10",
+      "recordId": "urn:maha:record:agentic-systems-mcp-least-authority-tokens",
+      "priorRecordRevisionSha256": "sha256:7a459f785de0194a6e23dfe28dea31a04058b5d2ad577b68e57952725273f037",
+      "priorSourceContractId": "source-agentic-systems-mcp-nist-genai",
+      "proposedSourceContractId": "source-remediation-batch-10-agentic-systems-mcp-least-authority-tokens",
+      "proposedSourceIdentifier": "url:https://research.google.com/pubs/archive/41892.pdf",
+      "proposedCitation": "Birgisson, A. et al. Macaroons: Cookies with Contextual Caveats for Decentralized Authorization in the Cloud. NDSS (2014).",
+      "proposedUrl": "https://research.google.com/pubs/archive/41892.pdf",
+      "exactLocator": "Abstract; §I Introduction; §II Motivation and Foundations; figure 1 and caveat construction.",
+      "boundedFinding": "The paper describes bearer credentials whose caveats restrict objects, actions, context, delegation, and third-party approval.",
+      "limitation": "Macaroons are one least-authority credential design; the paper does not prove that every token deployment is least-authority or secure.",
+      "claimIds": [
+        "urn:maha:claim:agentic-systems-mcp-least-authority-tokens"
+      ],
+      "reviewDecisionId": "urn:maha:review:frontier-alignment-batch-10:agentic-systems-mcp-least-authority-tokens",
+      "reviewDecisionSha256": "sha256:dc3c5f0c73dcb4f00be6a87b3ce1028d50055bd36fd24789994f44a6afad5f3d",
+      "packetContentSha256": "sha256:822b73c1db600e7d8cc1e8f63a126b46841b4bbf055c0c7dae145beecef40553",
+      "applicationState": "private-candidate-only",
+      "canonicalMutationAuthorized": false,
+      "publicProjectionAuthorized": false,
+      "releaseAuthorized": false,
+      "candidateRevisionSha256": "sha256:983bae94fec4cd68f1bd2cd8c76c6fd7cc366336d49704515e27811643f2a5f8",
+      "provenanceSha256": "sha256:a1baeb0fce884e77e0a474d7c3204ca0e8422d67c3e05b11ff39bb5defa3cb13"
+    },
+    {
+      "schemaVersion": "maha-frontier-source-override-canary/0.2",
+      "candidateId": "urn:maha:candidate:frontier-source-override:biomolecular-engineering-enzyme-cascade-engineering:batch-10",
+      "recordId": "urn:maha:record:biomolecular-engineering-enzyme-cascade-engineering",
+      "priorRecordRevisionSha256": "sha256:eb4726d5e119ae9564a0d2f01b2b2256b5a95109260b66a0e29a4495ff4d4f4b",
+      "priorSourceContractId": "source-biomolecular-engineering-toehold",
+      "proposedSourceContractId": "source-remediation-batch-10-biomolecular-engineering-enzyme-cascade-engineering",
+      "proposedSourceIdentifier": "doi:10.1038/ncomms12971",
+      "proposedCitation": "Hold, C., Billerbeck, S. & Panke, S. Forward design of a complex enzyme cascade reaction. Nature Communications 7, 12971 (2016).",
+      "proposedUrl": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5052792/",
+      "exactLocator": "Abstract; “Model formulation and parameterization”; “Optimizing a cascade reaction for product concentration”.",
+      "boundedFinding": "The study combines perturbation experiments, online mass spectrometry, mechanistic rate laws, parameter estimation, and model-based optimization for a ten-enzyme cascade.",
+      "limitation": "The result is specific to the constructed in vitro system and does not establish general transfer to all enzyme networks or production scales.",
+      "claimIds": [
+        "urn:maha:claim:biomolecular-engineering-enzyme-cascade-engineering"
+      ],
+      "reviewDecisionId": "urn:maha:review:frontier-alignment-batch-10:biomolecular-engineering-enzyme-cascade-engineering",
+      "reviewDecisionSha256": "sha256:da87a9b4fe1fdf92d930421b617137f0a24a5d8c67a712963d5590c94aa0f743",
+      "packetContentSha256": "sha256:7a94f6d5560e491dd632e9d702dd471ff8df041387c9028b04a23a27e69199f8",
+      "applicationState": "private-candidate-only",
+      "canonicalMutationAuthorized": false,
+      "publicProjectionAuthorized": false,
+      "releaseAuthorized": false,
+      "candidateRevisionSha256": "sha256:b4d7abf5183a48c4feac6428b46cf84047e9fb4f4dd1bfd6dbf0e02a5c97f514",
+      "provenanceSha256": "sha256:b5c8a1fd0878e414718200b5f6650f356cc6cd3e28d03f6ef9884ce8b346aeba"
+    },
+    {
+      "schemaVersion": "maha-frontier-source-override-canary/0.2",
+      "candidateId": "urn:maha:candidate:frontier-source-override:critical-supply-chains-fluorinated-resist-components:batch-10",
+      "recordId": "urn:maha:record:critical-supply-chains-fluorinated-resist-components",
+      "priorRecordRevisionSha256": "sha256:5af413273791c19aa42cc194b67bd193468c0580a0e086f197e41770f74fddb7",
+      "priorSourceContractId": "source-critical-supply-chains-mcs-gallium-germanium",
+      "proposedSourceContractId": "source-remediation-batch-10-critical-supply-chains-fluorinated-resist-components",
+      "proposedSourceIdentifier": "doi:10.1021/acsmaterialsau.1c00059",
+      "proposedCitation": "Thakur, N. et al. Fluorine-Rich Zinc Oxoclusters as Extreme Ultraviolet Photoresists: Chemical Reactions and Lithography Performance. ACS Materials Au 2, 343–355 (2022).",
+      "proposedUrl": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9888611/",
+      "exactLocator": "Abstract; figure 1 and study design; EUV lithography and spectroscopy results; Conclusions.",
+      "boundedFinding": "The paper measures fluorine-rich zinc oxocluster resists and reports EUV absorption, sensitivity, thin-film behavior, and carbon–fluorine bond chemistry.",
+      "limitation": "One zinc-oxocluster family does not define the full commercial supply chain or performance of all fluorinated resist components.",
+      "claimIds": [
+        "urn:maha:claim:critical-supply-chains-fluorinated-resist-components"
+      ],
+      "reviewDecisionId": "urn:maha:review:frontier-alignment-batch-10:critical-supply-chains-fluorinated-resist-components",
+      "reviewDecisionSha256": "sha256:8a84987eedfc87254270576ab1f731e4d2689d02ef8963994ae9583a76c8dc71",
+      "packetContentSha256": "sha256:55f6f2773095929059dc09ae6b4a6261b008df65091b332a7857e06ffbc68823",
+      "applicationState": "private-candidate-only",
+      "canonicalMutationAuthorized": false,
+      "publicProjectionAuthorized": false,
+      "releaseAuthorized": false,
+      "candidateRevisionSha256": "sha256:8a7daa18e51c4083c09a6674d32d192d14480b0611a696a2cd60977e0ea47315",
+      "provenanceSha256": "sha256:f79a8cbd2e0b4888adebda7853036539c6ec5cb4a18c26398783b6feefb9a1df"
+    },
+    {
+      "schemaVersion": "maha-frontier-source-override-canary/0.2",
+      "candidateId": "urn:maha:candidate:frontier-source-override:fusion-plasma-systems-magnetic-mirror-confinement:batch-10",
+      "recordId": "urn:maha:record:fusion-plasma-systems-magnetic-mirror-confinement",
+      "priorRecordRevisionSha256": "sha256:43ad0d2171751fbd879d2f79f02597b12e05f7ee2e641bf5659149adff468556",
+      "priorSourceContractId": "source-fusion-plasma-systems-nif-ignition",
+      "proposedSourceContractId": "source-remediation-batch-10-fusion-plasma-systems-magnetic-mirror-confinement",
+      "proposedSourceIdentifier": "osti:5879720",
+      "proposedCitation": "Coensgen, F. H. & Simonen, T. C. Magnetic Mirror Confinement of High-Energy, High-Density Plasma. UCRL-82790 (1979).",
+      "proposedUrl": "https://www.osti.gov/servlets/purl/5879720",
+      "exactLocator": "Mirror-confinement overview; impurity studies; 2XIIB results; “MFTF Experiments”.",
+      "boundedFinding": "The report treats magnetic-mirror confinement as an open-field plasma-confinement approach and reports experimental impurity and confinement observations.",
+      "limitation": "Historical mirror experiments and planned MFTF work do not establish a modern power-plant design or commercial feasibility.",
+      "claimIds": [
+        "urn:maha:claim:fusion-plasma-systems-magnetic-mirror-confinement"
+      ],
+      "reviewDecisionId": "urn:maha:review:frontier-alignment-batch-10:fusion-plasma-systems-magnetic-mirror-confinement",
+      "reviewDecisionSha256": "sha256:501b29de4a6450299f1401f3aa98682f4383ed70ad6627d88c684bf39d92abc0",
+      "packetContentSha256": "sha256:94375358e852ec4aac458157e2411d723ea6813c010c0e88d76a673eaca7081c",
+      "applicationState": "private-candidate-only",
+      "canonicalMutationAuthorized": false,
+      "publicProjectionAuthorized": false,
+      "releaseAuthorized": false,
+      "candidateRevisionSha256": "sha256:e1f4ce3de8e409fb66d2f8441f6e1445bf47aec7847a6926d963c2235b5a5a20",
+      "provenanceSha256": "sha256:ed9155cab700ff9b1e79ef069e71d24319c9bedc7b1761f82b95f2c0321748c6"
+    },
+    {
+      "schemaVersion": "maha-frontier-source-override-canary/0.2",
+      "candidateId": "urn:maha:candidate:frontier-source-override:mechanistic-interpretability-circuit-completeness:batch-10",
+      "recordId": "urn:maha:record:mechanistic-interpretability-circuit-completeness",
+      "priorRecordRevisionSha256": "sha256:2cd487cb78ca861c6c9fb368322e835d776a7394801249e256908563cbc75179",
+      "priorSourceContractId": "source-mechanistic-interpretability-circuits",
+      "proposedSourceContractId": "source-remediation-batch-10-mechanistic-interpretability-circuit-completeness",
+      "proposedSourceIdentifier": "arXiv:2211.00593",
+      "proposedCitation": "Wang, K. et al. Interpretability in the Wild: a Circuit for Indirect Object Identification in GPT-2 small. ICLR (2023).",
+      "proposedUrl": "https://arxiv.org/abs/2211.00593",
+      "exactLocator": "Abstract; §3 circuit discovery; §4 faithfulness, completeness, and minimality criteria; limitations.",
+      "boundedFinding": "The authors evaluate an IOI circuit using quantitative faithfulness, completeness, and minimality criteria while recording remaining explanatory gaps.",
+      "limitation": "The criterion is evaluated on GPT-2 small and one behavior; it is not proof that the proposed circuit is complete for all prompts or models.",
+      "claimIds": [
+        "urn:maha:claim:mechanistic-interpretability-circuit-completeness"
+      ],
+      "reviewDecisionId": "urn:maha:review:frontier-alignment-batch-10:mechanistic-interpretability-circuit-completeness",
+      "reviewDecisionSha256": "sha256:65949468d89fa3cba82a8596454e199d4b8546162cecca2f787125aa56b87efe",
+      "packetContentSha256": "sha256:f37c97c8f1515736e00fec4c31014f6284693f6b4557e954f993327bf21b0346",
+      "applicationState": "private-candidate-only",
+      "canonicalMutationAuthorized": false,
+      "publicProjectionAuthorized": false,
+      "releaseAuthorized": false,
+      "candidateRevisionSha256": "sha256:0075e78a405340b24fa06dccc8e2cbfde16428f6cacdb03b797612d64a6031e6",
+      "provenanceSha256": "sha256:6e862dac25ae9ca1f01f97d9e8fc2e6d8bac7520edb05645cae9007b0551a8c9"
+    }
+  ],
+  "artifactSha256": "sha256:66799073ecd764e0754f586c386d847c621daf014c021026e546c88fa3436371"
+}

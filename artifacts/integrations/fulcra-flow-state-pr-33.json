@@ -1,0 +1,78 @@
+{
+  "artifactVersion": "1.0.0",
+  "recordedAt": "2026-08-28",
+  "integration": {
+    "name": "Fulcra Flow State v2 metadata provenance",
+    "upstreamRepository": "https://github.com/schr3b3r/fulcra-community-projects",
+    "pullRequest": "https://github.com/schr3b3r/fulcra-community-projects/pull/33",
+    "pullRequestNumber": 33,
+    "state": "merged",
+    "mergedAt": "2026-08-28T14:12:49Z",
+    "mergeCommit": "d3f43719c4d1b7c333ce592f14400b47f99891f1",
+    "sourceCommits": [
+      "25126887f3f5f55dc56bb15366b9af844bc41377",
+      "99434fa143afbe3e6222af510728b3a0b37ceb37"
+    ]
+  },
+  "license": {
+    "status": "resolved",
+    "upstreamLicense": "MIT",
+    "upstreamLicensedRevision": "a73cfc3",
+    "boundary": "The contribution was rebased onto the upstream revision carrying the repository-level MIT license. This records the published upstream license; it is not independent legal advice."
+  },
+  "changedFiles": [
+    "flow-state-app-v2/app/CONTEXT.md",
+    "flow-state-app-v2/app/features/INDEX.md",
+    "flow-state-app-v2/app/features/metadata_provenance_and_consent.md",
+    "flow-state-app-v2/app/provenance.py",
+    "flow-state-app-v2/app/tests/test_provenance.py"
+  ],
+  "implementedCapabilities": [
+    "Explicit opt-in is required before session or marker audio is read or hashed.",
+    "SHA-256 digests bind the session, marker and selected clip without embedding audio bytes or local paths.",
+    "The deterministic metadata record binds the marker boundary, extraction window, processing version, key and BPM estimates, and the MusicalIdea reference.",
+    "The optional sharing record omits full-session and marker digests and binds a hashed audience reference.",
+    "The implementation verifies canonical record integrity and refuses private sharing by default."
+  ],
+  "verificationReportedByMergedPullRequest": {
+    "focusedProvenanceTests": {
+      "passed": 6,
+      "failed": 0
+    },
+    "offlineUpstreamSuite": {
+      "passed": 54,
+      "failed": 0,
+      "liveFulcraTestsSkipped": 11
+    }
+  },
+  "publicDisclosure": {
+    "realCreativeRecordingIncluded": false,
+    "privateAudioIncluded": false,
+    "privateSessionResultIncluded": false,
+    "consentReferenceIncluded": false,
+    "sessionDigestIncluded": false,
+    "markerDigestIncluded": false,
+    "credentialsIncluded": false
+  },
+  "privateSessionValidation": {
+    "authorizationRecordedOutsideThisArtifact": true,
+    "sharingScope": "private",
+    "completionStatus": "completed_private",
+    "sourceAudio": "original_synthetic_tones",
+    "thirdPartyAudioUsed": false,
+    "markerDetections": 1,
+    "provenanceVerified": true,
+    "liveFulcraPublicationReadBackVerified": true,
+    "shareRecordCreated": false,
+    "privateArtifactsRetainedOutsideRepository": true,
+    "boundary": "This publishes only the participant-authorized sanitized completion state. Audio, consent references, record digests, Fulcra paths, upload identifiers and the full private result remain outside the repository and public artifact."
+  },
+  "nonClaims": [
+    "This is not a Fulcra partnership, endorsement, certification or security assessment.",
+    "This does not attest Fulcra access enforcement or alter the Flow State upload pipeline.",
+    "This does not establish creative ownership, marker accuracy, key accuracy or BPM accuracy.",
+    "This does not prove that a human musical performance was processed; the completed private validation used original synthetic tones.",
+    "This is not evidence of customer adoption or commercial validation."
+  ],
+  "claimBoundary": "The merged pull request proves that the bounded metadata-provenance contribution was accepted into the upstream Fulcra community repository at the identified commit. A separately authorized private synthetic-audio session verified one marker-to-MusicalIdea Fulcra round trip and the metadata-only provenance record; it does not establish a human performance result, production deployment, partnership, endorsement or commercial outcome."
+}

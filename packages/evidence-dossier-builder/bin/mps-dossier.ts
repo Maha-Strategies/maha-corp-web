@@ -6,6 +6,8 @@
  *   mps-dossier compile  <input> --output <directory>
  *   mps-dossier verify   <manifest>
  *   mps-dossier render-jsonld <package>
+ *   mps-dossier compile-integrated <input> --kernel <wasm> --kernel-manifest <json> --output <directory>
+ *   mps-dossier verify-integrated <manifest>
  *
  * The CLI is offline by construction: it opens no sockets, retrieves no
  * sources, and emits no telemetry. Output is deterministic for a given input.
@@ -21,6 +23,10 @@ import { verifyPackageDirectory } from '../src/verify.ts'
 import { writeEvidenceDossierPackage } from '../src/compile.ts'
 import { EVIDENCE_DOSSIER_BUILDER_BOUNDARY, EVIDENCE_DOSSIER_BUILDER_VERSION } from '../src/index.ts'
 import type { EvidenceDossier } from '../src/schema.ts'
+import { compileIntegratedPackage, verifyIntegratedPackageDirectory, writeIntegratedPackage } from '../src/integrated-package.ts'
+import { executeAndAttachCalculationToDossier } from '../../wasm-kernel/dist/dossier.js'
+import type { KernelArtifact, KernelExecutionRequest } from '../../wasm-kernel/dist/execution.js'
+import type { DossierRuntimeWitnessAttachment } from '../../../lib/evidence-dossier/runtime-witness.ts'
 
 const USAGE = `mps-dossier ${EVIDENCE_DOSSIER_BUILDER_VERSION}
 
@@ -28,6 +34,8 @@ const USAGE = `mps-dossier ${EVIDENCE_DOSSIER_BUILDER_VERSION}
   mps-dossier compile <input.json> --output <directory>
   mps-dossier verify <manifest.json>
   mps-dossier render-jsonld <input.json|package-directory>
+  mps-dossier compile-integrated <input.json> --kernel <kernel.wasm> --kernel-manifest <manifest.json> --output <directory>
+  mps-dossier verify-integrated <manifest.json>
 
 ${EVIDENCE_DOSSIER_BUILDER_BOUNDARY}`
 
@@ -65,7 +73,7 @@ function loadDossier(target: string): EvidenceDossier {
   return readJson(path) as EvidenceDossier
 }
 
-export function runCli(argv: readonly string[]): void {
+export async function runCli(argv: readonly string[]): Promise<void> {
   const [command, ...rest] = argv
   if (!command || command === '--help' || command === '-h') {
     process.stdout.write(`${USAGE}\n`)
@@ -122,7 +130,34 @@ export function runCli(argv: readonly string[]): void {
     return
   }
 
+  if (command === 'compile-integrated') {
+    const input = rest[0]; const output = optionValue(rest, '--output'); const kernelPath = optionValue(rest, '--kernel'); const manifestPath = optionValue(rest, '--kernel-manifest')
+    if (!input || !output || !kernelPath || !manifestPath) fail('compile-integrated requires input, --kernel, --kernel-manifest, and --output.')
+    if (!isAbsolute(output)) fail('--output must be an absolute path.')
+    const envelope = readJson(input) as { dossier?: EvidenceDossier; calculations?: Array<{ claimIds?: string[]; request?: KernelExecutionRequest }>; runtimeWitnesses?: DossierRuntimeWitnessAttachment[] }
+    if (!envelope.dossier || !Array.isArray(envelope.calculations) || envelope.calculations.length > 50 || (envelope.runtimeWitnesses?.length ?? 0) > 50) fail('Integrated input must contain one dossier and at most 50 calculations and witnesses.')
+    const artifact: KernelArtifact = { bytes: readFileSync(resolve(kernelPath)), manifest: readJson(manifestPath) as KernelArtifact['manifest'] }
+    const attachments = []
+    for (const item of envelope.calculations) {
+      if (!Array.isArray(item.claimIds) || !item.request) fail('Each integrated calculation requires claimIds and a request.')
+      attachments.push(await executeAndAttachCalculationToDossier({ dossierId: envelope.dossier.dossierId, claimIds: item.claimIds, request: item.request, artifact }))
+    }
+    const bundle = await compileIntegratedPackage(envelope.dossier, attachments, { kernelArtifact: artifact, runtimeWitnesses: envelope.runtimeWitnesses ?? [] })
+    writeIntegratedPackage(bundle, output)
+    emit({ command: 'compile-integrated', ok: true, dossierId: envelope.dossier.dossierId, packageDigest: bundle.manifest.packageDigest, files: bundle.manifest.files.length, output: resolve(output) })
+    return
+  }
+
+  if (command === 'verify-integrated') {
+    const manifest = rest[0]
+    if (!manifest) fail('verify-integrated requires a manifest path.')
+    const report = await verifyIntegratedPackageDirectory(manifest)
+    emit({ command: 'verify-integrated', ...report })
+    if (!report.ok) process.exit(1)
+    return
+  }
+
   fail(`Unknown command: ${command}\n\n${USAGE}`)
 }
 
-if (import.meta.url === `file://${process.argv[1]}`) runCli(process.argv.slice(2))
+if (import.meta.url === `file://${process.argv[1]}`) await runCli(process.argv.slice(2))

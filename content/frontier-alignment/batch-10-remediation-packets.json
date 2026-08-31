@@ -1,0 +1,1294 @@
+{
+  "schemaVersion": "maha-frontier-alignment-batch/10.0",
+  "boundary": {
+    "reviewKind": "internal-editorial-source-inspection",
+    "replacementSourcesApplied": 0,
+    "canonicalRecordsMutated": 0,
+    "canonicalReleasesCreated": 0,
+    "externallyReviewed": false,
+    "independentlyReproduced": false,
+    "sourceContentCommitted": false
+  },
+  "selection": {
+    "activeMismatches": 86,
+    "excludedBatch9Records": 20,
+    "eligibleRemainingMismatches": 66,
+    "frozenRecords": 20,
+    "domains": [
+      "advanced-materials",
+      "agentic-systems-mcp",
+      "biomolecular-engineering",
+      "critical-supply-chains",
+      "fusion-plasma-systems",
+      "mechanistic-interpretability"
+    ],
+    "unlockCounts": {
+      "substantialPage": 20,
+      "evidenceDossier": 18,
+      "quantumBridge": 6
+    },
+    "rubric": {
+      "productRelevance": "0–4",
+      "graphLeverage": "0–3",
+      "correctionValue": "0–2",
+      "inspectability": "0–1",
+      "minimumTotal": 8
+    }
+  },
+  "counts": {
+    "replacementSourcesDiscovered": 20,
+    "replacementMetadataVerified": 20,
+    "replacementContentInspected": 20,
+    "replacementLocatorsInspected": 20,
+    "blockedPendingReview": 20,
+    "canonicalMutationsAuthorized": 0,
+    "promotionEligible": 0
+  },
+  "packets": [
+    {
+      "schemaVersion": "maha-frontier-alignment-batch/10.0",
+      "packetId": "urn:maha:remediation:frontier-alignment-batch-10:advanced-materials-moire-superlattices",
+      "recordId": "urn:maha:record:advanced-materials-moire-superlattices",
+      "domainSlug": "advanced-materials",
+      "priority": {
+        "productRelevance": 4,
+        "graphLeverage": 3,
+        "correctionValue": 2,
+        "inspectability": 1,
+        "total": 10,
+        "unlocks": [
+          "substantial-page",
+          "quantum-bridge"
+        ],
+        "rationale": "Occurs in the substantial-page selection and two Quantum Bridge endpoint dispositions."
+      },
+      "currentVerdict": "mismatched",
+      "replacement": {
+        "proposedSourceContractId": "source-remediation-batch-10-advanced-materials-moire-superlattices",
+        "replacementDecision": "replacement-supported",
+        "citation": "Bistritzer, R. & MacDonald, A. H. Moiré bands in twisted double-layer graphene. PNAS 108, 12233–12237 (2011).",
+        "identifier": "doi:10.1073/pnas.1108174108",
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3145708/",
+        "rationale": "The article directly derives moiré Bloch bands for twisted double-layer graphene.",
+        "rights": {
+          "basis": "citation-with-paraphrase",
+          "quotationUsed": false,
+          "sourceContentCommitted": false
+        },
+        "inspection": {
+          "metadataVerified": true,
+          "metadataNote": "The PMC version of record identifies both authors, PNAS volume and pages, and DOI.",
+          "artifactVersion": "version-of-record",
+          "inspectionDepth": "full-document",
+          "contentInspected": true,
+          "exactLocatorInspected": true,
+          "inspectedContentLocation": "Abstract; “Model”; “Discussion”; equations 1–5; figures 1–5.",
+          "findings": "The inspected article links relative layer twist to a moiré pattern, a periodic continuum Hamiltonian, moiré Bloch bands, and twist-angle-dependent band flattening.",
+          "limitation": "It is a continuum-model study, not a manufacturing method or evidence that every moiré material realizes the same bands."
+        }
+      },
+      "disposition": "blocked-pending-source-override-review",
+      "canonicalMutationAuthorized": false,
+      "promotionEligible": false,
+      "externallyReviewed": false,
+      "independentlyReproduced": false,
+      "whatWouldChangeIfAccepted": "Acceptance would create a new revision of advanced-materials-moire-superlattices whose single claim cites the inspected replacement and exact locator. It would not mutate the existing revision, inherit review, imply reproduction, authorize canonical release, or widen the claim beyond the inspected source.",
+      "prior": {
+        "sourceContractId": "source-advanced-materials-graphene",
+        "sourceIdentifier": "10.1126/science.1102896",
+        "sourceTitle": "Electric Field Effect in Atomically Thin Carbon Films",
+        "locator": "Abstract, device preparation, transport measurements, and figures 1–3.",
+        "verdict": "mismatched",
+        "recordRevisionSha256": "sha256:e068e9be179055bd276018d4cb160973d97b543ead4a2658066d1af11da7417e",
+        "blockers": [
+          "source-assignment-positional-legacy",
+          "source-subject-mismatched"
+        ]
+      },
+      "packetDigest": "sha256:cee7092546695afc4b98f425d5794c5b2b109aa2542390e476804055423ff564"
+    },
+    {
+      "schemaVersion": "maha-frontier-alignment-batch/10.0",
+      "packetId": "urn:maha:remediation:frontier-alignment-batch-10:advanced-materials-twist-angle-control",
+      "recordId": "urn:maha:record:advanced-materials-twist-angle-control",
+      "domainSlug": "advanced-materials",
+      "priority": {
+        "productRelevance": 4,
+        "graphLeverage": 3,
+        "correctionValue": 2,
+        "inspectability": 1,
+        "total": 10,
+        "unlocks": [
+          "substantial-page",
+          "quantum-bridge"
+        ],
+        "rationale": "Connects the substantial-page graph to a Quantum Bridge endpoint and a foundational fabrication control."
+      },
+      "currentVerdict": "mismatched",
+      "replacement": {
+        "proposedSourceContractId": "source-remediation-batch-10-advanced-materials-twist-angle-control",
+        "replacementDecision": "replacement-supported",
+        "citation": "Yang, Y. et al. In situ manipulation of van der Waals heterostructures for twistronics. Science Advances 6, eabd3655 (2020).",
+        "identifier": "doi:10.1126/sciadv.abd3655",
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7717928/",
+        "rationale": "The experiment directly demonstrates dynamic in situ rotation and manipulation of layered heterostructures.",
+        "rights": {
+          "basis": "citation-with-paraphrase",
+          "quotationUsed": false,
+          "sourceContentCommitted": false
+        },
+        "inspection": {
+          "metadataVerified": true,
+          "metadataNote": "PMC and the article identify the ten authors, Science Advances article number, and DOI.",
+          "artifactVersion": "version-of-record",
+          "inspectionDepth": "specified-sections",
+          "contentInspected": true,
+          "exactLocatorInspected": true,
+          "inspectedContentLocation": "Abstract; Introduction paragraphs on twist-angle control; Results, device construction and in situ rotation.",
+          "findings": "The article reports a manipulation technique that dynamically rotates 2D layers and fabricates aligned graphene/hBN heterostructures with tunable twist angles.",
+          "limitation": "The source establishes an experimental control method, not a comparison between every twist-control technique or scalable manufacturing yield."
+        }
+      },
+      "disposition": "blocked-pending-source-override-review",
+      "canonicalMutationAuthorized": false,
+      "promotionEligible": false,
+      "externallyReviewed": false,
+      "independentlyReproduced": false,
+      "whatWouldChangeIfAccepted": "Acceptance would create a new revision of advanced-materials-twist-angle-control whose single claim cites the inspected replacement and exact locator. It would not mutate the existing revision, inherit review, imply reproduction, authorize canonical release, or widen the claim beyond the inspected source.",
+      "prior": {
+        "sourceContractId": "source-advanced-materials-graphene",
+        "sourceIdentifier": "10.1126/science.1102896",
+        "sourceTitle": "Electric Field Effect in Atomically Thin Carbon Films",
+        "locator": "Abstract, device preparation, transport measurements, and figures 1–3.",
+        "verdict": "mismatched",
+        "recordRevisionSha256": "sha256:9a9750914fe0e9429a51dff02b586d4683dec4f1c80cc0d28c7195230330e9cf",
+        "blockers": [
+          "source-assignment-positional-legacy",
+          "source-subject-mismatched"
+        ]
+      },
+      "packetDigest": "sha256:5cfe64018f0cb713143382fdb2eef34922e6f92f920bf1281eddbf739e357c9e"
+    },
+    {
+      "schemaVersion": "maha-frontier-alignment-batch/10.0",
+      "packetId": "urn:maha:remediation:frontier-alignment-batch-10:agentic-systems-mcp-least-authority-tokens",
+      "recordId": "urn:maha:record:agentic-systems-mcp-least-authority-tokens",
+      "domainSlug": "agentic-systems-mcp",
+      "priority": {
+        "productRelevance": 4,
+        "graphLeverage": 3,
+        "correctionValue": 2,
+        "inspectability": 1,
+        "total": 10,
+        "unlocks": [
+          "substantial-page",
+          "quantum-bridge",
+          "evidence-dossier"
+        ],
+        "rationale": "Directly supports licensed MCP retrieval and two bridge dispositions."
+      },
+      "currentVerdict": "mismatched",
+      "replacement": {
+        "proposedSourceContractId": "source-remediation-batch-10-agentic-systems-mcp-least-authority-tokens",
+        "replacementDecision": "replacement-supported",
+        "citation": "Birgisson, A. et al. Macaroons: Cookies with Contextual Caveats for Decentralized Authorization in the Cloud. NDSS (2014).",
+        "identifier": "url:https://research.google.com/pubs/archive/41892.pdf",
+        "url": "https://research.google.com/pubs/archive/41892.pdf",
+        "rationale": "Macaroons implement attenuable bearer authority through contextual caveats.",
+        "rights": {
+          "basis": "citation-with-paraphrase",
+          "quotationUsed": false,
+          "sourceContentCommitted": false
+        },
+        "inspection": {
+          "metadataVerified": true,
+          "metadataNote": "Google Research and the inspected NDSS PDF agree on title, six authors, venue, and year.",
+          "artifactVersion": "version-of-record",
+          "inspectionDepth": "specified-sections",
+          "contentInspected": true,
+          "exactLocatorInspected": true,
+          "inspectedContentLocation": "Abstract; §I Introduction; §II Motivation and Foundations; figure 1 and caveat construction.",
+          "findings": "The paper describes bearer credentials whose caveats restrict objects, actions, context, delegation, and third-party approval.",
+          "limitation": "Macaroons are one least-authority credential design; the paper does not prove that every token deployment is least-authority or secure."
+        }
+      },
+      "disposition": "blocked-pending-source-override-review",
+      "canonicalMutationAuthorized": false,
+      "promotionEligible": false,
+      "externallyReviewed": false,
+      "independentlyReproduced": false,
+      "whatWouldChangeIfAccepted": "Acceptance would create a new revision of agentic-systems-mcp-least-authority-tokens whose single claim cites the inspected replacement and exact locator. It would not mutate the existing revision, inherit review, imply reproduction, authorize canonical release, or widen the claim beyond the inspected source.",
+      "prior": {
+        "sourceContractId": "source-agentic-systems-mcp-nist-genai",
+        "sourceIdentifier": "10.6028/NIST.AI.600-1",
+        "sourceTitle": "Artificial Intelligence Risk Management Framework: Generative Artificial Intelligence Profile",
+        "locator": "NIST AI 600-1: Generative AI risks and suggested actions across Govern, Map, Measure, and Manage; appendices A and B.",
+        "verdict": "mismatched",
+        "recordRevisionSha256": "sha256:7a459f785de0194a6e23dfe28dea31a04058b5d2ad577b68e57952725273f037",
+        "blockers": [
+          "source-assignment-positional-legacy",
+          "source-subject-mismatched"
+        ]
+      },
+      "packetDigest": "sha256:817e4c5f4c9569a704e6442e31d712c0b6acaf237490791e88dd6f6a3070bdcf"
+    },
+    {
+      "schemaVersion": "maha-frontier-alignment-batch/10.0",
+      "packetId": "urn:maha:remediation:frontier-alignment-batch-10:agentic-systems-mcp-sandboxed-tool-execution",
+      "recordId": "urn:maha:record:agentic-systems-mcp-sandboxed-tool-execution",
+      "domainSlug": "agentic-systems-mcp",
+      "priority": {
+        "productRelevance": 4,
+        "graphLeverage": 3,
+        "correctionValue": 2,
+        "inspectability": 1,
+        "total": 10,
+        "unlocks": [
+          "substantial-page",
+          "quantum-bridge",
+          "evidence-dossier"
+        ],
+        "rationale": "Defines a core machine-infrastructure execution boundary and appears twice in bridge planning."
+      },
+      "currentVerdict": "mismatched",
+      "replacement": {
+        "proposedSourceContractId": "source-remediation-batch-10-agentic-systems-mcp-sandboxed-tool-execution",
+        "replacementDecision": "replacement-supported",
+        "citation": "Tan, Z. et al. MCP-SandboxScan: WASM-based Secure Execution and Runtime Analysis for MCP Tools. arXiv:2601.01241 (2026).",
+        "identifier": "arXiv:2601.01241",
+        "url": "https://arxiv.org/abs/2601.01241",
+        "rationale": "The paper directly executes untrusted MCP tools inside a WebAssembly/WASI sandbox and audits runtime exposures.",
+        "rights": {
+          "basis": "citation-with-paraphrase",
+          "quotationUsed": false,
+          "sourceContentCommitted": false
+        },
+        "inspection": {
+          "metadataVerified": true,
+          "metadataNote": "The arXiv record identifies five authors, title, submission date, and versioned preprint.",
+          "artifactVersion": "preprint",
+          "inspectionDepth": "abstract-only",
+          "contentInspected": true,
+          "exactLocatorInspected": true,
+          "inspectedContentLocation": "arXiv:2601.01241 abstract, prototype description, three tool case studies, and stated benchmark limits.",
+          "findings": "The abstract describes WASM/WASI sandbox execution, external-input-to-output tracing, and observed filesystem-capability violations.",
+          "limitation": "Three tool case studies and a micro-benchmark do not establish complete isolation, universal threat coverage, or production readiness."
+        }
+      },
+      "disposition": "blocked-pending-source-override-review",
+      "canonicalMutationAuthorized": false,
+      "promotionEligible": false,
+      "externallyReviewed": false,
+      "independentlyReproduced": false,
+      "whatWouldChangeIfAccepted": "Acceptance would create a new revision of agentic-systems-mcp-sandboxed-tool-execution whose single claim cites the inspected replacement and exact locator. It would not mutate the existing revision, inherit review, imply reproduction, authorize canonical release, or widen the claim beyond the inspected source.",
+      "prior": {
+        "sourceContractId": "source-agentic-systems-mcp-nist-genai",
+        "sourceIdentifier": "10.6028/NIST.AI.600-1",
+        "sourceTitle": "Artificial Intelligence Risk Management Framework: Generative Artificial Intelligence Profile",
+        "locator": "NIST AI 600-1: Generative AI risks and suggested actions across Govern, Map, Measure, and Manage; appendices A and B.",
+        "verdict": "mismatched",
+        "recordRevisionSha256": "sha256:cf4967cc4ac52b721d6e122c96ef28d39ab0242752c738a436eae4863c055722",
+        "blockers": [
+          "source-assignment-positional-legacy",
+          "source-subject-mismatched"
+        ]
+      },
+      "packetDigest": "sha256:518b37ab0ac00cfb8ebb522c36c62977796fa147e9a99c39f77b6247dfb9088b"
+    },
+    {
+      "schemaVersion": "maha-frontier-alignment-batch/10.0",
+      "packetId": "urn:maha:remediation:frontier-alignment-batch-10:biomolecular-engineering-enzyme-cascade-engineering",
+      "recordId": "urn:maha:record:biomolecular-engineering-enzyme-cascade-engineering",
+      "domainSlug": "biomolecular-engineering",
+      "priority": {
+        "productRelevance": 4,
+        "graphLeverage": 3,
+        "correctionValue": 2,
+        "inspectability": 1,
+        "total": 10,
+        "unlocks": [
+          "substantial-page",
+          "quantum-bridge",
+          "evidence-dossier"
+        ],
+        "rationale": "A dossier-suitable quantitative method and an explicit bridge endpoint candidate."
+      },
+      "currentVerdict": "mismatched",
+      "replacement": {
+        "proposedSourceContractId": "source-remediation-batch-10-biomolecular-engineering-enzyme-cascade-engineering",
+        "replacementDecision": "replacement-supported",
+        "citation": "Hold, C., Billerbeck, S. & Panke, S. Forward design of a complex enzyme cascade reaction. Nature Communications 7, 12971 (2016).",
+        "identifier": "doi:10.1038/ncomms12971",
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5052792/",
+        "rationale": "The study directly engineers and optimizes an in vitro ten-enzyme cascade.",
+        "rights": {
+          "basis": "citation-with-paraphrase",
+          "quotationUsed": false,
+          "sourceContentCommitted": false
+        },
+        "inspection": {
+          "metadataVerified": true,
+          "metadataNote": "PMC identifies the three authors, article number, DOI, and CC BY 4.0 version of record.",
+          "artifactVersion": "version-of-record",
+          "inspectionDepth": "specified-sections",
+          "contentInspected": true,
+          "exactLocatorInspected": true,
+          "inspectedContentLocation": "Abstract; “Model formulation and parameterization”; “Optimizing a cascade reaction for product concentration”.",
+          "findings": "The study combines perturbation experiments, online mass spectrometry, mechanistic rate laws, parameter estimation, and model-based optimization for a ten-enzyme cascade.",
+          "limitation": "The result is specific to the constructed in vitro system and does not establish general transfer to all enzyme networks or production scales."
+        }
+      },
+      "disposition": "blocked-pending-source-override-review",
+      "canonicalMutationAuthorized": false,
+      "promotionEligible": false,
+      "externallyReviewed": false,
+      "independentlyReproduced": false,
+      "whatWouldChangeIfAccepted": "Acceptance would create a new revision of biomolecular-engineering-enzyme-cascade-engineering whose single claim cites the inspected replacement and exact locator. It would not mutate the existing revision, inherit review, imply reproduction, authorize canonical release, or widen the claim beyond the inspected source.",
+      "prior": {
+        "sourceContractId": "source-biomolecular-engineering-toehold",
+        "sourceIdentifier": "10.1016/j.cell.2014.10.004",
+        "sourceTitle": "Paper-based synthetic gene networks",
+        "locator": "Toehold-switch design, cell-free implementation, freeze-drying, assays, and Methods.",
+        "verdict": "mismatched",
+        "recordRevisionSha256": "sha256:eb4726d5e119ae9564a0d2f01b2b2256b5a95109260b66a0e29a4495ff4d4f4b",
+        "blockers": [
+          "source-assignment-positional-legacy",
+          "source-subject-mismatched"
+        ]
+      },
+      "packetDigest": "sha256:de967fb23f8fdd710a38e3a9e414fb8f507d8ccadc0357cc477aefc81d56ed4a"
+    },
+    {
+      "schemaVersion": "maha-frontier-alignment-batch/10.0",
+      "packetId": "urn:maha:remediation:frontier-alignment-batch-10:critical-supply-chains-semiconductor-grade-polysilicon",
+      "recordId": "urn:maha:record:critical-supply-chains-semiconductor-grade-polysilicon",
+      "domainSlug": "critical-supply-chains",
+      "priority": {
+        "productRelevance": 4,
+        "graphLeverage": 3,
+        "correctionValue": 2,
+        "inspectability": 1,
+        "total": 10,
+        "unlocks": [
+          "substantial-page",
+          "quantum-bridge",
+          "evidence-dossier"
+        ],
+        "rationale": "A semiconductor feedstock chokepoint tied to both substantial-page and bridge planning."
+      },
+      "currentVerdict": "mismatched",
+      "replacement": {
+        "proposedSourceContractId": "source-remediation-batch-10-critical-supply-chains-semiconductor-grade-polysilicon",
+        "replacementDecision": "replacement-supported",
+        "citation": "Costogue, E. N. et al. Polycrystalline silicon study: low-cost refining technology prospects and semiconductor-grade availability through 1988. JPL-PUB-84-41 (1984).",
+        "identifier": "ntrs:19840025142",
+        "url": "https://ntrs.nasa.gov/citations/19840025142",
+        "rationale": "The government report directly reviews semiconductor-grade polysilicon supply and Siemens, silane, and fluidized-bed refining routes.",
+        "rights": {
+          "basis": "citation-with-paraphrase",
+          "quotationUsed": false,
+          "sourceContentCommitted": false
+        },
+        "inspection": {
+          "metadataVerified": true,
+          "metadataNote": "NASA NTRS identifies five JPL authors, publication date, report numbers, public-use status, and downloadable contractor report.",
+          "artifactVersion": "government-report",
+          "inspectionDepth": "specified-sections",
+          "contentInspected": true,
+          "exactLocatorInspected": true,
+          "inspectedContentLocation": "Executive summary; §II commercial polysilicon industry; §III DOE silicon refining process research; silane-to-silicon conversion subsection.",
+          "findings": "The report distinguishes semiconductor-grade polycrystalline silicon and documents Siemens-process supply plus alternative silane and fluidized-bed process development.",
+          "limitation": "It is a 1984 industry and R&D assessment; it does not establish current capacity, present suppliers, or modern qualification economics."
+        }
+      },
+      "disposition": "blocked-pending-source-override-review",
+      "canonicalMutationAuthorized": false,
+      "promotionEligible": false,
+      "externallyReviewed": false,
+      "independentlyReproduced": false,
+      "whatWouldChangeIfAccepted": "Acceptance would create a new revision of critical-supply-chains-semiconductor-grade-polysilicon whose single claim cites the inspected replacement and exact locator. It would not mutate the existing revision, inherit review, imply reproduction, authorize canonical release, or widen the claim beyond the inspected source.",
+      "prior": {
+        "sourceContractId": "source-critical-supply-chains-pp1802",
+        "sourceIdentifier": null,
+        "sourceTitle": "Critical Mineral Resources of the United States—Economic and Environmental Geology and Prospects for Future Supply",
+        "locator": "Commodity chapters and introductory sections distinguishing resources, production, processing, uses, and supply considerations.",
+        "verdict": "mismatched",
+        "recordRevisionSha256": "sha256:16650f77b62196d4e0646eba40145ce3b81eb1c50f72d0342b1f2b2ae6096c79",
+        "blockers": [
+          "source-assignment-positional-legacy",
+          "source-subject-mismatched"
+        ]
+      },
+      "packetDigest": "sha256:9dee5ac724aaf7856e4aaa1f563e5e482aaa3c07ec3a6778047ed7f5cb8bb536"
+    },
+    {
+      "schemaVersion": "maha-frontier-alignment-batch/10.0",
+      "packetId": "urn:maha:remediation:frontier-alignment-batch-10:critical-supply-chains-fluorinated-resist-components",
+      "recordId": "urn:maha:record:critical-supply-chains-fluorinated-resist-components",
+      "domainSlug": "critical-supply-chains",
+      "priority": {
+        "productRelevance": 4,
+        "graphLeverage": 2,
+        "correctionValue": 2,
+        "inspectability": 1,
+        "total": 9,
+        "unlocks": [
+          "substantial-page",
+          "evidence-dossier"
+        ],
+        "rationale": "Repairs a semiconductor-materials source defect and supports a dossier-ready lithography topic."
+      },
+      "currentVerdict": "mismatched",
+      "replacement": {
+        "proposedSourceContractId": "source-remediation-batch-10-critical-supply-chains-fluorinated-resist-components",
+        "replacementDecision": "replacement-supported",
+        "citation": "Thakur, N. et al. Fluorine-Rich Zinc Oxoclusters as Extreme Ultraviolet Photoresists: Chemical Reactions and Lithography Performance. ACS Materials Au 2, 343–355 (2022).",
+        "identifier": "doi:10.1021/acsmaterialsau.1c00059",
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9888611/",
+        "rationale": "The experimental paper directly studies fluorinated components in an EUV photoresist formulation.",
+        "rights": {
+          "basis": "citation-with-paraphrase",
+          "quotationUsed": false,
+          "sourceContentCommitted": false
+        },
+        "inspection": {
+          "metadataVerified": true,
+          "metadataNote": "PMC and the institutional repository identify nine authors, journal, pages, DOI, and final article.",
+          "artifactVersion": "version-of-record",
+          "inspectionDepth": "full-document",
+          "contentInspected": true,
+          "exactLocatorInspected": true,
+          "inspectedContentLocation": "Abstract; figure 1 and study design; EUV lithography and spectroscopy results; Conclusions.",
+          "findings": "The paper measures fluorine-rich zinc oxocluster resists and reports EUV absorption, sensitivity, thin-film behavior, and carbon–fluorine bond chemistry.",
+          "limitation": "One zinc-oxocluster family does not define the full commercial supply chain or performance of all fluorinated resist components."
+        }
+      },
+      "disposition": "blocked-pending-source-override-review",
+      "canonicalMutationAuthorized": false,
+      "promotionEligible": false,
+      "externallyReviewed": false,
+      "independentlyReproduced": false,
+      "whatWouldChangeIfAccepted": "Acceptance would create a new revision of critical-supply-chains-fluorinated-resist-components whose single claim cites the inspected replacement and exact locator. It would not mutate the existing revision, inherit review, imply reproduction, authorize canonical release, or widen the claim beyond the inspected source.",
+      "prior": {
+        "sourceContractId": "source-critical-supply-chains-mcs-gallium-germanium",
+        "sourceIdentifier": null,
+        "sourceTitle": "Mineral Commodity Summaries 2026",
+        "locator": "Gallium and germanium commodity chapters: production, recycling, imports, uses, substitutes, and world resources.",
+        "verdict": "mismatched",
+        "recordRevisionSha256": "sha256:5af413273791c19aa42cc194b67bd193468c0580a0e086f197e41770f74fddb7",
+        "blockers": [
+          "source-assignment-positional-legacy",
+          "source-subject-mismatched"
+        ]
+      },
+      "packetDigest": "sha256:89cfb779c8b2cdf497b6104b390fee58a120472541f6d4e863c9975f2d5f6c9c"
+    },
+    {
+      "schemaVersion": "maha-frontier-alignment-batch/10.0",
+      "packetId": "urn:maha:remediation:frontier-alignment-batch-10:critical-supply-chains-quartz-crucible-manufacturing",
+      "recordId": "urn:maha:record:critical-supply-chains-quartz-crucible-manufacturing",
+      "domainSlug": "critical-supply-chains",
+      "priority": {
+        "productRelevance": 4,
+        "graphLeverage": 2,
+        "correctionValue": 2,
+        "inspectability": 1,
+        "total": 9,
+        "unlocks": [
+          "substantial-page",
+          "evidence-dossier"
+        ],
+        "rationale": "A semiconductor crystal-growth chokepoint and substantial-page candidate with a directly inspectable manufacturing disclosure."
+      },
+      "currentVerdict": "mismatched",
+      "replacement": {
+        "proposedSourceContractId": "source-remediation-batch-10-critical-supply-chains-quartz-crucible-manufacturing",
+        "replacementDecision": "replacement-supported",
+        "citation": "Kumagai, K. et al. Method for producing quartz glass crucible for use in pulling silicon single crystal. US Patent 7,587,912 (2009).",
+        "identifier": "patent:US7587912B2",
+        "url": "https://patents.google.com/patent/US7587912B2/en",
+        "rationale": "The patent directly specifies rotating-mold, silica-powder, vacuum, arc-melting, and layered crucible production steps.",
+        "rights": {
+          "basis": "citation-with-paraphrase",
+          "quotationUsed": false,
+          "sourceContentCommitted": false
+        },
+        "inspection": {
+          "metadataVerified": true,
+          "metadataNote": "Google Patents serves the published US patent, inventors, assignee, legal chronology, claims, description, and drawings.",
+          "artifactVersion": "patent",
+          "inspectionDepth": "specified-sections",
+          "contentInspected": true,
+          "exactLocatorInspected": true,
+          "inspectedContentLocation": "Abstract; Background; production-method description; figure 1; independent manufacturing claims.",
+          "findings": "The disclosure describes centrifugal forming in a rotating gas-permeable mold, vacuum gas removal, arc melting, and formation of translucent outer and transparent inner quartz-glass layers.",
+          "limitation": "A patent discloses a claimed method, not independent evidence of manufacturing yield, commercial adoption, or comparative superiority."
+        }
+      },
+      "disposition": "blocked-pending-source-override-review",
+      "canonicalMutationAuthorized": false,
+      "promotionEligible": false,
+      "externallyReviewed": false,
+      "independentlyReproduced": false,
+      "whatWouldChangeIfAccepted": "Acceptance would create a new revision of critical-supply-chains-quartz-crucible-manufacturing whose single claim cites the inspected replacement and exact locator. It would not mutate the existing revision, inherit review, imply reproduction, authorize canonical release, or widen the claim beyond the inspected source.",
+      "prior": {
+        "sourceContractId": "source-critical-supply-chains-pp1802",
+        "sourceIdentifier": null,
+        "sourceTitle": "Critical Mineral Resources of the United States—Economic and Environmental Geology and Prospects for Future Supply",
+        "locator": "Commodity chapters and introductory sections distinguishing resources, production, processing, uses, and supply considerations.",
+        "verdict": "mismatched",
+        "recordRevisionSha256": "sha256:4ea4058077b38e83ffe793f62499517702af9b8c0f9c129ab932833fa897e78e",
+        "blockers": [
+          "source-assignment-positional-legacy",
+          "source-subject-mismatched"
+        ]
+      },
+      "packetDigest": "sha256:e4f1fae008f6c55d0c96381311d2a48f3df9ea94322d7cf44df1bd6c2d22ee8a"
+    },
+    {
+      "schemaVersion": "maha-frontier-alignment-batch/10.0",
+      "packetId": "urn:maha:remediation:frontier-alignment-batch-10:fusion-plasma-systems-magnetic-mirror-confinement",
+      "recordId": "urn:maha:record:fusion-plasma-systems-magnetic-mirror-confinement",
+      "domainSlug": "fusion-plasma-systems",
+      "priority": {
+        "productRelevance": 4,
+        "graphLeverage": 2,
+        "correctionValue": 2,
+        "inspectability": 1,
+        "total": 9,
+        "unlocks": [
+          "substantial-page",
+          "evidence-dossier"
+        ],
+        "rationale": "A distinct confinement architecture and a high-value fusion methodology page."
+      },
+      "currentVerdict": "mismatched",
+      "replacement": {
+        "proposedSourceContractId": "source-remediation-batch-10-fusion-plasma-systems-magnetic-mirror-confinement",
+        "replacementDecision": "replacement-supported",
+        "citation": "Coensgen, F. H. & Simonen, T. C. Magnetic Mirror Confinement of High-Energy, High-Density Plasma. UCRL-82790 (1979).",
+        "identifier": "osti:5879720",
+        "url": "https://www.osti.gov/servlets/purl/5879720",
+        "rationale": "The inspected DOE report directly describes magnetic-mirror experiments, confinement issues, impurities, and the MFTF bridge.",
+        "rights": {
+          "basis": "citation-with-paraphrase",
+          "quotationUsed": false,
+          "sourceContentCommitted": false
+        },
+        "inspection": {
+          "metadataVerified": true,
+          "metadataNote": "The LLNL report header identifies both authors, report number, date, and DOE repository artifact.",
+          "artifactVersion": "government-report",
+          "inspectionDepth": "specified-sections",
+          "contentInspected": true,
+          "exactLocatorInspected": true,
+          "inspectedContentLocation": "Mirror-confinement overview; impurity studies; 2XIIB results; “MFTF Experiments”.",
+          "findings": "The report treats magnetic-mirror confinement as an open-field plasma-confinement approach and reports experimental impurity and confinement observations.",
+          "limitation": "Historical mirror experiments and planned MFTF work do not establish a modern power-plant design or commercial feasibility."
+        }
+      },
+      "disposition": "blocked-pending-source-override-review",
+      "canonicalMutationAuthorized": false,
+      "promotionEligible": false,
+      "externallyReviewed": false,
+      "independentlyReproduced": false,
+      "whatWouldChangeIfAccepted": "Acceptance would create a new revision of fusion-plasma-systems-magnetic-mirror-confinement whose single claim cites the inspected replacement and exact locator. It would not mutate the existing revision, inherit review, imply reproduction, authorize canonical release, or widen the claim beyond the inspected source.",
+      "prior": {
+        "sourceContractId": "source-fusion-plasma-systems-nif-ignition",
+        "sourceIdentifier": null,
+        "sourceTitle": "Achieving Fusion Ignition",
+        "locator": "Target, laser coupling, target chamber, ignition, and experimental result sections.",
+        "verdict": "mismatched",
+        "recordRevisionSha256": "sha256:43ad0d2171751fbd879d2f79f02597b12e05f7ee2e641bf5659149adff468556",
+        "blockers": [
+          "source-assignment-positional-legacy",
+          "source-subject-mismatched"
+        ]
+      },
+      "packetDigest": "sha256:a5f7f3c6f91ad63978477c1a9ab528af72a220fadb96b06f872529d66f7fdc5a"
+    },
+    {
+      "schemaVersion": "maha-frontier-alignment-batch/10.0",
+      "packetId": "urn:maha:remediation:frontier-alignment-batch-10:fusion-plasma-systems-plasma-position-and-shape-control",
+      "recordId": "urn:maha:record:fusion-plasma-systems-plasma-position-and-shape-control",
+      "domainSlug": "fusion-plasma-systems",
+      "priority": {
+        "productRelevance": 4,
+        "graphLeverage": 2,
+        "correctionValue": 2,
+        "inspectability": 1,
+        "total": 9,
+        "unlocks": [
+          "substantial-page",
+          "evidence-dossier"
+        ],
+        "rationale": "Already selected for a substantial page and central to governed tokamak control."
+      },
+      "currentVerdict": "mismatched",
+      "replacement": {
+        "proposedSourceContractId": "source-remediation-batch-10-fusion-plasma-systems-plasma-position-and-shape-control",
+        "replacementDecision": "replacement-supported",
+        "citation": "ITER Organization. ITPEA Topical Group on MHD, Disruptions and Control (accessed 2026-08-30).",
+        "identifier": "url:https://www.iter.org/scientists/itpea/itpea-topical-group-mhd-disruptions-and-control",
+        "url": "https://www.iter.org/scientists/itpea/itpea-topical-group-mhd-disruptions-and-control",
+        "rationale": "The official ITER page explicitly scopes feedback and feedforward control of plasma current, position, and shape.",
+        "rights": {
+          "basis": "citation-with-paraphrase",
+          "quotationUsed": false,
+          "sourceContentCommitted": false
+        },
+        "inspection": {
+          "metadataVerified": true,
+          "metadataNote": "The official ITER page identifies the topical group, scope, members, and magnetic-control work program.",
+          "artifactVersion": "living-specification",
+          "inspectionDepth": "specified-sections",
+          "contentInspected": true,
+          "exactLocatorInspected": true,
+          "inspectedContentLocation": "“Plasma magnetic control” scope and bullets on current, position, shape, error fields, simulators, and validation.",
+          "findings": "The page identifies plasma current, position, and shape as explicit magnetic-control targets and describes feedforward, feedback, simulation, and experimental validation activities.",
+          "limitation": "A topical-group work program does not report one bounded controller experiment, performance interval, or universal control law."
+        }
+      },
+      "disposition": "blocked-pending-source-override-review",
+      "canonicalMutationAuthorized": false,
+      "promotionEligible": false,
+      "externallyReviewed": false,
+      "independentlyReproduced": false,
+      "whatWouldChangeIfAccepted": "Acceptance would create a new revision of fusion-plasma-systems-plasma-position-and-shape-control whose single claim cites the inspected replacement and exact locator. It would not mutate the existing revision, inherit review, imply reproduction, authorize canonical release, or widen the claim beyond the inspected source.",
+      "prior": {
+        "sourceContractId": "source-fusion-plasma-systems-iter-divertor",
+        "sourceIdentifier": null,
+        "sourceTitle": "Making fusion work",
+        "locator": "Sections describing plasma control, first wall, blanket, and divertor heat and particle exhaust.",
+        "verdict": "mismatched",
+        "recordRevisionSha256": "sha256:576a18337105c689f45756b1a4a3252487621ea51817ee2a88dd28fca363ff7b",
+        "blockers": [
+          "source-assignment-positional-legacy",
+          "source-subject-mismatched"
+        ]
+      },
+      "packetDigest": "sha256:1a25085969e9182d910faa0b06996c8daf13ba921b1edbd4173dd0f9c166c10a"
+    },
+    {
+      "schemaVersion": "maha-frontier-alignment-batch/10.0",
+      "packetId": "urn:maha:remediation:frontier-alignment-batch-10:mechanistic-interpretability-circuit-completeness",
+      "recordId": "urn:maha:record:mechanistic-interpretability-circuit-completeness",
+      "domainSlug": "mechanistic-interpretability",
+      "priority": {
+        "productRelevance": 4,
+        "graphLeverage": 2,
+        "correctionValue": 2,
+        "inspectability": 1,
+        "total": 9,
+        "unlocks": [
+          "substantial-page",
+          "evidence-dossier"
+        ],
+        "rationale": "A key evidentiary criterion for substantial interpretability pages and future model dossiers."
+      },
+      "currentVerdict": "mismatched",
+      "replacement": {
+        "proposedSourceContractId": "source-remediation-batch-10-mechanistic-interpretability-circuit-completeness",
+        "replacementDecision": "replacement-supported",
+        "citation": "Wang, K. et al. Interpretability in the Wild: a Circuit for Indirect Object Identification in GPT-2 small. ICLR (2023).",
+        "identifier": "arXiv:2211.00593",
+        "url": "https://arxiv.org/abs/2211.00593",
+        "rationale": "The paper explicitly defines and evaluates completeness as one criterion for a mechanistic circuit explanation.",
+        "rights": {
+          "basis": "citation-with-paraphrase",
+          "quotationUsed": false,
+          "sourceContentCommitted": false
+        },
+        "inspection": {
+          "metadataVerified": true,
+          "metadataNote": "The arXiv record identifies five authors, title, versions, and the ICLR paper.",
+          "artifactVersion": "preprint",
+          "inspectionDepth": "specified-sections",
+          "contentInspected": true,
+          "exactLocatorInspected": true,
+          "inspectedContentLocation": "Abstract; §3 circuit discovery; §4 faithfulness, completeness, and minimality criteria; limitations.",
+          "findings": "The authors evaluate an IOI circuit using quantitative faithfulness, completeness, and minimality criteria while recording remaining explanatory gaps.",
+          "limitation": "The criterion is evaluated on GPT-2 small and one behavior; it is not proof that the proposed circuit is complete for all prompts or models."
+        }
+      },
+      "disposition": "blocked-pending-source-override-review",
+      "canonicalMutationAuthorized": false,
+      "promotionEligible": false,
+      "externallyReviewed": false,
+      "independentlyReproduced": false,
+      "whatWouldChangeIfAccepted": "Acceptance would create a new revision of mechanistic-interpretability-circuit-completeness whose single claim cites the inspected replacement and exact locator. It would not mutate the existing revision, inherit review, imply reproduction, authorize canonical release, or widen the claim beyond the inspected source.",
+      "prior": {
+        "sourceContractId": "source-mechanistic-interpretability-circuits",
+        "sourceIdentifier": null,
+        "sourceTitle": "A Mathematical Framework for Transformer Circuits",
+        "locator": "Residual-stream decomposition, attention-head composition, path expansion, and limitations.",
+        "verdict": "mismatched",
+        "recordRevisionSha256": "sha256:2cd487cb78ca861c6c9fb368322e835d776a7394801249e256908563cbc75179",
+        "blockers": [
+          "source-assignment-positional-legacy",
+          "source-subject-mismatched"
+        ]
+      },
+      "packetDigest": "sha256:cc12f3cf8b1fae3e251f200506aaa1cfa73bdba8738945aa04856ef8ddd87e63"
+    },
+    {
+      "schemaVersion": "maha-frontier-alignment-batch/10.0",
+      "packetId": "urn:maha:remediation:frontier-alignment-batch-10:advanced-materials-tmd-monolayers",
+      "recordId": "urn:maha:record:advanced-materials-tmd-monolayers",
+      "domainSlug": "advanced-materials",
+      "priority": {
+        "productRelevance": 3,
+        "graphLeverage": 2,
+        "correctionValue": 2,
+        "inspectability": 1,
+        "total": 8,
+        "unlocks": [
+          "substantial-page",
+          "evidence-dossier"
+        ],
+        "rationale": "A foundational 2D-materials record linked to multiple advanced-materials pages."
+      },
+      "currentVerdict": "mismatched",
+      "replacement": {
+        "proposedSourceContractId": "source-remediation-batch-10-advanced-materials-tmd-monolayers",
+        "replacementDecision": "replacement-supported",
+        "citation": "Mak, K. F. et al. Atomically thin MoS2: A new direct-gap semiconductor. Physical Review Letters 105, 136805 (2010).",
+        "identifier": "doi:10.1103/PhysRevLett.105.136805",
+        "url": "https://arxiv.org/abs/1004.0546",
+        "rationale": "The study directly measures one- through six-layer MoS2 and isolates monolayer behavior.",
+        "rights": {
+          "basis": "citation-with-paraphrase",
+          "quotationUsed": false,
+          "sourceContentCommitted": false
+        },
+        "inspection": {
+          "metadataVerified": true,
+          "metadataNote": "The arXiv record identifies five authors and the title; the DOI identifies the PRL version of record.",
+          "artifactVersion": "preprint",
+          "inspectionDepth": "abstract-only",
+          "contentInspected": true,
+          "exactLocatorInspected": true,
+          "inspectedContentLocation": "arXiv:1004.0546 abstract, sample thickness range, spectroscopy methods, and monolayer result.",
+          "findings": "Optical spectroscopy across N=1–6 layers demonstrates a thickness-dependent electronic structure and direct-gap monolayer limit.",
+          "limitation": "The result is specific to MoS2 and optical measurements; it does not establish a fabrication method for all TMD monolayers."
+        }
+      },
+      "disposition": "blocked-pending-source-override-review",
+      "canonicalMutationAuthorized": false,
+      "promotionEligible": false,
+      "externallyReviewed": false,
+      "independentlyReproduced": false,
+      "whatWouldChangeIfAccepted": "Acceptance would create a new revision of advanced-materials-tmd-monolayers whose single claim cites the inspected replacement and exact locator. It would not mutate the existing revision, inherit review, imply reproduction, authorize canonical release, or widen the claim beyond the inspected source.",
+      "prior": {
+        "sourceContractId": "source-advanced-materials-magic-angle",
+        "sourceIdentifier": "10.1038/nature26160",
+        "sourceTitle": "Unconventional superconductivity in magic-angle graphene superlattices",
+        "locator": "Abstract, device description, phase diagram, transport measurements, and Methods.",
+        "verdict": "mismatched",
+        "recordRevisionSha256": "sha256:a62d53835ec63fdb7a641c548e8b907ac05200e0bcd85d34ef62461494ce4a94",
+        "blockers": [
+          "source-assignment-positional-legacy",
+          "source-subject-mismatched"
+        ]
+      },
+      "packetDigest": "sha256:88571bb0f9a01df16c871a06736b52581392650703239adf9175988e199fdc9c"
+    },
+    {
+      "schemaVersion": "maha-frontier-alignment-batch/10.0",
+      "packetId": "urn:maha:remediation:frontier-alignment-batch-10:advanced-materials-topological-insulator-surface-states",
+      "recordId": "urn:maha:record:advanced-materials-topological-insulator-surface-states",
+      "domainSlug": "advanced-materials",
+      "priority": {
+        "productRelevance": 3,
+        "graphLeverage": 2,
+        "correctionValue": 2,
+        "inspectability": 1,
+        "total": 8,
+        "unlocks": [
+          "substantial-page",
+          "evidence-dossier"
+        ],
+        "rationale": "A foundational quantum-materials record with direct dossier and bridge relevance."
+      },
+      "currentVerdict": "mismatched",
+      "replacement": {
+        "proposedSourceContractId": "source-remediation-batch-10-advanced-materials-topological-insulator-surface-states",
+        "replacementDecision": "replacement-supported",
+        "citation": "Hasan, M. Z. & Kane, C. L. Colloquium: Topological insulators. Reviews of Modern Physics 82, 3045–3067 (2010).",
+        "identifier": "doi:10.1103/RevModPhys.82.3045",
+        "url": "https://arxiv.org/abs/1002.3895",
+        "rationale": "The review directly defines protected edge and surface states and surveys their experimental signatures.",
+        "rights": {
+          "basis": "citation-with-paraphrase",
+          "quotationUsed": false,
+          "sourceContentCommitted": false
+        },
+        "inspection": {
+          "metadataVerified": true,
+          "metadataNote": "The arXiv record identifies both authors and the complete colloquium corresponding to the RMP DOI.",
+          "artifactVersion": "preprint",
+          "inspectionDepth": "full-document",
+          "contentInspected": true,
+          "exactLocatorInspected": true,
+          "inspectedContentLocation": "Abstract; §I Introduction; §II Topological Band Theory; §IV 3D Topological Insulators; §V surface phases.",
+          "findings": "The article defines bulk-gapped topological insulators with protected boundary states and reviews direct probes of 3D surface states.",
+          "limitation": "This is a colloquium synthesis and the active record is typed as a method; review must decide whether the record class also needs revision."
+        }
+      },
+      "disposition": "blocked-pending-source-override-review",
+      "canonicalMutationAuthorized": false,
+      "promotionEligible": false,
+      "externallyReviewed": false,
+      "independentlyReproduced": false,
+      "whatWouldChangeIfAccepted": "Acceptance would create a new revision of advanced-materials-topological-insulator-surface-states whose single claim cites the inspected replacement and exact locator. It would not mutate the existing revision, inherit review, imply reproduction, authorize canonical release, or widen the claim beyond the inspected source.",
+      "prior": {
+        "sourceContractId": "source-advanced-materials-tmd",
+        "sourceIdentifier": "10.1103/PhysRevLett.105.136805",
+        "sourceTitle": "Atomically Thin MoS2: A New Direct-Gap Semiconductor",
+        "locator": "Abstract and photoluminescence measurements comparing bulk, few-layer, and monolayer MoS2.",
+        "verdict": "mismatched",
+        "recordRevisionSha256": "sha256:82e2bb95448b7807a4756154ddce34b8142ed5a9890eed50952d04bcb6f96827",
+        "blockers": [
+          "source-assignment-positional-legacy",
+          "source-subject-mismatched"
+        ]
+      },
+      "packetDigest": "sha256:4e659781b35a3387c7aecf6c8283815cb306dfaa7f98b78804763418130c3dab"
+    },
+    {
+      "schemaVersion": "maha-frontier-alignment-batch/10.0",
+      "packetId": "urn:maha:remediation:frontier-alignment-batch-10:advanced-materials-contact-resistance-in-2d-devices",
+      "recordId": "urn:maha:record:advanced-materials-contact-resistance-in-2d-devices",
+      "domainSlug": "advanced-materials",
+      "priority": {
+        "productRelevance": 3,
+        "graphLeverage": 2,
+        "correctionValue": 2,
+        "inspectability": 1,
+        "total": 8,
+        "unlocks": [
+          "substantial-page",
+          "evidence-dossier"
+        ],
+        "rationale": "A device-integration bottleneck with high semiconductor commercial relevance."
+      },
+      "currentVerdict": "mismatched",
+      "replacement": {
+        "proposedSourceContractId": "source-remediation-batch-10-advanced-materials-contact-resistance-in-2d-devices",
+        "replacementDecision": "replacement-supported",
+        "citation": "Liu, Y. et al. Recent Progress in Contact Engineering of Field-Effect Transistor Based on Two-Dimensional Materials. Nanomaterials 12, 3845 (2022).",
+        "identifier": "doi:10.3390/nano12213845",
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9658022/",
+        "rationale": "The review is explicitly organized around contact resistance mechanisms and engineering in 2D FETs.",
+        "rights": {
+          "basis": "citation-with-paraphrase",
+          "quotationUsed": false,
+          "sourceContentCommitted": false
+        },
+        "inspection": {
+          "metadataVerified": true,
+          "metadataNote": "PMC identifies the article, authors, journal, DOI, and CC BY version of record.",
+          "artifactVersion": "version-of-record",
+          "inspectionDepth": "full-document",
+          "contentInspected": true,
+          "exactLocatorInspected": true,
+          "inspectedContentLocation": "Abstract; §1 Introduction; contact-resistance origins; top and edge contacts; equation 8; §5 Conclusions.",
+          "findings": "The review treats contact resistance as a dominant 2D-FET limitation and connects it to Fermi-level pinning, interface damage, and top/edge contact structures.",
+          "limitation": "A review organizes reported results but does not supply one universal contact-resistance value or validate every proposed contact stack."
+        }
+      },
+      "disposition": "blocked-pending-source-override-review",
+      "canonicalMutationAuthorized": false,
+      "promotionEligible": false,
+      "externallyReviewed": false,
+      "independentlyReproduced": false,
+      "whatWouldChangeIfAccepted": "Acceptance would create a new revision of advanced-materials-contact-resistance-in-2d-devices whose single claim cites the inspected replacement and exact locator. It would not mutate the existing revision, inherit review, imply reproduction, authorize canonical release, or widen the claim beyond the inspected source.",
+      "prior": {
+        "sourceContractId": "source-advanced-materials-vdw",
+        "sourceIdentifier": "10.1038/nature12385",
+        "sourceTitle": "Van der Waals heterostructures",
+        "locator": "Assembly, interfaces, device examples, and outlook sections.",
+        "verdict": "mismatched",
+        "recordRevisionSha256": "sha256:367edb070cf1ffaca9e572229917f6dbb4b1f7122a9d44f0ba22a2e486612723",
+        "blockers": [
+          "source-assignment-positional-legacy",
+          "source-subject-mismatched"
+        ]
+      },
+      "packetDigest": "sha256:7ba7c97a9d1f441a519cb136715b371b43a0fcb9a03becda40296cc062de065d"
+    },
+    {
+      "schemaVersion": "maha-frontier-alignment-batch/10.0",
+      "packetId": "urn:maha:remediation:frontier-alignment-batch-10:fusion-plasma-systems-electron-cyclotron-heating",
+      "recordId": "urn:maha:record:fusion-plasma-systems-electron-cyclotron-heating",
+      "domainSlug": "fusion-plasma-systems",
+      "priority": {
+        "productRelevance": 3,
+        "graphLeverage": 2,
+        "correctionValue": 2,
+        "inspectability": 1,
+        "total": 8,
+        "unlocks": [
+          "substantial-page",
+          "evidence-dossier"
+        ],
+        "rationale": "A major ITER heating system currently bound to an unrelated disruption source."
+      },
+      "currentVerdict": "mismatched",
+      "replacement": {
+        "proposedSourceContractId": "source-remediation-batch-10-fusion-plasma-systems-electron-cyclotron-heating",
+        "replacementDecision": "replacement-supported",
+        "citation": "ITER Organization. External heating systems (accessed 2026-08-30).",
+        "identifier": "url:https://www.iter.org/machine/supporting-systems/external-heating-systems",
+        "url": "https://www.iter.org/machine/supporting-systems/external-heating-systems",
+        "rationale": "The official system page directly distinguishes ECRH and its operating mechanism from the other heating systems.",
+        "rights": {
+          "basis": "citation-with-paraphrase",
+          "quotationUsed": false,
+          "sourceContentCommitted": false
+        },
+        "inspection": {
+          "metadataVerified": true,
+          "metadataNote": "The official ITER page identifies the current planned heating mix and system-specific sections.",
+          "artifactVersion": "living-specification",
+          "inspectionDepth": "specified-sections",
+          "contentInspected": true,
+          "exactLocatorInspected": true,
+          "inspectedContentLocation": "“High-frequency electromagnetic waves” subsection, ECRH paragraph, gyrotron and launcher description.",
+          "findings": "The page describes 170 GHz resonant electron heating, electron-to-ion energy transfer, localized deposition, plasma-shot initiation, and instability suppression roles.",
+          "limitation": "The page describes ITER design and planned operation; it is not a comparative experiment proving system performance."
+        }
+      },
+      "disposition": "blocked-pending-source-override-review",
+      "canonicalMutationAuthorized": false,
+      "promotionEligible": false,
+      "externallyReviewed": false,
+      "independentlyReproduced": false,
+      "whatWouldChangeIfAccepted": "Acceptance would create a new revision of fusion-plasma-systems-electron-cyclotron-heating whose single claim cites the inspected replacement and exact locator. It would not mutate the existing revision, inherit review, imply reproduction, authorize canonical release, or widen the claim beyond the inspected source.",
+      "prior": {
+        "sourceContractId": "source-fusion-plasma-systems-iter-disruption",
+        "sourceIdentifier": null,
+        "sourceTitle": "Disruption mitigation",
+        "locator": "System overview and shattered pellet injection sections.",
+        "verdict": "mismatched",
+        "recordRevisionSha256": "sha256:978b79b7f3f00ce19bfdb6b9a58dbb4a02f6ec4b3c9e9c7c0bba8f414381b6c1",
+        "blockers": [
+          "source-assignment-positional-legacy",
+          "source-subject-mismatched"
+        ]
+      },
+      "packetDigest": "sha256:58cbf02f1b58a72991b5bd0a35e4e2599d2feafc680066fa8cce50099de7b875"
+    },
+    {
+      "schemaVersion": "maha-frontier-alignment-batch/10.0",
+      "packetId": "urn:maha:remediation:frontier-alignment-batch-10:fusion-plasma-systems-neutral-beam-injection",
+      "recordId": "urn:maha:record:fusion-plasma-systems-neutral-beam-injection",
+      "domainSlug": "fusion-plasma-systems",
+      "priority": {
+        "productRelevance": 3,
+        "graphLeverage": 2,
+        "correctionValue": 2,
+        "inspectability": 1,
+        "total": 8,
+        "unlocks": [
+          "substantial-page",
+          "evidence-dossier"
+        ],
+        "rationale": "A major ITER heating method currently bound to an unrelated disruption source."
+      },
+      "currentVerdict": "mismatched",
+      "replacement": {
+        "proposedSourceContractId": "source-remediation-batch-10-fusion-plasma-systems-neutral-beam-injection",
+        "replacementDecision": "replacement-supported",
+        "citation": "ITER Organization. External heating systems (accessed 2026-08-30).",
+        "identifier": "url:https://www.iter.org/machine/supporting-systems/external-heating-systems",
+        "url": "https://www.iter.org/machine/supporting-systems/external-heating-systems",
+        "rationale": "The official system page directly describes neutral-beam generation, neutralization, injection, and plasma heating.",
+        "rights": {
+          "basis": "citation-with-paraphrase",
+          "quotationUsed": false,
+          "sourceContentCommitted": false
+        },
+        "inspection": {
+          "metadataVerified": true,
+          "metadataNote": "The official ITER page identifies the current planned heating mix and system-specific sections.",
+          "artifactVersion": "living-specification",
+          "inspectionDepth": "specified-sections",
+          "contentInspected": true,
+          "exactLocatorInspected": true,
+          "inspectedContentLocation": "“Neutral beam injection” subsection, beam source, acceleration grids, neutralizer, plasma-collision mechanism, and test-program boundary.",
+          "findings": "The page describes accelerated deuterium ions, neutralization for magnetic-cage penetration, and collisional energy transfer to plasma particles.",
+          "limitation": "Design powers and planned operation do not establish realized ITER plasma performance or comparative superiority."
+        }
+      },
+      "disposition": "blocked-pending-source-override-review",
+      "canonicalMutationAuthorized": false,
+      "promotionEligible": false,
+      "externallyReviewed": false,
+      "independentlyReproduced": false,
+      "whatWouldChangeIfAccepted": "Acceptance would create a new revision of fusion-plasma-systems-neutral-beam-injection whose single claim cites the inspected replacement and exact locator. It would not mutate the existing revision, inherit review, imply reproduction, authorize canonical release, or widen the claim beyond the inspected source.",
+      "prior": {
+        "sourceContractId": "source-fusion-plasma-systems-iter-disruption",
+        "sourceIdentifier": null,
+        "sourceTitle": "Disruption mitigation",
+        "locator": "System overview and shattered pellet injection sections.",
+        "verdict": "mismatched",
+        "recordRevisionSha256": "sha256:23522611498d7babdf982ed88b099c17252d972bca6dfc57dc950cfa74d67459",
+        "blockers": [
+          "source-assignment-positional-legacy",
+          "source-subject-mismatched"
+        ]
+      },
+      "packetDigest": "sha256:deb42b77827168f49c3db088ad071de5a316909d747eca1996ad55bae43740d2"
+    },
+    {
+      "schemaVersion": "maha-frontier-alignment-batch/10.0",
+      "packetId": "urn:maha:remediation:frontier-alignment-batch-10:fusion-plasma-systems-edge-localized-modes",
+      "recordId": "urn:maha:record:fusion-plasma-systems-edge-localized-modes",
+      "domainSlug": "fusion-plasma-systems",
+      "priority": {
+        "productRelevance": 3,
+        "graphLeverage": 2,
+        "correctionValue": 2,
+        "inspectability": 1,
+        "total": 8,
+        "unlocks": [
+          "substantial-page",
+          "evidence-dossier"
+        ],
+        "rationale": "Already selected for a substantial page and central to plasma-facing component risk."
+      },
+      "currentVerdict": "mismatched",
+      "replacement": {
+        "proposedSourceContractId": "source-remediation-batch-10-fusion-plasma-systems-edge-localized-modes",
+        "replacementDecision": "replacement-supported",
+        "citation": "Paz-Soldan, C. et al. Operational Space and Plasma Performance with an RMP-ELM Suppressed Edge. arXiv:2403.03693 (2024).",
+        "identifier": "arXiv:2403.03693",
+        "url": "https://arxiv.org/abs/2403.03693",
+        "rationale": "The multi-device study directly identifies ELMs, suppression conditions, operating windows, and extrapolation limits.",
+        "rights": {
+          "basis": "citation-with-paraphrase",
+          "quotationUsed": false,
+          "sourceContentCommitted": false
+        },
+        "inspection": {
+          "metadataVerified": true,
+          "metadataNote": "The arXiv record identifies the author consortium, title, submission version, and multi-device scope.",
+          "artifactVersion": "preprint",
+          "inspectionDepth": "abstract-only",
+          "contentInspected": true,
+          "exactLocatorInspected": true,
+          "inspectedContentLocation": "arXiv:2403.03693 abstract, device cohort, RMP-ELM suppression conditions, uncertainty and extrapolation statements.",
+          "findings": "The abstract reports RMP-ELM suppression observations across AUG, DIII-D, EAST, and KSTAR and records device-dependent operating windows.",
+          "limitation": "This source focuses on a suppression regime; the abstract alone does not define every ELM class, damage mechanism, or control method."
+        }
+      },
+      "disposition": "blocked-pending-source-override-review",
+      "canonicalMutationAuthorized": false,
+      "promotionEligible": false,
+      "externallyReviewed": false,
+      "independentlyReproduced": false,
+      "whatWouldChangeIfAccepted": "Acceptance would create a new revision of fusion-plasma-systems-edge-localized-modes whose single claim cites the inspected replacement and exact locator. It would not mutate the existing revision, inherit review, imply reproduction, authorize canonical release, or widen the claim beyond the inspected source.",
+      "prior": {
+        "sourceContractId": "source-fusion-plasma-systems-iter-divertor",
+        "sourceIdentifier": null,
+        "sourceTitle": "Making fusion work",
+        "locator": "Sections describing plasma control, first wall, blanket, and divertor heat and particle exhaust.",
+        "verdict": "mismatched",
+        "recordRevisionSha256": "sha256:80352e6f68c80143a8c1856c2d0726f5fc15fb6074fa0093a414123a0bc14feb",
+        "blockers": [
+          "source-assignment-positional-legacy",
+          "source-subject-mismatched"
+        ]
+      },
+      "packetDigest": "sha256:abdd2b71b2452496a919e21d72f27ad881c8abc02a675d40324285e467104f2a"
+    },
+    {
+      "schemaVersion": "maha-frontier-alignment-batch/10.0",
+      "packetId": "urn:maha:remediation:frontier-alignment-batch-10:mechanistic-interpretability-cross-layer-transcoders",
+      "recordId": "urn:maha:record:mechanistic-interpretability-cross-layer-transcoders",
+      "domainSlug": "mechanistic-interpretability",
+      "priority": {
+        "productRelevance": 3,
+        "graphLeverage": 2,
+        "correctionValue": 2,
+        "inspectability": 1,
+        "total": 8,
+        "unlocks": [
+          "substantial-page",
+          "evidence-dossier"
+        ],
+        "rationale": "A current interpretability primitive for machine-readable circuit evidence."
+      },
+      "currentVerdict": "mismatched",
+      "replacement": {
+        "proposedSourceContractId": "source-remediation-batch-10-mechanistic-interpretability-cross-layer-transcoders",
+        "replacementDecision": "replacement-supported",
+        "citation": "Ameisen, E. et al. Circuit Tracing: Revealing Computational Graphs in Language Models. Transformer Circuits Thread (2025).",
+        "identifier": "url:https://transformer-circuits.pub/2025/attribution-graphs/methods.html",
+        "url": "https://transformer-circuits.pub/2025/attribution-graphs/methods.html",
+        "rationale": "The primary research article defines cross-layer transcoders and quantitatively evaluates their replacement and attribution graphs.",
+        "rights": {
+          "basis": "citation-with-paraphrase",
+          "quotationUsed": false,
+          "sourceContentCommitted": false
+        },
+        "inspection": {
+          "metadataVerified": true,
+          "metadataNote": "The author-hosted article identifies the full author list, publication date, sections, methods, and no-DOI status.",
+          "artifactVersion": "living-specification",
+          "inspectionDepth": "full-document",
+          "contentInspected": true,
+          "exactLocatorInspected": true,
+          "inspectedContentLocation": "§1 Introduction; §2.1 Architecture; §2.2 replacement model; §3 attribution graphs; §5.1 CLT evaluation; §7 Limitations.",
+          "findings": "The article defines features that read at one layer and decode to subsequent MLP layers, then evaluates CLT-based replacement models and attribution graphs.",
+          "limitation": "The replacement model contains reconstruction error and the article documents missing mechanisms; CLTs are not complete proofs of model computation."
+        }
+      },
+      "disposition": "blocked-pending-source-override-review",
+      "canonicalMutationAuthorized": false,
+      "promotionEligible": false,
+      "externallyReviewed": false,
+      "independentlyReproduced": false,
+      "whatWouldChangeIfAccepted": "Acceptance would create a new revision of mechanistic-interpretability-cross-layer-transcoders whose single claim cites the inspected replacement and exact locator. It would not mutate the existing revision, inherit review, imply reproduction, authorize canonical release, or widen the claim beyond the inspected source.",
+      "prior": {
+        "sourceContractId": "source-mechanistic-interpretability-feature-visualization",
+        "sourceIdentifier": "10.23915/distill.00007",
+        "sourceTitle": "Feature Visualization",
+        "locator": "Optimization objectives, regularization, visualization techniques, and interpretation cautions.",
+        "verdict": "mismatched",
+        "recordRevisionSha256": "sha256:27f5031ccd7d2002bff3d673ba91ce2ee353d07bb74af845c55843bd6465f4c6",
+        "blockers": [
+          "source-assignment-positional-legacy",
+          "source-subject-mismatched"
+        ]
+      },
+      "packetDigest": "sha256:c4b040ed71eef7fc9920c224f4088be94cd5264eb9951f7eb201ced2a9ee97af"
+    },
+    {
+      "schemaVersion": "maha-frontier-alignment-batch/10.0",
+      "packetId": "urn:maha:remediation:frontier-alignment-batch-10:mechanistic-interpretability-io-identification-circuit",
+      "recordId": "urn:maha:record:mechanistic-interpretability-io-identification-circuit",
+      "domainSlug": "mechanistic-interpretability",
+      "priority": {
+        "productRelevance": 3,
+        "graphLeverage": 2,
+        "correctionValue": 2,
+        "inspectability": 1,
+        "total": 8,
+        "unlocks": [
+          "substantial-page",
+          "evidence-dossier"
+        ],
+        "rationale": "A canonical end-to-end circuit study and a direct substantial-page candidate."
+      },
+      "currentVerdict": "mismatched",
+      "replacement": {
+        "proposedSourceContractId": "source-remediation-batch-10-mechanistic-interpretability-io-identification-circuit",
+        "replacementDecision": "replacement-supported",
+        "citation": "Wang, K. et al. Interpretability in the Wild: a Circuit for Indirect Object Identification in GPT-2 small. ICLR (2023).",
+        "identifier": "arXiv:2211.00593",
+        "url": "https://arxiv.org/abs/2211.00593",
+        "rationale": "The study directly discovers and tests an indirect-object-identification circuit in GPT-2 small.",
+        "rights": {
+          "basis": "citation-with-paraphrase",
+          "quotationUsed": false,
+          "sourceContentCommitted": false
+        },
+        "inspection": {
+          "metadataVerified": true,
+          "metadataNote": "The arXiv record identifies five authors, title, versions, and the ICLR paper.",
+          "artifactVersion": "preprint",
+          "inspectionDepth": "full-document",
+          "contentInspected": true,
+          "exactLocatorInspected": true,
+          "inspectedContentLocation": "Abstract; IOI task definition; circuit-discovery sections; 26-head/7-class circuit; causal interventions; quantitative evaluation.",
+          "findings": "The paper presents an IOI explanation comprising 26 attention heads in seven classes, discovered and evaluated with causal interventions.",
+          "limitation": "The circuit is model-, task-, and prompt-distribution-specific and retains documented gaps in completeness and understanding."
+        }
+      },
+      "disposition": "blocked-pending-source-override-review",
+      "canonicalMutationAuthorized": false,
+      "promotionEligible": false,
+      "externallyReviewed": false,
+      "independentlyReproduced": false,
+      "whatWouldChangeIfAccepted": "Acceptance would create a new revision of mechanistic-interpretability-io-identification-circuit whose single claim cites the inspected replacement and exact locator. It would not mutate the existing revision, inherit review, imply reproduction, authorize canonical release, or widen the claim beyond the inspected source.",
+      "prior": {
+        "sourceContractId": "source-mechanistic-interpretability-induction",
+        "sourceIdentifier": null,
+        "sourceTitle": "In-context Learning and Induction Heads",
+        "locator": "Induction-head definition, previous-token heads, training dynamics, interventions, and model scope.",
+        "verdict": "mismatched",
+        "recordRevisionSha256": "sha256:a4c834c54e189028d51e96fc535dd05faec8ae4f7597e75255cf0fd316b9f3bc",
+        "blockers": [
+          "source-assignment-positional-legacy",
+          "source-subject-mismatched"
+        ]
+      },
+      "packetDigest": "sha256:37391d4f82cbbe5d5525970c7add33ae37bfce15cb82cee72193ed92e0de3079"
+    },
+    {
+      "schemaVersion": "maha-frontier-alignment-batch/10.0",
+      "packetId": "urn:maha:remediation:frontier-alignment-batch-10:agentic-systems-mcp-tool-result-context-injection",
+      "recordId": "urn:maha:record:agentic-systems-mcp-tool-result-context-injection",
+      "domainSlug": "agentic-systems-mcp",
+      "priority": {
+        "productRelevance": 3,
+        "graphLeverage": 2,
+        "correctionValue": 2,
+        "inspectability": 1,
+        "total": 8,
+        "unlocks": [
+          "substantial-page",
+          "evidence-dossier"
+        ],
+        "rationale": "A direct security boundary for evidence retrieval and tool-result ingestion."
+      },
+      "currentVerdict": "mismatched",
+      "replacement": {
+        "proposedSourceContractId": "source-remediation-batch-10-agentic-systems-mcp-tool-result-context-injection",
+        "replacementDecision": "replacement-supported",
+        "citation": "Zhan, Q., Liang, Z., Ying, Z. & Kang, D. InjecAgent: Benchmarking Indirect Prompt Injections in Tool-Integrated Large Language Model Agents. arXiv:2403.02691 (2024).",
+        "identifier": "arXiv:2403.02691",
+        "url": "https://arxiv.org/abs/2403.02691",
+        "rationale": "The benchmark directly studies malicious instructions embedded in external content consumed by tool-integrated agents.",
+        "rights": {
+          "basis": "citation-with-paraphrase",
+          "quotationUsed": false,
+          "sourceContentCommitted": false
+        },
+        "inspection": {
+          "metadataVerified": true,
+          "metadataNote": "The arXiv record identifies four authors, title, versioned preprint, benchmark, and repository.",
+          "artifactVersion": "preprint",
+          "inspectionDepth": "abstract-only",
+          "contentInspected": true,
+          "exactLocatorInspected": true,
+          "inspectedContentLocation": "arXiv:2403.02691 abstract, 1,054-test-case benchmark description, tool coverage, attack categories, and evaluation result boundary.",
+          "findings": "The abstract defines indirect injection through external content and evaluates tool-integrated agents across user and attacker tools.",
+          "limitation": "Benchmark results do not prove every MCP tool result is vulnerable or that one mitigation universally prevents injection."
+        }
+      },
+      "disposition": "blocked-pending-source-override-review",
+      "canonicalMutationAuthorized": false,
+      "promotionEligible": false,
+      "externallyReviewed": false,
+      "independentlyReproduced": false,
+      "whatWouldChangeIfAccepted": "Acceptance would create a new revision of agentic-systems-mcp-tool-result-context-injection whose single claim cites the inspected replacement and exact locator. It would not mutate the existing revision, inherit review, imply reproduction, authorize canonical release, or widen the claim beyond the inspected source.",
+      "prior": {
+        "sourceContractId": "source-agentic-systems-mcp-lost-middle",
+        "sourceIdentifier": "10.1162/tacl_a_00638",
+        "sourceTitle": "Lost in the Middle: How Language Models Use Long Contexts",
+        "locator": "Long-context experiments, position effects, retrieval and question-answering tasks, and limitations.",
+        "verdict": "mismatched",
+        "recordRevisionSha256": "sha256:93911a4adfe952c54b625c3f5dd2988d2768561b40cff23548df3cc2e1c6235e",
+        "blockers": [
+          "source-assignment-positional-legacy",
+          "source-subject-mismatched"
+        ]
+      },
+      "packetDigest": "sha256:84e30aecc9bc3e0b87a6d63db3910223ffba61625fdcfa5c2071027bab0a67de"
+    }
+  ],
+  "batchDigest": "sha256:b8d91564664c70fb674b300d20a281ec43ba92d971a3d4534e4891cf8e4ea2bb"
+}

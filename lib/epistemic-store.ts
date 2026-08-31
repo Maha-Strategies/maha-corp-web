@@ -3,10 +3,6 @@ import { createClient, type SupabaseClient } from '@supabase/supabase-js'
 import type { EpistemicRecord } from './epistemic-schema.ts'
 import type { FrontierSourceVerificationReport } from './frontier-source-verification.ts'
 
-import {
-  ingestionBatchSnapshot,
-  type EpistemicIngestionBatch,
-} from './epistemic-ingestion.ts'
 import type { EpistemicFactoryRun, EpistemicReviewPacket } from './epistemic-factory.ts'
 import type { EpistemicFactoryQueueJob } from './epistemic-factory-tools.ts'
 import {
@@ -36,29 +32,6 @@ export function createEpistemicPersistenceClient(): SupabaseClient | null {
   const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY
   if (!url || !serviceRoleKey) return null
   return createClient(url, serviceRoleKey, { auth: { autoRefreshToken: false, persistSession: false } })
-}
-
-export async function insertEpistemicIngestionBatch(
-  client: SupabaseClient,
-  batch: EpistemicIngestionBatch,
-  idempotencyKey: string,
-  actorFingerprint: string,
-) {
-  const rpc = batch.adapterId === 'frontier-canary'
-    ? 'record_epistemic_frontier_canary_batch'
-    : batch.adapterId === 'substantial-batch-2-internal-review'
-      ? 'record_substantial_batch2_internal_review_targets'
-      : batch.adapterId === 'repaired-revision-canary'
-        ? 'record_repaired_revision_canary_targets'
-      : 'record_epistemic_ingestion_batch'
-  const { data, error } = await client.rpc(rpc, {
-    p_batch: ingestionBatchSnapshot(batch),
-    p_records: batch.records,
-    p_idempotency_hash: epistemicOperationsHash(idempotencyKey),
-    p_actor_fingerprint: actorFingerprint,
-  })
-  if (error) throw new Error(`Epistemic ingestion failed [${error.code ?? 'unknown'}]: ${error.message}`)
-  return data as { batchId: string; recordCount: number; idempotentReplay: boolean }
 }
 
 export async function listEpistemicIngestionBatches(client: SupabaseClient) {
@@ -430,7 +403,10 @@ export async function insertEpistemicCanonicalRelease(
   idempotencyKey: string,
   actorFingerprint: string,
 ) {
-  const { data, error } = await client.rpc('record_epistemic_canonical_release', {
+  const rpc = process.env.EPISTEMIC_EXTERNAL_LINEAGE_REHEARSAL === 'batch-11-preview'
+    ? 'record_batch_11_rehearsal_canonical_release'
+    : 'record_epistemic_canonical_release'
+  const { data, error } = await client.rpc(rpc, {
     p_release: release,
     p_authority_sha256: sha256Canonical(release.authority satisfies ReleaseAuthoritySnapshot),
     p_idempotency_hash: epistemicOperationsHash(idempotencyKey),
@@ -438,6 +414,35 @@ export async function insertEpistemicCanonicalRelease(
   })
   if (error) throw new Error(`Epistemic canonical release failed [${error.code ?? 'unknown'}]: ${error.message}`)
   return data as { releaseId: string; canonicalPath: string; idempotentReplay: boolean }
+}
+
+export interface EpistemicExternalLineageWitness {
+  recordId: string
+  releaseId: string
+  targetSha256: string
+  status: 'active'
+}
+
+/**
+ * Reads external predecessor witnesses only inside the isolated Batch 11
+ * Preview deployment. Production never sets this environment flag and never
+ * queries the rehearsal table.
+ */
+export async function listEpistemicExternalLineageWitnesses(
+  client: SupabaseClient,
+): Promise<EpistemicExternalLineageWitness[]> {
+  if (process.env.EPISTEMIC_EXTERNAL_LINEAGE_REHEARSAL !== 'batch-11-preview') return []
+  const { data, error } = await client
+    .from('batch_11_rehearsal_imported_lineage')
+    .select('record_id,prior_release_id,prior_target_sha256')
+    .order('record_id', { ascending: true })
+  if (error) throw new Error(`Batch 11 external-lineage witness read failed: ${error.message}`)
+  return (data ?? []).map((row) => ({
+    recordId: row.record_id,
+    releaseId: row.prior_release_id,
+    targetSha256: row.prior_target_sha256,
+    status: 'active' as const,
+  }))
 }
 
 export async function insertEpistemicReleaseWithdrawal(

@@ -2,9 +2,24 @@
 
 This adapter consumes IllWar5047's public **payable address preflight** contract for a Base address. It does not fetch the provider, request an x402 payment, sign a transaction, create an escrow order, or decide that a future release will succeed.
 
-The provider schema is pinned at `fixtures/payable-address-preflight/schema.json`; the fixture set is at `fixtures/payable-address-preflight/fixtures.json` (SHA-256 `529fa30d6be7b12cbff6752b53d032a32eb888a39057c54ac3c26bebe52fc893`). The locked preview is retained only to validate the provider's signature construction. Its fixed EOA is not evidence about a buyer, seller, or escrow recipient.
+The provider schema is pinned at `fixtures/payable-address-preflight/schema.json`; the expanded fixture set is at `fixtures/payable-address-preflight/fixtures.json` (SHA-256 `83cc0a2cba1150059abbe67f275e7f0a6d72b2ad2a1903445b61db8d4a28ecd9`). The bundle includes four complete frozen response envelopes signed through the provider's production signing path: a known EOA, a plain contract, an EIP-1967 proxy, and an invariant-based zero-address transfer revert. The locked preview is retained separately to validate the provider's current signature construction. Neither the frozen envelopes nor the preview are current evidence about a buyer, seller, escrow recipient, or future transfer.
 
-Signer authority is pinned to the provider's public [proof manifest](https://x402.nsgoods.org/proof/index.json), specifically its authoritative `signer_registry` entry for the separate `payable-address` service—not learned from a response's `signed_by` field or the legacy `signers` map. `fixtures/payable-address-preflight/proof-manifest.json` is a minimal public snapshot used only for synthetic verification. The adapter never fetches the manifest or the provider itself.
+Signer authority is pinned to the provider's public [proof manifest](https://x402.nsgoods.org/proof/index.json), specifically its authoritative `signer_registry` entry for the separate `payable-address` service—not learned from a response's `signed_by` field or the legacy `signers` map. The reviewed proof-manifest snapshot is pinned at SHA-256 `afad74421615403c80862e63b47336ab25d7b948460fcabdbabaabafe41a9809`, matching the pointer carried by every frozen envelope. The adapter never fetches the manifest or the provider itself.
+
+## Frozen signed-envelope verification
+
+For every envelope, Maha independently checks all of the following before evaluating policy:
+
+1. the exact bundle digest;
+2. the envelope's proof-manifest URL, version, timestamp, and SHA-256 against the reviewed local snapshot;
+3. Python `json.dumps(sort_keys=True, separators=(',', ':'), ensure_ascii=True)` compatible canonicalization after removing only `signed_by` and `signature`;
+4. the declared SHA-256 of that canonical body;
+5. EIP-191 signature recovery through the manifest-authorized signer; and
+6. the response fields against the provider's static expectations before deriving Maha's own decision.
+
+The fixture wrapper's `expected`, `reason_codes`, and `example_downstream_policy` fields are unsigned explanatory metadata. They are never passed to the gate and cannot authorize a decision. Passing the wrapper instead of its signed `response` is rejected as an unknown-field envelope.
+
+The four governed outcomes are intentionally asymmetric: the EOA permits only `approved_for_pre_money_progress`; the plain contract and EIP-1967 proxy require application-specific review; and the genuine transfer revert is denied. Tampering with any signed policy field makes signature verification fail closed.
 
 ## Gate
 

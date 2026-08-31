@@ -8,6 +8,7 @@ import {
 import {
   insertEpistemicCanonicalRelease,
   listEpistemicCanonicalReleases,
+  listEpistemicExternalLineageWitnesses,
   listEpistemicExpertReviews,
   listEpistemicReleaseWithdrawals,
   listEpistemicReviewTargets,
@@ -18,16 +19,22 @@ export async function executeEpistemicCanonicalRelease(
   input: CanonicalReleaseInput,
   actorFingerprint: string,
 ) {
-  const [targets, reviews, releases, withdrawals] = await Promise.all([
+  const [targets, reviews, releases, withdrawals, externalLineages] = await Promise.all([
     listEpistemicReviewTargets(client),
     listEpistemicExpertReviews(client),
     listEpistemicCanonicalReleases(client),
     listEpistemicReleaseWithdrawals(client),
+    listEpistemicExternalLineageWitnesses(client),
   ])
   const active = activeEpistemicReleases(releases, withdrawals)
   const target = targets.find((candidate) => candidate.recordId === input.recordId && candidate.reviewTargetSha256 === input.targetSha256)
   if (!target?.candidateSnapshot) throw new Error('The current frozen release target was not found.')
-  const previous = active.find((release) => release.recordId === input.recordId) ?? null
+  const previous = active.find((release) => release.recordId === input.recordId)
+    ?? externalLineages.find((lineage) =>
+      lineage.recordId === input.recordId
+      && lineage.releaseId === input.supersedesReleaseId,
+    )
+    ?? null
   const release = buildEpistemicCanonicalRelease(input, {
     recordId: target.recordId,
     targetSha256: target.reviewTargetSha256,
@@ -37,4 +44,3 @@ export async function executeEpistemicCanonicalRelease(
   const persistence = await insertEpistemicCanonicalRelease(client, release, input.idempotencyKey, actorFingerprint)
   return { release, persisted: true as const, persistence }
 }
-

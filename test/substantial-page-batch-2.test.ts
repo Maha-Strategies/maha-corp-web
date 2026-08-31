@@ -227,7 +227,7 @@ test('batch one and batch two share no record id and no public route', () => {
   }
   const paths = PUBLIC_SUBSTANTIAL_PAGES.map((page) => page.path)
   assert.equal(new Set(paths).size, paths.length, 'a public route is claimed twice')
-  assert.equal(PUBLIC_SUBSTANTIAL_PAGES.length, 50)
+  assert.equal(PUBLIC_SUBSTANTIAL_PAGES.length, 103)
 })
 
 /* ------------------------------------------------------ public projection */

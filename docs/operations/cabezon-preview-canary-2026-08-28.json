@@ -1,0 +1,63 @@
+{
+  "schemaVersion": "maha-cabezon-preview-operational-evidence/1.0",
+  "pr": 266,
+  "branch": "codex/cabezon-preview-adapter",
+  "headSha": "8bc109fd680e688dcf12819e742382a5c9c3282c",
+  "environment": "Preview",
+  "migration": {
+    "runId": 33173876204,
+    "runUrl": "https://github.com/Maha-Strategies/maha-corp-web/actions/runs/33173876204",
+    "result": "success",
+    "filename": "20260828110000_cabezon_preview_seller_adapter.sql",
+    "sha256": "052d7078cef47eb0e6270c8a7e67675559ed414d72caa8b03e81b90cd15c3cfe",
+    "verifiedObjects": 8,
+    "productionMutationPerformed": false
+  },
+  "deployment": {
+    "validatedDeploymentId": "dpl_FXTZq5BJHBq9Ad1eb2nhA2K1CMFN",
+    "disabledReplacementDeploymentId": "dpl_DY3Mme8g6V8o9jpUUXcaXWtMbuUm",
+    "target": "preview",
+    "productionAliasModified": false,
+    "postCanaryRouteStatus": 404
+  },
+  "canary": {
+    "schemaVersion": "maha-cabezon-preview-remote-canary/0.1",
+    "transport": "vercel-cli-automatic-protection-bypass",
+    "sharedBypassCredentialUsed": false,
+    "runId": "pr266-preview-vercel-cli-1",
+    "tokenSha256": "sha256:2fcd0f6dfd0a2d1a86fd97f75e640dc90a436d821e539ad01e596151afe705d4",
+    "projectionSha256": "sha256:1586f14a33274166f8ea63187e08ffd19d90aa630bdec22e69dab3691a93b8f7",
+    "lifecycleId": "cbz_4e40586bd756a0f212bdecb7c3c0dd3d",
+    "lifecycleStatus": "acknowledged",
+    "eventTypes": [
+      "enquiry_received",
+      "offer_returned",
+      "delivery_recorded",
+      "acknowledgement_recorded"
+    ],
+    "negativeStatuses": {
+      "staleOffer": 409,
+      "substitutedIdentity": 403,
+      "unavailableOffer": 409,
+      "unavailableDelivery": 409
+    },
+    "paymentEnabled": false,
+    "externalDeliveryEnabled": false,
+    "canonicalReleaseEnabled": false,
+    "evidenceSha256": "sha256:d09f1c9926b090fc175035d171fc66ba710741c579445accaea06a7634c5b6c7"
+  },
+  "secretHandling": {
+    "vercelBranchScopeVerified": true,
+    "githubBranchScopeVerified": true,
+    "vercelTokenRemoved": true,
+    "githubTokenRemoval": "pending-privileged-confirmation",
+    "localSecretMaterialRemoved": true,
+    "rawTokenRecorded": false
+  },
+  "authority": {
+    "purchaseAuthorized": false,
+    "paymentAuthorized": false,
+    "productionAuthorized": false,
+    "broaderCabezonActivityAuthorized": false
+  }
+}

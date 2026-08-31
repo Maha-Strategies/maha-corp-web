@@ -1,5 +1,6 @@
 // lib/briefs-data.ts
-// SINGLE SOURCE OF TRUTH for all 28 INTELLIGENCE briefs.
+// SINGLE SOURCE OF TRUTH for the internal intelligence archive and its
+// separately derived, confidentiality-scrubbed public editions.
 // Metadata, JSON-LD, and rendering all read from here.
 // Doctrine briefs (soil-gut-brain-axis, overclocked, physics-of-spirit, etc.)
 // are a SEPARATE route and are not included here.
@@ -44,9 +45,14 @@ export interface Brief {
   intro?: string;
   sections: BriefSection[];
   protocolPatch?: ProtocolPatch;
+  publicEditionBoundary?: {
+    reviewState: 'sanitized-public-edition';
+    note: string;
+    excludes: string[];
+  };
 }
 
-export const BRIEFS: Brief[] = [
+const ALL_BRIEFS: Brief[] = [
   {
     slug: 'sea-semiconductor-manufacturing-hedge',
     title: 'Manufacturing Power Semiconductors in SEA as a China-Risk Hedge',
@@ -2160,11 +2166,246 @@ export const BRIEFS: Brief[] = [
       ],
       emphasis: 'Do not collapse PPG polymers, EO/PO block copolymers, glycol ethers, and functional polyethers into one sourcing category.'
     }
+  },
+  {
+    slug: 'cmp-pads-hybrid-bonding-hbm',
+    title: 'CMP Pads for Hybrid Bonding and High-Bandwidth-Memory Packaging',
+    seoTitle: 'CMP Pads for Hybrid Bonding and HBM: Qualification Framework',
+    kicker: 'ADVANCED.PACKAGING // CMP // MATERIALS.QUALIFICATION',
+    description: 'A public qualification framework for CMP-pad choices as hybrid bonding and high-bandwidth-memory packaging raise the cost of planarization variation, contamination, and rework.',
+    status: 'PRELIMINARY',
+    datePublished: '2026-08-31',
+    intro: 'Hybrid bonding and high-bandwidth-memory packaging make CMP a package-yield control point rather than a routine bulk-removal operation. This public brief frames the engineering questions a pad supplier, device manufacturer, or equipment team should test. It does not assert a universal process window, market forecast, or technology winner.',
+    sections: [
+      {
+        level: 2,
+        heading: '01. The Control Problem Shifts From Removal Rate to Bond-Ready Surface State',
+        paragraphs: [
+          'Direct copper and dielectric bonding depends on a surface condition that is flat, clean, and consistent across local pattern-density changes. CMP therefore has to be evaluated for local topography, erosion, dishing, scratch formation, residue, and post-clean condition together. A result that is acceptable for a conventional interconnect layer may not be acceptable when the next operation is a fine-pitch bond interface.',
+          'The operational consequence is that pad selection cannot be separated from slurry chemistry, conditioner behavior, wafer handling, cleaning, metrology, and the specific bond stack. The relevant question is not whether a pad is generally “high precision,” but whether a controlled consumables-and-process combination reproduces a bond-ready surface over the actual product mix.'
+        ],
+        table: {
+          caption: 'CMP decision lenses for bond-sensitive packaging',
+          header: ['Control lens', 'Why it matters', 'Evidence to request'],
+          rows: [
+            ['Local topography', 'Copper and dielectric surfaces can respond differently across feature densities.', 'Within-wafer and die-level topography maps, pattern-density splits, and post-bond correlation.'],
+            ['Defectivity and residue', 'Particles, pad debris, and slurry agglomerates can become bond-interface defects.', 'Defect maps, particle specifications, post-clean inspection, and failure analysis.'],
+            ['Pad stability', 'Wear, glazing, conditioning response, and lot variation can change process behavior.', 'Pad-life study, conditioning trace, lot-to-lot controls, and change-notice procedure.'],
+            ['Rework and test interaction', 'Electrical test or handling can create a surface that needs reconditioning before bonding.', 'Defined rework route, surface-restoration evidence, and yield impact by additional pass.']
+          ]
+        }
+      },
+      {
+        level: 2,
+        heading: '02. Yield Risk Is Amplified by Multi-Die Assembly',
+        paragraphs: [
+          'A packaging flow with multiple high-value die makes a late-discovered interfacial defect more expensive than an isolated wafer-level defect. CMP-induced non-uniformity, particles, or surface damage should consequently be evaluated against the package-level failure budget and known-good-die strategy, not only against a stand-alone removal-rate target.',
+          'This does not make every microscopic signal a production failure. It does mean that the inspection plan needs a causal chain: consumable state, process telemetry, surface measurement, bond response, electrical result, and package disposition. Without that chain, a team cannot distinguish a transient excursion from a supplier, conditioning, or integration problem.'
+        ],
+        listItems: [
+          'Define the bond-relevant surface metrics before screening pad candidates.',
+          'Run patterned-wafer and product-representative splits rather than relying only on blanket-wafer removal data.',
+          'Track pad, slurry, conditioner, cleaning, and metrology lots as a single change-controlled system.',
+          'Relate surface exceptions to bond inspection and electrical outcomes before changing specifications or suppliers.'
+        ]
+      },
+      {
+        level: 2,
+        heading: '03. Engineered Pads and Inline Sensing Are Evaluation Paths, Not Settled Standards',
+        paragraphs: [
+          'More tightly controlled pad microstructures, zoned mechanical properties, embedded sensing, fixed-abrasive approaches, and alternative planarization methods all warrant evaluation where they address a defined defectivity, uniformity, or monitoring limitation. Public information does not justify treating any one of these categories as the inevitable industry standard by a fixed date.',
+          'The strongest commercial case for a new pad architecture is a measured improvement against the incumbent process: lower defectivity, tighter topography control, more predictable pad life, faster excursion detection, or a lower cost of ownership after conditioning, slurry, cleaning, and yield are counted. A novel manufacturing method is not itself a qualification result.'
+        ],
+        blockquote: 'Adoption should follow a demonstrated package-level control advantage, not a claim that a pad category is inherently superior.'
+      },
+      {
+        level: 2,
+        heading: '04. Materials and Environmental Change Need the Same Qualification Discipline',
+        paragraphs: [
+          'Changes to polymers, additives, solvents, or cleaning routes can be driven by regulation, customer requirements, or supply resilience. They should be handled as process changes with explicit compatibility, contamination, outgassing, safety, and performance gates. A sustainability or regulatory claim does not establish equivalence in a bond-sensitive CMP flow.',
+          'A practical supplier review asks for the exact formulation boundary, manufacturing site, quality controls, analytical methods, change-notice commitments, and evidence that the candidate is compatible with the intended slurry, conditioner, cleaning sequence, and package reliability plan.'
+        ]
+      }
+    ],
+    protocolPatch: {
+      title: 'Maha Qualification Note // Bond-Sensitive CMP Consumables',
+      paragraphs: [
+        'Treat CMP-pad choice as a controlled integration decision. Establish the target surface state, inspect the full consumables and cleaning route, connect excursions to bond and electrical outcomes, and require a documented requalification plan for material, process, or supplier changes.'
+      ],
+      emphasis: 'No pad technology should be treated as production-ready for hybrid bonding until it has passed the relevant patterned-wafer, bonding, reliability, and change-control gates.'
+    }
   }
 ]
 
+const SANITIZED_PUBLIC_TITLES: Record<string, string> = {
+  'sea-semiconductor-manufacturing-hedge': 'Southeast Asian Power Semiconductor Manufacturing: Capability and Risk',
+  'semiconductor-bifurcation': 'Semiconductor Collaboration Under Export Controls',
+  'physical-ai-deployment': 'Embodied AI Deployment: Hardware and Operational Boundaries',
+  'algorithmic-lock-in': 'Mobile Gaming, Social Status, and Attention Loops',
+  'backside-microchannel-semiconductors': 'Direct-to-Silicon Cooling: Integration and Reliability',
+  'known-good-die-storage-yield': 'Bare-Die Storage: Degradation and Custody Controls',
+  'high-purity-alumina-manufacturing-architecture': 'High-Purity Alumina: Process Routes and Qualification',
+  'angstrom-era-soc-architecture': '2nm System-on-Chip Design: Process, Power, and Packaging',
+  'rad-hard-gan-sic-leo-satellites': 'Semiconductor Design for Low-Earth-Orbit Systems',
+  'generative-ai-silicon-cycle-recalibration': 'AI Infrastructure Cycles: Capacity, Demand, and Downturn Risk',
+  'semiconductor-wfe-doping-annealing-landscape': 'Ion Implantation and Laser Annealing: Technology and Supply Chains',
+  'power-semiconductor-target-setting-metrics': 'Power Semiconductor Metrics Across Device Platforms',
+  'tensor-network-ai-compression': 'Tensor Networks for Large-Language-Model Compression',
+  'neurotechnology-non-medical-outlook': 'Consumer Neurotechnology: Technical and Governance Boundaries',
+  'ultra-thin-shock-absorbing-adhesives': 'Ultra-Thin Shock-Absorbing Adhesives: Materials and Qualification',
+  'hyperscaler-storage-disposition': 'Data-Sanitization and Reuse Controls for Cloud Storage Hardware',
+  'angstrom-foundry-diversification': 'Advanced-Node Foundry Diversification: Readiness and Risk',
+  'strategic-ip-architecture': 'Joint Research IP: Ownership, Licensing, and Freedom to Operate',
+  'electro-photonic-co-integration': 'Co-Packaged Optics: Integration, Thermal, and Test Boundaries',
+  'power-semiconductor-target-architecture': 'Power Semiconductor Strategy: Yield, Margin, and Product Mix',
+  'stm-legacy-distribution': 'Legacy Semiconductor Channels and Customer-Concentration Risk',
+  'arc-welding-robotics-margins': 'Arc-Welding Robotics: Component Economics',
+  'gan-on-diamond-leo-economics': 'GaN-on-Diamond for Space Systems: Thermal and Cost Trade-Offs',
+  'rapidus-2nm-yield-probability': 'Rapidus 2nm: Manufacturing Readiness Framework',
+  'us-foundry-sovereignization': 'U.S. Foundry Modernization: Economics and Customer Trust',
+  'sea-gaming-market-expansion': 'Southeast Asian Gaming: Platforms, Hardware, and Monetization',
+  'upstream-semiconductor-cvc-best-practices': 'Corporate Venture Design for Upstream Semiconductor Suppliers',
+  'european-compressor-suppliers-semiconductor-utilities': 'Compressor Qualification for Semiconductor Utility Systems',
+  'smartphone-ap-fan-out-substrate-thickness': 'Smartphone Application-Processor Packaging: Architecture and Reliability',
+  'smartphone-ap-osat-commercial-risk-allocation': 'Smartphone Packaging Contracts: Yield, Capacity, and Risk Allocation',
+  'smartphone-oem-peripheral-sales-mix': 'Smartphone Ecosystem Portfolios: Scenario Design for Adjacent Devices',
+  'ai-semiconductor-slt-practices': 'System-Level Test for AI Semiconductors',
+  'semiconductor-substrate-price-tolerance': 'Semiconductor Substrate Pricing: A Cost-Pass-Through Framework',
+  'tape-storage-nearline-hdd-demand': 'Archive Storage Boundaries: Tape, Nearline HDD, and AI',
+  'advanced-packaging-test-cpo-sockets': 'Advanced-Packaging Test and Co-Packaged-Optics Sockets',
+  'automotive-cloud-virtual-verification': 'Automotive Software Verification: Cloud, Simulation, and Hardware-in-the-Loop',
+  'ntc-thermistors-embedded-power-modules': 'Embedded Power Modules: NTC Thermistor Requirements',
+  'china-fa-cable-competitive-landscape': 'Factory-Automation Cable Qualification in China',
+  'us-semiconductor-cleanroom-construction': 'U.S. Semiconductor Cleanroom Capacity: A Sizing Method',
+  'ppg-derivatives-semiconductor-applications': 'Polyether Materials in Semiconductor Processing and Packaging',
+  'cmp-pads-hybrid-bonding-hbm': 'CMP Pads for Hybrid Bonding and HBM: Qualification Framework',
+}
+
+const PUBLIC_EDITION_EXCLUSIONS = [
+  'client identity and engagement context',
+  'client-supplied question or project wording',
+  'compensation and transaction records',
+  'nonpublic commercial assumptions',
+] as const
+
+const PUBLIC_REUSE_PROHIBITED = [
+  /flash[-\s]?opinions?/i,
+  /uzabase/i,
+  /\bsupplied (?:assessment|product hypothesis|willingness-to-pay hypothesis|competitive assessment)\b/i,
+  /\bwillingness[-\s]to[-\s]pay\b/i,
+  /\bWTP\b/,
+  /\bsurvey results?\b/i,
+  /\bpaid response\b/i,
+  /\bpayment metadata\b/i,
+] as const
+
+function mayAppearInPublicEdition(value: string): boolean {
+  return !PUBLIC_REUSE_PROHIBITED.some((pattern) => pattern.test(value))
+}
+
+function removeEngagementFraming(value: string): string {
+  return value
+    .replace(/The supplied assessment makes an important refinement for AI:/i, 'A useful distinction for AI is that')
+    .replace(/The supplied assessment identifies throughput and limited parametric visibility as its central limitations\./i, 'Its central limitations are throughput and limited parametric visibility.')
+    .replace(/The supplied assessment places the highest value in/i, 'The highest potential value lies in')
+    .replace(/The supplied assessment identifies metallization as the largest departure/i, 'Metallization is the largest departure')
+    .replace(/The supplied assessment positions Proterial as/i, 'A preliminary market view positions Proterial as')
+    .replace(/The supplied assessment estimates/i, 'A working estimate places')
+}
+
+function scrubOptionalText(value: string | undefined): string | undefined {
+  if (!value) return undefined
+  const sanitized = removeEngagementFraming(value)
+  return mayAppearInPublicEdition(sanitized) ? sanitized : undefined
+}
+
+function scrubTextList(values: string[] | undefined): string[] | undefined {
+  return values
+    ?.map(scrubOptionalText)
+    .filter((value): value is string => value !== undefined)
+}
+
+function sanitizeSection(section: BriefSection): BriefSection {
+  const table = section.table
+    ? {
+        ...section.table,
+        caption: scrubOptionalText(section.table.caption),
+        header: section.table.header.filter(mayAppearInPublicEdition),
+        rows: section.table.rows.filter((row) => row.every(mayAppearInPublicEdition)),
+      }
+    : undefined
+
+  return {
+    ...section,
+    heading: mayAppearInPublicEdition(section.heading) ? section.heading : 'Public research notes',
+    paragraphs: scrubTextList(section.paragraphs),
+    tag: scrubOptionalText(section.tag),
+    table,
+    blockquote: scrubOptionalText(section.blockquote),
+    listItems: scrubTextList(section.listItems),
+  }
+}
+
+function createPublicEdition(brief: Brief): Brief {
+  const title = SANITIZED_PUBLIC_TITLES[brief.slug] ?? brief.title
+  const description = mayAppearInPublicEdition(brief.description)
+    ? brief.description
+    : `A public research framework for ${title.toLocaleLowerCase('en-US')}, limited to general technical and market context.`
+
+  const protocolPatch = brief.protocolPatch
+    ? {
+        title: mayAppearInPublicEdition(brief.protocolPatch.title)
+          ? brief.protocolPatch.title
+          : 'Public research boundary',
+        paragraphs: scrubTextList(brief.protocolPatch.paragraphs) ?? [],
+        emphasis: scrubOptionalText(brief.protocolPatch.emphasis),
+      }
+    : undefined
+
+  return {
+    ...brief,
+    title,
+    seoTitle: undefined,
+    description,
+    intro: scrubOptionalText(brief.intro),
+    sections: brief.sections.map(sanitizeSection),
+    protocolPatch,
+    dateModified: '2026-08-28',
+    publicEditionBoundary: {
+      reviewState: 'sanitized-public-edition',
+      note: 'This generalized public research edition does not reproduce engagement-specific source material.',
+      excludes: [...PUBLIC_EDITION_EXCLUSIONS],
+    },
+  }
+}
+
+const PREVIOUSLY_REVIEWED_PUBLIC_SLUGS = new Set(['ai-software-cost-trajectory-2040'])
+
+// Fail closed for future archive additions. A record enters the public projection
+// only after receiving either an explicit sanitized title or a prior review marker.
+export const PUBLIC_INTELLIGENCE_BRIEF_SLUGS = ALL_BRIEFS
+  .filter((brief) => SANITIZED_PUBLIC_TITLES[brief.slug] || PREVIOUSLY_REVIEWED_PUBLIC_SLUGS.has(brief.slug))
+  .map((brief) => brief.slug)
+
+const PUBLIC_INTELLIGENCE_BRIEF_SLUG_SET = new Set(PUBLIC_INTELLIGENCE_BRIEF_SLUGS)
+
+export function isPublicIntelligenceBriefSlug(slug: string): boolean {
+  return PUBLIC_INTELLIGENCE_BRIEF_SLUG_SET.has(slug)
+}
+
+export const BRIEFS: Brief[] = ALL_BRIEFS
+  .filter((brief) => isPublicIntelligenceBriefSlug(brief.slug))
+  .map(createPublicEdition)
+
 const BRIEF_MAP: Record<string, Brief> = Object.fromEntries(
   BRIEFS.map((b) => [b.slug, b]),
+)
+
+/** Internal editorial archive. Never use this collection for a public projection. */
+export const INTELLIGENCE_BRIEF_ARCHIVE: readonly Brief[] = ALL_BRIEFS
+
+const ARCHIVE_BRIEF_MAP: Record<string, Brief> = Object.fromEntries(
+  INTELLIGENCE_BRIEF_ARCHIVE.map((brief) => [brief.slug, brief]),
 )
 
 export function getBriefBySlug(slug: string): Brief | undefined {
@@ -2173,4 +2414,12 @@ export function getBriefBySlug(slug: string): Brief | undefined {
 
 export function getAllBriefSlugs(): string[] {
   return BRIEFS.map((b) => b.slug)
+}
+
+export function getArchivedBriefBySlug(slug: string): Brief | undefined {
+  return ARCHIVE_BRIEF_MAP[slug]
+}
+
+export function getAllArchivedBriefSlugs(): string[] {
+  return INTELLIGENCE_BRIEF_ARCHIVE.map((brief) => brief.slug)
 }

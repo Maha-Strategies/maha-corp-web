@@ -1,18 +1,12 @@
 "use client"
 
-import React, { FormEvent, useEffect, useState } from 'react'
+import React, { FormEvent, useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
-import Script from 'next/script'
 
 import { trackConversion } from '@/components/ConversionTracker'
 import EngagementPath from '@/components/EngagementPath'
-
-declare global {
-  interface Window {
-    mahaTurnstileComplete?: (token: string) => void
-    mahaTurnstileExpired?: () => void
-  }
-}
+import TurnstileField, { type TurnstileFieldHandle } from '@/components/TurnstileField'
+import { postPublicForm } from '@/lib/public-form-client'
 
 const TURNSTILE_SITE_KEY = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY
 
@@ -50,20 +44,11 @@ export default function ContactPage() {
   const [isPending, setIsPending] = useState(false)
   const [selectedService, setSelectedService] = useState<ServiceCode>(selectedServiceFromLocation)
   const [turnstileToken, setTurnstileToken] = useState('')
+  const turnstileRef = useRef<TurnstileFieldHandle>(null)
 
   useEffect(() => {
     if (state.success) trackConversion('contact_form_success')
   }, [state.success])
-
-  useEffect(() => {
-    window.mahaTurnstileComplete = (token) => setTurnstileToken(token)
-    window.mahaTurnstileExpired = () => setTurnstileToken('')
-
-    return () => {
-      delete window.mahaTurnstileComplete
-      delete window.mahaTurnstileExpired
-    }
-  }, [])
 
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
@@ -96,17 +81,12 @@ export default function ContactPage() {
     }
 
     try {
-      const response = await fetch('/api/inbound-submissions', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(body),
-      })
-      const result = await response.json() as { error?: { message?: string } }
-      if (!response.ok) throw new Error(result.error?.message ?? 'Your inquiry could not be sent.')
+      await postPublicForm('/forms/contact', body)
       setState({ success: true, error: null })
     } catch (error) {
       setState({ success: false, error: error instanceof Error ? error.message : 'Your inquiry could not be sent.' })
     } finally {
+      turnstileRef.current?.reset()
       setIsPending(false)
     }
   }
@@ -285,23 +265,16 @@ export default function ContactPage() {
               </div>
 
               {TURNSTILE_SITE_KEY && (
-                <>
-                  <Script src="https://challenges.cloudflare.com/turnstile/v0/api.js" strategy="afterInteractive" />
-                  <div
-                    className="cf-turnstile mt-6"
-                    data-sitekey={TURNSTILE_SITE_KEY}
-                    data-action="contact_inquiry"
-                    data-callback="mahaTurnstileComplete"
-                    data-expired-callback="mahaTurnstileExpired"
-                  />
-                </>
+                <div className="mt-6">
+                  <TurnstileField ref={turnstileRef} siteKey={TURNSTILE_SITE_KEY} action="contact_inquiry" onTokenChange={setTurnstileToken} />
+                </div>
               )}
 
               {state.error && <p className="evidence-kicker mt-6 text-[var(--status-unverified)]">[ ERROR: {state.error} ]</p>}
 
               <button
                 type="submit"
-                disabled={isPending}
+                disabled={isPending || Boolean(TURNSTILE_SITE_KEY && !turnstileToken)}
                 className="evidence-action evidence-action--primary mt-8 w-full disabled:opacity-50 disabled:cursor-not-allowed sm:w-auto"
               >
                 {isPending ? 'Sending...' : 'Send inquiry →'}

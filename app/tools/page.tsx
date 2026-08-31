@@ -17,6 +17,14 @@ export const metadata: Metadata = {
 
 const tools = [
   {
+    eyebrow: 'Evidence Preflight',
+    title: 'Check three claims before commissioning an audit',
+    body: 'Assess DOI or URL syntax, exact locators, scope, evidence readiness, inference risk, rights, and access without claiming the supplied material was independently verified.',
+    href: '/tools/evidence-preflight',
+    action: 'Run the deterministic preflight',
+    accent: 'emerald',
+  },
+  {
     eyebrow: 'Agent Compatibility Pack',
     title: 'Test one A2A agent and one MCP server against explicit policy',
     body: 'Inspect the fixed-price contract, exact schemas, sample evidence report, limitations, and automatic-refund boundary. Runtime payment remains withheld until Production recovery is proven.',
@@ -117,8 +125,8 @@ export default function ToolsPage() {
             Use a self-service tool when you need one bounded outcome—not a consulting engagement.
           </p>
           <p className="evidence-copy mt-6">
-            Each product states its scope, limits, and payment flow before you commit. Consulting and research briefs remain
-            separate services.
+            Each product states its scope, limits, and payment flow before you commit. Start with the deterministic evidence
+            preflight when you have claims and source locators but are not yet ready for a full audit.
           </p>
         </header>
 

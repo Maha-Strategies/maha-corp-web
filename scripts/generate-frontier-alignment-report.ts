@@ -7,15 +7,25 @@ import {
   FRONTIER_ALIGNMENT_AUDIT,
   SOURCE_ALIGNMENT_VERSION,
   alignmentBlockers,
+  alignmentFor,
   auditDigest,
   ALIGNMENT_BATCH_MEMBERSHIP,
   BATCH_5_REINSPECTIONS,
   BATCH_6_REINSPECTIONS,
+  BATCH_7_FIRST_JUDGEMENTS,
+  BATCH_7_REINSPECTIONS,
+  BATCH_8_FIRST_JUDGEMENTS,
+  BATCH_8_REINSPECTIONS,
   batchOf,
   batchStats,
   originTotals,
   verdictTotals,
 } from '../lib/frontier-source-alignment.ts'
+import { ALIGNMENT_BATCH_7_DECISIONS } from '../lib/frontier-alignment-batch-7.ts'
+import {
+  ALIGNMENT_BATCH_8_DECISIONS,
+  ALIGNMENT_BATCH_8_SOURCE_DISCOVERIES,
+} from '../lib/frontier-alignment-batch-8.ts'
 
 /**
  * Emits the frontier source-alignment audit.
@@ -95,9 +105,39 @@ for (const stats of batchStats()) {
 }
 lines.push('')
 lines.push(
-  `Records carrying only default state, judged by no batch: **${FRONTIER_ALIGNMENT_AUDIT.filter((entry) => batchOf(entry.recordId) === null).length}**. These were never inspected and block.`,
+  `Records carrying only default state, judged by no initial batch, Batch 7, or Batch 8: **${FRONTIER_ALIGNMENT_AUDIT.filter((entry) => batchOf(entry.recordId) === null && !BATCH_7_FIRST_JUDGEMENTS.includes(entry.recordId) && !BATCH_8_FIRST_JUDGEMENTS.includes(entry.recordId)).length}**.`,
   '',
 )
+
+lines.push('## Batch 7 — closure cohort', '')
+lines.push(
+  'Batch 7 contains 35 re-inspections of records whose content had not been opened and five first judgements. It is append-only: prior judgements remain nested in the active audit entry.',
+  '',
+)
+const b7 = ALIGNMENT_BATCH_7_DECISIONS.map((decision) => alignmentFor(decision.recordId)!)
+lines.push(row(['Measure', 'Count']), row(['---', '---']))
+lines.push(row(['Attempted', String(b7.length)]))
+lines.push(row(['Content inspected', String(b7.filter((entry) => entry.evidence.sourceContentInspected).length)]))
+lines.push(row(['Re-inspections', String(BATCH_7_REINSPECTIONS.length)]))
+lines.push(row(['First judgements', String(BATCH_7_FIRST_JUDGEMENTS.length)]))
+lines.push(row(['Alignment-clear', String(b7.filter((entry) => alignmentBlockers(entry.recordId).length === 0).length)]))
+lines.push('')
+
+lines.push('## Batch 8 — remaining-backlog completion', '')
+lines.push(
+  'Batch 8 freezes the complete 59-record backlog whose source content remained uninspected after Batch 7. It records forty re-inspections and nineteen first judgements. Fifty-four records gained bounded internal inspection; five retain an explicit inaccessible-source verdict because no authorized copy of the declared article was located.',
+  '',
+)
+const b8 = ALIGNMENT_BATCH_8_DECISIONS.map((decision) => alignmentFor(decision.recordId)!)
+lines.push(row(['Measure', 'Count']), row(['---', '---']))
+lines.push(row(['Attempted', String(b8.length)]))
+lines.push(row(['Source contracts discovered', String(ALIGNMENT_BATCH_8_SOURCE_DISCOVERIES.length)]))
+lines.push(row(['Content inspected', String(b8.filter((entry) => entry.evidence.sourceContentInspected).length)]))
+lines.push(row(['Re-inspections', String(BATCH_8_REINSPECTIONS.length)]))
+lines.push(row(['First judgements', String(BATCH_8_FIRST_JUDGEMENTS.length)]))
+lines.push(row(['Alignment-clear', String(b8.filter((entry) => alignmentBlockers(entry.recordId).length === 0).length)]))
+lines.push(row(['Remaining corpus uninspected', String(FRONTIER_ALIGNMENT_AUDIT.filter((entry) => !entry.evidence.sourceContentInspected).length)]))
+lines.push('')
 
 lines.push('## Batch 6 membership', '')
 lines.push(

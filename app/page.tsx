@@ -29,8 +29,7 @@ const work = [
   { category: 'OPEN EDITION', title: 'The Unfinished Species', copy: 'A book about evolution, self-design, and the conditions intelligence creates for its own development.', href: '/books/the-unfinished-species' },
   { category: 'OPEN EDITION', title: 'The Imagined Life', copy: 'A book about dreaming, imagination, and the work of turning a possible future into an actual one.', href: '/books/the-imagined-life' },
   { category: 'INTERACTIVE PROTOTYPE', title: 'Overclock', copy: 'A five-round risk game about escalating stakes, imperfect information, and knowing when to bank a decision.', href: '/overclock' },
-  { category: 'SEMICONDUCTOR STRATEGY', title: 'U.S. Foundry Sovereignization', copy: 'A public analysis of the commercial and geopolitical friction around Intel IDM 2.0 and domestic advanced-node capacity.', href: '/intelligence/briefs/us-foundry-sovereignization' },
-  { category: 'AI INFRASTRUCTURE', title: 'The Generative AI Silicon Cycle', copy: 'A public analysis of capacity expansion, the next downturn, and where supply-chain resilience is likely to diverge.', href: '/intelligence/briefs/generative-ai-silicon-cycle-recalibration' },
+  { category: 'AI ECONOMICS', title: 'AI Software Cost Trajectory 2040', copy: 'An independent scenario analysis of labor substitution, open-source foundations, and long-run software price pressure.', href: '/intelligence/briefs/ai-software-cost-trajectory-2040' },
 ]
 
 const serviceJsonLd = {
