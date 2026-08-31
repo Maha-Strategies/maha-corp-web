@@ -90,7 +90,19 @@ const manifest = reconcileLineage(observation)
 const gates = BATCH_11_LINEAGE_DECLARATIONS.map((declaration) =>
   gateRecord(probeLineage(declaration.recordId, probeInput), declaration.declaredReleaseKind),
 )
-const ordering = proveOrderIndependence(BATCH_11_LINEAGE_DECLARATIONS.map((d) => d.recordId), gates)
+// Order independence is a property of a releasable cohort. Proving it requires
+// simulating the lifecycle, and simulating a refused record would assert
+// exactly what the gate denied, so it is not attempted when the cohort is
+// blocked. A blocked cohort is reported as blocked, not as an ordering result.
+const blockedGates = gates.filter((gate) => !gate.ready)
+const ordering = blockedGates.length === 0
+  ? proveOrderIndependence(BATCH_11_LINEAGE_DECLARATIONS.map((d) => d.recordId), gates)
+  : {
+    ordersTested: 0,
+    finalStateDigests: [] as readonly string[],
+    independent: false,
+    detail: `Not attempted: ${blockedGates.length} of ${gates.length} records did not gate cleanly.`,
+  }
 const planDigest = rehearsalPlanDigest(manifest, gates)
 
 /** Bounded, non-reversible summary. No identifier, token or source text. */
@@ -119,10 +131,18 @@ const emit = (payload: Record<string, unknown>) => {
 if (!authorized || operation !== OPERATION || confirmation !== CONFIRMATION) {
   const refused = authorized && (operation !== OPERATION || confirmation !== CONFIRMATION)
   emit({
-    mode: refused ? 'refused' : 'dry-run',
+    mode: refused ? 'refused' : blockedGates.length > 0 ? 'blocked' : 'dry-run',
     reason: refused
       ? 'Authorization was set but the operation name or confirmation phrase did not match exactly.'
-      : 'MAHA_B11_REMOTE_AUTHORIZED is not set to 1.',
+      : blockedGates.length > 0
+        ? `The cohort is not releasable: ${blockedGates.map((gate) => `${gate.recordId} (${gate.alignmentVerdict}: ${gate.failures.join(', ')})`).join('; ')}`
+        : 'MAHA_B11_REMOTE_AUTHORIZED is not set to 1.',
+    blockedRecords: blockedGates.map((gate) => ({
+      recordId: gate.recordId,
+      declaredKind: gate.declaredKind,
+      alignmentVerdict: gate.alignmentVerdict,
+      failures: gate.failures,
+    })),
     remoteOperationsPerformed: 0,
     previewBranchCreated: false,
     migrationsApplied: 0,

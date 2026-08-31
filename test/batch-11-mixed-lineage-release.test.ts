@@ -171,7 +171,9 @@ test('the rehearsal is disabled without explicit authorization', () => {
     env: { ...process.env, MAHA_B11_REMOTE_AUTHORIZED: '' },
   })
   const parsed = JSON.parse(out) as Record<string, unknown>
-  assert.equal(parsed.mode, 'dry-run')
+  // 'dry-run' when the cohort is releasable, 'blocked' when it is not. Both
+  // perform nothing, which is the property under test.
+  assert.ok(['dry-run', 'blocked'].includes(parsed.mode as string), `unexpected mode ${String(parsed.mode)}`)
   assert.equal(parsed.remoteOperationsPerformed, 0)
   assert.equal(parsed.previewBranchCreated, false)
   assert.equal(parsed.migrationsApplied, 0)
