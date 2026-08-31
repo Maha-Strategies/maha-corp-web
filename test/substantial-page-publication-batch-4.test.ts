@@ -17,8 +17,8 @@ test('Batch 4 refuses to manufacture pages from candidate or stale revisions', (
   assert.ok(SUBSTANTIAL_BATCH_4_READINESS.every((entry) => !entry.pageEligible && entry.blockerCodes.length === 4))
 })
 
-test('Batch 4 does not alter the 55-page public substantial projection', () => {
-  assert.equal(PUBLIC_SUBSTANTIAL_PAGES.length, 55)
+test('Batch 4 contributes no page to the later 103-page public substantial projection', () => {
+  assert.equal(PUBLIC_SUBSTANTIAL_PAGES.length, 103)
   const candidateIds = new Set(SUBSTANTIAL_BATCH_4_READINESS.map((entry) => entry.recordId))
   const overlaps = PUBLIC_SUBSTANTIAL_PAGES.filter((page) => candidateIds.has(page.contract.recordId))
   assert.equal(overlaps.length, 0)

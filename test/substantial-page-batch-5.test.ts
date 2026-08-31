@@ -108,9 +108,9 @@ test('depth increases on every page without inventing comparisons or calculation
   assert.equal(totalDelta, 46_609)
 })
 
-test('Batch 5 replaces 34 existing projections and creates no duplicate or 404-prone draft route', () => {
-  assert.equal(PUBLIC_SUBSTANTIAL_PAGES.length, 55)
-  assert.equal(new Set(PUBLIC_SUBSTANTIAL_PAGES.map((page) => page.path)).size, 55)
+test('Batch 5 remains exact within the later 103-page projection and creates no duplicate or 404-prone draft route', () => {
+  assert.equal(PUBLIC_SUBSTANTIAL_PAGES.length, 103)
+  assert.equal(new Set(PUBLIC_SUBSTANTIAL_PAGES.map((page) => page.path)).size, 103)
   assert.equal(PUBLIC_SUBSTANTIAL_PAGES.filter((page) => String(page.publicationVersion) === 'maha-substantial-publication/1.4').length, 34)
   for (const page of SUBSTANTIAL_BATCH_5_PAGES) {
     assert.equal(getPublishedSubstantialPage(page.contract.recordId)?.publicationVersion, 'maha-substantial-publication/1.4')

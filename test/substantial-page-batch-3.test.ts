@@ -55,8 +55,8 @@ test('Batch 3 replaces stale Batch 2 contracts without rewriting them', () => {
       'Batch 3 remains in append-only history even when a later exact-release depth upgrade replaces its public projection',
     )
   }
-  assert.equal(PUBLIC_SUBSTANTIAL_PAGES.length, 55, 'five newly eligible release-matched records must be added exactly once')
-  assert.equal(new Set(PUBLIC_SUBSTANTIAL_PAGES.map((page) => page.contract.recordId)).size, 55)
+  assert.equal(PUBLIC_SUBSTANTIAL_PAGES.length, 103, 'all release-matched records must be added exactly once across later batches')
+  assert.equal(new Set(PUBLIC_SUBSTANTIAL_PAGES.map((page) => page.contract.recordId)).size, 103)
 })
 
 test('five previously withheld active releases become release-matched public references', () => {
