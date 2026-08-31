@@ -10,6 +10,7 @@ import {
 } from './batch-11-mixed-lineage-release.ts'
 import { BATCH_11_REVISION_AUDITS, BATCH_11_SCOPED_DECISIONS } from './batch-11-revision-canary.ts'
 import { BATCH_11_DECISIONS } from './frontier-alignment-batch-11-review.ts'
+import { alignmentFor, isAlignmentClear } from './frontier-source-alignment.ts'
 import { FRONTIER_DOMAIN_GRAPH_RECORDS } from './frontier-domain-graphs.ts'
 
 /**
@@ -132,10 +133,13 @@ export type RehearsalFailureCode =
   | 'decision-held'
   | 'duplicate-release-attempt'
   | 'order-dependency-detected'
+  | 'source-alignment-not-clear'
 
 /** Per-record readiness for the remote rehearsal, computed from probes. */
 export interface RehearsalGate {
   recordId: string
+  /** The record's corpus alignment verdict, carried so a refusal can name it. */
+  alignmentVerdict: string
   declaredKind: ReleaseKind
   probeState: LineageProbeState
   proposedTargetSha256: string
@@ -154,6 +158,17 @@ export interface RehearsalGate {
  */
 export function gateRecord(probe: LineageProbe, declaredKind: ReleaseKind): RehearsalGate {
   const failures: RehearsalFailureCode[] = []
+
+  // Evidentiary support is a precondition for release, not a parallel opinion.
+  //
+  // This gate reads the lineage probe and the internal review decisions. Neither
+  // asks whether the record's declared source was ever shown to support its
+  // claim. Without this check a record with four scoped approvals releases on a
+  // source that was never read - and one record in the current cohort is
+  // exactly that: an initial-release candidate whose source is still marked
+  // inaccessible. Internal review records that a human looked; it cannot supply
+  // the support that looking failed to find.
+  if (!isAlignmentClear(probe.recordId)) failures.push('source-alignment-not-clear')
 
   if (probe.state === 'probe-failed') failures.push('lineage-probe-failed')
   if (probe.state === 'registry-empty') failures.push('registry-empty')
@@ -187,6 +202,7 @@ export function gateRecord(probe: LineageProbe, declaredKind: ReleaseKind): Rehe
     recordId: probe.recordId,
     declaredKind,
     probeState: probe.state,
+    alignmentVerdict: alignmentFor(probe.recordId)?.evidence.subjectAligned ?? 'unaudited',
     proposedTargetSha256: audit?.revisedRecordRevisionSha256 ?? '',
     scopedDecisionCount: scoped.length,
     failures: unique,

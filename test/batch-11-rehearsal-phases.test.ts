@@ -48,8 +48,25 @@ const PROBE: RegistryProbeInput = {
   statusVocabulary: [...KNOWN_RELEASE_STATUSES],
 }
 
+/**
+ * A releasable stand-in for the cohort.
+ *
+ * The real cohort is blocked on source alignment. That is an evidentiary fact
+ * about the corpus rather than a property of this machinery, and it is
+ * asserted directly in test/batch-11-alignment-eligibility.test.ts. These tests
+ * cover the lifecycle mechanism - phases, ordering, digests, refusals, cleanup
+ * - which has to keep working whatever the corpus says on a given day.
+ *
+ * Only the alignment failure is lifted, and only here. Every other gate result
+ * is the real one, so a mechanism regression still fails these tests.
+ */
+const releasable = <T extends { failures: readonly string[]; ready: boolean }>(gate: T): T => {
+  const failures = gate.failures.filter((failure) => failure !== 'source-alignment-not-clear')
+  return { ...gate, failures, ready: failures.length === 0 }
+}
+
 const GATES = BATCH_11_LINEAGE_DECLARATIONS.map((declaration) =>
-  gateRecord(probeLineage(declaration.recordId, PROBE), declaration.declaredReleaseKind),
+  releasable(gateRecord(probeLineage(declaration.recordId, PROBE), declaration.declaredReleaseKind)),
 )
 
 const INITIALS = BATCH_11_LINEAGE_DECLARATIONS.filter((d) => d.declaredReleaseKind === 'initial')
