@@ -39,7 +39,7 @@ const prohibitedPublicPatterns = [
 ]
 
 test('all archived research has a separate sanitized public edition', () => {
-  assert.equal(BRIEFS.length, 41)
+  assert.equal(BRIEFS.length, 42)
   assert.deepEqual(BRIEFS.map((brief) => brief.slug), PUBLIC_INTELLIGENCE_BRIEF_SLUGS)
   assert.deepEqual(getAllBriefSlugs(), PUBLIC_INTELLIGENCE_BRIEF_SLUGS)
   assert.deepEqual(

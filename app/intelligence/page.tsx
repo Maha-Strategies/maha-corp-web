@@ -157,6 +157,14 @@ const ALL_BRIEF_CARDS: BriefData[] = [
   },
   {
     group: 'HARDWARE & INFRASTRUCTURE',
+    category: 'ADVANCED.PACKAGING.CMP',
+    status: 'PRELIMINARY',
+    title: 'CMP Pads for Hybrid Bonding and HBM',
+    description: 'A qualification framework for CMP-pad choices as hybrid bonding and high-bandwidth-memory packaging raise the cost of planarization variation, contamination, and rework.',
+    href: '/intelligence/briefs/cmp-pads-hybrid-bonding-hbm',
+  },
+  {
+    group: 'HARDWARE & INFRASTRUCTURE',
     category: 'ADVANCED.PACKAGING',
     status: 'ACTIVE',
     title: 'Smartphone AP Packaging: Architecture, Supplier, and Reliability Decisions',

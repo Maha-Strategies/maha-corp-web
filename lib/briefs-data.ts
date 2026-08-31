@@ -2166,6 +2166,74 @@ const ALL_BRIEFS: Brief[] = [
       ],
       emphasis: 'Do not collapse PPG polymers, EO/PO block copolymers, glycol ethers, and functional polyethers into one sourcing category.'
     }
+  },
+  {
+    slug: 'cmp-pads-hybrid-bonding-hbm',
+    title: 'CMP Pads for Hybrid Bonding and High-Bandwidth-Memory Packaging',
+    seoTitle: 'CMP Pads for Hybrid Bonding and HBM: Qualification Framework',
+    kicker: 'ADVANCED.PACKAGING // CMP // MATERIALS.QUALIFICATION',
+    description: 'A public qualification framework for CMP-pad choices as hybrid bonding and high-bandwidth-memory packaging raise the cost of planarization variation, contamination, and rework.',
+    status: 'PRELIMINARY',
+    datePublished: '2026-08-31',
+    intro: 'Hybrid bonding and high-bandwidth-memory packaging make CMP a package-yield control point rather than a routine bulk-removal operation. This public brief frames the engineering questions a pad supplier, device manufacturer, or equipment team should test. It does not assert a universal process window, market forecast, or technology winner.',
+    sections: [
+      {
+        level: 2,
+        heading: '01. The Control Problem Shifts From Removal Rate to Bond-Ready Surface State',
+        paragraphs: [
+          'Direct copper and dielectric bonding depends on a surface condition that is flat, clean, and consistent across local pattern-density changes. CMP therefore has to be evaluated for local topography, erosion, dishing, scratch formation, residue, and post-clean condition together. A result that is acceptable for a conventional interconnect layer may not be acceptable when the next operation is a fine-pitch bond interface.',
+          'The operational consequence is that pad selection cannot be separated from slurry chemistry, conditioner behavior, wafer handling, cleaning, metrology, and the specific bond stack. The relevant question is not whether a pad is generally “high precision,” but whether a controlled consumables-and-process combination reproduces a bond-ready surface over the actual product mix.'
+        ],
+        table: {
+          caption: 'CMP decision lenses for bond-sensitive packaging',
+          header: ['Control lens', 'Why it matters', 'Evidence to request'],
+          rows: [
+            ['Local topography', 'Copper and dielectric surfaces can respond differently across feature densities.', 'Within-wafer and die-level topography maps, pattern-density splits, and post-bond correlation.'],
+            ['Defectivity and residue', 'Particles, pad debris, and slurry agglomerates can become bond-interface defects.', 'Defect maps, particle specifications, post-clean inspection, and failure analysis.'],
+            ['Pad stability', 'Wear, glazing, conditioning response, and lot variation can change process behavior.', 'Pad-life study, conditioning trace, lot-to-lot controls, and change-notice procedure.'],
+            ['Rework and test interaction', 'Electrical test or handling can create a surface that needs reconditioning before bonding.', 'Defined rework route, surface-restoration evidence, and yield impact by additional pass.']
+          ]
+        }
+      },
+      {
+        level: 2,
+        heading: '02. Yield Risk Is Amplified by Multi-Die Assembly',
+        paragraphs: [
+          'A packaging flow with multiple high-value die makes a late-discovered interfacial defect more expensive than an isolated wafer-level defect. CMP-induced non-uniformity, particles, or surface damage should consequently be evaluated against the package-level failure budget and known-good-die strategy, not only against a stand-alone removal-rate target.',
+          'This does not make every microscopic signal a production failure. It does mean that the inspection plan needs a causal chain: consumable state, process telemetry, surface measurement, bond response, electrical result, and package disposition. Without that chain, a team cannot distinguish a transient excursion from a supplier, conditioning, or integration problem.'
+        ],
+        listItems: [
+          'Define the bond-relevant surface metrics before screening pad candidates.',
+          'Run patterned-wafer and product-representative splits rather than relying only on blanket-wafer removal data.',
+          'Track pad, slurry, conditioner, cleaning, and metrology lots as a single change-controlled system.',
+          'Relate surface exceptions to bond inspection and electrical outcomes before changing specifications or suppliers.'
+        ]
+      },
+      {
+        level: 2,
+        heading: '03. Engineered Pads and Inline Sensing Are Evaluation Paths, Not Settled Standards',
+        paragraphs: [
+          'More tightly controlled pad microstructures, zoned mechanical properties, embedded sensing, fixed-abrasive approaches, and alternative planarization methods all warrant evaluation where they address a defined defectivity, uniformity, or monitoring limitation. Public information does not justify treating any one of these categories as the inevitable industry standard by a fixed date.',
+          'The strongest commercial case for a new pad architecture is a measured improvement against the incumbent process: lower defectivity, tighter topography control, more predictable pad life, faster excursion detection, or a lower cost of ownership after conditioning, slurry, cleaning, and yield are counted. A novel manufacturing method is not itself a qualification result.'
+        ],
+        blockquote: 'Adoption should follow a demonstrated package-level control advantage, not a claim that a pad category is inherently superior.'
+      },
+      {
+        level: 2,
+        heading: '04. Materials and Environmental Change Need the Same Qualification Discipline',
+        paragraphs: [
+          'Changes to polymers, additives, solvents, or cleaning routes can be driven by regulation, customer requirements, or supply resilience. They should be handled as process changes with explicit compatibility, contamination, outgassing, safety, and performance gates. A sustainability or regulatory claim does not establish equivalence in a bond-sensitive CMP flow.',
+          'A practical supplier review asks for the exact formulation boundary, manufacturing site, quality controls, analytical methods, change-notice commitments, and evidence that the candidate is compatible with the intended slurry, conditioner, cleaning sequence, and package reliability plan.'
+        ]
+      }
+    ],
+    protocolPatch: {
+      title: 'Maha Qualification Note // Bond-Sensitive CMP Consumables',
+      paragraphs: [
+        'Treat CMP-pad choice as a controlled integration decision. Establish the target surface state, inspect the full consumables and cleaning route, connect excursions to bond and electrical outcomes, and require a documented requalification plan for material, process, or supplier changes.'
+      ],
+      emphasis: 'No pad technology should be treated as production-ready for hybrid bonding until it has passed the relevant patterned-wafer, bonding, reliability, and change-control gates.'
+    }
   }
 ]
 
@@ -2210,6 +2278,7 @@ const SANITIZED_PUBLIC_TITLES: Record<string, string> = {
   'china-fa-cable-competitive-landscape': 'Factory-Automation Cable Qualification in China',
   'us-semiconductor-cleanroom-construction': 'U.S. Semiconductor Cleanroom Capacity: A Sizing Method',
   'ppg-derivatives-semiconductor-applications': 'Polyether Materials in Semiconductor Processing and Packaging',
+  'cmp-pads-hybrid-bonding-hbm': 'CMP Pads for Hybrid Bonding and HBM: Qualification Framework',
 }
 
 const PUBLIC_EDITION_EXCLUSIONS = [
