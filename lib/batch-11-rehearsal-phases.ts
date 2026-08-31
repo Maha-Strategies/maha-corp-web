@@ -116,6 +116,7 @@ export type RehearsalRefusal =
   | 'preview-not-bound'
   | 'preview-not-destroyed'
   | 'branch-not-destroyed'
+  | 'teardown-handle-missing'
 
 export class RehearsalRefused extends Error {
   code: RehearsalRefusal

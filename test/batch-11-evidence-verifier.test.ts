@@ -460,6 +460,7 @@ test('the reviewed commit is bound into the artifact digest', () => {
     releaseIdentities: bound.releaseIdentities as never,
     releaseCounts: bound.releaseCounts as never,
     deploymentMarkerDigest: bound.deploymentMarkerDigest as string | null,
+    teardownHandleDigests: bound.teardownHandleDigests as never,
     cleanup: bound.cleanup as never,
   })
   assert.notEqual(moved, original, 'the reviewed commit must be inside the digest')
@@ -553,16 +554,26 @@ const query = (over: Partial<ProviderQueryResult> = {}): ProviderQueryResult => 
   scope: 'exact-run-marker',
   runMarker: FIXTURE.runMarker,
   reviewedCommit: COMMIT,
+  identifierFingerprint: FIXTURE.artifact.teardownHandleDigests['supabase-branch'],
   matches: [],
   detail: '',
   ...over,
 })
 
 const cleanResults = (): ProviderQueryResult[] =>
-  TEARDOWN_RESOURCE_KINDS.map((kind) => query({ resourceKind: kind, provider: kind.split('-')[0] }))
+  TEARDOWN_RESOURCE_KINDS.map((kind) => query({
+    resourceKind: kind,
+    provider: kind.split('-')[0],
+    identifierFingerprint: FIXTURE.artifact.teardownHandleDigests[kind],
+  }))
 
 const produce = (results: ProviderQueryResult[]) =>
-  produceTeardownObservations({ runMarker: FIXTURE.runMarker, reviewedCommit: COMMIT, results })
+  produceTeardownObservations({
+    runMarker: FIXTURE.runMarker,
+    reviewedCommit: COMMIT,
+    expectedFingerprints: FIXTURE.artifact.teardownHandleDigests,
+    results,
+  })
 
 test('the producer confirms absence only when every query succeeded at exact scope', () => {
   const report = produce(cleanResults())
@@ -605,6 +616,14 @@ test('a stale run marker or another commit cannot support an absence claim', () 
   assert.equal(produce(other).observations[0].refusal, 'commit-mismatch')
 })
 
+test('a query for a different exact identifier cannot support absence', () => {
+  const results = cleanResults()
+  results[0].identifierFingerprint = `sha256:${'4'.repeat(64)}`
+  const report = produce(results)
+  assert.equal(report.observations[0].observedState, 'unknown')
+  assert.equal(report.observations[0].refusal, 'identifier-mismatch')
+})
+
 test('a missing query for any resource is unknown, not absent', () => {
   const results = cleanResults().filter((entry) => entry.resourceKind !== 'database-release-rows')
   const report = produce(results)
@@ -621,7 +640,12 @@ test('a surviving resource is present, and provider disagreement is flagged', ()
   // A second provider for the same kind reports none: they disagree.
   const disagreeing = [...cleanResults(), query({ provider: 'audit', matches: [] })]
   disagreeing[0].matches = [{ identifierFingerprint: `sha256:${'8'.repeat(64)}`, status: 'ACTIVE' }]
-  const report = produceTeardownObservations({ runMarker: FIXTURE.runMarker, reviewedCommit: COMMIT, results: disagreeing })
+  const report = produceTeardownObservations({
+    runMarker: FIXTURE.runMarker,
+    reviewedCommit: COMMIT,
+    expectedFingerprints: FIXTURE.artifact.teardownHandleDigests,
+    results: disagreeing,
+  })
   assert.equal(report.observations[0].observedState, 'present')
   assert.equal(report.observations[0].refusal, 'provider-disagreement')
 })
@@ -703,7 +727,6 @@ test('the live dry-run artifact remains refused', () => {
 
 import {
   TEARDOWN_PRODUCER_VERSION,
-  observationFingerprint,
   recomputeObservationsDigest,
 } from '../lib/batch-11-teardown-observations.ts'
 
@@ -746,7 +769,7 @@ test('an observation for an unsupported resource kind is refused', () => {
   const extra = teardown()
   extra.observations = [...extra.observations, {
     resourceKind: 'some-other-thing' as never,
-    identifierFingerprint: observationFingerprint(extra.runMarker, 'some-other-thing' as never),
+    identifierFingerprint: `sha256:${'f'.repeat(64)}`,
     observedState: 'confirmed-absent',
     detail: 'An unrelated resource.',
   }]
@@ -773,10 +796,10 @@ test('an omitted resource kind is refused', () => {
   refusesWith('teardown-observations-absent', { teardown: omitted })
 })
 
-test('an observation fingerprint that does not derive from this run is refused', () => {
+test('an observation fingerprint that does not match the bound exact handle is refused', () => {
   const forged = teardown()
   forged.observations = forged.observations.map((entry, index) =>
-    index === 0 ? { ...entry, identifierFingerprint: observationFingerprint('batch-11-mixed-lineage-rehearsal-999', entry.resourceKind) } : entry)
+    index === 0 ? { ...entry, identifierFingerprint: `sha256:${'a'.repeat(64)}` } : entry)
   forged.observationsDigest = recomputeObservationsDigest({
     schemaVersion: TEARDOWN_PRODUCER_VERSION,
     runMarker: forged.runMarker,
@@ -802,7 +825,17 @@ test('the collector never reports absence without a successful query', () => {
   assert.match(source, /status: 'failed'/, 'a failed request must produce failed')
   assert.match(source, /status: 'malformed'/, 'an uninterpretable body must produce malformed')
   assert.match(source, /assertSanitized\(payload\)/, 'the written report must be scanned before it lands')
-  assert.match(source, /if \(!report\.allConfirmedAbsent\) process\.exit\(1\)/, 'a green exit must not mean unconfirmed teardown')
-  // Identifiers are hashed, never written raw.
-  assert.match(source, /const fingerprint = \(value: string\)/)
+  assert.match(source, /if \(!report\.allConfirmedAbsent\)/, 'unconfirmed teardown must enter an explicit refusal branch')
+  assert.match(source, /if \(!partialSafe\) process\.exit\(1\)/, 'a green partial exit must require the three exact non-secret resources absent')
+  // Exact identifiers are reduced to digests bound by the public artifact.
+  assert.match(source, /teardownHandleDigests\(handles\)/)
+  assert.match(source, /expected\[kind\]/)
+  assert.match(source, /\/v1\/branches\/\$\{encodeURIComponent\(handles\.supabaseBranch\.branchId\)\}/)
+  assert.match(source, /\/v13\/deployments\/\$\{encodeURIComponent\(handles\.vercelPreview\.deploymentId\)\}/)
+  assert.doesNotMatch(source, /rehearsalRunMarker|registry\.json|\.includes\(runMarker\)/)
+
+  const finalizer = readFileSync(resolve(ROOT, 'scripts/finalize-batch-11-teardown-evidence.ts'), 'utf8')
+  assert.match(finalizer, /TEMPORARY_PREVIEW_SECRET_NAMES/)
+  assert.match(finalizer, /requiredPrior/)
+  assert.match(finalizer, /if \(!report\.allConfirmedAbsent\) process\.exit\(1\)/)
 })

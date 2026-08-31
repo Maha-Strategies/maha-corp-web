@@ -132,7 +132,7 @@
       "check": "artifact-schema",
       "passed": true,
       "refusal": null,
-      "detail": "The artifact declares maha-batch-11-rehearsal-evidence/3.0."
+      "detail": "The artifact declares maha-batch-11-rehearsal-evidence/4.0."
     },
     {
       "check": "lineage-classification",
@@ -168,7 +168,7 @@
       "check": "teardown-fingerprints",
       "passed": true,
       "refusal": null,
-      "detail": "Every observation fingerprint derives from this run marker."
+      "detail": "Every observation matches an exact resource digest bound by the rehearsal artifact."
     },
     {
       "check": "teardown-supabase-branch",

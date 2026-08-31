@@ -4,6 +4,7 @@ import { readFileSync } from 'node:fs'
 import { canonicalJson } from './evidence-dossier/digest.ts'
 import {
   BOUND_EVIDENCE_SCHEMA,
+  TEARDOWN_HANDLE_KINDS,
   boundEvidenceDigest,
   compareReleasesToContract,
   runMarkerFor,
@@ -19,7 +20,6 @@ import {
 import { BATCH_11_REVISION_AUDITS, BATCH_11_SCOPED_DECISIONS } from './batch-11-revision-canary.ts'
 import {
   TEARDOWN_PRODUCER_VERSION,
-  observationFingerprint,
   recomputeObservationsDigest,
 } from './batch-11-teardown-observations.ts'
 
@@ -495,6 +495,7 @@ export function verifyRehearsalEvidence(input: VerifierInput, contract = reposit
         releaseIdentities: releases as never,
         releaseCounts: (artifact.releaseCounts ?? {}) as never,
         deploymentMarkerDigest: (artifact.deploymentMarkerDigest ?? null) as string | null,
+        teardownHandleDigests: (artifact.teardownHandleDigests ?? {}) as never,
         cleanup: (cleanupStatus ?? {}) as never,
       })
     } catch { recomputed = null }
@@ -538,12 +539,17 @@ export function verifyRehearsalEvidence(input: VerifierInput, contract = reposit
       fail('teardown-shape', 'teardown-observation-unsupported-kind', `Observations for unsupported resource kinds: ${unsupported.join(', ')}.`)
     } else pass('teardown-shape', `Exactly one observation for each of the ${REQUIRED_TEARDOWN_KINDS.length} required resource kinds.`)
 
+    const artifactHandleDigests = isObject(artifact.teardownHandleDigests)
+      ? artifact.teardownHandleDigests
+      : {}
+    const completeHandleDigests = TEARDOWN_HANDLE_KINDS.every((kind) =>
+      typeof artifactHandleDigests[kind] === 'string')
     const wrongFingerprint = teardown.filter((entry) =>
-      entry.identifierFingerprint !== observationFingerprint(evidence!.runMarker, entry.resourceKind))
-    if (wrongFingerprint.length > 0) {
+      entry.identifierFingerprint !== artifactHandleDigests[entry.resourceKind])
+    if (!completeHandleDigests || wrongFingerprint.length > 0) {
       fail('teardown-fingerprints', 'teardown-fingerprint-mismatch',
-        `${wrongFingerprint.length} observation fingerprint(s) do not derive from this run marker and resource kind.`)
-    } else pass('teardown-fingerprints', 'Every observation fingerprint derives from this run marker.')
+        `${wrongFingerprint.length} observation fingerprint(s) do not match the exact resource digests bound by the rehearsal artifact.`)
+    } else pass('teardown-fingerprints', 'Every observation matches an exact resource digest bound by the rehearsal artifact.')
 
     for (const kind of REQUIRED_TEARDOWN_KINDS) {
       const observation = teardown.find((entry) => entry.resourceKind === kind)

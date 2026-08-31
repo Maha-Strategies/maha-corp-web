@@ -201,3 +201,27 @@ jobs:
             }
             console.log(`Cleanup converged. ${found.length} branch(es) destroyed, 0 surviving.`)
           '
+
+      - name: Collect exact sanitized teardown observations
+        if: always()
+        run: |
+          set -euo pipefail
+          evidence="$GITHUB_WORKSPACE/batch-11-rehearsal/evidence.json"
+          handles="$GITHUB_WORKSPACE/batch-11-rehearsal/teardown-handles.json"
+          partial="$GITHUB_WORKSPACE/batch-11-rehearsal/teardown-partial.json"
+          trap 'rm -f "$handles"' EXIT
+          if [ ! -f "$evidence" ] || [ ! -f "$handles" ]; then
+            echo 'No executed evidence and exact handles were produced; no teardown observation can be claimed.'
+            exit 0
+          fi
+          node --experimental-strip-types scripts/collect-batch-11-teardown-evidence.ts \
+            --artifact "$evidence" --handles "$handles" --out "$partial" \
+            --skip-github --allow-partial
+          # The EXIT trap removes raw identifiers even if collection refuses.
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: batch-11-sanitized-teardown-partial
+          path: batch-11-rehearsal/teardown-partial.json
+          if-no-files-found: ignore

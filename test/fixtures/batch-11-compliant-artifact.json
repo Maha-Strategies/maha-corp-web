@@ -12,6 +12,7 @@
       "scope": "exact-run-marker",
       "runMarker": "batch-11-mixed-lineage-rehearsal-77",
       "reviewedCommit": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      "identifierFingerprint": "sha256:75bc5806f707eb1c5eab5273d9c073a150a699a3fb31a7a6c0fc200e045d9d3c",
       "matches": [],
       "detail": "Queried supabase-branch at exact run-marker scope; no matching resource remained."
     },
@@ -22,6 +23,7 @@
       "scope": "exact-run-marker",
       "runMarker": "batch-11-mixed-lineage-rehearsal-77",
       "reviewedCommit": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      "identifierFingerprint": "sha256:080847506a0aeb2b4dcf4f1a022e00379f8359ef2e527f992d67f943b8eb8b49",
       "matches": [],
       "detail": "Queried vercel-preview at exact run-marker scope; no matching resource remained."
     },
@@ -32,6 +34,7 @@
       "scope": "exact-run-marker",
       "runMarker": "batch-11-mixed-lineage-rehearsal-77",
       "reviewedCommit": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      "identifierFingerprint": "sha256:48f04f7cd614cc604deba552e800a9bfd405462941978046b320dc077bb444f4",
       "matches": [],
       "detail": "Queried github-environment-secret at exact run-marker scope; no matching resource remained."
     },
@@ -42,12 +45,13 @@
       "scope": "exact-run-marker",
       "runMarker": "batch-11-mixed-lineage-rehearsal-77",
       "reviewedCommit": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      "identifierFingerprint": "sha256:b8877c772bae5168cdb5558d7e9518889a3ef4be4e0d57e0c26fcc8eea52b4e5",
       "matches": [],
       "detail": "Queried database-release-rows at exact run-marker scope; no matching resource remained."
     }
   ],
   "artifact": {
-    "artifactSchema": "maha-batch-11-rehearsal-evidence/3.0",
+    "artifactSchema": "maha-batch-11-rehearsal-evidence/4.0",
     "reviewedCommit": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
     "workflowRunId": "77",
     "runMarker": "batch-11-mixed-lineage-rehearsal-77",
@@ -167,12 +171,18 @@
       "replayed": 0
     },
     "deploymentMarkerDigest": "sha256:056cd329ffc4e96d1a5d3ca2e71481f1b90a9fd6f9c90c37e9aee982afb53ae5",
+    "teardownHandleDigests": {
+      "supabase-branch": "sha256:75bc5806f707eb1c5eab5273d9c073a150a699a3fb31a7a6c0fc200e045d9d3c",
+      "vercel-preview": "sha256:080847506a0aeb2b4dcf4f1a022e00379f8359ef2e527f992d67f943b8eb8b49",
+      "github-environment-secret": "sha256:48f04f7cd614cc604deba552e800a9bfd405462941978046b320dc077bb444f4",
+      "database-release-rows": "sha256:b8877c772bae5168cdb5558d7e9518889a3ef4be4e0d57e0c26fcc8eea52b4e5"
+    },
     "cleanup": {
       "branchDestroyed": true,
       "deploymentDestroyed": true,
       "markerRemoved": true
     },
-    "artifactDigest": "sha256:83b5ed6de1a44fdf8da6540fdf2a893cbcec7f01b07a47b9b21439062ecfb310",
+    "artifactDigest": "sha256:4a594de53bd1b1caf37b3223c6be2d24e91dc37ac9333daa76a64f0756133fda",
     "mode": "executed",
     "reason": "All 7 phases executed against an ephemeral Preview branch.",
     "remoteOperationsPerformed": 14,
@@ -245,13 +255,13 @@
     }
   },
   "teardown": {
-    "schemaVersion": "maha-batch-11-teardown-observations/1.0",
+    "schemaVersion": "maha-batch-11-teardown-observations/2.0",
     "runMarker": "batch-11-mixed-lineage-rehearsal-77",
     "reviewedCommit": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
     "observations": [
       {
         "resourceKind": "supabase-branch",
-        "identifierFingerprint": "sha256:52ffb3b28501ae82584e73606a625cb87475e75a427298986d0ca02b08e9e725",
+        "identifierFingerprint": "sha256:75bc5806f707eb1c5eab5273d9c073a150a699a3fb31a7a6c0fc200e045d9d3c",
         "observedState": "confirmed-absent",
         "detail": "supabase-branch: 1 authoritative query succeeded at exact scope and found nothing.",
         "refusal": null,
@@ -261,7 +271,7 @@
       },
       {
         "resourceKind": "vercel-preview",
-        "identifierFingerprint": "sha256:2c7bcecadd5ff27a9ebf5195b4205b60c8a183c75f7ea9894852c47d2f54dd9f",
+        "identifierFingerprint": "sha256:080847506a0aeb2b4dcf4f1a022e00379f8359ef2e527f992d67f943b8eb8b49",
         "observedState": "confirmed-absent",
         "detail": "vercel-preview: 1 authoritative query succeeded at exact scope and found nothing.",
         "refusal": null,
@@ -271,7 +281,7 @@
       },
       {
         "resourceKind": "github-environment-secret",
-        "identifierFingerprint": "sha256:3053491f89cfd8aa17cf141f8d630d966dc5886b170fef009be12cdf1285e61c",
+        "identifierFingerprint": "sha256:48f04f7cd614cc604deba552e800a9bfd405462941978046b320dc077bb444f4",
         "observedState": "confirmed-absent",
         "detail": "github-environment-secret: 1 authoritative query succeeded at exact scope and found nothing.",
         "refusal": null,
@@ -281,7 +291,7 @@
       },
       {
         "resourceKind": "database-release-rows",
-        "identifierFingerprint": "sha256:5732ba7aa00a7ef36a8ca60362fed40f3ae022141d45484f84327eec7eef7e4e",
+        "identifierFingerprint": "sha256:b8877c772bae5168cdb5558d7e9518889a3ef4be4e0d57e0c26fcc8eea52b4e5",
         "observedState": "confirmed-absent",
         "detail": "database-release-rows: 1 authoritative query succeeded at exact scope and found nothing.",
         "refusal": null,
@@ -291,7 +301,7 @@
       }
     ],
     "allConfirmedAbsent": true,
-    "observationsDigest": "sha256:4b1da027b2a75a516f61b62f4fe5849739162bbc5cb07d4e271e273e841cd7d6",
+    "observationsDigest": "sha256:fbc765f6e4cd017df8a683d0ca7dcc6fcc7450334c426cfa54c608d8751144c3",
     "workflowRunId": "77"
   }
 }

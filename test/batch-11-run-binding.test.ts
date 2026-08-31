@@ -5,6 +5,7 @@ import test from 'node:test'
 
 import {
   EvidenceBindingRefused,
+  TEMPORARY_PREVIEW_SECRET_NAMES,
   buildBoundEvidence,
   compareReleasesToContract,
   contractReleaseIdentities,
@@ -49,23 +50,37 @@ const verify = (over: { artifact?: Record<string, unknown>; reviewedCommit?: str
     teardown: over.teardown === undefined ? teardown() : over.teardown,
   }, CONTRACT)
 
-const boundInput = (over: Partial<BoundEvidenceInput> = {}): BoundEvidenceInput => ({
+const boundInput = (over: Partial<BoundEvidenceInput> = {}): BoundEvidenceInput => {
+  const workflowRunId = over.workflowRunId ?? '77'
+  const releaseIdentities = over.releaseIdentities ?? contractReleaseIdentities().map((entry, index) => ({ ...entry, releaseId: `epirelease_${index}` }))
+  return ({
   expectedReviewedCommit: COMMIT,
   checkedOutCommit: COMMIT,
-  workflowRunId: '77',
+  workflowRunId,
   planDigest: CONTRACT.planDigest,
   cohortRecordIds: BATCH_11_LINEAGE_DECLARATIONS.map((entry) => entry.recordId),
   lineageClassifications: BATCH_11_LINEAGE_DECLARATIONS.map((entry) => ({
     recordId: entry.recordId, expected: entry.declaredReleaseKind, observed: entry.declaredReleaseKind,
   })),
   phaseOutcomes: PHASE_ORDER.map((phase) => ({ phase, status: 'executed', mutations: 1 })),
-  releaseIdentities: contractReleaseIdentities().map((entry, index) => ({ ...entry, releaseId: `epirelease_${index}` })),
+  releaseIdentities,
   replayedReleases: 0,
   deploymentMarker: { deploymentId: 'dpl', origin: 'https://x.vercel.app' },
+  teardownHandles: {
+    schemaVersion: 'maha-batch-11-private-teardown-handles/1.0',
+    workflowRunId,
+    runMarker: runMarkerFor(workflowRunId),
+    reviewedCommit: COMMIT,
+    supabaseBranch: { branchId: 'branch', parentProjectRef: 'staging' },
+    vercelPreview: { deploymentId: 'dpl', origin: 'https://x.vercel.app' },
+    githubEnvironmentSecrets: { environment: 'batch-11-preview-rehearsal', names: TEMPORARY_PREVIEW_SECRET_NAMES },
+    databaseReleaseRows: { branchId: 'branch', releaseIds: releaseIdentities.map((entry) => entry.releaseId) },
+  },
   cleanup: { branchDestroyed: true, deploymentDestroyed: true, markerRemoved: true },
   requiredPhaseCount: PHASE_ORDER.length,
   ...over,
-})
+  })
+}
 
 const bindingRefusal = (input: BoundEvidenceInput): EvidenceBindingRefused => {
   try {
@@ -96,6 +111,21 @@ test('the run id and marker are inside the artifact digest', () => {
   const first = buildBoundEvidence(boundInput({ workflowRunId: '77' }))
   const second = buildBoundEvidence(boundInput({ workflowRunId: '78' }))
   assert.notEqual(first.artifactDigest, second.artifactDigest, 'a different run must produce a different digest')
+})
+
+test('exact teardown handles are digest-bound and must name the issued releases', () => {
+  const first = buildBoundEvidence(boundInput())
+  const changed = boundInput()
+  changed.teardownHandles = structuredClone(changed.teardownHandles)
+  changed.teardownHandles.supabaseBranch.branchId = 'another-exact-branch'
+  const second = buildBoundEvidence(changed)
+  assert.notEqual(first.teardownHandleDigests['supabase-branch'], second.teardownHandleDigests['supabase-branch'])
+  assert.notEqual(first.artifactDigest, second.artifactDigest)
+
+  const wrongRows = boundInput()
+  wrongRows.teardownHandles = structuredClone(wrongRows.teardownHandles)
+  wrongRows.teardownHandles.databaseReleaseRows.releaseIds = ['not-an-issued-release']
+  assert.equal(bindingRefusal(wrongRows).code, 'teardown-handle-release-mismatch')
 })
 
 test('evidence from a different run is refused even when everything else matches', () => {
