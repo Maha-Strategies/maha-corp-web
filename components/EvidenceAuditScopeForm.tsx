@@ -4,6 +4,7 @@ import { FormEvent, useEffect, useState } from 'react'
 import Script from 'next/script'
 
 import { trackConversion } from '@/components/ConversionTracker'
+import { postPublicForm } from '@/lib/public-form-client'
 
 declare global {
   interface Window {
@@ -50,13 +51,7 @@ export default function EvidenceAuditScopeForm() {
     }
 
     try {
-      const response = await fetch('/api/inbound-submissions', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(body),
-      })
-      const result = await response.json() as { error?: { message?: string } }
-      if (!response.ok) throw new Error(result.error?.message ?? 'Your audit request could not be sent.')
+      await postPublicForm('/forms/contact', body)
       trackConversion('contact_form_success')
       setState({ pending: false, success: true, error: '' })
     } catch (error) {

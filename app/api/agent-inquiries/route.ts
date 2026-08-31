@@ -74,7 +74,11 @@ export async function POST(request: Request) {
 
   let inquiry: AgentInquiry
   try {
-    inquiry = parseInquiry(await request.json())
+    const raw = await request.text()
+    if (Buffer.byteLength(raw, 'utf8') > MAX_BODY_BYTES) {
+      return jsonResponse({ error: { code: 'payload_too_large', message: 'Request body exceeds the 32 KB limit.' } }, 413)
+    }
+    inquiry = parseInquiry(JSON.parse(raw))
   } catch (error) {
     return jsonResponse({ error: { code: 'invalid_request', message: error instanceof Error ? error.message : 'Invalid request body.' } }, 400)
   }

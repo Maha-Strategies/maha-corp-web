@@ -3,6 +3,7 @@
 import { FormEvent, useEffect, useState } from 'react'
 import Script from 'next/script'
 import { trackConversion } from '@/components/ConversionTracker'
+import { postPublicForm } from '@/lib/public-form-client'
 
 declare global { interface Window { mahaPlannerTurnstileComplete?: (token: string) => void; mahaPlannerTurnstileExpired?: () => void } }
 
@@ -30,9 +31,7 @@ export default function PlannerInquiryForm({ recordJson }: { recordJson: string 
     const form = new FormData(event.currentTarget)
     const body = { idempotencyKey: `planner-inquiry:${crypto.randomUUID()}`, offerId: service, requester: { name: form.get('name'), email: form.get('email'), organization: form.get('organization') }, decision: form.get('decision'), question: form.get('question'), deadline: form.get('deadline') || undefined, context: `The requester explicitly opted in to attach this browser-generated AI Boundary Planner record for human scope review.\n\n${recordJson}`, requesterAuthorized: true, referralSource: 'direct', sourcePath: '/contact', turnstileToken: turnstileToken || undefined }
     try {
-      const response = await fetch('/api/inbound-submissions', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) })
-      const result = await response.json() as { error?: { message?: string } }
-      if (!response.ok) throw new Error(result.error?.message ?? 'Your inquiry could not be sent.')
+      await postPublicForm('/forms/contact', body)
       trackConversion('contact_form_success')
       setState({ pending: false, success: true, error: '' })
     } catch (error) { setState({ pending: false, success: false, error: error instanceof Error ? error.message : 'Your inquiry could not be sent.' }) }
