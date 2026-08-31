@@ -92,6 +92,7 @@ export default function DemoPage() {
             <EvidenceCard title="Fulcra Flow State" value="Merged contribution" body="Fulcra community PR #33 preserved metadata-only provenance for one bounded Flow State path. The private validation used synthetic media and did not retain or publish creative audio." href="/artifacts/integrations/fulcra-flow-state-pr-33.json" action="Read the sanitized artifact" />
             <EvidenceCard title="CABEZON / Thrivbe" value="Encrypted no-money enquiry" body="One reciprocal CARP onboarding and one encrypted tea enquiry completed with explicit enquiry-only boundaries. No purchase, payment, reservation, escrow, or delivery action occurred." href="/artifacts/carp/thrivbe-tea-enquiry-success-2026-08-28.json" action="Read the sanitized artifact" />
           </div>
+          <p className="mt-6 text-xs leading-6 text-[var(--text-muted)]">These records establish bounded technical outcomes. They do not claim endorsement, production adoption, partnership, certification, or commercial validation by Fulcra, CABEZON, or Thrivbe.</p>
         </section>
 
         <section className="evidence-section" aria-labelledby="partner-path">
