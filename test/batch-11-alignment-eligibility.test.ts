@@ -1,32 +1,33 @@
 import assert from 'node:assert/strict'
+import { createHash } from 'node:crypto'
 import { readFileSync } from 'node:fs'
 import { resolve } from 'node:path'
 import test from 'node:test'
 
-import { ALIGNMENT_CLOSURE_DISPOSITIONS } from '../lib/alignment-closure-batch.ts'
+import { canonicalJson } from '../lib/evidence-dossier/digest.ts'
 import { BATCH_11_LINEAGE_DECLARATIONS } from '../lib/batch-11-mixed-lineage-release.ts'
+import {
+  evaluateProposedRevisionAlignment,
+  proposedRevisionAlignmentFor,
+  proposedRevisionAlignmentInput,
+} from '../lib/batch-11-proposed-revision-alignment.ts'
 import {
   KNOWN_RELEASE_STATUSES,
   gateRecord,
   probeLineage,
+  proveOrderIndependence,
   simulateLifecycle,
   type RegistryProbeInput,
 } from '../lib/batch-11-remote-rehearsal.ts'
-import { BATCH_11_DECISIONS } from '../lib/frontier-alignment-batch-11-review.ts'
 import { alignmentFor, isAlignmentClear } from '../lib/frontier-source-alignment.ts'
 
 /**
- * Release eligibility must rest on evidence, not on approval or on cohort
- * membership.
+ * The active record and the proposed replacement are different revisions.
  *
- * The rehearsal gate reads the lineage probe and the internal review decisions.
- * Neither asks whether a record's declared source was ever shown to support its
- * claim, so before this check every record in the cohort gated ready - one of
- * them an initial-release candidate whose source is still marked inaccessible
- * and has never been read.
- *
- * These tests pin that shut, and pin shut the escape route next to it: swapping
- * a refused record for a different one does not make the replacement eligible.
+ * PR #310 correctly prevented an uninspected ACTIVE source from releasing, but
+ * it then judged the proposed replacement by that displaced source. These tests
+ * keep both rules: stale canonical bindings never become evidence, and a
+ * replacement clears only when its own packet-to-audit chain recomputes cleanly.
  */
 
 const ROOT = resolve(import.meta.dirname, '..')
@@ -38,133 +39,192 @@ const PROBE: RegistryProbeInput = {
   totalRegistryRows: OBSERVATION.totalReleasesInRegistry,
   statusVocabulary: [...KNOWN_RELEASE_STATUSES],
 }
+
+const COLOR_CENTERS = 'urn:maha:record:advanced-materials-color-centers-in-diamond'
 const TOOL_ALLOWLISTING = 'urn:maha:record:agentic-systems-mcp-tool-allowlisting'
+
+const sha = (value: unknown) =>
+  `sha256:${createHash('sha256').update(canonicalJson(value), 'utf8').digest('hex')}`
 
 const gateFor = (recordId: string, kind: 'initial' | 'superseding' = 'initial') => {
   const declaration = BATCH_11_LINEAGE_DECLARATIONS.find((entry) => entry.recordId === recordId)
   return gateRecord(probeLineage(recordId, PROBE), declaration?.declaredReleaseKind ?? kind)
 }
 
-test('no Batch 11 candidate is releasable while its source alignment is unresolved', () => {
+test('all five exact proposed revisions recompute alignment-clear while their displaced bindings stay non-clear', () => {
+  for (const declaration of BATCH_11_LINEAGE_DECLARATIONS) {
+    assert.equal(isAlignmentClear(declaration.recordId), false, `${declaration.recordId}: stale active binding unexpectedly clear`)
+    const proposed = proposedRevisionAlignmentFor(declaration.recordId)
+    assert.equal(proposed.ready, true, `${declaration.recordId}: ${proposed.blockers.join(',')}`)
+    assert.equal(proposed.alignmentVerdict, 'alignment-clear')
+    assert.deepEqual(proposed.blockers, [])
+    assert.match(proposed.proposedTargetSha256, /^sha256:[0-9a-f]{64}$/)
+    assert.match(proposed.auditSha256, /^sha256:[0-9a-f]{64}$/)
+  }
+})
+
+test('the real cohort gates cleanly without a fixture that strips failures', () => {
   const gates = BATCH_11_LINEAGE_DECLARATIONS.map((entry) => gateFor(entry.recordId))
   assert.equal(gates.length, 5)
+  assert.equal(gates.filter((entry) => entry.ready).length, 5)
+  assert.equal(gates.filter((entry) => entry.declaredKind === 'superseding').length, 2)
+  assert.equal(gates.filter((entry) => entry.declaredKind === 'initial').length, 3)
   for (const gate of gates) {
-    assert.equal(isAlignmentClear(gate.recordId), false, `${gate.recordId} is unexpectedly alignment-clear`)
-    assert.equal(gate.ready, false, `${gate.recordId} gated ready without alignment`)
-    assert.ok(gate.failures.includes('source-alignment-not-clear'), `${gate.recordId}: ${gate.failures.join(',')}`)
+    assert.equal(gate.alignmentVerdict, 'alignment-clear')
+    assert.deepEqual(gate.alignmentBlockers, [])
+    assert.ok(!gate.failures.includes('source-alignment-not-clear'))
   }
+  assert.doesNotThrow(() => simulateLifecycle(gates.map((entry) => entry.recordId), gates))
+  const ordering = proveOrderIndependence(gates.map((entry) => entry.recordId), gates)
+  assert.equal(ordering.independent, true)
+  assert.equal(ordering.ordersTested, 120)
 })
 
-test('an initial-release candidate whose source was never read is refused', () => {
-  // The sharpest case in the current cohort: a record proposed for a first
-  // canonical release whose declared source has never been opened.
-  const recordId = 'urn:maha:record:advanced-materials-color-centers-in-diamond'
-  const declaration = BATCH_11_LINEAGE_DECLARATIONS.find((entry) => entry.recordId === recordId)
-  assert.ok(declaration, 'the record must still be a declared candidate for this test to mean anything')
-  assert.equal(declaration.declaredReleaseKind, 'initial')
+test('an unread active source is not mistaken for the inspected replacement source', () => {
+  const active = alignmentFor(COLOR_CENTERS)!
+  assert.equal(active.evidence.sourceContentInspected, false)
+  assert.equal(active.evidence.subjectAligned, 'inaccessible-source')
 
-  const record = alignmentFor(recordId)!
-  assert.equal(record.evidence.sourceContentInspected, false, 'the source is still uninspected')
-  assert.equal(record.evidence.subjectAligned, 'inaccessible-source')
-  assert.equal(gateFor(recordId).ready, false)
-})
+  const input = proposedRevisionAlignmentInput(COLOR_CENTERS)
+  assert.equal(input.packet?.inspection?.depth, 'abstract-and-identity')
+  assert.equal(input.packet?.verdict, 'supported')
+  assert.equal(evaluateProposedRevisionAlignment(input).ready, true)
 
-// 1
-test('a partially-supported record cannot become alignment-clear', () => {
-  const record = alignmentFor(TOOL_ALLOWLISTING)!
-  assert.equal(record.evidence.subjectAligned, 'partially-supported')
-  assert.equal(record.evidence.claimSupported, false)
-  assert.equal(isAlignmentClear(TOOL_ALLOWLISTING), false)
-
-  // A property of the verdict, not a fact about one record.
-  for (const disposition of ALIGNMENT_CLOSURE_DISPOSITIONS) {
-    if (disposition.verdict === 'partially-supported') {
-      assert.equal(disposition.newlyAlignmentClear, false, disposition.recordId)
-      assert.equal(isAlignmentClear(disposition.recordId), false, disposition.recordId)
-    }
+  const uninspected = {
+    ...input,
+    packet: { ...input.packet!, inspection: null, source: null, verdict: 'unresolved-fail-closed' as const },
   }
+  const refused = evaluateProposedRevisionAlignment(uninspected)
+  assert.equal(refused.ready, false)
+  assert.ok(refused.blockers.includes('packet-not-supported'))
+  assert.ok(refused.blockers.includes('source-content-not-inspected'))
 })
 
-// 2
-test('internal review cannot override missing evidentiary support', () => {
-  const reviewed = BATCH_11_LINEAGE_DECLARATIONS.filter((entry) => {
-    const gate = gateFor(entry.recordId)
-    return gate.scopedDecisionCount === 4
+test('internal approvals cannot manufacture support when the packet is partial', () => {
+  const input = proposedRevisionAlignmentInput(COLOR_CENTERS)
+  assert.equal(input.scopedDecisions.length, 4)
+  const partial = {
+    ...input,
+    packet: { ...input.packet!, verdict: 'partially-supported' as const },
+  }
+  const result = evaluateProposedRevisionAlignment(partial)
+  assert.equal(result.ready, false)
+  assert.ok(result.blockers.includes('packet-not-supported'))
+  assert.ok(result.blockers.includes('packet-digest-mismatch'))
+})
+
+test('a decision cannot detach its reviewed identity, locator, rights or authority boundary from the packet', () => {
+  const input = proposedRevisionAlignmentInput(COLOR_CENTERS)
+  const detached = evaluateProposedRevisionAlignment({
+    ...input,
+    decision: {
+      ...input.decision!,
+      inspectedContentLocator: 'A different locator',
+      activeBindingChanged: true,
+      canonicalReleaseAuthorized: true,
+    } as unknown as NonNullable<typeof input.decision>,
   })
-  assert.ok(reviewed.length > 0, 'at least one candidate must be fully reviewed for this test to bite')
-
-  for (const entry of reviewed) {
-    const decisions = BATCH_11_DECISIONS.filter((decision) => decision.recordId === entry.recordId)
-    assert.ok(
-      decisions.every((decision) => decision.disposition !== 'reject-or-hold'),
-      `${entry.recordId}: a held decision would confound this test`,
-    )
-    const gate = gateFor(entry.recordId)
-    assert.equal(gate.scopedDecisionCount, 4, `${entry.recordId} is fully reviewed`)
-    assert.equal(gate.ready, false, `${entry.recordId} is still refused`)
-    assert.ok(
-      gate.failures.includes('source-alignment-not-clear'),
-      `${entry.recordId}: approval must not substitute for evidence`,
-    )
-    assert.throws(() => simulateLifecycle([entry.recordId], [gate]), /gate is not ready/)
-  }
+  assert.ok(detached.blockers.includes('review-decision-evidence-mismatch'))
+  assert.ok(detached.blockers.includes('review-decision-authority-overreach'))
+  assert.ok(detached.blockers.includes('audit-target-mismatch'))
 })
 
-// 3
-test('per-invocation denial is never reinterpreted as a persistent allowlist', () => {
-  const disposition = ALIGNMENT_CLOSURE_DISPOSITIONS.find((entry) => entry.recordId === TOOL_ALLOWLISTING)!
-  assert.equal(disposition.verdict, 'partially-supported')
-  assert.equal(disposition.newlyAlignmentClear, false)
-  assert.match(disposition.reason, /does not mandate any specific user interaction model/)
-  assert.match(disposition.reason, /not an allowlist/)
-  // Deeper reading resolved the depth question and left the subject question
-  // where it was: the prior verdict and the new one agree.
-  assert.equal(disposition.priorVerdict, 'partially-supported')
-  assert.notEqual(disposition.inspectionDepth, 'not-inspected')
+test('a self-consistent edited audit digest cannot manufacture a supporting finding', () => {
+  const input = proposedRevisionAlignmentInput(COLOR_CENTERS)
+  const changedAudit = {
+    ...input.audit!,
+    checks: input.audit!.checks.map((check) =>
+      check.dimension === 'claim-scope'
+        ? { ...check, finding: 'An unrelated but substantive statement inserted after review.' }
+        : check,
+    ),
+    auditSha256: '',
+  }
+  changedAudit.auditSha256 = sha(Object.fromEntries(
+    Object.entries(changedAudit).filter(([key]) => key !== 'auditSha256'),
+  ))
 
-  // Whether or not it is in the cohort on any given day, it is not releasable.
-  assert.equal(gateFor(TOOL_ALLOWLISTING).ready, false)
-  assert.equal(isAlignmentClear(TOOL_ALLOWLISTING), false)
+  const result = evaluateProposedRevisionAlignment({ ...input, audit: changedAudit })
+  assert.ok(!result.blockers.includes('audit-digest-mismatch'))
+  assert.ok(result.blockers.includes('audit-findings-mismatch'))
+  assert.equal(result.ready, false)
 })
 
-// 4
-test('substituting a refused candidate does not confer eligibility', () => {
-  // tool-allowlisting was a Batch 11 candidate and is no longer one. Removing a
-  // record that could not clear is legitimate; what must not follow is that its
-  // replacements inherit eligibility from the swap. Each replacement is gated
-  // on its own evidence, exactly as the record it replaced was.
-  const inCohort = BATCH_11_LINEAGE_DECLARATIONS.some((entry) => entry.recordId === TOOL_ALLOWLISTING)
-  if (inCohort) {
-    assert.equal(gateFor(TOOL_ALLOWLISTING).ready, false, 'a refused candidate must stay refused')
-  }
-  for (const entry of BATCH_11_LINEAGE_DECLARATIONS) {
-    assert.equal(
-      gateFor(entry.recordId).ready,
-      isAlignmentClear(entry.recordId) && gateFor(entry.recordId).failures.length === 0,
-      `${entry.recordId}: readiness must follow from its own evidence`,
-    )
-  }
+test('locator, source binding, audit and review mutations each fail closed', () => {
+  const input = proposedRevisionAlignmentInput(COLOR_CENTERS)
+
+  const vagueLocator = evaluateProposedRevisionAlignment({
+    ...input,
+    packet: { ...input.packet!, inspection: { ...input.packet!.inspection!, locator: 'whole document' } },
+  })
+  assert.ok(vagueLocator.blockers.includes('exact-locator-missing'))
+
+  const wrongSource = evaluateProposedRevisionAlignment({
+    ...input,
+    proposedRecord: {
+      ...input.proposedRecord!,
+      sources: [{ ...input.proposedRecord!.sources[0], url: 'https://example.invalid/substituted' }],
+    },
+  })
+  assert.ok(wrongSource.blockers.includes('proposed-source-binding-mismatch'))
+  assert.ok(wrongSource.blockers.includes('audit-target-mismatch'))
+
+  const incompleteAudit = evaluateProposedRevisionAlignment({
+    ...input,
+    audit: { ...input.audit!, checks: input.audit!.checks.slice(1) },
+  })
+  assert.ok(incompleteAudit.blockers.includes('audit-checks-incomplete'))
+  assert.ok(incompleteAudit.blockers.includes('audit-digest-mismatch'))
+
+  const missingScope = evaluateProposedRevisionAlignment({
+    ...input,
+    scopedDecisions: input.scopedDecisions.slice(0, 3),
+  })
+  assert.ok(missingScope.blockers.includes('scoped-review-incomplete'))
+  assert.ok(missingScope.blockers.includes('revision-preflight-failed'))
+
+  const staleScope = evaluateProposedRevisionAlignment({
+    ...input,
+    scopedDecisions: input.scopedDecisions.map((entry, index) =>
+      index === 0 ? { ...entry, targetSha256: `sha256:${'0'.repeat(64)}` } : entry,
+    ),
+  })
+  assert.ok(staleScope.blockers.includes('scoped-review-stale'))
+  assert.ok(staleScope.blockers.includes('scoped-review-digest-mismatch'))
 })
 
-test('a nearby record cannot stand in without its own declaration and digest', () => {
+test('a nearby record cannot inherit a declaration, proposal, audit or clearance', () => {
   const adjacent = 'urn:maha:record:agentic-systems-mcp-tool-deny-by-default'
-  assert.equal(
-    BATCH_11_LINEAGE_DECLARATIONS.find((entry) => entry.recordId === adjacent),
-    undefined,
-    'the adjacent record must carry no Batch 11 declaration',
-  )
+  assert.equal(BATCH_11_LINEAGE_DECLARATIONS.some((entry) => entry.recordId === adjacent), false)
+  const proposed = proposedRevisionAlignmentFor(adjacent)
+  assert.equal(proposed.ready, false)
+  assert.equal(proposed.proposedTargetSha256, '')
+  assert.ok(proposed.blockers.includes('evidence-chain-ambiguous'))
+  assert.ok(proposed.blockers.includes('proposal-record-missing'))
+  assert.ok(proposed.blockers.includes('packet-missing'))
+  assert.ok(proposed.blockers.includes('audit-missing'))
   const gate = gateFor(adjacent)
   assert.equal(gate.ready, false)
-  assert.equal(gate.proposedTargetSha256, '', 'an undeclared record has no revision digest to bind')
-  assert.throws(
-    () => simulateLifecycle([adjacent], [gateFor(BATCH_11_LINEAGE_DECLARATIONS[0].recordId)]),
-    /no gate; refusing to simulate a record that was never gated/,
-  )
+  assert.ok(gate.failures.includes('source-alignment-not-clear'))
 })
 
-test('the run refuses before any mutation while the cohort is blocked', () => {
-  const gates = BATCH_11_LINEAGE_DECLARATIONS.map((entry) => gateFor(entry.recordId))
-  assert.equal(gates.filter((gate) => gate.ready).length, 0)
-  // Order independence must not be asserted over refused records.
-  assert.throws(() => simulateLifecycle(gates.map((gate) => gate.recordId), gates), /gate is not ready/)
+test('duplicate or missing chain members are ambiguous even if one object can be selected', () => {
+  const input = proposedRevisionAlignmentInput(COLOR_CENTERS)
+  const duplicatePacket = evaluateProposedRevisionAlignment({
+    ...input,
+    chainCounts: { ...input.chainCounts, packets: 2 },
+  })
+  assert.ok(duplicatePacket.blockers.includes('evidence-chain-ambiguous'))
+  assert.equal(duplicatePacket.ready, false)
+})
+
+test('the rejected tool-allowlisting proposal remains blocked', () => {
+  const active = alignmentFor(TOOL_ALLOWLISTING)!
+  assert.equal(active.evidence.subjectAligned, 'partially-supported')
+  assert.equal(active.evidence.claimSupported, false)
+  assert.equal(isAlignmentClear(TOOL_ALLOWLISTING), false)
+  const proposed = proposedRevisionAlignmentFor(TOOL_ALLOWLISTING)
+  assert.equal(proposed.ready, false)
+  assert.ok(proposed.blockers.includes('proposal-record-missing'))
+  assert.equal(gateFor(TOOL_ALLOWLISTING).ready, false)
 })
