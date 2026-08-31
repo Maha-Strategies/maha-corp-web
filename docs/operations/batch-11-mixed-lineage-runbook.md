@@ -75,35 +75,43 @@ to a reviewed commit SHA. See
 [`batch-11-remote-rehearsal.md`](batch-11-remote-rehearsal.md) for the phases
 and the remaining operational prerequisite.
 
-### Required secret names
-
-Every name is an existing repository secret. No credential is minted for this
-rehearsal.
+### Required protected secret names
 
 - `SUPABASE_ACCESS_TOKEN` — Supabase Management API; creates and destroys the
   ephemeral branch. Currently bound only to `production-database`.
-- `SUPABASE_PROJECT_REF`
-- `SUPABASE_DB_PASSWORD`
+- `SUPABASE_PROJECT_REF` — must identify a non-Production parent project.
 - `EPISTEMIC_OPERATIONS_TOKEN`
 - `EPISTEMIC_RELEASE_AUTHORITY_TOKEN`
 - `VERCEL_AUTOMATION_BYPASS_SECRET`
+- `VERCEL_TOKEN` — deploys and destroys the exact-commit isolated Preview.
 
-Names only. No value appears in this repository, and a test asserts that.
+The branch's database password and one-hour service-role JWT are derived from
+the newly created branch inside the protected runner. They are never repository
+secrets, command arguments, artifacts or log output. Names only appear here; no
+credential value appears in this repository, and tests assert that boundary.
 
 ### Migration scope
 
-One additive migration,
-`supabase/migrations/20260831120000_batch_11_mixed_lineage_rehearsal.sql`,
-creating only the Batch 11 rehearsal tables and admitting one dedicated adapter.
-No existing table is altered. No row outside the five records is touched.
+Two dedicated ephemeral-branch migrations run in order. The immutable plan
+migration, `supabase/migrations/20260831120000_batch_11_mixed_lineage_rehearsal.sql`,
+creates the witness and observation tables. Its forward execution migration,
+`supabase/migrations/20260831123000_batch_11_mixed_lineage_rehearsal_execution.sql`,
+narrows the witness constraints to two exact public tuples, admits one exact
+five-record adapter, installs dedicated ingestion and release RPCs, and relaxes
+the local supersession foreign key so a new Preview release can name an
+external public predecessor witness. Those changes are intentionally allowed
+only inside the disposable schema-only branch; Production receives neither
+migration from this workflow. No row outside the five targets and two
+predecessor witnesses is written.
 Production is never a target of the rehearsal script — its only Production
 access is an unauthenticated HTTPS GET of the public release registry.
 
 ### Cleanup
 
-The ephemeral branch is destroyed in a `finally` block, and again by a workflow
-step that runs `if: always()`. Because the migration is additive and scoped to
-new tables, cleanup touches no pre-existing object.
+The exact-commit Vercel Preview and ephemeral branch are both destroyed in a
+`finally` block, with an independent workflow backstop that runs `if: always()`.
+Destroying the branch removes the entire isolated schema and its temporary
+constraint changes. Cleanup touches no Production or persistent Preview object.
 
 ## What the rehearsal would prove
 

@@ -3,10 +3,10 @@ import { readFileSync } from 'node:fs'
 import test from 'node:test'
 
 const migration = readFileSync('supabase/migrations/20260827161500_repaired_revision_canary_rpc.sql', 'utf8')
-const store = readFileSync('lib/epistemic-store.ts', 'utf8')
+const ingestionStore = readFileSync('lib/epistemic-ingestion-store.ts', 'utf8')
 
 test('the repaired canary uses its exact two-record persistence RPC', () => {
-  assert.match(store, /batch\.adapterId === 'repaired-revision-canary'[\s\S]*'record_repaired_revision_canary_targets'/)
+  assert.match(ingestionStore, /batch\.adapterId === 'repaired-revision-canary'[\s\S]*'record_repaired_revision_canary_targets'/)
   assert.match(migration, /adapterId',''\) <> 'repaired-revision-canary'/)
   assert.match(migration, /sourceDatasetVersion',''\) <> 'maha-repaired-revision-canary\/1\.0'/)
   assert.match(migration, /recordCount',''\) <> '2'/)

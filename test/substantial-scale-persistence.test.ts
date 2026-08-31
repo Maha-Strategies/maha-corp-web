@@ -6,7 +6,8 @@ const ROOT = new URL('../', import.meta.url)
 
 test('release-scale persistence is exact, draft-only, and separate from review and release', async () => {
   const migration = await readFile(new URL('supabase/migrations/20260830200000_substantial_scale_release_targets.sql', ROOT), 'utf8')
-  const store = await readFile(new URL('lib/epistemic-store.ts', ROOT), 'utf8')
+  const publicStore = await readFile(new URL('lib/epistemic-store.ts', ROOT), 'utf8')
+  const ingestionStore = await readFile(new URL('lib/epistemic-ingestion-store.ts', ROOT), 'utf8')
 
   assert.match(migration, /record_substantial_scale_release_targets/)
   assert.match(migration, /adapterId',''\) <> 'substantial-scale-release'/)
@@ -19,8 +20,9 @@ test('release-scale persistence is exact, draft-only, and separate from review a
   assert.match(migration, /requestedPublicPromotion}',''\) <> 'false'/)
   assert.doesNotMatch(migration, /insert into public\.epistemic_(?:expert_)?reviews/i)
   assert.doesNotMatch(migration, /insert into public\.epistemic_canonical_releases/i)
-  assert.match(store, /batch\.adapterId === 'substantial-scale-release'/)
-  assert.match(store, /record_substantial_scale_release_targets/)
+  assert.match(ingestionStore, /batch\.adapterId === 'substantial-scale-release'/)
+  assert.match(ingestionStore, /record_substantial_scale_release_targets/)
+  assert.doesNotMatch(publicStore, /insertEpistemicIngestionBatch/)
 })
 
 test('adapter constraints preserve prior adapters and add the release-scale adapter only', async () => {

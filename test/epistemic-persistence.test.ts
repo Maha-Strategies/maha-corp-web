@@ -180,7 +180,7 @@ test('aggregate production evidence proves execution without exposing operationa
 })
 
 test('protected APIs, Cyber-light ledger, sitemap, and machine discovery expose the workflow honestly', async () => {
-  const [ingestionRoute, reviewRoute, page, registry, method, sitemap, llms, admin, store] = await Promise.all([
+  const [ingestionRoute, reviewRoute, page, registry, method, sitemap, llms, admin, store, ingestionStore] = await Promise.all([
     'app/api/admin/epistemic-ingestion/route.ts',
     'app/api/admin/epistemic-reviews/route.ts',
     'app/knowledge/epistemic-system/migrations/page.tsx',
@@ -190,6 +190,7 @@ test('protected APIs, Cyber-light ledger, sitemap, and machine discovery expose 
     'lib/llms-manifest.ts',
     'app/admin/epistemic-ingestion/page.tsx',
     'lib/epistemic-store.ts',
+    'lib/epistemic-ingestion-store.ts',
   ].map((path) => readFile(new URL(path, root), 'utf8')))
   for (const route of [ingestionRoute, reviewRoute]) {
     assert.match(route, /authorizeEpistemicOperations/)
@@ -204,7 +205,7 @@ test('protected APIs, Cyber-light ledger, sitemap, and machine discovery expose 
   assert.match(sitemap, /EPISTEMIC_SYSTEM_PATH\}\/migrations/)
   assert.match(llms, /Epistemic machine-readable migration registry/)
   assert.match(admin, /Knowledge ingestion and expert review/)
-  assert.match(store, /record_epistemic_ingestion_batch/)
+  assert.match(ingestionStore, /record_epistemic_ingestion_batch/)
   assert.match(store, /record_epistemic_expert_review/)
   assert.equal(sha256Canonical(EPISTEMIC_MIGRATION_INVENTORY), sha256Canonical(EPISTEMIC_MIGRATION_INVENTORY))
 })

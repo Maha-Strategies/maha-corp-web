@@ -80,6 +80,8 @@ function fakeDriver(overrides: Partial<RehearsalDriver> = {}) {
   const issued = new Map<string, ReleaseResult>()
   let branches = 0
   let live = 0
+  let deployments = 0
+  let liveDeployments = 0
 
   const base: RehearsalDriver = {
     branchCredentialPresent: () => true,
@@ -106,6 +108,22 @@ function fakeDriver(overrides: Partial<RehearsalDriver> = {}) {
       log.push(`migrate:${migrations.length}`)
       return [...migrations]
     },
+    async bindPreview(branch) {
+      deployments += 1
+      liveDeployments += 1
+      log.push(`bind-preview:${branch.branchId}`)
+      return {
+        deploymentId: `deployment_${deployments}`,
+        origin: `https://batch-11-${deployments}.vercel.app`,
+        branchId: branch.branchId,
+        reviewedCommit: 'a'.repeat(40),
+        privateAccessVerified: true,
+      }
+    },
+    async destroyBoundPreview(deploymentId) {
+      liveDeployments -= 1
+      log.push(`destroy-preview:${deploymentId}`)
+    },
     async ingest(key: string) {
       log.push(`ingest:${key}`)
       return { decisionsRecorded: BATCH_11_LINEAGE_DECLARATIONS.length * 4 }
@@ -131,7 +149,13 @@ function fakeDriver(overrides: Partial<RehearsalDriver> = {}) {
     },
   }
 
-  return { driver: { ...base, ...overrides }, log, issued, liveBranches: () => live }
+  return {
+    driver: { ...base, ...overrides },
+    log,
+    issued,
+    liveBranches: () => live,
+    livePreviews: () => liveDeployments,
+  }
 }
 
 function throwsRefusal(fn: () => unknown): RehearsalRefused {
@@ -156,15 +180,43 @@ async function refusalFrom(promise: Promise<unknown>): Promise<RehearsalRefused>
 
 // --- the happy path, so the refusals below mean something -------------------
 
-test('all seven phases execute against a clean driver', async () => {
-  const { driver, liveBranches } = fakeDriver()
+test('all seven phases execute against a branch-bound private Preview', async () => {
+  const { driver, liveBranches, livePreviews } = fakeDriver()
   const outcome = await runRehearsal(driver, GATES)
   assert.equal(outcome.phasesExecuted, 7)
   assert.deepEqual(outcome.phases.map((phase) => phase.phase), PHASE_ORDER)
   assert.equal(outcome.releasesIssued, 5)
   assert.equal(outcome.productionWritesPerformed, 0)
+  assert.equal(outcome.previewDestroyed, true)
   assert.equal(outcome.branchDestroyed, true)
+  assert.equal(livePreviews(), 0, 'no Preview deployment may outlive the run')
   assert.equal(liveBranches(), 0, 'no branch may outlive the run')
+})
+
+test('the Preview must bind to the exact branch and reviewed commit', async () => {
+  for (const override of [
+    { branchId: 'a-different-branch' },
+    { reviewedCommit: 'short' },
+    { privateAccessVerified: false },
+    { origin: 'https://www.mahastrategies.com' },
+  ]) {
+    const { driver, log, liveBranches } = fakeDriver({
+      async bindPreview(branch) {
+        return {
+          deploymentId: 'deployment_bad',
+          origin: 'https://batch-11.vercel.app',
+          branchId: branch.branchId,
+          reviewedCommit: 'a'.repeat(40),
+          privateAccessVerified: true,
+          ...override,
+        }
+      },
+    })
+    const refusal = await refusalFrom(runRehearsal(driver, GATES))
+    assert.equal(refusal.code, 'preview-not-bound')
+    assert.ok(log.includes('destroy:branch_1'), 'the database branch must be destroyed after a binding refusal')
+    assert.equal(liveBranches(), 0)
+  }
 })
 
 // --- phase 1: provisioning --------------------------------------------------
@@ -299,11 +351,12 @@ test('a required migration that was not applied is refused', () => {
   assert.equal(refusal.code, 'migration-missing')
 })
 
-test('the declared migration exists on disk', () => {
-  for (const migration of REQUIRED_MIGRATIONS) {
-    const sql = readFileSync(resolve(ROOT, 'supabase/migrations', migration), 'utf8')
-    assert.ok(sql.includes('batch_11_rehearsal_observations'))
-  }
+test('the declared forward migration pair exists on disk in order', () => {
+  const [planMigration, executionMigration] = REQUIRED_MIGRATIONS.map((migration) =>
+    readFileSync(resolve(ROOT, 'supabase/migrations', migration), 'utf8'))
+  assert.ok(planMigration.includes('batch_11_rehearsal_observations'))
+  assert.ok(executionMigration.includes('record_batch_11_rehearsal_targets'))
+  assert.ok(executionMigration.includes('record_batch_11_rehearsal_canonical_release'))
 })
 
 // --- phase 5: replay safety -------------------------------------------------
@@ -437,14 +490,16 @@ test('the emitted outcome carries no secret-shaped text', async () => {
 
 // --- phase 7: cleanup is unconditional --------------------------------------
 
-test('a failure mid-run still destroys the ephemeral branch', async () => {
-  const { driver, log, liveBranches } = fakeDriver({
-    async applyMigrations() {
-      throw new Error('migration exploded')
+test('a failure after binding still destroys the Preview and ephemeral branch', async () => {
+  const { driver, log, liveBranches, livePreviews } = fakeDriver({
+    async ingest() {
+      throw new Error('ingestion exploded')
     },
   })
-  await assert.rejects(runRehearsal(driver, GATES), /migration exploded/)
+  await assert.rejects(runRehearsal(driver, GATES), /ingestion exploded/)
+  assert.ok(log.some((entry) => entry.startsWith('destroy-preview:')), 'Preview cleanup must run on the failure path')
   assert.ok(log.some((entry) => entry.startsWith('destroy:')), 'cleanup must run on the failure path')
+  assert.equal(livePreviews(), 0)
   assert.equal(liveBranches(), 0)
 })
 
@@ -452,6 +507,7 @@ test('a failure mid-run still destroys the ephemeral branch', async () => {
 
 const WORKFLOW = readFileSync(resolve(ROOT, '.github/workflows/preview-batch-11-remote-rehearsal.yml'), 'utf8')
 const SCRIPT = readFileSync(resolve(ROOT, 'scripts/run-batch-11-remote-rehearsal.ts'), 'utf8')
+const BINDING = readFileSync(resolve(ROOT, 'lib/batch-11-preview-binding.ts'), 'utf8')
 
 test('the rehearsal never exits authorized-but-unimplemented', () => {
   // The mode this change exists to remove. A run that satisfies all three locks
@@ -472,19 +528,18 @@ test('the workflow is reachable only by manual dispatch', () => {
 
 test('the workflow carries no Production write credential', () => {
   const referenced = [...WORKFLOW.matchAll(/secrets\.([A-Z_]+)/g)].map((match) => match[1])
-  // Every name here already exists in this repository. Nothing new is minted.
-  const established = [
+  const previewOnly = [
     'SUPABASE_ACCESS_TOKEN',
     'SUPABASE_PROJECT_REF',
-    'SUPABASE_DB_PASSWORD',
     'EPISTEMIC_OPERATIONS_TOKEN',
     'EPISTEMIC_RELEASE_AUTHORITY_TOKEN',
     'VERCEL_AUTOMATION_BYPASS_SECRET',
+    'VERCEL_TOKEN',
   ]
   for (const name of referenced) {
-    assert.ok(established.includes(name), `${name} is not an established repository secret name`)
+    assert.ok(previewOnly.includes(name), `${name} is not a bounded Preview-rehearsal credential`)
   }
-  for (const forbidden of ['PRODUCTION_RELEASE_HEALTH_TOKEN', 'MAHA_PRODUCTION_READONLY_URL', 'VERCEL_TOKEN']) {
+  for (const forbidden of ['PRODUCTION_RELEASE_HEALTH_TOKEN', 'MAHA_PRODUCTION_READONLY_URL', 'SUPABASE_DB_PASSWORD']) {
     assert.ok(!referenced.includes(forbidden), `${forbidden} must not be available to a Preview rehearsal`)
   }
   assert.ok(!WORKFLOW.includes('environment: Production'))
@@ -497,8 +552,10 @@ test('the workflow refuses the Production Supabase project', () => {
 })
 
 test('cleanup runs even when the rehearsal fails', () => {
-  const cleanup = WORKFLOW.slice(WORKFLOW.indexOf('Destroy any surviving ephemeral branch'))
+  const cleanup = WORKFLOW.slice(WORKFLOW.indexOf('Destroy any surviving Preview deployment and ephemeral branch'))
   assert.match(cleanup, /if: always\(\)/)
+  assert.match(cleanup, /vercel remove/)
+  assert.match(cleanup, /branches/)
 })
 
 test('the rehearsal script never combines psql -c with a psql variable', () => {
@@ -523,11 +580,26 @@ test('psql variables in the script are supplied on a path where they expand', ()
 test('no credential is passed as a command argument', () => {
   // Anything in argv is visible in the process list. Tokens travel in headers
   // and connection details travel in the environment.
-  for (const name of ['SUPABASE_ACCESS_TOKEN', 'SUPABASE_DB_PASSWORD', 'EPISTEMIC_RELEASE_AUTHORITY_TOKEN']) {
-    const inArgv = new RegExp(`execFileSync\\([^)]*${name}`, 's')
-    assert.ok(!inArgv.test(SCRIPT), `${name} must not reach argv`)
+  const deployArgv = BINDING.match(/return \[([\s\S]*?)\]\n\}/)?.[1] ?? ''
+  assert.ok(deployArgv, 'the Vercel deployment argv must be inspectable')
+  for (const valueVariable of ['managementToken', 'branchServiceRole', 'operationsToken', 'authorityToken', 'bypass', 'vercelToken']) {
+    assert.ok(!deployArgv.includes(valueVariable), `${valueVariable} must not reach argv`)
   }
   assert.ok(SCRIPT.includes('PGPASSWORD'), 'the database password must travel in the environment')
+  assert.match(BINDING, /'--env', 'SUPABASE_SERVICE_ROLE_KEY'/)
+  assert.doesNotMatch(deployArgv, /--env', `[^`]*=/, 'Vercel runtime values must be inherited by name, never embedded in argv')
+})
+
+test('the exact reviewed commit is deployed only after a schema-only branch is ready', () => {
+  assert.match(SCRIPT, /with_data: false/)
+  assert.match(SCRIPT, /persistent: false/)
+  assert.match(SCRIPT, /git', \['rev-parse', 'HEAD'\]/)
+  assert.match(SCRIPT, /MAHA_B11_REVIEWED_COMMIT/)
+  assert.doesNotMatch(SCRIPT, /process\.env\.GITHUB_SHA/)
+  assert.match(BINDING, /batch11ReviewedCommit=/)
+  assert.match(SCRIPT, /verifyPrivatePreview/)
+  assert.ok(!WORKFLOW.includes('preview_origin:'), 'an operator-supplied deployment could be bound to the wrong database')
+  assert.ok(WORKFLOW.includes('vercel@58.7.1'), 'the deployment client must be pinned')
 })
 
 test('the only Production URL the script contacts is the public registry', () => {

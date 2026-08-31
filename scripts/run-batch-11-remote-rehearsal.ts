@@ -1,5 +1,5 @@
 import { execFileSync } from 'node:child_process'
-import { mkdirSync, readFileSync, writeFileSync } from 'node:fs'
+import { existsSync, mkdirSync, readFileSync, unlinkSync, writeFileSync } from 'node:fs'
 import { dirname, join } from 'node:path'
 
 import {
@@ -37,6 +37,13 @@ import {
   type ReleaseRequest,
   type ReleaseResult,
 } from '../lib/batch-11-rehearsal-phases.ts'
+import {
+  assertPrivatePreviewResponses,
+  deriveEphemeralServiceRole,
+  parseVercelDeploymentOutput,
+  vercelDeploymentArguments,
+} from '../lib/batch-11-preview-binding.ts'
+import { batch11RevisionReviewInputs } from '../lib/batch-11-revision-canary.ts'
 
 /**
  * Batch 11 mixed-lineage remote Preview rehearsal.
@@ -56,11 +63,12 @@ import {
 const OPERATION = 'batch-11-mixed-lineage-preview-rehearsal'
 const CONFIRMATION = 'rehearse-batch-11-mixed-lineage-in-preview-only'
 const MANAGEMENT_API = 'https://api.supabase.com'
+const VERCEL_SCOPE = 'mayonerajans-projects'
 
 const authorized = process.env.MAHA_B11_REMOTE_AUTHORIZED === '1'
 const operation = process.env.MAHA_B11_OPERATION ?? ''
 const confirmation = process.env.MAHA_B11_CONFIRMATION ?? ''
-const previewOrigin = (process.env.MAHA_B11_PREVIEW_ORIGIN ?? '').replace(/\/$/, '')
+let previewOrigin = ''
 const evidencePath = process.env.MAHA_B11_EVIDENCE_PATH?.trim()
 
 // Inherited from the retired plan-only driver: the declarations must cover
@@ -133,10 +141,22 @@ if (!authorized || operation !== OPERATION || confirmation !== CONFIRMATION) {
 
 const managementToken = process.env[BRANCH_MANAGEMENT_CREDENTIAL]?.trim() ?? ''
 const parentRef = process.env.SUPABASE_PROJECT_REF?.trim() ?? ''
-const dbPassword = process.env.SUPABASE_DB_PASSWORD?.trim() ?? ''
 const operationsToken = process.env.EPISTEMIC_OPERATIONS_TOKEN?.trim() ?? ''
 const authorityToken = process.env.EPISTEMIC_RELEASE_AUTHORITY_TOKEN?.trim() ?? ''
 const bypass = process.env.VERCEL_AUTOMATION_BYPASS_SECRET?.trim() ?? ''
+const vercelToken = process.env.VERCEL_TOKEN?.trim() ?? ''
+const expectedReviewedCommit = process.env.MAHA_B11_REVIEWED_COMMIT?.trim() ?? ''
+const checkedOutCommit = execFileSync('git', ['rev-parse', 'HEAD'], { encoding: 'utf8' }).trim()
+
+const lifecycleState = {
+  previewBranchCreated: false,
+  previewBranchDestroyed: false,
+  previewDeploymentCreated: false,
+  previewDeploymentDestroyed: false,
+  migrationsApplied: 0,
+  releasesIssued: 0,
+  remoteOperationsPerformed: 0,
+}
 
 type Json = Record<string, unknown>
 
@@ -196,6 +216,51 @@ function psql(branchEnv: NodeJS.ProcessEnv, args: readonly string[], input?: str
 }
 
 let branchEnv: NodeJS.ProcessEnv = {}
+let branchApiUrl = ''
+let branchServiceRole = ''
+
+const wait = (milliseconds: number) => new Promise((resolve) => setTimeout(resolve, milliseconds))
+
+async function readyBranchDetail(branchId: string): Promise<Json> {
+  for (let attempt = 0; attempt < 100; attempt += 1) {
+    const detail = object(await management(`/v1/branches/${branchId}`), 'branch detail')
+    if (detail.ref && detail.db_host && detail.db_pass && detail.jwt_secret) return detail
+    await wait(3_000)
+  }
+  throw new Error('The ephemeral branch did not expose its isolated connection details before the five-minute deadline.')
+}
+
+async function verifyPrivatePreview(origin: string): Promise<void> {
+  const unauthenticated = await fetch(origin, { redirect: 'manual', cache: 'no-store' })
+  const authorized = await fetch(origin, {
+    headers: { 'x-vercel-protection-bypass': bypass },
+    redirect: 'follow',
+    cache: 'no-store',
+  })
+  assertPrivatePreviewResponses({
+    unauthenticatedStatus: unauthenticated.status,
+    unauthenticatedLocation: unauthenticated.headers.get('location'),
+    authorizedStatus: authorized.status,
+  })
+}
+
+function deploymentMarkerPath(): string | null {
+  return evidencePath ? join(dirname(evidencePath), 'preview-deployment.json') : null
+}
+
+function removePreviewDeployment(deploymentId: string): void {
+  try {
+    execFileSync('vercel', ['remove', deploymentId, '--yes', '--scope', VERCEL_SCOPE], {
+      encoding: 'utf8',
+      env: { ...process.env, VERCEL_TOKEN: vercelToken },
+      stdio: ['ignore', 'pipe', 'pipe'],
+    })
+  } catch {
+    throw new Error('The branch-bound Vercel Preview could not be destroyed.')
+  } finally {
+    previewOrigin = ''
+  }
+}
 
 const driver: RehearsalDriver = {
   branchCredentialPresent: () => managementToken.length > 0,
@@ -206,20 +271,31 @@ const driver: RehearsalDriver = {
       await management(`/v1/projects/${parentRef}/branches`, {
         method: 'POST',
         // No parent data is copied: the branch starts from schema alone.
-        body: JSON.stringify({ branch_name: `${name}-${process.env.GITHUB_RUN_ID ?? 'local'}`, region: 'us-east-1' }),
+        body: JSON.stringify({
+          branch_name: `${name}-${process.env.GITHUB_RUN_ID ?? 'local'}`,
+          region: 'us-east-1',
+          persistent: false,
+          with_data: false,
+        }),
       }),
       'created branch',
     )
     const branchId = String(created.id ?? created.branch_id ?? '')
     if (!branchId) throw new Error('The Management API did not return a branch id.')
-    const detail = object(await management(`/v1/branches/${branchId}`), 'branch detail')
+    const detail = await readyBranchDetail(branchId)
+    const branchRef = String(detail.ref)
+    const jwtSecret = String(detail.jwt_secret)
     branchEnv = {
       PGHOST: String(detail.db_host ?? ''),
       PGPORT: String(detail.db_port ?? '5432'),
       PGUSER: String(detail.db_user ?? 'postgres'),
-      PGPASSWORD: String(detail.db_pass ?? dbPassword),
+      PGPASSWORD: String(detail.db_pass),
       PGDATABASE: 'postgres',
     }
+    branchApiUrl = `https://${branchRef}.supabase.co`
+    branchServiceRole = deriveEphemeralServiceRole(jwtSecret, Math.floor(Date.now() / 1000))
+    lifecycleState.previewBranchCreated = true
+    lifecycleState.remoteOperationsPerformed += 1
     return {
       branchId,
       parentProjectRef: String(detail.parent_project_ref ?? parentRef),
@@ -229,7 +305,11 @@ const driver: RehearsalDriver = {
 
   async destroyEphemeralBranch(branchId: string): Promise<void> {
     await management(`/v1/branches/${branchId}`, { method: 'DELETE' })
+    lifecycleState.previewBranchDestroyed = true
+    lifecycleState.remoteOperationsPerformed += 1
     branchEnv = {}
+    branchApiUrl = ''
+    branchServiceRole = ''
   },
 
   productionAccess(): ProductionAccessDescriptor {
@@ -267,6 +347,7 @@ const driver: RehearsalDriver = {
         ['-v', `B11_RECORD=${row.recordId}`, '-v', `B11_RELEASE=${row.releaseId}`, '-v', `B11_DIGEST=${row.targetSha256}`],
         sql,
       )
+      lifecycleState.remoteOperationsPerformed += 1
     }
   },
 
@@ -276,8 +357,73 @@ const driver: RehearsalDriver = {
       const path = join('supabase/migrations', migration)
       psql(branchEnv, ['--single-transaction', '-f', path])
       applied.push(migration)
+      lifecycleState.migrationsApplied += 1
+      lifecycleState.remoteOperationsPerformed += 1
     }
     return applied
+  },
+
+  async bindPreview(branch: EphemeralBranch) {
+    if (!vercelToken || !bypass) throw new Error('The protected Vercel deployment credentials are not available.')
+    if (!branchApiUrl || !branchServiceRole) throw new Error('The ephemeral branch runtime binding is unavailable.')
+    const reviewedCommit = checkedOutCommit
+    if (!/^[0-9a-f]{40}$/.test(reviewedCommit) || reviewedCommit !== expectedReviewedCommit) {
+      throw new Error('The checked-out commit does not equal the exact reviewed commit.')
+    }
+
+    const deploymentEnvironment = {
+      ...process.env,
+      NEXT_PUBLIC_SUPABASE_URL: branchApiUrl,
+      SUPABASE_SERVICE_ROLE_KEY: branchServiceRole,
+      EPISTEMIC_OPERATIONS_TOKEN: operationsToken,
+      EPISTEMIC_RELEASE_AUTHORITY_TOKEN: authorityToken,
+      VERCEL_AUTOMATION_BYPASS_SECRET: bypass,
+      EPISTEMIC_EXTERNAL_LINEAGE_REHEARSAL: 'batch-11-preview',
+      VERCEL_TOKEN: vercelToken,
+    }
+    let output = ''
+    try {
+      output = execFileSync('vercel', [...vercelDeploymentArguments(reviewedCommit)], {
+        encoding: 'utf8',
+        env: deploymentEnvironment,
+        stdio: ['ignore', 'pipe', 'pipe'],
+      })
+    } catch {
+      throw new Error('The exact-commit Vercel Preview deployment failed.')
+    }
+    const deployment = parseVercelDeploymentOutput(output)
+    lifecycleState.previewDeploymentCreated = true
+    lifecycleState.remoteOperationsPerformed += 1
+    previewOrigin = deployment.origin
+    const markerPath = deploymentMarkerPath()
+    if (markerPath) {
+      mkdirSync(dirname(markerPath), { recursive: true })
+      writeFileSync(markerPath, `${JSON.stringify({ deploymentId: deployment.id, origin: deployment.origin, reviewedCommit })}\n`)
+    }
+    try {
+      await verifyPrivatePreview(previewOrigin)
+    } catch (error) {
+      removePreviewDeployment(deployment.id)
+      lifecycleState.previewDeploymentDestroyed = true
+      lifecycleState.remoteOperationsPerformed += 1
+      if (markerPath && existsSync(markerPath)) unlinkSync(markerPath)
+      throw error
+    }
+    return {
+      deploymentId: deployment.id,
+      origin: deployment.origin,
+      branchId: branch.branchId,
+      reviewedCommit,
+      privateAccessVerified: true,
+    }
+  },
+
+  async destroyBoundPreview(deploymentId: string) {
+    removePreviewDeployment(deploymentId)
+    lifecycleState.previewDeploymentDestroyed = true
+    lifecycleState.remoteOperationsPerformed += 1
+    const markerPath = deploymentMarkerPath()
+    if (markerPath && existsSync(markerPath)) unlinkSync(markerPath)
   },
 
   async ingest(idempotency: string): Promise<{ decisionsRecorded: number }> {
@@ -285,28 +431,41 @@ const driver: RehearsalDriver = {
       method: 'POST',
       body: JSON.stringify({ adapterId: 'batch-11-mixed-lineage-rehearsal', idempotencyKey: idempotency }),
     })
+    lifecycleState.remoteOperationsPerformed += 1
     let decisionsRecorded = 0
-    for (const declaration of BATCH_11_LINEAGE_DECLARATIONS) {
-      const gate = gates.find((entry) => entry.recordId === declaration.recordId)
-      if (!gate) throw new Error(`${declaration.recordId}: no gate.`)
-      for (const scope of ['source-alignment', 'revision-integrity', 'projection-safety', 'lineage-continuity']) {
-        await preview('/api/admin/epistemic-reviews', operationsToken, {
-          method: 'POST',
-          body: JSON.stringify({ recordId: declaration.recordId, scope, reviewTargetSha256: gate.proposedTargetSha256, decision: 'approve' }),
-        })
-        decisionsRecorded += 1
-      }
+    for (const decision of batch11RevisionReviewInputs()) {
+      await preview('/api/admin/epistemic-reviews', operationsToken, {
+        method: 'POST',
+        body: JSON.stringify(decision),
+      })
+      decisionsRecorded += 1
+      lifecycleState.remoteOperationsPerformed += 1
     }
     return { decisionsRecorded }
   },
 
   async issueRelease(request: ReleaseRequest): Promise<ReleaseResult> {
+    const common = {
+      recordId: request.recordId,
+      targetSha256: request.targetSha256,
+      canonicalVersion: request.releaseKind === 'superseding' ? 'batch-11-preview-1.1.0' : 'batch-11-preview-1.0.0',
+      supersedesReleaseId: request.supersedesReleaseId,
+      authority: {
+        authorityId: 'authority_batch-11-preview',
+        displayName: 'Maha Batch 11 Preview Release Authority',
+        role: 'Internal Preview-only canonical release authority',
+        authorizationBasis: 'The owner authorized this exact five-record isolated Preview rehearsal after inspected-source alignment, exact-revision internal review, lineage reconciliation and projection-safety checks passed. Production release is not authorized.',
+        publicAttribution: false,
+      },
+      publicChangeSummary: request.releaseKind === 'superseding'
+        ? 'Preview-only superseding release binds the inspected Batch 11 source replacement and exact revised record.'
+        : 'Preview-only initial release binds the inspected Batch 11 source replacement and exact revised record.',
+      rationale: 'The exact revision has an inspected subject-matched source, exact locator, eight-dimension audit and four scoped internal-editorial approvals. External endorsement, independent reproduction, scientific validation and Production publication are not claimed.',
+    }
     await preview('/api/admin/epistemic-releases', authorityToken, {
       method: 'POST',
       body: JSON.stringify({
-        recordId: request.recordId,
-        targetSha256: request.targetSha256,
-        supersedesReleaseId: request.supersedesReleaseId,
+        ...common,
         operation: 'preview',
         idempotencyKey: idempotencyKey('preview', request.targetSha256),
       }),
@@ -314,39 +473,48 @@ const driver: RehearsalDriver = {
     const response = await preview('/api/admin/epistemic-releases', authorityToken, {
       method: 'POST',
       body: JSON.stringify({
-        recordId: request.recordId,
-        targetSha256: request.targetSha256,
-        supersedesReleaseId: request.supersedesReleaseId,
+        ...common,
         operation: 'publish',
         idempotencyKey: request.idempotencyKey,
       }),
     })
     const body = object(response.body, `${request.recordId} published release`)
     const release = object(body.release, `${request.recordId} release`)
+    const replayed = body.replayed === true || body.created === false
+    if (!replayed) lifecycleState.releasesIssued += 1
+    lifecycleState.remoteOperationsPerformed += 2
     return {
       recordId: request.recordId,
       releaseId: String(release.releaseId),
       targetSha256: String(release.targetSha256),
-      replayed: body.replayed === true || body.created === false,
+      replayed,
     }
   },
 
   async observeTransitions(): Promise<ObservedTransition[]> {
     const registry = object((await preview('/knowledge/epistemic-system/releases/registry.json', null)).body, 'preview registry')
     const releases = array(registry.releases, 'preview registry releases')
+    const witnessRows = psql(
+      branchEnv,
+      [],
+      "select record_id || E'\\t' || prior_release_id || E'\\t' || prior_target_sha256 from public.batch_11_rehearsal_imported_lineage order by record_id;",
+    ).trim().split('\n').filter(Boolean).map((line) => {
+      const [recordId, releaseId, targetSha256] = line.split('\t')
+      return { recordId, releaseId, targetSha256 }
+    })
     return BATCH_11_LINEAGE_DECLARATIONS.map((declaration) => {
       const active = releases.filter((row) => row.recordId === declaration.recordId && row.status === 'active')
       if (active.length !== 1) throw new Error(`${declaration.recordId}: expected one active release, found ${active.length}.`)
-      const prior = declaration.declaredPriorReleaseId
-        ? releases.find((row) => row.releaseId === declaration.declaredPriorReleaseId)
-        : undefined
+      const prior = witnessRows.find((row) => row.recordId === declaration.recordId)
       return {
         recordId: declaration.recordId,
         releaseKind: declaration.declaredReleaseKind,
         activeTargetSha256: String(active[0].targetSha256),
         supersededReleaseId: active[0].supersedesReleaseId ? String(active[0].supersedesReleaseId) : null,
-        priorStillPresent: declaration.declaredPriorReleaseId === null ? true : prior !== undefined,
-        priorStatus: prior ? String(prior.status) : null,
+        priorStillPresent: declaration.declaredPriorReleaseId === null
+          ? true
+          : prior?.releaseId === declaration.declaredPriorReleaseId && prior.targetSha256 === declaration.declaredPriorTargetSha256,
+        priorStatus: prior && active[0].supersedesReleaseId === prior.releaseId ? 'superseded' : null,
       }
     })
   },
@@ -363,6 +531,15 @@ const driver: RehearsalDriver = {
 }
 
 try {
+  if (Buffer.byteLength(operationsToken) < 32 || Buffer.byteLength(authorityToken) < 32 || operationsToken === authorityToken) {
+    throw new RehearsalRefused('preview-credential-invalid', 'provision-ephemeral-branch', 'The isolated Preview operations and release-authority credentials are missing, too short, or not distinct.')
+  }
+  if (!bypass || !vercelToken) {
+    throw new RehearsalRefused('preview-credential-invalid', 'provision-ephemeral-branch', 'The isolated Preview deployment credentials are unavailable.')
+  }
+  if (!/^[0-9a-f]{40}$/.test(expectedReviewedCommit) || checkedOutCommit !== expectedReviewedCommit) {
+    throw new RehearsalRefused('reviewed-commit-mismatch', 'provision-ephemeral-branch', 'The checked-out commit does not equal the exact reviewed commit.')
+  }
   if (parentRef === PRODUCTION_SUPABASE_PROJECT_REF) {
     throw new RehearsalRefused('production-project-targeted', 'provision-ephemeral-branch', 'SUPABASE_PROJECT_REF is the Production project.')
   }
@@ -373,6 +550,8 @@ try {
     remoteOperationsPerformed: outcome.phases.reduce((total, phase) => total + phase.mutations, 0),
     previewBranchCreated: true,
     previewBranchDestroyed: outcome.branchDestroyed,
+    previewDeploymentCreated: true,
+    previewDeploymentDestroyed: outcome.previewDestroyed,
     migrationsApplied: REQUIRED_MIGRATIONS.length,
     releasesIssued: outcome.releasesIssued,
     replayedReleases: outcome.replayedReleases,
@@ -391,9 +570,13 @@ try {
     reason: refusal ? refusal.message : (error as Error).message,
     refusalCode: refusal?.code ?? 'unhandled-error',
     refusedAtPhase: refusal?.phase ?? null,
-    remoteOperationsPerformed: 0,
-    previewBranchCreated: false,
-    migrationsApplied: 0,
+    remoteOperationsPerformed: lifecycleState.remoteOperationsPerformed,
+    previewBranchCreated: lifecycleState.previewBranchCreated,
+    previewBranchDestroyed: lifecycleState.previewBranchDestroyed,
+    previewDeploymentCreated: lifecycleState.previewDeploymentCreated,
+    previewDeploymentDestroyed: lifecycleState.previewDeploymentDestroyed,
+    migrationsApplied: lifecycleState.migrationsApplied,
+    releasesIssued: lifecycleState.releasesIssued,
     productionWritesPerformed: 0,
     fingerprint,
   })

@@ -78,6 +78,7 @@ export const LEGACY_ADAPTER_IDS = [
   'substantial-scale-release',
   'repaired-revision-canary',
   'source-override-revision-canary',
+  'batch-11-mixed-lineage-rehearsal',
   MCP_PRIVATE_CANARY_ADAPTER_ID,
 ] as const
 
@@ -405,7 +406,7 @@ function neuromorphicRecord(concept: (typeof NEUROMORPHIC_CONCEPTS)[number]): Ep
   }
 }
 
-function definition(input: {
+export function definition(input: {
   id: LegacyAdapterId
   name: string
   description: string
