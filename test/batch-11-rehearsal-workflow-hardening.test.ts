@@ -58,6 +58,7 @@ test('every job requires the protected rehearsal environment', () => {
 test('the run is pinned to an exact reviewed commit and refuses any other', () => {
   assert.match(WORKFLOW, /reviewed_commit:/)
   assert.match(WORKFLOW, /ref:\s*\$\{\{\s*inputs\.reviewed_commit\s*\}\}/)
+  assert.match(WORKFLOW, /fetch-depth:\s*2/, 'the reviewed commit and its first parent must both be available')
   const step = WORKFLOW.slice(WORKFLOW.indexOf('Refuse a commit that is not the reviewed one'))
   assert.match(step, /git rev-parse HEAD/)
   assert.match(step, /\[ "\$actual" = "\$REVIEWED" \] \|\|/, 'a mismatch must exit non-zero')
@@ -87,6 +88,9 @@ test('all six Preview-only secrets are required before anything is checked out',
     assert.ok(boundary.includes(name), `${name} must be checked before checkout`)
   }
   assert.match(boundary, /exit 1/)
+  assert.match(boundary, /export LC_ALL=C/, 'credential character checks must use the ASCII locale')
+  assert.match(boundary, /\[\[ "\$\{!name\}" =~ \^\[\[:graph:\]\]\+\$ \]\]/,
+    'every secret must be printable ASCII with no whitespace')
   // And nothing remote can run first: the boundary is the first step.
   const firstStep = WORKFLOW.slice(WORKFLOW.indexOf('    steps:'), WORKFLOW.indexOf('- uses: actions/checkout'))
   assert.match(firstStep, /Enforce the Preview boundary/)

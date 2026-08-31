@@ -288,7 +288,9 @@ test('Codex-owned Evidence Preflight paths are untouched', () => {
     'lib/llms-manifest.ts', 'lib/openapi.ts', 'test/openapi-docs.test.ts',
     'test/public-visual-system-completeness.test.ts',
   ]
-  const changed = execFileSync('git', ['diff', '--name-only', 'origin/main...HEAD'], { cwd: ROOT, encoding: 'utf8' })
+  const reviewedCommit = process.env.MAHA_B11_REVIEWED_COMMIT?.trim() || 'HEAD'
+  assert.match(reviewedCommit, /^(?:HEAD|[0-9a-f]{40})$/, 'the reviewed commit must be HEAD or an exact SHA')
+  const changed = execFileSync('git', ['diff', '--name-only', `${reviewedCommit}^`, reviewedCommit], { cwd: ROOT, encoding: 'utf8' })
     .trim().split('\n').filter(Boolean)
   for (const path of owned) {
     assert.equal(changed.some((file) => file === path || file.startsWith(`${path}/`)), false, `${path} belongs to another workstream`)
