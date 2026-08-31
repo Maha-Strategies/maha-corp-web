@@ -1,6 +1,7 @@
 'use client'
 
 import { FormEvent, useState } from 'react'
+import { postPublicForm } from '@/lib/public-form-client'
 
 const initial = { name: '', email: '', organization: '', offerId: 'rapid-intelligence-brief', decision: '', question: '', deadline: '', website: '' }
 
@@ -12,12 +13,10 @@ export default function InboundPage() {
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault(); setSending(true); setMessage(null)
     try {
-      const response = await fetch('/api/inbound-submissions', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({
+      const body = await postPublicForm<{ nextStep?: string }>('/forms/contact', {
         idempotencyKey: crypto.randomUUID(), offerId: form.offerId, requester: { name: form.name, email: form.email, organization: form.organization || undefined },
         decision: form.decision, question: form.question, deadline: form.deadline || undefined, website: form.website, requesterAuthorized: true,
-      }) })
-      const body = await response.json() as { nextStep?: string; error?: { message?: string } }
-      if (!response.ok) throw new Error(body.error?.message ?? 'Submission could not be sent.')
+      })
       setMessage(body.nextStep ?? 'Your submission is queued for review.'); setForm(initial)
     } catch (error) { setMessage(error instanceof Error ? error.message : 'Submission could not be sent.') }
     finally { setSending(false) }

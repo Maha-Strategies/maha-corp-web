@@ -11,7 +11,7 @@
       "type": "string",
       "minLength": 8,
       "maxLength": 120,
-      "description": "Caller-generated request identifier. Repeated values receive best-effort deduplication for 24 hours on one serving instance."
+      "description": "Caller-generated idempotency identifier. Repeating the same value with the same credential returns the durable existing inquiry rather than creating another."
     },
     "offerId": {
       "type": "string",

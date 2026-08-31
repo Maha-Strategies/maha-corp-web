@@ -2,6 +2,7 @@
 
 import Script from 'next/script'
 import { FormEvent, useEffect, useMemo, useState } from 'react'
+import { postPublicForm } from '@/lib/public-form-client'
 
 declare global { interface Window { mahaNavigatorTurnstileComplete?: (token: string) => void; mahaNavigatorTurnstileExpired?: () => void } }
 
@@ -55,12 +56,8 @@ export default function NavigatorAssessment() {
   async function submit(event: FormEvent) {
     event.preventDefault(); setLoading(true); setError('')
     try {
-      const response = await fetch('/api/navigator/assessments', {
-        method: 'POST', headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ idempotencyKey: `navigator:${crypto.randomUUID()}`, requester: { name: form.name, email: form.email, organization: form.organization, role: form.role }, stage: form.stage, protocols: form.protocols, priority: form.priority, primaryGoal: form.primaryGoal, controls: form.controls, consentToAssessment: form.consentToAssessment, consentToFollowUp: form.consentToFollowUp, website: form.website || undefined, turnstileToken: turnstileToken || undefined }),
-      })
-      const body = await response.json() as { assessmentId?: string; assessment?: Assessment; error?: { message?: string } }
-      if (!response.ok || !body.assessmentId || !body.assessment) throw new Error(body.error?.message ?? 'The assessment could not be created.')
+      const body = await postPublicForm<{ assessmentId?: string; assessment?: Assessment }>('/api/navigator/assessments', { idempotencyKey: `navigator:${crypto.randomUUID()}`, requester: { name: form.name, email: form.email, organization: form.organization, role: form.role }, stage: form.stage, protocols: form.protocols, priority: form.priority, primaryGoal: form.primaryGoal, controls: form.controls, consentToAssessment: form.consentToAssessment, consentToFollowUp: form.consentToFollowUp, website: form.website || undefined, turnstileToken: turnstileToken || undefined })
+      if (!body.assessmentId || !body.assessment) throw new Error('The assessment could not be created.')
       setResult({ assessmentId: body.assessmentId, assessment: body.assessment }); setStep(4)
     } catch (caught) { setError(caught instanceof Error ? caught.message : 'The assessment could not be created.') }
     finally { setLoading(false) }
