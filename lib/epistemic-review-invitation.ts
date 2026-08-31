@@ -235,6 +235,17 @@ export function privateEpistemicReviewInvitationDto(
   invitation: EpistemicReviewInvitation,
   event: EpistemicReviewInvitationEvent | null | undefined,
   currentTargetSha256?: string | null,
+  /**
+   * The instant the status is evaluated against.
+   *
+   * Every other entry point in this module already takes an injectable `now`.
+   * This one used to read the wall clock inline, which made the served status
+   * correct but the function impossible to evaluate at a fixed instant - a
+   * caller could not ask "what was this invitation's status on that date?", and
+   * a test could only avoid the question by calling past the DTO. The default
+   * keeps request-time behaviour identical.
+   */
+  now = new Date(),
 ) {
   return {
     invitationId: invitation.invitationId,
@@ -247,7 +258,7 @@ export function privateEpistemicReviewInvitationDto(
     note: invitation.note,
     expiresAt: invitation.expiresAt,
     createdAt: invitation.createdAt,
-    status: epistemicReviewInvitationStatus(invitation, event, new Date(), currentTargetSha256),
+    status: epistemicReviewInvitationStatus(invitation, event, now, currentTargetSha256),
     terminalEvent: event ? {
       action: event.action,
       reviewId: event.reviewId,

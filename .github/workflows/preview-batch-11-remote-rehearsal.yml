@@ -136,6 +136,10 @@ jobs:
       # Runs even when the rehearsal fails. The script destroys both resources
       # in its finally block; this is the backstop for a runner interrupted
       # after the isolated deployment or branch was created.
+      #
+      # Cleanup that cannot prove it converged must fail the run. A listing that
+      # errors leaves the state unknown, and reporting unknown as clean is how a
+      # surviving branch outlives the rehearsal that created it.
       - name: Destroy any surviving Preview deployment and ephemeral branch
         if: always()
         run: |
@@ -144,11 +148,25 @@ jobs:
           if [ -f "$marker" ]; then
             deployment_id="$(jq -r '.deploymentId // empty' "$marker")"
             if [ -n "$deployment_id" ]; then
-              vercel remove "$deployment_id" --yes --scope mayonerajans-projects >/dev/null
-              echo 'Destroyed the surviving branch-bound Vercel Preview.'
+              # Idempotent: an already-removed deployment is a converged state,
+              # not a failure. Anything else fails the run.
+              if vercel remove "$deployment_id" --yes --scope mayonerajans-projects >/dev/null 2>/tmp/vercel-remove.err; then
+                echo 'Destroyed the surviving branch-bound Vercel Preview.'
+              elif grep -qiE 'not be found|does not exist|not found|no such deployment' /tmp/vercel-remove.err; then
+                echo 'Preview deployment was already absent; cleanup is idempotent.'
+              else
+                echo "::error::Failed to destroy Preview deployment $deployment_id."
+                sed -E 's/[A-Za-z0-9_-]{24,}/REDACTED/g' /tmp/vercel-remove.err >&2
+                exit 1
+              fi
             fi
           fi
-          [ -n "${SUPABASE_ACCESS_TOKEN:-}" ] || { echo 'No branch-management credential; nothing could have been created.'; exit 0; }
+          if [ -z "${SUPABASE_ACCESS_TOKEN:-}" ]; then
+            # The boundary step refuses before checkout when this is unbound, so
+            # no branch can exist to clean up.
+            echo 'No branch-management credential; nothing could have been created.'
+            exit 0
+          fi
           # The token is read from the environment inside node, never passed as
           # a command argument where it would appear in the process list.
           node --input-type=module -e '
@@ -156,13 +174,25 @@ jobs:
             const ref = process.env.SUPABASE_PROJECT_REF
             const marker = `batch-11-mixed-lineage-rehearsal-${process.env.GITHUB_RUN_ID}`
             const headers = { authorization: `Bearer ${token}` }
-            const listed = await fetch(`https://api.supabase.com/v1/projects/${ref}/branches`, { headers })
-            if (!listed.ok) { console.log(`Branch listing returned ${listed.status}; nothing to clean up.`); process.exit(0) }
-            const branches = await listed.json()
-            const mine = (Array.isArray(branches) ? branches : []).filter((b) => String(b.name ?? "").includes(marker))
-            for (const branch of mine) {
-              const gone = await fetch(`https://api.supabase.com/v1/branches/${branch.id}`, { method: "DELETE", headers })
-              console.log(`Destroyed surviving branch ${branch.id}: ${gone.status}`)
+            const mine = async () => {
+              const listed = await fetch(`https://api.supabase.com/v1/projects/${ref}/branches`, { headers })
+              if (!listed.ok) {
+                throw new Error(`Branch listing returned ${listed.status}; cleanup cannot prove convergence.`)
+              }
+              const branches = await listed.json()
+              return (Array.isArray(branches) ? branches : []).filter((b) => String(b.name ?? "").includes(marker))
             }
-            console.log(`Cleanup complete. ${mine.length} surviving branch(es) destroyed.`)
+            const found = await mine()
+            for (const branch of found) {
+              const gone = await fetch(`https://api.supabase.com/v1/branches/${branch.id}`, { method: "DELETE", headers })
+              // 404 means a concurrent or prior pass already removed it.
+              if (!gone.ok && gone.status !== 404) {
+                throw new Error(`Failed to destroy branch ${branch.id}: ${gone.status}`)
+              }
+            }
+            const survivors = await mine()
+            if (survivors.length > 0) {
+              throw new Error(`${survivors.length} ephemeral branch(es) survived cleanup for run ${process.env.GITHUB_RUN_ID}.`)
+            }
+            console.log(`Cleanup converged. ${found.length} branch(es) destroyed, 0 surviving.`)
           '
