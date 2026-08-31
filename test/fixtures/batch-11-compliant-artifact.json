@@ -2,6 +2,7 @@
   "syntheticFixture": true,
   "note": "Synthetic compliant run. Not evidence of any rehearsal; no protected run has occurred.",
   "reviewedCommit": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+  "workflowRunId": "77",
   "runMarker": "batch-11-mixed-lineage-rehearsal-77",
   "providerResults": [
     {
@@ -46,9 +47,10 @@
     }
   ],
   "artifact": {
-    "artifactSchema": "maha-batch-11-rehearsal-evidence/2.0",
+    "artifactSchema": "maha-batch-11-rehearsal-evidence/3.0",
     "reviewedCommit": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
     "workflowRunId": "77",
+    "runMarker": "batch-11-mixed-lineage-rehearsal-77",
     "planDigest": "sha256:bfac696440d515ce7309c8d751b86301f319fa0f617aeaadcefff69382dcdf71",
     "cohortRecordIds": [
       "urn:maha:record:advanced-materials-color-centers-in-diamond",
@@ -125,35 +127,35 @@
       {
         "recordId": "urn:maha:record:advanced-materials-color-centers-in-diamond",
         "releaseId": "epirelease_synthetic00",
-        "targetSha256": "sha256:0000000000000000000000000000000000000000000000000000000000000000",
+        "targetSha256": "sha256:96630a6fbe09aa7d0d239f37add3d6691d996445140812c876d676c67d69139f",
         "releaseKind": "initial",
         "supersedesReleaseId": null
       },
       {
         "recordId": "urn:maha:record:fusion-plasma-systems-tokamak-plasma-equilibrium",
         "releaseId": "epirelease_synthetic01",
-        "targetSha256": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+        "targetSha256": "sha256:26d193fe87af63e481f46db94638658c5be0df199ae55bb642f37edf45100bd7",
         "releaseKind": "superseding",
         "supersedesReleaseId": "epirelease_8e947374097d4695815dbf9ab653177b"
       },
       {
         "recordId": "urn:maha:record:longevity-metabolism-mitophagy-flux",
         "releaseId": "epirelease_synthetic02",
-        "targetSha256": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+        "targetSha256": "sha256:7bbef3b54fb9ac405c78bb7d819f75e34f949ab33b4c9ac764dd844e5f641ab2",
         "releaseKind": "initial",
         "supersedesReleaseId": null
       },
       {
         "recordId": "urn:maha:record:mechanistic-interpretability-activation-patching",
         "releaseId": "epirelease_synthetic03",
-        "targetSha256": "sha256:3333333333333333333333333333333333333333333333333333333333333333",
+        "targetSha256": "sha256:ef3182227b26a0902ad4848505fe5eb59dc310cfa30c18524f754b16dd4fd86c",
         "releaseKind": "initial",
         "supersedesReleaseId": null
       },
       {
         "recordId": "urn:maha:record:mechanistic-interpretability-representation-probing-boundary",
         "releaseId": "epirelease_synthetic04",
-        "targetSha256": "sha256:4444444444444444444444444444444444444444444444444444444444444444",
+        "targetSha256": "sha256:8485532ea6985bb77144951944066525e7f7d957b01ebfe55547627c07c1fcf8",
         "releaseKind": "superseding",
         "supersedesReleaseId": "epirelease_93c92eb7a317465b83fabf8d3e6962da"
       }
@@ -170,7 +172,7 @@
       "deploymentDestroyed": true,
       "markerRemoved": true
     },
-    "artifactDigest": "sha256:ff7559d39d5801202e99da9011073aed060ca94cd7b3eb5a34ba526af74571ab",
+    "artifactDigest": "sha256:83b5ed6de1a44fdf8da6540fdf2a893cbcec7f01b07a47b9b21439062ecfb310",
     "mode": "executed",
     "reason": "All 7 phases executed against an ephemeral Preview branch.",
     "remoteOperationsPerformed": 14,
@@ -243,8 +245,9 @@
     }
   },
   "teardown": {
-    "reviewedCommit": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+    "schemaVersion": "maha-batch-11-teardown-observations/1.0",
     "runMarker": "batch-11-mixed-lineage-rehearsal-77",
+    "reviewedCommit": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
     "observations": [
       {
         "resourceKind": "supabase-branch",
@@ -287,6 +290,8 @@
         ]
       }
     ],
-    "observationsDigest": "sha256:4b1da027b2a75a516f61b62f4fe5849739162bbc5cb07d4e271e273e841cd7d6"
+    "allConfirmedAbsent": true,
+    "observationsDigest": "sha256:4b1da027b2a75a516f61b62f4fe5849739162bbc5cb07d4e271e273e841cd7d6",
+    "workflowRunId": "77"
   }
 }

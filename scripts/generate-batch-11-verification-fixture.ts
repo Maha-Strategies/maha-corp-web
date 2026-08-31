@@ -1,6 +1,6 @@
 import { mkdirSync, writeFileSync } from 'node:fs'
 
-import { buildBoundEvidence } from '../lib/batch-11-evidence-binding.ts'
+import { buildBoundEvidence, contractReleaseIdentities, runMarkerFor } from '../lib/batch-11-evidence-binding.ts'
 import { repositoryContract } from '../lib/batch-11-evidence-verifier.ts'
 import { BATCH_11_LINEAGE_DECLARATIONS } from '../lib/batch-11-mixed-lineage-release.ts'
 import { PHASE_ORDER } from '../lib/batch-11-rehearsal-phases.ts'
@@ -24,12 +24,13 @@ import {
 
 const contract = repositoryContract()
 const REVIEWED_COMMIT = 'b'.repeat(40)
-const RUN_MARKER = 'batch-11-mixed-lineage-rehearsal-77'
+const WORKFLOW_RUN_ID = '77'
+const RUN_MARKER = runMarkerFor(WORKFLOW_RUN_ID)
 
 const bound = buildBoundEvidence({
   expectedReviewedCommit: REVIEWED_COMMIT,
   checkedOutCommit: REVIEWED_COMMIT,
-  workflowRunId: '77',
+  workflowRunId: WORKFLOW_RUN_ID,
   planDigest: contract.planDigest,
   cohortRecordIds: BATCH_11_LINEAGE_DECLARATIONS.map((entry) => entry.recordId),
   lineageClassifications: BATCH_11_LINEAGE_DECLARATIONS.map((entry) => ({
@@ -38,12 +39,11 @@ const bound = buildBoundEvidence({
     observed: entry.declaredReleaseKind,
   })),
   phaseOutcomes: PHASE_ORDER.map((phase) => ({ phase, status: 'executed', mutations: 1 })),
-  releaseIdentities: BATCH_11_LINEAGE_DECLARATIONS.map((entry, index) => ({
-    recordId: entry.recordId,
+  // Derived from the repository contract. An arbitrary well-formed hash here
+  // would be refused, which is the point of deriving them.
+  releaseIdentities: contractReleaseIdentities().map((entry, index) => ({
+    ...entry,
     releaseId: `epirelease_synthetic${String(index).padStart(2, '0')}`,
-    targetSha256: `sha256:${String(index).repeat(64).slice(0, 64)}`,
-    releaseKind: entry.declaredReleaseKind,
-    supersedesReleaseId: entry.declaredPriorReleaseId,
   })),
   replayedReleases: 0,
   deploymentMarker: { deploymentId: 'dpl_synthetic', origin: 'https://synthetic.vercel.app', reviewedCommit: REVIEWED_COMMIT },
@@ -73,6 +73,7 @@ const fixture = {
   syntheticFixture: true,
   note: 'Synthetic compliant run. Not evidence of any rehearsal; no protected run has occurred.',
   reviewedCommit: REVIEWED_COMMIT,
+  workflowRunId: WORKFLOW_RUN_ID,
   runMarker: RUN_MARKER,
   providerResults,
   artifact: {
@@ -105,12 +106,9 @@ const fixture = {
       planDigest: contract.planDigest,
     },
   },
-  teardown: {
-    reviewedCommit: REVIEWED_COMMIT,
-    runMarker: RUN_MARKER,
-    observations: teardown.observations,
-    observationsDigest: teardown.observationsDigest,
-  },
+  // The producer's own report, verbatim. The verifier validates the whole
+  // report; a hand-assembled list of observations is refused.
+  teardown: { ...teardown, workflowRunId: WORKFLOW_RUN_ID },
 }
 
 mkdirSync('test/fixtures', { recursive: true })

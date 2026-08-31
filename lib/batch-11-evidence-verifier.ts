@@ -2,7 +2,12 @@ import { createHash } from 'node:crypto'
 import { readFileSync } from 'node:fs'
 
 import { canonicalJson } from './evidence-dossier/digest.ts'
-import { BOUND_EVIDENCE_SCHEMA, boundEvidenceDigest } from './batch-11-evidence-binding.ts'
+import {
+  BOUND_EVIDENCE_SCHEMA,
+  boundEvidenceDigest,
+  compareReleasesToContract,
+  runMarkerFor,
+} from './batch-11-evidence-binding.ts'
 import { BATCH_11_LINEAGE_DECLARATIONS, reconcileLineage } from './batch-11-mixed-lineage-release.ts'
 import { PHASE_ORDER } from './batch-11-rehearsal-phases.ts'
 import {
@@ -12,6 +17,11 @@ import {
   rehearsalPlanDigest,
 } from './batch-11-remote-rehearsal.ts'
 import { BATCH_11_REVISION_AUDITS, BATCH_11_SCOPED_DECISIONS } from './batch-11-revision-canary.ts'
+import {
+  TEARDOWN_PRODUCER_VERSION,
+  observationFingerprint,
+  recomputeObservationsDigest,
+} from './batch-11-teardown-observations.ts'
 
 /**
  * Independent audit of the sanitized Batch 11 rehearsal evidence.
@@ -71,6 +81,16 @@ export type RefusalCode =
   | 'release-identity-mismatch'
   | 'cleanup-status-missing'
   | 'teardown-observations-stale'
+  | 'workflow-run-id-missing'
+  | 'workflow-run-id-malformed'
+  | 'run-marker-mismatch'
+  | 'teardown-run-mismatch'
+  | 'teardown-report-schema-invalid'
+  | 'teardown-report-digest-mismatch'
+  | 'teardown-observation-duplicated'
+  | 'teardown-observation-unsupported-kind'
+  | 'teardown-fingerprint-mismatch'
+  | 'release-not-contract-derived'
   | 'teardown-observations-absent'
   | 'teardown-reported-not-observed'
   | 'teardown-state-unknown'
@@ -125,9 +145,12 @@ export interface TeardownObservation {
  * verification.
  */
 export interface TeardownEvidence {
+  schemaVersion?: string
   reviewedCommit: string
+  workflowRunId?: string
   runMarker: string
   observations: readonly TeardownObservation[]
+  observationsDigest?: string
 }
 
 export interface VerifierInput {
@@ -393,6 +416,29 @@ export function verifyRehearsalEvidence(input: VerifierInput, contract = reposit
       'The artifact carries no reviewed commit, so it cannot be tied to the code that was reviewed.')
   }
 
+  // Run identity. Commit and cohort can be identical across two runs; the run
+  // id and its derived marker are what separate them.
+  const runId = artifact.workflowRunId
+  if (runId === null || runId === undefined || runId === '') {
+    fail('workflow-run-id', 'workflow-run-id-missing', 'Executed evidence must name the workflow run it came from.')
+  } else if (!/^[0-9]{1,20}$/.test(String(runId))) {
+    fail('workflow-run-id', 'workflow-run-id-malformed', `The workflow run id ${JSON.stringify(runId)} is not numeric.`)
+  } else {
+    pass('workflow-run-id', `The artifact names workflow run ${String(runId)}.`)
+    const expectedMarker = runMarkerFor(String(runId))
+    if (artifact.runMarker !== expectedMarker) {
+      fail('run-marker', 'run-marker-mismatch', `The run marker is ${JSON.stringify(artifact.runMarker)}; run ${String(runId)} derives ${expectedMarker}.`)
+    } else pass('run-marker', 'The run marker derives from the workflow run id.')
+  }
+
+  // Release identities against the contract, not merely against each other.
+  const contractProblems = Array.isArray(artifact.releaseIdentities)
+    ? compareReleasesToContract(artifact.releaseIdentities as never)
+    : ['The artifact lists no release identities.']
+  if (contractProblems.length > 0) {
+    fail('release-contract', 'release-not-contract-derived', contractProblems.slice(0, 3).join(' '))
+  } else pass('release-contract', 'Every release matches the target digest, kind and predecessor the repository declares.')
+
   // The bound block: schema, classifications, release identities, cleanup, and
   // a digest that covers the reviewed commit and the cohort in order.
   if (artifact.artifactSchema !== BOUND_EVIDENCE_SCHEMA) {
@@ -440,7 +486,8 @@ export function verifyRehearsalEvidence(input: VerifierInput, contract = reposit
       recomputed = boundEvidenceDigest({
         artifactSchema: BOUND_EVIDENCE_SCHEMA,
         reviewedCommit: String(artifact.reviewedCommit ?? ''),
-        workflowRunId: (artifact.workflowRunId ?? null) as string | null,
+        workflowRunId: String(artifact.workflowRunId ?? ''),
+        runMarker: String(artifact.runMarker ?? ''),
         planDigest: String((isObject(artifact.fingerprint) ? artifact.fingerprint.planDigest : artifact.planDigest) ?? ''),
         cohortRecordIds: (reported ?? []) as string[],
         lineageClassifications: classifications as never,
@@ -465,7 +512,39 @@ export function verifyRehearsalEvidence(input: VerifierInput, contract = reposit
   } else if (evidence!.reviewedCommit !== input.reviewedCommit) {
     fail('teardown', 'teardown-observations-stale',
       'The teardown observations belong to a different reviewed commit than the artifact under verification.')
+  } else if (evidence!.schemaVersion !== TEARDOWN_PRODUCER_VERSION) {
+    // A hand-assembled list of "confirmed-absent" is not a producer report.
+    fail('teardown', 'teardown-report-schema-invalid',
+      `Teardown evidence must be a ${TEARDOWN_PRODUCER_VERSION} producer report; got ${JSON.stringify(evidence!.schemaVersion)}.`)
+  } else if (String(evidence!.workflowRunId ?? '') !== String(artifact.workflowRunId ?? '\u0000')
+    || evidence!.runMarker !== artifact.runMarker) {
+    fail('teardown', 'teardown-run-mismatch',
+      'The teardown observations belong to a different workflow run than the artifact under verification.')
+  } else if (evidence!.observationsDigest !== recomputeObservationsDigest({
+    schemaVersion: evidence!.schemaVersion!,
+    runMarker: evidence!.runMarker,
+    reviewedCommit: evidence!.reviewedCommit,
+    observations: evidence!.observations as never,
+    allConfirmedAbsent: evidence!.observations.every((entry) => entry.observedState === 'confirmed-absent'),
+  })) {
+    fail('teardown', 'teardown-report-digest-mismatch', 'The producer report digest does not recompute from its own observations.')
   } else {
+    const kinds = teardown.map((entry) => entry.resourceKind)
+    const duplicated = kinds.filter((kind, index) => kinds.indexOf(kind) !== index)
+    const unsupported = kinds.filter((kind) => !REQUIRED_TEARDOWN_KINDS.includes(kind))
+    if (duplicated.length > 0) {
+      fail('teardown-shape', 'teardown-observation-duplicated', `Duplicate observations for ${[...new Set(duplicated)].join(', ')}.`)
+    } else if (unsupported.length > 0) {
+      fail('teardown-shape', 'teardown-observation-unsupported-kind', `Observations for unsupported resource kinds: ${unsupported.join(', ')}.`)
+    } else pass('teardown-shape', `Exactly one observation for each of the ${REQUIRED_TEARDOWN_KINDS.length} required resource kinds.`)
+
+    const wrongFingerprint = teardown.filter((entry) =>
+      entry.identifierFingerprint !== observationFingerprint(evidence!.runMarker, entry.resourceKind))
+    if (wrongFingerprint.length > 0) {
+      fail('teardown-fingerprints', 'teardown-fingerprint-mismatch',
+        `${wrongFingerprint.length} observation fingerprint(s) do not derive from this run marker and resource kind.`)
+    } else pass('teardown-fingerprints', 'Every observation fingerprint derives from this run marker.')
+
     for (const kind of REQUIRED_TEARDOWN_KINDS) {
       const observation = teardown.find((entry) => entry.resourceKind === kind)
       if (!observation) {

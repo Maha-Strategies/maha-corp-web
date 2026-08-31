@@ -406,6 +406,13 @@ export interface RehearsalDriver {
   bindPreview(branch: EphemeralBranch): Promise<BoundPreview>
   destroyBoundPreview(deploymentId: string): Promise<void>
 
+  /**
+   * Re-checks lineage against a live public read, immediately before release.
+   *
+   * Optional so an in-memory double need not implement it; a driver that has a
+   * live registry to consult must, and the real one does.
+   */
+  assertLineageFresh?(): Promise<void>
   ingest(idempotency: string): Promise<{ decisionsRecorded: number }>
   issueRelease(request: ReleaseRequest): Promise<ReleaseResult>
 
@@ -538,7 +545,11 @@ export async function runRehearsal(
     }
     record('ingest-revisions-and-decisions', 'executed', `Ingested ${gates.length} proposed revisions and ${ingestion.decisionsRecorded} exact-revision decisions.`, gates.length + ingestion.decisionsRecorded)
 
-    // Phase 5.
+    // Phase 5. Planning ran against a snapshot; the world has had time to move
+    // since. Re-read before mutating, so a lineage that changed after planning
+    // stops the release rather than being released over.
+    if (driver.assertLineageFresh) await driver.assertLineageFresh()
+
     const seen = new Set<string>()
     for (const declared of BATCH_11_LINEAGE_DECLARATIONS) {
       const gate = gates.find((entry) => entry.recordId === declared.recordId)

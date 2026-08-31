@@ -3,6 +3,7 @@ import { existsSync, mkdirSync, readFileSync, unlinkSync, writeFileSync } from '
 import { dirname, join } from 'node:path'
 
 import { buildBoundEvidence } from '../lib/batch-11-evidence-binding.ts'
+import { assertLineageFresh } from '../lib/batch-11-lineage-freshness.ts'
 import {
   BATCH_11_LINEAGE_DECLARATIONS,
   assertDeclarationCoverage,
@@ -452,6 +453,19 @@ const driver: RehearsalDriver = {
     if (markerPath && existsSync(markerPath)) { unlinkSync(markerPath); lifecycleState.markerRemoved = true }
   },
 
+  /**
+   * Reads the public Production registry again, right before releasing.
+   *
+   * Credential-free and read-only, exactly like the phase-2 read: a plain GET
+   * of a public document with no token and no body.
+   */
+  async assertLineageFresh(): Promise<void> {
+    const response = await fetch(PRODUCTION_REGISTRY_URL, { method: 'GET', cache: 'no-store' })
+    let body: unknown = null
+    try { body = await response.json() } catch { body = null }
+    assertLineageFresh({ ok: response.ok, status: response.status, body })
+  },
+
   async ingest(idempotency: string): Promise<{ decisionsRecorded: number }> {
     await preview('/api/admin/epistemic-ingestion', operationsToken, {
       method: 'POST',
@@ -575,7 +589,9 @@ try {
   const bound = buildBoundEvidence({
     expectedReviewedCommit,
     checkedOutCommit,
-    workflowRunId: process.env.GITHUB_RUN_ID ?? null,
+    // Mandatory. buildBoundEvidence refuses an absent or non-numeric value
+    // rather than emitting evidence that cannot name its run.
+    workflowRunId: process.env.GITHUB_RUN_ID ?? '',
     planDigest,
     cohortRecordIds: BATCH_11_LINEAGE_DECLARATIONS.map((entry) => entry.recordId),
     // Expected is what the cohort declares; observed is what the registry probe
@@ -586,6 +602,9 @@ try {
       observed: gate.probeState === 'lineage-present' ? 'superseding' as const : 'initial' as const,
     })),
     phaseOutcomes: outcome.phases.map((phase) => ({ phase: phase.phase, status: phase.status, mutations: phase.mutations })),
+    // Compared against the repository contract inside buildBoundEvidence: the
+    // target digest must be the one the revision audit declares, not merely a
+    // well-formed hash.
     releaseIdentities: outcome.releaseIdentities.map((entry) => ({
       recordId: entry.recordId,
       releaseId: entry.releaseId,

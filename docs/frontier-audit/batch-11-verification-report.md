@@ -6,7 +6,7 @@
 
 **Verdict: VERIFIED**
 
-Verification digest `sha256:42e1b0087afacfc90676220749181485247ab412e616a9c0ab09971842c33046`.
+Verification digest `sha256:2d65e65b8d5c0b09b5a35d86a48216b824154973275678ed36453b0ca661ee70`.
 
 Every check passed. This attests to what the artifact and the supplied observations show; it is not a claim that the rehearsal ran.
 
@@ -32,11 +32,16 @@ Every check passed. This attests to what the artifact and the supplied observati
 | `preview-deployment-created` | pass | previewDeploymentCreated is true. |
 | `preview-deployment-destroyed` | pass | previewDeploymentDestroyed is true. |
 | `reviewed-commit` | pass | The artifact names the supplied reviewed commit. |
-| `artifact-schema` | pass | The artifact declares maha-batch-11-rehearsal-evidence/2.0. |
+| `workflow-run-id` | pass | The artifact names workflow run 77. |
+| `run-marker` | pass | The run marker derives from the workflow run id. |
+| `release-contract` | pass | Every release matches the target digest, kind and predecessor the repository declares. |
+| `artifact-schema` | pass | The artifact declares maha-batch-11-rehearsal-evidence/3.0. |
 | `lineage-classification` | pass | Expected and observed lineage classifications agree for every record. |
 | `release-identity` | pass | 5 complete release identities, one per declared record. |
 | `cleanup-status` | pass | The artifact reports every temporary resource destroyed. |
 | `artifact-digest` | pass | The artifact digest recomputes over the reviewed commit and the ordered cohort. |
+| `teardown-shape` | pass | Exactly one observation for each of the 4 required resource kinds. |
+| `teardown-fingerprints` | pass | Every observation fingerprint derives from this run marker. |
 | `teardown-supabase-branch` | pass | supabase-branch was independently observed absent. |
 | `teardown-vercel-preview` | pass | vercel-preview was independently observed absent. |
 | `teardown-github-environment-secret` | pass | github-environment-secret was independently observed absent. |

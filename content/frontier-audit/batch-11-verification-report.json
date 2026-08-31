@@ -111,10 +111,28 @@
       "detail": "The artifact names the supplied reviewed commit."
     },
     {
+      "check": "workflow-run-id",
+      "passed": true,
+      "refusal": null,
+      "detail": "The artifact names workflow run 77."
+    },
+    {
+      "check": "run-marker",
+      "passed": true,
+      "refusal": null,
+      "detail": "The run marker derives from the workflow run id."
+    },
+    {
+      "check": "release-contract",
+      "passed": true,
+      "refusal": null,
+      "detail": "Every release matches the target digest, kind and predecessor the repository declares."
+    },
+    {
       "check": "artifact-schema",
       "passed": true,
       "refusal": null,
-      "detail": "The artifact declares maha-batch-11-rehearsal-evidence/2.0."
+      "detail": "The artifact declares maha-batch-11-rehearsal-evidence/3.0."
     },
     {
       "check": "lineage-classification",
@@ -139,6 +157,18 @@
       "passed": true,
       "refusal": null,
       "detail": "The artifact digest recomputes over the reviewed commit and the ordered cohort."
+    },
+    {
+      "check": "teardown-shape",
+      "passed": true,
+      "refusal": null,
+      "detail": "Exactly one observation for each of the 4 required resource kinds."
+    },
+    {
+      "check": "teardown-fingerprints",
+      "passed": true,
+      "refusal": null,
+      "detail": "Every observation fingerprint derives from this run marker."
     },
     {
       "check": "teardown-supabase-branch",
@@ -215,6 +245,6 @@
     ],
     "teardownRunMarker": "batch-11-mixed-lineage-rehearsal-77"
   },
-  "verificationDigest": "sha256:42e1b0087afacfc90676220749181485247ab412e616a9c0ab09971842c33046",
+  "verificationDigest": "sha256:2d65e65b8d5c0b09b5a35d86a48216b824154973275678ed36453b0ca661ee70",
   "syntheticFixture": true
 }

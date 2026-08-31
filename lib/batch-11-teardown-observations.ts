@@ -168,6 +168,39 @@ export function reduceResourceState(
   }
 }
 
+/**
+ * Recomputes a producer report's digest from its own fields.
+ *
+ * Exported so the verifier can re-derive it rather than trusting the value the
+ * report carries: a hand-assembled object with a plausible digest is exactly
+ * what this is meant to catch.
+ */
+export function recomputeObservationsDigest(report: {
+  schemaVersion: string
+  runMarker: string
+  reviewedCommit: string
+  observations: readonly ProducedObservation[]
+  allConfirmedAbsent: boolean
+}): string {
+  return `sha256:${createHash('sha256').update(canonicalJson({
+    schemaVersion: report.schemaVersion,
+    runMarker: report.runMarker,
+    reviewedCommit: report.reviewedCommit,
+    allConfirmedAbsent: report.allConfirmedAbsent,
+    observations: report.observations.map((entry) => ({
+      resourceKind: entry.resourceKind,
+      identifierFingerprint: entry.identifierFingerprint,
+      observedState: entry.observedState,
+      refusal: entry.refusal,
+    })),
+  }), 'utf8').digest('hex')}`
+}
+
+/** The fingerprint an observation must carry, derived from run and kind. */
+export function observationFingerprint(runMarker: string, kind: TeardownResourceKind): string {
+  return `sha256:${createHash('sha256').update(`${runMarker}:${kind}`, 'utf8').digest('hex')}`
+}
+
 /** Produces one observation per required resource kind. */
 export function produceTeardownObservations(input: ProducerInput): ProducerReport {
   assertSanitized(input)
@@ -177,7 +210,7 @@ export function produceTeardownObservations(input: ProducerInput): ProducerRepor
     return {
       resourceKind: kind,
       // The observation names the run, never the resource.
-      identifierFingerprint: `sha256:${createHash('sha256').update(`${input.runMarker}:${kind}`, 'utf8').digest('hex')}`,
+      identifierFingerprint: observationFingerprint(input.runMarker, kind),
       observedState: reduced.state,
       detail: reduced.detail,
       refusal: reduced.refusal,
@@ -192,16 +225,5 @@ export function produceTeardownObservations(input: ProducerInput): ProducerRepor
     observations,
     allConfirmedAbsent: observations.every((entry) => entry.observedState === 'confirmed-absent'),
   }
-  return {
-    ...report,
-    observationsDigest: `sha256:${createHash('sha256').update(canonicalJson({
-      ...report,
-      observations: observations.map((entry) => ({
-        resourceKind: entry.resourceKind,
-        identifierFingerprint: entry.identifierFingerprint,
-        observedState: entry.observedState,
-        refusal: entry.refusal,
-      })),
-    }), 'utf8').digest('hex')}`,
-  }
+  return { ...report, observationsDigest: recomputeObservationsDigest(report) }
 }

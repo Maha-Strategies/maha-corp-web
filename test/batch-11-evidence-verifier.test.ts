@@ -6,6 +6,10 @@ import test from 'node:test'
 
 import { PHASE_ORDER } from '../lib/batch-11-rehearsal-phases.ts'
 import {
+  TEARDOWN_PRODUCER_VERSION as PRODUCER_VERSION_FOR_RESEAL,
+  recomputeObservationsDigest as recomputeForReseal,
+} from '../lib/batch-11-teardown-observations.ts'
+import {
   REQUIRED_EXECUTION_ORDERS,
   repositoryContract,
   scanForProhibitedContent,
@@ -38,6 +42,26 @@ function verify(over: { artifact?: Artifact; reviewedCommit?: string; teardown?:
     reviewedCommit: over.reviewedCommit ?? COMMIT,
     teardown: over.teardown === undefined ? teardown() : over.teardown,
   }, CONTRACT)
+}
+
+
+/**
+ * Mutates observations and re-seals the report.
+ *
+ * Without this every mutation trips the digest check first, which would make
+ * these tests pass for the wrong reason.
+ */
+function resealed(mutate: (evidence: TeardownEvidence) => void): TeardownEvidence {
+  const evidence = teardown()
+  mutate(evidence)
+  evidence.observationsDigest = recomputeForReseal({
+    schemaVersion: PRODUCER_VERSION_FOR_RESEAL,
+    runMarker: evidence.runMarker,
+    reviewedCommit: evidence.reviewedCommit,
+    observations: evidence.observations as never,
+    allConfirmedAbsent: evidence.observations.every((entry) => entry.observedState === 'confirmed-absent'),
+  })
+  return evidence
 }
 
 const refusesWith = (code: RefusalCode, over: Parameters<typeof verify>[0] = {}) => {
@@ -220,34 +244,33 @@ test('absent teardown observations refuse: self-reported cleanup is not confirma
 
 test('partial cleanup refuses', () => {
   // The branch is gone; the deployment was never observed.
-  const partial = teardown()
-  partial.observations = partial.observations.filter((entry) => entry.resourceKind === 'supabase-branch')
-  refusesWith('teardown-observations-absent', { teardown: partial })
+  refusesWith('teardown-observations-absent', {
+    teardown: resealed((evidence) => { evidence.observations = evidence.observations.filter((entry) => entry.resourceKind === 'supabase-branch') }),
+  })
 })
 
 test('cleanup reported but not independently observed refuses', () => {
-  const reported = teardown()
-  reported.observations[0].observedState = 'reported-not-observed'
-  refusesWith('teardown-reported-not-observed', { teardown: reported })
+  refusesWith('teardown-reported-not-observed', {
+    teardown: resealed((evidence) => { evidence.observations[0].observedState = 'reported-not-observed' }),
+  })
 })
 
 test('unknown API state refuses rather than being read as absence', () => {
-  const unknown = teardown()
-  unknown.observations[1].observedState = 'unknown'
-  refusesWith('teardown-state-unknown', { teardown: unknown })
+  refusesWith('teardown-state-unknown', {
+    teardown: resealed((evidence) => { evidence.observations[1].observedState = 'unknown' }),
+  })
 })
 
 test('a surviving Preview resource refuses', () => {
-  const surviving = teardown()
-  surviving.observations[1].observedState = 'present'
-  refusesWith('teardown-resource-present', { teardown: surviving })
+  refusesWith('teardown-resource-present', {
+    teardown: resealed((evidence) => { evidence.observations[1].observedState = 'present' }),
+  })
 })
 
 test('only confirmed absence passes, for every resource kind', () => {
   for (const state of ['reported-not-observed', 'unknown', 'present'] as const) {
     for (let index = 0; index < teardown().observations.length; index += 1) {
-      const evidence = teardown()
-      evidence.observations[index].observedState = state
+      const evidence = resealed((draft) => { draft.observations[index].observedState = state })
       assert.equal(verify({ teardown: evidence }).verdict, 'refused', `${state} on ${evidence.observations[index].resourceKind}`)
     }
   }
@@ -316,9 +339,10 @@ test('the verification digest is stable and excludes free text and timestamps', 
   assert.equal(first.verificationDigest, second.verificationDigest)
 
   // Reworded detail and an added observation timestamp must not move it.
-  const reworded = teardown()
-  reworded.observations[0].detail = 'Completely different prose describing the same observation.'
-  reworded.observations[0].observedAt = '2026-08-31T12:00:00.000Z'
+  const reworded = resealed((evidence) => {
+    evidence.observations[0].detail = 'Completely different prose describing the same observation.'
+    evidence.observations[0].observedAt = '2026-08-31T12:00:00.000Z'
+  })
   assert.equal(verify({ teardown: reworded }).verificationDigest, first.verificationDigest)
 
   // A changed verdict must move it.
@@ -427,7 +451,8 @@ test('the reviewed commit is bound into the artifact digest', () => {
   const moved = boundEvidenceDigest({
     artifactSchema: BOUND_EVIDENCE_SCHEMA,
     reviewedCommit: 'd'.repeat(40),
-    workflowRunId: bound.workflowRunId as string | null,
+    workflowRunId: String(bound.workflowRunId),
+    runMarker: String(bound.runMarker),
     planDigest: String(bound.planDigest),
     cohortRecordIds: bound.cohortRecordIds as string[],
     lineageClassifications: bound.lineageClassifications as never,
@@ -650,7 +675,7 @@ test('the whole chain verifies: bound evidence -> observations -> verifier', () 
   const report = verifyRehearsalEvidence({
     artifact: artifact(),
     reviewedCommit: COMMIT,
-    teardown: { reviewedCommit: COMMIT, runMarker: FIXTURE.runMarker, observations: produced.observations },
+    teardown: { ...produced, workflowRunId: FIXTURE.workflowRunId },
   }, CONTRACT)
   assert.equal(report.verdict, 'verified', report.refusals.join(', '))
   assert.equal(produced.allConfirmedAbsent, true)
@@ -672,4 +697,112 @@ test('the live dry-run artifact remains refused', () => {
   assert.equal(report.verdict, 'refused')
   assert.ok(report.refusals.includes('mode-not-executed'))
   assert.ok(report.refusals.includes('teardown-observations-absent'))
+})
+
+/* ================================ producer report coupling ================ */
+
+import {
+  TEARDOWN_PRODUCER_VERSION,
+  observationFingerprint,
+  recomputeObservationsDigest,
+} from '../lib/batch-11-teardown-observations.ts'
+
+test('a handcrafted "everything absent" object is refused: it is not a producer report', () => {
+  // The shape a well-meaning operator would assemble by hand. Every resource
+  // says confirmed-absent, and none of it was produced by anything.
+  const handcrafted = {
+    reviewedCommit: COMMIT,
+    runMarker: FIXTURE.runMarker,
+    observations: TEARDOWN_RESOURCE_KINDS.map((kind) => ({
+      resourceKind: kind,
+      identifierFingerprint: `sha256:${'0'.repeat(64)}`,
+      observedState: 'confirmed-absent' as const,
+      detail: 'Checked manually; nothing there.',
+    })),
+  }
+  refusesWith('teardown-report-schema-invalid', { teardown: handcrafted as never })
+})
+
+test('a producer report whose digest does not recompute is refused', () => {
+  const tampered = teardown()
+  tampered.observationsDigest = `sha256:${'e'.repeat(64)}`
+  refusesWith('teardown-report-digest-mismatch', { teardown: tampered })
+})
+
+test('a duplicated observation is refused', () => {
+  const duplicated = teardown()
+  duplicated.observations = [...duplicated.observations, duplicated.observations[0]]
+  duplicated.observationsDigest = recomputeObservationsDigest({
+    schemaVersion: TEARDOWN_PRODUCER_VERSION,
+    runMarker: duplicated.runMarker,
+    reviewedCommit: duplicated.reviewedCommit,
+    observations: duplicated.observations as never,
+    allConfirmedAbsent: true,
+  })
+  refusesWith('teardown-observation-duplicated', { teardown: duplicated })
+})
+
+test('an observation for an unsupported resource kind is refused', () => {
+  const extra = teardown()
+  extra.observations = [...extra.observations, {
+    resourceKind: 'some-other-thing' as never,
+    identifierFingerprint: observationFingerprint(extra.runMarker, 'some-other-thing' as never),
+    observedState: 'confirmed-absent',
+    detail: 'An unrelated resource.',
+  }]
+  extra.observationsDigest = recomputeObservationsDigest({
+    schemaVersion: TEARDOWN_PRODUCER_VERSION,
+    runMarker: extra.runMarker,
+    reviewedCommit: extra.reviewedCommit,
+    observations: extra.observations as never,
+    allConfirmedAbsent: true,
+  })
+  refusesWith('teardown-observation-unsupported-kind', { teardown: extra })
+})
+
+test('an omitted resource kind is refused', () => {
+  const omitted = teardown()
+  omitted.observations = omitted.observations.filter((entry) => entry.resourceKind !== 'database-release-rows')
+  omitted.observationsDigest = recomputeObservationsDigest({
+    schemaVersion: TEARDOWN_PRODUCER_VERSION,
+    runMarker: omitted.runMarker,
+    reviewedCommit: omitted.reviewedCommit,
+    observations: omitted.observations as never,
+    allConfirmedAbsent: true,
+  })
+  refusesWith('teardown-observations-absent', { teardown: omitted })
+})
+
+test('an observation fingerprint that does not derive from this run is refused', () => {
+  const forged = teardown()
+  forged.observations = forged.observations.map((entry, index) =>
+    index === 0 ? { ...entry, identifierFingerprint: observationFingerprint('batch-11-mixed-lineage-rehearsal-999', entry.resourceKind) } : entry)
+  forged.observationsDigest = recomputeObservationsDigest({
+    schemaVersion: TEARDOWN_PRODUCER_VERSION,
+    runMarker: forged.runMarker,
+    reviewedCommit: forged.reviewedCommit,
+    observations: forged.observations as never,
+    allConfirmedAbsent: true,
+  })
+  refusesWith('teardown-fingerprint-mismatch', { teardown: forged })
+})
+
+test('observations copied from another run are refused', () => {
+  const copied = teardown()
+  copied.workflowRunId = '999'
+  copied.runMarker = 'batch-11-mixed-lineage-rehearsal-999'
+  refusesWith('teardown-run-mismatch', { teardown: copied })
+})
+
+test('the collector never reports absence without a successful query', () => {
+  // Standing in for the operator path: with no credentials supplied, every
+  // resource is unknown and nothing is confirmed absent.
+  const source = readFileSync(resolve(ROOT, 'scripts/collect-batch-11-teardown-evidence.ts'), 'utf8')
+  assert.match(source, /not-attempted/, 'an unsupplied credential must produce not-attempted, not an empty match list')
+  assert.match(source, /status: 'failed'/, 'a failed request must produce failed')
+  assert.match(source, /status: 'malformed'/, 'an uninterpretable body must produce malformed')
+  assert.match(source, /assertSanitized\(payload\)/, 'the written report must be scanned before it lands')
+  assert.match(source, /if \(!report\.allConfirmedAbsent\) process\.exit\(1\)/, 'a green exit must not mean unconfirmed teardown')
+  // Identifiers are hashed, never written raw.
+  assert.match(source, /const fingerprint = \(value: string\)/)
 })

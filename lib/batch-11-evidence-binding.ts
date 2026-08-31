@@ -1,6 +1,8 @@
 import { createHash } from 'node:crypto'
 
 import { canonicalJson } from './evidence-dossier/digest.ts'
+import { BATCH_11_LINEAGE_DECLARATIONS } from './batch-11-mixed-lineage-release.ts'
+import { BATCH_11_REVISION_AUDITS } from './batch-11-revision-canary.ts'
 
 /**
  * Binds executed rehearsal evidence to the code that was reviewed.
@@ -18,7 +20,20 @@ import { canonicalJson } from './evidence-dossier/digest.ts'
  * artifact with a swapped record, produces a different digest.
  */
 
-export const BOUND_EVIDENCE_SCHEMA = 'maha-batch-11-rehearsal-evidence/2.0' as const
+export const BOUND_EVIDENCE_SCHEMA = 'maha-batch-11-rehearsal-evidence/3.0' as const
+
+/** The run marker every temporary resource is named after. */
+export const RUN_MARKER_PREFIX = 'batch-11-mixed-lineage-rehearsal' as const
+
+/**
+ * Derives the run marker from the workflow run id.
+ *
+ * One derivation, used by the rehearsal, the producer and the verifier, so a
+ * marker cannot be asserted independently of the run it claims to belong to.
+ */
+export function runMarkerFor(workflowRunId: string): string {
+  return `${RUN_MARKER_PREFIX}-${workflowRunId}`
+}
 
 export type BindingRefusal =
   | 'reviewed-commit-malformed'
@@ -28,6 +43,11 @@ export type BindingRefusal =
   | 'phase-outcomes-incomplete'
   | 'release-identity-missing'
   | 'cleanup-status-missing'
+  | 'workflow-run-id-missing'
+  | 'workflow-run-id-malformed'
+  | 'run-marker-mismatch'
+  | 'release-target-not-contract-derived'
+  | 'release-predecessor-mismatch'
 
 export class EvidenceBindingRefused extends Error {
   code: BindingRefusal
@@ -69,6 +89,74 @@ export interface ReleaseIdentity {
   supersedesReleaseId: string | null
 }
 
+/**
+ * What each record must release, derived from the committed manifests.
+ *
+ * The target digest comes from the record's own revision audit, so a
+ * well-formed but arbitrary hash cannot stand in for it. The predecessor comes
+ * from the lineage declaration: a superseding release must name exactly the
+ * declared prior release, and an initial release must name nothing.
+ */
+export function contractReleaseIdentities(): readonly ReleaseIdentity[] {
+  return BATCH_11_LINEAGE_DECLARATIONS.map((declaration) => {
+    const audit = BATCH_11_REVISION_AUDITS.find((entry) => entry.recordId === declaration.recordId)
+    if (!audit) {
+      throw new EvidenceBindingRefused('release-target-not-contract-derived', `${declaration.recordId}: no revision audit declares a target digest.`)
+    }
+    return {
+      recordId: declaration.recordId,
+      // The release id is issued at run time and is not derivable here.
+      releaseId: '',
+      targetSha256: audit.revisedRecordRevisionSha256,
+      releaseKind: declaration.declaredReleaseKind,
+      supersedesReleaseId: declaration.declaredPriorReleaseId,
+    }
+  })
+}
+
+/**
+ * Compares issued releases against the contract, field by field.
+ *
+ * Returns the failures rather than throwing on the first, so a caller can
+ * report everything wrong with a cohort at once.
+ */
+export function compareReleasesToContract(
+  issued: readonly ReleaseIdentity[],
+  contract: readonly ReleaseIdentity[] = contractReleaseIdentities(),
+): string[] {
+  const problems: string[] = []
+  const seen = new Set<string>()
+
+  for (const release of issued) {
+    if (seen.has(release.recordId)) {
+      problems.push(`${release.recordId}: released twice in one run.`)
+      continue
+    }
+    seen.add(release.recordId)
+    const expected = contract.find((entry) => entry.recordId === release.recordId)
+    if (!expected) {
+      problems.push(`${release.recordId}: not a declared cohort record.`)
+      continue
+    }
+    if (release.targetSha256 !== expected.targetSha256) {
+      problems.push(`${release.recordId}: target digest is not the one the revision audit declares.`)
+    }
+    if (release.releaseKind !== expected.releaseKind) {
+      problems.push(`${release.recordId}: released as ${release.releaseKind} but declared ${expected.releaseKind}.`)
+    }
+    if (expected.releaseKind === 'superseding' && release.supersedesReleaseId !== expected.supersedesReleaseId) {
+      problems.push(`${release.recordId}: superseded ${release.supersedesReleaseId ?? 'nothing'} rather than the declared predecessor ${expected.supersedesReleaseId}.`)
+    }
+    if (expected.releaseKind === 'initial' && release.supersedesReleaseId !== null) {
+      problems.push(`${release.recordId}: an initial release must supersede nothing.`)
+    }
+  }
+  for (const expected of contract) {
+    if (!seen.has(expected.recordId)) problems.push(`${expected.recordId}: declared but never released.`)
+  }
+  return problems
+}
+
 export interface LineageClassification {
   recordId: string
   expected: 'initial' | 'superseding'
@@ -90,7 +178,8 @@ export interface CleanupStatus {
 export interface BoundEvidenceInput {
   expectedReviewedCommit: string
   checkedOutCommit: string
-  workflowRunId: string | null
+  /** Mandatory for executed evidence. Numeric, as GitHub issues it. */
+  workflowRunId: string
   planDigest: string
   /** Ordered. Order is part of the identity and part of the digest. */
   cohortRecordIds: readonly string[]
@@ -107,7 +196,9 @@ export interface BoundEvidenceInput {
 export interface BoundEvidence {
   artifactSchema: typeof BOUND_EVIDENCE_SCHEMA
   reviewedCommit: string
-  workflowRunId: string | null
+  workflowRunId: string
+  /** Derived, never supplied. Binds every resource name to this run. */
+  runMarker: string
   planDigest: string
   cohortRecordIds: readonly string[]
   lineageClassifications: readonly LineageClassification[]
@@ -131,6 +222,8 @@ export function boundEvidenceDigest(evidence: Omit<BoundEvidence, 'artifactDiges
   const identity = {
     artifactSchema: evidence.artifactSchema,
     reviewedCommit: evidence.reviewedCommit,
+    workflowRunId: evidence.workflowRunId,
+    runMarker: evidence.runMarker,
     planDigest: evidence.planDigest,
     cohortRecordIds: evidence.cohortRecordIds,
     lineageClassifications: evidence.lineageClassifications,
@@ -145,6 +238,15 @@ export function boundEvidenceDigest(evidence: Omit<BoundEvidence, 'artifactDiges
 /** Builds the bound block, refusing anything that would leave it unverifiable. */
 export function buildBoundEvidence(input: BoundEvidenceInput): BoundEvidence {
   const reviewedCommit = bindReviewedCommit(input.expectedReviewedCommit, input.checkedOutCommit)
+
+  // Evidence that cannot name the run it came from cannot be told apart from
+  // evidence of a different run with the same commit and cohort.
+  if (!input.workflowRunId) {
+    throw new EvidenceBindingRefused('workflow-run-id-missing', 'Executed evidence must carry the workflow run id.')
+  }
+  if (!/^[0-9]{1,20}$/.test(input.workflowRunId)) {
+    throw new EvidenceBindingRefused('workflow-run-id-malformed', `The workflow run id ${JSON.stringify(input.workflowRunId)} is not numeric.`)
+  }
 
   if (input.cohortRecordIds.length === 0) {
     throw new EvidenceBindingRefused('cohort-identity-missing', 'The artifact must name the records it released, in order.')
@@ -174,6 +276,20 @@ export function buildBoundEvidence(input: BoundEvidenceInput): BoundEvidence {
   if (input.releaseIdentities.length === 0) {
     throw new EvidenceBindingRefused('release-identity-missing', 'The artifact must name the releases it issued.')
   }
+
+  // Checked before the generic shape rules below, so a release that disagrees
+  // with the repository is reported as a contract violation rather than as a
+  // vaguely malformed identity.
+  const contractProblems = compareReleasesToContract(input.releaseIdentities)
+  if (contractProblems.length > 0) {
+    throw new EvidenceBindingRefused(
+      contractProblems.some((entry) => entry.includes('predecessor') || entry.includes('supersede'))
+        ? 'release-predecessor-mismatch'
+        : 'release-target-not-contract-derived',
+      contractProblems.join(' '),
+    )
+  }
+
   for (const release of input.releaseIdentities) {
     if (!release.releaseId || !release.targetSha256) {
       throw new EvidenceBindingRefused('release-identity-missing', `${release.recordId}: a release identity is incomplete.`)
@@ -197,6 +313,7 @@ export function buildBoundEvidence(input: BoundEvidenceInput): BoundEvidence {
     artifactSchema: BOUND_EVIDENCE_SCHEMA,
     reviewedCommit,
     workflowRunId: input.workflowRunId,
+    runMarker: runMarkerFor(input.workflowRunId),
     planDigest: input.planDigest,
     cohortRecordIds: [...input.cohortRecordIds],
     lineageClassifications: [...input.lineageClassifications],
