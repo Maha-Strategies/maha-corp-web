@@ -149,9 +149,14 @@ test('only the two declared predecessor lineages can be imported', () => {
 })
 
 // 8
-test('only the dedicated migration can be applied', () => {
-  assert.deepEqual(REQUIRED_MIGRATIONS, ['20260831120000_batch_11_mixed_lineage_rehearsal.sql'])
-  assert.ok(existsSync(join(ROOT, 'supabase/migrations', REQUIRED_MIGRATIONS[0])))
+test('only the two dedicated forward migrations can be applied', () => {
+  assert.deepEqual(REQUIRED_MIGRATIONS, [
+    '20260831120000_batch_11_mixed_lineage_rehearsal.sql',
+    '20260831123000_batch_11_mixed_lineage_rehearsal_execution.sql',
+  ])
+  for (const migration of REQUIRED_MIGRATIONS) {
+    assert.ok(existsSync(join(ROOT, 'supabase/migrations', migration)))
+  }
   assert.doesNotThrow(() => assertMigrationsAllowed([...REQUIRED_MIGRATIONS]))
   assert.throws(() => assertMigrationsAllowed([...REQUIRED_MIGRATIONS, '20260830200000_substantial_scale_release_targets.sql']), RehearsalRefused)
   assert.throws(() => assertMigrationsAllowed([]), RehearsalRefused)

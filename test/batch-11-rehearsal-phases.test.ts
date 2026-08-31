@@ -351,11 +351,12 @@ test('a required migration that was not applied is refused', () => {
   assert.equal(refusal.code, 'migration-missing')
 })
 
-test('the declared migration exists on disk', () => {
-  for (const migration of REQUIRED_MIGRATIONS) {
-    const sql = readFileSync(resolve(ROOT, 'supabase/migrations', migration), 'utf8')
-    assert.ok(sql.includes('batch_11_rehearsal_observations'))
-  }
+test('the declared forward migration pair exists on disk in order', () => {
+  const [planMigration, executionMigration] = REQUIRED_MIGRATIONS.map((migration) =>
+    readFileSync(resolve(ROOT, 'supabase/migrations', migration), 'utf8'))
+  assert.ok(planMigration.includes('batch_11_rehearsal_observations'))
+  assert.ok(executionMigration.includes('record_batch_11_rehearsal_targets'))
+  assert.ok(executionMigration.includes('record_batch_11_rehearsal_canonical_release'))
 })
 
 // --- phase 5: replay safety -------------------------------------------------

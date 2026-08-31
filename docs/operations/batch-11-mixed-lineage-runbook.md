@@ -92,14 +92,17 @@ credential value appears in this repository, and tests assert that boundary.
 
 ### Migration scope
 
-One dedicated ephemeral-branch migration,
-`supabase/migrations/20260831120000_batch_11_mixed_lineage_rehearsal.sql`,
-creates the Batch 11 witness and observation tables, admits one exact five-record
-adapter, installs dedicated ingestion and release RPCs, and relaxes the local
-supersession foreign key so a new Preview release can name an external public
-predecessor witness. Those changes are intentionally allowed only inside the
-disposable schema-only branch; Production never receives this migration. No
-row outside the five targets and two predecessor witnesses is written.
+Two dedicated ephemeral-branch migrations run in order. The immutable plan
+migration, `supabase/migrations/20260831120000_batch_11_mixed_lineage_rehearsal.sql`,
+creates the witness and observation tables. Its forward execution migration,
+`supabase/migrations/20260831123000_batch_11_mixed_lineage_rehearsal_execution.sql`,
+narrows the witness constraints to two exact public tuples, admits one exact
+five-record adapter, installs dedicated ingestion and release RPCs, and relaxes
+the local supersession foreign key so a new Preview release can name an
+external public predecessor witness. Those changes are intentionally allowed
+only inside the disposable schema-only branch; Production receives neither
+migration from this workflow. No row outside the five targets and two
+predecessor witnesses is written.
 Production is never a target of the rehearsal script — its only Production
 access is an unauthenticated HTTPS GET of the public release registry.
 

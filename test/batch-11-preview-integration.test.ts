@@ -17,7 +17,7 @@ import {
 
 const ROOT = resolve(import.meta.dirname, '..')
 const MIGRATION = readFileSync(
-  resolve(ROOT, 'supabase/migrations/20260831120000_batch_11_mixed_lineage_rehearsal.sql'),
+  resolve(ROOT, 'supabase/migrations/20260831123000_batch_11_mixed_lineage_rehearsal_execution.sql'),
   'utf8',
 )
 const SCRIPT = readFileSync(resolve(ROOT, 'scripts/run-batch-11-remote-rehearsal.ts'), 'utf8')

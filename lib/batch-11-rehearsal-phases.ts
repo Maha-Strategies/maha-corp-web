@@ -78,6 +78,7 @@ export interface PhaseRecord {
  */
 export const REQUIRED_MIGRATIONS: readonly string[] = [
   '20260831120000_batch_11_mixed_lineage_rehearsal.sql',
+  '20260831123000_batch_11_mixed_lineage_rehearsal_execution.sql',
 ]
 
 /**

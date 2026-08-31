@@ -20,7 +20,7 @@ SHA that must equal `HEAD`.
 | # | Phase | Effect |
 |---|---|---|
 | 1 | `provision-ephemeral-branch` | Creates a schema-only Supabase branch on the Preview project |
-| 2 | `apply-migrations` | Applies exactly the dedicated migration, then deploys the reviewed commit to a private Vercel Preview bound to the new branch |
+| 2 | `apply-migrations` | Applies exactly the immutable plan migration and its dedicated forward execution migration, then deploys the reviewed commit to a private Vercel Preview bound to the new branch |
 | 3 | `import-prior-lineages` | Reads two predecessor facts from the public Production registry and stores exact external-lineage witnesses; it does not reconstruct private release rows |
 | 4 | `ingest-revisions-and-decisions` | Ingests five proposed revisions and twenty exact-revision decisions |
 | 5 | `issue-releases` | Issues five releases under Preview release authority |
@@ -55,7 +55,7 @@ of record id, predecessor release id, and predecessor target digest.
   and can never appear here; importing one would manufacture the lineage its
   gate requires to be absent.
 - **A migration this lifecycle did not declare.** Refused in both directions:
-  an extra migration and a missing required one.
+  an extra migration and either missing required migration.
 - **A release binding a revision other than the gated one.** Refused.
 - **A predecessor removed rather than superseded.** Refused; release history is
   append-only.
