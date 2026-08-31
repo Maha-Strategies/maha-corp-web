@@ -1,0 +1,106 @@
+{
+  "syntheticFixture": true,
+  "note": "Synthetic compliant artifact. Not evidence of any rehearsal; no protected run has occurred.",
+  "reviewedCommit": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+  "artifact": {
+    "mode": "executed",
+    "reason": "All 7 phases executed against an ephemeral Preview branch.",
+    "reviewedCommit": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+    "remoteOperationsPerformed": 14,
+    "previewBranchCreated": true,
+    "previewBranchDestroyed": true,
+    "previewDeploymentCreated": true,
+    "previewDeploymentDestroyed": true,
+    "migrationsApplied": 1,
+    "releasesIssued": 5,
+    "replayedReleases": 0,
+    "productionWritesPerformed": 0,
+    "productionAccess": {
+      "kind": "public-https-get",
+      "url": "https://www.mahastrategies.com/knowledge/epistemic-system/releases/registry.json",
+      "credentialPresented": false
+    },
+    "cohortRecordIds": [
+      "urn:maha:record:advanced-materials-color-centers-in-diamond",
+      "urn:maha:record:fusion-plasma-systems-tokamak-plasma-equilibrium",
+      "urn:maha:record:longevity-metabolism-mitophagy-flux",
+      "urn:maha:record:mechanistic-interpretability-activation-patching",
+      "urn:maha:record:mechanistic-interpretability-representation-probing-boundary"
+    ],
+    "phases": [
+      {
+        "phase": "provision-ephemeral-branch",
+        "status": "executed",
+        "detail": "Phase completed.",
+        "mutations": 1
+      },
+      {
+        "phase": "apply-migrations",
+        "status": "executed",
+        "detail": "Phase completed.",
+        "mutations": 1
+      },
+      {
+        "phase": "import-prior-lineages",
+        "status": "executed",
+        "detail": "Phase completed.",
+        "mutations": 1
+      },
+      {
+        "phase": "ingest-revisions-and-decisions",
+        "status": "executed",
+        "detail": "Phase completed.",
+        "mutations": 1
+      },
+      {
+        "phase": "issue-releases",
+        "status": "executed",
+        "detail": "Phase completed.",
+        "mutations": 1
+      },
+      {
+        "phase": "verify-transitions",
+        "status": "executed",
+        "detail": "Phase completed.",
+        "mutations": 1
+      },
+      {
+        "phase": "destroy-ephemeral-branch",
+        "status": "executed",
+        "detail": "Phase completed.",
+        "mutations": 1
+      }
+    ],
+    "fingerprint": {
+      "schemaVersion": "maha-batch-11-remote-rehearsal/1.0",
+      "cohortSize": 5,
+      "readyCount": 5,
+      "supersedingCount": 2,
+      "initialCount": 3,
+      "probeStates": [
+        "lineage-absent",
+        "lineage-absent",
+        "lineage-absent",
+        "lineage-present",
+        "lineage-present"
+      ],
+      "ordersProvenIndependent": 120,
+      "orderIndependent": true,
+      "planDigest": "sha256:3d48cbf19ca53cf818f9b1b0318334c7e37754f1f7d3ab393535bce085f2be91"
+    }
+  },
+  "teardown": [
+    {
+      "resourceKind": "supabase-branch",
+      "identifierFingerprint": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+      "observedState": "confirmed-absent",
+      "detail": "Branch list re-read after deletion; no branch carrying this run marker remained."
+    },
+    {
+      "resourceKind": "vercel-preview",
+      "identifierFingerprint": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+      "observedState": "confirmed-absent",
+      "detail": "The deployment identifier no longer resolves."
+    }
+  ]
+}

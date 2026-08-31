@@ -1,0 +1,169 @@
+{
+  "schemaVersion": "maha-batch-11-evidence-verifier/1.0",
+  "verdict": "verified",
+  "checks": [
+    {
+      "check": "mode",
+      "passed": true,
+      "refusal": null,
+      "detail": "The artifact reports mode \"executed\"."
+    },
+    {
+      "check": "phase-count",
+      "passed": true,
+      "refusal": null,
+      "detail": "7 phases present."
+    },
+    {
+      "check": "phase-distinctness",
+      "passed": true,
+      "refusal": null,
+      "detail": "Every phase appears exactly once."
+    },
+    {
+      "check": "phase-order",
+      "passed": true,
+      "refusal": null,
+      "detail": "Phases ran in the required order."
+    },
+    {
+      "check": "phase-status",
+      "passed": true,
+      "refusal": null,
+      "detail": "Every phase reports status \"executed\"."
+    },
+    {
+      "check": "release-count",
+      "passed": true,
+      "refusal": null,
+      "detail": "5 releases issued."
+    },
+    {
+      "check": "release-composition",
+      "passed": true,
+      "refusal": null,
+      "detail": "2 superseding and 3 initial, matching the declarations."
+    },
+    {
+      "check": "cohort-size",
+      "passed": true,
+      "refusal": null,
+      "detail": "Cohort size 5 matches the declarations."
+    },
+    {
+      "check": "plan-digest",
+      "passed": true,
+      "refusal": null,
+      "detail": "The plan digest matches the digest re-derived from the repository manifests."
+    },
+    {
+      "check": "record-identity",
+      "passed": true,
+      "refusal": null,
+      "detail": "Every released record is one the repository declares."
+    },
+    {
+      "check": "order-convergence",
+      "passed": true,
+      "refusal": null,
+      "detail": "All 120 execution orders converge on one final state."
+    },
+    {
+      "check": "production-writes",
+      "passed": true,
+      "refusal": null,
+      "detail": "Zero Production writes."
+    },
+    {
+      "check": "production-access",
+      "passed": true,
+      "refusal": null,
+      "detail": "Production access was a credential-free public GET."
+    },
+    {
+      "check": "preview-branch-created",
+      "passed": true,
+      "refusal": null,
+      "detail": "previewBranchCreated is true."
+    },
+    {
+      "check": "preview-branch-destroyed",
+      "passed": true,
+      "refusal": null,
+      "detail": "previewBranchDestroyed is true."
+    },
+    {
+      "check": "preview-deployment-created",
+      "passed": true,
+      "refusal": null,
+      "detail": "previewDeploymentCreated is true."
+    },
+    {
+      "check": "preview-deployment-destroyed",
+      "passed": true,
+      "refusal": null,
+      "detail": "previewDeploymentDestroyed is true."
+    },
+    {
+      "check": "reviewed-commit",
+      "passed": true,
+      "refusal": null,
+      "detail": "The artifact names the supplied reviewed commit."
+    },
+    {
+      "check": "teardown-supabase-branch",
+      "passed": true,
+      "refusal": null,
+      "detail": "supabase-branch was independently observed absent."
+    },
+    {
+      "check": "teardown-vercel-preview",
+      "passed": true,
+      "refusal": null,
+      "detail": "vercel-preview was independently observed absent."
+    },
+    {
+      "check": "secret-scan",
+      "passed": true,
+      "refusal": null,
+      "detail": "No secret-shaped content."
+    },
+    {
+      "check": "sensitive-scan",
+      "passed": true,
+      "refusal": null,
+      "detail": "No participant, natal, customer, enquiry, payment or private-corpus content."
+    }
+  ],
+  "refusals": [],
+  "observed": {
+    "mode": "executed",
+    "phases": [
+      "provision-ephemeral-branch",
+      "apply-migrations",
+      "import-prior-lineages",
+      "ingest-revisions-and-decisions",
+      "issue-releases",
+      "verify-transitions",
+      "destroy-ephemeral-branch"
+    ],
+    "releasesIssued": 5,
+    "supersedingCount": 2,
+    "initialCount": 3,
+    "planDigestMatches": true,
+    "ordersProvenIndependent": 120,
+    "productionWritesPerformed": 0,
+    "teardownStates": [
+      {
+        "resourceKind": "supabase-branch",
+        "observedState": "confirmed-absent"
+      },
+      {
+        "resourceKind": "vercel-preview",
+        "observedState": "confirmed-absent"
+      }
+    ]
+  },
+  "verificationDigest": "sha256:c8e7fe480ef209d1163df412c84eeeb8dcd908972197b211188a6f887a6f5c68",
+  "syntheticFixture": true
+}
