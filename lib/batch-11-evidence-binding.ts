@@ -20,7 +20,71 @@ import { BATCH_11_REVISION_AUDITS } from './batch-11-revision-canary.ts'
  * artifact with a swapped record, produces a different digest.
  */
 
-export const BOUND_EVIDENCE_SCHEMA = 'maha-batch-11-rehearsal-evidence/3.0' as const
+export const BOUND_EVIDENCE_SCHEMA = 'maha-batch-11-rehearsal-evidence/4.0' as const
+
+export const TEMPORARY_PREVIEW_SECRET_NAMES = [
+  'EPISTEMIC_OPERATIONS_TOKEN',
+  'EPISTEMIC_RELEASE_AUTHORITY_TOKEN',
+  'SUPABASE_ACCESS_TOKEN',
+  'SUPABASE_PROJECT_REF',
+  'VERCEL_AUTOMATION_BYPASS_SECRET',
+  'VERCEL_TOKEN',
+] as const
+
+export const TEARDOWN_HANDLE_KINDS = [
+  'supabase-branch',
+  'vercel-preview',
+  'github-environment-secret',
+  'database-release-rows',
+] as const
+export type TeardownHandleKind = (typeof TEARDOWN_HANDLE_KINDS)[number]
+
+/** Private exact identifiers. This object is never part of public evidence. */
+export interface ExactTeardownHandles {
+  schemaVersion: 'maha-batch-11-private-teardown-handles/1.0'
+  workflowRunId: string
+  runMarker: string
+  reviewedCommit: string
+  supabaseBranch: { branchId: string; parentProjectRef: string }
+  vercelPreview: { deploymentId: string; origin: string }
+  githubEnvironmentSecrets: { environment: string; names: readonly string[] }
+  databaseReleaseRows: { branchId: string; releaseIds: readonly string[] }
+}
+
+export type TeardownHandleDigests = Readonly<Record<TeardownHandleKind, string>>
+
+const sha256Canonical = (value: unknown) =>
+  `sha256:${createHash('sha256').update(canonicalJson(value), 'utf8').digest('hex')}`
+
+/** Derives the public, non-reversible identity of every exact teardown target. */
+export function teardownHandleDigests(handles: ExactTeardownHandles): TeardownHandleDigests {
+  return {
+    'supabase-branch': sha256Canonical({
+      branchId: handles.supabaseBranch.branchId,
+      parentProjectRef: handles.supabaseBranch.parentProjectRef,
+      workflowRunId: handles.workflowRunId,
+      reviewedCommit: handles.reviewedCommit,
+    }),
+    'vercel-preview': sha256Canonical({
+      deploymentId: handles.vercelPreview.deploymentId,
+      origin: handles.vercelPreview.origin,
+      workflowRunId: handles.workflowRunId,
+      reviewedCommit: handles.reviewedCommit,
+    }),
+    'github-environment-secret': sha256Canonical({
+      environment: handles.githubEnvironmentSecrets.environment,
+      names: [...handles.githubEnvironmentSecrets.names].sort(),
+      workflowRunId: handles.workflowRunId,
+      reviewedCommit: handles.reviewedCommit,
+    }),
+    'database-release-rows': sha256Canonical({
+      branchId: handles.databaseReleaseRows.branchId,
+      releaseIds: [...handles.databaseReleaseRows.releaseIds].sort(),
+      workflowRunId: handles.workflowRunId,
+      reviewedCommit: handles.reviewedCommit,
+    }),
+  }
+}
 
 /** The run marker every temporary resource is named after. */
 export const RUN_MARKER_PREFIX = 'batch-11-mixed-lineage-rehearsal' as const
@@ -48,6 +112,8 @@ export type BindingRefusal =
   | 'run-marker-mismatch'
   | 'release-target-not-contract-derived'
   | 'release-predecessor-mismatch'
+  | 'teardown-handle-missing'
+  | 'teardown-handle-release-mismatch'
 
 export class EvidenceBindingRefused extends Error {
   code: BindingRefusal
@@ -189,6 +255,8 @@ export interface BoundEvidenceInput {
   replayedReleases: number
   /** The marker this run wrote, or null when no deployment was created. */
   deploymentMarker: Readonly<Record<string, unknown>> | null
+  /** Exact private targets. Only their digests enter the public artifact. */
+  teardownHandles: ExactTeardownHandles
   cleanup: CleanupStatus
   requiredPhaseCount: number
 }
@@ -206,6 +274,7 @@ export interface BoundEvidence {
   releaseIdentities: readonly ReleaseIdentity[]
   releaseCounts: { total: number; initial: number; superseding: number; replayed: number }
   deploymentMarkerDigest: string | null
+  teardownHandleDigests: TeardownHandleDigests
   cleanup: CleanupStatus
   artifactDigest: string
 }
@@ -230,6 +299,7 @@ export function boundEvidenceDigest(evidence: Omit<BoundEvidence, 'artifactDiges
     phaseOutcomes: evidence.phaseOutcomes.map((entry) => ({ phase: entry.phase, status: entry.status })),
     releaseIdentities: evidence.releaseIdentities,
     deploymentMarkerDigest: evidence.deploymentMarkerDigest,
+    teardownHandleDigests: evidence.teardownHandleDigests,
     cleanup: evidence.cleanup,
   }
   return `sha256:${createHash('sha256').update(canonicalJson(identity), 'utf8').digest('hex')}`
@@ -309,6 +379,22 @@ export function buildBoundEvidence(input: BoundEvidenceInput): BoundEvidence {
     throw new EvidenceBindingRefused('cleanup-status-missing', 'The artifact must state the cleanup status of every temporary resource.')
   }
 
+  const handles = input.teardownHandles
+  if (!handles?.supabaseBranch?.branchId || !handles?.vercelPreview?.deploymentId
+    || !handles?.databaseReleaseRows?.branchId || handles.databaseReleaseRows.releaseIds.length === 0
+    || handles.githubEnvironmentSecrets.names.length === 0) {
+    throw new EvidenceBindingRefused('teardown-handle-missing', 'Every temporary resource must have an exact private teardown handle.')
+  }
+  if (handles.workflowRunId !== input.workflowRunId || handles.reviewedCommit !== reviewedCommit
+    || handles.runMarker !== runMarkerFor(input.workflowRunId)) {
+    throw new EvidenceBindingRefused('teardown-handle-missing', 'Private teardown handles do not belong to this run and reviewed commit.')
+  }
+  const issuedReleaseIds = input.releaseIdentities.map((entry) => entry.releaseId).sort()
+  const handledReleaseIds = [...handles.databaseReleaseRows.releaseIds].sort()
+  if (issuedReleaseIds.join('\u0000') !== handledReleaseIds.join('\u0000')) {
+    throw new EvidenceBindingRefused('teardown-handle-release-mismatch', 'The database teardown handle does not name exactly the releases issued by this run.')
+  }
+
   const base = {
     artifactSchema: BOUND_EVIDENCE_SCHEMA,
     reviewedCommit,
@@ -329,6 +415,7 @@ export function buildBoundEvidence(input: BoundEvidenceInput): BoundEvidence {
     deploymentMarkerDigest: input.deploymentMarker
       ? `sha256:${createHash('sha256').update(canonicalJson(input.deploymentMarker), 'utf8').digest('hex')}`
       : null,
+    teardownHandleDigests: teardownHandleDigests(handles),
     cleanup,
   } satisfies Omit<BoundEvidence, 'artifactDigest'>
 

@@ -2,6 +2,7 @@ import { createHash } from 'node:crypto'
 
 import { canonicalJson } from './evidence-dossier/digest.ts'
 import type { TeardownObservation, TeardownResourceKind, TeardownState } from './batch-11-evidence-verifier.ts'
+import type { TeardownHandleDigests } from './batch-11-evidence-binding.ts'
 
 /**
  * Turns sanitized provider query results into teardown observations.
@@ -20,7 +21,7 @@ import type { TeardownObservation, TeardownResourceKind, TeardownState } from '.
  * rather than absence.
  */
 
-export const TEARDOWN_PRODUCER_VERSION = 'maha-batch-11-teardown-observations/1.0' as const
+export const TEARDOWN_PRODUCER_VERSION = 'maha-batch-11-teardown-observations/2.0' as const
 
 /** Every temporary resource a rehearsal can leave behind. */
 export const TEARDOWN_RESOURCE_KINDS: readonly TeardownResourceKind[] = [
@@ -57,6 +58,8 @@ export interface ProviderQueryResult {
   runMarker: string
   /** The reviewed commit the run belonged to. */
   reviewedCommit: string
+  /** Digest of the exact private identifier queried. */
+  identifierFingerprint: string
   matches: readonly ProviderMatch[]
   detail: string
 }
@@ -64,6 +67,7 @@ export interface ProviderQueryResult {
 export interface ProducerInput {
   runMarker: string
   reviewedCommit: string
+  expectedFingerprints: TeardownHandleDigests
   results: readonly ProviderQueryResult[]
 }
 
@@ -76,6 +80,7 @@ export type ProducerRefusal =
   | 'resource-present'
   | 'provider-disagreement'
   | 'credential-shaped-input'
+  | 'identifier-mismatch'
 
 export interface ProducedObservation extends TeardownObservation {
   /** Why this state was reached, as a code rather than prose. */
@@ -123,6 +128,7 @@ export function reduceResourceState(
   kind: TeardownResourceKind,
   runMarker: string,
   reviewedCommit: string,
+  expectedFingerprint: string,
   results: readonly ProviderQueryResult[],
 ): { state: TeardownState; refusal: ProducerRefusal | null; detail: string; providers: string[] } {
   const forKind = results.filter((entry) => entry.resourceKind === kind)
@@ -146,6 +152,9 @@ export function reduceResourceState(
   }
 
   for (const entry of forKind) {
+    if (entry.identifierFingerprint !== expectedFingerprint) {
+      return { state: 'unknown', refusal: 'identifier-mismatch', detail: `${kind}: the ${entry.provider} query covered a different exact identifier.`, providers }
+    }
     if (entry.queryStatus !== 'succeeded') {
       return { state: 'unknown', refusal: 'query-did-not-succeed', detail: `${kind}: the ${entry.provider} query ${entry.queryStatus}; an unread state is not absence.`, providers }
     }
@@ -196,21 +205,18 @@ export function recomputeObservationsDigest(report: {
   }), 'utf8').digest('hex')}`
 }
 
-/** The fingerprint an observation must carry, derived from run and kind. */
-export function observationFingerprint(runMarker: string, kind: TeardownResourceKind): string {
-  return `sha256:${createHash('sha256').update(`${runMarker}:${kind}`, 'utf8').digest('hex')}`
-}
-
 /** Produces one observation per required resource kind. */
 export function produceTeardownObservations(input: ProducerInput): ProducerReport {
   assertSanitized(input)
 
   const observations: ProducedObservation[] = TEARDOWN_RESOURCE_KINDS.map((kind) => {
-    const reduced = reduceResourceState(kind, input.runMarker, input.reviewedCommit, input.results)
+    const expectedFingerprint = input.expectedFingerprints[kind]
+    const reduced = reduceResourceState(kind, input.runMarker, input.reviewedCommit, expectedFingerprint, input.results)
     return {
       resourceKind: kind,
-      // The observation names the run, never the resource.
-      identifierFingerprint: observationFingerprint(input.runMarker, kind),
+      // Exact resource identity, disclosed only as the digest bound by the
+      // public rehearsal artifact.
+      identifierFingerprint: expectedFingerprint,
       observedState: reduced.state,
       detail: reduced.detail,
       refusal: reduced.refusal,

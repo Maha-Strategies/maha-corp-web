@@ -2,7 +2,12 @@ import { execFileSync } from 'node:child_process'
 import { existsSync, mkdirSync, readFileSync, unlinkSync, writeFileSync } from 'node:fs'
 import { dirname, join } from 'node:path'
 
-import { buildBoundEvidence } from '../lib/batch-11-evidence-binding.ts'
+import {
+  TEMPORARY_PREVIEW_SECRET_NAMES,
+  buildBoundEvidence,
+  runMarkerFor,
+  type ExactTeardownHandles,
+} from '../lib/batch-11-evidence-binding.ts'
 import { assertLineageFresh } from '../lib/batch-11-lineage-freshness.ts'
 import {
   BATCH_11_LINEAGE_DECLARATIONS,
@@ -171,6 +176,8 @@ const expectedReviewedCommit = process.env.MAHA_B11_REVIEWED_COMMIT?.trim() ?? '
 const checkedOutCommit = execFileSync('git', ['rev-parse', 'HEAD'], { encoding: 'utf8' }).trim()
 
 const lifecycleState = {
+  /** Retained privately so teardown can query the exact branch after deletion. */
+  branchHandle: null as { branchId: string; parentProjectRef: string } | null,
   /** Retained so the marker can be attested after it is deleted. */
   deploymentMarker: null as Record<string, unknown> | null,
   markerRemoved: false,
@@ -320,6 +327,7 @@ const driver: RehearsalDriver = {
     branchApiUrl = `https://${branchRef}.supabase.co`
     branchServiceRole = deriveEphemeralServiceRole(jwtSecret, Math.floor(Date.now() / 1000))
     lifecycleState.previewBranchCreated = true
+    lifecycleState.branchHandle = { branchId, parentProjectRef: String(detail.parent_project_ref ?? parentRef) }
     lifecycleState.remoteOperationsPerformed += 1
     return {
       branchId,
@@ -584,6 +592,32 @@ try {
     throw new RehearsalRefused('production-project-targeted', 'provision-ephemeral-branch', 'SUPABASE_PROJECT_REF is the Production project.')
   }
   const outcome = await runRehearsal(driver, gates)
+  if (!lifecycleState.branchHandle || !lifecycleState.deploymentMarker) {
+    throw new RehearsalRefused('teardown-handle-missing', 'destroy-ephemeral-resources', 'Exact private teardown handles were not retained for every temporary resource.')
+  }
+  const workflowRunId = process.env.GITHUB_RUN_ID ?? ''
+  const deploymentId = String(lifecycleState.deploymentMarker.deploymentId ?? '')
+  const deploymentOrigin = String(lifecycleState.deploymentMarker.origin ?? '')
+  const teardownHandles: ExactTeardownHandles = {
+    schemaVersion: 'maha-batch-11-private-teardown-handles/1.0',
+    workflowRunId,
+    runMarker: runMarkerFor(workflowRunId),
+    reviewedCommit: expectedReviewedCommit,
+    supabaseBranch: lifecycleState.branchHandle,
+    vercelPreview: { deploymentId, origin: deploymentOrigin },
+    githubEnvironmentSecrets: {
+      environment: 'batch-11-preview-rehearsal',
+      names: TEMPORARY_PREVIEW_SECRET_NAMES,
+    },
+    databaseReleaseRows: {
+      branchId: lifecycleState.branchHandle.branchId,
+      releaseIds: outcome.releaseIdentities.map((entry) => entry.releaseId),
+    },
+  }
+  if (evidencePath) {
+    const privatePath = join(dirname(evidencePath), 'teardown-handles.json')
+    writeFileSync(privatePath, `${JSON.stringify(teardownHandles, null, 2)}\n`, { mode: 0o600 })
+  }
   // The reviewed commit comes from the validated inputs above, never from a
   // field on the artifact this block is about to produce.
   const bound = buildBoundEvidence({
@@ -591,7 +625,7 @@ try {
     checkedOutCommit,
     // Mandatory. buildBoundEvidence refuses an absent or non-numeric value
     // rather than emitting evidence that cannot name its run.
-    workflowRunId: process.env.GITHUB_RUN_ID ?? '',
+    workflowRunId,
     planDigest,
     cohortRecordIds: BATCH_11_LINEAGE_DECLARATIONS.map((entry) => entry.recordId),
     // Expected is what the cohort declares; observed is what the registry probe
@@ -614,6 +648,7 @@ try {
     })),
     replayedReleases: outcome.replayedReleases,
     deploymentMarker: lifecycleState.deploymentMarker,
+    teardownHandles,
     cleanup: {
       branchDestroyed: outcome.branchDestroyed,
       deploymentDestroyed: outcome.previewDestroyed,

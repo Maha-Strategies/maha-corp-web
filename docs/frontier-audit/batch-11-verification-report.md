@@ -35,13 +35,13 @@ Every check passed. This attests to what the artifact and the supplied observati
 | `workflow-run-id` | pass | The artifact names workflow run 77. |
 | `run-marker` | pass | The run marker derives from the workflow run id. |
 | `release-contract` | pass | Every release matches the target digest, kind and predecessor the repository declares. |
-| `artifact-schema` | pass | The artifact declares maha-batch-11-rehearsal-evidence/3.0. |
+| `artifact-schema` | pass | The artifact declares maha-batch-11-rehearsal-evidence/4.0. |
 | `lineage-classification` | pass | Expected and observed lineage classifications agree for every record. |
 | `release-identity` | pass | 5 complete release identities, one per declared record. |
 | `cleanup-status` | pass | The artifact reports every temporary resource destroyed. |
 | `artifact-digest` | pass | The artifact digest recomputes over the reviewed commit and the ordered cohort. |
 | `teardown-shape` | pass | Exactly one observation for each of the 4 required resource kinds. |
-| `teardown-fingerprints` | pass | Every observation fingerprint derives from this run marker. |
+| `teardown-fingerprints` | pass | Every observation matches an exact resource digest bound by the rehearsal artifact. |
 | `teardown-supabase-branch` | pass | supabase-branch was independently observed absent. |
 | `teardown-vercel-preview` | pass | vercel-preview was independently observed absent. |
 | `teardown-github-environment-secret` | pass | github-environment-secret was independently observed absent. |

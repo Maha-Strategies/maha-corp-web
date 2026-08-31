@@ -1,186 +1,178 @@
-import { createHash } from 'node:crypto'
-import { mkdirSync, writeFileSync } from 'node:fs'
+import { mkdirSync, readFileSync, writeFileSync } from 'node:fs'
 import { dirname } from 'node:path'
 
-import { runMarkerFor } from '../lib/batch-11-evidence-binding.ts'
 import {
-  TEARDOWN_RESOURCE_KINDS,
+  TEARDOWN_HANDLE_KINDS,
+  teardownHandleDigests,
+  type ExactTeardownHandles,
+  type TeardownHandleDigests,
+} from '../lib/batch-11-evidence-binding.ts'
+import {
   assertSanitized,
   produceTeardownObservations,
   type ProviderQueryResult,
-  type QueryScope,
   type QueryStatus,
 } from '../lib/batch-11-teardown-observations.ts'
 
 /**
- * Runs the authoritative post-cleanup checks and writes a sanitized report.
- *
- * This is the operator's half of teardown verification. The producer is
- * deliberately inert and takes normalized results; something has to actually
- * ask the providers, and this is it.
- *
- * Every query is wrapped so that failure becomes `failed`, never an empty
- * result. That distinction is the whole point: an errored request and a
- * successful search of an empty account both return nothing, and only one of
- * them is evidence of absence.
- *
- * Nothing identifying leaves here. Resource identifiers are hashed before they
- * are recorded, and the report is scanned for credential-shaped text before it
- * is written.
- *
- * Usage:
- *   MAHA_B11_RUN_ID=<numeric run id> \
- *   MAHA_B11_REVIEWED_COMMIT=<40-char sha> \
- *   SUPABASE_ACCESS_TOKEN=... SUPABASE_PROJECT_REF=... VERCEL_TOKEN=... GITHUB_TOKEN=... \
- *   node --experimental-strip-types scripts/collect-batch-11-teardown-evidence.ts --out <path>
- *
- * Credentials are read from the environment and travel only in request
- * headers. None is written, logged or passed as an argument.
+ * Independently checks the exact resources named by a protected rehearsal.
+ * Only explicit not-found responses for exact identifiers establish absence.
  */
-
 const flag = (name: string, fallback: string | null = null): string | null => {
   const index = process.argv.indexOf(`--${name}`)
   return index >= 0 && process.argv[index + 1] ? process.argv[index + 1] : fallback
 }
 
-const runId = process.env.MAHA_B11_RUN_ID?.trim() ?? ''
-const reviewedCommit = process.env.MAHA_B11_REVIEWED_COMMIT?.trim() ?? ''
+const artifactPath = flag('artifact')
+const handlesPath = flag('handles')
 const outPath = flag('out', 'batch-11-teardown/observations.json')!
-
-if (!/^[0-9]{1,20}$/.test(runId)) {
-  console.error('MAHA_B11_RUN_ID must be the numeric workflow run id.')
+const skipGithub = process.argv.includes('--skip-github')
+const allowPartial = process.argv.includes('--allow-partial')
+if (!artifactPath || !handlesPath) {
+  console.error('--artifact and --handles are required.')
   process.exit(2)
 }
-if (!/^[0-9a-f]{40}$/.test(reviewedCommit)) {
-  console.error('MAHA_B11_REVIEWED_COMMIT must be a 40-character lowercase SHA.')
+
+const artifact = JSON.parse(readFileSync(artifactPath, 'utf8')) as Record<string, unknown>
+const handles = JSON.parse(readFileSync(handlesPath, 'utf8')) as ExactTeardownHandles
+const expected = artifact.teardownHandleDigests as TeardownHandleDigests | undefined
+const recomputed = teardownHandleDigests(handles)
+if (!expected || TEARDOWN_HANDLE_KINDS.some((kind) => expected[kind] !== recomputed[kind])) {
+  console.error('Private teardown handles do not match the digests bound by the public rehearsal artifact.')
   process.exit(2)
 }
-const runMarker = runMarkerFor(runId)
+if (artifact.workflowRunId !== handles.workflowRunId || artifact.runMarker !== handles.runMarker
+  || artifact.reviewedCommit !== handles.reviewedCommit) {
+  console.error('Private teardown handles do not belong to the supplied rehearsal artifact.')
+  process.exit(2)
+}
+const artifactReleaseIds = Array.isArray(artifact.releaseIdentities)
+  ? artifact.releaseIdentities.map((row) => String((row as Record<string, unknown>).releaseId ?? '')).sort()
+  : []
+if (artifactReleaseIds.join('\u0000') !== [...handles.databaseReleaseRows.releaseIds].sort().join('\u0000')) {
+  console.error('Private teardown handles do not name exactly the releases in the supplied artifact.')
+  process.exit(2)
+}
 
-/** Hashes an identifier so it can be counted without being disclosed. */
-const fingerprint = (value: string) => `sha256:${createHash('sha256').update(value, 'utf8').digest('hex')}`
-
-interface Attempt {
-  matches: { identifierFingerprint: string; status: string }[]
+interface ExactAttempt {
   status: QueryStatus
-  scope: QueryScope
+  matches: { identifierFingerprint: string; status: string }[]
   detail: string
 }
 
-/**
- * Wraps one authoritative query.
- *
- * A thrown error, a non-OK response and an unparseable body all resolve to a
- * non-succeeded status rather than an empty match list, so a broken query can
- * never be read downstream as absence.
- */
-async function attempt(
-  describe: string,
-  scope: QueryScope,
-  run: () => Promise<{ ok: boolean; status: number; body: unknown }>,
-  select: (body: unknown) => { identifierFingerprint: string; status: string }[],
-): Promise<Attempt> {
+async function exactGet(label: string, url: string, headers: Record<string, string>, fingerprint: string): Promise<ExactAttempt> {
   try {
-    const response = await run()
-    if (!response.ok) {
-      return { matches: [], status: 'failed', scope, detail: `${describe} returned ${response.status}.` }
+    const response = await fetch(url, { headers, cache: 'no-store' })
+    if (response.status === 404) {
+      return { status: 'succeeded', matches: [], detail: `${label} returned not-found for the exact identifier.` }
     }
-    try {
-      return { matches: select(response.body), status: 'succeeded', scope, detail: `${describe} succeeded at ${scope} scope.` }
-    } catch {
-      return { matches: [], status: 'malformed', scope, detail: `${describe} returned a body this collector could not interpret.` }
+    if (!response.ok) {
+      return { status: 'failed', matches: [], detail: `${label} returned ${response.status}; absence is not established.` }
+    }
+    return {
+      status: 'succeeded',
+      matches: [{ identifierFingerprint: fingerprint, status: 'present' }],
+      detail: `${label} returned the exact resource; it remains present.`,
     }
   } catch (error) {
-    return { matches: [], status: 'failed', scope, detail: `${describe} raised ${(error as Error).name}.` }
+    return { status: 'failed', matches: [], detail: `${label} raised ${(error as Error).name}; absence is not established.` }
   }
-}
-
-async function json(url: string, headers: Record<string, string>) {
-  const response = await fetch(url, { headers, cache: 'no-store' })
-  let body: unknown = null
-  try { body = await response.json() } catch { body = null }
-  return { ok: response.ok, status: response.status, body }
 }
 
 const supabaseToken = process.env.SUPABASE_ACCESS_TOKEN?.trim() ?? ''
-const supabaseRef = process.env.SUPABASE_PROJECT_REF?.trim() ?? ''
 const vercelToken = process.env.VERCEL_TOKEN?.trim() ?? ''
 const githubToken = process.env.GITHUB_TOKEN?.trim() ?? ''
 const repository = process.env.GITHUB_REPOSITORY?.trim() ?? 'Maha-Strategies/maha-corp-web'
-const environment = 'batch-11-preview-rehearsal'
+const vercelTeam = process.env.VERCEL_TEAM_ID?.trim() ?? 'team_KTJouKHTcPGeMXNMDqh6CoYs'
 
-const array = (value: unknown): unknown[] => {
-  if (Array.isArray(value)) return value
-  throw new Error('not an array')
-}
+const supabase: ExactAttempt = supabaseToken
+  ? await exactGet('The exact Supabase branch query',
+    `https://api.supabase.com/v1/branches/${encodeURIComponent(handles.supabaseBranch.branchId)}`,
+    { authorization: `Bearer ${supabaseToken}` }, expected['supabase-branch'])
+  : { status: 'not-attempted', matches: [], detail: 'The Supabase credential was not supplied.' }
 
-/** Only resources this run named. A foreign resource proves nothing here. */
-const named = (value: unknown, nameOf: (row: Record<string, unknown>) => string, statusOf: (row: Record<string, unknown>) => string) =>
-  array(value)
-    .filter((row): row is Record<string, unknown> => typeof row === 'object' && row !== null)
-    .filter((row) => nameOf(row).includes(runMarker))
-    .map((row) => ({ identifierFingerprint: fingerprint(nameOf(row)), status: statusOf(row) }))
+const vercel: ExactAttempt = vercelToken
+  ? await exactGet('The exact Vercel deployment query',
+    `https://api.vercel.com/v13/deployments/${encodeURIComponent(handles.vercelPreview.deploymentId)}?teamId=${encodeURIComponent(vercelTeam)}`,
+    { authorization: `Bearer ${vercelToken}` }, expected['vercel-preview'])
+  : { status: 'not-attempted', matches: [], detail: 'The Vercel credential was not supplied.' }
 
-const attempts: Record<string, Attempt> = {
-  'supabase-branch': supabaseToken && supabaseRef
-    ? await attempt('The Supabase branch listing', 'exact-run-marker',
-      () => json(`https://api.supabase.com/v1/projects/${supabaseRef}/branches`, { authorization: `Bearer ${supabaseToken}` }),
-      (body) => named(body, (row) => String(row.name ?? ''), (row) => String(row.status ?? 'unknown')))
-    : { matches: [], status: 'not-attempted', scope: 'unknown', detail: 'Supabase credentials were not supplied.' },
-
-  'vercel-preview': vercelToken
-    ? await attempt('The Vercel deployment listing', 'exact-run-marker',
-      () => json('https://api.vercel.com/v6/deployments?limit=100', { authorization: `Bearer ${vercelToken}` }),
-      (body) => named((body as Record<string, unknown>)?.deployments, (row) => String(row.name ?? row.meta ?? ''), (row) => String(row.state ?? 'unknown')))
-    : { matches: [], status: 'not-attempted', scope: 'unknown', detail: 'The Vercel credential was not supplied.' },
-
-  'github-environment-secret': githubToken
-    ? await attempt('The protected-environment secret listing', 'exact-run-marker',
-      () => json(`https://api.github.com/repos/${repository}/environments/${environment}/secrets`, {
-        authorization: `Bearer ${githubToken}`, accept: 'application/vnd.github+json',
-      }),
-      // Only names are read. A temporary binding for this run carries the run
-      // marker in its name; the permanent bindings do not and are ignored.
-      (body) => named((body as Record<string, unknown>)?.secrets, (row) => String(row.name ?? ''), () => 'bound'))
-    : { matches: [], status: 'not-attempted', scope: 'unknown', detail: 'The GitHub credential was not supplied.' },
-
-  // Preview release rows are read through the Preview deployment's own public
-  // registry projection, which needs no credential.
-  'database-release-rows': process.env.MAHA_B11_PREVIEW_ORIGIN
-    ? await attempt('The Preview release registry', 'exact-run-marker',
-      () => json(`${process.env.MAHA_B11_PREVIEW_ORIGIN}/knowledge/epistemic-system/releases/registry.json`, {}),
-      (body) => named((body as Record<string, unknown>)?.releases, (row) => String(row.rehearsalRunMarker ?? ''), (row) => String(row.status ?? 'unknown')))
-    : { matches: [], status: 'not-attempted', scope: 'unknown', detail: 'No Preview origin was supplied.' },
-}
-
-const results: ProviderQueryResult[] = TEARDOWN_RESOURCE_KINDS.map((kind) => {
-  const outcome = attempts[kind]
-  return {
-    provider: kind.split('-')[0],
-    resourceKind: kind,
-    queryStatus: outcome.status,
-    scope: outcome.scope,
-    runMarker,
-    reviewedCommit,
-    matches: outcome.matches,
-    detail: outcome.detail,
+async function githubSecrets(): Promise<ExactAttempt> {
+  if (skipGithub) return { status: 'not-attempted', matches: [], detail: 'GitHub secret teardown is finalized after the protected run ends.' }
+  if (!githubToken) return { status: 'not-attempted', matches: [], detail: 'The GitHub credential was not supplied.' }
+  try {
+    const response = await fetch(
+      `https://api.github.com/repos/${repository}/environments/${handles.githubEnvironmentSecrets.environment}/secrets`,
+      { headers: { authorization: `Bearer ${githubToken}`, accept: 'application/vnd.github+json' }, cache: 'no-store' },
+    )
+    if (!response.ok) return { status: 'failed', matches: [], detail: `The exact GitHub environment-secret listing returned ${response.status}.` }
+    const body = await response.json() as { secrets?: { name?: string }[] }
+    if (!Array.isArray(body.secrets)) return { status: 'malformed', matches: [], detail: 'The GitHub secret listing was malformed.' }
+    const expectedNames = new Set(handles.githubEnvironmentSecrets.names)
+    const survivors = body.secrets.filter((row) => expectedNames.has(String(row.name ?? '')))
+    return {
+      status: 'succeeded',
+      matches: survivors.map(() => ({ identifierFingerprint: expected['github-environment-secret'], status: 'bound' })),
+      detail: survivors.length === 0
+        ? 'The exact temporary secret-name set is absent from the protected environment.'
+        : `${survivors.length} exact temporary secret binding(s) remain.`,
+    }
+  } catch (error) {
+    return { status: 'failed', matches: [], detail: `The GitHub secret listing raised ${(error as Error).name}.` }
   }
+}
+const github = await githubSecrets()
+
+// Release rows existed only inside the exact ephemeral branch. Their absence
+// is established by confirmed destruction of that container, after checking
+// above that the private handle names exactly the artifact's release ids.
+const rows: ExactAttempt = supabase.status === 'succeeded' && supabase.matches.length === 0
+  ? { status: 'succeeded', matches: [], detail: 'Exact release rows are absent by confirmed destruction of their exact containing branch.' }
+  : {
+    status: supabase.status,
+    matches: supabase.matches.length > 0
+      ? [{ identifierFingerprint: expected['database-release-rows'], status: 'containing-branch-present' }]
+      : [],
+    detail: 'Release-row absence cannot be established until the exact containing branch is confirmed absent.',
+  }
+
+const attempts = {
+  'supabase-branch': supabase,
+  'vercel-preview': vercel,
+  'github-environment-secret': github,
+  'database-release-rows': rows,
+}
+const results: ProviderQueryResult[] = TEARDOWN_HANDLE_KINDS.map((kind) => ({
+  provider: kind === 'database-release-rows' ? 'supabase-container' : kind.split('-')[0],
+  resourceKind: kind,
+  queryStatus: attempts[kind].status,
+  scope: 'exact-identifier',
+  runMarker: handles.runMarker,
+  reviewedCommit: handles.reviewedCommit,
+  identifierFingerprint: expected[kind],
+  matches: attempts[kind].matches,
+  detail: attempts[kind].detail,
+}))
+
+const report = produceTeardownObservations({
+  runMarker: handles.runMarker,
+  reviewedCommit: handles.reviewedCommit,
+  expectedFingerprints: expected,
+  results,
 })
-
-const report = produceTeardownObservations({ runMarker, reviewedCommit, results })
-const payload = { ...report, workflowRunId: runId, providerResults: results }
-
-// Refuse to write anything credential-shaped, even accidentally.
+const payload = { ...report, workflowRunId: handles.workflowRunId, providerResults: results }
 assertSanitized(payload)
-
 mkdirSync(dirname(outPath), { recursive: true })
 writeFileSync(outPath, `${JSON.stringify(payload, null, 2)}\n`)
-
 process.stdout.write(`${JSON.stringify({
-  runMarker,
+  runMarker: handles.runMarker,
   allConfirmedAbsent: report.allConfirmedAbsent,
   states: report.observations.map((entry) => ({ resourceKind: entry.resourceKind, observedState: entry.observedState, refusal: entry.refusal })),
 }, null, 2)}\n`)
-
-// An operator must not read a green exit as confirmed teardown.
-if (!report.allConfirmedAbsent) process.exit(1)
+if (!report.allConfirmedAbsent) {
+  const partialSafe = allowPartial
+    && report.observations.every((entry) => entry.resourceKind === 'github-environment-secret'
+      ? entry.observedState === 'unknown'
+      : entry.observedState === 'confirmed-absent')
+  if (!partialSafe) process.exit(1)
+}

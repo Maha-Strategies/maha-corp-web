@@ -5,7 +5,7 @@ import {
   EVIDENCE_VERIFIER_VERSION,
   repositoryContract,
   verifyRehearsalEvidence,
-  type TeardownObservation,
+  type TeardownEvidence,
 } from '../lib/batch-11-evidence-verifier.ts'
 
 /**
@@ -39,10 +39,10 @@ const wrapped = typeof raw === 'object' && raw !== null && 'artifact' in raw
 const artifact = wrapped ? (raw as Record<string, unknown>).artifact : raw
 const reviewedCommit = flag('reviewed-commit', wrapped ? String((raw as Record<string, unknown>).reviewedCommit ?? '') : '')!
 const teardownPath = flag('teardown')
-const teardown: readonly TeardownObservation[] | null = teardownPath
-  ? (JSON.parse(readFileSync(teardownPath, 'utf8')) as TeardownObservation[])
+const teardown: TeardownEvidence | null = teardownPath
+  ? (JSON.parse(readFileSync(teardownPath, 'utf8')) as TeardownEvidence)
   : wrapped
-    ? ((raw as Record<string, unknown>).teardown as TeardownObservation[] | undefined) ?? null
+    ? ((raw as Record<string, unknown>).teardown as TeardownEvidence | undefined) ?? null
     : null
 
 const report = verifyRehearsalEvidence({ artifact, reviewedCommit, teardown }, repositoryContract())

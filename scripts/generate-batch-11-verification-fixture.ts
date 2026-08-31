@@ -1,6 +1,13 @@
 import { mkdirSync, writeFileSync } from 'node:fs'
 
-import { buildBoundEvidence, contractReleaseIdentities, runMarkerFor } from '../lib/batch-11-evidence-binding.ts'
+import {
+  TEMPORARY_PREVIEW_SECRET_NAMES,
+  buildBoundEvidence,
+  contractReleaseIdentities,
+  runMarkerFor,
+  teardownHandleDigests,
+  type ExactTeardownHandles,
+} from '../lib/batch-11-evidence-binding.ts'
 import { repositoryContract } from '../lib/batch-11-evidence-verifier.ts'
 import { BATCH_11_LINEAGE_DECLARATIONS } from '../lib/batch-11-mixed-lineage-release.ts'
 import { PHASE_ORDER } from '../lib/batch-11-rehearsal-phases.ts'
@@ -27,6 +34,21 @@ const REVIEWED_COMMIT = 'b'.repeat(40)
 const WORKFLOW_RUN_ID = '77'
 const RUN_MARKER = runMarkerFor(WORKFLOW_RUN_ID)
 
+const releaseIdentities = contractReleaseIdentities().map((entry, index) => ({
+  ...entry,
+  releaseId: `epirelease_synthetic${String(index).padStart(2, '0')}`,
+}))
+const teardownHandles: ExactTeardownHandles = {
+  schemaVersion: 'maha-batch-11-private-teardown-handles/1.0',
+  workflowRunId: WORKFLOW_RUN_ID,
+  runMarker: RUN_MARKER,
+  reviewedCommit: REVIEWED_COMMIT,
+  supabaseBranch: { branchId: 'branch_synthetic', parentProjectRef: 'staging_synthetic' },
+  vercelPreview: { deploymentId: 'dpl_synthetic', origin: 'https://synthetic.vercel.app' },
+  githubEnvironmentSecrets: { environment: 'batch-11-preview-rehearsal', names: TEMPORARY_PREVIEW_SECRET_NAMES },
+  databaseReleaseRows: { branchId: 'branch_synthetic', releaseIds: releaseIdentities.map((entry) => entry.releaseId) },
+}
+
 const bound = buildBoundEvidence({
   expectedReviewedCommit: REVIEWED_COMMIT,
   checkedOutCommit: REVIEWED_COMMIT,
@@ -41,12 +63,10 @@ const bound = buildBoundEvidence({
   phaseOutcomes: PHASE_ORDER.map((phase) => ({ phase, status: 'executed', mutations: 1 })),
   // Derived from the repository contract. An arbitrary well-formed hash here
   // would be refused, which is the point of deriving them.
-  releaseIdentities: contractReleaseIdentities().map((entry, index) => ({
-    ...entry,
-    releaseId: `epirelease_synthetic${String(index).padStart(2, '0')}`,
-  })),
+  releaseIdentities,
   replayedReleases: 0,
   deploymentMarker: { deploymentId: 'dpl_synthetic', origin: 'https://synthetic.vercel.app', reviewedCommit: REVIEWED_COMMIT },
+  teardownHandles,
   cleanup: { branchDestroyed: true, deploymentDestroyed: true, markerRemoved: true },
   requiredPhaseCount: PHASE_ORDER.length,
 })
@@ -59,6 +79,7 @@ const providerResults: ProviderQueryResult[] = TEARDOWN_RESOURCE_KINDS.map((kind
   scope: 'exact-run-marker',
   runMarker: RUN_MARKER,
   reviewedCommit: REVIEWED_COMMIT,
+  identifierFingerprint: teardownHandleDigests(teardownHandles)[kind],
   matches: [],
   detail: `Queried ${kind} at exact run-marker scope; no matching resource remained.`,
 }))
@@ -66,6 +87,7 @@ const providerResults: ProviderQueryResult[] = TEARDOWN_RESOURCE_KINDS.map((kind
 const teardown = produceTeardownObservations({
   runMarker: RUN_MARKER,
   reviewedCommit: REVIEWED_COMMIT,
+  expectedFingerprints: teardownHandleDigests(teardownHandles),
   results: providerResults,
 })
 
