@@ -1,0 +1,712 @@
+{
+  "schemaVersion": "maha-batch-11-registry-snapshot/1.0",
+  "source": "https://www.mahastrategies.com/knowledge/epistemic-system/releases/registry.json",
+  "method": "unauthenticated HTTPS GET of the public release registry; no credential presented, no mutation performed",
+  "statusVocabularyObserved": [
+    "active",
+    "superseded"
+  ],
+  "statusVocabularyEnumerated": [
+    "active",
+    "superseded",
+    "withdrawn"
+  ],
+  "counts": {
+    "totalReleases": 115,
+    "active": 114,
+    "superseded": 1,
+    "withdrawn": 0
+  },
+  "rows": [
+    {
+      "recordId": "urn:maha:record:adenine-base-editing",
+      "releaseId": "epirelease_10fad7325c184adc8fb88a6a3c9777d1",
+      "status": "active",
+      "targetSha256": "sha256:f01d3ec2cf7f188586f8d5938e430b5eceef5c0b34ce0db2527cf98bb76b5584"
+    },
+    {
+      "recordId": "urn:maha:record:advanced-materials-correlated-insulating-states",
+      "releaseId": "epirelease_599b493f44a0498da26d226961611b4b",
+      "status": "active",
+      "targetSha256": "sha256:3bd4d38a7f0f2d5e22a713e2f50ca6e6db51541de53cb7c3f87af5d77d9063d3"
+    },
+    {
+      "recordId": "urn:maha:record:advanced-materials-graphene-hbn-heterostructures",
+      "releaseId": "epirelease_cf7d30fd107544bb8cf80ef1d184e5b6",
+      "status": "active",
+      "targetSha256": "sha256:089357ea824544d5dae02a72384bb9eefea284e439771650d6e60b768ca3c144"
+    },
+    {
+      "recordId": "urn:maha:record:advanced-materials-graphene-monolayers",
+      "releaseId": "epirelease_bd3e9f2b9b0f4814acc35c11e17ec7fa",
+      "status": "active",
+      "targetSha256": "sha256:fe94138dd99d5ff79c9b69762b7039f9a84eefb7f8998841a423aaf125302fdf"
+    },
+    {
+      "recordId": "urn:maha:record:advanced-materials-hexagonal-boron-nitride-dielectrics",
+      "releaseId": "epirelease_4cd29a7223db4fd99b118dc96062e9ef",
+      "status": "active",
+      "targetSha256": "sha256:4caa07bb7312f980fff275aec28c5d7169fd1716dbc982b35e91f788071959a1"
+    },
+    {
+      "recordId": "urn:maha:record:advanced-materials-hexagonal-boron-nitride-dielectrics",
+      "releaseId": "epirelease_6b639643c3fd40bfbe4615cf9ba9d1b5",
+      "status": "superseded",
+      "targetSha256": "sha256:376cd21b08d466e7abb081b0ec9119d15c86a1f62a2de387c8297e39ff601bdd"
+    },
+    {
+      "recordId": "urn:maha:record:advanced-materials-magic-angle-superconductivity",
+      "releaseId": "epirelease_3594f696858045e69582411fd403d174",
+      "status": "active",
+      "targetSha256": "sha256:223180830fe00cc27716112698c27bd3c8c34ed198cf313d359e34fe3e9983d3"
+    },
+    {
+      "recordId": "urn:maha:record:advanced-materials-moire-superlattices",
+      "releaseId": "epirelease_377b82cd521742d79bcbfce0ccc14270",
+      "status": "active",
+      "targetSha256": "sha256:e068e9be179055bd276018d4cb160973d97b543ead4a2658066d1af11da7417e"
+    },
+    {
+      "recordId": "urn:maha:record:advanced-materials-twist-angle-control",
+      "releaseId": "epirelease_78e17a346f864314833c54ab2cf0b22b",
+      "status": "active",
+      "targetSha256": "sha256:9a9750914fe0e9429a51dff02b586d4683dec4f1c80cc0d28c7195230330e9cf"
+    },
+    {
+      "recordId": "urn:maha:record:agentic-systems-mcp-context-window-position-effects",
+      "releaseId": "epirelease_d6268dbcc8784930ac7b9c7154fb07d1",
+      "status": "active",
+      "targetSha256": "sha256:d58c9eff543c9c2b592772bdaac5922c9c4c13460344a52551e9bd80c0b732fc"
+    },
+    {
+      "recordId": "urn:maha:record:agentic-systems-mcp-mcp-capability-negotiation",
+      "releaseId": "epirelease_05d5ffe2af774b13934ea173e6f0dcc6",
+      "status": "active",
+      "targetSha256": "sha256:04b49adfee9ef25a070060f53ce2b0ce84a57da1c79e77635485c7a8bb60610d"
+    },
+    {
+      "recordId": "urn:maha:record:agentic-systems-mcp-mcp-client-server-roles",
+      "releaseId": "epirelease_d63350c4ac6642deb732ffe994518fa7",
+      "status": "active",
+      "targetSha256": "sha256:1db697ac8f4127a2423be668d9ae89fb658a579034d213d0241d9ad3ea299d9d"
+    },
+    {
+      "recordId": "urn:maha:record:agentic-systems-mcp-mcp-prompt-templates",
+      "releaseId": "epirelease_3387034a85fe4e5f8d7b0c7549ee35f2",
+      "status": "active",
+      "targetSha256": "sha256:8f0c7454dbddb8e89672ab5bb8f71487b13d5f60c0dd9caa8d2f3e3a9133af30"
+    },
+    {
+      "recordId": "urn:maha:record:agentic-systems-mcp-mcp-resource-discovery",
+      "releaseId": "epirelease_704543dbef7846c58230e51de125b5e1",
+      "status": "active",
+      "targetSha256": "sha256:4973e2d14da8933977d08c924b336c2acd89c61eca249abc5022d66d7a4a65b5"
+    },
+    {
+      "recordId": "urn:maha:record:agentic-systems-mcp-mcp-tool-discovery",
+      "releaseId": "epirelease_fc9af8f2bd544c95a5f9bebd8eec7e91",
+      "status": "active",
+      "targetSha256": "sha256:7b3e606931d1625dd96ab951f7694d189ca2fba493e3fb0769800be728166d2f"
+    },
+    {
+      "recordId": "urn:maha:record:agentic-systems-mcp-mcp-tool-input-schemas",
+      "releaseId": "epirelease_e4548b3179bc49838ccee244ffa16663",
+      "status": "active",
+      "targetSha256": "sha256:9ef90b56afe42591236f42acf544aa4c6390f01a1285d21968101a2379022779"
+    },
+    {
+      "recordId": "urn:maha:record:agentic-systems-mcp-mcp-tool-result-contracts",
+      "releaseId": "epirelease_1975faa375e24ca992a78548c6260168",
+      "status": "active",
+      "targetSha256": "sha256:29e3e05e98eb67e9d0e6543b2bb7cbada7af1c622aaebdef0e4eb46e118ff631"
+    },
+    {
+      "recordId": "urn:maha:record:agentic-systems-mcp-tool-deny-by-default",
+      "releaseId": "epirelease_ec742c5ed8924d4b9f8f3bda5570bb19",
+      "status": "active",
+      "targetSha256": "sha256:bc3682ef4b4613b4cff9c468953c218fb20ebad8786ab8c6cc4bbcc8dccb1a66"
+    },
+    {
+      "recordId": "urn:maha:record:biomolecular-engineering-cell-free-transcription-translation",
+      "releaseId": "epirelease_f2ee091ec4744210b464b5ec2feea44f",
+      "status": "active",
+      "targetSha256": "sha256:fab0b69c3399c2fc046edf1f5c653a02ddee5445dceb8f9976babc948d1b4547"
+    },
+    {
+      "recordId": "urn:maha:record:biomolecular-engineering-de-novo-binder-design",
+      "releaseId": "epirelease_6fd619c2bdc54cedbd99e0ff01493e77",
+      "status": "active",
+      "targetSha256": "sha256:344b491e9fa3317829d3e8b48d5432c80d6804b15ffce2f25a814770966ac298"
+    },
+    {
+      "recordId": "urn:maha:record:biomolecular-engineering-directed-enzyme-evolution",
+      "releaseId": "epirelease_f0d50f1b196841e785425e59f2bf8ddb",
+      "status": "active",
+      "targetSha256": "sha256:84b5247c53d2e106390e04dacfd9325874769cf98670ad9f272a53d176b574cd"
+    },
+    {
+      "recordId": "urn:maha:record:biomolecular-engineering-experimental-fold-validation",
+      "releaseId": "epirelease_d3bdc103f47f48ad9b4f2f1e706eb638",
+      "status": "active",
+      "targetSha256": "sha256:c0fc9d83edcc19113f2ea0c0d9887f42623754876eb1d6e407170b24c244eb63"
+    },
+    {
+      "recordId": "urn:maha:record:biomolecular-engineering-motif-scaffolding",
+      "releaseId": "epirelease_8ffb8cdb8d7841338d8ae69da6fd6eea",
+      "status": "active",
+      "targetSha256": "sha256:ca5e57a43f41f13e0dc0f97c84795152690e1d0bc8fca68488ac2390881a69b9"
+    },
+    {
+      "recordId": "urn:maha:record:biomolecular-engineering-protein-backbone-diffusion",
+      "releaseId": "epirelease_8fae1d3dd4fb47f38669ee6d09bbdbf9",
+      "status": "active",
+      "targetSha256": "sha256:3cc68d1076df1887eff88d393f6d363cfd01d641020d617bbe30c6c8062bd19f"
+    },
+    {
+      "recordId": "urn:maha:record:biomolecular-engineering-sequence-design-with-proteinmpnn",
+      "releaseId": "epirelease_d72ac357ac1f4d0fbb3605776e60cd46",
+      "status": "active",
+      "targetSha256": "sha256:b38ab10bfe119c71d5e1d33b0acc4475f4821974a641d50672cbd24021e765cc"
+    },
+    {
+      "recordId": "urn:maha:record:biomolecular-engineering-structure-prediction-filtering",
+      "releaseId": "epirelease_9bf9b14ec8fb48f884efdc43e44ea349",
+      "status": "active",
+      "targetSha256": "sha256:2f59ecb93f3ad9418b05e01058d2d629fff5368dcc20b838b0e996f651c1db50"
+    },
+    {
+      "recordId": "urn:maha:record:biomolecular-engineering-unconditional-protein-generation",
+      "releaseId": "epirelease_1abe7d4c72cc4e40a9b2105d4b5060a3",
+      "status": "active",
+      "targetSha256": "sha256:209f894eea44050079eb00fc6c0c3302e9cc362929409d23071f8327805c5153"
+    },
+    {
+      "recordId": "urn:maha:record:cell-free-gene-expression",
+      "releaseId": "epirelease_d548cd8185ff4c00bc261e8100e216ca",
+      "status": "active",
+      "targetSha256": "sha256:aa13c1ff302f9440de61005b80e9b5c585a8e983c107427a1fa3df9d4b3f9f8e"
+    },
+    {
+      "recordId": "urn:maha:record:cell-line-versus-primary-cell-evidence",
+      "releaseId": "epirelease_e262e328902e4be18ae9f8b90a398db1",
+      "status": "active",
+      "targetSha256": "sha256:6b6b99f6540b8e46e2895fcacf978dc6cea7ca8688fe377cbce0201b6957b54d"
+    },
+    {
+      "recordId": "urn:maha:record:change-seq-off-target-nomination",
+      "releaseId": "epirelease_5c6b2e61469f49ce920513f1d65fe068",
+      "status": "active",
+      "targetSha256": "sha256:d29ddb16723627ab8b8c7943944d9549c84f219884bc3dca0aae322a295aeac8"
+    },
+    {
+      "recordId": "urn:maha:record:circuit-quantum-electrodynamics",
+      "releaseId": "epirelease_7b4a1cce93ab43bfb0452969ee033094",
+      "status": "active",
+      "targetSha256": "sha256:e40bb12a0a21a56704cf497b3a825173443f8da8fd29118a756c19a866e91944"
+    },
+    {
+      "recordId": "urn:maha:record:crispr-cas9-nuclease-editing",
+      "releaseId": "epirelease_b178ad936ba047608b7178343af07a3a",
+      "status": "active",
+      "targetSha256": "sha256:af0966a0ae03aa6f7bcbd936ba194bf84ce302d67601dd93726855bba1c3884a"
+    },
+    {
+      "recordId": "urn:maha:record:critical-supply-chains-critical-mineral-import-reliance",
+      "releaseId": "epirelease_5edf879d805146c18b6e2ac1752dc607",
+      "status": "active",
+      "targetSha256": "sha256:0561fd738dfdd2daa0769ad4bf6585d6d447c2659052f7f3aca7945cc1547108"
+    },
+    {
+      "recordId": "urn:maha:record:critical-supply-chains-euv-photoresist-precursors",
+      "releaseId": "epirelease_c93f2d285cdf4a7f95c798d638b71c08",
+      "status": "active",
+      "targetSha256": "sha256:fef130954c4d695fc52a1cef16a84d5b4dbde317b8003fb37d0f8a7b7583fc46"
+    },
+    {
+      "recordId": "urn:maha:record:critical-supply-chains-high-purity-quartz-deposits",
+      "releaseId": "epirelease_d9b0cd28c1614fa58192be24afcd2a7a",
+      "status": "active",
+      "targetSha256": "sha256:c667320cf234997948bffc6fef2aefd2133010aed2a0af4d457dad0817fd93c0"
+    },
+    {
+      "recordId": "urn:maha:record:critical-supply-chains-photoacid-generator-supply",
+      "releaseId": "epirelease_c739be62c75c451c869097143637e2e5",
+      "status": "active",
+      "targetSha256": "sha256:e162b04fef588053f885e1a776241372b62282ee7b4cbb4819cbdb26ca531b69"
+    },
+    {
+      "recordId": "urn:maha:record:critical-supply-chains-quartz-crucible-manufacturing",
+      "releaseId": "epirelease_ddb8847cfa1748a19c374b2b71bc913e",
+      "status": "active",
+      "targetSha256": "sha256:4ea4058077b38e83ffe793f62499517702af9b8c0f9c129ab932833fa897e78e"
+    },
+    {
+      "recordId": "urn:maha:record:critical-supply-chains-semiconductor-grade-polysilicon",
+      "releaseId": "epirelease_79ecc635a76446f484134acc47546e7a",
+      "status": "active",
+      "targetSha256": "sha256:16650f77b62196d4e0646eba40145ce3b81eb1c50f72d0342b1f2b2ae6096c79"
+    },
+    {
+      "recordId": "urn:maha:record:cryogenic-superconducting-control-stack",
+      "releaseId": "epirelease_68d64fc9b9214d2f93dd7199163addab",
+      "status": "active",
+      "targetSha256": "sha256:71221adaf50e139ee7ffc0405584c158926babf0468c96e926f5e70685ebbc5d"
+    },
+    {
+      "recordId": "urn:maha:record:cytosine-base-editing",
+      "releaseId": "epirelease_de25e81019ba498398429c2cca7d3c23",
+      "status": "active",
+      "targetSha256": "sha256:4d8be53b3a2b511149801817f5c1c9821488e91ba44df24616cc592668d8e917"
+    },
+    {
+      "recordId": "urn:maha:record:directed-evolution-workflows",
+      "releaseId": "epirelease_d69f0bdc06db46248b9bc393cfa91d49",
+      "status": "active",
+      "targetSha256": "sha256:23639467a2d9f137e25953d72c9f022b6437cb4a13c998c116381750e1dfd746"
+    },
+    {
+      "recordId": "urn:maha:record:dispersive-qubit-readout",
+      "releaseId": "epirelease_10f27fad25d149e480c21b82af35b737",
+      "status": "active",
+      "targetSha256": "sha256:27c33647763e4282187726e9c47fbe7eeff93809fca432ee4a80233149d6146e"
+    },
+    {
+      "recordId": "urn:maha:record:double-strand-break-repair-outcomes",
+      "releaseId": "epirelease_a40b9baaab084de7a3dbd7e493878345",
+      "status": "active",
+      "targetSha256": "sha256:6560279b2afb7f1850f4ee8877679effb88c69af535aa3669b6410ebd5348660"
+    },
+    {
+      "recordId": "urn:maha:record:editing-efficiency-and-byproduct-measurement",
+      "releaseId": "epirelease_f9a9dc187c8444e8b2744e52f55bfb8c",
+      "status": "active",
+      "targetSha256": "sha256:016c844e61ea2cf840113ac1d34227c4733f14ebf40f922fcf31f98bdcf2b0fe"
+    },
+    {
+      "recordId": "urn:maha:record:error-mitigation-versus-correction",
+      "releaseId": "epirelease_c6a3d38460994f2bb29579a9e1e9e028",
+      "status": "active",
+      "targetSha256": "sha256:45a8ef63679f678ca28e372d7391c092f49909c49fc484b7963cec3b375e9bf5"
+    },
+    {
+      "recordId": "urn:maha:record:ex-vivo-genome-editing-workflow",
+      "releaseId": "epirelease_d92de3b10ecb4b8b82323b6b1d2e869e",
+      "status": "active",
+      "targetSha256": "sha256:3e76f32cc4d0ff6e901f3aeecd576f89bfa43edf09be22e618256a3a0fcc9120"
+    },
+    {
+      "recordId": "urn:maha:record:fault-tolerance-threshold-condition",
+      "releaseId": "epirelease_c073893f088c48e296810d5ea5d58207",
+      "status": "active",
+      "targetSha256": "sha256:e0e0d68ff64e4d2b7091b2d0b71e1dc97e72d847591734a46ebf423efc9c9be7"
+    },
+    {
+      "recordId": "urn:maha:record:fusion-plasma-systems-breeding-blanket-test-modules",
+      "releaseId": "epirelease_125e34f72e9d4296a44eae59f921caed",
+      "status": "active",
+      "targetSha256": "sha256:4e6718f1603760cec3f677744f669991415c5466c982f9c0aae3f6b39824636a"
+    },
+    {
+      "recordId": "urn:maha:record:fusion-plasma-systems-central-solenoid-inductive-drive",
+      "releaseId": "epirelease_3b68423488824f7da4c589d6f3303186",
+      "status": "active",
+      "targetSha256": "sha256:fa5b7b661950b82803b045a193a45bfae672d0ce82d724ebb0de856b6e17390e"
+    },
+    {
+      "recordId": "urn:maha:record:fusion-plasma-systems-cryogenic-magnet-cooling",
+      "releaseId": "epirelease_94218803d561412ba3ad8cb5279b7832",
+      "status": "active",
+      "targetSha256": "sha256:81541da3c3360687ed7c4c24209e88d3479eb103cd5f03b08f3e13410f142cd4"
+    },
+    {
+      "recordId": "urn:maha:record:fusion-plasma-systems-disruption-mitigation",
+      "releaseId": "epirelease_51b0c588e25e4f7eacad737ba89deaf5",
+      "status": "active",
+      "targetSha256": "sha256:8b4e21a4f55757d3ba7f4fc65ce6bc9952168f4707e8d2225d9d0b8b8cea2d21"
+    },
+    {
+      "recordId": "urn:maha:record:fusion-plasma-systems-divertor-heat-exhaust",
+      "releaseId": "epirelease_f003514d74e148ef9d11e5f9f276f33d",
+      "status": "active",
+      "targetSha256": "sha256:f593e2de8392bab77e626a475b9a7eb425784edcc5c95b81833ce46b96917f58"
+    },
+    {
+      "recordId": "urn:maha:record:fusion-plasma-systems-magnetic-confinement",
+      "releaseId": "epirelease_5d7334bba6ed4170ba8266f2464bc1fb",
+      "status": "active",
+      "targetSha256": "sha256:1a66b69d5429123c71e8a1f6665a5dea0a49deb410c02c3d64ef461fb4a411aa"
+    },
+    {
+      "recordId": "urn:maha:record:fusion-plasma-systems-plasma-diagnostics",
+      "releaseId": "epirelease_5e5e158276b248a1988a862a49715430",
+      "status": "active",
+      "targetSha256": "sha256:3e9e131b39bc4d39f6812cc9b4acf224fc1bd711f2e6580195e3440cee6639cc"
+    },
+    {
+      "recordId": "urn:maha:record:fusion-plasma-systems-poloidal-field-coils",
+      "releaseId": "epirelease_afe68aa49787455ab04c756d78252460",
+      "status": "active",
+      "targetSha256": "sha256:008185ca5a3bfbc8c334dac858833b90ac28d51fb79e83c9dfc4378ec229a8c0"
+    },
+    {
+      "recordId": "urn:maha:record:fusion-plasma-systems-tokamak-plasma-equilibrium",
+      "releaseId": "epirelease_8e947374097d4695815dbf9ab653177b",
+      "status": "active",
+      "targetSha256": "sha256:cb41216cd3cf8fdc36decedf66f8e768a25b450969b763e83c3d2b756ae57052"
+    },
+    {
+      "recordId": "urn:maha:record:fusion-plasma-systems-toroidal-field-coils",
+      "releaseId": "epirelease_8db6cd549d284a37b2f7cdfe3db93296",
+      "status": "active",
+      "targetSha256": "sha256:d7e7bde1bff5741e7dcb41c341c51f3d2fdb5bd081d063af2dd9a04207508e51"
+    },
+    {
+      "recordId": "urn:maha:record:fusion-plasma-systems-tritium-fuel-cycle",
+      "releaseId": "epirelease_c06e73e40b024160bb431695b4ce5277",
+      "status": "active",
+      "targetSha256": "sha256:9de5d2839e77ee26fbbdcc9ec1b03e65d3649c86bacbd29a296f65374cbe81f7"
+    },
+    {
+      "recordId": "urn:maha:record:genetic-toggle-switch",
+      "releaseId": "epirelease_3c8139447dd1419db67902a20c504e4f",
+      "status": "active",
+      "targetSha256": "sha256:5ebe87f4d5c1c2512ae655016d283646d46c04b95f0c8ec643c80f4c847397e5"
+    },
+    {
+      "recordId": "urn:maha:record:genome-editor-delivery-systems",
+      "releaseId": "epirelease_b6a8aae207ba431b909c7f9b1e0bd84c",
+      "status": "active",
+      "targetSha256": "sha256:96fcae910ef78135fbf36ae41f11fd0fbc6d6ccce6ea326509405f1bb4420fc8"
+    },
+    {
+      "recordId": "urn:maha:record:guide-rna-and-pam-recognition",
+      "releaseId": "epirelease_7540b8d717474f469f8fad6655a379b4",
+      "status": "active",
+      "targetSha256": "sha256:216a778cf1966d4c7e16153caa81e8432090e462c455f54e33fa72c0acc97fb7"
+    },
+    {
+      "recordId": "urn:maha:record:guide-seq-off-target-detection",
+      "releaseId": "epirelease_c46c3a1f6a3442f1b9050f72bde40c5d",
+      "status": "active",
+      "targetSha256": "sha256:5ef01b9f49fc3c5f1c6fcf4afefc0530f809cabbd9c9dc75a255f737081a0e24"
+    },
+    {
+      "recordId": "urn:maha:record:hardware-benchmark-scope",
+      "releaseId": "epirelease_4533a049a8994a30bcd508d9172ca3ce",
+      "status": "active",
+      "targetSha256": "sha256:2b4e00e0138c6df2c5a97dc34f7ea617fdc8508beb310069aff3f73ed2480eca"
+    },
+    {
+      "recordId": "urn:maha:record:in-vitro-versus-in-vivo-evidence",
+      "releaseId": "epirelease_68c940c82a01459ba867852e5561a912",
+      "status": "active",
+      "targetSha256": "sha256:04191ae798998644f3e9e348b443c465e6b6da590f5482685c2b1589eb248072"
+    },
+    {
+      "recordId": "urn:maha:record:in-vivo-genome-editing-workflow",
+      "releaseId": "epirelease_06cf4a8617774fb89fcd9f7f8b0d179e",
+      "status": "active",
+      "targetSha256": "sha256:c04affa4a87aba09a28285d08ee2c933963509ae9064cedf1a66c4dff7cd4dd6"
+    },
+    {
+      "recordId": "urn:maha:record:interleaved-randomized-benchmarking",
+      "releaseId": "epirelease_1a173338590c49d480e27b172dd8e381",
+      "status": "active",
+      "targetSha256": "sha256:b93a1312964e246b332b207d310fffe982efe0a1f0065cd9dae67df127266dd2"
+    },
+    {
+      "recordId": "urn:maha:record:josephson-junction-nonlinearity",
+      "releaseId": "epirelease_58754de944e149808f614f9817a08c5e",
+      "status": "active",
+      "targetSha256": "sha256:6a6feddafea5f53be1a7e5389d3a7813d5b3e271ed5df9fd34f1e2847560581e"
+    },
+    {
+      "recordId": "urn:maha:record:linear-optical-quantum-computation",
+      "releaseId": "epirelease_7637e5f3e744412587fc234509918e67",
+      "status": "active",
+      "targetSha256": "sha256:9d4198c21a107aa82c71a0f634c7c05eddced1ca348b77ad7ff2d580d99768a0"
+    },
+    {
+      "recordId": "urn:maha:record:logical-error-suppression",
+      "releaseId": "epirelease_6aa3f72fd72e4994ac95b000e883ea84",
+      "status": "active",
+      "targetSha256": "sha256:2ffe63c33bc6552238a34682a1f203b4b1f3c635fe69fef8261ec8424fa9830e"
+    },
+    {
+      "recordId": "urn:maha:record:longevity-metabolism-autophagic-flux",
+      "releaseId": "epirelease_0ec7c21d98e14b4fb8f01fdc65c4064b",
+      "status": "active",
+      "targetSha256": "sha256:1db5eca0f68681c48646e0d05ca7a71241751ba1d68c64e36b21fefe08ba75d6"
+    },
+    {
+      "recordId": "urn:maha:record:longevity-metabolism-autophagosome-abundance",
+      "releaseId": "epirelease_544aa352bd1e4db38bee41a97f03b34a",
+      "status": "active",
+      "targetSha256": "sha256:ca4b5b97fcdd716e0e9a9cc9bbb468104e24cce2673595f12ac60a45f8cc7740"
+    },
+    {
+      "recordId": "urn:maha:record:longevity-metabolism-lc3-turnover-assays",
+      "releaseId": "epirelease_0eb6f5296fba403b8a034b3b79d25956",
+      "status": "active",
+      "targetSha256": "sha256:d41e23431b7c29de0a5301bdaa86aef0a388ad6492f39a4ce6a75bb1d90dc62d"
+    },
+    {
+      "recordId": "urn:maha:record:longevity-metabolism-lysosomal-degradation-blockade",
+      "releaseId": "epirelease_23339b67f1124139b20cebc1e0dd6703",
+      "status": "active",
+      "targetSha256": "sha256:b80c01dc2ee3043a7d76441470570ee28019ee3f73f7ad5707128a38d890c794"
+    },
+    {
+      "recordId": "urn:maha:record:longevity-metabolism-nad-salvage-pathway",
+      "releaseId": "epirelease_ac656c0bd7cb437b8bcc465b76cbbe47",
+      "status": "active",
+      "targetSha256": "sha256:f949f2492c19deabe6bab3aecfc1a481ad428f2f7f0684a6bc85be30946e9ecd"
+    },
+    {
+      "recordId": "urn:maha:record:longevity-metabolism-p62-sqstm1-turnover",
+      "releaseId": "epirelease_06f942051b6448b7a48e3a4ccd9a0876",
+      "status": "active",
+      "targetSha256": "sha256:ed83383369888b5e9940c582d112890a656b507536b84b62911d91265350de1b"
+    },
+    {
+      "recordId": "urn:maha:record:longevity-metabolism-senolytic-selectivity",
+      "releaseId": "epirelease_070a784ac68d4237a3804bc356ee79e0",
+      "status": "active",
+      "targetSha256": "sha256:97051b2ab5681c95d7564cccc58a2982d124f07d562274041fdbe41a500e876a"
+    },
+    {
+      "recordId": "urn:maha:record:mechanistic-interpretability-attention-pattern-evidence",
+      "releaseId": "epirelease_7f90427c5f514a7d85f3fd7cf6e9e6ea",
+      "status": "active",
+      "targetSha256": "sha256:e80e5774922091325a1fa831b0514cfe96952f82a7bd473e95624fd8f8eb8387"
+    },
+    {
+      "recordId": "urn:maha:record:mechanistic-interpretability-causal-scrubbing",
+      "releaseId": "epirelease_92b3bb496d074e44a7ba0f906fdf90f0",
+      "status": "active",
+      "targetSha256": "sha256:8fd7d34fe31225012157eb78d84da4c9ffe9d0cad94226f7c27ba6ef83774949"
+    },
+    {
+      "recordId": "urn:maha:record:mechanistic-interpretability-in-context-learning-circuits",
+      "releaseId": "epirelease_cc43116e62cb4b0a857cb4a9a74610a9",
+      "status": "active",
+      "targetSha256": "sha256:eb81343071c34f3649873883e737eeb75092e3dc8ebd3b350d1c4fadf24fe78d"
+    },
+    {
+      "recordId": "urn:maha:record:mechanistic-interpretability-induction-head-circuits",
+      "releaseId": "epirelease_e3205e724b7e47b0ae1d82c4ec931af4",
+      "status": "active",
+      "targetSha256": "sha256:f0dcc8f3f5e33931ca881471e01d649d42ef29fd7dbd7bb67dcd5cc3de319f1b"
+    },
+    {
+      "recordId": "urn:maha:record:mechanistic-interpretability-neural-feature-superposition",
+      "releaseId": "epirelease_766f03e214444d6bb06ebcf49b38dddd",
+      "status": "active",
+      "targetSha256": "sha256:05a72058cb2682388462fcf950bdd95334b41c6ad0869a5e0f457d3c505eacea"
+    },
+    {
+      "recordId": "urn:maha:record:mechanistic-interpretability-polysemantic-neurons",
+      "releaseId": "epirelease_9358ae269fab40c8bfb92a15984a99cb",
+      "status": "active",
+      "targetSha256": "sha256:0ff0aff68c87fff92e7cc21e61a0e60da55ba57e5bc4199fc0d6f8ee11da78ad"
+    },
+    {
+      "recordId": "urn:maha:record:mechanistic-interpretability-representation-probing-boundary",
+      "releaseId": "epirelease_93c92eb7a317465b83fabf8d3e6962da",
+      "status": "active",
+      "targetSha256": "sha256:83339b28fdea2a81504e0bf44f9229fe06b24e444c774c0a0d513cf1b0bc8b3f"
+    },
+    {
+      "recordId": "urn:maha:record:mechanistic-interpretability-sae-encoder-decoder",
+      "releaseId": "epirelease_c5d8cc9f35ca441d8bac4c9254775f82",
+      "status": "active",
+      "targetSha256": "sha256:369c160f224159778ec08f586366d8c163e81afe67c769a0c5b9db269a01d54c"
+    },
+    {
+      "recordId": "urn:maha:record:mechanistic-interpretability-sparse-autoencoder-dictionaries",
+      "releaseId": "epirelease_210dc3c3474f4808b4c325b15074938d",
+      "status": "active",
+      "targetSha256": "sha256:3c1bf26d79f8b36ac42e1c9e9471cfa0746527abf8683d98f7835b00acaee19f"
+    },
+    {
+      "recordId": "urn:maha:record:mechanistic-interpretability-superposition-geometry",
+      "releaseId": "epirelease_ed697c0ba5494993b0743d696709515d",
+      "status": "active",
+      "targetSha256": "sha256:01b8119df53e3368bc49bc8975233b1931223b7b50cd3df9e18ebce4a68f39c1"
+    },
+    {
+      "recordId": "urn:maha:record:mechanistic-interpretability-toy-models-of-superposition",
+      "releaseId": "epirelease_a67e8b03cb744ab1b23ddc6acadf37a3",
+      "status": "active",
+      "targetSha256": "sha256:a984a5310affae3ce9141323a019b36a57e03d4e87430b5d82591c391afc908e"
+    },
+    {
+      "recordId": "urn:maha:record:neurotechnology-bci-extracellular-spike-recording",
+      "releaseId": "epirelease_68a3c152fa1343e2b3242ee3ad6aebd3",
+      "status": "active",
+      "targetSha256": "sha256:b69db4c70696ecb4cb4870c44fa90c1d2b127709311c42295b784ff807ebbf4c"
+    },
+    {
+      "recordId": "urn:maha:record:neurotechnology-bci-intracortical-bci",
+      "releaseId": "epirelease_22f04fc637eb412b84a4781fa5d6445d",
+      "status": "active",
+      "targetSha256": "sha256:9592f598d8258fad3c7da0a30ecbcf698a707f557eae4c263b684f293d046d3e"
+    },
+    {
+      "recordId": "urn:maha:record:neurotechnology-bci-micro-ecog-arrays",
+      "releaseId": "epirelease_a632a93ed4594075b49272855a54f954",
+      "status": "active",
+      "targetSha256": "sha256:6f91762319e0f12599bdc8940af0b1e8ce73d09464afdd0edb4a03a43a3cfe1f"
+    },
+    {
+      "recordId": "urn:maha:record:neurotechnology-bci-neuropixels-channel-selection",
+      "releaseId": "epirelease_a187a969073e438b9392f29649947a0e",
+      "status": "active",
+      "targetSha256": "sha256:fab1beaad2d0c9b53deca84649e83172b14d6043dc376b589c0f8fb6ded8a31d"
+    },
+    {
+      "recordId": "urn:maha:record:neurotechnology-bci-neuropixels-cmos-probe",
+      "releaseId": "epirelease_e825250db8ca431eb4f0616c5361b1c2",
+      "status": "active",
+      "targetSha256": "sha256:cd4d0ea320bbcb0d85312ee0cb16d2a52fbf4c480553a310e35a39d7376b3d75"
+    },
+    {
+      "recordId": "urn:maha:record:neurotechnology-bci-neuropixels-recording-sites",
+      "releaseId": "epirelease_7d7e421176a14205b8f2595f39e1ca0c",
+      "status": "active",
+      "targetSha256": "sha256:2399e9bc0abd97975dd6019b2f42dd1f38873f91cb36ce407179fad2b702d4a3"
+    },
+    {
+      "recordId": "urn:maha:record:neurotechnology-bci-spike-sorting-boundaries",
+      "releaseId": "epirelease_7e2cbf17b2114b1a83efe639f290c606",
+      "status": "active",
+      "targetSha256": "sha256:0438a6ef58edff4d00d9b5cf1b4c9fa2aff72136c4233c85cdc41885956dd0e8"
+    },
+    {
+      "recordId": "urn:maha:record:neutral-atom-optical-tweezer-arrays",
+      "releaseId": "epirelease_31120472a9d34eaca4fd6e8b69d4bd59",
+      "status": "active",
+      "targetSha256": "sha256:65bdb504584bbacd52f2d9f099fd93402c4a4ed12510a1bcf9d568683ab0c0c1"
+    },
+    {
+      "recordId": "urn:maha:record:off-target-nomination-versus-confirmation",
+      "releaseId": "epirelease_ca07d3a0cfde446a85760d1dd38a1ebe",
+      "status": "active",
+      "targetSha256": "sha256:b7bced5f8d14674ed18063921b7fa6f4acdab6e3de8b01c51c413a7f02bd7f55"
+    },
+    {
+      "recordId": "urn:maha:record:physical-and-logical-qubits",
+      "releaseId": "epirelease_eefc7afc9df94a71b9aea5fe99921fec",
+      "status": "active",
+      "targetSha256": "sha256:f950ccf0da9152d4dbbe784488fe7a02efdd22cf4ad7c1bb071f602efe6354c2"
+    },
+    {
+      "recordId": "urn:maha:record:pooled-crispr-screening",
+      "releaseId": "epirelease_f69cec40745e49fcb7dd1349123b1cad",
+      "status": "active",
+      "targetSha256": "sha256:959e5b4a8a42988da114a0702a7a9d34381c190305a42ae647f6e061d1f8f2c7"
+    },
+    {
+      "recordId": "urn:maha:record:prime-editing",
+      "releaseId": "epirelease_bd2151292bbf4b8f92cf1ef73f19e7bf",
+      "status": "active",
+      "targetSha256": "sha256:8145bad0de99c1ec7ac10cc9b2f0e57ee4a651cb82c3610a265c79a1f4ff89f2"
+    },
+    {
+      "recordId": "urn:maha:record:prime-editing-guide-rna-mechanism",
+      "releaseId": "epirelease_3e4599c444a3487b9140464e8809ddba",
+      "status": "active",
+      "targetSha256": "sha256:0b3e9a4522c5b0be9b6ce514fe55945920acf5364ab9c63701ab177042d8ce10"
+    },
+    {
+      "recordId": "urn:maha:record:quantum-error-correction",
+      "releaseId": "epirelease_f1c61805a29647e6bd6a218c53c5290c",
+      "status": "active",
+      "targetSha256": "sha256:2a24e4db12f11d6783766e60642deb8bf3b5f6d61a486da0d834da7d76ada9dd"
+    },
+    {
+      "recordId": "urn:maha:record:quantum-error-mitigation",
+      "releaseId": "epirelease_08f4803224f14d0dac450633558e88fb",
+      "status": "active",
+      "targetSha256": "sha256:1ba548818ce7ad026b2bb80c5a84466fed89cbd6c61c5a18a8f16cf1517e0832"
+    },
+    {
+      "recordId": "urn:maha:record:quantum-volume-benchmark",
+      "releaseId": "epirelease_285a7a87b6ac4052aa6c5de82bc3ac04",
+      "status": "active",
+      "targetSha256": "sha256:b61ab7a8fbfce50057126880e0e917d46e4be3a94c45a431f7672e783dc957bd"
+    },
+    {
+      "recordId": "urn:maha:record:random-circuit-sampling",
+      "releaseId": "epirelease_e5769d39e2fd44118c7b22e9db211272",
+      "status": "active",
+      "targetSha256": "sha256:9a55b13c6103a3d54fdd798bf4ceeb49208fef4c65ad1ed5da2cd7f6fe4c8b6c"
+    },
+    {
+      "recordId": "urn:maha:record:randomized-benchmarking",
+      "releaseId": "epirelease_fdf6a53434834d19a217bb4fc6055f53",
+      "status": "active",
+      "targetSha256": "sha256:935647bbd1d1c80c3a57610985a588f71413b110f9ea45a398967b3732b74829"
+    },
+    {
+      "recordId": "urn:maha:record:repressilator-gene-oscillator",
+      "releaseId": "epirelease_11ce7bda1a434f86a914317048f0283f",
+      "status": "active",
+      "targetSha256": "sha256:4836a066446356da13adb2438a1cf1a694ef61a662b109ea4a7533cf40f04b1c"
+    },
+    {
+      "recordId": "urn:maha:record:rydberg-blockade-entangling-gates",
+      "releaseId": "epirelease_04225d1e91954378a29b7dbc94d7480a",
+      "status": "active",
+      "targetSha256": "sha256:65ef58ea8e4368e747561738f8a183c87d440421ab8522307495fc19de7f7404"
+    },
+    {
+      "recordId": "urn:maha:record:silicon-spin-qubits",
+      "releaseId": "epirelease_3fa9babad79b4ffd91315a27a79eb072",
+      "status": "active",
+      "targetSha256": "sha256:4cc65163502a8934463f82e70ba72fc3fd2a24d8dc0c996657c7f24e4ba2c7af"
+    },
+    {
+      "recordId": "urn:maha:record:single-cell-perturbation-readout",
+      "releaseId": "epirelease_4222237c83a044d78b4365a06e5c9855",
+      "status": "active",
+      "targetSha256": "sha256:6425d7ab23e2f018b1b857acf0ece2c747053eaab5bfe0e32810efbffb8626cc"
+    },
+    {
+      "recordId": "urn:maha:record:somatic-versus-germline-editing",
+      "releaseId": "epirelease_192c8ae1784a49ee8e8010865c457c23",
+      "status": "active",
+      "targetSha256": "sha256:a70486150e1b435628d254e6e59be26d1e9e4f14c335458ec2f548af86d02f34"
+    },
+    {
+      "recordId": "urn:maha:record:stabilizer-syndrome-measurement",
+      "releaseId": "epirelease_2ceeafeb042d46719c1c4f15f55452a4",
+      "status": "active",
+      "targetSha256": "sha256:bcf371de57eeaa64ce9449ccfe776e3c76b2042e729ead3abe644ad279b5ae9c"
+    },
+    {
+      "recordId": "urn:maha:record:surface-code-error-correction",
+      "releaseId": "epirelease_f4d4049b936c4bd9984dc1686c880184",
+      "status": "active",
+      "targetSha256": "sha256:28cd4b8686cb6ce90756932d32bcb955c9ff88c5823b94825a8430d6ccd95e8b"
+    },
+    {
+      "recordId": "urn:maha:record:targeted-amplicon-sequencing",
+      "releaseId": "epirelease_0031fd34055a46959fa2184a6d725710",
+      "status": "active",
+      "targetSha256": "sha256:76c7c8eb258d88810584bf93ab38d66f517f10b3498cb285c837114ffe09de83"
+    },
+    {
+      "recordId": "urn:maha:record:transmon-qubit",
+      "releaseId": "epirelease_44923ed2f8a84a1ba855bb227452dad6",
+      "status": "active",
+      "targetSha256": "sha256:5b9d1df90661b0ae55bb9cde26d3d33fde4b82a2588475b11df9398da86e7d82"
+    },
+    {
+      "recordId": "urn:maha:record:trapped-ion-qccd-architecture",
+      "releaseId": "epirelease_6e5dfa411f9a47b0ac5e867c5de09d6b",
+      "status": "active",
+      "targetSha256": "sha256:892f263cc532d38bc18ebb99da507a85296bb54602e8205961540c57102bc6a7"
+    }
+  ]
+}
