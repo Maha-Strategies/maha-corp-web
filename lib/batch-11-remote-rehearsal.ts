@@ -15,7 +15,7 @@ import { FRONTIER_DOMAIN_GRAPH_RECORDS } from './frontier-domain-graphs.ts'
 /**
  * Remote Preview rehearsal for the Batch 11 mixed-lineage cohort.
  *
- * Four records supersede an existing canonical release; one does not. The
+ * Two records supersede an existing canonical release; three do not. The
  * dangerous move is to let those two cases blur, so this module keeps every way
  * of "finding nothing" apart from every other way.
  *
@@ -278,10 +278,10 @@ export function proveOrderIndependence(recordIds: readonly string[], gates: read
 /** The invariants a future authorized run must satisfy, stated as data. */
 export const REQUIRED_PREVIEW_INVARIANTS = [
   'exactly five new releases exist',
-  'four are superseding and one is initial',
+  'two are superseding and three are initial',
   'each release binds its exact proposed revision digest',
-  'the four prior releases become superseded and remain present in append-only history',
-  'the initial release supersedes nothing',
+  'the two prior releases become superseded and remain present in append-only history',
+  'each initial release supersedes nothing',
   'no release outside the cohort changes',
   'all twenty decisions are exact-revision internal-review decisions',
   'no held or stale decision is accepted',

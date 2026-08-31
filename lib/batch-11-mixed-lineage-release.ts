@@ -13,9 +13,10 @@ import { BATCH_11_DECISIONS } from './frontier-alignment-batch-11-review.ts'
  * Mixed-lineage release reconciliation for the five Batch 11 records.
  *
  * The batch was frozen on the assumption that all five supersede an existing
- * canonical release. The authoritative Production registry says otherwise: four
- * have exactly one active release, and tool-allowlisting has none at all. This
- * module corrects that assumption without papering over it.
+ * canonical release. Evidence reconciliation narrowed the executable cohort to
+ * accepted source replacements only: two have exactly one active release and
+ * three have no release row under any status. This module keeps those cases
+ * separate without papering over either lineage or evidence state.
  *
  * The load-bearing rule is that a release kind is DECLARED and then CHECKED,
  * never inferred. Deriving "initial" from a lookup that returned nothing would
@@ -87,34 +88,18 @@ export interface RegistryObservation {
 /**
  * The declarations, written from the reconciliation this task exists to make.
  *
- * Four supersede. One does not, and says so explicitly rather than arriving
- * there by absence.
+ * Two supersede. Three do not, and say so explicitly rather than arriving there
+ * by absence.
  */
 export const BATCH_11_LINEAGE_DECLARATIONS: readonly LineageDeclaration[] = [
   {
-    recordId: 'urn:maha:record:agentic-systems-mcp-tool-allowlisting',
+    recordId: 'urn:maha:record:advanced-materials-color-centers-in-diamond',
     declaredReleaseKind: 'initial',
     declaredPriorReleaseId: null,
     declaredPriorTargetSha256: null,
-    declaredCanonicalPath: '/knowledge/agentic-systems-mcp/measurements/agentic-systems-mcp-tool-allowlisting',
+    declaredCanonicalPath: '/knowledge/advanced-materials/methods/advanced-materials-color-centers-in-diamond',
     classificationBasis:
-      'The authoritative Production registry contains no release for this record, active or otherwise. It is therefore declared initial. This is an assertion about registry state that reconciliation re-checks; it is not a conclusion drawn from a lookup returning nothing.',
-  },
-  {
-    recordId: 'urn:maha:record:biomolecular-engineering-structure-prediction-filtering',
-    declaredReleaseKind: 'superseding',
-    declaredPriorReleaseId: 'epirelease_9bf9b14ec8fb48f884efdc43e44ea349',
-    declaredPriorTargetSha256: 'sha256:2f59ecb93f3ad9418b05e01058d2d629fff5368dcc20b838b0e996f651c1db50',
-    declaredCanonicalPath: '/knowledge/biomolecular-engineering/comparisons/biomolecular-engineering-structure-prediction-filtering',
-    classificationBasis: 'Exactly one active release observed, whose target digest equals the prior revision the audit was taken against.',
-  },
-  {
-    recordId: 'urn:maha:record:critical-supply-chains-high-purity-quartz-deposits',
-    declaredReleaseKind: 'superseding',
-    declaredPriorReleaseId: 'epirelease_d9b0cd28c1614fa58192be24afcd2a7a',
-    declaredPriorTargetSha256: 'sha256:c667320cf234997948bffc6fef2aefd2133010aed2a0af4d457dad0817fd93c0',
-    declaredCanonicalPath: '/knowledge/critical-supply-chains/concepts/critical-supply-chains-high-purity-quartz-deposits',
-    classificationBasis: 'Exactly one active release observed, whose target digest equals the prior revision the audit was taken against.',
+      'The authoritative all-status Production registry contains no release for this accepted source-replacement record. It is declared initial from a positive cohort observation, not from a failed lookup.',
   },
   {
     recordId: 'urn:maha:record:fusion-plasma-systems-tokamak-plasma-equilibrium',
@@ -123,6 +108,24 @@ export const BATCH_11_LINEAGE_DECLARATIONS: readonly LineageDeclaration[] = [
     declaredPriorTargetSha256: 'sha256:cb41216cd3cf8fdc36decedf66f8e768a25b450969b763e83c3d2b756ae57052',
     declaredCanonicalPath: '/knowledge/fusion-plasma-systems/mechanisms/fusion-plasma-systems-tokamak-plasma-equilibrium',
     classificationBasis: 'Exactly one active release observed, whose target digest equals the prior revision the audit was taken against.',
+  },
+  {
+    recordId: 'urn:maha:record:longevity-metabolism-mitophagy-flux',
+    declaredReleaseKind: 'initial',
+    declaredPriorReleaseId: null,
+    declaredPriorTargetSha256: null,
+    declaredCanonicalPath: '/knowledge/longevity-metabolism/concepts/longevity-metabolism-mitophagy-flux',
+    classificationBasis:
+      'The authoritative all-status Production registry contains no release for this accepted source-replacement record. It is declared initial from a positive cohort observation, not from a failed lookup.',
+  },
+  {
+    recordId: 'urn:maha:record:mechanistic-interpretability-activation-patching',
+    declaredReleaseKind: 'initial',
+    declaredPriorReleaseId: null,
+    declaredPriorTargetSha256: null,
+    declaredCanonicalPath: '/knowledge/mechanistic-interpretability/concepts/mechanistic-interpretability-activation-patching',
+    classificationBasis:
+      'The authoritative all-status Production registry contains no release for this accepted source-replacement record. It is declared initial from a positive cohort observation, not from a failed lookup.',
   },
   {
     recordId: 'urn:maha:record:mechanistic-interpretability-representation-probing-boundary',

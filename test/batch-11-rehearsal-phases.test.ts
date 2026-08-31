@@ -52,7 +52,8 @@ const GATES = BATCH_11_LINEAGE_DECLARATIONS.map((declaration) =>
   gateRecord(probeLineage(declaration.recordId, PROBE), declaration.declaredReleaseKind),
 )
 
-const INITIAL = BATCH_11_LINEAGE_DECLARATIONS.find((d) => d.declaredReleaseKind === 'initial')!
+const INITIALS = BATCH_11_LINEAGE_DECLARATIONS.filter((d) => d.declaredReleaseKind === 'initial')
+const INITIAL = INITIALS[0]
 const gateFor = (recordId: string) => GATES.find((gate) => gate.recordId === recordId)!
 
 const goodLineages = (): ImportedLineage[] =>
@@ -244,14 +245,17 @@ test('importing a record outside the cohort is refused', () => {
   assert.equal(refusal.code, 'import-outside-allowlist')
 })
 
-test('importing a lineage for the initial record is refused', () => {
-  const refusal = throwsRefusal(
-    () => assertImportAllowed([...goodLineages(), { recordId: INITIAL.recordId, releaseId: 'epirelease_invented', targetSha256: 'sha256:00', status: 'active' }]))
-  assert.equal(refusal.code, 'import-outside-allowlist')
-  assert.ok(
-    !IMPORT_ALLOWLIST.some((entry) => entry.recordId === INITIAL.recordId),
-    'the initial record must never appear in the import allowlist',
-  )
+test('importing a lineage for any initial record is refused', () => {
+  assert.equal(INITIALS.length, 3)
+  for (const initial of INITIALS) {
+    const refusal = throwsRefusal(
+      () => assertImportAllowed([...goodLineages(), { recordId: initial.recordId, releaseId: 'epirelease_invented', targetSha256: 'sha256:00', status: 'active' }]))
+    assert.equal(refusal.code, 'import-outside-allowlist')
+    assert.ok(
+      !IMPORT_ALLOWLIST.some((entry) => entry.recordId === initial.recordId),
+      'an initial record must never appear in the import allowlist',
+    )
+  }
 })
 
 test('a wrong predecessor release id is refused', () => {
@@ -269,11 +273,11 @@ test('a predecessor whose digest does not match the declared lineage is refused'
 })
 
 test('a short import is refused rather than silently narrowing the cohort', () => {
-  const refusal = throwsRefusal(() => assertImportAllowed(goodLineages().slice(0, 3)))
+  const refusal = throwsRefusal(() => assertImportAllowed(goodLineages().slice(0, 1)))
   assert.equal(refusal.code, 'import-lineage-mismatch')
 })
 
-test('the adjacent deny-by-default record cannot satisfy the initial record lineage', () => {
+test('an adjacent but undeclared record cannot satisfy an initial record lineage', () => {
   const adjacent = 'urn:maha:record:agentic-systems-mcp-tool-deny-by-default'
   assert.notEqual(adjacent, INITIAL.recordId)
   assert.ok(!IMPORT_ALLOWLIST.some((entry) => entry.recordId === adjacent))

@@ -29,13 +29,13 @@ const entryFor = (m: ReturnType<typeof reconcileLineage>, needle: string) =>
 
 // --------------------------------------------------------- classification
 
-test('the cohort is four superseding and one initial', () => {
+test('the cohort is two superseding and three initial', () => {
   const m = reconcileLineage(OBSERVATION)
   assert.equal(m.totals.records, 5)
-  assert.equal(m.totals.superseding, 4)
-  assert.equal(m.totals.initial, 1)
+  assert.equal(m.totals.superseding, 2)
+  assert.equal(m.totals.initial, 3)
   assert.equal(m.totals.blocked, 0)
-  assert.equal(entryFor(m, 'tool-allowlisting').releaseKind, 'initial')
+  assert.equal(entryFor(m, 'color-centers-in-diamond').releaseKind, 'initial')
 })
 
 test('declarations cover exactly the canary cohort', () => {
@@ -57,8 +57,8 @@ test('the initial release declares no prior target, and the others do', () => {
 })
 
 test('classification is declared, not inferred from a missing lookup', () => {
-  // An empty observation must not silently reclassify four superseding records
-  // as initial. Every one of them has to fail.
+  // An empty observation must not silently reclassify superseding records or
+  // treat unqueried initial records as proven absent. Every record has to fail.
   const empty: RegistryObservation = { ...clone(), records: [] }
   const m = reconcileLineage(empty)
   assert.equal(m.totals.ready, 0, 'no record may be ready against an empty observation')
@@ -86,17 +86,17 @@ test('a disappeared prior release fails closed rather than becoming initial', ()
 
 test('an appeared prior release fails closed rather than becoming superseding', () => {
   const obs = clone()
-  const row = obs.records.find((r) => r.recordId.endsWith('tool-allowlisting'))!
+  const row = obs.records.find((r) => r.recordId.endsWith('color-centers-in-diamond'))!
   row.activeReleases = 1
   row.totalReleases = 1
   row.activeRelease = {
     releaseId: 'epirelease_unexpected',
     releaseKind: 'initial',
     targetSha256: `sha256:${'a'.repeat(64)}`,
-    canonicalPath: '/knowledge/agentic-systems-mcp/measurements/agentic-systems-mcp-tool-allowlisting',
+    canonicalPath: '/knowledge/advanced-materials/methods/advanced-materials-color-centers-in-diamond',
     canonicalVersion: '0.1.0',
   }
-  const entry = entryFor(reconcileLineage(obs), 'tool-allowlisting')
+  const entry = entryFor(reconcileLineage(obs), 'color-centers-in-diamond')
   assert.equal(entry.ready, false)
   assert.ok(entry.failures.includes('prior-release-appeared'), entry.failures.join(','))
   assert.equal(entry.releaseKind, 'initial', 'it must NOT silently become superseding')
@@ -104,16 +104,16 @@ test('an appeared prior release fails closed rather than becoming superseding', 
 
 test('more than one active prior release fails closed', () => {
   const obs = clone()
-  obs.records.find((r) => r.recordId.endsWith('high-purity-quartz-deposits'))!.activeReleases = 2
-  const entry = entryFor(reconcileLineage(obs), 'high-purity-quartz-deposits')
+  obs.records.find((r) => r.recordId.endsWith('tokamak-plasma-equilibrium'))!.activeReleases = 2
+  const entry = entryFor(reconcileLineage(obs), 'tokamak-plasma-equilibrium')
   assert.equal(entry.ready, false)
   assert.ok(entry.failures.includes('multiple-active-prior-releases'), entry.failures.join(','))
 })
 
 test('a changed prior revision digest fails closed', () => {
   const obs = clone()
-  obs.records.find((r) => r.recordId.endsWith('structure-prediction-filtering'))!.activeRelease!.targetSha256 = `sha256:${'b'.repeat(64)}`
-  const entry = entryFor(reconcileLineage(obs), 'structure-prediction-filtering')
+  obs.records.find((r) => r.recordId.endsWith('tokamak-plasma-equilibrium'))!.activeRelease!.targetSha256 = `sha256:${'b'.repeat(64)}`
+  const entry = entryFor(reconcileLineage(obs), 'tokamak-plasma-equilibrium')
   assert.equal(entry.ready, false)
   assert.ok(entry.failures.includes('prior-revision-digest-changed'), entry.failures.join(','))
 })

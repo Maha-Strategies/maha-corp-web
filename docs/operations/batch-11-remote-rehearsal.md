@@ -1,7 +1,7 @@
 # Batch 11 mixed-lineage Preview rehearsal
 
-Five records are released together: four supersede an existing canonical
-release, one does not. The rehearsal exists because that mixture is the part
+Five records are released together: two supersede an existing canonical
+release, three do not. The rehearsal exists because that mixture is the part
 most likely to go wrong quietly — a run that releases five initials, or that
 supersedes the wrong predecessor, produces a registry that looks healthy.
 
@@ -20,7 +20,7 @@ SHA that must equal `HEAD`.
 | # | Phase | Effect |
 |---|---|---|
 | 1 | `provision-ephemeral-branch` | Creates a schema-only Supabase branch on the Preview project |
-| 2 | `import-prior-lineages` | Reads the four predecessors from the public Production registry and writes them into the branch |
+| 2 | `import-prior-lineages` | Reads the two predecessors from the public Production registry and writes them into the branch |
 | 3 | `apply-migrations` | Applies exactly the migrations this lifecycle declares, and no others |
 | 4 | `ingest-revisions-and-decisions` | Ingests five proposed revisions and twenty exact-revision decisions |
 | 5 | `issue-releases` | Issues five releases under Preview release authority |
@@ -42,18 +42,18 @@ not only the write.
 The job holds no Production database password, no Production service-role key
 and no Production release-authority token. The completed 64-record scale-release
 cohort in Production is neither read into the branch nor touched: the import is
-allowlisted to exactly four release ids.
+allowlisted to exactly two release ids.
 
 ## Fail-closed points
 
 - **Absent branch credential.** Phase 1 refuses before any mutation.
 - **Production project as branch parent.** Refused from the input, and again
   from the created branch's reported parent.
-- **Import outside the allowlist.** Any record other than the four
+- **Import outside the allowlist.** Any record other than the two
   predecessors, any wrong predecessor id, any wrong digest, a short import, or
-  a duplicate — each refuses. The initial record has no predecessor and can
-  never appear here; importing one would manufacture the lineage its gate
-  requires to be absent.
+  a duplicate — each refuses. The three initial records have no predecessors
+  and can never appear here; importing one would manufacture the lineage its
+  gate requires to be absent.
 - **A migration this lifecycle did not declare.** Refused in both directions:
   an extra migration and a missing required one.
 - **A release binding a revision other than the gated one.** Refused.

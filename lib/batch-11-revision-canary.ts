@@ -27,15 +27,16 @@ import { SUBSTANTIAL_PUBLICATION_QUEUE } from './substantial-publication-queue.t
 export const BATCH_11_CANARY_VERSION = 'maha-batch-11-revision-canary/0.1' as const
 
 /**
- * The five highest-unlock records among accepted and explicitly narrowed
- * decisions, scored across the Quantum Bridge endpoint plan, the pilot
- * contracts, the merged Batch 5 queue and publication Batches 1 and 3.
+ * Five high-unlock records whose review decisions accept a subject-matched
+ * source replacement. Scope-only revisions are deliberately excluded: the
+ * revision builder preserves the record's claim form, so narrowing only its
+ * prose scope cannot make a source support a different named subject.
  */
 export const BATCH_11_CANARY_RECORD_IDS = [
-  'urn:maha:record:agentic-systems-mcp-tool-allowlisting',
-  'urn:maha:record:biomolecular-engineering-structure-prediction-filtering',
-  'urn:maha:record:critical-supply-chains-high-purity-quartz-deposits',
+  'urn:maha:record:advanced-materials-color-centers-in-diamond',
   'urn:maha:record:fusion-plasma-systems-tokamak-plasma-equilibrium',
+  'urn:maha:record:longevity-metabolism-mitophagy-flux',
+  'urn:maha:record:mechanistic-interpretability-activation-patching',
   'urn:maha:record:mechanistic-interpretability-representation-probing-boundary',
 ] as const
 
@@ -48,6 +49,11 @@ function sha(value: unknown): string {
 function decisionFor(recordId: string): Batch11Decision {
   const decision = BATCH_11_DECISIONS.find((entry) => entry.recordId === recordId)
   if (!decision) throw new Error(`${recordId}: no review decision.`)
+  if (decision.disposition !== 'accept-source-replacement') {
+    throw new Error(
+      `${recordId}: ${decision.disposition} cannot enter the release rehearsal because the revision builder preserves the original claim form.`,
+    )
+  }
   return decision
 }
 

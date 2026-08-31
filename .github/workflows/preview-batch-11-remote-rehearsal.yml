@@ -123,8 +123,8 @@ jobs:
             and (.phases | length) == 7
             and ([.phases[] | select(.status == "executed")] | length) == 7
             and .fingerprint.cohortSize == 5
-            and .fingerprint.supersedingCount == 4
-            and .fingerprint.initialCount == 1
+            and .fingerprint.supersedingCount == 2
+            and .fingerprint.initialCount == 3
             and .fingerprint.orderIndependent == true
             and .fingerprint.ordersProvenIndependent == 120
           ' "$MAHA_B11_EVIDENCE_PATH" >/dev/null

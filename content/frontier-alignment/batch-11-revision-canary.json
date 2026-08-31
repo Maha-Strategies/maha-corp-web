@@ -1,42 +1,42 @@
 {
   "audits": [
     {
-      "auditId": "urn:maha:audit:batch-11-revision:agentic-systems-mcp-tool-allowlisting",
-      "auditSha256": "sha256:572ebe447494add6fb1ecf83a95efca1b9bd2d23f9048bfd859de7a0de0d3ef3",
+      "auditId": "urn:maha:audit:batch-11-revision:advanced-materials-color-centers-in-diamond",
+      "auditSha256": "sha256:8aae2beccb5bd23b8990db93add150ae23430e9485b4a4b3d021bd7d2b763fef",
       "checks": [
         {
           "dimension": "source-identity",
-          "finding": "Both pages are served under the /specification/2026-07-28/ path of the protocol's canonical documentation host and carry that revision in their internal cross-links, so the revision inspected is the one named.",
+          "finding": "The arXiv record carries the journal reference Physics Reports 528, 1 (2013) and DOI 10.1016/j.physrep.2013.02.001 alongside the title and authors, so the preprint and the version of record are linked by the publisher identifier rather than by title match alone.",
           "verdict": "satisfied"
         },
         {
           "dimension": "version-relationship",
-          "finding": "Revision 2026-07-28 supersedes the 2024-11-05 revision the record's prior source cited. The prior citation named the specification generically with year 2024; this inspection pins an exact later revision.",
+          "finding": "arXiv v1 is the author copy of the Physics Reports review. Elsevier holds the version of record; pagination differs, so any locator into the arXiv copy is stated by section rather than journal page.",
           "verdict": "satisfied"
         },
         {
           "dimension": "exact-locator",
-          "finding": "Inspected at Tools, section 'Capabilities', sentence beginning 'The set MAY vary by the authorization presented on the request'; and Tools, section 'User Interaction Model', warning beginning 'For trust & safety and security, there SHOULD always be a human in the loop'.; not a whole-document reference.",
+          "finding": "Inspected at Abstract, opening sentence.; not a whole-document reference.",
           "verdict": "satisfied"
         },
         {
           "dimension": "rights-basis",
-          "finding": "citation-only-no-reuse-licence: Published specification text on the protocol's public documentation site, quoted for identification. No licence grant is asserted beyond fair quotation of a short passage.",
+          "finding": "citation-only-no-reuse-licence: arXiv nonexclusive-distrib 1.0, which permits arXiv distribution only and is not an open reuse licence. Quoted for identification; no redistribution right asserted.",
           "verdict": "satisfied"
         },
         {
           "dimension": "claim-scope",
-          "finding": "Scope-limited tool exposure and human-in-the-loop denial, at two exact locators in specification revision 2026-07-28.",
+          "finding": "Treating colour centres in diamond as a distinct mechanism, established from the abstract of a dedicated review of the nitrogen-vacancy centre.",
           "verdict": "satisfied"
         },
         {
           "dimension": "quantitative-detail-permission",
-          "finding": "Quantitative detail is withheld: inspection depth was full-text-two-pages, which establishes subject identity only.",
+          "finding": "Quantitative detail is withheld: inspection depth was abstract-and-identity, which establishes subject identity only.",
           "verdict": "satisfied"
         },
         {
           "dimension": "prior-binding-preserved",
-          "finding": "Prior binding \"Model Context Protocol specification\" is retained in the revision's boundaries rather than deleted.",
+          "finding": "Prior binding \"An assessment of wide bandgap semiconductors for power devices\" is retained in the revision's boundaries rather than deleted.",
           "verdict": "satisfied"
         },
         {
@@ -45,130 +45,16 @@
           "verdict": "satisfied"
         }
       ],
-      "decisionSha256": "sha256:f91ef66bd23d99965abe11df14ccc86ccb7abbc5ebceedadbcac10d1ac627c5a",
-      "exactLocator": "Tools, section 'Capabilities', sentence beginning 'The set MAY vary by the authorization presented on the request'; and Tools, section 'User Interaction Model', warning beginning 'For trust & safety and security, there SHOULD always be a human in the loop'.",
+      "decisionSha256": "sha256:2c4f95da85ddc5a90d947aee613c91a3c63f76f2f58510ffe18da0d543caa6b1",
+      "exactLocator": "Abstract, opening sentence.",
       "externallyReviewed": false,
       "independentlyReproduced": false,
-      "inspectionDepth": "full-text-two-pages",
+      "inspectionDepth": "abstract-and-identity",
       "outcome": "alignment-clear-ready-for-revision-scoped-review",
-      "packetDigest": "sha256:699d329fe31c8dedd181a953d87487067d32d3500de04c7240243bc3187d26bb",
-      "priorRecordRevisionSha256": "sha256:5680e38f71e49bcded9e4e2c5cce4497c14bef33b5398d347f8657dd51ea817a",
-      "recordId": "urn:maha:record:agentic-systems-mcp-tool-allowlisting",
-      "revisedRecordRevisionSha256": "sha256:655c3ae116314eb3d2f42d40834b64034cac6a6ca7ea3b2f246f9134585ebaee",
-      "schemaVersion": "maha-batch-11-revision-canary/0.1"
-    },
-    {
-      "auditId": "urn:maha:audit:batch-11-revision:biomolecular-engineering-structure-prediction-filtering",
-      "auditSha256": "sha256:03ad129f7a2feb3664da001337d0bb92ee8e23deea23027681daf0e497203b9c",
-      "checks": [
-        {
-          "dimension": "source-identity",
-          "finding": "The fetched page reports the three lead authors Watson, Juergens and Bennett, matching the authorship of the work the record cites.",
-          "verdict": "satisfied"
-        },
-        {
-          "dimension": "version-relationship",
-          "finding": "IMPORTANT: the inspected preprint carries a DIFFERENT TITLE from the version of record. The record cites 'De novo design of protein structure and function with RFdiffusion' (Nature 620:1089-1100, 2023, doi:10.1038/s41586-023-06415-8). The inspected copy is the bioRxiv v2 preprint titled 'Broadly applicable and accurate protein design by integrating structure prediction networks and diffusion generative models'. Same work, retitled on publication. The locator below is therefore a locator into the PREPRINT and must not be presented as a locator into the Nature article, whose section structure and pagination differ.",
-          "verdict": "satisfied"
-        },
-        {
-          "dimension": "exact-locator",
-          "finding": "Inspected at Preprint v2, section 'Unconditional protein monomer generation'.; not a whole-document reference.",
-          "verdict": "satisfied"
-        },
-        {
-          "dimension": "rights-basis",
-          "finding": "citation-only-no-reuse-licence: bioRxiv preprint. No licence statement was found in the fetched text, so no reuse licence is asserted; the passage is quoted for identification only. The Nature version of record was not used because nature.com redirected to an authentication endpoint, which was not followed.",
-          "verdict": "satisfied"
-        },
-        {
-          "dimension": "claim-scope",
-          "finding": "The explicit in silico filtering step, with its pAE and backbone-RMSD acceptance thresholds, read at a named section of the bioRxiv preprint.",
-          "verdict": "satisfied"
-        },
-        {
-          "dimension": "quantitative-detail-permission",
-          "finding": "A section was read closely enough to carry quantitative detail (full-text-section).",
-          "verdict": "satisfied"
-        },
-        {
-          "dimension": "prior-binding-preserved",
-          "finding": "Prior binding \"De novo design of protein structure and function with RFdiffusion\" is retained in the revision's boundaries rather than deleted.",
-          "verdict": "satisfied"
-        },
-        {
-          "dimension": "prohibited-inferences",
-          "finding": "2 explicit non-claims are carried on the revision.",
-          "verdict": "satisfied"
-        }
-      ],
-      "decisionSha256": "sha256:d526405605c28a6c31d391ec67766460f2ed64f3ff4c4be55ca12c2c51623931",
-      "exactLocator": "Preprint v2, section 'Unconditional protein monomer generation'.",
-      "externallyReviewed": false,
-      "independentlyReproduced": false,
-      "inspectionDepth": "full-text-section",
-      "outcome": "alignment-clear-ready-for-revision-scoped-review",
-      "packetDigest": "sha256:85c9b6b8f20861cedbb6217ac9c5e1b57a615acf37f67cae8d5d8d64a495cb6e",
-      "priorRecordRevisionSha256": "sha256:2f59ecb93f3ad9418b05e01058d2d629fff5368dcc20b838b0e996f651c1db50",
-      "recordId": "urn:maha:record:biomolecular-engineering-structure-prediction-filtering",
-      "revisedRecordRevisionSha256": "sha256:4f41045346753387198fd285374217f7d1448d41a28a569a5e1c07fea844b8de",
-      "schemaVersion": "maha-batch-11-revision-canary/0.1"
-    },
-    {
-      "auditId": "urn:maha:audit:batch-11-revision:critical-supply-chains-high-purity-quartz-deposits",
-      "auditSha256": "sha256:39de94bc5c9502cc6434992a5b12fea9d3a25c6e21c512052a79855ec782dc02",
-      "checks": [
-        {
-          "dimension": "source-identity",
-          "finding": "The page is served from the USGS National Minerals Information Center path on the usgs.gov domain and identifies itself as USGS Silica Statistics and Information.",
-          "verdict": "satisfied"
-        },
-        {
-          "dimension": "version-relationship",
-          "finding": "A continuously maintained commodity page, not a dated edition. No version identifier is available, so this binding cannot be pinned to a fixed revision. The dated Mineral Commodity Summaries quartz chapters would provide that, but the 2025 PDF returned HTTP 403 and was not read.",
-          "verdict": "satisfied"
-        },
-        {
-          "dimension": "exact-locator",
-          "finding": "Inspected at Page body, high-purity quartz definition.; not a whole-document reference.",
-          "verdict": "satisfied"
-        },
-        {
-          "dimension": "rights-basis",
-          "finding": "public-domain-us-government: USGS content is a US Government work in the public domain, as stated on the page. Quotation and reuse are unrestricted.",
-          "verdict": "satisfied"
-        },
-        {
-          "dimension": "claim-scope",
-          "finding": "The high-purity quartz purity specification, under 100 ppm total impurities, and the existence of United States production.",
-          "verdict": "satisfied"
-        },
-        {
-          "dimension": "quantitative-detail-permission",
-          "finding": "Quantitative detail is withheld: inspection depth was full-page, which establishes subject identity only.",
-          "verdict": "satisfied"
-        },
-        {
-          "dimension": "prior-binding-preserved",
-          "finding": "Prior binding \"Critical Mineral Resources of the United States—Economic and Environmental Geology and Prospects for Future Supply\" is retained in the revision's boundaries rather than deleted.",
-          "verdict": "satisfied"
-        },
-        {
-          "dimension": "prohibited-inferences",
-          "finding": "2 explicit non-claims are carried on the revision.",
-          "verdict": "satisfied"
-        }
-      ],
-      "decisionSha256": "sha256:ce8f6ebc9002116022ab02fbf5bcc63e60e906ebe2dee34e0739477c27798c05",
-      "exactLocator": "Page body, high-purity quartz definition.",
-      "externallyReviewed": false,
-      "independentlyReproduced": false,
-      "inspectionDepth": "full-page",
-      "outcome": "alignment-clear-ready-for-revision-scoped-review",
-      "packetDigest": "sha256:2e218ca5c8d32a0d44de016a2848141ca8639ea2ebc1fa1977c6ac8cd239edce",
-      "priorRecordRevisionSha256": "sha256:c667320cf234997948bffc6fef2aefd2133010aed2a0af4d457dad0817fd93c0",
-      "recordId": "urn:maha:record:critical-supply-chains-high-purity-quartz-deposits",
-      "revisedRecordRevisionSha256": "sha256:bf577646700efe497e3cc15b1f0f8eb6aa0c7c7bbcdeff5e2fdc388b2ac07398",
+      "packetDigest": "sha256:0a5f51733532d81b045c71f7202f45fcbbdc2881aa99468e664af25eb6bd730b",
+      "priorRecordRevisionSha256": "sha256:b617d666666621222481c56029596df2a95f4b7fcde30ffa0f0238e01fee8d73",
+      "recordId": "urn:maha:record:advanced-materials-color-centers-in-diamond",
+      "revisedRecordRevisionSha256": "sha256:ee7c69df6eaff6c7910ee8dff251029f1217ac7b4f8d377422416ed5dbe7e0b5",
       "schemaVersion": "maha-batch-11-revision-canary/0.1"
     },
     {
@@ -226,6 +112,120 @@
       "priorRecordRevisionSha256": "sha256:cb41216cd3cf8fdc36decedf66f8e768a25b450969b763e83c3d2b756ae57052",
       "recordId": "urn:maha:record:fusion-plasma-systems-tokamak-plasma-equilibrium",
       "revisedRecordRevisionSha256": "sha256:b06ae30e9f4b9907e6a603a67e3e8b1639897b2fc1cce47ad36e854b32d50f90",
+      "schemaVersion": "maha-batch-11-revision-canary/0.1"
+    },
+    {
+      "auditId": "urn:maha:audit:batch-11-revision:longevity-metabolism-mitophagy-flux",
+      "auditSha256": "sha256:6b905d8c752bf1665aa6b07dfc8dd06cf517d77a0fa05319ddc93bdaff4b86b5",
+      "checks": [
+        {
+          "dimension": "source-identity",
+          "finding": "The PMC record returns the same title, first author, journal, year, DOI 10.3791/65789 and PMCID PMC10597842, so the copy inspected is the document the identifier names.",
+          "verdict": "satisfied"
+        },
+        {
+          "dimension": "version-relationship",
+          "finding": "PMC author manuscript deposited under NIHPA. The publisher version of record is the JoVE article behind the DOI; section structure is shared but pagination is not, so the locator is stated by section heading.",
+          "verdict": "satisfied"
+        },
+        {
+          "dimension": "exact-locator",
+          "finding": "Inspected at Section 'Representative Results', mitophagy flux ratio definition.; not a whole-document reference.",
+          "verdict": "satisfied"
+        },
+        {
+          "dimension": "rights-basis",
+          "finding": "citation-only-no-reuse-licence: PMC author manuscript under NIHPA deposit terms. Publicly readable; no open reuse licence is stated, so the formula is cited for identification and no redistribution right is asserted.",
+          "verdict": "satisfied"
+        },
+        {
+          "dimension": "claim-scope",
+          "finding": "Treating mitophagy flux as a distinct, operationalised measured quantity, defined as an induced-to-basal ratio at a named section.",
+          "verdict": "satisfied"
+        },
+        {
+          "dimension": "quantitative-detail-permission",
+          "finding": "A section was read closely enough to carry quantitative detail (full-text-section).",
+          "verdict": "satisfied"
+        },
+        {
+          "dimension": "prior-binding-preserved",
+          "finding": "Prior binding \"Mechanisms of mitophagy\" is retained in the revision's boundaries rather than deleted.",
+          "verdict": "satisfied"
+        },
+        {
+          "dimension": "prohibited-inferences",
+          "finding": "2 explicit non-claims are carried on the revision.",
+          "verdict": "satisfied"
+        }
+      ],
+      "decisionSha256": "sha256:ac537a4ab615c930500203a03452cbc9da95c6bc90928d018bc7e94163da7fb4",
+      "exactLocator": "Section 'Representative Results', mitophagy flux ratio definition.",
+      "externallyReviewed": false,
+      "independentlyReproduced": false,
+      "inspectionDepth": "full-text-section",
+      "outcome": "alignment-clear-ready-for-revision-scoped-review",
+      "packetDigest": "sha256:ee3267778f0ee808822ece201ed9a029d0f99c26e2e367ec19294aa816914ae1",
+      "priorRecordRevisionSha256": "sha256:3975863e949fe9ba5f925e4b1aa521ac0bafc04e3bab3ed1f08dc24a6ebcac5e",
+      "recordId": "urn:maha:record:longevity-metabolism-mitophagy-flux",
+      "revisedRecordRevisionSha256": "sha256:c2e7e45853d46a447a9eff34a074baed68ed0507e5c3afb0bde5059dc19c9139",
+      "schemaVersion": "maha-batch-11-revision-canary/0.1"
+    },
+    {
+      "auditId": "urn:maha:audit:batch-11-revision:mechanistic-interpretability-activation-patching",
+      "auditSha256": "sha256:9f84ffdc4ee957ccb551ba4fb4e8cccf54fb243e22c18783cd6e595f44cfbfde",
+      "checks": [
+        {
+          "dimension": "source-identity",
+          "finding": "The arXiv abstract page and the HTML full text both report the same title and the two authors Zhang and Nanda under identifier 2309.16042v2, so the text inspected is the document the identifier names.",
+          "verdict": "satisfied"
+        },
+        {
+          "dimension": "version-relationship",
+          "finding": "v2, submitted 2023-09-27 and last revised 2024-01-17, is the version accepted at ICLR 2024. The locator below is into v2; v1 was not inspected and its section numbering is not assumed to match.",
+          "verdict": "satisfied"
+        },
+        {
+          "dimension": "exact-locator",
+          "finding": "Inspected at Section 2.1 'Activation patching', numbered list of the three forward passes, step 3.; not a whole-document reference.",
+          "verdict": "satisfied"
+        },
+        {
+          "dimension": "rights-basis",
+          "finding": "cc-by-4.0: CC BY 4.0 as stated on the arXiv abstract page. Quotation and redistribution are permitted with attribution.",
+          "verdict": "satisfied"
+        },
+        {
+          "dimension": "claim-scope",
+          "finding": "Treating activation patching as a distinct mechanism, with the clean, corrupted and restore procedure specified at section 2.1.",
+          "verdict": "satisfied"
+        },
+        {
+          "dimension": "quantitative-detail-permission",
+          "finding": "A section was read closely enough to carry quantitative detail (full-text-section).",
+          "verdict": "satisfied"
+        },
+        {
+          "dimension": "prior-binding-preserved",
+          "finding": "Prior binding \"Causal Scrubbing: a method for rigorously testing interpretability hypotheses\" is retained in the revision's boundaries rather than deleted.",
+          "verdict": "satisfied"
+        },
+        {
+          "dimension": "prohibited-inferences",
+          "finding": "2 explicit non-claims are carried on the revision.",
+          "verdict": "satisfied"
+        }
+      ],
+      "decisionSha256": "sha256:9fd6bc3953b870821fb1a13ed6bc18661f26560f8a3278b27e5c074915aa93e6",
+      "exactLocator": "Section 2.1 'Activation patching', numbered list of the three forward passes, step 3.",
+      "externallyReviewed": false,
+      "independentlyReproduced": false,
+      "inspectionDepth": "full-text-section",
+      "outcome": "alignment-clear-ready-for-revision-scoped-review",
+      "packetDigest": "sha256:343c8fdb05c92718310797254061aad156b195ecd56d035023a97f3594921419",
+      "priorRecordRevisionSha256": "sha256:9455c157822bd369fe08884dd078a075eabe40a4ff6a1f3e703ef4c3315630e3",
+      "recordId": "urn:maha:record:mechanistic-interpretability-activation-patching",
+      "revisedRecordRevisionSha256": "sha256:67e0410c4ffb547d2d9063e8b797b20046e94932c862b0f8841a035ea8f804d1",
       "schemaVersion": "maha-batch-11-revision-canary/0.1"
     },
     {
@@ -288,25 +288,11 @@
   ],
   "priorBindings": [
     {
-      "priorExactLocator": "Architecture, lifecycle, capabilities, resources, prompts, and security sections.",
-      "priorRecordRevisionSha256": "sha256:5680e38f71e49bcded9e4e2c5cce4497c14bef33b5398d347f8657dd51ea817a",
-      "priorSourceContractId": "source-agentic-systems-mcp-mcp-core",
-      "priorSourceTitle": "Model Context Protocol specification",
-      "recordId": "urn:maha:record:agentic-systems-mcp-tool-allowlisting"
-    },
-    {
-      "priorExactLocator": "Abstract; unconditional generation, motif scaffolding, binder design, Methods, and Extended Data.",
-      "priorRecordRevisionSha256": "sha256:2f59ecb93f3ad9418b05e01058d2d629fff5368dcc20b838b0e996f651c1db50",
-      "priorSourceContractId": "source-biomolecular-engineering-rfdiffusion",
-      "priorSourceTitle": "De novo design of protein structure and function with RFdiffusion",
-      "recordId": "urn:maha:record:biomolecular-engineering-structure-prediction-filtering"
-    },
-    {
-      "priorExactLocator": "Commodity chapters and introductory sections distinguishing resources, production, processing, uses, and supply considerations.",
-      "priorRecordRevisionSha256": "sha256:c667320cf234997948bffc6fef2aefd2133010aed2a0af4d457dad0817fd93c0",
-      "priorSourceContractId": "source-critical-supply-chains-pp1802",
-      "priorSourceTitle": "Critical Mineral Resources of the United States—Economic and Environmental Geology and Prospects for Future Supply",
-      "recordId": "urn:maha:record:critical-supply-chains-high-purity-quartz-deposits"
+      "priorExactLocator": "Pages 907–914: material-property comparison and SiC, GaN, and diamond power-device sections.",
+      "priorRecordRevisionSha256": "sha256:b617d666666621222481c56029596df2a95f4b7fcde30ffa0f0238e01fee8d73",
+      "priorSourceContractId": "source-advanced-materials-wide-bandgap",
+      "priorSourceTitle": "An assessment of wide bandgap semiconductors for power devices",
+      "recordId": "urn:maha:record:advanced-materials-color-centers-in-diamond"
     },
     {
       "priorExactLocator": "Machine / Magnets: toroidal field, poloidal field, central solenoid, and correction coil sections.",
@@ -314,6 +300,20 @@
       "priorSourceContractId": "source-fusion-plasma-systems-iter-magnets",
       "priorSourceTitle": "Magnets",
       "recordId": "urn:maha:record:fusion-plasma-systems-tokamak-plasma-equilibrium"
+    },
+    {
+      "priorExactLocator": "PINK1–Parkin pathway, mitochondrial damage sensing, and mitophagy mechanism sections.",
+      "priorRecordRevisionSha256": "sha256:3975863e949fe9ba5f925e4b1aa521ac0bafc04e3bab3ed1f08dc24a6ebcac5e",
+      "priorSourceContractId": "source-longevity-metabolism-mitophagy",
+      "priorSourceTitle": "Mechanisms of mitophagy",
+      "recordId": "urn:maha:record:longevity-metabolism-mitophagy-flux"
+    },
+    {
+      "priorExactLocator": "Method definition, correspondence, resampling interventions, examples, and limitations.",
+      "priorRecordRevisionSha256": "sha256:9455c157822bd369fe08884dd078a075eabe40a4ff6a1f3e703ef4c3315630e3",
+      "priorSourceContractId": "source-mechanistic-interpretability-causal-scrubbing",
+      "priorSourceTitle": "Causal Scrubbing: a method for rigorously testing interpretability hypotheses",
+      "recordId": "urn:maha:record:mechanistic-interpretability-activation-patching"
     },
     {
       "priorExactLocator": "Definitions, toy models, geometry, sparsity, and feature-interference experiments.",
@@ -326,66 +326,24 @@
   "releaseCanary": [
     {
       "activeCanonicalRelease": false,
-      "auditSha256": "sha256:572ebe447494add6fb1ecf83a95efca1b9bd2d23f9048bfd859de7a0de0d3ef3",
-      "canarySha256": "sha256:3cc910c0d9fec58c7d7a26e53c0441ed4228b1515b37900db6c85a364d1dc23c",
+      "auditSha256": "sha256:8aae2beccb5bd23b8990db93add150ae23430e9485b4a4b3d021bd7d2b763fef",
+      "canarySha256": "sha256:501dd92476e1af14d58cde8254117a6f4352975b29eacb724f56983b3d0e512f",
       "canonicalMutationAuthorized": false,
-      "canonicalPath": "/knowledge/agentic-systems-mcp/measurements/agentic-systems-mcp-tool-allowlisting",
+      "canonicalPath": "/knowledge/advanced-materials/methods/advanced-materials-color-centers-in-diamond",
       "decisionSha256s": [
-        "sha256:2e01c3f17114f976fd24a1c5db99238e2bbd94b56c018ad9764bacd2c69b04ae",
-        "sha256:fa1cb333dc51d079c938205580a636440479447d387a9765901f83972dbc6004",
-        "sha256:96dce2548a004bef3313967155856e78ab8adcdb7285656139b18fcad2ef7abf",
-        "sha256:df6a5fddd201364e198ac19ebfc397707e5c2c709e09e7164e9cd8dd34ea374b"
+        "sha256:7ca32742c9d59d998665deece243650904ec5469aacf59f6fa4921ffe789dbe2",
+        "sha256:f4da4836d43bd5fd571d0eb832cad731ec8bc2af09d0f3fa3a6c1d65de3fb4d6",
+        "sha256:d6ce77c0ff8090af2c4026c08bd8321806aa582732988cf9aad1597a9f4bb059",
+        "sha256:89dc2c00d38892b72daa00a905280041ab1318750c0c74195f3cd76df5c8d05d"
       ],
       "excludedFromPublicationQueue": true,
       "productionMutationPerformed": false,
       "queueExclusionEvidence": "Checked against the merged three-gate SUBSTANTIAL_PUBLICATION_QUEUE: no entry admits this record as release-eligible.",
-      "recordId": "urn:maha:record:agentic-systems-mcp-tool-allowlisting",
+      "recordId": "urn:maha:record:advanced-materials-color-centers-in-diamond",
       "releaseAuthorityPresent": false,
       "schemaVersion": "maha-batch-11-release-canary/0.1",
       "state": "private-preflight-passed-awaiting-release-authority",
-      "targetSha256": "sha256:655c3ae116314eb3d2f42d40834b64034cac6a6ca7ea3b2f246f9134585ebaee"
-    },
-    {
-      "activeCanonicalRelease": false,
-      "auditSha256": "sha256:03ad129f7a2feb3664da001337d0bb92ee8e23deea23027681daf0e497203b9c",
-      "canarySha256": "sha256:ccfa1c85fbfcfed7a5ddcc408010ec6655238ef5acf611ca6aaa58f4ff9e4cc0",
-      "canonicalMutationAuthorized": false,
-      "canonicalPath": "/knowledge/biomolecular-engineering/comparisons/biomolecular-engineering-structure-prediction-filtering",
-      "decisionSha256s": [
-        "sha256:0cb78d0bfa456d74341ec40268b6abfb2e7cc9119d6cac2f6f6da6dc1f2d3fca",
-        "sha256:3a16a73dbff970dac9c75b6e1bea8bf4a6645712c9aaf9d8923526a52a1789b4",
-        "sha256:9377f784a18bd514a06d46478be1b33705baed6b70588ccde9a2915dc7efc96a",
-        "sha256:b9f35c2c9561a70fc3f627aba03e7596376d00c6b868578bf967453fb80e96af"
-      ],
-      "excludedFromPublicationQueue": true,
-      "productionMutationPerformed": false,
-      "queueExclusionEvidence": "Checked against the merged three-gate SUBSTANTIAL_PUBLICATION_QUEUE: no entry admits this record as release-eligible.",
-      "recordId": "urn:maha:record:biomolecular-engineering-structure-prediction-filtering",
-      "releaseAuthorityPresent": false,
-      "schemaVersion": "maha-batch-11-release-canary/0.1",
-      "state": "private-preflight-passed-awaiting-release-authority",
-      "targetSha256": "sha256:4f41045346753387198fd285374217f7d1448d41a28a569a5e1c07fea844b8de"
-    },
-    {
-      "activeCanonicalRelease": false,
-      "auditSha256": "sha256:39de94bc5c9502cc6434992a5b12fea9d3a25c6e21c512052a79855ec782dc02",
-      "canarySha256": "sha256:a4a30f27144f6e3ccd7690d46f61844591ce90abb021449e28be57ecb31c5ca8",
-      "canonicalMutationAuthorized": false,
-      "canonicalPath": "/knowledge/critical-supply-chains/concepts/critical-supply-chains-high-purity-quartz-deposits",
-      "decisionSha256s": [
-        "sha256:7a215698d46e985b90416d44096df9175e14a34ac67d7eba2fd55d277c99eb9f",
-        "sha256:f6c98738f28deeb4d2f57ab845cf4762e3b442d874ea703f67061558cbf6e4b3",
-        "sha256:40ee9dd03db259d6c22d159140f32520ffee7e94972f4ec0fdd5b104af05055c",
-        "sha256:b6c32ba2bee30efa292f699708001f6cbaf66c28809abbb02e7ca5f5bbeda8f1"
-      ],
-      "excludedFromPublicationQueue": true,
-      "productionMutationPerformed": false,
-      "queueExclusionEvidence": "Checked against the merged three-gate SUBSTANTIAL_PUBLICATION_QUEUE: no entry admits this record as release-eligible.",
-      "recordId": "urn:maha:record:critical-supply-chains-high-purity-quartz-deposits",
-      "releaseAuthorityPresent": false,
-      "schemaVersion": "maha-batch-11-release-canary/0.1",
-      "state": "private-preflight-passed-awaiting-release-authority",
-      "targetSha256": "sha256:bf577646700efe497e3cc15b1f0f8eb6aa0c7c7bbcdeff5e2fdc388b2ac07398"
+      "targetSha256": "sha256:ee7c69df6eaff6c7910ee8dff251029f1217ac7b4f8d377422416ed5dbe7e0b5"
     },
     {
       "activeCanonicalRelease": false,
@@ -410,6 +368,48 @@
     },
     {
       "activeCanonicalRelease": false,
+      "auditSha256": "sha256:6b905d8c752bf1665aa6b07dfc8dd06cf517d77a0fa05319ddc93bdaff4b86b5",
+      "canarySha256": "sha256:1f942aa90fbe13415ab4ee748ecf930d796791eebfb0d9a2626f89246a9cd4df",
+      "canonicalMutationAuthorized": false,
+      "canonicalPath": "/knowledge/longevity-metabolism/concepts/longevity-metabolism-mitophagy-flux",
+      "decisionSha256s": [
+        "sha256:b3b64987ec1dba29a2f882a43c0888db8e319347fe734bbc49e6bbbd95d0b34a",
+        "sha256:e04c4331191e2596a288dd3d863b3b57cfacdce6c45ed62481907e680fd009b8",
+        "sha256:8648086a34a52d3f93c304ae6cd3b5d468ab42b7bfd967e00d0dc374133420d4",
+        "sha256:1f1cd1012128d3268146aed2ed48e3a6f6d01d3c6314ab9b883e3c7fdd8e90e6"
+      ],
+      "excludedFromPublicationQueue": true,
+      "productionMutationPerformed": false,
+      "queueExclusionEvidence": "Checked against the merged three-gate SUBSTANTIAL_PUBLICATION_QUEUE: no entry admits this record as release-eligible.",
+      "recordId": "urn:maha:record:longevity-metabolism-mitophagy-flux",
+      "releaseAuthorityPresent": false,
+      "schemaVersion": "maha-batch-11-release-canary/0.1",
+      "state": "private-preflight-passed-awaiting-release-authority",
+      "targetSha256": "sha256:c2e7e45853d46a447a9eff34a074baed68ed0507e5c3afb0bde5059dc19c9139"
+    },
+    {
+      "activeCanonicalRelease": false,
+      "auditSha256": "sha256:9f84ffdc4ee957ccb551ba4fb4e8cccf54fb243e22c18783cd6e595f44cfbfde",
+      "canarySha256": "sha256:930ad14efb12af3d83fd7c7e07815564997dea0d0dbd046ae02fbcac1fcf61dd",
+      "canonicalMutationAuthorized": false,
+      "canonicalPath": "/knowledge/mechanistic-interpretability/concepts/mechanistic-interpretability-activation-patching",
+      "decisionSha256s": [
+        "sha256:bd038006007a1696205fa31abd432b9bfc755aeb1940d342963890c7abb79d66",
+        "sha256:f2e93342c88d4c2f2c46ef5f282a556dea955bf517575f584379850ff93151f7",
+        "sha256:1add4eb429338df061cf7cfa6f08a7e5072d39be83f01c73c3009a418553a88d",
+        "sha256:a1b04aacfb224b7d783029b05580c27ffc5777cec1d00749654caa617e109f4f"
+      ],
+      "excludedFromPublicationQueue": true,
+      "productionMutationPerformed": false,
+      "queueExclusionEvidence": "Checked against the merged three-gate SUBSTANTIAL_PUBLICATION_QUEUE: no entry admits this record as release-eligible.",
+      "recordId": "urn:maha:record:mechanistic-interpretability-activation-patching",
+      "releaseAuthorityPresent": false,
+      "schemaVersion": "maha-batch-11-release-canary/0.1",
+      "state": "private-preflight-passed-awaiting-release-authority",
+      "targetSha256": "sha256:67e0410c4ffb547d2d9063e8b797b20046e94932c862b0f8841a035ea8f804d1"
+    },
+    {
+      "activeCanonicalRelease": false,
       "auditSha256": "sha256:8780441de21fb9bfa9ea5bbd71c2299cd5a4492bd4ac58b0b60195d45544a5b0",
       "canarySha256": "sha256:a3df5ff1e9bcfbc8d07d8acdc06c2dd22ad803134cde68c0be21fa7fb30e0f72",
       "canonicalMutationAuthorized": false,
@@ -430,199 +430,71 @@
       "targetSha256": "sha256:c87bdda2c7cf974f86499469e46d6fd6aab9e80c6bfe11848c595a8591e9ddc6"
     }
   ],
-  "resultDigest": "sha256:260bb7877c14a289a93ba655860b80cc1a38749955ff4f8ce5d99d188dafd4a0",
+  "resultDigest": "sha256:3102789e348b1cc6aaf7dc627231221c2d02efc20a7b11aa4e17662c414e540f",
   "schemaVersion": "maha-batch-11-revision-canary/0.1",
   "scopedDecisions": [
     {
-      "auditSha256": "sha256:572ebe447494add6fb1ecf83a95efca1b9bd2d23f9048bfd859de7a0de0d3ef3",
-      "decisionId": "urn:maha:review:batch-11-revision:agentic-systems-mcp-tool-allowlisting:source-fidelity",
-      "decisionSha256": "sha256:2e01c3f17114f976fd24a1c5db99238e2bbd94b56c018ad9764bacd2c69b04ae",
+      "auditSha256": "sha256:8aae2beccb5bd23b8990db93add150ae23430e9485b4a4b3d021bd7d2b763fef",
+      "decisionId": "urn:maha:review:batch-11-revision:advanced-materials-color-centers-in-diamond:source-fidelity",
+      "decisionSha256": "sha256:7ca32742c9d59d998665deece243650904ec5469aacf59f6fa4921ffe789dbe2",
       "externallyReviewed": false,
       "independentlyReproduced": false,
-      "recordId": "urn:maha:record:agentic-systems-mcp-tool-allowlisting",
+      "recordId": "urn:maha:record:advanced-materials-color-centers-in-diamond",
       "reviewMethod": "explicit-revision-checklist",
       "reviewedAt": "2026-08-30T00:00:00Z",
       "reviewerId": "maha-internal-editorial:batch-11-revision-canary",
       "reviewerKind": "internal-editorial",
       "schemaVersion": "maha-batch-11-revision-review/0.1",
       "scope": "source-fidelity",
-      "targetSha256": "sha256:655c3ae116314eb3d2f42d40834b64034cac6a6ca7ea3b2f246f9134585ebaee",
+      "targetSha256": "sha256:ee7c69df6eaff6c7910ee8dff251029f1217ac7b4f8d377422416ed5dbe7e0b5",
       "verdict": "approve"
     },
     {
-      "auditSha256": "sha256:572ebe447494add6fb1ecf83a95efca1b9bd2d23f9048bfd859de7a0de0d3ef3",
-      "decisionId": "urn:maha:review:batch-11-revision:agentic-systems-mcp-tool-allowlisting:domain-fidelity",
-      "decisionSha256": "sha256:fa1cb333dc51d079c938205580a636440479447d387a9765901f83972dbc6004",
+      "auditSha256": "sha256:8aae2beccb5bd23b8990db93add150ae23430e9485b4a4b3d021bd7d2b763fef",
+      "decisionId": "urn:maha:review:batch-11-revision:advanced-materials-color-centers-in-diamond:domain-fidelity",
+      "decisionSha256": "sha256:f4da4836d43bd5fd571d0eb832cad731ec8bc2af09d0f3fa3a6c1d65de3fb4d6",
       "externallyReviewed": false,
       "independentlyReproduced": false,
-      "recordId": "urn:maha:record:agentic-systems-mcp-tool-allowlisting",
+      "recordId": "urn:maha:record:advanced-materials-color-centers-in-diamond",
       "reviewMethod": "explicit-revision-checklist",
       "reviewedAt": "2026-08-30T00:00:00Z",
       "reviewerId": "maha-internal-editorial:batch-11-revision-canary",
       "reviewerKind": "internal-editorial",
       "schemaVersion": "maha-batch-11-revision-review/0.1",
       "scope": "domain-fidelity",
-      "targetSha256": "sha256:655c3ae116314eb3d2f42d40834b64034cac6a6ca7ea3b2f246f9134585ebaee",
+      "targetSha256": "sha256:ee7c69df6eaff6c7910ee8dff251029f1217ac7b4f8d377422416ed5dbe7e0b5",
       "verdict": "approve"
     },
     {
-      "auditSha256": "sha256:572ebe447494add6fb1ecf83a95efca1b9bd2d23f9048bfd859de7a0de0d3ef3",
-      "decisionId": "urn:maha:review:batch-11-revision:agentic-systems-mcp-tool-allowlisting:rights-and-locator",
-      "decisionSha256": "sha256:96dce2548a004bef3313967155856e78ab8adcdb7285656139b18fcad2ef7abf",
+      "auditSha256": "sha256:8aae2beccb5bd23b8990db93add150ae23430e9485b4a4b3d021bd7d2b763fef",
+      "decisionId": "urn:maha:review:batch-11-revision:advanced-materials-color-centers-in-diamond:rights-and-locator",
+      "decisionSha256": "sha256:d6ce77c0ff8090af2c4026c08bd8321806aa582732988cf9aad1597a9f4bb059",
       "externallyReviewed": false,
       "independentlyReproduced": false,
-      "recordId": "urn:maha:record:agentic-systems-mcp-tool-allowlisting",
+      "recordId": "urn:maha:record:advanced-materials-color-centers-in-diamond",
       "reviewMethod": "explicit-revision-checklist",
       "reviewedAt": "2026-08-30T00:00:00Z",
       "reviewerId": "maha-internal-editorial:batch-11-revision-canary",
       "reviewerKind": "internal-editorial",
       "schemaVersion": "maha-batch-11-revision-review/0.1",
       "scope": "rights-and-locator",
-      "targetSha256": "sha256:655c3ae116314eb3d2f42d40834b64034cac6a6ca7ea3b2f246f9134585ebaee",
+      "targetSha256": "sha256:ee7c69df6eaff6c7910ee8dff251029f1217ac7b4f8d377422416ed5dbe7e0b5",
       "verdict": "approve"
     },
     {
-      "auditSha256": "sha256:572ebe447494add6fb1ecf83a95efca1b9bd2d23f9048bfd859de7a0de0d3ef3",
-      "decisionId": "urn:maha:review:batch-11-revision:agentic-systems-mcp-tool-allowlisting:boundary-adequacy",
-      "decisionSha256": "sha256:df6a5fddd201364e198ac19ebfc397707e5c2c709e09e7164e9cd8dd34ea374b",
+      "auditSha256": "sha256:8aae2beccb5bd23b8990db93add150ae23430e9485b4a4b3d021bd7d2b763fef",
+      "decisionId": "urn:maha:review:batch-11-revision:advanced-materials-color-centers-in-diamond:boundary-adequacy",
+      "decisionSha256": "sha256:89dc2c00d38892b72daa00a905280041ab1318750c0c74195f3cd76df5c8d05d",
       "externallyReviewed": false,
       "independentlyReproduced": false,
-      "recordId": "urn:maha:record:agentic-systems-mcp-tool-allowlisting",
+      "recordId": "urn:maha:record:advanced-materials-color-centers-in-diamond",
       "reviewMethod": "explicit-revision-checklist",
       "reviewedAt": "2026-08-30T00:00:00Z",
       "reviewerId": "maha-internal-editorial:batch-11-revision-canary",
       "reviewerKind": "internal-editorial",
       "schemaVersion": "maha-batch-11-revision-review/0.1",
       "scope": "boundary-adequacy",
-      "targetSha256": "sha256:655c3ae116314eb3d2f42d40834b64034cac6a6ca7ea3b2f246f9134585ebaee",
-      "verdict": "approve"
-    },
-    {
-      "auditSha256": "sha256:03ad129f7a2feb3664da001337d0bb92ee8e23deea23027681daf0e497203b9c",
-      "decisionId": "urn:maha:review:batch-11-revision:biomolecular-engineering-structure-prediction-filtering:source-fidelity",
-      "decisionSha256": "sha256:0cb78d0bfa456d74341ec40268b6abfb2e7cc9119d6cac2f6f6da6dc1f2d3fca",
-      "externallyReviewed": false,
-      "independentlyReproduced": false,
-      "recordId": "urn:maha:record:biomolecular-engineering-structure-prediction-filtering",
-      "reviewMethod": "explicit-revision-checklist",
-      "reviewedAt": "2026-08-30T00:00:00Z",
-      "reviewerId": "maha-internal-editorial:batch-11-revision-canary",
-      "reviewerKind": "internal-editorial",
-      "schemaVersion": "maha-batch-11-revision-review/0.1",
-      "scope": "source-fidelity",
-      "targetSha256": "sha256:4f41045346753387198fd285374217f7d1448d41a28a569a5e1c07fea844b8de",
-      "verdict": "approve"
-    },
-    {
-      "auditSha256": "sha256:03ad129f7a2feb3664da001337d0bb92ee8e23deea23027681daf0e497203b9c",
-      "decisionId": "urn:maha:review:batch-11-revision:biomolecular-engineering-structure-prediction-filtering:domain-fidelity",
-      "decisionSha256": "sha256:3a16a73dbff970dac9c75b6e1bea8bf4a6645712c9aaf9d8923526a52a1789b4",
-      "externallyReviewed": false,
-      "independentlyReproduced": false,
-      "recordId": "urn:maha:record:biomolecular-engineering-structure-prediction-filtering",
-      "reviewMethod": "explicit-revision-checklist",
-      "reviewedAt": "2026-08-30T00:00:00Z",
-      "reviewerId": "maha-internal-editorial:batch-11-revision-canary",
-      "reviewerKind": "internal-editorial",
-      "schemaVersion": "maha-batch-11-revision-review/0.1",
-      "scope": "domain-fidelity",
-      "targetSha256": "sha256:4f41045346753387198fd285374217f7d1448d41a28a569a5e1c07fea844b8de",
-      "verdict": "approve"
-    },
-    {
-      "auditSha256": "sha256:03ad129f7a2feb3664da001337d0bb92ee8e23deea23027681daf0e497203b9c",
-      "decisionId": "urn:maha:review:batch-11-revision:biomolecular-engineering-structure-prediction-filtering:rights-and-locator",
-      "decisionSha256": "sha256:9377f784a18bd514a06d46478be1b33705baed6b70588ccde9a2915dc7efc96a",
-      "externallyReviewed": false,
-      "independentlyReproduced": false,
-      "recordId": "urn:maha:record:biomolecular-engineering-structure-prediction-filtering",
-      "reviewMethod": "explicit-revision-checklist",
-      "reviewedAt": "2026-08-30T00:00:00Z",
-      "reviewerId": "maha-internal-editorial:batch-11-revision-canary",
-      "reviewerKind": "internal-editorial",
-      "schemaVersion": "maha-batch-11-revision-review/0.1",
-      "scope": "rights-and-locator",
-      "targetSha256": "sha256:4f41045346753387198fd285374217f7d1448d41a28a569a5e1c07fea844b8de",
-      "verdict": "approve"
-    },
-    {
-      "auditSha256": "sha256:03ad129f7a2feb3664da001337d0bb92ee8e23deea23027681daf0e497203b9c",
-      "decisionId": "urn:maha:review:batch-11-revision:biomolecular-engineering-structure-prediction-filtering:boundary-adequacy",
-      "decisionSha256": "sha256:b9f35c2c9561a70fc3f627aba03e7596376d00c6b868578bf967453fb80e96af",
-      "externallyReviewed": false,
-      "independentlyReproduced": false,
-      "recordId": "urn:maha:record:biomolecular-engineering-structure-prediction-filtering",
-      "reviewMethod": "explicit-revision-checklist",
-      "reviewedAt": "2026-08-30T00:00:00Z",
-      "reviewerId": "maha-internal-editorial:batch-11-revision-canary",
-      "reviewerKind": "internal-editorial",
-      "schemaVersion": "maha-batch-11-revision-review/0.1",
-      "scope": "boundary-adequacy",
-      "targetSha256": "sha256:4f41045346753387198fd285374217f7d1448d41a28a569a5e1c07fea844b8de",
-      "verdict": "approve"
-    },
-    {
-      "auditSha256": "sha256:39de94bc5c9502cc6434992a5b12fea9d3a25c6e21c512052a79855ec782dc02",
-      "decisionId": "urn:maha:review:batch-11-revision:critical-supply-chains-high-purity-quartz-deposits:source-fidelity",
-      "decisionSha256": "sha256:7a215698d46e985b90416d44096df9175e14a34ac67d7eba2fd55d277c99eb9f",
-      "externallyReviewed": false,
-      "independentlyReproduced": false,
-      "recordId": "urn:maha:record:critical-supply-chains-high-purity-quartz-deposits",
-      "reviewMethod": "explicit-revision-checklist",
-      "reviewedAt": "2026-08-30T00:00:00Z",
-      "reviewerId": "maha-internal-editorial:batch-11-revision-canary",
-      "reviewerKind": "internal-editorial",
-      "schemaVersion": "maha-batch-11-revision-review/0.1",
-      "scope": "source-fidelity",
-      "targetSha256": "sha256:bf577646700efe497e3cc15b1f0f8eb6aa0c7c7bbcdeff5e2fdc388b2ac07398",
-      "verdict": "approve"
-    },
-    {
-      "auditSha256": "sha256:39de94bc5c9502cc6434992a5b12fea9d3a25c6e21c512052a79855ec782dc02",
-      "decisionId": "urn:maha:review:batch-11-revision:critical-supply-chains-high-purity-quartz-deposits:domain-fidelity",
-      "decisionSha256": "sha256:f6c98738f28deeb4d2f57ab845cf4762e3b442d874ea703f67061558cbf6e4b3",
-      "externallyReviewed": false,
-      "independentlyReproduced": false,
-      "recordId": "urn:maha:record:critical-supply-chains-high-purity-quartz-deposits",
-      "reviewMethod": "explicit-revision-checklist",
-      "reviewedAt": "2026-08-30T00:00:00Z",
-      "reviewerId": "maha-internal-editorial:batch-11-revision-canary",
-      "reviewerKind": "internal-editorial",
-      "schemaVersion": "maha-batch-11-revision-review/0.1",
-      "scope": "domain-fidelity",
-      "targetSha256": "sha256:bf577646700efe497e3cc15b1f0f8eb6aa0c7c7bbcdeff5e2fdc388b2ac07398",
-      "verdict": "approve"
-    },
-    {
-      "auditSha256": "sha256:39de94bc5c9502cc6434992a5b12fea9d3a25c6e21c512052a79855ec782dc02",
-      "decisionId": "urn:maha:review:batch-11-revision:critical-supply-chains-high-purity-quartz-deposits:rights-and-locator",
-      "decisionSha256": "sha256:40ee9dd03db259d6c22d159140f32520ffee7e94972f4ec0fdd5b104af05055c",
-      "externallyReviewed": false,
-      "independentlyReproduced": false,
-      "recordId": "urn:maha:record:critical-supply-chains-high-purity-quartz-deposits",
-      "reviewMethod": "explicit-revision-checklist",
-      "reviewedAt": "2026-08-30T00:00:00Z",
-      "reviewerId": "maha-internal-editorial:batch-11-revision-canary",
-      "reviewerKind": "internal-editorial",
-      "schemaVersion": "maha-batch-11-revision-review/0.1",
-      "scope": "rights-and-locator",
-      "targetSha256": "sha256:bf577646700efe497e3cc15b1f0f8eb6aa0c7c7bbcdeff5e2fdc388b2ac07398",
-      "verdict": "approve"
-    },
-    {
-      "auditSha256": "sha256:39de94bc5c9502cc6434992a5b12fea9d3a25c6e21c512052a79855ec782dc02",
-      "decisionId": "urn:maha:review:batch-11-revision:critical-supply-chains-high-purity-quartz-deposits:boundary-adequacy",
-      "decisionSha256": "sha256:b6c32ba2bee30efa292f699708001f6cbaf66c28809abbb02e7ca5f5bbeda8f1",
-      "externallyReviewed": false,
-      "independentlyReproduced": false,
-      "recordId": "urn:maha:record:critical-supply-chains-high-purity-quartz-deposits",
-      "reviewMethod": "explicit-revision-checklist",
-      "reviewedAt": "2026-08-30T00:00:00Z",
-      "reviewerId": "maha-internal-editorial:batch-11-revision-canary",
-      "reviewerKind": "internal-editorial",
-      "schemaVersion": "maha-batch-11-revision-review/0.1",
-      "scope": "boundary-adequacy",
-      "targetSha256": "sha256:bf577646700efe497e3cc15b1f0f8eb6aa0c7c7bbcdeff5e2fdc388b2ac07398",
+      "targetSha256": "sha256:ee7c69df6eaff6c7910ee8dff251029f1217ac7b4f8d377422416ed5dbe7e0b5",
       "verdict": "approve"
     },
     {
@@ -687,6 +559,134 @@
       "schemaVersion": "maha-batch-11-revision-review/0.1",
       "scope": "boundary-adequacy",
       "targetSha256": "sha256:b06ae30e9f4b9907e6a603a67e3e8b1639897b2fc1cce47ad36e854b32d50f90",
+      "verdict": "approve"
+    },
+    {
+      "auditSha256": "sha256:6b905d8c752bf1665aa6b07dfc8dd06cf517d77a0fa05319ddc93bdaff4b86b5",
+      "decisionId": "urn:maha:review:batch-11-revision:longevity-metabolism-mitophagy-flux:source-fidelity",
+      "decisionSha256": "sha256:b3b64987ec1dba29a2f882a43c0888db8e319347fe734bbc49e6bbbd95d0b34a",
+      "externallyReviewed": false,
+      "independentlyReproduced": false,
+      "recordId": "urn:maha:record:longevity-metabolism-mitophagy-flux",
+      "reviewMethod": "explicit-revision-checklist",
+      "reviewedAt": "2026-08-30T00:00:00Z",
+      "reviewerId": "maha-internal-editorial:batch-11-revision-canary",
+      "reviewerKind": "internal-editorial",
+      "schemaVersion": "maha-batch-11-revision-review/0.1",
+      "scope": "source-fidelity",
+      "targetSha256": "sha256:c2e7e45853d46a447a9eff34a074baed68ed0507e5c3afb0bde5059dc19c9139",
+      "verdict": "approve"
+    },
+    {
+      "auditSha256": "sha256:6b905d8c752bf1665aa6b07dfc8dd06cf517d77a0fa05319ddc93bdaff4b86b5",
+      "decisionId": "urn:maha:review:batch-11-revision:longevity-metabolism-mitophagy-flux:domain-fidelity",
+      "decisionSha256": "sha256:e04c4331191e2596a288dd3d863b3b57cfacdce6c45ed62481907e680fd009b8",
+      "externallyReviewed": false,
+      "independentlyReproduced": false,
+      "recordId": "urn:maha:record:longevity-metabolism-mitophagy-flux",
+      "reviewMethod": "explicit-revision-checklist",
+      "reviewedAt": "2026-08-30T00:00:00Z",
+      "reviewerId": "maha-internal-editorial:batch-11-revision-canary",
+      "reviewerKind": "internal-editorial",
+      "schemaVersion": "maha-batch-11-revision-review/0.1",
+      "scope": "domain-fidelity",
+      "targetSha256": "sha256:c2e7e45853d46a447a9eff34a074baed68ed0507e5c3afb0bde5059dc19c9139",
+      "verdict": "approve"
+    },
+    {
+      "auditSha256": "sha256:6b905d8c752bf1665aa6b07dfc8dd06cf517d77a0fa05319ddc93bdaff4b86b5",
+      "decisionId": "urn:maha:review:batch-11-revision:longevity-metabolism-mitophagy-flux:rights-and-locator",
+      "decisionSha256": "sha256:8648086a34a52d3f93c304ae6cd3b5d468ab42b7bfd967e00d0dc374133420d4",
+      "externallyReviewed": false,
+      "independentlyReproduced": false,
+      "recordId": "urn:maha:record:longevity-metabolism-mitophagy-flux",
+      "reviewMethod": "explicit-revision-checklist",
+      "reviewedAt": "2026-08-30T00:00:00Z",
+      "reviewerId": "maha-internal-editorial:batch-11-revision-canary",
+      "reviewerKind": "internal-editorial",
+      "schemaVersion": "maha-batch-11-revision-review/0.1",
+      "scope": "rights-and-locator",
+      "targetSha256": "sha256:c2e7e45853d46a447a9eff34a074baed68ed0507e5c3afb0bde5059dc19c9139",
+      "verdict": "approve"
+    },
+    {
+      "auditSha256": "sha256:6b905d8c752bf1665aa6b07dfc8dd06cf517d77a0fa05319ddc93bdaff4b86b5",
+      "decisionId": "urn:maha:review:batch-11-revision:longevity-metabolism-mitophagy-flux:boundary-adequacy",
+      "decisionSha256": "sha256:1f1cd1012128d3268146aed2ed48e3a6f6d01d3c6314ab9b883e3c7fdd8e90e6",
+      "externallyReviewed": false,
+      "independentlyReproduced": false,
+      "recordId": "urn:maha:record:longevity-metabolism-mitophagy-flux",
+      "reviewMethod": "explicit-revision-checklist",
+      "reviewedAt": "2026-08-30T00:00:00Z",
+      "reviewerId": "maha-internal-editorial:batch-11-revision-canary",
+      "reviewerKind": "internal-editorial",
+      "schemaVersion": "maha-batch-11-revision-review/0.1",
+      "scope": "boundary-adequacy",
+      "targetSha256": "sha256:c2e7e45853d46a447a9eff34a074baed68ed0507e5c3afb0bde5059dc19c9139",
+      "verdict": "approve"
+    },
+    {
+      "auditSha256": "sha256:9f84ffdc4ee957ccb551ba4fb4e8cccf54fb243e22c18783cd6e595f44cfbfde",
+      "decisionId": "urn:maha:review:batch-11-revision:mechanistic-interpretability-activation-patching:source-fidelity",
+      "decisionSha256": "sha256:bd038006007a1696205fa31abd432b9bfc755aeb1940d342963890c7abb79d66",
+      "externallyReviewed": false,
+      "independentlyReproduced": false,
+      "recordId": "urn:maha:record:mechanistic-interpretability-activation-patching",
+      "reviewMethod": "explicit-revision-checklist",
+      "reviewedAt": "2026-08-30T00:00:00Z",
+      "reviewerId": "maha-internal-editorial:batch-11-revision-canary",
+      "reviewerKind": "internal-editorial",
+      "schemaVersion": "maha-batch-11-revision-review/0.1",
+      "scope": "source-fidelity",
+      "targetSha256": "sha256:67e0410c4ffb547d2d9063e8b797b20046e94932c862b0f8841a035ea8f804d1",
+      "verdict": "approve"
+    },
+    {
+      "auditSha256": "sha256:9f84ffdc4ee957ccb551ba4fb4e8cccf54fb243e22c18783cd6e595f44cfbfde",
+      "decisionId": "urn:maha:review:batch-11-revision:mechanistic-interpretability-activation-patching:domain-fidelity",
+      "decisionSha256": "sha256:f2e93342c88d4c2f2c46ef5f282a556dea955bf517575f584379850ff93151f7",
+      "externallyReviewed": false,
+      "independentlyReproduced": false,
+      "recordId": "urn:maha:record:mechanistic-interpretability-activation-patching",
+      "reviewMethod": "explicit-revision-checklist",
+      "reviewedAt": "2026-08-30T00:00:00Z",
+      "reviewerId": "maha-internal-editorial:batch-11-revision-canary",
+      "reviewerKind": "internal-editorial",
+      "schemaVersion": "maha-batch-11-revision-review/0.1",
+      "scope": "domain-fidelity",
+      "targetSha256": "sha256:67e0410c4ffb547d2d9063e8b797b20046e94932c862b0f8841a035ea8f804d1",
+      "verdict": "approve"
+    },
+    {
+      "auditSha256": "sha256:9f84ffdc4ee957ccb551ba4fb4e8cccf54fb243e22c18783cd6e595f44cfbfde",
+      "decisionId": "urn:maha:review:batch-11-revision:mechanistic-interpretability-activation-patching:rights-and-locator",
+      "decisionSha256": "sha256:1add4eb429338df061cf7cfa6f08a7e5072d39be83f01c73c3009a418553a88d",
+      "externallyReviewed": false,
+      "independentlyReproduced": false,
+      "recordId": "urn:maha:record:mechanistic-interpretability-activation-patching",
+      "reviewMethod": "explicit-revision-checklist",
+      "reviewedAt": "2026-08-30T00:00:00Z",
+      "reviewerId": "maha-internal-editorial:batch-11-revision-canary",
+      "reviewerKind": "internal-editorial",
+      "schemaVersion": "maha-batch-11-revision-review/0.1",
+      "scope": "rights-and-locator",
+      "targetSha256": "sha256:67e0410c4ffb547d2d9063e8b797b20046e94932c862b0f8841a035ea8f804d1",
+      "verdict": "approve"
+    },
+    {
+      "auditSha256": "sha256:9f84ffdc4ee957ccb551ba4fb4e8cccf54fb243e22c18783cd6e595f44cfbfde",
+      "decisionId": "urn:maha:review:batch-11-revision:mechanistic-interpretability-activation-patching:boundary-adequacy",
+      "decisionSha256": "sha256:a1b04aacfb224b7d783029b05580c27ffc5777cec1d00749654caa617e109f4f",
+      "externallyReviewed": false,
+      "independentlyReproduced": false,
+      "recordId": "urn:maha:record:mechanistic-interpretability-activation-patching",
+      "reviewMethod": "explicit-revision-checklist",
+      "reviewedAt": "2026-08-30T00:00:00Z",
+      "reviewerId": "maha-internal-editorial:batch-11-revision-canary",
+      "reviewerKind": "internal-editorial",
+      "schemaVersion": "maha-batch-11-revision-review/0.1",
+      "scope": "boundary-adequacy",
+      "targetSha256": "sha256:67e0410c4ffb547d2d9063e8b797b20046e94932c862b0f8841a035ea8f804d1",
       "verdict": "approve"
     },
     {
@@ -766,7 +766,7 @@
     "activeCanonicalReleases": 0,
     "auditsPassed": 5,
     "preflightPassed": 5,
-    "quantitativeDetailPermitted": 3,
+    "quantitativeDetailPermitted": 4,
     "revisionsBuilt": 5,
     "scopedDecisions": 20,
     "selected": 5

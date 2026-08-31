@@ -24,13 +24,13 @@ const OBSERVATION = JSON.parse(
   readFileSync(resolve(ROOT, 'content/frontier-alignment/batch-11-registry-observation.json'), 'utf8'),
 ) as RegistryObservation
 
-const INITIAL_ID = 'urn:maha:record:agentic-systems-mcp-tool-allowlisting'
+const INITIAL_ID = 'urn:maha:record:advanced-materials-color-centers-in-diamond'
 const SUPERSEDING_ID = 'urn:maha:record:fusion-plasma-systems-tokamak-plasma-equilibrium'
 const ALL_IDS = BATCH_11_LINEAGE_DECLARATIONS.map((d) => d.recordId)
 
 const healthy = (): RegistryProbeInput => ({
   observation: JSON.parse(JSON.stringify(OBSERVATION)) as RegistryObservation,
-  totalRegistryRows: 47,
+  totalRegistryRows: OBSERVATION.totalReleasesInRegistry,
   statusVocabulary: [...KNOWN_RELEASE_STATUSES],
 })
 const kindOf = (id: string) => BATCH_11_LINEAGE_DECLARATIONS.find((d) => d.recordId === id)!.declaredReleaseKind
@@ -39,12 +39,12 @@ const gatesFor = (input: RegistryProbeInput) =>
 
 // ------------------------------------------------------------- happy path
 
-test('the healthy cohort gates cleanly as four superseding and one initial', () => {
+test('the healthy cohort gates cleanly as two superseding and three initial', () => {
   const gates = gatesFor(healthy())
   assert.equal(gates.length, 5)
   assert.equal(gates.filter((g) => g.ready).length, 5)
-  assert.equal(gates.filter((g) => g.declaredKind === 'superseding').length, 4)
-  assert.equal(gates.filter((g) => g.declaredKind === 'initial').length, 1)
+  assert.equal(gates.filter((g) => g.declaredKind === 'superseding').length, 2)
+  assert.equal(gates.filter((g) => g.declaredKind === 'initial').length, 3)
   assert.equal(gates.find((g) => g.recordId === INITIAL_ID)!.probeState, 'lineage-absent')
 })
 
@@ -112,7 +112,7 @@ test('adversarial: unexpected prior for an initial release', () => {
   row.activeRelease = {
     releaseId: 'epirelease_unexpected', releaseKind: 'initial',
     targetSha256: `sha256:${'a'.repeat(64)}`,
-    canonicalPath: '/knowledge/agentic-systems-mcp/measurements/agentic-systems-mcp-tool-allowlisting',
+    canonicalPath: '/knowledge/advanced-materials/methods/advanced-materials-color-centers-in-diamond',
     canonicalVersion: '0.1.0',
   }
   const probe = probeLineage(INITIAL_ID, input)
@@ -216,17 +216,18 @@ test('adversarial: reversed execution order yields identical final state', () =>
   assert.equal(reversed, forward, 'a reversed order must not change the outcome')
 })
 
-test('the initial release supersedes nothing, in every order', () => {
+test('all three initial releases supersede nothing, in every order', () => {
   const gates = gatesFor(healthy())
   for (const order of [ALL_IDS, [...ALL_IDS].reverse(), [INITIAL_ID, ...ALL_IDS.filter((i) => i !== INITIAL_ID)]]) {
     const outcomes = simulateLifecycle(order, gates)
-    const initial = outcomes.find((o) => o.recordId === INITIAL_ID)!
-    assert.equal(initial.releaseKind, 'initial')
-    assert.equal(initial.supersedesNothing, true)
-    assert.equal(initial.supersededPriorReleaseId, null)
-    for (const other of outcomes.filter((o) => o.recordId !== INITIAL_ID)) {
-      assert.equal(other.releaseKind, 'superseding')
-      assert.ok(other.supersededPriorReleaseId, other.recordId)
+    for (const outcome of outcomes) {
+      if (outcome.releaseKind === 'initial') {
+        assert.equal(outcome.supersedesNothing, true)
+        assert.equal(outcome.supersededPriorReleaseId, null)
+      } else {
+        assert.equal(outcome.supersedesNothing, false)
+        assert.ok(outcome.supersededPriorReleaseId, outcome.recordId)
+      }
     }
   }
 })
