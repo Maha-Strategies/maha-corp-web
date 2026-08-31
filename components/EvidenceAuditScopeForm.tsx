@@ -1,32 +1,17 @@
 'use client'
 
-import { FormEvent, useEffect, useState } from 'react'
-import Script from 'next/script'
+import { FormEvent, useRef, useState } from 'react'
 
 import { trackConversion } from '@/components/ConversionTracker'
+import TurnstileField, { type TurnstileFieldHandle } from '@/components/TurnstileField'
 import { postPublicForm } from '@/lib/public-form-client'
-
-declare global {
-  interface Window {
-    mahaEvidenceAuditTurnstileComplete?: (token: string) => void
-    mahaEvidenceAuditTurnstileExpired?: () => void
-  }
-}
 
 const TURNSTILE_SITE_KEY = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY
 
 export default function EvidenceAuditScopeForm() {
   const [turnstileToken, setTurnstileToken] = useState('')
   const [state, setState] = useState({ pending: false, success: false, error: '' })
-
-  useEffect(() => {
-    window.mahaEvidenceAuditTurnstileComplete = (token) => setTurnstileToken(token)
-    window.mahaEvidenceAuditTurnstileExpired = () => setTurnstileToken('')
-    return () => {
-      delete window.mahaEvidenceAuditTurnstileComplete
-      delete window.mahaEvidenceAuditTurnstileExpired
-    }
-  }, [])
+  const turnstileRef = useRef<TurnstileFieldHandle>(null)
 
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
@@ -56,6 +41,8 @@ export default function EvidenceAuditScopeForm() {
       setState({ pending: false, success: true, error: '' })
     } catch (error) {
       setState({ pending: false, success: false, error: error instanceof Error ? error.message : 'Your audit request could not be sent.' })
+    } finally {
+      turnstileRef.current?.reset()
     }
   }
 
@@ -83,9 +70,9 @@ export default function EvidenceAuditScopeForm() {
         <label className="text-sm text-[var(--text-secondary)]">Decision deadline <span className="text-[var(--text-muted)]">(optional)</span><input name="deadline" disabled={state.pending} placeholder="e.g. 15 August 2026" className="evidence-input mt-2 w-full" /></label>
       </div>
       <div className="hidden" aria-hidden="true"><label htmlFor="evidence-audit-website-trap">Leave this blank</label><input id="evidence-audit-website-trap" name="website_trap" tabIndex={-1} autoComplete="off" /></div>
-      {TURNSTILE_SITE_KEY && <><Script src="https://challenges.cloudflare.com/turnstile/v0/api.js" strategy="afterInteractive" /><div className="cf-turnstile" data-sitekey={TURNSTILE_SITE_KEY} data-action="contact_inquiry" data-callback="mahaEvidenceAuditTurnstileComplete" data-expired-callback="mahaEvidenceAuditTurnstileExpired" /></>}
+      {TURNSTILE_SITE_KEY && <TurnstileField ref={turnstileRef} siteKey={TURNSTILE_SITE_KEY} action="contact_inquiry" onTokenChange={setTurnstileToken} />}
       {state.error && <p className="text-sm text-[var(--status-unverified)]" role="alert">{state.error}</p>}
-      <div><button type="submit" disabled={state.pending} className="evidence-action evidence-action--primary">{state.pending ? 'Sending audit request…' : 'Request audit scope →'}</button></div>
+      <div><button type="submit" disabled={state.pending || Boolean(TURNSTILE_SITE_KEY && !turnstileToken)} className="evidence-action evidence-action--primary">{state.pending ? 'Sending audit request…' : 'Request audit scope →'}</button></div>
       <p className="text-xs leading-relaxed text-[var(--text-muted)]">Submitting sends your inquiry to Maha Strategies for human scope review. It is not a purchase or engagement commitment.</p>
     </form>
   </section>

@@ -41,6 +41,28 @@ test('human intake retains Turnstile while agent intake remains separately authe
   assert.match(agentRoute, /autonomousPaymentSupported: false/)
 })
 
+test('every Turnstile-protected form requires a fresh token and resets it after submission', () => {
+  const surfaces = [
+    'app/contact/page.tsx',
+    'app/navigator/NavigatorAssessment.tsx',
+    'components/EvidenceAuditScopeForm.tsx',
+    'components/PlannerInquiryForm.tsx',
+  ]
+  for (const surface of surfaces) {
+    const source = readFileSync(join(ROOT, surface), 'utf8')
+    assert.match(source, /<TurnstileField\b/, `${surface} must use the shared managed widget`)
+    assert.match(source, /turnstileRef\.current\?\.reset\(\)/, `${surface} must invalidate a consumed token after every attempt`)
+    assert.match(source, /TURNSTILE_SITE_KEY && !turnstileToken/, `${surface} must prevent submission without a current token`)
+  }
+
+  const widget = readFileSync(join(ROOT, 'components/TurnstileField.tsx'), 'utf8')
+  assert.match(widget, /api\.js\?render=explicit/)
+  assert.match(widget, /window\.turnstile\.reset\(widgetIdRef\.current\)/)
+  assert.match(widget, /'error-callback'/)
+  assert.match(widget, /'expired-callback'/)
+  assert.match(widget, /'timeout-callback'/)
+})
+
 test('every statically addressed public form API has a route handler', () => {
   const files = [...sourceFiles(join(ROOT, 'app')), ...sourceFiles(join(ROOT, 'components'))]
   const endpoints = new Set<string>()
