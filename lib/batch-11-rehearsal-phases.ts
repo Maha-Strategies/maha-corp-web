@@ -406,6 +406,13 @@ export interface RehearsalDriver {
   bindPreview(branch: EphemeralBranch): Promise<BoundPreview>
   destroyBoundPreview(deploymentId: string): Promise<void>
 
+  /**
+   * Re-checks lineage against a live public read, immediately before release.
+   *
+   * Optional so an in-memory double need not implement it; a driver that has a
+   * live registry to consult must, and the real one does.
+   */
+  assertLineageFresh?(): Promise<void>
   ingest(idempotency: string): Promise<{ decisionsRecorded: number }>
   issueRelease(request: ReleaseRequest): Promise<ReleaseResult>
 
@@ -413,9 +420,26 @@ export interface RehearsalDriver {
   fetchServedBundle(recordId: string): Promise<string>
 }
 
+export interface IssuedRelease {
+  recordId: string
+  releaseId: string
+  targetSha256: string
+  releaseKind: ReleaseKind
+  supersedesReleaseId: string | null
+  replayed: boolean
+}
+
 export interface RehearsalOutcome {
   version: typeof BATCH_11_REHEARSAL_PHASES_VERSION
   phases: readonly PhaseRecord[]
+  /**
+   * What was actually released, per record.
+   *
+   * Counts alone cannot distinguish five correct releases from five releases
+   * of the wrong things, so the identities travel with the outcome and into
+   * the artifact that attests to it.
+   */
+  releaseIdentities: readonly IssuedRelease[]
   phasesExecuted: number
   releasesIssued: number
   replayedReleases: number
@@ -474,6 +498,7 @@ export async function runRehearsal(
 
   let releasesIssued = 0
   let replayedReleases = 0
+  const issuedReleases: IssuedRelease[] = []
   let preview: BoundPreview | null = null
   let previewDestroyed = false
   let branchDestroyed = false
@@ -520,7 +545,11 @@ export async function runRehearsal(
     }
     record('ingest-revisions-and-decisions', 'executed', `Ingested ${gates.length} proposed revisions and ${ingestion.decisionsRecorded} exact-revision decisions.`, gates.length + ingestion.decisionsRecorded)
 
-    // Phase 5.
+    // Phase 5. Planning ran against a snapshot; the world has had time to move
+    // since. Re-read before mutating, so a lineage that changed after planning
+    // stops the release rather than being released over.
+    if (driver.assertLineageFresh) await driver.assertLineageFresh()
+
     const seen = new Set<string>()
     for (const declared of BATCH_11_LINEAGE_DECLARATIONS) {
       const gate = gates.find((entry) => entry.recordId === declared.recordId)
@@ -539,6 +568,14 @@ export async function runRehearsal(
       if (result.targetSha256 !== gate.proposedTargetSha256) {
         refuse('transition-not-observed', 'issue-releases', `${declared.recordId}: the issued release binds a different revision than the one gated.`)
       }
+      issuedReleases.push({
+        recordId: declared.recordId,
+        releaseId: result.releaseId,
+        targetSha256: result.targetSha256,
+        releaseKind: declared.declaredReleaseKind,
+        supersedesReleaseId: declared.declaredPriorReleaseId,
+        replayed: result.replayed,
+      })
       if (result.replayed) replayedReleases += 1
       else releasesIssued += 1
     }
@@ -586,6 +623,7 @@ export async function runRehearsal(
   const outcome: RehearsalOutcome = {
     version: BATCH_11_REHEARSAL_PHASES_VERSION,
     phases,
+    releaseIdentities: issuedReleases,
     phasesExecuted: phases.filter((entry) => entry.status === 'executed').length,
     releasesIssued,
     replayedReleases,

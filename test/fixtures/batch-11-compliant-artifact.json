@@ -1,0 +1,297 @@
+{
+  "syntheticFixture": true,
+  "note": "Synthetic compliant run. Not evidence of any rehearsal; no protected run has occurred.",
+  "reviewedCommit": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+  "workflowRunId": "77",
+  "runMarker": "batch-11-mixed-lineage-rehearsal-77",
+  "providerResults": [
+    {
+      "provider": "supabase",
+      "resourceKind": "supabase-branch",
+      "queryStatus": "succeeded",
+      "scope": "exact-run-marker",
+      "runMarker": "batch-11-mixed-lineage-rehearsal-77",
+      "reviewedCommit": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      "matches": [],
+      "detail": "Queried supabase-branch at exact run-marker scope; no matching resource remained."
+    },
+    {
+      "provider": "vercel",
+      "resourceKind": "vercel-preview",
+      "queryStatus": "succeeded",
+      "scope": "exact-run-marker",
+      "runMarker": "batch-11-mixed-lineage-rehearsal-77",
+      "reviewedCommit": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      "matches": [],
+      "detail": "Queried vercel-preview at exact run-marker scope; no matching resource remained."
+    },
+    {
+      "provider": "github",
+      "resourceKind": "github-environment-secret",
+      "queryStatus": "succeeded",
+      "scope": "exact-run-marker",
+      "runMarker": "batch-11-mixed-lineage-rehearsal-77",
+      "reviewedCommit": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      "matches": [],
+      "detail": "Queried github-environment-secret at exact run-marker scope; no matching resource remained."
+    },
+    {
+      "provider": "database",
+      "resourceKind": "database-release-rows",
+      "queryStatus": "succeeded",
+      "scope": "exact-run-marker",
+      "runMarker": "batch-11-mixed-lineage-rehearsal-77",
+      "reviewedCommit": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      "matches": [],
+      "detail": "Queried database-release-rows at exact run-marker scope; no matching resource remained."
+    }
+  ],
+  "artifact": {
+    "artifactSchema": "maha-batch-11-rehearsal-evidence/3.0",
+    "reviewedCommit": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+    "workflowRunId": "77",
+    "runMarker": "batch-11-mixed-lineage-rehearsal-77",
+    "planDigest": "sha256:bfac696440d515ce7309c8d751b86301f319fa0f617aeaadcefff69382dcdf71",
+    "cohortRecordIds": [
+      "urn:maha:record:advanced-materials-color-centers-in-diamond",
+      "urn:maha:record:fusion-plasma-systems-tokamak-plasma-equilibrium",
+      "urn:maha:record:longevity-metabolism-mitophagy-flux",
+      "urn:maha:record:mechanistic-interpretability-activation-patching",
+      "urn:maha:record:mechanistic-interpretability-representation-probing-boundary"
+    ],
+    "lineageClassifications": [
+      {
+        "recordId": "urn:maha:record:advanced-materials-color-centers-in-diamond",
+        "expected": "initial",
+        "observed": "initial"
+      },
+      {
+        "recordId": "urn:maha:record:fusion-plasma-systems-tokamak-plasma-equilibrium",
+        "expected": "superseding",
+        "observed": "superseding"
+      },
+      {
+        "recordId": "urn:maha:record:longevity-metabolism-mitophagy-flux",
+        "expected": "initial",
+        "observed": "initial"
+      },
+      {
+        "recordId": "urn:maha:record:mechanistic-interpretability-activation-patching",
+        "expected": "initial",
+        "observed": "initial"
+      },
+      {
+        "recordId": "urn:maha:record:mechanistic-interpretability-representation-probing-boundary",
+        "expected": "superseding",
+        "observed": "superseding"
+      }
+    ],
+    "phaseOutcomes": [
+      {
+        "phase": "provision-ephemeral-branch",
+        "status": "executed",
+        "mutations": 1
+      },
+      {
+        "phase": "apply-migrations",
+        "status": "executed",
+        "mutations": 1
+      },
+      {
+        "phase": "import-prior-lineages",
+        "status": "executed",
+        "mutations": 1
+      },
+      {
+        "phase": "ingest-revisions-and-decisions",
+        "status": "executed",
+        "mutations": 1
+      },
+      {
+        "phase": "issue-releases",
+        "status": "executed",
+        "mutations": 1
+      },
+      {
+        "phase": "verify-transitions",
+        "status": "executed",
+        "mutations": 1
+      },
+      {
+        "phase": "destroy-ephemeral-branch",
+        "status": "executed",
+        "mutations": 1
+      }
+    ],
+    "releaseIdentities": [
+      {
+        "recordId": "urn:maha:record:advanced-materials-color-centers-in-diamond",
+        "releaseId": "epirelease_synthetic00",
+        "targetSha256": "sha256:96630a6fbe09aa7d0d239f37add3d6691d996445140812c876d676c67d69139f",
+        "releaseKind": "initial",
+        "supersedesReleaseId": null
+      },
+      {
+        "recordId": "urn:maha:record:fusion-plasma-systems-tokamak-plasma-equilibrium",
+        "releaseId": "epirelease_synthetic01",
+        "targetSha256": "sha256:26d193fe87af63e481f46db94638658c5be0df199ae55bb642f37edf45100bd7",
+        "releaseKind": "superseding",
+        "supersedesReleaseId": "epirelease_8e947374097d4695815dbf9ab653177b"
+      },
+      {
+        "recordId": "urn:maha:record:longevity-metabolism-mitophagy-flux",
+        "releaseId": "epirelease_synthetic02",
+        "targetSha256": "sha256:7bbef3b54fb9ac405c78bb7d819f75e34f949ab33b4c9ac764dd844e5f641ab2",
+        "releaseKind": "initial",
+        "supersedesReleaseId": null
+      },
+      {
+        "recordId": "urn:maha:record:mechanistic-interpretability-activation-patching",
+        "releaseId": "epirelease_synthetic03",
+        "targetSha256": "sha256:ef3182227b26a0902ad4848505fe5eb59dc310cfa30c18524f754b16dd4fd86c",
+        "releaseKind": "initial",
+        "supersedesReleaseId": null
+      },
+      {
+        "recordId": "urn:maha:record:mechanistic-interpretability-representation-probing-boundary",
+        "releaseId": "epirelease_synthetic04",
+        "targetSha256": "sha256:8485532ea6985bb77144951944066525e7f7d957b01ebfe55547627c07c1fcf8",
+        "releaseKind": "superseding",
+        "supersedesReleaseId": "epirelease_93c92eb7a317465b83fabf8d3e6962da"
+      }
+    ],
+    "releaseCounts": {
+      "total": 5,
+      "initial": 3,
+      "superseding": 2,
+      "replayed": 0
+    },
+    "deploymentMarkerDigest": "sha256:056cd329ffc4e96d1a5d3ca2e71481f1b90a9fd6f9c90c37e9aee982afb53ae5",
+    "cleanup": {
+      "branchDestroyed": true,
+      "deploymentDestroyed": true,
+      "markerRemoved": true
+    },
+    "artifactDigest": "sha256:83b5ed6de1a44fdf8da6540fdf2a893cbcec7f01b07a47b9b21439062ecfb310",
+    "mode": "executed",
+    "reason": "All 7 phases executed against an ephemeral Preview branch.",
+    "remoteOperationsPerformed": 14,
+    "previewBranchCreated": true,
+    "previewBranchDestroyed": true,
+    "previewDeploymentCreated": true,
+    "previewDeploymentDestroyed": true,
+    "migrationsApplied": 1,
+    "releasesIssued": 5,
+    "replayedReleases": 0,
+    "productionWritesPerformed": 0,
+    "productionAccess": {
+      "kind": "public-https-get",
+      "url": "https://www.mahastrategies.com/knowledge/epistemic-system/releases/registry.json",
+      "credentialPresented": false
+    },
+    "phases": [
+      {
+        "phase": "provision-ephemeral-branch",
+        "status": "executed",
+        "detail": "Phase completed.",
+        "mutations": 1
+      },
+      {
+        "phase": "apply-migrations",
+        "status": "executed",
+        "detail": "Phase completed.",
+        "mutations": 1
+      },
+      {
+        "phase": "import-prior-lineages",
+        "status": "executed",
+        "detail": "Phase completed.",
+        "mutations": 1
+      },
+      {
+        "phase": "ingest-revisions-and-decisions",
+        "status": "executed",
+        "detail": "Phase completed.",
+        "mutations": 1
+      },
+      {
+        "phase": "issue-releases",
+        "status": "executed",
+        "detail": "Phase completed.",
+        "mutations": 1
+      },
+      {
+        "phase": "verify-transitions",
+        "status": "executed",
+        "detail": "Phase completed.",
+        "mutations": 1
+      },
+      {
+        "phase": "destroy-ephemeral-branch",
+        "status": "executed",
+        "detail": "Phase completed.",
+        "mutations": 1
+      }
+    ],
+    "fingerprint": {
+      "schemaVersion": "maha-batch-11-remote-rehearsal/1.0",
+      "cohortSize": 5,
+      "readyCount": 5,
+      "supersedingCount": 2,
+      "initialCount": 3,
+      "ordersProvenIndependent": 120,
+      "orderIndependent": true,
+      "planDigest": "sha256:bfac696440d515ce7309c8d751b86301f319fa0f617aeaadcefff69382dcdf71"
+    }
+  },
+  "teardown": {
+    "schemaVersion": "maha-batch-11-teardown-observations/1.0",
+    "runMarker": "batch-11-mixed-lineage-rehearsal-77",
+    "reviewedCommit": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+    "observations": [
+      {
+        "resourceKind": "supabase-branch",
+        "identifierFingerprint": "sha256:52ffb3b28501ae82584e73606a625cb87475e75a427298986d0ca02b08e9e725",
+        "observedState": "confirmed-absent",
+        "detail": "supabase-branch: 1 authoritative query succeeded at exact scope and found nothing.",
+        "refusal": null,
+        "providers": [
+          "supabase"
+        ]
+      },
+      {
+        "resourceKind": "vercel-preview",
+        "identifierFingerprint": "sha256:2c7bcecadd5ff27a9ebf5195b4205b60c8a183c75f7ea9894852c47d2f54dd9f",
+        "observedState": "confirmed-absent",
+        "detail": "vercel-preview: 1 authoritative query succeeded at exact scope and found nothing.",
+        "refusal": null,
+        "providers": [
+          "vercel"
+        ]
+      },
+      {
+        "resourceKind": "github-environment-secret",
+        "identifierFingerprint": "sha256:3053491f89cfd8aa17cf141f8d630d966dc5886b170fef009be12cdf1285e61c",
+        "observedState": "confirmed-absent",
+        "detail": "github-environment-secret: 1 authoritative query succeeded at exact scope and found nothing.",
+        "refusal": null,
+        "providers": [
+          "github"
+        ]
+      },
+      {
+        "resourceKind": "database-release-rows",
+        "identifierFingerprint": "sha256:5732ba7aa00a7ef36a8ca60362fed40f3ae022141d45484f84327eec7eef7e4e",
+        "observedState": "confirmed-absent",
+        "detail": "database-release-rows: 1 authoritative query succeeded at exact scope and found nothing.",
+        "refusal": null,
+        "providers": [
+          "database"
+        ]
+      }
+    ],
+    "allConfirmedAbsent": true,
+    "observationsDigest": "sha256:4b1da027b2a75a516f61b62f4fe5849739162bbc5cb07d4e271e273e841cd7d6",
+    "workflowRunId": "77"
+  }
+}

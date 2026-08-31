@@ -1,0 +1,250 @@
+{
+  "schemaVersion": "maha-batch-11-evidence-verifier/1.0",
+  "verdict": "verified",
+  "checks": [
+    {
+      "check": "mode",
+      "passed": true,
+      "refusal": null,
+      "detail": "The artifact reports mode \"executed\"."
+    },
+    {
+      "check": "phase-count",
+      "passed": true,
+      "refusal": null,
+      "detail": "7 phases present."
+    },
+    {
+      "check": "phase-distinctness",
+      "passed": true,
+      "refusal": null,
+      "detail": "Every phase appears exactly once."
+    },
+    {
+      "check": "phase-order",
+      "passed": true,
+      "refusal": null,
+      "detail": "Phases ran in the required order."
+    },
+    {
+      "check": "phase-status",
+      "passed": true,
+      "refusal": null,
+      "detail": "Every phase reports status \"executed\"."
+    },
+    {
+      "check": "release-count",
+      "passed": true,
+      "refusal": null,
+      "detail": "5 releases issued."
+    },
+    {
+      "check": "release-composition",
+      "passed": true,
+      "refusal": null,
+      "detail": "2 superseding and 3 initial, matching the declarations."
+    },
+    {
+      "check": "cohort-size",
+      "passed": true,
+      "refusal": null,
+      "detail": "Cohort size 5 matches the declarations."
+    },
+    {
+      "check": "plan-digest",
+      "passed": true,
+      "refusal": null,
+      "detail": "The plan digest matches the digest re-derived from the repository manifests."
+    },
+    {
+      "check": "record-identity",
+      "passed": true,
+      "refusal": null,
+      "detail": "Every released record is one the repository declares, in the declared order."
+    },
+    {
+      "check": "order-convergence",
+      "passed": true,
+      "refusal": null,
+      "detail": "All 120 execution orders converge on one final state."
+    },
+    {
+      "check": "production-writes",
+      "passed": true,
+      "refusal": null,
+      "detail": "Zero Production writes."
+    },
+    {
+      "check": "production-access",
+      "passed": true,
+      "refusal": null,
+      "detail": "Production access was a credential-free public GET."
+    },
+    {
+      "check": "preview-branch-created",
+      "passed": true,
+      "refusal": null,
+      "detail": "previewBranchCreated is true."
+    },
+    {
+      "check": "preview-branch-destroyed",
+      "passed": true,
+      "refusal": null,
+      "detail": "previewBranchDestroyed is true."
+    },
+    {
+      "check": "preview-deployment-created",
+      "passed": true,
+      "refusal": null,
+      "detail": "previewDeploymentCreated is true."
+    },
+    {
+      "check": "preview-deployment-destroyed",
+      "passed": true,
+      "refusal": null,
+      "detail": "previewDeploymentDestroyed is true."
+    },
+    {
+      "check": "reviewed-commit",
+      "passed": true,
+      "refusal": null,
+      "detail": "The artifact names the supplied reviewed commit."
+    },
+    {
+      "check": "workflow-run-id",
+      "passed": true,
+      "refusal": null,
+      "detail": "The artifact names workflow run 77."
+    },
+    {
+      "check": "run-marker",
+      "passed": true,
+      "refusal": null,
+      "detail": "The run marker derives from the workflow run id."
+    },
+    {
+      "check": "release-contract",
+      "passed": true,
+      "refusal": null,
+      "detail": "Every release matches the target digest, kind and predecessor the repository declares."
+    },
+    {
+      "check": "artifact-schema",
+      "passed": true,
+      "refusal": null,
+      "detail": "The artifact declares maha-batch-11-rehearsal-evidence/3.0."
+    },
+    {
+      "check": "lineage-classification",
+      "passed": true,
+      "refusal": null,
+      "detail": "Expected and observed lineage classifications agree for every record."
+    },
+    {
+      "check": "release-identity",
+      "passed": true,
+      "refusal": null,
+      "detail": "5 complete release identities, one per declared record."
+    },
+    {
+      "check": "cleanup-status",
+      "passed": true,
+      "refusal": null,
+      "detail": "The artifact reports every temporary resource destroyed."
+    },
+    {
+      "check": "artifact-digest",
+      "passed": true,
+      "refusal": null,
+      "detail": "The artifact digest recomputes over the reviewed commit and the ordered cohort."
+    },
+    {
+      "check": "teardown-shape",
+      "passed": true,
+      "refusal": null,
+      "detail": "Exactly one observation for each of the 4 required resource kinds."
+    },
+    {
+      "check": "teardown-fingerprints",
+      "passed": true,
+      "refusal": null,
+      "detail": "Every observation fingerprint derives from this run marker."
+    },
+    {
+      "check": "teardown-supabase-branch",
+      "passed": true,
+      "refusal": null,
+      "detail": "supabase-branch was independently observed absent."
+    },
+    {
+      "check": "teardown-vercel-preview",
+      "passed": true,
+      "refusal": null,
+      "detail": "vercel-preview was independently observed absent."
+    },
+    {
+      "check": "teardown-github-environment-secret",
+      "passed": true,
+      "refusal": null,
+      "detail": "github-environment-secret was independently observed absent."
+    },
+    {
+      "check": "teardown-database-release-rows",
+      "passed": true,
+      "refusal": null,
+      "detail": "database-release-rows was independently observed absent."
+    },
+    {
+      "check": "secret-scan",
+      "passed": true,
+      "refusal": null,
+      "detail": "No secret-shaped content."
+    },
+    {
+      "check": "sensitive-scan",
+      "passed": true,
+      "refusal": null,
+      "detail": "No participant, natal, customer, enquiry, payment or private-corpus content."
+    }
+  ],
+  "refusals": [],
+  "observed": {
+    "mode": "executed",
+    "phases": [
+      "provision-ephemeral-branch",
+      "apply-migrations",
+      "import-prior-lineages",
+      "ingest-revisions-and-decisions",
+      "issue-releases",
+      "verify-transitions",
+      "destroy-ephemeral-branch"
+    ],
+    "releasesIssued": 5,
+    "supersedingCount": 2,
+    "initialCount": 3,
+    "planDigestMatches": true,
+    "ordersProvenIndependent": 120,
+    "productionWritesPerformed": 0,
+    "teardownStates": [
+      {
+        "resourceKind": "supabase-branch",
+        "observedState": "confirmed-absent"
+      },
+      {
+        "resourceKind": "vercel-preview",
+        "observedState": "confirmed-absent"
+      },
+      {
+        "resourceKind": "github-environment-secret",
+        "observedState": "confirmed-absent"
+      },
+      {
+        "resourceKind": "database-release-rows",
+        "observedState": "confirmed-absent"
+      }
+    ],
+    "teardownRunMarker": "batch-11-mixed-lineage-rehearsal-77"
+  },
+  "verificationDigest": "sha256:2d65e65b8d5c0b09b5a35d86a48216b824154973275678ed36453b0ca661ee70",
+  "syntheticFixture": true
+}

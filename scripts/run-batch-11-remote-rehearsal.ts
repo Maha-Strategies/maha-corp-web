@@ -2,6 +2,8 @@ import { execFileSync } from 'node:child_process'
 import { existsSync, mkdirSync, readFileSync, unlinkSync, writeFileSync } from 'node:fs'
 import { dirname, join } from 'node:path'
 
+import { buildBoundEvidence } from '../lib/batch-11-evidence-binding.ts'
+import { assertLineageFresh } from '../lib/batch-11-lineage-freshness.ts'
 import {
   BATCH_11_LINEAGE_DECLARATIONS,
   assertDeclarationCoverage,
@@ -169,6 +171,9 @@ const expectedReviewedCommit = process.env.MAHA_B11_REVIEWED_COMMIT?.trim() ?? '
 const checkedOutCommit = execFileSync('git', ['rev-parse', 'HEAD'], { encoding: 'utf8' }).trim()
 
 const lifecycleState = {
+  /** Retained so the marker can be attested after it is deleted. */
+  deploymentMarker: null as Record<string, unknown> | null,
+  markerRemoved: false,
   previewBranchCreated: false,
   previewBranchDestroyed: false,
   previewDeploymentCreated: false,
@@ -418,7 +423,9 @@ const driver: RehearsalDriver = {
     const markerPath = deploymentMarkerPath()
     if (markerPath) {
       mkdirSync(dirname(markerPath), { recursive: true })
-      writeFileSync(markerPath, `${JSON.stringify({ deploymentId: deployment.id, origin: deployment.origin, reviewedCommit })}\n`)
+      const marker = { deploymentId: deployment.id, origin: deployment.origin, reviewedCommit }
+      lifecycleState.deploymentMarker = marker
+      writeFileSync(markerPath, `${JSON.stringify(marker)}\n`)
     }
     try {
       await verifyPrivatePreview(previewOrigin)
@@ -426,7 +433,7 @@ const driver: RehearsalDriver = {
       removePreviewDeployment(deployment.id)
       lifecycleState.previewDeploymentDestroyed = true
       lifecycleState.remoteOperationsPerformed += 1
-      if (markerPath && existsSync(markerPath)) unlinkSync(markerPath)
+      if (markerPath && existsSync(markerPath)) { unlinkSync(markerPath); lifecycleState.markerRemoved = true }
       throw error
     }
     return {
@@ -443,7 +450,20 @@ const driver: RehearsalDriver = {
     lifecycleState.previewDeploymentDestroyed = true
     lifecycleState.remoteOperationsPerformed += 1
     const markerPath = deploymentMarkerPath()
-    if (markerPath && existsSync(markerPath)) unlinkSync(markerPath)
+    if (markerPath && existsSync(markerPath)) { unlinkSync(markerPath); lifecycleState.markerRemoved = true }
+  },
+
+  /**
+   * Reads the public Production registry again, right before releasing.
+   *
+   * Credential-free and read-only, exactly like the phase-2 read: a plain GET
+   * of a public document with no token and no body.
+   */
+  async assertLineageFresh(): Promise<void> {
+    const response = await fetch(PRODUCTION_REGISTRY_URL, { method: 'GET', cache: 'no-store' })
+    let body: unknown = null
+    try { body = await response.json() } catch { body = null }
+    assertLineageFresh({ ok: response.ok, status: response.status, body })
   },
 
   async ingest(idempotency: string): Promise<{ decisionsRecorded: number }> {
@@ -564,7 +584,45 @@ try {
     throw new RehearsalRefused('production-project-targeted', 'provision-ephemeral-branch', 'SUPABASE_PROJECT_REF is the Production project.')
   }
   const outcome = await runRehearsal(driver, gates)
+  // The reviewed commit comes from the validated inputs above, never from a
+  // field on the artifact this block is about to produce.
+  const bound = buildBoundEvidence({
+    expectedReviewedCommit,
+    checkedOutCommit,
+    // Mandatory. buildBoundEvidence refuses an absent or non-numeric value
+    // rather than emitting evidence that cannot name its run.
+    workflowRunId: process.env.GITHUB_RUN_ID ?? '',
+    planDigest,
+    cohortRecordIds: BATCH_11_LINEAGE_DECLARATIONS.map((entry) => entry.recordId),
+    // Expected is what the cohort declares; observed is what the registry probe
+    // independently found. Recording both is what makes a disagreement visible.
+    lineageClassifications: gates.map((gate) => ({
+      recordId: gate.recordId,
+      expected: BATCH_11_LINEAGE_DECLARATIONS.find((entry) => entry.recordId === gate.recordId)!.declaredReleaseKind,
+      observed: gate.probeState === 'lineage-present' ? 'superseding' as const : 'initial' as const,
+    })),
+    phaseOutcomes: outcome.phases.map((phase) => ({ phase: phase.phase, status: phase.status, mutations: phase.mutations })),
+    // Compared against the repository contract inside buildBoundEvidence: the
+    // target digest must be the one the revision audit declares, not merely a
+    // well-formed hash.
+    releaseIdentities: outcome.releaseIdentities.map((entry) => ({
+      recordId: entry.recordId,
+      releaseId: entry.releaseId,
+      targetSha256: entry.targetSha256,
+      releaseKind: entry.releaseKind,
+      supersedesReleaseId: entry.supersedesReleaseId,
+    })),
+    replayedReleases: outcome.replayedReleases,
+    deploymentMarker: lifecycleState.deploymentMarker,
+    cleanup: {
+      branchDestroyed: outcome.branchDestroyed,
+      deploymentDestroyed: outcome.previewDestroyed,
+      markerRemoved: lifecycleState.markerRemoved,
+    },
+    requiredPhaseCount: PHASE_ORDER.length,
+  })
   emit({
+    ...bound,
     mode: 'executed',
     reason: `All ${outcome.phasesExecuted} phases executed against an ephemeral Preview branch.`,
     remoteOperationsPerformed: outcome.phases.reduce((total, phase) => total + phase.mutations, 0),
