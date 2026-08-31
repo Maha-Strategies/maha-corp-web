@@ -413,9 +413,26 @@ export interface RehearsalDriver {
   fetchServedBundle(recordId: string): Promise<string>
 }
 
+export interface IssuedRelease {
+  recordId: string
+  releaseId: string
+  targetSha256: string
+  releaseKind: ReleaseKind
+  supersedesReleaseId: string | null
+  replayed: boolean
+}
+
 export interface RehearsalOutcome {
   version: typeof BATCH_11_REHEARSAL_PHASES_VERSION
   phases: readonly PhaseRecord[]
+  /**
+   * What was actually released, per record.
+   *
+   * Counts alone cannot distinguish five correct releases from five releases
+   * of the wrong things, so the identities travel with the outcome and into
+   * the artifact that attests to it.
+   */
+  releaseIdentities: readonly IssuedRelease[]
   phasesExecuted: number
   releasesIssued: number
   replayedReleases: number
@@ -474,6 +491,7 @@ export async function runRehearsal(
 
   let releasesIssued = 0
   let replayedReleases = 0
+  const issuedReleases: IssuedRelease[] = []
   let preview: BoundPreview | null = null
   let previewDestroyed = false
   let branchDestroyed = false
@@ -539,6 +557,14 @@ export async function runRehearsal(
       if (result.targetSha256 !== gate.proposedTargetSha256) {
         refuse('transition-not-observed', 'issue-releases', `${declared.recordId}: the issued release binds a different revision than the one gated.`)
       }
+      issuedReleases.push({
+        recordId: declared.recordId,
+        releaseId: result.releaseId,
+        targetSha256: result.targetSha256,
+        releaseKind: declared.declaredReleaseKind,
+        supersedesReleaseId: declared.declaredPriorReleaseId,
+        replayed: result.replayed,
+      })
       if (result.replayed) replayedReleases += 1
       else releasesIssued += 1
     }
@@ -586,6 +612,7 @@ export async function runRehearsal(
   const outcome: RehearsalOutcome = {
     version: BATCH_11_REHEARSAL_PHASES_VERSION,
     phases,
+    releaseIdentities: issuedReleases,
     phasesExecuted: phases.filter((entry) => entry.status === 'executed').length,
     releasesIssued,
     replayedReleases,

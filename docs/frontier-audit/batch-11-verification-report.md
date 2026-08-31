@@ -6,7 +6,7 @@
 
 **Verdict: VERIFIED**
 
-Verification digest `sha256:c8e7fe480ef209d1163df412c84eeeb8dcd908972197b211188a6f887a6f5c68`.
+Verification digest `sha256:42e1b0087afacfc90676220749181485247ab412e616a9c0ab09971842c33046`.
 
 Every check passed. This attests to what the artifact and the supplied observations show; it is not a claim that the rehearsal ran.
 
@@ -23,7 +23,7 @@ Every check passed. This attests to what the artifact and the supplied observati
 | `release-composition` | pass | 2 superseding and 3 initial, matching the declarations. |
 | `cohort-size` | pass | Cohort size 5 matches the declarations. |
 | `plan-digest` | pass | The plan digest matches the digest re-derived from the repository manifests. |
-| `record-identity` | pass | Every released record is one the repository declares. |
+| `record-identity` | pass | Every released record is one the repository declares, in the declared order. |
 | `order-convergence` | pass | All 120 execution orders converge on one final state. |
 | `production-writes` | pass | Zero Production writes. |
 | `production-access` | pass | Production access was a credential-free public GET. |
@@ -32,8 +32,15 @@ Every check passed. This attests to what the artifact and the supplied observati
 | `preview-deployment-created` | pass | previewDeploymentCreated is true. |
 | `preview-deployment-destroyed` | pass | previewDeploymentDestroyed is true. |
 | `reviewed-commit` | pass | The artifact names the supplied reviewed commit. |
+| `artifact-schema` | pass | The artifact declares maha-batch-11-rehearsal-evidence/2.0. |
+| `lineage-classification` | pass | Expected and observed lineage classifications agree for every record. |
+| `release-identity` | pass | 5 complete release identities, one per declared record. |
+| `cleanup-status` | pass | The artifact reports every temporary resource destroyed. |
+| `artifact-digest` | pass | The artifact digest recomputes over the reviewed commit and the ordered cohort. |
 | `teardown-supabase-branch` | pass | supabase-branch was independently observed absent. |
 | `teardown-vercel-preview` | pass | vercel-preview was independently observed absent. |
+| `teardown-github-environment-secret` | pass | github-environment-secret was independently observed absent. |
+| `teardown-database-release-rows` | pass | database-release-rows was independently observed absent. |
 | `secret-scan` | pass | No secret-shaped content. |
 | `sensitive-scan` | pass | No participant, natal, customer, enquiry, payment or private-corpus content. |
 
@@ -49,5 +56,6 @@ Every check passed. This attests to what the artifact and the supplied observati
 | `planDigestMatches` | true |
 | `ordersProvenIndependent` | 120 |
 | `productionWritesPerformed` | 0 |
-| `teardownStates` | [{"resourceKind":"supabase-branch","observedState":"confirmed-absent"},{"resourceKind":"vercel-preview","observedState":"confirmed-absent"}] |
+| `teardownStates` | [{"resourceKind":"supabase-branch","observedState":"confirmed-absent"},{"resourceKind":"vercel-preview","observedState":"confirmed-absent"},{"resourceKind":"github-environment-secret","observedState":"confirmed-absent"},{"resourceKind":"database-release-rows","observedState":"confirmed-absent"}] |
+| `teardownRunMarker` | "batch-11-mixed-lineage-rehearsal-77" |
 

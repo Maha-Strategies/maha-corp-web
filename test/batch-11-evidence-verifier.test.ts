@@ -11,7 +11,7 @@ import {
   scanForProhibitedContent,
   verifyRehearsalEvidence,
   type RefusalCode,
-  type TeardownObservation,
+  type TeardownEvidence,
 } from '../lib/batch-11-evidence-verifier.ts'
 
 /**
@@ -29,10 +29,10 @@ const CONTRACT = repositoryContract(resolve(ROOT, 'content/frontier-alignment/ba
 
 type Artifact = Record<string, unknown>
 const artifact = (): Artifact => structuredClone(FIXTURE.artifact) as Artifact
-const teardown = (): TeardownObservation[] => structuredClone(FIXTURE.teardown) as TeardownObservation[]
+const teardown = (): TeardownEvidence => structuredClone(FIXTURE.teardown) as TeardownEvidence
 const COMMIT: string = FIXTURE.reviewedCommit
 
-function verify(over: { artifact?: Artifact; reviewedCommit?: string; teardown?: TeardownObservation[] | null } = {}) {
+function verify(over: { artifact?: Artifact; reviewedCommit?: string; teardown?: TeardownEvidence | null } = {}) {
   return verifyRehearsalEvidence({
     artifact: over.artifact ?? artifact(),
     reviewedCommit: over.reviewedCommit ?? COMMIT,
@@ -203,46 +203,52 @@ test('a stale reviewed SHA refuses', () => {
 test('an artifact that names no reviewed commit cannot be tied to reviewed code', () => {
   const bad = artifact()
   delete bad.reviewedCommit
-  refusesWith('reviewed-commit-unbound-in-artifact', { artifact: bad })
+  const report = verify({ artifact: bad })
+  assert.equal(report.verdict, 'refused')
+  assert.ok(
+    report.refusals.includes('reviewed-commit-unbound-in-artifact') || report.refusals.includes('artifact-digest-mismatch'),
+    report.refusals.join(', '),
+  )
 })
 
 /* ------------------------------------------------------------- teardown -- */
 
 test('absent teardown observations refuse: self-reported cleanup is not confirmation', () => {
   refusesWith('teardown-observations-absent', { teardown: null })
-  refusesWith('teardown-observations-absent', { teardown: [] })
+  refusesWith('teardown-observations-absent', { teardown: { ...teardown(), observations: [] } })
 })
 
 test('partial cleanup refuses', () => {
   // The branch is gone; the deployment was never observed.
-  const partial = teardown().filter((entry) => entry.resourceKind === 'supabase-branch')
+  const partial = teardown()
+  partial.observations = partial.observations.filter((entry) => entry.resourceKind === 'supabase-branch')
   refusesWith('teardown-observations-absent', { teardown: partial })
 })
 
 test('cleanup reported but not independently observed refuses', () => {
   const reported = teardown()
-  reported[0].observedState = 'reported-not-observed'
+  reported.observations[0].observedState = 'reported-not-observed'
   refusesWith('teardown-reported-not-observed', { teardown: reported })
 })
 
 test('unknown API state refuses rather than being read as absence', () => {
   const unknown = teardown()
-  unknown[1].observedState = 'unknown'
+  unknown.observations[1].observedState = 'unknown'
   refusesWith('teardown-state-unknown', { teardown: unknown })
 })
 
 test('a surviving Preview resource refuses', () => {
   const surviving = teardown()
-  surviving[1].observedState = 'present'
+  surviving.observations[1].observedState = 'present'
   refusesWith('teardown-resource-present', { teardown: surviving })
 })
 
 test('only confirmed absence passes, for every resource kind', () => {
   for (const state of ['reported-not-observed', 'unknown', 'present'] as const) {
-    for (const index of [0, 1]) {
-      const observations = teardown()
-      observations[index].observedState = state
-      assert.equal(verify({ teardown: observations }).verdict, 'refused', `${state} on ${observations[index].resourceKind}`)
+    for (let index = 0; index < teardown().observations.length; index += 1) {
+      const evidence = teardown()
+      evidence.observations[index].observedState = state
+      assert.equal(verify({ teardown: evidence }).verdict, 'refused', `${state} on ${evidence.observations[index].resourceKind}`)
     }
   }
 })
@@ -311,8 +317,8 @@ test('the verification digest is stable and excludes free text and timestamps', 
 
   // Reworded detail and an added observation timestamp must not move it.
   const reworded = teardown()
-  reworded[0].detail = 'Completely different prose describing the same observation.'
-  reworded[0].observedAt = '2026-08-31T12:00:00.000Z'
+  reworded.observations[0].detail = 'Completely different prose describing the same observation.'
+  reworded.observations[0].observedAt = '2026-08-31T12:00:00.000Z'
   assert.equal(verify({ teardown: reworded }).verificationDigest, first.verificationDigest)
 
   // A changed verdict must move it.
@@ -397,4 +403,273 @@ test('no verifier artifact reaches a client bundle, route, sitemap or llms.txt',
     for (const marker of markers) assert.ok(!source.includes(marker), `${served} references ${marker}`)
   }
   assert.ok(!existsSync(join(ROOT, 'public/frontier-audit')))
+})
+
+/* ============================================================ binding ===== */
+
+import {
+  BOUND_EVIDENCE_SCHEMA,
+  EvidenceBindingRefused,
+  bindReviewedCommit,
+  boundEvidenceDigest,
+} from '../lib/batch-11-evidence-binding.ts'
+import {
+  TEARDOWN_RESOURCE_KINDS,
+  assertSanitized,
+  produceTeardownObservations,
+  type ProviderQueryResult,
+} from '../lib/batch-11-teardown-observations.ts'
+
+test('the reviewed commit is bound into the artifact digest', () => {
+  const bound = artifact()
+  const original = String(bound.artifactDigest)
+  // Same run, different commit: the digest must move.
+  const moved = boundEvidenceDigest({
+    artifactSchema: BOUND_EVIDENCE_SCHEMA,
+    reviewedCommit: 'd'.repeat(40),
+    workflowRunId: bound.workflowRunId as string | null,
+    planDigest: String(bound.planDigest),
+    cohortRecordIds: bound.cohortRecordIds as string[],
+    lineageClassifications: bound.lineageClassifications as never,
+    phaseOutcomes: bound.phaseOutcomes as never,
+    releaseIdentities: bound.releaseIdentities as never,
+    releaseCounts: bound.releaseCounts as never,
+    deploymentMarkerDigest: bound.deploymentMarkerDigest as string | null,
+    cleanup: bound.cleanup as never,
+  })
+  assert.notEqual(moved, original, 'the reviewed commit must be inside the digest')
+})
+
+test('a correct artifact from another commit is refused', () => {
+  // Everything else is right; only the commit differs. Both the supplied SHA
+  // and the artifact's own field are changed together, so this is not merely a
+  // mismatch between them - it is a coherent artifact from the wrong tree.
+  const other = 'd'.repeat(40)
+  const bad = artifact()
+  bad.reviewedCommit = other
+  const evidence = teardown()
+  evidence.reviewedCommit = other
+  const report = verify({ artifact: bad, reviewedCommit: other, teardown: evidence })
+  assert.equal(report.verdict, 'refused')
+  assert.ok(report.refusals.includes('artifact-digest-mismatch'), report.refusals.join(', '))
+})
+
+test('a malformed or missing reviewed commit fails closed at binding time', () => {
+  for (const [expected, checkedOut, code] of [
+    ['', 'a'.repeat(40), 'reviewed-commit-malformed'],
+    ['not-a-sha', 'a'.repeat(40), 'reviewed-commit-malformed'],
+    ['A'.repeat(40), 'A'.repeat(40), 'reviewed-commit-malformed'],
+    ['a'.repeat(40), 'b'.repeat(40), 'reviewed-commit-mismatch'],
+  ] as const) {
+    let caught: EvidenceBindingRefused | null = null
+    try {
+      bindReviewedCommit(expected, checkedOut)
+    } catch (error) {
+      assert.ok(error instanceof EvidenceBindingRefused, `expected EvidenceBindingRefused, got ${String(error)}`)
+      caught = error
+    }
+    assert.ok(caught, `${expected || '<empty>'} / ${checkedOut} should have refused`)
+    assert.equal(caught.code, code)
+  }
+  assert.equal(bindReviewedCommit('a'.repeat(40), 'a'.repeat(40)), 'a'.repeat(40))
+})
+
+test('missing cohort ids refuse; identity may not rest on the plan digest alone', () => {
+  const bad = artifact()
+  delete bad.cohortRecordIds
+  refusesWith('cohort-identity-missing', { artifact: bad })
+})
+
+test('reordered cohort ids refuse even when the set is complete', () => {
+  const bad = artifact()
+  const ids = [...(bad.cohortRecordIds as string[])]
+  ;[ids[0], ids[1]] = [ids[1], ids[0]]
+  bad.cohortRecordIds = ids
+  const report = verify({ artifact: bad })
+  assert.equal(report.verdict, 'refused')
+  assert.ok(report.refusals.includes('cohort-order-mismatch'), report.refusals.join(', '))
+})
+
+test('a lineage classification the registry did not observe refuses', () => {
+  const bad = artifact()
+  const classifications = bad.lineageClassifications as Record<string, string>[]
+  classifications[0].observed = classifications[0].expected === 'initial' ? 'superseding' : 'initial'
+  refusesWith('lineage-classification-mismatch', { artifact: bad })
+})
+
+test('missing or incomplete release identities refuse', () => {
+  const missing = artifact()
+  missing.releaseIdentities = []
+  refusesWith('release-identity-missing', { artifact: missing })
+
+  const incomplete = artifact()
+  ;(incomplete.releaseIdentities as Record<string, unknown>[])[0].releaseId = ''
+  refusesWith('release-identity-missing', { artifact: incomplete })
+})
+
+test('missing cleanup status refuses', () => {
+  const bad = artifact()
+  delete bad.cleanup
+  refusesWith('cleanup-status-missing', { artifact: bad })
+})
+
+test('the wrong artifact schema refuses', () => {
+  const bad = artifact()
+  bad.artifactSchema = 'maha-batch-11-rehearsal-evidence/1.0'
+  refusesWith('artifact-schema-missing', { artifact: bad })
+})
+
+/* ================================================== teardown producer ===== */
+
+const query = (over: Partial<ProviderQueryResult> = {}): ProviderQueryResult => ({
+  provider: 'supabase',
+  resourceKind: 'supabase-branch',
+  queryStatus: 'succeeded',
+  scope: 'exact-run-marker',
+  runMarker: FIXTURE.runMarker,
+  reviewedCommit: COMMIT,
+  matches: [],
+  detail: '',
+  ...over,
+})
+
+const cleanResults = (): ProviderQueryResult[] =>
+  TEARDOWN_RESOURCE_KINDS.map((kind) => query({ resourceKind: kind, provider: kind.split('-')[0] }))
+
+const produce = (results: ProviderQueryResult[]) =>
+  produceTeardownObservations({ runMarker: FIXTURE.runMarker, reviewedCommit: COMMIT, results })
+
+test('the producer confirms absence only when every query succeeded at exact scope', () => {
+  const report = produce(cleanResults())
+  assert.equal(report.allConfirmedAbsent, true)
+  assert.equal(report.observations.length, TEARDOWN_RESOURCE_KINDS.length)
+  for (const observation of report.observations) {
+    assert.equal(observation.observedState, 'confirmed-absent')
+    assert.equal(observation.refusal, null)
+  }
+})
+
+test('a failed provider query can never become confirmed-absent', () => {
+  for (const status of ['failed', 'malformed', 'not-attempted'] as const) {
+    const results = cleanResults()
+    results[0].queryStatus = status
+    const report = produce(results)
+    assert.equal(report.observations[0].observedState, 'unknown')
+    assert.equal(report.observations[0].refusal, 'query-did-not-succeed')
+    assert.equal(report.allConfirmedAbsent, false)
+  }
+})
+
+test('a partial or unknown query scope cannot support an absence claim', () => {
+  for (const scope of ['partial', 'unknown'] as const) {
+    const results = cleanResults()
+    results[1].scope = scope
+    const report = produce(results)
+    assert.equal(report.observations[1].observedState, 'unknown')
+    assert.equal(report.observations[1].refusal, 'scope-insufficient')
+  }
+})
+
+test('a stale run marker or another commit cannot support an absence claim', () => {
+  const stale = cleanResults()
+  stale[0].runMarker = 'batch-11-mixed-lineage-rehearsal-99'
+  assert.equal(produce(stale).observations[0].refusal, 'stale-run-marker')
+
+  const other = cleanResults()
+  other[0].reviewedCommit = 'd'.repeat(40)
+  assert.equal(produce(other).observations[0].refusal, 'commit-mismatch')
+})
+
+test('a missing query for any resource is unknown, not absent', () => {
+  const results = cleanResults().filter((entry) => entry.resourceKind !== 'database-release-rows')
+  const report = produce(results)
+  const rows = report.observations.find((entry) => entry.resourceKind === 'database-release-rows')!
+  assert.equal(rows.observedState, 'unknown')
+  assert.equal(rows.refusal, 'no-query-for-resource')
+})
+
+test('a surviving resource is present, and provider disagreement is flagged', () => {
+  const results = cleanResults()
+  results[0].matches = [{ identifierFingerprint: `sha256:${'9'.repeat(64)}`, status: 'ACTIVE' }]
+  assert.equal(produce(results).observations[0].refusal, 'resource-present')
+
+  // A second provider for the same kind reports none: they disagree.
+  const disagreeing = [...cleanResults(), query({ provider: 'audit', matches: [] })]
+  disagreeing[0].matches = [{ identifierFingerprint: `sha256:${'8'.repeat(64)}`, status: 'ACTIVE' }]
+  const report = produceTeardownObservations({ runMarker: FIXTURE.runMarker, reviewedCommit: COMMIT, results: disagreeing })
+  assert.equal(report.observations[0].observedState, 'present')
+  assert.equal(report.observations[0].refusal, 'provider-disagreement')
+})
+
+test('unrelated provider resources do not affect the result', () => {
+  const results = cleanResults()
+  // Another run's resources, reported alongside. They are for a different
+  // marker, so they must not be read as this run's survivors.
+  results.push(query({ provider: 'supabase', runMarker: 'batch-11-mixed-lineage-rehearsal-42', matches: [{ identifierFingerprint: `sha256:${'7'.repeat(64)}`, status: 'ACTIVE' }] }))
+  const report = produce(results)
+  // The foreign match makes this kind unresolvable rather than silently absent.
+  assert.notEqual(report.observations[0].observedState, 'confirmed-absent')
+  // Every other resource kind is unaffected.
+  for (const observation of report.observations.slice(1)) {
+    assert.equal(observation.observedState, 'confirmed-absent', observation.resourceKind)
+  }
+})
+
+test('the producer refuses credential-shaped input outright', () => {
+  const join = (...parts: string[]) => parts.join('')
+  for (const detail of [
+    join('Authorization: Bearer ', 'sk-', 'abcdefghijklmnopqrstuvwxyz012345'),
+    join('sbp', '_', '0123456789abcdef0123456789abcdef01234567'),
+    join('postgresql://postgres:', 'hunter2hunter2', '@db.host.supabase.co:5432/postgres'),
+  ]) {
+    const results = cleanResults()
+    results[0].detail = detail
+    assert.throws(() => produce(results), /credential-shaped/i)
+  }
+  assert.doesNotThrow(() => assertSanitized(cleanResults()))
+})
+
+test('the producer makes no network call', () => {
+  const source = readFileSync(resolve(ROOT, 'lib/batch-11-teardown-observations.ts'), 'utf8')
+  for (const forbidden of ['fetch(', 'execFileSync', 'https://api.', 'readFileSync', 'writeFileSync']) {
+    assert.ok(!source.includes(forbidden), `the producer must not contain ${forbidden}`)
+  }
+})
+
+test('produced observations are deterministic', () => {
+  assert.equal(produce(cleanResults()).observationsDigest, produce(cleanResults()).observationsDigest)
+  const changed = cleanResults()
+  changed[0].queryStatus = 'failed'
+  assert.notEqual(produce(changed).observationsDigest, produce(cleanResults()).observationsDigest)
+})
+
+/* ================================================ end-to-end and legacy === */
+
+test('the whole chain verifies: bound evidence -> observations -> verifier', () => {
+  const produced = produce(cleanResults())
+  const report = verifyRehearsalEvidence({
+    artifact: artifact(),
+    reviewedCommit: COMMIT,
+    teardown: { reviewedCommit: COMMIT, runMarker: FIXTURE.runMarker, observations: produced.observations },
+  }, CONTRACT)
+  assert.equal(report.verdict, 'verified', report.refusals.join(', '))
+  assert.equal(produced.allConfirmedAbsent, true)
+})
+
+test('observations from another run are refused as stale', () => {
+  const evidence = teardown()
+  evidence.reviewedCommit = 'd'.repeat(40)
+  refusesWith('teardown-observations-stale', { teardown: evidence })
+})
+
+test('the live dry-run artifact remains refused', () => {
+  // Whatever mode the current cohort produces, a run that did not execute the
+  // lifecycle must never verify.
+  const output = execFileSync('node', ['--experimental-strip-types', 'scripts/run-batch-11-remote-rehearsal.ts'], { cwd: ROOT, encoding: 'utf8' })
+  const live = JSON.parse(output) as Record<string, unknown>
+  assert.notEqual(live.mode, 'executed')
+  const report = verifyRehearsalEvidence({ artifact: live, reviewedCommit: COMMIT, teardown: null }, CONTRACT)
+  assert.equal(report.verdict, 'refused')
+  assert.ok(report.refusals.includes('mode-not-executed'))
+  assert.ok(report.refusals.includes('teardown-observations-absent'))
 })

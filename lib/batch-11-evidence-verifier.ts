@@ -2,6 +2,7 @@ import { createHash } from 'node:crypto'
 import { readFileSync } from 'node:fs'
 
 import { canonicalJson } from './evidence-dossier/digest.ts'
+import { BOUND_EVIDENCE_SCHEMA, boundEvidenceDigest } from './batch-11-evidence-binding.ts'
 import { BATCH_11_LINEAGE_DECLARATIONS, reconcileLineage } from './batch-11-mixed-lineage-release.ts'
 import { PHASE_ORDER } from './batch-11-rehearsal-phases.ts'
 import {
@@ -61,6 +62,15 @@ export type RefusalCode =
   | 'preview-deployment-not-destroyed'
   | 'reviewed-commit-unbound-in-artifact'
   | 'reviewed-commit-mismatch'
+  | 'artifact-schema-missing'
+  | 'artifact-digest-mismatch'
+  | 'cohort-identity-missing'
+  | 'cohort-order-mismatch'
+  | 'lineage-classification-mismatch'
+  | 'release-identity-missing'
+  | 'release-identity-mismatch'
+  | 'cleanup-status-missing'
+  | 'teardown-observations-stale'
   | 'teardown-observations-absent'
   | 'teardown-reported-not-observed'
   | 'teardown-state-unknown'
@@ -78,8 +88,17 @@ export type RefusalCode =
 export type TeardownState = 'confirmed-absent' | 'reported-not-observed' | 'unknown' | 'present'
 export const TEARDOWN_STATES: readonly TeardownState[] = ['confirmed-absent', 'reported-not-observed', 'unknown', 'present']
 
-export type TeardownResourceKind = 'supabase-branch' | 'vercel-preview'
-export const REQUIRED_TEARDOWN_KINDS: readonly TeardownResourceKind[] = ['supabase-branch', 'vercel-preview']
+export type TeardownResourceKind =
+  | 'supabase-branch'
+  | 'vercel-preview'
+  | 'github-environment-secret'
+  | 'database-release-rows'
+export const REQUIRED_TEARDOWN_KINDS: readonly TeardownResourceKind[] = [
+  'supabase-branch',
+  'vercel-preview',
+  'github-environment-secret',
+  'database-release-rows',
+]
 
 /**
  * A sanitized teardown observation.
@@ -98,10 +117,23 @@ export interface TeardownObservation {
   observedAt?: string | null
 }
 
+/**
+ * Teardown evidence, bound to the run it describes.
+ *
+ * A bare list of observations cannot be told apart from last week's, so the
+ * commit and run marker travel with it and must match the artifact under
+ * verification.
+ */
+export interface TeardownEvidence {
+  reviewedCommit: string
+  runMarker: string
+  observations: readonly TeardownObservation[]
+}
+
 export interface VerifierInput {
   artifact: unknown
   reviewedCommit: string
-  teardown?: readonly TeardownObservation[] | null
+  teardown?: TeardownEvidence | null
 }
 
 export interface CheckResult {
@@ -292,17 +324,23 @@ export function verifyRehearsalEvidence(input: VerifierInput, contract = reposit
   } else pass('plan-digest', 'The plan digest matches the digest re-derived from the repository manifests.')
 
   // Record identity, checked explicitly as well, so a refusal can name the record.
+  const canonicalOrder = BATCH_11_LINEAGE_DECLARATIONS.map((entry) => entry.recordId)
+  // No fallback. An artifact that does not name its cohort cannot be checked
+  // against the repository, and a matching plan digest alone does not say which
+  // records were released.
   const declared = new Set(contract.recordIds)
   const reported = Array.isArray(artifact.cohortRecordIds) ? artifact.cohortRecordIds.map(String) : null
-  if (reported) {
+  if (!reported || reported.length === 0) {
+    fail('record-identity', 'cohort-identity-missing', 'The artifact names no cohort record ids.')
+  } else {
     const substituted = reported.filter((id) => !declared.has(id))
     const missing = contract.recordIds.filter((id) => !reported.includes(id))
     if (substituted.length > 0 || missing.length > 0) {
       fail('record-identity', 'record-substituted-or-undeclared',
         `Undeclared: ${substituted.join(', ') || 'none'}; missing: ${missing.join(', ') || 'none'}.`)
-    } else pass('record-identity', 'Every released record is one the repository declares.')
-  } else {
-    pass('record-identity', 'The artifact lists no record ids; identity rests on the plan digest.')
+    } else if (canonicalOrder.join('\u0000') !== reported.join('\u0000')) {
+      fail('record-identity', 'cohort-order-mismatch', 'The cohort is complete but its order differs from the declared order.')
+    } else pass('record-identity', 'Every released record is one the repository declares, in the declared order.')
   }
 
   // Order convergence.
@@ -355,11 +393,78 @@ export function verifyRehearsalEvidence(input: VerifierInput, contract = reposit
       'The artifact carries no reviewed commit, so it cannot be tied to the code that was reviewed.')
   }
 
+  // The bound block: schema, classifications, release identities, cleanup, and
+  // a digest that covers the reviewed commit and the cohort in order.
+  if (artifact.artifactSchema !== BOUND_EVIDENCE_SCHEMA) {
+    fail('artifact-schema', 'artifact-schema-missing', `The artifact declares schema ${JSON.stringify(artifact.artifactSchema)}, not ${BOUND_EVIDENCE_SCHEMA}.`)
+  } else pass('artifact-schema', `The artifact declares ${BOUND_EVIDENCE_SCHEMA}.`)
+
+  const classifications = Array.isArray(artifact.lineageClassifications) ? artifact.lineageClassifications : []
+  const disagreeing = classifications.filter((entry) => isObject(entry) && entry.expected !== entry.observed)
+  if (classifications.length !== contract.recordIds.length) {
+    fail('lineage-classification', 'lineage-classification-mismatch',
+      `Expected ${contract.recordIds.length} lineage classifications, found ${classifications.length}.`)
+  } else if (disagreeing.length > 0) {
+    fail('lineage-classification', 'lineage-classification-mismatch',
+      `${disagreeing.length} record(s) were classified differently than the registry observed.`)
+  } else pass('lineage-classification', 'Expected and observed lineage classifications agree for every record.')
+
+  const releases = Array.isArray(artifact.releaseIdentities) ? artifact.releaseIdentities : []
+  if (releases.length !== REQUIRED_RELEASES) {
+    fail('release-identity', 'release-identity-missing', `Expected ${REQUIRED_RELEASES} release identities, found ${releases.length}.`)
+  } else {
+    const incomplete = releases.filter((entry) => !isObject(entry) || !entry.releaseId || !entry.targetSha256)
+    const released = releases.filter(isObject).map((entry) => String(entry.recordId)).sort()
+    if (incomplete.length > 0) {
+      fail('release-identity', 'release-identity-missing', `${incomplete.length} release identit(ies) are incomplete.`)
+    } else if (released.join('\u0000') !== [...contract.recordIds].sort().join('\u0000')) {
+      fail('release-identity', 'release-identity-mismatch', 'The released records are not the declared cohort.')
+    } else pass('release-identity', `${releases.length} complete release identities, one per declared record.`)
+  }
+
+  const cleanupStatus = isObject(artifact.cleanup) ? artifact.cleanup : null
+  if (!cleanupStatus || ['branchDestroyed', 'deploymentDestroyed', 'markerRemoved'].some((key) => typeof cleanupStatus[key] !== 'boolean')) {
+    fail('cleanup-status', 'cleanup-status-missing', 'The artifact does not state the cleanup status of every temporary resource.')
+  } else if (Object.values(cleanupStatus).some((value) => value !== true)) {
+    fail('cleanup-status', 'preview-branch-not-destroyed', `The artifact reports incomplete cleanup: ${JSON.stringify(cleanupStatus)}.`)
+  } else pass('cleanup-status', 'The artifact reports every temporary resource destroyed.')
+
+  // Recomputing the digest is what ties the commit and the cohort together: a
+  // correct artifact from another commit, or the same artifact with a swapped
+  // record, produces a different value.
+  if (typeof artifact.artifactDigest !== 'string') {
+    fail('artifact-digest', 'artifact-digest-mismatch', 'The artifact carries no digest.')
+  } else {
+    let recomputed: string | null = null
+    try {
+      recomputed = boundEvidenceDigest({
+        artifactSchema: BOUND_EVIDENCE_SCHEMA,
+        reviewedCommit: String(artifact.reviewedCommit ?? ''),
+        workflowRunId: (artifact.workflowRunId ?? null) as string | null,
+        planDigest: String((isObject(artifact.fingerprint) ? artifact.fingerprint.planDigest : artifact.planDigest) ?? ''),
+        cohortRecordIds: (reported ?? []) as string[],
+        lineageClassifications: classifications as never,
+        phaseOutcomes: (Array.isArray(artifact.phaseOutcomes) ? artifact.phaseOutcomes : []) as never,
+        releaseIdentities: releases as never,
+        releaseCounts: (artifact.releaseCounts ?? {}) as never,
+        deploymentMarkerDigest: (artifact.deploymentMarkerDigest ?? null) as string | null,
+        cleanup: (cleanupStatus ?? {}) as never,
+      })
+    } catch { recomputed = null }
+    if (recomputed !== artifact.artifactDigest) {
+      fail('artifact-digest', 'artifact-digest-mismatch', 'The artifact digest does not recompute from the fields it covers.')
+    } else pass('artifact-digest', 'The artifact digest recomputes over the reviewed commit and the ordered cohort.')
+  }
+
   // Teardown. Only confirmed absence passes.
-  const teardown = input.teardown ?? null
+  const evidence = input.teardown ?? null
+  const teardown = evidence?.observations ?? null
   if (!teardown || teardown.length === 0) {
     fail('teardown', 'teardown-observations-absent',
       'No teardown observation was supplied. The rehearsal reporting its own cleanup is not independent confirmation.')
+  } else if (evidence!.reviewedCommit !== input.reviewedCommit) {
+    fail('teardown', 'teardown-observations-stale',
+      'The teardown observations belong to a different reviewed commit than the artifact under verification.')
   } else {
     for (const kind of REQUIRED_TEARDOWN_KINDS) {
       const observation = teardown.find((entry) => entry.resourceKind === kind)
@@ -408,6 +513,7 @@ export function verifyRehearsalEvidence(input: VerifierInput, contract = reposit
       ordersProvenIndependent: fingerprint.ordersProvenIndependent ?? null,
       productionWritesPerformed: artifact.productionWritesPerformed ?? null,
       teardownStates: (teardown ?? []).map((entry) => ({ resourceKind: entry.resourceKind, observedState: entry.observedState })),
+      teardownRunMarker: evidence?.runMarker ?? null,
     },
     verificationDigest: '',
   }

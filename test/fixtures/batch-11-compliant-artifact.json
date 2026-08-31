@@ -1,11 +1,178 @@
 {
   "syntheticFixture": true,
-  "note": "Synthetic compliant artifact. Not evidence of any rehearsal; no protected run has occurred.",
+  "note": "Synthetic compliant run. Not evidence of any rehearsal; no protected run has occurred.",
   "reviewedCommit": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+  "runMarker": "batch-11-mixed-lineage-rehearsal-77",
+  "providerResults": [
+    {
+      "provider": "supabase",
+      "resourceKind": "supabase-branch",
+      "queryStatus": "succeeded",
+      "scope": "exact-run-marker",
+      "runMarker": "batch-11-mixed-lineage-rehearsal-77",
+      "reviewedCommit": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      "matches": [],
+      "detail": "Queried supabase-branch at exact run-marker scope; no matching resource remained."
+    },
+    {
+      "provider": "vercel",
+      "resourceKind": "vercel-preview",
+      "queryStatus": "succeeded",
+      "scope": "exact-run-marker",
+      "runMarker": "batch-11-mixed-lineage-rehearsal-77",
+      "reviewedCommit": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      "matches": [],
+      "detail": "Queried vercel-preview at exact run-marker scope; no matching resource remained."
+    },
+    {
+      "provider": "github",
+      "resourceKind": "github-environment-secret",
+      "queryStatus": "succeeded",
+      "scope": "exact-run-marker",
+      "runMarker": "batch-11-mixed-lineage-rehearsal-77",
+      "reviewedCommit": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      "matches": [],
+      "detail": "Queried github-environment-secret at exact run-marker scope; no matching resource remained."
+    },
+    {
+      "provider": "database",
+      "resourceKind": "database-release-rows",
+      "queryStatus": "succeeded",
+      "scope": "exact-run-marker",
+      "runMarker": "batch-11-mixed-lineage-rehearsal-77",
+      "reviewedCommit": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      "matches": [],
+      "detail": "Queried database-release-rows at exact run-marker scope; no matching resource remained."
+    }
+  ],
   "artifact": {
+    "artifactSchema": "maha-batch-11-rehearsal-evidence/2.0",
+    "reviewedCommit": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+    "workflowRunId": "77",
+    "planDigest": "sha256:bfac696440d515ce7309c8d751b86301f319fa0f617aeaadcefff69382dcdf71",
+    "cohortRecordIds": [
+      "urn:maha:record:advanced-materials-color-centers-in-diamond",
+      "urn:maha:record:fusion-plasma-systems-tokamak-plasma-equilibrium",
+      "urn:maha:record:longevity-metabolism-mitophagy-flux",
+      "urn:maha:record:mechanistic-interpretability-activation-patching",
+      "urn:maha:record:mechanistic-interpretability-representation-probing-boundary"
+    ],
+    "lineageClassifications": [
+      {
+        "recordId": "urn:maha:record:advanced-materials-color-centers-in-diamond",
+        "expected": "initial",
+        "observed": "initial"
+      },
+      {
+        "recordId": "urn:maha:record:fusion-plasma-systems-tokamak-plasma-equilibrium",
+        "expected": "superseding",
+        "observed": "superseding"
+      },
+      {
+        "recordId": "urn:maha:record:longevity-metabolism-mitophagy-flux",
+        "expected": "initial",
+        "observed": "initial"
+      },
+      {
+        "recordId": "urn:maha:record:mechanistic-interpretability-activation-patching",
+        "expected": "initial",
+        "observed": "initial"
+      },
+      {
+        "recordId": "urn:maha:record:mechanistic-interpretability-representation-probing-boundary",
+        "expected": "superseding",
+        "observed": "superseding"
+      }
+    ],
+    "phaseOutcomes": [
+      {
+        "phase": "provision-ephemeral-branch",
+        "status": "executed",
+        "mutations": 1
+      },
+      {
+        "phase": "apply-migrations",
+        "status": "executed",
+        "mutations": 1
+      },
+      {
+        "phase": "import-prior-lineages",
+        "status": "executed",
+        "mutations": 1
+      },
+      {
+        "phase": "ingest-revisions-and-decisions",
+        "status": "executed",
+        "mutations": 1
+      },
+      {
+        "phase": "issue-releases",
+        "status": "executed",
+        "mutations": 1
+      },
+      {
+        "phase": "verify-transitions",
+        "status": "executed",
+        "mutations": 1
+      },
+      {
+        "phase": "destroy-ephemeral-branch",
+        "status": "executed",
+        "mutations": 1
+      }
+    ],
+    "releaseIdentities": [
+      {
+        "recordId": "urn:maha:record:advanced-materials-color-centers-in-diamond",
+        "releaseId": "epirelease_synthetic00",
+        "targetSha256": "sha256:0000000000000000000000000000000000000000000000000000000000000000",
+        "releaseKind": "initial",
+        "supersedesReleaseId": null
+      },
+      {
+        "recordId": "urn:maha:record:fusion-plasma-systems-tokamak-plasma-equilibrium",
+        "releaseId": "epirelease_synthetic01",
+        "targetSha256": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+        "releaseKind": "superseding",
+        "supersedesReleaseId": "epirelease_8e947374097d4695815dbf9ab653177b"
+      },
+      {
+        "recordId": "urn:maha:record:longevity-metabolism-mitophagy-flux",
+        "releaseId": "epirelease_synthetic02",
+        "targetSha256": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+        "releaseKind": "initial",
+        "supersedesReleaseId": null
+      },
+      {
+        "recordId": "urn:maha:record:mechanistic-interpretability-activation-patching",
+        "releaseId": "epirelease_synthetic03",
+        "targetSha256": "sha256:3333333333333333333333333333333333333333333333333333333333333333",
+        "releaseKind": "initial",
+        "supersedesReleaseId": null
+      },
+      {
+        "recordId": "urn:maha:record:mechanistic-interpretability-representation-probing-boundary",
+        "releaseId": "epirelease_synthetic04",
+        "targetSha256": "sha256:4444444444444444444444444444444444444444444444444444444444444444",
+        "releaseKind": "superseding",
+        "supersedesReleaseId": "epirelease_93c92eb7a317465b83fabf8d3e6962da"
+      }
+    ],
+    "releaseCounts": {
+      "total": 5,
+      "initial": 3,
+      "superseding": 2,
+      "replayed": 0
+    },
+    "deploymentMarkerDigest": "sha256:056cd329ffc4e96d1a5d3ca2e71481f1b90a9fd6f9c90c37e9aee982afb53ae5",
+    "cleanup": {
+      "branchDestroyed": true,
+      "deploymentDestroyed": true,
+      "markerRemoved": true
+    },
+    "artifactDigest": "sha256:ff7559d39d5801202e99da9011073aed060ca94cd7b3eb5a34ba526af74571ab",
     "mode": "executed",
     "reason": "All 7 phases executed against an ephemeral Preview branch.",
-    "reviewedCommit": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
     "remoteOperationsPerformed": 14,
     "previewBranchCreated": true,
     "previewBranchDestroyed": true,
@@ -20,13 +187,6 @@
       "url": "https://www.mahastrategies.com/knowledge/epistemic-system/releases/registry.json",
       "credentialPresented": false
     },
-    "cohortRecordIds": [
-      "urn:maha:record:advanced-materials-color-centers-in-diamond",
-      "urn:maha:record:fusion-plasma-systems-tokamak-plasma-equilibrium",
-      "urn:maha:record:longevity-metabolism-mitophagy-flux",
-      "urn:maha:record:mechanistic-interpretability-activation-patching",
-      "urn:maha:record:mechanistic-interpretability-representation-probing-boundary"
-    ],
     "phases": [
       {
         "phase": "provision-ephemeral-branch",
@@ -77,30 +237,56 @@
       "readyCount": 5,
       "supersedingCount": 2,
       "initialCount": 3,
-      "probeStates": [
-        "lineage-absent",
-        "lineage-absent",
-        "lineage-absent",
-        "lineage-present",
-        "lineage-present"
-      ],
       "ordersProvenIndependent": 120,
       "orderIndependent": true,
-      "planDigest": "sha256:3d48cbf19ca53cf818f9b1b0318334c7e37754f1f7d3ab393535bce085f2be91"
+      "planDigest": "sha256:bfac696440d515ce7309c8d751b86301f319fa0f617aeaadcefff69382dcdf71"
     }
   },
-  "teardown": [
-    {
-      "resourceKind": "supabase-branch",
-      "identifierFingerprint": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
-      "observedState": "confirmed-absent",
-      "detail": "Branch list re-read after deletion; no branch carrying this run marker remained."
-    },
-    {
-      "resourceKind": "vercel-preview",
-      "identifierFingerprint": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
-      "observedState": "confirmed-absent",
-      "detail": "The deployment identifier no longer resolves."
-    }
-  ]
+  "teardown": {
+    "reviewedCommit": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+    "runMarker": "batch-11-mixed-lineage-rehearsal-77",
+    "observations": [
+      {
+        "resourceKind": "supabase-branch",
+        "identifierFingerprint": "sha256:52ffb3b28501ae82584e73606a625cb87475e75a427298986d0ca02b08e9e725",
+        "observedState": "confirmed-absent",
+        "detail": "supabase-branch: 1 authoritative query succeeded at exact scope and found nothing.",
+        "refusal": null,
+        "providers": [
+          "supabase"
+        ]
+      },
+      {
+        "resourceKind": "vercel-preview",
+        "identifierFingerprint": "sha256:2c7bcecadd5ff27a9ebf5195b4205b60c8a183c75f7ea9894852c47d2f54dd9f",
+        "observedState": "confirmed-absent",
+        "detail": "vercel-preview: 1 authoritative query succeeded at exact scope and found nothing.",
+        "refusal": null,
+        "providers": [
+          "vercel"
+        ]
+      },
+      {
+        "resourceKind": "github-environment-secret",
+        "identifierFingerprint": "sha256:3053491f89cfd8aa17cf141f8d630d966dc5886b170fef009be12cdf1285e61c",
+        "observedState": "confirmed-absent",
+        "detail": "github-environment-secret: 1 authoritative query succeeded at exact scope and found nothing.",
+        "refusal": null,
+        "providers": [
+          "github"
+        ]
+      },
+      {
+        "resourceKind": "database-release-rows",
+        "identifierFingerprint": "sha256:5732ba7aa00a7ef36a8ca60362fed40f3ae022141d45484f84327eec7eef7e4e",
+        "observedState": "confirmed-absent",
+        "detail": "database-release-rows: 1 authoritative query succeeded at exact scope and found nothing.",
+        "refusal": null,
+        "providers": [
+          "database"
+        ]
+      }
+    ],
+    "observationsDigest": "sha256:4b1da027b2a75a516f61b62f4fe5849739162bbc5cb07d4e271e273e841cd7d6"
+  }
 }

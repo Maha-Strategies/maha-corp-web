@@ -60,7 +60,7 @@
       "check": "record-identity",
       "passed": true,
       "refusal": null,
-      "detail": "Every released record is one the repository declares."
+      "detail": "Every released record is one the repository declares, in the declared order."
     },
     {
       "check": "order-convergence",
@@ -111,6 +111,36 @@
       "detail": "The artifact names the supplied reviewed commit."
     },
     {
+      "check": "artifact-schema",
+      "passed": true,
+      "refusal": null,
+      "detail": "The artifact declares maha-batch-11-rehearsal-evidence/2.0."
+    },
+    {
+      "check": "lineage-classification",
+      "passed": true,
+      "refusal": null,
+      "detail": "Expected and observed lineage classifications agree for every record."
+    },
+    {
+      "check": "release-identity",
+      "passed": true,
+      "refusal": null,
+      "detail": "5 complete release identities, one per declared record."
+    },
+    {
+      "check": "cleanup-status",
+      "passed": true,
+      "refusal": null,
+      "detail": "The artifact reports every temporary resource destroyed."
+    },
+    {
+      "check": "artifact-digest",
+      "passed": true,
+      "refusal": null,
+      "detail": "The artifact digest recomputes over the reviewed commit and the ordered cohort."
+    },
+    {
       "check": "teardown-supabase-branch",
       "passed": true,
       "refusal": null,
@@ -121,6 +151,18 @@
       "passed": true,
       "refusal": null,
       "detail": "vercel-preview was independently observed absent."
+    },
+    {
+      "check": "teardown-github-environment-secret",
+      "passed": true,
+      "refusal": null,
+      "detail": "github-environment-secret was independently observed absent."
+    },
+    {
+      "check": "teardown-database-release-rows",
+      "passed": true,
+      "refusal": null,
+      "detail": "database-release-rows was independently observed absent."
     },
     {
       "check": "secret-scan",
@@ -161,9 +203,18 @@
       {
         "resourceKind": "vercel-preview",
         "observedState": "confirmed-absent"
+      },
+      {
+        "resourceKind": "github-environment-secret",
+        "observedState": "confirmed-absent"
+      },
+      {
+        "resourceKind": "database-release-rows",
+        "observedState": "confirmed-absent"
       }
-    ]
+    ],
+    "teardownRunMarker": "batch-11-mixed-lineage-rehearsal-77"
   },
-  "verificationDigest": "sha256:c8e7fe480ef209d1163df412c84eeeb8dcd908972197b211188a6f887a6f5c68",
+  "verificationDigest": "sha256:42e1b0087afacfc90676220749181485247ab412e616a9c0ab09971842c33046",
   "syntheticFixture": true
 }
