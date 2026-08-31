@@ -10,16 +10,17 @@ import {
 
 const ROOT = resolve(import.meta.dirname, '..')
 const REF = 'abcdefghijklmnopqrst'
+const PARENT_REF = 'uvwxyzabcdefghijklmn'
 const PASSWORD = 'preview-only-password'
 
 const primary = (overrides: Record<string, unknown> = {}): Record<string, unknown> => ({
   identifier: 'primary',
   database_type: 'PRIMARY',
-  db_user: `postgres.${REF}`,
+  db_user: `postgres.${PARENT_REF}`,
   db_host: 'aws-0-us-east-1.pooler.supabase.com',
   db_port: 6543,
   db_name: 'postgres',
-  connection_string: `postgresql://postgres.${REF}:ignored@aws-0-us-east-1.pooler.supabase.com:6543/postgres`,
+  connection_string: `postgresql://postgres.${PARENT_REF}:ignored@aws-0-us-east-1.pooler.supabase.com:6543/postgres`,
   pool_mode: 'transaction',
   ...overrides,
 })
@@ -27,6 +28,7 @@ const primary = (overrides: Record<string, unknown> = {}): Record<string, unknow
 test('authoritative transaction pooler configuration becomes an IPv4 session connection', () => {
   const env = previewSessionPoolerEnvironment({
     branchRef: REF,
+    parentProjectRef: PARENT_REF,
     branchPassword: PASSWORD,
     poolerConfiguration: [primary()],
   })
@@ -49,6 +51,7 @@ test('camel-case connectionString is accepted when it is the sole authoritative 
   row.connectionString = connectionString
   const env = previewSessionPoolerEnvironment({
     branchRef: REF,
+    parentProjectRef: PARENT_REF,
     branchPassword: PASSWORD,
     poolerConfiguration: [row],
   })
@@ -58,6 +61,7 @@ test('camel-case connectionString is accepted when it is the sole authoritative 
 test('a replica alongside one exact PRIMARY is ignored', () => {
   const env = previewSessionPoolerEnvironment({
     branchRef: REF,
+    parentProjectRef: PARENT_REF,
     branchPassword: PASSWORD,
     poolerConfiguration: [{ ...primary(), database_type: 'READ_REPLICA' }, primary()],
   })
@@ -67,6 +71,7 @@ test('a replica alongside one exact PRIMARY is ignored', () => {
 test('auxiliary config fields cannot override the authoritative connection string', () => {
   const env = previewSessionPoolerEnvironment({
     branchRef: REF,
+    parentProjectRef: PARENT_REF,
     branchPassword: PASSWORD,
     poolerConfiguration: [primary({
       db_host: 'an-internal-database-host',
@@ -89,7 +94,7 @@ test('missing or duplicate PRIMARY configurations fail closed', () => {
     { database_type: 'PRIMARY' },
   ]) {
     assert.throws(
-      () => previewSessionPoolerEnvironment({ branchRef: REF, branchPassword: PASSWORD, poolerConfiguration }),
+      () => previewSessionPoolerEnvironment({ branchRef: REF, parentProjectRef: PARENT_REF, branchPassword: PASSWORD, poolerConfiguration }),
       /pooler configuration|exactly one PRIMARY/,
     )
   }
@@ -99,10 +104,11 @@ test('a direct endpoint can never stand in for the IPv4 shared pooler', () => {
   assert.throws(
     () => previewSessionPoolerEnvironment({
       branchRef: REF,
+      parentProjectRef: PARENT_REF,
       branchPassword: PASSWORD,
       poolerConfiguration: [primary({
         db_host: `db.${REF}.supabase.co`,
-        connection_string: `postgresql://postgres:${PASSWORD}@db.${REF}.supabase.co:5432/postgres`,
+        connection_string: `postgresql://postgres.${PARENT_REF}:${PASSWORD}@db.${REF}.supabase.co:5432/postgres`,
       })],
     }),
     /shared Supavisor endpoint/,
@@ -112,36 +118,61 @@ test('a direct endpoint can never stand in for the IPv4 shared pooler', () => {
 test('a substituted Preview ref, user, host or database is refused', () => {
   const cases = [
     primary({ db_user: 'postgres.other', connection_string: 'postgresql://postgres.other:x@aws-0-us-east-1.pooler.supabase.com:6543/postgres' }),
-    primary({ db_host: 'evil.example', connection_string: `postgresql://postgres.${REF}:x@evil.example:6543/postgres` }),
-    primary({ db_name: 'other', connection_string: `postgresql://postgres.${REF}:x@aws-0-us-east-1.pooler.supabase.com:6543/other` }),
+    primary({ db_host: 'evil.example', connection_string: `postgresql://postgres.${PARENT_REF}:x@evil.example:6543/postgres` }),
+    primary({ db_name: 'other', connection_string: `postgresql://postgres.${PARENT_REF}:x@aws-0-us-east-1.pooler.supabase.com:6543/other` }),
     primary({ connection_string: `postgresql://postgres.otherref0000000000:x@aws-0-us-east-1.pooler.supabase.com:6543/postgres` }),
   ]
   for (const row of cases) {
     assert.throws(
-      () => previewSessionPoolerEnvironment({ branchRef: REF, branchPassword: PASSWORD, poolerConfiguration: [row] }),
+      () => previewSessionPoolerEnvironment({ branchRef: REF, parentProjectRef: PARENT_REF, branchPassword: PASSWORD, poolerConfiguration: [row] }),
     )
   }
 })
 
 test('conflicting API aliases and malformed connection strings fail closed', () => {
   for (const row of [
-    primary({ connectionString: `postgresql://postgres.${REF}:x@another.pooler.supabase.com:6543/postgres` }),
+    primary({ connectionString: `postgresql://postgres.${PARENT_REF}:x@another.pooler.supabase.com:6543/postgres` }),
     primary({ connection_string: 'not a url' }),
-    primary({ connection_string: `https://postgres.${REF}:x@aws-0-us-east-1.pooler.supabase.com/postgres` }),
+    primary({ connection_string: `https://postgres.${PARENT_REF}:x@aws-0-us-east-1.pooler.supabase.com/postgres` }),
     primary({ connection_string: '' }),
   ]) {
     assert.throws(
-      () => previewSessionPoolerEnvironment({ branchRef: REF, branchPassword: PASSWORD, poolerConfiguration: [row] }),
+      () => previewSessionPoolerEnvironment({ branchRef: REF, parentProjectRef: PARENT_REF, branchPassword: PASSWORD, poolerConfiguration: [row] }),
     )
   }
 })
 
-test('the remote runner fetches the branch-bound pooler and never uses direct db_host for psql', () => {
+test('the remote runner fetches the parent-authorized pooler and binds its user to the branch', () => {
   const source = readFileSync(resolve(ROOT, 'scripts/run-batch-11-remote-rehearsal.ts'), 'utf8')
-  assert.match(source, /\/v1\/projects\/\$\{branchRef\}\/config\/database\/pooler/)
+  assert.match(source, /\/v1\/projects\/\$\{parentRef\}\/config\/database\/pooler/)
+  assert.doesNotMatch(source, /\/v1\/projects\/\$\{branchRef\}\/config\/database\/pooler/)
   assert.match(source, /previewSessionPoolerEnvironment/)
+  assert.match(source, /parentProjectRef: parentRef/)
   assert.doesNotMatch(source, /PGHOST:\s*String\(detail\.db_host/)
   assert.match(source, /execFileSync\('psql'/)
   assert.match(source, /env:\s*\{\s*\.\.\.process\.env,\s*\.\.\.branchEnv\s*\}/)
   assert.doesNotMatch(source, /psql[\s\S]{0,500}(?:postgres|postgresql):\/\//)
+})
+
+test('a missing branch password or substituted parent pooler user fails closed', () => {
+  assert.throws(
+    () => previewSessionPoolerEnvironment({
+      branchRef: REF,
+      parentProjectRef: PARENT_REF,
+      branchPassword: undefined,
+      poolerConfiguration: [primary()],
+    }),
+    /branch password/,
+  )
+  assert.throws(
+    () => previewSessionPoolerEnvironment({
+      branchRef: REF,
+      parentProjectRef: PARENT_REF,
+      branchPassword: PASSWORD,
+      poolerConfiguration: [primary({
+        connection_string: 'postgresql://postgres.substitutedproject:x@aws-0-us-east-1.pooler.supabase.com:6543/postgres',
+      })],
+    }),
+    /parent project ref/,
+  )
 })

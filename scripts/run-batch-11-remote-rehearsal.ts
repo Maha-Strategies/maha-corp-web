@@ -348,10 +348,16 @@ const driver: RehearsalDriver = {
     const detail = await readyBranchDetail(branchId)
     const branchRef = String(detail.ref)
     const jwtSecret = String(detail.jwt_secret)
-    const poolerConfiguration = await management(`/v1/projects/${branchRef}/config/database/pooler`)
+    // The fine-grained token is scoped to the parent staging project. An
+    // ephemeral branch has a distinct project ref, so asking for config under
+    // that ref is correctly forbidden. The parent response supplies the
+    // authoritative regional Supavisor host; the selector binds the database
+    // user to the exact branch ref and uses the branch's isolated password.
+    const poolerConfiguration = await management(`/v1/projects/${parentRef}/config/database/pooler`)
     branchEnv = previewSessionPoolerEnvironment({
       branchRef,
-      branchPassword: String(detail.db_pass),
+      parentProjectRef: parentRef,
+      branchPassword: detail.db_pass,
       poolerConfiguration,
     })
     branchApiUrl = `https://${branchRef}.supabase.co`

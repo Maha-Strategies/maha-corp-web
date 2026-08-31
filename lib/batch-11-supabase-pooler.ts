@@ -3,9 +3,13 @@
  * Supabase Preview branch.
  *
  * Supabase's Management API returns the authoritative PRIMARY pooler
- * connection string. The shared pooler uses the same host and user in both
- * transaction and session modes; port 5432 selects session mode. We never
- * derive a region hostname or fall back to the branch's IPv6-only direct host.
+ * connection string for the branch's parent project. The fine-grained token
+ * is scoped to that parent and cannot read config under an ephemeral branch's
+ * separate project ref. The parent response therefore supplies only the
+ * authoritative shared host and database; the user is rebound to the exact
+ * branch ref using Supavisor's documented `postgres.<project-ref>` tenancy
+ * convention. Port 5432 selects session mode. We never derive a region
+ * hostname or fall back to the branch's IPv6-only direct host.
  */
 
 export const SUPABASE_SESSION_POOLER_PORT = '5432' as const
@@ -63,17 +67,21 @@ function authoritativeConnectionString(entry: Json): string {
 
 export function previewSessionPoolerEnvironment(input: {
   branchRef: string
-  branchPassword: string
+  parentProjectRef: string
+  branchPassword: unknown
   poolerConfiguration: unknown
 }): SupabasePoolerEnvironment {
   const branchRef = nonempty(input.branchRef, 'Preview branch ref')
   if (!REF.test(branchRef)) throw new Error('Preview branch ref is malformed.')
+  const parentProjectRef = nonempty(input.parentProjectRef, 'Preview parent project ref')
+  if (!REF.test(parentProjectRef)) throw new Error('Preview parent project ref is malformed.')
   const password = nonempty(input.branchPassword, 'Preview branch password')
   const entry = primaryEntry(input.poolerConfiguration)
 
+  const connectionString = authoritativeConnectionString(entry)
   let parsed: URL
   try {
-    parsed = new URL(authoritativeConnectionString(entry))
+    parsed = new URL(connectionString)
   } catch {
     throw new Error('PRIMARY Supabase pooler connection string is malformed.')
   }
@@ -86,10 +94,11 @@ export function previewSessionPoolerEnvironment(input: {
     throw new Error('PRIMARY Supabase pooler host is not an authoritative shared Supavisor endpoint.')
   }
 
-  const user = decodeURIComponent(parsed.username)
-  if (!user.endsWith(`.${branchRef}`) || user.slice(0, -(branchRef.length + 1)).length === 0) {
-    throw new Error('PRIMARY Supabase pooler user is not bound to the exact Preview branch ref.')
+  const authoritativeUser = decodeURIComponent(parsed.username)
+  if (authoritativeUser !== `postgres.${parentProjectRef}`) {
+    throw new Error('PRIMARY Supabase pooler user is not bound to the configured parent project ref.')
   }
+  const user = `postgres.${branchRef}`
 
   const database = decodeURIComponent(parsed.pathname.replace(/^\//, ''))
   if (!DATABASE.test(database) || database !== 'postgres') {

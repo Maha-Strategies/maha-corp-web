@@ -600,7 +600,7 @@ test('no credential is passed as a command argument', () => {
     assert.ok(!deployArgv.includes(valueVariable), `${valueVariable} must not reach argv`)
   }
   assert.ok(POOLER.includes('PGPASSWORD: password'), 'the database password must travel in the environment')
-  assert.ok(SCRIPT.includes('branchPassword: String(detail.db_pass)'), 'the isolated branch password must bind the pooler environment')
+  assert.ok(SCRIPT.includes('branchPassword: detail.db_pass'), 'the isolated branch password must bind the pooler environment without turning absence into the string "undefined"')
   assert.match(BINDING, /'--env', 'SUPABASE_SERVICE_ROLE_KEY'/)
   assert.doesNotMatch(deployArgv, /--env', `[^`]*=/, 'Vercel runtime values must be inherited by name, never embedded in argv')
 })
