@@ -48,36 +48,61 @@ covered by tests.
 - `record-not-observed`
 - `held-decision-cannot-release`
 
-## Preview rehearsal — currently disabled
+## Preview rehearsal
+
+There is exactly one runnable remote Batch 11 workflow:
+`.github/workflows/preview-batch-11-remote-rehearsal.yml`, driven by
+`scripts/run-batch-11-remote-rehearsal.ts`.
+
+The earlier plan-only path — `preview-batch-11-lineage-rehearsal.yml` and
+`run-batch-11-preview-lineage-rehearsal.ts` — has been removed. Its authorized
+branch was never implemented, it declared two secret names that do not exist in
+this repository, and it ran without a protected environment or a reviewed-commit
+pin. Every capability it had is a subset of the authoritative path, including
+its declaration-coverage check, which the surviving script now performs before
+anything else. Its lineage tests were kept and rebound.
 
 ```bash
-# Plan only. Performs no remote operation.
-node --experimental-strip-types scripts/run-batch-11-preview-lineage-rehearsal.ts
+# Dry run. Gates the cohort, proves order independence, performs nothing.
+node --experimental-strip-types scripts/run-batch-11-remote-rehearsal.ts
 ```
 
-The remote half runs only with `MAHA_B11_REHEARSAL_AUTHORIZED=1`, and even then
-this change leaves it unimplemented and exiting non-zero. That is deliberate:
-authorization alone should not be able to cause an unreviewed remote operation.
+The remote phases run only under three simultaneous locks — an authorization
+flag, an exact operation name, and an exact confirmation phrase — inside a
+protected environment whose reviewers must approve first, from a checkout pinned
+to a reviewed commit SHA. See
+[`batch-11-remote-rehearsal.md`](batch-11-remote-rehearsal.md) for the phases
+and the remaining operational prerequisite.
 
 ### Required secret names
 
-- `MAHA_PREVIEW_SUPABASE_URL`
-- `MAHA_PREVIEW_SUPABASE_SERVICE_ROLE`
+Every name is an existing repository secret. No credential is minted for this
+rehearsal.
+
+- `SUPABASE_ACCESS_TOKEN` — Supabase Management API; creates and destroys the
+  ephemeral branch. Currently bound only to `production-database`.
+- `SUPABASE_PROJECT_REF`
+- `SUPABASE_DB_PASSWORD`
+- `EPISTEMIC_OPERATIONS_TOKEN`
 - `EPISTEMIC_RELEASE_AUTHORITY_TOKEN`
+- `VERCEL_AUTOMATION_BYPASS_SECRET`
 
 Names only. No value appears in this repository, and a test asserts that.
 
 ### Migration scope
 
-One additive migration creating only the Batch 11 rehearsal ingestion table and
-its RPC. No existing table is altered. No row outside the five records is touched.
-Production is never a target of the rehearsal script.
+One additive migration,
+`supabase/migrations/20260831120000_batch_11_mixed_lineage_rehearsal.sql`,
+creating only the Batch 11 rehearsal tables and admitting one dedicated adapter.
+No existing table is altered. No row outside the five records is touched.
+Production is never a target of the rehearsal script — its only Production
+access is an unauthenticated HTTPS GET of the public release registry.
 
 ### Cleanup
 
-Drop the rehearsal schema, then delete the Preview branch database. Because the
-migration is additive and scoped to a new table, cleanup does not touch any
-pre-existing object.
+The ephemeral branch is destroyed in a `finally` block, and again by a workflow
+step that runs `if: always()`. Because the migration is additive and scoped to
+new tables, cleanup touches no pre-existing object.
 
 ## What the rehearsal would prove
 
