@@ -199,13 +199,14 @@ export const mahaCarpSellerProfile = Object.freeze({
     confirmationEvidence: `${SITE_URL}/artifacts/carp/thrivbe-buyer-review-2026-08-27.json`,
     directPeerBindings: [{
       handle: 'thrivbe',
-      status: 'bidirectional_adilos_verified_enquiry_retry_pending',
+      status: 'bidirectional_adilos_verified_enquiry_round_trip_completed',
       did: 'did:key:zQ3shs5FSFqMhhCw7MazfRtyWZwBXGMVLs2jLxu8xiihjEbnJ',
       sadUrl: 'https://carp.thrivbe.com/cgi-bin/thrivbe',
       descriptorSequence: 2,
       publicKey: '03b8bd2886d40b5a4b6d12d396ff60c8df6b3b1deecc777411335d60afc5283673',
       carpUrl: 'https://carp.thrivbe.com',
       reciprocalEvidence: `${SITE_URL}/artifacts/carp/thrivbe-reciprocal-success-2026-08-28.json`,
+      enquiryEvidence: `${SITE_URL}/artifacts/carp/thrivbe-tea-enquiry-success-2026-08-28.json`,
     }],
     did: identity?.did.id ?? null,
     didUrl: MAHA_CARP_DID_URL,
@@ -335,27 +336,43 @@ function enquiryTerms(params: Record<string, unknown>) {
   ].join(' ').trim().toLowerCase()
 }
 
+function tokenSequence(value: string) {
+  return value.toLowerCase().match(/[a-z0-9]+/g) ?? []
+}
+
+function containsTokenPhrase(terms: string, candidate: string) {
+  const haystack = tokenSequence(terms)
+  const needle = tokenSequence(candidate)
+  if (needle.length === 0 || needle.length > haystack.length) return false
+  return haystack.some((_, start) => needle.every((token, offset) => haystack[start + offset] === token))
+}
+
+function containsAnyTokenPhrase(terms: string, candidates: readonly string[]) {
+  return candidates.some((candidate) => containsTokenPhrase(terms, candidate))
+}
+
 function enquiryMatchesDigital(terms: string) {
   if (!terms) return true
-  return ['context', 'retention', 'evidence', 'rag', 'provenance', 'evaluation', 'digital', 'ai']
-    .some((term) => terms.includes(term))
+  return containsAnyTokenPhrase(terms, ['context', 'retention', 'evidence', 'rag', 'provenance', 'evaluation', 'digital', 'ai'])
 }
 
 function enquiryMatchesSamleyTea(terms: string) {
   if (!terms) return true
-  if (['bogawantalawa', 'legend', 'bopf', 'black tea', 'single unit'].some((term) => terms.includes(term))) return false
-  return ['cinnamon', 'tea', 'ceylon', 'samley', 'sri lanka', 'physical', 'export', 'wholesale', 'pallet']
-    .some((term) => terms.includes(term))
+  if (containsAnyTokenPhrase(terms, ['bogawantalawa', 'legend', 'bopf', 'black tea', 'single unit'])) return false
+  return containsAnyTokenPhrase(terms, ['cinnamon', 'tea', 'ceylon', 'samley', 'sri lanka', 'physical', 'export', 'wholesale', 'pallet'])
 }
 
 function enquiryMatchesBogawantalawaTea(terms: string) {
   if (!terms) return true
-  if (['samley', 'cinnamon', 'pallet', 'wholesale'].some((term) => terms.includes(term))) return false
-  return ['black tea', 'tea', 'ceylon', 'bogawantalawa', 'legend', 'bopf', 'sri lanka', 'physical', 'retail', 'single unit']
-    .some((term) => terms.includes(term))
+  if (containsAnyTokenPhrase(terms, ['samley', 'cinnamon', 'pallet', 'wholesale'])) return false
+  return containsAnyTokenPhrase(terms, ['black tea', 'tea', 'ceylon', 'bogawantalawa', 'legend', 'bopf', 'sri lanka', 'physical', 'retail', 'single unit'])
 }
 
 function enquiryMatches(params: Record<string, unknown>) {
+  if (typeof params.offeringRef === 'string') {
+    const exactOffer = mahaCarpSellerProfile.offers.find((offer) => offer.offeringRef === params.offeringRef)
+    return exactOffer ? [exactOffer] : []
+  }
   const terms = enquiryTerms(params)
   return mahaCarpSellerProfile.offers.filter((offer) => {
     if (offer.offeringRef === SAMLEY_CINNAMON_TEA_RFQ_REF) return enquiryMatchesSamleyTea(terms)
@@ -378,6 +395,9 @@ export function handleCarpSellerRequest(request: CarpSellerRequest): CarpSellerR
     if (!params) return jsonError(request.id, -32602, 'enquiry params must be an object.')
     if (typeof params.query === 'string' && params.query.length > 2_000) {
       return jsonError(request.id, -32602, 'query must not exceed 2,000 characters.')
+    }
+    if (Object.hasOwn(params, 'offeringRef') && (typeof params.offeringRef !== 'string' || params.offeringRef.length > 256)) {
+      return jsonError(request.id, -32602, 'offeringRef must be a string of at most 256 characters.')
     }
     if (Array.isArray(params.tags) && (params.tags.length > 20 || params.tags.some((tag) => typeof tag !== 'string' || tag.length > 80))) {
       return jsonError(request.id, -32602, 'tags must contain at most 20 strings of at most 80 characters.')

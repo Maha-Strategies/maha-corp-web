@@ -45,13 +45,14 @@ test('the Maha seller maps Deep Context to the adopted digital offering shape', 
   assert.match(mahaCarpSellerProfile.membership.confirmationEvidence, /thrivbe-buyer-review-2026-08-27\.json$/)
   assert.deepEqual(mahaCarpSellerProfile.membership.directPeerBindings, [{
     handle: 'thrivbe',
-    status: 'bidirectional_adilos_verified_enquiry_retry_pending',
+    status: 'bidirectional_adilos_verified_enquiry_round_trip_completed',
     did: THRIVBE.did,
     sadUrl: THRIVBE.sadUrl,
     descriptorSequence: 2,
     publicKey: THRIVBE.publicKey,
     carpUrl: THRIVBE.carpUrl,
     reciprocalEvidence: 'https://www.mahastrategies.com/artifacts/carp/thrivbe-reciprocal-success-2026-08-28.json',
+    enquiryEvidence: 'https://www.mahastrategies.com/artifacts/carp/thrivbe-tea-enquiry-success-2026-08-28.json',
   }])
   assert.equal(offer.offeringRef, 'maha:deep-context-evaluation:v1')
   assert.equal(offer.kind, 'digital')
@@ -129,6 +130,37 @@ test('black tea enquiries expose one bounded retail unit without inventing manuf
   assert.match(BOGAWANTALAWA_LEGEND_TEA_TEST_OFFER.productSpecification.visibleCondition, /compression\/creasing/)
   assert.match(BOGAWANTALAWA_LEGEND_TEA_TEST_OFFER.termsUrl, /\/terms\/physical-goods$/)
   assert.match(BOGAWANTALAWA_LEGEND_TEA_TEST_OFFER.termsManifest, /\/terms\/carp-physical-goods-v1\.json$/)
+})
+
+test('an exact offeringRef returns only that offer and takes priority over free text', () => {
+  const exact = handleCarpSellerRequest({
+    jsonrpc: '2.0', method: 'enquiry', id: 'black-tea-exact-ref-1',
+    params: {
+      offeringRef: BOGAWANTALAWA_LEGEND_TEA_TEST_REF,
+      query: 'AI evidence evaluation',
+      tags: ['digital'],
+    },
+  })
+  assert.ok('result' in exact)
+  const exactOffers = (exact as { result: typeof mahaCarpSellerProfile.offers }).result
+  assert.deepEqual(exactOffers.map((offer) => offer.offeringRef), [BOGAWANTALAWA_LEGEND_TEA_TEST_REF])
+
+  const unknown = handleCarpSellerRequest({
+    jsonrpc: '2.0', method: 'enquiry', id: 'black-tea-exact-ref-2',
+    params: { offeringRef: 'maha:unknown:offer-v1', query: 'tea context evidence' },
+  })
+  assert.ok('result' in unknown)
+  assert.deepEqual((unknown as { result: unknown[] }).result, [])
+})
+
+test('free-text enquiry matching uses tokens rather than substrings', () => {
+  const matched = handleCarpSellerRequest({
+    jsonrpc: '2.0', method: 'enquiry', id: 'black-tea-token-match-1',
+    params: { query: BOGAWANTALAWA_LEGEND_TEA_TEST_REF, tags: [], imgtxt: null },
+  })
+  assert.ok('result' in matched)
+  const offers = (matched as { result: typeof mahaCarpSellerProfile.offers }).result
+  assert.deepEqual(offers.map((offer) => offer.offeringRef), [BOGAWANTALAWA_LEGEND_TEA_TEST_REF])
 })
 
 test('the one-box tea test fails closed at purchase pending a destination-specific quote', () => {
@@ -258,6 +290,27 @@ test('the reciprocal success artifact records identity proof only and retains no
   assert.equal(artifact.executionBoundary.temporaryRouteRemovedAfterAttempt, true)
   assert.equal(artifact.retention.privateKeysRetained, false)
   assert.doesNotMatch(canonical.toString('utf8'), /"challenge"\s*:|"response"\s*:|"privateKey"\s*:|CARP_AGENT_PRIVATE_KEY/)
+})
+
+test('the final Thrivbe artifact records exactly one no-money encrypted tea enquiry', async () => {
+  const canonical = await readFile(new URL('../artifacts/carp/thrivbe-tea-enquiry-success-2026-08-28.json', import.meta.url))
+  const published = await readFile(new URL('../public/artifacts/carp/thrivbe-tea-enquiry-success-2026-08-28.json', import.meta.url))
+  assert.deepEqual(published, canonical)
+  const artifact = JSON.parse(canonical.toString('utf8'))
+  assert.equal(artifact.scope.offeringRef, BOGAWANTALAWA_LEGEND_TEA_TEST_REF)
+  assert.equal(artifact.scope.encryptedEnquiriesAuthorized, 1)
+  assert.equal(artifact.scope.encryptedEnquiriesSent, 1)
+  assert.equal(artifact.observations.mahaEncryptedEnquiryHttpStatus, 200)
+  assert.equal(artifact.observations.correlatedEncryptedCallbackReceived, true)
+  assert.equal(artifact.observations.offersReturned, 2)
+  assert.equal(artifact.observations.offersMatchingExactReference, 1)
+  assert.match(artifact.observations.sellerMatchingFinding, /ai appeared inside the word retail/)
+  assert.equal(artifact.confirmedCommercialBoundary.purchasable, false)
+  assert.equal(artifact.confirmedCommercialBoundary.price, null)
+  assert.equal(artifact.confirmedCommercialBoundary.paymentInstructionsPresent, false)
+  assert.equal(artifact.retention.rawCorrelatedAnswerRetained, false)
+  assert.equal(artifact.retention.encryptedPayloadsRetained, false)
+  assert.doesNotMatch(canonical.toString('utf8'), /@|\+47|938 12345|msghex|sighex|"challenge"\s*:|"response"\s*:/)
 })
 
 test('the Samley RFQ fails closed at purchase until an order-specific quote exists', () => {

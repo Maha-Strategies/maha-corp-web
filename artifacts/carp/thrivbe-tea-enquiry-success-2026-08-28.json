@@ -1,0 +1,65 @@
+{
+  "artifactVersion": "1.0.0",
+  "recordedAt": "2026-08-28",
+  "reviewer": {
+    "agent": "thrivbe",
+    "role": "independent CABEZON buyer-side participant",
+    "humanOperatorNamed": false
+  },
+  "scope": {
+    "offeringRef": "maha:bogawantalawa-legend-black-tea:retail-test-v1",
+    "correlationId": "thrivbe-maha-tea-enquiry-20260828T104556Z",
+    "encryptedEnquiriesAuthorized": 1,
+    "encryptedEnquiriesSent": 1,
+    "moneyAuthorized": false,
+    "purchaseAuthorized": false,
+    "reservationAuthorized": false,
+    "escrowAuthorized": false,
+    "quoteAcceptanceAuthorized": false,
+    "deliveryAuthorized": false
+  },
+  "preflight": {
+    "thrivbeCarpUpstream": "clean",
+    "originalRepositoriesUnchanged": true
+  },
+  "observations": {
+    "mahaEncryptedEnquiryHttpStatus": 200,
+    "mahaAcceptedRequest": true,
+    "correlatedEncryptedCallbackReceived": true,
+    "requestedOfferingReturned": true,
+    "offersReturned": 2,
+    "offersMatchingExactReference": 1,
+    "sellerMatchingFinding": "Free-text substring matching also returned the digital AI offer because the token ai appeared inside the word retail.",
+    "exactReferenceFilteringMadeResultUnambiguous": true
+  },
+  "confirmedCommercialBoundary": {
+    "status": "request_for_quote",
+    "commercialAvailability": "enquiry_only",
+    "purchasable": false,
+    "price": null,
+    "directSettlement": null,
+    "paymentInstructionsPresent": false,
+    "escrowInstructionsPresent": false,
+    "deliveryInstructionsPresent": false,
+    "availableUnits": 1,
+    "replenishmentPromised": false,
+    "sellerOfRecord": "Maha Strategies LLC",
+    "manufacturerAuthorizationAsserted": false,
+    "distributorRelationshipAsserted": false
+  },
+  "sellerCorrection": {
+    "exactOfferingReferencePriority": true,
+    "unknownExactReferenceReturnsNoOffers": true,
+    "freeTextFallbackUsesTokenAwareMatching": true,
+    "carpGuidanceQuestionTreatedSeparately": true
+  },
+  "retention": {
+    "rawCorrelatedAnswerRetained": false,
+    "unrelatedQueueItemRemoved": false,
+    "credentialsRetained": false,
+    "encryptedRequestContentsRetained": false,
+    "encryptedPayloadsRetained": false,
+    "personalContactDetailsRetained": false
+  },
+  "claimBoundary": "This artifact records one independently operated encrypted, no-money enquiry round trip and the returned enquiry-only commercial boundary. It does not record or imply a purchase, payment, reservation, escrow, quote acceptance, delivery, manufacturer authorization, distributor relationship, or repeat demand."
+}
