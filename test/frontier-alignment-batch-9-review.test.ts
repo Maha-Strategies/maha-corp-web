@@ -130,11 +130,11 @@ test('rejected, revise, unreviewed, stale, and tampered decisions cannot compile
 
 test('Batch 9 closure leaves active verdict and publication counts unchanged', () => {
   assert.deepEqual(verdictTotals(), {
-    supported: 90,
-    'partially-supported': 50,
+    supported: 94,
+    'partially-supported': 47,
     mismatched: 86,
     'insufficient-evidence': 9,
-    'inaccessible-source': 5,
+    'inaccessible-source': 4,
   })
   assert.equal(FRONTIER_ALIGNMENT_AUDIT.filter((entry) => entry.evidence.subjectAligned === 'mismatched').length, 86)
   for (const decision of ALIGNMENT_BATCH_9_REVIEW_DECISIONS) {

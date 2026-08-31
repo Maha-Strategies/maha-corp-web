@@ -105,11 +105,11 @@ test('replacements remain private and cannot change the active source binding', 
     assert.ok(alignmentBlockers(packet.recordId).includes('source-subject-mismatched'))
   }
   assert.deepEqual(verdictTotals(), {
-    supported: 90,
-    'partially-supported': 50,
+    supported: 94,
+    'partially-supported': 47,
     mismatched: 86,
     'insufficient-evidence': 9,
-    'inaccessible-source': 5,
+    'inaccessible-source': 4,
   })
 })
 

@@ -93,13 +93,13 @@ test('Batch 9 does not alter canonical source bindings, verdicts, or aggregate c
     assert.equal(audit.evidence.subjectAligned, 'mismatched')
   }
   assert.deepEqual(verdictTotals(), {
-    supported: 90,
-    'partially-supported': 50,
+    supported: 94,
+    'partially-supported': 47,
     mismatched: 86,
     'insufficient-evidence': 9,
-    'inaccessible-source': 5,
+    'inaccessible-source': 4,
   })
-  assert.equal(FRONTIER_ALIGNMENT_AUDIT.filter((entry) => alignmentBlockers(entry.recordId).length === 0).length, 90)
+  assert.equal(FRONTIER_ALIGNMENT_AUDIT.filter((entry) => alignmentBlockers(entry.recordId).length === 0).length, 94)
 })
 
 test('generated remediation packets carry independently reproducible packet and batch digests', () => {

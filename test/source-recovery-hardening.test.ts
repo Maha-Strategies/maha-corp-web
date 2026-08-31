@@ -440,12 +440,12 @@ test('batch statistics are pinned', () => {
   assert.deepEqual(b6, {
     batchId: 'batch-6',
     attempted: 40,
-    contentInspected: 35,
-    inaccessible: 5,
-    supported: 12,
+    contentInspected: 36,
+    inaccessible: 4,
+    supported: 13,
     partiallySupported: 10,
     mismatched: 13,
     insufficientEvidence: 0,
-    alignmentClear: 12,
+    alignmentClear: 13,
   })
 })

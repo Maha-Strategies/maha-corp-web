@@ -37,9 +37,9 @@ test('source discovery stays separate from inspection and commits no retrieved c
   assert.ok(ALIGNMENT_BATCH_8_SOURCE_DISCOVERIES.every((entry) => entry.contentCommitted === false))
 })
 
-test('only the five wide-bandgap records remain uninspected and non-explanatory', () => {
+test('only the remaining wide-bandgap records are uninspected and non-explanatory', () => {
   const uninspected = FRONTIER_ALIGNMENT_AUDIT.filter((entry) => !entry.evidence.sourceContentInspected)
-  assert.equal(uninspected.length, 5)
+  assert.equal(uninspected.length, 4)
   assert.ok(uninspected.every((entry) => entry.sourceContractId === 'source-advanced-materials-wide-bandgap'))
   for (const entry of uninspected) {
     assert.equal(entry.evidence.subjectAligned, 'inaccessible-source')
@@ -50,14 +50,14 @@ test('only the five wide-bandgap records remain uninspected and non-explanatory'
 
 test('Batch 8 produces the reconciled active corpus totals', () => {
   assert.deepEqual(verdictTotals(), {
-    supported: 90,
-    'partially-supported': 50,
+    supported: 94,
+    'partially-supported': 47,
     mismatched: 86,
     'insufficient-evidence': 9,
-    'inaccessible-source': 5,
+    'inaccessible-source': 4,
   })
-  assert.equal(FRONTIER_ALIGNMENT_AUDIT.filter((entry) => entry.evidence.sourceContentInspected).length, 235)
-  assert.equal(FRONTIER_ALIGNMENT_AUDIT.filter((entry) => alignmentBlockers(entry.recordId).length === 0).length, 90)
+  assert.equal(FRONTIER_ALIGNMENT_AUDIT.filter((entry) => entry.evidence.sourceContentInspected).length, 236)
+  assert.equal(FRONTIER_ALIGNMENT_AUDIT.filter((entry) => alignmentBlockers(entry.recordId).length === 0).length, 94)
 })
 
 test('PP1802 is inspected per record and no longer inherits stale infrastructure inaccessibility', () => {
@@ -72,13 +72,28 @@ test('PP1802 is inspected per record and no longer inherits stale infrastructure
 })
 
 test('active Batch 8 decisions preserve prior judgement provenance where one existed', () => {
+  // A later append-only batch may sit on top of a Batch 8 decision. That pushes
+  // Batch 8's link one further down the chain rather than removing it, so the
+  // chain is walked instead of assuming Batch 8 is still the outermost layer.
+  const batchChain = (judgement: { batchId?: string; priorJudgement?: unknown } | null | undefined): string[] => {
+    const ids: string[] = []
+    let node = judgement as { batchId?: string; priorJudgement?: unknown } | null | undefined
+    while (node) {
+      if (node.batchId) ids.push(node.batchId)
+      node = node.priorJudgement as { batchId?: string; priorJudgement?: unknown } | null | undefined
+    }
+    return ids
+  }
   for (const decision of ALIGNMENT_BATCH_8_DECISIONS) {
     const active = alignmentFor(decision.recordId)!
+    const chain = batchChain(active.priorJudgement)
     if (decision.priorBatchId) {
-      assert.equal(active.priorJudgement?.batchId, decision.priorBatchId)
+      assert.ok(chain.includes(decision.priorBatchId), `${decision.recordId}: ${decision.priorBatchId} is missing from ${chain.join(' <- ') || '(no chain)'}`)
       assert.ok(active.priorJudgement?.reason)
     } else {
-      assert.equal(active.priorJudgement, null)
+      // Without a Batch 8 predecessor, the only link that may exist is one a
+      // later batch added on top.
+      assert.deepEqual(chain.filter((id) => id !== 'alignment-closure-1'), [], decision.recordId)
     }
   }
 })

@@ -2,7 +2,7 @@
 
 This is a deterministic, noncanonical search plan. It locates candidate copies; it does not inspect source content, create locators, change alignment verdicts, or authorize publication.
 
-Contracts: 1 · affected records: 5
+Contracts: 1 · affected records: 4
 
 | Priority | Source contract | Domain | Current state | Search requests |
 | ---: | --- | --- | --- | ---: |

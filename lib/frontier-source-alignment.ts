@@ -219,6 +219,8 @@ interface MetadataCacheEntry {
   authorCount?: number
 }
 
+import { ALIGNMENT_CLOSURE_BATCH_ID, ALIGNMENT_CLOSURE_DISPOSITIONS } from './alignment-closure-batch.ts'
+
 const cacheUrl = new URL('../content/frontier-audit/source-metadata-cache.json', import.meta.url)
 const metadataCache: Record<string, MetadataCacheEntry> =
   JSON.parse(readFileSync(cacheUrl, 'utf8')).entries ?? {}
@@ -2519,11 +2521,60 @@ const BATCH_10_REMEDIATION_JUDGEMENTS: Readonly<Record<string, InspectedJudgemen
   }),
 )
 
-const ACTIVE_JUDGEMENTS: Readonly<Record<string, InspectedJudgement>> = {
+const ACTIVE_JUDGEMENTS_BEFORE_CLOSURE: Readonly<Record<string, InspectedJudgement>> = {
   ...ACTIVE_JUDGEMENTS_AFTER_BATCH_7,
   ...BATCH_8_JUDGEMENTS,
   ...BATCH_9_REMEDIATION_JUDGEMENTS,
   ...BATCH_10_REMEDIATION_JUDGEMENTS,
+}
+
+/**
+ * The alignment closure batch, applied like every batch before it: append-only,
+ * with the superseded judgement nested rather than discarded.
+ *
+ * Every record here keeps the source it already declared. That is the property
+ * that makes the batch applicable at all - four of these records are reachable
+ * from a canonical release, and rebinding a source would require a new revision
+ * and a re-release rather than a re-reading.
+ */
+const CLOSURE_BATCH_JUDGEMENTS: Readonly<Record<string, InspectedJudgement>> = Object.fromEntries(
+  ALIGNMENT_CLOSURE_DISPOSITIONS.map((disposition) => {
+    // Deliberately does not validate here. The corpus guards below prove
+    // invariants that hold for every judgement; a batch-integrity check that
+    // threw during construction would fire first and mask them. This batch's
+    // own consistency is asserted after those guards instead.
+    const prior = ACTIVE_JUDGEMENTS_BEFORE_CLOSURE[disposition.recordId]
+    return [disposition.recordId, {
+      verdict: disposition.verdict,
+      sourceContentInspected: true,
+      inspectedContentLocation: disposition.inspectedContentLocation,
+      reason: disposition.reason,
+      remediation: disposition.newlyAlignmentClear
+        ? 'None. The declared source was read and supports the record subject; the mapping is recorded as curated rather than positional.'
+        : 'Bind a source that specifies a persistent permitted-tool set, or narrow the record to per-invocation approval.',
+      ...(disposition.origin ? { origin: disposition.origin } : {}),
+      artifactVersion: disposition.artifactVersion,
+      inspectionDepth: disposition.inspectionDepth,
+      versionRelationshipVerified: true,
+      recoveryDisposition: 'open-copy-located' as const,
+      ...(prior ? {
+        priorJudgement: {
+          batchId: ALIGNMENT_CLOSURE_BATCH_ID,
+          verdict: prior.verdict,
+          sourceContentInspected: prior.sourceContentInspected,
+          inspectionDepth: prior.inspectionDepth,
+          inspectedContentLocation: prior.inspectedContentLocation,
+          reason: prior.reason,
+          priorJudgement: prior.priorJudgement ?? null,
+        },
+      } : {}),
+    } satisfies InspectedJudgement]
+  }),
+)
+
+const ACTIVE_JUDGEMENTS: Readonly<Record<string, InspectedJudgement>> = {
+  ...ACTIVE_JUDGEMENTS_BEFORE_CLOSURE,
+  ...CLOSURE_BATCH_JUDGEMENTS,
 }
 
 /**
@@ -3440,6 +3491,21 @@ for (const entry of FRONTIER_ALIGNMENT_AUDIT) {
 }
 const judgedIds = Object.keys(ACTIVE_JUDGEMENTS)
 if (new Set(judgedIds).size !== judgedIds.length) throw new Error('Duplicate judgement in the alignment registry.')
+
+/**
+ * The closure batch must describe the state it actually superseded.
+ *
+ * Runs after the corpus guards so it cannot mask them, and before the audit is
+ * consumed, so a batch whose declared prior verdict has drifted from the record
+ * it re-inspected fails loudly rather than silently rewriting history.
+ */
+for (const disposition of ALIGNMENT_CLOSURE_DISPOSITIONS) {
+  const prior = ACTIVE_JUDGEMENTS_BEFORE_CLOSURE[disposition.recordId]
+  if (!prior) throw new Error(`${disposition.recordId}: the closure batch re-inspects a record with no prior judgement.`)
+  if (prior.verdict !== disposition.priorVerdict) {
+    throw new Error(`${disposition.recordId}: the closure batch declares a prior verdict of ${disposition.priorVerdict} but the superseded judgement is ${prior.verdict}.`)
+  }
+}
 const auditIds = new Set(FRONTIER_ALIGNMENT_AUDIT.map((entry) => entry.recordId))
 for (const id of judgedIds) {
   if (!auditIds.has(id)) throw new Error(`Judgement ${id} does not correspond to a frontier record.`)

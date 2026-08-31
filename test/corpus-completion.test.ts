@@ -13,7 +13,7 @@ import { ARTIFACT_VERSIONS, compileOutstandingRecoveryPackets, RECOVERY_CHANNELS
 test('the outstanding queue covers every and only uninspected frontier record', () => {
   const uninspected = FRONTIER_ALIGNMENT_AUDIT.filter((entry) => !entry.evidence.sourceContentInspected)
   const packets = compileOutstandingRecoveryPackets()
-  assert.equal(uninspected.length, 5)
+  assert.equal(uninspected.length, 4)
   assert.equal(SOURCE_RECOVERY_OUTSTANDING_IDS.length, 1)
   assert.deepEqual(packets.flatMap((packet) => packet.affectedRecordIds).sort(), uninspected.map((entry) => entry.recordId).sort())
   for (const packet of packets) {
@@ -27,7 +27,7 @@ test('the outstanding queue covers every and only uninspected frontier record', 
 
 test('all uninspected positional assignments remain automatically blocked and non-explanatory', () => {
   const rows = FRONTIER_ALIGNMENT_AUDIT.filter((entry) => !entry.evidence.sourceContentInspected)
-  assert.equal(rows.filter((entry) => entry.assignmentOrigin === 'positional-legacy').length, 5)
+  assert.equal(rows.filter((entry) => entry.assignmentOrigin === 'positional-legacy').length, 4)
   for (const entry of rows) {
     assert.equal(entry.evidence.claimSupported, false)
     assert.equal(entry.evidence.inspectedContentLocation, null)

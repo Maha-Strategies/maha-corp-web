@@ -122,7 +122,7 @@ test('revise, missing, stale, packet-substituted, and forged decisions fail clos
 
 test('Batch 10 review leaves active alignment totals and source contracts unchanged', () => {
   assert.deepEqual(verdictTotals(), {
-    supported: 90, 'partially-supported': 50, mismatched: 86, 'insufficient-evidence': 9, 'inaccessible-source': 5,
+    supported: 94, 'partially-supported': 47, mismatched: 86, 'insufficient-evidence': 9, 'inaccessible-source': 4,
   })
   assert.equal(FRONTIER_ALIGNMENT_AUDIT.filter((entry) => entry.evidence.subjectAligned === 'mismatched').length, 86)
   for (const decision of ALIGNMENT_BATCH_10_REVIEW_DECISIONS) {

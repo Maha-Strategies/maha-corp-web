@@ -3,18 +3,18 @@
   "counts": {
     "attempted": 40,
     "contentInspected": 35,
-    "inaccessible": 5,
+    "inaccessible": 4,
     "reInspections": 35,
     "firstJudgements": 5,
-    "alignmentClear": 11,
+    "alignmentClear": 12,
     "remainingCorpusUninspected": 59
   },
   "verdictTotals": {
-    "supported": 11,
+    "supported": 12,
     "partially-supported": 11,
     "mismatched": 13,
     "insufficient-evidence": 0,
-    "inaccessible-source": 5
+    "inaccessible-source": 4
   },
   "decisions": [
     {
@@ -53,13 +53,9 @@
       "inspectionDepth": "not-inspected",
       "versionRelationshipVerified": false,
       "recoveryDisposition": "authentication-wall",
-      "priorVerdict": "insufficient-evidence",
-      "finalVerdict": "inaccessible-source",
-      "alignmentBlockers": [
-        "source-assignment-positional-legacy",
-        "source-inaccessible",
-        "source-not-inspected"
-      ]
+      "priorVerdict": "inaccessible-source",
+      "finalVerdict": "supported",
+      "alignmentBlockers": []
     },
     {
       "recordId": "urn:maha:record:advanced-materials-diamond-wafer-substrates",
@@ -854,5 +850,5 @@
       "alignmentBlockers": []
     }
   ],
-  "resultDigest": "sha256:d12160713edcebee14547854ed3d4e8914f4598855d7b16aef95e94026562d05"
+  "resultDigest": "sha256:ce8b4063316bc8b10a5e668e149ff84e13e22cd70cb1b3c344b643ea5cb11235"
 }

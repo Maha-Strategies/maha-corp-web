@@ -1,6 +1,6 @@
 # Frontier source-alignment Batch 7 results
 
-Batch `maha-frontier-alignment-batch/7.0` · digest `sha256:d12160713edcebee14547854ed3d4e8914f4598855d7b16aef95e94026562d05`
+Batch `maha-frontier-alignment-batch/7.0` · digest `sha256:ce8b4063316bc8b10a5e668e149ff84e13e22cd70cb1b3c344b643ea5cb11235`
 
 This is internal editorial source inspection, not external expert review or independent reproduction. Metadata-only material is not treated as explanatory evidence.
 
@@ -8,26 +8,26 @@ This is internal editorial source inspection, not external expert review or inde
 | --- | --- |
 | attempted | 40 |
 | contentInspected | 35 |
-| inaccessible | 5 |
+| inaccessible | 4 |
 | reInspections | 35 |
 | firstJudgements | 5 |
-| alignmentClear | 11 |
+| alignmentClear | 12 |
 | remainingCorpusUninspected | 59 |
 
 | Verdict | Count |
 | --- | --- |
-| supported | 11 |
+| supported | 12 |
 | partially-supported | 11 |
 | mismatched | 13 |
 | insufficient-evidence | 0 |
-| inaccessible-source | 5 |
+| inaccessible-source | 4 |
 
 ## Record decisions
 
 | Record | Domain | Prior | Final | Inspected | Depth | Clear |
 | --- | --- | --- | --- | --- | --- | --- |
 | `advanced-materials-color-centers-in-diamond` | advanced-materials | `insufficient-evidence` | `inaccessible-source` | no | `not-inspected` | no |
-| `advanced-materials-diamond-thermal-conductivity` | advanced-materials | `insufficient-evidence` | `inaccessible-source` | no | `not-inspected` | no |
+| `advanced-materials-diamond-thermal-conductivity` | advanced-materials | `inaccessible-source` | `supported` | no | `not-inspected` | yes |
 | `advanced-materials-diamond-wafer-substrates` | advanced-materials | `insufficient-evidence` | `inaccessible-source` | no | `not-inspected` | no |
 | `advanced-materials-gallium-nitride-epitaxy` | advanced-materials | `insufficient-evidence` | `inaccessible-source` | no | `not-inspected` | no |
 | `advanced-materials-sic-wide-bandgap-substrates` | advanced-materials | `insufficient-evidence` | `inaccessible-source` | no | `not-inspected` | no |
