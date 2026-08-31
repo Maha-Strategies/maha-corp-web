@@ -143,12 +143,12 @@
     "canary:mcp-evidence:private": "node --experimental-strip-types scripts/run-mcp-evidence-private-canary.ts"
   },
   "dependencies": {
-    "@anthropic-ai/sdk": "^0.115.0",
+    "@anthropic-ai/sdk": "^0.122.0",
     "@scalar/api-reference-react": "^0.9.60",
-    "@sentry/nextjs": "^10.69.0",
+    "@sentry/nextjs": "^10.71.0",
     "@stripe/stripe-js": "^9.12.1",
-    "@supabase/supabase-js": "^2.112.0",
-    "@upstash/redis": "^1.38.1",
+    "@supabase/supabase-js": "^2.112.4",
+    "@upstash/redis": "^1.38.3",
     "@x402/core": "^2.21.0",
     "@x402/extensions": "^2.21.0",
     "adilosjs": "^1.0.0",
@@ -162,7 +162,7 @@
     "react": "19.2.8",
     "react-dom": "19.2.8",
     "react-katex": "^3.1.0",
-    "resend": "^6.18.1",
+    "resend": "^6.24.0",
     "stripe": "^22.3.2"
   },
   "devDependencies": {
