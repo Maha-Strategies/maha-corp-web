@@ -1,3 +1,4 @@
+import { ALIGNMENT_CLOSURE_DISPOSITIONS } from '../lib/alignment-closure-batch.ts'
 import assert from 'node:assert/strict'
 import { execFileSync } from 'node:child_process'
 import { readFileSync } from 'node:fs'
@@ -20,6 +21,8 @@ import {
   alignmentFor,
   verdictTotals,
 } from '../lib/frontier-source-alignment.ts'
+
+const CLOSURE_RECORD_IDS = new Set(ALIGNMENT_CLOSURE_DISPOSITIONS.map((entry) => entry.recordId))
 
 test('all twelve bridge specifications receive an immutable editorial closure', () => {
   assert.equal(QUANTUM_BRIDGE_CLOSURE.length, 12)
@@ -50,6 +53,10 @@ test('Batch 7 records forty bounded decisions across all eight frontier domains'
 
 test('Batch 7 inspection is explicit and metadata-only records remain blocked', () => {
   for (const decision of ALIGNMENT_BATCH_7_DECISIONS) {
+    // A later append-only batch may have read a source Batch 7 could not. That
+    // changes the active state by design, and Batch 7's own decision survives
+    // in the nested provenance chain rather than in the active row.
+    if (CLOSURE_RECORD_IDS.has(decision.recordId)) continue
     const audit = alignmentFor(decision.recordId)!
     assert.equal(audit.evidence.sourceContentInspected, decision.sourceContentInspected)
     if (!decision.sourceContentInspected) {
@@ -63,14 +70,14 @@ test('Batch 7 inspection is explicit and metadata-only records remain blocked', 
 
 test('the active corpus includes the bounded Batch 8 evidence moves without changing Batch 7 decisions', () => {
   assert.deepEqual(verdictTotals(), {
-    supported: 90,
-    'partially-supported': 50,
+    supported: 94,
+    'partially-supported': 47,
     mismatched: 86,
     'insufficient-evidence': 9,
-    'inaccessible-source': 5,
+    'inaccessible-source': 4,
   })
-  assert.equal(FRONTIER_ALIGNMENT_AUDIT.filter((entry) => entry.evidence.sourceContentInspected).length, 235)
-  assert.equal(FRONTIER_ALIGNMENT_AUDIT.filter((entry) => alignmentBlockers(entry.recordId).length === 0).length, 90)
+  assert.equal(FRONTIER_ALIGNMENT_AUDIT.filter((entry) => entry.evidence.sourceContentInspected).length, 236)
+  assert.equal(FRONTIER_ALIGNMENT_AUDIT.filter((entry) => alignmentBlockers(entry.recordId).length === 0).length, 94)
 })
 
 test('bridge endpoint and usability invariants do not move under editorial closure', () => {
@@ -87,7 +94,7 @@ test('generated closure and Batch 7 artifacts agree with the active modules', ()
   assert.equal(closure.records.length, 12)
   assert.equal(batch.decisions.length, 40)
   assert.equal(batch.counts.contentInspected, 35)
-  assert.equal(batch.counts.alignmentClear, 11)
+  assert.equal(batch.counts.alignmentClear, 12)
   assert.equal(batch.counts.remainingCorpusUninspected, 59)
 })
 

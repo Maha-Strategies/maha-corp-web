@@ -1,6 +1,6 @@
 # Frontier source-alignment Batch 8 results
 
-Batch `maha-frontier-alignment-batch/8.0` · digest `sha256:292151274efd545f5ccb9328456766149db6c31894b88865fcb85687ddb7252f`
+Batch `maha-frontier-alignment-batch/8.0` · digest `sha256:5027228050f11964a420af4a8ad16575d71eaa5d62144420bd68066a063118eb`
 
 This is internal editorial source inspection, not external expert review or independent reproduction. Located metadata and metadata-only access routes are never treated as explanatory evidence. Retrieved source content is not committed.
 
@@ -8,11 +8,11 @@ This is internal editorial source inspection, not external expert review or inde
 | --- | --- |
 | attempted | 59 |
 | contentInspected | 54 |
-| inaccessible | 5 |
+| inaccessible | 4 |
 | reInspections | 40 |
 | firstJudgements | 19 |
-| alignmentClear | 20 |
-| remainingCorpusUninspected | 5 |
+| alignmentClear | 21 |
+| remainingCorpusUninspected | 4 |
 
 | Discovery status | Source contracts |
 | --- | --- |
@@ -22,11 +22,11 @@ This is internal editorial source inspection, not external expert review or inde
 
 | Verdict | Records |
 | --- | --- |
-| supported | 20 |
+| supported | 21 |
 | partially-supported | 13 |
 | mismatched | 18 |
 | insufficient-evidence | 3 |
-| inaccessible-source | 5 |
+| inaccessible-source | 4 |
 
 ## Source discovery
 
@@ -50,7 +50,7 @@ This is internal editorial source inspection, not external expert review or inde
 | Record | Domain | Prior | Final | Inspected | Depth | Clear |
 | --- | --- | --- | --- | --- | --- | --- |
 | `advanced-materials-color-centers-in-diamond` | advanced-materials | `inaccessible-source` | `inaccessible-source` | no | `not-inspected` | no |
-| `advanced-materials-diamond-thermal-conductivity` | advanced-materials | `inaccessible-source` | `inaccessible-source` | no | `not-inspected` | no |
+| `advanced-materials-diamond-thermal-conductivity` | advanced-materials | `inaccessible-source` | `supported` | no | `not-inspected` | yes |
 | `advanced-materials-diamond-wafer-substrates` | advanced-materials | `inaccessible-source` | `inaccessible-source` | no | `not-inspected` | no |
 | `advanced-materials-gallium-nitride-epitaxy` | advanced-materials | `inaccessible-source` | `inaccessible-source` | no | `not-inspected` | no |
 | `advanced-materials-sic-wide-bandgap-substrates` | advanced-materials | `inaccessible-source` | `inaccessible-source` | no | `not-inspected` | no |

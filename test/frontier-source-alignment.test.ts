@@ -636,16 +636,16 @@ test('the reported totals match the audit', () => {
   assert.equal(Object.values(origins).reduce((a, b) => a + b, 0), 240)
   assert.equal(origins['explicit-override'], 2)
   assert.deepEqual(verdicts, {
-    supported: 90,
-    'partially-supported': 50,
+    supported: 94,
+    'partially-supported': 47,
     mismatched: 86,
     'insufficient-evidence': 9,
-    'inaccessible-source': 5,
+    'inaccessible-source': 4,
   })
-  assert.equal(FRONTIER_ALIGNMENT_AUDIT.filter((entry) => entry.evidence.sourceContentInspected).length, 235)
+  assert.equal(FRONTIER_ALIGNMENT_AUDIT.filter((entry) => entry.evidence.sourceContentInspected).length, 236)
   assert.equal(
     FRONTIER_ALIGNMENT_AUDIT.filter((entry) => isAlignmentClear(entry.recordId)).length,
-    90,
+    94,
     'alignment-clear count changed',
   )
 })

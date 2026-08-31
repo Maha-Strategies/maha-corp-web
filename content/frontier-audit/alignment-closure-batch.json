@@ -1,0 +1,150 @@
+{
+  "schemaVersion": "maha-alignment-closure-batch/1.0",
+  "batchId": "alignment-closure-1",
+  "batchDigest": "sha256:c9d59a57fce2712d81d1365689b7899ed2b47753822e79afa68786a2febfcd46",
+  "totals": {
+    "recordsInspected": 5,
+    "newlyAlignmentClear": 4,
+    "remainedBlocked": 1,
+    "alignmentClearBefore": 137,
+    "alignmentClearAfter": 141,
+    "frontierClearBefore": 90,
+    "frontierClearAfter": 94,
+    "pilotClear": 47
+  },
+  "verdictTotals": {
+    "before": {
+      "supported": 90,
+      "partially-supported": 50,
+      "mismatched": 86,
+      "insufficient-evidence": 9,
+      "inaccessible-source": 5
+    },
+    "after": {
+      "supported": 94,
+      "partially-supported": 47,
+      "mismatched": 86,
+      "insufficient-evidence": 9,
+      "inaccessible-source": 4
+    }
+  },
+  "verdictMovements": [
+    {
+      "recordId": "urn:maha:record:advanced-materials-diamond-thermal-conductivity",
+      "from": "inaccessible-source",
+      "to": "supported"
+    },
+    {
+      "recordId": "urn:maha:record:agentic-systems-mcp-mcp-session-lifecycle",
+      "from": "partially-supported",
+      "to": "supported"
+    },
+    {
+      "recordId": "urn:maha:record:biomolecular-engineering-crude-extract-cell-free-systems",
+      "from": "partially-supported",
+      "to": "supported"
+    },
+    {
+      "recordId": "urn:maha:record:biomolecular-engineering-purified-component-expression-systems",
+      "from": "partially-supported",
+      "to": "supported"
+    }
+  ],
+  "dispositions": [
+    {
+      "recordId": "urn:maha:record:advanced-materials-diamond-thermal-conductivity",
+      "verdict": "supported",
+      "priorVerdict": "inaccessible-source",
+      "newlyAlignmentClear": true,
+      "sourceIdentifier": "10.1109/TPEL.2003.810840",
+      "sourceTitle": "An assessment of wide bandgap semiconductors for power devices",
+      "inspectionHost": "IEEE Xplore (publisher), document 1198071",
+      "inspectedContentLocation": "Publisher-served abstract, IEEE Transactions on Power Electronics 18(3):907-914",
+      "artifactVersion": "version-of-record",
+      "inspectionDepth": "abstract-only",
+      "versionRelationship": "inspected-artifact-is-version-of-record",
+      "rightsBasis": "citation-with-paraphrase",
+      "evidenceCharacter": "descriptive",
+      "origin": "independently-curated",
+      "reason": "The publisher-served abstract states that the future optimal choice for bipolar devices is diamond \"owing to the large bandgap, high thermal conductivity, and large electron and hole mobilities\". Diamond thermal conductivity is named as a material property of the record subject, by the source this record already declares.",
+      "boundary": "The abstract asserts high thermal conductivity as a known property used in a device assessment. It reports no thermal-conductivity measurement, and it establishes nothing about fabrication, cost or deployment.",
+      "uncertainty": "The full text is behind a publisher paywall, so the inspection is abstract-depth. The record subject is named in the abstract, so the depth is sufficient for this verdict but not for any quantitative claim."
+    },
+    {
+      "recordId": "urn:maha:record:agentic-systems-mcp-mcp-session-lifecycle",
+      "verdict": "supported",
+      "priorVerdict": "partially-supported",
+      "newlyAlignmentClear": true,
+      "sourceIdentifier": "url:https://modelcontextprotocol.io/specification",
+      "sourceTitle": "Model Context Protocol specification",
+      "inspectionHost": "modelcontextprotocol.io (publisher of the specification)",
+      "inspectedContentLocation": "Specification 2024-11-05, Base Protocol > Lifecycle: \"Lifecycle Phases\", \"Version Negotiation\", \"Capability Negotiation\"",
+      "artifactVersion": "living-specification",
+      "inspectionDepth": "specified-sections",
+      "versionRelationship": "inspected-artifact-is-pinned-version-of-living-specification",
+      "rightsBasis": "citation-with-paraphrase",
+      "evidenceCharacter": "descriptive",
+      "origin": "independently-curated",
+      "reason": "The earlier judgement was reached from the specification index, which defers lifecycle detail to a linked page it did not inspect. That page was inspected here. It defines three lifecycle phases - initialization, operation and shutdown - and states that initialization MUST be the first interaction, carried by an initialize request, an initialize response and an initialized notification, with normative version and capability negotiation. That is the session lifecycle this record names.",
+      "boundary": "A specification states what conforming implementations must do. It is not evidence that any implementation does it, and it establishes no performance, security or deployment property.",
+      "uncertainty": "The inspected page is the pinned 2024-11-05 version and labels 2026-07-28 as the current specification. The lifecycle may differ in later versions; this disposition is bounded to the version inspected."
+    },
+    {
+      "recordId": "urn:maha:record:agentic-systems-mcp-tool-allowlisting",
+      "verdict": "partially-supported",
+      "priorVerdict": "partially-supported",
+      "newlyAlignmentClear": false,
+      "sourceIdentifier": "url:https://modelcontextprotocol.io/specification",
+      "sourceTitle": "Model Context Protocol specification",
+      "inspectionHost": "modelcontextprotocol.io (publisher of the specification)",
+      "inspectedContentLocation": "Specification 2024-11-05, Server Features > Tools: \"User Interaction Model\", \"Capabilities\", \"Protocol Messages\"",
+      "artifactVersion": "living-specification",
+      "inspectionDepth": "specified-sections",
+      "versionRelationship": "inspected-artifact-is-pinned-version-of-living-specification",
+      "rightsBasis": "citation-with-paraphrase",
+      "evidenceCharacter": "descriptive",
+      "origin": null,
+      "reason": "The linked tools page was inspected rather than the index, and it confirms the earlier limit instead of removing it. The page requires that there SHOULD always be a human in the loop able to deny tool invocations, and that applications disclose which tools are exposed. It also states that the protocol \"does not mandate any specific user interaction model\", and defines only tools/list and tools/call. Per-invocation human denial is not an allowlist: no persistent permitted-tool set is specified anywhere on the page.",
+      "boundary": "Deeper inspection resolved the depth question and left the subject question unchanged. The record stays blocked, and this batch records that outcome rather than omitting it.",
+      "uncertainty": null
+    },
+    {
+      "recordId": "urn:maha:record:biomolecular-engineering-crude-extract-cell-free-systems",
+      "verdict": "supported",
+      "priorVerdict": "partially-supported",
+      "newlyAlignmentClear": true,
+      "sourceIdentifier": "10.1016/j.synbio.2017.02.003",
+      "sourceTitle": "Cell-free synthetic biology: Engineering in an open world",
+      "inspectionHost": "Europe PMC full-text XML, PMC5625795",
+      "inspectedContentLocation": "Full text, introduction: the three developed cell-free system types",
+      "artifactVersion": "version-of-record",
+      "inspectionDepth": "full-document",
+      "versionRelationship": "inspected-artifact-is-version-of-record",
+      "rightsBasis": "open-license",
+      "evidenceCharacter": "descriptive",
+      "origin": "independently-curated",
+      "reason": "The earlier judgement said the inspected sections did not isolate crude-extract systems. The full text does: it names three developed cell-free system types and defines the first as the extract-based system, \"composed of crude extract with basic transcription and translation functions, DNA templates, energy regeneration substrates, amino acids, nucleotides, cofactors, and salts\", listing E. coli, S. cerevisiae, rabbit reticulocyte, wheat germ and insect cell as the common extract sources.",
+      "boundary": "A review describes an established taxonomy. It reports no yield, cost or performance measurement, and this disposition establishes none.",
+      "uncertainty": null
+    },
+    {
+      "recordId": "urn:maha:record:biomolecular-engineering-purified-component-expression-systems",
+      "verdict": "supported",
+      "priorVerdict": "partially-supported",
+      "newlyAlignmentClear": true,
+      "sourceIdentifier": "10.1016/j.synbio.2017.02.003",
+      "sourceTitle": "Cell-free synthetic biology: Engineering in an open world",
+      "inspectionHost": "Europe PMC full-text XML, PMC5625795",
+      "inspectedContentLocation": "Full text, introduction: the three developed cell-free system types",
+      "artifactVersion": "version-of-record",
+      "inspectionDepth": "full-document",
+      "versionRelationship": "inspected-artifact-is-version-of-record",
+      "rightsBasis": "open-license",
+      "evidenceCharacter": "descriptive",
+      "origin": "independently-curated",
+      "reason": "The earlier judgement said the inspected sections did not distinguish purified-component systems. The full text distinguishes them explicitly, as the second of three developed types: \"The other one is purified system, such as the PURE system which consists of a toolbox of purified E. coli translational components\", set against the extract-based system in the preceding sentence.",
+      "boundary": "The review establishes the distinction as an accepted category, not the relative performance of the two platforms.",
+      "uncertainty": null
+    }
+  ]
+}
