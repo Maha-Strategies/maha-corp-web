@@ -106,7 +106,7 @@ export default function AboutPage() {
               The <Link className="evidence-link" href="/mps">Maha Provenance Standard (MPS/0.1)</Link> is the firm&rsquo;s claim-level provenance framework for AI-assisted nonfiction. Its public archival record is available through <a className="evidence-link" href="https://doi.org/10.5281/zenodo.21241308">Zenodo DOI 10.5281/zenodo.21241308 ↗</a>.
             </p>
             <p className="evidence-copy mt-5">
-              Research and advisory work separate sourced evidence, interpretation, and bounded speculation. Read the <Link className="evidence-link" href="/method">method</Link>, browse <Link className="evidence-link" href="/intelligence">intelligence</Link>, or <Link className="evidence-link" href="/contact">contact Maha Strategies</Link>.
+              Research and advisory work separate sourced evidence, interpretation, and bounded speculation. <Link className="evidence-link" href="/demo">Watch the investor and partner demonstration</Link>, read the <Link className="evidence-link" href="/method">method</Link>, browse <Link className="evidence-link" href="/intelligence">intelligence</Link>, or <Link className="evidence-link" href="/contact">contact Maha Strategies</Link>.
             </p>
           </div>
         </section>

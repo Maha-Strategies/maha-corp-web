@@ -288,8 +288,13 @@ test('Codex-owned Evidence Preflight paths are untouched', () => {
     'lib/llms-manifest.ts', 'lib/openapi.ts', 'test/openapi-docs.test.ts',
     'test/public-visual-system-completeness.test.ts',
   ]
-  const reviewedCommit = process.env.MAHA_B11_REVIEWED_COMMIT?.trim() || 'HEAD'
-  assert.match(reviewedCommit, /^(?:HEAD|[0-9a-f]{40})$/, 'the reviewed commit must be HEAD or an exact SHA')
+  const reviewedCommit = process.env.MAHA_B11_REVIEWED_COMMIT?.trim() || execFileSync('git', [
+    'log', '-1', '--format=%H', '--',
+    '.github/workflows/preview-batch-11-remote-rehearsal.yml',
+    'scripts/run-batch-11-remote-rehearsal.ts',
+    'lib/batch-11-remote-rehearsal.ts',
+  ], { cwd: ROOT, encoding: 'utf8' }).trim()
+  assert.match(reviewedCommit, /^[0-9a-f]{40}$/, 'the reviewed commit must be an exact Batch-11 source SHA')
   const changed = execFileSync('git', ['diff', '--name-only', `${reviewedCommit}^`, reviewedCommit], { cwd: ROOT, encoding: 'utf8' })
     .trim().split('\n').filter(Boolean)
   for (const path of owned) {

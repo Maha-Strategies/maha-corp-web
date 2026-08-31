@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import type { Metadata } from 'next'
+import Image from 'next/image'
 import { TrackedLink } from '@/components/ConversionTracker'
 
 const SITE_URL = 'https://www.mahastrategies.com'
@@ -55,6 +56,21 @@ export default function CorporateHomepage() {
           </div>
           <p className="evidence-kicker mt-5">Traceable context · bounded authority · controlled payments · durable evidence</p>
         </header>
+
+        <section className="evidence-section" aria-labelledby="demo-heading">
+          <Link href="/demo" className="group block border border-[var(--border-default)] bg-[var(--surface-paper)] p-1">
+            <div className="relative aspect-video overflow-hidden bg-black">
+              {/* The local poster keeps the homepage fast and does not contact YouTube. */}
+              <Image src="/demo/evidence-layer-thumbnail.png" alt="The evidence layer for autonomous systems" fill sizes="(min-width: 1024px) 1024px, 100vw" className="object-cover transition duration-300 group-hover:scale-[1.01]" />
+              <span className="absolute inset-0 bg-black/10 transition group-hover:bg-black/20" aria-hidden="true" />
+              <span className="absolute bottom-4 right-4 bg-black/80 px-2 py-1 font-mono text-[10px] tracking-widest text-[#fff]">05:58</span>
+            </div>
+          </Link>
+          <div className="mt-6 flex flex-col justify-between gap-5 md:flex-row md:items-end">
+            <div className="max-w-3xl"><p className="evidence-kicker">Investor &amp; partner demonstration</p><h2 id="demo-heading" className="evidence-section-title mt-4">See the full system in six minutes.</h2><p className="evidence-copy mt-4">A bounded tour of governed knowledge, context integrity, agent control, machine commerce, and the evidence already produced through independent integrations.</p></div>
+            <Link href="/demo" className="evidence-action evidence-action--secondary shrink-0">Watch the demonstration ↗</Link>
+          </div>
+        </section>
 
         <section className="evidence-section" aria-labelledby="decisions-heading">
           <p className="evidence-kicker">One governance path</p>
