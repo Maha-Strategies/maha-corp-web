@@ -73,7 +73,7 @@ test('review invitations are pilot-bound, expiring, hashed credentials', () => {
   const dto = privateEpistemicReviewInvitationDto(credential.invitation, null)
   assert.equal('tokenSha256' in dto, false)
   assert.equal('invitedByFingerprint' in dto, false)
-  assert.equal(dto.status, 'active')
+  assert.equal(epistemicReviewInvitationStatus(credential.invitation, null, NOW), 'active')
 
   assert.throws(() => parseEpistemicReviewInvitationRequest({ ...invitationRequest(), recordId: 'urn:maha:record:not-in-pilot' }, NOW), /outside the bounded Phase 4 pilot/)
   assert.throws(() => parseEpistemicReviewInvitationRequest({ ...invitationRequest(), expiresAt: '2026-10-24T10:00:00.000Z' }, NOW), /between one hour and 30 days/)
