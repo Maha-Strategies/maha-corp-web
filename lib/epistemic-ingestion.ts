@@ -14,6 +14,8 @@ import {
   MCP_PRIVATE_CANARY_RECORD_ID,
 } from './mcp-private-canary-release.ts'
 import { SOURCE_OVERRIDE_REVISION_INSPECTION_ATTESTATIONS } from './source-override-revision-ingestion-records.ts'
+import { BATCH_11_REVISION_AUDITS } from './batch-11-revision-canary.ts'
+import { BATCH_11_MIXED_LINEAGE_REHEARSAL_ADAPTER } from './batch-11-ingestion-adapter.ts'
 import substantialScaleReviewManifest from '../content/substantial-pages/release-scale-review.json' with { type: 'json' }
 
 const SUBSTANTIAL_SCALE_INGESTION_ATTESTATIONS = substantialScaleReviewManifest.records
@@ -23,7 +25,7 @@ export const INGESTION_ALIGNMENT_VERSION = 'maha-ingestion-alignment-gate/1.0' a
 
 export interface IngestionAlignmentDecision {
   evaluatedAgainst: typeof INGESTION_ALIGNMENT_VERSION
-  contentInspectionState: 'required-uninspected' | 'internally-inspected-synthetic' | 'internally-inspected-source-override' | 'internally-inspected-substantial-scale'
+  contentInspectionState: 'required-uninspected' | 'internally-inspected-synthetic' | 'internally-inspected-source-override' | 'internally-inspected-substantial-scale' | 'internally-inspected-batch-11-revision'
   explanatoryEligible: boolean
   canonicalEligible: boolean
   blockerCodes: string[]
@@ -88,7 +90,9 @@ export function parseEpistemicIngestionRequest(value: unknown): EpistemicIngesti
 
 export function buildEpistemicIngestionBatch(input: EpistemicIngestionRequest, ingestedAt = new Date()): EpistemicIngestionBatch {
   if (!Number.isFinite(ingestedAt.getTime())) throw new Error('ingestedAt must be valid.')
-  const adapter = getLegacyEpistemicAdapter(input.adapterId)
+  const adapter = input.adapterId === 'batch-11-mixed-lineage-rehearsal'
+    ? BATCH_11_MIXED_LINEAGE_REHEARSAL_ADAPTER
+    : getLegacyEpistemicAdapter(input.adapterId)
   if (!adapter) throw new Error('adapterId is unsupported.')
   const batchId = `epibatch_${randomUUID().replaceAll('-', '')}`
   const records = adapter.adapt().map((candidate): EpistemicIngestionRecord => {
@@ -119,7 +123,16 @@ export function buildEpistemicIngestionBatch(input: EpistemicIngestionRequest, i
         && packet.sourceIds.every((sourceId) => candidate.record.sources.some((candidateSource) => candidateSource.id === sourceId)),
       )
       : undefined
-    const contentInspectionAttested = syntheticInspectionAttested || Boolean(sourceOverrideAttestation) || Boolean(substantialScaleAttestation)
+    const batch11Attestation = input.adapterId === 'batch-11-mixed-lineage-rehearsal'
+      ? BATCH_11_REVISION_AUDITS.find((audit) =>
+        audit.recordId === candidate.record.id
+        && audit.revisedRecordRevisionSha256 === candidate.reviewTargetSha256
+        && audit.exactLocator === source?.exactLocator
+        && audit.outcome === 'alignment-clear-ready-for-revision-scoped-review'
+        && audit.checks.length === 8,
+      )
+      : undefined
+    const contentInspectionAttested = syntheticInspectionAttested || Boolean(sourceOverrideAttestation) || Boolean(substantialScaleAttestation) || Boolean(batch11Attestation)
     const blockerCodes = contentInspectionAttested
       ? []
       : candidate.record.sources.length
@@ -133,6 +146,8 @@ export function buildEpistemicIngestionBatch(input: EpistemicIngestionRequest, i
           ? 'internally-inspected-source-override'
           : substantialScaleAttestation
             ? 'internally-inspected-substantial-scale'
+            : batch11Attestation
+              ? 'internally-inspected-batch-11-revision'
           : 'required-uninspected',
       explanatoryEligible: contentInspectionAttested,
       canonicalEligible: contentInspectionAttested,
@@ -143,6 +158,8 @@ export function buildEpistemicIngestionBatch(input: EpistemicIngestionRequest, i
           ? { inspectionAttestationSha256: sourceOverrideAttestation.attestationSha256 }
           : substantialScaleAttestation
             ? { inspectionAttestationSha256: substantialScaleAttestation.packetDigest }
+            : batch11Attestation
+              ? { inspectionAttestationSha256: batch11Attestation.auditSha256 }
           : {}),
     }
     return {

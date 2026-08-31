@@ -232,7 +232,7 @@ export function buildEpistemicCanonicalRelease(
   input: CanonicalReleaseInput,
   target: FrozenReleaseTarget,
   reviews: readonly EpistemicExpertReview[],
-  previousActiveRelease: EpistemicCanonicalRelease | null,
+  previousActiveRelease: Pick<EpistemicCanonicalRelease, 'recordId' | 'releaseId' | 'targetSha256'> | null,
   releasedAt = new Date(),
 ): EpistemicCanonicalRelease {
   if (!Number.isFinite(releasedAt.getTime())) throw new Error('releasedAt must be valid.')

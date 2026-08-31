@@ -7,10 +7,10 @@ import {
 import { authorizeEpistemicOperations } from '@/lib/epistemic-review'
 import {
   createEpistemicPersistenceClient,
-  insertEpistemicIngestionBatch,
   listEpistemicIngestionBatches,
   listEpistemicReviewTargets,
 } from '@/lib/epistemic-store'
+import { insertEpistemicIngestionBatch } from '@/lib/epistemic-ingestion-store'
 
 export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'

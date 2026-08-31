@@ -115,16 +115,16 @@ test('Production access is an unauthenticated HTTPS GET of the public registry o
 // 6
 test('no Production write credential is referenced', () => {
   const referenced = [...AUTH_TEXT.matchAll(/secrets\.([A-Z_]+)/g)].map((match) => match[1])
-  const established = [
+  const previewOnly = [
     'SUPABASE_ACCESS_TOKEN',
     'SUPABASE_PROJECT_REF',
-    'SUPABASE_DB_PASSWORD',
     'EPISTEMIC_OPERATIONS_TOKEN',
     'EPISTEMIC_RELEASE_AUTHORITY_TOKEN',
     'VERCEL_AUTOMATION_BYPASS_SECRET',
+    'VERCEL_TOKEN',
   ]
-  for (const name of referenced) assert.ok(established.includes(name), `${name} is not an established repository secret name`)
-  for (const forbidden of ['PRODUCTION_RELEASE_HEALTH_TOKEN', 'PRODUCTION_CANARY_API_KEY', 'VERCEL_TOKEN', 'MAHA_PRODUCTION_READONLY_URL']) {
+  for (const name of referenced) assert.ok(previewOnly.includes(name), `${name} is not a bounded Preview-rehearsal credential`)
+  for (const forbidden of ['PRODUCTION_RELEASE_HEALTH_TOKEN', 'PRODUCTION_CANARY_API_KEY', 'SUPABASE_DB_PASSWORD', 'MAHA_PRODUCTION_READONLY_URL']) {
     assert.ok(!referenced.includes(forbidden), `${forbidden} must not reach a Preview rehearsal`)
   }
   for (const environment of ['environment: Production', 'environment: production-database', 'environment: production-canary']) {
@@ -193,9 +193,11 @@ test('every initial release always supersedes nothing', () => {
 
 // 11
 test('cleanup runs after every success or failure', () => {
-  const cleanup = AUTH_TEXT.slice(AUTH_TEXT.indexOf('Destroy any surviving ephemeral branch'))
+  const cleanup = AUTH_TEXT.slice(AUTH_TEXT.indexOf('Destroy any surviving Preview deployment and ephemeral branch'))
   assert.match(cleanup, /if: always\(\)/)
+  assert.match(cleanup, /vercel remove/)
   const engine = readFileSync(join(ROOT, 'lib/batch-11-rehearsal-phases.ts'), 'utf8')
+  assert.match(engine, /destroyBoundPreview/, 'the exact deployment must be destroyed before the branch')
   assert.match(engine, /\}\s*finally\s*\{[\s\S]*destroyEphemeralBranch/, 'destruction must be in a finally block')
 })
 

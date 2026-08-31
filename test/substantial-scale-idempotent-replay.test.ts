@@ -6,9 +6,9 @@ const ROOT = new URL('../', import.meta.url)
 
 test('substantial-scale persistence replays by request and immutable dataset revision', async () => {
   const migration = await readFile(new URL('supabase/migrations/20260830203000_substantial_scale_idempotent_replay.sql', ROOT), 'utf8')
-  const store = await readFile(new URL('lib/epistemic-store.ts', ROOT), 'utf8')
+  const ingestionStore = await readFile(new URL('lib/epistemic-ingestion-store.ts', ROOT), 'utf8')
 
-  assert.match(store, /record_substantial_scale_release_targets_v2/)
+  assert.match(ingestionStore, /record_substantial_scale_release_targets_v2/)
   assert.match(migration, /where idempotency_hash = p_idempotency_hash/)
   assert.match(migration, /v_existing\.source_dataset_sha256 <> p_batch->>'sourceDatasetSha256'/)
   assert.match(migration, /'idempotentReplay', true/)

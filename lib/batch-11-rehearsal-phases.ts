@@ -52,8 +52,8 @@ export type PhaseName =
 
 export const PHASE_ORDER: readonly PhaseName[] = [
   'provision-ephemeral-branch',
-  'import-prior-lineages',
   'apply-migrations',
+  'import-prior-lineages',
   'ingest-revisions-and-decisions',
   'issue-releases',
   'verify-transitions',
@@ -110,6 +110,10 @@ export type RehearsalRefusal =
   | 'initial-supersedes-something'
   | 'secret-shaped-text-in-evidence'
   | 'private-corpus-in-served-bundle'
+  | 'preview-credential-invalid'
+  | 'reviewed-commit-mismatch'
+  | 'preview-not-bound'
+  | 'preview-not-destroyed'
   | 'branch-not-destroyed'
 
 export class RehearsalRefused extends Error {
@@ -349,6 +353,21 @@ export interface EphemeralBranch {
   schemaOnly: boolean
 }
 
+/**
+ * The isolated application deployment bound to one ephemeral database branch.
+ *
+ * Neither the branch service credential nor any release credential belongs in
+ * this descriptor. The driver keeps those in process memory and returns only
+ * non-secret identifiers needed to prove and clean up the binding.
+ */
+export interface BoundPreview {
+  deploymentId: string
+  origin: string
+  branchId: string
+  reviewedCommit: string
+  privateAccessVerified: boolean
+}
+
 export interface ReleaseRequest {
   recordId: string
   targetSha256: string
@@ -383,6 +402,8 @@ export interface RehearsalDriver {
   importLineages(branch: EphemeralBranch, lineages: readonly ImportedLineage[]): Promise<void>
 
   applyMigrations(branch: EphemeralBranch, migrations: readonly string[]): Promise<string[]>
+  bindPreview(branch: EphemeralBranch): Promise<BoundPreview>
+  destroyBoundPreview(deploymentId: string): Promise<void>
 
   ingest(idempotency: string): Promise<{ decisionsRecorded: number }>
   issueRelease(request: ReleaseRequest): Promise<ReleaseResult>
@@ -398,6 +419,7 @@ export interface RehearsalOutcome {
   releasesIssued: number
   replayedReleases: number
   productionWritesPerformed: 0
+  previewDestroyed: boolean
   branchDestroyed: boolean
   evidenceDigest: string
 }
@@ -451,20 +473,43 @@ export async function runRehearsal(
 
   let releasesIssued = 0
   let replayedReleases = 0
+  let preview: BoundPreview | null = null
+  let previewDestroyed = false
   let branchDestroyed = false
 
   try {
-    // Phase 2.
+    // Phase 2. The dedicated schema must exist before lineage witnesses can be
+    // inserted into an otherwise empty schema-only branch.
+    const applied = await driver.applyMigrations(branch, REQUIRED_MIGRATIONS)
+    assertMigrationsAllowed(applied)
+    preview = await driver.bindPreview(branch)
+    if (
+      preview.branchId !== branch.branchId
+      || preview.origin.includes('mahastrategies.com')
+      || !preview.origin.startsWith('https://')
+      || !preview.origin.endsWith('.vercel.app')
+      || !preview.privateAccessVerified
+      || !/^[0-9a-f]{40}$/.test(preview.reviewedCommit)
+    ) {
+      refuse(
+        'preview-not-bound',
+        'apply-migrations',
+        'The isolated application deployment is not privately bound to this branch and the exact reviewed commit.',
+      )
+    }
+    record(
+      'apply-migrations',
+      'executed',
+      `Applied ${applied.length} required migration(s), then bound one private Vercel Preview of the exact reviewed commit to that branch.`,
+      applied.length + 1,
+    )
+
+    // Phase 3.
     assertProductionReadOnly(driver.productionAccess())
     const lineages = await driver.readProductionLineages()
     assertImportAllowed(lineages)
     await driver.importLineages(branch, lineages)
-    record('import-prior-lineages', 'executed', `Imported ${lineages.length} prior release lineages over a credential-free public HTTPS GET.`, lineages.length)
-
-    // Phase 3.
-    const applied = await driver.applyMigrations(branch, REQUIRED_MIGRATIONS)
-    assertMigrationsAllowed(applied)
-    record('apply-migrations', 'executed', `Applied ${applied.length} required migration(s) and no others.`, applied.length)
+    record('import-prior-lineages', 'executed', `Imported ${lineages.length} exact external predecessor witnesses over a credential-free public HTTPS GET. No predecessor release snapshot was reconstructed.`, lineages.length)
 
     // Phase 4.
     const cohortDigest = rehearsalEvidenceDigest(gates.map((gate) => ({ recordId: gate.recordId, targetSha256: gate.proposedTargetSha256 })))
@@ -507,11 +552,32 @@ export async function runRehearsal(
     record('verify-transitions', 'executed', `Verified ${observed.length} transitions independently: ${IMPORT_ALLOWLIST.length} superseding with the predecessor retained and marked superseded, ${observed.length - IMPORT_ALLOWLIST.length} initial releases superseding nothing.`, 0)
   } finally {
     // Phase 7. Runs whether or not the phases above succeeded.
-    await driver.destroyEphemeralBranch(branch.branchId)
-    branchDestroyed = true
-    record('destroy-ephemeral-branch', 'executed', 'Destroyed the ephemeral branch. No temporary credential outlives the run.', 1)
+    let previewCleanupError: unknown = null
+    try {
+      if (preview) {
+        await driver.destroyBoundPreview(preview.deploymentId)
+        previewDestroyed = true
+      }
+    } catch (error) {
+      previewCleanupError = error
+    }
+    try {
+      await driver.destroyEphemeralBranch(branch.branchId)
+      branchDestroyed = true
+    } finally {
+      record(
+        'destroy-ephemeral-branch',
+        'executed',
+        'Destroyed the branch-bound Vercel Preview and the ephemeral database branch. No temporary credential outlives the run.',
+        Number(previewDestroyed) + Number(branchDestroyed),
+      )
+    }
+    if (previewCleanupError) throw previewCleanupError
   }
 
+  if (!previewDestroyed) {
+    refuse('preview-not-destroyed', 'destroy-ephemeral-branch', 'The branch-bound Vercel Preview was not destroyed.')
+  }
   if (!branchDestroyed) {
     refuse('branch-not-destroyed', 'destroy-ephemeral-branch', 'The ephemeral branch was not destroyed.')
   }
@@ -523,6 +589,7 @@ export async function runRehearsal(
     releasesIssued,
     replayedReleases,
     productionWritesPerformed: 0,
+    previewDestroyed,
     branchDestroyed,
     evidenceDigest: rehearsalEvidenceDigest(phases),
   }

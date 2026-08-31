@@ -5,6 +5,7 @@ import { BATCH_11_DECISIONS, type Batch11Decision } from './frontier-alignment-b
 import { ALIGNMENT_BATCH_11_PACKETS, type Batch11Packet } from './frontier-alignment-batch-11.ts'
 import { FRONTIER_DOMAIN_GRAPH_RECORDS } from './frontier-domain-graphs.ts'
 import { epistemicRecordPath, epistemicReviewTargetHash } from './epistemic-publication.ts'
+import { EXPERT_REVIEW_CRITERIA, type ExpertReviewInput } from './epistemic-review.ts'
 import type { EpistemicRecord, EpistemicSource, ExpertReviewScope } from './epistemic-schema.ts'
 import { SUBSTANTIAL_PUBLICATION_QUEUE } from './substantial-publication-queue.ts'
 
@@ -168,6 +169,7 @@ export function buildBatch11Revision(recordId: CanaryRecordId): EpistemicRecord 
     claims: [
       {
         ...claim,
+        sourceIds: [source.id],
         // The claim form is unchanged; what moves is the evidence behind it.
         scope: `Limited to ${source.exactLocator} in "${source.title}". ${scope.supports}`,
         // The schema distinguishes quantitative from qualitative uncertainty,
@@ -312,6 +314,59 @@ export const BATCH_11_SCOPED_DECISIONS: readonly Batch11ScopedDecision[] = BATCH
     return { ...base, decisionSha256: sha(base) }
   }),
 )
+
+const BATCH_11_REVIEWER_DOMAINS = [...new Set(BATCH_11_REVISED_RECORDS.map((record) => record.domainSlug))].sort()
+
+/**
+ * Route-valid internal-review inputs for the five exact revised targets.
+ *
+ * The append-only Batch 11 decision ledger above is the editorial source of
+ * truth. These inputs translate that ledger into the existing persisted review
+ * schema without changing its reviewer tier or implying external review.
+ */
+export function batch11RevisionReviewInputs(): readonly ExpertReviewInput[] {
+  return BATCH_11_REVISED_RECORDS.flatMap((record) => {
+    const audit = BATCH_11_REVISION_AUDITS.find((entry) => entry.recordId === record.id)
+    if (!audit) throw new Error(`${record.id}: exact-revision audit is missing.`)
+    const decisions = BATCH_11_SCOPED_DECISIONS.filter((entry) => entry.recordId === record.id)
+    if (decisions.length !== REVIEW_SCOPES.length) throw new Error(`${record.id}: four scoped decisions are required.`)
+
+    return REVIEW_SCOPES.map((scope) => {
+      const decision = decisions.find((entry) => entry.scope === scope)
+      if (!decision || decision.targetSha256 !== audit.revisedRecordRevisionSha256 || decision.auditSha256 !== audit.auditSha256) {
+        throw new Error(`${record.id}: ${scope} decision is not bound to the exact audit and revision.`)
+      }
+      const findings = audit.checks.map((check) => `${check.dimension}: ${check.finding}`).join(' ')
+      return {
+        recordId: record.id,
+        domainSlug: record.domainSlug,
+        targetSha256: audit.revisedRecordRevisionSha256,
+        scope,
+        reviewer: {
+          reviewerId: 'expert_maha-internal-batch-11',
+          profileVersion: 1,
+          displayName: 'Maha Batch 11 internal revision review',
+          qualifications: ['Explicit source identity, version, locator, rights, scope, uncertainty, prior-binding and prohibited-inference checklist review.'],
+          affiliation: 'Maha Strategies',
+          identityUrl: null,
+          domains: BATCH_11_REVIEWER_DOMAINS,
+          conflicts: ['Maha Strategies authors, reviews and may release these records; this internal review is not independent.'],
+          reviewerKind: 'internal-editorial' as const,
+          reviewMethod: 'Exact-revision internal checklist bound to the immutable Batch 11 remediation packet and eight-dimension revision audit. No external endorsement or independent reproduction is claimed.',
+        },
+        criteria: EXPERT_REVIEW_CRITERIA[scope].map((criterion) => ({
+          criterionId: criterion.id,
+          verdict: 'satisfied' as const,
+          rationale: `${criterion.label} was checked on exact target ${audit.revisedRecordRevisionSha256} under audit ${audit.auditSha256}. ${findings}`,
+        })),
+        disagreements: ['This is an internal editorial decision. External expert review and independent reproduction were not performed.'],
+        rationale: `The ${scope} approval is limited to exact target ${audit.revisedRecordRevisionSha256} and audit ${audit.auditSha256}. ${findings}`,
+        supersedesReviewId: null,
+        idempotencyKey: `batch-11-revision:${decision.decisionSha256}`,
+      }
+    })
+  })
+}
 
 export interface Batch11ReadinessResult {
   recordId: string
