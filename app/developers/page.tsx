@@ -49,7 +49,7 @@ export default function DevelopersPage() {
           <h1 className="evidence-title">Build governed AI systems on an inspectable control layer.</h1>
           <p className="evidence-lede mt-7">One entry point for Maha&apos;s production APIs, SDKs, operational boundaries, benchmarks, and security model.</p>
           <p className="evidence-copy mt-5">Use only the capability your workflow needs: govern agent tools, compile bounded context, evaluate evidence retention, run bounded optimization jobs, or preflight consequential documents.</p>
-          <div className="mt-9 flex flex-wrap gap-3"><Link href="/docs" className="evidence-action evidence-action--primary">Read API documentation ↗</Link><Link href="/dashboard" className="evidence-action evidence-action--secondary">Open developer dashboard ↗</Link></div>
+          <div className="mt-9 flex flex-wrap gap-3"><Link href="/docs" className="evidence-action evidence-action--primary">Read API documentation ↗</Link><Link href="/dashboard" className="evidence-action evidence-action--secondary">Open developer dashboard ↗</Link><Link href="/demo" className="evidence-action evidence-action--secondary">Watch the system demonstration ↗</Link></div>
         </header>
 
         <section className="evidence-section" aria-labelledby="production-capabilities">

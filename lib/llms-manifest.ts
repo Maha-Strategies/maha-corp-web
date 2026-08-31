@@ -79,6 +79,7 @@ export function buildLlmsManifest(
       : ['- No quality-gated substantial references are active in the supplied canonical release set.']),
     '',
     '## Automation and MCP',
+    '- Investor and partner demonstration: https://www.mahastrategies.com/demo',
     '- Deterministic public Evidence Preflight: https://www.mahastrategies.com/tools/evidence-preflight',
     '- Evidence Preflight API: https://www.mahastrategies.com/api/evidence-preflight',
     '  - Accepts 1-3 caller-declared claims with DOI or public HTTPS metadata, optional authorized excerpts, exact locators, and rights/access declarations. It performs structural triage only: no source is fetched or independently verified, claim content is not retained, and the proposed $250 Evidence Dossier purchase remains disabled.',
