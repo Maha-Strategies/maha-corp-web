@@ -507,6 +507,19 @@ test('a failure after binding still destroys the Preview and ephemeral branch', 
 
 const WORKFLOW = readFileSync(resolve(ROOT, '.github/workflows/preview-batch-11-remote-rehearsal.yml'), 'utf8')
 const SCRIPT = readFileSync(resolve(ROOT, 'scripts/run-batch-11-remote-rehearsal.ts'), 'utf8')
+
+test('branch readiness treats an initial 404 as asynchronous propagation, not creation failure', () => {
+  assert.match(SCRIPT, /const response = await managementResponse\(`\/v1\/branches\/\$\{branchId\}`\)/)
+  assert.match(SCRIPT, /if \(response\.status === 404\) \{[\s\S]*?await wait\(3_000\)[\s\S]*?continue/)
+})
+
+test('the branch POST is counted before readiness polling can fail', () => {
+  const branchId = SCRIPT.indexOf("const branchId = String(created.id ?? created.branch_id ?? '')")
+  const counted = SCRIPT.indexOf('lifecycleState.remoteOperationsPerformed += 1', branchId)
+  const readiness = SCRIPT.indexOf('const detail = await readyBranchDetail(branchId)', branchId)
+  assert.ok(branchId >= 0 && counted > branchId && readiness > counted,
+    'the branch mutation and exact handle must be recorded before readiness polling')
+})
 const BINDING = readFileSync(resolve(ROOT, 'lib/batch-11-preview-binding.ts'), 'utf8')
 const POOLER = readFileSync(resolve(ROOT, 'lib/batch-11-supabase-pooler.ts'), 'utf8')
 
