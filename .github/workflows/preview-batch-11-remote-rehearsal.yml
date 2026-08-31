@@ -1,0 +1,165 @@
+name: Batch 11 remote Preview rehearsal
+
+# Manual only, and locked three ways.
+#
+# This workflow is the one that creates an ephemeral Preview branch and applies
+# migrations. None of that should ever be reachable from a push, so there is no
+# push, pull_request or schedule trigger at all - not a filtered one.
+#
+# Every credential below is an existing protected secret under its established
+# repository name. This workflow introduces no new credential, and it has no
+# Production write credential of any kind: the only Production access in the
+# run is an unauthenticated GET of the public release registry.
+
+on:
+  workflow_dispatch:
+    inputs:
+      operation:
+        description: 'Exact operation name. Must be batch-11-mixed-lineage-preview-rehearsal.'
+        required: true
+        default: ''
+      confirmation:
+        description: 'Exact confirmation phrase. Must be rehearse-batch-11-mixed-lineage-in-preview-only.'
+        required: true
+        default: ''
+      reviewed_commit:
+        description: 'The exact reviewed commit SHA this run is authorized for.'
+        required: true
+        default: ''
+      preview_origin:
+        description: 'HTTPS Vercel Preview origin to rehearse against, e.g. https://example.vercel.app'
+        required: true
+        default: ''
+
+permissions:
+  contents: read
+
+concurrency:
+  group: batch-11-remote-rehearsal
+  cancel-in-progress: false
+
+jobs:
+  rehearse:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    # The protected environment is the human gate. Its reviewers approve the run
+    # before any step executes, and its secrets are scoped to Preview only.
+    environment: batch-11-preview-rehearsal
+    env:
+      MAHA_B11_PREVIEW_ORIGIN: ${{ inputs.preview_origin }}
+      MAHA_B11_EVIDENCE_PATH: ${{ github.workspace }}/batch-11-rehearsal/evidence.json
+      # Branch management. Established name; the rehearsal refuses before any
+      # mutation if this is not bound to the environment.
+      SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}
+      SUPABASE_PROJECT_REF: ${{ secrets.SUPABASE_PROJECT_REF }}
+      SUPABASE_DB_PASSWORD: ${{ secrets.SUPABASE_DB_PASSWORD }}
+      EPISTEMIC_OPERATIONS_TOKEN: ${{ secrets.EPISTEMIC_OPERATIONS_TOKEN }}
+      EPISTEMIC_RELEASE_AUTHORITY_TOKEN: ${{ secrets.EPISTEMIC_RELEASE_AUTHORITY_TOKEN }}
+      VERCEL_AUTOMATION_BYPASS_SECRET: ${{ secrets.VERCEL_AUTOMATION_BYPASS_SECRET }}
+    steps:
+      - name: Enforce the Preview boundary before anything is checked out
+        run: |
+          set -euo pipefail
+          case "$MAHA_B11_PREVIEW_ORIGIN" in
+            https://*.vercel.app|https://*.vercel.app/) ;;
+            *) echo '::error::The rehearsal target must be an HTTPS Vercel Preview origin.'; exit 1 ;;
+          esac
+          case "$MAHA_B11_PREVIEW_ORIGIN" in
+            *mahastrategies.com*) echo '::error::Production hosts are forbidden.'; exit 1 ;;
+          esac
+          for name in SUPABASE_ACCESS_TOKEN SUPABASE_PROJECT_REF SUPABASE_DB_PASSWORD EPISTEMIC_OPERATIONS_TOKEN EPISTEMIC_RELEASE_AUTHORITY_TOKEN; do
+            [ -n "${!name:-}" ] || { echo "::error::$name is not bound to this environment. The rehearsal cannot provision or destroy the ephemeral branch without it."; exit 1; }
+          done
+          [ "$EPISTEMIC_OPERATIONS_TOKEN" != "$EPISTEMIC_RELEASE_AUTHORITY_TOKEN" ] || { echo '::error::Operations and release-authority tokens must be distinct.'; exit 1; }
+          # The Production project may never be the parent of a rehearsal branch.
+          [ "$SUPABASE_PROJECT_REF" != 'uhwuullakihgszxhiygz' ] || { echo '::error::The Production Supabase project is forbidden.'; exit 1; }
+
+      - uses: actions/checkout@v7
+        with:
+          # Pinned to the SHA the operator typed, so the run cannot drift onto a
+          # branch tip that moved after review.
+          ref: ${{ inputs.reviewed_commit }}
+
+      - name: Refuse a commit that is not the reviewed one
+        env:
+          REVIEWED: ${{ inputs.reviewed_commit }}
+        run: |
+          set -euo pipefail
+          actual="$(git rev-parse HEAD)"
+          [ "$actual" = "$REVIEWED" ] || { echo "::error::Checked out $actual but the authorized commit is $REVIEWED."; exit 1; }
+          echo "Running from the exact reviewed commit."
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+
+      # Always runs, and performs nothing remote. Proves the cohort still gates
+      # cleanly from this exact commit before anything else is considered.
+      - name: Dry-run gate and order-independence proof
+        run: node --experimental-strip-types scripts/run-batch-11-remote-rehearsal.ts
+
+      - name: Adversarial phase tests
+        run: node --test --experimental-strip-types test/batch-11-remote-rehearsal.test.ts test/batch-11-rehearsal-phases.test.ts
+
+      - name: Remote rehearsal
+        env:
+          MAHA_B11_REMOTE_AUTHORIZED: '1'
+          MAHA_B11_OPERATION: ${{ inputs.operation }}
+          MAHA_B11_CONFIRMATION: ${{ inputs.confirmation }}
+        run: node --experimental-strip-types scripts/run-batch-11-remote-rehearsal.ts
+
+      - name: Verify the sanitized evidence boundary
+        run: |
+          set -euo pipefail
+          jq -e '
+            .mode == "executed"
+            and .productionWritesPerformed == 0
+            and .previewBranchCreated == true
+            and .previewBranchDestroyed == true
+            and .productionAccess.kind == "public-https-get"
+            and .productionAccess.credentialPresented == false
+            and (.phases | length) == 7
+            and ([.phases[] | select(.status == "executed")] | length) == 7
+            and .fingerprint.cohortSize == 5
+            and .fingerprint.supersedingCount == 4
+            and .fingerprint.initialCount == 1
+            and .fingerprint.orderIndependent == true
+            and .fingerprint.ordersProvenIndependent == 120
+          ' "$MAHA_B11_EVIDENCE_PATH" >/dev/null
+          # A last, independent scan of the artifact that leaves the runner.
+          ! grep -qEi 'bearer [A-Za-z0-9._~+/-]{16,}|sbp_[A-Za-z0-9]{16,}|postgres(ql)?://[^ "]*:[^ "@]+@' "$MAHA_B11_EVIDENCE_PATH"
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: batch-11-rehearsal-evidence
+          path: batch-11-rehearsal/evidence.json
+          if-no-files-found: ignore
+
+      # Runs even when the rehearsal fails, so an interrupted run cannot leave
+      # an ephemeral branch behind. The script destroys its own branch in a
+      # finally block; this is the backstop for a runner that died mid-phase.
+      - name: Destroy any surviving ephemeral branch
+        if: always()
+        run: |
+          set -euo pipefail
+          [ -n "${SUPABASE_ACCESS_TOKEN:-}" ] || { echo 'No branch-management credential; nothing could have been created.'; exit 0; }
+          # The token is read from the environment inside node, never passed as
+          # a command argument where it would appear in the process list.
+          node --input-type=module -e '
+            const token = process.env.SUPABASE_ACCESS_TOKEN
+            const ref = process.env.SUPABASE_PROJECT_REF
+            const marker = `batch-11-mixed-lineage-rehearsal-${process.env.GITHUB_RUN_ID}`
+            const headers = { authorization: `Bearer ${token}` }
+            const listed = await fetch(`https://api.supabase.com/v1/projects/${ref}/branches`, { headers })
+            if (!listed.ok) { console.log(`Branch listing returned ${listed.status}; nothing to clean up.`); process.exit(0) }
+            const branches = await listed.json()
+            const mine = (Array.isArray(branches) ? branches : []).filter((b) => String(b.name ?? "").includes(marker))
+            for (const branch of mine) {
+              const gone = await fetch(`https://api.supabase.com/v1/branches/${branch.id}`, { method: "DELETE", headers })
+              console.log(`Destroyed surviving branch ${branch.id}: ${gone.status}`)
+            }
+            console.log(`Cleanup complete. ${mine.length} surviving branch(es) destroyed.`)
+          '
