@@ -92,19 +92,34 @@ credential value appears in this repository, and tests assert that boundary.
 
 ### Migration scope
 
-Two dedicated ephemeral-branch migrations run in order. The immutable plan
-migration, `supabase/migrations/20260831120000_batch_11_mixed_lineage_rehearsal.sql`,
-creates the witness and observation tables. Its forward execution migration,
-`supabase/migrations/20260831123000_batch_11_mixed_lineage_rehearsal_execution.sql`,
-narrows the witness constraints to two exact public tuples, admits one exact
-five-record adapter, installs dedicated ingestion and release RPCs, and relaxes
-the local supersession foreign key so a new Preview release can name an
-external public predecessor witness. Those changes are intentionally allowed
-only inside the disposable schema-only branch; Production receives neither
-migration from this workflow. No row outside the five targets and two
-predecessor witnesses is written.
-Production is never a target of the rehearsal script — its only Production
-access is an unauthenticated HTTPS GET of the public release registry.
+Six migrations, applied in exactly this order:
+
+1. `20260824050000_epistemic_ingestion_and_expert_review.sql`
+2. `20260824073000_epistemic_source_completion_queue.sql`
+3. `20260824133000_epistemic_controlled_reingestion.sql`
+4. `20260824190000_epistemic_canonical_release_control.sql`
+5. `20260831120000_batch_11_mixed_lineage_rehearsal.sql`
+6. `20260831123000_batch_11_mixed_lineage_rehearsal_execution.sql`
+
+The first four are prerequisites, not extras. An earlier version of this runbook
+described the two Batch 11 migrations as sufficient, on the assumption that a
+Preview branch arrives carrying the epistemic tables. It does not. A schema-only
+branch is genuinely empty, and the first protected rehearsal failed applying
+migration 5 because `public.epistemic_ingestion_batches` did not exist.
+
+The four are derived rather than chosen: the Batch 11 migrations alter or
+reference exactly four relations they do not create, and these are the
+migrations that create them and their transitive dependencies. A test re-derives
+that closure from the SQL, so the list stays correct if a migration starts
+referencing something new.
+
+Order is part of the allowlist. Each entry depends on relations the earlier ones
+create, so a reordered or duplicated sequence is refused before anything is
+applied. Every `INSERT` in the four prerequisites sits inside a function body:
+the bootstrap installs schema and RPCs and seeds no rows. No existing table is
+altered outside this set, no row outside the five records is touched, and
+Production is never a target — its only access is an unauthenticated HTTPS GET
+of the public release registry.
 
 ### Cleanup
 

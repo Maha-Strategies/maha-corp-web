@@ -71,12 +71,31 @@ export interface PhaseRecord {
 }
 
 /**
- * The migrations this lifecycle requires, and the only ones it may apply.
+ * The migrations this lifecycle requires, in the order they must be applied.
  *
- * Named exactly so a run cannot quietly pick up whatever else has landed in
- * supabase/migrations since review.
+ * The two Batch 11 migrations were once listed alone, on the assumption that a
+ * Preview branch would already carry the epistemic tables. It does not: a
+ * schema-only branch is genuinely empty, and the first protected rehearsal
+ * failed applying the Batch 11 migration because
+ * `public.epistemic_ingestion_batches` did not exist.
+ *
+ * The four prerequisites are derived from the Batch 11 migrations' own
+ * references rather than chosen: those migrations alter or reference exactly
+ * four relations they do not create - epistemic_ingestion_batches,
+ * epistemic_ingestion_records, epistemic_expert_review_decisions and
+ * epistemic_canonical_releases - and these are the migrations that create them
+ * and their transitive dependencies. Every INSERT in them sits inside a
+ * function body, so the set is schema and RPCs with no seeded rows.
+ *
+ * Order is part of the allowlist, not a convention: each entry depends on
+ * relations the earlier ones create. Named exactly so a run cannot quietly pick
+ * up whatever else has landed in supabase/migrations since review.
  */
 export const REQUIRED_MIGRATIONS: readonly string[] = [
+  '20260824050000_epistemic_ingestion_and_expert_review.sql',
+  '20260824073000_epistemic_source_completion_queue.sql',
+  '20260824133000_epistemic_controlled_reingestion.sql',
+  '20260824190000_epistemic_canonical_release_control.sql',
   '20260831120000_batch_11_mixed_lineage_rehearsal.sql',
   '20260831123000_batch_11_mixed_lineage_rehearsal_execution.sql',
 ]
@@ -222,7 +241,14 @@ export function assertImportAllowed(imported: readonly ImportedLineage[]): void 
   }
 }
 
-/** Refuses a migration this lifecycle did not declare. */
+/**
+ * Refuses anything but the exact declared sequence.
+ *
+ * Membership alone is not enough here. These migrations build on each other, so
+ * an out-of-order application fails on a relation that does not exist yet, and
+ * a duplicate re-runs DDL that is not always idempotent. Both are refused
+ * before anything is applied rather than discovered halfway through.
+ */
 export function assertMigrationsAllowed(migrations: readonly string[]): void {
   const phase: PhaseName = 'apply-migrations'
   for (const migration of migrations) {
@@ -234,6 +260,15 @@ export function assertMigrationsAllowed(migrations: readonly string[]): void {
     if (!migrations.includes(required)) {
       refuse('migration-missing', phase, `${required} is required by this lifecycle but was not applied.`)
     }
+  }
+  const duplicated = migrations.filter((entry, index) => migrations.indexOf(entry) !== index)
+  if (duplicated.length > 0) {
+    refuse('migration-outside-allowlist', phase, `${[...new Set(duplicated)].join(', ')} appears more than once.`)
+  }
+  if (migrations.length !== REQUIRED_MIGRATIONS.length
+    || migrations.some((entry, index) => entry !== REQUIRED_MIGRATIONS[index])) {
+    refuse('migration-outside-allowlist', phase,
+      `Migrations must be applied in the declared order: ${REQUIRED_MIGRATIONS.join(' -> ')}.`)
   }
 }
 

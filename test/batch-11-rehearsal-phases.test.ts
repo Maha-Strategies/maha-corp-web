@@ -351,8 +351,13 @@ test('a required migration that was not applied is refused', () => {
   assert.equal(refusal.code, 'migration-missing')
 })
 
-test('the declared forward migration pair exists on disk in order', () => {
-  const [planMigration, executionMigration] = REQUIRED_MIGRATIONS.map((migration) =>
+test('the Batch 11 forward migrations are the terminal pair, and exist on disk', () => {
+  // Selected by name rather than by position: the allowlist now opens with four
+  // prerequisites, so the first two entries are no longer the Batch 11 pair.
+  const batch11 = REQUIRED_MIGRATIONS.filter((migration) => migration.includes('batch_11'))
+  assert.equal(batch11.length, 2)
+  assert.deepEqual(batch11, REQUIRED_MIGRATIONS.slice(-2), 'the Batch 11 migrations must run last')
+  const [planMigration, executionMigration] = batch11.map((migration) =>
     readFileSync(resolve(ROOT, 'supabase/migrations', migration), 'utf8'))
   assert.ok(planMigration.includes('batch_11_rehearsal_observations'))
   assert.ok(executionMigration.includes('record_batch_11_rehearsal_targets'))
