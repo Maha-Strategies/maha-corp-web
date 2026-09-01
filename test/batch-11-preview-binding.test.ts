@@ -136,3 +136,25 @@ test('the redactor removes exact values and leaves the diagnosis readable', asyn
   assert.match(said, /Error: bad token \[redacted\] for role \[redacted\]/)
   assert.ok(redact('x'.repeat(4000)).length <= 1200, 'a flood of output must be bounded')
 })
+
+/**
+ * A refused Preview call must say which refusal it was.
+ *
+ * The routes answer with an `error.code` that separates "no persistence
+ * client" from "a query threw" - the two failures that both surface as 503 and
+ * have entirely different causes. Throwing only the status discarded it, and
+ * recovering that distinction costs a whole protected run.
+ */
+test('a non-ok Preview response carries its redacted body into the refusal', () => {
+  const source = readFileSync(resolve(ROOT, 'scripts/run-batch-11-remote-rehearsal.ts'), 'utf8')
+
+  assert.ok(!/if \(!response\.ok\) throw new Error\(`\$\{init\.method \?\? 'GET'\} \$\{path\} returned \$\{response\.status\}\.`\)/.test(source),
+    'the status-only refusal must not come back')
+  assert.match(source, /Preview said: \$\{redactDeploymentSecrets\(text\)/)
+
+  // The body is redacted by the same function the deployment path uses, so a
+  // route that echoes a bound value cannot leak it through this path either.
+  const helper = source.slice(source.indexOf('async function preview('), source.indexOf('async function preview(') + 1200)
+  assert.match(helper, /redactDeploymentSecrets/)
+  assert.ok(!/throw new Error\([^)]*\$\{text\}/.test(helper), 'the raw body must never be thrown unredacted')
+})
