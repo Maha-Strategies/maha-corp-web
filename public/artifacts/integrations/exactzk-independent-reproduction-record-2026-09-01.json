@@ -1,0 +1,65 @@
+{
+  "artifactVersion": "1.0.0",
+  "recordedAt": "2026-09-01",
+  "integration": {
+    "name": "ExactZK MNIST MLP circuit-provenance reproduction",
+    "upstreamRepository": "https://github.com/achemperety/exactzk-mnistmlp-provenance-demo",
+    "bundleRevision": "54637f58522169deff89f03bfaa4bb765ff92eca",
+    "publicationCommit": "a2bc90d0a33a548fbcae09bb1756a4fc31286f4a",
+    "publishedFile": "https://github.com/achemperety/exactzk-mnistmlp-provenance-demo/blob/a2bc90d0a33a548fbcae09bb1756a4fc31286f4a/attestations/001-maha-strategies-2026-08-31.json",
+    "publishedRawFile": "https://raw.githubusercontent.com/achemperety/exactzk-mnistmlp-provenance-demo/a2bc90d0a33a548fbcae09bb1756a4fc31286f4a/attestations/001-maha-strategies-2026-08-31.json",
+    "state": "published"
+  },
+  "attestation": {
+    "profile": "exactzk-attestation-v1",
+    "localEvidenceFile": "artifacts/integrations/exactzk-independent-reproduction-attestation-001.json",
+    "signedFileSha256": "39ef9f94bec3adf3a85c955ca40381a48c7d20e75afa613a18e600e8bbb8d009",
+    "canonicalPayloadSha256": "978523dfd9d96b2d3a598d6f6db3389a0cb28b9a69d52171218f130b755af87f",
+    "issuedAt": "2026-09-01T08:30:37.448Z",
+    "did": "did:key:zQ3shMymYG2u2NQqbPH9xLLSzo2FT5iqDoyqUbvtX8nJ9FY9T",
+    "verificationMethod": "did:key:zQ3shMymYG2u2NQqbPH9xLLSzo2FT5iqDoyqUbvtX8nJ9FY9T#zQ3shMymYG2u2NQqbPH9xLLSzo2FT5iqDoyqUbvtX8nJ9FY9T",
+    "signatureProfile": {
+      "canonicalization": "RFC8785",
+      "serialization": "RFC7797 detached JWS with b64=false",
+      "algorithm": "ES256K",
+      "proofPurpose": "assertionMethod",
+      "domain": "exactzk.independent-reproduction-attestation.v1"
+    }
+  },
+  "reproduction": {
+    "ezklVersion": "23.0.5",
+    "verifyingKeySha256": "1ed847e127419bc1d7db2a22779f75284975bf1908b33a43486ca9070e4ef627",
+    "verifyingKeyKeccak256": "dd03fb0c69e96cc02cbcc6bed8ef51665f934c01cddaf2a855bd1c7fce94675f",
+    "matchesExpected": true,
+    "observedMemoryRequirement": "~7GB"
+  },
+  "verification": {
+    "upstreamMaintainerReportedIndependentVerification": {
+      "status": "passed",
+      "method": [
+        "Recomputed RFC 8785 canonicalization and obtained a byte-exact match.",
+        "Derived the public key directly from the did:key identifier.",
+        "Rebuilt the RFC 7797 signing input.",
+        "Verified the ES256K signature against the independently derived key."
+      ]
+    },
+    "mahaPublishedFileRetrieval": {
+      "retrievedAt": "2026-09-01",
+      "sha256Matched": true,
+      "byteIdenticalToSignedFile": true
+    },
+    "mahaSignatureReverification": {
+      "status": "passed",
+      "canonicalPayloadSha256": "978523dfd9d96b2d3a598d6f6db3389a0cb28b9a69d52171218f130b755af87f",
+      "signedFileSha256": "39ef9f94bec3adf3a85c955ca40381a48c7d20e75afa613a18e600e8bbb8d009"
+    }
+  },
+  "nonClaims": [
+    "This attestation is limited to independent reproduction of the circuit-provenance verifying-key digests at the identified bundle revision.",
+    "It does not validate the full escrow system.",
+    "It does not establish that the test SRS is suitable for production use.",
+    "It is not a security audit, correctness proof for application logic, commercial endorsement or certification."
+  ],
+  "claimBoundary": "This records the first published, cryptographically signed and independently verified reproduction in the upstream ExactZK bundle. The reproduced claim is limited to the identified MNIST MLP circuit-provenance verifying-key digests and the documented approximately 7GB memory observation."
+}
+
