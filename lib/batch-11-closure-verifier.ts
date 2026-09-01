@@ -4,7 +4,7 @@ import { canonicalJson } from './evidence-dossier/digest.ts'
 import { FINGERPRINT_PATTERN } from './batch-11-credential-provenance.ts'
 import {
   CREDENTIAL_IDENTITY_FIELDS,
-  TEMPORARY_REVOCABLE_SECRET_NAMES,
+  TEMPORARY_ENVIRONMENT_SECRET_NAMES,
   compareReleasesToContract,
   environmentSecretSlotFingerprint,
   runMarkerFor,
@@ -351,7 +351,7 @@ export function verifyBatch11Closure(
       if (!environment || !runMarker || !reviewedCommit) return null
       return environmentSecretSlotFingerprint({
         environment,
-        names: TEMPORARY_REVOCABLE_SECRET_NAMES,
+        names: TEMPORARY_ENVIRONMENT_SECRET_NAMES,
         runMarker,
         reviewedCommit,
       })

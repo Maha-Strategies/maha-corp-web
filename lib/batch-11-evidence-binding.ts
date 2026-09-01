@@ -22,31 +22,71 @@ import { BATCH_11_REVISION_AUDITS, BATCH_11_SCOPED_DECISIONS } from './batch-11-
 
 export const BOUND_EVIDENCE_SCHEMA = 'maha-batch-11-rehearsal-evidence/4.0' as const
 
-export const TEMPORARY_PREVIEW_SECRET_NAMES = [
-  'EPISTEMIC_OPERATIONS_TOKEN',
-  'EPISTEMIC_RELEASE_AUTHORITY_TOKEN',
-  'SUPABASE_ACCESS_TOKEN',
-  'SUPABASE_PROJECT_REF',
-  'VERCEL_AUTOMATION_BYPASS_SECRET',
-  'VERCEL_TOKEN',
-] as const
-
 /**
- * The five secrets a rehearsal is issued and must have revoked afterwards.
+ * The temporary GitHub environment bindings, and the persistent ones.
  *
- * Narrower than TEMPORARY_PREVIEW_SECRET_NAMES on purpose. That list is the set
- * of bindings teardown removes from the environment; this one is the set of
- * values whose revocation has to be independently observed. SUPABASE_PROJECT_REF
- * is not a credential, and VERCEL_TOKEN is a standing credential the runbook
- * preserves across runs - neither is revoked, so neither belongs here.
+ * These two lists are the whole lifecycle contract, and keeping them apart is
+ * load-bearing. Every temporary binding is provisioned for one rehearsal and
+ * must be gone afterwards; every persistent binding is Preview infrastructure
+ * that outlives the run and must still be there. Nothing is in both.
+ *
+ * The earlier arrangement had this wrong in both directions. It classified
+ * SUPABASE_PROJECT_REF and VERCEL_TOKEN as temporary, so the finalizer looked
+ * for them to be absent from an environment the runbook says to leave them in -
+ * a correct cleanup could never have been confirmed. And it omitted
+ * SUPABASE_ACCESS_TOKEN_SHA256 entirely, so the one binding that identifies
+ * which token a run was authorized for could survive unnoticed.
+ *
+ * "Deleted", not "revoked": SUPABASE_ACCESS_TOKEN_SHA256 holds a non-reversible
+ * fingerprint, and there is nothing there to revoke. Removing the binding is
+ * the whole of what cleanup owes it. Revocation is a separate question asked of
+ * the providers about the three credentials that actually authenticate, and
+ * lives in batch-11-revocation-evidence.
  */
-export const TEMPORARY_REVOCABLE_SECRET_NAMES = [
+export const TEMPORARY_ENVIRONMENT_SECRET_NAMES = [
   'EPISTEMIC_OPERATIONS_TOKEN',
   'EPISTEMIC_RELEASE_AUTHORITY_TOKEN',
   'SUPABASE_ACCESS_TOKEN',
   'SUPABASE_ACCESS_TOKEN_SHA256',
   'VERCEL_AUTOMATION_BYPASS_SECRET',
 ] as const
+export type TemporaryEnvironmentSecretName = (typeof TEMPORARY_ENVIRONMENT_SECRET_NAMES)[number]
+
+/**
+ * Preview infrastructure that survives every rehearsal.
+ *
+ * SUPABASE_PROJECT_REF is not a credential at all - it names the staging parent
+ * project - and VERCEL_TOKEN is a standing credential the runbook preserves
+ * across runs. Neither is issued per-run, so neither may enter a deletion set:
+ * a teardown that expected them gone would refuse the correct outcome.
+ */
+export const PERSISTENT_PREVIEW_BINDING_NAMES = [
+  'SUPABASE_PROJECT_REF',
+  'VERCEL_TOKEN',
+] as const
+export type PersistentPreviewBindingName = (typeof PERSISTENT_PREVIEW_BINDING_NAMES)[number]
+
+/**
+ * Refuses any deletion set that reaches for a persistent binding.
+ *
+ * Called wherever a name set is about to be treated as "must be absent". The
+ * two lists are disjoint by construction, so this only ever fires on a caller
+ * that assembled its own set - which is exactly the mistake being prevented.
+ */
+export function assertDeletableNames(names: readonly string[]): readonly string[] {
+  const persistent = names.filter((name) =>
+    (PERSISTENT_PREVIEW_BINDING_NAMES as readonly string[]).includes(name))
+  if (persistent.length > 0) {
+    throw new EvidenceBindingRefused('persistent-binding-in-teardown-set',
+      `${persistent.join(', ')}: persistent Preview infrastructure must survive cleanup and cannot be required absent.`)
+  }
+  const missing = TEMPORARY_ENVIRONMENT_SECRET_NAMES.filter((name) => !names.includes(name))
+  if (missing.length > 0) {
+    throw new EvidenceBindingRefused('temporary-binding-missing-from-teardown-set',
+      `${missing.join(', ')}: every temporary binding must be accounted for by cleanup.`)
+  }
+  return names
+}
 
 export const TEARDOWN_HANDLE_KINDS = [
   'supabase-branch',
@@ -88,9 +128,13 @@ export function teardownHandleDigests(handles: ExactTeardownHandles): TeardownHa
       workflowRunId: handles.workflowRunId,
       reviewedCommit: handles.reviewedCommit,
     }),
+    // Sorted, so the digest is a property of the set rather than of the order
+    // a caller happened to list it in. Checked first, so a handle that names a
+    // persistent binding refuses instead of producing a confident digest over
+    // a deletion set that should never have contained it.
     'github-environment-secret': sha256Canonical({
       environment: handles.githubEnvironmentSecrets.environment,
-      names: [...handles.githubEnvironmentSecrets.names].sort(),
+      names: [...assertDeletableNames(handles.githubEnvironmentSecrets.names)].sort(),
       workflowRunId: handles.workflowRunId,
       reviewedCommit: handles.reviewedCommit,
     }),
@@ -136,6 +180,8 @@ export type BindingRefusal =
   | 'credential-identity-duplicated'
   | 'teardown-handle-missing'
   | 'teardown-handle-release-mismatch'
+  | 'persistent-binding-in-teardown-set'
+  | 'temporary-binding-missing-from-teardown-set'
 
 export class EvidenceBindingRefused extends Error {
   code: BindingRefusal
@@ -351,7 +397,7 @@ export function environmentSecretSlotFingerprint(input: {
 }): string {
   return sha256Canonical({
     environment: input.environment,
-    names: [...input.names].sort(),
+    names: [...assertDeletableNames(input.names)].sort(),
     runMarker: input.runMarker,
     reviewedCommit: input.reviewedCommit,
   })

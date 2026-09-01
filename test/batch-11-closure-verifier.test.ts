@@ -12,7 +12,7 @@ import {
 } from '../lib/batch-11-closure-verifier.ts'
 import { fingerprintCredential } from '../lib/batch-11-credential-provenance.ts'
 import {
-  TEMPORARY_REVOCABLE_SECRET_NAMES,
+  TEMPORARY_ENVIRONMENT_SECRET_NAMES,
   boundEvidenceDigest,
   environmentSecretSlotFingerprint,
   type BoundEvidence,
@@ -559,7 +559,7 @@ test('the two credential identities are not interchangeable', () => {
 test('the environment-secret slot must name this run, this commit and this environment', () => {
   const base = {
     environment: 'batch-11-preview-rehearsal',
-    names: TEMPORARY_REVOCABLE_SECRET_NAMES,
+    names: TEMPORARY_ENVIRONMENT_SECRET_NAMES,
     runMarker: String(artifact().runMarker),
     reviewedCommit: String(artifact().reviewedCommit),
   }
@@ -569,11 +569,20 @@ test('the environment-secret slot must name this run, this commit and this envir
     { ...base, runMarker: 'batch-11-mixed-lineage-rehearsal-999' },
     { ...base, reviewedCommit: 'c'.repeat(40) },
     { ...base, environment: 'some-other-environment' },
-    { ...base, names: ['SUPABASE_ACCESS_TOKEN'] },
   ]) {
     refusesWith('revocation-credential-identity-mismatch', {
       revocation: substituting('github-environment-secrets', environmentSecretSlotFingerprint(drift)),
     })
+  }
+
+  // A short or padded name set never reaches a digest at all: it refuses while
+  // being derived, which is a better failure than a differing hash.
+  for (const names of [
+    ['SUPABASE_ACCESS_TOKEN'],
+    TEMPORARY_ENVIRONMENT_SECRET_NAMES.filter((name) => name !== 'SUPABASE_ACCESS_TOKEN_SHA256'),
+    [...TEMPORARY_ENVIRONMENT_SECRET_NAMES, 'VERCEL_TOKEN'],
+  ]) {
+    assert.throws(() => environmentSecretSlotFingerprint({ ...base, names }), /must survive cleanup|must be accounted for/)
   }
 })
 

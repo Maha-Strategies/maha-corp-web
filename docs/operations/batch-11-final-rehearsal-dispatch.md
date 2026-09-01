@@ -34,6 +34,39 @@ It already exists with one required reviewer.
 | `EPISTEMIC_RELEASE_AUTHORITY_TOKEN` | A temporary release-authority credential, at least 32 bytes, **different from the operations token**. |
 | `VERCEL_AUTOMATION_BYPASS_SECRET` | A temporary Vercel automation-bypass secret. |
 
+### Temporary versus persistent — the lifecycle contract
+
+The environment holds **seven** bindings, and they are not the same kind of
+thing. Cleanup deletes exactly the five above and must leave the other two
+alone.
+
+| Binding | Lifecycle | Cleanup |
+|---|---|---|
+| `SUPABASE_ACCESS_TOKEN` | Temporary — issued per run | **Delete.** Then confirm the token itself returns `401`. |
+| `SUPABASE_ACCESS_TOKEN_SHA256` | Temporary — issued per run | **Delete.** Nothing to revoke: it is a fingerprint, and there is no secret behind it. Removing the binding is the whole of what is owed. |
+| `EPISTEMIC_OPERATIONS_TOKEN` | Temporary — issued per run | **Delete.** |
+| `EPISTEMIC_RELEASE_AUTHORITY_TOKEN` | Temporary — issued per run | **Delete.** |
+| `VERCEL_AUTOMATION_BYPASS_SECRET` | Temporary — issued per run | **Delete.** Then confirm that exact bypass key is gone from the project. |
+| `SUPABASE_PROJECT_REF` | **Persistent** Preview infrastructure | **Keep.** It names the staging parent project; it is not a credential. |
+| `VERCEL_TOKEN` | **Persistent** Preview infrastructure | **Keep.** A standing credential reused across runs. |
+
+The two persistent bindings must never enter a deletion set. This is enforced,
+not merely documented: `assertDeletableNames` in `lib/batch-11-evidence-binding.ts`
+refuses any name set that reaches for one, or that omits a temporary binding, and
+every teardown handle and environment-slot fingerprint is derived through it.
+
+That guard exists because the contract was previously wrong in both directions.
+`SUPABASE_PROJECT_REF` and `VERCEL_TOKEN` were classified as temporary, so the
+finalizer looked for them to be absent from an environment this runbook says to
+leave them in — meaning a correct cleanup could never have been confirmed. And
+`SUPABASE_ACCESS_TOKEN_SHA256` was omitted, so the binding that records which
+token a run was authorized for could have survived unnoticed.
+
+**Deleted, not revoked.** Deleting a binding removes the environment's pointer to
+a value. Revoking asks the provider to stop honouring the value itself. The five
+are all deleted; only three have anything to revoke, and those are checked
+separately by the revocation collector below.
+
 ### Computing the fingerprint
 
 Run this where the token already is. It prints only the digest, and the token

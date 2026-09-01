@@ -836,7 +836,7 @@ test('the collector never reports absence without a successful query', () => {
   assert.doesNotMatch(source, /rehearsalRunMarker|registry\.json|\.includes\(runMarker\)/)
 
   const finalizer = readFileSync(resolve(ROOT, 'scripts/finalize-batch-11-teardown-evidence.ts'), 'utf8')
-  assert.match(finalizer, /TEMPORARY_PREVIEW_SECRET_NAMES/)
+  assert.match(finalizer, /TEMPORARY_ENVIRONMENT_SECRET_NAMES/)
   assert.match(finalizer, /requiredPrior/)
   assert.match(finalizer, /if \(!report\.allConfirmedAbsent\) process\.exit\(1\)/)
 })

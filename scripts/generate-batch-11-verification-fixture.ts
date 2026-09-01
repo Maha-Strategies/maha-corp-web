@@ -1,8 +1,7 @@
 import { mkdirSync, writeFileSync } from 'node:fs'
 
 import {
-  TEMPORARY_PREVIEW_SECRET_NAMES,
-  TEMPORARY_REVOCABLE_SECRET_NAMES,
+  TEMPORARY_ENVIRONMENT_SECRET_NAMES,
   buildBoundEvidence,
   contractReleaseIdentities,
   environmentSecretSlotFingerprint,
@@ -54,7 +53,7 @@ const teardownHandles: ExactTeardownHandles = {
   reviewedCommit: REVIEWED_COMMIT,
   supabaseBranch: { branchId: 'branch_synthetic', parentProjectRef: 'staging_synthetic' },
   vercelPreview: { deploymentId: 'dpl_synthetic', origin: 'https://synthetic.vercel.app' },
-  githubEnvironmentSecrets: { environment: 'batch-11-preview-rehearsal', names: TEMPORARY_PREVIEW_SECRET_NAMES },
+  githubEnvironmentSecrets: { environment: 'batch-11-preview-rehearsal', names: TEMPORARY_ENVIRONMENT_SECRET_NAMES },
   databaseReleaseRows: { branchId: 'branch_synthetic', releaseIds: releaseIdentities.map((entry) => entry.releaseId) },
 }
 
@@ -117,7 +116,7 @@ const revocationIdentity: Record<string, string> = {
   // same function the closure verifier uses, so a drift between them fails.
   'github-environment-secrets': environmentSecretSlotFingerprint({
     environment: PROTECTED_ENVIRONMENT,
-    names: TEMPORARY_REVOCABLE_SECRET_NAMES,
+    names: TEMPORARY_ENVIRONMENT_SECRET_NAMES,
     runMarker: RUN_MARKER,
     reviewedCommit: REVIEWED_COMMIT,
   }),
