@@ -1,0 +1,49 @@
+{
+  "schemaVersion": "maha-release-canary/1.0",
+  "reviewDate": "2026-09-01",
+  "selectionRule": "One release-ready record per domain, alphabetically first, until five are held.",
+  "canary": [
+    {
+      "recordId": "urn:maha:record:agentic-systems-mcp-mcp-session-lifecycle",
+      "domainSlug": "agentic-systems-mcp",
+      "revisionSha256": "sha256:110f2b0ddb37abd4acd9e4463e60c3bbd565d2dac8eefaa57cee2738d52ad80d",
+      "auditSha256": "sha256:7e50cd02c098692f4f74cf7097c2abb6c5335c70f647698e2da4a077c03ca867",
+      "releaseKind": "initial",
+      "inspectionDepth": "section-or-full-text"
+    },
+    {
+      "recordId": "urn:maha:record:biomolecular-engineering-crude-extract-cell-free-systems",
+      "domainSlug": "biomolecular-engineering",
+      "revisionSha256": "sha256:2c80ac068e79e4cbf4a41e142fc0696c842b4a20e32c3a347b82a53278e3899a",
+      "auditSha256": "sha256:14172c1565fc57857746a14aa7440811972b4d81f1f32c18cff2b5f96878fc3d",
+      "releaseKind": "initial",
+      "inspectionDepth": "section-or-full-text"
+    },
+    {
+      "recordId": "urn:maha:record:critical-supply-chains-gallium-bauxite-byproduct-flow",
+      "domainSlug": "critical-supply-chains",
+      "revisionSha256": "sha256:da4a974ebd5dc80c676257fa7bab66f3c1edc70b597012af5bbfae40e2b700ec",
+      "auditSha256": "sha256:12ce437866146bcfe9f6c5286a250df97cd7314080ae1a5ccfd03f0182656512",
+      "releaseKind": "initial",
+      "inspectionDepth": "section-or-full-text"
+    },
+    {
+      "recordId": "urn:maha:record:fusion-plasma-systems-laser-target-coupling",
+      "domainSlug": "fusion-plasma-systems",
+      "revisionSha256": "sha256:3ee25d0b479f803fcc6a42046edb6346b1404e6290f9f34a908939fc6ae3afbe",
+      "auditSha256": "sha256:1c31c6cf97609b7208bd21f9418334c36ef34ad66e18a87504b623e6b109e5bd",
+      "releaseKind": "initial",
+      "inspectionDepth": "section-or-full-text"
+    },
+    {
+      "recordId": "urn:maha:record:longevity-metabolism-apoptosis-in-senescent-cells",
+      "domainSlug": "longevity-metabolism",
+      "revisionSha256": "sha256:b8f9ca4f249f6628e1f2812f62cdbe132683e4d0d1355e09844d0d76c8d5ed88",
+      "auditSha256": "sha256:9afc5ee4fed0b72f33bb7967879a9e8fb9a563e330b43ce5c51cb542dbdc977c",
+      "releaseKind": "initial",
+      "inspectionDepth": "section-or-full-text"
+    }
+  ],
+  "released": false,
+  "boundary": "A prepared cohort. Nothing here has been released, dispatched or published."
+}

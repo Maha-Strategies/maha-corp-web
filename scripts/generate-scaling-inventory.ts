@@ -7,6 +7,7 @@ import { alignmentBlockers } from '../lib/frontier-source-alignment.ts'
 import { isPilotAlignmentClear, pilotAlignmentFor } from '../lib/pilot-source-alignment.ts'
 import { PUBLIC_SUBSTANTIAL_PAGES } from '../lib/substantial-page-public.ts'
 import { buildCapacityModel, PAGE_TARGET, type RecordState } from '../lib/scaling-capacity.ts'
+import projection from '../content/review/exact-revision-projection.json' with { type: 'json' }
 import { canonicalJson } from '../lib/evidence-dossier/digest.ts'
 import observation from '../content/scaling/public-surface-observation.json' with { type: 'json' }
 
@@ -25,9 +26,16 @@ const substantialPaths = new Set(PUBLIC_SUBSTANTIAL_PAGES.map((page) => page.pat
 const releasedPathByRecord = new Map(active.map((entry) => [entry.recordId, entry.canonicalPath]))
 
 const REQUIRED_SCOPES = ['boundary-adequacy', 'domain-fidelity', 'rights-and-locator', 'source-fidelity']
-const fullyReviewed = new Set(active
-  .filter((entry) => REQUIRED_SCOPES.every((scope) => entry.approvalScopes.includes(scope)))
-  .map((entry) => entry.recordId))
+// Two sources of review evidence, and the second is what makes the
+// canonical-release bucket observable: an active release proves review for the
+// records that have one, and the exact-revision projection proves it for the
+// records that do not.
+const fullyReviewed = new Set([
+  ...active.filter((entry) => REQUIRED_SCOPES.every((scope) => entry.approvalScopes.includes(scope)))
+    .map((entry) => entry.recordId),
+  ...(projection.projections as { recordId: string; releaseAuthorized: boolean }[])
+    .filter((entry) => entry.releaseAuthorized).map((entry) => entry.recordId),
+])
 
 const records = new Map([...EPISTEMIC_RECORDS, ...REPAIRED_REVISION_CANARY_RECORDS].map((record) => [record.id, record]))
 const alignmentClear = (recordId: string) =>
@@ -47,7 +55,7 @@ const states: RecordState[] = [...records.keys()].sort().map((recordId) => {
   }
 })
 
-const model = buildCapacityModel(states)
+const model = buildCapacityModel(states, 'projected-from-decisions')
 
 const inventory = {
   schemaVersion: 'maha-scaling-inventory/1.0',

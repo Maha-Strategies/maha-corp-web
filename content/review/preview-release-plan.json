@@ -1,0 +1,69 @@
+{
+  "schemaVersion": "maha-preview-release-plan/1.0",
+  "planDate": "2026-09-01",
+  "dispatched": false,
+  "productionMutationAuthorized": false,
+  "boundary": "A plan. Nothing here has been dispatched, no credential has been issued, and no Production write is authorized.",
+  "target": {
+    "database": "schema-only ephemeral Supabase Preview branch, created and destroyed within the run",
+    "deployment": "isolated Vercel Preview deployment bound to the exact reviewed commit",
+    "productionProjectRef": "denylisted"
+  },
+  "credentials": {
+    "operations": "EPISTEMIC_OPERATIONS_TOKEN, temporary, distinct from release authority",
+    "releaseAuthority": "EPISTEMIC_RELEASE_AUTHORITY_TOKEN, temporary, distinct from operations",
+    "note": "Both are provisioned per run and revoked afterwards. Neither is a Production credential."
+  },
+  "cohort": [
+    {
+      "recordId": "urn:maha:record:agentic-systems-mcp-mcp-session-lifecycle",
+      "domainSlug": "agentic-systems-mcp",
+      "revisionSha256": "sha256:110f2b0ddb37abd4acd9e4463e60c3bbd565d2dac8eefaa57cee2738d52ad80d",
+      "releaseKind": "initial"
+    },
+    {
+      "recordId": "urn:maha:record:biomolecular-engineering-crude-extract-cell-free-systems",
+      "domainSlug": "biomolecular-engineering",
+      "revisionSha256": "sha256:2c80ac068e79e4cbf4a41e142fc0696c842b4a20e32c3a347b82a53278e3899a",
+      "releaseKind": "initial"
+    },
+    {
+      "recordId": "urn:maha:record:critical-supply-chains-gallium-bauxite-byproduct-flow",
+      "domainSlug": "critical-supply-chains",
+      "revisionSha256": "sha256:da4a974ebd5dc80c676257fa7bab66f3c1edc70b597012af5bbfae40e2b700ec",
+      "releaseKind": "initial"
+    },
+    {
+      "recordId": "urn:maha:record:fusion-plasma-systems-laser-target-coupling",
+      "domainSlug": "fusion-plasma-systems",
+      "revisionSha256": "sha256:3ee25d0b479f803fcc6a42046edb6346b1404e6290f9f34a908939fc6ae3afbe",
+      "releaseKind": "initial"
+    },
+    {
+      "recordId": "urn:maha:record:longevity-metabolism-apoptosis-in-senescent-cells",
+      "domainSlug": "longevity-metabolism",
+      "revisionSha256": "sha256:b8f9ca4f249f6628e1f2812f62cdbe132683e4d0d1355e09844d0d76c8d5ed88",
+      "releaseKind": "initial"
+    }
+  ],
+  "releaseKinds": {
+    "initial": 5,
+    "superseding": 0
+  },
+  "phases": [
+    "provision the schema-only ephemeral Preview branch",
+    "apply the declared migration allowlist",
+    "ingest the exact reviewed revisions",
+    "record the five scoped internal-review decisions per record",
+    "issue the canonical releases, all initial, none superseding",
+    "compile release-aware substantial pages for the released revisions only",
+    "verify sitemap.xml and llms.txt contain the released revisions and nothing else",
+    "verify a stale revision and an unreleased control are absent or 404",
+    "destroy the branch and the deployment, then revoke both credentials"
+  ],
+  "controls": {
+    "staleRevision": "a superseded revision digest must not resolve to a public route",
+    "unreleasedRecord": "a reviewed but unreleased record must be absent from sitemap.xml and llms.txt",
+    "rejectedRecord": "the held record must remain absent from every public surface"
+  }
+}

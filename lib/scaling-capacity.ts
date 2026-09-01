@@ -95,6 +95,16 @@ export interface RecordState {
 }
 
 /**
+ * Whether review state came from a projection or from a release standing in.
+ *
+ * Before the exact-revision projection existed, review could only be read off
+ * an active release, which made blocked-on-canonical-release unfillable. A
+ * caller that supplies projected review state sets this, and the model stops
+ * disclaiming a bucket it can now actually observe.
+ */
+export type ReviewObservability = 'projected-from-decisions' | 'inferred-from-release'
+
+/**
  * Which bucket a record's missing page is waiting on.
  *
  * Ordered by what has to happen first. A record that is neither inspected nor
@@ -109,7 +119,10 @@ export function bucketFor(state: RecordState): CapacityBucket | null {
   return 'publishable-now'
 }
 
-export function buildCapacityModel(states: readonly RecordState[]): CapacityModel {
+export function buildCapacityModel(
+  states: readonly RecordState[],
+  reviewObservability: ReviewObservability = 'inferred-from-release',
+): CapacityModel {
   const { families, unclassified } = familyInventory()
   const buckets: Record<CapacityBucket, number> = {
     'publishable-now': 0,
@@ -146,11 +159,17 @@ export function buildCapacityModel(states: readonly RecordState[]): CapacityMode
     unclassified,
     buckets,
     publishableNowRecordIds: publishable.sort(),
-    observability: {
-      reviewObservedVia: 'active canonical release carrying all four required scopes',
-      canonicalReleaseBucketObservable: false,
-      note: 'A record reviewed but not released is indistinguishable here from one never reviewed, so both are counted against exact-revision review.',
-    },
+    observability: reviewObservability === 'projected-from-decisions'
+      ? {
+        reviewObservedVia: 'exact-revision review projection over committed decision corpora',
+        canonicalReleaseBucketObservable: true,
+        note: 'Review state is read from decisions naming the exact revision digest, so a reviewed-but-unreleased record is now distinguishable from one never reviewed.',
+      }
+      : {
+        reviewObservedVia: 'active canonical release carrying all four required scopes',
+        canonicalReleaseBucketObservable: false,
+        note: 'A record reviewed but not released is indistinguishable here from one never reviewed, so both are counted against exact-revision review.',
+      },
     boundary: 'Counts crawlable canonical URLs observed on the public surface. It does not assert that any page ranks, is indexed, or that any claim on it is true.',
   }
 }
