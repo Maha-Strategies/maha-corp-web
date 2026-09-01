@@ -87,8 +87,10 @@ test('the allowlist is exactly the transitive closure of what Batch 11 needs', (
       if (!owner.has(relation)) owner.set(relation, file)
     }
   }
+  // Three now: the plan, the execution, and the forward correction that made
+  // the release content comparison reachable instead of raising 42725.
   const batch11 = REQUIRED_MIGRATIONS.filter((name) => name.includes('batch_11'))
-  assert.equal(batch11.length, 2, 'the two Batch 11 migrations must be the terminal entries')
+  assert.equal(batch11.length, 3, 'the three Batch 11 migrations must be the terminal entries')
 
   const needed = new Set<string>()
   const seen = new Set<string>()

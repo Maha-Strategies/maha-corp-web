@@ -41,7 +41,7 @@ const videoJsonLd = {
   name: 'The evidence layer for autonomous systems',
   description,
   thumbnailUrl: [`${SITE_URL}/demo/evidence-layer-thumbnail.png`],
-  uploadDate: '2026-08-31',
+  uploadDate: '2026-08-31T07:25:46-07:00',
   duration: 'PT5M58S',
   contentUrl: VIDEO_URL,
   embedUrl: 'https://www.youtube-nocookie.com/embed/zDNs0Ndwx3Y',

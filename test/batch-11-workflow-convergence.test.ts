@@ -153,10 +153,12 @@ test('only the two declared predecessor lineages can be imported', () => {
 
 // 8
 test('only the declared bootstrap sequence can be applied', () => {
-  // Four prerequisites then the two Batch 11 migrations. The pair alone was
-  // once asserted here, which is the assumption that failed a live run against
-  // a genuinely empty branch. test/batch-11-schema-bootstrap.test.ts re-derives
-  // this list from the SQL rather than restating it.
+  // Four prerequisites, the two Batch 11 migrations, then the forward
+  // correction that made the release content comparison reachable. The pair
+  // alone was once asserted here, which is the assumption that failed a live
+  // run against a genuinely empty branch.
+  // test/batch-11-schema-bootstrap.test.ts re-derives this from the SQL rather
+  // than restating it.
   assert.deepEqual(REQUIRED_MIGRATIONS, [
     '20260824050000_epistemic_ingestion_and_expert_review.sql',
     '20260824073000_epistemic_source_completion_queue.sql',
@@ -164,7 +166,11 @@ test('only the declared bootstrap sequence can be applied', () => {
     '20260824190000_epistemic_canonical_release_control.sql',
     '20260831120000_batch_11_mixed_lineage_rehearsal.sql',
     '20260831123000_batch_11_mixed_lineage_rehearsal_execution.sql',
+    '20260901120000_batch_11_release_comparison_precedence.sql',
   ])
+  // The correction must come after the migration it corrects.
+  assert.ok(REQUIRED_MIGRATIONS.indexOf('20260901120000_batch_11_release_comparison_precedence.sql')
+    > REQUIRED_MIGRATIONS.indexOf('20260831123000_batch_11_mixed_lineage_rehearsal_execution.sql'))
   for (const migration of REQUIRED_MIGRATIONS) {
     assert.ok(existsSync(join(ROOT, 'supabase/migrations', migration)))
   }

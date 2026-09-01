@@ -98,6 +98,10 @@ export const REQUIRED_MIGRATIONS: readonly string[] = [
   '20260824190000_epistemic_canonical_release_control.sql',
   '20260831120000_batch_11_mixed_lineage_rehearsal.sql',
   '20260831123000_batch_11_mixed_lineage_rehearsal_execution.sql',
+  // Corrects an operator-precedence defect that made the release content
+  // comparison raise 42725 instead of comparing. Forward-only: the execution
+  // migration above is committed and may already have run elsewhere.
+  '20260901120000_batch_11_release_comparison_precedence.sql',
 ]
 
 /**

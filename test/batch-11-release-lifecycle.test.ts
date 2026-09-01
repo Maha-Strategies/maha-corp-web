@@ -43,11 +43,11 @@ const ROOT = resolve(import.meta.dirname, '..')
 const PG_BIN = ['/opt/homebrew/opt/postgresql@17/bin', '/usr/lib/postgresql/17/bin', '/usr/local/opt/postgresql@17/bin']
   .find((dir) => existsSync(join(dir, 'initdb')))
 
-const EXECUTION_MIGRATION = 'supabase/migrations/20260831123000_batch_11_mixed_lineage_rehearsal_execution.sql'
+const PRECEDENCE_FIX = 'supabase/migrations/20260901120000_batch_11_release_comparison_precedence.sql'
 const ACTOR = epistemicOperationsHash('release-lifecycle-actor-material')
 
 /** Brings up a disposable cluster carrying the exact migration allowlist. */
-function cluster(mutateExecutionSql?: (sql: string) => string) {
+function cluster(options: { omit?: string } = {}) {
   const dir = mkdtempSync(join(tmpdir(), 'b11-rel-'))
   const data = join(dir, 'data')
   const port = String(50000 + Math.floor(Math.random() * 10000))
@@ -70,12 +70,8 @@ function cluster(mutateExecutionSql?: (sql: string) => string) {
     create extension if not exists pgcrypto with schema extensions;`)
 
   for (const migration of REQUIRED_MIGRATIONS) {
-    const path = resolve(ROOT, 'supabase/migrations', migration)
-    if (mutateExecutionSql && path.endsWith('20260831123000_batch_11_mixed_lineage_rehearsal_execution.sql')) {
-      psql(['-d', 'b11', '--single-transaction'], mutateExecutionSql(readFileSync(path, 'utf8')))
-    } else {
-      psql(['-d', 'b11', '--single-transaction', '-f', path])
-    }
+    if (options.omit === migration) continue
+    psql(['-d', 'b11', '--single-transaction', '-f', resolve(ROOT, 'supabase/migrations', migration)])
   }
   return {
     connectionString: `postgres://postgres@127.0.0.1:${port}/b11`,
@@ -164,10 +160,7 @@ test('before the correction, every release fails with SQLSTATE 42725', { skip },
   // The original SQL, restored exactly: `->` without parentheses. Postgres
   // reads it as unknown - unknown and raises ambiguous_function, which the
   // route cannot classify and reports as 503.
-  const db = cluster((sql) => sql.replace(
-    "if (v_target.record_snapshot->'candidateSnapshot') - 'publication' <> (p_release->'recordSnapshot') - 'publication'",
-    "if v_target.record_snapshot->'candidateSnapshot' - 'publication' <> p_release->'recordSnapshot' - 'publication'",
-  ))
+  const db = cluster({ omit: PRECEDENCE_FIX.split('/').pop()! })
   const pool = await loadPool(db.connectionString)
   if (!pool) { db.stop(); return t.skip('pg module not installed') }
   const client = makeClient(pool) as never
@@ -191,10 +184,21 @@ test('before the correction, every release fails with SQLSTATE 42725', { skip },
   }
 })
 
-test('the corrected comparison is present, and the Production RPC was already correct', () => {
-  const execution = readFileSync(resolve(ROOT, EXECUTION_MIGRATION), 'utf8')
-  assert.match(execution, /if \(v_target\.record_snapshot->'candidateSnapshot'\) - 'publication' <> \(p_release->'recordSnapshot'\) - 'publication'/)
-  assert.ok(!/[^)]record_snapshot->'candidateSnapshot' - 'publication'/.test(execution))
+test('the correction is a forward migration, and the Production RPC was already correct', () => {
+  const fix = readFileSync(resolve(ROOT, PRECEDENCE_FIX), 'utf8')
+  assert.match(fix, /if \(v_target\.record_snapshot->'candidateSnapshot'\) - 'publication' <> \(p_release->'recordSnapshot'\) - 'publication'/)
+  // Comments stripped: the header quotes the defective form to explain it.
+  const executable = fix.split('\n').filter((line) => !line.trimStart().startsWith('--')).join('\n')
+  assert.ok(!/[^)]record_snapshot->'candidateSnapshot' - 'publication'/.test(executable))
+  assert.match(fix, /create or replace function public\.record_batch_11_rehearsal_canonical_release/)
+  assert.match(fix, /grant execute on function public\.record_batch_11_rehearsal_canonical_release\(jsonb,text,text,text\) to service_role;/)
+
+  // Forward-only: the committed execution migration is left exactly as it was.
+  const execution = readFileSync(resolve(ROOT, 'supabase/migrations/20260831123000_batch_11_mixed_lineage_rehearsal_execution.sql'), 'utf8')
+  assert.match(execution, /if v_target\.record_snapshot->'candidateSnapshot' - 'publication'/)
+
+  // And the allowlist applies the correction after the migration it corrects.
+  assert.equal(REQUIRED_MIGRATIONS.at(-1), PRECEDENCE_FIX.split('/').pop())
 
   // The Production release RPC subtracts from a typed jsonb variable, so the
   // literal coerces and there was never an ambiguity there to fix.
