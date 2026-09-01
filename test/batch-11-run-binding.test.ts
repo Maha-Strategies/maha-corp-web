@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict'
+import { spawnSync } from 'node:child_process'
 import { readFileSync } from 'node:fs'
 import { resolve } from 'node:path'
 import test from 'node:test'
@@ -380,4 +381,31 @@ test('a release outside the cohort is refused rather than given a digest', () =>
   // Every declared record has exactly one audit and one decision bundle.
   assert.equal(new Set(contract.map((entry) => entry.auditSha256)).size, 5)
   assert.equal(new Set(contract.map((entry) => entry.decisionBundleSha256)).size, 5)
+})
+
+/**
+ * scripts/ is excluded from typecheck, so an undefined name reaches a run.
+ *
+ * Run 33504091598 applied seven migrations, issued all five releases, tore
+ * everything down, and then died on `decisionBundleDigest is not defined` - an
+ * import that was never added. `npm run typecheck` passed throughout, because
+ * tsconfig excludes scripts entirely.
+ *
+ * Closing that exclusion wholesale is a larger change than this. What is
+ * cheap and catches exactly this failure is asking the compiler for
+ * name-resolution errors in the runner alone.
+ */
+test('every name the rehearsal runner uses actually resolves', () => {
+  const output = spawnSync('npx', [
+    'tsc', '--noEmit', '--allowImportingTsExtensions', '--skipLibCheck',
+    '--target', 'es2022', '--module', 'esnext', '--moduleResolution', 'bundler',
+    '--types', 'node', 'scripts/run-batch-11-remote-rehearsal.ts',
+  ], { cwd: ROOT, encoding: 'utf8' })
+
+  // TS2304 "Cannot find name" and TS2552 "did you mean" are the resolution
+  // failures. Other diagnostics are out of scope for this guard.
+  const unresolved = `${output.stdout}${output.stderr}`
+    .split('\n')
+    .filter((line) => /error TS(2304|2552|2305)\b/.test(line))
+  assert.deepEqual(unresolved, [], `the runner references names that do not resolve:\n${unresolved.join('\n')}`)
 })

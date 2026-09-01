@@ -5,6 +5,7 @@ import { dirname, join } from 'node:path'
 import {
   TEMPORARY_ENVIRONMENT_SECRET_NAMES,
   buildBoundEvidence,
+  decisionBundleDigest,
   runMarkerFor,
   type ExactTeardownHandles,
 } from '../lib/batch-11-evidence-binding.ts'
