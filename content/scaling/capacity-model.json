@@ -80,11 +80,20 @@
     "requires-new-records-or-sources": 49
   },
   "publishableNowRecordIds": [],
+  "releaseReadiness": {
+    "productionCrawlable": 764,
+    "previewRehearsed": 0,
+    "productionReleaseReady": 30,
+    "needsDeeperInspection": 7,
+    "rejected": 1,
+    "gapAfterHypotheticalRelease": 206,
+    "note": "Preview-rehearsed pages are never crawlable and are excluded from the Production total. Release-ready is a prepared state, not a published one."
+  },
   "observability": {
     "reviewObservedVia": "exact-revision review projection over committed decision corpora",
     "canonicalReleaseBucketObservable": true,
     "note": "Review state is read from decisions naming the exact revision digest, so a reviewed-but-unreleased record is now distinguishable from one never reviewed."
   },
   "boundary": "Counts crawlable canonical URLs observed on the public surface. It does not assert that any page ranks, is indexed, or that any claim on it is true.",
-  "capacityDigest": "sha256:5f2db87a478af22091ea78f6c5ac9825d1090449ed3102c9f28e53da50a5d4b2"
+  "capacityDigest": "sha256:7661c47fbf08f5c3e73fd9f97f3b135108b193f865db213286305d0734578efe"
 }
