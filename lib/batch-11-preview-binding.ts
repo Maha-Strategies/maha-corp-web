@@ -79,6 +79,12 @@ export function vercelDeploymentArguments(reviewedCommit: string): readonly stri
     'deploy', '.', '--yes', '--force', '--target', 'preview',
     '--project', 'maha-corp-web', '--scope', 'mayonerajans-projects', '--json',
     '--env', 'NEXT_PUBLIC_SUPABASE_URL', '--build-env', 'NEXT_PUBLIC_SUPABASE_URL',
+    // Without this the Preview deployment silently behaves like Production:
+    // it selects the ordinary canonical-release RPC instead of the rehearsal
+    // one, and reads zero external lineage witnesses, so the two superseding
+    // records would classify as initial. It was set in the runner's own
+    // environment but never forwarded, which is not the same thing.
+    '--env', 'EPISTEMIC_EXTERNAL_LINEAGE_REHEARSAL',
     '--env', 'SUPABASE_SERVICE_ROLE_KEY', '--env', 'EPISTEMIC_OPERATIONS_TOKEN',
     '--env', 'EPISTEMIC_RELEASE_AUTHORITY_TOKEN', '--env', 'VERCEL_AUTOMATION_BYPASS_SECRET',
     '--meta', `batch11ReviewedCommit=${reviewedCommit}`,
