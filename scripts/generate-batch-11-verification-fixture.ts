@@ -8,6 +8,8 @@ import {
   teardownHandleDigests,
   type ExactTeardownHandles,
 } from '../lib/batch-11-evidence-binding.ts'
+import { fingerprintCredential } from '../lib/batch-11-credential-provenance.ts'
+import { REVOCABLE_CREDENTIALS, produceRevocationEvidence, type RevocationCheck } from '../lib/batch-11-revocation-evidence.ts'
 import { repositoryContract } from '../lib/batch-11-evidence-verifier.ts'
 import { BATCH_11_LINEAGE_DECLARATIONS } from '../lib/batch-11-mixed-lineage-release.ts'
 import { PHASE_ORDER } from '../lib/batch-11-rehearsal-phases.ts'
@@ -68,6 +70,11 @@ const bound = buildBoundEvidence({
   deploymentMarker: { deploymentId: 'dpl_synthetic', origin: 'https://synthetic.vercel.app', reviewedCommit: REVIEWED_COMMIT },
   teardownHandles,
   cleanup: { branchDestroyed: true, deploymentDestroyed: true, markerRemoved: true },
+  identities: {
+    protectedEnvironment: 'batch-11-preview-rehearsal',
+    operationsIdentityFingerprint: fingerprintCredential('synthetic-operations-identity'),
+    releaseAuthorityIdentityFingerprint: fingerprintCredential('synthetic-release-authority-identity'),
+  },
   requiredPhaseCount: PHASE_ORDER.length,
 })
 
@@ -91,6 +98,26 @@ const teardown = produceTeardownObservations({
   results: providerResults,
 })
 
+/** Sanitized post-run revocation checks, as an operator would supply them. */
+const revocationChecks: RevocationCheck[] = REVOCABLE_CREDENTIALS.map((credential) => ({
+  provider: credential.split('-')[0],
+  credential,
+  checkStatus: 'succeeded',
+  scope: 'exact-credential-fingerprint',
+  runMarker: RUN_MARKER,
+  reviewedCommit: REVIEWED_COMMIT,
+  credentialFingerprint: fingerprintCredential(`synthetic-${credential}`),
+  stillResolves: false,
+  selfReportedOnly: false,
+  detail: `The ${credential} no longer resolves at the provider.`,
+}))
+
+const revocation = produceRevocationEvidence({
+  runMarker: RUN_MARKER,
+  reviewedCommit: REVIEWED_COMMIT,
+  checks: revocationChecks,
+})
+
 const fixture = {
   syntheticFixture: true,
   note: 'Synthetic compliant run. Not evidence of any rehearsal; no protected run has occurred.',
@@ -111,6 +138,17 @@ const fixture = {
     releasesIssued: 5,
     replayedReleases: 0,
     productionWritesPerformed: 0,
+    // Credential provenance, as the runner now records it. Fingerprints only.
+    credentialFingerprintMatched: true,
+    poolerCapabilityPreflight: {
+      version: 'maha-batch-11-credential-provenance/1.0',
+      parentProjectRefFingerprint: fingerprintCredential('synthetic-parent-project-ref'),
+      primaryHostFingerprint: fingerprintCredential('synthetic-pooler-host'),
+      poolMode: 'session',
+      databaseType: 'PRIMARY',
+      status: 200,
+    },
+    mutationStartedAfterPreflight: true,
     productionAccess: {
       kind: 'public-https-get',
       url: 'https://www.mahastrategies.com/knowledge/epistemic-system/releases/registry.json',
@@ -131,6 +169,8 @@ const fixture = {
   // The producer's own report, verbatim. The verifier validates the whole
   // report; a hand-assembled list of observations is refused.
   teardown: { ...teardown, workflowRunId: WORKFLOW_RUN_ID },
+  revocationChecks,
+  revocation,
 }
 
 mkdirSync('test/fixtures', { recursive: true })

@@ -132,6 +132,8 @@
         "recordId": "urn:maha:record:advanced-materials-color-centers-in-diamond",
         "releaseId": "epirelease_synthetic00",
         "targetSha256": "sha256:96630a6fbe09aa7d0d239f37add3d6691d996445140812c876d676c67d69139f",
+        "auditSha256": "sha256:8a256877aace929cb4b8940aa8502aaff1fe803272a0ad9b35c70865553f383c",
+        "decisionBundleSha256": "sha256:07b5074d88ebb45b372056d4ec418b21fd4f82790f85bc51e2dcdaa87e65c74a",
         "releaseKind": "initial",
         "supersedesReleaseId": null
       },
@@ -139,6 +141,8 @@
         "recordId": "urn:maha:record:fusion-plasma-systems-tokamak-plasma-equilibrium",
         "releaseId": "epirelease_synthetic01",
         "targetSha256": "sha256:26d193fe87af63e481f46db94638658c5be0df199ae55bb642f37edf45100bd7",
+        "auditSha256": "sha256:6272e483d58d71226c7ee32ddea6e6b7e6fce6d54fac8c10512e621befe78232",
+        "decisionBundleSha256": "sha256:b4585d32b2d91396da2a202ffe349eb98553075837a27ff32ab102e51545ab1a",
         "releaseKind": "superseding",
         "supersedesReleaseId": "epirelease_8e947374097d4695815dbf9ab653177b"
       },
@@ -146,6 +150,8 @@
         "recordId": "urn:maha:record:longevity-metabolism-mitophagy-flux",
         "releaseId": "epirelease_synthetic02",
         "targetSha256": "sha256:7bbef3b54fb9ac405c78bb7d819f75e34f949ab33b4c9ac764dd844e5f641ab2",
+        "auditSha256": "sha256:dca6ff9da8dd9b1e8e5553c2479a1f0702e479c298d0a2dd12a05847c172fe8e",
+        "decisionBundleSha256": "sha256:c17854e72495fa738b6cddb0e38a83f44c28604f77bd6946532575d393682a35",
         "releaseKind": "initial",
         "supersedesReleaseId": null
       },
@@ -153,6 +159,8 @@
         "recordId": "urn:maha:record:mechanistic-interpretability-activation-patching",
         "releaseId": "epirelease_synthetic03",
         "targetSha256": "sha256:ef3182227b26a0902ad4848505fe5eb59dc310cfa30c18524f754b16dd4fd86c",
+        "auditSha256": "sha256:c2ce76a7b87b8aa565e4baf89052ad01123b0625da5156ae6c169766c1bb265a",
+        "decisionBundleSha256": "sha256:ed66a321b7323ac6958c3127284edd71663550702ea478086fc6cecf2ad9bfc5",
         "releaseKind": "initial",
         "supersedesReleaseId": null
       },
@@ -160,6 +168,8 @@
         "recordId": "urn:maha:record:mechanistic-interpretability-representation-probing-boundary",
         "releaseId": "epirelease_synthetic04",
         "targetSha256": "sha256:8485532ea6985bb77144951944066525e7f7d957b01ebfe55547627c07c1fcf8",
+        "auditSha256": "sha256:0798abd08bf9c9b8e2a0455f6596667cf72f51963ecb7d4a7d8b9dee76e2541e",
+        "decisionBundleSha256": "sha256:d9f6d45333b8698ad31e30c4133c3a752a570e71e87b331a62d0af559b1e53da",
         "releaseKind": "superseding",
         "supersedesReleaseId": "epirelease_93c92eb7a317465b83fabf8d3e6962da"
       }
@@ -182,7 +192,12 @@
       "deploymentDestroyed": true,
       "markerRemoved": true
     },
-    "artifactDigest": "sha256:4a594de53bd1b1caf37b3223c6be2d24e91dc37ac9333daa76a64f0756133fda",
+    "identities": {
+      "protectedEnvironment": "batch-11-preview-rehearsal",
+      "operationsIdentityFingerprint": "sha256:1601bb43fe7956c943740403db38d0edb84fd2428a1ad416ef17a22a039f3637",
+      "releaseAuthorityIdentityFingerprint": "sha256:aedfdf025eaac5d12ab2e4707cef5cdc473637f2b71b64e01362ff112f0d6519"
+    },
+    "artifactDigest": "sha256:c826af3b57111881ef7641edca1e89364bd3a7ed573363d9aff243fcbc2cc19c",
     "mode": "executed",
     "reason": "All 7 phases executed against an ephemeral Preview branch.",
     "remoteOperationsPerformed": 14,
@@ -194,6 +209,16 @@
     "releasesIssued": 5,
     "replayedReleases": 0,
     "productionWritesPerformed": 0,
+    "credentialFingerprintMatched": true,
+    "poolerCapabilityPreflight": {
+      "version": "maha-batch-11-credential-provenance/1.0",
+      "parentProjectRefFingerprint": "sha256:4546dbacb6c68aa64cc05ebe69edfb730ef506c10b646314489195cf370dd834",
+      "primaryHostFingerprint": "sha256:2cccae488fd406ee753304c28b27bd30ced390e13d1255f7c6c2f2e1466794ad",
+      "poolMode": "session",
+      "databaseType": "PRIMARY",
+      "status": 200
+    },
+    "mutationStartedAfterPreflight": true,
     "productionAccess": {
       "kind": "public-https-get",
       "url": "https://www.mahastrategies.com/knowledge/epistemic-system/releases/registry.json",
@@ -303,5 +328,82 @@
     "allConfirmedAbsent": true,
     "observationsDigest": "sha256:fbc765f6e4cd017df8a683d0ca7dcc6fcc7450334c426cfa54c608d8751144c3",
     "workflowRunId": "77"
+  },
+  "revocationChecks": [
+    {
+      "provider": "supabase",
+      "credential": "supabase-access-token",
+      "checkStatus": "succeeded",
+      "scope": "exact-credential-fingerprint",
+      "runMarker": "batch-11-mixed-lineage-rehearsal-77",
+      "reviewedCommit": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      "credentialFingerprint": "sha256:2abc7b29c17a06108b127af83d57fff35088ce99500903799e275d687265e1a5",
+      "stillResolves": false,
+      "selfReportedOnly": false,
+      "detail": "The supabase-access-token no longer resolves at the provider."
+    },
+    {
+      "provider": "vercel",
+      "credential": "vercel-automation-bypass",
+      "checkStatus": "succeeded",
+      "scope": "exact-credential-fingerprint",
+      "runMarker": "batch-11-mixed-lineage-rehearsal-77",
+      "reviewedCommit": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      "credentialFingerprint": "sha256:3ae40f0c700ded5a5a7fb6340b1eb7bf2c12839c7996a500010f987552c2ae21",
+      "stillResolves": false,
+      "selfReportedOnly": false,
+      "detail": "The vercel-automation-bypass no longer resolves at the provider."
+    },
+    {
+      "provider": "github",
+      "credential": "github-environment-secrets",
+      "checkStatus": "succeeded",
+      "scope": "exact-credential-fingerprint",
+      "runMarker": "batch-11-mixed-lineage-rehearsal-77",
+      "reviewedCommit": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      "credentialFingerprint": "sha256:2000a112261b84b285dfe27dfddbc17bc5fe2a18e23d003ca3a94027e072703c",
+      "stillResolves": false,
+      "selfReportedOnly": false,
+      "detail": "The github-environment-secrets no longer resolves at the provider."
+    }
+  ],
+  "revocation": {
+    "schemaVersion": "maha-batch-11-revocation-evidence/1.0",
+    "runMarker": "batch-11-mixed-lineage-rehearsal-77",
+    "reviewedCommit": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+    "observations": [
+      {
+        "credential": "supabase-access-token",
+        "credentialFingerprint": "sha256:2abc7b29c17a06108b127af83d57fff35088ce99500903799e275d687265e1a5",
+        "observedState": "confirmed-revoked",
+        "refusal": null,
+        "providers": [
+          "supabase"
+        ],
+        "detail": "supabase-access-token: 1 provider check(s) confirmed the credential no longer resolves."
+      },
+      {
+        "credential": "vercel-automation-bypass",
+        "credentialFingerprint": "sha256:3ae40f0c700ded5a5a7fb6340b1eb7bf2c12839c7996a500010f987552c2ae21",
+        "observedState": "confirmed-revoked",
+        "refusal": null,
+        "providers": [
+          "vercel"
+        ],
+        "detail": "vercel-automation-bypass: 1 provider check(s) confirmed the credential no longer resolves."
+      },
+      {
+        "credential": "github-environment-secrets",
+        "credentialFingerprint": "sha256:2000a112261b84b285dfe27dfddbc17bc5fe2a18e23d003ca3a94027e072703c",
+        "observedState": "confirmed-revoked",
+        "refusal": null,
+        "providers": [
+          "github"
+        ],
+        "detail": "github-environment-secrets: 1 provider check(s) confirmed the credential no longer resolves."
+      }
+    ],
+    "allConfirmedRevoked": true,
+    "revocationDigest": "sha256:77fc9f283fdaa9172dee2432ff09ec9bed0d9741432187827a59d7fa16c6557e"
   }
 }

@@ -462,6 +462,7 @@ test('the reviewed commit is bound into the artifact digest', () => {
     deploymentMarkerDigest: bound.deploymentMarkerDigest as string | null,
     teardownHandleDigests: bound.teardownHandleDigests as never,
     cleanup: bound.cleanup as never,
+    identities: bound.identities as never,
   })
   assert.notEqual(moved, original, 'the reviewed commit must be inside the digest')
 })
