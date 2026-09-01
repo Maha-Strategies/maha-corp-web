@@ -278,6 +278,32 @@ let branchEnv: NodeJS.ProcessEnv = {}
 let branchApiUrl = ''
 let branchServiceRole = ''
 
+/**
+ * Removes every value this run holds from text before it is reported.
+ *
+ * Actions masks the registered environment secrets on its own, but the derived
+ * ones - the ephemeral service role, the branch URL - are minted at run time
+ * and are not registered, so nothing else would catch them. Redacting by exact
+ * value rather than by pattern means a credential shape nobody anticipated is
+ * still removed, because what is matched is the secret itself.
+ *
+ * Short values are skipped: redacting an 8-character string would blank
+ * unrelated words and make the diagnostic useless.
+ */
+function redactDeploymentSecrets(text: string): string {
+  let redacted = text
+  for (const secret of [
+    managementToken, operationsToken, authorityToken, bypass, vercelToken,
+    branchServiceRole, branchApiUrl, parentRef, expectedCredentialFingerprint,
+  ]) {
+    if (typeof secret === 'string' && secret.length >= 12) {
+      redacted = redacted.split(secret).join('[redacted]')
+    }
+  }
+  // Bounded, so a CLI that dumps a build log cannot flood the refusal.
+  return redacted.replace(/\s+/g, ' ').trim().slice(0, 1200)
+}
+
 const wait = (milliseconds: number) => new Promise((resolve) => setTimeout(resolve, milliseconds))
 
 /**
@@ -500,8 +526,14 @@ const driver: RehearsalDriver = {
         env: deploymentEnvironment,
         stdio: ['ignore', 'pipe', 'pipe'],
       })
-    } catch {
-      throw new Error('The exact-commit Vercel Preview deployment failed.')
+    } catch (error) {
+      // The CLI's own reason, redacted. Discarding it cost two protected runs:
+      // both stopped here reporting only that the deployment "failed", which is
+      // the one thing already known. A refusal that cannot say why turns a
+      // one-line flag fix into a fresh rehearsal each time.
+      const shell = error as { status?: number | null; stderr?: string | Buffer; stdout?: string | Buffer }
+      const said = redactDeploymentSecrets(`${shell.stderr ?? ''}${shell.stdout ?? ''}`)
+      throw new Error(`The exact-commit Vercel Preview deployment failed (exit ${shell.status ?? 'unknown'}). Vercel said: ${said || '(no output)'}`)
     }
     const deployment = parseVercelDeploymentOutput(output)
     lifecycleState.previewDeploymentCreated = true
