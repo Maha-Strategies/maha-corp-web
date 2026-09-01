@@ -13,6 +13,7 @@ test('demo page publishes the correct video and privacy-enhanced player', () => 
   assert.match(page, /zDNs0Ndwx3Y/)
   assert.match(page, /PT5M58S/)
   assert.match(page, /VideoObject/)
+  assert.match(page, /uploadDate: '2026-08-31T07:25:46-07:00'/)
   assert.match(embed, /youtube-nocookie\.com\/embed/)
   assert.match(embed, /onClick=\{\(\) => setPlaying\(true\)\}/)
 })
