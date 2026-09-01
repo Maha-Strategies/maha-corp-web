@@ -1,5 +1,5 @@
 import { createServer } from 'node:http'
-import { writeFileSync } from 'node:fs'
+import { renameSync, writeFileSync } from 'node:fs'
 import type { AddressInfo } from 'node:net'
 
 /**
@@ -33,5 +33,9 @@ const server = createServer((request, response) => {
 })
 
 server.listen(0, '127.0.0.1', () => {
-  writeFileSync(portFile, String((server.address() as AddressInfo).port))
+  // Written aside then renamed: a reader polling for this file must never
+  // observe it existing but empty, which is a real state writeFileSync passes
+  // through and which polling loops read as "no port yet, but no error either".
+  writeFileSync(`${portFile}.partial`, String((server.address() as AddressInfo).port))
+  renameSync(`${portFile}.partial`, portFile)
 })

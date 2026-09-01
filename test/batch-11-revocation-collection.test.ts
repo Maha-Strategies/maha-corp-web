@@ -176,9 +176,13 @@ function withStub(routes: Record<string, { status: number; body?: unknown }>, ru
     env: { ...process.env, MAHA_STUB_ROUTES: JSON.stringify(routes), MAHA_STUB_PORT_FILE: portFile },
   })
   try {
+    // Sleeps on every unsuccessful attempt. Sleeping only in the catch made an
+    // existing-but-empty file spin through all the attempts in microseconds,
+    // which on a loaded runner looked like the stub never starting at all.
     let port = ''
     for (let attempt = 0; attempt < 200 && !port; attempt += 1) {
-      try { port = readFileSync(portFile, 'utf8').trim() } catch { sleepSync(25) }
+      try { port = readFileSync(portFile, 'utf8').trim() } catch { /* not yet */ }
+      if (!port) sleepSync(25)
     }
     assert.ok(port, 'the loopback provider stub never reported a port')
     const base = `http://127.0.0.1:${port}`

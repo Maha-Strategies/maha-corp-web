@@ -77,6 +77,8 @@ test('deployment arguments carry credential names but never credential values', 
   assert.ok(args.includes('EPISTEMIC_RELEASE_AUTHORITY_TOKEN'))
   assert.ok(args.includes('VERCEL_AUTOMATION_BYPASS_SECRET'))
   assert.ok(args.includes(`batch11ReviewedCommit=${commit}`))
+  assert.ok(args.includes('preview'))
+  assert.ok(!args.includes('--skip-domain'), 'Preview deployment must not carry the production-only --skip-domain flag')
   for (const argument of args) {
     assert.doesNotMatch(argument, /^(?:SUPABASE_SERVICE_ROLE_KEY|EPISTEMIC_OPERATIONS_TOKEN|EPISTEMIC_RELEASE_AUTHORITY_TOKEN|VERCEL_AUTOMATION_BYPASS_SECRET)=/)
   }

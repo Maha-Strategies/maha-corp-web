@@ -73,7 +73,10 @@ export function assertPrivatePreviewResponses(input: {
 export function vercelDeploymentArguments(reviewedCommit: string): readonly string[] {
   if (!/^[0-9a-f]{40}$/.test(reviewedCommit)) throw new Error('The reviewed commit is not an exact Git SHA.')
   return [
-    'deploy', '.', '--yes', '--force', '--skip-domain', '--target', 'preview',
+    // `--skip-domain` is production-only in the pinned Vercel CLI. Preview
+    // deployments are never promoted to a production domain, so adding that
+    // flag makes the CLI refuse before it creates the isolated deployment.
+    'deploy', '.', '--yes', '--force', '--target', 'preview',
     '--project', 'maha-corp-web', '--scope', 'mayonerajans-projects', '--json',
     '--env', 'NEXT_PUBLIC_SUPABASE_URL', '--build-env', 'NEXT_PUBLIC_SUPABASE_URL',
     '--env', 'SUPABASE_SERVICE_ROLE_KEY', '--env', 'EPISTEMIC_OPERATIONS_TOKEN',
