@@ -58,6 +58,7 @@ import {
   vercelDeploymentArguments,
 } from '../lib/batch-11-preview-binding.ts'
 import { batch11RevisionReviewInputs } from '../lib/batch-11-revision-canary.ts'
+import { awaitRestReadiness, type ReadinessOutcome } from '../lib/batch-11-rest-readiness.ts'
 import { previewSessionPoolerEnvironment } from '../lib/batch-11-supabase-pooler.ts'
 
 /**
@@ -190,6 +191,10 @@ const lifecycleState = {
   credentialFingerprintMatched: false,
   poolerCapability: null as PoolerCapability | null,
   mutationStartedAfterPreflight: false,
+  /** Set only once the branch REST API has actually served. */
+  restReadiness: null as ReadinessOutcome | null,
+  restReadyAtMs: 0,
+  deploymentStartedAtMs: 0,
   /** Retained privately so teardown can query the exact branch after deletion. */
   branchHandle: null as { branchId: string; parentProjectRef: string } | null,
   /** Retained so the marker can be attested after it is deleted. */
@@ -510,6 +515,18 @@ const driver: RehearsalDriver = {
   async bindPreview(branch: EphemeralBranch) {
     if (!vercelToken || !bypass) throw new Error('The protected Vercel deployment credentials are not available.')
     if (!branchApiUrl || !branchServiceRole) throw new Error('The ephemeral branch runtime binding is unavailable.')
+
+    // Migrations have applied over psql, which only proves the database is up.
+    // The deployment talks to PostgREST, which starts serving later, so nothing
+    // may be created until the branch answers on the interface the application
+    // will actually use.
+    const readiness = await awaitRestReadiness({ branchApiUrl, serviceRole: branchServiceRole })
+    lifecycleState.restReadiness = readiness
+    if (!readiness.ready) {
+      throw new Error(`The ephemeral branch REST API never became ready [${readiness.refusal}] after ${readiness.attempts} attempt(s): ${JSON.stringify(readiness.statusClasses)}`)
+    }
+    lifecycleState.restReadyAtMs = Date.now()
+
     const reviewedCommit = checkedOutCommit
     if (!/^[0-9a-f]{40}$/.test(reviewedCommit) || reviewedCommit !== expectedReviewedCommit) {
       throw new Error('The checked-out commit does not equal the exact reviewed commit.')
@@ -525,6 +542,13 @@ const driver: RehearsalDriver = {
       EPISTEMIC_EXTERNAL_LINEAGE_REHEARSAL: 'batch-11-preview',
       VERCEL_TOKEN: vercelToken,
     }
+    // Ordering is the property, not just the wait: a future edit that moves the
+    // deploy above the gate fails here rather than silently racing again.
+    if (!lifecycleState.restReadyAtMs) {
+      throw new Error('A Preview deployment was attempted before the branch REST API was proven ready.')
+    }
+    lifecycleState.deploymentStartedAtMs = Date.now()
+
     let output = ''
     try {
       output = execFileSync('vercel', [...vercelDeploymentArguments(reviewedCommit)], {
@@ -837,6 +861,10 @@ try {
     credentialFingerprintMatched: lifecycleState.credentialFingerprintMatched,
     poolerCapabilityPreflight: lifecycleState.poolerCapability,
     mutationStartedAfterPreflight: lifecycleState.mutationStartedAfterPreflight,
+    // Counts per status class only - never the branch hostname or a body.
+    restReadiness: lifecycleState.restReadiness,
+    deploymentFollowedRestReadiness:
+      lifecycleState.restReadyAtMs > 0 && lifecycleState.deploymentStartedAtMs >= lifecycleState.restReadyAtMs,
     phases: outcome.phases,
     fingerprint,
     requiredInvariants: REQUIRED_PREVIEW_INVARIANTS,
@@ -861,6 +889,10 @@ try {
     credentialFingerprintMatched: lifecycleState.credentialFingerprintMatched,
     poolerCapabilityPreflight: lifecycleState.poolerCapability,
     mutationStartedAfterPreflight: lifecycleState.mutationStartedAfterPreflight,
+    // Counts per status class only - never the branch hostname or a body.
+    restReadiness: lifecycleState.restReadiness,
+    deploymentFollowedRestReadiness:
+      lifecycleState.restReadyAtMs > 0 && lifecycleState.deploymentStartedAtMs >= lifecycleState.restReadyAtMs,
     fingerprint,
   })
   process.exit(1)
