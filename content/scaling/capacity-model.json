@@ -95,5 +95,24 @@
     "note": "Review state is read from decisions naming the exact revision digest, so a reviewed-but-unreleased record is now distinguishable from one never reviewed."
   },
   "boundary": "Counts crawlable canonical URLs observed on the public surface. It does not assert that any page ranks, is indexed, or that any claim on it is true.",
-  "capacityDigest": "sha256:4530f50015b26adbde4488e34f14434b13d3147c0b3395795ed213cbcd92cf5f"
+  "batch12a": {
+    "selected": 15,
+    "contentInspected": 7,
+    "adequateReplacementsFound": 1,
+    "accepted": 1,
+    "revise": 5,
+    "rejected": 0,
+    "inaccessibleOrUnresolved": 8,
+    "newlyAlignmentClearProposed": 6,
+    "newlyReleaseReadyProposed": 0,
+    "activeAlignmentClear": 141,
+    "activePublicRoutes": 764,
+    "hypotheticalAfterExisting33": 797,
+    "hypotheticalAfterBatch12aAdoption": 803,
+    "remainingGapAfterBoth": 197,
+    "canary": null,
+    "canaryWithheldReason": "Only 1 proposal(s) carry a source override that passed every axis. Five are required, and the criteria were not weakened to reach five.",
+    "note": "Proposed revisions are private, inactive and pending governed adoption. They are not active records and not pages. Active alignment-clear and active public routes are unchanged by this sprint."
+  },
+  "capacityDigest": "sha256:69cbc0517653422806e7f69c4f8b26699f9a32ae911cb02f2ea5cca7a0701fb1"
 }
