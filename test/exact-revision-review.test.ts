@@ -12,6 +12,8 @@ import plan from '../content/review/preview-release-plan.json' with { type: 'jso
 import capacity from '../content/scaling/capacity-model.json' with { type: 'json' }
 import observation from '../content/scaling/public-surface-observation.json' with { type: 'json' }
 import { REVIEW_AXES, classifyForRelease, projectReviewState, releaseAuthorized } from '../lib/exact-revision-review.ts'
+import { REVIEW_TIERS, assertMachineReviewerPermitted, assertNoPersonAttribution, assertTierNotOverstated } from '../lib/review-tier.ts'
+import { reviewAssuranceTier } from '../lib/epistemic-release.ts'
 
 /**
  * Review is an input to release, never a substitute for it.
@@ -261,4 +263,88 @@ test('regenerating produces byte-identical artifacts', () => {
   execFileSync('node', ['--experimental-strip-types', 'scripts/generate-scaling-inventory.ts'], { cwd: ROOT, stdio: 'ignore' })
   const after = files.map((file) => readFileSync(resolve(ROOT, file), 'utf8'))
   for (const [index, file] of files.entries()) assert.equal(after[index], before[index], `${file} is not deterministic`)
+})
+
+/* --- the tier is declared, and cannot overstate itself -------------------- */
+
+test('the tier declares every assurance it does not have', () => {
+  const tier = REVIEW_TIERS['automated-internal-editorial']
+  assert.equal(tier.reviewerKind, 'automated-internal-editorial')
+  assert.equal(tier.independent, false)
+  assert.equal(tier.expertEndorsement, false)
+  assert.equal(tier.externallyReviewed, false)
+  assert.equal(tier.humanReviewed, false)
+  assert.equal(tier.releaseAuthority, 'separate')
+  assert.equal(tier.verifies, 'deterministic evidence-policy compliance')
+  for (const phrase of ['scientific truth', 'independent reproduction', 'expert consensus']) {
+    assert.ok(tier.doesNotEstablish.includes(phrase), `${phrase} must be disclaimed`)
+    assert.ok(tier.publicStatement.includes(phrase), `${phrase} must appear in the public statement`)
+  }
+})
+
+test('a machine tier cannot claim to be independent, expert, external or human', () => {
+  for (const field of ['independent', 'expertEndorsement', 'externallyReviewed', 'humanReviewed'] as const) {
+    assert.throws(() => assertTierNotOverstated({ ...REVIEW_TIERS['automated-internal-editorial'], [field]: true }),
+      /cannot declare itself independent, expert, external or human/, `${field} must be refused`)
+  }
+  assert.throws(() => assertTierNotOverstated({ ...REVIEW_TIERS['automated-internal-editorial'], releaseAuthority: 'same' }),
+    /must not also hold release authority/)
+})
+
+test('undeclared machine reviewer kinds fail closed', () => {
+  for (const kind of ['automated-scorer', 'machine-review', 'synthetic-editorial', 'generated-approval', 'agent-reviewer']) {
+    assert.throws(() => assertMachineReviewerPermitted(kind), /has no declared tier/, `${kind} must fail closed`)
+  }
+  // Human tiers are not gated by this: it is not a general allowlist.
+  assert.equal(assertMachineReviewerPermitted('internal-editorial'), null)
+  assert.equal(assertMachineReviewerPermitted('external-expert'), null)
+  assert.equal(assertMachineReviewerPermitted('automated-internal-editorial')?.reviewerKind, 'automated-internal-editorial')
+})
+
+test('a machine decision cannot be attributed to a person', () => {
+  for (const attribution of [{ displayName: 'A Reviewer' }, { reviewerId: 'expert_someone' }]) {
+    assert.throws(() => assertNoPersonAttribution('automated-internal-editorial', attribution),
+      /cannot carry a reviewer identity/)
+  }
+  // A human tier may of course name its reviewer.
+  assert.doesNotThrow(() => assertNoPersonAttribution('internal-editorial', { displayName: 'A Reviewer' }))
+})
+
+test('every produced decision names the machine tier, and none names a person', () => {
+  assert.equal((decisions.tier as { reviewerKind: string }).reviewerKind, 'automated-internal-editorial')
+  const rows = decisions.decisions as { reviewerKind: string }[]
+  assert.ok(rows.length > 0)
+  for (const row of rows) assert.equal(row.reviewerKind, 'automated-internal-editorial')
+  const carried = decisions.carriedForward as { axes: { reviewerKind: string }[] }[]
+  for (const entry of carried) for (const axis of entry.axes) assert.equal(axis.reviewerKind, 'automated-internal-editorial')
+  const text = JSON.stringify(decisions)
+  assert.ok(!/"displayName"|"reviewerId"|"affiliation"/.test(text), 'no identity field may appear')
+})
+
+test('the assurance tier keeps machine review out of the human tier', () => {
+  assert.equal(reviewAssuranceTier([{ scope: 's', reviewerKind: 'internal-editorial' } as never]), 'internally-reviewed-canonical')
+  assert.equal(reviewAssuranceTier([{ scope: 's', reviewerKind: 'automated-internal-editorial' } as never]),
+    'automated-internal-review-canonical')
+  // Mixing them is neither, and must not collapse into the human tier.
+  assert.equal(reviewAssuranceTier([
+    { scope: 'a', reviewerKind: 'internal-editorial' } as never,
+    { scope: 'b', reviewerKind: 'automated-internal-editorial' } as never,
+  ]), 'mixed-review-canonical')
+})
+
+test('the operator report states the tier and its limits verbatim', () => {
+  const report = readFileSync(resolve(ROOT, 'docs/operations/exact-revision-review.md'), 'utf8')
+  assert.match(report, /automated-internal-editorial/)
+  assert.match(report, /\| humanReviewed \| false \|/)
+  assert.match(report, /deterministic evidence-policy compliance/)
+  assert.match(report, /does not establish scientific truth, independent reproduction or expert consensus/)
+  assert.match(report, /No decision below was made by a person/)
+})
+
+test('the 30/7/1 result survives the tier correction', () => {
+  const counts = projection.classifications as Record<string, number>
+  assert.equal(counts['release-ready'], 30)
+  assert.equal(counts['revise-and-rereview'], 7)
+  assert.equal(counts.rejected, 1)
+  assert.equal(projection.releaseReady, 30)
 })

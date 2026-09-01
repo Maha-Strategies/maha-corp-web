@@ -26,6 +26,9 @@ export const REVIEW_ASSURANCE_TIERS = [
   'internally-reviewed-canonical',
   'expert-reviewed-canonical',
   'mixed-review-canonical',
+  // Every approval came from a machine. Named separately so it cannot be read
+  // as the internally-reviewed tier, which implies a person.
+  'automated-internal-review-canonical',
   'legacy-review-unclassified',
 ] as const
 export type ReviewAssuranceTier = (typeof REVIEW_ASSURANCE_TIERS)[number]
@@ -66,7 +69,7 @@ export interface ScopedReleaseApproval {
   reviewId: string
   reviewSha256: string
   reviewedAt: string
-  reviewerKind?: 'external-expert' | 'internal-editorial' | 'automated-verifier'
+  reviewerKind?: 'external-expert' | 'internal-editorial' | 'automated-internal-editorial' | 'automated-verifier'
   reviewMethod?: string
 }
 
@@ -99,6 +102,9 @@ export function reviewAssuranceTier(approvals: readonly ScopedReleaseApproval[])
   if (kinds.has(undefined)) return 'legacy-review-unclassified'
   if (kinds.size === 1 && kinds.has('external-expert')) return 'expert-reviewed-canonical'
   if (kinds.size === 1 && kinds.has('internal-editorial')) return 'internally-reviewed-canonical'
+  // Its own tier, not the internal-editorial one: a reader who sees
+  // "internally reviewed" is entitled to assume a person was involved.
+  if (kinds.size === 1 && kinds.has('automated-internal-editorial')) return 'automated-internal-review-canonical'
   return 'mixed-review-canonical'
 }
 

@@ -1,8 +1,18 @@
 # Exact-revision review: the 38 alignment-clear unreleased records
 
-Internal-editorial review, automated, **not independent and not expert
-endorsement**. It records what the committed evidence settles and sends back
-what it does not.
+Reviewer tier: `automated-internal-editorial`.
+
+| assurance | value |
+|---|---|
+| independent | false |
+| expertEndorsement | false |
+| externallyReviewed | false |
+| humanReviewed | false |
+| releaseAuthority | separate |
+
+This tier verifies deterministic evidence-policy compliance. It does not establish scientific truth, independent reproduction or expert consensus, and no decision in it was made by a person.
+
+No decision below was made by a person, and none is attributed to one.
 
 ## What was previously unobservable
 

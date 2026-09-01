@@ -11,6 +11,7 @@ import {
   REVIEW_AXES, classifyForRelease, projectReviewState, releaseAuthorized,
   type AxisDecision, type AxisRecord, type ReviewAxis,
 } from '../lib/exact-revision-review.ts'
+import { REVIEW_TIERS, assertMachineReviewerPermitted, assertNoPersonAttribution, assertTierNotOverstated } from '../lib/review-tier.ts'
 import observation from '../content/scaling/public-surface-observation.json' with { type: 'json' }
 
 /**
@@ -21,6 +22,10 @@ import observation from '../content/scaling/public-surface-observation.json' wit
  * can actually settle. Where the evidence cannot settle an axis, the axis gets
  * revise rather than a benefit of the doubt.
  */
+
+const TIER = REVIEW_TIERS['automated-internal-editorial']
+assertTierNotOverstated(TIER)
+assertMachineReviewerPermitted(TIER.reviewerKind)
 
 const digest = (value: unknown) => `sha256:${createHash('sha256').update(canonicalJson(value), 'utf8').digest('hex')}`
 
@@ -48,7 +53,7 @@ for (const decision of BATCH_11_DECISIONS) {
   existing.set(decision.recordId, REVIEW_AXES.map((axis) => ({
     axis,
     decision: 'reject' as AxisDecision,
-    reviewerKind: 'internal-editorial' as const,
+    reviewerKind: 'automated-internal-editorial' as const,
     decisionSha256: decision.packetDigest,
     note: 'Held by the Batch 11 alignment review; not authorized for canonical release.',
     revisionSha256: revision,
@@ -167,7 +172,7 @@ for (const packet of packets) {
       auditSha256: packet.auditSha256,
       axis,
       decision,
-      reviewerKind: 'internal-editorial',
+      reviewerKind: 'automated-internal-editorial',
       decisionSha256: digest({ recordId: packet.recordId, revision: packet.revisionSha256, axis, decision, note }),
       note,
       decidedAt: REVIEW_DATE,
@@ -176,6 +181,12 @@ for (const packet of packets) {
 }
 
 /* ------------------------------------------------------ classification -- */
+
+// Every decision this run emits is machine-generated. Checked rather than
+// assumed: a future edit that starts carrying a reviewer name fails here.
+for (const decision of [...produced, ...[...existing.values()].flat()]) {
+  assertNoPersonAttribution(decision.reviewerKind, decision as unknown as { displayName?: string; reviewerId?: string })
+}
 
 const projections = cohort.map((recordId) => {
   const packet = packets.find((entry) => entry.recordId === recordId)!
@@ -242,7 +253,8 @@ write('content/review/exact-revision-projection.json', {
     releaseAuthorized: entry.releaseAuthorized, inspectionDepth: entry.inspectionDepth,
     decidedAxes: entry.decidedAxes, missingAxes: entry.missingAxes, projectionDigest: entry.projectionDigest,
   })),
-  boundary: 'Internal-editorial review state only. It is not independent, is not expert endorsement, and asserts nothing about whether a claim is true.',
+  tier: TIER,
+  boundary: TIER.publicStatement,
 })
 write('content/review/internal-review-packets.json', {
   schemaVersion: 'maha-internal-review-packet/1.0', reviewDate: REVIEW_DATE, packets,
@@ -250,10 +262,11 @@ write('content/review/internal-review-packets.json', {
 })
 write('content/review/internal-review-decisions.json', {
   schemaVersion: 'maha-internal-review-decision/1.0', reviewDate: REVIEW_DATE,
-  appendOnly: true, reviewerKind: 'internal-editorial',
+  appendOnly: true,
+  tier: TIER,
   decisionCount: produced.length, decisions: produced,
   carriedForward: [...existing.entries()].map(([recordId, axes]) => ({ recordId, axes })),
-  boundary: 'Automated internal-editorial decisions. Not independent review and not external endorsement.',
+  boundary: TIER.publicStatement,
 })
 write('content/review/release-canary-manifest.json', {
   schemaVersion: 'maha-release-canary/1.0', reviewDate: REVIEW_DATE,
@@ -319,9 +332,19 @@ const ready = classCounts['release-ready'] ?? 0
 const lines: string[] = [
   '# Exact-revision review: the 38 alignment-clear unreleased records',
   '',
-  'Internal-editorial review, automated, **not independent and not expert',
-  'endorsement**. It records what the committed evidence settles and sends back',
-  'what it does not.',
+  'Reviewer tier: `automated-internal-editorial`.',
+  '',
+  '| assurance | value |',
+  '|---|---|',
+  '| independent | false |',
+  '| expertEndorsement | false |',
+  '| externallyReviewed | false |',
+  '| humanReviewed | false |',
+  '| releaseAuthority | separate |',
+  '',
+  TIER.publicStatement,
+  '',
+  'No decision below was made by a person, and none is attributed to one.',
   '',
   '## What was previously unobservable',
   '',

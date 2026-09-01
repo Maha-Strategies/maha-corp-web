@@ -13,6 +13,10 @@ export const EPISTEMIC_REVIEW_VERSION = 'maha-epistemic-review/1.0' as const
 export const REVIEWER_KINDS = [
   'external-expert',
   'internal-editorial',
+  // Machine-generated editorial review. Kept distinct from internal-editorial
+  // so a decision no person made is never counted as one they did. Its
+  // assurances are declared in lib/review-tier.ts.
+  'automated-internal-editorial',
   'automated-verifier',
 ] as const
 
