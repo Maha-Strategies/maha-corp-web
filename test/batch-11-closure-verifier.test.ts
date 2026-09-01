@@ -10,6 +10,13 @@ import {
   verifyBatch11Closure,
   type ClosureRefusal,
 } from '../lib/batch-11-closure-verifier.ts'
+import { fingerprintCredential } from '../lib/batch-11-credential-provenance.ts'
+import {
+  TEMPORARY_REVOCABLE_SECRET_NAMES,
+  boundEvidenceDigest,
+  environmentSecretSlotFingerprint,
+  type BoundEvidence,
+} from '../lib/batch-11-evidence-binding.ts'
 import { REQUIRED_TEARDOWN_KINDS, repositoryContract, type TeardownEvidence } from '../lib/batch-11-evidence-verifier.ts'
 import { recomputeObservationsDigest, TEARDOWN_PRODUCER_VERSION } from '../lib/batch-11-teardown-observations.ts'
 
@@ -466,7 +473,7 @@ test('incomplete or duplicated revocation coverage is refused', () => {
       draft.observations = (draft.observations as unknown[]).slice(1)
     }),
   })
-  refusesWith('revocation-evidence-missing', {
+  refusesWith('revocation-observation-duplicated', {
     revocation: resealedRevocation((draft) => {
       const observations = draft.observations as unknown[]
       draft.observations = [...observations, observations[0]]
@@ -492,4 +499,147 @@ test('the revocation producer is inert and never touches the shared teardown uni
   assert.ok(!source.includes('TeardownResourceKind'), 'the shared teardown union must stay untouched')
   const teardownSource = readFileSync(resolve(ROOT, 'lib/batch-11-teardown-observations.ts'), 'utf8')
   assert.ok(!teardownSource.includes('revocation'), 'the v2.0 producer must not learn about revocation')
+})
+
+/* --- gap 4: revocation must be about THIS run's credentials --------------- */
+
+/**
+ * The substitution these tests exist to catch.
+ *
+ * Before this binding, a revocation observation only had to say
+ * "supabase-access-token: confirmed-revoked". Any genuinely revoked Supabase
+ * token satisfied that - including one belonging to a different run, a
+ * different project, or a token revoked years ago - because nothing tied the
+ * observation to the credential this run actually held.
+ */
+
+const identityOf = (report: Record<string, unknown>, credential: string) =>
+  (report.observations as Array<{ credential: string; credentialFingerprint: string }>)
+    .find((entry) => entry.credential === credential)!.credentialFingerprint
+
+const substituting = (credential: string, fingerprint: string) =>
+  resealedRevocation((draft) => {
+    const observations = draft.observations as Array<Record<string, unknown>>
+    observations.find((entry) => entry.credential === credential)!.credentialFingerprint = fingerprint
+  })
+
+test('the baseline binds every observation to a credential the artifact names', () => {
+  const report = close()
+  assert.equal(report.summary.revocationBoundToRunCredentials, true)
+  const identities = artifact().identities as Record<string, string>
+  assert.equal(identityOf(revocation(), 'supabase-access-token'), identities.branchManagementIdentityFingerprint)
+  assert.equal(identityOf(revocation(), 'vercel-automation-bypass'), identities.automationBypassIdentityFingerprint)
+})
+
+test('a different but genuinely revoked Supabase token does not close this run', () => {
+  // Well-formed, plausible, and revoked somewhere. Just not ours.
+  const other = fingerprintCredential('a-different-supabase-token-that-was-also-revoked')
+  const report = refusesWith('revocation-credential-identity-mismatch', {
+    revocation: substituting('supabase-access-token', other),
+  })
+  assert.equal(report.summary.revocationBoundToRunCredentials, false)
+})
+
+test('a different absent Vercel bypass does not close this run', () => {
+  refusesWith('revocation-credential-identity-mismatch', {
+    revocation: substituting('vercel-automation-bypass', fingerprintCredential('somebody-elses-bypass')),
+  })
+})
+
+test('the two credential identities are not interchangeable', () => {
+  const identities = artifact().identities as Record<string, string>
+  refusesWith('revocation-credential-identity-mismatch', {
+    revocation: substituting('supabase-access-token', identities.automationBypassIdentityFingerprint),
+  })
+  refusesWith('revocation-credential-identity-mismatch', {
+    revocation: substituting('vercel-automation-bypass', identities.branchManagementIdentityFingerprint),
+  })
+})
+
+test('the environment-secret slot must name this run, this commit and this environment', () => {
+  const base = {
+    environment: 'batch-11-preview-rehearsal',
+    names: TEMPORARY_REVOCABLE_SECRET_NAMES,
+    runMarker: String(artifact().runMarker),
+    reviewedCommit: String(artifact().reviewedCommit),
+  }
+  assert.equal(identityOf(revocation(), 'github-environment-secrets'), environmentSecretSlotFingerprint(base))
+
+  for (const drift of [
+    { ...base, runMarker: 'batch-11-mixed-lineage-rehearsal-999' },
+    { ...base, reviewedCommit: 'c'.repeat(40) },
+    { ...base, environment: 'some-other-environment' },
+    { ...base, names: ['SUPABASE_ACCESS_TOKEN'] },
+  ]) {
+    refusesWith('revocation-credential-identity-mismatch', {
+      revocation: substituting('github-environment-secrets', environmentSecretSlotFingerprint(drift)),
+    })
+  }
+})
+
+test('an artifact that records no credential identity cannot be closed by any observation', () => {
+  for (const field of ['branchManagementIdentityFingerprint', 'automationBypassIdentityFingerprint']) {
+    const bad = artifact()
+    delete (bad.identities as Record<string, unknown>)[field]
+    // The identities block is refused outright, and revocation has nothing to
+    // check against - the artifact cannot be closed by supplying observations.
+    const report = refusesWith('preview-identity-unproven', { artifact: bad })
+    assert.ok(report.refusals.includes('revocation-identity-unbound'),
+      `expected revocation-identity-unbound, got ${report.refusals.join(', ')}`)
+    assert.equal(report.summary.revocationBoundToRunCredentials, false)
+  }
+})
+
+test('a duplicated observation is refused, not counted twice', () => {
+  refusesWith('revocation-observation-duplicated', {
+    revocation: resealedRevocation((draft) => {
+      const observations = draft.observations as unknown[]
+      draft.observations = [...observations, observations[0]]
+    }),
+  })
+})
+
+test('identity mismatch is reported ahead of a still-active state', () => {
+  // Both are wrong. The misleading one is the substituted identity, because a
+  // reader would otherwise see "not yet revoked" and wait, rather than ask why
+  // the evidence is about someone else's credential.
+  const report = close({
+    revocation: resealedRevocation((draft) => {
+      const entry = (draft.observations as Array<Record<string, unknown>>)
+        .find((observation) => observation.credential === 'supabase-access-token')!
+      entry.credentialFingerprint = fingerprintCredential('not-ours')
+      entry.observedState = 'still-active'
+    }),
+  })
+  assert.ok(report.refusals.includes('revocation-credential-identity-mismatch'))
+  assert.ok(!report.refusals.includes('credential-not-confirmed-revoked'))
+})
+
+test('tampering with any credential identity invalidates the artifact digest', () => {
+  const identities = artifact().identities as Record<string, string>
+  for (const field of Object.keys(identities)) {
+    if (field === 'protectedEnvironment') continue
+    const tampered = artifact()
+    const block = tampered.identities as Record<string, string>
+    block[field] = fingerprintCredential(`swapped-${field}`)
+
+    // The digest the artifact carries no longer recomputes from its contents.
+    const recomputed = boundEvidenceDigest(tampered as unknown as BoundEvidence)
+    assert.notEqual(recomputed, tampered.artifactDigest,
+      `${field} must be covered by the artifact digest`)
+
+    // And closure refuses rather than accepting a re-sealed substitution.
+    const report = close({ artifact: tampered })
+    assert.equal(report.closed, false)
+  }
+})
+
+test('re-sealing a tampered artifact still fails: the closure digest moves with it', () => {
+  const tampered = artifact()
+  const block = tampered.identities as Record<string, string>
+  block.branchManagementIdentityFingerprint = fingerprintCredential('a-token-we-never-held')
+  tampered.artifactDigest = boundEvidenceDigest(tampered as unknown as BoundEvidence)
+
+  const report = refusesWith('revocation-credential-identity-mismatch', { artifact: tampered })
+  assert.notEqual(report.closureDigest, close().closureDigest)
 })

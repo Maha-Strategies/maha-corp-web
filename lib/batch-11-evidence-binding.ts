@@ -31,6 +31,23 @@ export const TEMPORARY_PREVIEW_SECRET_NAMES = [
   'VERCEL_TOKEN',
 ] as const
 
+/**
+ * The five secrets a rehearsal is issued and must have revoked afterwards.
+ *
+ * Narrower than TEMPORARY_PREVIEW_SECRET_NAMES on purpose. That list is the set
+ * of bindings teardown removes from the environment; this one is the set of
+ * values whose revocation has to be independently observed. SUPABASE_PROJECT_REF
+ * is not a credential, and VERCEL_TOKEN is a standing credential the runbook
+ * preserves across runs - neither is revoked, so neither belongs here.
+ */
+export const TEMPORARY_REVOCABLE_SECRET_NAMES = [
+  'EPISTEMIC_OPERATIONS_TOKEN',
+  'EPISTEMIC_RELEASE_AUTHORITY_TOKEN',
+  'SUPABASE_ACCESS_TOKEN',
+  'SUPABASE_ACCESS_TOKEN_SHA256',
+  'VERCEL_AUTOMATION_BYPASS_SECRET',
+] as const
+
 export const TEARDOWN_HANDLE_KINDS = [
   'supabase-branch',
   'vercel-preview',
@@ -114,6 +131,9 @@ export type BindingRefusal =
   | 'release-predecessor-mismatch'
   | 'preview-identity-missing'
   | 'preview-identity-malformed'
+  | 'credential-identity-missing'
+  | 'credential-identity-malformed'
+  | 'credential-identity-duplicated'
   | 'teardown-handle-missing'
   | 'teardown-handle-release-mismatch'
 
@@ -275,18 +295,66 @@ export interface CleanupStatus {
 }
 
 /**
- * Who ran the rehearsal, and under what protection.
+ * Who ran the rehearsal, under what protection, and with which exact secrets.
  *
  * The identities are fingerprints, never the tokens: they answer "was this the
  * same operations identity throughout" without being able to authenticate as
  * it. The environment is named because the reviewer gate is attached to that
  * name, and a run from an unprotected environment would otherwise look
  * identical in the evidence.
+ *
+ * The branch-management and automation-bypass fingerprints are here for a
+ * different reason. Post-run revocation evidence has to be about *these*
+ * secrets, and a slot name cannot carry that: "the Supabase token was revoked"
+ * is true of every Supabase token anyone ever revoked. Recording the exact
+ * values' fingerprints in the run artifact is what lets a later observation be
+ * checked against the credential that actually did the work, so a genuinely
+ * revoked but unrelated token cannot be offered as closure for this run.
  */
 export interface PreviewIdentities {
   protectedEnvironment: string
   operationsIdentityFingerprint: string
   releaseAuthorityIdentityFingerprint: string
+  /** sha256 of the exact Supabase token that created and destroyed the branch. */
+  branchManagementIdentityFingerprint: string
+  /** sha256 of the exact Vercel automation-bypass secret this run was issued. */
+  automationBypassIdentityFingerprint: string
+}
+
+/**
+ * Every credential identity the artifact must carry, and its human label.
+ *
+ * One list, so the producer, the validator and the closure verifier cannot
+ * drift into disagreeing about which identities a run is required to prove.
+ */
+export const CREDENTIAL_IDENTITY_FIELDS = [
+  ['operationsIdentityFingerprint', 'operations'],
+  ['releaseAuthorityIdentityFingerprint', 'release-authority'],
+  ['branchManagementIdentityFingerprint', 'Supabase branch-management'],
+  ['automationBypassIdentityFingerprint', 'Vercel automation-bypass'],
+] as const satisfies readonly (readonly [keyof PreviewIdentities, string])[]
+
+/**
+ * The deterministic identity of the protected environment's secret slots.
+ *
+ * GitHub never returns a secret value, so there is no value to fingerprint and
+ * no honest way to pretend otherwise. What can be bound exactly is the slot:
+ * this environment, these five names, this run, this commit. Absence of those
+ * names from that environment is a real provider fact, and this fingerprint is
+ * what ties it to the run rather than to environments in general.
+ */
+export function environmentSecretSlotFingerprint(input: {
+  environment: string
+  names: readonly string[]
+  runMarker: string
+  reviewedCommit: string
+}): string {
+  return sha256Canonical({
+    environment: input.environment,
+    names: [...input.names].sort(),
+    runMarker: input.runMarker,
+    reviewedCommit: input.reviewedCommit,
+  })
 }
 
 export interface BoundEvidenceInput {
@@ -333,9 +401,10 @@ export interface BoundEvidence {
  * Digest over the fields that identify the run.
  *
  * Deliberately narrow: the reviewed commit, the cohort in order, the plan
- * digest, the classifications, the phase outcomes, the release identities and
- * the cleanup status. Free text and counters derivable from these are left out,
- * so the digest moves when identity moves and not when prose does.
+ * digest, the classifications, the phase outcomes, the release identities, the
+ * cleanup status and the credential identities. Free text and counters
+ * derivable from these are left out, so the digest moves when identity moves
+ * and not when prose does.
  */
 export function boundEvidenceDigest(evidence: Omit<BoundEvidence, 'artifactDigest'>): string {
   const identity = {
@@ -351,6 +420,10 @@ export function boundEvidenceDigest(evidence: Omit<BoundEvidence, 'artifactDiges
     deploymentMarkerDigest: evidence.deploymentMarkerDigest,
     teardownHandleDigests: evidence.teardownHandleDigests,
     cleanup: evidence.cleanup,
+    // In the digest because revocation evidence is checked against these: a
+    // swapped credential identity has to invalidate the artifact, not merely
+    // fail a later comparison against an artifact that still looks intact.
+    identities: evidence.identities,
   }
   return `sha256:${createHash('sha256').update(canonicalJson(identity), 'utf8').digest('hex')}`
 }
@@ -450,18 +523,24 @@ export function buildBoundEvidence(input: BoundEvidenceInput): BoundEvidence {
     throw new EvidenceBindingRefused('preview-identity-missing',
       'The artifact must name the protected environment the run was approved in.')
   }
-  for (const [label, value] of [
-    ['operations', identities.operationsIdentityFingerprint],
-    ['release-authority', identities.releaseAuthorityIdentityFingerprint],
-  ] as const) {
+  for (const [field, label] of CREDENTIAL_IDENTITY_FIELDS) {
+    const value = identities[field]
+    if (value === undefined || value === null || value === '') {
+      throw new EvidenceBindingRefused('credential-identity-missing',
+        `The artifact does not record the ephemeral ${label} credential identity.`)
+    }
     if (typeof value !== 'string' || !/^sha256:[0-9a-f]{64}$/.test(value)) {
-      throw new EvidenceBindingRefused('preview-identity-malformed',
+      throw new EvidenceBindingRefused('credential-identity-malformed',
         `The ephemeral ${label} identity must be recorded as a non-reversible sha256 fingerprint.`)
     }
   }
-  if (identities.operationsIdentityFingerprint === identities.releaseAuthorityIdentityFingerprint) {
-    throw new EvidenceBindingRefused('preview-identity-malformed',
-      'The operations and release-authority identities must be distinct.')
+  // Four distinct secrets were issued. Two identities that collide mean one
+  // value was reused, or one field was copied from another - and either way the
+  // artifact can no longer say which credential did which job.
+  const fingerprints = CREDENTIAL_IDENTITY_FIELDS.map(([field]) => identities[field])
+  if (new Set(fingerprints).size !== fingerprints.length) {
+    throw new EvidenceBindingRefused('credential-identity-duplicated',
+      'Two ephemeral credential identities are identical; each temporary secret must be distinct.')
   }
 
   const base = {

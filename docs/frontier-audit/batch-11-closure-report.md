@@ -6,7 +6,7 @@
 
 **CLOSED**
 
-Closure digest `sha256:230b34b77da956f074202d084544981127633119da708080b1a4c5a106590d8d`.
+Closure digest `sha256:c7c430d39f0fe405fb69742c446b7d8be04fa0db5abc8428bd9d086e46efdc6b`.
 
 ## What was proven
 
@@ -36,8 +36,8 @@ Closure digest `sha256:230b34b77da956f074202d084544981127633119da708080b1a4c5a10
 | `resource-destruction` | pass | Every ephemeral branch, deployment, secret binding and release row was independently confirmed absent. |
 | `cleanup-status` | pass | The run reports every temporary resource destroyed, corroborated by the observations above. |
 | `release-binding` | pass | Every release binds its exact revision, audit and decision-bundle digest. |
-| `preview-identities` | pass | Run approved in batch-11-preview-rehearsal under two distinct ephemeral identities. |
-| `revocation` | pass | All 3 temporary credentials independently confirmed revoked. |
+| `preview-identities` | pass | Run approved in batch-11-preview-rehearsal under 4 distinct ephemeral credential identities. |
+| `revocation` | pass | All 3 temporary credentials this run used were independently confirmed revoked. |
 
 ## Composed evidence verdict
 

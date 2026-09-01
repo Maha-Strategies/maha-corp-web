@@ -768,10 +768,16 @@ try {
     },
     // Fingerprints, never the tokens: this answers "was this the same
     // operations identity throughout" without being able to authenticate as it.
+    // The branch-management and bypass fingerprints are what post-run
+    // revocation evidence is later checked against. Both values are already
+    // gated non-empty above, so these identify the secrets this run actually
+    // used rather than whatever happened to be unset.
     identities: {
       protectedEnvironment: process.env.GITHUB_ENVIRONMENT ?? 'batch-11-preview-rehearsal',
       operationsIdentityFingerprint: fingerprintCredential(operationsToken),
       releaseAuthorityIdentityFingerprint: fingerprintCredential(authorityToken),
+      branchManagementIdentityFingerprint: fingerprintCredential(managementToken),
+      automationBypassIdentityFingerprint: fingerprintCredential(bypass),
     },
     requiredPhaseCount: PHASE_ORDER.length,
   })

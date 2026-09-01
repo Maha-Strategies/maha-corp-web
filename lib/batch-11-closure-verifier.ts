@@ -2,11 +2,19 @@ import { createHash } from 'node:crypto'
 
 import { canonicalJson } from './evidence-dossier/digest.ts'
 import { FINGERPRINT_PATTERN } from './batch-11-credential-provenance.ts'
-import { compareReleasesToContract, runMarkerFor } from './batch-11-evidence-binding.ts'
+import {
+  CREDENTIAL_IDENTITY_FIELDS,
+  TEMPORARY_REVOCABLE_SECRET_NAMES,
+  compareReleasesToContract,
+  environmentSecretSlotFingerprint,
+  runMarkerFor,
+} from './batch-11-evidence-binding.ts'
 import {
   REVOCABLE_CREDENTIALS,
+  REVOCATION_IDENTITY_BINDING,
   recomputeRevocationDigest,
   REVOCATION_EVIDENCE_VERSION,
+  type RevocableCredential,
   type RevocationReport,
 } from './batch-11-revocation-evidence.ts'
 import {
@@ -62,6 +70,9 @@ export type ClosureRefusal =
   | 'revocation-evidence-missing'
   | 'revocation-evidence-inconsistent'
   | 'revocation-digest-mismatch'
+  | 'revocation-observation-duplicated'
+  | 'revocation-identity-unbound'
+  | 'revocation-credential-identity-mismatch'
   | 'credential-not-confirmed-revoked'
 
 export interface ClosureCheck {
@@ -90,6 +101,8 @@ export interface ClosureReport {
     resourcesRequired: number
     credentialsConfirmedRevoked: number
     credentialsRequired: number
+    /** Whether every revocation observation named the run's own credentials. */
+    revocationBoundToRunCredentials: boolean
     protectedEnvironment: string | null
   }
   /** The composed evidence verdict, carried so closure is auditable in one file. */
@@ -152,6 +165,7 @@ export function verifyBatch11Closure(
     resourcesRequired: REQUIRED_TEARDOWN_KINDS.length,
     credentialsConfirmedRevoked: 0,
     credentialsRequired: REVOCABLE_CREDENTIALS.length,
+    revocationBoundToRunCredentials: false,
     protectedEnvironment: null,
   }
 
@@ -312,18 +326,44 @@ export function verifyBatch11Closure(
   if (!identities || environment !== 'batch-11-preview-rehearsal') {
     fail('preview-identities', 'preview-identity-unproven',
       `The artifact records the protected environment as ${JSON.stringify(environment)}.`)
-  } else if (typeof identities.operationsIdentityFingerprint !== 'string'
-    || !FINGERPRINT_PATTERN.test(identities.operationsIdentityFingerprint)
-    || typeof identities.releaseAuthorityIdentityFingerprint !== 'string'
-    || !FINGERPRINT_PATTERN.test(identities.releaseAuthorityIdentityFingerprint)
-    || identities.operationsIdentityFingerprint === identities.releaseAuthorityIdentityFingerprint) {
+  } else if (CREDENTIAL_IDENTITY_FIELDS.some(([field]) =>
+    typeof identities[field] !== 'string' || !FINGERPRINT_PATTERN.test(identities[field] as string))
+    || new Set(CREDENTIAL_IDENTITY_FIELDS.map(([field]) => identities[field])).size !== CREDENTIAL_IDENTITY_FIELDS.length) {
     fail('preview-identities', 'preview-identity-unproven',
-      'The ephemeral operations and release-authority identities are not two distinct non-reversible fingerprints.')
-  } else pass('preview-identities', `Run approved in ${environment} under two distinct ephemeral identities.`)
+      `The artifact does not record ${CREDENTIAL_IDENTITY_FIELDS.length} distinct non-reversible ephemeral credential identities.`)
+  } else pass('preview-identities', `Run approved in ${environment} under ${CREDENTIAL_IDENTITY_FIELDS.length} distinct ephemeral credential identities.`)
+
+  /**
+   * The fingerprint a revocation observation must carry to be about this run.
+   *
+   * Two come straight from the artifact: the run held those values and recorded
+   * their digests, so an observation about a different token - however genuinely
+   * revoked - fails to match. The third is derived rather than recorded, because
+   * GitHub never returns a secret value; what is bound instead is the exact
+   * slot, which is still specific to this environment, this run and this commit.
+   *
+   * Returns null when the artifact cannot supply the identity at all, which is a
+   * different failure from supplying the wrong one.
+   */
+  const expectedRevocationIdentity = (credential: RevocableCredential): string | null => {
+    const binding = REVOCATION_IDENTITY_BINDING[credential]
+    if (binding === 'environment-secret-slot') {
+      if (!environment || !runMarker || !reviewedCommit) return null
+      return environmentSecretSlotFingerprint({
+        environment,
+        names: TEMPORARY_REVOCABLE_SECRET_NAMES,
+        runMarker,
+        reviewedCommit,
+      })
+    }
+    const declared = identities ? identities[binding] : undefined
+    return typeof declared === 'string' && FINGERPRINT_PATTERN.test(declared) ? declared : null
+  }
 
   // Revocation, from an independent post-run check rather than the run itself.
   const revocationReport = isObject(revocation) ? (revocation as unknown as RevocationReport) : null
   let revoked = 0
+  let revocationBound = false
   if (!revocationReport || !Array.isArray(revocationReport.observations)) {
     fail('revocation', 'revocation-evidence-missing',
       'No revocation evidence was supplied. A destroyed branch does not revoke the token that created it.')
@@ -345,13 +385,36 @@ export function verifyBatch11Closure(
     const missing = REVOCABLE_CREDENTIALS.filter((credential) => !seenCredentials.includes(credential))
     const unresolved = revocationReport.observations.filter((entry) => entry.observedState !== 'confirmed-revoked')
     revoked = revocationReport.observations.filter((entry) => entry.observedState === 'confirmed-revoked').length
-    if (missing.length > 0 || new Set(seenCredentials).size !== seenCredentials.length) {
+
+    // Which exact secrets these observations are about. Checked before the
+    // states, because "confirmed-revoked" for the wrong credential is a more
+    // misleading answer than "not confirmed" for the right one.
+    const unbound: string[] = []
+    const mismatched: string[] = []
+    for (const observation of revocationReport.observations) {
+      if (!REVOCABLE_CREDENTIALS.includes(observation.credential)) continue
+      const expected = expectedRevocationIdentity(observation.credential)
+      if (expected === null) unbound.push(observation.credential)
+      else if (observation.credentialFingerprint !== expected) mismatched.push(observation.credential)
+    }
+    revocationBound = unbound.length === 0 && mismatched.length === 0 && missing.length === 0
+
+    if (missing.length > 0) {
       fail('revocation', 'revocation-evidence-missing',
-        `Revocation coverage is incomplete or duplicated: missing ${missing.join(', ') || 'none'}.`)
+        `Revocation coverage is incomplete: missing ${missing.join(', ')}.`)
+    } else if (new Set(seenCredentials).size !== seenCredentials.length) {
+      fail('revocation', 'revocation-observation-duplicated',
+        'A credential is observed more than once; one run issued one of each.')
+    } else if (unbound.length > 0) {
+      fail('revocation', 'revocation-identity-unbound',
+        `The artifact records no credential identity to check these observations against: ${unbound.join(', ')}.`)
+    } else if (mismatched.length > 0) {
+      fail('revocation', 'revocation-credential-identity-mismatch',
+        `${mismatched.join(', ')}: the observation is about a different credential than this run used.`)
     } else if (unresolved.length > 0) {
       fail('revocation', 'credential-not-confirmed-revoked',
         `${unresolved.map((entry) => `${entry.credential} (${entry.observedState})`).join(', ')}.`)
-    } else pass('revocation', `All ${REVOCABLE_CREDENTIALS.length} temporary credentials independently confirmed revoked.`)
+    } else pass('revocation', `All ${REVOCABLE_CREDENTIALS.length} temporary credentials this run used were independently confirmed revoked.`)
   }
 
   const fingerprintValue = isObject(artifact.fingerprint) ? artifact.fingerprint : {}
@@ -381,6 +444,7 @@ export function verifyBatch11Closure(
       resourcesRequired: REQUIRED_TEARDOWN_KINDS.length,
       credentialsConfirmedRevoked: revoked,
       credentialsRequired: REVOCABLE_CREDENTIALS.length,
+      revocationBoundToRunCredentials: revocationBound,
       protectedEnvironment: environment,
     },
     evidenceVerdict: evidenceReport.verdict,

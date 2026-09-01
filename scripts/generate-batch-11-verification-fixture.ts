@@ -2,8 +2,10 @@ import { mkdirSync, writeFileSync } from 'node:fs'
 
 import {
   TEMPORARY_PREVIEW_SECRET_NAMES,
+  TEMPORARY_REVOCABLE_SECRET_NAMES,
   buildBoundEvidence,
   contractReleaseIdentities,
+  environmentSecretSlotFingerprint,
   runMarkerFor,
   teardownHandleDigests,
   type ExactTeardownHandles,
@@ -35,6 +37,11 @@ const contract = repositoryContract()
 const REVIEWED_COMMIT = 'b'.repeat(40)
 const WORKFLOW_RUN_ID = '77'
 const RUN_MARKER = runMarkerFor(WORKFLOW_RUN_ID)
+
+const PROTECTED_ENVIRONMENT = 'batch-11-preview-rehearsal'
+/** Stand-in values, never credentials. The fixture proves the wiring, not a run. */
+const SYNTHETIC_BRANCH_MANAGEMENT = 'synthetic-branch-management-identity'
+const SYNTHETIC_AUTOMATION_BYPASS = 'synthetic-automation-bypass-identity'
 
 const releaseIdentities = contractReleaseIdentities().map((entry, index) => ({
   ...entry,
@@ -71,9 +78,13 @@ const bound = buildBoundEvidence({
   teardownHandles,
   cleanup: { branchDestroyed: true, deploymentDestroyed: true, markerRemoved: true },
   identities: {
-    protectedEnvironment: 'batch-11-preview-rehearsal',
+    protectedEnvironment: PROTECTED_ENVIRONMENT,
     operationsIdentityFingerprint: fingerprintCredential('synthetic-operations-identity'),
     releaseAuthorityIdentityFingerprint: fingerprintCredential('synthetic-release-authority-identity'),
+    // The same synthetic values the revocation checks below fingerprint, so the
+    // fixture exercises the binding rather than sidestepping it.
+    branchManagementIdentityFingerprint: fingerprintCredential(SYNTHETIC_BRANCH_MANAGEMENT),
+    automationBypassIdentityFingerprint: fingerprintCredential(SYNTHETIC_AUTOMATION_BYPASS),
   },
   requiredPhaseCount: PHASE_ORDER.length,
 })
@@ -99,14 +110,27 @@ const teardown = produceTeardownObservations({
 })
 
 /** Sanitized post-run revocation checks, as an operator would supply them. */
+const revocationIdentity: Record<string, string> = {
+  'supabase-access-token': fingerprintCredential(SYNTHETIC_BRANCH_MANAGEMENT),
+  'vercel-automation-bypass': fingerprintCredential(SYNTHETIC_AUTOMATION_BYPASS),
+  // No value exists to fingerprint; the slot is what is bound. Derived by the
+  // same function the closure verifier uses, so a drift between them fails.
+  'github-environment-secrets': environmentSecretSlotFingerprint({
+    environment: PROTECTED_ENVIRONMENT,
+    names: TEMPORARY_REVOCABLE_SECRET_NAMES,
+    runMarker: RUN_MARKER,
+    reviewedCommit: REVIEWED_COMMIT,
+  }),
+}
+
 const revocationChecks: RevocationCheck[] = REVOCABLE_CREDENTIALS.map((credential) => ({
   provider: credential.split('-')[0],
   credential,
   checkStatus: 'succeeded',
-  scope: 'exact-credential-fingerprint',
+  scope: credential === 'github-environment-secrets' ? 'exact-environment' : 'exact-credential-fingerprint',
   runMarker: RUN_MARKER,
   reviewedCommit: REVIEWED_COMMIT,
-  credentialFingerprint: fingerprintCredential(`synthetic-${credential}`),
+  credentialFingerprint: revocationIdentity[credential],
   stillResolves: false,
   selfReportedOnly: false,
   detail: `The ${credential} no longer resolves at the provider.`,

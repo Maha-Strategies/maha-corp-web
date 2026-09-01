@@ -82,6 +82,8 @@ const boundInput = (over: Partial<BoundEvidenceInput> = {}): BoundEvidenceInput 
     protectedEnvironment: 'batch-11-preview-rehearsal',
     operationsIdentityFingerprint: fingerprintCredential('synthetic-operations-identity'),
     releaseAuthorityIdentityFingerprint: fingerprintCredential('synthetic-release-authority-identity'),
+    branchManagementIdentityFingerprint: fingerprintCredential('synthetic-branch-management-identity'),
+    automationBypassIdentityFingerprint: fingerprintCredential('synthetic-automation-bypass-identity'),
   },
   requiredPhaseCount: PHASE_ORDER.length,
   ...over,

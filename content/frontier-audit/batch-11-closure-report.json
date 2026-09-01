@@ -60,13 +60,13 @@
       "check": "preview-identities",
       "passed": true,
       "refusal": null,
-      "detail": "Run approved in batch-11-preview-rehearsal under two distinct ephemeral identities."
+      "detail": "Run approved in batch-11-preview-rehearsal under 4 distinct ephemeral credential identities."
     },
     {
       "check": "revocation",
       "passed": true,
       "refusal": null,
-      "detail": "All 3 temporary credentials independently confirmed revoked."
+      "detail": "All 3 temporary credentials this run used were independently confirmed revoked."
     }
   ],
   "refusals": [],
@@ -87,10 +87,11 @@
     "resourcesRequired": 4,
     "credentialsConfirmedRevoked": 3,
     "credentialsRequired": 3,
+    "revocationBoundToRunCredentials": true,
     "protectedEnvironment": "batch-11-preview-rehearsal"
   },
   "evidenceVerdict": "verified",
   "evidenceRefusals": [],
-  "closureDigest": "sha256:230b34b77da956f074202d084544981127633119da708080b1a4c5a106590d8d",
+  "closureDigest": "sha256:c7c430d39f0fe405fb69742c446b7d8be04fa0db5abc8428bd9d086e46efdc6b",
   "syntheticFixture": true
 }
