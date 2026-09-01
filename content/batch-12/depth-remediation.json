@@ -1,0 +1,20 @@
+{
+  "schemaVersion": "maha-depth-remediation/1.0",
+  "cohortAtStart": 7,
+  "method": "Re-evaluated the recorded inspection depth of each record. No new document was retrieved, and no record was upgraded for having found one.",
+  "finding": "The prior classifier matched /abstract|metadata only/ anywhere in the recorded inspection location, so an audit reading \"abstract, Methods, Discussion, in-vivo results\" - a list of sections that were read - was classified as having read only the abstract. Three records were sent back for work their own audit records as already done.",
+  "correction": "Depth is now read from an explicit limitation (\"abstract only\", \"metadata only\", \"landing page\", \"publisher-served abstract\", \"indexed abstract\") rather than from keyword presence. A keyword list was tried and rejected: it missed \"SS2.1-2.3 and SS3, pp. 311-347\" and \"What Is Ignition, milestones\", which are more precise locators than any list would hold.",
+  "upgraded": [
+    "urn:maha:record:biomolecular-engineering-translational-control-circuits",
+    "urn:maha:record:neurotechnology-bci-electrocorticography-spatial-resolution",
+    "urn:maha:record:neurotechnology-bci-flexible-conformal-electrode-arrays"
+  ],
+  "remainInRevise": [
+    "urn:maha:record:longevity-metabolism-pink1-parkin-pathway",
+    "urn:maha:record:neurotechnology-bci-chronic-signal-stability",
+    "urn:maha:record:neurotechnology-bci-foreign-body-response",
+    "urn:maha:record:neurotechnology-bci-sensing-to-stimulation-loop"
+  ],
+  "remainInReviseReason": "Each records an explicitly abstract-only or landing-page inspection. Claim-to-passage support cannot be approved on an abstract, and no full text was retrieved in this sprint, so they stay in revise.",
+  "boundary": "A reclassification of existing evidence. No source was newly retrieved, inspected or rebound."
+}

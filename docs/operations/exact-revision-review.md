@@ -20,21 +20,21 @@ The scaling inventory could only read review state off an active canonical
 release, so a record reviewed and not released was indistinguishable from one
 never reviewed, and the capacity model's canonical-release bucket could never
 fill. Review state is now projected from committed decision corpora keyed by
-the exact revision digest, and that bucket reads **30**.
+the exact revision digest, and that bucket reads **33**.
 
 ## Review state of the 38
 
 | state | records |
 |---|---:|
-| `approved-for-exact-revision` | 30 |
+| `approved-for-exact-revision` | 33 |
 | `rejected` | 1 |
-| `revise-requested` | 7 |
+| `revise-requested` | 4 |
 
 | classification | records |
 |---|---:|
 | `rejected` | 1 |
-| `release-ready` | 30 |
-| `revise-and-rereview` | 7 |
+| `release-ready` | 33 |
+| `revise-and-rereview` | 4 |
 
 Before this sprint, exactly **one** of the 38 carried any committed decision: a
 Batch 11 hold that did not authorize canonical release. The other 37 had none.
@@ -87,8 +87,8 @@ Five release-ready records, one per domain, alphabetically first.
 | | count |
 |---|---:|
 | Alignment-clear | 141 |
-| Reviewed for exact revision | 30 |
-| Release-ready | 30 |
+| Reviewed for exact revision | 33 |
+| Release-ready | 33 |
 | Canonically released | 114 |
 | Substantial-page compiled | 103 |
 | Publicly reachable | 764 |

@@ -1,0 +1,2595 @@
+{
+  "schemaVersion": "maha-scope-join-impact/1.0",
+  "generator": "lib/frontier-domain-graphs.ts builds claim scope by interpolating an already-terminated exactLocator before \" in “\".",
+  "applied": false,
+  "affectedRecords": 238,
+  "totalRecords": 290,
+  "formattingOnly": true,
+  "digestChanges": 238,
+  "wouldInvalidate": {
+    "exactRevisionReviews": 33,
+    "activeCanonicalReleases": 65
+  },
+  "requiresExactRevisionReevaluation": [
+    "urn:maha:record:advanced-materials-color-centers-in-diamond",
+    "urn:maha:record:advanced-materials-contact-resistance-in-2d-devices",
+    "urn:maha:record:advanced-materials-correlated-insulating-states",
+    "urn:maha:record:advanced-materials-cvd-graphene-grain-boundaries",
+    "urn:maha:record:advanced-materials-diamond-thermal-conductivity",
+    "urn:maha:record:advanced-materials-diamond-wafer-substrates",
+    "urn:maha:record:advanced-materials-dielectric-screening",
+    "urn:maha:record:advanced-materials-direct-gap-mos2",
+    "urn:maha:record:advanced-materials-dry-transfer-contamination",
+    "urn:maha:record:advanced-materials-encapsulation-boundaries",
+    "urn:maha:record:advanced-materials-gallium-nitride-epitaxy",
+    "urn:maha:record:advanced-materials-graphene-hbn-heterostructures",
+    "urn:maha:record:advanced-materials-graphene-monolayers",
+    "urn:maha:record:advanced-materials-hexagonal-boron-nitride-dielectrics",
+    "urn:maha:record:advanced-materials-interface-bubbles-and-strain",
+    "urn:maha:record:advanced-materials-interlayer-excitons",
+    "urn:maha:record:advanced-materials-magic-angle-superconductivity",
+    "urn:maha:record:advanced-materials-materials-metrology-transfer",
+    "urn:maha:record:advanced-materials-moire-superlattices",
+    "urn:maha:record:advanced-materials-quantum-anomalous-hall-state",
+    "urn:maha:record:advanced-materials-sic-wide-bandgap-substrates",
+    "urn:maha:record:advanced-materials-spin-momentum-locking",
+    "urn:maha:record:advanced-materials-tmd-heterobilayers",
+    "urn:maha:record:advanced-materials-tmd-monolayers",
+    "urn:maha:record:advanced-materials-topological-insulator-surface-states",
+    "urn:maha:record:advanced-materials-twist-angle-control",
+    "urn:maha:record:advanced-materials-two-dimensional-magnetism",
+    "urn:maha:record:advanced-materials-valley-polarized-excitons",
+    "urn:maha:record:advanced-materials-van-der-waals-assembly",
+    "urn:maha:record:advanced-materials-wafer-scale-2d-growth",
+    "urn:maha:record:agentic-systems-mcp-agent-memory-boundaries",
+    "urn:maha:record:agentic-systems-mcp-agent-plan-execution-separation",
+    "urn:maha:record:agentic-systems-mcp-agentic-evaluation-protocols",
+    "urn:maha:record:agentic-systems-mcp-context-window-position-effects",
+    "urn:maha:record:agentic-systems-mcp-context-window-token-degradation",
+    "urn:maha:record:agentic-systems-mcp-distributed-agent-consensus",
+    "urn:maha:record:agentic-systems-mcp-game-theoretic-incentive-misalignment",
+    "urn:maha:record:agentic-systems-mcp-human-approval-boundaries",
+    "urn:maha:record:agentic-systems-mcp-idempotent-tool-calls",
+    "urn:maha:record:agentic-systems-mcp-least-authority-tokens",
+    "urn:maha:record:agentic-systems-mcp-mcp-capability-negotiation",
+    "urn:maha:record:agentic-systems-mcp-mcp-client-server-roles",
+    "urn:maha:record:agentic-systems-mcp-mcp-prompt-templates",
+    "urn:maha:record:agentic-systems-mcp-mcp-resource-discovery",
+    "urn:maha:record:agentic-systems-mcp-mcp-session-lifecycle",
+    "urn:maha:record:agentic-systems-mcp-mcp-tool-discovery",
+    "urn:maha:record:agentic-systems-mcp-mcp-tool-input-schemas",
+    "urn:maha:record:agentic-systems-mcp-mcp-tool-result-contracts",
+    "urn:maha:record:agentic-systems-mcp-multi-agent-coordination-protocols",
+    "urn:maha:record:agentic-systems-mcp-multi-agent-deadlock",
+    "urn:maha:record:agentic-systems-mcp-multi-agent-role-assignment",
+    "urn:maha:record:agentic-systems-mcp-prompt-injection-through-tools",
+    "urn:maha:record:agentic-systems-mcp-retrieval-context-selection",
+    "urn:maha:record:agentic-systems-mcp-sandboxed-tool-execution",
+    "urn:maha:record:agentic-systems-mcp-tool-allowlisting",
+    "urn:maha:record:agentic-systems-mcp-tool-call-traces",
+    "urn:maha:record:agentic-systems-mcp-tool-output-trust-boundaries",
+    "urn:maha:record:agentic-systems-mcp-tool-result-context-injection",
+    "urn:maha:record:agentic-systems-mcp-tool-timeout-budgets",
+    "urn:maha:record:biomolecular-engineering-cell-free-reaction-yield",
+    "urn:maha:record:biomolecular-engineering-cell-free-transcription-translation",
+    "urn:maha:record:biomolecular-engineering-compartmentalized-cell-free-systems",
+    "urn:maha:record:biomolecular-engineering-crude-extract-cell-free-systems",
+    "urn:maha:record:biomolecular-engineering-de-novo-binder-design",
+    "urn:maha:record:biomolecular-engineering-design-to-assay-provenance",
+    "urn:maha:record:biomolecular-engineering-directed-enzyme-evolution",
+    "urn:maha:record:biomolecular-engineering-droplet-microfluidic-screening",
+    "urn:maha:record:biomolecular-engineering-energy-regeneration-in-cell-free-systems",
+    "urn:maha:record:biomolecular-engineering-enzyme-cascade-engineering",
+    "urn:maha:record:biomolecular-engineering-experimental-fold-validation",
+    "urn:maha:record:biomolecular-engineering-fitness-landscape-accessibility",
+    "urn:maha:record:biomolecular-engineering-ligand-binding-aptamer-domains",
+    "urn:maha:record:biomolecular-engineering-metabolic-pathway-prototyping",
+    "urn:maha:record:biomolecular-engineering-motif-scaffolding",
+    "urn:maha:record:biomolecular-engineering-mutation-library-generation",
+    "urn:maha:record:biomolecular-engineering-off-target-binding-characterization",
+    "urn:maha:record:biomolecular-engineering-phage-assisted-continuous-evolution",
+    "urn:maha:record:biomolecular-engineering-protein-backbone-diffusion",
+    "urn:maha:record:biomolecular-engineering-protein-design-success-rate",
+    "urn:maha:record:biomolecular-engineering-purified-component-expression-systems",
+    "urn:maha:record:biomolecular-engineering-riboswitch-expression-platforms",
+    "urn:maha:record:biomolecular-engineering-rna-strand-displacement",
+    "urn:maha:record:biomolecular-engineering-selection-pressure-coupling",
+    "urn:maha:record:biomolecular-engineering-sequence-design-with-proteinmpnn",
+    "urn:maha:record:biomolecular-engineering-structure-prediction-filtering",
+    "urn:maha:record:biomolecular-engineering-synthetic-riboswitches",
+    "urn:maha:record:biomolecular-engineering-toehold-switches",
+    "urn:maha:record:biomolecular-engineering-translational-control-circuits",
+    "urn:maha:record:biomolecular-engineering-unconditional-protein-generation",
+    "urn:maha:record:critical-supply-chains-antimony-smelting-concentration",
+    "urn:maha:record:critical-supply-chains-cobalt-refining-concentration",
+    "urn:maha:record:critical-supply-chains-critical-mineral-import-reliance",
+    "urn:maha:record:critical-supply-chains-dysprosium-ore-to-oxide",
+    "urn:maha:record:critical-supply-chains-euv-photoresist-precursors",
+    "urn:maha:record:critical-supply-chains-export-control-exposure",
+    "urn:maha:record:critical-supply-chains-fluorinated-resist-components",
+    "urn:maha:record:critical-supply-chains-gallium-bauxite-byproduct-flow",
+    "urn:maha:record:critical-supply-chains-gallium-zinc-processing-byproduct",
+    "urn:maha:record:critical-supply-chains-germanium-coal-ash-recovery",
+    "urn:maha:record:critical-supply-chains-germanium-zinc-refining-flow",
+    "urn:maha:record:critical-supply-chains-graphite-anode-processing",
+    "urn:maha:record:critical-supply-chains-hafnium-zirconium-separation",
+    "urn:maha:record:critical-supply-chains-heavy-rare-earth-diffusion",
+    "urn:maha:record:critical-supply-chains-helium-liquefaction-logistics",
+    "urn:maha:record:critical-supply-chains-high-purity-quartz-deposits",
+    "urn:maha:record:critical-supply-chains-indium-zinc-byproduct-flow",
+    "urn:maha:record:critical-supply-chains-magnet-recycling",
+    "urn:maha:record:critical-supply-chains-material-substitution-boundaries",
+    "urn:maha:record:critical-supply-chains-nd-fe-b-magnet-alloying",
+    "urn:maha:record:critical-supply-chains-neodymium-praseodymium-separation",
+    "urn:maha:record:critical-supply-chains-niobium-ferroniobium-production",
+    "urn:maha:record:critical-supply-chains-photoacid-generator-supply",
+    "urn:maha:record:critical-supply-chains-quartz-crucible-manufacturing",
+    "urn:maha:record:critical-supply-chains-rare-earth-solvent-extraction",
+    "urn:maha:record:critical-supply-chains-semiconductor-grade-polysilicon",
+    "urn:maha:record:critical-supply-chains-single-country-processing-concentration",
+    "urn:maha:record:critical-supply-chains-supply-chain-data-uncertainty",
+    "urn:maha:record:critical-supply-chains-tantalum-concentrate-traceability",
+    "urn:maha:record:critical-supply-chains-tungsten-concentrate-processing",
+    "urn:maha:record:fusion-plasma-systems-cable-in-conduit-conductors",
+    "urn:maha:record:fusion-plasma-systems-central-solenoid-inductive-drive",
+    "urn:maha:record:fusion-plasma-systems-cryogenic-magnet-cooling",
+    "urn:maha:record:fusion-plasma-systems-disruption-mitigation",
+    "urn:maha:record:fusion-plasma-systems-divertor-heat-exhaust",
+    "urn:maha:record:fusion-plasma-systems-edge-localized-modes",
+    "urn:maha:record:fusion-plasma-systems-electron-cyclotron-heating",
+    "urn:maha:record:fusion-plasma-systems-inertial-confinement-target-chamber",
+    "urn:maha:record:fusion-plasma-systems-laser-target-coupling",
+    "urn:maha:record:fusion-plasma-systems-magnetic-confinement",
+    "urn:maha:record:fusion-plasma-systems-magnetic-mirror-confinement",
+    "urn:maha:record:fusion-plasma-systems-neutral-beam-injection",
+    "urn:maha:record:fusion-plasma-systems-neutron-material-damage",
+    "urn:maha:record:fusion-plasma-systems-plasma-diagnostics",
+    "urn:maha:record:fusion-plasma-systems-plasma-facing-components",
+    "urn:maha:record:fusion-plasma-systems-plasma-heating-and-current-drive",
+    "urn:maha:record:fusion-plasma-systems-plasma-position-and-shape-control",
+    "urn:maha:record:fusion-plasma-systems-poloidal-field-coils",
+    "urn:maha:record:fusion-plasma-systems-rebco-high-field-magnets",
+    "urn:maha:record:fusion-plasma-systems-remote-handling-maintenance",
+    "urn:maha:record:fusion-plasma-systems-resonant-magnetic-perturbations",
+    "urn:maha:record:fusion-plasma-systems-shattered-pellet-injection",
+    "urn:maha:record:fusion-plasma-systems-stellarator-field-optimization",
+    "urn:maha:record:fusion-plasma-systems-stellarator-magnetic-coils",
+    "urn:maha:record:fusion-plasma-systems-superconducting-quench-protection",
+    "urn:maha:record:fusion-plasma-systems-tokamak-plasma-equilibrium",
+    "urn:maha:record:fusion-plasma-systems-toroidal-field-coils",
+    "urn:maha:record:fusion-plasma-systems-tritium-fuel-cycle",
+    "urn:maha:record:fusion-plasma-systems-vacuum-vessel-boundary",
+    "urn:maha:record:longevity-metabolism-ampk-energy-sensing",
+    "urn:maha:record:longevity-metabolism-apoptosis-in-senescent-cells",
+    "urn:maha:record:longevity-metabolism-atp-linked-respiration",
+    "urn:maha:record:longevity-metabolism-autophagic-flux",
+    "urn:maha:record:longevity-metabolism-autophagosome-abundance",
+    "urn:maha:record:longevity-metabolism-cd38-nad-consumption",
+    "urn:maha:record:longevity-metabolism-cellular-senescence-markers",
+    "urn:maha:record:longevity-metabolism-insulin-mtor-signaling",
+    "urn:maha:record:longevity-metabolism-intervention-biomarker-boundaries",
+    "urn:maha:record:longevity-metabolism-lc3-turnover-assays",
+    "urn:maha:record:longevity-metabolism-lifespan-versus-healthspan-endpoints",
+    "urn:maha:record:longevity-metabolism-lysosomal-degradation-blockade",
+    "urn:maha:record:longevity-metabolism-metabolic-flux-tracing",
+    "urn:maha:record:longevity-metabolism-mitochondrial-membrane-potential",
+    "urn:maha:record:longevity-metabolism-mitochondrial-uncoupling",
+    "urn:maha:record:longevity-metabolism-mitophagy-flux",
+    "urn:maha:record:longevity-metabolism-nad-consumption-by-parps",
+    "urn:maha:record:longevity-metabolism-nad-salvage-pathway",
+    "urn:maha:record:longevity-metabolism-nampt-rate-limiting-step",
+    "urn:maha:record:longevity-metabolism-nmn-and-nr-precursors",
+    "urn:maha:record:longevity-metabolism-nmnat-compartmentalization",
+    "urn:maha:record:longevity-metabolism-oxygen-consumption-rate",
+    "urn:maha:record:longevity-metabolism-p62-sqstm1-turnover",
+    "urn:maha:record:longevity-metabolism-pink1-parkin-pathway",
+    "urn:maha:record:longevity-metabolism-proton-leak-respiration",
+    "urn:maha:record:longevity-metabolism-senescence-associated-secretory-phenotype",
+    "urn:maha:record:longevity-metabolism-senescent-cell-clearance",
+    "urn:maha:record:longevity-metabolism-senolytic-selectivity",
+    "urn:maha:record:longevity-metabolism-sirtuin-nad-dependence",
+    "urn:maha:record:longevity-metabolism-translation-to-human-outcomes",
+    "urn:maha:record:mechanistic-interpretability-activation-patching",
+    "urn:maha:record:mechanistic-interpretability-attention-pattern-evidence",
+    "urn:maha:record:mechanistic-interpretability-automated-feature-interpretation",
+    "urn:maha:record:mechanistic-interpretability-benchmark-task-transfer",
+    "urn:maha:record:mechanistic-interpretability-causal-feature-intervention",
+    "urn:maha:record:mechanistic-interpretability-causal-scrubbing",
+    "urn:maha:record:mechanistic-interpretability-circuit-completeness",
+    "urn:maha:record:mechanistic-interpretability-circuit-faithfulness",
+    "urn:maha:record:mechanistic-interpretability-cross-layer-transcoders",
+    "urn:maha:record:mechanistic-interpretability-dead-features",
+    "urn:maha:record:mechanistic-interpretability-feature-absorption",
+    "urn:maha:record:mechanistic-interpretability-feature-activation-maximization",
+    "urn:maha:record:mechanistic-interpretability-feature-splitting",
+    "urn:maha:record:mechanistic-interpretability-in-context-learning-circuits",
+    "urn:maha:record:mechanistic-interpretability-induction-head-circuits",
+    "urn:maha:record:mechanistic-interpretability-interchange-interventions",
+    "urn:maha:record:mechanistic-interpretability-interpretability-claim-boundaries",
+    "urn:maha:record:mechanistic-interpretability-io-identification-circuit",
+    "urn:maha:record:mechanistic-interpretability-mechanistic-anomaly-detection",
+    "urn:maha:record:mechanistic-interpretability-model-component-ablation",
+    "urn:maha:record:mechanistic-interpretability-neural-feature-superposition",
+    "urn:maha:record:mechanistic-interpretability-path-patching",
+    "urn:maha:record:mechanistic-interpretability-polysemantic-neurons",
+    "urn:maha:record:mechanistic-interpretability-previous-token-heads",
+    "urn:maha:record:mechanistic-interpretability-representation-probing-boundary",
+    "urn:maha:record:mechanistic-interpretability-sae-encoder-decoder",
+    "urn:maha:record:mechanistic-interpretability-sae-sparsity-fidelity-tradeoff",
+    "urn:maha:record:mechanistic-interpretability-sparse-autoencoder-dictionaries",
+    "urn:maha:record:mechanistic-interpretability-superposition-geometry",
+    "urn:maha:record:mechanistic-interpretability-toy-models-of-superposition",
+    "urn:maha:record:neurotechnology-bci-adaptive-stimulation-policies",
+    "urn:maha:record:neurotechnology-bci-bci-calibration-drift",
+    "urn:maha:record:neurotechnology-bci-channelrhodopsin-photocurrent-kinetics",
+    "urn:maha:record:neurotechnology-bci-chronic-signal-stability",
+    "urn:maha:record:neurotechnology-bci-clinical-translation-boundaries",
+    "urn:maha:record:neurotechnology-bci-closed-loop-neural-decoding",
+    "urn:maha:record:neurotechnology-bci-cortical-surface-bci",
+    "urn:maha:record:neurotechnology-bci-decoder-update-latency",
+    "urn:maha:record:neurotechnology-bci-electrocorticography-spatial-resolution",
+    "urn:maha:record:neurotechnology-bci-electrode-tissue-interface",
+    "urn:maha:record:neurotechnology-bci-extracellular-spike-recording",
+    "urn:maha:record:neurotechnology-bci-flexible-conformal-electrode-arrays",
+    "urn:maha:record:neurotechnology-bci-foreign-body-response",
+    "urn:maha:record:neurotechnology-bci-impedance-and-noise",
+    "urn:maha:record:neurotechnology-bci-intracortical-bci",
+    "urn:maha:record:neurotechnology-bci-light-delivery-tissue-heating",
+    "urn:maha:record:neurotechnology-bci-micro-ecog-arrays",
+    "urn:maha:record:neurotechnology-bci-motor-intention-decoding",
+    "urn:maha:record:neurotechnology-bci-neural-data-compression",
+    "urn:maha:record:neurotechnology-bci-neural-feature-extraction",
+    "urn:maha:record:neurotechnology-bci-neuropixels-channel-selection",
+    "urn:maha:record:neurotechnology-bci-neuropixels-cmos-probe",
+    "urn:maha:record:neurotechnology-bci-neuropixels-recording-sites",
+    "urn:maha:record:neurotechnology-bci-opsin-spectral-sensitivity",
+    "urn:maha:record:neurotechnology-bci-optogenetic-channelrhodopsin",
+    "urn:maha:record:neurotechnology-bci-peripheral-nerve-interface",
+    "urn:maha:record:neurotechnology-bci-sensing-to-stimulation-loop",
+    "urn:maha:record:neurotechnology-bci-spike-sorting-boundaries",
+    "urn:maha:record:neurotechnology-bci-stimulation-artifact-rejection",
+    "urn:maha:record:neurotechnology-bci-wireless-neural-telemetry"
+  ],
+  "whyNotApplied": "Applying the correction moves every affected revision digest. A digest is what an exact-revision review and an active canonical release are both bound to, so applying it would invalidate the reviews of the release-ready cohort and desync live releases from the records they name. Activation is a governed migration that must re-review what it touches.",
+  "impact": [
+    {
+      "recordId": "urn:maha:record:advanced-materials-color-centers-in-diamond",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:cb9bfd46e3b4864441d098990b70f7f899329d1321429e9543ef30d825fd2401",
+      "repairedRevisionSha256": "sha256:9bf158b430bf97db94cbd0057fba988857cf74ab503501637387fe5bdaa89bd2",
+      "digestChanges": true,
+      "invalidates": []
+    },
+    {
+      "recordId": "urn:maha:record:advanced-materials-contact-resistance-in-2d-devices",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:ca4dc2804efeb565e68797afef899b97c877a8c0579ad92797c7e1bc78d187a8",
+      "repairedRevisionSha256": "sha256:1a8879e32dcc5bdc0a4b8bbbc6e2d6f7253a02e0a5db26a4202868c5395a5bc3",
+      "digestChanges": true,
+      "invalidates": []
+    },
+    {
+      "recordId": "urn:maha:record:advanced-materials-correlated-insulating-states",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:eb3feb541e0e2e597d971a486599d7b296f71a357d606eaef7a8fb9a60b96bc5",
+      "repairedRevisionSha256": "sha256:1422540265953967f84f3654a8862eb8b50a34a3168afefd08182bb84bd45edf",
+      "digestChanges": true,
+      "invalidates": [
+        "active-canonical-release"
+      ]
+    },
+    {
+      "recordId": "urn:maha:record:advanced-materials-cvd-graphene-grain-boundaries",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:f83d44b44bdbd91c2c783b990ed9fb2c8f700139f4a2be5710e80260b47ee26e",
+      "repairedRevisionSha256": "sha256:31b98e57a187a1355de42231dcaf7313ed775bf05dfb1502f17f765e32146ec4",
+      "digestChanges": true,
+      "invalidates": []
+    },
+    {
+      "recordId": "urn:maha:record:advanced-materials-diamond-thermal-conductivity",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:be0298d6e8079e377b39f4c984a41d1beef17752c7053e35326ca1e79130015f",
+      "repairedRevisionSha256": "sha256:401290e12ab0a3fa6f8bef8d9d93c35fc536d746005c8b9947e30b7cd6ef30fd",
+      "digestChanges": true,
+      "invalidates": []
+    },
+    {
+      "recordId": "urn:maha:record:advanced-materials-diamond-wafer-substrates",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:25fd299d6e0a2fa2e742c133dcdeb89d1dfece44d41541b9460a9aa2ddfb0813",
+      "repairedRevisionSha256": "sha256:a1e9e9161e0700745d1767f62e628ba0c51fdb491626a7d91df833cc97f9af50",
+      "digestChanges": true,
+      "invalidates": []
+    },
+    {
+      "recordId": "urn:maha:record:advanced-materials-dielectric-screening",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:59be897e7ce0141c04f261b90cb31e23efe2e48d9d9baa48d3ed574ff67ef1ad",
+      "repairedRevisionSha256": "sha256:ab5619a6bb9897153aff2631b09a2245bccfc8a25c2fc8b1f807ece7e78fc9c8",
+      "digestChanges": true,
+      "invalidates": []
+    },
+    {
+      "recordId": "urn:maha:record:advanced-materials-direct-gap-mos2",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:9bdf312235c743dcd4976b1d6806d3a7f2fb509dc5c004dc397e6eff4594fc6f",
+      "repairedRevisionSha256": "sha256:f5c2c65589e9d5756a8d163cb2772409c0879ecb5ca583300cb0e4a1ffd20762",
+      "digestChanges": true,
+      "invalidates": []
+    },
+    {
+      "recordId": "urn:maha:record:advanced-materials-dry-transfer-contamination",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:7dab9fdedab71cdddfdab140704b006da9b49f30b7903000fed95e1153a17b00",
+      "repairedRevisionSha256": "sha256:fd21abec2f9721227b304dc4d062586b90e0d71cf2793b81fa6a5b04d623fc8c",
+      "digestChanges": true,
+      "invalidates": []
+    },
+    {
+      "recordId": "urn:maha:record:advanced-materials-encapsulation-boundaries",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:ed4e63e1b25f8eceb89eefaf04bd81b85097e0a57d4ccc9258b16d7d2fb130ce",
+      "repairedRevisionSha256": "sha256:2a2ec60e1f8b7e168f8be9b68a045d1182bb04fa5e98bebe72539457d689ff3b",
+      "digestChanges": true,
+      "invalidates": []
+    },
+    {
+      "recordId": "urn:maha:record:advanced-materials-gallium-nitride-epitaxy",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:c9f5c9fcab11fbf07f1bbc256feeaaa4e8e3767b5b31bd9ec5af2193b7b468a9",
+      "repairedRevisionSha256": "sha256:4f53b4562bb2f29950e6ae0f00d927284c519609015f6edca89e4e1ca71c7a6a",
+      "digestChanges": true,
+      "invalidates": []
+    },
+    {
+      "recordId": "urn:maha:record:advanced-materials-graphene-hbn-heterostructures",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:c51dbec3099f21ddd5fa7016027afd6d199ca36c583433d4b9f660b7ee6c709c",
+      "repairedRevisionSha256": "sha256:3af00ba401f1edb8500f567b4f3c619f84c75b62c548e46c5eeb50e159ed4dc5",
+      "digestChanges": true,
+      "invalidates": [
+        "active-canonical-release"
+      ]
+    },
+    {
+      "recordId": "urn:maha:record:advanced-materials-graphene-monolayers",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:98f7263b9170367c0f7d5ade8017e3e26ee5c6c26cd8a0c237fef4a271b18eaa",
+      "repairedRevisionSha256": "sha256:76184aa2bea9594d542f6b8a5e983b1481da3755b00e398443438ecd4a611d77",
+      "digestChanges": true,
+      "invalidates": [
+        "active-canonical-release"
+      ]
+    },
+    {
+      "recordId": "urn:maha:record:advanced-materials-hexagonal-boron-nitride-dielectrics",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:020dbb6d9b9a24c9f7e605c74a3190f92ee11afadae6e1dde809e7799bb73913",
+      "repairedRevisionSha256": "sha256:d8afb20b7109030e289db743d7a92ede7670e0c6a78131803bf329aab1642c0c",
+      "digestChanges": true,
+      "invalidates": [
+        "active-canonical-release"
+      ]
+    },
+    {
+      "recordId": "urn:maha:record:advanced-materials-interface-bubbles-and-strain",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:2b15cc95c6419607f54a384699e032720412c9cfe69229b3f4a9cd9fd6512e29",
+      "repairedRevisionSha256": "sha256:765dd5ba8dbe6de253ee473db0c509682c1ef70f08c1c7ff2baa0153c7937ad9",
+      "digestChanges": true,
+      "invalidates": []
+    },
+    {
+      "recordId": "urn:maha:record:advanced-materials-interlayer-excitons",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:94ba92c4ccc303487c5cfd13a3e1f2a7e3226fe34754d541ad85241827101397",
+      "repairedRevisionSha256": "sha256:e8795062ea15f232d42a071f88c70f4b6ca0b72f302729e57128493a334e83db",
+      "digestChanges": true,
+      "invalidates": []
+    },
+    {
+      "recordId": "urn:maha:record:advanced-materials-magic-angle-superconductivity",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:2c7995a665d7d09ffbff6be1bb5386429599f0f8e45e6d349604518d3ebf4f72",
+      "repairedRevisionSha256": "sha256:e990f0902c91c4d144f8339973b3b3c29bbc0e169749417cdc42553efa2a0919",
+      "digestChanges": true,
+      "invalidates": [
+        "active-canonical-release"
+      ]
+    },
+    {
+      "recordId": "urn:maha:record:advanced-materials-materials-metrology-transfer",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:c1444e7714fe853f7d9e9092bf1978e599011ac24473ed8a1945b259a8fc2f07",
+      "repairedRevisionSha256": "sha256:1808396d12c023467aa3ad13a5e437a4a2088f510b61c4cacbf82c732362514e",
+      "digestChanges": true,
+      "invalidates": []
+    },
+    {
+      "recordId": "urn:maha:record:advanced-materials-moire-superlattices",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:e2cd25628692aa838b42fde424553a9c99c092d77050dbc5f005e1cf72023141",
+      "repairedRevisionSha256": "sha256:2fce8d8171c44bd6949ef01e0da2e439023f0a37139ac5c2645a7aa36bcdf760",
+      "digestChanges": true,
+      "invalidates": [
+        "active-canonical-release"
+      ]
+    },
+    {
+      "recordId": "urn:maha:record:advanced-materials-quantum-anomalous-hall-state",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:d5c240d98b2f081d67f6394cae92cfaf1658a7c5d2771711bb2b38ffd95e5cb1",
+      "repairedRevisionSha256": "sha256:b8394ae5d2ae1bf32cd53c78072f673323839ce76ce914ee8e0682d7c612ca85",
+      "digestChanges": true,
+      "invalidates": []
+    },
+    {
+      "recordId": "urn:maha:record:advanced-materials-sic-wide-bandgap-substrates",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:0b807b567477ca70769371d93eefa0851ab662e32577340748f7afb3fb452313",
+      "repairedRevisionSha256": "sha256:4b64cdcc5a496334313b64b3b5bfcb0bca12aba90678a08f5fdaa8744619f51a",
+      "digestChanges": true,
+      "invalidates": []
+    },
+    {
+      "recordId": "urn:maha:record:advanced-materials-spin-momentum-locking",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:d83433c328fca3f585384d6e314ef720bf112a4f6d85ae4f4ddb229dd0296078",
+      "repairedRevisionSha256": "sha256:435cb0e6cf6fd3f6df51555c0da2eb867d33b56658efe8a08cd2b7d7b456e790",
+      "digestChanges": true,
+      "invalidates": []
+    },
+    {
+      "recordId": "urn:maha:record:advanced-materials-tmd-heterobilayers",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:9f197d1bacfc4de75b243cdf3e6b9d952caecaa21f3cc6630ad3358c388f3511",
+      "repairedRevisionSha256": "sha256:06edff315a395611aa9f894f9d5a442a84f0a842c4c5641beabd69eb03a94f7e",
+      "digestChanges": true,
+      "invalidates": []
+    },
+    {
+      "recordId": "urn:maha:record:advanced-materials-tmd-monolayers",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:6346aea80a48a75249262dda3e24fc475d7d9ed8a6254853c0a199b4000cc63c",
+      "repairedRevisionSha256": "sha256:9a9400109a2ab851e6aa414ae6dc49460b0be9ea3b5ac4d30623bc1273549dcb",
+      "digestChanges": true,
+      "invalidates": []
+    },
+    {
+      "recordId": "urn:maha:record:advanced-materials-topological-insulator-surface-states",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:61f404d8b1f6b7e1c4a27c4bc3245ca0df60c7cd8a73c2256dc08f0aeea971fd",
+      "repairedRevisionSha256": "sha256:9f1ee37fbe65687e3690bf3007193d3902d20388d2de8a1b115236d9934140b3",
+      "digestChanges": true,
+      "invalidates": []
+    },
+    {
+      "recordId": "urn:maha:record:advanced-materials-twist-angle-control",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:13566800b17216d3a0994712cc9ff8428d9d1286b651f917108458fe9a45b11c",
+      "repairedRevisionSha256": "sha256:26fd2467b9f1693e6f9527b9b440a01702b4f577fce4d81e4d785bd33e6ec283",
+      "digestChanges": true,
+      "invalidates": [
+        "active-canonical-release"
+      ]
+    },
+    {
+      "recordId": "urn:maha:record:advanced-materials-two-dimensional-magnetism",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:893d24663bebfc7eb12c575616936d631f849f2a135f44981ab81f4e313ed63e",
+      "repairedRevisionSha256": "sha256:093bc7c1bbd232853b254fcbef6aade5b975102279d0ecea350b50339bd75a93",
+      "digestChanges": true,
+      "invalidates": []
+    },
+    {
+      "recordId": "urn:maha:record:advanced-materials-valley-polarized-excitons",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:e3de34020e7c3deb2557807c51b21ef95cc1f9f169c0441a23003c952178c611",
+      "repairedRevisionSha256": "sha256:11a1573ee044b98d8f59f904fbceb4d7f4c121c61815b1fb842c5965cf46476d",
+      "digestChanges": true,
+      "invalidates": []
+    },
+    {
+      "recordId": "urn:maha:record:advanced-materials-van-der-waals-assembly",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:6f19327dff72ca67d5e86932af0ea195c100d96daeee3f86973ed9a0342f4cc8",
+      "repairedRevisionSha256": "sha256:26a5bd7fa35bff9053bd2fb9049b8da3c10557a39df63cbc128afd2790dbcd3e",
+      "digestChanges": true,
+      "invalidates": []
+    },
+    {
+      "recordId": "urn:maha:record:advanced-materials-wafer-scale-2d-growth",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:bde9829a39493629805920e837ed4bd7f0959bb8a329ef84c9972d922687cb48",
+      "repairedRevisionSha256": "sha256:f17ec1a15816cdb0f9852a2b7e2902d1b5e40a801f7c8690766b12c55ec5c933",
+      "digestChanges": true,
+      "invalidates": []
+    },
+    {
+      "recordId": "urn:maha:record:agentic-systems-mcp-agent-memory-boundaries",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:fddebdee52edd23bda08c048a99e26c6241e02d1e6b7457308dd883e9b2fd1ea",
+      "repairedRevisionSha256": "sha256:656635876080a9dd24e74fb7fb8e52e8b4b193947422edac2f9c4e7fa3e44db4",
+      "digestChanges": true,
+      "invalidates": []
+    },
+    {
+      "recordId": "urn:maha:record:agentic-systems-mcp-agent-plan-execution-separation",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:2e1d2b8415c9ee6e68906c4660daedfbc6f87cd80a5db3b99fb7f770b79178bd",
+      "repairedRevisionSha256": "sha256:9fea698a27a833e6fc056916538734ee2b03b0694141d63aa20ffe49e557808d",
+      "digestChanges": true,
+      "invalidates": []
+    },
+    {
+      "recordId": "urn:maha:record:agentic-systems-mcp-agentic-evaluation-protocols",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:2ec86186171bbb5fd7e2afd1cf2f33e1818554ddd26851e790b6dc5d6ca44030",
+      "repairedRevisionSha256": "sha256:04c5575b3f95d82403d20c21be1e0d2f535281a7c881258e70025d231377c700",
+      "digestChanges": true,
+      "invalidates": []
+    },
+    {
+      "recordId": "urn:maha:record:agentic-systems-mcp-context-window-position-effects",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:ec68f9ca8c9cf27ace2ca1df1a9d78a4494412f8d42d798f444d2c5460e1ac7c",
+      "repairedRevisionSha256": "sha256:d6f53d870cad14f0394d75d60948c2bac88d5a7b6b0ed928899f535aaa023a37",
+      "digestChanges": true,
+      "invalidates": [
+        "active-canonical-release"
+      ]
+    },
+    {
+      "recordId": "urn:maha:record:agentic-systems-mcp-context-window-token-degradation",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:e63068eb9d9e3bdfd529add5738b921e1e03f7229a3097d48d42be8ece92bec3",
+      "repairedRevisionSha256": "sha256:ed66738d5cee80c89122e3ada1940df182f51406354acabb0e5a801acbe7abb8",
+      "digestChanges": true,
+      "invalidates": []
+    },
+    {
+      "recordId": "urn:maha:record:agentic-systems-mcp-distributed-agent-consensus",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:bc39e9b32de8a0f1b24d25b62976a5a8d5911ea876e979052e4b3fa3c1a63eef",
+      "repairedRevisionSha256": "sha256:d511300a43a4b73759403035d47d85542f3f960b21ece99e2e1a41344ef01f54",
+      "digestChanges": true,
+      "invalidates": []
+    },
+    {
+      "recordId": "urn:maha:record:agentic-systems-mcp-game-theoretic-incentive-misalignment",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:eebd7c4b5432e9da32c192f56f3c167bbb4a8adb779b1d54a851271c092f24c2",
+      "repairedRevisionSha256": "sha256:cab52635f33f0cc47a47b0c2b0be05fcd9ab42a5cbe43f5e5f3071bc9d0b8982",
+      "digestChanges": true,
+      "invalidates": []
+    },
+    {
+      "recordId": "urn:maha:record:agentic-systems-mcp-human-approval-boundaries",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:23ce11aa706ebb47b52d126e90ef1f0ab480110135c25decc253cdbe6f6b2897",
+      "repairedRevisionSha256": "sha256:ec87e095d376e8ec98a2f6ff3a084d553120489c9aeed6cf47f242924def9d29",
+      "digestChanges": true,
+      "invalidates": []
+    },
+    {
+      "recordId": "urn:maha:record:agentic-systems-mcp-idempotent-tool-calls",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:c79ad275e0417a21918a0013e2b420a9d26d953900900457f7be86573db786ff",
+      "repairedRevisionSha256": "sha256:140265677bd38894efb31a660237fb1ca359d679d36705e2d630b9e7a446d5bb",
+      "digestChanges": true,
+      "invalidates": []
+    },
+    {
+      "recordId": "urn:maha:record:agentic-systems-mcp-least-authority-tokens",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:f1d8ff2d0e9b128fd767f27874369196ca372b4602f8e6c7c5b163c7b930388c",
+      "repairedRevisionSha256": "sha256:9ac82046b78e36ec035e1425ab7175d9247fddda6db8d6fd21397693f6f30270",
+      "digestChanges": true,
+      "invalidates": []
+    },
+    {
+      "recordId": "urn:maha:record:agentic-systems-mcp-mcp-capability-negotiation",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:e62ccfe83dde0bdbca1ad3da3472fa2fff23ade3a7f62dbf35e1f3fa95d874a1",
+      "repairedRevisionSha256": "sha256:d7b3beec0507b13bda1f1e83fe40148def15bc5b63b86c2311bad054e19520a2",
+      "digestChanges": true,
+      "invalidates": [
+        "active-canonical-release"
+      ]
+    },
+    {
+      "recordId": "urn:maha:record:agentic-systems-mcp-mcp-client-server-roles",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:d41071766c8e9746e1034a7c027c893d299dcd8d8c0053bd59bf1a5e06d08049",
+      "repairedRevisionSha256": "sha256:63b14c357a355f018fe621e106399292603b722b6ef13dd0a23f246299315cf6",
+      "digestChanges": true,
+      "invalidates": [
+        "active-canonical-release"
+      ]
+    },
+    {
+      "recordId": "urn:maha:record:agentic-systems-mcp-mcp-prompt-templates",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:5eba9ef3a96b65acf7e3eac4fed0754ed67a7e7b78f6ba9aa6dbbbf24444d070",
+      "repairedRevisionSha256": "sha256:4ccf001264b384d737f2e0a85f993ed4b7de5587fd5c92cb3b3adf2cadcca911",
+      "digestChanges": true,
+      "invalidates": [
+        "active-canonical-release"
+      ]
+    },
+    {
+      "recordId": "urn:maha:record:agentic-systems-mcp-mcp-resource-discovery",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:7c5797337f6a30b329a292d05515e0e686dc76ee87d9636f79acdc4d1f5d7429",
+      "repairedRevisionSha256": "sha256:aaea3450a645847ec19b58b61682d83e7a02f6905e95959859bd97d60df81247",
+      "digestChanges": true,
+      "invalidates": [
+        "active-canonical-release"
+      ]
+    },
+    {
+      "recordId": "urn:maha:record:agentic-systems-mcp-mcp-session-lifecycle",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:110f2b0ddb37abd4acd9e4463e60c3bbd565d2dac8eefaa57cee2738d52ad80d",
+      "repairedRevisionSha256": "sha256:dd9c36952fe82fe98239db723d70e013869a0450177578452eebe35e0cbcf4ab",
+      "digestChanges": true,
+      "invalidates": [
+        "exact-revision-review"
+      ]
+    },
+    {
+      "recordId": "urn:maha:record:agentic-systems-mcp-mcp-tool-discovery",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:97587657ca9c7ea61f566479fcc0f23a20142cadda5a79414047081f4510c7eb",
+      "repairedRevisionSha256": "sha256:8faeb8b80ae9ab6831593ea572ed23897da9ec1f521995901e4e8282ed51822b",
+      "digestChanges": true,
+      "invalidates": [
+        "active-canonical-release"
+      ]
+    },
+    {
+      "recordId": "urn:maha:record:agentic-systems-mcp-mcp-tool-input-schemas",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:01d51aa2e05a93fa4cc780e24d1417eaf15bb1a1d919f2cec76b9e4a85b35e5f",
+      "repairedRevisionSha256": "sha256:3950dd75efc7f56c7f71eecc23fd0e865173cc51514ee9dcff666977f6bb146e",
+      "digestChanges": true,
+      "invalidates": [
+        "active-canonical-release"
+      ]
+    },
+    {
+      "recordId": "urn:maha:record:agentic-systems-mcp-mcp-tool-result-contracts",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:4f618f9709ac3f9b6b13f30a99a8761b350ab24c080da840622d893cc035c2a7",
+      "repairedRevisionSha256": "sha256:6fb27c18aed77c60edca4948785853209750460366f0bc2a31058a83bbec3f3a",
+      "digestChanges": true,
+      "invalidates": [
+        "active-canonical-release"
+      ]
+    },
+    {
+      "recordId": "urn:maha:record:agentic-systems-mcp-multi-agent-coordination-protocols",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:85c4e2ba36c1766ea241a19025532c245105a4f1613b889a737c270cd474224e",
+      "repairedRevisionSha256": "sha256:1f597d1cc72a1025033f15f68b901db7a77eddae19907b7d58170c176579f596",
+      "digestChanges": true,
+      "invalidates": []
+    },
+    {
+      "recordId": "urn:maha:record:agentic-systems-mcp-multi-agent-deadlock",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:e00e3afe168a1e7d2c71500abb65718977e029a4c0953caae63d89c5c87a00f1",
+      "repairedRevisionSha256": "sha256:ae515ba440bbc832b45230e6f241c04a7a46192ad4e05ec3236c06e1cf67b929",
+      "digestChanges": true,
+      "invalidates": []
+    },
+    {
+      "recordId": "urn:maha:record:agentic-systems-mcp-multi-agent-role-assignment",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:7b21b60190a185361cc7d84fc45c5661c8b92ee8d21734a103921ccf8265f553",
+      "repairedRevisionSha256": "sha256:6aa1565fd7e4939a732676de1eb87880bdf10a0118e2f13bcad6bab06c6ff045",
+      "digestChanges": true,
+      "invalidates": []
+    },
+    {
+      "recordId": "urn:maha:record:agentic-systems-mcp-prompt-injection-through-tools",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:fa46a0d2ba50a8c5890040b9bff90e63ef7dbbef5d7342919fd30c40026836f6",
+      "repairedRevisionSha256": "sha256:1e1a22aecfe6885040d4d6d2739bade22f5bf06f9731e27cb583990d3b289f95",
+      "digestChanges": true,
+      "invalidates": []
+    },
+    {
+      "recordId": "urn:maha:record:agentic-systems-mcp-retrieval-context-selection",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:81c3abda25a3b536d66bc38ecba273f8727af5ae1eea24f0c5b6ec754aa2d603",
+      "repairedRevisionSha256": "sha256:52f33e8ca06256e40d195e5134220d508290b62746cc9b4d1a03eed9c17219f8",
+      "digestChanges": true,
+      "invalidates": []
+    },
+    {
+      "recordId": "urn:maha:record:agentic-systems-mcp-sandboxed-tool-execution",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:04eb7cf1b1775deefb1c9222cd46e77d33f44775fdaec4069015cc62fc0964b5",
+      "repairedRevisionSha256": "sha256:5eb48928aec195b9e33a2adc5343c0498ced87f12c1f9f62022d5c463bd58a61",
+      "digestChanges": true,
+      "invalidates": []
+    },
+    {
+      "recordId": "urn:maha:record:agentic-systems-mcp-tool-allowlisting",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:adcf82aed5f0fa3b468f494e98eb4c420ba22a53bebd17422202c939c4b214b8",
+      "repairedRevisionSha256": "sha256:532ef28c28e3918fac4086de85471a4dcf5764ecc88b244a5c2fbf76bf2f5448",
+      "digestChanges": true,
+      "invalidates": []
+    },
+    {
+      "recordId": "urn:maha:record:agentic-systems-mcp-tool-call-traces",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:6e5a28eea74760c26de06a302e42164c1a5c8900f86b711637eb79ac7f93448c",
+      "repairedRevisionSha256": "sha256:2005cd5640a9a2f10c64c3aea5dc08271c0f3389942399001431c16937176d50",
+      "digestChanges": true,
+      "invalidates": []
+    },
+    {
+      "recordId": "urn:maha:record:agentic-systems-mcp-tool-output-trust-boundaries",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:7180e7c78678d40446f61da335c77faa402f86f0006213c4b7d4fb2c06a7442e",
+      "repairedRevisionSha256": "sha256:4879bcf2448681b88a481ce08133606083709b0ea945ae3b75ff143a3fb26c0b",
+      "digestChanges": true,
+      "invalidates": []
+    },
+    {
+      "recordId": "urn:maha:record:agentic-systems-mcp-tool-result-context-injection",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:cb2419d975f2b2035c748baa15441764325ecf32fc4f128951e8f31db2f28e05",
+      "repairedRevisionSha256": "sha256:8d25c5aa1a328d45487f1d2258935886789e40e3ab848d694c59dc8a736a26b8",
+      "digestChanges": true,
+      "invalidates": []
+    },
+    {
+      "recordId": "urn:maha:record:agentic-systems-mcp-tool-timeout-budgets",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:44bc0ea5607868a61c2b55c69971daeb5d3b34219712efec0f71f4dbc7673476",
+      "repairedRevisionSha256": "sha256:709822f6877fe0a8f7b07b2c9247a15a6938ca04d91ab0f1aaf365ec87b38c71",
+      "digestChanges": true,
+      "invalidates": []
+    },
+    {
+      "recordId": "urn:maha:record:biomolecular-engineering-cell-free-reaction-yield",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:5cb36c04150256e102ab7462ebe7fc4a9753c830ff131a518e9666fb4f0dc131",
+      "repairedRevisionSha256": "sha256:758d90c4eae7d3a388b9120094ded9c8f359d2fe064ccb5aa3521fdf41a9117e",
+      "digestChanges": true,
+      "invalidates": []
+    },
+    {
+      "recordId": "urn:maha:record:biomolecular-engineering-cell-free-transcription-translation",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:93e4273257d481d0199cb4f105ea2c091d54dc4f97a223a4bcd93705dd03cb90",
+      "repairedRevisionSha256": "sha256:2204eea1f69deeadc6cf547c5cd44f5016743292e4474360704821308743c9e6",
+      "digestChanges": true,
+      "invalidates": [
+        "active-canonical-release"
+      ]
+    },
+    {
+      "recordId": "urn:maha:record:biomolecular-engineering-compartmentalized-cell-free-systems",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:7b344d2bc9e6f1bfa7d0d265a865c1f4a1d67b165ca8a8fece10536a5a410a37",
+      "repairedRevisionSha256": "sha256:e24b9b5dc9e33fdad3eb7f898dce0c7a4dc49c92ee7ae63e34d1af0112d0aa6b",
+      "digestChanges": true,
+      "invalidates": []
+    },
+    {
+      "recordId": "urn:maha:record:biomolecular-engineering-crude-extract-cell-free-systems",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:2c80ac068e79e4cbf4a41e142fc0696c842b4a20e32c3a347b82a53278e3899a",
+      "repairedRevisionSha256": "sha256:41547f5d36d3cc138e9d4c1bbf2f37b1627f75fa4fc40f674bdc62c3f612b15c",
+      "digestChanges": true,
+      "invalidates": [
+        "exact-revision-review"
+      ]
+    },
+    {
+      "recordId": "urn:maha:record:biomolecular-engineering-de-novo-binder-design",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:b826642a88ba6732c1fc9b91a04493b91ea9db538e4fde2092348a431fb2fa9f",
+      "repairedRevisionSha256": "sha256:cb9d361a8c40c9081f98eaa2727c01ffa85eb80620855e65ef8d9519e7e96cf8",
+      "digestChanges": true,
+      "invalidates": [
+        "active-canonical-release"
+      ]
+    },
+    {
+      "recordId": "urn:maha:record:biomolecular-engineering-design-to-assay-provenance",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:446a5177093535223cb9a1bee78edec437b2a4bbfcb6959e160ae99c0c3332d2",
+      "repairedRevisionSha256": "sha256:9852885da137581092bdcb8860a6d52f63fce86ad51f5897d3852f7460453717",
+      "digestChanges": true,
+      "invalidates": []
+    },
+    {
+      "recordId": "urn:maha:record:biomolecular-engineering-directed-enzyme-evolution",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:91e1027a17cb23c09b25832650a72059eab1760832114b0e1fcb06848654697d",
+      "repairedRevisionSha256": "sha256:83c0d61b9f8e95e8c96249d6ffdf1aeb542c125de27e28651a46c32401764e63",
+      "digestChanges": true,
+      "invalidates": [
+        "active-canonical-release"
+      ]
+    },
+    {
+      "recordId": "urn:maha:record:biomolecular-engineering-droplet-microfluidic-screening",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:835981d42a3f9c1beff525b65f9110298e4afb84d904af2ef013d2101ec5300f",
+      "repairedRevisionSha256": "sha256:44e1e77a7a9fcc454c51441b17e96a7c422c7830636ae34339c4440485e7b986",
+      "digestChanges": true,
+      "invalidates": []
+    },
+    {
+      "recordId": "urn:maha:record:biomolecular-engineering-energy-regeneration-in-cell-free-systems",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:48ff042cc15298829cb31ae3c7c6d05b2a57e2c5ce7997785a2b19fbe59962fc",
+      "repairedRevisionSha256": "sha256:dac3f19dd281db079e3afb65f258cdba4349e2bbeaa4b4d0d5fcd46776dd7271",
+      "digestChanges": true,
+      "invalidates": []
+    },
+    {
+      "recordId": "urn:maha:record:biomolecular-engineering-enzyme-cascade-engineering",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:bd0eac425cda83510a62839d32a49f3563b93e9f74c992c817f8618d5e6b1e79",
+      "repairedRevisionSha256": "sha256:53cf10ede29ed2ceceae628402d3864c1b61cf8769170d11f8fee063d65fe415",
+      "digestChanges": true,
+      "invalidates": []
+    },
+    {
+      "recordId": "urn:maha:record:biomolecular-engineering-experimental-fold-validation",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:fba3c4e2ea29411e5c4b50b545cf44b8918a5822c72a75c3b12d576939583616",
+      "repairedRevisionSha256": "sha256:ecf94c60ad6fed5b5eefb12fab67dd96dc29f383128c978405b1ea9f288e498c",
+      "digestChanges": true,
+      "invalidates": [
+        "active-canonical-release"
+      ]
+    },
+    {
+      "recordId": "urn:maha:record:biomolecular-engineering-fitness-landscape-accessibility",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:96eae54806b7d4f4921e0e81170d00c6cbd92ff74ac871b17a926805bd76cf9a",
+      "repairedRevisionSha256": "sha256:5e9cf5203bf33e2498ef37e97b0f705776e80c2932dfc8c2af40930762335244",
+      "digestChanges": true,
+      "invalidates": []
+    },
+    {
+      "recordId": "urn:maha:record:biomolecular-engineering-ligand-binding-aptamer-domains",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:5851ad93ecbc39aea2649cd97904b3c989e78237f05d8c14af7af553f551d183",
+      "repairedRevisionSha256": "sha256:85ebc7623ec77689a7f3d059a073e18cb279c630579e9b707314bc1212c8d866",
+      "digestChanges": true,
+      "invalidates": []
+    },
+    {
+      "recordId": "urn:maha:record:biomolecular-engineering-metabolic-pathway-prototyping",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:9a52be42a0306797a81951694a13811a15a87c1317f1e51ca39ef2a2983788fd",
+      "repairedRevisionSha256": "sha256:062cf08dea974d7fe87d3e71f5f76ef6497bd6fd812d761eb844591a78cb3bae",
+      "digestChanges": true,
+      "invalidates": []
+    },
+    {
+      "recordId": "urn:maha:record:biomolecular-engineering-motif-scaffolding",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:38c6ee32b2071d7b177e4baa4156102a50ab88b8dc93b4427baadf47ddb0709a",
+      "repairedRevisionSha256": "sha256:2f06221f7794f2d216ac0bf6ca2d157f0fcd1c4e990dd9b10b2948e9cbad055e",
+      "digestChanges": true,
+      "invalidates": [
+        "active-canonical-release"
+      ]
+    },
+    {
+      "recordId": "urn:maha:record:biomolecular-engineering-mutation-library-generation",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:a2c5c165f6dfe18b2b27a04fd5fde9cf5a831e666abea654c1234ea5155f1a91",
+      "repairedRevisionSha256": "sha256:3249fffcc9e486e7ede80b219d3fdd2fa7d82b8671ade613e3c325b4589a5249",
+      "digestChanges": true,
+      "invalidates": []
+    },
+    {
+      "recordId": "urn:maha:record:biomolecular-engineering-off-target-binding-characterization",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:351e2174b3af3eeaff54a73833a8132de17574e7c569c7fdc636c6de16807306",
+      "repairedRevisionSha256": "sha256:ee9768b93b7ebcbc768437c358f26a6b73c946bf3ce8c5d9b4a8d4e483741e36",
+      "digestChanges": true,
+      "invalidates": []
+    },
+    {
+      "recordId": "urn:maha:record:biomolecular-engineering-phage-assisted-continuous-evolution",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:8dc697f5defa0cfa0911ac052bda5679be3b17707f0897f9cddef4ab626d52d4",
+      "repairedRevisionSha256": "sha256:e066fafce7c68c76a539182721cfd7122b6ef4484f5cff7767f09cea4bd49444",
+      "digestChanges": true,
+      "invalidates": [
+        "exact-revision-review"
+      ]
+    },
+    {
+      "recordId": "urn:maha:record:biomolecular-engineering-protein-backbone-diffusion",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:5e43a862676db3ab81d49fe0eafef3351d4c76e2c5773e4b44e87f0360854356",
+      "repairedRevisionSha256": "sha256:59b2ee919c802d0d403eb3907359868a275691d877d08e242365e372b2433208",
+      "digestChanges": true,
+      "invalidates": [
+        "active-canonical-release"
+      ]
+    },
+    {
+      "recordId": "urn:maha:record:biomolecular-engineering-protein-design-success-rate",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:7416b13ecf314af6eff87325d8fcdf51b8c248ee5ed73ec1daeda9fc08b918d4",
+      "repairedRevisionSha256": "sha256:4bcab0a9151933264fa207c15e57e97f558d039f4c18a8d51d2899590bb3a979",
+      "digestChanges": true,
+      "invalidates": []
+    },
+    {
+      "recordId": "urn:maha:record:biomolecular-engineering-purified-component-expression-systems",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:90c9d503233cc00066f3a97a8777b590b496637f4c4d217539e085dbe1c20a22",
+      "repairedRevisionSha256": "sha256:c553cb857a8782ad03ff6cf1e0bf26764c7477575f91f1811dc32ba5b13a6b5a",
+      "digestChanges": true,
+      "invalidates": [
+        "exact-revision-review"
+      ]
+    },
+    {
+      "recordId": "urn:maha:record:biomolecular-engineering-riboswitch-expression-platforms",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:c2b242db1b07158ebd5ca7685d05c2baa06e7acc8ad082f338c160cbcbddecc5",
+      "repairedRevisionSha256": "sha256:63324b564e8e8900882fd43f238754d6abdcba29dcb30c8b03c18cfd67503e82",
+      "digestChanges": true,
+      "invalidates": []
+    },
+    {
+      "recordId": "urn:maha:record:biomolecular-engineering-rna-strand-displacement",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:739ef1f1f162a8d5b5a4443b1a4cd53c78973b89b1efda9fcf2102757aba53d2",
+      "repairedRevisionSha256": "sha256:55c74da3d8d895febd0095e68af64e08f3e087edb26731a2ac70d69e90357a73",
+      "digestChanges": true,
+      "invalidates": []
+    },
+    {
+      "recordId": "urn:maha:record:biomolecular-engineering-selection-pressure-coupling",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:c23dcc18daaf071309c5f4116b7f6132c4477875558c29321a92f5d98d815d6f",
+      "repairedRevisionSha256": "sha256:6dc0721588b122a2554f559a178ca0b287c3f3e3ebce09ed80f0fbf41825945e",
+      "digestChanges": true,
+      "invalidates": [
+        "exact-revision-review"
+      ]
+    },
+    {
+      "recordId": "urn:maha:record:biomolecular-engineering-sequence-design-with-proteinmpnn",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:f9c62b910854ec2360bd7423a5a56a6d84e84cc8a15b040b8c7be3b6cd28a9e0",
+      "repairedRevisionSha256": "sha256:07a50825c86330f85eb25986c5fcad60108186604cbcc17786141e01222a11b1",
+      "digestChanges": true,
+      "invalidates": [
+        "active-canonical-release"
+      ]
+    },
+    {
+      "recordId": "urn:maha:record:biomolecular-engineering-structure-prediction-filtering",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:8fc2fa62ff8521551955d83413d952987410cfc59a352a2eebbfe4b07fe84d84",
+      "repairedRevisionSha256": "sha256:b94420aa26620e38ce8b84faa80cfa120d1327687a270d62ab8c5d07180fd942",
+      "digestChanges": true,
+      "invalidates": [
+        "active-canonical-release"
+      ]
+    },
+    {
+      "recordId": "urn:maha:record:biomolecular-engineering-synthetic-riboswitches",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:eeb9a530ebdfb2c125f0b72f3d5fddf544d697d0cc8315c9c230ebcfd202c718",
+      "repairedRevisionSha256": "sha256:755039401b56e44c0383a79d0e8b147f20a0d66247b941dbced38af4d2e80476",
+      "digestChanges": true,
+      "invalidates": []
+    },
+    {
+      "recordId": "urn:maha:record:biomolecular-engineering-toehold-switches",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:0ca9200312a0dc45566b0cbf5f2c37383374bc1f31a0c5c9c1e7101688bdb982",
+      "repairedRevisionSha256": "sha256:306338e86c03eb14cb1938789113cd906eb7c96bfee0d75af285cd6cf9b44b08",
+      "digestChanges": true,
+      "invalidates": []
+    },
+    {
+      "recordId": "urn:maha:record:biomolecular-engineering-translational-control-circuits",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:1f877ffe9cc1fe0a02ae70fee8bcdbb697add8846b90a1c42671c25f6c7a88bb",
+      "repairedRevisionSha256": "sha256:2cb4c78368985d6cbc7f170af1d9c4453f39270349f365f596ef58337e55e951",
+      "digestChanges": true,
+      "invalidates": [
+        "exact-revision-review"
+      ]
+    },
+    {
+      "recordId": "urn:maha:record:biomolecular-engineering-unconditional-protein-generation",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:35d7adeb64552f084e22c3a45fa0d3e05e6f374d25c98722f720bacbf512fc66",
+      "repairedRevisionSha256": "sha256:cb62610adf20a3275cea7d4b0563a1beba4cc6db39e993b0b4a8fbc1686aa3e6",
+      "digestChanges": true,
+      "invalidates": [
+        "active-canonical-release"
+      ]
+    },
+    {
+      "recordId": "urn:maha:record:critical-supply-chains-antimony-smelting-concentration",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:83fdf10f8f0760c21e8d0616bf4c0e18b00a037ee23a2d11669cb5018664ebd2",
+      "repairedRevisionSha256": "sha256:b7ecea75bd100a6ec430d0eb00250fd4a36ab345929ae853f906147dcaf545a6",
+      "digestChanges": true,
+      "invalidates": []
+    },
+    {
+      "recordId": "urn:maha:record:critical-supply-chains-cobalt-refining-concentration",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:0ed198f4d3d15c65802d4cbfcdac09863039bc189f6fa06345d084b5be022193",
+      "repairedRevisionSha256": "sha256:69203fca01510ddcbcf5e7269e9c46d685440639464b512810d1e59ed076eba3",
+      "digestChanges": true,
+      "invalidates": []
+    },
+    {
+      "recordId": "urn:maha:record:critical-supply-chains-critical-mineral-import-reliance",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:fb1a5c89c8d562b5722ca7c872bcab69078257472be083c2ab0c77c98b15667a",
+      "repairedRevisionSha256": "sha256:6782e7d0ba685ab1e81ba9533b9a55e784843025f5ce9613da17de7834fec621",
+      "digestChanges": true,
+      "invalidates": [
+        "active-canonical-release"
+      ]
+    },
+    {
+      "recordId": "urn:maha:record:critical-supply-chains-dysprosium-ore-to-oxide",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:01a2cd3c8541b36810a0eccb3128d1cca76ec88e0da3dd4aed3b692cf3729aa0",
+      "repairedRevisionSha256": "sha256:d64f1043319b1ed637d9e10a873865b2f5f3297822e1d027e45d3c31afde8ba7",
+      "digestChanges": true,
+      "invalidates": []
+    },
+    {
+      "recordId": "urn:maha:record:critical-supply-chains-euv-photoresist-precursors",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:26b0783565e090420e3a48a7499d95d4feb0fb8a7815104c105f0aea4c17755a",
+      "repairedRevisionSha256": "sha256:0c489f8908430a06d3ec70d414376d88e933d120429d997da77b12850a4632e8",
+      "digestChanges": true,
+      "invalidates": [
+        "active-canonical-release"
+      ]
+    },
+    {
+      "recordId": "urn:maha:record:critical-supply-chains-export-control-exposure",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:980ec29c8c465fe8f1a4047343014638a5b9931aad34cefefb1406557279da36",
+      "repairedRevisionSha256": "sha256:0d868096db4b0b1d6cab1e241522b97901f2fa8aea55a299805c5fc017f06b9b",
+      "digestChanges": true,
+      "invalidates": []
+    },
+    {
+      "recordId": "urn:maha:record:critical-supply-chains-fluorinated-resist-components",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:595477acac796dfa2954f52e79770268ac6230d47e050f0b2dc152f0c0ca8697",
+      "repairedRevisionSha256": "sha256:e70265865d965829d8db6bc07de09e3f595180eabfce74a57e88df5ed2bd8f98",
+      "digestChanges": true,
+      "invalidates": []
+    },
+    {
+      "recordId": "urn:maha:record:critical-supply-chains-gallium-bauxite-byproduct-flow",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:da4a974ebd5dc80c676257fa7bab66f3c1edc70b597012af5bbfae40e2b700ec",
+      "repairedRevisionSha256": "sha256:20e75a6882e09e94850f3fd45e1a56f370372b8bd1891dce49ab6aec0c4c468e",
+      "digestChanges": true,
+      "invalidates": [
+        "exact-revision-review"
+      ]
+    },
+    {
+      "recordId": "urn:maha:record:critical-supply-chains-gallium-zinc-processing-byproduct",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:27db54bd1e8c7807c9889751b345eff394d0f51933200b24fb5f5900946748f9",
+      "repairedRevisionSha256": "sha256:2e6c13b8dfe027a98927a8e366cdf4334e575d5436f94959d1e520c82a1a7f5d",
+      "digestChanges": true,
+      "invalidates": [
+        "exact-revision-review"
+      ]
+    },
+    {
+      "recordId": "urn:maha:record:critical-supply-chains-germanium-coal-ash-recovery",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:ee6208d6e62fc4e146ca3f90f8fcf4c385cf4c33ce322ba4cfa835275d25865a",
+      "repairedRevisionSha256": "sha256:dead830d8da364c5b8eeda6d6836fb234dd969280e20f39e2ce8738b7a791550",
+      "digestChanges": true,
+      "invalidates": []
+    },
+    {
+      "recordId": "urn:maha:record:critical-supply-chains-germanium-zinc-refining-flow",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:5f055a0c6b5222726955abe36900a0474ed1198e922e0f2b84e46779f8421e60",
+      "repairedRevisionSha256": "sha256:3f38039f714fb933f5ac806c2f2ed83ae5d03296e8c2354a3a73170a3de96d79",
+      "digestChanges": true,
+      "invalidates": [
+        "exact-revision-review"
+      ]
+    },
+    {
+      "recordId": "urn:maha:record:critical-supply-chains-graphite-anode-processing",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:21e3b74d5cb38ac084bd41f6bb9676fe8eb01b9faa18c6fade8c82d2689116bb",
+      "repairedRevisionSha256": "sha256:5fda19f166e78ba3e41f2bd07f0dfa637fa66e94613622556b797ddf6a27b8b8",
+      "digestChanges": true,
+      "invalidates": []
+    },
+    {
+      "recordId": "urn:maha:record:critical-supply-chains-hafnium-zirconium-separation",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:649a064e484913ec75838c6b8ab8144b9ac52f9b1ddd3d35fa7d7295d1576dc1",
+      "repairedRevisionSha256": "sha256:11bef415f707a4f6c120d4a909f13fad310fc34cb6dfd1635efe3e55f1c5cf96",
+      "digestChanges": true,
+      "invalidates": []
+    },
+    {
+      "recordId": "urn:maha:record:critical-supply-chains-heavy-rare-earth-diffusion",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:2ffa51b08e1bb400a9c0fd97b4623a4a2d7277986f1a79d0742839d41c644f4c",
+      "repairedRevisionSha256": "sha256:d6bd92115be5b92317fe73283d21a2de57c6158d617d3e3c95772a190f13628b",
+      "digestChanges": true,
+      "invalidates": []
+    },
+    {
+      "recordId": "urn:maha:record:critical-supply-chains-helium-liquefaction-logistics",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:54a24d5bbe55325d0ba7e9a32fa2193249c5f644168df355b21f3dadccc830fc",
+      "repairedRevisionSha256": "sha256:b1c6ebe669640001e21423b051384612dac3ef47cf65c9f0aa7670c3123bdd49",
+      "digestChanges": true,
+      "invalidates": []
+    },
+    {
+      "recordId": "urn:maha:record:critical-supply-chains-high-purity-quartz-deposits",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:7d1460a1ca4bc9a89da90b65bb46c19c7a284194e4de3250f646a58c0f8de7f2",
+      "repairedRevisionSha256": "sha256:b9e247a8ca9dac06c0eccd2e5694025801077afc5c85c277f2571f753284cd4f",
+      "digestChanges": true,
+      "invalidates": [
+        "active-canonical-release"
+      ]
+    },
+    {
+      "recordId": "urn:maha:record:critical-supply-chains-indium-zinc-byproduct-flow",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:10e3f43188f5dd7342fe425cd15eed2f8f00d34b3f4ad18a30e9158bdf24785a",
+      "repairedRevisionSha256": "sha256:fc855aa16d031f4237ba1aa6f9c92edc56ea504687e993fbdb56404501bb62ff",
+      "digestChanges": true,
+      "invalidates": []
+    },
+    {
+      "recordId": "urn:maha:record:critical-supply-chains-magnet-recycling",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:c1d77e1b9a24e4358668fceefff66dbfb36be8a840f9d9ef43cb0f94b6677527",
+      "repairedRevisionSha256": "sha256:fc81d12a7cd58b66975cb2e26c8c7465b40661384b8e17ed3a8527583009ee63",
+      "digestChanges": true,
+      "invalidates": []
+    },
+    {
+      "recordId": "urn:maha:record:critical-supply-chains-material-substitution-boundaries",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:1c4ea6b4646de793df1fb1d4fbbe10218548a0c3ca5234f97e4b491c0f4e022a",
+      "repairedRevisionSha256": "sha256:7fc69357debdd074b6ba0922ddd94e3b9c3aeab5baedcfeb947a84cc53ed30ce",
+      "digestChanges": true,
+      "invalidates": []
+    },
+    {
+      "recordId": "urn:maha:record:critical-supply-chains-nd-fe-b-magnet-alloying",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:61666256cbd7c75e28b7215e0b201f5784377603a72a6367fcf8044c2bd1c80f",
+      "repairedRevisionSha256": "sha256:250337ae51d15d0ff6db173505088a8e7b655fcb8bb32782318d693fd9891988",
+      "digestChanges": true,
+      "invalidates": []
+    },
+    {
+      "recordId": "urn:maha:record:critical-supply-chains-neodymium-praseodymium-separation",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:a4383ccf85be9baea35efde5e871ca9a95ac0b6dd7c1ef70c2d07f6984f9e146",
+      "repairedRevisionSha256": "sha256:3fb06b64fc9063bba8643853fb30162255019726676abb3a495a4fda3e4ed65e",
+      "digestChanges": true,
+      "invalidates": []
+    },
+    {
+      "recordId": "urn:maha:record:critical-supply-chains-niobium-ferroniobium-production",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:138719dda5fa18e05558a26025cd189b8bf566e0e7f41817610d20e911643f55",
+      "repairedRevisionSha256": "sha256:b275698cf5aaec2fc6de19d7922b6c126e7212085fdb64f3dcf41a6060964fa8",
+      "digestChanges": true,
+      "invalidates": [
+        "exact-revision-review"
+      ]
+    },
+    {
+      "recordId": "urn:maha:record:critical-supply-chains-photoacid-generator-supply",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:0f15223d30a40bb328c6bf5a1762a04c7803a6c6e3e3ecf7236afa8c523a9448",
+      "repairedRevisionSha256": "sha256:d53a352874f3a560a2a1b5fa0647c12f2f9637d4af1962d19c0e019d9c367f1c",
+      "digestChanges": true,
+      "invalidates": [
+        "active-canonical-release"
+      ]
+    },
+    {
+      "recordId": "urn:maha:record:critical-supply-chains-quartz-crucible-manufacturing",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:8875304b34512980cdb1681ccccbaf97c3b44a70c48d6c959479c9abf8948b8d",
+      "repairedRevisionSha256": "sha256:092b5c921035a93c5ce9b53a90a5c31c6217f77a490c845855bd1b2b19c828b8",
+      "digestChanges": true,
+      "invalidates": [
+        "active-canonical-release"
+      ]
+    },
+    {
+      "recordId": "urn:maha:record:critical-supply-chains-rare-earth-solvent-extraction",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:509cb481842316d2de916e1f4f0b322ea2d5ea34cedd02b56fa8aed049bacfbb",
+      "repairedRevisionSha256": "sha256:f055968fd9619fef50711458af3e32fbe59bdac51555602e7054285008483895",
+      "digestChanges": true,
+      "invalidates": []
+    },
+    {
+      "recordId": "urn:maha:record:critical-supply-chains-semiconductor-grade-polysilicon",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:d8deade7cd1906f41c75de93e97b79700b0b775bd150057edeacb17cf320b058",
+      "repairedRevisionSha256": "sha256:404584f41a318873f882f648351e133e0d1f2886d3264ba243170ab2c7bb81a5",
+      "digestChanges": true,
+      "invalidates": [
+        "active-canonical-release"
+      ]
+    },
+    {
+      "recordId": "urn:maha:record:critical-supply-chains-single-country-processing-concentration",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:8233707992c8aaac4011c7905d85d240fdf0c5269c528d989f151f58e10dd4d0",
+      "repairedRevisionSha256": "sha256:b2aa6e5b024ff26f1d1c43be2eae864f0701e03fcb8ca33f8c1d0cdf9c606aa5",
+      "digestChanges": true,
+      "invalidates": []
+    },
+    {
+      "recordId": "urn:maha:record:critical-supply-chains-supply-chain-data-uncertainty",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:8df91023b44e8d2d607821257ba00b0a4465813ad47719ed690428c0fa3ff2f0",
+      "repairedRevisionSha256": "sha256:9b1d508f54d9827661fe4192404075ea84c020a022b729e399857f6697f438e7",
+      "digestChanges": true,
+      "invalidates": []
+    },
+    {
+      "recordId": "urn:maha:record:critical-supply-chains-tantalum-concentrate-traceability",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:97e072d708bf0a6bd39b3274d2f8d7c2f4d76cbe221bfd316abdfad3375c0a4b",
+      "repairedRevisionSha256": "sha256:6501abe5e3979a60eabb2bd1f053731f740fa5921eabeb55f5971a08c4a79087",
+      "digestChanges": true,
+      "invalidates": []
+    },
+    {
+      "recordId": "urn:maha:record:critical-supply-chains-tungsten-concentrate-processing",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:d0244d7c071e152e8f7d75ecb889f75392eb77711d063b49b6445d41e44ce96a",
+      "repairedRevisionSha256": "sha256:a31bb0463fed868e513fb2167e0a5eace1ce3c0e8228f95713e3b412fc4e0e36",
+      "digestChanges": true,
+      "invalidates": []
+    },
+    {
+      "recordId": "urn:maha:record:fusion-plasma-systems-cable-in-conduit-conductors",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:169927ba7f1dbede4199779190623db9ce4e69f21a6fc62ef493e9209a888c27",
+      "repairedRevisionSha256": "sha256:81edc3b846d1b6a9c31adf19f092c8b7cdf62c8012d8c52a94739b678867f9ae",
+      "digestChanges": true,
+      "invalidates": []
+    },
+    {
+      "recordId": "urn:maha:record:fusion-plasma-systems-central-solenoid-inductive-drive",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:d954b3fee7b92c310cd3e7e9e70877973dd4943a5ca8f8f1c51e5f252c836f88",
+      "repairedRevisionSha256": "sha256:cd2cb3f9edd9b6f849973ace1179aeaf9ab1d09c23bcef77c14244d7ba17e6a0",
+      "digestChanges": true,
+      "invalidates": [
+        "active-canonical-release"
+      ]
+    },
+    {
+      "recordId": "urn:maha:record:fusion-plasma-systems-cryogenic-magnet-cooling",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:e66f3811999be6f4bca1f2eda2518da9e8613088dfd8289d7f85c270fa40faa5",
+      "repairedRevisionSha256": "sha256:45aac70685d4caaa340e5c8023a8116528a08b8880ba4bcf12ad102abf742019",
+      "digestChanges": true,
+      "invalidates": [
+        "active-canonical-release"
+      ]
+    },
+    {
+      "recordId": "urn:maha:record:fusion-plasma-systems-disruption-mitigation",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:65f1120ab96c6821a3b78fa48c197f00b9e9ca535f457488b4707b0211e9f3d9",
+      "repairedRevisionSha256": "sha256:c2ea7b7bfc6b713f8240498a7e528b2f3ae7c2380659987b79e42c42640ede61",
+      "digestChanges": true,
+      "invalidates": [
+        "active-canonical-release"
+      ]
+    },
+    {
+      "recordId": "urn:maha:record:fusion-plasma-systems-divertor-heat-exhaust",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:e53a828764186c90dfbcd773ebd47159ae9d015b055bd2dc4d6aaa65013ce142",
+      "repairedRevisionSha256": "sha256:54ac18c6be8d7b9f39192f369cbf5761dcf58026508af4443851020875065cce",
+      "digestChanges": true,
+      "invalidates": [
+        "active-canonical-release"
+      ]
+    },
+    {
+      "recordId": "urn:maha:record:fusion-plasma-systems-edge-localized-modes",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:0c3c953b5dfd539043ae91838f0d10ca23ba5ab0f7290adbaf49678325400bc2",
+      "repairedRevisionSha256": "sha256:f5545952c12fc7605938c15e8d395acd28ce74526bb4aa25bef38b4e06b530fe",
+      "digestChanges": true,
+      "invalidates": []
+    },
+    {
+      "recordId": "urn:maha:record:fusion-plasma-systems-electron-cyclotron-heating",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:96b803713a9e86cfeb04d1f0649e886c365a58b6644c95dae7ce3bc4a8542ad3",
+      "repairedRevisionSha256": "sha256:0d7fde5024a6d863731aa3d59f8982d39f9d8bda9deb4aae3199ab418cdea09e",
+      "digestChanges": true,
+      "invalidates": []
+    },
+    {
+      "recordId": "urn:maha:record:fusion-plasma-systems-inertial-confinement-target-chamber",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:79f14c90571fd53e631fb28b9d97b641c79ad5959bf305b014887257186f32b1",
+      "repairedRevisionSha256": "sha256:74d3cd4c776aa4bdd1da53a3784ad2aab5fb92d410c9210d1f8be3d3413ea110",
+      "digestChanges": true,
+      "invalidates": []
+    },
+    {
+      "recordId": "urn:maha:record:fusion-plasma-systems-laser-target-coupling",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:3ee25d0b479f803fcc6a42046edb6346b1404e6290f9f34a908939fc6ae3afbe",
+      "repairedRevisionSha256": "sha256:c0e0967812bfbd9d701707ecd4e039be0756b6e00eea583a172a381aa6c49350",
+      "digestChanges": true,
+      "invalidates": [
+        "exact-revision-review"
+      ]
+    },
+    {
+      "recordId": "urn:maha:record:fusion-plasma-systems-magnetic-confinement",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:32ac01e76e7c7b433be7d2b231e125ec3ccc3441be38c5c8a49926bf2f85ab74",
+      "repairedRevisionSha256": "sha256:86399a29bedae45bf72492c14f4ce6f585a8858d1a8b925c3016925e1042ab9b",
+      "digestChanges": true,
+      "invalidates": [
+        "active-canonical-release"
+      ]
+    },
+    {
+      "recordId": "urn:maha:record:fusion-plasma-systems-magnetic-mirror-confinement",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:b19052af0beecc57556cbf8c98b41ae9e8bdac38c34a150d44aaea7640921c0b",
+      "repairedRevisionSha256": "sha256:2afa84654352d37d67e09e9794e2a23cdbc8c8efa4c37b92a2b6eb53d11e50a5",
+      "digestChanges": true,
+      "invalidates": []
+    },
+    {
+      "recordId": "urn:maha:record:fusion-plasma-systems-neutral-beam-injection",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:32a00630de883b2ebd9835b2ad7b64c0dd486d130c57a90e4396291399e69d16",
+      "repairedRevisionSha256": "sha256:03e733740a4ca859c6b0991efa1fdb0577590f2a609b02f7207c0fd3a925e728",
+      "digestChanges": true,
+      "invalidates": []
+    },
+    {
+      "recordId": "urn:maha:record:fusion-plasma-systems-neutron-material-damage",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:0d96d26dcceab41adbae3265be38e922f716bf60c543056f9617c3231db35d95",
+      "repairedRevisionSha256": "sha256:a54d0e7ee713e8acc2b1a833b29b2afa108c85087aede0ef057bf19ab683864b",
+      "digestChanges": true,
+      "invalidates": []
+    },
+    {
+      "recordId": "urn:maha:record:fusion-plasma-systems-plasma-diagnostics",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:20693f47450d36f62418dbc454b1aab0d81eb55f14ed317138688545f94cf839",
+      "repairedRevisionSha256": "sha256:a0070a00cdf862993f1e4101263f18e07dfadc6f1f197eac79ca9b6251da3a8d",
+      "digestChanges": true,
+      "invalidates": [
+        "active-canonical-release"
+      ]
+    },
+    {
+      "recordId": "urn:maha:record:fusion-plasma-systems-plasma-facing-components",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:9e507764819c6ca6bf753f291f989ecce94951902d6ac17a646ab149d1a40053",
+      "repairedRevisionSha256": "sha256:6213dfadd37a07f88f3b2e3927c48d8a6af6dcb6fdec2a2a33746fe36c34e411",
+      "digestChanges": true,
+      "invalidates": []
+    },
+    {
+      "recordId": "urn:maha:record:fusion-plasma-systems-plasma-heating-and-current-drive",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:0124d0faafe8ae09e8eea2f28803c19409c5aae7faee4ce5e4a58bc8d870973a",
+      "repairedRevisionSha256": "sha256:0249f77962531e4bda88444124322a88111eac5e72e3a24ccb0a231b3a4bca6c",
+      "digestChanges": true,
+      "invalidates": []
+    },
+    {
+      "recordId": "urn:maha:record:fusion-plasma-systems-plasma-position-and-shape-control",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:c8a0b1ffe54ea5a2294b2f2440c760124f2a8a135ef1dfb6de9138550425ba28",
+      "repairedRevisionSha256": "sha256:72b9c3086eb300eae08f816209154bb816201c62fd409357d10ca0ec9333366b",
+      "digestChanges": true,
+      "invalidates": []
+    },
+    {
+      "recordId": "urn:maha:record:fusion-plasma-systems-poloidal-field-coils",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:652f0e8755c77b66ad7f6ac08c46e2c8335b4f40fd00689a3beba0b1025c1198",
+      "repairedRevisionSha256": "sha256:382bb569da52d74ebe1c41e2e45e239aa9422994a85602ecab5f9a0499230173",
+      "digestChanges": true,
+      "invalidates": [
+        "active-canonical-release"
+      ]
+    },
+    {
+      "recordId": "urn:maha:record:fusion-plasma-systems-rebco-high-field-magnets",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:1e269a0e3094d1e1ecf3a8d8e872267225e48b482706a7db904776e24791eaa7",
+      "repairedRevisionSha256": "sha256:fd551cb112ae944d2353878f9bc67c0e54b7d25fd2f394149a27ca4b8ae5d288",
+      "digestChanges": true,
+      "invalidates": []
+    },
+    {
+      "recordId": "urn:maha:record:fusion-plasma-systems-remote-handling-maintenance",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:f2d046c7e7cc488ea30a8402a278061bbbd5405e80be5682a1d956adfafca35f",
+      "repairedRevisionSha256": "sha256:6d69f4c2a009b55fd3f364e86b0a7afc13d438656f6843d2f7584253f0974d25",
+      "digestChanges": true,
+      "invalidates": []
+    },
+    {
+      "recordId": "urn:maha:record:fusion-plasma-systems-resonant-magnetic-perturbations",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:f992e3437f2b1afe34857cfb1a38fb1e6cb597fadaf7d9ab4aad568964d971b5",
+      "repairedRevisionSha256": "sha256:e69ec3e03830bf624b824b2573b9ba89a6739b86a70e82cc4077fd7a6a1dd9f1",
+      "digestChanges": true,
+      "invalidates": []
+    },
+    {
+      "recordId": "urn:maha:record:fusion-plasma-systems-shattered-pellet-injection",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:62c581108e5a7ec96f2573a3a29c0e30ec0eba991ff6ea9146c9a4363116f0c1",
+      "repairedRevisionSha256": "sha256:a27d3f35e03343e511974787ff0db826ad87536caa8937121dedb38f9c45e54c",
+      "digestChanges": true,
+      "invalidates": [
+        "exact-revision-review"
+      ]
+    },
+    {
+      "recordId": "urn:maha:record:fusion-plasma-systems-stellarator-field-optimization",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:69b7bb3c02cbfed16a5de05a097be55d222f74adacede5cdfb7a65cd8fb3f83a",
+      "repairedRevisionSha256": "sha256:5827540fd63c21cd416374f4a496cf5e6a409de894af35ddece8e4c3442d4228",
+      "digestChanges": true,
+      "invalidates": [
+        "exact-revision-review"
+      ]
+    },
+    {
+      "recordId": "urn:maha:record:fusion-plasma-systems-stellarator-magnetic-coils",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:8ac96963ede9957044e42ffbe2faf4627c3d2e2e4abbc199f1c61f46bf3539d9",
+      "repairedRevisionSha256": "sha256:47c0f9c50ff5c0c2c7bdb5646f8c17379e31eba5504f29a9f196ca29d9b7ae84",
+      "digestChanges": true,
+      "invalidates": [
+        "exact-revision-review"
+      ]
+    },
+    {
+      "recordId": "urn:maha:record:fusion-plasma-systems-superconducting-quench-protection",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:ffc65583cac401a72bc1c1cc6e42890f3871065f5cb9e279865da71f9f3c78b7",
+      "repairedRevisionSha256": "sha256:4693a037192ab29f565fc01d65b5d7001d769505e0b332178442f1d0b607216a",
+      "digestChanges": true,
+      "invalidates": []
+    },
+    {
+      "recordId": "urn:maha:record:fusion-plasma-systems-tokamak-plasma-equilibrium",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:33436c81f49ca042301300245f18880d027289bef92b0b4ea7c765628a397769",
+      "repairedRevisionSha256": "sha256:ecc1d91a75d615af4086e3565fec69c4588c136ab53fdc5a1d4d302cf06990b3",
+      "digestChanges": true,
+      "invalidates": [
+        "active-canonical-release"
+      ]
+    },
+    {
+      "recordId": "urn:maha:record:fusion-plasma-systems-toroidal-field-coils",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:206c52b2d2e07f5e07eb12e2260858b71cee5865c45aa80b00e42238d8a37035",
+      "repairedRevisionSha256": "sha256:7037cf5094ef5bebf7d6ca37bfe592d560df72bfdc0a3d912e31e6e83e7bd255",
+      "digestChanges": true,
+      "invalidates": [
+        "active-canonical-release"
+      ]
+    },
+    {
+      "recordId": "urn:maha:record:fusion-plasma-systems-tritium-fuel-cycle",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:221fe02704a58db3221a1c3bc565e04bbb30d6fe68909da7b11321239dcf8b0e",
+      "repairedRevisionSha256": "sha256:4a6e2b91d304f5ae490b59faed29e45c7e28c3b70a99d8a2a12418ab5c3499fe",
+      "digestChanges": true,
+      "invalidates": [
+        "active-canonical-release"
+      ]
+    },
+    {
+      "recordId": "urn:maha:record:fusion-plasma-systems-vacuum-vessel-boundary",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:4c42435cbd38fb9fe55c916cee671fa1098da815f0e63d0e54b52cf171afdf3e",
+      "repairedRevisionSha256": "sha256:dbeceb3fa887490d24bfeeec0facfcacfdc17b9b132980d492acf5efe03c9d75",
+      "digestChanges": true,
+      "invalidates": []
+    },
+    {
+      "recordId": "urn:maha:record:longevity-metabolism-ampk-energy-sensing",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:11166569e6a0aa01f19064633051d5ad84e2a41eb81a97198cbe5ab8cfe9889a",
+      "repairedRevisionSha256": "sha256:2b80f96eca555566c1cacbd4621cd4dba8f2105e4225f9d79cda56880ce06d46",
+      "digestChanges": true,
+      "invalidates": []
+    },
+    {
+      "recordId": "urn:maha:record:longevity-metabolism-apoptosis-in-senescent-cells",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:b8f9ca4f249f6628e1f2812f62cdbe132683e4d0d1355e09844d0d76c8d5ed88",
+      "repairedRevisionSha256": "sha256:4b86ae28fc46e054e8c3343885647fdd9db752bc3e5e926863eff440ef608561",
+      "digestChanges": true,
+      "invalidates": [
+        "exact-revision-review"
+      ]
+    },
+    {
+      "recordId": "urn:maha:record:longevity-metabolism-atp-linked-respiration",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:58b6a11d7507f1b2dd28f920f82bd5fc045e5885b8c10bd9bdceb407d7aa51d2",
+      "repairedRevisionSha256": "sha256:27ff2ee0b9620029d6336889ca77652cf89d94512674fb037138671340c8f955",
+      "digestChanges": true,
+      "invalidates": [
+        "exact-revision-review"
+      ]
+    },
+    {
+      "recordId": "urn:maha:record:longevity-metabolism-autophagic-flux",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:c4e061e7ce193e2575d311732e2354614efd0fc01c1c0761d8e8d9e1ce5b91c7",
+      "repairedRevisionSha256": "sha256:750724f6c8feebe0ef3f15f20df24f9dc1f235fe102d29f71044b5062648fc90",
+      "digestChanges": true,
+      "invalidates": [
+        "active-canonical-release"
+      ]
+    },
+    {
+      "recordId": "urn:maha:record:longevity-metabolism-autophagosome-abundance",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:c5c5ac0886af644acf5fa06d761da6d4df5da0a277ac6330bf0b0e53002f74af",
+      "repairedRevisionSha256": "sha256:5254153f808c3db42097e434abd4affdc99d307e90620eee9c91af7896b00180",
+      "digestChanges": true,
+      "invalidates": [
+        "active-canonical-release"
+      ]
+    },
+    {
+      "recordId": "urn:maha:record:longevity-metabolism-cd38-nad-consumption",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:575e829bc82bd7a76ad29d773704f79f51a5a86e2cedc7c0a95a30f35524b570",
+      "repairedRevisionSha256": "sha256:bc09616f058651f76c516b9fef996710014cfe08a82f6cc6613554b682a22929",
+      "digestChanges": true,
+      "invalidates": []
+    },
+    {
+      "recordId": "urn:maha:record:longevity-metabolism-cellular-senescence-markers",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:32f84190547d8cff7fab09573847957046e817bea41f479c57eaf48d9d5fcd37",
+      "repairedRevisionSha256": "sha256:bd90a978344d8a0700e210d9587959ede45ab0552335088a717bf67d6be5283e",
+      "digestChanges": true,
+      "invalidates": [
+        "exact-revision-review"
+      ]
+    },
+    {
+      "recordId": "urn:maha:record:longevity-metabolism-insulin-mtor-signaling",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:56b92bdedc8e8b59d00ea159ddf89551169660542ba83e221130d9046e763a73",
+      "repairedRevisionSha256": "sha256:62a57cd9e849eea3f17dd9988a1c14586ec3bf0d873e2e0076d07a0715b4333f",
+      "digestChanges": true,
+      "invalidates": []
+    },
+    {
+      "recordId": "urn:maha:record:longevity-metabolism-intervention-biomarker-boundaries",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:b42f6ab8e4a4d91ba3ef3ebc9efb8750e5efe7d322befbddf74241c09016284a",
+      "repairedRevisionSha256": "sha256:49a1dbb1a6f2076df73094ff49fa145598c906660b3db82f49d004a94c00c996",
+      "digestChanges": true,
+      "invalidates": []
+    },
+    {
+      "recordId": "urn:maha:record:longevity-metabolism-lc3-turnover-assays",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:e90bc1eed1778d16a491bebc7f9d0b3ecf08a7a02a081981a8fdbb601a41b86e",
+      "repairedRevisionSha256": "sha256:fea7fe53c14ad26447029869c536d802c49140b3163b0b6aa801df83c03e284c",
+      "digestChanges": true,
+      "invalidates": [
+        "active-canonical-release"
+      ]
+    },
+    {
+      "recordId": "urn:maha:record:longevity-metabolism-lifespan-versus-healthspan-endpoints",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:d3f02e6c6340da552ce47205b2902e8df9b303f027b2dabead35624a679db296",
+      "repairedRevisionSha256": "sha256:2e1f5ba2e968fe7ea2ce8836feb105017be0dbe029dac3fe65856663782423ce",
+      "digestChanges": true,
+      "invalidates": [
+        "exact-revision-review"
+      ]
+    },
+    {
+      "recordId": "urn:maha:record:longevity-metabolism-lysosomal-degradation-blockade",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:e277cc947aa3e4851aa4fbbc76017d68b41e102e43433a69049809082731cbf5",
+      "repairedRevisionSha256": "sha256:7d6a5a435c8b95120906ec83ed27e50a5cc0d70cf26f30d15f55fe9346882211",
+      "digestChanges": true,
+      "invalidates": [
+        "active-canonical-release"
+      ]
+    },
+    {
+      "recordId": "urn:maha:record:longevity-metabolism-metabolic-flux-tracing",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:121ec5896f4411eed85f3086eba507fa1dbe76a9f4bf08bd191e7d165556986c",
+      "repairedRevisionSha256": "sha256:01b06520bcf14f7281e9234facd1ed953eb62f81db44ff64ec39b3faf4c25e0a",
+      "digestChanges": true,
+      "invalidates": []
+    },
+    {
+      "recordId": "urn:maha:record:longevity-metabolism-mitochondrial-membrane-potential",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:dc84b70eb49acdff7ee51cb174d935a2893a8e6e3f2b4564452d3bae70025d1b",
+      "repairedRevisionSha256": "sha256:d3ba5a599ed8da9c6597ec860f895058c8d504217cf9112ed5b232f4f1321a79",
+      "digestChanges": true,
+      "invalidates": []
+    },
+    {
+      "recordId": "urn:maha:record:longevity-metabolism-mitochondrial-uncoupling",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:ac069ff72a21e41841f6f0db28714569105235da74c891a75f8bca8e7194be0a",
+      "repairedRevisionSha256": "sha256:485bfed7997bf44a165e3c97340805a0fd447ca78a9e40376fe8f0c75376c510",
+      "digestChanges": true,
+      "invalidates": []
+    },
+    {
+      "recordId": "urn:maha:record:longevity-metabolism-mitophagy-flux",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:af9bc1e0f540b39aecec364ec7bba3b60d73da04e8a307fe10ae41c14ea9f7bd",
+      "repairedRevisionSha256": "sha256:7d651d55765998c64333ecedcdf8057fe51c58fa5032bcd0491560ccbfafe32c",
+      "digestChanges": true,
+      "invalidates": []
+    },
+    {
+      "recordId": "urn:maha:record:longevity-metabolism-nad-consumption-by-parps",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:412e98d79a88bc725711c9c75b372870f59ae37e41e8ff99ade5b0fbc097fe80",
+      "repairedRevisionSha256": "sha256:d6ae2b733db61dd458ab7c64c4a0afa00e76c048e7d8610f41e430d3b9d1c8a0",
+      "digestChanges": true,
+      "invalidates": [
+        "exact-revision-review"
+      ]
+    },
+    {
+      "recordId": "urn:maha:record:longevity-metabolism-nad-salvage-pathway",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:0c467bcce142892f6356dadfabfe1914b8c4b95ed53cf9714ae794e90fc40957",
+      "repairedRevisionSha256": "sha256:a9a653aefa0ffeba5cd5303d76670ee41fcff13b67f70167adcfc9a7aabee165",
+      "digestChanges": true,
+      "invalidates": [
+        "active-canonical-release"
+      ]
+    },
+    {
+      "recordId": "urn:maha:record:longevity-metabolism-nampt-rate-limiting-step",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:bf7d09a9215d20978d902db07001f60efd91b79282fc94cf20ffb62a3727cbaa",
+      "repairedRevisionSha256": "sha256:913e9980e5dd1b01caae94426e7261abfed722b6c84a9514b2147837244dcaeb",
+      "digestChanges": true,
+      "invalidates": [
+        "exact-revision-review"
+      ]
+    },
+    {
+      "recordId": "urn:maha:record:longevity-metabolism-nmn-and-nr-precursors",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:191557d52bd9efab7dcd9dba21d964223963a9c86e33e57f1aa5b0f07dec0c54",
+      "repairedRevisionSha256": "sha256:4919d369043502c99ad84c946c20711d3ca8ccac764a6de2b10b45c552b738d5",
+      "digestChanges": true,
+      "invalidates": [
+        "exact-revision-review"
+      ]
+    },
+    {
+      "recordId": "urn:maha:record:longevity-metabolism-nmnat-compartmentalization",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:4faf2fae6b61dd689323efef0694188699b458ec10f9b6edef4c7d3de75f7796",
+      "repairedRevisionSha256": "sha256:f49201c2657c1496985e5df3dc8317f85fe81be55927f31d406600746466b93a",
+      "digestChanges": true,
+      "invalidates": [
+        "exact-revision-review"
+      ]
+    },
+    {
+      "recordId": "urn:maha:record:longevity-metabolism-oxygen-consumption-rate",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:9ae12b356c0faf01b473266d67fded5ffe49f2a3f1652e3b17af62de1336974d",
+      "repairedRevisionSha256": "sha256:fb7b0b0e3ce05105b442b89505c52ad7685acbd67a622fbf08ffd9a33f654e50",
+      "digestChanges": true,
+      "invalidates": [
+        "exact-revision-review"
+      ]
+    },
+    {
+      "recordId": "urn:maha:record:longevity-metabolism-p62-sqstm1-turnover",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:853acfcb4c8dedb8c3efdf835dc592c87e2caf53a0acc79ecae89af5e7e6daa7",
+      "repairedRevisionSha256": "sha256:125c3b6204df8fdddc208a8ba975a0cc18d1d622c838da8da7d3a901f48ff159",
+      "digestChanges": true,
+      "invalidates": [
+        "active-canonical-release"
+      ]
+    },
+    {
+      "recordId": "urn:maha:record:longevity-metabolism-pink1-parkin-pathway",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:46308d98f43ad48680e8f9a1d873f801475c93c6788461243e8d916aa4643485",
+      "repairedRevisionSha256": "sha256:0c8c0ec25b5120419d1827231380aecc648e6c8857ac7eebc821b614fb63c13b",
+      "digestChanges": true,
+      "invalidates": []
+    },
+    {
+      "recordId": "urn:maha:record:longevity-metabolism-proton-leak-respiration",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:3e34f500f91c530fe3220089b0e1b8b038838a80d941c34e3e2c3d8ec8b8d129",
+      "repairedRevisionSha256": "sha256:c49b6668f7467545b73928e8948367480e00058831ae0b253e3b7b89f42493bc",
+      "digestChanges": true,
+      "invalidates": []
+    },
+    {
+      "recordId": "urn:maha:record:longevity-metabolism-senescence-associated-secretory-phenotype",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:952678480a011c4b89b3a081b903fa76b0d4a06d4b10f99cd6c16f39320aa91c",
+      "repairedRevisionSha256": "sha256:865bf6564b5f09bcb65e11eb4b5b87d431f10a447bebeb463c9995fe01b21b0b",
+      "digestChanges": true,
+      "invalidates": []
+    },
+    {
+      "recordId": "urn:maha:record:longevity-metabolism-senescent-cell-clearance",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:f208ae5ebd530d273ae1e30c924ebc41eabe84efaa38aa731de42fee86645808",
+      "repairedRevisionSha256": "sha256:63ddde763250a84373e52d7e05b9a8865d219b90c235d449e559e8cd6816b5c6",
+      "digestChanges": true,
+      "invalidates": [
+        "exact-revision-review"
+      ]
+    },
+    {
+      "recordId": "urn:maha:record:longevity-metabolism-senolytic-selectivity",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:ab0282bd6cf2439e46edd62f9ba8d4a7ad56839eac40112defe558da1777c195",
+      "repairedRevisionSha256": "sha256:f9716ecdf2098361e2116b0c5ed02f1286f8a6ed1fa078706ac029b23637aace",
+      "digestChanges": true,
+      "invalidates": [
+        "active-canonical-release"
+      ]
+    },
+    {
+      "recordId": "urn:maha:record:longevity-metabolism-sirtuin-nad-dependence",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:3774dec2e51ced47caa4a9f83ae6490bf4617f2afe90e96422fec90a3f7ec080",
+      "repairedRevisionSha256": "sha256:2848507aee59c675ac8446f81817cb86c7a1f2543bef99a146309c614771df7b",
+      "digestChanges": true,
+      "invalidates": [
+        "exact-revision-review"
+      ]
+    },
+    {
+      "recordId": "urn:maha:record:longevity-metabolism-translation-to-human-outcomes",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:d0d8e4666aabf2a9c6243e0681e380eb24e01b1be85287194df8456cbd0b021f",
+      "repairedRevisionSha256": "sha256:f221119ce8126f0057c7fa25cbc29a1d68cb9abe2c9459a3b4d0022c2fd56191",
+      "digestChanges": true,
+      "invalidates": [
+        "exact-revision-review"
+      ]
+    },
+    {
+      "recordId": "urn:maha:record:mechanistic-interpretability-activation-patching",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:75b9f1bb39ddd339c45d7813146d0d54f9a4dd03de056be3f9a51a4ed72c1953",
+      "repairedRevisionSha256": "sha256:9155a69267cee40e8d5c68fd049cc354230ebca34ea5b19c040aa5af8339135f",
+      "digestChanges": true,
+      "invalidates": []
+    },
+    {
+      "recordId": "urn:maha:record:mechanistic-interpretability-attention-pattern-evidence",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:b620e7cc4910dadbbb70e5b76d09e2eb114fd6f9255443a7e292258bac5399c0",
+      "repairedRevisionSha256": "sha256:3022ae398c06c2a7771b07ee6cf14932108214ce8692a46327a5579da17d4197",
+      "digestChanges": true,
+      "invalidates": [
+        "active-canonical-release"
+      ]
+    },
+    {
+      "recordId": "urn:maha:record:mechanistic-interpretability-automated-feature-interpretation",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:b3b721201f1ca0bdb11af93c7de74ee522a0963565383973a262c8be35616a5f",
+      "repairedRevisionSha256": "sha256:61d9924f28716a2a5e7e14c6117b8be4663984e26040764d11e9353012675859",
+      "digestChanges": true,
+      "invalidates": []
+    },
+    {
+      "recordId": "urn:maha:record:mechanistic-interpretability-benchmark-task-transfer",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:ddf2ed2123e3d6a45e1041116e781a7a92e6e3166bd63ada0c16de7c0eb40095",
+      "repairedRevisionSha256": "sha256:c2ea7dd4d7da9f4db041636c5f0bd85ff0ffe2263af8c975fd9d3d8cdcf96504",
+      "digestChanges": true,
+      "invalidates": []
+    },
+    {
+      "recordId": "urn:maha:record:mechanistic-interpretability-causal-feature-intervention",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:65e85d61491dcb72f0695dff79bcc48eed60ff5f2b5a94f4864c0a706c0b3ced",
+      "repairedRevisionSha256": "sha256:2cf5b265294f4e7c001885bee3bea168ca717423140f506a883e4e90f519794b",
+      "digestChanges": true,
+      "invalidates": []
+    },
+    {
+      "recordId": "urn:maha:record:mechanistic-interpretability-causal-scrubbing",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:be714d5fa8d820c6923baeaa7a9b5e9cad6bbbf1cc82a0a22305f1880debf54b",
+      "repairedRevisionSha256": "sha256:e98d56130962ee1abe7bb55bfe6f5ebef8a3b8ccb1e4ac4d7b2b59b1ce2392f2",
+      "digestChanges": true,
+      "invalidates": [
+        "active-canonical-release"
+      ]
+    },
+    {
+      "recordId": "urn:maha:record:mechanistic-interpretability-circuit-completeness",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:e96a0c8349db8bf91661f3641701ec4edc8d0d1ba0ddda30d91cee7c9b2d2dc9",
+      "repairedRevisionSha256": "sha256:d0b1b70b341acc16d94be3619cf9931638c0b0bd984ff0fff2c28314d33f11dc",
+      "digestChanges": true,
+      "invalidates": []
+    },
+    {
+      "recordId": "urn:maha:record:mechanistic-interpretability-circuit-faithfulness",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:5ae18dd0bad14d69f62dc4b6f93a8fb459ff39540da4e395e083a8c11969b4b0",
+      "repairedRevisionSha256": "sha256:98fca387b72bede1bb725c8ea7876023771fb53290c6fe16d7ab228100cc4cc4",
+      "digestChanges": true,
+      "invalidates": []
+    },
+    {
+      "recordId": "urn:maha:record:mechanistic-interpretability-cross-layer-transcoders",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:4bdeeacc98d968613a0e230bee70f605d7c406e67be9f98d26892e9874e7f6b4",
+      "repairedRevisionSha256": "sha256:66cb701b5a57abcc05ed79fb63aa02ef514bca1404d1bc412b2ef55f41d17597",
+      "digestChanges": true,
+      "invalidates": []
+    },
+    {
+      "recordId": "urn:maha:record:mechanistic-interpretability-dead-features",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:2c5a7bd11dc0c0f322c68d1e3dbbeb2793762b33626b00b37afb97647aa6748d",
+      "repairedRevisionSha256": "sha256:ec9905aebde1d537fe744f9a0eb9b2610a725d125489ae0d13404a7097032d37",
+      "digestChanges": true,
+      "invalidates": []
+    },
+    {
+      "recordId": "urn:maha:record:mechanistic-interpretability-feature-absorption",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:2a2d4bb4d9a99ccbded6876d32b1b0259bc45fda110c3c297d93f6479654681d",
+      "repairedRevisionSha256": "sha256:d3d4b47d4ddb589b99f82530e396d5ee8ba1c0f4002c32fc48ed089e1cfa3e9c",
+      "digestChanges": true,
+      "invalidates": []
+    },
+    {
+      "recordId": "urn:maha:record:mechanistic-interpretability-feature-activation-maximization",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:6c45c999f1603edcc3571e7f7fc3848e734e2fb4fa532624cea798499991f446",
+      "repairedRevisionSha256": "sha256:7c54619ec82b9a4509add1a289b41f9db840f56d0164e493b706e2a6d9245532",
+      "digestChanges": true,
+      "invalidates": [
+        "exact-revision-review"
+      ]
+    },
+    {
+      "recordId": "urn:maha:record:mechanistic-interpretability-feature-splitting",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:cf6db395de12fd17dc25b78473858e97a8191aba6a34fe58c56c1f0a3b0840ef",
+      "repairedRevisionSha256": "sha256:c5b4f96e941679b854d391dff96eac228e73f313e9c7e25991e07d533bcbf337",
+      "digestChanges": true,
+      "invalidates": []
+    },
+    {
+      "recordId": "urn:maha:record:mechanistic-interpretability-in-context-learning-circuits",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:34dd381e9adb2ce62571ccee51023a8014020b65a8380b129b67f4e8f140cc70",
+      "repairedRevisionSha256": "sha256:d79e7bd70b24cced1a14c054284829eaf8f1cca20c2a30b380ecc0074a8d6d43",
+      "digestChanges": true,
+      "invalidates": [
+        "active-canonical-release"
+      ]
+    },
+    {
+      "recordId": "urn:maha:record:mechanistic-interpretability-induction-head-circuits",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:e4ea8094bb1cc6dd46e32a36fdf0bff6fae8e5fdb7e81ed1ad3f9c85f6807720",
+      "repairedRevisionSha256": "sha256:3fee6c6c2fce901b1e7ab6c418a544ce871bbfd2e8f73574d9b16ae215fae9b6",
+      "digestChanges": true,
+      "invalidates": [
+        "active-canonical-release"
+      ]
+    },
+    {
+      "recordId": "urn:maha:record:mechanistic-interpretability-interchange-interventions",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:fa78fb4443e757f3ac7137edfce3d21f48c2b5c013bf040452f091cff9f53ee9",
+      "repairedRevisionSha256": "sha256:c4fd2bc6b6f8446770f23f0f5f38a791443b2f0bbfeeb4d9947d53adad224596",
+      "digestChanges": true,
+      "invalidates": []
+    },
+    {
+      "recordId": "urn:maha:record:mechanistic-interpretability-interpretability-claim-boundaries",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:11a69bfe8da762641cc6eedd1c821bd5e53d6644eafb5918c1b2fc5fa8862856",
+      "repairedRevisionSha256": "sha256:692cc0c5026db5023b68ae2c5170ffefd7ada395c048970608f1c0a57e0701ac",
+      "digestChanges": true,
+      "invalidates": []
+    },
+    {
+      "recordId": "urn:maha:record:mechanistic-interpretability-io-identification-circuit",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:423d3d8385569d7166a1f5e4a595935f02f05834f537c17c8c382cbe408aff41",
+      "repairedRevisionSha256": "sha256:9ebc6cc1da1459bc64f0e503cc2eeef2c572b7d084406ac7432690b7739aa22d",
+      "digestChanges": true,
+      "invalidates": []
+    },
+    {
+      "recordId": "urn:maha:record:mechanistic-interpretability-mechanistic-anomaly-detection",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:67a6c2e8d94a7de06711fa33722b0a07d8d34670a3e6d3a74f918ffe137268a4",
+      "repairedRevisionSha256": "sha256:a988e3ccf69e1eb3801fd7ad73a28c12f4b87e15873e7f5dfd941f7b8ad19297",
+      "digestChanges": true,
+      "invalidates": []
+    },
+    {
+      "recordId": "urn:maha:record:mechanistic-interpretability-model-component-ablation",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:850665cfac0e9281b1d32c3e62784cd5e12ef82258386eff1e258695bb3b6a6b",
+      "repairedRevisionSha256": "sha256:5777e3f7fc4fb33a84a8d2c46c0530c488bcf6fb97e05df06ace5ff8b437e058",
+      "digestChanges": true,
+      "invalidates": []
+    },
+    {
+      "recordId": "urn:maha:record:mechanistic-interpretability-neural-feature-superposition",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:e0955ae7df6a4db6135e0b27d8d43c3d753f1721bee83db45c979b4984770ba0",
+      "repairedRevisionSha256": "sha256:5bd6a2359d5789b70eed0d3c807bb51292a4c5b8162c6292cb536d4f7713b90a",
+      "digestChanges": true,
+      "invalidates": [
+        "active-canonical-release"
+      ]
+    },
+    {
+      "recordId": "urn:maha:record:mechanistic-interpretability-path-patching",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:ddf477b346986f7db4aa3974a49478576a8f1b7eede4f32a4498f2dc70cc98f8",
+      "repairedRevisionSha256": "sha256:d1b7dcb3116d1fa102dc8d62d7a4e3c17c30a2720af5d225d6c41b9745c88a77",
+      "digestChanges": true,
+      "invalidates": []
+    },
+    {
+      "recordId": "urn:maha:record:mechanistic-interpretability-polysemantic-neurons",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:da6577a271900f4eb0831b1939a28d77f55443288043f90948ff41cd26e42216",
+      "repairedRevisionSha256": "sha256:51459c8669f8c4f0fcc40d71c6498f6aaf1d2fd2ddeaf9b2aa292d96cfbf35ac",
+      "digestChanges": true,
+      "invalidates": [
+        "active-canonical-release"
+      ]
+    },
+    {
+      "recordId": "urn:maha:record:mechanistic-interpretability-previous-token-heads",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:f625abc2cd12338322ef9b8e12ff33585aff6fb0d430de39607a16b52a003c7b",
+      "repairedRevisionSha256": "sha256:cf3c746db74726c37a052ceaef2427b81e157a8f23b7e249728cd1ce817e51f5",
+      "digestChanges": true,
+      "invalidates": []
+    },
+    {
+      "recordId": "urn:maha:record:mechanistic-interpretability-representation-probing-boundary",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:3fa9cad966e10d7bb1ba52e2c082873316a8e28dfd2e7131e986e1474fa499c9",
+      "repairedRevisionSha256": "sha256:da7f7cf623c064d6b2be6018291b12d8e1db803fc57c3c058dd1d31b6e7313d1",
+      "digestChanges": true,
+      "invalidates": [
+        "active-canonical-release"
+      ]
+    },
+    {
+      "recordId": "urn:maha:record:mechanistic-interpretability-sae-encoder-decoder",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:fecd2f23e46352a862eaf3e441ce678513c066768f2c9217c16dfe44946aea54",
+      "repairedRevisionSha256": "sha256:f57dafafdcdbbdd811c34b10e6181c90c82c77c6d817e819c1e396b9c622f043",
+      "digestChanges": true,
+      "invalidates": [
+        "active-canonical-release"
+      ]
+    },
+    {
+      "recordId": "urn:maha:record:mechanistic-interpretability-sae-sparsity-fidelity-tradeoff",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:76276db1a59f0a8bd689e93c3dee21528b66cf1c7b757c339c275a5f2da8a82f",
+      "repairedRevisionSha256": "sha256:439cd636e4f71159e39ac9e6d55b712c6474afba0c4ae3255fa83e4bbd79e750",
+      "digestChanges": true,
+      "invalidates": []
+    },
+    {
+      "recordId": "urn:maha:record:mechanistic-interpretability-sparse-autoencoder-dictionaries",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:d4eb84c77a4b5bc1457f8dd25681d62b4a48e21bfc622b1d5cf312604f4e3cad",
+      "repairedRevisionSha256": "sha256:763103a0e76d731da0e947a2f20a695c9c9857248f627cb6211fce0bad6db2a8",
+      "digestChanges": true,
+      "invalidates": [
+        "active-canonical-release"
+      ]
+    },
+    {
+      "recordId": "urn:maha:record:mechanistic-interpretability-superposition-geometry",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:66809a1a4e58090f95d04caca8045b7de2f1ecbc5c0bd5df930b8ed641284760",
+      "repairedRevisionSha256": "sha256:d002137f8fed6f114dcc3743c7aadf9ca213cb39d3fd21e2bfc22276b14e4cd2",
+      "digestChanges": true,
+      "invalidates": [
+        "active-canonical-release"
+      ]
+    },
+    {
+      "recordId": "urn:maha:record:mechanistic-interpretability-toy-models-of-superposition",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:d99abd6cf16677d4bc79261413b00c1e51dd8d33885dee6659acd2424b054767",
+      "repairedRevisionSha256": "sha256:e01f156e5003d5220050c5046adcb393290c77c5171b67d3ebc3a0f00e821eb5",
+      "digestChanges": true,
+      "invalidates": [
+        "active-canonical-release"
+      ]
+    },
+    {
+      "recordId": "urn:maha:record:neurotechnology-bci-adaptive-stimulation-policies",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:6421b1d7631cd0d8f3a56c8c94d55d133c9622b90382c4d46afea950d5f0f7b0",
+      "repairedRevisionSha256": "sha256:118022eee17e75cf2e1f22c7d67dc3f44b7235b6a5fb2af70dd7f4cb126eb9bc",
+      "digestChanges": true,
+      "invalidates": []
+    },
+    {
+      "recordId": "urn:maha:record:neurotechnology-bci-bci-calibration-drift",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:b4c9d5961857a604642779d01a130f605f420e4acbce820798cb294f1ee938e5",
+      "repairedRevisionSha256": "sha256:616cbe1d084abc4ef1877e27375f9e27289ef40b9745c4f14c6402056bf5293e",
+      "digestChanges": true,
+      "invalidates": []
+    },
+    {
+      "recordId": "urn:maha:record:neurotechnology-bci-channelrhodopsin-photocurrent-kinetics",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:3222b99000d35c144e1b7da3e76a8fbb09514fcce54c71e3b38fc873851307f5",
+      "repairedRevisionSha256": "sha256:292ff069e9b514f46f826d8d33e7ea05297c4bcb059404cb8251188a94a71113",
+      "digestChanges": true,
+      "invalidates": [
+        "exact-revision-review"
+      ]
+    },
+    {
+      "recordId": "urn:maha:record:neurotechnology-bci-chronic-signal-stability",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:21b00e998a171f2c9a561463f4ca43fa3bf56ba0439efbe8abd89654e7906de9",
+      "repairedRevisionSha256": "sha256:6cee719863c052f7bb2e6e327643bb93a482bdbed2f5049f76060043bf38180a",
+      "digestChanges": true,
+      "invalidates": []
+    },
+    {
+      "recordId": "urn:maha:record:neurotechnology-bci-clinical-translation-boundaries",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:b71169dac2062e651c6cdac31cd5366dab81dd55dbdc2914a673daa296c6044f",
+      "repairedRevisionSha256": "sha256:fa777e4133195a9821824354c09f67b460a0d00f22738d98da642a638df2aaca",
+      "digestChanges": true,
+      "invalidates": []
+    },
+    {
+      "recordId": "urn:maha:record:neurotechnology-bci-closed-loop-neural-decoding",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:e287e1c9d6dee7116f8c8c9dfd6f4484faba4ad519cab35b12924e4194cd38be",
+      "repairedRevisionSha256": "sha256:def02a7065657d859c38cc9a7074a86df168a57379233ecb6b579829edc8309d",
+      "digestChanges": true,
+      "invalidates": []
+    },
+    {
+      "recordId": "urn:maha:record:neurotechnology-bci-cortical-surface-bci",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:1d714ec80f8a0b1b5862b5fd1a8dab73b6afc15146eec4b4c6102721f4aa1519",
+      "repairedRevisionSha256": "sha256:41f57d90bdb2ea7ea3b5c74ea0d1d61364ba36160d4c5acaee2a428a64fa369d",
+      "digestChanges": true,
+      "invalidates": []
+    },
+    {
+      "recordId": "urn:maha:record:neurotechnology-bci-decoder-update-latency",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:69c5b7d88b23c93b7d6f355cce8af23005eaf66627969676d75d59f74267c27f",
+      "repairedRevisionSha256": "sha256:aaf4238cfd68b141579dd7cf3560d85bf9d2c1a707a9b76e9ddce67d04cf0f5e",
+      "digestChanges": true,
+      "invalidates": []
+    },
+    {
+      "recordId": "urn:maha:record:neurotechnology-bci-electrocorticography-spatial-resolution",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:ea472f6b233b533b20d8cde9e8a9048b68ca74fc90dc3b05dd15a1ea397f1706",
+      "repairedRevisionSha256": "sha256:f0ff776984205e98a81c07f0a2259410c3f03e8440856f5250f91a4de160c4bd",
+      "digestChanges": true,
+      "invalidates": [
+        "exact-revision-review"
+      ]
+    },
+    {
+      "recordId": "urn:maha:record:neurotechnology-bci-electrode-tissue-interface",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:6023d80716780a5fc6f9f63f5393e196b0fc018f9bbec667b4368ff6896f9e6f",
+      "repairedRevisionSha256": "sha256:93df6db0508e36195838287f4cf27f9c0e87a8f5ed11de8ff6cf5eb8249bcc32",
+      "digestChanges": true,
+      "invalidates": []
+    },
+    {
+      "recordId": "urn:maha:record:neurotechnology-bci-extracellular-spike-recording",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:52a87462d2d5d40f161076641e83c1411b5d83bc3135c7460a7327fd1b216d84",
+      "repairedRevisionSha256": "sha256:bd60af41ee171309de1e0738f4e508d96327f2877faee3c0f52ec879278fe324",
+      "digestChanges": true,
+      "invalidates": [
+        "active-canonical-release"
+      ]
+    },
+    {
+      "recordId": "urn:maha:record:neurotechnology-bci-flexible-conformal-electrode-arrays",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:93cab9b620eeaae46c89c71eca8acb4e5430ef522a0001c796547d151a80beae",
+      "repairedRevisionSha256": "sha256:1a602bad0602baa7006515459bb85307371206472b77c348653b228469934fb3",
+      "digestChanges": true,
+      "invalidates": [
+        "exact-revision-review"
+      ]
+    },
+    {
+      "recordId": "urn:maha:record:neurotechnology-bci-foreign-body-response",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:f72bd35f40fb420af2a5b3fadc165aac72d0fc875d3e30ccfb82a597f97409a8",
+      "repairedRevisionSha256": "sha256:c91849ec57abd66970243a86aa66dbec4c6a5b5cf46e12a06d81dc6ba204adf4",
+      "digestChanges": true,
+      "invalidates": []
+    },
+    {
+      "recordId": "urn:maha:record:neurotechnology-bci-impedance-and-noise",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:33b261ece72be319ca54f184e3ef3e1de10576820b272ec8da730d613a777994",
+      "repairedRevisionSha256": "sha256:317288d432be5916d00311e7bea94d332c3a549fe8b4bde7d10332f69ff2ad71",
+      "digestChanges": true,
+      "invalidates": []
+    },
+    {
+      "recordId": "urn:maha:record:neurotechnology-bci-intracortical-bci",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:a6a06b2bc45a990034b2649b5ba3cb9c1d8d2656df2bf4e2913c81c241fc9999",
+      "repairedRevisionSha256": "sha256:9ef60493cb6374f1c44d0a17ce003e99119eb744d816f7f12df2e6f85a09ed78",
+      "digestChanges": true,
+      "invalidates": [
+        "active-canonical-release"
+      ]
+    },
+    {
+      "recordId": "urn:maha:record:neurotechnology-bci-light-delivery-tissue-heating",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:ebaeb9b79217410afaf027c87cd6fa6c14a2d5a53db7ac4bdddcf032523965ae",
+      "repairedRevisionSha256": "sha256:caed6bcf04dab41caeee88b027ee3eaed1f060d918d7de45fd9217ba52b3c868",
+      "digestChanges": true,
+      "invalidates": []
+    },
+    {
+      "recordId": "urn:maha:record:neurotechnology-bci-micro-ecog-arrays",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:d819a5131f00c88af427c4f34625417117f98a2bd419797494b908ae502f47be",
+      "repairedRevisionSha256": "sha256:9034fb4a1a57b32a5786fd2ab064714e52f74d6d9eee20e9cfc574d2ef78e8f4",
+      "digestChanges": true,
+      "invalidates": [
+        "active-canonical-release"
+      ]
+    },
+    {
+      "recordId": "urn:maha:record:neurotechnology-bci-motor-intention-decoding",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:e51b270b795dcc7be694c411f91b06fa4950dcf6ed4ce5d8f4f9d38ce91729af",
+      "repairedRevisionSha256": "sha256:94ba0f0a92bd26a8d930702d603572b4271eedbd4ac8386cc9354bb1a715d16d",
+      "digestChanges": true,
+      "invalidates": [
+        "exact-revision-review"
+      ]
+    },
+    {
+      "recordId": "urn:maha:record:neurotechnology-bci-neural-data-compression",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:ecd25017f5a4963595c44b87ce8a2c29bbed3e34c1101f4646c4ae965fa19b61",
+      "repairedRevisionSha256": "sha256:03ab39e4120bcec45a1711ef08d50fe5f323fdbda9fe6f798f956aedc47913d2",
+      "digestChanges": true,
+      "invalidates": []
+    },
+    {
+      "recordId": "urn:maha:record:neurotechnology-bci-neural-feature-extraction",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:6e2753bef11c22080e830eda933d3f4d4ab61efa129f565d1d3bc2c3cf174d65",
+      "repairedRevisionSha256": "sha256:8f7fbd3d8e4ebf37ab274fe763425c27f925b2b2e60a2e6c3410c53d1bc39103",
+      "digestChanges": true,
+      "invalidates": []
+    },
+    {
+      "recordId": "urn:maha:record:neurotechnology-bci-neuropixels-channel-selection",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:bb2be28177d846b84dc7661a8b8f6e1949265a009839a3e5f47c57a237b2999d",
+      "repairedRevisionSha256": "sha256:4daf61883c17ffd179d78d993946d926805cb8c09833e004697b5aa856a93f93",
+      "digestChanges": true,
+      "invalidates": [
+        "active-canonical-release"
+      ]
+    },
+    {
+      "recordId": "urn:maha:record:neurotechnology-bci-neuropixels-cmos-probe",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:dc6dfa723e4414dcd02b227781dbe6de4c1d2b1a4075113fa77ee6a0db89683e",
+      "repairedRevisionSha256": "sha256:8e7749f1050ccf9236d3b8ac39ac78eb666734d901b6ddb9413e59d94d365d07",
+      "digestChanges": true,
+      "invalidates": [
+        "active-canonical-release"
+      ]
+    },
+    {
+      "recordId": "urn:maha:record:neurotechnology-bci-neuropixels-recording-sites",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:14a2daf3edfd1949f7a598ed92fffada66619f94310d9d18de55c6af4b8b9985",
+      "repairedRevisionSha256": "sha256:4e5cff495212db8a49ebee0cfda999c007e0d8c1c0eddca5e700d6bb70313d6f",
+      "digestChanges": true,
+      "invalidates": [
+        "active-canonical-release"
+      ]
+    },
+    {
+      "recordId": "urn:maha:record:neurotechnology-bci-opsin-spectral-sensitivity",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:8e5cad4598ae3b249a0c35631a2bb999d71e0f13faaede0acc71a406621464e7",
+      "repairedRevisionSha256": "sha256:a7d614baadf3f11986c78e3f89690d4c472bb62eaa01b112151859a8053cc4cf",
+      "digestChanges": true,
+      "invalidates": [
+        "exact-revision-review"
+      ]
+    },
+    {
+      "recordId": "urn:maha:record:neurotechnology-bci-optogenetic-channelrhodopsin",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:6e054e00282fe4710e477f5b7c43c5605ebf35fbc855b2f589d1cf6265de7473",
+      "repairedRevisionSha256": "sha256:c0de91e6a891c0ab8648174dfc5025b642eb28989ab3f91840a944ed58221dd3",
+      "digestChanges": true,
+      "invalidates": [
+        "exact-revision-review"
+      ]
+    },
+    {
+      "recordId": "urn:maha:record:neurotechnology-bci-peripheral-nerve-interface",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:8b62748e004c026ed4cb930649a61cbfeebe94fd4e56666ee3073d6f96999734",
+      "repairedRevisionSha256": "sha256:27649e23768f3c4f6d50facdf7c3cedac3c3302a6b7fa81eeac10a4226c48b95",
+      "digestChanges": true,
+      "invalidates": []
+    },
+    {
+      "recordId": "urn:maha:record:neurotechnology-bci-sensing-to-stimulation-loop",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:90fb9f3d6b315601450a5240f84ad94a736577f9f2f80e842f2f71340761c657",
+      "repairedRevisionSha256": "sha256:8d3f2fde2995a377438d6a2bb6c8870097b06c3956dc4273a14ce102e2098acc",
+      "digestChanges": true,
+      "invalidates": []
+    },
+    {
+      "recordId": "urn:maha:record:neurotechnology-bci-spike-sorting-boundaries",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:56d5b281f41632fd5dea4d16f066e5aac12e7e9b479c60b91b24f8e28718211f",
+      "repairedRevisionSha256": "sha256:4557399483042f5ef8cf8dbe0090c90e2b46302c11c3952aed0159b2ac2e6401",
+      "digestChanges": true,
+      "invalidates": [
+        "active-canonical-release"
+      ]
+    },
+    {
+      "recordId": "urn:maha:record:neurotechnology-bci-stimulation-artifact-rejection",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:68649aa9e10e27794f4157caabcf6d0b1958ef04303ae844bc787f8de3d5175d",
+      "repairedRevisionSha256": "sha256:4cad9b59ccae147000f330fc6c958a5a875fc338ef8671ce7e26be2275dfdd40",
+      "digestChanges": true,
+      "invalidates": []
+    },
+    {
+      "recordId": "urn:maha:record:neurotechnology-bci-wireless-neural-telemetry",
+      "claimsRepaired": 1,
+      "formattingOnly": true,
+      "currentRevisionSha256": "sha256:3bb88c0e480523c88de1379cac89a559b970908abd509ebc1393a48603078e18",
+      "repairedRevisionSha256": "sha256:7bc820537dbe94a3a4df0b1cee738717e23443149d3b1979f1a9b220312ffc2d",
+      "digestChanges": true,
+      "invalidates": []
+    }
+  ],
+  "boundary": "A computed correction, not an applied one. No record, review or release was changed."
+}

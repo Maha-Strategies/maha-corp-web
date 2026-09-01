@@ -5,6 +5,7 @@ import { canonicalJson } from '../lib/evidence-dossier/digest.ts'
 import { EPISTEMIC_RECORDS } from '../lib/epistemic-pilots.ts'
 import { REPAIRED_REVISION_CANARY_RECORDS } from '../lib/repaired-revision-canary-targets.ts'
 import { alignmentBlockers, alignmentFor } from '../lib/frontier-source-alignment.ts'
+import { classifyInspectionDepth, supportsPassageAxis } from '../lib/inspection-depth.ts'
 import { isPilotAlignmentClear, pilotAlignmentFor } from '../lib/pilot-source-alignment.ts'
 import { BATCH_11_DECISIONS } from '../lib/frontier-alignment-batch-11-review.ts'
 import {
@@ -78,11 +79,16 @@ interface Packet {
 const revisionOf = (recordId: string) => digest(records.get(recordId))
 const auditOf = (recordId: string) => digest(alignmentFor(recordId) ?? null)
 
-/** Whether the inspection reached the passage, or stopped at the abstract. */
-const inspectionDepth = (recordId: string): 'section-or-full-text' | 'abstract-or-metadata-only' => {
-  const where = String((alignmentFor(recordId)?.evidence as Record<string, unknown> | undefined)?.inspectedContentLocation ?? '')
-  return /abstract|metadata only/i.test(where) ? 'abstract-or-metadata-only' : 'section-or-full-text'
-}
+/**
+ * Whether the inspection reached the passage, or stopped at the abstract.
+ *
+ * Delegated, because the first version of this matched /abstract/ anywhere and
+ * so read "abstract, Methods, Discussion, in-vivo results" - a list of sections
+ * that were read - as having read only the abstract. Three records were sent
+ * back for work their own audit records as done. See lib/inspection-depth.ts.
+ */
+const inspectionDepth = (recordId: string) =>
+  classifyInspectionDepth((alignmentFor(recordId)?.evidence as Record<string, unknown> | undefined)?.inspectedContentLocation as string)
 
 const packets: Packet[] = cohort.map((recordId) => {
   const record = records.get(recordId)!
@@ -133,7 +139,7 @@ const packets: Packet[] = cohort.map((recordId) => {
  * require.
  */
 function reviewAxis(packet: Packet, axis: ReviewAxis): { decision: AxisDecision; note: string } {
-  const shallow = packet.alignment.inspectionDepth === 'abstract-or-metadata-only'
+  const shallow = !supportsPassageAxis(packet.alignment.inspectionDepth as never)
   switch (axis) {
     case 'source-identity-and-fidelity':
       return packet.source.identifier && packet.alignment.subjectAligned === 'supported'

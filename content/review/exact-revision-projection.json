@@ -3,20 +3,20 @@
   "reviewDate": "2026-09-01",
   "cohortSize": 38,
   "states": {
-    "approved-for-exact-revision": 30,
+    "approved-for-exact-revision": 33,
     "rejected": 1,
-    "revise-requested": 7
+    "revise-requested": 4
   },
   "classifications": {
     "rejected": 1,
-    "release-ready": 30,
-    "revise-and-rereview": 7
+    "release-ready": 33,
+    "revise-and-rereview": 4
   },
   "inspectionDepth": {
-    "abstract-or-metadata-only": 8,
-    "section-or-full-text": 30
+    "abstract-or-metadata-only": 5,
+    "section-or-full-text": 33
   },
-  "releaseReady": 30,
+  "releaseReady": 33,
   "projections": [
     {
       "recordId": "urn:maha:record:advanced-materials-diamond-thermal-conductivity",
@@ -137,10 +137,10 @@
       "domainSlug": "biomolecular-engineering",
       "revisionSha256": "sha256:1f877ffe9cc1fe0a02ae70fee8bcdbb697add8846b90a1c42671c25f6c7a88bb",
       "auditSha256": "sha256:a58c7bc32e2838b67e3b037836dc93af1e5549e9352e6589151fd815fab2f136",
-      "state": "revise-requested",
-      "classification": "revise-and-rereview",
-      "releaseAuthorized": false,
-      "inspectionDepth": "abstract-or-metadata-only",
+      "state": "approved-for-exact-revision",
+      "classification": "release-ready",
+      "releaseAuthorized": true,
+      "inspectionDepth": "section-or-full-text",
       "decidedAxes": [
         "claim-to-passage-support",
         "release-boundary-and-nonclaims",
@@ -149,7 +149,7 @@
         "source-identity-and-fidelity"
       ],
       "missingAxes": [],
-      "projectionDigest": "sha256:c27f9fd61d0e72651e91dea5cf64e8e74fb949741c6ac4fafe9d2a22b4a6feaf"
+      "projectionDigest": "sha256:9d8ac942910f01c8652a5180b35dadba05870291ae777ea1d997d1d0ea41b134"
     },
     {
       "recordId": "urn:maha:record:critical-supply-chains-gallium-bauxite-byproduct-flow",
@@ -612,10 +612,10 @@
       "domainSlug": "neurotechnology-bci",
       "revisionSha256": "sha256:ea472f6b233b533b20d8cde9e8a9048b68ca74fc90dc3b05dd15a1ea397f1706",
       "auditSha256": "sha256:4aabb116038af0bcfc8a724cdd9e2565a487300fd390b9f130d851e6fb1af985",
-      "state": "revise-requested",
-      "classification": "revise-and-rereview",
-      "releaseAuthorized": false,
-      "inspectionDepth": "abstract-or-metadata-only",
+      "state": "approved-for-exact-revision",
+      "classification": "release-ready",
+      "releaseAuthorized": true,
+      "inspectionDepth": "section-or-full-text",
       "decidedAxes": [
         "claim-to-passage-support",
         "release-boundary-and-nonclaims",
@@ -624,17 +624,17 @@
         "source-identity-and-fidelity"
       ],
       "missingAxes": [],
-      "projectionDigest": "sha256:7ed7d349487c4614893155065665cd755afc64b1e7119e70501c7bc942f73e5d"
+      "projectionDigest": "sha256:eb36b1e791b66f34d669874a3000e62bb6bd78a2591f849bbd2af98f5b5b21be"
     },
     {
       "recordId": "urn:maha:record:neurotechnology-bci-flexible-conformal-electrode-arrays",
       "domainSlug": "neurotechnology-bci",
       "revisionSha256": "sha256:93cab9b620eeaae46c89c71eca8acb4e5430ef522a0001c796547d151a80beae",
       "auditSha256": "sha256:5f3ca7f7d9b198258fe8363ccffdb318ad6f05d433301c454f82a8a8d6ade7d3",
-      "state": "revise-requested",
-      "classification": "revise-and-rereview",
-      "releaseAuthorized": false,
-      "inspectionDepth": "abstract-or-metadata-only",
+      "state": "approved-for-exact-revision",
+      "classification": "release-ready",
+      "releaseAuthorized": true,
+      "inspectionDepth": "section-or-full-text",
       "decidedAxes": [
         "claim-to-passage-support",
         "release-boundary-and-nonclaims",
@@ -643,7 +643,7 @@
         "source-identity-and-fidelity"
       ],
       "missingAxes": [],
-      "projectionDigest": "sha256:dfb4f54ff8fc62afb262b48822ad988565dfa390703695e4fa54d3935b00372b"
+      "projectionDigest": "sha256:1204dd2d3e562f3ca6d24bd6c970839491329dd4a73227be33b6f8244f1224a1"
     },
     {
       "recordId": "urn:maha:record:neurotechnology-bci-foreign-body-response",

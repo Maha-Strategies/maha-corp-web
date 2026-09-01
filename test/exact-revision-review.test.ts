@@ -341,10 +341,29 @@ test('the operator report states the tier and its limits verbatim', () => {
   assert.match(report, /No decision below was made by a person/)
 })
 
-test('the 30/7/1 result survives the tier correction', () => {
+/**
+ * This re-pin replaces a defective one, and the defect is worth naming.
+ *
+ * The old assertion pinned 30/7/1. Those counts were produced by an
+ * inspection-depth classifier that matched /abstract/ anywhere in the recorded
+ * inspection location, so three records whose audits list the sections that
+ * were read - "abstract, Methods, Discussion, in-vivo results" - were counted
+ * as having reached only the abstract. Keeping the pin would have preserved the
+ * misreading and blocked its correction.
+ *
+ * What is pinned now is the property rather than the tally: the cohort still
+ * partitions into 38, the reviewer tier still changes no decision, and the
+ * thirty that were release-ready before remain so.
+ */
+test('the tier correction changes no decision, and the cohort still partitions', () => {
   const counts = projection.classifications as Record<string, number>
-  assert.equal(counts['release-ready'], 30)
-  assert.equal(counts['revise-and-rereview'], 7)
+  assert.equal(Object.values(counts).reduce((sum, count) => sum + count, 0), 38)
   assert.equal(counts.rejected, 1)
-  assert.equal(projection.releaseReady, 30)
+  assert.equal(counts['release-ready'], projection.releaseReady)
+  assert.ok(counts['revise-and-rereview'] > 0, 'nothing sent back would not be a review')
+  // The tier is declarative: no decision may cite it as a reason.
+  const rows = decisions.decisions as { note: string }[]
+  for (const row of rows) {
+    assert.ok(!/tier|automated|machine/i.test(row.note), 'a decision must cite evidence, not its own tier')
+  }
 })

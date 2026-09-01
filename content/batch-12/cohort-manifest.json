@@ -1,0 +1,646 @@
+{
+  "schemaVersion": "maha-batch-12-cohort/1.0",
+  "selectionBasis": "Deterministic unlock score over record properties. No domain quota; spread is reported, not enforced. Ties broken by record id.",
+  "scoreComponents": {
+    "bridgeEndpoints": "min(bridges,5) x 4 - a record others point at repairs a neighbourhood",
+    "sectionDepth": "min(sections,4) x 3 - depth the page compiler can use",
+    "domainClusterSize": "min(domain size,30) / 3 - lands inside an existing cluster",
+    "contentInspected": "6 if source content was already inspected",
+    "resolvableIdentifier": "5 if the audit carries a registered identifier",
+    "boundedClaims": "4 if every claim already states a boundary",
+    "subjectPartlySupported": "8 supported, 5 partially-supported, else 0"
+  },
+  "depthRemediation": {
+    "cohortAtStart": 7,
+    "upgraded": 3,
+    "remaining": 4,
+    "recordIds": [
+      "urn:maha:record:longevity-metabolism-pink1-parkin-pathway",
+      "urn:maha:record:neurotechnology-bci-chronic-signal-stability",
+      "urn:maha:record:neurotechnology-bci-foreign-body-response",
+      "urn:maha:record:neurotechnology-bci-sensing-to-stimulation-loop"
+    ]
+  },
+  "alignmentAudit": {
+    "count": 43,
+    "records": [
+      {
+        "recordId": "urn:maha:record:advanced-materials-tmd-heterobilayers",
+        "domainSlug": "advanced-materials",
+        "components": {
+          "bridgeEndpoints": 8,
+          "sectionDepth": 6,
+          "domainClusterSize": 10,
+          "contentInspected": 6,
+          "resolvableIdentifier": 5,
+          "boundedClaims": 4,
+          "subjectPartlySupported": 5
+        },
+        "total": 44
+      },
+      {
+        "recordId": "urn:maha:record:longevity-metabolism-mitophagy-flux",
+        "domainSlug": "longevity-metabolism",
+        "components": {
+          "bridgeEndpoints": 8,
+          "sectionDepth": 6,
+          "domainClusterSize": 10,
+          "contentInspected": 6,
+          "resolvableIdentifier": 5,
+          "boundedClaims": 4,
+          "subjectPartlySupported": 5
+        },
+        "total": 44
+      },
+      {
+        "recordId": "urn:maha:record:neurotechnology-bci-closed-loop-neural-decoding",
+        "domainSlug": "neurotechnology-bci",
+        "components": {
+          "bridgeEndpoints": 8,
+          "sectionDepth": 6,
+          "domainClusterSize": 10,
+          "contentInspected": 6,
+          "resolvableIdentifier": 5,
+          "boundedClaims": 4,
+          "subjectPartlySupported": 5
+        },
+        "total": 44
+      },
+      {
+        "recordId": "urn:maha:record:agentic-systems-mcp-context-window-token-degradation",
+        "domainSlug": "agentic-systems-mcp",
+        "components": {
+          "bridgeEndpoints": 4,
+          "sectionDepth": 6,
+          "domainClusterSize": 10,
+          "contentInspected": 6,
+          "resolvableIdentifier": 5,
+          "boundedClaims": 4,
+          "subjectPartlySupported": 5
+        },
+        "total": 40
+      },
+      {
+        "recordId": "urn:maha:record:agentic-systems-mcp-retrieval-context-selection",
+        "domainSlug": "agentic-systems-mcp",
+        "components": {
+          "bridgeEndpoints": 4,
+          "sectionDepth": 6,
+          "domainClusterSize": 10,
+          "contentInspected": 6,
+          "resolvableIdentifier": 5,
+          "boundedClaims": 4,
+          "subjectPartlySupported": 5
+        },
+        "total": 40
+      },
+      {
+        "recordId": "urn:maha:record:biomolecular-engineering-cell-free-reaction-yield",
+        "domainSlug": "biomolecular-engineering",
+        "components": {
+          "bridgeEndpoints": 4,
+          "sectionDepth": 6,
+          "domainClusterSize": 10,
+          "contentInspected": 6,
+          "resolvableIdentifier": 5,
+          "boundedClaims": 4,
+          "subjectPartlySupported": 5
+        },
+        "total": 40
+      },
+      {
+        "recordId": "urn:maha:record:biomolecular-engineering-fitness-landscape-accessibility",
+        "domainSlug": "biomolecular-engineering",
+        "components": {
+          "bridgeEndpoints": 4,
+          "sectionDepth": 6,
+          "domainClusterSize": 10,
+          "contentInspected": 6,
+          "resolvableIdentifier": 5,
+          "boundedClaims": 4,
+          "subjectPartlySupported": 5
+        },
+        "total": 40
+      },
+      {
+        "recordId": "urn:maha:record:biomolecular-engineering-metabolic-pathway-prototyping",
+        "domainSlug": "biomolecular-engineering",
+        "components": {
+          "bridgeEndpoints": 4,
+          "sectionDepth": 6,
+          "domainClusterSize": 10,
+          "contentInspected": 6,
+          "resolvableIdentifier": 5,
+          "boundedClaims": 4,
+          "subjectPartlySupported": 5
+        },
+        "total": 40
+      },
+      {
+        "recordId": "urn:maha:record:biomolecular-engineering-mutation-library-generation",
+        "domainSlug": "biomolecular-engineering",
+        "components": {
+          "bridgeEndpoints": 4,
+          "sectionDepth": 6,
+          "domainClusterSize": 10,
+          "contentInspected": 6,
+          "resolvableIdentifier": 5,
+          "boundedClaims": 4,
+          "subjectPartlySupported": 5
+        },
+        "total": 40
+      },
+      {
+        "recordId": "urn:maha:record:biomolecular-engineering-protein-design-success-rate",
+        "domainSlug": "biomolecular-engineering",
+        "components": {
+          "bridgeEndpoints": 4,
+          "sectionDepth": 6,
+          "domainClusterSize": 10,
+          "contentInspected": 6,
+          "resolvableIdentifier": 5,
+          "boundedClaims": 4,
+          "subjectPartlySupported": 5
+        },
+        "total": 40
+      },
+      {
+        "recordId": "urn:maha:record:biomolecular-engineering-rna-strand-displacement",
+        "domainSlug": "biomolecular-engineering",
+        "components": {
+          "bridgeEndpoints": 4,
+          "sectionDepth": 6,
+          "domainClusterSize": 10,
+          "contentInspected": 6,
+          "resolvableIdentifier": 5,
+          "boundedClaims": 4,
+          "subjectPartlySupported": 5
+        },
+        "total": 40
+      },
+      {
+        "recordId": "urn:maha:record:longevity-metabolism-intervention-biomarker-boundaries",
+        "domainSlug": "longevity-metabolism",
+        "components": {
+          "bridgeEndpoints": 4,
+          "sectionDepth": 6,
+          "domainClusterSize": 10,
+          "contentInspected": 6,
+          "resolvableIdentifier": 5,
+          "boundedClaims": 4,
+          "subjectPartlySupported": 5
+        },
+        "total": 40
+      },
+      {
+        "recordId": "urn:maha:record:longevity-metabolism-mitochondrial-membrane-potential",
+        "domainSlug": "longevity-metabolism",
+        "components": {
+          "bridgeEndpoints": 4,
+          "sectionDepth": 6,
+          "domainClusterSize": 10,
+          "contentInspected": 6,
+          "resolvableIdentifier": 5,
+          "boundedClaims": 4,
+          "subjectPartlySupported": 5
+        },
+        "total": 40
+      },
+      {
+        "recordId": "urn:maha:record:longevity-metabolism-mitochondrial-uncoupling",
+        "domainSlug": "longevity-metabolism",
+        "components": {
+          "bridgeEndpoints": 4,
+          "sectionDepth": 6,
+          "domainClusterSize": 10,
+          "contentInspected": 6,
+          "resolvableIdentifier": 5,
+          "boundedClaims": 4,
+          "subjectPartlySupported": 5
+        },
+        "total": 40
+      },
+      {
+        "recordId": "urn:maha:record:longevity-metabolism-senescence-associated-secretory-phenotype",
+        "domainSlug": "longevity-metabolism",
+        "components": {
+          "bridgeEndpoints": 4,
+          "sectionDepth": 6,
+          "domainClusterSize": 10,
+          "contentInspected": 6,
+          "resolvableIdentifier": 5,
+          "boundedClaims": 4,
+          "subjectPartlySupported": 5
+        },
+        "total": 40
+      },
+      {
+        "recordId": "urn:maha:record:neurotechnology-bci-adaptive-stimulation-policies",
+        "domainSlug": "neurotechnology-bci",
+        "components": {
+          "bridgeEndpoints": 4,
+          "sectionDepth": 6,
+          "domainClusterSize": 10,
+          "contentInspected": 6,
+          "resolvableIdentifier": 5,
+          "boundedClaims": 4,
+          "subjectPartlySupported": 5
+        },
+        "total": 40
+      },
+      {
+        "recordId": "urn:maha:record:neurotechnology-bci-bci-calibration-drift",
+        "domainSlug": "neurotechnology-bci",
+        "components": {
+          "bridgeEndpoints": 4,
+          "sectionDepth": 6,
+          "domainClusterSize": 10,
+          "contentInspected": 6,
+          "resolvableIdentifier": 5,
+          "boundedClaims": 4,
+          "subjectPartlySupported": 5
+        },
+        "total": 40
+      },
+      {
+        "recordId": "urn:maha:record:neurotechnology-bci-clinical-translation-boundaries",
+        "domainSlug": "neurotechnology-bci",
+        "components": {
+          "bridgeEndpoints": 4,
+          "sectionDepth": 6,
+          "domainClusterSize": 10,
+          "contentInspected": 6,
+          "resolvableIdentifier": 5,
+          "boundedClaims": 4,
+          "subjectPartlySupported": 5
+        },
+        "total": 40
+      },
+      {
+        "recordId": "urn:maha:record:neurotechnology-bci-electrode-tissue-interface",
+        "domainSlug": "neurotechnology-bci",
+        "components": {
+          "bridgeEndpoints": 4,
+          "sectionDepth": 6,
+          "domainClusterSize": 10,
+          "contentInspected": 6,
+          "resolvableIdentifier": 5,
+          "boundedClaims": 4,
+          "subjectPartlySupported": 5
+        },
+        "total": 40
+      },
+      {
+        "recordId": "urn:maha:record:neurotechnology-bci-impedance-and-noise",
+        "domainSlug": "neurotechnology-bci",
+        "components": {
+          "bridgeEndpoints": 4,
+          "sectionDepth": 6,
+          "domainClusterSize": 10,
+          "contentInspected": 6,
+          "resolvableIdentifier": 5,
+          "boundedClaims": 4,
+          "subjectPartlySupported": 5
+        },
+        "total": 40
+      },
+      {
+        "recordId": "urn:maha:record:neurotechnology-bci-neural-feature-extraction",
+        "domainSlug": "neurotechnology-bci",
+        "components": {
+          "bridgeEndpoints": 4,
+          "sectionDepth": 6,
+          "domainClusterSize": 10,
+          "contentInspected": 6,
+          "resolvableIdentifier": 5,
+          "boundedClaims": 4,
+          "subjectPartlySupported": 5
+        },
+        "total": 40
+      },
+      {
+        "recordId": "urn:maha:record:advanced-materials-contact-resistance-in-2d-devices",
+        "domainSlug": "advanced-materials",
+        "components": {
+          "bridgeEndpoints": 8,
+          "sectionDepth": 6,
+          "domainClusterSize": 10,
+          "contentInspected": 6,
+          "resolvableIdentifier": 5,
+          "boundedClaims": 4,
+          "subjectPartlySupported": 0
+        },
+        "total": 39
+      },
+      {
+        "recordId": "urn:maha:record:advanced-materials-two-dimensional-magnetism",
+        "domainSlug": "advanced-materials",
+        "components": {
+          "bridgeEndpoints": 8,
+          "sectionDepth": 6,
+          "domainClusterSize": 10,
+          "contentInspected": 6,
+          "resolvableIdentifier": 5,
+          "boundedClaims": 4,
+          "subjectPartlySupported": 0
+        },
+        "total": 39
+      },
+      {
+        "recordId": "urn:maha:record:agentic-systems-mcp-human-approval-boundaries",
+        "domainSlug": "agentic-systems-mcp",
+        "components": {
+          "bridgeEndpoints": 8,
+          "sectionDepth": 6,
+          "domainClusterSize": 10,
+          "contentInspected": 6,
+          "resolvableIdentifier": 5,
+          "boundedClaims": 4,
+          "subjectPartlySupported": 0
+        },
+        "total": 39
+      },
+      {
+        "recordId": "urn:maha:record:agentic-systems-mcp-least-authority-tokens",
+        "domainSlug": "agentic-systems-mcp",
+        "components": {
+          "bridgeEndpoints": 8,
+          "sectionDepth": 6,
+          "domainClusterSize": 10,
+          "contentInspected": 6,
+          "resolvableIdentifier": 5,
+          "boundedClaims": 4,
+          "subjectPartlySupported": 0
+        },
+        "total": 39
+      },
+      {
+        "recordId": "urn:maha:record:biomolecular-engineering-synthetic-riboswitches",
+        "domainSlug": "biomolecular-engineering",
+        "components": {
+          "bridgeEndpoints": 8,
+          "sectionDepth": 6,
+          "domainClusterSize": 10,
+          "contentInspected": 6,
+          "resolvableIdentifier": 5,
+          "boundedClaims": 4,
+          "subjectPartlySupported": 0
+        },
+        "total": 39
+      },
+      {
+        "recordId": "urn:maha:record:critical-supply-chains-dysprosium-ore-to-oxide",
+        "domainSlug": "critical-supply-chains",
+        "components": {
+          "bridgeEndpoints": 8,
+          "sectionDepth": 6,
+          "domainClusterSize": 10,
+          "contentInspected": 6,
+          "resolvableIdentifier": 0,
+          "boundedClaims": 4,
+          "subjectPartlySupported": 5
+        },
+        "total": 39
+      },
+      {
+        "recordId": "urn:maha:record:critical-supply-chains-helium-liquefaction-logistics",
+        "domainSlug": "critical-supply-chains",
+        "components": {
+          "bridgeEndpoints": 8,
+          "sectionDepth": 6,
+          "domainClusterSize": 10,
+          "contentInspected": 6,
+          "resolvableIdentifier": 0,
+          "boundedClaims": 4,
+          "subjectPartlySupported": 5
+        },
+        "total": 39
+      },
+      {
+        "recordId": "urn:maha:record:fusion-plasma-systems-cable-in-conduit-conductors",
+        "domainSlug": "fusion-plasma-systems",
+        "components": {
+          "bridgeEndpoints": 8,
+          "sectionDepth": 6,
+          "domainClusterSize": 10,
+          "contentInspected": 6,
+          "resolvableIdentifier": 5,
+          "boundedClaims": 4,
+          "subjectPartlySupported": 0
+        },
+        "total": 39
+      },
+      {
+        "recordId": "urn:maha:record:mechanistic-interpretability-activation-patching",
+        "domainSlug": "mechanistic-interpretability",
+        "components": {
+          "bridgeEndpoints": 8,
+          "sectionDepth": 6,
+          "domainClusterSize": 10,
+          "contentInspected": 6,
+          "resolvableIdentifier": 0,
+          "boundedClaims": 4,
+          "subjectPartlySupported": 5
+        },
+        "total": 39
+      },
+      {
+        "recordId": "urn:maha:record:mechanistic-interpretability-dead-features",
+        "domainSlug": "mechanistic-interpretability",
+        "components": {
+          "bridgeEndpoints": 8,
+          "sectionDepth": 6,
+          "domainClusterSize": 10,
+          "contentInspected": 6,
+          "resolvableIdentifier": 5,
+          "boundedClaims": 4,
+          "subjectPartlySupported": 0
+        },
+        "total": 39
+      },
+      {
+        "recordId": "urn:maha:record:advanced-materials-cvd-graphene-grain-boundaries",
+        "domainSlug": "advanced-materials",
+        "components": {
+          "bridgeEndpoints": 4,
+          "sectionDepth": 6,
+          "domainClusterSize": 10,
+          "contentInspected": 6,
+          "resolvableIdentifier": 5,
+          "boundedClaims": 4,
+          "subjectPartlySupported": 0
+        },
+        "total": 35
+      },
+      {
+        "recordId": "urn:maha:record:advanced-materials-dielectric-screening",
+        "domainSlug": "advanced-materials",
+        "components": {
+          "bridgeEndpoints": 4,
+          "sectionDepth": 6,
+          "domainClusterSize": 10,
+          "contentInspected": 6,
+          "resolvableIdentifier": 5,
+          "boundedClaims": 4,
+          "subjectPartlySupported": 0
+        },
+        "total": 35
+      },
+      {
+        "recordId": "urn:maha:record:advanced-materials-direct-gap-mos2",
+        "domainSlug": "advanced-materials",
+        "components": {
+          "bridgeEndpoints": 4,
+          "sectionDepth": 6,
+          "domainClusterSize": 10,
+          "contentInspected": 6,
+          "resolvableIdentifier": 5,
+          "boundedClaims": 4,
+          "subjectPartlySupported": 0
+        },
+        "total": 35
+      },
+      {
+        "recordId": "urn:maha:record:advanced-materials-dry-transfer-contamination",
+        "domainSlug": "advanced-materials",
+        "components": {
+          "bridgeEndpoints": 4,
+          "sectionDepth": 6,
+          "domainClusterSize": 10,
+          "contentInspected": 6,
+          "resolvableIdentifier": 5,
+          "boundedClaims": 4,
+          "subjectPartlySupported": 0
+        },
+        "total": 35
+      },
+      {
+        "recordId": "urn:maha:record:advanced-materials-encapsulation-boundaries",
+        "domainSlug": "advanced-materials",
+        "components": {
+          "bridgeEndpoints": 4,
+          "sectionDepth": 6,
+          "domainClusterSize": 10,
+          "contentInspected": 6,
+          "resolvableIdentifier": 5,
+          "boundedClaims": 4,
+          "subjectPartlySupported": 0
+        },
+        "total": 35
+      },
+      {
+        "recordId": "urn:maha:record:advanced-materials-interface-bubbles-and-strain",
+        "domainSlug": "advanced-materials",
+        "components": {
+          "bridgeEndpoints": 4,
+          "sectionDepth": 6,
+          "domainClusterSize": 10,
+          "contentInspected": 6,
+          "resolvableIdentifier": 5,
+          "boundedClaims": 4,
+          "subjectPartlySupported": 0
+        },
+        "total": 35
+      },
+      {
+        "recordId": "urn:maha:record:advanced-materials-interlayer-excitons",
+        "domainSlug": "advanced-materials",
+        "components": {
+          "bridgeEndpoints": 4,
+          "sectionDepth": 6,
+          "domainClusterSize": 10,
+          "contentInspected": 6,
+          "resolvableIdentifier": 5,
+          "boundedClaims": 4,
+          "subjectPartlySupported": 0
+        },
+        "total": 35
+      },
+      {
+        "recordId": "urn:maha:record:advanced-materials-materials-metrology-transfer",
+        "domainSlug": "advanced-materials",
+        "components": {
+          "bridgeEndpoints": 4,
+          "sectionDepth": 6,
+          "domainClusterSize": 10,
+          "contentInspected": 6,
+          "resolvableIdentifier": 5,
+          "boundedClaims": 4,
+          "subjectPartlySupported": 0
+        },
+        "total": 35
+      },
+      {
+        "recordId": "urn:maha:record:advanced-materials-quantum-anomalous-hall-state",
+        "domainSlug": "advanced-materials",
+        "components": {
+          "bridgeEndpoints": 4,
+          "sectionDepth": 6,
+          "domainClusterSize": 10,
+          "contentInspected": 6,
+          "resolvableIdentifier": 5,
+          "boundedClaims": 4,
+          "subjectPartlySupported": 0
+        },
+        "total": 35
+      },
+      {
+        "recordId": "urn:maha:record:advanced-materials-spin-momentum-locking",
+        "domainSlug": "advanced-materials",
+        "components": {
+          "bridgeEndpoints": 4,
+          "sectionDepth": 6,
+          "domainClusterSize": 10,
+          "contentInspected": 6,
+          "resolvableIdentifier": 5,
+          "boundedClaims": 4,
+          "subjectPartlySupported": 0
+        },
+        "total": 35
+      },
+      {
+        "recordId": "urn:maha:record:advanced-materials-tmd-monolayers",
+        "domainSlug": "advanced-materials",
+        "components": {
+          "bridgeEndpoints": 4,
+          "sectionDepth": 6,
+          "domainClusterSize": 10,
+          "contentInspected": 6,
+          "resolvableIdentifier": 5,
+          "boundedClaims": 4,
+          "subjectPartlySupported": 0
+        },
+        "total": 35
+      },
+      {
+        "recordId": "urn:maha:record:advanced-materials-topological-insulator-surface-states",
+        "domainSlug": "advanced-materials",
+        "components": {
+          "bridgeEndpoints": 4,
+          "sectionDepth": 6,
+          "domainClusterSize": 10,
+          "contentInspected": 6,
+          "resolvableIdentifier": 5,
+          "boundedClaims": 4,
+          "subjectPartlySupported": 0
+        },
+        "total": 35
+      }
+    ]
+  },
+  "combinedCohort": 50,
+  "blockedPoolSize": 138,
+  "domainSpread": {
+    "advanced-materials": 15,
+    "agentic-systems-mcp": 4,
+    "biomolecular-engineering": 7,
+    "critical-supply-chains": 2,
+    "fusion-plasma-systems": 1,
+    "longevity-metabolism": 5,
+    "mechanistic-interpretability": 2,
+    "neurotechnology-bci": 7
+  },
+  "inspected": 0,
+  "proposalsGenerated": 0,
+  "boundary": "A selection. No source has been re-inspected, no binding proposed, and no decision produced for these records in this sprint."
+}
