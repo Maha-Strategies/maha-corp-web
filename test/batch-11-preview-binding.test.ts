@@ -1,5 +1,4 @@
 import assert from 'node:assert/strict'
-import { createHmac } from 'node:crypto'
 import { readFileSync } from 'node:fs'
 import { resolve } from 'node:path'
 import test from 'node:test'
@@ -8,33 +7,33 @@ const ROOT = resolve(import.meta.dirname, '..')
 
 import {
   assertPrivatePreviewResponses,
-  deriveEphemeralServiceRole,
   parseVercelDeploymentOutput,
   vercelDeploymentArguments,
 } from '../lib/batch-11-preview-binding.ts'
 
-const decode = (segment: string) => JSON.parse(Buffer.from(segment, 'base64url').toString('utf8')) as Record<string, unknown>
+/**
+ * The self-minted service role is gone, and must stay gone.
+ *
+ * It signed an HS256 token from the branch JWT secret with self-hosted claims.
+ * Run 33494192235 proved a hosted branch rejects it - REST readiness answered
+ * 401 on the first attempt - so the branch key is fetched from the provider
+ * instead. This pins the removal, because the failure mode of its quiet return
+ * is a credential that authenticates as nothing.
+ */
+test('the self-minted service-role path is unreachable', async () => {
+  const binding = await import('../lib/batch-11-preview-binding.ts')
+  assert.ok(!('deriveEphemeralServiceRole' in binding), 'the minted path must not be exported')
 
-test('the ephemeral service role is one-hour, branch-signed and deterministic for a fixed issue time', () => {
-  const secret = 'ephemeral-branch-secret-material-only'
-  const first = deriveEphemeralServiceRole(secret, 1_800_000_000)
-  const second = deriveEphemeralServiceRole(secret, 1_800_000_000)
-  assert.equal(first, second)
-  const [header, payload, signature] = first.split('.')
-  assert.deepEqual(decode(header), { alg: 'HS256', typ: 'JWT' })
-  assert.deepEqual(decode(payload), {
-    role: 'service_role',
-    iss: 'supabase',
-    iat: 1_800_000_000,
-    exp: 1_800_003_600,
-  })
-  assert.equal(signature, createHmac('sha256', secret).update(`${header}.${payload}`, 'utf8').digest('base64url'))
-  assert.notEqual(first, deriveEphemeralServiceRole(`${secret}-different`, 1_800_000_000))
-})
+  const source = readFileSync(resolve(ROOT, 'lib/batch-11-preview-binding.ts'), 'utf8')
+  assert.ok(!/export function deriveEphemeralServiceRole/.test(source))
+  assert.ok(!/createHmac\(/.test(source), 'nothing here may sign a credential any more')
+  assert.match(source, /deriveEphemeralServiceRole was removed deliberately/)
 
-test('missing branch signing material refuses rather than emitting a weak credential', () => {
-  assert.throws(() => deriveEphemeralServiceRole('short', 1_800_000_000), /implausibly short/)
-  assert.throws(() => deriveEphemeralServiceRole('long-enough-branch-secret', 0), /issue time/)
+  // And no caller may reintroduce one.
+  const runner = readFileSync(resolve(ROOT, 'scripts/run-batch-11-remote-rehearsal.ts'), 'utf8')
+  assert.ok(!/deriveEphemeralServiceRole/.test(runner))
+  assert.match(runner, /acquireBranchServiceKey/)
+  assert.ok(!/createHmac[^\n]*jwt_secret/.test(runner))
 })
 
 test('Vercel deployment output accepts only an isolated vercel.app origin', () => {

@@ -53,11 +53,11 @@ import {
 } from '../lib/batch-11-rehearsal-phases.ts'
 import {
   assertPrivatePreviewResponses,
-  deriveEphemeralServiceRole,
   parseVercelDeploymentOutput,
   vercelDeploymentArguments,
 } from '../lib/batch-11-preview-binding.ts'
 import { batch11RevisionReviewInputs } from '../lib/batch-11-revision-canary.ts'
+import { acquireBranchServiceKey, type BranchKeyOutcome } from '../lib/batch-11-branch-api-key.ts'
 import { awaitRestReadiness, type ReadinessOutcome } from '../lib/batch-11-rest-readiness.ts'
 import { previewSessionPoolerEnvironment } from '../lib/batch-11-supabase-pooler.ts'
 
@@ -192,6 +192,8 @@ const lifecycleState = {
   poolerCapability: null as PoolerCapability | null,
   mutationStartedAfterPreflight: false,
   /** Set only once the branch REST API has actually served. */
+  /** Safe to serialize. Never carries the key itself. */
+  branchKey: null as BranchKeyOutcome | null,
   restReadiness: null as ReadinessOutcome | null,
   restReadyAtMs: 0,
   deploymentStartedAtMs: 0,
@@ -356,7 +358,7 @@ async function readyBranchDetail(branchId: string): Promise<Json> {
       throw new Error(`Management API GET /v1/branches/${branchId} returned ${response.status}.`)
     }
     const detail = object(response.body, 'branch detail')
-    if (detail.ref && detail.db_host && detail.db_pass && detail.jwt_secret) return detail
+    if (detail.ref && detail.db_host && detail.db_pass) return detail
     await wait(3_000)
   }
   throw new Error('The ephemeral branch did not expose its isolated connection details before the five-minute deadline.')
@@ -429,7 +431,6 @@ const driver: RehearsalDriver = {
     lifecycleState.remoteOperationsPerformed += 1
     const detail = await readyBranchDetail(branchId)
     const branchRef = String(detail.ref)
-    const jwtSecret = String(detail.jwt_secret)
     // The fine-grained token is scoped to the parent staging project. An
     // ephemeral branch has a distinct project ref, so asking for config under
     // that ref is correctly forbidden. The parent response supplies the
@@ -443,7 +444,23 @@ const driver: RehearsalDriver = {
       poolerConfiguration,
     })
     branchApiUrl = `https://${branchRef}.supabase.co`
-    branchServiceRole = deriveEphemeralServiceRole(jwtSecret, Math.floor(Date.now() / 1000))
+
+    // Asked for, not constructed. The provider issues the branch's own key; a
+    // token minted here was rejected with 401 by run 33494192235, and there is
+    // no claim set or signing form this side could reliably reproduce.
+    const acquisition = await acquireBranchServiceKey({
+      branchRef,
+      request: async (path) => {
+        const response = await managementResponse(path)
+        return { status: response.status, body: response.body }
+      },
+    })
+    lifecycleState.branchKey = acquisition.outcome
+    if (!acquisition.outcome.acquired || !acquisition.key) {
+      throw new Error(`The branch service key could not be obtained [${acquisition.outcome.refusal}] after ${acquisition.outcome.attempts} attempt(s): ${JSON.stringify(acquisition.outcome.statusClasses)}`)
+    }
+    // Process memory only. Never written, logged, fingerprinted or emitted.
+    branchServiceRole = acquisition.key!
     lifecycleState.branchHandle = { branchId, parentProjectRef: String(detail.parent_project_ref ?? parentRef) }
     return {
       branchId,
@@ -862,6 +879,7 @@ try {
     poolerCapabilityPreflight: lifecycleState.poolerCapability,
     mutationStartedAfterPreflight: lifecycleState.mutationStartedAfterPreflight,
     // Counts per status class only - never the branch hostname or a body.
+    branchKeyAcquisition: lifecycleState.branchKey,
     restReadiness: lifecycleState.restReadiness,
     deploymentFollowedRestReadiness:
       lifecycleState.restReadyAtMs > 0 && lifecycleState.deploymentStartedAtMs >= lifecycleState.restReadyAtMs,
@@ -890,6 +908,7 @@ try {
     poolerCapabilityPreflight: lifecycleState.poolerCapability,
     mutationStartedAfterPreflight: lifecycleState.mutationStartedAfterPreflight,
     // Counts per status class only - never the branch hostname or a body.
+    branchKeyAcquisition: lifecycleState.branchKey,
     restReadiness: lifecycleState.restReadiness,
     deploymentFollowedRestReadiness:
       lifecycleState.restReadyAtMs > 0 && lifecycleState.deploymentStartedAtMs >= lifecycleState.restReadyAtMs,

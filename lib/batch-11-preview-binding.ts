@@ -1,28 +1,27 @@
-import { createHmac } from 'node:crypto'
 
 /**
  * Pure helpers for the ephemeral Batch 11 application/database binding.
  *
- * This module performs no network or filesystem effects. It accepts the
- * branch JWT secret only long enough to derive a one-hour service-role token;
- * callers must keep both values in process memory and out of artifacts.
+ * This module performs no network or filesystem effects, and no longer mints
+ * any credential: the branch service key is issued by the provider and fetched
+ * in batch-11-branch-api-key. Callers keep that value in process memory and out
+ * of artifacts.
  */
 
 export const BATCH_11_PREVIEW_BINDING_VERSION = 'maha-batch-11-preview-binding/1.0' as const
 
-const encode = (value: unknown) => Buffer.from(JSON.stringify(value), 'utf8').toString('base64url')
-
-export function deriveEphemeralServiceRole(jwtSecret: string, issuedAtSeconds: number): string {
-  if (jwtSecret.length < 16) throw new Error('The ephemeral branch JWT secret is missing or implausibly short.')
-  if (!Number.isSafeInteger(issuedAtSeconds) || issuedAtSeconds <= 0) throw new Error('The JWT issue time is invalid.')
-  const unsigned = `${encode({ alg: 'HS256', typ: 'JWT' })}.${encode({
-    role: 'service_role',
-    iss: 'supabase',
-    iat: issuedAtSeconds,
-    exp: issuedAtSeconds + 3600,
-  })}`
-  return `${unsigned}.${createHmac('sha256', jwtSecret).update(unsigned, 'utf8').digest('base64url')}`
-}
+/*
+ * deriveEphemeralServiceRole was removed deliberately.
+ *
+ * It minted an HS256 token from the branch JWT secret using self-hosted claims.
+ * Run 33494192235 proved a hosted branch rejects it: REST readiness answered
+ * 401 on its first attempt. Hosted keys are issued by the provider and carry a
+ * form nothing outside it can reproduce, so the branch key is now fetched -
+ * see lib/batch-11-branch-api-key.ts.
+ *
+ * It is deleted rather than deprecated so it cannot quietly become a fallback
+ * the next time key retrieval is inconvenient.
+ */
 
 export interface ParsedPreviewDeployment {
   id: string
