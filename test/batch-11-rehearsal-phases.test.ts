@@ -351,17 +351,23 @@ test('a required migration that was not applied is refused', () => {
   assert.equal(refusal.code, 'migration-missing')
 })
 
-test('the Batch 11 forward migrations are the terminal pair, and exist on disk', () => {
-  // Selected by name rather than by position: the allowlist now opens with four
-  // prerequisites, so the first two entries are no longer the Batch 11 pair.
+test('the Batch 11 forward migrations are terminal, and exist on disk', () => {
+  // Selected by name rather than by position: the allowlist opens with four
+  // prerequisites, so the Batch 11 entries are not the first ones.
   const batch11 = REQUIRED_MIGRATIONS.filter((migration) => migration.includes('batch_11'))
-  assert.equal(batch11.length, 2)
-  assert.deepEqual(batch11, REQUIRED_MIGRATIONS.slice(-2), 'the Batch 11 migrations must run last')
-  const [planMigration, executionMigration] = batch11.map((migration) =>
+  assert.equal(batch11.length, 3, 'plan, execution, and the precedence correction')
+  assert.deepEqual(batch11, REQUIRED_MIGRATIONS.slice(-3), 'the Batch 11 migrations must run last')
+
+  const [planMigration, executionMigration, precedenceFix] = batch11.map((migration) =>
     readFileSync(resolve(ROOT, 'supabase/migrations', migration), 'utf8'))
   assert.ok(planMigration.includes('batch_11_rehearsal_observations'))
   assert.ok(executionMigration.includes('record_batch_11_rehearsal_targets'))
   assert.ok(executionMigration.includes('record_batch_11_rehearsal_canonical_release'))
+
+  // The correction replaces exactly one function and touches nothing else.
+  assert.ok(precedenceFix.includes('create or replace function public.record_batch_11_rehearsal_canonical_release'))
+  assert.equal((precedenceFix.match(/create or replace function/g) ?? []).length, 1)
+  assert.ok(!/create table|alter table|drop /i.test(precedenceFix), 'the correction must not touch schema')
 })
 
 // --- phase 5: replay safety -------------------------------------------------

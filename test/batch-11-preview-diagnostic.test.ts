@@ -108,3 +108,35 @@ test('the route actually routes its 503 through this boundary', () => {
   // The route must not re-derive the gate itself.
   assert.ok(!/EPISTEMIC_EXTERNAL_LINEAGE_REHEARSAL/.test(route), 'the flag check belongs in one place')
 })
+
+/* --- the releases route shares the same boundary -------------------------- */
+
+test('the releases route routes its 503 through the same boundary', () => {
+  const route = readFileSync(resolve(ROOT, 'app/api/admin/epistemic-releases/route.ts'), 'utf8')
+  assert.match(route, /import \{ previewDiagnostic \} from '@\/lib\/epistemic-ingestion-diagnostics'/)
+  assert.match(route, /\.\.\.previewDiagnostic\(operation, error\),/)
+  assert.equal((route.match(/unavailable\(undefined, 'persistence-client-absent'\)/g) ?? []).length, 2)
+  assert.ok(!/EPISTEMIC_EXTERNAL_LINEAGE_REHEARSAL/.test(route), 'the flag check belongs in one place')
+  // The 400/409/404 arms are untouched: only the unclassified case gains a code.
+  assert.match(route, /message\.includes\('\[22023\]'\)/)
+  assert.match(route, /message\.includes\('\[P0001\]'\)/)
+  assert.match(route, /message\.includes\('\[P0002\]'\)/)
+})
+
+test('the release operation names are fixed enums, not free text', () => {
+  const route = readFileSync(resolve(ROOT, 'app/api/admin/epistemic-releases/route.ts'), 'utf8')
+  const operations = [...route.matchAll(/unavailable\((?:undefined, )?'([a-z-]+)'\)/g)].map((match) => match[1])
+  const declared = route.match(/operation = '([a-z-]+)'/)?.[1]
+  for (const operation of [...operations, declared!]) {
+    assert.match(operation, /^[a-z][a-z-]{4,40}$/, `${operation} must be a fixed lowercase enum`)
+  }
+  assert.ok(new Set([...operations, declared!]).size <= 3, 'the operation vocabulary must stay small and fixed')
+})
+
+test('a release failure carries a SQLSTATE and nothing else', () => {
+  // The exact shape the release path produced: 42725 from an ambiguous operator.
+  const real = new Error('Epistemic canonical release failed [42725]: operator is not unique: unknown - unknown')
+  assert.deepEqual(previewDiagnostic('release-persistence-call-failed', real, REHEARSAL_FLAG),
+    { diagnostic: { operation: 'release-persistence-call-failed', sqlstate: '42725' } })
+  assert.deepEqual(previewDiagnostic('release-persistence-call-failed', real, undefined), {})
+})
