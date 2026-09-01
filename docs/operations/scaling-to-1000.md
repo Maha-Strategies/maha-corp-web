@@ -59,8 +59,8 @@ review prose or authority value.
 | bucket | records |
 |---|---:|
 | a. publishable now | **0** |
-| b. blocked on canonical release | 0 |
-| c. blocked on exact-revision review | 38 |
+| b. blocked on canonical release | 30 |
+| c. blocked on exact-revision review | 8 |
 | d. blocked on source inspection / alignment | 149 |
 | e. requires genuinely new records or sources | 49 |
 
@@ -73,7 +73,7 @@ never reviewed, and both are counted against review.
 
 Every record that is both alignment-clear and carries an active canonical
 release already has a substantial page. The constraint on the next batch is not
-compilation capacity; it is that 0 inspected
+compilation capacity; it is that 30 inspected
 records are waiting on a canonical release and 149
 records are waiting on source inspection. Neither is work that may be
 manufactured here: a release decision and a source inspection are human acts,
@@ -82,8 +82,8 @@ and inventing either to raise a page count would make the count worthless.
 ## Roadmap
 
 Existing evidence can support at most 187 further pages once its
-blockers clear — 0 through release,
-38 through review, and
+blockers clear — 30 through release,
+8 through review, and
 149 through inspection. That leaves
 **49** pages that need records or sources
 that do not exist yet.
@@ -95,7 +95,7 @@ corpus and 1 cannot.
 
 The ordering that unblocks the most work per decision:
 
-1. Release the 0 records that are already
+1. Release the 30 records that are already
    inspected and reviewed. This is the only bucket where a single decision
    converts directly into publishable pages.
 2. Inspect sources for the 149 unaligned

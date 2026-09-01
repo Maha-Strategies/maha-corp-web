@@ -118,9 +118,29 @@ test('a record is never reported publishable while any gate is open', () => {
   assert.equal(bucketFor({ ...base, alignmentClear: false, activeCanonicalRelease: false }), 'blocked-on-source-inspection')
 })
 
-test('the model states that it cannot observe review without a release', () => {
-  assert.equal(capacity.observability.canonicalReleaseBucketObservable, false)
-  assert.match(capacity.observability.reviewObservedVia, /active canonical release/)
+/**
+ * This assertion changed, and the old one was defective.
+ *
+ * It pinned `canonicalReleaseBucketObservable === false` - true when review
+ * could only be read off an active release, and the reason that bucket could
+ * never fill. The exact-revision projection removed that limit, so the old
+ * assertion had become a test that the model still could not see something it
+ * now can, which would have blocked the fix rather than protecting anything.
+ *
+ * What is worth pinning is mode-independent: whatever the model claims to
+ * observe, it must name the source it observed it from, and the two must agree.
+ */
+test('the model names the source of its review evidence, and the two agree', () => {
+  const { canonicalReleaseBucketObservable, reviewObservedVia, note } = capacity.observability
+  assert.equal(typeof canonicalReleaseBucketObservable, 'boolean')
+  assert.ok(note.length > 20, 'the model must say what its mode means')
+  if (canonicalReleaseBucketObservable) {
+    assert.match(reviewObservedVia, /projection/, 'claiming observability requires naming the projection')
+  } else {
+    assert.match(reviewObservedVia, /active canonical release/)
+    assert.equal(capacity.buckets['blocked-on-canonical-release'], 0,
+      'an unobservable bucket must read zero rather than a guess')
+  }
 })
 
 /* --- nothing private rides along ------------------------------------------ */

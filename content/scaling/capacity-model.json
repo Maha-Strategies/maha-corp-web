@@ -74,17 +74,17 @@
   ],
   "buckets": {
     "publishable-now": 0,
-    "blocked-on-canonical-release": 0,
-    "blocked-on-exact-revision-review": 38,
+    "blocked-on-canonical-release": 30,
+    "blocked-on-exact-revision-review": 8,
     "blocked-on-source-inspection": 149,
     "requires-new-records-or-sources": 49
   },
   "publishableNowRecordIds": [],
   "observability": {
-    "reviewObservedVia": "active canonical release carrying all four required scopes",
-    "canonicalReleaseBucketObservable": false,
-    "note": "A record reviewed but not released is indistinguishable here from one never reviewed, so both are counted against exact-revision review."
+    "reviewObservedVia": "exact-revision review projection over committed decision corpora",
+    "canonicalReleaseBucketObservable": true,
+    "note": "Review state is read from decisions naming the exact revision digest, so a reviewed-but-unreleased record is now distinguishable from one never reviewed."
   },
   "boundary": "Counts crawlable canonical URLs observed on the public surface. It does not assert that any page ranks, is indexed, or that any claim on it is true.",
-  "capacityDigest": "sha256:57697af8d259a25dee359bf8ca2cfe6fc85345d702d6c582a7b90efdf22366f9"
+  "capacityDigest": "sha256:5f2db87a478af22091ea78f6c5ac9825d1090449ed3102c9f28e53da50a5d4b2"
 }

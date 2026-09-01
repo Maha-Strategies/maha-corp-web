@@ -1,0 +1,1413 @@
+{
+  "schemaVersion": "maha-internal-review-packet/1.0",
+  "reviewDate": "2026-09-01",
+  "packets": [
+    {
+      "packetVersion": "maha-internal-review-packet/1.0",
+      "recordId": "urn:maha:record:advanced-materials-diamond-thermal-conductivity",
+      "revisionSha256": "sha256:be0298d6e8079e377b39f4c984a41d1beef17752c7053e35326ca1e79130015f",
+      "auditSha256": "sha256:6c286fbb16dfe6c77d6f5b8e5d353632babe4a59ec6ab1b04fb6f8aab2b1dffc",
+      "title": "Diamond thermal conductivity",
+      "claims": [
+        {
+          "statement": "The cited source supports treating diamond thermal conductivity as a distinct mechanism within the stated advanced materials scope.",
+          "scope": "Limited to Pages 907–914: material-property comparison and SiC, GaN, and diamond power-device sections. in “An assessment of wide bandgap semiconductors for power devices”; this candidate records the concept boundary and does not pool results from uncited systems or studies.",
+          "boundary": "Diamond thermal conductivity does not by itself establish system-level performance, safety, manufacturability, scalability, economic advantage, clinical benefit, or deployment readiness.",
+          "claimKind": "theoretical-model",
+          "evidenceMaturity": "single-study"
+        }
+      ],
+      "source": {
+        "title": "An assessment of wide bandgap semiconductors for power devices",
+        "identifier": "10.1109/TPEL.2003.810840",
+        "exactLocator": "Pages 907–914: material-property comparison and SiC, GaN, and diamond power-device sections.",
+        "rightsBasis": "citation-with-paraphrase",
+        "quotationUsed": false
+      },
+      "alignment": {
+        "subjectAligned": "supported",
+        "assignmentOrigin": "independently-curated",
+        "sourceContentInspected": true,
+        "inspectionDepth": "abstract-or-metadata-only"
+      },
+      "requiredAxes": [
+        "source-identity-and-fidelity",
+        "claim-to-passage-support",
+        "scope-and-unsupported-inference",
+        "rights-and-locator-adequacy",
+        "release-boundary-and-nonclaims"
+      ],
+      "packetDigest": "sha256:e31f4156139f28c29ad459fa7d31247738698aff21a9e779ea672e5eee063214"
+    },
+    {
+      "packetVersion": "maha-internal-review-packet/1.0",
+      "recordId": "urn:maha:record:agentic-systems-mcp-mcp-session-lifecycle",
+      "revisionSha256": "sha256:110f2b0ddb37abd4acd9e4463e60c3bbd565d2dac8eefaa57cee2738d52ad80d",
+      "auditSha256": "sha256:7e50cd02c098692f4f74cf7097c2abb6c5335c70f647698e2da4a077c03ca867",
+      "title": "MCP session lifecycle",
+      "claims": [
+        {
+          "statement": "The cited source supports treating mcp session lifecycle as a distinct method within the stated agentic systems and mcp scope.",
+          "scope": "Limited to Architecture, lifecycle, capabilities, resources, prompts, and security sections. in “Model Context Protocol specification”; this candidate records the concept boundary and does not pool results from uncited systems or studies.",
+          "boundary": "MCP session lifecycle does not by itself establish system-level performance, safety, manufacturability, scalability, economic advantage, clinical benefit, or deployment readiness.",
+          "claimKind": "theoretical-model",
+          "evidenceMaturity": "single-study"
+        }
+      ],
+      "source": {
+        "title": "Model Context Protocol specification",
+        "identifier": "https://modelcontextprotocol.io/specification/2024-11-05/index",
+        "exactLocator": "Architecture, lifecycle, capabilities, resources, prompts, and security sections.",
+        "rightsBasis": "citation-with-paraphrase",
+        "quotationUsed": false
+      },
+      "alignment": {
+        "subjectAligned": "supported",
+        "assignmentOrigin": "independently-curated",
+        "sourceContentInspected": true,
+        "inspectionDepth": "section-or-full-text"
+      },
+      "requiredAxes": [
+        "source-identity-and-fidelity",
+        "claim-to-passage-support",
+        "scope-and-unsupported-inference",
+        "rights-and-locator-adequacy",
+        "release-boundary-and-nonclaims"
+      ],
+      "packetDigest": "sha256:f71931859d4ebd42889d4639433a7f31a2e576d44bb2a04fa1678a7173ecb1e6"
+    },
+    {
+      "packetVersion": "maha-internal-review-packet/1.0",
+      "recordId": "urn:maha:record:biomolecular-engineering-crude-extract-cell-free-systems",
+      "revisionSha256": "sha256:2c80ac068e79e4cbf4a41e142fc0696c842b4a20e32c3a347b82a53278e3899a",
+      "auditSha256": "sha256:14172c1565fc57857746a14aa7440811972b4d81f1f32c18cff2b5f96878fc3d",
+      "title": "Crude extract cell free systems",
+      "claims": [
+        {
+          "statement": "The cited source supports treating crude extract cell free systems as a distinct mechanism within the stated biomolecular engineering scope.",
+          "scope": "Limited to Cell-free platform, protein engineering, metabolic engineering, artificial-cell engineering, and conclusions sections. in “Cell-free synthetic biology: Engineering in an open world”; this candidate records the concept boundary and does not pool results from uncited systems or studies.",
+          "boundary": "Crude extract cell free systems does not by itself establish system-level performance, safety, manufacturability, scalability, economic advantage, clinical benefit, or deployment readiness.",
+          "claimKind": "theoretical-model",
+          "evidenceMaturity": "single-study"
+        }
+      ],
+      "source": {
+        "title": "Cell-free synthetic biology: Engineering in an open world",
+        "identifier": "10.1016/j.synbio.2017.02.003",
+        "exactLocator": "Cell-free platform, protein engineering, metabolic engineering, artificial-cell engineering, and conclusions sections.",
+        "rightsBasis": "citation-with-paraphrase",
+        "quotationUsed": false
+      },
+      "alignment": {
+        "subjectAligned": "supported",
+        "assignmentOrigin": "independently-curated",
+        "sourceContentInspected": true,
+        "inspectionDepth": "section-or-full-text"
+      },
+      "requiredAxes": [
+        "source-identity-and-fidelity",
+        "claim-to-passage-support",
+        "scope-and-unsupported-inference",
+        "rights-and-locator-adequacy",
+        "release-boundary-and-nonclaims"
+      ],
+      "packetDigest": "sha256:9f905de1861227d7977b9d8f7c19a9edad3a3c99b1725998baa9cc04d8e405f2"
+    },
+    {
+      "packetVersion": "maha-internal-review-packet/1.0",
+      "recordId": "urn:maha:record:biomolecular-engineering-phage-assisted-continuous-evolution",
+      "revisionSha256": "sha256:8dc697f5defa0cfa0911ac052bda5679be3b17707f0897f9cddef4ab626d52d4",
+      "auditSha256": "sha256:93057a1f7d34987a99d10e79f14e4cef174175d2ffab27e6e2871744aab40386",
+      "title": "Phage assisted continuous evolution",
+      "claims": [
+        {
+          "statement": "The cited source supports treating phage assisted continuous evolution as a distinct measurement within the stated biomolecular engineering scope.",
+          "scope": "Limited to PACE architecture, selection coupling, mutation, experiments, and Methods. in “A system for the continuous directed evolution of biomolecules”; this candidate records the concept boundary and does not pool results from uncited systems or studies.",
+          "boundary": "Phage assisted continuous evolution does not by itself establish system-level performance, safety, manufacturability, scalability, economic advantage, clinical benefit, or deployment readiness.",
+          "claimKind": "observation",
+          "evidenceMaturity": "single-study"
+        }
+      ],
+      "source": {
+        "title": "A system for the continuous directed evolution of biomolecules",
+        "identifier": "10.1038/nature09929",
+        "exactLocator": "PACE architecture, selection coupling, mutation, experiments, and Methods.",
+        "rightsBasis": "citation-with-paraphrase",
+        "quotationUsed": false
+      },
+      "alignment": {
+        "subjectAligned": "supported",
+        "assignmentOrigin": "independently-curated",
+        "sourceContentInspected": true,
+        "inspectionDepth": "section-or-full-text"
+      },
+      "requiredAxes": [
+        "source-identity-and-fidelity",
+        "claim-to-passage-support",
+        "scope-and-unsupported-inference",
+        "rights-and-locator-adequacy",
+        "release-boundary-and-nonclaims"
+      ],
+      "packetDigest": "sha256:53650fd6f3cf17ad6bdff33c167d9dc29615becad02fb1e8cde22b0e28b049d6"
+    },
+    {
+      "packetVersion": "maha-internal-review-packet/1.0",
+      "recordId": "urn:maha:record:biomolecular-engineering-purified-component-expression-systems",
+      "revisionSha256": "sha256:90c9d503233cc00066f3a97a8777b590b496637f4c4d217539e085dbe1c20a22",
+      "auditSha256": "sha256:c74a210521f2ae390111e8d432c1a7d2b6c30bf90a28d730c90fbb5c9945616f",
+      "title": "Purified component expression systems",
+      "claims": [
+        {
+          "statement": "The cited source supports treating purified component expression systems as a distinct method within the stated biomolecular engineering scope.",
+          "scope": "Limited to Cell-free platform, protein engineering, metabolic engineering, artificial-cell engineering, and conclusions sections. in “Cell-free synthetic biology: Engineering in an open world”; this candidate records the concept boundary and does not pool results from uncited systems or studies.",
+          "boundary": "Purified component expression systems does not by itself establish system-level performance, safety, manufacturability, scalability, economic advantage, clinical benefit, or deployment readiness.",
+          "claimKind": "theoretical-model",
+          "evidenceMaturity": "single-study"
+        }
+      ],
+      "source": {
+        "title": "Cell-free synthetic biology: Engineering in an open world",
+        "identifier": "10.1016/j.synbio.2017.02.003",
+        "exactLocator": "Cell-free platform, protein engineering, metabolic engineering, artificial-cell engineering, and conclusions sections.",
+        "rightsBasis": "citation-with-paraphrase",
+        "quotationUsed": false
+      },
+      "alignment": {
+        "subjectAligned": "supported",
+        "assignmentOrigin": "independently-curated",
+        "sourceContentInspected": true,
+        "inspectionDepth": "section-or-full-text"
+      },
+      "requiredAxes": [
+        "source-identity-and-fidelity",
+        "claim-to-passage-support",
+        "scope-and-unsupported-inference",
+        "rights-and-locator-adequacy",
+        "release-boundary-and-nonclaims"
+      ],
+      "packetDigest": "sha256:b60856b9b50ec7c98c7e402aedf776e223f07c4f628511680f41d90276e59571"
+    },
+    {
+      "packetVersion": "maha-internal-review-packet/1.0",
+      "recordId": "urn:maha:record:biomolecular-engineering-selection-pressure-coupling",
+      "revisionSha256": "sha256:c23dcc18daaf071309c5f4116b7f6132c4477875558c29321a92f5d98d815d6f",
+      "auditSha256": "sha256:1620dd55d1f0a5f7637e66c00e2292c90014121dc543323045f150f7b0f0ac2a",
+      "title": "Selection pressure coupling",
+      "claims": [
+        {
+          "statement": "The cited source supports treating selection pressure coupling as a distinct method within the stated biomolecular engineering scope.",
+          "scope": "Limited to PACE architecture, selection coupling, mutation, experiments, and Methods. in “A system for the continuous directed evolution of biomolecules”; this candidate records the concept boundary and does not pool results from uncited systems or studies.",
+          "boundary": "Selection pressure coupling does not by itself establish system-level performance, safety, manufacturability, scalability, economic advantage, clinical benefit, or deployment readiness.",
+          "claimKind": "theoretical-model",
+          "evidenceMaturity": "single-study"
+        }
+      ],
+      "source": {
+        "title": "A system for the continuous directed evolution of biomolecules",
+        "identifier": "10.1038/nature09929",
+        "exactLocator": "PACE architecture, selection coupling, mutation, experiments, and Methods.",
+        "rightsBasis": "citation-with-paraphrase",
+        "quotationUsed": false
+      },
+      "alignment": {
+        "subjectAligned": "supported",
+        "assignmentOrigin": "independently-curated",
+        "sourceContentInspected": true,
+        "inspectionDepth": "section-or-full-text"
+      },
+      "requiredAxes": [
+        "source-identity-and-fidelity",
+        "claim-to-passage-support",
+        "scope-and-unsupported-inference",
+        "rights-and-locator-adequacy",
+        "release-boundary-and-nonclaims"
+      ],
+      "packetDigest": "sha256:83f97a4305889ef995a9b9aac3a3fd4472bf8a2d6ab6632435bf65776edcc4b5"
+    },
+    {
+      "packetVersion": "maha-internal-review-packet/1.0",
+      "recordId": "urn:maha:record:biomolecular-engineering-translational-control-circuits",
+      "revisionSha256": "sha256:1f877ffe9cc1fe0a02ae70fee8bcdbb697add8846b90a1c42671c25f6c7a88bb",
+      "auditSha256": "sha256:a58c7bc32e2838b67e3b037836dc93af1e5549e9352e6589151fd815fab2f136",
+      "title": "Translational control circuits",
+      "claims": [
+        {
+          "statement": "The cited source supports treating translational control circuits as a distinct concept within the stated biomolecular engineering scope.",
+          "scope": "Limited to Toehold-switch design, cell-free implementation, freeze-drying, assays, and Methods. in “Paper-based synthetic gene networks”; this candidate records the concept boundary and does not pool results from uncited systems or studies.",
+          "boundary": "Translational control circuits does not by itself establish system-level performance, safety, manufacturability, scalability, economic advantage, clinical benefit, or deployment readiness.",
+          "claimKind": "theoretical-model",
+          "evidenceMaturity": "single-study"
+        }
+      ],
+      "source": {
+        "title": "Paper-based synthetic gene networks",
+        "identifier": "10.1016/j.cell.2014.10.004",
+        "exactLocator": "Toehold-switch design, cell-free implementation, freeze-drying, assays, and Methods.",
+        "rightsBasis": "citation-with-paraphrase",
+        "quotationUsed": false
+      },
+      "alignment": {
+        "subjectAligned": "supported",
+        "assignmentOrigin": "independently-curated",
+        "sourceContentInspected": true,
+        "inspectionDepth": "abstract-or-metadata-only"
+      },
+      "requiredAxes": [
+        "source-identity-and-fidelity",
+        "claim-to-passage-support",
+        "scope-and-unsupported-inference",
+        "rights-and-locator-adequacy",
+        "release-boundary-and-nonclaims"
+      ],
+      "packetDigest": "sha256:b07f012c5f146ca262c0d3ca218490d3cb2857420ec7b41c56563e2d81db4ab5"
+    },
+    {
+      "packetVersion": "maha-internal-review-packet/1.0",
+      "recordId": "urn:maha:record:critical-supply-chains-gallium-bauxite-byproduct-flow",
+      "revisionSha256": "sha256:da4a974ebd5dc80c676257fa7bab66f3c1edc70b597012af5bbfae40e2b700ec",
+      "auditSha256": "sha256:12ce437866146bcfe9f6c5286a250df97cd7314080ae1a5ccfd03f0182656512",
+      "title": "Gallium bauxite byproduct flow",
+      "claims": [
+        {
+          "statement": "The cited source supports treating gallium bauxite byproduct flow as a distinct mechanism within the stated critical supply chains scope.",
+          "scope": "Limited to Gallium and germanium commodity chapters: production, recycling, imports, uses, substitutes, and world resources. in “Mineral Commodity Summaries 2026”; this candidate records the concept boundary and does not pool results from uncited systems or studies.",
+          "boundary": "Gallium bauxite byproduct flow does not by itself establish system-level performance, safety, manufacturability, scalability, economic advantage, clinical benefit, or deployment readiness.",
+          "claimKind": "theoretical-model",
+          "evidenceMaturity": "single-study"
+        }
+      ],
+      "source": {
+        "title": "Mineral Commodity Summaries 2026",
+        "identifier": "https://pubs.usgs.gov/periodicals/mcs2026/mcs2026.pdf",
+        "exactLocator": "Gallium and germanium commodity chapters: production, recycling, imports, uses, substitutes, and world resources.",
+        "rightsBasis": "citation-with-paraphrase",
+        "quotationUsed": false
+      },
+      "alignment": {
+        "subjectAligned": "supported",
+        "assignmentOrigin": "independently-curated",
+        "sourceContentInspected": true,
+        "inspectionDepth": "section-or-full-text"
+      },
+      "requiredAxes": [
+        "source-identity-and-fidelity",
+        "claim-to-passage-support",
+        "scope-and-unsupported-inference",
+        "rights-and-locator-adequacy",
+        "release-boundary-and-nonclaims"
+      ],
+      "packetDigest": "sha256:bce71f35a76c680d5fa623b7965769860f81f25d1b616153dd6dd474a47c2379"
+    },
+    {
+      "packetVersion": "maha-internal-review-packet/1.0",
+      "recordId": "urn:maha:record:critical-supply-chains-gallium-zinc-processing-byproduct",
+      "revisionSha256": "sha256:27db54bd1e8c7807c9889751b345eff394d0f51933200b24fb5f5900946748f9",
+      "auditSha256": "sha256:1460cd66a84f4eb33bf71e99b2ae323a3595550a9fc5700718f7ab8b5427c252",
+      "title": "Gallium zinc processing byproduct",
+      "claims": [
+        {
+          "statement": "The cited source supports treating gallium zinc processing byproduct as a distinct method within the stated critical supply chains scope.",
+          "scope": "Limited to Gallium and germanium commodity chapters: production, recycling, imports, uses, substitutes, and world resources. in “Mineral Commodity Summaries 2026”; this candidate records the concept boundary and does not pool results from uncited systems or studies.",
+          "boundary": "Gallium zinc processing byproduct does not by itself establish system-level performance, safety, manufacturability, scalability, economic advantage, clinical benefit, or deployment readiness.",
+          "claimKind": "theoretical-model",
+          "evidenceMaturity": "single-study"
+        }
+      ],
+      "source": {
+        "title": "Mineral Commodity Summaries 2026",
+        "identifier": "https://pubs.usgs.gov/periodicals/mcs2026/mcs2026.pdf",
+        "exactLocator": "Gallium and germanium commodity chapters: production, recycling, imports, uses, substitutes, and world resources.",
+        "rightsBasis": "citation-with-paraphrase",
+        "quotationUsed": false
+      },
+      "alignment": {
+        "subjectAligned": "supported",
+        "assignmentOrigin": "independently-curated",
+        "sourceContentInspected": true,
+        "inspectionDepth": "section-or-full-text"
+      },
+      "requiredAxes": [
+        "source-identity-and-fidelity",
+        "claim-to-passage-support",
+        "scope-and-unsupported-inference",
+        "rights-and-locator-adequacy",
+        "release-boundary-and-nonclaims"
+      ],
+      "packetDigest": "sha256:c93287d82dfd1122100a4e485d669d6ebff4b649d0b669e7b1bbdd608977cc2f"
+    },
+    {
+      "packetVersion": "maha-internal-review-packet/1.0",
+      "recordId": "urn:maha:record:critical-supply-chains-germanium-zinc-refining-flow",
+      "revisionSha256": "sha256:5f055a0c6b5222726955abe36900a0474ed1198e922e0f2b84e46779f8421e60",
+      "auditSha256": "sha256:29059f633f791bf46e6b8efe26a7aa8fbd98197c0a4fb46719e2b851155039e5",
+      "title": "Germanium zinc refining flow",
+      "claims": [
+        {
+          "statement": "The cited source supports treating germanium zinc refining flow as a distinct measurement within the stated critical supply chains scope.",
+          "scope": "Limited to Gallium and germanium commodity chapters: production, recycling, imports, uses, substitutes, and world resources. in “Mineral Commodity Summaries 2026”; this candidate records the concept boundary and does not pool results from uncited systems or studies.",
+          "boundary": "Germanium zinc refining flow does not by itself establish system-level performance, safety, manufacturability, scalability, economic advantage, clinical benefit, or deployment readiness.",
+          "claimKind": "observation",
+          "evidenceMaturity": "single-study"
+        }
+      ],
+      "source": {
+        "title": "Mineral Commodity Summaries 2026",
+        "identifier": "https://pubs.usgs.gov/periodicals/mcs2026/mcs2026.pdf",
+        "exactLocator": "Gallium and germanium commodity chapters: production, recycling, imports, uses, substitutes, and world resources.",
+        "rightsBasis": "citation-with-paraphrase",
+        "quotationUsed": false
+      },
+      "alignment": {
+        "subjectAligned": "supported",
+        "assignmentOrigin": "independently-curated",
+        "sourceContentInspected": true,
+        "inspectionDepth": "section-or-full-text"
+      },
+      "requiredAxes": [
+        "source-identity-and-fidelity",
+        "claim-to-passage-support",
+        "scope-and-unsupported-inference",
+        "rights-and-locator-adequacy",
+        "release-boundary-and-nonclaims"
+      ],
+      "packetDigest": "sha256:3ad0658a1193daeb8b0576d47d5bb164e99cfe0786ae7319912f1c91353cc397"
+    },
+    {
+      "packetVersion": "maha-internal-review-packet/1.0",
+      "recordId": "urn:maha:record:critical-supply-chains-niobium-ferroniobium-production",
+      "revisionSha256": "sha256:138719dda5fa18e05558a26025cd189b8bf566e0e7f41817610d20e911643f55",
+      "auditSha256": "sha256:857d29d54f04b8d519da876d189dd37733ecaa76e9547cdc8e7d850cd4466d14",
+      "title": "Niobium ferroniobium production",
+      "claims": [
+        {
+          "statement": "The cited source supports treating niobium ferroniobium production as a distinct measurement within the stated critical supply chains scope.",
+          "scope": "Limited to Helium, hafnium, tantalum, niobium, and antimony commodity chapters. in “Mineral Commodity Summaries 2026”; this candidate records the concept boundary and does not pool results from uncited systems or studies.",
+          "boundary": "Niobium ferroniobium production does not by itself establish system-level performance, safety, manufacturability, scalability, economic advantage, clinical benefit, or deployment readiness.",
+          "claimKind": "observation",
+          "evidenceMaturity": "single-study"
+        }
+      ],
+      "source": {
+        "title": "Mineral Commodity Summaries 2026",
+        "identifier": "https://pubs.usgs.gov/periodicals/mcs2026/mcs2026.pdf",
+        "exactLocator": "Helium, hafnium, tantalum, niobium, and antimony commodity chapters.",
+        "rightsBasis": "citation-with-paraphrase",
+        "quotationUsed": false
+      },
+      "alignment": {
+        "subjectAligned": "supported",
+        "assignmentOrigin": "independently-curated",
+        "sourceContentInspected": true,
+        "inspectionDepth": "section-or-full-text"
+      },
+      "requiredAxes": [
+        "source-identity-and-fidelity",
+        "claim-to-passage-support",
+        "scope-and-unsupported-inference",
+        "rights-and-locator-adequacy",
+        "release-boundary-and-nonclaims"
+      ],
+      "packetDigest": "sha256:85c8aed916d880d63c9611ec977af0df5dcbeb5eedff8bc4f7972b6eb00cb17f"
+    },
+    {
+      "packetVersion": "maha-internal-review-packet/1.0",
+      "recordId": "urn:maha:record:fusion-plasma-systems-laser-target-coupling",
+      "revisionSha256": "sha256:3ee25d0b479f803fcc6a42046edb6346b1404e6290f9f34a908939fc6ae3afbe",
+      "auditSha256": "sha256:1c31c6cf97609b7208bd21f9418334c36ef34ad66e18a87504b623e6b109e5bd",
+      "title": "Laser target coupling",
+      "claims": [
+        {
+          "statement": "The cited source supports treating laser target coupling as a distinct method within the stated fusion and plasma systems scope.",
+          "scope": "Limited to Target, laser coupling, target chamber, ignition, and experimental result sections. in “Achieving Fusion Ignition”; this candidate records the concept boundary and does not pool results from uncited systems or studies.",
+          "boundary": "Laser target coupling does not by itself establish system-level performance, safety, manufacturability, scalability, economic advantage, clinical benefit, or deployment readiness.",
+          "claimKind": "theoretical-model",
+          "evidenceMaturity": "single-study"
+        }
+      ],
+      "source": {
+        "title": "Achieving Fusion Ignition",
+        "identifier": "https://lasers.llnl.gov/science/achieving-fusion-ignition",
+        "exactLocator": "Target, laser coupling, target chamber, ignition, and experimental result sections.",
+        "rightsBasis": "citation-with-paraphrase",
+        "quotationUsed": false
+      },
+      "alignment": {
+        "subjectAligned": "supported",
+        "assignmentOrigin": "independently-curated",
+        "sourceContentInspected": true,
+        "inspectionDepth": "section-or-full-text"
+      },
+      "requiredAxes": [
+        "source-identity-and-fidelity",
+        "claim-to-passage-support",
+        "scope-and-unsupported-inference",
+        "rights-and-locator-adequacy",
+        "release-boundary-and-nonclaims"
+      ],
+      "packetDigest": "sha256:3e135aeb7b045010de681ef20b8af790a9bc170c9c44513dd2fda46eda022793"
+    },
+    {
+      "packetVersion": "maha-internal-review-packet/1.0",
+      "recordId": "urn:maha:record:fusion-plasma-systems-shattered-pellet-injection",
+      "revisionSha256": "sha256:62c581108e5a7ec96f2573a3a29c0e30ec0eba991ff6ea9146c9a4363116f0c1",
+      "auditSha256": "sha256:20b612ecb5c0a6802ea9131aa0e96d0a1aa9e615642ee5caf228d6b252754c4e",
+      "title": "Shattered pellet injection",
+      "claims": [
+        {
+          "statement": "The cited source supports treating shattered pellet injection as a distinct mechanism within the stated fusion and plasma systems scope.",
+          "scope": "Limited to System overview and shattered pellet injection sections. in “Disruption mitigation”; this candidate records the concept boundary and does not pool results from uncited systems or studies.",
+          "boundary": "Shattered pellet injection does not by itself establish system-level performance, safety, manufacturability, scalability, economic advantage, clinical benefit, or deployment readiness.",
+          "claimKind": "theoretical-model",
+          "evidenceMaturity": "single-study"
+        }
+      ],
+      "source": {
+        "title": "Disruption mitigation",
+        "identifier": "https://www.iter.org/machine/supporting-systems/disruption-mitigation",
+        "exactLocator": "System overview and shattered pellet injection sections.",
+        "rightsBasis": "citation-with-paraphrase",
+        "quotationUsed": false
+      },
+      "alignment": {
+        "subjectAligned": "supported",
+        "assignmentOrigin": "independently-curated",
+        "sourceContentInspected": true,
+        "inspectionDepth": "section-or-full-text"
+      },
+      "requiredAxes": [
+        "source-identity-and-fidelity",
+        "claim-to-passage-support",
+        "scope-and-unsupported-inference",
+        "rights-and-locator-adequacy",
+        "release-boundary-and-nonclaims"
+      ],
+      "packetDigest": "sha256:34c79aac7a1bc3d4696e8682ba803eba938f9efc28209cb186549325c8fca37b"
+    },
+    {
+      "packetVersion": "maha-internal-review-packet/1.0",
+      "recordId": "urn:maha:record:fusion-plasma-systems-stellarator-field-optimization",
+      "revisionSha256": "sha256:69b7bb3c02cbfed16a5de05a097be55d222f74adacede5cdfb7a65cd8fb3f83a",
+      "auditSha256": "sha256:4ccbab39fcfd0bbec53a5f04f969d95d1dee3d59647ffab297c1debba6f3638e",
+      "title": "Stellarator field optimization",
+      "claims": [
+        {
+          "statement": "The cited source supports treating stellarator field optimization as a distinct comparison within the stated fusion and plasma systems scope.",
+          "scope": "Limited to Sections on magnetic-field design, coils, confinement, and reactor implications. in “Stellarators as a fast path to fusion”; this candidate records the concept boundary and does not pool results from uncited systems or studies.",
+          "boundary": "Stellarator field optimization does not by itself establish system-level performance, safety, manufacturability, scalability, economic advantage, clinical benefit, or deployment readiness.",
+          "claimKind": "empirical-claim",
+          "evidenceMaturity": "single-study"
+        }
+      ],
+      "source": {
+        "title": "Stellarators as a fast path to fusion",
+        "identifier": "10.1088/1741-4326/ac170f",
+        "exactLocator": "Sections on magnetic-field design, coils, confinement, and reactor implications.",
+        "rightsBasis": "citation-with-paraphrase",
+        "quotationUsed": false
+      },
+      "alignment": {
+        "subjectAligned": "supported",
+        "assignmentOrigin": "independently-curated",
+        "sourceContentInspected": true,
+        "inspectionDepth": "section-or-full-text"
+      },
+      "requiredAxes": [
+        "source-identity-and-fidelity",
+        "claim-to-passage-support",
+        "scope-and-unsupported-inference",
+        "rights-and-locator-adequacy",
+        "release-boundary-and-nonclaims"
+      ],
+      "packetDigest": "sha256:c7a74e92b41c8d1e89083e94b8337622c88bbeeb2e97d4776863c9369de7cd61"
+    },
+    {
+      "packetVersion": "maha-internal-review-packet/1.0",
+      "recordId": "urn:maha:record:fusion-plasma-systems-stellarator-magnetic-coils",
+      "revisionSha256": "sha256:8ac96963ede9957044e42ffbe2faf4627c3d2e2e4abbc199f1c61f46bf3539d9",
+      "auditSha256": "sha256:8ee0af2f814d8a8383d413959a51fa9947f63f106c359fa9c8afbdad5f03fdc0",
+      "title": "Stellarator magnetic coils",
+      "claims": [
+        {
+          "statement": "The cited source supports treating stellarator magnetic coils as a distinct measurement within the stated fusion and plasma systems scope.",
+          "scope": "Limited to Sections on magnetic-field design, coils, confinement, and reactor implications. in “Stellarators as a fast path to fusion”; this candidate records the concept boundary and does not pool results from uncited systems or studies.",
+          "boundary": "Stellarator magnetic coils does not by itself establish system-level performance, safety, manufacturability, scalability, economic advantage, clinical benefit, or deployment readiness.",
+          "claimKind": "observation",
+          "evidenceMaturity": "single-study"
+        }
+      ],
+      "source": {
+        "title": "Stellarators as a fast path to fusion",
+        "identifier": "10.1088/1741-4326/ac170f",
+        "exactLocator": "Sections on magnetic-field design, coils, confinement, and reactor implications.",
+        "rightsBasis": "citation-with-paraphrase",
+        "quotationUsed": false
+      },
+      "alignment": {
+        "subjectAligned": "supported",
+        "assignmentOrigin": "independently-curated",
+        "sourceContentInspected": true,
+        "inspectionDepth": "section-or-full-text"
+      },
+      "requiredAxes": [
+        "source-identity-and-fidelity",
+        "claim-to-passage-support",
+        "scope-and-unsupported-inference",
+        "rights-and-locator-adequacy",
+        "release-boundary-and-nonclaims"
+      ],
+      "packetDigest": "sha256:848d01c5fd8312dbd417d31045afd898ec8fac1d5c7beaeff7f0f373c5cc4c11"
+    },
+    {
+      "packetVersion": "maha-internal-review-packet/1.0",
+      "recordId": "urn:maha:record:longevity-metabolism-apoptosis-in-senescent-cells",
+      "revisionSha256": "sha256:b8f9ca4f249f6628e1f2812f62cdbe132683e4d0d1355e09844d0d76c8d5ed88",
+      "auditSha256": "sha256:9afc5ee4fed0b72f33bb7967879a9e8fb9a563e330b43ce5c51cb542dbdc977c",
+      "title": "Apoptosis in senescent cells",
+      "claims": [
+        {
+          "statement": "The cited source supports treating apoptosis in senescent cells as a distinct measurement within the stated longevity and metabolism scope.",
+          "scope": "Limited to Senescent-cell survival pathways, compound screening, cell assays, and mouse experiments. in “The Achilles’ heel of senescent cells: from transcriptome to senolytic drugs”; this candidate records the concept boundary and does not pool results from uncited systems or studies.",
+          "boundary": "Apoptosis in senescent cells does not by itself establish system-level performance, safety, manufacturability, scalability, economic advantage, clinical benefit, or deployment readiness.",
+          "claimKind": "observation",
+          "evidenceMaturity": "single-study"
+        }
+      ],
+      "source": {
+        "title": "The Achilles’ heel of senescent cells: from transcriptome to senolytic drugs",
+        "identifier": "10.1111/acel.12344",
+        "exactLocator": "Senescent-cell survival pathways, compound screening, cell assays, and mouse experiments.",
+        "rightsBasis": "citation-with-paraphrase",
+        "quotationUsed": false
+      },
+      "alignment": {
+        "subjectAligned": "supported",
+        "assignmentOrigin": "independently-curated",
+        "sourceContentInspected": true,
+        "inspectionDepth": "section-or-full-text"
+      },
+      "requiredAxes": [
+        "source-identity-and-fidelity",
+        "claim-to-passage-support",
+        "scope-and-unsupported-inference",
+        "rights-and-locator-adequacy",
+        "release-boundary-and-nonclaims"
+      ],
+      "packetDigest": "sha256:5e091d458d1e41b149fc937dc035308f1142c446f0eb1ce120c5ca3a58409771"
+    },
+    {
+      "packetVersion": "maha-internal-review-packet/1.0",
+      "recordId": "urn:maha:record:longevity-metabolism-atp-linked-respiration",
+      "revisionSha256": "sha256:58b6a11d7507f1b2dd28f920f82bd5fc045e5885b8c10bd9bdceb407d7aa51d2",
+      "auditSha256": "sha256:0b4435983b1271b75d71b2ed50f0f9018181090cc2852eb408fbda86844e0d8b",
+      "title": "ATP linked respiration",
+      "claims": [
+        {
+          "statement": "The cited source supports treating atp linked respiration as a distinct mechanism within the stated longevity and metabolism scope.",
+          "scope": "Limited to Chapter 16, pages 309–354: oxygen-consumption rate, data analysis, normalization, controls, and extracellular-pH interpretation. in “Analysis and interpretation of microplate-based oxygen consumption and pH data”; this candidate records the concept boundary and does not pool results from uncited systems or studies.",
+          "boundary": "ATP linked respiration does not by itself establish system-level performance, safety, manufacturability, scalability, economic advantage, clinical benefit, or deployment readiness.",
+          "claimKind": "theoretical-model",
+          "evidenceMaturity": "single-study"
+        }
+      ],
+      "source": {
+        "title": "Analysis and interpretation of microplate-based oxygen consumption and pH data",
+        "identifier": "10.1016/B978-0-12-801415-8.00016-3",
+        "exactLocator": "Chapter 16, pages 309–354: oxygen-consumption rate, data analysis, normalization, controls, and extracellular-pH interpretation.",
+        "rightsBasis": "citation-with-paraphrase",
+        "quotationUsed": false
+      },
+      "alignment": {
+        "subjectAligned": "supported",
+        "assignmentOrigin": "independently-curated",
+        "sourceContentInspected": true,
+        "inspectionDepth": "section-or-full-text"
+      },
+      "requiredAxes": [
+        "source-identity-and-fidelity",
+        "claim-to-passage-support",
+        "scope-and-unsupported-inference",
+        "rights-and-locator-adequacy",
+        "release-boundary-and-nonclaims"
+      ],
+      "packetDigest": "sha256:9d5414494cb90f1d086d078c40d6d9ee3b2541bb167b01da4a5d6540ae4a9552"
+    },
+    {
+      "packetVersion": "maha-internal-review-packet/1.0",
+      "recordId": "urn:maha:record:longevity-metabolism-cellular-senescence-markers",
+      "revisionSha256": "sha256:32f84190547d8cff7fab09573847957046e817bea41f479c57eaf48d9d5fcd37",
+      "auditSha256": "sha256:d1cad7aaa4a7aefe1104ae56ed3e12c71dc2e33da70408be62c8dfde74ef5acc",
+      "title": "Cellular senescence markers",
+      "claims": [
+        {
+          "statement": "The cited source supports treating cellular senescence markers as a distinct concept within the stated longevity and metabolism scope.",
+          "scope": "Limited to Senescent-cell survival pathways, compound screening, cell assays, and mouse experiments. in “The Achilles’ heel of senescent cells: from transcriptome to senolytic drugs”; this candidate records the concept boundary and does not pool results from uncited systems or studies.",
+          "boundary": "Cellular senescence markers does not by itself establish system-level performance, safety, manufacturability, scalability, economic advantage, clinical benefit, or deployment readiness.",
+          "claimKind": "theoretical-model",
+          "evidenceMaturity": "single-study"
+        }
+      ],
+      "source": {
+        "title": "The Achilles’ heel of senescent cells: from transcriptome to senolytic drugs",
+        "identifier": "10.1111/acel.12344",
+        "exactLocator": "Senescent-cell survival pathways, compound screening, cell assays, and mouse experiments.",
+        "rightsBasis": "citation-with-paraphrase",
+        "quotationUsed": false
+      },
+      "alignment": {
+        "subjectAligned": "supported",
+        "assignmentOrigin": "independently-curated",
+        "sourceContentInspected": true,
+        "inspectionDepth": "section-or-full-text"
+      },
+      "requiredAxes": [
+        "source-identity-and-fidelity",
+        "claim-to-passage-support",
+        "scope-and-unsupported-inference",
+        "rights-and-locator-adequacy",
+        "release-boundary-and-nonclaims"
+      ],
+      "packetDigest": "sha256:8ed50f65dda7faef706b59aec0f9c1b3d8feb0617a10cbbd95e21c67262aaa28"
+    },
+    {
+      "packetVersion": "maha-internal-review-packet/1.0",
+      "recordId": "urn:maha:record:longevity-metabolism-lifespan-versus-healthspan-endpoints",
+      "revisionSha256": "sha256:d3f02e6c6340da552ce47205b2902e8df9b303f027b2dabead35624a679db296",
+      "auditSha256": "sha256:d129660b1edda879914ec9e5bf7a48c300673c61d252607209d6cb001d41becd",
+      "title": "Lifespan versus healthspan endpoints",
+      "claims": [
+        {
+          "statement": "The cited source supports treating lifespan versus healthspan endpoints as a distinct measurement within the stated longevity and metabolism scope.",
+          "scope": "Limited to Nutrient sensing, mitochondrial dysfunction, cellular senescence, biomarkers, and intervention framework. in “Hallmarks of Aging: An Expanding Universe”; this candidate records the concept boundary and does not pool results from uncited systems or studies.",
+          "boundary": "Lifespan versus healthspan endpoints does not by itself establish system-level performance, safety, manufacturability, scalability, economic advantage, clinical benefit, or deployment readiness.",
+          "claimKind": "observation",
+          "evidenceMaturity": "single-study"
+        }
+      ],
+      "source": {
+        "title": "Hallmarks of Aging: An Expanding Universe",
+        "identifier": "10.1016/j.cell.2022.11.001",
+        "exactLocator": "Nutrient sensing, mitochondrial dysfunction, cellular senescence, biomarkers, and intervention framework.",
+        "rightsBasis": "citation-with-paraphrase",
+        "quotationUsed": false
+      },
+      "alignment": {
+        "subjectAligned": "supported",
+        "assignmentOrigin": "independently-curated",
+        "sourceContentInspected": true,
+        "inspectionDepth": "section-or-full-text"
+      },
+      "requiredAxes": [
+        "source-identity-and-fidelity",
+        "claim-to-passage-support",
+        "scope-and-unsupported-inference",
+        "rights-and-locator-adequacy",
+        "release-boundary-and-nonclaims"
+      ],
+      "packetDigest": "sha256:db8db701b9b8d44b0c9b7c259a61158885933b215670c82aa7af800531384059"
+    },
+    {
+      "packetVersion": "maha-internal-review-packet/1.0",
+      "recordId": "urn:maha:record:longevity-metabolism-nad-consumption-by-parps",
+      "revisionSha256": "sha256:412e98d79a88bc725711c9c75b372870f59ae37e41e8ff99ade5b0fbc097fe80",
+      "auditSha256": "sha256:d287fe38635a1e43e3520518143d5c6aba38afd7150a522dcf97be4d9a87674e",
+      "title": "NAD+ consumption by PARPs",
+      "claims": [
+        {
+          "statement": "The cited source supports treating nad+ consumption by parps as a distinct comparison within the stated longevity and metabolism scope.",
+          "scope": "Limited to NAD+ biosynthesis and consumption, NAD+-dependent mechanisms in ageing, therapeutic targeting, figures 1–4, and supplementary boxes. in “NAD+ metabolism and its roles in cellular processes during ageing”; this candidate records the concept boundary and does not pool results from uncited systems or studies.",
+          "boundary": "NAD+ consumption by PARPs does not by itself establish system-level performance, safety, manufacturability, scalability, economic advantage, clinical benefit, or deployment readiness.",
+          "claimKind": "empirical-claim",
+          "evidenceMaturity": "single-study"
+        }
+      ],
+      "source": {
+        "title": "NAD+ metabolism and its roles in cellular processes during ageing",
+        "identifier": "10.1038/s41580-020-00313-x",
+        "exactLocator": "NAD+ biosynthesis and consumption, NAD+-dependent mechanisms in ageing, therapeutic targeting, figures 1–4, and supplementary boxes.",
+        "rightsBasis": "citation-with-paraphrase",
+        "quotationUsed": false
+      },
+      "alignment": {
+        "subjectAligned": "supported",
+        "assignmentOrigin": "independently-curated",
+        "sourceContentInspected": true,
+        "inspectionDepth": "section-or-full-text"
+      },
+      "requiredAxes": [
+        "source-identity-and-fidelity",
+        "claim-to-passage-support",
+        "scope-and-unsupported-inference",
+        "rights-and-locator-adequacy",
+        "release-boundary-and-nonclaims"
+      ],
+      "packetDigest": "sha256:6ef91029c2609f472292f23cf9c3ff4108aae05bfcdc74c5ce2a0b5718120fac"
+    },
+    {
+      "packetVersion": "maha-internal-review-packet/1.0",
+      "recordId": "urn:maha:record:longevity-metabolism-nampt-rate-limiting-step",
+      "revisionSha256": "sha256:bf7d09a9215d20978d902db07001f60efd91b79282fc94cf20ffb62a3727cbaa",
+      "auditSha256": "sha256:fe309d0a5ea43620220b74383bdeaeefaab89fab4311e458796c3eb6f7f7ab67",
+      "title": "NAMPT rate limiting step",
+      "claims": [
+        {
+          "statement": "The cited source supports treating nampt rate limiting step as a distinct mechanism within the stated longevity and metabolism scope.",
+          "scope": "Limited to NAD+ biosynthesis and consumption, NAD+-dependent mechanisms in ageing, therapeutic targeting, figures 1–4, and supplementary boxes. in “NAD+ metabolism and its roles in cellular processes during ageing”; this candidate records the concept boundary and does not pool results from uncited systems or studies.",
+          "boundary": "NAMPT rate limiting step does not by itself establish system-level performance, safety, manufacturability, scalability, economic advantage, clinical benefit, or deployment readiness.",
+          "claimKind": "theoretical-model",
+          "evidenceMaturity": "single-study"
+        }
+      ],
+      "source": {
+        "title": "NAD+ metabolism and its roles in cellular processes during ageing",
+        "identifier": "10.1038/s41580-020-00313-x",
+        "exactLocator": "NAD+ biosynthesis and consumption, NAD+-dependent mechanisms in ageing, therapeutic targeting, figures 1–4, and supplementary boxes.",
+        "rightsBasis": "citation-with-paraphrase",
+        "quotationUsed": false
+      },
+      "alignment": {
+        "subjectAligned": "supported",
+        "assignmentOrigin": "independently-curated",
+        "sourceContentInspected": true,
+        "inspectionDepth": "section-or-full-text"
+      },
+      "requiredAxes": [
+        "source-identity-and-fidelity",
+        "claim-to-passage-support",
+        "scope-and-unsupported-inference",
+        "rights-and-locator-adequacy",
+        "release-boundary-and-nonclaims"
+      ],
+      "packetDigest": "sha256:ee2ffb4b89c66bc8aee095d0f53390b85b6575ea3858c6ad373efe4a39a95a50"
+    },
+    {
+      "packetVersion": "maha-internal-review-packet/1.0",
+      "recordId": "urn:maha:record:longevity-metabolism-nmn-and-nr-precursors",
+      "revisionSha256": "sha256:191557d52bd9efab7dcd9dba21d964223963a9c86e33e57f1aa5b0f07dec0c54",
+      "auditSha256": "sha256:cfb7d5ca1a1671169de8dad9c85b4ccdda883a0557d73039f265a6b96c37de68",
+      "title": "NMN and NR precursors",
+      "claims": [
+        {
+          "statement": "The cited source supports treating nmn and nr precursors as a distinct measurement within the stated longevity and metabolism scope.",
+          "scope": "Limited to NAD+ biosynthesis and consumption, NAD+-dependent mechanisms in ageing, therapeutic targeting, figures 1–4, and supplementary boxes. in “NAD+ metabolism and its roles in cellular processes during ageing”; this candidate records the concept boundary and does not pool results from uncited systems or studies.",
+          "boundary": "NMN and NR precursors does not by itself establish system-level performance, safety, manufacturability, scalability, economic advantage, clinical benefit, or deployment readiness.",
+          "claimKind": "observation",
+          "evidenceMaturity": "single-study"
+        }
+      ],
+      "source": {
+        "title": "NAD+ metabolism and its roles in cellular processes during ageing",
+        "identifier": "10.1038/s41580-020-00313-x",
+        "exactLocator": "NAD+ biosynthesis and consumption, NAD+-dependent mechanisms in ageing, therapeutic targeting, figures 1–4, and supplementary boxes.",
+        "rightsBasis": "citation-with-paraphrase",
+        "quotationUsed": false
+      },
+      "alignment": {
+        "subjectAligned": "supported",
+        "assignmentOrigin": "independently-curated",
+        "sourceContentInspected": true,
+        "inspectionDepth": "section-or-full-text"
+      },
+      "requiredAxes": [
+        "source-identity-and-fidelity",
+        "claim-to-passage-support",
+        "scope-and-unsupported-inference",
+        "rights-and-locator-adequacy",
+        "release-boundary-and-nonclaims"
+      ],
+      "packetDigest": "sha256:56e92bd4d983d4e0c608d8f48052800c5c0745d2a17350d8b18ccd2f5c6833e2"
+    },
+    {
+      "packetVersion": "maha-internal-review-packet/1.0",
+      "recordId": "urn:maha:record:longevity-metabolism-nmnat-compartmentalization",
+      "revisionSha256": "sha256:4faf2fae6b61dd689323efef0694188699b458ec10f9b6edef4c7d3de75f7796",
+      "auditSha256": "sha256:419baf3bd59797a022f6771d202ca51c5400ff6f6fff1987862836c44844d669",
+      "title": "NMNAT compartmentalization",
+      "claims": [
+        {
+          "statement": "The cited source supports treating nmnat compartmentalization as a distinct method within the stated longevity and metabolism scope.",
+          "scope": "Limited to NAD+ biosynthesis and consumption, NAD+-dependent mechanisms in ageing, therapeutic targeting, figures 1–4, and supplementary boxes. in “NAD+ metabolism and its roles in cellular processes during ageing”; this candidate records the concept boundary and does not pool results from uncited systems or studies.",
+          "boundary": "NMNAT compartmentalization does not by itself establish system-level performance, safety, manufacturability, scalability, economic advantage, clinical benefit, or deployment readiness.",
+          "claimKind": "theoretical-model",
+          "evidenceMaturity": "single-study"
+        }
+      ],
+      "source": {
+        "title": "NAD+ metabolism and its roles in cellular processes during ageing",
+        "identifier": "10.1038/s41580-020-00313-x",
+        "exactLocator": "NAD+ biosynthesis and consumption, NAD+-dependent mechanisms in ageing, therapeutic targeting, figures 1–4, and supplementary boxes.",
+        "rightsBasis": "citation-with-paraphrase",
+        "quotationUsed": false
+      },
+      "alignment": {
+        "subjectAligned": "supported",
+        "assignmentOrigin": "independently-curated",
+        "sourceContentInspected": true,
+        "inspectionDepth": "section-or-full-text"
+      },
+      "requiredAxes": [
+        "source-identity-and-fidelity",
+        "claim-to-passage-support",
+        "scope-and-unsupported-inference",
+        "rights-and-locator-adequacy",
+        "release-boundary-and-nonclaims"
+      ],
+      "packetDigest": "sha256:f6440e5bc8fd29d88be3b9484916cfe1b70b44d00540d3908dd9b3226aea376b"
+    },
+    {
+      "packetVersion": "maha-internal-review-packet/1.0",
+      "recordId": "urn:maha:record:longevity-metabolism-oxygen-consumption-rate",
+      "revisionSha256": "sha256:9ae12b356c0faf01b473266d67fded5ffe49f2a3f1652e3b17af62de1336974d",
+      "auditSha256": "sha256:2b5adae213732d059940cf0d056d6789ef5024ea27b6058c05a7f77e5dba914e",
+      "title": "Oxygen consumption rate",
+      "claims": [
+        {
+          "statement": "The cited source supports treating oxygen consumption rate as a distinct concept within the stated longevity and metabolism scope.",
+          "scope": "Limited to Chapter 16, pages 309–354: oxygen-consumption rate, data analysis, normalization, controls, and extracellular-pH interpretation. in “Analysis and interpretation of microplate-based oxygen consumption and pH data”; this candidate records the concept boundary and does not pool results from uncited systems or studies.",
+          "boundary": "Oxygen consumption rate does not by itself establish system-level performance, safety, manufacturability, scalability, economic advantage, clinical benefit, or deployment readiness.",
+          "claimKind": "theoretical-model",
+          "evidenceMaturity": "single-study"
+        }
+      ],
+      "source": {
+        "title": "Analysis and interpretation of microplate-based oxygen consumption and pH data",
+        "identifier": "10.1016/B978-0-12-801415-8.00016-3",
+        "exactLocator": "Chapter 16, pages 309–354: oxygen-consumption rate, data analysis, normalization, controls, and extracellular-pH interpretation.",
+        "rightsBasis": "citation-with-paraphrase",
+        "quotationUsed": false
+      },
+      "alignment": {
+        "subjectAligned": "supported",
+        "assignmentOrigin": "independently-curated",
+        "sourceContentInspected": true,
+        "inspectionDepth": "section-or-full-text"
+      },
+      "requiredAxes": [
+        "source-identity-and-fidelity",
+        "claim-to-passage-support",
+        "scope-and-unsupported-inference",
+        "rights-and-locator-adequacy",
+        "release-boundary-and-nonclaims"
+      ],
+      "packetDigest": "sha256:9439193d9d6438b34fef4e39eaee426030f3230e694c42716ba6d936079320ad"
+    },
+    {
+      "packetVersion": "maha-internal-review-packet/1.0",
+      "recordId": "urn:maha:record:longevity-metabolism-pink1-parkin-pathway",
+      "revisionSha256": "sha256:46308d98f43ad48680e8f9a1d873f801475c93c6788461243e8d916aa4643485",
+      "auditSha256": "sha256:ae8ce8be98d01d3cad394006a2b8193e1e9213ce0d363c2c349c2104f5ab7c24",
+      "title": "PINK1 parkin pathway",
+      "claims": [
+        {
+          "statement": "The cited source supports treating pink1 parkin pathway as a distinct mechanism within the stated longevity and metabolism scope.",
+          "scope": "Limited to PINK1–Parkin pathway, mitochondrial damage sensing, and mitophagy mechanism sections. in “Mechanisms of mitophagy”; this candidate records the concept boundary and does not pool results from uncited systems or studies.",
+          "boundary": "PINK1 parkin pathway does not by itself establish system-level performance, safety, manufacturability, scalability, economic advantage, clinical benefit, or deployment readiness.",
+          "claimKind": "theoretical-model",
+          "evidenceMaturity": "single-study"
+        }
+      ],
+      "source": {
+        "title": "Mechanisms of mitophagy",
+        "identifier": "10.1038/nrm3028",
+        "exactLocator": "PINK1–Parkin pathway, mitochondrial damage sensing, and mitophagy mechanism sections.",
+        "rightsBasis": "citation-with-paraphrase",
+        "quotationUsed": false
+      },
+      "alignment": {
+        "subjectAligned": "supported",
+        "assignmentOrigin": "independently-curated",
+        "sourceContentInspected": true,
+        "inspectionDepth": "abstract-or-metadata-only"
+      },
+      "requiredAxes": [
+        "source-identity-and-fidelity",
+        "claim-to-passage-support",
+        "scope-and-unsupported-inference",
+        "rights-and-locator-adequacy",
+        "release-boundary-and-nonclaims"
+      ],
+      "packetDigest": "sha256:df68e8291868cf2240c3b06e32ca6e6101a505afe8df64a8eb51c31b515a20b3"
+    },
+    {
+      "packetVersion": "maha-internal-review-packet/1.0",
+      "recordId": "urn:maha:record:longevity-metabolism-senescent-cell-clearance",
+      "revisionSha256": "sha256:f208ae5ebd530d273ae1e30c924ebc41eabe84efaa38aa731de42fee86645808",
+      "auditSha256": "sha256:a2c55cfab2a21335cbfbfa86f988ece627da2801c459aca1033c19c8e4f492aa",
+      "title": "Senescent cell clearance",
+      "claims": [
+        {
+          "statement": "The cited source supports treating senescent cell clearance as a distinct comparison within the stated longevity and metabolism scope.",
+          "scope": "Limited to Senescent-cell survival pathways, compound screening, cell assays, and mouse experiments. in “The Achilles’ heel of senescent cells: from transcriptome to senolytic drugs”; this candidate records the concept boundary and does not pool results from uncited systems or studies.",
+          "boundary": "Senescent cell clearance does not by itself establish system-level performance, safety, manufacturability, scalability, economic advantage, clinical benefit, or deployment readiness.",
+          "claimKind": "empirical-claim",
+          "evidenceMaturity": "single-study"
+        }
+      ],
+      "source": {
+        "title": "The Achilles’ heel of senescent cells: from transcriptome to senolytic drugs",
+        "identifier": "10.1111/acel.12344",
+        "exactLocator": "Senescent-cell survival pathways, compound screening, cell assays, and mouse experiments.",
+        "rightsBasis": "citation-with-paraphrase",
+        "quotationUsed": false
+      },
+      "alignment": {
+        "subjectAligned": "supported",
+        "assignmentOrigin": "independently-curated",
+        "sourceContentInspected": true,
+        "inspectionDepth": "section-or-full-text"
+      },
+      "requiredAxes": [
+        "source-identity-and-fidelity",
+        "claim-to-passage-support",
+        "scope-and-unsupported-inference",
+        "rights-and-locator-adequacy",
+        "release-boundary-and-nonclaims"
+      ],
+      "packetDigest": "sha256:de7cce659d090d437d0e0255cad40d200401a57602af405a4ef266e529e9020b"
+    },
+    {
+      "packetVersion": "maha-internal-review-packet/1.0",
+      "recordId": "urn:maha:record:longevity-metabolism-sirtuin-nad-dependence",
+      "revisionSha256": "sha256:3774dec2e51ced47caa4a9f83ae6490bf4617f2afe90e96422fec90a3f7ec080",
+      "auditSha256": "sha256:13d0e3dd7bf5946301ac54a2fbc703b77a7bb0fd05b4219289498b979f550cef",
+      "title": "Sirtuin NAD+ dependence",
+      "claims": [
+        {
+          "statement": "The cited source supports treating sirtuin nad+ dependence as a distinct concept within the stated longevity and metabolism scope.",
+          "scope": "Limited to Nutrient sensing, mitochondrial dysfunction, cellular senescence, biomarkers, and intervention framework. in “Hallmarks of Aging: An Expanding Universe”; this candidate records the concept boundary and does not pool results from uncited systems or studies.",
+          "boundary": "Sirtuin NAD+ dependence does not by itself establish system-level performance, safety, manufacturability, scalability, economic advantage, clinical benefit, or deployment readiness.",
+          "claimKind": "theoretical-model",
+          "evidenceMaturity": "single-study"
+        }
+      ],
+      "source": {
+        "title": "Hallmarks of Aging: An Expanding Universe",
+        "identifier": "10.1016/j.cell.2022.11.001",
+        "exactLocator": "Nutrient sensing, mitochondrial dysfunction, cellular senescence, biomarkers, and intervention framework.",
+        "rightsBasis": "citation-with-paraphrase",
+        "quotationUsed": false
+      },
+      "alignment": {
+        "subjectAligned": "supported",
+        "assignmentOrigin": "independently-curated",
+        "sourceContentInspected": true,
+        "inspectionDepth": "section-or-full-text"
+      },
+      "requiredAxes": [
+        "source-identity-and-fidelity",
+        "claim-to-passage-support",
+        "scope-and-unsupported-inference",
+        "rights-and-locator-adequacy",
+        "release-boundary-and-nonclaims"
+      ],
+      "packetDigest": "sha256:0a30ea302631ebd25ab469d54fb40bbe2b0d4607eeeb60f1ffb0ef3b6f5b54df"
+    },
+    {
+      "packetVersion": "maha-internal-review-packet/1.0",
+      "recordId": "urn:maha:record:longevity-metabolism-translation-to-human-outcomes",
+      "revisionSha256": "sha256:d0d8e4666aabf2a9c6243e0681e380eb24e01b1be85287194df8456cbd0b021f",
+      "auditSha256": "sha256:fe52f7785cabaa95701c44b6eea4af9e898904729d85c3bf7b3a39650ad75643",
+      "title": "Translation to human outcomes",
+      "claims": [
+        {
+          "statement": "The cited source supports treating translation to human outcomes as a distinct comparison within the stated longevity and metabolism scope.",
+          "scope": "Limited to Nutrient sensing, mitochondrial dysfunction, cellular senescence, biomarkers, and intervention framework. in “Hallmarks of Aging: An Expanding Universe”; this candidate records the concept boundary and does not pool results from uncited systems or studies.",
+          "boundary": "Translation to human outcomes does not by itself establish system-level performance, safety, manufacturability, scalability, economic advantage, clinical benefit, or deployment readiness.",
+          "claimKind": "empirical-claim",
+          "evidenceMaturity": "single-study"
+        }
+      ],
+      "source": {
+        "title": "Hallmarks of Aging: An Expanding Universe",
+        "identifier": "10.1016/j.cell.2022.11.001",
+        "exactLocator": "Nutrient sensing, mitochondrial dysfunction, cellular senescence, biomarkers, and intervention framework.",
+        "rightsBasis": "citation-with-paraphrase",
+        "quotationUsed": false
+      },
+      "alignment": {
+        "subjectAligned": "supported",
+        "assignmentOrigin": "independently-curated",
+        "sourceContentInspected": true,
+        "inspectionDepth": "section-or-full-text"
+      },
+      "requiredAxes": [
+        "source-identity-and-fidelity",
+        "claim-to-passage-support",
+        "scope-and-unsupported-inference",
+        "rights-and-locator-adequacy",
+        "release-boundary-and-nonclaims"
+      ],
+      "packetDigest": "sha256:3ba63e8c2f0ea4567ae6ca30cb105ffc87a5b8f01686978da51b2bfc5d850880"
+    },
+    {
+      "packetVersion": "maha-internal-review-packet/1.0",
+      "recordId": "urn:maha:record:mechanistic-interpretability-feature-activation-maximization",
+      "revisionSha256": "sha256:6c45c999f1603edcc3571e7f7fc3848e734e2fb4fa532624cea798499991f446",
+      "auditSha256": "sha256:c9c0984c6c3c87d5683c176729ef485779caa55ba5ddeb8b309e8952324a7d37",
+      "title": "Feature activation maximization",
+      "claims": [
+        {
+          "statement": "The cited source supports treating feature activation maximization as a distinct mechanism within the stated mechanistic interpretability scope.",
+          "scope": "Limited to Optimization objectives, regularization, visualization techniques, and interpretation cautions. in “Feature Visualization”; this candidate records the concept boundary and does not pool results from uncited systems or studies.",
+          "boundary": "Feature activation maximization does not by itself establish system-level performance, safety, manufacturability, scalability, economic advantage, clinical benefit, or deployment readiness.",
+          "claimKind": "theoretical-model",
+          "evidenceMaturity": "single-study"
+        }
+      ],
+      "source": {
+        "title": "Feature Visualization",
+        "identifier": "10.23915/distill.00007",
+        "exactLocator": "Optimization objectives, regularization, visualization techniques, and interpretation cautions.",
+        "rightsBasis": "citation-with-paraphrase",
+        "quotationUsed": false
+      },
+      "alignment": {
+        "subjectAligned": "supported",
+        "assignmentOrigin": "independently-curated",
+        "sourceContentInspected": true,
+        "inspectionDepth": "section-or-full-text"
+      },
+      "requiredAxes": [
+        "source-identity-and-fidelity",
+        "claim-to-passage-support",
+        "scope-and-unsupported-inference",
+        "rights-and-locator-adequacy",
+        "release-boundary-and-nonclaims"
+      ],
+      "packetDigest": "sha256:082123a90760cbeb13fed84b3aa1f0339531cc48fbb9a206a232ec24b53ff1fa"
+    },
+    {
+      "packetVersion": "maha-internal-review-packet/1.0",
+      "recordId": "urn:maha:record:neurotechnology-bci-channelrhodopsin-photocurrent-kinetics",
+      "revisionSha256": "sha256:3222b99000d35c144e1b7da3e76a8fbb09514fcce54c71e3b38fc873851307f5",
+      "auditSha256": "sha256:cc0515ea5cefc6112055f52cb8757d3d21c36e1ea161b92d89256e36e98ce0cf",
+      "title": "Channelrhodopsin photocurrent kinetics",
+      "claims": [
+        {
+          "statement": "The cited source supports treating channelrhodopsin photocurrent kinetics as a distinct mechanism within the stated neurotechnology and bci scope.",
+          "scope": "Limited to Channelrhodopsin expression, photocurrent, optical stimulation, spike timing, and Methods. in “Millisecond-timescale, genetically targeted optical control of neural activity”; this candidate records the concept boundary and does not pool results from uncited systems or studies.",
+          "boundary": "Channelrhodopsin photocurrent kinetics does not by itself establish system-level performance, safety, manufacturability, scalability, economic advantage, clinical benefit, or deployment readiness.",
+          "claimKind": "theoretical-model",
+          "evidenceMaturity": "single-study"
+        }
+      ],
+      "source": {
+        "title": "Millisecond-timescale, genetically targeted optical control of neural activity",
+        "identifier": "10.1038/nn1525",
+        "exactLocator": "Channelrhodopsin expression, photocurrent, optical stimulation, spike timing, and Methods.",
+        "rightsBasis": "citation-with-paraphrase",
+        "quotationUsed": false
+      },
+      "alignment": {
+        "subjectAligned": "supported",
+        "assignmentOrigin": "independently-curated",
+        "sourceContentInspected": true,
+        "inspectionDepth": "section-or-full-text"
+      },
+      "requiredAxes": [
+        "source-identity-and-fidelity",
+        "claim-to-passage-support",
+        "scope-and-unsupported-inference",
+        "rights-and-locator-adequacy",
+        "release-boundary-and-nonclaims"
+      ],
+      "packetDigest": "sha256:74f193a91c5f54434673ca999dc30241d48335cc44b9a4a02e133814be78b84d"
+    },
+    {
+      "packetVersion": "maha-internal-review-packet/1.0",
+      "recordId": "urn:maha:record:neurotechnology-bci-chronic-signal-stability",
+      "revisionSha256": "sha256:21b00e998a171f2c9a561463f4ca43fa3bf56ba0439efbe8abd89654e7906de9",
+      "auditSha256": "sha256:ed749c787bcc09c33b62cbc003cc77281308858cd62fe8097a8755d8fe42938c",
+      "title": "Chronic signal stability",
+      "claims": [
+        {
+          "statement": "The cited source supports treating chronic signal stability as a distinct concept within the stated neurotechnology and bci scope.",
+          "scope": "Limited to Tissue response, electrode materials, chronic recording stability, and design-factor sections. in “Response of brain tissue to chronically implanted neural electrodes”; this candidate records the concept boundary and does not pool results from uncited systems or studies.",
+          "boundary": "Chronic signal stability does not by itself establish system-level performance, safety, manufacturability, scalability, economic advantage, clinical benefit, or deployment readiness.",
+          "claimKind": "theoretical-model",
+          "evidenceMaturity": "single-study"
+        }
+      ],
+      "source": {
+        "title": "Response of brain tissue to chronically implanted neural electrodes",
+        "identifier": "10.1016/j.jneumeth.2005.08.015",
+        "exactLocator": "Tissue response, electrode materials, chronic recording stability, and design-factor sections.",
+        "rightsBasis": "citation-with-paraphrase",
+        "quotationUsed": false
+      },
+      "alignment": {
+        "subjectAligned": "supported",
+        "assignmentOrigin": "independently-curated",
+        "sourceContentInspected": true,
+        "inspectionDepth": "abstract-or-metadata-only"
+      },
+      "requiredAxes": [
+        "source-identity-and-fidelity",
+        "claim-to-passage-support",
+        "scope-and-unsupported-inference",
+        "rights-and-locator-adequacy",
+        "release-boundary-and-nonclaims"
+      ],
+      "packetDigest": "sha256:3482629739508b1c6811331221974ff915306b7b8061dc2ea65df9e51cf1e040"
+    },
+    {
+      "packetVersion": "maha-internal-review-packet/1.0",
+      "recordId": "urn:maha:record:neurotechnology-bci-electrocorticography-spatial-resolution",
+      "revisionSha256": "sha256:ea472f6b233b533b20d8cde9e8a9048b68ca74fc90dc3b05dd15a1ea397f1706",
+      "auditSha256": "sha256:4aabb116038af0bcfc8a724cdd9e2565a487300fd390b9f130d851e6fb1af985",
+      "title": "Electrocorticography spatial resolution",
+      "claims": [
+        {
+          "statement": "The cited source supports treating electrocorticography spatial resolution as a distinct mechanism within the stated neurotechnology and bci scope.",
+          "scope": "Limited to Array architecture, conformal placement, multiplexing, in-vivo mapping, and Methods. in “Flexible, foldable, actively multiplexed, high-density electrode array for mapping brain activity in vivo”; this candidate records the concept boundary and does not pool results from uncited systems or studies.",
+          "boundary": "Electrocorticography spatial resolution does not by itself establish system-level performance, safety, manufacturability, scalability, economic advantage, clinical benefit, or deployment readiness.",
+          "claimKind": "theoretical-model",
+          "evidenceMaturity": "single-study"
+        }
+      ],
+      "source": {
+        "title": "Flexible, foldable, actively multiplexed, high-density electrode array for mapping brain activity in vivo",
+        "identifier": "10.1038/nn.2973",
+        "exactLocator": "Array architecture, conformal placement, multiplexing, in-vivo mapping, and Methods.",
+        "rightsBasis": "citation-with-paraphrase",
+        "quotationUsed": false
+      },
+      "alignment": {
+        "subjectAligned": "supported",
+        "assignmentOrigin": "independently-curated",
+        "sourceContentInspected": true,
+        "inspectionDepth": "abstract-or-metadata-only"
+      },
+      "requiredAxes": [
+        "source-identity-and-fidelity",
+        "claim-to-passage-support",
+        "scope-and-unsupported-inference",
+        "rights-and-locator-adequacy",
+        "release-boundary-and-nonclaims"
+      ],
+      "packetDigest": "sha256:0ac4685b3b9edb82c9711bf939c593ef5d8fe90715e7a46be5f4f5b594f6c9af"
+    },
+    {
+      "packetVersion": "maha-internal-review-packet/1.0",
+      "recordId": "urn:maha:record:neurotechnology-bci-flexible-conformal-electrode-arrays",
+      "revisionSha256": "sha256:93cab9b620eeaae46c89c71eca8acb4e5430ef522a0001c796547d151a80beae",
+      "auditSha256": "sha256:5f3ca7f7d9b198258fe8363ccffdb318ad6f05d433301c454f82a8a8d6ade7d3",
+      "title": "Flexible conformal electrode arrays",
+      "claims": [
+        {
+          "statement": "The cited source supports treating flexible conformal electrode arrays as a distinct method within the stated neurotechnology and bci scope.",
+          "scope": "Limited to Array architecture, conformal placement, multiplexing, in-vivo mapping, and Methods. in “Flexible, foldable, actively multiplexed, high-density electrode array for mapping brain activity in vivo”; this candidate records the concept boundary and does not pool results from uncited systems or studies.",
+          "boundary": "Flexible conformal electrode arrays does not by itself establish system-level performance, safety, manufacturability, scalability, economic advantage, clinical benefit, or deployment readiness.",
+          "claimKind": "theoretical-model",
+          "evidenceMaturity": "single-study"
+        }
+      ],
+      "source": {
+        "title": "Flexible, foldable, actively multiplexed, high-density electrode array for mapping brain activity in vivo",
+        "identifier": "10.1038/nn.2973",
+        "exactLocator": "Array architecture, conformal placement, multiplexing, in-vivo mapping, and Methods.",
+        "rightsBasis": "citation-with-paraphrase",
+        "quotationUsed": false
+      },
+      "alignment": {
+        "subjectAligned": "supported",
+        "assignmentOrigin": "independently-curated",
+        "sourceContentInspected": true,
+        "inspectionDepth": "abstract-or-metadata-only"
+      },
+      "requiredAxes": [
+        "source-identity-and-fidelity",
+        "claim-to-passage-support",
+        "scope-and-unsupported-inference",
+        "rights-and-locator-adequacy",
+        "release-boundary-and-nonclaims"
+      ],
+      "packetDigest": "sha256:64cc90846e351b7b913fec43d4e4772e72e49310be06b8b10212530d9bef6910"
+    },
+    {
+      "packetVersion": "maha-internal-review-packet/1.0",
+      "recordId": "urn:maha:record:neurotechnology-bci-foreign-body-response",
+      "revisionSha256": "sha256:f72bd35f40fb420af2a5b3fadc165aac72d0fc875d3e30ccfb82a597f97409a8",
+      "auditSha256": "sha256:3640043243f2a992bcb96709107b97680284e9edb1c83e85fce463c2505c58ec",
+      "title": "Foreign body response",
+      "claims": [
+        {
+          "statement": "The cited source supports treating foreign body response as a distinct mechanism within the stated neurotechnology and bci scope.",
+          "scope": "Limited to Tissue response, electrode materials, chronic recording stability, and design-factor sections. in “Response of brain tissue to chronically implanted neural electrodes”; this candidate records the concept boundary and does not pool results from uncited systems or studies.",
+          "boundary": "Foreign body response does not by itself establish system-level performance, safety, manufacturability, scalability, economic advantage, clinical benefit, or deployment readiness.",
+          "claimKind": "theoretical-model",
+          "evidenceMaturity": "single-study"
+        }
+      ],
+      "source": {
+        "title": "Response of brain tissue to chronically implanted neural electrodes",
+        "identifier": "10.1016/j.jneumeth.2005.08.015",
+        "exactLocator": "Tissue response, electrode materials, chronic recording stability, and design-factor sections.",
+        "rightsBasis": "citation-with-paraphrase",
+        "quotationUsed": false
+      },
+      "alignment": {
+        "subjectAligned": "supported",
+        "assignmentOrigin": "independently-curated",
+        "sourceContentInspected": true,
+        "inspectionDepth": "abstract-or-metadata-only"
+      },
+      "requiredAxes": [
+        "source-identity-and-fidelity",
+        "claim-to-passage-support",
+        "scope-and-unsupported-inference",
+        "rights-and-locator-adequacy",
+        "release-boundary-and-nonclaims"
+      ],
+      "packetDigest": "sha256:e85c7e97d13735f6e2f69e1bfd16baf6b6ba8331b3bf5942c6cd214ad67e8629"
+    },
+    {
+      "packetVersion": "maha-internal-review-packet/1.0",
+      "recordId": "urn:maha:record:neurotechnology-bci-motor-intention-decoding",
+      "revisionSha256": "sha256:e51b270b795dcc7be694c411f91b06fa4950dcf6ed4ce5d8f4f9d38ce91729af",
+      "auditSha256": "sha256:25bf1f0e38e64990f6fedb97a47622442b6378e549aeb232e4e022bf39f0afb1",
+      "title": "Motor intention decoding",
+      "claims": [
+        {
+          "statement": "The cited source supports treating motor intention decoding as a distinct measurement within the stated neurotechnology and bci scope.",
+          "scope": "Limited to Participant, implant, decoding tasks, performance measures, and Methods. in “Neuronal ensemble control of prosthetic devices by a human with tetraplegia”; this candidate records the concept boundary and does not pool results from uncited systems or studies.",
+          "boundary": "Motor intention decoding does not by itself establish system-level performance, safety, manufacturability, scalability, economic advantage, clinical benefit, or deployment readiness.",
+          "claimKind": "observation",
+          "evidenceMaturity": "single-study"
+        }
+      ],
+      "source": {
+        "title": "Neuronal ensemble control of prosthetic devices by a human with tetraplegia",
+        "identifier": "10.1038/nature04970",
+        "exactLocator": "Participant, implant, decoding tasks, performance measures, and Methods.",
+        "rightsBasis": "citation-with-paraphrase",
+        "quotationUsed": false
+      },
+      "alignment": {
+        "subjectAligned": "supported",
+        "assignmentOrigin": "independently-curated",
+        "sourceContentInspected": true,
+        "inspectionDepth": "section-or-full-text"
+      },
+      "requiredAxes": [
+        "source-identity-and-fidelity",
+        "claim-to-passage-support",
+        "scope-and-unsupported-inference",
+        "rights-and-locator-adequacy",
+        "release-boundary-and-nonclaims"
+      ],
+      "packetDigest": "sha256:e071b50f5ee3dfe68d9d7e19d691683aef358e8bb534e8704b447a2d4316b4ae"
+    },
+    {
+      "packetVersion": "maha-internal-review-packet/1.0",
+      "recordId": "urn:maha:record:neurotechnology-bci-opsin-spectral-sensitivity",
+      "revisionSha256": "sha256:8e5cad4598ae3b249a0c35631a2bb999d71e0f13faaede0acc71a406621464e7",
+      "auditSha256": "sha256:0d62d848b681e09edec87909bc09a85e96fe565119892b8efbd85d044ab5b536",
+      "title": "Opsin spectral sensitivity",
+      "claims": [
+        {
+          "statement": "The cited source supports treating opsin spectral sensitivity as a distinct method within the stated neurotechnology and bci scope.",
+          "scope": "Limited to Channelrhodopsin expression, photocurrent, optical stimulation, spike timing, and Methods. in “Millisecond-timescale, genetically targeted optical control of neural activity”; this candidate records the concept boundary and does not pool results from uncited systems or studies.",
+          "boundary": "Opsin spectral sensitivity does not by itself establish system-level performance, safety, manufacturability, scalability, economic advantage, clinical benefit, or deployment readiness.",
+          "claimKind": "theoretical-model",
+          "evidenceMaturity": "single-study"
+        }
+      ],
+      "source": {
+        "title": "Millisecond-timescale, genetically targeted optical control of neural activity",
+        "identifier": "10.1038/nn1525",
+        "exactLocator": "Channelrhodopsin expression, photocurrent, optical stimulation, spike timing, and Methods.",
+        "rightsBasis": "citation-with-paraphrase",
+        "quotationUsed": false
+      },
+      "alignment": {
+        "subjectAligned": "supported",
+        "assignmentOrigin": "independently-curated",
+        "sourceContentInspected": true,
+        "inspectionDepth": "section-or-full-text"
+      },
+      "requiredAxes": [
+        "source-identity-and-fidelity",
+        "claim-to-passage-support",
+        "scope-and-unsupported-inference",
+        "rights-and-locator-adequacy",
+        "release-boundary-and-nonclaims"
+      ],
+      "packetDigest": "sha256:1a23b732bd523b53a9c85e801ba553d869f6e6e6061be09fdf3a6fe5da619372"
+    },
+    {
+      "packetVersion": "maha-internal-review-packet/1.0",
+      "recordId": "urn:maha:record:neurotechnology-bci-optogenetic-channelrhodopsin",
+      "revisionSha256": "sha256:6e054e00282fe4710e477f5b7c43c5605ebf35fbc855b2f589d1cf6265de7473",
+      "auditSha256": "sha256:4b4e624214d947730f59bff346a495d5b8622f58e7bae3a624f253fb87c0372b",
+      "title": "Optogenetic channelrhodopsin",
+      "claims": [
+        {
+          "statement": "The cited source supports treating optogenetic channelrhodopsin as a distinct concept within the stated neurotechnology and bci scope.",
+          "scope": "Limited to Channelrhodopsin expression, photocurrent, optical stimulation, spike timing, and Methods. in “Millisecond-timescale, genetically targeted optical control of neural activity”; this candidate records the concept boundary and does not pool results from uncited systems or studies.",
+          "boundary": "Optogenetic channelrhodopsin does not by itself establish system-level performance, safety, manufacturability, scalability, economic advantage, clinical benefit, or deployment readiness.",
+          "claimKind": "theoretical-model",
+          "evidenceMaturity": "single-study"
+        }
+      ],
+      "source": {
+        "title": "Millisecond-timescale, genetically targeted optical control of neural activity",
+        "identifier": "10.1038/nn1525",
+        "exactLocator": "Channelrhodopsin expression, photocurrent, optical stimulation, spike timing, and Methods.",
+        "rightsBasis": "citation-with-paraphrase",
+        "quotationUsed": false
+      },
+      "alignment": {
+        "subjectAligned": "supported",
+        "assignmentOrigin": "independently-curated",
+        "sourceContentInspected": true,
+        "inspectionDepth": "section-or-full-text"
+      },
+      "requiredAxes": [
+        "source-identity-and-fidelity",
+        "claim-to-passage-support",
+        "scope-and-unsupported-inference",
+        "rights-and-locator-adequacy",
+        "release-boundary-and-nonclaims"
+      ],
+      "packetDigest": "sha256:3c8e152851730ba09643a21b505f6435db55a75d77ac22cdd554e2d7e7c2d82d"
+    },
+    {
+      "packetVersion": "maha-internal-review-packet/1.0",
+      "recordId": "urn:maha:record:neurotechnology-bci-sensing-to-stimulation-loop",
+      "revisionSha256": "sha256:90fb9f3d6b315601450a5240f84ad94a736577f9f2f80e842f2f71340761c657",
+      "auditSha256": "sha256:352986680eb4d939afff2e1afd1a3144af2f894642d26bd020af92632a279161",
+      "title": "Sensing to stimulation loop",
+      "claims": [
+        {
+          "statement": "The cited source supports treating sensing to stimulation loop as a distinct method within the stated neurotechnology and bci scope.",
+          "scope": "Limited to Closed-loop detection, stimulation timing, MPTP primate model, outcome comparisons, figures, and experimental procedures. in “Closed-loop deep brain stimulation is superior in ameliorating parkinsonism”; this candidate records the concept boundary and does not pool results from uncited systems or studies.",
+          "boundary": "Sensing to stimulation loop does not by itself establish system-level performance, safety, manufacturability, scalability, economic advantage, clinical benefit, or deployment readiness.",
+          "claimKind": "theoretical-model",
+          "evidenceMaturity": "single-study"
+        }
+      ],
+      "source": {
+        "title": "Closed-loop deep brain stimulation is superior in ameliorating parkinsonism",
+        "identifier": "10.1016/j.neuron.2011.08.023",
+        "exactLocator": "Closed-loop detection, stimulation timing, MPTP primate model, outcome comparisons, figures, and experimental procedures.",
+        "rightsBasis": "citation-with-paraphrase",
+        "quotationUsed": false
+      },
+      "alignment": {
+        "subjectAligned": "supported",
+        "assignmentOrigin": "independently-curated",
+        "sourceContentInspected": true,
+        "inspectionDepth": "abstract-or-metadata-only"
+      },
+      "requiredAxes": [
+        "source-identity-and-fidelity",
+        "claim-to-passage-support",
+        "scope-and-unsupported-inference",
+        "rights-and-locator-adequacy",
+        "release-boundary-and-nonclaims"
+      ],
+      "packetDigest": "sha256:95c9829e38ea838fcab03a7f8fbb099e0b138a4dc5e4bf19668b74d28758a106"
+    }
+  ],
+  "boundary": "Immutable reviewer inputs. Contains no secret, customer, participant or unrelated audit content."
+}
