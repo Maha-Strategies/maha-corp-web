@@ -194,6 +194,16 @@
     "releasesIssued": 5,
     "replayedReleases": 0,
     "productionWritesPerformed": 0,
+    "credentialFingerprintMatched": true,
+    "poolerCapabilityPreflight": {
+      "version": "maha-batch-11-credential-provenance/1.0",
+      "parentProjectRefFingerprint": "sha256:4546dbacb6c68aa64cc05ebe69edfb730ef506c10b646314489195cf370dd834",
+      "primaryHostFingerprint": "sha256:2cccae488fd406ee753304c28b27bd30ced390e13d1255f7c6c2f2e1466794ad",
+      "poolMode": "session",
+      "databaseType": "PRIMARY",
+      "status": 200
+    },
+    "mutationStartedAfterPreflight": true,
     "productionAccess": {
       "kind": "public-https-get",
       "url": "https://www.mahastrategies.com/knowledge/epistemic-system/releases/registry.json",

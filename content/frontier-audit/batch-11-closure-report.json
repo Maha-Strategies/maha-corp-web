@@ -1,0 +1,75 @@
+{
+  "schemaVersion": "maha-batch-11-closure-verifier/1.0",
+  "closed": true,
+  "checks": [
+    {
+      "check": "evidence-verification",
+      "passed": true,
+      "refusal": null,
+      "detail": "Commit, phases, releases, cohort identity and Production boundaries all verified."
+    },
+    {
+      "check": "run-identity",
+      "passed": true,
+      "refusal": null,
+      "detail": "Both artifacts describe run 77 at marker batch-11-mixed-lineage-rehearsal-77."
+    },
+    {
+      "check": "credential-fingerprint",
+      "passed": true,
+      "refusal": null,
+      "detail": "The bound credential matched its expected non-secret fingerprint."
+    },
+    {
+      "check": "capability-preflight",
+      "passed": true,
+      "refusal": null,
+      "detail": "The read-only capability preflight succeeded in session mode."
+    },
+    {
+      "check": "mutation-order",
+      "passed": true,
+      "refusal": null,
+      "detail": "Every remote mutation began after the preflight completed."
+    },
+    {
+      "check": "resource-identity",
+      "passed": true,
+      "refusal": null,
+      "detail": "All 4 temporary resources are identified by fingerprints derived from this run."
+    },
+    {
+      "check": "resource-destruction",
+      "passed": true,
+      "refusal": null,
+      "detail": "Every ephemeral branch, deployment, secret binding and release row was independently confirmed absent."
+    },
+    {
+      "check": "cleanup-status",
+      "passed": true,
+      "refusal": null,
+      "detail": "The run reports every temporary resource destroyed, corroborated by the observations above."
+    }
+  ],
+  "refusals": [],
+  "summary": {
+    "reviewedCommit": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+    "workflowRunId": "77",
+    "runMarker": "batch-11-mixed-lineage-rehearsal-77",
+    "credentialFingerprintMatched": true,
+    "capabilityPreflightStatus": 200,
+    "phasesExecuted": 7,
+    "releases": {
+      "total": 5,
+      "superseding": 2,
+      "initial": 3
+    },
+    "productionWrites": 0,
+    "resourcesConfirmedDestroyed": 4,
+    "resourcesRequired": 4
+  },
+  "evidenceVerdict": "verified",
+  "evidenceRefusals": [],
+  "closureDigest": "sha256:9dcaf65269f9c4965f969ba7da9b01579662db629dcc444342db1feb46a9665d",
+  "syntheticFixture": true
+}

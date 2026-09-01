@@ -8,6 +8,7 @@ import {
   teardownHandleDigests,
   type ExactTeardownHandles,
 } from '../lib/batch-11-evidence-binding.ts'
+import { fingerprintCredential } from '../lib/batch-11-credential-provenance.ts'
 import { repositoryContract } from '../lib/batch-11-evidence-verifier.ts'
 import { BATCH_11_LINEAGE_DECLARATIONS } from '../lib/batch-11-mixed-lineage-release.ts'
 import { PHASE_ORDER } from '../lib/batch-11-rehearsal-phases.ts'
@@ -111,6 +112,17 @@ const fixture = {
     releasesIssued: 5,
     replayedReleases: 0,
     productionWritesPerformed: 0,
+    // Credential provenance, as the runner now records it. Fingerprints only.
+    credentialFingerprintMatched: true,
+    poolerCapabilityPreflight: {
+      version: 'maha-batch-11-credential-provenance/1.0',
+      parentProjectRefFingerprint: fingerprintCredential('synthetic-parent-project-ref'),
+      primaryHostFingerprint: fingerprintCredential('synthetic-pooler-host'),
+      poolMode: 'session',
+      databaseType: 'PRIMARY',
+      status: 200,
+    },
+    mutationStartedAfterPreflight: true,
     productionAccess: {
       kind: 'public-https-get',
       url: 'https://www.mahastrategies.com/knowledge/epistemic-system/releases/registry.json',
