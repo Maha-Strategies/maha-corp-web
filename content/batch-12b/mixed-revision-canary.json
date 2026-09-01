@@ -1,0 +1,129 @@
+{
+  "schemaVersion": "maha-mixed-revision-adoption/1.0",
+  "canaryKind": "mixed-revision-adoption",
+  "whyNotSourceOverride": "A source-override canary requires five source replacements and only one proposal replaces its source. The cohort is not relabelled; this is a differently named thing.",
+  "assembledFrom": "Batch 12A surviving proposals. Batch 12B produced no adoptable proposal.",
+  "released": false,
+  "active": false,
+  "canary": [
+    {
+      "recordId": "urn:maha:record:advanced-materials-tmd-heterobilayers",
+      "kind": "source-replacement",
+      "activeRevisionSha256": "sha256:9f197d1bacfc4de75b243cdf3e6b9d952caecaa21f3cc6630ad3358c388f3511",
+      "proposedRevisionSha256": "sha256:6500fbabea1d27899254fcc088e0668dbb0ec7a172cc5d20bea057b5c9a8a4eb",
+      "proposedAuditSha256": "sha256:83782d8357ea3a1602709de288600f66f2de53cdde1fc06f9c97954df44ef47b",
+      "reviewBundleRevisionSha256": "sha256:6500fbabea1d27899254fcc088e0668dbb0ec7a172cc5d20bea057b5c9a8a4eb",
+      "decidedAxes": [
+        "source-identity-and-fidelity",
+        "claim-to-passage-support",
+        "scope-and-unsupported-inference",
+        "rights-and-locator-adequacy",
+        "release-boundary-and-nonclaims"
+      ],
+      "hasActivePredecessorRelease": false
+    },
+    {
+      "recordId": "urn:maha:record:agentic-systems-mcp-context-window-token-degradation",
+      "kind": "locator-correction",
+      "activeRevisionSha256": "sha256:e63068eb9d9e3bdfd529add5738b921e1e03f7229a3097d48d42be8ece92bec3",
+      "proposedRevisionSha256": "sha256:0ae55f047be56b86164c9403b0348668437747194e06236f3d54ecbc162f8c38",
+      "proposedAuditSha256": "sha256:df12092897d00c77d8e3b728f4b16cc0778d023be16ab8c3d433ef0218b13909",
+      "reviewBundleRevisionSha256": "sha256:0ae55f047be56b86164c9403b0348668437747194e06236f3d54ecbc162f8c38",
+      "decidedAxes": [
+        "source-identity-and-fidelity",
+        "claim-to-passage-support",
+        "scope-and-unsupported-inference",
+        "rights-and-locator-adequacy",
+        "release-boundary-and-nonclaims"
+      ],
+      "hasActivePredecessorRelease": false
+    },
+    {
+      "recordId": "urn:maha:record:agentic-systems-mcp-retrieval-context-selection",
+      "kind": "claim-scope-narrowing",
+      "activeRevisionSha256": "sha256:81c3abda25a3b536d66bc38ecba273f8727af5ae1eea24f0c5b6ec754aa2d603",
+      "proposedRevisionSha256": "sha256:cf8d697f55630b31c544a52570597549897840ae11b22398ee4cfa1eb92aa1e0",
+      "proposedAuditSha256": "sha256:5061993c51357a47f6301ad5f940caa3a09dd1605c372d6eb3b40ab360202408",
+      "reviewBundleRevisionSha256": "sha256:cf8d697f55630b31c544a52570597549897840ae11b22398ee4cfa1eb92aa1e0",
+      "decidedAxes": [
+        "source-identity-and-fidelity",
+        "claim-to-passage-support",
+        "scope-and-unsupported-inference",
+        "rights-and-locator-adequacy",
+        "release-boundary-and-nonclaims"
+      ],
+      "hasActivePredecessorRelease": false
+    },
+    {
+      "recordId": "urn:maha:record:biomolecular-engineering-mutation-library-generation",
+      "kind": "locator-correction",
+      "activeRevisionSha256": "sha256:a2c5c165f6dfe18b2b27a04fd5fde9cf5a831e666abea654c1234ea5155f1a91",
+      "proposedRevisionSha256": "sha256:a347822f5385a795eee04ddae0abb3b68ef35a514c6a8d65e0cf3082ffe88ed6",
+      "proposedAuditSha256": "sha256:bdf9f55b9f263b78218d99d9d3841500b61ee08349d870e30ee726da9204b6b1",
+      "reviewBundleRevisionSha256": "sha256:a347822f5385a795eee04ddae0abb3b68ef35a514c6a8d65e0cf3082ffe88ed6",
+      "decidedAxes": [
+        "source-identity-and-fidelity",
+        "claim-to-passage-support",
+        "scope-and-unsupported-inference",
+        "rights-and-locator-adequacy",
+        "release-boundary-and-nonclaims"
+      ],
+      "hasActivePredecessorRelease": false
+    },
+    {
+      "recordId": "urn:maha:record:biomolecular-engineering-protein-design-success",
+      "kind": "locator-correction",
+      "activeRevisionSha256": "sha256:74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "proposedRevisionSha256": "sha256:ea850b60f60755f6faf53c514fcc4bcd8eeb0d4b5cbde84cef5a7d1af32e87d2",
+      "proposedAuditSha256": "sha256:0a39aa5aff980c6b46f18374229e4518eafc4b4e7b7ff9f77adf62b55995ff8c",
+      "reviewBundleRevisionSha256": "sha256:ea850b60f60755f6faf53c514fcc4bcd8eeb0d4b5cbde84cef5a7d1af32e87d2",
+      "decidedAxes": [
+        "source-identity-and-fidelity",
+        "claim-to-passage-support",
+        "scope-and-unsupported-inference",
+        "rights-and-locator-adequacy",
+        "release-boundary-and-nonclaims"
+      ],
+      "hasActivePredecessorRelease": false
+    }
+  ],
+  "excluded": [
+    {
+      "recordId": "urn:maha:record:biomolecular-engineering-fitness-landscape-analysis",
+      "reason": "inspected but the passage does not establish the record subject"
+    },
+    {
+      "recordId": "urn:maha:record:biomolecular-engineering-cell-free-reaction-environment",
+      "reason": "inaccessible after documented lawful attempts"
+    },
+    {
+      "recordId": "urn:maha:record:biomolecular-engineering-metabolic-pathway-prototyping",
+      "reason": "inaccessible after documented lawful attempts"
+    },
+    {
+      "recordId": "urn:maha:record:biomolecular-engineering-rna-strand-displacement",
+      "reason": "inaccessible after documented lawful attempts"
+    },
+    {
+      "recordId": "urn:maha:record:longevity-metabolism-intervention-biomarker-selection",
+      "reason": "inaccessible after documented lawful attempts"
+    },
+    {
+      "recordId": "urn:maha:record:longevity-metabolism-mitophagy-flux",
+      "reason": "inaccessible after documented lawful attempts"
+    },
+    {
+      "recordId": "urn:maha:record:neurotechnology-bci-closed-loop-neural-decoding",
+      "reason": "inaccessible after documented lawful attempts"
+    },
+    {
+      "recordId": "urn:maha:record:neurotechnology-bci-bci-calibration-drift",
+      "reason": "inaccessible after documented lawful attempts"
+    },
+    {
+      "recordId": "urn:maha:record:neurotechnology-bci-clinical-translation-boundaries",
+      "reason": "inaccessible after documented lawful attempts"
+    }
+  ],
+  "boundary": "A prepared cohort proven only against a disposable local database. Nothing was released, activated or deployed."
+}

@@ -10,6 +10,8 @@ import { buildCapacityModel, PAGE_TARGET, type RecordState } from '../lib/scalin
 import projection from '../content/review/exact-revision-projection.json' with { type: 'json' }
 import batch12aInvestigations from '../content/batch-12a/source-investigations.json' with { type: 'json' }
 import batch12aProposals from '../content/batch-12a/proposed-revisions.json' with { type: 'json' }
+import batch12bPackets from '../content/batch-12b/remediation-packets.json' with { type: 'json' }
+import batch12bProposals from '../content/batch-12b/proposed-revisions.json' with { type: 'json' }
 import { canonicalJson } from '../lib/evidence-dossier/digest.ts'
 import observation from '../content/scaling/public-surface-observation.json' with { type: 'json' }
 
@@ -122,7 +124,24 @@ const batch12a = {
   canaryWithheldReason: batch12aProposals.canaryWithheldReason,
   note: 'Proposed revisions are private, inactive and pending governed adoption. They are not active records and not pages. Active alignment-clear and active public routes are unchanged by this sprint.',
 }
-const withBatch12a = { ...model, batch12a }
+// Batch 12B, counted in its own queue. Its survivors are narrowed claims, not
+// new records, and a narrowed claim adds no route.
+const b12bPackets = batch12bPackets.packets as { contentInspected: boolean; inspectionDepth: string; subjectVerdict: string }[]
+const batch12b = {
+  selected: b12bPackets.length,
+  contentInspected: b12bPackets.filter((packet) => packet.contentInspected).length,
+  sectionDepth: b12bPackets.filter((packet) => packet.inspectionDepth === 'section-or-full-text').length,
+  abstractDepth: b12bPackets.filter((packet) => packet.inspectionDepth === 'abstract-or-metadata-only').length,
+  inaccessible: b12bPackets.filter((packet) => !packet.contentInspected).length,
+  subjectMismatchRejected: b12bPackets.filter((packet) => packet.subjectVerdict === 'subject-mismatch').length,
+  narrowedProposals: batch12bProposals.proposedCount as number,
+  newlyReleaseReadyProposed: 0,
+  activePublicRoutes: model.crawlable,
+  hypotheticalAfterBatch12bSurvivors: model.crawlable + (classifications['release-ready'] ?? 0)
+    + (batch12aProposals.proposedCount as number) + (batch12bProposals.proposedCount as number),
+  note: 'A narrowed claim rebinds an existing record and adds no route. Proposed revisions are private, inactive and pending governed adoption.',
+}
+const withBatch12a = { ...model, batch12a, batch12b }
 writeFileSync('content/scaling/capacity-model.json', `${JSON.stringify({ ...withBatch12a, capacityDigest: digest(withBatch12a) }, null, 2)}\n`)
 
 /* ------------------------------------------------------------ the report -- */

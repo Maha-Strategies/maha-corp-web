@@ -1,0 +1,165 @@
+{
+  "schemaVersion": "maha-batch-12b-cohort/1.0",
+  "frozenAt": "2026-09-01",
+  "frozenBeforeResearch": true,
+  "selectionBasis": "Highest unlock score among the Batch 12 backlog, restricted to sources with a plausible lawful full-text route (arXiv, government host, or open web). Batch 12A records and its eight inaccessible controls are excluded, as are records whose only value would be a thin standalone bridge page.",
+  "excluded": {
+    "batch12aRecords": 15,
+    "reason": "already investigated or documented inaccessible"
+  },
+  "cohortSize": 15,
+  "distinctSources": 7,
+  "records": [
+    {
+      "recordId": "urn:maha:record:advanced-materials-contact-resistance-in-2d-devices",
+      "domainSlug": "advanced-materials",
+      "unlockScore": 39,
+      "activeSource": {
+        "title": "Van der Waals heterostructures",
+        "identifier": "10.1038/nature12385",
+        "exactLocator": "Assembly, interfaces, device examples, and outlook sections."
+      }
+    },
+    {
+      "recordId": "urn:maha:record:advanced-materials-cvd-graphene-grain-boundaries",
+      "domainSlug": "advanced-materials",
+      "unlockScore": 35,
+      "activeSource": {
+        "title": "Van der Waals heterostructures",
+        "identifier": "10.1038/nature12385",
+        "exactLocator": "Assembly, interfaces, device examples, and outlook sections."
+      }
+    },
+    {
+      "recordId": "urn:maha:record:advanced-materials-dielectric-screening",
+      "domainSlug": "advanced-materials",
+      "unlockScore": 35,
+      "activeSource": {
+        "title": "Van der Waals heterostructures",
+        "identifier": "10.1038/nature12385",
+        "exactLocator": "Assembly, interfaces, device examples, and outlook sections."
+      }
+    },
+    {
+      "recordId": "urn:maha:record:advanced-materials-direct-gap-mos2",
+      "domainSlug": "advanced-materials",
+      "unlockScore": 35,
+      "activeSource": {
+        "title": "Unconventional superconductivity in magic-angle graphene superlattices",
+        "identifier": "10.1038/nature26160",
+        "exactLocator": "Abstract, device description, phase diagram, transport measurements, and Methods."
+      }
+    },
+    {
+      "recordId": "urn:maha:record:advanced-materials-dry-transfer-contamination",
+      "domainSlug": "advanced-materials",
+      "unlockScore": 35,
+      "activeSource": {
+        "title": "Colloquium: Topological insulators",
+        "identifier": "10.1103/RevModPhys.82.3045",
+        "exactLocator": "Sections II–V on topology, surface states, spin texture, and material realizations."
+      }
+    },
+    {
+      "recordId": "urn:maha:record:advanced-materials-encapsulation-boundaries",
+      "domainSlug": "advanced-materials",
+      "unlockScore": 35,
+      "activeSource": {
+        "title": "Colloquium: Topological insulators",
+        "identifier": "10.1103/RevModPhys.82.3045",
+        "exactLocator": "Sections II–V on topology, surface states, spin texture, and material realizations."
+      }
+    },
+    {
+      "recordId": "urn:maha:record:advanced-materials-interface-bubbles-and-strain",
+      "domainSlug": "advanced-materials",
+      "unlockScore": 35,
+      "activeSource": {
+        "title": "Colloquium: Topological insulators",
+        "identifier": "10.1103/RevModPhys.82.3045",
+        "exactLocator": "Sections II–V on topology, surface states, spin texture, and material realizations."
+      }
+    },
+    {
+      "recordId": "urn:maha:record:advanced-materials-materials-metrology-transfer",
+      "domainSlug": "advanced-materials",
+      "unlockScore": 35,
+      "activeSource": {
+        "title": "Van der Waals heterostructures",
+        "identifier": "10.1038/nature12385",
+        "exactLocator": "Assembly, interfaces, device examples, and outlook sections."
+      }
+    },
+    {
+      "recordId": "urn:maha:record:advanced-materials-tmd-monolayers",
+      "domainSlug": "advanced-materials",
+      "unlockScore": 35,
+      "activeSource": {
+        "title": "Unconventional superconductivity in magic-angle graphene superlattices",
+        "identifier": "10.1038/nature26160",
+        "exactLocator": "Abstract, device description, phase diagram, transport measurements, and Methods."
+      }
+    },
+    {
+      "recordId": "urn:maha:record:advanced-materials-two-dimensional-magnetism",
+      "domainSlug": "advanced-materials",
+      "unlockScore": 39,
+      "activeSource": {
+        "title": "Colloquium: Topological insulators",
+        "identifier": "10.1103/RevModPhys.82.3045",
+        "exactLocator": "Sections II–V on topology, surface states, spin texture, and material realizations."
+      }
+    },
+    {
+      "recordId": "urn:maha:record:agentic-systems-mcp-least-authority-tokens",
+      "domainSlug": "agentic-systems-mcp",
+      "unlockScore": 39,
+      "activeSource": {
+        "title": "Artificial Intelligence Risk Management Framework: Generative Artificial Intelligence Profile",
+        "identifier": "10.6028/NIST.AI.600-1",
+        "exactLocator": "NIST AI 600-1: Generative AI risks and suggested actions across Govern, Map, Measure, and Manage; appendices A and B."
+      }
+    },
+    {
+      "recordId": "urn:maha:record:critical-supply-chains-dysprosium-ore-to-oxide",
+      "domainSlug": "critical-supply-chains",
+      "unlockScore": 39,
+      "activeSource": {
+        "title": "Mineral Commodity Summaries 2026",
+        "identifier": "https://pubs.usgs.gov/periodicals/mcs2026/mcs2026.pdf",
+        "exactLocator": "Rare earths commodity chapter: mine production, compounds and metals, trade, recycling, substitutes, and world resources."
+      }
+    },
+    {
+      "recordId": "urn:maha:record:critical-supply-chains-helium-liquefaction-logistics",
+      "domainSlug": "critical-supply-chains",
+      "unlockScore": 39,
+      "activeSource": {
+        "title": "Mineral Commodity Summaries 2026",
+        "identifier": "https://pubs.usgs.gov/periodicals/mcs2026/mcs2026.pdf",
+        "exactLocator": "Helium, hafnium, tantalum, niobium, and antimony commodity chapters."
+      }
+    },
+    {
+      "recordId": "urn:maha:record:mechanistic-interpretability-activation-patching",
+      "domainSlug": "mechanistic-interpretability",
+      "unlockScore": 39,
+      "activeSource": {
+        "title": "Causal Scrubbing: a method for rigorously testing interpretability hypotheses",
+        "identifier": "https://www.alignmentforum.org/posts/JvZhhzycHu2Yd57RN/causal-scrubbing-a-method-for-rigorously-testing",
+        "exactLocator": "Method definition, correspondence, resampling interventions, examples, and limitations."
+      }
+    },
+    {
+      "recordId": "urn:maha:record:mechanistic-interpretability-dead-features",
+      "domainSlug": "mechanistic-interpretability",
+      "unlockScore": 39,
+      "activeSource": {
+        "title": "Feature Visualization",
+        "identifier": "10.23915/distill.00007",
+        "exactLocator": "Optimization objectives, regularization, visualization techniques, and interpretation cautions."
+      }
+    }
+  ],
+  "boundary": "A frozen selection. No source in it has been inspected at the time of freezing."
+}
