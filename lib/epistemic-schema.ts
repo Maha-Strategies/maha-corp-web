@@ -142,7 +142,7 @@ export interface ReviewEvent {
   reviewerId: string
   reviewerProfileVersion?: number
   reviewerRole: string
-  reviewerKind?: 'external-expert' | 'internal-editorial' | 'automated-verifier'
+  reviewerKind?: 'external-expert' | 'internal-editorial' | 'automated-internal-editorial' | 'automated-verifier'
   reviewMethod?: string
   scope?: ExpertReviewScope
   targetSha256?: string

@@ -1,0 +1,762 @@
+{
+  "schemaVersion": "maha-exact-revision-review/1.0",
+  "reviewDate": "2026-09-01",
+  "cohortSize": 38,
+  "states": {
+    "approved-for-exact-revision": 30,
+    "rejected": 1,
+    "revise-requested": 7
+  },
+  "classifications": {
+    "rejected": 1,
+    "release-ready": 30,
+    "revise-and-rereview": 7
+  },
+  "inspectionDepth": {
+    "abstract-or-metadata-only": 8,
+    "section-or-full-text": 30
+  },
+  "releaseReady": 30,
+  "projections": [
+    {
+      "recordId": "urn:maha:record:advanced-materials-diamond-thermal-conductivity",
+      "domainSlug": "advanced-materials",
+      "revisionSha256": "sha256:be0298d6e8079e377b39f4c984a41d1beef17752c7053e35326ca1e79130015f",
+      "auditSha256": "sha256:6c286fbb16dfe6c77d6f5b8e5d353632babe4a59ec6ab1b04fb6f8aab2b1dffc",
+      "state": "rejected",
+      "classification": "rejected",
+      "releaseAuthorized": false,
+      "inspectionDepth": "abstract-or-metadata-only",
+      "decidedAxes": [
+        "claim-to-passage-support",
+        "release-boundary-and-nonclaims",
+        "rights-and-locator-adequacy",
+        "scope-and-unsupported-inference",
+        "source-identity-and-fidelity"
+      ],
+      "missingAxes": [],
+      "projectionDigest": "sha256:1211c2f5dc45c0af160a518ece670f99cded6277ffcc3b046f0a3bddfe01945b"
+    },
+    {
+      "recordId": "urn:maha:record:agentic-systems-mcp-mcp-session-lifecycle",
+      "domainSlug": "agentic-systems-mcp",
+      "revisionSha256": "sha256:110f2b0ddb37abd4acd9e4463e60c3bbd565d2dac8eefaa57cee2738d52ad80d",
+      "auditSha256": "sha256:7e50cd02c098692f4f74cf7097c2abb6c5335c70f647698e2da4a077c03ca867",
+      "state": "approved-for-exact-revision",
+      "classification": "release-ready",
+      "releaseAuthorized": true,
+      "inspectionDepth": "section-or-full-text",
+      "decidedAxes": [
+        "claim-to-passage-support",
+        "release-boundary-and-nonclaims",
+        "rights-and-locator-adequacy",
+        "scope-and-unsupported-inference",
+        "source-identity-and-fidelity"
+      ],
+      "missingAxes": [],
+      "projectionDigest": "sha256:009de50e45d893a377a74d1fe1e19c5ddeebc8543e8143f5196a6c9756b0f11d"
+    },
+    {
+      "recordId": "urn:maha:record:biomolecular-engineering-crude-extract-cell-free-systems",
+      "domainSlug": "biomolecular-engineering",
+      "revisionSha256": "sha256:2c80ac068e79e4cbf4a41e142fc0696c842b4a20e32c3a347b82a53278e3899a",
+      "auditSha256": "sha256:14172c1565fc57857746a14aa7440811972b4d81f1f32c18cff2b5f96878fc3d",
+      "state": "approved-for-exact-revision",
+      "classification": "release-ready",
+      "releaseAuthorized": true,
+      "inspectionDepth": "section-or-full-text",
+      "decidedAxes": [
+        "claim-to-passage-support",
+        "release-boundary-and-nonclaims",
+        "rights-and-locator-adequacy",
+        "scope-and-unsupported-inference",
+        "source-identity-and-fidelity"
+      ],
+      "missingAxes": [],
+      "projectionDigest": "sha256:810cedb716a93d89270f8865b8b97b0ee803e5c5791af43a1f19b96673cb7750"
+    },
+    {
+      "recordId": "urn:maha:record:biomolecular-engineering-phage-assisted-continuous-evolution",
+      "domainSlug": "biomolecular-engineering",
+      "revisionSha256": "sha256:8dc697f5defa0cfa0911ac052bda5679be3b17707f0897f9cddef4ab626d52d4",
+      "auditSha256": "sha256:93057a1f7d34987a99d10e79f14e4cef174175d2ffab27e6e2871744aab40386",
+      "state": "approved-for-exact-revision",
+      "classification": "release-ready",
+      "releaseAuthorized": true,
+      "inspectionDepth": "section-or-full-text",
+      "decidedAxes": [
+        "claim-to-passage-support",
+        "release-boundary-and-nonclaims",
+        "rights-and-locator-adequacy",
+        "scope-and-unsupported-inference",
+        "source-identity-and-fidelity"
+      ],
+      "missingAxes": [],
+      "projectionDigest": "sha256:cc51de5f1d5d6d9d3be8ea58880ed03651e6f76f1b24f49877c402ec2b3209dc"
+    },
+    {
+      "recordId": "urn:maha:record:biomolecular-engineering-purified-component-expression-systems",
+      "domainSlug": "biomolecular-engineering",
+      "revisionSha256": "sha256:90c9d503233cc00066f3a97a8777b590b496637f4c4d217539e085dbe1c20a22",
+      "auditSha256": "sha256:c74a210521f2ae390111e8d432c1a7d2b6c30bf90a28d730c90fbb5c9945616f",
+      "state": "approved-for-exact-revision",
+      "classification": "release-ready",
+      "releaseAuthorized": true,
+      "inspectionDepth": "section-or-full-text",
+      "decidedAxes": [
+        "claim-to-passage-support",
+        "release-boundary-and-nonclaims",
+        "rights-and-locator-adequacy",
+        "scope-and-unsupported-inference",
+        "source-identity-and-fidelity"
+      ],
+      "missingAxes": [],
+      "projectionDigest": "sha256:e728603452a8bbded6639ce961c9355beb27734ced6d8a82e2f9c32c664ee977"
+    },
+    {
+      "recordId": "urn:maha:record:biomolecular-engineering-selection-pressure-coupling",
+      "domainSlug": "biomolecular-engineering",
+      "revisionSha256": "sha256:c23dcc18daaf071309c5f4116b7f6132c4477875558c29321a92f5d98d815d6f",
+      "auditSha256": "sha256:1620dd55d1f0a5f7637e66c00e2292c90014121dc543323045f150f7b0f0ac2a",
+      "state": "approved-for-exact-revision",
+      "classification": "release-ready",
+      "releaseAuthorized": true,
+      "inspectionDepth": "section-or-full-text",
+      "decidedAxes": [
+        "claim-to-passage-support",
+        "release-boundary-and-nonclaims",
+        "rights-and-locator-adequacy",
+        "scope-and-unsupported-inference",
+        "source-identity-and-fidelity"
+      ],
+      "missingAxes": [],
+      "projectionDigest": "sha256:72f40726973fa03ab83f3b6369c609f0d572740b8cff33995a55f710efab80d6"
+    },
+    {
+      "recordId": "urn:maha:record:biomolecular-engineering-translational-control-circuits",
+      "domainSlug": "biomolecular-engineering",
+      "revisionSha256": "sha256:1f877ffe9cc1fe0a02ae70fee8bcdbb697add8846b90a1c42671c25f6c7a88bb",
+      "auditSha256": "sha256:a58c7bc32e2838b67e3b037836dc93af1e5549e9352e6589151fd815fab2f136",
+      "state": "revise-requested",
+      "classification": "revise-and-rereview",
+      "releaseAuthorized": false,
+      "inspectionDepth": "abstract-or-metadata-only",
+      "decidedAxes": [
+        "claim-to-passage-support",
+        "release-boundary-and-nonclaims",
+        "rights-and-locator-adequacy",
+        "scope-and-unsupported-inference",
+        "source-identity-and-fidelity"
+      ],
+      "missingAxes": [],
+      "projectionDigest": "sha256:c27f9fd61d0e72651e91dea5cf64e8e74fb949741c6ac4fafe9d2a22b4a6feaf"
+    },
+    {
+      "recordId": "urn:maha:record:critical-supply-chains-gallium-bauxite-byproduct-flow",
+      "domainSlug": "critical-supply-chains",
+      "revisionSha256": "sha256:da4a974ebd5dc80c676257fa7bab66f3c1edc70b597012af5bbfae40e2b700ec",
+      "auditSha256": "sha256:12ce437866146bcfe9f6c5286a250df97cd7314080ae1a5ccfd03f0182656512",
+      "state": "approved-for-exact-revision",
+      "classification": "release-ready",
+      "releaseAuthorized": true,
+      "inspectionDepth": "section-or-full-text",
+      "decidedAxes": [
+        "claim-to-passage-support",
+        "release-boundary-and-nonclaims",
+        "rights-and-locator-adequacy",
+        "scope-and-unsupported-inference",
+        "source-identity-and-fidelity"
+      ],
+      "missingAxes": [],
+      "projectionDigest": "sha256:6b74707e11248e5bff2b22050b8559b2f3e5e032b69e8214e770b2d278fac272"
+    },
+    {
+      "recordId": "urn:maha:record:critical-supply-chains-gallium-zinc-processing-byproduct",
+      "domainSlug": "critical-supply-chains",
+      "revisionSha256": "sha256:27db54bd1e8c7807c9889751b345eff394d0f51933200b24fb5f5900946748f9",
+      "auditSha256": "sha256:1460cd66a84f4eb33bf71e99b2ae323a3595550a9fc5700718f7ab8b5427c252",
+      "state": "approved-for-exact-revision",
+      "classification": "release-ready",
+      "releaseAuthorized": true,
+      "inspectionDepth": "section-or-full-text",
+      "decidedAxes": [
+        "claim-to-passage-support",
+        "release-boundary-and-nonclaims",
+        "rights-and-locator-adequacy",
+        "scope-and-unsupported-inference",
+        "source-identity-and-fidelity"
+      ],
+      "missingAxes": [],
+      "projectionDigest": "sha256:e3c166624308a884a6a805a0c1e5add89aca5c1e0becc243d7ed2d703698ec80"
+    },
+    {
+      "recordId": "urn:maha:record:critical-supply-chains-germanium-zinc-refining-flow",
+      "domainSlug": "critical-supply-chains",
+      "revisionSha256": "sha256:5f055a0c6b5222726955abe36900a0474ed1198e922e0f2b84e46779f8421e60",
+      "auditSha256": "sha256:29059f633f791bf46e6b8efe26a7aa8fbd98197c0a4fb46719e2b851155039e5",
+      "state": "approved-for-exact-revision",
+      "classification": "release-ready",
+      "releaseAuthorized": true,
+      "inspectionDepth": "section-or-full-text",
+      "decidedAxes": [
+        "claim-to-passage-support",
+        "release-boundary-and-nonclaims",
+        "rights-and-locator-adequacy",
+        "scope-and-unsupported-inference",
+        "source-identity-and-fidelity"
+      ],
+      "missingAxes": [],
+      "projectionDigest": "sha256:c4a020e3e00f7b1c0e554841cd38eb1c935df553f5a217bfbbe109d69078893c"
+    },
+    {
+      "recordId": "urn:maha:record:critical-supply-chains-niobium-ferroniobium-production",
+      "domainSlug": "critical-supply-chains",
+      "revisionSha256": "sha256:138719dda5fa18e05558a26025cd189b8bf566e0e7f41817610d20e911643f55",
+      "auditSha256": "sha256:857d29d54f04b8d519da876d189dd37733ecaa76e9547cdc8e7d850cd4466d14",
+      "state": "approved-for-exact-revision",
+      "classification": "release-ready",
+      "releaseAuthorized": true,
+      "inspectionDepth": "section-or-full-text",
+      "decidedAxes": [
+        "claim-to-passage-support",
+        "release-boundary-and-nonclaims",
+        "rights-and-locator-adequacy",
+        "scope-and-unsupported-inference",
+        "source-identity-and-fidelity"
+      ],
+      "missingAxes": [],
+      "projectionDigest": "sha256:fe4f880713b83198b0f4181dfdde89013f3627ac636c6ab3401d9a06a42d5623"
+    },
+    {
+      "recordId": "urn:maha:record:fusion-plasma-systems-laser-target-coupling",
+      "domainSlug": "fusion-plasma-systems",
+      "revisionSha256": "sha256:3ee25d0b479f803fcc6a42046edb6346b1404e6290f9f34a908939fc6ae3afbe",
+      "auditSha256": "sha256:1c31c6cf97609b7208bd21f9418334c36ef34ad66e18a87504b623e6b109e5bd",
+      "state": "approved-for-exact-revision",
+      "classification": "release-ready",
+      "releaseAuthorized": true,
+      "inspectionDepth": "section-or-full-text",
+      "decidedAxes": [
+        "claim-to-passage-support",
+        "release-boundary-and-nonclaims",
+        "rights-and-locator-adequacy",
+        "scope-and-unsupported-inference",
+        "source-identity-and-fidelity"
+      ],
+      "missingAxes": [],
+      "projectionDigest": "sha256:24480e3d9c4e32e3557f2fccf866ccf2f702d8c602ceb62969810c55aa128c63"
+    },
+    {
+      "recordId": "urn:maha:record:fusion-plasma-systems-shattered-pellet-injection",
+      "domainSlug": "fusion-plasma-systems",
+      "revisionSha256": "sha256:62c581108e5a7ec96f2573a3a29c0e30ec0eba991ff6ea9146c9a4363116f0c1",
+      "auditSha256": "sha256:20b612ecb5c0a6802ea9131aa0e96d0a1aa9e615642ee5caf228d6b252754c4e",
+      "state": "approved-for-exact-revision",
+      "classification": "release-ready",
+      "releaseAuthorized": true,
+      "inspectionDepth": "section-or-full-text",
+      "decidedAxes": [
+        "claim-to-passage-support",
+        "release-boundary-and-nonclaims",
+        "rights-and-locator-adequacy",
+        "scope-and-unsupported-inference",
+        "source-identity-and-fidelity"
+      ],
+      "missingAxes": [],
+      "projectionDigest": "sha256:a7182a43bd0017e26c37b2836bbf85ec7a9f08375db82d79ba389b3fd7a3d7c2"
+    },
+    {
+      "recordId": "urn:maha:record:fusion-plasma-systems-stellarator-field-optimization",
+      "domainSlug": "fusion-plasma-systems",
+      "revisionSha256": "sha256:69b7bb3c02cbfed16a5de05a097be55d222f74adacede5cdfb7a65cd8fb3f83a",
+      "auditSha256": "sha256:4ccbab39fcfd0bbec53a5f04f969d95d1dee3d59647ffab297c1debba6f3638e",
+      "state": "approved-for-exact-revision",
+      "classification": "release-ready",
+      "releaseAuthorized": true,
+      "inspectionDepth": "section-or-full-text",
+      "decidedAxes": [
+        "claim-to-passage-support",
+        "release-boundary-and-nonclaims",
+        "rights-and-locator-adequacy",
+        "scope-and-unsupported-inference",
+        "source-identity-and-fidelity"
+      ],
+      "missingAxes": [],
+      "projectionDigest": "sha256:c18632969b75f428031e331ec3b10ae0b93f6f132cda70b3a4d8a5e9b366d088"
+    },
+    {
+      "recordId": "urn:maha:record:fusion-plasma-systems-stellarator-magnetic-coils",
+      "domainSlug": "fusion-plasma-systems",
+      "revisionSha256": "sha256:8ac96963ede9957044e42ffbe2faf4627c3d2e2e4abbc199f1c61f46bf3539d9",
+      "auditSha256": "sha256:8ee0af2f814d8a8383d413959a51fa9947f63f106c359fa9c8afbdad5f03fdc0",
+      "state": "approved-for-exact-revision",
+      "classification": "release-ready",
+      "releaseAuthorized": true,
+      "inspectionDepth": "section-or-full-text",
+      "decidedAxes": [
+        "claim-to-passage-support",
+        "release-boundary-and-nonclaims",
+        "rights-and-locator-adequacy",
+        "scope-and-unsupported-inference",
+        "source-identity-and-fidelity"
+      ],
+      "missingAxes": [],
+      "projectionDigest": "sha256:39ee257f832078c306b59949a7a4226a25ada36e3a2163c1396ecfc53b437d48"
+    },
+    {
+      "recordId": "urn:maha:record:longevity-metabolism-apoptosis-in-senescent-cells",
+      "domainSlug": "longevity-metabolism",
+      "revisionSha256": "sha256:b8f9ca4f249f6628e1f2812f62cdbe132683e4d0d1355e09844d0d76c8d5ed88",
+      "auditSha256": "sha256:9afc5ee4fed0b72f33bb7967879a9e8fb9a563e330b43ce5c51cb542dbdc977c",
+      "state": "approved-for-exact-revision",
+      "classification": "release-ready",
+      "releaseAuthorized": true,
+      "inspectionDepth": "section-or-full-text",
+      "decidedAxes": [
+        "claim-to-passage-support",
+        "release-boundary-and-nonclaims",
+        "rights-and-locator-adequacy",
+        "scope-and-unsupported-inference",
+        "source-identity-and-fidelity"
+      ],
+      "missingAxes": [],
+      "projectionDigest": "sha256:e3ac6a5e52c6bf50c120ecfbd181a9f4a935eaf78ac4f8430d15dba37ae279f5"
+    },
+    {
+      "recordId": "urn:maha:record:longevity-metabolism-atp-linked-respiration",
+      "domainSlug": "longevity-metabolism",
+      "revisionSha256": "sha256:58b6a11d7507f1b2dd28f920f82bd5fc045e5885b8c10bd9bdceb407d7aa51d2",
+      "auditSha256": "sha256:0b4435983b1271b75d71b2ed50f0f9018181090cc2852eb408fbda86844e0d8b",
+      "state": "approved-for-exact-revision",
+      "classification": "release-ready",
+      "releaseAuthorized": true,
+      "inspectionDepth": "section-or-full-text",
+      "decidedAxes": [
+        "claim-to-passage-support",
+        "release-boundary-and-nonclaims",
+        "rights-and-locator-adequacy",
+        "scope-and-unsupported-inference",
+        "source-identity-and-fidelity"
+      ],
+      "missingAxes": [],
+      "projectionDigest": "sha256:58b38193986d84a3d0eb3327d26218481a729ef496be8b963142651d59fd1af4"
+    },
+    {
+      "recordId": "urn:maha:record:longevity-metabolism-cellular-senescence-markers",
+      "domainSlug": "longevity-metabolism",
+      "revisionSha256": "sha256:32f84190547d8cff7fab09573847957046e817bea41f479c57eaf48d9d5fcd37",
+      "auditSha256": "sha256:d1cad7aaa4a7aefe1104ae56ed3e12c71dc2e33da70408be62c8dfde74ef5acc",
+      "state": "approved-for-exact-revision",
+      "classification": "release-ready",
+      "releaseAuthorized": true,
+      "inspectionDepth": "section-or-full-text",
+      "decidedAxes": [
+        "claim-to-passage-support",
+        "release-boundary-and-nonclaims",
+        "rights-and-locator-adequacy",
+        "scope-and-unsupported-inference",
+        "source-identity-and-fidelity"
+      ],
+      "missingAxes": [],
+      "projectionDigest": "sha256:b43801dbb2b64ff51aa047b7d3e907a6092319d0adf95bb23cbecca137525701"
+    },
+    {
+      "recordId": "urn:maha:record:longevity-metabolism-lifespan-versus-healthspan-endpoints",
+      "domainSlug": "longevity-metabolism",
+      "revisionSha256": "sha256:d3f02e6c6340da552ce47205b2902e8df9b303f027b2dabead35624a679db296",
+      "auditSha256": "sha256:d129660b1edda879914ec9e5bf7a48c300673c61d252607209d6cb001d41becd",
+      "state": "approved-for-exact-revision",
+      "classification": "release-ready",
+      "releaseAuthorized": true,
+      "inspectionDepth": "section-or-full-text",
+      "decidedAxes": [
+        "claim-to-passage-support",
+        "release-boundary-and-nonclaims",
+        "rights-and-locator-adequacy",
+        "scope-and-unsupported-inference",
+        "source-identity-and-fidelity"
+      ],
+      "missingAxes": [],
+      "projectionDigest": "sha256:9249a6d8678ce88aa2120ce6951ea7d0e99bf437730fa290ab44f0a73365f8d4"
+    },
+    {
+      "recordId": "urn:maha:record:longevity-metabolism-nad-consumption-by-parps",
+      "domainSlug": "longevity-metabolism",
+      "revisionSha256": "sha256:412e98d79a88bc725711c9c75b372870f59ae37e41e8ff99ade5b0fbc097fe80",
+      "auditSha256": "sha256:d287fe38635a1e43e3520518143d5c6aba38afd7150a522dcf97be4d9a87674e",
+      "state": "approved-for-exact-revision",
+      "classification": "release-ready",
+      "releaseAuthorized": true,
+      "inspectionDepth": "section-or-full-text",
+      "decidedAxes": [
+        "claim-to-passage-support",
+        "release-boundary-and-nonclaims",
+        "rights-and-locator-adequacy",
+        "scope-and-unsupported-inference",
+        "source-identity-and-fidelity"
+      ],
+      "missingAxes": [],
+      "projectionDigest": "sha256:b38a4b77b0953e790930c929d6f52d19bc7050023841f7199aa08e69499b58af"
+    },
+    {
+      "recordId": "urn:maha:record:longevity-metabolism-nampt-rate-limiting-step",
+      "domainSlug": "longevity-metabolism",
+      "revisionSha256": "sha256:bf7d09a9215d20978d902db07001f60efd91b79282fc94cf20ffb62a3727cbaa",
+      "auditSha256": "sha256:fe309d0a5ea43620220b74383bdeaeefaab89fab4311e458796c3eb6f7f7ab67",
+      "state": "approved-for-exact-revision",
+      "classification": "release-ready",
+      "releaseAuthorized": true,
+      "inspectionDepth": "section-or-full-text",
+      "decidedAxes": [
+        "claim-to-passage-support",
+        "release-boundary-and-nonclaims",
+        "rights-and-locator-adequacy",
+        "scope-and-unsupported-inference",
+        "source-identity-and-fidelity"
+      ],
+      "missingAxes": [],
+      "projectionDigest": "sha256:b6618018436c43476b1fb8335bc052d5500154eb74071484ddd66a1d6a6752be"
+    },
+    {
+      "recordId": "urn:maha:record:longevity-metabolism-nmn-and-nr-precursors",
+      "domainSlug": "longevity-metabolism",
+      "revisionSha256": "sha256:191557d52bd9efab7dcd9dba21d964223963a9c86e33e57f1aa5b0f07dec0c54",
+      "auditSha256": "sha256:cfb7d5ca1a1671169de8dad9c85b4ccdda883a0557d73039f265a6b96c37de68",
+      "state": "approved-for-exact-revision",
+      "classification": "release-ready",
+      "releaseAuthorized": true,
+      "inspectionDepth": "section-or-full-text",
+      "decidedAxes": [
+        "claim-to-passage-support",
+        "release-boundary-and-nonclaims",
+        "rights-and-locator-adequacy",
+        "scope-and-unsupported-inference",
+        "source-identity-and-fidelity"
+      ],
+      "missingAxes": [],
+      "projectionDigest": "sha256:b3252763134d565eed4e6897633578ac7caef8d4ae4a705b451cd310a5ff68c6"
+    },
+    {
+      "recordId": "urn:maha:record:longevity-metabolism-nmnat-compartmentalization",
+      "domainSlug": "longevity-metabolism",
+      "revisionSha256": "sha256:4faf2fae6b61dd689323efef0694188699b458ec10f9b6edef4c7d3de75f7796",
+      "auditSha256": "sha256:419baf3bd59797a022f6771d202ca51c5400ff6f6fff1987862836c44844d669",
+      "state": "approved-for-exact-revision",
+      "classification": "release-ready",
+      "releaseAuthorized": true,
+      "inspectionDepth": "section-or-full-text",
+      "decidedAxes": [
+        "claim-to-passage-support",
+        "release-boundary-and-nonclaims",
+        "rights-and-locator-adequacy",
+        "scope-and-unsupported-inference",
+        "source-identity-and-fidelity"
+      ],
+      "missingAxes": [],
+      "projectionDigest": "sha256:6a6330aa19860694e7ee08af13cd07e600763bbebd64375ad352e26fde349ceb"
+    },
+    {
+      "recordId": "urn:maha:record:longevity-metabolism-oxygen-consumption-rate",
+      "domainSlug": "longevity-metabolism",
+      "revisionSha256": "sha256:9ae12b356c0faf01b473266d67fded5ffe49f2a3f1652e3b17af62de1336974d",
+      "auditSha256": "sha256:2b5adae213732d059940cf0d056d6789ef5024ea27b6058c05a7f77e5dba914e",
+      "state": "approved-for-exact-revision",
+      "classification": "release-ready",
+      "releaseAuthorized": true,
+      "inspectionDepth": "section-or-full-text",
+      "decidedAxes": [
+        "claim-to-passage-support",
+        "release-boundary-and-nonclaims",
+        "rights-and-locator-adequacy",
+        "scope-and-unsupported-inference",
+        "source-identity-and-fidelity"
+      ],
+      "missingAxes": [],
+      "projectionDigest": "sha256:6a615f6c1327cba24340348c0354beab05328e0a7903a877575130f53930962b"
+    },
+    {
+      "recordId": "urn:maha:record:longevity-metabolism-pink1-parkin-pathway",
+      "domainSlug": "longevity-metabolism",
+      "revisionSha256": "sha256:46308d98f43ad48680e8f9a1d873f801475c93c6788461243e8d916aa4643485",
+      "auditSha256": "sha256:ae8ce8be98d01d3cad394006a2b8193e1e9213ce0d363c2c349c2104f5ab7c24",
+      "state": "revise-requested",
+      "classification": "revise-and-rereview",
+      "releaseAuthorized": false,
+      "inspectionDepth": "abstract-or-metadata-only",
+      "decidedAxes": [
+        "claim-to-passage-support",
+        "release-boundary-and-nonclaims",
+        "rights-and-locator-adequacy",
+        "scope-and-unsupported-inference",
+        "source-identity-and-fidelity"
+      ],
+      "missingAxes": [],
+      "projectionDigest": "sha256:84c2696eb1fcbcfdc0ed7ca381225281607a5f3bb7bee93b8406434dacaebfa2"
+    },
+    {
+      "recordId": "urn:maha:record:longevity-metabolism-senescent-cell-clearance",
+      "domainSlug": "longevity-metabolism",
+      "revisionSha256": "sha256:f208ae5ebd530d273ae1e30c924ebc41eabe84efaa38aa731de42fee86645808",
+      "auditSha256": "sha256:a2c55cfab2a21335cbfbfa86f988ece627da2801c459aca1033c19c8e4f492aa",
+      "state": "approved-for-exact-revision",
+      "classification": "release-ready",
+      "releaseAuthorized": true,
+      "inspectionDepth": "section-or-full-text",
+      "decidedAxes": [
+        "claim-to-passage-support",
+        "release-boundary-and-nonclaims",
+        "rights-and-locator-adequacy",
+        "scope-and-unsupported-inference",
+        "source-identity-and-fidelity"
+      ],
+      "missingAxes": [],
+      "projectionDigest": "sha256:d774dbaa84399b165e72b8143a250921d69eb283489b9e09049a1678f611a2e7"
+    },
+    {
+      "recordId": "urn:maha:record:longevity-metabolism-sirtuin-nad-dependence",
+      "domainSlug": "longevity-metabolism",
+      "revisionSha256": "sha256:3774dec2e51ced47caa4a9f83ae6490bf4617f2afe90e96422fec90a3f7ec080",
+      "auditSha256": "sha256:13d0e3dd7bf5946301ac54a2fbc703b77a7bb0fd05b4219289498b979f550cef",
+      "state": "approved-for-exact-revision",
+      "classification": "release-ready",
+      "releaseAuthorized": true,
+      "inspectionDepth": "section-or-full-text",
+      "decidedAxes": [
+        "claim-to-passage-support",
+        "release-boundary-and-nonclaims",
+        "rights-and-locator-adequacy",
+        "scope-and-unsupported-inference",
+        "source-identity-and-fidelity"
+      ],
+      "missingAxes": [],
+      "projectionDigest": "sha256:7a0ea20dff26683b8d4ebf97eafe7adbc0fd198b4f361a63669c5902d3ec8833"
+    },
+    {
+      "recordId": "urn:maha:record:longevity-metabolism-translation-to-human-outcomes",
+      "domainSlug": "longevity-metabolism",
+      "revisionSha256": "sha256:d0d8e4666aabf2a9c6243e0681e380eb24e01b1be85287194df8456cbd0b021f",
+      "auditSha256": "sha256:fe52f7785cabaa95701c44b6eea4af9e898904729d85c3bf7b3a39650ad75643",
+      "state": "approved-for-exact-revision",
+      "classification": "release-ready",
+      "releaseAuthorized": true,
+      "inspectionDepth": "section-or-full-text",
+      "decidedAxes": [
+        "claim-to-passage-support",
+        "release-boundary-and-nonclaims",
+        "rights-and-locator-adequacy",
+        "scope-and-unsupported-inference",
+        "source-identity-and-fidelity"
+      ],
+      "missingAxes": [],
+      "projectionDigest": "sha256:caf64dbd7d9b76ebe0f7745b5c35e808b547210d15ff3d8b41809e06ca42e874"
+    },
+    {
+      "recordId": "urn:maha:record:mechanistic-interpretability-feature-activation-maximization",
+      "domainSlug": "mechanistic-interpretability",
+      "revisionSha256": "sha256:6c45c999f1603edcc3571e7f7fc3848e734e2fb4fa532624cea798499991f446",
+      "auditSha256": "sha256:c9c0984c6c3c87d5683c176729ef485779caa55ba5ddeb8b309e8952324a7d37",
+      "state": "approved-for-exact-revision",
+      "classification": "release-ready",
+      "releaseAuthorized": true,
+      "inspectionDepth": "section-or-full-text",
+      "decidedAxes": [
+        "claim-to-passage-support",
+        "release-boundary-and-nonclaims",
+        "rights-and-locator-adequacy",
+        "scope-and-unsupported-inference",
+        "source-identity-and-fidelity"
+      ],
+      "missingAxes": [],
+      "projectionDigest": "sha256:97cfdf2a64d71dc6a82cf8861e6fba867460091242ef74ec50e5b846cd67f3d0"
+    },
+    {
+      "recordId": "urn:maha:record:neurotechnology-bci-channelrhodopsin-photocurrent-kinetics",
+      "domainSlug": "neurotechnology-bci",
+      "revisionSha256": "sha256:3222b99000d35c144e1b7da3e76a8fbb09514fcce54c71e3b38fc873851307f5",
+      "auditSha256": "sha256:cc0515ea5cefc6112055f52cb8757d3d21c36e1ea161b92d89256e36e98ce0cf",
+      "state": "approved-for-exact-revision",
+      "classification": "release-ready",
+      "releaseAuthorized": true,
+      "inspectionDepth": "section-or-full-text",
+      "decidedAxes": [
+        "claim-to-passage-support",
+        "release-boundary-and-nonclaims",
+        "rights-and-locator-adequacy",
+        "scope-and-unsupported-inference",
+        "source-identity-and-fidelity"
+      ],
+      "missingAxes": [],
+      "projectionDigest": "sha256:fcdd2c35947816c63bafb42d9a9230ca18f5cdaa6a1e8c6aff3d25b2f375b3d4"
+    },
+    {
+      "recordId": "urn:maha:record:neurotechnology-bci-chronic-signal-stability",
+      "domainSlug": "neurotechnology-bci",
+      "revisionSha256": "sha256:21b00e998a171f2c9a561463f4ca43fa3bf56ba0439efbe8abd89654e7906de9",
+      "auditSha256": "sha256:ed749c787bcc09c33b62cbc003cc77281308858cd62fe8097a8755d8fe42938c",
+      "state": "revise-requested",
+      "classification": "revise-and-rereview",
+      "releaseAuthorized": false,
+      "inspectionDepth": "abstract-or-metadata-only",
+      "decidedAxes": [
+        "claim-to-passage-support",
+        "release-boundary-and-nonclaims",
+        "rights-and-locator-adequacy",
+        "scope-and-unsupported-inference",
+        "source-identity-and-fidelity"
+      ],
+      "missingAxes": [],
+      "projectionDigest": "sha256:afe4ab8cbf728c0802ee9c724c77e0e352b6003824203188f34aad9816594d25"
+    },
+    {
+      "recordId": "urn:maha:record:neurotechnology-bci-electrocorticography-spatial-resolution",
+      "domainSlug": "neurotechnology-bci",
+      "revisionSha256": "sha256:ea472f6b233b533b20d8cde9e8a9048b68ca74fc90dc3b05dd15a1ea397f1706",
+      "auditSha256": "sha256:4aabb116038af0bcfc8a724cdd9e2565a487300fd390b9f130d851e6fb1af985",
+      "state": "revise-requested",
+      "classification": "revise-and-rereview",
+      "releaseAuthorized": false,
+      "inspectionDepth": "abstract-or-metadata-only",
+      "decidedAxes": [
+        "claim-to-passage-support",
+        "release-boundary-and-nonclaims",
+        "rights-and-locator-adequacy",
+        "scope-and-unsupported-inference",
+        "source-identity-and-fidelity"
+      ],
+      "missingAxes": [],
+      "projectionDigest": "sha256:7ed7d349487c4614893155065665cd755afc64b1e7119e70501c7bc942f73e5d"
+    },
+    {
+      "recordId": "urn:maha:record:neurotechnology-bci-flexible-conformal-electrode-arrays",
+      "domainSlug": "neurotechnology-bci",
+      "revisionSha256": "sha256:93cab9b620eeaae46c89c71eca8acb4e5430ef522a0001c796547d151a80beae",
+      "auditSha256": "sha256:5f3ca7f7d9b198258fe8363ccffdb318ad6f05d433301c454f82a8a8d6ade7d3",
+      "state": "revise-requested",
+      "classification": "revise-and-rereview",
+      "releaseAuthorized": false,
+      "inspectionDepth": "abstract-or-metadata-only",
+      "decidedAxes": [
+        "claim-to-passage-support",
+        "release-boundary-and-nonclaims",
+        "rights-and-locator-adequacy",
+        "scope-and-unsupported-inference",
+        "source-identity-and-fidelity"
+      ],
+      "missingAxes": [],
+      "projectionDigest": "sha256:dfb4f54ff8fc62afb262b48822ad988565dfa390703695e4fa54d3935b00372b"
+    },
+    {
+      "recordId": "urn:maha:record:neurotechnology-bci-foreign-body-response",
+      "domainSlug": "neurotechnology-bci",
+      "revisionSha256": "sha256:f72bd35f40fb420af2a5b3fadc165aac72d0fc875d3e30ccfb82a597f97409a8",
+      "auditSha256": "sha256:3640043243f2a992bcb96709107b97680284e9edb1c83e85fce463c2505c58ec",
+      "state": "revise-requested",
+      "classification": "revise-and-rereview",
+      "releaseAuthorized": false,
+      "inspectionDepth": "abstract-or-metadata-only",
+      "decidedAxes": [
+        "claim-to-passage-support",
+        "release-boundary-and-nonclaims",
+        "rights-and-locator-adequacy",
+        "scope-and-unsupported-inference",
+        "source-identity-and-fidelity"
+      ],
+      "missingAxes": [],
+      "projectionDigest": "sha256:27f774d49b73ef8253c8d444de90fdc5cb1491a1fa14c0851c027b4dad0f1b50"
+    },
+    {
+      "recordId": "urn:maha:record:neurotechnology-bci-motor-intention-decoding",
+      "domainSlug": "neurotechnology-bci",
+      "revisionSha256": "sha256:e51b270b795dcc7be694c411f91b06fa4950dcf6ed4ce5d8f4f9d38ce91729af",
+      "auditSha256": "sha256:25bf1f0e38e64990f6fedb97a47622442b6378e549aeb232e4e022bf39f0afb1",
+      "state": "approved-for-exact-revision",
+      "classification": "release-ready",
+      "releaseAuthorized": true,
+      "inspectionDepth": "section-or-full-text",
+      "decidedAxes": [
+        "claim-to-passage-support",
+        "release-boundary-and-nonclaims",
+        "rights-and-locator-adequacy",
+        "scope-and-unsupported-inference",
+        "source-identity-and-fidelity"
+      ],
+      "missingAxes": [],
+      "projectionDigest": "sha256:403e86638faa588c88ff202de81ed7606f9a2218b8f1867a8157cfae27d9c11d"
+    },
+    {
+      "recordId": "urn:maha:record:neurotechnology-bci-opsin-spectral-sensitivity",
+      "domainSlug": "neurotechnology-bci",
+      "revisionSha256": "sha256:8e5cad4598ae3b249a0c35631a2bb999d71e0f13faaede0acc71a406621464e7",
+      "auditSha256": "sha256:0d62d848b681e09edec87909bc09a85e96fe565119892b8efbd85d044ab5b536",
+      "state": "approved-for-exact-revision",
+      "classification": "release-ready",
+      "releaseAuthorized": true,
+      "inspectionDepth": "section-or-full-text",
+      "decidedAxes": [
+        "claim-to-passage-support",
+        "release-boundary-and-nonclaims",
+        "rights-and-locator-adequacy",
+        "scope-and-unsupported-inference",
+        "source-identity-and-fidelity"
+      ],
+      "missingAxes": [],
+      "projectionDigest": "sha256:6868f31c75b69055a10d14450a8688df2b718d89dbb60cc6e71bb285e7cb8fa2"
+    },
+    {
+      "recordId": "urn:maha:record:neurotechnology-bci-optogenetic-channelrhodopsin",
+      "domainSlug": "neurotechnology-bci",
+      "revisionSha256": "sha256:6e054e00282fe4710e477f5b7c43c5605ebf35fbc855b2f589d1cf6265de7473",
+      "auditSha256": "sha256:4b4e624214d947730f59bff346a495d5b8622f58e7bae3a624f253fb87c0372b",
+      "state": "approved-for-exact-revision",
+      "classification": "release-ready",
+      "releaseAuthorized": true,
+      "inspectionDepth": "section-or-full-text",
+      "decidedAxes": [
+        "claim-to-passage-support",
+        "release-boundary-and-nonclaims",
+        "rights-and-locator-adequacy",
+        "scope-and-unsupported-inference",
+        "source-identity-and-fidelity"
+      ],
+      "missingAxes": [],
+      "projectionDigest": "sha256:89cce243b99e8b4c4570c3a090c4b3d0ea377e503adcc314d3c20038dc3ff4c3"
+    },
+    {
+      "recordId": "urn:maha:record:neurotechnology-bci-sensing-to-stimulation-loop",
+      "domainSlug": "neurotechnology-bci",
+      "revisionSha256": "sha256:90fb9f3d6b315601450a5240f84ad94a736577f9f2f80e842f2f71340761c657",
+      "auditSha256": "sha256:352986680eb4d939afff2e1afd1a3144af2f894642d26bd020af92632a279161",
+      "state": "revise-requested",
+      "classification": "revise-and-rereview",
+      "releaseAuthorized": false,
+      "inspectionDepth": "abstract-or-metadata-only",
+      "decidedAxes": [
+        "claim-to-passage-support",
+        "release-boundary-and-nonclaims",
+        "rights-and-locator-adequacy",
+        "scope-and-unsupported-inference",
+        "source-identity-and-fidelity"
+      ],
+      "missingAxes": [],
+      "projectionDigest": "sha256:df40365b2ae1c2b6b75264d550f313be99d5bd2904bb5564c7b69cd3b7b50607"
+    }
+  ],
+  "tier": {
+    "reviewerKind": "automated-internal-editorial",
+    "independent": false,
+    "expertEndorsement": false,
+    "externallyReviewed": false,
+    "humanReviewed": false,
+    "releaseAuthority": "separate",
+    "verifies": "deterministic evidence-policy compliance",
+    "doesNotEstablish": [
+      "scientific truth",
+      "independent reproduction",
+      "expert consensus",
+      "external endorsement",
+      "fitness for any decision the reader may make"
+    ],
+    "publicStatement": "This tier verifies deterministic evidence-policy compliance. It does not establish scientific truth, independent reproduction or expert consensus, and no decision in it was made by a person."
+  },
+  "boundary": "This tier verifies deterministic evidence-policy compliance. It does not establish scientific truth, independent reproduction or expert consensus, and no decision in it was made by a person."
+}
