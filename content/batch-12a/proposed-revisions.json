@@ -1,0 +1,96 @@
+{
+  "schemaVersion": "maha-batch-12a-proposed-revision/1.0",
+  "reviewDate": "2026-09-01",
+  "active": false,
+  "pendingGovernedAdoption": true,
+  "proposedCount": 6,
+  "proposedRevisions": [
+    {
+      "recordId": "urn:maha:record:advanced-materials-tmd-heterobilayers",
+      "active": false,
+      "pendingGovernedAdoption": true,
+      "activeRevisionSha256": "sha256:9f197d1bacfc4de75b243cdf3e6b9d952caecaa21f3cc6630ad3358c388f3511",
+      "proposedBoundedClaim": "In the MoSe2/WSe2 heterobilayer measured by Wang and colleagues, interlayer exciton diffusivity resolves three density-dependent phases, with a Mott transition confirmed by photoconductivity.",
+      "proposedSourceOverride": {
+        "title": "Diffusivity Reveals Three Distinct Phases of Interlayer Excitons in MoSe2/WSe2 Heterobilayers",
+        "arxivId": "2001.03812",
+        "versionOfRecord": "Physical Review Letters 126, 106804 (2021)",
+        "versionOfRecordDoi": "10.1103/PhysRevLett.126.106804",
+        "versionRelationship": "preprint",
+        "exactLocator": "Abstract and reported density thresholds",
+        "boundedPassage": "The latter is the Mott transition and is confirmed in photoconductivity measurements.",
+        "rightsBasis": "arXiv nonexclusive distribution licence; short quotation with attribution",
+        "establishes": "Two density-dependent phase transitions of interlayer excitons in a MoSe2/WSe2 heterobilayer: moire-trapped to mobile exciton gas, and exciton gas to electron-hole plasma.",
+        "doesNotEstablish": "Sustained exciton condensates or quantum many-body states; it identifies density thresholds above which such states are not sustained."
+      },
+      "exactLocator": "Abstract and reported density thresholds",
+      "rightsBasis": "arXiv nonexclusive distribution licence; short quotation with attribution",
+      "disposition": "accept-replacement",
+      "proposedRevisionSha256": "sha256:6500fbabea1d27899254fcc088e0668dbb0ec7a172cc5d20bea057b5c9a8a4eb"
+    },
+    {
+      "recordId": "urn:maha:record:agentic-systems-mcp-context-window-token-degradation",
+      "active": false,
+      "pendingGovernedAdoption": true,
+      "activeRevisionSha256": "sha256:e63068eb9d9e3bdfd529add5738b921e1e03f7229a3097d48d42be8ece92bec3",
+      "proposedBoundedClaim": "In the multi-document question answering evaluation of Liu and colleagues, accuracy is highest when the relevant document sits at the start or end of the context and degrades when it sits in the middle.",
+      "proposedSourceOverride": null,
+      "exactLocator": "Section 2.3 Results and Discussion; Figure 5",
+      "rightsBasis": "arXiv open access; short quotation with attribution",
+      "disposition": "revise-record",
+      "proposedRevisionSha256": "sha256:0ae55f047be56b86164c9403b0348668437747194e06236f3d54ecbc162f8c38"
+    },
+    {
+      "recordId": "urn:maha:record:agentic-systems-mcp-retrieval-context-selection",
+      "active": false,
+      "pendingGovernedAdoption": true,
+      "activeRevisionSha256": "sha256:81c3abda25a3b536d66bc38ecba273f8727af5ae1eea24f0c5b6ec754aa2d603",
+      "proposedBoundedClaim": "Retrieved-context ordering measurably changes answer accuracy in the evaluation of Liu and colleagues; the source does not evaluate selection policies themselves.",
+      "proposedSourceOverride": null,
+      "exactLocator": "Section 2.3 Results and Discussion; Figure 5",
+      "rightsBasis": "arXiv open access; short quotation with attribution",
+      "disposition": "revise-record",
+      "proposedRevisionSha256": "sha256:cf8d697f55630b31c544a52570597549897840ae11b22398ee4cfa1eb92aa1e0"
+    },
+    {
+      "recordId": "urn:maha:record:biomolecular-engineering-mutation-library-generation",
+      "active": false,
+      "pendingGovernedAdoption": true,
+      "activeRevisionSha256": "sha256:a2c5c165f6dfe18b2b27a04fd5fde9cf5a831e666abea654c1234ea5155f1a91",
+      "proposedBoundedClaim": "Continuous directed evolution as described by Esvelt and colleagues couples desired activity to phage infectivity and runs dozens of rounds per day; the source does not describe library generation chemistry.",
+      "proposedSourceOverride": null,
+      "exactLocator": "Main text statement of evolution rate and selection coupling to pIII",
+      "rightsBasis": "Nature author-manuscript terms permitting view, print and text mining for academic research; short quotation with attribution",
+      "disposition": "revise-record",
+      "proposedRevisionSha256": "sha256:a347822f5385a795eee04ddae0abb3b68ef35a514c6a8d65e0cf3082ffe88ed6"
+    },
+    {
+      "recordId": "urn:maha:record:biomolecular-engineering-protein-design-success",
+      "active": false,
+      "pendingGovernedAdoption": true,
+      "activeRevisionSha256": "sha256:74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "proposedBoundedClaim": "On the benchmark reported by Dauparas and colleagues, ProteinMPNN recovers 52.4 per cent of native sequence against 32.9 per cent for Rosetta. No single experimental success rate is stated in the inspected passage.",
+      "proposedSourceOverride": null,
+      "exactLocator": "Abstract, reported native sequence recovery figures",
+      "rightsBasis": "bioRxiv CC-BY-NC-ND 4.0; short quotation with attribution",
+      "disposition": "revise-record",
+      "proposedRevisionSha256": "sha256:ea850b60f60755f6faf53c514fcc4bcd8eeb0d4b5cbde84cef5a7d1af32e87d2"
+    },
+    {
+      "recordId": "urn:maha:record:longevity-metabolism-senescence-associated-secretory-phenotype",
+      "active": false,
+      "pendingGovernedAdoption": true,
+      "activeRevisionSha256": "sha256:952678480a011c4b89b3a081b903fa76b0d4a06d4b10f99cd6c16f39320aa91c",
+      "proposedBoundedClaim": "Senescent cells upregulate anti-apoptotic pathways in the transcriptome analysis of Zhu and colleagues. The inspected sections address anti-apoptotic survival pathways rather than the secretory phenotype named by this record.",
+      "proposedSourceOverride": null,
+      "exactLocator": "Section 'The senescent transcriptome and anti-apoptotic pathways'; Figure 1A-C",
+      "rightsBasis": "Creative Commons Attribution licence; short quotation with attribution",
+      "disposition": "revise-record",
+      "proposedRevisionSha256": "sha256:7305b3898871d0cb7b8fa8ab1aa173137a21fb476c00713bae8a22320ac95bb9"
+    }
+  ],
+  "sourceOverrideCandidates": 1,
+  "canary": null,
+  "canaryWithheldReason": "Only 1 proposal(s) carry a source override that passed every axis. Five are required, and the criteria were not weakened to reach five.",
+  "boundary": "Proposed revisions are private and inactive. No active binding, canonical release or public route was changed."
+}

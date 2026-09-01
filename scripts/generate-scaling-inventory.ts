@@ -8,6 +8,8 @@ import { isPilotAlignmentClear, pilotAlignmentFor } from '../lib/pilot-source-al
 import { PUBLIC_SUBSTANTIAL_PAGES } from '../lib/substantial-page-public.ts'
 import { buildCapacityModel, PAGE_TARGET, type RecordState } from '../lib/scaling-capacity.ts'
 import projection from '../content/review/exact-revision-projection.json' with { type: 'json' }
+import batch12aInvestigations from '../content/batch-12a/source-investigations.json' with { type: 'json' }
+import batch12aProposals from '../content/batch-12a/proposed-revisions.json' with { type: 'json' }
 import { canonicalJson } from '../lib/evidence-dossier/digest.ts'
 import observation from '../content/scaling/public-surface-observation.json' with { type: 'json' }
 
@@ -92,7 +94,36 @@ const digest = (value: unknown) => `sha256:${createHash('sha256').update(canonic
 
 mkdirSync('content/scaling', { recursive: true })
 writeFileSync('content/scaling/public-inventory.json', `${JSON.stringify({ ...inventory, inventoryDigest: digest(inventory) }, null, 2)}\n`)
-writeFileSync('content/scaling/capacity-model.json', `${JSON.stringify({ ...model, capacityDigest: digest(model) }, null, 2)}\n`)
+/**
+ * Batch 12A, counted apart from everything active.
+ *
+ * A proposed revision is not a record and not a page. Keeping these in their
+ * own block, with the active counts restated beside them, is what stops a
+ * private proposal being read later as something the public can reach.
+ */
+const proposed = batch12aProposals.proposedCount as number
+const batch12a = {
+  selected: 15,
+  contentInspected: (batch12aInvestigations.investigations as unknown[]).length,
+  adequateReplacementsFound: (batch12aInvestigations.investigations as { candidateReplacement: unknown }[])
+    .filter((entry) => entry.candidateReplacement !== null).length,
+  accepted: batch12aProposals.sourceOverrideCandidates as number,
+  revise: proposed - (batch12aProposals.sourceOverrideCandidates as number),
+  rejected: 0,
+  inaccessibleOrUnresolved: (batch12aInvestigations.unresolved as unknown[]).length,
+  newlyAlignmentClearProposed: proposed,
+  newlyReleaseReadyProposed: 0,
+  activeAlignmentClear: states.filter((state) => state.alignmentClear).length,
+  activePublicRoutes: model.crawlable,
+  hypotheticalAfterExisting33: model.crawlable + (classifications['release-ready'] ?? 0),
+  hypotheticalAfterBatch12aAdoption: model.crawlable + (classifications['release-ready'] ?? 0) + proposed,
+  remainingGapAfterBoth: Math.max(0, PAGE_TARGET - model.crawlable - (classifications['release-ready'] ?? 0) - proposed),
+  canary: batch12aProposals.canary,
+  canaryWithheldReason: batch12aProposals.canaryWithheldReason,
+  note: 'Proposed revisions are private, inactive and pending governed adoption. They are not active records and not pages. Active alignment-clear and active public routes are unchanged by this sprint.',
+}
+const withBatch12a = { ...model, batch12a }
+writeFileSync('content/scaling/capacity-model.json', `${JSON.stringify({ ...withBatch12a, capacityDigest: digest(withBatch12a) }, null, 2)}\n`)
 
 /* ------------------------------------------------------------ the report -- */
 
