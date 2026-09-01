@@ -195,9 +195,11 @@
     "identities": {
       "protectedEnvironment": "batch-11-preview-rehearsal",
       "operationsIdentityFingerprint": "sha256:1601bb43fe7956c943740403db38d0edb84fd2428a1ad416ef17a22a039f3637",
-      "releaseAuthorityIdentityFingerprint": "sha256:aedfdf025eaac5d12ab2e4707cef5cdc473637f2b71b64e01362ff112f0d6519"
+      "releaseAuthorityIdentityFingerprint": "sha256:aedfdf025eaac5d12ab2e4707cef5cdc473637f2b71b64e01362ff112f0d6519",
+      "branchManagementIdentityFingerprint": "sha256:923c9663e7583a66d2b1bc9d1b6cd9d5c3ce057e71e83c2d70afa39965b50242",
+      "automationBypassIdentityFingerprint": "sha256:75054e9ae99be5877ef4f726a829916f4a27febb26c16b811398c22d6102c5cc"
     },
-    "artifactDigest": "sha256:c826af3b57111881ef7641edca1e89364bd3a7ed573363d9aff243fcbc2cc19c",
+    "artifactDigest": "sha256:fdf80bf6b247aebf97db44cff6a5ca7d4456c0b6ff17fd5847a82b0e72e7a5b0",
     "mode": "executed",
     "reason": "All 7 phases executed against an ephemeral Preview branch.",
     "remoteOperationsPerformed": 14,
@@ -337,7 +339,7 @@
       "scope": "exact-credential-fingerprint",
       "runMarker": "batch-11-mixed-lineage-rehearsal-77",
       "reviewedCommit": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
-      "credentialFingerprint": "sha256:2abc7b29c17a06108b127af83d57fff35088ce99500903799e275d687265e1a5",
+      "credentialFingerprint": "sha256:923c9663e7583a66d2b1bc9d1b6cd9d5c3ce057e71e83c2d70afa39965b50242",
       "stillResolves": false,
       "selfReportedOnly": false,
       "detail": "The supabase-access-token no longer resolves at the provider."
@@ -349,7 +351,7 @@
       "scope": "exact-credential-fingerprint",
       "runMarker": "batch-11-mixed-lineage-rehearsal-77",
       "reviewedCommit": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
-      "credentialFingerprint": "sha256:3ae40f0c700ded5a5a7fb6340b1eb7bf2c12839c7996a500010f987552c2ae21",
+      "credentialFingerprint": "sha256:75054e9ae99be5877ef4f726a829916f4a27febb26c16b811398c22d6102c5cc",
       "stillResolves": false,
       "selfReportedOnly": false,
       "detail": "The vercel-automation-bypass no longer resolves at the provider."
@@ -358,10 +360,10 @@
       "provider": "github",
       "credential": "github-environment-secrets",
       "checkStatus": "succeeded",
-      "scope": "exact-credential-fingerprint",
+      "scope": "exact-environment",
       "runMarker": "batch-11-mixed-lineage-rehearsal-77",
       "reviewedCommit": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
-      "credentialFingerprint": "sha256:2000a112261b84b285dfe27dfddbc17bc5fe2a18e23d003ca3a94027e072703c",
+      "credentialFingerprint": "sha256:5a1ff484f90a2087a7ce6be9101c7ff822edda0e56355b05a63b49608814f72f",
       "stillResolves": false,
       "selfReportedOnly": false,
       "detail": "The github-environment-secrets no longer resolves at the provider."
@@ -374,7 +376,7 @@
     "observations": [
       {
         "credential": "supabase-access-token",
-        "credentialFingerprint": "sha256:2abc7b29c17a06108b127af83d57fff35088ce99500903799e275d687265e1a5",
+        "credentialFingerprint": "sha256:923c9663e7583a66d2b1bc9d1b6cd9d5c3ce057e71e83c2d70afa39965b50242",
         "observedState": "confirmed-revoked",
         "refusal": null,
         "providers": [
@@ -384,7 +386,7 @@
       },
       {
         "credential": "vercel-automation-bypass",
-        "credentialFingerprint": "sha256:3ae40f0c700ded5a5a7fb6340b1eb7bf2c12839c7996a500010f987552c2ae21",
+        "credentialFingerprint": "sha256:75054e9ae99be5877ef4f726a829916f4a27febb26c16b811398c22d6102c5cc",
         "observedState": "confirmed-revoked",
         "refusal": null,
         "providers": [
@@ -394,7 +396,7 @@
       },
       {
         "credential": "github-environment-secrets",
-        "credentialFingerprint": "sha256:2000a112261b84b285dfe27dfddbc17bc5fe2a18e23d003ca3a94027e072703c",
+        "credentialFingerprint": "sha256:5a1ff484f90a2087a7ce6be9101c7ff822edda0e56355b05a63b49608814f72f",
         "observedState": "confirmed-revoked",
         "refusal": null,
         "providers": [
@@ -404,6 +406,6 @@
       }
     ],
     "allConfirmedRevoked": true,
-    "revocationDigest": "sha256:77fc9f283fdaa9172dee2432ff09ec9bed0d9741432187827a59d7fa16c6557e"
+    "revocationDigest": "sha256:f20149dd288df031d131193b4f035a792d83c143d48330d922cc571fae464490"
   }
 }

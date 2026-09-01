@@ -90,16 +90,39 @@ directly and records only what the provider answers:
 MAHA_B11_RUN_ID=<the run id> \
 MAHA_B11_REVIEWED_COMMIT=<the reviewed commit> \
 SUPABASE_ACCESS_TOKEN=<the revoked token> \
-VERCEL_TOKEN=<...> VERCEL_PROJECT_ID=<...> GITHUB_TOKEN=<...> \
+VERCEL_TOKEN=<...> VERCEL_PROJECT_ID=<...> \
+VERCEL_AUTOMATION_BYPASS_SECRET=<the revoked bypass> \
+GITHUB_TOKEN=<...> \
 node --experimental-strip-types scripts/collect-batch-11-revocation-evidence.ts \
   --out batch-11-teardown/revocation.json
 ```
 
-Supply the credential you are testing: a revoked Supabase token is expected to
-be rejected with 401, and that rejection is the evidence. A credential that is
-not supplied yields `not-attempted`, which does not close. An operator's own
-statement that they revoked something reduces to `reported-revoked`, which also
-does not close.
+Supply the exact credential you are testing — the collector fingerprints the
+value, and the closure verifier checks that fingerprint against the one the run
+artifact recorded. A different token, however genuinely revoked, will not close
+this run. A credential that is not supplied yields `not-attempted`, which does
+not close, and an operator's own statement reduces to `reported-revoked`, which
+also does not close.
+
+The Vercel probe needs the revoked bypass **value**, not just a project id. The
+question it answers is whether that exact key is gone from the project's
+`protectionBypass` map — a map this project legitimately shares with unrelated
+automation bypasses, so "the project has bypasses" answers nothing. Other keys
+may remain without affecting closure.
+
+| Provider answer | Meaning |
+| --- | --- |
+| Supabase `401` | Confirmed revoked. The only status that closes. |
+| Supabase `200` | **Still active.** The token was not revoked. |
+| Supabase `403` | Unknown — a valid fine-grained token that lacks permission answers 403, so this is not revocation. Same for `404`, `429`, `5xx` and transport failures. |
+| Vercel: exact key absent | Confirmed revoked. |
+| Vercel: exact key present | Still active. |
+| Vercel: unreadable | Unknown. |
+| GitHub: none of the five names listed | Confirmed revoked, bound to the environment/run/commit slot. |
+
+There is no Supabase token-introspection endpoint to use instead: the Management
+API's only token paths are the OAuth application flows, and `/v1/oauth/revoke`
+is a `POST` that revokes rather than reports. Nothing in this step may mutate.
 
 ### Why closure is a post-run step
 

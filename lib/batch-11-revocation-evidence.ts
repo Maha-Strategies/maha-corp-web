@@ -51,7 +51,23 @@ export type RevocationRefusal =
   | 'run-mismatch'
   | 'credential-still-active'
   | 'only-self-reported'
+  | 'credential-identity-inconsistent'
   | 'credential-shaped-input'
+
+/**
+ * Which field of the run artifact proves each credential's identity.
+ *
+ * Two of the three can be fingerprinted from the value itself, because the run
+ * held that value. The third cannot: GitHub never returns a secret, so the only
+ * exact thing to bind is the slot - this environment, these names, this run -
+ * and pretending otherwise would mean inventing a value-shaped identity for
+ * something whose value is unobservable.
+ */
+export const REVOCATION_IDENTITY_BINDING = {
+  'supabase-access-token': 'branchManagementIdentityFingerprint',
+  'vercel-automation-bypass': 'automationBypassIdentityFingerprint',
+  'github-environment-secrets': 'environment-secret-slot',
+} as const satisfies Readonly<Record<RevocableCredential, string>>
 
 export type CheckStatus = 'succeeded' | 'failed' | 'malformed' | 'not-attempted'
 /** Only an exact-identity check can support a revocation claim. */
@@ -127,6 +143,13 @@ export function reduceRevocationState(
   }
   // Still resolving beats everything: a live credential is live whatever else
   // the other checks report.
+  // Two checks of "the same" credential that fingerprint different values are
+  // not corroboration; they are evidence that at least one tested the wrong
+  // secret, and there is no way to tell which.
+  if (new Set(forCredential.map((entry) => entry.credentialFingerprint)).size > 1) {
+    return { observedState: 'unknown', refusal: 'credential-identity-inconsistent', providers, credentialFingerprint: null,
+      detail: `${credential}: the checks disagree about which credential they tested.` }
+  }
   const alive = forCredential.filter((entry) => entry.stillResolves)
   if (alive.length > 0) {
     return { observedState: 'still-active', refusal: 'credential-still-active', providers, credentialFingerprint: fingerprint,
