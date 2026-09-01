@@ -117,6 +117,14 @@ export type RehearsalRefusal =
   | 'preview-not-destroyed'
   | 'branch-not-destroyed'
   | 'teardown-handle-missing'
+  | 'credential-absent'
+  | 'credential-fingerprint-absent'
+  | 'credential-fingerprint-malformed'
+  | 'credential-fingerprint-mismatch'
+  | 'pooler-capability-unavailable'
+  | 'pooler-capability-malformed'
+  | 'pooler-capability-production-target'
+  | 'mutation-before-preflight'
 
 export class RehearsalRefused extends Error {
   code: RehearsalRefusal

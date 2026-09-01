@@ -31,6 +31,10 @@ const REQUIRED_SECRETS = [
   'EPISTEMIC_RELEASE_AUTHORITY_TOKEN',
   'VERCEL_AUTOMATION_BYPASS_SECRET',
   'VERCEL_TOKEN',
+  // Not a credential: a non-reversible fingerprint that identifies which token
+  // is bound. It is stored as an environment value so it is approved and
+  // rotated alongside the token it names.
+  'SUPABASE_ACCESS_TOKEN_SHA256',
 ]
 
 /* ------------------------------------------------------- the trigger gate -- */
@@ -78,7 +82,7 @@ test('exact operation and confirmation strings are required and compared exactly
 
 /* ----------------------------------------------- credentials and targets -- */
 
-test('all six Preview-only secrets are required before anything is checked out', () => {
+test('every Preview-only secret is required before anything is checked out', () => {
   const boundary = WORKFLOW.slice(
     WORKFLOW.indexOf('Enforce the Preview boundary'),
     WORKFLOW.indexOf('actions/checkout'),
@@ -96,8 +100,8 @@ test('all six Preview-only secrets are required before anything is checked out',
   assert.match(firstStep, /Enforce the Preview boundary/)
 })
 
-test('the workflow references only the six Preview-scoped secret names', () => {
-  const referenced = [...new Set([...WORKFLOW.matchAll(/secrets\.([A-Z_]+)/g)].map((m) => m[1]))]
+test('the workflow references only the Preview-scoped secret names', () => {
+  const referenced = [...new Set([...WORKFLOW.matchAll(/secrets\.([A-Z0-9_]+)/g)].map((m) => m[1]))]
   for (const name of referenced) assert.ok(REQUIRED_SECRETS.includes(name), `${name} is outside the Preview-scoped set`)
   for (const name of REQUIRED_SECRETS) assert.ok(referenced.includes(name), `${name} is never bound`)
   for (const forbidden of ['PRODUCTION_RELEASE_HEALTH_TOKEN', 'SUPABASE_DB_PASSWORD', 'PRODUCTION_CANARY_API_KEY']) {

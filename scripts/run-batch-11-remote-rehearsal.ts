@@ -10,6 +10,12 @@ import {
 } from '../lib/batch-11-evidence-binding.ts'
 import { assertLineageFresh } from '../lib/batch-11-lineage-freshness.ts'
 import {
+  CredentialProvenanceRefused,
+  assertExpectedCredential,
+  assertPoolerCapability,
+  type PoolerCapability,
+} from '../lib/batch-11-credential-provenance.ts'
+import {
   BATCH_11_LINEAGE_DECLARATIONS,
   assertDeclarationCoverage,
   reconcileLineage,
@@ -174,9 +180,15 @@ const authorityToken = process.env.EPISTEMIC_RELEASE_AUTHORITY_TOKEN?.trim() ?? 
 const bypass = process.env.VERCEL_AUTOMATION_BYPASS_SECRET?.trim() ?? ''
 const vercelToken = process.env.VERCEL_TOKEN?.trim() ?? ''
 const expectedReviewedCommit = process.env.MAHA_B11_REVIEWED_COMMIT?.trim() ?? ''
+const expectedCredentialFingerprint = process.env.SUPABASE_ACCESS_TOKEN_SHA256?.trim() ?? ''
 const checkedOutCommit = execFileSync('git', ['rev-parse', 'HEAD'], { encoding: 'utf8' }).trim()
 
 const lifecycleState = {
+  /** Set only after every pre-mutation gate has passed. */
+  preflightCompleted: false,
+  credentialFingerprintMatched: false,
+  poolerCapability: null as PoolerCapability | null,
+  mutationStartedAfterPreflight: false,
   /** Retained privately so teardown can query the exact branch after deletion. */
   branchHandle: null as { branchId: string; parentProjectRef: string } | null,
   /** Retained so the marker can be attested after it is deleted. */
@@ -267,6 +279,31 @@ let branchServiceRole = ''
 
 const wait = (milliseconds: number) => new Promise((resolve) => setTimeout(resolve, milliseconds))
 
+/**
+ * Reads a Management API endpoint for capability only.
+ *
+ * Returns the status rather than throwing, because the whole point is to
+ * classify 401/403/404/429/5xx before anything is created. The body is parsed
+ * for structure and never returned to a caller that logs.
+ */
+async function managementProbe(path: string): Promise<{ status: number; body: unknown }> {
+  try {
+    const response = await fetch(`${MANAGEMENT_API}${path}`, {
+      method: 'GET',
+      headers: { authorization: `Bearer ${managementToken}`, 'content-type': 'application/json' },
+      cache: 'no-store',
+    })
+    const text = await response.text()
+    let body: unknown = null
+    try { body = text ? JSON.parse(text) : null } catch { body = null }
+    return { status: response.status, body }
+  } catch {
+    // A transport failure is not a capability. 0 is not a documented status,
+    // which is exactly why it must not be mistaken for one.
+    return { status: 0, body: null }
+  }
+}
+
 async function readyBranchDetail(branchId: string): Promise<Json> {
   for (let attempt = 0; attempt < 100; attempt += 1) {
     const response = await managementResponse(`/v1/branches/${branchId}`)
@@ -324,6 +361,13 @@ const driver: RehearsalDriver = {
   parentProjectRef: () => parentRef,
 
   async createEphemeralBranch(name: string): Promise<EphemeralBranch> {
+    // Guarded rather than merely ordered: if the gates below ever stop running
+    // first, this refuses instead of creating a branch nobody authorized.
+    if (!lifecycleState.preflightCompleted) {
+      throw new RehearsalRefused('mutation-before-preflight', 'provision-ephemeral-branch',
+        'The branch creation was attempted before the credential and capability preflight completed.')
+    }
+    lifecycleState.mutationStartedAfterPreflight = true
     const created = object(
       await management(`/v1/projects/${parentRef}/branches`, {
         method: 'POST',
@@ -625,6 +669,39 @@ try {
   if (parentRef === PRODUCTION_SUPABASE_PROJECT_REF) {
     throw new RehearsalRefused('production-project-targeted', 'provision-ephemeral-branch', 'SUPABASE_PROJECT_REF is the Production project.')
   }
+
+  // Cohort readiness before credentials: a cohort that cannot be released is
+  // not worth authenticating for, and runRehearsal would refuse anyway.
+  const notReady = gates.filter((gate) => !gate.ready)
+  if (notReady.length > 0) {
+    throw new RehearsalRefused('gate-not-ready', 'provision-ephemeral-branch',
+      `${notReady.length} record(s) did not gate cleanly: ${notReady.map((gate) => gate.recordId).join(', ')}`)
+  }
+
+  // Which token is bound, before it is used for anything. The previous
+  // rehearsal held a stale token, created a branch, and learned it was the
+  // wrong one from a 403 afterwards.
+  try {
+    assertExpectedCredential(managementToken, expectedCredentialFingerprint)
+    lifecycleState.credentialFingerprintMatched = true
+  } catch (error) {
+    const refusal = error as CredentialProvenanceRefused
+    throw new RehearsalRefused(refusal.code, 'provision-ephemeral-branch', refusal.message)
+  }
+
+  // Whether that token can actually do the job. Read-only, and it fails on the
+  // same 403 the last run received - but before a branch exists to clean up.
+  try {
+    const probe = await managementProbe(`/v1/projects/${parentRef}/config/database/pooler`)
+    lifecycleState.poolerCapability = assertPoolerCapability(parentRef, PRODUCTION_SUPABASE_PROJECT_REF, probe)
+  } catch (error) {
+    const refusal = error as CredentialProvenanceRefused
+    throw new RehearsalRefused(refusal.code, 'provision-ephemeral-branch', refusal.message)
+  }
+
+  // Only now may anything be created.
+  lifecycleState.preflightCompleted = true
+
   const outcome = await runRehearsal(driver, gates)
   if (!lifecycleState.branchHandle || !lifecycleState.deploymentMarker) {
     throw new RehearsalRefused('teardown-handle-missing', 'destroy-ephemeral-resources', 'Exact private teardown handles were not retained for every temporary resource.')
@@ -704,6 +781,10 @@ try {
     replayedReleases: outcome.replayedReleases,
     productionWritesPerformed: 0,
     productionAccess: driver.productionAccess(),
+    // Credential provenance, carried as non-reversible fingerprints only.
+    credentialFingerprintMatched: lifecycleState.credentialFingerprintMatched,
+    poolerCapabilityPreflight: lifecycleState.poolerCapability,
+    mutationStartedAfterPreflight: lifecycleState.mutationStartedAfterPreflight,
     phases: outcome.phases,
     fingerprint,
     requiredInvariants: REQUIRED_PREVIEW_INVARIANTS,
@@ -725,6 +806,9 @@ try {
     migrationsApplied: lifecycleState.migrationsApplied,
     releasesIssued: lifecycleState.releasesIssued,
     productionWritesPerformed: 0,
+    credentialFingerprintMatched: lifecycleState.credentialFingerprintMatched,
+    poolerCapabilityPreflight: lifecycleState.poolerCapability,
+    mutationStartedAfterPreflight: lifecycleState.mutationStartedAfterPreflight,
     fingerprint,
   })
   process.exit(1)
