@@ -47,6 +47,9 @@ jobs:
       # Branch management. Established name; the rehearsal refuses before any
       # mutation if this is not bound to the environment.
       SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}
+      # Identifies which token is bound, without revealing it. A wrong or stale
+      # token is refused before any branch exists.
+      SUPABASE_ACCESS_TOKEN_SHA256: ${{ secrets.SUPABASE_ACCESS_TOKEN_SHA256 }}
       SUPABASE_PROJECT_REF: ${{ secrets.SUPABASE_PROJECT_REF }}
       EPISTEMIC_OPERATIONS_TOKEN: ${{ secrets.EPISTEMIC_OPERATIONS_TOKEN }}
       EPISTEMIC_RELEASE_AUTHORITY_TOKEN: ${{ secrets.EPISTEMIC_RELEASE_AUTHORITY_TOKEN }}
@@ -57,12 +60,18 @@ jobs:
         run: |
           set -euo pipefail
           export LC_ALL=C
-          for name in SUPABASE_ACCESS_TOKEN SUPABASE_PROJECT_REF EPISTEMIC_OPERATIONS_TOKEN EPISTEMIC_RELEASE_AUTHORITY_TOKEN VERCEL_AUTOMATION_BYPASS_SECRET VERCEL_TOKEN; do
+          for name in SUPABASE_ACCESS_TOKEN SUPABASE_ACCESS_TOKEN_SHA256 SUPABASE_PROJECT_REF EPISTEMIC_OPERATIONS_TOKEN EPISTEMIC_RELEASE_AUTHORITY_TOKEN VERCEL_AUTOMATION_BYPASS_SECRET VERCEL_TOKEN; do
             [ -n "${!name:-}" ] || { echo "::error::$name is not bound to this environment. The rehearsal cannot provision or destroy the isolated resources without it."; exit 1; }
             [[ "${!name}" =~ ^[[:graph:]]+$ ]] || { echo "::error::$name contains whitespace or a non-ASCII character and cannot be used safely."; exit 1; }
           done
           [ "${#EPISTEMIC_OPERATIONS_TOKEN}" -ge 32 ] || { echo '::error::The Preview operations token is shorter than the application authorization minimum.'; exit 1; }
           [ "${#EPISTEMIC_RELEASE_AUTHORITY_TOKEN}" -ge 32 ] || { echo '::error::The Preview release-authority token is shorter than the application authorization minimum.'; exit 1; }
+          case "$SUPABASE_ACCESS_TOKEN_SHA256" in
+            sha256:*) ;;
+            *) echo '::error::SUPABASE_ACCESS_TOKEN_SHA256 must be sha256: followed by 64 lowercase hex characters.'; exit 1 ;;
+          esac
+          [ "${#SUPABASE_ACCESS_TOKEN_SHA256}" -eq 71 ] || { echo '::error::SUPABASE_ACCESS_TOKEN_SHA256 is not a sha256 fingerprint.'; exit 1; }
+          [ "$SUPABASE_ACCESS_TOKEN_SHA256" != "$SUPABASE_ACCESS_TOKEN" ] || { echo '::error::The fingerprint value must not be the token itself.'; exit 1; }
           [ "$EPISTEMIC_OPERATIONS_TOKEN" != "$EPISTEMIC_RELEASE_AUTHORITY_TOKEN" ] || { echo '::error::Operations and release-authority tokens must be distinct.'; exit 1; }
           # The Production project may never be the parent of a rehearsal branch.
           [ "$SUPABASE_PROJECT_REF" != 'uhwuullakihgszxhiygz' ] || { echo '::error::The Production Supabase project is forbidden.'; exit 1; }

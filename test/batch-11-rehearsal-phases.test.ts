@@ -541,7 +541,9 @@ test('the workflow is reachable only by manual dispatch', () => {
 })
 
 test('the workflow carries no Production write credential', () => {
-  const referenced = [...WORKFLOW.matchAll(/secrets\.([A-Z_]+)/g)].map((match) => match[1])
+  // The class includes digits: SUPABASE_ACCESS_TOKEN_SHA256 would otherwise be
+  // captured as SUPABASE_ACCESS_TOKEN_SHA and read as an unknown name.
+  const referenced = [...WORKFLOW.matchAll(/secrets\.([A-Z0-9_]+)/g)].map((match) => match[1])
   const previewOnly = [
     'SUPABASE_ACCESS_TOKEN',
     'SUPABASE_PROJECT_REF',
@@ -549,6 +551,8 @@ test('the workflow carries no Production write credential', () => {
     'EPISTEMIC_RELEASE_AUTHORITY_TOKEN',
     'VERCEL_AUTOMATION_BYPASS_SECRET',
     'VERCEL_TOKEN',
+    // A non-reversible fingerprint, not a credential.
+    'SUPABASE_ACCESS_TOKEN_SHA256',
   ]
   for (const name of referenced) {
     assert.ok(previewOnly.includes(name), `${name} is not a bounded Preview-rehearsal credential`)

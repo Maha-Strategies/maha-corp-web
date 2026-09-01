@@ -114,7 +114,7 @@ test('Production access is an unauthenticated HTTPS GET of the public registry o
 
 // 6
 test('no Production write credential is referenced', () => {
-  const referenced = [...AUTH_TEXT.matchAll(/secrets\.([A-Z_]+)/g)].map((match) => match[1])
+  const referenced = [...AUTH_TEXT.matchAll(/secrets\.([A-Z0-9_]+)/g)].map((match) => match[1])
   const previewOnly = [
     'SUPABASE_ACCESS_TOKEN',
     'SUPABASE_PROJECT_REF',
@@ -122,6 +122,9 @@ test('no Production write credential is referenced', () => {
     'EPISTEMIC_RELEASE_AUTHORITY_TOKEN',
     'VERCEL_AUTOMATION_BYPASS_SECRET',
     'VERCEL_TOKEN',
+    // A non-reversible fingerprint, not a credential: it identifies which
+    // token is bound without being able to authenticate as it.
+    'SUPABASE_ACCESS_TOKEN_SHA256',
   ]
   for (const name of referenced) assert.ok(previewOnly.includes(name), `${name} is not a bounded Preview-rehearsal credential`)
   for (const forbidden of ['PRODUCTION_RELEASE_HEALTH_TOKEN', 'PRODUCTION_CANARY_API_KEY', 'SUPABASE_DB_PASSWORD', 'MAHA_PRODUCTION_READONLY_URL']) {
