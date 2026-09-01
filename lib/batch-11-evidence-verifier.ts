@@ -189,6 +189,11 @@ const SECRET_SHAPES: readonly { name: string; pattern: RegExp }[] = [
   // credential-ish key, where a real token would actually appear.
   { name: 'vercel token', pattern: /"(?:vercel[A-Za-z]*token|token|accessToken|deploymentToken)"\s*:\s*"[A-Za-z0-9_-]{20,}"/i },
   { name: 'authorization header', pattern: /"authorization"\s*:/i },
+  // An ephemeral branch's hostname is its project ref, which names a live
+  // database. Evidence attests resources by fingerprint, so a bare branch or
+  // project host appearing anywhere is a leak of the identifier the
+  // fingerprints exist to avoid publishing.
+  { name: 'supabase project host', pattern: /\bhttps?:\/\/[a-z0-9]{20}\.supabase\.(?:co|in)\b/i },
   { name: 'assigned secret', pattern: /\b(?:secret|token|password|apikey|api_key)"?\s*[:=]\s*"?[A-Za-z0-9/+_-]{20,}/i },
 ]
 
@@ -204,8 +209,69 @@ const SENSITIVE_SHAPES: readonly { name: string; pattern: RegExp }[] = [
   { name: 'unhashed authority value', pattern: /"authorizationBasis"\s*:|"authorityId"\s*:\s*"(?!sha256:)/i },
 ]
 
-export function scanForProhibitedContent(value: unknown): { secrets: string[]; sensitive: string[] } {
-  const text = typeof value === 'string' ? value : JSON.stringify(value ?? null)
+/**
+ * The one static policy sentence the scanner may not read as content.
+ *
+ * The rehearsal declares what it must never leak, and that declaration names
+ * the categories - "no audit corpus, review packet, credential or private
+ * evidence enters a served bundle". A text scanner cannot tell a promise not to
+ * carry audit corpus from audit corpus, so it flagged the run's own policy and
+ * refused a genuinely clean artifact.
+ *
+ * The exemption is deliberately the narrowest thing that fixes it: one exact
+ * literal, at one exact path, and nothing else. It is not a pattern, it does
+ * not understand negation, and it has no notion of "similar" text. Anything
+ * that is not byte-identical at that exact location is scanned normally, so an
+ * excerpt appended to the sentence, the sentence moved to another field, or a
+ * near-copy under a substituted path all still fail.
+ */
+export const STATIC_POLICY_EXEMPTIONS: readonly { path: string; text: string }[] = [
+  {
+    path: 'artifact.requiredInvariants[]',
+    text: 'no audit corpus, review packet, credential or private evidence enters a served bundle',
+  },
+]
+
+/** Never matches any rule, so redaction cannot mask a neighbouring match. */
+const REDACTED_POLICY = '[static-policy-invariant]'
+
+/**
+ * Replaces exactly the permitted literals, leaving the structure otherwise whole.
+ *
+ * A clone rather than a filtered string list, because the rules also match JSON
+ * keys - "authorizationBasis": and paymentIntent among them - and dropping to
+ * values alone would quietly lose those detections.
+ */
+function redactStaticPolicy(value: unknown, path: string): unknown {
+  if (typeof value === 'string') {
+    return STATIC_POLICY_EXEMPTIONS.some((entry) => entry.path === path && entry.text === value)
+      ? REDACTED_POLICY
+      : value
+  }
+  if (Array.isArray(value)) return value.map((entry) => redactStaticPolicy(entry, `${path}[]`))
+  if (value !== null && typeof value === 'object') {
+    return Object.fromEntries(Object.entries(value)
+      .map(([key, entry]) => [key, redactStaticPolicy(entry, path ? `${path}.${key}` : key)]))
+  }
+  return value
+}
+
+export interface ScanOptions {
+  /**
+   * Whether the artifact's own digest has already recomputed.
+   *
+   * The exemption is only extended to an artifact that has proven it is the one
+   * the run produced. A forged artifact does not get to carry the sentence.
+   */
+  digestVerified?: boolean
+}
+
+export function scanForProhibitedContent(
+  value: unknown,
+  options: ScanOptions = {},
+): { secrets: string[]; sensitive: string[] } {
+  const scannable = options.digestVerified ? redactStaticPolicy(value, '') : value
+  const text = typeof scannable === 'string' ? scannable : JSON.stringify(scannable ?? null)
   return {
     secrets: SECRET_SHAPES.filter((shape) => shape.pattern.test(text)).map((shape) => shape.name),
     sensitive: SENSITIVE_SHAPES.filter((shape) => shape.pattern.test(text)).map((shape) => shape.name),
@@ -478,6 +544,9 @@ export function verifyRehearsalEvidence(input: VerifierInput, contract = reposit
   // Recomputing the digest is what ties the commit and the cohort together: a
   // correct artifact from another commit, or the same artifact with a swapped
   // record, produces a different value.
+  // Gates the static-policy exemption below: only an artifact that proves it is
+  // the one the run produced may carry the policy sentence unscanned.
+  let digestVerified = false
   if (typeof artifact.artifactDigest !== 'string') {
     fail('artifact-digest', 'artifact-digest-mismatch', 'The artifact carries no digest.')
   } else {
@@ -502,7 +571,10 @@ export function verifyRehearsalEvidence(input: VerifierInput, contract = reposit
     } catch { recomputed = null }
     if (recomputed !== artifact.artifactDigest) {
       fail('artifact-digest', 'artifact-digest-mismatch', 'The artifact digest does not recompute from the fields it covers.')
-    } else pass('artifact-digest', 'The artifact digest recomputes over the reviewed commit and the ordered cohort.')
+    } else {
+      digestVerified = true
+      pass('artifact-digest', 'The artifact digest recomputes over the reviewed commit and the ordered cohort.')
+    }
   }
 
   // Teardown. Only confirmed absence passes.
@@ -575,7 +647,7 @@ export function verifyRehearsalEvidence(input: VerifierInput, contract = reposit
   }
 
   // Content scanning, over the artifact and everything this report will carry.
-  const scanned = scanForProhibitedContent({ artifact, checks, teardown })
+  const scanned = scanForProhibitedContent({ artifact, checks, teardown }, { digestVerified })
   if (scanned.secrets.length > 0) {
     fail('secret-scan', 'secret-shaped-content', `Secret-shaped content detected: ${scanned.secrets.join(', ')}.`)
   } else pass('secret-scan', 'No secret-shaped content.')
