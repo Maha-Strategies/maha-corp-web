@@ -497,6 +497,7 @@ export function verifyRehearsalEvidence(input: VerifierInput, contract = reposit
         deploymentMarkerDigest: (artifact.deploymentMarkerDigest ?? null) as string | null,
         teardownHandleDigests: (artifact.teardownHandleDigests ?? {}) as never,
         cleanup: (cleanupStatus ?? {}) as never,
+        identities: (artifact.identities ?? {}) as never,
       })
     } catch { recomputed = null }
     if (recomputed !== artifact.artifactDigest) {

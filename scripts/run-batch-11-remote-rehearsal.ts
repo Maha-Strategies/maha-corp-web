@@ -12,6 +12,7 @@ import { assertLineageFresh } from '../lib/batch-11-lineage-freshness.ts'
 import {
   CredentialProvenanceRefused,
   assertExpectedCredential,
+  fingerprintCredential,
   assertPoolerCapability,
   type PoolerCapability,
 } from '../lib/batch-11-credential-provenance.ts'
@@ -764,6 +765,13 @@ try {
       branchDestroyed: outcome.branchDestroyed,
       deploymentDestroyed: outcome.previewDestroyed,
       markerRemoved: lifecycleState.markerRemoved,
+    },
+    // Fingerprints, never the tokens: this answers "was this the same
+    // operations identity throughout" without being able to authenticate as it.
+    identities: {
+      protectedEnvironment: process.env.GITHUB_ENVIRONMENT ?? 'batch-11-preview-rehearsal',
+      operationsIdentityFingerprint: fingerprintCredential(operationsToken),
+      releaseAuthorityIdentityFingerprint: fingerprintCredential(authorityToken),
     },
     requiredPhaseCount: PHASE_ORDER.length,
   })

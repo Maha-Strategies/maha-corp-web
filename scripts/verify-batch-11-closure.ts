@@ -16,7 +16,8 @@ import {
  *
  * Usage:
  *   node --experimental-strip-types scripts/verify-batch-11-closure.ts \
- *     [--artifact <path>] [--teardown <path>] [--json-out <path>] [--md-out <path>]
+ *     [--artifact <path>] [--teardown <path>] [--revocation <path>]
+ *     [--json-out <path>] [--md-out <path>]
  *
  * The bundled synthetic fixture is the default input, so the reports regenerate
  * deterministically without a rehearsal having run.
@@ -29,6 +30,7 @@ const flag = (name: string, fallback: string | null = null): string | null => {
 
 const artifactPath = flag('artifact', 'test/fixtures/batch-11-compliant-artifact.json')!
 const teardownPath = flag('teardown')
+const revocationPath = flag('revocation')
 const jsonOut = flag('json-out', 'content/frontier-audit/batch-11-closure-report.json')!
 const mdOut = flag('md-out', 'docs/frontier-audit/batch-11-closure-report.md')!
 
@@ -43,7 +45,13 @@ const teardown = teardownPath
     : null
 const synthetic = wrapped && (raw as Record<string, unknown>).syntheticFixture === true
 
-const report = verifyBatch11Closure(artifact, teardown)
+const revocation = revocationPath
+  ? JSON.parse(readFileSync(revocationPath, 'utf8'))
+  : wrapped
+    ? (raw as Record<string, unknown>).revocation ?? null
+    : null
+
+const report = verifyBatch11Closure(artifact, teardown, revocation)
 
 mkdirSync(dirname(jsonOut), { recursive: true })
 mkdirSync(dirname(mdOut), { recursive: true })
@@ -76,6 +84,8 @@ const lines = [
   `| Releases | ${s.releases.total ?? '—'} (${s.releases.superseding ?? '—'} superseding, ${s.releases.initial ?? '—'} initial) | ${CLOSURE_REQUIREMENTS.releases} split ${CLOSURE_REQUIREMENTS.superseding}/${CLOSURE_REQUIREMENTS.initial} |`,
   `| Production writes | ${s.productionWrites ?? '—'} | ${CLOSURE_REQUIREMENTS.productionWrites} |`,
   `| Resources destroyed | ${s.resourcesConfirmedDestroyed} of ${s.resourcesRequired} | every one independently confirmed absent |`,
+  `| Credentials revoked | ${s.credentialsConfirmedRevoked} of ${s.credentialsRequired} | every one independently confirmed revoked |`,
+  `| Protected environment | \`${s.protectedEnvironment ?? '—'}\` | batch-11-preview-rehearsal |`,
   '',
   '## Checks',
   '',

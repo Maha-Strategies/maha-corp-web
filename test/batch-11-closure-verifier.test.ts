@@ -29,10 +29,13 @@ type Artifact = Record<string, unknown>
 const artifact = (): Artifact => structuredClone(FIXTURE.artifact) as Artifact
 const teardown = (): TeardownEvidence => structuredClone(FIXTURE.teardown) as TeardownEvidence
 
-const close = (over: { artifact?: unknown; teardown?: unknown } = {}) =>
+const revocation = () => structuredClone(FIXTURE.revocation) as Record<string, unknown>
+
+const close = (over: { artifact?: unknown; teardown?: unknown; revocation?: unknown } = {}) =>
   verifyBatch11Closure(
     over.artifact === undefined ? artifact() : over.artifact,
     over.teardown === undefined ? teardown() : over.teardown,
+    over.revocation === undefined ? revocation() : over.revocation,
     CONTRACT,
   )
 
@@ -315,4 +318,178 @@ test('no closure artifact reaches a client bundle, route, sitemap or llms.txt', 
     const source = readFileSync(join(ROOT, served), 'utf8')
     for (const marker of markers) assert.ok(!source.includes(marker), `${served} references ${marker}`)
   }
+})
+
+/* ============================ the three closed gaps ====================== */
+
+import { contractReleaseIdentities, decisionBundleDigest } from '../lib/batch-11-evidence-binding.ts'
+import {
+  REVOCABLE_CREDENTIALS,
+  recomputeRevocationDigest,
+  REVOCATION_EVIDENCE_VERSION,
+  type RevocationState,
+} from '../lib/batch-11-revocation-evidence.ts'
+
+/** Mutates revocation observations and re-seals the digest. */
+function resealedRevocation(mutate: (report: Record<string, unknown>) => void): Record<string, unknown> {
+  const report = revocation()
+  mutate(report)
+  const observations = report.observations as Array<{ observedState: RevocationState }>
+  report.revocationDigest = recomputeRevocationDigest({
+    schemaVersion: String(report.schemaVersion),
+    runMarker: String(report.runMarker),
+    reviewedCommit: String(report.reviewedCommit),
+    observations: observations as never,
+    allConfirmedRevoked: observations.every((entry) => entry.observedState === 'confirmed-revoked'),
+  })
+  return report
+}
+
+/* --- gap 1: revision, audit and decision-bundle binding ------------------- */
+
+test('a release must bind its exact revision, audit and decision bundle', () => {
+  const contract = contractReleaseIdentities()
+  assert.equal(contract.length, 5)
+  for (const entry of contract) {
+    assert.match(entry.targetSha256, /^sha256:[0-9a-f]{64}$/)
+    assert.match(entry.auditSha256, /^sha256:[0-9a-f]{64}$/)
+    assert.match(entry.decisionBundleSha256, /^sha256:[0-9a-f]{64}$/)
+    // The three are independent facts, not restatements of one another.
+    assert.notEqual(entry.targetSha256, entry.auditSha256)
+    assert.notEqual(entry.auditSha256, entry.decisionBundleSha256)
+    assert.equal(entry.decisionBundleSha256, decisionBundleDigest(entry.recordId))
+  }
+})
+
+test('a tampered audit digest is refused', () => {
+  const bad = artifact()
+  ;(bad.releaseIdentities as Record<string, unknown>[])[0].auditSha256 = `sha256:${'0'.repeat(64)}`
+  const report = close({ artifact: bad })
+  assert.equal(report.closed, false)
+  assert.ok(report.refusals.includes('release-binding-incomplete'), report.refusals.join(', '))
+})
+
+test('a tampered decision bundle is refused', () => {
+  const bad = artifact()
+  ;(bad.releaseIdentities as Record<string, unknown>[])[1].decisionBundleSha256 = `sha256:${'0'.repeat(64)}`
+  refusesWith('release-binding-incomplete', { artifact: bad })
+})
+
+test('a stale revision digest is refused even when audit and bundle are right', () => {
+  const bad = artifact()
+  ;(bad.releaseIdentities as Record<string, unknown>[])[2].targetSha256 = `sha256:${'a'.repeat(64)}`
+  refusesWith('release-binding-incomplete', { artifact: bad })
+})
+
+test('one record cannot borrow another record decision bundle', () => {
+  const contract = contractReleaseIdentities()
+  const bad = artifact()
+  const releases = bad.releaseIdentities as Record<string, unknown>[]
+  releases[0].decisionBundleSha256 = contract[1].decisionBundleSha256
+  refusesWith('release-binding-incomplete', { artifact: bad })
+})
+
+/* --- gap 2: protected environment and ephemeral identities ---------------- */
+
+test('the run must be approved in the protected environment', () => {
+  for (const environment of ['Preview', 'production-database', '', undefined]) {
+    const bad = artifact()
+    const identities = bad.identities as Record<string, unknown>
+    if (environment === undefined) delete identities.protectedEnvironment
+    else identities.protectedEnvironment = environment
+    refusesWith('preview-identity-unproven', { artifact: bad })
+  }
+})
+
+test('substituted or indistinct ephemeral authority identities are refused', () => {
+  const shared = artifact()
+  const identities = shared.identities as Record<string, unknown>
+  identities.releaseAuthorityIdentityFingerprint = identities.operationsIdentityFingerprint
+  refusesWith('preview-identity-unproven', { artifact: shared })
+
+  for (const value of ['not-a-fingerprint', 'sha256:short', '']) {
+    const bad = artifact()
+    ;(bad.identities as Record<string, unknown>).operationsIdentityFingerprint = value
+    refusesWith('preview-identity-unproven', { artifact: bad })
+  }
+})
+
+test('the identities are fingerprints, never tokens', () => {
+  const identities = artifact().identities as Record<string, string>
+  for (const key of ['operationsIdentityFingerprint', 'releaseAuthorityIdentityFingerprint']) {
+    assert.match(identities[key], /^sha256:[0-9a-f]{64}$/)
+  }
+})
+
+/* --- gap 3: independent revocation --------------------------------------- */
+
+test('missing revocation evidence is refused: a destroyed branch does not revoke a token', () => {
+  refusesWith('revocation-evidence-missing', { revocation: null })
+  refusesWith('revocation-evidence-missing', { revocation: {} })
+})
+
+test('revocation evidence from another run or commit is refused', () => {
+  refusesWith('revocation-evidence-inconsistent', {
+    revocation: { ...revocation(), runMarker: 'batch-11-mixed-lineage-rehearsal-999' },
+  })
+  refusesWith('revocation-evidence-inconsistent', {
+    revocation: { ...revocation(), reviewedCommit: 'd'.repeat(40) },
+  })
+  refusesWith('revocation-evidence-inconsistent', {
+    revocation: { ...revocation(), schemaVersion: 'maha-batch-11-revocation-evidence/0.9' },
+  })
+})
+
+test('a tampered revocation digest is refused', () => {
+  refusesWith('revocation-digest-mismatch', {
+    revocation: { ...revocation(), revocationDigest: `sha256:${'e'.repeat(64)}` },
+  })
+})
+
+test('a surviving credential is refused, and so is every unresolved state', () => {
+  for (const state of ['still-active', 'unknown', 'reported-revoked'] as const) {
+    for (let index = 0; index < REVOCABLE_CREDENTIALS.length; index += 1) {
+      const report = close({
+        revocation: resealedRevocation((draft) => {
+          (draft.observations as Array<Record<string, unknown>>)[index].observedState = state
+        }),
+      })
+      assert.equal(report.closed, false, `${state} on ${REVOCABLE_CREDENTIALS[index]}`)
+      assert.ok(report.refusals.includes('credential-not-confirmed-revoked'), report.refusals.join(', '))
+    }
+  }
+})
+
+test('incomplete or duplicated revocation coverage is refused', () => {
+  refusesWith('revocation-evidence-missing', {
+    revocation: resealedRevocation((draft) => {
+      draft.observations = (draft.observations as unknown[]).slice(1)
+    }),
+  })
+  refusesWith('revocation-evidence-missing', {
+    revocation: resealedRevocation((draft) => {
+      const observations = draft.observations as unknown[]
+      draft.observations = [...observations, observations[0]]
+    }),
+  })
+})
+
+test('a complete run with all three gaps satisfied closes', () => {
+  const report = close()
+  assert.equal(report.closed, true, report.refusals.join(', '))
+  assert.equal(report.summary.credentialsConfirmedRevoked, REVOCABLE_CREDENTIALS.length)
+  assert.equal(report.summary.protectedEnvironment, 'batch-11-preview-rehearsal')
+  assert.equal(report.schemaVersion, 'maha-batch-11-closure-verifier/1.0')
+  assert.equal(REVOCATION_EVIDENCE_VERSION, 'maha-batch-11-revocation-evidence/1.0')
+})
+
+test('the revocation producer is inert and never touches the shared teardown union', () => {
+  const source = readFileSync(resolve(ROOT, 'lib/batch-11-revocation-evidence.ts'), 'utf8')
+  for (const forbidden of ['fetch(', 'execFileSync', 'writeFileSync', 'https://api.']) {
+    assert.ok(!source.includes(forbidden), `the revocation producer must not contain ${forbidden}`)
+  }
+  // It defines its own vocabulary rather than widening the v2.0 producer's.
+  assert.ok(!source.includes('TeardownResourceKind'), 'the shared teardown union must stay untouched')
+  const teardownSource = readFileSync(resolve(ROOT, 'lib/batch-11-teardown-observations.ts'), 'utf8')
+  assert.ok(!teardownSource.includes('revocation'), 'the v2.0 producer must not learn about revocation')
 })

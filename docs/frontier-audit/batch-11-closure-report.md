@@ -6,7 +6,7 @@
 
 **CLOSED**
 
-Closure digest `sha256:9dcaf65269f9c4965f969ba7da9b01579662db629dcc444342db1feb46a9665d`.
+Closure digest `sha256:230b34b77da956f074202d084544981127633119da708080b1a4c5a106590d8d`.
 
 ## What was proven
 
@@ -20,6 +20,8 @@ Closure digest `sha256:9dcaf65269f9c4965f969ba7da9b01579662db629dcc444342db1feb4
 | Releases | 5 (2 superseding, 3 initial) | 5 split 2/3 |
 | Production writes | 0 | 0 |
 | Resources destroyed | 4 of 4 | every one independently confirmed absent |
+| Credentials revoked | 3 of 3 | every one independently confirmed revoked |
+| Protected environment | `batch-11-preview-rehearsal` | batch-11-preview-rehearsal |
 
 ## Checks
 
@@ -33,6 +35,9 @@ Closure digest `sha256:9dcaf65269f9c4965f969ba7da9b01579662db629dcc444342db1feb4
 | `resource-identity` | pass | All 4 temporary resources are identified by fingerprints derived from this run. |
 | `resource-destruction` | pass | Every ephemeral branch, deployment, secret binding and release row was independently confirmed absent. |
 | `cleanup-status` | pass | The run reports every temporary resource destroyed, corroborated by the observations above. |
+| `release-binding` | pass | Every release binds its exact revision, audit and decision-bundle digest. |
+| `preview-identities` | pass | Run approved in batch-11-preview-rehearsal under two distinct ephemeral identities. |
+| `revocation` | pass | All 3 temporary credentials independently confirmed revoked. |
 
 ## Composed evidence verdict
 

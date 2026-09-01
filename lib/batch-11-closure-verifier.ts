@@ -2,7 +2,13 @@ import { createHash } from 'node:crypto'
 
 import { canonicalJson } from './evidence-dossier/digest.ts'
 import { FINGERPRINT_PATTERN } from './batch-11-credential-provenance.ts'
-import { runMarkerFor } from './batch-11-evidence-binding.ts'
+import { compareReleasesToContract, runMarkerFor } from './batch-11-evidence-binding.ts'
+import {
+  REVOCABLE_CREDENTIALS,
+  recomputeRevocationDigest,
+  REVOCATION_EVIDENCE_VERSION,
+  type RevocationReport,
+} from './batch-11-revocation-evidence.ts'
 import {
   REQUIRED_INITIAL,
   REQUIRED_RELEASES,
@@ -51,6 +57,12 @@ export type ClosureRefusal =
   | 'resource-not-confirmed-destroyed'
   | 'cleanup-incomplete'
   | 'closure-output-credential-shaped'
+  | 'release-binding-incomplete'
+  | 'preview-identity-unproven'
+  | 'revocation-evidence-missing'
+  | 'revocation-evidence-inconsistent'
+  | 'revocation-digest-mismatch'
+  | 'credential-not-confirmed-revoked'
 
 export interface ClosureCheck {
   check: string
@@ -76,6 +88,9 @@ export interface ClosureReport {
     productionWrites: number | null
     resourcesConfirmedDestroyed: number
     resourcesRequired: number
+    credentialsConfirmedRevoked: number
+    credentialsRequired: number
+    protectedEnvironment: string | null
   }
   /** The composed evidence verdict, carried so closure is auditable in one file. */
   evidenceVerdict: 'verified' | 'refused'
@@ -116,6 +131,7 @@ export function closureDigest(report: Omit<ClosureReport, 'closureDigest'>): str
 export function verifyBatch11Closure(
   artifact: unknown,
   teardown: unknown,
+  revocation: unknown = null,
   contract: RepositoryContract = repositoryContract(),
 ): ClosureReport {
   const checks: ClosureCheck[] = []
@@ -134,6 +150,9 @@ export function verifyBatch11Closure(
     productionWrites: null,
     resourcesConfirmedDestroyed: 0,
     resourcesRequired: REQUIRED_TEARDOWN_KINDS.length,
+    credentialsConfirmedRevoked: 0,
+    credentialsRequired: REVOCABLE_CREDENTIALS.length,
+    protectedEnvironment: null,
   }
 
   const seal = (report: Omit<ClosureReport, 'closureDigest'>): ClosureReport => {
@@ -277,6 +296,64 @@ export function verifyBatch11Closure(
       `The artifact reports incomplete cleanup: ${JSON.stringify(cleanup)}.`)
   } else pass('cleanup-status', 'The run reports every temporary resource destroyed, corroborated by the observations above.')
 
+  // Each release bound to its exact revision, source-alignment audit and
+  // scoped decision bundle. A release can carry the right revision and audit
+  // and still have been approved by a different set of decisions.
+  const releaseProblems = Array.isArray(artifact.releaseIdentities)
+    ? compareReleasesToContract(artifact.releaseIdentities as never)
+    : ['the artifact lists no release identities']
+  if (releaseProblems.length > 0) {
+    fail('release-binding', 'release-binding-incomplete', releaseProblems.slice(0, 3).join(' '))
+  } else pass('release-binding', 'Every release binds its exact revision, audit and decision-bundle digest.')
+
+  // Who ran it, and under what protection.
+  const identities = isObject(artifact.identities) ? artifact.identities : null
+  const environment = identities && typeof identities.protectedEnvironment === 'string' ? identities.protectedEnvironment : null
+  if (!identities || environment !== 'batch-11-preview-rehearsal') {
+    fail('preview-identities', 'preview-identity-unproven',
+      `The artifact records the protected environment as ${JSON.stringify(environment)}.`)
+  } else if (typeof identities.operationsIdentityFingerprint !== 'string'
+    || !FINGERPRINT_PATTERN.test(identities.operationsIdentityFingerprint)
+    || typeof identities.releaseAuthorityIdentityFingerprint !== 'string'
+    || !FINGERPRINT_PATTERN.test(identities.releaseAuthorityIdentityFingerprint)
+    || identities.operationsIdentityFingerprint === identities.releaseAuthorityIdentityFingerprint) {
+    fail('preview-identities', 'preview-identity-unproven',
+      'The ephemeral operations and release-authority identities are not two distinct non-reversible fingerprints.')
+  } else pass('preview-identities', `Run approved in ${environment} under two distinct ephemeral identities.`)
+
+  // Revocation, from an independent post-run check rather than the run itself.
+  const revocationReport = isObject(revocation) ? (revocation as unknown as RevocationReport) : null
+  let revoked = 0
+  if (!revocationReport || !Array.isArray(revocationReport.observations)) {
+    fail('revocation', 'revocation-evidence-missing',
+      'No revocation evidence was supplied. A destroyed branch does not revoke the token that created it.')
+  } else if (revocationReport.schemaVersion !== REVOCATION_EVIDENCE_VERSION
+    || revocationReport.runMarker !== runMarker
+    || revocationReport.reviewedCommit !== reviewedCommit) {
+    fail('revocation', 'revocation-evidence-inconsistent',
+      'The revocation evidence does not describe this run at this commit.')
+  } else if (revocationReport.revocationDigest !== recomputeRevocationDigest({
+    schemaVersion: revocationReport.schemaVersion,
+    runMarker: revocationReport.runMarker,
+    reviewedCommit: revocationReport.reviewedCommit,
+    observations: revocationReport.observations,
+    allConfirmedRevoked: revocationReport.observations.every((entry) => entry.observedState === 'confirmed-revoked'),
+  })) {
+    fail('revocation', 'revocation-digest-mismatch', 'The revocation digest does not recompute from its own observations.')
+  } else {
+    const seenCredentials = revocationReport.observations.map((entry) => entry.credential)
+    const missing = REVOCABLE_CREDENTIALS.filter((credential) => !seenCredentials.includes(credential))
+    const unresolved = revocationReport.observations.filter((entry) => entry.observedState !== 'confirmed-revoked')
+    revoked = revocationReport.observations.filter((entry) => entry.observedState === 'confirmed-revoked').length
+    if (missing.length > 0 || new Set(seenCredentials).size !== seenCredentials.length) {
+      fail('revocation', 'revocation-evidence-missing',
+        `Revocation coverage is incomplete or duplicated: missing ${missing.join(', ') || 'none'}.`)
+    } else if (unresolved.length > 0) {
+      fail('revocation', 'credential-not-confirmed-revoked',
+        `${unresolved.map((entry) => `${entry.credential} (${entry.observedState})`).join(', ')}.`)
+    } else pass('revocation', `All ${REVOCABLE_CREDENTIALS.length} temporary credentials independently confirmed revoked.`)
+  }
+
   const fingerprintValue = isObject(artifact.fingerprint) ? artifact.fingerprint : {}
   const refusals = [...new Set(checks.filter((entry) => !entry.passed).map((entry) => entry.refusal!))]
 
@@ -302,6 +379,9 @@ export function verifyBatch11Closure(
       productionWrites: typeof artifact.productionWritesPerformed === 'number' ? artifact.productionWritesPerformed : null,
       resourcesConfirmedDestroyed: destroyed.length,
       resourcesRequired: REQUIRED_TEARDOWN_KINDS.length,
+      credentialsConfirmedRevoked: revoked,
+      credentialsRequired: REVOCABLE_CREDENTIALS.length,
+      protectedEnvironment: environment,
     },
     evidenceVerdict: evidenceReport.verdict,
     evidenceRefusals: evidenceReport.refusals,

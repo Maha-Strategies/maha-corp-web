@@ -2,7 +2,7 @@ import { createHash } from 'node:crypto'
 
 import { canonicalJson } from './evidence-dossier/digest.ts'
 import { BATCH_11_LINEAGE_DECLARATIONS } from './batch-11-mixed-lineage-release.ts'
-import { BATCH_11_REVISION_AUDITS } from './batch-11-revision-canary.ts'
+import { BATCH_11_REVISION_AUDITS, BATCH_11_SCOPED_DECISIONS } from './batch-11-revision-canary.ts'
 
 /**
  * Binds executed rehearsal evidence to the code that was reviewed.
@@ -112,6 +112,8 @@ export type BindingRefusal =
   | 'run-marker-mismatch'
   | 'release-target-not-contract-derived'
   | 'release-predecessor-mismatch'
+  | 'preview-identity-missing'
+  | 'preview-identity-malformed'
   | 'teardown-handle-missing'
   | 'teardown-handle-release-mismatch'
 
@@ -150,9 +152,32 @@ export function bindReviewedCommit(expected: string, checkedOut: string): string
 export interface ReleaseIdentity {
   recordId: string
   releaseId: string
+  /** The exact reviewed record revision this release binds. */
   targetSha256: string
+  /** The source-alignment audit that cleared that exact revision. */
+  auditSha256: string
+  /**
+   * Digest over the record's four scoped internal-review decisions.
+   *
+   * A release can carry the right revision and the right audit and still have
+   * been approved by a different set of decisions, so the bundle is bound
+   * separately rather than inferred from the audit.
+   */
+  decisionBundleSha256: string
   releaseKind: 'initial' | 'superseding'
   supersedesReleaseId: string | null
+}
+
+/** Digest over one record's scoped decisions, order-independent. */
+export function decisionBundleDigest(recordId: string): string {
+  const decisions = BATCH_11_SCOPED_DECISIONS
+    .filter((entry) => entry.recordId === recordId)
+    .map((entry) => entry.decisionSha256)
+    .sort()
+  if (decisions.length === 0) {
+    throw new EvidenceBindingRefused('release-target-not-contract-derived', `${recordId}: no scoped review decisions exist.`)
+  }
+  return `sha256:${createHash('sha256').update(canonicalJson(decisions), 'utf8').digest('hex')}`
 }
 
 /**
@@ -174,6 +199,8 @@ export function contractReleaseIdentities(): readonly ReleaseIdentity[] {
       // The release id is issued at run time and is not derivable here.
       releaseId: '',
       targetSha256: audit.revisedRecordRevisionSha256,
+      auditSha256: audit.auditSha256,
+      decisionBundleSha256: decisionBundleDigest(declaration.recordId),
       releaseKind: declaration.declaredReleaseKind,
       supersedesReleaseId: declaration.declaredPriorReleaseId,
     }
@@ -206,6 +233,12 @@ export function compareReleasesToContract(
     }
     if (release.targetSha256 !== expected.targetSha256) {
       problems.push(`${release.recordId}: target digest is not the one the revision audit declares.`)
+    }
+    if (release.auditSha256 !== expected.auditSha256) {
+      problems.push(`${release.recordId}: the source-alignment audit digest is not the one that cleared this revision.`)
+    }
+    if (release.decisionBundleSha256 !== expected.decisionBundleSha256) {
+      problems.push(`${release.recordId}: the scoped internal-review decision bundle is not the one recorded for this revision.`)
     }
     if (release.releaseKind !== expected.releaseKind) {
       problems.push(`${release.recordId}: released as ${release.releaseKind} but declared ${expected.releaseKind}.`)
@@ -241,6 +274,21 @@ export interface CleanupStatus {
   markerRemoved: boolean
 }
 
+/**
+ * Who ran the rehearsal, and under what protection.
+ *
+ * The identities are fingerprints, never the tokens: they answer "was this the
+ * same operations identity throughout" without being able to authenticate as
+ * it. The environment is named because the reviewer gate is attached to that
+ * name, and a run from an unprotected environment would otherwise look
+ * identical in the evidence.
+ */
+export interface PreviewIdentities {
+  protectedEnvironment: string
+  operationsIdentityFingerprint: string
+  releaseAuthorityIdentityFingerprint: string
+}
+
 export interface BoundEvidenceInput {
   expectedReviewedCommit: string
   checkedOutCommit: string
@@ -258,6 +306,7 @@ export interface BoundEvidenceInput {
   /** Exact private targets. Only their digests enter the public artifact. */
   teardownHandles: ExactTeardownHandles
   cleanup: CleanupStatus
+  identities: PreviewIdentities
   requiredPhaseCount: number
 }
 
@@ -276,6 +325,7 @@ export interface BoundEvidence {
   deploymentMarkerDigest: string | null
   teardownHandleDigests: TeardownHandleDigests
   cleanup: CleanupStatus
+  identities: PreviewIdentities
   artifactDigest: string
 }
 
@@ -395,6 +445,25 @@ export function buildBoundEvidence(input: BoundEvidenceInput): BoundEvidence {
     throw new EvidenceBindingRefused('teardown-handle-release-mismatch', 'The database teardown handle does not name exactly the releases issued by this run.')
   }
 
+  const identities = input.identities
+  if (!identities || typeof identities.protectedEnvironment !== 'string' || identities.protectedEnvironment.trim().length === 0) {
+    throw new EvidenceBindingRefused('preview-identity-missing',
+      'The artifact must name the protected environment the run was approved in.')
+  }
+  for (const [label, value] of [
+    ['operations', identities.operationsIdentityFingerprint],
+    ['release-authority', identities.releaseAuthorityIdentityFingerprint],
+  ] as const) {
+    if (typeof value !== 'string' || !/^sha256:[0-9a-f]{64}$/.test(value)) {
+      throw new EvidenceBindingRefused('preview-identity-malformed',
+        `The ephemeral ${label} identity must be recorded as a non-reversible sha256 fingerprint.`)
+    }
+  }
+  if (identities.operationsIdentityFingerprint === identities.releaseAuthorityIdentityFingerprint) {
+    throw new EvidenceBindingRefused('preview-identity-malformed',
+      'The operations and release-authority identities must be distinct.')
+  }
+
   const base = {
     artifactSchema: BOUND_EVIDENCE_SCHEMA,
     reviewedCommit,
@@ -417,6 +486,7 @@ export function buildBoundEvidence(input: BoundEvidenceInput): BoundEvidence {
       : null,
     teardownHandleDigests: teardownHandleDigests(handles),
     cleanup,
+    identities: input.identities,
   } satisfies Omit<BoundEvidence, 'artifactDigest'>
 
   return { ...base, artifactDigest: boundEvidenceDigest(base) }

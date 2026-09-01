@@ -49,6 +49,24 @@
       "passed": true,
       "refusal": null,
       "detail": "The run reports every temporary resource destroyed, corroborated by the observations above."
+    },
+    {
+      "check": "release-binding",
+      "passed": true,
+      "refusal": null,
+      "detail": "Every release binds its exact revision, audit and decision-bundle digest."
+    },
+    {
+      "check": "preview-identities",
+      "passed": true,
+      "refusal": null,
+      "detail": "Run approved in batch-11-preview-rehearsal under two distinct ephemeral identities."
+    },
+    {
+      "check": "revocation",
+      "passed": true,
+      "refusal": null,
+      "detail": "All 3 temporary credentials independently confirmed revoked."
     }
   ],
   "refusals": [],
@@ -66,10 +84,13 @@
     },
     "productionWrites": 0,
     "resourcesConfirmedDestroyed": 4,
-    "resourcesRequired": 4
+    "resourcesRequired": 4,
+    "credentialsConfirmedRevoked": 3,
+    "credentialsRequired": 3,
+    "protectedEnvironment": "batch-11-preview-rehearsal"
   },
   "evidenceVerdict": "verified",
   "evidenceRefusals": [],
-  "closureDigest": "sha256:9dcaf65269f9c4965f969ba7da9b01579662db629dcc444342db1feb46a9665d",
+  "closureDigest": "sha256:230b34b77da956f074202d084544981127633119da708080b1a4c5a106590d8d",
   "syntheticFixture": true
 }

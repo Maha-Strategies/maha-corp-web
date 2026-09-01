@@ -12,6 +12,7 @@ import {
   runMarkerFor,
   type BoundEvidenceInput,
 } from '../lib/batch-11-evidence-binding.ts'
+import { fingerprintCredential } from '../lib/batch-11-credential-provenance.ts'
 import { verifyRehearsalEvidence, repositoryContract, type TeardownEvidence } from '../lib/batch-11-evidence-verifier.ts'
 import {
   LineageNotFresh,
@@ -77,6 +78,11 @@ const boundInput = (over: Partial<BoundEvidenceInput> = {}): BoundEvidenceInput 
     databaseReleaseRows: { branchId: 'branch', releaseIds: releaseIdentities.map((entry) => entry.releaseId) },
   },
   cleanup: { branchDestroyed: true, deploymentDestroyed: true, markerRemoved: true },
+  identities: {
+    protectedEnvironment: 'batch-11-preview-rehearsal',
+    operationsIdentityFingerprint: fingerprintCredential('synthetic-operations-identity'),
+    releaseAuthorityIdentityFingerprint: fingerprintCredential('synthetic-release-authority-identity'),
+  },
   requiredPhaseCount: PHASE_ORDER.length,
   ...over,
   })
