@@ -2,8 +2,9 @@ import { mkdirSync, writeFileSync } from 'node:fs'
 import { dirname } from 'node:path'
 
 import { fingerprintCredential } from '../lib/batch-11-credential-provenance.ts'
+import { providerEndpoint } from '../lib/batch-11-provider-endpoints.ts'
 import {
-  TEMPORARY_REVOCABLE_SECRET_NAMES,
+  TEMPORARY_ENVIRONMENT_SECRET_NAMES,
   environmentSecretSlotFingerprint,
   runMarkerFor,
 } from '../lib/batch-11-evidence-binding.ts'
@@ -99,35 +100,17 @@ async function probe(
 const notAttempted = (detail: string): Outcome =>
   ({ status: 'not-attempted', scope: 'unknown', stillResolves: false, detail })
 
-/**
- * Where to send each probe, overridable only to loopback.
- *
- * The probes carry live credentials, so an override that could name any host
- * would be a way to exfiltrate one by setting an environment variable. Only
- * http://127.0.0.1 is accepted, and anything else exits rather than falling
- * back to the real endpoint - a misconfigured override must not silently
- * become a production call either.
- */
-const endpoint = (name: string, production: string): string => {
-  const override = process.env[name]?.trim()
-  if (!override) return production
-  let url: URL
-  try {
-    url = new URL(override)
-  } catch {
-    console.error(`${name} is not a URL.`)
-    process.exit(2)
-  }
-  if (url.protocol !== 'http:' || (url.hostname !== '127.0.0.1' && url.hostname !== 'localhost')) {
-    console.error(`${name} may only point at http://127.0.0.1; refusing to send a credential elsewhere.`)
-    process.exit(2)
-  }
-  return override.replace(/\/+$/, '')
+let SUPABASE_API: string
+let VERCEL_API: string
+let GITHUB_API: string
+try {
+  SUPABASE_API = providerEndpoint('supabase')
+  VERCEL_API = providerEndpoint('vercel')
+  GITHUB_API = providerEndpoint('github')
+} catch (error) {
+  console.error((error as Error).message)
+  process.exit(2)
 }
-
-const SUPABASE_API = endpoint('MAHA_B11_SUPABASE_API', 'https://api.supabase.com')
-const VERCEL_API = endpoint('MAHA_B11_VERCEL_API', 'https://api.vercel.com')
-const GITHUB_API = endpoint('MAHA_B11_GITHUB_API', 'https://api.github.com')
 
 const supabaseToken = process.env.SUPABASE_ACCESS_TOKEN?.trim() ?? ''
 const vercelToken = process.env.VERCEL_TOKEN?.trim() ?? ''
@@ -213,7 +196,14 @@ const outcomes: Record<RevocableCredential, Outcome> = {
     })
     : notAttempted('VERCEL_TOKEN, VERCEL_PROJECT_ID and the revoked VERCEL_AUTOMATION_BYPASS_SECRET were not all supplied, so bypass revocation cannot be confirmed.'),
 
-  // Deleted environment secrets stop being listed. Names only are read.
+  /*
+   * Deleted environment secrets stop being listed. Names only are read.
+   *
+   * Deletion, not revocation - SUPABASE_ACCESS_TOKEN_SHA256 holds a
+   * fingerprint, and a fingerprint cannot be revoked. The persistent bindings
+   * are deliberately not in this set: they are expected to still be listed, and
+   * looking for their absence would refuse a correct cleanup.
+   */
   'github-environment-secrets': githubToken
     ? await probe('The protected-environment secret listing', 'exact-environment', async () => {
       const response = await fetch(`${GITHUB_API}/repos/${repository}/environments/${environment}/secrets`, {
@@ -225,7 +215,7 @@ const outcomes: Record<RevocableCredential, Outcome> = {
       }
       const body = await response.json() as { secrets?: { name: string }[] }
       const present = (body.secrets ?? []).map((entry) => entry.name)
-      const surviving = TEMPORARY_REVOCABLE_SECRET_NAMES.filter((name) => present.includes(name))
+      const surviving = TEMPORARY_ENVIRONMENT_SECRET_NAMES.filter((name) => present.includes(name))
       return { status: 'succeeded', scope: 'exact-environment', stillResolves: surviving.length > 0,
         detail: surviving.length > 0
           ? `${surviving.length} temporary secret name(s) are still bound to ${environment}.`
@@ -257,7 +247,7 @@ const identityFor = (credential: RevocableCredential): string | null => {
   }
   return environmentSecretSlotFingerprint({
     environment,
-    names: TEMPORARY_REVOCABLE_SECRET_NAMES,
+    names: TEMPORARY_ENVIRONMENT_SECRET_NAMES,
     runMarker,
     reviewedCommit,
   })

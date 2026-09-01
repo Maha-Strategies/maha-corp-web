@@ -5,7 +5,7 @@ import test from 'node:test'
 
 import {
   EvidenceBindingRefused,
-  TEMPORARY_PREVIEW_SECRET_NAMES,
+  TEMPORARY_ENVIRONMENT_SECRET_NAMES,
   buildBoundEvidence,
   compareReleasesToContract,
   contractReleaseIdentities,
@@ -74,7 +74,7 @@ const boundInput = (over: Partial<BoundEvidenceInput> = {}): BoundEvidenceInput 
     reviewedCommit: COMMIT,
     supabaseBranch: { branchId: 'branch', parentProjectRef: 'staging' },
     vercelPreview: { deploymentId: 'dpl', origin: 'https://x.vercel.app' },
-    githubEnvironmentSecrets: { environment: 'batch-11-preview-rehearsal', names: TEMPORARY_PREVIEW_SECRET_NAMES },
+    githubEnvironmentSecrets: { environment: 'batch-11-preview-rehearsal', names: TEMPORARY_ENVIRONMENT_SECRET_NAMES },
     databaseReleaseRows: { branchId: 'branch', releaseIds: releaseIdentities.map((entry) => entry.releaseId) },
   },
   cleanup: { branchDestroyed: true, deploymentDestroyed: true, markerRemoved: true },

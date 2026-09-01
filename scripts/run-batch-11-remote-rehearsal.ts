@@ -3,7 +3,7 @@ import { existsSync, mkdirSync, readFileSync, unlinkSync, writeFileSync } from '
 import { dirname, join } from 'node:path'
 
 import {
-  TEMPORARY_PREVIEW_SECRET_NAMES,
+  TEMPORARY_ENVIRONMENT_SECRET_NAMES,
   buildBoundEvidence,
   runMarkerFor,
   type ExactTeardownHandles,
@@ -719,7 +719,7 @@ try {
     vercelPreview: { deploymentId, origin: deploymentOrigin },
     githubEnvironmentSecrets: {
       environment: 'batch-11-preview-rehearsal',
-      names: TEMPORARY_PREVIEW_SECRET_NAMES,
+      names: TEMPORARY_ENVIRONMENT_SECRET_NAMES,
     },
     databaseReleaseRows: {
       branchId: lifecycleState.branchHandle.branchId,

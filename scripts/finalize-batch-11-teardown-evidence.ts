@@ -3,9 +3,12 @@ import { dirname } from 'node:path'
 import { execFileSync } from 'node:child_process'
 
 import {
-  TEMPORARY_PREVIEW_SECRET_NAMES,
+  PERSISTENT_PREVIEW_BINDING_NAMES,
+  TEMPORARY_ENVIRONMENT_SECRET_NAMES,
+  assertDeletableNames,
   type TeardownHandleDigests,
 } from '../lib/batch-11-evidence-binding.ts'
+import { providerEndpoint } from '../lib/batch-11-provider-endpoints.ts'
 import {
   assertSanitized,
   produceTeardownObservations,
@@ -48,7 +51,7 @@ let github: ProviderQueryResult
 try {
   let body: { secrets?: { name?: string }[] }
   if (githubToken) {
-    const response = await fetch(`https://api.github.com/repos/${repository}/environments/batch-11-preview-rehearsal/secrets`, {
+    const response = await fetch(`${providerEndpoint('github')}/repos/${repository}/environments/batch-11-preview-rehearsal/secrets`, {
       headers: { authorization: `Bearer ${githubToken}`, accept: 'application/vnd.github+json' },
       cache: 'no-store',
     })
@@ -62,8 +65,11 @@ try {
     ], { encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'] })) as { secrets?: { name?: string }[] }
   }
   if (!Array.isArray(body.secrets)) throw new Error('GitHub returned a malformed secret listing.')
-  const expectedNames = new Set<string>(TEMPORARY_PREVIEW_SECRET_NAMES)
-  const survivors = body.secrets.filter((entry) => expectedNames.has(String(entry.name ?? '')))
+  // Only the temporary bindings. SUPABASE_PROJECT_REF and VERCEL_TOKEN are
+  // persistent Preview infrastructure and are expected to still be listed here;
+  // counting them as survivors is what made a correct cleanup unconfirmable.
+  const deletable = new Set<string>(assertDeletableNames(TEMPORARY_ENVIRONMENT_SECRET_NAMES))
+  const survivors = body.secrets.filter((entry) => deletable.has(String(entry.name ?? '')))
   github = {
     provider: 'github',
     resourceKind: 'github-environment-secret',
@@ -73,7 +79,9 @@ try {
     reviewedCommit: String(artifact.reviewedCommit),
     identifierFingerprint: expected['github-environment-secret'],
     matches: survivors.map(() => ({ identifierFingerprint: expected['github-environment-secret'], status: 'bound' })),
-    detail: survivors.length === 0 ? 'The exact temporary secret-name set is absent.' : `${survivors.length} exact temporary secret binding(s) remain.`,
+    detail: survivors.length === 0
+      ? `All ${TEMPORARY_ENVIRONMENT_SECRET_NAMES.length} temporary secret bindings are absent; the ${PERSISTENT_PREVIEW_BINDING_NAMES.length} persistent Preview bindings are untouched.`
+      : `${survivors.length} temporary secret binding(s) remain.`,
   }
 } catch (error) {
   github = {
