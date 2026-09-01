@@ -56,7 +56,7 @@ import {
   parseVercelDeploymentOutput,
   vercelDeploymentArguments,
 } from '../lib/batch-11-preview-binding.ts'
-import { batch11RevisionReviewInputs } from '../lib/batch-11-revision-canary.ts'
+import { BATCH_11_REVISION_AUDITS, batch11RevisionReviewInputs } from '../lib/batch-11-revision-canary.ts'
 import { acquireBranchServiceKey, type BranchKeyOutcome } from '../lib/batch-11-branch-api-key.ts'
 import { awaitRestReadiness, type ReadinessOutcome } from '../lib/batch-11-rest-readiness.ts'
 import { previewSessionPoolerEnvironment } from '../lib/batch-11-supabase-pooler.ts'
@@ -830,13 +830,26 @@ try {
     // Compared against the repository contract inside buildBoundEvidence: the
     // target digest must be the one the revision audit declares, not merely a
     // well-formed hash.
-    releaseIdentities: outcome.releaseIdentities.map((entry) => ({
-      recordId: entry.recordId,
-      releaseId: entry.releaseId,
-      targetSha256: entry.targetSha256,
-      releaseKind: entry.releaseKind,
-      supersedesReleaseId: entry.supersedesReleaseId,
-    })),
+    // The audit and decision-bundle digests are repository facts about which
+    // audit and which four approvals cleared this exact revision. They were
+    // added to the bound identity but never produced here, so every issued
+    // release arrived with them undefined and the contract comparison refused
+    // after the releases had already been made. Looked up by the record the run
+    // actually released, so a release for a record outside the cohort refuses
+    // here rather than being recorded with a plausible digest.
+    releaseIdentities: outcome.releaseIdentities.map((entry) => {
+      const audit = BATCH_11_REVISION_AUDITS.find((candidate) => candidate.recordId === entry.recordId)
+      if (!audit) throw new Error(`${entry.recordId}: released without a revision audit.`)
+      return {
+        recordId: entry.recordId,
+        releaseId: entry.releaseId,
+        targetSha256: entry.targetSha256,
+        auditSha256: audit.auditSha256,
+        decisionBundleSha256: decisionBundleDigest(entry.recordId),
+        releaseKind: entry.releaseKind,
+        supersedesReleaseId: entry.supersedesReleaseId,
+      }
+    }),
     replayedReleases: outcome.replayedReleases,
     deploymentMarker: lifecycleState.deploymentMarker,
     teardownHandles,

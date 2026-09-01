@@ -343,3 +343,41 @@ test('each record still carries four scoped decisions on its exact revision', ()
     assert.match(proposed.auditSha256, /^sha256:[0-9a-f]{64}$/)
   }
 })
+
+/**
+ * The bound identity must carry what the contract compares.
+ *
+ * Run 33502828081 issued all five releases against a live branch and was then
+ * refused while assembling its own evidence: the audit and decision-bundle
+ * digests had been added to the bound identity but were never produced, so
+ * every release arrived with them undefined. The work was done and the artifact
+ * could not be built.
+ */
+test('the runner produces every field the contract comparison requires', () => {
+  const runner = readFileSync(resolve(ROOT, 'scripts/run-batch-11-remote-rehearsal.ts'), 'utf8')
+  const block = runner.slice(runner.indexOf('releaseIdentities: outcome.releaseIdentities.map'))
+    .slice(0, 1200)
+
+  for (const field of ['recordId', 'releaseId', 'targetSha256', 'auditSha256', 'decisionBundleSha256', 'releaseKind', 'supersedesReleaseId']) {
+    assert.ok(block.includes(`${field}:`), `the bound release identity must carry ${field}`)
+  }
+  // Derived from the record actually released, not asserted blindly.
+  assert.match(block, /BATCH_11_REVISION_AUDITS\.find\(\(candidate\) => candidate\.recordId === entry\.recordId\)/)
+  assert.match(block, /released without a revision audit/)
+  assert.match(block, /decisionBundleDigest\(entry\.recordId\)/)
+})
+
+test('a release outside the cohort is refused rather than given a digest', () => {
+  // The lookup throws instead of falling back, so an unexpected record cannot
+  // be recorded with a plausible-looking audit digest.
+  const contract = contractReleaseIdentities()
+  const known = new Set(contract.map((entry) => entry.recordId))
+  assert.equal(known.size, 5)
+  for (const identity of contract) {
+    assert.match(identity.auditSha256, /^sha256:[0-9a-f]{64}$/)
+    assert.match(identity.decisionBundleSha256, /^sha256:[0-9a-f]{64}$/)
+  }
+  // Every declared record has exactly one audit and one decision bundle.
+  assert.equal(new Set(contract.map((entry) => entry.auditSha256)).size, 5)
+  assert.equal(new Set(contract.map((entry) => entry.decisionBundleSha256)).size, 5)
+})
