@@ -9,11 +9,15 @@ reuse any of them.** Only `SUPABASE_PROJECT_REF` and `VERCEL_TOKEN` remain bound
 
 ## Reviewed commit
 
-```
-6e3504e4fcf199154e6f9a619aef5e4b97e78116
+The run must be dispatched at **the exact current merged `main`**. Read it at
+dispatch time rather than copying a value from here:
+
+```bash
+git fetch origin && git rev-parse origin/main
 ```
 
-This is the commit the run must be dispatched at. The workflow checks out this
+A SHA written into this file goes stale the moment the file is merged, because
+merging it moves `main`. That already happened once. The workflow checks out this
 SHA and refuses if `HEAD` differs, and the artifact digest binds it, so a run
 from any other tree fails verification afterwards even if it succeeds.
 
@@ -56,7 +60,7 @@ Workflow: **Batch 11 remote Preview rehearsal**, manual dispatch only.
 |---|---|
 | `operation` | `batch-11-mixed-lineage-preview-rehearsal` |
 | `confirmation` | `rehearse-batch-11-mixed-lineage-in-preview-only` |
-| `reviewed_commit` | `6e3504e4fcf199154e6f9a619aef5e4b97e78116` |
+| `reviewed_commit` | the output of `git rev-parse origin/main` |
 | `preview_origin` | the HTTPS Vercel Preview origin for that commit |
 
 All four are compared exactly. A reviewer must approve the environment before
@@ -79,9 +83,31 @@ feed the sanitized results to the producer. A query that failed, was never
 attempted, or covered a partial scope produces `unknown`, not absence.
 
 **Revocation checks.** Revoke the Supabase token, the Vercel bypass secret and
-the temporary GitHub secrets, then confirm with each provider that they no
-longer resolve. An operator's own statement that they revoked something reduces
-to `reported-revoked`, which does not close.
+the temporary GitHub secrets, then run the collector. It asks each provider
+directly and records only what the provider answers:
+
+```bash
+MAHA_B11_RUN_ID=<the run id> \
+MAHA_B11_REVIEWED_COMMIT=<the reviewed commit> \
+SUPABASE_ACCESS_TOKEN=<the revoked token> \
+VERCEL_TOKEN=<...> VERCEL_PROJECT_ID=<...> GITHUB_TOKEN=<...> \
+node --experimental-strip-types scripts/collect-batch-11-revocation-evidence.ts \
+  --out batch-11-teardown/revocation.json
+```
+
+Supply the credential you are testing: a revoked Supabase token is expected to
+be rejected with 401, and that rejection is the evidence. A credential that is
+not supplied yields `not-attempted`, which does not close. An operator's own
+statement that they revoked something reduces to `reported-revoked`, which also
+does not close.
+
+### Why closure is a post-run step
+
+The workflow cannot close itself. The temporary credentials are still live while
+it runs — they have to be, it is using them — so revocation can only be observed
+afterwards. The run uploads `batch-11-sanitized-teardown-partial`; the GitHub
+portion, the revocation checks and the closure verification are all operator
+steps that follow it.
 
 Then:
 
