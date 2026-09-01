@@ -104,15 +104,42 @@ test('401 and 403 refuse immediately, without retrying', async () => {
 
 /* --- selection is unforgiving --------------------------------------------- */
 
-test('exactly one secret key is required', async () => {
+test('two keys of the same tier are ambiguous and refuse', async () => {
   const two = await acquire([ok([secretRow, { ...secretRow, id: 'k9', name: 'second' }])])
   assert.equal(two.outcome.refusal, 'ambiguous-secret-key')
   assert.equal(two.key, null)
 
-  // A legacy service_role key alongside a modern secret is equally ambiguous.
-  const mixed = await acquire([ok([secretRow, legacyService])])
-  assert.equal(mixed.outcome.refusal, 'ambiguous-secret-key')
-  assert.equal(mixed.key, null)
+  const twoLegacy = await acquire([ok([legacyService, { ...legacyService, id: 'k9' }])])
+  assert.equal(twoLegacy.outcome.refusal, 'ambiguous-secret-key')
+  assert.equal(twoLegacy.key, null)
+})
+
+/**
+ * A modern secret and a legacy service_role key are not rival identities.
+ *
+ * Run 33497894169 refused here: the branch published both, and pooling them
+ * made a routine hosted-project shape look ambiguous. They are the same
+ * authority in two tiers, and the modern key is the one the provider issues
+ * going forward, so the tiers are ranked. Genuine ambiguity - two of the same
+ * tier - still refuses, which the test above pins.
+ */
+test('a modern secret key takes precedence over a legacy service_role key', async () => {
+  const { outcome, key } = await acquire([ok([legacyAnon, legacyService, publishableRow, secretRow])])
+  assert.equal(outcome.acquired, true)
+  assert.equal(key, SECRET_KEY)
+  assert.deepEqual(outcome.selected, { type: 'secret', name: 'default' })
+})
+
+test('a refusal describes what the branch offered, by type and name only', async () => {
+  const { outcome } = await acquire([ok([secretRow, { ...secretRow, id: 'k9', name: 'second' }])])
+  assert.deepEqual(outcome.candidates, [
+    { type: 'secret', name: 'default' },
+    { type: 'secret', name: 'second' },
+  ])
+  // Diagnosable without another protected run, and still carrying no values.
+  const serialized = JSON.stringify(outcome)
+  assert.ok(!serialized.includes(SECRET_KEY))
+  assert.ok(!serialized.includes(PUBLISHABLE))
 })
 
 test('a publishable-only response never yields a key', async () => {
@@ -144,7 +171,7 @@ test('a malformed response refuses rather than guessing', async () => {
   }
 })
 
-test('a legacy service_role key alone is accepted', async () => {
+test('a legacy service_role key is used when no modern secret exists', async () => {
   const { outcome, key } = await acquire([ok([legacyAnon, legacyService])])
   assert.equal(outcome.acquired, true)
   assert.equal(key, legacyService.api_key)
