@@ -24,6 +24,7 @@ import { getActiveEpistemicCanonicalReleases } from '@/lib/public-epistemic-rele
 import { EPISTEMIC_PHASE4_PILOT_DATE } from '@/lib/epistemic-pilot-corpus'
 import { PUBLIC_AUTHORITY_CONFORMANCE_DATE } from '@/lib/celestial-public-authority-conformance'
 import { getPublishedSubstantialPage, SUBSTANTIAL_PUBLICATION_DATE } from '@/lib/substantial-page-public'
+import { EXACTZK_EVIDENCE_PATH, EXACTZK_RELEASE_DATE, KNOWLEDGE_INTEGRATIONS_PATH } from '@/lib/knowledge-integration-evidence'
 
 /*
  * The sitemap reads active canonical releases from the database, so it must be
@@ -52,6 +53,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${baseUrl}/doctrine` },
     { url: `${baseUrl}/research` },
     { url: `${baseUrl}/knowledge`, lastModified: new Date(CELESTIAL_FACT_RELEASE_DATE) },
+    { url: `${baseUrl}${KNOWLEDGE_INTEGRATIONS_PATH}`, lastModified: new Date(EXACTZK_RELEASE_DATE) },
+    { url: `${baseUrl}${EXACTZK_EVIDENCE_PATH}`, lastModified: new Date(EXACTZK_RELEASE_DATE) },
     { url: `${baseUrl}${CELESTIAL_FACT_PATH}`, lastModified: new Date(CELESTIAL_FACT_RELEASE_DATE) },
     { url: `${baseUrl}${ASTRONOMY_KNOWLEDGE_PATH}`, lastModified: new Date(ASTRONOMY_KNOWLEDGE_RELEASE_DATE) },
     { url: `${baseUrl}${MATHEMATICS_KNOWLEDGE_PATH}`, lastModified: new Date(MATHEMATICS_KNOWLEDGE_RELEASE_DATE) },

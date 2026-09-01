@@ -37,6 +37,7 @@ import {
 } from '@/lib/religion-knowledge'
 import { NEUROMORPHIC_COMPARISONS, NEUROMORPHIC_CONCEPTS, NEUROMORPHIC_PATH, NEUROMORPHIC_VERSION } from '@/lib/neuromorphic-biocomputing'
 import { EPISTEMIC_DOMAINS, EPISTEMIC_SYSTEM_PATH, PUBLIC_EPISTEMIC_RECORDS } from '@/lib/epistemic-pilots'
+import { KNOWLEDGE_INTEGRATIONS_PATH } from '@/lib/knowledge-integration-evidence'
 import styles from './knowledge-cyber-light.module.css'
 
 export const metadata: Metadata = {
@@ -94,6 +95,7 @@ export default function KnowledgePage() {
       },
       { '@type': 'CollectionPage', name: 'Neuromorphic and biocomputing', url: `${SITE_URL}${NEUROMORPHIC_PATH}`, version: NEUROMORPHIC_VERSION },
       { '@type': 'TechArticle', name: 'Maha Epistemic Publication System', url: `${SITE_URL}${EPISTEMIC_SYSTEM_PATH}` },
+      { '@type': 'CollectionPage', name: 'Integration Evidence', url: `${SITE_URL}${KNOWLEDGE_INTEGRATIONS_PATH}` },
       ...EPISTEMIC_DOMAINS.map((domain) => ({ '@type': 'CollectionPage', name: domain.name, url: `${SITE_URL}/knowledge/${domain.slug}` })),
       ...KNOWLEDGE_ARTICLES.map((article) => ({
         '@type': 'TechArticle',
@@ -193,6 +195,13 @@ export default function KnowledgePage() {
               <p className="mt-3 text-sm leading-6 text-zinc-400">A multi-axis schema, source-rights contract, deterministic provenance hash, and enforceable gate between machine records and public pages.</p>
               <p className="mt-4 border-l border-amber-700/60 pl-3 text-xs leading-5 text-amber-200">A record’s existence does not make it publishable. Drafts and incomplete claims remain below the crawlable layer.</p>
               <p className="mt-6 font-mono text-[10px] uppercase tracking-widest text-zinc-600 group-hover:text-cyan-300">Inspect the universal contract →</p>
+            </Link>
+            <Link href={KNOWLEDGE_INTEGRATIONS_PATH} className="group border border-emerald-900/60 bg-emerald-950/10 p-6 transition-colors hover:border-emerald-400">
+              <p className="font-mono text-[10px] uppercase tracking-widest text-emerald-300">External evidence · bounded records</p>
+              <h2 className="mt-4 text-2xl font-semibold text-white group-hover:text-emerald-200">Integration evidence</h2>
+              <p className="mt-3 text-sm leading-6 text-zinc-400">Crawlable reproductions and interoperability records with direct links to signed artifacts, upstream publications and explicit non-claims.</p>
+              <p className="mt-4 border-l border-amber-700/60 pl-3 text-xs leading-5 text-amber-200">These records document observed integrations. They are not silently promoted into canonical domain knowledge.</p>
+              <p className="mt-6 font-mono text-[10px] uppercase tracking-widest text-zinc-600 group-hover:text-emerald-300">Inspect integration evidence →</p>
             </Link>
             {EPISTEMIC_DOMAINS.map((domain) => {
               const accent = {
