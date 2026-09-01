@@ -46,6 +46,21 @@ export interface CapacityModel {
   /** Records released and inspected but not yet given a substantial page. */
   publishableNowRecordIds: readonly string[]
   /**
+   * Production and Preview counted separately, because they are not the same
+   * kind of fact. A page rehearsed in an ephemeral Preview was never crawlable
+   * and never will be; adding it to a Production total would inflate the
+   * number with routes no reader can reach.
+   */
+  releaseReadiness: {
+    productionCrawlable: number
+    previewRehearsed: number
+    productionReleaseReady: number
+    needsDeeperInspection: number
+    rejected: number
+    gapAfterHypotheticalRelease: number
+    note: string
+  }
+  /**
    * What this model can and cannot see.
    *
    * Exact-revision review is only observable through an active canonical
@@ -119,9 +134,17 @@ export function bucketFor(state: RecordState): CapacityBucket | null {
   return 'publishable-now'
 }
 
+export interface ReleaseReadinessInput {
+  previewRehearsed: number
+  productionReleaseReady: number
+  needsDeeperInspection: number
+  rejected: number
+}
+
 export function buildCapacityModel(
   states: readonly RecordState[],
   reviewObservability: ReviewObservability = 'inferred-from-release',
+  readiness: ReleaseReadinessInput = { previewRehearsed: 0, productionReleaseReady: 0, needsDeeperInspection: 0, rejected: 0 },
 ): CapacityModel {
   const { families, unclassified } = familyInventory()
   const buckets: Record<CapacityBucket, number> = {
@@ -159,6 +182,15 @@ export function buildCapacityModel(
     unclassified,
     buckets,
     publishableNowRecordIds: publishable.sort(),
+    releaseReadiness: {
+      productionCrawlable: crawlable,
+      previewRehearsed: readiness.previewRehearsed,
+      productionReleaseReady: readiness.productionReleaseReady,
+      needsDeeperInspection: readiness.needsDeeperInspection,
+      rejected: readiness.rejected,
+      gapAfterHypotheticalRelease: Math.max(0, PAGE_TARGET - crawlable - readiness.productionReleaseReady),
+      note: 'Preview-rehearsed pages are never crawlable and are excluded from the Production total. Release-ready is a prepared state, not a published one.',
+    },
     observability: reviewObservability === 'projected-from-decisions'
       ? {
         reviewObservedVia: 'exact-revision review projection over committed decision corpora',

@@ -55,7 +55,14 @@ const states: RecordState[] = [...records.keys()].sort().map((recordId) => {
   }
 })
 
-const model = buildCapacityModel(states, 'projected-from-decisions')
+const classifications = projection.classifications as Record<string, number>
+const model = buildCapacityModel(states, 'projected-from-decisions', {
+  // Zero: no Preview rehearsal has run. Five records are prepared for one.
+  previewRehearsed: 0,
+  productionReleaseReady: classifications['release-ready'] ?? 0,
+  needsDeeperInspection: classifications['revise-and-rereview'] ?? 0,
+  rejected: classifications.rejected ?? 0,
+})
 
 const inventory = {
   schemaVersion: 'maha-scaling-inventory/1.0',
