@@ -254,7 +254,13 @@ async function preview(path: string, token: string | null, init: RequestInit = {
   if (init.body) headers.set('content-type', 'application/json')
   const response = await fetch(`${previewOrigin}${path}`, { ...init, headers, cache: 'no-store', redirect: 'follow' })
   const text = await response.text()
-  if (!response.ok) throw new Error(`${init.method ?? 'GET'} ${path} returned ${response.status}.`)
+  if (!response.ok) {
+    // The body is already in hand and says which failure this is - the routes
+    // answer with an error.code that separates "no persistence client" from "a
+    // query threw". Throwing only the status discards the one thing that
+    // distinguishes them, which costs a whole protected run to recover.
+    throw new Error(`${init.method ?? 'GET'} ${path} returned ${response.status}. Preview said: ${redactDeploymentSecrets(text) || '(empty body)'}`)
+  }
   let body: unknown = null
   try { body = text ? JSON.parse(text) : null } catch { body = text }
   return { status: response.status, body, text }
