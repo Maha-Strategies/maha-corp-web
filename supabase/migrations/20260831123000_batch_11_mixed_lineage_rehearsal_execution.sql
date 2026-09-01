@@ -209,7 +209,12 @@ begin
       and review_target_sha256 = p_release->>'targetSha256'
     order by created_at desc limit 1;
   if not found then raise exception 'Exact Batch 11 target not found.' using errcode = 'P0002'; end if;
-  if v_target.record_snapshot->'candidateSnapshot' - 'publication' <> p_release->'recordSnapshot' - 'publication'
+  -- Parenthesised because `-` binds tighter than `->`: without them Postgres
+  -- reads this as record_snapshot -> ('candidateSnapshot' - 'publication'),
+  -- which is `unknown - unknown` and raises 42725 before the comparison ever
+  -- happens. The check below is the one that proves released content equals the
+  -- frozen target, so it was not weak - it was unreachable.
+  if (v_target.record_snapshot->'candidateSnapshot') - 'publication' <> (p_release->'recordSnapshot') - 'publication'
   then raise exception 'Released content differs from the frozen Batch 11 target.' using errcode = 'P0001'; end if;
   if v_target.record_snapshot#>>'{candidateSnapshot,id}' <> p_release->>'recordId'
     or v_target.record_snapshot#>>'{candidateSnapshot,domainSlug}' <> p_release->>'domainSlug'

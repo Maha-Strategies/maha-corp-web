@@ -7,6 +7,7 @@ import {
   parseEpistemicReleaseRequest,
   releaseReadiness,
 } from '@/lib/epistemic-release'
+import { previewDiagnostic } from '@/lib/epistemic-ingestion-diagnostics'
 import { executeEpistemicCanonicalRelease } from '@/lib/epistemic-release-execution'
 import { classifyEpistemicReleaseConflict } from '@/lib/epistemic-release-conflict'
 import { revalidateEpistemicReleasePaths } from '@/lib/epistemic-revalidation'
@@ -36,7 +37,7 @@ function gate(request: Request): { actorFingerprint: string } | null {
     : null
 }
 
-function unavailable(error?: unknown) {
+function unavailable(error?: unknown, operation = 'release-persistence-call-failed') {
   const message = error instanceof Error ? error.message : ''
   if (message.includes('[22023]')) return json({ error: { code: 'invalid_request', message: 'The release failed persistence validation.' } }, 400)
   if (message.includes('[P0001]') || message.includes('duplicate key')) return json({
@@ -47,7 +48,10 @@ function unavailable(error?: unknown) {
     },
   }, 409)
   if (message.includes('[P0002]')) return json({ error: { code: 'not_found', message: 'The frozen target or canonical release was not found.' } }, 404)
-  return json({ error: { code: 'epistemic_release_unavailable', message: 'Canonical release control is temporarily unavailable.' } }, 503)
+  return json({
+    error: { code: 'epistemic_release_unavailable', message: 'Canonical release control is temporarily unavailable.' },
+    ...previewDiagnostic(operation, error),
+  }, 503)
 }
 
 async function readWorkspace(client: NonNullable<ReturnType<typeof createEpistemicPersistenceClient>>) {
@@ -103,7 +107,7 @@ async function readWorkspace(client: NonNullable<ReturnType<typeof createEpistem
 export async function GET(request: Request) {
   if (!gate(request)) return json({ error: { code: 'unauthorized', message: 'A distinct epistemic release-authority bearer token is required.' } }, 401)
   const client = createEpistemicPersistenceClient()
-  if (!client) return unavailable()
+  if (!client) return unavailable(undefined, 'persistence-client-absent')
   try {
     return json({ ...(await readWorkspace(client)), autonomousPublicationSupported: false }, 200)
   } catch (error) {
@@ -125,7 +129,7 @@ export async function POST(request: Request) {
   }
 
   const client = createEpistemicPersistenceClient()
-  if (!client) return unavailable()
+  if (!client) return unavailable(undefined, 'persistence-client-absent')
   try {
     if (parsed.operation === 'withdraw') {
       const [releases, withdrawals] = await Promise.all([
