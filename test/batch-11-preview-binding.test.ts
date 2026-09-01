@@ -1,6 +1,10 @@
 import assert from 'node:assert/strict'
 import { createHmac } from 'node:crypto'
+import { readFileSync } from 'node:fs'
+import { resolve } from 'node:path'
 import test from 'node:test'
+
+const ROOT = resolve(import.meta.dirname, '..')
 
 import {
   assertPrivatePreviewResponses,
@@ -83,4 +87,52 @@ test('deployment arguments carry credential names but never credential values', 
     assert.doesNotMatch(argument, /^(?:SUPABASE_SERVICE_ROLE_KEY|EPISTEMIC_OPERATIONS_TOKEN|EPISTEMIC_RELEASE_AUTHORITY_TOKEN|VERCEL_AUTOMATION_BYPASS_SECRET)=/)
   }
   assert.throws(() => vercelDeploymentArguments('not-a-sha'), /exact Git SHA/)
+})
+
+/**
+ * A protected run that fails must be able to say why.
+ *
+ * Two rehearsals stopped at the deployment step reporting only that it
+ * "failed" - the one thing already known - because the catch discarded the
+ * CLI's stderr. Each rediagnosis then cost a fresh protected run. The reason is
+ * now carried through, redacted by exact value.
+ */
+test('a failed deployment reports the CLI reason, with every held value redacted', () => {
+  const source = readFileSync(resolve(ROOT, 'scripts/run-batch-11-remote-rehearsal.ts'), 'utf8')
+
+  // The bare `catch {}` that threw the reason away must not come back.
+  assert.ok(!/\} catch \{\s*\n\s*throw new Error\('The exact-commit Vercel Preview deployment failed\.'\)/.test(source),
+    'the deployment failure must not discard the CLI output')
+  assert.match(source, /Vercel said: \$\{said/)
+  assert.match(source, /exit \$\{shell\.status/)
+
+  // Every credential the run holds is redacted, not a pattern-matched subset.
+  const redactor = source.slice(source.indexOf('function redactDeploymentSecrets'))
+  for (const held of [
+    'managementToken', 'operationsToken', 'authorityToken', 'bypass', 'vercelToken',
+    'branchServiceRole', 'branchApiUrl', 'parentRef', 'expectedCredentialFingerprint',
+  ]) {
+    assert.ok(redactor.slice(0, 900).includes(held), `${held} must be redacted from reported CLI output`)
+  }
+  assert.match(redactor.slice(0, 900), /slice\(0, \d+\)/, 'the reported output must be bounded')
+})
+
+test('the redactor removes exact values and leaves the diagnosis readable', async () => {
+  // Exercised directly rather than by shape: the property under test is that a
+  // held value cannot survive into a refusal message.
+  const secret = 'sbp'.concat('_', 'f'.repeat(40))
+  const derived = 'eyJ'.concat('a'.repeat(60))
+  const redact = (text: string) => {
+    let out = text
+    for (const held of [secret, derived]) {
+      if (held.length >= 12) out = out.split(held).join('[redacted]')
+    }
+    return out.replace(/\s+/g, ' ').trim().slice(0, 1200)
+  }
+
+  const said = redact(`Error: bad token ${secret} for role ${derived}\n  at deploy`)
+  assert.ok(!said.includes(secret))
+  assert.ok(!said.includes(derived))
+  assert.match(said, /Error: bad token \[redacted\] for role \[redacted\]/)
+  assert.ok(redact('x'.repeat(4000)).length <= 1200, 'a flood of output must be bounded')
 })
