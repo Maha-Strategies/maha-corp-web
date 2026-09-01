@@ -45,6 +45,13 @@ export interface BranchKeyOutcome {
   statusClasses: Readonly<Record<string, number>>
   /** How the selected key identifies itself. Never its value. */
   selected: { type: string; name: string } | null
+  /**
+   * What the branch offered, by type and name only.
+   *
+   * Present on refusals so an ambiguous or empty listing can be diagnosed from
+   * the artifact instead of costing another protected run.
+   */
+  candidates: readonly { type: string; name: string }[]
   detail: string
 }
 
@@ -66,6 +73,10 @@ interface ApiKeyRow {
 const isObject = (value: unknown): value is Record<string, unknown> =>
   typeof value === 'object' && value !== null && !Array.isArray(value)
 
+/** Type and name only. Never a value, prefix or hash. */
+const describe = (rows: readonly ApiKeyRow[]) =>
+  rows.map((row) => ({ type: String(row.type ?? 'unknown'), name: String(row.name ?? 'unnamed') }))
+
 /**
  * Whether a returned value is a usable secret, without ever revealing it.
  *
@@ -82,11 +93,22 @@ function keyProblem(value: unknown): 'key-masked' | 'key-publishable-shaped' | n
   return null
 }
 
-/** True when this row is an unambiguous provider-issued secret key. */
-function isSecretRow(row: ApiKeyRow): boolean {
-  if (row.type === 'secret') return true
-  // Legacy projects express the same thing as a key literally named for the role.
-  return row.type === 'legacy' && row.name === 'service_role'
+/**
+ * Which tier a row belongs to, or null if it is not a secret-class key.
+ *
+ * A hosted project can publish both at once, and run 33497894169 did: a modern
+ * `secret` key and a legacy key named `service_role`. Those are not rival
+ * identities to choose between - they are the same authority in two forms, and
+ * the modern one is what the provider issues going forward.
+ *
+ * So the tiers are ranked rather than pooled. Ambiguity still refuses, but it
+ * now means what it should: two keys of the *same* tier, where picking one
+ * really would be picking which identity the rehearsal runs as.
+ */
+function secretTier(row: ApiKeyRow): 'secret' | 'legacy-service-role' | null {
+  if (row.type === 'secret') return 'secret'
+  if (row.type === 'legacy' && row.name === 'service_role') return 'legacy-service-role'
+  return null
 }
 
 export interface BranchKeyOptions {
@@ -111,10 +133,15 @@ export async function acquireBranchServiceKey(
   const classes: Record<string, number> = {}
   const count = (label: string) => { classes[label] = (classes[label] ?? 0) + 1 }
 
-  const refuse = (refusal: BranchKeyRefusal, attempts: number, detail: string) => ({
+  const refuse = (
+    refusal: BranchKeyRefusal,
+    attempts: number,
+    detail: string,
+    candidates: readonly { type: string; name: string }[] = [],
+  ) => ({
     outcome: {
       version: BRANCH_API_KEY_VERSION, acquired: false, attempts, refusal,
-      statusClasses: { ...classes }, selected: null, detail,
+      statusClasses: { ...classes }, selected: null, candidates, detail,
     } satisfies BranchKeyOutcome,
     key: null,
   })
@@ -158,22 +185,26 @@ export async function acquireBranchServiceKey(
       return refuse('response-malformed', attempt, 'The key listing contained a non-object entry.')
     }
 
-    const secrets = rows.filter(isSecretRow)
+    // Modern keys win when present; legacy is the fallback for older projects.
+    const modern = rows.filter((row) => secretTier(row) === 'secret')
+    const legacy = rows.filter((row) => secretTier(row) === 'legacy-service-role')
+    const secrets = modern.length > 0 ? modern : legacy
     if (secrets.length === 0) {
       // The branch may not have published its keys yet; that is a wait, not a
       // verdict, until the schedule is exhausted.
       if (attempt > delays.length) {
-        return refuse('no-secret-key', attempt, 'The branch published no secret or service-role key.')
+        return refuse('no-secret-key', attempt, 'The branch published no secret or service-role key.', describe(rows))
       }
       count('awaiting-key')
       await sleep(delays[attempt - 1])
       continue
     }
     if (secrets.length > 1) {
-      // Choosing between two would be choosing which identity the rehearsal
-      // runs as, which is not a decision this may make silently.
+      // Two of the same tier. Choosing would be choosing which identity the
+      // rehearsal runs as, which is not a decision this may make silently.
       return refuse('ambiguous-secret-key', attempt,
-        `The branch published ${secrets.length} secret keys; exactly one is required.`)
+        `The branch published ${secrets.length} keys of the same tier; exactly one is required.`,
+        describe(rows))
     }
 
     const selected = secrets[0]
@@ -181,7 +212,7 @@ export async function acquireBranchServiceKey(
     if (problem) {
       return refuse(problem, attempt, problem === 'key-masked'
         ? 'The branch key was returned masked or unrevealed.'
-        : 'The branch key has the shape of a publishable key.')
+        : 'The branch key has the shape of a publishable key.', describe(rows))
     }
 
     return {
@@ -193,6 +224,7 @@ export async function acquireBranchServiceKey(
         statusClasses: { ...classes },
         // Type and name only. Never the value, never the prefix.
         selected: { type: String(selected.type ?? 'unknown'), name: String(selected.name ?? 'unnamed') },
+        candidates: describe(rows),
         detail: `The provider issued one secret key for the branch after ${attempt} attempt(s).`,
       },
       key: String(selected.api_key).trim(),
