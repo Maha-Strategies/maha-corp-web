@@ -1,0 +1,89 @@
+{
+  "schemaVersion": "maha-scaling-inventory/1.0",
+  "observedAt": "2026-09-01T12:00:00.000Z",
+  "sourceDigests": {
+    "sitemap": "sha256:c9609cfe19d732912f6a9ec99caeb1c2817f81427f022d54ab092c8a4f1b43a6",
+    "llmsTxt": "sha256:f951fcd86d4a03811ac930654fe4e527705e127fc79c47c6e138327e27cf83a6",
+    "releaseRegistry": "sha256:cbaaff0cdc5f761b230db94b0f65998a934356e67effdb215627a3e53e87b179"
+  },
+  "crawlable": 764,
+  "llmsTxtPaths": 190,
+  "families": [
+    {
+      "familyId": "methodology",
+      "label": "Methodology and governance",
+      "crawlable": 34,
+      "requiresCanonicalRelease": false
+    },
+    {
+      "familyId": "substantial-record",
+      "label": "Substantial canonical record",
+      "crawlable": 437,
+      "requiresCanonicalRelease": true
+    },
+    {
+      "familyId": "book-chapter",
+      "label": "Open book chapter",
+      "crawlable": 167,
+      "requiresCanonicalRelease": false
+    },
+    {
+      "familyId": "intelligence-brief",
+      "label": "Intelligence and analysis",
+      "crawlable": 49,
+      "requiresCanonicalRelease": false
+    },
+    {
+      "familyId": "product-tool",
+      "label": "Product, tool and developer surface",
+      "crawlable": 42,
+      "requiresCanonicalRelease": false
+    },
+    {
+      "familyId": "case-study",
+      "label": "Case study and consulting",
+      "crawlable": 12,
+      "requiresCanonicalRelease": false
+    },
+    {
+      "familyId": "corporate",
+      "label": "Corporate and legal",
+      "crawlable": 6,
+      "requiresCanonicalRelease": false
+    }
+  ],
+  "unclassified": [
+    "/",
+    "/agent-infrastructure-compatibility-pack",
+    "/benchmarks/context-retention",
+    "/books",
+    "/context-pack-evaluator",
+    "/docs",
+    "/enterprise-mcp-gateway",
+    "/geometric-optimization",
+    "/integrations/wso2",
+    "/knowledge",
+    "/mcp-bridge",
+    "/on-device-ai-vs-cloud",
+    "/overclock",
+    "/systemic-sovereignty",
+    "/tensor-opt",
+    "/x402-buyer-policy",
+    "/x402-observatory"
+  ],
+  "records": {
+    "total": 290,
+    "alignmentClear": 141,
+    "activeCanonicalRelease": 114,
+    "exactRevisionReviewed": 114,
+    "substantialPages": 103
+  },
+  "reconciliation": {
+    "releasePathsInSitemap": 114,
+    "releasePathsMissingFromSitemap": [],
+    "substantialPathsReleased": 103,
+    "duplicateSitemapPaths": 0
+  },
+  "boundary": "Counts crawlable canonical URLs observed on the public surface. It does not assert that any page ranks, is indexed, or that any claim on it is true.",
+  "inventoryDigest": "sha256:79ccb6fabec06aacf403fba4ca22a34893f7a62833586d70a12ca2d5925ec6d5"
+}
