@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Preflight composite schema: preflight_v2</title>
+<meta name="description" content="Binding specification for the x402 preflight composite envelope, schema version preflight_v2: three independently signed checks (payability, sanctions, trust) in one call, with locked fixtures. Supersedes preflight_v1 at an announced version boundary after Maha Strategies' fixture review.">
+<style>
+  :root { color-scheme: light; }
+  body { max-width: 46rem; margin: 2.5rem auto; padding: 0 1.1rem; font: 16px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; color: #1a1a1a; background: #fff; }
+  h1 { font-size: 1.55rem; line-height: 1.25; margin: 0 0 .2rem; }
+  h2 { font-size: 1.16rem; margin: 2rem 0 .5rem; border-bottom: 1px solid #e5e5e5; padding-bottom: .25rem; }
+  p, li { margin: .5rem 0; }
+  ul, ol { padding-left: 1.3rem; }
+  code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: .88em; background: #f4f4f4; padding: .1em .35em; border-radius: 3px; word-break: break-all; }
+  pre { background: #f7f7f7; border: 1px solid #e5e5e5; border-radius: 4px; padding: .8rem; overflow-x: auto; font-size: .82em; line-height: 1.45; }
+  a { color: #1a5fb4; }
+  .sub { color: #555; margin: 0 0 1.2rem; font-size: .95rem; }
+  .boundary { background: #f4f8ff; border: 1px solid #cfe0ff; border-radius: 4px; padding: .6rem .8rem; margin: 1rem 0; font-size: .95rem; }
+  footer { margin-top: 2.5rem; color: #666; font-size: .85rem; border-top: 1px solid #e5e5e5; padding-top: .8rem; }
+</style>
+</head>
+<body>
+
+<h1>Preflight composite schema: preflight_v2</h1>
+<p class="sub">Published 2026-09-01. Binding specification, frozen after publication.</p>
+
+<p class="boundary">preflight_v2 supersedes <a href="/preflight/schema/preflight_v1.html">preflight_v1</a> at a version boundary announced 2026-09-01, after an independent fixture review by Maha Strategies and before any consumer had integrated v1. The v1 schema and fixtures remain published for the audit trail.</p>
+
+<p>This document is the binding specification for the composite preflight envelope, schema version preflight_v2. It is frozen after publication. Changes happen only at an announced version boundary with a new schema_version.</p>
+<p>The endpoint that returns these envelopes is not built yet. This is the schema and a set of locked, really signed fixtures, published so an integrator can build against a fixed target before anything is paid. When the endpoint ships, the price is 0.015 dollars per call.</p>
+
+<h2>Changelog / version boundary</h2>
+<p>v2, 2026-09-01: tightened after Maha Strategies' independent fixture review, before any consumer integrated v1. Changes: per component verdict enums, additionalProperties false, non empty limitations, 503 refusal shape, manifest binding to a dedicated preflight service entry authorizing the composite signer.</p>
+<p>What each change means in practice:</p>
+<ul>
+  <li><strong>Per component verdict enums.</strong> In v1 every component shared one seven value verdict enum, so a schema-valid sanctions component could carry PAYABLE. v2 locks each position to its own vocabulary: payability is PAYABLE, NOT_PAYABLE, not_evaluated; sanctions is CLEAR, MATCH, not_evaluated; trust is DATA, NO_DATA, not_evaluated.</li>
+  <li><strong>additionalProperties false, everywhere.</strong> Every object, the envelope, the request, each component, subject_echo, manifest, and observation, now rejects unknown keys. A typo or an injected field fails validation instead of passing silently.</li>
+  <li><strong>Non empty limitations.</strong> limitations now requires at least one entry, so an honest per component caveat is always present.</li>
+  <li><strong>503 refusal shape.</strong> The signing unavailable refusal is now a described JSON shape with http_status 503, charged false, and reason_codes containing signing_unavailable, matching the existing 400 invalid subject shape.</li>
+  <li><strong>Manifest binding.</strong> Each component's manifest and the envelope both point at one manifest entry, <code>preflight</code>, which is now a service entry in the proof manifest that authorizes <code>0x57fF0F084Cba33e6761503f90eEF0Da9F159350c</code> as the composite signer for both the components and the envelope. Each component's manifest also carries an informational <code>source_service</code> naming the underlying service that produced it.</li>
+</ul>
+
+<h2>What it is</h2>
+<p>One call returns three independent checks of a single subject address, each as its own signed sub result: payability, sanctions, and trust. Nothing collapses into a single score. The envelope carries a components_evaluated count and that is the only top level tally.</p>
+<p>The three checks run sequentially within one request, in a fixed order: payability, then sanctions, then trust. All three always run. The envelope records the observation mode and the spread in milliseconds between the first and last observation, so the small time gap is visible rather than hidden.</p>
+
+<h2>The envelope</h2>
+<ul>
+  <li><code>schema_version</code>: the constant "preflight_v2".</li>
+  <li><code>request</code>: request_id, request_time in RFC3339, and subject with address, chain in CAIP-2 form, and role which is one of payer, payee, escrow_destination.</li>
+  <li><code>components</code>: exactly three component objects, in the order payability, sanctions, trust.</li>
+  <li><code>observation</code>: mode is the constant "sequential-within-one-request", and spread_ms is the integer millisecond spread across the three observations.</li>
+  <li><code>components_evaluated</code>: an integer from 0 to 3, the count of components whose verdict is not not_evaluated. There is no aggregate verdict and no score at the top level.</li>
+  <li><code>envelope</code>: signer and signature.</li>
+</ul>
+
+<h2>A component</h2>
+<p>All three components share one structure: component, verdict, reason_codes (a non empty array; not_evaluated always carries at least one), observed_at, freshness_bound_seconds, limitations (non empty, always present), subject_echo, signer (the constant composite signer), manifest with url, entry the constant "preflight", and an optional source_service, and component_digest and component_signature so each component verifies on its own, offline.</p>
+<p>Verdict vocabulary and freshness bound, per component, locked in v2:</p>
+<ul>
+  <li>payability: PAYABLE, NOT_PAYABLE, or not_evaluated. Bound 300 seconds.</li>
+  <li>sanctions: CLEAR, MATCH, or not_evaluated. Bound 86400 seconds.</li>
+  <li>trust: DATA, NO_DATA, or not_evaluated. Bound 3600 seconds.</li>
+</ul>
+
+<h2>Reason codes, locked</h2>
+<p>The list is locked at this version. Where a source service already emits a code, we reuse its literal rather than invent a new one. New codes require a version boundary.</p>
+<p><strong>Reused from the source services.</strong> payability, from the address preflight transfer simulation and option verdicts: <code>simulated_ok</code>, <code>simulated_revert</code>, <code>EVM_NO_ATA_CHECK_NEEDED</code>, <code>ATA_MISSING_NEVER_EXISTED</code>, <code>ATA_CLOSED_AFTER_USE</code>, <code>NOT_SPL_SETTLEMENT</code>. trust, from the reputation scorer status: <code>insufficient_data</code>.</p>
+<p><strong>Derived</strong>, because those services expose no reason code taxonomy of their own. sanctions: <code>ofac_sdn_match</code>, <code>ofac_sdn_no_match</code>. trust: <code>erc8004_scored</code>.</p>
+<p><strong>Parameterized</strong> codes attach a value after a colon: <code>revert_reason:&lt;reason string&gt;</code>, <code>matched_label:&lt;OFAC chain label&gt;</code>.</p>
+<p><strong>Operational</strong>, shared across all components and the refusal shapes: <code>oracle_unreachable</code>, <code>rpc_timeout</code>, <code>invalid_subject</code>, <code>signing_unavailable</code>.</p>
+
+<h2>Fail closed behavior</h2>
+<p>The envelope is always complete and signed. Every component is present and signed even when its verdict is not_evaluated. There is never a partially signed envelope.</p>
+<p>Total refusal happens in exactly two cases, and only before any component runs:</p>
+<ul>
+  <li>Invalid subject: HTTP 400, no charge, no envelope. The body carries reason_codes with invalid_subject.</li>
+  <li>Signing unavailable: HTTP 503, no charge, no envelope. The body carries reason_codes containing signing_unavailable. An unsigned envelope is never emitted.</li>
+</ul>
+<p>In every other case the caller gets a full signed envelope, with not_evaluated components where a check could not complete.</p>
+
+<h2>Signatures and offline verification</h2>
+<p>Signer: <code>0x57fF0F084Cba33e6761503f90eEF0Da9F159350c</code>, published in the proof manifest as the signer of the preflight service entry, authorized for both the components and the envelope. Signing is Ethereum EIP-191 personal_sign over canonical JSON, the same discipline as our sanctions screen: json.dumps with sort_keys true and separators of a comma and a colon, which escapes non ASCII as backslash u sequences.</p>
+<p>To verify a single component offline:</p>
+<ol>
+  <li>Take the component object. Remove component_digest and component_signature.</li>
+  <li>Canonicalize the remainder: keys sorted, compact separators, non ASCII escaped.</li>
+  <li>sha256 of that string must equal component_digest.</li>
+  <li>Recover the signer from the EIP-191 signature over that same string. It must equal the component signer.</li>
+</ol>
+<p>To verify the whole envelope:</p>
+<ol>
+  <li>Take the envelope. Remove envelope.signature only. Keep envelope.signer.</li>
+  <li>Canonicalize the whole body.</li>
+  <li>Recover the signer from the EIP-191 signature over that string. It must equal envelope.signer.</li>
+</ol>
+
+<h2>What the schema cannot express, verify these yourself</h2>
+<p>JSON Schema validation is necessary but not sufficient. A document can be schema valid and still be wrong or tampered. A consumer MUST also perform these checks in code, because the schema cannot express them:</p>
+<ul>
+  <li><strong>Signature recovery.</strong> The schema checks that component_signature and envelope.signature are hex strings of the right shape. It cannot recover a key. Recompute each component_digest and recover every signature to <code>0x57fF0F084Cba33e6761503f90eEF0Da9F159350c</code> before trusting any verdict.</li>
+  <li><strong>subject_echo equality.</strong> Each component's subject_echo MUST equal request.subject exactly, address, chain, and role. The schema allows both to be valid strings independently; it cannot assert they are the same subject. A component signed over a different subject is not evidence about yours.</li>
+  <li><strong>components_evaluated consistency.</strong> components_evaluated MUST equal the count of components whose verdict is not not_evaluated. The schema bounds it to 0 through 3 but cannot tie it to the actual verdicts.</li>
+  <li><strong>Digest before recover.</strong> Recompute component_digest from the canonical bytes and confirm it matches before recovering the signature, so a mismatched digest is caught even if a signature happens to parse.</li>
+  <li><strong>Freshness.</strong> Compare observed_at plus freshness_bound_seconds against your own clock. The schema fixes the bound per component but cannot know when you are reading.</li>
+</ul>
+<p>If any of these fail, treat the envelope as untrusted, the same as a signature mismatch.</p>
+
+<h2>Point in time, not a guarantee</h2>
+<p>Every verdict is point in time evidence at its observed_at, bounded by its freshness_bound_seconds. This is not a guarantee of future settlement. A payable destination can stop being payable, an OFAC snapshot can change, and reputation data can move. Read the freshness bound before relying on a verdict.</p>
+
+<h2>Example envelope</h2>
+<p>This is the clean-pass fixture, our own payee address, all three checks really run and really signed. Digests and signatures are truncated here; the published fixture carries them in full.</p>
+<pre>{
+ "schema_version": "preflight_v2",
+ "request": {
+  "request_id": "pf_...",
+  "request_time": "2026-09-01T...Z",
+  "subject": { "address": "0xc87a06DEE4c0E85912296002617120BBfd5EF990", "chain": "eip155:8453", "role": "payee" }
+ },
+ "components": [
+  { "component": "payability", "verdict": "PAYABLE", "reason_codes": ["simulated_ok"], "observed_at": "2026-09-01T...Z", "freshness_bound_seconds": 300, "limitations": ["..."], "subject_echo": {"address":"0xc87a06DEE4c0E85912296002617120BBfd5EF990","chain":"eip155:8453","role":"payee"}, "signer": "0x57fF0F...350c", "manifest": {"url":"https://x402.nsgoods.org/proof/index.json","entry":"preflight","source_service":"payable-address"}, "component_digest": "...", "component_signature": "0x..." },
+  { "component": "sanctions", "verdict": "CLEAR", "reason_codes": ["ofac_sdn_no_match"], "freshness_bound_seconds": 86400, "manifest": {"entry":"preflight","source_service":"sanctions"}, "...": "..." },
+  { "component": "trust", "verdict": "NO_DATA", "reason_codes": ["insufficient_data"], "freshness_bound_seconds": 3600, "manifest": {"entry":"preflight","source_service":"trust"}, "...": "..." }
+ ],
+ "observation": { "mode": "sequential-within-one-request", "spread_ms": 65 },
+ "components_evaluated": 3,
+ "envelope": { "signer": "0x57fF0F...350c", "signature": "0x..." }
+}</pre>
+
+<h2>Fixtures and schema</h2>
+<ul>
+  <li>Schema: <a href="/preflight/schema/preflight_v2.schema.json">/preflight/schema/preflight_v2.schema.json</a></li>
+  <li>Fixtures: <a href="/preflight/fixtures/preflight_v2/clean-pass.json">clean-pass.json</a>, <a href="/preflight/fixtures/preflight_v2/sanctions-match.json">sanctions-match.json</a>, <a href="/preflight/fixtures/preflight_v2/partial-not-evaluated.json">partial-not-evaluated.json</a>, <a href="/preflight/fixtures/preflight_v2/invalid-subject.json">invalid-subject.json</a>, <a href="/preflight/fixtures/preflight_v2/signing-unavailable.json">signing-unavailable.json</a></li>
+  <li>Digest: <a href="/preflight/fixtures/preflight_v2/DIGEST">/preflight/fixtures/preflight_v2/DIGEST</a></li>
+</ul>
+<p>clean-pass is our payee address: payable, clear, no trust data. sanctions-match is a live OFAC SDN address: an OFAC match, and its transfer simulation also reverts. partial-not-evaluated shows a real not_evaluated trust component; the live trust oracle returns NO_DATA for an address with no ERC-8004 registration, so that one component is marked synthetic_condition true with a one line note, because a genuine oracle outage could not be forced honestly from outside. invalid-subject is the real HTTP 400 refusal body, no envelope. signing-unavailable is the HTTP 503 refusal body, no envelope.</p>
+<p>The paid /payable and /screen endpoints are unchanged by this document. This composite lands there only at an announced version boundary. Signed report manifest at <a href="/proof/index.json">/proof/index.json</a>.</p>
+
+<footer>nsgoods.org &middot; preflight_v2 schema and fixtures &middot; signer 0x57fF0F...350c</footer>
+
+</body>
+</html>

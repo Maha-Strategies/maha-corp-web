@@ -1,0 +1,10 @@
+# preflight_v1 fixtures DIGEST
+# sha256 of each locked fixture; regenerate a fixture only at a version boundary.
+
+dcb1a39be2b51ef107f889ce6719065db88e9b36c6e7b5e8d6f3505890006518  clean-pass.json
+8ebcf6a8c56bc10cd81e6179667dd0b69a1bfb73b681ef93351053b17e1cec89  sanctions-match.json
+1ce8919aee6a4fcbd129c66ea13cd11f6e410c7de7538d203290e218bc9da65f  partial-not-evaluated.json
+cca688de4489aaf5d60be01ba443656ec92350bfcec6c312cfa1181ff0f94522  invalid-subject.json
+ae6fe5f5e47a0f9bc1eea20e695f087821d43a0b5c6f8ccc4e06057f66575a44  ../preflight_v1.schema.json
+
+# combined (concatenated bytes of the 4 fixtures + schema): 39a32c96d79a9ca95653c8dc2fe0a03f40a132bd1ea6ee726d0727ed68c63900

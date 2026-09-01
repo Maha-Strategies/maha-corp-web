@@ -1,0 +1,12 @@
+# preflight_v2 fixtures DIGEST
+# sha256 of each locked fixture; regenerate a fixture only at a version boundary.
+# v2 supersedes v1 (announced 2026-09-01). v1 fixtures remain for the audit trail.
+
+341e9b1bb40b10a82c02a55481c39832751a72b0b8eef7ca7d987b472d60e7e2  clean-pass.json
+5a1592152add46b1c263a1d336d0b1f91c9c0f54236960a5931ca29dd31b24a2  sanctions-match.json
+b07a60133694be3118181f7952b8533b730b9ca8c613b495c18137c1c3c129be  partial-not-evaluated.json
+7c06904f7a64302dc2de963ac6536d8dc2a632eff30d783bc4dfd651ffc5e2ab  invalid-subject.json
+c49c02d36d61b95d83deb4639469babe839b83e0fbf2c8eef5d6c77bfe9fae92  signing-unavailable.json
+ab76303573e1aa3eb846bfa45c696679340616a821f72d739826e58bf4a1cd05  ../preflight_v2.schema.json
+
+# combined (concatenated bytes of the 5 fixtures + schema): 686f1673d13f9efccaef02d44a591768f98e894dabfc0a87a0de6e59f874aef2

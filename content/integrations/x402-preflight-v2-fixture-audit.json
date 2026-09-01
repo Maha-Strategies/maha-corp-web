@@ -1,0 +1,65 @@
+{
+  "artifacts": {
+    "combinedFixtureAndSchemaSha256": "686f1673d13f9efccaef02d44a591768f98e894dabfc0a87a0de6e59f874aef2",
+    "digestFileSha256": "f8f9854881c939485b0e109dce9294a5fb76dcc6577f8a563f8a7ffc3f27d0d3",
+    "documentationSha256": "817b2b256ba9f7a8b53b0a6645736282c188e50f3f07aa092a3635fbc172d957",
+    "proofManifestSha256": "debd4bc225cc1c933abf01203e2f6f1e592af563e9df19ed287ec4bda1e76afb",
+    "schemaSha256": "ab76303573e1aa3eb846bfa45c696679340616a821f72d739826e58bf4a1cd05",
+    "supersededV1DigestFileSha256": "7d999eae6cb550345b4c8f743f656bb4bc5487ec4eb23058b4ac210d1bb98416",
+    "supersededV1SchemaSha256": "ae6fe5f5e47a0f9bc1eea20e695f087821d43a0b5c6f8ccc4e06057f66575a44"
+  },
+  "auditKind": "fixture-only-offline-consumer-verification",
+  "auditedAt": "2026-09-01T10:44:34.762171Z",
+  "authorizedCompositeSigner": "0x57fF0F084Cba33e6761503f90eEF0Da9F159350c",
+  "boundary": {
+    "assertsCurrentPayabilityOrSanctionsStatus": false,
+    "credentialsUsed": false,
+    "liveEndpointInvoked": false,
+    "networkCallsMadeByVerifier": 0,
+    "partialNotEvaluatedFixtureContainsDeclaredSyntheticCondition": true,
+    "paymentsMade": 0,
+    "providerEndpointStatus": "schema published, endpoint not built"
+  },
+  "findings": [
+    "refusal-schema-allows-unknown-fields: both refusal branches omit additionalProperties=false and accept an injected envelope"
+  ],
+  "manifest": {
+    "authorizedServices": [
+      "sanctions",
+      "preflight"
+    ],
+    "endpointStatus": "schema published, endpoint not built",
+    "generatedAt": "2026-09-01T10:26:07.263086+00:00",
+    "manifestSha256": "debd4bc225cc1c933abf01203e2f6f1e592af563e9df19ed287ec4bda1e76afb",
+    "registryStatus": "active"
+  },
+  "provider": "NS Goods",
+  "recommendation": {
+    "consumerMayPayOrRelyOnFixturesAsCurrentEvidence": false,
+    "nextGate": "publish a new immutable schema version whose refusal branches declare and enforce all allowed fields with additionalProperties=false, then rerun this audit",
+    "providerMayBuildEndpoint": false
+  },
+  "schemaVersion": "preflight_v2",
+  "sourceUrls": {
+    "contract": "https://x402.nsgoods.org/preflight/schema/preflight_v2.html",
+    "fixtureDigest": "https://x402.nsgoods.org/preflight/fixtures/preflight_v2/DIGEST",
+    "proofManifest": "https://x402.nsgoods.org/proof/index.json",
+    "schema": "https://x402.nsgoods.org/preflight/schema/preflight_v2.schema.json"
+  },
+  "status": "blocked",
+  "verification": {
+    "componentCountChecks": 3,
+    "componentSignaturesVerified": 9,
+    "envelopeSignaturesVerified": 3,
+    "fixtureDigestsVerified": 6,
+    "refusalEnvelopeInjectionsRejectedByConsumer": 2,
+    "refusalEnvelopeInjectionsRejectedBySchema": 0,
+    "signedFixturesVerified": 3,
+    "signerAuthorizationVerified": true,
+    "subjectEqualityChecks": 9,
+    "tamperCasesAttempted": 7,
+    "tamperCasesRejectedByConsumer": 7,
+    "unsignedRefusalFixturesVerified": 2,
+    "v1FixturesRejectedByV2Schema": 4
+  }
+}
