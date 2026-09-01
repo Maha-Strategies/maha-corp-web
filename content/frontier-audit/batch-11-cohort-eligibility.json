@@ -1,0 +1,197 @@
+{
+  "schemaVersion": "maha-batch-11-cohort-eligibility/1.0",
+  "eligibilityDigest": "sha256:80a64bc499a37a57ed78bb720d0a3325323b5589b196493f25b395dda073911e",
+  "registrySnapshot": {
+    "source": "https://www.mahastrategies.com/knowledge/epistemic-system/releases/registry.json",
+    "method": "unauthenticated HTTPS GET of the public release registry; no credential presented, no mutation performed",
+    "rows": 115,
+    "statusVocabularyObserved": [
+      "active",
+      "superseded"
+    ],
+    "statusVocabularyEnumerated": [
+      "active",
+      "superseded",
+      "withdrawn"
+    ]
+  },
+  "requirements": [
+    "record-exists-in-graph",
+    "source-content-inspected",
+    "subject-alignment-clear",
+    "exact-locator-present",
+    "source-identity-verified",
+    "version-relationship-verified",
+    "rights-basis-acceptable",
+    "bounded-claim-scope",
+    "not-positional-legacy",
+    "not-metadata-only-or-inaccessible",
+    "lineage-state-supports-declared-kind",
+    "revision-distinct-from-released-target"
+  ],
+  "requiredShape": {
+    "superseding": 2,
+    "initial": 3
+  },
+  "feasibility": {
+    "requiredSuperseding": 2,
+    "requiredInitial": 3,
+    "availableSuperseding": 0,
+    "availableInitial": 28,
+    "feasible": false,
+    "shortfall": [
+      "superseding: need 2, 0 eligible"
+    ]
+  },
+  "supersedingCeiling": {
+    "recordsWithOneActiveRelease": 67,
+    "ofWhichRevisionDiffersFromReleasedTarget": 3,
+    "ofWhichAlignmentClear": 3,
+    "ofWhichVersionRelationshipVerified": 0,
+    "candidates": [
+      {
+        "recordId": "urn:maha:record:fusion-plasma-systems-breeding-blanket-test-modules",
+        "sourceIdentifier": null,
+        "inspectionDepth": "abstract-only",
+        "versionRelationshipVerified": false
+      },
+      {
+        "recordId": "urn:maha:record:neurotechnology-bci-spike-sorting-boundaries",
+        "sourceIdentifier": "10.1523/JNEUROSCI.0971-11.2011",
+        "inspectionDepth": "abstract-only",
+        "versionRelationshipVerified": false
+      },
+      {
+        "recordId": "urn:maha:record:agentic-systems-mcp-tool-deny-by-default",
+        "sourceIdentifier": null,
+        "inspectionDepth": "abstract-only",
+        "versionRelationshipVerified": false
+      }
+    ]
+  },
+  "eligiblePool": {
+    "supersedingCount": 0,
+    "initialCount": 28,
+    "superseding": [],
+    "initial": [
+      "urn:maha:record:advanced-materials-diamond-thermal-conductivity",
+      "urn:maha:record:agentic-systems-mcp-mcp-session-lifecycle",
+      "urn:maha:record:biomolecular-engineering-crude-extract-cell-free-systems",
+      "urn:maha:record:biomolecular-engineering-phage-assisted-continuous-evolution",
+      "urn:maha:record:biomolecular-engineering-purified-component-expression-systems",
+      "urn:maha:record:biomolecular-engineering-selection-pressure-coupling",
+      "urn:maha:record:biomolecular-engineering-translational-control-circuits",
+      "urn:maha:record:critical-supply-chains-gallium-bauxite-byproduct-flow",
+      "urn:maha:record:critical-supply-chains-gallium-zinc-processing-byproduct",
+      "urn:maha:record:critical-supply-chains-germanium-zinc-refining-flow",
+      "urn:maha:record:critical-supply-chains-niobium-ferroniobium-production",
+      "urn:maha:record:fusion-plasma-systems-laser-target-coupling",
+      "urn:maha:record:longevity-metabolism-atp-linked-respiration",
+      "urn:maha:record:longevity-metabolism-lifespan-versus-healthspan-endpoints",
+      "urn:maha:record:longevity-metabolism-oxygen-consumption-rate",
+      "urn:maha:record:longevity-metabolism-pink1-parkin-pathway",
+      "urn:maha:record:longevity-metabolism-sirtuin-nad-dependence",
+      "urn:maha:record:longevity-metabolism-translation-to-human-outcomes",
+      "urn:maha:record:mechanistic-interpretability-feature-activation-maximization",
+      "urn:maha:record:neurotechnology-bci-channelrhodopsin-photocurrent-kinetics",
+      "urn:maha:record:neurotechnology-bci-chronic-signal-stability",
+      "urn:maha:record:neurotechnology-bci-electrocorticography-spatial-resolution",
+      "urn:maha:record:neurotechnology-bci-flexible-conformal-electrode-arrays",
+      "urn:maha:record:neurotechnology-bci-foreign-body-response",
+      "urn:maha:record:neurotechnology-bci-motor-intention-decoding",
+      "urn:maha:record:neurotechnology-bci-opsin-spectral-sensitivity",
+      "urn:maha:record:neurotechnology-bci-optogenetic-channelrhodopsin",
+      "urn:maha:record:neurotechnology-bci-sensing-to-stimulation-loop"
+    ]
+  },
+  "currentCohort": [
+    {
+      "recordId": "urn:maha:record:advanced-materials-color-centers-in-diamond",
+      "declaredKind": "initial",
+      "alignmentVerdict": "inaccessible-source",
+      "assignmentOrigin": "positional-legacy",
+      "registryRows": 0,
+      "activeReleaseId": null,
+      "releasedTargetSha256": null,
+      "currentTargetSha256": "sha256:b617d666666621222481c56029596df2a95f4b7fcde30ffa0f0238e01fee8d73",
+      "failures": [
+        "source-content-inspected",
+        "subject-alignment-clear",
+        "version-relationship-verified",
+        "rights-basis-acceptable",
+        "not-positional-legacy",
+        "not-metadata-only-or-inaccessible"
+      ],
+      "eligible": false
+    },
+    {
+      "recordId": "urn:maha:record:fusion-plasma-systems-tokamak-plasma-equilibrium",
+      "declaredKind": "superseding",
+      "alignmentVerdict": "partially-supported",
+      "assignmentOrigin": "positional-legacy",
+      "registryRows": 1,
+      "activeReleaseId": "epirelease_8e947374097d4695815dbf9ab653177b",
+      "releasedTargetSha256": "sha256:cb41216cd3cf8fdc36decedf66f8e768a25b450969b763e83c3d2b756ae57052",
+      "currentTargetSha256": "sha256:cb41216cd3cf8fdc36decedf66f8e768a25b450969b763e83c3d2b756ae57052",
+      "failures": [
+        "subject-alignment-clear",
+        "version-relationship-verified",
+        "not-positional-legacy",
+        "not-metadata-only-or-inaccessible",
+        "revision-distinct-from-released-target"
+      ],
+      "eligible": false
+    },
+    {
+      "recordId": "urn:maha:record:longevity-metabolism-mitophagy-flux",
+      "declaredKind": "initial",
+      "alignmentVerdict": "partially-supported",
+      "assignmentOrigin": "positional-legacy",
+      "registryRows": 0,
+      "activeReleaseId": null,
+      "releasedTargetSha256": null,
+      "currentTargetSha256": "sha256:3975863e949fe9ba5f925e4b1aa521ac0bafc04e3bab3ed1f08dc24a6ebcac5e",
+      "failures": [
+        "subject-alignment-clear",
+        "not-positional-legacy",
+        "not-metadata-only-or-inaccessible"
+      ],
+      "eligible": false
+    },
+    {
+      "recordId": "urn:maha:record:mechanistic-interpretability-activation-patching",
+      "declaredKind": "initial",
+      "alignmentVerdict": "partially-supported",
+      "assignmentOrigin": "positional-legacy",
+      "registryRows": 0,
+      "activeReleaseId": null,
+      "releasedTargetSha256": null,
+      "currentTargetSha256": "sha256:9455c157822bd369fe08884dd078a075eabe40a4ff6a1f3e703ef4c3315630e3",
+      "failures": [
+        "subject-alignment-clear",
+        "version-relationship-verified",
+        "not-positional-legacy",
+        "not-metadata-only-or-inaccessible"
+      ],
+      "eligible": false
+    },
+    {
+      "recordId": "urn:maha:record:mechanistic-interpretability-representation-probing-boundary",
+      "declaredKind": "superseding",
+      "alignmentVerdict": "insufficient-evidence",
+      "assignmentOrigin": "positional-legacy",
+      "registryRows": 1,
+      "activeReleaseId": "epirelease_93c92eb7a317465b83fabf8d3e6962da",
+      "releasedTargetSha256": "sha256:83339b28fdea2a81504e0bf44f9229fe06b24e444c774c0a0d513cf1b0bc8b3f",
+      "currentTargetSha256": "sha256:83339b28fdea2a81504e0bf44f9229fe06b24e444c774c0a0d513cf1b0bc8b3f",
+      "failures": [
+        "subject-alignment-clear",
+        "version-relationship-verified",
+        "not-positional-legacy",
+        "not-metadata-only-or-inaccessible",
+        "revision-distinct-from-released-target"
+      ],
+      "eligible": false
+    }
+  ]
+}
