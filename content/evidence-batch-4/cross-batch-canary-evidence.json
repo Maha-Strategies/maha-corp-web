@@ -1,0 +1,257 @@
+{
+  "schemaVersion": "maha-cross-batch-source-override-canary/1.0",
+  "batchesSpanned": [
+    "evidence-recovery-3",
+    "source-acquisition-4"
+  ],
+  "membershipRule": "Five distinct accepted records across the two batches, each joining once. Fewer than five refuses rather than shrinking.",
+  "ranAt": "2026-09-02",
+  "environment": {
+    "kind": "disposable local PostgreSQL cluster",
+    "createdForThisRun": true,
+    "productionReachable": false,
+    "note": "Not a Vercel Preview deployment. No environment approval was held for this sprint, so the canary was run in a database created for it and destroyed afterwards. Isolation is by construction rather than by configuration."
+  },
+  "productionMutations": 0,
+  "canonicalReleasesPublished": 0,
+  "records": 5,
+  "perRecord": [
+    {
+      "route": "/knowledge/mathematics/uncertainty-propagation",
+      "packetDigestFingerprint": "00244b348a1a33d3",
+      "proposedRevisionFingerprint": "77c169fd568bc35e",
+      "predecessorFingerprint": "dc8c817c8b22af03",
+      "sourceIdentityVerified": true,
+      "versionRelationshipRecorded": true,
+      "rightsBasisRecorded": true,
+      "exactLocatorRecorded": true,
+      "inspectedPassageFingerprint": "f091c44ccea541bb",
+      "claimScopeFingerprint": "e4846b59b6c3fe75",
+      "limitationFingerprint": "80757b9ce84957ac",
+      "inspectionDepth": "section-or-full-text",
+      "gateSequence": {
+        "noReview": {
+          "applied": false,
+          "refusals": [
+            "no-review-for-exact-revision"
+          ]
+        },
+        "staleRevisionReview": {
+          "applied": false,
+          "refusals": [
+            "no-review-for-exact-revision"
+          ]
+        },
+        "alignmentNotClear": {
+          "applied": false,
+          "refusals": [
+            "alignment-not-clear"
+          ]
+        },
+        "noActiveMatchingRelease": {
+          "applied": false,
+          "refusals": [
+            "no-active-matching-release"
+          ]
+        },
+        "allGatesSatisfied": {
+          "applied": true,
+          "refusals": []
+        }
+      },
+      "predecessorUnchangedUntilApplied": true
+    },
+    {
+      "route": "/knowledge/neuromorphic-biocomputing/multielectrode-arrays-and-stimulation",
+      "packetDigestFingerprint": "df9e1a75f1f304e8",
+      "proposedRevisionFingerprint": "b90a275fdd7e9d2d",
+      "predecessorFingerprint": "21c62a3e922fc7dc",
+      "sourceIdentityVerified": true,
+      "versionRelationshipRecorded": true,
+      "rightsBasisRecorded": true,
+      "exactLocatorRecorded": true,
+      "inspectedPassageFingerprint": "2bdb1103a7b21e37",
+      "claimScopeFingerprint": "3612a394f7f55fa3",
+      "limitationFingerprint": "aa10797b8ce4080b",
+      "inspectionDepth": "section-or-full-text",
+      "gateSequence": {
+        "noReview": {
+          "applied": false,
+          "refusals": [
+            "no-review-for-exact-revision"
+          ]
+        },
+        "staleRevisionReview": {
+          "applied": false,
+          "refusals": [
+            "no-review-for-exact-revision"
+          ]
+        },
+        "alignmentNotClear": {
+          "applied": false,
+          "refusals": [
+            "alignment-not-clear"
+          ]
+        },
+        "noActiveMatchingRelease": {
+          "applied": false,
+          "refusals": [
+            "no-active-matching-release"
+          ]
+        },
+        "allGatesSatisfied": {
+          "applied": true,
+          "refusals": []
+        }
+      },
+      "predecessorUnchangedUntilApplied": true
+    },
+    {
+      "route": "/knowledge/neuromorphic-biocomputing/biological-neural-cultures",
+      "packetDigestFingerprint": "c560a340e40d0b64",
+      "proposedRevisionFingerprint": "6d025ce292fef32d",
+      "predecessorFingerprint": "ef42de08f636a707",
+      "sourceIdentityVerified": true,
+      "versionRelationshipRecorded": true,
+      "rightsBasisRecorded": true,
+      "exactLocatorRecorded": true,
+      "inspectedPassageFingerprint": "2bdb1103a7b21e37",
+      "claimScopeFingerprint": "3612a394f7f55fa3",
+      "limitationFingerprint": "aa10797b8ce4080b",
+      "inspectionDepth": "section-or-full-text",
+      "gateSequence": {
+        "noReview": {
+          "applied": false,
+          "refusals": [
+            "no-review-for-exact-revision"
+          ]
+        },
+        "staleRevisionReview": {
+          "applied": false,
+          "refusals": [
+            "no-review-for-exact-revision"
+          ]
+        },
+        "alignmentNotClear": {
+          "applied": false,
+          "refusals": [
+            "alignment-not-clear"
+          ]
+        },
+        "noActiveMatchingRelease": {
+          "applied": false,
+          "refusals": [
+            "no-active-matching-release"
+          ]
+        },
+        "allGatesSatisfied": {
+          "applied": true,
+          "refusals": []
+        }
+      },
+      "predecessorUnchangedUntilApplied": true
+    },
+    {
+      "route": "/knowledge/domains/semiconductor-manufacturing",
+      "packetDigestFingerprint": "d090496f29fcf1ff",
+      "proposedRevisionFingerprint": "7cb069064fc8bab9",
+      "predecessorFingerprint": "06127d8bf8408863",
+      "sourceIdentityVerified": true,
+      "versionRelationshipRecorded": true,
+      "rightsBasisRecorded": true,
+      "exactLocatorRecorded": true,
+      "inspectedPassageFingerprint": "e5571427fc41133c",
+      "claimScopeFingerprint": "67ea99384da49b7e",
+      "limitationFingerprint": "c0423b103c378ce7",
+      "inspectionDepth": "section-or-full-text",
+      "gateSequence": {
+        "noReview": {
+          "applied": false,
+          "refusals": [
+            "no-review-for-exact-revision"
+          ]
+        },
+        "staleRevisionReview": {
+          "applied": false,
+          "refusals": [
+            "no-review-for-exact-revision"
+          ]
+        },
+        "alignmentNotClear": {
+          "applied": false,
+          "refusals": [
+            "alignment-not-clear"
+          ]
+        },
+        "noActiveMatchingRelease": {
+          "applied": false,
+          "refusals": [
+            "no-active-matching-release"
+          ]
+        },
+        "allGatesSatisfied": {
+          "applied": true,
+          "refusals": []
+        }
+      },
+      "predecessorUnchangedUntilApplied": true
+    },
+    {
+      "route": "/knowledge/concepts/cleanrooms-fab-utilities-and-contamination-control",
+      "packetDigestFingerprint": "2f57eb582c1fda9e",
+      "proposedRevisionFingerprint": "94caf4de3797489a",
+      "predecessorFingerprint": "87963425de0868cd",
+      "sourceIdentityVerified": true,
+      "versionRelationshipRecorded": true,
+      "rightsBasisRecorded": true,
+      "exactLocatorRecorded": true,
+      "inspectedPassageFingerprint": "af59bc6979ce7c1a",
+      "claimScopeFingerprint": "7e8f185ed5680932",
+      "limitationFingerprint": "2f8a1a89ae544a4e",
+      "inspectionDepth": "section-or-full-text",
+      "gateSequence": {
+        "noReview": {
+          "applied": false,
+          "refusals": [
+            "no-review-for-exact-revision"
+          ]
+        },
+        "staleRevisionReview": {
+          "applied": false,
+          "refusals": [
+            "no-review-for-exact-revision"
+          ]
+        },
+        "alignmentNotClear": {
+          "applied": false,
+          "refusals": [
+            "alignment-not-clear"
+          ]
+        },
+        "noActiveMatchingRelease": {
+          "applied": false,
+          "refusals": [
+            "no-active-matching-release"
+          ]
+        },
+        "allGatesSatisfied": {
+          "applied": true,
+          "refusals": []
+        }
+      },
+      "predecessorUnchangedUntilApplied": true
+    }
+  ],
+  "invariants": {
+    "everyRecordRefusedWithoutExactRevisionReview": true,
+    "staleRevisionReviewNeverSatisfies": true,
+    "alignmentRequired": true,
+    "activeMatchingReleaseRequired": true,
+    "appliesOnlyWhenAllGatesPass": true,
+    "predecessorUnchangedUntilApplied": true
+  },
+  "bindingsChangedInDisposableDatabase": 5,
+  "commercialValidationInferred": false,
+  "evidenceContract": "Fingerprints and digests only. No source passage, credential or review rationale appears in this artifact.",
+  "canaryDigest": "sha256:64122acad6a883d084391c1df7eba33cadecdc102a7bd7baaa1ece81a2c14779"
+}

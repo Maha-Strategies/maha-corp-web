@@ -14,6 +14,17 @@ import attestationFile from '../content/legacy-uplift/inspection-attestations.js
 import batch1 from '../content/semiconductor-evidence/batch-1.json' with { type: 'json' }
 import batch2 from '../content/evidence-batch-2/inspections.json' with { type: 'json' }
 import batch3 from '../content/evidence-batch-3/inspections.json' with { type: 'json' }
+import batch4 from '../content/evidence-batch-4/inspections.json' with { type: 'json' }
+
+/**
+ * Batch 4 names supported routes per claim rather than per source, so a source
+ * reaches a page only where a distinct inspected passage backs that page's own
+ * claim. The shape is flattened here into the same supportsRoutes contract.
+ */
+const batch4Flattened = (batch4.inspected as unknown as { claimByClaimSupport: { route: string }[] }[]).map((entry) => ({
+  ...entry,
+  supportsRoutes: entry.claimByClaimSupport.map((c) => c.route),
+}))
 
 /**
  * Inventories the legacy corpus, baselines it, and compiles the uplift.
@@ -64,7 +75,7 @@ const withAttestation = (s: LegacySource): LegacySource => {
  */
 type Batch1 = { sourceId: string; title: string; retrievedFrom: string; retrievedOn: string; depth: string; exactLocators: string[]; observedContent: string; establishes: string; boundary: string; identityVerified: boolean; versionRelationship: string; rightsBasis: string; supportsRoutes: string[] }
 const batch1ByRoute = new Map<string, Batch1[]>()
-for (const entry of [...(batch1.inspected as Batch1[]), ...(batch2.inspected as unknown as Batch1[]), ...(batch3.inspected as unknown as Batch1[])]) {
+for (const entry of [...(batch1.inspected as Batch1[]), ...(batch2.inspected as unknown as Batch1[]), ...(batch3.inspected as unknown as Batch1[]), ...(batch4Flattened as unknown as Batch1[])]) {
   for (const route of entry.supportsRoutes) {
     batch1ByRoute.set(route, [...(batch1ByRoute.get(route) ?? []), entry])
   }
@@ -261,7 +272,7 @@ const withBatch1 = inputs.map((input) => {
     }))],
   }
 })
-const batch1Attestations = Object.fromEntries([...(batch1.inspected as Batch1[]), ...(batch2.inspected as unknown as Batch1[]), ...(batch3.inspected as unknown as Batch1[])].map((entry) => [entry.sourceId, {
+const batch1Attestations = Object.fromEntries([...(batch1.inspected as Batch1[]), ...(batch2.inspected as unknown as Batch1[]), ...(batch3.inspected as unknown as Batch1[]), ...(batch4Flattened as unknown as Batch1[])].map((entry) => [entry.sourceId, {
   sourceId: entry.sourceId, retrievedFrom: entry.retrievedFrom, retrievedOn: entry.retrievedOn,
   depth: entry.depth as never, exactLocator: entry.exactLocators.join('; '),
   observedContent: entry.observedContent, identityVerified: entry.identityVerified,

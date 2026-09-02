@@ -14489,35 +14489,141 @@
       "route": "/knowledge/domains/semiconductor-manufacturing",
       "family": "semiconductor-manufacturing",
       "slug": "semiconductor-manufacturing",
-      "eligible": false,
-      "refusals": [
-        "below-dimension-floor",
-        "no-cited-source",
-        "no-negative-space"
-      ],
+      "eligible": true,
+      "refusals": [],
       "before": {
         "route": "/knowledge/domains/semiconductor-manufacturing",
         "family": "semiconductor-manufacturing",
         "dimensionsPresent": [
+          "claim-level-citation",
           "direct-answer",
+          "exact-locator",
           "limitations",
-          "mechanism-or-method"
+          "mechanism-or-method",
+          "not-established",
+          "source-boundary"
         ],
-        "dimensionCount": 3,
-        "sourceCount": 3,
-        "sourcesWithBoundary": 0,
+        "dimensionCount": 7,
+        "sourceCount": 5,
+        "sourcesWithBoundary": 2,
         "referenceOnlySources": 3,
-        "declaredLocators": 0,
-        "contentInspectedLocators": 0,
-        "explanatorySources": 0,
+        "declaredLocators": 2,
+        "contentInspectedLocators": 2,
+        "explanatorySources": 2,
         "bridgeCount": 0,
         "relatedRouteCount": 0,
         "renderedSections": 6
       },
-      "after": null,
-      "sections": [],
-      "sectionCount": 0,
-      "upliftDigest": "sha256:428040bbe08172d7501d540415423583ce615bad7e7d5f091aa794f62d06cf90"
+      "after": {
+        "route": "/knowledge/domains/semiconductor-manufacturing",
+        "family": "semiconductor-manufacturing",
+        "dimensionsPresent": [
+          "claim-level-citation",
+          "direct-answer",
+          "exact-locator",
+          "limitations",
+          "mechanism-or-method",
+          "not-established",
+          "source-boundary"
+        ],
+        "dimensionCount": 7,
+        "sourceCount": 5,
+        "sourcesWithBoundary": 2,
+        "referenceOnlySources": 3,
+        "declaredLocators": 2,
+        "contentInspectedLocators": 2,
+        "explanatorySources": 2,
+        "bridgeCount": 0,
+        "relatedRouteCount": 0,
+        "renderedSections": 5
+      },
+      "sections": [
+        {
+          "dimension": "direct-answer",
+          "heading": "Direct answer",
+          "items": [
+            "Semiconductor manufacturing is a linked design and production system that converts an electronic specification into patterned devices, multilayer interconnects, tested die, and qualified packages."
+          ],
+          "sourceIds": [
+            "doe-2023-plasma-microelectronics",
+            "doe-2022-microelectronics-capabilities"
+          ]
+        },
+        {
+          "dimension": "mechanism-or-method",
+          "heading": "Mechanism and method",
+          "items": [
+            "Define and verify the chip architecture",
+            "Translate the design into physical layout and masks",
+            "Prepare and qualify wafers",
+            "Repeat deposition, lithography, etch, doping, clean, and planarization cycles",
+            "Form contacts and multilayer interconnects",
+            "Probe wafers and singulate die",
+            "Assemble, package, and provide power, signal, and thermal paths",
+            "Run final test, qualification, and failure analysis"
+          ],
+          "sourceIds": [
+            "doe-2023-plasma-microelectronics",
+            "doe-2022-microelectronics-capabilities"
+          ]
+        },
+        {
+          "dimension": "mechanism-or-method",
+          "heading": "What is measured",
+          "items": [
+            "Design-rule compliance",
+            "Overlay and critical dimension",
+            "Film thickness and material properties",
+            "Etch profile and selectivity",
+            "Dopant dose and activation",
+            "Defect density and yield",
+            "Package warpage and interconnect integrity",
+            "Test coverage and reliability margin",
+            "Optical and electron-beam inspection",
+            "Critical-dimension and overlay metrology",
+            "Film thickness and composition measurement",
+            "Electrical wafer probe",
+            "Package inspection and system-level test",
+            "Accelerated reliability testing and failure analysis"
+          ],
+          "sourceIds": [
+            "doe-2023-plasma-microelectronics",
+            "doe-2022-microelectronics-capabilities"
+          ]
+        },
+        {
+          "dimension": "limitations",
+          "heading": "Limitations",
+          "items": [
+            "Design or mask error",
+            "Particle or pattern defect",
+            "Film nonuniformity",
+            "Electrical opens or shorts",
+            "Parametric yield loss",
+            "Die damage during thinning or singulation",
+            "Package-interface fatigue",
+            "Test escape or latent reliability failure"
+          ],
+          "sourceIds": [
+            "doe-2023-plasma-microelectronics",
+            "doe-2022-microelectronics-capabilities"
+          ]
+        },
+        {
+          "dimension": "not-established",
+          "heading": "Boundaries declared by the cited sources",
+          "items": [
+            "A workshop report setting out research opportunities. It gives no process recipe, no tool performance figure, no yield data and no throughput, so it cannot support a claim about how any reactor or process performs. (boundary declared by Plasma Science for Microelectronics Nanofabrication (workshop report))",
+            "A capabilities and opportunities report describing facilities and research directions. It contains no process parameters, no tool specifications, no yield or reliability data, and makes no comparison between commercial systems. (boundary declared by Microelectronics at the Department of Energy: Capabilities and Opportunities for Driving U.S. Competitiveness)"
+          ],
+          "sourceIds": [
+            "doe-2023-plasma-microelectronics",
+            "doe-2022-microelectronics-capabilities"
+          ]
+        }
+      ],
+      "sectionCount": 5,
+      "upliftDigest": "sha256:afabec64c50a9dbc3f47252d74388c5484e6ec0f1402645e3a45698876e125e8"
     },
     {
       "route": "/knowledge/processes/photolithography",
@@ -15933,35 +16039,131 @@
       "route": "/knowledge/concepts/cleanrooms-fab-utilities-and-contamination-control",
       "family": "semiconductor-manufacturing",
       "slug": "cleanrooms-fab-utilities-and-contamination-control",
-      "eligible": false,
-      "refusals": [
-        "below-dimension-floor",
-        "no-cited-source",
-        "no-negative-space"
-      ],
+      "eligible": true,
+      "refusals": [],
       "before": {
         "route": "/knowledge/concepts/cleanrooms-fab-utilities-and-contamination-control",
         "family": "semiconductor-manufacturing",
         "dimensionsPresent": [
+          "claim-level-citation",
           "direct-answer",
+          "exact-locator",
           "limitations",
-          "mechanism-or-method"
+          "mechanism-or-method",
+          "not-established",
+          "source-boundary"
         ],
-        "dimensionCount": 3,
-        "sourceCount": 2,
-        "sourcesWithBoundary": 0,
+        "dimensionCount": 7,
+        "sourceCount": 3,
+        "sourcesWithBoundary": 1,
         "referenceOnlySources": 2,
-        "declaredLocators": 0,
-        "contentInspectedLocators": 0,
-        "explanatorySources": 0,
+        "declaredLocators": 1,
+        "contentInspectedLocators": 1,
+        "explanatorySources": 1,
         "bridgeCount": 0,
         "relatedRouteCount": 0,
         "renderedSections": 6
       },
-      "after": null,
-      "sections": [],
-      "sectionCount": 0,
-      "upliftDigest": "sha256:0919c764d8050ab44108a43fc49e5accfafd47baab6e12e178e4b8afecea80fc"
+      "after": {
+        "route": "/knowledge/concepts/cleanrooms-fab-utilities-and-contamination-control",
+        "family": "semiconductor-manufacturing",
+        "dimensionsPresent": [
+          "claim-level-citation",
+          "direct-answer",
+          "exact-locator",
+          "limitations",
+          "mechanism-or-method",
+          "not-established",
+          "source-boundary"
+        ],
+        "dimensionCount": 7,
+        "sourceCount": 3,
+        "sourcesWithBoundary": 1,
+        "referenceOnlySources": 2,
+        "declaredLocators": 1,
+        "contentInspectedLocators": 1,
+        "explanatorySources": 1,
+        "bridgeCount": 0,
+        "relatedRouteCount": 0,
+        "renderedSections": 5
+      },
+      "sections": [
+        {
+          "dimension": "direct-answer",
+          "heading": "Direct answer",
+          "items": [
+            "A semiconductor fab is a controlled production environment whose facility systems maintain the cleanliness, chemistry, energy, mechanical stability, and safe material delivery required by process tools."
+          ],
+          "sourceIds": [
+            "khan-2024-cleanroom-crds"
+          ]
+        },
+        {
+          "dimension": "mechanism-or-method",
+          "heading": "Mechanism and method",
+          "items": [
+            "Filter and condition air",
+            "Generate and distribute ultrapure water and gases",
+            "Deliver chemicals at controlled purity",
+            "Maintain vacuum, exhaust, and abatement",
+            "Monitor particles, molecular contamination, vibration, and temperature",
+            "Trace excursions"
+          ],
+          "sourceIds": [
+            "khan-2024-cleanroom-crds"
+          ]
+        },
+        {
+          "dimension": "mechanism-or-method",
+          "heading": "What is measured",
+          "items": [
+            "Airborne particles",
+            "Molecular contamination",
+            "Water resistivity and organics",
+            "Gas purity",
+            "Temperature and humidity",
+            "Vibration",
+            "Pressure balance",
+            "Utility uptime",
+            "Air and liquid particle counters",
+            "Chemical and trace-metal analysis",
+            "Temperature and humidity sensors",
+            "Vibration monitoring",
+            "Utility alarm and trend systems"
+          ],
+          "sourceIds": [
+            "khan-2024-cleanroom-crds"
+          ]
+        },
+        {
+          "dimension": "limitations",
+          "heading": "Limitations",
+          "items": [
+            "Particle excursion",
+            "Trace-metal or organic contamination",
+            "Water-quality drift",
+            "Gas cross-connection",
+            "Pressure upset",
+            "Vibration-induced tool error",
+            "Utility interruption"
+          ],
+          "sourceIds": [
+            "khan-2024-cleanroom-crds"
+          ]
+        },
+        {
+          "dimension": "not-established",
+          "heading": "Boundaries declared by the cited sources",
+          "items": [
+            "The authors state they performed the hydrogen chloride and particulate experiments separately rather than simultaneously, that testing occurred in controlled laboratory chambers rather than an operating cleanroom, and that the work does not reference SEMI contamination categories or validate against semiconductor industry standards. It therefore cannot support a claim about contamination levels in any real fab, nor about compliance with any standard. (boundary declared by Open-Path Cavity Ring-Down Spectroscopy for Simultaneous Detection of Hydrogen Chloride and Particles in Cleanroom Environment)"
+          ],
+          "sourceIds": [
+            "khan-2024-cleanroom-crds"
+          ]
+        }
+      ],
+      "sectionCount": 5,
+      "upliftDigest": "sha256:474576a6e85788470f99342c1869ef4bc62de932ecdfddcb6a7a57031b3ec9be"
     },
     {
       "route": "/knowledge/processes/wafer-acceptance-test-and-wafer-sort",

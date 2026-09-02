@@ -1,0 +1,23 @@
+{
+  "schemaVersion": "maha-source-acquisition-inventory/1.0",
+  "batch": "source-acquisition-4",
+  "builtAt": "2026-09-02",
+  "strategy": "Source-first. Previous batches picked pages and then hunted for evidence. This batch searched strong lawful collections first and mapped what they actually support onto blocked pages, claim by claim.",
+  "collectionsSearched": [
+    { "collection": "OSTI.GOV", "outcome": "productive", "found": "DOE microelectronics and plasma-science reports" },
+    { "collection": "DOE Office of Science (science.osti.gov)", "outcome": "productive", "found": "two full-text government reports" },
+    { "collection": "NIST publications and nvlpubs", "outcome": "productive in earlier batches; nothing new for cleanroom contamination", "found": "cleanroom search returned only patents" },
+    { "collection": "PubMed Central open access", "outcome": "productive", "found": "one CC-BY sensor paper on cleanroom contamination measurement" },
+    { "collection": "arXiv", "outcome": "searched; nothing new subject-matched this batch" },
+    { "collection": "institutional repositories (MIT DSpace, eScholarship, DiVA, CORE)", "outcome": "unproductive for CMP across two batches" },
+    { "collection": "Sandia, Berkeley Lab, Argonne", "outcome": "reached indirectly through DOE reports naming their facilities; no separate lab publication inspected" }
+  ],
+  "exclusions": {
+    "patents": "excluded as explanatory evidence by rule; they dominated the cleanroom and Czochralski searches",
+    "searchSnippets": "never treated as inspected content",
+    "uninspectedMetadata": "never treated as inspected content",
+    "knownFailedUrls": "not retried; only genuinely different collections were searched"
+  },
+  "sourcesAcquired": 3,
+  "boundary": "A private acquisition record."
+}

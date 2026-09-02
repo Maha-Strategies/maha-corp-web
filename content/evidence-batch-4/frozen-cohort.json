@@ -1,0 +1,230 @@
+{
+  "schemaVersion": "maha-evidence-batch-4-cohort/1.0",
+  "batch": "source-acquisition-4",
+  "frozenAt": "2026-09-02",
+  "frozenBeforeSearching": false,
+  "frozenBeforeSearchingNote": "Batch 4 inverted the order deliberately: collections were searched first and pages mapped to what was found. The cohort is therefore recorded after acquisition, and the honesty guarantee comes from the claim-by-claim mapping rather than from the freeze order.",
+  "poolSize": 37,
+  "scoringModel": {
+    "factors": [
+      "likelihood a lawful full text exists for the subject",
+      "independent rather than vendor authorship",
+      "typed internal links",
+      "current evidence state"
+    ],
+    "familySizeUsed": false,
+    "positionalSiblingsUsed": false
+  },
+  "selected": 20,
+  "bySubject": {
+    "metrology-and-defect-inspection": 6,
+    "deposition-etching-cleaning": 3,
+    "lithography-and-pattern-transfer": 3,
+    "process-control-and-yield": 1,
+    "advanced-packaging": 6,
+    "crystal-and-materials": 1
+  },
+  "targets": [
+    {
+      "route": "/knowledge/suppliers/advantest",
+      "family": "semiconductor-suppliers",
+      "subject": "metrology-and-defect-inspection",
+      "currentEvidence": "vendor-or-metadata-only",
+      "typedInternalLinks": 2,
+      "lawfulFullTextLikely": 9,
+      "independentAuthorship": 9,
+      "score": 25.6
+    },
+    {
+      "route": "/knowledge/equipment/burn-in-and-system-level-test-equipment",
+      "family": "semiconductor-manufacturing",
+      "subject": "metrology-and-defect-inspection",
+      "currentEvidence": "vendor-or-metadata-only",
+      "typedInternalLinks": 0,
+      "lawfulFullTextLikely": 9,
+      "independentAuthorship": 9,
+      "score": 25.5
+    },
+    {
+      "route": "/knowledge/equipment/chemical-vapor-deposition-reactor",
+      "family": "semiconductor-manufacturing",
+      "subject": "deposition-etching-cleaning",
+      "currentEvidence": "vendor-or-metadata-only",
+      "typedInternalLinks": 0,
+      "lawfulFullTextLikely": 9,
+      "independentAuthorship": 9,
+      "score": 25.2
+    },
+    {
+      "route": "/knowledge/processes/final-test-burn-in-and-system-level-test",
+      "family": "semiconductor-manufacturing",
+      "subject": "metrology-and-defect-inspection",
+      "currentEvidence": "vendor-or-metadata-only",
+      "typedInternalLinks": 0,
+      "lawfulFullTextLikely": 9,
+      "independentAuthorship": 9,
+      "score": 25.2
+    },
+    {
+      "route": "/knowledge/processes/wafer-acceptance-test-and-wafer-sort",
+      "family": "semiconductor-manufacturing",
+      "subject": "metrology-and-defect-inspection",
+      "currentEvidence": "vendor-or-metadata-only",
+      "typedInternalLinks": 0,
+      "lawfulFullTextLikely": 9,
+      "independentAuthorship": 9,
+      "score": 25.2
+    },
+    {
+      "route": "/knowledge/concepts/cleanrooms-fab-utilities-and-contamination-control",
+      "family": "semiconductor-manufacturing",
+      "subject": "deposition-etching-cleaning",
+      "currentEvidence": "vendor-or-metadata-only",
+      "typedInternalLinks": 0,
+      "lawfulFullTextLikely": 9,
+      "independentAuthorship": 9,
+      "score": 24.9
+    },
+    {
+      "route": "/knowledge/concepts/semiconductor-qualification-reliability-and-failure-analysis",
+      "family": "semiconductor-manufacturing",
+      "subject": "metrology-and-defect-inspection",
+      "currentEvidence": "vendor-or-metadata-only",
+      "typedInternalLinks": 0,
+      "lawfulFullTextLikely": 9,
+      "independentAuthorship": 9,
+      "score": 24.9
+    },
+    {
+      "route": "/knowledge/equipment/pvd-sputter-and-metal-deposition-system",
+      "family": "semiconductor-manufacturing",
+      "subject": "deposition-etching-cleaning",
+      "currentEvidence": "vendor-or-metadata-only",
+      "typedInternalLinks": 0,
+      "lawfulFullTextLikely": 9,
+      "independentAuthorship": 9,
+      "score": 24.9
+    },
+    {
+      "route": "/knowledge/equipment/semiconductor-automatic-test-equipment",
+      "family": "semiconductor-manufacturing",
+      "subject": "metrology-and-defect-inspection",
+      "currentEvidence": "vendor-or-metadata-only",
+      "typedInternalLinks": 0,
+      "lawfulFullTextLikely": 9,
+      "independentAuthorship": 9,
+      "score": 24.9
+    },
+    {
+      "route": "/knowledge/processes/ic-design-to-tapeout",
+      "family": "semiconductor-manufacturing",
+      "subject": "lithography-and-pattern-transfer",
+      "currentEvidence": "vendor-or-metadata-only",
+      "typedInternalLinks": 0,
+      "lawfulFullTextLikely": 8,
+      "independentAuthorship": 8,
+      "score": 22.8
+    },
+    {
+      "route": "/knowledge/domains/semiconductor-manufacturing",
+      "family": "semiconductor-manufacturing",
+      "subject": "process-control-and-yield",
+      "currentEvidence": "vendor-or-metadata-only",
+      "typedInternalLinks": 0,
+      "lawfulFullTextLikely": 8,
+      "independentAuthorship": 8,
+      "score": 22.5
+    },
+    {
+      "route": "/knowledge/equipment/electron-beam-mask-writer",
+      "family": "semiconductor-manufacturing",
+      "subject": "lithography-and-pattern-transfer",
+      "currentEvidence": "vendor-or-metadata-only",
+      "typedInternalLinks": 0,
+      "lawfulFullTextLikely": 8,
+      "independentAuthorship": 8,
+      "score": 22.2
+    },
+    {
+      "route": "/knowledge/processes/rtl-verification-synthesis-physical-design",
+      "family": "semiconductor-manufacturing",
+      "subject": "lithography-and-pattern-transfer",
+      "currentEvidence": "vendor-or-metadata-only",
+      "typedInternalLinks": 0,
+      "lawfulFullTextLikely": 8,
+      "independentAuthorship": 8,
+      "score": 22.2
+    },
+    {
+      "route": "/knowledge/equipment/blade-and-laser-dicing-singulation-system",
+      "family": "semiconductor-manufacturing",
+      "subject": "advanced-packaging",
+      "currentEvidence": "vendor-or-metadata-only",
+      "typedInternalLinks": 0,
+      "lawfulFullTextLikely": 7,
+      "independentAuthorship": 7,
+      "score": 19.8
+    },
+    {
+      "route": "/knowledge/equipment/wafer-backgrinder-and-polisher",
+      "family": "semiconductor-manufacturing",
+      "subject": "advanced-packaging",
+      "currentEvidence": "vendor-or-metadata-only",
+      "typedInternalLinks": 0,
+      "lawfulFullTextLikely": 7,
+      "independentAuthorship": 7,
+      "score": 19.5
+    },
+    {
+      "route": "/knowledge/processes/advanced-packaging-and-heterogeneous-integration",
+      "family": "semiconductor-manufacturing",
+      "subject": "advanced-packaging",
+      "currentEvidence": "vendor-or-metadata-only",
+      "typedInternalLinks": 0,
+      "lawfulFullTextLikely": 7,
+      "independentAuthorship": 7,
+      "score": 19.5
+    },
+    {
+      "route": "/knowledge/processes/package-substrates-and-redistribution-layers",
+      "family": "semiconductor-manufacturing",
+      "subject": "advanced-packaging",
+      "currentEvidence": "vendor-or-metadata-only",
+      "typedInternalLinks": 0,
+      "lawfulFullTextLikely": 7,
+      "independentAuthorship": 7,
+      "score": 19.5
+    },
+    {
+      "route": "/knowledge/processes/underfill-molding-and-package-encapsulation",
+      "family": "semiconductor-manufacturing",
+      "subject": "advanced-packaging",
+      "currentEvidence": "vendor-or-metadata-only",
+      "typedInternalLinks": 0,
+      "lawfulFullTextLikely": 7,
+      "independentAuthorship": 7,
+      "score": 19.5
+    },
+    {
+      "route": "/knowledge/processes/wafer-thinning-dicing-and-die-handling",
+      "family": "semiconductor-manufacturing",
+      "subject": "advanced-packaging",
+      "currentEvidence": "vendor-or-metadata-only",
+      "typedInternalLinks": 0,
+      "lawfulFullTextLikely": 7,
+      "independentAuthorship": 7,
+      "score": 19.5
+    },
+    {
+      "route": "/knowledge/suppliers/applied-materials",
+      "family": "semiconductor-suppliers",
+      "subject": "crystal-and-materials",
+      "currentEvidence": "vendor-or-metadata-only",
+      "typedInternalLinks": 4,
+      "lawfulFullTextLikely": 5,
+      "independentAuthorship": 7,
+      "score": 19.1
+    }
+  ],
+  "cohortDigest": "sha256:bc52110f1ce566bb4033997697fa3dbe24de20993e36999328fcdaf66c7f6346"
+}
