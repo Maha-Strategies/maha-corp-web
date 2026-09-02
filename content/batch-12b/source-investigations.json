@@ -1,0 +1,131 @@
+{
+  "schemaVersion": "maha-batch-12b-investigation/1.0",
+  "investigatedAt": "2026-09-01",
+  "cohortSize": 15,
+  "boundary": "Direct source inspection by an automated process. Identity confirmed independently against Crossref and OpenAlex; content read at the depth stated. Establishes what a passage says, not that a claim is true.",
+  "accessPolicy": "Only lawfully accessible copies: arXiv, government hosts and open web. No paywall, login or CAPTCHA was bypassed. Routes already recorded as failed for Batch 12A were not retried.",
+  "sources": [
+    {
+      "identifier": "10.1103/RevModPhys.82.3045",
+      "confirmedTitle": "Colloquium: Topological insulators",
+      "confirmedAuthors": "Hasan, Kane",
+      "confirmedYear": 2010,
+      "lawfulCopy": "arXiv:1002.3895",
+      "versionRelationship": "preprint; version of record Rev. Mod. Phys. 82, 3045 (2010)",
+      "inspectionDepth": "section-or-full-text",
+      "exactLocator": "Abstract and scope statement; 2D quantum spin Hall and 3D surface Dirac fermion sections",
+      "boundedPassage": "The 2D topological insulator is a quantum spin Hall insulator, which is a close cousin of the integer quantum Hall state.",
+      "rightsBasis": "arXiv nonexclusive distribution licence; short quotation with attribution",
+      "establishes": "Topological insulator physics in HgCdTe quantum wells and bismuth chalcogenides, covering 2D quantum spin Hall edge states and 3D spin-polarised surface Dirac fermions.",
+      "doesNotEstablish": "Two-dimensional magnetism in van der Waals materials, CVD graphene grain boundaries, or dielectric screening in 2D devices. The review does not address any of them.",
+      "records": [
+        "urn:maha:record:advanced-materials-two-dimensional-magnetism",
+        "urn:maha:record:advanced-materials-cvd-graphene-grain-boundaries",
+        "urn:maha:record:advanced-materials-dielectric-screening",
+        "urn:maha:record:advanced-materials-materials-metrology-transfer"
+      ],
+      "verdict": "subject-mismatch"
+    },
+    {
+      "identifier": "10.1038/nature26160",
+      "confirmedTitle": "Unconventional superconductivity in magic-angle graphene superlattices",
+      "confirmedAuthors": "Cao et al.",
+      "confirmedYear": 2018,
+      "lawfulCopy": "arXiv:1803.02342",
+      "versionRelationship": "preprint; version of record Nature 556, 43 (2018)",
+      "inspectionDepth": "section-or-full-text",
+      "exactLocator": "Abstract and reported zero-resistance states with critical temperature",
+      "boundedPassage": "we observe tunable zero-resistance states with a critical temperature Tc up to 1.7 K.",
+      "rightsBasis": "arXiv nonexclusive distribution licence; short quotation with attribution",
+      "establishes": "Superconductivity in twisted bilayer graphene at magic angle, with tunable zero-resistance states up to 1.7 K.",
+      "doesNotEstablish": "Anything about direct-gap MoS2 or transition metal dichalcogenide monolayers. The work is exclusively on graphene superlattices.",
+      "records": [
+        "urn:maha:record:advanced-materials-direct-gap-mos2",
+        "urn:maha:record:advanced-materials-tmd-monolayers"
+      ],
+      "verdict": "subject-mismatch"
+    },
+    {
+      "identifier": "10.6028/NIST.AI.600-1",
+      "confirmedTitle": "Artificial Intelligence Risk Management Framework: Generative Artificial Intelligence Profile",
+      "confirmedAuthors": "NIST",
+      "confirmedYear": 2024,
+      "lawfulCopy": "nvlpubs.nist.gov NIST.AI.600-1.pdf, July 2024",
+      "versionRelationship": "government report, version of record",
+      "inspectionDepth": "section-or-full-text",
+      "exactLocator": "Suggested Actions MS-2.7-004 and MS-2.7-005, under the Information Integrity and Information Security risk categories",
+      "boundedPassage": "access controls, conformity assessment, and model integrity verification",
+      "rightsBasis": "US Government publication, available free of charge; short quotation with attribution",
+      "establishes": "Suggested measurement actions for generative AI risk, in which access controls appear as one content-authentication and provenance-verification measure alongside watermarking and cryptographic signatures.",
+      "doesNotEstablish": "Least-authority token design, capability scoping or credential delegation for AI agents. Access control appears in a provenance-verification context, not an agent-authorization one.",
+      "records": [
+        "urn:maha:record:agentic-systems-mcp-least-authority-tokens"
+      ],
+      "verdict": "partially-supported"
+    },
+    {
+      "identifier": "10.23915/distill.00007",
+      "confirmedTitle": "Feature Visualization",
+      "confirmedAuthors": "Olah, Mordvintsev, Schubert",
+      "confirmedYear": 2017,
+      "lawfulCopy": "distill.pub/2017/feature-visualization/",
+      "versionRelationship": "version of record",
+      "inspectionDepth": "section-or-full-text",
+      "exactLocator": "Feature visualization by optimization sections; no section addresses inactive units",
+      "boundedPassage": "optimization-based feature visualization reveals what neural networks seek in their inputs",
+      "rightsBasis": "Creative Commons Attribution CC-BY 4.0; short paraphrase with attribution",
+      "establishes": "That optimization-based visualization can show what a unit responds to, and that naive optimization produces high-frequency adversarial noise.",
+      "doesNotEstablish": "Dead features or dying and inactive units. The article contains no section on them.",
+      "records": [
+        "urn:maha:record:mechanistic-interpretability-dead-features"
+      ],
+      "verdict": "subject-mismatch"
+    },
+    {
+      "identifier": "10.1038/nature12385",
+      "confirmedTitle": "Van der Waals heterostructures",
+      "confirmedAuthors": "Geim, Grigorieva",
+      "confirmedYear": 2013,
+      "lawfulCopy": "arXiv:1307.6718 (OpenAlex green OA)",
+      "versionRelationship": "preprint; version of record Nature 499, 419 (2013)",
+      "inspectionDepth": "abstract-or-metadata-only",
+      "exactLocator": "Abstract",
+      "boundedPassage": "Isolated atomic planes can also be reassembled into designer heterostructures made layer by layer in a precisely chosen sequence.",
+      "rightsBasis": "arXiv nonexclusive distribution licence; short quotation with attribution",
+      "establishes": "That two-dimensional crystals can be stacked layer by layer into designer heterostructures.",
+      "doesNotEstablish": "At the depth inspected, it does not establish contact resistance, dry-transfer contamination, interface bubbles and strain, or encapsulation boundaries. The abstract confirms the general subject only.",
+      "records": [
+        "urn:maha:record:advanced-materials-contact-resistance-in-2d-devices",
+        "urn:maha:record:advanced-materials-dry-transfer-contamination",
+        "urn:maha:record:advanced-materials-interface-bubbles-and-strain",
+        "urn:maha:record:advanced-materials-encapsulation-boundaries"
+      ],
+      "verdict": "insufficient-depth"
+    }
+  ],
+  "failedRetrievals": [
+    {
+      "identifier": "https://www.alignmentforum.org/posts/JvZhhzycHu2Yd57RN/causal-scrubbing-a-method-for-rigorously-testing",
+      "records": [
+        "urn:maha:record:mechanistic-interpretability-activation-patching"
+      ],
+      "attemptedRoutes": [
+        "Direct fetch of the AI Alignment Forum post: content returned truncated, no title, authors, sections or licence recoverable"
+      ],
+      "outcome": "remain-inaccessible",
+      "reason": "The page did not return enough content to inspect. Not retried through a mirror, since none is known to be authoritative."
+    },
+    {
+      "identifier": "https://pubs.usgs.gov/periodicals/mcs2026/mcs2026.pdf",
+      "records": [
+        "urn:maha:record:critical-supply-chains-dysprosium-ore-to-oxide",
+        "urn:maha:record:critical-supply-chains-helium-liquefaction-logistics"
+      ],
+      "attemptedRoutes": [
+        "Direct fetch of the rare-earths chapter PDF at pubs.usgs.gov: HTTP 403"
+      ],
+      "outcome": "remain-inaccessible",
+      "reason": "The government host refused the request. Identity is plausible from the citation but no content was read."
+    }
+  ]
+}
