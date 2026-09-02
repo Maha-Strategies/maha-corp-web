@@ -1,0 +1,116 @@
+{
+  "schemaVersion": "maha-remediation-ledger/1.0",
+  "appendOnly": true,
+  "immutable": true,
+  "generatedAt": "2026-09-02",
+  "packets": 3,
+  "accept": 3,
+  "revise": 0,
+  "reject": 0,
+  "activeBindingsChanged": 0,
+  "adoptionRule": "A packet proposes. Adoption is a separate, reviewed act. No code path reads proposedDisposition and mutates a binding, and the uplift compiler consults inspections rather than packets.",
+  "canary": {
+    "fiveRecordCanaryReachable": false,
+    "distinctRecordsAvailable": 2,
+    "constructed": false,
+    "records": [],
+    "executed": false,
+    "authorized": false,
+    "note": "Fewer than five distinct records passed inspection. No smaller canary was constructed and called complete."
+  },
+  "ledgerEntries": [
+    {
+      "packetVersion": "maha-remediation-packet/1.0",
+      "recordIdentity": {
+        "route": "/knowledge/domains/semiconductor-manufacturing",
+        "currentState": "structural-only"
+      },
+      "claimIdentity": "Plasma etching and lithographic patterning are among the most complex unit processes in the integrated-circuit manufacturing flow.",
+      "currentSource": "none inspected for this proposition",
+      "proposedSource": {
+        "sourceId": "doe-2023-plasma-microelectronics",
+        "title": "Plasma Science for Microelectronics Nanofabrication (workshop report)",
+        "venue": "DOE FES workshop report, 2023",
+        "tier": "government-publication"
+      },
+      "sourceIdentityEvidence": "Served from science.osti.gov under the DOE Office of Science media path; running text names Fusion Energy Sciences and the workshop.",
+      "versionRelationship": "Final workshop report.",
+      "exactLocator": "1a. Summary, page 11",
+      "claimSupported": "Plasma etching and lithographic patterning are among the most complex unit processes in the integrated-circuit manufacturing flow.",
+      "evidenceClass": "government-or-standards-guidance",
+      "inspectedPassage": "Goals of the Workshop records low temperature plasma processing of microelectronics devices as an underpinning technology supporting the US semiconductor industry. PRO 1 records that sustainable fabrication of cutting-edge nanoelectronics requires plasma-assisted processes building features at the atomic level alongside features hundreds of atoms wide and tens of thousands of atoms deep. Section 1a records that the equipment for plasma-assisted manufacturing is complex, expensive, energy intensive and requires exotic feedstock gases including greenhouse gases, and that plasma etching and lithographic patterning are two of the most complex unit processes in the manufacturing flow for integrated circuits. Figure 1-1 shows transmission electron micrographs of high aspect ratio trenches coated with titanium dioxide by thermal ALD and by plasma-enhanced ALD.",
+      "boundedClaim": "That plasma-assisted processing underpins semiconductor nanofabrication, that plasma etching and lithographic patterning are among the most complex unit processes in the IC flow, and that the equipment carrying these processes is energy intensive and dependent on greenhouse-gas feedstocks.",
+      "limitation": "A workshop report setting out research opportunities. It gives no process recipe, no tool performance figure, no yield data and no throughput, so it cannot support a claim about how any reactor or process performs.",
+      "rightsBasis": "US government work, citation-with-paraphrase",
+      "inspectionDepth": "section-or-full-text",
+      "proposedDisposition": "accept",
+      "dispositionIsAdvisoryOnly": true,
+      "appliedToActiveBinding": false,
+      "activeBindingUnchanged": true,
+      "provenanceDigest": "sha256:fadac7ad00eda3aa8e0be86af570fd616f0afd21c5d7fe096ba3683b54a2739b"
+    },
+    {
+      "packetVersion": "maha-remediation-packet/1.0",
+      "recordIdentity": {
+        "route": "/knowledge/domains/semiconductor-manufacturing",
+        "currentState": "structural-only"
+      },
+      "claimIdentity": "Lithography is the process by which successively smaller devices are patterned onto silicon wafers, and its improvement drove decades of advance in microelectronics.",
+      "currentSource": "none inspected for this proposition",
+      "proposedSource": {
+        "sourceId": "doe-2022-microelectronics-capabilities",
+        "title": "Microelectronics at the Department of Energy: Capabilities and Opportunities for Driving U.S. Competitiveness",
+        "venue": "DOE report, May 2022",
+        "tier": "government-publication"
+      },
+      "sourceIdentityEvidence": "DOE branding on every page and a running footer stating the full report title.",
+      "versionRelationship": "May 2022 report.",
+      "exactLocator": "Section 2 Fabrication and Prototyping, page 5",
+      "claimSupported": "Lithography is the process by which successively smaller devices are patterned onto silicon wafers, and its improvement drove decades of advance in microelectronics.",
+      "evidenceClass": "government-or-standards-guidance",
+      "inspectedPassage": "Section 2 records that for decades continued improvements in lithography, the process by which smaller devices are patterned onto silicon wafers, drove advances in microelectronic technologies, and that the Center for X-ray Optics at the Advanced Light Source worked with national labs and industry over decades to develop extreme ultraviolet lithography. Section 4 records that characterization and testing are needed at length scales below ten nanometres approaching atomic scales, and that accelerator-based light sources providing intense extreme ultraviolet radiation could enable higher resolution optical metrology. Table 2 maps DOE facilities against seven capability areas including materials and processing, fabrication and prototyping, characterization and testing, and manufacturing.",
+      "boundedClaim": "That lithography is the patterning step that drove decades of device scaling, that extreme ultraviolet lithography was developed over decades through national-laboratory and industry collaboration, and that characterization below ten nanometres is a recognised measurement problem.",
+      "limitation": "A capabilities and opportunities report describing facilities and research directions. It contains no process parameters, no tool specifications, no yield or reliability data, and makes no comparison between commercial systems.",
+      "rightsBasis": "US government work, citation-with-paraphrase",
+      "inspectionDepth": "section-or-full-text",
+      "proposedDisposition": "accept",
+      "dispositionIsAdvisoryOnly": true,
+      "appliedToActiveBinding": false,
+      "activeBindingUnchanged": true,
+      "provenanceDigest": "sha256:1d6beba335c84f00c076f14e3972be73e9196e992fd219c3824dcf476c82c038"
+    },
+    {
+      "packetVersion": "maha-remediation-packet/1.0",
+      "recordIdentity": {
+        "route": "/knowledge/concepts/cleanrooms-fab-utilities-and-contamination-control",
+        "currentState": "structural-only"
+      },
+      "claimIdentity": "Airborne molecular contamination of the kind cleanroom control targets is measurable optically at parts-per-billion sensitivity, demonstrated here in laboratory chambers rather than an operating fab.",
+      "currentSource": "none inspected for this proposition",
+      "proposedSource": {
+        "sourceId": "khan-2024-cleanroom-crds",
+        "title": "Open-Path Cavity Ring-Down Spectroscopy for Simultaneous Detection of Hydrogen Chloride and Particles in Cleanroom Environment",
+        "authors": "Muhammad Bilal Khan, Christian L'Orange, Cheongha Lim, Deokhyeon Kwon, Azer P. Yalin",
+        "venue": "Sensors (Basel), 2024",
+        "tier": "peer-reviewed-open-access"
+      },
+      "sourceIdentityEvidence": "PMC record states the title, five authors, journal and 2024 date.",
+      "versionRelationship": "Open-access version of record under CC BY 4.0.",
+      "exactLocator": "Section 4.1 and Abstract",
+      "claimSupported": "Airborne molecular contamination of the kind cleanroom control targets is measurable optically at parts-per-billion sensitivity, demonstrated here in laboratory chambers rather than an operating fab.",
+      "evidenceClass": "independent-scientific-or-technical",
+      "inspectedPassage": "Section 3.2 records that the sensor targets the R(3) line of hydrogen chloride at 5739.26 inverse centimetres in the 2-0 vibrational band, with Mie scattering used for particulates. Section 4.1 records an Allan variance around one part per billion at integration times near ten minutes. The Abstract records particle detection at number densities as low as about ten to the fifth per cubic metre for diameters above one micrometre.",
+      "boundedClaim": "That airborne molecular contamination relevant to cleanrooms can be measured optically at parts-per-billion sensitivity, and the specific spectroscopic line and integration time at which that sensitivity was demonstrated.",
+      "limitation": "The authors state they performed the hydrogen chloride and particulate experiments separately rather than simultaneously, that testing occurred in controlled laboratory chambers rather than an operating cleanroom, and that the work does not reference SEMI contamination categories or validate against semiconductor industry standards. It therefore cannot support a claim about contamination levels in any real fab, nor about compliance with any standard.",
+      "rightsBasis": "CC BY 4.0, citation-with-paraphrase",
+      "inspectionDepth": "section-or-full-text",
+      "proposedDisposition": "accept",
+      "dispositionIsAdvisoryOnly": true,
+      "appliedToActiveBinding": false,
+      "activeBindingUnchanged": true,
+      "provenanceDigest": "sha256:43096c0d24b6fe225538c97b7588b1129e5abc0aa9ecbcae627624d4ce5026e4"
+    }
+  ],
+  "boundary": "Private, append-only proposals. Nothing here is active.",
+  "ledgerDigest": "sha256:ca9a1e02d47c62fa5ceaaa789c34088d626fe0a4ec354faf2c228ea9d9d43efb"
+}
