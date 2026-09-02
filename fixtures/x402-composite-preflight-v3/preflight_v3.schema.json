@@ -1,0 +1,352 @@
+{
+ "$schema": "https://json-schema.org/draft/2020-12/schema",
+ "$id": "https://x402.nsgoods.org/preflight/schema/preflight_v3.schema.json",
+ "title": "x402 preflight composite envelope (preflight_v3)",
+ "description": "FROZEN after publication; supersedes preflight_v2 at an announced version boundary (2026-09-01). Identical to preflight_v2 except the two refusal branches (400 invalid subject, 503 signing unavailable) now explicitly declare every permitted field and set additionalProperties false, closing the gap where injected keys were accepted in a refusal body. No other change.",
+ "$defs": {
+  "subject": {
+   "type": "object",
+   "additionalProperties": false,
+   "required": [
+    "address",
+    "chain",
+    "role"
+   ],
+   "properties": {
+    "address": {
+     "type": "string"
+    },
+    "chain": {
+     "type": "string"
+    },
+    "role": {
+     "enum": [
+      "payer",
+      "payee",
+      "escrow_destination"
+     ]
+    }
+   }
+  },
+  "manifest": {
+   "type": "object",
+   "additionalProperties": false,
+   "required": [
+    "url",
+    "entry"
+   ],
+   "properties": {
+    "url": {
+     "const": "https://x402.nsgoods.org/proof/index.json"
+    },
+    "entry": {
+     "const": "preflight"
+    },
+    "source_service": {
+     "type": "string"
+    }
+   }
+  },
+  "component_common": {
+   "type": "object",
+   "additionalProperties": false,
+   "required": [
+    "component",
+    "verdict",
+    "reason_codes",
+    "observed_at",
+    "freshness_bound_seconds",
+    "limitations",
+    "subject_echo",
+    "signer",
+    "manifest",
+    "component_digest",
+    "component_signature"
+   ],
+   "properties": {
+    "component": {
+     "type": "string"
+    },
+    "verdict": {
+     "type": "string"
+    },
+    "reason_codes": {
+     "type": "array",
+     "items": {
+      "type": "string"
+     },
+     "minItems": 1
+    },
+    "observed_at": {
+     "type": "string",
+     "format": "date-time"
+    },
+    "freshness_bound_seconds": {
+     "type": "integer"
+    },
+    "limitations": {
+     "type": "array",
+     "items": {
+      "type": "string"
+     },
+     "minItems": 1
+    },
+    "subject_echo": {
+     "$ref": "#/$defs/subject"
+    },
+    "signer": {
+     "const": "0x57fF0F084Cba33e6761503f90eEF0Da9F159350c"
+    },
+    "manifest": {
+     "$ref": "#/$defs/manifest"
+    },
+    "synthetic_condition": {
+     "type": "boolean"
+    },
+    "synthetic_note": {
+     "type": "string"
+    },
+    "component_digest": {
+     "type": "string",
+     "pattern": "^[0-9a-f]{64}$"
+    },
+    "component_signature": {
+     "type": "string",
+     "pattern": "^0x[0-9a-fA-F]+$"
+    }
+   }
+  }
+ },
+ "oneOf": [
+  {
+   "type": "object",
+   "additionalProperties": false,
+   "required": [
+    "schema_version",
+    "request",
+    "components",
+    "observation",
+    "components_evaluated",
+    "envelope"
+   ],
+   "properties": {
+    "schema_version": {
+     "const": "preflight_v3"
+    },
+    "request": {
+     "type": "object",
+     "additionalProperties": false,
+     "required": [
+      "request_id",
+      "request_time",
+      "subject"
+     ],
+     "properties": {
+      "request_id": {
+       "type": "string"
+      },
+      "request_time": {
+       "type": "string",
+       "format": "date-time"
+      },
+      "subject": {
+       "$ref": "#/$defs/subject"
+      }
+     }
+    },
+    "components": {
+     "type": "array",
+     "minItems": 3,
+     "maxItems": 3,
+     "prefixItems": [
+      {
+       "allOf": [
+        {
+         "$ref": "#/$defs/component_common"
+        }
+       ],
+       "properties": {
+        "component": {
+         "const": "payability"
+        },
+        "verdict": {
+         "enum": [
+          "PAYABLE",
+          "NOT_PAYABLE",
+          "not_evaluated"
+         ]
+        },
+        "freshness_bound_seconds": {
+         "const": 300
+        }
+       }
+      },
+      {
+       "allOf": [
+        {
+         "$ref": "#/$defs/component_common"
+        }
+       ],
+       "properties": {
+        "component": {
+         "const": "sanctions"
+        },
+        "verdict": {
+         "enum": [
+          "CLEAR",
+          "MATCH",
+          "not_evaluated"
+         ]
+        },
+        "freshness_bound_seconds": {
+         "const": 86400
+        }
+       }
+      },
+      {
+       "allOf": [
+        {
+         "$ref": "#/$defs/component_common"
+        }
+       ],
+       "properties": {
+        "component": {
+         "const": "trust"
+        },
+        "verdict": {
+         "enum": [
+          "DATA",
+          "NO_DATA",
+          "not_evaluated"
+         ]
+        },
+        "freshness_bound_seconds": {
+         "const": 3600
+        }
+       }
+      }
+     ],
+     "items": false
+    },
+    "observation": {
+     "type": "object",
+     "additionalProperties": false,
+     "required": [
+      "mode",
+      "spread_ms"
+     ],
+     "properties": {
+      "mode": {
+       "const": "sequential-within-one-request"
+      },
+      "spread_ms": {
+       "type": "integer",
+       "minimum": 0
+      }
+     }
+    },
+    "components_evaluated": {
+     "type": "integer",
+     "minimum": 0,
+     "maximum": 3
+    },
+    "envelope": {
+     "type": "object",
+     "additionalProperties": false,
+     "required": [
+      "signer",
+      "signature"
+     ],
+     "properties": {
+      "signer": {
+       "const": "0x57fF0F084Cba33e6761503f90eEF0Da9F159350c"
+      },
+      "signature": {
+       "type": "string",
+       "pattern": "^0x[0-9a-fA-F]+$"
+      }
+     }
+    }
+   }
+  },
+  {
+   "type": "object",
+   "required": [
+    "error",
+    "http_status",
+    "charged",
+    "schema_version",
+    "reason_codes"
+   ],
+   "properties": {
+    "error": {
+     "type": "string"
+    },
+    "detail": {
+     "type": "string"
+    },
+    "http_status": {
+     "const": 400
+    },
+    "charged": {
+     "const": false
+    },
+    "schema_version": {
+     "const": "preflight_v3"
+    },
+    "note": {
+     "type": "string"
+    },
+    "reason_codes": {
+     "type": "array",
+     "items": {
+      "type": "string"
+     },
+     "minItems": 1
+    }
+   },
+   "additionalProperties": false
+  },
+  {
+   "type": "object",
+   "required": [
+    "error",
+    "http_status",
+    "charged",
+    "schema_version",
+    "reason_codes"
+   ],
+   "properties": {
+    "error": {
+     "type": "string"
+    },
+    "detail": {
+     "type": "string"
+    },
+    "http_status": {
+     "const": 503
+    },
+    "charged": {
+     "const": false
+    },
+    "schema_version": {
+     "const": "preflight_v3"
+    },
+    "note": {
+     "type": "string"
+    },
+    "reason_codes": {
+     "type": "array",
+     "items": {
+      "type": "string"
+     },
+     "minItems": 1,
+     "contains": {
+      "const": "signing_unavailable"
+     }
+    }
+   },
+   "additionalProperties": false
+  }
+ ]
+}

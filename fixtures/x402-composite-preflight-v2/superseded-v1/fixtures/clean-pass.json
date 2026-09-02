@@ -1,0 +1,98 @@
+{
+ "schema_version": "preflight_v1",
+ "request": {
+  "request_id": "pf_6527a6b060353100",
+  "request_time": "2026-08-31T16:30:00Z",
+  "subject": {
+   "address": "0xc87a06DEE4c0E85912296002617120BBfd5EF990",
+   "chain": "eip155:8453",
+   "role": "payee"
+  }
+ },
+ "components": [
+  {
+   "component": "payability",
+   "verdict": "PAYABLE",
+   "reason_codes": [
+    "simulated_ok"
+   ],
+   "observed_at": "2026-08-31T16:30:00Z",
+   "freshness_bound_seconds": 300,
+   "limitations": [
+    "eth_call simulation at latest block, not an on-chain transfer",
+    "classification is point-in-time (eth_getCode)"
+   ],
+   "subject_echo": {
+    "address": "0xc87a06DEE4c0E85912296002617120BBfd5EF990",
+    "chain": "eip155:8453",
+    "role": "payee"
+   },
+   "signer": "0x57fF0F084Cba33e6761503f90eEF0Da9F159350c",
+   "manifest": {
+    "url": "https://x402.nsgoods.org/proof/index.json",
+    "entry": "services[7] payable-address"
+   },
+   "component_digest": "b810f8e8c3f7487b737bf81a063f529f26ee42cc6eab513c54462e7c32559f18",
+   "component_signature": "0x0336ddcb2beea872a2ae4f18c2d7d4bb4e4530fece71782e85b2788d0867ed8c63a8887f7c939faa6bd93dab908c45a6e9b22d61bffc46af7433518109af8b921b"
+  },
+  {
+   "component": "sanctions",
+   "verdict": "CLEAR",
+   "reason_codes": [
+    "ofac_sdn_no_match"
+   ],
+   "observed_at": "2026-08-31T16:30:00.006000Z",
+   "freshness_bound_seconds": 86400,
+   "limitations": [
+    "OFAC SDN exact-address screening only; not KYC, Travel Rule, or legal advice",
+    "clean means absent from this snapshot, negative evidence only"
+   ],
+   "subject_echo": {
+    "address": "0xc87a06DEE4c0E85912296002617120BBfd5EF990",
+    "chain": "eip155:8453",
+    "role": "payee"
+   },
+   "signer": "0x57fF0F084Cba33e6761503f90eEF0Da9F159350c",
+   "manifest": {
+    "url": "https://x402.nsgoods.org/proof/index.json",
+    "entry": "services[5] sanctions"
+   },
+   "component_digest": "e1dfb6e21e3b53e1dddee06dafaea560f3b86a3111c1106a101d147f9bda1d1f",
+   "component_signature": "0x95350871ec7876010249652c684ce443b9bbb051a60a3e88225dc678e57e4cdf19bdfabc66ae5fcfc3292dcef7d77dde1deb50f9d02e090810a48d3469bc8f371b"
+  },
+  {
+   "component": "trust",
+   "verdict": "NO_DATA",
+   "reason_codes": [
+    "insufficient_data"
+   ],
+   "observed_at": "2026-08-31T16:30:00.012000Z",
+   "freshness_bound_seconds": 3600,
+   "limitations": [
+    "ERC-8004 reputation across EVM chains; scored by (chain, agent_id)",
+    "NO_DATA means no qualifying ERC-8004 feedback, not a negative rating"
+   ],
+   "subject_echo": {
+    "address": "0xc87a06DEE4c0E85912296002617120BBfd5EF990",
+    "chain": "eip155:8453",
+    "role": "payee"
+   },
+   "signer": "0x57fF0F084Cba33e6761503f90eEF0Da9F159350c",
+   "manifest": {
+    "url": "https://x402.nsgoods.org/proof/index.json",
+    "entry": "services[1] trust"
+   },
+   "component_digest": "ad71a655ba4d8e83bdf709a6938251f5e938897185cd9c5261b280553b96aca6",
+   "component_signature": "0x7761742880acf2fb247d9db4a82f8d19f9595fab36cc02d18efe1b30109fe0fb605947c61ca9c1f3e98ca71b5a7a1796fa1a8599a105fe054f126b99efacfb271b"
+  }
+ ],
+ "observation": {
+  "mode": "sequential-within-one-request",
+  "spread_ms": 12
+ },
+ "components_evaluated": 3,
+ "envelope": {
+  "signer": "0x57fF0F084Cba33e6761503f90eEF0Da9F159350c",
+  "signature": "0x639af5fe316edabdabbcb33b9268fe3bd880c0200e76f0020fc953b52dfcd87b6ec2c41baa17c7a001aed58ccab2cbbd43449dbc8d8f6dbf79a0ba3bd9ad13e71b"
+ }
+}

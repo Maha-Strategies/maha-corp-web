@@ -1,0 +1,104 @@
+{
+ "schema_version": "preflight_v2",
+ "request": {
+  "request_id": "pf_ea37a1f1bc50dda3",
+  "request_time": "2026-09-01T10:21:28.234636+00:00",
+  "subject": {
+   "address": "0x4200000000000000000000000000000000000006",
+   "chain": "eip155:8453",
+   "role": "escrow_destination"
+  }
+ },
+ "components": [
+  {
+   "component": "payability",
+   "verdict": "PAYABLE",
+   "reason_codes": [
+    "simulated_ok"
+   ],
+   "observed_at": "2026-09-01T10:21:28.116623+00:00",
+   "freshness_bound_seconds": 300,
+   "limitations": [
+    "eth_call simulation at latest block, not an on-chain transfer",
+    "classification is point-in-time (eth_getCode)",
+    "settlement feasibility is always simulated on Base USDC regardless of subject.chain"
+   ],
+   "subject_echo": {
+    "address": "0x4200000000000000000000000000000000000006",
+    "chain": "eip155:8453",
+    "role": "escrow_destination"
+   },
+   "signer": "0x57fF0F084Cba33e6761503f90eEF0Da9F159350c",
+   "manifest": {
+    "url": "https://x402.nsgoods.org/proof/index.json",
+    "entry": "preflight",
+    "source_service": "payable-address"
+   },
+   "component_digest": "be6037fd3cde8d967a02b5f60a652ac479c5c8acd01e5afb4f8fb5f9b3bf7354",
+   "component_signature": "0x5f2bea2eedfb43f34eb8593a902e5b5afa9582345ca4a897844f2940633f7e2a405380a544d50d72ec2097c73e9106d56c47a55e6ae011f357facce19dae69431b"
+  },
+  {
+   "component": "sanctions",
+   "verdict": "CLEAR",
+   "reason_codes": [
+    "ofac_sdn_no_match"
+   ],
+   "observed_at": "2026-09-01T10:21:28.233172+00:00",
+   "freshness_bound_seconds": 86400,
+   "limitations": [
+    "OFAC SDN exact-address screening only; not KYC, Travel Rule, or legal advice",
+    "clear means absent from this snapshot, negative evidence only"
+   ],
+   "subject_echo": {
+    "address": "0x4200000000000000000000000000000000000006",
+    "chain": "eip155:8453",
+    "role": "escrow_destination"
+   },
+   "signer": "0x57fF0F084Cba33e6761503f90eEF0Da9F159350c",
+   "manifest": {
+    "url": "https://x402.nsgoods.org/proof/index.json",
+    "entry": "preflight",
+    "source_service": "sanctions"
+   },
+   "component_digest": "56068ffbe05fdc7f7c4618b819220aa8a0c1858c92e26b7755afa6e61be48a8e",
+   "component_signature": "0x23269cf0c5ddaf54eba8605e3b04811ab3096263f1044d24bfb6d18e614fcf073e8b2f74c3fcd9c8187d0c666b474984aa64fdc048e2a9e95a998814d246cf641b"
+  },
+  {
+   "component": "trust",
+   "verdict": "not_evaluated",
+   "reason_codes": [
+    "oracle_unreachable"
+   ],
+   "observed_at": "2026-09-01T10:21:28.234156+00:00",
+   "freshness_bound_seconds": 3600,
+   "limitations": [
+    "ERC-8004 reputation across EVM chains; scored by (chain, agent_id)",
+    "synthetic not_evaluated: see synthetic_condition"
+   ],
+   "subject_echo": {
+    "address": "0x4200000000000000000000000000000000000006",
+    "chain": "eip155:8453",
+    "role": "escrow_destination"
+   },
+   "signer": "0x57fF0F084Cba33e6761503f90eEF0Da9F159350c",
+   "manifest": {
+    "url": "https://x402.nsgoods.org/proof/index.json",
+    "entry": "preflight",
+    "source_service": "trust"
+   },
+   "synthetic_condition": true,
+   "synthetic_note": "trust oracle marked unreachable inside the fixture builder to demonstrate a real not_evaluated component; live service returns NO_DATA for an unregistered address",
+   "component_digest": "2e17f0627b8c4dacbd620d0b2d277b4cc309c46bb51c3d2f17a32b06a9aaba8a",
+   "component_signature": "0xe4b0e1f4b770802e61c97584979dc7dd6fbf80ce5c2193d67478682b78f4b62b783124bea8c35fc3b6936fd39f31a2e3901cc31b47fd031f0c957a26b931b8011b"
+  }
+ ],
+ "observation": {
+  "mode": "sequential-within-one-request",
+  "spread_ms": 118
+ },
+ "components_evaluated": 2,
+ "envelope": {
+  "signer": "0x57fF0F084Cba33e6761503f90eEF0Da9F159350c",
+  "signature": "0x34338addf58ce0699cff0ca52fea7cce01ed1b952a86df0b055458d189f6ecf8437d8505e42446cf10af5642bf0f2a777e5d2ad5e2afc542c3ac9c20632652f71c"
+ }
+}
