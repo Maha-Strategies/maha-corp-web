@@ -1,0 +1,48 @@
+{
+  "schemaVersion": "maha-policy-v2-preview-rehearsal/1.0",
+  "dispatched": false,
+  "provisioned": false,
+  "authorized": false,
+  "environment": "preview",
+  "database": {
+    "kind": "schema-only ephemeral",
+    "seededFromProduction": false,
+    "note": "Schema only. No Production row is copied in, so a rehearsal cannot accidentally publish real content."
+  },
+  "commit": "the exact merged commit under test, pinned by sha and never by branch",
+  "credentials": {
+    "kind": "dedicated temporary",
+    "scope": "preview-only; no Production operations or release-authority token participates",
+    "revocation": "exact-credential revocation at teardown, verified by fingerprint rather than by slot"
+  },
+  "scope": {
+    "canaryRecords": 5,
+    "remainderRecords": 0,
+    "productionWrites": 0
+  },
+  "teardown": [
+    "revoke the exact temporary credentials issued for this rehearsal",
+    "confirm revocation by observing refusal, not by absence of a slot",
+    "drop the ephemeral database",
+    "record sanitized closure evidence"
+  ],
+  "closureEvidence": {
+    "includes": [
+      "run identifier",
+      "commit",
+      "record ids",
+      "candidate targets",
+      "route verification",
+      "teardown result"
+    ],
+    "excludes": [
+      "credential values",
+      "reviewer identities",
+      "private rationale",
+      "source passages"
+    ]
+  },
+  "productionRelationship": "A rehearsal only. A Production release remains a later, separately authorized operation and is not implied by a green rehearsal.",
+  "boundary": "Prepared and undispatched. Nothing is provisioned.",
+  "previewDigest": "sha256:c025c0b006bbd234665272e5af4b83c784b3ebb81de7dab4b94ad2ade08760fb"
+}

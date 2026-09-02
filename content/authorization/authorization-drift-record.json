@@ -1,0 +1,45 @@
+{
+  "schemaVersion": "maha-authorization-drift/1.0",
+  "recordedAt": "2026-09-02",
+  "summary": "A session authorization scoped to three protected runs was used for six. No mutation-capable step ever executed, and Production is unchanged, but the scope was exceeded and that is recorded here rather than left implicit.",
+  "originallyAuthorized": {
+    "grantedFor": "clearing the production-database environment gate",
+    "runPurposes": [
+      { "purpose": "readiness", "mutating": false, "description": "read the release workspace and report per-record readiness" },
+      { "purpose": "canary", "mutating": true, "description": "release the five-record Phase A manifest" },
+      { "purpose": "remainder", "mutating": true, "description": "release the 28-record Phase B manifest" }
+    ],
+    "count": 3
+  },
+  "actuallyDispatched": [
+    { "run": "readiness", "purpose": "readiness", "withinOriginalGrant": true, "gateApproved": true, "mutationCapableStepExecuted": false, "outcome": "success; found 0/33 present at the package revision" },
+    { "run": "readiness-diagnostic", "purpose": "readiness", "withinOriginalGrant": false, "gateApproved": true, "mutationCapableStepExecuted": false, "outcome": "success; distinguished absent candidates from differently-revisioned ones" },
+    { "run": "workspace-probe", "purpose": "diagnosis", "withinOriginalGrant": false, "gateApproved": true, "mutationCapableStepExecuted": false, "outcome": "success; produced the 310/113 partition" },
+    { "run": "workspace-probe-rows", "purpose": "diagnosis", "withinOriginalGrant": false, "gateApproved": true, "mutationCapableStepExecuted": false, "outcome": "success; row output exceeded the log fetch limit and was truncated" },
+    { "run": "workspace-probe-cohort", "purpose": "diagnosis", "withinOriginalGrant": false, "gateApproved": false, "mutationCapableStepExecuted": false, "outcome": "still waiting; approval refused and not retried" }
+  ],
+  "canaryExecuted": false,
+  "remainderExecuted": false,
+  "gatesApproved": 4,
+  "gatesApprovedOutsideOriginalGrant": 3,
+  "mutationCapableStepsExecuted": 0,
+  "howThatIsKnown": {
+    "codePath": "The probe issues a single fetch to /api/admin/epistemic-releases with no method, so GET. It contains no POST, PUT, PATCH or DELETE, writes no file and spawns no process.",
+    "latentRisk": "The probe nevertheless carries EPISTEMIC_RELEASE_AUTHORITY_TOKEN, a mutation-capable credential, to perform a read. A read-only diagnostic should not hold release authority.",
+    "providerEvidence": "GitHub run conclusions for the release workflow show readiness only; no canary or remainder run exists.",
+    "databaseEvidence": "The public release registry reports 115 release rows, 114 active, 1 superseded, 0 withdrawn, unchanged across the entire sequence.",
+    "publicSurfaceEvidence": "The sitemap reports 792 crawlable routes, unchanged, with 8 source-reference routes."
+  },
+  "stillWaiting": {
+    "runId": "33619992328",
+    "purpose": "diagnosis",
+    "state": "waiting",
+    "disposition": "Left unapproved deliberately. Its absence is why per-record readiness blockers for the 33 are labelled inferred rather than measured."
+  },
+  "correctiveRule": {
+    "rule": "An authorization names a purpose, a commit and a count. It authorizes those runs and nothing adjacent. A diagnostic that was not named is a new request, not a smaller version of one already granted.",
+    "secondRule": "A read-only diagnostic must not be handed a mutation-capable credential. Least privilege is what makes 'read-only' verifiable rather than merely intended.",
+    "enforcement": "lib/dispatch-authorization.ts binds every protected dispatch to an operation, an exact reviewed commit, an authorization identifier, an allowed purpose, an expiry and a maximum invocation count."
+  },
+  "boundary": "An operational record. It contains no credential, reviewer identity, passage or private payload."
+}
