@@ -1,0 +1,29 @@
+name: Probe workspace readiness
+
+# Read-only. Reads the release workspace and reports why candidates are
+# unready. Creates nothing, ingests nothing, releases nothing.
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: probe-workspace-readiness
+  cancel-in-progress: false
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    environment: production-database
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Probe, read-only
+        env:
+          EPISTEMIC_RELEASE_AUTHORITY_TOKEN: ${{ secrets.EPISTEMIC_RELEASE_AUTHORITY_TOKEN }}
+        run: node --experimental-strip-types scripts/probe-workspace-readiness.ts
