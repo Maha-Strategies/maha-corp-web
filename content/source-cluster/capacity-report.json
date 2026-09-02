@@ -1,0 +1,53 @@
+{
+  "schemaVersion": "maha-capacity-report/2.0",
+  "reportedAt": "2026-09-02",
+  "live": {
+    "baselineRecordedInScalingObservation": 764,
+    "baselineRecordedAt": "2026-09-01T12:00:00.000Z",
+    "baselineIsStale": true,
+    "routesLandedBetweenBaselineAndThisSprint": {
+      "total": 20,
+      "the-cosmic-recursion (#358)": 18,
+      "exactzk integration evidence": 1,
+      "/knowledge/integrations": 1
+    },
+    "liveImmediatelyBeforeThisDeployment": 784,
+    "liveAfterSourcePageDeployment": {
+      "expectedFromStaleBaseline": 772,
+      "expectedFromCorrectedBaseline": 792,
+      "observed": 792,
+      "matchesCorrectedExpectation": true,
+      "sourceRoutesAdded": 8,
+      "duplicateUrls": 0,
+      "note": "The deployment added exactly eight routes, which is what it was supposed to add. The 772 figure was computed from a baseline that had already gone stale by twenty routes."
+    }
+  },
+  "prepared": {
+    "status": "NOT LIVE. Prepared, unauthorized and unexecuted.",
+    "canaryReady": 5,
+    "remainderReady": 28,
+    "cascadeReadySourcePages": 1,
+    "staleRevision": 0,
+    "existingRelease": 0,
+    "missingDecision": 0,
+    "lineageConflict": 0,
+    "blocked": 0,
+    "preparedFinalTotal": {
+      "statedInSprint": 806,
+      "correctedForObservedBaseline": 826,
+      "derivation": "792 live + 5 canary + 28 remainder + 1 cascade source page"
+    }
+  },
+  "gapToTarget": {
+    "target": 1000,
+    "statedInSprint": 194,
+    "fromLiveToday": 208,
+    "fromPreparedFinalTotal": 174,
+    "note": "The stated 194 is the gap from the stale 806. Against the observed surface the prepared final total is 826 and the remaining gap is 174."
+  },
+  "accounting": {
+    "preparedCountedAsLive": false,
+    "rule": "A prepared release reaches no reader. Live and prepared are reported in separate columns and never summed into a single public figure."
+  },
+  "reportDigest": "sha256:03b6e0ab252edb9900ba267d1e544566476a01eaf5c2c760ab3b4039ecc5df02"
+}

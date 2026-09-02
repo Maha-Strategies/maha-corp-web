@@ -1,0 +1,967 @@
+{
+  "schemaVersion": "maha-production-release-preflight/1.0",
+  "mode": "read-only",
+  "ranAt": "2026-09-02",
+  "productionStateSource": "https://www.mahastrategies.com/knowledge/epistemic-system/releases/registry.json",
+  "productionReleasesObserved": {
+    "totalReleases": 115,
+    "active": 114,
+    "superseded": 1,
+    "withdrawn": 0
+  },
+  "credentialsUsed": "none",
+  "mutationsPerformed": 0,
+  "repairsPerformed": 0,
+  "repairPolicy": "A record that fails preflight is classified and left untouched. Repair during preflight would mean the report no longer describes Production.",
+  "cohortSize": 33,
+  "classification": {
+    "canary-ready": 5,
+    "remainder-ready": 28
+  },
+  "reviewTier": {
+    "id": "automated-internal-editorial",
+    "reviewerKind": "automated-internal-editorial",
+    "independent": false,
+    "expertEndorsement": false,
+    "externallyReviewed": false,
+    "humanReviewed": false,
+    "releaseAuthority": "separate",
+    "verifies": "deterministic evidence-policy compliance",
+    "doesNotEstablish": [
+      "scientific truth",
+      "independent reproduction",
+      "expert consensus",
+      "external endorsement",
+      "fitness for any decision the reader may make"
+    ],
+    "publicStatement": "This tier verifies deterministic evidence-policy compliance. It does not establish scientific truth, independent reproduction or expert consensus, and no decision in it was made by a person."
+  },
+  "records": [
+    {
+      "recordId": "urn:maha:record:agentic-systems-mcp-mcp-session-lifecycle",
+      "phase": "canary",
+      "revisionSha256": "sha256:110f2b0ddb37abd4acd9e4463e60c3bbd565d2dac8eefaa57cee2738d52ad80d",
+      "operationId": "release:dcb2082e05c3ab2e5a8e25b7d3c6e357",
+      "releaseKind": "initial",
+      "declaredClassification": "initial",
+      "reviewAxes": [
+        "source-identity-and-fidelity",
+        "claim-to-passage-support",
+        "scope-and-unsupported-inference",
+        "rights-and-locator-adequacy",
+        "release-boundary-and-nonclaims"
+      ],
+      "reviewBundleDigest": "sha256:4cc72c910e3039933366619cd8fc5ab269aa95b7fc671d2fc9806976fb1e2e7d",
+      "auditSha256": "sha256:7e50cd02c098692f4f74cf7097c2abb6c5335c70f647698e2da4a077c03ca867",
+      "productionActiveRelease": null,
+      "productionReleaseHistory": 0,
+      "canonicalRoute": "/knowledge/agentic-systems-mcp/methods/agentic-systems-mcp-mcp-session-lifecycle",
+      "sourceBinding": {
+        "sourceId": "https://modelcontextprotocol.io/specification/2024-11-05/index",
+        "locator": "Architecture, lifecycle, capabilities, resources, prompts, and security sections."
+      },
+      "attributesChecked": 15,
+      "failedAttributes": [],
+      "classification": "canary-ready",
+      "repaired": false
+    },
+    {
+      "recordId": "urn:maha:record:biomolecular-engineering-crude-extract-cell-free-systems",
+      "phase": "canary",
+      "revisionSha256": "sha256:2c80ac068e79e4cbf4a41e142fc0696c842b4a20e32c3a347b82a53278e3899a",
+      "operationId": "release:e8b0f2984ed69a0d1699e41e17aab587",
+      "releaseKind": "initial",
+      "declaredClassification": "initial",
+      "reviewAxes": [
+        "source-identity-and-fidelity",
+        "claim-to-passage-support",
+        "scope-and-unsupported-inference",
+        "rights-and-locator-adequacy",
+        "release-boundary-and-nonclaims"
+      ],
+      "reviewBundleDigest": "sha256:df2a3b7a2d50b8f4e5c7f1360373cb3ef53fd260c6bdd607361881c2dcca2fa7",
+      "auditSha256": "sha256:14172c1565fc57857746a14aa7440811972b4d81f1f32c18cff2b5f96878fc3d",
+      "productionActiveRelease": null,
+      "productionReleaseHistory": 0,
+      "canonicalRoute": "/knowledge/biomolecular-engineering/mechanisms/biomolecular-engineering-crude-extract-cell-free-systems",
+      "sourceBinding": {
+        "sourceId": "10.1016/j.synbio.2017.02.003",
+        "locator": "Cell-free platform, protein engineering, metabolic engineering, artificial-cell engineering, and conclusions sections."
+      },
+      "attributesChecked": 15,
+      "failedAttributes": [],
+      "classification": "canary-ready",
+      "repaired": false
+    },
+    {
+      "recordId": "urn:maha:record:critical-supply-chains-gallium-bauxite-byproduct-flow",
+      "phase": "canary",
+      "revisionSha256": "sha256:da4a974ebd5dc80c676257fa7bab66f3c1edc70b597012af5bbfae40e2b700ec",
+      "operationId": "release:8b017fbb378127e0f829143de55c0998",
+      "releaseKind": "initial",
+      "declaredClassification": "initial",
+      "reviewAxes": [
+        "source-identity-and-fidelity",
+        "claim-to-passage-support",
+        "scope-and-unsupported-inference",
+        "rights-and-locator-adequacy",
+        "release-boundary-and-nonclaims"
+      ],
+      "reviewBundleDigest": "sha256:b768d1186870821cade2ca6afd334b46c5448cafe457c4375bfa44edd2ca8b98",
+      "auditSha256": "sha256:12ce437866146bcfe9f6c5286a250df97cd7314080ae1a5ccfd03f0182656512",
+      "productionActiveRelease": null,
+      "productionReleaseHistory": 0,
+      "canonicalRoute": "/knowledge/critical-supply-chains/mechanisms/critical-supply-chains-gallium-bauxite-byproduct-flow",
+      "sourceBinding": {
+        "sourceId": "https://pubs.usgs.gov/periodicals/mcs2026/mcs2026.pdf",
+        "locator": "Gallium and germanium commodity chapters: production, recycling, imports, uses, substitutes, and world resources."
+      },
+      "attributesChecked": 15,
+      "failedAttributes": [],
+      "classification": "canary-ready",
+      "repaired": false
+    },
+    {
+      "recordId": "urn:maha:record:fusion-plasma-systems-laser-target-coupling",
+      "phase": "canary",
+      "revisionSha256": "sha256:3ee25d0b479f803fcc6a42046edb6346b1404e6290f9f34a908939fc6ae3afbe",
+      "operationId": "release:eb3e6af1ad2fa86c83c448ba1dbc1046",
+      "releaseKind": "initial",
+      "declaredClassification": "initial",
+      "reviewAxes": [
+        "source-identity-and-fidelity",
+        "claim-to-passage-support",
+        "scope-and-unsupported-inference",
+        "rights-and-locator-adequacy",
+        "release-boundary-and-nonclaims"
+      ],
+      "reviewBundleDigest": "sha256:4ab7256e92ec449162613faa9d265dc9c8d36892e7d8db33c252850ea5df41b2",
+      "auditSha256": "sha256:1c31c6cf97609b7208bd21f9418334c36ef34ad66e18a87504b623e6b109e5bd",
+      "productionActiveRelease": null,
+      "productionReleaseHistory": 0,
+      "canonicalRoute": "/knowledge/fusion-plasma-systems/methods/fusion-plasma-systems-laser-target-coupling",
+      "sourceBinding": {
+        "sourceId": "https://lasers.llnl.gov/science/achieving-fusion-ignition",
+        "locator": "Target, laser coupling, target chamber, ignition, and experimental result sections."
+      },
+      "attributesChecked": 15,
+      "failedAttributes": [],
+      "classification": "canary-ready",
+      "repaired": false
+    },
+    {
+      "recordId": "urn:maha:record:longevity-metabolism-apoptosis-in-senescent-cells",
+      "phase": "canary",
+      "revisionSha256": "sha256:b8f9ca4f249f6628e1f2812f62cdbe132683e4d0d1355e09844d0d76c8d5ed88",
+      "operationId": "release:6502f1480fd6bd5a528bbc598cc9cbc2",
+      "releaseKind": "initial",
+      "declaredClassification": "initial",
+      "reviewAxes": [
+        "source-identity-and-fidelity",
+        "claim-to-passage-support",
+        "scope-and-unsupported-inference",
+        "rights-and-locator-adequacy",
+        "release-boundary-and-nonclaims"
+      ],
+      "reviewBundleDigest": "sha256:d405084bebb9b5a3bb27f79841a4ba3a43e1e36dd09385cf47afb984cf35c442",
+      "auditSha256": "sha256:9afc5ee4fed0b72f33bb7967879a9e8fb9a563e330b43ce5c51cb542dbdc977c",
+      "productionActiveRelease": null,
+      "productionReleaseHistory": 0,
+      "canonicalRoute": "/knowledge/longevity-metabolism/measurements/longevity-metabolism-apoptosis-in-senescent-cells",
+      "sourceBinding": {
+        "sourceId": "10.1111/acel.12344",
+        "locator": "Senescent-cell survival pathways, compound screening, cell assays, and mouse experiments."
+      },
+      "attributesChecked": 15,
+      "failedAttributes": [],
+      "classification": "canary-ready",
+      "repaired": false
+    },
+    {
+      "recordId": "urn:maha:record:biomolecular-engineering-phage-assisted-continuous-evolution",
+      "phase": "remainder",
+      "revisionSha256": "sha256:8dc697f5defa0cfa0911ac052bda5679be3b17707f0897f9cddef4ab626d52d4",
+      "operationId": "release:14f6943edbbc97c66ccb2180567a7f28",
+      "releaseKind": "initial",
+      "declaredClassification": "initial",
+      "reviewAxes": [
+        "source-identity-and-fidelity",
+        "claim-to-passage-support",
+        "scope-and-unsupported-inference",
+        "rights-and-locator-adequacy",
+        "release-boundary-and-nonclaims"
+      ],
+      "reviewBundleDigest": "sha256:bf3194e8d3588a50b9cf3532cff975c32162aad04801e2bcf8a4d253c069283f",
+      "auditSha256": "sha256:93057a1f7d34987a99d10e79f14e4cef174175d2ffab27e6e2871744aab40386",
+      "productionActiveRelease": null,
+      "productionReleaseHistory": 0,
+      "canonicalRoute": "/knowledge/biomolecular-engineering/measurements/biomolecular-engineering-phage-assisted-continuous-evolution",
+      "sourceBinding": {
+        "sourceId": "10.1038/nature09929",
+        "locator": "PACE architecture, selection coupling, mutation, experiments, and Methods."
+      },
+      "attributesChecked": 15,
+      "failedAttributes": [],
+      "classification": "remainder-ready",
+      "repaired": false
+    },
+    {
+      "recordId": "urn:maha:record:biomolecular-engineering-purified-component-expression-systems",
+      "phase": "remainder",
+      "revisionSha256": "sha256:90c9d503233cc00066f3a97a8777b590b496637f4c4d217539e085dbe1c20a22",
+      "operationId": "release:9aef717af54b30d455544269e02d9bec",
+      "releaseKind": "initial",
+      "declaredClassification": "initial",
+      "reviewAxes": [
+        "source-identity-and-fidelity",
+        "claim-to-passage-support",
+        "scope-and-unsupported-inference",
+        "rights-and-locator-adequacy",
+        "release-boundary-and-nonclaims"
+      ],
+      "reviewBundleDigest": "sha256:60989326499eff639953f806adc2f910496efb60350cf69897f90b101c9a8a95",
+      "auditSha256": "sha256:c74a210521f2ae390111e8d432c1a7d2b6c30bf90a28d730c90fbb5c9945616f",
+      "productionActiveRelease": null,
+      "productionReleaseHistory": 0,
+      "canonicalRoute": "/knowledge/biomolecular-engineering/methods/biomolecular-engineering-purified-component-expression-systems",
+      "sourceBinding": {
+        "sourceId": "10.1016/j.synbio.2017.02.003",
+        "locator": "Cell-free platform, protein engineering, metabolic engineering, artificial-cell engineering, and conclusions sections."
+      },
+      "attributesChecked": 15,
+      "failedAttributes": [],
+      "classification": "remainder-ready",
+      "repaired": false
+    },
+    {
+      "recordId": "urn:maha:record:biomolecular-engineering-selection-pressure-coupling",
+      "phase": "remainder",
+      "revisionSha256": "sha256:c23dcc18daaf071309c5f4116b7f6132c4477875558c29321a92f5d98d815d6f",
+      "operationId": "release:fcaac0d8a7ba6d5f32c1c48535228531",
+      "releaseKind": "initial",
+      "declaredClassification": "initial",
+      "reviewAxes": [
+        "source-identity-and-fidelity",
+        "claim-to-passage-support",
+        "scope-and-unsupported-inference",
+        "rights-and-locator-adequacy",
+        "release-boundary-and-nonclaims"
+      ],
+      "reviewBundleDigest": "sha256:691573a60cfc6dd93aef4aff5331e937feb71ba3cdc8c44db12908fdfe1c607b",
+      "auditSha256": "sha256:1620dd55d1f0a5f7637e66c00e2292c90014121dc543323045f150f7b0f0ac2a",
+      "productionActiveRelease": null,
+      "productionReleaseHistory": 0,
+      "canonicalRoute": "/knowledge/biomolecular-engineering/methods/biomolecular-engineering-selection-pressure-coupling",
+      "sourceBinding": {
+        "sourceId": "10.1038/nature09929",
+        "locator": "PACE architecture, selection coupling, mutation, experiments, and Methods."
+      },
+      "attributesChecked": 15,
+      "failedAttributes": [],
+      "classification": "remainder-ready",
+      "repaired": false
+    },
+    {
+      "recordId": "urn:maha:record:biomolecular-engineering-translational-control-circuits",
+      "phase": "remainder",
+      "revisionSha256": "sha256:1f877ffe9cc1fe0a02ae70fee8bcdbb697add8846b90a1c42671c25f6c7a88bb",
+      "operationId": "release:d28f3913b30a9d87fd9b5b1331a9cd13",
+      "releaseKind": "initial",
+      "declaredClassification": "initial",
+      "reviewAxes": [
+        "source-identity-and-fidelity",
+        "claim-to-passage-support",
+        "scope-and-unsupported-inference",
+        "rights-and-locator-adequacy",
+        "release-boundary-and-nonclaims"
+      ],
+      "reviewBundleDigest": "sha256:ed8c08b312910046aca955fae5f4d313fe8219c6b9513d8accb5306cc530b3b0",
+      "auditSha256": "sha256:a58c7bc32e2838b67e3b037836dc93af1e5549e9352e6589151fd815fab2f136",
+      "productionActiveRelease": null,
+      "productionReleaseHistory": 0,
+      "canonicalRoute": "/knowledge/biomolecular-engineering/concepts/biomolecular-engineering-translational-control-circuits",
+      "sourceBinding": {
+        "sourceId": "10.1016/j.cell.2014.10.004",
+        "locator": "Toehold-switch design, cell-free implementation, freeze-drying, assays, and Methods."
+      },
+      "attributesChecked": 15,
+      "failedAttributes": [],
+      "classification": "remainder-ready",
+      "repaired": false
+    },
+    {
+      "recordId": "urn:maha:record:critical-supply-chains-gallium-zinc-processing-byproduct",
+      "phase": "remainder",
+      "revisionSha256": "sha256:27db54bd1e8c7807c9889751b345eff394d0f51933200b24fb5f5900946748f9",
+      "operationId": "release:d96ce104da77cfbe7ac91a8126205864",
+      "releaseKind": "initial",
+      "declaredClassification": "initial",
+      "reviewAxes": [
+        "source-identity-and-fidelity",
+        "claim-to-passage-support",
+        "scope-and-unsupported-inference",
+        "rights-and-locator-adequacy",
+        "release-boundary-and-nonclaims"
+      ],
+      "reviewBundleDigest": "sha256:99f8449b80ad09d7b9c520852fcb93315393fe5ea65da4f0a4f92d1ae4b04aaa",
+      "auditSha256": "sha256:1460cd66a84f4eb33bf71e99b2ae323a3595550a9fc5700718f7ab8b5427c252",
+      "productionActiveRelease": null,
+      "productionReleaseHistory": 0,
+      "canonicalRoute": "/knowledge/critical-supply-chains/methods/critical-supply-chains-gallium-zinc-processing-byproduct",
+      "sourceBinding": {
+        "sourceId": "https://pubs.usgs.gov/periodicals/mcs2026/mcs2026.pdf",
+        "locator": "Gallium and germanium commodity chapters: production, recycling, imports, uses, substitutes, and world resources."
+      },
+      "attributesChecked": 15,
+      "failedAttributes": [],
+      "classification": "remainder-ready",
+      "repaired": false
+    },
+    {
+      "recordId": "urn:maha:record:critical-supply-chains-germanium-zinc-refining-flow",
+      "phase": "remainder",
+      "revisionSha256": "sha256:5f055a0c6b5222726955abe36900a0474ed1198e922e0f2b84e46779f8421e60",
+      "operationId": "release:8ae2ac59c3999e5e4841d67e7df8b7f4",
+      "releaseKind": "initial",
+      "declaredClassification": "initial",
+      "reviewAxes": [
+        "source-identity-and-fidelity",
+        "claim-to-passage-support",
+        "scope-and-unsupported-inference",
+        "rights-and-locator-adequacy",
+        "release-boundary-and-nonclaims"
+      ],
+      "reviewBundleDigest": "sha256:9697d2307e0f8bf0b144097ff85296a859045e5f736a2c5f9aac854d16e0a035",
+      "auditSha256": "sha256:29059f633f791bf46e6b8efe26a7aa8fbd98197c0a4fb46719e2b851155039e5",
+      "productionActiveRelease": null,
+      "productionReleaseHistory": 0,
+      "canonicalRoute": "/knowledge/critical-supply-chains/measurements/critical-supply-chains-germanium-zinc-refining-flow",
+      "sourceBinding": {
+        "sourceId": "https://pubs.usgs.gov/periodicals/mcs2026/mcs2026.pdf",
+        "locator": "Gallium and germanium commodity chapters: production, recycling, imports, uses, substitutes, and world resources."
+      },
+      "attributesChecked": 15,
+      "failedAttributes": [],
+      "classification": "remainder-ready",
+      "repaired": false
+    },
+    {
+      "recordId": "urn:maha:record:critical-supply-chains-niobium-ferroniobium-production",
+      "phase": "remainder",
+      "revisionSha256": "sha256:138719dda5fa18e05558a26025cd189b8bf566e0e7f41817610d20e911643f55",
+      "operationId": "release:301d62e9e0f619f98b0bce1c78fe2942",
+      "releaseKind": "initial",
+      "declaredClassification": "initial",
+      "reviewAxes": [
+        "source-identity-and-fidelity",
+        "claim-to-passage-support",
+        "scope-and-unsupported-inference",
+        "rights-and-locator-adequacy",
+        "release-boundary-and-nonclaims"
+      ],
+      "reviewBundleDigest": "sha256:da82432ca3ea072887e76f4313f65ea000f5910c64d67f0536eed94fd0ded592",
+      "auditSha256": "sha256:857d29d54f04b8d519da876d189dd37733ecaa76e9547cdc8e7d850cd4466d14",
+      "productionActiveRelease": null,
+      "productionReleaseHistory": 0,
+      "canonicalRoute": "/knowledge/critical-supply-chains/measurements/critical-supply-chains-niobium-ferroniobium-production",
+      "sourceBinding": {
+        "sourceId": "https://pubs.usgs.gov/periodicals/mcs2026/mcs2026.pdf",
+        "locator": "Helium, hafnium, tantalum, niobium, and antimony commodity chapters."
+      },
+      "attributesChecked": 15,
+      "failedAttributes": [],
+      "classification": "remainder-ready",
+      "repaired": false
+    },
+    {
+      "recordId": "urn:maha:record:fusion-plasma-systems-shattered-pellet-injection",
+      "phase": "remainder",
+      "revisionSha256": "sha256:62c581108e5a7ec96f2573a3a29c0e30ec0eba991ff6ea9146c9a4363116f0c1",
+      "operationId": "release:c5151e45d36be60a4271d2f0cad279a0",
+      "releaseKind": "initial",
+      "declaredClassification": "initial",
+      "reviewAxes": [
+        "source-identity-and-fidelity",
+        "claim-to-passage-support",
+        "scope-and-unsupported-inference",
+        "rights-and-locator-adequacy",
+        "release-boundary-and-nonclaims"
+      ],
+      "reviewBundleDigest": "sha256:9dac2f6ae578dceb83c124a5c344b3d5a8621e38afc04f74fbffef71c2f8eddc",
+      "auditSha256": "sha256:20b612ecb5c0a6802ea9131aa0e96d0a1aa9e615642ee5caf228d6b252754c4e",
+      "productionActiveRelease": null,
+      "productionReleaseHistory": 0,
+      "canonicalRoute": "/knowledge/fusion-plasma-systems/mechanisms/fusion-plasma-systems-shattered-pellet-injection",
+      "sourceBinding": {
+        "sourceId": "https://www.iter.org/machine/supporting-systems/disruption-mitigation",
+        "locator": "System overview and shattered pellet injection sections."
+      },
+      "attributesChecked": 15,
+      "failedAttributes": [],
+      "classification": "remainder-ready",
+      "repaired": false
+    },
+    {
+      "recordId": "urn:maha:record:fusion-plasma-systems-stellarator-field-optimization",
+      "phase": "remainder",
+      "revisionSha256": "sha256:69b7bb3c02cbfed16a5de05a097be55d222f74adacede5cdfb7a65cd8fb3f83a",
+      "operationId": "release:8c7ac86a0792b43a0d45872964f8f686",
+      "releaseKind": "initial",
+      "declaredClassification": "initial",
+      "reviewAxes": [
+        "source-identity-and-fidelity",
+        "claim-to-passage-support",
+        "scope-and-unsupported-inference",
+        "rights-and-locator-adequacy",
+        "release-boundary-and-nonclaims"
+      ],
+      "reviewBundleDigest": "sha256:58719ad07bb84af79d6cc23ab2420fff8a551ab6dedac68033ead0e7132a95cc",
+      "auditSha256": "sha256:4ccbab39fcfd0bbec53a5f04f969d95d1dee3d59647ffab297c1debba6f3638e",
+      "productionActiveRelease": null,
+      "productionReleaseHistory": 0,
+      "canonicalRoute": "/knowledge/fusion-plasma-systems/comparisons/fusion-plasma-systems-stellarator-field-optimization",
+      "sourceBinding": {
+        "sourceId": "10.1088/1741-4326/ac170f",
+        "locator": "Sections on magnetic-field design, coils, confinement, and reactor implications."
+      },
+      "attributesChecked": 15,
+      "failedAttributes": [],
+      "classification": "remainder-ready",
+      "repaired": false
+    },
+    {
+      "recordId": "urn:maha:record:fusion-plasma-systems-stellarator-magnetic-coils",
+      "phase": "remainder",
+      "revisionSha256": "sha256:8ac96963ede9957044e42ffbe2faf4627c3d2e2e4abbc199f1c61f46bf3539d9",
+      "operationId": "release:eadfe40fea0c9046ee0aa14dc2be9e09",
+      "releaseKind": "initial",
+      "declaredClassification": "initial",
+      "reviewAxes": [
+        "source-identity-and-fidelity",
+        "claim-to-passage-support",
+        "scope-and-unsupported-inference",
+        "rights-and-locator-adequacy",
+        "release-boundary-and-nonclaims"
+      ],
+      "reviewBundleDigest": "sha256:baaadcd43f35ea487d60a411f6a60a640a5ec1dd31fca1f9846b4f40ccd73f6b",
+      "auditSha256": "sha256:8ee0af2f814d8a8383d413959a51fa9947f63f106c359fa9c8afbdad5f03fdc0",
+      "productionActiveRelease": null,
+      "productionReleaseHistory": 0,
+      "canonicalRoute": "/knowledge/fusion-plasma-systems/measurements/fusion-plasma-systems-stellarator-magnetic-coils",
+      "sourceBinding": {
+        "sourceId": "10.1088/1741-4326/ac170f",
+        "locator": "Sections on magnetic-field design, coils, confinement, and reactor implications."
+      },
+      "attributesChecked": 15,
+      "failedAttributes": [],
+      "classification": "remainder-ready",
+      "repaired": false
+    },
+    {
+      "recordId": "urn:maha:record:longevity-metabolism-atp-linked-respiration",
+      "phase": "remainder",
+      "revisionSha256": "sha256:58b6a11d7507f1b2dd28f920f82bd5fc045e5885b8c10bd9bdceb407d7aa51d2",
+      "operationId": "release:af6a741c5d787eef4833722bbd4bc23c",
+      "releaseKind": "initial",
+      "declaredClassification": "initial",
+      "reviewAxes": [
+        "source-identity-and-fidelity",
+        "claim-to-passage-support",
+        "scope-and-unsupported-inference",
+        "rights-and-locator-adequacy",
+        "release-boundary-and-nonclaims"
+      ],
+      "reviewBundleDigest": "sha256:072b82208409daba35a29becba920d1d615875b0d90dfc06753822fa80cf1239",
+      "auditSha256": "sha256:0b4435983b1271b75d71b2ed50f0f9018181090cc2852eb408fbda86844e0d8b",
+      "productionActiveRelease": null,
+      "productionReleaseHistory": 0,
+      "canonicalRoute": "/knowledge/longevity-metabolism/mechanisms/longevity-metabolism-atp-linked-respiration",
+      "sourceBinding": {
+        "sourceId": "10.1016/B978-0-12-801415-8.00016-3",
+        "locator": "Chapter 16, pages 309–354: oxygen-consumption rate, data analysis, normalization, controls, and extracellular-pH interpretation."
+      },
+      "attributesChecked": 15,
+      "failedAttributes": [],
+      "classification": "remainder-ready",
+      "repaired": false
+    },
+    {
+      "recordId": "urn:maha:record:longevity-metabolism-cellular-senescence-markers",
+      "phase": "remainder",
+      "revisionSha256": "sha256:32f84190547d8cff7fab09573847957046e817bea41f479c57eaf48d9d5fcd37",
+      "operationId": "release:50eb294c64d1bf7021cc0a19b4418e97",
+      "releaseKind": "initial",
+      "declaredClassification": "initial",
+      "reviewAxes": [
+        "source-identity-and-fidelity",
+        "claim-to-passage-support",
+        "scope-and-unsupported-inference",
+        "rights-and-locator-adequacy",
+        "release-boundary-and-nonclaims"
+      ],
+      "reviewBundleDigest": "sha256:989cc66083ccfd5617b2ed01d789029be53dd2c0274043e6081e28a407e8befe",
+      "auditSha256": "sha256:d1cad7aaa4a7aefe1104ae56ed3e12c71dc2e33da70408be62c8dfde74ef5acc",
+      "productionActiveRelease": null,
+      "productionReleaseHistory": 0,
+      "canonicalRoute": "/knowledge/longevity-metabolism/concepts/longevity-metabolism-cellular-senescence-markers",
+      "sourceBinding": {
+        "sourceId": "10.1111/acel.12344",
+        "locator": "Senescent-cell survival pathways, compound screening, cell assays, and mouse experiments."
+      },
+      "attributesChecked": 15,
+      "failedAttributes": [],
+      "classification": "remainder-ready",
+      "repaired": false
+    },
+    {
+      "recordId": "urn:maha:record:longevity-metabolism-lifespan-versus-healthspan-endpoints",
+      "phase": "remainder",
+      "revisionSha256": "sha256:d3f02e6c6340da552ce47205b2902e8df9b303f027b2dabead35624a679db296",
+      "operationId": "release:9e53017e64093b51ea6e4e64614eb1d9",
+      "releaseKind": "initial",
+      "declaredClassification": "initial",
+      "reviewAxes": [
+        "source-identity-and-fidelity",
+        "claim-to-passage-support",
+        "scope-and-unsupported-inference",
+        "rights-and-locator-adequacy",
+        "release-boundary-and-nonclaims"
+      ],
+      "reviewBundleDigest": "sha256:d37ffb1a3ffbbbeaaa1a5af72b1b2cdac60dd3adbc02f2728b6c2b895188af27",
+      "auditSha256": "sha256:d129660b1edda879914ec9e5bf7a48c300673c61d252607209d6cb001d41becd",
+      "productionActiveRelease": null,
+      "productionReleaseHistory": 0,
+      "canonicalRoute": "/knowledge/longevity-metabolism/measurements/longevity-metabolism-lifespan-versus-healthspan-endpoints",
+      "sourceBinding": {
+        "sourceId": "10.1016/j.cell.2022.11.001",
+        "locator": "Nutrient sensing, mitochondrial dysfunction, cellular senescence, biomarkers, and intervention framework."
+      },
+      "attributesChecked": 15,
+      "failedAttributes": [],
+      "classification": "remainder-ready",
+      "repaired": false
+    },
+    {
+      "recordId": "urn:maha:record:longevity-metabolism-nad-consumption-by-parps",
+      "phase": "remainder",
+      "revisionSha256": "sha256:412e98d79a88bc725711c9c75b372870f59ae37e41e8ff99ade5b0fbc097fe80",
+      "operationId": "release:94383560ea294100fa9f6c2074e8349a",
+      "releaseKind": "initial",
+      "declaredClassification": "initial",
+      "reviewAxes": [
+        "source-identity-and-fidelity",
+        "claim-to-passage-support",
+        "scope-and-unsupported-inference",
+        "rights-and-locator-adequacy",
+        "release-boundary-and-nonclaims"
+      ],
+      "reviewBundleDigest": "sha256:669edb064cb82091ba725f575ad3abde8e2bd7336cdfc44e709e837ef2a11163",
+      "auditSha256": "sha256:d287fe38635a1e43e3520518143d5c6aba38afd7150a522dcf97be4d9a87674e",
+      "productionActiveRelease": null,
+      "productionReleaseHistory": 0,
+      "canonicalRoute": "/knowledge/longevity-metabolism/comparisons/longevity-metabolism-nad-consumption-by-parps",
+      "sourceBinding": {
+        "sourceId": "10.1038/s41580-020-00313-x",
+        "locator": "NAD+ biosynthesis and consumption, NAD+-dependent mechanisms in ageing, therapeutic targeting, figures 1–4, and supplementary boxes."
+      },
+      "attributesChecked": 15,
+      "failedAttributes": [],
+      "classification": "remainder-ready",
+      "repaired": false
+    },
+    {
+      "recordId": "urn:maha:record:longevity-metabolism-nampt-rate-limiting-step",
+      "phase": "remainder",
+      "revisionSha256": "sha256:bf7d09a9215d20978d902db07001f60efd91b79282fc94cf20ffb62a3727cbaa",
+      "operationId": "release:6fded16adc6a63b282fb7a12c0da4d00",
+      "releaseKind": "initial",
+      "declaredClassification": "initial",
+      "reviewAxes": [
+        "source-identity-and-fidelity",
+        "claim-to-passage-support",
+        "scope-and-unsupported-inference",
+        "rights-and-locator-adequacy",
+        "release-boundary-and-nonclaims"
+      ],
+      "reviewBundleDigest": "sha256:755b650841f790b8b8323a1e3ad7c3ab8119db81d3ff959e7af479ce3c2d44c5",
+      "auditSha256": "sha256:fe309d0a5ea43620220b74383bdeaeefaab89fab4311e458796c3eb6f7f7ab67",
+      "productionActiveRelease": null,
+      "productionReleaseHistory": 0,
+      "canonicalRoute": "/knowledge/longevity-metabolism/mechanisms/longevity-metabolism-nampt-rate-limiting-step",
+      "sourceBinding": {
+        "sourceId": "10.1038/s41580-020-00313-x",
+        "locator": "NAD+ biosynthesis and consumption, NAD+-dependent mechanisms in ageing, therapeutic targeting, figures 1–4, and supplementary boxes."
+      },
+      "attributesChecked": 15,
+      "failedAttributes": [],
+      "classification": "remainder-ready",
+      "repaired": false
+    },
+    {
+      "recordId": "urn:maha:record:longevity-metabolism-nmn-and-nr-precursors",
+      "phase": "remainder",
+      "revisionSha256": "sha256:191557d52bd9efab7dcd9dba21d964223963a9c86e33e57f1aa5b0f07dec0c54",
+      "operationId": "release:c85444c1beb8122d2ecb3d0125a68e7a",
+      "releaseKind": "initial",
+      "declaredClassification": "initial",
+      "reviewAxes": [
+        "source-identity-and-fidelity",
+        "claim-to-passage-support",
+        "scope-and-unsupported-inference",
+        "rights-and-locator-adequacy",
+        "release-boundary-and-nonclaims"
+      ],
+      "reviewBundleDigest": "sha256:eead646342be95cd69dccc7cac3c27299136e713de650ea58e21c1d2d553e194",
+      "auditSha256": "sha256:cfb7d5ca1a1671169de8dad9c85b4ccdda883a0557d73039f265a6b96c37de68",
+      "productionActiveRelease": null,
+      "productionReleaseHistory": 0,
+      "canonicalRoute": "/knowledge/longevity-metabolism/measurements/longevity-metabolism-nmn-and-nr-precursors",
+      "sourceBinding": {
+        "sourceId": "10.1038/s41580-020-00313-x",
+        "locator": "NAD+ biosynthesis and consumption, NAD+-dependent mechanisms in ageing, therapeutic targeting, figures 1–4, and supplementary boxes."
+      },
+      "attributesChecked": 15,
+      "failedAttributes": [],
+      "classification": "remainder-ready",
+      "repaired": false
+    },
+    {
+      "recordId": "urn:maha:record:longevity-metabolism-nmnat-compartmentalization",
+      "phase": "remainder",
+      "revisionSha256": "sha256:4faf2fae6b61dd689323efef0694188699b458ec10f9b6edef4c7d3de75f7796",
+      "operationId": "release:5855b573609fca8f0318136c6361565d",
+      "releaseKind": "initial",
+      "declaredClassification": "initial",
+      "reviewAxes": [
+        "source-identity-and-fidelity",
+        "claim-to-passage-support",
+        "scope-and-unsupported-inference",
+        "rights-and-locator-adequacy",
+        "release-boundary-and-nonclaims"
+      ],
+      "reviewBundleDigest": "sha256:f496ffeb9006eec8e9b4a9360a8fc572e57bfd30b94448e7e52323ed97d4e32a",
+      "auditSha256": "sha256:419baf3bd59797a022f6771d202ca51c5400ff6f6fff1987862836c44844d669",
+      "productionActiveRelease": null,
+      "productionReleaseHistory": 0,
+      "canonicalRoute": "/knowledge/longevity-metabolism/methods/longevity-metabolism-nmnat-compartmentalization",
+      "sourceBinding": {
+        "sourceId": "10.1038/s41580-020-00313-x",
+        "locator": "NAD+ biosynthesis and consumption, NAD+-dependent mechanisms in ageing, therapeutic targeting, figures 1–4, and supplementary boxes."
+      },
+      "attributesChecked": 15,
+      "failedAttributes": [],
+      "classification": "remainder-ready",
+      "repaired": false
+    },
+    {
+      "recordId": "urn:maha:record:longevity-metabolism-oxygen-consumption-rate",
+      "phase": "remainder",
+      "revisionSha256": "sha256:9ae12b356c0faf01b473266d67fded5ffe49f2a3f1652e3b17af62de1336974d",
+      "operationId": "release:4b13d3b320f76b168f75f35b507df638",
+      "releaseKind": "initial",
+      "declaredClassification": "initial",
+      "reviewAxes": [
+        "source-identity-and-fidelity",
+        "claim-to-passage-support",
+        "scope-and-unsupported-inference",
+        "rights-and-locator-adequacy",
+        "release-boundary-and-nonclaims"
+      ],
+      "reviewBundleDigest": "sha256:1c85843515ff3e7219a35ab18831adf153e03bc7d0952d9510abe4a5230b8a5b",
+      "auditSha256": "sha256:2b5adae213732d059940cf0d056d6789ef5024ea27b6058c05a7f77e5dba914e",
+      "productionActiveRelease": null,
+      "productionReleaseHistory": 0,
+      "canonicalRoute": "/knowledge/longevity-metabolism/concepts/longevity-metabolism-oxygen-consumption-rate",
+      "sourceBinding": {
+        "sourceId": "10.1016/B978-0-12-801415-8.00016-3",
+        "locator": "Chapter 16, pages 309–354: oxygen-consumption rate, data analysis, normalization, controls, and extracellular-pH interpretation."
+      },
+      "attributesChecked": 15,
+      "failedAttributes": [],
+      "classification": "remainder-ready",
+      "repaired": false
+    },
+    {
+      "recordId": "urn:maha:record:longevity-metabolism-senescent-cell-clearance",
+      "phase": "remainder",
+      "revisionSha256": "sha256:f208ae5ebd530d273ae1e30c924ebc41eabe84efaa38aa731de42fee86645808",
+      "operationId": "release:5d00018206ced162f74b6daab330cbd9",
+      "releaseKind": "initial",
+      "declaredClassification": "initial",
+      "reviewAxes": [
+        "source-identity-and-fidelity",
+        "claim-to-passage-support",
+        "scope-and-unsupported-inference",
+        "rights-and-locator-adequacy",
+        "release-boundary-and-nonclaims"
+      ],
+      "reviewBundleDigest": "sha256:56ae1cefd2da2d40ed2673af763277151af6caa83a10841de3c91b142bc337dc",
+      "auditSha256": "sha256:a2c55cfab2a21335cbfbfa86f988ece627da2801c459aca1033c19c8e4f492aa",
+      "productionActiveRelease": null,
+      "productionReleaseHistory": 0,
+      "canonicalRoute": "/knowledge/longevity-metabolism/comparisons/longevity-metabolism-senescent-cell-clearance",
+      "sourceBinding": {
+        "sourceId": "10.1111/acel.12344",
+        "locator": "Senescent-cell survival pathways, compound screening, cell assays, and mouse experiments."
+      },
+      "attributesChecked": 15,
+      "failedAttributes": [],
+      "classification": "remainder-ready",
+      "repaired": false
+    },
+    {
+      "recordId": "urn:maha:record:longevity-metabolism-sirtuin-nad-dependence",
+      "phase": "remainder",
+      "revisionSha256": "sha256:3774dec2e51ced47caa4a9f83ae6490bf4617f2afe90e96422fec90a3f7ec080",
+      "operationId": "release:8fb4e855cbb516d0e61697c8a985cda3",
+      "releaseKind": "initial",
+      "declaredClassification": "initial",
+      "reviewAxes": [
+        "source-identity-and-fidelity",
+        "claim-to-passage-support",
+        "scope-and-unsupported-inference",
+        "rights-and-locator-adequacy",
+        "release-boundary-and-nonclaims"
+      ],
+      "reviewBundleDigest": "sha256:933a4020d24fb00e0ecaee4c5a1e1a19e2afc5f9eff4b0af7ca346ae6d5506e7",
+      "auditSha256": "sha256:13d0e3dd7bf5946301ac54a2fbc703b77a7bb0fd05b4219289498b979f550cef",
+      "productionActiveRelease": null,
+      "productionReleaseHistory": 0,
+      "canonicalRoute": "/knowledge/longevity-metabolism/concepts/longevity-metabolism-sirtuin-nad-dependence",
+      "sourceBinding": {
+        "sourceId": "10.1016/j.cell.2022.11.001",
+        "locator": "Nutrient sensing, mitochondrial dysfunction, cellular senescence, biomarkers, and intervention framework."
+      },
+      "attributesChecked": 15,
+      "failedAttributes": [],
+      "classification": "remainder-ready",
+      "repaired": false
+    },
+    {
+      "recordId": "urn:maha:record:longevity-metabolism-translation-to-human-outcomes",
+      "phase": "remainder",
+      "revisionSha256": "sha256:d0d8e4666aabf2a9c6243e0681e380eb24e01b1be85287194df8456cbd0b021f",
+      "operationId": "release:08d7e713b70bf0f4b8ac5b714f77d180",
+      "releaseKind": "initial",
+      "declaredClassification": "initial",
+      "reviewAxes": [
+        "source-identity-and-fidelity",
+        "claim-to-passage-support",
+        "scope-and-unsupported-inference",
+        "rights-and-locator-adequacy",
+        "release-boundary-and-nonclaims"
+      ],
+      "reviewBundleDigest": "sha256:199574e9a01ade6d17a5f26a30c49bc39e8083c6de72cd8bb26d0e05590be660",
+      "auditSha256": "sha256:fe52f7785cabaa95701c44b6eea4af9e898904729d85c3bf7b3a39650ad75643",
+      "productionActiveRelease": null,
+      "productionReleaseHistory": 0,
+      "canonicalRoute": "/knowledge/longevity-metabolism/comparisons/longevity-metabolism-translation-to-human-outcomes",
+      "sourceBinding": {
+        "sourceId": "10.1016/j.cell.2022.11.001",
+        "locator": "Nutrient sensing, mitochondrial dysfunction, cellular senescence, biomarkers, and intervention framework."
+      },
+      "attributesChecked": 15,
+      "failedAttributes": [],
+      "classification": "remainder-ready",
+      "repaired": false
+    },
+    {
+      "recordId": "urn:maha:record:mechanistic-interpretability-feature-activation-maximization",
+      "phase": "remainder",
+      "revisionSha256": "sha256:6c45c999f1603edcc3571e7f7fc3848e734e2fb4fa532624cea798499991f446",
+      "operationId": "release:fc0621bb854f61ac54e71f6c35b8a62f",
+      "releaseKind": "initial",
+      "declaredClassification": "initial",
+      "reviewAxes": [
+        "source-identity-and-fidelity",
+        "claim-to-passage-support",
+        "scope-and-unsupported-inference",
+        "rights-and-locator-adequacy",
+        "release-boundary-and-nonclaims"
+      ],
+      "reviewBundleDigest": "sha256:f618c4135748295ccca82a04dc9e65c3586387f3a836401dfb0287836a54bd37",
+      "auditSha256": "sha256:c9c0984c6c3c87d5683c176729ef485779caa55ba5ddeb8b309e8952324a7d37",
+      "productionActiveRelease": null,
+      "productionReleaseHistory": 0,
+      "canonicalRoute": "/knowledge/mechanistic-interpretability/mechanisms/mechanistic-interpretability-feature-activation-maximization",
+      "sourceBinding": {
+        "sourceId": "10.23915/distill.00007",
+        "locator": "Optimization objectives, regularization, visualization techniques, and interpretation cautions."
+      },
+      "attributesChecked": 15,
+      "failedAttributes": [],
+      "classification": "remainder-ready",
+      "repaired": false
+    },
+    {
+      "recordId": "urn:maha:record:neurotechnology-bci-channelrhodopsin-photocurrent-kinetics",
+      "phase": "remainder",
+      "revisionSha256": "sha256:3222b99000d35c144e1b7da3e76a8fbb09514fcce54c71e3b38fc873851307f5",
+      "operationId": "release:de42620a61048718e22f36a9d9004942",
+      "releaseKind": "initial",
+      "declaredClassification": "initial",
+      "reviewAxes": [
+        "source-identity-and-fidelity",
+        "claim-to-passage-support",
+        "scope-and-unsupported-inference",
+        "rights-and-locator-adequacy",
+        "release-boundary-and-nonclaims"
+      ],
+      "reviewBundleDigest": "sha256:98e7b8b317eb2c0c3fad346e572e0c8af703b0d1819e6c7f6883dcb310519438",
+      "auditSha256": "sha256:cc0515ea5cefc6112055f52cb8757d3d21c36e1ea161b92d89256e36e98ce0cf",
+      "productionActiveRelease": null,
+      "productionReleaseHistory": 0,
+      "canonicalRoute": "/knowledge/neurotechnology-bci/mechanisms/neurotechnology-bci-channelrhodopsin-photocurrent-kinetics",
+      "sourceBinding": {
+        "sourceId": "10.1038/nn1525",
+        "locator": "Channelrhodopsin expression, photocurrent, optical stimulation, spike timing, and Methods."
+      },
+      "attributesChecked": 15,
+      "failedAttributes": [],
+      "classification": "remainder-ready",
+      "repaired": false
+    },
+    {
+      "recordId": "urn:maha:record:neurotechnology-bci-electrocorticography-spatial-resolution",
+      "phase": "remainder",
+      "revisionSha256": "sha256:ea472f6b233b533b20d8cde9e8a9048b68ca74fc90dc3b05dd15a1ea397f1706",
+      "operationId": "release:77e49864a78848620998db5a4709705c",
+      "releaseKind": "initial",
+      "declaredClassification": "initial",
+      "reviewAxes": [
+        "source-identity-and-fidelity",
+        "claim-to-passage-support",
+        "scope-and-unsupported-inference",
+        "rights-and-locator-adequacy",
+        "release-boundary-and-nonclaims"
+      ],
+      "reviewBundleDigest": "sha256:f5ee7b7d2ac9e94bd33a333a58ce40b75fd756d3da57cc01bafe2446bb90111d",
+      "auditSha256": "sha256:4aabb116038af0bcfc8a724cdd9e2565a487300fd390b9f130d851e6fb1af985",
+      "productionActiveRelease": null,
+      "productionReleaseHistory": 0,
+      "canonicalRoute": "/knowledge/neurotechnology-bci/mechanisms/neurotechnology-bci-electrocorticography-spatial-resolution",
+      "sourceBinding": {
+        "sourceId": "10.1038/nn.2973",
+        "locator": "Array architecture, conformal placement, multiplexing, in-vivo mapping, and Methods."
+      },
+      "attributesChecked": 15,
+      "failedAttributes": [],
+      "classification": "remainder-ready",
+      "repaired": false
+    },
+    {
+      "recordId": "urn:maha:record:neurotechnology-bci-flexible-conformal-electrode-arrays",
+      "phase": "remainder",
+      "revisionSha256": "sha256:93cab9b620eeaae46c89c71eca8acb4e5430ef522a0001c796547d151a80beae",
+      "operationId": "release:4e70c98fd2168b076b489e4fcb2004d4",
+      "releaseKind": "initial",
+      "declaredClassification": "initial",
+      "reviewAxes": [
+        "source-identity-and-fidelity",
+        "claim-to-passage-support",
+        "scope-and-unsupported-inference",
+        "rights-and-locator-adequacy",
+        "release-boundary-and-nonclaims"
+      ],
+      "reviewBundleDigest": "sha256:50cdbbaa212f8fa0e0f1e565faa7f3b76fa48ef2ecb5e15deb9825c57bea7cce",
+      "auditSha256": "sha256:5f3ca7f7d9b198258fe8363ccffdb318ad6f05d433301c454f82a8a8d6ade7d3",
+      "productionActiveRelease": null,
+      "productionReleaseHistory": 0,
+      "canonicalRoute": "/knowledge/neurotechnology-bci/methods/neurotechnology-bci-flexible-conformal-electrode-arrays",
+      "sourceBinding": {
+        "sourceId": "10.1038/nn.2973",
+        "locator": "Array architecture, conformal placement, multiplexing, in-vivo mapping, and Methods."
+      },
+      "attributesChecked": 15,
+      "failedAttributes": [],
+      "classification": "remainder-ready",
+      "repaired": false
+    },
+    {
+      "recordId": "urn:maha:record:neurotechnology-bci-motor-intention-decoding",
+      "phase": "remainder",
+      "revisionSha256": "sha256:e51b270b795dcc7be694c411f91b06fa4950dcf6ed4ce5d8f4f9d38ce91729af",
+      "operationId": "release:79347fdfdcd57e82529d26d809190ddb",
+      "releaseKind": "initial",
+      "declaredClassification": "initial",
+      "reviewAxes": [
+        "source-identity-and-fidelity",
+        "claim-to-passage-support",
+        "scope-and-unsupported-inference",
+        "rights-and-locator-adequacy",
+        "release-boundary-and-nonclaims"
+      ],
+      "reviewBundleDigest": "sha256:8cec6cc220242e18a18199d813699b906576191100fa9abeed4d7c75a390dc84",
+      "auditSha256": "sha256:25bf1f0e38e64990f6fedb97a47622442b6378e549aeb232e4e022bf39f0afb1",
+      "productionActiveRelease": null,
+      "productionReleaseHistory": 0,
+      "canonicalRoute": "/knowledge/neurotechnology-bci/measurements/neurotechnology-bci-motor-intention-decoding",
+      "sourceBinding": {
+        "sourceId": "10.1038/nature04970",
+        "locator": "Participant, implant, decoding tasks, performance measures, and Methods."
+      },
+      "attributesChecked": 15,
+      "failedAttributes": [],
+      "classification": "remainder-ready",
+      "repaired": false
+    },
+    {
+      "recordId": "urn:maha:record:neurotechnology-bci-opsin-spectral-sensitivity",
+      "phase": "remainder",
+      "revisionSha256": "sha256:8e5cad4598ae3b249a0c35631a2bb999d71e0f13faaede0acc71a406621464e7",
+      "operationId": "release:75700a4db693d1299906be9a12d15e61",
+      "releaseKind": "initial",
+      "declaredClassification": "initial",
+      "reviewAxes": [
+        "source-identity-and-fidelity",
+        "claim-to-passage-support",
+        "scope-and-unsupported-inference",
+        "rights-and-locator-adequacy",
+        "release-boundary-and-nonclaims"
+      ],
+      "reviewBundleDigest": "sha256:780995e5863f15e7b485249917502d8798b7044275930cc2d9557725062c5767",
+      "auditSha256": "sha256:0d62d848b681e09edec87909bc09a85e96fe565119892b8efbd85d044ab5b536",
+      "productionActiveRelease": null,
+      "productionReleaseHistory": 0,
+      "canonicalRoute": "/knowledge/neurotechnology-bci/methods/neurotechnology-bci-opsin-spectral-sensitivity",
+      "sourceBinding": {
+        "sourceId": "10.1038/nn1525",
+        "locator": "Channelrhodopsin expression, photocurrent, optical stimulation, spike timing, and Methods."
+      },
+      "attributesChecked": 15,
+      "failedAttributes": [],
+      "classification": "remainder-ready",
+      "repaired": false
+    },
+    {
+      "recordId": "urn:maha:record:neurotechnology-bci-optogenetic-channelrhodopsin",
+      "phase": "remainder",
+      "revisionSha256": "sha256:6e054e00282fe4710e477f5b7c43c5605ebf35fbc855b2f589d1cf6265de7473",
+      "operationId": "release:1965df1d65e0bd7415099871624f92f2",
+      "releaseKind": "initial",
+      "declaredClassification": "initial",
+      "reviewAxes": [
+        "source-identity-and-fidelity",
+        "claim-to-passage-support",
+        "scope-and-unsupported-inference",
+        "rights-and-locator-adequacy",
+        "release-boundary-and-nonclaims"
+      ],
+      "reviewBundleDigest": "sha256:0ce8307ab8290cb30259512cedfb086d2e174591ddddbf01481ab7abd1ea002a",
+      "auditSha256": "sha256:4b4e624214d947730f59bff346a495d5b8622f58e7bae3a624f253fb87c0372b",
+      "productionActiveRelease": null,
+      "productionReleaseHistory": 0,
+      "canonicalRoute": "/knowledge/neurotechnology-bci/concepts/neurotechnology-bci-optogenetic-channelrhodopsin",
+      "sourceBinding": {
+        "sourceId": "10.1038/nn1525",
+        "locator": "Channelrhodopsin expression, photocurrent, optical stimulation, spike timing, and Methods."
+      },
+      "attributesChecked": 15,
+      "failedAttributes": [],
+      "classification": "remainder-ready",
+      "repaired": false
+    }
+  ],
+  "boundary": "A read-only observation. No release row was created, no record promoted, no lineage altered.",
+  "preflightDigest": "sha256:cb39d68d7b6c0351e3834965ef8da5fe0be121fdcfa53aa56544e9dbef723d7c"
+}
