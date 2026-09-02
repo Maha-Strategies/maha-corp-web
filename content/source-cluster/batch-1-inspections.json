@@ -1,0 +1,91 @@
+{
+  "schemaVersion": "maha-source-cluster-inspection/1.0",
+  "batch": "source-cluster-closure-batch-1",
+  "inspectedOn": "2026-09-02",
+  "method": "Each source was retrieved and read for this batch. Verdicts are recorded against what the retrieved content actually contains, not against what the record needed it to contain.",
+  "narrowingPolicy": "A record the shared source does not support is removed from the cluster. It is never narrowed into a different claim to make the cluster close, because narrowing changes the claim, which changes the revision, which invalidates the review the record already carries.",
+  "inspections": [
+    {
+      "recordId": "urn:maha:record:fusion-plasma-systems-vacuum-vessel-boundary",
+      "sourceId": "https://www.iter.org/machine/supporting-systems",
+      "retrieval": { "route": "direct-https", "outcome": "success", "retrievedOn": "2026-09-02" },
+      "inspectionDepth": "section-or-full-text",
+      "priorVerdict": "partially-supported",
+      "verdict": "mismatched",
+      "verdictChanged": true,
+      "evidence": "The retrieved page is an index. It carries one introductory sentence and links to 13 named system categories: Tritium Breeding, CODAC, Cooling Water, Cryogenics, Diagnostics, Fuelling, Hot Cell, Power Supply, Remote Handling, External Heating, Vacuum System, Main Components, Disruption Mitigation. The vacuum vessel is not among them and does not appear anywhere on the page, in passing or otherwise. Its walls, ports, and confinement-boundary role are absent.",
+      "distinctionDrawn": "The listed 'Vacuum System' is the pumping system, which is a different subject from the vacuum vessel as a confinement boundary. Matching on the word 'vacuum' would be a string coincidence, not support.",
+      "clusterDisposition": "removed",
+      "remediation": "Bind a source that describes the vacuum vessel itself. This is a re-sourcing action, not a release.",
+      "collateralObservation": "This index page supports its four already-released sibling records only at the level of a category name. That is thin, and it is recorded here as an observation about an existing release, not as a change to it."
+    },
+    {
+      "recordId": "urn:maha:record:agentic-systems-mcp-tool-allowlisting",
+      "sourceId": "https://modelcontextprotocol.io/specification/2024-11-05/index",
+      "retrieval": { "route": "direct-https", "outcome": "success", "retrievedOn": "2026-09-02" },
+      "inspectionDepth": "section-or-full-text",
+      "priorVerdict": "partially-supported",
+      "verdict": "partially-supported",
+      "verdictChanged": false,
+      "evidence": "The Security and Trust & Safety section states under Tool Safety that hosts must obtain explicit user consent before invoking any tool, and under Implementation Guidelines that implementors should build consent and authorization flows and implement appropriate access controls. No allowlist, denylist, permitted-tool list or per-tool permission registry is specified anywhere in the retrieved document.",
+      "distinctionDrawn": "Per-invocation user consent is a policy an allowlist could implement. It is not itself an allowlist mechanism, and the specification names no mechanism.",
+      "clusterDisposition": "removed",
+      "remediation": "Bind a source that specifies an allowlist mechanism. Narrowing this record to consent-gated invocation was available and was declined: it would make the cluster close by changing what the record claims."
+    },
+    {
+      "recordId": "urn:maha:record:mechanistic-interpretability-previous-token-heads",
+      "sourceId": "https://transformer-circuits.pub/2022/in-context-learning-and-induction-heads/index.html",
+      "retrieval": { "route": "direct-https", "outcome": "success", "retrievedOn": "2026-09-02" },
+      "inspectionDepth": "section-or-full-text",
+      "priorVerdict": "partially-supported",
+      "verdict": "partially-supported",
+      "verdictChanged": false,
+      "evidence": "Previous-token heads appear twice, both inside the definition of the induction head: as the first of two attention heads that copies information from the previous token so the second head can attend by what preceded a token. There is no dedicated section and no independent analysis. The concept appears only instrumentally, as a prerequisite of the article's actual subject.",
+      "clusterDisposition": "removed",
+      "remediation": "Bind a source that treats previous-token heads as its own subject."
+    },
+    {
+      "recordId": "urn:maha:record:mechanistic-interpretability-io-identification-circuit",
+      "sourceId": "https://transformer-circuits.pub/2022/in-context-learning-and-induction-heads/index.html",
+      "retrieval": { "route": "direct-https", "outcome": "success", "retrievedOn": "2026-09-02" },
+      "inspectionDepth": "section-or-full-text",
+      "priorVerdict": "mismatched",
+      "verdict": "mismatched",
+      "verdictChanged": false,
+      "evidence": "Neither 'indirect object identification' nor 'IOI' appears anywhere in the retrieved article. Indirect-object identification is a separate study on a separate circuit.",
+      "clusterDisposition": "removed",
+      "remediation": "Bind the indirect-object identification paper. Re-sourcing, not release."
+    },
+    {
+      "recordId": "urn:maha:record:longevity-metabolism-senescence-associated-secretory-phenotype",
+      "sourceId": "10.1111/acel.12344",
+      "retrieval": {
+        "route": "publisher-then-open-access",
+        "publisherOutcome": "HTTP 403 at onlinelibrary.wiley.com",
+        "resolvedVia": "PMC4531078 open-access full text",
+        "outcome": "success",
+        "retrievedOn": "2026-09-02"
+      },
+      "inspectionDepth": "section-or-full-text",
+      "identityConfirmed": "Retrieved article reports DOI 10.1111/acel.12344, title 'The Achilles' heel of senescent cells: from transcriptome to senolytic drugs'. Identity matches the bound source.",
+      "priorVerdict": "partially-supported",
+      "verdict": "partially-supported",
+      "verdictChanged": false,
+      "evidence": "SASP appears three times: twice in the Introduction, defining it and noting it likely contributes to dysfunction, and once in the Senolytic siRNAs section noting EFNB3 overexpression can induce it. The article performs no cytokine profiling and quantifies no SASP factor. Its measured subject is apoptosis resistance and senolytic drug action.",
+      "distinctionDrawn": "Citing the SASP as background is not characterising it. A record about the SASP needs a source that measures it.",
+      "clusterDisposition": "removed",
+      "remediation": "Bind a source that characterises the SASP directly."
+    }
+  ],
+  "summary": {
+    "recordsInspected": 5,
+    "supported": 0,
+    "partiallySupported": 3,
+    "mismatched": 2,
+    "removedFromCluster": 5,
+    "narrowedToFitCluster": 0,
+    "verdictsChangedByThisBatch": 1,
+    "finding": "Every record that required inspection failed it. None was rescued by narrowing. Four of the five frozen clusters therefore cannot close, and the batch yields whatever the one already-clean cluster yields."
+  },
+  "boundary": "Private inspection record. No claim here is published, and no verdict here releases anything."
+}

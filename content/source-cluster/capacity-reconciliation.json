@@ -1,0 +1,55 @@
+{
+  "schemaVersion": "maha-cluster-capacity-reconciliation/1.0",
+  "reconciledAt": "2026-09-02",
+  "currentlyReachable": {
+    "sitemapPaths": 764,
+    "sourceReferencePages": 0,
+    "basis": "Observed public surface. These are the only pages a reader can open today."
+  },
+  "reachableAfterPreparedButUnexecutedOperations": {
+    "sitemapPaths": 806,
+    "sourceReferencePages": 9,
+    "operations": [
+      {
+        "operation": "merge-and-deploy-pr-355",
+        "kind": "code-merge",
+        "executed": false,
+        "authorization": "not-granted",
+        "addsPages": 8,
+        "note": "Reviewed and green, and explicitly not merged in this sprint. The eight source routes exist only on a branch."
+      },
+      {
+        "operation": "release-33-record-production-package",
+        "kind": "canonical-release",
+        "executed": false,
+        "authorization": "not-granted",
+        "addsPages": 34,
+        "note": "Frozen and reverified against thirteen attributes. Requires release credentials this sprint did not use."
+      },
+      {
+        "operation": "source-cluster-closure-batch-1",
+        "kind": "canonical-release",
+        "executed": false,
+        "authorization": "not-granted",
+        "addsPages": 0,
+        "note": "Its one surviving cluster is wholly contained in the 33-record package, so it adds nothing the package does not already add. Counted at zero rather than counted twice."
+      }
+    ],
+    "status": "NOT LIVE. Every operation below is prepared and unexecuted, and none is authorized."
+  },
+  "doubleCountingAvoided": {
+    "check": "Batch 1 overlaps the 33-record package entirely.",
+    "naiveSum": 43,
+    "honestSum": 42,
+    "difference": 1
+  },
+  "batch1Reconciliation": {
+    "clustersFrozen": 5,
+    "clustersSurvivingInspection": 1,
+    "recordsRemovedForLackOfSupport": 5,
+    "marginalPagesBeyondExistingPlans": 0,
+    "honestFinding": "Batch 1 produced no marginal page. Its value was diagnostic: it established by direct reading that four of the five nearest clusters are blocked by records their sources do not support, which is a re-sourcing problem, not a release backlog."
+  },
+  "boundary": "A private reconciliation. The second column is a projection of prepared work and must never be reported as the live surface.",
+  "reconciliationDigest": "sha256:9fd8eab2aaf122e6e433eb6e55283aa24f3746db8a64968eead4b9dc8637db66"
+}
