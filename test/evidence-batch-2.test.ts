@@ -49,9 +49,11 @@ test('an inspected source cannot support records it was not checked against', ()
 test('one source cannot mechanically support every record in a positional block', () => {
   const neuro = compiled.pages.filter((p) => p.route.startsWith('/knowledge/neuromorphic-biocomputing/'))
   const supported = neuro.filter((p) => (p.after?.explanatorySources ?? 0) > 0)
+  // The property, not a frozen number: later batches may legitimately add more
+  // neuromorphic sources, but no source may absorb the whole family.
   assert.ok(supported.length < neuro.length,
-    'the neuromorphic source covers the three routes it was checked against, not the whole family')
-  assert.equal(supported.length, 3)
+    'sources cover only the routes they were checked against, never the whole family')
+  assert.ok(supported.length > 0)
 })
 
 test('vendor claims cannot become independent validation', () => {

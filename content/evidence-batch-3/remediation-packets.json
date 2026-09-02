@@ -1,0 +1,115 @@
+{
+  "schemaVersion": "maha-remediation-ledger/1.0",
+  "appendOnly": true,
+  "immutable": true,
+  "generatedAt": "2026-09-02",
+  "packets": 3,
+  "accept": 3,
+  "revise": 0,
+  "reject": 0,
+  "activeBindingsChanged": 0,
+  "adoptionRule": "A packet proposes. Adoption is a separate, reviewed act. No code path reads proposedDisposition and mutates a binding, and the uplift compiler consults inspections rather than packets.",
+  "canary": {
+    "fiveRecordCanaryReachable": false,
+    "distinctRecordsAvailable": 3,
+    "constructed": false,
+    "records": [],
+    "executed": false,
+    "authorized": false,
+    "note": "Fewer than five distinct records passed inspection. No smaller canary was constructed and called complete."
+  },
+  "ledgerEntries": [
+    {
+      "packetVersion": "maha-remediation-packet/1.0",
+      "recordIdentity": {
+        "route": "/knowledge/mathematics/uncertainty-propagation",
+        "currentState": "structural-only"
+      },
+      "claimIdentity": "That measurement uncertainties combine by a stated rule and that coverage factors express confidence, asserted with no inspected source for either.",
+      "currentSource": "none inspected for this proposition",
+      "proposedSource": {
+        "sourceId": "nist-tn1297-uncertainty",
+        "title": "Guidelines for Evaluating and Expressing the Uncertainty of NIST Measurement Results",
+        "authors": "Barry N. Taylor and Chris E. Kuyatt",
+        "venue": "NIST Technical Note 1297, 1994 edition",
+        "identifier": "NIST TN 1297",
+        "tier": "government-publication"
+      },
+      "sourceIdentityEvidence": "Served from nvlpubs.nist.gov; running head and title page state the title, both authors and the Technical Note number.",
+      "versionRelationship": "1994 edition, superseding the 1993 edition.",
+      "exactLocator": "Section 2.7 correlations and covariances; Section 3 Type A Evaluation of Standard Uncertainty; Section 4 Type B Evaluation of Standard Uncertainty; Sections 4.2 to 4.6 distribution conversions; Section 4.7; Section 5.1 Combined Standard Uncertainty; Section 5.4 level of confidence; Section 6.1 and 6.2 Expanded Uncertainty and coverage factor; Appendix A Law of Propagation of Uncertainty, Eq. (A-3)",
+      "inspectedPassage": "Section 3 records that a Type A evaluation may rest on any valid statistical method, giving the standard deviation of the mean of independent observations, least squares and analysis of variance as examples. Section 4 records that a Type B evaluation rests on scientific judgment using previous data, general knowledge of instruments, manufacturer specifications, calibration reports and handbook reference data, and Sections 4.2 to 4.6 give the conversions for rectangular and triangular models, with u equal to a over the square root of three and a over the square root of six respectively. Section 4.7 states that Type A evaluations based on limited data are not necessarily more reliable than soundly based Type B evaluations. Section 5.1 states that the combined standard uncertainty is obtained by combining the individual standard uncertainties and covariances by the method summarized in Appendix A Equation A-3, called the law of propagation of uncertainty and commonly the root-sum-of-squares method. Section 6.1 defines expanded uncertainty as the coverage factor times the combined standard uncertainty, and Section 6.2 records that the coverage factor is typically between two and three, with a factor of two giving approximately ninety-five percent level of confidence.",
+      "boundedClaim": "The standard method for combining measurement uncertainties: the distinction between Type A and Type B evaluation, the law of propagation of uncertainty as the root-sum-of-squares combination including covariances, and the meaning of a coverage factor and expanded uncertainty.",
+      "limitation": "Section 3 states outright that the Note does not attempt to give detailed statistical techniques for carrying out Type A evaluations and refers the reader elsewhere. It prescribes no calibration procedure for any instrument, no industry-specific protocol and no compliance requirement, so it cannot support a claim about how any particular measurement was performed.",
+      "rightsBasis": "US government work, citation-with-paraphrase",
+      "inspectionDepth": "section-or-full-text",
+      "proposedDisposition": "accept",
+      "dispositionIsAdvisoryOnly": true,
+      "appliedToActiveBinding": false,
+      "activeBindingUnchanged": true,
+      "provenanceDigest": "sha256:7b0294e7a3bf8c35d507bb58add669feaf47993f8585b9f5515db5d741e1c349"
+    },
+    {
+      "packetVersion": "maha-remediation-packet/1.0",
+      "recordIdentity": {
+        "route": "/knowledge/neuromorphic-biocomputing/multielectrode-arrays-and-stimulation",
+        "currentState": "structural-only"
+      },
+      "claimIdentity": "That multielectrode arrays record and stimulate cultured neurons, and what those recordings can resolve, asserted with no inspected source.",
+      "currentSource": "none inspected for this proposition",
+      "proposedSource": {
+        "sourceId": "obien-2015-mea-recordings",
+        "title": "Revealing neuronal function through microelectrode array recordings",
+        "authors": "Marie Engelene J. Obien, Kosmas Deligkaris, Torsten Bullmann, Douglas J. Bakkum, Urs Frey",
+        "venue": "Frontiers in Neuroscience, 2015",
+        "identifier": "10.3389/fnins.2014.00423",
+        "tier": "peer-reviewed-open-access"
+      },
+      "sourceIdentityEvidence": "Article page states the title, five authors, journal, year and DOI, matching the citation.",
+      "versionRelationship": "Open-access version of record.",
+      "exactLocator": "Introduction; Understanding MEA Signals; MEA Signal Processing; Neuron-Electrode Interface",
+      "inspectedPassage": "The Introduction records that microelectrode arrays permit simultaneous long-term recording of local field potentials and extracellular action potentials from a population of neurons at millisecond timescale. Understanding MEA Signals records that extracellular action potentials are tens to hundreds of microvolts in amplitude and under two milliseconds in duration, against tens of millivolts for intracellular potentials. MEA Signal Processing records a typical band-pass filter of 300 to 3000 hertz. Neuron-Electrode Interface records that electrodes detect signals from all sources around each sensor rather than resolving single cells as intracellular methods do.",
+      "boundedClaim": "What a microelectrode array actually measures: the two signal classes and their bands, the amplitude and duration of extracellular action potentials against intracellular ones, the standard filter band, and the fact that an extracellular electrode integrates over nearby sources rather than isolating one cell.",
+      "limitation": "A review of the recording method. It establishes no comparative efficacy against optical methods, no clinical diagnostic validity, and no long-term biocompatibility beyond what manufacturers test. It cannot support a claim that any cultured network performs computation, nor any claim about neuromorphic hardware.",
+      "rightsBasis": "Frontiers open access, citation-with-paraphrase",
+      "inspectionDepth": "section-or-full-text",
+      "proposedDisposition": "accept",
+      "dispositionIsAdvisoryOnly": true,
+      "appliedToActiveBinding": false,
+      "activeBindingUnchanged": true,
+      "provenanceDigest": "sha256:60ef5fda9cd3fe28acbbf4e6f287671a00d4758f5587339e50f32832fe5bec91"
+    },
+    {
+      "packetVersion": "maha-remediation-packet/1.0",
+      "recordIdentity": {
+        "route": "/knowledge/neuromorphic-biocomputing/biological-neural-cultures",
+        "currentState": "structural-only"
+      },
+      "claimIdentity": "That multielectrode arrays record and stimulate cultured neurons, and what those recordings can resolve, asserted with no inspected source.",
+      "currentSource": "none inspected for this proposition",
+      "proposedSource": {
+        "sourceId": "obien-2015-mea-recordings",
+        "title": "Revealing neuronal function through microelectrode array recordings",
+        "authors": "Marie Engelene J. Obien, Kosmas Deligkaris, Torsten Bullmann, Douglas J. Bakkum, Urs Frey",
+        "venue": "Frontiers in Neuroscience, 2015",
+        "identifier": "10.3389/fnins.2014.00423",
+        "tier": "peer-reviewed-open-access"
+      },
+      "sourceIdentityEvidence": "Article page states the title, five authors, journal, year and DOI, matching the citation.",
+      "versionRelationship": "Open-access version of record.",
+      "exactLocator": "Introduction; Understanding MEA Signals; MEA Signal Processing; Neuron-Electrode Interface",
+      "inspectedPassage": "The Introduction records that microelectrode arrays permit simultaneous long-term recording of local field potentials and extracellular action potentials from a population of neurons at millisecond timescale. Understanding MEA Signals records that extracellular action potentials are tens to hundreds of microvolts in amplitude and under two milliseconds in duration, against tens of millivolts for intracellular potentials. MEA Signal Processing records a typical band-pass filter of 300 to 3000 hertz. Neuron-Electrode Interface records that electrodes detect signals from all sources around each sensor rather than resolving single cells as intracellular methods do.",
+      "boundedClaim": "What a microelectrode array actually measures: the two signal classes and their bands, the amplitude and duration of extracellular action potentials against intracellular ones, the standard filter band, and the fact that an extracellular electrode integrates over nearby sources rather than isolating one cell.",
+      "limitation": "A review of the recording method. It establishes no comparative efficacy against optical methods, no clinical diagnostic validity, and no long-term biocompatibility beyond what manufacturers test. It cannot support a claim that any cultured network performs computation, nor any claim about neuromorphic hardware.",
+      "rightsBasis": "Frontiers open access, citation-with-paraphrase",
+      "inspectionDepth": "section-or-full-text",
+      "proposedDisposition": "accept",
+      "dispositionIsAdvisoryOnly": true,
+      "appliedToActiveBinding": false,
+      "activeBindingUnchanged": true,
+      "provenanceDigest": "sha256:78685f6478ce6b5243160e1f4905e6c5076efbdb05a6801f698c8541334c79f2"
+    }
+  ],
+  "boundary": "Private, append-only proposals. Nothing here is active.",
+  "ledgerDigest": "sha256:f7c3b5e219ed5265e88e30ea44522c277015eece8ddda744904927fc27da286e"
+}

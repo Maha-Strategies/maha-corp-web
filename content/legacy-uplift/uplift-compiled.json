@@ -4458,12 +4458,12 @@
           "source-boundary"
         ],
         "dimensionCount": 8,
-        "sourceCount": 2,
-        "sourcesWithBoundary": 2,
+        "sourceCount": 3,
+        "sourcesWithBoundary": 3,
         "referenceOnlySources": 0,
-        "declaredLocators": 2,
-        "contentInspectedLocators": 0,
-        "explanatorySources": 0,
+        "declaredLocators": 3,
+        "contentInspectedLocators": 1,
+        "explanatorySources": 1,
         "bridgeCount": 3,
         "relatedRouteCount": 3,
         "renderedSections": 6
@@ -4483,12 +4483,12 @@
           "typed-bridges"
         ],
         "dimensionCount": 9,
-        "sourceCount": 2,
-        "sourcesWithBoundary": 2,
+        "sourceCount": 3,
+        "sourcesWithBoundary": 3,
         "referenceOnlySources": 0,
-        "declaredLocators": 2,
-        "contentInspectedLocators": 0,
-        "explanatorySources": 0,
+        "declaredLocators": 3,
+        "contentInspectedLocators": 1,
+        "explanatorySources": 1,
         "bridgeCount": 3,
         "relatedRouteCount": 3,
         "renderedSections": 8
@@ -4502,7 +4502,8 @@
           ],
           "sourceIds": [
             "nist-gum",
-            "nist-statistical-handbook"
+            "nist-statistical-handbook",
+            "nist-tn1297-uncertainty"
           ]
         },
         {
@@ -4515,7 +4516,8 @@
           ],
           "sourceIds": [
             "nist-gum",
-            "nist-statistical-handbook"
+            "nist-statistical-handbook",
+            "nist-tn1297-uncertainty"
           ]
         },
         {
@@ -4528,7 +4530,8 @@
           ],
           "sourceIds": [
             "nist-gum",
-            "nist-statistical-handbook"
+            "nist-statistical-handbook",
+            "nist-tn1297-uncertainty"
           ]
         },
         {
@@ -4544,7 +4547,8 @@
           ],
           "sourceIds": [
             "nist-gum",
-            "nist-statistical-handbook"
+            "nist-statistical-handbook",
+            "nist-tn1297-uncertainty"
           ]
         },
         {
@@ -4555,7 +4559,8 @@
           ],
           "sourceIds": [
             "nist-gum",
-            "nist-statistical-handbook"
+            "nist-statistical-handbook",
+            "nist-tn1297-uncertainty"
           ]
         },
         {
@@ -4573,7 +4578,8 @@
           ],
           "sourceIds": [
             "nist-gum",
-            "nist-statistical-handbook"
+            "nist-statistical-handbook",
+            "nist-tn1297-uncertainty"
           ]
         },
         {
@@ -4591,7 +4597,8 @@
           ],
           "sourceIds": [
             "nist-gum",
-            "nist-statistical-handbook"
+            "nist-statistical-handbook",
+            "nist-tn1297-uncertainty"
           ]
         },
         {
@@ -4609,12 +4616,13 @@
           ],
           "sourceIds": [
             "nist-gum",
-            "nist-statistical-handbook"
+            "nist-statistical-handbook",
+            "nist-tn1297-uncertainty"
           ]
         }
       ],
       "sectionCount": 8,
-      "upliftDigest": "sha256:43b66519de5919b158bd961aa4d1e10aa351abd2b34850476106e4be00bfd4be"
+      "upliftDigest": "sha256:e196839a91fd68af99c523864d2f6e2de55ff579b1267e823f66f94aeb5ca996"
     },
     {
       "route": "/knowledge/mathematics/bayesian-updating",
@@ -10687,12 +10695,12 @@
           "source-boundary"
         ],
         "dimensionCount": 8,
-        "sourceCount": 3,
-        "sourcesWithBoundary": 3,
+        "sourceCount": 4,
+        "sourcesWithBoundary": 4,
         "referenceOnlySources": 0,
-        "declaredLocators": 3,
-        "contentInspectedLocators": 0,
-        "explanatorySources": 0,
+        "declaredLocators": 4,
+        "contentInspectedLocators": 1,
+        "explanatorySources": 1,
         "bridgeCount": 1,
         "relatedRouteCount": 3,
         "renderedSections": 6
@@ -10713,12 +10721,12 @@
           "typed-bridges"
         ],
         "dimensionCount": 10,
-        "sourceCount": 3,
-        "sourcesWithBoundary": 3,
+        "sourceCount": 4,
+        "sourcesWithBoundary": 4,
         "referenceOnlySources": 0,
-        "declaredLocators": 3,
-        "contentInspectedLocators": 0,
-        "explanatorySources": 0,
+        "declaredLocators": 4,
+        "contentInspectedLocators": 1,
+        "explanatorySources": 1,
         "bridgeCount": 1,
         "relatedRouteCount": 3,
         "renderedSections": 7
@@ -10733,7 +10741,8 @@
           "sourceIds": [
             "dishbrain",
             "mea-protocol",
-            "mea-reproducibility"
+            "mea-reproducibility",
+            "obien-2015-mea-recordings"
           ]
         },
         {
@@ -10747,7 +10756,8 @@
           "sourceIds": [
             "dishbrain",
             "mea-protocol",
-            "mea-reproducibility"
+            "mea-reproducibility",
+            "obien-2015-mea-recordings"
           ]
         },
         {
@@ -10761,7 +10771,8 @@
           "sourceIds": [
             "dishbrain",
             "mea-protocol",
-            "mea-reproducibility"
+            "mea-reproducibility",
+            "obien-2015-mea-recordings"
           ]
         },
         {
@@ -10788,7 +10799,8 @@
           "sourceIds": [
             "dishbrain",
             "mea-protocol",
-            "mea-reproducibility"
+            "mea-reproducibility",
+            "obien-2015-mea-recordings"
           ]
         },
         {
@@ -10797,12 +10809,14 @@
           "items": [
             "The observed closed-loop behavior is a bounded experimental result. The paper title’s use of sentience is not accepted here as proof of consciousness, subjective experience, general intelligence, or deployable biological computing. (boundary declared by In vitro neurons learn and exhibit sentience when embodied in a simulated game-world)",
             "A protocol improves procedural visibility but does not eliminate biological batch variation, electrode-culture differences, contamination, analytic flexibility, or differences among cell sources and laboratories. (boundary declared by A practical guide to culturing and recording from neuronal networks using microelectrode arrays)",
-            "Reproducibility under the studied protocol does not generalize to every cell source, maturation state, array, stimulation regime, analysis pipeline, learning task, or claimed computational capability. (boundary declared by Interlaboratory reproducibility of microelectrode array measurements of spontaneous activity in networks of cultured neurons)"
+            "Reproducibility under the studied protocol does not generalize to every cell source, maturation state, array, stimulation regime, analysis pipeline, learning task, or claimed computational capability. (boundary declared by Interlaboratory reproducibility of microelectrode array measurements of spontaneous activity in networks of cultured neurons)",
+            "A review of the recording method. It establishes no comparative efficacy against optical methods, no clinical diagnostic validity, and no long-term biocompatibility beyond what manufacturers test. It cannot support a claim that any cultured network performs computation, nor any claim about neuromorphic hardware. (boundary declared by Revealing neuronal function through microelectrode array recordings)"
           ],
           "sourceIds": [
             "dishbrain",
             "mea-protocol",
-            "mea-reproducibility"
+            "mea-reproducibility",
+            "obien-2015-mea-recordings"
           ]
         },
         {
@@ -10821,12 +10835,13 @@
           "sourceIds": [
             "dishbrain",
             "mea-protocol",
-            "mea-reproducibility"
+            "mea-reproducibility",
+            "obien-2015-mea-recordings"
           ]
         }
       ],
       "sectionCount": 7,
-      "upliftDigest": "sha256:da07b0e6e9b1dbeddc7b715dd82a6bee2bcf7f730c3355ec63cfd480d549dfa3"
+      "upliftDigest": "sha256:8f4d3df830e7a0dd039dc4fb03076b18442398b56bfb69ecdbaca6bbe821b097"
     },
     {
       "route": "/knowledge/neuromorphic-biocomputing/brain-organoids-and-organoid-intelligence",
@@ -11369,12 +11384,12 @@
           "source-boundary"
         ],
         "dimensionCount": 8,
-        "sourceCount": 3,
-        "sourcesWithBoundary": 3,
+        "sourceCount": 4,
+        "sourcesWithBoundary": 4,
         "referenceOnlySources": 0,
-        "declaredLocators": 3,
-        "contentInspectedLocators": 0,
-        "explanatorySources": 0,
+        "declaredLocators": 4,
+        "contentInspectedLocators": 1,
+        "explanatorySources": 1,
         "bridgeCount": 1,
         "relatedRouteCount": 3,
         "renderedSections": 6
@@ -11394,12 +11409,12 @@
           "typed-bridges"
         ],
         "dimensionCount": 9,
-        "sourceCount": 3,
-        "sourcesWithBoundary": 3,
+        "sourceCount": 4,
+        "sourcesWithBoundary": 4,
         "referenceOnlySources": 0,
-        "declaredLocators": 3,
-        "contentInspectedLocators": 0,
-        "explanatorySources": 0,
+        "declaredLocators": 4,
+        "contentInspectedLocators": 1,
+        "explanatorySources": 1,
         "bridgeCount": 1,
         "relatedRouteCount": 3,
         "renderedSections": 6
@@ -11414,7 +11429,8 @@
           "sourceIds": [
             "mea-protocol",
             "mea-reproducibility",
-            "dishbrain"
+            "dishbrain",
+            "obien-2015-mea-recordings"
           ]
         },
         {
@@ -11428,7 +11444,8 @@
           "sourceIds": [
             "mea-protocol",
             "mea-reproducibility",
-            "dishbrain"
+            "dishbrain",
+            "obien-2015-mea-recordings"
           ]
         },
         {
@@ -11442,7 +11459,8 @@
           "sourceIds": [
             "mea-protocol",
             "mea-reproducibility",
-            "dishbrain"
+            "dishbrain",
+            "obien-2015-mea-recordings"
           ]
         },
         {
@@ -11455,7 +11473,8 @@
           "sourceIds": [
             "mea-protocol",
             "mea-reproducibility",
-            "dishbrain"
+            "dishbrain",
+            "obien-2015-mea-recordings"
           ]
         },
         {
@@ -11464,12 +11483,14 @@
           "items": [
             "A protocol improves procedural visibility but does not eliminate biological batch variation, electrode-culture differences, contamination, analytic flexibility, or differences among cell sources and laboratories. (boundary declared by A practical guide to culturing and recording from neuronal networks using microelectrode arrays)",
             "Reproducibility under the studied protocol does not generalize to every cell source, maturation state, array, stimulation regime, analysis pipeline, learning task, or claimed computational capability. (boundary declared by Interlaboratory reproducibility of microelectrode array measurements of spontaneous activity in networks of cultured neurons)",
-            "The observed closed-loop behavior is a bounded experimental result. The paper title’s use of sentience is not accepted here as proof of consciousness, subjective experience, general intelligence, or deployable biological computing. (boundary declared by In vitro neurons learn and exhibit sentience when embodied in a simulated game-world)"
+            "The observed closed-loop behavior is a bounded experimental result. The paper title’s use of sentience is not accepted here as proof of consciousness, subjective experience, general intelligence, or deployable biological computing. (boundary declared by In vitro neurons learn and exhibit sentience when embodied in a simulated game-world)",
+            "A review of the recording method. It establishes no comparative efficacy against optical methods, no clinical diagnostic validity, and no long-term biocompatibility beyond what manufacturers test. It cannot support a claim that any cultured network performs computation, nor any claim about neuromorphic hardware. (boundary declared by Revealing neuronal function through microelectrode array recordings)"
           ],
           "sourceIds": [
             "mea-protocol",
             "mea-reproducibility",
-            "dishbrain"
+            "dishbrain",
+            "obien-2015-mea-recordings"
           ]
         },
         {
@@ -11488,12 +11509,13 @@
           "sourceIds": [
             "mea-protocol",
             "mea-reproducibility",
-            "dishbrain"
+            "dishbrain",
+            "obien-2015-mea-recordings"
           ]
         }
       ],
       "sectionCount": 6,
-      "upliftDigest": "sha256:52f10356675b320b58ae1e5b779a2aab77e7f7b2a1b6bca0f1a6b5a50b708f6e"
+      "upliftDigest": "sha256:da676fe2c4ede95a1a39ff1319691460ce8784b71a5ae9b7f80fa4264ad1cf8b"
     },
     {
       "route": "/knowledge/neuromorphic-biocomputing/hybrid-bioelectronic-systems",

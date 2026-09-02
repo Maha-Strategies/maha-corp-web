@@ -1,0 +1,342 @@
+{
+  "schemaVersion": "maha-evidence-batch-3-cohort/1.0",
+  "batch": "evidence-recovery-3",
+  "frozenAt": "2026-09-02",
+  "frozenBeforeSearching": true,
+  "pool": {
+    "blocked": 37,
+    "structuralOnly": 98,
+    "total": 135
+  },
+  "scoringModel": {
+    "factors": [
+      "subject priority",
+      "typed internal links",
+      "plausible independent literature",
+      "blocked pages weighted above structural",
+      "existing source count as a depth proxy"
+    ],
+    "siblingCountUsed": false,
+    "siblingCountNote": "Deliberately excluded. Batch 2 rewarded large families rather than pages most in need, and a source must earn each page record by record.",
+    "subjectCap": 6,
+    "searchRelevance": "not used; no privacy-safe query-level data exists locally"
+  },
+  "selected": 30,
+  "bySubject": {
+    "advanced-packaging": 6,
+    "astronomy": 5,
+    "cmp": 3,
+    "deposition-and-etching": 2,
+    "lithography-and-overlay": 1,
+    "mathematics": 6,
+    "neuromorphic": 6,
+    "process-control-and-yield": 1
+  },
+  "byState": {
+    "blocked": 12,
+    "structuralOnly": 18
+  },
+  "targets": [
+    {
+      "route": "/knowledge/equipment/blade-and-laser-dicing-singulation-system",
+      "family": "semiconductor-manufacturing",
+      "subject": "advanced-packaging",
+      "state": "blocked",
+      "currentSources": 3,
+      "typedInternalLinks": 0,
+      "dimensions": 3,
+      "score": 26.2
+    },
+    {
+      "route": "/knowledge/equipment/chemical-vapor-deposition-reactor",
+      "family": "semiconductor-manufacturing",
+      "subject": "deposition-and-etching",
+      "state": "blocked",
+      "currentSources": 3,
+      "typedInternalLinks": 0,
+      "dimensions": 3,
+      "score": 26.2
+    },
+    {
+      "route": "/knowledge/processes/copper-interconnects-and-cmp",
+      "family": "semiconductor-manufacturing",
+      "subject": "cmp",
+      "state": "blocked",
+      "currentSources": 3,
+      "typedInternalLinks": 0,
+      "dimensions": 3,
+      "score": 26.2
+    },
+    {
+      "route": "/knowledge/concepts/cleanrooms-fab-utilities-and-contamination-control",
+      "family": "semiconductor-manufacturing",
+      "subject": "process-control-and-yield",
+      "state": "blocked",
+      "currentSources": 2,
+      "typedInternalLinks": 0,
+      "dimensions": 3,
+      "score": 25.8
+    },
+    {
+      "route": "/knowledge/equipment/chemical-mechanical-planarization-polisher",
+      "family": "semiconductor-manufacturing",
+      "subject": "cmp",
+      "state": "blocked",
+      "currentSources": 2,
+      "typedInternalLinks": 0,
+      "dimensions": 3,
+      "score": 25.8
+    },
+    {
+      "route": "/knowledge/equipment/electron-beam-mask-writer",
+      "family": "semiconductor-manufacturing",
+      "subject": "lithography-and-overlay",
+      "state": "blocked",
+      "currentSources": 2,
+      "typedInternalLinks": 0,
+      "dimensions": 3,
+      "score": 25.8
+    },
+    {
+      "route": "/knowledge/equipment/pvd-sputter-and-metal-deposition-system",
+      "family": "semiconductor-manufacturing",
+      "subject": "deposition-and-etching",
+      "state": "blocked",
+      "currentSources": 2,
+      "typedInternalLinks": 0,
+      "dimensions": 3,
+      "score": 25.8
+    },
+    {
+      "route": "/knowledge/equipment/wafer-backgrinder-and-polisher",
+      "family": "semiconductor-manufacturing",
+      "subject": "cmp",
+      "state": "blocked",
+      "currentSources": 2,
+      "typedInternalLinks": 0,
+      "dimensions": 3,
+      "score": 25.8
+    },
+    {
+      "route": "/knowledge/processes/advanced-packaging-and-heterogeneous-integration",
+      "family": "semiconductor-manufacturing",
+      "subject": "advanced-packaging",
+      "state": "blocked",
+      "currentSources": 2,
+      "typedInternalLinks": 0,
+      "dimensions": 3,
+      "score": 25.8
+    },
+    {
+      "route": "/knowledge/processes/package-substrates-and-redistribution-layers",
+      "family": "semiconductor-manufacturing",
+      "subject": "advanced-packaging",
+      "state": "blocked",
+      "currentSources": 2,
+      "typedInternalLinks": 0,
+      "dimensions": 3,
+      "score": 25.8
+    },
+    {
+      "route": "/knowledge/processes/underfill-molding-and-package-encapsulation",
+      "family": "semiconductor-manufacturing",
+      "subject": "advanced-packaging",
+      "state": "blocked",
+      "currentSources": 2,
+      "typedInternalLinks": 0,
+      "dimensions": 3,
+      "score": 25.8
+    },
+    {
+      "route": "/knowledge/processes/wafer-thinning-dicing-and-die-handling",
+      "family": "semiconductor-manufacturing",
+      "subject": "advanced-packaging",
+      "state": "blocked",
+      "currentSources": 2,
+      "typedInternalLinks": 0,
+      "dimensions": 3,
+      "score": 25.8
+    },
+    {
+      "route": "/knowledge/neuromorphic-biocomputing/comparisons/simulation-and-physical-substrate",
+      "family": "neuromorphic-biocomputing-comparisons",
+      "subject": "advanced-packaging",
+      "state": "structural-only",
+      "currentSources": 2,
+      "typedInternalLinks": 2,
+      "dimensions": 9,
+      "score": 25
+    },
+    {
+      "route": "/knowledge/mathematics/optimization",
+      "family": "mathematics",
+      "subject": "mathematics",
+      "state": "structural-only",
+      "currentSources": 2,
+      "typedInternalLinks": 6,
+      "dimensions": 9,
+      "score": 21.4
+    },
+    {
+      "route": "/knowledge/mathematics/reference-frame-transformations",
+      "family": "mathematics",
+      "subject": "mathematics",
+      "state": "structural-only",
+      "currentSources": 2,
+      "typedInternalLinks": 6,
+      "dimensions": 9,
+      "score": 21.4
+    },
+    {
+      "route": "/knowledge/mathematics/uncertainty-propagation",
+      "family": "mathematics",
+      "subject": "mathematics",
+      "state": "structural-only",
+      "currentSources": 2,
+      "typedInternalLinks": 6,
+      "dimensions": 9,
+      "score": 21.4
+    },
+    {
+      "route": "/knowledge/mathematics/graph-theory",
+      "family": "mathematics",
+      "subject": "mathematics",
+      "state": "structural-only",
+      "currentSources": 1,
+      "typedInternalLinks": 6,
+      "dimensions": 9,
+      "score": 21
+    },
+    {
+      "route": "/knowledge/mathematics/angle-normalization",
+      "family": "mathematics",
+      "subject": "mathematics",
+      "state": "structural-only",
+      "currentSources": 2,
+      "typedInternalLinks": 5,
+      "dimensions": 9,
+      "score": 20.8
+    },
+    {
+      "route": "/knowledge/mathematics/calendar-and-timescale-mappings",
+      "family": "mathematics",
+      "subject": "mathematics",
+      "state": "structural-only",
+      "currentSources": 2,
+      "typedInternalLinks": 5,
+      "dimensions": 9,
+      "score": 20.8
+    },
+    {
+      "route": "/knowledge/neuromorphic-biocomputing/biological-neural-cultures",
+      "family": "neuromorphic-biocomputing",
+      "subject": "neuromorphic",
+      "state": "structural-only",
+      "currentSources": 3,
+      "typedInternalLinks": 4,
+      "dimensions": 10,
+      "score": 20.6
+    },
+    {
+      "route": "/knowledge/neuromorphic-biocomputing/multielectrode-arrays-and-stimulation",
+      "family": "neuromorphic-biocomputing",
+      "subject": "neuromorphic",
+      "state": "structural-only",
+      "currentSources": 3,
+      "typedInternalLinks": 4,
+      "dimensions": 9,
+      "score": 20.6
+    },
+    {
+      "route": "/knowledge/neuromorphic-biocomputing/reproducibility-variability-and-controls",
+      "family": "neuromorphic-biocomputing",
+      "subject": "neuromorphic",
+      "state": "structural-only",
+      "currentSources": 3,
+      "typedInternalLinks": 4,
+      "dimensions": 10,
+      "score": 20.6
+    },
+    {
+      "route": "/knowledge/neuromorphic-biocomputing/synaptic-plasticity-and-learning",
+      "family": "neuromorphic-biocomputing",
+      "subject": "neuromorphic",
+      "state": "structural-only",
+      "currentSources": 3,
+      "typedInternalLinks": 4,
+      "dimensions": 10,
+      "score": 20.6
+    },
+    {
+      "route": "/knowledge/neuromorphic-biocomputing/mixed-signal-neuromorphic-hardware",
+      "family": "neuromorphic-biocomputing",
+      "subject": "neuromorphic",
+      "state": "structural-only",
+      "currentSources": 2,
+      "typedInternalLinks": 4,
+      "dimensions": 10,
+      "score": 20.2
+    },
+    {
+      "route": "/knowledge/neuromorphic-biocomputing/neural-coding-and-time",
+      "family": "neuromorphic-biocomputing",
+      "subject": "neuromorphic",
+      "state": "structural-only",
+      "currentSources": 2,
+      "typedInternalLinks": 4,
+      "dimensions": 10,
+      "score": 20.2
+    },
+    {
+      "route": "/knowledge/astronomy/light-time-distance-and-lookback-time",
+      "family": "astronomy",
+      "subject": "astronomy",
+      "state": "structural-only",
+      "currentSources": 4,
+      "typedInternalLinks": 0,
+      "dimensions": 7,
+      "score": 18.6
+    },
+    {
+      "route": "/knowledge/astronomy/active-galactic-nuclei",
+      "family": "astronomy",
+      "subject": "astronomy",
+      "state": "structural-only",
+      "currentSources": 3,
+      "typedInternalLinks": 0,
+      "dimensions": 7,
+      "score": 18.2
+    },
+    {
+      "route": "/knowledge/astronomy/astrometry-parallax-and-proper-motion",
+      "family": "astronomy",
+      "subject": "astronomy",
+      "state": "structural-only",
+      "currentSources": 3,
+      "typedInternalLinks": 0,
+      "dimensions": 7,
+      "score": 18.2
+    },
+    {
+      "route": "/knowledge/astronomy/black-hole-observation-and-relativistic-inference",
+      "family": "astronomy",
+      "subject": "astronomy",
+      "state": "structural-only",
+      "currentSources": 3,
+      "typedInternalLinks": 0,
+      "dimensions": 7,
+      "score": 18.2
+    },
+    {
+      "route": "/knowledge/astronomy/coordinates-reference-frames-and-sky-position",
+      "family": "astronomy",
+      "subject": "astronomy",
+      "state": "structural-only",
+      "currentSources": 3,
+      "typedInternalLinks": 0,
+      "dimensions": 7,
+      "score": 18.2
+    }
+  ],
+  "cohortDigest": "sha256:66cf351131b7c4093a116879c066949089050711b9a2787d396e26d17b372aa0"
+}
