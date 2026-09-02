@@ -12,19 +12,27 @@ export const metadata: Metadata = {
     type: 'website',
     url: `${SITE_URL}/books`,
     title: 'Books & Essays | Maha Strategies',
-    description: 'Seven complete open web editions by Mayone Maha Rajan, with guides and essays.',
+    description: 'Eight complete open web editions by Mayone Maha Rajan, with guides and essays.',
     images: [{ url: '/og-master.png', width: 1200, height: 630, alt: 'Books & Essays — Maha Strategies' }],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Books & Essays | Maha Strategies',
-    description: 'Seven open web editions by Mayone Maha Rajan.',
+    description: 'Eight open web editions by Mayone Maha Rajan.',
     images: ['/og-master.png'],
     creator: '@mayonemaha',
   },
 }
 
 const books = [
+  {
+    title: 'The Cosmic Recursion',
+    subtitle: 'What Survives the Compression',
+    description: 'A book about information, erasure, physical limits, cosmic structure, and the disciplined losses through which anything persists.',
+    href: '/books/the-cosmic-recursion',
+    readHref: '/books/the-cosmic-recursion/read',
+    chapter: { title: 'The First Forgetting', href: '/books/the-cosmic-recursion/read/the-first-forgetting' },
+  },
   {
     title: 'The Maha Principle',
     subtitle: 'The Architecture of Human Flourishing',
@@ -97,8 +105,8 @@ export default function BooksPage() {
           <p className="evidence-kicker">[ Maha Strategies // Open Editions ]</p>
           <h1 className="evidence-title evidence-title--product mt-5">Books &amp; essays</h1>
           <p className="evidence-lede mt-7">
-            Seven works about the systems that shape a person and a world: intelligence, attention, evolution,
-            imagination, relationship, planetary process, and the choices that follow from them.
+            Eight works about the systems that shape a person and a world: intelligence, attention, evolution,
+            imagination, relationship, planetary and cosmic process, and the choices that follow from them.
           </p>
           <p className="evidence-copy mt-5">
             Each open edition includes the complete manuscript, stable chapter links, and companion essays where available.

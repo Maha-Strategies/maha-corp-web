@@ -3,7 +3,7 @@ import { resolve, sep } from 'node:path'
 
 export type OpenBookSection = { slug: string; title: string; marker: string }
 export type OpenBookEdition = {
-  slug: 'the-borrowed-light' | 'the-imagined-life' | 'the-maha-principle' | 'the-orbital-mind' | 'the-synthetic-self' | 'the-volcanic-engine'
+  slug: 'the-borrowed-light' | 'the-cosmic-recursion' | 'the-imagined-life' | 'the-maha-principle' | 'the-orbital-mind' | 'the-synthetic-self' | 'the-volcanic-engine'
   title: string
   subtitle: string
   manuscriptFiles: string[]
@@ -15,6 +15,30 @@ const CONTENT_ROOT = resolve(process.cwd(), 'content', 'books')
 // These editions read directly from one canonical manuscript each. The reader
 // URLs are derived views, never separately maintained chapter copies.
 export const openBookEditions: Record<OpenBookEdition['slug'], OpenBookEdition> = {
+  'the-cosmic-recursion': {
+    slug: 'the-cosmic-recursion',
+    title: 'The Cosmic Recursion',
+    subtitle: 'What Survives the Compression',
+    manuscriptFiles: ['THE-COSMIC-RECURSION-manuscript.md'],
+    sections: [
+      ['introduction', 'Introduction: The Deep Field and the Ledger', '## Introduction — The Deep Field and the Ledger'],
+      ['the-first-forgetting', 'Chapter 1: The First Forgetting', '# Chapter One'],
+      ['the-price-of-erasure', 'Chapter 2: The Price of Erasure', '# Chapter Two'],
+      ['the-threshold', 'Chapter 3: The Threshold', '# Chapter Three'],
+      ['the-long-burn', 'Chapter 4: The Long Burn', '# Chapter Four'],
+      ['writing-to-metal', 'Chapter 5: Writing to Metal', '# Chapter Five'],
+      ['the-clock-in-the-dark', 'Chapter 6: The Clock in the Dark', '# Chapter Six'],
+      ['the-boundary-that-holds', 'Chapter 7: The Boundary That Holds', '# Chapter Seven'],
+      ['the-invisible-majority', 'Chapter 8: The Invisible Majority', '# Chapter Eight'],
+      ['the-cannibal-and-the-engine', 'Chapter 9: The Cannibal and the Engine', '# Chapter Nine'],
+      ['reading-a-sparse-sky', 'Chapter 10: Reading a Sparse Sky', '# Chapter Ten'],
+      ['the-last-erasure', 'Chapter 11: The Last Erasure', '# Chapter Eleven'],
+      ['the-retained-invariant', 'Coda: The Retained Invariant', '# Coda'],
+      ['universe-as-computer-claims', 'Appendix A: What “The Universe Is a Computer” Actually Claims, and Doesn’t', '# Appendix A'],
+      ['provenance-index', 'Appendix B: Provenance Index', '# Appendix B'],
+      ['sources-and-verification', 'Appendix C: Sources and Verification', '# Appendix C'],
+    ].map(([slug, title, marker]) => ({ slug, title, marker })),
+  },
   'the-maha-principle': {
     slug: 'the-maha-principle',
     title: 'The Maha Principle',
