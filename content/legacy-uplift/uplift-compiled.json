@@ -9805,12 +9805,12 @@
           "source-boundary"
         ],
         "dimensionCount": 8,
-        "sourceCount": 3,
-        "sourcesWithBoundary": 3,
+        "sourceCount": 4,
+        "sourcesWithBoundary": 4,
         "referenceOnlySources": 0,
-        "declaredLocators": 3,
-        "contentInspectedLocators": 0,
-        "explanatorySources": 0,
+        "declaredLocators": 4,
+        "contentInspectedLocators": 1,
+        "explanatorySources": 1,
         "bridgeCount": 1,
         "relatedRouteCount": 3,
         "renderedSections": 6
@@ -9830,12 +9830,12 @@
           "typed-bridges"
         ],
         "dimensionCount": 9,
-        "sourceCount": 3,
-        "sourcesWithBoundary": 3,
+        "sourceCount": 4,
+        "sourcesWithBoundary": 4,
         "referenceOnlySources": 0,
-        "declaredLocators": 3,
-        "contentInspectedLocators": 0,
-        "explanatorySources": 0,
+        "declaredLocators": 4,
+        "contentInspectedLocators": 1,
+        "explanatorySources": 1,
         "bridgeCount": 1,
         "relatedRouteCount": 3,
         "renderedSections": 6
@@ -9850,7 +9850,8 @@
           "sourceIds": [
             "intel-loihi2",
             "spinnaker2",
-            "neurobench"
+            "neurobench",
+            "ostrau-2022-neuromorphic-benchmarking"
           ]
         },
         {
@@ -9864,7 +9865,8 @@
           "sourceIds": [
             "intel-loihi2",
             "spinnaker2",
-            "neurobench"
+            "neurobench",
+            "ostrau-2022-neuromorphic-benchmarking"
           ]
         },
         {
@@ -9878,7 +9880,8 @@
           "sourceIds": [
             "intel-loihi2",
             "spinnaker2",
-            "neurobench"
+            "neurobench",
+            "ostrau-2022-neuromorphic-benchmarking"
           ]
         },
         {
@@ -9891,7 +9894,8 @@
           "sourceIds": [
             "intel-loihi2",
             "spinnaker2",
-            "neurobench"
+            "neurobench",
+            "ostrau-2022-neuromorphic-benchmarking"
           ]
         },
         {
@@ -9900,12 +9904,14 @@
           "items": [
             "This is a vendor technical brief about a research platform. Performance and efficiency results remain workload-, configuration-, measurement-boundary-, and comparison-dependent and do not establish equivalence to biological intelligence. (boundary declared by Taking Neuromorphic Computing to the Next Level with Loihi 2)",
             "Architecture documentation establishes available mechanisms, not universal speed, energy, learning, biological plausibility, or production readiness. Claims require a named board, software version, workload, and system boundary. (boundary declared by SpiNNaker2 Developer Portal and Hardware Documentation)",
-            "A benchmark ranks submitted systems on declared tasks and metrics. It does not prove general intelligence, biological equivalence, safety, usefulness outside the benchmark, or superiority under unreported host and data costs. (boundary declared by NeuroBench: Advancing Neuromorphic Computing Through Collaborative, Fair and Representative Benchmarking)"
+            "A benchmark ranks submitted systems on declared tasks and metrics. It does not prove general intelligence, biological equivalence, safety, usefulness outside the benchmark, or superiority under unreported host and data costs. (boundary declared by NeuroBench: Advancing Neuromorphic Computing Through Collaborative, Fair and Representative Benchmarking)",
+            "A cross-platform benchmark study. It validates no vendor efficiency claim, declares no platform universally superior, and sets no absolute efficiency threshold, since its results depend on workload and configuration. It cannot support a general claim that neuromorphic hardware is more efficient than conventional hardware. (boundary declared by Benchmarking Neuromorphic Hardware and Its Energy Expenditure)"
           ],
           "sourceIds": [
             "intel-loihi2",
             "spinnaker2",
-            "neurobench"
+            "neurobench",
+            "ostrau-2022-neuromorphic-benchmarking"
           ]
         },
         {
@@ -9924,12 +9930,13 @@
           "sourceIds": [
             "intel-loihi2",
             "spinnaker2",
-            "neurobench"
+            "neurobench",
+            "ostrau-2022-neuromorphic-benchmarking"
           ]
         }
       ],
       "sectionCount": 6,
-      "upliftDigest": "sha256:40e42f2902d3a159e27a14bbd5a3b9324789ed746339d3daddce2b780d65d4cb"
+      "upliftDigest": "sha256:715968fa7896a492812e8429c0df3e8c576affb4c8762642aa25dc687e1d5c9d"
     },
     {
       "route": "/knowledge/neuromorphic-biocomputing/mixed-signal-neuromorphic-hardware",
@@ -10368,12 +10375,12 @@
           "source-boundary"
         ],
         "dimensionCount": 8,
-        "sourceCount": 3,
-        "sourcesWithBoundary": 3,
+        "sourceCount": 4,
+        "sourcesWithBoundary": 4,
         "referenceOnlySources": 0,
-        "declaredLocators": 3,
-        "contentInspectedLocators": 0,
-        "explanatorySources": 0,
+        "declaredLocators": 4,
+        "contentInspectedLocators": 1,
+        "explanatorySources": 1,
         "bridgeCount": 1,
         "relatedRouteCount": 3,
         "renderedSections": 6
@@ -10394,12 +10401,12 @@
           "typed-bridges"
         ],
         "dimensionCount": 10,
-        "sourceCount": 3,
-        "sourcesWithBoundary": 3,
+        "sourceCount": 4,
+        "sourcesWithBoundary": 4,
         "referenceOnlySources": 0,
-        "declaredLocators": 3,
-        "contentInspectedLocators": 0,
-        "explanatorySources": 0,
+        "declaredLocators": 4,
+        "contentInspectedLocators": 1,
+        "explanatorySources": 1,
         "bridgeCount": 1,
         "relatedRouteCount": 3,
         "renderedSections": 8
@@ -10414,7 +10421,8 @@
           "sourceIds": [
             "intel-loihi2",
             "spinnaker2",
-            "neurobench"
+            "neurobench",
+            "ostrau-2022-neuromorphic-benchmarking"
           ]
         },
         {
@@ -10428,7 +10436,8 @@
           "sourceIds": [
             "intel-loihi2",
             "spinnaker2",
-            "neurobench"
+            "neurobench",
+            "ostrau-2022-neuromorphic-benchmarking"
           ]
         },
         {
@@ -10442,7 +10451,8 @@
           "sourceIds": [
             "intel-loihi2",
             "spinnaker2",
-            "neurobench"
+            "neurobench",
+            "ostrau-2022-neuromorphic-benchmarking"
           ]
         },
         {
@@ -10481,7 +10491,8 @@
           "sourceIds": [
             "intel-loihi2",
             "spinnaker2",
-            "neurobench"
+            "neurobench",
+            "ostrau-2022-neuromorphic-benchmarking"
           ]
         },
         {
@@ -10490,12 +10501,14 @@
           "items": [
             "This is a vendor technical brief about a research platform. Performance and efficiency results remain workload-, configuration-, measurement-boundary-, and comparison-dependent and do not establish equivalence to biological intelligence. (boundary declared by Taking Neuromorphic Computing to the Next Level with Loihi 2)",
             "Architecture documentation establishes available mechanisms, not universal speed, energy, learning, biological plausibility, or production readiness. Claims require a named board, software version, workload, and system boundary. (boundary declared by SpiNNaker2 Developer Portal and Hardware Documentation)",
-            "A benchmark ranks submitted systems on declared tasks and metrics. It does not prove general intelligence, biological equivalence, safety, usefulness outside the benchmark, or superiority under unreported host and data costs. (boundary declared by NeuroBench: Advancing Neuromorphic Computing Through Collaborative, Fair and Representative Benchmarking)"
+            "A benchmark ranks submitted systems on declared tasks and metrics. It does not prove general intelligence, biological equivalence, safety, usefulness outside the benchmark, or superiority under unreported host and data costs. (boundary declared by NeuroBench: Advancing Neuromorphic Computing Through Collaborative, Fair and Representative Benchmarking)",
+            "A cross-platform benchmark study. It validates no vendor efficiency claim, declares no platform universally superior, and sets no absolute efficiency threshold, since its results depend on workload and configuration. It cannot support a general claim that neuromorphic hardware is more efficient than conventional hardware. (boundary declared by Benchmarking Neuromorphic Hardware and Its Energy Expenditure)"
           ],
           "sourceIds": [
             "intel-loihi2",
             "spinnaker2",
-            "neurobench"
+            "neurobench",
+            "ostrau-2022-neuromorphic-benchmarking"
           ]
         },
         {
@@ -10514,12 +10527,13 @@
           "sourceIds": [
             "intel-loihi2",
             "spinnaker2",
-            "neurobench"
+            "neurobench",
+            "ostrau-2022-neuromorphic-benchmarking"
           ]
         }
       ],
       "sectionCount": 8,
-      "upliftDigest": "sha256:50009a4824554b37ece54b28010e609f845d6067661adcbd6b7828d8146aca76"
+      "upliftDigest": "sha256:8eafb75f80dc583560cd3c038229ac61050604bff166e3db919ea7d0bc378174"
     },
     {
       "route": "/knowledge/neuromorphic-biocomputing/physical-reservoir-computing",
@@ -11641,12 +11655,12 @@
           "source-boundary"
         ],
         "dimensionCount": 8,
-        "sourceCount": 3,
-        "sourcesWithBoundary": 3,
+        "sourceCount": 4,
+        "sourcesWithBoundary": 4,
         "referenceOnlySources": 0,
-        "declaredLocators": 3,
-        "contentInspectedLocators": 0,
-        "explanatorySources": 0,
+        "declaredLocators": 4,
+        "contentInspectedLocators": 1,
+        "explanatorySources": 1,
         "bridgeCount": 1,
         "relatedRouteCount": 3,
         "renderedSections": 6
@@ -11667,12 +11681,12 @@
           "typed-bridges"
         ],
         "dimensionCount": 10,
-        "sourceCount": 3,
-        "sourcesWithBoundary": 3,
+        "sourceCount": 4,
+        "sourcesWithBoundary": 4,
         "referenceOnlySources": 0,
-        "declaredLocators": 3,
-        "contentInspectedLocators": 0,
-        "explanatorySources": 0,
+        "declaredLocators": 4,
+        "contentInspectedLocators": 1,
+        "explanatorySources": 1,
         "bridgeCount": 1,
         "relatedRouteCount": 3,
         "renderedSections": 9
@@ -11687,7 +11701,8 @@
           "sourceIds": [
             "neurobench",
             "intel-loihi2",
-            "adleman-dna"
+            "adleman-dna",
+            "ostrau-2022-neuromorphic-benchmarking"
           ]
         },
         {
@@ -11701,7 +11716,8 @@
           "sourceIds": [
             "neurobench",
             "intel-loihi2",
-            "adleman-dna"
+            "adleman-dna",
+            "ostrau-2022-neuromorphic-benchmarking"
           ]
         },
         {
@@ -11715,7 +11731,8 @@
           "sourceIds": [
             "neurobench",
             "intel-loihi2",
-            "adleman-dna"
+            "adleman-dna",
+            "ostrau-2022-neuromorphic-benchmarking"
           ]
         },
         {
@@ -11767,7 +11784,8 @@
           "sourceIds": [
             "neurobench",
             "intel-loihi2",
-            "adleman-dna"
+            "adleman-dna",
+            "ostrau-2022-neuromorphic-benchmarking"
           ]
         },
         {
@@ -11776,12 +11794,14 @@
           "items": [
             "A benchmark ranks submitted systems on declared tasks and metrics. It does not prove general intelligence, biological equivalence, safety, usefulness outside the benchmark, or superiority under unreported host and data costs. (boundary declared by NeuroBench: Advancing Neuromorphic Computing Through Collaborative, Fair and Representative Benchmarking)",
             "This is a vendor technical brief about a research platform. Performance and efficiency results remain workload-, configuration-, measurement-boundary-, and comparison-dependent and do not establish equivalence to biological intelligence. (boundary declared by Taking Neuromorphic Computing to the Next Level with Loihi 2)",
-            "The experiment demonstrates a bounded molecular computation. It does not establish practical general-purpose DNA computing, favorable end-to-end energy or latency, autonomous operation, or scalability beyond the reported instance. (boundary declared by Molecular computation of solutions to combinatorial problems)"
+            "The experiment demonstrates a bounded molecular computation. It does not establish practical general-purpose DNA computing, favorable end-to-end energy or latency, autonomous operation, or scalability beyond the reported instance. (boundary declared by Molecular computation of solutions to combinatorial problems)",
+            "A cross-platform benchmark study. It validates no vendor efficiency claim, declares no platform universally superior, and sets no absolute efficiency threshold, since its results depend on workload and configuration. It cannot support a general claim that neuromorphic hardware is more efficient than conventional hardware. (boundary declared by Benchmarking Neuromorphic Hardware and Its Energy Expenditure)"
           ],
           "sourceIds": [
             "neurobench",
             "intel-loihi2",
-            "adleman-dna"
+            "adleman-dna",
+            "ostrau-2022-neuromorphic-benchmarking"
           ]
         },
         {
@@ -11800,12 +11820,13 @@
           "sourceIds": [
             "neurobench",
             "intel-loihi2",
-            "adleman-dna"
+            "adleman-dna",
+            "ostrau-2022-neuromorphic-benchmarking"
           ]
         }
       ],
       "sectionCount": 9,
-      "upliftDigest": "sha256:e53f6654ba993b0c58045b430b37be11cd817b62189c02e035aab2e002716d51"
+      "upliftDigest": "sha256:b284186792c47cf65ff05e1f526908a95884fb4ea5c410f24e65b38e828cc2e2"
     },
     {
       "route": "/knowledge/neuromorphic-biocomputing/reproducibility-variability-and-controls",
@@ -13142,35 +13163,127 @@
       "route": "/knowledge/equipment/semiconductor-ion-implantation-system",
       "family": "semiconductor-manufacturing",
       "slug": "semiconductor-ion-implantation-system",
-      "eligible": false,
-      "refusals": [
-        "below-dimension-floor",
-        "no-cited-source",
-        "no-negative-space"
-      ],
+      "eligible": true,
+      "refusals": [],
       "before": {
         "route": "/knowledge/equipment/semiconductor-ion-implantation-system",
         "family": "semiconductor-manufacturing",
         "dimensionsPresent": [
+          "claim-level-citation",
           "direct-answer",
+          "exact-locator",
           "limitations",
-          "mechanism-or-method"
+          "mechanism-or-method",
+          "not-established",
+          "source-boundary"
         ],
-        "dimensionCount": 3,
-        "sourceCount": 2,
-        "sourcesWithBoundary": 0,
+        "dimensionCount": 7,
+        "sourceCount": 3,
+        "sourcesWithBoundary": 1,
         "referenceOnlySources": 2,
-        "declaredLocators": 0,
-        "contentInspectedLocators": 0,
-        "explanatorySources": 0,
+        "declaredLocators": 1,
+        "contentInspectedLocators": 1,
+        "explanatorySources": 1,
         "bridgeCount": 0,
         "relatedRouteCount": 0,
         "renderedSections": 6
       },
-      "after": null,
-      "sections": [],
-      "sectionCount": 0,
-      "upliftDigest": "sha256:8ead4a2a7fbbdf5b256a01502711c165319a5a5e0040f7f2f5c7327e0f8f899f"
+      "after": {
+        "route": "/knowledge/equipment/semiconductor-ion-implantation-system",
+        "family": "semiconductor-manufacturing",
+        "dimensionsPresent": [
+          "claim-level-citation",
+          "direct-answer",
+          "exact-locator",
+          "limitations",
+          "mechanism-or-method",
+          "not-established",
+          "source-boundary"
+        ],
+        "dimensionCount": 7,
+        "sourceCount": 3,
+        "sourcesWithBoundary": 1,
+        "referenceOnlySources": 2,
+        "declaredLocators": 1,
+        "contentInspectedLocators": 1,
+        "explanatorySources": 1,
+        "bridgeCount": 0,
+        "relatedRouteCount": 0,
+        "renderedSections": 5
+      },
+      "sections": [
+        {
+          "dimension": "direct-answer",
+          "heading": "Direct answer",
+          "items": [
+            "An ion implanter ionizes a source species, selects and accelerates the desired ions, shapes and scans the beam, and controls wafer angle, temperature, charge, dose, and energy to create a repeatable implanted depth and lateral distribution."
+          ],
+          "sourceIds": [
+            "tabata-2021-uvla-spr-activation"
+          ]
+        },
+        {
+          "dimension": "mechanism-or-method",
+          "heading": "Mechanism and method",
+          "items": [
+            "Generate and analyze ion species",
+            "Accelerate to target energy",
+            "Shape and scan beam",
+            "Control wafer angle and temperature",
+            "Integrate dose and unload"
+          ],
+          "sourceIds": [
+            "tabata-2021-uvla-spr-activation"
+          ]
+        },
+        {
+          "dimension": "mechanism-or-method",
+          "heading": "What is measured",
+          "items": [
+            "Ion species",
+            "Dose",
+            "Energy",
+            "Beam current",
+            "Tilt and twist",
+            "Wafer temperature",
+            "Beam-current integration",
+            "Sheet resistance after activation",
+            "Depth profiling",
+            "Dose uniformity mapping",
+            "Particle inspection"
+          ],
+          "sourceIds": [
+            "tabata-2021-uvla-spr-activation"
+          ]
+        },
+        {
+          "dimension": "limitations",
+          "heading": "Limitations",
+          "items": [
+            "Dose error",
+            "Energy contamination",
+            "Channeling",
+            "Charging damage",
+            "Particle addition",
+            "Cross-species contamination"
+          ],
+          "sourceIds": [
+            "tabata-2021-uvla-spr-activation"
+          ]
+        },
+        {
+          "dimension": "not-established",
+          "heading": "Boundaries declared by the cited sources",
+          "items": [
+            "A single material system: arsenic-implanted silicon-on-insulator annealed by UV laser. It establishes no process window for furnace or rapid thermal annealing, no production throughput, no yield figure, and nothing about implanters as products. It is an accepted manuscript rather than the version of record. (boundary declared by Solid Phase Recrystallization and Dopant Activation in Arsenic Ion-Implanted Silicon-On-Insulator by UV Laser Annealing)"
+          ],
+          "sourceIds": [
+            "tabata-2021-uvla-spr-activation"
+          ]
+        }
+      ],
+      "sectionCount": 5,
+      "upliftDigest": "sha256:13a1c52e02dfcced3a974c37905b87373f19fde95af0346957171b5bfeb260c0"
     },
     {
       "route": "/knowledge/equipment/diffusion-furnace-and-rapid-thermal-processor",
@@ -13336,69 +13449,253 @@
       "route": "/knowledge/equipment/optical-patterned-wafer-inspection-system",
       "family": "semiconductor-manufacturing",
       "slug": "optical-patterned-wafer-inspection-system",
-      "eligible": false,
-      "refusals": [
-        "below-dimension-floor",
-        "no-cited-source",
-        "no-negative-space"
-      ],
+      "eligible": true,
+      "refusals": [],
       "before": {
         "route": "/knowledge/equipment/optical-patterned-wafer-inspection-system",
         "family": "semiconductor-manufacturing",
         "dimensionsPresent": [
+          "claim-level-citation",
           "direct-answer",
+          "exact-locator",
           "limitations",
-          "mechanism-or-method"
+          "mechanism-or-method",
+          "not-established",
+          "source-boundary"
         ],
-        "dimensionCount": 3,
-        "sourceCount": 2,
-        "sourcesWithBoundary": 0,
+        "dimensionCount": 7,
+        "sourceCount": 3,
+        "sourcesWithBoundary": 1,
         "referenceOnlySources": 2,
-        "declaredLocators": 0,
-        "contentInspectedLocators": 0,
-        "explanatorySources": 0,
+        "declaredLocators": 1,
+        "contentInspectedLocators": 1,
+        "explanatorySources": 1,
         "bridgeCount": 0,
         "relatedRouteCount": 0,
         "renderedSections": 6
       },
-      "after": null,
-      "sections": [],
-      "sectionCount": 0,
-      "upliftDigest": "sha256:144dada56da33e91f628983f683940f5b510d676240f8a4142a2c9fce2e18d29"
+      "after": {
+        "route": "/knowledge/equipment/optical-patterned-wafer-inspection-system",
+        "family": "semiconductor-manufacturing",
+        "dimensionsPresent": [
+          "claim-level-citation",
+          "direct-answer",
+          "exact-locator",
+          "limitations",
+          "mechanism-or-method",
+          "not-established",
+          "source-boundary"
+        ],
+        "dimensionCount": 7,
+        "sourceCount": 3,
+        "sourcesWithBoundary": 1,
+        "referenceOnlySources": 2,
+        "declaredLocators": 1,
+        "contentInspectedLocators": 1,
+        "explanatorySources": 1,
+        "bridgeCount": 0,
+        "relatedRouteCount": 0,
+        "renderedSections": 5
+      },
+      "sections": [
+        {
+          "dimension": "direct-answer",
+          "heading": "Direct answer",
+          "items": [
+            "An optical patterned-wafer inspector illuminates and scans production wafers, compares detected signals across dies or to a reference, and applies detection and classification algorithms to identify candidate defects at useful production throughput."
+          ],
+          "sourceIds": [
+            "dey-2022-sem-defect-detection"
+          ]
+        },
+        {
+          "dimension": "mechanism-or-method",
+          "heading": "Mechanism and method",
+          "items": [
+            "Load and align wafer",
+            "Select optical and detection mode",
+            "Scan production area",
+            "Detect and classify candidates",
+            "Sample review and disposition"
+          ],
+          "sourceIds": [
+            "dey-2022-sem-defect-detection"
+          ]
+        },
+        {
+          "dimension": "mechanism-or-method",
+          "heading": "What is measured",
+          "items": [
+            "Sensitivity",
+            "Throughput",
+            "Nuisance rate",
+            "Illumination mode",
+            "Sampling plan",
+            "Recipe stability",
+            "Defect-of-interest capture",
+            "Capture-rate study",
+            "Nuisance-rate study",
+            "Tool matching",
+            "Review sampling"
+          ],
+          "sourceIds": [
+            "dey-2022-sem-defect-detection"
+          ]
+        },
+        {
+          "dimension": "limitations",
+          "heading": "Limitations",
+          "items": [
+            "Missed defect",
+            "Nuisance overload",
+            "Reference mismatch",
+            "Focus drift",
+            "Wafer-edge artifact",
+            "Classification bias"
+          ],
+          "sourceIds": [
+            "dey-2022-sem-defect-detection"
+          ]
+        },
+        {
+          "dimension": "not-established",
+          "heading": "Boundaries declared by the cited sources",
+          "items": [
+            "A preprint evaluating research models on imec datasets. It reports no tool throughput, no production yield impact, and nothing about how any commercial inspection system performs. Its abstract carries no numeric accuracy figures, so no quantitative performance claim may rest on it. (boundary declared by Deep Learning-Based Defect Classification and Detection in SEM Images)"
+          ],
+          "sourceIds": [
+            "dey-2022-sem-defect-detection"
+          ]
+        }
+      ],
+      "sectionCount": 5,
+      "upliftDigest": "sha256:69b0f058a0a6b4d813708c543c14a788b52fe8cc3659f77d0b86cceb482ba6dd"
     },
     {
       "route": "/knowledge/equipment/electron-beam-defect-review-and-inspection-system",
       "family": "semiconductor-manufacturing",
       "slug": "electron-beam-defect-review-and-inspection-system",
-      "eligible": false,
-      "refusals": [
-        "below-dimension-floor",
-        "no-cited-source",
-        "no-negative-space"
-      ],
+      "eligible": true,
+      "refusals": [],
       "before": {
         "route": "/knowledge/equipment/electron-beam-defect-review-and-inspection-system",
         "family": "semiconductor-manufacturing",
         "dimensionsPresent": [
+          "claim-level-citation",
           "direct-answer",
+          "exact-locator",
           "limitations",
-          "mechanism-or-method"
+          "mechanism-or-method",
+          "not-established",
+          "source-boundary"
         ],
-        "dimensionCount": 3,
-        "sourceCount": 2,
-        "sourcesWithBoundary": 0,
+        "dimensionCount": 7,
+        "sourceCount": 3,
+        "sourcesWithBoundary": 1,
         "referenceOnlySources": 2,
-        "declaredLocators": 0,
-        "contentInspectedLocators": 0,
-        "explanatorySources": 0,
+        "declaredLocators": 1,
+        "contentInspectedLocators": 1,
+        "explanatorySources": 1,
         "bridgeCount": 0,
         "relatedRouteCount": 0,
         "renderedSections": 6
       },
-      "after": null,
-      "sections": [],
-      "sectionCount": 0,
-      "upliftDigest": "sha256:0457b040c737c5351c7456d8e437ccf7b037821ddd2b74d4176b9272b0d82a50"
+      "after": {
+        "route": "/knowledge/equipment/electron-beam-defect-review-and-inspection-system",
+        "family": "semiconductor-manufacturing",
+        "dimensionsPresent": [
+          "claim-level-citation",
+          "direct-answer",
+          "exact-locator",
+          "limitations",
+          "mechanism-or-method",
+          "not-established",
+          "source-boundary"
+        ],
+        "dimensionCount": 7,
+        "sourceCount": 3,
+        "sourcesWithBoundary": 1,
+        "referenceOnlySources": 2,
+        "declaredLocators": 1,
+        "contentInspectedLocators": 1,
+        "explanatorySources": 1,
+        "bridgeCount": 0,
+        "relatedRouteCount": 0,
+        "renderedSections": 5
+      },
+      "sections": [
+        {
+          "dimension": "direct-answer",
+          "heading": "Direct answer",
+          "items": [
+            "An electron-beam defect review or inspection system scans selected wafer locations with a focused electron beam, detects emitted signals, and produces high-resolution images and classifications that connect inspection candidates to physical defect evidence."
+          ],
+          "sourceIds": [
+            "dey-2022-sem-defect-detection"
+          ]
+        },
+        {
+          "dimension": "mechanism-or-method",
+          "heading": "Mechanism and method",
+          "items": [
+            "Load and align wafer",
+            "Navigate to candidate coordinates",
+            "Optimize beam and imaging condition",
+            "Acquire images or scan area",
+            "Classify and correlate results"
+          ],
+          "sourceIds": [
+            "dey-2022-sem-defect-detection"
+          ]
+        },
+        {
+          "dimension": "mechanism-or-method",
+          "heading": "What is measured",
+          "items": [
+            "Landing energy",
+            "Beam current",
+            "Resolution",
+            "Charging control",
+            "Coordinate accuracy",
+            "Review throughput",
+            "Image-resolution check",
+            "Coordinate correlation",
+            "Classification repeatability",
+            "Beam-damage study",
+            "Optical-to-e-beam capture analysis"
+          ],
+          "sourceIds": [
+            "dey-2022-sem-defect-detection"
+          ]
+        },
+        {
+          "dimension": "limitations",
+          "heading": "Limitations",
+          "items": [
+            "Beam-induced change",
+            "Charging artifact",
+            "Coordinate miss",
+            "Low-contrast image",
+            "Contamination deposition",
+            "Sampling bias"
+          ],
+          "sourceIds": [
+            "dey-2022-sem-defect-detection"
+          ]
+        },
+        {
+          "dimension": "not-established",
+          "heading": "Boundaries declared by the cited sources",
+          "items": [
+            "A preprint evaluating research models on imec datasets. It reports no tool throughput, no production yield impact, and nothing about how any commercial inspection system performs. Its abstract carries no numeric accuracy figures, so no quantitative performance claim may rest on it. (boundary declared by Deep Learning-Based Defect Classification and Detection in SEM Images)"
+          ],
+          "sourceIds": [
+            "dey-2022-sem-defect-detection"
+          ]
+        }
+      ],
+      "sectionCount": 5,
+      "upliftDigest": "sha256:88801f85bced5d9c5467b38cc13e5c9e57ea624b3d0f765aa4dcf12ace7d431b"
     },
     {
       "route": "/knowledge/equipment/overlay-critical-dimension-and-film-metrology-system",
@@ -14599,35 +14896,134 @@
       "route": "/knowledge/processes/ion-implantation-and-annealing",
       "family": "semiconductor-manufacturing",
       "slug": "ion-implantation-and-annealing",
-      "eligible": false,
-      "refusals": [
-        "below-dimension-floor",
-        "no-cited-source",
-        "no-negative-space"
-      ],
+      "eligible": true,
+      "refusals": [],
       "before": {
         "route": "/knowledge/processes/ion-implantation-and-annealing",
         "family": "semiconductor-manufacturing",
         "dimensionsPresent": [
+          "claim-level-citation",
           "direct-answer",
+          "exact-locator",
           "limitations",
-          "mechanism-or-method"
+          "mechanism-or-method",
+          "not-established",
+          "source-boundary"
         ],
-        "dimensionCount": 3,
-        "sourceCount": 1,
-        "sourcesWithBoundary": 0,
+        "dimensionCount": 7,
+        "sourceCount": 2,
+        "sourcesWithBoundary": 1,
         "referenceOnlySources": 1,
-        "declaredLocators": 0,
-        "contentInspectedLocators": 0,
-        "explanatorySources": 0,
+        "declaredLocators": 1,
+        "contentInspectedLocators": 1,
+        "explanatorySources": 1,
         "bridgeCount": 0,
         "relatedRouteCount": 0,
         "renderedSections": 6
       },
-      "after": null,
-      "sections": [],
-      "sectionCount": 0,
-      "upliftDigest": "sha256:085a19544d58acb6f081f06975d1636dee7b66694172918f70dedd0ee837e892"
+      "after": {
+        "route": "/knowledge/processes/ion-implantation-and-annealing",
+        "family": "semiconductor-manufacturing",
+        "dimensionsPresent": [
+          "claim-level-citation",
+          "direct-answer",
+          "exact-locator",
+          "limitations",
+          "mechanism-or-method",
+          "not-established",
+          "source-boundary"
+        ],
+        "dimensionCount": 7,
+        "sourceCount": 2,
+        "sourcesWithBoundary": 1,
+        "referenceOnlySources": 1,
+        "declaredLocators": 1,
+        "contentInspectedLocators": 1,
+        "explanatorySources": 1,
+        "bridgeCount": 0,
+        "relatedRouteCount": 0,
+        "renderedSections": 5
+      },
+      "sections": [
+        {
+          "dimension": "direct-answer",
+          "heading": "Direct answer",
+          "items": [
+            "Ion implantation introduces selected dopant species into a semiconductor, while subsequent thermal processing repairs implantation damage and activates dopants within the required junction geometry."
+          ],
+          "sourceIds": [
+            "tabata-2021-uvla-spr-activation"
+          ]
+        },
+        {
+          "dimension": "mechanism-or-method",
+          "heading": "Mechanism and method",
+          "items": [
+            "Mask regions that must not be implanted",
+            "Generate and select an ion beam",
+            "Control energy, dose, angle, and wafer motion",
+            "Implant the target region",
+            "Clean if required",
+            "Anneal to repair damage and activate dopants",
+            "Measure sheet resistance and junction behavior"
+          ],
+          "sourceIds": [
+            "tabata-2021-uvla-spr-activation"
+          ]
+        },
+        {
+          "dimension": "mechanism-or-method",
+          "heading": "What is measured",
+          "items": [
+            "Species",
+            "Dose",
+            "Energy",
+            "Beam angle",
+            "Uniformity",
+            "Channeling",
+            "Lattice damage",
+            "Anneal temperature and time",
+            "Dopant diffusion and activation",
+            "Beam-current and dose monitoring",
+            "Sheet resistance",
+            "Secondary-ion mass spectrometry",
+            "Junction profiling",
+            "Electrical test structures"
+          ],
+          "sourceIds": [
+            "tabata-2021-uvla-spr-activation"
+          ]
+        },
+        {
+          "dimension": "limitations",
+          "heading": "Limitations",
+          "items": [
+            "Incorrect dose or depth",
+            "Channeling",
+            "Mask leakage",
+            "Crystal damage",
+            "Incomplete activation",
+            "Excess diffusion",
+            "Across-wafer nonuniformity",
+            "Contamination"
+          ],
+          "sourceIds": [
+            "tabata-2021-uvla-spr-activation"
+          ]
+        },
+        {
+          "dimension": "not-established",
+          "heading": "Boundaries declared by the cited sources",
+          "items": [
+            "A single material system: arsenic-implanted silicon-on-insulator annealed by UV laser. It establishes no process window for furnace or rapid thermal annealing, no production throughput, no yield figure, and nothing about implanters as products. It is an accepted manuscript rather than the version of record. (boundary declared by Solid Phase Recrystallization and Dopant Activation in Arsenic Ion-Implanted Silicon-On-Insulator by UV Laser Annealing)"
+          ],
+          "sourceIds": [
+            "tabata-2021-uvla-spr-activation"
+          ]
+        }
+      ],
+      "sectionCount": 5,
+      "upliftDigest": "sha256:a0e4f64c7a061f109eb07af5dc81db6edefadd244dd8d907cd5e7356010ca013"
     },
     {
       "route": "/knowledge/processes/copper-interconnects-and-cmp",
@@ -15387,35 +15783,129 @@
       "route": "/knowledge/concepts/yield-learning-and-statistical-process-control",
       "family": "semiconductor-manufacturing",
       "slug": "yield-learning-and-statistical-process-control",
-      "eligible": false,
-      "refusals": [
-        "below-dimension-floor",
-        "no-cited-source",
-        "no-negative-space"
-      ],
+      "eligible": true,
+      "refusals": [],
       "before": {
         "route": "/knowledge/concepts/yield-learning-and-statistical-process-control",
         "family": "semiconductor-manufacturing",
         "dimensionsPresent": [
+          "claim-level-citation",
           "direct-answer",
+          "exact-locator",
           "limitations",
-          "mechanism-or-method"
+          "mechanism-or-method",
+          "not-established",
+          "source-boundary"
         ],
-        "dimensionCount": 3,
-        "sourceCount": 3,
-        "sourcesWithBoundary": 0,
+        "dimensionCount": 7,
+        "sourceCount": 4,
+        "sourcesWithBoundary": 1,
         "referenceOnlySources": 3,
-        "declaredLocators": 0,
-        "contentInspectedLocators": 0,
-        "explanatorySources": 0,
+        "declaredLocators": 1,
+        "contentInspectedLocators": 1,
+        "explanatorySources": 1,
         "bridgeCount": 0,
         "relatedRouteCount": 0,
         "renderedSections": 6
       },
-      "after": null,
-      "sections": [],
-      "sectionCount": 0,
-      "upliftDigest": "sha256:68e82939315689550d8572a7d9238d5ba53d351de45ea1ca91c391823411ba8f"
+      "after": {
+        "route": "/knowledge/concepts/yield-learning-and-statistical-process-control",
+        "family": "semiconductor-manufacturing",
+        "dimensionsPresent": [
+          "claim-level-citation",
+          "direct-answer",
+          "exact-locator",
+          "limitations",
+          "mechanism-or-method",
+          "not-established",
+          "source-boundary"
+        ],
+        "dimensionCount": 7,
+        "sourceCount": 4,
+        "sourcesWithBoundary": 1,
+        "referenceOnlySources": 3,
+        "declaredLocators": 1,
+        "contentInspectedLocators": 1,
+        "explanatorySources": 1,
+        "bridgeCount": 0,
+        "relatedRouteCount": 0,
+        "renderedSections": 5
+      },
+      "sections": [
+        {
+          "dimension": "direct-answer",
+          "heading": "Direct answer",
+          "items": [
+            "Yield learning links physical and electrical losses to probable causes, while statistical process control detects meaningful change in production variables before it becomes widespread output loss."
+          ],
+          "sourceIds": [
+            "dey-2022-sem-defect-detection"
+          ]
+        },
+        {
+          "dimension": "mechanism-or-method",
+          "heading": "Mechanism and method",
+          "items": [
+            "Establish stable baselines and control limits",
+            "Detect excursions or yield signatures",
+            "Trace affected material and equipment",
+            "Correlate physical and electrical evidence",
+            "Test root-cause hypotheses",
+            "Implement and verify corrective action"
+          ],
+          "sourceIds": [
+            "dey-2022-sem-defect-detection"
+          ]
+        },
+        {
+          "dimension": "mechanism-or-method",
+          "heading": "What is measured",
+          "items": [
+            "Data traceability",
+            "Measurement-system capability",
+            "Control-limit design",
+            "Sampling latency",
+            "False-alarm rate",
+            "Experiment discipline",
+            "Feedback speed",
+            "Control charts",
+            "Pareto and spatial-pattern analysis",
+            "Defect-to-test correlation",
+            "Equipment health monitoring",
+            "Designed experiments"
+          ],
+          "sourceIds": [
+            "dey-2022-sem-defect-detection"
+          ]
+        },
+        {
+          "dimension": "limitations",
+          "heading": "Limitations",
+          "items": [
+            "Common-cause variation treated as an excursion",
+            "Real excursion hidden by sampling",
+            "Confounded correlation",
+            "Poor genealogy",
+            "Unverified corrective action",
+            "Local optimization that shifts loss downstream"
+          ],
+          "sourceIds": [
+            "dey-2022-sem-defect-detection"
+          ]
+        },
+        {
+          "dimension": "not-established",
+          "heading": "Boundaries declared by the cited sources",
+          "items": [
+            "A preprint evaluating research models on imec datasets. It reports no tool throughput, no production yield impact, and nothing about how any commercial inspection system performs. Its abstract carries no numeric accuracy figures, so no quantitative performance claim may rest on it. (boundary declared by Deep Learning-Based Defect Classification and Detection in SEM Images)"
+          ],
+          "sourceIds": [
+            "dey-2022-sem-defect-detection"
+          ]
+        }
+      ],
+      "sectionCount": 5,
+      "upliftDigest": "sha256:9123e104f63736b61911826107ff385ba387a73a6aa4c35c03e057a42dce66cf"
     },
     {
       "route": "/knowledge/concepts/cleanrooms-fab-utilities-and-contamination-control",

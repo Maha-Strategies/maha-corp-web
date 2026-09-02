@@ -1,0 +1,117 @@
+{
+  "schemaVersion": "maha-evidence-batch-2-inspections/1.0",
+  "batch": "evidence-recovery-2",
+  "conductedOn": "2026-09-02",
+  "appendOnly": true,
+  "writtenToProduction": false,
+  "cohortDigest": "sha256:f470f91a304f1aef7cfc19491d0367facb53956070dcd5eab78785473b4186f8",
+  "frozenBeforeSearching": true,
+  "inspected": [
+    {
+      "sourceId": "ostrau-2022-neuromorphic-benchmarking",
+      "tier": "peer-reviewed-open-access",
+      "title": "Benchmarking Neuromorphic Hardware and Its Energy Expenditure",
+      "authors": "Christoph Ostrau, Christian Klarhorst, Michael Thies, Ulrich Rückert",
+      "venue": "Frontiers in Neuroscience, 2022",
+      "identifier": "10.3389/fnins.2022.873935",
+      "retrievedFrom": "https://www.frontiersin.org/journals/neuroscience/articles/10.3389/fnins.2022.873935/full",
+      "retrievedOn": "2026-09-02",
+      "depth": "section-or-full-text",
+      "identityVerified": true,
+      "identityBasis": "Article page states title, four authors, journal, 2022 and the DOI, all matching the citation.",
+      "versionRelationship": "Open-access version of record.",
+      "rightsBasis": "Frontiers open access, citation-with-paraphrase",
+      "exactLocators": ["Methods, Section 2.1", "Section 3.4, energy model and results"],
+      "observedContent": "Section 3.4 reports that for Spikey systems predicted energy values sit within ten percent of measured values, and that neuromorphic hardware still lags human-brain efficiency by four orders of magnitude even under optimistic scaling assumptions. Methods 2.1 records that simulators differ in numerical approach, with GeNN using a closed-form representation assuming fixed input current while NEST integrates more precisely. The paper also reports that conventional accelerators such as the Coral Edge TPU and Intel NCS 2 remain competitive or better for DNN inference.",
+      "establishes": "That neuromorphic energy expenditure can be modelled and measured across platforms with a published benchmark suite, that the modelled and measured figures agree within about ten percent on one mixed-signal system, and that conventional accelerators remain competitive for some workloads.",
+      "boundary": "A cross-platform benchmark study. It validates no vendor efficiency claim, declares no platform universally superior, and sets no absolute efficiency threshold, since its results depend on workload and configuration. It cannot support a general claim that neuromorphic hardware is more efficient than conventional hardware.",
+      "supportsRoutes": [
+        "/knowledge/neuromorphic-biocomputing/benchmarking-energy-and-task-equivalence",
+        "/knowledge/neuromorphic-biocomputing/event-driven-computation",
+        "/knowledge/neuromorphic-biocomputing/hardware-software-co-design"
+      ],
+      "unsupportedPropositionBefore": "That neuromorphic systems are energy-efficient relative to conventional hardware, and that task equivalence between them can be benchmarked, both stated without any inspected measurement."
+    },
+    {
+      "sourceId": "tabata-2021-uvla-spr-activation",
+      "tier": "accepted-manuscript",
+      "title": "Solid Phase Recrystallization and Dopant Activation in Arsenic Ion-Implanted Silicon-On-Insulator by UV Laser Annealing",
+      "authors": "Toshiyuki Tabata, Fabien Rozé, Pablo Acosta Alba, Sébastien Halty, Pierre-Edouard Raynal, Imen Karmous, Sébastien Kerdilès, Fulvio Mazzamuto",
+      "venue": "Accepted paper, 20th International Workshop on Junction Technology (IWJT 2021), © 2021 IEEE",
+      "identifier": "arXiv:2111.07577",
+      "retrievedFrom": "https://arxiv.org/pdf/2111.07577",
+      "retrievedOn": "2026-09-02",
+      "depth": "section-or-full-text",
+      "retrievalNote": "Automated text extraction returned binary, so the PDF was read page by page.",
+      "identityVerified": true,
+      "identityBasis": "Title page states the title, eight authors, the IWJT2021 acceptance line and the IEEE copyright notice.",
+      "versionRelationship": "Accepted manuscript, not the IEEE version of record.",
+      "rightsBasis": "author accepted manuscript posted to arXiv, citation-with-paraphrase",
+      "exactLocators": ["1. Introduction", "2. Experimental", "3. Results and Discussion", "Figure 1 sheet resistance", "Figure 4 dark-field cross-sectional TEM"],
+      "observedContent": "The Introduction states that ion implantation introduces a high concentration of interstitials beneath the amorphized layer, that thermal processing transforms these into dislocation loops known as end-of-range defects, and that those interstitials can interact with substitutional dopants and deactivate them. It records solid phase recrystallization as normally performed at 500 to 600 degrees Celsius, against conventional furnace annealing or rapid thermal processing. The Experimental section records a 70 nm SOI layer on 145 nm buried oxide, arsenic implanted at room temperature at 19 keV to a total dose of 4e15 per square centimetre, producing 37 nm of amorphization confirmed by cross-sectional TEM. Results and Discussion reports sheet resistance falling monotonically to a plateau near 100 ohm per square as the amorphized film recrystallizes and arsenic activates, and Figure 4 shows the 37 nm amorphized layer fully recrystallized after annealing.",
+      "establishes": "The physical mechanism linking ion implantation damage to dopant deactivation through end-of-range defects, and one measured instance of recrystallization and activation, with stated implant energy, dose, amorphization depth and resulting sheet resistance.",
+      "boundary": "A single material system: arsenic-implanted silicon-on-insulator annealed by UV laser. It establishes no process window for furnace or rapid thermal annealing, no production throughput, no yield figure, and nothing about implanters as products. It is an accepted manuscript rather than the version of record.",
+      "supportsRoutes": [
+        "/knowledge/processes/ion-implantation-and-annealing",
+        "/knowledge/equipment/semiconductor-ion-implantation-system"
+      ],
+      "unsupportedPropositionBefore": "That ion implantation damages the lattice and that annealing repairs it to activate dopants, stated with no inspected source for either the damage mechanism or any measured activation."
+    },
+    {
+      "sourceId": "dey-2022-sem-defect-detection",
+      "tier": "lawful-preprint",
+      "title": "Deep Learning-Based Defect Classification and Detection in SEM Images",
+      "authors": "Bappaditya Dey, Dipam Goswami, Sandip Halder, Kasem Khalil, Philippe Leray, Magdy A. Bayoumi",
+      "venue": "arXiv:2206.13505, 20 June 2022; also SPIE Metrology, Inspection, and Process Control XXXVI, 2022",
+      "identifier": "arXiv:2206.13505",
+      "retrievedFrom": "https://arxiv.org/pdf/2206.13505",
+      "retrievedOn": "2026-09-02",
+      "depth": "section-or-full-text",
+      "retrievalNote": "The abstract page gave no section detail or numbers, so the full PDF was read; the abstract alone was treated as insufficient.",
+      "identityVerified": true,
+      "identityBasis": "arXiv record and PDF both state the title, six authors and the June 2022 date.",
+      "versionRelationship": "Preprint, also appearing in SPIE proceedings. Not peer reviewed in this form.",
+      "rightsBasis": "arXiv preprint, citation-with-paraphrase",
+      "exactLocators": ["Section 1 contributions", "Section 2 Related Work", "Section 3 Proposed Approach", "Figure 3 ensemble framework", "Figure 4 RetinaNet architecture"],
+      "observedContent": "Section 2 states that the four common defect-detection operations, thresholding, noise removal, edge detection and segmentation, do not survive the requirements of the semiconductor industry at advanced nodes, and that the capture efficiency of the manual technique is directly proportional to the nuisance rate. Section 1 records that unsupervised denoising was applied to reduce the effect of stochastic noise on structured pixels and remove false-positive defects, and that the proposed model replaces manual trial-and-error threshold selection with an automated confidence score. Section 3 records a framework combining a RetinaNet detector with a U-Net denoiser, trained and evaluated on imec post-litho and post-etch resist wafer datasets, over defect classes named as bridge, gap, line collapse, micro-bridge and micro-gap.",
+      "establishes": "Why rule-based defect inspection degrades at advanced nodes, the named defect classes used in SEM defect review, and that a denoiser plus detector framework was trained and evaluated on named datasets against those classes.",
+      "boundary": "A preprint evaluating research models on imec datasets. It reports no tool throughput, no production yield impact, and nothing about how any commercial inspection system performs. Its abstract carries no numeric accuracy figures, so no quantitative performance claim may rest on it.",
+      "supportsRoutes": [
+        "/knowledge/equipment/electron-beam-defect-review-and-inspection-system",
+        "/knowledge/equipment/optical-patterned-wafer-inspection-system",
+        "/knowledge/concepts/yield-learning-and-statistical-process-control"
+      ],
+      "unsupportedPropositionBefore": "That optical and electron-beam inspection detect and classify defects and that this feeds yield learning, stated with no inspected source for detection limits, defect classes or the nuisance problem."
+    }
+  ],
+  "notInspected": [
+    {
+      "sourceId": "dey-abstract-page",
+      "route": "https://arxiv.org/abs/2206.13505",
+      "outcome": "abstract-only",
+      "depth": "abstract-only",
+      "disposition": "Insufficient. The abstract page carried no section numbers and no accuracy figures, so it was not used; the full PDF was read instead.",
+      "note": "Recorded to show the abstract was rejected as evidence rather than accepted because it was convenient."
+    },
+    {
+      "sourceId": "cmp-preston-equation-preprint",
+      "route": "arXiv subject search for CMP removal-rate mechanism",
+      "outcome": "no-lawful-inspectable-source-found",
+      "depth": "not-inspected",
+      "disposition": "The search surfaced only patents and a quartz-glass slurry paper, neither subject-matched to copper CMP in interconnect formation. Nothing was cited.",
+      "requires": "an open-access or repository copy of a copper-CMP mechanism study"
+    }
+  ],
+  "summary": {
+    "cohortSize": 25,
+    "retrievalAttempts": 7,
+    "inspectedSectionOrFullText": 3,
+    "abstractOnlyRejected": 1,
+    "noSourceFound": 1,
+    "wrongDocumentRejected": 0,
+    "routesSupported": 8,
+    "vendorSourcesUsedForIndependentClaims": 0,
+    "activeBindingsChanged": 0
+  },
+  "boundary": "A private inspection record. No passage is reproduced beyond what states what a source establishes and where it stops."
+}

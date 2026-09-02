@@ -12,6 +12,7 @@ import { KNOWLEDGE_ARTICLES, KNOWLEDGE_SOURCES } from '../lib/knowledge-data.ts'
 import { KNOWLEDGE_SUPPLIERS } from '../lib/knowledge-process-profiles.ts'
 import attestationFile from '../content/legacy-uplift/inspection-attestations.json' with { type: 'json' }
 import batch1 from '../content/semiconductor-evidence/batch-1.json' with { type: 'json' }
+import batch2 from '../content/evidence-batch-2/inspections.json' with { type: 'json' }
 
 /**
  * Inventories the legacy corpus, baselines it, and compiles the uplift.
@@ -62,7 +63,7 @@ const withAttestation = (s: LegacySource): LegacySource => {
  */
 type Batch1 = { sourceId: string; title: string; retrievedFrom: string; retrievedOn: string; depth: string; exactLocators: string[]; observedContent: string; establishes: string; boundary: string; identityVerified: boolean; versionRelationship: string; rightsBasis: string; supportsRoutes: string[] }
 const batch1ByRoute = new Map<string, Batch1[]>()
-for (const entry of batch1.inspected as Batch1[]) {
+for (const entry of [...(batch1.inspected as Batch1[]), ...(batch2.inspected as unknown as Batch1[])]) {
   for (const route of entry.supportsRoutes) {
     batch1ByRoute.set(route, [...(batch1ByRoute.get(route) ?? []), entry])
   }
@@ -259,7 +260,7 @@ const withBatch1 = inputs.map((input) => {
     }))],
   }
 })
-const batch1Attestations = Object.fromEntries((batch1.inspected as Batch1[]).map((entry) => [entry.sourceId, {
+const batch1Attestations = Object.fromEntries([...(batch1.inspected as Batch1[]), ...(batch2.inspected as unknown as Batch1[])].map((entry) => [entry.sourceId, {
   sourceId: entry.sourceId, retrievedFrom: entry.retrievedFrom, retrievedOn: entry.retrievedOn,
   depth: entry.depth as never, exactLocator: entry.exactLocators.join('; '),
   observedContent: entry.observedContent, identityVerified: entry.identityVerified,
@@ -308,8 +309,41 @@ const depth = {
   locatorNote: 'A declared locator is a URL. A content-inspected locator requires an independent attestation recording the passage that was read. The first pass conflated them and reported declared locators as inspected.',
 }
 
+/**
+ * Four states, reported apart.
+ *
+ * Structural and source-supported are never summed into one quality headline,
+ * because a page that gained shape and a page that gained evidence are not the
+ * same achievement and the difference is the whole point of measuring.
+ */
+const sourceSupportedPages = eligible.filter((r) => (r.after?.explanatorySources ?? 0) > 0)
+const structuralPages = eligible.filter((r) => (r.after?.explanatorySources ?? 0) === 0)
+const pageStates = {
+  legacyUnchanged: results.length - eligible.length - blocked.length,
+  structurallyUplifted: structuralPages.length,
+  sourceSupportedUplift: sourceSupportedPages.length,
+  blocked: blocked.length,
+  total: results.length,
+  neverCombined: 'structurallyUplifted and sourceSupportedUplift are reported separately and must not be added into a single quality figure.',
+}
+
+const informationValue = {
+  inspectedClaimsPerPage: avg(eligible.map((r) => r.after!.explanatorySources)),
+  inspectedLocatorsPerPage: avg(eligible.map((r) => r.after!.contentInspectedLocators)),
+  declaredLocatorsPerPage: avg(eligible.map((r) => r.after!.declaredLocators)),
+  independentlySourcedExplanatorySections: sourceSupportedPages.length,
+  informationDimensionsPerPage: avg(eligible.map((r) => r.after!.dimensionCount)),
+  limitationsPerPage: avg(eligible.map((r) => r.sections.filter((s) => s.dimension === 'limitations').length)),
+  typedInternalLinksPerPage: avg(eligible.map((r) => r.after!.relatedRouteCount + r.after!.bridgeCount)),
+  supportedComparisons: eligible.reduce((n, r) => n + r.sections.filter((s) => s.dimension === 'bounded-comparison').length, 0),
+  reproducibleCalculations: eligible.reduce((n, r) => n + r.sections.filter((s) => s.dimension === 'deterministic-calculation').length, 0),
+  wordCountUsed: false,
+}
+
 const report = {
-  schemaVersion: 'maha-legacy-uplift-report/1.0',
+  schemaVersion: 'maha-legacy-uplift-report/2.0',
+  pageStates,
+  informationValue,
   upliftVersion: UPLIFT_VERSION,
   generatedAt: '2026-09-02',
   inventory: { pages: results.length, families: Object.keys(byFamily).length, byFamily },
