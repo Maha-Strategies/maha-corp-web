@@ -179,7 +179,8 @@ test('unsupported comparisons and calculations remain absent', () => {
 
 test('the four states are reported apart and the metric moved honestly', () => {
   const s = report.pageStates
-  assert.equal(s.structurallyUplifted + s.sourceSupportedUplift + s.blocked + s.legacyUnchanged, 167)
+  // Five states since Batch 5 introduced first-party documentation.
+  assert.equal(s.structurallyUplifted + s.firstPartyDocumented + s.independentlySourceSupported + s.blocked + s.legacyUnchanged, 167)
   assert.ok(s.sourceSupportedUplift > 32, `source-supported must exceed 32, got ${s.sourceSupportedUplift}`)
   // The secondary target is not met, and the report must not pretend otherwise.
   assert.ok(s.structurallyUplifted + s.sourceSupportedUplift < 150)

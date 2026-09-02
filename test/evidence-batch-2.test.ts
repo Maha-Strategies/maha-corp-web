@@ -147,9 +147,11 @@ test('the cohort was frozen before searching', () => {
 
 test('the four page states are reported apart and never summed', () => {
   const s = report.pageStates
-  assert.equal(s.structurallyUplifted + s.sourceSupportedUplift + s.blocked + s.legacyUnchanged, s.total)
+  // Five states since Batch 5 introduced first-party documentation.
+  assert.equal(s.structurallyUplifted + s.firstPartyDocumented + s.independentlySourceSupported + s.blocked + s.legacyUnchanged, s.total)
   assert.ok(s.sourceSupportedUplift > 24, `the primary metric must exceed 24, got ${s.sourceSupportedUplift}`)
-  assert.match(s.neverCombined, /must not be added into a single quality figure/)
+  assert.match(s.neverCombined, /reported separately/)
+  assert.match(s.neverCombined, /must never be added to independent support/)
   assert.equal(report.informationValue.wordCountUsed, false)
 })
 

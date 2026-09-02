@@ -1,0 +1,106 @@
+{
+  "schemaVersion": "maha-batch-5-technical-cohort/1.0",
+  "frozenAt": "2026-09-02",
+  "poolSize": 22,
+  "selected": 12,
+  "bySubject": {
+    "cmp": 3,
+    "packaging": 4,
+    "burn-in-and-test": 3,
+    "cvd-pvd": 2
+  },
+  "searchStrategy": {
+    "shifted": true,
+    "toward": [
+      "university dissertations and theses",
+      "author-hosted accepted manuscripts",
+      "institutional technical reports",
+      "NASA Technical Reports Server",
+      "DTIC and government archives",
+      "open textbooks and identifiable course notes",
+      "author or university hosted proceedings",
+      "Crossref-linked repository copies"
+    ],
+    "patentPolicy": "Patents may be recorded as background intellectual-property references only. They are never explanatory support."
+  },
+  "outcomeThisBatch": {
+    "sourcesInspected": 0,
+    "pagesUnlocked": 0,
+    "reason": "Batch 5 spent its retrieval effort on the thirteen supplier profiles, where a whole class of pages had no admissible evidence path at all. The technical cohort is frozen and carries no inspections yet; recording it as attempted-and-empty would misstate what happened."
+  },
+  "targets": [
+    {
+      "route": "/knowledge/equipment/chemical-mechanical-planarization-polisher",
+      "subject": "cmp",
+      "typedInternalLinks": 0,
+      "score": 20
+    },
+    {
+      "route": "/knowledge/equipment/wafer-backgrinder-and-polisher",
+      "subject": "cmp",
+      "typedInternalLinks": 0,
+      "score": 20
+    },
+    {
+      "route": "/knowledge/processes/copper-interconnects-and-cmp",
+      "subject": "cmp",
+      "typedInternalLinks": 0,
+      "score": 20
+    },
+    {
+      "route": "/knowledge/equipment/blade-and-laser-dicing-singulation-system",
+      "subject": "packaging",
+      "typedInternalLinks": 0,
+      "score": 18
+    },
+    {
+      "route": "/knowledge/equipment/burn-in-and-system-level-test-equipment",
+      "subject": "burn-in-and-test",
+      "typedInternalLinks": 0,
+      "score": 18
+    },
+    {
+      "route": "/knowledge/equipment/chemical-vapor-deposition-reactor",
+      "subject": "cvd-pvd",
+      "typedInternalLinks": 0,
+      "score": 18
+    },
+    {
+      "route": "/knowledge/equipment/pvd-sputter-and-metal-deposition-system",
+      "subject": "cvd-pvd",
+      "typedInternalLinks": 0,
+      "score": 18
+    },
+    {
+      "route": "/knowledge/equipment/semiconductor-automatic-test-equipment",
+      "subject": "burn-in-and-test",
+      "typedInternalLinks": 0,
+      "score": 18
+    },
+    {
+      "route": "/knowledge/processes/advanced-packaging-and-heterogeneous-integration",
+      "subject": "packaging",
+      "typedInternalLinks": 0,
+      "score": 18
+    },
+    {
+      "route": "/knowledge/processes/final-test-burn-in-and-system-level-test",
+      "subject": "burn-in-and-test",
+      "typedInternalLinks": 0,
+      "score": 18
+    },
+    {
+      "route": "/knowledge/processes/package-substrates-and-redistribution-layers",
+      "subject": "packaging",
+      "typedInternalLinks": 0,
+      "score": 18
+    },
+    {
+      "route": "/knowledge/processes/underfill-molding-and-package-encapsulation",
+      "subject": "packaging",
+      "typedInternalLinks": 0,
+      "score": 18
+    }
+  ],
+  "cohortDigest": "sha256:d21a11007b9924bae9be977d1d74adac5dea9bb8430e82188d379d0b2218e680"
+}

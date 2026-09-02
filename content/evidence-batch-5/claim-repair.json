@@ -1,0 +1,93 @@
+{
+  "schemaVersion": "maha-claim-repair/1.0",
+  "decidedAt": "2026-09-02",
+  "rule": "A narrowing or source replacement produces a proposed revision with a new digest. The live claim is never rewritten to fit a source.",
+  "decisions": [
+    {
+      "route": "/knowledge/suppliers/axcelis-technologies",
+      "currentClaimScope": "the supplier profile as previously written, which asserted capability without an inspected source",
+      "decision": "narrow",
+      "rationale": "Narrowed to what the organisation documents about itself, with the first-party basis disclosed on the page.",
+      "proposedRevisionRequired": true,
+      "supersedes": "the uninspected supplier claim",
+      "proposedRevisionDigest": "sha256:f6c194a195e83d9d6888825b39de5b295f80ee9fe6ea60bde0ba05ccac59c245",
+      "appliedToLiveClaim": false
+    },
+    {
+      "route": "/knowledge/suppliers/disco",
+      "currentClaimScope": "the supplier profile as previously written, which asserted capability without an inspected source",
+      "decision": "narrow",
+      "rationale": "Narrowed to what the organisation documents about itself, with the first-party basis disclosed on the page.",
+      "proposedRevisionRequired": true,
+      "supersedes": "the uninspected supplier claim",
+      "proposedRevisionDigest": "sha256:25901dcc5c2c9d752087000a1af16ac521f11c6527310db38464644707b5ded8",
+      "appliedToLiveClaim": false
+    },
+    {
+      "route": "/knowledge/suppliers/advantest",
+      "currentClaimScope": "the supplier profile as previously written, which asserted capability without an inspected source",
+      "decision": "narrow",
+      "rationale": "Narrowed to what the organisation documents about itself, with the first-party basis disclosed on the page.",
+      "proposedRevisionRequired": true,
+      "supersedes": "the uninspected supplier claim",
+      "proposedRevisionDigest": "sha256:268542b4923c5e6b6c9a8e0bf318927ab94dcca3c450a5388a445df4d26ad007",
+      "appliedToLiveClaim": false
+    },
+    {
+      "route": "/knowledge/suppliers/lam-research",
+      "currentClaimScope": "the supplier profile as previously written, which asserted capability without an inspected source",
+      "decision": "narrow",
+      "rationale": "Narrowed to what the organisation documents about itself, with the first-party basis disclosed on the page.",
+      "proposedRevisionRequired": true,
+      "supersedes": "the uninspected supplier claim",
+      "proposedRevisionDigest": "sha256:0625d46cb4bdf1b1eefc0a1446c2b204a9a5fbed792fde8a354dff9c2f2ceaab",
+      "appliedToLiveClaim": false
+    },
+    {
+      "route": "/knowledge/suppliers/sumco",
+      "currentClaimScope": "the supplier profile as previously written, which asserted capability without an inspected source",
+      "decision": "retain-blocked",
+      "rationale": "marketing-page-documents-no-specifics",
+      "proposedRevisionRequired": false,
+      "supersedes": null,
+      "proposedRevisionDigest": null,
+      "appliedToLiveClaim": false
+    },
+    {
+      "route": "/knowledge/equipment/chemical-mechanical-planarization-polisher",
+      "currentClaimScope": "technical claim with no inspected source",
+      "decision": "retain-blocked",
+      "rationale": "No source was inspected for this page in Batch 5. Retained as blocked rather than narrowed toward evidence that does not exist.",
+      "proposedRevisionRequired": false,
+      "supersedes": null,
+      "proposedRevisionDigest": null,
+      "appliedToLiveClaim": false
+    },
+    {
+      "route": "/knowledge/equipment/wafer-backgrinder-and-polisher",
+      "currentClaimScope": "technical claim with no inspected source",
+      "decision": "retain-blocked",
+      "rationale": "No source was inspected for this page in Batch 5. Retained as blocked rather than narrowed toward evidence that does not exist.",
+      "proposedRevisionRequired": false,
+      "supersedes": null,
+      "proposedRevisionDigest": null,
+      "appliedToLiveClaim": false
+    },
+    {
+      "route": "/knowledge/processes/copper-interconnects-and-cmp",
+      "currentClaimScope": "technical claim with no inspected source",
+      "decision": "retain-blocked",
+      "rationale": "No source was inspected for this page in Batch 5. Retained as blocked rather than narrowed toward evidence that does not exist.",
+      "proposedRevisionRequired": false,
+      "supersedes": null,
+      "proposedRevisionDigest": null,
+      "appliedToLiveClaim": false
+    }
+  ],
+  "counts": {
+    "narrow": 4,
+    "retain-blocked": 4
+  },
+  "liveClaimsRewritten": 0,
+  "repairDigest": "sha256:93fb1bb5eacc430c612b0420f54e898c68a62edfcc1301200092054206a430c9"
+}

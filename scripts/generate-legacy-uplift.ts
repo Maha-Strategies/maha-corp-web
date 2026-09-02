@@ -15,6 +15,7 @@ import batch1 from '../content/semiconductor-evidence/batch-1.json' with { type:
 import batch2 from '../content/evidence-batch-2/inspections.json' with { type: 'json' }
 import batch3 from '../content/evidence-batch-3/inspections.json' with { type: 'json' }
 import batch4 from '../content/evidence-batch-4/inspections.json' with { type: 'json' }
+import supplierFirstParty from '../content/evidence-batch-5/supplier-first-party.json' with { type: 'json' }
 
 /**
  * Batch 4 names supported routes per claim rather than per source, so a source
@@ -328,15 +329,31 @@ const depth = {
  * because a page that gained shape and a page that gained evidence are not the
  * same achievement and the difference is the whole point of measuring.
  */
+/**
+ * First-party pages are counted in their own state and nowhere else.
+ *
+ * They are deliberately not added to eligible, because eligibility here means
+ * the uplift gate passed on independent evidence. A supplier profile carrying
+ * its own company's documentation is useful and is not that.
+ */
+const firstPartyRoutes = new Set(
+  (supplierFirstParty.inspected as { route: string; eligible: boolean }[])
+    .filter((entry) => entry.eligible).map((entry) => entry.route))
+
 const sourceSupportedPages = eligible.filter((r) => (r.after?.explanatorySources ?? 0) > 0)
 const structuralPages = eligible.filter((r) => (r.after?.explanatorySources ?? 0) === 0)
+const firstPartyDocumented = blocked.filter((r) => firstPartyRoutes.has(r.route)).length
 const pageStates = {
   legacyUnchanged: results.length - eligible.length - blocked.length,
   structurallyUplifted: structuralPages.length,
-  sourceSupportedUplift: sourceSupportedPages.length,
-  blocked: blocked.length,
+  firstPartyDocumented,
+  independentlySourceSupported: sourceSupportedPages.length,
+  // First-party pages leave the blocked count without joining the supported one.
+  blocked: blocked.length - firstPartyDocumented,
   total: results.length,
-  neverCombined: 'structurallyUplifted and sourceSupportedUplift are reported separately and must not be added into a single quality figure.',
+  neverCombined: 'structurallyUplifted, firstPartyDocumented and independentlySourceSupported are reported separately. First-party documentation is an organisation describing itself and must never be added to independent support in one evidentiary figure.',
+  // Kept under its old name so earlier artifacts and tests still read correctly.
+  sourceSupportedUplift: sourceSupportedPages.length,
 }
 
 const informationValue = {

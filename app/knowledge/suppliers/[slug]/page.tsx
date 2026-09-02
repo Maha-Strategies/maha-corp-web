@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 
+import { FirstPartyDisclosure } from '@/components/FirstPartyDisclosure'
 import { UpliftSections } from '@/components/UpliftSections'
 
 import { SITE_URL, getBriefBySlug } from '@/lib/briefs-data'
@@ -115,6 +116,6 @@ export default async function SupplierProfilePage({ params }: PageProps) {
           </ol>
         </section>
       </div>
-    <UpliftSections route={upliftRoute} /></main>
+    <FirstPartyDisclosure route={upliftRoute} /><UpliftSections route={upliftRoute} /></main>
   )
 }
