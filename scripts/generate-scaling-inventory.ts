@@ -14,6 +14,9 @@ import batch12bPackets from '../content/batch-12b/remediation-packets.json' with
 import batch12bProposals from '../content/batch-12b/proposed-revisions.json' with { type: 'json' }
 import sourceEligibility from '../content/source-first/eligibility-report.json' with { type: 'json' }
 import sourceCandidates from '../content/source-first/record-candidates.json' with { type: 'json' }
+import cascadeModel from '../content/release-cascade/cascade-model.json' with { type: 'json' }
+import canaryManifest from '../content/release-cascade/canary-manifest.json' with { type: 'json' }
+import remainderManifest from '../content/release-cascade/remainder-manifest.json' with { type: 'json' }
 import { canonicalJson } from '../lib/evidence-dossier/digest.ts'
 import observation from '../content/scaling/public-surface-observation.json' with { type: 'json' }
 
@@ -174,7 +177,35 @@ const pathToTarget = {
   },
   note: 'A narrowed claim rebinds an existing record and adds no route, so legacy adoption is counted as reviewed rather than as new routes. Only currentProductionRoutes is public.',
 }
-const withBatch12a = { ...model, batch12a, batch12b, pathToTarget }
+/**
+ * The cascade, counted from actual dependency sets.
+ *
+ * Releasing the 33 adds 33 record routes and no source pages, because none of
+ * them is the last unreleased record in its source set - one unreleased claim
+ * refuses the whole aggregate. The naive assumption that 33 releases yield 33
+ * pages plus a cascade is wrong by the size of the cascade.
+ */
+const cascade = {
+  currentProductionRoutes: model.crawlable,
+  sourcePagesImplemented: sourceEligibility.eligibleNow as number,
+  routesAfterSourcePagesDeploy: model.crawlable + (sourceEligibility.eligibleNow as number),
+  canaryDirectRoutes: canaryManifest.directRoutes as number,
+  canarySourcePagesUnlocked: canaryManifest.sourcePagesUnlocked as number,
+  remainderDirectRoutes: remainderManifest.directRoutes as number,
+  remainderSourcePagesUnlocked: remainderManifest.sourcePagesUnlocked as number,
+  privateSourceFirstCandidates: sourceCandidates.admissible as number,
+  privateCandidatesExcludedFromPublicTotals: true,
+  reachableAfterAllKnownWork: model.crawlable + (sourceEligibility.eligibleNow as number)
+    + (canaryManifest.directRoutes as number) + (remainderManifest.directRoutes as number)
+    + (canaryManifest.sourcePagesUnlocked as number) + (remainderManifest.sourcePagesUnlocked as number),
+  remainingGapToTarget: Math.max(0, PAGE_TARGET - (model.crawlable + (sourceEligibility.eligibleNow as number)
+    + (canaryManifest.directRoutes as number) + (remainderManifest.directRoutes as number)
+    + (canaryManifest.sourcePagesUnlocked as number) + (remainderManifest.sourcePagesUnlocked as number))),
+  sourcePagesUnlockedByAll33: (cascadeModel.cascade as { completesSourceAggregate: boolean }[])
+    .filter((entry) => entry.completesSourceAggregate).length,
+  note: 'Source pages become reachable only on deployment; nothing here is deployed. Private candidates are excluded from every public total.',
+}
+const withBatch12a = { ...model, batch12a, batch12b, pathToTarget, cascade }
 writeFileSync('content/scaling/capacity-model.json', `${JSON.stringify({ ...withBatch12a, capacityDigest: digest(withBatch12a) }, null, 2)}\n`)
 
 /* ------------------------------------------------------------ the report -- */
