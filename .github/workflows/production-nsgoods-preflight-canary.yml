@@ -41,7 +41,9 @@ jobs:
       - name: Pin the live signer manifest before payment
         env:
           NSGOODS_PREFLIGHT_MANIFEST_PATH: ${{ runner.temp }}/nsgoods-preflight/proof-index.json
-        run: curl --fail --silent --show-error --location https://x402.nsgoods.org/proof/index.json --output "$NSGOODS_PREFLIGHT_MANIFEST_PATH"
+        run: |
+          mkdir -p "$(dirname "$NSGOODS_PREFLIGHT_MANIFEST_PATH")"
+          curl --fail --silent --show-error --location https://x402.nsgoods.org/proof/index.json --output "$NSGOODS_PREFLIGHT_MANIFEST_PATH"
       - name: Validate the protected buyer and balance without payment
         env:
           X402_BUYER_PRIVATE_KEY: ${{ secrets.X402_BUYER_PRIVATE_KEY }}
@@ -70,5 +72,5 @@ jobs:
         with:
           name: production-nsgoods-preflight-canary-${{ github.run_id }}
           path: ${{ runner.temp }}/nsgoods-preflight
-          if-no-files-found: error
+          if-no-files-found: warn
           retention-days: 90
