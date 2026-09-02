@@ -1,0 +1,13 @@
+# preflight_v3 fixtures DIGEST
+# sha256 of each locked fixture; regenerate a fixture only at a version boundary.
+# v3 supersedes v2 (announced 2026-09-01): the two refusal branches are now closed
+# (additionalProperties false + explicit fields). v1 and v2 remain for the audit trail.
+
+5b518561c919ca3e41cab0a5486e5e2c22663ddb6759f252ba778c0d140e795a  clean-pass.json
+d6c8a0d39515b29364fddbf7a558e1b245e97f77875aad5f8b5bb540f984040e  sanctions-match.json
+d791ecbe30f36cf708f244acdb7af3259bc5d6827f9855f660c519bb20aa8e1b  partial-not-evaluated.json
+b616362dd2b669e2d34afcc2907da3c94fe23a6a40d2e5972925f3d0ef2b82de  invalid-subject.json
+a80e210a12378faad849b15d2cb20de5f96da21b466c669ecddb66d78ad6d51a  signing-unavailable.json
+7c9e99de9391183a262f84d94ae4c21babcdb5e5d5d17a0346d233c3d310f44a  ../preflight_v3.schema.json
+
+# combined (concatenated bytes of the 5 fixtures + schema): cf1e2b16bc626eba01af48d84f1b5026a01d104c993cd097600900c22cf6251f

@@ -1,0 +1,498 @@
+{
+ "schema_version": "1.0",
+ "generated_at": "2026-09-01T11:49:24.127723+00:00",
+ "publisher": "x402.nsgoods.org",
+ "signers": {
+  "0x5e63d01d6A266BC17f577B80199a2a07B15053C7": [
+   "signals",
+   "trust"
+  ],
+  "0x01d298d8Df8DA0cbEA1d91e6D8Cffd56Cc026226": [
+   "regime"
+  ],
+  "0x3fA288bB8C49F3AA1CFfE461739c79D43B6Ae00E": [
+   "extractability"
+  ],
+  "0x2E2Dc1E180d8BAbF6Eb8Ca902bb37106e899c693": [
+   "solar"
+  ],
+  "0x57fF0F084Cba33e6761503f90eEF0Da9F159350c": [
+   "sanctions",
+   "preflight",
+   "settle"
+  ],
+  "0x41Fb10a9E637C85cE3C1d35c4f059E7de1593fBE": [
+   "payable",
+   "payable-address"
+  ]
+ },
+ "signer_registry": {
+  "0x5e63d01d6A266BC17f577B80199a2a07B15053C7": {
+   "services": [
+    "signals",
+    "trust"
+   ],
+   "status": "active",
+   "valid_from": null,
+   "valid_until": null,
+   "note": "valid_from is null where the first signing date was not recorded before this field existed; valid_until null means this key is currently signing"
+  },
+  "0x01d298d8Df8DA0cbEA1d91e6D8Cffd56Cc026226": {
+   "services": [
+    "regime"
+   ],
+   "status": "active",
+   "valid_from": null,
+   "valid_until": null,
+   "note": "valid_from is null where the first signing date was not recorded before this field existed; valid_until null means this key is currently signing"
+  },
+  "0x3fA288bB8C49F3AA1CFfE461739c79D43B6Ae00E": {
+   "services": [
+    "extractability"
+   ],
+   "status": "active",
+   "valid_from": null,
+   "valid_until": null,
+   "note": "valid_from is null where the first signing date was not recorded before this field existed; valid_until null means this key is currently signing"
+  },
+  "0x2E2Dc1E180d8BAbF6Eb8Ca902bb37106e899c693": {
+   "services": [
+    "solar"
+   ],
+   "status": "active",
+   "valid_from": null,
+   "valid_until": null,
+   "note": "valid_from is null where the first signing date was not recorded before this field existed; valid_until null means this key is currently signing"
+  },
+  "0x57fF0F084Cba33e6761503f90eEF0Da9F159350c": {
+   "services": [
+    "sanctions",
+    "preflight",
+    "settle"
+   ],
+   "status": "active",
+   "valid_from": null,
+   "valid_until": null,
+   "note": "valid_from is null where the first signing date was not recorded before this field existed; valid_until null means this key is currently signing"
+  },
+  "0x41Fb10a9E637C85cE3C1d35c4f059E7de1593fBE": {
+   "services": [
+    "payable",
+    "payable-address"
+   ],
+   "status": "active",
+   "valid_from": null,
+   "valid_until": null,
+   "note": "valid_from is null where the first signing date was not recorded before this field existed; valid_until null means this key is currently signing"
+  }
+ },
+ "signer_rotations": [],
+ "signer_policy": {
+  "pinning": "clients should pin signer addresses from this manifest, not trust on first use",
+  "rotation": "signers do not rotate silently; a rotation adds the new address alongside the old with a validity boundary before the old key stops signing",
+  "unannounced_change": "treat as compromise; fail closed, same as a signature mismatch",
+  "rotation_record_shape": {
+   "address_old": "0x...",
+   "address_new": "0x...",
+   "old_valid_until": "ISO8601",
+   "new_valid_from": "ISO8601",
+   "services": [
+    "..."
+   ],
+   "announced_at": "ISO8601"
+  }
+ },
+ "services": [
+  {
+   "name": "signals",
+   "base_url": "https://signals.nsgoods.org",
+   "signer": "0x5e63d01d6A266BC17f577B80199a2a07B15053C7",
+   "signer_source": "recovered_from_preview",
+   "paid": [
+    {
+     "path": "/signals",
+     "price_usdc": "0.01",
+     "network": "eip155:8453",
+     "payTo": "0xc87a06DEE4c0E85912296002617120BBfd5EF990"
+    }
+   ],
+   "preview": {
+    "path": "/signals/preview",
+    "preview_signed": true,
+    "post_sign_fields": [],
+    "verify": "remove signature and signed_by, canonicalise the remainder as json.dumps(sort_keys=True, separators=(',',':'), ensure_ascii=True) so non-ASCII is \\uXXXX-escaped, then recover the signer with EIP-191 personal_sign (the Ethereum signed-message prefix); recover == signed_by"
+   },
+   "correctness": null,
+   "verifiability": "well-formed and signed; not independently verifiable at issuance",
+   "health": "/health"
+  },
+  {
+   "name": "trust",
+   "base_url": "https://trust.nsgoods.org",
+   "signer": "0x5e63d01d6A266BC17f577B80199a2a07B15053C7",
+   "signer_source": "recovered_from_preview",
+   "paid": [
+    {
+     "path": "/agent-trust",
+     "price_usdc": "0.005",
+     "network": "eip155:8453",
+     "payTo": "0xc87a06DEE4c0E85912296002617120BBfd5EF990"
+    }
+   ],
+   "preview": {
+    "path": "/agent-trust/preview",
+    "preview_signed": true,
+    "post_sign_fields": [],
+    "verify": "remove signature and signed_by, canonicalise the remainder as json.dumps(sort_keys=True, separators=(',',':'), ensure_ascii=True) so non-ASCII is \\uXXXX-escaped, then recover the signer with EIP-191 personal_sign (the Ethereum signed-message prefix); recover == signed_by"
+   },
+   "correctness": null,
+   "health": "/health"
+  },
+  {
+   "name": "regime",
+   "base_url": "https://regime.nsgoods.org",
+   "signer": "0x01d298d8Df8DA0cbEA1d91e6D8Cffd56Cc026226",
+   "signer_source": "well-known",
+   "paid": [
+    {
+     "path": "/regime",
+     "price_usdc": "0.01",
+     "network": "eip155:8453",
+     "payTo": "0xc87a06DEE4c0E85912296002617120BBfd5EF990"
+    }
+   ],
+   "preview": {
+    "path": "/regime/preview",
+    "preview_signed": false,
+    "note": "preview unsigned — recover the signer from a paid response"
+   },
+   "correctness": null,
+   "verifiability": "well-formed and signed; not independently verifiable at issuance",
+   "health": "/health"
+  },
+  {
+   "name": "extractability",
+   "base_url": "https://schema.nsgoods.org",
+   "signer": "0x3fA288bB8C49F3AA1CFfE461739c79D43B6Ae00E",
+   "signer_source": "health",
+   "paid": [
+    {
+     "path": "/extractability",
+     "price_usdc": "0.01",
+     "network": "eip155:8453",
+     "payTo": "0xc87a06DEE4c0E85912296002617120BBfd5EF990"
+    }
+   ],
+   "preview": {
+    "path": "/extractability/preview",
+    "preview_signed": false,
+    "note": "preview unsigned — recover the signer from a paid response"
+   },
+   "correctness": null,
+   "health": "/health"
+  },
+  {
+   "name": "solar",
+   "base_url": "https://solar.nsgoods.org",
+   "signer": "0x2E2Dc1E180d8BAbF6Eb8Ca902bb37106e899c693",
+   "signer_source": "health",
+   "paid": [
+    {
+     "path": "/solar-legality",
+     "price_usdc": "0.005",
+     "network": "eip155:8453",
+     "payTo": "0xc87a06DEE4c0E85912296002617120BBfd5EF990"
+    }
+   ],
+   "preview": {
+    "path": "/solar-legality/preview",
+    "preview_signed": false,
+    "note": "preview unsigned — recover the signer from a paid response"
+   },
+   "correctness": null,
+   "health": "/health"
+  },
+  {
+   "name": "sanctions",
+   "base_url": "https://sanctions.nsgoods.org",
+   "signer": "0x57fF0F084Cba33e6761503f90eEF0Da9F159350c",
+   "signer_source": "recovered_from_preview",
+   "paid": [
+    {
+     "path": "/screen",
+     "price_usdc": "0.005",
+     "network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+     "payTo": "35tCuyL3E7M88jfhTeEaRxhrbuKFyQLWgxJQyf5QcLLe",
+     "asset": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+     "challenge_transport": "PAYMENT-REQUIRED header (base64); 402 body is {}"
+    }
+   ],
+   "preview": {
+    "path": "/screen/preview",
+    "preview_signed": true,
+    "type": "locked_demo",
+    "input_ignored": true,
+    "post_sign_fields": [
+     "preview",
+     "demo_address",
+     "input_ignored",
+     "note"
+    ],
+    "verify": "remove the post_sign_fields, then remove signature and signed_by, then canonicalise the remainder as json.dumps(sort_keys=True, separators=(',',':'), ensure_ascii=True) so non-ASCII is \\uXXXX-escaped, and recover the signer with EIP-191 personal_sign (the Ethereum signed-message prefix); recover == signed_by"
+   },
+   "correctness": {
+    "url": "https://x402.nsgoods.org/ata-audit/correctness_set.json",
+    "sha256": "91c01a28640b7ee4c7fe791d99074211d4eb28da07ad774aa584ab7e937ab0e2",
+    "cases": 20,
+    "passed": 20,
+    "run_at": "2026-08-18T19:10:30.782427+00:00"
+   },
+   "data_freshness": "OFAC SDN refetch every 6h; HTTP 304 means unchanged, not stale",
+   "vendor_docs": {
+    "url": "https://x402.nsgoods.org/proof/vendor-sanctions-screen.html",
+    "markdown_url": "https://x402.nsgoods.org/proof/vendor-sanctions-screen.md",
+    "last_updated": "2026-08-29T17:22:02.407661+00:00"
+   },
+   "health": "/health"
+  },
+  {
+   "name": "payable",
+   "base_url": "https://payable.nsgoods.org",
+   "signer": "0x41Fb10a9E637C85cE3C1d35c4f059E7de1593fBE",
+   "signer_source": "recovered_from_preview",
+   "paid": [
+    {
+     "path": "/payable",
+     "price_usdc": "0.005",
+     "network": "eip155:8453",
+     "payTo": "0xc87a06DEE4c0E85912296002617120BBfd5EF990"
+    }
+   ],
+   "preview": {
+    "path": "/payable/preview",
+    "preview_signed": true,
+    "type": "locked_demo",
+    "input_ignored": true,
+    "post_sign_fields": [
+     "preview",
+     "demo_resource",
+     "input_ignored",
+     "note"
+    ],
+    "verify": "remove the post_sign_fields, then remove signature and signed_by, then canonicalise the remainder as json.dumps(sort_keys=True, separators=(',',':'), ensure_ascii=True) so non-ASCII is \\uXXXX-escaped, and recover the signer with EIP-191 personal_sign (the Ethereum signed-message prefix); recover == signed_by"
+   },
+   "correctness": null,
+   "health": "/health"
+  },
+  {
+   "name": "payable-address",
+   "base_url": "https://payable.nsgoods.org",
+   "signer": "0x41Fb10a9E637C85cE3C1d35c4f059E7de1593fBE",
+   "signer_source": "recovered_from_preview",
+   "schema": "address_schema_version 1 (separate contract from payable schema_version 2)",
+   "paid": [
+    {
+     "path": "/payable/address",
+     "price_usdc": "0.005",
+     "network": "eip155:8453",
+     "payTo": "0xc87a06DEE4c0E85912296002617120BBfd5EF990",
+     "params": {
+      "address": "0x EVM address",
+      "chain": "base",
+      "token": "optional ERC-20 (default USDC on Base)"
+     }
+    }
+   ],
+   "preview": {
+    "path": "/payable/address/preview",
+    "preview_signed": true,
+    "type": "locked_demo",
+    "input_ignored": true,
+    "post_sign_fields": [
+     "preview",
+     "demo_address",
+     "input_ignored",
+     "note"
+    ],
+    "verify": "remove the post_sign_fields, then remove signature and signed_by, then canonicalise the remainder as json.dumps(sort_keys=True, separators=(',',':'), ensure_ascii=True) so non-ASCII is \\uXXXX-escaped, and recover the signer with EIP-191 personal_sign (the Ethereum signed-message prefix); recover == signed_by"
+   },
+   "correctness": {
+    "url": "https://payable.nsgoods.org/payable/address/fixtures",
+    "sha256": "83cc0a2cba1150059abbe67f275e7f0a6d72b2ad2a1903445b61db8d4a28ecd9",
+    "cases": 3,
+    "note": "real Base mainnet fixtures verified live; a transfer-revert fixture is pending (not fabricated)"
+   },
+   "health": "/health"
+  },
+  {
+   "name": "preflight",
+   "base_url": "https://x402.nsgoods.org",
+   "signer": "0x57fF0F084Cba33e6761503f90eEF0Da9F159350c",
+   "signer_source": "declared_composite_signer",
+   "status": "schema published, endpoint not built",
+   "price_usdc": "0.015",
+   "schema": "preflight_v3 (supersedes preflight_v2 at an announced version boundary, 2026-09-01)",
+   "schema_url": "https://x402.nsgoods.org/preflight/schema/preflight_v3.schema.json",
+   "doc_html": "https://x402.nsgoods.org/preflight/schema/preflight_v3.html",
+   "authorizes": "0x57fF0F084Cba33e6761503f90eEF0Da9F159350c signs each component (component_signature) and the whole composite (envelope.signature); a preflight envelope's manifest.entry 'preflight' resolves to this entry",
+   "note": "no live endpoint yet; this entry binds the composite signer in the manifest so component and envelope signatures verify against an authorized signer. Each component also carries an informational manifest.source_service naming the underlying service."
+  },
+  {
+   "name": "settle",
+   "base_url": "https://x402.nsgoods.org",
+   "signer": "0x57fF0F084Cba33e6761503f90eEF0Da9F159350c",
+   "signer_source": "recovered_from_preview",
+   "schema": "settle_v1 (frozen)",
+   "schema_url": "https://x402.nsgoods.org/settle/schema/settle_v1.schema.json",
+   "doc_html": "https://x402.nsgoods.org/settle/schema/settle_v1.html",
+   "paid": [
+    {
+     "path": "/settle",
+     "price_usdc": "0.01",
+     "network": "eip155:8453",
+     "payTo": "0xc87a06DEE4c0E85912296002617120BBfd5EF990",
+     "params": {
+      "tx": "Solana tx signature (base58)",
+      "payee": "Solana address",
+      "amount": "expected atomic units credited to payee",
+      "mint": "optional SPL mint (default USDC)",
+      "payer": "optional signer"
+     }
+    }
+   ],
+   "preview": {
+    "path": "/settle/preview",
+    "preview_signed": true,
+    "type": "locked_demo",
+    "input_ignored": true,
+    "post_sign_fields": [
+     "preview",
+     "note"
+    ],
+    "verify": "remove the post_sign_fields, then remove signature and KEEP signer, then canonicalise the remainder as json.dumps(sort_keys=True, separators=(',',':'), ensure_ascii=True) so non-ASCII is \\uXXXX-escaped, and recover the signer with EIP-191 personal_sign; recover == signer"
+   },
+   "health": "/health"
+  }
+ ],
+ "payability": {
+  "weekly_report_20260831": {
+   "html": "https://x402.nsgoods.org/proof/payability-report-2026-08-31.html",
+   "markdown": "https://x402.nsgoods.org/proof/payability-report-2026-08-31.md",
+   "chart_png": "https://x402.nsgoods.org/proof/payability-chart-2026-08-31.png",
+   "aggregate_index": "https://x402.nsgoods.org/ata-audit/payability_index.json",
+   "instrument_comparison": "https://x402.nsgoods.org/proof/instrument-comparison.html",
+   "published": "2026-08-31",
+   "sha256": {
+    "html": "d8446e674a1e853c58ac5863b1f8ea4307bfb1fd81e7d6c640ad5784d5dc105f",
+    "markdown": "749566704567640e9353429a5ec60e31f393716a8d9889e69e548897062fa428",
+    "chart_png": "d4fbee7b5fd66b19df7bd32b058aff4ea9cfd7461eeaac13ce480fe2de2a7a7f",
+    "aggregate_index": "9038f6886a4742d7e04641227fa70138b435528fe8b9051cca2c4910805dfdaf"
+   }
+  }
+ },
+ "preflight": {
+  "schema_v1": {
+   "status": "schema and locked fixtures published; endpoint not built yet",
+   "price_when_built_usdc": "0.015",
+   "published": "2026-08-31",
+   "schema_url": "https://x402.nsgoods.org/preflight/schema/preflight_v1.schema.json",
+   "doc_html": "https://x402.nsgoods.org/preflight/schema/preflight_v1.html",
+   "doc_markdown": "https://x402.nsgoods.org/preflight/schema/preflight_v1.md",
+   "signer": "0x57fF0F084Cba33e6761503f90eEF0Da9F159350c",
+   "fixtures_digest_url": "https://x402.nsgoods.org/preflight/fixtures/preflight_v1/DIGEST",
+   "sha256": {
+    "schema": "ae6fe5f5e47a0f9bc1eea20e695f087821d43a0b5c6f8ccc4e06057f66575a44",
+    "doc_html": "e136a7ac4b562f16283389df5e920a633f9047ff3c3a35dcd2022db7b9585a87",
+    "doc_markdown": "9704490479efa9b98e1878baf062a0130f193d30ce9d5fa61594b8ecc6b51b56",
+    "fixture_clean_pass": "dcb1a39be2b51ef107f889ce6719065db88e9b36c6e7b5e8d6f3505890006518",
+    "fixture_sanctions_match": "8ebcf6a8c56bc10cd81e6179667dd0b69a1bfb73b681ef93351053b17e1cec89",
+    "fixture_partial_not_evaluated": "1ce8919aee6a4fcbd129c66ea13cd11f6e410c7de7538d203290e218bc9da65f",
+    "fixture_invalid_subject": "cca688de4489aaf5d60be01ba443656ec92350bfcec6c312cfa1181ff0f94522",
+    "digest_file": "7d999eae6cb550345b4c8f743f656bb4bc5487ec4eb23058b4ac210d1bb98416"
+   }
+  },
+  "schema_v2": {
+   "status": "schema and locked fixtures published; endpoint not built yet",
+   "supersedes": "preflight_v1",
+   "version_boundary_announced": "2026-09-01",
+   "boundary_reason": "tightened after Maha Strategies' independent fixture review, before any consumer integrated v1",
+   "price_when_built_usdc": "0.015",
+   "published": "2026-09-01",
+   "schema_url": "https://x402.nsgoods.org/preflight/schema/preflight_v2.schema.json",
+   "doc_html": "https://x402.nsgoods.org/preflight/schema/preflight_v2.html",
+   "doc_markdown": "https://x402.nsgoods.org/preflight/schema/preflight_v2.md",
+   "signer": "0x57fF0F084Cba33e6761503f90eEF0Da9F159350c",
+   "manifest_entry": "preflight",
+   "fixtures_digest_url": "https://x402.nsgoods.org/preflight/fixtures/preflight_v2/DIGEST",
+   "sha256": {
+    "schema": "ab76303573e1aa3eb846bfa45c696679340616a821f72d739826e58bf4a1cd05",
+    "doc_html": "ff123cb57708078a9a99fd53bf3bba8ec7a620d06820094d859d47c23938a38c",
+    "doc_markdown": "e13ec47ac25a0093b98320bb3a2eb61bb2663d6991df287eaaab7124d83a1baf",
+    "fixture_clean_pass": "341e9b1bb40b10a82c02a55481c39832751a72b0b8eef7ca7d987b472d60e7e2",
+    "fixture_sanctions_match": "5a1592152add46b1c263a1d336d0b1f91c9c0f54236960a5931ca29dd31b24a2",
+    "fixture_partial_not_evaluated": "b07a60133694be3118181f7952b8533b730b9ca8c613b495c18137c1c3c129be",
+    "fixture_invalid_subject": "7c06904f7a64302dc2de963ac6536d8dc2a632eff30d783bc4dfd651ffc5e2ab",
+    "fixture_signing_unavailable": "c49c02d36d61b95d83deb4639469babe839b83e0fbf2c8eef5d6c77bfe9fae92",
+    "digest_file": "f8f9854881c939485b0e109dce9294a5fb76dcc6577f8a563f8a7ffc3f27d0d3"
+   }
+  },
+  "schema_v3": {
+   "status": "schema and locked fixtures published; endpoint not built yet",
+   "supersedes": "preflight_v2",
+   "version_boundary_announced": "2026-09-01",
+   "boundary_reason": "closed the two refusal branches (400, 503) with additionalProperties false and explicitly declared fields, after Maha's second fixture audit found injected keys accepted there; no other change",
+   "price_when_built_usdc": "0.015",
+   "published": "2026-09-01",
+   "schema_url": "https://x402.nsgoods.org/preflight/schema/preflight_v3.schema.json",
+   "doc_html": "https://x402.nsgoods.org/preflight/schema/preflight_v3.html",
+   "doc_markdown": "https://x402.nsgoods.org/preflight/schema/preflight_v3.md",
+   "signer": "0x57fF0F084Cba33e6761503f90eEF0Da9F159350c",
+   "manifest_entry": "preflight",
+   "fixtures_digest_url": "https://x402.nsgoods.org/preflight/fixtures/preflight_v3/DIGEST",
+   "sha256": {
+    "schema": "7c9e99de9391183a262f84d94ae4c21babcdb5e5d5d17a0346d233c3d310f44a",
+    "doc_html": "329bed19b54d72fd7b216447604c8f452dc679cb1cc9ac8c04c04567218efda7",
+    "doc_markdown": "526a19ea5be662445aa7d8cfea8bd748ec7d1823eddc5ba2ad07a3b030150696",
+    "fixture_clean_pass": "5b518561c919ca3e41cab0a5486e5e2c22663ddb6759f252ba778c0d140e795a",
+    "fixture_sanctions_match": "d6c8a0d39515b29364fddbf7a558e1b245e97f77875aad5f8b5bb540f984040e",
+    "fixture_partial_not_evaluated": "d791ecbe30f36cf708f244acdb7af3259bc5d6827f9855f660c519bb20aa8e1b",
+    "fixture_invalid_subject": "b616362dd2b669e2d34afcc2907da3c94fe23a6a40d2e5972925f3d0ef2b82de",
+    "fixture_signing_unavailable": "a80e210a12378faad849b15d2cb20de5f96da21b466c669ecddb66d78ad6d51a",
+    "digest_file": "e2aad5e492fb4dddad9bd12ba2578329876a1b2025ab6f8b54291c3af442d4e6"
+   }
+  }
+ },
+ "settle": {
+  "schema_v1": {
+   "status": "live; schema and locked fixtures published",
+   "price_usdc": "0.01",
+   "published": "2026-09-01",
+   "schema_url": "https://x402.nsgoods.org/settle/schema/settle_v1.schema.json",
+   "doc_html": "https://x402.nsgoods.org/settle/schema/settle_v1.html",
+   "doc_markdown": "https://x402.nsgoods.org/settle/schema/settle_v1.md",
+   "signer": "0x57fF0F084Cba33e6761503f90eEF0Da9F159350c",
+   "manifest_entry": "settle",
+   "chain": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+   "fixtures_digest_url": "https://x402.nsgoods.org/settle/fixtures/settle_v1/DIGEST",
+   "sha256": {
+    "schema": "210d50e068bbbc36fca31a762bbceb7af5c68432c919bd07f2abd7ee9e0b2a40",
+    "doc_html": "cdd4b12e69f85571308ccab21795e3406d8a098162b7a0fb1eaf087f7bcc0f4f",
+    "doc_markdown": "608f8c826668ab3efb1041491c0aa7d51cec5f85424292b42cc90e403867035f",
+    "fixture_verified": "f7755a21f126de06502152d28b6fa615409064bee1924e8dad51c044ea4f156d",
+    "fixture_refuted_amount": "34842debfd9641bb959ce0570f64a2115987e3f838c8b34f381b50e58f5c0af1",
+    "fixture_not_found": "98d7492f02fce00c0e8edb36ce5ac2e6603ecf1ce94149765eb21d39864280ac",
+    "fixture_invalid_subject": "efc299b84786b846d2730e2c9c4e10de01d14e0cfa2e1ea9e3a5ed0087cc036e",
+    "fixture_signing_unavailable": "e047fcef02d0052200f995858b615ef74b1afa15861255d87cf6c854413ffec1",
+    "digest_file": "a3966b49345f03a3236f967c9a677e2a5702fcb18d95267e7d405dc7e31b639b"
+   }
+  }
+ },
+ "validation_set": {
+  "url": "https://x402.nsgoods.org/ata-audit/validation_set.json"
+ },
+ "mcp": {
+  "npm": "nsgoods-mcp",
+  "version": "1.0.2"
+ },
+ "note": "This file is regenerated in place; the URL and inode are stable."
+}

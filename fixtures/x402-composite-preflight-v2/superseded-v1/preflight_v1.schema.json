@@ -1,0 +1,473 @@
+{
+ "$schema": "https://json-schema.org/draft/2020-12/schema",
+ "$id": "https://x402.nsgoods.org/preflight/schema/preflight_v1.schema.json",
+ "title": "x402 preflight composite envelope (preflight_v1)",
+ "description": "FROZEN after publication; changes only at an announced version boundary. Composite of three independent, individually signed components (payability, sanctions, trust) run sequentially within one request. No top-level aggregate verdict or score.",
+ "oneOf": [
+  {
+   "type": "object",
+   "additionalProperties": false,
+   "required": [
+    "schema_version",
+    "request",
+    "components",
+    "observation",
+    "components_evaluated",
+    "envelope"
+   ],
+   "properties": {
+    "schema_version": {
+     "const": "preflight_v1"
+    },
+    "request": {
+     "type": "object",
+     "additionalProperties": false,
+     "required": [
+      "request_id",
+      "request_time",
+      "subject"
+     ],
+     "properties": {
+      "request_id": {
+       "type": "string"
+      },
+      "request_time": {
+       "type": "string",
+       "format": "date-time"
+      },
+      "subject": {
+       "type": "object",
+       "additionalProperties": false,
+       "required": [
+        "address",
+        "chain",
+        "role"
+       ],
+       "properties": {
+        "address": {
+         "type": "string"
+        },
+        "chain": {
+         "type": "string"
+        },
+        "role": {
+         "enum": [
+          "payer",
+          "payee",
+          "escrow_destination"
+         ]
+        }
+       }
+      }
+     }
+    },
+    "components": {
+     "type": "array",
+     "minItems": 3,
+     "maxItems": 3,
+     "prefixItems": [
+      {
+       "type": "object",
+       "additionalProperties": true,
+       "required": [
+        "component",
+        "verdict",
+        "reason_codes",
+        "observed_at",
+        "freshness_bound_seconds",
+        "limitations",
+        "subject_echo",
+        "signer",
+        "manifest",
+        "component_digest",
+        "component_signature"
+       ],
+       "properties": {
+        "component": {
+         "const": "payability"
+        },
+        "verdict": {
+         "enum": [
+          "PAYABLE",
+          "NOT_PAYABLE",
+          "CLEAR",
+          "MATCH",
+          "DATA",
+          "NO_DATA",
+          "not_evaluated"
+         ]
+        },
+        "reason_codes": {
+         "type": "array",
+         "items": {
+          "type": "string"
+         },
+         "minItems": 1
+        },
+        "observed_at": {
+         "type": "string",
+         "format": "date-time"
+        },
+        "freshness_bound_seconds": {
+         "const": 300
+        },
+        "limitations": {
+         "type": "array",
+         "items": {
+          "type": "string"
+         }
+        },
+        "subject_echo": {
+         "type": "object",
+         "required": [
+          "address",
+          "chain",
+          "role"
+         ],
+         "properties": {
+          "address": {
+           "type": "string"
+          },
+          "chain": {
+           "type": "string"
+          },
+          "role": {
+           "enum": [
+            "payer",
+            "payee",
+            "escrow_destination"
+           ]
+          }
+         }
+        },
+        "signer": {
+         "type": "string",
+         "const": "0x57fF0F084Cba33e6761503f90eEF0Da9F159350c"
+        },
+        "manifest": {
+         "type": "object",
+         "required": [
+          "url",
+          "entry"
+         ],
+         "properties": {
+          "url": {
+           "type": "string"
+          },
+          "entry": {
+           "type": "string"
+          }
+         }
+        },
+        "synthetic_condition": {
+         "type": "boolean"
+        },
+        "component_digest": {
+         "type": "string",
+         "pattern": "^[0-9a-f]{64}$"
+        },
+        "component_signature": {
+         "type": "string",
+         "pattern": "^0x[0-9a-fA-F]+$"
+        },
+        "synthetic_note": {
+         "type": "string"
+        }
+       }
+      },
+      {
+       "type": "object",
+       "additionalProperties": true,
+       "required": [
+        "component",
+        "verdict",
+        "reason_codes",
+        "observed_at",
+        "freshness_bound_seconds",
+        "limitations",
+        "subject_echo",
+        "signer",
+        "manifest",
+        "component_digest",
+        "component_signature"
+       ],
+       "properties": {
+        "component": {
+         "const": "sanctions"
+        },
+        "verdict": {
+         "enum": [
+          "PAYABLE",
+          "NOT_PAYABLE",
+          "CLEAR",
+          "MATCH",
+          "DATA",
+          "NO_DATA",
+          "not_evaluated"
+         ]
+        },
+        "reason_codes": {
+         "type": "array",
+         "items": {
+          "type": "string"
+         },
+         "minItems": 1
+        },
+        "observed_at": {
+         "type": "string",
+         "format": "date-time"
+        },
+        "freshness_bound_seconds": {
+         "const": 86400
+        },
+        "limitations": {
+         "type": "array",
+         "items": {
+          "type": "string"
+         }
+        },
+        "subject_echo": {
+         "type": "object",
+         "required": [
+          "address",
+          "chain",
+          "role"
+         ],
+         "properties": {
+          "address": {
+           "type": "string"
+          },
+          "chain": {
+           "type": "string"
+          },
+          "role": {
+           "enum": [
+            "payer",
+            "payee",
+            "escrow_destination"
+           ]
+          }
+         }
+        },
+        "signer": {
+         "type": "string",
+         "const": "0x57fF0F084Cba33e6761503f90eEF0Da9F159350c"
+        },
+        "manifest": {
+         "type": "object",
+         "required": [
+          "url",
+          "entry"
+         ],
+         "properties": {
+          "url": {
+           "type": "string"
+          },
+          "entry": {
+           "type": "string"
+          }
+         }
+        },
+        "synthetic_condition": {
+         "type": "boolean"
+        },
+        "component_digest": {
+         "type": "string",
+         "pattern": "^[0-9a-f]{64}$"
+        },
+        "component_signature": {
+         "type": "string",
+         "pattern": "^0x[0-9a-fA-F]+$"
+        },
+        "synthetic_note": {
+         "type": "string"
+        }
+       }
+      },
+      {
+       "type": "object",
+       "additionalProperties": true,
+       "required": [
+        "component",
+        "verdict",
+        "reason_codes",
+        "observed_at",
+        "freshness_bound_seconds",
+        "limitations",
+        "subject_echo",
+        "signer",
+        "manifest",
+        "component_digest",
+        "component_signature"
+       ],
+       "properties": {
+        "component": {
+         "const": "trust"
+        },
+        "verdict": {
+         "enum": [
+          "PAYABLE",
+          "NOT_PAYABLE",
+          "CLEAR",
+          "MATCH",
+          "DATA",
+          "NO_DATA",
+          "not_evaluated"
+         ]
+        },
+        "reason_codes": {
+         "type": "array",
+         "items": {
+          "type": "string"
+         },
+         "minItems": 1
+        },
+        "observed_at": {
+         "type": "string",
+         "format": "date-time"
+        },
+        "freshness_bound_seconds": {
+         "const": 3600
+        },
+        "limitations": {
+         "type": "array",
+         "items": {
+          "type": "string"
+         }
+        },
+        "subject_echo": {
+         "type": "object",
+         "required": [
+          "address",
+          "chain",
+          "role"
+         ],
+         "properties": {
+          "address": {
+           "type": "string"
+          },
+          "chain": {
+           "type": "string"
+          },
+          "role": {
+           "enum": [
+            "payer",
+            "payee",
+            "escrow_destination"
+           ]
+          }
+         }
+        },
+        "signer": {
+         "type": "string",
+         "const": "0x57fF0F084Cba33e6761503f90eEF0Da9F159350c"
+        },
+        "manifest": {
+         "type": "object",
+         "required": [
+          "url",
+          "entry"
+         ],
+         "properties": {
+          "url": {
+           "type": "string"
+          },
+          "entry": {
+           "type": "string"
+          }
+         }
+        },
+        "synthetic_condition": {
+         "type": "boolean"
+        },
+        "component_digest": {
+         "type": "string",
+         "pattern": "^[0-9a-f]{64}$"
+        },
+        "component_signature": {
+         "type": "string",
+         "pattern": "^0x[0-9a-fA-F]+$"
+        },
+        "synthetic_note": {
+         "type": "string"
+        }
+       }
+      }
+     ],
+     "items": false
+    },
+    "observation": {
+     "type": "object",
+     "additionalProperties": false,
+     "required": [
+      "mode",
+      "spread_ms"
+     ],
+     "properties": {
+      "mode": {
+       "const": "sequential-within-one-request"
+      },
+      "spread_ms": {
+       "type": "integer",
+       "minimum": 0
+      }
+     }
+    },
+    "components_evaluated": {
+     "type": "integer",
+     "minimum": 0,
+     "maximum": 3
+    },
+    "envelope": {
+     "type": "object",
+     "additionalProperties": false,
+     "required": [
+      "signer",
+      "signature"
+     ],
+     "properties": {
+      "signer": {
+       "type": "string",
+       "const": "0x57fF0F084Cba33e6761503f90eEF0Da9F159350c"
+      },
+      "signature": {
+       "type": "string",
+       "pattern": "^0x[0-9a-fA-F]+$"
+      }
+     }
+    }
+   }
+  },
+  {
+   "type": "object",
+   "required": [
+    "error",
+    "http_status",
+    "charged",
+    "schema_version",
+    "reason_codes"
+   ],
+   "properties": {
+    "error": {
+     "type": "string"
+    },
+    "http_status": {
+     "const": 400
+    },
+    "charged": {
+     "const": false
+    },
+    "schema_version": {
+     "const": "preflight_v1"
+    },
+    "reason_codes": {
+     "type": "array",
+     "items": {
+      "type": "string"
+     },
+     "minItems": 1
+    }
+   }
+  }
+ ]
+}

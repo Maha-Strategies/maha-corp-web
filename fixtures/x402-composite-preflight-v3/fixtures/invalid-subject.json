@@ -1,0 +1,11 @@
+{
+ "error": "bad_request",
+ "detail": "missing/invalid address",
+ "http_status": 400,
+ "charged": false,
+ "schema_version": "preflight_v3",
+ "note": "total refusal: invalid subject is rejected before any component runs, no charge, no envelope, per fail-closed policy",
+ "reason_codes": [
+  "invalid_subject"
+ ]
+}

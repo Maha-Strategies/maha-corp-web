@@ -1,0 +1,11 @@
+{
+ "error": "signing_unavailable",
+ "detail": "the composite signer key is not loaded; no envelope can be produced",
+ "http_status": 503,
+ "charged": false,
+ "schema_version": "preflight_v2",
+ "note": "total refusal: when signing is unavailable the service returns 503 before any component runs, no charge, no envelope, per fail-closed policy; an unsigned envelope is never emitted",
+ "reason_codes": [
+  "signing_unavailable"
+ ]
+}
