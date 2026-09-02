@@ -1,0 +1,46 @@
+{
+  "type": "ExternalIntegrationFixtureValidation",
+  "version": "1",
+  "provider": "NSGoods",
+  "schemaVersion": "preflight_v3",
+  "auditKind": "fixture-only-offline-consumer-verification",
+  "auditedAt": "2026-09-01T12:01:11.619272Z",
+  "status": "passed",
+  "authorizedCompositeSigner": "0x57fF0F084Cba33e6761503f90eEF0Da9F159350c",
+  "sources": {
+    "contract": "https://x402.nsgoods.org/preflight/schema/preflight_v3.html",
+    "schema": "https://x402.nsgoods.org/preflight/schema/preflight_v3.schema.json",
+    "fixtureDigest": "https://x402.nsgoods.org/preflight/fixtures/preflight_v3/DIGEST",
+    "proofManifest": "https://x402.nsgoods.org/proof/index.json"
+  },
+  "pinnedDigests": {
+    "schemaSha256": "7c9e99de9391183a262f84d94ae4c21babcdb5e5d5d17a0346d233c3d310f44a",
+    "combinedFixtureAndSchemaSha256": "cf1e2b16bc626eba01af48d84f1b5026a01d104c993cd097600900c22cf6251f",
+    "fixtureDigestFileSha256": "e2aad5e492fb4dddad9bd12ba2578329876a1b2025ab6f8b54291c3af442d4e6",
+    "proofManifestSha256": "908fc24f233dacbe47db5c428e3c041dff8c695dfb31a51c0d4b9a7a66aa5773"
+  },
+  "verifiedCoverage": {
+    "fixtureDigests": 6,
+    "signedFixtures": 3,
+    "unsignedRefusalFixtures": 2,
+    "componentSignatures": 9,
+    "envelopeSignatures": 3,
+    "subjectEqualityChecks": 9,
+    "componentCountChecks": 3,
+    "tamperCasesRejected": 9,
+    "v1FixturesRejectedByV3Schema": 4,
+    "v2FixturesRejectedByV3Schema": 5,
+    "signerAuthorizationVerified": true
+  },
+  "boundary": {
+    "fixtureOnly": true,
+    "networkCallsMadeByVerifier": 0,
+    "credentialsUsed": false,
+    "paymentsMade": 0,
+    "liveEndpointInvoked": false,
+    "assertsCurrentPayabilityOrSanctionsStatus": false,
+    "note": "This record reports the frozen fixture audit performed at the stated audit time. It is not a live-endpoint or paid-canary result and does not authorize payment or escrow release."
+  },
+  "classification": "external-integration-evidence",
+  "commercialBoundary": "This validation is public interoperability evidence. It is not a customer engagement, certification, endorsement or commercial validation."
+}

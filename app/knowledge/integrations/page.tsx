@@ -5,6 +5,8 @@ import {
   EXACTZK_EVIDENCE,
   EXACTZK_EVIDENCE_PATH,
   KNOWLEDGE_INTEGRATIONS_PATH,
+  NSGOODS_PREFLIGHT_V3_EVIDENCE,
+  NSGOODS_PREFLIGHT_V3_EVIDENCE_PATH,
 } from '@/lib/knowledge-integration-evidence'
 
 export const metadata: Metadata = {
@@ -44,6 +46,13 @@ export default function KnowledgeIntegrationsPage() {
         url: `${SITE_URL}${EXACTZK_EVIDENCE_PATH}`,
         datePublished: '2026-09-01',
       },
+      {
+        '@type': 'DigitalDocument',
+        name: NSGOODS_PREFLIGHT_V3_EVIDENCE.title,
+        description: NSGOODS_PREFLIGHT_V3_EVIDENCE.summary,
+        url: `${SITE_URL}${NSGOODS_PREFLIGHT_V3_EVIDENCE_PATH}`,
+        datePublished: '2026-09-02',
+      },
     ],
   }
 
@@ -75,6 +84,17 @@ export default function KnowledgeIntegrationsPage() {
               Machine-readable registry ↗
             </a>
           </div>
+          <div className="grid gap-5">
+          <Link href={NSGOODS_PREFLIGHT_V3_EVIDENCE_PATH} className="group block border border-zinc-800 bg-zinc-950/70 p-7 transition-colors hover:border-cyan-500/60">
+            <div className="flex flex-wrap items-center gap-3 font-mono text-[10px] uppercase tracking-widest">
+              <span className="text-emerald-300">Passed · fixture-only validation</span>
+              <span className="text-zinc-600">2026-09-02</span>
+              <span className="text-zinc-600">NSGoods · preflight_v3</span>
+            </div>
+            <h3 className="mt-5 text-2xl font-semibold text-white group-hover:text-cyan-200">{NSGOODS_PREFLIGHT_V3_EVIDENCE.title}</h3>
+            <p className="mt-3 max-w-3xl text-sm leading-6 text-zinc-400">{NSGOODS_PREFLIGHT_V3_EVIDENCE.summary}</p>
+            <p className="mt-6 font-mono text-[10px] uppercase tracking-widest text-cyan-400">Open validation record →</p>
+          </Link>
           <Link href={EXACTZK_EVIDENCE_PATH} className="group block border border-zinc-800 bg-zinc-950/70 p-7 transition-colors hover:border-cyan-500/60">
             <div className="flex flex-wrap items-center gap-3 font-mono text-[10px] uppercase tracking-widest">
               <span className="text-emerald-300">Published · independently verified</span>
@@ -85,6 +105,7 @@ export default function KnowledgeIntegrationsPage() {
             <p className="mt-3 max-w-3xl text-sm leading-6 text-zinc-400">{EXACTZK_EVIDENCE.summary}</p>
             <p className="mt-6 font-mono text-[10px] uppercase tracking-widest text-cyan-400">Open evidence record →</p>
           </Link>
+          </div>
         </div>
       </section>
     </main>

@@ -107,6 +107,19 @@
       "commercialBoundary": "The reproduction is public integration evidence, not a certification, endorsement, customer engagement or commercial validation."
     },
     {
+      "id": "nsgoods-preflight-v3-fixture-validation",
+      "kind": "integration",
+      "name": "NSGoods composite preflight v3 fixture validation",
+      "status": "public_evidence",
+      "url": "https://www.mahastrategies.com/knowledge/integrations/nsgoods-preflight-v3-fixture-validation",
+      "machineReadable": true,
+      "evidence": [
+        "https://www.mahastrategies.com/artifacts/integrations/nsgoods-preflight-v3-fixture-validation-2026-09-01.json"
+      ],
+      "evidenceBoundary": "The record covers offline verification of the frozen preflight_v3 contract and fixtures, including signer authorization, signatures, invariants, tamper cases and cross-version rejection. It does not report a verified live-endpoint or paid-canary result and does not assert current address status.",
+      "commercialBoundary": "This validation is public interoperability evidence, not a certification, endorsement, customer engagement or commercial validation."
+    },
+    {
       "id": "governed-workflow-state-graph",
       "kind": "capability",
       "name": "Governed Workflow State Graph",
