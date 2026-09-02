@@ -127,5 +127,25 @@
     "hypotheticalAfterBatch12bSurvivors": 804,
     "note": "A narrowed claim rebinds an existing record and adds no route. Proposed revisions are private, inactive and pending governed adoption."
   },
-  "capacityDigest": "sha256:533b24a39d3495b2176bb3712d28946f469922dceaa7dabb87ccbf8e897f0d95"
+  "pathToTarget": {
+    "currentProductionRoutes": 764,
+    "existingReleaseReadyPotential": 33,
+    "governedLegacyAdoptionPotential": 7,
+    "eligibleSourceReferencePages": 8,
+    "eligibleSourceFirstRecordCandidates": 7,
+    "reachableIfAllAdopted": 812,
+    "remainingGenuinelyNewWork": 188,
+    "stages": {
+      "candidate": 15,
+      "reviewed": 40,
+      "releaseReady": 33,
+      "released": 114,
+      "compiled": 103,
+      "reachable": 764,
+      "sitemapListed": 764,
+      "llmsListed": 190
+    },
+    "note": "A narrowed claim rebinds an existing record and adds no route, so legacy adoption is counted as reviewed rather than as new routes. Only currentProductionRoutes is public."
+  },
+  "capacityDigest": "sha256:0318e8322197a415b39c2bf4a274536e3fedab3785ae44e175192d5df6437afa"
 }
