@@ -1,0 +1,724 @@
+{
+  "schemaVersion": "maha-source-eligibility/1.0",
+  "governance": {
+    "chosen": "A",
+    "name": "projection-of-released-claims",
+    "inheritsFactualAuthority": false,
+    "requiresOwnCanonicalRelease": false,
+    "rationale": "A source page states only what already-released records state. It gains no authority of its own, so a withdrawn record removes its claim from the page rather than leaving it stranded behind a second release.",
+    "failClosed": "Every displayed claim must trace to an active released revision. A claim whose record is unreleased, superseded or withdrawn is dropped, and a page left with no claims is not eligible."
+  },
+  "uniqueInspectedSources": 48,
+  "eligibleNow": 8,
+  "blocked": {
+    "onRelease": 57,
+    "onShallowInspection": 7,
+    "onRights": 0,
+    "onMismatch": 8,
+    "duplicativeOrThin": 34
+  },
+  "verdicts": [
+    {
+      "sourceId": "10.1016/B978-0-12-801415-8.00016-3",
+      "eligible": false,
+      "refusals": [
+        "no-active-released-record",
+        "unreleased-claim-present",
+        "missing-information-dimension"
+      ],
+      "missingDimensions": [
+        "supported-findings"
+      ],
+      "releasedClaimCount": 0,
+      "route": "/knowledge/sources/10-1016-b978-0-12-801415-8-00016-3",
+      "depth": "section-or-full-text",
+      "releasedRecordCount": 0
+    },
+    {
+      "sourceId": "10.1016/j.cell.2014.10.004",
+      "eligible": false,
+      "refusals": [
+        "no-active-released-record",
+        "unreleased-claim-present",
+        "missing-information-dimension"
+      ],
+      "missingDimensions": [
+        "supported-findings"
+      ],
+      "releasedClaimCount": 0,
+      "route": "/knowledge/sources/10-1016-j-cell-2014-10-004",
+      "depth": "section-or-full-text",
+      "releasedRecordCount": 0
+    },
+    {
+      "sourceId": "10.1016/j.cell.2022.11.001",
+      "eligible": false,
+      "refusals": [
+        "no-active-released-record",
+        "unreleased-claim-present",
+        "missing-information-dimension"
+      ],
+      "missingDimensions": [
+        "supported-findings"
+      ],
+      "releasedClaimCount": 0,
+      "route": "/knowledge/sources/10-1016-j-cell-2022-11-001",
+      "depth": "section-or-full-text",
+      "releasedRecordCount": 0
+    },
+    {
+      "sourceId": "10.1016/j.jneumeth.2005.08.015",
+      "eligible": false,
+      "refusals": [
+        "not-inspected-beyond-metadata",
+        "no-active-released-record",
+        "unreleased-claim-present",
+        "missing-information-dimension"
+      ],
+      "missingDimensions": [
+        "inspected-passages",
+        "supported-findings"
+      ],
+      "releasedClaimCount": 0,
+      "route": "/knowledge/sources/10-1016-j-jneumeth-2005-08-015",
+      "depth": "abstract-only",
+      "releasedRecordCount": 0
+    },
+    {
+      "sourceId": "10.1016/j.neuron.2011.08.023",
+      "eligible": false,
+      "refusals": [
+        "not-inspected-beyond-metadata",
+        "no-active-released-record",
+        "unreleased-claim-present",
+        "missing-information-dimension"
+      ],
+      "missingDimensions": [
+        "inspected-passages",
+        "supported-findings"
+      ],
+      "releasedClaimCount": 0,
+      "route": "/knowledge/sources/10-1016-j-neuron-2011-08-023",
+      "depth": "abstract-only",
+      "releasedRecordCount": 0
+    },
+    {
+      "sourceId": "10.1016/j.synbio.2017.02.003",
+      "eligible": false,
+      "refusals": [
+        "unreleased-claim-present",
+        "missing-information-dimension"
+      ],
+      "missingDimensions": [
+        "supported-findings"
+      ],
+      "releasedClaimCount": 1,
+      "route": "/knowledge/sources/10-1016-j-synbio-2017-02-003",
+      "depth": "section-or-full-text",
+      "releasedRecordCount": 1
+    },
+    {
+      "sourceId": "10.1038/nature04970",
+      "eligible": false,
+      "refusals": [
+        "unreleased-claim-present",
+        "missing-information-dimension"
+      ],
+      "missingDimensions": [
+        "supported-findings"
+      ],
+      "releasedClaimCount": 1,
+      "route": "/knowledge/sources/10-1038-nature04970",
+      "depth": "section-or-full-text",
+      "releasedRecordCount": 1
+    },
+    {
+      "sourceId": "10.1038/nature09929",
+      "eligible": false,
+      "refusals": [
+        "unreleased-claim-present",
+        "missing-information-dimension"
+      ],
+      "missingDimensions": [
+        "supported-findings"
+      ],
+      "releasedClaimCount": 1,
+      "route": "/knowledge/sources/10-1038-nature09929",
+      "depth": "section-or-full-text",
+      "releasedRecordCount": 1
+    },
+    {
+      "sourceId": "10.1038/nature12385",
+      "eligible": false,
+      "refusals": [
+        "identity-unverified",
+        "not-inspected-beyond-metadata",
+        "unresolved-alignment-mismatch",
+        "no-active-released-record",
+        "unreleased-claim-present",
+        "missing-information-dimension"
+      ],
+      "missingDimensions": [
+        "inspected-passages",
+        "supported-findings"
+      ],
+      "releasedClaimCount": 0,
+      "route": "/knowledge/sources/10-1038-nature12385",
+      "depth": "abstract-only",
+      "releasedRecordCount": 0
+    },
+    {
+      "sourceId": "10.1038/nature24636",
+      "eligible": true,
+      "refusals": [],
+      "missingDimensions": [],
+      "releasedClaimCount": 4,
+      "route": "/knowledge/sources/10-1038-nature24636",
+      "depth": "section-or-full-text",
+      "releasedRecordCount": 4
+    },
+    {
+      "sourceId": "10.1038/nature26160",
+      "eligible": false,
+      "refusals": [
+        "identity-unverified",
+        "unresolved-alignment-mismatch",
+        "unreleased-claim-present"
+      ],
+      "missingDimensions": [],
+      "releasedClaimCount": 2,
+      "route": "/knowledge/sources/10-1038-nature26160",
+      "depth": "section-or-full-text",
+      "releasedRecordCount": 2
+    },
+    {
+      "sourceId": "10.1038/nbt986",
+      "eligible": false,
+      "refusals": [
+        "no-active-released-record",
+        "unreleased-claim-present",
+        "missing-information-dimension"
+      ],
+      "missingDimensions": [
+        "supported-findings"
+      ],
+      "releasedClaimCount": 0,
+      "route": "/knowledge/sources/10-1038-nbt986",
+      "depth": "section-or-full-text",
+      "releasedRecordCount": 0
+    },
+    {
+      "sourceId": "10.1038/nn.2973",
+      "eligible": false,
+      "refusals": [
+        "unreleased-claim-present",
+        "missing-information-dimension"
+      ],
+      "missingDimensions": [
+        "supported-findings"
+      ],
+      "releasedClaimCount": 1,
+      "route": "/knowledge/sources/10-1038-nn-2973",
+      "depth": "section-or-full-text",
+      "releasedRecordCount": 1
+    },
+    {
+      "sourceId": "10.1038/nn1525",
+      "eligible": false,
+      "refusals": [
+        "no-active-released-record",
+        "unreleased-claim-present",
+        "missing-information-dimension"
+      ],
+      "missingDimensions": [
+        "supported-findings"
+      ],
+      "releasedClaimCount": 0,
+      "route": "/knowledge/sources/10-1038-nn1525",
+      "depth": "section-or-full-text",
+      "releasedRecordCount": 0
+    },
+    {
+      "sourceId": "10.1038/nnano.2010.172",
+      "eligible": false,
+      "refusals": [
+        "missing-information-dimension"
+      ],
+      "missingDimensions": [
+        "supported-findings"
+      ],
+      "releasedClaimCount": 1,
+      "route": "/knowledge/sources/10-1038-nnano-2010-172",
+      "depth": "section-or-full-text",
+      "releasedRecordCount": 1
+    },
+    {
+      "sourceId": "10.1038/nrm3028",
+      "eligible": false,
+      "refusals": [
+        "not-inspected-beyond-metadata",
+        "no-active-released-record",
+        "unreleased-claim-present",
+        "missing-information-dimension"
+      ],
+      "missingDimensions": [
+        "inspected-passages",
+        "supported-findings"
+      ],
+      "releasedClaimCount": 0,
+      "route": "/knowledge/sources/10-1038-nrm3028",
+      "depth": "abstract-only",
+      "releasedRecordCount": 0
+    },
+    {
+      "sourceId": "10.1038/s41580-020-00313-x",
+      "eligible": false,
+      "refusals": [
+        "unreleased-claim-present",
+        "missing-information-dimension"
+      ],
+      "missingDimensions": [
+        "supported-findings"
+      ],
+      "releasedClaimCount": 1,
+      "route": "/knowledge/sources/10-1038-s41580-020-00313-x",
+      "depth": "section-or-full-text",
+      "releasedRecordCount": 1
+    },
+    {
+      "sourceId": "10.1038/s41586-023-06415-8",
+      "eligible": true,
+      "refusals": [],
+      "missingDimensions": [],
+      "releasedClaimCount": 5,
+      "route": "/knowledge/sources/10-1038-s41586-023-06415-8",
+      "depth": "section-or-full-text",
+      "releasedRecordCount": 5
+    },
+    {
+      "sourceId": "10.1088/1741-4326/ac170f",
+      "eligible": false,
+      "refusals": [
+        "no-active-released-record",
+        "unreleased-claim-present",
+        "missing-information-dimension"
+      ],
+      "missingDimensions": [
+        "supported-findings"
+      ],
+      "releasedClaimCount": 0,
+      "route": "/knowledge/sources/10-1088-1741-4326-ac170f",
+      "depth": "section-or-full-text",
+      "releasedRecordCount": 0
+    },
+    {
+      "sourceId": "10.1103/PhysRevLett.105.136805",
+      "eligible": false,
+      "refusals": [
+        "no-active-released-record",
+        "unreleased-claim-present",
+        "missing-information-dimension"
+      ],
+      "missingDimensions": [
+        "supported-findings"
+      ],
+      "releasedClaimCount": 0,
+      "route": "/knowledge/sources/10-1103-physrevlett-105-136805",
+      "depth": "section-or-full-text",
+      "releasedRecordCount": 0
+    },
+    {
+      "sourceId": "10.1103/RevModPhys.82.3045",
+      "eligible": false,
+      "refusals": [
+        "identity-unverified",
+        "not-inspected-beyond-metadata",
+        "unresolved-alignment-mismatch",
+        "no-active-released-record",
+        "unreleased-claim-present",
+        "missing-information-dimension"
+      ],
+      "missingDimensions": [
+        "inspected-passages",
+        "supported-findings"
+      ],
+      "releasedClaimCount": 0,
+      "route": "/knowledge/sources/10-1103-revmodphys-82-3045",
+      "depth": "abstract-only",
+      "releasedRecordCount": 0
+    },
+    {
+      "sourceId": "10.1109/TPEL.2003.810840",
+      "eligible": false,
+      "refusals": [
+        "not-inspected-beyond-metadata",
+        "no-active-released-record",
+        "unreleased-claim-present",
+        "missing-information-dimension"
+      ],
+      "missingDimensions": [
+        "inspected-passages",
+        "supported-findings"
+      ],
+      "releasedClaimCount": 0,
+      "route": "/knowledge/sources/10-1109-tpel-2003-810840",
+      "depth": "abstract-only",
+      "releasedRecordCount": 0
+    },
+    {
+      "sourceId": "10.1111/acel.12344",
+      "eligible": false,
+      "refusals": [
+        "unreleased-claim-present",
+        "missing-information-dimension"
+      ],
+      "missingDimensions": [
+        "supported-findings"
+      ],
+      "releasedClaimCount": 1,
+      "route": "/knowledge/sources/10-1111-acel-12344",
+      "depth": "section-or-full-text",
+      "releasedRecordCount": 1
+    },
+    {
+      "sourceId": "10.1126/science.1102896",
+      "eligible": true,
+      "refusals": [],
+      "missingDimensions": [],
+      "releasedClaimCount": 4,
+      "route": "/knowledge/sources/10-1126-science-1102896",
+      "depth": "section-or-full-text",
+      "releasedRecordCount": 4
+    },
+    {
+      "sourceId": "10.1126/science.add2187",
+      "eligible": false,
+      "refusals": [
+        "unreleased-claim-present"
+      ],
+      "missingDimensions": [],
+      "releasedClaimCount": 2,
+      "route": "/knowledge/sources/10-1126-science-add2187",
+      "depth": "section-or-full-text",
+      "releasedRecordCount": 2
+    },
+    {
+      "sourceId": "10.1162/tacl_a_00638",
+      "eligible": false,
+      "refusals": [
+        "unreleased-claim-present",
+        "missing-information-dimension"
+      ],
+      "missingDimensions": [
+        "supported-findings"
+      ],
+      "releasedClaimCount": 1,
+      "route": "/knowledge/sources/10-1162-tacl-a-00638",
+      "depth": "section-or-full-text",
+      "releasedRecordCount": 1
+    },
+    {
+      "sourceId": "10.1523/JNEUROSCI.0971-11.2011",
+      "eligible": false,
+      "refusals": [
+        "missing-information-dimension"
+      ],
+      "missingDimensions": [
+        "supported-findings"
+      ],
+      "releasedClaimCount": 1,
+      "route": "/knowledge/sources/10-1523-jneurosci-0971-11-2011",
+      "depth": "section-or-full-text",
+      "releasedRecordCount": 1
+    },
+    {
+      "sourceId": "10.23915/distill.00007",
+      "eligible": false,
+      "refusals": [
+        "identity-unverified",
+        "not-inspected-beyond-metadata",
+        "unresolved-alignment-mismatch",
+        "no-active-released-record",
+        "unreleased-claim-present",
+        "missing-information-dimension"
+      ],
+      "missingDimensions": [
+        "inspected-passages",
+        "supported-findings"
+      ],
+      "releasedClaimCount": 0,
+      "route": "/knowledge/sources/10-23915-distill-00007",
+      "depth": "source-mismatched",
+      "releasedRecordCount": 0
+    },
+    {
+      "sourceId": "10.4161/auto.19496",
+      "eligible": true,
+      "refusals": [],
+      "missingDimensions": [],
+      "releasedClaimCount": 5,
+      "route": "/knowledge/sources/10-4161-auto-19496",
+      "depth": "section-or-full-text",
+      "releasedRecordCount": 5
+    },
+    {
+      "sourceId": "10.6028/NIST.AI.600-1",
+      "eligible": false,
+      "refusals": [
+        "no-active-released-record",
+        "unreleased-claim-present",
+        "missing-information-dimension"
+      ],
+      "missingDimensions": [
+        "supported-findings"
+      ],
+      "releasedClaimCount": 0,
+      "route": "/knowledge/sources/10-6028-nist-ai-600-1",
+      "depth": "section-or-full-text",
+      "releasedRecordCount": 0
+    },
+    {
+      "sourceId": "https://arxiv.org/abs/2210.03629",
+      "eligible": false,
+      "refusals": [
+        "no-active-released-record",
+        "unreleased-claim-present",
+        "missing-information-dimension"
+      ],
+      "missingDimensions": [
+        "supported-findings"
+      ],
+      "releasedClaimCount": 0,
+      "route": "/knowledge/sources/https-arxiv-org-abs-2210-03629",
+      "depth": "section-or-full-text",
+      "releasedRecordCount": 0
+    },
+    {
+      "sourceId": "https://arxiv.org/abs/2308.08155",
+      "eligible": false,
+      "refusals": [
+        "no-active-released-record",
+        "unreleased-claim-present",
+        "missing-information-dimension"
+      ],
+      "missingDimensions": [
+        "supported-findings"
+      ],
+      "releasedClaimCount": 0,
+      "route": "/knowledge/sources/https-arxiv-org-abs-2308-08155",
+      "depth": "section-or-full-text",
+      "releasedRecordCount": 0
+    },
+    {
+      "sourceId": "https://arxiv.org/abs/2309.08600",
+      "eligible": false,
+      "refusals": [
+        "unreleased-claim-present"
+      ],
+      "missingDimensions": [],
+      "releasedClaimCount": 2,
+      "route": "/knowledge/sources/https-arxiv-org-abs-2309-08600",
+      "depth": "section-or-full-text",
+      "releasedRecordCount": 2
+    },
+    {
+      "sourceId": "https://lasers.llnl.gov/science/achieving-fusion-ignition",
+      "eligible": false,
+      "refusals": [
+        "no-active-released-record",
+        "unreleased-claim-present",
+        "missing-information-dimension"
+      ],
+      "missingDimensions": [
+        "supported-findings"
+      ],
+      "releasedClaimCount": 0,
+      "route": "/knowledge/sources/https-lasers-llnl-gov-science-achieving-fusion-ignition",
+      "depth": "section-or-full-text",
+      "releasedRecordCount": 0
+    },
+    {
+      "sourceId": "https://modelcontextprotocol.io/specification/2024-11-05/index",
+      "eligible": false,
+      "refusals": [
+        "unreleased-claim-present"
+      ],
+      "missingDimensions": [],
+      "releasedClaimCount": 4,
+      "route": "/knowledge/sources/https-modelcontextprotocol-io-specification-2024-11-05-index",
+      "depth": "section-or-full-text",
+      "releasedRecordCount": 4
+    },
+    {
+      "sourceId": "https://modelcontextprotocol.io/specification/draft/server/tools",
+      "eligible": true,
+      "refusals": [],
+      "missingDimensions": [],
+      "releasedClaimCount": 5,
+      "route": "/knowledge/sources/https-modelcontextprotocol-io-specification-draft-server-tools",
+      "depth": "section-or-full-text",
+      "releasedRecordCount": 5
+    },
+    {
+      "sourceId": "https://pubs.usgs.gov/periodicals/mcs2026/mcs2026.pdf",
+      "eligible": false,
+      "refusals": [
+        "no-active-released-record",
+        "unreleased-claim-present",
+        "missing-information-dimension"
+      ],
+      "missingDimensions": [
+        "supported-findings"
+      ],
+      "releasedClaimCount": 0,
+      "route": "/knowledge/sources/https-pubs-usgs-gov-periodicals-mcs2026-mcs2026-pdf",
+      "depth": "section-or-full-text",
+      "releasedRecordCount": 0
+    },
+    {
+      "sourceId": "https://pubs.usgs.gov/publication/pp1802",
+      "eligible": true,
+      "refusals": [],
+      "missingDimensions": [],
+      "releasedClaimCount": 5,
+      "route": "/knowledge/sources/https-pubs-usgs-gov-publication-pp1802",
+      "depth": "section-or-full-text",
+      "releasedRecordCount": 5
+    },
+    {
+      "sourceId": "https://transformer-circuits.pub/2021/framework/index.html",
+      "eligible": false,
+      "refusals": [
+        "no-active-released-record",
+        "unreleased-claim-present",
+        "missing-information-dimension"
+      ],
+      "missingDimensions": [
+        "supported-findings"
+      ],
+      "releasedClaimCount": 0,
+      "route": "/knowledge/sources/https-transformer-circuits-pub-2021-framework-index-html",
+      "depth": "section-or-full-text",
+      "releasedRecordCount": 0
+    },
+    {
+      "sourceId": "https://transformer-circuits.pub/2022/in-context-learning-and-induction-heads/index.html",
+      "eligible": false,
+      "refusals": [
+        "unreleased-claim-present"
+      ],
+      "missingDimensions": [],
+      "releasedClaimCount": 3,
+      "route": "/knowledge/sources/https-transformer-circuits-pub-2022-in-context-learning-and-induction-heads-index-html",
+      "depth": "section-or-full-text",
+      "releasedRecordCount": 3
+    },
+    {
+      "sourceId": "https://transformer-circuits.pub/2022/toy_model/index.html",
+      "eligible": true,
+      "refusals": [],
+      "missingDimensions": [],
+      "releasedClaimCount": 5,
+      "route": "/knowledge/sources/https-transformer-circuits-pub-2022-toy-model-index-html",
+      "depth": "section-or-full-text",
+      "releasedRecordCount": 5
+    },
+    {
+      "sourceId": "https://www.alignmentforum.org/posts/JvZhhzycHu2Yd57RN/causal-scrubbing-a-method-for-rigorously-testing",
+      "eligible": false,
+      "refusals": [
+        "unreleased-claim-present",
+        "missing-information-dimension"
+      ],
+      "missingDimensions": [
+        "supported-findings"
+      ],
+      "releasedClaimCount": 1,
+      "route": "/knowledge/sources/https-www-alignmentforum-org-posts-jvzhhzychu2yd57rn-causal-scrubbing-a-method-for-rigorously-testing",
+      "depth": "section-or-full-text",
+      "releasedRecordCount": 1
+    },
+    {
+      "sourceId": "https://www.iter.org/fusion-energy/making-it-work",
+      "eligible": false,
+      "refusals": [
+        "unreleased-claim-present",
+        "missing-information-dimension"
+      ],
+      "missingDimensions": [
+        "supported-findings"
+      ],
+      "releasedClaimCount": 1,
+      "route": "/knowledge/sources/https-www-iter-org-fusion-energy-making-it-work",
+      "depth": "section-or-full-text",
+      "releasedRecordCount": 1
+    },
+    {
+      "sourceId": "https://www.iter.org/machine/magnets",
+      "eligible": true,
+      "refusals": [],
+      "missingDimensions": [],
+      "releasedClaimCount": 5,
+      "route": "/knowledge/sources/https-www-iter-org-machine-magnets",
+      "depth": "section-or-full-text",
+      "releasedRecordCount": 5
+    },
+    {
+      "sourceId": "https://www.iter.org/machine/supporting-systems",
+      "eligible": false,
+      "refusals": [
+        "unreleased-claim-present"
+      ],
+      "missingDimensions": [],
+      "releasedClaimCount": 4,
+      "route": "/knowledge/sources/https-www-iter-org-machine-supporting-systems",
+      "depth": "section-or-full-text",
+      "releasedRecordCount": 4
+    },
+    {
+      "sourceId": "https://www.iter.org/machine/supporting-systems/disruption-mitigation",
+      "eligible": false,
+      "refusals": [
+        "unreleased-claim-present",
+        "missing-information-dimension"
+      ],
+      "missingDimensions": [
+        "supported-findings"
+      ],
+      "releasedClaimCount": 1,
+      "route": "/knowledge/sources/https-www-iter-org-machine-supporting-systems-disruption-mitigation",
+      "depth": "section-or-full-text",
+      "releasedRecordCount": 1
+    },
+    {
+      "sourceId": "https://www.iter.org/machine/supporting-systems/tritium-breeding",
+      "eligible": false,
+      "refusals": [
+        "missing-information-dimension"
+      ],
+      "missingDimensions": [
+        "supported-findings"
+      ],
+      "releasedClaimCount": 1,
+      "route": "/knowledge/sources/https-www-iter-org-machine-supporting-systems-tritium-breeding",
+      "depth": "section-or-full-text",
+      "releasedRecordCount": 1
+    },
+    {
+      "sourceId": "https://www.usgs.gov/programs/mineral-resources-program/science/mineral-supply-chain-analysis",
+      "eligible": false,
+      "refusals": [
+        "unreleased-claim-present",
+        "missing-information-dimension"
+      ],
+      "missingDimensions": [
+        "supported-findings"
+      ],
+      "releasedClaimCount": 1,
+      "route": "/knowledge/sources/https-www-usgs-gov-programs-mineral-resources-program-science-mineral-supply-chain-analysis",
+      "depth": "section-or-full-text",
+      "releasedRecordCount": 1
+    }
+  ],
+  "note": "One source does not equal one eligible page. A source backing a single released record duplicates that record page and is refused."
+}

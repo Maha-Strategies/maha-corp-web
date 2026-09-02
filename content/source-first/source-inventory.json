@@ -1,0 +1,2854 @@
+{
+  "schemaVersion": "maha-source-inventory/1.0",
+  "contentInspectedRecords": 238,
+  "uniqueSources": 48,
+  "byDepth": {
+    "section-or-full-text": 41,
+    "abstract-only": 6,
+    "source-mismatched": 1
+  },
+  "recordsPerSource": {
+    "1": 4,
+    "4": 2,
+    "5": 40,
+    "6": 1,
+    "20": 1
+  },
+  "sources": [
+    {
+      "sourceId": "10.1016/B978-0-12-801415-8.00016-3",
+      "title": "Analysis and interpretation of microplate-based oxygen consumption and pH data",
+      "authors": [
+        "Ajit S. Divakaruni",
+        "Alexander Paradyse",
+        "David A. Ferrick",
+        "Anne N. Murphy",
+        "Martin Jastroch"
+      ],
+      "publisher": "Methods in Enzymology",
+      "publishedAt": "2014-01-01",
+      "versionRelationship": "version of record as cited",
+      "rightsBasis": "citation-with-paraphrase",
+      "inspectionDepth": "section-or-full-text",
+      "exactLocators": [
+        "Chapter 16, pages 309–354: oxygen-consumption rate, data analysis, normalization, controls, and extracellular-pH interpretation."
+      ],
+      "boundRecords": [
+        {
+          "recordId": "urn:maha:record:longevity-metabolism-oxygen-consumption-rate",
+          "revisionSha256": "sha256:9ae12b356c0faf01b473266d67fded5ffe49f2a3f1652e3b17af62de1336974d",
+          "activeRelease": false,
+          "locator": "Chapter 16, pages 309–354: oxygen-consumption rate, data analysis, normalization, controls, and extracellular-pH interpretation.",
+          "statement": "The cited source supports treating oxygen consumption rate as a distinct concept within the stated longevity and metabolism scope."
+        },
+        {
+          "recordId": "urn:maha:record:longevity-metabolism-atp-linked-respiration",
+          "revisionSha256": "sha256:58b6a11d7507f1b2dd28f920f82bd5fc045e5885b8c10bd9bdceb407d7aa51d2",
+          "activeRelease": false,
+          "locator": "Chapter 16, pages 309–354: oxygen-consumption rate, data analysis, normalization, controls, and extracellular-pH interpretation.",
+          "statement": "The cited source supports treating atp linked respiration as a distinct mechanism within the stated longevity and metabolism scope."
+        },
+        {
+          "recordId": "urn:maha:record:longevity-metabolism-metabolic-flux-tracing",
+          "revisionSha256": "sha256:121ec5896f4411eed85f3086eba507fa1dbe76a9f4bf08bd191e7d165556986c",
+          "activeRelease": false,
+          "locator": "Chapter 16, pages 309–354: oxygen-consumption rate, data analysis, normalization, controls, and extracellular-pH interpretation.",
+          "statement": "The cited source supports treating metabolic flux tracing as a distinct method within the stated longevity and metabolism scope."
+        },
+        {
+          "recordId": "urn:maha:record:longevity-metabolism-ampk-energy-sensing",
+          "revisionSha256": "sha256:11166569e6a0aa01f19064633051d5ad84e2a41eb81a97198cbe5ab8cfe9889a",
+          "activeRelease": false,
+          "locator": "Chapter 16, pages 309–354: oxygen-consumption rate, data analysis, normalization, controls, and extracellular-pH interpretation.",
+          "statement": "The cited source supports treating ampk energy sensing as a distinct measurement within the stated longevity and metabolism scope."
+        },
+        {
+          "recordId": "urn:maha:record:longevity-metabolism-insulin-mtor-signaling",
+          "revisionSha256": "sha256:56b92bdedc8e8b59d00ea159ddf89551169660542ba83e221130d9046e763a73",
+          "activeRelease": false,
+          "locator": "Chapter 16, pages 309–354: oxygen-consumption rate, data analysis, normalization, controls, and extracellular-pH interpretation.",
+          "statement": "The cited source supports treating insulin mtor signaling as a distinct comparison within the stated longevity and metabolism scope."
+        }
+      ],
+      "releasedRecordCount": 0,
+      "fullTextAccessible": true,
+      "candidateSearchIntent": "What Analysis and interpretation of microplate-based oxygen consumption and establishes, and what it does not",
+      "duplicationRisk": "none",
+      "identityConflicted": false
+    },
+    {
+      "sourceId": "10.1016/j.cell.2014.10.004",
+      "title": "Paper-based synthetic gene networks",
+      "authors": [
+        "Keith Pardee",
+        "Alex A. Green",
+        "Tom Ferrante",
+        "et al."
+      ],
+      "publisher": "Cell",
+      "publishedAt": "2014-11-06",
+      "versionRelationship": "version of record as cited",
+      "rightsBasis": "citation-with-paraphrase",
+      "inspectionDepth": "section-or-full-text",
+      "exactLocators": [
+        "Toehold-switch design, cell-free implementation, freeze-drying, assays, and Methods."
+      ],
+      "boundRecords": [
+        {
+          "recordId": "urn:maha:record:biomolecular-engineering-translational-control-circuits",
+          "revisionSha256": "sha256:1f877ffe9cc1fe0a02ae70fee8bcdbb697add8846b90a1c42671c25f6c7a88bb",
+          "activeRelease": false,
+          "locator": "Toehold-switch design, cell-free implementation, freeze-drying, assays, and Methods.",
+          "statement": "The cited source supports treating translational control circuits as a distinct concept within the stated biomolecular engineering scope."
+        },
+        {
+          "recordId": "urn:maha:record:biomolecular-engineering-metabolic-pathway-prototyping",
+          "revisionSha256": "sha256:9a52be42a0306797a81951694a13811a15a87c1317f1e51ca39ef2a2983788fd",
+          "activeRelease": false,
+          "locator": "Toehold-switch design, cell-free implementation, freeze-drying, assays, and Methods.",
+          "statement": "The cited source supports treating metabolic pathway prototyping as a distinct mechanism within the stated biomolecular engineering scope."
+        },
+        {
+          "recordId": "urn:maha:record:biomolecular-engineering-enzyme-cascade-engineering",
+          "revisionSha256": "sha256:bd0eac425cda83510a62839d32a49f3563b93e9f74c992c817f8618d5e6b1e79",
+          "activeRelease": false,
+          "locator": "Toehold-switch design, cell-free implementation, freeze-drying, assays, and Methods.",
+          "statement": "The cited source supports treating enzyme cascade engineering as a distinct method within the stated biomolecular engineering scope."
+        },
+        {
+          "recordId": "urn:maha:record:biomolecular-engineering-compartmentalized-cell-free-systems",
+          "revisionSha256": "sha256:7b344d2bc9e6f1bfa7d0d265a865c1f4a1d67b165ca8a8fece10536a5a410a37",
+          "activeRelease": false,
+          "locator": "Toehold-switch design, cell-free implementation, freeze-drying, assays, and Methods.",
+          "statement": "The cited source supports treating compartmentalized cell free systems as a distinct measurement within the stated biomolecular engineering scope."
+        },
+        {
+          "recordId": "urn:maha:record:biomolecular-engineering-droplet-microfluidic-screening",
+          "revisionSha256": "sha256:835981d42a3f9c1beff525b65f9110298e4afb84d904af2ef013d2101ec5300f",
+          "activeRelease": false,
+          "locator": "Toehold-switch design, cell-free implementation, freeze-drying, assays, and Methods.",
+          "statement": "The cited source supports treating droplet microfluidic screening as a distinct comparison within the stated biomolecular engineering scope."
+        }
+      ],
+      "releasedRecordCount": 0,
+      "fullTextAccessible": true,
+      "candidateSearchIntent": "What Paper-based synthetic gene networks establishes, and what it does not",
+      "duplicationRisk": "none",
+      "identityConflicted": false
+    },
+    {
+      "sourceId": "10.1016/j.cell.2022.11.001",
+      "title": "Hallmarks of Aging: An Expanding Universe",
+      "authors": [
+        "Carlos López-Otín",
+        "Maria A. Blasco",
+        "Linda Partridge",
+        "Manuel Serrano",
+        "Guido Kroemer"
+      ],
+      "publisher": "Cell",
+      "publishedAt": "2023-01-19",
+      "versionRelationship": "version of record as cited",
+      "rightsBasis": "citation-with-paraphrase",
+      "inspectionDepth": "section-or-full-text",
+      "exactLocators": [
+        "Nutrient sensing, mitochondrial dysfunction, cellular senescence, biomarkers, and intervention framework."
+      ],
+      "boundRecords": [
+        {
+          "recordId": "urn:maha:record:longevity-metabolism-sirtuin-nad-dependence",
+          "revisionSha256": "sha256:3774dec2e51ced47caa4a9f83ae6490bf4617f2afe90e96422fec90a3f7ec080",
+          "activeRelease": false,
+          "locator": "Nutrient sensing, mitochondrial dysfunction, cellular senescence, biomarkers, and intervention framework.",
+          "statement": "The cited source supports treating sirtuin nad+ dependence as a distinct concept within the stated longevity and metabolism scope."
+        },
+        {
+          "recordId": "urn:maha:record:longevity-metabolism-cd38-nad-consumption",
+          "revisionSha256": "sha256:575e829bc82bd7a76ad29d773704f79f51a5a86e2cedc7c0a95a30f35524b570",
+          "activeRelease": false,
+          "locator": "Nutrient sensing, mitochondrial dysfunction, cellular senescence, biomarkers, and intervention framework.",
+          "statement": "The cited source supports treating cd38 nad+ consumption as a distinct mechanism within the stated longevity and metabolism scope."
+        },
+        {
+          "recordId": "urn:maha:record:longevity-metabolism-intervention-biomarker-boundaries",
+          "revisionSha256": "sha256:b42f6ab8e4a4d91ba3ef3ebc9efb8750e5efe7d322befbddf74241c09016284a",
+          "activeRelease": false,
+          "locator": "Nutrient sensing, mitochondrial dysfunction, cellular senescence, biomarkers, and intervention framework.",
+          "statement": "The cited source supports treating intervention biomarker boundaries as a distinct method within the stated longevity and metabolism scope."
+        },
+        {
+          "recordId": "urn:maha:record:longevity-metabolism-lifespan-versus-healthspan-endpoints",
+          "revisionSha256": "sha256:d3f02e6c6340da552ce47205b2902e8df9b303f027b2dabead35624a679db296",
+          "activeRelease": false,
+          "locator": "Nutrient sensing, mitochondrial dysfunction, cellular senescence, biomarkers, and intervention framework.",
+          "statement": "The cited source supports treating lifespan versus healthspan endpoints as a distinct measurement within the stated longevity and metabolism scope."
+        },
+        {
+          "recordId": "urn:maha:record:longevity-metabolism-translation-to-human-outcomes",
+          "revisionSha256": "sha256:d0d8e4666aabf2a9c6243e0681e380eb24e01b1be85287194df8456cbd0b021f",
+          "activeRelease": false,
+          "locator": "Nutrient sensing, mitochondrial dysfunction, cellular senescence, biomarkers, and intervention framework.",
+          "statement": "The cited source supports treating translation to human outcomes as a distinct comparison within the stated longevity and metabolism scope."
+        }
+      ],
+      "releasedRecordCount": 0,
+      "fullTextAccessible": true,
+      "candidateSearchIntent": "What Hallmarks of Aging: An Expanding Universe establishes, and what it does not",
+      "duplicationRisk": "none",
+      "identityConflicted": false
+    },
+    {
+      "sourceId": "10.1016/j.jneumeth.2005.08.015",
+      "title": "Response of brain tissue to chronically implanted neural electrodes",
+      "authors": [
+        "Vera S. Polikov",
+        "Patrick A. Tresco",
+        "William M. Reichert"
+      ],
+      "publisher": "Journal of Neuroscience Methods",
+      "publishedAt": "2005-10-15",
+      "versionRelationship": "version of record as cited",
+      "rightsBasis": "citation-with-paraphrase",
+      "inspectionDepth": "abstract-only",
+      "exactLocators": [
+        "Tissue response, electrode materials, chronic recording stability, and design-factor sections."
+      ],
+      "boundRecords": [
+        {
+          "recordId": "urn:maha:record:neurotechnology-bci-chronic-signal-stability",
+          "revisionSha256": "sha256:21b00e998a171f2c9a561463f4ca43fa3bf56ba0439efbe8abd89654e7906de9",
+          "activeRelease": false,
+          "locator": "Tissue response, electrode materials, chronic recording stability, and design-factor sections.",
+          "statement": "The cited source supports treating chronic signal stability as a distinct concept within the stated neurotechnology and bci scope."
+        },
+        {
+          "recordId": "urn:maha:record:neurotechnology-bci-foreign-body-response",
+          "revisionSha256": "sha256:f72bd35f40fb420af2a5b3fadc165aac72d0fc875d3e30ccfb82a597f97409a8",
+          "activeRelease": false,
+          "locator": "Tissue response, electrode materials, chronic recording stability, and design-factor sections.",
+          "statement": "The cited source supports treating foreign body response as a distinct mechanism within the stated neurotechnology and bci scope."
+        },
+        {
+          "recordId": "urn:maha:record:neurotechnology-bci-wireless-neural-telemetry",
+          "revisionSha256": "sha256:3bb88c0e480523c88de1379cac89a559b970908abd509ebc1393a48603078e18",
+          "activeRelease": false,
+          "locator": "Tissue response, electrode materials, chronic recording stability, and design-factor sections.",
+          "statement": "The cited source supports treating wireless neural telemetry as a distinct method within the stated neurotechnology and bci scope."
+        },
+        {
+          "recordId": "urn:maha:record:neurotechnology-bci-neural-data-compression",
+          "revisionSha256": "sha256:ecd25017f5a4963595c44b87ce8a2c29bbed3e34c1101f4646c4ae965fa19b61",
+          "activeRelease": false,
+          "locator": "Tissue response, electrode materials, chronic recording stability, and design-factor sections.",
+          "statement": "The cited source supports treating neural data compression as a distinct measurement within the stated neurotechnology and bci scope."
+        },
+        {
+          "recordId": "urn:maha:record:neurotechnology-bci-clinical-translation-boundaries",
+          "revisionSha256": "sha256:b71169dac2062e651c6cdac31cd5366dab81dd55dbdc2914a673daa296c6044f",
+          "activeRelease": false,
+          "locator": "Tissue response, electrode materials, chronic recording stability, and design-factor sections.",
+          "statement": "The cited source supports treating clinical translation boundaries as a distinct comparison within the stated neurotechnology and bci scope."
+        }
+      ],
+      "releasedRecordCount": 0,
+      "fullTextAccessible": false,
+      "candidateSearchIntent": "What Response of brain tissue to chronically implanted neural electrodes establishes, and what it does not",
+      "duplicationRisk": "none",
+      "identityConflicted": false
+    },
+    {
+      "sourceId": "10.1016/j.neuron.2011.08.023",
+      "title": "Closed-loop deep brain stimulation is superior in ameliorating parkinsonism",
+      "authors": [
+        "Boris Rosin",
+        "Maya Slovik",
+        "Rea Mitelman",
+        "et al."
+      ],
+      "publisher": "Neuron",
+      "publishedAt": "2011-10-20",
+      "versionRelationship": "version of record as cited",
+      "rightsBasis": "citation-with-paraphrase",
+      "inspectionDepth": "abstract-only",
+      "exactLocators": [
+        "Closed-loop detection, stimulation timing, MPTP primate model, outcome comparisons, figures, and experimental procedures."
+      ],
+      "boundRecords": [
+        {
+          "recordId": "urn:maha:record:neurotechnology-bci-closed-loop-neural-decoding",
+          "revisionSha256": "sha256:e287e1c9d6dee7116f8c8c9dfd6f4484faba4ad519cab35b12924e4194cd38be",
+          "activeRelease": false,
+          "locator": "Closed-loop detection, stimulation timing, MPTP primate model, outcome comparisons, figures, and experimental procedures.",
+          "statement": "The cited source supports treating closed loop neural decoding as a distinct concept within the stated neurotechnology and bci scope."
+        },
+        {
+          "recordId": "urn:maha:record:neurotechnology-bci-decoder-update-latency",
+          "revisionSha256": "sha256:69c5b7d88b23c93b7d6f355cce8af23005eaf66627969676d75d59f74267c27f",
+          "activeRelease": false,
+          "locator": "Closed-loop detection, stimulation timing, MPTP primate model, outcome comparisons, figures, and experimental procedures.",
+          "statement": "The cited source supports treating decoder update latency as a distinct mechanism within the stated neurotechnology and bci scope."
+        },
+        {
+          "recordId": "urn:maha:record:neurotechnology-bci-sensing-to-stimulation-loop",
+          "revisionSha256": "sha256:90fb9f3d6b315601450a5240f84ad94a736577f9f2f80e842f2f71340761c657",
+          "activeRelease": false,
+          "locator": "Closed-loop detection, stimulation timing, MPTP primate model, outcome comparisons, figures, and experimental procedures.",
+          "statement": "The cited source supports treating sensing to stimulation loop as a distinct method within the stated neurotechnology and bci scope."
+        },
+        {
+          "recordId": "urn:maha:record:neurotechnology-bci-neural-feature-extraction",
+          "revisionSha256": "sha256:6e2753bef11c22080e830eda933d3f4d4ab61efa129f565d1d3bc2c3cf174d65",
+          "activeRelease": false,
+          "locator": "Closed-loop detection, stimulation timing, MPTP primate model, outcome comparisons, figures, and experimental procedures.",
+          "statement": "The cited source supports treating neural feature extraction as a distinct measurement within the stated neurotechnology and bci scope."
+        },
+        {
+          "recordId": "urn:maha:record:neurotechnology-bci-adaptive-stimulation-policies",
+          "revisionSha256": "sha256:6421b1d7631cd0d8f3a56c8c94d55d133c9622b90382c4d46afea950d5f0f7b0",
+          "activeRelease": false,
+          "locator": "Closed-loop detection, stimulation timing, MPTP primate model, outcome comparisons, figures, and experimental procedures.",
+          "statement": "The cited source supports treating adaptive stimulation policies as a distinct comparison within the stated neurotechnology and bci scope."
+        }
+      ],
+      "releasedRecordCount": 0,
+      "fullTextAccessible": false,
+      "candidateSearchIntent": "What Closed-loop deep brain stimulation is superior in ameliorating parkins establishes, and what it does not",
+      "duplicationRisk": "none",
+      "identityConflicted": false
+    },
+    {
+      "sourceId": "10.1016/j.synbio.2017.02.003",
+      "title": "Cell-free synthetic biology: Engineering in an open world",
+      "authors": [
+        "Yuan Lu"
+      ],
+      "publisher": "Synthetic and Systems Biotechnology",
+      "publishedAt": "2017-03-01",
+      "versionRelationship": "version of record as cited",
+      "rightsBasis": "citation-with-paraphrase",
+      "inspectionDepth": "section-or-full-text",
+      "exactLocators": [
+        "Cell-free platform, protein engineering, metabolic engineering, artificial-cell engineering, and conclusions sections."
+      ],
+      "boundRecords": [
+        {
+          "recordId": "urn:maha:record:biomolecular-engineering-cell-free-transcription-translation",
+          "revisionSha256": "sha256:93e4273257d481d0199cb4f105ea2c091d54dc4f97a223a4bcd93705dd03cb90",
+          "activeRelease": true,
+          "locator": "Cell-free platform, protein engineering, metabolic engineering, artificial-cell engineering, and conclusions sections.",
+          "statement": "The cited source supports treating cell free transcription translation as a distinct concept within the stated biomolecular engineering scope."
+        },
+        {
+          "recordId": "urn:maha:record:biomolecular-engineering-crude-extract-cell-free-systems",
+          "revisionSha256": "sha256:2c80ac068e79e4cbf4a41e142fc0696c842b4a20e32c3a347b82a53278e3899a",
+          "activeRelease": false,
+          "locator": "Cell-free platform, protein engineering, metabolic engineering, artificial-cell engineering, and conclusions sections.",
+          "statement": "The cited source supports treating crude extract cell free systems as a distinct mechanism within the stated biomolecular engineering scope."
+        },
+        {
+          "recordId": "urn:maha:record:biomolecular-engineering-purified-component-expression-systems",
+          "revisionSha256": "sha256:90c9d503233cc00066f3a97a8777b590b496637f4c4d217539e085dbe1c20a22",
+          "activeRelease": false,
+          "locator": "Cell-free platform, protein engineering, metabolic engineering, artificial-cell engineering, and conclusions sections.",
+          "statement": "The cited source supports treating purified component expression systems as a distinct method within the stated biomolecular engineering scope."
+        },
+        {
+          "recordId": "urn:maha:record:biomolecular-engineering-energy-regeneration-in-cell-free-systems",
+          "revisionSha256": "sha256:48ff042cc15298829cb31ae3c7c6d05b2a57e2c5ce7997785a2b19fbe59962fc",
+          "activeRelease": false,
+          "locator": "Cell-free platform, protein engineering, metabolic engineering, artificial-cell engineering, and conclusions sections.",
+          "statement": "The cited source supports treating energy regeneration in cell free systems as a distinct measurement within the stated biomolecular engineering scope."
+        },
+        {
+          "recordId": "urn:maha:record:biomolecular-engineering-cell-free-reaction-yield",
+          "revisionSha256": "sha256:5cb36c04150256e102ab7462ebe7fc4a9753c830ff131a518e9666fb4f0dc131",
+          "activeRelease": false,
+          "locator": "Cell-free platform, protein engineering, metabolic engineering, artificial-cell engineering, and conclusions sections.",
+          "statement": "The cited source supports treating cell free reaction yield as a distinct comparison within the stated biomolecular engineering scope."
+        }
+      ],
+      "releasedRecordCount": 1,
+      "fullTextAccessible": true,
+      "candidateSearchIntent": "What Cell-free synthetic biology: Engineering in an open world establishes, and what it does not",
+      "duplicationRisk": "overlaps-record-page",
+      "identityConflicted": false
+    },
+    {
+      "sourceId": "10.1038/nature04970",
+      "title": "Neuronal ensemble control of prosthetic devices by a human with tetraplegia",
+      "authors": [
+        "Leigh R. Hochberg",
+        "Mijail D. Serruya",
+        "Gerhard M. Friehs",
+        "et al."
+      ],
+      "publisher": "Nature",
+      "publishedAt": "2006-07-13",
+      "versionRelationship": "version of record as cited",
+      "rightsBasis": "citation-with-paraphrase",
+      "inspectionDepth": "section-or-full-text",
+      "exactLocators": [
+        "Participant, implant, decoding tasks, performance measures, and Methods."
+      ],
+      "boundRecords": [
+        {
+          "recordId": "urn:maha:record:neurotechnology-bci-intracortical-bci",
+          "revisionSha256": "sha256:a6a06b2bc45a990034b2649b5ba3cb9c1d8d2656df2bf4e2913c81c241fc9999",
+          "activeRelease": true,
+          "locator": "Participant, implant, decoding tasks, performance measures, and Methods.",
+          "statement": "The cited source supports treating intracortical bci as a distinct concept within the stated neurotechnology and bci scope."
+        },
+        {
+          "recordId": "urn:maha:record:neurotechnology-bci-cortical-surface-bci",
+          "revisionSha256": "sha256:1d714ec80f8a0b1b5862b5fd1a8dab73b6afc15146eec4b4c6102721f4aa1519",
+          "activeRelease": false,
+          "locator": "Participant, implant, decoding tasks, performance measures, and Methods.",
+          "statement": "The cited source supports treating cortical surface bci as a distinct mechanism within the stated neurotechnology and bci scope."
+        },
+        {
+          "recordId": "urn:maha:record:neurotechnology-bci-peripheral-nerve-interface",
+          "revisionSha256": "sha256:8b62748e004c026ed4cb930649a61cbfeebe94fd4e56666ee3073d6f96999734",
+          "activeRelease": false,
+          "locator": "Participant, implant, decoding tasks, performance measures, and Methods.",
+          "statement": "The cited source supports treating peripheral nerve interface as a distinct method within the stated neurotechnology and bci scope."
+        },
+        {
+          "recordId": "urn:maha:record:neurotechnology-bci-motor-intention-decoding",
+          "revisionSha256": "sha256:e51b270b795dcc7be694c411f91b06fa4950dcf6ed4ce5d8f4f9d38ce91729af",
+          "activeRelease": false,
+          "locator": "Participant, implant, decoding tasks, performance measures, and Methods.",
+          "statement": "The cited source supports treating motor intention decoding as a distinct measurement within the stated neurotechnology and bci scope."
+        },
+        {
+          "recordId": "urn:maha:record:neurotechnology-bci-bci-calibration-drift",
+          "revisionSha256": "sha256:b4c9d5961857a604642779d01a130f605f420e4acbce820798cb294f1ee938e5",
+          "activeRelease": false,
+          "locator": "Participant, implant, decoding tasks, performance measures, and Methods.",
+          "statement": "The cited source supports treating bci calibration drift as a distinct comparison within the stated neurotechnology and bci scope."
+        }
+      ],
+      "releasedRecordCount": 1,
+      "fullTextAccessible": true,
+      "candidateSearchIntent": "What Neuronal ensemble control of prosthetic devices by a human with tetrap establishes, and what it does not",
+      "duplicationRisk": "overlaps-record-page",
+      "identityConflicted": false
+    },
+    {
+      "sourceId": "10.1038/nature09929",
+      "title": "A system for the continuous directed evolution of biomolecules",
+      "authors": [
+        "Kevin M. Esvelt",
+        "Jacob C. Carlson",
+        "David R. Liu"
+      ],
+      "publisher": "Nature",
+      "publishedAt": "2011-04-10",
+      "versionRelationship": "version of record as cited",
+      "rightsBasis": "citation-with-paraphrase",
+      "inspectionDepth": "section-or-full-text",
+      "exactLocators": [
+        "PACE architecture, selection coupling, mutation, experiments, and Methods."
+      ],
+      "boundRecords": [
+        {
+          "recordId": "urn:maha:record:biomolecular-engineering-directed-enzyme-evolution",
+          "revisionSha256": "sha256:91e1027a17cb23c09b25832650a72059eab1760832114b0e1fcb06848654697d",
+          "activeRelease": true,
+          "locator": "PACE architecture, selection coupling, mutation, experiments, and Methods.",
+          "statement": "The cited source supports treating directed enzyme evolution as a distinct concept within the stated biomolecular engineering scope."
+        },
+        {
+          "recordId": "urn:maha:record:biomolecular-engineering-mutation-library-generation",
+          "revisionSha256": "sha256:a2c5c165f6dfe18b2b27a04fd5fde9cf5a831e666abea654c1234ea5155f1a91",
+          "activeRelease": false,
+          "locator": "Main text statement of evolution rate and selection coupling to pIII",
+          "statement": "The cited source supports treating mutation library generation as a distinct mechanism within the stated biomolecular engineering scope."
+        },
+        {
+          "recordId": "urn:maha:record:biomolecular-engineering-selection-pressure-coupling",
+          "revisionSha256": "sha256:c23dcc18daaf071309c5f4116b7f6132c4477875558c29321a92f5d98d815d6f",
+          "activeRelease": false,
+          "locator": "PACE architecture, selection coupling, mutation, experiments, and Methods.",
+          "statement": "The cited source supports treating selection pressure coupling as a distinct method within the stated biomolecular engineering scope."
+        },
+        {
+          "recordId": "urn:maha:record:biomolecular-engineering-phage-assisted-continuous-evolution",
+          "revisionSha256": "sha256:8dc697f5defa0cfa0911ac052bda5679be3b17707f0897f9cddef4ab626d52d4",
+          "activeRelease": false,
+          "locator": "PACE architecture, selection coupling, mutation, experiments, and Methods.",
+          "statement": "The cited source supports treating phage assisted continuous evolution as a distinct measurement within the stated biomolecular engineering scope."
+        },
+        {
+          "recordId": "urn:maha:record:biomolecular-engineering-fitness-landscape-accessibility",
+          "revisionSha256": "sha256:96eae54806b7d4f4921e0e81170d00c6cbd92ff74ac871b17a926805bd76cf9a",
+          "activeRelease": false,
+          "locator": "PACE architecture, selection coupling, mutation, experiments, and Methods.",
+          "statement": "The cited source supports treating fitness landscape accessibility as a distinct comparison within the stated biomolecular engineering scope."
+        }
+      ],
+      "releasedRecordCount": 1,
+      "fullTextAccessible": true,
+      "candidateSearchIntent": "What A system for the continuous directed evolution of biomolecules establishes, and what it does not",
+      "duplicationRisk": "overlaps-record-page",
+      "identityConflicted": false
+    },
+    {
+      "sourceId": "10.1038/nature12385",
+      "title": "Van der Waals heterostructures",
+      "authors": [
+        "A. K. Geim",
+        "I. V. Grigorieva"
+      ],
+      "publisher": "Nature",
+      "publishedAt": "2013-07-24",
+      "versionRelationship": "recorded in batch research",
+      "rightsBasis": "arXiv nonexclusive distribution licence; short quotation with attribution",
+      "inspectionDepth": "abstract-only",
+      "exactLocators": [
+        "Assembly, interfaces, device examples, and outlook sections."
+      ],
+      "boundRecords": [
+        {
+          "recordId": "urn:maha:record:advanced-materials-contact-resistance-in-2d-devices",
+          "revisionSha256": "sha256:ca4dc2804efeb565e68797afef899b97c877a8c0579ad92797c7e1bc78d187a8",
+          "activeRelease": false,
+          "locator": "Abstract",
+          "statement": "The cited source supports treating contact resistance in 2d devices as a distinct concept within the stated advanced materials scope."
+        },
+        {
+          "recordId": "urn:maha:record:advanced-materials-dielectric-screening",
+          "revisionSha256": "sha256:59be897e7ce0141c04f261b90cb31e23efe2e48d9d9baa48d3ed574ff67ef1ad",
+          "activeRelease": false,
+          "locator": "Abstract and scope statement; 2D quantum spin Hall and 3D surface Dirac fermion sections",
+          "statement": "The cited source supports treating dielectric screening as a distinct mechanism within the stated advanced materials scope."
+        },
+        {
+          "recordId": "urn:maha:record:advanced-materials-wafer-scale-2d-growth",
+          "revisionSha256": "sha256:bde9829a39493629805920e837ed4bd7f0959bb8a329ef84c9972d922687cb48",
+          "activeRelease": false,
+          "locator": "Assembly, interfaces, device examples, and outlook sections.",
+          "statement": "The cited source supports treating wafer scale 2d growth as a distinct method within the stated advanced materials scope."
+        },
+        {
+          "recordId": "urn:maha:record:advanced-materials-cvd-graphene-grain-boundaries",
+          "revisionSha256": "sha256:f83d44b44bdbd91c2c783b990ed9fb2c8f700139f4a2be5710e80260b47ee26e",
+          "activeRelease": false,
+          "locator": "Abstract and scope statement; 2D quantum spin Hall and 3D surface Dirac fermion sections",
+          "statement": "The cited source supports treating cvd graphene grain boundaries as a distinct measurement within the stated advanced materials scope."
+        },
+        {
+          "recordId": "urn:maha:record:advanced-materials-materials-metrology-transfer",
+          "revisionSha256": "sha256:c1444e7714fe853f7d9e9092bf1978e599011ac24473ed8a1945b259a8fc2f07",
+          "activeRelease": false,
+          "locator": "Abstract and scope statement; 2D quantum spin Hall and 3D surface Dirac fermion sections",
+          "statement": "The cited source supports treating materials metrology transfer as a distinct comparison within the stated advanced materials scope."
+        }
+      ],
+      "releasedRecordCount": 0,
+      "fullTextAccessible": false,
+      "candidateSearchIntent": "What Van der Waals heterostructures establishes, and what it does not",
+      "duplicationRisk": "none",
+      "identityConflicted": true
+    },
+    {
+      "sourceId": "10.1038/nature24636",
+      "title": "Fully integrated silicon probes for high-density recording of neural activity",
+      "authors": [
+        "James J. Jun",
+        "Nicholas A. Steinmetz",
+        "Joshua H. Siegle",
+        "et al."
+      ],
+      "publisher": "Nature",
+      "publishedAt": "2017-11-08",
+      "versionRelationship": "version of record as cited",
+      "rightsBasis": "citation-with-paraphrase",
+      "inspectionDepth": "section-or-full-text",
+      "exactLocators": [
+        "Probe architecture, recording sites, channel selection, noise, recordings, and Methods."
+      ],
+      "boundRecords": [
+        {
+          "recordId": "urn:maha:record:neurotechnology-bci-neuropixels-cmos-probe",
+          "revisionSha256": "sha256:dc6dfa723e4414dcd02b227781dbe6de4c1d2b1a4075113fa77ee6a0db89683e",
+          "activeRelease": true,
+          "locator": "Probe architecture, recording sites, channel selection, noise, recordings, and Methods.",
+          "statement": "The cited source supports treating neuropixels cmos probe as a distinct concept within the stated neurotechnology and bci scope."
+        },
+        {
+          "recordId": "urn:maha:record:neurotechnology-bci-neuropixels-recording-sites",
+          "revisionSha256": "sha256:14a2daf3edfd1949f7a598ed92fffada66619f94310d9d18de55c6af4b8b9985",
+          "activeRelease": true,
+          "locator": "Probe architecture, recording sites, channel selection, noise, recordings, and Methods.",
+          "statement": "The cited source supports treating neuropixels recording sites as a distinct mechanism within the stated neurotechnology and bci scope."
+        },
+        {
+          "recordId": "urn:maha:record:neurotechnology-bci-neuropixels-channel-selection",
+          "revisionSha256": "sha256:bb2be28177d846b84dc7661a8b8f6e1949265a009839a3e5f47c57a237b2999d",
+          "activeRelease": true,
+          "locator": "Probe architecture, recording sites, channel selection, noise, recordings, and Methods.",
+          "statement": "The cited source supports treating neuropixels channel selection as a distinct method within the stated neurotechnology and bci scope."
+        },
+        {
+          "recordId": "urn:maha:record:neurotechnology-bci-extracellular-spike-recording",
+          "revisionSha256": "sha256:52a87462d2d5d40f161076641e83c1411b5d83bc3135c7460a7327fd1b216d84",
+          "activeRelease": true,
+          "locator": "Probe architecture, recording sites, channel selection, noise, recordings, and Methods.",
+          "statement": "The cited source supports treating extracellular spike recording as a distinct measurement within the stated neurotechnology and bci scope."
+        }
+      ],
+      "releasedRecordCount": 4,
+      "fullTextAccessible": true,
+      "candidateSearchIntent": "What Fully integrated silicon probes for high-density recording of neural a establishes, and what it does not",
+      "duplicationRisk": "none",
+      "identityConflicted": false
+    },
+    {
+      "sourceId": "10.1038/nature26160",
+      "title": "Unconventional superconductivity in magic-angle graphene superlattices",
+      "authors": [
+        "Yuan Cao",
+        "Valla Fatemi",
+        "Shi Fang",
+        "et al."
+      ],
+      "publisher": "Nature",
+      "publishedAt": "2018-03-05",
+      "versionRelationship": "version of record as cited",
+      "rightsBasis": "citation-with-paraphrase",
+      "inspectionDepth": "section-or-full-text",
+      "exactLocators": [
+        "Abstract, device description, phase diagram, transport measurements, and Methods."
+      ],
+      "boundRecords": [
+        {
+          "recordId": "urn:maha:record:advanced-materials-correlated-insulating-states",
+          "revisionSha256": "sha256:eb3feb541e0e2e597d971a486599d7b296f71a357d606eaef7a8fb9a60b96bc5",
+          "activeRelease": true,
+          "locator": "Abstract, device description, phase diagram, transport measurements, and Methods.",
+          "statement": "The cited source supports treating correlated insulating states as a distinct concept within the stated advanced materials scope."
+        },
+        {
+          "recordId": "urn:maha:record:advanced-materials-magic-angle-superconductivity",
+          "revisionSha256": "sha256:2c7995a665d7d09ffbff6be1bb5386429599f0f8e45e6d349604518d3ebf4f72",
+          "activeRelease": true,
+          "locator": "Abstract, device description, phase diagram, transport measurements, and Methods.",
+          "statement": "The cited source supports treating magic angle superconductivity as a distinct mechanism within the stated advanced materials scope."
+        },
+        {
+          "recordId": "urn:maha:record:advanced-materials-tmd-monolayers",
+          "revisionSha256": "sha256:6346aea80a48a75249262dda3e24fc475d7d9ed8a6254853c0a199b4000cc63c",
+          "activeRelease": false,
+          "locator": "Abstract and reported zero-resistance states with critical temperature",
+          "statement": "The cited source supports treating tmd monolayers as a distinct method within the stated advanced materials scope."
+        },
+        {
+          "recordId": "urn:maha:record:advanced-materials-direct-gap-mos2",
+          "revisionSha256": "sha256:9bdf312235c743dcd4976b1d6806d3a7f2fb509dc5c004dc397e6eff4594fc6f",
+          "activeRelease": false,
+          "locator": "Abstract and reported zero-resistance states with critical temperature",
+          "statement": "The cited source supports treating direct gap mos₂ as a distinct measurement within the stated advanced materials scope."
+        },
+        {
+          "recordId": "urn:maha:record:advanced-materials-valley-polarized-excitons",
+          "revisionSha256": "sha256:e3de34020e7c3deb2557807c51b21ef95cc1f9f169c0441a23003c952178c611",
+          "activeRelease": false,
+          "locator": "Abstract, device description, phase diagram, transport measurements, and Methods.",
+          "statement": "The cited source supports treating valley polarized excitons as a distinct comparison within the stated advanced materials scope."
+        }
+      ],
+      "releasedRecordCount": 2,
+      "fullTextAccessible": true,
+      "candidateSearchIntent": "What Unconventional superconductivity in magic-angle graphene superlattices establishes, and what it does not",
+      "duplicationRisk": "none",
+      "identityConflicted": true
+    },
+    {
+      "sourceId": "10.1038/nbt986",
+      "title": "Engineered riboregulators enable post-transcriptional control of gene expression",
+      "authors": [
+        "Farren J. Isaacs",
+        "David J. Dwyer",
+        "James J. Collins"
+      ],
+      "publisher": "Nature Biotechnology",
+      "publishedAt": "2004-07-11",
+      "versionRelationship": "version of record as cited",
+      "rightsBasis": "citation-with-paraphrase",
+      "inspectionDepth": "section-or-full-text",
+      "exactLocators": [
+        "Riboregulator design, experiments, figures, and Methods."
+      ],
+      "boundRecords": [
+        {
+          "recordId": "urn:maha:record:biomolecular-engineering-synthetic-riboswitches",
+          "revisionSha256": "sha256:eeb9a530ebdfb2c125f0b72f3d5fddf544d697d0cc8315c9c230ebcfd202c718",
+          "activeRelease": false,
+          "locator": "Riboregulator design, experiments, figures, and Methods.",
+          "statement": "The cited source supports treating synthetic riboswitches as a distinct concept within the stated biomolecular engineering scope."
+        },
+        {
+          "recordId": "urn:maha:record:biomolecular-engineering-ligand-binding-aptamer-domains",
+          "revisionSha256": "sha256:5851ad93ecbc39aea2649cd97904b3c989e78237f05d8c14af7af553f551d183",
+          "activeRelease": false,
+          "locator": "Riboregulator design, experiments, figures, and Methods.",
+          "statement": "The cited source supports treating ligand binding aptamer domains as a distinct mechanism within the stated biomolecular engineering scope."
+        },
+        {
+          "recordId": "urn:maha:record:biomolecular-engineering-riboswitch-expression-platforms",
+          "revisionSha256": "sha256:c2b242db1b07158ebd5ca7685d05c2baa06e7acc8ad082f338c160cbcbddecc5",
+          "activeRelease": false,
+          "locator": "Riboregulator design, experiments, figures, and Methods.",
+          "statement": "The cited source supports treating riboswitch expression platforms as a distinct method within the stated biomolecular engineering scope."
+        },
+        {
+          "recordId": "urn:maha:record:biomolecular-engineering-toehold-switches",
+          "revisionSha256": "sha256:0ca9200312a0dc45566b0cbf5f2c37383374bc1f31a0c5c9c1e7101688bdb982",
+          "activeRelease": false,
+          "locator": "Riboregulator design, experiments, figures, and Methods.",
+          "statement": "The cited source supports treating toehold switches as a distinct measurement within the stated biomolecular engineering scope."
+        },
+        {
+          "recordId": "urn:maha:record:biomolecular-engineering-rna-strand-displacement",
+          "revisionSha256": "sha256:739ef1f1f162a8d5b5a4443b1a4cd53c78973b89b1efda9fcf2102757aba53d2",
+          "activeRelease": false,
+          "locator": "Riboregulator design, experiments, figures, and Methods.",
+          "statement": "The cited source supports treating rna strand displacement as a distinct comparison within the stated biomolecular engineering scope."
+        }
+      ],
+      "releasedRecordCount": 0,
+      "fullTextAccessible": true,
+      "candidateSearchIntent": "What Engineered riboregulators enable post-transcriptional control of gene  establishes, and what it does not",
+      "duplicationRisk": "none",
+      "identityConflicted": false
+    },
+    {
+      "sourceId": "10.1038/nn.2973",
+      "title": "Flexible, foldable, actively multiplexed, high-density electrode array for mapping brain activity in vivo",
+      "authors": [
+        "Jonathan Viventi",
+        "Dae-Hyeong Kim",
+        "Jon D. Moss",
+        "et al."
+      ],
+      "publisher": "Nature Neuroscience",
+      "publishedAt": "2011-11-13",
+      "versionRelationship": "version of record as cited",
+      "rightsBasis": "citation-with-paraphrase",
+      "inspectionDepth": "section-or-full-text",
+      "exactLocators": [
+        "Array architecture, conformal placement, multiplexing, in-vivo mapping, and Methods."
+      ],
+      "boundRecords": [
+        {
+          "recordId": "urn:maha:record:neurotechnology-bci-micro-ecog-arrays",
+          "revisionSha256": "sha256:d819a5131f00c88af427c4f34625417117f98a2bd419797494b908ae502f47be",
+          "activeRelease": true,
+          "locator": "Array architecture, conformal placement, multiplexing, in-vivo mapping, and Methods.",
+          "statement": "The cited source supports treating micro ecog arrays as a distinct concept within the stated neurotechnology and bci scope."
+        },
+        {
+          "recordId": "urn:maha:record:neurotechnology-bci-electrocorticography-spatial-resolution",
+          "revisionSha256": "sha256:ea472f6b233b533b20d8cde9e8a9048b68ca74fc90dc3b05dd15a1ea397f1706",
+          "activeRelease": false,
+          "locator": "Array architecture, conformal placement, multiplexing, in-vivo mapping, and Methods.",
+          "statement": "The cited source supports treating electrocorticography spatial resolution as a distinct mechanism within the stated neurotechnology and bci scope."
+        },
+        {
+          "recordId": "urn:maha:record:neurotechnology-bci-flexible-conformal-electrode-arrays",
+          "revisionSha256": "sha256:93cab9b620eeaae46c89c71eca8acb4e5430ef522a0001c796547d151a80beae",
+          "activeRelease": false,
+          "locator": "Array architecture, conformal placement, multiplexing, in-vivo mapping, and Methods.",
+          "statement": "The cited source supports treating flexible conformal electrode arrays as a distinct method within the stated neurotechnology and bci scope."
+        },
+        {
+          "recordId": "urn:maha:record:neurotechnology-bci-electrode-tissue-interface",
+          "revisionSha256": "sha256:6023d80716780a5fc6f9f63f5393e196b0fc018f9bbec667b4368ff6896f9e6f",
+          "activeRelease": false,
+          "locator": "Array architecture, conformal placement, multiplexing, in-vivo mapping, and Methods.",
+          "statement": "The cited source supports treating electrode tissue interface as a distinct measurement within the stated neurotechnology and bci scope."
+        },
+        {
+          "recordId": "urn:maha:record:neurotechnology-bci-impedance-and-noise",
+          "revisionSha256": "sha256:33b261ece72be319ca54f184e3ef3e1de10576820b272ec8da730d613a777994",
+          "activeRelease": false,
+          "locator": "Array architecture, conformal placement, multiplexing, in-vivo mapping, and Methods.",
+          "statement": "The cited source supports treating impedance and noise as a distinct comparison within the stated neurotechnology and bci scope."
+        }
+      ],
+      "releasedRecordCount": 1,
+      "fullTextAccessible": true,
+      "candidateSearchIntent": "What Flexible, foldable, actively multiplexed, high-density electrode array establishes, and what it does not",
+      "duplicationRisk": "overlaps-record-page",
+      "identityConflicted": false
+    },
+    {
+      "sourceId": "10.1038/nn1525",
+      "title": "Millisecond-timescale, genetically targeted optical control of neural activity",
+      "authors": [
+        "Edward S. Boyden",
+        "Feng Zhang",
+        "Ernst Bamberg",
+        "Georg Nagel",
+        "Karl Deisseroth"
+      ],
+      "publisher": "Nature Neuroscience",
+      "publishedAt": "2005-08-14",
+      "versionRelationship": "version of record as cited",
+      "rightsBasis": "citation-with-paraphrase",
+      "inspectionDepth": "section-or-full-text",
+      "exactLocators": [
+        "Channelrhodopsin expression, photocurrent, optical stimulation, spike timing, and Methods."
+      ],
+      "boundRecords": [
+        {
+          "recordId": "urn:maha:record:neurotechnology-bci-optogenetic-channelrhodopsin",
+          "revisionSha256": "sha256:6e054e00282fe4710e477f5b7c43c5605ebf35fbc855b2f589d1cf6265de7473",
+          "activeRelease": false,
+          "locator": "Channelrhodopsin expression, photocurrent, optical stimulation, spike timing, and Methods.",
+          "statement": "The cited source supports treating optogenetic channelrhodopsin as a distinct concept within the stated neurotechnology and bci scope."
+        },
+        {
+          "recordId": "urn:maha:record:neurotechnology-bci-channelrhodopsin-photocurrent-kinetics",
+          "revisionSha256": "sha256:3222b99000d35c144e1b7da3e76a8fbb09514fcce54c71e3b38fc873851307f5",
+          "activeRelease": false,
+          "locator": "Channelrhodopsin expression, photocurrent, optical stimulation, spike timing, and Methods.",
+          "statement": "The cited source supports treating channelrhodopsin photocurrent kinetics as a distinct mechanism within the stated neurotechnology and bci scope."
+        },
+        {
+          "recordId": "urn:maha:record:neurotechnology-bci-opsin-spectral-sensitivity",
+          "revisionSha256": "sha256:8e5cad4598ae3b249a0c35631a2bb999d71e0f13faaede0acc71a406621464e7",
+          "activeRelease": false,
+          "locator": "Channelrhodopsin expression, photocurrent, optical stimulation, spike timing, and Methods.",
+          "statement": "The cited source supports treating opsin spectral sensitivity as a distinct method within the stated neurotechnology and bci scope."
+        },
+        {
+          "recordId": "urn:maha:record:neurotechnology-bci-light-delivery-tissue-heating",
+          "revisionSha256": "sha256:ebaeb9b79217410afaf027c87cd6fa6c14a2d5a53db7ac4bdddcf032523965ae",
+          "activeRelease": false,
+          "locator": "Channelrhodopsin expression, photocurrent, optical stimulation, spike timing, and Methods.",
+          "statement": "The cited source supports treating light delivery tissue heating as a distinct measurement within the stated neurotechnology and bci scope."
+        },
+        {
+          "recordId": "urn:maha:record:neurotechnology-bci-stimulation-artifact-rejection",
+          "revisionSha256": "sha256:68649aa9e10e27794f4157caabcf6d0b1958ef04303ae844bc787f8de3d5175d",
+          "activeRelease": false,
+          "locator": "Channelrhodopsin expression, photocurrent, optical stimulation, spike timing, and Methods.",
+          "statement": "The cited source supports treating stimulation artifact rejection as a distinct comparison within the stated neurotechnology and bci scope."
+        }
+      ],
+      "releasedRecordCount": 0,
+      "fullTextAccessible": true,
+      "candidateSearchIntent": "What Millisecond-timescale, genetically targeted optical control of neural  establishes, and what it does not",
+      "duplicationRisk": "none",
+      "identityConflicted": false
+    },
+    {
+      "sourceId": "10.1038/nnano.2010.172",
+      "title": "Boron nitride substrates for high-quality graphene electronics",
+      "authors": [
+        "C. R. Dean",
+        "A. F. Young",
+        "I. Meric",
+        "C. Lee",
+        "L. Wang",
+        "S. Sorgenfrei",
+        "K. Watanabe",
+        "T. Taniguchi",
+        "P. Kim",
+        "K. L. Shepard",
+        "J. Hone"
+      ],
+      "publisher": "Nature Nanotechnology",
+      "publishedAt": "2010-08-22",
+      "versionRelationship": "version of record as cited",
+      "rightsBasis": "citation-with-paraphrase",
+      "inspectionDepth": "section-or-full-text",
+      "exactLocators": [
+        "Abstract: fabrication and characterization of exfoliated mono- and bilayer graphene on single-crystal hexagonal boron nitride substrates."
+      ],
+      "boundRecords": [
+        {
+          "recordId": "urn:maha:record:advanced-materials-hexagonal-boron-nitride-dielectrics",
+          "revisionSha256": "sha256:020dbb6d9b9a24c9f7e605c74a3190f92ee11afadae6e1dde809e7799bb73913",
+          "activeRelease": true,
+          "locator": "Abstract: fabrication and characterization of exfoliated mono- and bilayer graphene on single-crystal hexagonal boron nitride substrates.",
+          "statement": "The cited source supports treating hexagonal boron nitride dielectrics as a distinct mechanism within the stated advanced materials scope."
+        }
+      ],
+      "releasedRecordCount": 1,
+      "fullTextAccessible": true,
+      "candidateSearchIntent": "What Boron nitride substrates for high-quality graphene electronics establishes, and what it does not",
+      "duplicationRisk": "overlaps-record-page",
+      "identityConflicted": false
+    },
+    {
+      "sourceId": "10.1038/nrm3028",
+      "title": "Mechanisms of mitophagy",
+      "authors": [
+        "Richard J. Youle",
+        "Derek P. Narendra"
+      ],
+      "publisher": "Nature Reviews Molecular Cell Biology",
+      "publishedAt": "2011-01-01",
+      "versionRelationship": "version of record as cited",
+      "rightsBasis": "citation-with-paraphrase",
+      "inspectionDepth": "abstract-only",
+      "exactLocators": [
+        "PINK1–Parkin pathway, mitochondrial damage sensing, and mitophagy mechanism sections."
+      ],
+      "boundRecords": [
+        {
+          "recordId": "urn:maha:record:longevity-metabolism-mitophagy-flux",
+          "revisionSha256": "sha256:af9bc1e0f540b39aecec364ec7bba3b60d73da04e8a307fe10ae41c14ea9f7bd",
+          "activeRelease": false,
+          "locator": "PINK1–Parkin pathway, mitochondrial damage sensing, and mitophagy mechanism sections.",
+          "statement": "The cited source supports treating mitophagy flux as a distinct concept within the stated longevity and metabolism scope."
+        },
+        {
+          "recordId": "urn:maha:record:longevity-metabolism-pink1-parkin-pathway",
+          "revisionSha256": "sha256:46308d98f43ad48680e8f9a1d873f801475c93c6788461243e8d916aa4643485",
+          "activeRelease": false,
+          "locator": "PINK1–Parkin pathway, mitochondrial damage sensing, and mitophagy mechanism sections.",
+          "statement": "The cited source supports treating pink1 parkin pathway as a distinct mechanism within the stated longevity and metabolism scope."
+        },
+        {
+          "recordId": "urn:maha:record:longevity-metabolism-mitochondrial-membrane-potential",
+          "revisionSha256": "sha256:dc84b70eb49acdff7ee51cb174d935a2893a8e6e3f2b4564452d3bae70025d1b",
+          "activeRelease": false,
+          "locator": "PINK1–Parkin pathway, mitochondrial damage sensing, and mitophagy mechanism sections.",
+          "statement": "The cited source supports treating mitochondrial membrane potential as a distinct method within the stated longevity and metabolism scope."
+        },
+        {
+          "recordId": "urn:maha:record:longevity-metabolism-proton-leak-respiration",
+          "revisionSha256": "sha256:3e34f500f91c530fe3220089b0e1b8b038838a80d941c34e3e2c3d8ec8b8d129",
+          "activeRelease": false,
+          "locator": "PINK1–Parkin pathway, mitochondrial damage sensing, and mitophagy mechanism sections.",
+          "statement": "The cited source supports treating proton leak respiration as a distinct measurement within the stated longevity and metabolism scope."
+        },
+        {
+          "recordId": "urn:maha:record:longevity-metabolism-mitochondrial-uncoupling",
+          "revisionSha256": "sha256:ac069ff72a21e41841f6f0db28714569105235da74c891a75f8bca8e7194be0a",
+          "activeRelease": false,
+          "locator": "PINK1–Parkin pathway, mitochondrial damage sensing, and mitophagy mechanism sections.",
+          "statement": "The cited source supports treating mitochondrial uncoupling as a distinct comparison within the stated longevity and metabolism scope."
+        }
+      ],
+      "releasedRecordCount": 0,
+      "fullTextAccessible": false,
+      "candidateSearchIntent": "What Mechanisms of mitophagy establishes, and what it does not",
+      "duplicationRisk": "none",
+      "identityConflicted": false
+    },
+    {
+      "sourceId": "10.1038/s41580-020-00313-x",
+      "title": "NAD+ metabolism and its roles in cellular processes during ageing",
+      "authors": [
+        "Anthony J. Covarrubias",
+        "Rosalba Perrone",
+        "Alessia Grozio",
+        "Eric Verdin"
+      ],
+      "publisher": "Nature Reviews Molecular Cell Biology",
+      "publishedAt": "2020-12-22",
+      "versionRelationship": "version of record as cited",
+      "rightsBasis": "citation-with-paraphrase",
+      "inspectionDepth": "section-or-full-text",
+      "exactLocators": [
+        "NAD+ biosynthesis and consumption, NAD+-dependent mechanisms in ageing, therapeutic targeting, figures 1–4, and supplementary boxes."
+      ],
+      "boundRecords": [
+        {
+          "recordId": "urn:maha:record:longevity-metabolism-nad-salvage-pathway",
+          "revisionSha256": "sha256:0c467bcce142892f6356dadfabfe1914b8c4b95ed53cf9714ae794e90fc40957",
+          "activeRelease": true,
+          "locator": "NAD+ biosynthesis and consumption, NAD+-dependent mechanisms in ageing, therapeutic targeting, figures 1–4, and supplementary boxes.",
+          "statement": "The cited source supports treating nad+ salvage pathway as a distinct concept within the stated longevity and metabolism scope."
+        },
+        {
+          "recordId": "urn:maha:record:longevity-metabolism-nampt-rate-limiting-step",
+          "revisionSha256": "sha256:bf7d09a9215d20978d902db07001f60efd91b79282fc94cf20ffb62a3727cbaa",
+          "activeRelease": false,
+          "locator": "NAD+ biosynthesis and consumption, NAD+-dependent mechanisms in ageing, therapeutic targeting, figures 1–4, and supplementary boxes.",
+          "statement": "The cited source supports treating nampt rate limiting step as a distinct mechanism within the stated longevity and metabolism scope."
+        },
+        {
+          "recordId": "urn:maha:record:longevity-metabolism-nmnat-compartmentalization",
+          "revisionSha256": "sha256:4faf2fae6b61dd689323efef0694188699b458ec10f9b6edef4c7d3de75f7796",
+          "activeRelease": false,
+          "locator": "NAD+ biosynthesis and consumption, NAD+-dependent mechanisms in ageing, therapeutic targeting, figures 1–4, and supplementary boxes.",
+          "statement": "The cited source supports treating nmnat compartmentalization as a distinct method within the stated longevity and metabolism scope."
+        },
+        {
+          "recordId": "urn:maha:record:longevity-metabolism-nmn-and-nr-precursors",
+          "revisionSha256": "sha256:191557d52bd9efab7dcd9dba21d964223963a9c86e33e57f1aa5b0f07dec0c54",
+          "activeRelease": false,
+          "locator": "NAD+ biosynthesis and consumption, NAD+-dependent mechanisms in ageing, therapeutic targeting, figures 1–4, and supplementary boxes.",
+          "statement": "The cited source supports treating nmn and nr precursors as a distinct measurement within the stated longevity and metabolism scope."
+        },
+        {
+          "recordId": "urn:maha:record:longevity-metabolism-nad-consumption-by-parps",
+          "revisionSha256": "sha256:412e98d79a88bc725711c9c75b372870f59ae37e41e8ff99ade5b0fbc097fe80",
+          "activeRelease": false,
+          "locator": "NAD+ biosynthesis and consumption, NAD+-dependent mechanisms in ageing, therapeutic targeting, figures 1–4, and supplementary boxes.",
+          "statement": "The cited source supports treating nad+ consumption by parps as a distinct comparison within the stated longevity and metabolism scope."
+        }
+      ],
+      "releasedRecordCount": 1,
+      "fullTextAccessible": true,
+      "candidateSearchIntent": "What NAD+ metabolism and its roles in cellular processes during ageing establishes, and what it does not",
+      "duplicationRisk": "overlaps-record-page",
+      "identityConflicted": false
+    },
+    {
+      "sourceId": "10.1038/s41586-023-06415-8",
+      "title": "De novo design of protein structure and function with RFdiffusion",
+      "authors": [
+        "Joseph L. Watson",
+        "David Juergens",
+        "Nathaniel R. Bennett",
+        "et al."
+      ],
+      "publisher": "Nature",
+      "publishedAt": "2023-07-11",
+      "versionRelationship": "version of record as cited",
+      "rightsBasis": "citation-with-paraphrase",
+      "inspectionDepth": "section-or-full-text",
+      "exactLocators": [
+        "Abstract; unconditional generation, motif scaffolding, binder design, Methods, and Extended Data."
+      ],
+      "boundRecords": [
+        {
+          "recordId": "urn:maha:record:biomolecular-engineering-protein-backbone-diffusion",
+          "revisionSha256": "sha256:5e43a862676db3ab81d49fe0eafef3351d4c76e2c5773e4b44e87f0360854356",
+          "activeRelease": true,
+          "locator": "Abstract; unconditional generation, motif scaffolding, binder design, Methods, and Extended Data.",
+          "statement": "The cited source supports treating protein backbone diffusion as a distinct concept within the stated biomolecular engineering scope."
+        },
+        {
+          "recordId": "urn:maha:record:biomolecular-engineering-unconditional-protein-generation",
+          "revisionSha256": "sha256:35d7adeb64552f084e22c3a45fa0d3e05e6f374d25c98722f720bacbf512fc66",
+          "activeRelease": true,
+          "locator": "Abstract; unconditional generation, motif scaffolding, binder design, Methods, and Extended Data.",
+          "statement": "The cited source supports treating unconditional protein generation as a distinct mechanism within the stated biomolecular engineering scope."
+        },
+        {
+          "recordId": "urn:maha:record:biomolecular-engineering-motif-scaffolding",
+          "revisionSha256": "sha256:38c6ee32b2071d7b177e4baa4156102a50ab88b8dc93b4427baadf47ddb0709a",
+          "activeRelease": true,
+          "locator": "Abstract; unconditional generation, motif scaffolding, binder design, Methods, and Extended Data.",
+          "statement": "The cited source supports treating motif scaffolding as a distinct method within the stated biomolecular engineering scope."
+        },
+        {
+          "recordId": "urn:maha:record:biomolecular-engineering-de-novo-binder-design",
+          "revisionSha256": "sha256:b826642a88ba6732c1fc9b91a04493b91ea9db538e4fde2092348a431fb2fa9f",
+          "activeRelease": true,
+          "locator": "Abstract; unconditional generation, motif scaffolding, binder design, Methods, and Extended Data.",
+          "statement": "The cited source supports treating de novo binder design as a distinct measurement within the stated biomolecular engineering scope."
+        },
+        {
+          "recordId": "urn:maha:record:biomolecular-engineering-structure-prediction-filtering",
+          "revisionSha256": "sha256:8fc2fa62ff8521551955d83413d952987410cfc59a352a2eebbfe4b07fe84d84",
+          "activeRelease": true,
+          "locator": "Abstract; unconditional generation, motif scaffolding, binder design, Methods, and Extended Data.",
+          "statement": "The cited source supports treating structure prediction filtering as a distinct comparison within the stated biomolecular engineering scope."
+        }
+      ],
+      "releasedRecordCount": 5,
+      "fullTextAccessible": true,
+      "candidateSearchIntent": "What De novo design of protein structure and function with RFdiffusion establishes, and what it does not",
+      "duplicationRisk": "none",
+      "identityConflicted": false
+    },
+    {
+      "sourceId": "10.1088/1741-4326/ac170f",
+      "title": "Stellarators as a fast path to fusion",
+      "authors": [
+        "Allen H. Boozer"
+      ],
+      "publisher": "Nuclear Fusion",
+      "publishedAt": "2021-08-01",
+      "versionRelationship": "version of record as cited",
+      "rightsBasis": "citation-with-paraphrase",
+      "inspectionDepth": "section-or-full-text",
+      "exactLocators": [
+        "Sections on magnetic-field design, coils, confinement, and reactor implications."
+      ],
+      "boundRecords": [
+        {
+          "recordId": "urn:maha:record:fusion-plasma-systems-cable-in-conduit-conductors",
+          "revisionSha256": "sha256:169927ba7f1dbede4199779190623db9ce4e69f21a6fc62ef493e9209a888c27",
+          "activeRelease": false,
+          "locator": "Sections on magnetic-field design, coils, confinement, and reactor implications.",
+          "statement": "The cited source supports treating cable in conduit conductors as a distinct concept within the stated fusion and plasma systems scope."
+        },
+        {
+          "recordId": "urn:maha:record:fusion-plasma-systems-rebco-high-field-magnets",
+          "revisionSha256": "sha256:1e269a0e3094d1e1ecf3a8d8e872267225e48b482706a7db904776e24791eaa7",
+          "activeRelease": false,
+          "locator": "Sections on magnetic-field design, coils, confinement, and reactor implications.",
+          "statement": "The cited source supports treating rebco high field magnets as a distinct mechanism within the stated fusion and plasma systems scope."
+        },
+        {
+          "recordId": "urn:maha:record:fusion-plasma-systems-superconducting-quench-protection",
+          "revisionSha256": "sha256:ffc65583cac401a72bc1c1cc6e42890f3871065f5cb9e279865da71f9f3c78b7",
+          "activeRelease": false,
+          "locator": "Sections on magnetic-field design, coils, confinement, and reactor implications.",
+          "statement": "The cited source supports treating superconducting quench protection as a distinct method within the stated fusion and plasma systems scope."
+        },
+        {
+          "recordId": "urn:maha:record:fusion-plasma-systems-stellarator-magnetic-coils",
+          "revisionSha256": "sha256:8ac96963ede9957044e42ffbe2faf4627c3d2e2e4abbc199f1c61f46bf3539d9",
+          "activeRelease": false,
+          "locator": "Sections on magnetic-field design, coils, confinement, and reactor implications.",
+          "statement": "The cited source supports treating stellarator magnetic coils as a distinct measurement within the stated fusion and plasma systems scope."
+        },
+        {
+          "recordId": "urn:maha:record:fusion-plasma-systems-stellarator-field-optimization",
+          "revisionSha256": "sha256:69b7bb3c02cbfed16a5de05a097be55d222f74adacede5cdfb7a65cd8fb3f83a",
+          "activeRelease": false,
+          "locator": "Sections on magnetic-field design, coils, confinement, and reactor implications.",
+          "statement": "The cited source supports treating stellarator field optimization as a distinct comparison within the stated fusion and plasma systems scope."
+        }
+      ],
+      "releasedRecordCount": 0,
+      "fullTextAccessible": true,
+      "candidateSearchIntent": "What Stellarators as a fast path to fusion establishes, and what it does not",
+      "duplicationRisk": "none",
+      "identityConflicted": false
+    },
+    {
+      "sourceId": "10.1103/PhysRevLett.105.136805",
+      "title": "Atomically Thin MoS2: A New Direct-Gap Semiconductor",
+      "authors": [
+        "Kin Fai Mak",
+        "Changgu Lee",
+        "James Hone",
+        "Jie Shan",
+        "Tony F. Heinz"
+      ],
+      "publisher": "Physical Review Letters",
+      "publishedAt": "2010-09-24",
+      "versionRelationship": "recorded in batch research",
+      "rightsBasis": "arXiv nonexclusive distribution licence; short quotation with attribution",
+      "inspectionDepth": "section-or-full-text",
+      "exactLocators": [
+        "Abstract and photoluminescence measurements comparing bulk, few-layer, and monolayer MoS2."
+      ],
+      "boundRecords": [
+        {
+          "recordId": "urn:maha:record:advanced-materials-tmd-heterobilayers",
+          "revisionSha256": "sha256:9f197d1bacfc4de75b243cdf3e6b9d952caecaa21f3cc6630ad3358c388f3511",
+          "activeRelease": false,
+          "locator": "Abstract and reported density thresholds",
+          "statement": "The cited source supports treating tmd heterobilayers as a distinct concept within the stated advanced materials scope."
+        },
+        {
+          "recordId": "urn:maha:record:advanced-materials-interlayer-excitons",
+          "revisionSha256": "sha256:94ba92c4ccc303487c5cfd13a3e1f2a7e3226fe34754d541ad85241827101397",
+          "activeRelease": false,
+          "locator": "Abstract and photoluminescence measurements comparing bulk, few-layer, and monolayer MoS2.",
+          "statement": "The cited source supports treating interlayer excitons as a distinct mechanism within the stated advanced materials scope."
+        },
+        {
+          "recordId": "urn:maha:record:advanced-materials-topological-insulator-surface-states",
+          "revisionSha256": "sha256:61f404d8b1f6b7e1c4a27c4bc3245ca0df60c7cd8a73c2256dc08f0aeea971fd",
+          "activeRelease": false,
+          "locator": "Abstract and photoluminescence measurements comparing bulk, few-layer, and monolayer MoS2.",
+          "statement": "The cited source supports treating topological insulator surface states as a distinct method within the stated advanced materials scope."
+        },
+        {
+          "recordId": "urn:maha:record:advanced-materials-spin-momentum-locking",
+          "revisionSha256": "sha256:d83433c328fca3f585384d6e314ef720bf112a4f6d85ae4f4ddb229dd0296078",
+          "activeRelease": false,
+          "locator": "Abstract and photoluminescence measurements comparing bulk, few-layer, and monolayer MoS2.",
+          "statement": "The cited source supports treating spin momentum locking as a distinct measurement within the stated advanced materials scope."
+        },
+        {
+          "recordId": "urn:maha:record:advanced-materials-quantum-anomalous-hall-state",
+          "revisionSha256": "sha256:d5c240d98b2f081d67f6394cae92cfaf1658a7c5d2771711bb2b38ffd95e5cb1",
+          "activeRelease": false,
+          "locator": "Abstract and photoluminescence measurements comparing bulk, few-layer, and monolayer MoS2.",
+          "statement": "The cited source supports treating quantum anomalous hall state as a distinct comparison within the stated advanced materials scope."
+        }
+      ],
+      "releasedRecordCount": 0,
+      "fullTextAccessible": true,
+      "candidateSearchIntent": "What Atomically Thin MoS2: A New Direct-Gap Semiconductor establishes, and what it does not",
+      "duplicationRisk": "none",
+      "identityConflicted": false
+    },
+    {
+      "sourceId": "10.1103/RevModPhys.82.3045",
+      "title": "Colloquium: Topological insulators",
+      "authors": [
+        "M. Z. Hasan",
+        "C. L. Kane"
+      ],
+      "publisher": "Reviews of Modern Physics",
+      "publishedAt": "2010-11-08",
+      "versionRelationship": "recorded in batch research",
+      "rightsBasis": "arXiv nonexclusive distribution licence; short quotation with attribution",
+      "inspectionDepth": "abstract-only",
+      "exactLocators": [
+        "Sections II–V on topology, surface states, spin texture, and material realizations."
+      ],
+      "boundRecords": [
+        {
+          "recordId": "urn:maha:record:advanced-materials-two-dimensional-magnetism",
+          "revisionSha256": "sha256:893d24663bebfc7eb12c575616936d631f849f2a135f44981ab81f4e313ed63e",
+          "activeRelease": false,
+          "locator": "Abstract and scope statement; 2D quantum spin Hall and 3D surface Dirac fermion sections",
+          "statement": "The cited source supports treating two dimensional magnetism as a distinct concept within the stated advanced materials scope."
+        },
+        {
+          "recordId": "urn:maha:record:advanced-materials-van-der-waals-assembly",
+          "revisionSha256": "sha256:6f19327dff72ca67d5e86932af0ea195c100d96daeee3f86973ed9a0342f4cc8",
+          "activeRelease": false,
+          "locator": "Sections II–V on topology, surface states, spin texture, and material realizations.",
+          "statement": "The cited source supports treating van der waals assembly as a distinct mechanism within the stated advanced materials scope."
+        },
+        {
+          "recordId": "urn:maha:record:advanced-materials-dry-transfer-contamination",
+          "revisionSha256": "sha256:7dab9fdedab71cdddfdab140704b006da9b49f30b7903000fed95e1153a17b00",
+          "activeRelease": false,
+          "locator": "Abstract",
+          "statement": "The cited source supports treating dry transfer contamination as a distinct method within the stated advanced materials scope."
+        },
+        {
+          "recordId": "urn:maha:record:advanced-materials-interface-bubbles-and-strain",
+          "revisionSha256": "sha256:2b15cc95c6419607f54a384699e032720412c9cfe69229b3f4a9cd9fd6512e29",
+          "activeRelease": false,
+          "locator": "Abstract",
+          "statement": "The cited source supports treating interface bubbles and strain as a distinct measurement within the stated advanced materials scope."
+        },
+        {
+          "recordId": "urn:maha:record:advanced-materials-encapsulation-boundaries",
+          "revisionSha256": "sha256:ed4e63e1b25f8eceb89eefaf04bd81b85097e0a57d4ccc9258b16d7d2fb130ce",
+          "activeRelease": false,
+          "locator": "Abstract",
+          "statement": "The cited source supports treating encapsulation boundaries as a distinct comparison within the stated advanced materials scope."
+        }
+      ],
+      "releasedRecordCount": 0,
+      "fullTextAccessible": false,
+      "candidateSearchIntent": "What Colloquium: Topological insulators establishes, and what it does not",
+      "duplicationRisk": "none",
+      "identityConflicted": true
+    },
+    {
+      "sourceId": "10.1109/TPEL.2003.810840",
+      "title": "An assessment of wide bandgap semiconductors for power devices",
+      "authors": [
+        "Jerry L. Hudgins",
+        "Grigory S. Simin",
+        "Enrico Santi",
+        "M. Asif Khan"
+      ],
+      "publisher": "IEEE Transactions on Power Electronics",
+      "publishedAt": "2003-05-01",
+      "versionRelationship": "version of record as cited",
+      "rightsBasis": "citation-with-paraphrase",
+      "inspectionDepth": "abstract-only",
+      "exactLocators": [
+        "Pages 907–914: material-property comparison and SiC, GaN, and diamond power-device sections."
+      ],
+      "boundRecords": [
+        {
+          "recordId": "urn:maha:record:advanced-materials-diamond-thermal-conductivity",
+          "revisionSha256": "sha256:be0298d6e8079e377b39f4c984a41d1beef17752c7053e35326ca1e79130015f",
+          "activeRelease": false,
+          "locator": "Pages 907–914: material-property comparison and SiC, GaN, and diamond power-device sections.",
+          "statement": "The cited source supports treating diamond thermal conductivity as a distinct mechanism within the stated advanced materials scope."
+        }
+      ],
+      "releasedRecordCount": 0,
+      "fullTextAccessible": false,
+      "candidateSearchIntent": "What An assessment of wide bandgap semiconductors for power devices establishes, and what it does not",
+      "duplicationRisk": "none",
+      "identityConflicted": false
+    },
+    {
+      "sourceId": "10.1111/acel.12344",
+      "title": "The Achilles’ heel of senescent cells: from transcriptome to senolytic drugs",
+      "authors": [
+        "Yi Zhu",
+        "Tamara Tchkonia",
+        "Tamar Pirtskhalava",
+        "et al."
+      ],
+      "publisher": "Aging Cell",
+      "publishedAt": "2015-01-01",
+      "versionRelationship": "version of record as cited",
+      "rightsBasis": "citation-with-paraphrase",
+      "inspectionDepth": "section-or-full-text",
+      "exactLocators": [
+        "Senescent-cell survival pathways, compound screening, cell assays, and mouse experiments."
+      ],
+      "boundRecords": [
+        {
+          "recordId": "urn:maha:record:longevity-metabolism-cellular-senescence-markers",
+          "revisionSha256": "sha256:32f84190547d8cff7fab09573847957046e817bea41f479c57eaf48d9d5fcd37",
+          "activeRelease": false,
+          "locator": "Senescent-cell survival pathways, compound screening, cell assays, and mouse experiments.",
+          "statement": "The cited source supports treating cellular senescence markers as a distinct concept within the stated longevity and metabolism scope."
+        },
+        {
+          "recordId": "urn:maha:record:longevity-metabolism-senescence-associated-secretory-phenotype",
+          "revisionSha256": "sha256:952678480a011c4b89b3a081b903fa76b0d4a06d4b10f99cd6c16f39320aa91c",
+          "activeRelease": false,
+          "locator": "Section 'The senescent transcriptome and anti-apoptotic pathways'; Figure 1A-C",
+          "statement": "The cited source supports treating senescence associated secretory phenotype as a distinct mechanism within the stated longevity and metabolism scope."
+        },
+        {
+          "recordId": "urn:maha:record:longevity-metabolism-senolytic-selectivity",
+          "revisionSha256": "sha256:ab0282bd6cf2439e46edd62f9ba8d4a7ad56839eac40112defe558da1777c195",
+          "activeRelease": true,
+          "locator": "Senescent-cell survival pathways, compound screening, cell assays, and mouse experiments.",
+          "statement": "The cited source supports treating senolytic selectivity as a distinct method within the stated longevity and metabolism scope."
+        },
+        {
+          "recordId": "urn:maha:record:longevity-metabolism-apoptosis-in-senescent-cells",
+          "revisionSha256": "sha256:b8f9ca4f249f6628e1f2812f62cdbe132683e4d0d1355e09844d0d76c8d5ed88",
+          "activeRelease": false,
+          "locator": "Senescent-cell survival pathways, compound screening, cell assays, and mouse experiments.",
+          "statement": "The cited source supports treating apoptosis in senescent cells as a distinct measurement within the stated longevity and metabolism scope."
+        },
+        {
+          "recordId": "urn:maha:record:longevity-metabolism-senescent-cell-clearance",
+          "revisionSha256": "sha256:f208ae5ebd530d273ae1e30c924ebc41eabe84efaa38aa731de42fee86645808",
+          "activeRelease": false,
+          "locator": "Senescent-cell survival pathways, compound screening, cell assays, and mouse experiments.",
+          "statement": "The cited source supports treating senescent cell clearance as a distinct comparison within the stated longevity and metabolism scope."
+        }
+      ],
+      "releasedRecordCount": 1,
+      "fullTextAccessible": true,
+      "candidateSearchIntent": "What The Achilles’ heel of senescent cells: from transcriptome to senolytic establishes, and what it does not",
+      "duplicationRisk": "overlaps-record-page",
+      "identityConflicted": false
+    },
+    {
+      "sourceId": "10.1126/science.1102896",
+      "title": "Electric Field Effect in Atomically Thin Carbon Films",
+      "authors": [
+        "K. S. Novoselov",
+        "A. K. Geim",
+        "S. V. Morozov",
+        "et al."
+      ],
+      "publisher": "Science",
+      "publishedAt": "2004-10-22",
+      "versionRelationship": "version of record as cited",
+      "rightsBasis": "citation-with-paraphrase",
+      "inspectionDepth": "section-or-full-text",
+      "exactLocators": [
+        "Abstract, device preparation, transport measurements, and figures 1–3."
+      ],
+      "boundRecords": [
+        {
+          "recordId": "urn:maha:record:advanced-materials-graphene-monolayers",
+          "revisionSha256": "sha256:98f7263b9170367c0f7d5ade8017e3e26ee5c6c26cd8a0c237fef4a271b18eaa",
+          "activeRelease": true,
+          "locator": "Abstract, device preparation, transport measurements, and figures 1–3.",
+          "statement": "The cited source supports treating graphene monolayers as a distinct concept within the stated advanced materials scope."
+        },
+        {
+          "recordId": "urn:maha:record:advanced-materials-graphene-hbn-heterostructures",
+          "revisionSha256": "sha256:c51dbec3099f21ddd5fa7016027afd6d199ca36c583433d4b9f660b7ee6c709c",
+          "activeRelease": true,
+          "locator": "Abstract, device preparation, transport measurements, and figures 1–3.",
+          "statement": "The cited source supports treating graphene hbn heterostructures as a distinct method within the stated advanced materials scope."
+        },
+        {
+          "recordId": "urn:maha:record:advanced-materials-moire-superlattices",
+          "revisionSha256": "sha256:e2cd25628692aa838b42fde424553a9c99c092d77050dbc5f005e1cf72023141",
+          "activeRelease": true,
+          "locator": "Abstract, device preparation, transport measurements, and figures 1–3.",
+          "statement": "The cited source supports treating moire superlattices as a distinct measurement within the stated advanced materials scope."
+        },
+        {
+          "recordId": "urn:maha:record:advanced-materials-twist-angle-control",
+          "revisionSha256": "sha256:13566800b17216d3a0994712cc9ff8428d9d1286b651f917108458fe9a45b11c",
+          "activeRelease": true,
+          "locator": "Abstract, device preparation, transport measurements, and figures 1–3.",
+          "statement": "The cited source supports treating twist angle control as a distinct comparison within the stated advanced materials scope."
+        }
+      ],
+      "releasedRecordCount": 4,
+      "fullTextAccessible": true,
+      "candidateSearchIntent": "What Electric Field Effect in Atomically Thin Carbon Films establishes, and what it does not",
+      "duplicationRisk": "none",
+      "identityConflicted": false
+    },
+    {
+      "sourceId": "10.1126/science.add2187",
+      "title": "Robust deep learning–based protein sequence design using ProteinMPNN",
+      "authors": [
+        "Justas Dauparas",
+        "Ivan Anishchenko",
+        "Nathaniel Bennett",
+        "et al."
+      ],
+      "publisher": "Science",
+      "publishedAt": "2022-10-07",
+      "versionRelationship": "version of record as cited",
+      "rightsBasis": "citation-with-paraphrase",
+      "inspectionDepth": "section-or-full-text",
+      "exactLocators": [
+        "Sequence-design method, benchmark comparisons, experimental validation, and supplementary methods."
+      ],
+      "boundRecords": [
+        {
+          "recordId": "urn:maha:record:biomolecular-engineering-sequence-design-with-proteinmpnn",
+          "revisionSha256": "sha256:f9c62b910854ec2360bd7423a5a56a6d84e84cc8a15b040b8c7be3b6cd28a9e0",
+          "activeRelease": true,
+          "locator": "Sequence-design method, benchmark comparisons, experimental validation, and supplementary methods.",
+          "statement": "The cited source supports treating sequence design with proteinmpnn as a distinct concept within the stated biomolecular engineering scope."
+        },
+        {
+          "recordId": "urn:maha:record:biomolecular-engineering-experimental-fold-validation",
+          "revisionSha256": "sha256:fba3c4e2ea29411e5c4b50b545cf44b8918a5822c72a75c3b12d576939583616",
+          "activeRelease": true,
+          "locator": "Sequence-design method, benchmark comparisons, experimental validation, and supplementary methods.",
+          "statement": "The cited source supports treating experimental fold validation as a distinct mechanism within the stated biomolecular engineering scope."
+        },
+        {
+          "recordId": "urn:maha:record:biomolecular-engineering-protein-design-success-rate",
+          "revisionSha256": "sha256:7416b13ecf314af6eff87325d8fcdf51b8c248ee5ed73ec1daeda9fc08b918d4",
+          "activeRelease": false,
+          "locator": "Sequence-design method, benchmark comparisons, experimental validation, and supplementary methods.",
+          "statement": "The cited source supports treating protein design success rate as a distinct method within the stated biomolecular engineering scope."
+        },
+        {
+          "recordId": "urn:maha:record:biomolecular-engineering-off-target-binding-characterization",
+          "revisionSha256": "sha256:351e2174b3af3eeaff54a73833a8132de17574e7c569c7fdc636c6de16807306",
+          "activeRelease": false,
+          "locator": "Sequence-design method, benchmark comparisons, experimental validation, and supplementary methods.",
+          "statement": "The cited source supports treating off target binding characterization as a distinct measurement within the stated biomolecular engineering scope."
+        },
+        {
+          "recordId": "urn:maha:record:biomolecular-engineering-design-to-assay-provenance",
+          "revisionSha256": "sha256:446a5177093535223cb9a1bee78edec437b2a4bbfcb6959e160ae99c0c3332d2",
+          "activeRelease": false,
+          "locator": "Sequence-design method, benchmark comparisons, experimental validation, and supplementary methods.",
+          "statement": "The cited source supports treating design to assay provenance as a distinct comparison within the stated biomolecular engineering scope."
+        }
+      ],
+      "releasedRecordCount": 2,
+      "fullTextAccessible": true,
+      "candidateSearchIntent": "What Robust deep learning–based protein sequence design using ProteinMPNN establishes, and what it does not",
+      "duplicationRisk": "none",
+      "identityConflicted": false
+    },
+    {
+      "sourceId": "10.1162/tacl_a_00638",
+      "title": "Lost in the Middle: How Language Models Use Long Contexts",
+      "authors": [
+        "Nelson F. Liu",
+        "Kevin Lin",
+        "John Hewitt",
+        "et al."
+      ],
+      "publisher": "Transactions of the Association for Computational Linguistics",
+      "publishedAt": "2024-01-01",
+      "versionRelationship": "version of record as cited",
+      "rightsBasis": "citation-with-paraphrase",
+      "inspectionDepth": "section-or-full-text",
+      "exactLocators": [
+        "Long-context experiments, position effects, retrieval and question-answering tasks, and limitations."
+      ],
+      "boundRecords": [
+        {
+          "recordId": "urn:maha:record:agentic-systems-mcp-human-approval-boundaries",
+          "revisionSha256": "sha256:23ce11aa706ebb47b52d126e90ef1f0ab480110135c25decc253cdbe6f6b2897",
+          "activeRelease": false,
+          "locator": "Long-context experiments, position effects, retrieval and question-answering tasks, and limitations.",
+          "statement": "The cited source supports treating human approval boundaries as a distinct concept within the stated agentic systems and mcp scope."
+        },
+        {
+          "recordId": "urn:maha:record:agentic-systems-mcp-context-window-position-effects",
+          "revisionSha256": "sha256:ec68f9ca8c9cf27ace2ca1df1a9d78a4494412f8d42d798f444d2c5460e1ac7c",
+          "activeRelease": true,
+          "locator": "Long-context experiments, position effects, retrieval and question-answering tasks, and limitations.",
+          "statement": "The cited source supports treating context window position effects as a distinct mechanism within the stated agentic systems and mcp scope."
+        },
+        {
+          "recordId": "urn:maha:record:agentic-systems-mcp-context-window-token-degradation",
+          "revisionSha256": "sha256:e63068eb9d9e3bdfd529add5738b921e1e03f7229a3097d48d42be8ece92bec3",
+          "activeRelease": false,
+          "locator": "Section 2.3 Results and Discussion; Figure 5",
+          "statement": "The cited source supports treating context window token degradation as a distinct method within the stated agentic systems and mcp scope."
+        },
+        {
+          "recordId": "urn:maha:record:agentic-systems-mcp-retrieval-context-selection",
+          "revisionSha256": "sha256:81c3abda25a3b536d66bc38ecba273f8727af5ae1eea24f0c5b6ec754aa2d603",
+          "activeRelease": false,
+          "locator": "Section 2.3 Results and Discussion; Figure 5",
+          "statement": "The cited source supports treating retrieval context selection as a distinct measurement within the stated agentic systems and mcp scope."
+        },
+        {
+          "recordId": "urn:maha:record:agentic-systems-mcp-tool-result-context-injection",
+          "revisionSha256": "sha256:cb2419d975f2b2035c748baa15441764325ecf32fc4f128951e8f31db2f28e05",
+          "activeRelease": false,
+          "locator": "Long-context experiments, position effects, retrieval and question-answering tasks, and limitations.",
+          "statement": "The cited source supports treating tool result context injection as a distinct comparison within the stated agentic systems and mcp scope."
+        }
+      ],
+      "releasedRecordCount": 1,
+      "fullTextAccessible": true,
+      "candidateSearchIntent": "What Lost in the Middle: How Language Models Use Long Contexts establishes, and what it does not",
+      "duplicationRisk": "overlaps-record-page",
+      "identityConflicted": false
+    },
+    {
+      "sourceId": "10.1523/JNEUROSCI.0971-11.2011",
+      "title": "Quality Metrics to Accompany Spike Sorting of Extracellular Signals",
+      "authors": [
+        "Daniel N. Hill",
+        "Samar B. Mehta",
+        "David Kleinfeld"
+      ],
+      "publisher": "Journal of Neuroscience",
+      "publishedAt": "2011-06-15",
+      "versionRelationship": "version of record as cited",
+      "rightsBasis": "citation-with-paraphrase",
+      "inspectionDepth": "section-or-full-text",
+      "exactLocators": [
+        "Quality metrics and Summary matrices sections: false-positive and false-negative error estimates from refractory-period violations, detection threshold, cluster overlap, and censored events."
+      ],
+      "boundRecords": [
+        {
+          "recordId": "urn:maha:record:neurotechnology-bci-spike-sorting-boundaries",
+          "revisionSha256": "sha256:56d5b281f41632fd5dea4d16f066e5aac12e7e9b479c60b91b24f8e28718211f",
+          "activeRelease": true,
+          "locator": "Quality metrics and Summary matrices sections: false-positive and false-negative error estimates from refractory-period violations, detection threshold, cluster overlap, and censored events.",
+          "statement": "The cited source supports treating spike sorting boundaries as a distinct comparison within the stated neurotechnology and bci scope."
+        }
+      ],
+      "releasedRecordCount": 1,
+      "fullTextAccessible": true,
+      "candidateSearchIntent": "What Quality Metrics to Accompany Spike Sorting of Extracellular Signals establishes, and what it does not",
+      "duplicationRisk": "overlaps-record-page",
+      "identityConflicted": false
+    },
+    {
+      "sourceId": "10.23915/distill.00007",
+      "title": "Feature Visualization",
+      "authors": [
+        "Chris Olah",
+        "Alexander Mordvintsev",
+        "Ludwig Schubert"
+      ],
+      "publisher": "Distill",
+      "publishedAt": "2017-11-07",
+      "versionRelationship": "recorded in batch research",
+      "rightsBasis": "Creative Commons Attribution CC-BY 4.0; short paraphrase with attribution",
+      "inspectionDepth": "source-mismatched",
+      "exactLocators": [
+        "Optimization objectives, regularization, visualization techniques, and interpretation cautions."
+      ],
+      "boundRecords": [
+        {
+          "recordId": "urn:maha:record:mechanistic-interpretability-dead-features",
+          "revisionSha256": "sha256:2c5a7bd11dc0c0f322c68d1e3dbbeb2793762b33626b00b37afb97647aa6748d",
+          "activeRelease": false,
+          "locator": "Feature visualization by optimization sections; no section addresses inactive units",
+          "statement": "The cited source supports treating dead features as a distinct concept within the stated mechanistic interpretability scope."
+        },
+        {
+          "recordId": "urn:maha:record:mechanistic-interpretability-feature-activation-maximization",
+          "revisionSha256": "sha256:6c45c999f1603edcc3571e7f7fc3848e734e2fb4fa532624cea798499991f446",
+          "activeRelease": false,
+          "locator": "Optimization objectives, regularization, visualization techniques, and interpretation cautions.",
+          "statement": "The cited source supports treating feature activation maximization as a distinct mechanism within the stated mechanistic interpretability scope."
+        },
+        {
+          "recordId": "urn:maha:record:mechanistic-interpretability-automated-feature-interpretation",
+          "revisionSha256": "sha256:b3b721201f1ca0bdb11af93c7de74ee522a0963565383973a262c8be35616a5f",
+          "activeRelease": false,
+          "locator": "Optimization objectives, regularization, visualization techniques, and interpretation cautions.",
+          "statement": "The cited source supports treating automated feature interpretation as a distinct method within the stated mechanistic interpretability scope."
+        },
+        {
+          "recordId": "urn:maha:record:mechanistic-interpretability-causal-feature-intervention",
+          "revisionSha256": "sha256:65e85d61491dcb72f0695dff79bcc48eed60ff5f2b5a94f4864c0a706c0b3ced",
+          "activeRelease": false,
+          "locator": "Optimization objectives, regularization, visualization techniques, and interpretation cautions.",
+          "statement": "The cited source supports treating causal feature intervention as a distinct measurement within the stated mechanistic interpretability scope."
+        },
+        {
+          "recordId": "urn:maha:record:mechanistic-interpretability-cross-layer-transcoders",
+          "revisionSha256": "sha256:4bdeeacc98d968613a0e230bee70f605d7c406e67be9f98d26892e9874e7f6b4",
+          "activeRelease": false,
+          "locator": "Optimization objectives, regularization, visualization techniques, and interpretation cautions.",
+          "statement": "The cited source supports treating cross layer transcoders as a distinct comparison within the stated mechanistic interpretability scope."
+        }
+      ],
+      "releasedRecordCount": 0,
+      "fullTextAccessible": false,
+      "candidateSearchIntent": "What Feature Visualization establishes, and what it does not",
+      "duplicationRisk": "none",
+      "identityConflicted": true
+    },
+    {
+      "sourceId": "10.4161/auto.19496",
+      "title": "Guidelines for the use and interpretation of assays for monitoring autophagy",
+      "authors": [
+        "Daniel J. Klionsky",
+        "et al."
+      ],
+      "publisher": "Autophagy",
+      "publishedAt": "2012-04-01",
+      "versionRelationship": "version of record as cited",
+      "rightsBasis": "citation-with-paraphrase",
+      "inspectionDepth": "section-or-full-text",
+      "exactLocators": [
+        "Assay interpretation sections for LC3, SQSTM1/p62, lysosomal inhibition, and autophagic flux."
+      ],
+      "boundRecords": [
+        {
+          "recordId": "urn:maha:record:longevity-metabolism-autophagosome-abundance",
+          "revisionSha256": "sha256:c5c5ac0886af644acf5fa06d761da6d4df5da0a277ac6330bf0b0e53002f74af",
+          "activeRelease": true,
+          "locator": "Assay interpretation sections for LC3, SQSTM1/p62, lysosomal inhibition, and autophagic flux.",
+          "statement": "The cited source supports treating autophagosome abundance as a distinct concept within the stated longevity and metabolism scope."
+        },
+        {
+          "recordId": "urn:maha:record:longevity-metabolism-autophagic-flux",
+          "revisionSha256": "sha256:c4e061e7ce193e2575d311732e2354614efd0fc01c1c0761d8e8d9e1ce5b91c7",
+          "activeRelease": true,
+          "locator": "Assay interpretation sections for LC3, SQSTM1/p62, lysosomal inhibition, and autophagic flux.",
+          "statement": "The cited source supports treating autophagic flux as a distinct mechanism within the stated longevity and metabolism scope."
+        },
+        {
+          "recordId": "urn:maha:record:longevity-metabolism-lysosomal-degradation-blockade",
+          "revisionSha256": "sha256:e277cc947aa3e4851aa4fbbc76017d68b41e102e43433a69049809082731cbf5",
+          "activeRelease": true,
+          "locator": "Assay interpretation sections for LC3, SQSTM1/p62, lysosomal inhibition, and autophagic flux.",
+          "statement": "The cited source supports treating lysosomal degradation blockade as a distinct method within the stated longevity and metabolism scope."
+        },
+        {
+          "recordId": "urn:maha:record:longevity-metabolism-lc3-turnover-assays",
+          "revisionSha256": "sha256:e90bc1eed1778d16a491bebc7f9d0b3ecf08a7a02a081981a8fdbb601a41b86e",
+          "activeRelease": true,
+          "locator": "Assay interpretation sections for LC3, SQSTM1/p62, lysosomal inhibition, and autophagic flux.",
+          "statement": "The cited source supports treating lc3 turnover assays as a distinct measurement within the stated longevity and metabolism scope."
+        },
+        {
+          "recordId": "urn:maha:record:longevity-metabolism-p62-sqstm1-turnover",
+          "revisionSha256": "sha256:853acfcb4c8dedb8c3efdf835dc592c87e2caf53a0acc79ecae89af5e7e6daa7",
+          "activeRelease": true,
+          "locator": "Assay interpretation sections for LC3, SQSTM1/p62, lysosomal inhibition, and autophagic flux.",
+          "statement": "The cited source supports treating p62 sqstm1 turnover as a distinct comparison within the stated longevity and metabolism scope."
+        }
+      ],
+      "releasedRecordCount": 5,
+      "fullTextAccessible": true,
+      "candidateSearchIntent": "What Guidelines for the use and interpretation of assays for monitoring aut establishes, and what it does not",
+      "duplicationRisk": "none",
+      "identityConflicted": false
+    },
+    {
+      "sourceId": "10.6028/NIST.AI.600-1",
+      "title": "Artificial Intelligence Risk Management Framework: Generative Artificial Intelligence Profile",
+      "authors": [
+        "Chloe Autio",
+        "Reva Schwartz",
+        "Jesse Dunietz",
+        "Shomik Jain",
+        "Martin Stanley",
+        "Elham Tabassi",
+        "Patrick Hall",
+        "Kamie Roberts"
+      ],
+      "publisher": "National Institute of Standards and Technology",
+      "publishedAt": "2024-07-26",
+      "versionRelationship": "recorded in batch research",
+      "rightsBasis": "US Government publication, available free of charge; short quotation with attribution",
+      "inspectionDepth": "section-or-full-text",
+      "exactLocators": [
+        "NIST AI 600-1: Generative AI risks and suggested actions across Govern, Map, Measure, and Manage; appendices A and B."
+      ],
+      "boundRecords": [
+        {
+          "recordId": "urn:maha:record:agentic-systems-mcp-least-authority-tokens",
+          "revisionSha256": "sha256:f1d8ff2d0e9b128fd767f27874369196ca372b4602f8e6c7c5b163c7b930388c",
+          "activeRelease": false,
+          "locator": "Suggested Actions MS-2.7-004 and MS-2.7-005, under the Information Integrity and Information Security risk categories",
+          "statement": "The cited source supports treating least authority tokens as a distinct concept within the stated agentic systems and mcp scope."
+        },
+        {
+          "recordId": "urn:maha:record:agentic-systems-mcp-sandboxed-tool-execution",
+          "revisionSha256": "sha256:04eb7cf1b1775deefb1c9222cd46e77d33f44775fdaec4069015cc62fc0964b5",
+          "activeRelease": false,
+          "locator": "NIST AI 600-1: Generative AI risks and suggested actions across Govern, Map, Measure, and Manage; appendices A and B.",
+          "statement": "The cited source supports treating sandboxed tool execution as a distinct mechanism within the stated agentic systems and mcp scope."
+        },
+        {
+          "recordId": "urn:maha:record:agentic-systems-mcp-tool-call-traces",
+          "revisionSha256": "sha256:6e5a28eea74760c26de06a302e42164c1a5c8900f86b711637eb79ac7f93448c",
+          "activeRelease": false,
+          "locator": "NIST AI 600-1: Generative AI risks and suggested actions across Govern, Map, Measure, and Manage; appendices A and B.",
+          "statement": "The cited source supports treating tool call traces as a distinct method within the stated agentic systems and mcp scope."
+        },
+        {
+          "recordId": "urn:maha:record:agentic-systems-mcp-idempotent-tool-calls",
+          "revisionSha256": "sha256:c79ad275e0417a21918a0013e2b420a9d26d953900900457f7be86573db786ff",
+          "activeRelease": false,
+          "locator": "NIST AI 600-1: Generative AI risks and suggested actions across Govern, Map, Measure, and Manage; appendices A and B.",
+          "statement": "The cited source supports treating idempotent tool calls as a distinct measurement within the stated agentic systems and mcp scope."
+        },
+        {
+          "recordId": "urn:maha:record:agentic-systems-mcp-tool-timeout-budgets",
+          "revisionSha256": "sha256:44bc0ea5607868a61c2b55c69971daeb5d3b34219712efec0f71f4dbc7673476",
+          "activeRelease": false,
+          "locator": "NIST AI 600-1: Generative AI risks and suggested actions across Govern, Map, Measure, and Manage; appendices A and B.",
+          "statement": "The cited source supports treating tool timeout budgets as a distinct comparison within the stated agentic systems and mcp scope."
+        }
+      ],
+      "releasedRecordCount": 0,
+      "fullTextAccessible": true,
+      "candidateSearchIntent": "What Artificial Intelligence Risk Management Framework: Generative Artifici establishes, and what it does not",
+      "duplicationRisk": "none",
+      "identityConflicted": false
+    },
+    {
+      "sourceId": "https://arxiv.org/abs/2210.03629",
+      "title": "ReAct: Synergizing Reasoning and Acting in Language Models",
+      "authors": [
+        "Shunyu Yao",
+        "Jeffrey Zhao",
+        "Dian Yu",
+        "et al."
+      ],
+      "publisher": "International Conference on Learning Representations",
+      "publishedAt": "2023-05-01",
+      "versionRelationship": "version of record as cited",
+      "rightsBasis": "citation-with-paraphrase",
+      "inspectionDepth": "section-or-full-text",
+      "exactLocators": [
+        "Reasoning/action trajectory format, task experiments, prompting setup, and error analysis."
+      ],
+      "boundRecords": [
+        {
+          "recordId": "urn:maha:record:agentic-systems-mcp-agent-plan-execution-separation",
+          "revisionSha256": "sha256:2e1d2b8415c9ee6e68906c4660daedfbc6f87cd80a5db3b99fb7f770b79178bd",
+          "activeRelease": false,
+          "locator": "Reasoning/action trajectory format, task experiments, prompting setup, and error analysis.",
+          "statement": "The cited source supports treating agent plan execution separation as a distinct concept within the stated agentic systems and mcp scope."
+        },
+        {
+          "recordId": "urn:maha:record:agentic-systems-mcp-multi-agent-role-assignment",
+          "revisionSha256": "sha256:7b21b60190a185361cc7d84fc45c5661c8b92ee8d21734a103921ccf8265f553",
+          "activeRelease": false,
+          "locator": "Reasoning/action trajectory format, task experiments, prompting setup, and error analysis.",
+          "statement": "The cited source supports treating multi agent role assignment as a distinct mechanism within the stated agentic systems and mcp scope."
+        },
+        {
+          "recordId": "urn:maha:record:agentic-systems-mcp-multi-agent-coordination-protocols",
+          "revisionSha256": "sha256:85c4e2ba36c1766ea241a19025532c245105a4f1613b889a737c270cd474224e",
+          "activeRelease": false,
+          "locator": "Reasoning/action trajectory format, task experiments, prompting setup, and error analysis.",
+          "statement": "The cited source supports treating multi agent coordination protocols as a distinct method within the stated agentic systems and mcp scope."
+        },
+        {
+          "recordId": "urn:maha:record:agentic-systems-mcp-multi-agent-deadlock",
+          "revisionSha256": "sha256:e00e3afe168a1e7d2c71500abb65718977e029a4c0953caae63d89c5c87a00f1",
+          "activeRelease": false,
+          "locator": "Reasoning/action trajectory format, task experiments, prompting setup, and error analysis.",
+          "statement": "The cited source supports treating multi agent deadlock as a distinct measurement within the stated agentic systems and mcp scope."
+        },
+        {
+          "recordId": "urn:maha:record:agentic-systems-mcp-distributed-agent-consensus",
+          "revisionSha256": "sha256:bc39e9b32de8a0f1b24d25b62976a5a8d5911ea876e979052e4b3fa3c1a63eef",
+          "activeRelease": false,
+          "locator": "Reasoning/action trajectory format, task experiments, prompting setup, and error analysis.",
+          "statement": "The cited source supports treating distributed agent consensus as a distinct comparison within the stated agentic systems and mcp scope."
+        }
+      ],
+      "releasedRecordCount": 0,
+      "fullTextAccessible": true,
+      "candidateSearchIntent": "What ReAct: Synergizing Reasoning and Acting in Language Models establishes, and what it does not",
+      "duplicationRisk": "none",
+      "identityConflicted": false
+    },
+    {
+      "sourceId": "https://arxiv.org/abs/2308.08155",
+      "title": "AutoGen: Enabling Next-Gen LLM Applications via Multi-Agent Conversation",
+      "authors": [
+        "Qingyun Wu",
+        "Gagan Bansal",
+        "Jieyu Zhang",
+        "et al."
+      ],
+      "publisher": "arXiv",
+      "publishedAt": "2023-08-16",
+      "versionRelationship": "version of record as cited",
+      "rightsBasis": "citation-with-paraphrase",
+      "inspectionDepth": "section-or-full-text",
+      "exactLocators": [
+        "Agent roles, conversation patterns, implementation, applications, and limitations."
+      ],
+      "boundRecords": [
+        {
+          "recordId": "urn:maha:record:agentic-systems-mcp-game-theoretic-incentive-misalignment",
+          "revisionSha256": "sha256:eebd7c4b5432e9da32c192f56f3c167bbb4a8adb779b1d54a851271c092f24c2",
+          "activeRelease": false,
+          "locator": "Agent roles, conversation patterns, implementation, applications, and limitations.",
+          "statement": "The cited source supports treating game theoretic incentive misalignment as a distinct concept within the stated agentic systems and mcp scope."
+        },
+        {
+          "recordId": "urn:maha:record:agentic-systems-mcp-agent-memory-boundaries",
+          "revisionSha256": "sha256:fddebdee52edd23bda08c048a99e26c6241e02d1e6b7457308dd883e9b2fd1ea",
+          "activeRelease": false,
+          "locator": "Agent roles, conversation patterns, implementation, applications, and limitations.",
+          "statement": "The cited source supports treating agent memory boundaries as a distinct mechanism within the stated agentic systems and mcp scope."
+        },
+        {
+          "recordId": "urn:maha:record:agentic-systems-mcp-prompt-injection-through-tools",
+          "revisionSha256": "sha256:fa46a0d2ba50a8c5890040b9bff90e63ef7dbbef5d7342919fd30c40026836f6",
+          "activeRelease": false,
+          "locator": "Agent roles, conversation patterns, implementation, applications, and limitations.",
+          "statement": "The cited source supports treating prompt injection through tools as a distinct method within the stated agentic systems and mcp scope."
+        },
+        {
+          "recordId": "urn:maha:record:agentic-systems-mcp-tool-output-trust-boundaries",
+          "revisionSha256": "sha256:7180e7c78678d40446f61da335c77faa402f86f0006213c4b7d4fb2c06a7442e",
+          "activeRelease": false,
+          "locator": "Agent roles, conversation patterns, implementation, applications, and limitations.",
+          "statement": "The cited source supports treating tool output trust boundaries as a distinct measurement within the stated agentic systems and mcp scope."
+        },
+        {
+          "recordId": "urn:maha:record:agentic-systems-mcp-agentic-evaluation-protocols",
+          "revisionSha256": "sha256:2ec86186171bbb5fd7e2afd1cf2f33e1818554ddd26851e790b6dc5d6ca44030",
+          "activeRelease": false,
+          "locator": "Agent roles, conversation patterns, implementation, applications, and limitations.",
+          "statement": "The cited source supports treating agentic evaluation protocols as a distinct comparison within the stated agentic systems and mcp scope."
+        }
+      ],
+      "releasedRecordCount": 0,
+      "fullTextAccessible": true,
+      "candidateSearchIntent": "What AutoGen: Enabling Next-Gen LLM Applications via Multi-Agent Conversati establishes, and what it does not",
+      "duplicationRisk": "none",
+      "identityConflicted": false
+    },
+    {
+      "sourceId": "https://arxiv.org/abs/2309.08600",
+      "title": "Sparse Autoencoders Find Highly Interpretable Features in Language Models",
+      "authors": [
+        "Hoagy Cunningham",
+        "Aidan Ewart",
+        "Logan Riggs",
+        "Robert Huben",
+        "Lee Sharkey"
+      ],
+      "publisher": "arXiv",
+      "publishedAt": "2023-09-15",
+      "versionRelationship": "version of record as cited",
+      "rightsBasis": "citation-with-paraphrase",
+      "inspectionDepth": "section-or-full-text",
+      "exactLocators": [
+        "Method, reconstruction and sparsity objectives, experiments, feature analysis, and limitations."
+      ],
+      "boundRecords": [
+        {
+          "recordId": "urn:maha:record:mechanistic-interpretability-sparse-autoencoder-dictionaries",
+          "revisionSha256": "sha256:d4eb84c77a4b5bc1457f8dd25681d62b4a48e21bfc622b1d5cf312604f4e3cad",
+          "activeRelease": true,
+          "locator": "Method, reconstruction and sparsity objectives, experiments, feature analysis, and limitations.",
+          "statement": "The cited source supports treating sparse autoencoder dictionaries as a distinct concept within the stated mechanistic interpretability scope."
+        },
+        {
+          "recordId": "urn:maha:record:mechanistic-interpretability-sae-encoder-decoder",
+          "revisionSha256": "sha256:fecd2f23e46352a862eaf3e441ce678513c066768f2c9217c16dfe44946aea54",
+          "activeRelease": true,
+          "locator": "Method, reconstruction and sparsity objectives, experiments, feature analysis, and limitations.",
+          "statement": "The cited source supports treating sae encoder decoder as a distinct mechanism within the stated mechanistic interpretability scope."
+        },
+        {
+          "recordId": "urn:maha:record:mechanistic-interpretability-sae-sparsity-fidelity-tradeoff",
+          "revisionSha256": "sha256:76276db1a59f0a8bd689e93c3dee21528b66cf1c7b757c339c275a5f2da8a82f",
+          "activeRelease": false,
+          "locator": "Method, reconstruction and sparsity objectives, experiments, feature analysis, and limitations.",
+          "statement": "The cited source supports treating sae sparsity fidelity tradeoff as a distinct method within the stated mechanistic interpretability scope."
+        },
+        {
+          "recordId": "urn:maha:record:mechanistic-interpretability-feature-splitting",
+          "revisionSha256": "sha256:cf6db395de12fd17dc25b78473858e97a8191aba6a34fe58c56c1f0a3b0840ef",
+          "activeRelease": false,
+          "locator": "Method, reconstruction and sparsity objectives, experiments, feature analysis, and limitations.",
+          "statement": "The cited source supports treating feature splitting as a distinct measurement within the stated mechanistic interpretability scope."
+        },
+        {
+          "recordId": "urn:maha:record:mechanistic-interpretability-feature-absorption",
+          "revisionSha256": "sha256:2a2d4bb4d9a99ccbded6876d32b1b0259bc45fda110c3c297d93f6479654681d",
+          "activeRelease": false,
+          "locator": "Method, reconstruction and sparsity objectives, experiments, feature analysis, and limitations.",
+          "statement": "The cited source supports treating feature absorption as a distinct comparison within the stated mechanistic interpretability scope."
+        }
+      ],
+      "releasedRecordCount": 2,
+      "fullTextAccessible": true,
+      "candidateSearchIntent": "What Sparse Autoencoders Find Highly Interpretable Features in Language Mod establishes, and what it does not",
+      "duplicationRisk": "none",
+      "identityConflicted": false
+    },
+    {
+      "sourceId": "https://lasers.llnl.gov/science/achieving-fusion-ignition",
+      "title": "Achieving Fusion Ignition",
+      "authors": [
+        "Lawrence Livermore National Laboratory"
+      ],
+      "publisher": "National Ignition Facility and Photon Science",
+      "publishedAt": "",
+      "versionRelationship": "version of record as cited",
+      "rightsBasis": "citation-with-paraphrase",
+      "inspectionDepth": "section-or-full-text",
+      "exactLocators": [
+        "Target, laser coupling, target chamber, ignition, and experimental result sections."
+      ],
+      "boundRecords": [
+        {
+          "recordId": "urn:maha:record:fusion-plasma-systems-magnetic-mirror-confinement",
+          "revisionSha256": "sha256:b19052af0beecc57556cbf8c98b41ae9e8bdac38c34a150d44aaea7640921c0b",
+          "activeRelease": false,
+          "locator": "Target, laser coupling, target chamber, ignition, and experimental result sections.",
+          "statement": "The cited source supports treating magnetic mirror confinement as a distinct concept within the stated fusion and plasma systems scope."
+        },
+        {
+          "recordId": "urn:maha:record:fusion-plasma-systems-inertial-confinement-target-chamber",
+          "revisionSha256": "sha256:79f14c90571fd53e631fb28b9d97b641c79ad5959bf305b014887257186f32b1",
+          "activeRelease": false,
+          "locator": "Target, laser coupling, target chamber, ignition, and experimental result sections.",
+          "statement": "The cited source supports treating inertial confinement target chamber as a distinct mechanism within the stated fusion and plasma systems scope."
+        },
+        {
+          "recordId": "urn:maha:record:fusion-plasma-systems-laser-target-coupling",
+          "revisionSha256": "sha256:3ee25d0b479f803fcc6a42046edb6346b1404e6290f9f34a908939fc6ae3afbe",
+          "activeRelease": false,
+          "locator": "Target, laser coupling, target chamber, ignition, and experimental result sections.",
+          "statement": "The cited source supports treating laser target coupling as a distinct method within the stated fusion and plasma systems scope."
+        },
+        {
+          "recordId": "urn:maha:record:fusion-plasma-systems-neutron-material-damage",
+          "revisionSha256": "sha256:0d96d26dcceab41adbae3265be38e922f716bf60c543056f9617c3231db35d95",
+          "activeRelease": false,
+          "locator": "Target, laser coupling, target chamber, ignition, and experimental result sections.",
+          "statement": "The cited source supports treating neutron material damage as a distinct measurement within the stated fusion and plasma systems scope."
+        },
+        {
+          "recordId": "urn:maha:record:fusion-plasma-systems-remote-handling-maintenance",
+          "revisionSha256": "sha256:f2d046c7e7cc488ea30a8402a278061bbbd5405e80be5682a1d956adfafca35f",
+          "activeRelease": false,
+          "locator": "Target, laser coupling, target chamber, ignition, and experimental result sections.",
+          "statement": "The cited source supports treating remote handling maintenance as a distinct comparison within the stated fusion and plasma systems scope."
+        }
+      ],
+      "releasedRecordCount": 0,
+      "fullTextAccessible": true,
+      "candidateSearchIntent": "What Achieving Fusion Ignition establishes, and what it does not",
+      "duplicationRisk": "none",
+      "identityConflicted": false
+    },
+    {
+      "sourceId": "https://modelcontextprotocol.io/specification/2024-11-05/index",
+      "title": "Model Context Protocol specification",
+      "authors": [
+        "Model Context Protocol contributors"
+      ],
+      "publisher": "Model Context Protocol",
+      "publishedAt": "2024-11-05",
+      "versionRelationship": "version of record as cited",
+      "rightsBasis": "citation-with-paraphrase",
+      "inspectionDepth": "section-or-full-text",
+      "exactLocators": [
+        "Architecture, lifecycle, capabilities, resources, prompts, and security sections."
+      ],
+      "boundRecords": [
+        {
+          "recordId": "urn:maha:record:agentic-systems-mcp-mcp-resource-discovery",
+          "revisionSha256": "sha256:7c5797337f6a30b329a292d05515e0e686dc76ee87d9636f79acdc4d1f5d7429",
+          "activeRelease": true,
+          "locator": "Architecture, lifecycle, capabilities, resources, prompts, and security sections.",
+          "statement": "The cited source supports treating mcp resource discovery as a distinct concept within the stated agentic systems and mcp scope."
+        },
+        {
+          "recordId": "urn:maha:record:agentic-systems-mcp-mcp-prompt-templates",
+          "revisionSha256": "sha256:5eba9ef3a96b65acf7e3eac4fed0754ed67a7e7b78f6ba9aa6dbbbf24444d070",
+          "activeRelease": true,
+          "locator": "Architecture, lifecycle, capabilities, resources, prompts, and security sections.",
+          "statement": "The cited source supports treating mcp prompt templates as a distinct mechanism within the stated agentic systems and mcp scope."
+        },
+        {
+          "recordId": "urn:maha:record:agentic-systems-mcp-mcp-session-lifecycle",
+          "revisionSha256": "sha256:110f2b0ddb37abd4acd9e4463e60c3bbd565d2dac8eefaa57cee2738d52ad80d",
+          "activeRelease": false,
+          "locator": "Architecture, lifecycle, capabilities, resources, prompts, and security sections.",
+          "statement": "The cited source supports treating mcp session lifecycle as a distinct method within the stated agentic systems and mcp scope."
+        },
+        {
+          "recordId": "urn:maha:record:agentic-systems-mcp-tool-allowlisting",
+          "revisionSha256": "sha256:adcf82aed5f0fa3b468f494e98eb4c420ba22a53bebd17422202c939c4b214b8",
+          "activeRelease": false,
+          "locator": "Architecture, lifecycle, capabilities, resources, prompts, and security sections.",
+          "statement": "The cited source supports treating tool allowlisting as a distinct measurement within the stated agentic systems and mcp scope."
+        },
+        {
+          "recordId": "urn:maha:record:agentic-systems-mcp-tool-deny-by-default",
+          "revisionSha256": "sha256:76dceea19020e02f7718a3bb263856de10e5acca53003598d78698514d98d6ac",
+          "activeRelease": true,
+          "locator": "Architecture, lifecycle, capabilities, resources, prompts, and security sections.",
+          "statement": "The cited source supports treating tool deny by default as a distinct comparison within the stated agentic systems and mcp scope."
+        },
+        {
+          "recordId": "urn:maha:record:agentic-systems-mcp-tool-deny-by-default",
+          "revisionSha256": "sha256:6b757d9bde334d8a5393f275f9af4ffb61aa6dcee794c7b99470ba3d1b7c645d",
+          "activeRelease": true,
+          "locator": "Tools page, version 2024-11-05: the \"User Interaction Model\" warning block and the \"Security Considerations\" list.",
+          "statement": "The Model Context Protocol specification recommends, as a normative SHOULD for implementors rather than a protocol mandate, that a human remain in the loop with the ability to deny tool invocations, and states that the protocol itself does not mandate any specific user interaction model."
+        }
+      ],
+      "releasedRecordCount": 4,
+      "fullTextAccessible": true,
+      "candidateSearchIntent": "What Model Context Protocol specification establishes, and what it does not",
+      "duplicationRisk": "none",
+      "identityConflicted": false
+    },
+    {
+      "sourceId": "https://modelcontextprotocol.io/specification/draft/server/tools",
+      "title": "Model Context Protocol specification: Tools",
+      "authors": [
+        "Model Context Protocol contributors"
+      ],
+      "publisher": "Model Context Protocol",
+      "publishedAt": "",
+      "versionRelationship": "version of record as cited",
+      "rightsBasis": "citation-with-paraphrase",
+      "inspectionDepth": "section-or-full-text",
+      "exactLocators": [
+        "Tool discovery, input schemas, calls, results, error handling, and security considerations."
+      ],
+      "boundRecords": [
+        {
+          "recordId": "urn:maha:record:agentic-systems-mcp-mcp-client-server-roles",
+          "revisionSha256": "sha256:d41071766c8e9746e1034a7c027c893d299dcd8d8c0053bd59bf1a5e06d08049",
+          "activeRelease": true,
+          "locator": "Tool discovery, input schemas, calls, results, error handling, and security considerations.",
+          "statement": "The cited source supports treating mcp client server roles as a distinct concept within the stated agentic systems and mcp scope."
+        },
+        {
+          "recordId": "urn:maha:record:agentic-systems-mcp-mcp-capability-negotiation",
+          "revisionSha256": "sha256:e62ccfe83dde0bdbca1ad3da3472fa2fff23ade3a7f62dbf35e1f3fa95d874a1",
+          "activeRelease": true,
+          "locator": "Tool discovery, input schemas, calls, results, error handling, and security considerations.",
+          "statement": "The cited source supports treating mcp capability negotiation as a distinct mechanism within the stated agentic systems and mcp scope."
+        },
+        {
+          "recordId": "urn:maha:record:agentic-systems-mcp-mcp-tool-discovery",
+          "revisionSha256": "sha256:97587657ca9c7ea61f566479fcc0f23a20142cadda5a79414047081f4510c7eb",
+          "activeRelease": true,
+          "locator": "Tool discovery, input schemas, calls, results, error handling, and security considerations.",
+          "statement": "The cited source supports treating mcp tool discovery as a distinct method within the stated agentic systems and mcp scope."
+        },
+        {
+          "recordId": "urn:maha:record:agentic-systems-mcp-mcp-tool-input-schemas",
+          "revisionSha256": "sha256:01d51aa2e05a93fa4cc780e24d1417eaf15bb1a1d919f2cec76b9e4a85b35e5f",
+          "activeRelease": true,
+          "locator": "Tool discovery, input schemas, calls, results, error handling, and security considerations.",
+          "statement": "The cited source supports treating mcp tool input schemas as a distinct measurement within the stated agentic systems and mcp scope."
+        },
+        {
+          "recordId": "urn:maha:record:agentic-systems-mcp-mcp-tool-result-contracts",
+          "revisionSha256": "sha256:4f618f9709ac3f9b6b13f30a99a8761b350ab24c080da840622d893cc035c2a7",
+          "activeRelease": true,
+          "locator": "Tool discovery, input schemas, calls, results, error handling, and security considerations.",
+          "statement": "The cited source supports treating mcp tool result contracts as a distinct comparison within the stated agentic systems and mcp scope."
+        }
+      ],
+      "releasedRecordCount": 5,
+      "fullTextAccessible": true,
+      "candidateSearchIntent": "What Model Context Protocol specification: Tools establishes, and what it does not",
+      "duplicationRisk": "none",
+      "identityConflicted": false
+    },
+    {
+      "sourceId": "https://pubs.usgs.gov/periodicals/mcs2026/mcs2026.pdf",
+      "title": "Mineral Commodity Summaries 2026",
+      "authors": [
+        "U.S. Geological Survey"
+      ],
+      "publisher": "U.S. Geological Survey",
+      "publishedAt": "2026-01-30",
+      "versionRelationship": "version of record as cited",
+      "rightsBasis": "citation-with-paraphrase",
+      "inspectionDepth": "section-or-full-text",
+      "exactLocators": [
+        "Gallium and germanium commodity chapters: production, recycling, imports, uses, substitutes, and world resources."
+      ],
+      "boundRecords": [
+        {
+          "recordId": "urn:maha:record:critical-supply-chains-fluorinated-resist-components",
+          "revisionSha256": "sha256:595477acac796dfa2954f52e79770268ac6230d47e050f0b2dc152f0c0ca8697",
+          "activeRelease": false,
+          "locator": "Gallium and germanium commodity chapters: production, recycling, imports, uses, substitutes, and world resources.",
+          "statement": "The cited source supports treating fluorinated resist components as a distinct concept within the stated critical supply chains scope."
+        },
+        {
+          "recordId": "urn:maha:record:critical-supply-chains-gallium-bauxite-byproduct-flow",
+          "revisionSha256": "sha256:da4a974ebd5dc80c676257fa7bab66f3c1edc70b597012af5bbfae40e2b700ec",
+          "activeRelease": false,
+          "locator": "Gallium and germanium commodity chapters: production, recycling, imports, uses, substitutes, and world resources.",
+          "statement": "The cited source supports treating gallium bauxite byproduct flow as a distinct mechanism within the stated critical supply chains scope."
+        },
+        {
+          "recordId": "urn:maha:record:critical-supply-chains-gallium-zinc-processing-byproduct",
+          "revisionSha256": "sha256:27db54bd1e8c7807c9889751b345eff394d0f51933200b24fb5f5900946748f9",
+          "activeRelease": false,
+          "locator": "Gallium and germanium commodity chapters: production, recycling, imports, uses, substitutes, and world resources.",
+          "statement": "The cited source supports treating gallium zinc processing byproduct as a distinct method within the stated critical supply chains scope."
+        },
+        {
+          "recordId": "urn:maha:record:critical-supply-chains-germanium-zinc-refining-flow",
+          "revisionSha256": "sha256:5f055a0c6b5222726955abe36900a0474ed1198e922e0f2b84e46779f8421e60",
+          "activeRelease": false,
+          "locator": "Gallium and germanium commodity chapters: production, recycling, imports, uses, substitutes, and world resources.",
+          "statement": "The cited source supports treating germanium zinc refining flow as a distinct measurement within the stated critical supply chains scope."
+        },
+        {
+          "recordId": "urn:maha:record:critical-supply-chains-germanium-coal-ash-recovery",
+          "revisionSha256": "sha256:ee6208d6e62fc4e146ca3f90f8fcf4c385cf4c33ce322ba4cfa835275d25865a",
+          "activeRelease": false,
+          "locator": "Gallium and germanium commodity chapters: production, recycling, imports, uses, substitutes, and world resources.",
+          "statement": "The cited source supports treating germanium coal ash recovery as a distinct comparison within the stated critical supply chains scope."
+        },
+        {
+          "recordId": "urn:maha:record:critical-supply-chains-dysprosium-ore-to-oxide",
+          "revisionSha256": "sha256:01a2cd3c8541b36810a0eccb3128d1cca76ec88e0da3dd4aed3b692cf3729aa0",
+          "activeRelease": false,
+          "locator": "Rare earths commodity chapter: mine production, compounds and metals, trade, recycling, substitutes, and world resources.",
+          "statement": "The cited source supports treating dysprosium ore to oxide as a distinct concept within the stated critical supply chains scope."
+        },
+        {
+          "recordId": "urn:maha:record:critical-supply-chains-neodymium-praseodymium-separation",
+          "revisionSha256": "sha256:a4383ccf85be9baea35efde5e871ca9a95ac0b6dd7c1ef70c2d07f6984f9e146",
+          "activeRelease": false,
+          "locator": "Rare earths commodity chapter: mine production, compounds and metals, trade, recycling, substitutes, and world resources.",
+          "statement": "The cited source supports treating neodymium praseodymium separation as a distinct mechanism within the stated critical supply chains scope."
+        },
+        {
+          "recordId": "urn:maha:record:critical-supply-chains-nd-fe-b-magnet-alloying",
+          "revisionSha256": "sha256:61666256cbd7c75e28b7215e0b201f5784377603a72a6367fcf8044c2bd1c80f",
+          "activeRelease": false,
+          "locator": "Rare earths commodity chapter: mine production, compounds and metals, trade, recycling, substitutes, and world resources.",
+          "statement": "The cited source supports treating nd fe b magnet alloying as a distinct method within the stated critical supply chains scope."
+        },
+        {
+          "recordId": "urn:maha:record:critical-supply-chains-heavy-rare-earth-diffusion",
+          "revisionSha256": "sha256:2ffa51b08e1bb400a9c0fd97b4623a4a2d7277986f1a79d0742839d41c644f4c",
+          "activeRelease": false,
+          "locator": "Rare earths commodity chapter: mine production, compounds and metals, trade, recycling, substitutes, and world resources.",
+          "statement": "The cited source supports treating heavy rare earth diffusion as a distinct measurement within the stated critical supply chains scope."
+        },
+        {
+          "recordId": "urn:maha:record:critical-supply-chains-rare-earth-solvent-extraction",
+          "revisionSha256": "sha256:509cb481842316d2de916e1f4f0b322ea2d5ea34cedd02b56fa8aed049bacfbb",
+          "activeRelease": false,
+          "locator": "Rare earths commodity chapter: mine production, compounds and metals, trade, recycling, substitutes, and world resources.",
+          "statement": "The cited source supports treating rare earth solvent extraction as a distinct comparison within the stated critical supply chains scope."
+        },
+        {
+          "recordId": "urn:maha:record:critical-supply-chains-magnet-recycling",
+          "revisionSha256": "sha256:c1d77e1b9a24e4358668fceefff66dbfb36be8a840f9d9ef43cb0f94b6677527",
+          "activeRelease": false,
+          "locator": "Graphite, cobalt, tungsten, and indium commodity chapters.",
+          "statement": "The cited source supports treating magnet recycling as a distinct concept within the stated critical supply chains scope."
+        },
+        {
+          "recordId": "urn:maha:record:critical-supply-chains-graphite-anode-processing",
+          "revisionSha256": "sha256:21e3b74d5cb38ac084bd41f6bb9676fe8eb01b9faa18c6fade8c82d2689116bb",
+          "activeRelease": false,
+          "locator": "Graphite, cobalt, tungsten, and indium commodity chapters.",
+          "statement": "The cited source supports treating graphite anode processing as a distinct mechanism within the stated critical supply chains scope."
+        },
+        {
+          "recordId": "urn:maha:record:critical-supply-chains-cobalt-refining-concentration",
+          "revisionSha256": "sha256:0ed198f4d3d15c65802d4cbfcdac09863039bc189f6fa06345d084b5be022193",
+          "activeRelease": false,
+          "locator": "Graphite, cobalt, tungsten, and indium commodity chapters.",
+          "statement": "The cited source supports treating cobalt refining concentration as a distinct method within the stated critical supply chains scope."
+        },
+        {
+          "recordId": "urn:maha:record:critical-supply-chains-tungsten-concentrate-processing",
+          "revisionSha256": "sha256:d0244d7c071e152e8f7d75ecb889f75392eb77711d063b49b6445d41e44ce96a",
+          "activeRelease": false,
+          "locator": "Graphite, cobalt, tungsten, and indium commodity chapters.",
+          "statement": "The cited source supports treating tungsten concentrate processing as a distinct measurement within the stated critical supply chains scope."
+        },
+        {
+          "recordId": "urn:maha:record:critical-supply-chains-indium-zinc-byproduct-flow",
+          "revisionSha256": "sha256:10e3f43188f5dd7342fe425cd15eed2f8f00d34b3f4ad18a30e9158bdf24785a",
+          "activeRelease": false,
+          "locator": "Graphite, cobalt, tungsten, and indium commodity chapters.",
+          "statement": "The cited source supports treating indium zinc byproduct flow as a distinct comparison within the stated critical supply chains scope."
+        },
+        {
+          "recordId": "urn:maha:record:critical-supply-chains-helium-liquefaction-logistics",
+          "revisionSha256": "sha256:54a24d5bbe55325d0ba7e9a32fa2193249c5f644168df355b21f3dadccc830fc",
+          "activeRelease": false,
+          "locator": "Helium, hafnium, tantalum, niobium, and antimony commodity chapters.",
+          "statement": "The cited source supports treating helium liquefaction logistics as a distinct concept within the stated critical supply chains scope."
+        },
+        {
+          "recordId": "urn:maha:record:critical-supply-chains-hafnium-zirconium-separation",
+          "revisionSha256": "sha256:649a064e484913ec75838c6b8ab8144b9ac52f9b1ddd3d35fa7d7295d1576dc1",
+          "activeRelease": false,
+          "locator": "Helium, hafnium, tantalum, niobium, and antimony commodity chapters.",
+          "statement": "The cited source supports treating hafnium zirconium separation as a distinct mechanism within the stated critical supply chains scope."
+        },
+        {
+          "recordId": "urn:maha:record:critical-supply-chains-tantalum-concentrate-traceability",
+          "revisionSha256": "sha256:97e072d708bf0a6bd39b3274d2f8d7c2f4d76cbe221bfd316abdfad3375c0a4b",
+          "activeRelease": false,
+          "locator": "Helium, hafnium, tantalum, niobium, and antimony commodity chapters.",
+          "statement": "The cited source supports treating tantalum concentrate traceability as a distinct method within the stated critical supply chains scope."
+        },
+        {
+          "recordId": "urn:maha:record:critical-supply-chains-niobium-ferroniobium-production",
+          "revisionSha256": "sha256:138719dda5fa18e05558a26025cd189b8bf566e0e7f41817610d20e911643f55",
+          "activeRelease": false,
+          "locator": "Helium, hafnium, tantalum, niobium, and antimony commodity chapters.",
+          "statement": "The cited source supports treating niobium ferroniobium production as a distinct measurement within the stated critical supply chains scope."
+        },
+        {
+          "recordId": "urn:maha:record:critical-supply-chains-antimony-smelting-concentration",
+          "revisionSha256": "sha256:83fdf10f8f0760c21e8d0616bf4c0e18b00a037ee23a2d11669cb5018664ebd2",
+          "activeRelease": false,
+          "locator": "Helium, hafnium, tantalum, niobium, and antimony commodity chapters.",
+          "statement": "The cited source supports treating antimony smelting concentration as a distinct comparison within the stated critical supply chains scope."
+        }
+      ],
+      "releasedRecordCount": 0,
+      "fullTextAccessible": true,
+      "candidateSearchIntent": "What Mineral Commodity Summaries 2026 establishes, and what it does not",
+      "duplicationRisk": "none",
+      "identityConflicted": false
+    },
+    {
+      "sourceId": "https://pubs.usgs.gov/publication/pp1802",
+      "title": "Critical Mineral Resources of the United States—Economic and Environmental Geology and Prospects for Future Supply",
+      "authors": [
+        "Klaus J. Schulz",
+        "John H. DeYoung Jr.",
+        "Robert R. Seal II",
+        "Dwight C. Bradley",
+        "editors"
+      ],
+      "publisher": "U.S. Geological Survey",
+      "publishedAt": "2017-12-19",
+      "versionRelationship": "version of record as cited",
+      "rightsBasis": "citation-with-paraphrase",
+      "inspectionDepth": "section-or-full-text",
+      "exactLocators": [
+        "Commodity chapters and introductory sections distinguishing resources, production, processing, uses, and supply considerations."
+      ],
+      "boundRecords": [
+        {
+          "recordId": "urn:maha:record:critical-supply-chains-high-purity-quartz-deposits",
+          "revisionSha256": "sha256:7d1460a1ca4bc9a89da90b65bb46c19c7a284194e4de3250f646a58c0f8de7f2",
+          "activeRelease": true,
+          "locator": "Commodity chapters and introductory sections distinguishing resources, production, processing, uses, and supply considerations.",
+          "statement": "The cited source supports treating high purity quartz deposits as a distinct concept within the stated critical supply chains scope."
+        },
+        {
+          "recordId": "urn:maha:record:critical-supply-chains-quartz-crucible-manufacturing",
+          "revisionSha256": "sha256:8875304b34512980cdb1681ccccbaf97c3b44a70c48d6c959479c9abf8948b8d",
+          "activeRelease": true,
+          "locator": "Commodity chapters and introductory sections distinguishing resources, production, processing, uses, and supply considerations.",
+          "statement": "The cited source supports treating quartz crucible manufacturing as a distinct mechanism within the stated critical supply chains scope."
+        },
+        {
+          "recordId": "urn:maha:record:critical-supply-chains-semiconductor-grade-polysilicon",
+          "revisionSha256": "sha256:d8deade7cd1906f41c75de93e97b79700b0b775bd150057edeacb17cf320b058",
+          "activeRelease": true,
+          "locator": "Commodity chapters and introductory sections distinguishing resources, production, processing, uses, and supply considerations.",
+          "statement": "The cited source supports treating semiconductor grade polysilicon as a distinct method within the stated critical supply chains scope."
+        },
+        {
+          "recordId": "urn:maha:record:critical-supply-chains-euv-photoresist-precursors",
+          "revisionSha256": "sha256:26b0783565e090420e3a48a7499d95d4feb0fb8a7815104c105f0aea4c17755a",
+          "activeRelease": true,
+          "locator": "Commodity chapters and introductory sections distinguishing resources, production, processing, uses, and supply considerations.",
+          "statement": "The cited source supports treating euv photoresist precursors as a distinct measurement within the stated critical supply chains scope."
+        },
+        {
+          "recordId": "urn:maha:record:critical-supply-chains-photoacid-generator-supply",
+          "revisionSha256": "sha256:0f15223d30a40bb328c6bf5a1762a04c7803a6c6e3e3ecf7236afa8c523a9448",
+          "activeRelease": true,
+          "locator": "Commodity chapters and introductory sections distinguishing resources, production, processing, uses, and supply considerations.",
+          "statement": "The cited source supports treating photoacid generator supply as a distinct comparison within the stated critical supply chains scope."
+        }
+      ],
+      "releasedRecordCount": 5,
+      "fullTextAccessible": true,
+      "candidateSearchIntent": "What Critical Mineral Resources of the United States—Economic and Environme establishes, and what it does not",
+      "duplicationRisk": "none",
+      "identityConflicted": false
+    },
+    {
+      "sourceId": "https://transformer-circuits.pub/2021/framework/index.html",
+      "title": "A Mathematical Framework for Transformer Circuits",
+      "authors": [
+        "Nelson Elhage",
+        "Neel Nanda",
+        "Catherine Olsson",
+        "et al."
+      ],
+      "publisher": "Transformer Circuits Thread",
+      "publishedAt": "2021-12-22",
+      "versionRelationship": "version of record as cited",
+      "rightsBasis": "citation-with-paraphrase",
+      "inspectionDepth": "section-or-full-text",
+      "exactLocators": [
+        "Residual-stream decomposition, attention-head composition, path expansion, and limitations."
+      ],
+      "boundRecords": [
+        {
+          "recordId": "urn:maha:record:mechanistic-interpretability-circuit-completeness",
+          "revisionSha256": "sha256:e96a0c8349db8bf91661f3641701ec4edc8d0d1ba0ddda30d91cee7c9b2d2dc9",
+          "activeRelease": false,
+          "locator": "Residual-stream decomposition, attention-head composition, path expansion, and limitations.",
+          "statement": "The cited source supports treating circuit completeness as a distinct concept within the stated mechanistic interpretability scope."
+        },
+        {
+          "recordId": "urn:maha:record:mechanistic-interpretability-circuit-faithfulness",
+          "revisionSha256": "sha256:5ae18dd0bad14d69f62dc4b6f93a8fb459ff39540da4e395e083a8c11969b4b0",
+          "activeRelease": false,
+          "locator": "Residual-stream decomposition, attention-head composition, path expansion, and limitations.",
+          "statement": "The cited source supports treating circuit faithfulness as a distinct mechanism within the stated mechanistic interpretability scope."
+        },
+        {
+          "recordId": "urn:maha:record:mechanistic-interpretability-mechanistic-anomaly-detection",
+          "revisionSha256": "sha256:67a6c2e8d94a7de06711fa33722b0a07d8d34670a3e6d3a74f918ffe137268a4",
+          "activeRelease": false,
+          "locator": "Residual-stream decomposition, attention-head composition, path expansion, and limitations.",
+          "statement": "The cited source supports treating mechanistic anomaly detection as a distinct method within the stated mechanistic interpretability scope."
+        },
+        {
+          "recordId": "urn:maha:record:mechanistic-interpretability-benchmark-task-transfer",
+          "revisionSha256": "sha256:ddf2ed2123e3d6a45e1041116e781a7a92e6e3166bd63ada0c16de7c0eb40095",
+          "activeRelease": false,
+          "locator": "Residual-stream decomposition, attention-head composition, path expansion, and limitations.",
+          "statement": "The cited source supports treating benchmark task transfer as a distinct measurement within the stated mechanistic interpretability scope."
+        },
+        {
+          "recordId": "urn:maha:record:mechanistic-interpretability-interpretability-claim-boundaries",
+          "revisionSha256": "sha256:11a69bfe8da762641cc6eedd1c821bd5e53d6644eafb5918c1b2fc5fa8862856",
+          "activeRelease": false,
+          "locator": "Residual-stream decomposition, attention-head composition, path expansion, and limitations.",
+          "statement": "The cited source supports treating interpretability claim boundaries as a distinct comparison within the stated mechanistic interpretability scope."
+        }
+      ],
+      "releasedRecordCount": 0,
+      "fullTextAccessible": true,
+      "candidateSearchIntent": "What A Mathematical Framework for Transformer Circuits establishes, and what it does not",
+      "duplicationRisk": "none",
+      "identityConflicted": false
+    },
+    {
+      "sourceId": "https://transformer-circuits.pub/2022/in-context-learning-and-induction-heads/index.html",
+      "title": "In-context Learning and Induction Heads",
+      "authors": [
+        "Catherine Olsson",
+        "Nelson Elhage",
+        "Neel Nanda",
+        "et al."
+      ],
+      "publisher": "Transformer Circuits Thread",
+      "publishedAt": "2022-03-22",
+      "versionRelationship": "version of record as cited",
+      "rightsBasis": "citation-with-paraphrase",
+      "inspectionDepth": "section-or-full-text",
+      "exactLocators": [
+        "Induction-head definition, previous-token heads, training dynamics, interventions, and model scope."
+      ],
+      "boundRecords": [
+        {
+          "recordId": "urn:maha:record:mechanistic-interpretability-induction-head-circuits",
+          "revisionSha256": "sha256:e4ea8094bb1cc6dd46e32a36fdf0bff6fae8e5fdb7e81ed1ad3f9c85f6807720",
+          "activeRelease": true,
+          "locator": "Induction-head definition, previous-token heads, training dynamics, interventions, and model scope.",
+          "statement": "The cited source supports treating induction head circuits as a distinct concept within the stated mechanistic interpretability scope."
+        },
+        {
+          "recordId": "urn:maha:record:mechanistic-interpretability-previous-token-heads",
+          "revisionSha256": "sha256:f625abc2cd12338322ef9b8e12ff33585aff6fb0d430de39607a16b52a003c7b",
+          "activeRelease": false,
+          "locator": "Induction-head definition, previous-token heads, training dynamics, interventions, and model scope.",
+          "statement": "The cited source supports treating previous token heads as a distinct mechanism within the stated mechanistic interpretability scope."
+        },
+        {
+          "recordId": "urn:maha:record:mechanistic-interpretability-in-context-learning-circuits",
+          "revisionSha256": "sha256:34dd381e9adb2ce62571ccee51023a8014020b65a8380b129b67f4e8f140cc70",
+          "activeRelease": true,
+          "locator": "Induction-head definition, previous-token heads, training dynamics, interventions, and model scope.",
+          "statement": "The cited source supports treating in context learning circuits as a distinct method within the stated mechanistic interpretability scope."
+        },
+        {
+          "recordId": "urn:maha:record:mechanistic-interpretability-attention-pattern-evidence",
+          "revisionSha256": "sha256:b620e7cc4910dadbbb70e5b76d09e2eb114fd6f9255443a7e292258bac5399c0",
+          "activeRelease": true,
+          "locator": "Induction-head definition, previous-token heads, training dynamics, interventions, and model scope.",
+          "statement": "The cited source supports treating attention pattern evidence as a distinct measurement within the stated mechanistic interpretability scope."
+        },
+        {
+          "recordId": "urn:maha:record:mechanistic-interpretability-io-identification-circuit",
+          "revisionSha256": "sha256:423d3d8385569d7166a1f5e4a595935f02f05834f537c17c8c382cbe408aff41",
+          "activeRelease": false,
+          "locator": "Induction-head definition, previous-token heads, training dynamics, interventions, and model scope.",
+          "statement": "The cited source supports treating io identification circuit as a distinct comparison within the stated mechanistic interpretability scope."
+        }
+      ],
+      "releasedRecordCount": 3,
+      "fullTextAccessible": true,
+      "candidateSearchIntent": "What In-context Learning and Induction Heads establishes, and what it does not",
+      "duplicationRisk": "none",
+      "identityConflicted": false
+    },
+    {
+      "sourceId": "https://transformer-circuits.pub/2022/toy_model/index.html",
+      "title": "Toy Models of Superposition",
+      "authors": [
+        "Nelson Elhage",
+        "Tristan Hume",
+        "Catherine Olsson",
+        "et al."
+      ],
+      "publisher": "Transformer Circuits Thread",
+      "publishedAt": "2022-09-14",
+      "versionRelationship": "version of record as cited",
+      "rightsBasis": "citation-with-paraphrase",
+      "inspectionDepth": "section-or-full-text",
+      "exactLocators": [
+        "Definitions, toy models, geometry, sparsity, and feature-interference experiments."
+      ],
+      "boundRecords": [
+        {
+          "recordId": "urn:maha:record:mechanistic-interpretability-neural-feature-superposition",
+          "revisionSha256": "sha256:e0955ae7df6a4db6135e0b27d8d43c3d753f1721bee83db45c979b4984770ba0",
+          "activeRelease": true,
+          "locator": "Definitions, toy models, geometry, sparsity, and feature-interference experiments.",
+          "statement": "The cited source supports treating neural feature superposition as a distinct concept within the stated mechanistic interpretability scope."
+        },
+        {
+          "recordId": "urn:maha:record:mechanistic-interpretability-polysemantic-neurons",
+          "revisionSha256": "sha256:da6577a271900f4eb0831b1939a28d77f55443288043f90948ff41cd26e42216",
+          "activeRelease": true,
+          "locator": "Definitions, toy models, geometry, sparsity, and feature-interference experiments.",
+          "statement": "The cited source supports treating polysemantic neurons as a distinct mechanism within the stated mechanistic interpretability scope."
+        },
+        {
+          "recordId": "urn:maha:record:mechanistic-interpretability-toy-models-of-superposition",
+          "revisionSha256": "sha256:d99abd6cf16677d4bc79261413b00c1e51dd8d33885dee6659acd2424b054767",
+          "activeRelease": true,
+          "locator": "Definitions, toy models, geometry, sparsity, and feature-interference experiments.",
+          "statement": "The cited source supports treating toy models of superposition as a distinct method within the stated mechanistic interpretability scope."
+        },
+        {
+          "recordId": "urn:maha:record:mechanistic-interpretability-superposition-geometry",
+          "revisionSha256": "sha256:66809a1a4e58090f95d04caca8045b7de2f1ecbc5c0bd5df930b8ed641284760",
+          "activeRelease": true,
+          "locator": "Definitions, toy models, geometry, sparsity, and feature-interference experiments.",
+          "statement": "The cited source supports treating superposition geometry as a distinct measurement within the stated mechanistic interpretability scope."
+        },
+        {
+          "recordId": "urn:maha:record:mechanistic-interpretability-representation-probing-boundary",
+          "revisionSha256": "sha256:3fa9cad966e10d7bb1ba52e2c082873316a8e28dfd2e7131e986e1474fa499c9",
+          "activeRelease": true,
+          "locator": "Definitions, toy models, geometry, sparsity, and feature-interference experiments.",
+          "statement": "The cited source supports treating representation probing boundary as a distinct comparison within the stated mechanistic interpretability scope."
+        }
+      ],
+      "releasedRecordCount": 5,
+      "fullTextAccessible": true,
+      "candidateSearchIntent": "What Toy Models of Superposition establishes, and what it does not",
+      "duplicationRisk": "none",
+      "identityConflicted": false
+    },
+    {
+      "sourceId": "https://www.alignmentforum.org/posts/JvZhhzycHu2Yd57RN/causal-scrubbing-a-method-for-rigorously-testing",
+      "title": "Causal Scrubbing: a method for rigorously testing interpretability hypotheses",
+      "authors": [
+        "Lawrence Chan",
+        "Adrià Garriga-Alonso",
+        "Nicholas Goldowsky-Dill",
+        "et al."
+      ],
+      "publisher": "Alignment Research Center",
+      "publishedAt": "2022-12-06",
+      "versionRelationship": "version of record as cited",
+      "rightsBasis": "citation-with-paraphrase",
+      "inspectionDepth": "section-or-full-text",
+      "exactLocators": [
+        "Method definition, correspondence, resampling interventions, examples, and limitations."
+      ],
+      "boundRecords": [
+        {
+          "recordId": "urn:maha:record:mechanistic-interpretability-activation-patching",
+          "revisionSha256": "sha256:75b9f1bb39ddd339c45d7813146d0d54f9a4dd03de056be3f9a51a4ed72c1953",
+          "activeRelease": false,
+          "locator": "Method definition, correspondence, resampling interventions, examples, and limitations.",
+          "statement": "The cited source supports treating activation patching as a distinct concept within the stated mechanistic interpretability scope."
+        },
+        {
+          "recordId": "urn:maha:record:mechanistic-interpretability-path-patching",
+          "revisionSha256": "sha256:ddf477b346986f7db4aa3974a49478576a8f1b7eede4f32a4498f2dc70cc98f8",
+          "activeRelease": false,
+          "locator": "Method definition, correspondence, resampling interventions, examples, and limitations.",
+          "statement": "The cited source supports treating path patching as a distinct mechanism within the stated mechanistic interpretability scope."
+        },
+        {
+          "recordId": "urn:maha:record:mechanistic-interpretability-causal-scrubbing",
+          "revisionSha256": "sha256:be714d5fa8d820c6923baeaa7a9b5e9cad6bbbf1cc82a0a22305f1880debf54b",
+          "activeRelease": true,
+          "locator": "Method definition, correspondence, resampling interventions, examples, and limitations.",
+          "statement": "The cited source supports treating causal scrubbing as a distinct method within the stated mechanistic interpretability scope."
+        },
+        {
+          "recordId": "urn:maha:record:mechanistic-interpretability-interchange-interventions",
+          "revisionSha256": "sha256:fa78fb4443e757f3ac7137edfce3d21f48c2b5c013bf040452f091cff9f53ee9",
+          "activeRelease": false,
+          "locator": "Method definition, correspondence, resampling interventions, examples, and limitations.",
+          "statement": "The cited source supports treating interchange interventions as a distinct measurement within the stated mechanistic interpretability scope."
+        },
+        {
+          "recordId": "urn:maha:record:mechanistic-interpretability-model-component-ablation",
+          "revisionSha256": "sha256:850665cfac0e9281b1d32c3e62784cd5e12ef82258386eff1e258695bb3b6a6b",
+          "activeRelease": false,
+          "locator": "Method definition, correspondence, resampling interventions, examples, and limitations.",
+          "statement": "The cited source supports treating model component ablation as a distinct comparison within the stated mechanistic interpretability scope."
+        }
+      ],
+      "releasedRecordCount": 1,
+      "fullTextAccessible": true,
+      "candidateSearchIntent": "What Causal Scrubbing: a method for rigorously testing interpretability hyp establishes, and what it does not",
+      "duplicationRisk": "overlaps-record-page",
+      "identityConflicted": false
+    },
+    {
+      "sourceId": "https://www.iter.org/fusion-energy/making-it-work",
+      "title": "Making fusion work",
+      "authors": [
+        "ITER Organization"
+      ],
+      "publisher": "ITER Organization",
+      "publishedAt": "",
+      "versionRelationship": "version of record as cited",
+      "rightsBasis": "citation-with-paraphrase",
+      "inspectionDepth": "section-or-full-text",
+      "exactLocators": [
+        "Sections describing plasma control, first wall, blanket, and divertor heat and particle exhaust."
+      ],
+      "boundRecords": [
+        {
+          "recordId": "urn:maha:record:fusion-plasma-systems-plasma-position-and-shape-control",
+          "revisionSha256": "sha256:c8a0b1ffe54ea5a2294b2f2440c760124f2a8a135ef1dfb6de9138550425ba28",
+          "activeRelease": false,
+          "locator": "Sections describing plasma control, first wall, blanket, and divertor heat and particle exhaust.",
+          "statement": "The cited source supports treating plasma position and shape control as a distinct concept within the stated fusion and plasma systems scope."
+        },
+        {
+          "recordId": "urn:maha:record:fusion-plasma-systems-divertor-heat-exhaust",
+          "revisionSha256": "sha256:e53a828764186c90dfbcd773ebd47159ae9d015b055bd2dc4d6aaa65013ce142",
+          "activeRelease": true,
+          "locator": "Sections describing plasma control, first wall, blanket, and divertor heat and particle exhaust.",
+          "statement": "The cited source supports treating divertor heat exhaust as a distinct mechanism within the stated fusion and plasma systems scope."
+        },
+        {
+          "recordId": "urn:maha:record:fusion-plasma-systems-plasma-facing-components",
+          "revisionSha256": "sha256:9e507764819c6ca6bf753f291f989ecce94951902d6ac17a646ab149d1a40053",
+          "activeRelease": false,
+          "locator": "Sections describing plasma control, first wall, blanket, and divertor heat and particle exhaust.",
+          "statement": "The cited source supports treating plasma facing components as a distinct method within the stated fusion and plasma systems scope."
+        },
+        {
+          "recordId": "urn:maha:record:fusion-plasma-systems-edge-localized-modes",
+          "revisionSha256": "sha256:0c3c953b5dfd539043ae91838f0d10ca23ba5ab0f7290adbaf49678325400bc2",
+          "activeRelease": false,
+          "locator": "Sections describing plasma control, first wall, blanket, and divertor heat and particle exhaust.",
+          "statement": "The cited source supports treating edge localized modes as a distinct measurement within the stated fusion and plasma systems scope."
+        },
+        {
+          "recordId": "urn:maha:record:fusion-plasma-systems-resonant-magnetic-perturbations",
+          "revisionSha256": "sha256:f992e3437f2b1afe34857cfb1a38fb1e6cb597fadaf7d9ab4aad568964d971b5",
+          "activeRelease": false,
+          "locator": "Sections describing plasma control, first wall, blanket, and divertor heat and particle exhaust.",
+          "statement": "The cited source supports treating resonant magnetic perturbations as a distinct comparison within the stated fusion and plasma systems scope."
+        }
+      ],
+      "releasedRecordCount": 1,
+      "fullTextAccessible": true,
+      "candidateSearchIntent": "What Making fusion work establishes, and what it does not",
+      "duplicationRisk": "overlaps-record-page",
+      "identityConflicted": false
+    },
+    {
+      "sourceId": "https://www.iter.org/machine/magnets",
+      "title": "Magnets",
+      "authors": [
+        "ITER Organization"
+      ],
+      "publisher": "ITER Organization",
+      "publishedAt": "",
+      "versionRelationship": "version of record as cited",
+      "rightsBasis": "citation-with-paraphrase",
+      "inspectionDepth": "section-or-full-text",
+      "exactLocators": [
+        "Machine / Magnets: toroidal field, poloidal field, central solenoid, and correction coil sections."
+      ],
+      "boundRecords": [
+        {
+          "recordId": "urn:maha:record:fusion-plasma-systems-magnetic-confinement",
+          "revisionSha256": "sha256:32ac01e76e7c7b433be7d2b231e125ec3ccc3441be38c5c8a49926bf2f85ab74",
+          "activeRelease": true,
+          "locator": "Machine / Magnets: toroidal field, poloidal field, central solenoid, and correction coil sections.",
+          "statement": "The cited source supports treating magnetic confinement as a distinct concept within the stated fusion and plasma systems scope."
+        },
+        {
+          "recordId": "urn:maha:record:fusion-plasma-systems-tokamak-plasma-equilibrium",
+          "revisionSha256": "sha256:33436c81f49ca042301300245f18880d027289bef92b0b4ea7c765628a397769",
+          "activeRelease": true,
+          "locator": "Machine / Magnets: toroidal field, poloidal field, central solenoid, and correction coil sections.",
+          "statement": "The cited source supports treating tokamak plasma equilibrium as a distinct mechanism within the stated fusion and plasma systems scope."
+        },
+        {
+          "recordId": "urn:maha:record:fusion-plasma-systems-toroidal-field-coils",
+          "revisionSha256": "sha256:206c52b2d2e07f5e07eb12e2260858b71cee5865c45aa80b00e42238d8a37035",
+          "activeRelease": true,
+          "locator": "Machine / Magnets: toroidal field, poloidal field, central solenoid, and correction coil sections.",
+          "statement": "The cited source supports treating toroidal field coils as a distinct method within the stated fusion and plasma systems scope."
+        },
+        {
+          "recordId": "urn:maha:record:fusion-plasma-systems-poloidal-field-coils",
+          "revisionSha256": "sha256:652f0e8755c77b66ad7f6ac08c46e2c8335b4f40fd00689a3beba0b1025c1198",
+          "activeRelease": true,
+          "locator": "Machine / Magnets: toroidal field, poloidal field, central solenoid, and correction coil sections.",
+          "statement": "The cited source supports treating poloidal field coils as a distinct measurement within the stated fusion and plasma systems scope."
+        },
+        {
+          "recordId": "urn:maha:record:fusion-plasma-systems-central-solenoid-inductive-drive",
+          "revisionSha256": "sha256:d954b3fee7b92c310cd3e7e9e70877973dd4943a5ca8f8f1c51e5f252c836f88",
+          "activeRelease": true,
+          "locator": "Machine / Magnets: toroidal field, poloidal field, central solenoid, and correction coil sections.",
+          "statement": "The cited source supports treating central solenoid inductive drive as a distinct comparison within the stated fusion and plasma systems scope."
+        }
+      ],
+      "releasedRecordCount": 5,
+      "fullTextAccessible": true,
+      "candidateSearchIntent": "What Magnets establishes, and what it does not",
+      "duplicationRisk": "none",
+      "identityConflicted": false
+    },
+    {
+      "sourceId": "https://www.iter.org/machine/supporting-systems",
+      "title": "Supporting systems",
+      "authors": [
+        "ITER Organization"
+      ],
+      "publisher": "ITER Organization",
+      "publishedAt": "",
+      "versionRelationship": "version of record as cited",
+      "rightsBasis": "citation-with-paraphrase",
+      "inspectionDepth": "section-or-full-text",
+      "exactLocators": [
+        "Heating and current drive, fuel cycle, vacuum, cryogenic, diagnostics, and tritium breeding system summaries."
+      ],
+      "boundRecords": [
+        {
+          "recordId": "urn:maha:record:fusion-plasma-systems-plasma-diagnostics",
+          "revisionSha256": "sha256:20693f47450d36f62418dbc454b1aab0d81eb55f14ed317138688545f94cf839",
+          "activeRelease": true,
+          "locator": "Heating and current drive, fuel cycle, vacuum, cryogenic, diagnostics, and tritium breeding system summaries.",
+          "statement": "The cited source supports treating plasma diagnostics as a distinct concept within the stated fusion and plasma systems scope."
+        },
+        {
+          "recordId": "urn:maha:record:fusion-plasma-systems-vacuum-vessel-boundary",
+          "revisionSha256": "sha256:4c42435cbd38fb9fe55c916cee671fa1098da815f0e63d0e54b52cf171afdf3e",
+          "activeRelease": false,
+          "locator": "Heating and current drive, fuel cycle, vacuum, cryogenic, diagnostics, and tritium breeding system summaries.",
+          "statement": "The cited source supports treating vacuum vessel boundary as a distinct mechanism within the stated fusion and plasma systems scope."
+        },
+        {
+          "recordId": "urn:maha:record:fusion-plasma-systems-tritium-fuel-cycle",
+          "revisionSha256": "sha256:221fe02704a58db3221a1c3bc565e04bbb30d6fe68909da7b11321239dcf8b0e",
+          "activeRelease": true,
+          "locator": "Heating and current drive, fuel cycle, vacuum, cryogenic, diagnostics, and tritium breeding system summaries.",
+          "statement": "The cited source supports treating tritium fuel cycle as a distinct method within the stated fusion and plasma systems scope."
+        },
+        {
+          "recordId": "urn:maha:record:fusion-plasma-systems-breeding-blanket-test-modules",
+          "revisionSha256": "sha256:3bae840b4bdb2cb64ed265fbb7ba5061fe318cc2502e148a0690adf02153bea4",
+          "activeRelease": true,
+          "locator": "Heating and current drive, fuel cycle, vacuum, cryogenic, diagnostics, and tritium breeding system summaries.",
+          "statement": "The cited source supports treating breeding blanket test modules as a distinct measurement within the stated fusion and plasma systems scope."
+        },
+        {
+          "recordId": "urn:maha:record:fusion-plasma-systems-cryogenic-magnet-cooling",
+          "revisionSha256": "sha256:e66f3811999be6f4bca1f2eda2518da9e8613088dfd8289d7f85c270fa40faa5",
+          "activeRelease": true,
+          "locator": "Heating and current drive, fuel cycle, vacuum, cryogenic, diagnostics, and tritium breeding system summaries.",
+          "statement": "The cited source supports treating cryogenic magnet cooling as a distinct comparison within the stated fusion and plasma systems scope."
+        }
+      ],
+      "releasedRecordCount": 4,
+      "fullTextAccessible": true,
+      "candidateSearchIntent": "What Supporting systems establishes, and what it does not",
+      "duplicationRisk": "none",
+      "identityConflicted": false
+    },
+    {
+      "sourceId": "https://www.iter.org/machine/supporting-systems/disruption-mitigation",
+      "title": "Disruption mitigation",
+      "authors": [
+        "ITER Organization"
+      ],
+      "publisher": "ITER Organization",
+      "publishedAt": "",
+      "versionRelationship": "version of record as cited",
+      "rightsBasis": "citation-with-paraphrase",
+      "inspectionDepth": "section-or-full-text",
+      "exactLocators": [
+        "System overview and shattered pellet injection sections."
+      ],
+      "boundRecords": [
+        {
+          "recordId": "urn:maha:record:fusion-plasma-systems-disruption-mitigation",
+          "revisionSha256": "sha256:65f1120ab96c6821a3b78fa48c197f00b9e9ca535f457488b4707b0211e9f3d9",
+          "activeRelease": true,
+          "locator": "System overview and shattered pellet injection sections.",
+          "statement": "The cited source supports treating disruption mitigation as a distinct concept within the stated fusion and plasma systems scope."
+        },
+        {
+          "recordId": "urn:maha:record:fusion-plasma-systems-shattered-pellet-injection",
+          "revisionSha256": "sha256:62c581108e5a7ec96f2573a3a29c0e30ec0eba991ff6ea9146c9a4363116f0c1",
+          "activeRelease": false,
+          "locator": "System overview and shattered pellet injection sections.",
+          "statement": "The cited source supports treating shattered pellet injection as a distinct mechanism within the stated fusion and plasma systems scope."
+        },
+        {
+          "recordId": "urn:maha:record:fusion-plasma-systems-plasma-heating-and-current-drive",
+          "revisionSha256": "sha256:0124d0faafe8ae09e8eea2f28803c19409c5aae7faee4ce5e4a58bc8d870973a",
+          "activeRelease": false,
+          "locator": "System overview and shattered pellet injection sections.",
+          "statement": "The cited source supports treating plasma heating and current drive as a distinct method within the stated fusion and plasma systems scope."
+        },
+        {
+          "recordId": "urn:maha:record:fusion-plasma-systems-neutral-beam-injection",
+          "revisionSha256": "sha256:32a00630de883b2ebd9835b2ad7b64c0dd486d130c57a90e4396291399e69d16",
+          "activeRelease": false,
+          "locator": "System overview and shattered pellet injection sections.",
+          "statement": "The cited source supports treating neutral beam injection as a distinct measurement within the stated fusion and plasma systems scope."
+        },
+        {
+          "recordId": "urn:maha:record:fusion-plasma-systems-electron-cyclotron-heating",
+          "revisionSha256": "sha256:96b803713a9e86cfeb04d1f0649e886c365a58b6644c95dae7ce3bc4a8542ad3",
+          "activeRelease": false,
+          "locator": "System overview and shattered pellet injection sections.",
+          "statement": "The cited source supports treating electron cyclotron heating as a distinct comparison within the stated fusion and plasma systems scope."
+        }
+      ],
+      "releasedRecordCount": 1,
+      "fullTextAccessible": true,
+      "candidateSearchIntent": "What Disruption mitigation establishes, and what it does not",
+      "duplicationRisk": "overlaps-record-page",
+      "identityConflicted": false
+    },
+    {
+      "sourceId": "https://www.iter.org/machine/supporting-systems/tritium-breeding",
+      "title": "Tritium Breeding | ITER is First Fusion Device to Test",
+      "authors": [
+        "ITER Organization"
+      ],
+      "publisher": "ITER Organization",
+      "publishedAt": "",
+      "versionRelationship": "version of record as cited",
+      "rightsBasis": "citation-with-paraphrase",
+      "inspectionDepth": "section-or-full-text",
+      "exactLocators": [
+        "“ITER Test Blanket Module (TBM) Program” section and the immediately preceding paragraph ending “Further research will be necessary to demonstrate the feasibility of large-scale tritium production and recycling.”"
+      ],
+      "boundRecords": [
+        {
+          "recordId": "urn:maha:record:fusion-plasma-systems-breeding-blanket-test-modules",
+          "revisionSha256": "sha256:123e78e04a5873d6226fd426cf3e450d856c6f1aa5fe8bd6eb1604b2fd7ee9e9",
+          "activeRelease": true,
+          "locator": "“ITER Test Blanket Module (TBM) Program” section and the immediately preceding paragraph ending “Further research will be necessary to demonstrate the feasibility of large-scale tritium production and recycling.”",
+          "statement": "ITER documents a Test Blanket Module programme under which in-vessel modules will be used to test tritium breeding concepts, and states that further research is necessary to demonstrate the feasibility of large-scale tritium production and recycling."
+        }
+      ],
+      "releasedRecordCount": 1,
+      "fullTextAccessible": true,
+      "candidateSearchIntent": "What Tritium Breeding | ITER is First Fusion Device to Test establishes, and what it does not",
+      "duplicationRisk": "overlaps-record-page",
+      "identityConflicted": false
+    },
+    {
+      "sourceId": "https://www.usgs.gov/programs/mineral-resources-program/science/mineral-supply-chain-analysis",
+      "title": "Mineral Supply Chain Analysis",
+      "authors": [
+        "U.S. Geological Survey Mineral Resources Program"
+      ],
+      "publisher": "U.S. Geological Survey",
+      "publishedAt": "",
+      "versionRelationship": "version of record as cited",
+      "rightsBasis": "citation-with-paraphrase",
+      "inspectionDepth": "section-or-full-text",
+      "exactLocators": [
+        "Methods and data sections covering criticality, net import reliance, disruption exposure, and uncertainty."
+      ],
+      "boundRecords": [
+        {
+          "recordId": "urn:maha:record:critical-supply-chains-critical-mineral-import-reliance",
+          "revisionSha256": "sha256:fb1a5c89c8d562b5722ca7c872bcab69078257472be083c2ab0c77c98b15667a",
+          "activeRelease": true,
+          "locator": "Methods and data sections covering criticality, net import reliance, disruption exposure, and uncertainty.",
+          "statement": "The cited source supports treating critical mineral import reliance as a distinct concept within the stated critical supply chains scope."
+        },
+        {
+          "recordId": "urn:maha:record:critical-supply-chains-single-country-processing-concentration",
+          "revisionSha256": "sha256:8233707992c8aaac4011c7905d85d240fdf0c5269c528d989f151f58e10dd4d0",
+          "activeRelease": false,
+          "locator": "Methods and data sections covering criticality, net import reliance, disruption exposure, and uncertainty.",
+          "statement": "The cited source supports treating single country processing concentration as a distinct mechanism within the stated critical supply chains scope."
+        },
+        {
+          "recordId": "urn:maha:record:critical-supply-chains-export-control-exposure",
+          "revisionSha256": "sha256:980ec29c8c465fe8f1a4047343014638a5b9931aad34cefefb1406557279da36",
+          "activeRelease": false,
+          "locator": "Methods and data sections covering criticality, net import reliance, disruption exposure, and uncertainty.",
+          "statement": "The cited source supports treating export control exposure as a distinct method within the stated critical supply chains scope."
+        },
+        {
+          "recordId": "urn:maha:record:critical-supply-chains-material-substitution-boundaries",
+          "revisionSha256": "sha256:1c4ea6b4646de793df1fb1d4fbbe10218548a0c3ca5234f97e4b491c0f4e022a",
+          "activeRelease": false,
+          "locator": "Methods and data sections covering criticality, net import reliance, disruption exposure, and uncertainty.",
+          "statement": "The cited source supports treating material substitution boundaries as a distinct measurement within the stated critical supply chains scope."
+        },
+        {
+          "recordId": "urn:maha:record:critical-supply-chains-supply-chain-data-uncertainty",
+          "revisionSha256": "sha256:8df91023b44e8d2d607821257ba00b0a4465813ad47719ed690428c0fa3ff2f0",
+          "activeRelease": false,
+          "locator": "Methods and data sections covering criticality, net import reliance, disruption exposure, and uncertainty.",
+          "statement": "The cited source supports treating supply chain data uncertainty as a distinct comparison within the stated critical supply chains scope."
+        }
+      ],
+      "releasedRecordCount": 1,
+      "fullTextAccessible": true,
+      "candidateSearchIntent": "What Mineral Supply Chain Analysis establishes, and what it does not",
+      "duplicationRisk": "overlaps-record-page",
+      "identityConflicted": false
+    }
+  ],
+  "boundary": "A private inventory. Metadata verification is never recorded as inspected content, and no entry here is public."
+}

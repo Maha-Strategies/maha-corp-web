@@ -12,6 +12,8 @@ import batch12aInvestigations from '../content/batch-12a/source-investigations.j
 import batch12aProposals from '../content/batch-12a/proposed-revisions.json' with { type: 'json' }
 import batch12bPackets from '../content/batch-12b/remediation-packets.json' with { type: 'json' }
 import batch12bProposals from '../content/batch-12b/proposed-revisions.json' with { type: 'json' }
+import sourceEligibility from '../content/source-first/eligibility-report.json' with { type: 'json' }
+import sourceCandidates from '../content/source-first/record-candidates.json' with { type: 'json' }
 import { canonicalJson } from '../lib/evidence-dossier/digest.ts'
 import observation from '../content/scaling/public-surface-observation.json' with { type: 'json' }
 
@@ -141,7 +143,38 @@ const batch12b = {
     + (batch12aProposals.proposedCount as number) + (batch12bProposals.proposedCount as number),
   note: 'A narrowed claim rebinds an existing record and adds no route. Proposed revisions are private, inactive and pending governed adoption.',
 }
-const withBatch12a = { ...model, batch12a, batch12b }
+/**
+ * The path from 764, with every stage counted once.
+ *
+ * A source-reference page is a new route; a narrowed claim rebinds an existing
+ * record and adds none. Nothing below is public: each stage is named for what
+ * it actually is, and only the first has readers.
+ */
+const releaseReady = classifications['release-ready'] ?? 0
+const legacyAdoption = (batch12aProposals.proposedCount as number) + (batch12bProposals.proposedCount as number)
+const sourcePages = sourceEligibility.eligibleNow as number
+const newRecords = sourceCandidates.admissible as number
+const pathToTarget = {
+  currentProductionRoutes: model.crawlable,
+  existingReleaseReadyPotential: releaseReady,
+  governedLegacyAdoptionPotential: legacyAdoption,
+  eligibleSourceReferencePages: sourcePages,
+  eligibleSourceFirstRecordCandidates: newRecords,
+  reachableIfAllAdopted: model.crawlable + releaseReady + sourcePages + newRecords,
+  remainingGenuinelyNewWork: Math.max(0, PAGE_TARGET - (model.crawlable + releaseReady + sourcePages + newRecords)),
+  stages: {
+    candidate: sourcePages + newRecords,
+    reviewed: releaseReady + legacyAdoption,
+    releaseReady,
+    released: (observation.releases as { status: string }[]).filter((entry) => entry.status === 'active').length,
+    compiled: 103,
+    reachable: model.crawlable,
+    sitemapListed: (observation.sitemapPaths as string[]).length,
+    llmsListed: (observation.llmsPaths as string[]).length,
+  },
+  note: 'A narrowed claim rebinds an existing record and adds no route, so legacy adoption is counted as reviewed rather than as new routes. Only currentProductionRoutes is public.',
+}
+const withBatch12a = { ...model, batch12a, batch12b, pathToTarget }
 writeFileSync('content/scaling/capacity-model.json', `${JSON.stringify({ ...withBatch12a, capacityDigest: digest(withBatch12a) }, null, 2)}\n`)
 
 /* ------------------------------------------------------------ the report -- */
