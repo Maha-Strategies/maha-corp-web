@@ -11,12 +11,19 @@ const EXACTZK_PATH = `${INDEX_PATH}/exactzk-independent-reproduction`
 const SIGNED_PATH = '/artifacts/integrations/exactzk-independent-reproduction-attestation-001.json'
 const RECORD_PATH = '/artifacts/integrations/exactzk-independent-reproduction-record-2026-09-01.json'
 
-test('ExactZK is discoverable from Knowledge in three bounded HTML fetches', () => {
+test('ExactZK is directly discoverable from the Knowledge starting page', () => {
   const knowledge = readFileSync(join(ROOT, 'app/knowledge/page.tsx'), 'utf8')
   const index = readFileSync(join(ROOT, 'app/knowledge/integrations/page.tsx'), 'utf8')
   const record = readFileSync(join(ROOT, 'app/knowledge/integrations/exactzk-independent-reproduction/page.tsx'), 'utf8')
 
   assert.ok(knowledge.includes('KNOWLEDGE_INTEGRATIONS_PATH'))
+  assert.ok(knowledge.includes('EXACTZK_EVIDENCE_PATH'))
+  assert.ok(knowledge.includes('ExactZK independent reproduction'))
+  assert.ok(knowledge.includes('Recently published integration evidence'))
+  assert.ok(knowledge.includes('signedArtifactPath'))
+  assert.ok(knowledge.includes('integrationRecordPath'))
+  assert.ok(knowledge.includes('/maha-machine-readable-registry.json'))
+  assert.match(knowledge, /Classified as external integration evidence, not canonical domain knowledge/)
   assert.ok(index.includes('EXACTZK_EVIDENCE_PATH'))
   assert.ok(record.includes('signedArtifactPath'))
   assert.ok(record.includes('upstreamPublication'))
