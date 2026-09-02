@@ -75,13 +75,12 @@ export async function probe(environment = process.env) {
     summary: workspace.summary ?? null,
     sampleRows: rows.slice(0, 2),
   })} PROBE_END`)
-  // Every row, compactly, so the reconciliation can be done offline without
-  // another round trip to Production.
-  console.log(`ROWS_BEGIN ${JSON.stringify(rows.map((r) => [
-    r.recordId, r.targetSha256, r.ready ? 1 : 0, r.approvalCount, r.blockerCount,
-    r.hasActiveRelease ? 1 : 0, r.localRecordPresent ? 1 : 0, r.localTargetMatches === true ? 1 : 0,
-    r.blockers.map((b) => (typeof b === 'string' ? b : 'non-string')).join('|'),
-  ]))} ROWS_END`)
+  // One line per cohort record. A single line holding every row exceeded the
+  // log fetch limit and was silently truncated, so this prints them separately.
+  const cohort = (process.env.PROBE_COHORT ?? '').split(',').map((s) => s.trim()).filter(Boolean)
+  const wanted = cohort.length > 0 ? rows.filter((r) => cohort.includes(r.recordId)) : []
+  for (const row of wanted) console.log(`COHORT_ROW ${JSON.stringify(row)}`)
+  console.log(`COHORT_COUNT ${wanted.length}`)
 }
 
 if (import.meta.url === `file://${process.argv[1]}`) {
