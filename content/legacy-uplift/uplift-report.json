@@ -3,10 +3,12 @@
   "pageStates": {
     "legacyUnchanged": 0,
     "structurallyUplifted": 95,
-    "sourceSupportedUplift": 37,
-    "blocked": 35,
+    "firstPartyDocumented": 4,
+    "independentlySourceSupported": 37,
+    "blocked": 31,
     "total": 167,
-    "neverCombined": "structurallyUplifted and sourceSupportedUplift are reported separately and must not be added into a single quality figure."
+    "neverCombined": "structurallyUplifted, firstPartyDocumented and independentlySourceSupported are reported separately. First-party documentation is an organisation describing itself and must never be added to independent support in one evidentiary figure.",
+    "sourceSupportedUplift": 37
   },
   "informationValue": {
     "inspectedClaimsPerPage": 0.3,
@@ -114,5 +116,5 @@
   "routesChanged": 0,
   "duplicatePagesAdded": 0,
   "boundary": "A private compilation report. It contains no audit data, review packet, rejected material or credential.",
-  "reportDigest": "sha256:48e8e36f1ea8486183f6e95677682dba3f92ce592f1168409e40e8a280d8be9e"
+  "reportDigest": "sha256:e1dfb02553c3e5555d787cb103274af67740ca54327530f7f9d82e7f012bd1ff"
 }

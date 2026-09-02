@@ -1,0 +1,136 @@
+{
+  "schemaVersion": "maha-combined-adoption-manifest/1.0",
+  "preparedAt": "2026-09-02",
+  "batchesSpanned": [
+    "evidence-recovery-2",
+    "evidence-recovery-3",
+    "source-acquisition-4",
+    "supplier-documentation-5"
+  ],
+  "executed": false,
+  "authorized": false,
+  "migrationPrepared": true,
+  "migrationApplied": false,
+  "productionReleasePerformed": false,
+  "canaryRerun": false,
+  "canaryRerunNote": "The five-record cross-batch canary already proved the mechanism. Repeating it would restate a known result rather than test a new one.",
+  "totalAcceptedProposals": 14,
+  "partition": {
+    "initialRevisions": 13,
+    "supersedingRevisions": 0,
+    "note": "Every accepted proposal targets a route holding no prior inspected binding, so all are initial. A second proposal for the same route would be superseding and is partitioned separately."
+  },
+  "adoptionPreconditions": [
+    "a review decision bound to the exact proposed revision",
+    "alignment clearance for that revision",
+    "an active release matching that revision",
+    "release authority held separately from review"
+  ],
+  "staleDecisionCannotAuthorize": "A decision naming any other revision fails the exact-revision precondition, so a predecessor digest cannot authorize adoption of its successor.",
+  "entries": [
+    {
+      "batch": "evidence-recovery-2",
+      "route": "/knowledge/neuromorphic-biocomputing/benchmarking-energy-and-task-equivalence",
+      "provenanceDigest": "sha256:6dd68340c2f48185f2d6867a2b0fd2bae270b62b158bae7940a0d940488d64f7",
+      "revisionKind": "initial",
+      "adopted": false
+    },
+    {
+      "batch": "evidence-recovery-2",
+      "route": "/knowledge/neuromorphic-biocomputing/event-driven-computation",
+      "provenanceDigest": "sha256:b4dcac5c69f84095462b2f726e353fb999f17b17baac53a7a887d4f4313d3c03",
+      "revisionKind": "initial",
+      "adopted": false
+    },
+    {
+      "batch": "evidence-recovery-2",
+      "route": "/knowledge/neuromorphic-biocomputing/hardware-software-co-design",
+      "provenanceDigest": "sha256:972e924742a824144f2585d9a799e3c2ca26e72bce3880526da516563fcf5867",
+      "revisionKind": "initial",
+      "adopted": false
+    },
+    {
+      "batch": "evidence-recovery-2",
+      "route": "/knowledge/processes/ion-implantation-and-annealing",
+      "provenanceDigest": "sha256:3cbf98df455378f18a5f16181d5d94829985e3179f6b0c9e1e0b7f46a61058b8",
+      "revisionKind": "initial",
+      "adopted": false
+    },
+    {
+      "batch": "evidence-recovery-2",
+      "route": "/knowledge/equipment/semiconductor-ion-implantation-system",
+      "provenanceDigest": "sha256:eb1e2e31ec089ce10ffae235bb9095f7a68aad0b53714563414d2a5bbdd22c76",
+      "revisionKind": "initial",
+      "adopted": false
+    },
+    {
+      "batch": "evidence-recovery-2",
+      "route": "/knowledge/equipment/electron-beam-defect-review-and-inspection-system",
+      "provenanceDigest": "sha256:46a287f35dc035aa77e6022e26c14301c5410f96fe886f30614da5a6106005b1",
+      "revisionKind": "initial",
+      "adopted": false
+    },
+    {
+      "batch": "evidence-recovery-2",
+      "route": "/knowledge/equipment/optical-patterned-wafer-inspection-system",
+      "provenanceDigest": "sha256:0ae0f9dee059dc2733d5320a964016b906a98bcb122d1b440c7cf6fec1c7a77d",
+      "revisionKind": "initial",
+      "adopted": false
+    },
+    {
+      "batch": "evidence-recovery-2",
+      "route": "/knowledge/concepts/yield-learning-and-statistical-process-control",
+      "provenanceDigest": "sha256:719c59a4e8e5bc8c99b08c55cb7ec30ab479902e1ab6ec06bac975d3ba32d442",
+      "revisionKind": "initial",
+      "adopted": false
+    },
+    {
+      "batch": "evidence-recovery-3",
+      "route": "/knowledge/mathematics/uncertainty-propagation",
+      "provenanceDigest": "sha256:7b0294e7a3bf8c35d507bb58add669feaf47993f8585b9f5515db5d741e1c349",
+      "revisionKind": "initial",
+      "adopted": false
+    },
+    {
+      "batch": "evidence-recovery-3",
+      "route": "/knowledge/neuromorphic-biocomputing/multielectrode-arrays-and-stimulation",
+      "provenanceDigest": "sha256:60ef5fda9cd3fe28acbbf4e6f287671a00d4758f5587339e50f32832fe5bec91",
+      "revisionKind": "initial",
+      "adopted": false
+    },
+    {
+      "batch": "evidence-recovery-3",
+      "route": "/knowledge/neuromorphic-biocomputing/biological-neural-cultures",
+      "provenanceDigest": "sha256:78685f6478ce6b5243160e1f4905e6c5076efbdb05a6801f698c8541334c79f2",
+      "revisionKind": "initial",
+      "adopted": false
+    },
+    {
+      "batch": "source-acquisition-4",
+      "route": "/knowledge/domains/semiconductor-manufacturing",
+      "provenanceDigest": "sha256:fadac7ad00eda3aa8e0be86af570fd616f0afd21c5d7fe096ba3683b54a2739b",
+      "revisionKind": "initial",
+      "adopted": false
+    },
+    {
+      "batch": "source-acquisition-4",
+      "route": "/knowledge/domains/semiconductor-manufacturing",
+      "provenanceDigest": "sha256:1d6beba335c84f00c076f14e3972be73e9196e992fd219c3824dcf476c82c038",
+      "revisionKind": "initial",
+      "adopted": false
+    },
+    {
+      "batch": "source-acquisition-4",
+      "route": "/knowledge/concepts/cleanrooms-fab-utilities-and-contamination-control",
+      "provenanceDigest": "sha256:43096c0d24b6fe225538c97b7588b1129e5abc0aa9ecbcae627624d4ce5026e4",
+      "revisionKind": "initial",
+      "adopted": false
+    }
+  ],
+  "firstPartyProposals": {
+    "count": 4,
+    "partitionedSeparately": true,
+    "reason": "First-party proposals are carried in their own partition so an adoption run cannot mix self-description with independent evidence."
+  },
+  "manifestDigest": "sha256:60af5d89e9139965719c959c3c7c93ef2f4b42d27559aae1831677262f5aa344"
+}
