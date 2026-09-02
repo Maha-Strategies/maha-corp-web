@@ -5,6 +5,11 @@ name: Probe workspace readiness
 
 on:
   workflow_dispatch:
+    inputs:
+      cohort:
+        description: Optional comma-separated record URNs to report individually
+        required: false
+        type: string
 
 permissions:
   contents: read
@@ -26,4 +31,5 @@ jobs:
       - name: Probe, read-only
         env:
           EPISTEMIC_RELEASE_AUTHORITY_TOKEN: ${{ secrets.EPISTEMIC_RELEASE_AUTHORITY_TOKEN }}
+          PROBE_COHORT: ${{ inputs.cohort }}
         run: node --experimental-strip-types scripts/probe-workspace-readiness.ts
