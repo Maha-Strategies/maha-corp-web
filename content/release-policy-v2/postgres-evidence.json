@@ -1,0 +1,57 @@
+{
+  "schemaVersion": "maha-policy-v2-postgres-evidence/1.0",
+  "ranAt": "2026-09-02",
+  "cluster": { "kind": "disposable local", "version": "PostgreSQL 17.11", "productionApplied": false },
+  "migration": "supabase/migrations/20260902120000_release_readiness_policy_v2.sql",
+  "migrationAppliedToProduction": false,
+  "forwardOnly": true,
+  "priorMigrationsEdited": 0,
+  "defectFoundByThisTesting": {
+    "defect": "Every refusal append read v_refusals || 'code', and an untyped literal on the right of || is parsed as an array literal, so the function raised \"malformed array literal\" the moment any refusal fired.",
+    "consequence": "The two passing paths worked and every refusal path errored. Shipping it would have made the policy look permissive while actually being broken.",
+    "fix": "Cast each literal to text. Fifteen sites.",
+    "foundBefore": "any application beyond the disposable cluster"
+  },
+  "results": {
+    "total": 16,
+    "passed": 16,
+    "failed": 0,
+    "cases": [
+      "complete expert bundle passes Path A",
+      "complete automated bundle passes Path B",
+      "machine decisions cannot satisfy Path A",
+      "expert decisions are not silently counted as Path B",
+      "four of five automated axes fail",
+      "stale target fails",
+      "record revision digest supplied instead of candidate target fails",
+      "human identity on a machine decision fails",
+      "unknown reviewer kind fails closed",
+      "mixed expert and machine bundle satisfies neither",
+      "separate release authority is still required",
+      "an already-released target is not re-released",
+      "alignment audit target mismatch fails",
+      "rights or locator failure blocks",
+      "conflicting decisions fail",
+      "readiness does not create a release"
+    ]
+  },
+  "publicationSemantics": {
+    "publicationOnlyChangeLeavesTargetUnchanged": true,
+    "claimChangeMovesTarget": true,
+    "sourceBindingChangeMovesTarget": true,
+    "note": "Verified against real records, not fixtures."
+  },
+  "mutationCheck": {
+    "baselinePassing": 16,
+    "mutations": [
+      { "mutation": "drop the stale-target guard", "passing": 14, "caught": true },
+      { "mutation": "treat any reviewer kind as machine", "passing": 13, "caught": true },
+      { "mutation": "drop the person-attribution guard", "passing": 15, "caught": true },
+      { "mutation": "drop the mixed-bundle guard", "passing": 15, "caught": true },
+      { "mutation": "drop the already-released guard", "passing": 15, "caught": true }
+    ],
+    "allCaught": true,
+    "restoredPassing": 16
+  },
+  "boundary": "A disposable cluster created for this test and discarded. No migration was applied to Production or Preview."
+}

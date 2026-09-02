@@ -1,0 +1,24 @@
+{
+  "schemaVersion": "maha-policy-v2-simulation/1.0",
+  "policyVersion": 2,
+  "calledProductionRpc": false,
+  "method": "Local evaluation of the corrected package against policy v2. Production readiness was not called, and no candidate outside the 33 was assumed to have machine review.",
+  "cohort": {
+    "total": 33,
+    "exactTargetDecisionsReproduced": 33,
+    "pathBReady": 33,
+    "evaluatorDisagreement": 0,
+    "stale": 0,
+    "malformed": 0,
+    "blocked": 0,
+    "initial": 33,
+    "superseding": 0
+  },
+  "restOfWorkspace": {
+    "otherCandidates": 390,
+    "assumedMachineReviewed": 0,
+    "note": "The other 390 candidates hold no machine review and none was invented for them. Only the 33 corrected records move in this simulation."
+  },
+  "boundary": "A local simulation. It releases nothing and calls no Production RPC.",
+  "simulationDigest": "sha256:a352e8ff694c817b6de75fad23314365ffa61db15be5c3e989eeb82980e6fbc6"
+}
