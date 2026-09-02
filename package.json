@@ -102,6 +102,8 @@
     "evaluate:wso2-large-context:dry": "node --experimental-strip-types scripts/run-wso2-three-path-evaluation.ts --dry-run --corpus=content/integrations/wso2-large-context-cost-corpus.json",
     "reproduce:wso2-evaluation": "node --experimental-strip-types scripts/reproduce-wso2-evaluation.ts",
     "generate:wso2-sanitized-trace": "node --experimental-strip-types scripts/generate-wso2-sanitized-trace.ts",
+    "generate:hawthorn-governed-trace-receipt": "node --experimental-strip-types scripts/generate-hawthorn-governed-trace-receipt.ts",
+    "verify:hawthorn-governed-trace-receipt": "node --test --experimental-strip-types test/hawthorn-governed-trace-receipt.test.ts",
     "test:wso2-failure-paths": "node --experimental-strip-types scripts/run-wso2-failure-path-evaluation.ts",
     "validate:wso2-policy-bundle": "node --test --experimental-strip-types --test-name-pattern='WSO2 policy bundle' test/wso2-reproduction.test.ts",
     "probe:local-selector-wasm": "node --experimental-strip-types scripts/probe-local-selector-wasm-feasibility.ts",
