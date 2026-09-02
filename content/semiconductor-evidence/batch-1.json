@@ -1,0 +1,208 @@
+{
+  "schemaVersion": "maha-semiconductor-evidence-batch/1.0",
+  "batch": "semiconductor-evidence-recovery-1",
+  "conductedOn": "2026-09-02",
+  "appendOnly": true,
+  "writtenToProduction": false,
+  "selection": {
+    "candidatePool": 35,
+    "selected": 20,
+    "basis": "Graph connectivity plus foundational-process weight across lithography, deposition, etch, metrology, packaging and yield. No privacy-safe query-level search data exists locally, so search demand was not used.",
+    "gscDataAvailable": false
+  },
+  "sourcePreferenceApplied": "standards and government first, then peer-reviewed open access, then repositories and accepted manuscripts, then lawful preprints, and manufacturer documentation last and only for bounded product-description claims.",
+  "inspected": [
+    {
+      "sourceId": "nist-orji-metrology-requirements",
+      "tier": "government-publication",
+      "title": "Metrology Requirements for Next Generation of Semiconductor Devices",
+      "author": "George Orji, Microsystems and Nanotechnology Division, Physical Measurement Laboratory, NIST",
+      "retrievedFrom": "https://tsapps.nist.gov/publication/get_pdf.cfm?pub_id=927435",
+      "retrievedOn": "2026-09-02",
+      "depth": "section-or-full-text",
+      "retrievalNote": "Automated text extraction returned binary, so the PDF was read directly, page by page.",
+      "identityVerified": true,
+      "identityBasis": "Served from tsapps.nist.gov; title page names the author, NIST division and the paper title, and the document is marked Preprint.",
+      "versionRelationship": "Preprint of a conference presentation. Not the version of record.",
+      "rightsBasis": "US government work, citation-with-paraphrase",
+      "exactLocators": [
+        "INTRODUCTION",
+        "DEVICE AND LITHOGRAPHY OPTIONS",
+        "TABLE 1, Device structure and lithography metrology challenges",
+        "FIGURE 1, Lithography metrology gaps and limits",
+        "POSSIBLE METROLOGY SOLUTIONS",
+        "FIGURE 2, Multi-instrument evaluation of a 3D stacked chip"
+      ],
+      "observedContent": "The Introduction records that the first International Roadmap for Devices and Systems was published in 2018, building on the ITRS, and that its Metrology Chapter identifies measurement challenges over the following fifteen years. Device and Lithography Options names gate-all-around challenges as small target volumes, localized information, low signal-to-noise ratios and non-uniform sensitivities at different depths, states that destructive characterization of 3D stacked chips would be prohibitively expensive, and lists EUV mask defectivity, line-edge roughness and stochastics. Possible Metrology Solutions states that no single technique has the resolution, range and low uncertainty needed to fully characterize these features, and describes hybrid metrology combining instruments.",
+      "establishes": "The metrology challenges a NIST author identifies for gate-all-around, monolithic 3D and EUV-patterned devices, and the stated position that no single measurement technique suffices, which is why hybrid metrology combining several instruments is used.",
+      "boundary": "A preprint outlining requirements and challenges. It reports no tool vendor performance, no yield data, no process recipe and no measurement uncertainty budget for any named product, so it cannot support a claim about how any particular instrument performs.",
+      "supportsRoutes": [
+        "/knowledge/concepts/semiconductor-metrology-and-defect-inspection",
+        "/knowledge/equipment/overlay-critical-dimension-and-film-metrology-system",
+        "/knowledge/equipment/reticle-and-photomask-inspection-system"
+      ]
+    },
+    {
+      "sourceId": "weimer-particle-ald-2019",
+      "tier": "peer-reviewed-open-access",
+      "title": "Particle atomic layer deposition",
+      "author": "Alan W. Weimer",
+      "venue": "Journal of Nanoparticle Research, 2019",
+      "retrievedFrom": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6320374/",
+      "retrievedOn": "2026-09-02",
+      "depth": "section-or-full-text",
+      "identityVerified": true,
+      "identityBasis": "PMC record states the title, author, journal and 2019 publication date.",
+      "versionRelationship": "Open-access version of record under CC-BY 4.0.",
+      "rightsBasis": "CC-BY 4.0, citation-with-paraphrase",
+      "exactLocators": ["Introduction", "General Chemistry"],
+      "observedContent": "General Chemistry states that deposition is controlled at the atomic level by self-limiting surface reactions and that precursors do not self-react, reacting only with the functionalized surface produced by the complementary precursor. The Introduction states that atomic layer control comes from self-limiting sequential surface reactions, separate saturating gas-solid reactions, which prevent undesired gas-phase reactions between precursors. General Chemistry gives the trimethylaluminium and water half-reactions and states that film thickness depends only on the number of AB cycles.",
+      "establishes": "The mechanism of atomic layer deposition: paired self-limiting half-reactions separated by purges, precursors that react with the surface rather than each other, and film thickness set by cycle count rather than exposure time.",
+      "boundary": "A review centred on particle ALD. It gives no quantitative kinetic rates for individual steps, no quantum-mechanical account of why the reactions self-limit, and no wafer-scale tool throughput or uniformity data, so it cannot support a claim about any production reactor's performance.",
+      "supportsRoutes": [
+        "/knowledge/equipment/atomic-layer-deposition-reactor",
+        "/knowledge/processes/thin-film-deposition"
+      ]
+    },
+    {
+      "sourceId": "an-2025-chxfy-etch-arxiv",
+      "tier": "lawful-preprint",
+      "title": "Etching-to-deposition transition in SiO2/Si3N4 using CHxFy ion-based plasma etching: An atomistic study with neural network potentials",
+      "author": "Hyungmin An, Sangmin Oh, Dongheon Lee, Jae-hyeon Ko, Dongyean Oh, Changho Hong, Seungwu Han",
+      "venue": "arXiv:2508.00327v1, 1 August 2025",
+      "retrievedFrom": "https://arxiv.org/html/2508.00327v1",
+      "retrievedOn": "2026-09-02",
+      "depth": "section-or-full-text",
+      "identityVerified": true,
+      "identityBasis": "arXiv record 2508.00327v1 states the title, seven authors and submission date.",
+      "versionRelationship": "Preprint, version 1. Not peer reviewed.",
+      "rightsBasis": "arXiv preprint, citation-with-paraphrase",
+      "exactLocators": ["Section 3.2.1, SiO2", "Section 3.2.2, Si3N4"],
+      "observedContent": "Section 3.2.1 states that on ion impact a collision cascade breaks multiple substrate bonds, carbon preferentially reacts with oxygen to form CO or CO2, and fluorine reacts with silicon to produce volatile SiFx, leaving an oxygen-deficient mixed layer that promotes carbon film formation at intermediate energies. Section 3.2.2 states that in Si3N4 silicon reacts with fluorine to form volatile SiFx while nitrogen leaves mainly as N2, and that reduced formation of volatile carbon-nitrogen compounds favours carbon accumulation regardless of ion F/C ratio.",
+      "establishes": "The atomistic account of why fluorocarbon plasma etching of SiO2 and Si3N4 crosses from etching into deposition, and the different volatile-product chemistries that make the two materials behave differently.",
+      "boundary": "A preprint that models energetic ions only. It does not model radicals or neutral atoms, simplifies the byproduct removal depth criterion, and states it cannot predict outcomes in full plasma environments where species interact, so it cannot support a claim about any production etch process window. It is also not peer reviewed.",
+      "supportsRoutes": [
+        "/knowledge/processes/plasma-etch-and-pattern-transfer",
+        "/knowledge/equipment/plasma-etch-and-atomic-layer-etch-system"
+      ]
+    }
+  ],
+  "notInspected": [
+    {
+      "sourceId": "nist-silver-optical-defect-limits",
+      "title": "The Limits and Extensibility of Optical Patterned Defect Inspection",
+      "route": "https://www.nist.gov/publications/limits-and-extensibility-optical-patterned-defect-inspection",
+      "outcome": "metadata-and-abstract-only",
+      "depth": "abstract-only",
+      "identityVerified": true,
+      "disposition": "Non-explanatory. The NIST landing page shows only the citation and abstract; SPIE holds the full text. A metadata match is not an inspection.",
+      "requires": "SPIE Digital Library access"
+    },
+    {
+      "sourceId": "cmp-citrate-slurry-mechanisms",
+      "title": "Mechanisms of Chemically Promoted Material Removal Examined for Molybdenum and Copper CMP in Weakly Alkaline Citrate-Based Slurries",
+      "route": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11477894/",
+      "outcome": "bot-verification-challenge",
+      "depth": "not-inspected",
+      "disposition": "Non-explanatory. The request returned a reCAPTCHA verification page. Bot checks were not bypassed.",
+      "requires": "a lawful route that does not require defeating a bot check"
+    },
+    {
+      "sourceId": "cryogenic-sio2-dry-etch",
+      "title": "Pseudo-Wet Plasma Mechanism Enabling High-Throughput Dry Etching of SiO2 by Cryogenic-Assisted Surface Reactions",
+      "route": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11672179/",
+      "outcome": "bot-verification-challenge",
+      "depth": "not-inspected",
+      "disposition": "Non-explanatory. Same reCAPTCHA wall; not bypassed.",
+      "requires": "a lawful route that does not require defeating a bot check"
+    },
+    {
+      "sourceId": "nist-cmp-programme-page",
+      "route": "https://www.nist.gov/programs-projects/chemical-mechanical-planarization-cmp",
+      "outcome": "HTTP 404",
+      "depth": "not-inspected",
+      "disposition": "Non-explanatory. The guessed NIST programme path does not exist."
+    },
+    {
+      "sourceId": "arxiv-2404.05954",
+      "route": "https://arxiv.org/abs/2404.05954",
+      "outcome": "identity-mismatch",
+      "depth": "not-inspected",
+      "disposition": "Rejected. The identifier resolves to Chondrule Destruction via Dust Collisions in Shock Waves, a planetary astrophysics paper. It is not about packaging and was discarded rather than cited.",
+      "note": "Recorded because a guessed identifier that resolves to the wrong work is exactly the failure identity verification exists to catch."
+    }
+  ],
+  "staleSourceRemediation": [
+    {
+      "sourceId": "amkor-rdl-pop",
+      "originalUrl": "https://amkor.com/wp-content/uploads/2020/11/A-New-RDL-First-PoP-Fan-Out-Wafer-Level-Package-Process.pdf",
+      "originalOutcome": "HTTP 404, dead link",
+      "routesAttempted": [
+        { "route": "original vendor PDF path", "outcome": "HTTP 404" },
+        { "route": "search for a lawful copy", "outcome": "located the version of record" }
+      ],
+      "replacementIdentified": {
+        "venue": "IEEE ECTC, IEEE Xplore document 9159536",
+        "title": "A New RDL-First PoP Fan-Out Wafer-Level Package Process with Chip-to-Wafer Bonding Technology",
+        "identityVerified": true,
+        "contentInspected": false,
+        "accessOutcome": "paywalled; IEEE Xplore subscription required"
+      },
+      "proposedRevision": {
+        "action": "rebind the citation from the dead vendor PDF to the IEEE record",
+        "status": "proposed, not applied",
+        "reason": "The replacement is identified but not inspected, so it cannot yet support explanatory prose. The active binding is unchanged.",
+        "requires": "IEEE Xplore institutional access"
+      }
+    },
+    {
+      "sourceId": "advantest-test-briefing",
+      "originalUrl": "https://www.advantest.com/document/en/investors/ir-library/business-briefing",
+      "originalOutcome": "HTTP 404, dead link",
+      "routesAttempted": [{ "route": "original vendor IR path", "outcome": "HTTP 404" }],
+      "replacementIdentified": null,
+      "proposedRevision": {
+        "action": "none available",
+        "status": "blocked",
+        "reason": "An investor briefing would in any case be vendor material usable only for bounded product-description claims, so the effort was not extended further."
+      }
+    },
+    {
+      "sourceId": "applied-product-portfolio",
+      "originalUrl": "https://www.appliedmaterials.com/il/en/semiconductor/semiconductor-products.html",
+      "originalOutcome": "HTTP 403",
+      "routesAttempted": [{ "route": "original vendor path", "outcome": "HTTP 403" }],
+      "replacementIdentified": null,
+      "proposedRevision": {
+        "action": "none applied",
+        "status": "blocked",
+        "reason": "Access controls were not circumvented. Even if reachable, a product portfolio page is vendor material and could support only bounded product-description claims, never independent performance or comparison."
+      }
+    },
+    {
+      "sourceId": "tsmc-3dfabric",
+      "originalUrl": "https://3dfabric.tsmc.com/english/dedicatedFoundry/technology/3DFabric.htm",
+      "originalOutcome": "HTTP 403",
+      "routesAttempted": [{ "route": "original foundry path", "outcome": "HTTP 403" }],
+      "replacementIdentified": null,
+      "proposedRevision": {
+        "action": "none applied",
+        "status": "blocked",
+        "reason": "Same. Access controls were not circumvented, and foundry technology pages are vendor material for bounded product-description claims only."
+      }
+    }
+  ],
+  "summary": {
+    "pagesSelected": 20,
+    "retrievalAttempts": 11,
+    "inspectedSectionOrFullText": 3,
+    "abstractOnly": 1,
+    "inaccessible": 4,
+    "identityMismatchRejected": 1,
+    "deadPaths": 2,
+    "vendorSourcesUsedForIndependentClaims": 0,
+    "activeBindingsChanged": 0,
+    "proposedRevisions": 1
+  },
+  "boundary": "A private evidence record. No passage is reproduced beyond what states what a source establishes and where it stops, and no active record binding was changed."
+}

@@ -12180,35 +12180,127 @@
       "route": "/knowledge/equipment/reticle-and-photomask-inspection-system",
       "family": "semiconductor-manufacturing",
       "slug": "reticle-and-photomask-inspection-system",
-      "eligible": false,
-      "refusals": [
-        "below-dimension-floor",
-        "no-cited-source",
-        "no-negative-space"
-      ],
+      "eligible": true,
+      "refusals": [],
       "before": {
         "route": "/knowledge/equipment/reticle-and-photomask-inspection-system",
         "family": "semiconductor-manufacturing",
         "dimensionsPresent": [
+          "claim-level-citation",
           "direct-answer",
+          "exact-locator",
           "limitations",
-          "mechanism-or-method"
+          "mechanism-or-method",
+          "not-established",
+          "source-boundary"
         ],
-        "dimensionCount": 3,
-        "sourceCount": 2,
-        "sourcesWithBoundary": 0,
+        "dimensionCount": 7,
+        "sourceCount": 3,
+        "sourcesWithBoundary": 1,
         "referenceOnlySources": 2,
-        "declaredLocators": 0,
-        "contentInspectedLocators": 0,
-        "explanatorySources": 0,
+        "declaredLocators": 1,
+        "contentInspectedLocators": 1,
+        "explanatorySources": 1,
         "bridgeCount": 0,
         "relatedRouteCount": 0,
         "renderedSections": 6
       },
-      "after": null,
-      "sections": [],
-      "sectionCount": 0,
-      "upliftDigest": "sha256:67e0319f03d83d1960e41244a7a1c5a4bc0fb3aa804f33262de98adb5d758847"
+      "after": {
+        "route": "/knowledge/equipment/reticle-and-photomask-inspection-system",
+        "family": "semiconductor-manufacturing",
+        "dimensionsPresent": [
+          "claim-level-citation",
+          "direct-answer",
+          "exact-locator",
+          "limitations",
+          "mechanism-or-method",
+          "not-established",
+          "source-boundary"
+        ],
+        "dimensionCount": 7,
+        "sourceCount": 3,
+        "sourcesWithBoundary": 1,
+        "referenceOnlySources": 2,
+        "declaredLocators": 1,
+        "contentInspectedLocators": 1,
+        "explanatorySources": 1,
+        "bridgeCount": 0,
+        "relatedRouteCount": 0,
+        "renderedSections": 5
+      },
+      "sections": [
+        {
+          "dimension": "direct-answer",
+          "heading": "Direct answer",
+          "items": [
+            "A reticle inspection system images or scans a photomask and compares measured signals with a neighboring die or design reference so that printable pattern defects, particles, registration errors, and process excursions can be reviewed and dispositioned."
+          ],
+          "sourceIds": [
+            "nist-orji-metrology-requirements"
+          ]
+        },
+        {
+          "dimension": "mechanism-or-method",
+          "heading": "Mechanism and method",
+          "items": [
+            "Load and identify reticle",
+            "Align to reference",
+            "Scan at selected sensitivity",
+            "Detect and classify candidates",
+            "Review and disposition defects"
+          ],
+          "sourceIds": [
+            "nist-orji-metrology-requirements"
+          ]
+        },
+        {
+          "dimension": "mechanism-or-method",
+          "heading": "What is measured",
+          "items": [
+            "Sensitivity",
+            "Nuisance rate",
+            "Inspection wavelength",
+            "Scan speed",
+            "Reference fidelity",
+            "Registration accuracy",
+            "Die-to-database comparison",
+            "Die-to-die comparison",
+            "Registration metrology",
+            "Defect review",
+            "Printability assessment"
+          ],
+          "sourceIds": [
+            "nist-orji-metrology-requirements"
+          ]
+        },
+        {
+          "dimension": "limitations",
+          "heading": "Limitations",
+          "items": [
+            "Missed printable defect",
+            "Excess nuisance detections",
+            "Reference mismatch",
+            "Focus or illumination drift",
+            "Handling contamination",
+            "Incorrect disposition"
+          ],
+          "sourceIds": [
+            "nist-orji-metrology-requirements"
+          ]
+        },
+        {
+          "dimension": "not-established",
+          "heading": "Boundaries declared by the cited sources",
+          "items": [
+            "A preprint outlining requirements and challenges. It reports no tool vendor performance, no yield data, no process recipe and no measurement uncertainty budget for any named product, so it cannot support a claim about how any particular instrument performs. (boundary declared by Metrology Requirements for Next Generation of Semiconductor Devices)"
+          ],
+          "sourceIds": [
+            "nist-orji-metrology-requirements"
+          ]
+        }
+      ],
+      "sectionCount": 5,
+      "upliftDigest": "sha256:a4877fc5ba3da8c1b9ebd32b6e8453535e80fffc601b2d0bd1cea451237d6aeb"
     },
     {
       "route": "/knowledge/equipment/duv-immersion-lithography-scanner",
@@ -12666,35 +12758,127 @@
       "route": "/knowledge/equipment/atomic-layer-deposition-reactor",
       "family": "semiconductor-manufacturing",
       "slug": "atomic-layer-deposition-reactor",
-      "eligible": false,
-      "refusals": [
-        "below-dimension-floor",
-        "no-cited-source",
-        "no-negative-space"
-      ],
+      "eligible": true,
+      "refusals": [],
       "before": {
         "route": "/knowledge/equipment/atomic-layer-deposition-reactor",
         "family": "semiconductor-manufacturing",
         "dimensionsPresent": [
+          "claim-level-citation",
           "direct-answer",
+          "exact-locator",
           "limitations",
-          "mechanism-or-method"
+          "mechanism-or-method",
+          "not-established",
+          "source-boundary"
         ],
-        "dimensionCount": 3,
-        "sourceCount": 3,
-        "sourcesWithBoundary": 0,
+        "dimensionCount": 7,
+        "sourceCount": 4,
+        "sourcesWithBoundary": 1,
         "referenceOnlySources": 3,
-        "declaredLocators": 0,
-        "contentInspectedLocators": 0,
-        "explanatorySources": 0,
+        "declaredLocators": 1,
+        "contentInspectedLocators": 1,
+        "explanatorySources": 1,
         "bridgeCount": 0,
         "relatedRouteCount": 0,
         "renderedSections": 6
       },
-      "after": null,
-      "sections": [],
-      "sectionCount": 0,
-      "upliftDigest": "sha256:0daf2dc1d44e378b1623604451ece937ef19d473aabac6267e3d75705b660b3e"
+      "after": {
+        "route": "/knowledge/equipment/atomic-layer-deposition-reactor",
+        "family": "semiconductor-manufacturing",
+        "dimensionsPresent": [
+          "claim-level-citation",
+          "direct-answer",
+          "exact-locator",
+          "limitations",
+          "mechanism-or-method",
+          "not-established",
+          "source-boundary"
+        ],
+        "dimensionCount": 7,
+        "sourceCount": 4,
+        "sourcesWithBoundary": 1,
+        "referenceOnlySources": 3,
+        "declaredLocators": 1,
+        "contentInspectedLocators": 1,
+        "explanatorySources": 1,
+        "bridgeCount": 0,
+        "relatedRouteCount": 0,
+        "renderedSections": 5
+      },
+      "sections": [
+        {
+          "dimension": "direct-answer",
+          "heading": "Direct answer",
+          "items": [
+            "An atomic layer deposition reactor separates precursor and reactant doses with purge steps so that self-limiting surface reactions add material cycle by cycle, enabling thickness control and conformal coverage on complex three-dimensional structures."
+          ],
+          "sourceIds": [
+            "weimer-particle-ald-2019"
+          ]
+        },
+        {
+          "dimension": "mechanism-or-method",
+          "heading": "Mechanism and method",
+          "items": [
+            "Condition chamber and wafer",
+            "Dose first precursor",
+            "Purge excess species",
+            "Dose co-reactant or plasma",
+            "Purge and repeat cycles"
+          ],
+          "sourceIds": [
+            "weimer-particle-ald-2019"
+          ]
+        },
+        {
+          "dimension": "mechanism-or-method",
+          "heading": "What is measured",
+          "items": [
+            "Dose saturation",
+            "Purge completeness",
+            "Temperature window",
+            "Cycle count",
+            "Plasma exposure where used",
+            "Nucleation delay",
+            "Growth per cycle",
+            "Film thickness",
+            "Conformality cross-section",
+            "Composition analysis",
+            "Electrical-property measurement"
+          ],
+          "sourceIds": [
+            "weimer-particle-ald-2019"
+          ]
+        },
+        {
+          "dimension": "limitations",
+          "heading": "Limitations",
+          "items": [
+            "Incomplete saturation",
+            "Parasitic CVD reaction",
+            "Precursor condensation",
+            "Poor nucleation",
+            "Impurity incorporation",
+            "Chamber cross-contamination"
+          ],
+          "sourceIds": [
+            "weimer-particle-ald-2019"
+          ]
+        },
+        {
+          "dimension": "not-established",
+          "heading": "Boundaries declared by the cited sources",
+          "items": [
+            "A review centred on particle ALD. It gives no quantitative kinetic rates for individual steps, no quantum-mechanical account of why the reactions self-limit, and no wafer-scale tool throughput or uniformity data, so it cannot support a claim about any production reactor's performance. (boundary declared by Particle atomic layer deposition)"
+          ],
+          "sourceIds": [
+            "weimer-particle-ald-2019"
+          ]
+        }
+      ],
+      "sectionCount": 5,
+      "upliftDigest": "sha256:eda76ab58f069f357dbae6491e411ddc01fb7f97fe9f0c521d8fdbbc364ba8fd"
     },
     {
       "route": "/knowledge/equipment/plasma-etch-and-atomic-layer-etch-system",
@@ -12715,12 +12899,12 @@
           "source-boundary"
         ],
         "dimensionCount": 7,
-        "sourceCount": 3,
-        "sourcesWithBoundary": 1,
+        "sourceCount": 4,
+        "sourcesWithBoundary": 2,
         "referenceOnlySources": 2,
-        "declaredLocators": 1,
-        "contentInspectedLocators": 1,
-        "explanatorySources": 1,
+        "declaredLocators": 2,
+        "contentInspectedLocators": 2,
+        "explanatorySources": 2,
         "bridgeCount": 0,
         "relatedRouteCount": 0,
         "renderedSections": 6
@@ -12738,12 +12922,12 @@
           "source-boundary"
         ],
         "dimensionCount": 7,
-        "sourceCount": 3,
-        "sourcesWithBoundary": 1,
+        "sourceCount": 4,
+        "sourcesWithBoundary": 2,
         "referenceOnlySources": 2,
-        "declaredLocators": 1,
-        "contentInspectedLocators": 1,
-        "explanatorySources": 1,
+        "declaredLocators": 2,
+        "contentInspectedLocators": 2,
+        "explanatorySources": 2,
         "bridgeCount": 0,
         "relatedRouteCount": 0,
         "renderedSections": 5
@@ -12756,7 +12940,8 @@
             "A plasma etch system creates reactive neutral species and ions, controls their energy and transport to the wafer, and removes selected materials with a target profile, selectivity, uniformity, and damage level; cyclic variants can approach atomic-layer control."
           ],
           "sourceIds": [
-            "tel-process-equipment"
+            "tel-process-equipment",
+            "an-2025-chxfy-etch-arxiv"
           ]
         },
         {
@@ -12770,7 +12955,8 @@
             "Purge and unload"
           ],
           "sourceIds": [
-            "tel-process-equipment"
+            "tel-process-equipment",
+            "an-2025-chxfy-etch-arxiv"
           ]
         },
         {
@@ -12790,7 +12976,8 @@
             "Residue and defect inspection"
           ],
           "sourceIds": [
-            "tel-process-equipment"
+            "tel-process-equipment",
+            "an-2025-chxfy-etch-arxiv"
           ]
         },
         {
@@ -12805,22 +12992,25 @@
             "Chamber drift"
           ],
           "sourceIds": [
-            "tel-process-equipment"
+            "tel-process-equipment",
+            "an-2025-chxfy-etch-arxiv"
           ]
         },
         {
           "dimension": "not-established",
           "heading": "Boundaries declared by the cited sources",
           "items": [
-            "A product index only. It carries no measured process parameter, no yield or defect data, and no independent comparison, so it cannot support any statement about how a process performs, only about how the vendor organises its catalogue. (boundary declared by Semiconductor Production Equipment)"
+            "A product index only. It carries no measured process parameter, no yield or defect data, and no independent comparison, so it cannot support any statement about how a process performs, only about how the vendor organises its catalogue. (boundary declared by Semiconductor Production Equipment)",
+            "A preprint that models energetic ions only. It does not model radicals or neutral atoms, simplifies the byproduct removal depth criterion, and states it cannot predict outcomes in full plasma environments where species interact, so it cannot support a claim about any production etch process window. It is also not peer reviewed. (boundary declared by Etching-to-deposition transition in SiO2/Si3N4 using CHxFy ion-based plasma etching: An atomistic study with neural network potentials)"
           ],
           "sourceIds": [
-            "tel-process-equipment"
+            "tel-process-equipment",
+            "an-2025-chxfy-etch-arxiv"
           ]
         }
       ],
       "sectionCount": 5,
-      "upliftDigest": "sha256:0a3b90b2268f8f1eed01b16e916ed74ed3398588a818749cb30ed84e8e1ac912"
+      "upliftDigest": "sha256:d021feaf1d60c377168315686eeb2449997ba37f46eeb18295c791005a7812e6"
     },
     {
       "route": "/knowledge/equipment/single-wafer-wet-clean-and-surface-preparation-system",
@@ -13214,35 +13404,127 @@
       "route": "/knowledge/equipment/overlay-critical-dimension-and-film-metrology-system",
       "family": "semiconductor-manufacturing",
       "slug": "overlay-critical-dimension-and-film-metrology-system",
-      "eligible": false,
-      "refusals": [
-        "below-dimension-floor",
-        "no-cited-source",
-        "no-negative-space"
-      ],
+      "eligible": true,
+      "refusals": [],
       "before": {
         "route": "/knowledge/equipment/overlay-critical-dimension-and-film-metrology-system",
         "family": "semiconductor-manufacturing",
         "dimensionsPresent": [
+          "claim-level-citation",
           "direct-answer",
+          "exact-locator",
           "limitations",
-          "mechanism-or-method"
+          "mechanism-or-method",
+          "not-established",
+          "source-boundary"
         ],
-        "dimensionCount": 3,
-        "sourceCount": 2,
-        "sourcesWithBoundary": 0,
+        "dimensionCount": 7,
+        "sourceCount": 3,
+        "sourcesWithBoundary": 1,
         "referenceOnlySources": 2,
-        "declaredLocators": 0,
-        "contentInspectedLocators": 0,
-        "explanatorySources": 0,
+        "declaredLocators": 1,
+        "contentInspectedLocators": 1,
+        "explanatorySources": 1,
         "bridgeCount": 0,
         "relatedRouteCount": 0,
         "renderedSections": 6
       },
-      "after": null,
-      "sections": [],
-      "sectionCount": 0,
-      "upliftDigest": "sha256:0042fd0a7479a22454b649492e96e4389746cbda659f1d69259d430ffb27c163"
+      "after": {
+        "route": "/knowledge/equipment/overlay-critical-dimension-and-film-metrology-system",
+        "family": "semiconductor-manufacturing",
+        "dimensionsPresent": [
+          "claim-level-citation",
+          "direct-answer",
+          "exact-locator",
+          "limitations",
+          "mechanism-or-method",
+          "not-established",
+          "source-boundary"
+        ],
+        "dimensionCount": 7,
+        "sourceCount": 3,
+        "sourcesWithBoundary": 1,
+        "referenceOnlySources": 2,
+        "declaredLocators": 1,
+        "contentInspectedLocators": 1,
+        "explanatorySources": 1,
+        "bridgeCount": 0,
+        "relatedRouteCount": 0,
+        "renderedSections": 5
+      },
+      "sections": [
+        {
+          "dimension": "direct-answer",
+          "heading": "Direct answer",
+          "items": [
+            "Patterning and film metrology systems measure defined targets or product structures to estimate overlay, critical dimension, profile, film thickness, composition, stress, or other properties used for process control and wafer disposition."
+          ],
+          "sourceIds": [
+            "nist-orji-metrology-requirements"
+          ]
+        },
+        {
+          "dimension": "mechanism-or-method",
+          "heading": "Mechanism and method",
+          "items": [
+            "Load and identify wafer",
+            "Align to measurement targets",
+            "Acquire optical or electron signal",
+            "Fit calibrated model",
+            "Map results and feed control loop"
+          ],
+          "sourceIds": [
+            "nist-orji-metrology-requirements"
+          ]
+        },
+        {
+          "dimension": "mechanism-or-method",
+          "heading": "What is measured",
+          "items": [
+            "Accuracy",
+            "Precision",
+            "Tool-induced shift",
+            "Sampling density",
+            "Model validity",
+            "Target-to-device correlation",
+            "Reference-material calibration",
+            "Repeatability and reproducibility",
+            "Tool matching",
+            "Target correlation",
+            "Uncertainty analysis"
+          ],
+          "sourceIds": [
+            "nist-orji-metrology-requirements"
+          ]
+        },
+        {
+          "dimension": "limitations",
+          "heading": "Limitations",
+          "items": [
+            "Calibration drift",
+            "Model mismatch",
+            "Target asymmetry",
+            "Sampling blind spot",
+            "Tool mismatch",
+            "Correction overfit"
+          ],
+          "sourceIds": [
+            "nist-orji-metrology-requirements"
+          ]
+        },
+        {
+          "dimension": "not-established",
+          "heading": "Boundaries declared by the cited sources",
+          "items": [
+            "A preprint outlining requirements and challenges. It reports no tool vendor performance, no yield data, no process recipe and no measurement uncertainty budget for any named product, so it cannot support a claim about how any particular instrument performs. (boundary declared by Metrology Requirements for Next Generation of Semiconductor Devices)"
+          ],
+          "sourceIds": [
+            "nist-orji-metrology-requirements"
+          ]
+        }
+      ],
+      "sectionCount": 5,
+      "upliftDigest": "sha256:9ca53894ed1c94892924b59c1399e48ac82a98670f76c4c1031dd231cc715d59"
     },
     {
       "route": "/knowledge/equipment/semiconductor-wafer-prober",
@@ -14053,69 +14335,265 @@
       "route": "/knowledge/processes/thin-film-deposition",
       "family": "semiconductor-manufacturing",
       "slug": "thin-film-deposition",
-      "eligible": false,
-      "refusals": [
-        "below-dimension-floor",
-        "no-cited-source",
-        "no-negative-space"
-      ],
+      "eligible": true,
+      "refusals": [],
       "before": {
         "route": "/knowledge/processes/thin-film-deposition",
         "family": "semiconductor-manufacturing",
         "dimensionsPresent": [
+          "claim-level-citation",
           "direct-answer",
+          "exact-locator",
           "limitations",
-          "mechanism-or-method"
+          "mechanism-or-method",
+          "not-established",
+          "source-boundary"
         ],
-        "dimensionCount": 3,
-        "sourceCount": 2,
-        "sourcesWithBoundary": 0,
+        "dimensionCount": 7,
+        "sourceCount": 3,
+        "sourcesWithBoundary": 1,
         "referenceOnlySources": 2,
-        "declaredLocators": 0,
-        "contentInspectedLocators": 0,
-        "explanatorySources": 0,
+        "declaredLocators": 1,
+        "contentInspectedLocators": 1,
+        "explanatorySources": 1,
         "bridgeCount": 0,
         "relatedRouteCount": 0,
         "renderedSections": 6
       },
-      "after": null,
-      "sections": [],
-      "sectionCount": 0,
-      "upliftDigest": "sha256:13c41b212c116a8f3e8e0be1d35cf112e9aa210b3a7b986d92a8f8d84394211c"
+      "after": {
+        "route": "/knowledge/processes/thin-film-deposition",
+        "family": "semiconductor-manufacturing",
+        "dimensionsPresent": [
+          "claim-level-citation",
+          "direct-answer",
+          "exact-locator",
+          "limitations",
+          "mechanism-or-method",
+          "not-established",
+          "source-boundary"
+        ],
+        "dimensionCount": 7,
+        "sourceCount": 3,
+        "sourcesWithBoundary": 1,
+        "referenceOnlySources": 2,
+        "declaredLocators": 1,
+        "contentInspectedLocators": 1,
+        "explanatorySources": 1,
+        "bridgeCount": 0,
+        "relatedRouteCount": 0,
+        "renderedSections": 5
+      },
+      "sections": [
+        {
+          "dimension": "direct-answer",
+          "heading": "Direct answer",
+          "items": [
+            "Thin-film deposition creates controlled layers of material on a wafer, with the selected method determined by composition, thickness, conformality, temperature budget, throughput, and integration constraints."
+          ],
+          "sourceIds": [
+            "weimer-particle-ald-2019"
+          ]
+        },
+        {
+          "dimension": "mechanism-or-method",
+          "heading": "Mechanism and method",
+          "items": [
+            "Condition and clean the chamber and wafer surface",
+            "Introduce source material or precursor",
+            "Activate physical or chemical deposition mechanism",
+            "Control nucleation and growth",
+            "Purge or evacuate by-products",
+            "Measure thickness, composition, stress, and uniformity"
+          ],
+          "sourceIds": [
+            "weimer-particle-ald-2019"
+          ]
+        },
+        {
+          "dimension": "mechanism-or-method",
+          "heading": "What is measured",
+          "items": [
+            "Film thickness",
+            "Within-wafer uniformity",
+            "Conformality",
+            "Composition and stoichiometry",
+            "Resistivity or dielectric properties",
+            "Film stress",
+            "Adhesion",
+            "Thermal budget",
+            "Particles and contamination",
+            "Ellipsometry or reflectometry",
+            "Sheet resistance",
+            "X-ray methods",
+            "Cross-sectional microscopy",
+            "Stress and bow measurement",
+            "Composition analysis"
+          ],
+          "sourceIds": [
+            "weimer-particle-ald-2019"
+          ]
+        },
+        {
+          "dimension": "limitations",
+          "heading": "Limitations",
+          "items": [
+            "Nonuniform thickness",
+            "Poor step coverage",
+            "Voids or seams",
+            "Delamination",
+            "Excess film stress",
+            "Composition drift",
+            "Particles",
+            "Interfacial contamination"
+          ],
+          "sourceIds": [
+            "weimer-particle-ald-2019"
+          ]
+        },
+        {
+          "dimension": "not-established",
+          "heading": "Boundaries declared by the cited sources",
+          "items": [
+            "A review centred on particle ALD. It gives no quantitative kinetic rates for individual steps, no quantum-mechanical account of why the reactions self-limit, and no wafer-scale tool throughput or uniformity data, so it cannot support a claim about any production reactor's performance. (boundary declared by Particle atomic layer deposition)"
+          ],
+          "sourceIds": [
+            "weimer-particle-ald-2019"
+          ]
+        }
+      ],
+      "sectionCount": 5,
+      "upliftDigest": "sha256:62b0f5eac61023f702b7efd0fe1edbd02cdd149efede6ae2b81df8b174742f6b"
     },
     {
       "route": "/knowledge/processes/plasma-etch-and-pattern-transfer",
       "family": "semiconductor-manufacturing",
       "slug": "plasma-etch-and-pattern-transfer",
-      "eligible": false,
-      "refusals": [
-        "below-dimension-floor",
-        "no-cited-source",
-        "no-negative-space"
-      ],
+      "eligible": true,
+      "refusals": [],
       "before": {
         "route": "/knowledge/processes/plasma-etch-and-pattern-transfer",
         "family": "semiconductor-manufacturing",
         "dimensionsPresent": [
+          "claim-level-citation",
           "direct-answer",
+          "exact-locator",
           "limitations",
-          "mechanism-or-method"
+          "mechanism-or-method",
+          "not-established",
+          "source-boundary"
         ],
-        "dimensionCount": 3,
-        "sourceCount": 1,
-        "sourcesWithBoundary": 0,
+        "dimensionCount": 7,
+        "sourceCount": 2,
+        "sourcesWithBoundary": 1,
         "referenceOnlySources": 1,
-        "declaredLocators": 0,
-        "contentInspectedLocators": 0,
-        "explanatorySources": 0,
+        "declaredLocators": 1,
+        "contentInspectedLocators": 1,
+        "explanatorySources": 1,
         "bridgeCount": 0,
         "relatedRouteCount": 0,
         "renderedSections": 6
       },
-      "after": null,
-      "sections": [],
-      "sectionCount": 0,
-      "upliftDigest": "sha256:ec1d6849e44d8d253f1f5af8f2aee8cbfa322e60a777613a282ef01d08265d32"
+      "after": {
+        "route": "/knowledge/processes/plasma-etch-and-pattern-transfer",
+        "family": "semiconductor-manufacturing",
+        "dimensionsPresent": [
+          "claim-level-citation",
+          "direct-answer",
+          "exact-locator",
+          "limitations",
+          "mechanism-or-method",
+          "not-established",
+          "source-boundary"
+        ],
+        "dimensionCount": 7,
+        "sourceCount": 2,
+        "sourcesWithBoundary": 1,
+        "referenceOnlySources": 1,
+        "declaredLocators": 1,
+        "contentInspectedLocators": 1,
+        "explanatorySources": 1,
+        "bridgeCount": 0,
+        "relatedRouteCount": 0,
+        "renderedSections": 5
+      },
+      "sections": [
+        {
+          "dimension": "direct-answer",
+          "heading": "Direct answer",
+          "items": [
+            "Etch selectively removes material from exposed wafer regions so that a lithographic pattern becomes a three-dimensional device, contact, or interconnect structure."
+          ],
+          "sourceIds": [
+            "an-2025-chxfy-etch-arxiv"
+          ]
+        },
+        {
+          "dimension": "mechanism-or-method",
+          "heading": "Mechanism and method",
+          "items": [
+            "Select chemistry and mask",
+            "Stabilize wafer temperature and chamber condition",
+            "Generate reactive species and ions for dry etch where applicable",
+            "Remove exposed material",
+            "Control endpoint and profile",
+            "Strip mask or residue",
+            "Clean and inspect"
+          ],
+          "sourceIds": [
+            "an-2025-chxfy-etch-arxiv"
+          ]
+        },
+        {
+          "dimension": "mechanism-or-method",
+          "heading": "What is measured",
+          "items": [
+            "Etch rate",
+            "Selectivity",
+            "Anisotropy",
+            "Sidewall profile",
+            "Critical-dimension bias",
+            "Endpoint",
+            "Plasma damage",
+            "Residue and particle level",
+            "Cross-sectional SEM or TEM",
+            "Critical-dimension SEM",
+            "Optical emission endpoint",
+            "Defect inspection",
+            "Electrical damage monitors"
+          ],
+          "sourceIds": [
+            "an-2025-chxfy-etch-arxiv"
+          ]
+        },
+        {
+          "dimension": "limitations",
+          "heading": "Limitations",
+          "items": [
+            "Under-etch or over-etch",
+            "Sidewall bowing or taper",
+            "Mask erosion",
+            "Notching or microtrenching",
+            "Residue redeposition",
+            "Plasma-induced damage",
+            "Pattern collapse after wet processing"
+          ],
+          "sourceIds": [
+            "an-2025-chxfy-etch-arxiv"
+          ]
+        },
+        {
+          "dimension": "not-established",
+          "heading": "Boundaries declared by the cited sources",
+          "items": [
+            "A preprint that models energetic ions only. It does not model radicals or neutral atoms, simplifies the byproduct removal depth criterion, and states it cannot predict outcomes in full plasma environments where species interact, so it cannot support a claim about any production etch process window. It is also not peer reviewed. (boundary declared by Etching-to-deposition transition in SiO2/Si3N4 using CHxFy ion-based plasma etching: An atomistic study with neural network potentials)"
+          ],
+          "sourceIds": [
+            "an-2025-chxfy-etch-arxiv"
+          ]
+        }
+      ],
+      "sectionCount": 5,
+      "upliftDigest": "sha256:9e41133d5d34400b8cd21848addd313524b63c1deedfbf05562e5a4741236c5b"
     },
     {
       "route": "/knowledge/processes/ion-implantation-and-annealing",
@@ -14779,35 +15257,131 @@
       "route": "/knowledge/concepts/semiconductor-metrology-and-defect-inspection",
       "family": "semiconductor-manufacturing",
       "slug": "semiconductor-metrology-and-defect-inspection",
-      "eligible": false,
-      "refusals": [
-        "below-dimension-floor",
-        "no-cited-source",
-        "no-negative-space"
-      ],
+      "eligible": true,
+      "refusals": [],
       "before": {
         "route": "/knowledge/concepts/semiconductor-metrology-and-defect-inspection",
         "family": "semiconductor-manufacturing",
         "dimensionsPresent": [
+          "claim-level-citation",
           "direct-answer",
+          "exact-locator",
           "limitations",
-          "mechanism-or-method"
+          "mechanism-or-method",
+          "not-established",
+          "source-boundary"
         ],
-        "dimensionCount": 3,
-        "sourceCount": 2,
-        "sourcesWithBoundary": 0,
+        "dimensionCount": 7,
+        "sourceCount": 3,
+        "sourcesWithBoundary": 1,
         "referenceOnlySources": 2,
-        "declaredLocators": 0,
-        "contentInspectedLocators": 0,
-        "explanatorySources": 0,
+        "declaredLocators": 1,
+        "contentInspectedLocators": 1,
+        "explanatorySources": 1,
         "bridgeCount": 0,
         "relatedRouteCount": 0,
         "renderedSections": 6
       },
-      "after": null,
-      "sections": [],
-      "sectionCount": 0,
-      "upliftDigest": "sha256:0683fa058e06d3835eb58e45584870150ec1c08caeae6e92a7a2c526208ff22a"
+      "after": {
+        "route": "/knowledge/concepts/semiconductor-metrology-and-defect-inspection",
+        "family": "semiconductor-manufacturing",
+        "dimensionsPresent": [
+          "claim-level-citation",
+          "direct-answer",
+          "exact-locator",
+          "limitations",
+          "mechanism-or-method",
+          "not-established",
+          "source-boundary"
+        ],
+        "dimensionCount": 7,
+        "sourceCount": 3,
+        "sourcesWithBoundary": 1,
+        "referenceOnlySources": 2,
+        "declaredLocators": 1,
+        "contentInspectedLocators": 1,
+        "explanatorySources": 1,
+        "bridgeCount": 0,
+        "relatedRouteCount": 0,
+        "renderedSections": 5
+      },
+      "sections": [
+        {
+          "dimension": "direct-answer",
+          "heading": "Direct answer",
+          "items": [
+            "Metrology quantifies specified properties, while inspection searches for anomalies or defects; together they provide the evidence used to control processes, disposition wafers, and learn yield."
+          ],
+          "sourceIds": [
+            "nist-orji-metrology-requirements"
+          ]
+        },
+        {
+          "dimension": "mechanism-or-method",
+          "heading": "Mechanism and method",
+          "items": [
+            "Define the measurand or defect class",
+            "Calibrate the system",
+            "Select sites and sampling frequency",
+            "Acquire data",
+            "Classify and correlate signals",
+            "Feed results to process and yield control"
+          ],
+          "sourceIds": [
+            "nist-orji-metrology-requirements"
+          ]
+        },
+        {
+          "dimension": "mechanism-or-method",
+          "heading": "What is measured",
+          "items": [
+            "Accuracy",
+            "Precision",
+            "Repeatability",
+            "Detection sensitivity",
+            "Nuisance rate",
+            "Sampling coverage",
+            "Throughput",
+            "Tool matching",
+            "Optical and electron-beam inspection",
+            "CD and overlay metrology",
+            "Film and composition measurement",
+            "X-ray and acoustic imaging",
+            "Electrical test"
+          ],
+          "sourceIds": [
+            "nist-orji-metrology-requirements"
+          ]
+        },
+        {
+          "dimension": "limitations",
+          "heading": "Limitations",
+          "items": [
+            "Missed defect",
+            "False alarm",
+            "Sampling blind spot",
+            "Calibration drift",
+            "Recipe mismatch",
+            "Misclassification",
+            "Slow feedback"
+          ],
+          "sourceIds": [
+            "nist-orji-metrology-requirements"
+          ]
+        },
+        {
+          "dimension": "not-established",
+          "heading": "Boundaries declared by the cited sources",
+          "items": [
+            "A preprint outlining requirements and challenges. It reports no tool vendor performance, no yield data, no process recipe and no measurement uncertainty budget for any named product, so it cannot support a claim about how any particular instrument performs. (boundary declared by Metrology Requirements for Next Generation of Semiconductor Devices)"
+          ],
+          "sourceIds": [
+            "nist-orji-metrology-requirements"
+          ]
+        }
+      ],
+      "sectionCount": 5,
+      "upliftDigest": "sha256:3a61ea7996bb70d9cbc5537af0fe775eb0cd750d4f144cea198c84b0e85a7f5c"
     },
     {
       "route": "/knowledge/concepts/yield-learning-and-statistical-process-control",
