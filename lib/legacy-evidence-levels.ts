@@ -109,9 +109,10 @@ export function gradeEvidence(input: EvidenceInput): EvidenceProfile {
     'release-revision-matched': input.releaseMatched !== false,
   }
 
-  // Explanatory use needs the content actually read, the item confirmed, the
-  // subject matched, and a declared scope. Four separate facts, all required.
-  const explanatory = levels['content-inspected-locator']
+  // All six, and all separately. A source with no declared locator is one a
+  // reader cannot follow, so an attestation does not excuse its absence.
+  const explanatory = levels['declared-locator']
+    && levels['content-inspected-locator']
     && levels['source-identity-verified']
     && levels['subject-aligned']
     && levels['claim-supported-at-stated-scope']
