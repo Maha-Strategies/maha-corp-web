@@ -37,7 +37,12 @@ import {
 } from '@/lib/religion-knowledge'
 import { NEUROMORPHIC_COMPARISONS, NEUROMORPHIC_CONCEPTS, NEUROMORPHIC_PATH, NEUROMORPHIC_VERSION } from '@/lib/neuromorphic-biocomputing'
 import { EPISTEMIC_DOMAINS, EPISTEMIC_SYSTEM_PATH, PUBLIC_EPISTEMIC_RECORDS } from '@/lib/epistemic-pilots'
-import { KNOWLEDGE_INTEGRATIONS_PATH } from '@/lib/knowledge-integration-evidence'
+import {
+  EXACTZK_EVIDENCE,
+  EXACTZK_EVIDENCE_PATH,
+  EXACTZK_RELEASE_DATE,
+  KNOWLEDGE_INTEGRATIONS_PATH,
+} from '@/lib/knowledge-integration-evidence'
 import styles from './knowledge-cyber-light.module.css'
 
 export const metadata: Metadata = {
@@ -96,6 +101,33 @@ export default function KnowledgePage() {
       { '@type': 'CollectionPage', name: 'Neuromorphic and biocomputing', url: `${SITE_URL}${NEUROMORPHIC_PATH}`, version: NEUROMORPHIC_VERSION },
       { '@type': 'TechArticle', name: 'Maha Epistemic Publication System', url: `${SITE_URL}${EPISTEMIC_SYSTEM_PATH}` },
       { '@type': 'CollectionPage', name: 'Integration Evidence', url: `${SITE_URL}${KNOWLEDGE_INTEGRATIONS_PATH}` },
+      {
+        '@type': 'DigitalDocument',
+        name: EXACTZK_EVIDENCE.title,
+        description: EXACTZK_EVIDENCE.summary,
+        url: `${SITE_URL}${EXACTZK_EVIDENCE_PATH}`,
+        datePublished: EXACTZK_RELEASE_DATE,
+        isPartOf: {
+          '@type': 'CollectionPage',
+          name: 'Maha Strategies Integration Evidence',
+          url: `${SITE_URL}${KNOWLEDGE_INTEGRATIONS_PATH}`,
+        },
+        associatedMedia: [
+          {
+            '@type': 'DataDownload',
+            name: 'Signed ExactZK attestation',
+            contentUrl: `${SITE_URL}${EXACTZK_EVIDENCE.signedArtifactPath}`,
+            encodingFormat: 'application/json',
+          },
+          {
+            '@type': 'DataDownload',
+            name: 'Maha ExactZK integration record',
+            contentUrl: `${SITE_URL}${EXACTZK_EVIDENCE.integrationRecordPath}`,
+            encodingFormat: 'application/json',
+          },
+        ],
+        sameAs: EXACTZK_EVIDENCE.upstreamPublication,
+      },
       ...EPISTEMIC_DOMAINS.map((domain) => ({ '@type': 'CollectionPage', name: domain.name, url: `${SITE_URL}/knowledge/${domain.slug}` })),
       ...KNOWLEDGE_ARTICLES.map((article) => ({
         '@type': 'TechArticle',
@@ -137,6 +169,30 @@ export default function KnowledgePage() {
               <p>Claim-level evidence status</p>
               <p>Bidirectional Intelligence links</p>
             </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="border-b border-zinc-900 px-6 py-12 sm:px-12" aria-labelledby="recent-integration-evidence">
+        <div className="mx-auto max-w-6xl">
+          <div className="flex flex-wrap items-end justify-between gap-4">
+            <div>
+              <p className="font-mono text-[10px] uppercase tracking-widest text-emerald-300">Recently published integration evidence</p>
+              <h2 id="recent-integration-evidence" className="mt-3 text-2xl font-semibold text-white">ExactZK independent reproduction</h2>
+            </div>
+            <Link href={KNOWLEDGE_INTEGRATIONS_PATH} className="font-mono text-[10px] uppercase tracking-widest text-zinc-500 hover:text-cyan-300">
+              All integration evidence →
+            </Link>
+          </div>
+          <p className="mt-4 max-w-3xl text-sm leading-6 text-zinc-400">{EXACTZK_EVIDENCE.summary}</p>
+          <p className="mt-3 max-w-3xl border-l border-amber-700/60 pl-3 text-xs leading-5 text-amber-200">
+            Classified as external integration evidence, not canonical domain knowledge. The record states its reproduction boundary and explicit non-claims.
+          </p>
+          <div className="mt-6 flex flex-wrap gap-x-6 gap-y-3 font-mono text-[10px] uppercase tracking-widest">
+            <Link href={EXACTZK_EVIDENCE_PATH} className="text-cyan-300 hover:text-cyan-100">Open ExactZK evidence record →</Link>
+            <a href={EXACTZK_EVIDENCE.signedArtifactPath} type="application/json" className="text-zinc-500 hover:text-cyan-300">Signed attestation JSON ↗</a>
+            <a href={EXACTZK_EVIDENCE.integrationRecordPath} type="application/json" className="text-zinc-500 hover:text-cyan-300">Integration record JSON ↗</a>
+            <a href="/maha-machine-readable-registry.json" type="application/json" className="text-zinc-500 hover:text-cyan-300">Machine-readable registry ↗</a>
           </div>
         </div>
       </section>
