@@ -24,10 +24,6 @@ jobs:
       url: https://x402.nsgoods.org/preflight
     env:
       BASE_RPC_URL: ${{ vars.BASE_RPC_URL }}
-      NSGOODS_PREFLIGHT_RESPONSE_PATH: ${{ runner.temp }}/nsgoods-preflight/live-response.json
-      NSGOODS_PREFLIGHT_PAYMENT_PATH: ${{ runner.temp }}/nsgoods-preflight/payment-evidence.json
-      NSGOODS_PREFLIGHT_MANIFEST_PATH: ${{ runner.temp }}/nsgoods-preflight/proof-index.json
-      NSGOODS_PREFLIGHT_REPORT_PATH: ${{ runner.temp }}/nsgoods-preflight/validation-report.json
     steps:
       - name: Refuse any broader authorization
         run: test '${{ inputs.confirmation }}' = 'PAY NSGOODS PREFLIGHT 0.015 USDC'
@@ -43,6 +39,8 @@ jobs:
           cache: pip
       - run: pip install -r fixtures/x402-composite-preflight-v3/requirements.txt
       - name: Pin the live signer manifest before payment
+        env:
+          NSGOODS_PREFLIGHT_MANIFEST_PATH: ${{ runner.temp }}/nsgoods-preflight/proof-index.json
         run: curl --fail --silent --show-error --location https://x402.nsgoods.org/proof/index.json --output "$NSGOODS_PREFLIGHT_MANIFEST_PATH"
       - name: Validate the protected buyer and balance without payment
         env:
@@ -51,8 +49,15 @@ jobs:
       - name: Make exactly one authorized 0.015 USDC call
         env:
           X402_BUYER_PRIVATE_KEY: ${{ secrets.X402_BUYER_PRIVATE_KEY }}
+          NSGOODS_PREFLIGHT_RESPONSE_PATH: ${{ runner.temp }}/nsgoods-preflight/live-response.json
+          NSGOODS_PREFLIGHT_PAYMENT_PATH: ${{ runner.temp }}/nsgoods-preflight/payment-evidence.json
         run: node --experimental-strip-types scripts/run-nsgoods-preflight-live-canary.ts
       - name: Independently verify the response and settlement evidence
+        env:
+          NSGOODS_PREFLIGHT_RESPONSE_PATH: ${{ runner.temp }}/nsgoods-preflight/live-response.json
+          NSGOODS_PREFLIGHT_PAYMENT_PATH: ${{ runner.temp }}/nsgoods-preflight/payment-evidence.json
+          NSGOODS_PREFLIGHT_MANIFEST_PATH: ${{ runner.temp }}/nsgoods-preflight/proof-index.json
+          NSGOODS_PREFLIGHT_REPORT_PATH: ${{ runner.temp }}/nsgoods-preflight/validation-report.json
         run: >-
           python scripts/verify-x402-composite-preflight-live.py
           --response "$NSGOODS_PREFLIGHT_RESPONSE_PATH"
