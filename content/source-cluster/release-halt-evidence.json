@@ -1,0 +1,75 @@
+{
+  "schemaVersion": "maha-release-halt-evidence/1.0",
+  "recordedAt": "2026-09-02",
+  "outcome": "halted-before-any-release",
+  "phaseAExecuted": false,
+  "phaseBExecuted": false,
+  "productionMutations": 0,
+  "releaseRowsCreated": 0,
+  "recordsPromoted": 0,
+  "lineageAltered": false,
+  "mergeShas": {
+    "pr-360-preflight-plan-capacity": "f9af995dfac5dd1e6b62d0520c26b9c9877f1724",
+    "pr-361-release-path": "095792b5706d2bee3767a0e6b262e5b40c4fb639"
+  },
+  "deployedSha": "095792b5706d2bee3767a0e6b262e5b40c4fb639",
+  "deploymentState": "success",
+  "preReleaseRevalidation": {
+    "publicRouteCount": 792,
+    "releaseRows": 115,
+    "active": 114,
+    "superseded": 1,
+    "withdrawn": 0,
+    "cohortSize": 33,
+    "phaseA": 5,
+    "phaseB": 28,
+    "noCanaryRecordHasActiveRelease": true,
+    "allFiveAreInitial": true,
+    "auditAndFiveAxisDigestsMatch": true,
+    "reviewerKind": "automated-internal-editorial",
+    "humanReviewed": false,
+    "externallyReviewed": false,
+    "expertEndorsement": false,
+    "releaseAuthority": "separate",
+    "privateSourceFirstCandidatesInCohort": 0,
+    "result": "every read-only value matched; no drift"
+  },
+  "haltCause": {
+    "detectedBy": "read-only readiness mode against the live release workspace",
+    "blockers": [
+      {
+        "id": "revision-not-offered",
+        "finding": "All 33 records are present in the release workspace, each at exactly one revision, and in no case is that revision the one the frozen package reviewed.",
+        "phaseAInWorkspaceAtAnyRevision": 5,
+        "phaseBInWorkspaceAtAnyRevision": 28,
+        "presentAtExactRevision": 0,
+        "example": {
+          "recordId": "urn:maha:record:agentic-systems-mcp-mcp-session-lifecycle",
+          "packageExpects": "sha256:110f2b0ddb37abd4acd9e4463e60c3bbd565d2dac8eefaa57cee2738d52ad80d",
+          "productionOffers": "sha256:e7f323bdf0dcf0a15f9a0a1df7f2c0ccceaf388c9cc2488befdcf2791bcfaaf2",
+          "note": "The expected value equals the record revision recorded in the source inventory. The offered value matches none of the package's three digests: revision, audit or review bundle. These are different quantities, not a drifted copy of the same one."
+        }
+      },
+      {
+        "id": "no-ready-candidates-workspace-wide",
+        "finding": "The workspace holds 423 candidates and zero of them are ready. This is not specific to the cohort, so it is a precondition unmet across the whole workspace rather than a fault in the 33.",
+        "candidateCount": 423,
+        "readyCandidates": 0
+      }
+    ]
+  },
+  "whyNotWorkedAround": {
+    "reFreezeAgainstOfferedRevisions": "Refused. That would change record revisions and cohort membership, which the authorization excludes, and would release revisions no five-axis review ever examined.",
+    "submitReviewDecisions": "Refused. That would create review decisions in Production. The authorization covers releasing a frozen cohort, not reviewing it.",
+    "releaseTheOfferedRevision": "Refused. The reviewed revision is the unit the review binds to. Releasing a different one would make the published assurance false.",
+    "principle": "The readiness gate did exactly what it exists to do. Reaching the authorized outcome by loosening the thing that stopped it would defeat the purpose of having stopped."
+  },
+  "unrelatedFinding": {
+    "workflow": "preview-cabezon-seller-canary.yml",
+    "status": "pre-existing, not caused by this work, not repaired",
+    "diagnosis": "Failing runs contain zero jobs and are attributed to push events, although the workflow declares only workflow_dispatch. That signature is a startup failure: GitHub could not start the workflow, so nothing inside it ran. It is not an assertion failure in the canary logic.",
+    "claimedFixed": false,
+    "note": "Needs its own pass. It touched nothing in this cohort."
+  },
+  "boundary": "A record of a release that did not happen. Production holds the same 115 release rows and 792 routes it held before this sprint began."
+}
