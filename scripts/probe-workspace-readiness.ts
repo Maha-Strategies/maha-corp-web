@@ -73,8 +73,15 @@ export async function probe(environment = process.env) {
     blockerVocabulary: [...vocabulary.entries()].sort((a, b) => b[1] - a[1]),
     summaryKeys: workspace.summary ? Object.keys(workspace.summary as object) : [],
     summary: workspace.summary ?? null,
-    sampleRows: rows.slice(0, 3),
+    sampleRows: rows.slice(0, 2),
   })} PROBE_END`)
+  // Every row, compactly, so the reconciliation can be done offline without
+  // another round trip to Production.
+  console.log(`ROWS_BEGIN ${JSON.stringify(rows.map((r) => [
+    r.recordId, r.targetSha256, r.ready ? 1 : 0, r.approvalCount, r.blockerCount,
+    r.hasActiveRelease ? 1 : 0, r.localRecordPresent ? 1 : 0, r.localTargetMatches === true ? 1 : 0,
+    r.blockers.map((b) => (typeof b === 'string' ? b : 'non-string')).join('|'),
+  ]))} ROWS_END`)
 }
 
 if (import.meta.url === `file://${process.argv[1]}`) {
