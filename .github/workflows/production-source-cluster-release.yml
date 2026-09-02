@@ -1,0 +1,55 @@
+name: Production source-cluster release
+
+on:
+  workflow_dispatch:
+    inputs:
+      operation:
+        description: Check readiness, release the five-record canary, or release the 28-record remainder
+        required: true
+        default: readiness
+        type: choice
+        options:
+          - readiness
+          - canary
+          - remainder
+      confirmation:
+        description: RELEASE_5_SOURCE_CLUSTER_CANARY for canary, RELEASE_28_SOURCE_CLUSTER_REMAINDER for remainder
+        required: false
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: production-source-cluster-release
+  cancel-in-progress: false
+
+jobs:
+  operate:
+    runs-on: ubuntu-latest
+    environment: production-database
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      # Each phase carries its own confirmation string, so an approval for the
+      # canary cannot be replayed to release the remainder.
+      - name: Verify canary confirmation
+        if: inputs.operation == 'canary'
+        env:
+          CONFIRMATION: ${{ inputs.confirmation }}
+        run: test "$CONFIRMATION" = "RELEASE_5_SOURCE_CLUSTER_CANARY"
+      - name: Verify remainder confirmation
+        if: inputs.operation == 'remainder'
+        env:
+          CONFIRMATION: ${{ inputs.confirmation }}
+        run: test "$CONFIRMATION" = "RELEASE_28_SOURCE_CLUSTER_REMAINDER"
+      - name: Operate the source-cluster release
+        env:
+          EPISTEMIC_OPERATIONS_TOKEN: ${{ secrets.EPISTEMIC_OPERATIONS_TOKEN }}
+          EPISTEMIC_RELEASE_AUTHORITY_TOKEN: ${{ secrets.EPISTEMIC_RELEASE_AUTHORITY_TOKEN }}
+          SOURCE_CLUSTER_CONFIRM: ${{ inputs.confirmation }}
+        run: |
+          node --experimental-strip-types scripts/run-source-cluster-production-release.ts ${{ inputs.operation }}
