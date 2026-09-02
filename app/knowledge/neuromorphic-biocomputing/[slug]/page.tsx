@@ -1,6 +1,8 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
+
+import { UpliftSections } from '@/components/UpliftSections'
 import { SITE_URL } from '@/lib/briefs-data'
 import { getMathematicalConcept, mathematicsConceptPath } from '@/lib/mathematics-knowledge'
 import { NEUROMORPHIC_CONCEPTS, NEUROMORPHIC_PATH, NEUROMORPHIC_RELEASE_DATE, NEUROMORPHIC_SOURCES, getNeuromorphicConcept, getNeuromorphicConceptBridges, neuromorphicConceptPath } from '@/lib/neuromorphic-biocomputing'
@@ -23,5 +25,5 @@ export default async function ConceptPage({ params }: PageProps) {
       <section className="mt-14 border-t border-zinc-800 pt-8"><h2 className="text-2xl font-semibold text-white">Technical and governance sources</h2><ol className="mt-6 space-y-5">{sources.map((source, index) => <li key={source.id} className="border-l border-zinc-700 pl-4 text-sm leading-6 text-zinc-400"><span className="mr-2 font-mono text-xs text-lime-300">[{index + 1}]</span><a href={source.url} target="_blank" rel="noopener noreferrer" className="text-zinc-200 underline decoration-zinc-700 underline-offset-4">{source.title}</a><span className="text-zinc-600"> · {source.publisher}</span><p className="mt-2 text-xs text-zinc-500"><span className="text-zinc-300">Establishes:</span> {source.establishes}</p><p className="mt-2 text-xs text-rose-200/70"><span className="text-rose-300">Boundary:</span> {source.boundary}</p></li>)}</ol></section>
     </article><aside className="space-y-8"><div className="border border-zinc-800 bg-zinc-950/60 p-5"><p className="font-mono text-[10px] uppercase tracking-widest text-zinc-500">Evidence contract</p><dl className="mt-5 space-y-4 text-sm"><div><dt className="text-zinc-600">Substrate</dt><dd className="mt-1 text-zinc-300">{item.substrate}</dd></div><div><dt className="text-zinc-600">Maturity</dt><dd className="mt-1 text-zinc-300">{item.maturity}</dd></div><div><dt className="text-zinc-600">Sources</dt><dd className="mt-1 text-zinc-300">{sources.length}</dd></div></dl></div><div className="border border-rose-900/50 bg-rose-950/10 p-5"><p className="font-mono text-[10px] uppercase tracking-widest text-rose-300">Epistemic boundary</p><p className="mt-3 text-sm leading-6 text-zinc-400">Model behavior, hardware performance, cellular activity, and closed-loop adaptation remain separately typed. None certifies consciousness, sentience, or general intelligence.</p></div></aside></div>
     <section className="mt-16 border-t border-zinc-800 pt-10"><h2 className="font-mono text-xs uppercase tracking-widest text-zinc-500">Related concepts</h2><div className="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">{related.map((value) => <Link key={value.id} href={neuromorphicConceptPath(value)} className="border border-zinc-800 p-5 hover:border-lime-500/50"><p className="font-mono text-[9px] uppercase tracking-widest text-lime-300">{value.substrate}</p><p className="mt-3 text-sm font-semibold text-white">{value.name}</p></Link>)}</div></section>
-  </div></main>
+  <UpliftSections route={path} /></div></main>
 }

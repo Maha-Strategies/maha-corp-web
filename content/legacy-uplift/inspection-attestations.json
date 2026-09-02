@@ -1,0 +1,71 @@
+{
+  "schemaVersion": "maha-legacy-inspection-attestations/1.0",
+  "appendOnly": true,
+  "inspectedOn": "2026-09-02",
+  "method": "Each source was retrieved and read for this batch. Verdicts describe what the retrieved content actually contains. A source that could not be retrieved is recorded as a failure and stays non-explanatory.",
+  "cohortSelection": "No privacy-safe query-level search data exists locally, so sources were ranked by graph connectivity: how many legacy pages cite them.",
+  "attestations": [
+    {
+      "sourceId": "asml-lithography",
+      "retrievedFrom": "https://www.asml.com/en/technology/lithography-principles",
+      "retrievedOn": "2026-09-02",
+      "depth": "section-or-full-text",
+      "exactLocator": "Lithography principles section, including the Rayleigh criterion subsection",
+      "observedContent": "The page describes light projected through a mask or reticle, and system optics shrinking and focusing that pattern onto a photosensitive wafer. It names the Rayleigh criterion as the relation bounding minimum printable feature size.",
+      "identityVerified": true,
+      "identityBasis": "Served from asml.com under the cited path; page title matches the cited title.",
+      "subjectAligned": true,
+      "subjectBasis": "The page is about optical lithography, which is the subject the citing pages use it for.",
+      "versionRelationship": "Living vendor page. No date or version marker is present, so the inspected state is 2026-09-02 and no earlier state can be asserted.",
+      "rightsBasis": "citation-with-paraphrase",
+      "establishes": "How ASML describes the optical lithography imaging chain: mask, projection optics, demagnification onto a photosensitive wafer, and the Rayleigh criterion as the resolution bound.",
+      "boundary": "Vendor-authored explanatory material. It reports no measured yield, no process-window numbers, no independent benchmark, and carries no date, so it cannot support a performance claim or a statement about any particular tool generation."
+    },
+    {
+      "sourceId": "tel-process-equipment",
+      "retrievedFrom": "https://www.tel.com/product/index.html",
+      "retrievedOn": "2026-09-02",
+      "depth": "section-or-full-text",
+      "exactLocator": "Product index, six process category listings",
+      "observedContent": "A product catalogue listing six categories: deposition (thermal, CVD, ASFD, ALD, PVD), lithography coater/developer, etch, cleaning, test including wafer probers, and bonding/debonding. Entries carry short promotional descriptions and links.",
+      "identityVerified": true,
+      "identityBasis": "Served from tel.com at the cited path; content matches the cited title.",
+      "subjectAligned": true,
+      "subjectBasis": "The page is about semiconductor production equipment categories, which is what the citing pages use it to name.",
+      "versionRelationship": "Living vendor index. No version marker.",
+      "rightsBasis": "citation-with-paraphrase",
+      "establishes": "The equipment category taxonomy Tokyo Electron publishes for its own product lines, and which named system types fall under each category.",
+      "boundary": "A product index only. It carries no measured process parameter, no yield or defect data, and no independent comparison, so it cannot support any statement about how a process performs, only about how the vendor organises its catalogue."
+    },
+    {
+      "sourceId": "amkor-3d-stack",
+      "retrievedFrom": "https://amkor.com/technology/3d-stacked-die/",
+      "retrievedOn": "2026-09-02",
+      "depth": "section-or-full-text",
+      "exactLocator": "Die Stacking section",
+      "observedContent": "The Die Stacking section states that wafers and die can be thinned below 30 micrometres and stacked and interconnected up to 16 active dies, and that stacking has been demonstrated to 24 die although stacks above 9 high generally combine die and package stacking.",
+      "identityVerified": true,
+      "identityBasis": "Served from amkor.com at the cited path; page title matches.",
+      "subjectAligned": true,
+      "subjectBasis": "The page is about 3D stacked die packaging, the subject the citing pages use it for.",
+      "versionRelationship": "Living vendor page with no visible publication date; linked PDFs reference 2017 to 2020.",
+      "rightsBasis": "citation-with-paraphrase",
+      "establishes": "The die-count and thinning figures Amkor publishes for its own 3D stacked die packaging, and its stated distinction between die stacking and package stacking above nine high.",
+      "boundary": "Marketing collateral. It reports no reliability test results, no yield statistics and no failure rates, and is undated, so it cannot support a reliability or yield claim, nor a claim about any competitor or industry-wide practice."
+    }
+  ],
+  "retrievalFailures": [
+    { "sourceId": "applied-product-portfolio", "url": "https://www.appliedmaterials.com/il/en/semiconductor/semiconductor-products.html", "outcome": "HTTP 403", "disposition": "remains non-explanatory" },
+    { "sourceId": "tsmc-3dfabric", "url": "https://3dfabric.tsmc.com/english/dedicatedFoundry/technology/3DFabric.htm", "outcome": "HTTP 403", "disposition": "remains non-explanatory" },
+    { "sourceId": "amkor-rdl-pop", "url": "https://amkor.com/wp-content/uploads/2020/11/A-New-RDL-First-PoP-Fan-Out-Wafer-Level-Package-Process.pdf", "outcome": "HTTP 404", "disposition": "remains non-explanatory; the cited PDF path no longer resolves" },
+    { "sourceId": "advantest-test-briefing", "url": "https://www.advantest.com/document/en/investors/ir-library/business-briefing", "outcome": "HTTP 404", "disposition": "remains non-explanatory; the cited path no longer resolves" }
+  ],
+  "summary": {
+    "attempted": 7,
+    "inspected": 3,
+    "unreachable": 4,
+    "allInspectedAreVendorAuthored": true,
+    "finding": "Every source that could be read is vendor-authored descriptive material. Each can support what the vendor states about its own products or taxonomy, and none can support a measured performance, yield or reliability claim. Two more are behind a 403 and two cited paths no longer resolve at all."
+  },
+  "boundary": "A private inspection record. No passage is reproduced beyond what is needed to state what the source establishes and where it stops."
+}
