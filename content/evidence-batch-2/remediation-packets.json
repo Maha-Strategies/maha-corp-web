@@ -1,0 +1,271 @@
+{
+  "schemaVersion": "maha-remediation-ledger/1.0",
+  "appendOnly": true,
+  "immutable": true,
+  "generatedAt": "2026-09-02",
+  "packets": 8,
+  "accept": 8,
+  "revise": 0,
+  "reject": 0,
+  "activeBindingsChanged": 0,
+  "adoptionRule": "A packet proposes. Adoption is a separate, reviewed act. No code path reads proposedDisposition and mutates a binding, and the uplift compiler consults inspections rather than packets.",
+  "canary": {
+    "fiveRecordCanaryReachable": true,
+    "distinctRecordsAvailable": 8,
+    "constructed": true,
+    "records": [
+      "/knowledge/concepts/yield-learning-and-statistical-process-control",
+      "/knowledge/equipment/electron-beam-defect-review-and-inspection-system",
+      "/knowledge/equipment/optical-patterned-wafer-inspection-system",
+      "/knowledge/equipment/semiconductor-ion-implantation-system",
+      "/knowledge/neuromorphic-biocomputing/benchmarking-energy-and-task-equivalence"
+    ],
+    "executed": false,
+    "authorized": false,
+    "note": "Five distinct records carry an accept-disposition packet, so a five-record private source-override canary is honestly available. It is prepared and unexecuted."
+  },
+  "ledgerEntries": [
+    {
+      "packetVersion": "maha-remediation-packet/1.0",
+      "recordIdentity": {
+        "route": "/knowledge/neuromorphic-biocomputing/benchmarking-energy-and-task-equivalence",
+        "currentState": "structural-only"
+      },
+      "claimIdentity": "That neuromorphic systems are energy-efficient relative to conventional hardware, and that task equivalence between them can be benchmarked, both stated without any inspected measurement.",
+      "currentSource": "none inspected for this proposition",
+      "proposedSource": {
+        "sourceId": "ostrau-2022-neuromorphic-benchmarking",
+        "title": "Benchmarking Neuromorphic Hardware and Its Energy Expenditure",
+        "authors": "Christoph Ostrau, Christian Klarhorst, Michael Thies, Ulrich Rückert",
+        "venue": "Frontiers in Neuroscience, 2022",
+        "identifier": "10.3389/fnins.2022.873935",
+        "tier": "peer-reviewed-open-access"
+      },
+      "sourceIdentityEvidence": "Article page states title, four authors, journal, 2022 and the DOI, all matching the citation.",
+      "versionRelationship": "Open-access version of record.",
+      "exactLocator": "Methods, Section 2.1; Section 3.4, energy model and results",
+      "inspectedPassage": "Section 3.4 reports that for Spikey systems predicted energy values sit within ten percent of measured values, and that neuromorphic hardware still lags human-brain efficiency by four orders of magnitude even under optimistic scaling assumptions. Methods 2.1 records that simulators differ in numerical approach, with GeNN using a closed-form representation assuming fixed input current while NEST integrates more precisely. The paper also reports that conventional accelerators such as the Coral Edge TPU and Intel NCS 2 remain competitive or better for DNN inference.",
+      "boundedClaim": "That neuromorphic energy expenditure can be modelled and measured across platforms with a published benchmark suite, that the modelled and measured figures agree within about ten percent on one mixed-signal system, and that conventional accelerators remain competitive for some workloads.",
+      "limitation": "A cross-platform benchmark study. It validates no vendor efficiency claim, declares no platform universally superior, and sets no absolute efficiency threshold, since its results depend on workload and configuration. It cannot support a general claim that neuromorphic hardware is more efficient than conventional hardware.",
+      "rightsBasis": "Frontiers open access, citation-with-paraphrase",
+      "inspectionDepth": "section-or-full-text",
+      "proposedDisposition": "accept",
+      "dispositionIsAdvisoryOnly": true,
+      "appliedToActiveBinding": false,
+      "activeBindingUnchanged": true,
+      "provenanceDigest": "sha256:6dd68340c2f48185f2d6867a2b0fd2bae270b62b158bae7940a0d940488d64f7"
+    },
+    {
+      "packetVersion": "maha-remediation-packet/1.0",
+      "recordIdentity": {
+        "route": "/knowledge/neuromorphic-biocomputing/event-driven-computation",
+        "currentState": "structural-only"
+      },
+      "claimIdentity": "That neuromorphic systems are energy-efficient relative to conventional hardware, and that task equivalence between them can be benchmarked, both stated without any inspected measurement.",
+      "currentSource": "none inspected for this proposition",
+      "proposedSource": {
+        "sourceId": "ostrau-2022-neuromorphic-benchmarking",
+        "title": "Benchmarking Neuromorphic Hardware and Its Energy Expenditure",
+        "authors": "Christoph Ostrau, Christian Klarhorst, Michael Thies, Ulrich Rückert",
+        "venue": "Frontiers in Neuroscience, 2022",
+        "identifier": "10.3389/fnins.2022.873935",
+        "tier": "peer-reviewed-open-access"
+      },
+      "sourceIdentityEvidence": "Article page states title, four authors, journal, 2022 and the DOI, all matching the citation.",
+      "versionRelationship": "Open-access version of record.",
+      "exactLocator": "Methods, Section 2.1; Section 3.4, energy model and results",
+      "inspectedPassage": "Section 3.4 reports that for Spikey systems predicted energy values sit within ten percent of measured values, and that neuromorphic hardware still lags human-brain efficiency by four orders of magnitude even under optimistic scaling assumptions. Methods 2.1 records that simulators differ in numerical approach, with GeNN using a closed-form representation assuming fixed input current while NEST integrates more precisely. The paper also reports that conventional accelerators such as the Coral Edge TPU and Intel NCS 2 remain competitive or better for DNN inference.",
+      "boundedClaim": "That neuromorphic energy expenditure can be modelled and measured across platforms with a published benchmark suite, that the modelled and measured figures agree within about ten percent on one mixed-signal system, and that conventional accelerators remain competitive for some workloads.",
+      "limitation": "A cross-platform benchmark study. It validates no vendor efficiency claim, declares no platform universally superior, and sets no absolute efficiency threshold, since its results depend on workload and configuration. It cannot support a general claim that neuromorphic hardware is more efficient than conventional hardware.",
+      "rightsBasis": "Frontiers open access, citation-with-paraphrase",
+      "inspectionDepth": "section-or-full-text",
+      "proposedDisposition": "accept",
+      "dispositionIsAdvisoryOnly": true,
+      "appliedToActiveBinding": false,
+      "activeBindingUnchanged": true,
+      "provenanceDigest": "sha256:b4dcac5c69f84095462b2f726e353fb999f17b17baac53a7a887d4f4313d3c03"
+    },
+    {
+      "packetVersion": "maha-remediation-packet/1.0",
+      "recordIdentity": {
+        "route": "/knowledge/neuromorphic-biocomputing/hardware-software-co-design",
+        "currentState": "structural-only"
+      },
+      "claimIdentity": "That neuromorphic systems are energy-efficient relative to conventional hardware, and that task equivalence between them can be benchmarked, both stated without any inspected measurement.",
+      "currentSource": "none inspected for this proposition",
+      "proposedSource": {
+        "sourceId": "ostrau-2022-neuromorphic-benchmarking",
+        "title": "Benchmarking Neuromorphic Hardware and Its Energy Expenditure",
+        "authors": "Christoph Ostrau, Christian Klarhorst, Michael Thies, Ulrich Rückert",
+        "venue": "Frontiers in Neuroscience, 2022",
+        "identifier": "10.3389/fnins.2022.873935",
+        "tier": "peer-reviewed-open-access"
+      },
+      "sourceIdentityEvidence": "Article page states title, four authors, journal, 2022 and the DOI, all matching the citation.",
+      "versionRelationship": "Open-access version of record.",
+      "exactLocator": "Methods, Section 2.1; Section 3.4, energy model and results",
+      "inspectedPassage": "Section 3.4 reports that for Spikey systems predicted energy values sit within ten percent of measured values, and that neuromorphic hardware still lags human-brain efficiency by four orders of magnitude even under optimistic scaling assumptions. Methods 2.1 records that simulators differ in numerical approach, with GeNN using a closed-form representation assuming fixed input current while NEST integrates more precisely. The paper also reports that conventional accelerators such as the Coral Edge TPU and Intel NCS 2 remain competitive or better for DNN inference.",
+      "boundedClaim": "That neuromorphic energy expenditure can be modelled and measured across platforms with a published benchmark suite, that the modelled and measured figures agree within about ten percent on one mixed-signal system, and that conventional accelerators remain competitive for some workloads.",
+      "limitation": "A cross-platform benchmark study. It validates no vendor efficiency claim, declares no platform universally superior, and sets no absolute efficiency threshold, since its results depend on workload and configuration. It cannot support a general claim that neuromorphic hardware is more efficient than conventional hardware.",
+      "rightsBasis": "Frontiers open access, citation-with-paraphrase",
+      "inspectionDepth": "section-or-full-text",
+      "proposedDisposition": "accept",
+      "dispositionIsAdvisoryOnly": true,
+      "appliedToActiveBinding": false,
+      "activeBindingUnchanged": true,
+      "provenanceDigest": "sha256:972e924742a824144f2585d9a799e3c2ca26e72bce3880526da516563fcf5867"
+    },
+    {
+      "packetVersion": "maha-remediation-packet/1.0",
+      "recordIdentity": {
+        "route": "/knowledge/processes/ion-implantation-and-annealing",
+        "currentState": "structural-only"
+      },
+      "claimIdentity": "That ion implantation damages the lattice and that annealing repairs it to activate dopants, stated with no inspected source for either the damage mechanism or any measured activation.",
+      "currentSource": "none inspected for this proposition",
+      "proposedSource": {
+        "sourceId": "tabata-2021-uvla-spr-activation",
+        "title": "Solid Phase Recrystallization and Dopant Activation in Arsenic Ion-Implanted Silicon-On-Insulator by UV Laser Annealing",
+        "authors": "Toshiyuki Tabata, Fabien Rozé, Pablo Acosta Alba, Sébastien Halty, Pierre-Edouard Raynal, Imen Karmous, Sébastien Kerdilès, Fulvio Mazzamuto",
+        "venue": "Accepted paper, 20th International Workshop on Junction Technology (IWJT 2021), © 2021 IEEE",
+        "identifier": "arXiv:2111.07577",
+        "tier": "accepted-manuscript"
+      },
+      "sourceIdentityEvidence": "Title page states the title, eight authors, the IWJT2021 acceptance line and the IEEE copyright notice.",
+      "versionRelationship": "Accepted manuscript, not the IEEE version of record.",
+      "exactLocator": "1. Introduction; 2. Experimental; 3. Results and Discussion; Figure 1 sheet resistance; Figure 4 dark-field cross-sectional TEM",
+      "inspectedPassage": "The Introduction states that ion implantation introduces a high concentration of interstitials beneath the amorphized layer, that thermal processing transforms these into dislocation loops known as end-of-range defects, and that those interstitials can interact with substitutional dopants and deactivate them. It records solid phase recrystallization as normally performed at 500 to 600 degrees Celsius, against conventional furnace annealing or rapid thermal processing. The Experimental section records a 70 nm SOI layer on 145 nm buried oxide, arsenic implanted at room temperature at 19 keV to a total dose of 4e15 per square centimetre, producing 37 nm of amorphization confirmed by cross-sectional TEM. Results and Discussion reports sheet resistance falling monotonically to a plateau near 100 ohm per square as the amorphized film recrystallizes and arsenic activates, and Figure 4 shows the 37 nm amorphized layer fully recrystallized after annealing.",
+      "boundedClaim": "The physical mechanism linking ion implantation damage to dopant deactivation through end-of-range defects, and one measured instance of recrystallization and activation, with stated implant energy, dose, amorphization depth and resulting sheet resistance.",
+      "limitation": "A single material system: arsenic-implanted silicon-on-insulator annealed by UV laser. It establishes no process window for furnace or rapid thermal annealing, no production throughput, no yield figure, and nothing about implanters as products. It is an accepted manuscript rather than the version of record.",
+      "rightsBasis": "author accepted manuscript posted to arXiv, citation-with-paraphrase",
+      "inspectionDepth": "section-or-full-text",
+      "proposedDisposition": "accept",
+      "dispositionIsAdvisoryOnly": true,
+      "appliedToActiveBinding": false,
+      "activeBindingUnchanged": true,
+      "provenanceDigest": "sha256:3cbf98df455378f18a5f16181d5d94829985e3179f6b0c9e1e0b7f46a61058b8"
+    },
+    {
+      "packetVersion": "maha-remediation-packet/1.0",
+      "recordIdentity": {
+        "route": "/knowledge/equipment/semiconductor-ion-implantation-system",
+        "currentState": "structural-only"
+      },
+      "claimIdentity": "That ion implantation damages the lattice and that annealing repairs it to activate dopants, stated with no inspected source for either the damage mechanism or any measured activation.",
+      "currentSource": "none inspected for this proposition",
+      "proposedSource": {
+        "sourceId": "tabata-2021-uvla-spr-activation",
+        "title": "Solid Phase Recrystallization and Dopant Activation in Arsenic Ion-Implanted Silicon-On-Insulator by UV Laser Annealing",
+        "authors": "Toshiyuki Tabata, Fabien Rozé, Pablo Acosta Alba, Sébastien Halty, Pierre-Edouard Raynal, Imen Karmous, Sébastien Kerdilès, Fulvio Mazzamuto",
+        "venue": "Accepted paper, 20th International Workshop on Junction Technology (IWJT 2021), © 2021 IEEE",
+        "identifier": "arXiv:2111.07577",
+        "tier": "accepted-manuscript"
+      },
+      "sourceIdentityEvidence": "Title page states the title, eight authors, the IWJT2021 acceptance line and the IEEE copyright notice.",
+      "versionRelationship": "Accepted manuscript, not the IEEE version of record.",
+      "exactLocator": "1. Introduction; 2. Experimental; 3. Results and Discussion; Figure 1 sheet resistance; Figure 4 dark-field cross-sectional TEM",
+      "inspectedPassage": "The Introduction states that ion implantation introduces a high concentration of interstitials beneath the amorphized layer, that thermal processing transforms these into dislocation loops known as end-of-range defects, and that those interstitials can interact with substitutional dopants and deactivate them. It records solid phase recrystallization as normally performed at 500 to 600 degrees Celsius, against conventional furnace annealing or rapid thermal processing. The Experimental section records a 70 nm SOI layer on 145 nm buried oxide, arsenic implanted at room temperature at 19 keV to a total dose of 4e15 per square centimetre, producing 37 nm of amorphization confirmed by cross-sectional TEM. Results and Discussion reports sheet resistance falling monotonically to a plateau near 100 ohm per square as the amorphized film recrystallizes and arsenic activates, and Figure 4 shows the 37 nm amorphized layer fully recrystallized after annealing.",
+      "boundedClaim": "The physical mechanism linking ion implantation damage to dopant deactivation through end-of-range defects, and one measured instance of recrystallization and activation, with stated implant energy, dose, amorphization depth and resulting sheet resistance.",
+      "limitation": "A single material system: arsenic-implanted silicon-on-insulator annealed by UV laser. It establishes no process window for furnace or rapid thermal annealing, no production throughput, no yield figure, and nothing about implanters as products. It is an accepted manuscript rather than the version of record.",
+      "rightsBasis": "author accepted manuscript posted to arXiv, citation-with-paraphrase",
+      "inspectionDepth": "section-or-full-text",
+      "proposedDisposition": "accept",
+      "dispositionIsAdvisoryOnly": true,
+      "appliedToActiveBinding": false,
+      "activeBindingUnchanged": true,
+      "provenanceDigest": "sha256:eb1e2e31ec089ce10ffae235bb9095f7a68aad0b53714563414d2a5bbdd22c76"
+    },
+    {
+      "packetVersion": "maha-remediation-packet/1.0",
+      "recordIdentity": {
+        "route": "/knowledge/equipment/electron-beam-defect-review-and-inspection-system",
+        "currentState": "structural-only"
+      },
+      "claimIdentity": "That optical and electron-beam inspection detect and classify defects and that this feeds yield learning, stated with no inspected source for detection limits, defect classes or the nuisance problem.",
+      "currentSource": "none inspected for this proposition",
+      "proposedSource": {
+        "sourceId": "dey-2022-sem-defect-detection",
+        "title": "Deep Learning-Based Defect Classification and Detection in SEM Images",
+        "authors": "Bappaditya Dey, Dipam Goswami, Sandip Halder, Kasem Khalil, Philippe Leray, Magdy A. Bayoumi",
+        "venue": "arXiv:2206.13505, 20 June 2022; also SPIE Metrology, Inspection, and Process Control XXXVI, 2022",
+        "identifier": "arXiv:2206.13505",
+        "tier": "lawful-preprint"
+      },
+      "sourceIdentityEvidence": "arXiv record and PDF both state the title, six authors and the June 2022 date.",
+      "versionRelationship": "Preprint, also appearing in SPIE proceedings. Not peer reviewed in this form.",
+      "exactLocator": "Section 1 contributions; Section 2 Related Work; Section 3 Proposed Approach; Figure 3 ensemble framework; Figure 4 RetinaNet architecture",
+      "inspectedPassage": "Section 2 states that the four common defect-detection operations, thresholding, noise removal, edge detection and segmentation, do not survive the requirements of the semiconductor industry at advanced nodes, and that the capture efficiency of the manual technique is directly proportional to the nuisance rate. Section 1 records that unsupervised denoising was applied to reduce the effect of stochastic noise on structured pixels and remove false-positive defects, and that the proposed model replaces manual trial-and-error threshold selection with an automated confidence score. Section 3 records a framework combining a RetinaNet detector with a U-Net denoiser, trained and evaluated on imec post-litho and post-etch resist wafer datasets, over defect classes named as bridge, gap, line collapse, micro-bridge and micro-gap.",
+      "boundedClaim": "Why rule-based defect inspection degrades at advanced nodes, the named defect classes used in SEM defect review, and that a denoiser plus detector framework was trained and evaluated on named datasets against those classes.",
+      "limitation": "A preprint evaluating research models on imec datasets. It reports no tool throughput, no production yield impact, and nothing about how any commercial inspection system performs. Its abstract carries no numeric accuracy figures, so no quantitative performance claim may rest on it.",
+      "rightsBasis": "arXiv preprint, citation-with-paraphrase",
+      "inspectionDepth": "section-or-full-text",
+      "proposedDisposition": "accept",
+      "dispositionIsAdvisoryOnly": true,
+      "appliedToActiveBinding": false,
+      "activeBindingUnchanged": true,
+      "provenanceDigest": "sha256:46a287f35dc035aa77e6022e26c14301c5410f96fe886f30614da5a6106005b1"
+    },
+    {
+      "packetVersion": "maha-remediation-packet/1.0",
+      "recordIdentity": {
+        "route": "/knowledge/equipment/optical-patterned-wafer-inspection-system",
+        "currentState": "structural-only"
+      },
+      "claimIdentity": "That optical and electron-beam inspection detect and classify defects and that this feeds yield learning, stated with no inspected source for detection limits, defect classes or the nuisance problem.",
+      "currentSource": "none inspected for this proposition",
+      "proposedSource": {
+        "sourceId": "dey-2022-sem-defect-detection",
+        "title": "Deep Learning-Based Defect Classification and Detection in SEM Images",
+        "authors": "Bappaditya Dey, Dipam Goswami, Sandip Halder, Kasem Khalil, Philippe Leray, Magdy A. Bayoumi",
+        "venue": "arXiv:2206.13505, 20 June 2022; also SPIE Metrology, Inspection, and Process Control XXXVI, 2022",
+        "identifier": "arXiv:2206.13505",
+        "tier": "lawful-preprint"
+      },
+      "sourceIdentityEvidence": "arXiv record and PDF both state the title, six authors and the June 2022 date.",
+      "versionRelationship": "Preprint, also appearing in SPIE proceedings. Not peer reviewed in this form.",
+      "exactLocator": "Section 1 contributions; Section 2 Related Work; Section 3 Proposed Approach; Figure 3 ensemble framework; Figure 4 RetinaNet architecture",
+      "inspectedPassage": "Section 2 states that the four common defect-detection operations, thresholding, noise removal, edge detection and segmentation, do not survive the requirements of the semiconductor industry at advanced nodes, and that the capture efficiency of the manual technique is directly proportional to the nuisance rate. Section 1 records that unsupervised denoising was applied to reduce the effect of stochastic noise on structured pixels and remove false-positive defects, and that the proposed model replaces manual trial-and-error threshold selection with an automated confidence score. Section 3 records a framework combining a RetinaNet detector with a U-Net denoiser, trained and evaluated on imec post-litho and post-etch resist wafer datasets, over defect classes named as bridge, gap, line collapse, micro-bridge and micro-gap.",
+      "boundedClaim": "Why rule-based defect inspection degrades at advanced nodes, the named defect classes used in SEM defect review, and that a denoiser plus detector framework was trained and evaluated on named datasets against those classes.",
+      "limitation": "A preprint evaluating research models on imec datasets. It reports no tool throughput, no production yield impact, and nothing about how any commercial inspection system performs. Its abstract carries no numeric accuracy figures, so no quantitative performance claim may rest on it.",
+      "rightsBasis": "arXiv preprint, citation-with-paraphrase",
+      "inspectionDepth": "section-or-full-text",
+      "proposedDisposition": "accept",
+      "dispositionIsAdvisoryOnly": true,
+      "appliedToActiveBinding": false,
+      "activeBindingUnchanged": true,
+      "provenanceDigest": "sha256:0ae0f9dee059dc2733d5320a964016b906a98bcb122d1b440c7cf6fec1c7a77d"
+    },
+    {
+      "packetVersion": "maha-remediation-packet/1.0",
+      "recordIdentity": {
+        "route": "/knowledge/concepts/yield-learning-and-statistical-process-control",
+        "currentState": "structural-only"
+      },
+      "claimIdentity": "That optical and electron-beam inspection detect and classify defects and that this feeds yield learning, stated with no inspected source for detection limits, defect classes or the nuisance problem.",
+      "currentSource": "none inspected for this proposition",
+      "proposedSource": {
+        "sourceId": "dey-2022-sem-defect-detection",
+        "title": "Deep Learning-Based Defect Classification and Detection in SEM Images",
+        "authors": "Bappaditya Dey, Dipam Goswami, Sandip Halder, Kasem Khalil, Philippe Leray, Magdy A. Bayoumi",
+        "venue": "arXiv:2206.13505, 20 June 2022; also SPIE Metrology, Inspection, and Process Control XXXVI, 2022",
+        "identifier": "arXiv:2206.13505",
+        "tier": "lawful-preprint"
+      },
+      "sourceIdentityEvidence": "arXiv record and PDF both state the title, six authors and the June 2022 date.",
+      "versionRelationship": "Preprint, also appearing in SPIE proceedings. Not peer reviewed in this form.",
+      "exactLocator": "Section 1 contributions; Section 2 Related Work; Section 3 Proposed Approach; Figure 3 ensemble framework; Figure 4 RetinaNet architecture",
+      "inspectedPassage": "Section 2 states that the four common defect-detection operations, thresholding, noise removal, edge detection and segmentation, do not survive the requirements of the semiconductor industry at advanced nodes, and that the capture efficiency of the manual technique is directly proportional to the nuisance rate. Section 1 records that unsupervised denoising was applied to reduce the effect of stochastic noise on structured pixels and remove false-positive defects, and that the proposed model replaces manual trial-and-error threshold selection with an automated confidence score. Section 3 records a framework combining a RetinaNet detector with a U-Net denoiser, trained and evaluated on imec post-litho and post-etch resist wafer datasets, over defect classes named as bridge, gap, line collapse, micro-bridge and micro-gap.",
+      "boundedClaim": "Why rule-based defect inspection degrades at advanced nodes, the named defect classes used in SEM defect review, and that a denoiser plus detector framework was trained and evaluated on named datasets against those classes.",
+      "limitation": "A preprint evaluating research models on imec datasets. It reports no tool throughput, no production yield impact, and nothing about how any commercial inspection system performs. Its abstract carries no numeric accuracy figures, so no quantitative performance claim may rest on it.",
+      "rightsBasis": "arXiv preprint, citation-with-paraphrase",
+      "inspectionDepth": "section-or-full-text",
+      "proposedDisposition": "accept",
+      "dispositionIsAdvisoryOnly": true,
+      "appliedToActiveBinding": false,
+      "activeBindingUnchanged": true,
+      "provenanceDigest": "sha256:719c59a4e8e5bc8c99b08c55cb7ec30ab479902e1ab6ec06bac975d3ba32d442"
+    }
+  ],
+  "boundary": "Private, append-only proposals. Nothing here is active.",
+  "ledgerDigest": "sha256:0f4a379fc6692cbf6e97aef7eb8ebbdfd8605012dc91244af572d422fdf4a2b1"
+}
